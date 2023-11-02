@@ -1,9 +1,12 @@
+import { print } from "./util/output.js";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.printLottos(numbers);
   }
 
   #validate(numbers) {
@@ -13,6 +16,9 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  printLottos(){
+    print(this.#numbers);
+  }
 }
 
 export default Lotto;
