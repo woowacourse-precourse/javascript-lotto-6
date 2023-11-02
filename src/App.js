@@ -3,6 +3,8 @@ import Lotto from "./Lotto";
 class App {
   async play() {
     const totalPrice = await getTotalPrice();
+    const totalCount = parseInt(totalPrice / 1000);
+    Console.print(`${totalCount}개를 구매했습니다.`);
   }
 }
 
