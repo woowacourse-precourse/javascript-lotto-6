@@ -5,7 +5,7 @@ import InOutputError from '../error/InOutputError.js';
 class UserView{
 
     constructor(){
-        this.validate = new Validate();
+        this.inOutputError = new InOutputError();
         
     }
 
@@ -19,6 +19,11 @@ class UserView{
         const WINNING_NUMBERS = await Console.readLineAsync(MESSAGE.MSG_WINNING_NUMBERS+'\n');
         this.inOutputError.inputWinningNumbersValidate(WINNING_NUMBERS.split(','));
         return WINNING_NUMBERS.split(',');
+    }
+
+    async userInputBonusNumber(){
+        const BONUS_NUMBER = await Console.readLineAsync(MESSAGE.MSG_BONUS_NUMBER+'\n');
+        return BONUS_NUMBER;
     }
 
 }
