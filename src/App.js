@@ -13,6 +13,8 @@ class App {
   }
 
   createTickets(amount) {
+    this.validateAmount(amount);
+
     const count = amount / 1000;
     const tickets = [];
 
@@ -23,6 +25,11 @@ class App {
     }
     
     return tickets;
+  }
+
+  validateAmount(amount) {
+    const remainder = amount % 1000;
+    if (remainder) throw new Error('[ERROR] Amount isn\'t valid.');
   }
 }
 
