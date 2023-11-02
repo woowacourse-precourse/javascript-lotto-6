@@ -1,6 +1,5 @@
 import lottoPriceInput from "./LottoPriceInput.js";
 import numberVerification from "./NumberVerification.js";
-import addNumber from "./addNumber.js";
 import bonusNumber from "./bonusNumber.js";
 import calculate from "./calculate.js";
 import excutionNumber from "./excutionNumber.js";
@@ -25,6 +24,7 @@ class App {
       verificationNumber,
       bounsNumberverification
     );
+    console.log(result);
   }
 }
 

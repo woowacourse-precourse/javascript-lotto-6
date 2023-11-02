@@ -19,4 +19,11 @@ describe("보너스 숫자 입력 유효성 검사", () => {
       verificationBounsNumber(result);
     }).toThrow("[ERROR] : 숫자가 잘못된 형식입니다.");
   });
+  it("중복된 숫자가 있을 경우", () => {
+    const number = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 6;
+    expect(() => {
+      addNumber(bonusNumber, number).toThrow("[ERROR]: 겹치는 숫자 발생");
+    });
+  });
 });
