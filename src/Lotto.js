@@ -25,7 +25,6 @@ class Lotto {
   // 2-2. 구매한 로또 번호를 출력한다.
   getNumbers() {
     OutputView.printLottoNumbers(this.#numbers);
-    return this.#numbers;
   }
 }
 

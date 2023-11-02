@@ -1,8 +1,8 @@
 class Game {
-  constructor() {
-    this.lottos = [];
-    this.luckyNumbers = [];
-    this.bonusNumber = 0;
+  constructor(lottos, luckyNumbers, bonusNumber) {
+    this.lottos = lottos;
+    this.luckyNumbers = luckyNumbers;
+    this.bonusNumber = bonusNumber;
   }
 }
 
