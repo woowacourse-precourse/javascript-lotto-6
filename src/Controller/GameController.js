@@ -18,6 +18,8 @@ class GameController {
 
     const { luckyNumbers, bonusNumber } = await this.getLottoNumbers();
     const game = new Game(this.lottos, luckyNumbers, bonusNumber);
+    const result = game.play();
+    OutputView.printLottoResult(result, money);
   }
 
   // 2. 로또를 구매한다.
@@ -42,6 +44,10 @@ class GameController {
   // 1. 로또 구입 금액을 입력 받는다.
   async getMoney() {
     const money = InputValidator.validateMoney(await InputView.getMoney());
+    if (!money) {
+      return this.getMoney();
+    }
+
     return money;
   }
 
@@ -56,12 +62,18 @@ class GameController {
   // 3-1. 당첨 번호를 입력 받는다.
   async getLuckyNumbers() {
     const luckyNumbers = InputValidator.validateLuckyNumbers(await InputView.getLuckyNumbers());
+    if (!luckyNumbers) {
+      return this.getLuckyNumbers();
+    }
     return luckyNumbers;
   }
 
   // 3-2. 보너스 번호를 입력 받는다.
   async getBonumsNumber(luckyNumbers) {
     const bonusNumber = InputValidator.validateBonusNumber(await InputView.getBonusNumber(), luckyNumbers);
+    if (!bonusNumber) {
+      return this.getBonumsNumber(luckyNumbers);
+    }
     return bonusNumber;
   }
 }
