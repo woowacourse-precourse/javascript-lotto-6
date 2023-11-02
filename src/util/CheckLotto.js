@@ -39,6 +39,16 @@ class CheckLotto {
 	static firstPlace(lottoNumberArray, winningNumberArray) {
 		return this.getCorrectCount(lottoNumberArray, winningNumberArray) === lottoNumber.firstPlaceCount;
 	}
+
+	static calculateRateOfReturn(purchaseAmount, lottoResult) {
+		let totalEarning = 0;
+		totalEarning += lottoResult.firstPlaceCount * lottoNumber.firstPlacePrice;
+		totalEarning += lottoResult.secondPlaceCount * lottoNumber.secondPlacePrice;
+		totalEarning += lottoResult.thirdPlaceCount * lottoNumber.thirdPlacePrice;
+		totalEarning += lottoResult.fourthPlaceCount * lottoNumber.fourthPlacePrice;
+		totalEarning += lottoResult.fifthPlaceCount * lottoNumber.fifthPlacePrice;
+		return (totalEarning / purchaseAmount).toFixed(4) * 100;
+	}
 }
 
 export default CheckLotto;
