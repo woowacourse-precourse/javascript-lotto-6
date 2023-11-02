@@ -1,6 +1,7 @@
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import Calculate from '../utils/Calculate.js';
+import { CONSTANTS } from '../constants/constant.js';
 
 class LottoController {
   #USER_MONEY;
@@ -12,7 +13,10 @@ class LottoController {
 
   async inputPurchaseMoney() {
     this.#USER_MONEY = await this.INPUT_VIEW.purchaseMoney();
-    this.#buyLotto();
+    if (this.#USER_MONEY === CONSTANTS.IS_ERROR) {
+      return this.inputPurchaseMoney();
+    }
+    return this.#buyLotto();
   }
 
   async #buyLotto() {

@@ -12,8 +12,14 @@ class InputView {
   }
 
   async purchaseMoney() {
-    const inputMoney = await Console.readLineAsync(INPUT_MSG.PURCHASE_MONEY);
-    return this.INPUT_VAL.inputMoney(inputMoney);
+    try {
+      const inputMoney = await Console.readLineAsync(INPUT_MSG.PURCHASE_MONEY);
+      await this.INPUT_VAL.inputMoney(inputMoney);
+      return Number(inputMoney);
+    } catch (error) {
+      Console.print(error.name + error.message);
+      return error.name;
+    }
   }
 }
 
