@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from './constants.js';
+import { ERROR_MESSAGES, LOTTO_PRICE } from './constants.js';
 
 export const splitAndTrim = (inputString) => {
   if (inputString === '') {
@@ -12,4 +12,22 @@ export const splitAndTrim = (inputString) => {
   }
 
   return items;
+};
+
+export const validateMoney = (input) => {
+  if (isNaN(input)) {
+    throw new Error(ERROR_MESSAGES.MONEY_NOT_NUMERIC);
+  }
+
+  const amount = parseInt(input, 10);
+
+  if (amount < LOTTO_PRICE) {
+    throw new Error(ERROR_MESSAGES.AMOUNT_LESS_THAN_1000);
+  }
+
+  if (amount % LOTTO_PRICE !== 0) {
+    throw new Error(ERROR_MESSAGES.NOT_IN_1000_UNIT);
+  }
+
+  return true;
 };
