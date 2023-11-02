@@ -11,6 +11,7 @@ class App {
     printLottos(lottos);
 
     const targetNumbers = getTargetNumbers();
+    const bonusNumber = getBonusNumber();
   }
 }
 
@@ -63,6 +64,20 @@ const validateTargetNumbers = (numbers) => {
   }
   if (numbers.length != numbersSet.length) {
     throw new Error("[ERROR] 당첨 번호는 중복된 숫자가 있을 수 없습니다.");
+  }
+};
+
+const getBonusNumber = async () => {
+  const bonusNumber = await Console.readLineAsync(
+    "보너스 번호를 입력해 주세요.\n"
+  );
+  validateBonusNumbers(bonusNumber);
+  return bonusNumber;
+};
+
+const validateBonusNumbers = (number) => {
+  if (Number.isNaN(number)) {
+    throw new Error("[ERROR] 당첨 번호는 6자리입니다.");
   }
 };
 
