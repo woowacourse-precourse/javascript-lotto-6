@@ -4,25 +4,39 @@ class Lotto {
   #numbers;
 
   constructor(amount, lottoNumbers, numbers, bonus) {
-    // this.#validate(numbers);
     this.amount = amount;
     this.lottoNumbers = lottoNumbers;
     this.#numbers = numbers;
     this.bonus = bonus;
-  }
+  };
 
-  // #validate(numbers) {
-  //   if (numbers.length !== 6) {
-  //     throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-  //   }
-  // }
+  calculateResult() {
+    let result = [];
+    for(let lotto = 0; lotto < this.lottoNumbers.length; lotto++) {
+      let count = 0;
 
-  print() {
-    console.log(this.amount);
-    console.log(this.lottoNumbers);
-    console.log(this.#numbers);
-    console.log(this.bonus);
-  }
+      for(let number = 0; number < this.lottoNumbers[lotto].length; number++) {
+        if(this.lottoNumbers[lotto].includes(+this.#numbers[number])) {
+          count += 1
+        }
+      }
+      if(count >= 3) {
+        result.push(count);
+      }
+
+    }
+    const countedResult = result.reduce((allCount, count) => {
+      if(count in allCount) {
+        allCount[count] += 1;
+      } else {
+        allCount[count] = 1;
+      }
+
+      return allCount;
+    }, {});
+
+    console.log(countedResult);
+  };
 }
 
 export default Lotto;
