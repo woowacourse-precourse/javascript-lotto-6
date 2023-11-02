@@ -34,13 +34,10 @@ class Validate {
         return true;
     }
 
-    isCheckProperNumberRange(numbers) {
-        for(const num of numbers) {
-            if(+num < 1 || +num > 45) {
-                throw new Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
-            }
+    isCheckProperNumberRange(num) {
+        if(+num < 1 || +num > 45) {
+            throw new Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
         }
-
         return true;
     }
 

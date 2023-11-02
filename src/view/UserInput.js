@@ -26,9 +26,14 @@ class UserInput {
         const input = await MissionUtils.Console.readLineAsync(`\n${MESSAGE.WINNING_NUMBERS}\n`);
         const winningNumbers = input.split(',');
 
+        for(const num of winningNumbers) {
+            if(!this.validate.isCheckProperNumberRange(num)) {
+                return
+            }
+        }
+
         if(
             !this.validate.isCheckDuplicate(winningNumbers) ||
-            !this.validate.isCheckProperNumberRange(winningNumbers) || 
             !this.validate.isCheckProperNumberLength(winningNumbers)
         ) {
             return
