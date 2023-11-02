@@ -1,6 +1,6 @@
 import MESSAGES from "../constants/messages";
 import SETTINGS from "../constants/settings";
-import Lotto from "./Lotto";
+import Lotto from "../Lotto";
 import { Random } from "@woowacourse/mission-utils";
 
 class LottoModel {
@@ -22,6 +22,9 @@ class LottoModel {
 
   validateTotalPrice(price) {
     if (Number.isNaN(price)) {
+      throw new Error(MESSAGES.error.notNumber);
+    }
+    if (typeof price !== "number") {
       throw new Error(MESSAGES.error.notNumber);
     }
     if (price % SETTINGS.priceUnit) {

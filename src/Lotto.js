@@ -1,4 +1,4 @@
-import MESSAGES from "../constants/messages";
+import MESSAGES from "./constants/messages";
 
 class Lotto {
   #numbers;
@@ -13,11 +13,16 @@ class Lotto {
     if (numbersSet.size !== 6) {
       throw new Error(MESSAGES.error.invalidTargetNumbersLength);
     }
+    if (!numbers.every((number) => typeof number === "number")) {
+      throw new Error(MESSAGES.error.notNumber);
+    }
   }
 
   getNumbers() {
     return this.#numbers;
   }
+
+  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

@@ -1,7 +1,7 @@
 import LottoController from "./controller/LottoController";
 import InputView from "./views/InputView";
 import OutputView from "./views/OutputView";
-import LottoModel from "./models/LottoApp";
+import LottoModel from "./model/LottoModel";
 
 class App {
   async play() {
