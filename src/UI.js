@@ -3,6 +3,7 @@ import InputValidator from "./InputValidator";
 
 const TEXT = {
   askAmount: "구입금액을 입력해 주세요.",
+  askWinningNumbers: "당첨 번호를 입력해 주세요.",
 };
 
 class UI {
@@ -20,6 +21,17 @@ class UI {
     const input = await this.#ask(TEXT.askAmount);
     this.#validator.validateAmount(input.trim());
     return Number(input);
+  }
+
+  async askWinningNumbers() {
+    const input = await this.#ask(TEXT.askWinningNumbers);
+    const trimmedInput = input
+      .trim()
+      .split(",")
+      .map((v) => v.trim())
+      .join(",");
+    this.#validator.validateWinningNumbers(trimmedInput);
+    return trimmedInput.split(",").map(Number);
   }
 }
 
