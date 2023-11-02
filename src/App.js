@@ -9,6 +9,7 @@ class App {
   async play() {
     const purchaseAmount = await this.#getPurchaseAmount();
     this.#purchaseLotto = this.#getAutoLotto(purchaseAmount);
+    OutputView.printAutoLotto(this.#purchaseLotto, purchaseAmount);
   }
 
   async #getPurchaseAmount() {
