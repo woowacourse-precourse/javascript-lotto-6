@@ -38,7 +38,7 @@ class InputValidator {
 
   validateBonusNumber(input, winningNumbers) {
     if (!this.#REGEX.lottoNumber.test(input)) {
-      throw new Error(this.#ERROR_MESSAGE.amount);
+      throw new Error(this.#ERROR_MESSAGE.invalidLottoNumber);
     }
     if (winningNumbers.includes(Number(input))) {
       throw new Error(this.#ERROR_MESSAGE.duplication);
