@@ -8,8 +8,7 @@ class LottoGame {
   #lottoBundle;
 
   async startGame() {
-    const amount = await this.#getAmountInput();
-    const lottoCount = this.#getLottoCount(amount);
+    const lottoCount = await this.#getAmountInput();
 
     this.#lottoBundle = new LottoBundle();
     this.#lottoBundle.buyLottos(lottoCount);
@@ -17,10 +16,11 @@ class LottoGame {
   }
 
   async #getAmountInput() {
-    const amount = await InputView.inputAmount();
+    const amount = await InputView.readAmount();
     this.#validateAmountInput(amount);
+    const count = this.#getLottoCount(amount);
 
-    return amount;
+    return count;
   }
 
   #validateAmountInput(amount) {
