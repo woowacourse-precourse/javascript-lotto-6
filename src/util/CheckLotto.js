@@ -1,37 +1,25 @@
 import lottoNumber from '../constants/lottoNumber.js';
 
 class CheckLotto {
+	static getCorrectCount(lottoNumberList, winningNumberList) {
+		return lottoNumberList.reduce((count, lottoNumber) => {
+			if (winningNumberList.includes(lottoNumber)) {
+				return count + 1;
+			}
+			return count;
+		}, 0);
+	}
+
 	static fivePlace(lottoNumberList, winningNumberList) {
-		const correctCount = lottoNumberList.reduce((count, lottoNumber) => {
-			if (winningNumberList.includes(lottoNumber)) {
-				return count + 1;
-			}
-			return count;
-		}, 0);
-
-		return correctCount === lottoNumber.fifthPlaceCount;
+		return this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.fifthPlaceCount;
 	}
-
+	
 	static fourthPlace(lottoNumberList, winningNumberList) {
-		const correctCount = lottoNumberList.reduce((count, lottoNumber) => {
-			if (winningNumberList.includes(lottoNumber)) {
-				return count + 1;
-			}
-			return count;
-		}, 0);
-
-		return correctCount === lottoNumber.fourthPlaceCount;
+		return this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.fourthPlaceCount;
 	}
-
+	
 	static thirdPlace(lottoNumberList, winningNumberList) {
-		const correctCount = lottoNumberList.reduce((count, lottoNumber) => {
-			if (winningNumberList.includes(lottoNumber)) {
-				return count + 1;
-			}
-			return count;
-		}, 0);
-
-		return correctCount === lottoNumber.thirdPlaceCount;
+		return this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.thirdPlaceCount;
 	}
 }
 
