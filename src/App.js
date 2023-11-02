@@ -9,6 +9,8 @@ class App {
 
     const lottos = getLottos(totalCount);
     printLottos(lottos);
+
+    const targetNumbers = getTargetNumbers();
   }
 }
 
@@ -42,6 +44,25 @@ const printLottos = (lottos) => {
   for (let lotto of lottos) {
     const numbers = lotto.getNumbers();
     Console.print(numbers);
+  }
+};
+
+const getTargetNumbers = async () => {
+  const targetNumbers = await Console.readLineAsync(
+    "당첨 번호를 입력해 주세요.\n"
+  );
+  validateTargetNumbers(targetNumbers);
+  return targetNumbers;
+};
+
+const validateTargetNumbers = (numbers) => {
+  const numbers = numbers.split(",");
+  const numbersSet = Set(numbers);
+  if (numbers.length != 6) {
+    throw new Error("[ERROR] 당첨 번호는 6자리입니다.");
+  }
+  if (numbers.length != numbersSet.length) {
+    throw new Error("[ERROR] 당첨 번호는 중복된 숫자가 있을 수 없습니다.");
   }
 };
 
