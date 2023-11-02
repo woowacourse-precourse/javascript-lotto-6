@@ -7,7 +7,7 @@ class Is {
     return true;
   }
 
-  static multiplesOf1000(number) {
+  static positiveMultiplesOf1000(number) {
     if (number % 1000 === 0) return true;
     return false;
   }
