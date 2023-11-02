@@ -1,4 +1,5 @@
 import { print } from "./util/output.js";
+import { getValidatedNumbers } from "./validation/number.js";
 
 class Lotto {
   #numbers;
@@ -10,9 +11,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    this.#numbers = getValidatedNumbers(numbers);
   }
 
   // TODO: 추가 기능 구현
