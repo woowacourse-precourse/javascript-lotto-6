@@ -30,6 +30,7 @@ class App {
 
     while (this.countNumber < this.lottoTicket) {
       randomNumberArray = this.makeRandomNumber();
+      this.countNumber += 1;
     }
   }
 }
