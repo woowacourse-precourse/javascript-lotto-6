@@ -4,7 +4,7 @@ const lottoNumber = Object.freeze({
 	fifthPlaceCount: 3,
 	fourthPlaceCount: 4,
 	thirdPlaceCount: 5,
-	secondPlaceCount: 6,
+	secondPlaceCount: 5,
 	firstPlaceCount: 6,
 });
 
