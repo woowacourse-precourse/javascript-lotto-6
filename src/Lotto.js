@@ -1,4 +1,6 @@
-import UserInput from './view/userInput.js';
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+import { MESSAGE } from './data/message.js';
 
 class Lotto {
   #numbers;
@@ -35,8 +37,18 @@ class Lotto {
       return allCount;
     }, {});
 
-    console.log(countedResult);
+    this.print(countedResult);
   };
+
+
+  async print(result, rate) {
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_INFO}\n---\n`);
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_THREE} ${result[3] ?? 0}개`);
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_FOUR} ${result[4] ?? 0}개`);
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE} ${result[5] ?? 0}개`);
+    // await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE_BOUNS} ${result[5] ?? 0}`);
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_SIX} ${result[6] ?? 0}개`);
+  }
 }
 
 export default Lotto;
