@@ -1,3 +1,8 @@
+/**
+ * 1. numbers의 #을 변경할 수 없다.
+ * 2. 필드를 추가할 수 없다.
+ */
+
 class Lotto {
   #numbers;
 
