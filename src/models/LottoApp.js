@@ -48,6 +48,8 @@ class LottoModel {
       throw new Error(MESSAGES.error.invalidTargetNumbersLength);
     if (numbers.length !== numbersSet.size)
       throw new Error(MESSAGES.error.notDuplicateTargetNumbers);
+    if (numbers.some((number) => Number.isNaN(number)))
+      throw new Error(MESSAGES.error.notNumber);
   }
 
   getTargetNumbers() {
