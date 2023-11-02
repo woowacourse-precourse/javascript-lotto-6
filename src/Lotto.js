@@ -1,3 +1,5 @@
+import MESSAGES from "./constants/messages";
+
 class Lotto {
   #numbers;
 
@@ -9,7 +11,7 @@ class Lotto {
   #validate(numbers) {
     const numbersSet = new Set(numbers);
     if (numbersSet.size !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(MESSAGES.error.invalidTargetNumbersLength);
     }
   }
 
