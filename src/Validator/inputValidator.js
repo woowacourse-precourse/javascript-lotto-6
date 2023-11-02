@@ -10,19 +10,20 @@ class InputValidator {
   }
 
   // 당첨 번호에 대해 검증한다.
-  static validateLuckyNumbers(numbers) {
-    numbers.every((number) => this.isNumber(number));
-    this.isLengthSix(numbers);
-    this.isRepeat(numbers);
-    numbers.every((number) => this.isValidLottoNumber(number));
-    return numbers;
+  static validateLuckyNumbers(luckyNumbers) {
+    luckyNumbers.every((number) => this.isNumber(number));
+    this.isLengthSix(luckyNumbers);
+    this.isRepeat(luckyNumbers);
+    luckyNumbers.every((number) => this.isValidLottoNumber(number));
+    return luckyNumbers;
   }
 
   // 보너스 번호에 대해 검증한다.
-  static validateBonusNumber(number) {
-    this.isNumber(number);
-    this.isValidLottoNumber(number);
-    return Number(number);
+  static validateBonusNumber(bonusNumber, luckyNumbers) {
+    this.isNumber(bonusNumber);
+    this.isValidLottoNumber(bonusNumber);
+    this.isBonusInLuckyNumbers(bonusNumber, luckyNumbers);
+    return Number(bonusNumber);
   }
 
   // 숫자가 아닌 경우 금액, 로또 번호에 대해 예외 처리한다.
@@ -68,6 +69,15 @@ class InputValidator {
       throw new Error(ERROR_MESSAGE.notValidLotto);
     }
     return isValidLotto;
+  }
+
+  // 3-3. 보너스 번호는 당첨 번호와 중복되지 않아야 한다.
+  static isBonusInLuckyNumbers(bonusNumber, luckyNumbers) {
+    const isBonusInLuckyNumbers = luckyNumbers.includes(bonusNumber);
+    if (isBonusInLuckyNumbers) {
+      throw new Error(ERROR_MESSAGE.isBonusInLuckyNumbers);
+    }
+    return isBonusInLuckyNumbers;
   }
 }
 

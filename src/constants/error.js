@@ -9,4 +9,5 @@ export const ERROR_MESSAGE = {
   notSixLength: `[ERROR] 로또 번호는 ${LOTTO.length}개여야 합니다.`,
   isRepeat: "[ERROR] 로또 번호는 중복되지 않아야 합니다.",
   notValidLotto: `[ERROR] 로또 번호는 ${LOTTO.min} ~ ${LOTTO.max} 사이여야 합니다.`,
+  isBonusInLuckyNumbers: "[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.",
 };
