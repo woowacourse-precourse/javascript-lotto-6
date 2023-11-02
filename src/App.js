@@ -8,17 +8,22 @@ class App {
   #lottos = [];
 
   async play() {
-    const money = await Message.inputPurchasingAmount();
-    Validate.purchasingMoney(money);
-    const count = money / PURCHASE_UNIT;
-    this.issueLottos(count);
-    Message.printNumberOfLottos(count);
+    await this.issueLottos();
+    this.printLottosNumbers();
+  }
+
+  printLottosNumbers() {
+    Message.printNumberOfLottos(this.#lottos.length);
     this.#lottos.forEach((lotto) => {
       Message.printLottoNumber(lotto.getNumbers());
     });
   }
 
-  issueLottos(count) {
+  async issueLottos() {
+    const money = await Message.inputPurchasingAmount();
+    Validate.purchasingMoney(money);
+    const count = money / PURCHASE_UNIT;
+
     for (let i = 0; i < count; i++) {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       this.#lottos.push(new Lotto(numbers));
