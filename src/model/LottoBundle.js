@@ -21,6 +21,10 @@ class LottoBundle {
       RANDOM_NUMBER.count,
     );
   }
+
+  getTotalLottoNumberString() {
+    return this.#lottoList.map((lotto) => lotto.getNumberString()).join('\n');
+  }
 }
 
 export default LottoBundle;
