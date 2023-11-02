@@ -15,6 +15,10 @@ class Lotto {
   #sortNumbers(numbers) {
     return numbers.sort((first, second) => first - second);
   }
+
+  getNumberString() {
+    return `[${this.#numbers.join(', ')}]`;
+  }
 }
 
 export default Lotto;
