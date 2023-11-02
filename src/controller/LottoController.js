@@ -1,23 +1,23 @@
 import MESSAGES from '../constants/Messages.js';
-import Validator from '../utils/Validator.js';
+import User from '../domains/User.js';
 import View from '../utils/View.js';
 
 class LottoController {
-  #Lottos
-  
-  constructor() {
-    this.#Lottos = [];
-  }
+  #user
 
   async run() {
-    await this.#buyLottos()
+    await this.setUser();
+    this.#user.buyLottos();
+    this.getUserLottos();
   }
 
-  async #buyLottos() {
-    const valance = await View.getInputByQuestion(MESSAGES.inputBalance);
-    Validator.isValidValance(valance);
-    const lottoAmount = Number(valance) / 1000;
-    return lottoAmount;
+  async setUser() {
+    const balance = await View.getInputByQuestion(MESSAGES.inputBalance);
+    this.#user = new User(balance);
+  }
+
+  getUserLottos() {
+    View.printOutput(this.#user.getLottos());
   }
 }
 
