@@ -1,4 +1,4 @@
-import { LOTTO_RANK } from "../constants/constants.js";
+import { LOTTO_RANK, RANK } from "../constants/constants.js";
 
 class Game {
   constructor(lottos, luckyNumbers, bonusNumber) {
@@ -27,13 +27,22 @@ class Game {
 
   calculateGame(result) {
     const { cnt, bonus } = result;
-    // 5등 이하는 제외
-    if (cnt < 3) return;
-    if (cnt === 5 && bonus) {
+    // 5등 미만이라면 return
+    const rank = this.calculateRank(cnt, bonus);
+    if (!rank) return;
+    // 2등이라면 보너스 번호 일치 여부에 따라 결과를 계산
+    if (rank === RANK.second) {
       this.matchResult[LOTTO_RANK[cnt][bonus]] += 1;
       return;
     }
     this.matchResult[LOTTO_RANK[cnt]] += 1;
+  }
+
+  calculateRank(cnt, bonus = false) {
+    if (bonus) {
+      return LOTTO_RANK[cnt][bonus];
+    }
+    return LOTTO_RANK[cnt];
   }
 }
 

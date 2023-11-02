@@ -33,11 +33,14 @@ class Lotto {
 
   match(luckyNumbers, bonusNumber) {
     const cnt = this.#numbers.filter((number) => luckyNumbers.includes(number)).length;
-    const bonus = this.#numbers.includes(bonusNumber);
     const matchResult = {
       cnt,
-      bonus
+      bonus: false
     };
+
+    if (cnt === 5) {
+      matchResult.bonus = this.#numbers.includes(bonusNumber);
+    }
 
     return matchResult;
   }

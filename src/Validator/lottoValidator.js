@@ -23,7 +23,7 @@ class LottoValidator {
   }
 
   static isValidLottoNumber(number) {
-    const isValidLotto = number >= 1 && number <= 45;
+    const isValidLotto = number >= LOTTO.min && number <= LOTTO.max;
     if (!isValidLotto) {
       Console.print(ERROR_MESSAGE.notValidLotto);
       return false;
