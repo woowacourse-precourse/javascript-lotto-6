@@ -3,6 +3,7 @@ const ERROR = {
   TYPE_NUMBER: '숫자 형식으로 입력하세요.',
   SIX_FIGURES: '당첨 번호는 6개여야 합니다.',
   DIFFERENT_NUMBERS: '각 번호는 다른 숫자여야 합니다.',
+  DIFFERENT_WINNING_NUMBERS: '당첨 번호에 있는 숫자들과 달라야 합니다.',
 };
 
 export const Validate = Object.freeze({
@@ -40,6 +41,14 @@ export const Validate = Object.freeze({
 
     if (numbers.length !== set.size) {
       throw new Error(ERROR.DIFFERENT_NUMBERS);
+    }
+  },
+
+  bonusNumber(number, winningLotteryNumbers) {
+    this.isNumberType(number);
+
+    if (winningLotteryNumbers.includes(number)) {
+      throw new Error(ERROR.DIFFERENT_WINNING_NUMBERS);
     }
   },
 });

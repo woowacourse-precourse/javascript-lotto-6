@@ -7,6 +7,7 @@ import { PURCHASE_UNIT } from './constant.js';
 class App {
   #lottos = [];
   #winningLotteryNumber;
+  #bonusNumber;
 
   async play() {
     await this.issueLottos();
@@ -37,6 +38,12 @@ class App {
     const numbers = value.split(',');
     Validate.winningLottery(numbers);
     this.#winningLotteryNumber = numbers;
+  }
+
+  async inputBonusNumber() {
+    const number = await Message.inputBonusNumber();
+    Validate.bonusNumber(number, this.#winningLotteryNumber);
+    this.#bonusNumber = number;
   }
 }
 
