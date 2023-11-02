@@ -146,9 +146,9 @@ class App {
     });
 
     const investment = lottoCount * LOTTO_PRICE;
-    const roi = ((totalPrizeMoney - investment) / investment) * 100;
+    const roi = (totalPrizeMoney / investment) * 100;
 
-    Console.print(`총 수익률은 ${roi.toFixed(2)}% 입니다.`);
+    Console.print(`총 수익률은 ${roi.toFixed(1)}%입니다.`);
   }
 }
 
