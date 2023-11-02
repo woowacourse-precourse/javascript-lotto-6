@@ -4,21 +4,21 @@ import Lotto from './Lotto.js';
 import CheckLotto from './util/CheckLotto.js';
 
 class LottoBuyer {
-	#lottoList;
+	#lottoArray;
 
 	constructor(purchaseAmount) {
-		this.#lottoList = this.#buyLotto(purchaseAmount);
+		this.#lottoArray = this.#buyLotto(purchaseAmount);
 	}
 
 	#buyLotto(purchaseAmount) {
 		const lottoTicketCount = Number.parseInt(purchaseAmount/1000);
 		return Array.from({ length: lottoTicketCount }, () => {
-			const pickedNumberList = Random.pickUniqueNumbersInRange(lottoNumber.firstNumber, lottoNumber.lastNumber, lottoNumber.totalCount).sort((a, b) => a - b);
-			return new Lotto(pickedNumberList);
+			const pickedNumberArray = Random.pickUniqueNumbersInRange(lottoNumber.firstNumber, lottoNumber.lastNumber, lottoNumber.totalCount).sort((a, b) => a - b);
+			return new Lotto(pickedNumberArray);
 		});
 	}
 
-	checkResult(winningNumberList, bonusNumber) {
+	checkResult(winningNumberArray, bonusNumber) {
 		const lottoResult = {
 			firstPlaceCount: 0,
 			secondPlaceCount: 0,
@@ -27,20 +27,20 @@ class LottoBuyer {
 			fifthPlaceCount: 0,
 		};
 
-		this.#lottoList.forEach((lotto) => {
-			lottoResult.firstPlaceCount += CheckLotto.firstPlace(lotto.getNumberList(), winningNumberList) ? 1 : 0;
-			lottoResult.secondPlaceCount += CheckLotto.secondPlace(lotto.getNumberList(), winningNumberList, bonusNumber) ? 1 : 0;
-			lottoResult.thirdPlaceCount += CheckLotto.thirdPlace(lotto.getNumberList(), winningNumberList, bonusNumber) ? 1 : 0;
-			lottoResult.fourthPlaceCount += CheckLotto.fourthPlace(lotto.getNumberList(), winningNumberList) ? 1 : 0;
-			lottoResult.fifthPlaceCount += CheckLotto.fifthPlace(lotto.getNumberList(), winningNumberList) ? 1 : 0;
+		this.#lottoArray.forEach((lotto) => {
+			lottoResult.firstPlaceCount += CheckLotto.firstPlace(lotto.getNumberArray(), winningNumberArray) ? 1 : 0;
+			lottoResult.secondPlaceCount += CheckLotto.secondPlace(lotto.getNumberArray(), winningNumberArray, bonusNumber) ? 1 : 0;
+			lottoResult.thirdPlaceCount += CheckLotto.thirdPlace(lotto.getNumberArray(), winningNumberArray, bonusNumber) ? 1 : 0;
+			lottoResult.fourthPlaceCount += CheckLotto.fourthPlace(lotto.getNumberArray(), winningNumberArray) ? 1 : 0;
+			lottoResult.fifthPlaceCount += CheckLotto.fifthPlace(lotto.getNumberArray(), winningNumberArray) ? 1 : 0;
 		});
 
 		return lottoResult;
 	}
 
-	getAllLottoNumberList() {
-		return this.#lottoList.map(lotto => {
-			return lotto.getNumberList();
+	getAllLottoNumberArray() {
+		return this.#lottoArray.map(lotto => {
+			return lotto.getNumberArray();
 		});
 	}
 }
