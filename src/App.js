@@ -6,7 +6,8 @@ class App {
   async play() {
     const price = await lottoPriceInput("구입금액을 입력해 주세요.");
     const purchase = priceCheck(price);
-    console.log(purchase);
+    const lotto = new Lotto();
+    console.log(lotto.randomNumber());
   }
 }
 
