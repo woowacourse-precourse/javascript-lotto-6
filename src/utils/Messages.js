@@ -2,6 +2,7 @@ const ERROR_MESSAGES = Object.freeze({
   INVALID_LOTTO_PRICE: "[ERROR] 로또 구입 금액은 1,000원 단위로 입력되어야 합니다.",
   INVALID_LOTTO_NUMBER: "[ERROR] 로또 번호는 6개여야 합니다.",
   INVALID_NUMBER: "[ERROR] 숫자가 아닌 값이 입력되었습니다.",
+  INVALID_RANGE: "[ERROR] 1 ~ 45 사이의 값을 입력해주세요.",
   DEFAULT_ERROR: "[ERROR] 유효한 값이 아닙니다.",
 });
 
