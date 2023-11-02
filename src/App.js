@@ -25,9 +25,15 @@ class App {
     this.lottoRandomNumber.push(randomNumberArray);
   }
 
+  removeSpace(lottoArray) {
+    const arrayString = lottoArray.join(', ');
+    return '[' + arrayString + ']';
+  }
+
   printLottoArray() {
     this.lottoRandomNumber.forEach(lottoArray => {
-      Console.print(lottoArray);
+      const string = this.removeSpace(lottoArray);
+      Console.print(string);
     });
   }
   async play() {
