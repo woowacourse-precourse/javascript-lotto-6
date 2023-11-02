@@ -1,14 +1,14 @@
 const matchingNumbers = (matchnumber, bonusNumber, results) => {
   if (matchnumber === 6) {
-    results.push("1등");
+    results["1등"] += 1;
   } else if (matchnumber === 5 && bonusNumber) {
-    results.push("2등");
+    results["2등"] += 1;
   } else if (matchnumber === 5) {
-    results.push("3등");
+    results["3등"] += 1;
   } else if (matchnumber === 4) {
-    results.push("4등");
+    results["4등"] += 1;
   } else if (matchnumber === 3) {
-    results.push("5등");
+    results["5등"] += 1;
   }
   return results;
 };

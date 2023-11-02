@@ -6,6 +6,7 @@ import excutionNumber from "./excutionNumber.js";
 import playerNumber from "./playerNumber.js";
 import priceCheck from "./priceCheck.js";
 import verificationBounsNumber from "./verficationBonusNumber.js";
+import results from "./results.js";
 
 class App {
   async play() {
@@ -25,6 +26,7 @@ class App {
       bounsNumberverification
     );
     console.log(result);
+    // results(result);
   }
 }
 
