@@ -6,9 +6,9 @@ class App {
       "구입 금액을 입력해 주세요. \n"
     );
 
-    console.log(Number.isInteger(purchaseCost / 1000));
+    console.log(purchaseCost % 1000 !== 0);
 
-    if (Number.isInterger(purchaseCost / 1000) === false) {
+    if (purchaseCost % 1000 !== 0) {
       throw new Error("[ERROR] 구입 금액은 1,000원 단위로 입력 가능합니다.");
     }
   }
