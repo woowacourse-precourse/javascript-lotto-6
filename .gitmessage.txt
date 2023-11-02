@@ -1,0 +1,11 @@
+
+# <type>(<scope>): <subject>
+
+# <BLANK LINE>
+
+# <body>
+#
+# type: feat, fix, docs, style, refactor, test, chore
+# scope: 커밋이 일어난 곳을 알려줄수 있는 단어
+# subject: changed, changes 보다는 change로 명령형으로 작성, 문장 끝에 .을 쓰지 않는다
+# body: 명령형으로 작성, 변경된 이유, 동작 설명
