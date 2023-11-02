@@ -11,14 +11,15 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
-    const numberArray = numbers.split(', ');
-    const arrayLength = numberArray.filter(
-      value => 1 <= value && value <= 45,
-    ).length;
+    const arrayLength = this.checkRange(numbers);
     if (arrayLength !== 0)
       throw new Error('[ERROR] 1~45 사이의 숫자를 입력하세요.');
   }
 
+  checkRange(numbers) {
+    const numberArray = numbers.split(', ');
+    return numberArray.filter(value => 1 <= value && value <= 45).length;
+  }
   // TODO: 추가 기능 구현
 }
 
