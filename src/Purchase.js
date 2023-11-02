@@ -1,5 +1,6 @@
 import { Random } from "@woowacourse/mission-utils";
 import { LOTTO } from "./constants/rule.js";
+import Utils from "./Utils.js";
 
 class Purchase {
   constructor(amount) {
@@ -21,7 +22,9 @@ class Purchase {
       LOTTO.LENGTH
     );
 
-    return lotto;
+    const sortedLotto = Utils.getAscendingSortedArray(lotto);
+
+    return sortedLotto;
   }
 }
 

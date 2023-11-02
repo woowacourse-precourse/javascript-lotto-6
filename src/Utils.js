@@ -5,6 +5,10 @@ class Utils {
     const number = parseInt(sum, 10);
     return number / UNIT.PURCHASE;
   }
+
+  static getAscendingSortedArray(array) {
+    return array.sort((a, b) => a - b);
+  }
 }
 
 export default Utils;
