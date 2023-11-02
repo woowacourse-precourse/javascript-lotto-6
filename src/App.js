@@ -1,8 +1,10 @@
 import Purchase from "./Purchase.js";
 import WinNumber from "./WinNumber.js";
+import LottoData from "./LottoData.js";
+import Result from "./Result.js";
+import Lotto from "./Lotto.js";
 import { OUTPUT } from "./Constants.js";
 import { Console } from "@woowacourse/mission-utils";
-import LottoData from "./LottoData.js";
 
 class App {
   async play() {
@@ -18,6 +20,9 @@ class App {
 
     await winNumber.inputWinNumber();
     await winNumber.inputBonusNumber();
+
+    const result = new Result();
+    result.printStaticsMessage();
   }
 }
 

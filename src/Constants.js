@@ -18,7 +18,7 @@ export const OUTPUT = {
   correct_5: "5개 일치 (1,500,000원) - ",
   correct_5_bouns: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
   correct_6: "6개 일치 (2,000,000,000원) - ",
-  count: "개",
+  count: "개\n",
   statics: "\n당첨 통계\n---",
   rate_of_return: "총 수익률은 ",
   percent_is: "%입니다.",
