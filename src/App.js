@@ -3,14 +3,10 @@ import Lottos from './Model/Lottos.js';
 
 class App {
 
-  #lottos;
-  #winningNumber
-  #bonusNumber
-
   constructor(){
-    this.#lottos;
-    this.#winningNumber = [];
-    this.#bonusNumber;
+    this.lottos;
+    this.winningNumber = [];
+    this.bonusNumber;
     this.userView = new UserView();
   }
 
@@ -22,6 +18,7 @@ class App {
     await this.createLottoAmount();
     await this.createWinningNumbers();
     await this.createBonusNumber();
+    this.lottos.lottoNumberResultCount(this.lottos.purchaseLottoNumbers, this.winningNumber, this.bonusNumber);
   }
 
   async createLottoAmount(){
