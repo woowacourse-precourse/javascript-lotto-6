@@ -9,10 +9,29 @@ class App {
   lottos = [];
 
 
- 
+  getLottoCount(money){
+    if(isNaN(money)){
+      throw new Error(ERROE_MESSAGE.MONEY_ISNAN);
+    }
+
+    if(money < 1000){
+      throw new Error(ERROE_MESSAGE.MONEY_UPPER_1000);
+    }
+
+    if(money % 1000 !== 0){
+      throw new Error(ERROE_MESSAGE.MONEY_UNIT_1000);
+    }
+
+    return money / 1000;
+  }
+
+
+  
 
   async play() {
     const INPUT_MONEY = await input(PRINT_MESSAGE.INPUT_MONEY);
+    const LOTTO_COUNT = this.getLottoCount(+INPUT_MONEY);
+
 
     
   }
