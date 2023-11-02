@@ -94,6 +94,31 @@ class App {
     this.#printResults(results);
   }
 
+  #printResults(results) {
+    const amountSpent = this.#lottos.length * 1000;
+    MissionUtils.Console.print("당첨 통계");
+    MissionUtils.Console.print("---");
+    const prizeMoney = {
+      3: 5000,
+      4: 50000,
+      5: 1500000,
+      "5+1": 30000000,
+      6: 2000000000,
+    };
+    let totalPrize = 0;
+
+    for (const [match, count] of Object.entries(results)) {
+      const prize = prizeMoney[match] * count;
+      totalPrize += prize;
+      MissionUtils.Console.print(
+        `${match}개 일치 (${prizeMoney[match].toLocaleString()}원) - ${count}개`
+      );
+    }
+
+    const profitRate = ((totalPrize - amountSpent) / amountSpent) * 100;
+    MissionUtils.Console.print(`총 수익률은 ${profitRate.toFixed(2)}%입니다.`);
+  }
+
   getMatchCount(numbers, winningNumbers) {
     return numbers.filter((number) => winningNumbers.includes(number)).length;
   }
