@@ -5,6 +5,7 @@ export const CONSTANT = Object.freeze({
 export const RANDOM_NUMBER = Object.freeze({
   minNum: 1,
   maxNum: 45,
+  count: 6,
 });
 
 export const MESSAGE = Object.freeze({
