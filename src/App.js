@@ -1,10 +1,12 @@
 import Lotto from "./Lotto.js";
 import lottoPriceInput from "./LottoPriceInput.js";
+import priceCheck from "./priceCheck.js";
 
 class App {
   async play() {
     const price = await lottoPriceInput("구입금액을 입력해 주세요.");
-    console.log(price);
+    const purchase = priceCheck(price);
+    console.log(purchase);
   }
 }
 
