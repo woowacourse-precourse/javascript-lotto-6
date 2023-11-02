@@ -1,16 +1,54 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-import { MESSAGE } from './data/message.js';
+import UserInput from '../view/userInput.js';
+import makeLottoNumbers from './makeLottoNumbers.js';
+import { MESSAGE } from '../data/message.js';
+import { ERROR_MESSAGE } from '../data/message.js';
 
 class Lotto {
   #numbers;
 
-  constructor(amount, lottoNumbers, numbers, bonus) {
-    this.amount = amount;
-    this.lottoNumbers = lottoNumbers;
+  // constructor(amount, lottoNumbers, numbers, bonus) {
+  //   this.amount = amount;
+  //   this.lottoNumbers = lottoNumbers;
+  //   this.#numbers = numbers;
+  //   this.bonus = bonus;
+  // };
+
+  constructor(numbers) {
+    this.UserInput = new UserInput();
+    this.amount = 0;
+    this.purchasedLotto = [];
     this.#numbers = numbers;
-    this.bonus = bonus;
+    this.#validate(numbers);
   };
+
+  async RequestInput() {
+    this.amount = await this.UserInput.RequestAmount();
+    this.purchasedLotto = makeLottoNumbers(this.amount);
+    this.test()
+  }
+
+  test() {
+    console.log(this.amount);
+    console.log(this.purchasedLotto);
+  }
+
+  #validate(numbers) {
+    const filteredNumbers = new Set(numbers);
+    if(filteredNumbers.size !== numbers.length) {
+        throw new Error(`${ERROR_MESSAGE.NUMBER_DUPLICATED_ERROR}`);
+    }
+    if (numbers.length !== 6) {
+      throw new Error(`${ERROR_MESSAGE.NUMBER_LEGNTH_ERROR}`);
+    }
+    
+    for(const num of numbers) {
+      if(+num < 1 || +num > 45) {
+        throw new Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
+      }
+    }
+  }
 
   calculateResult() {
     let result = [];
