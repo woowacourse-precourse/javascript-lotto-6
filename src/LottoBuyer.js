@@ -37,6 +37,12 @@ class LottoBuyer {
 
 		return lottoResult;
 	}
+
+	getAllLottoNumberList() {
+		return this.#lottoList.map(lotto => {
+			return lotto.getNumberList();
+		});
+	}
 }
 
 export default LottoBuyer;
