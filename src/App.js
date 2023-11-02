@@ -41,6 +41,20 @@ class App {
     this.lottos.push(lotto);
   }
   
+  async makeNumberArray(numberString){
+    const numbers = numberString.split(',');
+    if(numbers.length !== 6) throw new Error("6개여야함");
+    return numbers.map(this.validNumber);
+  }
+
+  validNumber(number){
+    const N = +number;
+    if(isNaN(N)) throw new Error("숫자가 아님");
+    if(N < 1 || N > 45) throw new Error("범위 밖임");
+    if(Math.floor(N) !== N) throw new Error("정수가 아님");
+
+    return N;
+  }
 
   async play() {
     const INPUT_MONEY = await input(PRINT_MESSAGE.INPUT_MONEY);
@@ -51,7 +65,9 @@ class App {
 
     this.createLottos(LOTTO_COUNT);
 
-    
+    const INPUT_NUMBERS = await input(PRINT_MESSAGE.INPUT_NUMBERS);
+    const NUMBERS = this.makeNumberArray(INPUT_NUMBERS);
+
   }
 }
 
