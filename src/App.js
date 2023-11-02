@@ -9,9 +9,9 @@ class App {
   }
 
   async play() {
-    const amount = await this.UserInput.amount();
+    const amount = await this.UserInput.RequestAmount();
     const lottoNumbers = makeLottoNumbers(amount);
-    const winningNumbers = await this.UserInput.makeWinningNumbers();
+    const winningNumbers = await this.UserInput.RequestWinningNumbers();
     this.lotto = new Lotto(amount, lottoNumbers, winningNumbers);
     this.lotto.print();
   }
