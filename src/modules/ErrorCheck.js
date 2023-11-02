@@ -1,10 +1,12 @@
-const NOT_A_NUMBER_ERROR_MESSAGE = '[ERROR] 숫자가 아닙니다.';
+const NOT_AN_INTEGER_ERROR_MESSAGE = '[ERROR] 정수가 아닙니다.';
 
 class ErrorCheck {
   static purchasePrice(inputString) {}
-  static stringToNumber(inputString) {
+  static integerString(inputString) {
     if (Number.isNaN(Number(inputString)))
-      throw new Error(NOT_A_NUMBER_ERROR_MESSAGE);
+      throw new Error(NOT_AN_INTEGER_ERROR_MESSAGE);
+    if (Number(inputString) !== parseInt(inputString))
+      throw new Error(NOT_AN_INTEGER_ERROR_MESSAGE);
   }
 }
 
