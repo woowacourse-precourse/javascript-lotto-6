@@ -1,5 +1,3 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-
 class Lotto {
   #numbers;
 
@@ -8,6 +6,7 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
