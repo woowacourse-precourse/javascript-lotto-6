@@ -1,12 +1,15 @@
+import lottoNumber from '../constants/lottoNumber.js';
+
 class CheckLotto {
 	static fivePlace(lottoNumberList, winningNumberList) {
-		let correctCount = 0;
-		lottoNumberList.forEach(lottoNumber => {
+		const correctCount = lottoNumberList.reduce((count, lottoNumber) => {
 			if (winningNumberList.includes(lottoNumber)) {
-				correctCount += 1;
+				return count + 1;
 			}
-		});
-		if ()
+			return count;
+		}, 0);
+
+		return correctCount === lottoNumber.fifthPlaceCount;
 	}
 }
 
