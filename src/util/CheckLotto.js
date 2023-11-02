@@ -10,7 +10,7 @@ class CheckLotto {
 		}, 0);
 	}
 
-	static fivePlace(lottoNumberList, winningNumberList) {
+	static fifthPlace(lottoNumberList, winningNumberList) {
 		return this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.fifthPlaceCount;
 	}
 	
