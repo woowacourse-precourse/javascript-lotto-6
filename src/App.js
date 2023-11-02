@@ -1,3 +1,4 @@
+const { MissionUtils } = require("@woowacourse/mission-utils");
 import Lotto from "./Lotto.js";
 
 class App {
@@ -65,25 +66,34 @@ class App {
     this.#bonusNumber = bonusNumber;
   }
 
-  #calculateResults(winningNumbers, bonusNumber) {
+  #calculateResults() {
     const results = { 3: 0, 4: 0, 5: 0, "5+1": 0, 6: 0 };
-    this.lottos.forEach((lotto) => {
-      const matchCount = this.getMatchCount(lotto.numbers, winningNumbers);
-      if (matchCount === 3) results["3"]++;
-      else if (matchCount === 4) results["4"]++;
-      else if (matchCount === 5 && lotto.numbers.includes(bonusNumber))
-        results["5+1"]++;
-      else if (matchCount === 5) results["5"]++;
-      else if (matchCount === 6) results["6"]++;
+
+    this.#lottos.forEach((lotto) => {
+      const matchCount = this.getMatchCount(
+        lotto.numbers,
+        this.#winningNumbers.numbers
+      );
+      const hasBonus = lotto.numbers.includes(this.#bonusNumber);
+      switch (matchCount) {
+        case 3:
+          results["3"]++;
+          break;
+        case 4:
+          results["4"]++;
+          break;
+        case 5:
+          hasBonus ? results["5+1"]++ : results["5"]++;
+          break;
+        case 6:
+          results["6"]++;
+          break;
+      }
     });
-    return results;
+
+    this.#printResults(results);
   }
 
-  #printResults(results, amountSpent) {
-    // 각 등수별 당첨 로또 수와 수익률을 출력
-  }
-
-  // getMatchCount 메소드는 로또 번호와 당첨 번호를 비교하여 일치하는 숫자의 수를 반환
   getMatchCount(numbers, winningNumbers) {
     return numbers.filter((number) => winningNumbers.includes(number)).length;
   }
