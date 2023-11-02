@@ -3,10 +3,11 @@ import UserInput from './view/userInput.js';
 class Lotto {
   #numbers;
 
-  constructor(amount, numbers) {
+  constructor(amount, lottoNumbers, numbers) {
     // this.#validate(numbers);
     // this.#numbers = numbers;
     this.amount = amount;
+    this.lottoNumbers = lottoNumbers;
   }
 
   // #validate(numbers) {
@@ -17,6 +18,7 @@ class Lotto {
 
   print() {
     console.log(this.amount);
+    console.log(this.lottoNumbers);
   }
 }
 
