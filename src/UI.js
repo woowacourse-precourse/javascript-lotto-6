@@ -4,6 +4,7 @@ import InputValidator from "./InputValidator";
 const TEXT = {
   askAmount: "구입금액을 입력해 주세요.",
   askWinningNumbers: "당첨 번호를 입력해 주세요.",
+  askBonusLottoNumber: "보너스 번호를 입력해 주세요.",
 };
 
 class UI {
@@ -32,6 +33,12 @@ class UI {
       .join(",");
     this.#validator.validateWinningNumbers(trimmedInput);
     return trimmedInput.split(",").map(Number);
+  }
+
+  async askBonusLottoNumber(winningNumbers) {
+    const input = await this.#ask(TEXT.askBonusLottoNumber);
+    this.#validator.validateBonusNumber(input.trim(), winningNumbers);
+    return Number(input);
   }
 }
 
