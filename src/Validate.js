@@ -1,4 +1,4 @@
-import { REGEX, UNIT } from "./constants/rule.js";
+import { LOTTO, REGEX, UNIT } from "./constants/rule.js";
 import { ERROR } from "./constants/message.js";
 
 class Validate {
@@ -23,6 +23,14 @@ class Validate {
 
     if (number % UNIT.PURCHASE !== 0) {
       throw new Error(ERROR.INVALID_UNIT);
+    }
+
+    return true;
+  }
+
+  isOnlyNumberAndComma(input) {
+    if (!REGEX.ONLY_NUMBER_AND_COMMA.test(input)) {
+      throw new Error(ERROR.NOT_ONLY_NUMBER_AND_COMMA);
     }
 
     return true;

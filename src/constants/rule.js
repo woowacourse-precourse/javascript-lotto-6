@@ -1,5 +1,6 @@
 export const REGEX = {
   ONLY_NUMBER: /^[0-9]+$/,
+  ONLY_NUMBER_AND_COMMA: /^[0-9,]+$/,
 };
 
 export const UNIT = {
@@ -14,4 +15,6 @@ export const LOTTO = {
 
 export const SEPARATOR = {
   PURCHASED_LOTTO: ", ",
+  USER_LOTTO: ",",
+  NAME: "쉼표",
 };

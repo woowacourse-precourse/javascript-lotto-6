@@ -2,6 +2,7 @@ import Print from "./Print.js";
 import Validate from "./Validate.js";
 import Utils from "./Utils.js";
 import Purchase from "./Purchase.js";
+import Lotto from "./Lotto.js";
 
 class App {
   async play() {
@@ -34,8 +35,10 @@ class App {
   async getUserLottoInput() {
     try {
       const userLotto = await Print.getUserLottoNumber();
+      const validLotto = new Lotto(userLotto);
     } catch (error) {
       Print.showErrorMessage(error.message);
+      await this.getUserLottoInput();
     }
   }
 }

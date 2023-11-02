@@ -1,4 +1,4 @@
-import { UNIT, SEPARATOR } from "./rule.js";
+import { UNIT, SEPARATOR, LOTTO } from "./rule.js";
 
 export const MESSAGE = {
   GET_PURCHASE_SUM: "구입금액을 입력해 주세요.\n",
@@ -14,4 +14,6 @@ export const MESSAGE = {
 export const ERROR = {
   NOT_ONLY_NUMBER: "[ERROR] 숫자만 입력 가능합니다.",
   INVALID_UNIT: `[ERROR] ${UNIT.PURCHASE} 단위로 입력 가능합니다.`,
+  INVALID_LOTTO_LENGTH: `[ERROR] 로또 번호는 ${LOTTO.LENGTH}개여야 합니다.`,
+  NOT_ONLY_NUMBER_AND_COMMA: `[ERROR] 숫자와 ${SEPARATOR.NAME}만 입력 가능합니다.`,
 };

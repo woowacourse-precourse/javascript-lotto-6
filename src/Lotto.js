@@ -1,5 +1,6 @@
-// 이건 유저가 입력한 로또인가...?
-// 아니면 구입 금액에 따라 생성된 로또인가...?
+import Validate from "./Validate.js";
+import { SEPARATOR } from "./constants/rule.js";
+
 class Lotto {
   #numbers;
 
@@ -9,12 +10,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-  }
+    const trimedNumbers = numbers.trim();
 
-  // TODO: 추가 기능 구현
+    const validate = new Validate();
+    validate.isOnlyNumberAndComma(trimedNumbers);
+  }
 }
 
 export default Lotto;
