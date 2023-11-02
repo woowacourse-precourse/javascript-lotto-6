@@ -7,12 +7,20 @@ describe("InputValidator 테스트", () => {
       ["숫자가 아닐 때", "ab"],
       ["중간에 공백이 들어갔을 때", "10 00"],
       ["1000원 단위가 아닐 때", "12345"],
-    ])("%s", (_, input) => {
+    ])("%s 에러를 발생시킨다", (_, input) => {
       const validator = new InputValidator();
 
       expect(() => {
         validator.validateAmount(input);
       }).toThrow("[ERROR]");
+    });
+
+    test("1000원 단위의 금액을 입력했을 경우 에러를 발생시키지 않는다", () => {
+      const validator = new InputValidator();
+
+      expect(() => {
+        validator.validateAmount("10000");
+      }).not.toThrow("[ERROR]");
     });
   });
 
@@ -29,6 +37,14 @@ describe("InputValidator 테스트", () => {
       expect(() => {
         validator.validateWinningNumbers(input);
       }).toThrow("[ERROR]");
+    });
+
+    test("6개의 중복없는 로또번호를 입력했을 경우 에러를 발생시키지 않는다", () => {
+      const validator = new InputValidator();
+
+      expect(() => {
+        validator.validateWinningNumbers("1,2,3,4,5,6");
+      }).not.toThrow("[ERROR]");
     });
   });
 });
