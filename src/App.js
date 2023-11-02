@@ -1,17 +1,14 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto";
+import Lotto from "./Lotto.js";
 class App {
   async play() {
     const totalPrice = await getTotalPrice();
-
     const totalCount = parseInt(totalPrice / 1000);
-    Console.print(`${totalCount}개를 구매했습니다.`);
-
     const lottos = getLottos(totalCount);
-    printLottos(lottos);
+    printLottos(totalCount, lottos);
 
-    const targetNumbers = getTargetNumbers();
-    const bonusNumber = getBonusNumber();
+    const targetNumbers = await getTargetNumbers();
+    const bonusNumber = await getBonusNumber();
     const result = getResult(lottos, targetNumbers, bonusNumber);
     const income = getIncome(result);
     printResult(totalPrice, income, result);
@@ -20,16 +17,21 @@ class App {
 
 const getTotalPrice = async () => {
   const totalPrice = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-  validateTotalPrice(totalPrice);
+  try {
+    validateTotalPrice(totalPrice);
+  } catch ({ message }) {
+    Console.print(message);
+    getTotalPrice();
+  }
   return totalPrice;
 };
 
 const validateTotalPrice = (price) => {
-  if (price % 1000) {
-    throw new Error("[ERROR] 구입 금액이 1,000원 단위가 아닙니다.");
+  if (isNaN(price)) {
+    throw new Error("[ERROR]");
   }
-  if (Number.isNaN(price)) {
-    throw new Error("[ERROR] 구입 금액은 숫자여야 합니다.");
+  if (price % 1000 !== 0) {
+    throw new Error("[ERROR]");
   }
 };
 
@@ -44,10 +46,11 @@ const getLottos = (counts) => {
   return lottos;
 };
 
-const printLottos = (lottos) => {
+const printLottos = (totalCount, lottos) => {
+  Console.print(`${totalCount}개를 구매했습니다.`);
   for (let lotto of lottos) {
     const numbers = lotto.getNumbers();
-    Console.print(numbers);
+    Console.print(`[${numbers.join(", ")}]`);
   }
 };
 
@@ -55,18 +58,22 @@ const getTargetNumbers = async () => {
   const targetNumbers = await Console.readLineAsync(
     "당첨 번호를 입력해 주세요.\n"
   );
-  validateTargetNumbers(targetNumbers);
+  try {
+    validateTargetNumbers(targetNumbers.split(","));
+  } catch ({ message }) {
+    Console.print(message);
+    getTargetNumbers();
+  }
   return targetNumbers;
 };
 
 const validateTargetNumbers = (numbers) => {
-  const numbers = numbers.split(",");
-  const numbersSet = Set(numbers);
-  if (numbers.length != 6) {
-    throw new Error("[ERROR] 당첨 번호는 6자리입니다.");
+  const numbersSet = new Set(numbers);
+  if (numbers.length !== 6) {
+    throw new Error("[ERROR]");
   }
-  if (numbers.length != numbersSet.length) {
-    throw new Error("[ERROR] 당첨 번호는 중복된 숫자가 있을 수 없습니다.");
+  if (numbers.length !== numbersSet.size) {
+    throw new Error("[ERROR]");
   }
 };
 
@@ -80,7 +87,7 @@ const getBonusNumber = async () => {
 
 const validateBonusNumbers = (number) => {
   if (Number.isNaN(number)) {
-    throw new Error("[ERROR] 보너스 번호는 숫자입니다.");
+    throw new Error("[ERROR]");
   }
 };
 
@@ -93,8 +100,9 @@ const getResult = (lottos, targetNumbers, bonusNumber) => {
     1: 0,
   };
   for (let lotto of lottos) {
+    const numbers = lotto.getNumbers();
     const [correctTarget, correctBonus] = calculateResult(
-      lotto,
+      numbers,
       targetNumbers,
       bonusNumber
     );
@@ -103,14 +111,13 @@ const getResult = (lottos, targetNumbers, bonusNumber) => {
   return result;
 };
 
-const calculateResult = (lotto, targetNumbers, bonusNumber) => {
+const calculateResult = (numbers, targetNumbers, bonusNumber) => {
   let corretTarget = 0;
   let corretBonus = 0;
   for (let targetNumber of targetNumbers) {
-    if (lotto.includes(targetNumber)) corretTarget += 1;
+    if (numbers.includes(Number(targetNumber))) corretTarget += 1;
   }
-  if (lotto.includes(bonusNumber)) corretBonus += 1;
-
+  if (numbers.includes(Number(bonusNumber))) corretBonus += 1;
   return [corretTarget, corretBonus];
 };
 
@@ -126,8 +133,7 @@ const getIncome = (result) => {
   return (
     result[5] * 5000 +
     result[4] * 50000 +
-    result[3] +
-    1500000 +
+    result[3] * 1500000 +
     result[2] * 30000000 +
     result[1] * 2000000000
   );
@@ -139,7 +145,12 @@ const printResult = (totalPrice, income, result) => {
   Console.print(`5개 일치 (1,500,000원) - ${result[3]}개`);
   Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[2]}개`);
   Console.print(`6개 일치 (2,000,000,000원) - ${result[1]}개`);
-  Console.print(`총 수익률은 ${(income / totalPrice).toFixed(1)}%입니다.`);
+  Console.print(
+    `총 수익률은 ${((income / totalPrice) * 100).toLocaleString("ko-KR", {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    })}%입니다.`
+  );
 };
 
 export default App;

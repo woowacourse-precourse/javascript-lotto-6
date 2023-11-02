@@ -7,7 +7,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    const numbersSet = new Set(numbers);
+    if (numbersSet.size !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
   }
