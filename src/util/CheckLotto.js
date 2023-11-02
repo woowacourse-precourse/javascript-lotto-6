@@ -35,6 +35,10 @@ class CheckLotto {
 		}
 		return false;
 	}
+
+	static firstPlace(lottoNumberList, winningNumberList) {
+		return this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.firstPlaceCount;
+	}
 }
 
 export default CheckLotto;
