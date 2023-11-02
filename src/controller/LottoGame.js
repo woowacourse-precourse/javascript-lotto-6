@@ -18,9 +18,8 @@ class LottoGame {
   async #getAmountInput() {
     const amount = await InputView.readAmount();
     this.#validateAmountInput(amount);
-    const count = this.#getLottoCount(amount);
 
-    return count;
+    return this.#getLottoCount(amount);
   }
 
   #validateAmountInput(amount) {
@@ -30,6 +29,10 @@ class LottoGame {
 
   #getLottoCount(amount) {
     return amount / CONSTANT.amountUnit;
+  }
+
+  async #getWinningNumbersInput() {
+    const winningNumbers = await InputView.readWinningNumbers();
   }
 }
 
