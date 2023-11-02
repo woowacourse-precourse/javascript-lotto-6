@@ -5,3 +5,9 @@ export const REGEX = {
 export const UNIT = {
   PURCHASE: 1000,
 };
+
+export const LOTTO = {
+  MIN_RANGE: 1,
+  MAX_RANGE: 45,
+  LENGTH: 6,
+};

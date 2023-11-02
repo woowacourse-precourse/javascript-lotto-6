@@ -1,6 +1,7 @@
 import Print from "./Print.js";
 import Validate from "./Validate.js";
 import Utils from "./Utils.js";
+import Purchase from "./Purchase.js";
 
 class App {
   async play() {
@@ -22,6 +23,8 @@ class App {
 
   purchaseLotto(amount) {
     Print.showPurchaseMessage(amount);
+    const purchase = new Purchase(amount);
+    purchase.getLottos();
   }
 }
 
