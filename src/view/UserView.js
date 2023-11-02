@@ -15,6 +15,11 @@ class UserView{
         return PURCHASE_AMOUT;
     }
 
+    async userInputWinningNumbers(){
+        const WINNING_NUMBERS = await Console.readLineAsync(MESSAGE.MSG_WINNING_NUMBERS+'\n');
+        return WINNING_NUMBERS.split(',');
+    }
+
 }
 
 export default UserView
