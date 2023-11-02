@@ -2,6 +2,7 @@ import InputView from '../view/InputView.js';
 import AmountValidator from '../validator/AmountValidator.js';
 import { CONSTANT } from '../constants/Constant.js';
 import LottoBundle from '../model/LottoBundle.js';
+import OutputView from '../view/OutputView.js';
 
 class LottoGame {
   #lottoBundle;
@@ -12,6 +13,7 @@ class LottoGame {
 
     this.#lottoBundle = new LottoBundle();
     this.#lottoBundle.buyLottos(lottoCount);
+    OutputView.printLottoNumbers(lottoCount, this.#lottoBundle.getTotalLottoNumberString());
   }
 
   async #getAmountInput() {
