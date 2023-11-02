@@ -15,11 +15,15 @@ class GameController {
     // 1. 로또 구입 금액을 입력 받는다.
     const money = await InputView.getMoney();
     const lottoCnt = Math.floor(money / MONEY_UNIT);
-    await this.buyLotto(lottoCnt);
+    this.buyLotto(lottoCnt);
+
+    // 3. 로또 번호를 입력 받는다.
+    this.game.luckyNumbers = await InputView.getLuckyNumbers();
+    this.game.bonusNumber = await InputView.getBonusNumber();
   }
 
   // 2. 로또를 구매한다.
-  async buyLotto(lottoCnt) {
+  buyLotto(lottoCnt) {
     // 2-1. 구매한 로또 수량을 출력한다.
     OutputView.printLottoCnt(lottoCnt);
 
