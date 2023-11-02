@@ -12,7 +12,7 @@ class Controller {
     try {
       const priceInput = await this.view.readLine("구입금액을 입력해 주세요.\n");
     } catch (err) {
-      Console.print(err.message);
+      this.view.print(err.message);
     }
   }
 }
