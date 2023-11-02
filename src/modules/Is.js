@@ -1,5 +1,6 @@
 class Is {
   static positiveIntegerString(string) {
+    if (typeof string !== 'string') return false;
     if (string.trim() === '') return false;
     if (Number.isNaN(Number(string))) return false;
     if (Number(string) !== parseInt(string)) return false;
