@@ -8,9 +8,6 @@ class InOutputError{
         if(purchaseAmount.trim() === '' || purchaseAmount === undefined){
             throw Error(`${ERROR_MESSAGE.INPUT_BLANK_ERROR}`);
         }
-        if(isNaN(purchaseAmount)){ 
-            throw Error(`${ERROR_MESSAGE.INPUT_NUMBER_ERROR}`);
-        }
     }
 
     inputWinningNumbersValidate = (winningNumbers) => {
@@ -22,6 +19,15 @@ class InOutputError{
                 throw new Error(`${ERROR_MESSAGE.INPUT_WINNING_NUMBERS_ERROR}`);
             }
         });
+    }
+
+    inputBonusNumberValidate = (bonusNumber) => {
+        if(bonusNumber < 1 || bonusNumber > 45){
+            throw new Error(`${ERROR_MESSAGE.INPUT_WINNING_NUMBERS_ERROR}`);
+        }
+        if(bonusNumber.trim() === '' || bonusNumber === undefined){
+            throw Error(`${ERROR_MESSAGE.INPUT_BLANK_ERROR}`);
+        }
     }
 }
 
