@@ -14,4 +14,18 @@ describe('ErrorCheck 테스트', () => {
     if (isThrowing) expect(targetFunction).toThrow();
     if (!isThrowing) expect(targetFunction).not.toThrow();
   });
+
+  test.each([
+    [1000, false],
+    [40000, false],
+    [10000, false],
+    [2001, true],
+    [9999, true],
+    [123, true],
+    [1, true],
+  ])('positiveIntegerString()', (input, isThrowing) => {
+    const targetFunction = () => ErrorCheck.positiveIntegerString(input);
+    if (isThrowing) expect(targetFunction).toThrow();
+    if (!isThrowing) expect(targetFunction).not.toThrow();
+  });
 });
