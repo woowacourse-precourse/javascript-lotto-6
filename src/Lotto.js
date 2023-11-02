@@ -1,8 +1,8 @@
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
+  constructor(numbers, purchaseAmount, bonusNumber) {
+    this.#validate(numbers, purchaseAmount, bonusNumber);
     this.#numbers = numbers;
   }
 
@@ -21,6 +21,16 @@ class Lotto {
       if (number > 45 || number < 1) {
         throw new Error('[ERROR] 로또 번호는 1~45 사이로 입력해주세요.');
       }
+    }
+
+    // 보너스 번호가 1~45 범위 벗어낫을 때
+    if (bonusNumber > 45 || bonusNumber < 1) {
+      throw new Error('[ERROR] 보너스 번호는 1~45 사이로 입력해주세요.');
+    }
+
+    // 보너스 번호를 여러개 입력했을 때
+    if (bonusNumber.length > 1) {
+      throw new Error('[ERROR] 보너스 번호는 하나만 입력해주세요.');
     }
   }
 
