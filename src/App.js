@@ -8,7 +8,7 @@ class App {
   }
 
   async play() {
-    this.#LOTTO_PLAY.test();
+    await this.#LOTTO_PLAY.inputPurchaseMoney();
   }
 }
 
