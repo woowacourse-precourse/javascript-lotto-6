@@ -6,6 +6,12 @@ class PurchaseController {
 
     return price;
   }
+
+  static checkOnlyNumbers(price) {
+    const pattern = /^\d+$/;
+
+    return pattern.test(price);
+  }
 }
 
 export default PurchaseController;
