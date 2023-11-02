@@ -31,10 +31,9 @@ class Lotto {
     OutputView.printLottoNumbers(this.#numbers);
   }
 
-  calculateMatchCount(luckyNumbers, bonusNumber) {
+  match(luckyNumbers, bonusNumber) {
     const cnt = this.#numbers.filter((number) => luckyNumbers.includes(number)).length;
     const bonus = this.#numbers.includes(bonusNumber);
-
     const matchResult = {
       cnt,
       bonus
