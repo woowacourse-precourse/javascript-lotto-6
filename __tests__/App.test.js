@@ -33,4 +33,20 @@ describe('class App test', () => {
       }).toThrow('[ERROR] 숫자만 입력하세요.');
     });
   });
+
+  describe('method test : checkLottoPrice()', () => {
+    test('입력 받은 로또 구입 금액이 문자이면 오류가 발생할까 ?', () => {
+      const testPrice = 'Hundred';
+      expect(() => {
+        app.checkLottoPrice(testPrice);
+      }).toThrow('[ERROR] 숫자만 입력하세요.');
+    });
+  });
+
+  describe('method test : makeRandomNumber()', () => {
+    test('반환된 배열의 길이가 6인가 ?', () => {
+      const testArray = app.makeRandomNumber();
+      expect(testArray).toHaveLength(6);
+    });
+  });
 });
