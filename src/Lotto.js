@@ -25,7 +25,14 @@ class Lotto {
     return this.#numbers;
   }
 
-  // TODO: 추가 기능 구현
+  contains(number) {
+    return this.#numbers.includes(number);
+  }
+
+  matchCount(otherNumbers) {
+    return this.#numbers.filter((number) => otherNumbers.includes(number))
+      .length;
+  }
 }
 
 export default Lotto;
