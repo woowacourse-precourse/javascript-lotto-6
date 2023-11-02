@@ -1,5 +1,5 @@
-import LottoModel from "../src/model/LottoModel";
-import SETTINGS from "../src/constants/settings";
+import LottoModel from "../src/model/LottoModel.js";
+import SETTINGS from "../src/constants/settings.js";
 
 describe("LottoApp 모델 테스트", () => {
   let lottoModel;
