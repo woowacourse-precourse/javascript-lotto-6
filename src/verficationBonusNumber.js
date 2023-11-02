@@ -7,6 +7,6 @@ const verificationBounsNumber = (number) => {
   ) {
     throw new Error("[ERROR] : 숫자가 잘못된 형식입니다.");
   }
-  return arrayNumber.join("");
+  return Number(arrayNumber.join(""));
 };
 export default verificationBounsNumber;
