@@ -8,8 +8,9 @@ class Is {
     return true;
   }
 
-  static multiplesOf1000InPositive(number) {
-    if (number % 1000 === 0) return true;
+  static multiplesInPositive(number, targetNumber) {
+    if (number <= 0) return false;
+    if (number % targetNumber === 0) return true;
     return false;
   }
 }
