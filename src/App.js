@@ -1,13 +1,23 @@
 import { Random, Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
+const LOTTO_PRICE = 1000;
+const PRIZES = {
+  6: 2000000000,
+  "5+1": 30000000,
+  5: 1500000,
+  4: 50000,
+  3: 5000,
+  꽝: 0,
+};
+
 class App {
   async play() {
     const purchaseAmount = await Console.readLineAsync(
       "구입금액을 입력해 주세요. \n"
     );
 
-    const lottoCount = Math.floor(purchaseAmount / 1000);
+    const lottoCount = Math.floor(purchaseAmount / LOTTO_PRICE);
     const lottos = [];
 
     for (let i = 0; i < lottoCount; i++) {
@@ -62,6 +72,19 @@ class App {
 
     Console.print("\n당첨 통계\n---");
     prizeMessages.forEach((message) => Console.print(message));
+
+    let totalPrizeMoney = 0;
+
+    Object.keys(resultCounts).forEach((prize) => {
+      if (PRIZES.hasOwnProperty(prize)) {
+        totalPrizeMoney += PRIZES[prize] * resultCounts[prize];
+      }
+    });
+
+    const investment = lottoCount * LOTTO_PRICE;
+    const roi = ((totalPrizeMoney - investment) / investment) * 100;
+
+    Console.print(`총 수익률은 ${roi.toFixed(2)}% 입니다.`);
   }
 }
 
