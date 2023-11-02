@@ -51,7 +51,11 @@ const printWinningStatistics = (matchResults) => {
 };
 
 const printTotalReturn = (totalReturn) => {
-  return `총 수익률은 ${totalReturn}%입니다.`;
+  print(`총 수익률은 ${totalReturn}%입니다.`);
+};
+
+const printErrorMessage = (errorMessage) => {
+  print(`[ERROR] ${errorMessage}`);
 };
 
 export {
@@ -62,4 +66,5 @@ export {
   printInputBonusNumberPhrase,
   printWinningStatistics,
   printTotalReturn,
+  printErrorMessage,
 };
