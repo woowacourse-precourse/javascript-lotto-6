@@ -108,4 +108,15 @@ describe("로또 테스트", () => {
     expect(lottos[0].getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
     expect(lottos[1].getNumbers()).toEqual([7, 8, 9, 10, 11, 12]);
   });
+
+  test('당첨 번호와 보너스 번호 입력', async () => {
+    const winningNumbers = "1,2,3,4,5,6";
+    const bounsNumber = "7";
+    
+    const app = new App();
+    
+    expect(app.checkLottoNumberValidate(winningNumbers)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(app.checkBonusNumberValidate(bounsNumber, winningNumbers)).toBe(7);
+  })
+  
 });
