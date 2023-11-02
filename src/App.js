@@ -1,7 +1,6 @@
 import UserInput from './view/userInput.js';
 import Amount from './controller/Amount.js';
 import Purchase from './controller/Purchase.js';
-
 import Lotto from './controller/Lotto.js';
 
 class App {
@@ -12,11 +11,11 @@ class App {
   async play() {
     const amount = await this.UserInput.RequestAmount();
     new Amount(amount);
-    const purchaseLotto = new Purchase(amount);
-    const arrays = purchaseLotto.public();
-    console.log(arrays);
+    const purchase = new Purchase(amount);
+    const arrays = purchase.public();
+    const numbers = await this.UserInput.RequestWinningNumbers();
+    const lotto = new Lotto(numbers);
 
-    // const winningNumbers = await this.UserInput.RequestWinningNumbers();
     // const bonusNumber = await this.UserInput.RequestBonus();
     // this.lotto = new Lotto();
     // this.lotto.calculateResult();
