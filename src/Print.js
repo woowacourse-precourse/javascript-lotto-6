@@ -7,6 +7,10 @@ class Print {
     return sum;
   }
 
+  static showPurchaseMessage(amount) {
+    Console.print(MESSAGE.SHOW_LOTTO_AMOUNT(amount));
+  }
+
   static showErrorMessage(message) {
     Console.print(message);
   }
