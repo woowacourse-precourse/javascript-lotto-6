@@ -4,5 +4,5 @@ export function devideMoneyForLotto(moneyForLotto) {
 
 export function profitRate(moneyForLotto, winningPrizeSum) {
   const rate = (winningPrizeSum / moneyForLotto) * 100;
-  return Math.round(rate * 100) / 100;
+  return Math.round(rate * 10) / 10;
 }
