@@ -4,7 +4,10 @@ import { print } from "./util/output.js";
 import { PRINT_MESSAGE } from "./constants/message.js";
 
 import { Random } from "@woowacourse/mission-utils";
-import { getValidatedNumber, getValidatedNumbers } from "./validation/number.js";
+import {
+  getValidatedNumber,
+  getValidatedNumbers,
+} from "./validation/number.js";
 import { validateMoney } from "./validation/money.js";
 class App {
   lottos = [];
@@ -36,18 +39,20 @@ class App {
     return getValidatedNumbers(numbers);
   }
 
-  getResult(NUMBERS) {
+  getResult(NUMBERS, BONUS_NUMBER) {
     let prizeCount = {
       1: 0,
       2: 0,
       3: 0,
       4: 0,
       5: 0,
+      bonus: 0,
       6: 0,
     };
     this.lottos.forEach((lotto) => {
-      const count = lotto.getPrizeCount(NUMBERS);
-      prizeCount[count]++;
+      const { count, isbonus } = lotto.getPrizeCount(NUMBERS, BONUS_NUMBER);
+      if (isbonus) prizeCount["bonus"]++;
+      else prizeCount[count]++;
     });
 
     return prizeCount;
@@ -69,15 +74,14 @@ class App {
     //각 로또 번호 생성
     const INPUT_NUMBERS = await input(PRINT_MESSAGE.NUMBERS);
     const NUMBERS = this.makeNumberArray(INPUT_NUMBERS);
-    
-    console.log(NUMBERS);
-    
 
     //보너스 번호 생성
     const INPUT_BONUS_NUMBERS = await input(PRINT_MESSAGE.BONUS_NUMBER);
     const BONUS_NUMBERS = getValidatedNumber(INPUT_BONUS_NUMBERS);
 
-    const RESULT = this.getResult(NUMBERS);
+    const RESULT = this.getResult(NUMBERS, BONUS_NUMBERS);
+    console.log(RESULT);
+    
   }
 }
 

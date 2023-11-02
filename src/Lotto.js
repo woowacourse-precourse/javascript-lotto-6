@@ -19,13 +19,20 @@ class Lotto {
     print(this.#numbers);
   }
 
-  getPrizeCount(userNumbers){
+  getPrizeCount(userNumbers, bonusNumber){
     let count = 0;
+    let isbonus = false;
     userNumbers.forEach((userNumber)=>{
       if(this.#numbers.includes(userNumber)) count++;
     });
 
-    return count;
+
+    if(count === 5 && this.#numbers.includes(bonusNumber)) isbonus = true;
+
+    return {
+      count,
+      isbonus
+    };
   }
 }
 
