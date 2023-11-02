@@ -1,4 +1,4 @@
-const ERROR_MESSAGE = Object.freeze({
+const ERROR = Object.freeze({
   purchaseNumber: "[ERROR] 구입 금액은 숫자만 입력 가능합니다.",
   purchaseUnit: "[ERROR] 구입 금액은 1,000원 단위로 나눠 떨어져야 합니다.",
   purchaseZero: "[ERROR] 구입 금액은 0원이 될 수 없습니다.",
@@ -15,4 +15,4 @@ const ERROR_MESSAGE = Object.freeze({
   bonusRange: "[ERROR] 보너스 번호는 1과 45 사이의 값이어야 합니다.",
 });
 
-export default ERROR_MESSAGE;
+export default ERROR;
