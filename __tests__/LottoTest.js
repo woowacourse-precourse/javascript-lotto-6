@@ -14,5 +14,8 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test('1~45까지 중복되지 않은 로또 번호 생성', () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(lotto.getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
+  });
 });

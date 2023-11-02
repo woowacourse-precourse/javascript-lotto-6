@@ -7,12 +7,18 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    const LOTTO_LENGTH = 6;
+    const set = new Set(numbers);
+    const newNumbers = [...set];
+
+    if(newNumbers.length !== LOTTO_LENGTH) {
+      throw new Error("[ERROR] 로또 번호는 6자리의 중복되지 않은 숫자여야 합니다.")
     }
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
