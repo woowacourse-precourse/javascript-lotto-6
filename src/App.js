@@ -6,7 +6,7 @@ class App {
   }
 
   async play() {
-    const lottoPurchaseAmount =
+    const lottoPrice =
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
     const lottoTicket = this.getLottoTicket(lottoPurchaseAmount);
   }
