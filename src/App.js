@@ -18,8 +18,6 @@ class App {
 
     await winNumber.inputWinNumber();
     await winNumber.inputBonusNumber();
-
-    Console.print(OUTPUT.statics);
   }
 }
 

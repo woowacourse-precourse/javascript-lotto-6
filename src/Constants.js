@@ -29,3 +29,10 @@ export const ERROR = {
   same_num_error: "[ERROR] 로또 번호가 중복되었습니다.",
   purchase_amount_error: "[ERROR] 로또 구입 금액은 1000원 단위 입니다.",
 };
+export const MATCH = {
+  match_3: 3,
+  match_4: 4,
+  match_5: 5,
+  match_6: 6,
+  match_5_bonus: 7,
+};

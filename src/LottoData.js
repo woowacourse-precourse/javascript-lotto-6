@@ -27,5 +27,9 @@ class LottoData {
       this.pickRandomLotto();
     }
   }
+
+  getLottoData() {
+    return this.#lottoData;
+  }
 }
 export default LottoData;
