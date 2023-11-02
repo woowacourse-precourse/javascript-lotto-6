@@ -1,6 +1,6 @@
-import MESSAGES from "../constants/messages.js";
-import SETTINGS from "../constants/settings.js";
-import Lotto from "../Lotto.js";
+import MESSAGES from "../constants/messages";
+import SETTINGS from "../constants/settings";
+import Lotto from "../Lotto";
 import { Random } from "@woowacourse/mission-utils";
 
 class LottoModel {
