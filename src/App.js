@@ -1,4 +1,5 @@
 import lottoPriceInput from "./LottoPriceInput.js";
+import numberVerification from "./NumberVerification.js";
 import excutionNumber from "./excutionNumber.js";
 import playerNumber from "./playerNumber.js";
 import priceCheck from "./priceCheck.js";
@@ -9,7 +10,8 @@ class App {
     const purchase = priceCheck(price);
     const excution = excutionNumber(purchase);
     const playerAnswer = await playerNumber("당첨 번호를 입력해 주세요.");
-    console.log(playerAnswer);
+    const verificationNumber = numberVerification(playerAnswer);
+    console.log(verificationNumber);
   }
 }
 
