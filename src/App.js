@@ -8,16 +8,19 @@ class App {
   }
 
   getLottoTicket(lottoPurchaseAmount) {
+    // test code
     return Number(lottoPurchaseAmount / 1000);
   }
 
   checkLottoPrice(lottoPrice) {
+    // test code
     if (lottoPrice < 1000)
       throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
     if (isNaN(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
   }
 
   makeRandomNumber() {
+    // test code
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
@@ -26,6 +29,7 @@ class App {
   }
 
   removeSpace(lottoArray) {
+    // test code
     const arrayString = lottoArray.join(', ');
     return '[' + arrayString + ']';
   }
