@@ -57,6 +57,8 @@ class App {
     this.printLottoArray();
     const userLottoNumber =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const userBonusNumber =
+      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
   }
 }
 
