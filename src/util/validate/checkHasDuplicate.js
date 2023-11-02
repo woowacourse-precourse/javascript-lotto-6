@@ -6,6 +6,6 @@ export default function checkHasDuplicate(numbers) {
   const isNotValid = LottoSet.size !== numbers.length;
 
   if (isNotValid) {
-    throw new Error(`[ERROR] ${ERROR_CODE.isDuplicated}`);
+    throw new Error(`${ERROR_CODE.isDuplicated}`);
   }
 }
