@@ -8,6 +8,7 @@ const excutionNumber = (number) => {
       new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)).numbers
     );
   }
+  return result;
 };
 
 export default excutionNumber;
