@@ -5,10 +5,16 @@ class App {
     return Number(lottoPurchaseAmount / 1000);
   }
 
+  checkLottoPrice(lottoPrice) {
+    if (lottoPrice < 1000)
+      throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
+  }
+
   async play() {
     const lottoPrice =
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
-    const lottoTicket = this.getLottoTicket(lottoPurchaseAmount);
+    this.checkLottoPrice(lottoPrice);
+    const lottoTicket = this.getLottoTicket(lottoPrice);
   }
 }
 
