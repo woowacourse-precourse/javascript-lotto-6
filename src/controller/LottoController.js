@@ -23,11 +23,6 @@ class LottoController {
     this.outputView.printLottos(totalCount, lottosData);
   }
 
-  async setNumbers() {
-    await this.setTargetNumbers();
-    await this.setBonusNumber();
-  }
-
   async setPriceInfo() {
     const totalPrice = await this.inputView.read(MESSAGES.buyPrice);
     try {
@@ -36,6 +31,11 @@ class LottoController {
       this.outputView.print(message);
       await this.setPriceInfo();
     }
+  }
+
+  async setNumbers() {
+    await this.setTargetNumbers();
+    await this.setBonusNumber();
   }
 
   async setTargetNumbers() {
@@ -62,7 +62,7 @@ class LottoController {
     this.lottoModel.judgeResult();
     const result = this.lottoModel.getResult();
 
-    this.lottoModel.calculateIncome();
+    this.lottoModel.setIncome();
     const incomeData = this.lottoModel.getIncomeData();
 
     this.outputView.printResult(incomeData, result);

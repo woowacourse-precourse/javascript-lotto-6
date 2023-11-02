@@ -1,5 +1,6 @@
 import LottoModel from "../src/model/LottoModel";
 import SETTINGS from "../src/constants/settings";
+import MESSAGES from "../src/constants/messages";
 
 describe("LottoModel 테스트", () => {
   let lottoModel;
@@ -11,7 +12,9 @@ describe("LottoModel 테스트", () => {
   describe("로또 구매 금액 설정 및 가져오기", () => {
     test("로또 구매 금액을 설정하고 가져오기", () => {
       const totalPrice = 14000;
+
       lottoModel.setPriceInfo(totalPrice);
+
       expect(lottoModel.getTotalPrice()).toBe(totalPrice);
     });
   });
@@ -19,58 +22,56 @@ describe("LottoModel 테스트", () => {
   describe("당첨 번호 설정 및 가져오기", () => {
     test("당첨 번호를 설정하고 가져오기", () => {
       const targetNumbers = [3, 7, 12, 18, 22, 45];
+
       lottoModel.setTargetNumbers(targetNumbers);
+
       expect(lottoModel.getTargetNumbers()).toEqual(targetNumbers);
     });
 
-    test("유효하지 않은 당첨 번호인 경우에 예외 처리", () => {
-      const invalidNumbers = [1, 1, 2, 3, "abc"];
-      expect(() => lottoModel.validateTargetNumbers(invalidNumbers)).toThrow();
+    test("중복된 당첨 번호 예외 처리", () => {
+      const invalidNumbers = [1, 2, 3, 4, 5, 5];
 
-      const validNumbers = [2, 4, 6, 8, 10, 12];
-      expect(() =>
-        lottoModel.validateTargetNumbers(validNumbers)
-      ).not.toThrow();
+      expect(() => lottoModel.validateTargetNumbers(invalidNumbers)).toThrow(
+        MESSAGES.error.notDuplicateTargetNumbers
+      );
     });
   });
 
   describe("수익 계산 테스트", () => {
     test("수익을 계산할 때 올바른 결과 반환", () => {
       lottoModel.result = [0, 5, 3, 2, 1, 0];
-
       const expectedIncome =
-        5 * SETTINGS.income.first +
-        3 * SETTINGS.income.second +
-        2 * SETTINGS.income.third +
-        1 * SETTINGS.income.fourth +
-        0 * SETTINGS.income.fifth;
+        lottoModel.result[1] * SETTINGS.income.first +
+        lottoModel.result[2] * SETTINGS.income.second +
+        lottoModel.result[3] * SETTINGS.income.third +
+        lottoModel.result[4] * SETTINGS.income.fourth +
+        lottoModel.result[5] * SETTINGS.income.fifth;
 
-      lottoModel.calculateIncome();
+      lottoModel.setIncome();
 
-      expect(lottoModel.income).toBe(expectedIncome);
+      expect(lottoModel.getIncome()).toBe(expectedIncome);
     });
   });
 
   describe("보너스 번호 테스트", () => {
     test("유효한 보너스 번호인 경우 검증 통과", () => {
-      const bonusNumber = 42;
-      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35]; // 예시로 6개의 로또 번호 배열
+      const number = 42;
+      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35];
 
-      expect(() => lottoModel.validateBonusNumbers(bonusNumber)).not.toThrow();
+      expect(() => lottoModel.validateBonusNumbers(number)).not.toThrow();
     });
 
     test("범위를 벗어나는 번호인 경우 예외 처리", () => {
-      const bonusNumber = 50;
-      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35]; // 예시로 6개의 로또 번호 배열
+      const number = 100;
 
-      expect(() => lottoModel.validateBonusNumbers(bonusNumber)).toThrowError();
+      expect(() => lottoModel.validateBonusNumbers(number)).toThrowError();
     });
 
     test("이미 로또 번호에 있는 번호인 경우 예외 처리", () => {
-      const bonusNumber = 25;
-      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35]; // 예시로 6개의 로또 번호 배열
+      const number = 25;
+      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35];
 
-      expect(() => lottoModel.validateBonusNumbers(bonusNumber)).toThrowError();
+      expect(() => lottoModel.validateBonusNumbers(number)).toThrowError();
     });
   });
 });

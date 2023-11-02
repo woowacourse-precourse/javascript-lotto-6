@@ -10,7 +10,7 @@ class LottoModel {
     this.targetNumbers = [];
     this.lottos = [];
     this.bonusNumber = null;
-    this.result = [0, 0, 0, 0, 0, 0];
+    this.result = Array(6).fill(0);
     this.income = null;
   }
 
@@ -23,7 +23,7 @@ class LottoModel {
   validateTotalPrice(price) {
     if (Number.isNaN(price)) throw new Error(MESSAGES.error.notNumber);
     if (price % SETTINGS.priceUnit)
-      throw new Error(MESSAGES.error.invalidPrice);
+      throw new Error(MESSAGES.error.invalidPricUnit);
   }
 
   getTotalPrice() {
@@ -40,21 +40,24 @@ class LottoModel {
   }
 
   validateTargetNumbers(numbers) {
+    const { count, minimum, maximum } = SETTINGS.targetNumber;
     const numbersSet = new Set(numbers);
-    if (numbers.length !== SETTINGS.targetNumber.count)
+
+    if (numbers.length !== count)
       throw new Error(MESSAGES.error.invalidTargetNumbersLength);
     if (numbers.length !== numbersSet.size)
       throw new Error(MESSAGES.error.notDuplicateTargetNumbers);
-    if (numbers.some((number) => Number.isNaN(number)))
-      throw new Error(MESSAGES.error.notNumber);
     if (
-      numbers.some(
-        (number) =>
-          number > SETTINGS.targetNumber.maximum ||
-          SETTINGS.targetNumber.minimum < 1
+      numbers.some((number) =>
+        this.isInvalidNumberRange(number, minimum, maximum)
       )
-    )
+    ) {
       throw new Error(MESSAGES.error.invalidRange);
+    }
+  }
+
+  isInvalidNumberRange(number, minimum, maximum) {
+    return number > maximum || number < minimum;
   }
 
   getTargetNumbers() {
@@ -62,12 +65,9 @@ class LottoModel {
   }
 
   setLottos() {
+    const { minimum, maximum } = SETTINGS.targetNumber;
     for (let count = 0; count < this.totalCount; count++) {
-      const numbers = Random.pickUniqueNumbersInRange(
-        SETTINGS.targetNumber.minimum,
-        SETTINGS.targetNumber.maximum,
-        SETTINGS.targetNumber.count
-      );
+      const numbers = Random.pickUniqueNumbersInRange(count, minimum, maximum);
       numbers.sort((a, b) => a - b);
       this.lottos.push(new Lotto(numbers));
     }
@@ -78,10 +78,7 @@ class LottoModel {
   }
 
   getLottosData = () => {
-    const lottosData = this.lottos.map(
-      (lotto) => `[${lotto.getNumbers().join(", ")}]`
-    );
-    return lottosData;
+    return this.lottos.map((lotto) => `[${lotto.getNumbers().join(", ")}]`);
   };
 
   setBonusNumber(bonusNumber) {
@@ -90,12 +87,10 @@ class LottoModel {
   }
 
   validateBonusNumbers = (number) => {
-    if (Number.isNaN(number)) throw new Error(MESSAGES.error.notNumber);
-    if (
-      number > SETTINGS.targetNumber.maximum ||
-      SETTINGS.targetNumber.minimum < 1
-    )
+    const { minimum, maximum } = SETTINGS.targetNumber;
+    if (this.isInvalidNumberRange(number, minimum, maximum)) {
       throw new Error(MESSAGES.error.invalidRange);
+    }
     if (this.getTargetNumbers().includes(number))
       throw Error(MESSAGES.error.notDuplicateTargetNumbers);
   };
@@ -108,48 +103,49 @@ class LottoModel {
     for (let lotto of this.lottos) {
       const numbers = lotto.getNumbers();
       const [correctTarget, correctBonus] = this.calculateCorrect(numbers);
-      this.makeResult(correctTarget, correctBonus);
+      this.calculateResult(correctTarget, correctBonus);
     }
   }
 
   calculateCorrect(numbers) {
-    let corretTarget = 0;
-    let corretBonus = 0;
+    let correctTarget = 0;
+    let correctBonus = numbers.includes(Number(this.bonusNumber)) ? 1 : 0;
     for (let targetNumber of this.targetNumbers) {
-      if (numbers.includes(Number(targetNumber))) corretTarget += 1;
+      if (numbers.includes(Number(targetNumber))) correctTarget += 1;
     }
-    if (numbers.includes(Number(this.bonusNumber))) corretBonus += 1;
-    return [corretTarget, corretBonus];
+    return [correctTarget, correctBonus];
   }
 
-  makeResult(correctTarget, correctBonus) {
-    if (correctTarget == SETTINGS.targetNumber.count) this.result[1] += 1;
-    if (correctTarget == SETTINGS.targetNumber.count - 1 && correctBonus)
-      this.result[2] += 1;
-    if (correctTarget == SETTINGS.targetNumber.count - 1 && !correctBonus)
-      this.result[3] += 1;
-    if (correctTarget == SETTINGS.targetNumber.count - 2) this.result[4] += 1;
-    if (correctTarget == SETTINGS.targetNumber.count - 3) this.result[5] += 1;
+  calculateResult(correctTarget, correctBonus) {
+    const { count } = SETTINGS.targetNumber;
+
+    if (correctTarget === count) this.result[1] += 1;
+    if (correctTarget === count - 1 && correctBonus) this.result[2] += 1;
+    if (correctTarget === count - 1 && !correctBonus) this.result[3] += 1;
+    if (correctTarget === count - 2) this.result[4] += 1;
+    if (correctTarget === count - 3) this.result[5] += 1;
   }
 
   getResult() {
     return this.result;
   }
 
-  calculateIncome() {
+  setIncome() {
+    const { first, second, third, fourth, fifth } = SETTINGS.income;
     this.income =
-      this.result[5] * SETTINGS.income.fifth +
-      this.result[4] * SETTINGS.income.fourth +
-      this.result[3] * SETTINGS.income.third +
-      this.result[2] * SETTINGS.income.second +
-      this.result[1] * SETTINGS.income.first;
+      this.result[1] * first +
+      this.result[2] * second +
+      this.result[3] * third +
+      this.result[4] * fourth +
+      this.result[5] * fifth;
+  }
+
+  getIncome() {
+    return this.income;
   }
 
   getIncomeData() {
-    return ((this.income / this.totalPrice) * 100).toLocaleString("ko-KR", {
-      minimumFractionDigits: SETTINGS.digit,
-      maximumFractionDigits: SETTINGS.digit,
-    });
+    return ((this.income / this.totalPrice) * 100).toLocaleString();
   }
 }
 
