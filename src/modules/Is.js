@@ -6,5 +6,10 @@ class Is {
     if (Number(string) <= 0) return false;
     return true;
   }
+
+  static multiplesOf1000(number) {
+    if (number % 1000 === 0) return true;
+    return false;
+  }
 }
 export default Is;
