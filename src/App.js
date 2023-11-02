@@ -9,19 +9,29 @@ class App {
     try {
       const purchaseAmount = await this.#inputPurchaseAmount();
       this.#generateLottos(purchaseAmount);
-      this.#inputWinningNumbers();
-      this.#inputBonusNumber();
+      await this.#inputWinningNumbers();
+      await this.#inputBonusNumber();
       this.#calculateResults();
       this.#printResults();
     } catch (error) {
-      console.error(error.message);
-      this.play(); // 잘못된 입력 시 재시도
+      MissionUtils.Console.print(error.message);
+      await this.play(); // 잘못된 입력 후 재시도
     }
   }
 
   async #inputPurchaseAmount() {
-    // 여기에 사용자 입력을 받기
-    // 입력받은 금액을 검증하기
+    let purchaseAmount = await MissionUtils.Console.readLineAsync(
+      "구입 금액을 입력해 주세요."
+    );
+    purchaseAmount = parseInt(purchaseAmount, 10);
+    if (
+      isNaN(purchaseAmount) ||
+      purchaseAmount <= 0 ||
+      purchaseAmount % 1000 !== 0
+    ) {
+      throw new Error("[ERROR] 구입 금액은 1,000원 단위의 양수여야 합니다.");
+    }
+    return purchaseAmount;
   }
 
   #generateLottos(purchaseAmount) {
