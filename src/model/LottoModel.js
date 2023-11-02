@@ -21,15 +21,9 @@ class LottoModel {
   }
 
   validateTotalPrice(price) {
-    if (Number.isNaN(price)) {
-      throw new Error(MESSAGES.error.notNumber);
-    }
-    if (typeof price !== "number") {
-      throw new Error(MESSAGES.error.notNumber);
-    }
-    if (price % SETTINGS.priceUnit) {
-      throw new Error(MESSAGES.error.invalidPriceUnit);
-    }
+    if (Number.isNaN(price)) throw new Error(MESSAGES.error.notNumber);
+    if (price % SETTINGS.priceUnit)
+      throw new Error(MESSAGES.error.invalidPrice);
   }
 
   getTotalPrice() {

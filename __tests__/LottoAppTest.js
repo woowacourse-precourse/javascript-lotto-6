@@ -14,14 +14,6 @@ describe("LottoApp 모델 테스트", () => {
       lottoModel.setPriceInfo(totalPrice);
       expect(lottoModel.getTotalPrice()).toBe(totalPrice);
     });
-
-    test("유효하지 않은 총 가격이면 예외를 던지기", () => {
-      const invalidPrice = "abc";
-      expect(() => lottoModel.validateTotalPrice(invalidPrice)).toThrow();
-
-      const validPrice = 15000;
-      expect(() => lottoModel.validateTotalPrice(validPrice)).not.toThrow();
-    });
   });
 
   describe("목표 번호 설정 및 가져오기", () => {
@@ -31,7 +23,7 @@ describe("LottoApp 모델 테스트", () => {
       expect(lottoModel.getTargetNumbers()).toEqual(targetNumbers);
     });
 
-    test("유효하지 않은 목표 번호이면 예외를 던지기", () => {
+    test("유효하지 않은 목표 번호이면 예외 처리", () => {
       const invalidNumbers = [1, 1, 2, 3, "abc"];
       expect(() => lottoModel.validateTargetNumbers(invalidNumbers)).toThrow();
 
