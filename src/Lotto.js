@@ -13,9 +13,7 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-
-  // Development tools; to be deleted before submitting assignment
-  devShow() {
+  getLottoNumbers() {
     return this.#numbers;
   }
 }

@@ -5,6 +5,8 @@ class App {
   async play() {
     const purchaseAmount = await this.getPurchaseAmount();
     const tickets = this.createTickets(purchaseAmount);
+
+    this.printTickets(tickets);
   }
   
   async getPurchaseAmount() {
@@ -25,6 +27,17 @@ class App {
     }
     
     return tickets;
+  }
+
+  printTickets(tickets) {
+    const count = tickets.length;
+    MissionUtils.Console.print(`\n${count}개를 구매했습니다.`);
+
+    for (let i = 0; i < count; i += 1) {
+      const numbers = tickets[i].getLottoNumbers();
+      const text = numbers.join(', ');
+      MissionUtils.Console.print(`[${text}]`);
+    }
   }
 
   validateAmount(amount) {
