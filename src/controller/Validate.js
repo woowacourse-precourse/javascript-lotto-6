@@ -24,6 +24,36 @@ class Validate {
 
         return true;
     }
+
+    isCheckDuplicate(numbers) {
+        const filteredNumbers = new Set(numbers);
+        if(filteredNumbers.size !== numbers.length) {
+            throw new Error(`${ERROR_MESSAGE.NUMBER_DUPLICATED_ERROR}`);
+        }
+
+        return true;
+    }
+
+    isCheckProperNumberRange(numbers) {
+        for(const num of numbers) {
+            if(+num < 1 || +num > 45) {
+                throw new Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
+            }
+        }
+
+        return true;
+    }
+
+    isCheckProperNumberLength(numbers) {
+        if(numbers.length !== 6) {
+            throw new Error(`${ERROR_MESSAGE.NUMBER_LEGNTH_ERROR}`);
+        }
+
+        return true;
+    }
 }
+
+// const validate = new Validate();
+// console.log(validate.isCheckProperNumberRange([1,2,3,4,5,67]))
 
 export default Validate;

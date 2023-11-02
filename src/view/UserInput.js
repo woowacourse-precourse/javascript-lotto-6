@@ -15,11 +15,26 @@ class UserInput {
             !this.validate.isCheckNumber(amount) || 
             !this.validate.isCheckProperRange(amount) || 
             !this.validate.isCheckThousand(amount)
-            ) {
+        ) {
             return 
         }
 
         return amount;
+    }
+
+    async makeWinningNumbers() {
+        const input = await MissionUtils.Console.readLineAsync(`\n${MESSAGE.WINNING_NUMBERS}\n`);
+        const winningNumbers = input.split(',');
+
+        if(
+            !this.validate.isCheckDuplicate(winningNumbers) ||
+            !this.validate.isCheckProperNumberRange(winningNumbers) || 
+            !this.validate.isCheckProperNumberLength(winningNumbers)
+        ) {
+            return
+        }
+
+        return winningNumbers;
     }
 }
 

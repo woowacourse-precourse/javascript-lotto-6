@@ -11,8 +11,9 @@ class App {
   async play() {
     const amount = await this.UserInput.amount();
     const lottoNumbers = makeLottoNumbers(amount);
-    this.lotto = new Lotto(amount, lottoNumbers);
-    // this.lotto.print();
+    const winningNumbers = await this.UserInput.makeWinningNumbers();
+    this.lotto = new Lotto(amount, lottoNumbers, winningNumbers);
+    this.lotto.print();
   }
 }
 
