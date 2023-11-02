@@ -26,4 +26,5 @@ export const OUTPUT = {
 export const ERROR = {
   lotto_count_error: "[ERROR] 로또 번호는 6개여야 합니다.",
   lotto_num_error: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
+  purchase_amount_error: "[ERROR] 로또 구입 금액은 1000원 단위 입니다.",
 };
