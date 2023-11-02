@@ -8,7 +8,16 @@ export default class Capital {
   }
 
   async toSpend() {
-    const money = await IO.get(Constants.input.askAmount);
-    return parseInt(money.trim(), 10);
+    let cash;
+    while (true) {
+      try {
+        cash = await IO.get(Constants.input.askAmount);
+        this.check.money(parseInt(cash.trim(), 10));
+        break;
+      } catch {
+        IO.print(Constants.error.money);
+      }
+    }
+    return parseInt(cash, 10);
   }
 }
