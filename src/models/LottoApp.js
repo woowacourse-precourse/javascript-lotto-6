@@ -94,6 +94,11 @@ class LottoModel {
 
   validateBonusNumbers = (number) => {
     if (Number.isNaN(number)) throw new Error(MESSAGES.error.notNumber);
+    if (
+      number > SETTINGS.targetNumber.maximum ||
+      SETTINGS.targetNumber.minimum < 1
+    )
+      throw new Error(MESSAGES.error.invalidRange);
   };
 
   getBonusNumber() {
