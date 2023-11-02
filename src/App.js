@@ -15,7 +15,7 @@ class App {
       this.#printResults();
     } catch (error) {
       MissionUtils.Console.print(error.message);
-      await this.play(); // 잘못된 입력 후 재시도
+      await this.play();
     }
   }
 
@@ -63,6 +63,29 @@ class App {
       );
     }
     this.#bonusNumber = bonusNumber;
+  }
+
+  #calculateResults(winningNumbers, bonusNumber) {
+    const results = { 3: 0, 4: 0, 5: 0, "5+1": 0, 6: 0 };
+    this.lottos.forEach((lotto) => {
+      const matchCount = this.getMatchCount(lotto.numbers, winningNumbers);
+      if (matchCount === 3) results["3"]++;
+      else if (matchCount === 4) results["4"]++;
+      else if (matchCount === 5 && lotto.numbers.includes(bonusNumber))
+        results["5+1"]++;
+      else if (matchCount === 5) results["5"]++;
+      else if (matchCount === 6) results["6"]++;
+    });
+    return results;
+  }
+
+  #printResults(results, amountSpent) {
+    // 각 등수별 당첨 로또 수와 수익률을 출력
+  }
+
+  // getMatchCount 메소드는 로또 번호와 당첨 번호를 비교하여 일치하는 숫자의 수를 반환
+  getMatchCount(numbers, winningNumbers) {
+    return numbers.filter((number) => winningNumbers.includes(number)).length;
   }
 }
 
