@@ -20,3 +20,5 @@
 `Shift + Cmd + O`: 파일 찾기
 
 `Shift + Shift`: 전체 찾기
+
+`opt + shift + 방향키`: 해당 라인에 있는 코드 이동
