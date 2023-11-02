@@ -48,4 +48,30 @@ describe("InputValidator 테스트", () => {
       }).not.toThrow("[ERROR]");
     });
   });
+
+  describe("보너스 로또 번호", () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+    test.each([
+      ["빈값일 때", ""],
+      ["숫자가 아닐 때", "ab"],
+      ["중간에 공백이 들어갔을 때", "4 5"],
+      ["로또 번호가 아닐 때", "55"],
+      ["중복되는 로또 번호를 선택했을 때", "5"],
+    ])("%s 에러를 발생시킨다", (_, input) => {
+      const validator = new InputValidator();
+
+      expect(() => {
+        validator.validateBonusNumber(input, winningNumbers);
+      }).toThrow("[ERROR]");
+    });
+
+    test("중복되지 않은 보너스 로또 번호를 선택했을 경우 에러를 발생시키지 않는다", () => {
+      const validator = new InputValidator();
+
+      expect(() => {
+        validator.validateBonusNumber("7", winningNumbers);
+      }).not.toThrow("[ERROR]");
+    });
+  });
 });
