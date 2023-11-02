@@ -28,7 +28,7 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
@@ -40,12 +40,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -94,5 +94,18 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
-});
 
+  test("사용자가 로또 구입 시 로또 번호 발행", async () => {
+    const lottoAmount = 2;
+    const purchaseAmount = 2000;
+
+    const app = new App();
+
+    mockRandoms([[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12]]);
+
+    const lottos = app.createLottos(purchaseAmount);
+    expect(lottos).toHaveLength(lottoAmount);
+    expect(lottos[0].getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(lottos[1].getNumbers()).toEqual([7, 8, 9, 10, 11, 12]);
+  });
+});
