@@ -12,7 +12,8 @@ class App {
     const excution = excutionNumber(purchase);
     const playerAnswer = await playerNumber("당첨 번호를 입력해 주세요.");
     const verificationNumber = numberVerification(playerAnswer);
-    const bonusNumber = bonusNumber("보너스 번호를 입력해 주세요.");
+    console.log(verificationNumber);
+    const bonusNumber = await bonusNumber("보너스 번호를 입력해 주세요.");
   }
 }
 
