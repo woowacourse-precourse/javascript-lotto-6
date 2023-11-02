@@ -18,6 +18,7 @@ class App {
     const bonusNumberAnswer = await bonusNumber("보너스 번호를 입력해 주세요.");
     const bounsNumberverification = verificationBounsNumber(bonusNumberAnswer);
     const numberAdd = addNumber(verificationNumber, bounsNumberverification);
+    console.log(numberAdd);
   }
 }
 
