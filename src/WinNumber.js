@@ -27,7 +27,7 @@ class WinNumber {
     if (typeof bonusNumber !== "number" || bonusNumber <= 0) {
       throw new Error(ERROR.lotto_num_error);
     }
-    if (winNumber.includes(bonusNumber)) {
+    if (this.#winNumber.includes(bonusNumber)) {
       throw new Error(ERROR.same_num_error);
     }
   }
@@ -36,7 +36,7 @@ class WinNumber {
     const input = await Console.readLineAsync(INPUT.win_numbers);
     const winNumber = input.split(",").map((number) => parseInt(number, 10));
     this.#winNumberValidate(winNumber);
-    this.#winNumber = winNumber;
+    this.#winNumber = winNumber.sort((a, b) => a - b);
   }
 
   async inputBonusNumber() {
