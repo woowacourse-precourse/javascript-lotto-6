@@ -17,18 +17,20 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-// const runException = async (input) => {
-//   // given
-//   const logSpy = getLogSpy();
+const runException = async (input) => {
+  // given
+  const logSpy = getLogSpy();
 
-//   mockQuestions([input]);
-//   // when
-//   const app = new App();
-//   await app.play();
+  const INPUT_NUMBERS_TO_END = ['5000'];
 
-//   // then
-//   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
-// };
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+
+  // when
+  const app = new App();
+  await app.play();
+  // then
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+};
 
 describe('로또 구입 테스트', () => {
   beforeEach(() => {
@@ -69,7 +71,15 @@ describe('로또 구입 테스트', () => {
     });
   });
 
-  // test('예외 테스트', async () => {
-  //   await runException('2800');
-  // });
+  test('2800원 입력 후 , 5000원 입력', async () => {
+    await runException('2800');
+  });
+
+  test('문자 입력 후, 5000원 입력', async () => {
+    await runException('12abc');
+  });
+
+  test('0원, 5000원 입력', async () => {
+    await runException('0');
+  });
 });
