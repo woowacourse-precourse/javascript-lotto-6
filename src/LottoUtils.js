@@ -77,6 +77,17 @@ export const printResult = result => {
   Object.keys(result)
     .reverse()
     .forEach(rank => {
-      Console.print(`${MATCH[rank].message} - ${result[rank].count}`);
+      Console.print(`${MATCH[rank].message} - ${result[rank].count}개`);
     });
+};
+export const getRateOfReturn = (amount, result) => {
+  let totalMoney = 0;
+  Object.keys(result).forEach(rank => {
+    totalMoney += result[rank].money * result[rank].count;
+  });
+  const ratio = Math.round((totalMoney / amount) * 100).toFixed(1);
+  return ratio;
+};
+export const printRateOfReturn = ratio => {
+  Console.print(`총 수익률은 ${ratio}%입니다.`);
 };

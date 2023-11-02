@@ -12,6 +12,8 @@ class App {
     const BONUS_NUMBER = await utils.inputBonusNumber();
     const RESULT = utils.getResult(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
     utils.printResult(RESULT);
+    const RATEOFRETURNS = utils.getRateOfReturn(AMOUNT, RESULT);
+    utils.printRateOfReturn(RATEOFRETURNS);
   }
 }
 
