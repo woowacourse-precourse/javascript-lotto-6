@@ -15,17 +15,23 @@ class Lotto {
   calculateResult() {
     let result = [];
     for(let lotto = 0; lotto < this.lottoNumbers.length; lotto++) {
+      let isBonus = false;
       let count = 0;
 
       for(let number = 0; number < this.lottoNumbers[lotto].length; number++) {
         if(this.lottoNumbers[lotto].includes(+this.#numbers[number])) {
           count += 1
         }
+        if(count === 5 && this.lottoNumbers[lotto].includes(+this.bonus)) {
+          isBonus = true;
+        }
       }
-      if(count >= 3) {
+      if(isBonus) {
+        result.push(5.5);
+      }
+      if(!isBonus && count >= 3) {
         result.push(count);
       }
-
     }
     const countedResult = result.reduce((allCount, count) => {
       if(count in allCount) {
@@ -53,11 +59,14 @@ class Lotto {
       if(value === '5') {
         sum += 1500000
       }
+      if(value === '5.5') {
+        sum += 30000000
+      }
       if(value === '6') {
         sum += 2000000000
       }
     } 
-    const rate = ((sum / this.amount) * 100).toFixed(1);
+    const rate = ((sum / this.amount) * 100).toFixed(1).toLocaleString();
     this.print(result, rate);
   }
 
@@ -66,9 +75,9 @@ class Lotto {
     await MissionUtils.Console.print(`${MESSAGE.RESULT_THREE} ${result[3] ?? 0}개`);
     await MissionUtils.Console.print(`${MESSAGE.RESULT_FOUR} ${result[4] ?? 0}개`);
     await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE} ${result[5] ?? 0}개`);
-    // await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE_BOUNS} ${result[5] ?? 0}`);
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE_BOUNS} ${result[5.5] ?? 0}개`);
     await MissionUtils.Console.print(`${MESSAGE.RESULT_SIX} ${result[6] ?? 0}개`);
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_RATE} ${rate.toLocaleString()}%입니다.`);
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_RATE} ${rate}%입니다.`);
   }
 }
 
