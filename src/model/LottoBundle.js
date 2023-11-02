@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { RANDOM_NUMBER } from '../constants/Constant.js';
+import Lotto from './Lotto.js';
 
 class LottoBundle {
   #lottoList = [];
@@ -7,7 +8,9 @@ class LottoBundle {
   buyLottos(count) {
     for (let i = 0; i < count; i += 1) {
       const newLottoNumbers = this.#makeLottoNumbers();
-      this.#lottoList.push(newLottoNumbers);
+      const newLotto = new Lotto(newLottoNumbers);
+
+      this.#lottoList.push(newLotto);
     }
   }
 
