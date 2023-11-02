@@ -55,7 +55,7 @@ class App {
     return N;
   }
 
-  validateBonusNumber(number) {
+  validateNumber(number) {
     const N = +number;
     if (isNaN(N)) throw new Error("숫자가 아님");
     if (N < 1 || N > 45) throw new Error("범위 밖임");
@@ -101,10 +101,10 @@ class App {
 
     //보너스 번호 생성
     const INPUT_BONUS_NUMBERS = await input(PRINT_MESSAGE.BONUS_NUMBER);
-    const BONUS_NUMBERS = this.validateBonusNumber(INPUT_BONUS_NUMBERS);
+    const BONUS_NUMBERS = this.validateNumber(INPUT_BONUS_NUMBERS);
 
     const RESULT = this.getResult(NUMBERS);
-    console.log(RESULT);
+    
     
   }
 }
