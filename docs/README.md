@@ -1,0 +1,31 @@
+# 3주차 프리코스 미션 - 로또 
+
+## 기능 목록
+1.  [ ] 사용자에게 로또 구입 금액 입력받기
+
+* 1번 - 예외 처리
+    * [ ] 구입 금액이 1000원 이하인 경우
+
+2. [ ] 로또 구입 개수 출력하기
+3. [ ] 구입 개수에 따라 로또 번호 뽑기
+
+4. [ ] 발행한 로또 출력하기
+5. [ ] 사용자에게 당첨 번호 입력받기
+
+* 5번 - 예외 처리
+    * [ ] 입력을 안했을 경우
+    * [ ] 1 ~ 45 사이의 숫자가 아닐 경우
+
+6. [] 사용자에게 당첨 번호 입력받기
+
+* 6번 - 예외 처리
+    * [ ] 입력을 안했을 경우
+    * [ ] 1 ~ 45 사이의 숫자가 아닐 경우
+    * [ ] 1개가 아닌 2개 이상의 숫자를 입력할 경우
+
+7. [ ] 당첨 통계 출력하기
+8. [ ] 총 수익률 출력하기
+
+-------
+## 기술 스택
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)  ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
