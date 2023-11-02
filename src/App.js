@@ -4,6 +4,7 @@ import bonusNumber from "./bonusNumber.js";
 import excutionNumber from "./excutionNumber.js";
 import playerNumber from "./playerNumber.js";
 import priceCheck from "./priceCheck.js";
+import verificationBounsNumber from "./verficationBonusNumber.js";
 
 class App {
   async play() {
@@ -13,7 +14,9 @@ class App {
     const playerAnswer = await playerNumber("당첨 번호를 입력해 주세요.");
     const verificationNumber = numberVerification(playerAnswer);
     console.log(verificationNumber);
-    const bonusNumber = await bonusNumber("보너스 번호를 입력해 주세요.");
+    const bonusNumberAnswer = await bonusNumber("보너스 번호를 입력해 주세요.");
+    const bounsNumberverification = verificationBounsNumber(bonusNumberAnswer);
+    console.log(bounsNumberverification);
   }
 }
 
