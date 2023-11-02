@@ -1,7 +1,7 @@
 import lottoNumber from '../constants/lottoNumber.js';
 import errorMessage from '../constants/errorMessage.js';
 
-class winningNumberArrayValidator {
+class WinningNumberArrayValidator {
 	validateNotNumber(winningNumberArray) {
 		winningNumberArray.forEach((winningNumber) => {
 			if (Number.isNaN(winningNumber)) {
@@ -31,11 +31,12 @@ class winningNumberArrayValidator {
 	}
 
 	static validate(winningNumberArray) {
-		this.validateNotNumber(winningNumberArray);
-		this.validateArrayLength(winningNumberArray);
-		this.validateDuplicatedNumber(winningNumberArray);
-		this.validateNumberRange(winningNumberArray);
+		const winningNumberArrayValidator = new WinningNumberArrayValidator();
+		winningNumberArrayValidator.validateNotNumber(winningNumberArray);
+		winningNumberArrayValidator.validateArrayLength(winningNumberArray);
+		winningNumberArrayValidator.validateDuplicatedNumber(winningNumberArray);
+		winningNumberArrayValidator.validateNumberRange(winningNumberArray);
 	}
 }
 
-export default winningNumberArrayValidator;
+export default WinningNumberArrayValidator;

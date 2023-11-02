@@ -20,9 +20,10 @@ class PurchaseAmountValidator {
 	}
 
 	static validate(purchaseAmount) {
-		this.validateNumber(purchaseAmount);
-		this.validateEnoughAmount(purchaseAmount);
-		this.validateValidAmount(purchaseAmount);
+		const purchaseAmountValidator = new PurchaseAmountValidator();
+		purchaseAmountValidator.validateNumber(purchaseAmount);
+		purchaseAmountValidator.validateEnoughAmount(purchaseAmount);
+		purchaseAmountValidator.validateValidAmount(purchaseAmount);
 	}
 }
 export default PurchaseAmountValidator;
