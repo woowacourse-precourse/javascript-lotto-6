@@ -1,83 +1,73 @@
+import { Console } from "@woowacourse/mission-utils";
+
 import { ERROR_MESSAGE } from "../constants/error.js";
 import { LOTTO } from "../constants/constants.js";
+import LottoValidator from "./lottoValidator.js";
 
 class InputValidator {
   // 구입 금액에 대해 검증한다.
   static validateMoney(value) {
-    this.isNumber(value, 'money');
-    this.isDivideByUnit(value);
+    if (!this.isNumber(value, 'money')) return false;
+    if (!this.isDivideByUnit(value)) return false;
+
     return Number(value);
   }
 
   // 당첨 번호에 대해 검증한다.
   static validateLuckyNumbers(luckyNumbers) {
-    luckyNumbers.every((number) => this.isNumber(number));
-    this.isLengthSix(luckyNumbers);
-    this.isRepeat(luckyNumbers);
-    luckyNumbers.every((number) => this.isValidLottoNumber(number));
+    if (!this.validateArray(luckyNumbers, this.isNumber)) return false;
+    if (!LottoValidator.isLengthSix(luckyNumbers)) return false;
+    if (!LottoValidator.isRepeat(luckyNumbers)) return false;
+    if (!this.validateArray(luckyNumbers, LottoValidator.isValidLottoNumber)) return false;
+    
     return luckyNumbers;
   }
 
   // 보너스 번호에 대해 검증한다.
   static validateBonusNumber(bonusNumber, luckyNumbers) {
-    this.isNumber(bonusNumber);
-    this.isValidLottoNumber(bonusNumber);
-    this.isBonusInLuckyNumbers(bonusNumber, luckyNumbers);
-    return Number(bonusNumber);
+    if (!this.isNumber(bonusNumber)) return false;
+    if (!LottoValidator.isValidLottoNumber(bonusNumber)) return false;
+    if (!this.isBonusInLuckyNumbers(bonusNumber, luckyNumbers)) return false;
+
+    return bonusNumber;
+  }
+
+  // 배열의 모든 원소에 대해 callback 함수를 실행해 검증한다.
+  static validateArray(array, callback) {
+    const isValid = array.every((value) => callback(value));
+    if (!isValid) return false;
+
+    return array;
   }
 
   // 숫자가 아닌 경우 금액, 로또 번호에 대해 예외 처리한다.
   static isNumber(value, type = 'number') {
     const isNumber = Number.isSafeInteger(Number(value));
     if (!isNumber) {
-      throw new Error(ERROR_MESSAGE.notNumber[type]);
+      Console.print(ERROR_MESSAGE.notNumber[type]);
+      return false;
     }
-    return isNumber;
+    return true;
   }
 
   // 1,000원 단위로 나누어 떨어지지 않는 경우 예외 처리한다.
   static isDivideByUnit(value) {
     const isDivideByUnit = value % LOTTO.price === 0;
     if (!isDivideByUnit) {
-      throw new Error(ERROR_MESSAGE.notDivideBy1000);
+      Console.print(ERROR_MESSAGE.notDivideBy1000);
+      return false;
     }
-    return isDivideByUnit;
-  }
-
-  // 로또 번호가 6개가 아닌 경우 예외 처리한다.
-  static isLengthSix(numbers) {
-    const isLengthSix = numbers.length === LOTTO.length;
-    if (!isLengthSix) {
-      throw new Error(ERROR_MESSAGE.notSixLength);
-    }
-    return isLengthSix;
-  }
-
-  // 로또 번호가 중복되는 경우 예외 처리한다.
-  static isRepeat(numbers) {
-    const isRepeat = new Set(numbers).size !== numbers.length;
-    if (isRepeat) {
-      throw new Error(ERROR_MESSAGE.isRepeat);
-    }
-    return isRepeat;
-  }
-
-  // 로또 번호가 1 ~ 45 사이가 아닌 경우 예외 처리한다.
-  static isValidLottoNumber(number) {
-    const isValidLotto = number >= 1 && number <= 45;
-    if (!isValidLotto) {
-      throw new Error(ERROR_MESSAGE.notValidLotto);
-    }
-    return isValidLotto;
+    return true;
   }
 
   // 3-3. 보너스 번호는 당첨 번호와 중복되지 않아야 한다.
   static isBonusInLuckyNumbers(bonusNumber, luckyNumbers) {
     const isBonusInLuckyNumbers = luckyNumbers.includes(bonusNumber);
     if (isBonusInLuckyNumbers) {
-      throw new Error(ERROR_MESSAGE.isBonusInLuckyNumbers);
+      Console.print(ERROR_MESSAGE.isBonusInLuckyNumbers);
+      return false;
     }
-    return isBonusInLuckyNumbers;
+    return true;
   }
 }
 
