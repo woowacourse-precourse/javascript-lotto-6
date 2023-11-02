@@ -8,6 +8,7 @@ class App {
   checkLottoPrice(lottoPrice) {
     if (lottoPrice < 1000)
       throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
+    if (isNaN(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
   }
 
   async play() {
