@@ -18,7 +18,7 @@ export const Message = Object.freeze({
   },
 
   printLottoNumber(lottoNumber) {
-    MissionUtils.Console.print(lottoNumber);
+    MissionUtils.Console.print('[' + lottoNumber.toString().replaceAll(',', ', ') + ']');
   },
 
   inputWinningLotteryNumbers() {
@@ -38,10 +38,10 @@ export const Message = Object.freeze({
         `4개 일치 (${PRIZE_MONEY[PRIZE.FOURTH].toLocaleString('ko-KR')}원) - ${
           prize[PRIZE.FOURTH] ?? 0
         }개\n` +
-        `5개 일치, 보너스 불 일치 (${PRIZE_MONEY[PRIZE.THIRD].toLocaleString('ko-KR')}원) - ${
+        `5개 일치 (${PRIZE_MONEY[PRIZE.THIRD].toLocaleString('ko-KR')}원) - ${
           prize[PRIZE.THIRD] ?? 0
         }개\n` +
-        `5개 일치 (${PRIZE_MONEY[PRIZE.SECOND].toLocaleString('ko-KR')}원) - ${
+        `5개 일치, 보너스 볼 일치 (${PRIZE_MONEY[PRIZE.SECOND].toLocaleString('ko-KR')}원) - ${
           prize[PRIZE.SECOND] ?? 0
         }개\n` +
         `6개 일치 (${PRIZE_MONEY[PRIZE.FIRST].toLocaleString('ko-KR')}원) - ${
