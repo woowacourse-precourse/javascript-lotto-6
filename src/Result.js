@@ -1,4 +1,4 @@
-import { OUTPUT, MATCH } from "./Constants";
+import { OUTPUT, MATCH } from "./Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class Result {
@@ -48,8 +48,22 @@ class Result {
     Console.print(OUTPUT.correct_6 + this.#matchSix + OUTPUT.count);
   }
 
-  getRateOfReturn(purchaseAmount, winningAmount) {
-    return Math.round((winningAmount / purchaseAmount) * 1000) / 10;
+  getWinningAmount() {
+    return (
+      this.#matchThree * 5000 +
+      this.#matchFour * 50000 +
+      this.#matchFive * 1500000 +
+      this.#matchFiveWithBonus * 30000000 +
+      this.#matchSix * 2000000000
+    );
+  }
+
+  printRateOfReturn(purchaseAmount, winningAmount) {
+    Console.print(
+      OUTPUT.rate_of_return +
+        Math.round((winningAmount / purchaseAmount) * 1000) / 10 +
+        OUTPUT.percent_is
+    );
   }
 }
 export default Result;

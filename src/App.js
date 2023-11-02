@@ -23,6 +23,22 @@ class App {
 
     const result = new Result();
     result.printStaticsMessage();
+
+    lottoData.getLottoData().forEach((lottoNumbers) => {
+      const lotto = new Lotto(lottoNumbers);
+      result.countMatchingNumbers(
+        lotto.checkLottoNumbers(
+          winNumber.getWinNumber(),
+          winNumber.getBonusNumber()
+        )
+      );
+    });
+
+    result.printResult();
+    result.printRateOfReturn(
+      purchase.getLottoCount() * 1000,
+      result.getWinningAmount()
+    );
   }
 }
 

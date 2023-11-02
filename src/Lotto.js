@@ -17,8 +17,8 @@ class Lotto {
   checkLottoNumbers(winNumber, bonusNumber) {
     const myNumbers = this.#numbers;
     let matchCount = 0;
-    myNumbers.forEach((number) => {
-      if (winNumber.includes(number)) {
+    myNumbers.forEach((myNumber) => {
+      if (winNumber.includes(myNumber)) {
         matchCount += 1;
       }
     });
