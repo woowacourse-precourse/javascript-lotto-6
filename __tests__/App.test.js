@@ -24,4 +24,13 @@ describe('class App test', () => {
       }).toThrow('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
     });
   });
+
+  describe('method test : checkLottoPrice()', () => {
+    test('입력 받은 로또 구입 금액이 문자이면 오류가 발생할까 ?', () => {
+      const testPrice = 'Hundred';
+      expect(() => {
+        app.checkLottoPrice(testPrice);
+      }).toThrow('[ERROR] 숫자만 입력하세요.');
+    });
+  });
 });
