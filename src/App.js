@@ -10,6 +10,7 @@ class App {
       this.checkValidPurchaseSum(sum);
       const amount = Utils.getLottoAmount(sum);
       this.purchaseLotto(amount);
+      await this.getUserLottoInput();
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.play();
@@ -28,6 +29,14 @@ class App {
     lottos.forEach((lotto) => {
       Print.showLotto(lotto);
     });
+  }
+
+  async getUserLottoInput() {
+    try {
+      const userLotto = await Print.getUserLottoNumber();
+    } catch (error) {
+      Print.showErrorMessage(error.message);
+    }
   }
 }
 

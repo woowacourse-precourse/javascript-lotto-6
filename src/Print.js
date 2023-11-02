@@ -7,6 +7,11 @@ class Print {
     return sum;
   }
 
+  static async getUserLottoNumber() {
+    const lotto = await Console.readLineAsync(MESSAGE.GET_USER_LOTTO);
+    return lotto;
+  }
+
   static showPurchaseMessage(amount) {
     Console.print(MESSAGE.SHOW_LOTTO_AMOUNT(amount));
   }

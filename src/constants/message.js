@@ -8,6 +8,7 @@ export const MESSAGE = {
   SHOW_LOTTO_NUMBER(lotto) {
     return `[${lotto.join(", ")}]`;
   },
+  GET_USER_LOTTO: "\n당첨 번호를 입력해 주세요.\n",
 };
 
 export const ERROR = {
