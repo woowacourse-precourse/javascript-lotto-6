@@ -10,6 +10,15 @@ class InputView {
             throw new Error(ERROR_MESSAGES.DEFAULT_ERROR);
         }
     }
+
+    static async getWinningNumbers(){
+        try {
+            const winnigNumbers = await MissionUtils.Console.readLineAsync(GAME_MESSAGES.ENTER_WINNING_NUMBERS);
+            return winnigNumbers;
+        } catch (error) {
+            throw new Error(ERROR_MESSAGES.DEFAULT_ERROR);
+        }
+    }
 }
 
 export default InputView;
