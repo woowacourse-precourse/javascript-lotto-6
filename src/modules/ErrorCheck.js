@@ -9,8 +9,8 @@ class ErrorCheck {
     if (!Is.positiveIntegerString(inputString))
       throw new Error(NOT_AN_INTEGER_ERROR_MESSAGE);
   }
-  static positiveMultiplesOf1000(inputNumber) {
-    if (!Is.positiveMultiplesOf1000(inputNumber))
+  static multiplesOf1000InPositive(inputNumber) {
+    if (!Is.multiplesOf1000InPositive(inputNumber))
       throw new Error(NOT_MULTIPLES_OF_THOUSANDS_ERROR_MESSAGE);
   }
 }
