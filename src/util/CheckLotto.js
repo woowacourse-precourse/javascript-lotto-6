@@ -18,8 +18,13 @@ class CheckLotto {
 		return this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.fourthPlaceCount;
 	}
 	
-	static thirdPlace(lottoNumberList, winningNumberList) {
-		return this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.thirdPlaceCount;
+	static thirdPlace(lottoNumberList, winningNumberList, bonusNumber) {
+		if (this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.thirdPlaceCount) {
+			if (!lottoNumberList.includes(bonusNumber)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 
