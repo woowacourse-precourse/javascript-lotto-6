@@ -44,7 +44,13 @@ class App {
     }
   }
 
-  // 당첨 번호, 보너스 번호 입력과 결과 계산 후 출력하기
+  async #inputWinningNumbers() {
+    const input = await MissionUtils.Console.readLineAsync(
+      "지난 주 당첨 번호를 입력해 주세요."
+    );
+    const numbers = input.split(",").map((num) => parseInt(num.trim(), 10));
+    this.#winningNumbers = new Lotto(numbers);
+  }
 }
 
 export default App;
