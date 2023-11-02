@@ -50,6 +50,14 @@ class LottoModel {
       throw new Error(MESSAGES.error.notDuplicateTargetNumbers);
     if (numbers.some((number) => Number.isNaN(number)))
       throw new Error(MESSAGES.error.notNumber);
+    if (
+      numbers.some(
+        (number) =>
+          number > SETTINGS.targetNumber.maximum ||
+          SETTINGS.targetNumber.minimum < 1
+      )
+    )
+      throw new Error(MESSAGES.error.invalidRange);
   }
 
   getTargetNumbers() {
