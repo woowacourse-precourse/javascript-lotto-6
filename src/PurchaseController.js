@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_PRICE, MESSAGES } from "./constants.js";
+import { MESSAGES } from "./constants.js";
 import PurchaseView from "./PurchaseView.js";
 
 class PurchaseController {
@@ -15,12 +15,6 @@ class PurchaseController {
     return pattern.test(price);
   }
 
-  static checkPriceDivisible(price) {
-    const remainder = price % LOTTO_PRICE;
-
-    return remainder === 0;
-  }
-
   static processPriceText(priceText) {
     const processedText = priceText.trim();
 
@@ -29,10 +23,6 @@ class PurchaseController {
     }
 
     const price = parseInt(processedText);
-
-    if (!PurchaseController.checkPriceDivisible(price)) {
-      throw new Error(MESSAGES.priceNotDivisibleError)
-    }
 
     return price;
   }
