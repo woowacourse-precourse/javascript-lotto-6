@@ -9,3 +9,9 @@ async function userMoney() {
     return userMoney;
 }
 
+function lottoPurchasesNumber(userMoney) {
+    const lottoNumber = userMoney/LOTTOPRICE;
+    return lottoNumber;
+}
+
+
