@@ -1,35 +1,39 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto";
+import SETTINGS from "../constants/settings";
 
 class LottoController {
-  constructor(outputView) {
+  constructor(inputView, outputView) {
+    this.inputView = inputView;
     this.outputView = outputView;
   }
 
   async play() {
-    const totalPrice = await getTotalPrice();
-    const totalCount = parseInt(totalPrice / 1000);
+    const totalPrice = await this.getTotalPrice();
+    const totalCount = parseInt(totalPrice / SETTINGS.priceUnit);
     const lottos = getLottos(totalCount);
-    this.outputView.printLottos(totalCount, lottos);
+    const lottosData = getLottosData(lottos);
+    this.outputView.printLottos(totalCount, lottosData);
 
     const targetNumbers = await getTargetNumbers();
     const bonusNumber = await getBonusNumber();
     const result = getResult(lottos, targetNumbers, bonusNumber);
     const income = getIncome(result);
-    this.outputView.printResult(totalPrice, income, result);
+    const incomeData = getIncomeData(income, totalPrice);
+    this.outputView.printResult(incomeData, result);
+  }
+
+  async getTotalPrice() {
+    const totalPrice = await this.inputView.read("구입금액을 입력해 주세요.\n");
+    try {
+      validateTotalPrice(totalPrice);
+    } catch ({ message }) {
+      Console.print(message);
+      this.getTotalPrice();
+    }
+    return totalPrice;
   }
 }
-
-const getTotalPrice = async () => {
-  const totalPrice = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-  try {
-    validateTotalPrice(totalPrice);
-  } catch ({ message }) {
-    Console.print(message);
-    getTotalPrice();
-  }
-  return totalPrice;
-};
 
 const validateTotalPrice = (price) => {
   if (Number.isNaN(price)) {
@@ -49,6 +53,13 @@ const getLottos = (counts) => {
     lottos.push(lotto);
   }
   return lottos;
+};
+
+const getLottosData = (lottos) => {
+  const lottosData = lottos.map(
+    (lotto) => `[${lotto.getNumbers().join(", ")}]`
+  );
+  return lottosData;
 };
 
 const getTargetNumbers = async () => {
@@ -134,6 +145,13 @@ const getIncome = (result) => {
     result[2] * 30000000 +
     result[1] * 2000000000
   );
+};
+
+const getIncomeData = (income, totalPrice) => {
+  return ((income / totalPrice) * 100).toLocaleString("ko-KR", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
 };
 
 export default LottoController;
