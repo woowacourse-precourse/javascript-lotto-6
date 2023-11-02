@@ -54,4 +54,27 @@ describe("LottoModel 테스트", () => {
       expect(lottoModel.income).toBe(expectedIncome);
     });
   });
+
+  describe("보너스 번호 검증 테스트", () => {
+    test("유효한 보너스 번호인 경우 검증 통과", () => {
+      const bonusNumber = 42;
+      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35]; // 예시로 6개의 로또 번호 배열
+
+      expect(() => lottoModel.validateBonusNumbers(bonusNumber)).not.toThrow();
+    });
+
+    test("범위를 벗어나는 번호인 경우 예외 처리", () => {
+      const bonusNumber = 50;
+      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35]; // 예시로 6개의 로또 번호 배열
+
+      expect(() => lottoModel.validateBonusNumbers(bonusNumber)).toThrowError();
+    });
+
+    test("이미 로또 번호에 있는 번호인 경우 예외 처리", () => {
+      const bonusNumber = 25;
+      lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35]; // 예시로 6개의 로또 번호 배열
+
+      expect(() => lottoModel.validateBonusNumbers(bonusNumber)).toThrowError();
+    });
+  });
 });
