@@ -7,5 +7,6 @@ export const OUTPUT_MSG = {
 };
 
 export const ERROR_MSG = {
-  MONEY_NUMBER_ERROR: '올바른 숫자가 아닙니다.',
+  MONEY_SHOULD_NUMBER: '올바른 숫자를 입력해주세요.',
+  MONEY_IS_THOUSAND: '구입 금액은 1,000원 단위로 입력해주세요',
 };
