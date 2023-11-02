@@ -16,8 +16,13 @@ class LotteryMachine {
     const lotteryNumber = purchaseAmount / 1000;
                 
     for(let lottery = 0; lottery < lotteryNumber; lottery++) {
-      this.#lottoTicket.push(Random.pickUniqueNumbersInRange(1, 45, 6));
+      let temp = this.#ascendingOrder((Random.pickUniqueNumbersInRange(1, 45, 6)));
+      this.#lottoTicket.push(temp);
     }
+  }
+
+  #ascendingOrder(array) {
+    return array.sort((a, b) => a- b);
   }
 
   #validate(purchaseAmount) {
