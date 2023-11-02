@@ -5,7 +5,7 @@ const NOT_MULTIPLES_OF_THOUSANDS_ERROR_MESSAGE =
 
 class ErrorCheck {
   static purchasePrice(inputString) {}
-  static integerString(inputString) {
+  static positiveIntegerString(inputString) {
     if (!Is.positiveIntegerString(inputString))
       throw new Error(NOT_AN_INTEGER_ERROR_MESSAGE);
   }
