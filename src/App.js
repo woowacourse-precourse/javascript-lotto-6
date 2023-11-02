@@ -12,8 +12,7 @@ class App {
     const winNumber = new WinNumber();
 
     await purchase.inputPurchaseAmount();
-    Console.print(OUTPUT.linebreak);
-    Console.print(purchase.getLottoCount() + OUTPUT.how_many_purchased);
+    purchase.printLottoCount();
 
     const lottoData = new LottoData(purchase.getLottoCount());
     lottoData.iterLotto();

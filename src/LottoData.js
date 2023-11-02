@@ -18,7 +18,7 @@ class LottoData {
       OPTION.lotto_num_count
     );
     pick.sort((a, b) => a - b);
-    Console.print(pick);
+    Console.print(`[${pick.join(", ")}]`);
     this.#lottoData.push(pick);
   }
 

@@ -1,4 +1,4 @@
-import { INPUT, OUTPUT, ERROR } from "./Constants.js";
+import { INPUT, ERROR } from "./Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class WinNumber {

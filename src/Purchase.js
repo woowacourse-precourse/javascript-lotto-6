@@ -1,4 +1,4 @@
-import { INPUT, ERROR } from "./Constants.js";
+import { INPUT, OUTPUT, ERROR } from "./Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class Purchase {
@@ -27,6 +27,10 @@ class Purchase {
 
   getLottoCount() {
     return this.#lottoCount;
+  }
+
+  printLottoCount() {
+    Console.print("\n" + this.#lottoCount + OUTPUT.how_many_purchased);
   }
 }
 
