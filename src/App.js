@@ -1,10 +1,12 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto';
 
 class App {
   constructor() {
     this.lottoRandomNumber = [];
     this.lottoTicket;
     this.countNumber = 0;
+    this.lotto = new Lotto();
   }
 
   getLottoTicket(lottoPurchaseAmount) {
