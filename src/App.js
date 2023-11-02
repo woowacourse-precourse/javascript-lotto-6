@@ -55,6 +55,8 @@ class App {
       this.countNumber += 1;
     }
     this.printLottoArray();
+    const userLottoNumber =
+      await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
   }
 }
 
