@@ -1,4 +1,4 @@
-import { INPUT, ERROR } from "./Constants.js";
+import { INPUT, OUTPUT, ERROR } from "./Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class WinNumber {
@@ -11,17 +11,24 @@ class WinNumber {
   }
 
   #winNumberValidate(winNumber) {
+    const uniqueNumbers = new Set(winNumber);
     if (winNumber.length !== 6) {
       throw new Error(ERROR.lotto_count_error);
     }
     if (!winNumber.every((number) => number >= 1 && number <= 45)) {
       throw new Error(ERROR.lotto_num_error);
     }
+    if (uniqueNumbers.size !== 6) {
+      throw new Error(ERROR.same_num_error);
+    }
   }
 
   #bonusNumberValidate(bonusNumber) {
     if (typeof bonusNumber !== "number" || bonusNumber <= 0) {
       throw new Error(ERROR.lotto_num_error);
+    }
+    if (winNumber.includes(bonusNumber)) {
+      throw new Error(ERROR.same_num_error);
     }
   }
 

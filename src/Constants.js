@@ -1,7 +1,7 @@
 export const INPUT = {
   purchase_amount: "구입금액을 입력해 주세요.\n",
-  win_numbers: "당첨 번호를 입력해 주세요.",
-  bonus_numbers: "보너스 번호를 입력해 주세요.",
+  win_numbers: "당첨 번호를 입력해 주세요.\n",
+  bonus_numbers: "보너스 번호를 입력해 주세요.\n",
 };
 export const OPTION = {
   max_name_length: 5,
@@ -26,5 +26,6 @@ export const OUTPUT = {
 export const ERROR = {
   lotto_count_error: "[ERROR] 로또 번호는 6개여야 합니다.",
   lotto_num_error: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
+  same_num_error: "[ERROR] 로또 번호가 중복되었습니다.",
   purchase_amount_error: "[ERROR] 로또 구입 금액은 1000원 단위 입니다.",
 };
