@@ -1,12 +1,18 @@
 import LottoController from "./controller/LottoController";
-import OutputView from "./views/OutputView";
 import InputView from "./views/InputView";
+import OutputView from "./views/OutputView";
+import LottoModel from "./models/LottoApp";
 
 class App {
   async play() {
     const inputView = new InputView();
     const outputView = new OutputView();
-    const lottoController = new LottoController(inputView, outputView);
+    const lottoModel = new LottoModel();
+    const lottoController = new LottoController(
+      inputView,
+      outputView,
+      lottoModel
+    );
     await lottoController.play();
   }
 }
