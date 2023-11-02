@@ -5,7 +5,8 @@ const calculate = (excution, number, bonusNumber) => {
   for (let i = 0; i < excution.length; i++) {
     const result = excution[i].filter((item) => number.includes(item));
     const matchNumber = result.length;
-    matchingNumbers(matchNumber, bonusNumber, excution[i], results);
+    const bonusNumberIncludes = excution[i].includes(bonusNumber);
+    matchingNumbers(matchNumber, bonusNumberIncludes, results);
   }
   return results;
 };

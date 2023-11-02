@@ -1,7 +1,7 @@
-const matchingNumbers = (matchnumber, bonusNumber, lotto, results) => {
+const matchingNumbers = (matchnumber, bonusNumber, results) => {
   if (matchnumber === 6) {
     results.push("1등");
-  } else if (matchnumber === 5 && lotto[i].includes(bonusNumber)) {
+  } else if (matchnumber === 5 && bonusNumber) {
     results.push("2등");
   } else if (matchnumber === 5) {
     results.push("3등");
