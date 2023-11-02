@@ -1,4 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 export const inputAmount = async () => {
   try {
     const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
@@ -25,7 +26,30 @@ export const inputBonusNumber = async () => {
     Console.print(error.message);
   }
 };
-export const getRandomNumbers = async () => {
+export const getRandomNumbers = () => {
   const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
   return numbers;
+};
+export const getLottoCount = amount => {
+  return amount / 1000;
+};
+export const issueLotto = () => {
+  const numbers = getRandomNumbers();
+  const lotto = new Lotto(numbers);
+  return lotto;
+};
+export const getLottos = lotto_count => {
+  const lottos = [];
+  for (let i = 0; i < lotto_count; i++) {
+    const newLotto = issueLotto();
+    lottos.push(newLotto);
+  }
+  return lottos;
+};
+export const printLottos = lottos => {
+  Console.print(`${lottos.length}개를 구매했습니다.`);
+  lottos.forEach(lotto => {
+    Console.print(lotto.getNumbers());
+  });
+  Console.print('');
 };
