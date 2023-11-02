@@ -9,7 +9,7 @@ class UserInput {
         this.validate = new Validate();
     }
     
-    async amount() {
+    async RequestAmount() {
         const amount = await MissionUtils.Console.readLineAsync(`${MESSAGE.PURCHASE_AMOUNT}\n`);
         if(
             !this.validate.isCheckNumber(amount) || 
@@ -22,7 +22,7 @@ class UserInput {
         return amount;
     }
 
-    async makeWinningNumbers() {
+    async RequestWinningNumbers() {
         const input = await MissionUtils.Console.readLineAsync(`\n${MESSAGE.WINNING_NUMBERS}\n`);
         const winningNumbers = input.split(',');
 
