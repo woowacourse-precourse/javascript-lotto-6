@@ -22,6 +22,7 @@
 반복문으로 count만큼 객체countObject 생성: 객체는 key값은 0에서부터 count까지(index)로 하고 값은 []으로 생성
 - 2. 한 반복문마다 array 변수를 새로 만들어 arrayNumbers 6개의 숫자를 랜덤으로 생성
 ㄴ const firstNumber = MissionUtils.Random.pickNumberInRange(1,45)식으로 6개를 만들고 array로 정리하여 오름차순으로 정리한 후(sort) 생성될 때 마다 객체countObject의 value값으로 넣는다
+ㄴ 라고 생각했는데 이번에는 pickUniqueNumbersInRange를 사용하면 배열로 바로 만들수 있음 - pickUniqueNumbersInRange(1,45,6)으로 1부터 45까지 숫자를 6개 뽑는다. sort로 정렬은 잊지 말것
 - 3. 예를 들어 countObject[i] = arrayNumbers
 ㄴ 구매횟수만큼 반복문으로 돌리되, 객체를 생성하여 객체의 키는 index로, value는 랜덤 생성된 번호의 배열로 넣는다. value값이 즉 로또 번호이다
 
