@@ -35,6 +35,15 @@ class InputValidator {
       throw new Error(this.#ERROR_MESSAGE.duplication);
     }
   }
+
+  validateBonusNumber(input, winningNumbers) {
+    if (!this.#REGEX.lottoNumber.test(input)) {
+      throw new Error(this.#ERROR_MESSAGE.amount);
+    }
+    if (winningNumbers.includes(Number(input))) {
+      throw new Error(this.#ERROR_MESSAGE.duplication);
+    }
+  }
 }
 
 export default InputValidator;
