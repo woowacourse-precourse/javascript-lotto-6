@@ -3,7 +3,7 @@ import viewMessage from '../constants/viewMessage.js';
 
 class OutputView {
 	static printNewLine() {
-		Console.print();
+		Console.print('');
 	}
 
 	static printPurchaseHistory(lottoNumberList) {
