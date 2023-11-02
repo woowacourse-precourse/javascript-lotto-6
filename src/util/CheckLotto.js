@@ -26,6 +26,15 @@ class CheckLotto {
 		}
 		return false;
 	}
+
+	static secondPlace(lottoNumberList, winningNumberList, bonusNumber) {
+		if (this.getCorrectCount(lottoNumberList, winningNumberList) === lottoNumber.secondPlaceCount) {
+			if (lottoNumberList.includes(bonusNumber)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 export default CheckLotto;
