@@ -25,4 +25,17 @@ describe("UI 클래스 테스트", () => {
     // then
     expect(winningnumbers).toEqual([1, 2, 3, 4, 5, 6]);
   });
+
+  test("중복되지 않은 보너스 로또번호를 입력받으면 숫자로 변환된 로또번호를 반환한다", async () => {
+    // given
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    mockQuestions(["7"]);
+
+    // when
+    const ui = new UI();
+    const bonusLottoNumber = await ui.askBonusLottoNumber(winningNumbers);
+
+    // then
+    expect(bonusLottoNumber).toBe(7);
+  });
 });
