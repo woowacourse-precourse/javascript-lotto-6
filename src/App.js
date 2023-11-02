@@ -29,7 +29,17 @@ class App {
     await print(`${count}${PRINT_MESSAGE.BUY_COUNT}`);
   }
   
+  async createLottos(count){
+    for(let i = 0 ; i < count ; i++){
+      this.insertLotto();  
+    }
+  }
 
+  async insertLotto(){
+    const RANDOMS = await Random.pickUniqueNumbersInRange(1, 45, 6);
+    const lotto = new Lotto(RANDOMS);
+    this.lottos.push(lotto);
+  }
   
 
   async play() {
@@ -37,7 +47,9 @@ class App {
     const LOTTO_COUNT = this.getLottoCount(+INPUT_MONEY);
     await this.printBuyCount(LOTTO_COUNT);
     
-    
+    print('');
+
+    this.createLottos(LOTTO_COUNT);
 
     
   }
