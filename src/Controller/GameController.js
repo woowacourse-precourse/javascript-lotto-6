@@ -3,7 +3,7 @@ import OutputView from "../View/OutputView.js";
 import Game from "../Model/Game.js";
 import Lotto from "../Lotto.js";
 
-import { MONEY_UNIT } from "../constants/constants.js";
+import { LOTTO } from "../constants/constants.js";
 import { generateLotto } from "../util/generateLotto.js";
 import InputValidator from "../Validator/inputValidator.js";
 
@@ -36,7 +36,7 @@ class GameController {
   }
 
   getLottocnt(money) {
-    const lottoCnt = Math.floor(money / MONEY_UNIT);
+    const lottoCnt = Math.floor(money / LOTTO.price);
     return lottoCnt;
   }
 

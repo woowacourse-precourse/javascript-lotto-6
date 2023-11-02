@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from "../constants/error.js";
-import { MONEY_UNIT, LOTTO } from "../constants/constants.js";
+import { LOTTO } from "../constants/constants.js";
 
 class InputValidator {
   // 구입 금액에 대해 검증한다.
@@ -36,7 +36,7 @@ class InputValidator {
 
   // 1,000원 단위로 나누어 떨어지지 않는 경우 예외 처리한다.
   static isDivideByUnit(value) {
-    const isDivideByUnit = value % MONEY_UNIT === 0;
+    const isDivideByUnit = value % LOTTO.price === 0;
     if (!isDivideByUnit) {
       throw new Error(ERROR_MESSAGE.notDivideBy1000);
     }
