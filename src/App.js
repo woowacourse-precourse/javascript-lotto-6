@@ -12,7 +12,8 @@ class App {
     const amount = await this.UserInput.RequestAmount();
     const lottoNumbers = makeLottoNumbers(amount);
     const winningNumbers = await this.UserInput.RequestWinningNumbers();
-    this.lotto = new Lotto(amount, lottoNumbers, winningNumbers);
+    const bonusNumber = await this.UserInput.RequestBonus();
+    this.lotto = new Lotto(amount, lottoNumbers, winningNumbers, bonusNumber);
     this.lotto.print();
   }
 }

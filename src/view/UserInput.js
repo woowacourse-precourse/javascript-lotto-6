@@ -1,7 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 import Validate from '../controller/Validate.js';
-
 import { MESSAGE } from '../data/message.js';
 
 class UserInput {
@@ -11,6 +10,7 @@ class UserInput {
     
     async RequestAmount() {
         const amount = await MissionUtils.Console.readLineAsync(`${MESSAGE.PURCHASE_AMOUNT}\n`);
+        
         if(
             !this.validate.isCheckNumber(amount) || 
             !this.validate.isCheckProperRange(amount) || 
@@ -40,6 +40,19 @@ class UserInput {
         }
 
         return winningNumbers;
+    }
+
+    async RequestBonus() {
+        const bonus = await MissionUtils.Console.readLineAsync(`\n${MESSAGE.BONUS_NUMBER}\n`);
+
+        if(
+            !this.validate.isCheckNumber(bonus) ||
+            !this.validate.isCheckProperNumberRange(bonus)
+        ) {
+            return
+        }
+
+        return bonus;
     }
 }
 
