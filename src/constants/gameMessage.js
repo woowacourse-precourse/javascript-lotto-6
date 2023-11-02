@@ -1,7 +1,7 @@
 const GAME_MESSAGE = Object.freeze({
     buy_money: '구입금액을 입력해주세요.\n',
     bought: '개를 구매했습니다.',
-    winning_number: '당첨 번호를 입력해 주세요.\n',
+    winning_number: '\n당첨 번호를 입력해 주세요.\n',
     bonus_number: '보너스 번호를 입력해 주세요.\n',
     result: '당첨 통계\n',
     hyphon: '---\n',
