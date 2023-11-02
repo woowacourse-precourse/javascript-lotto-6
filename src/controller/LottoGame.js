@@ -1,11 +1,17 @@
 import InputView from '../view/InputView.js';
 import AmountValidator from '../validator/AmountValidator.js';
 import { CONSTANT } from '../constants/Constant.js';
+import LottoBundle from '../model/LottoBundle.js';
 
 class LottoGame {
+  #lottoBundle;
+
   async startGame() {
     const amount = await this.#getAmountInput();
     const lottoCount = this.#getLottoCount(amount);
+
+    this.#lottoBundle = new LottoBundle();
+    this.#lottoBundle.buyLottos(lottoCount);
   }
 
   async #getAmountInput() {
