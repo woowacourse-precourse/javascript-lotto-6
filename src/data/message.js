@@ -19,6 +19,7 @@ const ERROR_MESSAGE = {
     NUMBER_DUPLICATED_ERROR: '[ERROR] 번호가 중복이 되면 안됩니다.',
     NUMBER_RANGE_ERROR: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
     NUMBER_LEGNTH_ERROR: '[ERROR] 총 6개의 숫자를 적어야 합니다.',
+    BONUS_DUPLICATED_ERROR: '[ERROR] 기존 당첨 번호와 보너스 번호가 중복이 되면 안됩니다.',
 }
 
 export { MESSAGE, ERROR_MESSAGE };

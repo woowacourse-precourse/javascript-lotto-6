@@ -21,31 +21,11 @@ class UserInput {
         const input = await MissionUtils.Console.readLineAsync(`\n${MESSAGE.WINNING_NUMBERS}\n`);
         const winningNumbers = input.split(',');
 
-        for(const num of winningNumbers) {
-            if(!this.validate.isCheckProperNumberRange(num)) {
-                return
-            }
-        }
-
-        if(
-            !this.validate.isCheckDuplicate(winningNumbers) ||
-            !this.validate.isCheckProperNumberLength(winningNumbers)
-        ) {
-            return
-        }
-
         return winningNumbers;
     }
 
     async RequestBonus() {
         const bonus = await MissionUtils.Console.readLineAsync(`\n${MESSAGE.BONUS_NUMBER}\n`);
-
-        if(
-            !this.validate.isCheckNumber(bonus) ||
-            !this.validate.isCheckProperNumberRange(bonus)
-        ) {
-            return
-        }
 
         return bonus;
     }
