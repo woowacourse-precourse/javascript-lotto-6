@@ -7,7 +7,9 @@ describe('ErrorCheck 테스트', () => {
     ['true', true],
     [' ', true],
     ['+', true],
-  ])('stringToNumber()', (input, isThrowing) => {
+    ['1.1', false],
+    ['-10', false],
+  ])('integerString()', (input, isThrowing) => {
     const targetFunction = () => ErrorCheck.integerString(input);
     if (isThrowing) expect(targetFunction).toThrow();
     if (!isThrowing) expect(targetFunction).not.toThrow();
