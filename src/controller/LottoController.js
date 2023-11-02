@@ -1,8 +1,21 @@
 export class LottoController {
 
+    /**
+     * @type {InputView}
+     */
+    #inputView
+    /**
+     * @type {OutputView}
+     */
+    #outputView
 
-    //
-    constructor() {
+    /**
+     * @param {InputView} inputView
+     * @param {OutputView} outputView
+     */
+    constructor(inputView, outputView) {
+        this.#inputView = inputView
+        this.#outputView = outputView
     }
 
     /**
