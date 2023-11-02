@@ -14,6 +14,7 @@ const InputValidator = {
       throw new Error(
         '[ERROR] 입력한 금액이 1000원으로 나누어떨어지지 않습니다. 다시 입력해주세요.',
       );
+    return input;
   },
 };
 
