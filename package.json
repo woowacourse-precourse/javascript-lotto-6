@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "jest --detectOpenHandles --watch",
-    "lint": "eslint ./src/**/*.js",
+    "lint": "eslint --cache ./src/**/*.js",
     "lint:fix": "eslint --fix ./src/**/*.js",
     "postinstall": "husky install",
 	  "prepare": "husky install",
