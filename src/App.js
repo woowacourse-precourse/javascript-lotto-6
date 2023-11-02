@@ -13,9 +13,21 @@ const PRIZES = {
 
 class App {
   async play() {
-    const purchaseAmount = await Console.readLineAsync(
-      "구입금액을 입력해 주세요. \n"
-    );
+    let purchaseAmount;
+    while (true) {
+      try {
+        purchaseAmount = parseInt(
+          await Console.readLineAsync("구입금액을 입력해 주세요. \n"),
+          10
+        );
+        if (!isValidAmount(purchaseAmount)) {
+          throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
+        }
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
 
     const lottoCount = Math.floor(purchaseAmount / LOTTO_PRICE);
     const lottos = [];
@@ -31,16 +43,68 @@ class App {
       Console.print(`[${lotto.getNumbers().join(", ")}]`);
     });
 
-    const winningNumbersInput = await Console.readLineAsync(
-      "\n당첨 번호를 입력해 주세요.\n"
-    );
-    const winningNumbers = winningNumbersInput
-      .split(",")
-      .map((number) => parseInt(number.trim()));
-    const bonusNumberInput = await Console.readLineAsync(
-      "\n보너스 번호를 입력해 주세요.\n"
-    );
-    const bonusNumber = parseInt(bonusNumberInput.trim(), 10);
+    let winningNumbers;
+    while (true) {
+      try {
+        const winningNumbersInput = await Console.readLineAsync(
+          "\n당첨 번호를 입력해 주세요.\n"
+        );
+        if (!/^\d+(,\d+)*$/.test(winningNumbersInput)) {
+          throw new Error(
+            "[ERROR] 당첨 번호는 쉼표(,)로만 구분된 숫자여야 합니다."
+          );
+        }
+
+        winningNumbers = winningNumbersInput
+          .split(",")
+          .map((number) => parseInt(number.trim(), 10));
+
+        if (winningNumbers.some((num) => isNaN(num))) {
+          throw new Error("[ERROR] 당첨 번호는 숫자여야 합니다.");
+        }
+        if (!isValidWinningNumbers(winningNumbers)) {
+          throw new Error(
+            "[ERROR] 당첨 번호는 1~45 범위의 숫자 6개여야 합니다."
+          );
+        }
+        if (hasDuplicate(winningNumbers)) {
+          throw new Error("[ERROR] 당첨 번호는 중복될 수 없습니다.");
+        }
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    let bonusNumber;
+    while (true) {
+      try {
+        const bonusNumberInput = await Console.readLineAsync(
+          "\n보너스 번호를 입력해 주세요.\n"
+        );
+        if (!/^\d+$/.test(bonusNumberInput)) {
+          throw new Error(
+            "[ERROR] 보너스 번호는 숫자 한 개만 입력해야 합니다."
+          );
+        }
+
+        bonusNumber = parseInt(bonusNumberInput.trim(), 10);
+
+        if (winningNumbers.includes(bonusNumber)) {
+          throw new Error(
+            "[ERROR] 보너스 번호는 당첨 번호와 다른 숫자여야 합니다."
+          );
+        }
+        if (!isValidNumber(bonusNumber)) {
+          throw new Error(
+            "[ERROR] 보너스 번호는 1~45 범위의 숫자 1개여야 합니다."
+          );
+        }
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
 
     const results = lottos.map((lotto) => {
       const numbers = lotto.getNumbers();
@@ -91,5 +155,26 @@ class App {
 const PickLottoNumbers = () => {
   return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
 };
+
+// 예외 처리를 위한 유효성 검사 함수들
+// 1. 구입 금액이 1,000원 단위인지 검사
+function isValidAmount(amount) {
+  return amount % 1000 === 0;
+}
+
+// 2. 당첨 번호와 보너스 번호에 1~45 범위의 값을 입력했는지 검사
+function isValidNumber(number) {
+  return !isNaN(number) && number >= 1 && number <= 45;
+}
+
+// 3. 당첨 번호에 7개 이상의 숫자를 입력했는지 검사
+function isValidWinningNumbers(numbers) {
+  return numbers.length === 6 && numbers.every(isValidNumber);
+}
+
+// 4. 중복 입력 여부 검사
+function hasDuplicate(numbers) {
+  return new Set(numbers).size !== numbers.length;
+}
 
 export default App;
