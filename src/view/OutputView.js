@@ -9,7 +9,7 @@ class OutputView {
 	static printPurchaseHistory(lottoNumberList) {
 		Console.print(`${lottoNumberList.length}${viewMessage.OUTPUT_PURCHASE_HISTORY}`);
 		lottoNumberList.forEach(lottoNumber => {
-			Console.print(lottoNumber);
+			Console.print(`[${lottoNumber.join(', ')}]`);
 		});
 	}
 
