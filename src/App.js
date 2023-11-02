@@ -18,6 +18,10 @@ class App {
     await this.createLottoAmount();
   }
 
+  async createLottoAmount(){
+    const PURCHASE_AMOUNT = await this.userView.userInputPurchaseAmount();
+  }
+
 }
 
 export default App;
