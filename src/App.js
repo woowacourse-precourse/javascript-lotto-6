@@ -6,17 +6,12 @@ import { PURCHASE_UNIT } from './constant.js';
 
 class App {
   #lottos = [];
+  #winningLotteryNumber;
 
   async play() {
     await this.issueLottos();
     this.printLottosNumbers();
-  }
-
-  printLottosNumbers() {
-    Message.printNumberOfLottos(this.#lottos.length);
-    this.#lottos.forEach((lotto) => {
-      Message.printLottoNumber(lotto.getNumbers());
-    });
+    await this.inputWinningLotteryNumbers();
   }
 
   async issueLottos() {
@@ -28,6 +23,20 @@ class App {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       this.#lottos.push(new Lotto(numbers));
     }
+  }
+
+  printLottosNumbers() {
+    Message.printNumberOfLottos(this.#lottos.length);
+    this.#lottos.forEach((lotto) => {
+      Message.printLottoNumber(lotto.getNumbers());
+    });
+  }
+
+  async inputWinningLotteryNumbers() {
+    const value = await Message.inputWinningLotteryNumbers();
+    const numbers = value.split(',');
+    Validate.winningLottery(numbers);
+    this.#winningLotteryNumber = numbers;
   }
 }
 

@@ -1,6 +1,8 @@
 const ERROR = {
   MONEY_UNIT: '구입 금액은 1,000원 단위여야 합니다.',
   TYPE_NUMBER: '숫자 형식으로 입력하세요.',
+  SIX_FIGURES: '당첨 번호는 6개여야 합니다.',
+  DIFFERENT_NUMBERS: '각 번호는 다른 숫자여야 합니다.',
 };
 
 export const Validate = Object.freeze({
@@ -15,6 +17,29 @@ export const Validate = Object.freeze({
   isNumberType(string) {
     if (isNaN(string)) {
       throw new Error(ERROR.TYPE_NUMBER);
+    }
+  },
+
+  winningLottery(numbers) {
+    numbers.forEach((number) => {
+      this.isNumberType(number);
+    });
+
+    this.isNotSixFigures(numbers);
+    this.isDuplicated(numbers);
+  },
+
+  isNotSixFigures(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error(ERROR.SIX_FIGURES);
+    }
+  },
+
+  isDuplicated(numbers) {
+    const set = new Set([...numbers]);
+
+    if (numbers.length !== set.size) {
+      throw new Error(ERROR.DIFFERENT_NUMBERS);
     }
   },
 });
