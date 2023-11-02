@@ -21,17 +21,28 @@ class App {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
+  pushArray(randomNumberArray) {
+    this.lottoRandomNumber.push(randomNumberArray);
+  }
+
+  printLottoArray() {
+    this.lottoRandomNumber.forEach(lottoArray => {
+      Console.print(lottoArray);
+    });
+  }
   async play() {
     const lottoPrice =
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
     this.checkLottoPrice(lottoPrice);
     this.lottoTicket = this.getLottoTicket(lottoPrice);
-    Console.print(`${lottoTicket}개를 구매했습니다.`);
+    Console.print(`${this.lottoTicket}개를 구매했습니다.`);
 
     while (this.countNumber < this.lottoTicket) {
-      randomNumberArray = this.makeRandomNumber();
+      const randomNumberArray = this.makeRandomNumber();
+      this.pushArray(randomNumberArray);
       this.countNumber += 1;
     }
+    this.printLottoArray();
   }
 }
 
