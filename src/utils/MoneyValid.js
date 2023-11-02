@@ -5,10 +5,11 @@
 // const hasDecimal = (input) => input.include('.');
 
 class MoneyValid {
-    moneyisValid(money) {
+    moneyIsValid(money) {
         if (money % 1000 !== 0){
             throw new Error('[ERROR]'); // 임시
         }
+        return true;
     }
 }
 
