@@ -2,17 +2,22 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { Message } from './Message.js';
 import { Validate } from './Validate.js';
 import Lotto from './Lotto.js';
-import { PURCHASE_UNIT } from './constant.js';
+import { PRIZE_MONEY, PURCHASE_UNIT } from './constant.js';
 
 class App {
   #lottos = [];
+  #prize = {};
   #winningLotteryNumber;
   #bonusNumber;
+  #profit;
 
   async play() {
     await this.issueLottos();
     this.printLottosNumbers();
     await this.inputWinningLotteryNumbers();
+    await this.inputBonusNumber();
+    this.gatherResult();
+    this.printResult();
   }
 
   async issueLottos() {
@@ -35,7 +40,7 @@ class App {
 
   async inputWinningLotteryNumbers() {
     const value = await Message.inputWinningLotteryNumbers();
-    const numbers = value.split(',');
+    const numbers = value.split(',').map(Number);
     Validate.winningLottery(numbers);
     this.#winningLotteryNumber = numbers;
   }
@@ -43,7 +48,36 @@ class App {
   async inputBonusNumber() {
     const number = await Message.inputBonusNumber();
     Validate.bonusNumber(number, this.#winningLotteryNumber);
-    this.#bonusNumber = number;
+    this.#bonusNumber = Number(number);
+  }
+
+  gatherResult() {
+    const result = this.#lottos.map((lotto) =>
+      lotto.compareNumbersOf(this.#winningLotteryNumber, this.#bonusNumber),
+    );
+    result.forEach((rank) => {
+      if (!rank) return;
+      this.#prize[rank] = this.#prize[rank] ? this.#prize[rank] + 1 : 1;
+    });
+
+    const totalPrice = this.calculateTotalPrice(result);
+    const profit = this.calculateProfit(totalPrice);
+    this.#profit = profit;
+  }
+
+  printResult() {
+    Message.printWinningStats(this.#prize);
+    Message.printProfit(this.#profit);
+  }
+
+  calculateTotalPrice(result) {
+    return result.reduce((acc, cur) => {
+      return (acc = cur ? acc + PRIZE_MONEY[cur] : acc);
+    }, 0);
+  }
+
+  calculateProfit(totalPrice) {
+    return (totalPrice / (this.#lottos.length * PURCHASE_UNIT)).toFixed(1);
   }
 }
 
