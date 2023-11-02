@@ -12,6 +12,17 @@ class InOutputError{
             throw Error(`${ERROR_MESSAGE.INPUT_NUMBER_ERROR}`);
         }
     }
+
+    inputWinningNumbersValidate = (winningNumbers) => {
+        if(winningNumbers.length !== 6){
+            throw Error(`${ERROR_MESSAGE.INPUT_MORE_WINNING_NUMBERS_ERROR}`);
+        }
+        winningNumbers.forEach((number) => {
+            if (number < 1 || number > 45) {
+                throw new Error(`${ERROR_MESSAGE.INPUT_WINNING_NUMBERS_ERROR}`);
+            }
+        });
+    }
 }
 
 export default InOutputError
