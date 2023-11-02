@@ -25,13 +25,19 @@ class App {
     return money / 1000;
   }
 
+  async printBuyCount(count){
+    await print(`${count}${PRINT_MESSAGE.BUY_COUNT}`);
+  }
+  
 
   
 
   async play() {
     const INPUT_MONEY = await input(PRINT_MESSAGE.INPUT_MONEY);
     const LOTTO_COUNT = this.getLottoCount(+INPUT_MONEY);
-
+    await this.printBuyCount(LOTTO_COUNT);
+    
+    
 
     
   }
