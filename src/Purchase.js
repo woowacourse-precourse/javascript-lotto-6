@@ -1,15 +1,8 @@
-import { INPUT, ERROR } from "Constants/Constants.js";
+import { INPUT, ERROR } from "./Constants/Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class Purchase {
-  #purchaseAmount;
   #lottoCount;
-
-  constructor(purchaseAmount) {
-    this.#validate(purchaseAmount);
-    this.#purchaseAmount = purchaseAmount;
-    this.#lottoCount = purchaseAmount / 1000;
-  }
   #validate(purchaseAmount) {
     if (
       typeof purchaseAmount !== "number" ||
@@ -19,11 +12,21 @@ class Purchase {
       throw new Error(ERROR.purchase_amount_error);
     }
   }
+
+  constructor() {
+    this.#lottoCount = 0;
+  }
+
   async inputPurchaseAmount() {
-    const input = await Console.ReadLineAsync(INPUT.purchase_amount);
+    const input = await Console.readLineAsync(INPUT.purchase_amount);
     const purchaseAmount = parseInt(input);
     this.#validate(purchaseAmount);
-    this.#purchaseAmount = purchaseAmount;
     this.#lottoCount = purchaseAmount / 1000;
   }
+
+  getLottoCount() {
+    return this.#lottoCount;
+  }
 }
+
+export default Purchase;
