@@ -37,9 +37,29 @@ class Lotto {
       return allCount;
     }, {});
 
-    this.print(countedResult);
+    this.calculateRate(countedResult);
+
   };
 
+  calculateRate(result) {
+    let sum = 0;
+    for(const value of Object.keys(result)) {
+      if(value === '3') {
+        sum += 5000
+      }
+      if(value === '4') {
+        sum += 50000
+      }
+      if(value === '5') {
+        sum += 1500000
+      }
+      if(value === '6') {
+        sum += 2000000000
+      }
+    } 
+    const rate = ((sum / this.amount) * 100).toFixed(1);
+    this.print(result, rate);
+  }
 
   async print(result, rate) {
     await MissionUtils.Console.print(`${MESSAGE.RESULT_INFO}\n---\n`);
@@ -48,6 +68,7 @@ class Lotto {
     await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE} ${result[5] ?? 0}개`);
     // await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE_BOUNS} ${result[5] ?? 0}`);
     await MissionUtils.Console.print(`${MESSAGE.RESULT_SIX} ${result[6] ?? 0}개`);
+    await MissionUtils.Console.print(`${MESSAGE.RESULT_RATE} ${rate.toLocaleString()}%입니다.`);
   }
 }
 
