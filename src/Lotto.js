@@ -19,6 +19,15 @@ class Lotto {
   printLottos(){
     print(this.#numbers);
   }
+
+  getPrizeCount(userNumbers){
+    let count = 0;
+    userNumbers.forEach((userNumber)=>{
+      if(this.#numbers.includes(userNumber)) count++;
+    });
+
+    return count;
+  }
 }
 
 export default Lotto;
