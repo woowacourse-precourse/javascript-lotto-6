@@ -11,6 +11,7 @@ class Purchase {
   #validate(purchaseAmount) {
     if (
       typeof purchaseAmount !== "number" ||
+      isNaN(purchaseAmount) ||
       purchaseAmount <= 0 ||
       purchaseAmount % 1000 !== 0
     ) {
@@ -20,7 +21,7 @@ class Purchase {
 
   async inputPurchaseAmount() {
     const input = await Console.readLineAsync(INPUT.purchase_amount);
-    const purchaseAmount = parseInt(input);
+    const purchaseAmount = Number(input);
     this.#validate(purchaseAmount);
     this.#lottoCount = purchaseAmount / 1000;
   }

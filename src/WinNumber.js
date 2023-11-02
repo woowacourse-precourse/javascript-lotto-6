@@ -24,7 +24,11 @@ class WinNumber {
   }
 
   #bonusNumberValidate(bonusNumber) {
-    if (typeof bonusNumber !== "number" || bonusNumber <= 0) {
+    if (
+      typeof bonusNumber !== "number" ||
+      isNaN(bonusNumber) ||
+      bonusNumber <= 0
+    ) {
       throw new Error(ERROR.lotto_num_error);
     }
     if (this.#winNumber.includes(bonusNumber)) {
@@ -34,14 +38,14 @@ class WinNumber {
 
   async inputWinNumber() {
     const input = await Console.readLineAsync(INPUT.win_numbers);
-    const winNumber = input.split(",").map((number) => parseInt(number, 10));
+    const winNumber = input.split(",").map((number) => Number(number));
     this.#winNumberValidate(winNumber);
     this.#winNumber = winNumber.sort((a, b) => a - b);
   }
 
   async inputBonusNumber() {
     const input = await Console.readLineAsync(INPUT.bonus_numbers);
-    const bonusNumber = parseInt(input);
+    const bonusNumber = Number(input);
     this.#bonusNumberValidate(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }

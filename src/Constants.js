@@ -1,5 +1,5 @@
 export const INPUT = {
-  purchase_amount: "구입금액을 입력해 주세요.\n",
+  purchase_amount: "구입금액을 입력해 주세요.",
   win_numbers: "\n당첨 번호를 입력해 주세요.\n",
   bonus_numbers: "\n보너스 번호를 입력해 주세요.\n",
 };
