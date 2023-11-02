@@ -20,6 +20,16 @@ class App {
     lottos.forEach((lotto) => {
       Console.print(`[${lotto.getNumbers().join(", ")}]`);
     });
+
+    const winningNumbersInput = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요. \n"
+    );
+    const winningNumbers = winningNumbersInput
+      .split(",")
+      .map((number) => parseInt(number.trim()));
+    const bonusNumbers = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요. \n"
+    );
   }
 }
 
