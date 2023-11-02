@@ -14,7 +14,7 @@ function lottoPurchasesNumber(userMoney) {
     return lottoNumber;
 }
 
-async function lottoWinnerNumber() {
+async function lottoWinnerNumbers() {
     const inputNumber = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
     const lottoWinnerNumber = inputNumber.split(",");
     return lottoWinnerNumber;
