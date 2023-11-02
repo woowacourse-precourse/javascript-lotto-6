@@ -13,6 +13,8 @@ class Purchase {
       const lotto = this.getLotto();
       this.lottos.push(lotto);
     }
+
+    return this.lottos;
   }
 
   getLotto() {

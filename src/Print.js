@@ -11,6 +11,10 @@ class Print {
     Console.print(MESSAGE.SHOW_LOTTO_AMOUNT(amount));
   }
 
+  static showLotto(lotto) {
+    Console.print(MESSAGE.SHOW_LOTTO_NUMBER(lotto));
+  }
+
   static showErrorMessage(message) {
     Console.print(message);
   }

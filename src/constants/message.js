@@ -5,6 +5,9 @@ export const MESSAGE = {
   SHOW_LOTTO_AMOUNT(amount) {
     return `\n${amount}개를 구매했습니다.\n`;
   },
+  SHOW_LOTTO_NUMBER(lotto) {
+    return `[${lotto.join(", ")}]`;
+  },
 };
 
 export const ERROR = {

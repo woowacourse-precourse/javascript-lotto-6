@@ -24,7 +24,10 @@ class App {
   purchaseLotto(amount) {
     Print.showPurchaseMessage(amount);
     const purchase = new Purchase(amount);
-    purchase.getLottos();
+    const lottos = purchase.getLottos();
+    lottos.forEach((lotto) => {
+      Print.showLotto(lotto);
+    });
   }
 }
 
