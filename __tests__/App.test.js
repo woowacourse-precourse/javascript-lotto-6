@@ -49,4 +49,12 @@ describe('class App test', () => {
       expect(testArray).toHaveLength(6);
     });
   });
+
+  describe('method test : removeSpace()', () => {
+    test('반환된 배열의 길이가 6인가 ?', () => {
+      const lottoArray = [1, 2, 3, 4, 5, 6];
+      const testString = app.removeSpace(lottoArray);
+      expect(testString).toBe('[1, 2, 3, 4, 5, 6]');
+    });
+  });
 });
