@@ -15,6 +15,7 @@ class App {
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
     this.checkLottoPrice(lottoPrice);
     const lottoTicket = this.getLottoTicket(lottoPrice);
+    Console.print(`${lottoTicket}개를 구매했습니다.`);
   }
 }
 
