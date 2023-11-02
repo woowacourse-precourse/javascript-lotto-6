@@ -63,3 +63,18 @@
   
 
 - [ ] ##### 총 수익률 출력
+
+
+
+# :heavy_check_mark: 커밋 컨벤션
+
+```
+feat (feature)
+fix (bug fix)
+docs (documentation)
+style (formatting, missing semi colons, …)
+refactor
+test (when adding missing tests)
+chore (maintain)
+```
+
