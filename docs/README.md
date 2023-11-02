@@ -152,17 +152,15 @@ JavaScript에서는 클래스 말고도 객체를 만드는 방법은 여러 가
   `npm install --save-dev eslint-config-airbnb` 설치 후 .eslintrc.cjs 에서 `extends : ['airbnb']` 추가
 
 - <details>
-  <summay>함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.</summary>
-
+    <summary> 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.</summary> 
+    
   eslintrc.cjs에 `'max-lines-per-function': ['error', 15],` 룰 추가
   </details>
-
-</details>
 
 # ✏️ 과제 진행 요구 사항
 
 - <details>
-    <summay>**기능을 구현하기 전 docs/README.md에 구현할 기능 목록을 정리해 추가**한다.</summary>
-    
-    </details>
+    <summary>기능을 구현하기 전 docs/README.md에 구현할 기능 목록을 정리해 추가한다.</summary>
+
+  README.md 파일 작성 중
   </details>
