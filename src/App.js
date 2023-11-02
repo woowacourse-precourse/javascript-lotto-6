@@ -35,19 +35,13 @@ class App {
   }
 
   #generateLottos(purchaseAmount) {
-    const numberOfLottos = Math.floor(purchaseAmount / 1000);
+    const numberOfLottos = purchaseAmount / 1000;
+    MissionUtils.Console.print(`${numberOfLottos}개를 구매했습니다.`);
     for (let i = 0; i < numberOfLottos; i++) {
-      const numbers = this.#generateRandomNumbers();
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       this.#lottos.push(new Lotto(numbers));
+      MissionUtils.Console.print(`[${numbers.join(", ")}]`);
     }
-  }
-
-  #generateRandomNumbers() {
-    const numbers = new Set();
-    while (numbers.size < 6) {
-      numbers.add(Math.floor(Math.random() * 45) + 1);
-    }
-    return [...numbers];
   }
 
   // 당첨 번호, 보너스 번호 입력과 결과 계산 후 출력하기
