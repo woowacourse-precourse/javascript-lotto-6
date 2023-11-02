@@ -1,4 +1,4 @@
-import { UNIT } from "./rule.js";
+import { UNIT, SEPARATOR } from "./rule.js";
 
 export const MESSAGE = {
   GET_PURCHASE_SUM: "구입금액을 입력해 주세요.\n",
@@ -6,7 +6,7 @@ export const MESSAGE = {
     return `\n${amount}개를 구매했습니다.\n`;
   },
   SHOW_LOTTO_NUMBER(lotto) {
-    return `[${lotto.join(", ")}]`;
+    return `[${lotto.join(SEPARATOR.PURCHASED_LOTTO)}]`;
   },
   GET_USER_LOTTO: "\n당첨 번호를 입력해 주세요.\n",
 };

@@ -11,3 +11,7 @@ export const LOTTO = {
   MAX_RANGE: 45,
   LENGTH: 6,
 };
+
+export const SEPARATOR = {
+  PURCHASED_LOTTO: ", ",
+};
