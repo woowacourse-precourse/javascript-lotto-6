@@ -19,6 +19,15 @@ class InputView {
             throw new Error(ERROR_MESSAGES.DEFAULT_ERROR);
         }
     }
+
+    static async getBonusNumbers(){
+        try {
+            const bonusNumbers = await MissionUtils.Console.readLineAsync(GAME_MESSAGES.ENTER_BONUS_NUMBER);
+            return bonusNumbers;
+        } catch (error) {
+            throw new Error(ERROR_MESSAGES.DEFAULT_ERROR);
+        }
+    }
 }
 
 export default InputView;
