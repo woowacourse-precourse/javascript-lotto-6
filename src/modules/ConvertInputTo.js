@@ -10,3 +10,5 @@ class ConvertInputTo {
     return Number(inputString);
   }
 }
+
+export default ConvertInputTo;
