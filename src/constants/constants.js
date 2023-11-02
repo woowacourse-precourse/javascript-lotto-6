@@ -3,3 +3,9 @@ export const INPUT_MESSAGE = {
 };
 
 export const MONEY_UNIT = 1000;
+
+export const LOTTO = {
+  length: 6,
+  min: 1,
+  max: 45,
+};
