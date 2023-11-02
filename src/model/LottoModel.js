@@ -96,6 +96,8 @@ class LottoModel {
       SETTINGS.targetNumber.minimum < 1
     )
       throw new Error(MESSAGES.error.invalidRange);
+    if (this.targetNumbers.includes(this.bonusNumber))
+      throw Error(MESSAGES.error.notDuplicateTargetNumbers);
   };
 
   getBonusNumber() {
