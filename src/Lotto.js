@@ -1,6 +1,4 @@
-import { INPUT, ERROR } from "./Constants/Constants.js";
-import { Console } from "@woowacourse/mission-utils";
-import { Random } from "@woowacourse/mission-utils";
+import { ERROR } from "./Constants.js";
 
 class Lotto {
   #numbers;

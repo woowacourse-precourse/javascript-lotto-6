@@ -1,6 +1,6 @@
 export const INPUT = {
   purchase_amount: "구입금액을 입력해 주세요.\n",
-  guess_numbers: "당첨 번호를 입력해 주세요.",
+  win_numbers: "당첨 번호를 입력해 주세요.",
   bonus_numbers: "보너스 번호를 입력해 주세요.",
 };
 export const OPTION = {

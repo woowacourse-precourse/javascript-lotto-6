@@ -1,8 +1,13 @@
-import { INPUT, ERROR } from "./Constants/Constants.js";
+import { INPUT, ERROR } from "./Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class Purchase {
   #lottoCount;
+
+  constructor() {
+    this.#lottoCount = 0;
+  }
+
   #validate(purchaseAmount) {
     if (
       typeof purchaseAmount !== "number" ||
@@ -11,10 +16,6 @@ class Purchase {
     ) {
       throw new Error(ERROR.purchase_amount_error);
     }
-  }
-
-  constructor() {
-    this.#lottoCount = 0;
   }
 
   async inputPurchaseAmount() {
