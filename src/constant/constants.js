@@ -1,8 +1,8 @@
 const GAME_RULE_NUMBER = {
-  Min: 1,
-  Max: 45,
-  Length: 6,
-  Price: 1000,
+  min: 1,
+  max: 45,
+  length: 6,
+  price: 1000,
   firstPrize: '2,000,000,000원',
   secondPrize: '30,000,000원',
   thirdPrize: '1,500,000원',
@@ -12,12 +12,12 @@ const GAME_RULE_NUMBER = {
 
 const INPUT_MESSAGES = {
   purcahsingMoney: '구입금액을 입력해 주세요.\n',
-  lottoWinningNumbers: '당첨 번호를 입력해 주세요.\n',
+  lottoWinningNumbers: '\n당첨 번호를 입력해 주세요.\n',
   lottoBonusNumber: '보너스 번호를 입력해 주세요.\n',
 };
 
 const PRINT_MESSAGES = {
-  purcahsedAmount: (number) => `${number}를 구입했습니다.\n`,
+  purcahsedAmount: (amount) => `\n${amount}개를 구입했습니다.`,
   winStatistics: '당첨 통계',
   dashLine: '---',
 };
