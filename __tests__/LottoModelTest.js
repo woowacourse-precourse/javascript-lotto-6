@@ -74,4 +74,17 @@ describe("LottoModel 테스트", () => {
       expect(() => lottoModel.validateBonusNumbers(number)).toThrowError();
     });
   });
+
+  describe("로또 번호 테스트", () => {
+    test("사용자가 구매한 임의 로또 번호와 실제 로또 번호 일치 개수 판정", () => {
+      const userNumbers = [1, 2, 3, 4, 5, 6];
+      lottoModel.targetNumbers = [1, 2, 3, 4, 5, 6];
+      lottoModel.bonusNumber = 7;
+
+      const [target, bonus] = lottoModel.calculateCorrect(userNumbers);
+
+      expect(target).toEqual(6);
+      expect(bonus).toEqual(0);
+    });
+  });
 });
