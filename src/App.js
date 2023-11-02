@@ -2,10 +2,16 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import * as utils from './LottoUtils.js';
 class App {
   async play() {
-    await utils.inputAmount();
-    await utils.inputWinningNumbers();
-    await utils.inputBonusNumber();
-    Console.print(utils.getRandomNumbers());
+    const AMOUNT = await utils.inputAmount();
+    const LOTTO_COUNT = utils.getLottoCount(AMOUNT);
+    const LOTTOS = utils.getLottos(LOTTO_COUNT);
+    utils.printLottos(LOTTOS);
+    const WINNING_NUMBERS = await utils.inputWinningNumbers();
+    console.log(WINNING_NUMBERS);
+    //const WINNING_NUMBERS = utils.getWinningNumbers(winningNumbers);
+    const BONUS_NUMBER = await utils.inputBonusNumber();
+    const RESULT = utils.getResult(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
+    utils.printResult(RESULT);
   }
 }
 

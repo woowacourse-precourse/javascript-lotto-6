@@ -1,5 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH } from './constants.js';
 export const inputAmount = async () => {
   try {
     const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
@@ -12,7 +13,9 @@ export const inputWinningNumbers = async () => {
   try {
     const winningNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    return winningNumbers;
+    let winNums = winningNumbers.split(',');
+    //return winningNumbers;
+    return winNums.map(x => Number(x));
   } catch (error) {
     Console.print(error.message);
   }
@@ -27,11 +30,11 @@ export const inputBonusNumber = async () => {
   }
 };
 export const getRandomNumbers = () => {
-  const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+  const numbers = Random.pickUniqueNumbersInRange(MIN, MAX, LOTTO_LENGTH);
   return numbers;
 };
 export const getLottoCount = amount => {
-  return amount / 1000;
+  return amount / UNIT;
 };
 export const issueLotto = () => {
   const numbers = getRandomNumbers();
@@ -52,4 +55,28 @@ export const printLottos = lottos => {
     Console.print(lotto.getNumbers());
   });
   Console.print('');
+};
+/*export const getWinningNumbers = numbers => {
+  return numbers.split(',');
+};*/
+export const getResult = (lottos, winningNumbers, bonusNumber) => {
+  const result = {};
+  Object.keys(MATCH).forEach(rank => {
+    result[rank] = {
+      money: MATCH[rank].money,
+      count: 0,
+    };
+  });
+  lottos.forEach(lotto => {
+    const rank = lotto.getRank(winningNumbers, bonusNumber);
+    if (rank) result[rank].count += 1;
+  });
+  return result;
+};
+export const printResult = result => {
+  Object.keys(result)
+    .reverse()
+    .forEach(rank => {
+      Console.print(`${MATCH[rank].message} - ${result[rank].count}`);
+    });
 };
