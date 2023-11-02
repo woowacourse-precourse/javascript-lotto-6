@@ -6,7 +6,7 @@ class App {
     this.lottoRandomNumber = [];
     this.lottoTicket;
     this.countNumber = 0;
-    this.lotto = new Lotto();
+    this.lotto;
   }
 
   getLottoTicket(lottoPurchaseAmount) {
@@ -59,6 +59,7 @@ class App {
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     const userBonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    this.lotto = new Lotto(userLottoNumber);
   }
 }
 
