@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import GAME_MESSAGE from "../../constants/gameMessage.js";
+import Lotto from "../../model/Lotto.js";
 import WinningValid from "../../utils/WinningValid.js";
 
 class WinningInput {
@@ -12,17 +13,20 @@ class WinningInput {
   }
 
   async winningNumbers() {
-    let valid, numbers;
+    let valid = true,
+      numbers,
+      bonusNumber;
     do {
       numbers = await this.userInput();
       try {
-        valid = this.winningValid.winningIsValid(numbers);
+        const lotto = new Lotto(numbers);
+        bonusNumber = await lotto.bonus();
       } catch (error) {
         Console.print(error.message);
         valid = false;
       }
     } while (!valid);
-    return numbers;
+    return [numbers, bonusNumber];
   }
 }
 

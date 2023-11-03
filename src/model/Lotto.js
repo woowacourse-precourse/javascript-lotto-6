@@ -22,7 +22,7 @@ class Lotto {
   async bonus() {
     const bonus = new BonusInput();
     const bonusNumber = await bonus.number();
-    return [this.#numbers, bonusNumber];
+    return bonusNumber;
   }
   // TODO: 추가 기능 구현
 }

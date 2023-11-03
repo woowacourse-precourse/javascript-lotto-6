@@ -10,9 +10,10 @@ class App {
   async play() {
     const money = await this.#moneyInput.buyMoney();
     const userLotto = createNumbers(money);
-    const winning = await this.#winningInput.winningNumbers();
-    const lotto = new Lotto(winning);
-    const [winningNumbers, bonusNumber] = await lotto.bonus();
+    const [winningNumbers, bonusNumber] =
+      await this.#winningInput.winningNumbers();
+    // const lotto = new Lotto(winning);
+    // const [winningNumbers, bonusNumber] = await lotto.bonus();
     const lottoGame = new LottoGame(userLotto, winningNumbers, bonusNumber);
     lottoGame.lottoLogic();
   }
