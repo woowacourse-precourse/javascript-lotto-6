@@ -12,7 +12,7 @@ class User {
   }
 
   #validate(purchaseAmount) {
-    if (purchaseAmount === '') throw new Error(ERROR_MESSAGE.purchaseAmountBlack);
+    if (Number.isNaN(Number(purchaseAmount))) throw new Error(ERROR_MESSAGE.isChar);
   }
 }
 
