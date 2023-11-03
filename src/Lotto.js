@@ -16,10 +16,14 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 중복될 수 없습니다.');
     }
 
-    // 1~45 범위 벗어낫을 때
+    // 1~45 범위 벗어낫을 때, 숫자가 아닐 때
     for (const number of numbers) {
       if (number > 45 || number < 1) {
         throw new Error('[ERROR] 로또 번호는 1~45 사이로 입력해주세요.');
+      }
+
+      if (isNaN(number)) {
+        throw new Error('[ERROR] 로또 번호는 숫자만 입력 가능합니다.');
       }
     }
 
@@ -32,9 +36,22 @@ class Lotto {
     if (bonusNumber.length > 1) {
       throw new Error('[ERROR] 보너스 번호는 하나만 입력해주세요.');
     }
-  }
 
-  // TODO: 추가 기능 구현
+    // 보너스 번호에 숫자가 아닌 값을 입력했을 때
+    if (isNaN(bonusNumber)) {
+      throw new Error('[ERROR] 보너스 번호는 숫자로 입력해주세요.');
+    }
+
+    // 금액을 1000단위로 입력하지 않았을 때
+    if (purchaseAmount % 1000 !== 0) {
+      throw new Error('[ERROR] 금액은 1000원 단위로 입력해주세요.');
+    }
+
+    // 금액에 숫자가 아닌 값을 입력했을 때
+    if (isNaN(purchaseAmount)) {
+      throw new Error('[ERROR] 금액은 숫자로 입력해주세요.');
+    }
+  }
 }
 
 export default Lotto;
