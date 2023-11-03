@@ -1,19 +1,26 @@
+const LOTTO_ERROR_PREFIX = "로또 번호는";
+const COMMON_ERROR_PREFIX = "입력값은";
+const BUY_ERROR_PREFIX = "구매 금액은";
+
 export const MESSAGES = Object.freeze({
   ERROR: {
     PREFIX: "[ERROR]",
     COMMON: {
-      NOT_NUMBER: "입력값은 숫자여야 합니다.",
-      NOT_INTEGER: "입력값은 정수여야 합니다.",
+      NOT_NUMBER: `${COMMON_ERROR_PREFIX} 숫자여야 합니다.`,
+      NOT_INTEGER: `${COMMON_ERROR_PREFIX} 정수여야 합니다.`,
     },
     LOTTO: {
-      NOT_UNIQUE: "로또 번호는 중복되지 않아야 합니다.",
-      NOT_LENGTH: (length) => `로또 번호는 ${length}개여야 합니다.`,
+      NOT_NUMBER: `${LOTTO_ERROR_PREFIX} 숫자여야 합니다.`,
+      NOT_INTEGER: `${LOTTO_ERROR_PREFIX} 정수여야 합니다.`,
+      NOT_UNIQUE: `${LOTTO_ERROR_PREFIX} 중복되지 않아야 합니다.`,
+      NOT_LENGTH: (length) => `${LOTTO_ERROR_PREFIX} ${length}개여야 합니다.`,
       NOT_ON_RANGE: (min, max) =>
-        `로또 번호는 ${min} ~ ${max} 사이의 숫자여야 합니다.`,
+        `${LOTTO_ERROR_PREFIX} ${min} ~ ${max} 사이의 숫자여야 합니다.`,
     },
     BUY: {
+      NOT_NUMBER: `${BUY_ERROR_PREFIX} 숫자여야 합니다.`,
       NOT_MULTIPLE_OF: (multiple) =>
-        `구매 금액은${multiple}의 배수여야 합니다.`,
+        `${BUY_ERROR_PREFIX} ${multiple}의 배수여야 합니다.`,
     },
   },
 });
