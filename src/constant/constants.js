@@ -61,6 +61,8 @@ const ERROR_MESSAGES = {
   bonusInteger: '[ERROR] 보너스 번호는 반드시 정수여야 합니다.',
   bonusRange: `[ERROR] 보너스 번호는 반드시 ${GAME_RULE_NUMBER.min}~${GAME_RULE_NUMBER.max}여야 합니다.`,
   bonusLength: `[ERROR] 보너스 번호는 반드시 ${GAME_RULE_NUMBER.bonusNumberLength}여야 합니다.`,
+  inputSpace: '[ERROR] 입력 값이 없습니다.',
+  inputBlank: '[ERROR] 입력 값에 공백이 포함되어 있습니다.',
 };
 
 export {
