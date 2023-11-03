@@ -15,6 +15,8 @@ class Model {
 
     return lotties;
   }
+
+  compareWinLotto(winNumInput, winBonusInput) {}
 }
 
 export default Model;
