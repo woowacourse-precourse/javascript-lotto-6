@@ -6,6 +6,8 @@ class Input {
   static async getLottoBudget() {
     const lottoBudget = await Console.readLineAsync(PROMPT.lottoBudget);
     Validate.checkLottoBudget(lottoBudget);
+
+    return lottoBudget;
   }
 }
 
