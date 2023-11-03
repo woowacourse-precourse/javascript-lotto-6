@@ -18,18 +18,12 @@ class LottoGame {
   async #getAmountInput() {
     try {
       const amount = await InputView.readAmount();
-      this.#validateAmountInput(amount);
+      Validator.validateAmount(amount);
       return this.#getLottoCount(amount);
     } catch (error) {
       OutputView.printMessage(error.message);
       return this.#getAmountInput();
     }
-  }
-
-  #validateAmountInput(amount) {
-    AmountValidator.checkIsNotNumber(amount);
-    AmountValidator.checkIsNegative(amount);
-    AmountValidator.checkIsNotInUnit(amount);
   }
 
   #getLottoCount(amount) {
