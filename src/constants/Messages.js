@@ -5,7 +5,7 @@ const INPUT_MESSAGES = {
 };
 
 const OUTPUT_MESSAGES = {
-  OUTPUT_PURCHASE_QUANTITY: "개를 구매했습니다.",
+  OUTPUT_PURCHASE_QUANTITY: "개를 구매했습니다.\n",
 };
 
 export { INPUT_MESSAGES, OUTPUT_MESSAGES };

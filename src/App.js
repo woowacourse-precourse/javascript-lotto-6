@@ -38,6 +38,18 @@ class App {
 
   showLottoNumbers(cash) {
     MissionUtils.Console.print(cash + OUTPUT_MESSAGES.OUTPUT_PURCHASE_QUANTITY);
+    const ARRAY_OF_GAMES = [];
+    for (let i = 0; i < cash; i++) {
+      const LOTTO_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(
+        1,
+        45,
+        6
+      );
+      console.log(LOTTO_NUMBER);
+      ARRAY_OF_GAMES.push(LOTTO_NUMBER);
+    }
+    console.log("");
+    return ARRAY_OF_GAMES;
   }
 }
 
