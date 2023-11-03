@@ -1,19 +1,21 @@
 import createNumbers from "./controller/CreateNumbers.js";
 import MoneyInput from "./view/input/MoneyInput.js";
-import userLottoOutput from "./view/output/userLottoOutput.js";
 import WinningInput from "./view/input/WinningInput.js";
-import Lotto from "./Lotto.js";
+import BonusInput from "./view/input/BonusInput.js";
+import Lotto from "./model/Lotto.js";
 
 class App {
   #moneyInput = new MoneyInput();
   #winningInput = new WinningInput();
+  #bonusInput = new BonusInput();
 
   async play() {
     const money = await this.#moneyInput.buyMoney();
     const userLotto = createNumbers(money);
-    userLottoOutput(userLotto);
     const winningNumber = await this.#winningInput.winningNumbers();
-    Lotto(winningNumber);
+    const bonusNumber = await this.#bonusInput.bonusNumber();
+    const lotto = new Lotto(userLotto, winningNumber, bonusNumber);
+    lotto.lottoLogic();
   }
 }
 

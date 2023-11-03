@@ -7,7 +7,8 @@ class WinningInput {
     this.winningValid = new WinningValid();
   }
   async userInput() {
-    return await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`);
+    const input = await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`); 
+    return input.split(',').map(str => parseInt(str, 10));
   }
 
   async winningNumbers() {
