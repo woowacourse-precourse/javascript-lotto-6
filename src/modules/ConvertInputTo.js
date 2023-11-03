@@ -13,6 +13,12 @@ class ConvertInputTo {
     ErrorCheck.purchasePrice(inputString, LOTTO_PRICE);
     return Number(inputString);
   }
+
+  static async lottoArray() {
+    return await ConvertInputTo.purchasePrice().then(purchasePrice =>
+      Get.randomLottoArray(purchasePrice / LOTTO_PRICE)
+    );
+  }
 }
 
 export default ConvertInputTo;
