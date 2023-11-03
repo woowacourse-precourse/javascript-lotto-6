@@ -10,7 +10,10 @@ class App {
     this.count = 0;
   }
   async play() {
-    
+    this.getLottoPrice();
+    // printHowMany
+    // printMyLottos
+    // inputNumbers
 
   }
 
@@ -75,6 +78,7 @@ class progressLotto extends App{
       const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(1,45,6)
       arrayNumbers.push(lottoNumber.sort());
     }
+    this.printHowMany(this.count);
     this.getWinningLottos(arrayNumbers);
   }
 
@@ -83,7 +87,8 @@ class progressLotto extends App{
       'three' : 0,
       'four' : 0,
       'five' : 0,
-      'six' : 0
+      'six' : 0,
+      'bonus' : 0
     }
     for(let i = 0; i < this.count; i++){
       const newArray = [...arrayNumbers,...this.winning]
@@ -109,7 +114,40 @@ class progressLotto extends App{
       default:
         return sameNumbers
     }
+    if(sameNumbers.length === 5 && arrayNumbers.includes(checkBonusNumber)) {
+      sameNumbersObject['bonus']++
+    }
+
   }
+}
+
+class printLottos {
+  printHowMany() {
+    MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
+  }
+  printMyLottos() {
+    arrayNumbers.forEach(element => {
+      MissionUtils.Console.print(element);
+    })
+  }
+  winningStatics() {
+    const sum = 0;
+    for(let win of Object.values(sameNumbersObject)){
+      sum += win;
+    }
+    const rate = sum/count * 100;
+    
+    MissionUtils.Console.print(
+    `당첨 통계
+    ---
+    3개 일치 (5,000원) - ${sameNumbersObject['three']}개
+    4개 일치 (50,000원) - ${sameNumbersObject['four']}개
+    5개 일치 (1,500,000원) - ${sameNumbersObject['five']}개
+    5개 일치, 보너스 볼 일치 (30,000,000원) - ${sameNumbersObject['bonus']}개
+    6개 일치 (2,000,000,000원) - ${sameNumbersObject['six']}개
+    총 수익률은 ${rate}%입니다.`)
+  }
+
 }
 
 export default App;
