@@ -51,6 +51,7 @@ class LottoShop {
       return RANKING[number];
     });
     rankingList.sort((a, b) => b - a);
+
     printRankingList(rankingList);
   }
 
@@ -86,8 +87,5 @@ class LottoShop {
     return this.bonusNumber;
   }
 }
-
-const user = new LottoShop();
-user.lottoPurchase();
 
 export default LottoShop;

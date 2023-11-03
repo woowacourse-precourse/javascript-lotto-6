@@ -28,18 +28,19 @@ const printProfit = (rankAmount) => {
   });
   Console.print(
     PRINT_MESSAGES.profitMessage(
-      Math.round((totalProfit / (totalAmount * GAME_RULE_NUMBER.price)) * 100) /
-        100,
+      Math.round(
+        (totalProfit / (totalAmount * GAME_RULE_NUMBER.price)) * 1000,
+      ) / 10,
     ),
   );
 };
 
 const printRankingList = (rankingList) => {
   const rankList = ['nothing', 'fifth', 'fourth', 'third', 'second', 'first'];
-  Console.print('');
   const rankAmount = rankList.map(
     (rank) => rankingList.filter((el) => el === rank).length,
   );
+  Console.print(PRINT_MESSAGES.winStatistics);
   rankList.forEach((rank, idx) => {
     Console.print(GAME_WINNER[rank](rankAmount[idx]));
   });

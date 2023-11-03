@@ -5,6 +5,15 @@ const GAME_RULE_NUMBER = {
   price: 1000,
 };
 
+const PRINT_MESSAGES = {
+  purcahsedAmount: (amount) => `\n${amount}개를 구입했습니다.`,
+  winStatistics: '\n당첨 통계',
+  dashLine: '---',
+  winnerMessage: (ranking, rankingPrize, amount) =>
+    `${ranking} (${rankingPrize}) - ${amount}개`,
+  profitMessage: (profitPercent) => `총 수익률은 ${profitPercent}%입니다.`,
+};
+
 const GAME_WINNER = {
   lottoPrize: ['0', '5000', '50000', '1500000', '30000000', '2000000000'],
   firstPrize: '2,000,000,000원',
@@ -18,7 +27,7 @@ const GAME_WINNER = {
   third: (amount) => `5개 일치 (${GAME_WINNER.thirdPrize}) - ${amount}개`,
   fourth: (amount) => `4개 일치 (${GAME_WINNER.fourthPrize}) - ${amount}개`,
   fifth: (amount) => `3개 일치 (${GAME_WINNER.fifthPrize}) - ${amount}개`,
-  nothing: () => '',
+  nothing: () => PRINT_MESSAGES.dashLine,
 };
 
 const RANKING = {
@@ -36,13 +45,8 @@ const INPUT_MESSAGES = {
   lottoBonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 };
 
-const PRINT_MESSAGES = {
-  purcahsedAmount: (amount) => `\n${amount}개를 구입했습니다.`,
-  winStatistics: '당첨 통계',
-  dashLine: '---',
-  winnerMessage: (ranking, rankingPrize, amount) =>
-    `${ranking} (${rankingPrize}) - ${amount}개`,
-  profitMessage: (profitPercent) => `총 수익률은 ${profitPercent}%입니다.`,
+const ERROR_MESSAGES = {
+  divisibleByLottoPrice: '[ERROR] 로또 구매 금액은 1,000원 단위만 가능합니다.',
 };
 
 export {
@@ -51,4 +55,5 @@ export {
   PRINT_MESSAGES,
   GAME_WINNER,
   RANKING,
+  ERROR_MESSAGES,
 };
