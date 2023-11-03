@@ -22,6 +22,7 @@ class App {
     this.inputLottoNumArr = this.convertToArr(this.inputLottoNum);
     this.checkValidateInputLottoNum(this.inputLottoNumArr);
     this.bonus = await this.inputBonusNumber();
+    this.checkValidateInputBonus(this.bonus);
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -74,11 +75,24 @@ class App {
     if (inputNum.length !== new Set(inputNum).size) {
       throw new Error("[ERROR] 중복된 숫자는 입력하면 안 됩니다.");
     }
+    if (inputNum % 1 !== 0) {
+      throw new Error("[Error] 자연수만 입력이 가능합니다.");
+    }
   }
 
   async inputBonusNumber() {
     const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    return input;
+    return +input;
+  }
+  checkValidateInputBonus(bonus) {
+    if (isNaN(Number(bonus)) || bonus < 1 || bonus > 45) {
+      throw new Error(
+        "[ERROR] 1부터 45 사이의 숫자 한 개만 입력이 가능합니다."
+      );
+    }
+    if (bonus % 1 !== 0) {
+      throw new Error("[Error] 자연수만 입력이 가능합니다.");
+    }
   }
 }
 
