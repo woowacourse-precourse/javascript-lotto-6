@@ -1,20 +1,20 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { LOTTO_FORM } from '../constant';
+import { BONUS_BALL_FORM, LOTTO_FORM } from '../constant';
 
-const getRandomNumbers = (...props) => {
-  const { rangeMin, rangeMax, length } = props;
-  return MissionUtils.Random.pickUniqueNumbersInRange(
-    rangeMin,
-    rangeMax,
-    length,
+const getRandomNumbers = (range, length) => {
+  return Array.from(
+    MissionUtils.Random.pickUniqueNumbersInRange(range.min, range.max, length),
   ).sort();
 };
 
 const getLottoRandomNumbers = () => {
-  return getRandomNumbers({
-    rangeMin: LOTTO_FORM.range.min,
-    rangeMax: LOTTO_FORM.range.max,
-    length: LOTTO_FORM.length,
-  });
+  const { range, length } = LOTTO_FORM;
+  return getRandomNumbers(range, length);
 };
-export { getLottoRandomNumbers };
+
+const getBonusBallNumber = () => {
+  const { range, length } = BONUS_BALL_FORM;
+  return getRandomNumbers(range, length);
+};
+
+export { getLottoRandomNumbers, getBonusBallNumber };
