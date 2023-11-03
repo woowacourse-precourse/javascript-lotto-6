@@ -7,6 +7,7 @@ class Lotto {
   constructor(numbers) {
     this.#validateSize(numbers);
     this.#validateDuplicate(numbers);
+    this.#validateRange(numbers);
     this.#numbers = this.#sortNumbers(numbers);
   }
 
@@ -27,6 +28,20 @@ class Lotto {
   #validateDuplicate(numbers) {
     if (numbers.length !== new Set(numbers).size) {
       throw new LottoError(`중복된 번호가 있습니다.`);
+    }
+  }
+
+  #validateRange(numbers) {
+    const isAnyNumberInvalid = numbers.some(
+      (number) =>
+        number < LOTTO_SETTINGS.NUMBER_RANGE.MIN ||
+        number > LOTTO_SETTINGS.NUMBER_RANGE.MAX
+    );
+
+    if (isAnyNumberInvalid) {
+      throw new LottoError(
+        `로또 번호는 ${LOTTO_SETTINGS.NUMBER_RANGE.MIN}이상 ${LOTTO_SETTINGS.NUMBER_RANGE.MAX}이하여야 합니다.`
+      );
     }
   }
 
