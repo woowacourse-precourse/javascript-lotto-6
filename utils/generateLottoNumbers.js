@@ -1,10 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import LOTTO_NUMBER from '../constants/lottoNumber';
+import LOTTO from '../constants/lotto';
 
 export default function generateLottoNumbers() {
-  return Random.pickUniqueNumbersInRange(
-    LOTTO_NUMBER.min,
-    LOTTO_NUMBER.max,
-    LOTTO_NUMBER.length,
-  );
+  return Random.pickUniqueNumbersInRange(LOTTO.min, LOTTO.max, LOTTO.length);
 }

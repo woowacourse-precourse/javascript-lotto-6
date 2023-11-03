@@ -48,8 +48,8 @@ class LottoCompany {
     return count;
   }
 
-  calculateStatics(lottos) {
-    const statics = {
+  calculateStatistics(lottos) {
+    const statistics = {
       0: 0,
       1: 0,
       2: 0,
@@ -60,10 +60,10 @@ class LottoCompany {
     };
     lottos.forEach((lotto) => {
       const matchedNum = this.match(lotto);
-      statics[matchedNum] += 1;
+      statistics[matchedNum] += 1;
     });
 
-    return statics;
+    return statistics;
   }
 
   calculateRateOfReturn(lottos) {

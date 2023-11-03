@@ -108,10 +108,10 @@ describe('LottoCompany 객체 테스트', () => {
     ];
 
     // when
-    const statics = lottoCompany.calculateStatics(lottos);
+    const statistics = lottoCompany.calculateStatistics(lottos);
 
     // then
-    expect(statics).toEqual({
+    expect(statistics).toEqual({
       0: 0,
       1: 0,
       2: 0,
