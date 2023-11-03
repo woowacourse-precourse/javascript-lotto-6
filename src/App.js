@@ -27,6 +27,7 @@ class App {
 
   async #transition(status) {
     this.#status = status;
+    this.#ui.println();
     await this.#transitionEffect();
   }
 
