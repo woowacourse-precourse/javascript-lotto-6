@@ -23,11 +23,28 @@ class Lotto {
     if (this.#hasDuplicate(numbers)) {
       throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다."); 
     };
+    
+    if (!this.#isWithinValidRange(numbers)) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45까지의 숫자여야 합니다.");
+    };
   }
 
   #hasDuplicate(numbers) {
     return new Set(numbers).size !== numbers.length;
   };
+
+  getMatchCount(winningNumbers) {
+    return this.#numbers.filter(number => winningNumbers.includes(number)).length;
+  };
+
+  hasBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  };
+
+  #isWithinValidRange(numbers) {
+    return numbers.every(number => number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER);
+  };
+  
   
   
 }
