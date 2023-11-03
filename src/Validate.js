@@ -89,7 +89,7 @@ class Validate {
   }
 
   isValidBonusNumber(input) {
-    if (!this.isOnlyNumber(input)) {
+    if (!this.isOnlyNumber(input) || !this.isValidRange(input)) {
       return false;
     }
 
