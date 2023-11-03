@@ -17,7 +17,18 @@ class Lotto {
     Console.print(this.#numbers);
   }
 
-  // TODO: 추가 기능 구현
+  returnMatchedCount(winningNumbers, bonusNumber) {
+    let matchedCount = 0;
+    this.#numbers.forEach((number) => {
+      if (winningNumbers.includes(number)) {
+        matchedCount++;
+      }
+    });
+    if (this.#numbers.includes(bonusNumber)) {
+      matchedCount++;
+    }
+    return matchedCount;
+  }
 }
 
 export default Lotto;

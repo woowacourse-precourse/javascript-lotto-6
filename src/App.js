@@ -3,9 +3,10 @@ import * as C from './constants.js';
 import Lotto from './Lotto.js';
 
 class App {
+  #purchaseAmount;
   #lottoCount;
   #lottoList = [];
-  #winningNumber = [];
+  #winningNumbers = [];
   #bonusNumber;
 
   async play() {
@@ -17,6 +18,8 @@ class App {
     await this.#inputWinningNumbers();
     Console.print('');
     await this.#inputBonusNumber();
+    Console.print('');
+    this.#calculateWinningStatistics();
   }
 
   async #inputPurchaseAmount() {
@@ -33,6 +36,7 @@ class App {
     if (convertNumber % 1000 !== 0) {
       throw new Error('[ERROR] 1000단위로 나누어 떨어지는 금액이 아닙니다.');
     }
+    this.#purchaseAmount = convertNumber;
     this.#lottoCount = convertNumber / 1000;
   }
 
@@ -66,7 +70,7 @@ class App {
     if (splitWinningNumbers.length != 6) {
       throw new Error('[ERROR] 입력된 당첨 번호가 6자리가 아닙니다.');
     }
-    splitWinningNumbers.sort((a, b) => a - b);
+
     splitWinningNumbers.forEach((number) => {
       const convertNumber = Number(number);
       if (isNaN(convertNumber)) {
@@ -75,10 +79,10 @@ class App {
       if (convertNumber > 45) {
         throw new Error('[ERROR] 입력된 당첨 번호가 로또번호의 최대값을 초가하였습니다.');
       }
-      if (this.#winningNumber.includes(convertNumber)) {
+      if (this.#winningNumbers.includes(convertNumber)) {
         throw new Error('[ERROR] 입력된 당첨 번호에 중복된 숫자가 있습니다.');
       }
-      this.#winningNumber.push(convertNumber);
+      this.#winningNumbers.push(convertNumber);
     });
   }
 
@@ -96,11 +100,57 @@ class App {
     if (convertNumber > 45) {
       throw new Error('[ERROR] 입력된 당첨 번호가 로또번호의 최대값을 초가하였습니다.');
     }
-    if (this.#winningNumber.includes(convertNumber)) {
+    if (this.#winningNumbers.includes(convertNumber)) {
       throw new Error('[ERROR] 입력된 보너스 번호가 담청 번호에 이미 존재합니다.');
     }
 
     this.#bonusNumber = bonusNumber;
+  }
+
+  #calculateWinningStatistics() {
+    Console.print(C.WINNING_STATISTICS);
+    Console.print('---');
+    this.#calculateMatchedNumber();
+  }
+
+  #calculateMatchedNumber() {
+    let threeMatch = 0;
+    let fourMatch = 0;
+    let fiveMatch = 0;
+    let sixMatch = 0;
+
+    this.#lottoList.forEach((lottoNumbers) => {
+      const matchedCount = lottoNumbers.returnMatchedCount(this.#winningNumbers, this.#bonusNumber);
+
+      switch (matchedCount) {
+        case 3:
+          threeMatch++;
+          break;
+        case 4:
+          fourMatch++;
+          break;
+        case 5:
+          fiveMatch++;
+          break;
+        case 6:
+          sixMatch++;
+          break;
+      }
+    });
+
+    Console.print(`${C.THREE_MATCHES} -- ${threeMatch}개`);
+    Console.print(`${C.FOUR_MATCHES} -- ${fourMatch}개`);
+    Console.print(`${C.FIVE_MATCHES} -- ${fiveMatch}개`);
+    Console.print(`${C.SIX_MATCHES} -- ${sixMatch}개`);
+
+    this.#calculateRevenueRate({ threeMatch, fourMatch, fiveMatch, sixMatch });
+  }
+
+  #calculateRevenueRate({ threeMatch, fourMatch, fiveMatch, sixMatch }) {
+    const totalRevenue = threeMatch * 5000 + fourMatch * 50000 + fiveMatch * 1500000 + sixMatch * 2000000000;
+    const revenueRate = Number((totalRevenue / this.#purchaseAmount) * 100);
+
+    Console.print(`총 수익률은 ${revenueRate}%입니다.`);
   }
 }
 
