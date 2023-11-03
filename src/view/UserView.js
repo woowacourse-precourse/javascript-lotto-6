@@ -26,7 +26,9 @@ class UserView{
     }
 
     userOutputPurchaseLottoNumber(purchaseLottoNumbers){
-        Console.print(purchaseLottoNumbers);
+        purchaseLottoNumbers.forEach((purchaseLottoNumber) => {
+            Console.print(purchaseLottoNumber);
+        }); 
     }
 
 }
