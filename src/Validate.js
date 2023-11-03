@@ -39,7 +39,7 @@ class Validate {
   isValidUserLottoInput(input) {
     if (
       !this.isValidLength(input) ||
-      !this.isValidRange(input) ||
+      !this.isValidRangeEachLotto(input) ||
       !this.isDuplicate(input)
     ) {
       return false;
@@ -56,12 +56,22 @@ class Validate {
     return true;
   }
 
-  isValidRange(input) {
-    const isValid = input.every(
-      (value) => value >= LOTTO.MIN_RANGE && value <= LOTTO.MAX_RANGE
-    );
+  isValidRangeEachLotto(input) {
+    const isValid = input.every((value) => this.isValidRange(value));
 
     if (!isValid) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isValidRange(value) {
+    if (typeof value !== "number") {
+      value = parseInt(value, 10);
+    }
+
+    if (value < LOTTO.MIN_RANGE || value > LOTTO.MAX_RANGE) {
       throw new Error(ERROR.INVALID_RANGE);
     }
 
