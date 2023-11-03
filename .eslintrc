@@ -16,6 +16,17 @@
     "import/extensions": ["error", "always", { "ignorePackages": true }],
 
     // validate 은닉을 위한 침묵
-    "class-methods-use-this": "off"
-  }
+    "class-methods-use-this": "off",
+
+    // 메서드의 길이 제한
+    "max-lines-per-function": ["error", { "max": 15 }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js"],
+      "rules": {
+        "max-lines-per-function": "off" // **.test.js 파일에 대해서는 max-lines 룰을 비활성화합니다.
+      }
+    }
+  ]
 }
