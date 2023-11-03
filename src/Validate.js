@@ -88,12 +88,24 @@ class Validate {
     return true;
   }
 
-  isValidBonusNumber(input) {
-    if (!this.isOnlyNumber(input) || !this.isValidRange(input)) {
+  isValidBonusNumber(input, lotto) {
+    if (
+      !this.isOnlyNumber(input) ||
+      !this.isValidRange(input) ||
+      this.isExistInLotto(input, lotto)
+    ) {
       return false;
     }
 
     return true;
+  }
+
+  isExistInLotto(input, lotto) {
+    if (lotto.includes(input)) {
+      throw new Error(ERROR.ALREADY_EXIST);
+    }
+
+    return false;
   }
 }
 

@@ -58,7 +58,7 @@ class App {
 
   checkValidBonusNumber(input) {
     const validate = new Validate();
-    validate.isValidBonusNumber(input);
+    validate.isValidBonusNumber(input, this.#userLotto);
   }
 }
 
