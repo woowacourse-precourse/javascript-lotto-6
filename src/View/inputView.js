@@ -4,7 +4,8 @@ import validator from '../utils/validator.js';
 const inputView = {
   async readPurchasePriceAsync(message) {
     const userInput = await Console.readLineAsync(message);
-    validator.validatePrice(userInput);
+    if (validator.validatePrice(userInput)) this.readPurchasePriceAsync(message);
+
     return parseInt(userInput);
   },
 
