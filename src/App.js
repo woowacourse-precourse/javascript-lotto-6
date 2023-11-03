@@ -12,17 +12,21 @@ class App {
   #profit;
 
   async play() {
-    await this.issueLottos();
-    this.printLottosNumbers();
-    await this.inputWinningLotteryNumbers();
-    await this.inputBonusNumber();
-    this.gatherResult();
-    this.printResult();
+    try {
+      await this.issueLottos();
+      this.printLottosNumbers();
+      await this.inputWinningLotteryNumbers();
+      await this.inputBonusNumber();
+      this.gatherResult();
+      this.printResult();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   async issueLottos() {
     const money = await Message.inputPurchasingAmount();
-    Validate.purchasingMoney(money);
+    Validate.purchasingLottos(money);
     const count = money / PURCHASE_UNIT;
 
     for (let i = 0; i < count; i++) {
@@ -77,7 +81,7 @@ class App {
   }
 
   calculateProfit(totalPrice) {
-    return (totalPrice / (this.#lottos.length * PURCHASE_UNIT)).toFixed(1);
+    return ((totalPrice / (this.#lottos.length * PURCHASE_UNIT)) * 100).toFixed(1);
   }
 }
 
