@@ -11,9 +11,16 @@ const Validation = {
     }
   },
 
+  limitPrice(price) {
+    if (Number(price) > 2000000000) {
+      throw new Error('[ERROR] 로또 금액이 너무 큽니다.');
+    }
+  },
+
   inputLottoPrice(price) {
     Validation.currencyAmount(price);
     Validation.numberType(price);
+    Validation.limitPrice(price);
   },
 };
 
