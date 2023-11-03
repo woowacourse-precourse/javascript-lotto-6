@@ -73,3 +73,49 @@ describe('로또 게임 테스트', () => {
     },
   );
 });
+
+describe('수익 계산 테스트', () => {
+  let auttoLottos;
+  beforeEach(() => {
+    auttoLottos = [
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+    ];
+  });
+
+  test('일치 갯수를 통해 수익을 계산합니다.', () => {
+    const winningLotto = [1, 2, 3, 7, 8, 9];
+    const bonus = 10;
+    const lottoGame = new LottoGame(auttoLottos, winningLotto, bonus);
+    lottoGame.getWinningResult();
+
+    expect(lottoGame.getIncome()).toBe(10000);
+  });
+
+  test('3개이하로 일치하면 수익을 계산하지 않습니다.', () => {
+    const winningLotto = [1, 2, 7, 8, 40, 41];
+    const bonus = 10;
+    const lottoGame = new LottoGame(auttoLottos, winningLotto, bonus);
+    lottoGame.getWinningResult();
+
+    expect(lottoGame.getIncome()).toBe(0);
+  });
+
+  test('5개가 일치하고 보너스 번호가 일치하면 2등 수익입니다.', () => {
+    const winningLotto = [1, 2, 3, 4, 5, 7];
+    const bonus = 6;
+    const lottoGame = new LottoGame(auttoLottos, winningLotto, bonus);
+    lottoGame.getWinningResult();
+
+    expect(lottoGame.getIncome()).toBe(30000000);
+  });
+
+  test('5개가 일치하고 보너스 번호가 일치하지 않으면 3등 수익입니다.', () => {
+    const winningLotto = [1, 2, 3, 4, 5, 7];
+    const bonus = 10;
+    const lottoGame = new LottoGame(auttoLottos, winningLotto, bonus);
+    lottoGame.getWinningResult();
+
+    expect(lottoGame.getIncome()).toBe(1500000);
+  });
+});
