@@ -14,7 +14,7 @@ class LottoController {
       throw new Error(LOTTO_CONTROLLER.ERROR.PRICE_NOT_NUMBER);
     }
 
-    if (!Validator.isDivisibleBy1000(+string)) {
+    if (!Validator.isDivisible(+string, LOTTO_CONTROLLER.TICKET_PRICE)) {
       throw new Error(LOTTO_CONTROLLER.ERROR.PRICE_NOT_DIVISIBLE);
     }
   }

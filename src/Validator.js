@@ -13,8 +13,8 @@ class Validator {
     return VALIDATOR.DIGITS_REGEX.test(string);
   }
 
-  static isDivisibleBy1000(number) {
-    return number % 1000 === 0;
+  static isDivisible(dividend, divisor) {
+    return dividend % divisor === 0;
   }
 }
 

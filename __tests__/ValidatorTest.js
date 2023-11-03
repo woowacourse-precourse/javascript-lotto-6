@@ -34,12 +34,12 @@ describe("Validator 클래스 테스트", () => {
   );
 
   test.each([
-    [100100, false],
-    [100000, true],
+    [25, 5, true],
+    [16, 3, false],
   ])(
-    "숫자가 1000으로 나누어 떨어지면 true, 아니라면 false 반환 - %d",
-    (number, expectedOutput) => {
-      expect(Validator.isDivisibleBy1000(number)).toBe(expectedOutput);
+    "첫 번째 숫자가 두 번째 숫자로 나누어 떨어지면 true, 아니라면 false 반환 - %d",
+    (dividend, divisor, expectedOutput) => {
+      expect(Validator.isDivisible(dividend, divisor)).toBe(expectedOutput);
     }
   );
 });
