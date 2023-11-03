@@ -13,10 +13,11 @@ describe("Lotto 유닛 테스트", () => {
 
   describe("로또 번호 유효성 검증", () => {
     const { LENGTH, RANGE } = LOTTO_RULE;
-    const { NOT_NUMBER, NOT_INTEGER, NOT_LENGTH, NOT_ON_RANGE } =
+    const { NOT_UNIQUE, NOT_NUMBER, NOT_INTEGER, NOT_LENGTH, NOT_ON_RANGE } =
       MESSAGES.ERROR.LOTTO;
 
     const invalidInputsAndErrorMessages = [
+      [[1, 1, 1, 1, 1, 1], NOT_UNIQUE],
       [["안", "녕", "하", "세", "요", "!"], NOT_NUMBER],
       [[1, 2, 3, 4, 5], NOT_LENGTH(LENGTH)],
       [[1.5, 2.3, 3.5, 4.1, 5.7, 4.4], NOT_INTEGER],
