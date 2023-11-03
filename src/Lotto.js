@@ -14,7 +14,7 @@ class Lotto {
   }
 
   print() {
-    Console.print(this.#numbers);
+    Console.print(`"[${this.#numbers.join(', ')}]"`);
   }
 
   returnMatchedCount(winningNumbers, bonusNumber) {
@@ -24,6 +24,13 @@ class Lotto {
         matchedCount++;
       }
     });
+
+    // 6자리가 다 맞으면 +1을 합니다.
+    // 7이상일 경우 보너스 숫자 제외 6개 일치입니다.
+    if (matchedCount === 6) {
+      matchedCount++;
+    }
+
     if (this.#numbers.includes(bonusNumber)) {
       matchedCount++;
     }

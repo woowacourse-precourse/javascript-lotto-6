@@ -10,16 +10,21 @@ class App {
   #bonusNumber;
 
   async play() {
-    await this.#inputPurchaseAmount();
-    Console.print('');
-    this.#purchaseLottos();
-    this.#printAllLottos();
-    Console.print('');
-    await this.#inputWinningNumbers();
-    Console.print('');
-    await this.#inputBonusNumber();
-    Console.print('');
-    this.#calculateWinningStatistics();
+    try {
+      await this.#inputPurchaseAmount();
+      Console.print('');
+      this.#purchaseLottos();
+      this.#printAllLottos();
+      Console.print('');
+      await this.#inputWinningNumbers();
+      Console.print('');
+      await this.#inputBonusNumber();
+      Console.print('');
+      this.#calculateWinningStatistics();
+    } catch (err) {
+      Console.print(err.message);
+      await this.play();
+    }
   }
 
   async #inputPurchaseAmount() {
@@ -62,10 +67,10 @@ class App {
   async #inputWinningNumbers() {
     Console.print(C.LOTTO_NUMBERS_INPUT);
     const winningNumbers = await Console.readLineAsync('');
-    this.#validateWinningNumbers(winningNumbers);
+    await this.#validateWinningNumbers(winningNumbers);
   }
 
-  #validateWinningNumbers(winningNumbers) {
+  async #validateWinningNumbers(winningNumbers) {
     const splitWinningNumbers = winningNumbers.split(',');
     if (splitWinningNumbers.length != 6) {
       throw new Error('[ERROR] 입력된 당첨 번호가 6자리가 아닙니다.');
@@ -117,6 +122,7 @@ class App {
     let threeMatch = 0;
     let fourMatch = 0;
     let fiveMatch = 0;
+    let fiveMatchAndBonusMatch = 0;
     let sixMatch = 0;
 
     this.#lottoList.forEach((lottoNumbers) => {
@@ -133,15 +139,19 @@ class App {
           fiveMatch++;
           break;
         case 6:
+          fiveMatchAndBonusMatch++;
+          break;
+        case 7:
           sixMatch++;
           break;
       }
     });
 
-    Console.print(`${C.THREE_MATCHES} -- ${threeMatch}개`);
-    Console.print(`${C.FOUR_MATCHES} -- ${fourMatch}개`);
-    Console.print(`${C.FIVE_MATCHES} -- ${fiveMatch}개`);
-    Console.print(`${C.SIX_MATCHES} -- ${sixMatch}개`);
+    Console.print(`${C.THREE_MATCHES} - ${threeMatch}개`);
+    Console.print(`${C.FOUR_MATCHES} - ${fourMatch}개`);
+    Console.print(`${C.FIVE_MATCHES} - ${fiveMatch}개`);
+    Console.print(`${C.FIVE_MATCHES_AND_BONUS_MARCH} - ${fiveMatchAndBonusMatch}개`);
+    Console.print(`${C.SIX_MATCHES} - ${sixMatch}개`);
 
     this.#calculateRevenueRate({ threeMatch, fourMatch, fiveMatch, sixMatch });
   }
