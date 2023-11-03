@@ -1,8 +1,8 @@
 /* eslint-disable no-new */
-import Lotto from '../src/Lotto';
-import LottoCompany from '../src/LottoCompany';
+import Lotto from '../src/Models/Lotto';
+import LottoCompany from '../src/Models/LottoCompany';
 
-describe('LottoCommission 객체 테스트', () => {
+describe('LottoCompany 객체 테스트', () => {
   let lottoCompany;
 
   beforeEach(() => {
@@ -10,13 +10,20 @@ describe('LottoCommission 객체 테스트', () => {
   });
 
   test('당첨 번호가 6개가 아니면 예외가 발생한다.', () => {
+    // given
     const input = [1, 2, 3, 4, 5, 6, 7];
-    expect(lottoCompany.setNumbers(input)).toThrow('[ERROR]');
+
+    // when
+    const setNumbers = () => {
+      lottoCompany.numbers = input;
+    };
+    // then
+    expect(setNumbers).toThrow('[ERROR]');
   });
 
   test('당첨 번호 6개를 통해 생성하면, 멤버 numbers가 정상적으로 생성된다.', () => {
     const input = [1, 2, 3, 4, 5, 6];
-    lottoCompany.setNumbers(input);
+    lottoCompany.numbers = input;
     expect(lottoCompany.numbers).toEqual(input);
   });
 
@@ -25,34 +32,39 @@ describe('LottoCommission 객체 테스트', () => {
     const bonusNumber = 10;
 
     // when
+    lottoCompany.numbers = [1, 2, 3, 4, 5, 6];
     lottoCompany.pushBonus(bonusNumber);
 
     // then
     expect(lottoCompany.numbers).toEqual([1, 2, 3, 4, 5, 6, 10]);
   });
 
-  test('보너스 번호를 두 번이상 추가할 경우 무시한다.', () => {
+  test('보너스 번호를 두 번이상 추가할 경우 예외처리한다.', () => {
     // given
+    lottoCompany.numbers = [1, 2, 3, 4, 5, 6];
     const bonusNumber1 = 10;
     const bonusNumber2 = 20;
 
     // when
-    lottoCompany.pushBonus(bonusNumber1);
-    lottoCompany.pushBonus(bonusNumber2);
+    const pushBonusTwice = () => {
+      lottoCompany.pushBonus(bonusNumber1);
+      lottoCompany.pushBonus(bonusNumber2);
+    };
 
     // then
-    expect(lottoCompany.numbers).toEqual([1, 2, 3, 4, 5, 6, 10]);
+    expect(pushBonusTwice).toThrow('[ERROR]');
   });
 
   test('로또 객체를 n개 발행할 수 있다.', () => {
     // given
     const numOfLottos = 2;
+    const anyNumbers = [1, 2, 3, 4, 5, 6];
 
     // when
     const lottos = lottoCompany.issueLottos(numOfLottos);
 
     // then
-    expect(lottos).toEqual([Lotto, Lotto]);
+    expect(lottos).toEqual([new Lotto(anyNumbers), new Lotto(anyNumbers)]);
     expect(lottos).toHaveLength(2);
   });
 
@@ -62,10 +74,16 @@ describe('LottoCommission 객체 테스트', () => {
     const input2 = 46;
     const inputList = [1, 2, 3, 4, 5, 46];
 
-    // when, then
-    expect(lottoCompany.pushBonus(input1)).toThrow('[ERROR]');
-    expect(lottoCompany.pushBonus(input2)).toThrow('[ERROR]');
-    expect(lottoCompany.setNumbers(inputList)).toThrow('[ERROR]');
+    // when
+    const pushSmallNum = () => lottoCompany.pushBonus(input1);
+    const pushLargelNum = () => lottoCompany.pushBonus(input2);
+    const setNumbers = () => {
+      lottoCompany.numbers = inputList;
+    };
+    // then
+    expect(pushSmallNum).toThrow('[ERROR]');
+    expect(pushLargelNum).toThrow('[ERROR]');
+    expect(setNumbers).toThrow('[ERROR]');
   });
 
   test('match 메서드를 호출하면, 로또 번호의 일치 개수가 반환된다.', () => {
