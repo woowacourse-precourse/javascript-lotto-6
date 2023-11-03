@@ -13,6 +13,12 @@ const mockQuestions = inputs => {
   });
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
 describe('purchasePrice()', () => {
   test.each([
     [['1000'], 1000],
@@ -24,22 +30,28 @@ describe('purchasePrice()', () => {
     mockQuestions(input);
 
     //when
-    const result = await ConvertInputTo.purchasePrice();
+    const purchasePrice = await ConvertInputTo.purchasePrice();
 
     //then
-    expect(result).toBe(expectedValue);
+    expect(purchasePrice).toBe(expectedValue);
   });
 
-  test.each([[['10']], [['1001']], [['']], [['  ']]])(
-    '예외처리',
-    async input => {
-      //given
-      mockQuestions(input);
+  test.each([
+    [['10', '10000'], 10000],
+    [['1001', '10001', '1000'], 1000],
+    [['만원', '10000'], 10000],
+  ])('예외처리', async input => {
+    //given
+    mockQuestions(input);
+    const logSpy = getLogSpy();
 
-      //then
-      await expect(ConvertInputTo.purchasePrice()).rejects.toThrow(
-        ERROR_FORMAT
-      );
+    //when
+    const purchasePrice = await ConvertInputTo.purchasePrice();
+
+    //then
+    for (let logIndex = 0; logIndex < logSpy.mock.calls.length - 1; logIndex) {
+      expect(String(call[0])).toMatch(ERROR_FORMAT);
     }
-  );
+    expect(purchasePrice).toBe(expectedValue);
+  });
 });
