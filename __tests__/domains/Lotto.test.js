@@ -1,5 +1,5 @@
 import Lotto from '../../src/domains/Lotto.js';
-import { LottoDuplicatedError, LottoLengthError, LottoRangeError, LottoTypeError } from '../../src/error/Errors';
+import { LottoDuplicatedError, LottoLengthError, LottoRangeError, LottoTypeError } from '../../src/error/CustomErrors.js';
 
 describe('Lotto - 생성 lotto 번호 유효성 검사 테스트', () => {
   test.each([

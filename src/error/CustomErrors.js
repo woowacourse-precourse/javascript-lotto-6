@@ -32,5 +32,22 @@ export class BalanceTypeError extends Error {
   }
 }
 
+export class BonusTypeError extends Error {
+  constructor(input) {
+    super(errorMessage(ERRORS.bonusType, input));
+  }
+}
+
+export class BonusRangeError extends Error {
+  constructor(input) {
+    super(errorMessage(ERRORS.bonusRange, input));
+  }
+}
+
+export class BonusIncludedError extends Error {
+  constructor(input) {
+    super(errorMessage(ERRORS.bonusIncluded, input));
+  }
+}
 
 

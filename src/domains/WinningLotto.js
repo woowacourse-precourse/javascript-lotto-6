@@ -1,6 +1,6 @@
 import REGEXP from '../constants/RegExp.js';
 import { SETTINGS } from '../constants/Settings.js';
-import { LottoRangeError, LottoTypeError, LottoLengthError, LottoDuplicatedError } from '../error/Errors.js';
+import { LottoRangeError, LottoTypeError, LottoLengthError, LottoDuplicatedError, BonusTypeError, BonusRangeError, BonusIncludedError } from '../error/CustomErrors.js';
 import Utils from '../utils/Utils.js';
 
 class WinningLotto {
@@ -32,12 +32,18 @@ class WinningLotto {
 
   setBonus(bonus) {
     this.#validateBonus(bonus);
-    this.#bonus = bonus;
+    this.#bonus = Number(bonus);
   }
 
   #validateBonus(bonus) {
     if (!REGEXP.eachNumber.test(bonus)) {
-      throw new Error('[ERROR]')
+      throw new BonusTypeError(bonus);
+    }
+    if (Number(bonus) < SETTINGS.minimumLottoRange || Number(bonus) > SETTINGS.maximumLottoRange) {
+      throw new BonusRangeError(bonus);
+    }
+    if (this.#numbers.includes(Number(bonus))) {
+      throw new BonusIncludedError(bonus);
     }
   }
 }

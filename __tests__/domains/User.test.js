@@ -1,4 +1,4 @@
-import { BalanceTypeError } from '../../src/error/Errors.js';
+import { BalanceTypeError } from '../../src/error/CustomErrors.js';
 import User from '../../src/domains/User.js';
 
 const mockRandoms = (numbers) => {

@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import REGEXP from '../constants/RegExp.js';
-import { BalanceTypeError } from '../error/Errors.js';
+import { BalanceTypeError } from '../error/CustomErrors.js';
 import Lotto from './Lotto.js';
 import { SETTINGS } from '../constants/Settings.js';
 

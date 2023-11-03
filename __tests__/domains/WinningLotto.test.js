@@ -1,5 +1,5 @@
 import WinningLotto from '../../src/domains/WinningLotto'
-import { LottoDuplicatedError, LottoLengthError, LottoRangeError, LottoTypeError } from '../../src/error/Errors';
+import { LottoDuplicatedError, LottoLengthError, LottoRangeError, LottoTypeError, BonusTypeError, BonusRangeError, BonusIncludedError } from '../../src/error/CustomErrors.js';
 
 describe('WinningLotto - 당첨 번호 유효성 검사 테스트', () => {
   const winning = new WinningLotto();
@@ -9,10 +9,20 @@ describe('WinningLotto - 당첨 번호 유효성 검사 테스트', () => {
     '1,2,3,4,5,1024',
     '45,46,47,48,49,50',
     '100,1,200,2,300,3',
-  ])('당첨 번호는 1이상 45 이하여야 한다.', (numbers) => {
+  ])('당첨 번호는 1 이상 45 이하여야 한다.', (numbers) => {
     const result = () => winning.setNumbers(numbers);
 
     expect(result).toThrowError(LottoRangeError);
+  });
+
+  test.each([
+    '일,2,3,4,5,6',
+    'a,b,c,d,e,f',
+    '-1,0,3.14,5,6,7'
+  ])('당첨 번호는 자연수로 이루어져야 한다.', (numbers) => {
+    const result = () => winning.setNumbers(numbers);
+
+    expect(result).toThrowError(LottoTypeError);
   });
 
   test.each([
@@ -26,21 +36,43 @@ describe('WinningLotto - 당첨 번호 유효성 검사 테스트', () => {
   });
 
   test.each([
-    '일,2,3,4,5,6',
-    'a,b,c,d,e,f',
-    '-1,0,3.14,5,6,7'
-  ])('당첨 번호는 숫자로 이루어져야 한다.', (numbers) => {
-    const result = () => winning.setNumbers(numbers);
-
-    expect(result).toThrowError(LottoTypeError);
-  });
-
-  test.each([
     '1,1,3,4,5,6',
     '30,1,3,2,30,40',
   ])('당첨 번호에 중복되는 숫자는 없어야 한다.', (numbers) => {
     const result = () => winning.setNumbers(numbers);
 
     expect(result).toThrowError(LottoDuplicatedError);
+  });
+});
+
+describe('WinningLotto - 보너스 번호 유효성 검사 테스트', () => {
+  const winning = new WinningLotto();
+
+  beforeEach(() => {
+    winning.setNumbers('1,2,3,4,5,6');
+  });
+
+  test.each([
+    '-1', '3.14', '9.81', 'f', '다섯', ' ',
+  ])('보너스는 자연수로 이루어져야 한다.', (bonus) => {
+    const result = () => winning.setBonus(bonus);
+
+    expect(result).toThrowError(BonusTypeError);
+  });
+
+  test.each([
+    '0', '46', '100', '9999',
+  ])('보너스는 1 이상 45 이하여야 한다.', (bonus) => {
+    const result = () => winning.setBonus(bonus);
+
+    expect(result).toThrowError(BonusRangeError);
+  });
+
+  test.each([
+    '1', '2', '3', '4', '5', '6'
+  ])('보너스는 당첨번호와 중복되지 않아야 한다.', (bonus) => {
+    const result = () => winning.setBonus(bonus);
+
+    expect(result).toThrowError(BonusIncludedError);
   });
 });
