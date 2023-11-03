@@ -1,5 +1,5 @@
 import UserView from './view/UserView.js';
-import Lottos from './Model/Lottos.js';
+import Lottos from './model/Lottos.js';
 import WinningNumbers from './model/WinningNumbers.js';
 import BonusNumber from './model/BonusNumber.js';
 
@@ -40,7 +40,20 @@ class App {
   }
 
   lottoNumberResult = () => {
-      this.lottos.lottoNumberResultCount(this.lottos.purchaseLottoNumbers, this.winningNumber.winningNumber, this.bonusNumber.bonusNumber);
+      const LOTTO_RANK = this.lottos.lottoNumberResultCount(this.lottos.purchaseLottoNumbers, this.winningNumber.winningNumber, this.bonusNumber.bonusNumber);
+      this.resultLotto(LOTTO_RANK);
+  }
+
+  resultLotto = (lottoRank) => {
+    this.lottos.lottoOutputRank.forEach((data, idx) => {
+      this.userView.userOutputLottoResult(data+' - '+lottoRank[idx]+'개');
+    });
+    this.lottoYield(lottoRank);
+  }
+
+  lottoYield = (lottoRank) => {
+    const YIELD = this.lottos.lottoYieldResult(lottoRank.reverse());
+    this.userView.userOutputLottoYield(YIELD);
   }
 
 }

@@ -28,9 +28,9 @@ class Lotto {
         COMPARE_NUMBER_COUNT.push(COMPARE_LOTTO_COUNT);
         COMPARE_BONUS_NUMBER_COUNT.push(LOTTO_ARR.filter(number => number === Number(bonusNumber)).length);
     }
-    const resultRank = this.resultLottoRank(COMPARE_NUMBER_COUNT,COMPARE_BONUS_NUMBER_COUNT);
-    console.log(resultRank);
-    return resultRank;
+    const RESULT_RANK = this.resultLottoRank(COMPARE_NUMBER_COUNT,COMPARE_BONUS_NUMBER_COUNT);
+    const RESULT_RANK_COUNT = this.resultLankCount(RESULT_RANK);
+    return RESULT_RANK_COUNT;
   }
 
   compareLottoNumber = (purchaseLotto, winningNumber) => {
@@ -57,6 +57,15 @@ class Lotto {
     });
     return RESULT_RANK;
   }
+
+  resultLankCount = (resultLank) => {
+    const RESULT_RANK_COUNT_ARR = new Array(5).fill(0);
+    resultLank.forEach((data) => {
+      RESULT_RANK_COUNT_ARR[data-1]++;
+    });
+    return RESULT_RANK_COUNT_ARR.reverse();
+  }
+
 }
 
 export default Lotto;
