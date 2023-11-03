@@ -15,4 +15,11 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+
+  test("로또번호 반환 ", () => {
+    const input = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto(input);
+    const returnNumbers = lotto.getNumbers();
+    expect(returnNumbers).toEqual(input);
+  });
 });
