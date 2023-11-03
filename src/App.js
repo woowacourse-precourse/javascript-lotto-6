@@ -14,7 +14,7 @@ class App {
     );
     const lotto = new Lotto(winningNumbers);
     const bonusNumber = await inputView.readBonusNumberAsync('\n보너스 번호를 입력해 주세요.\n');
-    lotto.getLottoResult(myLottoNumbers, bonusNumber);
+    lotto.getLottoResult(myLottoNumbers, bonusNumber, purchasePrice);
   }
 
   purchaseLottos(lottoCount) {
