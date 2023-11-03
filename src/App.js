@@ -23,3 +23,12 @@ export function lottoCounter(money) {
   const lottocounts = money/price;
   return lottocounts
 }
+
+    
+export async function inputMoneyValidater(input) {
+  if (/^[+]?[1-9]\d*$/.test(input)) {
+    return Number(input);
+  } else {
+    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+  }
+}
