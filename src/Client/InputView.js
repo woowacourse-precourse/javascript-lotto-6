@@ -5,6 +5,7 @@ import { INPUT_MESSAGE } from '../Util/Message.js';
 import DispatcherServlet from '../Server/Spring/MVCpattern/DispatcherServlet.js';
 import HttpRequest from './HttpRequest.js';
 import RESTFULAPI from '../Util/API.js';
+import CONSTANTS from '../Util/Constants.js';
 
 class InputView {
   constructor() {
@@ -15,7 +16,10 @@ class InputView {
     const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.purchaseAmount);
     const httpRequest = HttpRequest(RESTFULAPI.purchaseAmount, purchaseAmount);
     const httpResponse = this.dispatcherServlet.requestAPI(httpRequest);
-    console.log(httpResponse);
+    if (httpResponse.status === CONSTANTS.error) {
+      Console.print(httpResponse.responseData);
+      this.inputPurchaseAmount();
+    }
   }
 }
 
