@@ -36,6 +36,10 @@ class Print {
   static showStatistic(statistic, rankIndex) {
     Console.print(STATISTICS(statistic, rankIndex));
   }
+
+  static showEarningRate(rate) {
+    Console.print(MESSAGE.SHOW_EARNING_RATE(rate));
+  }
 }
 
 export default Print;

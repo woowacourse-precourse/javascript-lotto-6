@@ -6,15 +6,16 @@ import Lotto from "./Lotto.js";
 import Result from "./Result.js";
 
 class App {
+  #sum;
   #lottos;
   #userLotto;
   #bonus;
 
   async play() {
     try {
-      const sum = await Print.getPurchaseSum();
-      this.checkValidPurchaseSum(sum);
-      const amount = Utils.getLottoAmount(sum);
+      this.#sum = await Print.getPurchaseSum();
+      this.checkValidPurchaseSum();
+      const amount = Utils.getLottoAmount(this.#sum);
       this.purchaseLotto(amount);
       await this.getUserLottoInput();
     } catch (error) {
@@ -23,9 +24,9 @@ class App {
     }
   }
 
-  checkValidPurchaseSum(input) {
+  checkValidPurchaseSum() {
     const validate = new Validate();
-    validate.isValidPurchaseSum(input);
+    validate.isValidPurchaseSum(this.#sum);
   }
 
   purchaseLotto(amount) {
@@ -53,8 +54,9 @@ class App {
     try {
       this.#bonus = await Print.getUserBonusNumber();
       this.checkValidBonusNumber(this.#bonus);
-      const statistics = this.calculateResult();
+      const [statistics, earningRate] = this.calculateResult();
       this.showLottoResult(statistics);
+      this.showEarningRate(earningRate);
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.getUserBonusInput();
@@ -73,8 +75,9 @@ class App {
       parseInt(this.#bonus, 10)
     );
     const statistics = result.getStatistics();
+    const earningRate = result.getEarningRate(this.#sum);
 
-    return statistics;
+    return [statistics, earningRate];
   }
 
   showLottoResult(statistics) {
@@ -82,6 +85,10 @@ class App {
     statistics.forEach((statistic, rankIndex) => {
       Print.showStatistic(statistic, rankIndex);
     });
+  }
+
+  showEarningRate(rate) {
+    Print.showEarningRate(rate);
   }
 }
 

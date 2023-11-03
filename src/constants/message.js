@@ -12,6 +12,9 @@ export const MESSAGE = {
   GET_USER_LOTTO: "\n당첨 번호를 입력해 주세요.\n",
   GET_USER_BONUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
   SHOW_RESULT_PHRASE: "\n당첨 통계\n---",
+  SHOW_EARNING_RATE(rate) {
+    return `총 수익률은 ${rate}%입니다.`;
+  },
 };
 
 export const RESULT = [

@@ -1,4 +1,4 @@
-import { INDEX, PRIZE, RANK } from "./constants/rule.js";
+import { INDEX, PRIZE, RANK, UNIT } from "./constants/rule.js";
 
 class Result {
   constructor(lottos, userLotto, bonus) {
@@ -78,6 +78,26 @@ class Result {
     } else if (result.count === RANK.FIFTH) {
       this.statistics[INDEX.FIFTH_RANK] += 1;
     }
+  }
+
+  getEarningRate(sum) {
+    const earningRate = this.calculateEarningRate(sum);
+    return earningRate;
+  }
+
+  calculateEarningRate(sum) {
+    const sumOfPrize = this.calculateSumOfPrize();
+    const earningRate = (sumOfPrize / sum) * 100;
+    const fixedEarningRate = earningRate.toFixed(1);
+    return fixedEarningRate;
+  }
+
+  calculateSumOfPrize() {
+    const sumOfPrize = this.result.reduce((acc, curr) => {
+      return acc + curr.prize;
+    }, 0);
+
+    return sumOfPrize;
   }
 }
 
