@@ -100,7 +100,7 @@ describe('LottoCompany 객체 테스트', () => {
 
   test('로또 객체 배열이 주어지면, 통계를 계산할 수 있다.', () => {
     // given
-    lottoCompany.setNumbers([1, 2, 3, 4, 5, 6]);
+    lottoCompany.numbers = [1, 2, 3, 4, 5, 6];
     const lottos = [
       new Lotto([1, 2, 3, 4, 8, 9]), // 4개 일치
       new Lotto([1, 2, 3, 10, 11, 12]), // 3개 일치
@@ -111,6 +111,7 @@ describe('LottoCompany 객체 테스트', () => {
 
     // then
     expect(statics).toEqual({
+      0: 0,
       1: 0,
       2: 0,
       3: 1,

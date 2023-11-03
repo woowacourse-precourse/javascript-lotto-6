@@ -38,13 +38,34 @@ class LottoCompany {
   }
 
   match(lotto) {
+    console.log('=========');
     let count = 0;
     this.#numbers.forEach((number) => {
-      if (number in lotto.numbers) {
+      if (lotto.numbers.includes(number)) {
+        console.log(number);
+
         count += 1;
       }
     });
     return count;
+  }
+
+  calculateStatics(lottos) {
+    const statics = {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+    };
+    lottos.forEach((lotto) => {
+      const matchedNum = this.match(lotto);
+      statics[matchedNum] += 1;
+    });
+
+    return statics;
   }
 }
 
