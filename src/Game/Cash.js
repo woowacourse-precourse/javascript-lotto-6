@@ -2,7 +2,7 @@ import IO from "../Util/IOHandler.js";
 import Constants from "../Util/Constants.js";
 import Check from "../Util/Check.js";
 
-export default class Capital {
+export default class Cash {
   constructor() {
     this.check = new Check();
   }
