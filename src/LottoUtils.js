@@ -1,12 +1,16 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH } from './constants.js';
-import { isValidAmount, isValidWinnintNumbers } from './Validation.js';
+import {
+  isValidAmount,
+  isValidBonusNumber,
+  isValidWinnintNumbers,
+} from './Validation.js';
 export const inputAmount = async () => {
   try {
     const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     if (!isValidAmount(amount))
-      throw new Error('[ERROR] 숫자가 잘못된 형식입니다.\n');
+      throw new Error('[ERROR] 금액이 잘못된 형식입니다.\n');
     return amount;
   } catch (error) {
     Console.print(error.message);
@@ -33,7 +37,7 @@ export const inputWinningNumbers = async () => {
     return false;
   }
 };
-export const multiInputWin = async () => {
+export const multiInputWiningNumbers = async () => {
   let winningNumbers;
   while (true) {
     winningNumbers = await inputWinningNumbers();
@@ -41,22 +45,23 @@ export const multiInputWin = async () => {
   }
   return winningNumbers;
 };
-export const inputBonusNumber = async () => {
+export const inputBonusNumber = async winningNumbers => {
   try {
     const bonusNumber = await Console.readLineAsync(
       '\n보너스 번호를 입력해 주세요.\n',
     );
-
+    if (!isValidBonusNumber(winningNumbers, bonusNumber))
+      throw new Error('[ERROR] 보너스 번호가 잘못된 형식입니다.\n');
     return bonusNumber;
   } catch (error) {
     Console.print(error.message);
     return false;
   }
 };
-export const multipleInputBonus = async () => {
+export const multiInputBonusNumber = async winningNumbers => {
   let bonusNumber;
   while (true) {
-    bonusNumber = await inputBonusNumber();
+    bonusNumber = await inputBonusNumber(winningNumbers);
     if (bonusNumber) break;
   }
   return bonusNumber;
@@ -88,9 +93,6 @@ export const printLottos = lottos => {
   });
   Console.print('');
 };
-/*export const getWinningNumbers = numbers => {
-  return numbers.split(',');
-};*/
 export const getResult = (lottos, winningNumbers, bonusNumber) => {
   const result = {};
   Object.keys(MATCH).forEach(rank => {

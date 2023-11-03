@@ -7,9 +7,7 @@ class App {
     const LOTTOS = utils.getLottos(LOTTO_COUNT);
     utils.printLottos(LOTTOS);
     const WINNING_NUMBERS = await utils.multiInputWiningNumbers();
-    console.log(WINNING_NUMBERS);
-    //const WINNING_NUMBERS = utils.getWinningNumbers(winningNumbers);
-    const BONUS_NUMBER = await utils.inputBonusNumber();
+    const BONUS_NUMBER = await utils.multiInputBonusNumber(WINNING_NUMBERS);
     const RESULT = utils.getResult(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
     utils.printResult(RESULT);
     const RATEOFRETURNS = utils.getRateOfReturn(AMOUNT, RESULT);

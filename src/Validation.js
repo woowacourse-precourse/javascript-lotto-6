@@ -15,4 +15,10 @@ export const isValidWinnintNumbers = winningNumbers => {
   const duplicateErr = new Set(winNumsArr).size === LOTTO_LENGTH;
   return strErr && rangeErr && duplicateErr;
 };
-/export const isValid
+export const isValidBonusNumber = (winningNumbers, bonusNumber) => {
+  const regex = /\d/;
+  const numErr = regex.test(bonusNumber);
+  const rangeErr = bonusNumber >= MIN && bonusNumber <= MAX;
+  const duplicateErr = !winningNumbers.includes(bonusNumber);
+  return numErr && rangeErr && duplicateErr;
+};
