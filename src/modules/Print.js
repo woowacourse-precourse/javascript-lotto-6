@@ -5,6 +5,7 @@ const LOTTO_FRONT_COVER = '[';
 const LOTTO_BEHIND_COVER = ']';
 class Print {
   static purchasedLotto(lottoArray) {
+    Print.lineBreak();
     Console.print(`${lottoArray.length}${PURCHASED_LOTTO_FORMAT}`);
     lottoArray.forEach(Print.lottoNumbers);
   }

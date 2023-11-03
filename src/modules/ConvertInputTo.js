@@ -7,8 +7,8 @@ const LOTTO_PRICE = 1000;
 const LOTTO_UPPER_NUMBER = 45;
 
 const PURCHASE_PRICE_INPUT_MESSAGE = '구입금액을 입력해 주세요.\n';
-const WINNING_NUMBER_INPUT_MESSAGE = '당첨 번호를 입력해 주세요.\n';
-const BONUS_NUMBER_INPUT_MESSAGE = '보너스 번호를 입력해 주세요.\n';
+const WINNING_NUMBER_INPUT_MESSAGE = '\n당첨 번호를 입력해 주세요.\n';
+const BONUS_NUMBER_INPUT_MESSAGE = '\n보너스 번호를 입력해 주세요.\n';
 
 const MISS_STATE = 0;
 const BONUS_STATE = 0.5;
