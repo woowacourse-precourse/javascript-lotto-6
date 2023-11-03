@@ -67,7 +67,8 @@ class Lotto {
     lottoResult.forEach((amount, index) => {
       if(amount) prizeMoney += amount * money[index];
     })
-    rate = (1- ((prizeMoney - investment)/ investment));
+    rate = ((prizeMoney - investment)/ investment)*100;
+    rate = 1- (Math.round(rate * 10) / 10);
     return rate;
   }
 }
