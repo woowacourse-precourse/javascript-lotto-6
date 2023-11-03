@@ -18,6 +18,10 @@ class App {
   async play() {
     const INPUT_CASH = await this.inputCash();
     this.showLottoNumbers(this.validateCash(INPUT_CASH));
+    const WINNING_NUMBER = await this.inputWinningNumber();
+    this.validateWinningNumber(WINNING_NUMBER);
+    const BOUNUS_NUMBER = await this.inputBonusNumber();
+    MissionUtils.Console.print(WINNING_NUMBER, BOUNUS_NUMBER);
   }
 
   inputCash() {
@@ -50,6 +54,38 @@ class App {
     }
     console.log("");
     return ARRAY_OF_GAMES;
+  }
+
+  inputWinningNumber() {
+    const WINNING_NUMBER = MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGES.INPUT_WINNING_NUMBER
+    );
+    return WINNING_NUMBER;
+  }
+
+  validateWinningNumber(WINNING_NUMBER) {
+    const WINNING_NUMBER_ARRAY = WINNING_NUMBER.split(",");
+    const UNIQUE_ARRAY = [...new Set(WINNING_NUMBER_ARRAY)];
+    if (WINNING_NUMBER_ARRAY.length !== 6) {
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+    if (
+      WINNING_NUMBER_ARRAY.forEach((number) => {
+        number < 1 || number > 45;
+      })
+    ) {
+      throw new Error("[ERROR] 로또 번호는 1 ~ 45 사이의 수여야 합니다.");
+    }
+    if (WINNING_NUMBER_ARRAY !== UNIQUE_ARRAY) {
+      throw new Error("[ERROR] 로또 번호는 중복되지 않는 수여야 합니다.");
+    }
+  }
+
+  inputBonusNumber() {
+    const BOUNUS_NUMBER = MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGES.INPUT_BOUNUS_NUMBER
+    );
+    return BOUNUS_NUMBER;
   }
 }
 
