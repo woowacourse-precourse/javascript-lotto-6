@@ -7,6 +7,7 @@ import playerNumber from "./playerNumber.js";
 import priceCheck from "./priceCheck.js";
 import verificationBounsNumber from "./verficationBonusNumber.js";
 import results from "./results.js";
+import rateOfReturn from "./rateOfReturn.js";
 
 class App {
   async play() {
@@ -26,6 +27,7 @@ class App {
       bounsNumberverification
     );
     results(result);
+    rateOfReturn(price, result);
   }
 }
 
