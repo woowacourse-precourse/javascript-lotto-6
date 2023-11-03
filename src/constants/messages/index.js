@@ -25,6 +25,8 @@ export const MESSAGES = Object.freeze({
         `${BUY_ERROR_PREFIX} ${multiple}의 배수여야 합니다.`,
     },
   },
-
-  BUY: "구입금액을 입력해 주세요.",
+  BUY: {
+    PLACE_HOLDER: "구입금액을 입력해 주세요.",
+    RESULT: (count) => `${count}개를 구매했습니다.`,
+  },
 });
