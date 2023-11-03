@@ -1,0 +1,66 @@
+import { Console } from '@woowacourse/mission-utils';
+import ConvertInputTo from '../../../src/modules/ConvertInputTo';
+
+const ERROR_FORMAT = '[ERROR]';
+const LOTTO_UPPER_NUMBER = 45;
+const MISS_STATE = 0;
+const HIT_STATE = 1;
+
+const mockBoard = winningNumbers => {
+  const board = new Array(LOTTO_UPPER_NUMBER).fill(MISS_STATE);
+  winningNumbers.forEach(number => (board[number] = HIT_STATE));
+
+  return Object.freeze(board);
+};
+
+const mockQuestions = inputs => {
+  let nowIndex = 0;
+  Console.readLineAsync = jest.fn();
+  Console.readLineAsync.mockImplementation(() => {
+    const input = inputs[nowIndex++];
+
+    return Promise.resolve(input);
+  });
+};
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
+describe('bonusNumber()', () => {
+  test.each([
+    [['1'], mockBoard([40, 41, 42, 43, 44, 45]), 1],
+    //[['37'], mockBoard([10, 15, 20, 25, 30, 35]), 37],
+    //[['10'], mockBoard([1, 2, 3, 4, 5, 6]), 10],
+  ])('정상작동', async (input, board, expectedValue) => {
+    //given
+    mockQuestions(input);
+
+    //when
+    const bonusNumber = await ConvertInputTo.bonusNumber(board);
+
+    //then
+    expect(bonusNumber).toBe(expectedValue);
+  });
+
+  test.each([
+    [['51', '40', '31'], mockBoard([40, 41, 42, 43, 44, 45]), 31],
+    [['0', '48', '30'], mockBoard([40, 41, 42, 43, 44, 45]), 30],
+    [['십', '', '10'], mockBoard([40, 41, 42, 43, 44, 45]), 10],
+  ])('예외처리', async (input, mockBoard, expectedValue) => {
+    //given
+    mockQuestions(input);
+
+    const logSpy = getLogSpy();
+
+    //when
+    const bonusNumber = await ConvertInputTo.bonusNumber(mockBoard);
+    //then
+    for (let i = 0; i < logSpy.mock.calls.length - 1; i++) {
+      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_FORMAT);
+    }
+    expect(bonusNumber).toBe(expectedValue);
+  });
+});
