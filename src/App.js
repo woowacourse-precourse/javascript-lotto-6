@@ -1,20 +1,12 @@
-import Input from './Input.js';
-import Output from './Output.js';
-import Util from './Util.js';
+import LottoGame from './LottoGame.js';
 
 class App {
   constructor() {
-    this.purchasedLotto = [];
+    this.lottoGame = new LottoGame();
   }
 
   async play() {
-    const lottoBudget = await Input.getLottoBudget();
-    const purchaseCount = Util.calculatePurchaseCount(lottoBudget);
-    Output.printPurchase(purchaseCount);
-    for (let i = 0; i < purchaseCount; i += 1) {
-      this.purchasedLotto.push(Util.createLottoNumber());
-    }
-    Output.printPurchasedLottoList(this.purchasedLotto);
+    this.lottoGame.start();
   }
 }
 
