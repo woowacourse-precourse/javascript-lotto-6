@@ -105,7 +105,7 @@ class App {
       (acc, key) => acc + WINNING_RESULT_TO_PRICE[key] * totalResult[key],
       0,
     );
-    return ((winningAmount / this.#amount - 1) * 100).toFixed(1);
+    return ((winningAmount / this.#amount) * 100).toFixed(1);
   }
 }
 
