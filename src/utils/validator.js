@@ -1,14 +1,12 @@
-import { amount } from "../constants/amount.js";
+import { LOTTO } from "../constants/lotto.js";
 
 export const Validator = {
   isValidPurchaseAmount(number) {
     return this.isInThousandUnit(number) && this.isNumber(number);
   },
-
   isInThousandUnit(number) {
-    return Number(number) % amount.unit === 0;
+    return Number(number) % LOTTO.price === 0;
   },
-
   isNumber(number) {
     return !isNaN(number);
   },

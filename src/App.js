@@ -3,18 +3,19 @@ import { Validator } from "./utils/validator.js";
 
 class App {
   async play() {
-    const amount = await this.setLottoConfig();
-    // console.log(amount);
+    const { purchaseAmount, lottoArray } = await this.setLottoConfig();
+    View.showPurchaseLotto(purchaseAmount, lottoArray);
   }
 
   async setLottoConfig() {
     const purchaseAmount = await View.getAmount();
 
-    if (Validator.isValidPurchaseAmount(purchaseAmount)) {
-      return purchaseAmount;
+    if (!Validator.isValidPurchaseAmount(purchaseAmount)) {
+      throw Error("[ERROR]");
     }
 
-    throw Error("[ERROR]");
+    const lottoArray = setPurchaseLotto(purchaseAmount);
+    return { purchaseAmount, lottoArray };
   }
 }
 

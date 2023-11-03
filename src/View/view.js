@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import { inputMessage } from "../constants/message.js";
+import { LOTTO } from "../constants/lotto.js";
+import { inputMessage, outputMessage } from "../constants/message.js";
 
 export const View = {
   async getAmount() {
@@ -7,5 +8,14 @@ export const View = {
       inputMessage.requestPurchaseAmount
     );
     return amount;
+  },
+
+  async showPurchaseLotto(purchaseAmount, lottoArray) {
+    Console.print(
+      outputMessage.purchaseConfirmation(purchaseAmount / LOTTO.price)
+    );
+    lottoArray.forEach((lotto) => {
+      Console.print(lotto);
+    });
   },
 };
