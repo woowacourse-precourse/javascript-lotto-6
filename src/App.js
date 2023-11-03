@@ -5,6 +5,7 @@ class App {
   async play() {
     const lottoArray = await ConvertInputTo.lottoArray();
     Print.purchasedLotto(lottoArray);
+    const lottoBoard = await ConvertInputTo.lottoBoard();
   }
 }
 
