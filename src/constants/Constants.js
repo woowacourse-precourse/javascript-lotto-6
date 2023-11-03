@@ -17,6 +17,22 @@ class Constants {
   getLottoNumberCount() {
     return this.#constants.lottoNumberCount;
   }
+
+  getLottoNumberMax() {
+    return this.#constants.lottoNumberMax;
+  }
+
+  getLottoNumberMin() {
+    return this.#constants.lottoNumberMin;
+  }
+
+  getLottoPrice() {
+    return this.#constants.lottoPrice;
+  }
+
+  getLottoPriceUnit() {
+    return this.#constants.lottoPriceUnit;
+  }
 }
 
 // const constants = new Constants();
