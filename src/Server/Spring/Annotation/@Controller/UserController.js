@@ -1,0 +1,21 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-constructor-return */
+/* eslint-disable class-methods-use-this */
+import createUser from '../@Service/createUser.js';
+
+class UserController {
+  static instance = null;
+
+  constructor() {
+    if (!UserController.instance) {
+      UserController.instance = this;
+    }
+    return UserController.instance;
+  }
+
+  requestMapping(purchaseAmount) {
+    return createUser(purchaseAmount);
+  }
+}
+
+export default UserController;
