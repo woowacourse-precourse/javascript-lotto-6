@@ -15,8 +15,8 @@ class App {
 
   checkLottoPrice(lottoPrice) {
     // test code
-    let alphabetPattern = /[a-zA-Z]/;
-    if(alphabetPattern.test(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
+    lottoPrice = Number(lottoPrice);
+    if(isNaN(lottoPrice)) throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
     if (lottoPrice < 1000)
       throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
     if (Number(lottoPrice) % 1000 !== 0)
@@ -46,9 +46,10 @@ class App {
   }
 
   checkBonusNumber(userBonusNumber){
-    if(userBonusNumber === '') throw new Error('[ERROR] 숫자를 입력해주세요.');
-    if(isNaN(userBonusNumber)) throw new Error('[ERROR] 숫자만 입력해주세요.');
-    if(1>Number(userBonusNumber) || Number(userBonusNumber)>45) throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    if(userBonusNumber === '') throw new Error('[ERROR] 숫자를 입력하세요.');
+    userBonusNumber = Number(userBonusNumber);
+    if(isNaN(userBonusNumber)) throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
+    if(1>userBonusNumber || userBonusNumber>45) throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
   }
 
   printLottoResult(lottoResult, lottoRate){
@@ -61,31 +62,34 @@ class App {
   }
 
   async play() {
-    const lottoPrice =
+    try{
+      const lottoPrice =
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
-    this.checkLottoPrice(lottoPrice);
-    this.lottoTicket = this.getLottoTicket(lottoPrice);
-    Console.print(`${this.lottoTicket}개를 구매했습니다.`);
+      this.checkLottoPrice(lottoPrice);
+      this.lottoTicket = this.getLottoTicket(lottoPrice);
+      Console.print(`${this.lottoTicket}개를 구매했습니다.`);
 
-    while (this.countNumber < this.lottoTicket) {
-      const randomNumberArray = this.makeRandomNumber();
-      this.pushArray(randomNumberArray);
-      this.countNumber += 1;
+      while (this.countNumber < this.lottoTicket) {
+        const randomNumberArray = this.makeRandomNumber();
+        this.pushArray(randomNumberArray);
+        this.countNumber += 1;
+      }
+      this.printLottoArray();
+      const userLottoNumber =
+        await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+      const userBonusNumber =
+        await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+      this.checkBonusNumber(userBonusNumber);
+      const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
+      const lotto = new Lotto(lottoNumberArray);
+      let lottoResult = lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
+      const lottoRate = lotto.getLottoRate(lottoResult, lottoPrice);
+      Console.print('당첨 통계');
+      Console.print('---');
+      this.printLottoResult(lottoResult, lottoRate);
+    }catch(error){
+      Console.print(error.message);
     }
-    this.printLottoArray();
-    const userLottoNumber =
-      await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    const userBonusNumber =
-      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-    this.checkBonusNumber(userBonusNumber);
-    const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
-    const lotto = new Lotto(lottoNumberArray);
-    let lottoResult = lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
-    const lottoRate = lotto.getLottoRate(lottoResult, lottoPrice);
-    Console.print('당첨 통계');
-    Console.print('---');
-    this.printLottoResult(lottoResult, lottoRate);
-    
   }
 }
 
