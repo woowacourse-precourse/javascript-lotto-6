@@ -23,7 +23,11 @@ class PublishController {
     const lottos = [];
 
     for(let i = 0; i < quantity; i++) {
-      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBERS_COUNT);
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
+        MIN_LOTTO_NUMBER,
+        MAX_LOTTO_NUMBER,
+        LOTTO_NUMBERS_COUNT
+      );
 
       const lotto = new Lotto(numbers);
       lottos.push(lotto);
