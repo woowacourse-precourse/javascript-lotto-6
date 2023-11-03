@@ -5,22 +5,21 @@ export default class LottoYieldCalculator {
     const lottoNumbers = lotto.getNumbers();
     const { numbers, bonusNumber } = drawnLotto.getFullNumbers();
 
-    const matchCount = this.#getMatchCount(lottoNumbers, {
-      numbers,
-      bonusNumber,
-    });
+    const matchCount = this.#getMatchCount(lottoNumbers, numbers);
+    if (matchCount === 5) {
+      return this.#compareBonusNumber(lottoNumbers, bonusNumber);
+    }
+    return this.#getPrize(matchCount);
   }
 
-  static #getMatchCount(lottoNumbers, { numbers, bonusNumber }) {
-    let matchCount = lottoNumbers.filter((lottoNumber) =>
+  static #getMatchCount(lottoNumbers, numbers) {
+    const matchCount = lottoNumbers.filter((lottoNumber) =>
       numbers.includes(lottoNumber)
     ).length;
-
-    if (matchCount === 5) {
-      if (lottoNumbers.includes(bonusNumber)) {
-        matchCount += 1;
-      }
-    }
     return matchCount;
+  }
+
+  static #compareBonusNumber(lottoNumbers, bonusNumber) {
+    if (lottoNumbers.includes(bonusNumber)) return LOTTO_SETTINGS.PRIZES.SECOND;
   }
 }
