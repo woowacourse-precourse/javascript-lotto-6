@@ -27,7 +27,7 @@ class ErrorCheck {
     ErrorCheck.differentElementArray(arrayFromString);
   }
 
-  static bonusNumbersString(string, lottoBoard) {
+  static bonusNumberString(string, lottoBoard) {
     ErrorCheck.lottoNumberString(string);
     ErrorCheck.differeNumberInLottoBoard(Number(string), lottoBoard);
   }

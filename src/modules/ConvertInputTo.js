@@ -41,6 +41,7 @@ class ConvertInputTo {
       number => (board[number] = HIT_STATE)
     );
 
+    board[await ConvertInputTo.bonusNumber(board)] = BONUS_STATE;
     return Object.freeze(board);
   }
 
