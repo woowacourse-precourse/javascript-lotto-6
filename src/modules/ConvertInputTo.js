@@ -34,7 +34,7 @@ class ConvertInputTo {
     }
   }
 
-  static async numberBoard() {
+  static async lottoBoard() {
     const board = new Array(LOTTO_UPPER_NUMBER + 1).fill(MISS_STATE);
     (await ConvertInputTo.winningNumbersArray()).forEach(
       number => (board[number] = HIT_STATE)

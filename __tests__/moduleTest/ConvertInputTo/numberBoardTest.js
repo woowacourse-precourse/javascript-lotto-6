@@ -29,7 +29,7 @@ const linearBoardMaker = winningNumbers => {
   return Object.freeze(board);
 };
 
-describe('numberBoard()', () => {
+describe('lottoBoard()', () => {
   test.each([
     [['1,2,3,4,5,6'], linearBoardMaker([1, 2, 3, 4, 5, 6])],
     [['4,5,6,7,8,9'], linearBoardMaker([4, 5, 6, 7, 8, 9])],
@@ -38,7 +38,7 @@ describe('numberBoard()', () => {
     mockQuestions(input);
 
     //when
-    const result = await ConvertInputTo.numberBoard();
+    const result = await ConvertInputTo.lottoBoard();
     //then
     expect(result).toEqual(expectedValue);
   });
@@ -56,6 +56,6 @@ describe('numberBoard()', () => {
   //   mockQuestions(input);
 
   //   //then
-  //   await expect(ConvertInputTo.numberBoard()).toThrow(ERROR_FORMAT);
+  //   await expect(ConvertInputTo.lottoBoard()).toThrow(ERROR_FORMAT);
   // });
 });
