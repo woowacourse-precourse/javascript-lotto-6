@@ -22,6 +22,8 @@ const processLottoPurchase = async () => {
   const purchasedLottoAmount = await requirePurchasedLottoAmount();
   const lottoNumbers = requestLottoNumbers(purchasedLottoAmount);
 
+  lottoGameConsole.output.printLottoNumbers(lottoNumbers);
+
   return { purchasedLottoAmount, lottoNumbers };
 };
 
