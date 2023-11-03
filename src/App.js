@@ -67,44 +67,22 @@ class App {
     try {
       switch (this.#status) {
         case "purchase": {
-          const amount = await this.#ui.askAmountForPurchase();
-          this.#amount = amount;
-
-          const lotteries = this.#lottoMachine.sell(this.#amount);
-          this.#lotteries = lotteries;
-
-          this.#ui.linebreak();
-
-          this.#ui.printLottoPurchaseInformation(
-            this.#lotteries.map((lotto) => lotto.getInformation()),
-          );
-
+          await this.#purchaseEffect();
           await this.#transition("winningNumberSetting");
           break;
         }
         case "winningNumberSetting": {
-          const winningNumbers = await this.#ui.askWinningNumbers();
-          this.#winningNumbers = winningNumbers;
-          this.#transition("bonusNumberSetting");
+          await this.#winningNumberSettingEffect();
+          await this.#transition("bonusNumberSetting");
           break;
         }
         case "bonusNumberSetting": {
-          const bonusNumber = await this.#ui.askBonusLottoNumber(
-            this.#winningNumbers,
-          );
-
-          const matchResults = this.#lotteries.map((lotto) =>
-            lotto.checkWinningNumbers(this.#winningNumbers, bonusNumber),
-          );
-          this.#matchResults = matchResults;
-
-          this.#transition("result");
+          await this.#bonusNumberSettingEffect();
+          await this.#transition("result");
           break;
         }
         case "result": {
-          const totalResult = reduceToTotalResult(this.#matchResults);
-          const profitRate = this.#calculateProfitRate(totalResult);
-          this.#ui.printStatistics(totalResult, profitRate);
+          await this.#resultEffect();
           break;
         }
         default: {
@@ -119,6 +97,41 @@ class App {
         throw error;
       }
     }
+  }
+
+  async #purchaseEffect() {
+    const amount = await this.#ui.askAmountForPurchase();
+    this.#amount = amount;
+
+    const lotteries = this.#lottoMachine.sell(this.#amount);
+    this.#lotteries = lotteries;
+
+    this.#ui.linebreak();
+
+    this.#ui.printLottoPurchaseInformation(
+      this.#lotteries.map((lotto) => lotto.getInformation()),
+    );
+  }
+
+  async #winningNumberSettingEffect() {
+    const winningNumbers = await this.#ui.askWinningNumbers();
+    this.#winningNumbers = winningNumbers;
+  }
+
+  async #bonusNumberSettingEffect() {
+    const bonusNumber = await this.#ui.askBonusLottoNumber(
+      this.#winningNumbers,
+    );
+    const matchResults = this.#lotteries.map((lotto) =>
+      lotto.checkWinningNumbers(this.#winningNumbers, bonusNumber),
+    );
+    this.#matchResults = matchResults;
+  }
+
+  async #resultEffect() {
+    const totalResult = reduceToTotalResult(this.#matchResults);
+    const profitRate = this.#calculateProfitRate(totalResult);
+    this.#ui.printStatistics(totalResult, profitRate);
   }
 
   #calculateProfitRate(totalResult) {
