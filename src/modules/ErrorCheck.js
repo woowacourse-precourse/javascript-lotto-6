@@ -5,8 +5,9 @@ const LOTTO_NUMBER_UPPER = 45;
 
 const NOT_AN_INTEGER_ERROR_MESSAGE = '[ERROR] 정수가 아닙니다.';
 const NOT_MULTIPLES_ERROR_MESSAGE = '[ERROR] 로또를 깔끔하게 살 수 없습니다.';
-const WRONG_LENGTH_ERROR_MESSAGE = '[ERROR] 잘못된 길이입니다';
-const WRONG_RANGE_NUMBER_ERROR_MESSAGE = '[ERROR] 범위 바깥의 숫자입니다';
+const WRONG_LENGTH_ERROR_MESSAGE = '[ERROR] 잘못된 길이입니다.';
+const WRONG_RANGE_NUMBER_ERROR_MESSAGE = '[ERROR] 범위 바깥의 숫자입니다.';
+const SAME_ELEMENT_IN_ARRAY_ERROR_MESSAGE = '[ERROR] 중복된 요소가 존재합니다.';
 
 class ErrorCheck {
   static purchasePrice(inputString, lottoPrice) {
@@ -25,6 +26,7 @@ class ErrorCheck {
         LOTTO_NUMBER_UPPER
       );
     });
+    ErrorCheck.differentElementArray(arrayFromString);
   }
 
   static positiveIntegerString(inputString) {
@@ -45,6 +47,11 @@ class ErrorCheck {
   static numberInRange(number, lower, upper) {
     if (number < lower) throw new Error(WRONG_RANGE_NUMBER_ERROR_MESSAGE);
     if (upper < number) throw new Error(WRONG_RANGE_NUMBER_ERROR_MESSAGE);
+  }
+
+  static differentElementArray(array) {
+    if (array.length !== new Set(array).size)
+      throw new Error(SAME_ELEMENT_IN_ARRAY_ERROR_MESSAGE);
   }
 }
 
