@@ -27,7 +27,7 @@ class App {
 
   async #transition(status) {
     this.#status = status;
-    this.#ui.println();
+    this.#ui.linebreak();
     await this.#transitionEffect();
   }
 
@@ -45,7 +45,7 @@ class App {
       }
     } catch (error) {
       if (error instanceof AppError && error.type === ERROR_TYPE.inputError) {
-        this.#ui.println(error.message);
+        this.#ui.print(error.message);
         this.#transitionEffect();
       } else {
         throw error;

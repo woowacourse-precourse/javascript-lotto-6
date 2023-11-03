@@ -41,8 +41,8 @@ class UI {
     Console.print(message);
   }
 
-  println(message = "") {
-    Console.print(`${message}\n`);
+  linebreak() {
+    this.print();
   }
 
   async askAmountForPurchase() {
