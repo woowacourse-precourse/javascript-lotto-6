@@ -61,8 +61,26 @@ class Lotto {
   }
 
   // 수익률 계산
-  calculateRateOfReturn(구매금액, result) {
-    //
+  // 총 당첨 금액 계산 + 총 수익률 계산 및 출력
+  calculateTotalPrizeAmount() {
+    return Object.keys(this.result).reduce((total, key) => {
+      const count = this.result[key];
+      const prizeInfo = MATCH_COUNT_PRIZES.get(key);
+
+      if (prizeInfo) total += prizeInfo.prize * count;
+      return total;
+    }, 0);
+  }
+
+  calculateReturnRate(totalPurchaseAmount) {
+    const totalPrizeAmount = this.calculateTotalPrizeAmount();
+    const totalProfit = totalPurchaseAmount - totalPrizeAmount;
+    const totalReturnRate = 100 - (totalProfit / totalPurchaseAmount) * 100;
+    this.printTotalReturnRate(totalReturnRate);
+  }
+
+  printTotalReturnRate(totalReturnRate) {
+    Console.print(OUTPUT_MESSAGE.TOTAL_RETURN_RATE(totalReturnRate));
   }
 }
 
