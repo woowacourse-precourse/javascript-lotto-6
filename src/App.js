@@ -1,4 +1,5 @@
 import InputManager from "./functions/InputManager.js";
+import OutputManager from "./functions/OutputManager.js";
 import {
   devideMoneyForLotto,
   profitRate,
@@ -14,7 +15,7 @@ import {
   countMatchingBalls,
   recordRanks,
 } from "./utils/condition.js";
-import OutputManager from "./functions/OutputManager.js";
+import Lotto from "./Lotto.js";
 
 class App {
   constructor() {
@@ -23,37 +24,42 @@ class App {
   }
 
   async play() {
-    const moneyForLotto = await this.inputManager.moneyForLotto();
-    const moneyForLottoToNumber = stringToNumber(moneyForLotto);
+    try {
+      const moneyForLotto = await this.inputManager.moneyForLotto();
+      const moneyForLottoToNumber = stringToNumber(moneyForLotto);
 
-    const countsOfLotto = devideMoneyForLotto(moneyForLottoToNumber);
-    const countsOfLottoToNumber = stringToNumber(countsOfLotto);
+      const countsOfLotto = devideMoneyForLotto(moneyForLottoToNumber);
+      this.outputManager.showPurchaseAmount(countsOfLotto);
+      const countsOfLottoToNumber = stringToNumber(countsOfLotto);
 
-    const purchasedLotto = this.outputManager.showLottoNumbers(
-      countsOfLottoToNumber
-    );
-    this.outputManager.showEmptyLine();
+      const purchasedLotto = this.outputManager.showLottoNumbers(
+        countsOfLottoToNumber
+      );
+      this.outputManager.showEmptyLine();
 
-    const winningBalls = await this.inputManager.winningBallNumbers();
-    const winningBallsArr = devideIntoCommas(winningBalls);
-    const winningBallsToNumberArr = stringsToNumbers(winningBallsArr);
+      const winningBalls = await this.inputManager.winningBallNumbers();
+      const winningBallsArr = devideIntoCommas(winningBalls);
+      const winningBallsToNumberArr = stringsToNumbers(winningBallsArr);
 
-    const bonusBall = await this.inputManager.bonusBallNumbers();
-    const bonusBallToNumber = stringToNumber(bonusBall);
+      const bonusBall = await this.inputManager.bonusBallNumbers();
+      const bonusBallToNumber = stringToNumber(bonusBall);
 
-    const countMatchArr = countMatchingBalls(
-      purchasedLotto,
-      winningBallsToNumberArr
-    );
-    const checkBonusArr = checkBonusBall(purchasedLotto, bonusBallToNumber);
+      const countMatchArr = countMatchingBalls(
+        purchasedLotto,
+        winningBallsToNumberArr
+      );
+      const checkBonusArr = checkBonusBall(purchasedLotto, bonusBallToNumber);
 
-    // +1을 해서 1등~N등까지 그대로 적용할 수 있도록 하기(시작값 = 0)
-    const rankCounts = recordRanks(countMatchArr, checkBonusArr);
-    const winningPrizeSum = sumOfWinning(rankCounts);
+      // +1을 해서 1등~N등까지 그대로 적용할 수 있도록 하기(시작값 = 0)
+      const rankCounts = recordRanks(countMatchArr, checkBonusArr);
+      const winningPrizeSum = sumOfWinning(rankCounts);
 
-    const earnRate = profitRate(moneyForLotto, winningPrizeSum);
+      const earnRate = profitRate(moneyForLotto, winningPrizeSum);
 
-    this.outputManager.showStatistics(rankCounts, earnRate);
+      this.outputManager.showStatistics(rankCounts, earnRate);
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
