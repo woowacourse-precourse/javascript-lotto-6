@@ -16,6 +16,14 @@ const printFormat = {
     return `${count}개를 구매했습니다.
 ${formattedLottoInfos}`;
   },
+  statistics: (totalLottoResult, profitRate) => `당첨 통계
+---
+3개 일치 (5,000원) - ${totalLottoResult.three}개
+4개 일치 (50,000원) - ${totalLottoResult.four}개
+5개 일치 (1,500,000원) - ${totalLottoResult.five}개
+5개 일치, 보너스 볼 일치 (30,000,000원) - ${totalLottoResult.fiveBonus}개
+6개 일치 (2,000,000,000원) - ${totalLottoResult.six}개
+총 수익률은 ${profitRate}%입니다.`,
 };
 
 class UI {
@@ -58,6 +66,10 @@ class UI {
 
   printLottoPurchaseInformation(lottoInformations) {
     this.#print(printFormat.purchaseInformation(lottoInformations));
+  }
+
+  printStatistics(totalLottoResult, profitRate) {
+    this.#print(printFormat.statistics(totalLottoResult, profitRate));
   }
 }
 
