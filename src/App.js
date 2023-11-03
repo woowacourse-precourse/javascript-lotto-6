@@ -62,7 +62,13 @@ export async function winnningNumberValidater(input) {
 export async function winnningNumberDuplicateValidater(input) {
   for (let i = 0; i < input.length-1; i++) {
     if (input[i] === input[i+1]) {
-      throw new Error("[ERROR] 자동차 이름이 중복되었습니다.")
+      throw new Error("[ERROR] 로또 번호가 중복되었습니다.")
     }
+  }
+}
+
+export async function winnningNumberRangeValidater(number) {
+  if (number > 45) {
+    throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
   }
 }
