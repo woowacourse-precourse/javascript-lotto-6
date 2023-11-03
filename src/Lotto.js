@@ -12,18 +12,18 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
     if (this.checkRange(numbers))
-      throw new Error('[ERROR] 1~45 사이의 숫자를 입력하세요.');
-    const numbersSet = getNumbersSet(numbers);
+      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    const numbersSet = this.getNumbersSet(numbers);
     if ([...numbersSet].length !== 6)
       throw new Error('[ERROR] 중복되지 않는 숫자를 입력하세요');
   }
 
   checkRange(numbers) {
-    return numbers.filter(value => 1 <= value && value <= 45).length;
+    return numbers.filter(value => 1 > value || value > 45).length;
   }
 
   getNumbersSet(numbers) {
-    return new Set(numbers.split('').map(Number));
+    return new Set(numbers.map(Number));
   }
   // TODO: 추가 기능 구현
 }
