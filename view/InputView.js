@@ -14,6 +14,13 @@ class InputView {
     this.price = price;
     Console.print(this.price);
   }
+
+  // 당첨 번호 입력
+  async getWinNum() {
+    const winNum = await Console.readLineAsync(PromptMessage.ENTER_WIN_NUM);
+    this.winNum = winNum.split(',').map((e) => parseInt(e.trim(), 10));
+    Console.print(this.winNum);
+  }
 }
 
 export default InputView;
