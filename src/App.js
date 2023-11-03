@@ -8,17 +8,31 @@ class App {
   }
 
   async inputMoney() {
+    let money;
     try {
-      const money = await Console.readLineAsync(LOTTO_MESSAGE.MONEY_INPUT);
+      money = await Console.readLineAsync(LOTTO_MESSAGE.MONEY_INPUT);
       if (money % 1000 !== 0) {
-        throw new Error(ERROR_MESSAGE);
+        throw new Error(ERROR_MESSAGE.MONEY);
       }
-    } catch (error) {}
+    } catch (error) {
+      Console.print(error.message);
+      this.inputMoney();
+    }
+    return money;
   }
 
   async play() {
     const money = await this.inputMoney();
-    console.log(this.createLotto());
+    const lottoNumber = money / 1000;
+    Console.print(`${lottoNumber}개를 구매했습니다`);
+    for (let i = 0; i < lottoNumber; i += 1) {
+      const lotto = this.createLotto();
+      Console.print(lotto);
+    }
+    const winningNumbers = await Console.readLineAsync(LOTTO_MESSAGE.WINNING_INPUT);
+    const bonusNumbers = await Console.readLineAsync(LOTTO_MESSAGE.BONUS_INPUT);
+    console.log(winningNumbers, bonusNumbers);
+    Console.print(LOTTO_MESSAGE.WINNING_STATISTICS);
   }
 }
 

@@ -10,7 +10,7 @@ const ERROR_MESSAGE = {
   NUMBER: `${ERROR_PREFIX} 로또 번호의 개수는 6개 입니다`,
   RANGE: `${ERROR_PREFIX} 로또 번호는 1에서 45 사이의 숫자여야 합니다`,
   NOT_INTEGER: `${ERROR_PREFIX} 로또 번호는 정수여야 합니다`,
-  MONEY: `${ERROR_PREFIX} 로또 번호는 정수여야 합니다`,
+  MONEY: `${ERROR_PREFIX} 구입 금액은 1000원 단위로 입력해주세요`,
 };
 
 export { LOTTO_MESSAGE, ERROR_MESSAGE };
