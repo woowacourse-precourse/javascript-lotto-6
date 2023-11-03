@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import InputValidator from "./InputValidator";
+import InputValidator from "./InputValidator.js";
 
 const TEXT = {
   askAmount: "구입금액을 입력해 주세요.",

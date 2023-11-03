@@ -1,4 +1,4 @@
-import AppError from "./AppError";
+import AppError from "./AppError.js";
 
 const ROTTO_NUMBER_LENGTH = 6;
 
