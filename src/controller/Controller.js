@@ -13,10 +13,10 @@ class Controller {
       const priceInput = await this.view.readLine("구입금액을 입력해 주세요.\n");
       this.view.printLotto(this.model.makeLotto(priceInput));
 
-      const winLottoNumberInput = await this.view.readLine("\n당첨 번호를 입력해 주세요.\n");
+      const winLottoNumbersInput = await this.view.readLine("\n당첨 번호를 입력해 주세요.\n");
       const winLottoBonusNumberInput = await this.view.readLine("\n보너스 번호를 입력해 주세요.\n");
 
-      this.startLotto(winLottoNumberInput, winLottoBonusNumberInput);
+      this.startLottoHandler(winLottoNumbersInput, winLottoBonusNumberInput);
     } catch (err) {
       this.view.print(err.message);
     }

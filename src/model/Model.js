@@ -1,6 +1,6 @@
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
-import { validatePriceInput } from "../utils/vaildateInput.js";
+import { validatePriceInput, validateWinLottoInput } from "../utils/vaildateInput.js";
 
 class Model {
   makeLotto(priceInput) {
@@ -16,7 +16,9 @@ class Model {
     return lotties;
   }
 
-  compareWinLotto(winNumInput, winBonusInput) {}
+  compareWinLotto(winNumsInput, winBonusInput) {
+    const winLottoNums = validateWinLottoInput(winNumsInput, winBonusInput);
+  }
 }
 
 export default Model;
