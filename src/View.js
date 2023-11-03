@@ -25,7 +25,12 @@ class View {
 
   static async askWinningNum() {
     const askWinning = new WinningNum();
-    await askWinning.askWinningNum();
+    return await askWinning.askWinningNum();
+  }
+
+  static async askBonusNum() {
+    const askBonus = new WinningNum();
+    return await askBonus.askBonusNum();
   }
 }
 

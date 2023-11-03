@@ -11,7 +11,8 @@ class App {
     const lottoTickets = new LottoTickets();
     this.lottoTickets = lottoTickets.generateLottoTickets(numberOfTickets);
     View.showTickets(this.lottoTickets);
-    View.askWinningNum();
+    const resultWinNum = View.askWinningNum();
+    const resultBonusNum = View.askBonusNum();
   }
 }
 
