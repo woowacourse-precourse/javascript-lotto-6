@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import ErrorCheck from './ErrorCheck.js';
+import Get from './Get.js';
 
 const LOTTO_PRICE = 1000;
 const LOTTO_UPPER_NUMBER = 45;
@@ -29,7 +30,7 @@ class ConvertInputTo {
 
   static async numberBoard() {
     const board = new Array(LOTTO_UPPER_NUMBER + 1).fill(MISS_STATE);
-    await ConvertInputTo.winningNumbersArray().forEach(
+    (await ConvertInputTo.winningNumbersArray()).forEach(
       number => (board[number] = HIT_STATE)
     );
 
