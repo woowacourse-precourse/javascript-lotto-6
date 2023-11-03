@@ -37,8 +37,12 @@ class UI {
     return Console.readLineAsync(`${message}\n`);
   }
 
-  #print(message = "") {
+  print(message = "") {
     Console.print(message);
+  }
+
+  println(message = "") {
+    Console.print(`${message}\n`);
   }
 
   async askAmountForPurchase() {
@@ -65,11 +69,11 @@ class UI {
   }
 
   printLottoPurchaseInformation(lottoInformations) {
-    this.#print(printFormat.purchaseInformation(lottoInformations));
+    this.print(printFormat.purchaseInformation(lottoInformations));
   }
 
   printStatistics(totalLottoResult, profitRate) {
-    this.#print(printFormat.statistics(totalLottoResult, profitRate));
+    this.print(printFormat.statistics(totalLottoResult, profitRate));
   }
 }
 

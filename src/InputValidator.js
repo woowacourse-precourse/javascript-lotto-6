@@ -1,4 +1,4 @@
-import AppError from "./AppError.js";
+import AppError, { ERROR_TYPE } from "./AppError.js";
 
 const ROTTO_NUMBER_LENGTH = 6;
 
@@ -18,32 +18,47 @@ class InputValidator {
 
   validateAmount(input) {
     if (!this.#REGEX.number.test(input)) {
-      throw new AppError(this.#ERROR_MESSAGE.amount);
+      throw new AppError(this.#ERROR_MESSAGE.amount, ERROR_TYPE.inputError);
     }
     if (input.slice(-3) !== "000") {
-      throw new AppError(this.#ERROR_MESSAGE.unit);
+      throw new AppError(this.#ERROR_MESSAGE.unit, ERROR_TYPE.inputError);
     }
   }
 
   validateWinningNumbers(input) {
     const nums = input.split(",");
     if (nums.findIndex((num) => !this.#REGEX.lottoNumber.test(num)) !== -1) {
-      throw new AppError(this.#ERROR_MESSAGE.invalidLottoNumber);
+      throw new AppError(
+        this.#ERROR_MESSAGE.invalidLottoNumber,
+        ERROR_TYPE.inputError,
+      );
     }
     if (nums.length !== ROTTO_NUMBER_LENGTH) {
-      throw new AppError(this.#ERROR_MESSAGE.invalidLottoLength);
+      throw new AppError(
+        this.#ERROR_MESSAGE.invalidLottoLength,
+        ERROR_TYPE.inputError,
+      );
     }
     if (new Set(nums).size < ROTTO_NUMBER_LENGTH) {
-      throw new AppError(this.#ERROR_MESSAGE.duplication);
+      throw new AppError(
+        this.#ERROR_MESSAGE.duplication,
+        ERROR_TYPE.inputError,
+      );
     }
   }
 
   validateBonusNumber(input, winningNumbers) {
     if (!this.#REGEX.lottoNumber.test(input)) {
-      throw new AppError(this.#ERROR_MESSAGE.invalidLottoNumber);
+      throw new AppError(
+        this.#ERROR_MESSAGE.invalidLottoNumber,
+        ERROR_TYPE.inputError,
+      );
     }
     if (winningNumbers.includes(Number(input))) {
-      throw new AppError(this.#ERROR_MESSAGE.duplication);
+      throw new AppError(
+        this.#ERROR_MESSAGE.duplication,
+        ERROR_TYPE.inputError,
+      );
     }
   }
 }
