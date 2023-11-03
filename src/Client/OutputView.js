@@ -10,6 +10,10 @@ const OutputView = {
   outputUserLotto(userLotto) {
     userLotto.forEach(lotto => Console.print(lotto));
   },
+
+  outputError(error) {
+    Console.print(error);
+  },
 };
 
 export default OutputView;

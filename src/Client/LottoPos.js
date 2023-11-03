@@ -17,22 +17,39 @@ class LottoPos {
   }
 
   // eslint-disable-next-line consistent-return
-  async handlerPurchaseAmount() {
+  handlerPurchaseAmount = async () => {
     const purchaseAmount = await InputView.inputPurchaseAmount();
-    const httpRequest = HttpRequest(RESTFULAPI.purchaseAmount, purchaseAmount);
+    const responseData = await this.ajax(
+      RESTFULAPI.purchaseAmount,
+      purchaseAmount,
+      this.handlerPurchaseAmount,
+    );
+    if (responseData) {
+      OutputView.outputPurchaseCount(responseData.length);
+      OutputView.outputUserLotto(responseData);
+    }
+  };
+
+  inputWinningNumber = async () => {
+    const winningNumber = await InputView.inputWinningNumber();
+    // const responseData = await this.ajax(
+    //   RESTFULAPI.setWinningNumber,
+    //   winningNumber,
+    //   this.inputWinningNumber,
+    // );
+    // console.log(responseData);
+  };
+
+  ajax = async (url, data, callback) => {
+    const httpRequest = HttpRequest(url, data);
     const httpResponse = this.dispatcherServlet.requestAPI(httpRequest);
     if (httpResponse.status === CONSTANTS.error) {
-      Console.print(httpResponse.responseData);
-      return await this.handlerPurchaseAmount();
+      OutputView.outputError(httpResponse.responseData);
+      return await callback();
     }
     const responseData = httpResponse.responseData.data;
-    OutputView.outputPurchaseCount(responseData.length);
-    OutputView.outputUserLotto(responseData);
-  }
-
-  async inputWinningNumber() {
-    const winningNumber = await Console.readLineAsync(INPUT_MESSAGE.winningNumber);
-  }
+    return responseData;
+  };
 }
 
 export default LottoPos;
