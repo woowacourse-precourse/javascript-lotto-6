@@ -67,7 +67,6 @@ describe("로또 클래스 테스트", () => {
 
     // when
     const lotto = createLotto(input);
-    const a = lotto.getNumbers();
 
     // then
     expect(lotto.getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);

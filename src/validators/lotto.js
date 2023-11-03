@@ -1,3 +1,6 @@
+import ERROR from "../constants/error.js";
+import messageFormatter from "../utils/messageFormatter.js";
+
 /**
  *
  * @param {number[]} numbers
@@ -5,7 +8,7 @@
  */
 const validateNumbersLength = (numbers, length) => {
   if (numbers.length !== length) {
-    throw new Error(`[ERROR] 로또 번호는 ${length}개여야 합니다.`);
+    throw new Error(messageFormatter.error.lottoNumbersLength(length));
   }
 };
 
@@ -15,14 +18,17 @@ const validateNumbersLength = (numbers, length) => {
  * @param {number} startInclusive
  * @param {number} endInclusive
  */
-const validateNumberRange = (numbers, startInclusive, endInclusive) => {
+const validateNumbersRange = (numbers, startInclusive, endInclusive) => {
   const isOverRange = numbers.some(
     (number) => number < startInclusive || number > endInclusive,
   );
 
   if (isOverRange) {
     throw new Error(
-      `[ERROR] 로또 번호의 숫자 범위는 ${startInclusive}~${endInclusive} 입니다.`,
+      messageFormatter.error.lottoNumbersIsOverRange(
+        startInclusive,
+        endInclusive,
+      ),
     );
   }
 };
@@ -31,16 +37,18 @@ const validateNumberRange = (numbers, startInclusive, endInclusive) => {
  *
  * @param {number[]} numbers
  */
-const validateNumberIsDuplicate = (numbers) => {
+const validateNumbersDuplicate = (numbers) => {
   const isDuplicate = Array.from(new Set(numbers)).length !== numbers.length;
 
   if (isDuplicate) {
-    throw new Error("[ERROR] 로또 번호는 중복되지 않아야 합니다.");
+    throw new Error(
+      messageFormatter.error.default(ERROR.lottoNumbersDuplicate),
+    );
   }
 };
 
 export {
   validateNumbersLength,
-  validateNumberRange,
-  validateNumberIsDuplicate,
+  validateNumbersRange,
+  validateNumbersDuplicate,
 };

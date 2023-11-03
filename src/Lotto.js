@@ -1,13 +1,9 @@
+import LOTTO from "./constants/lotto.js";
 import {
-  validateNumberIsDuplicate,
-  validateNumberRange,
+  validateNumbersDuplicate,
+  validateNumbersRange,
   validateNumbersLength,
-} from "./validators/lottoValidator.js";
-
-const LOTTO_LENGTH = 6;
-
-const LOTTO_START_INCLUSIVE = 1;
-const LOTTO_END_INCLUSIVE = 45;
+} from "./validators/lotto.js";
 
 class Lotto {
   #numbers;
@@ -30,9 +26,13 @@ class Lotto {
    * @param {number[]} numbers
    */
   #validate(numbers) {
-    validateNumbersLength(numbers, LOTTO_LENGTH);
-    validateNumberRange(numbers, LOTTO_START_INCLUSIVE, LOTTO_END_INCLUSIVE);
-    validateNumberIsDuplicate(numbers);
+    validateNumbersLength(numbers, LOTTO.length);
+    validateNumbersRange(
+      numbers,
+      LOTTO.range.startInclusive,
+      LOTTO.range.endInclusive,
+    );
+    validateNumbersDuplicate(numbers);
   }
 }
 
