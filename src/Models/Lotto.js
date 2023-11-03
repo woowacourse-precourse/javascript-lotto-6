@@ -8,6 +8,7 @@ class Lotto {
     this.#validateSize(numbers);
     this.#validateDuplicate(numbers);
     this.#validateRange(numbers);
+    this.#numbers.map((number) => Number(number));
     this.#numbers = this.#sortNumbers(numbers);
   }
 
