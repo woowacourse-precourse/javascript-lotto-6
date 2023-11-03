@@ -6,8 +6,8 @@ export default class LottoYieldCalculator {
     const { numbers, bonusNumber } = drawnLotto.getFullNumbers();
 
     const matchCount = this.#getMatchCount(lottoNumbers, numbers);
-    if (matchCount === 5) {
-      return this.#compareBonusNumber(lottoNumbers, bonusNumber);
+    if (matchCount === 5 && lottoNumbers.includes(bonusNumber)) {
+      return LOTTO_SETTINGS.PRIZES.SECOND;
     }
     return this.#getPrize(matchCount);
   }
@@ -34,9 +34,5 @@ export default class LottoYieldCalculator {
       default:
         return 0;
     }
-  }
-
-  static #compareBonusNumber(lottoNumbers, bonusNumber) {
-    if (lottoNumbers.includes(bonusNumber)) return LOTTO_SETTINGS.PRIZES.SECOND;
   }
 }
