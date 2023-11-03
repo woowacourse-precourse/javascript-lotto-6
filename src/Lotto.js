@@ -1,3 +1,4 @@
+import { LOTTO_NUMBER_COUNT, MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER } from "./constants/standard";
 import {
   ERROR_NUMBER_COUNT,
   ERROR_NUMBER_DUPLICATION,
@@ -26,21 +27,21 @@ class Lotto {
   }
 
   #validateNumberCount(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_NUMBER_COUNT) {
       this.#occurError(ERROR_NUMBER_COUNT);
     }
   }
 
   #validateDuplication(numbers) {
     const checkedNumbers = new Set(numbers);
-    if (checkedNumbers.size !== 6) {
+    if (checkedNumbers.size !== LOTTO_NUMBER_COUNT) {
       this.#occurError(ERROR_NUMBER_DUPLICATION);
     }
   }
 
   #validateNumberRange(numbers) {
     numbers.forEach((number) => {
-      if (number < 1 || number > 45) {
+      if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
         this.#occurError(ERROR_NUMBER_RANGE);
       }
     });
