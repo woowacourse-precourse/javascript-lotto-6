@@ -1,3 +1,4 @@
+import Lotto from './Lotto.js';
 class App {
   async play() {}
 }
