@@ -64,4 +64,19 @@ describe("LottoYeildCaculator 클래스 테스트", () => {
       PRIZES.FIFTH + PRIZES.FIRST
     );
   });
+
+  test("로또가 여러개 때 수익률 구하기", () => {
+    const lottos = [
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "7"]), // 5등
+    ];
+    const drawnLotto = new DrawnLotto(["1", "2", "7", "8", "9", "10"], "11");
+    expect(LottoYieldCalculator.calculateYield(lottos, drawnLotto)).toBe(62.5);
+  });
 });
