@@ -6,7 +6,7 @@ export const Data = {
     lottoResult: {},
 };
 
-export const MESSAGE = new Object.freeze({
+export const CONSTANT = Object.freeze({
     LOTTO_PRICE: 1000,
     PURCHASE_INPUT_ASK: "구입금액을 입력해 주세요.",
     PURCHASE_INPUT_RESPONSE: "개를 구매했습니다.",
@@ -17,4 +17,6 @@ export const MESSAGE = new Object.freeze({
     STATISTICS_5: "5개 일치 (1,500,000원) - ",
     STATISTICS_5_BONUS: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
     STATISTICS_6: "6개 일치 (2,000,000,000원) - ",
+    ERROR_PURCHASE_INPUT:
+        "[ERROR] 구입 금액이 1000원으로 나누어 떨어지지 않습니다.",
 });
