@@ -23,12 +23,18 @@ export function lottoCounter(money) {
   const lottocounts = money/price;
   return lottocounts
 }
-
     
 export async function inputMoneyValidater(input) {
   if (/^[+]?[1-9]\d*$/.test(input)) {
     return Number(input);
   } else {
     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+  }
+}
+
+export async function inputMoneyDivideValidater(input) {
+  let price = LOTTO_PRICE;
+  if (input%price !== 0) {
+    throw new Error("[ERROR] 구입 금액은 1000원 단위로 입력 가능합니다.");
   }
 }
