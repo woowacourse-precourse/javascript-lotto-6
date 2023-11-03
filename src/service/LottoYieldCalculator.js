@@ -19,6 +19,23 @@ export default class LottoYieldCalculator {
     return matchCount;
   }
 
+  static #getPrize(matchCount) {
+    const { NUMBERS_PER_TICKET, PRIZES } = LOTTO_SETTINGS.PRIZES;
+
+    switch (matchCount) {
+      case NUMBERS_PER_TICKET - 3:
+        return PRIZES.FIFTH;
+      case NUMBERS_PER_TICKET - 2:
+        return PRIZES.FOURTH;
+      case NUMBERS_PER_TICKET - 1:
+        return PRIZES.THIRD;
+      case NUMBERS_PER_TICKET:
+        return PRIZES.FIRST;
+      default:
+        return 0;
+    }
+  }
+
   static #compareBonusNumber(lottoNumbers, bonusNumber) {
     if (lottoNumbers.includes(bonusNumber)) return LOTTO_SETTINGS.PRIZES.SECOND;
   }
