@@ -8,12 +8,15 @@ import priceCheck from "./priceCheck.js";
 import verificationBounsNumber from "./verificationBonusNumber.js";
 import results from "./results.js";
 import rateOfReturn from "./rateOfReturn.js";
+import resultView from "./resultView.js";
 
 class App {
   async play() {
     const price = await lottoPriceInput("구입금액을 입력해 주세요.");
     const purchase = priceCheck(price);
     const excution = excutionNumber(purchase);
+
+    resultView(excution, purchase);
     const playerAnswer = await playerNumber("당첨 번호를 입력해 주세요.");
     const verificationNumber = numberVerification(playerAnswer);
     const bonusNumberAnswer = await bonusNumber("보너스 번호를 입력해 주세요.");
@@ -26,8 +29,8 @@ class App {
       verificationNumber,
       bounsNumberverification
     );
-    results(result);
-    rateOfReturn(price, result);
+    const rate = rateOfReturn(price, result);
+    results(result, rate);
   }
 }
 
