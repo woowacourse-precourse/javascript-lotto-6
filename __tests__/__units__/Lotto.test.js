@@ -1,5 +1,5 @@
 import { getLogSpy } from "../../src/utils";
-import Lotto from "../../src/domain/Lotto";
+import { Lotto } from "../../src/domain";
 import { LOTTO_RULE, MESSAGES } from "../../src/constants";
 import { CustomError } from "../../src/exception";
 
