@@ -7,11 +7,10 @@ class Computer {
     this.#generator = generator;
   }
 
-  generateLotto(price) {
-    const quantity = this.calculateQuantity(Number(price));
-
+  generateLotto(lottoPrice) {
+    const quantity = this.calculateQuantity(Number(lottoPrice));
     const lottoes = Array.from({ length: quantity }, () => {
-      return new Lotto(this.#generator());
+      return new Lotto(this.#generator()).findNumbers();
     });
 
     return lottoes;
