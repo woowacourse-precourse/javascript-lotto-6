@@ -1,5 +1,5 @@
-import Messages from "../messages/Messages.js";
-import Constants from "../constants/Constants.js";
+import Messages from "../utils/Messages.js";
+import Constants from "../utils/Constants.js";
 
 class Lotto {
   #numbers;
@@ -22,7 +22,7 @@ class Lotto {
     const messages = new Messages();
     const constants = new Constants();
     if (numbers.length !== constants.getLottoNumberCount()) {
-      throw new Error(messages.getErrorMsg("notSix"));
+      throw new Error(messages.getErrorMsg("notLength"));
     }
     if (numbers.some((num) => this.#checkArange(num))) {
       throw new Error(messages.getErrorMsg("outOfindex"));
@@ -33,6 +33,7 @@ class Lotto {
     if (numbers.some((number) => typeof number !== "number")) {
       throw new Error(messages.getErrorMsg("notNumber"));
     }
+    // 보너스 번호와 당첨 번호가 중복되는 경우는 controller에서 처리
   }
 
   #checkArange(number) {

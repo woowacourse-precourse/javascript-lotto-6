@@ -1,6 +1,5 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import Messages from "../messages/Messages.js";
-import Constants from "../constants/Constants.js";
+import Messages from "../utils/Messages.js";
+import Constants from "../utils/Constants.js";
 
 class BonusLotto {
   #number;
@@ -21,16 +20,13 @@ class BonusLotto {
 
   async #validate(bonusNumber) {
     const messages = new Messages();
-    const constants = new Constants();
     if (numbers.some((num) => this.#checkArange(num))) {
       throw new Error(messages.getErrorMsg("outOfindex"));
     }
     if (typeof bonusNumber !== "number") {
       throw new Error(messages.getErrorMsg("notNumber"));
     }
-    if (this.#numbers.includes(bonusNumber)) {
-      throw new Error(messages.getErrorMsg("overlap"));
-    }
+    // 보너스 번호와 당첨 번호가 중복되는 경우는 controller에서 처리
   }
 
   #checkArange(number) {

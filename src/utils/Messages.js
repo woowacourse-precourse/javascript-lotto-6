@@ -1,7 +1,7 @@
 // 파일명 : Messages.js
 // 역할 : 메시지를 객체로 관리
-import { MissionUtils } from "@woowacourse/mission-utils";
-import Constants from "../constants/Constants.js";
+
+import Constants from "./Constants.js";
 
 class Messages {
   // 메시지는 정적인 값이므로 클래스 필드에 선언
@@ -20,7 +20,8 @@ class Messages {
     outOfindex: `[ERROR] 로또 번호는 ${this.#constants.getLottoNumberMin()} 부터 ${this.#constants.getLottoNumberMax()} 사이의 숫자여야 합니다.`,
     overlap: "[ERROR] 로또 번호는 중복될 수 없습니다.",
     notNumber: "[ERROR] 로또 번호는 숫자여야 합니다.",
-    notSix: `[ERROR] 로또 번호는 ${this.#constants.getLottoNumberCount()}개여야 합니다.`,
+    notLength: `[ERROR] 로또 번호는 ${this.#constants.getLottoNumberCount()}개여야 합니다.`,
+    notNumberMoney: "[ERROR] 로또 구입 금액은 숫자여야 합니다.",
   };
 
   #outputMsg = {
