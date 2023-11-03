@@ -36,6 +36,16 @@ class Lotto {
     return randomNumberArray.includes(userBonusNumber);
   }
 
+  getLottoResult(equalNumber, bonusResult){
+    const result = [0,0,0,0,0];
+    if(equalNumber === 3) result[0] += 1;
+    if(equalNumber === 4) result[1] += 1;
+    if(equalNumber === 5 && !bonusResult) result[2] += 1;
+    if(equalNumber === 5 && bonusResult) result[3] += 1;
+    if(equalNumber === 6) result[4] += 1;
+    return result;
+  }
+
   compareLottoNumbers(lottoRandomNumber, userLottoNumber, userBonusNumber){
     const lottoResult = [];
     const bonusResult = 0;
@@ -44,7 +54,9 @@ class Lotto {
       if(equalNumber === 5){
         bonusResult = this.compareBonusNumber(randomNumberArray, userBonusNumber);
       }
+      lottoResult = this.getLottoResult(equalNumber, bonusResult);
     });
+    return lottoResult;
   }
 }
 
