@@ -25,7 +25,7 @@ export const Validate = Object.freeze({
     }
   },
 
-  winningLottery(numbers) {
+  LotteryNumbers(numbers) {
     numbers.forEach((number) => {
       this.isNumberType(number);
       this.isInteger(number);

@@ -45,7 +45,7 @@ class App {
   async inputWinningLotteryNumbers() {
     const value = await Message.inputWinningLotteryNumbers();
     const numbers = value.split(',').map(Number);
-    Validate.winningLottery(numbers);
+    Validate.LotteryNumbers(numbers);
     this.#winningLotteryNumber = numbers;
   }
 
