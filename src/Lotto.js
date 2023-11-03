@@ -11,9 +11,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    console.log(numbers); // [1,2,3,4,5,6]
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+
+    if (!numbers.every((num) => num >= 1 && num <= 45 && Number.isInteger(num))) {
+      throw new Error('[ERROR] 1에서 45 사이의 정수를 입력해주세요.');
+    }
+
+    if (new Set(numbers).size !== 6) {
+      throw new Error('[ERROR] 6개의 서로 다른 숫자를 입력해주세요.');
     }
   }
   // TODO: 함수 분리, SOLID 원칙 적용하기
