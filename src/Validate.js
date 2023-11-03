@@ -1,4 +1,4 @@
-import ERROR_MESSAGE from "./Errors";
+import ERROR_MESSAGE from "./Errors.js";
 class Validator {
   static #MONEY_UNIT = 1000;
 
@@ -13,7 +13,7 @@ class Validator {
       throw new Error(ERROR_MESSAGE.moneyValue);
     }
 
-    if (/[^0-9]$/.test(numTest)) {
+    if (/[^0-9]$/.test(inputMoney)) {
       throw new Error(ERROR_MESSAGE.moneyValue);
     }
   }

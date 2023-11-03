@@ -1,9 +1,9 @@
 import { Console, MissionUtils } from "@woowacourse/mission-utils";
-import Validator from "./Validate";
-import Lotto from "./Lotto";
+import Validator from "./Validate.js";
+import Lotto from "./Lotto.js";
 
 class View {
-  static #INPUT_MONEY = "구입금액을 입력해 주세요.";
+  static #INPUT_MONEY = "구입금액을 입력해 주세요.\n";
   static #COUNT_LOTTO_QUERY = "개를 구매했습니다.";
 
   static async askInputMoney() {
