@@ -24,6 +24,10 @@ class App {
     if(remainder !== 0 ){throw new Error(ERROR.THOUSAND)};
     return checkPrice;
   }
+
+// 이후 getNumers에서 입력 받기 전에 몇개 구매한지 출력해야 함
+
+
   async getNumbers(){
     const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
     this.winning = this.checkWinningNumbers(winningNumbers);
@@ -34,12 +38,10 @@ class App {
     const checkWinningNumber = winningNumbers.spilt(",").map(Number);
 
     if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
-    if(!Number.isInteger(checkWinningNumber)) {throw new Error(ERROR.INTEGER)};
-    if(checkWinningNumber < 1) {throw new Error(ERROR.ONE)};
-    if(checkWinningNumber > 45) {throw new Error(ERROR.FORTY_FIVE)};
+    this.checkNumberError(checkWinningNumber);
     return checkWinningNumber;
   }
-  
+
   async getBonusNumbers(){
     const bonusNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.BONUS_NUMBER);
     this.bonus = this.checkBonusNumbers(bonusNumbers);
@@ -49,10 +51,13 @@ class App {
     const checkBonusNumber = bonusNumbers.spilt(",").map(Number);
 
     if(bonusNumbers.includes(',')) {throw new Error(ERROR.INPUT_COMMA)};
-    if(!Number.isInteger(checkBonusNumber)) {throw new Error(ERROR.INTEGER)};
-    if(checkBonusNumber < 1) {throw new Error(ERROR.ONE)};
-    if(checkBonusNumber > 45) {throw new Error(ERROR.FORTY_FIVE)};
+    this.checkNumberError(checkBonusNumber);
     return checkBonusNumber;
+  }
+  checkNumberError(numbers){
+    if(!Number.isInteger(numbers)) {throw new Error(ERROR.INTEGER)};
+    if(numbers < 1) {throw new Error(ERROR.ONE)};
+    if(numbers > 45) {throw new Error(ERROR.FORTY_FIVE)};
   }
 }
 
