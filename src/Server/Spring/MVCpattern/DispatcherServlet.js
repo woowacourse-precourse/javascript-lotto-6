@@ -15,9 +15,7 @@ class DispatcherServlet {
 
   requestAPI(httpRequest) {
     const controller = this.#handlerMapping.getController(httpRequest.url);
-    console.log(controller);
-    const result = this.#handlerAdapter.handler(controller);
-    console.log(result);
+    const result = this.#handlerAdapter.handler(controller, httpRequest.body);
   }
 }
 

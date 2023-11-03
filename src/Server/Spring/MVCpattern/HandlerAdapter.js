@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 class HandlerAdapter {
-  handler(controller) {
-    return controller.requestMapping();
+  handler(controller, httpRequestBody) {
+    return controller.requestMapping(httpRequestBody);
   }
 }
 

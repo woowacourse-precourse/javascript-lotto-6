@@ -8,11 +8,14 @@ class User {
 
   constructor(purchaseAmount) {
     this.#validate(purchaseAmount);
-    this.#purchaseAmount = purchaseAmount;
+    this.#purchaseAmount = Number(purchaseAmount);
   }
 
-  #validate(purchaseAmount) {
+  #validate(paramPurchaseAmount) {
+    const purchaseAmount = paramPurchaseAmount.trim();
+    if (purchaseAmount === '') throw new Error(ERROR_MESSAGE.isBlank);
     if (Number.isNaN(Number(purchaseAmount))) throw new Error(ERROR_MESSAGE.isChar);
+    if (Number(purchaseAmount) % 1000 !== 0) throw new Error(ERROR_MESSAGE.isNotThousandDivide);
   }
 }
 
