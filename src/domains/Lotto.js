@@ -23,6 +23,9 @@ class Lotto {
         throw new LottoRangeError(numbers);
       }
     });
+    if (new Set([...numbers]).size !== numbers.length) {
+      throw new LottoDuplicatedError(numbers);
+    }
   }
 
   getNumbers() {

@@ -38,7 +38,7 @@ describe('WinningLotto - 당첨 번호 유효성 검사 테스트', () => {
   test.each([
     '1,1,3,4,5,6',
     '30,1,3,2,30,40',
-  ])('당첨 번호에 중복되는 숫자는 없어야 한다..', (numbers) => {
+  ])('당첨 번호에 중복되는 숫자는 없어야 한다.', (numbers) => {
     const result = () => winning.setNumbers(numbers);
 
     expect(result).toThrowError(LottoDuplicatedError);
