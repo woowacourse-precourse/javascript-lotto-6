@@ -20,6 +20,18 @@ class Lotto {
   getInformation() {
     return [...this.#numbers].sort((a, b) => a - b);
   }
+
+  checkWinningNumbers(winningNumbers, bonusNumber) {
+    const matchedCount = this.#numbers.reduce(
+      (count, num) => (winningNumbers.includes(num) ? count + 1 : count),
+      0,
+    );
+    const bonusIncluded = this.#numbers.includes(bonusNumber);
+    return {
+      matchedCount: bonusIncluded ? matchedCount + 1 : matchedCount,
+      bonusIncluded,
+    };
+  }
 }
 
 export default Lotto;
