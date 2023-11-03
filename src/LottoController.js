@@ -6,6 +6,7 @@ class LottoController {
 
   constructor(totalPrice) {
     this.#validateTotalPrice(totalPrice);
+    this.#ticketAmount = this.#calculateTicketAmount(totalPrice);
   }
 
   #validateTotalPrice(string) {
@@ -16,6 +17,10 @@ class LottoController {
     if (!Validator.isDivisibleBy1000(+string)) {
       throw new Error(LOTTO_CONTROLLER.ERROR.PRICE_NOT_DIVISIBLE);
     }
+  }
+
+  #calculateTicketAmount(string) {
+    return +string / LOTTO_CONTROLLER.TICKET_PRICE;
   }
 }
 
