@@ -1,4 +1,4 @@
-import ErrorCheck from '../../src/modules/ErrorCheck';
+import ErrorCheck from '../../../src/modules/ErrorCheck.js';
 
 const ERROR_FORMAT = '[ERROR]';
 

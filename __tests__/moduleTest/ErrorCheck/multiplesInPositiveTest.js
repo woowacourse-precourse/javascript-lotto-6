@@ -1,6 +1,7 @@
 import ErrorCheck from '../../../src/modules/ErrorCheck';
 
 const LOTTO_PRICE = 1000;
+const ERROR_FORMAT = '[ERROR]';
 
 test.each([
   [1000, false],
@@ -10,6 +11,7 @@ test.each([
   [9999, true],
   [123, true],
   [1, true],
+  [0, true],
 ])('multiplesInPositive', (input, isThrowing) => {
   const targetFunction = () =>
     ErrorCheck.multiplesInPositive(input, LOTTO_PRICE);
