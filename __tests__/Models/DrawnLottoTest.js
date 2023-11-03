@@ -14,4 +14,13 @@ describe("DrawnLotto 클래스 테스트", () => {
       LottoError.PREFIX
     );
   });
+
+  test("DrawnLotto의 numbers와 bonusNumber를 객체로 리턴해야한다", () => {
+    expect(
+      new DrawnLotto(["1", "2", "3", "4", "5", "6"], "7").getFullNumbers()
+    ).toEqual({
+      numbers: [1, 2, 3, 4, 5, 6],
+      bonusNumber: 7,
+    });
+  });
 });
