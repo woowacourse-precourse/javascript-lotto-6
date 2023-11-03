@@ -1,5 +1,5 @@
-import { Console } from "@woowacourse/mission-utils";
-import validator from "../utils/validator.js";
+import { Console } from '@woowacourse/mission-utils';
+import validator from '../utils/validator.js';
 
 const inputView = {
   async readPurchasePriceAsync(message) {
@@ -10,8 +10,12 @@ const inputView = {
 
   async readWinningNumbersAsync(message) {
     const userInput = await Console.readLineAsync(message);
-    const numbers = userInput.split(",");
+    const numbers = userInput.split(',').map((number) => parseInt(number));
     return numbers;
+  },
+
+  async readBonusNumberAsync(message) {
+    return await Console.readLineAsync(message);
   },
 };
 
