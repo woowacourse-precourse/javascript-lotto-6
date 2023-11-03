@@ -1,5 +1,7 @@
-import { Random, Console } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
+import { Console } from "@woowacourse/mission-utils";
+import LotteryMachine from "./LotteryMachine.js";
+import LottoResult from "./LottoResult.js";
+import LottoStatistics from "./LottoStatistics.js";
 
 const LOTTO_PRICE = 1000;
 const PRIZES = {
@@ -12,7 +14,55 @@ const PRIZES = {
 };
 
 class App {
+  constructor() {
+    this.lottoMachine = new LotteryMachine(LOTTO_PRICE);
+    this.lottos = [];
+  }
+
   async play() {
+    const purchaseAmount = await this.#askForPurchaseAmount();
+    this.lottos = this.lottoMachine.buyLottos(purchaseAmount);
+
+    this.#printLottos();
+
+    const winningNumbers = await this.#askForWinningNumbers();
+    const bonusNumber = await this.#askForBonusNumber(winningNumbers);
+    const lottoResult = new LottoResult(winningNumbers, bonusNumber);
+
+    const results = lottoResult.calculateResults(this.lottos);
+    const lottoStatistics = new LottoStatistics(this.lottos, LOTTO_PRICE);
+    const statistics = lottoStatistics.calculateStatistics(results);
+
+    this.#printResults(statistics);
+  }
+
+  #printLottos() {
+    Console.print(`\n${this.lottos.length}개를 구매했습니다.`);
+    this.lottos.forEach((lotto) => {
+      Console.print(`[${lotto.getNumbers().join(", ")}]`);
+    });
+  }
+
+  #printResults(statistics) {
+    Console.print("\n당첨 통계\n---");
+    const prizeOrder = ["3", "4", "5", "5+1", "6"];
+
+    prizeOrder.forEach((key) => {
+      const prizeString =
+        key === "5+1" ? "5개 일치, 보너스 볼 일치" : `${key}개 일치`;
+      const count = statistics.resultCounts[key] || 0;
+      const prize = PRIZES[key] || 0;
+      if (prize > 0) {
+        Console.print(
+          `${prizeString} (${prize.toLocaleString()}원) - ${count}개`
+        );
+      }
+    });
+
+    Console.print(`총 수익률은 ${statistics.roi}%입니다.`);
+  }
+
+  async #askForPurchaseAmount() {
     let purchaseAmount;
     while (true) {
       try {
@@ -29,20 +79,10 @@ class App {
       }
     }
 
-    const lottoCount = Math.floor(purchaseAmount / LOTTO_PRICE);
-    const lottos = [];
+    return purchaseAmount;
+  }
 
-    for (let i = 0; i < lottoCount; i++) {
-      const numbers = PickLottoNumbers();
-      const lotto = new Lotto(numbers);
-      lottos.push(lotto);
-    }
-
-    Console.print(`\n${lottoCount}개를 구매했습니다.`);
-    lottos.forEach((lotto) => {
-      Console.print(`[${lotto.getNumbers().join(", ")}]`);
-    });
-
+  async #askForWinningNumbers() {
     let winningNumbers;
     while (true) {
       try {
@@ -54,11 +94,9 @@ class App {
             "[ERROR] 당첨 번호는 쉼표(,)로만 구분된 숫자여야 합니다."
           );
         }
-
         winningNumbers = winningNumbersInput
           .split(",")
           .map((number) => parseInt(number.trim(), 10));
-
         if (winningNumbers.some((num) => isNaN(num))) {
           throw new Error("[ERROR] 당첨 번호는 숫자여야 합니다.");
         }
@@ -76,6 +114,10 @@ class App {
       }
     }
 
+    return winningNumbers;
+  }
+
+  async #askForBonusNumber(winningNumbers) {
     let bonusNumber;
     while (true) {
       try {
@@ -87,9 +129,7 @@ class App {
             "[ERROR] 보너스 번호는 숫자 한 개만 입력해야 합니다."
           );
         }
-
         bonusNumber = parseInt(bonusNumberInput.trim(), 10);
-
         if (winningNumbers.includes(bonusNumber)) {
           throw new Error(
             "[ERROR] 보너스 번호는 당첨 번호와 다른 숫자여야 합니다."
@@ -105,56 +145,9 @@ class App {
         Console.print(error.message);
       }
     }
-
-    const results = lottos.map((lotto) => {
-      const numbers = lotto.getNumbers();
-      const matchCount = numbers.filter((number) =>
-        winningNumbers.includes(number)
-      ).length;
-      const bonusMatch = numbers.includes(bonusNumber);
-
-      if (matchCount === 6) return "6";
-      if (matchCount === 5 && bonusMatch) return "5+1";
-      if (matchCount === 5) return "5";
-      if (matchCount === 4) return "4";
-      if (matchCount === 3) return "3";
-      return "꽝";
-    });
-
-    const resultCounts = results.reduce((countByResult, result) => {
-      countByResult[result] = (countByResult[result] || 0) + 1;
-      return countByResult;
-    }, {});
-
-    const prizeMessages = [
-      `3개 일치 (5,000원) - ${resultCounts["3"] || 0}개`,
-      `4개 일치 (50,000원) - ${resultCounts["4"] || 0}개`,
-      `5개 일치 (1,500,000원) - ${resultCounts["5"] || 0}개`,
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${resultCounts["5+1"] || 0}개`,
-      `6개 일치 (2,000,000,000원) - ${resultCounts["6"] || 0}개`,
-    ];
-
-    Console.print("\n당첨 통계\n---");
-    prizeMessages.forEach((message) => Console.print(message));
-
-    let totalPrizeMoney = 0;
-
-    Object.keys(resultCounts).forEach((prize) => {
-      if (PRIZES.hasOwnProperty(prize)) {
-        totalPrizeMoney += PRIZES[prize] * resultCounts[prize];
-      }
-    });
-
-    const investment = lottoCount * LOTTO_PRICE;
-    const roi = (totalPrizeMoney / investment) * 100;
-
-    Console.print(`총 수익률은 ${roi.toFixed(1)}%입니다.`);
+    return bonusNumber;
   }
 }
-
-const PickLottoNumbers = () => {
-  return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
-};
 
 // 예외 처리를 위한 유효성 검사 함수들
 // 1. 구입 금액이 1,000원 단위인지 검사
