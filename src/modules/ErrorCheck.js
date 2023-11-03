@@ -6,6 +6,7 @@ const LOTTO_NUMBER_UPPER = 45;
 const NOT_AN_INTEGER_ERROR_MESSAGE = '[ERROR] 정수가 아닙니다.';
 const NOT_MULTIPLES_ERROR_MESSAGE = '[ERROR] 로또를 깔끔하게 살 수 없습니다.';
 const WRONG_LENGTH_ERROR_MESSAGE = '[ERROR] 잘못된 길이입니다';
+const WRONG_RANGE_NUMBER_ERROR_MESSAGE = '[ERROR] 범위 바깥의 숫자입니다';
 
 class ErrorCheck {
   static purchasePrice(inputString, lottoPrice) {
@@ -16,9 +17,14 @@ class ErrorCheck {
   static lottoListString(inputString) {
     const arrayFromString = inputString.split(',');
     ErrorCheck.arrayLikeLength(arrayFromString, NUMBER_OF_LOTTO_NUMBERS);
-    arrayFromString.forEach(splitedString =>
-      ErrorCheck.positiveIntegerString(splitedString)
-    );
+    arrayFromString.forEach(splitedString => {
+      ErrorCheck.positiveIntegerString(splitedString);
+      ErrorCheck.numberInRange(
+        Number(splitedString),
+        LOTTO_NUMBER_LOWER,
+        LOTTO_NUMBER_UPPER
+      );
+    });
   }
 
   static positiveIntegerString(inputString) {
@@ -34,6 +40,11 @@ class ErrorCheck {
   static arrayLikeLength(arrayLike, length) {
     if (arrayLike.length !== length)
       throw new Error(WRONG_LENGTH_ERROR_MESSAGE);
+  }
+
+  static numberInRange(number, lower, upper) {
+    if (number < lower) throw new Error(WRONG_RANGE_NUMBER_ERROR_MESSAGE);
+    if (upper < number) throw new Error(WRONG_RANGE_NUMBER_ERROR_MESSAGE);
   }
 }
 
