@@ -1,5 +1,9 @@
+import Input from './Input.js';
+
 class App {
-  async play() {}
+  async play() {
+    await Input.getLottoBudget();
+  }
 }
 
 export default App;
