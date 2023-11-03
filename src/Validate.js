@@ -43,7 +43,7 @@ export const Validate = Object.freeze({
   },
 
   isInteger(num) {
-    if (!Number.isInteger(num)) {
+    if (!Number.isInteger(Number(num))) {
       throw new Error(ERROR.SHOULD_BE_INTEGER);
     }
   },
