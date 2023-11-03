@@ -1,7 +1,7 @@
 import { MESSAGES } from "../../src/constants";
 import { LottoSeller } from "../../src/domain";
 import { CustomError } from "../../src/exception";
-import { mockQuestions } from "../../src/utils";
+import { getLogSpy, mockQuestions, mockRandoms } from "../../src/utils";
 
 const LOTTO_PRICE = 1000;
 
@@ -64,5 +64,28 @@ describe("LottoSeller 유닛 테스트", () => {
         );
       }
     );
+  });
+
+  test("로또 발행 테스트", async () => {
+    const logSpy = getLogSpy();
+    mockRandoms([
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+      [13, 14, 15, 16, 17, 18],
+    ]);
+    mockQuestions([3000]);
+    await lottoSeller.sellLotto();
+
+    // then
+    const logs = [
+      MESSAGES.BUY.RESULT(3),
+      "[1, 2, 3, 4, 5, 6]",
+      "[7, 8, 9, 10, 11, 12]",
+      "[13, 14, 15, 16, 17, 18]",
+    ];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
   });
 });
