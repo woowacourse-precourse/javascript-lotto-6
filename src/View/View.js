@@ -18,8 +18,9 @@ class View {
   }
 
   async readBonusNumber() {
-    const bonusNumberStr =
-      await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+    const bonusNumberStr = await Console.readLineAsync(
+      MESSAGE.requireBonusNumber,
+    );
     const bonusNumber = Number(bonusNumberStr);
     return bonusNumber;
   }

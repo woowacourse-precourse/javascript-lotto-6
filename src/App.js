@@ -22,7 +22,6 @@ class App {
 
     const statistics = this.#lottoCompany.calculateStatistics(lottos);
     const rateOfReturn = this.#lottoCompany.calculateRateOfReturn(lottos);
-
     Console.print(MESSAGE.statistic);
     Console.print(MESSAGE.line);
     this.#view.printStatistics(statistics);

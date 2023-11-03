@@ -33,29 +33,26 @@ describe('LottoCompany 객체 테스트', () => {
     const bonusNumber = 10;
 
     // when
-    lottoCompany.numbers = [1, 2, 3, 4, 5, 6];
-    lottoCompany.pushBonus(bonusNumber);
+    lottoCompany.bonusNumber = bonusNumber;
 
     // then
-    expect(lottoCompany.numbers).toEqual([1, 2, 3, 4, 5, 6, 10]);
+    expect(lottoCompany.bonusNumber).toBe(bonusNumber);
   });
 
-  test('보너스 번호를 두 번이상 추가할 경우 예외처리한다.', () => {
+  test('보너스 번호 일치 여부를 알 수 있다.', () => {
     // given
-    lottoCompany.numbers = [1, 2, 3, 4, 5, 6];
-    const bonusNumber1 = 10;
-    const bonusNumber2 = 20;
+    lottoCompany.bonusNumber = 10;
+    const lotto1 = new Lotto([1, 2, 3, 4, 5, 6]);
+    const lotto2 = new Lotto([1, 2, 3, 4, 5, 10]);
 
     // when
-    const pushBonusTwice = () => {
-      lottoCompany.pushBonus(bonusNumber1);
-      lottoCompany.pushBonus(bonusNumber2);
-    };
+    const match1 = lottoCompany.matchBonus(lotto1);
+    const match2 = lottoCompany.matchBonus(lotto2);
 
     // then
-    expect(pushBonusTwice).toThrow('[ERROR]');
+    expect(match1).toBe(false);
+    expect(match2).toBe(true);
   });
-
   test('로또 객체를 n개 발행할 수 있다.', () => {
     // given
     const numOfLottos = 2;

@@ -8,6 +8,8 @@ import winningsTable from '../../utils/winningsTable';
 import Lotto from './Lotto';
 
 class LottoCompany {
+  #bonusNumber = 0;
+
   #numbers = [];
 
   #income = 0;
@@ -18,8 +20,16 @@ class LottoCompany {
     this.#numbers = numbers;
   }
 
+  set bonusNumber(number) {
+    this.#bonusNumber = number;
+  }
+
   get numbers() {
     return this.#numbers;
+  }
+
+  get bonusNumber() {
+    return this.#bonusNumber;
   }
 
   pushBonus(number) {
@@ -46,6 +56,10 @@ class LottoCompany {
       }
     });
     return count;
+  }
+
+  matchBonus(lotto) {
+    return lotto.numbers.includes(this.#bonusNumber);
   }
 
   calculateStatistics(lottos) {
