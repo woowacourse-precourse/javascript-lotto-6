@@ -20,7 +20,7 @@ export default class LottoYieldCalculator {
   }
 
   static #getPrize(matchCount) {
-    const { NUMBERS_PER_TICKET, PRIZES } = LOTTO_SETTINGS.PRIZES;
+    const { NUMBERS_PER_TICKET, PRIZES } = LOTTO_SETTINGS;
 
     switch (matchCount) {
       case NUMBERS_PER_TICKET - 3:
