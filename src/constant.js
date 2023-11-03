@@ -11,3 +11,7 @@ export const ERROR_PREFIX = '[ERROR]';
 export const ERROR = Object.freeze({
   budget: `${ERROR_PREFIX} 구입 금액은 1000원 단위로 입력해주세요.`,
 });
+
+export const MESSAGE = Object.freeze({
+  purchase: (count) => `${count}개를 구매했습니다.`,
+});
