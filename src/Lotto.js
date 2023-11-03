@@ -1,10 +1,28 @@
+import ERROR_MESSAGE_GENERATOR from './constants/error.js';
 import LottoNumber from './domain/LottoNumber.js';
+import { isDuplicated } from './utils/validator.js';
 
 class Lotto {
+  /**
+   * 로또 한 장당 소유할 로또 번호의 갯수입니다.
+   * @type {6}
+   */
+  static NUMBER_QUANTITY = 6;
+
+  static ERROR_MESSAGES = Object.freeze({
+    invalidQuantity: '6개의 로또 숫자를 입력해주세요!',
+    duplicated: ERROR_MESSAGE_GENERATOR.duplicated('로또 숫자'),
+    invalidMatchArg: 'match의 인자에 LottoNumber를 입력해주세요!',
+  });
+
+  /**
+   * LottoNumber로 이루어진 배열입니다.
+   * @type {LottoNumber[]}
+   */
   #numbers;
 
   /**
-   *
+   * 로또 한 장당 소유할 로또 번호입니다.
    * @param {number[]} numbers
    */
   constructor(numbers) {
@@ -12,22 +30,36 @@ class Lotto {
     this.#numbers = Array.from(numbers, LottoNumber.valueOf);
   }
 
+  /**
+   * @param {number[]} numbers
+   * @returns {Lotto}
+   */
   static of(numbers) {
     return new Lotto(numbers);
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (isDuplicated(numbers)) {
+      throw new Error(Lotto.ERROR_MESSAGES.duplicated);
+    }
+    if (numbers.length !== Lotto.NUMBER_QUANTITY) {
+      throw new Error(Lotto.ERROR_MESSAGES.invalidQuantity);
     }
   }
 
   /**
-   *
+   * 입력받은 LottoNumber가 numbers에 포함되었는지 비교합니다.
    * @param {LottoNumber} number
    */
   match(number) {
+    this.#validateMatch(number);
     return this.#numbers.some((lottoNumber) => lottoNumber === number);
+  }
+
+  #validateMatch(number) {
+    if (!(number instanceof LottoNumber)) {
+      throw new Error(Lotto.ERROR_MESSAGES.invalidMatchArg);
+    }
   }
 }
 

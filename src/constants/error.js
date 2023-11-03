@@ -29,6 +29,9 @@ const ERROR_MESSAGE_GENERATOR = Object.freeze({
   notInteger(target) {
     return `${target}에 정수를 입력해주세요!`;
   },
+  duplicated(target) {
+    return `${target}에 중복된 값이 존재합니다!`;
+  },
 });
 
 export default ERROR_MESSAGE_GENERATOR;
