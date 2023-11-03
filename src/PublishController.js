@@ -1,4 +1,6 @@
-import { LOTTO_PRICE, MESSAGES } from "./constants.js";
+import { LOTTO_PRICE, MESSAGES, LOTTO_NUMBERS_COUNT, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER } from "./constants.js";
+import Lotto from "./Lotto.js";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 class PublishController {
   static checkPriceDivisible(price) {
@@ -15,6 +17,19 @@ class PublishController {
     const lottoQuantity = Math.floor(price / LOTTO_PRICE);
 
     return lottoQuantity;
+  }
+
+  static publish(quantity) {
+    const lottos = [];
+
+    for(let i = 0; i < quantity; i++) {
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_NUMBERS_COUNT);
+
+      const lotto = new Lotto(numbers);
+      lottos.push(lotto);
+    }
+
+    return lottos;
   }
 }
 

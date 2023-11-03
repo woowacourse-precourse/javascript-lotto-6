@@ -1,3 +1,5 @@
+import { MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER, MESSAGES, LOTTO_NUMBERS_COUNT } from "./constants.js";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,34 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTO_NUMBERS_COUNT) {
+      throw new Error(MESSAGES.lottoNumbersCountError);
+    }
+
+    if (!this.#checkAllLottoNumbersInRange(numbers)) {
+      throw new Error(MESSAGES.lottoNumberRangeError);
+    }
+
+    if (!this.#checkAllNumbersUnique(numbers)) {
+      throw new Error(MESSAGES.duplicatedLottoNumberError);
     }
   }
 
-  // TODO: 추가 기능 구현
+  #checkLottoNumberInRange(lottoNumber) {
+    return MIN_LOTTO_NUMBER <= lottoNumber && lottoNumber <= MAX_LOTTO_NUMBER;
+  }
+
+  #checkAllLottoNumbersInRange(numbers) {
+    const isAllNumbersInRange = numbers.every(this.#checkLottoNumberInRange);
+
+    return isAllNumbersInRange;
+  }
+
+  #checkAllNumbersUnique(numbers) {
+    const uniqueNumbers = [...new Set(numbers)];
+
+    return uniqueNumbers.length === numbers.length;
+  }
 }
 
 export default Lotto;
