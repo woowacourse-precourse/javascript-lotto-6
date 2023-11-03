@@ -37,6 +37,10 @@ class Lotto {
 
     return uniqueNumbers.length === numbers.length;
   }
+
+  getNumbers() {
+    return this.numbers;
+  }
 }
 
 export default Lotto;
