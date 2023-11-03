@@ -23,23 +23,38 @@ class App {
       this.printPercentage(prize, money);
     } catch (e) {
       Console.print(e.message);
-      // this.play();
     }
   }
 
   async validMoney() {
-    const moneyInput = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    const money = Number(moneyInput);
-    if (isNaN(money)) {
-      throw new Error('[ERROR] 숫자만 입력 가능합니다.');
+    return this.retryValid(async () => {
+      const moneyInput = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      const money = Number(moneyInput);
+      if (isNaN(money)) {
+        throw new Error('[ERROR] 숫자만 입력 가능합니다.');
+      }
+      if (money <= 0) {
+        throw new Error('[ERROR] 정수만 입력 가능합니다.');
+      }
+      if (money % 1000 !== 0) {
+        throw new Error("[ERROR] 1장 당 1000원입니다.");
+      }
+      return money;
+    });
+  }
+
+  async retryValid(func) {
+    let result;
+    let isValid = false;
+    while (!isValid) {
+      try {
+        result = await func();
+        isValid = true;
+      } catch (e) {
+        Console.print(e.message);
+      }
     }
-    if (money <= 0) {
-      throw new Error('[ERROR] 정수만 입력 가능합니다.');
-    }
-    if (money % 1000 !== 0) {
-      throw new Error("[ERROR] 1장 당 1000원입니다.");
-    }
-    return money;
+    return result;
   }
 
   setRandomNumber(lottos) {
@@ -57,35 +72,70 @@ class App {
   }
 
   async getLottoNumber() {
-    const lottonumberInput = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-    const lottonumber = lottonumberInput.split(',').map(Number);
-    if (lottonumber.length !== 6) {
-      throw new Error('[ERROR] 6개의 숫자만 입력해주세요');
-    }
-
-    const duplicateCheck = new Set();
-    for (const number of lottonumber) {
-      if (duplicateCheck.has(number)) {
-        throw new Error(`[ERROR] 중복된 번호 ${number}을 입력하셨습니다.`);
+    return this.returnLottoNumber(async () => {
+      const lottonumberInput = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+      const lottonumber = lottonumberInput.split(',').map(Number);
+      if (lottonumber < 1 || lottonumber > 45) {
+        throw new Error('[ERROR] 1 ~ 45까지의 숫자만 입력 가능합니다.');
       }
-      duplicateCheck.add(number);
+      if (lottonumber.length !== 6) {
+        throw new Error('[ERROR] 6개의 숫자만 입력해주세요');
+      }
+
+      const duplicateCheck = new Set();
+      for (const number of lottonumber) {
+        if (duplicateCheck.has(number)) {
+          throw new Error(`[ERROR] 중복된 번호 ${number}을 입력하셨습니다.`);
+        }
+        duplicateCheck.add(number);
+      }
+      return lottonumber;
+    });
+  }
+
+  async returnLottoNumber(func) {
+    let result;
+    let isValid = false;
+    while (!isValid) {
+      try {
+        result = await func();
+        isValid = true;
+      } catch (e) {
+        Console.print(e.message);
+      }
     }
-    return lottonumber;
+    return result;
   }
 
   async getBonusNumber(lottonumber) {
-    const bonusNumberInput = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
-    const bonumNumber = Number(bonusNumberInput);
-    if (isNaN(bonumNumber)) {
-      throw new Error('[ERROR] 숫자만 입력 가능합니다.');
+    return this.returnBonusNumber(async () => {
+      const bonusNumberInput = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+      const bonumNumber = Number(bonusNumberInput);
+      if (isNaN(bonumNumber)) {
+        throw new Error('[ERROR] 숫자만 입력 가능합니다.');
+      }
+      if (lottonumber.includes(bonumNumber)) {
+        throw new Error('[ERROR] 보너스 번호와 당첨 번호가 중복됩니다.');
+      }
+      if (bonumNumber < 1 || bonumNumber > 45) {
+        throw new Error('[ERROR] 1부터 45까지의 숫자만 입력 가능합니다');
+      }
+      return bonumNumber;
+    });
+  }
+
+  async returnBonusNumber(func) {
+    let result;
+    let isValid = false;
+    while (!isValid) {
+      try {
+        result = await func();
+        isValid = true;
+      } catch (e) {
+        Console.print(e.message);
+      }
     }
-    if (lottonumber.includes(bonumNumber)) {
-      throw new Error('[ERROR] 보너스 번호와 당첨 번호가 중복됩니다.');
-    }
-    if (bonumNumber < 1 || bonumNumber > 45) {
-      throw new Error('[ERROR] 1부터 45까지의 숫자만 입력 가능합니다');
-    }
-    return bonumNumber;
+    return result;
   }
 
   matchNumber(randomNumbers, lottonumber, bonumNumber) {
