@@ -1,11 +1,14 @@
 import InputView from './InputView.js';
 import Lottos from './Lottos.js';
 import OutputView from './OutputView.js';
+import BonusLotto from './BonusLotto.js';
 
 class Controller {
   #inputView;
   #outputView;
   #lottos;
+  #bonusLotto;
+  #winningLotto;
 
   constructor() {
     this.#inputView = new InputView();
@@ -15,12 +18,23 @@ class Controller {
   async start() {
     await this.createLottos();
     this.printAllLottos();
+    await this.createBonusLottos();
   }
 
   async createLottos() {
     const amount = await this.#inputView.readPurchaseAmount();    
     this.#lottos = new Lottos(amount);
-    return amount;
+  }
+
+  checkDuplicate(bonusNum) {
+    const winningLotto = this.#lottos.getLottos().map((lotto) => lotto.getNumbers());
+    console.log(winningLotto);
+  }
+
+  async createBonusLottos() {
+    const bonusNum = await this.#inputView.readBonusNumber();
+    this.checkDuplicate(bonusNum);
+    this.#bonusLotto = new BonusLotto(bonusNum);
   }
 
   printAllLottos() {
