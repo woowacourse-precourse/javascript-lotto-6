@@ -1,6 +1,14 @@
 import LOTTO_SETTINGS from "../config/gameSetting.js";
 
 export default class LottoYieldCalculator {
+  static calculateYield(lottos, drawnLotto) {
+    const totalPrize = this.getTotalPrize(lottos, drawnLotto);
+    const lottosPrice = lottos.length * LOTTO_SETTINGS.TICKET_PRICE;
+    const yieldRate = (totalPrize / lottosPrice) * 100;
+
+    return Number(yieldRate.toFixed(2));
+  }
+
   static getTotalPrize(lottos, drawnLotto) {
     const totalPrize = lottos.reduce((accumulator, lotto) => {
       return accumulator + this.calculate(lotto, drawnLotto);
