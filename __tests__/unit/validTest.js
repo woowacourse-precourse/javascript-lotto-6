@@ -2,6 +2,7 @@ import Lotto from '../../src/Lotto';
 import ERROR_CODE from '../../src/util/error/errorCode';
 import checkHasDuplicate from '../../src/util/validate/checkHasDuplicate';
 import checkHasNoRemainder from '../../src/util/validate/checkHasNoRemainder';
+import checkIsEmpty from '../../src/util/validate/checkIsEmpty';
 import { checkIsNaN } from '../../src/util/validate/checkIsNaN';
 
 describe('[Lotto] 유효성 검사 테스트', () => {
@@ -36,7 +37,7 @@ describe('[function] 유효성 검사 테스트 ', () => {
     const firstTestInput = 'a';
     const secondTestInput = ';';
 
-    // thedn
+    // then
     expect(() => {
       checkIsNaN(firstTestInput);
     }).toThrow(`${ERROR_CODE.valueIsNaN}`);
@@ -44,5 +45,15 @@ describe('[function] 유효성 검사 테스트 ', () => {
     expect(() => {
       checkIsNaN(secondTestInput);
     }).toThrow(`${ERROR_CODE.valueIsNaN}`);
+  });
+
+  test('입력값이 빈값일 경우 에러를 발생시킨다', () => {
+    // given
+    const testInputValue = '';
+
+    // then
+    expect(() => {
+      checkIsEmpty(testInputValue);
+    }).toThrow(`${ERROR_CODE.valueIsEmpty}`);
   });
 });
