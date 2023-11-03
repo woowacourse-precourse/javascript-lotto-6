@@ -1,5 +1,5 @@
 import Validate from "./Validate.js";
-import { SEPARATOR } from "./constants/rule.js";
+import Utils from "./Utils.js";
 
 class Lotto {
   #numbers;
@@ -13,8 +13,12 @@ class Lotto {
     const validate = new Validate();
     validate.isOnlyNumberAndComma(numbers);
 
-    const numbersArray = numbers.split(SEPARATOR.USER_LOTTO).map(Number);
+    const numbersArray = Utils.convertStringIntoNumberArray(numbers);
     validate.isValidUserLottoInput(numbersArray);
+  }
+
+  getUserLotto() {
+    return Utils.convertStringIntoNumberArray(this.#numbers);
   }
 }
 

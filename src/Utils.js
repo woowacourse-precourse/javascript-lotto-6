@@ -1,4 +1,4 @@
-import { UNIT } from "./constants/rule.js";
+import { UNIT, SEPARATOR } from "./constants/rule.js";
 
 class Utils {
   static getLottoAmount(sum) {
@@ -8,6 +8,10 @@ class Utils {
 
   static getAscendingSortedArray(array) {
     return array.sort((a, b) => a - b);
+  }
+
+  static convertStringIntoNumberArray(input) {
+    return input.split(SEPARATOR.USER_LOTTO).map(Number);
   }
 }
 

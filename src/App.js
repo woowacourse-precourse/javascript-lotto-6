@@ -5,6 +5,8 @@ import Purchase from "./Purchase.js";
 import Lotto from "./Lotto.js";
 
 class App {
+  #userLotto;
+
   async play() {
     try {
       const sum = await Print.getPurchaseSum();
@@ -34,8 +36,9 @@ class App {
 
   async getUserLottoInput() {
     try {
-      const userLotto = await Print.getUserLottoNumber();
-      const validLotto = new Lotto(userLotto);
+      const userLottoInput = await Print.getUserLottoNumber();
+      const validUserLotto = new Lotto(userLottoInput);
+      this.#userLotto = validUserLotto.getUserLotto();
       await this.getUserBonusInput();
     } catch (error) {
       Print.showErrorMessage(error.message);
