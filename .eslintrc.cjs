@@ -4,7 +4,12 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["eslint:recommended", "plugin:jest/recommended", "prettier"],
+  extends: [
+    "eslint:recommended",
+    "airbnb-base",
+    "plugin:jest/recommended",
+    "prettier",
+  ],
   overrides: [
     {
       env: {
@@ -24,5 +29,7 @@ module.exports = {
   plugins: ["jest", "prettier"],
   rules: {
     "prettier/prettier": ["error", { endOfLine: "auto" }],
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
   },
 };
