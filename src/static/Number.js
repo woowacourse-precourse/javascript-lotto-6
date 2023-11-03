@@ -1,4 +1,4 @@
-const NUMBER = objet.freeze({
+const NUMBER = Object.freeze({
   lottoStart: 1,
   lottoEnd: 45,
   lottoCount: 6,
