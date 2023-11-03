@@ -9,6 +9,7 @@ const rateOfReturn = (price, result) => {
     if (key === "6개 일치 (2,000,000,000원)") value += result[key] * 2000000000;
   }
   const rate = (value / price) * 100;
+
   return rate.toFixed(1);
 };
 export default rateOfReturn;
