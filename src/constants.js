@@ -5,6 +5,7 @@ export const MESSAGES = {
   lottoNumbersCountError: "[ERROR] 로또 번호는 6개여야 합니다.",
   lottoNumberRangeError: "[ERROR] 로또 번호는 1이상 45이하만 가능합니다.",
   duplicatedLottoNumberError: "[ERROR] 모든 로또 번호는 서로 달라야 합니다.",
+  winningNumbersQuestion: "\n당첨 번호를 입력해 주세요.",
 };
 export const LOTTO_NUMBERS_COUNT = 6;
 export const MIN_LOTTO_NUMBER = 1;
