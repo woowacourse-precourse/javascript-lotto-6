@@ -10,12 +10,10 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const trimedNumbers = numbers.trim();
-
     const validate = new Validate();
-    validate.isOnlyNumberAndComma(trimedNumbers);
+    validate.isOnlyNumberAndComma(numbers);
 
-    const numbersArray = trimedNumbers.split(SEPARATOR.USER_LOTTO).map(Number);
+    const numbersArray = numbers.split(SEPARATOR.USER_LOTTO).map(Number);
     validate.isValidUserLottoInput(numbersArray);
   }
 }
