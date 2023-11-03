@@ -43,6 +43,6 @@ export class Lotto {
   }
 
   printNumbers() {
-    OutputView.print(this.#numbers.join(", "));
+    OutputView.print(`[${this.#numbers.join(", ")}]`);
   }
 }
