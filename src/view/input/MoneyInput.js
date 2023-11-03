@@ -6,7 +6,6 @@ class MoneyInput {
   constructor() {
     this.moneyValid = new MoneyValid();
   }
-
   async userInput() {
     return await Console.readLineAsync(`${GAME_MESSAGE.buy_money}`);
   }
