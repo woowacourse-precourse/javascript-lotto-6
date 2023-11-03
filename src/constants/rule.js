@@ -18,3 +18,19 @@ export const SEPARATOR = {
   USER_LOTTO: ",",
   NAME: "쉼표",
 };
+
+export const RANK = {
+  FIRST: 6,
+  SECOND: 5,
+  THIRD: 5,
+  FOURTH: 4,
+  FIFTH: 3,
+};
+
+export const PRIZE = {
+  FIRST: 2_000_000_000,
+  SECOND: 30_000_000,
+  THIRD: 1_500_000,
+  FOURTH: 50_000,
+  FIFTH: 5_000,
+};
