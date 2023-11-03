@@ -8,6 +8,8 @@ class App {
 
   #winningNumbers;
 
+  #bonusNumber;
+
   static #isPositiveInteger(input) {
     const regex = /^\d+$/;
     return regex.test(input);
@@ -50,9 +52,16 @@ class App {
     return regex.test(numbers);
   }
 
+  static #isLottoNumber(number) {
+    if (number < 1 || number > 45) {
+      return false;
+    }
+    return true;
+  }
+
   static #isLottoNumbers(numbers) {
     for (let i = 0; i < numbers.length; i += 1) {
-      if (numbers[i] < 1 || numbers[i] > 45) {
+      if (!this.#isLottoNumber(numbers[i])) {
         return false;
       }
     }
@@ -77,6 +86,13 @@ class App {
     this.#winningNumbers = new Set(numbers.split(" "));
   }
 
+  async getBonusNumber() {
+    const bonusNumber = await MissionUtils.Console.readLineAsync(
+      "보너스 번호를 입력해 주세요.\n",
+    );
+    this.#bonusNumber = bonusNumber;
+  }
+
   async play() {
     await this.getMoneyInput();
     for (let i = 0; i < this.#money / 1000; i += 1) {
@@ -84,6 +100,7 @@ class App {
     }
     this.printLottoList();
     await this.getWinningNumbers();
+    await this.getBonusNumber();
   }
 }
 
