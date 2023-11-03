@@ -6,6 +6,13 @@ class InputView {
     const price = await Console.readLineAsync(CONSOLE_MESSAGE.inputPrice);
     return price;
   }
+
+  static async getLottoNumbers() {
+    const LottoNumbers = await Console.readLineAsync(
+      CONSOLE_MESSAGE.inputLottoNumbers
+    );
+    return LottoNumbers;
+  }
 }
 
 export default InputView;
