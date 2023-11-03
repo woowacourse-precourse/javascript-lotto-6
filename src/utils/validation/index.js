@@ -3,6 +3,10 @@ export class Validation {
     return target.length === length;
   }
 
+  static isUnique(target) {
+    return new Set(target).size === target.length;
+  }
+
   static isNumber(target) {
     return typeof target === "number";
   }
