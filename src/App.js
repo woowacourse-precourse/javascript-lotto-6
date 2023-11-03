@@ -25,8 +25,7 @@ class App {
       verificationNumber,
       bounsNumberverification
     );
-    console.log(result);
-    // results(result);
+    results(result);
   }
 }
 
