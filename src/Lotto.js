@@ -8,8 +8,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const setNumbers = new Set(numbers);
-    if (setNumbers.length !== numbers.length) {
+    const numbersSet = new Set(numbers);
+    if (numbersSet.size !== numbers.length) {
       throw new Error('[ERROR] 로또 번호는 중복이 있으면 안 됩니다.');
     }
     if (numbers.length !== 6) {
