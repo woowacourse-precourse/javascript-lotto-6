@@ -11,6 +11,7 @@ export default App;
 
 const PURCASE_COMMENT = "구입금액을 입력해 주세요."
 const WINNING_NUMBER_COMMENT = "당첨 번호를 입력해 주세요.";
+const BONUS_NUMBER_COMMENT = "보너스 번호를 입력해 주세요.";
 const LOTTO_PRICE = 1000;
 
 async function inputMoney() {
@@ -45,6 +46,13 @@ async function inputWinningNumber() {
   MissionUtils.Console.print(comment);
   const winnigNumber = await MissionUtils.Console.readLineAsync('');
   return winnigNumber;
+}
+
+async function inputBonusNumber() {
+  let comment = BONUS_NUMBER_COMMENT;
+  MissionUtils.Console.print(comment);
+  const bonusNumber = await MissionUtils.Console.readLineAsync('');
+  return bonusNumber;
 }
 
 export function winningNumberSpliter(input) {
