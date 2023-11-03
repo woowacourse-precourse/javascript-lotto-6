@@ -73,10 +73,6 @@
     <td><code>static</code>MAX_NUMBER</td>
     <td>로또 번호의 최대 숫자입니다.</td>
   </tr>
-  <tr>
-    <td>number</td>
-    <td>로또 번호입니다.</td>
-  </tr>
 </table>
 
 <table>
@@ -292,12 +288,12 @@
 
   - [x] `equal(number)` 호출 시 같은 인스턴스인지 비교한다.
 
-- [ ] LottoNumber 예외 처리
+- [x] LottoNumber 예외 처리
 
-  - [ ] 인스턴스 생성 시 `number`에 숫자가 아닌 값이 입력되면 에러가 발생한다.
-  - [ ] 인스턴스 생성 시 `number`에 정수가 아닌 값이 입력되면 에러가 발생한다.
-  - [ ] 인스턴스 생성 시 `number`에 범위 외 숫자가 입력되면 에러가 발생한다.
-  - [ ] `equal(number)` 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
+  - [x] 인스턴스 생성 시 `number`에 숫자가 아닌 값이 입력되면 에러가 발생한다.
+  - [x] 인스턴스 생성 시 `number`에 정수가 아닌 값이 입력되면 에러가 발생한다.
+  - [x] 인스턴스 생성 시 `number`에 범위 외 숫자가 입력되면 에러가 발생한다.
+  - [x] `equal(number)` 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
 
 - [ ] Lotto
 
