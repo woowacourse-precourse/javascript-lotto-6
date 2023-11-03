@@ -13,27 +13,28 @@ const Validator = {
 // 값을 입력하지 않았는지 검사
 const notInputValue = (inputValue) => {
   if (inputValue.trim().length === 0) {
-    throw new Error(ERROR.emptyValue);
+    // Console.print(ERROR.emptyValue);
+    throw ERROR.emptyValue;
   }
 };
 
 //숫자 아닌것이 있는지 검사 (?) -> isNaN(Number(inputValue))하면 실수표현 못잡음
 const notNumber = (inputValue) => {
   if (/[^0-9]/g.test(inputValue)) {
-    throw new Error(ERROR.notNumberic);
+    throw ERROR.notNumberic;
   }
 };
 
 // 1000단위인지 검사 -> 이거하면 문자있는지, 정수형인지 같이 되는 것 같은데..
 const notDivisibleByThousand = (inputValue) => {
   if (Number(inputValue) % 1000 !== 0) {
-    throw new Error(ERROR.notDivisibleMoney);
+    throw ERROR.notDivisibleMoney;
   }
 };
 
 const moneyRangeOver = (inputValue) => {
   if (Number(inputValue) < 1000) {
-    throw new Error(ERROR.underThousandMoney);
+    throw ERROR.underThousandMoney;
   }
 };
 

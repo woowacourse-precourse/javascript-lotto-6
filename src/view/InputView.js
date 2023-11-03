@@ -7,7 +7,6 @@ const InputView = {
       const money = await Console.readLineAsync(MESSAGE.moneyInput);
       return money;
     } catch (error) {
-      // 에러메시지, 여기부터 다시
       throw new Error(error);
     }
   },
