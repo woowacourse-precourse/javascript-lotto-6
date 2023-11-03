@@ -21,7 +21,7 @@ class App {
     if (lottoPrice < 1000)
       throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
     if (Number(lottoPrice) % 1000 !== 0)
-      throw new Error('[ERROR] 금액은 1,000원 단위로 입력해주세요');
+      throw new Error('[ERROR] 금액은 1,000원 단위로 입력해주세요.');
   }
 
   makeRandomNumber() {
@@ -45,6 +45,13 @@ class App {
       Console.print(string);
     });
   }
+
+  checkBonusNumber(userBonusNumber){
+    if(userBonusNumber === '') throw new Error('[ERROR] 숫자를 입력해주세요.');
+    if(isNaN(userBonusNumber)) throw new Error('[ERROR] 숫자만 입력해주세요.');
+    if(1>Number(userBonusNumber) || Number(userBonusNumber)>45) throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+  }
+
   async play() {
     const lottoPrice =
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
@@ -62,6 +69,7 @@ class App {
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     const userBonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    this.checkBonusNumber(userBonusNumber);
     const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
     this.lotto = new Lotto(lottoNumberArray);
   }
