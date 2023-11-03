@@ -7,9 +7,10 @@ class DrawnLotto extends Lotto {
 
   constructor(numbers, bonusNumber) {
     super(numbers);
-    this.#validatePlusNumber(bonusNumber);
-    this.#validateRangeOfPlusNumber(bonusNumber);
-    this.#bonusNumber = Number(bonusNumber);
+    const convertedBonumNumber = Number(bonusNumber);
+    this.#validatePlusNumber(convertedBonumNumber);
+    this.#validateRangeOfPlusNumber(convertedBonumNumber);
+    this.#bonusNumber = convertedBonumNumber;
   }
 
   getBonusNumber() {

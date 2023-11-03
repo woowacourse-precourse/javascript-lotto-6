@@ -5,11 +5,11 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validateSize(numbers);
-    this.#validateDuplicate(numbers);
-    this.#validateRange(numbers);
-    this.#numbers.map((number) => Number(number));
-    this.#numbers = this.#sortNumbers(numbers);
+    const convertedNumbers = numbers.map(Number);
+    this.#validateSize(convertedNumbers);
+    this.#validateDuplicate(convertedNumbers);
+    this.#validateRange(convertedNumbers);
+    this.#numbers = this.#sortNumbers(convertedNumbers);
   }
 
   #validateSize(numbers) {
