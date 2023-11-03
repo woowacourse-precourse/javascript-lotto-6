@@ -17,7 +17,10 @@ class App {
 
   async play() {
     this.#lottoGame.setUpGame();
+    await this.#getLottoTickets();
+  }
 
+  async #getLottoTickets() {
     const lottoPrice = await this.#inputView.getLottoPrice();
     Validation.inputLottoPrice(lottoPrice);
 
