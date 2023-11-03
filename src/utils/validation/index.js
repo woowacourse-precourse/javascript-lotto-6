@@ -11,6 +11,10 @@ export class Validation {
     return typeof target === "number";
   }
 
+  static isPositive(target) {
+    return target > 0;
+  }
+
   static isInteger(target) {
     return Number.isInteger(target);
   }
