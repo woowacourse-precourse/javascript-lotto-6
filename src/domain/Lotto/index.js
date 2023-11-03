@@ -6,7 +6,7 @@ import { OutputView } from "../../view";
 const LENGTH = LOTTO_RULE.LENGTH;
 const { MIN, MAX } = LOTTO_RULE.RANGE;
 
-class Lotto {
+export class Lotto {
   #numbers;
 
   constructor(numbers) {
@@ -46,5 +46,3 @@ class Lotto {
     OutputView.print(this.#numbers.join(", "));
   }
 }
-
-export default Lotto;
