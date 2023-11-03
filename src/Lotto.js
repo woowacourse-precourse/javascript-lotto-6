@@ -11,14 +11,11 @@ class Lotto {
 
   #validate(numbers) {
     const validate = new Validate();
-    validate.isOnlyNumberAndComma(numbers);
-
-    const numbersArray = Utils.convertStringIntoNumberArray(numbers);
-    validate.isValidUserLottoInput(numbersArray);
+    validate.isValidUserLottoInput(numbers);
   }
 
   getUserLotto() {
-    return Utils.convertStringIntoNumberArray(this.#numbers);
+    return this.#numbers;
   }
 }
 

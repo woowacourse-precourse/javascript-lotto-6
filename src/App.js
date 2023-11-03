@@ -41,7 +41,10 @@ class App {
   async getUserLottoInput() {
     try {
       const userLottoInput = await Print.getUserLottoNumber();
-      const validUserLotto = new Lotto(userLottoInput);
+      const validate = new Validate();
+      validate.isOnlyNumberAndComma(userLottoInput);
+      const numbersArray = Utils.convertStringIntoNumberArray(userLottoInput);
+      const validUserLotto = new Lotto(numbersArray);
       this.#userLotto = validUserLotto.getUserLotto();
       await this.getUserBonusInput();
     } catch (error) {
