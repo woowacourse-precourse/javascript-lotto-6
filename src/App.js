@@ -9,14 +9,20 @@ class App {
 
     const lottos = this.createLottos(userMoney);
     MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
-    lottos.forEach((lotto) => MissionUtils.Console.print(lotto.getNumbers()));
+    lottos.forEach((lotto) => MissionUtils.Console.print("[" + lotto.getNumbers().join(", ") + "]"));
     MissionUtils.Console.print("");
 
-    const winningNumbers = await this.playUserRequest("당첨 번호를 입력해 주세요.\n");
+    const winningNumbers = await this.playUserRequest(
+      "당첨 번호를 입력해 주세요.\n"
+    );
     const bonusNumbers = await this.playUserRequest(
       "보너스 번호를 입력해 주세요.\n",
       winningNumbers
     );
+    const results = this.winningLotto(lottos, winningNumbers, bonusNumbers);
+    const profitRate = this.calculateProfit(userMoney, results);
+    const profit = this.formatProfit(profitRate);
+    this.printConsoleUI(results, profit);
   }
 
   async playUserRequest(prompt, winningNumbers) {
@@ -41,7 +47,9 @@ class App {
 
     while (true) {
       try {
-        const userInput = await this.getUserInput(firstAttempt ? promptMsg : "");
+        const userInput = await this.getUserInput(
+          firstAttempt ? promptMsg : ""
+        );
         firstAttempt = false;
 
         return validateFn(userInput, winningNumbers);
@@ -81,7 +89,8 @@ class App {
   }
 
   checkLottoNumberValidate(userInput) {
-    const errorMessage = "[ERROR] 로또 번호는 1부터 45 사이의 중복되지 않는 6자리 숫자여야 합니다.";
+    const errorMessage =
+      "[ERROR] 로또 번호는 1부터 45 사이의 중복되지 않는 6자리 숫자여야 합니다.";
     let numbers = userInput.split(",").map((number) => {
       let num = parseInt(number, 10);
       if (isNaN(num) || num <= 0 || num > 45) {
@@ -126,6 +135,78 @@ class App {
       count -= 1;
     }
     return lottos;
+  }
+
+  winningLotto(lottos, winningNumbers, bonusNumber) {
+    let results = {
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+    };
+
+    lottos.forEach((lotto) => {
+      const matchCount = lotto.getNumbers().filter((number) =>
+        winningNumbers.includes(number)
+      ).length;
+      const isBonusMatched = lotto.getNumbers().includes(bonusNumber);
+
+      switch (matchCount) {
+        case 6:
+          results.first += 1;
+          break;
+        case 5:
+          results[isBonusMatched ? "second" : "third"] += 1;
+          break;
+        case 4:
+          results.fourth += 1;
+          break;
+        case 3:
+          results.fifth += 1;
+          break;
+      }
+    });
+
+    return results;
+  }
+
+  calculateProfit(userMoney, results) {
+    const prizeMoney = {
+      first: 2000000000,
+      second: 30000000,
+      third: 1500000,
+      fourth: 50000,
+      fifth: 5000,
+    };
+  
+    let totalPrize = 0;
+    for (const rank in results) {
+      totalPrize += results[rank] * prizeMoney[rank];
+    }
+  
+    let profitRate = (totalPrize/ userMoney) * 100;
+    
+    return profitRate;
+  };
+
+  formatProfit(profitRate) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'percent',
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1
+    }).format(profitRate / 100);
+  };
+
+  printConsoleUI(results, profit) {
+    MissionUtils.Console.print("\n당첨통계");
+    MissionUtils.Console.print("---");
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${results.fifth}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${results.fourth}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${results.third}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${results.second}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${results.first}개`);
+    MissionUtils.Console.print(`총 수익률은 ${profit}입니다.`);
   }
 }
 

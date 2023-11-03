@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "../src/Lotto.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -101,7 +102,10 @@ describe("로또 테스트", () => {
 
     const app = new App();
 
-    mockRandoms([[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12]]);
+    mockRandoms([
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+    ]);
 
     const lottos = app.createLottos(purchaseAmount);
     expect(lottos).toHaveLength(lottoAmount);
@@ -109,14 +113,46 @@ describe("로또 테스트", () => {
     expect(lottos[1].getNumbers()).toEqual([7, 8, 9, 10, 11, 12]);
   });
 
-  test('당첨 번호와 보너스 번호 입력', async () => {
+  test("당첨 번호와 보너스 번호 입력", async () => {
     const winningNumbers = "1,2,3,4,5,6";
     const bounsNumber = "7";
-    
+
     const app = new App();
-    
-    expect(app.checkLottoNumberValidate(winningNumbers)).toEqual([1, 2, 3, 4, 5, 6]);
+
+    expect(app.checkLottoNumberValidate(winningNumbers)).toEqual([
+      1, 2, 3, 4, 5, 6,
+    ]);
     expect(app.checkBonusNumberValidate(bounsNumber, winningNumbers)).toBe(7);
-  })
-  
+  });
+
+  test("당첨 결과 계산: 6자리 다 맞출 경우", () => {
+    const userNumbers = [new Lotto([1, 2, 3, 4, 5, 6])];
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+
+    const app = new App();
+
+    const results = app.winningLotto(userNumbers, winningNumbers, bonusNumber);
+
+    expect(results).toEqual({
+      fifth: 0,
+      fourth: 0,
+      third: 0,
+      second: 0,
+      first: 1,
+    });
+  });
+
+  test("당첨 결과 계산: 수익률", () => {
+    const userMoney = 1000;
+    const results = { fifth: 0, fourth: 0, third: 0, second: 0, first: 1 };
+    const app = new App();
+
+    const profit = app.calculateProfit(userMoney, results);
+
+    const expectedProfitRate =
+      Math.round((2000000000 / userMoney) * 100 * 10) / 10;
+
+    expect(profit).toBeCloseTo(expectedProfitRate, 1);
+  });
 });
