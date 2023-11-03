@@ -46,10 +46,16 @@ class App {
   async getUserBonusInput() {
     try {
       const bonus = await Print.getUserBonusNumber();
+      this.checkValidBonusNumber(bonus);
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.getUserBonusInput();
     }
+  }
+
+  checkValidBonusNumber(input) {
+    const validate = new Validate();
+    validate.isValidBonusNumber(input);
   }
 }
 

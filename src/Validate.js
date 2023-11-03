@@ -77,6 +77,14 @@ class Validate {
 
     return true;
   }
+
+  isValidBonusNumber(input) {
+    if (!this.isOnlyNumber(input)) {
+      return false;
+    }
+
+    return true;
+  }
 }
 
 export default Validate;
