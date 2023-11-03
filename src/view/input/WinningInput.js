@@ -8,7 +8,7 @@ class WinningInput {
   }
   async userInput() {
     const input = await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`);
-    return input.split(",").map((str) => parseInt(str, 10));
+    return input.split(",").map((str) => parseFloat(str));
   }
 
   async winningNumbers() {

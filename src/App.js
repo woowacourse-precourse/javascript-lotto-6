@@ -2,7 +2,7 @@ import createNumbers from "./controller/CreateNumbers.js";
 import MoneyInput from "./view/input/MoneyInput.js";
 import WinningInput from "./view/input/WinningInput.js";
 import BonusInput from "./view/input/BonusInput.js";
-import Lotto from "./model/Lotto.js";
+import LottoGame from "./model/LottoGame.js";
 
 class App {
   #moneyInput = new MoneyInput();
@@ -14,7 +14,7 @@ class App {
     const userLotto = createNumbers(money);
     const winningNumber = await this.#winningInput.winningNumbers();
     const bonusNumber = await this.#bonusInput.bonusNumber();
-    const lotto = new Lotto(userLotto, winningNumber, bonusNumber);
+    const lotto = new LottoGame(userLotto, winningNumber, bonusNumber);
     lotto.lottoLogic();
   }
 }
