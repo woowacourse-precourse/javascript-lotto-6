@@ -1,6 +1,6 @@
-export function toSorted(array) {
+export function toSorted(array, compareFunction) {
   const copied = [...array];
-  copied.sort();
+  copied.sort(compareFunction);
 
   return copied;
 }
