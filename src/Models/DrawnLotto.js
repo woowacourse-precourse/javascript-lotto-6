@@ -8,6 +8,7 @@ class DrawnLotto extends Lotto {
   constructor(numbers, bonusNumber) {
     super(numbers);
     this.#validatePlusNumber(bonusNumber);
+    this.#validateRangeOfPlusNumber(bonusNumber);
     this.#bonusNumber = Number(bonusNumber);
   }
 
@@ -18,6 +19,16 @@ class DrawnLotto extends Lotto {
   #validatePlusNumber(bonusNumber) {
     if (this.getNumbers().includes(bonusNumber))
       throw new LottoError("중복된 숫자가 있습니다.");
+  }
+
+  #validateRangeOfPlusNumber(bonusNumber) {
+    if (
+      bonusNumber < LOTTO_SETTINGS.NUMBER_RANGE.MIN ||
+      bonusNumber > LOTTO_SETTINGS.NUMBER_RANGE.MAX
+    )
+      throw new LottoError(
+        `로또 번호는 ${LOTTO_SETTINGS.NUMBER_RANGE.MIN}이상 ${LOTTO_SETTINGS.NUMBER_RANGE.MAX}이하여야 합니다.`
+      );
   }
 }
 
