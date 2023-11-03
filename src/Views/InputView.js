@@ -11,8 +11,15 @@ export default class InputView {
 
   static async promptForDrawnLottoNumbers() {
     const drawnLottoNumbers = await Console.readLineSync(
-      `${MESSAGES.PROMPT_BONUS_NUMBER}\n`
+      `${MESSAGES.PROMPT_DRAWN_LOTTO_NUMBERS}\n`
     );
     return drawnLottoNumbers.split(",").map((number) => number.trim());
+  }
+
+  static async promptForBonusNumber() {
+    const bonusNumber = await Console.readLineSync(
+      `${MESSAGES.PROMPT_BONUS_NUMBER}\n`
+    );
+    return bonusNumber;
   }
 }
