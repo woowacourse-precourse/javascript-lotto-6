@@ -12,7 +12,7 @@ class Lotto {
   }
 
   #validateSize(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_SETTINGS.NUMBERS_PER_TICKET) {
       throw new LottoError(
         `로또 번호는 ${LOTTO_SETTINGS.NUMBER_PER_TICKET}개여야 합니다.`
       );
@@ -48,8 +48,6 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
