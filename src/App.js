@@ -2,7 +2,7 @@ import Controller from "./Controller.js";
 
 class App {
     async play() {
-        let a = Controller.priceToAmount(5000);
+        const a = Controller.lottoNumToArray("1,2,am,  3, 4,5");
         console.log(a);
     }
 }

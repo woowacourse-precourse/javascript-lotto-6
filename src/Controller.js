@@ -9,6 +9,11 @@ class Controller {
             throw new Error(CONSTANT.ERROR_PURCHASE_INPUT);
         }
     }
+
+    static lottoNumToArray(lottoNumStr) {
+        const LOTTO_NUM_ARRAY = lottoNumStr.trim().split(",").map(Number);
+        return LOTTO_NUM_ARRAY;
+    }
 }
 
 export default Controller;
