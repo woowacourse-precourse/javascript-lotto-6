@@ -7,6 +7,7 @@ const Outputs = {
       Console.print(`[${items.sort((a, b) => a - b).join(', ')}]`);
     });
   },
+
   printStatistics(bills = {}) {
     Console.print(`3개 일치 (5,000원) - ${bills.three ?? 0}개`);
     Console.print(`4개 일치 (50,000원) - ${bills.four ?? 0}개`);
@@ -16,5 +17,8 @@ const Outputs = {
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${bills.six ?? 0}개`);
   },
+
+  printRateOfReturn(rate = 0) {
+    Console.print(`총 수익률은 ${rate ?? 0}%입니다.`);
+  },
 };
-Outputs.printStatistics();
