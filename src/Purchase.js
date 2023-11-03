@@ -15,15 +15,20 @@ class Purchase {
       purchaseAmount <= 0 ||
       purchaseAmount % 1000 !== 0
     ) {
-      throw new Error(ERROR.purchase_amount_error);
+      throw new Error();
     }
   }
 
   async inputPurchaseAmount() {
     const input = await Console.readLineAsync(INPUT.purchase_amount);
     const purchaseAmount = Number(input);
-    this.#validate(purchaseAmount);
-    this.#lottoCount = purchaseAmount / 1000;
+    try {
+      this.#validate(purchaseAmount);
+      this.#lottoCount = purchaseAmount / 1000;
+    } catch {
+      Console.print(ERROR.purchase_amount_error);
+      await this.inputPurchaseAmount();
+    }
   }
 
   getLottoCount() {
