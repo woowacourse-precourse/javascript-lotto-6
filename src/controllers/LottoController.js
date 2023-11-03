@@ -10,6 +10,8 @@ class LottoController {
 
   #WIN_NUMBER;
 
+  #BONUS_NUMBER;
+
   constructor() {
     this.INPUT_VIEW = new InputView();
     this.OUTPUT_VIEW = new OutputView();
@@ -30,7 +32,7 @@ class LottoController {
 
   async #printLottoNumber(canBuy) {
     this.OUTPUT_VIEW.userCanBuy(canBuy);
-    this.#lottoGenerator(canBuy);
+    await this.#lottoGenerator(canBuy);
     await this.inputWinNumber();
   }
 
@@ -56,7 +58,8 @@ class LottoController {
   }
 
   async #inputBonusNumber() {
-    console.log(this.#WIN_NUMBER);
+    this.#BONUS_NUMBER = await this.INPUT_VIEW.bonusNumber();
+    console.log(this.#BONUS_NUMBER);
   }
 }
 

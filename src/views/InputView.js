@@ -22,6 +22,18 @@ class InputView {
     const winNumber = await Console.readLineAsync(INPUT_MSG.WIN_LOTTERY_NUMBER);
     return winNumber.split(',').map((number) => Number(number));
   }
+
+  async bonusNumber() {
+    //
+    try {
+      const bonusNumber = await Console.readLineAsync(INPUT_MSG.BONUS_NUMBER);
+      await this.INPUT_VAL.bonusNumber(bonusNumber);
+      return Number(bonusNumber);
+    } catch (error) {
+      Console.print(error.name + error.message);
+      return error.name;
+    }
+  }
 }
 
 export default InputView;

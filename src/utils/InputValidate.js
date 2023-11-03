@@ -18,6 +18,12 @@ class InputValidate {
       throw new InputError(ERROR_MSG.LOTTO_SHOULD_SIX);
     }
   }
+
+  async bonusNumber(bonus) {
+    if (!Number.isSafeInteger(Number(bonus))) {
+      throw new InputError(ERROR_MSG.BONUS_NUMBER_NOT_NUMBER);
+    }
+  }
 }
 
 export default InputValidate;
