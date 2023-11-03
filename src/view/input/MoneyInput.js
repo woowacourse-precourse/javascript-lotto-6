@@ -14,7 +14,12 @@ class MoneyInput {
     do {
       money = await this.userInput();
       Console.print("");
-      valid = this.moneyValid.moneyIsValid(money);
+      try {
+        valid = this.moneyValid.moneyIsValid(money);
+      } catch (error) {
+        Console.print(error.message);
+        valid = false;
+      }
     } while (!valid);
     return money / 1000;
   }

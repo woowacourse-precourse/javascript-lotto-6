@@ -6,8 +6,8 @@
 
 class MoneyValid {
     moneyIsValid(money) {
-        if (money % 1000 !== 0){
-            throw new Error('[ERROR]'); // 임시
+        if (isNaN(Number(money))) {
+            throw new Error('[ERROR] 문자가 포함되어 있습니다.');
         }
         return true;
     }
