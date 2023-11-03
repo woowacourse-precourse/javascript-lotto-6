@@ -6,7 +6,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validateSize(numbers);
-    this.#numbers = numbers;
+    this.#numbers = this.#sortNumbers(numbers);
   }
 
   #validateSize(numbers) {
@@ -16,6 +16,13 @@ class Lotto {
       );
     }
   }
+
+  #sortNumbers(numbers) {
+    return numbers.sort(
+      (currentNumber, nextNumber) => currentNumber - nextNumber
+    );
+  }
+
   // TODO: 추가 기능 구현
 }
 
