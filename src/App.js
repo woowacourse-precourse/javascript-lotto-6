@@ -23,7 +23,7 @@ class App {
 
   async createLottoAmount(){
     const PURCHASE_AMOUNT = await this.userView.userInputPurchaseAmount();
-    this.lottos = new Lottos(Number(PURCHASE_AMOUNT));
+    this.lottos = new Lottos(PURCHASE_AMOUNT);
   }
 
   async createWinningNumbers(){
