@@ -1,3 +1,5 @@
+import { Random } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -51,6 +53,14 @@ class Lotto {
     if (isNaN(purchaseAmount)) {
       throw new Error('[ERROR] 금액은 숫자로 입력해주세요.');
     }
+  }
+
+  // 로또번호 생성, 당첨번호와 비교, 수익률 계산,,
+
+  // 로또번호 생성
+  createLottoNumbers() {
+    const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return lottoNumbers;
   }
 }
 
