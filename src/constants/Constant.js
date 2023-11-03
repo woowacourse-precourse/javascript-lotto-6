@@ -1,4 +1,5 @@
 export const CONSTANT = Object.freeze({
+  digit: 6,
   amountUnit: 1000,
 });
 
@@ -22,6 +23,6 @@ export const ERROR = Object.freeze({
   isNegative: '입력된 금액이 음수입니다. 금액은 양수여야 합니다.',
   isEmpty: '공백이 입력되었습니다. 6자리의 숫자를 입력해야합니다.',
   isNotANumber: '숫자가 아닌 값이 입력되었습니다. 번호는 숫자만 가능합니다.',
-  isNotSix: '6개가 입력되지 않았습니다. 6개의 숫자를 입력해주세요.',
+  isInvalidDigit: `${CONSTANT.digit}개가 입력되지 않았습니다. ${CONSTANT.digit}개의 숫자를 입력해주세요.`,
   isNotInRange: '입력된 숫자 중 1-45 범위가 아닌 숫자가 있습니다. 범위 안의 숫자를 입력해주세요',
 });

@@ -13,6 +13,8 @@ class LottoGame {
     this.#lottoBundle = new LottoBundle();
     this.#lottoBundle.buyLottos(lottoCount);
     OutputView.printLottoNumbers(lottoCount, this.#lottoBundle.getTotalLottoNumberString());
+
+    await this.#getWinningNumbersInput();
   }
 
   async #getAmountInput() {
@@ -32,6 +34,7 @@ class LottoGame {
 
   async #getWinningNumbersInput() {
     const winningNumbers = await InputView.readWinningNumbers();
+    Validator.validateLotto(winningNumbers);
   }
 }
 
