@@ -7,11 +7,17 @@ class DrawnLotto extends Lotto {
 
   constructor(numbers, bonusNumber) {
     super(numbers);
+    this.#validatePlusNumber(bonusNumber);
     this.#bonusNumber = Number(bonusNumber);
   }
 
   getPlusNumber() {
     return this.#bonusNumber;
+  }
+
+  #validatePlusNumber(bonusNumber) {
+    if (this.getNumbers().includes(bonusNumber))
+      throw new LottoError("중복된 숫자가 있습니다.");
   }
 }
 
