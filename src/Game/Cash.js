@@ -4,7 +4,7 @@ import Check from "../Util/Check.js";
 
 export default class Cash {
   constructor() {
-    this.check = new Check();
+    this.Check = new Check();
   }
 
   async toSpend() {
@@ -12,10 +12,10 @@ export default class Cash {
     while (true) {
       try {
         cash = await IO.get(Constants.input.askAmount);
-        this.check.money(parseInt(cash.trim(), 10));
+        this.Check.money(parseInt(cash.trim(), 10));
         break;
-      } catch {
-        IO.print(Constants.error.money);
+      } catch (error) {
+        IO.print(error);
       }
     }
     return parseInt(cash, 10);
