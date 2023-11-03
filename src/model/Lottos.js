@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import Lotto from '../Lotto.js';
 
 class Lottos {
   #lottos;
@@ -10,6 +11,11 @@ class Lottos {
       );
       return numbers;
     });
+    this.#lottos = this.#lottos.map(lotto => new Lotto(lotto));
+  }
+
+  getLottos() {
+    return this.#lottos;
   }
 }
 
