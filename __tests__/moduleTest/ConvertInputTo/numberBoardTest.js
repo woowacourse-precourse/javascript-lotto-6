@@ -39,7 +39,6 @@ describe('numberBoard()', () => {
 
     //when
     const result = await ConvertInputTo.numberBoard();
-    console.log(result);
     //then
     expect(result).toEqual(expectedValue);
   });

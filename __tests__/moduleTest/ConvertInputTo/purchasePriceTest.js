@@ -40,7 +40,7 @@ describe('purchasePrice()', () => {
     [['10', '10000'], 10000],
     [['1001', '10001', '1000'], 1000],
     [['만원', '10000'], 10000],
-  ])('예외처리', async input => {
+  ])('예외처리', async (input, expectedValue) => {
     //given
     mockQuestions(input);
     const logSpy = getLogSpy();
@@ -49,8 +49,8 @@ describe('purchasePrice()', () => {
     const purchasePrice = await ConvertInputTo.purchasePrice();
 
     //then
-    for (let logIndex = 0; logIndex < logSpy.mock.calls.length - 1; logIndex) {
-      expect(String(call[0])).toMatch(ERROR_FORMAT);
+    for (let i = 0; i < logSpy.mock.calls.length - 1; i++) {
+      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_FORMAT);
     }
     expect(purchasePrice).toBe(expectedValue);
   });

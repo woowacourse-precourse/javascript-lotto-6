@@ -16,6 +16,10 @@ class Print {
         .join(', ')}${LOTTO_BEHIND_COVER}`
     );
   }
+
+  static errorMessage(error) {
+    Console.print(error.message);
+  }
 }
 
 export default Print;

@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import ErrorCheck from './ErrorCheck.js';
 import Get from './Get.js';
+import Print from './Print.js';
 
 const LOTTO_PRICE = 1000;
 const LOTTO_UPPER_NUMBER = 45;
@@ -20,19 +21,19 @@ class ConvertInputTo {
   }
 
   static async purchasePrice() {
-    let isFailed = false;
-    do {
+    let isFailed = true;
+    while (isFailed) {
       const inputString = await Console.readLineAsync(
         PURCHASE_PRICE_INPUT_MESSAGE
       );
       try {
         ErrorCheck.purchasePrice(inputString, LOTTO_PRICE);
+        return Number(inputString);
       } catch (error) {
-        Console.print(error.message);
+        Print.errorMessage(error);
         isFailed = true;
       }
-    } while (isFailed);
-    return Number(inputString);
+    }
   }
 
   static async numberBoard() {
