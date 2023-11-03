@@ -20,4 +20,14 @@ describe("로또 발행 테스트", () => {
       expect(() => PublishController.calculateLottoQuantity(price)).toThrow();
     });
   });
+
+  test("수량을 전달하면 그 수만큼 Lotto 객체를 만든다.", () => {
+    // given
+    const quantityList = [1, 3, 5, 10];
+    const results = [1, 3, 5, 10];
+
+    // when & then
+    const answers = quantityList.map((quantity) => PublishController.publish(quantity).length);
+    expect(answers).toEqual(results);
+  });
 });

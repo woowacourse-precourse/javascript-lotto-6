@@ -14,5 +14,18 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test("로또 번호가 1보다 작거나 45보다 큰 수가 있으면 예외가 발생한다.", () => {
+    // given
+    const lottoList = [
+      [0, 1, 3, 5, 10],
+      [1, 3, 44, 45, 46],
+    ];
+
+    // when & then
+    lottoList.forEach((lotto) => {
+      expect(() => {
+        new Lotto(lotto);
+      }).toThrow();
+    });
+  });
 });
