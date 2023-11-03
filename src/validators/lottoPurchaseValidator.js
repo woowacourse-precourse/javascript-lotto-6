@@ -1,4 +1,4 @@
-import { errorMessage } from "../constants/messages/errorMessage.js";
+import { errorMessage } from "../constants/messages.js";
 
 export const checkLottoPurchase = (cash) => {
   const isNotValid = (input) => {

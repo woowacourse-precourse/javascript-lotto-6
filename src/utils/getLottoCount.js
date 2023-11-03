@@ -1,4 +1,6 @@
+import { lotto } from "../constants/constants.js";
+
 export const getLottoCount = (cash) => {
-  const lottoCount = cash / 1000;
+  const lottoCount = cash / lotto.PRICE;
   return lottoCount;
 };

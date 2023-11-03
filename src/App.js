@@ -8,7 +8,7 @@ class App {
     const cash = await getPurchase();
     const lottoCount = getLottoCount(cash);
 
-    Console.print(lottoCount);
+    Console.print(`\n${lottoCount}개를 구매했습니다.`);
   }
 }
 
