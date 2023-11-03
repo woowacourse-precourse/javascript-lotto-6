@@ -9,6 +9,17 @@ class Utils {
 
     return numberArray;
   }
+
+  static numberArrayToString(array) {
+    let stringArray = [];
+    
+    array.forEach((number) => {
+      stringArray.push(number.toString());
+    });
+    const result = `[${stringArray.join(', ')}]`;
+
+    return result;
+  }
 }
 
 export default Utils;

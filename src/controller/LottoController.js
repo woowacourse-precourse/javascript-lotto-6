@@ -1,3 +1,4 @@
+import Utils from '../utils/Utils.js';
 import MESSAGES from '../constants/Messages.js';
 import User from '../domains/User.js';
 import WinningLotto from '../domains/WinningLotto.js';
@@ -35,7 +36,7 @@ class LottoController {
   getUserLottos() {
     View.printOutput(`\n${this.#user.getLottos().length}${MESSAGES.outputLottoAmount}`)
     this.#user.getLottos().forEach(lotto => {
-      View.printOutput(lotto);
+      View.printOutput(Utils.numberArrayToString(lotto));
     });
   }
 
@@ -65,8 +66,8 @@ class LottoController {
 
   getResult() {
     const lottos = this.#user.getLottos();
-    const numbers = 0;
-    const bonus = false;
+    let numbers = 0;
+    let bonus = false;
 
     lottos.forEach((lotto) => {
       numbers = this.#winningLotto.getMatchWithNumbers(lotto);
