@@ -21,8 +21,7 @@ class ConvertInputTo {
   }
 
   static async purchasePrice() {
-    let isFailed = true;
-    while (isFailed) {
+    while (true) {
       const inputString = await Console.readLineAsync(
         PURCHASE_PRICE_INPUT_MESSAGE
       );
@@ -31,7 +30,6 @@ class ConvertInputTo {
         return Number(inputString);
       } catch (error) {
         Print.errorMessage(error);
-        isFailed = true;
       }
     }
   }
@@ -46,11 +44,17 @@ class ConvertInputTo {
   }
 
   static async winningNumbersArray() {
-    const numbersString = await Console.readLineAsync(
-      WINNING_NUMBER_INPUT_MESSAGE
-    );
-    ErrorCheck.lottoNumbersString(numbersString);
-    return numbersString.split(',').map(Number);
+    while (true) {
+      const numbersString = await Console.readLineAsync(
+        WINNING_NUMBER_INPUT_MESSAGE
+      );
+      try {
+        ErrorCheck.lottoNumbersString(numbersString);
+        return numbersString.split(',').map(Number);
+      } catch (error) {
+        Print.errorMessage(error);
+      }
+    }
   }
 }
 
