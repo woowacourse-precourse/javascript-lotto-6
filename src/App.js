@@ -80,6 +80,7 @@ class App {
     const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
     const lotto = new Lotto(lottoNumberArray);
     let lottoResult = lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
+    const lottoRate = lotto.getLottoRate(lottoResult, lottoPrice);
     Console.print('당첨 통계');
     Console.print('---');
     this.printLottoResult(lottoResult);

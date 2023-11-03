@@ -37,7 +37,7 @@ class Lotto {
   }
 
   getLottoResult(equalNumber, bonusResult){
-    const result = [0,0,0,0,0];
+    let result = [0,0,0,0,0];
     if(equalNumber === 3) result[0] += 1;
     if(equalNumber === 4) result[1] += 1;
     if(equalNumber === 5 && !bonusResult) result[2] += 1;
@@ -47,7 +47,7 @@ class Lotto {
   }
 
   compareLottoNumbers(lottoRandomNumber, userLottoNumber, userBonusNumber){
-    const lottoResult = [];
+    let lottoResult = [];
     const bonusResult = 0;
     lottoRandomNumber.forEach(randomNumberArray => {
       const equalNumber = this.countEqualNumbers(randomNumberArray, userLottoNumber);
@@ -57,6 +57,18 @@ class Lotto {
       lottoResult = this.getLottoResult(equalNumber, bonusResult);
     });
     return lottoResult;
+  }
+
+  getLottoRate(lottoResult, lottoPrice){
+    const money = [5000, 50000, 1500000, 30000000, 2000000000];
+    let prizeMoney = 0;
+    let investment = Number(lottoPrice);
+    let rate = 0;
+    lottoResult.forEach((amount, index) => {
+      if(amount) prizeMoney += amount * money[index];
+    })
+    rate = (1- ((prizeMoney - investment)/ investment));
+    return rate;
   }
 }
 
