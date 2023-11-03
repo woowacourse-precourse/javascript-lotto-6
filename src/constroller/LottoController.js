@@ -8,15 +8,20 @@ import {
   bonusNubmerValidation,
 } from "../utils/Validation.js";
 import AnswerLotto from "../model/AnswerLotto.js";
+import LottoResult from "../model/LottoResult.js";
 
 class LottoController {
   #answerLotto;
+  #lottoResult;
   #lottoPage = [];
 
   async start() {
     try {
       await this.#createLotto();
       await this.#createAnswerLotto();
+      this.#lottoResult = new LottoResult();
+      this.#setLottoResult();
+      OutputView.printLottoResult(this.#lottoResult.getLottoRank());
     } catch (error) {
       throw error;
     }
@@ -35,8 +40,19 @@ class LottoController {
 
     this.#answerLotto = new AnswerLotto(lottoNumber, bonusNumber);
   }
+
+  #setLottoResult() {
+    this.#lottoPage.forEach((page) => {
+      this.#lottoResult.setRank(
+        page.getLottoNumber(),
+        this.#answerLotto.getLottoNumber(),
+        this.#answerLotto.getBonusNumber()
+      );
+    });
+  }
+
   #printLottoCount(count) {
-    OutputView.printLottoCount(count);
+    OutputView.printLottoPaperCount(count);
   }
 
   #getLottoList(count) {
