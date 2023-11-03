@@ -14,7 +14,7 @@ export async function getPayment() {
 export async function getGuessNumber() {
   try {
     const NUMBER_GUESS = await MissionUtils.Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
+      "\n당첨 번호를 입력해 주세요.\n"
     );
     return NUMBER_GUESS;
   } catch (error) {
@@ -25,7 +25,7 @@ export async function getGuessNumber() {
 export async function getBonusNumber() {
   try {
     const NUMBER_BONUS = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
+      "\n보너스 번호를 입력해 주세요.\n"
     );
     return NUMBER_BONUS;
   } catch (error) {

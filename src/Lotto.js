@@ -1,4 +1,6 @@
-class Lotto {
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+export class Lotto {
   #numbers;
 
   constructor(numbers) {
@@ -12,6 +14,9 @@ class Lotto {
     }
   }
 
+  printNumbers() {
+    MissionUtils.Console.print(this.#numbers.sort((a, b) => a - b));
+  }
   // TODO: 추가 기능 구현
 }
 
