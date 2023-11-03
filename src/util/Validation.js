@@ -9,28 +9,44 @@ const checkInputType = (input, message) => {
   if (input.match(/\D/)) throw new Error(message);
 };
 
-const checkMoneyZero = (input) => {
-  if (!input) throw new Error(ERROR_MESSAGES.inputMoneyZero);
+const checkInputSpace = (input) => {
+  if (input.match(' ')) throw new Error(ERROR_MESSAGES.inputSpace);
 };
 
 const checkInputBlank = (input) => {
-  if (input.match(' ')) throw new Error(ERROR_MESSAGES.inputBlank);
+  if (input === '') throw new Error(ERROR_MESSAGES.inputBlank);
+};
+
+const checkMoneyMinimun = (input) => {
+  if (input < GAME_RULE_NUMBER.price)
+    throw new Error(ERROR_MESSAGES.inputMoneyMinimun);
+};
+
+const checkWinningRange = (input) => {
+  if (input < GAME_RULE_NUMBER.min || input > GAME_RULE_NUMBER.max)
+    throw new Error(ERROR_MESSAGES.winningRange);
+};
+
+const checkInput = (input) => {
+  checkInputSpace(input);
+  checkInputBlank(input);
 };
 
 const checkPurchasingMoney = (input) => {
-  checkInputBlank(input);
+  checkInput(input);
   checkDivisibleByLottoPrice(input);
   checkInputType(input, ERROR_MESSAGES.inputMoneyType);
-  checkMoneyZero(input);
+  checkMoneyMinimun(input);
 };
 
 const checkWinningNumbers = (input) => {
-  checkInputBlank(input);
+  checkInput(input);
   checkInputType(input, ERROR_MESSAGES.winningType);
+  checkWinningRange(input);
 };
 
 const checkBonusNumber = (input) => {
-  checkInputBlank(input);
+  checkInput(input);
   checkInputType(input, ERROR_MESSAGES.bonusType);
 };
 
