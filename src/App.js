@@ -20,12 +20,14 @@ class App {
     await this.createLottoAmount();
     await this.createWinningNumbers();
     await this.createBonusNumber();
-    this.lottos.lottoNumberResultCount(this.lottos.purchaseLottoNumbers, this.winningNumber, this.bonusNumber);
+    this.lottoNumberResult();
   }
 
   async createLottoAmount(){
     const PURCHASE_AMOUNT = await this.userView.userInputPurchaseAmount();
     this.lottos = new Lottos(PURCHASE_AMOUNT);
+    this.userView.userOutputLottoCount(this.lottos.lottoCount);
+    this.userView.userOutputPurchaseLottoNumber(this.lottos.purchaseLottoNumbers);
   }
 
   async createWinningNumbers(){
@@ -36,6 +38,10 @@ class App {
   async createBonusNumber(){
     const BONUS_NUMBER = await this.userView.userInputBonusNumber();
     this.bonusNumber = new BonusNumber(BONUS_NUMBER);
+  }
+
+  lottoNumberResult = () => {
+      this.lottos.lottoNumberResultCount(this.lottos.purchaseLottoNumbers, this.winningNumber.winningNumber, this.bonusNumber.bonusNumber);
   }
 
 }

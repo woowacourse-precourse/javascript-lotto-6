@@ -12,15 +12,18 @@ class Lottos{
     constructor(amount){
         this.amount = amount;
         this.purchaseLottoNumbers = [];
-        this.lottoCount = this.amount / 1000;
+        this.matchingNumberCount = [];
+        this.matchingBonusNumberCount = [];
+        this.lottoCount = this.amount / Lottos.UNIT_PRICE;
         this.inputLottoValidate(amount);
+        this.lottoNumbers();
     }
 
     inputLottoValidate = (amount) => {
         new LottoValidate().inputPurchaseAmountValidate(amount);
     }
 
-    lottoNumbers = () => {
+    lottoNumbers = () => {    
         for(let i = 0; i < this.lottoCount; i++){
             const CREATE_RANDOM_NUMBER = this.createRandomNumber();
             this.purchaseLottoNumbers.push(CREATE_RANDOM_NUMBER);
@@ -28,20 +31,23 @@ class Lottos{
     };
 
     createRandomNumber = () => {
-        const RANDOM_NUMBER = Random.pickUniqueNumbersInRange(Lottos.MIN_NUMBER, Lottos.MAX_NUMBER, Lottos.MINNUMBER_LENGTH_NUMBER);
+        const RANDOM_NUMBER = Random.pickUniqueNumbersInRange(Lottos.MIN_NUMBER, Lottos.MAX_NUMBER, Lottos.NUMBER_LENGTH);
         this.lotto = new Lotto(RANDOM_NUMBER);
+        return RANDOM_NUMBER;
     }
 
     lottoNumberResultCount = (purchaseLotto, winningNumber, bonusNumber) => {
-        const results = [];
-        for(const PURCHASE_LOTTO of purchaseLotto){
-            const matchedNumbers = this.countMatchingNumbers(PURCHASE_LOTTO, winningNumber);
-            results.push(matchedNumbers);
+        for(const LOTTO_ARR of purchaseLotto){
+            const COMPARE_LOTTO_COUNT = this.compareLottoNumber(LOTTO_ARR, winningNumber);
+            this.matchingNumberCount.push(COMPARE_LOTTO_COUNT);
+            this.matchingBonusNumberCount.push(LOTTO_ARR.filter(number => number === Number(bonusNumber)).length);
         }
     };
 
-    countMatchingNumbers = (purchaseLotto, winningNumber) => {
-        return purchaseLotto.filter(number => winningNumber.includes(number)).length;
+    compareLottoNumber = (purchaseLotto, winningNumber) => {
+        return purchaseLotto.filter(
+            number => winningNumber.includes(number)
+        ).length;
     }
 
 
