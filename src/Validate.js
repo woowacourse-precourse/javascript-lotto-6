@@ -37,7 +37,7 @@ class Validate {
   }
 
   isValidUserLottoInput(input) {
-    if (!this.isValidLength(input)) {
+    if (!this.isValidLength(input) || !this.isValidRange(input)) {
       return false;
     }
 
@@ -47,6 +47,18 @@ class Validate {
   isValidLength(input) {
     if (input.length !== LOTTO.LENGTH) {
       throw new Error(ERROR.INVALID_LOTTO_LENGTH);
+    }
+
+    return true;
+  }
+
+  isValidRange(input) {
+    const isValid = input.every(
+      (value) => value < LOTTO.MIN_RANGE || value > LOTTO.MAX_RANGE
+    );
+
+    if (!isValid) {
+      throw new Error(ERROR.INVALID_RANGE);
     }
 
     return true;
