@@ -1,4 +1,5 @@
 import Lotto from "./Lotto.js";
+import Function from "./Fuctions.js";
 import { Random, Console } from "@woowacourse/mission-utils";
 
 class App {
@@ -8,9 +9,5 @@ class App {
   }
 }
 
-function lottoRandomNumber() {
-   const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-   return Array.from(randomNumbers);
-}
 
 export default App;
