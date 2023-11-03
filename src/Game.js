@@ -2,6 +2,24 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto";
 
 class Game {
+  #PRICE_TABLE = [{
+    price:5_000,
+    string:"3개 일치 (5,000원)"
+  }, {
+    price:50_000,
+    string:"4개 일치 (50,000원)"
+  }, {
+    price:1_500_500,
+    string:"5개 일치 (1,500,000원)"
+  }, {
+    price:30_000_000,
+    string:"5개 일치, 보너스 볼 일치 (30,000,000원)"
+  }, {
+    price:2_000_000_000,
+    string:"6개 일치 (2,000,000,000원)"
+  },];
+
+  money;
   lottos;
   choice;
   bonus;
@@ -14,8 +32,9 @@ class Game {
 
   async getMoney() {
     const input = await Console.readLineAsync("구입 금액을 입력해주세요.\n");
-    this.#validateMoney(input); 
-    this.#getLottos(input/1_000);
+    this.#validateMoney(input);
+    this.money = input;
+    this.#getLottos(input / 1_000);
   }
 
   #validateMoney(money) {
@@ -26,8 +45,8 @@ class Game {
 
   #getLottos(number) {
     const lottos = [];
-    for(let i=0;i<number;i++) {
-      lottos.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6).sort((a,b)=>a-b)));
+    for (let i = 0; i < number; i++) {
+      lottos.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)));
     }
     this.lottos = lottos;
   }
@@ -44,8 +63,20 @@ class Game {
   }
 
   #validateNumber(number) {
-    if(isNaN(number) || number < 1 || number > 45) {
+    if (isNaN(number) || number < 1 || number > 45) {
       throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.")
+    }
+  }
+
+  getResult() {
+    Console.print("당첨 통계\n---")
+    const result = [0, 0, 0, 0, 0, 0];
+    this.lottos.forEach(lotto => {
+      result[6-lotto.compare(this.choice.numbers, this.bonus)] += 1;
+    })
+
+    for(let i=1; i<6;i++) {
+      Console.print(`${this.#PRICE_TABLE[i-1].string} - ${result[i]}개`);
     }
   }
 
