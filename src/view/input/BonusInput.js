@@ -7,14 +7,18 @@ class BonusInput {
     this.bonusValid = new BonusValid();
   }
   async userInput() {
-    return await Console.readLineAsync(`${GAME_MESSAGE.bonus_number}`)
+    return await Console.readLineAsync(`${GAME_MESSAGE.bonus_number}`);
   }
   async bonusNumber() {
     let valid, number;
     do {
       number = await this.userInput();
-      Console.print('');
-      valid = this.bonusValid.BonusIsValid(number);
+      try {
+        valid = this.bonusValid.BonusIsValid(number);
+      } catch (error) {
+        Console.print(error.message);
+        valid = false;
+      }
     } while (!valid);
     return parseInt(number, 10);
   }

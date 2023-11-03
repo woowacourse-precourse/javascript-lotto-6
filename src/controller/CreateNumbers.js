@@ -4,11 +4,11 @@ import NUMBERS from '../constants/numbers.js'
 import userLottoOutput from "../view/output/userLottoOutput.js";
 
 const createNumbers = (lottoAmount) => {
-    Console.print(`${lottoAmount}${GAME_MESSAGE.bought}`);
+    Console.print(`\n${lottoAmount}${GAME_MESSAGE.bought}`);
     const numberOfLottos = [];
     for (let i = 0; i < lottoAmount; i++){
-        const Numbers = Random.pickUniqueNumbersInRange(NUMBERS.start_number, NUMBERS.end_number, NUMBERS.piece).sort((a,b) => a - b);
-        numberOfLottos.push(Numbers);
+        const numbers = Random.pickUniqueNumbersInRange(NUMBERS.start_number, NUMBERS.end_number, NUMBERS.piece).sort((a,b) => a - b);
+        numberOfLottos.push(numbers);
     }
     userLottoOutput(numberOfLottos);
     return numberOfLottos;

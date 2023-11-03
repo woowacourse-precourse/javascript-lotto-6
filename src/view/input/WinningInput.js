@@ -7,16 +7,20 @@ class WinningInput {
     this.winningValid = new WinningValid();
   }
   async userInput() {
-    const input = await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`); 
-    return input.split(',').map(str => parseInt(str, 10));
+    const input = await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`);
+    return input.split(",").map((str) => parseInt(str, 10));
   }
 
   async winningNumbers() {
     let valid, numbers;
     do {
       numbers = await this.userInput();
-      Console.print("");
-      valid = this.winningValid.winningIsValid(numbers);
+      try {
+        valid = this.winningValid.winningIsValid(numbers);
+      } catch (error) {
+        Console.print(error.message);
+        valid = false;
+      }
     } while (!valid);
     return numbers;
   }

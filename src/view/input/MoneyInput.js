@@ -13,7 +13,6 @@ class MoneyInput {
     let valid, money;
     do {
       money = await this.userInput();
-      Console.print("");
       try {
         valid = this.moneyValid.moneyIsValid(money);
       } catch (error) {
