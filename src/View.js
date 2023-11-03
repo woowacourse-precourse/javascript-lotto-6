@@ -1,7 +1,6 @@
 import { Console, MissionUtils } from "@woowacourse/mission-utils";
 import Validator from "./Validate.js";
-import Lotto from "./Lotto.js";
-import LottoTickets from "./LottoTickets.js";
+import WinningNum from "./WinningNum.js";
 
 class View {
   static #INPUT_MONEY = "구입금액을 입력해 주세요.\n";
@@ -22,6 +21,11 @@ class View {
     tickets.forEach((ticket) => {
       console.log(`[${ticket.join(", ")}]`);
     });
+  }
+
+  static async askWinningNum() {
+    const askWinning = new WinningNum();
+    await askWinning.askWinningNum();
   }
 }
 

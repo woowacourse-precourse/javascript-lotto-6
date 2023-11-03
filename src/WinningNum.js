@@ -6,6 +6,7 @@ class WinningNum {
   static #BONUSNUM_INPUT = "보너스 번호를 입력해 주세요.\n";
 
   async askWinningNum() {
+    MissionUtils.Console.print(WinningNum.#WINNINGNUM_INPUT);
     const userInputWinningNum = await MissionUtils.Console.readLineAsync("");
     const winningNum = userInputWinningNum.split(",");
     Validator.validateInputMoney(winningNum);
@@ -14,6 +15,7 @@ class WinningNum {
   }
 
   async askBonusNum() {
+    MissionUtils.Console.print(WinningNum.#BONUSNUM_INPUT);
     const userInputBonusNum = await MissionUtils.Console.readLineAsync("");
     const bonusNum = userInputBonusNum.split(",");
     Validator.validateInputMoney(bonusNum);
