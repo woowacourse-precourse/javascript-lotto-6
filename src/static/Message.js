@@ -4,7 +4,7 @@ const MESSAGE = Object.freeze({
   winningNumber: "\n당첨 번호를 입력해 주세요.\n",
   bonusNumber: "\n보너스 번호를 입력해 주세요.\n",
   revenuePrefix: "총 수익률은",
-  revenueSuffix: "%입니다.\n",
+  revenueSuffix: " %입니다.\n",
   resultStatic: "\n당첨통계\n---",
 });
 
