@@ -44,14 +44,7 @@ class App {
   }
 
   #getRandomNumbers() {
-    const randomNumbers = [];
-    while (randomNumbers.length < 6) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 45);
-      if (!randomNumbers.includes(number)) {
-        randomNumbers.push(number);
-      }
-    }
-
+    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
     return randomNumbers.sort((a, b) => a - b);
   }
 
