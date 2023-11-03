@@ -9,8 +9,8 @@ class PurchaseAmount {
   constructor(amountInput) {
     const parsed = parseInt(amountInput);
 
-    this.#validateAtImplmentLevel(amountInput);
-    this.#validateAtDomainLevel(amountInput);
+    this.#validateAtImplmentLevel(parsed);
+    this.#validateAtDomainLevel(parsed);
 
     this.#amount = parsed;
   }
