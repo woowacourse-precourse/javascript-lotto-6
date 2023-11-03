@@ -7,6 +7,17 @@ const TEXT = {
   askBonusLottoNumber: "보너스 번호를 입력해 주세요.",
 };
 
+const printFormat = {
+  purchaseInformation: (lottoInformations) => {
+    const count = lottoInformations.length;
+    const formattedLottoInfos = lottoInformations
+      .map((info) => `[${info.join(", ")}]`)
+      .join("\n");
+    return `${count}개를 구매했습니다.
+${formattedLottoInfos}`;
+  },
+};
+
 class UI {
   #validator;
 
@@ -16,6 +27,10 @@ class UI {
 
   async #ask(message) {
     return Console.readLineAsync(message);
+  }
+
+  #print(message = "") {
+    Console.print(message);
   }
 
   async askAmountForPurchase() {
@@ -39,6 +54,10 @@ class UI {
     const input = await this.#ask(TEXT.askBonusLottoNumber);
     this.#validator.validateBonusNumber(input.trim(), winningNumbers);
     return Number(input);
+  }
+
+  printLottoPurchaseInformation(lottoInformations) {
+    this.#print(printFormat.purchaseInformation(lottoInformations));
   }
 }
 
