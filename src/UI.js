@@ -34,7 +34,7 @@ class UI {
   }
 
   async #ask(message) {
-    return Console.readLineAsync(message);
+    return Console.readLineAsync(`${message}\n`);
   }
 
   #print(message = "") {
