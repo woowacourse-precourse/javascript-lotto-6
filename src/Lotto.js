@@ -32,10 +32,18 @@ class Lotto {
     return randomNumberArray.filter(number => userLottoNumber.includes(number)).length;
   }
 
+  compareBonusNumber(randomNumberArray, userBonusNumber){
+    return randomNumberArray.includes(userBonusNumber);
+  }
+
   compareLottoNumbers(lottoRandomNumber, userLottoNumber, userBonusNumber){
     const lottoResult = [];
+    const bonusResult = 0;
     lottoRandomNumber.forEach(randomNumberArray => {
-      const equalNumbers = this.countEqualNumbers(randomNumberArray, userLottoNumber);
+      const equalNumber = this.countEqualNumbers(randomNumberArray, userLottoNumber);
+      if(equalNumber === 5){
+        bonusResult = this.compareBonusNumber(randomNumberArray, userBonusNumber);
+      }
     });
   }
 }
