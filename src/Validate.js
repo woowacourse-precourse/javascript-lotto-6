@@ -37,7 +37,11 @@ class Validate {
   }
 
   isValidUserLottoInput(input) {
-    if (!this.isValidLength(input) || !this.isValidRange(input)) {
+    if (
+      !this.isValidLength(input) ||
+      !this.isValidRange(input) ||
+      !this.isDuplicate(input)
+    ) {
       return false;
     }
 
@@ -59,6 +63,16 @@ class Validate {
 
     if (!isValid) {
       throw new Error(ERROR.INVALID_RANGE);
+    }
+
+    return true;
+  }
+
+  isDuplicate(input) {
+    const set = new Set(input);
+
+    if (set.size !== input.length) {
+      throw new Error(ERROR.DUPLICATE_EXIST);
     }
 
     return true;
