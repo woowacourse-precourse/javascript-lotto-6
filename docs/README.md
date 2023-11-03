@@ -288,9 +288,9 @@
 
 ## 도메인 구현
 
-- [ ] LottoNumber
+- [x] LottoNumber
 
-  - [ ] `equal(number)` 호출 시 같은 인스턴스인지 비교한다.
+  - [x] `equal(number)` 호출 시 같은 인스턴스인지 비교한다.
 
 - [ ] LottoNumber 예외 처리
 
