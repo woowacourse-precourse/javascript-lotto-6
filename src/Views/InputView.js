@@ -3,23 +3,27 @@ import MESSAGES from "./messages";
 
 export default class InputView {
   static async promptToBuyLottos() {
-    const money = await Console.readLineSync(
+    const money = await Console.readLineAsync(
       `${MESSAGES.PROMPT_PURCHASE_VALUE}\n`
     );
-    return money.trimt();
+    return money.trim();
   }
 
   static async promptForDrawnLottoNumbers() {
-    const drawnLottoNumbers = await Console.readLineSync(
+    const drawnLottoNumbers = await Console.readLineAsync(
       `${MESSAGES.PROMPT_DRAWN_LOTTO_NUMBERS}\n`
     );
-    return drawnLottoNumbers.split(",").map((number) => number.trim());
+    return drawnLottoNumbers
+      .trim()
+      .replace(/(,+)$/, "")
+      .split(",")
+      .map((number) => number.trim());
   }
 
   static async promptForBonusNumber() {
-    const bonusNumber = await Console.readLineSync(
+    const bonusNumber = await Console.readLineAsync(
       `${MESSAGES.PROMPT_BONUS_NUMBER}\n`
     );
-    return bonusNumber;
+    return bonusNumber.trim();
   }
 }
