@@ -3,6 +3,7 @@
 /* eslint-disable class-methods-use-this */
 import createUser from '../@Service/createUser.js';
 import generateLottoNumber from '../@Service/generateLottoNumber.js';
+import ModelAndView from '../../Objects/ModelAndView.js';
 
 class UserController {
   static instance = null;
@@ -15,7 +16,11 @@ class UserController {
   }
 
   requestMapping(purchaseAmount) {
-    return createUser(purchaseAmount, generateLottoNumber);
+    const modelAndView = new ModelAndView();
+    const user = createUser(purchaseAmount, generateLottoNumber);
+    modelAndView.setViewName('LottoPos');
+    modelAndView.addObject('message', user.userLotto);
+    return modelAndView;
   }
 }
 
