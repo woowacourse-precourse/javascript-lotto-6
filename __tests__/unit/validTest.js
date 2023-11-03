@@ -4,6 +4,7 @@ import { checkHasDuplicate } from '../../src/util/validate/checkHasDuplicate';
 import checkHasNoRemainder from '../../src/util/validate/checkHasNoRemainder';
 import checkIsEmpty from '../../src/util/validate/checkIsEmpty';
 import { checkIsNaN } from '../../src/util/validate/checkIsNaN';
+import checkIsTooSmall from '../../src/util/validate/checkIsTooSmall';
 
 describe('[Lotto] 유효성 검사 테스트', () => {
   test('로또 번호에 중복된 숫자가 존재할 경우 에러를 발생시킨다', () => {
@@ -65,5 +66,13 @@ describe('[function] 유효성 검사 테스트 ', () => {
     expect(() => {
       checkIsEmpty(testInputValue);
     }).toThrow(`${ERROR_CODE.valueIsEmpty}`);
+  });
+
+  test('입력값이 1000 이하일 경우 에러를 밸생 시킨다', () => {
+    // given
+    const testInputValue = '0';
+
+    // then
+    expect(() => checkIsTooSmall(testInputValue)).toThrow(`${ERROR_CODE.valueIsTooSmall}`);
   });
 });
