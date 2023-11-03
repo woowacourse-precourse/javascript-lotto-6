@@ -8,7 +8,8 @@ class App {
   }
 
   async play() {
-    await this.LottoPos.inputPurchaseAmount();
+    await this.LottoPos.handlerPurchaseAmount();
+    await this.LottoPos.inputWinningNumber();
   }
 }
 
