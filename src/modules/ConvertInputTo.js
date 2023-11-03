@@ -60,12 +60,12 @@ class ConvertInputTo {
 
   static async bonusNumber(lottoBoard) {
     while (true) {
-      const numbersString = await Console.readLineAsync(
+      const numberString = await Console.readLineAsync(
         BONUS_NUMBER_INPUT_MESSAGE
       );
       try {
-        ErrorCheck.bonusNumberString(numbersString, lottoBoard);
-        return numbersString.split(',').map(Number);
+        ErrorCheck.bonusNumberString(numberString, lottoBoard);
+        return Number(numberString);
       } catch (error) {
         Print.errorMessage(error);
       }

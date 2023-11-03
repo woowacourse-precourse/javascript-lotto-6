@@ -13,9 +13,9 @@ const boardMaker = winningNumbers => {
 };
 
 test.each([
-  [[7, boardMaker([1, 2, 3, 4, 5, 6])], false],
-  [[0, boardMaker([1, 2, 3, 4, 5, 6])], true],
-  [[46, boardMaker([1, 2, 3, 4, 5, 6])], true],
+  [[8, boardMaker([1, 2, 3, 4, 5, 6])], false],
+  [[15, boardMaker([1, 2, 3, 4, 5, 6])], false],
+  [[6, boardMaker([1, 2, 3, 4, 5, 6])], true],
   [[10, boardMaker([7, 8, 9, 10, 11, 12])], true],
 ])('differeNumberInLottoBoard()', (input, isThrowing) => {
   const targetFunction = () => ErrorCheck.differeNumberInLottoBoard(...input);
