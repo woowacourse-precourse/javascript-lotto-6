@@ -1,15 +1,21 @@
 import MESSAGES from '../constants/Messages.js';
 import User from '../domains/User.js';
+import WinningLotto from '../domains/WinningLotto.js';
 import View from '../utils/View.js';
 
 class LottoController {
   #user
+  #winningLotto
+
+  constructor() {
+    this.#winningLotto = new WinningLotto();
+  }
 
   async run() {
     await this.setUser();
     this.#user.buyLottos();
     this.getUserLottos();
-    this.setWinningLotto();
+    this.setWinningLottoNumbers();
   }
 
   async setUser() {
@@ -33,9 +39,14 @@ class LottoController {
     });
   }
 
-  async setWinningLotto() {
+  async setWinningLottoNumbers() {
     const numbers = await View.getInputByQuestion(MESSAGES.inputWinningNumbers);
+    this.#winningLotto.setNumbers(numbers);
+  }
+
+  async setWinningLottoBonus() {
     const bonus = await View.getInputByQuestion(MESSAGES.inputBonusNumber);
+    this.#winningLotto.setBonus(bonus);
   }
 }
 

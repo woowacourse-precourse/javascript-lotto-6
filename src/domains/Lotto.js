@@ -1,20 +1,32 @@
+import REGEXP from '../constants/RegExp.js';
+import { SETTINGS } from '../constants/Settings.js';
+import { LottoLengthError, LottoRangeError, LottoTypeError } from '../error/Errors.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
-    this.#numbers.sort();
+    this.#numbers.sort((a, b) => a - b);
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== SETTINGS.lottoLength) {
+      throw new LottoLengthError(numbers);
     }
+    numbers.forEach(number => {
+      if (!REGEXP.eachNumber.test(number)) {
+        throw new LottoTypeError(numbers);
+      }
+      if (Number(number) < SETTINGS.minimumLottoRange || Number(number) > SETTINGS.maximumLottoRange) {
+        throw new LottoRangeError(numbers);
+      }
+    });
   }
 
   getNumbers() {
-    return this.#numbers.sort((a, b) => a - b);
+    return this.#numbers;
   }
 }
 
