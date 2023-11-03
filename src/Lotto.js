@@ -12,6 +12,12 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    const tempArray = [];
+    for (let i = 0; i < numbers.length; i++) {
+      if (tempArray.includes(numbers[i]))
+        throw new Error('[ERROR] 로또 번호 중 중복된 숫자가 있습니다.');
+      else tempArray.push(numbers[i]);
+    }
   }
 
   getLottoResult(myLottoNumbers, bonusNumber, purchasePrice) {
