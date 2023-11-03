@@ -7,11 +7,27 @@ class App {
     const tickets = this.createTickets(purchaseAmount);
 
     this.printTickets(tickets);
+
+    const winningNumbers = await this.getWinningNumbers();
+    const bonusNumber = await this.getBonusNumber(winningNumbers);
   }
   
   async getPurchaseAmount() {
     const input = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
     return input;
+  }
+
+  async getWinningNumbers() {
+    const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const numbers = input.split(',').map((x) => Number(x));
+    const lotto = new Lotto(numbers);
+    return lotto;
+  }
+
+  async getBonusNumber(winningNumbers) {
+    const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const bonusNumber = Number(input);
+    return bonusNumber;
   }
 
   createTickets(amount) {
