@@ -1,5 +1,6 @@
 import Bonus from './Bonus.js';
 import Lotto from './Lotto.js';
+import LottoGame from './LottoGame.js';
 import InputValidator from './utils/InputValidator.js';
 import autoLottoGenerator from './utils/autoLottoGenerator.js';
 import InputView from './view/InputView.js';
@@ -12,12 +13,34 @@ class App {
 
   #bonus;
 
+  #lottoGame;
+
   async play() {
     const purchaseAmount = await this.#getPurchaseAmount();
     this.#purchaseLotto = this.#getAutoLotto(purchaseAmount);
     OutputView.printAutoLotto(this.#purchaseLotto, purchaseAmount);
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
+    const { winningResult, income } = this.#getlotteryResultsSummary(
+      this.#purchaseLotto,
+      this.#winningLotto.getLotto(),
+      this.#bonus.getBonus(),
+    );
+    const rateOfReturn = this.#getRateOfReturn(income);
+    OutputView.printLotteryResultsSummary(winningResult, rateOfReturn);
+  }
+
+  #getRateOfReturn(income) {
+    const inputMoney = this.#purchaseLotto.length * 1000;
+    return +`${Math.round(`${inputMoney / income}e+2`)}e-2`;
+  }
+
+  #getlotteryResultsSummary(purchaseLotto, winningLotto, bonus) {
+    this.#lottoGame = new LottoGame(purchaseLotto, winningLotto, bonus);
+    return {
+      winningResult: this.#lottoGame.getWinningResult(),
+      income: this.#lottoGame.getIncome(),
+    };
   }
 
   async #getPurchaseAmount() {

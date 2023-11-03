@@ -19,4 +19,8 @@ export default class Bonus {
       throw new Error('[ERROR] 1부터 45사이의 수를 입력해주세요.');
     }
   }
+
+  getBonus() {
+    return this.#bonus;
+  }
 }

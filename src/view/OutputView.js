@@ -11,6 +11,8 @@ const OutputView = {
       Console.print(lotto);
     });
   },
+
+  printLotteryResultsSummary(winningResult, rateOfReturn) {},
 };
 
 export default OutputView;

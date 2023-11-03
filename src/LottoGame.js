@@ -1,3 +1,6 @@
+/*
+🐛FIX: matchingTable을 객체로 관리하기, 함수 크기 줄이기
+*/
 export default class LottoGame {
   #autoLottos;
 
@@ -5,43 +8,59 @@ export default class LottoGame {
 
   #bonus;
 
-  #result;
-
-  #income;
+  #matchingTable;
 
   constructor(autoLottos, winningLotto, bonus) {
     this.#autoLottos = autoLottos;
     this.#winningLotto = winningLotto;
     this.#bonus = bonus;
-    this.#result = Array.from({ length: this.#autoLottos.length }).fill(0);
-    this.#income = 0;
+    this.#matchingTable = {
+      threeMatching: 0,
+      fourMatching: 0,
+      fiveMatchingNotBonus: 0,
+      fiveMatchingAndBonus: 0,
+      allMatching: 0,
+    };
   }
 
   getWinningResult() {
-    this.#autoLottos.reduce((acc, autoLotto, index) => {
+    this.#autoLottos.reduce((acc, autoLotto) => {
+      let count = 0;
       acc.forEach((winningNum) => {
-        if (autoLotto.includes(winningNum)) this.#result[index] += 1;
+        if (autoLotto.includes(winningNum)) count += 1;
       });
-      if (this.#result[index] === 5) {
-        this.#result[index] = autoLotto.includes(this.#bonus)
-          ? [this.#result[index], true]
-          : [this.#result[index], false];
-      }
+      this.#checkMatchingCount(count, autoLotto);
       return acc;
     }, this.#winningLotto);
 
-    return this.#result;
+    return this.#matchingTable;
+  }
+
+  #checkMatchingCount(count, autoLotto) {
+    if (count === 3) this.#matchingTable.threeMatching += 1;
+    if (count === 4) this.#matchingTable.fourMatching += 1;
+    if (count === 5) {
+      autoLotto.includes(this.#bonus)
+        ? (this.#matchingTable.fiveMatchingAndBonus += 1)
+        : (this.#matchingTable.fiveMatchingNotBonus += 1);
+    }
+    if (count === 6) this.#matchingTable.allMatching += 1;
   }
 
   getIncome() {
-    this.#result.forEach((matchCount) => {
-      if (matchCount === 3) this.#income += 5000;
-      if (matchCount === 4) this.#income += 50000;
-      if (Array.isArray(matchCount)) {
-        this.#income += matchCount[1] ? 30000000 : 1500000;
-      }
-      if (matchCount === 6) this.#income += 2000000000;
-    });
-    return this.#income;
+    const {
+      threeMatching,
+      fourMatching,
+      fiveMatchingNotBonus,
+      fiveMatchingAndBonus,
+      allMatching,
+    } = this.#matchingTable;
+    const income =
+      threeMatching * 5000 +
+      fourMatching * 50000 +
+      fiveMatchingNotBonus * 1500000 +
+      fiveMatchingAndBonus * 30000000 +
+      allMatching * 2000000000;
+    return income;
   }
 }
