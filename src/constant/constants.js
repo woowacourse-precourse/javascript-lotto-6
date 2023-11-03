@@ -6,6 +6,7 @@ const GAME_RULE_NUMBER = {
 };
 
 const GAME_WINNER = {
+  lottoPrize: ['0', '5000', '50000', '1500000', '30000000', '2000000000'],
   firstPrize: '2,000,000,000원',
   secondPrize: '30,000,000원',
   thirdPrize: '1,500,000원',
@@ -17,7 +18,7 @@ const GAME_WINNER = {
   third: (amount) => `5개 일치 (${GAME_WINNER.thirdPrize}) - ${amount}개`,
   fourth: (amount) => `4개 일치 (${GAME_WINNER.fourthPrize}) - ${amount}개`,
   fifth: (amount) => `3개 일치 (${GAME_WINNER.fifthPrize}) - ${amount}개`,
-  nothing: '불일치',
+  nothing: () => '',
 };
 
 const RANKING = {
@@ -41,6 +42,7 @@ const PRINT_MESSAGES = {
   dashLine: '---',
   winnerMessage: (ranking, rankingPrize, amount) =>
     `${ranking} (${rankingPrize}) - ${amount}개`,
+  profitMessage: (profitPercent) => `총 수익률은 ${profitPercent}%입니다.`,
 };
 
 export {

@@ -52,7 +52,6 @@ class LottoShop {
     });
     rankingList.sort((a, b) => b - a);
     printRankingList(rankingList);
-    return rankingList;
   }
 
   checkAccord() {
