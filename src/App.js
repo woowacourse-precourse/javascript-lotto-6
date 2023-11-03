@@ -51,6 +51,14 @@ class App {
     if(1>Number(userBonusNumber) || Number(userBonusNumber)>45) throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
   }
 
+  printLottoResult(lottoResult){
+    Console.print(`3개 일치 (5,000원) - ${lottoResult[0]}개\n`);
+    Console.print(`4개 일치 (50,000원) - ${lottoResult[1]}개\n`);
+    Console.print(`5개 일치 (1,500,000원) - ${lottoResult[2]}개\n`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${lottoResult[3]}개\n`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${lottoResult[4]}개\n`);
+  }
+
   async play() {
     const lottoPrice =
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
@@ -71,7 +79,11 @@ class App {
     this.checkBonusNumber(userBonusNumber);
     const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
     const lotto = new Lotto(lottoNumberArray);
-    lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
+    let lottoResult = lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
+    Console.print('당첨 통계');
+    Console.print('---');
+    this.printLottoResult(lottoResult);
+    
   }
 }
 
