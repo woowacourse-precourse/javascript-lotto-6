@@ -92,7 +92,7 @@ class App {
     } catch (error) {
       if (error instanceof AppError && error.type === ERROR_TYPE.inputError) {
         this.#ui.print(error.message);
-        this.#transitionEffect();
+        await this.#transitionEffect();
       } else {
         throw error;
       }
