@@ -14,7 +14,8 @@ class LottoController {
     OutputView.printQuantity(quantity);
 
     this.#userLottoModel.generateLottoTicket(quantity);
-    OutputView.printLottoTickets(this.#userLottoModel.getLottoTickets());
+    const lottoTickets = this.#userLottoModel.getLottoTickets()
+    OutputView.printLottoTickets(lottoTickets);
 
     const winningNumbers = await InputView.getWinningNumbers();
 
