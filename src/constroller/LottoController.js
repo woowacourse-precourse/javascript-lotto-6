@@ -10,33 +10,37 @@ import {
 import AnswerLotto from "../model/AnswerLotto.js";
 
 class LottoController {
-  #lottoCount;
   #answerLotto;
   #lottoPage = [];
 
   async start() {
     try {
-      await this.#getUserPrice();
-      this.#printLottoCount();
-      this.#getLottoList();
+      await this.#createLotto();
       await this.#createAnswerLotto();
     } catch (error) {
       throw error;
     }
   }
+
+  async #createLotto() {
+    const price = await this.#getUserPrice();
+    const count = price / 1000;
+    this.#printLottoCount(count);
+    this.#getLottoList(count);
+  }
+
   async #createAnswerLotto() {
     const lottoNumber = await this.#getUserLottoNumbers();
     const bonusNumber = await this.#getUserBonusNumber(lottoNumber);
 
     this.#answerLotto = new AnswerLotto(lottoNumber, bonusNumber);
   }
-
-  #printLottoCount() {
-    OutputView.printLottoCount(this.#lottoCount);
+  #printLottoCount(count) {
+    OutputView.printLottoCount(count);
   }
 
-  #getLottoList() {
-    Array.from({ length: this.#lottoCount }).forEach(() => {
+  #getLottoList(count) {
+    Array.from({ length: count }).forEach(() => {
       let lotto = new Lotto(generateRandomNumber());
       OutputView.printLotto(lotto.getLottoNumber());
       this.#lottoPage.push(lotto);
@@ -46,7 +50,7 @@ class LottoController {
   async #getUserPrice() {
     const price = await InputView.getPrice();
     priceValidation(price);
-    return (this.#lottoCount = price / 1000);
+    return price;
   }
 
   async #getUserLottoNumbers() {
