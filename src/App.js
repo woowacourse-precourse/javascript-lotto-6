@@ -37,3 +37,8 @@ export async function inputMoneyDivideValidater(input) {
     throw new Error("[ERROR] 구입 금액은 1000원 단위로 입력 가능합니다.");
   }
 }
+
+export function winningNumberSpliter(input) {
+  const winningNumberSplit = input.split(',');
+  return winningNumberSplit;
+}
