@@ -50,7 +50,7 @@ class ConvertInputTo {
         WINNING_NUMBER_INPUT_MESSAGE
       );
       try {
-        ErrorCheck.bonusNumberString(numbersString);
+        ErrorCheck.lottoNumbersString(numbersString);
         return numbersString.split(',').map(Number);
       } catch (error) {
         Print.errorMessage(error);
