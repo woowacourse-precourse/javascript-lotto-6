@@ -5,11 +5,11 @@ const MESSAGE = {
 };
 
 const ERROR_MESSAGE = {
-    INPUT_PURCHASE_AMOUNT_ERROR: '[ERROR] 입력한 구입 금액이 천 단위가 아닙니다.',
-    INPUT_WINNING_NUMBERS_ERROR: '[ERROR] 입력한 당첨 번호가 1 ~ 45의 숫자가 아닙니다.',
-    INPUT_MORE_WINNING_NUMBERS_ERROR: '[ERROR] 입력한 당첨 번호가 6개 이상입니다.',
-    INPUT_BLANK_ERROR: '[ERROR] 입력한 값이 공백입니다.',
-    INPUT_NUMBER_ERROR: '[ERROR] 입력한 값이 숫자가 아닙니다.'
+    INPUT_PURCHASE_AMOUNT_ERROR: '[ERROR] 구입 금액은 천 단위여야 합니다. .',
+    INPUT_WINNING_NUMBERS_ERROR: '[ERROR] 당첨 번호는 1 ~ 45의 숫자여야 합니다.',
+    INPUT_MORE_WINNING_NUMBERS_ERROR: '[ERROR] 당첨 번호가 6개여야 합니다..',
+    INPUT_BLANK_ERROR: '[ERROR] 값이 공백입니다.',
+    INPUT_NUMBER_ERROR: '[ERROR] 값이 숫자가 아닙니다.'
 };
 
 export { MESSAGE, ERROR_MESSAGE }
