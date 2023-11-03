@@ -4,6 +4,9 @@ export const PROMPT = Object.freeze({
 
 export const LOTTO = Object.freeze({
   price: 1000,
+  minRange: 1,
+  maxRange: 45,
+  numberCount: 6,
 });
 
 export const ERROR_PREFIX = '[ERROR]';
