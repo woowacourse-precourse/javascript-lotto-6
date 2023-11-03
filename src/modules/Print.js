@@ -20,6 +20,10 @@ class Print {
   static errorMessage(error) {
     Console.print(error.message);
   }
+
+  static lineBreak() {
+    Console.print('');
+  }
 }
 
 export default Print;
