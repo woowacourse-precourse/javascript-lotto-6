@@ -17,8 +17,8 @@ class DrawnLotto extends Lotto {
   }
 
   getFullNumbers() {
-    numbers = this.getNumbers();
-    bonusNumber = this.getBonusNumber();
+    const numbers = this.getNumbers();
+    const bonusNumber = this.getBonusNumber();
     return { numbers, bonusNumber };
   }
 
