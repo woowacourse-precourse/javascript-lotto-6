@@ -24,7 +24,6 @@ class InputView {
   }
 
   async bonusNumber() {
-    //
     try {
       const bonusNumber = await Console.readLineAsync(INPUT_MSG.BONUS_NUMBER);
       await this.INPUT_VAL.bonusNumber(bonusNumber);

@@ -50,16 +50,23 @@ class LottoController {
     try {
       const winNumber = await Lotto.createLottoInstance(winLotteryNumber);
       this.#WIN_NUMBER = winNumber.getWinNumber();
-      return this.#inputBonusNumber();
+      return this.inputBonusNumber();
     } catch (error) {
       Console.print(error.name + error.message);
       return this.inputWinNumber();
     }
   }
 
-  async #inputBonusNumber() {
+  async inputBonusNumber() {
     this.#BONUS_NUMBER = await this.INPUT_VIEW.bonusNumber();
-    console.log(this.#BONUS_NUMBER);
+    if (this.#BONUS_NUMBER === CONSTANTS.IS_ERROR) {
+      return this.inputBonusNumber();
+    }
+    return this.printStatistic();
+  }
+
+  async printStatistic() {
+    console.log(this.#USER_MONEY, this.#WIN_NUMBER, this.#BONUS_NUMBER);
   }
 }
 

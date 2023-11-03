@@ -29,7 +29,7 @@ const runException = async (input) => {
   const logSpy = getLogSpy();
 
   const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-  const INPUT_NUMBERS_TO_END = ['1,2,3,4,5,6', 'a'];
+  const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', '7'];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
   mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
@@ -46,7 +46,7 @@ describe('로또 구입 테스트', () => {
     jest.restoreAllMocks();
   });
 
-  test('보너스 번호 문자 입력', async () => {
-    await runException('1000');
+  test('예외 테스트', async () => {
+    await runException('1000k');
   });
 });
