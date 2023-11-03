@@ -1,26 +1,16 @@
 import REGEXP from '../constants/RegExp.js';
 import { SETTINGS } from '../constants/Settings.js';
 import { LottoRangeError, LottoTypeError, LottoLengthError, LottoDuplicatedError } from '../error/Errors.js';
+import Utils from '../utils/Utils.js';
 
 class WinningLotto {
   #numbers;
   #bonus;
 
   setNumbers(numbers) {
-    const numberArray = this.#stringToNumber(numbers)
+    const numberArray = Utils.stringArrayToNumberArray(numbers)
     this.#validateNumbers(numberArray);
     this.#numbers = numberArray;
-  }
-
-  #stringToNumber(array) {
-    const inputArray = array.split(',');
-    const numberArray = [];
-    inputArray.forEach(string => {
-      numberArray.push(Number(string));
-    });
-    numberArray.sort((a, b) => a - b);
-
-    return numberArray;
   }
 
   #validateNumbers(numbers) {
@@ -46,7 +36,7 @@ class WinningLotto {
   }
 
   #validateBonus(bonus) {
-    if (Number(bonus)) {
+    if (!REGEXP.eachNumber.test(bonus)) {
       throw new Error('[ERROR]')
     }
   }

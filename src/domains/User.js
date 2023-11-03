@@ -28,7 +28,7 @@ class User {
   }
 
   getLottos() {
-    const lottoNumbers = []
+    const lottoNumbers = [];
     this.#lottos.forEach((lotto) => {
       lottoNumbers.push(lotto.getNumbers());
     });

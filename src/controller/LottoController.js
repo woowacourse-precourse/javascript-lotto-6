@@ -15,7 +15,8 @@ class LottoController {
     await this.setUser();
     this.#user.buyLottos();
     this.getUserLottos();
-    this.setWinningLottoNumbers();
+    await this.setWinningLottoNumbers();
+    this.setWinningLottoBonus();
   }
 
   async setUser() {
@@ -50,8 +51,15 @@ class LottoController {
   }
 
   async setWinningLottoBonus() {
-    const bonus = await View.getInputByQuestion(MESSAGES.inputBonusNumber);
-    this.#winningLotto.setBonus(bonus);
+    while (true) {
+      const bonus = await View.getInputByQuestion(MESSAGES.inputBonusNumber);
+      try {
+        this.#winningLotto.setBonus(bonus);
+        break
+      } catch (e) {
+        View.printOutput(e.message);
+      }
+    }
   }
 }
 
