@@ -2,3 +2,11 @@
 export function devideIntoCommas(stringInput) {
   return stringInput.split(",");
 }
+
+export function stringToNumber(string) {
+  return Number(string);
+}
+
+export function stringsToNumbers(strings) {
+  return strings.map(Number);
+}
