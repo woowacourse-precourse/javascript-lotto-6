@@ -20,6 +20,10 @@ class Lotto {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_LENGTH(length));
     }
 
+    if (!Validation.isUnique(numbers)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_UNIQUE);
+    }
+
     numbers.every((number) => {
       if (!Validation.isNumber(number)) {
         throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
