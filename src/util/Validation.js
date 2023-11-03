@@ -27,6 +27,10 @@ const checkWinningRange = (input) => {
     throw new Error(ERROR_MESSAGES.winningRange);
 };
 
+const checkInputInteger = (input, message) => {
+  if (+input !== Math.floor(+input)) throw new Error(message);
+};
+
 const checkInput = (input) => {
   checkInputSpace(input);
   checkInputBlank(input);
@@ -43,11 +47,13 @@ const checkWinningNumbers = (input) => {
   checkInput(input);
   checkInputType(input, ERROR_MESSAGES.winningType);
   checkWinningRange(input);
+  checkInputInteger(input, ERROR_MESSAGES.winningInteger);
 };
 
 const checkBonusNumber = (input) => {
   checkInput(input);
   checkInputType(input, ERROR_MESSAGES.bonusType);
+  checkInputInteger(input, ERROR_MESSAGES.bonusInteger);
 };
 
 export { checkPurchasingMoney, checkWinningNumbers, checkBonusNumber };
