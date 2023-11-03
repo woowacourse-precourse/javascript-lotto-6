@@ -16,7 +16,10 @@ class Lotto {
     return this.#numbers;
   }
 
-  // TODO: 로또한장에 보너스번호가 포함되어있는지 확인한다.
+  hasContainBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
+
   // TODO: 당첨번호와 보너스번호를 받아서 포함된 숫자를 카운팅한다.
 }
 
