@@ -8,6 +8,10 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  get numbers() {
+    return this.#numbers;
+  }
+
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
@@ -22,6 +26,22 @@ class Lotto {
   printLotto() {
     Console.print(`[${this.#numbers.join(", ")}]`);
     return `[${this.#numbers.join(", ")}]`;
+  }
+
+  compare(numbers, bonus) {
+    const same = numbers.filter(num=>this.#numbers.includes(num)).length;
+    switch(same) {
+      case 6:
+        return 1;
+     case 5:
+        return this.#numbers.includes(bonus) ? 2 : 3;
+      case 4:
+        return 4;
+      case 3:
+        return 5;
+      default:
+        return 6;
+    }
   }
 }
 
