@@ -15,13 +15,13 @@ class Lotto {
   }
 
   #validateLength(numbers) {
-    if (!Validator.checkArrayLength(numbers, LOTTO.SIZE)) {
+    if (!Validator.isArrayLengthEqualTo(numbers, LOTTO.SIZE)) {
       throw new Error(LOTTO.ERROR.SIZE);
     }
   }
 
   #validateDuplicate(numbers) {
-    if (Validator.checkArrayForDuplicate(numbers)) {
+    if (Validator.hasDuplicate(numbers)) {
       throw new Error(LOTTO.ERROR.DUPLICATE);
     }
   }

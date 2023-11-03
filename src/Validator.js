@@ -1,11 +1,11 @@
 import VALIDATOR from "./constant/VALIDATOR.js";
 
 class Validator {
-  static checkArrayLength(array, number) {
+  static isArrayLengthEqualTo(array, number) {
     return array.length === number;
   }
 
-  static checkArrayForDuplicate(array) {
+  static hasDuplicate(array) {
     return new Set(array).size !== array.length;
   }
 

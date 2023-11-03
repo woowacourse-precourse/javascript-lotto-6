@@ -7,7 +7,9 @@ describe("Validator 클래스 테스트", () => {
   ])(
     "배열의 크기가 주어진 숫자와 같으면 true, 다르면 false 반환 - %s",
     (testName, array, number, expectedOutput) => {
-      expect(Validator.checkArrayLength(array, number)).toBe(expectedOutput);
+      expect(Validator.isArrayLengthEqualTo(array, number)).toBe(
+        expectedOutput
+      );
     }
   );
 
@@ -17,7 +19,7 @@ describe("Validator 클래스 테스트", () => {
   ])(
     "배열 내에 중복된 값이 있다면 true, 없다면 false 반환 - %s",
     (testName, array, expectedOutput) => {
-      expect(Validator.checkArrayForDuplicate(array)).toBe(expectedOutput);
+      expect(Validator.hasDuplicate(array)).toBe(expectedOutput);
     }
   );
 });
