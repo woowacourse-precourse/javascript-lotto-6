@@ -86,10 +86,20 @@ class App {
     this.#winningNumbers = new Set(numbers.split(" "));
   }
 
+  static #validateBonusNumber(bonusNumber) {
+    if (!App.#isPositiveInteger(bonusNumber)) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+    if (!App.#isLottoNumber(bonusNumber)) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+  }
+
   async getBonusNumber() {
     const bonusNumber = await MissionUtils.Console.readLineAsync(
       "보너스 번호를 입력해 주세요.\n",
     );
+    App.#validateBonusNumber(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
