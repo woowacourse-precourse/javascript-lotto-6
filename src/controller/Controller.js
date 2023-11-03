@@ -15,6 +15,10 @@ class LottoController {
 
     this.#userLottoModel.generateLottoTicket(quantity);
     OutputView.printLottoTickets(this.#userLottoModel.getLottoTickets());
+
+    const winningNumbers = await InputView.getWinningNumbers();
+
+    const bonusNumbers = await InputView.getBonusNumbers();
   }
 }
 
