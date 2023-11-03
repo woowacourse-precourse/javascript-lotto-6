@@ -5,7 +5,7 @@ const inputView = {
   async readPurchasePriceAsync(message) {
     const userInput = await Console.readLineAsync(message);
     validator.validatePrice(userInput);
-    return userInput;
+    return parseInt(userInput);
   },
 
   async readWinningNumbersAsync(message) {
@@ -15,7 +15,8 @@ const inputView = {
   },
 
   async readBonusNumberAsync(message) {
-    return await Console.readLineAsync(message);
+    const userInput = await Console.readLineAsync(message);
+    return parseInt(userInput);
   },
 };
 
