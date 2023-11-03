@@ -34,7 +34,7 @@ class OutputView {
 
   static calculateProfitRate(result) {
     const profitRate = (result.totalEarnings / result.totalSpent) * 100;
-    MissionUtils.Console.print(`${profitRate.toFixed(1)}%`);
+    MissionUtils.Console.print(`총 수익률은 ${profitRate.toFixed(1)}%입니다.`);
   }
 }
 export default OutputView;
