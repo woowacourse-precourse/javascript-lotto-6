@@ -17,6 +17,7 @@ export const MESSAGE = Object.freeze({
 
 export const ERROR = Object.freeze({
   errorPrefix: '[ERROR]',
+  isNotNumber: '입력값이 숫자가 아닙니다. 구매 금액은 숫자만 입력할 수 있습니다.',
   isNotInAmountUnit: `입력된 금액이 ${CONSTANT.amountUnit}원 단위가 아닙니다.`,
   isNegative: '입력된 금액이 음수입니다. 금액은 양수여야 합니다.',
   isEmpty: '공백이 입력되었습니다. 6자리의 숫자를 입력해야합니다.',

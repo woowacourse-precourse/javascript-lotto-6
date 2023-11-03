@@ -23,6 +23,7 @@ class LottoGame {
   }
 
   #validateAmountInput(amount) {
+    AmountValidator.checkIsNotNumber(amount);
     AmountValidator.checkIsNegative(amount);
     AmountValidator.checkIsNotInUnit(amount);
   }
