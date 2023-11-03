@@ -16,14 +16,14 @@ export function checkBonusBall(purchasedLotto, bonusBall) {
 
 export function recordRanks(countMatchArr, checkBonusArr) {
   let rankCounts = Array.from({ length: LOTTO_NUMBERS.ranks + 1 }, () => 0);
-  for (let index = 0; index < countMatchArr.length; index += 1) {
-    caseOfWinning(index, countMatchArr, checkBonusArr, rankCounts);
-  }
+  countMatchArr.forEach((matchCount, index) => {
+    caseOfWinning(matchCount, checkBonusArr[index], rankCounts);
+  });
   return rankCounts;
 }
 
-export function caseOfWinning(index, countMatchArr, checkBonusArr, rankCounts) {
-  switch (countMatchArr[index]) {
+export function caseOfWinning(matchCount, hasBonus, rankCounts) {
+  switch (matchCount) {
     case 3:
       rankCounts[5] += 1; // 3개 일치는 5등
       break;
@@ -31,7 +31,7 @@ export function caseOfWinning(index, countMatchArr, checkBonusArr, rankCounts) {
       rankCounts[4] += 1; // 4개 일치는 4등
       break;
     case 5:
-      checkBonusBallIsMatching(index, checkBonusArr, rankCounts);
+      checkBonusBallIsMatching(hasBonus, rankCounts);
       break;
     case 6:
       rankCounts[1] += 1; // 6개 일치는 1등
@@ -39,10 +39,7 @@ export function caseOfWinning(index, countMatchArr, checkBonusArr, rankCounts) {
   }
 }
 
-export function checkBonusBallIsMatching(index, checkBonusArr, rankCounts) {
-  if (checkBonusArr[index]) {
-    rankCounts[2] += 1; // 5개 일치하고 보너스 볼이 일치하면 2등
-  } else {
-    rankCounts[3] += 1; // 5개 일치만 되어도 3등
-  }
+export function checkBonusBallIsMatching(hasBonus, rankCounts) {
+  // 짧은 회로를 통해 hasBonus가 참일 경우 rankCounts[2], 거짓일 경우 rankCounts[3] 값 증가
+  rankCounts[hasBonus ? 2 : 3] += 1;
 }
