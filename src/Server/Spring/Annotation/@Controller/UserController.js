@@ -2,6 +2,7 @@
 /* eslint-disable no-constructor-return */
 /* eslint-disable class-methods-use-this */
 import createUser from '../@Service/createUser.js';
+import generateLottoNumber from '../@Service/generateLottoNumber.js';
 
 class UserController {
   static instance = null;
@@ -14,7 +15,7 @@ class UserController {
   }
 
   requestMapping(purchaseAmount) {
-    return createUser(purchaseAmount);
+    return createUser(purchaseAmount, generateLottoNumber);
   }
 }
 

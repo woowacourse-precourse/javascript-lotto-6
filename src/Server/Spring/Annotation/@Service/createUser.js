@@ -1,8 +1,8 @@
 /* eslint-disable import/extensions */
-import User from '../../DTO/User.js';
+import User from '../../VO/User.js';
 
-const createUser = purchaseAmount => {
-  return new User(purchaseAmount);
+const createUser = (purchaseAmount, generateLottoNumber) => {
+  return new User(purchaseAmount, generateLottoNumber);
 };
 
 export default createUser;
