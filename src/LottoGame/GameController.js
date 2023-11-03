@@ -17,7 +17,8 @@ export default class GameController {
     this.util.buyingMoneyValidator(buyingMoney);
 
     this.model.lottoCount(buyingMoney);
-    MissionUtils.Console.print(this.model.LOTTO_COUNT);
+    this.model.generateLotto(this.model.LOTTO_COUNT);
+    this.view.printLottos(this.model.LOTTOS, this.model.LOTTO_COUNT);
   }
 
   async getUserInput() {
