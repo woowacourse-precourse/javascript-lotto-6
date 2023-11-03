@@ -102,6 +102,8 @@ class App {
   async #allOfMoneyfunc() {
     const inputMoney = await this.getMoney();
     this.#validateMoneyIsNum(inputMoney);
+    this.#validateMoneyUnit(inputMoney);
+    this.#claculateNumOfBuy(inputMoney);
   }
 
   // 로또 구입 금액 입력받기
@@ -118,6 +120,23 @@ class App {
       throw new Error(`[ERROR] 구입금액은 숫자만 입력 가능합니다.`);
     }
   }
+
+  #validateMoneyUnit(inputMoney) {
+    const MONEY_UNIT = 1000;
+    if (inputMoney % MONEY_UNIT !== 0) {
+      throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
+    }
+  }
+
+  // 로또 구입 갯수 계산
+  #claculateNumOfBuy(inputMoney) {
+    const MONEY_UNIT = 1000;
+    const numOfBuy = inputMoney / MONEY_UNIT;
+    Console.print(numOfBuy); // 테스트용 지워야함.
+    return numOfBuy;
+  }
+
+  // --------------------------------당첨금 계산 함수-------
 }
 
 export default App;
