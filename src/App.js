@@ -1,4 +1,5 @@
 import InputView from './view/InputView.js';
+import Validation from './util/Validation.js';
 
 class App {
   #inputView;
@@ -9,7 +10,7 @@ class App {
 
   async play() {
     const lottoPrice = await this.#inputView.getLottoPrice();
-    console.log(lottoPrice);
+    Validation.CurrencyAmount(lottoPrice);
   }
 }
 
