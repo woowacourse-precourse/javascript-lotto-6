@@ -21,12 +21,18 @@ class App {
 
   #lottoMachine;
 
+  #winningNumbers;
+
+  #matchResults;
+
   constructor() {
     this.#status = "purchase";
     this.#amount = 0;
     this.#lotteries = [];
     this.#ui = new UI();
     this.#lottoMachine = new LottoMachine();
+    this.#winningNumbers = [];
+    this.#matchResults = [];
   }
 
   async play() {
@@ -59,6 +65,25 @@ class App {
           break;
         }
         case "winningNumberSetting": {
+          const winningNumbers = await this.#ui.askWinningNumbers();
+          this.#winningNumbers = winningNumbers;
+          this.#transition("bonusNumberSetting");
+          break;
+        }
+        case "bonusNumberSetting": {
+          const bonusNumber = await this.#ui.askBonusLottoNumber(
+            this.#winningNumbers,
+          );
+
+          const matchResults = this.#lotteries.map((lotto) =>
+            lotto.checkWinningNumbers(this.#winningNumbers, bonusNumber),
+          );
+          this.#matchResults = matchResults;
+
+          this.#transition("result");
+          break;
+        }
+        case "result": {
           break;
         }
         default: {
