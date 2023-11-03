@@ -12,22 +12,24 @@ class Lotto {
     LottoValidator.validLottoNumber(numbers);
   }
 
-  getLotto() {
-    return this.#numbers;
-  }
-
   hasContainBonusNumber(bonusNumber) {
     return this.#numbers.includes(bonusNumber);
   }
 
-  // TODO: 당첨번호와 보너스번호를 받아서 포함된 숫자를 카운팅한다.
+  countMatchWinningNumbers(winningNumbers) {
+    return this.#numbers.filter((number) => winningNumbers.includes(number)).length;
+  }
+
+  getLottoComparisonResults(winningNumbers, bonusNumber) {
+    const matchingCount = this.countMatchWinningNumbers(winningNumbers);
+    const hasBonusNumber = this.hasContainBonusNumber(bonusNumber);
+
+    return { matchingCount, hasBonusNumber };
+  }
+
+  getLotto() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
-
-// 테스트용 코드
-/*
-const lottos = '1, 2, 35, 4, 5, 6'.split(',').map((number) => number.trim());
-const lotto = new Lotto(lottos);
-lotto.getLotto();
-*/
