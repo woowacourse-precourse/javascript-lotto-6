@@ -10,17 +10,17 @@ class Price {
   }
 
   #validate() {
-    this.checkNumber();
-    this.checkUnit();
+    this.#checkNumber();
+    this.#checkUnit();
   }
 
-  checkNumber() {
+  #checkNumber() {
     if (!Number.isSafeInteger(this.#price)) {
       throw new Error(MESSAGE.error.numericPrice);
     }
   }
 
-  checkUnit() {
+  #checkUnit() {
     if (this.#price % VALUE.condition.priceDivision > 0) {
       throw new Error(MESSAGE.error.priceUnit);
     }
