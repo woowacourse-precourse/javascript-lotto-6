@@ -29,7 +29,12 @@ const runException = async (input) => {
   const logSpy = getLogSpy();
 
   const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-  const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6,7', '1,2,3,4,5,6', '7'];
+  const INPUT_NUMBERS_TO_END = [
+    '1000',
+    '1,2,3,4,5,6,7',
+    '10,20,30,40,50,60',
+    '7',
+  ];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
   mockQuestions([input, ...INPUT_NUMBERS_TO_END]);

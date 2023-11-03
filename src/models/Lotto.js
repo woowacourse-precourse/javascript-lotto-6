@@ -1,24 +1,27 @@
-import InputError from '../utils/InputError.js';
-import { ERROR_MSG } from '../constants/LottoMsg.js';
+import InputValidate from '../utils/InputValidate.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new InputError(ERROR_MSG.LOTTO_SHOULD_SIX);
-    }
+  static async createLottoInstance(numbers) {
+    const inputValidate = new InputValidate();
+    await inputValidate.lengthSix(numbers);
+    return new Lotto(numbers);
   }
 
   // TODO: 추가 기능 구현
   sortingNumber() {
     this.#numbers.sort((a, b) => a - b);
     return this.#numbers.join(', ');
+  }
+
+  getWinNumber() {
+    this.#numbers.sort((a, b) => a - b);
+    return this.#numbers;
   }
 }
 

@@ -1,6 +1,5 @@
 import { ERROR_MSG } from '../constants/LottoMsg.js';
 import InputError from './InputError.js';
-import Lotto from '../models/Lotto.js';
 
 class InputValidate {
   async inputMoney(money) {
@@ -14,9 +13,10 @@ class InputValidate {
     return Number(money);
   }
 
-  async inputWinNumbers(numbers) {
-    const numbersToList = numbers.split(',');
-    const winNumber = new Lotto(numbersToList);
+  async lengthSix(numbers) {
+    if (numbers.length !== 6) {
+      throw new InputError(ERROR_MSG.LOTTO_SHOULD_SIX);
+    }
   }
 }
 
