@@ -35,6 +35,10 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 숫자 형태로 입력해주세요');
     }
   }
+
+  findNumbers() {
+    return this.#numbers.sort((a, b) => a - b);
+  }
 }
 
 export default Lotto;
