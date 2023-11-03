@@ -1,0 +1,13 @@
+const MESSAGE_PURCHASING_AMOUNT = "구입금액을 입력해 주세요.";
+const MESSAGE_PURCHASING_NUMBER = "개를 구매했습니다.";
+
+const MESSAGE_WINNING_NUMBER = "당첨 번호를 입력해 주세요.";
+
+const MESSAGE_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
+
+export {
+  MESSAGE_PURCHASING_AMOUNT,
+  MESSAGE_PURCHASING_NUMBER,
+  MESSAGE_WINNING_NUMBER,
+  MESSAGE_BONUS_NUMBER,
+};
