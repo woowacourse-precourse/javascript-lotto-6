@@ -17,6 +17,13 @@ class App {
     const computer = new Computer(generator);
     const quantity = computer.calculateQuantity(lottoPrice);
     console.log(quantity);
+
+    const lottos = computer.generateLotto(lottoPrice);
+    console.log(this.#checkLottos(lottos));
+  }
+
+  #checkLottos(lottos) {
+    return lottos.map((lotto) => lotto.findNumbers());
   }
 }
 
