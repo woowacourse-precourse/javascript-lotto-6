@@ -3,8 +3,14 @@ import Lotto from "./Lotto";
 
 class Game {
   lottos;
-  #choice;
-  #bonus;
+  choice;
+  bonus;
+
+  constructor() {
+    this.lottos = [];
+    this.choice = null;
+    this.bonus = -1;
+  }
 
   async getMoney() {
     const input = await Console.readLineAsync("구입 금액을 입력해주세요.\n");
@@ -24,6 +30,11 @@ class Game {
       lottos.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6).sort((a,b)=>a-b)));
     }
     this.lottos = lottos;
+  }
+
+  async getChoiceNumbers() {
+    const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\ n");
+    this.choice = new Lotto(input.split(","));
   }
 
 };
