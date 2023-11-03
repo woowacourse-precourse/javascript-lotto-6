@@ -4,6 +4,7 @@ export const INPUT_MSG = {
 
 export const OUTPUT_MSG = {
   USER_CAN_BUY_LOTTO: (amount) => `${amount}개를 구매했습니다.\n`,
+  USER_LOTTO_NUMBER: (number) => `[${number}]`,
 };
 
 export const ERROR_MSG = {

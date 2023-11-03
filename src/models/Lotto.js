@@ -13,6 +13,10 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  sortingNumber() {
+    this.#numbers.sort((a, b) => a - b);
+    return this.#numbers.join(', ');
+  }
 }
 
 export default Lotto;
