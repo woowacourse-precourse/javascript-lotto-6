@@ -6,13 +6,19 @@ class App {
     this.randomLottoNumber = [];
   }
   async play() {
-    this.purchasePrice = await this.inputMyLottoNumber();
+    this.purchasePrice = await this.inputPurchasePrice();
     this.isValidInputPrice = this.isValidInputPrice();
     this.printPriceError(this.isValidInputPrice);
     this.purchaseCount = this.calculatePurchaseCount();
     this.printPurchaseCount();
+    while (this.purchaseCount > 0) {
+      this.createLottoNumber();
+      this.purchaseCount -= 1;
+    }
+
+    this.printRandomNumArr();
   }
-  async inputMyLottoNumber() {
+  async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     return +input;
   }
@@ -32,6 +38,14 @@ class App {
 
   printPurchaseCount() {
     Console.print(`${this.purchaseCount}개를 구매했습니다.`);
+  }
+  createLottoNumber() {
+    this.randomLottoNumber.push(Random.pickUniqueNumbersInRange(1, 45, 6));
+  }
+  printRandomNumArr() {
+    this.randomLottoNumber.forEach((_, index) => {
+      Console.print(this.randomLottoNumber[index]);
+    });
   }
 }
 
