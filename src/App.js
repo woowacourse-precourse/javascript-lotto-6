@@ -10,6 +10,24 @@ const WINNING_RESULT_TO_PRICE = {
   six: 2000000000,
 };
 
+const reduceToTotalResult = (matchResults) => {
+  const result = {
+    three: 0,
+    four: 0,
+    five: 0,
+    fiveBonus: 0,
+    six: 0,
+  };
+  matchResults.forEach(({ matchedCount, bonusIncluded }) => {
+    if (matchedCount === 3) result.three += 1;
+    if (matchedCount === 4) result.four += 1;
+    if (matchedCount === 5 && !bonusIncluded) result.five += 1;
+    if (matchedCount === 5 && bonusIncluded) result.fiveBonus += 1;
+    if (matchedCount === 6) result.six += 1;
+  });
+  return result;
+};
+
 class App {
   #status;
 
@@ -84,6 +102,9 @@ class App {
           break;
         }
         case "result": {
+          const totalResult = reduceToTotalResult(this.#matchResults);
+          const profitRate = this.#calculateProfitRate(totalResult);
+          this.#ui.printStatistics(totalResult, profitRate);
           break;
         }
         default: {
