@@ -43,5 +43,4 @@ class LottoStatistics {
   
 }
 
-const a = new LottoStatistics([1,1,1,1,1,1,1,4,4,4,4,3,3,3,3,3,5]);
-console.log(a.getResult())
+export default LottoStatistics;

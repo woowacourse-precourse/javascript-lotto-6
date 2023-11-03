@@ -44,5 +44,4 @@ class LotteryMachine {
   }  
 }
 
-const a = new LotteryMachine("30000");
-console.log(a.getTiket());
+export default LotteryMachine;
