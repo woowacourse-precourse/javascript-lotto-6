@@ -1,6 +1,6 @@
 import Lotto from '../../src/Lotto';
 import ERROR_CODE from '../../src/util/error/errorCode';
-import checkHasDuplicate from '../../src/util/validate/checkHasDuplicate';
+import { checkHasDuplicate } from '../../src/util/validate/checkHasDuplicate';
 import checkHasNoRemainder from '../../src/util/validate/checkHasNoRemainder';
 import checkIsEmpty from '../../src/util/validate/checkIsEmpty';
 import { checkIsNaN } from '../../src/util/validate/checkIsNaN';

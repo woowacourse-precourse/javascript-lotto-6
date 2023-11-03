@@ -1,4 +1,4 @@
-import checkHasDuplicate from './util/validate/checkHasDuplicate';
+import { checkHasDuplicate } from './util/validate/checkHasDuplicate';
 import { checkLottoIsNaN } from './util/validate/checkIsNaN';
 
 class Lotto {
