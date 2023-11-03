@@ -64,5 +64,35 @@ describe("UI 클래스 테스트", () => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
       });
     });
+
+    test("당첨통계를 출력한다", async () => {
+      const logSpy = getLogSpy();
+      const TOTAL_LOTTO_RESULT = {
+        three: 2,
+        four: 1,
+        five: 0,
+        fiveBonus: 0,
+        six: 0,
+      };
+      const PROFIT_RATE = "62.5";
+
+      const ui = new UI();
+      ui.printStatistics(TOTAL_LOTTO_RESULT, PROFIT_RATE);
+
+      const logs = [
+        "당첨 통계",
+        "---",
+        `3개 일치 (5,000원) - ${TOTAL_LOTTO_RESULT.three}개`,
+        `4개 일치 (50,000원) - ${TOTAL_LOTTO_RESULT.four}개`,
+        `5개 일치 (1,500,000원) - ${TOTAL_LOTTO_RESULT.five}개`,
+        `5개 일치, 보너스 볼 일치 (30,000,000원) - ${TOTAL_LOTTO_RESULT.fiveBonus}개`,
+        `6개 일치 (2,000,000,000원) - ${TOTAL_LOTTO_RESULT.six}개`,
+        `총 수익률은 ${PROFIT_RATE}%입니다.`,
+      ];
+
+      logs.forEach((log) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+      });
+    });
   });
 });
