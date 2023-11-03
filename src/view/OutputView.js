@@ -31,5 +31,10 @@ class OutputView {
     formattedResults.push(`6개 일치 (2,000,000,000원) - ${result["1등"]}개`);
     MissionUtils.Console.print(formattedResults.join("\n"));
   }
+
+  static calculateProfitRate(result) {
+    const profitRate = (result.totalEarnings / result.totalSpent) * 100;
+    MissionUtils.Console.print(`${profitRate.toFixed(1)}%`);
+  }
 }
 export default OutputView;

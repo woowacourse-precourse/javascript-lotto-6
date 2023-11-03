@@ -25,12 +25,14 @@ class LottoController {
     const bonusNumbers = await InputView.getBonusNumbers();
 
     const result = lotto.countMatches(lottoTickets, winningNumbers, bonusNumbers, ticketPrice);
-    
+
     OutputView.printResultTitle();
 
     OutputView.printSeparator();
 
     OutputView.formatResults(result);
+
+    OutputView.calculateProfitRate(result);
   }
 }
 
