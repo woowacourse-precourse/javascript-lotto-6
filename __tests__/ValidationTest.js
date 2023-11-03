@@ -46,4 +46,10 @@ describe('로또 금액 테스트', () => {
       }).toThrow('[ERROR]');
     });
   });
+
+  test('로또 금액이 너무 큰 경우 테스트 -> 200001000인 경우', () => {
+    expect(() => {
+      Validation.limitPrice('2000001000');
+    }).toThrow('[ERROR]');
+  });
 });
