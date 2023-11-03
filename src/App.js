@@ -3,12 +3,14 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async play() {
     await inputMoney();
+    await inputWinningNumber();
   }
 }
 
 export default App;
 
 const PURCASE_COMMENT = "구입금액을 입력해 주세요."
+const WINNING_NUMBER_COMMENT = "당첨 번호를 입력해 주세요.";
 const LOTTO_PRICE = 1000;
 
 async function inputMoney() {
@@ -36,6 +38,13 @@ export async function inputMoneyDivideValidater(input) {
   if (input%price !== 0) {
     throw new Error("[ERROR] 구입 금액은 1000원 단위로 입력 가능합니다.");
   }
+}
+
+async function inputWinningNumber() {
+  let comment = WINNING_NUMBER_COMMENT;
+  MissionUtils.Console.print(comment);
+  const totalMoney = await MissionUtils.Console.readLineAsync('');
+  return totalMoney;
 }
 
 export function winningNumberSpliter(input) {
