@@ -1,4 +1,4 @@
-import { LOTTO_GAME_TERMS } from '../constants/lottoGame.js';
+import lottoPurchase from '../domain/lottoPurchase.js';
 import AppError from '../error/customErrors/AppError.js';
 
 /**
@@ -6,16 +6,17 @@ import AppError from '../error/customErrors/AppError.js';
  */
 export const PURCHASED_LOTTO_AMOUNT_VALIDATION_TYPES = Object.freeze({
   amountRange: Object.freeze({
-    errorMessage: `구매 로또 금액은 ${LOTTO_GAME_TERMS.purchasedLottoPrice.minRange} ~ ${LOTTO_GAME_TERMS.purchasedLottoPrice.maxRange}원 사이로 입력해주세요.`,
+    errorMessage: `구매 로또 금액은 ${lottoPurchase.constants.minRange} ~ ${lottoPurchase.constants.maxRange}원 사이로 입력해주세요.`,
     isValid(purchasedLottoAmount) {
-      const { minRange, maxRange } = LOTTO_GAME_TERMS.purchasedLottoPrice;
+      const { minRange, maxRange } = lottoPurchase.constants;
       return purchasedLottoAmount >= minRange && purchasedLottoAmount <= maxRange;
     },
   }),
+
   lottoUnit: Object.freeze({
-    errorMessage: `구매 로또 금액은 ${LOTTO_GAME_TERMS.purchasedLottoPrice.unit}원 단위로 입력해야 합니다.`,
+    errorMessage: `구매 로또 금액은 ${lottoPurchase.constants.unit}원 단위로 입력해야 합니다.`,
     isValid(purchasedLottoAmount) {
-      return purchasedLottoAmount % LOTTO_GAME_TERMS.purchasedLottoPrice.unit === 0;
+      return purchasedLottoAmount % lottoPurchase.constants.unit === 0;
     },
   }),
 });
