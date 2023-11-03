@@ -54,7 +54,7 @@ class Validate {
 
   isValidRange(input) {
     const isValid = input.every(
-      (value) => value < LOTTO.MIN_RANGE || value > LOTTO.MAX_RANGE
+      (value) => value >= LOTTO.MIN_RANGE && value <= LOTTO.MAX_RANGE
     );
 
     if (!isValid) {
