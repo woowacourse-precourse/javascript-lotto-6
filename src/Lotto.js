@@ -32,6 +32,10 @@ class Lotto {
   #isValidNumber(number = []) {
     return Number.isInteger(number) && number >= 1 && number <= 45;
   }
+
+  toString() {
+    return `[${this.#numbers.join(', ')}]`;
+  }
 }
 
 export default Lotto;
