@@ -19,32 +19,13 @@ class Lotto {
   // TODO: 함수 분리, SOLID 원칙 적용하기
 
   // 로또 번호 생성
-  static getOneLotto() {
-    let curCount = 0;
-    let limit = 6;
-    let lottoNumbers = [];
-    while (curCount < limit) {
-      const a = Random.pickNumberInRange(1, 45);
-      if (!lottoNumbers.includes(a)) {
-        lottoNumbers.push(a);
-        curCount += 1;
-      }
-    }
-    return lottoNumbers.sort((a, b) => a - b);
-    // pickUniqueNumbersInRange를 사용하면 더 짧음.
-    // const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+  static generateRandomLottoNumber() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
   }
 
-  // 넘겨 받은 갯수만큼 로또 리스트 생성
-  static getLottoList(num) {
-    let curCount = 0;
-    let lottoNumbersList = [];
-    while (curCount < num) {
-      const numbers = this.getOneLotto();
-      lottoNumbersList.push(numbers);
-      curCount += 1;
-    }
-    return lottoNumbersList;
+  // 넘겨 받은 갯수만큼 로또 티켓 리스트 생성
+  static generateLottoTickets(num) {
+    return Array.from({ length: num }, () => this.generateRandomLottoNumber());
   }
 
   // 당첨 번호와 비교
