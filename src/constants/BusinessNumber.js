@@ -13,3 +13,7 @@ export const LOTTO_STASTICS = Object.freeze({
   fourthPrize : 50000,
   fifthPrize : 5000,
 })
+
+export const REGEX = Object.freeze({
+  numberSplit : /\B(?=(\d{3})+(?!\d))/g,
+})

@@ -37,6 +37,10 @@ const ticket = [
   [1, 3, 5, 14, 22, 45]
 ]
 
+const ticket2 = [
+  [11,12,13,14,15,16]
+]
+
 const answer = [1,2,3,4,5,6,7]
 
 const a = new LottoReader(ticket, answer);

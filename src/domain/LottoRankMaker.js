@@ -27,6 +27,16 @@ class LottoRankMaker {
     return count;
   }
 
+  #rankUpdate() {
+    this.#lottoTicket.forEach((lottoArray) => {
+      const rank = this.#rankFilter(lottoArray);
+      
+      if(rank !== 0) {
+        this.#rankArray.push(this.#rankFilter(lottoArray));
+      }   
+    })
+  }
+
   #rankFilter(lottoArray) {
     const luckyCount = this.#countDuplicate(lottoArray, this.#luckyArray);
     const bonusCount = this.#countDuplicate(lottoArray, [this.#bonusNumber]);
@@ -42,23 +52,12 @@ class LottoRankMaker {
 
     if (luckyCount === 3) return 5;
   }
-
-  #rankUpdate() {
-    this.#lottoTicket.forEach((lottoArray) => {
-      const rank = this.#rankFilter(lottoArray);
-      
-      if(rank !== 0) {
-        this.#rankArray.push(this.#rankFilter(lottoArray));
-      }   
-    })
-  }
-
+  
   getRankArray() {
     this.#rankUpdate();
 
     return this.#rankArray;
   }
-
 }
 
 export default LottoRankMaker;
