@@ -48,7 +48,7 @@ describe("Lotto 유닛 테스트", () => {
 
     // then
     expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(generatedNumber.join(", "))
+      expect.stringContaining(`[${generatedNumber.join(", ")}]`)
     );
   });
 });
