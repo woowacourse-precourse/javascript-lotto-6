@@ -21,6 +21,7 @@ class App {
     const WINNING_NUMBER = await this.inputWinningNumber();
     this.validateWinningNumber(WINNING_NUMBER);
     const BOUNUS_NUMBER = await this.inputBonusNumber();
+    this.validateBonusNumber(BOUNUS_NUMBER);
     MissionUtils.Console.print(WINNING_NUMBER, BOUNUS_NUMBER);
   }
 
@@ -71,14 +72,17 @@ class App {
     }
     if (
       WINNING_NUMBER_ARRAY.forEach((number) => {
-        number < 1 || number > 45;
+        +number < 1 || +number > 45;
       })
     ) {
       throw new Error("[ERROR] 로또 번호는 1 ~ 45 사이의 수여야 합니다.");
     }
-    if (WINNING_NUMBER_ARRAY !== UNIQUE_ARRAY) {
+    if (WINNING_NUMBER_ARRAY.length !== UNIQUE_ARRAY.length) {
+      console.log(WINNING_NUMBER_ARRAY);
+      console.log(UNIQUE_ARRAY);
       throw new Error("[ERROR] 로또 번호는 중복되지 않는 수여야 합니다.");
     }
+    //정수 여부 확인?
   }
 
   inputBonusNumber() {
@@ -86,6 +90,12 @@ class App {
       INPUT_MESSAGES.INPUT_BOUNUS_NUMBER
     );
     return BOUNUS_NUMBER;
+  }
+
+  validateBonusNumber(BOUNUS_NUMBER) {
+    if (BOUNUS_NUMBER < 1 || BOUNUS_NUMBER > 45) {
+      throw new Error("[ERROR] 보너스 번호는 1 ~ 45 사이의 수여야 합니다.");
+    }
   }
 }
 
