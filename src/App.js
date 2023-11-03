@@ -1,6 +1,7 @@
 import UserView from './view/UserView.js';
 import Lottos from './Model/Lottos.js';
 import WinningNumbers from './model/WinningNumbers.js';
+import BonusNumber from './model/BonusNumber.js';
 
 class App {
 
@@ -33,7 +34,8 @@ class App {
   }
 
   async createBonusNumber(){
-    this.bonusNumber = await this.userView.userInputBonusNumber();;
+    const BONUS_NUMBER = await this.userView.userInputBonusNumber();
+    this.bonusNumber = new BonusNumber(BONUS_NUMBER);
   }
 
 }

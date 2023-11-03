@@ -18,9 +18,7 @@ class UserView{
     }
 
     async userInputBonusNumber(){
-        const BONUS_NUMBER = await Console.readLineAsync(MESSAGE.MSG_BONUS_NUMBER+'\n');
-        this.inOutputError.inputBonusNumberValidate(BONUS_NUMBER);
-        return BONUS_NUMBER;
+        return await Console.readLineAsync(MESSAGE.MSG_BONUS_NUMBER+'\n');
     }
 
 }
