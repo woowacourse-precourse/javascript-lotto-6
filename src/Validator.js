@@ -12,6 +12,10 @@ class Validator {
   static isStringOnlyDigits(string) {
     return VALIDATOR.DIGITS_REGEX.test(string);
   }
+
+  static isDivisibleBy1000(number) {
+    return number % 1000 === 0;
+  }
 }
 
 export default Validator;
