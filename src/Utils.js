@@ -13,6 +13,10 @@ class Utils {
   static convertStringIntoNumberArray(input) {
     return input.split(SEPARATOR.USER_LOTTO).map(Number);
   }
+
+  static convertKoreaWonUnit(number) {
+    return number.toLocaleString("ko-KR");
+  }
 }
 
 export default Utils;

@@ -20,6 +20,7 @@ export const SEPARATOR = {
 };
 
 export const RANK = {
+  LENGTH: 5,
   FIRST: 6,
   SECOND: 5,
   THIRD: 5,
@@ -33,4 +34,12 @@ export const PRIZE = {
   THIRD: 1_500_000,
   FOURTH: 50_000,
   FIFTH: 5_000,
+};
+
+export const INDEX = {
+  FIRST_RANK: 4,
+  SECOND_RANK: 3,
+  THIRD_RANK: 2,
+  FOURTH_RANK: 1,
+  FIFTH_RANK: 0,
 };

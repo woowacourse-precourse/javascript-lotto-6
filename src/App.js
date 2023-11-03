@@ -53,7 +53,8 @@ class App {
     try {
       this.#bonus = await Print.getUserBonusNumber();
       this.checkValidBonusNumber(this.#bonus);
-      this.calculateResult();
+      const statistics = this.calculateResult();
+      this.showLottoResult(statistics);
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.getUserBonusInput();
@@ -71,6 +72,16 @@ class App {
       this.#userLotto,
       parseInt(this.#bonus, 10)
     );
+    const statistics = result.getStatistics();
+
+    return statistics;
+  }
+
+  showLottoResult(statistics) {
+    Print.showResultPhrase();
+    statistics.forEach((statistic, rankIndex) => {
+      Print.showStatistic(statistic, rankIndex);
+    });
   }
 }
 
