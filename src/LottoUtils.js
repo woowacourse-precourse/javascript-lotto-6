@@ -1,42 +1,65 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH } from './constants.js';
-import { isValidAmount } from './Validation.js';
+import { isValidAmount, isValidWinnintNumbers } from './Validation.js';
 export const inputAmount = async () => {
   try {
     const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     if (!isValidAmount(amount))
-      throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
+      throw new Error('[ERROR] 숫자가 잘못된 형식입니다.\n');
     return amount;
   } catch (error) {
     Console.print(error.message);
     return false;
   }
 };
-export const multipleInputAmount = async () => {
-  let amount = false;
-  while (!amount) amount = await inputAmount();
+export const multiInputAmount = async () => {
+  let amount;
+  while (true) {
+    amount = await inputAmount();
+    if (amount) break;
+  }
   return amount;
 };
 export const inputWinningNumbers = async () => {
   try {
     const winningNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    let winNums = winningNumbers.split(',');
-    //return winningNumbers;
-    return winNums.map(x => Number(x));
+    if (!isValidWinnintNumbers(winningNumbers))
+      throw new Error('[ERROR] 당첨 번호가 잘못된 형식입니다.\n');
+    return winningNumbers.split(',').map(x => Number(x));
   } catch (error) {
     Console.print(error.message);
+    return false;
   }
+};
+export const multiInputWin = async () => {
+  let winningNumbers;
+  while (true) {
+    winningNumbers = await inputWinningNumbers();
+    if (Array.isArray(winningNumbers)) break;
+  }
+  return winningNumbers;
 };
 export const inputBonusNumber = async () => {
   try {
-    const bonusNumber =
-      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const bonusNumber = await Console.readLineAsync(
+      '\n보너스 번호를 입력해 주세요.\n',
+    );
+
     return bonusNumber;
   } catch (error) {
     Console.print(error.message);
+    return false;
   }
+};
+export const multipleInputBonus = async () => {
+  let bonusNumber;
+  while (true) {
+    bonusNumber = await inputBonusNumber();
+    if (bonusNumber) break;
+  }
+  return bonusNumber;
 };
 export const getRandomNumbers = () => {
   const numbers = Random.pickUniqueNumbersInRange(MIN, MAX, LOTTO_LENGTH);
@@ -59,7 +82,7 @@ export const getLottos = lotto_count => {
   return lottos;
 };
 export const printLottos = lottos => {
-  Console.print(`${lottos.length}개를 구매했습니다.`);
+  Console.print(`\n${lottos.length}개를 구매했습니다.`);
   lottos.forEach(lotto => {
     Console.print(lotto.getNumbers());
   });
