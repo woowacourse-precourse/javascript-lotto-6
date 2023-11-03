@@ -1,6 +1,6 @@
 import REGEXP from '../constants/RegExp.js';
 import { SETTINGS } from '../constants/Settings.js';
-import { LottoRangeError, LottoTypeError } from '../error/Errors.js';
+import { LottoRangeError, LottoTypeError, LottoLengthError, LottoDuplicatedError } from '../error/Errors.js';
 
 class WinningLotto {
   #numbers;
@@ -36,7 +36,7 @@ class WinningLotto {
       }
     });
     if (new Set([...numbers]).size !== numbers.length) {
-
+      throw new LottoDuplicatedError(numbers);
     }
   }
 
