@@ -19,7 +19,7 @@ class UserController {
     const modelAndView = new ModelAndView();
     const user = createUser(purchaseAmount, generateLottoNumber);
     modelAndView.setViewName('LottoPos');
-    modelAndView.addObject('message', user.userLotto);
+    modelAndView.addObject('data', user.userLotto);
     return modelAndView;
   }
 }

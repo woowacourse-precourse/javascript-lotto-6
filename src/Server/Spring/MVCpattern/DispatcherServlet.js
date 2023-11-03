@@ -9,26 +9,33 @@
  */
 import HandlerMapping from './HandlerMapping.js';
 import HandlerAdapter from './HandlerAdapter.js';
+import ViewResolver from './ViewResolver.js';
 import CONSTANTS from '../../../Util/Constants.js';
-import HttpResponse from '../../HttpResponse.js';
 
 class DispatcherServlet {
   #handlerMapping;
 
   #handlerAdapter;
 
+  #viewResolver;
+
   constructor() {
     this.#handlerMapping = new HandlerMapping();
     this.#handlerAdapter = new HandlerAdapter();
+    this.#viewResolver = new ViewResolver();
   }
 
   requestAPI(httpRequest) {
     try {
       const controller = this.#handlerMapping.getController(httpRequest.url);
       const modelAndView = this.#handlerAdapter.handler(controller, httpRequest.body);
-      return HttpResponse(CONSTANTS.success, modelAndView);
+      const view = this.#viewResolver.getView();
+      const httpResponse = view.generateHttpResponse(CONSTANTS.success, modelAndView.model);
+      return httpResponse;
     } catch (errorMessage) {
-      return HttpResponse(CONSTANTS.error, errorMessage);
+      const view = this.#viewResolver.getView();
+      const httpResponse = view.generateHttpResponse(CONSTANTS.error, errorMessage);
+      return httpResponse;
     }
   }
 }
