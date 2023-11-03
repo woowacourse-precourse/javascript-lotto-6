@@ -35,6 +35,22 @@ class Validate {
 
     return true;
   }
+
+  isValidUserLottoInput(input) {
+    if (!this.isValidLength(input)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isValidLength(input) {
+    if (input.length !== LOTTO.LENGTH) {
+      throw new Error(ERROR.INVALID_LOTTO_LENGTH);
+    }
+
+    return true;
+  }
 }
 
 export default Validate;

@@ -14,6 +14,9 @@ class Lotto {
 
     const validate = new Validate();
     validate.isOnlyNumberAndComma(trimedNumbers);
+
+    const numbersArray = trimedNumbers.split(SEPARATOR.USER_LOTTO);
+    validate.isValidUserLottoInput(numbersArray);
   }
 }
 
