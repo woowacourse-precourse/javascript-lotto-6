@@ -12,7 +12,14 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  static buyLottoTickets(money) {
+    if (money < 1000) {
+      throw new Error("[ERROR] 로또는 1000원부터 구입할 수 있습니다.");
+    }
+    if (money % 1000 !== 0) {
+      throw new Error("[ERROR] 구입 금액은 1000원 단위입니다.");
+    }
+  }
 }
 
 export default Lotto;
