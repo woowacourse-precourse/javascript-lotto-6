@@ -11,7 +11,13 @@ class Lotto {
 
   #validate(numbers) {
     const valid = new WinningValid();
-    valid.winningIsValid(numbers);
+    const integerNumber = numbers.filter((number) =>
+      Number.isInteger(Number(number))
+    );
+    const outOfRangeNumber = numbers.filter(
+      (number) => number < 1 || number > 45
+    );
+    valid.winningIsValid(numbers, integerNumber, outOfRangeNumber);
   }
   async bonus() {
     const bonus = new BonusInput();
@@ -22,7 +28,3 @@ class Lotto {
 }
 
 export default Lotto;
-
-// 당첨 번호를 여기로 보낸 다음에
-// 여기서 보너스 번호를 입력 받는다.
-// 그 이후에 당첨 번호와 보너스 번호를 밖으로 내보낸다.
