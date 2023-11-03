@@ -1,16 +1,23 @@
 import ERROR_CODE from '../error/errorCode';
 import { pickSixNumber } from '../libararyFeatures/MissionUtilHandler';
 import acendingSortList from '../parse/acendingSortList';
+import { checkLottoDuplicate } from '../validate/checkHasDuplicate';
 
 export default async function createPurchaseData(lottoCount, lottos) {
   try {
     const singleLotto = pickSixNumber();
     const sortedLotto = acendingSortList(singleLotto);
     const lottoList = [...lottos];
-    lottoList.push(sortedLotto);
-    const isNotPurchased = lottoList.length !== lottoCount;
+    const isLottoDuplicated = checkLottoDuplicate(sortedLotto, lottoList);
 
-    if (isNotPurchased) {
+    if (isLottoDuplicated) {
+      return createPurchaseData(lottoCount, lottoList);
+    }
+
+    lottoList.push(sortedLotto);
+    const isNotCompleted = lottoList.length !== lottoCount;
+
+    if (isNotCompleted) {
       return createPurchaseData(lottoCount, lottoList);
     }
 
