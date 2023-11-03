@@ -1,6 +1,7 @@
 import InputView from "../view/InputView";
 import OutputView from "../view/OutputView";
 import UserLottoModel from "../domain/UserLottoModel";
+import Lotto from "../domain/Lotto";
 
 
 class LottoController {
@@ -19,7 +20,12 @@ class LottoController {
 
     const winningNumbers = await InputView.getWinningNumbers();
 
+    const lotto = new Lotto(winningNumbers);
+
     const bonusNumbers = await InputView.getBonusNumbers();
+
+    const result = lotto.countMatches(lottoTickets, winningNumbers, bonusNumbers);
+    console.log(result)
   }
 }
 
