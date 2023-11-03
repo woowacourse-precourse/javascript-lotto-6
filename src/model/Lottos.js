@@ -12,8 +12,6 @@ class Lottos{
     constructor(amount){
         this.amount = amount;
         this.purchaseLottoNumbers = [];
-        this.matchingNumberCount = [];
-        this.matchingBonusNumberCount = [];
         this.lottoCount = this.amount / Lottos.UNIT_PRICE;
         this.inputLottoValidate(amount);
         this.lottoNumbers();
@@ -28,28 +26,18 @@ class Lottos{
             const CREATE_RANDOM_NUMBER = this.createRandomNumber();
             this.purchaseLottoNumbers.push(CREATE_RANDOM_NUMBER);
         }
+        new Lotto(this.purchaseLottoNumbers).userOutputPurchaseLotto();
     };
 
     createRandomNumber = () => {
         const RANDOM_NUMBER = Random.pickUniqueNumbersInRange(Lottos.MIN_NUMBER, Lottos.MAX_NUMBER, Lottos.NUMBER_LENGTH);
-        this.lotto = new Lotto(RANDOM_NUMBER).userOutputPurchaseLotto();
         return RANDOM_NUMBER;
     }
 
     lottoNumberResultCount = (purchaseLotto, winningNumber, bonusNumber) => {
-        for(const LOTTO_ARR of purchaseLotto){
-            const COMPARE_LOTTO_COUNT = this.compareLottoNumber(LOTTO_ARR, winningNumber);
-            this.matchingNumberCount.push(COMPARE_LOTTO_COUNT);
-            this.matchingBonusNumberCount.push(LOTTO_ARR.filter(number => number === Number(bonusNumber)).length);
-        }
+        const lottoRank = new Lotto(purchaseLotto).resultLottoPrize(winningNumber, bonusNumber);
+        console.log(lottoRank);
     };
-
-    compareLottoNumber = (purchaseLotto, winningNumber) => {
-        return purchaseLotto.filter(
-            number => winningNumber.includes(number)
-        ).length;
-    }
-
 
 }
 
