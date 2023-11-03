@@ -1,18 +1,36 @@
+import { ERROR_MESSAGE, LOTTO_FORM } from './constant';
+import { throwError, validateNumberRange } from './uttils';
 class Lotto {
-  #numbers;
+  #numbers; // number[]
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#validateLottoNumbers(numbers);
+    this.#numbers = numbers.sort();
   }
-
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+  #validateNumbersLength(numbers) {
+    if (numbers.length !== LOTTO_FORM.length) {
+      throwError(ERROR_MESSAGE.sixNumbers);
     }
   }
 
-  // TODO: 추가 기능 구현
+  #validateNumbersRange(numbers) {
+    numbers.forEach((number) => validateNumberRange(number));
+  }
+
+  #hasNoRepeatNumber(numbers) {
+    if (new Set(numbers).size !== numbers.length)
+      throwError(ERROR_MESSAGE.duplicateNumber);
+  }
+
+  #validateLottoNumbers(numbers) {
+    this.#validateNumbersLength(numbers);
+    this.#validateNumbersRange(numbers);
+    this.#hasNoRepeatNumber(numbers);
+  }
+
+  getLottoNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

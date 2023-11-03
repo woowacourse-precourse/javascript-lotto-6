@@ -1,25 +1,14 @@
-import {
-  getErrorMessage,
-  getNumberErrorMessage,
-  printMessage,
-} from './MessageFactory';
+import { getErrorMessage, throwError, printMessage } from './MessageFactory';
 
-import {
-  hasNoReset,
-  validatePayment,
-  validateBonusBall,
-  validateLottoNumbers,
-} from './Validate';
+import { validateNumberRange, hasNoReset } from './Validate';
 
 import { getLottoRandomNumbers } from './RandomNumbers';
 
 export {
   getErrorMessage,
-  getNumberErrorMessage,
   getLottoRandomNumbers,
   hasNoReset,
   printMessage,
-  validateBonusBall,
-  validateLottoNumbers,
-  validatePayment,
+  throwError,
+  validateNumberRange,
 };
