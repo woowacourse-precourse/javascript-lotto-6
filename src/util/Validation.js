@@ -22,13 +22,24 @@ const checkMoneyMinimun = (input) => {
     throw new Error(ERROR_MESSAGES.inputMoneyMinimun);
 };
 
-const checkWinningRange = (input) => {
-  if (input < GAME_RULE_NUMBER.min || input > GAME_RULE_NUMBER.max)
-    throw new Error(ERROR_MESSAGES.winningRange);
+const checkInputLength = (input, length, message) => {
+  if (input.split(',').length !== length) throw new Error(message);
 };
 
-const checkInputInteger = (input, message) => {
-  if (+input !== Math.floor(+input)) throw new Error(message);
+const checkInputRange = (input, message) => {
+  if (input < GAME_RULE_NUMBER.min || input > GAME_RULE_NUMBER.max)
+    throw new Error(message);
+};
+
+const checkWinningRange = (input) => {
+  input
+    .split(',')
+    .forEach((number) => checkInputRange(number, ERROR_MESSAGES.winningRange));
+};
+const checkWinningType = (input) => {
+  input
+    .split(',')
+    .forEach((number) => checkInputType(number, ERROR_MESSAGES.winningType));
 };
 
 const checkInput = (input) => {
@@ -45,15 +56,28 @@ const checkPurchasingMoney = (input) => {
 
 const checkWinningNumbers = (input) => {
   checkInput(input);
-  checkInputType(input, ERROR_MESSAGES.winningType);
+  checkWinningType(input);
   checkWinningRange(input);
-  checkInputInteger(input, ERROR_MESSAGES.winningInteger);
+  checkInputLength(
+    input,
+    GAME_RULE_NUMBER.winningNumbersLength,
+    ERROR_MESSAGES.winningLength,
+  );
 };
 
 const checkBonusNumber = (input) => {
   checkInput(input);
+  checkInputLength(
+    input,
+    GAME_RULE_NUMBER.bonusNumberLength,
+    ERROR_MESSAGES.bonusLength,
+  );
   checkInputType(input, ERROR_MESSAGES.bonusType);
-  checkInputInteger(input, ERROR_MESSAGES.bonusInteger);
+  checkInputRange(input, ERROR_MESSAGES.bonusRange);
 };
+
+checkBonusNumber('11');
+checkPurchasingMoney('8000');
+checkWinningNumbers('1,2,3,4,5,6');
 
 export { checkPurchasingMoney, checkWinningNumbers, checkBonusNumber };
