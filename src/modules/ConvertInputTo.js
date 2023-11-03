@@ -8,6 +8,7 @@ const LOTTO_UPPER_NUMBER = 45;
 
 const PURCHASE_PRICE_INPUT_MESSAGE = '구입금액을 입력해 주세요.\n';
 const WINNING_NUMBER_INPUT_MESSAGE = '당첨 번호를 입력해 주세요.\n';
+const BONUS_NUMBER_INPUT_MESSAGE = '보너스 번호를 입력해 주세요.\n';
 
 const MISS_STATE = 0;
 const BONUS_STATE = 0.5;
@@ -49,7 +50,21 @@ class ConvertInputTo {
         WINNING_NUMBER_INPUT_MESSAGE
       );
       try {
-        ErrorCheck.lottoNumbersString(numbersString);
+        ErrorCheck.bonusNumberString(numbersString);
+        return numbersString.split(',').map(Number);
+      } catch (error) {
+        Print.errorMessage(error);
+      }
+    }
+  }
+
+  static async bonusNumber(lottoBoard) {
+    while (true) {
+      const numbersString = await Console.readLineAsync(
+        BONUS_NUMBER_INPUT_MESSAGE
+      );
+      try {
+        ErrorCheck.bonusNumberString(numbersString, lottoBoard);
         return numbersString.split(',').map(Number);
       } catch (error) {
         Print.errorMessage(error);

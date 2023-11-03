@@ -8,9 +8,9 @@ class Is {
     return true;
   }
 
-  static multiplesInPositive(number, targetNumber) {
-    if (number <= 0) return false;
-    if (number % targetNumber === 0) return true;
+  static multiplesInPositive(multiplier, multiplicand) {
+    if (multiplier <= 0) return false;
+    if (multiplier % multiplicand === 0) return true;
     return false;
   }
 }

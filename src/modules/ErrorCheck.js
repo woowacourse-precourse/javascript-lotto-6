@@ -15,27 +15,33 @@ class ErrorCheck {
     ErrorCheck.multiplesInPositive(Number(inputString), lottoPrice);
   }
 
-  static lottoNumbersString(inputString) {
-    const arrayFromString = inputString.split(',');
+  static lottoNumbersString(string) {
+    const arrayFromString = string.split(',');
     ErrorCheck.arrayLikeLength(arrayFromString, NUMBER_OF_LOTTO_NUMBERS);
-    arrayFromString.forEach(splitedString => {
-      ErrorCheck.positiveIntegerString(splitedString);
-      ErrorCheck.numberInRange(
-        Number(splitedString),
-        LOTTO_NUMBER_LOWER,
-        LOTTO_NUMBER_UPPER
-      );
-    });
+    arrayFromString.forEach(ErrorCheck.lottoNumberString);
     ErrorCheck.differentElementArray(arrayFromString);
   }
 
-  static positiveIntegerString(inputString) {
-    if (!Is.positiveIntegerString(inputString))
+  static bonusNumbersString(inputString, lottoBoard) {
+    ErrorCheck.lottoNumberString(inputString);
+  }
+
+  static lottoNumberString(string) {
+    ErrorCheck.positiveIntegerString(string);
+    ErrorCheck.numberInRange(
+      Number(string),
+      LOTTO_NUMBER_LOWER,
+      LOTTO_NUMBER_UPPER
+    );
+  }
+
+  static positiveIntegerString(string) {
+    if (!Is.positiveIntegerString(string))
       throw new Error(NOT_AN_INTEGER_ERROR_MESSAGE);
   }
 
-  static multiplesInPositive(inputNumber, targetNumber) {
-    if (!Is.multiplesInPositive(inputNumber, targetNumber))
+  static multiplesInPositive(multiplier, multiplicand) {
+    if (!Is.multiplesInPositive(multiplier, multiplicand))
       throw new Error(NOT_MULTIPLES_ERROR_MESSAGE);
   }
 
