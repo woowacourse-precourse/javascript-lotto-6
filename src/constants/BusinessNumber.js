@@ -24,4 +24,6 @@ export const LOTTO_RULE = Object.freeze({
 
 export const REGEX = Object.freeze({
   numberSplit : /\B(?=(\d{3})+(?!\d))/g,
+  commaNumber : /[^0-9,]/g, //컴마와 0~9숫자 이외에 모두 true반환 
+  number : /[^0-9]/g,  // 숫자 0~9 이외에 모두 true반환
 })
