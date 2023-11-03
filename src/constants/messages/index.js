@@ -7,6 +7,7 @@ export const MESSAGES = Object.freeze({
     PREFIX: "[ERROR]",
     COMMON: {
       NOT_NUMBER: `${COMMON_ERROR_PREFIX} 숫자여야 합니다.`,
+      NOT_POSITIVE: `${COMMON_ERROR_PREFIX} 양수여야 합니다.`,
       NOT_INTEGER: `${COMMON_ERROR_PREFIX} 정수여야 합니다.`,
     },
     LOTTO: {
@@ -19,8 +20,11 @@ export const MESSAGES = Object.freeze({
     },
     BUY: {
       NOT_NUMBER: `${BUY_ERROR_PREFIX} 숫자여야 합니다.`,
+      NOT_POSITIVE: `${BUY_ERROR_PREFIX} 양수여야 합니다.`,
       NOT_MULTIPLE_OF: (multiple) =>
         `${BUY_ERROR_PREFIX} ${multiple}의 배수여야 합니다.`,
     },
   },
+
+  BUY: "구입금액을 입력해 주세요.",
 });
