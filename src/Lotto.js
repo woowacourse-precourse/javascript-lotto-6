@@ -1,3 +1,4 @@
+import { Random, Console } from "@woowacourse/mission-utils";
 class Lotto {
   #numbers;
 
@@ -13,6 +14,13 @@ class Lotto {
   getLottoNumbers() {
     const randomLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
     return randomLottoNumber;
+  }
+
+  printLottoNumbers(amountOfLotto) {
+    for (let i = 0; i < amountOfLotto; i++) {
+      const lottoNumbers = this.getLottoNumbers();
+      Console.print(lottoNumbers);
+    }
   }
 }
 
