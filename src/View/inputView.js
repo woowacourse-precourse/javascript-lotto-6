@@ -7,6 +7,12 @@ const inputView = {
     validator.validatePrice(userInput);
     return userInput;
   },
+
+  async readWinningNumbersAsync(message) {
+    const userInput = await Console.readLineAsync(message);
+    const numbers = userInput.split(",");
+    return numbers;
+  },
 };
 
 export default inputView;
