@@ -1,3 +1,4 @@
+import divideInput from '../../util/parse/divideInput.js';
 import checkHasNoRemainder from '../../util/validate/checkHasNoRemainder.js';
 import checkIsEmpty from '../../util/validate/checkIsEmpty.js';
 import { checkIsNaN } from '../../util/validate/checkIsNaN.js';
@@ -10,7 +11,7 @@ export default async function purchaseValidService(input) {
     checkIsNaN(input);
     checkHasNoRemainder(input);
 
-    const result = input / 1000;
+    const result = divideInput(input);
     return result;
   } catch (error) {
     const errorMessage = error.message;
