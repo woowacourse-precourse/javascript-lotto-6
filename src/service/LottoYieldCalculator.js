@@ -1,17 +1,26 @@
-import LOTTO_SETTINGS from "../config/gameSetting";
+import LOTTO_SETTINGS from "../config/gameSetting.js";
 
 export default class LottoYieldCalculator {
-  calculate(lotto, drawnLotto) {
+  static calculate(lotto, drawnLotto) {
     const lottoNumbers = lotto.getNumbers();
-    const drawnLottoNumbers = drawnLotto.getNumbers();
-    const bonusNumber = drawnLotto.getBonusNumber();
+    const { numbers, bonusNumber } = drawnLotto.getFullNumbers();
 
-    const matchCount = lottoNumbers.filter((number) =>
-      drawnLottoNumbers.includes(number)
+    const matchCount = this.#getMatchCount(lottoNumbers, {
+      numbers,
+      bonusNumber,
+    });
+  }
+
+  static #getMatchCount(lottoNumbers, { numbers, bonusNumber }) {
+    let matchCount = lottoNumbers.filter((lottoNumber) =>
+      numbers.includes(lottoNumber)
     ).length;
 
     if (matchCount === 5) {
-      matchCount += 1;
+      if (lottoNumbers.includes(bonusNumber)) {
+        matchCount += 1;
+      }
     }
+    return matchCount;
   }
 }
