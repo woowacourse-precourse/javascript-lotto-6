@@ -24,7 +24,7 @@ class App {
 
   async getMoneyInput() {
     const money = await MissionUtils.Console.readLineAsync(
-      "구입금액을 입력해 주세요.",
+      "구입금액을 입력해 주세요.\n",
     );
     App.#validateMoney(money);
     this.#money = money;
@@ -36,11 +36,19 @@ class App {
     );
   }
 
+  printLottoList() {
+    MissionUtils.Console.print(`\n${this.#lottos.length}개를 구매했습니다.`);
+    for (let i = 0; i < this.#lottos.length; i += 1) {
+      this.#lottos[i].printNumbers();
+    }
+  }
+
   async play() {
     await this.getMoneyInput();
     for (let i = 0; i < this.#money / 1000; i += 1) {
       this.purchaseLotto();
     }
+    this.printLottoList();
   }
 }
 
