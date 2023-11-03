@@ -44,8 +44,8 @@ export async function inputMoneyDivideValidater(input) {
 async function inputWinningNumber() {
   let comment = WINNING_NUMBER_COMMENT;
   MissionUtils.Console.print(comment);
-  const winnigNumber = await MissionUtils.Console.readLineAsync('');
-  return winnigNumber;
+  const winningNumber = await MissionUtils.Console.readLineAsync('');
+  return winningNumber;
 }
 
 async function inputBonusNumber() {
