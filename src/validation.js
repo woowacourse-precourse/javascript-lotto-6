@@ -35,3 +35,5 @@ function validationBonusNumber(bonusNumber, winnerNumbers) {
     winnerNumbers.forEach((winnerNumber) => qualificationBonusNumber(bonusNumber, winnerNumber));
     qualificationLottoNumber(bonusNumber);
 }
+
+export { validationUserMoney, validationWinnerNumber, validationBonusNumber };
