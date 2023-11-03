@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import validation from "./utils/valiidation.js";
 
 class App {
   #lottoTickets;
@@ -27,7 +28,8 @@ class App {
           45,
           6,
         );
-        MissionUtils.Console.print(randomNumbers);
+        const sortedNumbers = randomNumbers.sort((a, b) => a - b);
+        MissionUtils.Console.print(sortedNumbers);
       };
       MakeAndPrintLottoNumbers();
       count++;
@@ -36,9 +38,10 @@ class App {
     //당첨 번호를 입력
     const winLottoNumbersInput =
       await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    const winLottoNumbers = winLottoNumbersInput.split(",");
 
     //당첨 번호 유효성 검사
-    const lotto = new Lotto(Array(winLottoNumbersInput));
+    const lotto = new Lotto(winLottoNumbers);
     lotto.checkValidation();
 
     //보너스 번호
@@ -48,6 +51,8 @@ class App {
       );
 
     //보너스 번호 유효성 검사
+    validation.hasSameNumber([...winLottoNumbers, bonusNumberInput]);
+    validation.isInValidRange([Number(bonusNumberInput)]);
   }
 }
 
