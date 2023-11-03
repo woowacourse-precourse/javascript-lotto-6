@@ -8,4 +8,11 @@ export default class InputView {
     );
     return money.trimt();
   }
+
+  static async promptForDrawnLottoNumbers() {
+    const drawnLottoNumbers = await Console.readLineSync(
+      `${MESSAGES.PROMPT_BONUS_NUMBER}\n`
+    );
+    return drawnLottoNumbers.split(",").map((number) => number.trim());
+  }
 }
