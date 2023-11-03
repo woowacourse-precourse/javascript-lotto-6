@@ -22,7 +22,7 @@ class LottoPurchase {
     }
   }
 
-  async #askPurchaseLottoAmount() {
+  async #purchaseLottoAmount() {
     let amount;
 
     while (true) {
@@ -36,6 +36,10 @@ class LottoPurchase {
     }
 
     return amount;
+  }
+
+  async askPurchaseLottoAmount() {
+    return this.#purchaseLottoAmount();
   }
 }
 
