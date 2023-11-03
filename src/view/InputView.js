@@ -8,10 +8,17 @@ class InputView {
   }
 
   static async getLottoNumbers() {
-    const LottoNumbers = await Console.readLineAsync(
+    const lottoNumbers = await Console.readLineAsync(
       CONSOLE_MESSAGE.inputLottoNumbers
     );
-    return LottoNumbers;
+    return lottoNumbers;
+  }
+
+  static async getBonusNumber() {
+    const bonuseNubmer = await Console.readLineAsync(
+      CONSOLE_MESSAGE.inputBonusNumber
+    );
+    return bonuseNubmer;
   }
 }
 

@@ -15,8 +15,14 @@ export const numberValidation = (list) => {
     throw new Error(ERROR_MESSAGE.max_input);
 
   uniqueList.forEach((input) => {
-    console.log(input);
     if (!Setting.lotto_Number_Reg.test(input))
       throw new Error(ERROR_MESSAGE.number);
   });
+};
+
+export const bonusNubmerValidation = (number, numberList) => {
+  if (!Setting.lotto_Number_Reg.test(number))
+    throw new Error(ERROR_MESSAGE.number);
+
+  if (numberList.includes(number)) throw new Error(ERROR_MESSAGE.bonus_number);
 };
