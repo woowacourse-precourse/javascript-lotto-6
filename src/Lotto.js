@@ -4,6 +4,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.COUNT = 0;
   }
 
   #validate(numbers) {
@@ -12,7 +13,15 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  compareNumber(winnerNumbers) {
+    this.#numbers.forEach((number) => this.qulificationWinNumber(winnerNumbers, number));
+  }
+
+  qulificationWinNumber(winnerNumbers, number) {
+    if(winnerNumbers.includes(number)) {
+      this.COUNT++;
+    }
+  }
 }
 
 export default Lotto;
