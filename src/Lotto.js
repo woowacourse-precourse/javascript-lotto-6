@@ -27,8 +27,9 @@ class Lotto {
       0,
     );
     const bonusIncluded = this.#numbers.includes(bonusNumber);
+
     return {
-      matchedCount: bonusIncluded ? matchedCount + 1 : matchedCount,
+      matchedCount,
       bonusIncluded,
     };
   }

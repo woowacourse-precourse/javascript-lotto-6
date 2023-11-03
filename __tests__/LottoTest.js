@@ -83,8 +83,8 @@ describe("로또 클래스 테스트", () => {
         "5개 일치, 보너스 볼 일치",
         {
           lottoNumbers: LOTTO_NUMBERS,
-          winningNumbers: [1, 2, 3, 4, 13, 14],
-          bonusNumber: 5,
+          winningNumbers: [1, 2, 3, 4, 5, 14],
+          bonusNumber: 6,
         },
         { matchedCount: 5, bonusIncluded: true },
       ],
