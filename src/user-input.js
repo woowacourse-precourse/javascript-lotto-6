@@ -20,3 +20,8 @@ async function lottoWinnerNumbers() {
     return lottoWinnerNumber;
 }
 
+async function lottoBonusNumber() {
+    const lottoBonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
+    return lottoBonusNumber;
+}
+
