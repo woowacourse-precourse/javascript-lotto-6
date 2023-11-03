@@ -31,7 +31,20 @@ describe('LottoCommission 객체 테스트', () => {
     expect(lottoCompany.numbers).toEqual([1, 2, 3, 4, 5, 6, 10]);
   });
 
-  test('로또 객체를 발행할 수 있다.', () => {
+  test('보너스 번호를 두 번이상 추가할 경우 무시한다.', () => {
+    // given
+    const bonusNumber1 = 10;
+    const bonusNumber2 = 20;
+
+    // when
+    lottoCompany.pushBonus(bonusNumber1);
+    lottoCompany.pushBonus(bonusNumber2);
+
+    // then
+    expect(lottoCompany.numbers).toEqual([1, 2, 3, 4, 5, 6, 10]);
+  });
+
+  test('로또 객체를 n개 발행할 수 있다.', () => {
     // given
     const numOfLottos = 2;
 
@@ -39,11 +52,23 @@ describe('LottoCommission 객체 테스트', () => {
     const lottos = lottoCompany.issueLottos(numOfLottos);
 
     // then
-    expect(lottos).toContain(Lotto);
+    expect(lottos).toEqual([Lotto, Lotto]);
     expect(lottos).toHaveLength(2);
   });
 
-  test('match 메서드를 호출하면, 번호의 일치 개수가 반환된다.', () => {
+  test('numbers 멤버에는 1~45 사이의 숫자를 넣지않으면 예외가 발생한다.', () => {
+    // given
+    const input1 = 0;
+    const input2 = 46;
+    const inputList = [1, 2, 3, 4, 5, 46];
+
+    // when, then
+    expect(lottoCompany.pushBonus(input1)).toThrow('[ERROR]');
+    expect(lottoCompany.pushBonus(input2)).toThrow('[ERROR]');
+    expect(lottoCompany.setNumbers(inputList)).toThrow('[ERROR]');
+  });
+
+  test('match 메서드를 호출하면, 로또 번호의 일치 개수가 반환된다.', () => {
     // given
     lottoCompany.setNumbers([1, 2, 3, 7, 8, 9]);
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
