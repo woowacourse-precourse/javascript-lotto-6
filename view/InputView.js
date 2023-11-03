@@ -21,6 +21,13 @@ class InputView {
     this.winNum = winNum.split(',').map((e) => parseInt(e.trim(), 10));
     Console.print(this.winNum);
   }
+
+  // 보너스 번호 입력
+  async getBonusNum() {
+    const bonusNum = await Console.readLineAsync(PromptMessage.ENTER_BONUS_NUM);
+    this.bonusNum = parseInt(bonusNum, 10);
+    Console.print(this.bonusNum);
+  }
 }
 
 export default InputView;
