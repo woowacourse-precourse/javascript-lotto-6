@@ -80,3 +80,11 @@ export async function winnningNumberRangeValidater(number) {
     throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
   }
 }
+
+export async function bonusNumberDuplicateValidater(winning, bonus) {
+  for (let i = 0; i < winning.length; i++) {
+    if (winning[i] === bonus) {
+      throw new Error("[ERROR] 보너스 번호가 중복되었습니다.")
+    }
+  }
+}
