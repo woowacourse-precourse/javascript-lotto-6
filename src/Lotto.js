@@ -1,3 +1,11 @@
+const PRIZE = {
+  FIRST: 2000000000,
+  SECOND: 30000000,
+  THIRD: 1500000,
+  FOURTH: 50000,
+  FIFTH: 5000
+};
+
 class Lotto {
   #numbers;
 
@@ -6,6 +14,7 @@ class Lotto {
     this.#numbers = numbers;
     this.COUNT = 0;
     this.BONUS = false;
+    this.PRIZE;
   }
 
   #validate(numbers) {
