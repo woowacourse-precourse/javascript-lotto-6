@@ -14,9 +14,7 @@ class UserView{
     }
 
     async userInputWinningNumbers(){
-        const WINNING_NUMBERS = await Console.readLineAsync(MESSAGE.MSG_WINNING_NUMBERS+'\n');
-        this.inOutputError.inputWinningNumbersValidate(WINNING_NUMBERS.split(','));
-        return WINNING_NUMBERS.split(',');
+        return await Console.readLineAsync(MESSAGE.MSG_WINNING_NUMBERS+'\n');
     }
 
     async userInputBonusNumber(){
