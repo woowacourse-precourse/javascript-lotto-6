@@ -2,9 +2,10 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
-  static async play() {
-    this.makeLottoNum();
-    await this.allOfInputfunc();
+  async play() {
+    this.#makeLottoNum();
+    // await this.allOfInputfunc();
+    await this.#allOfMoneyfunc();
   }
 
   // 당첨번호 & 보너스번호 입력 함수 총집합
@@ -18,7 +19,7 @@ class App {
     this.validateNumRange([bonusNum]); // 배열 형태로 전달
   }
 
-  static makeLottoNum() {
+  #makeLottoNum() {
     const NEED_NUM = 6;
     const myLottoNum = [];
     while (myLottoNum.length < NEED_NUM) {
@@ -97,10 +98,29 @@ class App {
     }
   }
 
+  // ------로또구입 함수------
+  async #allOfMoneyfunc() {
+    const inputMoney = await this.getMoney();
+    this.#validateMoneyIsNum(inputMoney);
+  }
+
   // 로또 구입 금액 입력받기
-  getMoney() {}
+  async getMoney() {
+    const inputMoney =
+      await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+
+    return Number(inputMoney);
+  }
+
+  // 구입금액 유효성 확인
+  #validateMoneyIsNum(inputMoney) {
+    if (Number.isNaN(inputMoney)) {
+      throw new Error(`[ERROR] 구입금액은 숫자만 입력 가능합니다.`);
+    }
+  }
 }
 
 export default App;
 
-// App.play();
+const app = new App();
+app.play();
