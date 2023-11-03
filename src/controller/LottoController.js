@@ -16,7 +16,8 @@ class LottoController {
     this.#user.buyLottos();
     this.getUserLottos();
     await this.setWinningLottoNumbers();
-    this.setWinningLottoBonus();
+    await this.setWinningLottoBonus();
+    this.getResult();
   }
 
   async setUser() {
@@ -60,6 +61,19 @@ class LottoController {
         View.printOutput(e.message);
       }
     }
+  }
+
+  getResult() {
+    const lottos = this.#user.getLottos();
+    const numbers = 0;
+    const bonus = false;
+
+    lottos.forEach((lotto) => {
+      numbers = this.#winningLotto.getMatchWithNumbers(lotto);
+      bonus = this.#winningLotto.getMatchWithBonus(lotto);
+    });
+
+    return { numbers, bonus };
   }
 }
 

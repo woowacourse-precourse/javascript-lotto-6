@@ -1,5 +1,6 @@
 import WinningLotto from '../../src/domains/WinningLotto'
 import { LottoDuplicatedError, LottoLengthError, LottoRangeError, LottoTypeError, BonusTypeError, BonusRangeError, BonusIncludedError } from '../../src/error/CustomErrors.js';
+import Lotto from '../../src/domains/Lotto.js';
 
 describe('WinningLotto - 당첨 번호 유효성 검사 테스트', () => {
   const winning = new WinningLotto();
@@ -75,4 +76,39 @@ describe('WinningLotto - 보너스 번호 유효성 검사 테스트', () => {
 
     expect(result).toThrowError(BonusIncludedError);
   });
+});
+
+describe('WinningLotto - 로또와 담첨번호 및 보너스 결과 테스트', () => {
+  const winning = new WinningLotto();
+
+  winning.setNumbers('1,2,3,4,5,6');
+  winning.setBonus('7');
+
+  test('lotto와 당첨번호가 모두 일치하는 경우 6을 반환한다.', () => {
+    const lotto = new Lotto([1,2,3,4,5,6])
+    const result = winning.getMatchWithNumbers(lotto.getNumbers());
+
+    expect(result).toEqual(6);
+  });
+
+  test.each([
+    [[1,2,3,10,20,30]],
+    [[1,10,20,3,5,30]],
+  ])('lotto와 당첨번호가 3개 일치하는 경우 3을 반환한다.', (input) => {
+    const lotto = new Lotto(input)
+    const result = winning.getMatchWithNumbers(lotto.getNumbers());
+
+    expect(result).toEqual(3);
+  });
+
+  test.each([
+    [[10,11,12,13,14,15]],
+    [[20,21,22,23,24,25]],
+  ])('lotto와 당첨번호가 일치하지 않는 경우 0을 반환한다.', (input) => {
+    const lotto = new Lotto(input)
+    const result = winning.getMatchWithNumbers(lotto.getNumbers());
+
+    expect(result).toEqual(0);
+  });
+
 });

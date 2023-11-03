@@ -46,6 +46,24 @@ class WinningLotto {
       throw new BonusIncludedError(bonus);
     }
   }
+
+  getMatchWithNumbers(numbers) {
+    let counter = 0;
+    numbers.forEach((number) => {
+      if (this.#numbers.includes(number)) {
+        counter += 1;
+      }
+    });
+
+    return counter;
+  }
+
+  getMatchWithBonus(numbers) {
+    if (numbers.includes(this.#bonus)) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export default WinningLotto;

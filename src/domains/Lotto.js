@@ -6,12 +6,12 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this._validate(numbers);
     this.#numbers = numbers;
     this.#numbers.sort((a, b) => a - b);
   }
 
-  #validate(numbers) {
+  _validate(numbers) {
     if (numbers.length !== SETTINGS.lottoLength) {
       throw new LottoLengthError(numbers);
     }
