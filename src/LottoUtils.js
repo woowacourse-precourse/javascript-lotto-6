@@ -4,7 +4,7 @@ import { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH } from './constants.js';
 import {
   isValidAmount,
   isValidBonusNumber,
-  isValidWinnintNumbers,
+  isValidWinningNumbers,
 } from './Validation.js';
 export const inputAmount = async () => {
   try {
@@ -29,7 +29,7 @@ export const inputWinningNumbers = async () => {
   try {
     const winningNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    if (!isValidWinnintNumbers(winningNumbers))
+    if (!isValidWinningNumbers(winningNumbers))
       throw new Error('[ERROR] 당첨 번호가 잘못된 형식입니다.\n');
     return winningNumbers.split(',').map(x => Number(x));
   } catch (error) {
@@ -37,7 +37,7 @@ export const inputWinningNumbers = async () => {
     return false;
   }
 };
-export const multiInputWiningNumbers = async () => {
+export const multiInputWinningNumbers = async () => {
   let winningNumbers;
   while (true) {
     winningNumbers = await inputWinningNumbers();
@@ -50,9 +50,9 @@ export const inputBonusNumber = async winningNumbers => {
     const bonusNumber = await Console.readLineAsync(
       '\n보너스 번호를 입력해 주세요.\n',
     );
-    if (!isValidBonusNumber(winningNumbers, bonusNumber))
+    if (!isValidBonusNumber(winningNumbers, Number(bonusNumber)))
       throw new Error('[ERROR] 보너스 번호가 잘못된 형식입니다.\n');
-    return bonusNumber;
+    return Number(bonusNumber);
   } catch (error) {
     Console.print(error.message);
     return false;
@@ -89,7 +89,7 @@ export const getLottos = lotto_count => {
 export const printLottos = lottos => {
   Console.print(`\n${lottos.length}개를 구매했습니다.`);
   lottos.forEach(lotto => {
-    Console.print(lotto.getNumbers());
+    Console.print(`[${lotto.getNumbers().join(', ')}]`);
   });
   Console.print('');
 };
@@ -108,6 +108,7 @@ export const getResult = (lottos, winningNumbers, bonusNumber) => {
   return result;
 };
 export const printResult = result => {
+  Console.print('\n당첨 통계\n---');
   Object.keys(result)
     .reverse()
     .forEach(rank => {
@@ -119,7 +120,7 @@ export const getRateOfReturn = (amount, result) => {
   Object.keys(result).forEach(rank => {
     totalMoney += result[rank].money * result[rank].count;
   });
-  const ratio = Math.round((totalMoney / amount) * 100).toFixed(1);
+  const ratio = ((totalMoney / amount) * 100).toFixed(1);
   return ratio;
 };
 export const printRateOfReturn = ratio => {

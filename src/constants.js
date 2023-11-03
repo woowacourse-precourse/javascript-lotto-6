@@ -10,6 +10,6 @@ const MATCH = {
   },
   rank3: { message: '5개 일치 (1,500,000원)', money: 1500000 },
   rank4: { message: '4개 일치 (50,000원)', money: 50000 },
-  rank5: { message: '3개 일치 (5000원)', money: 5000 },
+  rank5: { message: '3개 일치 (5,000원)', money: 5000 },
 };
 export { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH };
