@@ -17,7 +17,7 @@ class App {
   checkLottoPrice(lottoPrice) {
     // test code
     let alphabetPattern = /[a-zA-Z]/;
-    if(lottoPrice.search(alphabetPattern) !== -1) throw new Error('[ERROR] 숫자만 입력하세요.');
+    if(alphabetPattern.test(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
     if (isNaN(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
     if (lottoPrice < 1000)
       throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
