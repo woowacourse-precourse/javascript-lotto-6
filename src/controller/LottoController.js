@@ -6,6 +6,7 @@ class LottoController {
 
   async playLotto() {
     await this.inputMoney();
+    await this.inputLottoNumbers();
   }
 
   async inputMoney() {
@@ -36,6 +37,16 @@ class LottoController {
     lottos.map(lotto => {
       Console.print(lotto.getNumbers());
     });
+    Console.print('');
+  }
+
+  async inputLottoNumbers() {
+    const userLottoNumbers =
+      await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    Console.print('');
+    const userBonusNumber =
+      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    Console.print('');
   }
 }
 
