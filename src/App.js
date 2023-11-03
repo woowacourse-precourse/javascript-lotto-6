@@ -1,6 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
+  #lottoTickets;
+
   async play() {
     const lottoPurchasePrice =
       await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.");
@@ -12,7 +14,21 @@ class App {
     };
 
     isValidPrice(lottoPurchasePrice);
-    let lottoTickets = lottoPurchasePrice / LOTTO_PRICE;
+    this.#lottoTickets = lottoPurchasePrice / LOTTO_PRICE;
+
+    //한장씩 숫자 랜덤으로 돌려서 출력하기
+    let count = 0;
+    while (count < this.#lottoTickets) {
+      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+        1,
+        45,
+        6,
+      );
+      MissionUtils.Console.print(randomNumbers);
+      count++;
+    }
+
+    //당첨 번호를 입력
 
     const lotto = new Lotto();
   }
