@@ -1,5 +1,6 @@
 class Lotto {
   #numbers;
+  // 필드 추가 불가
 
   constructor(numbers) {
     this.#validate(numbers);
