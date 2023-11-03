@@ -19,6 +19,7 @@ class LottoPurchased {
     for (let i = 0; i < quantity; i++) {
       const myLotto = await Random.pickUniqueNumbersInRange(min, max, count);
       myLotto.sort((a, b) => a - b);
+
       myLottos.push(myLotto);
     }
     return myLottos;
