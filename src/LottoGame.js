@@ -3,12 +3,16 @@ import Query from './View/Query';
 import Print from './View/Print';
 import { Console, Random } from '@woowacourse/mission-utils';
 class LottoGame {
-  #tickets
+  #tickets;
   async start() {
     const purchaseAmount = await Query.getPurchaseAmount();
     const ticketCount = LottoGame.validatePurchaseAmount(purchaseAmount);
     this.#puchaseLottos(ticketCount);
     Print.printTickets([...this.#tickets]);
+    const winningNumbers = await Query.getWinningNumber();
+    const winningNumbersArray = new Lotto(
+      LottoGame.winningNumberToWinningNumberArray(winningNumbers)
+    );
   }
 
   static validatePurchaseAmount(purchaseAmount = '0') {
@@ -19,14 +23,21 @@ class LottoGame {
     ) {
       throw new Error('[ERROR] 구입 금액이 잘못 입력되었습니다.');
     }
-    return Number(purchaseAmount) / 1000
+    return Number(purchaseAmount) / 1000;
   }
-  #puchaseLottos(ticketCount = 0){
+  #puchaseLottos(ticketCount = 0) {
     this.#tickets = [];
-    for(let i = 0; i<ticketCount; i++){
+    for (let i = 0; i < ticketCount; i++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       this.#tickets.push(new Lotto(numbers));
     }
+  }
+
+  static winningNumberToWinningNumberArray(winningNumbers = '') {
+    return winningNumbers.split(',').map((winningNumber) => {
+      const trimWinningNumber = winningNumber.trim();
+      return Number(trimWinningNumber);
+    });
   }
 }
 
