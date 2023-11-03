@@ -1,4 +1,6 @@
 class App {
+  #money;
+
   async play() {}
 }
 
