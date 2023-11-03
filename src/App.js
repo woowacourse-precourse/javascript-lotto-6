@@ -16,11 +16,11 @@ class App {
 
   checkLottoPrice(lottoPrice) {
     // test code
+    if (isNaN(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
     if (lottoPrice < 1000)
       throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
     if (Number(lottoPrice) % 1000 !== 0)
       throw new Error('[ERROR] 금액은 1,000원 단위로 입력해주세요');
-    if (isNaN(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
   }
 
   makeRandomNumber() {
