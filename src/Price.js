@@ -2,10 +2,10 @@ import MESSAGE from './constants/message.js';
 import VALUE from './constants/value.js';
 
 class Price {
-  #number;
+  #price;
 
-  constructor(number) {
-    this.#number = number;
+  constructor(price) {
+    this.#price = price;
     this.#validate();
   }
 
@@ -15,19 +15,19 @@ class Price {
   }
 
   checkNumber() {
-    if (!Number.isSafeInteger(this.#number)) {
+    if (!Number.isSafeInteger(this.#price)) {
       throw new Error(MESSAGE.error.numericPrice);
     }
   }
 
   checkUnit() {
-    if (this.#number % VALUE.condition.priceDivision > 0) {
+    if (this.#price % VALUE.condition.priceDivision > 0) {
       throw new Error(MESSAGE.error.priceUnit);
     }
   }
 
   finishValidation() {
-    return this.#number;
+    return this.#price;
   }
 }
 
