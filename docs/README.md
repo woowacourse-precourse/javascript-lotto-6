@@ -297,11 +297,12 @@
 
 - [ ] Lotto
 
-  - [ ] 인스턴스 생성 시 `numbers`에 `LottoNumber`가 아닌 값이 존재할 시 에러가 발생한다.
   - [ ] `match(number)` 호출 시 `numbers`에 해당 인자를 보유하였는지 확인한다.
 
-- [ ] LottoNumber 예외 처리
+- [ ] Lotto 예외 처리
 
+  - [ ] 인스턴스 생성 시 `numbers`에 중복된 숫자가 존재할 시 에러가 발생한다.
+  - [ ] 인스턴스 생성 시 `numbers`가 6개가 아닐 시 에러가 발생한다.
   - [ ] `match(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
 
 - [ ] LottoMachine
