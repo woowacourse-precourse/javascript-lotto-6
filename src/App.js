@@ -18,8 +18,9 @@ class App {
     }
 
     this.printRandomNumArr();
-    this.inputmyLottoNum = await this.inputMyLottoNumber();
-    this.convertStrToArr = this.convertToArr(this.inputmyLottoNum);
+    this.inputLottoNum = await this.inputMyLottoNumber();
+    this.inputLottoNumArr = this.convertToArr(this.inputLottoNum);
+    this.isValidInputLottoNum(this.inputLottoNumArr);
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -54,8 +55,17 @@ class App {
     const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     return input;
   }
-  convertToArr(myInputNum) {
-    return myInputNum.split(",").map((element) => parseInt(element));
+  convertToArr(inputNum) {
+    return inputNum.split(",").map((element) => String(element));
+  }
+
+  isValidInputLottoNum(inputNum) {
+    if (inputNum.length !== 6 || inputNum.some((num) => num.trim() === "")) {
+      throw new Error("[ERROR] 당첨 번호는 6자리를 입력해 주세요.");
+    }
+    if (inputNum.some((number) => number < 1 || number > 45)) {
+      throw new Error("[ERROR] 입력한 숫자는 1부터 45 사이여야 합니다.");
+    }
   }
 }
 
