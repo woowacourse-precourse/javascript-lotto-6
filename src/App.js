@@ -8,15 +8,18 @@ class App {
 
 export default App;
 
+const PURCASE_COMMENT = "구입금액을 입력해 주세요."
+const LOTTO_PRICE = 1000;
+
 async function inputMoney() {
-  const PURCASE_COMMENT = "구입금액을 입력해 주세요."
-  MissionUtils.Console.print(PURCASE_COMMENT);
+  let comment = PURCASE_COMMENT;
+  MissionUtils.Console.print(comment);
   const totalMoney = await MissionUtils.Console.readLineAsync('');
   return totalMoney;
 }
 
 export function lottoCounter(money) {
-  const LOTTO_PRICE = 1000;
-  const lottocounts = money/LOTTO_PRICE;
+  let price = LOTTO_PRICE;
+  const lottocounts = money/price;
   return lottocounts
 }
