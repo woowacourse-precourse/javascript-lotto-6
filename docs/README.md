@@ -1,4 +1,4 @@
-# 미션 - 레이싱카
+# 미션 - 로또게임
 
 📍 : `리드미 볼때마다 확인`
 
@@ -75,6 +75,7 @@
 ## 🎯 요구 사항
 
 스스로 생각하되 요구사항은 지켜야한다.
+
 [기능 요구 사항](https://github.com/DOKIDOKI-b/javascript-lotto-6#-%EA%B8%B0%EB%8A%A5-%EC%9A%94%EA%B5%AC-%EC%82%AC%ED%95%AD)
 
 요구사항의 **입출력 양식**을 지키지 않으면 0점
@@ -85,7 +86,7 @@
 
 ### 입력
 
-- [] 로또 구입 금액 (1000원 단위)
+- [x] 로또 구입 금액 (1000원 단위)
 - [] 당첨번호
   - (,) 기준으로 구분
 - [] 보너스 번호
@@ -164,7 +165,7 @@ eslint와 prettier를 적극 활용하자
     `git checkout -b DOKIDOKI-b`
   </details>
 - <details>
-    <summary><b>eslint with air bnb</b></summary>
+    <summary><b>eslint with airbnb</b></summary>
     `npm install --save-dev eslint`
     `npx install-peerdeps --dev eslint-config-airbnb`
     필요한 디펜던시 확인
