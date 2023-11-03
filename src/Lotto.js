@@ -5,6 +5,7 @@ class Lotto {
     this.#validate(numbers);
     this.#numbers = numbers;
     this.COUNT = 0;
+    this.BONUS = false;
   }
 
   #validate(numbers) {
@@ -22,6 +23,13 @@ class Lotto {
       this.COUNT++;
     }
   }
+
+  compareBonusNumber(bonusNumber) {
+    if(this.#numbers.includes(bonusNumber)) {
+      this.BONUS = true;
+    }
+  }
+
 }
 
 export default Lotto;
