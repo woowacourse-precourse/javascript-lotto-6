@@ -35,11 +35,20 @@ describe('class App test', () => {
   });
 
   describe('method test : checkLottoPrice()', () => {
-    test('입력 받은 로또 구입 금액이 문자이면 오류가 발생할까 ?', () => {
-      const testPrice = 'Hundred';
+    test('입력 받은 로또 구입 금액에 문자가 있으면 오류가 발생할까 ?', () => {
+      const testPrice = '1000a';
       expect(() => {
         app.checkLottoPrice(testPrice);
       }).toThrow('[ERROR] 숫자만 입력하세요.');
+    });
+  });
+
+  describe('method test : checkLottoPrice()', () => {
+    test('입력 받은 로또 구입 금액이 1,000원 단위가 아니면 오류가 발생할까 ?', () => {
+      const testPrice = 12345;
+      expect(() => {
+        app.checkLottoPrice(testPrice);
+      }).toThrow('[ERROR] 금액은 1,000원 단위로 입력해주세요.');
     });
   });
 
