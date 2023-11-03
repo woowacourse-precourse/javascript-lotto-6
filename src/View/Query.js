@@ -10,5 +10,14 @@ class Query {
       throw new Error('ERROR')
     }
   }
+
+  static async getWinningNumber() {
+    try {
+      const winningNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+      return winningNumber;
+    } catch (error) {
+      throw new Error('ERROR')
+    }
+  }
 }
 export default Query
