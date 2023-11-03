@@ -1,4 +1,7 @@
 import InputView from "../view/InputView.js";
+import OutputView from "../view/OutputView.js";
+import Lotto from "../model/Lotto.js";
+import { generateRandomNumber } from "../utils/RandomNumber.js";
 import {
   priceValidation,
   numberValidation,
@@ -6,12 +9,15 @@ import {
 } from "../utils/Validation.js";
 
 class LottoController {
-  #price;
+  #lottoCount;
   #lottoNumber;
+  #lottoPage = [];
 
   async start() {
     try {
       await this.#getUserPrice();
+      this.#printLottoCount();
+      this.#getLottoList();
       await this.#getUserLottoNumbers();
       await this.#getUserBonusNumber();
     } catch (error) {
@@ -19,10 +25,22 @@ class LottoController {
     }
   }
 
+  #printLottoCount() {
+    OutputView.printLottoCount(this.#lottoCount);
+  }
+
+  #getLottoList() {
+    Array.from({ length: this.#lottoCount }).forEach(() => {
+      let lotto = new Lotto(generateRandomNumber());
+      OutputView.printLotto(lotto.getLottoNumber());
+      this.#lottoPage.push(lotto);
+    });
+  }
+
   async #getUserPrice() {
     const price = await InputView.getPrice();
     priceValidation(price);
-    return (this.#price = price);
+    return (this.#lottoCount = price / 1000);
   }
 
   async #getUserLottoNumbers() {
