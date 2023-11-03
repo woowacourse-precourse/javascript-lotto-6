@@ -39,6 +39,14 @@ class Lotto {
     }
   }
 
+  qulificationSecond() {
+    if(this.Bonus) {
+      return this.PRIZE = PRIZE.SECOND;
+    }
+    if(!this.BONUS) {
+      return this.PRIZE = PRIZE.THIRD;
+    }
+  }
 }
 
 export default Lotto;
