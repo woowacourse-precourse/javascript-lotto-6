@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { GAME_MESSAGES, ERROR_MESSAGES } from "../utils/Messages";
-import { isDivisibleByThousand, isNumber, isNumberInRange, isNumberLengthValid } from "../utils/Validation";
+import { GAME_MESSAGES, ERROR_MESSAGES } from "../utils/Messages.js";
+import { isDivisibleByThousand, isNumber, isNumberInRange, isNumberLengthValid } from "../utils/Validation.js";
 
 class InputView {
     static async getLottoNumbers(){
