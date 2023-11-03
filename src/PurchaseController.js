@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGES } from "./constants.js";
 import PurchaseView from "./PurchaseView.js";
+import ErrorView from "./ErrorView.js";
 
 class PurchaseController {
   static async getPrice() {
@@ -40,7 +41,7 @@ class PurchaseController {
         isSuccess = true;
       } catch (error) {
         isSuccess = false;
-        PurchaseView.printPurchaseError(error.message);
+        ErrorView.printErrorMessage(error.message);
       }
     }
 
