@@ -5,6 +5,7 @@ const ERROR_CODE = {
   hasRemainder: '[ERROR] 구입 금액이 1000으로 나누어 떨어지지 않습니다.',
   valueIsNaN: '[ERROR] 입력값이 유효하지 않습니다.',
   valueIsEmpty: '[ERROR] 입력값에 빈값이 존재합니다.',
+  valueIsTooSmall: '[ERROR] 로또를 구매할 수 없습니다.',
 };
 
 export default ERROR_CODE;
