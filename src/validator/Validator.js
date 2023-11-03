@@ -1,7 +1,7 @@
 import { CONSTANT, ERROR } from '../constants/Constant.js';
 import ValidationError from '../ValidationError.js';
 
-const AmountValidator = {
+const Validator = {
   checkIsNotNumber(userInput) {
     if (Number.isNaN(Number(userInput)) || userInput === '') {
       throw new ValidationError(ERROR.isNotNumber);
@@ -19,4 +19,4 @@ const AmountValidator = {
   },
 };
 
-export default AmountValidator;
+export default Validator;

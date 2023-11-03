@@ -1,5 +1,5 @@
 import InputView from '../view/InputView.js';
-import AmountValidator from '../validator/AmountValidator.js';
+import Validator from '../validator/Validator.js';
 import { CONSTANT } from '../constants/Constant.js';
 import LottoBundle from '../model/LottoBundle.js';
 import OutputView from '../view/OutputView.js';
