@@ -2,20 +2,13 @@ import { ERROR_MESSAGES } from "../utils/Messages.js";
 import { isDivisibleByThousand } from "../utils/Validation.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-class LottoModel {
+class UserLottoModel {
   #lottoTickets;
 
-  constructor(number) {
+  constructor() {
     this.#lottoTickets = [];
-    this.#validateNumber(number);
   }
-
-  #validateNumber(number) {
-    if (!isDivisibleByThousand(number)) {
-      throw new Error(ERROR_MESSAGES.INVALID_LOTTO_PRICE);
-    }
-  }
-
+  
   generateLottoTicket(inputNum) {
     const tickets = this.#checkNumber(inputNum);
     for (let i = 0; i < tickets; i++) {
@@ -34,4 +27,4 @@ class LottoModel {
   }
 }
 
-export default LottoModel;
+export default UserLottoModel;
