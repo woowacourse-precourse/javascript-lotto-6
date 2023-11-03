@@ -32,7 +32,7 @@ class LottoValidate{
     }
 
     randomNumberValidate = (lottoNumber) => {
-        if(numbers.length !== 6){
+        if(lottoNumber.length !== 6){
             throw Error(`${ERROR_MESSAGE.INPUT_MORE_WINNING_NUMBERS_ERROR}`);
         }
         lottoNumber.forEach((number) => {

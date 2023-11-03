@@ -3,7 +3,7 @@ import LottoValidate from "../validate/LottoValidate.js";
 class WinningNumbers{
 
     constructor(winningNumber){
-        this.winningNumbers = winningNumber;
+        this.winningNumber = winningNumber;
         this.winningNumberValidate(winningNumber);
     }
 
