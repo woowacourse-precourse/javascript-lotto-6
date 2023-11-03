@@ -11,6 +11,11 @@ class InputView {
     return winnigNumbers;
   }
 
+  async getBonusNumber() {
+    const bonusNumber = this.#readLine('보너스 번호를 입력해 주세요.\n');
+    return bonusNumber;
+  }
+
   async #readLine(message) {
     try {
       const input = await Console.readLineAsync(message);

@@ -19,6 +19,7 @@ class App {
     this.#lottoGame.setUpGame();
     await this.#getLottoTickets();
     const winnigNumbers = await this.#inputView.getWinnigNumbers();
+    const bonusNumber = await this.#inputView.getBonusNumber();
   }
 
   async #getLottoTickets() {
