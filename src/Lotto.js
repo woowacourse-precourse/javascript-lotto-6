@@ -13,6 +13,11 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  // 로또 번호 오름차순 정리
+  sortNumbers() {
+    this.#numbers.sort((a, b) => a - b);
+  }
+
 }
 
 export default Lotto;
