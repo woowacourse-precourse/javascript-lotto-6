@@ -7,5 +7,15 @@ class Validator {
       throw new Error(ERROR_MESSAGE.moneyUnit);
     }
   }
+
+  static validateInputMoney(inputMoney) {
+    if (inputMoney.includes(" ")) {
+      throw new Error(ERROR_MESSAGE.moneyValue);
+    }
+
+    if (/[^1-9]$/.test(numTest)) {
+      throw new Error(ERROR_MESSAGE.moneyValue);
+    }
+  }
 }
 export default Validator;
