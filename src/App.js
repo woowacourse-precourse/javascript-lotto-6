@@ -1,5 +1,10 @@
+import Lotto from './domain/Lotto.js';
+
 class App {
-  async play() {}
+  async play() {
+    const lotto = new Lotto();
+    lotto.lottoPurchase();
+  }
 }
 
 export default App;

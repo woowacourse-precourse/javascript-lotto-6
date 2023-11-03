@@ -1,6 +1,3 @@
-import { getUserInput, printPurchasedAmount } from '../util/Utils.js';
-import { INPUT_MESSAGES } from '../constant/constants.js';
-
 class Lotto {
   #numbers;
 
@@ -15,8 +12,5 @@ class Lotto {
     }
   }
 }
-
-const lotto = new Lotto();
-lotto.lottoProcess();
 
 export default Lotto;

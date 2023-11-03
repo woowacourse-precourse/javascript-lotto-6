@@ -1,9 +1,5 @@
-import { Random, Console } from '@woowacourse/mission-utils';
-import {
-  INPUT_MESSAGES,
-  GAME_RULE_NUMBER,
-  PRINT_MESSAGES,
-} from '../constant/constants.js';
+import { Console } from '@woowacourse/mission-utils';
+import { GAME_WINNER, PRINT_MESSAGES } from '../constant/constants.js';
 
 async function getUserInput(message) {
   const userInput = await Console.readLineAsync(message);
@@ -16,4 +12,20 @@ const printPurchasedAmount = (amount) => {
 const printPurchasedLottos = (lottos) => {
   lottos.map((lotto) => Console.print(lotto));
 };
-export { getUserInput, printPurchasedAmount, printPurchasedLottos };
+
+const printRankingList = (rankingList) => {
+  const rankList = ['fifth', 'fourth', 'third', 'second', 'first'];
+  rankList.map((rank) =>
+    Console.print(
+      GAME_WINNER[rank](rankingList.filter((el) => el === rank).length),
+    ),
+  );
+};
+
+printRankingList(['fifth', 'first']);
+export {
+  getUserInput,
+  printPurchasedAmount,
+  printPurchasedLottos,
+  printRankingList,
+};
