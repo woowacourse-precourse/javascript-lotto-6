@@ -6,6 +6,7 @@ class App {
   async play() {
     const amount = await this.inputAmount();
     const winningNumbers = await this.inputWinningNumbers();
+    const bonusNumber = await this.inputBonusNumber();
     this.issueLottos(amount);
   };
   
@@ -29,7 +30,7 @@ class App {
     for (let i = 0; i < lottoCount; i++) {
       const numbers = Lotto.generateNumbers();
       this.lottos.push(new Lotto(numbers));
-      Console.print(`[${numbers}]`);
+      Console.print(`[${numbers.join(', ')}]`);
     }
     
     Console.print(`${lottoCount}개를 구매했습니다.`)
@@ -44,6 +45,19 @@ class App {
       return this.inputWinningNumbers();
     }
   };
+
+  async inputBonusNumber() {
+    const bonusInput = await Console.readLineAsync("로또 보너스 번호를 입력해주세요. (1~45):");
+    const bonusNumber = parseInt(bonusInput.trim(), 10);
+
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      Console.print("[ERROR] 올바른 보너스 번호를 입력해주세요 (1~45)!");
+      return this.inputBonusNumber();
+    };
+
+    return bonusNumber;
+  };
+
   
 };
 
