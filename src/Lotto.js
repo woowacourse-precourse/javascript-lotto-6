@@ -33,6 +33,10 @@ class Lotto {
     return Number.isInteger(number) && number >= 1 && number <= 45;
   }
 
+  getNumbers(){
+    return [...this.#numbers];
+  }
+
   toString() {
     return `[${this.#numbers.join(', ')}]`;
   }

@@ -1,4 +1,4 @@
-import { Console, Random } from "@woowacourse/mission-utils";
+import { Console, Random } from '@woowacourse/mission-utils';
 class Query {
   static async getPurchaseAmount() {
     try {
@@ -7,17 +7,30 @@ class Query {
       );
       return purchaseAmount;
     } catch (error) {
-      throw new Error('ERROR')
+      throw new Error('ERROR');
     }
   }
 
   static async getWinningNumber() {
     try {
-      const winningNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+      const winningNumber = await Console.readLineAsync(
+        '\n당첨 번호를 입력해 주세요.\n'
+      );
       return winningNumber;
     } catch (error) {
-      throw new Error('ERROR')
+      throw new Error('ERROR');
+    }
+  }
+
+  static async getBonusNumber() {
+    try {
+      const bonusNumber = await Console.readLineAsync(
+        '보너스 번호를 입력해 주세요.\n'
+      );
+      return bonusNumber;
+    } catch (error) {
+      throw new Error('ERROR');
     }
   }
 }
-export default Query
+export default Query;
