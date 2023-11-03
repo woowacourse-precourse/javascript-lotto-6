@@ -3,9 +3,8 @@ import { Validation } from "../../utils";
 import { CustomError } from "../../exception";
 import { OutputView } from "../../view";
 
-const length = LOTTO_RULE.LENGTH;
-const min = LOTTO_RULE.RANGE.MIN;
-const max = LOTTO_RULE.RANGE.MAX;
+const LENGTH = LOTTO_RULE.LENGTH;
+const { MIN, MAX } = LOTTO_RULE.RANGE;
 
 class Lotto {
   #numbers;
@@ -16,8 +15,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (!Validation.isLength(numbers, length)) {
-      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_LENGTH(length));
+    if (!Validation.isLength(numbers, LENGTH)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_LENGTH(LENGTH));
     }
 
     if (!Validation.isUnique(numbers)) {
@@ -29,8 +28,8 @@ class Lotto {
         throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
       }
 
-      if (!Validation.isOnRange(number, min, max)) {
-        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_ON_RANGE(min, max));
+      if (!Validation.isOnRange(number, MIN, MAX)) {
+        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_ON_RANGE(MIN, MAX));
       }
 
       if (!Validation.isInteger(number)) {
