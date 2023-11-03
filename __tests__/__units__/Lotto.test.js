@@ -1,17 +1,16 @@
-import { LOTTO_RULE } from "../../src/constants/lotto";
+import { getLogSpy } from "../../src/utils";
 import Lotto from "../../src/domain/Lotto";
 
 describe("Lotto 유닛 테스트", () => {
-  test("로또 인스턴스 생성", () => {
-    const generatedNumber = [1, 2, 3, 4, 5, 6];
-    const lotto = new Lotto(generatedNumber);
+  const generatedNumber = [1, 2, 3, 4, 5, 6];
 
+  test("로또 인스턴스 생성", () => {
+    const lotto = new Lotto(generatedNumber);
     expect(lotto).toBeInstanceOf(Lotto);
   });
 
   describe("로또 번호 유효성 검증", () => {
     test("올바른 케이스", () => {
-      const generatedNumber = [1, 2, 3, 4, 5, 6];
       expect(() => new Lotto(generatedNumber)).not.toThrow();
     });
 
@@ -26,9 +25,16 @@ describe("Lotto 유닛 테스트", () => {
   });
 
   test("로또 번호 반환", () => {
-    const generatedNumber = [1, 2, 3, 4, 5, 6];
+    // given
+    const logSpy = getLogSpy();
     const lotto = new Lotto(generatedNumber);
 
-    expect(lotto.getNumbers()).toEqual(generatedNumber);
+    // when
+    lotto.printNumbers();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(generatedNumber.join(", "))
+    );
   });
 });
