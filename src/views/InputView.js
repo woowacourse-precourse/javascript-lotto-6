@@ -7,15 +7,24 @@ class InputView {
     this.INPUT_VAL = new InputValidate();
   }
 
-  purchaseMsg() {
-    Console.print(INPUT_MSG.PURCHASE_MONEY);
-  }
-
   async purchaseMoney() {
     try {
       const inputMoney = await Console.readLineAsync(INPUT_MSG.PURCHASE_MONEY);
       await this.INPUT_VAL.inputMoney(inputMoney);
       return Number(inputMoney);
+    } catch (error) {
+      Console.print(error.name + error.message);
+      return error.name;
+    }
+  }
+
+  async winLotteryNumber() {
+    try {
+      const winNumber = await Console.readLineAsync(
+        INPUT_MSG.WIN_LOTTERY_NUMBER,
+      );
+      await this.INPUT_VAL.inputWinNumbers(winNumber);
+      return winNumber;
     } catch (error) {
       Console.print(error.name + error.message);
       return error.name;

@@ -8,6 +8,8 @@ import { CONSTANTS } from '../constants/constant.js';
 class LottoController {
   #USER_MONEY;
 
+  #WIN_NUMBER;
+
   constructor() {
     this.INPUT_VIEW = new InputView();
     this.OUTPUT_VIEW = new OutputView();
@@ -29,6 +31,7 @@ class LottoController {
   async #printLottoNumber(canBuy) {
     this.OUTPUT_VIEW.userCanBuy(canBuy);
     this.#lottoGenerator(canBuy);
+    this.inputWinNumber();
   }
 
   #lottoGenerator(canBuy) {
@@ -38,6 +41,14 @@ class LottoController {
       this.OUTPUT_VIEW.userLottoNumber(lottoNumber.sortingNumber());
       this.#lottoGenerator(canBuy - 1);
     }
+  }
+
+  async inputWinNumber() {
+    const winLotteryNumber = await this.INPUT_VIEW.winLotteryNumber();
+    if (winLotteryNumber === CONSTANTS.IS_ERROR) {
+      return this.inputWinNumber();
+    }
+    return console.log('ye');
   }
 }
 

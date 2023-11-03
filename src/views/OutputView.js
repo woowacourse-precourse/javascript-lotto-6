@@ -3,11 +3,11 @@ import { OUTPUT_MSG } from '../constants/LottoMsg.js';
 
 class OutputView {
   userCanBuy(amount) {
-    Console.print(OUTPUT_MSG.USER_CAN_BUY_LOTTO(amount));
+    Console.print(OUTPUT_MSG.userCanBuyLotto(amount));
   }
 
   userLottoNumber(numbers) {
-    Console.print(OUTPUT_MSG.USER_LOTTO_NUMBER(numbers));
+    Console.print(OUTPUT_MSG.userLottoNumber(numbers));
   }
 }
 

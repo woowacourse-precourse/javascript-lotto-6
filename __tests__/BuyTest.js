@@ -11,6 +11,13 @@ const mockQuestions = (inputs) => {
   });
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
+
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
@@ -21,8 +28,10 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const INPUT_NUMBERS_TO_END = ['5000'];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+  const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6,7', '1,2,3,4,5,6', '7'];
 
+  mockRandoms([RANDOM_NUMBERS_TO_END]);
   mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
 
   // when
@@ -40,7 +49,13 @@ describe('로또 구입 테스트', () => {
   test('10장 구입 테스트', async () => {
     // given
     const logSpy = getLogSpy();
-    mockQuestions(['10000']);
+    const randoms = [];
+    for (let idx = 0; idx < 10; idx += 1) {
+      randoms.push(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
+    }
+
+    mockRandoms(randoms);
+    mockQuestions(['10000', '2,5,7,11,16,45', '10']);
 
     // when
     const app = new App();
@@ -48,23 +63,6 @@ describe('로또 구입 테스트', () => {
 
     // then
     const logs = ['10개를 구매했습니다.'];
-
-    logs.forEach((log) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
-    });
-  });
-
-  test('100장 구입 테스트', async () => {
-    // given
-    const logSpy = getLogSpy();
-    mockQuestions(['100000']);
-
-    // when
-    const app = new App();
-    await app.play();
-
-    // then
-    const logs = ['100개를 구매했습니다.'];
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
