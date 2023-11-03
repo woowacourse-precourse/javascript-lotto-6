@@ -1,6 +1,6 @@
 import InputView from '../view/InputView.js';
 import Validator from '../validator/Validator.js';
-import { CONSTANT } from '../constants/Constant.js';
+import { CONSTANT, SYMBOL } from '../constants/Constant.js';
 import LottoBundle from '../model/LottoBundle.js';
 import OutputView from '../view/OutputView.js';
 
@@ -34,7 +34,12 @@ class LottoGame {
 
   async #getWinningNumbersInput() {
     const winningNumbers = await InputView.readWinningNumbers();
-    Validator.validateLotto(winningNumbers);
+    const splitWinningNumbers = this.#getSplitWinningNumbers(winningNumbers);
+    Validator.validateLotto(splitWinningNumbers);
+  }
+
+  #getSplitWinningNumbers(winningNumbers) {
+    return winningNumbers.split(SYMBOL.comma).map((number) => number.trim());
   }
 }
 

@@ -3,6 +3,10 @@ export const CONSTANT = Object.freeze({
   amountUnit: 1000,
 });
 
+export const SYMBOL = Object.freeze({
+  comma: ',',
+});
+
 export const RANDOM_NUMBER = Object.freeze({
   minNum: 1,
   maxNum: 45,
