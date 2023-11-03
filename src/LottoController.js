@@ -1,5 +1,6 @@
 import Validator from "./Validator.js";
-import LOTTO_CONTROLLER from "./constant/LOTTO_CONTROLLER.js";
+import PRICE from "./constant/PRICE.js";
+import { Random } from "@woowacourse/mission-utils";
 
 class LottoController {
   #ticketAmount;
@@ -11,16 +12,16 @@ class LottoController {
 
   #validateTotalPrice(string) {
     if (!Validator.isStringOnlyDigits(string)) {
-      throw new Error(LOTTO_CONTROLLER.ERROR.PRICE_NOT_NUMBER);
+      throw new Error(PRICE.ERROR.NOT_NUMBER);
     }
 
-    if (!Validator.isDivisible(+string, LOTTO_CONTROLLER.TICKET_PRICE)) {
-      throw new Error(LOTTO_CONTROLLER.ERROR.PRICE_NOT_DIVISIBLE);
+    if (!Validator.isDivisible(+string, PRICE.TICKET)) {
+      throw new Error(PRICE.ERROR.NOT_DIVISIBLE_BY_TICKET);
     }
   }
 
   #calculateTicketAmount(string) {
-    return +string / LOTTO_CONTROLLER.TICKET_PRICE;
+    return +string / PRICE.TICKET;
   }
 }
 
