@@ -6,6 +6,7 @@ class App {
   #lottoCount;
   #lottoList = [];
   #winningNumber = [];
+  #bonusNumber;
 
   async play() {
     await this.#inputPurchaseAmount();
@@ -15,6 +16,7 @@ class App {
     Console.print('');
     await this.#inputWinningNumbers();
     Console.print('');
+    await this.#inputBonusNumber();
   }
 
   async #inputPurchaseAmount() {
@@ -83,6 +85,24 @@ class App {
       }
       this.#winningNumber.push(convertNumber);
     });
+  }
+
+  async #inputBonusNumber() {
+    Console.print(C.BONUS_NUMBER_INPUT);
+    const bonusNumber = await Console.readLineAsync('');
+    this.#validateBonusNumber(bonusNumber);
+  }
+
+  #validateBonusNumber(bonusNumber) {
+    const convertNumber = Number(bonusNumber);
+    if (isNaN(convertNumber)) {
+      throw new Error('[ERROR] 입력된 보너스 번호가 숫자가 아닙니다.');
+    }
+    if (this.#winningNumber.includes(convertNumber)) {
+      throw new Error('[ERROR] 입력된 보너스 번호가 담청 번호에 이미 존재합니다.');
+    }
+
+    this.#bonusNumber = bonusNumber;
   }
 }
 
