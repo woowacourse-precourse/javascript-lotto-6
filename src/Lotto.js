@@ -13,6 +13,10 @@ class Lotto {
     if (!Validator.checkArrayLength(numbers, LOTTO.SIZE)) {
       throw new Error(LOTTO.ERROR.SIZE);
     }
+
+    if (Validator.checkArrayForDuplicate(numbers)) {
+      throw new Error(LOTTO.ERROR.DUPLICATE);
+    }
   }
 
   // TODO: 추가 기능 구현
