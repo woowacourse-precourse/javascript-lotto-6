@@ -14,5 +14,7 @@ describe("Money 클래스 테스트", () => {
 
   test("금액은 1000 단위로만 받아야한다.", () => {
     expect(() => new Money("1900")).toThrow(LottoError.PREFIX);
+    expect(() => new Money("0")).toThrow(LottoError.PREFIX);
+    expect(() => new Money("-1000")).toThrow(LottoError.PREFIX);
   });
 });
