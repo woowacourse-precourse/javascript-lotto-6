@@ -5,13 +5,23 @@ import { ERROR } from "./const/error";
 class App {
 
   constructor() {
+    this.sameNumbersObject = {
+      'three' : 0,
+      'four' : 0,
+      'five' : 0,
+      'six' : 0,
+      'bonus' : 0
+    }
     this.winning = [];
     this.bonus = 0;
     this.count = 0;
   }
 
   async play() {
-
+    await this.getLottoPrice();
+    this.getMyLottos();
+    await this.getNumbers();
+    this.printWinningStatics();
   }
 
   async getLottoPrice() {
@@ -23,11 +33,60 @@ class App {
     const checkPrice = parseInt(priceInput);
     const remainder = checkPrice % 1000;
 
-    if(remainder !== 0 ){throw new Error(ERROR.THOUSAND)};
+    if(checkPrice === NaN) {throw new Error(ERROR.NAN)};
+    if(remainder !== 0 ) {throw new Error(ERROR.THOUSAND)};
+
     return checkPrice;
   }
 
-// 이후 getNumers에서 입력 받기 전에 몇개 구매한지 출력해야 함
+  getMyLottos() {
+    const arrayNumbers = [];
+  
+    for(let i = 0; i < this.count; i++){
+      const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(1,45,6)
+      arrayNumbers.push(lottoNumber.sort());
+    }
+    this.printHowMany(arrayNumbers);
+    this.getWinningLottos(arrayNumbers);
+  }
+
+  getWinningLottos(arrayNumbers) {
+    for(let i = 0; i < this.count; i++){
+      const newArray = [...arrayNumbers,...this.winning]
+      const sameNumbers = arrayNumbers.filter(newArray);
+      this.checkSameNumbers(sameNumbers)
+    }
+  }
+
+  checkSameNumbers(sameNumbers) {
+    switch (sameNumbers.length) {
+      case 3:
+        this.sameNumbersObject['three']++
+        break;
+      case 4:
+        this.sameNumbersObject['four']++
+        break;
+      case 5:
+        this.sameNumbersObject['five']++
+        break;
+      case 6:
+        this.sameNumbersObject['six']++
+        break;      
+      default:
+        return this.sameNumbersObject
+    }
+    if(sameNumbers.length === 5 && arrayNumbers.includes(checkBonusNumber)) {
+      this.sameNumbersObject['bonus']++
+    }
+  }
+
+  printHowMany(arrayNumbers) {
+      MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
+      arrayNumbers.forEach(element => {
+        MissionUtils.Console.print(element);
+      })
+  }
+
   async getNumbers(){
     const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
     this.winning = this.checkWinningNumbers(winningNumbers);
@@ -44,7 +103,7 @@ class App {
 
   async getBonusNumbers(){
     const bonusNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.BONUS_NUMBER);
-   this.bonus = this.checkBonusNumbers(bonusNumbers);
+    this.bonus = this.checkBonusNumbers(bonusNumbers);
   }
   
   checkBonusNumbers(bonusNumbers){
@@ -60,62 +119,26 @@ class App {
     if(numbers < 1) {throw new Error(ERROR.ONE)};
     if(numbers > 45) {throw new Error(ERROR.FORTY_FIVE)};
   }
+
   
-  getMyLottos() {
-    const arrayNumbers = [];
+  printWinningStatics() {
+    const sum = 0;
+    for(let win of Object.values(this.sameNumbersObject)){
+      sum += win;
+    }
+    const rate = sum/count * 100;
+    
+    MissionUtils.Console.print(
+    `당첨 통계
+    ---
+    3개 일치 (5,000원) - ${this.sameNumbersObject['three']}개
+    4개 일치 (50,000원) - ${this.sameNumbersObject['four']}개
+    5개 일치 (1,500,000원) - ${this.sameNumbersObject['five']}개
+    5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.sameNumbersObject['bonus']}개
+    6개 일치 (2,000,000,000원) - ${this.sameNumbersObject['six']}개
+    총 수익률은 ${rate}%입니다.`)
+  }
   
-    for(let i = 0; i < this.count; i++){
-      const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(1,45,6)
-      arrayNumbers.push(lottoNumber.sort());
-    }
-    this.printHowMany(this.count,arrayNumbers);
-    this.getWinningLottos(arrayNumbers);
-  }
-
-  getWinningLottos(arrayNumbers) {
-    const sameNumbersObject = {
-      'three' : 0,
-      'four' : 0,
-      'five' : 0,
-      'six' : 0,
-      'bonus' : 0
-    }
-    for(let i = 0; i < this.count; i++){
-      const newArray = [...arrayNumbers,...this.winning]
-      const sameNumbers = arrayNumbers.filter(newArray);
-      this.checkSameNumbers(sameNumbers,sameNumbersObject)
-    }
-  }
-
-  checkSameNumbers(sameNumbers,sameNumbersObject) {
-    switch (sameNumbers.length) {
-      case 3:
-        sameNumbersObject['three']++
-        break;
-      case 4:
-        sameNumbersObject['four']++
-        break;
-      case 5:
-        sameNumbersObject['five']++
-        break;
-      case 6:
-        sameNumbersObject['six']++
-        break;      
-      default:
-        return sameNumbersObject
-    }
-    if(sameNumbers.length === 5 && arrayNumbers.includes(checkBonusNumber)) {
-      sameNumbersObject['bonus']++
-    }
-    return sameNumbersObject
-  }
-
-  printHowMany(count, arrayNumbers) {
-      MissionUtils.Console.print(`${count}개를 구매했습니다.`);
-      arrayNumbers.forEach(element => {
-        MissionUtils.Console.print(element);
-      })
-  }
 }
 
 export default App;

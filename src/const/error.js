@@ -5,6 +5,7 @@ export const ERROR = {
     INTEGER : '[ERROR] 정수를 입력해야 합니다',
     ONE : '[ERROR] 1이상의 숫자를 입력해주세요',
     FORTY_FIVE : '[ERROR] 45이하의 숫자를 입력해주세요',
-    SIX : '[ERROR] 로또 번호는 6개여야 합니다.'
+    SIX : '[ERROR] 로또 번호는 6개여야 합니다.',
+    NAN : '[ERROR] 번호에 문자가 있습니다'
 
 }
