@@ -58,3 +58,11 @@ export async function winnningNumberValidater(input) {
   } 
   throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
 }
+
+export async function winnningNumberDuplicateValidater(input) {
+  for (let i = 0; i < input.length-1; i++) {
+    if (input[i] === input[i+1]) {
+      throw new Error("[ERROR] 자동차 이름이 중복되었습니다.")
+    }
+  }
+}
