@@ -5,6 +5,10 @@ class DrawView {
   static printWinningNumbersQuestion() {
     MissionUtils.Console.print(MESSAGES.winningNumbersQuestion);
   }
+
+  static printBonusNumberQuestion() {
+    MissionUtils.Console.print(MESSAGES.bonusNumberQuestion);
+  }
 }
 
 export default DrawView;

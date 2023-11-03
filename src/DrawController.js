@@ -53,6 +53,12 @@ class DrawController {
 
     return numbers;
   }
+
+  static async getBonusNumber() {
+    const bonusNumberText = await MissionUtils.Console.readLineAsync("");
+
+    return bonusNumberText;
+  }
 }
 
 export default DrawController;

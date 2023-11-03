@@ -10,6 +10,7 @@ export const MESSAGES = {
   winningNumbersCountError: "[ERROR] 당첨 번호를 6개보다 적게 선택했습니다.",
   winningNumberRangeError: "[ERROR] 범위(1~45)를 벗어난 당첨 번호가 있습니다.",
   duplicatedWinningNumbersError: "[ERROR] 중복된 당첨 번호가 있습니다.",
+  bonusNumberQuestion: "보너스 번호를 입력해 주세요.",
 };
 export const LOTTO_NUMBERS_COUNT = 6;
 export const MIN_LOTTO_NUMBER = 1;
