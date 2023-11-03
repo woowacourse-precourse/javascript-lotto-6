@@ -1,5 +1,7 @@
 import { getLogSpy } from "../../src/utils";
 import Lotto from "../../src/domain/Lotto";
+import { LOTTO_RULE, MESSAGES } from "../../src/constants";
+import { CustomError } from "../../src/exception";
 
 describe("Lotto 유닛 테스트", () => {
   const generatedNumber = [1, 2, 3, 4, 5, 6];
@@ -10,18 +12,29 @@ describe("Lotto 유닛 테스트", () => {
   });
 
   describe("로또 번호 유효성 검증", () => {
+    const { LENGTH, RANGE } = LOTTO_RULE;
+    const { NOT_NUMBER, NOT_INTEGER, NOT_LENGTH, NOT_ON_RANGE } =
+      MESSAGES.ERROR.LOTTO;
+
+    const invalidInputsAndErrorMessages = [
+      [["안", "녕", "하", "세", "요", "!"], NOT_NUMBER],
+      [[1, 2, 3, 4, 5], NOT_LENGTH(LENGTH)],
+      [[1.5, 2.3, 3.5, 4.1, 5.7, 4.4], NOT_INTEGER],
+      [[-1, 46, 435, 34314, 1344, 49404], NOT_ON_RANGE(RANGE.MIN, RANGE.MAX)],
+    ];
+
     test("올바른 케이스", () => {
       expect(() => new Lotto(generatedNumber)).not.toThrow();
     });
 
-    test.each([
-      [["안", "녕", "하", "세", "요", "!"]],
-      [[1, 2, 3, 4, 5]],
-      [[1.5, 2.3, 3.5, 4.1, 5.7, 4.4]],
-      [[-1, 46, 435, 34314, 13434, 4943404]],
-    ])("틀린 케이스", (generatedNumber) => {
-      expect(() => new Lotto(generatedNumber)).toThrow("[ERROR]");
-    });
+    test.each(invalidInputsAndErrorMessages)(
+      "틀린 케이스",
+      (generatedNumber, expectedErrorMessage) => {
+        expect(() => new Lotto(generatedNumber)).toThrow(
+          new CustomError(expectedErrorMessage)
+        );
+      }
+    );
   });
 
   test("로또 번호 반환", () => {
