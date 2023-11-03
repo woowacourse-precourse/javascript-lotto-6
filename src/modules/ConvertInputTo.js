@@ -20,11 +20,18 @@ class ConvertInputTo {
   }
 
   static async purchasePrice() {
-    const inputString = await Console.readLineAsync(
-      PURCHASE_PRICE_INPUT_MESSAGE
-    );
-
-    ErrorCheck.purchasePrice(inputString, LOTTO_PRICE);
+    let isFailed = false;
+    do {
+      const inputString = await Console.readLineAsync(
+        PURCHASE_PRICE_INPUT_MESSAGE
+      );
+      try {
+        ErrorCheck.purchasePrice(inputString, LOTTO_PRICE);
+      } catch (error) {
+        Console.print(error.message);
+        isFailed = true;
+      }
+    } while (isFailed);
     return Number(inputString);
   }
 
