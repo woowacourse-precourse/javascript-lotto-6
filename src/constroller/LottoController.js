@@ -28,17 +28,25 @@ class LottoController {
   }
 
   async #createLotto() {
-    const price = await this.#getUserPrice();
-    const count = price / 1000;
-    this.#printLottoCount(count);
-    this.#getLottoList(count);
+    try {
+      const price = await this.#getUserPrice();
+      const count = price / 1000;
+      this.#printLottoCount(count);
+      this.#getLottoList(count);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async #createAnswerLotto() {
-    const lottoNumber = await this.#getUserLottoNumbers();
-    const bonusNumber = await this.#getUserBonusNumber(lottoNumber);
+    try {
+      const lottoNumber = await this.#getUserLottoNumbers();
+      const bonusNumber = await this.#getUserBonusNumber(lottoNumber);
 
-    this.#answerLotto = new AnswerLotto(lottoNumber, bonusNumber);
+      this.#answerLotto = new AnswerLotto(lottoNumber, bonusNumber);
+    } catch (error) {
+      throw error;
+    }
   }
 
   #setLottoResult() {
@@ -64,21 +72,33 @@ class LottoController {
   }
 
   async #getUserPrice() {
-    const price = await InputView.getPrice();
-    priceValidation(price);
-    return price;
+    try {
+      const price = await InputView.getPrice();
+      priceValidation(price);
+      return price;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async #getUserLottoNumbers() {
-    const lottoNumbers = await InputView.getLottoNumbers();
-    const lottoNumber = lottoNumbers.split(",");
-    numberValidation(lottoNumber);
-    return lottoNumber;
+    try {
+      const lottoNumbers = await InputView.getLottoNumbers();
+      const lottoNumber = lottoNumbers.split(",");
+      numberValidation(lottoNumber);
+      return lottoNumber;
+    } catch (error) {
+      throw error;
+    }
   }
   async #getUserBonusNumber(lottoNumber) {
-    const bonusNumber = await InputView.getBonusNumber();
-    bonusNubmerValidation(bonusNumber, lottoNumber);
-    return bonusNumber;
+    try {
+      const bonusNumber = await InputView.getBonusNumber();
+      bonusNubmerValidation(bonusNumber, lottoNumber);
+      return bonusNumber;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
