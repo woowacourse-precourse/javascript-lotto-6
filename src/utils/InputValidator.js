@@ -21,12 +21,12 @@ const InputValidator = {
     if (RangeFilter(inputNumbers)) throw new Error(ERROR.winningRange);
   },
 
-  bonusNumber(input, winningNumbers) {
+  bonusNumber(input, winningNumber) {
     const inputArray = [input];
     if (input.replace(/\d/g, "").length > 0) throw new Error(ERROR.bonusNumber);
     if (inputArray.length !== 1) throw new Error(ERROR.bonusCount);
     if (RangeFilter(inputArray)) throw new Error(ERROR.bonusRange);
-    if (winningNumbers.includes(input)) throw new Error(ERROR.bonusDuplicate);
+    if (winningNumber.includes(input)) throw new Error(ERROR.bonusDuplicate);
   },
 };
 
