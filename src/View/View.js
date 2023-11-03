@@ -10,20 +10,23 @@ class View {
     return this.#price;
   }
   
-  inputWinningNumber() {
-    this.#winningNumber = Number((Console.readLineAsync('당첨 번호를 입력해 주세요.')).split(','));
+  async inputWinningNumber() {
+    const winningNumber = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    this.#winningNumber = winningNumber.split(',');
+    this.#winningNumber = this.#winningNumber.map(num => Number(num));
+    Console.print(this.#winningNumber);
     return this.#winningNumber;
   }
 
-  inputBonus() {
-    this.#bonusNumber = Number(Console.readLineAsync('보너스 번호를 입력해 주세요.'));
+  async inputBonus() {
+    this.#bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     return this.#bonusNumber;
   }
 
   printQuantity(quantity) {
     Console.print(`\n${quantity}개를 구매했습니다.`);
   }
-  
+
   printLottoNumber(lottoNumber) {
     for (let i=0; i<lottoNumber.length; i+=1) {
       Console.print(lottoNumber[i]);
@@ -39,7 +42,7 @@ class View {
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[3]}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${result[4]}개`);
   }
-  
+
   printROI(roi) {
     Console.print(`총 수익률은 ${roi}%입니다.`);
   }
