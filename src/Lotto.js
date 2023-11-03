@@ -18,6 +18,11 @@ class Lotto {
         throw new Error('[ERROR] 로또 번호 중 중복된 숫자가 있습니다.');
       else tempArray.push(numbers[i]);
     }
+
+    numbers.forEach((number) => {
+      if (number < 1 || number > 45)
+        throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    });
   }
 
   getLottoResult(myLottoNumbers, bonusNumber, purchasePrice) {
