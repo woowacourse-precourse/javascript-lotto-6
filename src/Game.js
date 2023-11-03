@@ -3,20 +3,20 @@ import Lotto from "./Lotto";
 
 class Game {
   #PRICE_TABLE = [{
-    price:5_000,
-    string:"3개 일치 (5,000원)"
+    price: 5_000,
+    string: "3개 일치 (5,000원)"
   }, {
-    price:50_000,
-    string:"4개 일치 (50,000원)"
+    price: 50_000,
+    string: "4개 일치 (50,000원)"
   }, {
-    price:1_500_500,
-    string:"5개 일치 (1,500,000원)"
+    price: 1_500_500,
+    string: "5개 일치 (1,500,000원)"
   }, {
-    price:30_000_000,
-    string:"5개 일치, 보너스 볼 일치 (30,000,000원)"
+    price: 30_000_000,
+    string: "5개 일치, 보너스 볼 일치 (30,000,000원)"
   }, {
-    price:2_000_000_000,
-    string:"6개 일치 (2,000,000,000원)"
+    price: 2_000_000_000,
+    string: "6개 일치 (2,000,000,000원)"
   },];
 
   money;
@@ -70,14 +70,23 @@ class Game {
 
   getResult() {
     Console.print("당첨 통계\n---")
-    const result = [0, 0, 0, 0, 0, 0];
-    this.lottos.forEach(lotto => {
-      result[6-lotto.compare(this.choice.numbers, this.bonus)] += 1;
+    const result = this.lottos.reduce((acc, lotto) => {
+      const rank = lotto.compare(this.choice.numbers, this.bonus);
+      if (rank < 6) acc[5 - rank] += 1;
+      return acc;
+    }, [0, 0, 0, 0, 0])
+
+    result.forEach((count, idx) => {
+      Console.print(`${this.#PRICE_TABLE[idx].string} - ${count}개`);
     })
 
-    for(let i=1; i<6;i++) {
-      Console.print(`${this.#PRICE_TABLE[i-1].string} - ${result[i]}개`);
-    }
+    this.getEarningsRate(result);
+  }
+
+  getEarningsRate(counts) {
+    const totalPrice = counts.reduce((acc, curr, idx) => acc +this.#PRICE_TABLE[idx].price * curr, 0);
+    const rates = totalPrice / this.money;
+    Console.print(`총 수익률은 ${Math.floor(rates*1000)/10}%입니다.`);
   }
 
 };
