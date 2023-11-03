@@ -6,6 +6,8 @@ class App {
 
   #lottos = [];
 
+  #winningNumbers;
+
   static #isPositiveInteger(input) {
     const regex = /^\d+$/;
     return regex.test(input);
@@ -43,12 +45,20 @@ class App {
     }
   }
 
+  async getWinningNumbers() {
+    const numbers = await MissionUtils.Console.readLineAsync(
+      "당첨 번호를 입력해 주세요.\n",
+    );
+    this.#winningNumbers = new Set(numbers.split(" "));
+  }
+
   async play() {
     await this.getMoneyInput();
     for (let i = 0; i < this.#money / 1000; i += 1) {
       this.purchaseLotto();
     }
     this.printLottoList();
+    await this.getWinningNumbers();
   }
 }
 
