@@ -14,6 +14,14 @@ export const LOTTO_STASTICS = Object.freeze({
   fifthPrize : 5000,
 })
 
+export const LOTTO_RULE = Object.freeze({
+  minNumber : 1,
+  maxNumber : 45,
+  selectTime : 6,
+  buyUnit : 1000,
+  buyMax : 100000,
+})
+
 export const REGEX = Object.freeze({
   numberSplit : /\B(?=(\d{3})+(?!\d))/g,
 })
