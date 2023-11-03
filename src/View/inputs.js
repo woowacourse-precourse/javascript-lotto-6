@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import MESSAGE from '../constants/message.js';
 
-const Input = {
+const inputs = {
   async buyLotto() {
     const priceAnswer = await Console.readLineAsync(
       MESSAGE.input.purchasePrice,
@@ -10,4 +10,4 @@ const Input = {
   },
 };
 
-export default Input;
+export default inputs;
