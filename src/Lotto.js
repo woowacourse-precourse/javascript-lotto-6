@@ -18,9 +18,8 @@ class Lotto {
   //   }
   // }
 
-  async countingLottos() {
-    const userMoney = await View.askInputMoney();
-    return userMoney / 1000;
+  countingLottos(inputMoney) {
+    return inputMoney / 1000;
   }
 }
 

@@ -5,12 +5,12 @@ class App {
   lottoTickets;
 
   async play() {
-    await View.askInputMoney();
+    const inputMoney = await View.askInputMoney();
     await View.printLottoCount();
-    const numberOfTickets = await new Lotto().countingLottos();
+    const numberOfTickets = await new Lotto().countingLottos(inputMoney);
     const lottoTickets = new LottoTickets();
     this.lottoTickets = lottoTickets.generateLottoTickets(numberOfTickets);
-    await View.showTickets(this.lottoTickets);
+    View.showTickets(this.lottoTickets);
   }
 }
 
