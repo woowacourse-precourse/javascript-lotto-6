@@ -6,7 +6,13 @@ describe('로또 게임 테스트', () => {
       autoLottos: [[1, 2, 3, 4, 5, 6]],
       winningLotto: [7, 8, 9, 10, 11, 12],
       bonus: 13,
-      expected: [0],
+      expected: {
+        threeMatching: 0,
+        fourMatching: 0,
+        fiveMatchingNotBonus: 0,
+        fiveMatchingAndBonus: 0,
+        allMatching: 0,
+      },
     },
     {
       autoLottos: [
@@ -15,7 +21,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [3, 30, 32, 12, 1, 7],
       bonus: 41,
-      expected: [3, 3],
+      expected: {
+        threeMatching: 2,
+        fourMatching: 0,
+        fiveMatchingNotBonus: 0,
+        fiveMatchingAndBonus: 0,
+        allMatching: 0,
+      },
     },
     {
       autoLottos: [
@@ -24,7 +36,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [1, 2, 3, 12, 13, 14],
       bonus: 41,
-      expected: [3, 1],
+      expected: {
+        threeMatching: 1,
+        fourMatching: 0,
+        fiveMatchingNotBonus: 0,
+        fiveMatchingAndBonus: 0,
+        allMatching: 0,
+      },
     },
   ])(
     '당첨번호와 각각의 로또번호를 비교하여 일치갯수를 저장한다.',
@@ -43,7 +61,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [2, 7, 12, 14, 32, 43],
       bonus: 41,
-      expected: [[5, true], 2],
+      expected: {
+        threeMatching: 0,
+        fourMatching: 0,
+        fiveMatchingNotBonus: 0,
+        fiveMatchingAndBonus: 1,
+        allMatching: 0,
+      },
     },
   ])(
     '5개가 일치하고 보너스 번호가 일치합니다.',
@@ -62,7 +86,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [2, 7, 12, 14, 32, 43],
       bonus: 39,
-      expected: [[5, false], 2],
+      expected: {
+        threeMatching: 0,
+        fourMatching: 0,
+        fiveMatchingNotBonus: 1,
+        fiveMatchingAndBonus: 0,
+        allMatching: 0,
+      },
     },
   ])(
     '5개가 일치하고 보너스 번호가 일치하지 않습니다.',
