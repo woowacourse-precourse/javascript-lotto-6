@@ -7,10 +7,11 @@ import {
   numberValidation,
   bonusNubmerValidation,
 } from "../utils/Validation.js";
+import AnswerLotto from "../model/AnswerLotto.js";
 
 class LottoController {
   #lottoCount;
-  #lottoNumber;
+  #answerLotto;
   #lottoPage = [];
 
   async start() {
@@ -18,11 +19,16 @@ class LottoController {
       await this.#getUserPrice();
       this.#printLottoCount();
       this.#getLottoList();
-      await this.#getUserLottoNumbers();
-      await this.#getUserBonusNumber();
+      await this.#createAnswerLotto();
     } catch (error) {
       throw error;
     }
+  }
+  async #createAnswerLotto() {
+    const lottoNumber = await this.#getUserLottoNumbers();
+    const bonusNumber = await this.#getUserBonusNumber(lottoNumber);
+
+    this.#answerLotto = new AnswerLotto(lottoNumber, bonusNumber);
   }
 
   #printLottoCount() {
@@ -47,11 +53,12 @@ class LottoController {
     const lottoNumbers = await InputView.getLottoNumbers();
     const lottoNumber = lottoNumbers.split(",");
     numberValidation(lottoNumber);
-    return (this.#lottoNumber = lottoNumber);
+    return lottoNumber;
   }
-  async #getUserBonusNumber() {
-    const bonuseNubmer = await InputView.getBonusNumber();
-    bonusNubmerValidation(bonuseNubmer, this.#lottoNumber);
+  async #getUserBonusNumber(lottoNumber) {
+    const bonusNumber = await InputView.getBonusNumber();
+    bonusNubmerValidation(bonusNumber, lottoNumber);
+    return bonusNumber;
   }
 }
 
