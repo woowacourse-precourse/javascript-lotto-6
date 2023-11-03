@@ -14,11 +14,7 @@ const hasNoReset = (string) => {
   if (!string.includes(','))
     throw new Error(getErrorMessage(ERROR_MESSAGE.noReset));
 };
-//payment
-const validatePayment = (payment, unit) => {
-  if (payment < 1000 || !(payment % unit))
-    throw new Error(getErrorMessage(ERROR_MESSAGE.payment));
-};
+
 // 보너스 볼
 const hasNoBonusBall = (...args) => {
   const { numbers, bonusBall } = args;
