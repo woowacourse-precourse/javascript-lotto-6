@@ -48,3 +48,5 @@ class PurchaseAmount {
     }
   }
 }
+
+export default PurchaseAmount;
