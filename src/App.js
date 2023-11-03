@@ -1,5 +1,6 @@
+"use strict";
 class App {
-  async play() {}
+    async play() {}
 }
 
 export default App;
