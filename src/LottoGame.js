@@ -1,11 +1,14 @@
+import Lotto from './Lotto';
 import Query from './View/Query';
-
+import Print from './View/Print';
+import { Console, Random } from '@woowacourse/mission-utils';
 class LottoGame {
   #tickets
-  async game() {
+  async start() {
     const purchaseAmount = await Query.getPurchaseAmount();
     const ticketCount = LottoGame.validatePurchaseAmount(purchaseAmount);
-    this.#puchaseLottos(ticketCount)
+    this.#puchaseLottos(ticketCount);
+    Print.printTickets([...this.#tickets]);
   }
 
   static validatePurchaseAmount(purchaseAmount = '0') {
