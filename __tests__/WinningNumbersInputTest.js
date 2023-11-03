@@ -1,4 +1,4 @@
-import { winningNumberSpliter, winnningNumberValidater, winnningNumberDuplicateValidater } from "../src/App.js";
+import { winningNumberSpliter, winnningNumberValidater, winnningNumberDuplicateValidater, winnningNumberRangeValidater } from "../src/App.js";
 
 describe("당첨 번호 입력 테스트", () => {
   test("당첨 번호를 쉼표로 구분한다.", () => {
@@ -24,5 +24,11 @@ describe("당첨 번호 입력 테스트", () => {
     const input = ["1","2","2","4","5","6"];
 
     expect(winnningNumberDuplicateValidater(input)).rejects.toThrow("[ERROR]");
+  });
+
+  test("당첨 번호가 1~45 사이가 아닐 경우, 에러가 발생한다.", () => {
+    const INPUT = 46;
+
+    expect(winnningNumberRangeValidater(INPUT)).rejects.toThrow("[ERROR]");
   });
 });
