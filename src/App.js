@@ -17,6 +17,7 @@ else를 지양한다.
 class App {
   async play() {
     const INPUT_CASH = await this.inputCash();
+    this.showLottoNumbers(this.validateCash(INPUT_CASH));
   }
 
   inputCash() {
@@ -24,6 +25,19 @@ class App {
       INPUT_MESSAGES.INPUT_CASH_MESSAGE
     );
     return INPUT_CASH;
+  }
+
+  validateCash(CASH) {
+    const CHANGE = +CASH % 1000;
+    if (CHANGE === 0) {
+      const NUMBER_OF_GAMES = CASH / 1000;
+      return NUMBER_OF_GAMES;
+    }
+    throw new Error("[ERROR] 구입금액은 1000 단위 정수로 입력이 가능합니다.");
+  }
+
+  showLottoNumbers(cash) {
+    MissionUtils.Console.print(cash + OUTPUT_MESSAGES.OUTPUT_PURCHASE_QUANTITY);
   }
 }
 
