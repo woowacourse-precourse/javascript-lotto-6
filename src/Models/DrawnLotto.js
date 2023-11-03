@@ -12,8 +12,14 @@ class DrawnLotto extends Lotto {
     this.#bonusNumber = Number(bonusNumber);
   }
 
-  getPlusNumber() {
+  getBonusNumber() {
     return this.#bonusNumber;
+  }
+
+  getFullNumbers() {
+    numbers = this.getNumbers();
+    bonusNumber = this.getBonusNumber();
+    return { numbers, bonusNumber };
   }
 
   #validatePlusNumber(bonusNumber) {
