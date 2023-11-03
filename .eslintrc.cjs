@@ -22,5 +22,12 @@ module.exports = {
   },
   rules: {
     quotes: [2, "double"],
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        js: "ignorePackages",
+      },
+    ],
   },
 };
