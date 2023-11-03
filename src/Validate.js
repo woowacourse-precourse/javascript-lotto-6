@@ -40,7 +40,7 @@ class Validate {
     if (
       !this.isValidLength(input) ||
       !this.isValidRangeEachLotto(input) ||
-      !this.isDuplicate(input)
+      this.isDuplicate(input)
     ) {
       return false;
     }
@@ -85,7 +85,7 @@ class Validate {
       throw new Error(ERROR.DUPLICATE_EXIST);
     }
 
-    return true;
+    return false;
   }
 
   isValidBonusNumber(input, lotto) {
