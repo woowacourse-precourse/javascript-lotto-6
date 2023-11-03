@@ -20,7 +20,7 @@ export default class Money {
   }
 
   #validateIsDevided(money) {
-    if (Number(money) % 1000 !== 0) {
+    if (Number(money) <= 0 || Number(money) % 1000 !== 0) {
       throw new LottoError(
         `금액은 ${LOTTO_SETTINGS.TICKET_PRICE}단위여야합니다.`
       );
