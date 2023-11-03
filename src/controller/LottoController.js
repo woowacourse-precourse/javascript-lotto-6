@@ -19,15 +19,13 @@ class LottoController {
   }
 
   async setUser() {
-    let isValidBalance = false;
-    while (!isValidBalance) {
+    while (true) {
       const balance = await View.getInputByQuestion(MESSAGES.inputBalance);
       try {
         this.#user = new User(balance);
-        break;
+        break
       } catch (e) {
         View.printOutput(e.message);
-        continue;
       }
     }
   }
@@ -40,8 +38,15 @@ class LottoController {
   }
 
   async setWinningLottoNumbers() {
-    const numbers = await View.getInputByQuestion(MESSAGES.inputWinningNumbers);
-    this.#winningLotto.setNumbers(numbers);
+    while (true) {
+      const numbers = await View.getInputByQuestion(MESSAGES.inputWinningNumbers);
+      try {
+        this.#winningLotto.setNumbers(numbers);
+        break
+      } catch (e) {
+        View.printOutput(e.message);
+      }
+    }
   }
 
   async setWinningLottoBonus() {
