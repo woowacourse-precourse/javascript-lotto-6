@@ -1,4 +1,4 @@
-import { MESSAGES } from "../../constants";
+import { LOTTO_RULE, MESSAGES } from "../../constants";
 import { CustomError } from "../../exception";
 import { Validation } from "../../utils";
 import { InputView } from "../../view";
@@ -44,5 +44,9 @@ export class LottoSeller {
         MESSAGES.ERROR.BUY.NOT_MULTIPLE_OF(this.#lottoPrice)
       );
     }
+  }
+
+  #calculateLottoAmount(paidAmount) {
+    return paidAmount / this.#lottoPrice;
   }
 }
