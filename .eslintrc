@@ -23,9 +23,13 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.js"],
+      "files": ["**/*.test.js", "LottoTest.js"],
       "rules": {
-        "max-lines-per-function": "off" // **.test.js 파일에 대해서는 max-lines 룰을 비활성화합니다.
+        // 테스트 파일에 대해서는 max-lines-per-function 룰을 비활성화합니다.
+        "max-lines-per-function": "off",
+
+        // 테스트 파일에 대해서는 예외처리를 위해 no-new 룰을 비활성화합니다.
+        "no-new": "off"
       }
     }
   ]
