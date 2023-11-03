@@ -32,4 +32,14 @@ describe("Validator 클래스 테스트", () => {
       expect(Validator.isStringOnlyDigits(string)).toBe(expectedOutput);
     }
   );
+
+  test.each([
+    [100100, false],
+    [100000, true],
+  ])(
+    "숫자가 1000으로 나누어 떨어지면 true, 아니라면 false 반환 - %d",
+    (number, expectedOutput) => {
+      expect(Validator.isDivisibleBy1000(number)).toBe(expectedOutput);
+    }
+  );
 });
