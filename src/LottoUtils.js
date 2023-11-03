@@ -1,13 +1,22 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH } from './constants.js';
+import { isValidAmount } from './Validation.js';
 export const inputAmount = async () => {
   try {
     const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    if (!isValidAmount(amount))
+      throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
     return amount;
   } catch (error) {
     Console.print(error.message);
+    return false;
   }
+};
+export const multipleInputAmount = async () => {
+  let amount = false;
+  while (!amount) amount = await inputAmount();
+  return amount;
 };
 export const inputWinningNumbers = async () => {
   try {

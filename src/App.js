@@ -2,7 +2,7 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import * as utils from './LottoUtils.js';
 class App {
   async play() {
-    const AMOUNT = await utils.inputAmount();
+    const AMOUNT = await utils.multipleInputAmount();
     const LOTTO_COUNT = utils.getLottoCount(AMOUNT);
     const LOTTOS = utils.getLottos(LOTTO_COUNT);
     utils.printLottos(LOTTOS);
