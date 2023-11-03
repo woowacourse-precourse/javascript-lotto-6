@@ -16,6 +16,7 @@
 - else 지양
   - switch문이 더 깔끔한 경우가 있다. 
   - 도메인 로직 에 단위 테스트 진행 
+  -depth 주의 
   */
 class App {
   async play() {}
