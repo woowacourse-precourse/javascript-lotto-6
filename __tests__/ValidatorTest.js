@@ -22,4 +22,14 @@ describe("Validator 클래스 테스트", () => {
       expect(Validator.hasDuplicate(array)).toBe(expectedOutput);
     }
   );
+
+  test.each([
+    ["1234s5", false],
+    ["123456", true],
+  ])(
+    "문자열 내에 숫자만 있다면 true, 아니라면 false 반환 - %s",
+    (string, expectedOutput) => {
+      expect(Validator.isStringOnlyDigits(string)).toBe(expectedOutput);
+    }
+  );
 });
