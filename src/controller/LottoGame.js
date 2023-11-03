@@ -16,10 +16,14 @@ class LottoGame {
   }
 
   async #getAmountInput() {
-    const amount = await InputView.readAmount();
-    this.#validateAmountInput(amount);
-
-    return this.#getLottoCount(amount);
+    try {
+      const amount = await InputView.readAmount();
+      this.#validateAmountInput(amount);
+      return this.#getLottoCount(amount);
+    } catch (error) {
+      OutputView.printMessage(error.message);
+      return this.#getAmountInput();
+    }
   }
 
   #validateAmountInput(amount) {

@@ -6,6 +6,9 @@ const OutputView = {
     Console.print(`\n${count}${MESSAGE.buyLotto}`);
     Console.print(message);
   },
+  printMessage(message) {
+    Console.print(message);
+  },
 };
 
 export default OutputView;
