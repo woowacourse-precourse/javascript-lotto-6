@@ -11,10 +11,10 @@ class LottoController {
     this.#userLottoModel = new UserLottoModel();
   }
   async playGame() {
-    const quantity = await InputView.getLottoNumbers();
-    OutputView.printQuantity(quantity);
+    const ticketPrice = await InputView.getLottoNumbers();
+    OutputView.printQuantity(ticketPrice);
 
-    this.#userLottoModel.generateLottoTicket(quantity);
+    this.#userLottoModel.generateLottoTicket(ticketPrice);
     const lottoTickets = this.#userLottoModel.getLottoTickets()
     OutputView.printLottoTickets(lottoTickets);
 
@@ -24,7 +24,7 @@ class LottoController {
 
     const bonusNumbers = await InputView.getBonusNumbers();
 
-    const result = lotto.countMatches(lottoTickets, winningNumbers, bonusNumbers);
+    const result = lotto.countMatches(lottoTickets, winningNumbers, bonusNumbers, ticketPrice);
     
     OutputView.printResultTitle();
 

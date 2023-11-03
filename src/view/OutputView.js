@@ -1,8 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class OutputView {
-  static printQuantity(quantity) {
-    MissionUtils.Console.print(`${quantity / 1000}개를 구매했습니다.`);
+  static printQuantity(ticketPrice) {
+    MissionUtils.Console.print(`${ticketPrice / 1000}개를 구매했습니다.`);
   }
 
   static printLottoTickets(tickets) {
@@ -19,7 +19,7 @@ class OutputView {
   static printSeparator() {
     MissionUtils.Console.print("---");
   }
-  
+
   static formatResults(result) {
     const formattedResults = [];
     formattedResults.push(`3개 일치 (5,000원) - ${result["5등"]}개`);
