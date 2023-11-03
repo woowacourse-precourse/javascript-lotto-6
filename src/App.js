@@ -67,16 +67,16 @@ class App {
     }
     if (
       inputNum.some(
-        (number) => isNaN(Number(number)) || number < 1 || number > 45
+        (number) =>
+          isNaN(Number(number)) || number < 1 || number > 45 || number % 1 !== 0
       )
     ) {
-      throw new Error("[ERROR] 입력한 숫자는 1부터 45 사이여야 합니다.");
+      throw new Error(
+        "[ERROR] 입력한 숫자는 1부터 45 사이의 자연수이어야 합니다."
+      );
     }
     if (inputNum.length !== new Set(inputNum).size) {
       throw new Error("[ERROR] 중복된 숫자는 입력하면 안 됩니다.");
-    }
-    if (inputNum % 1 !== 0) {
-      throw new Error("[Error] 자연수만 입력이 가능합니다.");
     }
   }
 
