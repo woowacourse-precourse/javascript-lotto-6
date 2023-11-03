@@ -1,6 +1,7 @@
 import { Console, MissionUtils } from "@woowacourse/mission-utils";
 import Validator from "./Validate.js";
 import Lotto from "./Lotto.js";
+import LottoTickets from "./LottoTickets.js";
 
 class View {
   static #INPUT_MONEY = "구입금액을 입력해 주세요.\n";
@@ -14,8 +15,15 @@ class View {
   }
 
   static async printLottoCount() {
-    const inputMoney = await Lotto.countingLottos();
+    const lotto = new Lotto();
+    const inputMoney = await lotto.countingLottos();
     MissionUtils.Console.print(inputMoney + View.#COUNT_LOTTO_QUERY);
+  }
+
+  static async showTickets(tickets) {
+    tickets.forEach((ticket) => {
+      console.log(`[${ticket.join(", ")}]`);
+    });
   }
 }
 
