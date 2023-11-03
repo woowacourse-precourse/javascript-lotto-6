@@ -1,3 +1,4 @@
+import Bonus from './Bonus.js';
 import Lotto from './Lotto.js';
 import InputValidator from './utils/InputValidator.js';
 import autoLottoGenerator from './utils/autoLottoGenerator.js';
@@ -9,11 +10,14 @@ class App {
 
   #winningLotto;
 
+  #bonus;
+
   async play() {
     const purchaseAmount = await this.#getPurchaseAmount();
     this.#purchaseLotto = this.#getAutoLotto(purchaseAmount);
     OutputView.printAutoLotto(this.#purchaseLotto, purchaseAmount);
     this.#winningLotto = await this.#generateWinningLotto();
+    this.#bonus = await this.#generateBonus();
   }
 
   async #getPurchaseAmount() {
@@ -33,10 +37,13 @@ class App {
       return autoLottoGenerator(purchaseAmount);
     } catch (error) {
       OutputView.printError(error.message);
-      this.#getAutoLotto();
+      return this.#getAutoLotto();
     }
   }
 
+  /* 
+  🐛FIX: DI로 구현할 것
+  */
   async #generateWinningLotto() {
     try {
       const answer = await InputView.getWinningLotto();
@@ -44,6 +51,16 @@ class App {
     } catch (error) {
       OutputView.printError(error.message);
       return this.#generateWinningLotto();
+    }
+  }
+
+  async #generateBonus() {
+    try {
+      const answer = await InputView.getBonus();
+      return new Bonus(answer);
+    } catch (error) {
+      OutputView.printError(error.message);
+      return this.#generateBonus();
     }
   }
 }
