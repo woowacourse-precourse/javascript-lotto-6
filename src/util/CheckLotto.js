@@ -47,7 +47,7 @@ class CheckLotto {
 		totalEarning += lottoResult.thirdPlaceCount * lottoNumber.thirdPlacePrice;
 		totalEarning += lottoResult.fourthPlaceCount * lottoNumber.fourthPlacePrice;
 		totalEarning += lottoResult.fifthPlaceCount * lottoNumber.fifthPlacePrice;
-		return (totalEarning / purchaseAmount).toFixed(4) * 100;
+		return ((totalEarning / purchaseAmount) * 100).toFixed(1);
 	}
 }
 
