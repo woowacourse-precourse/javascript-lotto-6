@@ -3,10 +3,13 @@ import validator from '../utils/validator.js';
 
 const inputView = {
   async readPurchasePriceAsync(message) {
-    const userInput = await Console.readLineAsync(message);
-    if (validator.validatePrice(userInput)) this.readPurchasePriceAsync(message);
-
-    return parseInt(userInput);
+    try {
+      const userInput = await Console.readLineAsync(message);
+      validator.validatePrice(userInput);
+      return parseInt(userInput);
+    } catch (e) {
+      return await this.readPurchasePriceAsync(message);
+    }
   },
 
   async readWinningNumbersAsync(message) {
