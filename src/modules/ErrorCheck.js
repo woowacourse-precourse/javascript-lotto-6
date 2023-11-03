@@ -15,7 +15,7 @@ class ErrorCheck {
     ErrorCheck.multiplesInPositive(Number(inputString), lottoPrice);
   }
 
-  static lottoListString(inputString) {
+  static lottoNumbersString(inputString) {
     const arrayFromString = inputString.split(',');
     ErrorCheck.arrayLikeLength(arrayFromString, NUMBER_OF_LOTTO_NUMBERS);
     arrayFromString.forEach(splitedString => {

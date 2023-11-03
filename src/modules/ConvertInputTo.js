@@ -29,9 +29,19 @@ class ConvertInputTo {
 
   static async numberBoard() {
     const board = new Array(LOTTO_UPPER_NUMBER + 1).fill(MISS_STATE);
-    const inputString = await Console.readLineAsync(
+    await ConvertInputTo.winningNumbersArray().forEach(
+      number => (board[number] = HIT_STATE)
+    );
+
+    return Object.freeze(board);
+  }
+
+  static async winningNumbersArray() {
+    const numbersString = await Console.readLineAsync(
       WINNING_NUMBER_INPUT_MESSAGE
     );
+    ErrorCheck.lottoNumbersString(numbersString);
+    return numbersString.split(',').map(Number);
   }
 }
 
