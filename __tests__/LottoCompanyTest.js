@@ -88,7 +88,7 @@ describe('LottoCompany 객체 테스트', () => {
 
   test('match 메서드를 호출하면, 로또 번호의 일치 개수가 반환된다.', () => {
     // given
-    lottoCompany.setNumbers([1, 2, 3, 7, 8, 9]);
+    lottoCompany.numbers = [1, 2, 3, 7, 8, 9];
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
 
     // when

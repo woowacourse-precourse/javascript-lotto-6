@@ -3,6 +3,7 @@ import {
   validateLength,
   validateNumberRange,
 } from '../../utils/Validate';
+import generateLottoNumbers from '../../utils/generateLottoNumbers';
 import Lotto from './Lotto';
 
 class LottoCompany {
@@ -26,15 +27,24 @@ class LottoCompany {
     this.#numbers.push(number);
   }
 
-  issueLottos(numOfLotto) {
+  issueLottos(numOfLottos) {
     const lottos = [];
-    for (let index = 0; index < numOfLotto; index += 1) {
+    for (let index = 0; index < numOfLottos; index += 1) {
       this.#income += 1000;
-      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      const lotto = new Lotto(generateLottoNumbers());
       lottos.push(lotto);
     }
-
     return lottos;
+  }
+
+  match(lotto) {
+    let count = 0;
+    this.#numbers.forEach((number) => {
+      if (number in lotto.numbers) {
+        count += 1;
+      }
+    });
+    return count;
   }
 }
 
