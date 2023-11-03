@@ -19,7 +19,7 @@ class LottoRankMaker {
     this.#luckyArray = temp;
   }
 
-  countDuplicate(lottoArray, luckyArray) {
+  #countDuplicate(lottoArray, luckyArray) {
     const count = lottoArray
     .filter((number) => luckyArray.includes(number))
     .length;
@@ -28,8 +28,8 @@ class LottoRankMaker {
   }
 
   #rankFilter(lottoArray) {
-    const luckyCount = this.countDuplicate(lottoArray, this.#luckyArray);
-    const bonusCount = this.countDuplicate(lottoArray, [this.#bonusNumber]);
+    const luckyCount = this.#countDuplicate(lottoArray, this.#luckyArray);
+    const bonusCount = this.#countDuplicate(lottoArray, [this.#bonusNumber]);
     if (luckyCount < 3) return 0;
 
     if (luckyCount === 6) return 1;
