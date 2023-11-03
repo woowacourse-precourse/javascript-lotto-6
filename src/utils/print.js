@@ -54,10 +54,6 @@ const printTotalReturn = (totalReturn) => {
   print(`총 수익률은 ${totalReturn}%입니다.`);
 };
 
-const printErrorMessage = (errorMessage) => {
-  print(`[ERROR] ${errorMessage}`);
-};
-
 export {
   printInputPurchaseAmountPhrase,
   printNPurchasePhrase,
@@ -66,5 +62,4 @@ export {
   printInputBonusNumberPhrase,
   printWinningStatistics,
   printTotalReturn,
-  printErrorMessage,
 };
