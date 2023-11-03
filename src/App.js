@@ -1,9 +1,21 @@
+/* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
   static async play() {
     this.makeLottoNum();
     await this.allOfInputfunc();
+  }
+
+  // 당첨번호 & 보너스번호 입력 함수 총집합
+  static async allOfInputfunc() {
+    const winningNum = await this.stringToNum();
+    this.validateWinningNumLength(winningNum);
+    const bonusNum = await this.getBonusNum();
+    this.duplCheckOfWinngNum(winningNum);
+    this.duplCheckOfBonus(winningNum, bonusNum);
+    this.validateNumRange(winningNum);
+    this.validateNumRange([bonusNum]); // 배열 형태로 전달
   }
 
   static makeLottoNum() {
@@ -77,6 +89,7 @@ class App {
     });
   }
 
+  // 정답 숫자 중복 확인.
   static duplCheckOfWinngNum(winningNum) {
     const setWinningNum = new Set(winningNum);
     if (winningNum.length !== setWinningNum.size) {
@@ -84,18 +97,10 @@ class App {
     }
   }
 
-  // 당첨번호 & 보너스번호 입력 함수 총집합
-  static async allOfInputfunc() {
-    const winningNum = await this.stringToNum();
-    this.validateWinningNumLength(winningNum);
-    const bonusNum = await this.getBonusNum();
-    this.duplCheckOfWinngNum(winningNum);
-    this.duplCheckOfBonus(winningNum, bonusNum);
-    this.validateNumRange(winningNum);
-    this.validateNumRange([bonusNum]); // 배열 형태로 전달
-  }
+  // 로또 구입 금액 입력받기
+  getMoney() {}
 }
 
 export default App;
 
-App.play();
+// App.play();
