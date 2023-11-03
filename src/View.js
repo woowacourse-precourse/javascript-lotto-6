@@ -14,10 +14,8 @@ class View {
     return answer;
   }
 
-  static async printLottoCount() {
-    const lotto = new Lotto();
-    const inputMoney = await lotto.countingLottos();
-    MissionUtils.Console.print(inputMoney + View.#COUNT_LOTTO_QUERY);
+  static async printLottoCount(numberOfTickets) {
+    MissionUtils.Console.print(numberOfTickets + View.#COUNT_LOTTO_QUERY);
   }
 
   static async showTickets(tickets) {

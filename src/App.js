@@ -6,8 +6,8 @@ class App {
 
   async play() {
     const inputMoney = await View.askInputMoney();
-    await View.printLottoCount();
     const numberOfTickets = await new Lotto().countingLottos(inputMoney);
+    await View.printLottoCount(numberOfTickets);
     const lottoTickets = new LottoTickets();
     this.lottoTickets = lottoTickets.generateLottoTickets(numberOfTickets);
     View.showTickets(this.lottoTickets);
