@@ -64,7 +64,11 @@ class App {
     if (inputNum.length !== 6 || inputNum.some((num) => num.trim() === "")) {
       throw new Error("[ERROR] 당첨 번호는 6자리를 입력해 주세요.");
     }
-    if (inputNum.some((number) => number < 1 || number > 45)) {
+    if (
+      inputNum.some(
+        (number) => isNaN(Number(number)) || number < 1 || number > 45
+      )
+    ) {
       throw new Error("[ERROR] 입력한 숫자는 1부터 45 사이여야 합니다.");
     }
     if (inputNum.length !== new Set(inputNum).size) {
