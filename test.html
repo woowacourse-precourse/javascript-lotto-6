@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    sameNumbersObject = {
+      'three' : 0,
+      'four' : 0,
+      'five' : 0,
+      'six' : 0
+    }
+    sameNumbersObject['three']++
+  const arrayNumbers = [];
+  
+    count = 8;
+    for(let i = 0; i<count; i++){
+      const newArray = [];
+      for(let j = 0; j<6; j++){
+        const aNumber = Math.floor(Math.random() * 10 + 1);
+        newArray.push(aNumber)
+      }
+      arrayNumbers.push(newArray);
+    }
+
+    </script>
+</body>
+</html>

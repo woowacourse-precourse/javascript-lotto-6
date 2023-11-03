@@ -19,7 +19,7 @@ class App {
 
   async play() {
     await this.getLottoPrice();
-    this.getMyLottos();
+    await this.getMyLottos();
     await this.getNumbers();
     this.printWinningStatics();
   }
@@ -39,12 +39,14 @@ class App {
     return checkPrice;
   }
 
-  getMyLottos() {
+  async getMyLottos() {
     const arrayNumbers = [];
   
     for(let i = 0; i < this.count; i++){
-      const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(1,45,6)
-      arrayNumbers.push(lottoNumber.sort());
+      const lottoNumber = await MissionUtils.Random.pickUniqueNumbersInRange(1,45,6);
+      // 지금 lottoNumber가 콘솔로그로 보니 undefined뜸 여기서부터 체크해야 함
+      // console.log(lottoNumber);
+      // arrayNumbers.push([...lottoNumber]);
     }
     this.printHowMany(arrayNumbers);
     this.getWinningLottos(arrayNumbers);
