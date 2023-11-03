@@ -79,7 +79,9 @@ class App {
       if (isNaN(convertNumber)) {
         throw new Error('[ERROR] 입력된 당첨 번호가 숫자가 아닙니다.');
       }
-
+      if (convertNumber > 45) {
+        throw new Error('[ERROR] 입력된 당첨 번호가 로또번호의 최대값을 초가하였습니다.');
+      }
       if (this.#winningNumber.includes(convertNumber)) {
         throw new Error('[ERROR] 입력된 당첨 번호에 중복된 숫자가 있습니다.');
       }
@@ -97,6 +99,9 @@ class App {
     const convertNumber = Number(bonusNumber);
     if (isNaN(convertNumber)) {
       throw new Error('[ERROR] 입력된 보너스 번호가 숫자가 아닙니다.');
+    }
+    if (convertNumber > 45) {
+      throw new Error('[ERROR] 입력된 당첨 번호가 로또번호의 최대값을 초가하였습니다.');
     }
     if (this.#winningNumber.includes(convertNumber)) {
       throw new Error('[ERROR] 입력된 보너스 번호가 담청 번호에 이미 존재합니다.');
