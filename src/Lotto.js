@@ -1,6 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-
-import { OUTPUT_MESSAGE } from './constants/index.js';
+import { MATCH_COUNT_PRIZES, OUTPUT_MESSAGE } from './constants/index.js';
 
 class Lotto {
   #numbers;
@@ -8,6 +7,17 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.result = {
+      3: 0,
+      4: 0,
+      5: 0,
+      '5_bonus': 0,
+      6: 0,
+    };
+    this.MATH_COUNT = {
+      min: 3,
+      max: 6,
+    };
   }
 
   #validate(numbers) {
@@ -35,29 +45,34 @@ class Lotto {
     return Array.from({ length: num }, () => this.generateRandomLottoNumber());
   }
 
-  // 당첨 번호와 비교
-  compareWinningAndLotto(winningNumbers, bonusNumber, lottoList) {
+  printCompareWinningAndLotto() {
     Console.print(OUTPUT_MESSAGE.RESULT_HEADER);
-
-    const matchingCount = lottoList.map((lotto) => {
-      return lotto.filter((num) => winningNumbers.includes(num)).length;
-    });
-
-    this.lotteryStatistics(matchingCount);
   }
 
-  // 당첨 통계
-  lotteryStatistics(matchingCount) {
-    const result = {};
-    matchingCount.forEach((count) => {
-      if (count < 3) return;
-      result[count] = result[count] ? result[count] + 1 : 1;
+  compareWinningAndLotto(userLotto, lottoList) {
+    const { userNumbers, bonusNumber } = userLotto;
+
+    lottoList.forEach((lotto) => {
+      const hasUserNumber = userNumbers
+        .split(',')
+        .map(Number)
+        .filter((num) => lotto.includes(num)).length;
+      const hasBonusNumber = lotto.includes(Number(bonusNumber));
+
+      if (hasUserNumber >= 3 && !hasBonusNumber) {
+        this.result[hasUserNumber] = (this.result[hasUserNumber] || 0) + 1;
+      } else if (hasUserNumber === 5 && hasBonusNumber) {
+        this.result['5_bonus'] = (this.result['5_bonus'] || 0) + 1;
+      }
     });
 
-    console.log(result);
-    for (let index = 3; index <= 6; index++) {
-      Console.print(OUTPUT_MESSAGE.RESULT_ROW(index, result[Number(index)]));
-    }
+    return this.result;
+  }
+
+  printTotalResult() {
+    Array.from(MATCH_COUNT_PRIZES.keys()).forEach((key) => {
+      Console.print(OUTPUT_MESSAGE.RESULT_ROW(key, this.result[key]));
+    });
   }
 
   // 수익률 계산
