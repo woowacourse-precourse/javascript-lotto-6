@@ -1,4 +1,5 @@
-import ERROR_MESSAGE from "src/Errors.js";
+import ERROR_MESSAGE from "./Errors";
+import View from "./ViewTemp";
 
 class Lotto {
   #numbers;
@@ -15,6 +16,11 @@ class Lotto {
     if (new Set(numbers).size !== 6) {
       throw new Error(ERROR_MESSAGE.lottoSize);
     }
+  }
+
+  async countingLottos() {
+    const userMoney = View.askInputMoney();
+    return userMoney / 1000;
   }
 }
 

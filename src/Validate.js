@@ -1,4 +1,4 @@
-import ERROR_MESSAGE from "src/Errors.js";
+import ERROR_MESSAGE from "./Errors";
 class Validator {
   static #MONEY_UNIT = 1000;
 
