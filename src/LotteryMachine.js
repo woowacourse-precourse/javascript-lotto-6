@@ -7,19 +7,24 @@ class LotteryMachine {
   }
 
   buyLottos(purchaseAmount) {
-    const lottoCount = Math.floor(purchaseAmount / this.lottoPrice);
-    const lottos = [];
+    const lottoCount = this.calculateLottoCount(purchaseAmount);
+    return this.generateLottos(lottoCount);
+  }
 
-    for (let i = 0; i < lottoCount; i++) {
-      const numbers = this.pickLottoNumbers();
-      lottos.push(new Lotto(numbers));
-    }
+  calculateLottoCount(purchaseAmount) {
+    return Math.floor(purchaseAmount / this.lottoPrice);
+  }
 
-    return lottos;
+  generateLottos(count) {
+    return Array.from(
+      { length: count },
+      () => new Lotto(this.pickLottoNumbers())
+    );
   }
 
   pickLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return numbers.sort((a, b) => a - b);
   }
 }
 

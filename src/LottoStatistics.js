@@ -1,11 +1,4 @@
-const PRIZES = {
-  6: 2000000000,
-  "5+1": 30000000,
-  5: 1500000,
-  4: 50000,
-  3: 5000,
-  꽝: 0,
-};
+import { PRIZES } from "./constants";
 
 class LottoStatistics {
   constructor(lottos, lottoPrice) {
@@ -16,14 +9,22 @@ class LottoStatistics {
   calculateStatistics(results) {
     const resultCounts = this.countResults(results);
     const totalPrizeMoney = this.calculateTotalPrizeMoney(resultCounts);
-    const investment = this.lottos.length * this.lottoPrice;
-    const roi = (totalPrizeMoney / investment) * 100;
+    const investment = this.calculateInvestment();
+    const roi = this.calculateROI(totalPrizeMoney, investment);
 
     return {
       resultCounts,
       totalPrizeMoney,
       roi: roi.toFixed(1),
     };
+  }
+
+  calculateInvestment() {
+    return this.lottos.length * this.lottoPrice;
+  }
+
+  calculateROI(totalPrizeMoney, investment) {
+    return (totalPrizeMoney / investment) * 100;
   }
 
   countResults(results) {
@@ -34,13 +35,9 @@ class LottoStatistics {
   }
 
   calculateTotalPrizeMoney(resultCounts) {
-    let totalPrizeMoney = 0;
-    Object.keys(resultCounts).forEach((prize) => {
-      if (PRIZES.hasOwnProperty(prize)) {
-        totalPrizeMoney += PRIZES[prize] * resultCounts[prize];
-      }
-    });
-    return totalPrizeMoney;
+    return Object.keys(resultCounts).reduce((total, prize) => {
+      return total + PRIZES[prize] * resultCounts[prize];
+    }, 0);
   }
 }
 
