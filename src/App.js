@@ -26,24 +26,34 @@ class App {
   }
   async getNumbers(){
     const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
-    this.winning = this.checkNumbers(winningNumbers);
+    this.winning = this.checkWinningNumbers(winningNumbers);
   }
 
-  // 여기 if문이 4개나 되는데 switch 쓸 것인지 고찰
-  checkNumbers(winningNumbers){
-    const checkNumber = winningNumbers.spilt(",").map(Number);
+  // 여기와 보너스 넘버쪽 if문이 4개나 되는데 switch 쓸 것인지 고찰
+  checkWinningNumbers(winningNumbers){
+    const checkWinningNumber = winningNumbers.spilt(",").map(Number);
 
     if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
-    if(!Number.isInteger(checkNumber)) {throw new Error(ERROR.INTEGER)};
-    if(checkNumber < 1) {throw new Error(ERROR.ONE)};
-    if(checkNumber > 45) {throw new Error(ERROR.FORTY_FIVE)};
-    return checkNumber;
+    if(!Number.isInteger(checkWinningNumber)) {throw new Error(ERROR.INTEGER)};
+    if(checkWinningNumber < 1) {throw new Error(ERROR.ONE)};
+    if(checkWinningNumber > 45) {throw new Error(ERROR.FORTY_FIVE)};
+    return checkWinningNumber;
   }
+  
   async getBonusNumbers(){
     const bonusNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.BONUS_NUMBER);
+    this.bonus = this.checkBonusNumbers(bonusNumbers);
     
   }
+  checkBonusNumbers(bonusNumbers){
+    const checkBonusNumber = bonusNumbers.spilt(",").map(Number);
 
+    if(bonusNumbers.includes(',')) {throw new Error(ERROR.INPUT_COMMA)};
+    if(!Number.isInteger(checkBonusNumber)) {throw new Error(ERROR.INTEGER)};
+    if(checkBonusNumber < 1) {throw new Error(ERROR.ONE)};
+    if(checkBonusNumber > 45) {throw new Error(ERROR.FORTY_FIVE)};
+    return checkBonusNumber;
+  }
 }
 
 export default App;
