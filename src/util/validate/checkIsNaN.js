@@ -1,8 +1,8 @@
 import ERROR_CODE from '../error/errorCode';
 
 export function checkIsNaN(verifyValue) {
-  const parsedValud = Number(verifyValue);
-  const IsInputNaN = Number.isNaN(parsedValud);
+  const parsedValue = Number(verifyValue);
+  const IsInputNaN = Number.isNaN(parsedValue);
   if (IsInputNaN) {
     throw new Error(`${ERROR_CODE.valueIsNaN}`);
   }
