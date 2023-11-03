@@ -1,13 +1,23 @@
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
+import LottoValidate from "../validate/LottoValidate.js";
 
 class Lottos{
+
+    static MIN_NUMBER = 1;
+    static MAX_NUMBER = 45;
+    static NUMBER_LENGTH = 6;
+    static UNIT_PRICE = 1000;
 
     constructor(amount){
         this.amount = amount;
         this.purchaseLottoNumbers = [];
         this.lottoCount = this.amount / 1000;
-        this.lottoNumbers();
+        this.inputLottoValidate(amount);
+    }
+
+    inputLottoValidate = (amount) => {
+        new LottoValidate().inputPurchaseAmountValidate(amount);
     }
 
     lottoNumbers = () => {
@@ -18,9 +28,8 @@ class Lottos{
     };
 
     createRandomNumber = () => {
-        const RANDOM_NUMBER = Random.pickUniqueNumbersInRange(1, 45, 6);
+        const RANDOM_NUMBER = Random.pickUniqueNumbersInRange(Lottos.MIN_NUMBER, Lottos.MAX_NUMBER, Lottos.MINNUMBER_LENGTH_NUMBER);
         this.lotto = new Lotto(RANDOM_NUMBER);
-        return RANDOM_NUMBER;
     }
 
     lottoNumberResultCount = (purchaseLotto, winningNumber, bonusNumber) => {
@@ -29,12 +38,9 @@ class Lottos{
             const matchedNumbers = this.countMatchingNumbers(PURCHASE_LOTTO, winningNumber);
             results.push(matchedNumbers);
         }
-        console.log(results);
     };
 
     countMatchingNumbers = (purchaseLotto, winningNumber) => {
-        console.log(purchaseLotto);
-        console.log(winningNumber);
         return purchaseLotto.filter(number => winningNumber.includes(number)).length;
     }
 

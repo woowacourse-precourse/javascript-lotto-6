@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from '../comm/Message.js';
-import InOutputError from '../error/InOutputError.js';
+import InOutputError from '../validate/InOutputValidate.js';
 
 class UserView{
 
@@ -10,9 +10,7 @@ class UserView{
     }
 
     async userInputPurchaseAmount(){
-        const PURCHASE_AMOUT = await Console.readLineAsync(MESSAGE.MSG_PURCHASE_AMOUNT+'\n');
-        this.inOutputError.inputPurchaseAmountValidate(PURCHASE_AMOUT);
-        return PURCHASE_AMOUT;
+        return await Console.readLineAsync(MESSAGE.MSG_PURCHASE_AMOUNT+'\n');
     }
 
     async userInputWinningNumbers(){
