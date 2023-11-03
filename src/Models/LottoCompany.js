@@ -4,12 +4,13 @@ import {
   validateNumberRange,
 } from '../../utils/Validate';
 import generateLottoNumbers from '../../utils/generateLottoNumbers';
+import winningsTable from '../../utils/winningsTable';
 import Lotto from './Lotto';
 
 class LottoCompany {
   #numbers = [];
 
-  #income;
+  #income = 0;
 
   set numbers(numbers) {
     validateNumberRange(numbers);
@@ -38,12 +39,9 @@ class LottoCompany {
   }
 
   match(lotto) {
-    console.log('=========');
     let count = 0;
     this.#numbers.forEach((number) => {
       if (lotto.numbers.includes(number)) {
-        console.log(number);
-
         count += 1;
       }
     });
@@ -66,6 +64,17 @@ class LottoCompany {
     });
 
     return statics;
+  }
+
+  calculateRateOfReturn(lottos) {
+    let totalWinning = 0;
+
+    lottos.forEach((lotto) => {
+      const matchedNum = this.match(lotto);
+      totalWinning += winningsTable[matchedNum];
+    });
+
+    return (totalWinning / this.#income) * 100;
   }
 }
 

@@ -1,4 +1,5 @@
 /* eslint-disable no-new */
+import { Random } from '@woowacourse/mission-utils';
 import Lotto from '../src/Models/Lotto';
 import LottoCompany from '../src/Models/LottoCompany';
 
@@ -123,16 +124,16 @@ describe('LottoCompany 객체 테스트', () => {
 
   test('로또 객체 배열이 주어지면, 수익률을 계산할 수 있다.', () => {
     // given
-    lottoCompany.setNumbers([1, 2, 3, 4, 5, 6]);
-    const lottos = [
-      new Lotto([1, 2, 3, 4, 8, 9]),
-      new Lotto([1, 2, 3, 10, 11, 12]),
-    ];
+    jest
+      .spyOn(Random, 'pickUniqueNumbersInRange')
+      .mockReturnValue([1, 2, 3, 7, 8, 9]);
+    lottoCompany.numbers = [1, 2, 3, 4, 5, 6];
+    const lottos = lottoCompany.issueLottos(2);
 
     // when
     const rateOfReturn = lottoCompany.calculateRateOfReturn(lottos);
 
     // then
-    expect(rateOfReturn).toBe(2750);
+    expect(rateOfReturn).toBe(500);
   });
 });
