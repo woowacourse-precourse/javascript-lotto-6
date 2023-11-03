@@ -1,6 +1,14 @@
 import LOTTO_SETTINGS from "../config/gameSetting.js";
 
 export default class LottoYieldCalculator {
+  static getTotalPrize(lottos, drawnLotto) {
+    const totalPrize = lottos.reduce((accumulator, lotto) => {
+      return accumulator + this.calculate(lotto, drawnLotto);
+    }, 0);
+
+    return totalPrize;
+  }
+
   static calculate(lotto, drawnLotto) {
     const lottoNumbers = lotto.getNumbers();
     const { numbers, bonusNumber } = drawnLotto.getFullNumbers();
