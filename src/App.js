@@ -43,8 +43,8 @@ export async function inputMoneyDivideValidater(input) {
 async function inputWinningNumber() {
   let comment = WINNING_NUMBER_COMMENT;
   MissionUtils.Console.print(comment);
-  const totalMoney = await MissionUtils.Console.readLineAsync('');
-  return totalMoney;
+  const winnigNumber = await MissionUtils.Console.readLineAsync('');
+  return winnigNumber;
 }
 
 export function winningNumberSpliter(input) {
