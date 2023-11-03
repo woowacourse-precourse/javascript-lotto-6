@@ -10,9 +10,10 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+  getLottoNumbers() {
+    const randomLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return randomLottoNumber;
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
