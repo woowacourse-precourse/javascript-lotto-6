@@ -10,7 +10,7 @@ class App {
 
   async play() {
     const lottoPrice = await this.#inputView.getLottoPrice();
-    Validation.CurrencyAmount(lottoPrice);
+    Validation.inputLottoPrice(lottoPrice);
   }
 }
 
