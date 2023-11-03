@@ -16,7 +16,6 @@ class App {
 
   checkLottoPrice(lottoPrice) {
     // test code
-    Console.print(typeof lottoPrice);
     let alphabetPattern = /[a-zA-Z]/;
     if(lottoPrice.search(alphabetPattern) !== -1) throw new Error('[ERROR] 숫자만 입력하세요.');
     if (isNaN(lottoPrice)) throw new Error('[ERROR] 숫자만 입력하세요.');
@@ -64,7 +63,8 @@ class App {
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     const userBonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-    this.lotto = new Lotto(userLottoNumber);
+    const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
+    this.lotto = new Lotto(lottoNumberArray);
   }
 }
 
