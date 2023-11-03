@@ -47,6 +47,22 @@ class Lotto {
       return this.PRIZE = PRIZE.THIRD;
     }
   }
+
+  getPrize() {
+    if(this.COUNT === 6) {
+      return this.PRIZE = PRIZE.FIRST;
+    }
+    if(this.COUNT === 5 && this.BONUS) {
+      return this.qulificationSecond();
+    }
+    if(this.COUNT === 4) {
+      return this.PRIZE = PRIZE.FOURTH;
+    }
+    if(this.COUNT === 3) {
+      return this.PRIZE = PRIZE.FIFTH;
+    }
+  }
+
 }
 
 export default Lotto;
