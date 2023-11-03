@@ -22,7 +22,7 @@ class Lotto {
 
     numbers.every((number) => {
       if (!Validation.isNumber(number)) {
-        throw new CustomError(MESSAGES.ERROR.COMMON.NOT_NUMBER);
+        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
       }
 
       if (!Validation.isOnRange(number, min, max)) {
@@ -30,7 +30,7 @@ class Lotto {
       }
 
       if (!Validation.isInteger(number)) {
-        throw new CustomError(MESSAGES.ERROR.COMMON.NOT_INTEGER);
+        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_INTEGER);
       }
     });
   }
