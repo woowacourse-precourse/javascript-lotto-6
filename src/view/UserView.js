@@ -22,13 +22,11 @@ class UserView{
     }
 
     userOutputLottoCount(purchaseAmount){
-        Console.print(purchaseAmount+MESSAGE.MSG_LOTTO_COUNT);
+        Console.print(Number(purchaseAmount)/1000+MESSAGE.MSG_LOTTO_COUNT);
     }
 
     userOutputPurchaseLottoNumber(purchaseLottoNumbers){
-        purchaseLottoNumbers.forEach((lottoNumber) => {
-            Console.print(lottoNumber);
-        });
+        Console.print(purchaseLottoNumbers);
     }
 
 }

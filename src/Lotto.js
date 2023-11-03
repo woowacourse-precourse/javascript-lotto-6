@@ -1,4 +1,5 @@
 import LottoValidate from "./validate/LottoValidate.js";
+import UserView from './view/UserView.js';
 
 class Lotto {
   #numbers;
@@ -12,7 +13,9 @@ class Lotto {
     new LottoValidate().randomNumberValidate(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  userOutputPurchaseLotto() {
+    new UserView().userOutputPurchaseLottoNumber(this.#numbers);
+  }  
 }
 
 export default Lotto;

@@ -32,7 +32,7 @@ class Lottos{
 
     createRandomNumber = () => {
         const RANDOM_NUMBER = Random.pickUniqueNumbersInRange(Lottos.MIN_NUMBER, Lottos.MAX_NUMBER, Lottos.NUMBER_LENGTH);
-        this.lotto = new Lotto(RANDOM_NUMBER);
+        this.lotto = new Lotto(RANDOM_NUMBER).userOutputPurchaseLotto();
         return RANDOM_NUMBER;
     }
 
