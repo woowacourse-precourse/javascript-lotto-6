@@ -1,12 +1,16 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Console } from '@woowacourse/mission-utils';
 import Lottos from '../model/Lottos.js';
+import WinningLotto from '../model/WinningLotto.js';
 
 class LottoController {
   #lottos;
 
+  #winningLottos;
+
   async playLotto() {
     await this.inputMoney();
-    await this.inputLottoNumbers();
+    await this.inputWinningLottoNumbers();
+    await this.inputBonusLottoNumber();
   }
 
   async inputMoney() {
@@ -40,13 +44,23 @@ class LottoController {
     Console.print('');
   }
 
-  async inputLottoNumbers() {
-    const userLottoNumbers =
+  async inputWinningLottoNumbers() {
+    const winningLottoNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     Console.print('');
-    const userBonusNumber =
+
+    this.#winningLottos = winningLottoNumbers.split(',').map(Number);
+  }
+
+  async inputBonusLottoNumber() {
+    const winningBonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     Console.print('');
+
+    this.#winningLottos = new WinningLotto(
+      this.#winningLottos,
+      Number(winningBonusNumber),
+    );
   }
 }
 
