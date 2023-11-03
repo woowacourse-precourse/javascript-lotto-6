@@ -1,21 +1,16 @@
-import Purchase from "./Purchase.js";
 import WinNumber from "./WinNumber.js";
 import LottoData from "./LottoData.js";
 import Result from "./Result.js";
 import Lotto from "./Lotto.js";
-import { OUTPUT } from "./Constants.js";
-import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async play() {
-    const purchase = new Purchase();
+    const lottoData = new LottoData();
     const winNumber = new WinNumber();
 
-    await purchase.inputPurchaseAmount();
-    purchase.printLottoCount();
-
-    const lottoData = new LottoData(purchase.getLottoCount());
-    lottoData.iterLotto();
+    await lottoData.inputPurchaseAmount();
+    lottoData.printLottoCount();
+    lottoData.pickRandomLotto();
 
     await winNumber.inputWinNumber();
     await winNumber.inputBonusNumber();
@@ -35,7 +30,7 @@ class App {
 
     result.printResult();
     result.printRateOfReturn(
-      purchase.getLottoCount() * 1000,
+      lottoData.getLottoCount() * 1000,
       result.getWinningAmount()
     );
   }
