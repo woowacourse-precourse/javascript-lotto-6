@@ -4,11 +4,19 @@ import { SETTING } from "../constants/Settings.js";
 
 class OutputView {
   static async printLottoPaperCount(number) {
-    Console.print(`\n${number}${CONSOLE_MESSAGE.outputLottoNumber}`);
+    try {
+      Console.print(`\n${number}${CONSOLE_MESSAGE.outputLottoNumber}`);
+    } catch (error) {
+      throw error;
+    }
   }
 
   static async printLotto(number) {
-    Console.print(number);
+    try {
+      Console.print(number);
+    } catch (error) {
+      throw error;
+    }
   }
 
   static printLottoResult(list) {
