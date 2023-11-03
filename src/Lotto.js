@@ -1,5 +1,5 @@
 import ERROR_MESSAGE from "./Errors";
-import View from "./ViewTemp";
+import View from "./View";
 
 class Lotto {
   #numbers;
