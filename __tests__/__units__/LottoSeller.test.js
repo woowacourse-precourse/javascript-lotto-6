@@ -1,6 +1,7 @@
 import { MESSAGES } from "../../src/constants";
 import { LottoSeller } from "../../src/domain";
 import { CustomError } from "../../src/exception";
+import { mockQuestions } from "../../src/utils";
 
 const LOTTO_PRICE = 1000;
 
@@ -41,22 +42,24 @@ describe("LottoSeller 유닛 테스트", () => {
   describe("지불한 금액 유효성 검증", () => {
     // given
     const { NOT_NUMBER, NOT_POSITIVE, NOT_MULTIPLE_OF } = MESSAGES.ERROR.BUY;
-    const validPaidAmounts = [[10000, 15000, 20000]];
+    const validPaidAmounts = [[[10000], [15000], [20000]]];
     const inValidPaidAmountsAndErrorMessages = [
-      ["오천냥", NOT_NUMBER],
-      [-1000, NOT_POSITIVE],
-      [1000.15, NOT_MULTIPLE_OF(LOTTO_PRICE)],
-      [1500, NOT_MULTIPLE_OF(LOTTO_PRICE)],
+      [["오천냥"], NOT_NUMBER],
+      [[-1000], NOT_POSITIVE],
+      [[1000.15], NOT_MULTIPLE_OF(LOTTO_PRICE)],
+      [[1500], NOT_MULTIPLE_OF(LOTTO_PRICE)],
     ];
 
-    test.each(validPaidAmounts)("올바른 케이스", (paidAmount) => {
-      expect(() => lottoSeller.sellLotto(paidAmount)).not.toThrow();
+    test.each(validPaidAmounts)("올바른 케이스", async (paidAmount) => {
+      mockQuestions(paidAmount);
+      await expect(lottoSeller.sellLotto()).resolves.not.toThrow();
     });
 
     test.each(inValidPaidAmountsAndErrorMessages)(
       "틀린 케이스",
-      (paidAmount, errorMessage) => {
-        expect(() => lottoSeller.sellLotto(paidAmount)).toThrow(
+      async (paidAmount, errorMessage) => {
+        mockQuestions(paidAmount);
+        await expect(lottoSeller.sellLotto()).rejects.toThrow(
           new CustomError(errorMessage)
         );
       }
