@@ -51,3 +51,10 @@ export function winningNumberSpliter(input) {
   const winningNumberSplit = input.split(',');
   return winningNumberSplit;
 }
+
+export async function winnningNumberValidater(input) {
+  if (/^[+]?[1-9]\d*$/.test(input)) {
+    return Number(input);
+  } 
+  throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+}

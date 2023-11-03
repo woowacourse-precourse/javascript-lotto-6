@@ -1,4 +1,4 @@
-import { winningNumberSpliter } from "../src/App.js";
+import { winningNumberSpliter, winnningNumberValidater } from "../src/App.js";
 
 describe("당첨 번호 입력 테스트", () => {
   test("당첨 번호를 쉼표로 구분한다.", () => {
@@ -17,6 +17,6 @@ describe("당첨 번호 입력 테스트", () => {
   ])("당첨 번호 입력중 하나라도 숫자가 아닐 경우, 에러가 발생한다.", (inputs) => {
   
     // then
-    expect(inputMoneyValidater(inputs)).rejects.toThrow("[ERROR]");
+    expect(winnningNumberValidater(inputs)).rejects.toThrow("[ERROR]");
   });
 });
