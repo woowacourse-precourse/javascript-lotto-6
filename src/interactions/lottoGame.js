@@ -6,13 +6,19 @@ import lottoGameConsole from '../cli/lottoGameConsole.js';
 
 import systemErrorHandler from '../error/handlers/systemErrorHandler.js';
 
-const requestLottoNumbers = (purchasedLottoAmount) =>
+const requireWinningLottoNumber = () =>
+  systemErrorHandler.retryOnErrors(async () => {
+    const winningLottoNumbers = await lottoGameConsole.input.readWinningLottoNumber();
+    return winningLottoNumbers;
+  });
+
+const requireLottoNumbers = (purchasedLottoAmount) =>
   lottoPurchase.generateLottoNumbers({
     randomNumberGenerator: Random,
     purchasedLottoAmount,
   });
 
-const requirePurchasedLottoAmount = async () =>
+const requirePurchasedLottoAmount = () =>
   systemErrorHandler.retryOnErrors(async () => {
     const purchasedLottoAmount = await lottoGameConsole.input.readPurchasedLottoAmount();
     return purchasedLottoAmount;
@@ -20,7 +26,7 @@ const requirePurchasedLottoAmount = async () =>
 
 const processLottoPurchase = async () => {
   const purchasedLottoAmount = await requirePurchasedLottoAmount();
-  const lottoNumbers = requestLottoNumbers(purchasedLottoAmount);
+  const lottoNumbers = requireLottoNumbers(purchasedLottoAmount);
 
   lottoGameConsole.output.printLottoNumbers(lottoNumbers);
 
@@ -29,7 +35,9 @@ const processLottoPurchase = async () => {
 
 const lottoGame = {
   async run() {
-    processLottoPurchase();
+    await processLottoPurchase();
+    const winningLottoNumbers = await requireWinningLottoNumber();
+    console.log(winningLottoNumbers);
   },
 };
 

@@ -5,17 +5,27 @@ import { validatePurchasedLottoAmount } from '../validations/purchasedLottoAmoun
 import { SYMBOLS } from '../constants/symbols.js';
 
 import systemConsole from './systemConsole.js';
+import { validateLottoNumber } from '../validations/lottoNumberValidation.js';
 
 const lottoGameConsole = Object.freeze({
   input: Object.freeze({
     messages: Object.freeze({
       purchasedLottoAmount: '구입금액을 입력해 주세요.\n',
+      winningLottoNumber: '당첨 번호를 입력해 주세요.\n',
     }),
 
     async readPurchasedLottoAmount() {
       const purchasedLottoAmount = await systemConsole.read(this.messages.purchasedLottoAmount);
       validatePurchasedLottoAmount(Number(purchasedLottoAmount));
       return purchasedLottoAmount;
+    },
+
+    async readWinningLottoNumber() {
+      const winningLottoNumber = (await systemConsole.read(this.messages.winningLottoNumber))
+        .split(SYMBOLS.comma)
+        .map(Number);
+      validateLottoNumber(winningLottoNumber);
+      return winningLottoNumber;
     },
   }),
 
