@@ -22,6 +22,17 @@ class Lotto {
       Console.print(lottoNumbers);
     }
   }
+
+  enterDrawNumbers() {
+    const input = Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    const drawNumbers = input.split(",");
+    return drawNumbers;
+  }
+
+  enterBonusNumber() {
+    const bonusNumber = Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    return bonusNumber;
+  }
 }
 
 export default Lotto;
