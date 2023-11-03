@@ -71,6 +71,7 @@ class App {
     this.checkBonusNumber(userBonusNumber);
     const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
     const lotto = new Lotto(lottoNumberArray);
+    lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
   }
 }
 

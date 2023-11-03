@@ -1,3 +1,5 @@
+import { Console, Random } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -25,7 +27,17 @@ class Lotto {
   getNumbersSet(numbers) {
     return new Set(numbers.map(Number));
   }
-  // TODO: 추가 기능 구현
+
+  countEqualNumbers(randomNumberArray, userLottoNumber){
+    return randomNumberArray.filter(number => userLottoNumber.includes(number)).length;
+  }
+
+  compareLottoNumbers(lottoRandomNumber, userLottoNumber, userBonusNumber){
+    const lottoResult = [];
+    lottoRandomNumber.forEach(randomNumberArray => {
+      const equalNumbers = this.countEqualNumbers(randomNumberArray, userLottoNumber);
+    });
+  }
 }
 
 export default Lotto;
