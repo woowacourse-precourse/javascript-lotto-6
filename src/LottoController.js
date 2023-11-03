@@ -12,6 +12,10 @@ class LottoController {
     if (!Validator.isStringOnlyDigits(string)) {
       throw new Error(LOTTO_CONTROLLER.ERROR.PRICE_NOT_NUMBER);
     }
+
+    if (!Validator.isDivisibleBy1000(+string)) {
+      throw new Error(LOTTO_CONTROLLER.ERROR.PRICE_NOT_DIVISIBLE);
+    }
   }
 }
 
