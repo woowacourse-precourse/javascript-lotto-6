@@ -54,6 +54,9 @@ class App {
     }
   }
 
+  /* 
+  🐛FIX: DI로 구현할 것
+  */
   async #generateBonus() {
     try {
       const answer = await InputView.getBonus();

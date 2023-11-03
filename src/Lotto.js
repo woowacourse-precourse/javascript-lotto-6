@@ -6,6 +6,9 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  /*
+  🤔당첨번호와 중복여부도 판단해야하는지?
+  */
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 당첨번호를 6자리 이하로 입력해주세요.');
