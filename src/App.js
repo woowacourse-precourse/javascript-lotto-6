@@ -21,6 +21,7 @@ class App {
     this.inputLottoNum = await this.inputMyLottoNumber();
     this.inputLottoNumArr = this.convertToArr(this.inputLottoNum);
     this.checkValidateInputLottoNum(this.inputLottoNumArr);
+    this.bonus = await this.inputBonusNumber();
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -69,6 +70,11 @@ class App {
     if (inputNum.length !== new Set(inputNum).size) {
       throw new Error("[ERROR] 중복된 숫자는 입력하면 안 됩니다.");
     }
+  }
+
+  async inputBonusNumber() {
+    const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    return input;
   }
 }
 
