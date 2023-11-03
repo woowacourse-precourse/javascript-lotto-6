@@ -6,7 +6,7 @@ class LottoRankMaker {
 
   #bonusNumber;
 
-  #rankingArray = [];
+  #rankArray = [];
 
   constructor(lottoTicket, luckyBonusArray) {
     this.#lottoTicket = lottoTicket;
@@ -43,20 +43,20 @@ class LottoRankMaker {
     if (luckyCount === 3) return 5;
   }
 
-  #makeRankingArray() {
+  #rankUpdate() {
     this.#lottoTicket.forEach((lottoArray) => {
       const rank = this.#rankFilter(lottoArray);
       
       if(rank !== 0) {
-        this.#rankingArray.push(this.#rankFilter(lottoArray));
+        this.#rankArray.push(this.#rankFilter(lottoArray));
       }   
     })
   }
 
-  getResult() {
-    this.#makeRankingArray();
+  getRankArray() {
+    this.#rankUpdate();
 
-    return this.#rankingArray;
+    return this.#rankArray;
   }
 
 }
