@@ -1,5 +1,6 @@
 import LottoError from "../../src/Error/LottoError.js";
 import Lotto from "../../src/Models/Lotto.js";
+import LOTTO_SETTINGS from "../../src/config/gameSetting.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -19,5 +20,9 @@ describe("로또 클래스 테스트", () => {
     expect(new Lotto([6, 5, 4, 3, 2, 1]).getNumbers()).toEqual([
       1, 2, 3, 4, 5, 6,
     ]);
+  });
+
+  test(`로또 번호는 ${LOTTO_SETTINGS.NUMBER_RANGE.MIN} 이상  ${LOTTO_SETTINGS.NUMBER_RANGE.MAX} 이하여야한다.`, () => {
+    expect(() => new Lotto([1, 2, 3, 4, 5, 90])).toThrow(LottoError.PREFIX);
   });
 });
