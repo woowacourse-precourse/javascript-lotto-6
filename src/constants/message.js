@@ -9,6 +9,7 @@ export const MESSAGE = {
     return `[${lotto.join(SEPARATOR.PURCHASED_LOTTO)}]`;
   },
   GET_USER_LOTTO: "\n당첨 번호를 입력해 주세요.\n",
+  GET_USER_BONUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
 };
 
 export const ERROR = {

@@ -12,6 +12,11 @@ class Print {
     return lotto;
   }
 
+  static async getUserBonusNumber() {
+    const bonus = await Console.readLineAsync(MESSAGE.GET_USER_BONUS_NUMBER);
+    return bonus;
+  }
+
   static showPurchaseMessage(amount) {
     Console.print(MESSAGE.SHOW_LOTTO_AMOUNT(amount));
   }

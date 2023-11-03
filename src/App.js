@@ -36,9 +36,19 @@ class App {
     try {
       const userLotto = await Print.getUserLottoNumber();
       const validLotto = new Lotto(userLotto);
+      await this.getUserBonusInput();
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.getUserLottoInput();
+    }
+  }
+
+  async getUserBonusInput() {
+    try {
+      const bonus = await Print.getUserBonusNumber();
+    } catch (error) {
+      Print.showErrorMessage(error.message);
+      await this.getUserBonusInput();
     }
   }
 }
