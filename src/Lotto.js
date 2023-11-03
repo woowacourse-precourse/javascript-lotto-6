@@ -68,7 +68,7 @@ class Lotto {
       if(amount) prizeMoney += amount * money[index];
     })
     rate = ((prizeMoney - investment)/ investment)*100;
-    rate = 1- (Math.round(rate * 10) / 10);
+    rate = 100 + (Math.round(rate * 100) / 100);
     return rate;
   }
 }
