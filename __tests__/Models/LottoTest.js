@@ -16,8 +16,8 @@ describe("로또 클래스 테스트", () => {
   });
 
   test("로또 번호는 오름차순으로 정렬되어야한다.", () => {
-    expect(() => {
-      new Lotto([6, 5, 4, 3, 2, 1]).numbers;
-    }).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(new Lotto([6, 5, 4, 3, 2, 1]).getNumbers()).toEqual([
+      1, 2, 3, 4, 5, 6,
+    ]);
   });
 });
