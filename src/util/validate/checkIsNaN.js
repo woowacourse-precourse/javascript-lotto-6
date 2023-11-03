@@ -1,4 +1,4 @@
-import ERROR_CODE from '../error/errorCode';
+import ERROR_CODE from '../error/errorCode.js';
 
 export function checkIsNaN(verifyValue) {
   const parsedValue = Number(verifyValue);

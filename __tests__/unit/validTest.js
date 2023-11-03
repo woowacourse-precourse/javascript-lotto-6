@@ -20,6 +20,16 @@ describe('[Lotto] 유효성 검사 테스트', () => {
 });
 
 describe('[function] 유효성 검사 테스트 ', () => {
+  test('입력값에 중복값이 존재할 경우 에러를 발생 시킨다', () => {
+    // given
+    const testValue = [1, 2, 2, 3, 4, 5];
+
+    // when
+    expect(() => {
+      checkHasDuplicate(testValue);
+    }).toThrow(`${ERROR_CODE.isDuplicated}`);
+  });
+
   test('구입 금액이 1000으로 나누어 떨어지지 않는 경우 에러를 발생시킨다', () => {
     // give
     const input = 9999999;
@@ -32,7 +42,7 @@ describe('[function] 유효성 검사 테스트 ', () => {
     }).toThrow(`${ERROR_CODE.hasRemainder}`);
   });
 
-  test('입력값이 숫자 이외의 값이 결우 에러를 발생시킨다', () => {
+  test('입력값이 숫자 이외의 값이 경우 에러를 발생시킨다', () => {
     // given
     const firstTestInput = 'a';
     const secondTestInput = ';';
