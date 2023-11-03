@@ -26,4 +26,12 @@ describe("InputView 클래스 테스트", () => {
 
     expect(numbers).toBe("1");
   });
+
+  test("로또 구입 금액 입력 받기", async () => {
+    mockQuestions(["12,000 "]);
+
+    const money = await InputView.promptToBuyLottos();
+
+    expect(money).toEqual("12,000");
+  });
 });
