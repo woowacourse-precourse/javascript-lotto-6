@@ -12,15 +12,15 @@ const isNumber = (purchaseAmount) => {
     return true;
 }
 
-const isNumberLengthValid = (winningNumbers) => {
-    const winningNumberArray = winningNumbers.split(",");
-    const winningNumberSet = new Set(winningNumberArray);
-    winningNumberArray.forEach((number)=>{
+const isNumberLengthValid = (number) => {
+    const numberArray = number.toString().split(",");
+    const NumberSet = new Set(numberArray);
+    numberArray.forEach((number)=>{
         if(isNumberInRange(number)){
-            winningNumberSet.add(number);
+            NumberSet.add(number);
         }
-    })
-    return winningNumberSet.size === 6;
+    });
+    return NumberSet.size === 6;
 }
 
 const isNumberInRange = (number) => {
