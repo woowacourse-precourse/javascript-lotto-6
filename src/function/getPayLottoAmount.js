@@ -6,6 +6,8 @@
 - [x] 입력된 금액을 1000으로 나누는 함수를 생성한다
 */
 
+import { Console } from "@woowacourse/mission-utils";
+
 export const getPayLottoAmount = async () => {
   const lottoPurchaseAmount = await Console.readLineAsync("구입금액을 입력해 주세요.");
 
