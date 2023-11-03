@@ -1,7 +1,8 @@
 import { LOTTO_RULE, MESSAGES } from "../../constants";
 import { CustomError } from "../../exception";
 import { Validation, pickUniqueNumbersInRange } from "../../utils";
-import { InputView } from "../../view";
+import { InputView, OutputView } from "../../view";
+import { Lotto } from "../Lotto";
 
 const { MIN, MAX } = LOTTO_RULE.RANGE;
 const { LENGTH } = LOTTO_RULE;
@@ -18,7 +19,8 @@ export class LottoSeller {
     const paidAmount = await InputView.readLine(MESSAGES.BUY);
     this.#validatePaidAmount(paidAmount);
     const amount = this.#calculateLottoAmount(paidAmount);
-    this.#publishLottos(amount);
+    OutputView.print(MESSAGES.BUY.RESULT(amount));
+    return this.#issueLottos(amount);
   }
 
   #validateLottoPrice(lottoPrice) {
@@ -57,5 +59,16 @@ export class LottoSeller {
 
   #generateLottoNumber() {
     return pickUniqueNumbersInRange(MIN, MAX, LENGTH);
+  }
+
+  #issueLottos(amount) {
+    const lottos = [];
+    for (let i = 0; i < amount; i++) {
+      const lottoNumber = this.#generateLottoNumber();
+      const lotto = new Lotto(lottoNumber);
+      lotto.printNumbers();
+      lottos.push(lotto);
+    }
+    return lottos;
   }
 }
