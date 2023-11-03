@@ -1,14 +1,14 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
-import InputView from './Client/InputView.js';
+import LottoPos from './Client/LottoPos.js';
 
 class App {
   constructor() {
-    this.inputView = new InputView();
+    this.LottoPos = new LottoPos();
   }
 
   async play() {
-    await this.inputView.inputPurchaseAmount();
+    await this.LottoPos.inputPurchaseAmount();
   }
 }
 
