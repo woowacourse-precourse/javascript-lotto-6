@@ -10,16 +10,21 @@ class Lotto {
   }
 
   #validate(numbers) {
+    this.#validateLength(numbers);
+    this.#validateDuplicate(numbers);
+  }
+
+  #validateLength(numbers) {
     if (!Validator.checkArrayLength(numbers, LOTTO.SIZE)) {
       throw new Error(LOTTO.ERROR.SIZE);
     }
+  }
 
+  #validateDuplicate(numbers) {
     if (Validator.checkArrayForDuplicate(numbers)) {
       throw new Error(LOTTO.ERROR.DUPLICATE);
     }
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
