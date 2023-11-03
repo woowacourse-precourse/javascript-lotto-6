@@ -45,10 +45,35 @@ class App {
     }
   }
 
+  static #isNumbers(numbers) {
+    const regex = /^\d+(,\d+){5}$/;
+    return regex.test(numbers);
+  }
+
+  static #isLottoNumbers(numbers) {
+    for (let i = 0; i < numbers.length; i += 1) {
+      if (numbers[i] < 1 || numbers[i] > 45) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  static #validateWinningNumbers(numbers) {
+    if (!App.#isNumbers(numbers)) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+    const splitedNumbers = numbers.split(",").map(Number);
+    if (!App.#isLottoNumbers(splitedNumbers)) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+  }
+
   async getWinningNumbers() {
     const numbers = await MissionUtils.Console.readLineAsync(
       "당첨 번호를 입력해 주세요.\n",
     );
+    App.#validateWinningNumbers(numbers);
     this.#winningNumbers = new Set(numbers.split(" "));
   }
 
