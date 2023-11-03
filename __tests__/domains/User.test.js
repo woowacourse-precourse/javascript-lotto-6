@@ -10,7 +10,7 @@ const mockRandoms = (numbers) => {
 
 describe('User - 구입 금액 유효성 검사 테스트', () => {
   test.each(
-    ['오백원', '0', '400', '3578', '-2000']
+    ['오백원', '0', '1000.5', '400', '3578', '-2000']
   )('구입 금액이 1000의 배수인 자연수가 아닌 경우, BalanceTypeError을 반환한다.', (input) => {
     const result = () => new User(input);
 
