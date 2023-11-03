@@ -50,4 +50,18 @@ describe("LottoYeildCaculator 클래스 테스트", () => {
     const drawnLotto = new DrawnLotto(["1", "2", "7", "8", "9", "10"], "11");
     expect(LottoYieldCalculator.calculate(lotto, drawnLotto)).toBe(0);
   });
+
+  test("로또가 여러개 때 총 당첨금액 구하기", () => {
+    const lottos = [
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "7", "8", "9", "10"]), // 1등
+      new Lotto(["1", "2", "3", "4", "5", "6"]),
+      new Lotto(["1", "2", "3", "4", "5", "7"]), // 5등
+    ];
+    const drawnLotto = new DrawnLotto(["1", "2", "7", "8", "9", "10"], "11");
+    expect(LottoYieldCalculator.getTotalPrize(lottos, drawnLotto)).toBe(
+      PRIZES.FIFTH + PRIZES.FIRST
+    );
+  });
 });
