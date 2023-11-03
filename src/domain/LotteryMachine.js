@@ -56,6 +56,6 @@ class LotteryMachine {
 }
 
 export default LotteryMachine;
-
+/*
 const a = new LotteryMachine(7000);
-console.log(a.getTiket());
+console.log(a.getTiket());*/

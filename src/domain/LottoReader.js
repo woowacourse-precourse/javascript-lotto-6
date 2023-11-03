@@ -1,18 +1,15 @@
-
+import { LOTTO_RULE } from "../constants/BusinessNumber.js";
 import LottoRankMaker from "./LottoRankMaker.js";
 import LottoStatistics from "./LottoStatistics.js";
 
 
-class LottoReader extends LottoRankMaker{
-  
-  
+class LottoReader extends LottoRankMaker {
   #purchaseAmount = 0;
+
   // ( [로또티켓 2차원배열] [당첨배열+보너스배열] )  로또티켓으로 구입금액 유츄가능
   constructor(lottoTicket, luckyBonusArray) {
-    super(lottoTicket,luckyBonusArray);
-     
-    this.#purchaseAmount = lottoTicket.length * 1000;
-    
+    super(lottoTicket,luckyBonusArray); 
+    this.#purchaseAmount = lottoTicket.length * LOTTO_RULE.buyUnit;
   }
 
   start() {
@@ -25,7 +22,7 @@ class LottoReader extends LottoRankMaker{
 
   
 }
-
+/*
 const ticket = [
   [8, 21, 23, 41, 42, 43],
   [3, 5, 11, 16, 32, 38],
@@ -44,4 +41,4 @@ const ticket2 = [
 const answer = [1,2,3,4,5,6,7]
 
 const a = new LottoReader(ticket, answer);
-console.log(a.start());
+console.log(a.start());*/
