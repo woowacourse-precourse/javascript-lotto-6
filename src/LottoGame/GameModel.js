@@ -5,6 +5,7 @@ export default class GameModel {
   constructor() {
     this.LOTTO_COUNT = 0;
     this.LOTTOS = [];
+    this.WINNING_NUMBER = [];
   }
 
   lottoCount(buyingMoney) {
@@ -19,5 +20,10 @@ export default class GameModel {
       const lotto = new Lotto(number);
       this.LOTTOS.push(lotto);
     }
+  }
+
+  generateWinningNumber(winningNumber) {
+    const number = new Lotto(winningNumber);
+    this.WINNING_NUMBER = number.getLottoNumber();
   }
 }

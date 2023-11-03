@@ -14,4 +14,8 @@ export default class GameView {
 
     MissionUtils.Console.print(allLottos);
   }
+
+  async printWinningNumber(winningNumber) {
+    MissionUtils.Console.print(winningNumber);
+  }
 }

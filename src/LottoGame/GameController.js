@@ -11,14 +11,22 @@ export default class GameController {
     this.model = new GameModel();
   }
   async start() {
+    // 로또 구매 금액을 입력받음
     this.view.printGameMessage(GameText.GET_BUYING_MONEY);
     const buyingMoney = await this.getUserInput();
     MissionUtils.Console.print(`사용자 입력 금액 ${buyingMoney}`);
     this.util.buyingMoneyValidator(buyingMoney);
 
+    // 로또 번호를 생성하고 출력
     this.model.lottoCount(buyingMoney);
     this.model.generateLotto(this.model.LOTTO_COUNT);
     this.view.printLottos(this.model.LOTTOS, this.model.LOTTO_COUNT);
+
+    // 당첨번호 생성
+    this.view.printGameMessage(GameText.GET_WINNING_NUMBER);
+    const winningNumber = await this.getUserInput();
+    this.model.generateWinningNumber(winningNumber.split(","));
+    this.view.printWinningNumber(this.model.WINNING_NUMBER.join(", "));
   }
 
   async getUserInput() {
