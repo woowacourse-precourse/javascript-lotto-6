@@ -42,4 +42,5 @@ export function printResult(prize) {
   MissionUtils.Console.print(
     `5개 일치, 보너스 볼 일치 (30,000,000원) - ${prize[3]}개`
   );
+  MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${prize[4]}개`);
 }

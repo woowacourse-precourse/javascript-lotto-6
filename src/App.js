@@ -16,8 +16,8 @@ class App {
     NUMBER_GUESS = NUMBER_GUESS.map(Number);
     let NUMBER_BONUS = await func.getBonusNumber();
     NUMBER_BONUS = Number(NUMBER_BONUS);
-    LOTTO_MACHINE.machinePrize(NUMBER_GUESS, NUMBER_BONUS);
-    console.log(LOTTO_MACHINE.prize);
+    LOTTO_MACHINE.calcPrize(NUMBER_GUESS, NUMBER_BONUS);
+    LOTTO_MACHINE.printResult();
   }
 }
 

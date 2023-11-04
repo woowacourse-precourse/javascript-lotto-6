@@ -34,11 +34,10 @@ export class LottoMachine {
     }
   }
 
-  machinePrize(NUMBER_GUESS, NUMBER_BONUS) {
+  calcPrize(NUMBER_GUESS, NUMBER_BONUS) {
     for (let cnt = 0; cnt < this.quantity; cnt++) {
       let NUMBER_CORRECT = this.inventory[cnt].calcGuess(NUMBER_GUESS);
       let IS_BONUS = this.inventory[cnt].isBonus(NUMBER_BONUS);
-      console.log(IS_BONUS);
       this.#addPrize(NUMBER_CORRECT, IS_BONUS);
     }
   }
@@ -59,5 +58,18 @@ export class LottoMachine {
     if (NUMBER_CORRECT === 6) {
       this.prize[4]++;
     }
+  }
+
+  printResult() {
+    MissionUtils.Console.print("\n당첨 통계\n___");
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${this.prize[0]}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${this.prize[1]}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${this.prize[2]}개`);
+    MissionUtils.Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.prize[3]}개`
+    );
+    MissionUtils.Console.print(
+      `6개 일치 (2,000,000,000원) - ${this.prize[4]}개`
+    );
   }
 }
