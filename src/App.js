@@ -61,6 +61,10 @@ class App {
     Console.print(`총 수익률은 ${lottoRate}%입니다.`);
   }
 
+  getLottoNumberArray(userLottoNumber){
+    return userLottoNumber.split(',').map((value) => Number(value));
+  }
+
   async play() {
     try{
       const lottoPrice =
@@ -80,7 +84,7 @@ class App {
       const userBonusNumber =
         await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
       this.checkBonusNumber(userBonusNumber);
-      const lottoNumberArray = userLottoNumber.split(',').map((value) => Number(value));
+      const lottoNumberArray = this.getLottoNumberArray(userLottoNumber);
       const lotto = new Lotto(lottoNumberArray);
       let lottoResult = lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
       const lottoRate = lotto.getLottoRate(lottoResult, lottoPrice);
