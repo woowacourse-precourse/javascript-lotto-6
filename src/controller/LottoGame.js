@@ -21,7 +21,8 @@ class LottoGame {
     const bonusNumber = await this.#getBonusNumber();
     const totalRank = this.#lottoBundle.getTotalRank(winningLotto, bonusNumber);
 
-    const totalReward = this.#getReward(totalRank);
+    const reward = this.#getReward(totalRank);
+    const profitRate = this.#getProfitRate(reward, lottoCount);
   }
 
   async #getLottoCount() {
@@ -69,6 +70,10 @@ class LottoGame {
 
   #getReward(totalRank) {
     return totalRank.reduce((sum, count, index) => sum + RANK.reward[index] * count, 0);
+  }
+
+  #getProfitRate(reward, lottoCount) {
+    return ((reward / (lottoCount * CONSTANT.amountUnit)) * 100).toFixed(1);
   }
 }
 
