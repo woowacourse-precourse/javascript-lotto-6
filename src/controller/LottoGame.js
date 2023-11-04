@@ -6,7 +6,9 @@ import WinLotto from '../model/WinLotto.js';
 
 class LottoGame {
   #buyer;
+
   #winLotto;
+
   #bonusLotto;
 
   async start() {

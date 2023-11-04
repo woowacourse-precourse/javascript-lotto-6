@@ -4,13 +4,14 @@ import Util from '../utils/Util.js';
 
 class Buyer {
   #budget;
+
   #lottoList;
 
   constructor(budget) {
     this.#validate(budget);
     this.#budget = budget;
     this.#lottoList = [];
-    this.setLottoList();
+    this.#setLottoList();
   }
 
   #validate(budget) {
@@ -23,7 +24,7 @@ class Buyer {
     return this.#budget / LOTTO.price;
   }
 
-  setLottoList() {
+  #setLottoList() {
     for (let i = 0; i < this.getPurchaseCount(); i += 1) {
       const lotto = new Lotto(Util.createLottoNumber()).getLotto();
       this.#lottoList.push(lotto);

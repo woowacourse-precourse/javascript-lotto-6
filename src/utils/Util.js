@@ -3,7 +3,7 @@ import { LOTTO } from '../constant/constant.js';
 
 class Util {
   static createLottoNumber() {
-    const lotto = Random.pickUniqueNumbersInRange(LOTTO.minRange, LOTTO.maxRange, LOTTO.numberCount);
+    const lotto = Random.pickUniqueNumbersInRange(LOTTO.minRange, LOTTO.maxRange, LOTTO.length);
     return this.sortAscendingArray(lotto);
   }
 

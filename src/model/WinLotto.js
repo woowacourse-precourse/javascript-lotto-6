@@ -4,10 +4,6 @@ import { ERROR, LOTTO, REGEX } from '../constant/constant.js';
 class WinLotto extends Lotto {
   #bonusLotto;
 
-  constructor(numbers) {
-    super(numbers);
-  }
-
   setBonusLotto(bonusLotto) {
     this.#validateBonus(bonusLotto);
     this.#bonusLotto = bonusLotto;
