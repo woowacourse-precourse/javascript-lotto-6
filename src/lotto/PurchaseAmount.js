@@ -1,5 +1,5 @@
-import { validatePurchaseAmount, inputMethod } from '../utils/index.js';
-import { magicNumber, uiConstants } from '../constants/index.js';
+import { validatePurchaseAmount } from '../utils/index.js';
+import { magicNumber } from '../constants/index.js';
 
 export default class PurchaseAmount {
   #purchaseAmount;

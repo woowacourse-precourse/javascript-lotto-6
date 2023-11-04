@@ -1,5 +1,4 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { uiConstants } from '../constants/index.js';
 
 export async function inputMethod(inputConst) {
   const input = await MissionUtils.Console.readLineAsync(inputConst);
