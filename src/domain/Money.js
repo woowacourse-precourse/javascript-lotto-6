@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from "../src/constants/messages.js";
-import { REGEX } from "../src/constants/regex.js";
+import { ERROR_MESSAGE } from "../constants/messages.js";
+import { REGEX } from "../constants/regex.js";
 
 class Money {
   #amount = 0;
