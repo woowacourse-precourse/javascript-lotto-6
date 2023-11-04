@@ -23,9 +23,10 @@ class Lotto {
 
   getMatchingCount(winningLotto, bonusNumber) {
     const matchingCount = this.#countMatchingNumbers(winningLotto);
-    if (matchingCount === RANK.secondPrize && this.#hasBonusNumber(bonusNumber)) {
-      return RANK.bonusPrize;
+    if (matchingCount === RANK.second.match && this.#hasBonusNumber(bonusNumber)) {
+      return RANK.bonus.match;
     }
+
     return matchingCount;
   }
 

@@ -13,6 +13,14 @@ export const LOTTO_NUMBER = Object.freeze({
   count: 6,
 });
 
+export const RANK = Object.freeze({
+  first: { match: 6, index: 0 },
+  bonus: { match: 0, index: 1 },
+  second: { match: 5, index: 2 },
+  third: { match: 4, index: 3 },
+  fourth: { match: 3, index: 4 },
+});
+
 export const MESSAGE = Object.freeze({
   enterAmount: '구입금액을 입력해 주세요.\n',
   buyLotto: '개를 구매했습니다.',

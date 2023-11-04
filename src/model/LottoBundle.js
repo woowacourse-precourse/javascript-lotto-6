@@ -25,6 +25,12 @@ class LottoBundle {
   getTotalLottoNumberString() {
     return this.#lottoList.map((lotto) => lotto.getNumberString()).join('\n');
   }
+  getRankIndex(matchingCount) {
+    return Object.values(RANK).reduce(
+      (rankIndex, rankItem) => (rankItem.match === matchingCount ? rankItem.index : rankIndex),
+      0,
+    );
+  }
 }
 
 export default LottoBundle;
