@@ -1,6 +1,12 @@
 import { LOTTO_PRICE } from '../constants/message/setting.js';
 
 class MoneyValidator {
+  static validate(money) {
+    this.validateNumber(money);
+    this.validateLottoPurchaseAmount(money);
+    this.validateLottoAmountExactness(money);
+  }
+
   static validateNumber(money) {
     if (Number.isNaN(money)) {
       throw new Error('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
