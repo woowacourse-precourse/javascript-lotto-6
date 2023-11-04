@@ -7,7 +7,11 @@ class App {
     const lottoArray = await ConvertInputTo.lottoArray();
     Print.purchasedLotto(lottoArray);
     const lottoBoard = await ConvertInputTo.lottoBoard();
-    Print.lottoResult(Get.lottoResult(lottoArray, lottoBoard));
+    const lottoResult = Get.lottoResult(lottoArray, lottoBoard);
+    Print.lottoResult(lottoResult);
+    Print.lottoReturnRatio(
+      Get.lottoReturnRatio(lottoResult, lottoArray.length)
+    );
   }
 }
 

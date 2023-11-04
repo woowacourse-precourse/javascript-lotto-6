@@ -23,6 +23,9 @@ const STRINGS = Object.freeze({
   FOURTH_PLACE_RESULT_HEADER: '4개 일치 (50,000원)',
   FIFTH_PLACE_RESULT_HEADER: '3개 일치 (5,000원)',
 
+  RETURN_RATIO_HEADER: '총 수익률은 ',
+  RETURN_RATIO_FOOTER: '%입니다.',
+
   STRING_TYPE: 'string',
   BLANK: '',
   LOTTO_FRONT_COVER: '[',

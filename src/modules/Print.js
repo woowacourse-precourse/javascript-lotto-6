@@ -12,6 +12,8 @@ const {
   THIRD_PLACE_RESULT_HEADER,
   FOURTH_PLACE_RESULT_HEADER,
   FIFTH_PLACE_RESULT_HEADER,
+  RETURN_RATIO_HEADER,
+  RETURN_RATIO_FOOTER,
   DASH,
   SPACE,
   UNIT_OF_LOTTO,
@@ -45,6 +47,12 @@ class Print {
     Print.thirdPlaceResult(resultArray);
     Print.secondPlaceResult(resultArray);
     Print.firstPlaceResult(resultArray);
+  }
+
+  static lottoReturnRatio(returnRatio) {
+    Console.print(
+      `${RETURN_RATIO_HEADER}${returnRatio.toFixed(1)}${RETURN_RATIO_FOOTER}`
+    );
   }
 
   static fifthPlaceResult(resultArray) {
