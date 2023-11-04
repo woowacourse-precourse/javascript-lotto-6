@@ -12,15 +12,21 @@ class App {
       LOTTO_INPUT_MESSAGE.cost
     );
 
-    const numOfLotto = purchaseCost / 1000;
-
     if (purchaseCost % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.isInvaildUnit);
     }
 
-    let lottoNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    this.createLotto(purchaseCost);
+  }
 
-    const lotto = new Lotto(lottoNum);
+  async createLotto(purchaseCost) {
+    const numOfLotto = purchaseCost / 1000;
+
+    for (let i = 0; i < numOfLotto; i++) {
+      let lottoNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+
+      const lotto = new Lotto(lottoNum);
+    }
   }
 }
 
