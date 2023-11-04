@@ -1,5 +1,5 @@
 import { Console, MissionUtils } from "@woowacourse/mission-utils";
-import { MESSAGE, MESSAGE_INPUT } from "./constants/constant.js";
+import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE } from "./constants/constant.js";
 
 class App {
   async play() {
@@ -25,11 +25,26 @@ class App {
         break
       }
     };
-
-
+    
 
     // 당첨 번호 입력 - 유효한지 확인하는 코드 추가하기
     const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
+    // 유효한지 확인
+    const removedWinningNums = winningNums.replace(/ /g, ''); // 공백 제거
+    // 문장 맨앞, 맨뒤 쉼표 확인
+    if (removedWinningNums[0] === ',' || removedWinningNums[removedWinningNums.length-1] === ',') {
+      throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+    }
+    // 문자 개수 및 숫자 확인
+    const splitWinningNums = removedWinningNums.split(',').map(Number);
+    if (new Set(splitWinningNums).size !== 6) { // 중복 및 개수 확인 (,, 입력 포함)
+      throw new Error(INPUT_DUPLICATE_ERROR);
+    }
+    for (let i = 0; i < splitWinningNums.length; i++) {
+      if (isNaN(splitWinningNums[i])) { // 문자인지 확인
+        throw new Error(ERROR_MESSAGE.INPUT_TYPE_ERROR);
+      }
+    }
     
 
     // 보너스 번호 입력 - 유효한지 확인하는 코드 추가하기
