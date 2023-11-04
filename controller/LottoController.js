@@ -46,6 +46,21 @@ class LottoController {
       this.sameNumCountArr.push(5);
     }
   }
+
+  getWinCountArr() {
+    for (let i = 3; i <= 7; i++) {
+      const count = this.sameNumCountArr.reduce(
+        (cnt, element) => cnt + (element === i),
+        0,
+      );
+      this.winCountArr.push(count);
+    }
+    [this.winCountArr[3], this.winCountArr[4]] = [
+      this.winCountArr[4],
+      this.winCountArr[3],
+    ];
+    // Console.print(this.winCountArr);
+  }
 }
 
 export default LottoController;
