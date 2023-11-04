@@ -100,7 +100,10 @@ class App {
       );
     }
     if (bonus % 1 !== 0) {
-      throw new Error("[Error] 자연수만 입력이 가능합니다.");
+      throw new Error("[ERROR] 자연수만 입력이 가능합니다.");
+    }
+    if (this.inputLottoNumArr.includes(bonus)) {
+      throw new Error("[ERROR] 입력한 당첨 번호 외 숫자를 입력해 주세요.");
     }
   }
 
