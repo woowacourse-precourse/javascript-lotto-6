@@ -15,17 +15,15 @@ import {
   recordRanks,
 } from "./utils/condition.js";
 import ValidateManager from "./functions/validateManager.js";
-import LottoGameManager from "./functions/LottoGameManager.js";
-
 class App {
   constructor() {
     this.outputManager = new OutputManager();
     this.validateManager = new ValidateManager();
-    this.lottoGameManager = new LottoGameManager();
   }
 
   async play() {
     try {
+      // purchaseLotto
       const moneyForLotto = await this.validateManager.getMoneyForLotto();
       const moneyForLottoToNumber = stringToNumber(moneyForLotto);
       const countsOfLotto = devideMoneyForLotto(moneyForLottoToNumber);
@@ -36,7 +34,8 @@ class App {
         countsOfLottoToNumber
       );
       this.outputManager.showEmptyLine();
-
+      // purchaseLotto
+      // setWinningNumber
       const winningBalls = await this.validateManager.getWinningBalls();
       const winningBallsArr = devideIntoCommas(winningBalls);
       const winningBallsToNumberArr = stringsToNumbers(winningBallsArr);
