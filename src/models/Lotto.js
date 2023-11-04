@@ -37,6 +37,20 @@ class Lotto {
       .fill(0)
       .map(() => new Lotto(Lotto.pickRandomNumbers()));
   }
+
+  /**
+   * 해당 로또의 번호와 입력받은 로또 번호의 일치하는 개수 구하기
+   * @param {number[]} numbers
+   * @returns {number}
+   */
+  getMatchNumberCount(numbers) {
+    return numbers.reduce((count, number) => {
+      if (this.#numbers.includes(number)) {
+        return count + 1;
+      }
+      return count;
+    }, 0);
+  }
 }
 
 export default Lotto;
