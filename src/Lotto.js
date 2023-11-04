@@ -9,30 +9,35 @@ class Lotto {
     this.rank = 0;
   }
 
-  getLottoNumbers() {
-    const randomLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-    return randomLottoNumber;
+  getRandomNumbers() {
+    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return randomNumbers;
   }
 
-  printLottoNumbers(amountOfLotto) {
-    for (let i = 0; i < amountOfLotto; i++) {
-      const lottoNumbers = this.getLottoNumbers();
-      Console.print(lottoNumbers);
+  getLottoNumbers(amount) {
+    const lottoNumbers = [];
+    for (let i = 0; i < amount; i++) {
+      lottoNumbers.push(this.getRandomNumbers());
+    }
+    return lottoNumbers;
+  }
+
+  printLottoNumbers(lottoNumbers) {
+    for (let i = 0; i < lottoNumbers.length; i++) {
+      Console.print(lottoNumbers[i]);
     }
   }
 
   async enterDrawNumbers() {
     const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     const number = input.split(",");
-    const drewNumbers = this.#validateDraw(number);
-    return drewNumbers;
+    return this.#validateDraw(number).map(Number);
   }
 
   async enterBonusNumber() {
     const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    const number = input.split(",");
-    const bonusNumber = this.#valudateBonus(number);
-    return bonusNumber;
+    const number = input.split("");
+    return this.#valudateBonus(number).map(Number);
   }
 
   #validateDraw(numbers) {
@@ -55,9 +60,11 @@ class Lotto {
     return bonus;
   }
 
-  resultOfLotto(drew, bonus) {
-    let result = this.matchCountCheck(drew, bonus);
-    let isBonus = this.matchBonusCheck(drew, bonus);
+  resultOfLotto(random, drew, bonus) {
+    let result = this.matchCountCheck(random, drew);
+    console.log(result);
+    let isBonus = this.matchBonusCheck(random, bonus);
+    console.log(isBonus);
     if (result === 3) {
       return (this.rank = 5);
     }
@@ -77,13 +84,16 @@ class Lotto {
   }
 
   matchCountCheck = (random, drew) => {
-    const result = random.reduce((acc, cur) => {
-      if (random.includes(cur)) {
-        acc++;
+    let count = 0;
+    const setLottoNumbers = [].concat(...new Set(random.flat()));
+    console.log(setLottoNumbers);
+    console.log(drew);
+    for (let i = 0; i < setLottoNumbers.length; i++) {
+      if (drew.includes(setLottoNumbers[i])) {
+        count++;
       }
-      return acc;
-    }, 0);
-    return result;
+    }
+    return count;
   };
 
   matchBonusCheck = (random, bonus) => {
