@@ -12,6 +12,7 @@ class Controller {
       OutputView.printMessage(error.message);
       await this.setLottoTicket();
     }
+    this.#displayLottoTicket();
   }
 
   async setLottoTicket() {
@@ -19,6 +20,10 @@ class Controller {
     this.#lottoTicketList = new LottoTicket(
       inputLottoPurchaseAmount,
     ).getLottoList;
+  }
+
+  #displayLottoTicket() {
+    OutputView.printLottoTicket(this.#lottoTicketList);
   }
 }
 
