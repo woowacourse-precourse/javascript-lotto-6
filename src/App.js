@@ -30,8 +30,10 @@ class App {
 
     const verifyNumber = /^[0-9]+$/;
 
-    if (verifyNumber.test(winningNum) === false) {
-      throw new Error(`${ERROR_MESSAGE.isNotwNumber}`);
+    for (let i = 0; i < winningNum.length; i++) {
+      if (verifyNumber.test(winningNum[i]) === false) {
+        throw new Error(`${ERROR_MESSAGE.isNotwNumber}`);
+      }
     }
 
     for (let i = 0; i < winningNum.length; i++) {
