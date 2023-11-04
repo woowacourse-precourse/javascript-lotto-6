@@ -1,6 +1,6 @@
 import divideInput from '../../util/parse/divideInput.js';
 import checkHasNoRemainder from '../../util/validate/checkHasNoRemainder.js';
-import checkIsEmpty from '../../util/validate/checkIsEmpty.js';
+import { checkIsEmpty } from '../../util/validate/checkIsEmpty.js';
 import { checkIsNaN } from '../../util/validate/checkIsNaN.js';
 import checkIsTooSmall from '../../util/validate/checkIsTooSmall.js';
 

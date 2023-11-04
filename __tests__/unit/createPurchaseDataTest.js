@@ -1,5 +1,3 @@
-import ERROR_CODE from '../../src/util/error/errorCode';
-import acendingSortList from '../../src/util/parse/acendingSortList';
 import createPurchaseData from '../../src/util/purchase/createPurchaseData';
 
 describe('로또 구매 리스트 생성 테스트', () => {

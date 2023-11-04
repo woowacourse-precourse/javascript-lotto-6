@@ -1,4 +1,4 @@
-import ERROR_CODE from '../error/errorCode.js';
+import { PURCHASE_ERROR_CODE } from '../error/errorCode.js';
 import { pickSixNumber } from '../libararyFeatures/MissionUtilHandler.js';
 import acendingSortList from '../parse/acendingSortList.js';
 
@@ -17,6 +17,6 @@ export default async function createPurchaseData(lottoCount, lottos) {
 
     return lottoList;
   } catch (error) {
-    throw new Error(`${ERROR_CODE.createPurchaseData}`);
+    throw new Error(`${PURCHASE_ERROR_CODE.createPurchaseData}`);
   }
 }

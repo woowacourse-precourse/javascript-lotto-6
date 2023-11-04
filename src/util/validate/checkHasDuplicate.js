@@ -1,4 +1,4 @@
-import ERROR_CODE from '../error/errorCode.js';
+import { PURCHASE_ERROR_CODE } from '../error/errorCode.js';
 
 export function checkHasDuplicate(numbers) {
   const LottoSet = new Set(numbers);
@@ -6,7 +6,7 @@ export function checkHasDuplicate(numbers) {
   const isNotValid = LottoSet.size !== numbers.length;
 
   if (isNotValid) {
-    throw new Error(`${ERROR_CODE.isDuplicated}`);
+    throw new Error(`${PURCHASE_ERROR_CODE.isDuplicated}`);
   }
 }
 

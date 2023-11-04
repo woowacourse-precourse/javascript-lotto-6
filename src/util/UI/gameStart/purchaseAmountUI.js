@@ -1,4 +1,4 @@
-import ERROR_CODE from '../../error/errorCode.js';
+import { PURCHASE_ERROR_CODE } from '../../error/errorCode.js';
 import { consoleInput } from '../../libararyFeatures/MissionUtilHandler.js';
 
 export default async function purchaseAmountUI() {
@@ -7,6 +7,6 @@ export default async function purchaseAmountUI() {
     const input = await consoleInput(GUIDANCE_TEXT);
     return input;
   } catch (error) {
-    throw new Error(`${ERROR_CODE.purchaseAmount}`);
+    throw new Error(`${PURCHASE_ERROR_CODE.purchaseAmount}`);
   }
 }

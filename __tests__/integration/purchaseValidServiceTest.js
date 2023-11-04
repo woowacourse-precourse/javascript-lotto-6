@@ -1,6 +1,5 @@
 import purchaseValidService from '../../src/service/validate/purchaseValidService';
-import ERROR_CODE from '../../src/util/error/errorCode';
-import { consolePrint } from '../../src/util/libararyFeatures/MissionUtilHandler';
+import { PURCHASE_ERROR_CODE } from '../../src/util/error/errorCode';
 
 describe('로또 구입 금액 입력에 대한 유효성 테스트', () => {
   test('1000으로 나누어 떨어지지 않는 값에 대한 에러 테스트', async () => {
@@ -11,7 +10,7 @@ describe('로또 구입 금액 입력에 대한 유효성 테스트', () => {
     try {
       await purchaseValidService(undivisibleInput);
     } catch (error) {
-      expect(error.message).toBe(`${ERROR_CODE.hasRemainder}`);
+      expect(error.message).toBe(`${PURCHASE_ERROR_CODE.hasRemainder}`);
     }
   });
 
@@ -22,7 +21,7 @@ describe('로또 구입 금액 입력에 대한 유효성 테스트', () => {
     try {
       await purchaseValidService(notNumberInput);
     } catch (error) {
-      expect(error.message).toBe(`${ERROR_CODE.valueIsNaN}`);
+      expect(error.message).toBe(`${PURCHASE_ERROR_CODE.valueIsNaN}`);
     }
   });
 
@@ -33,7 +32,7 @@ describe('로또 구입 금액 입력에 대한 유효성 테스트', () => {
     try {
       await purchaseValidService(emptyInput);
     } catch (error) {
-      expect(error.message).toBe(`${ERROR_CODE.valueIsEmpty}`);
+      expect(error.message).toBe(`${PURCHASE_ERROR_CODE.valueIsEmpty}`);
     }
   });
 });
