@@ -38,4 +38,20 @@ describe('로또 게임 컨트롤 클래스 테스트.', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
     }
   });
+
+  test('구입 금액이 천원 단위가 아닌 경우 에러를 발생시킵니다.', async () => {
+    // given
+    const input = ['1001', '1000'];
+    mockQuestions(input);
+    const logSpy = getLogSpy();
+
+    const lottoGame = new LottoGame();
+
+    // when & then
+    try {
+      await lottoGame.inputPurchaseAmount();
+    } catch (error) {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+    }
+  });
 });
