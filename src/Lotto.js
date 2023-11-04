@@ -4,8 +4,8 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
+    this.#validate(numbers);
     this.#isNumbersUnique(numbers); // 중복 번호 검증
   }
 
