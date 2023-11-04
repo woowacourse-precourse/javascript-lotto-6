@@ -22,6 +22,8 @@ class LottoReader extends LottoRankMaker {
 
   
 }
+
+export default LottoReader;
 /*
 const ticket = [
   [8, 21, 23, 41, 42, 43],
