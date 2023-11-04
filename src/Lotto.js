@@ -1,9 +1,7 @@
-import { LOTTO_RULE } from "./constants/BusinessNumber.js";
-import { LOTTO_ERROR } from "./constants/Messeage.js";
-import CustomError from "./error/CustomError.js";
-// numbers 에 문자숫자 배열을 넘겨줬지만 
-// 예외 처리하는데에 무리가 없다
-// 대소배교는 숫자로 인식함
+import { LOTTO_RULE, REGEX } from "./constants/BusinessNumber.js";
+
+
+// 파라미터  : 숫자배열
 
 class Lotto {
   #numbers;
@@ -25,19 +23,23 @@ class Lotto {
     const setNumbers = new Set(numbers);
 
     if (numbers.length !== setNumbers.size) {
-      throw new CustomError(LOTTO_ERROR.luckyConflict);
+      throw new Error("[ERROR] 중복이 숫자가 있거나 형식이 잘못됬습니다");
     }
-
+    
     numbers.forEach((number) => {
       if (number > LOTTO_RULE.maxNumber || number < LOTTO_RULE.minNumber) {
-        throw new CustomError(LOTTO_ERROR.luckyRange);
+        throw new Error("[ERROR] 1부터 45 사이의 숫자만 가능합니다");
       }
+
+      if (REGEX.commaNumber.test(Number(number))) throw new Error("[ERROR] 오류");
     })
   }
 
-  getLuckyArray() {
-    return this.#numbers.map((number) => Number(number));
+  getLuckyNumbers() {
+    return this.#numbers;
   }
 }
 
 export default Lotto;
+
+

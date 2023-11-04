@@ -9,7 +9,6 @@ class LotteryMachine {
   #issuanceLimit = 0;
 
   constructor(purchaseAmount) {
-    this.#validate(purchaseAmount);
     this.#issuanceLimit = purchaseAmount / LOTTO_RULE.buyUnit;
     this.#ticketMaker()
   }
@@ -35,25 +34,7 @@ class LotteryMachine {
   getTiket() {
     return this.#lottoTicket;
   }
-
-  #validate(purchaseAmount) {
-    const amountNumber = Number(purchaseAmount);
-
-    if(Number.isNaN(amountNumber)) {
-      throw new Error("숫자가 아님")
-    }
-
-    const remainder = Number(purchaseAmount) % 1000;
-    
-    if (remainder !== 0) {
-      throw new Error("거스름돈없어여")
-    }
-
-    if ( amountNumber >= 100000) {
-      throw new Error("10만원이하만구매가능")
-    }
-  }  
-}
+}  
 
 export default LotteryMachine;
 /*
