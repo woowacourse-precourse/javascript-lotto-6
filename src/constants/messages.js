@@ -5,6 +5,9 @@ const INPUT_QUERY = {
 const errorString = (string) => `[ERROR] ${string}`;
 const ERROR_MESSAGE = {
   notPostiveInt: errorString("값이 양의 정수가 아닙니다."),
+  undividableByThousand: errorString("값이 1000으로 나누어 떨어지는 값이 아닙니다."),
+
+  overLottoStock: errorString("남아있는 로또의 재고 수를 초과하여 구매할 수 없습니다."),
 };
 
 export { INPUT_QUERY, ERROR_MESSAGE };
