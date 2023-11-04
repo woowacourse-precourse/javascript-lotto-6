@@ -36,5 +36,18 @@ class View {
       this.print(lotto);
     });
   }
+
+  static winningStatistics(winningResult, yieldRate) {
+    this.print(OUTPUT_MESSAGE.statistics);
+    this.print(OUTPUT_MESSAGE.divider);
+
+    [...Object.entries(winningResult)].forEach((result) => {
+      const rank = result[0];
+      const count = result[1];
+      this.print(`${OUTPUT_MESSAGE[rank]}${count}개`);
+    });
+
+    this.print(`총 수익률은 ${yieldRate}%입니다.`);
+  }
 }
 export default View;
