@@ -45,6 +45,19 @@ class LottoCompany {
 			}
 		} while (!isPublished);
 	}
+
+	async drawWinningNumberArray() {
+		let isDrawn = false;
+		do {
+			try {
+				this.#winningNumberArray = await this.#getWinningNumberArrayFromUser();
+				OutputView.printNewLine();
+				isDrawn = true;
+			} catch (error) {
+				Console.print(error.message);
+			}
+		} while (!isDrawn);
+	}
 }
 
 export default LottoCompany;
