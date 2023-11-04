@@ -38,6 +38,8 @@ class App {
       this.randomLottoNumber
     );
     console.log(this.matchingCounts);
+
+    this.countMatchingNumbers(this.matchingCounts);
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -135,6 +137,25 @@ class App {
       counts.push(matchingCount);
     }
     return counts;
+  }
+  countMatchingNumbers(counts) {
+    for (const count of counts) {
+      if (count === 3) {
+        this.threeMatches += 1;
+      }
+      if (count === 4) {
+        this.fourMatches += 1;
+      }
+      if (count === 5) {
+        this.fiveMatches += 1;
+      }
+      if (count === 5 && count.includes(this.bonus)) {
+        this.fiveAndBonusMatches += 1;
+      }
+      if (count === 4) {
+        this.sixMatches += 1;
+      }
+    }
   }
 }
 export default App;
