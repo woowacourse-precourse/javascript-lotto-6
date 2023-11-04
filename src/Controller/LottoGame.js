@@ -1,10 +1,11 @@
-import { Random } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import InputView from "../View/InputView.js";
 import OutputView from "../View/OutputView.js";
 import Lotto from "../Lotto.js";
 
 class LottoGame {
   #numberOfPurchase = 0;
+  #winningNumbers;
 
   async start() {
     const purchaseAmount = await InputView.requestPurchaseAmount();
@@ -16,6 +17,9 @@ class LottoGame {
       const lotto = new Lotto(this.makeLottoNumbers());
       OutputView.displayLotto(lotto.getNumbers());
     }
+
+    const winningNumbers = await InputView.requestWinningNumbers();
+    this.#winningNumbers = winningNumbers.split(',').map(Number);
   }
 
   makeLottoNumbers() {

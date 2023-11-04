@@ -17,6 +17,11 @@ class InputView {
       throw new Error('[ERROR] 구입금액은 1000원으로 나누어 떨어져야 합니다.');
     }
   }
+
+  static async requestWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.');
+    return winningNumbers;
+  }
 }
 
 export default InputView;
