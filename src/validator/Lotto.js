@@ -1,5 +1,6 @@
 import { LOTTO_ERROR } from '../constants/message/error.js';
 import { LOTTO } from '../constants/setting.js';
+import CommonValidator from './Common.js';
 
 class LottoValidator {
   static validate(numbers) {
@@ -23,7 +24,10 @@ class LottoValidator {
   }
 
   static validateRange(numbers) {
-    numbers.forEach(number => LottoValidator.validateLottoNumber(number));
+    numbers.forEach(number => {
+      CommonValidator.validateIsNumber(number);
+      LottoValidator.validateLottoNumber(number);
+    });
   }
 
   static validateLottoNumber(number) {
