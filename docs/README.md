@@ -331,12 +331,12 @@
   - [x] `prepare(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.
   - [x] `hasBonus(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
 
-- [ ] LottoReward
+- [x] LottoReward
 
-  - [ ] `getRequirement()` 호출 시 경품 조건을 반환한다.
-  - [ ] `getQuantity()` 호출 시 경품 갯수를 반환한다.
-  - [ ] `getTotalPrize()` 호출 시 갯수에 비례한 총 금액을 반환한다.
-  - [ ] `checkRequirement(requirement)` 호출 시 `requirement`와 조건을 비교하고 갯수를 증가한다.
+  - [x] `getRequirement()` 호출 시 경품 조건을 반환한다.
+  - [x] `getQuantity()` 호출 시 경품 갯수를 반환한다.
+  - [x] `getTotalPrize()` 호출 시 갯수에 비례한 총 금액을 반환한다.
+  - [x] `checkRequirement(requirement)` 호출 시 `requirement`와 조건을 비교하고 갯수를 증가한다.
 
 - [ ] LottoReward 예외 처리
 
