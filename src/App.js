@@ -73,5 +73,11 @@ function randomNumberCreater() {
 
 function lottoCreater(numbers) {
   const lotto = new Lotto(numbers);
-  return lotto;
+  const sortLotto = numberSort(lotto);
+  return sortLotto;
+}
+
+export function numberSort(numbers) {
+  numbers.sort((a, b) => a - b);
+  return numbers;
 }
