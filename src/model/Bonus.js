@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../constants/errors";
+import { ERROR_MESSAGE } from "../constants/errors.js";
 
 class Bonus {
   // Bonus 예시: "3" 과 같은 문자열

@@ -1,6 +1,8 @@
+import { SEPARATOR } from "../constants/messages.js";
+
 // 여기에 변환 관련 함수들 모아두기
 export function devideIntoCommas(stringInput) {
-  return stringInput.split(",");
+  return stringInput.split(SEPARATOR);
 }
 
 export function stringToNumber(string) {

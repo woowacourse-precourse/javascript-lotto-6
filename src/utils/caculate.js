@@ -1,7 +1,7 @@
-import { WINNING_PRIZE_NUMBERS } from "../constants/numbers.js";
+import { LOTTERY_WINNINGS, LOTTO_NUMBERS } from "../constants/numbers.js";
 
 export function devideMoneyForLotto(moneyForLotto) {
-  return moneyForLotto / 1000;
+  return moneyForLotto / LOTTO_NUMBERS.amount;
 }
 
 export function profitRate(moneyForLotto, winningPrizeSum) {
@@ -11,10 +11,10 @@ export function profitRate(moneyForLotto, winningPrizeSum) {
 
 export function sumOfWinning(rankCounts) {
   const sum =
-    rankCounts[1] * WINNING_PRIZE_NUMBERS.rank1 +
-    rankCounts[2] * WINNING_PRIZE_NUMBERS.rank2 +
-    rankCounts[3] * WINNING_PRIZE_NUMBERS.rank3 +
-    rankCounts[4] * WINNING_PRIZE_NUMBERS.rank4 +
-    rankCounts[5] * WINNING_PRIZE_NUMBERS.rank5;
+    rankCounts[1] * LOTTERY_WINNINGS.rank1 +
+    rankCounts[2] * LOTTERY_WINNINGS.rank2 +
+    rankCounts[3] * LOTTERY_WINNINGS.rank3 +
+    rankCounts[4] * LOTTERY_WINNINGS.rank4 +
+    rankCounts[5] * LOTTERY_WINNINGS.rank5;
   return sum;
 }

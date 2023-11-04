@@ -1,5 +1,5 @@
 import { ERROR_CONVENTION } from "../src/constants/conventions.js";
-import { WINNING_NUMBER } from "../src/constants/numbers.js";
+import { COUNT } from "../src/constants/numbers.js";
 import Winning from "../src/model/Winning.js";
 
 describe("당첨 번호 클래스 테스트", () => {
@@ -15,7 +15,7 @@ describe("당첨 번호 클래스 테스트", () => {
     }).toThrow(ERROR_CONVENTION);
   });
 
-  test(`배열로 만들었을 때 길이가 ${WINNING_NUMBER.count}이(가) 아니라면 예외를 발생한다.`, () => {
+  test(`배열로 만들었을 때 길이가 ${COUNT.winningNumbers}이(가) 아니라면 예외를 발생한다.`, () => {
     expect(() => {
       new Winning("1,2,3,4,5,6,7");
     }).toThrow(ERROR_CONVENTION);

@@ -22,3 +22,5 @@ export const STATISTICS_MESSAGE = Object.freeze({
 });
 
 export const EMPTY_LINE = "";
+
+export const SEPARATOR = ",";
