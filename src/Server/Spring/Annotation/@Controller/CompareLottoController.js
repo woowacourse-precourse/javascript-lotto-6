@@ -2,7 +2,7 @@
 /* eslint-disable no-constructor-return */
 /* eslint-disable class-methods-use-this */
 import ModelAndView from '../../Objects/ModelAndView.js';
-import compareLotto from '../@Service/compareLotto.js';
+import { compareLotto, getProfitLotto } from '../@Service/compareLotto.js';
 
 class CompareLottoController {
   static instance = null;
@@ -16,10 +16,11 @@ class CompareLottoController {
 
   requestMapping(userLotto) {
     const modelAndView = new ModelAndView();
-    const compareResult = compareLotto(userLotto);
+    const compareResult = compareLotto(userLotto.userLotto);
+    const profit = ((getProfitLotto(compareResult) / userLotto.purchaseAmount) * 100).toFixed(1);
     const data = {
       compareResult,
-      avg: 35,
+      profit,
     };
     modelAndView.setViewName('LottoPos');
     modelAndView.addObject('data', data);

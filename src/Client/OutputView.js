@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../Util/Message.js';
-import CONSTANTS from '../Util/Constants.js';
 
 const OutputView = {
   outputPurchaseCount(purchaseCount) {
@@ -22,6 +21,10 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.five(compareResult[5] === undefined ? 0 : compareResult[5]));
     Console.print(OUTPUT_MESSAGE.seven(compareResult[7] === undefined ? 0 : compareResult[7]));
     Console.print(OUTPUT_MESSAGE.six(compareResult[6] === undefined ? 0 : compareResult[6]));
+  },
+
+  outputProfit(profit) {
+    Console.print(OUTPUT_MESSAGE.profit(profit));
   },
 };
 

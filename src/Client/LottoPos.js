@@ -44,13 +44,10 @@ class LottoPos {
   };
 
   compareLottoNumber = async () => {
-    const responseData = await this.ajax(
-      RESTFULAPI.compareLottoNumber,
-      this.#userLotto.userLotto,
-      null,
-    );
+    const responseData = await this.ajax(RESTFULAPI.compareLottoNumber, this.#userLotto, null);
     OutputView.outputMessage(OUTPUT_MESSAGE.winningAvgTitle);
     OutputView.outputLottoResult(responseData.compareResult);
+    OutputView.outputProfit(responseData.profit);
   };
 
   ajax = async (url, data, callback) => {

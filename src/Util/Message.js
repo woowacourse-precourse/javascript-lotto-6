@@ -5,18 +5,18 @@ const INPUT_MESSAGE = Object.freeze({
   purchaseAmount: '구입금액을 입력해 주세요.\n',
   winningNumber: '\n당첨 번호를 입력해 주세요.\n',
   bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
-  winningAvgTitle: '\n당첨 통계\n---\n',
 });
 
 const OUTPUT_MESSAGE = Object.freeze({
+  winningAvgTitle: '\n당첨 통계\n---',
   purchaseCount: (purchaseCount) => `\n${purchaseCount}개를 구매했습니다.`,
   userLotto: (userLotto) => `[${userLotto.join(', ')}]`,
-  three: (count) => `3개 일치 (${CONSTANTS.three.toLocaleString()}원) - ${count}개`,
-  four: (count) => `4개 일치 (${CONSTANTS.four.toLocaleString()}원) - ${count}개`,
-  five: (count) => `5개 일치 (${CONSTANTS.five.toLocaleString()}원) - ${count}개`,
-  six: (count) => `6개 일치 (${CONSTANTS.six.toLocaleString()}원) - ${count}개`,
-  seven: (count) => `5개 일치, 보너스 볼 일치 (${CONSTANTS.seven.toLocaleString()}원) - ${count}개`,
-  profit: (profit) => `총 수익률은 ${profit}%입니다.`,
+  three: (count) => `3개 일치 (${CONSTANTS['3'].toLocaleString()}원) - ${count}개`,
+  four: (count) => `4개 일치 (${CONSTANTS['4'].toLocaleString()}원) - ${count}개`,
+  five: (count) => `5개 일치 (${CONSTANTS['5'].toLocaleString()}원) - ${count}개`,
+  six: (count) => `6개 일치 (${CONSTANTS['6'].toLocaleString()}원) - ${count}개`,
+  seven: (count) => `5개 일치, 보너스 볼 일치 (${CONSTANTS['7'].toLocaleString()}원) - ${count}개`,
+  profit: (profit) => `총 수익률은 ${profit.toLocaleString()}%입니다.`,
 });
 
 const ERROR_MESSAGE = Object.freeze({

@@ -44,4 +44,10 @@ const compareLotto = (userLotto) => {
   return convertListToDict(lottoCompareResult);
 };
 
-export default compareLotto;
+const getProfitLotto = (compareResult) => {
+  return Object.keys(compareResult).reduce((profit, count) => {
+    return profit + CONSTANTS[count] * compareResult[count];
+  }, 0);
+};
+
+export { compareLotto, getProfitLotto };
