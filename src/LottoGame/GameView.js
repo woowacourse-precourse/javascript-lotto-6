@@ -6,13 +6,11 @@ export default class GameView {
   }
 
   async printLottos(lottos, lottoCount) {
-    let allLottos = `${lottoCount}개를 구매했습니다. \n`;
+    MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
     lottos.forEach(lotto => {
       const num = lotto.getLottoNumber();
-      allLottos += `[${num}] \n`;
+      MissionUtils.Console.print(`[${num.join(', ')}]`);
     });
-
-    MissionUtils.Console.print(allLottos);
   }
 
   async printWinningNumber(number) {

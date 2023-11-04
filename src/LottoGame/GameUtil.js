@@ -12,6 +12,7 @@ export default class GameUtil {
       throw new Error(ErrorMessage.INVALID_MONEY_TYPE);
     }
   }
+
   bonusNumberValidatro(bonusNumber, duplicateCheckArray) {
     if (/\D/.test(bonusNumber)) {
       throw new Error(ErrorMessage.INVALID_BONUS_NUMBER_TYPE);
