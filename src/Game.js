@@ -10,10 +10,10 @@ class Game {
   }
 
   purchase() {
-    InputView.purchaseLotto(this.handleLottoQuantity);
+    InputView.purchaseLotto(this.handlePurchase);
   }
 
-  handleLottoQuantity = (amount) => {
+  handlePurchase = (amount) => {
     this.#quantity = new Purchase(amount).getAmount();
     OutputView.printQuantity(this.#quantity);
   };
