@@ -10,6 +10,8 @@ class App {
     const amountOfLotto = this.Credit.getAmountOfLotto(credit);
     this.Credit.printAmountOfLotto(amountOfLotto);
     const LottoNumbers = this.Lotto.printLottoNumbers(amountOfLotto);
+    const drawNumbers = await this.Lotto.enterDrawNumbers();
+    const bonusNumber = await this.Lotto.enterBonusNumber();
   }
 }
 

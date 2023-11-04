@@ -23,14 +23,17 @@ class Lotto {
     }
   }
 
-  enterDrawNumbers() {
-    const input = Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    const drawNumbers = input.split(",");
-    return drawNumbers;
+  async enterDrawNumbers() {
+    const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    const number = input.split(",");
+    const drewNumbers = this.#validateDraw(number);
+    return drewNumbers;
   }
 
-  enterBonusNumber() {
-    const bonusNumber = Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+  async enterBonusNumber() {
+    const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    const number = input.split(",");
+    const bonusNumber = this.#valudateBonus(number);
     return bonusNumber;
   }
 }
