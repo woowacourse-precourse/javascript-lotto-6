@@ -1,5 +1,4 @@
 import App from '../src/App.js';
-import { Console } from '@woowacourse/mission-utils';
 
 describe('class App test', () => {
   let app;
@@ -30,16 +29,16 @@ describe('class App test', () => {
       const testPrice = 'Hundred';
       expect(() => {
         app.checkLottoPrice(testPrice);
-      }).toThrow('[ERROR] 숫자만 입력하세요.');
+      }).toThrow('[ERROR] 숫자가 잘못된 형식입니다.');
     });
   });
 
   describe('method test : checkLottoPrice()', () => {
     test('입력 받은 로또 구입 금액에 문자가 있으면 오류가 발생할까 ?', () => {
-      const testPrice = '1000a';
+      const testPrice = '1000j';
       expect(() => {
         app.checkLottoPrice(testPrice);
-      }).toThrow('[ERROR] 숫자만 입력하세요.');
+      }).toThrow('[ERROR] 숫자가 잘못된 형식입니다.');
     });
   });
 
