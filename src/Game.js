@@ -1,8 +1,17 @@
-import { validateNumberType, validateUnit } from './utils/validate.js';
+import Lotto from './Lotto.js';
 import getUserInput from './utils/getUserInput.js';
+import createLottoNumbers from './utils/createLottoNumbers.js';
+import { LOTTO } from './constants/lotto.js';
 import { INPUT_MESSAGE } from './constants/messages.js';
+import { validateNumberType, validateUnit } from './utils/validate.js';
 
 class Game {
+  #lottos;
+
+  constructor() {
+    this.#lottos = [];
+  }
+
   async start() {
     const purchaseAmount = await this.getPurchaseAmount();
     this.validate(purchaseAmount);
@@ -19,7 +28,19 @@ class Game {
     return purchaseAmount;
   }
 
-  purchaseLotto(amount) {}
+  purchaseLotto(amount) {
+    const lottoCount = amount / LOTTO.price;
+
+    for (let i = 0; i < lottoCount; i++) {
+      const lottoNumbers = createLottoNumbers();
+      this.#lottos.push(new Lotto(lottoNumbers));
+    }
+  }
+
+  getLottos() {
+    const lottos = this.#lottos.map((lotto) => lotto.getNumbers());
+    return lottos;
+  }
 }
 
 export default Game;
