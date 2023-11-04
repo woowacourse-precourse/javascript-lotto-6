@@ -1,3 +1,7 @@
+import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
+import ApplicationError from '../exceptions/ApplicationError.js';
+import { isEqualObject, isSameKeyList } from '../utils/object.js';
+
 /**
  * @typedef {object} RewardRequirement
  * @property {number} match
@@ -5,6 +9,11 @@
  */
 
 class LottoReward {
+  static ERROR_MESSAGES = Object.freeze({
+    invalidRequirement: '유효하지 않은 경품 조건입니다',
+    invalidPrize: ERROR_MESSAGE_GENERATOR.notNumber('로또의 경품 조건'),
+  });
+
   /**
    * 로또 경품의 조건입니다.
    * @type {RewardRequirement}
@@ -28,6 +37,7 @@ class LottoReward {
    * @param {number} prize
    */
   constructor(requirement, prize) {
+    this.#validate(requirement, prize);
     this.#requirement = requirement;
     this.#prize = prize;
   }
@@ -39,6 +49,13 @@ class LottoReward {
    */
   static of(requirement, prize) {
     return new LottoReward(requirement, prize);
+  }
+
+  #validate(requirement, prize) {
+    this.#validateRequirement(requirement);
+    if (typeof prize !== 'number') {
+      throw new ApplicationError(LottoReward.ERROR_MESSAGES.invalidPrize);
+    }
   }
 
   /**
@@ -70,9 +87,16 @@ class LottoReward {
    * @param {RewardRequirement} requirement
    * @returns {void}
    */
-  checkRequirement({ match, hasBonus }) {
-    if (this.#requirement.match === match && this.#requirement.hasBonus === hasBonus) {
+  checkRequirement(requirement) {
+    this.#validateRequirement(requirement);
+    if (isEqualObject(requirement, this.#requirement)) {
       this.#quantity += 1;
+    }
+  }
+
+  #validateRequirement(requirement) {
+    if (!isSameKeyList(requirement, { match: 0, hasBonus: true })) {
+      throw new ApplicationError(LottoReward.ERROR_MESSAGES.invalidRequirement);
     }
   }
 }
