@@ -43,56 +43,71 @@ class LottoMachine {
   }
 
   async #getWinningNumbers() {
+    const USER_INPUT =
+      await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.");
+    const USER_INPUT_NUMBERS = USER_INPUT.split(",")
+      .map((number) => parseInt(number.trim(), 10))
+      .sort((a, b) => a - b);
+    return USER_INPUT_NUMBERS;
+  }
+
+  async #setWinningNumbers() {
     let winningNumbers;
+
     while (true) {
-      const USER_INPUT =
-        await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.");
-      winningNumbers = this.#parseAndSortWinningNumbers(USER_INPUT);
-
-      if (this.#isValideNumbersArray(winningNumbers)) {
+      try {
+        winningNumbers = await this.#getWinningNumbers();
+        this.#validateNumbersArray(winningNumbers);
         break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
       }
-
-      throw new Error("[ERROR] 보너스 번호는 1~45사이의 숫자여야 합니다.");
     }
+
     return winningNumbers;
   }
 
-  #parseAndSortWinningNumbers(input) {
-    return input
-      .split(",")
-      .map((number) => parseInt(number.trim(), 10))
-      .sort((a, b) => a - b);
-  }
-
   // 숫자들 배열의 유효성 검사
-  #isValideNumbersArray(numbers) {
+  #validateNumbersArray(numbers) {
     const areAllnumbersValid = numbers.every((number) =>
-      this.#isValidNumber(number)
+      this.#validateNumber(number)
     );
     const hasCorrectLength = numbers.length === 6;
     const hasAllUniqueNumbers = new Set(numbers).size === 6;
-    return areAllnumbersValid && hasCorrectLength && hasAllUniqueNumbers;
+    if (!areAllnumbersValid || !hasCorrectLength || !hasAllUniqueNumbers) {
+      throw new Error(
+        "[ERROR] 입력은 1~45사이의 숫자이고, 6개의 숫자여야 합니다."
+      );
+    }
   }
 
   // 단일 숫자의 유효성 검사
-  #isValidNumber(number) {
-    return !isNaN(number) && number >= 1 && number <= 45;
+  #validateNumber(number) {
+    if (isNaN(number) || number < 1 || number > 45) {
+      throw new Error("[ERROR] 입력은 1~45사이의 숫자여야 합니다.");
+    }
   }
 
-  async #askBonusNumber() {
+  async #getBonusNumber() {
+    const USER_INPUT =
+      await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.");
+    const USER_INPUT_PRICE = parseInt(USER_INPUT, 10);
+    return USER_INPUT_PRICE;
+  }
+
+  async #setBonusNumber() {
     let bonusNumber;
+
     while (true) {
-      bonusNumber = parseInt(
-        await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.")
-      );
-
-      if (this.#isValidNumber(bonusNumber)) {
+      try {
+        bonusNumber = await this.#getBonusNumber();
+        this.#validateNumber(bonusNumber);
         break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
       }
-
-      throw new Error("[ERROR] 보너스 번호는 1~45사이의 숫자여야 합니다.");
     }
+
     return bonusNumber;
   }
 }

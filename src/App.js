@@ -6,9 +6,10 @@ class App {
 
 class LottoPurchase {
   async #getLottoAmount() {
-    return await parseInt(
-      MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.")
-    );
+    const USER_INPUT =
+      await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.");
+    const USER_INPUT_PRICE = parseInt(USER_INPUT, 10);
+    return USER_INPUT_PRICE;
   }
 
   #validateAmount(lottoAmount) {
