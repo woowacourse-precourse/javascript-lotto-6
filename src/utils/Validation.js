@@ -6,7 +6,7 @@ const isDivisibleByThousand = (purchaseAmount) => {
 }
 
 const isNumber = (purchaseAmount) => {
-    if (isNaN(purchaseAmount)) {
+    if (isNaN(Number(purchaseAmount))) {
         return false;
     }
     return true;

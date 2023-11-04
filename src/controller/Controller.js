@@ -10,7 +10,7 @@ class LottoController {
     this.#userLottoModel = new UserLottoModel();
   }
   async playGame() {
-    try {
+    // try {
         const ticketPrice = await InputView.getLottoNumbers();
         OutputView.printQuantity(ticketPrice);
   
@@ -38,9 +38,9 @@ class LottoController {
         OutputView.formatResults(result);
   
         OutputView.calculateProfitRate(result);
-    } catch (error) {
-      throw new Error(ERROR_MESSAGES.DEFAULT_ERROR);
-    }
+    // } catch (error) {
+    //   throw new Error(ERROR_MESSAGES.DEFAULT_ERROR);
+    // }
   }
 }
 
