@@ -1,3 +1,3 @@
-const DELIMITER = ',';
+export const DELIMITER = ',';
 
-export default DELIMITER;
+export const LOTTO_PRICE = 1000;
