@@ -11,8 +11,8 @@ const WINNING_NUMBER_INPUT_MESSAGE = '\n당첨 번호를 입력해 주세요.\n'
 const BONUS_NUMBER_INPUT_MESSAGE = '\n보너스 번호를 입력해 주세요.\n';
 
 const MISS_STATE = 0;
-const BONUS_STATE = 0.5;
-const HIT_STATE = 1;
+const BONUS_STATE = 1;
+const HIT_STATE = 2;
 
 class ConvertInputTo {
   static async lottoArray() {

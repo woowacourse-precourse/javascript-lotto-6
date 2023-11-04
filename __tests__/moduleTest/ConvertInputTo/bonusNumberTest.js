@@ -4,7 +4,7 @@ import ConvertInputTo from '../../../src/modules/ConvertInputTo';
 const ERROR_FORMAT = '[ERROR]';
 const LOTTO_UPPER_NUMBER = 45;
 const MISS_STATE = 0;
-const HIT_STATE = 1;
+const HIT_STATE = 2;
 
 const mockBoard = winningNumbers => {
   const board = new Array(LOTTO_UPPER_NUMBER).fill(MISS_STATE);

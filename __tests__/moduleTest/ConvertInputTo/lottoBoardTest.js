@@ -4,8 +4,8 @@ import { Console } from '@woowacourse/mission-utils';
 const ERROR_FORMAT = '[ERROR]';
 
 const MISS_STATE = 0;
-const BONUS_STATE = 0.5;
-const HIT_STATE = 1;
+const BONUS_STATE = 1;
+const HIT_STATE = 2;
 
 const LOTTO_UPPER_NUMBER = 45;
 
