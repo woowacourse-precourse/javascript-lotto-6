@@ -1,13 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-
-const INPUT_MESSAGE_PURCHASE_AMOUNT = '구입금액을 입력해 주세요.';
-const INPUT_MESSAGE_WINNING_NUMBERS = '당첨 번호를 입력해 주세요.';
-const INPUT_MESSAGE_BONUS_NUMBER = '보너스 번호를 입력해 주세요.';
+import { INPUT_MESSAGE } from '../constants/messages';
 
 const InputView = {
   async readPurchaseAmount() {
     try {
-      const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE_PURCHASE_AMOUNT);
+      const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.purchase_amount);
 
       return purchaseAmount;
     } catch (error) {
@@ -17,7 +14,7 @@ const InputView = {
 
   async readWinningNumbers() {
     try {
-      const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE_WINNING_NUMBERS);
+      const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.winning_numbers);
 
       return winningNumbers;
     } catch (error) {
@@ -27,7 +24,7 @@ const InputView = {
 
   async readBonusNumber() {
     try {
-      const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE_BONUS_NUMBER);
+      const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.bonus_number);
 
       return bonusNumber;
     } catch (error) {
