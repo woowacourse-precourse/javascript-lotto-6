@@ -1,7 +1,4 @@
-import { ERROR_MESSAGE } from "./CONSTANT.js";
-
-const BASEAMOUNT = 1000;
-const NUMBERREGEX = /^[0-9]+$/;
+import { BASEAMOUNT, ERROR_MESSAGE, NUMBERREGEX } from "./CONSTANT.js";
 
 const isEmpty = (value) => value === "";
 

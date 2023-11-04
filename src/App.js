@@ -1,9 +1,15 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { INPUT_MESSAGE } from "./utils/CONSTANT.js";
+import { BASEAMOUNT, INPUT_MESSAGE } from "./utils/CONSTANT.js";
 import { validatePurchase } from "./utils/validation.js";
 
 class App {
   #purchaseAmount;
+  #ticketCount;
+  #tickets;
+
+  constructor() {
+    this.#tickets = [];
+  }
 
   async inputPurchaseAmount() {
     const input = await MissionUtils.Console.readLineAsync(
@@ -12,11 +18,28 @@ class App {
 
     validatePurchase(input);
 
-    this.purchaseAmount = input;
+    this.#purchaseAmount = input;
+    this.#ticketCount = parseInt(input) / BASEAMOUNT;
+  }
+
+  createLottoTickets() {
+    for (let i = 0; i < this.#ticketCount; i += 1) {
+      this.#tickets.push(this.createTicket());
+    }
+    MissionUtils.Console.print(this.#tickets);
+  }
+
+  createTicket() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
+  async startPurchase() {
+    await this.inputPurchaseAmount();
+    this.createLottoTickets();
   }
 
   async play() {
-    this.inputPurchaseAmount();
+    await this.startPurchase();
   }
 }
 
