@@ -21,7 +21,7 @@ describe('Request', () => {
     const result = await Request.money();
 
     expect(result).toBe('8000');
-    expect(prompt.in).toHaveBeenCalledWith('구입금액을 입력해 주세요.');
+    expect(prompt.in).toHaveBeenCalledWith('구입금액을 입력해 주세요.\n');
     expect(validate.money).toHaveBeenCalledWith('8000');
   });
 
@@ -38,7 +38,7 @@ describe('Request', () => {
     const result = await Request.money();
 
     expect(result).toBe('8000');
-    expect(prompt.in).toHaveBeenCalledWith('구입금액을 입력해 주세요.');
+    expect(prompt.in).toHaveBeenCalledWith('구입금액을 입력해 주세요.\n');
     expect(validate.money).toHaveBeenCalledWith('팔천원');
     expect(validate.money).toHaveBeenCalledWith('8000');
     expect(prompt.out).toHaveBeenCalledWith('[ERROR] 정확한 값이 아닙니다.');
