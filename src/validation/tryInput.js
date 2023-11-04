@@ -1,7 +1,7 @@
 import { input } from "../util/input.js";
 import { print } from "../util/output.js";
 
-export const getInputMessage = async (message, validCallback)=>{
+export const getInputValue = async (message, validCallback)=>{
     while(true){
         try {
             const inputMessage = await input(message);

@@ -5,13 +5,13 @@ import { PRINT_MESSAGE } from "./constants/message.js";
 
 import { Random } from "@woowacourse/mission-utils";
 import {
-  getValidatedNumber,
-  getValidatedNumbers,
+  validateNumber,
+  validateNumbers,
 } from "./validation/number.js";
 import { validateMoney } from "./validation/money.js";
 import { PRIZE } from "./constants/prize.js";
 import { ERROR_MESSAGE } from "./constants/error.js";
-import { getInputMessage } from "./validation/tryInput.js";
+import { getInputValue } from "./validation/tryInput.js";
 class App {
   lottos = [];
 
@@ -42,7 +42,8 @@ class App {
   }
 
   async getNumbers(){
-    const inputNumbers = await getInputMessage(PRINT_MESSAGE.NUMBERS, getValidatedNumbers);
+    // TODO: valid함수명 수정
+    const inputNumbers = await getInputValue(PRINT_MESSAGE.NUMBERS, validateNumbers);
     return inputNumbers.split(",").map(Number);
   }
 
@@ -101,11 +102,12 @@ class App {
 
   async getPrizeNumbers() {
     const inputNumbers = await input(PRINT_MESSAGE.NUMBERS);
-    getValidatedNumbers(inputNumbers);
+    validateNumbers(inputNumbers);
   }
 
   async getBonusNumber() {
-    const bonusNumber = await getInputMessage(PRINT_MESSAGE.BONUS_NUMBER, getValidatedNumber);
+    // TODO: valid 함수명 수정
+    const bonusNumber = await getInputValue(PRINT_MESSAGE.BONUS_NUMBER, validateNumber);
     return +bonusNumber;
   }
 
@@ -119,7 +121,7 @@ class App {
   }
 
   async getInputMoney(){
-    const inputMoney = await getInputMessage(PRINT_MESSAGE.INPUT_MONEY, validateMoney);
+    const inputMoney = await getInputValue(PRINT_MESSAGE.INPUT_MONEY, validateMoney);
     
     return +inputMoney;
   }

@@ -1,5 +1,5 @@
 import { print } from "./util/output.js";
-import { getValidatedNumbers } from "./validation/number.js";
+import { validateNumbers } from "./validation/number.js";
 
 class Lotto {
   #numbers;
@@ -11,7 +11,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    this.#numbers = getValidatedNumbers(numbers);
+    validateNumbers(numbers);
+    this.#numbers = numbers.map(Number);
   }
 
   // TODO: 추가 기능 구현
