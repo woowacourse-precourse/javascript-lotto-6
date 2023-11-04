@@ -28,6 +28,9 @@ class LottoGame {
     const lottoTicketsCount = GameUtils.dividedByThousand(amount);
 
     this.#lottoTickets = new LottoTickets(lottoTicketsCount);
+    LottoGameOutput.showAllIssuedLottoTickets(
+      this.#lottoTickets.getLottoTickets(),
+    );
   }
 }
 
