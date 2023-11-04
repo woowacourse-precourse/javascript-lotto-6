@@ -55,7 +55,7 @@ const Validator = {
 
   checkHasOutOfRange(inputs) {
     inputs.forEach((number) => {
-      if (number < LOTTO_NUMBER.minNum || number > LOTTO_NUMBER.maxNum) {
+      if (Number(number) < LOTTO_NUMBER.minNum || Number(number) > LOTTO_NUMBER.maxNum) {
         throw new ValidationError(ERROR.hasOutOfRange);
       }
     });
@@ -68,7 +68,7 @@ const Validator = {
   },
 
   checkIsOutOfRange(input) {
-    if (input < LOTTO_NUMBER.minNum || input > LOTTO_NUMBER.maxNum) {
+    if (Number(input) < LOTTO_NUMBER.minNum || Number(input) > LOTTO_NUMBER.maxNum) {
       throw new ValidationError(ERROR.isOutOfRange);
     }
   },

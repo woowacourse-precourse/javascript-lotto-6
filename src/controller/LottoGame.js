@@ -54,8 +54,16 @@ class LottoGame {
   }
 
   async #getBonusNumberInput() {
-    const bonusNumber = await InputView.readBonusNumber();
-    Validator.validateBonusNumber(bonusNumber);
+    try {
+      const bonusNumber = await InputView.readBonusNumber();
+      Validator.validateBonusNumber(bonusNumber);
+
+      return Number(bonusNumber);
+    } catch (error) {
+      OutputView.printMessage(error.message);
+
+      return this.#getBonusNumberInput();
+    }
   }
 }
 
