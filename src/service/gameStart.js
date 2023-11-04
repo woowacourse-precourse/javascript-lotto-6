@@ -1,5 +1,5 @@
-import purchaseAmountUI from '../util/UI/purchaseAmountUI.js';
-import purchaseResaultUI from '../util/UI/purchaseResultUI.js';
+import purchaseAmountUI from '../util/UI/gameStart/purchaseAmountUI.js';
+import purchaseResaultUI from '../util/UI/gameStart/purchaseResultUI.js';
 import createPurchaseData from '../util/purchase/createPurchaseData.js';
 import purchaseValidService from './validate/purchaseValidService.js';
 
@@ -16,5 +16,3 @@ export default async function gameStart() {
     throw new Error(error.message);
   }
 }
-
-gameStart();
