@@ -12,6 +12,10 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.lottoSize);
     }
+
+    if (new Set(numbers).size !== 6) {
+      throw new Error(ERROR_MESSAGE.duplicateNumbers);
+    }
   }
 
   static countingLottos(inputMoney) {
