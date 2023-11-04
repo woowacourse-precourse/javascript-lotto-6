@@ -2,8 +2,9 @@ import { Console } from '@woowacourse/mission-utils';
 import InputMessage from '../message/Input.js';
 
 const InputView = {
-  readPurchaseAmount() {
-    Console.readLineAsync(InputMessage.PurchaseAmount);
+  async readPurchaseAmount() {
+    const purchaseAmount = await Console.readLineAsync(InputMessage.PurchaseAmount);
+    return purchaseAmount;
   },
 };
 
