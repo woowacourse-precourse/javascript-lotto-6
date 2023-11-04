@@ -28,4 +28,14 @@ describe('💙 InputValidator 클래스를 테스트합니다. ฅ^._.^ฅ', () 
       );
     });
   });
+
+  test(`[validateMoney] 인자로 받은 money가 ${GAME_RULE.MAX_AMOUNT_UNIT}을 초과하면 에러가 발생해요.`, () => {
+    const invalidMoneyList = [200_000, 5_000_000, 900_000_000];
+
+    invalidMoneyList.forEach((invalidMoney) => {
+      expect(() => InputValidator.validateMoney(invalidMoney)).toThrow(
+        ERROR_MESSAGE.OVER_THE_LIMIT,
+      );
+    });
+  });
 });
