@@ -6,6 +6,13 @@ describe("사용자 로또 번호", () => {
     const result = input.split(",").map((number) => parseInt(number.trim(), 10));
     expect(result).toEqual(output);
   });
+
+  test("보너스 번호 - 공백 무시하고 10진수 숫자로 받음", () => {
+    const input = " 11 ";
+    const output = 11;
+    const result = parseInt(input.trim(), 10);
+    expect(result).toEqual(output);
+  });
 });
 
 // RunLotteryMachine.js 관련 단위 테스트
