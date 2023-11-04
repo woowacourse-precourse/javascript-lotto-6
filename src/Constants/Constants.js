@@ -15,7 +15,7 @@ const LOTTO_MESSAGE = Object.freeze({
 
 const ERROR_MESSAGE = Object.freeze({
   NOT_THOUSANDS: '[ERROR] 금액은 1,000 단위로 입력해주세요.',
-  NOT_NUMBERS: '[ERROR] 숫자를 입력해주세요',
+  NOT_NUMBERS: '[ERROR] 1 이상의 숫자로 입력해주세요',
   INPUT_NOTHING: '[ERROR] 값을 입력해주세요.',
   NOT_LOTTO_NUM: '[ERROR] 로또 번호는 1부터 45 사이의 숫자로 입력해주세요.',
   NOT_SIX: '[ERROR] 로또 번호는 6개의 숫자를 쉼표(,)로 구분하여 입력해주세요.',
@@ -23,4 +23,8 @@ const ERROR_MESSAGE = Object.freeze({
     '[ERROR] 보너스 번호는 1부터 45 사이의 숫자를 1개만 입력해주세요.',
 });
 
-export { LOTTO_MESSAGE, ERROR_MESSAGE };
+const NUMBERS = {
+  MIN_LOTTO: 1,
+  MAX_LOTTO: 45,
+};
+export { LOTTO_MESSAGE, ERROR_MESSAGE, NUMBERS };
