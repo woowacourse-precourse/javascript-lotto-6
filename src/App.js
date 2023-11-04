@@ -43,6 +43,8 @@ class App {
 
     this.totalProfit = this.calculateTotalProfit();
     console.log(this.totalProfit);
+
+    this.profitRate = calculateProfitRate();
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -169,6 +171,10 @@ class App {
       30000000 * this.fiveAndBonusMatches +
       2000000000 * this.sixMatches;
     return totalProfit;
+  }
+
+  calculateProfitRate() {
+    return (this.totalProfit / this.purchasePrice) * 100;
   }
 }
 export default App;
