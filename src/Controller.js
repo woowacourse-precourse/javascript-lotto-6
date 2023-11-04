@@ -2,14 +2,11 @@ import { CONSTANT } from "./Constant.js";
 import { Random } from "@woowacourse/mission-utils";
 
 class Controller {
-    static async inputUserPurchasePrice() {
-        return Number(await Console.readLineAsync());
-    }
-    static async inputBonusNum() {
-        return Number(await Console.readLineAsync());
-    }
-    static async inputLottoNum() {
-        return await Console.readLineAsync();
+    // 사용자 인풋
+    static async userInput() {
+        const TMP = await Console.readLineAsync();
+        if (!isNaN(TMP)) return Number(TMP);
+        else return TMP;
     }
 
     // 가격을 로또 갯수로 반환
