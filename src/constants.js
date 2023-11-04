@@ -70,4 +70,4 @@ export const NEW_LINE = '\n';
 export const REG_EXP = /[a-zA-Z가-힣[!@#$%^&*()_+{}[\]:;<>.,?~\\/-]]/g;
 export const REG_EXP_EXCEPT_COMMA = /[a-zA-Z가-힣[!@#$%^&*()_+{}[\]:;<>.?~\\/-]]/g;
 
-export const PROFIT_RATE_IS = (number) => `총 수익률은 ${number}%입니다.`;
+export const PROFITS_RATE_IS = (number) => `총 수익률은 ${number}%입니다.`;
