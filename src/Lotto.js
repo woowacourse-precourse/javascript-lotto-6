@@ -17,7 +17,24 @@ export class Lotto {
   printNumbers() {
     MissionUtils.Console.print(this.#numbers.sort((a, b) => a - b));
   }
+
+  calcGuess(NUMBER_GUESS) {
+    let CORRECT_GUESS = 0;
+    for (let cnt = 0; cnt < 6; cnt++) {
+      if (this.#numbers.includes(NUMBER_GUESS[cnt])) {
+        CORRECT_GUESS++;
+      }
+    }
+    return Number(CORRECT_GUESS);
+  }
+
+  isBonus(NUMBER_BONUS) {
+    if (this.#numbers.includes(NUMBER_BONUS)) {
+      return true;
+    }
+    return false;
+  }
+
   // TODO: 추가 기능 구현
 }
-
 export default Lotto;

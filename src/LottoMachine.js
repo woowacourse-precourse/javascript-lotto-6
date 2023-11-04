@@ -7,6 +7,7 @@ export class LottoMachine {
     this.quantity = PAYMENT / 1000;
     this.inventory = [];
     this.#fillInventory(this.quantity);
+    this.prize = [0, 0, 0, 0, 0];
   }
 
   #validate(PAYMENT) {
@@ -30,6 +31,33 @@ export class LottoMachine {
   printInventory() {
     for (let cnt = 0; cnt < this.quantity; cnt++) {
       this.inventory[cnt].printNumbers();
+    }
+  }
+
+  machinePrize(NUMBER_GUESS, NUMBER_BONUS) {
+    for (let cnt = 0; cnt < this.quantity; cnt++) {
+      let NUMBER_CORRECT = this.inventory[cnt].calcGuess(NUMBER_GUESS);
+      let IS_BONUS = this.inventory[cnt].isBonus(NUMBER_BONUS);
+      console.log(IS_BONUS);
+      this.#addPrize(NUMBER_CORRECT, IS_BONUS);
+    }
+  }
+
+  #addPrize(NUMBER_CORRECT, IS_BONUS) {
+    if (NUMBER_CORRECT === 3) {
+      this.prize[0]++;
+    }
+    if (NUMBER_CORRECT === 4) {
+      this.prize[1]++;
+    }
+    if (NUMBER_CORRECT === 5 && IS_BONUS == false) {
+      this.prize[2]++;
+    }
+    if (NUMBER_CORRECT === 5 && IS_BONUS == true) {
+      this.prize[3]++;
+    }
+    if (NUMBER_CORRECT === 6) {
+      this.prize[4]++;
     }
   }
 }

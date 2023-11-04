@@ -1,5 +1,4 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { Lotto } from "./Lotto.js";
 import { LottoMachine } from "./LottoMachine.js";
 import * as func from "./Function.js";
 
@@ -14,7 +13,11 @@ class App {
     LOTTO_MACHINE.printInventory();
 
     let NUMBER_GUESS = (await func.getGuessNumber()).split(",");
-    const NUMBER_BONUS = await func.getBonusNumber();
+    NUMBER_GUESS = NUMBER_GUESS.map(Number);
+    let NUMBER_BONUS = await func.getBonusNumber();
+    NUMBER_BONUS = Number(NUMBER_BONUS);
+    LOTTO_MACHINE.machinePrize(NUMBER_GUESS, NUMBER_BONUS);
+    console.log(LOTTO_MACHINE.prize);
   }
 }
 
