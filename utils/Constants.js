@@ -4,7 +4,7 @@ const CONSTANTS = Object.freeze({
   eachLottoPrice: 1000,
   bonusNumberCount: 1,
   mainNumberCount: 6,
-  numberDivision: ',',
+  numberDelimiter: ',',
   bonusNumberConditionCount: 5,
 });
 
