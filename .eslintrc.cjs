@@ -5,6 +5,9 @@ module.exports = {
     es2021: true,
   },
   extends: ['airbnb-base', 'plugin:jsdoc/recommended', 'prettier'],
+  parserOptions: {
+    ecmaVersion: 'latest',
+  },
   rules: {
     // 규칙 변경
 
