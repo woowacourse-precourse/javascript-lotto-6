@@ -21,6 +21,7 @@ class App {
     this.#lottoQuantity = calculate.countFrom(this.#money);
     this.#lottos = lottoMachine.make(this.#lottoQuantity);
     notice.quantity(this.#lottoQuantity);
+    notice.totalLotto(this.#lottos);
   }
 }
 

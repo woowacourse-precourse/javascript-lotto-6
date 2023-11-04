@@ -4,6 +4,12 @@ class notice {
   static quantity(lottoCount) {
     prompt.out(`\n${lottoCount}개를 구매했습니다.`);
   }
+
+  static totalLotto(lottos) {
+    lottos.forEach((lotto) => {
+      prompt.out(lotto.getNumbers());
+    });
+  }
 }
 
 export default notice;

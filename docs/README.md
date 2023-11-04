@@ -21,7 +21,7 @@
     - [x] Lotto 클래스를 사용해서 필드값에 넣는다.
 
 - [x] 구입한 수량을 출력한다. prompt.out(lottoCount());
-- [ ] 구입한 로또를 출력한다. prompt.out(#lottos);
+- [x] 구입한 로또를 출력한다. prompt.out(#lottos);
 
 - [ ] 당청 번호를 입력 받는다. request.winningNumber 
     - [ ] 입력값이 적당한지 확인한다. validate.winningNumber()
