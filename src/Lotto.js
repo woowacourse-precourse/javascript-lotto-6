@@ -1,8 +1,9 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
@@ -12,7 +13,22 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  generateRandomNumber(lottoCnt) {
+    const lottoArr = [];
+    for(let i = 0 ; i < lottoCnt ; i++) {
+      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      MissionUtils.Console.print(randomNumbers);
+      lottoArr.push(randomNumbers);
+    }
+    return lottoArr;
+  }
+  repeatLottoNumber(purchasePrice) {
+    const lottoCnt = purchasePrice / 1000;
+    return lottoCnt;
+  }
+  isValidWinningNumbers(winningNumbers) {
+    this.#validate(winningNumbers.split(','));
+  } 
 }
 
 export default Lotto;
