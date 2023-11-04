@@ -31,6 +31,14 @@ describe("사용자 로또 번호", () => {
     const result = parseInt(input.trim(), 10);
     expect(result).toEqual(output);
   });
+
+  test("오름차순", () => {
+    const input = "5,8,3,1,9,7";
+    const output = ["1", "3", "5", "7", "8", "9"];
+    const array = input.split(",");
+    const result = array.sort((a, b) => a - b);
+    expect(result).toEqual(output);
+  });
 });
 
 // RunLotteryMachine.js 관련 단위 테스트
