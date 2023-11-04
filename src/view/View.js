@@ -13,7 +13,7 @@ class View {
     Console.print(`\n${lotties.length}개를 구매했습니다.`);
 
     lotties.forEach((lotto) => {
-      Console.print(lotto.lottoNumbers);
+      Console.print(`[${lotto.lottoNumbers.join(", ")}]`);
     });
   }
   printLottoPrize(prizeCategories) {
