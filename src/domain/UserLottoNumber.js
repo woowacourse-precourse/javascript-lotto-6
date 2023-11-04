@@ -12,7 +12,7 @@ class UserLottoNumber {
 
   async userBonusNumber() {
     const input = await Console.readLineAsync();
-    this.bonusNumber = input.trim();
+    this.bonusNumber = parseInt(input.trim(), 10);
     return this.bonusNumber;
   }
 }
