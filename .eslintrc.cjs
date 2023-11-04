@@ -15,6 +15,14 @@ module.exports = {
         sourceType: 'script',
       },
     },
+
+    {
+      files: ['__tests__/**/*.js'],
+      rules: {
+        'max-lines-per-function': 'off',
+        'no-new': 'off',
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
