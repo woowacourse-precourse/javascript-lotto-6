@@ -62,16 +62,20 @@ describe("LottoModel 테스트", () => {
     });
 
     test("범위를 벗어나는 번호인 경우 예외 처리", () => {
-      const number = 100;
+      const number = SETTINGS.targetNumber.maximum * 2;
 
-      expect(() => lottoModel.validateBonusNumbers(number)).toThrowError();
+      expect(() => lottoModel.validateBonusNumbers(number)).toThrowError(
+        MESSAGES.error.invalidRange
+      );
     });
 
     test("이미 로또 번호에 있는 번호인 경우 예외 처리", () => {
       const number = 25;
       lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35];
 
-      expect(() => lottoModel.validateBonusNumbers(number)).toThrowError();
+      expect(() => lottoModel.validateBonusNumbers(number)).toThrowError(
+        MESSAGES.error.notDuplicateTargetNumbers
+      );
     });
   });
 
