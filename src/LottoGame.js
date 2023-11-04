@@ -10,11 +10,16 @@ class LottoGame {
   async start() {
     await this.setBuyer();
     this.printPurchaseInfo();
+    await this.setWinLotto();
   }
 
   async setBuyer() {
     const lottoBudget = await Input.getLottoBudget();
     this.#buyer = new Buyer(lottoBudget);
+  }
+
+  async setWinLotto() {
+    const winLotto = await Input.getWinLotto();
   }
 
   printPurchaseInfo() {

@@ -1,6 +1,5 @@
 import { ERROR, LOTTO } from './constant.js';
 import Lotto from './Lotto.js';
-import Output from './Output.js';
 import Util from './Util.js';
 
 class Buyer {

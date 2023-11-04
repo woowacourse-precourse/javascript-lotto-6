@@ -1,5 +1,6 @@
 export const PROMPT = Object.freeze({
   lottoBudget: '구입금액을 입력해 주세요.\n',
+  winLotto: '당첨 번호를 입력해 주세요.\n',
 });
 
 export const LOTTO = Object.freeze({

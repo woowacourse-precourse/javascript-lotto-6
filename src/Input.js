@@ -7,6 +7,12 @@ class Input {
 
     return lottoBudget;
   }
+
+  static async getWinLotto() {
+    const winLotto = await Console.readLineAsync(PROMPT.winLotto);
+
+    return winLotto;
+  }
 }
 
 export default Input;
