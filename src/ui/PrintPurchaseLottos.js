@@ -1,9 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import Messages from "../common/messages.js";
-import makeLotto from "../controller/Lotto/makeLotto.js";
+import collectLotto from "../controller/Lotto/collectLotto.js";
 
 const PrintPurchaseLotto = (count) => {
   Console.print(`\n${count}${Messages.PURCHASE_COUNT_MESSAGE}`);
+  for (let i = 0; i < count; i++) {
+    Console.print(collectLotto(count)[i]);
+  }
 };
 
 export default PrintPurchaseLotto;
