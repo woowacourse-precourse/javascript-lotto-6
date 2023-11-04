@@ -1,5 +1,17 @@
+import View from './View/View.js';
+
 class App {
-  async play() {}
+  #view;
+
+  constructor() {
+    this.#view = new View();
+  }
+
+  async play() {
+    const userInput = await this.#view.readUserInput();
+
+    this.#view.print(userInput);
+  }
 }
 
 export default App;
