@@ -22,3 +22,11 @@ export const isDuplicated = (array) => new Set(array).size !== array.length;
  * @returns {boolean}
  */
 export const isOutOfRange = (value, { min, max }) => value < min || value > max;
+
+/**
+ * 값이 특정 값으로 정확이 나누어 떨어지는지 판별합니다.
+ * @param {number} value
+ * @param {number} dividedValue
+ * @returns {boolean}
+ */
+export const isIndivisible = (value, dividedValue) => dividedValue % value !== 0;
