@@ -2,20 +2,26 @@ import { Console } from '@woowacourse/mission-utils';
 import { PROMPT } from '../constant/constant.js';
 
 class Input {
+  static async readAsync(prompt) {
+    const answer = await Console.readLineAsync(prompt);
+
+    return answer;
+  }
+
   static async getLottoBudget() {
-    const lottoBudget = await Console.readLineAsync(PROMPT.lottoBudget);
+    const lottoBudget = await Input.readAsync(PROMPT.lottoBudget);
 
     return lottoBudget;
   }
 
   static async getWinLotto() {
-    const winLotto = await Console.readLineAsync(PROMPT.winLotto);
+    const winLotto = await Input.readAsync(PROMPT.winLotto);
 
     return winLotto;
   }
 
   static async getBonusLotto() {
-    const bonusLotto = await Console.readLineAsync(PROMPT.bonusLotto);
+    const bonusLotto = await Input.readAsync(PROMPT.bonusLotto);
 
     return bonusLotto;
   }

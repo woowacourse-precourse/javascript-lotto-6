@@ -2,12 +2,16 @@ import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from '../constant/constant.js';
 
 class Output {
+  static print(message) {
+    Console.print(message);
+  }
+
   static printPurchaseCount(count) {
-    Console.print(MESSAGE.purchase(count));
+    Output.print(MESSAGE.purchase(count));
   }
 
   static printPurchasedLottoList(lottoList) {
-    lottoList.forEach(Console.print);
+    lottoList.forEach(Output.print);
   }
 }
 export default Output;
