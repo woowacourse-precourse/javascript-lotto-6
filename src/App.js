@@ -18,8 +18,11 @@ class App {
   async play() {
     this.#lottoGame.setUpGame();
     await this.#getLottoTickets();
+
     const winnigNumbers = await this.#inputView.getWinnigNumbers();
     const bonusNumber = await this.#inputView.getBonusNumber();
+    const result = this.#lottoGame.resultOfWinningDetails(winnigNumbers, bonusNumber);
+    console.log(result);
   }
 
   async #getLottoTickets() {

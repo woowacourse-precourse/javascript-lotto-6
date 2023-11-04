@@ -1,3 +1,4 @@
+import CombinationMachine from './CombinationMachine.js';
 import Computer from './Computer.js';
 import LottoSeller from './LottoSeller.js';
 import User from './User.js';
@@ -22,6 +23,13 @@ class LottoGame {
     const lottos = this.#user.purchaceLottos();
 
     return lottos;
+  }
+
+  resultOfWinningDetails(winnigNumbers, bonusNumber) {
+    const combinationMachine = new CombinationMachine(winnigNumbers, bonusNumber);
+    const result = this.#user.checkResult(combinationMachine);
+
+    return result;
   }
 }
 
