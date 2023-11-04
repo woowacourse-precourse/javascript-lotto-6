@@ -19,9 +19,11 @@ class App {
       new Lotto(ticket);
     });
     const result = await WinLotto.calculateEarnings(this.lottoTickets);
+
+    MissionUtils.Console.print("당첨 통계\n---");
     View.printRewardStatistics(result);
     const returnPrint = View.printReturn(result, inputMoney);
-    MissionUtils.Console.print(returnPrint);
+    MissionUtils.Console.print(`총 수익률은 ${returnPrint}입니다.`);
   }
 }
 

@@ -67,7 +67,7 @@ class View {
     const isValidCount = calculateEarningResults.countResults;
     if (isValidCount) {
       const rateOfReturn = (totalReturn / inputMoney) * 100;
-      return `${rateOfReturn.toFixed(2)}%`;
+      return `${Number(rateOfReturn.toFixed(2))}%`;
     }
   }
 }

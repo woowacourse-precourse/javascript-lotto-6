@@ -19,22 +19,22 @@ class WinLotto {
   }
 
   compareNumbers() {
-    let winningAndBonusCount = [];
+    let winningResults = [];
 
     this.ticketNumbers.forEach((ticket) => {
-      const matchCount = ticket.filter((num) =>
+      let matchCount = ticket.filter((num) =>
         this.winningNumbers.includes(num)
       ).length;
+      let bonusMatch = ticket.includes(this.bonusNumber) ? 1 : 0;
 
-      const bonusMatch = ticket.includes(this.bonusNumber) ? 1 : 0;
-
-      winningAndBonusCount.push({
-        matchCount: matchCount,
-        bonusMatch: bonusMatch,
-      });
+      if (matchCount === 5 && bonusMatch === 1) {
+        winningResults.push("5+1");
+      } else {
+        winningResults.push(matchCount);
+      }
     });
 
-    return winningAndBonusCount;
+    return winningResults;
   }
 
   static async calculateEarnings(lottoTickets) {
@@ -58,12 +58,12 @@ class WinLotto {
     };
 
     results.forEach((result) => {
-      if (result.matchCount === 5 && result.bonusMatch === 1) {
+      if (result === "5+1") {
         countResults["5+1"]++;
         totalEarnings += prizeMoney["5+1"];
-      } else if (result.matchCount >= 3) {
-        countResults[result.matchCount]++;
-        totalEarnings += prizeMoney[result.matchCount];
+      } else if (typeof result === "number" && result >= 3) {
+        countResults[result]++;
+        totalEarnings += prizeMoney[result];
       }
     });
 
