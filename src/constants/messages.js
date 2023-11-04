@@ -6,7 +6,7 @@ const INPUT_MESSAGE = {
   bonusNumber: '보너스 번호를 입력해 주세요.\n',
 };
 
-const PURCHASE_MESSAGE = (count) => `${count}개를 구매했습니다.\n`;
+const PURCHASE_MESSAGE = (count) => `\n${count}개를 구매했습니다.`;
 
 const STATISTICS_MESSAGE = {
   output: '당첨 통계\n---\n',
