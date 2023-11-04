@@ -17,10 +17,17 @@ const Validation = {
     }
   },
 
+  minimumPrice(price) {
+    if (Number(price) < 1000) {
+      throw new Error('로또 금액은 1,000원 이상부터 구매가 가능합니다.');
+    }
+  },
+
   inputLottoPrice(price) {
     Validation.currencyAmount(price);
     Validation.numberType(price);
     Validation.limitPrice(price);
+    Validation.minimumPrice(price);
   },
 };
 
