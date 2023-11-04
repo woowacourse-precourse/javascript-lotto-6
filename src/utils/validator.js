@@ -1,4 +1,4 @@
-import printErrorMessage from './printErrorMessage.js';
+import printErrorMessage from './printMessage.js';
 import MESSAGES from '../constants/messages.js';
 
 const isValidPerchaseAmount = perchaseAmount => {
