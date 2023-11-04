@@ -11,7 +11,9 @@ class Utils {
   }
 
   static convertStringIntoNumberArray(input) {
-    return input.split(SEPARATOR.USER_LOTTO).map(Number);
+    return input
+      .split(SEPARATOR.USER_LOTTO)
+      .map((value) => parseInt(value, 10));
   }
 
   static convertKoreaWonUnit(number) {

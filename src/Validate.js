@@ -28,7 +28,7 @@ class Validate {
     return true;
   }
 
-  isOnlyNumberAndComma(input) {
+  static isOnlyNumberAndComma(input) {
     if (!REGEX.ONLY_NUMBER_AND_COMMA.test(input)) {
       throw new Error(ERROR.NOT_ONLY_NUMBER_AND_COMMA);
     }
@@ -38,6 +38,7 @@ class Validate {
 
   isValidUserLottoInput(input) {
     if (
+      this.isExistNaN(input) ||
       !this.isValidLength(input) ||
       !this.isValidRangeEachLotto(input) ||
       this.isDuplicate(input)
@@ -46,6 +47,16 @@ class Validate {
     }
 
     return true;
+  }
+
+  isExistNaN(input) {
+    const isAnyNaN = input.some((value) => Number.isNaN(value));
+
+    if (isAnyNaN) {
+      throw new Error(ERROR.INVALID_FORMAT);
+    }
+
+    return false;
   }
 
   isValidLength(input) {

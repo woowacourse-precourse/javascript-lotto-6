@@ -36,16 +36,19 @@ class App {
   async getUserLottoInput() {
     try {
       const userLottoInput = await Print.getUserLottoNumber();
-      const validate = new Validate();
-      validate.isOnlyNumberAndComma(userLottoInput);
-      const numbersArray = Utils.convertStringIntoNumberArray(userLottoInput);
-      const validUserLotto = new Lotto(numbersArray);
-      this.#userLotto = validUserLotto.getUserLotto();
+      Validate.isOnlyNumberAndComma(userLottoInput);
+      this.createUserLotto(userLottoInput);
       await this.getUserBonusInput();
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.getUserLottoInput();
     }
+  }
+
+  createUserLotto(input) {
+    const numbersArray = Utils.convertStringIntoNumberArray(input);
+    const validUserLotto = new Lotto(numbersArray);
+    this.#userLotto = validUserLotto.getUserLotto();
   }
 
   async getUserBonusInput() {

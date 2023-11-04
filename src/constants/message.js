@@ -52,6 +52,7 @@ export const ERROR = {
   INVALID_UNIT: `[ERROR] ${UNIT.PURCHASE} 단위로 입력 가능합니다.`,
   INVALID_LOTTO_LENGTH: `[ERROR] 로또 번호는 ${LOTTO.LENGTH}개여야 합니다.`,
   NOT_ONLY_NUMBER_AND_COMMA: `[ERROR] 숫자와 ${SEPARATOR.NAME}만 입력 가능합니다.`,
+  INVALID_FORMAT: `[ERROR] 올바르지 않은 형식입니다.`,
   INVALID_RANGE: `[ERROR] 로또 번호는 ${LOTTO.MIN_RANGE}부터 ${LOTTO.MAX_RANGE} 사이의 숫자여야 합니다.`,
   DUPLICATE_EXIST: "[ERROR] 중복되는 번호는 입력할 수 없습니다.",
   ALREADY_EXIST: "[ERROR] 보너스 번호와 당첨 번호는 중복될 수 없습니다.",
