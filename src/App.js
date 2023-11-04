@@ -5,6 +5,7 @@ class App {
   async play() {
     const lottoAmount = await UserInput.inputAmount();
     const bonusNumber = await UserInput.inputBonus();
+    const selectedNumbers = await UserInput.inputNumber();
 
     const lottoNumber = Lotto.generateNumbers();
     const numberOfSets = lottoAmount / 1000;
