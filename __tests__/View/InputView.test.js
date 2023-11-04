@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import InputView from "../../src/View/InputView";
-import { INPUT_MESSAGE } from "../../src/constants/message";
+import InputView from "../../src/View/InputView.js";
+import { INPUT_MESSAGE } from "../../src/constants/message.js";
 
 Console.readLineAsync = jest.fn();
 
@@ -15,9 +15,7 @@ describe("InputView 객체 테스트", () => {
       // when
       InputView.readLottoPurchaseAmount();
       // tehn
-      expect(Console.readLineAsync).toBeCalledWith(
-        INPUT_MESSAGE.PURCHASE_LOTTO
-      );
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.PURCHASE_LOTTO);
     });
 
     test("readLottoPurchaseAmount 메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
