@@ -18,4 +18,32 @@ function isDivisibleByThousand(input) {
   }
 }
 
-export { isInputEmpty, isInputNumeric, isDivisibleByThousand };
+function checkLottoNumbersLength(numbers) {
+  if (numbers.length !== 6) {
+    throw new Error(ERRORS.INVALID_NUMBERS_LENGTH);
+  }
+}
+
+function hasDuplicate(numbers) {
+  const numberSet = new Set(numbers);
+  if (numbers.length !== numberSet.size) {
+    throw new Error(ERRORS.CONTAIN_DUPLICATE_NUMBER);
+  }
+}
+
+function isNumberInRange(numbers) {
+  numbers.forEach((number) => {
+    if (number < 1 || number > 45) {
+      throw new Error(ERRORS.NUMBER_RANGE_ALERT);
+    }
+  });
+}
+
+export {
+  isInputEmpty,
+  isInputNumeric,
+  isDivisibleByThousand,
+  checkLottoNumbersLength,
+  hasDuplicate,
+  isNumberInRange,
+};

@@ -13,15 +13,9 @@ class User {
   }
 
   async buyLotto() {
-    try {
-      const input = await Console.readLineAsync(
-        MESSAGES.LOTTO_PURCHASE_MESSAGE
-      );
-      this.#validate(input);
-      this.money = parseInt(input);
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    const input = await Console.readLineAsync(MESSAGES.LOTTO_PURCHASE_MESSAGE);
+    this.#validate(input);
+    this.money = parseInt(input);
   }
 
   #validate(input) {
