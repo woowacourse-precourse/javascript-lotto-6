@@ -1,8 +1,9 @@
 /* eslint-disable import/extensions */
 import database from '../../../DB/database.js';
+import CONSTANTS from '../../../../Util/Constants.js';
 
 const selectSqlWinningLotto = () => {
-  database.get('winningLotto');
+  return database.get(CONSTANTS.winningLottoColumnName);
 };
 
 export default selectSqlWinningLotto;

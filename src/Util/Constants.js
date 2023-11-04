@@ -6,6 +6,8 @@ const CONSTANTS = Object.freeze({
   lottoMax: 45,
   lottoCount: 6,
   lottoPrice: 1000,
+  bonusLottoColumnName: 'bonusLotto',
+  winningLottoColumnName: 'winningLotto',
 });
 
 export default CONSTANTS;

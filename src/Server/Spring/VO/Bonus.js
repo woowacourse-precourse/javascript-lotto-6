@@ -6,14 +6,15 @@ import { ERROR_MESSAGE } from '../../../Util/Message.js';
 class Bonus {
   #bonus;
 
-  constructor(bonusLotto) {
-    this.#validate(bonusLotto);
+  constructor(bonusLotto, winningLotto) {
+    this.#validate(bonusLotto, winningLotto);
     this.#bonus = Number(bonusLotto);
   }
 
-  #validate(bonusLotto) {
+  #validate(bonusLotto, winningLotto) {
     if (bonusLotto === '') throw new Error(ERROR_MESSAGE.isBlank);
     if (Number.isNaN(Number(bonusLotto))) throw new Error(ERROR_MESSAGE.isChar);
+    if (winningLotto.includes(Number(bonusLotto))) throw new Error(ERROR_MESSAGE.isDuplicate);
     if (CONSTANTS.lottoMin > Number(bonusLotto) || Number(bonusLotto) > CONSTANTS.lottoMax)
       throw new Error(ERROR_MESSAGE.isNotInRange);
   }
