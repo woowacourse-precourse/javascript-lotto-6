@@ -20,8 +20,9 @@ class OutputView {
   }
 
   printResult(result) {
-    const prize = Object.keys(result).map((price) => Number(price).toLocaleString());
-    const matchedLength = Object.values(result);
+    const prize = Object.keys(result[0]).map((price) => Number(price).toLocaleString());
+    const matchedLength = Object.values(result[0]);
+    const rateOfReturn = result[1];
 
     this.#print(
       `\n당첨 통계
@@ -30,7 +31,8 @@ class OutputView {
 4개 일치 (${prize[1]}원) - ${matchedLength[1]}개
 5개 일치 (${prize[2]}원) - ${matchedLength[2]}개
 5개 일치, 보너스 볼 일치 (${prize[3]}원) - ${matchedLength[3]}개
-6개 일치 (${prize[4]}원) - ${matchedLength[4]}개`
+6개 일치 (${prize[4]}원) - ${matchedLength[4]}개
+총 수익률은 ${rateOfReturn}%입니다.`
     );
   }
 
