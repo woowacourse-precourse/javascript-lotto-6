@@ -25,6 +25,27 @@ class LottoController {
       this.lottoCount -= 1;
     }
   }
+
+  checkWin(price, win, bonus) {
+    for (let i = 0; i < price / 1000; i++) {
+      const lotto = this.lottoArr[i].getNumbers();
+      const sameNumArr = lotto.filter((num) => win.includes(num));
+      if (sameNumArr.length === 5) {
+        this.checkIsBonus(lotto, bonus);
+      } else {
+        this.sameNumCountArr.push(sameNumArr.length);
+      }
+    }
+    // Console.print(this.sameNumCountArr);
+  }
+
+  checkIsBonus(arr, bonus) {
+    if (arr.includes(bonus)) {
+      this.sameNumCountArr.push(7);
+    } else {
+      this.sameNumCountArr.push(5);
+    }
+  }
 }
 
 export default LottoController;
