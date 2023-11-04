@@ -109,6 +109,10 @@
     <th>설명</th>
   </tr>
   <tr>
+    <td>getNumbers()</td>
+    <td><code>numbers</code>를 반환합니다.</td>
+  </tr>
+  <tr>
     <td>match(number)</td>
     <td>입력받은 <code>LottoNumber</code>가 <code>numbers</code>에 포함되었는지 비교합니다.</td>
   </tr>
@@ -295,23 +299,24 @@
   - [x] 인스턴스 생성 시 `number`에 범위 외 숫자가 입력되면 에러가 발생한다.
   - [x] `equal(number)` 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
 
-- [ ] Lotto
+- [x] Lotto
 
-  - [ ] `match(number)` 호출 시 `numbers`에 해당 인자를 보유하였는지 확인한다.
+  - [x] `match(number)` 호출 시 `numbers`에 해당 인자를 보유하였는지 확인한다.
 
-- [ ] Lotto 예외 처리
+- [x] Lotto 예외 처리
 
-  - [ ] 인스턴스 생성 시 `numbers`에 중복된 숫자가 존재할 시 에러가 발생한다.
-  - [ ] 인스턴스 생성 시 `numbers`가 6개가 아닐 시 에러가 발생한다.
-  - [ ] `match(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
+  - [x] 인스턴스 생성 시 `numbers`에 중복된 숫자가 존재할 시 에러가 발생한다.
+  - [x] 인스턴스 생성 시 `numbers`가 6개가 아닐 시 에러가 발생한다.
+  - [x] `match(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
 
-- [ ] LottoMachine
+- [x] LottoMachine
 
-  - [ ] `buy(money)` 호출 시 금액에 비례해 `Lotto`를 반환한다.
+  - [x] `buy(money)` 호출 시 금액에 비례해 `Lotto`를 반환한다.
 
-- [ ] LottoMachine 예외 처리
+- [x] LottoMachine 예외 처리
 
-  - [ ] `buy(money)` 호출 시 인자로 숫자가 아닌 값이 들어올 시 에러가 발생한다.
+  - [x] `buy(money)` 호출 시 인자로 숫자가 아닌 값이 들어올 시 에러가 발생한다.
+  - [x] `buy(money)` 호출 시 1000원으로 나누어 떨어지지 않는 값이 들어올 시 에러가 발생한다.
 
 - [ ] WinningLotto
 

@@ -16,6 +16,21 @@ describe('로또 클래스 테스트', () => {
   });
 
   it.each([
+    { numbers: [1, 2, 3, 4, 5, 6] },
+    { numbers: [1, 2, 3, 4, 5, 6] },
+    { numbers: [1, 2, 3, 4, 5, 6] },
+  ])('`getNumbers` 호출 시 `numbers`를 반환한다.', ({ numbers }) => {
+    // given
+    const lotto = Lotto.of(numbers);
+
+    // when
+    const result = lotto.getNumbers();
+
+    // then
+    expect(result).toEqual(Array.from(numbers, LottoNumber.valueOf));
+  });
+
+  it.each([
     { numbers: [1, 2, 3, 4, 5, 6], number: LottoNumber.valueOf(1) },
     { numbers: [1, 2, 3, 4, 5, 6], number: LottoNumber.valueOf(2) },
     { numbers: [1, 2, 3, 4, 5, 6], number: LottoNumber.valueOf(3) },
@@ -35,6 +50,7 @@ describe('로또 클래스 테스트', () => {
       expect(result).toBeTruthy();
     },
   );
+
   it.each([
     { numbers: [1, 2, 3, 4, 5, 6], number: LottoNumber.valueOf(7) },
     { numbers: [1, 2, 3, 4, 5, 6], number: LottoNumber.valueOf(8) },

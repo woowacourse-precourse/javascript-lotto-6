@@ -1,5 +1,6 @@
 import ERROR_MESSAGE_GENERATOR from './constants/error.js';
 import LottoNumber from './domain/LottoNumber.js';
+import ApplicationError from './exceptions/ApplicationError.js';
 import { isDuplicated } from './utils/validator.js';
 
 class Lotto {
@@ -40,11 +41,19 @@ class Lotto {
 
   #validate(numbers) {
     if (isDuplicated(numbers)) {
-      throw new Error(Lotto.ERROR_MESSAGES.duplicated);
+      throw new ApplicationError(Lotto.ERROR_MESSAGES.duplicated);
     }
     if (numbers.length !== Lotto.NUMBER_QUANTITY) {
-      throw new Error(Lotto.ERROR_MESSAGES.invalidQuantity);
+      throw new ApplicationError(Lotto.ERROR_MESSAGES.invalidQuantity);
     }
+  }
+
+  /**
+   * 로또의 numbers를 반환합니다.
+   * @param {LottoNumber} number
+   */
+  getNumbers() {
+    return this.#numbers;
   }
 
   /**
