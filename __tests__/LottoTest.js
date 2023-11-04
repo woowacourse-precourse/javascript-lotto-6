@@ -45,7 +45,7 @@ describe("로또 클래스 테스트", () => {
   test("getMatchCount : 정답 번호와 일치하는 개수 리턴", () => {
     const numbers = getLottoNumbers(LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER);
     const lotto = new Lotto(numbers);
-    const bonusNumber = LOTTO.MAX_NUMBER;
+    const bonusNumber = [LOTTO.MAX_NUMBER];
 
     const [matchLotto, matchBonus] = lotto.getMatchCount(numbers, bonusNumber);
 
