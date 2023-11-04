@@ -2,15 +2,25 @@ import ERROR from "../static/Error.js";
 import NUMBER from "../static/Number.js";
 import RangeFilter from "./RangeFilter.js";
 
-const InputValidator = {
-  purchaseAmount(input) {
+const Validator = {
+  lottoNumber(numbers) {
+    const number = numbers.join("");
+    if (number.replace(/\d/g, "").length > 0)
+      throw new Error(ERROR.lottoNumber);
+    if (numbers.length !== new Set(numbers).size)
+      throw new Error(ERROR.lottoDuplicate);
+    if (numbers.length !== NUMBER.lottoCount) throw new Error(ERROR.lottoCount);
+    if (RangeFilter(numbers)) throw new Error(ERROR.lottoRange);
+  },
+
+  inputPurchaseAmount(input) {
     if (input === "0" || input === "") throw new Error(ERROR.purchaseZero);
     if (input.replace(/\d/g, "").length > 0)
       throw new Error(ERROR.purchaseNumber);
     if (input % NUMBER.price !== 0) throw new Error(ERROR.purchaseUnit);
   },
 
-  winningNumber(input) {
+  inputWinningNumber(input) {
     const inputNumbers = input.split(",");
     if (input.replace(/\d|\,/g, "").length > 0)
       throw new Error(ERROR.winningNumber);
@@ -21,7 +31,7 @@ const InputValidator = {
     if (RangeFilter(inputNumbers)) throw new Error(ERROR.winningRange);
   },
 
-  bonusNumber(input, winningNumber) {
+  inputBonusNumber(input, winningNumber) {
     const inputArray = [input];
     if (input.replace(/\d/g, "").length > 0) throw new Error(ERROR.bonusNumber);
     if (inputArray.length !== 1) throw new Error(ERROR.bonusCount);
@@ -30,4 +40,4 @@ const InputValidator = {
   },
 };
 
-export default InputValidator;
+export default Validator;

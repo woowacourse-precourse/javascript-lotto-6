@@ -1,12 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import MESSAGE from "../static/Message.js";
-import InputValidator from "../utils/InputValidator.js";
+import Validator from "../utils/Validator.js";
 
 const InputView = {
   async readPurchasePrice() {
     const inputPrice = await Console.readLineAsync(MESSAGE.purchase);
 
-    InputValidator.purchaseAmount(inputPrice);
+    Validator.inputPurchaseAmount(inputPrice);
 
     return inputPrice;
   },
@@ -14,7 +14,7 @@ const InputView = {
   async readWinningNumber() {
     const inputNumbers = await Console.readLineAsync(MESSAGE.winningNumber);
 
-    InputValidator.winningNumber(inputNumbers);
+    Validator.inputWinningNumber(inputNumbers);
 
     return inputNumbers;
   },
@@ -22,7 +22,7 @@ const InputView = {
   async readBonusNumber(winningNumber) {
     const inputNumber = await Console.readLineAsync(MESSAGE.bonusNumber);
 
-    InputValidator.bonusNumber(inputNumber, winningNumber);
+    Validator.inputBonusNumber(inputNumber, winningNumber);
 
     return inputNumber;
   },
