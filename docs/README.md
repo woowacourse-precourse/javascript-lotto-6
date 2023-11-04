@@ -16,9 +16,9 @@
         - [x] request.money 테스트 진행 
     - [x] 금액에 맞는 복권의 매수를 계산해서 값을 넣는다. - calculate.countFrom();
 
-- [ ] 구입한 로또의 수만큼 로또를 발행한다. lottoMachine.make();
-    - [ ] 로또의 발행은 pickUniqueNumbersInRange()을 사용하고, 그 값을 정렬한다.
-    - [ ] Lotto 클래스를 사용해서 필드값에 넣는다.
+- [x] 구입한 로또의 수만큼 로또를 발행한다. lottoMachine.make();
+    - [x] 로또의 발행은 pickUniqueNumbersInRange()을 사용하고, 그 값을 정렬한다.
+    - [x] Lotto 클래스를 사용해서 필드값에 넣는다.
 
 - [ ] 구입한 수량을 출력한다. prompt.out(lottoCount());
 - [ ] 구입한 로또를 출력한다. prompt.out(#lottos);

@@ -7,6 +7,7 @@ class lottoMachine {
 
     Array.from({ length: lottoCount }).forEach(() => {
       const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      lottoNumbers.sort((a, b) => a - b);
       const lotto = new Lotto(lottoNumbers);
       lottoArray.push(lotto);
     });
