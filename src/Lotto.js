@@ -46,14 +46,18 @@ class Lotto {
     return result;
   }
 
+  checkEqualNumber(equalNumber){
+    if(equalNumber === 5){
+      return this.compareBonusNumber(randomNumberArray, userBonusNumber);
+    }
+  }
+
   compareLottoNumbers(lottoRandomNumber, userLottoNumber, userBonusNumber){
     let lottoResult = [];
-    const bonusResult = 0;
+    let bonusResult = 0;
     lottoRandomNumber.forEach(randomNumberArray => {
       const equalNumber = this.countEqualNumbers(randomNumberArray, userLottoNumber);
-      if(equalNumber === 5){
-        bonusResult = this.compareBonusNumber(randomNumberArray, userBonusNumber);
-      }
+      bonusResult = this.checkEqualNumber(equalNumber);
       lottoResult = this.getLottoResult(equalNumber, bonusResult);
     });
     return lottoResult;
