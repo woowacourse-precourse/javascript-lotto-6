@@ -11,6 +11,7 @@ export default class LottoController {
 
   async start() {
     await this.initializeLottoAmount();
+    OutputView.printLottoAmount(this.#lottoAmount);
   }
 
   async initializeLottoAmount() {

@@ -1,5 +1,6 @@
 export const MESSAGE = {
   moneyInput: `구입금액을 입력해 주세요.\n`,
+  lottoAmount: (amount) => `\n${amount}개를 구매했습니다.`,
 };
 
 export const ERROR = {
