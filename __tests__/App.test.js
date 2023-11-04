@@ -96,4 +96,12 @@ describe('class App test', () => {
       }).toThrow('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
     });
   });
+
+  describe('method test : sortNumber()', () => {
+    test('로또 번호 배열이 오름차순으로 정렬이 되는가 ?', () => {
+      const lottoArray = [5,4,6,3,1,2];
+      const testArray = app.sortNumber(lottoArray);
+      expect(testArray).toEqual([1,2,3,4,5,6]);
+    });
+  });
 });
