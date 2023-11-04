@@ -1,6 +1,12 @@
 import LOTTO from '../constants/lotto';
 import { ERROR_MESSAGE } from '../constants/message';
 
+export function validateNumber(number) {
+  if (Number.isNaN(number)) {
+    throw new Error(ERROR_MESSAGE.requireNumber);
+  }
+}
+
 export function validateNumberRange(numbers) {
   const isOutOfRange = numbers.some(
     (number) => number < LOTTO.min || number > LOTTO.max,
@@ -16,15 +22,14 @@ export function validateDuplication(numbers) {
     throw new Error(ERROR_MESSAGE.duplication);
   }
 }
-
-export function validateLength(numbers) {
-  if (numbers.length !== LOTTO.length) {
-    throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+export function validateBonus(numbers, bonusNumber) {
+  if (numbers.includes(bonusNumber)) {
+    throw new Error(ERROR_MESSAGE.duplication);
   }
 }
 
-export function validateBonusLength(numbers) {
-  if (numbers.length === LOTTO.bonusLength) {
-    throw new Error('[ERROR] 로또 번호(보너스 포함)는 7개여야 합니다.');
+export function validateLength(numbers) {
+  if (numbers.length !== LOTTO.length) {
+    throw new Error(ERROR_MESSAGE.tooManyNums);
   }
 }

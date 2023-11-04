@@ -66,24 +66,6 @@ describe('LottoCompany 객체 테스트', () => {
     expect(lottos).toHaveLength(2);
   });
 
-  test('numbers 멤버에는 1~45 사이의 숫자를 넣지않으면 예외가 발생한다.', () => {
-    // given
-    const input1 = 0;
-    const input2 = 46;
-    const inputList = [1, 2, 3, 4, 5, 46];
-
-    // when
-    const pushSmallNum = () => lottoCompany.pushBonus(input1);
-    const pushLargelNum = () => lottoCompany.pushBonus(input2);
-    const setNumbers = () => {
-      lottoCompany.numbers = inputList;
-    };
-    // then
-    expect(pushSmallNum).toThrow('[ERROR]');
-    expect(pushLargelNum).toThrow('[ERROR]');
-    expect(setNumbers).toThrow('[ERROR]');
-  });
-
   test('match 메서드를 호출하면, 로또 번호의 일치 개수가 반환된다.', () => {
     // given
     lottoCompany.numbers = [1, 2, 3, 7, 8, 9];
@@ -99,9 +81,10 @@ describe('LottoCompany 객체 테스트', () => {
   test('로또 객체 배열이 주어지면, 통계를 계산할 수 있다.', () => {
     // given
     lottoCompany.numbers = [1, 2, 3, 4, 5, 6];
+    lottoCompany.bonusNumber = 10;
     const lottos = [
       new Lotto([1, 2, 3, 4, 8, 9]), // 4개 일치
-      new Lotto([1, 2, 3, 10, 11, 12]), // 3개 일치
+      new Lotto([1, 2, 3, 4, 5, 10]), // 3개 일치
     ];
 
     // when
@@ -112,10 +95,11 @@ describe('LottoCompany 객체 테스트', () => {
       0: 0,
       1: 0,
       2: 0,
-      3: 1,
+      3: 0,
       4: 1,
       5: 0,
       6: 0,
+      bonus: 1,
     });
   });
 

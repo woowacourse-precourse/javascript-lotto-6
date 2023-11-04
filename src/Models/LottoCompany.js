@@ -1,5 +1,5 @@
 import {
-  validateBonusLength,
+  validateBonus,
   validateLength,
   validateNumberRange,
 } from '../../utils/Validate';
@@ -21,6 +21,7 @@ class LottoCompany {
   }
 
   set bonusNumber(number) {
+    validateBonus(this.#numbers, number);
     this.#bonusNumber = number;
   }
 
@@ -30,12 +31,6 @@ class LottoCompany {
 
   get bonusNumber() {
     return this.#bonusNumber;
-  }
-
-  pushBonus(number) {
-    validateBonusLength(this.#numbers);
-    validateNumberRange([number]);
-    this.#numbers.push(number);
   }
 
   issueLottos(numOfLottos) {
@@ -71,9 +66,16 @@ class LottoCompany {
       4: 0,
       5: 0,
       6: 0,
+      bonus: 0,
     };
     lottos.forEach((lotto) => {
       const matchedNum = this.match(lotto);
+      const isMatchedBonus = this.matchBonus(lotto);
+
+      if (isMatchedBonus && matchedNum === 5) {
+        statistics['bonus'] += 1;
+        return;
+      }
       statistics[matchedNum] += 1;
     });
 

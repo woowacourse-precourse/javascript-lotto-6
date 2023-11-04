@@ -1,11 +1,18 @@
 import { Console } from '@woowacourse/mission-utils';
 import winningsTable from '../../utils/winningsTable';
 import { MESSAGE } from '../../constants/message';
+import {
+  validateDuplication,
+  validateLength,
+  validateNumber,
+  validateNumberRange,
+} from '../../utils/Validate';
 
 class View {
   async readMoney() {
     const moneyStr = await Console.readLineAsync(MESSAGE.requireMoney);
     const money = Number(moneyStr);
+    validateNumber(money);
     return money;
   }
 
@@ -14,6 +21,9 @@ class View {
       MESSAGE.requireWinningNumbers,
     );
     const winningNumbers = winningNumbersStr.split(',').map(Number);
+    validateNumberRange(winningNumbers);
+    validateDuplication(winningNumbers);
+    validateLength(winningNumbers);
     return winningNumbers;
   }
 
@@ -37,6 +47,13 @@ class View {
     Object.entries(statistics).forEach(([matchedNum, count], idx) => {
       if (idx < 3) return;
       const winnings = winningsTable[matchedNum].toLocaleString();
+
+      if (matchedNum === 'bonus') {
+        Console.print(
+          `${5}개 일치, 보너스 볼 일치 (${winnings}원) - ${count}개`,
+        );
+        return;
+      }
       Console.print(`${matchedNum}개 일치 (${winnings}원) - ${count}개`);
     });
   }
