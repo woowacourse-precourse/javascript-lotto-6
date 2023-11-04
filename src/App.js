@@ -26,13 +26,14 @@ class App {
       this.#winningLotto.getLotto(),
       this.#bonus.getBonus(),
     );
-    const rateOfReturn = this.#getRateOfReturn(income);
+    const rateOfReturn = this.#getRateOfReturn(purchaseAmount, income);
     OutputView.printLotteryResultsSummary(winningResult, rateOfReturn);
   }
 
-  #getRateOfReturn(income) {
-    const inputMoney = this.#purchaseLotto.length * 1000;
-    return +`${Math.round(`${inputMoney / income}e+2`)}e-2`;
+  #getRateOfReturn(purchaseAmount, income) {
+    const inputMoney = purchaseAmount * 1000;
+    const rateOfReturn = (income / inputMoney) * 100;
+    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
   }
 
   #getlotteryResultsSummary(purchaseLotto, winningLotto, bonus) {
