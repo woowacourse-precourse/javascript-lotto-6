@@ -22,12 +22,12 @@ class App {
 
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
-    const { winningResult, income } = this.#getlotteryResultsSummary(
+    const { winningResult, rateOfReturn } = this.#getlotteryResultsSummary(
       this.#purchaseLotto,
       this.#winningLotto.getLotto(),
       this.#bonus.getBonus(),
     );
-    const rateOfReturn = this.#getRateOfReturn(purchaseAmount, income);
+
     OutputView.printLotteryResultsSummary(winningResult, rateOfReturn);
   }
 
@@ -73,17 +73,11 @@ class App {
     }
   }
 
-  #getRateOfReturn(purchaseAmount, income) {
-    const inputMoney = purchaseAmount * 1000;
-    const rateOfReturn = (income / inputMoney) * 100;
-    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
-  }
-
   #getlotteryResultsSummary(purchaseLotto, winningLotto, bonus) {
     this.#lottoGame = new LottoGame(purchaseLotto, winningLotto, bonus);
     return {
       winningResult: this.#lottoGame.getWinningResult(),
-      income: this.#lottoGame.getIncome(),
+      rateOfReturn: this.#lottoGame.getRateOfReturn(),
     };
   }
 }

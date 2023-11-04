@@ -47,7 +47,14 @@ export default class LottoGame {
     if (count === 6) this.#matchingTable.allMatching += 1;
   }
 
-  getIncome() {
+  getRateOfReturn() {
+    const income = this.#getIncome();
+    const inputMoney = this.#autoLottos.length * 1000;
+    const rateOfReturn = (income / inputMoney) * 100;
+    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
+  }
+
+  #getIncome() {
     const {
       threeMatching,
       fourMatching,
