@@ -4,7 +4,8 @@ class App {
   async play() {
     const lottoCounts = await inputMoney();
     lottoCountPrinter(lottoCounts);
-    await inputWinningNumber();
+    const winningNumbers = await inputWinningNumber();
+    console.log(winningNumbers);
   }
 }
 
@@ -30,7 +31,9 @@ async function inputWinningNumber() {
   MissionUtils.Console.print("");
   MissionUtils.Console.print(comment);
   const winningNumber = await MissionUtils.Console.readLineAsync('');
-  return winningNumber;
+  const winningSplitNumber = winningNumberSpliter(winningNumber);
+  const winning = new Winning(winningSplitNumber);
+  return winning.winningNumbers();
 }
 
 async function inputBonusNumber() {
@@ -106,7 +109,7 @@ export class Winning {
 
   #winnningEachNumberValidater(number) {
     if (/^[+]?[1-9]\d*$/.test(number)) {
-      return Number(number);
+      return true;
     } 
     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
   }
@@ -129,5 +132,9 @@ export class Winning {
     if (number > 45) {
       throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
     }
+  }
+
+  winningNumbers() {
+    return this.#numbers
   }
 }
