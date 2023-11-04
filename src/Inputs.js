@@ -2,13 +2,21 @@ import { Console } from '@woowacourse/mission-utils';
 import Validation from './Validation.js';
 
 class Inputs {
-  async returnPurchaseAmount() {
-    const purchaseAmount = (await this.getInput('구입금액을 입력해 주세요.')).trim();
-
-    return Validation.validatePurchaseAmount(purchaseAmount);
+  returnPurchaseAmount() {
+    return this.getPromptedAmount();
   }
 
-  async getInput(message) {
+  async getPromptedAmount() {
+    try {
+      const input = await this.getInput('구입금액을 입력해 주세요.');
+      return Validation.validatePurchaseAmount(input);
+    } catch (error) {
+      Console.print(error.message);
+      return this.getPromptedAmount();
+    }
+  }
+
+  getInput(message) {
     return Console.readLineAsync(`${message}\n`);
   }
 }
