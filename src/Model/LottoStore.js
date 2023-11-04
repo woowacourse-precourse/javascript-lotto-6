@@ -1,8 +1,8 @@
 class LottoStore {
-  #purchaseAmount;
+  #purchaseQuantity;
 
-  constructor(purchaseAmount) {
-    this.#purchaseAmount = purchaseAmount;
+  constructor(purchaseQuantity) {
+    this.#purchaseQuantity = purchaseQuantity;
   }
 }
 

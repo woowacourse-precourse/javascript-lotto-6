@@ -5,12 +5,13 @@ class App {
   #lottoStore;
 
   async play() {
-    this.#submitLottoPurchaseAmount();
+    this.#submitLottoPurchaseQuantity();
   }
 
-  async #submitLottoPurchaseAmount() {
+  async #submitLottoPurchaseQuantity() {
     const lottoPurchaseAmount = await this.#getLottoPurchaseAmount();
-    this.#initializeLottoStore(lottoPurchaseAmount);
+    const lottoPurchaseQuantity = this.#changeAmountToQuantity(lottoPurchaseAmount);
+    this.#initializeLottoStore(lottoPurchaseQuantity);
   }
 
   async #getLottoPurchaseAmount() {
@@ -18,8 +19,17 @@ class App {
     return lottoPurchaseAmount;
   }
 
-  #initializeLottoStore(purchaseAmount) {
-    this.#lottoStore = new LottoStore(purchaseAmount);
+  #changeAmountToQuantity(purchaseAmount) {
+    const purchaseQuantity = purchaseAmount / 1000;
+    return purchaseQuantity;
+  }
+
+  #initializeLottoStore(purchaseQuantity) {
+    this.#lottoStore = new LottoStore(purchaseQuantity);
+  }
+
+  #buyLotto() {
+    this.#lottoStore.createLotto();
   }
 }
 
