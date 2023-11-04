@@ -1,35 +1,28 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import LottoData from '../models/LottoData.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import LottoUtill from '../utils/LottoUtill.js';
-import Lotto from '../models/Lotto.js';
+import Lotto from '../Lotto.js';
 import { CONSTANTS } from '../constants/constant.js';
 
 class LottoController {
-  #USER_MONEY;
-
-  #USER_NUMBER;
-
-  #WIN_NUMBER;
-
-  #BONUS_NUMBER;
-
   constructor() {
     this.INPUT_VIEW = new InputView();
     this.OUTPUT_VIEW = new OutputView();
-    this.#USER_NUMBER = [];
+    this.LOTTO_DATA = new LottoData();
   }
 
   async inputPurchaseMoney() {
-    this.#USER_MONEY = await this.INPUT_VIEW.purchaseMoney();
-    if (this.#USER_MONEY === CONSTANTS.IS_ERROR) {
+    this.LOTTO_DATA.getUserMoney(await this.INPUT_VIEW.purchaseMoney());
+    if (this.LOTTO_DATA.userMoney === CONSTANTS.IS_ERROR) {
       return this.inputPurchaseMoney();
     }
     return this.#buyLotto();
   }
 
   async #buyLotto() {
-    const CALC_BUY = new LottoUtill(this.#USER_MONEY);
+    const CALC_BUY = new LottoUtill(this.LOTTO_DATA.userMoney);
     await this.#printLottoNumber(CALC_BUY.howManyToBuy());
   }
 
@@ -43,17 +36,16 @@ class LottoController {
     if (canBuy > 0) {
       const generateNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       const lottoNumber = await Lotto.createLottoInstance(generateNumber);
-      this.#USER_NUMBER.push(generateNumber);
+      this.LOTTO_DATA.userNumber.push(generateNumber);
       this.OUTPUT_VIEW.userLottoNumber(lottoNumber.sortingNumber());
       await this.#lottoGenerator(canBuy - 1);
     }
   }
 
   async #inputWinNumber() {
-    const winLotteryNumber = await this.INPUT_VIEW.winLotteryNumber();
+    this.LOTTO_DATA.getWinNumber(await this.INPUT_VIEW.winLotteryNumber());
     try {
-      const winNumber = await Lotto.createLottoInstance(winLotteryNumber);
-      this.#WIN_NUMBER = winNumber.getWinNumber();
+      await Lotto.createLottoInstance(this.LOTTO_DATA.winNumber);
       return this.#inputBonusNumber();
     } catch (error) {
       Console.print(error.message);
@@ -62,8 +54,8 @@ class LottoController {
   }
 
   async #inputBonusNumber() {
-    this.#BONUS_NUMBER = await this.INPUT_VIEW.bonusNumber();
-    if (this.#BONUS_NUMBER === CONSTANTS.IS_ERROR) {
+    this.LOTTO_DATA.getBonusNumber(await this.INPUT_VIEW.bonusNumber());
+    if (this.LOTTO_DATA.bonusNumber === CONSTANTS.IS_ERROR) {
       return this.#inputBonusNumber();
     }
     return this.#printStatistic();
@@ -72,16 +64,16 @@ class LottoController {
   async #printStatistic() {
     const clacStatic = new LottoUtill();
     const lottoStatic = await clacStatic.checkLottoCorrect(
-      this.#USER_NUMBER,
-      this.#WIN_NUMBER,
-      this.#BONUS_NUMBER,
+      this.LOTTO_DATA.userNumber,
+      this.LOTTO_DATA.winNumber,
+      this.LOTTO_DATA.bonusNumber,
     );
     this.OUTPUT_VIEW.lottoStatic(lottoStatic);
     this.#printRate(lottoStatic);
   }
 
   async #printRate(lottoStatic) {
-    const rateUtill = new LottoUtill(this.#USER_MONEY, lottoStatic);
+    const rateUtill = new LottoUtill(this.LOTTO_DATA.userMoney, lottoStatic);
     this.OUTPUT_VIEW.totalRevenue(rateUtill.getRate());
   }
 }
