@@ -12,8 +12,8 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
-    if(!numbers.every(this.isValidNumber)) {
-      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    if (!numbers.every(this.isValidNumber) || !this.areAllIntegers(numbers)) {
+      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 정수여야 합니다.');
     }
     if (nonDuplicateNumbers.size !== numbers.length) {
       throw new Error('[ERROR] 중복된 값이 있습니다.');
@@ -22,6 +22,10 @@ class Lotto {
 
   isValidNumber(number) {
     return !isNaN(number) && number >= 1 && number <= 45;
+  }
+
+  areAllIntegers(numbers) {
+    return numbers.every(number => Number.isInteger(number));
   }
 
   isBonusNumberDuplicate(bonus) {

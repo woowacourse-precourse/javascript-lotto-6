@@ -50,10 +50,12 @@ class App {
   }
 
   validateBonusNumber(lottoNumbers, bonusNumber) {
-    if (!lottoNumbers.isValidNumber(bonusNumber)) {
+    const parsedBonusNumber = Number.parseFloat(bonusNumber);
+
+    if (isNaN(parsedBonusNumber) || parsedBonusNumber < 1 || parsedBonusNumber > 45 || !Number.isInteger(parsedBonusNumber)) {
       throw new Error('[ERROR] 보너스 번호는 1부터 45 사이의 한개의 정수여야 합니다.');
     }
-    if (lottoNumbers.isBonusNumberDuplicate(Number.parseInt(bonusNumber))) {
+    if (lottoNumbers.isBonusNumberDuplicate(parsedBonusNumber)) {
       throw new Error('[ERROR] 중복된 값이 있습니다.');
     }
   }
