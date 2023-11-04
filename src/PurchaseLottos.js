@@ -1,21 +1,21 @@
+import { DIVISOR } from "./utils/constants.js";
 import { Console } from "@woowacourse/mission-utils";
 import { USER_PROMPT } from "./utils/constants.js";
 
 class PurchaseLottos {
   constructor() {
-    this.amount;
+    this.amount = null;
   }
 
-  async getLottoPurchaseAmount() {
+  async getLottoAmount() {
     try {
-      const input = await Console.readLineAsync(
-        `${USER_PROMPT.PURCHASE_AMOUNT}\n`
-      );
-
-      this.amount = input;
+      const input = await Console.readLineAsync(USER_PROMPT.PURCHASE_AMOUNT);
+      this.amount = parseInt(input);
+      return this.amount / DIVISOR;
     } catch (error) {
       throw error;
     }
   }
+}
 
 export default PurchaseLottos;
