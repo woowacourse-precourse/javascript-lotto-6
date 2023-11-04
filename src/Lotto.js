@@ -29,13 +29,13 @@ class Lotto {
   }
 
   async enterDrawNumbers() {
-    const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    const input = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
     const number = input.split(",");
     return this.#validateDraw(number).map(Number);
   }
 
   async enterBonusNumber() {
-    const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    const input = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
     const number = input.split("");
     return this.#valudateBonus(number).map(Number);
   }
@@ -62,9 +62,7 @@ class Lotto {
 
   resultOfLotto(random, drew, bonus) {
     let result = this.matchCountCheck(random, drew);
-    console.log(result);
     let isBonus = this.matchBonusCheck(random, bonus);
-    console.log(isBonus);
     if (result === 3) {
       return (this.rank = 5);
     }
@@ -86,8 +84,6 @@ class Lotto {
   matchCountCheck = (random, drew) => {
     let count = 0;
     const setLottoNumbers = [].concat(...new Set(random.flat()));
-    console.log(setLottoNumbers);
-    console.log(drew);
     for (let i = 0; i < setLottoNumbers.length; i++) {
       if (drew.includes(setLottoNumbers[i])) {
         count++;

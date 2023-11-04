@@ -26,7 +26,7 @@ export class Purchase {
 
   printAmountOfLotto(amount) {
     const amountOfLotto = amount;
-    Console.print(`${amountOfLotto}개를 구매했습니다.`);
+    Console.print(`${amountOfLotto}개를 구매했습니다.\n`);
   }
 }
 
@@ -39,27 +39,27 @@ export class Profit {
     let statCount = this.statCount;
     if (rank === 5) {
       statCount[0] = 1;
-      console.log(statCount);
+
       return;
     }
     if (rank === 4) {
       statCount[1] = 1;
-      console.log(statCount);
+
       return;
     }
     if (rank === 3) {
       statCount[2] = 1;
-      console.log(statCount);
+
       return;
     }
     if (rank === 2 && isBonus === true) {
       statCount[3] = 1;
-      console.log(statCount);
+
       return;
     }
     if (rank === 1) {
       statCount[4] = 1;
-      console.log(statCount);
+
       return;
     }
 
@@ -69,7 +69,9 @@ export class Profit {
   lottoStatsPrint(count) {
     const statCount = this.statCount;
     Console.print(
-      `당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n4개 일치 (50,000원) - ${statCount[1]}개\n5개 일치 (1,500,000원) - ${statCount[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n6개 일치 (2,000,000,000원) - ${statCount[4]}개\n`
+      `\n당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n4개 일치 (50,000원) - ${statCount[1]}개\n5개 일치 (1,500,000원) - ${statCount[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n6개 일치 (2,000,000,000원) - ${statCount[4]}개\n`
     );
   }
+
+  profitCalc() {}
 }
