@@ -1,4 +1,4 @@
-import { Bonus } from "../src/App.js";
+import { Bonus } from "../src/Bonus.js";
 
 describe("보너스 번호 입력 테스트", () => {
   test.each([

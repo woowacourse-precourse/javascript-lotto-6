@@ -1,4 +1,4 @@
-import { Counter } from "../src/App.js";
+import { Counter } from "../src/Counter.js";
 
 describe("구입 금액에 따른 로또 개수 테스트", () => {
   test("구입 금액에 따라 올바른 개수의 로또를 발행한다.", () => {
