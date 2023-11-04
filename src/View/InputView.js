@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import MESSAGE from '../constants/message.js';
 import isPositiveInteger from '../utils/function.js';
+import ERROR from '../constants/error.js';
 
 class InputView {
   static async inputMoney() {
@@ -11,7 +12,7 @@ class InputView {
 
   static #validateMoney(money) {
     if (!isPositiveInteger(money)) {
-      throw new Error('[ERROR] 올바른 금액을 입력해주세요.');
+      throw new Error(ERROR.input.invalidMoney);
     }
   }
 }

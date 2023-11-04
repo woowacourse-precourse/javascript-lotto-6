@@ -1,3 +1,4 @@
+import ERROR from './constants/error.js';
 import LOTTO from './constants/lotto.js';
 
 class LottoMachine {
@@ -10,7 +11,7 @@ class LottoMachine {
 
   #validateMoney(money) {
     if (money % LOTTO.price) {
-      throw new Error(`[ERROR] 구입 금액은 ${LOTTO.price}원 단위여야 합니다.`);
+      throw new Error(ERROR.lotto.notDivisibleMoney);
     }
   }
 }
