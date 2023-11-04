@@ -10,13 +10,13 @@ const mockRandoms = (numbers) => {
 
 describe("Purchase 클래스 테스트", () => {
   test("인스턴스 생성 시 전달받은 인자로 수량을 얻는다.", () => {
-    const purchase = new Purchase(8000);
+    const purchase = new Purchase("8000");
 
     expect(purchase.getAmount()).toBe(8);
   });
 
   test("인스턴스 생성 시 전달받은 인자로 생성된 수량만큼 로또를 생성한다.", () => {
-    const purchase = new Purchase(8000);
+    const purchase = new Purchase("8000");
     const amount = purchase.getAmount();
 
     mockRandoms([
@@ -31,5 +31,17 @@ describe("Purchase 클래스 테스트", () => {
     ]);
 
     expect(purchase.getLottos()).toHaveLength(amount);
+  });
+
+  test("인스턴스 생성 시 전달받은 인자에 숫자가 아닌 다른 문자가 있으면 에러가 발생한다.", () => {
+    expect(() => {
+      new Purchase("80a0");
+    }).toThrow("[ERROR]");
+  });
+
+  test("인스턴스 생성 시 전달받은 인자에 천원 단위가 아니라면 에러가 발생한다.", () => {
+    expect(() => {
+      new Purchase("800");
+    }).toThrow("[ERROR]");
   });
 });
