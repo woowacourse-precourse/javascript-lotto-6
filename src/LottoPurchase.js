@@ -1,25 +1,29 @@
 import { Console, Random } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
+import LottoPurchaseInput from "./LottoPurchaseInput.js";
 
 export default class LottoPurchase {
-  #lottos;
+  static UNIT_MONEY = 1000;
 
-  UNIT_MONEY = 1000;
-
-  async buy() {
-    const money = await Console.readLineAsync("구입금액을 입력해 주세요.");
-    this.#validateMoeny(money);
-    const count = money / this.UNIT_MONEY;
-    this.#lottos = [...Array(count).keys()].map(() =>
-      Random.pickUniqueNumbersInRange(1, 45, 6)
+  static async buyWithUserInput() {
+    const money = await LottoPurchaseInput.collectMoney();
+    return LottoPurchase.#generateLottos(
+      LottoPurchase.calculateLottoCount(money)
     );
   }
 
-  getLottos() {
-    return this.#lottos;
+  static calculateLottoCount(money) {
+    return money / LottoPurchase.UNIT_MONEY;
   }
 
-  #validateMoeny(money) {
-    if (money % this.UNIT_MONEY !== 0)
-      throw new Error("[ERROR] 구매금액은 1,000원 단위로만 입력 가능합니다.");
+  static #generateLottos(count) {
+    return [...Array(count).keys()].map(
+      () => new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6))
+    );
+  }
+
+  static print(lottos) {
+    Console.print(`\n${lottos.length}개를 구매했습니다.`);
+    lottos.map((lotto) => lotto.print());
   }
 }
