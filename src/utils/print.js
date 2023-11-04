@@ -16,7 +16,7 @@ const printNPurchasePhrase = (n) => {
 };
 
 const sortLottoNumbers = (lotto) => {
-  return [...lotto].sort((a, b) => a - b);
+  return [...lotto.getNumbers()].sort((a, b) => a - b);
 };
 
 const printLottoNumbers = (lottos) => {
