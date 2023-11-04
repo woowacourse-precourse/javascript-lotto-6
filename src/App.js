@@ -10,10 +10,11 @@ class App {
     const credit = await this.Purchase.getCredit();
     const amountOfLotto = this.Purchase.getAmountOfLotto(credit);
     this.Purchase.printAmountOfLotto(amountOfLotto);
-    const LottoNumbers = this.Lotto.printLottoNumbers(amountOfLotto);
+    const lottoNumbers = this.Lotto.getLottoNumbers(amountOfLotto);
+    this.Lotto.printLottoNumbers(lottoNumbers);
     const drawNumbers = await this.Lotto.enterDrawNumbers();
     const bonusNumber = await this.Lotto.enterBonusNumber();
-    const resultOfLotto = this.Lotto.resultOfLotto(drawNumbers, bonusNumber);
+    const resultOfLotto = this.Lotto.resultOfLotto(lottoNumbers, drawNumbers, bonusNumber);
     const lottoStats = this.Profit.lottoStats(resultOfLotto);
     const lottoStatsPrint = this.Profit.lottoStatsPrint(lottoStats);
   }
