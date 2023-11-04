@@ -13,4 +13,12 @@ describe("컨트롤러 클래스 테스트", () => {
             }).toThrow("[ERROR]");
         });
     });
+
+    describe("lottoNumToArray", () => {
+        test("문자열을 배열로 분리한다.", () => {
+            const TMP = Controller.lottoNumToArray("1,2,3,4,5,6");
+
+            expect(TMP).toEqual([1, 2, 3, 4, 5, 6]);
+        });
+    });
 });
