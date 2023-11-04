@@ -6,7 +6,7 @@ class App {
     this.randomLottoNumber = [];
     this.threeMatches = 0;
     this.fourMatches = 0;
-    this.fivthMatches = 0;
+    this.fiveMatches = 0;
     this.fiveAndBonusMatches = 0;
     this.sixMatches = 0;
   }
@@ -40,6 +40,9 @@ class App {
     console.log(this.matchingCounts);
 
     this.countMatchingNumbers(this.matchingCounts);
+
+    this.totalProfit = this.calculateTotalProfit();
+    console.log(this.totalProfit);
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -156,6 +159,16 @@ class App {
         this.sixMatches += 1;
       }
     }
+  }
+
+  calculateTotalProfit() {
+    const totalProfit =
+      5000 * this.threeMatches +
+      10000 * this.fourMatches +
+      1500000 * this.fiveMatches +
+      30000000 * this.fiveAndBonusMatches +
+      2000000000 * this.sixMatches;
+    return totalProfit;
   }
 }
 export default App;
