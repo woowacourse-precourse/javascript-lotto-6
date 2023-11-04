@@ -13,6 +13,11 @@ export default class LottoController {
     this.generate = new LottoGenerator();
   }
 
+  async start() {
+    await this.initializeLottoAmount();
+    await this.inputUserLottoNumber();
+  }
+
   async initializeLottoAmount() {
     const moneyInput = await InputView.moneyInput();
     this.#validate(moneyInput, Validator.moneyCheck);
@@ -34,4 +39,20 @@ export default class LottoController {
     this.#lottoList = this.generate.startGenerate(this.#lottoAmount);
     OutputView.printLottoList(this.#lottoList);
   }
+
+  async inputUserLottoNumber() {
+    const userLottoNumber = await InputView.lottoNumberInput();
+    Console.print(userLottoNumber);
+    // this.#lottoNumberValidate(userLottoNumber, Validator.moneyCheck);
+  }
+
+  // #lottoNumberValidate(inputValue, checkingFunction) {
+  //   try {
+  //     checkingFunction(inputValue);
+  //     this.generateLottos(inputValue);
+  //   } catch (error) {
+  //     OutputView.printError(error);
+  //     this.initializeLottoAmount();
+  //   }
+  // }
 }

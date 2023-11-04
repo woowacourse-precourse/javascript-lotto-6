@@ -3,7 +3,8 @@ import LottoController from './controller/LottoController.js';
 class App {
   async play() {
     const controller = new LottoController();
-    await controller.initializeLottoAmount();
+    await controller.start();
+    // await controller.initializeLottoAmount();
   }
 }
 
