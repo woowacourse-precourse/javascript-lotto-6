@@ -5,6 +5,14 @@ const STATIC_NUMBER = Object.freeze({
   LottoNumLen: 6,
 });
 
+const MATCHED_COUNT = Object.freeze({
+  three: "three",
+  four: "four",
+  five: "five",
+  fiveAndBonus: "fiveAndBonus",
+  six: "six",
+});
+
 const SEPARATOR = Object.freeze({
   lottoNumSeparator: ",",
 });
@@ -19,4 +27,4 @@ const ASK_MESSAGE = Object.freeze({
   bonusNum: "\n보너스 번호를 입력해 주세요.\n",
 });
 
-export { STATIC_NUMBER, SEPARATOR, PRINT_MESSAGE, ASK_MESSAGE };
+export { STATIC_NUMBER, MATCHED_COUNT, SEPARATOR, PRINT_MESSAGE, ASK_MESSAGE };
