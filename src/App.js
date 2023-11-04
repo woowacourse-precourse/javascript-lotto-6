@@ -9,7 +9,7 @@ class App {
 }
 
 async function inputMoney() {
-  let money = await MissionUtils.Console.readLineAsync('구입금액을 입력해주세요.\n');
+  let money = await Console.readLineAsync('구입금액을 입력해주세요.\n');
   money = parseInt(money);
   return money;
 }
