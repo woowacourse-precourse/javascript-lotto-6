@@ -1,6 +1,7 @@
 import { ERROR_MESSAGE } from "../constants/error.js";
 
-export const validateMoney = (money) => {
+export const validateMoney = (string) => {
+  const money = +string;
   if (isNaN(money)) {
     throw new Error(ERROR_MESSAGE.MONEY_ISNAN);
   }

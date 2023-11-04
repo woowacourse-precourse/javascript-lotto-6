@@ -10,11 +10,13 @@ import {
 } from "./validation/number.js";
 import { validateMoney } from "./validation/money.js";
 import { PRIZE } from "./constants/prize.js";
+import { ERROR_MESSAGE } from "./constants/error.js";
+import { getInputMessage } from "./validation/tryInput.js";
 class App {
   lottos = [];
 
+  
   getLottoCount(money) {
-    
     return money / 1000;
   }
 
@@ -36,8 +38,7 @@ class App {
   }
 
   makeNumberArray(numberString) {
-    const numbers = numberString.split(",");
-    return getValidatedNumbers(numbers);
+    return numberString.split(",").map(Number);
   }
 
   getPrizeCounts(numbers, bonusNumber){
@@ -93,16 +94,16 @@ class App {
 
   async getPrizeNumbers() {
     const inputNumbers = await input(PRINT_MESSAGE.NUMBERS);
-    return this.makeNumberArray(inputNumbers);
+    getValidatedNumbers(inputNumbers);
   }
 
   async getBonusNumber() {
-    const inputBonusNumber = await input(PRINT_MESSAGE.BONUS_NUMBER);
-    return getValidatedNumber(inputBonusNumber);
+    const bonusNumber = await getInputMessage(PRINT_MESSAGE.BONUS_NUMBER, getValidatedNumber);
+    return +bonusNumber;
   }
 
   async setLottos(money) {
-    const lottoCount = this.getLottoCount(money);
+    const lottoCount = this.getLottoCount(+money);
     
     await this.printBuyCount(lottoCount);
     print("");
@@ -110,21 +111,28 @@ class App {
     await this.createLottos(lottoCount);
   }
 
+  async getInputMoney(){
+    const inputMoney = await getInputMessage(PRINT_MESSAGE.INPUT_MONEY, validateMoney);
+    
+    return +inputMoney;
+  }
+
   //TODO: 보너스 숫자 이전 6 숫자 중복 시 에러
   async play() {
-    const inputMoney = await input(PRINT_MESSAGE.INPUT_MONEY);
-    validateMoney(+inputMoney);
+
+    const inputMoney = await this.getInputMoney();
 
     //로또 생성
-    await this.setLottos(+inputMoney);
+    await this.setLottos(inputMoney);
 
     //당첨 로또 번호 생성
-    const numbers = await this.getPrizeNumbers();
+    const inputNumbers = await getInputMessage(PRINT_MESSAGE.NUMBERS, getValidatedNumbers);
+    const numbers = this.makeNumberArray(inputNumbers); 
     
     //보너스 번호 생성
     const bonusNumber = await this.getBonusNumber();
 
-    const result = this.getResult(numbers, bonusNumber, +inputMoney);
+    const result = this.getResult(numbers, bonusNumber, inputMoney);
     this.printResult(result);
   }
 }

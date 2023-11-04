@@ -1,6 +1,11 @@
 import { ERROR_MESSAGE } from "../constants/error.js";
 
 export const getValidatedNumbers = (numbers) => {
+  
+  if(typeof numbers === 'string'){
+    numbers = numbers.split(',');
+  }
+  
   validateNumbers(numbers);
   return numbers.map((number) => {
     const N = +number;
