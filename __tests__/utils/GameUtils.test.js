@@ -1,3 +1,4 @@
+import LOTTO_NUMBER from "../../src/constants/LottoNumber.js";
 import GameUtils from "../../src/utils/GameUtils.js";
 
 describe('게임 유틸 테스트', () => {
@@ -11,5 +12,16 @@ describe('게임 유틸 테스트', () => {
 
     // then
     expect(lottoTickets).toEqual(answer);
+  });
+
+  test('1부터 45까지의 랜덤한 수 6개를 생성받습니다.', () => {
+    // given
+    const randomNumberCount = LOTTO_NUMBER.COUNT;
+
+    // when
+    const randomNumber = GameUtils.createRandomUniqueSixNumberFromOneToForthFive();
+
+    // then
+    expect(randomNumber.length).toEqual(randomNumberCount);
   });
 });
