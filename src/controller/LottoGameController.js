@@ -21,6 +21,8 @@ class LottoGameController {
         this.outputView.print(error);
       }
     }
+
+    this.printPurchaseCount();
   }
 
   async getPurchaseAmount() {
@@ -34,6 +36,11 @@ class LottoGameController {
   async createMoneyInstance() {
     const money = await this.getPurchaseAmount();
     return new Money(money);
+  }
+
+  printPurchaseCount() {
+    const purchaseCount = this.#moneyInstance.getPurchaseCount();
+    this.outputView.print(`${purchaseCount}${MESSAGE.BUY}`);
   }
 }
 
