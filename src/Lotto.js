@@ -13,7 +13,7 @@ class Lotto {
   #isNumberArray(numbers) {
     if (!Array.isArray(numbers)) throwError(ERROR_MESSAGE.isNotNumberArray);
 
-    if (!numbers.every((v) => typeof v === 'number'))
+    if (!numbers.every((v) => typeof v === 'number' && !Number.isNaN(v)))
       throwError(ERROR_MESSAGE.isNotNumberArray);
   }
 
