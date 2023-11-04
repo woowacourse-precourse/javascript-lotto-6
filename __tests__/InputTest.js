@@ -41,4 +41,19 @@ describe("입력 가져오기", () => {
       expect(result).toBe(output);
     });
   });
+
+  test("보너스 번호", async () => {
+    const inputs = ["1", "45", "38", "22"];
+    const outputs = ["1", "45", "38", "22"];
+
+    mockQuestions(inputs);
+
+    const inputGetter = new InputGetter();
+
+    outputs.forEach(async (output) => {
+      const result = await inputGetter.inputBonusNumber();
+
+      expect(result).toBe(output);
+    });
+  });
 });
