@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "./utils/CONSTANT.js";
+import { validatePurchase } from "./utils/validation.js";
 
 class App {
   #purchaseAmount;
@@ -8,6 +9,9 @@ class App {
     const input = await MissionUtils.Console.readLineAsync(
       INPUT_MESSAGE.purchaseAmount,
     );
+
+    validatePurchase(input);
+
     this.purchaseAmount = input;
   }
 
