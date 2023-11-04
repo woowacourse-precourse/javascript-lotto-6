@@ -24,6 +24,7 @@ class Controller {
 
   startLottoHandler(winNumInput, winBonusNumInput) {
     this.model.compareWinLotto(winNumInput, winBonusNumInput);
+    this.view.printLottoPrize(this.model.getPrizeCategories);
   }
 }
 
