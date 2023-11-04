@@ -6,6 +6,7 @@ import Lotto from "../Lotto.js";
 class LottoGame {
   #numberOfPurchase = 0;
   #winningNumbers;
+  #bonusNumber;
 
   async start() {
     const purchaseAmount = await InputView.requestPurchaseAmount();
@@ -20,6 +21,9 @@ class LottoGame {
 
     const winningNumbers = await InputView.requestWinningNumbers();
     this.#winningNumbers = winningNumbers.split(',').map(Number);
+
+    const bonusNumber = await InputView.requestBonusNumber();
+    this.#bonusNumber = bonusNumber;
   }
 
   makeLottoNumbers() {

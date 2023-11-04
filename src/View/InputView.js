@@ -19,8 +19,13 @@ class InputView {
   }
 
   static async requestWinningNumbers() {
-    const winningNumbers = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.');
+    const winningNumbers = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     return winningNumbers;
+  }
+
+  static async requestBonusNumber() {
+    const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+    return bonusNumber;
   }
 }
 
