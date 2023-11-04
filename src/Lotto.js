@@ -27,8 +27,8 @@ class Lotto {
     return { matchingCount, hasBonusNumber };
   }
 
-  getLotto() {
-    return this.#numbers;
+  getSortedLotto() {
+    return [...this.#numbers].sort((firstNumber, secondNumber) => firstNumber - secondNumber);
   }
 }
 
