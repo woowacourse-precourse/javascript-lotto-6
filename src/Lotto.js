@@ -1,3 +1,6 @@
+import { ERROR_MESSAGE, LOTTO } from './utils/constants.js';
+import { throwError } from './utils/index.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,34 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    this.#isLengthSix(numbers);
+    this.#isDuplicate(numbers);
+    this.#isRange(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
+
+  #isDuplicate(numbers) {
+    throwError(
+      ERROR_MESSAGE.numbers_duplicate,
+      new Set(numbers).size !== numbers.length,
+    );
+  }
+
+  #isRange(numbers) {
+    throwError(
+      ERROR_MESSAGE.numbers_range,
+      numbers.some(
+        (number) => number < LOTTO.min_number || number > LOTTO.max_number,
+      ),
+    );
+  }
+
+  #isLengthSix(value) {
+    throwError(ERROR_MESSAGE.numbers_length, value.length !== LOTTO.length);
+  }
 }
 
 export default Lotto;
