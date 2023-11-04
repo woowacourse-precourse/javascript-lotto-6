@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const Inputs = {
+export const Inputs = {
   async getAmount(message) {
     const userInput = await Console.readLineAsync(message);
     if (userInput % 1000 !== 0) {
