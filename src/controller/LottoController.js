@@ -13,6 +13,7 @@ class LottoController {
     this.calculateMatchingNumbers();
     this.displayLottoMatchResults();
     const totalPrize = this.calculatePrizeAmount(this.#lottos.getRankCount());
+    this.displayLottoROI(totalPrize, this.#lottos.getLottos());
   }
 
   async inputMoney() {
@@ -29,7 +30,7 @@ class LottoController {
   }
 
   showLottos() {
-    Console.print(' ');
+    Console.print('\n');
     const lottos = this.#lottos.getLottos();
     this.printLottosCount(lottos.length);
     this.printLottoNumbers(lottos);
@@ -41,9 +42,8 @@ class LottoController {
 
   printLottoNumbers(lottos) {
     lottos.map(lotto => {
-      Console.print(lotto.getNumbers());
+      Console.print(`[${lotto.getNumbers().join(', ')}]`);
     });
-    Console.print('');
   }
 
   async inputWinningLottoNumbers() {
@@ -108,6 +108,13 @@ class LottoController {
     );
 
     return prizeAmount;
+  }
+
+  displayLottoROI(totalPrize, lottos) {
+    const lottoPurchaseAmount = lottos.length * 1000;
+    const lottoROI = ((totalPrize / lottoPurchaseAmount) * 100).toFixed(1);
+
+    Console.print(`총 수익률은 ${lottoROI}%입니다.`);
   }
 }
 
