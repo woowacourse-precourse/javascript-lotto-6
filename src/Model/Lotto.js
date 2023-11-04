@@ -5,6 +5,7 @@ class Lotto {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
+  // 당첨 번호를 입력받고 검사한 것
 
   #validate(numbers) {
     if (numbers.length !== 6) {
