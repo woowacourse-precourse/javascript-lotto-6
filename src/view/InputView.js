@@ -1,12 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import Calculator from "../utils/calc/Calculator.js";
-import { ASK_MESSAGE } from "../static/Static.js";
+import { MESSAGE_ASK } from "../static/Static.js";
 
 const InputView = {
   async readPurchasePrice() {
     try {
       const purchasePrice = await Console.readLineAsync(
-        ASK_MESSAGE.purchasePrice
+        MESSAGE_ASK.purchasePrice
       );
       const purchaseQuantity = Calculator.calcPurchaseQuantity(purchasePrice);
       return purchaseQuantity;
@@ -15,13 +15,13 @@ const InputView = {
 
   async readWinningNums() {
     try {
-      return await Console.readLineAsync(ASK_MESSAGE.winningNums);
+      return await Console.readLineAsync(MESSAGE_ASK.winningNums);
     } catch (error) {}
   },
 
   async readBonusNum() {
     try {
-      return await Console.readLineAsync(ASK_MESSAGE.bonusNum);
+      return await Console.readLineAsync(MESSAGE_ASK.bonusNum);
     } catch (error) {}
   },
 };
