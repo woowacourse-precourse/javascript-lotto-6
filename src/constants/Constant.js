@@ -14,6 +14,7 @@ export const LOTTO_NUMBER = Object.freeze({
 });
 
 export const RANK = Object.freeze({
+  reward: [200000000, 30000000, 1500000, 50000, 5000],
   first: { match: 6, index: 0 },
   bonus: { match: 0, index: 1 },
   second: { match: 5, index: 2 },

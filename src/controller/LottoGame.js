@@ -1,6 +1,6 @@
 import InputView from '../view/InputView.js';
 import Validator from '../validator/Validator.js';
-import { CONSTANT, SYMBOL } from '../constants/Constant.js';
+import { CONSTANT, RANK, SYMBOL } from '../constants/Constant.js';
 import LottoBundle from '../model/LottoBundle.js';
 import OutputView from '../view/OutputView.js';
 import Lotto from '../model/Lotto.js';
@@ -20,6 +20,8 @@ class LottoGame {
     const winningLotto = await this.#getWinningLotto();
     const bonusNumber = await this.#getBonusNumber();
     const totalRank = this.#lottoBundle.getTotalRank(winningLotto, bonusNumber);
+
+    const totalReward = this.#getReward(totalRank);
   }
 
   async #getLottoCount() {
@@ -63,6 +65,10 @@ class LottoGame {
 
       return this.#getBonusNumber();
     }
+  }
+
+  #getReward(totalRank) {
+    return totalRank.reduce((sum, count, index) => sum + RANK.reward[index] * count, 0);
   }
 }
 
