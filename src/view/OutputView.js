@@ -14,21 +14,28 @@ const OutputView = {
   },
 
   printLotteryResultsSummary(winningResult, rateOfReturn) {
-    const {
-      threeMatching,
-      fourMatching,
-      fiveMatchingNotBonus,
-      fiveMatchingAndBonus,
-      allMatching,
-    } = winningResult;
-    Console.print(`3개 일치 (5,000원) - ${threeMatching}개`);
-    Console.print(`4개 일치 (50,000원) - ${fourMatching}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${fiveMatchingNotBonus}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${fiveMatchingAndBonus}개`,
-    );
-    Console.print(`6개 일치 (2,000,000,000원) - ${allMatching}개`);
+    const template = this.getResultStringTemplate(winningResult);
+    template.forEach(({ label, count }) => {
+      Console.print(`${label} - ${count}개`);
+    });
+
     Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
+  },
+
+  getResultStringTemplate(winningResult) {
+    return [
+      { label: '3개 일치 (5,000원)', count: winningResult.threeMatching },
+      { label: '4개 일치 (50,000원)', count: winningResult.fourMatching },
+      {
+        label: '5개 일치 (1,500,000원)',
+        count: winningResult.fiveMatchingNotBonus,
+      },
+      {
+        label: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+        count: winningResult.fiveMatchingAndBonus,
+      },
+      { label: '6개 일치 (2,000,000,000원)', count: winningResult.allMatching },
+    ];
   },
 };
 
