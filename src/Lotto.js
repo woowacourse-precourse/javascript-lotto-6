@@ -1,9 +1,10 @@
+import printWinningLotto from "./ui/PrintWinningLotto.js";
+
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+  constructor() {
+    this.#numbers = [];
   }
 
   #validate(numbers) {
@@ -12,7 +13,16 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  async print() {
+    const lottoNumbers = await printWinningLotto();
+    this.#validate(lottoNumbers);
+    this.#numbers = lottoNumbers;
+    console.log(this.#numbers);
+  }
+
+  main() {
+    this.print();
+  }
 }
 
 export default Lotto;
