@@ -36,21 +36,22 @@ const Validate = Object.freeze({
 
 const LottoValidate = Object.freeze({
   // 로또 번호의 개수가 LOTTO.NUMBER_COUNT와 다르면 IncorrectLottoCountError
-  checkCount: (numbers) => Validate.checkCount(numbers, LOTTO.NUMBER_COUNT),
+  checkCount: (numbers, count = LOTTO.NUMBER_COUNT) => Validate.checkCount(numbers, count),
 
   // 로또 번호가 숫자 형식이 아니면 IncorrectFormatError
-  checkFormat: (numbers) => Validate.checkFormat(numbers, "number"),
+  checkFormat: (numbers, type = "number") => Validate.checkFormat(numbers, type),
 
   // LOTTO.MIN_NUMBER ~ LOTTO.MAX_NUMBER 사이의 숫자가 아니면 IncorrectLottoNumberError
-  checkRange: (numbers) => Validate.checkRange(numbers, LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER),
+  checkRange: (numbers, start = LOTTO.MIN_NUMBER, end = LOTTO.MAX_NUMBER) =>
+    Validate.checkRange(numbers, start, end),
 
   // 로또 번호가 중복된 값을 가지면 DuplicateNumbersError
   checkDuplicate: (numbers) => Validate.checkDuplicate(numbers),
 
-  checkAll(numbers) {
-    this.checkCount(numbers);
-    this.checkFormat(numbers);
-    this.checkRange(numbers);
+  checkAll(numbers, options) {
+    this.checkCount(numbers, options?.count);
+    this.checkFormat(numbers, options?.type);
+    this.checkRange(numbers, options?.start, options?.end);
     this.checkDuplicate(numbers);
   },
 });
