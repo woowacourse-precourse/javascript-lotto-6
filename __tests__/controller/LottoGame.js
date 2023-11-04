@@ -1,21 +1,41 @@
-import App from "../../src/App";
+import { MissionUtils } from "@woowacourse/mission-utils";
 import LottoGame from "../../src/controller/LottoGame"
 
-const getStartSpy = () => {
-  const startSpy = jest.spyOn(LottoGame.prototype, 'start');
-  return startSpy;
-}
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const mockQuestions = (inputs) => {
+  MissionUtils.Console.readLineAsync = jest.fn();
+
+  MissionUtils.Console.readLineAsync.mockImplementation(() => {
+    const input = inputs.shift();
+
+    return Promise.resolve(input);
+  });
+};
+
 
 describe('로또 게임 컨트롤 클래스 테스트.', () => {
-  test('play 메서드가 실행되면 start 메서드가 호출되어야합니다.', async () => {
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test('구입 금액이 숫자가 아닌 경우 에러를 발생시킵니다.', async () => {
     // given
-    const startSpy = getStartSpy();
+    const input = ['공습경보', '1000'];
+    mockQuestions(input);
+    const logSpy = getLogSpy();
 
-    // when
-    const app = new App();
-    await app.play();
+    const lottoGame = new LottoGame();
 
-    // then
-    expect(startSpy).toHaveBeenCalled();
+    // when & then
+    try {
+      await lottoGame.inputPurchaseAmount();
+    } catch (error) {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+    }
   });
 });
