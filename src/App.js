@@ -17,8 +17,8 @@ class App {
   }
 
   async play() {
-    this.#lottoGame.setUpGame();
-    await this.#getLottoTickets();
+    this.#lottoGame.setUpGameProcess();
+    await this.#generateLottoProcess();
 
     const winnigNumbers = await this.#inputView.getWinnigNumbers();
     const bonusNumber = await this.#inputView.getBonusNumber();
@@ -28,7 +28,7 @@ class App {
     this.#gameOver();
   }
 
-  async #getLottoTickets() {
+  async #generateLottoProcess() {
     while (true) {
       const lottoPrice = await this.#inputView.getLottoPrice();
       const isValid = await errorHandler(lottoPrice, Validation.inputLottoPrice);

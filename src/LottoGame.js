@@ -13,7 +13,7 @@ class LottoGame {
     this.#seller = null;
   }
 
-  setUpGame() {
+  setUpGameProcess() {
     const computer = new Computer(generator);
     this.#seller = new LottoSeller(computer);
   }
