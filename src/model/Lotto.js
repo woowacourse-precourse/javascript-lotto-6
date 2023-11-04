@@ -13,7 +13,7 @@ class Lotto {
    * @param {number[]} numbers
    */
   #validate(numbers) {
-    LottoValidate.checkAll(numbers);
+    LottoValidate.checkAllLottoNumbers(numbers);
   }
 
   /**

@@ -9,25 +9,37 @@ const between = (val, start, end) => {
 };
 
 const Validate = Object.freeze({
-  checkCount(arr, count) {
-    if (arr.length !== count) {
-      throw new IncorrectLottoCountError();
-    }
-  },
-
-  checkFormat(arr, type) {
-    if (arr.some((elm) => typeof elm !== type)) {
+  checkFormat(elm, type) {
+    if (typeof elm !== type) {
       throw new IncorrectFormatError();
     }
   },
 
-  checkRange(arr, start, end) {
+  checkMultiple(targetNumber, number) {
+    this.checkFormat(targetNumber, "number");
+    this.checkFormat(number, "number");
+    if (!Number.isInteger(targetNumber / number)) {
+      throw new IncorrectFormatError();
+    }
+  },
+
+  checkArrFormat(arr, type) {
+    arr.forEach((elm) => this.checkFormat(elm, type));
+  },
+
+  checkArrLength(arr, length) {
+    if (arr.length !== length) {
+      throw new IncorrectLottoCountError();
+    }
+  },
+
+  checkArrRange(arr, start, end) {
     if (arr.some((elm) => !between(elm, start, end))) {
       throw new IncorrectLottoNumberError();
     }
   },
 
-  checkDuplicate(arr) {
+  checkArrDuplicate(arr) {
     if (arr.some((elm, index) => arr.includes(elm, index + 1))) {
       throw new DuplicateNumbersError();
     }
@@ -35,24 +47,35 @@ const Validate = Object.freeze({
 });
 
 const LottoValidate = Object.freeze({
+  // 로또 구매 가격이 숫자 형식이 아니면 IncorrectFormatError
+  checkFormat: (purchaseAmount, type = "number") => Validate.checkFormat(purchaseAmount, type),
+
+  // 로또 구매 가격이 LOTTO.PRICE의 배수가 아니면 IncorrectFormatError
+  checkMultiple: (purchaseAmount, price = LOTTO.PRICE) =>
+    Validate.checkMultiple(purchaseAmount, price),
+
   // 로또 번호의 개수가 LOTTO.NUMBER_COUNT와 다르면 IncorrectLottoCountError
-  checkCount: (numbers, count = LOTTO.NUMBER_COUNT) => Validate.checkCount(numbers, count),
+  checkArrLength: (numbers, count = LOTTO.NUMBER_COUNT) => Validate.checkArrLength(numbers, count),
 
   // 로또 번호가 숫자 형식이 아니면 IncorrectFormatError
-  checkFormat: (numbers, type = "number") => Validate.checkFormat(numbers, type),
+  checkArrFormat: (numbers, type = "number") => Validate.checkArrFormat(numbers, type),
 
   // LOTTO.MIN_NUMBER ~ LOTTO.MAX_NUMBER 사이의 숫자가 아니면 IncorrectLottoNumberError
-  checkRange: (numbers, start = LOTTO.MIN_NUMBER, end = LOTTO.MAX_NUMBER) =>
-    Validate.checkRange(numbers, start, end),
+  checkArrRange: (numbers, start = LOTTO.MIN_NUMBER, end = LOTTO.MAX_NUMBER) =>
+    Validate.checkArrRange(numbers, start, end),
 
   // 로또 번호가 중복된 값을 가지면 DuplicateNumbersError
-  checkDuplicate: (numbers) => Validate.checkDuplicate(numbers),
+  checkArrDuplicate: (numbers) => Validate.checkArrDuplicate(numbers),
 
-  checkAll(numbers, options) {
-    this.checkCount(numbers, options?.count);
-    this.checkFormat(numbers, options?.type);
-    this.checkRange(numbers, options?.start, options?.end);
-    this.checkDuplicate(numbers);
+  checkAllLottoNumbers(numbers, options) {
+    this.checkArrLength(numbers, options?.count);
+    this.checkArrFormat(numbers, options?.type);
+    this.checkArrRange(numbers, options?.start, options?.end);
+    this.checkArrDuplicate(numbers);
+  },
+
+  checkAllLottoAmount(purchaseAmount, price) {
+    this.checkMultiple(purchaseAmount, price);
   },
 });
 

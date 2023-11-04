@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { ReadMessage } from "./message";
-import { LOTTO } from "../constants/lotto";
-import { LottoValidate } from "./validate";
+import { ReadMessage } from "./message.js";
+import { LOTTO } from "../constants/lotto.js";
+import { LottoValidate } from "./validate.js";
 
 const readLineAsync = async (msg) => await MissionUtils.Console.readLineAsync(msg);
 
@@ -13,7 +13,7 @@ const Read = Object.freeze({
     const numbers = inputs.map((input) => Number(input));
 
     // 로또 번호 유효성 체크
-    LottoValidate.checkAll(numbers);
+    LottoValidate.checkAllLottoNumbers(numbers);
 
     return numbers;
   },
@@ -23,7 +23,7 @@ const Read = Object.freeze({
     const numbers = inputs.map((input) => Number(input));
 
     // 보너스 번호 유효성 체크
-    LottoValidate.checkAll(numbers, { count: LOTTO.BONUS_NUMBER_COUNT });
+    LottoValidate.checkAllLottoNumbers(numbers, { count: LOTTO.BONUS_NUMBER_COUNT });
 
     return numbers;
   },
