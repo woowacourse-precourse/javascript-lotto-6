@@ -9,7 +9,7 @@ const print = {
 }
 
 function printArray(array) {
-  printMessage('[' + array.join(', ') + ']');
+  printMessage(`[${array.join(', ')}]`);
 }
 
 function printMessage(message) {
