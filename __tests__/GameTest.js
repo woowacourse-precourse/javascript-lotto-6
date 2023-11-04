@@ -1,4 +1,5 @@
 import Game from '../src/Game.js';
+import { Random } from '@woowacourse/mission-utils';
 
 describe('Game 클래스 테스트', () => {
   test('로또 구입 금액이 1,000으로 나누어 떨어지지 않으면 예외가 발생한다.', () => {
@@ -21,5 +22,16 @@ describe('Game 클래스 테스트', () => {
     const lottos = game.getLottos();
 
     expect(lottos.length).toBe(2);
+  });
+
+  test('로또 번호를 오름차순으로 정렬한다.', () => {
+    Random.pickUniqueNumbersInRange = jest.fn();
+    Random.pickUniqueNumbersInRange.mockReturnValue([35, 1, 4, 25, 44, 12]);
+
+    const game = new Game();
+    game.purchaseLotto(1000);
+    const lottos = game.getLottos();
+
+    expect(lottos).toEqual([[1, 4, 12, 25, 35, 44]]);
   });
 });
