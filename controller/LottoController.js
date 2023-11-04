@@ -2,7 +2,7 @@ import { Random, Console } from '@woowacourse/mission-utils';
 import Lotto from '../src/Lotto.js';
 import InputView from '../view/InputView.js';
 import PromptMessage from '../constants/PromptMessage.js';
-import CountLabel from '../constants/Label.js';
+import CountLabel from '../constants/CountLabel.js';
 
 class LottoController {
   constructor() {
@@ -60,6 +60,24 @@ class LottoController {
       this.winCountArr[3],
     ];
     // Console.print(this.winCountArr);
+  }
+
+  printWinCount() {
+    Console.print(PromptMessage.PRINT_STATISTICS);
+    for (let i = 0; i < this.winCountArr.length; i++) {
+      Console.print(
+        `${CountLabel.WIN_COUNT_LABELS[i]} (${CountLabel.PRICE_AMOUNT[
+          i
+        ].toLocaleString()}원) - ${this.winCountArr[i]}개`,
+      );
+    }
+  }
+
+  calculatePrice() {
+    for (let i = 0; i < this.winCountArr.length; i++) {
+      this.totalPrice += this.winCountArr[i] * CountLabel.PRICE_AMOUNT[i];
+    }
+    // Console.print(this.totalPrice);
   }
 }
 
