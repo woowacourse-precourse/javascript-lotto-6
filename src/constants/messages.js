@@ -16,4 +16,5 @@ export const ERROR_MESSAGES = {
   IT_IS_TO_SMALL: "[ERROR] 1000 이상의 금액을 입력해 주세요.",
   ONLY_NUMBER: "[ERROR] 공백,특수기호 등은 사용할 수 없습니다.",
   ONLY_THOUSANDWON_UNIT: "[ERROR] 천원 단위로만 입력해 주세요.",
+  UNCORRECT_INPUT: "[ERROR] 잘못된 입력입니다.",
 };
