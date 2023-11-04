@@ -1,15 +1,26 @@
 import { Console, MissionUtils } from "@woowacourse/mission-utils";
 import Validator from "./Validate.js";
-import WinningNum from "./LottoStore.js";
+import ERROR_MESSAGE from "./Errors.js";
 
 class View {
   static #INPUT_MONEY = "구입금액을 입력해 주세요.\n";
   static #COUNT_LOTTO_QUERY = "개를 구매했습니다.";
 
   static async askInputMoney() {
-    const answer = await Console.readLineAsync(View.#INPUT_MONEY);
-    Validator.validateMoneyUnit(answer);
-    Validator.validateInputMoney(answer);
+    let answer;
+    let userInputValid = false;
+
+    while (!userInputValid) {
+      try {
+        answer = await Console.readLineAsync(View.#INPUT_MONEY);
+        Validator.validateInputMoney(answer);
+        Validator.validateMoneyUnit(answer);
+        userInputValid = true;
+      } catch (error) {
+        MissionUtils.Console.print(ERROR_MESSAGE.repeatMoney);
+      }
+    }
+
     return answer;
   }
 
@@ -24,13 +35,11 @@ class View {
   }
 
   static async askWinningNum() {
-    const askWinning = new WinningNum();
-    return await askWinning.askWinningNum();
+    return await LottoStore.askWinningNum();
   }
 
   static async askBonusNum() {
-    const askBonus = new WinningNum();
-    return await askBonus.askBonusNum();
+    return await LottoStore.askBonusNum();
   }
 
   static printRewardStatistics(calculateEarningResults) {
