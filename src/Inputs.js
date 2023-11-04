@@ -8,8 +8,8 @@ class Inputs {
 
   async getPromptedAmount() {
     try {
-      const input = await this.getInput('구입금액을 입력해 주세요.');
-      return Validation.validatePurchaseAmount(input);
+      const purchaseAmount = await this.getInput('구입금액을 입력해 주세요.');
+      return Validation.validatePurchaseAmount(purchaseAmount);
     } catch (error) {
       Console.print(error.message);
       return this.getPromptedAmount();
@@ -22,3 +22,16 @@ class Inputs {
 }
 
 export default Inputs;
+
+// returnWinningNumbers(){
+
+// }
+
+// async getPromptedWinningNumbers(){
+//   try{
+
+//   }catch(error){
+//     Console.print(error.message);
+//     return this.getPromptedWinningNumbers
+//   }
+// }
