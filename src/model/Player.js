@@ -15,18 +15,8 @@ class Player {
   }
 
   #validate(money) {
-    this.#validateDigit(money);
     if (money % MONEY_CONSTANT.LOTTO_PRICE !== 0) {
       throw new LottoGameError(LOTTO_ERROR_MSG.DIVIDE_ERR);
-    }
-  }
-
-  #validateDigit(number) {
-    const DIGIT_CHECK = /^[0-9]+$/;
-
-    const isDigit = DIGIT_CHECK.test(number);
-    if (!isDigit) {
-      throw new LottoGameError(LOTTO_ERROR_MSG.NOT_DIGIT_ERR);
     }
   }
 
