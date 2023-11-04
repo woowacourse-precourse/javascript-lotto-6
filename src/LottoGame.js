@@ -9,13 +9,17 @@ class LottoGame {
 
   async start() {
     await this.setBuyer();
-    this.printPurchasedLottoList();
+    this.printPurchaseInfo();
   }
 
   async setBuyer() {
     const lottoBudget = await Input.getLottoBudget();
     this.#buyer = new Buyer(lottoBudget);
+  }
+
+  printPurchaseInfo() {
     Output.printPurchaseCount(this.#buyer.getPurchaseCount());
+    Output.printPurchasedLottoList(this.#buyer.getLottoList());
   }
 }
 

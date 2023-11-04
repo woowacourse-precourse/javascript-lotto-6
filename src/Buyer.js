@@ -31,7 +31,7 @@ class Buyer {
       this.#lottoList.push(lotto.getLotto());
     }
 
-    Output.printPurchasedLottoList(this.#lottoList);
+    
   }
 
   getLottoList() {
