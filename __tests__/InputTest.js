@@ -142,4 +142,17 @@ describe("입력 예외 처리", () => {
       }).toThrow("[ERROR]");
     });
   });
+
+  test("보너스 번호", () => {
+    const numberInputs = ["0", ".", "2", "47"];
+    const winningNumbersInput = [1, 2, 3, 4, 5, 6];
+
+    const inputValidator = new InputValidator();
+
+    numberInputs.forEach((number) => {
+      expect(() => {
+        inputValidator.bonusNumberValidator(number, winningNumbersInput);
+      }).toThrow("[ERROR]");
+    });
+  });
 });
