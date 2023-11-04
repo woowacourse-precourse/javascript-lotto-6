@@ -9,12 +9,12 @@ class BonusInput {
   async userInput() {
     return await Console.readLineAsync(`${GAME_MESSAGE.bonus_number}`);
   }
-  async number() {
+  async number(winningNumbers) {
     let valid, number;
     do {
       number = await this.userInput();
       try {
-        valid = this.bonusValid.BonusIsValid(number);
+        valid = this.bonusValid.BonusIsValid(number, winningNumbers);
       } catch (error) {
         Console.print(error.message);
         valid = false;

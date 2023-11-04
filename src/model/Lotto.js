@@ -21,7 +21,7 @@ class Lotto {
   }
   async bonus() {
     const bonus = new BonusInput();
-    const bonusNumber = await bonus.number();
+    const bonusNumber = await bonus.number(this.#numbers);
     return bonusNumber;
   }
   // TODO: 추가 기능 구현
