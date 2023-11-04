@@ -11,6 +11,7 @@ const Validator = {
   validateLotto(lotto) {
     this.checkIsInvalidDigit(lotto);
     this.checkHasNonNumericElements(lotto);
+    this.checkHasDuplicate(lotto);
   },
 
   checkIsNotNumber(userInput) {
@@ -43,6 +44,12 @@ const Validator = {
         throw new ValidationError(ERROR.hasNonNumericElements);
       }
     });
+  },
+
+  checkHasDuplicate(inputs) {
+    if (inputs.length !== new Set(inputs)) {
+      throw new ValidationError(ERROR.hasDuplicate);
+    }
   },
 };
 
