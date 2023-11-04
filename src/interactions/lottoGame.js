@@ -24,27 +24,26 @@ const requireLottoNumbers = (purchasedLottoAmount) =>
     purchasedLottoAmount,
   });
 
-const requirePurchasedLottoAmount = () =>
+const processInputPurchasedLottoAmount = () =>
   systemErrorHandler.retryOnErrors(async () => {
     const purchasedLottoAmount = await lottoGameConsole.input.readPurchasedLottoAmount();
     return purchasedLottoAmount;
   });
 
-const processLottoPurchase = async () => {
-  const purchasedLottoAmount = await requirePurchasedLottoAmount();
+const processLottoPurchase = (purchasedLottoAmount) => {
   const lottoNumbers = requireLottoNumbers(purchasedLottoAmount);
 
   lottoGameConsole.output.printLottoNumbers(lottoNumbers);
 
-  return { purchasedLottoAmount, lottoNumbers };
+  return lottoNumbers;
 };
 
 const lottoGame = {
   async run() {
-    await processLottoPurchase();
+    const purchasedLottoAmount = await processInputPurchasedLottoAmount();
+    const lottoNumbers = processLottoPurchase(purchasedLottoAmount);
     const winningLottoNumber = await requireWinningLottoNumber();
     const bonusNumber = await requireBonusNumber(winningLottoNumber);
-    console.log(bonusNumber);
   },
 };
 
