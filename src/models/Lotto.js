@@ -13,6 +13,7 @@ class Lotto {
     return [...this.#numbers];
   }
 
+  // TODO: this.number 수정
   #validateSize(numbers) {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
@@ -33,7 +34,7 @@ class Lotto {
 
   #validateRange(numbers) {
     numbers.forEach((number) => {
-      if (1 <= number && number >= 45) {
+      if (1 < number && number > 45) {
         throw new Error('[ERROR] 로또 번호의 숫자 범위는 1~45 입니다.');
       }
     });
