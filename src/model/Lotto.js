@@ -1,4 +1,5 @@
 import Validator from '../validator/Validator.js';
+import { LOTTO_NUMBER, RANK } from '../constants/Constant.js';
 
 class Lotto {
   #numbers;
@@ -18,6 +19,15 @@ class Lotto {
 
   getNumberString() {
     return `[${this.#numbers.join(', ')}]`;
+  }
+
+  getMatchingCount(winningLotto, bonusNumber) {
+    const matchingCount = this.#countMatchingNumbers(winningLotto);
+    return matchingCount;
+  }
+
+  #countMatchingNumbers(winningLotto) {
+    return 2 * LOTTO_NUMBER.count - new Set([winningLotto.#numbers, ...this.#numbers]).size;
   }
 }
 
