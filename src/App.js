@@ -11,7 +11,7 @@ class App {
 
   // ------로또구입 함수------
   async #allOfMoneyfunc() {
-    const inputMoney = await this.getMoney();
+    const inputMoney = await this.#getMoney();
     this.#validateMoneyIsNum(inputMoney);
     this.#validateMoneyUnit(inputMoney);
     const numOfBuy = this.#claculateNumOfBuy(inputMoney);
@@ -20,7 +20,7 @@ class App {
   }
 
   // 로또 구입 금액 입력받기
-  async getMoney() {
+  async #getMoney() {
     const inputMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
     return Number(inputMoney);
@@ -44,7 +44,7 @@ class App {
   #claculateNumOfBuy(inputMoney) {
     const MONEY_UNIT = 1000;
     const numOfBuy = inputMoney / MONEY_UNIT;
-    Console.print(numOfBuy); // 테스트용 지워야함.
+    Console.print(`\n${numOfBuy}개를 구매했습니다.`);
     return numOfBuy;
   }
 
@@ -93,7 +93,7 @@ class App {
   }
 
   async #getWinningNum() {
-    const getNum = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const getNum = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     const winningNum = String(getNum).split(','); // 문자열 형태
 
     return winningNum; // 문자열 상태
@@ -106,13 +106,13 @@ class App {
     if (numTypeOfWin.includes(NaN)) {
       throw new Error(`[ERROR] 입력 값은 숫자여야 합니다.`);
     }
-    Console.print(numTypeOfWin); // 지워야 함
+    // Console.print(numTypeOfWin); // 지워야 함
     return numTypeOfWin;
   }
 
   // 보너스 넘버
   async #getBonusNum() {
-    const bonusNum = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const bonusNum = await MissionUtils.Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     const NumTypeBonus = Number(bonusNum);
     if (Number.isNaN(NumTypeBonus)) {
       throw new Error(`보너스 입력값은 숫자여야 합니다.`);
@@ -155,14 +155,14 @@ class App {
 
   // --------------------------------당첨금 계산 함수-------
   #allofPrizeMoneyCalculfunc(numOfBuy, arrayofLotto, inputNumbers) {
-    const countOfWinning = this.#calculateFistPrize(arrayofLotto, inputNumbers);
-
-    Console.print(`당첨결과 : ${countOfWinning}`);
+    const countOfWinning = this.#calculatePrize(arrayofLotto, inputNumbers);
+    const allIncome = this.#calculatePrizemoney(countOfWinning);
+    const yeild = this.#calculateYeild(numOfBuy, allIncome);
+    this.#printOfResult(countOfWinning, yeild);
   }
 
-  #calculateFistPrize(arrayofLotto, inputNumbers) {
+  #calculatePrize(arrayofLotto, inputNumbers) {
     const countOfWinning = [0, 0, 0, 0, 0];
-    Console.print(`당첨숫자 : ${countOfWinning}`);
     arrayofLotto.forEach((myLotto) => {
       const matchArray = myLotto.filter((value) => inputNumbers.winning.includes(value));
       const ranks = matchArray.length;
@@ -178,12 +178,49 @@ class App {
       if (ranks === 4) countOfWinning[3] += 1; // 4th
       if (ranks === 3) countOfWinning[4] += 1; // 5th
     });
-    Console.print(`당첨결과 : ${countOfWinning}`);
+
     return countOfWinning;
+  }
+
+  #calculatePrizemoney(countOfWinning) {
+    const FIRST = 2000000000;
+    const SECOND = 30000000;
+    const THIRD = 1500000;
+    const FOURTH = 50000;
+    const FIFTH = 5000;
+    let allIncome = 0;
+
+    allIncome =
+      countOfWinning[0] * FIRST +
+      countOfWinning[1] * SECOND +
+      countOfWinning[2] * THIRD +
+      countOfWinning[3] * FOURTH +
+      countOfWinning[4] * FIFTH;
+
+    return allIncome;
+  }
+
+  #calculateYeild(numOfBuy, allIncome) {
+    const investment = numOfBuy * 1000;
+    const yeild = ((allIncome / investment) * 100).toFixed(1);
+
+    return yeild;
+  }
+
+  #printOfResult(countOfWinning, yeild) {
+    Console.print(`
+당첨 통계
+---
+3개 일치 (5,000원) - ${countOfWinning[4]}개
+4개 일치 (50,000원) - ${countOfWinning[3]}개
+5개 일치 (1,500,000원) - ${countOfWinning[2]}개
+5개 일치, 보너스 볼 일치 (30,000,000원) - ${countOfWinning[1]}개
+6개 일치 (2,000,000,000원) - ${countOfWinning[0]}개
+총 수익률은 ${yeild}%입니다.`);
   }
 }
 
 export default App;
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();

@@ -3,3 +3,4 @@ package-lock.json
 .eslintrc.cjs
 .npmrc
 .prettierrc
+.prettierignore
