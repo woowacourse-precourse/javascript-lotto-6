@@ -8,4 +8,5 @@ export const ERROR_MESSAGE = Object.freeze({
   winningCount: `${ERROR_CONVENTION} 입력된 당첨번호의 개수가 올바르지 않습니다.`,
   hasEmpty: `${ERROR_CONVENTION} 입력받은 값에 공백이 존재합니다.`,
   hasChanges: `${ERROR_CONVENTION} 잔돈이 존재합니다.`,
+  incorrectPrecision: `${ERROR_CONVENTION} 올바른 정확도(소숫점)가 아닙니다.`,
 });

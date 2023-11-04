@@ -77,7 +77,10 @@ class LottoGameManager {
 
   showResult(moneyForLotto, winningPrizeSum, rankCounts) {
     try {
-      const earnRate = profitRate(moneyForLotto, winningPrizeSum);
+      const earnRate = this.validateManager.getEarnRate(
+        moneyForLotto,
+        winningPrizeSum
+      );
       this.outputManager.showStatistics(rankCounts, earnRate);
     } catch (error) {
       throw error;
