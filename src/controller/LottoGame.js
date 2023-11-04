@@ -9,7 +9,7 @@ class LottoGame {
   #lottoBundle;
 
   async startGame() {
-    const lottoCount = await this.#getAmountInput();
+    const lottoCount = await this.#getLottoCount();
 
     this.#lottoBundle = new LottoBundle();
     this.#lottoBundle.buyLottos(lottoCount);
@@ -19,24 +19,20 @@ class LottoGame {
     const bonusNumber = await this.#getBonusNumberInput();
   }
 
-  async #getAmountInput() {
+  async #getLottoCount() {
     try {
       const amount = await InputView.readAmount();
       Validator.validateAmount(amount);
 
-      return this.#getLottoCount(amount);
+      return amount / CONSTANT.amountUnit;
     } catch (error) {
       OutputView.printMessage(error.message);
 
-      return this.#getAmountInput();
+      return this.#getLottoCount();
     }
   }
 
-  #getLottoCount(amount) {
-    return amount / CONSTANT.amountUnit;
-  }
-
-  async #getWinningNumbersInput() {
+  async #getWinningLotto() {
     try {
       const winningNumbers = await InputView.readWinningNumbers();
       const splitWinningNumbers = this.#getSplitWinningNumbers(winningNumbers);
@@ -45,7 +41,7 @@ class LottoGame {
     } catch (error) {
       OutputView.printMessage(error.message);
 
-      return this.#getWinningNumbersInput();
+      return this.#getWinningLotto();
     }
   }
 
@@ -53,7 +49,7 @@ class LottoGame {
     return winningNumbers.split(SYMBOL.comma).map((number) => number.trim());
   }
 
-  async #getBonusNumberInput() {
+  async #getBonusNumber() {
     try {
       const bonusNumber = await InputView.readBonusNumber();
       Validator.validateBonusNumber(bonusNumber);
@@ -62,7 +58,7 @@ class LottoGame {
     } catch (error) {
       OutputView.printMessage(error.message);
 
-      return this.#getBonusNumberInput();
+      return this.#getBonusNumber();
     }
   }
 }
