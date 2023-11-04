@@ -18,7 +18,6 @@ class Lotto {
     Validate.isDuplicate(numbers, lottoErrorMessage.duplicate);
     Validate.isInteger(numbers, lottoErrorMessage.integer);
     Validate.isInRange(numbers, lottoErrorMessage.inRange);
-    Validate.isAscendingOrder(numbers, lottoErrorMessage.ascendingOrder);
   }
 }
 

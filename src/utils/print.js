@@ -15,9 +15,13 @@ const printNPurchasePhrase = (n) => {
   print(nPurchasePhrase);
 };
 
+const sortLottoNumbers = (lotto) => {
+  return [...lotto].sort((a, b) => a - b);
+};
+
 const printLottoNumbers = (lottos) => {
   lottos.forEach((lotto) => {
-    print(lotto);
+    print(sortLottoNumbers(lotto));
   });
 };
 

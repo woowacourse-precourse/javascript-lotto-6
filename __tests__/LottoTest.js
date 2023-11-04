@@ -39,12 +39,6 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  test('로또 번호가 오름차순이 아니면 예외가 발생한다.', () => {
-    expect(() => {
-      new Lotto([1, 20, 3, 4, 5, 6]);
-    }).toThrow('[ERROR]');
-  });
-
   test('올바른 로또 번호가 들어가, 로또 번호를 반환한다.', () => {
     const numbers = [1, 4, 5, 10, 20, 44];
     const lotto = new Lotto([...numbers]);
