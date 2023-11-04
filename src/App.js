@@ -13,6 +13,7 @@ class App {
     this.lottoManager.calculateLottoCount();
 
     this.lottoManager.publishLotto();
+    this.lottoManager.printPublishedLotto();
   }
 }
 

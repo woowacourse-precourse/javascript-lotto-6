@@ -19,7 +19,7 @@ class Lotto {
     isNumberInRange(numbers);
   }
 
-  printLotto() {
+  printNumbers() {
     this.#numbers.sort((a, b) => a - b);
     Console.print(this.#numbers);
   }

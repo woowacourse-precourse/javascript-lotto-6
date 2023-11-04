@@ -19,9 +19,15 @@ class LottoManager {
     for (let i = 0; i < this.lottoCount; i++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       const lotto = new Lotto(numbers);
-      // lotto.printLotto();
       this.user.lottoArr.push(lotto);
     }
+  }
+
+  printPublishedLotto() {
+    Console.print(`\n${this.lottoCount}개를 구매했습니다.`);
+    this.user.lottoArr.forEach((lotto) => {
+      lotto.printNumbers();
+    });
   }
 }
 
