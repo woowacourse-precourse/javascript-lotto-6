@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { calcPurchaseQuantity } from "../utils/calc/CalcPurchaseQuantity.js";
+import Calculator from "../utils/calc/Calculator.js";
 
 const InputView = {
   async readPurchasePrice() {
@@ -7,7 +7,7 @@ const InputView = {
       const purchasePrice = await Console.readLineAsync(
         "구입금액을 입력해 주세요.\n"
       );
-      const purchaseQuantity = calcPurchaseQuantity(purchasePrice);
+      const purchaseQuantity = Calculator.calcPurchaseQuantity(purchasePrice);
       return purchaseQuantity;
     } catch (error) {}
   },
