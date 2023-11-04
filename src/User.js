@@ -1,16 +1,16 @@
 class User {
-  #seller;
+  #lottoSeller;
   #lottoPrice;
   #lottos;
 
-  constructor(seller, lottoPrice) {
-    this.#seller = seller;
+  constructor(lottoSeller, lottoPrice) {
+    this.#lottoSeller = lottoSeller;
     this.#lottoPrice = lottoPrice;
     this.#lottos = [];
   }
 
   purchaceLottos() {
-    this.#lottos = this.#seller.sellLotto(this.#lottoPrice);
+    this.#lottos = this.#lottoSeller.sellLotto(this.#lottoPrice);
     return this.#lottos;
   }
 

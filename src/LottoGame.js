@@ -6,20 +6,20 @@ import { generator } from './util/generator.js';
 
 class LottoGame {
   #user;
-  #seller;
+  #lottoSeller;
 
   constructor() {
     this.#user = null;
-    this.#seller = null;
+    this.#lottoSeller = null;
   }
 
   setUpGameProcess() {
     const computer = new Computer(generator);
-    this.#seller = new LottoSeller(computer);
+    this.#lottoSeller = new LottoSeller(computer);
   }
 
   purchace(lottoPrice) {
-    this.#user = new User(this.#seller, lottoPrice);
+    this.#user = new User(this.#lottoSeller, lottoPrice);
     const lottos = this.#user.purchaceLottos();
 
     return lottos;
