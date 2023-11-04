@@ -16,9 +16,20 @@ class User {
 
   checkResult(combinationMachine) {
     const { lottos } = this.#lottos;
-    const result = combinationMachine.compareLottoNumbers(lottos);
+    const lottoResult = combinationMachine.compareLottoNumbers(lottos);
 
-    return result;
+    return [lottoResult, this.#calculateRateOfReturn(lottoResult)];
+  }
+
+  #calculateRateOfReturn(lottoResult) {
+    const filtered = Object.entries(lottoResult).filter(([_, matchedLength]) => matchedLength > 0);
+    if (filtered.length === 0) return 0;
+
+    const sum = filtered.reduce((total, [prize, matchedLength]) => {
+      return (total += Number(prize) * matchedLength);
+    }, 0);
+
+    return ((sum / this.#lottoPrice) * 100).toFixed(1);
   }
 }
 
