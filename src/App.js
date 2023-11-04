@@ -2,14 +2,13 @@ import { Console, Random } from "@woowacourse/mission-utils";
 
 class App {
   async play() {
-    try {
       const money = await this.validMoney();
 
       let lottos = money / 1000;
       Console.print(`\n${lottos}개를 구매했습니다.`);
 
       const randomNumbers = this.setRandomNumber(lottos);
-      const lottonumber = await this.getLottoNumber();
+      const lottonumber = await this.getLottoNumber('당첨 번호를 입력해 주세요.\n', 6);
       const bonumNumber = await this.getBonusNumber(lottonumber);
 
       Console.print('\n당첨 통계');
@@ -17,19 +16,12 @@ class App {
 
       const [matchThree, matchFour, matchFive, matchFiveBonus, matchSix] = this.matchNumber(randomNumbers, lottonumber, bonumNumber);
 
-      this.lottoPrint(matchThree, matchFour, matchFive, matchFiveBonus, matchSix);
-
-      const prize = this.calculatePrize(matchThree, matchFour, matchFive, matchFiveBonus, matchSix);
-      this.printPercentage(prize, money);
-    } catch (e) {
-      Console.print(e.message);
-    }
+      this.printPercentage(matchThree, matchFour, matchFive, matchFiveBonus, matchSix, money);
   }
 
   async validMoney() {
-    return this.retryValid(async () => {
-      const moneyInput = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-      const money = Number(moneyInput);
+    return this.retryValid('구입금액을 입력해 주세요.\n', (input) => {
+      const money = Number(input);
       if (isNaN(money)) {
         throw new Error('[ERROR] 숫자만 입력 가능합니다.');
       }
@@ -43,148 +35,96 @@ class App {
     });
   }
 
-  async retryValid(func) {
-    let result;
-    let isValid = false;
-    while (!isValid) {
+  async retryValid(prompt, validator) {
+    while (true) {
       try {
-        result = await func();
-        isValid = true;
-      } catch (e) {
+        const input = await Console.readLineAsync(prompt);
+        return validator(input);
+      }catch (e) {
         Console.print(e.message);
       }
     }
-    return result;
   }
 
-  setRandomNumber(lottos) {
+  setRandomNumber(count) {
     const randomNumbers = [];
-    while (lottos > 0) {
+    for (let i = 0; i < count; i++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      numbers.sort(function (a, b) {
-        return a - b;
-      });
+      numbers.sort((a, b) => a - b);
       randomNumbers.push(numbers);
-      Console.print(`[${numbers.join(', ')}]`);
-      lottos--;
+      Console.print(`[${numbers.join(', ')}]\n`);
     }
     return randomNumbers;
   }
 
-  async getLottoNumber() {
-    return this.returnLottoNumber(async () => {
-      const lottonumberInput = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-      const lottonumber = lottonumberInput.split(',').map(Number);
+  async getLottoNumber(prompt, expectedCount) {
+    return this.retryValid(prompt, (input) => {
+      const lottonumber = input.split(',').map(Number);
       if (lottonumber < 1 || lottonumber > 45) {
         throw new Error('[ERROR] 1 ~ 45까지의 숫자만 입력 가능합니다.');
       }
       if (lottonumber.length !== 6) {
         throw new Error('[ERROR] 6개의 숫자만 입력해주세요');
       }
-
-      const duplicateCheck = new Set();
-      for (const number of lottonumber) {
-        if (duplicateCheck.has(number)) {
-          throw new Error(`[ERROR] 중복된 번호 ${number}을 입력하셨습니다.`);
-        }
-        duplicateCheck.add(number);
+      if (new Set(lottonumber).size !== expectedCount) {
+        throw new Error('[ERROR] 중복된 번호를 입력하셨습니다.');
       }
       return lottonumber;
     });
   }
 
-  async returnLottoNumber(func) {
-    let result;
-    let isValid = false;
-    while (!isValid) {
-      try {
-        result = await func();
-        isValid = true;
-      } catch (e) {
-        Console.print(e.message);
-      }
-    }
-    return result;
-  }
-
   async getBonusNumber(lottonumber) {
-    return this.returnBonusNumber(async () => {
-      const bonusNumberInput = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
-      const bonumNumber = Number(bonusNumberInput);
-      if (isNaN(bonumNumber)) {
+    return this.retryValid('\n보너스 번호를 입력해주세요.\n', (input) => {
+      const bonusNumber = Number(input);
+      if (isNaN(bonusNumber)) {
         throw new Error('[ERROR] 숫자만 입력 가능합니다.');
       }
-      if (lottonumber.includes(bonumNumber)) {
+      if (lottonumber.includes(bonusNumber)) {
         throw new Error('[ERROR] 보너스 번호와 당첨 번호가 중복됩니다.');
       }
-      if (bonumNumber < 1 || bonumNumber > 45) {
+      if (bonusNumber < 1 || bonusNumber > 45) {
         throw new Error('[ERROR] 1부터 45까지의 숫자만 입력 가능합니다');
       }
-      return bonumNumber;
+      return bonusNumber;
     });
   }
 
-  async returnBonusNumber(func) {
-    let result;
-    let isValid = false;
-    while (!isValid) {
-      try {
-        result = await func();
-        isValid = true;
-      } catch (e) {
-        Console.print(e.message);
-      }
-    }
-    return result;
-  }
-
   matchNumber(randomNumbers, lottonumber, bonumNumber) {
-    let matchThree = 0;
-    let matchFour = 0;
-    let matchFive = 0;
-    let matchFiveBonus = 0;
-    let matchSix = 0;
-    for (const userNumbers of randomNumbers) {
-      let userMatchCount = 0;
-      for (const number of userNumbers) {
-        if (lottonumber.includes(number)) {
-          userMatchCount++;
-        }
-      }
+    const matches = new Array(5).fill(0);
+
+    randomNumbers.forEach(userNumbers => {
+      const userMatchCount = userNumbers.filter(num => lottonumber.includes(num)).length;
       if (userMatchCount === 3) {
-        matchThree++;
+        matches[0]++;
       }
       if (userMatchCount === 4) {
-        matchFour++;
+        matches[1]++;
       }
-      if (userMatchCount === 5 && userNumbers.includes(bonumNumber)) {
-        matchFiveBonus++;
-      }
-      else if (userMatchCount === 5) {
-        matchFive++;
+      if (userMatchCount === 5) {
+        if (userNumbers.includes(bonumNumber)) {
+          matches[3];
+        }
+        else {
+          matches[2];
+        }
       }
       if (userMatchCount === 6) {
-        matchSix++;
+        matches[5]++;
       }
-    }
-    return [matchThree, matchFour, matchFive, matchFiveBonus, matchSix];
+    });
+    return matches;
   }
 
-  lottoPrint(matchThree, matchFour, matchFive, matchFiveBonus, matchSix) {
+  printPercentage(matchThree, matchFour, matchFive, matchFiveBonus, matchSix, money) {
+    const prizes = [5000, 50000, 1500000, 30000000, 2000000000];
+    const totalPrize = matchThree * prizes[0] + matchFour * prizes[1] + matchFive * prizes[2] + matchFiveBonus * prizes[3] + matchSix * prizes[4];
+
     Console.print(`3개 일치 (5,000원) - ${matchThree}개`);
     Console.print(`4개 일치 (50,000원) - ${matchFour}개`);
     Console.print(`5개 일치 (1,500,000원) - ${matchFive}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${matchFiveBonus}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${matchSix}개`);
-  }
-
-  calculatePrize(matchThree, matchFour, matchFive, matchFiveBonus, matchSix) {
-    const prize = (matchThree * 5000) + (matchFour * 50000) + (matchFive * 1500000) + (matchFiveBonus * 30000000) + (matchSix * 2000000000);
-    return prize;
-  }
-
-  printPercentage(prize, money) {
-    const profitPercentage = (prize / money) * 100;
+    const profitPercentage = (totalPrize / money) * 100;
     Console.print(`총 수익률은 ${profitPercentage.toFixed(1)}%입니다.`);
   }
 
