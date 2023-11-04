@@ -10,10 +10,12 @@ class App {
   lotto;
   bounce;
   rank;
+  benefit;
 
   async play() {
     await this.gameStart();
     await this.gameProgress();
+    this.gameOver();
   }
 
   async gameStart() {
@@ -26,6 +28,11 @@ class App {
     await this.getLottoBounce();
     this.checkLottoRank();
     this.printLottoRank();
+  }
+
+  gameOver() {
+    this.checkLottoBenfit();
+    this.printLottoBenfit();
   }
 
   async getLottoPrice() {
@@ -97,6 +104,25 @@ class App {
     }
 
     return bouncCount;
+  }
+
+  checkLottoBenfit() {
+    const ranks = this.rank;
+    const prices = [0, 0, 0, 5000, 50000, 1500000, 2000000000, 30000000];
+    const lottoPostPrice = this.lottos.getLottoPrice();
+    let lottoGetPrice = 0;
+
+    ranks.forEach((rank, index) => {
+      lottoGetPrice += prices[index] * rank;
+    });
+
+    this.benefit = ((lottoGetPrice / lottoPostPrice) * 100).toFixed(1);
+  }
+
+  printLottoBenfit() {
+    const totalBenfit = this.benefit;
+
+    Console.print(RESULT_MESSAGE.benefit(totalBenfit));
   }
 
   printLottoRank() {
