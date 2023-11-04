@@ -12,34 +12,35 @@ import {
 	ASK_BONUS_NUMBER,
 	RESULT,
 	DIVISION_LINE,
-	PROFITS_RATE_IS,
+	PROFITS_RATE_IS
 } from './constants';
 
 class App {
 	async play() {
 		const computer = new Computer();
-		const lotto = new Lotto();
+		const randomArrayArr = [];
 
 		const userMoney = await computer.getInput(ASK_MONEY);
-		lotto.amount = computer.calculateHowManyLottos(userMoney);
+		const amount = computer.calculateLottosAmount(+userMoney);
 
-		Console.print(NEW_LINE + lottoAmount + TELL_HOW_MANY_LOTTOS_BOUGHT);
-		for (let i = 0; i < lottoAmount; i += 1) {
-			const randomArray = computer.getRandomSixNumbers();
+		Console.print(`${NEW_LINE}${amount}${TELL_HOW_MANY_LOTTOS_BOUGHT}`);
+		for (let i = 0; i < amount; i += 1) {
+			const randomArray = await computer.getRandomSixNumbers();
 			Console.print(randomArray);
-			lotto.randomArraySet.add(randomArray);
+			randomArrayArr.push(randomArray);
 		}
 
-		const inputLotto = await computer.getInput(NEW_LINE + ASK_LOTTO_NUMBER, TYPE_LOTTO);
-		lotto.numbers = Validator.validateNumbers(inputLotto, TYPE_LOTTO);
-		const inputBonus = await computer.getInput(NEW_LINE + ASK_BONUS_NUMBER, TYPE_BONUS);
-		lotto.bonus = Validator.validateNumbers(inputBonus, TYPE_BONUS)[0];
+		const inputLotto = await computer.getInput(ASK_LOTTO_NUMBER);
+		const numbers = Validator.validateNumbers(inputLotto, TYPE_LOTTO);
+		const inputBonus = await computer.getInput(ASK_BONUS_NUMBER);
+		const bonus = Validator.validateNumbers(inputBonus, TYPE_BONUS)[0];
+		const lotto = new Lotto(numbers, randomArrayArr, bonus);
 
-		Console.print(NEW_LINE + RESULT + NEW_LINE + DIVISION_LINE);
-		// 몇 개 일치하는 지 계산
-		const profitsRate = computer.calculateProfitsRate//수익률 계산
-		computer.printHowManySameNumber(num1, num2); //결과 출력
-		Console.print(PROFITS_RATE_IS(profitsRate));//수익률 출력
+		Console.print(`${RESULT}${NEW_LINE}${DIVISION_LINE}`);
+		computer.compareLottoArrays(lotto); // 몇 개 일치하는 지 계산
+		const profitsRate = computer.calculateProfitsRate; //수익률 계산
+		await computer.printHowManySameNumbers(); //결과 출력
+		Console.print(PROFITS_RATE_IS(profitsRate)); //수익률 출력
 	}
 }
 

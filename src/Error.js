@@ -1,8 +1,7 @@
-class LottoError extends Error {
-	constructor(value, ...params) {
-		this.super(...params);
-		this.name = value;
-	}
-}
+// class LottoError extends Error {
+// 	constructor(...params) {
+// 		this.super(...params);
+// 	}
+// }
 
-export default LottoError;
+// export default LottoError;
