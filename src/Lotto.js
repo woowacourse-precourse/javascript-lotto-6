@@ -12,6 +12,9 @@ class Lotto {
     }
   }
 
+  get() {
+    return this.#numbers;
+  }
   // TODO: 추가 기능 구현
 }
 
