@@ -1,4 +1,4 @@
-import PurchaseAmount from '../models/PurchaseAmount.js';
+import PurchaseAmount from '../src/models/PurchaseAmount.js';
 
 describe('구입금액 클래스 테스트', () => {
   test.each([['string'], ['3.14']])(

@@ -1,4 +1,4 @@
-import PurchaseAmount from '../models/PurchaseAmount.js';
+import PurchaseAmount from '../src/models/PurchaseAmount.js';
 
 class LottoController {
   #lottoCount;
