@@ -2,39 +2,39 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { magicNumber } from '../constants/index.js';
 import { printMethod } from '../utils/ui-method.js';
 
-export default class RandomNumberArr {
-  #randomNumberArr;
+export default class RandomNumber {
+  #randomNumber;
 
   constructor(cnt) {
     // this.#validate(numbers);
-    this.#randomNumberArr = this.createRandomNumberArr(cnt);
+    this.#randomNumber = this.createRandomNumber(cnt);
   }
 
   // #validate(numbers) {}
 
-  printRandomNumberArr() {
-    this.#randomNumberArr.forEach((randomNumber, idx) => {
-      printMethod(randomNumber);
-      if (idx === randomNumber.length + 1) printMethod('\n');
+  printRandomNumber() {
+    this.#randomNumber.forEach((numbers, idx) => {
+      printMethod(numbers);
+      if (idx === numbers.length + 1) printMethod('\n');
     });
   }
 
-  createRandomNumber() {
-    const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(
+  createNumbers() {
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
       magicNumber.START_RANGE,
       magicNumber.END_RANGE,
       magicNumber.LOTTO_NUMBER_CNT,
     );
-    return randomNumber.sort((a, b) => a - b);
+    return numbers.sort((a, b) => a - b);
   }
 
-  createRandomNumberArr(cnt) {
-    const randomNumberArr = [];
-    let randomNumber = [];
+  createRandomNumber(cnt) {
+    const randomNumber = [];
+    let numbers = [];
     for (let idx = 0; idx < cnt; idx += 1) {
-      randomNumber = this.createRandomNumber();
-      randomNumberArr.push(randomNumber);
+      numbers = this.createNumbers();
+      randomNumber.push(numbers);
     }
-    return randomNumberArr;
+    return randomNumber;
   }
 }
