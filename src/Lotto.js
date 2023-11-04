@@ -1,5 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
-
 class Lotto {
   #numbers;
 
@@ -27,6 +25,7 @@ class Lotto {
     if (result.length === 5 && sortedUserNumbers.includes(BounsNum)) {
       return '2nd';
     }
+
     return result.length;
   }
 }

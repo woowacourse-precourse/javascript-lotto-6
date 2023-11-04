@@ -27,12 +27,8 @@ class App {
       '보너스 번호를 입력해 주세요.\n'
     );
 
-    // Console.print(lottoNumbers);
-    const winningNumberCount = [];
+    const winningNumbers = {};
     const winningStats = {
-      0: '일치번호 없음',
-      1: '1개 일치',
-      2: '2개 일치',
       3: '3개 일치 (5,000원) ',
       4: '4개 일치 (50,000원) ',
       5: '5개 일치 (1,500,000원) ',
@@ -41,13 +37,19 @@ class App {
     };
 
     lottoNumbers.forEach((lottoNum) => {
-      winningNumberCount.push(
-        lotto.checkLotteryResult(lottoNum, Number(BonusNumber))
-      );
+      const sameCount = lotto.checkLotteryResult(lottoNum, Number(BonusNumber));
+
+      if (sameCount > 2) {
+        winningNumbers[sameCount] = (winningNumbers[sameCount] || 0) + 1;
+      }
     });
 
-    Console.print(winningNumberCount);
-    Console.print(winningNumberCount.map((el) => winningStats[el]));
+    Object.keys(winningStats).forEach((el) => {
+      if (!winningStats[el]) winningStats[el] = 0;
+      if (!winningNumbers[el]) winningNumbers[el] = 0;
+
+      Console.print(`${winningStats[el]}- ${winningNumbers[el]}개`);
+    });
   }
 }
 
