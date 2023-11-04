@@ -34,7 +34,11 @@ class App {
       throw new Error(`${ERROR_MESSAGE.isNotwNumber}`);
     }
 
-    for (let i=0;)
+    for (let i = 0; i < winningNum.length; i++) {
+      if (winningNum[i] > 45 || winningNum[i] < 1) {
+        throw new Error(`${ERROR_MESSAGE.isIncorrecRage}`);
+      }
+    }
 
     const bonusNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputBonusNum
