@@ -1,4 +1,4 @@
-import { CONSTANT, ERROR } from '../constants/Constant.js';
+import { CONSTANT, ERROR, REGEX } from '../constants/Constant.js';
 import ValidationError from '../ValidationError.js';
 
 const Validator = {
@@ -7,8 +7,10 @@ const Validator = {
     this.checkIsNegative(amount);
     this.checkIsNotInUnit(amount);
   },
+
   validateLotto(lotto) {
     this.checkIsInvalidDigit(lotto);
+    this.checkHasNonNumericElements(lotto);
   },
 
   checkIsNotNumber(userInput) {
@@ -28,10 +30,19 @@ const Validator = {
       throw new ValidationError(ERROR.isNegative);
     }
   },
+
   checkIsInvalidDigit(userInput) {
     if (userInput.length !== CONSTANT.digit) {
       throw new ValidationError(ERROR.isInvalidDigit);
     }
+  },
+
+  checkHasNonNumericElements(inputs) {
+    inputs.forEach((element) => {
+      if (Number.isNaN(Number(element)) || element === '') {
+        throw new ValidationError(ERROR.hasNonNumericElements);
+      }
+    });
   },
 };
 
