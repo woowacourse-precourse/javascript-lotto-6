@@ -1,5 +1,11 @@
+import LottoGenerator from "./LottoGenerator.js";
+
+const lottoTickets = new LottoGenerator();
+
 class App {
-  async play() {}
+  async play() {
+    lottoTickets.getLottoTickets();
+  }
 }
 
 export default App;
