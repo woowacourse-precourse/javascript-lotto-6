@@ -5,6 +5,8 @@ class App {
 
   #purchaseAmount;
 
+  #winningNumbers;
+
   constructor() {
     this.#inputs = new Inputs();
     this.#purchaseAmount = 0;
@@ -12,6 +14,7 @@ class App {
 
   async play() {
     this.#purchaseAmount = await this.#inputs.returnPurchaseAmount();
+    this.#winningNumbers = await this.#inputs.returnWinningNumbers();
   }
 }
 

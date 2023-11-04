@@ -16,22 +16,23 @@ class Inputs {
     }
   }
 
+  returnWinningNumbers() {
+    this.getPromptedWinningNumbers();
+  }
+
+  async getPromptedWinningNumbers() {
+    try {
+      const winningNumbers = await this.getInput('당첨 번호를 입력해 주세요.');
+      return winningNumbers;
+    } catch (error) {
+      Console.print(error.message);
+      return this.getPromptedWinningNumbers;
+    }
+  }
+
   getInput(message) {
     return Console.readLineAsync(`${message}\n`);
   }
 }
 
 export default Inputs;
-
-// returnWinningNumbers(){
-
-// }
-
-// async getPromptedWinningNumbers(){
-//   try{
-
-//   }catch(error){
-//     Console.print(error.message);
-//     return this.getPromptedWinningNumbers
-//   }
-// }
