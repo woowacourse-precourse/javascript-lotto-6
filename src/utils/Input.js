@@ -27,6 +27,9 @@ class Input {
    */
   static async readIntegerAsync(message) {
     const userInput = await Console.readLineAsync(message);
+    if (userInput.trim().length === 0) {
+      throw new Error('[ERROR] 입력값이 없습니다.');
+    }
 
     return new Promise((resolve, reject) => {
       const numberInput = Number(userInput);
