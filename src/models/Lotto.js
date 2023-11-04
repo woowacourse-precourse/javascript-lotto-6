@@ -39,7 +39,7 @@ class Lotto {
   }
 
   /**
-   * 해당 로또의 번호와 입력받은 로또 번호의 일치하는 개수 구하기
+   * 해당 로또의 번호와 입력받은 로또 번호 일치하는 개수 구하기
    * @param {number[]} numbers
    * @returns {number}
    */
@@ -50,6 +50,27 @@ class Lotto {
       }
       return count;
     }, 0);
+  }
+
+  /**
+   * 해당 로또의 당첨 등수 구하기, 낙첨 시 0 리턴.
+   * @param {number[]} numbers
+   * @param {number} bonus
+   * @returns {number}
+   */
+  getRank(numbers, bonus) {
+    const match = this.getMatchNumberCount(numbers);
+
+    if (match <= OPTION.BALL_COUNT - OPTION.WINNING_RANKING + 1) {
+      return 0;
+    }
+    if (match === OPTION.BALL_COUNT) {
+      return 1;
+    }
+    if (match === OPTION.BALL_COUNT - 1 && this.#numbers.includes(bonus)) {
+      return 2;
+    }
+    return OPTION.BALL_COUNT - match + 2;
   }
 }
 
