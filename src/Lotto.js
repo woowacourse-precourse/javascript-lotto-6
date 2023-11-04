@@ -46,6 +46,7 @@ class Lotto {
 const findDuplicateNUmbers = (array1, array2) => {
   const returnArray = [];
   for (let number of array1) {
+    number = Number(number);
     if (array2.includes(number)) returnArray.push(number);
   }
   return returnArray;

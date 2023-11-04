@@ -30,7 +30,6 @@ describe("로또 클래스 테스트", () => {
     const expectedResult = {winNumbersCount: 4, isWinBonus: false};
     const lotto = new Lotto(input);
     const result = lotto.getResult(winNumbers, bonusNumber);
-
     expect(result).toEqual(expectedResult);
   });
 });

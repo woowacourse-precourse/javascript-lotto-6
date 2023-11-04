@@ -1,6 +1,6 @@
 import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
-
+import {MissionUtils} from "@woowacourse/mission-utils";
+import {countPrizeMoney} from "../src/App.js";
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
@@ -28,7 +28,7 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
@@ -40,12 +40,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -94,5 +94,17 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
-});
 
+  test("로또결산 ", () => {
+    const input = [
+      {winNumbersCount: 3, isWinBonus: false},
+      {winNumbersCount: 2, isWinBonus: false},
+      {winNumbersCount: 5, isWinBonus: false},
+      {winNumbersCount: 5, isWinBonus: true},
+      {winNumbersCount: 3, isWinBonus: false},
+    ];
+
+    const result = countPrizeMoney(input);
+    expect(result).toEqual(31510000);
+  });
+});
