@@ -1,11 +1,12 @@
 import { ERROR_CONVENTION } from "../src/constants/conventions.js";
+import { EMPTY_LINE } from "../src/constants/messages.js";
 import { COUNT } from "../src/constants/numbers.js";
 import Winning from "../src/model/Winning.js";
 
 describe("당첨 번호 클래스 테스트", () => {
   test("어떤 값도 들어오지 않았다면 예외를 발생한다.", () => {
     expect(() => {
-      new Winning("");
+      new Winning(EMPTY_LINE);
     }).toThrow(ERROR_CONVENTION);
   });
 
