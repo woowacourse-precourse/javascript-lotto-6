@@ -56,7 +56,7 @@ const Validator = {
   },
 
   checkHasDuplicate(inputs) {
-    if (inputs.length !== new Set(inputs)) {
+    if (inputs.length !== new Set(inputs).size) {
       throw new ValidationError(ERROR.hasDuplicate);
     }
   },
