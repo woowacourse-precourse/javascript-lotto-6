@@ -29,6 +29,10 @@ class View {
       Console.print(`${prizeGrade}개 일치 (${prize.price}원) - ${prize.count}개`);
     }
   }
+
+  printProfitRate(profitRate) {
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  }
 }
 
 export default View;

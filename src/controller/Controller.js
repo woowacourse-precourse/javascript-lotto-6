@@ -25,6 +25,7 @@ class Controller {
   startLottoHandler(winNumInput, winBonusNumInput) {
     this.model.compareWinLotto(winNumInput, winBonusNumInput);
     this.view.printLottoPrize(this.model.getPrizeCategories);
+    this.view.printProfitRate(this.model.calculateProfit());
   }
 }
 

@@ -63,6 +63,20 @@ class Model {
       this.#prizeCategories[`equal${winLotto.length === 6 && winLotto.includes(Number(winBonusInput)) ? "5WithBonus" : winLotto.length}`].count += 1;
     });
   }
+
+  calculateProfit() {
+    const purchasePrice = this.#lotties.length * 1000;
+    let total = 0;
+
+    for (const prize of Object.values(this.#prizeCategories)) {
+      const prizePrice = prize.price.replace(/[^0-9]/g, "");
+      total += prize.count * Number(prizePrice);
+    }
+
+    const profitRate = (total / purchasePrice) * 100;
+
+    return profitRate.toFixed(1);
+  }
 }
 
 export default Model;
