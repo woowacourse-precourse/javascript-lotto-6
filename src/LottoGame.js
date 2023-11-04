@@ -2,7 +2,8 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import Messages from './Messages.js';
 
 class LottoGame {
-  #purchaseAmount;
+  #purchase_amount;
+  #purchased_tickets;
 
   getPurchaseAmount = async () => {
     const input_amount = await MissionUtils.Console.readLineAsync(
@@ -14,12 +15,33 @@ class LottoGame {
     if (input_amount % 1000 !== 0) {
       throw new Error(Messages.PURCHASE_AMOUNT_NOT_DIVIDED);
     }
-    this.#purchaseAmount = parseInt(input_amount) / 1000;
+    this.#purchase_amount = parseInt(input_amount) / 1000;
   };
 
-  playGame = () => {
+  generateNumbers = (count) => {
+    let tickets = [];
+    for (let i = 0; i < count; i++) {
+      let ticket = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      ticket.sort((a, b) => a - b);
+      tickets.push(ticket);
+    }
+    this.#purchased_tickets = tickets;
+  };
+
+  printPurchasedTickets = (tickets) => {
+    MissionUtils.Console.print(
+      '\n' + tickets.length + Messages.PURCHASED_TICKET_PRINT
+    );
+    for (let ticket of tickets) {
+      MissionUtils.Console.print(ticket);
+    }
+  };
+
+  playGame = async () => {
     try {
-      this.getPurchaseAmount();
+      await this.getPurchaseAmount();
+      this.generateNumbers(this.#purchase_amount);
+      this.printPurchasedTickets(this.#purchased_tickets);
     } catch (error) {
       throw new Error(error);
     }
