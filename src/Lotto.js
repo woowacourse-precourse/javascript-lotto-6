@@ -69,7 +69,7 @@ class Lotto {
 
   #validateMatch(number) {
     if (!(number instanceof LottoNumber)) {
-      throw new Error(Lotto.ERROR_MESSAGES.invalidMatchArg);
+      throw new ApplicationError(Lotto.ERROR_MESSAGES.invalidMatchArg);
     }
   }
 }
