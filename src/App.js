@@ -152,7 +152,7 @@ class App {
       if (count === 5 && count.includes(this.bonus)) {
         this.fiveAndBonusMatches += 1;
       }
-      if (count === 4) {
+      if (count === 6) {
         this.sixMatches += 1;
       }
     }
