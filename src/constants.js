@@ -6,4 +6,12 @@ const REWARD = {
   FIFTH: 5_000,
 };
 
-export default REWARD;
+const NUMBER = {
+  SIX: '6',
+  FIVE: '5',
+  FOUR: '4',
+  THREE: '3',
+  ONE: '1',
+};
+
+export { REWARD, NUMBER };
