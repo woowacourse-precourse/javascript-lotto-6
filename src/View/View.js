@@ -1,8 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class View {
+  printError(error) {
+    Console.print(error);
+  }
+  
   async inputPrice() {
-    const price = await Console.readLineAsync('구매금액을 입력해 주세요.\n');
+    const price = Number(await Console.readLineAsync('구매금액을 입력해 주세요.\n'));
     return price;
   }
 
@@ -17,12 +21,12 @@ class View {
   }
 
   printQuantity(quantity) {
-    Console.print(`\n${quantity}개를 구매했습니다.`);
+    Console.print(`${quantity}개를 구매했습니다.`);
   }
 
   printLottoNumber(lottoNumber) {
     for (let i=0; i<lottoNumber.length; i+=1) {
-      Console.print(lottoNumber[i]);
+    Console.print(`[${lottoNumber[i].map((number) => number).join(', ')}]`);
     }
 
     Console.print('');
