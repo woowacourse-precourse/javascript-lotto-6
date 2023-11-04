@@ -9,9 +9,21 @@ const ERROR_MESSAGE = {
 
 const INPUT_MESSAGE = {
   INPUT_BUY_MONEY: '구입금액을 입력해 주세요.\n',
-  INPUT_WINNINGNUM: '당첨 번호를 입력해 주세요.',
-  INPUT_BONUSNUM: '보너스 번호를 입력해 주세요.',
-  RESULT: '당첨 통계\n---',
+  INPUT_WINNINGNUM: '\n당첨 번호를 입력해 주세요.',
+  INPUT_BONUSNUM: '\n보너스 번호를 입력해 주세요.',
 };
 
-export { ERROR_MESSAGE, INPUT_MESSAGE };
+const OUTPUT_MESSAGE = {
+  OUTPUT_NUM_OF_LOTTOS: '개를 구매했습니다.',
+  RESULT: '\n당첨 통계\n---',
+
+  FIFTH_PLACE: '3개 일치 (5,000원)',
+  FOURTH_PLACE: '4개 일치 (50,000원)',
+  THIRD_PLACE: '5개 일치 (1,500,000원)',
+  SECOND_PLACE: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+  FIRST_PLACE: '6개 일치 (2,000,000,000원)',
+
+  REVENUE: '총 수익률은',
+};
+
+export { ERROR_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE };

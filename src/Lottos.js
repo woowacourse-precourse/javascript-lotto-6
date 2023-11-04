@@ -1,4 +1,5 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { OUTPUT_MESSAGE } from '../constant/Messages.js';
 
 class Lottos {
   constructor(buyMoney) {
@@ -18,14 +19,15 @@ class Lottos {
   }
 
   printNumOfLottos() {
-    Console.print(`\n${this.numOfLottos}개를 구매했습니다.`);
+    Console.print(
+      `\n${this.numOfLottos}` + OUTPUT_MESSAGE.OUTPUT_NUM_OF_LOTTOS
+    );
   }
 
   printCreatedLottos() {
     this.createdLottos.map((e) => {
       Console.print(e);
     });
-    Console.print('\n');
   }
 }
 
