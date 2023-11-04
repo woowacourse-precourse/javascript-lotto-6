@@ -7,6 +7,15 @@ class App {
     const userMoney = await Console.readLineAsync(MESSAGE.START);
     const count = (userMoney / 1000);
     Console.print(MESSAGE_INPUT(count).COUNT);
+    
+    // 랜덤한 6개 번호를 count 개수만큼 출력
+    let userRandomNums = [];
+    for (let i=0; i < count; i++) {
+      const randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      userRandomNums.push(randomNums);
+      Console.print(randomNums);
+    }
+    // Console.print(userRandomNums)
 
   }
 }
