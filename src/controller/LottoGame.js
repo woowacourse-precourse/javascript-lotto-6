@@ -33,9 +33,16 @@ class LottoGame {
   }
 
   async #getWinningNumbersInput() {
-    const winningNumbers = await InputView.readWinningNumbers();
-    const splitWinningNumbers = this.#getSplitWinningNumbers(winningNumbers);
-    Validator.validateLotto(splitWinningNumbers);
+    try {
+      const winningNumbers = await InputView.readWinningNumbers();
+      const splitWinningNumbers = this.#getSplitWinningNumbers(winningNumbers);
+
+      return new Lotto(splitWinningNumbers);
+    } catch (error) {
+      OutputView.printMessage(error.message);
+
+      return this.#getWinningNumbersInput();
+    }
   }
 
   #getSplitWinningNumbers(winningNumbers) {
