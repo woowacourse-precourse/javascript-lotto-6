@@ -11,6 +11,7 @@ class App {
     await this.LottoPos.handlerPurchaseAmount();
     await this.LottoPos.inputWinningNumber();
     await this.LottoPos.inputBonusNumber();
+    this.LottoPos.compareLottoNumber();
   }
 }
 
