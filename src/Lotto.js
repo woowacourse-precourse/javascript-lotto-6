@@ -23,6 +23,10 @@ class Lotto {
   isValidNumber(number) {
     return !isNaN(number) && number >= 1 && number <= 45;
   }
+
+  isBonusNumberDuplicate(bonus) {
+    return this.#numbers.includes(bonus);
+  }
   // TODO: 추가 기능 구현
 }
 
