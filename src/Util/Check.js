@@ -2,6 +2,7 @@ import Constants from "./Constants.js";
 
 export default class Check {
   #conditions = {
+    LOTTO_PRICE: 1000,
     LOTTO_MAX_NUM: 45,
     LOTTO_MIN_NUM: 1,
     BASE_NUM_UNITS: 6,
@@ -9,8 +10,8 @@ export default class Check {
   };
 
   money(amount) {
-    const unit = 1000;
-    if (amount % unit || isNaN(amount)) throw new Error(Constants.error.money);
+    if (amount % this.#conditions.LOTTO_PRICE || isNaN(amount))
+      throw new Error(Constants.error.money);
     return amount;
   }
 
