@@ -1,4 +1,5 @@
 import { InputGetter } from "../src/InputGetter";
+import { InputConverter } from "../src/InputConverter";
 import { Console } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
@@ -54,6 +55,22 @@ describe("입력 가져오기", () => {
       const result = await inputGetter.inputBonusNumber();
 
       expect(result).toBe(output);
+    });
+  });
+});
+
+describe("입력 변환하기", () => {
+  test("금액", () => {
+    const inputs = ["1000", "3000", "15000"];
+    const outputs = [1000, 3000, 15000];
+
+    const inputConverter = new InputConverter();
+
+    outputs.forEach((output) => {
+      const input = inputs.shift();
+      const result = inputConverter.moneyConverter(input);
+
+      expect(result).toEqual(output);
     });
   });
 });
