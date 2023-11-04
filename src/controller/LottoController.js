@@ -4,6 +4,7 @@ import Lotto from "../domain/Lotto.js";
 import RandomNumGenerator from "../utils/calc/RandomNumGenerator.js";
 import Sort from "../utils/calc/Sort.js";
 import { SEPARATOR, STATIC_NUMBER, RANK } from "../static/Static.js";
+import Calculator from "../utils/calc/Calculator.js";
 class LottoController {
   #lottoList = [];
   #purchaseQty;
@@ -35,6 +36,7 @@ class LottoController {
 
   async setPurchaseQty() {
     this.#purchaseQty = await InputView.readPurchasePrice();
+    OutputView.printBlankLine();
   }
 
   showPurchaseQuantity() {
@@ -42,14 +44,7 @@ class LottoController {
   }
 
   makeRandomNumArr() {
-    const randomNumArr = [];
-    do {
-      const uniqueNum = RandomNumGenerator.generateRandomNum();
-      if (!randomNumArr.includes(uniqueNum)) {
-        randomNumArr.push(uniqueNum);
-      }
-    } while (randomNumArr.length < STATIC_NUMBER.LottoNumLen);
-    return randomNumArr;
+    return RandomNumGenerator.generateRandomNumArr();
   }
 
   setLottoList() {
@@ -64,12 +59,14 @@ class LottoController {
       Sort.sortNumArrASC(lotto);
       OutputView.printLotto(lotto);
     });
+    OutputView.printBlankLine();
   }
 
   async setWinningNums() {
     const winningNumsString = await InputView.readWinningNums();
     const winningNumsArr = winningNumsString.split(SEPARATOR.lottoNum);
     this.#winningNums = winningNumsArr.map((winningNum) => Number(winningNum));
+    OutputView.printBlankLine();
   }
 
   async setBonusNum() {
@@ -95,7 +92,13 @@ class LottoController {
     OutputView.printResult(this.#winningStatistic);
   }
 
-  showRateOfReturn() {}
+  showRateOfReturn() {
+    const rateOfReturn = Calculator.calcRateOfReturn(
+      this.#winningStatistic,
+      this.#purchaseQty
+    );
+    OutputView.printRateOfReturn(rateOfReturn);
+  }
 }
 
 export default LottoController;

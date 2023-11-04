@@ -40,8 +40,8 @@ const MESSAGE_ALERT = Object.freeze({
 
 const MESSAGE_ASK = Object.freeze({
   purchasePrice: "구입금액을 입력해 주세요.\n",
-  winningNums: "\n당첨 번호를 입력해 주세요.\n",
-  bonusNum: "\n보너스 번호를 입력해 주세요.\n",
+  winningNums: "당첨 번호를 입력해 주세요.\n",
+  bonusNum: "보너스 번호를 입력해 주세요.\n",
 });
 
 export {

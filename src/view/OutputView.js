@@ -2,8 +2,11 @@ import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE_ALERT, MESSAGE_RESULT } from "../static/Static.js";
 
 const OutputView = {
+  printBlankLine() {
+    Console.print("");
+  },
   printPurchaseQuantity(purchaseQuantity) {
-    Console.print(`\n${purchaseQuantity}${MESSAGE_ALERT.quantity}`);
+    Console.print(`${purchaseQuantity}${MESSAGE_ALERT.quantity}`);
   },
   printLotto(lotto) {
     Console.print(lotto);
@@ -13,6 +16,9 @@ const OutputView = {
     for (let rank in winningStatistic) {
       Console.print(`${MESSAGE_RESULT[rank]} - ${winningStatistic[rank]}개`);
     }
+  },
+  printRateOfReturn(rateOfReturn) {
+    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   },
 };
 
