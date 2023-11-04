@@ -12,8 +12,8 @@ class Lotto {
     }
   }
 
-  getNumber(){
-    return this.#numbers; 
+  getNumber() {
+    return this.#numbers;
   }
   // TODO: 추가 기능 구현
 }
