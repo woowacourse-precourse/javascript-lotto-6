@@ -5,7 +5,7 @@ class App {
 }
 
 class LottoPurchase {
-  async #lottoAmount() {
+  async #getLottoAmount() {
     return await parseInt(
       MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.")
     );
@@ -27,7 +27,7 @@ class LottoPurchase {
 
     while (true) {
       try {
-        purchaseAmount = await this.#lottoAmount();
+        purchaseAmount = await this.#getLottoAmount();
         this.#validateAmount(purchaseAmount);
         break;
       } catch (error) {
