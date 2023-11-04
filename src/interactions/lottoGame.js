@@ -6,17 +6,19 @@ import lottoGameConsole from '../cli/lottoGameConsole.js';
 
 import systemErrorHandler from '../error/handlers/systemErrorHandler.js';
 
-const requireBonusNumber = (winningLottoNumber) =>
-  systemErrorHandler.retryOnErrors(async () => {
-    const bonusNumber = await lottoGameConsole.input.readBonusNumber(winningLottoNumber);
-    return bonusNumber;
-  });
+const processInputWinningLottoInfo = async () => {
+  const { readWinningLottoNumber, readBonusNumber } = lottoGameConsole.input;
 
-const requireWinningLottoNumber = () =>
-  systemErrorHandler.retryOnErrors(async () => {
-    const winningLottoNumbers = await lottoGameConsole.input.readWinningLottoNumber();
-    return winningLottoNumbers;
-  });
+  const winningLottoNumber = await systemErrorHandler.retryOnErrors(
+    readWinningLottoNumber.bind(lottoGameConsole.input),
+  );
+
+  const bonusNumber = await systemErrorHandler.retryOnErrors(() =>
+    readBonusNumber(winningLottoNumber),
+  );
+
+  return { winningLottoNumber, bonusNumber };
+};
 
 const requireLottoNumbers = (purchasedLottoAmount) =>
   lottoPurchase.generateLottoNumbers({
@@ -42,8 +44,7 @@ const lottoGame = {
   async run() {
     const purchasedLottoAmount = await processInputPurchasedLottoAmount();
     const lottoNumbers = processLottoPurchase(purchasedLottoAmount);
-    const winningLottoNumber = await requireWinningLottoNumber();
-    const bonusNumber = await requireBonusNumber(winningLottoNumber);
+    const { bonusNumber, winningLottoNumber } = await processInputWinningLottoInfo();
   },
 };
 
