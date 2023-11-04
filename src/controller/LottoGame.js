@@ -8,6 +8,8 @@ import Lotto from '../model/Lotto.js';
 class LottoGame {
   #lottoBundle;
 
+  #winningNumbers;
+
   async startGame() {
     const lottoCount = await this.#getLottoCount();
 
@@ -15,8 +17,9 @@ class LottoGame {
     this.#lottoBundle.buyLottos(lottoCount);
     OutputView.printLottoNumbers(lottoCount, this.#lottoBundle.getTotalLottoNumberString());
 
-    const winningNumbers = await this.#getWinningNumbersInput();
-    const bonusNumber = await this.#getBonusNumberInput();
+    const winningLotto = await this.#getWinningLotto();
+    const bonusNumber = await this.#getBonusNumber();
+    const totalRank = this.#lottoBundle.getTotalRank(winningLotto, bonusNumber);
   }
 
   async #getLottoCount() {
