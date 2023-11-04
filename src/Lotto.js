@@ -1,3 +1,7 @@
+import LottoGameError from "./Error";
+import { LOTTO_ERROR_MSG } from "./constants/error";
+import { LOTTO_CONSTANT } from "./constants/game";
+
 class Lotto {
   #numbers;
 
@@ -14,24 +18,27 @@ class Lotto {
   }
 
   #validateLength(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTO_CONSTANT.SIZE) {
+      throw new LottoGameError(LOTTO_ERROR_MSG.LENGTH_ERR);
     }
   }
 
   #validateDuplication(numbers) {
     numbers.forEach((number, idx) => {
       if (idx !== numbers.lastIndexOf(number)) {
-        throw new Error("[ERROR] 로또 번호가 중복되었습니다.");
+        throw new LottoGameError(LOTTO_ERROR_MSG.DUPLICATION_ERR);
       }
     });
   }
 
   #validateRange(numbers) {
-    const abnormalRange = numbers.some((number) => number < 1 || number > 45);
+    const abnormalRange = numbers.some(
+      (number) =>
+        number < LOTTO_CONSTANT.MIN_RANGE || number > LOTTO_CONSTANT.MAX_RANGE
+    );
 
     if (abnormalRange) {
-      throw new Error("[ERROR] 로또 번호가 중복되었습니다.");
+      throw new LottoGameError(LOTTO_ERROR_MSG.RANGE_ERR);
     }
   }
 
@@ -40,7 +47,7 @@ class Lotto {
 
     const isDigit = numbers.every((number) => DIGIT_CHECK.test(number));
     if (!isDigit) {
-      throw new Error("[ERROR] 숫자가 아닌 문자가 있습니다.");
+      throw new LottoGameError(LOTTO_ERROR_MSG.NOT_DIGIT_ERR);
     }
   }
 
