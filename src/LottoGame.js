@@ -1,6 +1,5 @@
-/*
-🐛FIX: matchingTable을 객체로 관리하기, 함수 크기 줄이기
-*/
+import MatchingTable from './MatchingTable.js';
+
 export default class LottoGame {
   #autoLottos;
 
@@ -10,41 +9,41 @@ export default class LottoGame {
 
   #matchingTable;
 
+  #rankingList;
+
   constructor(autoLottos, winningLotto, bonus) {
     this.#autoLottos = autoLottos;
     this.#winningLotto = winningLotto;
     this.#bonus = bonus;
-    this.#matchingTable = {
-      threeMatching: 0,
-      fourMatching: 0,
-      fiveMatchingNotBonus: 0,
-      fiveMatchingAndBonus: 0,
-      allMatching: 0,
-    };
+    this.#matchingTable = new MatchingTable();
+    this.#rankingList = [];
   }
 
   getWinningResult() {
+    this.#countMatchingNumbers();
+    this.#matchingTable.updateMatchingCount(this.#rankingList);
+    return this.#matchingTable.getMatchingTable();
+  }
+
+  #countMatchingNumbers() {
     this.#autoLottos.reduce((acc, autoLotto) => {
       let count = 0;
       acc.forEach((winningNum) => {
         if (autoLotto.includes(winningNum)) count += 1;
       });
-      this.#checkMatchingCount(count, autoLotto);
+      this.#updateRankingList(autoLotto, count);
       return acc;
     }, this.#winningLotto);
-
-    return this.#matchingTable;
   }
 
-  #checkMatchingCount(count, autoLotto) {
-    if (count === 3) this.#matchingTable.threeMatching += 1;
-    if (count === 4) this.#matchingTable.fourMatching += 1;
+  #updateRankingList(autoLotto, count) {
+    if (count === 3) this.#rankingList.push(5);
+    if (count === 4) this.#rankingList.push(4);
     if (count === 5) {
-      autoLotto.includes(this.#bonus)
-        ? (this.#matchingTable.fiveMatchingAndBonus += 1)
-        : (this.#matchingTable.fiveMatchingNotBonus += 1);
+      if (autoLotto.includes(this.#bonus)) this.#rankingList.push(2);
+      else this.#rankingList.push(3);
     }
-    if (count === 6) this.#matchingTable.allMatching += 1;
+    if (count === 6) this.#rankingList.push(1);
   }
 
   getRateOfReturn() {
@@ -55,19 +54,14 @@ export default class LottoGame {
   }
 
   #getIncome() {
-    const {
-      threeMatching,
-      fourMatching,
-      fiveMatchingNotBonus,
-      fiveMatchingAndBonus,
-      allMatching,
-    } = this.#matchingTable;
-    const income =
-      threeMatching * 5000 +
-      fourMatching * 50000 +
-      fiveMatchingNotBonus * 1500000 +
-      fiveMatchingAndBonus * 30000000 +
-      allMatching * 2000000000;
+    let income = 0;
+    this.#rankingList.forEach((ranking) => {
+      if (ranking === 5) income += 5000;
+      if (ranking === 4) income += 50000;
+      if (ranking === 3) income += 1500000;
+      if (ranking === 2) income += 30000000;
+      if (ranking === 1) income += 2000000000;
+    });
     return income;
   }
 }
