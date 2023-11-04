@@ -1,7 +1,16 @@
 class Validation {
   isValidWinningNumbers(numbers) {
+    this.isNumbers(numbers);
     this.isNonDuplicatedNumbers(numbers);
     this.isNumbersInRange(numbers);
+  }
+
+  static isNumbers(numbers) {
+    numbers.forEach((number) => {
+      if (Number.isNaN(number)) {
+        throw new Error('[ERROR] 숫자만 입력할 수 있습니다.');
+      }
+    });
   }
 
   static isNonDuplicatedNumbers(numbers) {
