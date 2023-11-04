@@ -7,13 +7,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
-
+    this.#validateSixLength(numbers);
     this.#validateDuplicated(numbers);
     this.#validateRangeNumber(numbers);
     this.#validateNumberType(numbers);
+  }
+
+  #validateSixLength(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
   }
 
   #validateDuplicated(numbers) {
