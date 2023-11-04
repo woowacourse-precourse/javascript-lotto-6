@@ -1,13 +1,10 @@
 import prompt from './prompt.js';
 
 class notice {
-  static quantity(lottoCount) {
-    prompt.out(`\n${lottoCount}개를 구매했습니다.`);
-  }
-
-  static totalLotto(lottos) {
+  static totalLotto(lottos, quantity) {
+    prompt.out(`${quantity}개를 구매했습니다.`);
     lottos.forEach((lotto) => {
-      prompt.out(lotto.getNumbers());
+      prompt.out(`[${lotto.getNumbers().join(', ')}]`);
     });
   }
 }

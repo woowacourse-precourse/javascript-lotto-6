@@ -26,8 +26,8 @@ class App {
     this.#money = await Request.money();
     this.#lottoQuantity = calculate.countFrom(this.#money);
     this.#lottos = lottoMachine.make(this.#lottoQuantity);
-    notice.quantity(this.#lottoQuantity);
-    notice.totalLotto(this.#lottos);
+    // notice.quantity(this.#lottoQuantity);
+    notice.totalLotto(this.#lottos, this.#lottoQuantity);
     this.#winningNumbers = await Request.winningNumbers();
     this.#bonusNumber = await Request.bonusNumber();
   }
