@@ -7,6 +7,7 @@ class Amount {
     this.#string = string;
     this.#isEmpty(string);
     this.#isNotNumber(string);
+    this.#isNotDividedByAmount(string);
   }
 
   #isEmpty(string) {
@@ -20,6 +21,13 @@ class Amount {
     // 숫자인지 체크
     if (isNaN(Number(string))) {
       throw new Error(ERROR_MESSAGE.typeDismatching);
+    }
+  }
+
+  #isNotDividedByAmount(string) {
+    // 잔돈이 존재하는경우를 체크
+    if (Number(string) % 1000 !== 0) {
+      throw new Error(ERROR_MESSAGE.hasChanges);
     }
   }
 }

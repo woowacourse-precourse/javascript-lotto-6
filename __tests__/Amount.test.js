@@ -19,4 +19,10 @@ describe("구입 금액 클래스 테스트", () => {
       new Amount("    ");
     }).toThrow(ERROR_CONVENTION);
   });
+
+  test("잔돈이 존재하는 경우 예외를 발생한다.", () => {
+    expect(() => {
+      new Amount("1500");
+    }).toThrow(ERROR_CONVENTION);
+  });
 });
