@@ -16,9 +16,24 @@ describe('로또 클래스 테스트', () => {
   });
 
   test('로또 클래스는 숫자배열을 파라미터로 받으며, 그렇지 않을 경우 예외가 발생한다.', () => {
-    expect(() => {
-      new Lotto([1, 2, 3, 4, 5, '숫자']);
-    }).toThrow(getErrorMessage(ERROR_MESSAGE.isNotNumberArray));
+    const numbers = [1, 2, 3, 4, 5];
+    const wrongItems = [
+      NaN,
+      null,
+      undefined,
+      true,
+      false,
+      '하나',
+      '1',
+      '',
+      { number: 1 },
+    ];
+
+    wrongItems.forEach((v) => {
+      expect(() => {
+        new Lotto(numbers.concat(v));
+      }).toThrow(getErrorMessage(ERROR_MESSAGE.isNotNumberArray));
+    });
 
     expect(() => {
       new Lotto('1,2,3,4,5,6');
