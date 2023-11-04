@@ -26,12 +26,14 @@ class Consumer {
     return this.#quantity;
   }
 
-  getLottoNumber() {
+  pickLottoNumber() {
     for(let i=0; i<this.#quantity; i+=1){
       this.#lottoNumber.push(Random.pickUniqueNumbersInRange(1, 45, 6));
       this.#lottoNumber[i].sort((a, b) => a - b);
     }
-
+  }
+  
+  getLottoNumber() {
     return this.#lottoNumber;
   }
 }
