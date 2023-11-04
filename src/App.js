@@ -1,13 +1,16 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constant/Messages.js';
-
+import { INPUT_MESSAGE } from '../constant/Messages.js';
 import Money from './Money.js';
+import Lottos from './Lottos.js';
 
 class App {
+  constructor() {}
   async play() {
     const buyMoney = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BUY_MONEY);
-
-    new Money(buyMoney);
+    this.Money = new Money(buyMoney);
+    this.Lottos = new Lottos(buyMoney);
+    this.Lottos.printNumOfLottos();
+    this.Lottos.printCreatedLottos();
   }
 }
 
