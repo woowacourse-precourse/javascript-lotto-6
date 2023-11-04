@@ -15,6 +15,11 @@ const inputs = {
     );
     return numbersAnswer;
   },
+
+  async enterBonusNumber() {
+    const numberAnswer = await Console.readLineAsync(MESSAGE.input.bonusNumber);
+    return numberAnswer;
+  },
 };
 
 export default inputs;
