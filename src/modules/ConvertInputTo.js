@@ -3,16 +3,18 @@ import ErrorCheck from './ErrorCheck.js';
 import Get from './Get.js';
 import Print from './Print.js';
 
-const LOTTO_PRICE = 1000;
-const LOTTO_UPPER_NUMBER = 45;
+import CONSTANTS from '../constants/CONSTANTS.js';
 
-const PURCHASE_PRICE_INPUT_MESSAGE = '구입금액을 입력해 주세요.\n';
-const WINNING_NUMBER_INPUT_MESSAGE = '\n당첨 번호를 입력해 주세요.\n';
-const BONUS_NUMBER_INPUT_MESSAGE = '\n보너스 번호를 입력해 주세요.\n';
-
-const MISS_STATE = 0;
-const BONUS_STATE = 1;
-const HIT_STATE = 2;
+const {
+  PURCHASE_PRICE_INPUT_MESSAGE,
+  WINNING_NUMBER_INPUT_MESSAGE,
+  BONUS_NUMBER_INPUT_MESSAGE,
+  LOTTO_PRICE,
+  LOTTO_NUMBER_UPPER,
+  MISS_STATE,
+  BONUS_STATE,
+  HIT_STATE,
+} = CONSTANTS;
 
 class ConvertInputTo {
   static async lottoArray() {
@@ -36,7 +38,7 @@ class ConvertInputTo {
   }
 
   static async lottoBoard() {
-    const board = new Array(LOTTO_UPPER_NUMBER + 1).fill(MISS_STATE);
+    const board = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
     (await ConvertInputTo.winningNumbersArray()).forEach(
       number => (board[number] = HIT_STATE)
     );

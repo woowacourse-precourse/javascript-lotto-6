@@ -1,6 +1,10 @@
 import Get from '../../src/modules/Get.js';
 import Lotto from '../../src/Lotto.js';
 
+import CONSTANTS from '../../src/constants/CONSTANTS.js';
+
+const { MISS_STATE, BONUS_STATE, HIT_STATE, LOTTO_UPPER_NUMBER } = CONSTANTS;
+
 const mockBoard = (winningNumbers, bonusNumber) => {
   const board = new Array(LOTTO_UPPER_NUMBER + 1).fill(MISS_STATE);
   winningNumbers.forEach(number => (board[number] = HIT_STATE));

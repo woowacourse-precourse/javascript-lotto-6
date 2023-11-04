@@ -1,13 +1,10 @@
-import ConvertInputTo from '../../../src/modules/ConvertInputTo';
 import { Console } from '@woowacourse/mission-utils';
+import ConvertInputTo from '../../../src/modules/ConvertInputTo';
 
-const ERROR_FORMAT = '[ERROR]';
+import CONSTANTS from '../../../src/constants/CONSTANTS';
 
-const MISS_STATE = 0;
-const BONUS_STATE = 1;
-const HIT_STATE = 2;
-
-const LOTTO_UPPER_NUMBER = 45;
+const { ERROR_HEADER, MISS_STATE, BONUS_STATE, HIT_STATE, LOTTO_NUMBER_UPPER } =
+  CONSTANTS;
 
 const mockQuestions = inputs => {
   let nowIndex = 0;
@@ -20,7 +17,7 @@ const mockQuestions = inputs => {
 };
 
 const mockBoard = (winningNumbers, bonusNumber) => {
-  const board = new Array(LOTTO_UPPER_NUMBER + 1).fill(MISS_STATE);
+  const board = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
   winningNumbers.forEach(number => (board[number] = HIT_STATE));
   board[bonusNumber] = BONUS_STATE;
 
@@ -83,7 +80,7 @@ describe('lottoBoard()', () => {
     const board = await ConvertInputTo.lottoBoard();
 
     expect(logSpy.mock.calls).toHaveLength(errorCount);
-    logSpy.mock.calls.forEach(call => expect(call[0]).toMatch(ERROR_FORMAT));
+    logSpy.mock.calls.forEach(call => expect(call[0]).toMatch(ERROR_HEADER));
     expect(board).toEqual(expectedValue);
   });
 });

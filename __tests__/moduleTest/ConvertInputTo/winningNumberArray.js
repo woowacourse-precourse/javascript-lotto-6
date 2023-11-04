@@ -1,7 +1,9 @@
 import ConvertInputTo from '../../../src/modules/ConvertInputTo';
 import { Console } from '@woowacourse/mission-utils';
 
-const ERROR_FORMAT = '[ERROR]';
+import CONSTANTS from '../../../src/constants/CONSTANTS';
+
+const { ERROR_HEADER } = CONSTANTS;
 
 const mockQuestions = inputs => {
   let nowIndex = 0;
@@ -73,7 +75,7 @@ describe('winningNumbersArray()', () => {
 
     //then
     for (let i = 0; i < logSpy.mock.calls.length - 1; i++) {
-      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_FORMAT);
+      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_HEADER);
     }
     expect(winningNumbers).toEqual(expectedValue);
   });

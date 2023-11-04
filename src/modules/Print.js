@@ -1,8 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const PURCHASED_LOTTO_FORMAT = '개를 구매했습니다.';
-const LOTTO_FRONT_COVER = '[';
-const LOTTO_BEHIND_COVER = ']';
+import CONSTANTS from '../constants/CONSTANTS.js';
+
+const { PURCHASED_LOTTO_FORMAT, LOTTO_FRONT_COVER, LOTTO_BEHIND_COVER } =
+  CONSTANTS;
+
 class Print {
   static purchasedLotto(lottoArray) {
     Print.lineBreak();

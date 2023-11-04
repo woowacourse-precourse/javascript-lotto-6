@@ -1,6 +1,8 @@
-import ErrorCheck from '../../../src/modules/ErrorCheck.js';
+import ErrorCheck from '../../../src/modules/ErrorCheck';
 
-const ERROR_FORMAT = '[ERROR]';
+import CONSTANTS from '../../../src/constants/CONSTANTS';
+
+const { ERROR_HEADER } = CONSTANTS;
 
 test.each([
   ['123', false],
@@ -12,6 +14,6 @@ test.each([
   ['-10', true],
 ])('positiveIntegerString()', (input, isThrowing) => {
   const targetFunction = () => ErrorCheck.positiveIntegerString(input);
-  if (isThrowing) expect(targetFunction).toThrow(ERROR_FORMAT);
+  if (isThrowing) expect(targetFunction).toThrow(ERROR_HEADER);
   if (!isThrowing) expect(targetFunction).not.toThrow();
 });

@@ -1,13 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 import ConvertInputTo from '../../../src/modules/ConvertInputTo';
 
-const ERROR_FORMAT = '[ERROR]';
-const LOTTO_UPPER_NUMBER = 45;
-const MISS_STATE = 0;
-const HIT_STATE = 2;
+import CONSTANTS from '../../../src/constants/CONSTANTS';
+
+const { ERROR_HEADER, LOTTO_NUMBER_UPPER, MISS_STATE, HIT_STATE } = CONSTANTS;
 
 const mockBoard = winningNumbers => {
-  const board = new Array(LOTTO_UPPER_NUMBER).fill(MISS_STATE);
+  const board = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
   winningNumbers.forEach(number => (board[number] = HIT_STATE));
 
   return Object.freeze(board);
@@ -32,8 +31,8 @@ const getLogSpy = () => {
 describe('bonusNumber()', () => {
   test.each([
     [['1'], mockBoard([40, 41, 42, 43, 44, 45]), 1],
-    //[['37'], mockBoard([10, 15, 20, 25, 30, 35]), 37],
-    //[['10'], mockBoard([1, 2, 3, 4, 5, 6]), 10],
+    [['37'], mockBoard([10, 15, 20, 25, 30, 35]), 37],
+    [['10'], mockBoard([1, 2, 3, 4, 5, 6]), 10],
   ])('정상작동', async (input, board, expectedValue) => {
     //given
     mockQuestions(input);
@@ -59,7 +58,7 @@ describe('bonusNumber()', () => {
     const bonusNumber = await ConvertInputTo.bonusNumber(mockBoard);
     //then
     for (let i = 0; i < logSpy.mock.calls.length - 1; i++) {
-      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_FORMAT);
+      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_HEADER);
     }
     expect(bonusNumber).toBe(expectedValue);
   });

@@ -1,7 +1,8 @@
 import ErrorCheck from '../../../src/modules/ErrorCheck';
 
-const LOTTO_PRICE = 1000;
-const ERROR_FORMAT = '[ERROR]';
+import CONSTANTS from '../../../src/constants/CONSTANTS';
+
+const { ERROR_HEADER } = CONSTANTS;
 
 test.each([
   [[1, 0, 4], false],
@@ -14,6 +15,6 @@ test.each([
   [[2, 1, 1], true],
 ])('numberInRange()', (input, isThrowing) => {
   const targetFunction = () => ErrorCheck.numberInRange(...input);
-  if (isThrowing) expect(targetFunction).toThrow(ERROR_FORMAT);
+  if (isThrowing) expect(targetFunction).toThrow(ERROR_HEADER);
   if (!isThrowing) expect(targetFunction).not.toThrow();
 });

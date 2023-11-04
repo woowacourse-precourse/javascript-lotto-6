@@ -1,0 +1,25 @@
+const ERROR_HEADER = '[ERROR]';
+
+const STRINGS = Object.freeze({
+  PURCHASE_PRICE_INPUT_MESSAGE: '구입금액을 입력해 주세요.\n',
+  WINNING_NUMBER_INPUT_MESSAGE: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER_INPUT_MESSAGE: '\n보너스 번호를 입력해 주세요.\n',
+
+  ERROR_HEADER,
+
+  NOT_AN_INTEGER_ERROR_MESSAGE: `${ERROR_HEADER} 정수가 아닙니다.`,
+  NOT_MULTIPLES_ERROR_MESSAGE: `${ERROR_HEADER} 로또를 깔끔하게 살 수 없습니다.`,
+  WRONG_LENGTH_ERROR_MESSAGE: `${ERROR_HEADER} 잘못된 길이입니다.`,
+  WRONG_RANGE_NUMBER_ERROR_MESSAGE: `${ERROR_HEADER} 범위 바깥의 숫자입니다.`,
+  SAME_ELEMENT_IN_ARRAY_ERROR_MESSAGE: `${ERROR_HEADER} 중복된 요소가 존재합니다.`,
+  EXIST_NUMBER_IN_BOARD_ERROR_MESSAGE: `${ERROR_HEADER} 중복된 번호가 존재합니다.`,
+
+  STRING_TYPE: 'string',
+  BLANK: '',
+
+  PURCHASED_LOTTO_FORMAT: '개를 구매했습니다.',
+  LOTTO_FRONT_COVER: '[',
+  LOTTO_BEHIND_COVER: ']',
+});
+
+export default STRINGS;

@@ -1,7 +1,8 @@
 import ErrorCheck from '../../../src/modules/ErrorCheck';
 
-const LOTTO_PRICE = 1000;
-const ERROR_FORMAT = '[ERROR]';
+import CONSTANTS from '../../../src/constants/CONSTANTS';
+
+const { ERROR_HEADER, LOTTO_PRICE } = CONSTANTS;
 
 test.each([
   [1000, false],
@@ -15,6 +16,6 @@ test.each([
 ])('multiplesInPositive', (input, isThrowing) => {
   const targetFunction = () =>
     ErrorCheck.multiplesInPositive(input, LOTTO_PRICE);
-  if (isThrowing) expect(targetFunction).toThrow(ERROR_FORMAT);
+  if (isThrowing) expect(targetFunction).toThrow(ERROR_HEADER);
   if (!isThrowing) expect(targetFunction).not.toThrow();
 });

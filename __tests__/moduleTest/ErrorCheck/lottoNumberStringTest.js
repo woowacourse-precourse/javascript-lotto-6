@@ -1,6 +1,8 @@
-import ErrorCheck from '../../../src/modules/ErrorCheck.js';
+import ErrorCheck from '../../../src/modules/ErrorCheck';
 
-const ERROR_FORMAT = '[ERROR]';
+import CONSTANTS from '../../../src/constants/CONSTANTS';
+
+const { ERROR_HEADER } = CONSTANTS;
 
 test.each([
   ['5', false],
@@ -15,6 +17,6 @@ test.each([
   ['0', true],
 ])('lottoNumberString()', (input, isThrowing) => {
   const targetFunction = () => ErrorCheck.lottoNumberString(input);
-  if (isThrowing) expect(targetFunction).toThrow(ERROR_FORMAT);
+  if (isThrowing) expect(targetFunction).toThrow(ERROR_HEADER);
   if (!isThrowing) expect(targetFunction).not.toThrow();
 });
