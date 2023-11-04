@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import Print from '../../src/modules/Print.js';
+import Print from '../../../src/modules/Print.js';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(Console, 'print');
