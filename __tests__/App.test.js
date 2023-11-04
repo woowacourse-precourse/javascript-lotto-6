@@ -73,4 +73,27 @@ describe('class App test', () => {
       expect(app.lottoRandomNumber).toEqual([[1,2,3,4,5,6]]);
     });
   });
+
+  describe('method test : checkBonusNumber()', () => {
+    test('보너스 번호를 입력 안했을 때 에러가 발생하는가 ?', () => {
+      const testBonus = '';
+      expect(() => {
+        app.checkBonusNumber(testBonus);
+      }).toThrow('[ERROR] 숫자를 입력하세요.');
+    });
+
+    test('보너스 번호에 문자를 입력하면 에러가 발생하는가 ?', () => {
+      const testBonus = '1000j';
+      expect(() => {
+        app.checkBonusNumber(testBonus);
+      }).toThrow('[ERROR] 숫자가 잘못된 형식입니다.');
+    });
+
+    test('보너스 번호에 문자를 입력하면 에러가 발생하는가 ?', () => {
+      const testBonus = 99;
+      expect(() => {
+        app.checkBonusNumber(testBonus);
+      }).toThrow('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
+    });
+  });
 });
