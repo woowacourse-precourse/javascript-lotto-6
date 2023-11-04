@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { COST_PROMPT } from '../constants/message';
+import { COST_PROMPT } from '../constants/message.js';
 
 class Input {
   /**

@@ -23,7 +23,7 @@ describe('Input', () => {
   describe('getCost', () => {
     test('구입금액을 입력해 주세요. 라는 문구를 출력한다.', async () => {
       // given
-      const expectedMessage = '구입금액을 입력해 주세요.';
+      const expectedMessage = '구입금액을 입력해 주세요.\n';
       Console.readLineAsync.mockResolvedValue('1000');
 
       // when
