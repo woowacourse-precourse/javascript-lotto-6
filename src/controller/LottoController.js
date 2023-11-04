@@ -8,24 +8,17 @@ class LottoController {
   #quantity;
 
   async playGame() {
-    await this.inputPurchasePrice();
-    this.outputPurchaseQuantity();
+    await this.askPurchasePrice();
+    this.showPurchaseQuantity();
     this.setLottos();
   }
 
-  async inputPurchasePrice() {
+  async askPurchasePrice() {
     this.#quantity = await InputView.readPurchasePrice();
   }
 
-  outputPurchaseQuantity() {
+  showPurchaseQuantity() {
     OutputView.printPurchaseQuantity(this.#quantity);
-  }
-
-  setLottos() {
-    for (let i = 0; i < this.#quantity; i++) {
-      const candidateNumArr = this.makeRandomNumArr();
-      this.#lottos.push(candidateNumArr);
-    }
   }
 
   makeRandomNumArr() {
@@ -37,6 +30,13 @@ class LottoController {
       }
     } while (randomNumArr.length < STATIC_NUMBER.LottoNumLen);
     return randomNumArr;
+  }
+
+  setLottos() {
+    for (let i = 0; i < this.#quantity; i++) {
+      const candidateNumArr = this.makeRandomNumArr();
+      this.#lottos.push(candidateNumArr);
+    }
   }
 }
 
