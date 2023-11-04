@@ -1,3 +1,3 @@
-export { default as inputConstants } from './input-constants.js';
+export { default as uiConstants } from './ui-constants.js';
 export { default as magicNumber } from './magic-number.js';
-export { default as validateConstants } from './validate-constants.js';
+export { default as errorConstants } from './error-constants.js';
