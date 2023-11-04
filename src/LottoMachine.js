@@ -28,7 +28,11 @@ class LottoMachine {
   }
 
   #generateLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(
+      LOTTO.range.min,
+      LOTTO.range.max,
+      LOTTO.size,
+    );
   }
 }
 
