@@ -31,7 +31,7 @@ class Lotto {
   }
 
   #countMatchingNumbers(winningLotto) {
-    return 2 * LOTTO_NUMBER.count - new Set([winningLotto.#numbers, ...this.#numbers]).size;
+    return 2 * LOTTO_NUMBER.count - new Set([...winningLotto.#numbers, ...this.#numbers]).size;
   }
 
   #hasBonusNumber(bonusNumber) {
