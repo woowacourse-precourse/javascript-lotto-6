@@ -17,6 +17,7 @@ class App {
     const BONUS_NUM = await INPUT_BONUS();
     const MY_ANSWER = new Lottory(LOTTO_ARR, ANSWER.getNumbers(), BONUS_NUM);
     OUT_RESULT(MY_ANSWER.getAnswer());
+    MissionUtils.Console.print(MY_ANSWER.getEarning());
   }
 }
 

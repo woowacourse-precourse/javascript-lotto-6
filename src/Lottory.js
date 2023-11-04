@@ -3,12 +3,13 @@ class Lottory {
     #ANSWER;
     #BONUS;
     #RESULT = [0, 0, 0, 0, 0];
-
+    #EARNING;
     constructor(Lotto, answer, Bonus) {
         this.#MY_LOTTO = Lotto;
         this.#ANSWER = answer;
         this.#BONUS = Bonus;
         this.checkLotto(Lotto);
+        this.#EARNING = this.countEarning();
     }
 
     checkLotto(Lotto) {
@@ -36,6 +37,19 @@ class Lottory {
 
     getAnswer() {
         return this.#RESULT;
+    }
+
+    countEarning(){
+        let earning  = (2000000000 * this.#RESULT[0])
+            + (30000000 * this.#RESULT[1])
+            + (1500000 * this.#RESULT[2])
+            + (50000 * this.#RESULT[3])
+            + (5000 * this.#RESULT[4]);
+        return (earning / (this.#MY_LOTTO.length * 1000) * 100).toFixed(2);
+    }
+
+    getEarning() {
+        return this.#EARNING;
     }
 }
 
