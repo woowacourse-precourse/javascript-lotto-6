@@ -52,4 +52,10 @@ describe('로또 금액 테스트', () => {
       Validation.limitPrice('2000001000');
     }).toThrow();
   });
+
+  test('로또 금액이 1000원 이하인 경우 테스트 -> 0인 경우', () => {
+    expect(() => {
+      Validation.minimumPrice('0');
+    }).toThrow();
+  });
 });
