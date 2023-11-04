@@ -39,8 +39,8 @@ class App {
     return getValidatedNumbers(numbers);
   }
 
-  getResult(NUMBERS, BONUS_NUMBER) {
-    let prizeCount = {
+  getPrizeCounts(numbers, bonusNumber){
+    let prizeCounts = {
       1: 0,
       2: 0,
       3: 0,
@@ -49,39 +49,76 @@ class App {
       bonus: 0,
       6: 0,
     };
+
     this.lottos.forEach((lotto) => {
-      const { count, isbonus } = lotto.getPrizeCount(NUMBERS, BONUS_NUMBER);
-      if (isbonus) prizeCount["bonus"]++;
-      else prizeCount[count]++;
+      const { count, isbonus } = lotto.getPrizeCount(numbers, bonusNumber);
+      if (isbonus) prizeCounts["bonus"]++;
+      else prizeCounts[count]++;
     });
 
-    return prizeCount;
+    return prizeCounts;
   }
 
-  async printResult(result) {}
+  getRate(prizeCounts){
+    let prize = 0;
+    
+    return 0;
+  }
 
-  async play() {
+  getResult(numbers, bonusNumber) {
+    const prizeCounts = this.getPrizeCounts(numbers, bonusNumber);
+    const rate = this.getRate(prizeCounts);
+    return {prizeCounts, rate};
+  }
+
+  async printResult(result) {
+    print("당첨통계");
+    print("---");
+    print(`3개 일치 (5,000원) - ${result.prizeCounts["3"]}개`);
+    print(`4개 일치 (50,000원) - ${result.prizeCounts["4"]}개`);
+    print(`5개 일치 (1,500,000원) - ${result.prizeCounts["5"]}개`);
+    print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.prizeCounts["bonus"]}개`);
+    print(`6개 일치 (2,000,000,000원) - ${result.prizeCounts["6"]}개`);
+    print(`총 수익률은 ${result.rate}%입니다.`);
+    print("---");
+  }
+
+  async getPrizeNumbers() {
+    const inputNumbers = await input(PRINT_MESSAGE.NUMBERS);
+    return this.makeNumberArray(inputNumbers);
+  }
+
+  async getBonusNumber() {
+    const inputBonusNumber = await input(PRINT_MESSAGE.BONUS_NUMBER);
+    return getValidatedNumber(inputBonusNumber);
+  }
+
+  async setLottos() {
+    //TODO: 함수 밖으로?
     //돈 입력 및 로또 개수 구하기
-    const INPUT_MONEY = await input(PRINT_MESSAGE.INPUT_MONEY);
-    const LOTTO_COUNT = this.getLottoCount(+INPUT_MONEY);
+    const inputMoney = await input(PRINT_MESSAGE.INPUT_MONEY);
+    const lottoCount = this.getLottoCount(+inputMoney);
 
-    await this.printBuyCount(LOTTO_COUNT);
+    await this.printBuyCount(lottoCount);
     print("");
 
     //로또 생성
-    await this.createLottos(LOTTO_COUNT);
+    await this.createLottos(lottoCount);
+  }
 
-    //각 로또 번호 생성
-    const INPUT_NUMBERS = await input(PRINT_MESSAGE.NUMBERS);
-    const NUMBERS = this.makeNumberArray(INPUT_NUMBERS);
+  //TODO: 보너스 숫자 이전 6 숫자 중복 시 에러
+  async play() {
+    //로또 생성
+    await this.setLottos();
 
-    //보너스 번호 생성
-    const INPUT_BONUS_NUMBERS = await input(PRINT_MESSAGE.BONUS_NUMBER);
-    const BONUS_NUMBERS = getValidatedNumber(INPUT_BONUS_NUMBERS);
-
-    const RESULT = this.getResult(NUMBERS, BONUS_NUMBERS);
-    console.log(RESULT);
+    //당첨 로또 번호 생성
+    const numbers = await this.getPrizeNumbers();
     
+    //보너스 번호 생성
+    const bonusNumber = await this.getBonusNumber();
+
+    const result = this.getResult(numbers, bonusNumber);
+    this.printResult(result);
   }
 }
 
