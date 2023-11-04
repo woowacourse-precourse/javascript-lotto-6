@@ -17,14 +17,9 @@ class App {
     this.lottoTickets.forEach((ticket) => {
       new Lotto(ticket);
     });
-    const resultWinNum = await View.askWinningNum();
-    const resultBonusNum = await View.askBonusNum();
-    const winCount = new WinLotto(
-      resultWinNum,
-      resultBonusNum,
-      this.lottoTickets
-    );
-    const winResults = winCount.compareNumbers();
+    const result = await WinLotto.calculateEarnings(this.lottoTickets);
+    const statisticPrint = View.printRewardStatistics(result);
+    console.log(statisticPrint);
   }
 }
 

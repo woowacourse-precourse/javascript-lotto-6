@@ -3,7 +3,7 @@ class Validator {
   static #MONEY_UNIT = 1000;
 
   static validateMoneyUnit(inputMoney) {
-    if (inputMoney % Validator.#MONEY_UNIT !== 0) {
+    if (parseInt(inputMoney, 10) % Validator.#MONEY_UNIT !== 0) {
       throw new Error(ERROR_MESSAGE.moneyUnit);
     }
   }

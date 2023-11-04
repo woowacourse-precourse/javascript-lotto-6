@@ -1,5 +1,4 @@
-import { Console, MissionUtils } from "@woowacourse/mission-utils";
-import Validator from "./Validate.js";
+import LottoStore from "./LottoStore.js";
 import ERROR_MESSAGE from "./Errors.js";
 
 class WinLotto {
@@ -36,6 +35,39 @@ class WinLotto {
     });
 
     return winningAndBonusCount;
+  }
+
+  static async calculateEarnings(lottoTickets) {
+    const prizeMoney = {
+      3: 5000,
+      4: 50000,
+      5: 1500000,
+      "5+1": 30000000,
+      6: 2000000000,
+    };
+
+    const results = await LottoStore.calculateWinningResults(lottoTickets);
+
+    let totalEarnings = 0;
+    const countResults = {
+      3: 0,
+      4: 0,
+      5: 0,
+      "5+1": 0,
+      6: 0,
+    };
+
+    results.forEach((result) => {
+      if (result.matchCount === 5 && result.bonusMatch === 1) {
+        countResults["5+1"]++;
+        totalEarnings += prizeMoney["5+1"];
+      } else if (result.matchCount >= 3) {
+        countResults[result.matchCount]++;
+        totalEarnings += prizeMoney[result.matchCount];
+      }
+    });
+
+    return { totalEarnings, countResults };
   }
 }
 
