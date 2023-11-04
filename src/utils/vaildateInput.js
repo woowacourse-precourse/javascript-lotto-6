@@ -7,6 +7,10 @@ const validation = {
     if (!Number.isInteger(Number(input))) {
       throw new Error("[ERROR] 숫자는 정수이여야 합니다.");
     }
+
+    if (input.length === 0) {
+      throw new Error("[ERROR] 값을 입력해 주세요");
+    }
   },
   lottoNumberRange: (input) => {
     if (Number(input) < 1 || Number(input) > 45) {
