@@ -1,8 +1,8 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import GameView from "./GameView";
-import { GameText } from "../Message";
-import GameUtil from "./GameUtil";
-import GameModel from "./GameModel";
+import { MissionUtils } from '@woowacourse/mission-utils';
+import GameView from './GameView';
+import { GameText } from '../Message';
+import GameUtil from './GameUtil';
+import GameModel from './GameModel';
 
 export default class GameController {
   constructor() {
@@ -25,8 +25,14 @@ export default class GameController {
     // 당첨번호 생성
     this.view.printGameMessage(GameText.GET_WINNING_NUMBER);
     const winningNumber = await this.getUserInput();
-    this.model.generateWinningNumber(winningNumber.split(","));
-    this.view.printWinningNumber(this.model.WINNING_NUMBER.join(", "));
+    this.model.generateWinningNumber(winningNumber.split(','));
+    this.view.printWinningNumber(this.model.WINNING_NUMBER.join(', '));
+
+    // 보너스번호 생성
+    this.view.printGameMessage(GameText.GET_BOUNS_NUMBER);
+    const bonusNumber = await this.getUserInput();
+    this.model.generateBonusNumber(bonusNumber);
+    this.view.printWinningNumber(this.model.BONUS_NUMBER);
   }
 
   async getUserInput() {

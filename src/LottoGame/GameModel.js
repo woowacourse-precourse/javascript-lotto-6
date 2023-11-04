@@ -1,11 +1,15 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from "../Lotto";
+import { MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from '../Lotto';
+import { ErrorMessage } from '../Message';
+import GameUtil from './GameUtil';
 
 export default class GameModel {
   constructor() {
     this.LOTTO_COUNT = 0;
     this.LOTTOS = [];
     this.WINNING_NUMBER = [];
+    this.BONUS_NUMBER = 0;
+    this.util = new GameUtil();
   }
 
   lottoCount(buyingMoney) {
@@ -25,5 +29,11 @@ export default class GameModel {
   generateWinningNumber(winningNumber) {
     const number = new Lotto(winningNumber);
     this.WINNING_NUMBER = number.getLottoNumber();
+  }
+
+  generateBonusNumber(bonusNumber) {
+    const duplicateCheckArray = [bonusNumber, ...this.WINNING_NUMBER];
+    this.util.bonusNumberValidatro(bonusNumber, duplicateCheckArray);
+    this.BONUS_NUMBER = Number(bonusNumber);
   }
 }

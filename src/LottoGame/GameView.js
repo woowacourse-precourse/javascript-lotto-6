@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 export default class GameView {
   async printGameMessage(message) {
@@ -7,7 +7,7 @@ export default class GameView {
 
   async printLottos(lottos, lottoCount) {
     let allLottos = `${lottoCount}개를 구매했습니다. \n`;
-    lottos.forEach((lotto) => {
+    lottos.forEach(lotto => {
       const num = lotto.getLottoNumber();
       allLottos += `[${num}] \n`;
     });
@@ -15,7 +15,7 @@ export default class GameView {
     MissionUtils.Console.print(allLottos);
   }
 
-  async printWinningNumber(winningNumber) {
-    MissionUtils.Console.print(winningNumber);
+  async printWinningNumber(number) {
+    MissionUtils.Console.print(number);
   }
 }
