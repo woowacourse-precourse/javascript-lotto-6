@@ -1,4 +1,5 @@
 import { ERROR_CONVENTION } from "../src/constants/conventions";
+import { EMPTY_LINE } from "../src/constants/messages";
 import Bonus from "../src/model/Bonus";
 
 describe("구입 금액 클래스 테스트", () => {
@@ -10,7 +11,7 @@ describe("구입 금액 클래스 테스트", () => {
 
   test("입력값이 없을 경우 예외를 발생한다.", () => {
     expect(() => {
-      new Bonus("");
+      new Bonus(EMPTY_LINE);
     }).toThrow(ERROR_CONVENTION);
   });
 
