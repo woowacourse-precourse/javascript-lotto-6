@@ -4,7 +4,7 @@
     "node": true,
     "jest": true
   },
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "plugin:jsdoc/recommended"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -19,7 +19,9 @@
     "class-methods-use-this": "off",
 
     // 메서드의 길이 제한
-    "max-lines-per-function": ["error", { "max": 15 }]
+    "max-lines-per-function": ["error", { "max": 15 }],
+
+    "jsdoc/no-unused-vars": "off"
   },
   "overrides": [
     {
