@@ -22,9 +22,10 @@ class App {
 
     const winnigNumbers = await this.#inputView.getWinnigNumbers();
     const bonusNumber = await this.#inputView.getBonusNumber();
-
     const result = this.#lottoGame.resultOfWinningDetails(winnigNumbers, bonusNumber);
     this.#outputView.printResult(result);
+
+    this.#gameOver();
   }
 
   async #getLottoTickets() {
@@ -36,6 +37,10 @@ class App {
       this.#outputView.printTotalLottos(lottos);
       if (isValid) break;
     }
+  }
+
+  #gameOver() {
+    return;
   }
 }
 
