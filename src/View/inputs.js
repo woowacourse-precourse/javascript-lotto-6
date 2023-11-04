@@ -8,6 +8,13 @@ const inputs = {
     );
     return priceAnswer;
   },
+
+  async enterWinningNumbers() {
+    const numbersAnswer = await Console.readLineAsync(
+      MESSAGE.input.winningNumbers,
+    );
+    return numbersAnswer;
+  },
 };
 
 export default inputs;
