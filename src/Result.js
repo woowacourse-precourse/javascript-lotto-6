@@ -2,11 +2,12 @@ import { INDEX, PRIZE, RANK, UNIT } from "./constants/rule.js";
 
 class Result {
   #result;
+  #statistics;
 
   constructor(lottos, userLotto, bonus) {
     this.#result = [];
     this.#calculateResult(lottos, userLotto, bonus);
-    this.statistics = Array.from({ length: RANK.LENGTH }).fill(0);
+    this.#statistics = Array.from({ length: RANK.LENGTH }).fill(0);
   }
 
   #calculateResult(lottos, userLotto, bonus) {
@@ -65,20 +66,20 @@ class Result {
       this.#calculateStatistics(each);
     });
 
-    return this.statistics;
+    return this.#statistics;
   }
 
   #calculateStatistics(result) {
     if (result.count === RANK.FIRST) {
-      this.statistics[INDEX.FIRST_RANK] += 1;
+      this.#statistics[INDEX.FIRST_RANK] += 1;
     } else if (result.count === RANK.SECOND && result.isBonus) {
-      this.statistics[INDEX.SECOND_RANK] += 1;
+      this.#statistics[INDEX.SECOND_RANK] += 1;
     } else if (result.count === RANK.THIRD && !result.isBonus) {
-      this.statistics[INDEX.THIRD_RANK] += 1;
+      this.#statistics[INDEX.THIRD_RANK] += 1;
     } else if (result.count === RANK.FOURTH) {
-      this.statistics[INDEX.FOURTH_RANK] += 1;
+      this.#statistics[INDEX.FOURTH_RANK] += 1;
     } else if (result.count === RANK.FIFTH) {
-      this.statistics[INDEX.FIFTH_RANK] += 1;
+      this.#statistics[INDEX.FIFTH_RANK] += 1;
     }
   }
 
