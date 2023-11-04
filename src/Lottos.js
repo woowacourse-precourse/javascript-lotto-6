@@ -25,6 +25,10 @@ class Lottos {
     return this.#lottos;
   }
 
+  setLottos(lotto) {
+    this.#lottos.push(lotto);
+  }
+
   getLottoPrice() {
     return this.#lottoPrice;
   }
