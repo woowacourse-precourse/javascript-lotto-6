@@ -52,6 +52,9 @@ class Bonus {
         }
     }
 
+    getBonusNumber() {
+        return this.#bonus;
+    }
 }
 
 export default Bonus;

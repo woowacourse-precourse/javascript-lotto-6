@@ -37,6 +37,10 @@ class Money {
             //숫자를 재입력할 Console.readLine()함수 
         }
     }
+
+    getPurchaseAmount() {
+        return this.#money;
+    }
 }
 
 export default Money;

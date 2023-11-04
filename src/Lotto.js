@@ -64,6 +64,9 @@ class Lotto {
     }
   }
 
+  getWinningNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
