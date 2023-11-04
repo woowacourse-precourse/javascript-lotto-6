@@ -112,6 +112,10 @@ class Validate {
   }
 
   isExistInLotto(input, lotto) {
+    if (typeof input !== "number") {
+      input = parseInt(input, 10);
+    }
+
     if (lotto.includes(input)) {
       throw new Error(ERROR.ALREADY_EXIST);
     }

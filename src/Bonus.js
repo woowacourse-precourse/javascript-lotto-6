@@ -1,4 +1,4 @@
-import Validate from "./Validate";
+import Validate from "./Validate.js";
 
 class Bonus {
   constructor(bonus, userLotto) {
@@ -7,9 +7,8 @@ class Bonus {
   }
 
   #validate(bonus, userLotto) {
-    const parsedBonus = parseInt(bonus, 10);
     const validate = new Validate();
-    validate.isValidBonusNumber(parsedBonus, userLotto);
+    validate.isValidBonusNumber(bonus, userLotto);
   }
 
   getBonus() {
