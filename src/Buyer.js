@@ -1,4 +1,5 @@
 import { ERROR, LOTTO } from './constant.js';
+import Lotto from './Lotto.js';
 import Output from './Output.js';
 import Util from './Util.js';
 
@@ -11,6 +12,7 @@ class Buyer {
     this.#validate(budget);
     this.#budget = budget;
     this.#lottoList = [];
+    this.setLottoList();
   }
 
   #validate(budget) {
@@ -23,12 +25,17 @@ class Buyer {
     return this.#budget / LOTTO.price;
   }
 
-  setLottos() {
+  setLottoList() {
     for (let i = 0; i < this.getPurchaseCount(); i += 1) {
-      this.#lottoList.push(Util.createLottoNumber());
+      const lotto = new Lotto(Util.createLottoNumber());
+      this.#lottoList.push(lotto.getLotto());
     }
 
     Output.printPurchasedLottoList(this.#lottoList);
+  }
+
+  getLottoList() {
+    return this.#lottoList;
   }
 }
 

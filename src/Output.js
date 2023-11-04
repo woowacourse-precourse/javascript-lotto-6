@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from './constant.js';
 
 class Output {
-  static printPurchase(count) {
+  static printPurchaseCount(count) {
     Console.print(MESSAGE.purchase(count));
   }
 

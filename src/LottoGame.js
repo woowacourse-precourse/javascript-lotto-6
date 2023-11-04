@@ -5,15 +5,17 @@ import Buyer from './Buyer.js';
 class LottoGame {
   #buyer;
 
+  #lottos;
+
   async start() {
     await this.setBuyer();
-    this.#buyer.setLottos();
+    this.printPurchasedLottoList();
   }
 
   async setBuyer() {
     const lottoBudget = await Input.getLottoBudget();
     this.#buyer = new Buyer(lottoBudget);
-    Output.printPurchase(this.#buyer.getPurchaseCount());
+    Output.printPurchaseCount(this.#buyer.getPurchaseCount());
   }
 }
 
