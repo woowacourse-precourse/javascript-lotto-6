@@ -44,4 +44,11 @@ describe('로또 클래스 테스트', () => {
     expect(result.matchingCount).toBe(3);
     expect(result.hasBonusNumber).toBe(true);
   });
+
+  test('로또 번호가 오름차순으로 재정렬되어 반환되는지 테스트한다.', () => {
+    const lotto = new Lotto([6, 5, 4, 3, 2, 1]);
+    const sortedLotto = lotto.getSortedLotto();
+
+    expect(sortedLotto).toEqual([1, 2, 3, 4, 5, 6]);
+  });
 });
