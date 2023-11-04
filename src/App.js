@@ -24,7 +24,21 @@ class App {
     // 보너스 번호 입력 - 유효한지 확인하는 코드 추가하기
     const bonusNums = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
     
-
+    // 당첨 확인
+    let winningThree = 0;
+    let winningFour = 0;
+    let winningFive = 0;
+    let winningBonus = 0;
+    let winningSix = 0;
+    
+    // 통계
+    Console.print(MESSAGE.CALC);
+    Console.print(MESSAGE_INPUT(winningThree).RANK_THREE);
+    Console.print(MESSAGE_INPUT(winningFour).RANK_FOUR);
+    Console.print(MESSAGE_INPUT(winningFive).RANK_FIVE);
+    Console.print(MESSAGE_INPUT(winningBonus).RANK_BONUS);
+    Console.print(MESSAGE_INPUT(winningSix).RANK_SIX);
+    
   }
 }
 
