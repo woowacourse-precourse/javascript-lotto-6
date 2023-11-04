@@ -12,7 +12,7 @@ class InputView {
   }
 
   async getBonusNumber() {
-    const bonusNumber = this.#readLine('보너스 번호를 입력해 주세요.\n');
+    const bonusNumber = this.#readLine('\n보너스 번호를 입력해 주세요.\n');
     return bonusNumber;
   }
 
