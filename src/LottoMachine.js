@@ -1,3 +1,4 @@
+import { Random } from '@woowacourse/mission-utils';
 import ERROR from './constants/error.js';
 import LOTTO from './constants/lotto.js';
 
@@ -13,6 +14,10 @@ class LottoMachine {
     if (money % LOTTO.price) {
       throw new Error(ERROR.lotto.notDivisibleMoney);
     }
+  }
+
+  #generateLottoNumbers() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 }
 

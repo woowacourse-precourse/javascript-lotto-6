@@ -94,12 +94,12 @@
 
 ### 중복되지 않는 랜덤 숫자 추출
 
-- [ ] `1~45` 사이 숫자 중 중복되지 않는 `6`개의 숫자를 뽑는다.
-- [ ] `@woowacourse/mission-utils`의 `Random.pickUniqueNumbersInRange()`를 사용한다.
+- [x] `1~45` 사이 숫자 중 중복되지 않는 `6`개의 숫자를 뽑는다.
+  - `@woowacourse/mission-utils`의 `Random.pickUniqueNumbersInRange()`를 사용한다.
 
-  ```javascript
-  MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-  ```
+    ```javascript
+    MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    ```
 
 ### 로또 발행
 
