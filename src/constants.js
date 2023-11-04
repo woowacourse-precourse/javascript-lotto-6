@@ -52,6 +52,8 @@ export const BONUS_ERROR = {
 	},
 };
 
+//const BLANK_REGEXP = /\s/g;
 export const REG_EXP = /[a-zA-Z가-힣[!@#$%^&*()_+{}[\]:;<>.,?~\\/-]]/g;
 export const REG_EXP_EXCEPT_COMMA = /[a-zA-Z가-힣[!@#$%^&*()_+{}[\]:;<>.?~\\/-]]/g;
-//const BLANK_REGEXP = /\s/g;
+
+export const PROFIT_RATE_IS = (number) => `총 수익률은 ${number}%입니다.`;
