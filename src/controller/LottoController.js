@@ -27,7 +27,7 @@ class LottoController {
     const randomNumArr = [];
     do {
       const uniqueNum = RandomNumGenerator.generateRandomNum();
-      if (!(uniqueNum in randomNumArr)) {
+      if (!randomNumArr.includes(uniqueNum)) {
         randomNumArr.push(uniqueNum);
       }
     } while (randomNumArr.length < STATIC_NUMBER.LottoNumLen);
@@ -36,8 +36,8 @@ class LottoController {
 
   setLottos() {
     for (let i = 0; i < this.#purchaseQty; i++) {
-      const candidateNumArr = this.makeRandomNumArr();
-      this.#lottos.push(candidateNumArr);
+      const randomNumArr = this.makeRandomNumArr();
+      this.#lottos.push(randomNumArr);
     }
   }
 
