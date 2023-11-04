@@ -36,6 +36,26 @@ class Lotto {
     const bonusNumber = this.#valudateBonus(number);
     return bonusNumber;
   }
+
+  #validateDraw(numbers) {
+    if (!numbers) {
+      return;
+    }
+    if (numbers.length !== 6) {
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+    return numbers;
+  }
+
+  #valudateBonus(bonus) {
+    if (!bonus) {
+      return;
+    }
+    if (bonus.length !== 1) {
+      throw new Error("[ERROR] 보너스 번호는 1개여야 합니다.");
+    }
+    return bonus;
+  }
 }
 
 export default Lotto;
