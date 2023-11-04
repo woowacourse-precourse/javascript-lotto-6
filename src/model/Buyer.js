@@ -26,7 +26,7 @@ class Buyer {
 
   #setLottoList() {
     for (let i = 0; i < this.getPurchaseCount(); i += 1) {
-      const lotto = new Lotto(Util.createLottoNumber()).getLotto();
+      const lotto = new Lotto(Util.createSortedLottoNumber()).getLotto();
       this.#lottoList.push(lotto);
     }
   }

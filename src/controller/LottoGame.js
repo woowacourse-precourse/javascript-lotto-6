@@ -37,7 +37,7 @@ class LottoGame {
     while (true) {
       // eslint-disable-next-line no-await-in-loop
       const winLotto = await Input.getWinLotto();
-      const parsedWinLotto = Util.splitStringToNumberArray(winLotto);
+      const parsedWinLotto = Util.parseWinLotto(winLotto);
       try {
         this.#winLotto = new WinLotto(parsedWinLotto);
         break;
