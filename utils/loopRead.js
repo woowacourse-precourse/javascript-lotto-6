@@ -5,7 +5,7 @@ export default async function loopRead(readFn) {
     try {
       return await readFn();
     } catch (error) {
-      Console.print(error);
+      Console.print(error.message);
     }
   }
 }
