@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { BASEAMOUNT, INPUT_MESSAGE } from "./utils/CONSTANT.js";
+import { BASEAMOUNT, INPUT_MESSAGE, OUTPUT_MESSAGE } from "./utils/CONSTANT.js";
 import { validatePurchase } from "./utils/validation.js";
 
 class App {
@@ -33,9 +33,17 @@ class App {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
+  printPurchaseResults() {
+    MissionUtils.Console.print(
+      this.#ticketCount + OUTPUT_MESSAGE.purchaseResult,
+    );
+    MissionUtils.Console.print(OUTPUT_MESSAGE.divide);
+  }
+
   async startPurchase() {
     await this.inputPurchaseAmount();
     this.createLottoTickets();
+    this.printPurchaseResults();
   }
 
   async play() {

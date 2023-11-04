@@ -5,9 +5,9 @@ const INPUT_MESSAGE = {
 };
 
 const OUTPUT_MESSAGE = {
-  purchaseResult: "개를 구매했습니다.\n",
-  prizeDistribution: "당첨 통계\n",
-  divide: "---\n",
+  purchaseResult: "개를 구매했습니다.",
+  prizeDistribution: "당첨 통계",
+  divide: "---",
   matchCount: "개 일치",
   matchBonus: ", 보너스 볼 일치",
   totalProfitPercentage: "총 수익률은 ",
