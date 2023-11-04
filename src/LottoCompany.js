@@ -30,6 +30,21 @@ class LottoCompany {
 		BonusNumberValidator.validate(bonusNumber, this.#winningNumberArray);
 		return bonusNumber;
 	}
+
+	async publishLottos() {
+		let isPublished = false;
+		do {
+			try {
+				this.#lottoBuyer = new LottoBuyer(await this.#getPurchaseAmountFromUser());
+				OutputView.printNewLine();
+				OutputView.printPurchaseHistory(this.#lottoBuyer.getAllLottoNumberArray());
+				OutputView.printNewLine();
+				isPublished = true;
+			} catch (error) {
+				Console.print(error.message);
+			}
+		} while (!isPublished);
+	}
 }
 
 export default LottoCompany;
