@@ -21,6 +21,16 @@ class RandomModel {
 
     return [...random];
   }
+
+  static getStringOfRandom(random) {
+    const stringOfRandom = [];
+
+    for (let i = 0; i < random.length; i += 1) {
+      stringOfRandom.push(`[${random[i].join(', ')}]\n`);
+    }
+
+    return stringOfRandom;
+  }
 }
 
 export default RandomModel;
