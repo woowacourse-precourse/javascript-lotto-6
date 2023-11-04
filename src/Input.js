@@ -6,7 +6,9 @@ import { LOTTO_ERROR_MSG } from "./constants/error.js";
 class Input {
   async getMoney() {
     let money = await Console.readLineAsync(INPUT_MSG.LOTTO_PRICE);
+
     this.#validateInput(money);
+
     return parseInt(money);
   }
 
@@ -27,7 +29,9 @@ class Input {
 
   async getBonusNumber() {
     const bonusNumber = await Console.readLineAsync(INPUT_MSG.BONUS_NUMBER);
+
     this.#validateInput(bonusNumber);
+
     return parseInt(bonusNumber);
   }
 
@@ -40,6 +44,3 @@ class Input {
 }
 
 export default Input;
-
-const input = new Input();
-input.getWinningNumber();
