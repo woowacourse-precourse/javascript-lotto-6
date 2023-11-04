@@ -1,7 +1,7 @@
 import { Random } from "@woowacourse/mission-utils";
-import Validate from "./Validate.js";
-import { LOTTO } from "./constants/rule.js";
-import Utils from "./Utils.js";
+import Validate from "./Validate";
+import { LOTTO } from "./constants/rule";
+import Utils from "./Utils";
 
 class Purchase {
   #amount;

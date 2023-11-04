@@ -1,5 +1,5 @@
-import { UNIT, SEPARATOR, LOTTO, RANK, PRIZE } from "./rule.js";
-import Utils from "../Utils.js";
+import { UNIT, SEPARATOR, LOTTO, RANK, PRIZE } from "./rule";
+import Utils from "../Utils";
 
 export const MESSAGE = {
   GET_PURCHASE_SUM: "구입금액을 입력해 주세요.\n",

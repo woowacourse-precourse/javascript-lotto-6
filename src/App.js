@@ -1,10 +1,10 @@
-import Print from "./Print.js";
-import Validate from "./Validate.js";
-import Utils from "./Utils.js";
-import Purchase from "./Purchase.js";
-import Lotto from "./Lotto.js";
-import Result from "./Result.js";
-import Bonus from "./Bonus.js";
+import Print from "./Print";
+import Validate from "./Validate";
+import Utils from "./Utils";
+import Purchase from "./Purchase";
+import Lotto from "./Lotto";
+import Result from "./Result";
+import Bonus from "./Bonus";
 
 class App {
   #sum;

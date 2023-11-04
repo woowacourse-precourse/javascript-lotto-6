@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE, STATISTICS } from "./constants/message.js";
+import { MESSAGE, STATISTICS } from "./constants/message";
 
 class Print {
   static async getPurchaseSum() {

@@ -1,4 +1,4 @@
-import { UNIT, SEPARATOR } from "./constants/rule.js";
+import { UNIT, SEPARATOR } from "./constants/rule";
 
 class Utils {
   static getLottoAmount(sum) {

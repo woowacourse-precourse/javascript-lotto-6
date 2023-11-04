@@ -1,4 +1,4 @@
-import { INDEX, PRIZE, RANK, UNIT } from "./constants/rule.js";
+import { INDEX, PRIZE, RANK, UNIT } from "./constants/rule";
 
 class Result {
   #result;

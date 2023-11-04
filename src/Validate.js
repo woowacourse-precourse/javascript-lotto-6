@@ -1,5 +1,5 @@
-import { LOTTO, REGEX, UNIT } from "./constants/rule.js";
-import { ERROR } from "./constants/message.js";
+import { LOTTO, REGEX, UNIT } from "./constants/rule";
+import { ERROR } from "./constants/message";
 
 class Validate {
   isValidPurchaseSum(num) {
