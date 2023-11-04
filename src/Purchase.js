@@ -7,7 +7,7 @@ class Purchase {
   constructor(sum) {
     this.checkValidPurchaseSum(sum);
     this.amount = Utils.getLottoAmount(sum);
-    this.lottos = [];
+    this.lottos = this.purchaseLottos();
   }
 
   checkValidPurchaseSum(sum) {
@@ -20,15 +20,21 @@ class Purchase {
   }
 
   getLottos() {
-    for (let i = 0; i < this.amount; i++) {
-      const lotto = this.getLotto();
-      this.lottos.push(lotto);
-    }
-
     return this.lottos;
   }
 
-  getLotto() {
+  purchaseLottos() {
+    let lottos = [];
+
+    for (let i = 0; i < this.amount; i++) {
+      const lotto = this.purhcaseLotto();
+      lottos.push(lotto);
+    }
+
+    return lottos;
+  }
+
+  purhcaseLotto() {
     const lotto = Random.pickUniqueNumbersInRange(
       LOTTO.MIN_RANGE,
       LOTTO.MAX_RANGE,
