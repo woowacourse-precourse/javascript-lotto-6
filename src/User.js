@@ -18,7 +18,7 @@ class User {
     const { lottos } = this.#lottos;
     const lottoResult = combinationMachine.compareLottoNumbers(lottos);
 
-    return [lottoResult, this.#calculateRateOfReturn(lottoResult)];
+    return [lottoResult, this.#calculateRateOfReturn(lottoResult).toFixed(1)];
   }
 
   #calculateRateOfReturn(lottoResult) {
@@ -29,7 +29,7 @@ class User {
       return (total += Number(prize) * matchedLength);
     }, 0);
 
-    return ((sum / this.#lottoPrice) * 100).toFixed(1);
+    return (sum / this.#lottoPrice) * 100;
   }
 }
 
