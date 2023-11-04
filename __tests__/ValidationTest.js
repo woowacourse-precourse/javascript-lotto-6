@@ -59,3 +59,31 @@ describe('로또 금액 테스트', () => {
     }).toThrow();
   });
 });
+
+describe('당첨 번호 테스트', () => {
+  describe('당첨 번호가 쉼표(,)를 기준으로 6개가 아닌경우 테스트', () => {
+    test('당첨 번호를 쉼표를 기준으로 6개인 경우 테스트', () => {
+      expect(() => {
+        Validation.inputWinningNumbers('1,2,3,4,5,6');
+      }).not.toThrow();
+    });
+
+    test('당첨 번호를 나누는 기준이 없는 경우 테스트', () => {
+      expect(() => {
+        Validation.inputWinningNumbers('123456');
+      }).toThrow();
+    });
+
+    test('당첨 번호를 나누는 기준이 공백(" ")인 경우 테스트', () => {
+      expect(() => {
+        Validation.inputWinningNumbers('1 2 3 4 5 6');
+      }).toThrow();
+    });
+
+    test('당첨 번호를 쉼표를 기준으로 다 나누지 않은 경우 테스트', () => {
+      expect(() => {
+        Validation.inputWinningNumbers('1,2,3,4,56');
+      }).toThrow();
+    });
+  });
+});
