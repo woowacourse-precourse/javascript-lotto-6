@@ -24,10 +24,13 @@ class LottoController {
 
   async playGame() {
     await this.setPurchaseQty();
+    OutputView.printBlankLine();
     this.showPurchaseQuantity();
     this.setLottoList();
     this.showLottoList();
+    OutputView.printBlankLine();
     await this.setWinningNums();
+    OutputView.printBlankLine();
     await this.setBonusNum();
     this.checkLottoList();
     this.showResult();
@@ -36,7 +39,6 @@ class LottoController {
 
   async setPurchaseQty() {
     this.#purchaseQty = await InputView.readPurchasePrice();
-    OutputView.printBlankLine();
   }
 
   showPurchaseQuantity() {
@@ -57,16 +59,19 @@ class LottoController {
   showLottoList() {
     this.#lottoList.map((lotto) => {
       Sort.sortNumArrASC(lotto);
-      OutputView.printLotto(lotto);
+      const lottoString = this.convertToString(lotto);
+      OutputView.printLotto(lottoString);
     });
-    OutputView.printBlankLine();
+  }
+
+  convertToString(Arr) {
+    return `[${Arr[0]}, ${Arr[1]}, ${Arr[2]}, ${Arr[3]}, ${Arr[4]}, ${Arr[5]}]`;
   }
 
   async setWinningNums() {
     const winningNumsString = await InputView.readWinningNums();
     const winningNumsArr = winningNumsString.split(SEPARATOR.lottoNum);
     this.#winningNums = winningNumsArr.map((winningNum) => Number(winningNum));
-    OutputView.printBlankLine();
   }
 
   async setBonusNum() {
@@ -77,15 +82,15 @@ class LottoController {
   checkLottoList() {
     this.#lottoList.map((lottoNums) => {
       const lotto = new Lotto(lottoNums);
-      const rank = lotto.checkResult(this.#winningNums, this.#bonusNum);
-      if (rank) {
-        this.setWinningStatistic(rank);
+      const winnerLank = lotto.checkResult(this.#winningNums, this.#bonusNum);
+      if (winnerLank) {
+        this.setWinningStatistic(winnerLank);
       }
     });
   }
 
-  setWinningStatistic(rank) {
-    this.#winningStatistic[rank] += 1;
+  setWinningStatistic(winnerLank) {
+    this.#winningStatistic[winnerLank] += 1;
   }
 
   showResult() {
