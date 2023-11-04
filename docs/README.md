@@ -349,9 +349,9 @@
   - [x] 인스턴스 생성 시 `prize`에 숫자가 아닌 값이 입력될 시 에러가 발생한다.
   - [x] `checkRequirement(requirement)` 호출 시 인자로 `RewardRequirement`가 아닌 값이 입력될 시 에러가 발생한다.
 
-- [ ] LottoRewards
+- [x] LottoRewards
 
-  - [ ] `getLottosResult(lottos)` 호출 시 입력받은 로또의 총 결과를 반환한다.
+  - [x] `getLottosResult(lottos)` 호출 시 입력받은 로또의 총 결과를 반환한다.
 
 - [ ] LottoRewards 예외 처리
 
