@@ -4,7 +4,10 @@ class Lotto {
   #numbers; // number[]
 
   constructor(numbers) {
-    this.#validateLottoNumbers(numbers);
+    this.#isNumberArray(numbers);
+    this.#validateNumbersLength(numbers);
+    this.#validateNumbersRange(numbers);
+    this.#hasNoRepeatNumber(numbers);
     this.#numbers = numbers.sort();
   }
   #isNumberArray(numbers) {
@@ -27,13 +30,6 @@ class Lotto {
   #hasNoRepeatNumber(numbers) {
     if (new Set(numbers).size !== numbers.length)
       throwError(ERROR_MESSAGE.duplicateNumber);
-  }
-
-  #validateLottoNumbers(numbers) {
-    this.#isNumberArray(numbers);
-    this.#validateNumbersLength(numbers);
-    this.#validateNumbersRange(numbers);
-    this.#hasNoRepeatNumber(numbers);
   }
 
   getLottoNumbers() {
