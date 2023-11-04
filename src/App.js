@@ -1,19 +1,31 @@
 import PurchaseLottos from "./PurchaseLottos.js";
-import { Console } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import { USER_PROMPT } from "./utils/constants.js";
 
 class App {
-  #lottoAmounts;
+  #lottoCount;
+  #winningNumberList = [];
 
   async play() {
-    await this.getLottoAmount();
+    await this.getLottoCount();
+    this.generateWinningNumbers();
   }
 
-  async getLottoAmount() {
+  async getLottoCount() {
     const purchaseLottos = new PurchaseLottos();
-    this.#lottoAmounts = await purchaseLottos.getLottoAmount();
+    this.#lottoCount = await purchaseLottos.getLottoAmount();
 
-    Console.print(USER_PROMPT.SHOW_LOTTO_AMOUNT(this.#lottoAmounts));
+    Console.print(USER_PROMPT.SHOW_LOTTO_COUNT(this.#lottoCount));
+  }
+
+  generateWinningNumbers() {
+    for (let index = 0; index < this.#lottoCount; index++) {
+      const winningNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+        (a, b) => a - b
+      );
+      this.#winningNumberList.push(winningNumbers);
+      Console.print(winningNumbers);
+    }
   }
 }
 
