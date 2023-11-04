@@ -41,6 +41,13 @@ class App {
     return numberString.split(",").map(Number);
   }
 
+  async getNumbers(){
+    const inputNumbers = await getInputMessage(PRINT_MESSAGE.NUMBERS, getValidatedNumbers);
+    return inputNumbers.split(",").map(Number);
+  }
+
+
+
   getPrizeCounts(numbers, bonusNumber){
     let prizeCounts = {
       1: 0,
@@ -125,11 +132,8 @@ class App {
     //로또 생성
     await this.setLottos(inputMoney);
 
-    //당첨 로또 번호 생성
-    const inputNumbers = await getInputMessage(PRINT_MESSAGE.NUMBERS, getValidatedNumbers);
-    const numbers = this.makeNumberArray(inputNumbers); 
+    const numbers = await this.getNumbers();
     
-    //보너스 번호 생성
     const bonusNumber = await this.getBonusNumber();
 
     const result = this.getResult(numbers, bonusNumber, inputMoney);
