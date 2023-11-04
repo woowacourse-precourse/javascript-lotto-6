@@ -1,5 +1,4 @@
 import ERROR_MESSAGE from "./Errors.js";
-import View from "./View.js";
 
 class Lotto {
   #numbers;

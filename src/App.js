@@ -25,7 +25,6 @@ class App {
       this.lottoTickets
     );
     const winResults = winCount.compareNumbers();
-    console.log(winResults);
   }
 }
 
