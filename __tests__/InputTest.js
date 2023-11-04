@@ -107,8 +107,8 @@ describe("입력 변환하기", () => {
   });
 });
 
-describe("예외 처리", () => {
-  test("금액 입력", () => {
+describe("입력 예외 처리", () => {
+  test("금액", () => {
     const inputs = ["100", "1001", "-1000", " 1000", ".1000"];
 
     const inputValidator = new InputValidator();
@@ -116,6 +116,30 @@ describe("예외 처리", () => {
     inputs.forEach((input) => {
       expect(() => {
         inputValidator.moneyValidator(input);
+      }).toThrow("[ERROR]");
+    });
+  });
+
+  test("당첨 번호", () => {
+    const inputs = [
+      "1,,2,3,4,5,6",
+      "123456",
+      "-1,2,3,4,5,6",
+      "1,2,3,4,5",
+      "0,1,2,3,4,5",
+      "47,23,22,12,24,18",
+      "1,1,2,3,4,5",
+      "1,7,2,3,4,5,9",
+      ".,1,3,4,5,6",
+      "s,1,2,3,4,5",
+    ];
+
+    const inputValidator = new InputValidator();
+
+    inputs.forEach((input) => {
+      console.log(input);
+      expect(() => {
+        inputValidator.winningNumbersValidator(input);
       }).toThrow("[ERROR]");
     });
   });
