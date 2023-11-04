@@ -6,7 +6,13 @@ import { LottoValidate } from "./validate.js";
 const readLineAsync = async (msg) => await MissionUtils.Console.readLineAsync(msg);
 
 const Read = Object.freeze({
-  purchaseAmount: async () => Number(await readLineAsync(ReadMessage.purchaseAmount())),
+  purchaseAmount: async () => {
+    const purchaseAmount = Number(await readLineAsync(ReadMessage.purchaseAmount()));
+
+    // 로또 구매 가격 유효성 체크
+    LottoValidate.checkAllPurchaseAmount(purchaseAmount);
+    return purchaseAmount;
+  },
 
   answerNumbers: async () => {
     const inputs = await readLineAsync(ReadMessage.answerNumbers()).split(",");
@@ -14,7 +20,6 @@ const Read = Object.freeze({
 
     // 로또 번호 유효성 체크
     LottoValidate.checkAllLottoNumbers(numbers);
-
     return numbers;
   },
 
@@ -24,7 +29,6 @@ const Read = Object.freeze({
 
     // 보너스 번호 유효성 체크
     LottoValidate.checkAllLottoNumbers(numbers, { count: LOTTO.BONUS_NUMBER_COUNT });
-
     return numbers;
   },
 });

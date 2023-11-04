@@ -74,7 +74,7 @@ const LottoValidate = Object.freeze({
     this.checkArrDuplicate(numbers);
   },
 
-  checkAllLottoAmount(purchaseAmount, price) {
+  checkAllPurchaseAmount(purchaseAmount, price) {
     this.checkMultiple(purchaseAmount, price);
   },
 });
