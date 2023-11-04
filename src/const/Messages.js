@@ -7,13 +7,17 @@ export const ASK = {
 export const PRINT = {
   HOW_MANY_BUY: "개를 구매했습니다.",
   WINNING_STATISTICS: "당첨 통계",
-  DASH: "-",
   DASH_LINE: "---",
-  WON: "(원)",
-  COUNT: "개",
-  RIGHT_COUNT: "개 일치",
-  RIGHT_BONUS: "보너스 볼 일치",
+  COUNT: "개\n",
   RETURN_RATE: "총 수익률은 %입니다.",
+};
+
+export const PRIZE = {
+  FIFTH: "3개 일치 (5,000원) -",
+  FOURTH: "4개 일치 (50,000원) -",
+  THIRD: "5개 일치 (1,500,000원) -",
+  SECOND: "5개 일치, 보너스 볼 일치 (30,000,000원) -",
+  FIRST: "6개 일치 (2,000,000,000원) -",
 };
 
 export const ERROR = {
