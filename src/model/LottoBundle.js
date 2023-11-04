@@ -31,7 +31,9 @@ class LottoBundle {
 
     this.#lottoList.forEach((lotto) => {
       const matchingCount = lotto.getMatchingCount(winningLotto, bonusNumber);
-      rank[this.getRankIndex(matchingCount)] += 1;
+      if (matchingCount >= RANK.fourth.match) {
+        rank[this.getRankIndex(matchingCount)] += 1;
+      }
     });
 
     return rank;
