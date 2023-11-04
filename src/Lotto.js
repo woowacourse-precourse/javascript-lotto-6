@@ -1,3 +1,5 @@
+import { ERROR, LOTTO, REGEX } from './constant.js';
+
 class Lotto {
   #numbers;
 
@@ -8,8 +10,22 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR.length);
     }
+
+    if (new Set([...numbers]).size !== numbers.length) {
+      throw new Error(ERROR.duplicated);
+    }
+
+    numbers.forEach((number) => {
+      if (number > LOTTO.maxRange || number < LOTTO.minRange) {
+        throw new Error(ERROR.range);
+      }
+
+      if (!REGEX.isNumber.test(number)) {
+        throw new Error(ERROR.numberOnly);
+      }
+    });
   }
 
   getLotto() {

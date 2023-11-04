@@ -14,8 +14,16 @@ export const ERROR_PREFIX = '[ERROR]';
 
 export const ERROR = Object.freeze({
   budget: `${ERROR_PREFIX} 구입 금액은 1000원 단위로 입력해주세요.`,
+  length: `${ERROR_PREFIX} 로또 번호는 6개여야 합니다.`,
+  range: `${ERROR_PREFIX} 로또 번호는 1부터 45까지만 입력가능합니다.`,
+  numberOnly: `${ERROR_PREFIX} 숫자만 입력하세요.`,
+  duplicated: `${ERROR_PREFIX} 중복을 허용하지 않습니다.`,
 });
 
 export const MESSAGE = Object.freeze({
   purchase: (count) => `${count}개를 구매했습니다.`,
+});
+
+export const REGEX = Object.freeze({
+  isNumber: /^\d+$/,
 });
