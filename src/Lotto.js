@@ -1,5 +1,4 @@
 import Validate from "./Validate.js";
-import Utils from "./Utils.js";
 
 class Lotto {
   #numbers;
