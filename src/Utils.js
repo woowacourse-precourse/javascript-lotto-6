@@ -13,6 +13,12 @@ class Utils {
 
     return numbersArray;
   }
+
+  static convertInputNumbers(userNumbers) {
+    const numbersArray = userNumbers.split(',').map(Number);
+    numbersArray.sort();
+    return numbersArray;
+  }
 }
 
 export default Utils;
