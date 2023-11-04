@@ -5,6 +5,9 @@ const OutputView = {
   printPurchaseQuantity(purchaseQuantity) {
     Console.print(`\n${purchaseQuantity}${PRINT_MESSAGE.quantity}`);
   },
+  printLotto(lotto) {
+    Console.print(lotto);
+  },
 };
 
 export default OutputView;

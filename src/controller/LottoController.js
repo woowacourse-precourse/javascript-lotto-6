@@ -2,6 +2,7 @@ import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 import Lotto from "../domain/Lotto.js";
 import RandomNumGenerator from "../utils/calc/RandomNumGenerator.js";
+import Sort from "../utils/calc/Sort.js";
 import { STATIC_NUMBER } from "../static/Static.js";
 class LottoController {
   #lottos = [];
@@ -11,6 +12,7 @@ class LottoController {
     await this.askPurchasePrice();
     this.showPurchaseQuantity();
     this.setLottos();
+    this.showLottos();
   }
 
   async askPurchasePrice() {
@@ -37,6 +39,13 @@ class LottoController {
       const candidateNumArr = this.makeRandomNumArr();
       this.#lottos.push(candidateNumArr);
     }
+  }
+
+  showLottos() {
+    this.#lottos.map((lotto) => {
+      Sort.sortNumArrASC(lotto);
+      OutputView.printLotto(lotto);
+    });
   }
 }
 
