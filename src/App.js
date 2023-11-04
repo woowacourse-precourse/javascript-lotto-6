@@ -1,11 +1,14 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import { InputValidator } from "./utils/InputValidator.js";
 
 class App {
   #money = 0;
   #trialNum = 0;
   #lotto = [];
   #totalLotto = [];
+  #winningLotto = [];
+  #bonus = 0;
 
   async play() {
     this.inputAmount();
@@ -18,14 +21,11 @@ class App {
   }
 
   calcTickets() {
-    this.#trialNum = Math.floor(this.#money / 1000);
-
-    const remainer = this.#money % 1000;
-    if (remainer == 0) {
-      Console.print("성공");
-      this.RandomNums();
+    if (!InputValidator.validMoney(this.#money)) {
+      throw new Error("금액 오류");
     } else {
-      Console.print("실패"); // 에러로 종료
+      this.#trialNum = Math.floor(this.#money / 1000);
+      this.RandomNums();
     }
   }
 
@@ -47,24 +47,26 @@ class App {
   async inputWinning() {
     Console.print("당첨 번호를 입력해 주세요.");
     const input = await Console.readLineAsync("");
-    let inputArr = [];
 
-    if (!input) {
-      Console.print("에러");
-    } else if (input.includes(",")) {
-      inputArr = input.split(",");
-
-      new Lotto(inputArr);
+    if (!InputValidator.validWinningNumber(input)) {
+      throw new Error("번호 오류");
+    } else {
+      this.#winningLotto = input.split(",");
+      new Lotto(this.#winningLotto);
     }
-    Console.print("보너스 번호를 입력해 주세요.");
-    const inputBonus = await Console.readLineAsync(""); // 한자리 제한, 1~45인지 확인해야함
 
-    this.compare(inputArr, inputBonus);
+    Console.print("보너스 번호를 입력해 주세요.");
+    this.#bonus = await Console.readLineAsync("");
+
+    if (!InputValidator.validBonusNumber(this.#bonus)) {
+      throw new Error("번호 오류");
+    }
+    this.compare();
   }
 
-  compare(inputArr, inputBonus, totalLotto) {
-    Console.print(inputArr);
-    Console.print(inputBonus);
+  compare() {
+    Console.print(this.#winningLotto);
+    Console.print(Number(this.#bonus));
     Console.print(this.#totalLotto);
   }
 }

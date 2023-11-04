@@ -3,7 +3,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    //this.#validate2(numbers);
+    this.#validate2(numbers);
     this.#numbers = numbers;
   }
 
@@ -15,12 +15,10 @@ class Lotto {
 
   // TODO: 추가 기능 구현
   #validate2(numbers) {
-    if (
-      numbers.map((num) => {
-        num < 1 || num > 45;
-      })
-    ) {
-      throw new Error("[ERROR] 범위 오류"); // 중복도 체크
+    for (let num of numbers) {
+      if (num < 1 || num > 45) {
+        throw new Error("[ERROR] 범위 오류"); // 숫자가 1보다 작거나 45보다 큰 경우 에러 발생
+      }
     }
   }
 }
