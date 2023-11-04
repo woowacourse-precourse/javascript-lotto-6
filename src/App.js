@@ -5,6 +5,7 @@ class App {
   async play() {
     const lottos = await LottoPurchase.buyWithUserInput();
     LottoPurchase.print(lottos);
+    await WinningNumberInput.collect();
   }
 }
 
