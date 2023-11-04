@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -12,7 +14,14 @@ class Lotto {
     }
   }
 
+  #compareNumber(a, b) {
+    return a - b;
+  }
+
   // TODO: 추가 기능 구현
+  printLotto() {
+    Console.print(this.#numbers.sort(this.#compareNumber));
+  }
 }
 
 export default Lotto;
