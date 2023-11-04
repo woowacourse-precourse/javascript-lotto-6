@@ -34,7 +34,7 @@ export const RESULT = [
     )}원) - ${count}개`;
   },
   function SECOND_RANK_RESULT(count) {
-    return `${RANK.SECOND}개 일치 (${Utils.convertKoreaWonUnit(
+    return `${RANK.SECOND}개 일치, 보너스 볼 일치 (${Utils.convertKoreaWonUnit(
       PRIZE.SECOND
     )}원) - ${count}개`;
   },
