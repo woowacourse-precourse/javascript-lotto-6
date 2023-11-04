@@ -25,6 +25,8 @@ class Lotto {
   }
 
   validateBonusNumber(bonusNumber) {
+    if (bonusNumber < 1 || bonusNumber > 45) throw new Error(ERROR.NUMBER_RANGE);
+
     if (this.#numbers.includes(bonusNumber)) {
       throw new Error(ERROR.BONUSNUMBER_DUPPLICATE);
     }

@@ -34,4 +34,20 @@ describe('로또 클래스 테스트', () => {
       lotto.validateBonusNumber(BONUS_NUMBER);
     }).toThrow('[ERROR]');
   });
+
+  test('보너스 번호가 1보다 작을 경우 예외가 발생한다.', () => {
+    const BONUS_NUMBER = 0;
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(() => {
+      lotto.validateBonusNumber(BONUS_NUMBER);
+    }).toThrow('[ERROR]');
+  });
+
+  test('보너스 번호가 45보다 큰 경우 예외가 발생한다.', () => {
+    const BONUS_NUMBER = 46;
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(() => {
+      lotto.validateBonusNumber(BONUS_NUMBER);
+    }).toThrow('[ERROR]');
+  });
 });
