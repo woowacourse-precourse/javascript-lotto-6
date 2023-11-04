@@ -15,4 +15,6 @@ export const ERROR_MESSAGE = Object.freeze({
   NEGATIVE_VALUE: `${ERROR_PREFIX} 미입력 및 0이하의 숫자는 입력할 수 없습니다.`,
   NOT_BEING_DIVIDED: `${ERROR_PREFIX} ${GAME_RULE.MIN_AMOUNT_UNIT}으로 나누어 떨어지지 않는 숫자는 입력할 수 없습니다.`,
   OVER_THE_LIMIT: `${ERROR_PREFIX} 한 회차에 ${GAME_RULE.MAX_AMOUNT_UNIT}만 원을 초과하여 구매할 수 없습니다.`,
+  INVALID_COUNT: `${ERROR_PREFIX} 로또 번호는 6개여야 합니다.`,
+  NOT_A_UNIQUE: `${ERROR_PREFIX} 로또 번호에 중복된 번호가 존재합니다.`,
 });
