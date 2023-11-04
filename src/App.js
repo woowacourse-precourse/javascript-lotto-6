@@ -1,11 +1,11 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import { InputValidator } from "./utils/InputValidator.js";
+import Output from "./Output.js";
 
 class App {
   #money = 0;
   #trialNum = 0;
-  #lotto = [];
   #totalLotto = [];
   #winningLotto = [];
   #bonus = 0;
@@ -31,13 +31,10 @@ class App {
 
   RandomNums() {
     for (let i = 0; i < this.#trialNum; i++) {
-      for (let r = 0; r < 6; r++) {
-        const random = Random.pickNumberInRange(1, 45);
-        this.#lotto.push(random);
-      }
-      Console.print(this.#lotto);
-      this.#totalLotto.push(this.#lotto);
-      this.#lotto = [];
+      let lotto = new Output();
+      const newLotto = lotto.createLotto();
+      Console.print(newLotto);
+      this.#totalLotto.push(newLotto);
     }
 
     Console.print(this.#totalLotto);
