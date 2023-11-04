@@ -1,11 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGES, OUTPUT_MESSAGES } from '../constants/messages.js';
+import { OUTPUT_MESSAGES } from '../constants/messages.js';
 
 const OutputView = {
   print: Console.print,
 
-  printError: errorMessage => {
-    Console.print(`${ERROR_MESSAGES.prefix} ${errorMessage}`);
+  printError: error => {
+    Console.print(error);
+    Console.print(`${error}`);
   },
 
   printLottosQuantity: quantity => {

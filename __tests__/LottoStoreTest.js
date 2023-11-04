@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGES } from '../../src/constants/messages.js';
-import LottoStore from '../../src/model/LottoStore.js';
+import { ERROR_MESSAGES } from '../src/constants/messages.js';
+import LottoStore from '../src/model/LottoStore.js';
 
 describe('LottoStore 모델 테스트', () => {
   test('인스턴스 테스트', () => {
@@ -16,13 +16,13 @@ describe('LottoStore 모델 테스트', () => {
     );
   });
 
-  test('getUserLottos() 메소드 테스트', () => {
+  test('getLottos() 메소드 테스트', () => {
     Random.pickUniqueNumbersInRange = jest.fn();
     Random.pickUniqueNumbersInRange.mockReturnValue([1, 2, 3, 4, 5, 6]);
 
     const purchaseAmount = '2000';
     const lottoStore = new LottoStore(purchaseAmount);
-    const lottos = lottoStore.getUserLottos();
+    const lottos = lottoStore.getLottos();
 
     expect(lottos).toHaveLength(2);
     lottos.forEach(lotto => expect(lotto).toEqual([1, 2, 3, 4, 5, 6]));

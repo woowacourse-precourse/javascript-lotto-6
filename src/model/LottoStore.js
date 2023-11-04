@@ -1,11 +1,14 @@
 import { Random } from '@woowacourse/mission-utils';
 import OPTIONS from '../constants/options.js';
 import Validator from '../validators/Validator.js';
+import Lotto from './Lotto.js';
 
 class LottoStore {
   #purchaseAmount;
 
-  #lottos = [];
+  #userLottos = [];
+
+  #quantity;
 
   constructor(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
@@ -16,7 +19,7 @@ class LottoStore {
     Validator.validatePurchaseAmount(this.#purchaseAmount);
   }
 
-  #lottoGenerator() {
+  #getUniqueNumbers() {
     return Random.pickUniqueNumbersInRange(
       OPTIONS.minLottoNumber,
       OPTIONS.maxLottoNumber,
@@ -24,15 +27,16 @@ class LottoStore {
     ).sort((currentEl, nextEl) => currentEl - nextEl);
   }
 
-  getLottos() {
-    let quantity = this.#purchaseAmount / OPTIONS.baseAmount;
+  getUserLottos() {
+    this.#quantity = this.#purchaseAmount / OPTIONS.baseAmount;
 
-    while (quantity) {
-      this.#lottos.push(this.#lottoGenerator());
-      quantity -= 1;
+    while (this.#quantity) {
+      const lottoInstance = new Lotto(this.#getUniqueNumbers());
+      this.#userLottos.push(lottoInstance.getUserLotto());
+      this.#quantity -= 1;
     }
 
-    return this.#lottos;
+    return this.#userLottos;
   }
 }
 
