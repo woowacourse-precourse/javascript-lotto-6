@@ -3,8 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-
-  extends: 'airbnb-base',
+  extends: ['airbnb-base', 'plugin:jest/recommended', 'prettier'],
   overrides: [
     {
       env: {
@@ -20,5 +19,5 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  rules: { 'class-methods-use-this': 0 },
+  rules: { 'class-methods-use-this': 0, 'no-new': 0 },
 };
