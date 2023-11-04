@@ -49,14 +49,13 @@ class LottoMachine {
         await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.");
       winningNumbers = this.#parseAndSortWinningNumbers(USER_INPUT);
 
-      if (this.#isValideNumberArray(winningNumbers)) {
-        return winningNumbers;
+      if (this.#isValideNumbersArray(winningNumbers)) {
+        break;
       }
 
-      MissionUtils.Console.print(
-        "[ERROR] 당첨 번호는 중복 없는 6개의 숫자여야 하며, 모든 숫자는 1~45 사이여야 합니다."
-      );
+      throw new Error("[ERROR] 보너스 번호는 1~45사이의 숫자여야 합니다.");
     }
+    return winningNumbers;
   }
 
   #parseAndSortWinningNumbers(input) {
@@ -67,7 +66,7 @@ class LottoMachine {
   }
 
   // 숫자들 배열의 유효성 검사
-  #isValideNumberArray(numbers) {
+  #isValideNumbersArray(numbers) {
     const areAllnumbersValid = numbers.every((number) =>
       this.#isValidNumber(number)
     );
@@ -79,6 +78,22 @@ class LottoMachine {
   // 단일 숫자의 유효성 검사
   #isValidNumber(number) {
     return !isNaN(number) && number >= 1 && number <= 45;
+  }
+
+  async #askBonusNumber() {
+    let bonusNumber;
+    while (true) {
+      bonusNumber = parseInt(
+        await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.")
+      );
+
+      if (this.#isValidNumber(bonusNumber)) {
+        break;
+      }
+
+      throw new Error("[ERROR] 보너스 번호는 1~45사이의 숫자여야 합니다.");
+    }
+    return bonusNumber;
   }
 }
 
