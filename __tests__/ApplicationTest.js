@@ -91,7 +91,39 @@ describe('로또 테스트', () => {
     });
   });
 
+  test('기능 테스트2', async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    mockRandoms([[1, 2, 3, 4, 5, 6]]);
+    mockQuestions(['1000', '1,2,3,4,5,6', '7']);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    const logs = [
+      '1개를 구매했습니다.',
+      '[1, 2, 3, 4, 5, 6]',
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 1개',
+      '총 수익률은 200,000,000.0%입니다.',
+    ];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
   test('예외 테스트', async () => {
     await runException('1000j');
+  });
+
+  test('예외 테스트2', async () => {
+    await runException('10ㅇ0');
   });
 });
