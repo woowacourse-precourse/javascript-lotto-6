@@ -26,4 +26,19 @@ describe("입력 가져오기", () => {
       expect(result).toBe(output);
     });
   });
+
+  test("당첨 번호", async () => {
+    const inputs = ["1,2,3,4,6,5", "1,4,22,34,45,44", "4,7,9,23,41,42"];
+    const outputs = ["1,2,3,4,6,5", "1,4,22,34,45,44", "4,7,9,23,41,42"];
+
+    mockQuestions(inputs);
+
+    const inputGetter = new InputGetter();
+
+    outputs.forEach(async (output) => {
+      const result = await inputGetter.inputWinningNumbers();
+
+      expect(result).toBe(output);
+    });
+  });
 });
