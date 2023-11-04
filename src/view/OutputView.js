@@ -7,6 +7,8 @@ class OutputView {
   }
 
   #printPurchaceTitle(quantity) {
+    if (Number.isNaN(quantity)) return;
+
     this.#print(`\n${quantity}개를 구매했습니다.`);
   }
 

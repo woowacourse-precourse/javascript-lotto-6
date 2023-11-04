@@ -3,6 +3,7 @@ import OutputView from './view/OutputView.js';
 
 import Validation from './util/Validation.js';
 import LottoGame from './LottoGame.js';
+import errorHandler from './util/errorHandler.js';
 
 class App {
   #inputView;
@@ -21,16 +22,20 @@ class App {
 
     const winnigNumbers = await this.#inputView.getWinnigNumbers();
     const bonusNumber = await this.#inputView.getBonusNumber();
+
     const result = this.#lottoGame.resultOfWinningDetails(winnigNumbers, bonusNumber);
     this.#outputView.printResult(result);
   }
 
   async #getLottoTickets() {
-    const lottoPrice = await this.#inputView.getLottoPrice();
-    Validation.inputLottoPrice(lottoPrice);
+    while (true) {
+      const lottoPrice = await this.#inputView.getLottoPrice();
+      const isValid = await errorHandler(lottoPrice, Validation.inputLottoPrice);
 
-    const lottos = this.#lottoGame.purchace(lottoPrice);
-    this.#outputView.printTotalLottos(lottos);
+      const lottos = this.#lottoGame.purchace(lottoPrice);
+      this.#outputView.printTotalLottos(lottos);
+      if (isValid) break;
+    }
   }
 }
 
