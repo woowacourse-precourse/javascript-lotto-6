@@ -57,6 +57,19 @@ class Lotto {
     numbers.sort((a, b) => a - b);
   }
 
+  toString() {
+    let lottoString = "[";
+
+    lottoString = this.#numbers.reduce(
+      (acc, number) => acc + `${number}, `,
+      lottoString
+    );
+    lottoString = lottoString.slice(0, lottoString.length - 2);
+    lottoString += "]";
+
+    return lottoString;
+  }
+
   get lottoNumbers() {
     return this.#numbers;
   }

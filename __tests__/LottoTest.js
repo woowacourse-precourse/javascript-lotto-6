@@ -31,4 +31,9 @@ describe("로또 클래스 테스트", () => {
     const lotto = new Lotto([5, 4, 3, 2, 1, 45]);
     expect(lotto.lottoNumbers).toEqual([1, 2, 3, 4, 5, 45]);
   });
+
+  test(`로또 클래스는 "[숫자1, 숫자2, ..., 숫자6]" 형식의 문자열로 반환`, () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(lotto.toString()).toEqual("[1, 2, 3, 4, 5, 6]");
+  });
 });
