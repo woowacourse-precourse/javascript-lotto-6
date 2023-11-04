@@ -3,6 +3,7 @@ export const MESSAGE = Object.freeze({
   lottoAmount: amount => `\n${amount}개를 구매했습니다.`,
   lottoList: lotto => `[${lotto.join(', ')}]`,
   lottoNumberInput: `당첨 번호를 입력해 주세요.\n`,
+  bonusNumberInput: `보너스 번호를 입력해 주세요.\n`,
 });
 
 export const ERROR = Object.freeze({

@@ -11,6 +11,7 @@ export default class LottoController {
   #lottoList;
   #correctNumbers;
   #lotto;
+  #bonus;
 
   constructor() {
     this.generate = new LottoGenerator();
@@ -52,6 +53,22 @@ export default class LottoController {
     try {
       this.#correctNumbers = inputValue.split(',');
       this.#lotto = new Lotto(this.#correctNumbers);
+      this.inputBonusNumber();
+    } catch (error) {
+      OutputView.printError(error);
+      this.inputUserLottoNumber();
+    }
+  }
+
+  async inputBonusNumber() {
+    const bonusNumber = await InputView.bonusNumberInput();
+    Console.print(bonusNumber);
+    // this.#bonusNumberValidate(bonusNumber);
+  }
+
+  #bonusNumberValidate(bonusNumber) {
+    try {
+      this.#bonus = new Lotto(this.#correctNumbers);
     } catch (error) {
       OutputView.printError(error);
       this.inputUserLottoNumber();

@@ -17,6 +17,14 @@ const InputView = {
       throw new Error(error);
     }
   },
+
+  async bonusNumberInput() {
+    try {
+      return await Console.readLineAsync(MESSAGE.bonusNumberInput);
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
 };
 
 export default InputView;
