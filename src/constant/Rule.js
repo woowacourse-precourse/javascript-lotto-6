@@ -13,4 +13,11 @@ const BONUS_BALL_FORM = Object.freeze({
   length: 1,
 });
 
-export { NUMBER_RANGE, LOTTO_FORM, BONUS_BALL_FORM };
+const WINNING_AMOUNT = Object.freeze({
+  three: '5,000',
+  four: '50,000',
+  fiveNoBonus: '1,500,000',
+  fiveAndBonus: '30,000,000',
+  six: '2,000,000,000',
+});
+export { NUMBER_RANGE, LOTTO_FORM, BONUS_BALL_FORM, WINNING_AMOUNT };
