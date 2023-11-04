@@ -19,10 +19,11 @@ class LottoGame {
 
     const winningLotto = await this.#getWinningLotto();
     const bonusNumber = await this.#getBonusNumber();
-    const totalRank = this.#lottoBundle.getTotalRank(winningLotto, bonusNumber);
+    const totalRanks = this.#lottoBundle.getTotalRank(winningLotto, bonusNumber);
 
-    const reward = this.#getReward(totalRank);
+    const reward = this.#getReward(totalRanks);
     const profitRate = this.#getProfitRate(reward, lottoCount);
+    OutputView.printGameResult(totalRanks, profitRate);
   }
 
   async #getLottoCount() {
