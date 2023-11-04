@@ -12,6 +12,14 @@ class MoneyValidator {
       throw new Error('[ERROR] 구입금액은 1000원 이상만 가능합니다.');
     }
   }
+
+  static validateLottoAmountExactness(money) {
+    if (money % LOTTO_PRICE !== 0) {
+      throw new Error(
+        `[ERROR] 구입금액은 ${LOTTO_PRICE}원 단위로만 가능합니다.`,
+      );
+    }
+  }
 }
 
 export default MoneyValidator;
