@@ -13,6 +13,10 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error(ErrorMessage.INVALID_NUM_COUNT);
     }
+    const set = new Set(numbers);
+    if (numbers.length !== set.size) {
+      throw new Error(ErrorMessage.DUPLICATE_NUMBER);
+    }
   }
 
   getNumbers() {
