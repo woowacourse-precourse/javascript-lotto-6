@@ -6,8 +6,10 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.duplCheckOfWinngNum(numbers);
-    this.validateNumRange(numbers);
+    this.#stringToNum(numbers);
+    this.#validateWinningNumLength(numbers);
+    this.#duplCheckOfWinngNum(numbers);
+    this.#validateNumRange(numbers);
     this.#numbers = numbers;
   }
 
@@ -19,13 +21,43 @@ class Lotto {
 
   // TODO: 추가 기능 구현
 
-  async playy() {
-    this.duplCheckOfWinngNum();
-    this.#validate(this.#numbers);
+  async run() {
+    let winningNum = await this.#getWinningNum();
+    winningNum = this.#stringToNum(winningNum);
+    this.#validateWinningNumLength(winningNum);
+    this.#duplCheckOfWinngNum(winningNum);
+    this.#validateNumRange(winningNum);
+
+    return winningNum;
   }
 
-  // 정답 숫자 입력 범위 확인
-  validateNumRange(inputNum) {
+  async #getWinningNum() {
+    const getNum = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    const winningNum = String(getNum).split(','); // 문자열 형태
+
+    return winningNum; // 문자열 상태
+  }
+
+  // 입력 값이 숫자인지 유효성도 같이 확인하면서 문자열을 숫자로 변환.
+  #stringToNum(winningNum) {
+    const numTypeOfWin = winningNum.map(Number);
+    if (numTypeOfWin.includes(NaN)) {
+      throw new Error(`[ERROR] 입력 값은 숫자여야 합니다.`);
+    }
+    // Console.print(numTypeOfWin); // 지워야 함
+    return numTypeOfWin;
+  }
+
+  // 정답 숫자 길이 유효성 확인
+  #validateWinningNumLength(winningNum) {
+    const WINNINGNUM_LENGTH = 6;
+    if (winningNum.length !== WINNINGNUM_LENGTH) {
+      throw new Error(`[ERROR] 숫자 6개를 입력해야 합니다.`);
+    }
+  }
+
+  // 정답 숫자 입력 범위 확인, 정답, 보너스 둘 다 사용 가능
+  #validateNumRange(inputNum) {
     const MIN_NUM = 1;
     const MAX_NUM = 45;
     inputNum.forEach((number) => {
@@ -36,10 +68,9 @@ class Lotto {
   }
 
   // 정답 숫자 중복 확인.
-  duplCheckOfWinngNum(numbers) {
-    Console.print(numbers);
-    const setWinningNum = new Set(numbers);
-    if (numbers.length !== setWinningNum.size) {
+  #duplCheckOfWinngNum(winningNum) {
+    const setWinningNum = new Set(winningNum);
+    if (winningNum.length !== setWinningNum.size) {
       throw new Error(`[ERROR] 당첨 번호는 중복될 수 없습니다.`);
     }
   }
@@ -47,16 +78,5 @@ class Lotto {
 
 export default Lotto;
 
-// 모듈 받는 곳에서 구현해야 하나?
-// const lottoNum = async function getWinningNum() {
-//  const getNum =
-//    await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-//  const winningNum = String(getNum).split(','); // 문자열 형태
-
-//  return winningNum; // 문자열 상태
-// };
-
-// const lottoNum = [1, 2, 3, 4, 5, 5];
-
-// const lotto = new Lotto(lottoNum);
-// lotto.playy();
+// const run = new Lotto();
+// run.run();

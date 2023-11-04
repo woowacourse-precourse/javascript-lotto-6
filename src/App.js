@@ -6,13 +6,16 @@ import MakeLottoNum from './makelottonum.js';
 class App {
   #numOfBuy;
 
+  #arrayOfLotto;
+
   constructor() {
     this.#numOfBuy = new NumOfBuy();
+    this.#arrayOfLotto = new MakeLottoNum();
   }
 
   async play() {
-    const numOfBuy = this.#numOfBuy.run();
-    const arrayofLotto = this.#makeArrayOfLottoNum(numOfBuy);
+    const numOfBuy = await this.#numOfBuy.run();
+    const arrayofLotto = await this.#arrayOfLotto.makeArrayOfLottoNum();
     const numbers = await this.#allOfInputfunc();
     this.#allofPrizeMoneyCalculfunc(numOfBuy, arrayofLotto, numbers);
   }
@@ -71,8 +74,8 @@ class App {
 
   // -------------------------------랜덤 로또생성함수-----
 
-  //// 랜덤 로또 번호 생성 함수 (반복되어야 함)
-  //#makeLottoNum() {
+  /// / 랜덤 로또 번호 생성 함수 (반복되어야 함)
+  // #makeLottoNum() {
   //  const NEED_NUM = 6;
   //  const myLottoNum = [];
   //  while (myLottoNum.length < NEED_NUM) {
@@ -86,16 +89,16 @@ class App {
   //  Console.print(sortLottoNum);
 
   //  return sortLottoNum;
-  //}
+  // }
 
-  //#makeArrayOfLottoNum(numOfBuy) {
+  // #makeArrayOfLottoNum(numOfBuy) {
   //  const arrayofLotto = [];
   //  while (arrayofLotto.length < numOfBuy) {
   //    arrayofLotto.push(this.#makeLottoNum());
   //  }
 
   //  return arrayofLotto;
-  //}
+  // }
 
   // ------------------당첨번호 & 보너스번호 입력 함수 총집합--------------------
   async #allOfInputfunc() {
