@@ -23,11 +23,22 @@ const Validation = {
     }
   },
 
+  lottoNumberLength(splitedWinnigNumbers) {
+    if (splitedWinnigNumbers.length !== 6) {
+      throw new Error('당첨 번호는 쉼표(,)를 기준으로 6자리를 입력해주세요');
+    }
+  },
+
   inputLottoPrice(price) {
     Validation.currencyAmount(price);
     Validation.numberType(price);
     Validation.limitPrice(price);
     Validation.minimumPrice(price);
+  },
+
+  inputWinningNumbers(winnigNumbers) {
+    const splitedWinnigNumbers = winnigNumbers.split(',');
+    Validation.lottoNumberLength(splitedWinnigNumbers);
   },
 };
 
