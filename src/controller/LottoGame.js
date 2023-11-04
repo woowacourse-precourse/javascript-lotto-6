@@ -14,16 +14,19 @@ class LottoGame {
     this.#lottoBundle.buyLottos(lottoCount);
     OutputView.printLottoNumbers(lottoCount, this.#lottoBundle.getTotalLottoNumberString());
 
-    await this.#getWinningNumbersInput();
+    const winningNumbers = await this.#getWinningNumbersInput();
+    const bonusNumber = await this.#getBonusNumberInput();
   }
 
   async #getAmountInput() {
     try {
       const amount = await InputView.readAmount();
       Validator.validateAmount(amount);
+
       return this.#getLottoCount(amount);
     } catch (error) {
       OutputView.printMessage(error.message);
+
       return this.#getAmountInput();
     }
   }
@@ -47,6 +50,10 @@ class LottoGame {
 
   #getSplitWinningNumbers(winningNumbers) {
     return winningNumbers.split(SYMBOL.comma).map((number) => number.trim());
+  }
+
+  async #getBonusNumberInput() {
+    const bonusNumber = await InputView.readBonusNumber();
   }
 }
 
