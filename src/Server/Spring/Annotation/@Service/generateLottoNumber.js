@@ -1,7 +1,13 @@
+/* eslint-disable import/extensions */
 import { Random } from '@woowacourse/mission-utils';
+import CONSTANTS from '../../../../Util/Constants.js';
 
 const generateLottoNumber = () => {
-  return Random.pickUniqueNumbersInRange(1, 45, 6).sort(function (lottoNumberA, lottoNumberB) {
+  return Random.pickUniqueNumbersInRange(
+    CONSTANTS.lottoMin,
+    CONSTANTS.lottoMax,
+    CONSTANTS.lottoCount,
+  ).sort(function (lottoNumberA, lottoNumberB) {
     return lottoNumberA - lottoNumberB;
   });
 };

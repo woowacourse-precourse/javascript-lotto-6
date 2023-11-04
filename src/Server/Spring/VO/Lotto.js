@@ -1,4 +1,8 @@
+/* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
+import CONSTANTS from '../../../Util/Constants.js';
+import { ERROR_MESSAGE } from '../../../Util/Message.js';
+
 class Lotto {
   #numbers;
 
@@ -11,6 +15,14 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    this.#validateNumberRange(numbers);
+  }
+
+  #validateNumberRange(numbers) {
+    const filterNumbers = numbers.filter(
+      (lottoNumber) => CONSTANTS.lottoMin <= lottoNumber && lottoNumber <= CONSTANTS.lottoMax,
+    );
+    if (filterNumbers.length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.isNotInRange);
   }
 
   get numbers() {
