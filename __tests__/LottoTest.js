@@ -17,7 +17,7 @@ describe("로또 클래스 테스트", () => {
   // 아래에 추가 테스트 작성 가능
   test("로또 번호를 정확한 포맷으로 출력해야한다.", () => {
     //given
-    logSpy = jest.spyOn(Console, "print");
+    logSpy = jest.spyOn(Console, "print").mockImplementation(() => {});
     const lotto = new Lotto([1, 44, 3, 5, 6, 7]);
 
     //when
