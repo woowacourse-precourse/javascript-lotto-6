@@ -1,4 +1,4 @@
-import { ascendingNumbers } from '../../src/utils/array';
+import { ascendingNumbers, countBy, intersection } from '../../src/utils/array.js';
 
 /* eslint-disable max-lines-per-function */
 describe('Array 함수형 모듈 테스트', () => {
@@ -28,5 +28,60 @@ describe('Array 함수형 모듈 테스트', () => {
       // when - then
       expect(ascendingNumbers(input)).toStrictEqual(output);
     });
+  });
+
+  describe('countBy 테스트', () => {
+    test.each([
+      {
+        input: [1, 2, 3, 4, 5, 2, 3, 4],
+        calculateFunction: (n) => n,
+        output: { 1: 1, 2: 2, 3: 2, 4: 2, 5: 1 },
+      },
+      {
+        input: ['apple', 'banana', 'cherry', 'apple', 'cherry'],
+        output: { apple: 2, banana: 1, cherry: 2 },
+      },
+    ])('입력 값이 $input 일 때, 결과는 $output 이다.', ({ input, calculateFunction, output }) => {
+      // given - when
+      const result = countBy(input, calculateFunction ?? null);
+      // then
+      expect(result).toStrictEqual(output);
+    });
+  });
+
+  describe('intersection 테스트', () => {
+    test.each([
+      {
+        input: {
+          firstArray: [1, 2, 3, 4],
+          secondArray: [3, 4, 5, 6],
+        },
+        output: [3, 4],
+      },
+      {
+        input: {
+          firstArray: ['apple', 'banana', 'cherry'],
+          secondArray: ['cherry', 'apple', 'grape'],
+        },
+        output: ['apple', 'cherry'],
+      },
+      {
+        input: {
+          firstArray: [1, 2, 3],
+          secondArray: [4, 5, 6],
+        },
+        output: [],
+      },
+    ])(
+      '첫 번째 배열이 $input.firstArray 이고, 두 번째 배열이 $input.firstArray 일 때, 교집합 결과는 $output 이다.',
+      ({ input, output }) => {
+        // given
+        const { firstArray, secondArray } = input;
+        // when
+        const result = intersection(firstArray, secondArray);
+        // then
+        expect(result).toStrictEqual(output);
+      },
+    );
   });
 });
