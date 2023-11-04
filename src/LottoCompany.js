@@ -77,6 +77,13 @@ class LottoCompany {
 		const lottoResult = this.#lottoBuyer.checkResult(this.#winningNumberArray, this.#bonusNumber);
 		OutputView.printWinningResult(lottoResult, Formatting.insertCommasByThousandUnits(CheckLotto.calculateRateOfReturn(purchaseAmount, lottoResult)));
 	}
+
+	async operate() {
+		await this.publishLottos();
+		await this.drawWinningNumberArray();
+		await this.drawBonusNumber();
+		await this.announceResult();
+	}
 }
 
 export default LottoCompany;
