@@ -1,8 +1,16 @@
-import ERROR_CODE from '../error/errorCode.js';
+import { LOTTO_ERROR_CODE, PURCHASE_ERROR_CODE } from '../error/errorCode.js';
 
-export default function checkIsEmpty(verifyValue) {
+export function checkIsEmpty(verifyValue) {
   const isNotValid = verifyValue === '';
   if (isNotValid) {
-    throw new Error(`${ERROR_CODE.valueIsEmpty}`);
+    throw new Error(`${PURCHASE_ERROR_CODE.valueIsEmpty}`);
   }
+}
+
+export function checkLottoIsEmpty(verifyValue) {
+  verifyValue.forEach((element) => {
+    if (element === '') {
+      throw new Error(`${LOTTO_ERROR_CODE}`);
+    }
+  });
 }
