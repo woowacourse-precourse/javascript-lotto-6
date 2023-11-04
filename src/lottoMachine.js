@@ -30,7 +30,7 @@ class lottoMachine {
   }
 
   static read(resultArray, bonusNumber) {
-    const prize = {
+    const prizeRank = {
       first: 0,
       second: 0,
       third: 0,
@@ -38,12 +38,13 @@ class lottoMachine {
       fifth: 0,
     };
     resultArray.forEach((result) => {
-      if (result.matchCount === 6) prize.first += 1;
-      if (result.matchCount === 5 && result.notMatchNumber === bonusNumber) prize.second += 1;
-      if (result.matchCount === 5 && result.notMatchNumber !== bonusNumber) prize.third += 1;
-      if (result.matchCount === 4) prize.fourth += 1;
-      if (result.matchCount === 3) prize.fifth += 1;
+      if (result.matchCount === 6) prizeRank.first += 1;
+      if (result.matchCount === 5 && result.notMatchNumber === bonusNumber) prizeRank.second += 1;
+      if (result.matchCount === 5 && result.notMatchNumber !== bonusNumber) prizeRank.third += 1;
+      if (result.matchCount === 4) prizeRank.fourth += 1;
+      if (result.matchCount === 3) prizeRank.fifth += 1;
     });
+    return prizeRank;
   }
 }
 

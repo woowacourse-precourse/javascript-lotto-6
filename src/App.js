@@ -14,12 +14,15 @@ class App {
 
   #bonusNumber;
 
+  #prizeResult;
+
   constructor() {
     this.#money = 0;
     this.#lottoQuantity = 0;
     this.#lottos = [];
     this.#winningNumbers = 0;
     this.#bonusNumber = 0;
+    this.#prizeResult = {};
   }
 
   async play() {
@@ -30,7 +33,10 @@ class App {
     this.#winningNumbers = await Request.winningNumbers();
     this.#bonusNumber = await Request.bonusNumber();
     const result = App.getResult(this.#lottos, this.#winningNumbers);
-    lottoMachine.read(result, this.#bonusNumber);
+    this.#prizeResult = lottoMachine.read(result, this.#bonusNumber);
+    console.log(this.#money);
+    console.log(this.#prizeResult);
+    console.log(calculate.profitFrom(this.#prizeResult, this.#money));
   }
 
   static getResult(lottos, winningNumbers) {
