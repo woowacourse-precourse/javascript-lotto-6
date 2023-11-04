@@ -25,16 +25,16 @@ const notNumber = (inputValue) => {
   }
 };
 
+const moneyRangeOver = (inputValue) => {
+  if (Number(inputValue) < 1000) {
+    throw ERROR.underThousandMoney;
+  }
+};
+
 // 1000단위인지 검사 -> 이거하면 문자있는지, 정수형인지 같이 되는 것 같은데..
 const notDivisibleByThousand = (inputValue) => {
   if (Number(inputValue) % 1000 !== 0) {
     throw ERROR.notDivisibleMoney;
-  }
-};
-
-const moneyRangeOver = (inputValue) => {
-  if (Number(inputValue) < 1000) {
-    throw ERROR.underThousandMoney;
   }
 };
 
