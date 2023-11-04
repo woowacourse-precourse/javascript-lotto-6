@@ -13,7 +13,7 @@ class Validator {
       throw new Error(ERROR_MESSAGE.moneyValue);
     }
 
-    if (/[^0-9]$/.test(inputMoney)) {
+    if (/\D/.test(inputMoney)) {
       throw new Error(ERROR_MESSAGE.moneyValue);
     }
   }
