@@ -6,10 +6,12 @@ import LottoMaker from './LottoMaker.js';
 class Game {
   #quantity;
   #lottos;
+  #winningNumbers;
 
   constructor() {
     this.#quantity;
     this.#lottos;
+    this.#winningNumbers;
   }
 
   purchase() {
@@ -21,6 +23,18 @@ class Game {
     OutputView.printQuantity(this.#quantity);
     this.#lottos = LottoMaker.generate(this.#quantity);
     OutputView.printLottos(this.#lottos);
+    this.askWinningNumbers();
+  };
+
+  askWinningNumbers() {
+    InputView.getWinningNumbers(this.handleWinningNumbers);
+  }
+
+  handleWinningNumbers = (numbers) => {
+    const WINNING_LIST = numbers.split(',').map((number) => {
+      return (number = parseInt(number, 10));
+    });
+    console.log(WINNING_LIST);
   };
 }
 
