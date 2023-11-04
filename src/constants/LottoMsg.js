@@ -10,8 +10,9 @@ export const OUTPUT_MSG = {
 };
 
 export const ERROR_MSG = {
-  MONEY_SHOULD_NUMBER: '올바른 숫자를 입력해주세요.',
-  MONEY_IS_THOUSAND: '구입 금액은 1,000원 단위로 입력해주세요.',
-  LOTTO_SHOULD_SIX: '로또 번호는 6자리를 입력해주세요.',
-  BONUS_NUMBER_NOT_NUMBER: '보너스 번호는 숫자로 입력해주세요.',
+  MONEY_SHOULD_NUMBER: '[ERROR] 올바른 숫자를 입력해주세요.',
+  MONEY_IS_THOUSAND: '[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.',
+  LOTTO_SHOULD_SIX: '[ERROR] 로또 번호는 6자리를 입력해주세요.',
+  LOTTO_DUPLICATE_ERROR: '[ERROR] 로또 번호가 중복되었습니다.',
+  BONUS_NUMBER_NOT_NUMBER: '[ERROR] 보너스 번호는 숫자로 입력해주세요.',
 };

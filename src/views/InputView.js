@@ -13,7 +13,7 @@ class InputView {
       await this.INPUT_VAL.inputMoney(inputMoney);
       return Number(inputMoney);
     } catch (error) {
-      Console.print(error.name + error.message);
+      Console.print(error.message);
       return error.name;
     }
   }
@@ -29,7 +29,7 @@ class InputView {
       await this.INPUT_VAL.bonusNumber(bonusNumber);
       return Number(bonusNumber);
     } catch (error) {
-      Console.print(error.name + error.message);
+      Console.print(error.message);
       return error.name;
     }
   }

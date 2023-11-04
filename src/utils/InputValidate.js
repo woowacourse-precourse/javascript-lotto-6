@@ -17,6 +17,10 @@ class InputValidate {
     if (numbers.length !== 6) {
       throw new InputError(ERROR_MSG.LOTTO_SHOULD_SIX);
     }
+
+    if (new Set(numbers).size !== 6) {
+      throw new InputError(ERROR_MSG.LOTTO_DUPLICATE_ERROR);
+    }
   }
 
   async bonusNumber(bonus) {

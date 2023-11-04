@@ -52,7 +52,7 @@ class LottoController {
       this.#WIN_NUMBER = winNumber.getWinNumber();
       return this.inputBonusNumber();
     } catch (error) {
-      Console.print(error.name + error.message);
+      Console.print(error.message);
       return this.inputWinNumber();
     }
   }
