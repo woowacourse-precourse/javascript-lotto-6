@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -17,6 +19,16 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+
+  checkLotteryResult(lottoNum, BounsNum) {
+    const sortedUserNumbers = this.#numbers.sort((a, b) => a - b);
+    const result = sortedUserNumbers.filter((num) => lottoNum.includes(num));
+
+    if (result.length === 5 && sortedUserNumbers.includes(BounsNum)) {
+      return '2nd';
+    }
+    return result.length;
+  }
 }
 
 export default Lotto;
