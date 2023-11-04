@@ -4,12 +4,15 @@ import Utils from "./Utils.js";
 import Purchase from "./Purchase.js";
 import Lotto from "./Lotto.js";
 import Result from "./Result.js";
+import Bonus from "./Bonus.js";
 
 class App {
   #sum;
   #lottos;
   #userLotto;
   #bonus;
+  #statistics;
+  #earningRate;
 
   async play() {
     try {
@@ -47,49 +50,39 @@ class App {
 
   createUserLotto(input) {
     const numbersArray = Utils.convertStringIntoNumberArray(input);
-    const validUserLotto = new Lotto(numbersArray);
-    this.#userLotto = validUserLotto.getUserLotto();
+    const lotto = new Lotto(numbersArray);
+    this.#userLotto = lotto.getUserLotto();
   }
 
   async getUserBonusInput() {
     try {
-      this.#bonus = await Print.getUserBonusNumber();
-      this.checkValidBonusNumber(this.#bonus);
-      const [statistics, earningRate] = this.calculateResult();
-      this.showLottoResult(statistics);
-      this.showEarningRate(earningRate);
+      const bonusInput = await Print.getUserBonusNumber();
+      const bonus = new Bonus(bonusInput, this.#userLotto);
+      this.#bonus = bonus.getBonus();
+      this.getResult();
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.getUserBonusInput();
     }
   }
 
-  checkValidBonusNumber(input) {
-    const validate = new Validate();
-    validate.isValidBonusNumber(input, this.#userLotto);
+  getResult() {
+    this.calculateResult();
+    this.showResult();
   }
 
   calculateResult() {
-    const result = new Result(
-      this.#lottos,
-      this.#userLotto,
-      parseInt(this.#bonus, 10)
-    );
-    const statistics = result.getStatistics();
-    const earningRate = result.getEarningRate(this.#sum);
-
-    return [statistics, earningRate];
+    const result = new Result(this.#lottos, this.#userLotto, this.#bonus);
+    this.#statistics = result.getStatistics();
+    this.#earningRate = result.getEarningRate(this.#sum);
   }
 
-  showLottoResult(statistics) {
+  showResult() {
     Print.showResultPhrase();
-    statistics.forEach((statistic, rankIndex) => {
+    this.#statistics.forEach((statistic, rankIndex) => {
       Print.showStatistic(statistic, rankIndex);
     });
-  }
-
-  showEarningRate(rate) {
-    Print.showEarningRate(rate);
+    Print.showEarningRate(this.#earningRate);
   }
 }
 
