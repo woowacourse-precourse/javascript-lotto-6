@@ -3,7 +3,7 @@ import OutputView from "../view/OutputView.js";
 import Lotto from "../domain/Lotto.js";
 import RandomNumGenerator from "../utils/calc/RandomNumGenerator.js";
 import Sort from "../utils/calc/Sort.js";
-import { SEPARATOR, STATIC_NUMBER, MATCHED_COUNT } from "../static/Static.js";
+import { SEPARATOR, STATIC_NUMBER, RANK } from "../static/Static.js";
 class LottoController {
   #lottoList = [];
   #purchaseQty;
@@ -13,11 +13,11 @@ class LottoController {
 
   constructor() {
     this.#winningStatistic = {
-      [MATCHED_COUNT.three]: 0,
-      [MATCHED_COUNT.four]: 0,
-      [MATCHED_COUNT.five]: 0,
-      [MATCHED_COUNT.fiveAndBonus]: 0,
-      [MATCHED_COUNT.six]: 0,
+      [RANK.fifth]: 0,
+      [RANK.fourth]: 0,
+      [RANK.third]: 0,
+      [RANK.second]: 0,
+      [RANK.first]: 0,
     };
   }
 
@@ -30,6 +30,7 @@ class LottoController {
     await this.setBonusNum();
     this.checkLottoList();
     this.showResult();
+    this.showRateOfReturn();
   }
 
   async setPurchaseQty() {
@@ -79,20 +80,22 @@ class LottoController {
   checkLottoList() {
     this.#lottoList.map((lottoNums) => {
       const lotto = new Lotto(lottoNums);
-      const result = lotto.checkResult(this.#winningNums, this.#bonusNum);
-      if (result) {
-        this.setWinningStatistic(result);
+      const rank = lotto.checkResult(this.#winningNums, this.#bonusNum);
+      if (rank) {
+        this.setWinningStatistic(rank);
       }
     });
   }
 
-  setWinningStatistic(result) {
-    this.#winningStatistic[result] += 1;
+  setWinningStatistic(rank) {
+    this.#winningStatistic[rank] += 1;
   }
 
   showResult() {
     OutputView.printResult(this.#winningStatistic);
   }
+
+  showRateOfReturn() {}
 }
 
 export default LottoController;
