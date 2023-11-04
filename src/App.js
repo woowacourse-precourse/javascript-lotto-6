@@ -9,7 +9,7 @@ class App {
 
   async play() {
     this.#lottoGame.start();
-    const amount = await this.#lottoGame.inputPurchaseAmount();
+    await this.#lottoGame.inputPurchaseAmount();
   }
 }
 

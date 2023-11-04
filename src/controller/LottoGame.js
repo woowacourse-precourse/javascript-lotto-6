@@ -1,7 +1,10 @@
+import PurchaseAmount from '../domain/PurchaseAmount.js';
 import LottoGameInput from '../view/LottoGameInput.js';
 import LottoGameOutput from '../view/LottoGameOutput.js';
 
 class LottoGame {
+  #purchaseAmount;
+
   start() {
     return this;
   }
@@ -9,11 +12,10 @@ class LottoGame {
   async inputPurchaseAmount() {
     try {
       const amount = await LottoGameInput.purchaseAmount();
-      return amount;
+      this.#purchaseAmount = new PurchaseAmount(amount);
     } catch (error) {
       LottoGameOutput.purchaseAmountError(error);
-      const amount = await this.inputPurchaseAmount();
-      return amount;
+      await this.inputPurchaseAmount();
     }
   }
 }
