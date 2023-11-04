@@ -39,6 +39,13 @@ class App {
     Console.print(MESSAGE_INPUT(winningBonus).RANK_BONUS);
     Console.print(MESSAGE_INPUT(winningSix).RANK_SIX);
     
+    // 수익률 계산
+    // 깔끔하게 수정하기
+    const sums = 5000 * winningThree + 50000 * winningFour + 1500000 * winningFive
+    + 30000000 * winningBonus + 2000000000 * winningSix
+    const rate = (1000000 / userMoney).toFixed(1);
+    Console.print(MESSAGE_INPUT(rate).RATE);
+    
   }
 }
 
