@@ -15,12 +15,16 @@ class App {
     this.winning = [];
     this.bonus = 0;
     this.count = 0;
+    this.arrayNumbers = [];
   }
 
   async play() {
     await this.getLottoPrice();
     await this.getMyLottos();
+    this.printHowMany();
     await this.getNumbers();
+    await this.getBonusNumbers();
+    this.getWinningLottos();
     this.printWinningStatics();
   }
 
@@ -32,75 +36,96 @@ class App {
   checkPrice(priceInput) {
     const checkPrice = parseInt(priceInput);
     const remainder = checkPrice % 1000;
+    const share = parseInt(checkPrice/1000)
 
     if(checkPrice === NaN) {throw new Error(ERROR.NAN)};
     if(remainder !== 0 ) {throw new Error(ERROR.THOUSAND)};
 
-    return checkPrice;
+    return share;
   }
 
   async getMyLottos() {
-    const arrayNumbers = [];
-  
     for(let i = 0; i < this.count; i++){
       const lottoNumber = await MissionUtils.Random.pickUniqueNumbersInRange(1,45,6);
       // 지금 lottoNumber가 콘솔로그로 보니 undefined뜸 여기서부터 체크해야 함
       // console.log(lottoNumber);
-      // arrayNumbers.push([...lottoNumber]);
+      // const sortNumbers = lottoNumber.sort((a,b) => a-b);
+      this.arrayNumbers.push(lottoNumber);
     }
-    this.printHowMany(arrayNumbers);
-    this.getWinningLottos(arrayNumbers);
   }
+  
 
-  getWinningLottos(arrayNumbers) {
+  getWinningLottos() {
     for(let i = 0; i < this.count; i++){
-      const newArray = [...arrayNumbers,...this.winning]
-      const sameNumbers = arrayNumbers.filter(newArray);
-      this.checkSameNumbers(sameNumbers)
+      const newArray = [...this.arrayNumbers,...this.winning]
+      const set = new Set(newArray)
+      this.checkSameNumbers(set);
+      // const sameNumbers = this.arrayNumbers.filter(newArray);
+      // this.checkSameNumbers(sameNumbers)
     }
   }
 
-  checkSameNumbers(sameNumbers) {
-    switch (sameNumbers.length) {
-      case 3:
+  // checkSameNumbers(sameNumbers) {
+  //   switch (sameNumbers.length) {
+  //     case 3:
+  //       this.sameNumbersObject['three']++
+  //       break;
+  //     case 4:
+  //       this.sameNumbersObject['four']++
+  //       break;
+  //     case 5:
+  //       this.sameNumbersObject['five']++
+  //       break;
+  //     case 6:
+  //       this.sameNumbersObject['six']++
+  //       break;      
+  //     default:
+  //       return this.sameNumbersObject
+  //   }
+  //   if(sameNumbers.length === 5 && arrayNumbers.includes(checkBonusNumber)) {
+  //     this.sameNumbersObject['bonus']++
+  //   }
+  // }
+  checkSameNumbers(set) {
+    switch (set.length) {
+      case 6:
         this.sameNumbersObject['three']++
         break;
       case 4:
         this.sameNumbersObject['four']++
         break;
-      case 5:
+      case 2:
         this.sameNumbersObject['five']++
         break;
-      case 6:
+      case 0:
         this.sameNumbersObject['six']++
         break;      
       default:
         return this.sameNumbersObject
     }
-    if(sameNumbers.length === 5 && arrayNumbers.includes(checkBonusNumber)) {
+    if(set.length === 2 && this.arrayNumbers.includes(this.bonus)) {
       this.sameNumbersObject['bonus']++
     }
   }
 
-  printHowMany(arrayNumbers) {
+  printHowMany() {
       MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
-      arrayNumbers.forEach(element => {
-        MissionUtils.Console.print(element);
-      })
+      for(let i = 0; i < this.count; i++){
+        MissionUtils.Console.print(this.arrayNumbers[i]);
+      }
+      // this.arrayNumbers.forEach(element => {
+      //   MissionUtils.Console.print(element);
+      // })
   }
 
   async getNumbers(){
     const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
-    this.winning = this.checkWinningNumbers(winningNumbers);
-  }
-
-  checkWinningNumbers(winningNumbers){
-    const checkWinningNumber = winningNumbers.spilt(",").map(Number);
+    this.winning  = winningNumbers.split(",").map(Number);
+console.log(winningNumbers)
 
     if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
-    if(winningNumbers.length !== 6) { throw new Error(ERROR.SIX)};
-    this.checkNumberError(checkWinningNumber);
-    return checkWinningNumber;
+    if(this.winning.length !== 6) { throw new Error(ERROR.SIX)};
+    
   } 
 
   async getBonusNumbers(){
@@ -109,9 +134,11 @@ class App {
   }
   
   checkBonusNumbers(bonusNumbers){
-    const checkBonusNumber = bonusNumbers.spilt(",").map(Number);
-
     if(bonusNumbers.includes(',')) {throw new Error(ERROR.INPUT_COMMA)};
+    if(isNaN(bonusNumbers)) {throw new Error(ERROR.NAN)};
+
+    const checkBonusNumber = Number(bonusNumbers);
+    
     this.checkNumberError(checkBonusNumber);
     return checkBonusNumber;
   }
