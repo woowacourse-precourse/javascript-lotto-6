@@ -25,7 +25,7 @@ describe('객체 유틸리티 테스트', () => {
     },
     {
       obj1: { a: 'a', b: 'b' },
-      obj2: { c: 'b', a: 'a' },
+      obj2: { a: 'b', b: 'a', c: 'c' },
     },
   ])('isSameKeyList는 모든 키 값이 다를경우 true를 반환한다.', ({ obj1, obj2 }) => {
     // given & when
