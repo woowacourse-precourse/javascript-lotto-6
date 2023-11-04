@@ -1,4 +1,4 @@
-import { MATCHED_COUNT } from "../static/Static.js";
+import { RANK } from "../static/Static.js";
 class Lotto {
   #numbers;
   // 필드 추가 불가
@@ -17,8 +17,8 @@ class Lotto {
   checkResult(winningNums, bonusNum) {
     const matchedCount = this.countMatchedNums(winningNums);
     const isBonusNumIncluded = this.isBonusNumIncluded(bonusNum);
-    const result = this.getResult(matchedCount, isBonusNumIncluded);
-    return result;
+    const rank = this.getRank(matchedCount, isBonusNumIncluded);
+    return rank;
   }
 
   countMatchedNums(winningNums) {
@@ -33,18 +33,16 @@ class Lotto {
     return this.#numbers.includes(bonusNum) ? true : false;
   }
 
-  getResult(matchedCount, isBonusNumIncluded) {
+  getRank(matchedCount, isBonusNumIncluded) {
     switch (matchedCount) {
       case 6:
-        return MATCHED_COUNT.six;
+        return RANK.first;
       case 5:
-        return isBonusNumIncluded
-          ? MATCHED_COUNT.fiveAndBonus
-          : MATCHED_COUNT.five;
+        return isBonusNumIncluded ? RANK.second : RANK.third;
       case 4:
-        return MATCHED_COUNT.four;
+        return RANK.fourth;
       case 3:
-        return MATCHED_COUNT.three;
+        return RANK.fifth;
       default:
         return null;
     }

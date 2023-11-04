@@ -10,10 +10,8 @@ const OutputView = {
   },
   printResult(winningStatistic) {
     Console.print(MESSAGE_ALERT.beforeResult);
-    for (let matchedCount in winningStatistic) {
-      Console.print(
-        `${MESSAGE_RESULT[matchedCount]} - ${winningStatistic[matchedCount]}개`
-      );
+    for (let rank in winningStatistic) {
+      Console.print(`${MESSAGE_RESULT[rank]} - ${winningStatistic[rank]}개`);
     }
   },
 };
