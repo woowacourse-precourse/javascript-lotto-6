@@ -35,7 +35,7 @@ class Lotto {
   #validateRange(numbers) {
     const abnormalRange = numbers.some(
       (number) =>
-        number < LOTTO_CONSTANT.MIN_RANGE || number > LOTTO_CONSTANT.MAX_RANGE
+        number < LOTTO_CONSTANT.RANGE.MIN || number > LOTTO_CONSTANT.RANGE.MAX
     );
 
     if (abnormalRange) {

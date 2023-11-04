@@ -11,8 +11,21 @@ function deepFreeze(object) {
   return Object.freeze(object);
 }
 
-export const LOTTO_CONSTANT = {
+export const LOTTO_CONSTANT = deepFreeze({
   SIZE: 6,
-  MAX_RANGE: 45,
-  MIN_RANGE: 1,
-};
+  RANGE: {
+    MAX: 45,
+    MIN: 1,
+  },
+});
+
+export const MONEY_CONSTANT = deepFreeze({
+  LOTTO_PRICE: 1000,
+  REWARD: {
+    FIFTH: 5000,
+    FOURTH: 50000,
+    THIRD: 1500000,
+    SECOND: 30000000,
+    FIRST: 2000000000,
+  },
+});
