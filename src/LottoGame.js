@@ -15,6 +15,7 @@ class LottoGame {
     ]);
     const results = LottoGame.calculateResult(bonusNumber, [...this.#tickets], [...winningNumbersArray.getNumbers()]);
     LottoGame.printResults(results);
+    LottoGame.printEarningRate(ticketCount, results);
   }
 
   static validatePurchaseAmount(purchaseAmount = '0') {
