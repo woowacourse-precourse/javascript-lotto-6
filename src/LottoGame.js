@@ -12,6 +12,7 @@ class LottoGame {
   async start() {
     await this.buyLotto();
     this.setLottoTickets(this.#lottoTickets, this.#ticketCount);
+    this.printLottoTickets(this.#lottoTickets, this.#ticketCount);
   }
 
   setTicketCount(count) {
@@ -62,7 +63,13 @@ class LottoGame {
       
     }
   }
-  
+
+  printLottoTickets(lottoTickets, count) {
+    Console.print(`\n${count}개를 구매했습니다.`)
+    lottoTickets.forEach(element => {
+      Console.print(element.getNumbers());
+    });
+  }
 }
 
 export default LottoGame;
