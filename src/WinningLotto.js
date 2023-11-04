@@ -3,7 +3,7 @@ class WinningLotto {
 
   constructor(input) {
     const numbers = input.split(',').map(Number);
-    checkValid(numbers);
+    this.checkValid(numbers);
     this.#winningLotto = numbers;
   }
 
@@ -20,3 +20,5 @@ class WinningLotto {
     return this.#winningLotto;
   }
 }
+
+export default WinningLotto;
