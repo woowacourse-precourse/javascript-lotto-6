@@ -2,6 +2,16 @@ import { CONSTANT } from "./Constant.js";
 import { Random } from "@woowacourse/mission-utils";
 
 class Controller {
+    static async inputUserPurchasePrice() {
+        return Number(await Console.readLineAsync());
+    }
+    static async inputBonusNum() {
+        return Number(await Console.readLineAsync());
+    }
+    static async inputLottoNum() {
+        return await Console.readLineAsync();
+    }
+
     // 가격을 로또 갯수로 반환
     static priceToAmount(price) {
         const AMOUNT = price / CONSTANT.LOTTO_PRICE;
@@ -29,8 +39,8 @@ class Controller {
     }
 
     // 결과가 로또 상금과 관련이 있는 숫자인지 bool반환
-    static isAllowedResult(result) {
-        return Object.keys(CONSTANT.WINNER_PRICE).includes(result);
+    static isAllowedResult(lottoResult, result) {
+        return Object.keys(lottoResult).includes(result);
     }
 
     // 6개의 랜덤 숫자 배열 반환
