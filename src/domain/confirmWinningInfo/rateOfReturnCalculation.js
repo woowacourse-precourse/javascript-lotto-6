@@ -8,7 +8,7 @@ const rateOfReturnCalculation = Object.freeze({
     const rateOfReturn = (prize / purchasedLottoAmount) * this.constants.percent;
 
     return Number.isInteger(rateOfReturn)
-      ? rateOfReturn
+      ? rateOfReturn.toString()
       : rateOfReturn.toFixed(this.constants.decimal);
   },
 });
