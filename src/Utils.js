@@ -15,8 +15,10 @@ class Utils {
   }
 
   static convertInputNumbers(userNumbers) {
-    const numbersArray = userNumbers.split(',').map(Number);
-    return numbersArray;
+    const numbersArray = userNumbers.split(',');
+    const convertNumbers = numbersArray.map((number) => Number(number.trim()));
+
+    return convertNumbers;
   }
 }
 
