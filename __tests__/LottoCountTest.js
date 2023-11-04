@@ -1,11 +1,13 @@
-import { lottoCounter, Counter } from "../src/App.js";
+import { Counter } from "../src/App.js";
 
 describe("구입 금액에 따른 로또 개수 테스트", () => {
   test("구입 금액에 따라 올바른 개수의 로또를 발행한다.", () => {
     const INPUT = 10000;
     const OUTPUT = 10;
 
-    const result = lottoCounter(INPUT);
+    const counter = new Counter(INPUT);
+    const result = counter.lottoCounter();
+
     expect(result).toBe(OUTPUT);
   });
 
