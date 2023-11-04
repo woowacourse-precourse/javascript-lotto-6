@@ -46,7 +46,7 @@ const Validator = {
     }
   },
 
-  validatePurchaseAmount(value) {
+  validatePositiveInteger(value) {
     if (!this.isPositiveInteger(value)) {
       throw CustomError.inputView(ERROR.message.notPositiveInteger);
     }

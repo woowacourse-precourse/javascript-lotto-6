@@ -8,7 +8,7 @@ class App {
   }
 
   async play() {
-    const userInput = await this.#view.readUserInput();
+    const userInput = await this.#view.readPurchaseAmount();
 
     this.#view.print(userInput);
   }

@@ -7,9 +7,9 @@ class View {
 
   #outputView = OutputView;
 
-  async readUserInput() {
-    const userInput = await this.#inputView.readLineAsync(
-      MESSAGE.read.userInput,
+  async readPurchaseAmount() {
+    const userInput = await this.#inputView.readPositiveIntegerAsync(
+      MESSAGE.read.purchaseAmount,
     );
 
     return userInput;
