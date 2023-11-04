@@ -1,5 +1,7 @@
-const calulate = {
+const calculate = {
   countFrom: (money) => {
-    return (money / 1000);
+    return (Number(money) / 1000);
   },
 };
+
+export default calculate;
