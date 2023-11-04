@@ -26,4 +26,12 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 3, 4, 5, 46]);
     }).toThrow('[ERROR]');
   });
+
+  test('보너스 번호가 당첨 번호에 포함되어 있으면 예외가 발생한다.', () => {
+    const BONUS_NUMBER = 1;
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(() => {
+      lotto.validateBonusNumber(BONUS_NUMBER);
+    }).toThrow('[ERROR]');
+  });
 });
