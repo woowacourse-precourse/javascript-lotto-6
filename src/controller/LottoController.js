@@ -3,9 +3,9 @@ import OutputView from "../view/OutputView.js";
 import Lotto from "../domain/Lotto.js";
 import RandomNumGenerator from "../utils/calc/RandomNumGenerator.js";
 import Sort from "../utils/calc/Sort.js";
-import { STATIC_NUMBER } from "../static/Static.js";
+import { SEPARATOR, STATIC_NUMBER } from "../static/Static.js";
 class LottoController {
-  #lottos = [];
+  #lottoArr = [];
   #purchaseQty;
   #winningNums = [];
   #bonusNum;
@@ -41,19 +41,22 @@ class LottoController {
   setLottos() {
     for (let i = 0; i < this.#purchaseQty; i++) {
       const randomNumArr = this.makeRandomNumArr();
-      this.#lottos.push(randomNumArr);
+      this.#lottoArr.push(randomNumArr);
     }
   }
 
   showLottos() {
-    this.#lottos.map((lotto) => {
+    this.#lottoArr.map((lotto) => {
       Sort.sortNumArrASC(lotto);
       OutputView.printLotto(lotto);
     });
   }
 
   async setWinningNums() {
-    this.#winningNums = await InputView.readWinningNums();
+    const winningNums = await InputView.readWinningNums();
+    this.#winningNums = winningNums
+      .split(SEPARATOR.lottoNumSeparator)
+      .map((winningNum) => Number(winningNum));
   }
 
   async setBonusNum() {
