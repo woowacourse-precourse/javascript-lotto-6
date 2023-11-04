@@ -9,15 +9,12 @@ export class Lottos {
 
     /**
      *
-     * @param {Lottos[]} boughtLottos
+     * @param {Lotto[]} boughtLottos
      * @description - boughtLottos를 돌면서 Lotto로 보내 로또 한장을 생성해서 모두 가져옴
      */
 
     constructor(boughtLottos) {
-        //
-        this.#manylottos = boughtLottos.map((lotto) =>
-            new Lotto(lotto)
-        )
+        this.#manylottos = boughtLottos
     }
 
     /**
@@ -43,4 +40,6 @@ export class Lottos {
         const manyLottoDto = this.#manylottos.map((lotto) => lotto.makeLottoDto())
         return new LottosDto(manyLottoDto)
     }
+
+
 }
