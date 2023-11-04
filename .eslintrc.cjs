@@ -34,7 +34,7 @@ module.exports = {
   // 테스트 코드에 불필요한 규칙 적용 x
   overrides: [
     {
-      files: ['__tests__/**/*.js', 'src/utils/validator/utils/**/*.js'],
+      files: ['__tests__/**/*.js', 'src/utils/validators/src/**/*.js'],
       rules: {
         'max-lines-per-function': 'off',
         'no-new': 'off',
