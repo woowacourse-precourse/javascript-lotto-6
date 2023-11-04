@@ -16,7 +16,7 @@ class App {
 
   async play() {
     const purchaseAmount = await askForInput(
-      "구매 금액을 입력해 주세요.\n",
+      "\n구매 금액을 입력해 주세요.\n",
       (input) => parseInt(input.trim(), 10),
       (amount) => isValidAmount(amount, LOTTO_PRICE),
       "[ERROR] 구매 금액은 1000원 단위의 금액이어야 합니다."
@@ -25,7 +25,7 @@ class App {
     this.printLottos();
 
     const winningNumbers = await askForInput(
-      "당첨 번호를 입력해 주세요.\n",
+      "\n당첨 번호를 입력해 주세요.\n",
       (input) => input.split(",").map((n) => parseInt(n.trim(), 10)),
       (numbers) => isValidWinningNumbers(numbers) && !hasDuplicate(numbers),
       "[ERROR] 당첨 번호는 1~45 범위의 숫자 6개여야 하며, 중복될 수 없습니다."
@@ -45,7 +45,7 @@ class App {
   printLottos() {
     Console.print(`\n${this.lottos.length}개를 구매했습니다.`);
     this.lottos.forEach((lotto) =>
-      Console.print(`[${lotto.getNumbers().join(", ")}]\n`)
+      Console.print(`[${lotto.getNumbers().join(", ")}]`)
     );
   }
 
@@ -96,8 +96,8 @@ class App {
   }
 
   calculateResultCounts(results) {
-    return results.reduce((counts, result) => {
-      const key = result.rank;
+    return results.reduce((counts, prizeCategory) => {
+      const key = prizeCategory;
       counts[key] = (counts[key] || 0) + 1;
       return counts;
     }, {});

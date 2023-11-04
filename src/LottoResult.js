@@ -1,4 +1,4 @@
-import { PRIZE_CATEGORIES } from "./constants";
+import { PRIZE_CATEGORIES } from "../src/constants.js";
 
 class LottoResult {
   constructor(winningNumbers, bonusNumber) {
@@ -12,15 +12,20 @@ class LottoResult {
 
   determinePrize(lotto) {
     const matches = this.calculateMatches(lotto.getNumbers());
-    return this.getPrizeCategory(
+    const prizeCategory = this.getPrizeCategory(
       matches,
       lotto.getNumbers().includes(this.bonusNumber)
     );
+
+    return prizeCategory;
   }
 
   calculateMatches(numbers) {
-    return numbers.filter((number) => this.winningNumbers.includes(number))
-      .length;
+    const matches = numbers.filter((number) =>
+      this.winningNumbers.includes(number)
+    ).length;
+
+    return matches;
   }
 
   getPrizeCategory(matchCount, bonusMatch) {

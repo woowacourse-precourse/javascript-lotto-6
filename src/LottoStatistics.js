@@ -1,4 +1,4 @@
-import { PRIZES } from "./constants";
+import { PRIZES } from "../src/constants.js";
 
 class LottoStatistics {
   constructor(lottos, lottoPrice) {
@@ -15,7 +15,7 @@ class LottoStatistics {
     return {
       resultCounts,
       totalPrizeMoney,
-      roi: roi.toFixed(1),
+      roi: parseFloat(roi.toFixed(1)),
     };
   }
 
