@@ -32,13 +32,12 @@ class LottoGame {
     const inputPrice = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
 
     const tempPrice = Number(inputPrice);
-    this.#validateCost(tempPrice);
+    this.#validatePrice(tempPrice);
     const termTicketCount = tempPrice / 1000;
     this.setTicketCount(termTicketCount);
   }
 
-  //validatePrice로 바꾸기
-  #validateCost(price) {
+  #validatePrice(price) {
     if (price <= 0) {
       throw new Error("[ERROR] 구입 가능한 금액이 입력되지 않았습니다.")
     }
@@ -77,7 +76,7 @@ class LottoGame {
   printLottoTickets(lottoTickets, count) {
     Console.print(`\n${count}개를 구매했습니다.`)
     lottoTickets.forEach(element => {
-      Console.print(element.getNumbers());
+      Console.print(element.getSortNumbers());
     });
   }
 

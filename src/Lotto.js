@@ -12,7 +12,7 @@ class Lotto {
     }
   }
   
-  getNumbers() {
+  getSortNumbers() {
     return this.#numbers.slice().sort((a, b) => a - b);
   }
 }
