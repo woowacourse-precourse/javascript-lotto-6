@@ -32,6 +32,12 @@ class App {
     console.log(this.inputLottoNumArr);
     console.log(this.randomLottoNumber);
     console.log(this.bonusArr);
+
+    this.matchingCounts = this.compareInputNumAndRandomNum(
+      this.inputLottoNumArr,
+      this.randomLottoNumber
+    );
+    console.log(this.matchingCounts);
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -117,6 +123,18 @@ class App {
     }
 
     return bonusArray;
+  }
+
+  compareInputNumAndRandomNum(inputArr, randomArrs) {
+    const counts = [];
+
+    for (const randomArr of randomArrs) {
+      const matchingCount = inputArr.reduce((accumalator, inputValue) => {
+        return accumalator + (randomArr.includes(inputValue) ? 1 : 0);
+      }, 0);
+      counts.push(matchingCount);
+    }
+    return counts;
   }
 }
 export default App;
