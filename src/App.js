@@ -27,7 +27,7 @@ class App {
     };
     
 
-    // 당첨 번호 입력 - 유효한지 확인하는 코드 추가하기
+    // 당첨 번호 입력
     const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
     // 유효한지 확인
     const removedWinningNums = winningNums.replace(/ /g, ''); // 공백 제거
@@ -43,6 +43,9 @@ class App {
     for (let i = 0; i < splitWinningNums.length; i++) {
       if (isNaN(splitWinningNums[i])) { // 문자인지 확인
         throw new Error(ERROR_MESSAGE.INPUT_TYPE_ERROR);
+      }
+      if (splitWinningNums[i] > 45 || splitWinningNums[i] < 1) { // 범위 확인
+        throw new Error(ERROR_MESSAGE.INPUT_ERROR);
       }
     }
     
