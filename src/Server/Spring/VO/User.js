@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
 import { ERROR_MESSAGE } from '../../../Util/Message.js';
+import CONSTANTS from '../../../Util/Constants.js';
 import Lotto from './Lotto.js';
 
 class User {
@@ -13,7 +14,7 @@ class User {
   constructor(purchaseAmount, generateLottoNumber) {
     this.#validate(purchaseAmount);
     this.#purchaseAmount = Number(purchaseAmount);
-    this.#LottoCount = this.#purchaseAmount / 1000;
+    this.#LottoCount = this.#purchaseAmount / CONSTANTS.lottoPrice;
     this.#purchaseLotto(generateLottoNumber);
   }
 

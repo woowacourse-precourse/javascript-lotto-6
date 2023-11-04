@@ -30,12 +30,12 @@ class LottoPos {
 
   inputWinningNumber = async () => {
     const winningNumber = await InputView.inputWinningNumber();
-    const responseData = await this.ajax(
-      RESTFULAPI.setWinningNumber,
-      winningNumber,
-      this.inputWinningNumber,
-    );
-    console.log(responseData);
+    await this.ajax(RESTFULAPI.setWinningNumber, winningNumber, this.inputWinningNumber);
+  };
+
+  inputBonusNumber = async () => {
+    const bonusNumber = await InputView.inputBonusNumber();
+    await this.ajax(RESTFULAPI.setBonusNumber, bonusNumber, this.inputBonusNumber);
   };
 
   ajax = async (url, data, callback) => {

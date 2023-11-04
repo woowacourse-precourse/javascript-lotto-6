@@ -10,6 +10,7 @@ class App {
   async play() {
     await this.LottoPos.handlerPurchaseAmount();
     await this.LottoPos.inputWinningNumber();
+    await this.LottoPos.inputBonusNumber();
   }
 }
 

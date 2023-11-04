@@ -12,8 +12,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== CONSTANTS.lottoCount) {
+      throw new Error(ERROR_MESSAGE.isNotLength);
     }
     this.#validateIsAllNumber(numbers);
     this.#validateNumberRange(numbers);
@@ -35,7 +35,7 @@ class Lotto {
 
   #validateDuplicateNumber(numbers) {
     const numberSet = new Set(numbers);
-    if ([...numberSet].length !== 6) throw new Error(ERROR_MESSAGE.isDuplicate);
+    if ([...numberSet].length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.isDuplicate);
   }
 
   get numbers() {
