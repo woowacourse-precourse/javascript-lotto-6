@@ -1,3 +1,4 @@
+import NUMBERS from "../constants/numbers.js";
 import WinningValid from "../utils/WinningValid.js";
 import BonusInput from "../view/input/BonusInput.js";
 
@@ -15,7 +16,7 @@ class Lotto {
       Number.isInteger(Number(number))
     );
     const outOfRangeNumber = numbers.filter(
-      (number) => number < 1 || number > 45
+      (number) => number < NUMBERS.start_number || number > NUMBERS.end_number
     );
     valid.winningIsValid(numbers, integerNumber, outOfRangeNumber);
   }
@@ -24,7 +25,6 @@ class Lotto {
     const bonusNumber = await bonus.number(this.#numbers);
     return bonusNumber;
   }
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

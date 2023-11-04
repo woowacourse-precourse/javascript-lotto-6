@@ -1,16 +1,19 @@
+import { WINNING_ERROR } from "../constants/errorMessage.js";
+import NUMBERS from "../constants/numbers.js";
+
 class WinningValid {
   winningIsValid(numbers, integer, outOfRange) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 6개의 숫자를 입력해주세요"); // 임시
+    if (numbers.length !== NUMBERS.piece) {
+      throw new Error(`${WINNING_ERROR.length_error}`);
     }
-    if (outOfRange.length !== 0) {
-      throw new Error("[ERROR] 1 이상 45 이하의 숫자만 입력해주세요.");
+    if (outOfRange.length !== NUMBERS.zero) {
+      throw new Error(`${WINNING_ERROR.range_error}`);
     }
     if (integer.length !== numbers.length) {
-      throw new Error("[ERROR] 숫자만 입력해주세요.");
+      throw new Error(`${WINNING_ERROR.string_error}`);
     }
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error("[ERROR] 중복된 숫자가 입력되어 있습니다.");
+      throw new Error(`${WINNING_ERROR.dulicate_error}`);
     }
     return true;
   }

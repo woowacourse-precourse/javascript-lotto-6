@@ -1,17 +1,23 @@
+import { BONUS_ERROR } from "../constants/errorMessage.js";
+import NUMBERS from "../constants/numbers.js";
+import SYMBOLS from "../constants/symbols.js";
+
 class BonusValid {
-  BonusIsValid(number, winningNumbers) {
-    console.log(winningNumbers);
-    if (number.includes(" ")) {
-      throw new Error("[ERROR] 공백이 입력되어 있습니다.");
+  bonusIsValid(number, winningNumbers) {
+    if (number.includes(SYMBOLS.space)) {
+      throw new Error(`${BONUS_ERROR.space_error}`);
     }
     if (winningNumbers.includes(Number(number))) {
-      throw new Error("[ERROR] 당첨 번호와 중복된 번호가 있습니다.");
+      throw new Error(`${BONUS_ERROR.dulicate_error}`);
     }
     if (!Number.isInteger(Number(number))) {
-      throw new Error("[ERROR] 문자가 포함되어 있습니다.");
+      throw new Error(`${BONUS_ERROR.string_error}`);
     }
-    if (number < 1 || number > 45) {
-      throw new Error("[ERROR] 1 이상 45 이하의 숫자만 입력해주세요.");
+    if (number.includes(SYMBOLS.dot)) {
+      throw new Error(`${BONUS_ERROR.point_error}`);
+    }
+    if (number < NUMBERS.start_number || number > NUMBERS.end_number) {
+      throw new Error(`${BONUS_ERROR.range_error}`);
     }
     return true;
   }

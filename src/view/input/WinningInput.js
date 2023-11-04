@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import GAME_MESSAGE from "../../constants/gameMessage.js";
-import Lotto from "../../model/Lotto.js";
+import SYMBOLS from "../../constants/symbols.js";
+import Lotto from "../../controller/Lotto.js";
 import WinningValid from "../../utils/WinningValid.js";
 
 class WinningInput {
@@ -9,7 +10,7 @@ class WinningInput {
   }
   async userInput() {
     const input = await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`);
-    return input.split(",").map((str) => parseFloat(str));
+    return input.split(SYMBOLS.comma).map((str) => parseFloat(str));
   }
 
   async winningNumbers() {

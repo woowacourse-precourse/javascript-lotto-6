@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import GAME_MESSAGE from "../../constants/gameMessage.js";
+import NUMBERS from "../../constants/numbers.js";
 import MoneyValid from "../../utils/MoneyValid.js";
 
 class MoneyInput {
@@ -20,7 +21,7 @@ class MoneyInput {
         valid = false;
       }
     } while (!valid);
-    return money / 1000;
+    return money / NUMBERS.purchase_money;
   }
 }
 

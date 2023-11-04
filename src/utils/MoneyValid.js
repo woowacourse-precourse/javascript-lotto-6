@@ -1,25 +1,23 @@
-// const isBlank = (input) => input.trim() === '';
-// const isNegative = (input) => input <= 0;
-// const isNumbers = (input) => Number.isNaN(input);
-// const hasRemainder = (input) => input % 1000 === 0;
-// const hasDecimal = (input) => input.include('.');
+import NUMBERS from "../constants/numbers.js";
+import { MONEY_ERROR } from "../constants/errorMessage.js";
+import SYMBOLS from "../constants/symbols.js";
 
 class MoneyValid {
   moneyIsValid(money) {
     if (!Number.isInteger(Number(money))) {
-      throw new Error("[ERROR] 문자가 포함되어 있습니다.");
+      throw new Error(`${MONEY_ERROR.string_error}`);
     }
-    if (money.includes(" ")) {
-      throw new Error("[ERROR] 공백이 포함되어 있습니다.");
+    if (money.includes(SYMBOLS.space)) {
+      throw new Error(`${MONEY_ERROR.space_error}`);
     }
-    if (money.includes(".")) {
-      throw new Error("[ERROR] 소수점이 입력되었습니다.");
+    if (money.includes(SYMBOLS.dot)) {
+      throw new Error(`${MONEY_ERROR.point_error}`);
     }
-    if (money < 1000) {
-      throw new Error("[ERROR] 1000원 이상 입력해주세요.");
-    }
-    if (money % 1000 !== 0) {
-      throw new Error("[ERROR] 1000원 단위로 입력해주세요.");
+    if (
+      money < NUMBERS.purchase_money ||
+      money % NUMBERS.purchase_money !== NUMBERS.zero
+    ) {
+      throw new Error(`${MONEY_ERROR.amount_error}`);
     }
     return true;
   }

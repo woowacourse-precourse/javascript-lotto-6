@@ -14,13 +14,13 @@ class BonusInput {
     do {
       number = await this.userInput();
       try {
-        valid = this.bonusValid.BonusIsValid(number, winningNumbers);
+        valid = this.bonusValid.bonusIsValid(number, winningNumbers);
       } catch (error) {
         Console.print(error.message);
         valid = false;
       }
     } while (!valid);
-    return parseInt(number, 10);
+    return number;
   }
 }
 
