@@ -41,6 +41,26 @@ class InputView {
       throw new Error(ERROR.WINNING_NUMBERS_UNIQE);
     }
   }
+
+  static async readBonusNumber(winningNumbers) {
+    const input = await Console.readLineAsync(INPUT.BONUS_NUMBERS);
+    InputView.#validateBonusNumber(input, winningNumbers);
+    return Number(input);
+  }
+
+  static #validateBonusNumber(input, winningNumbers) {
+    if (!/^[1-9][0-9]*$/.test(input)) {
+      throw new Error(ERROR.BONUS_NUMBER_INTEGER);
+    }
+
+    if (input < 1 || input > 45) {
+      throw new Error(ERROR.BONUS_NUMBER_RANGE);
+    }
+
+    if (winningNumbers.includes(Number(input))) {
+      throw new Error(ERROR.BONUS_NUMBER_UNIQUE);
+    }
+  }
 }
 
 export default InputView;
