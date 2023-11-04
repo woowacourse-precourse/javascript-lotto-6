@@ -10,9 +10,9 @@
 
 ### 기능 목록
 
-- [ ] 구입금액을 입력 받는다. request.money
-    - [ ] 입력값이 유효한지 확인한다. validate.money
-    - [ ] 유효하지 않으면 [ERROR]를 출력하고, 해당 부분에서 다시 진행한다.
+- [x] 구입금액을 입력 받는다. request.money
+    - [x] 입력값이 유효한지 확인한다. validate.money
+    - [x] 유효하지 않으면 [ERROR]를 출력하고, 해당 부분에서 다시 진행한다.
     - [ ] 금액으로 복권의 매수를 계산해서 값을 넣는다. - calculate.countFrom();
 
 - [ ] 구입한 로또의 수만큼 로또를 발행한다. lottoMachine.make();
