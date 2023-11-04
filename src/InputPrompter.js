@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import InputError from "./InputError.js";
 
-class InputHandler {
+class InputPrompter {
   constructor(promptMessage, isValid, errorMessage) {
     this.promptMessage = promptMessage;
     this.validate = (input) => {
@@ -15,26 +15,26 @@ class InputHandler {
 
     while (!isValid) {
       input = await Console.readLineAsync(this.promptMessage);
-      isValid = this.checkValidity(input);
+      isValid = this.#checkValidity(input);
     }
 
     return input;
   }
 
-  checkValidity(input) {
+  #checkValidity(input) {
     try {
       this.validate(input);
       return true;
     } catch (error) {
-      InputHandler.handleError(error);
+      InputPrompter.#handleError(error);
       return false;
     }
   }
 
-  static handleError(error) {
+  static #handleError(error) {
     if (error instanceof InputError) Console.print(error.message);
     else throw error;
   }
 }
 
-export default InputHandler;
+export default InputPrompter;
