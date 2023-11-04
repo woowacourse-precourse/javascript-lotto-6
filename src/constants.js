@@ -22,5 +22,7 @@ const PRICE = {
 export const ERROR_MESSAGE = {
   isNotwNumber: "숫자를 입력해주세요.",
   isInvaildUnit: "1000원의 배수만 입력 가능합니다.",
-  isSmallNumber: "1000 이상의 수만 입력 가능합니다.",
+  isSmallNumber: "1000 이상의 금액만 입력 가능합니다.",
+  isOnlysix: "6자리의 숫자만 입력 가능합니다.",
+  isIncorrecRage: "1부터 45까지의 숫자만 입력 가능합니다.",
 };

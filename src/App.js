@@ -16,7 +16,7 @@ class App {
       throw new Error(ERROR_MESSAGE.isInvaildUnit);
     }
 
-    this.createLotto(purchaseCost);
+    await this.createLotto(purchaseCost);
 
     const winnigNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputWinnigNum
@@ -29,9 +29,18 @@ class App {
 
   async createLotto(purchaseCost) {
     const numOfLotto = purchaseCost / 1000;
+    const tellNumOfLotto = await MissionUtils.Console.print(
+      `${numOfLotto}${LOTTO_OUTPUT_MESSAGE.numOfLotto}`
+    );
 
     for (let i = 0; i < numOfLotto; i++) {
-      let lottoNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      let lottoNum = await MissionUtils.Random.pickUniqueNumbersInRange(
+        1,
+        45,
+        6
+      );
+
+      const printLottNum = await MissionUtils.Console.print(lottoNum);
 
       const lotto = new Lotto(lottoNum);
     }
