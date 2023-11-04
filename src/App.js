@@ -38,13 +38,15 @@ class App {
     }
     //TODO 로또 구매 함수 분리
     const lottoArray = [];
-    MissionUtils.Console.print(`${inputMoney / 1000}개를 구매했습니다.`);
+
+    let buyComment = `${inputMoney / 1000}개를 구매했습니다.\n`;
     for (let i = 0; i < inputMoney; i += 1000) {
       const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
       const lotto = new Lotto(randomNumbers);
       lottoArray.push(lotto);
-      MissionUtils.Console.print(lotto.getNumbers());
+      buyComment += `[${lotto.getNumbers().toString().replaceAll(",", ", ")}]\n`;
     }
+    MissionUtils.Console.print(buyComment);
 
     isPass = initIsPass(isPass);
 
@@ -82,7 +84,7 @@ class App {
     }
     const prizeMoney = countPrizeMoney(results);
     const countResult = countTotalWin(results);
-    console.log(countResult);
+
     const resultComment = writeResultComment(inputMoney, prizeMoney, countResult, LOTTO_PRIZES);
     MissionUtils.Console.print(resultComment);
   }
@@ -94,12 +96,19 @@ const writeResultComment = (inputMoney, prizeMoney, countResult, LOTTO_PRIZES) =
   for (let count in countResult) {
     if (count === "5B") comment += `5개 일치, 보너스 볼 일치`;
     else comment += `${count}개 일치`;
-    console.log(count);
-    comment += `(${LOTTO_PRIZES[count].toLocaleString("kor")}원) - ${countResult[count]}개\n`;
+    comment += ` (${LOTTO_PRIZES[count].toLocaleString("kor")}원) - ${countResult[count]}개\n`;
   }
-  comment += `총 수익률은 ${Number((prizeMoney / inputMoney).toFixed(1)).toLocaleString("kor")}%입니다.`;
+  comment += `총 수익률은 ${getEarningRate(inputMoney, prizeMoney)}%입니다.`;
   return comment;
 };
+
+const getEarningRate = (input, output) => {
+  const earningRate = ((output / input) * 100).toFixed(1);
+  const [onZero, underZero] = earningRate.split(".");
+  const koreaInteger = Number(onZero).toLocaleString("kor");
+  return koreaInteger + "." + underZero;
+};
+
 const countTotalWin = (lottoResults) => {
   const countResult = {3: 0, 4: 0, 5: 0, "5B": 0, 6: 0};
   for (let result of lottoResults) {
