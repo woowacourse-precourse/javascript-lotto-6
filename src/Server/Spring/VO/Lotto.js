@@ -17,6 +17,7 @@ class Lotto {
     }
     this.#validateIsAllNumber(numbers);
     this.#validateNumberRange(numbers);
+    this.#validateDuplicateNumber(numbers);
   }
 
   #validateIsAllNumber(numbers) {
@@ -30,6 +31,11 @@ class Lotto {
       (lottoNumber) => CONSTANTS.lottoMin <= lottoNumber && lottoNumber <= CONSTANTS.lottoMax,
     );
     if (filterNumbers.length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.isNotInRange);
+  }
+
+  #validateDuplicateNumber(numbers) {
+    const numberSet = new Set(numbers);
+    if ([...numberSet].length !== 6) throw new Error(ERROR_MESSAGE.isDuplicate);
   }
 
   get numbers() {
