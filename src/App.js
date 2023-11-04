@@ -1,7 +1,9 @@
 import { Random, Console } from "@woowacourse/mission-utils";
 
 class App {
-  async play() { }
+  async play() {
+    const purchaseAmount = await this.purchasePrice();
+  }
   
   async purchasePrice() {
     const priceInput = await Console.readLineAsync('구입금액을 입력해 주세요. \n');
@@ -13,6 +15,11 @@ class App {
   
   priceValidity(priceInput) {
     return priceInput % 1000 !== 0;
+  }
+
+  viewPurchasePrice(purchaseAmount) {
+    const numberOfLotto = Math.floor(purchaseAmount / 1000);
+    Console.print(`${numberOfLotto}개를 구매했습니다.`);
   }
 }
 
