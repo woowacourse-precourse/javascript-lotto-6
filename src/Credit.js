@@ -31,7 +31,10 @@ class Purchase {
 }
 
 class Profit {
-  constructor() {}
+  #profit;
+  constructor() {
+    this.#profit = profit;
+  }
 }
 
 export default Purchase;

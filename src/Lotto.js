@@ -1,16 +1,13 @@
 import { Random, Console } from "@woowacourse/mission-utils";
+
 class Lotto {
-  #numbers;
+  #drawNumbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#validateDraw(numbers);
+    this.#drawNumbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
   getLottoNumbers() {
     const randomLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
     return randomLottoNumber;
@@ -56,6 +53,43 @@ class Lotto {
     }
     return bonus;
   }
-}
 
+  resultOfLotto(drew, bonus) {
+    let result = this.matchCountCheck(drew, bonus);
+    let isBonus = this.matchBonusCheck(drew, bonus);
+    if (result === 3) {
+      return (rank = 5);
+    }
+    if (result === 4) {
+      return (rank = 4);
+    }
+    if (result === 5) {
+      return (rank = 3);
+    }
+    if (result === 5 && isBonus === true) {
+      return (rank = 2);
+    }
+    if (result === 6) {
+      return (rank = 1);
+    }
+    return (rank = 0);
+  }
+
+  matchCountCheck = (random, drew) => {
+    const result = random.reduce((acc, cur) => {
+      if (random.includes(cur)) {
+        acc++;
+      }
+      return acc;
+    }, 0);
+    return result;
+  };
+
+  matchBonusCheck = (random, bonus) => {
+    if (random.includes(bonus)) {
+      return true;
+    }
+    return false;
+  };
+}
 export default Lotto;
