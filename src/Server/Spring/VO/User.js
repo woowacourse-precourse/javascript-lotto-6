@@ -32,7 +32,7 @@ class User {
   }
 
   get userLotto() {
-    return this.#userLotto.map(lotto => lotto.numbers);
+    return this.#userLotto.map((lotto) => lotto.numbers);
   }
 }
 

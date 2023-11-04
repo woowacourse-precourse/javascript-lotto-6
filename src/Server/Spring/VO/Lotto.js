@@ -15,7 +15,14 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    this.#validateIsAllNumber(numbers);
     this.#validateNumberRange(numbers);
+  }
+
+  #validateIsAllNumber(numbers) {
+    numbers.forEach((lottoNumber) => {
+      if (Number.isNaN(Number(lottoNumber))) throw new Error(ERROR_MESSAGE.isChar);
+    });
   }
 
   #validateNumberRange(numbers) {
