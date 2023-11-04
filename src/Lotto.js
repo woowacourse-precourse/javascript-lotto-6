@@ -2,6 +2,7 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
+    numbers = numbers.split(',');
     this.#validate(numbers);
     this.#numbers = numbers;
   }
@@ -30,6 +31,10 @@ class Lotto {
   findDuplicationInNumbers(numbers) {
     const duplication_numbers = new Set(numbers);
     return duplication_numbers.size !== numbers.length;
+  }
+
+  getLottoNumbers() {
+    return this.#numbers;
   }
 }
 
