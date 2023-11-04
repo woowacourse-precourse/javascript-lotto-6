@@ -1,6 +1,4 @@
-import { Console, Random } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGE } from "./constants/errorMessage.js";
-import { RESULT_MESSAGE } from "./constants/resultMessage.js";
 
 class Lottos {
   #lottoPrice = 0;
@@ -20,20 +18,6 @@ class Lottos {
 
     if (parseInt(lottoPrice, 10) % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.priceIsNotDivisible);
-    }
-  }
-
-  printLottos() {
-    Console.print(RESULT_MESSAGE.count(this.#lottoPrice / 1000));
-
-    for (let i = 0; i < this.#lottoPrice / 1000; i++) {
-      let lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
-
-      lotto = lotto.sort((a, b) => a - b);
-
-      Console.print(`[${lotto.join(", ")}]`);
-
-      this.#lottos.push(lotto);
     }
   }
 
