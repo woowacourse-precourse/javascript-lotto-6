@@ -9,4 +9,11 @@ describe('💙 RandomNumberStrategy 클래스를 테스트합니다. ฅ^._.^ฅ
 
     expect(lottoNumberLength).toBe(GAME_RULE.LOTTO_NUMBER_COUNT);
   });
+
+  test('[generateLottoNumber] 반환한 숫자 6개는 모두 중복되지 않는다.', () => {
+    const lottoNumbers = new Set(lottoNumberGenerator.generateLottoNumber())
+      .size;
+
+    expect(lottoNumbers).toBe(GAME_RULE.LOTTO_NUMBER_COUNT);
+  });
 });
