@@ -1,3 +1,5 @@
+import { ERROR } from './constant/index';
+
 class Lotto {
   #numbers;
 
@@ -8,17 +10,17 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR.LOTTO_NUMBERS_LENGTH);
     }
 
     const INVALID_RANGE = numbers.some(number => number < 1 || number > 45);
     if (INVALID_RANGE) {
-      throw new Error('[ERROR] 로또 번호는 1에서 45 사이의 숫자여야 합니다.');
+      throw new Error(ERROR.LOTTO_NUMBERS_RANGE);
     }
 
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== 6) {
-      throw new Error('[ERROR] 로또 번호는 중복이 없어야 합니다.');
+      throw new Error(ERROR.LOTTO_NUMBERS_UNIQE);
     }
   }
 }
