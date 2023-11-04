@@ -30,5 +30,8 @@ describe("로또게임 클래스 테스트", () => {
     const tickets = [new Lotto([1,2,3,4,5,6])]
     expect(LottoGame.calculateResult(23, tickets, [1,2,3,8,9,10])).toEqual([1,0,0,0,0]);
   });
-  // 아래에 추가 테스트 작성 가능
+
+  test('수익률 계산 테스트', () => {
+    expect(LottoGame.calculateEarningsRate(8, [1, 0, 0, 0, 0])).toEqual('62.5');
+  });
 });
