@@ -4,8 +4,7 @@ import { INPUT_MESSAGE } from '../constants/message/io.js';
 import { DELIMITER } from '../constants/setting.js';
 import Converter from '../utils/converter.js';
 import MoneyValidator from '../validator/Money.js';
-import Lotto from '../Lotto.js';
-import CommonValidator from '../validator/Common.js';
+import LottoValidator from '../validator/Lotto.js';
 
 class InputView {
   static async readMoney() {
@@ -24,9 +23,9 @@ class InputView {
       inputWinningNumbers,
       DELIMITER,
     );
-    const winningLotto = new Lotto(winningNumbers);
+    LottoValidator.validate(winningNumbers);
 
-    return winningLotto;
+    return winningNumbers;
   }
 
   static async readBonusNumber() {
@@ -34,7 +33,7 @@ class InputView {
       INPUT_MESSAGE.bonusNumber,
     );
     const bonusNumber = Converter.stringToNumber(inputBonusNumber);
-    CommonValidator.validateLottoNumber(bonusNumber);
+    LottoValidator.validateLottoNumber(bonusNumber);
 
     return bonusNumber;
   }
