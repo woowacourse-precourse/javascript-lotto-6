@@ -10,12 +10,15 @@ export default class Bonus {
     this.#bonus = number;
   }
 
+  /* 
+  🐛FIX: 조건 수정
+  */
   #validate(number) {
     const isNumber = /^\d+$/;
     if (!isNumber.test(number)) {
       throw new Error('[ERROR] 숫자만 입력해주세요.');
     }
-    if (Number(number) <= 1 || Number(number) >= 45) {
+    if (Number(number) < 1 || Number(number) > 45) {
       throw new Error('[ERROR] 1부터 45사이의 수를 입력해주세요.');
     }
   }
