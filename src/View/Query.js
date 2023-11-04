@@ -7,7 +7,7 @@ class Query {
       );
       return purchaseAmount;
     } catch (error) {
-      throw new Error('ERROR');
+      throw 'ERROR';
     }
   }
 
@@ -18,7 +18,7 @@ class Query {
       );
       return winningNumber;
     } catch (error) {
-      throw new Error('ERROR');
+      throw 'ERROR';
     }
   }
 
@@ -29,7 +29,7 @@ class Query {
       );
       return bonusNumber;
     } catch (error) {
-      throw new Error('ERROR');
+      throw 'ERROR';
     }
   }
 }
