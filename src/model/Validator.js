@@ -10,7 +10,12 @@ const Validator = {
     return inputValue;
   },
 
-  lottoNumberList: numbers => {},
+  lottoNumberList: numberList => {
+    notNumberElement(numberList);
+    notSixNumber(numberList);
+    notRangeNumber(numberList);
+    sameNumber(numberList);
+  },
 };
 
 // 값을 입력하지 않았는지 검사
@@ -38,6 +43,49 @@ const moneyRangeOver = inputValue => {
 const notDivisibleByThousand = inputValue => {
   if (Number(inputValue) % 1000 !== 0) {
     throw ERROR.notDivisibleMoney;
+  }
+};
+
+// 쉼표 외의 문자가 들어간 경우
+const notNumberElement = numberList => {
+  numberList.forEach(number => {
+    return notNumber(number);
+  });
+};
+
+//split했을 빈 값을 입력한 경우
+const notInputUserNumber = numberList => {
+  numberList.forEach(number => {
+    return notInputValue(number);
+  });
+};
+
+// 6개가 아닌 경우
+const notSixNumber = numberList => {
+  if (numberList.length !== 6) {
+    throw ERROR.notSixNumber;
+  }
+};
+
+// 1~45사이의 정수가 아닌 경우
+const notRangeNumber = numberList => {
+  numberList.forEach(number => {
+    return numberListRangeCheck(number);
+  });
+};
+
+const numberListRangeCheck = number => {
+  if (Number(number) < 1 || Number(number) > 45) {
+    throw ERROR.rangeOverInput;
+  }
+};
+
+// 중복되는 숫자가 있는 경우
+const sameNumber = numberList => {
+  const deleteSameNumber = new Set(numberList).size;
+
+  if (numberList.length !== deleteSameNumber) {
+    throw ERROR.sameNumber;
   }
 };
 
