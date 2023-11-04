@@ -13,4 +13,32 @@ function validateUnit(value) {
   }
 }
 
-export { validateNumberType, validateUnit };
+function validateLottoLength(numbers) {
+  if (numbers.length !== LOTTO.length) {
+    throw new Error(ERROR_MESSAGE.invalidLottoLength);
+  }
+}
+
+function validateLottoRange(numbers) {
+  numbers.forEach((number) => {
+    if (number < LOTTO.range.start || number > LOTTO.range.end) {
+      throw new Error(ERROR_MESSAGE.invalidLottoRange);
+    }
+  });
+}
+
+function validateDuplicateNumber(numbers) {
+  const numberSet = new Set(numbers);
+
+  if (numberSet.size !== numbers.length) {
+    throw new Error(ERROR_MESSAGE.duplicateLottoNumber);
+  }
+}
+
+export {
+  validateNumberType,
+  validateUnit,
+  validateLottoLength,
+  validateLottoRange,
+  validateDuplicateNumber,
+};
