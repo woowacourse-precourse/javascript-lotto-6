@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { ReadMessage } from "./message";
 import { LOTTO } from "../constants/lotto";
-import { LottoValidate, Validate } from "./validate";
+import { LottoValidate } from "./validate";
 
 const readLineAsync = async (msg) => await MissionUtils.Console.readLineAsync(msg);
 
