@@ -1,5 +1,6 @@
 import { InputGetter } from "../src/InputGetter";
 import { InputConverter } from "../src/InputConverter";
+import { InputValidator } from "../src/InputValidator";
 import { Console } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
@@ -102,6 +103,20 @@ describe("입력 변환하기", () => {
       const result = inputConverter.bonusNumberConverter(input);
 
       expect(result).toEqual(output);
+    });
+  });
+});
+
+describe("예외 처리", () => {
+  test("금액 입력", () => {
+    const inputs = ["100", "1001", "-1000", " 1000", ".1000"];
+
+    const inputValidator = new InputValidator();
+
+    inputs.forEach((input) => {
+      expect(() => {
+        inputValidator.moneyValidator(input);
+      }).toThrow("[ERROR]");
     });
   });
 });
