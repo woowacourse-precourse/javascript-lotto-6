@@ -3,15 +3,18 @@ class LottoUtill {
 
   #staticObject;
 
-  constructor(calcNumber) {
-    this.#calcNumber = calcNumber;
-    this.#staticObject = {
+  constructor(
+    calcNumber,
+    staticObject = {
       3: 0,
       4: 0,
       5: 0,
       6: 0,
       bonus: 0,
-    };
+    },
+  ) {
+    this.#calcNumber = calcNumber;
+    this.#staticObject = staticObject;
   }
 
   howManyToBuy() {
