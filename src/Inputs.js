@@ -2,11 +2,11 @@ import { Console } from '@woowacourse/mission-utils';
 import Validation from './Validation.js';
 
 class Inputs {
-  async returnPurchaseAmount() {
+  returnPurchaseAmount() {
     return this.getPromptedAmount('구입금액을 입력해 주세요.');
   }
 
-  async returnWinningNumbers() {
+  returnWinningNumbers() {
     return this.getPromptedWinningNumbers('당첨 번호를 입력해 주세요.');
   }
 
