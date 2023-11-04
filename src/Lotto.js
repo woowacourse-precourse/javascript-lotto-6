@@ -53,8 +53,16 @@ class Lotto {
     return lottoTickets;
   }
 
+  static toArray(number) {
+    return new Lotto(number.split(",").map(Number));
+  }
+
   toPrintableString() {
     return `[${this.#numbers.join(", ")}]`;
+  }
+
+  includesNumber(number) {
+    return this.#numbers.includes(number);
   }
 }
 
