@@ -5,12 +5,16 @@
  */
 import RESTFULAPI from '../../../Util/API.js';
 import UserController from '../Annotation/@Controller/UserController.js';
+import WinningLottoController from '../Annotation/@Controller/WinningLottoController.js';
 
 class HandlerMapping {
   #userController;
 
+  #winningLottoController;
+
   constructor() {
     this.#userController = new UserController();
+    this.#winningLottoController = new WinningLottoController();
   }
 
   get userController() {
@@ -18,7 +22,8 @@ class HandlerMapping {
   }
 
   getController(url) {
-    if (url === RESTFULAPI.purchaseAmount) return this.userController;
+    if (url === RESTFULAPI.purchaseAmount) return this.#userController;
+    if (url === RESTFULAPI.setWinningNumber) return this.#winningLottoController;
     return 0;
   }
 }

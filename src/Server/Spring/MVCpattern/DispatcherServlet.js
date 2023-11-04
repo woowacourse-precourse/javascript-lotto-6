@@ -11,6 +11,7 @@ import HandlerMapping from './HandlerMapping.js';
 import HandlerAdapter from './HandlerAdapter.js';
 import ViewResolver from './ViewResolver.js';
 import CONSTANTS from '../../../Util/Constants.js';
+import database from '../../DB/database.js';
 
 class DispatcherServlet {
   #handlerMapping;
