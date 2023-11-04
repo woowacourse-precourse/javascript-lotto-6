@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { RANDOM_NUMBER } from '../constants/Constant.js';
+import { LOTTO_NUMBER } from '../constants/Constant.js';
 import Lotto from './Lotto.js';
 
 class LottoBundle {
@@ -16,9 +16,9 @@ class LottoBundle {
 
   #makeLottoNumbers() {
     return Random.pickUniqueNumbersInRange(
-      RANDOM_NUMBER.minNum,
-      RANDOM_NUMBER.maxNum,
-      RANDOM_NUMBER.count,
+      LOTTO_NUMBER.minNum,
+      LOTTO_NUMBER.maxNum,
+      LOTTO_NUMBER.count,
     );
   }
 

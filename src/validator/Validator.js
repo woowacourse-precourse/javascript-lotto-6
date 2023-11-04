@@ -35,7 +35,7 @@ const Validator = {
 
   checkIsInvalidCount(userInput) {
     if (userInput.length !== LOTTO_NUMBER.count) {
-      throw new ValidationError(ERROR.isInvalidDigit);
+      throw new ValidationError(ERROR.isInvalidCount);
     }
   },
 
