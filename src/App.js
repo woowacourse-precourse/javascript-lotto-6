@@ -12,6 +12,7 @@ class App {
     const winningNumbers = await inputView.readWinningNumbersAsync(MESSAGE.INPUT_WINNING_NUMBER);
     const lotto = new Lotto(winningNumbers);
     const bonusNumber = await inputView.readBonusNumberAsync(MESSAGE.INPUT_BONUS_NUMBER);
+    lotto.validateBonusNumber(bonusNumber);
     lotto.getLottoResult(myLottoNumbers, bonusNumber, purchasePrice);
   }
 

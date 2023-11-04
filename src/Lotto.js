@@ -24,6 +24,12 @@ class Lotto {
     });
   }
 
+  validateBonusNumber(bonusNumber) {
+    if (this.#numbers.includes(bonusNumber)) {
+      throw new Error(ERROR.BONUSNUMBER_DUPPLICATE);
+    }
+  }
+
   getLottoResult(myLottoNumbers, bonusNumber, purchasePrice) {
     const lottoResult = { first: 0, second: 0, third: 0, fourth: 0, fifth: 0 };
 
