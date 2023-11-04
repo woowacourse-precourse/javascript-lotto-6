@@ -2,8 +2,9 @@ import { LOTTO } from '../setting.js';
 
 export const ERROR_PREFIX = '[ERROR] ';
 
+export const COMMON_NUMBER_ERROR = '숫자만 입력 가능합니다.';
+
 export const MONEY_ERROR = Object.freeze({
-  number: '구입금액은 숫자만 입력 가능합니다.',
   purchaseAmount: `구입금액은 ${LOTTO.price}원 이상만 가능합니다.`,
   amountExactness: `구입금액은 ${LOTTO.price}원 단위로만 가능합니다.`,
 });
