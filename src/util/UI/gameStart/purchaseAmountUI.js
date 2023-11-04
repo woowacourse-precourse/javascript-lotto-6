@@ -1,5 +1,5 @@
-import ERROR_CODE from '../error/errorCode.js';
-import { consoleInput } from '../libararyFeatures/MissionUtilHandler.js';
+import ERROR_CODE from '../../error/errorCode.js';
+import { consoleInput } from '../../libararyFeatures/MissionUtilHandler.js';
 
 export default async function purchaseAmountUI() {
   try {

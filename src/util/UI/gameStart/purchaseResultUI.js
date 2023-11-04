@@ -1,4 +1,4 @@
-import { consolePrint } from '../libararyFeatures/MissionUtilHandler.js';
+import { consolePrint } from '../../libararyFeatures/MissionUtilHandler.js';
 
 export default async function purchaseResaultUI(count, purchaseData) {
   const purchaseCount = count;
