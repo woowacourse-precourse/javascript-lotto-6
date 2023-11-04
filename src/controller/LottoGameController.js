@@ -25,6 +25,14 @@ class LottoGameController {
     }
 
     this.printPurchaseCount();
+
+    const loopCount = this.#moneyInstance.getPurchaseCount();
+    Array.from({ length: loopCount }).forEach(() => {
+      const lotto = new Lotto(
+        this.generateLottoNumbers().sort((a, b) => a - b),
+      );
+      this.lottoTickets.addLotto(lotto.getLottoNumbers());
+    });
   }
 
   async getPurchaseAmount() {
