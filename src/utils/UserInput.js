@@ -7,6 +7,8 @@ class UserInput {
 
     const inputToNumber = parseInt(input, 10);
 
+    InputError.checkNumberError(inputToNumber);
+    InputError.checkNagativeNumberError(inputToNumber);
     InputError.checkAmountInputError(inputToNumber);
 
     return inputToNumber;
