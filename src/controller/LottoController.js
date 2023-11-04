@@ -1,10 +1,13 @@
 import MESSAGES from "../constants/messages";
+import SETTINGS from "../constants/settings";
+import LottoModel from "../model/LottoModel";
 
 class LottoController {
-  constructor(inputView, outputView, lottoModel) {
+  #lottoModel;
+
+  constructor(inputView, outputView) {
     this.inputView = inputView;
     this.outputView = outputView;
-    this.lottoModel = lottoModel;
   }
 
   async play() {
@@ -14,19 +17,19 @@ class LottoController {
   }
 
   async init() {
-    await this.setPriceInfo();
-    const totalCount = this.lottoModel.getTotalCount();
+    await this.setPrice();
+    const count = this.#lottoModel.getCount();
 
-    this.lottoModel.setLottos();
-    const lottosData = this.lottoModel.getLottosData();
+    this.#lottoModel.setLottos();
+    const lottosData = this.#lottoModel.getLottosData();
 
-    this.outputView.printLottos(totalCount, lottosData);
+    this.outputView.printLottos(count, lottosData);
   }
 
-  async setPriceInfo() {
-    const totalPrice = await this.inputView.read(MESSAGES.read.buyPrice);
+  async setPrice() {
+    const input = await this.inputView.read(MESSAGES.read.buyPrice);
     try {
-      this.lottoModel.setPriceInfo(totalPrice);
+      this.#lottoModel = new LottoModel(input);
     } catch ({ message }) {
       this.outputView.print(message);
       await this.setPriceInfo();
@@ -41,7 +44,7 @@ class LottoController {
   async setTargetNumbers() {
     const targetNumbers = await this.inputView.read(MESSAGES.read.targetNumber);
     try {
-      this.lottoModel.setTargetNumbers(targetNumbers.split(","));
+      this.#lottoModel.setTargetNumbers(targetNumbers.split(","));
     } catch ({ message }) {
       this.outputView.print(message);
       await this.setTargetNumbers();
@@ -51,7 +54,7 @@ class LottoController {
   async setBonusNumber() {
     const bonusNumber = this.inputView.read(MESSAGES.read.bonusNumber);
     try {
-      this.lottoModel.setBonusNumber(bonusNumber);
+      this.#lottoModel.setBonusNumber(bonusNumber);
     } catch ({ message }) {
       this.outputView.print(message);
       await this.setBonusNumber();
@@ -59,11 +62,11 @@ class LottoController {
   }
 
   printResult() {
-    this.lottoModel.judgeResult();
-    const result = this.lottoModel.getResult();
+    this.#lottoModel.judgeResult();
+    const result = this.#lottoModel.getResult();
 
-    this.lottoModel.setIncome();
-    const incomeData = this.lottoModel.getIncomeData();
+    this.#lottoModel.setIncome();
+    const incomeData = this.#lottoModel.getIncomeData();
 
     this.outputView.printResult(incomeData, result);
   }

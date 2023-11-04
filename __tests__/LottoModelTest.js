@@ -3,24 +3,18 @@ import SETTINGS from "../src/constants/settings";
 import MESSAGES from "../src/constants/messages";
 
 describe("LottoModel 테스트", () => {
-  let lottoModel;
-
-  beforeEach(() => {
-    lottoModel = new LottoModel();
-  });
-
   describe("로또 구매 금액 설정 및 가져오기", () => {
     test("로또 구매 금액을 설정하고 가져오기", () => {
-      const totalPrice = 14000;
+      const totalPrice = 10000;
+      const lottoModel = new LottoModel(totalPrice);
 
-      lottoModel.setPriceInfo(totalPrice);
-
-      expect(lottoModel.getTotalPrice()).toBe(totalPrice);
+      expect(lottoModel.getPrice()).toBe(totalPrice);
     });
   });
 
   describe("당첨 번호 설정 및 가져오기", () => {
     test("당첨 번호를 설정하고 가져오기", () => {
+      const lottoModel = new LottoModel(10000);
       const targetNumbers = [3, 7, 12, 18, 22, 45];
 
       lottoModel.setTargetNumbers(targetNumbers);
@@ -29,6 +23,7 @@ describe("LottoModel 테스트", () => {
     });
 
     test("중복된 당첨 번호 예외 처리", () => {
+      const lottoModel = new LottoModel(10000);
       const invalidNumbers = [1, 2, 3, 4, 5, 5];
 
       expect(() => lottoModel.validateTargetNumbers(invalidNumbers)).toThrow(
@@ -39,6 +34,7 @@ describe("LottoModel 테스트", () => {
 
   describe("수익 계산 테스트", () => {
     test("수익을 계산할 때 올바른 결과 반환", () => {
+      const lottoModel = new LottoModel(10000);
       lottoModel.result = [0, 5, 3, 2, 1, 0];
       const expectedIncome =
         lottoModel.result[1] * SETTINGS.income.first +
@@ -55,6 +51,7 @@ describe("LottoModel 테스트", () => {
 
   describe("보너스 번호 테스트", () => {
     test("유효한 보너스 번호인 경우 검증 통과", () => {
+      const lottoModel = new LottoModel(10000);
       const number = 42;
       lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35];
 
@@ -62,6 +59,7 @@ describe("LottoModel 테스트", () => {
     });
 
     test("범위를 벗어나는 번호인 경우 예외 처리", () => {
+      const lottoModel = new LottoModel(10000);
       const number = SETTINGS.targetNumber.maximum * 2;
 
       expect(() => lottoModel.validateBonusNumbers(number)).toThrowError(
@@ -70,6 +68,7 @@ describe("LottoModel 테스트", () => {
     });
 
     test("이미 로또 번호에 있는 번호인 경우 예외 처리", () => {
+      const lottoModel = new LottoModel(10000);
       const number = 25;
       lottoModel.targetNumbers = [10, 15, 20, 25, 30, 35];
 
@@ -80,6 +79,7 @@ describe("LottoModel 테스트", () => {
   });
 
   describe("로또 번호 테스트", () => {
+    const lottoModel = new LottoModel(10000);
     test("사용자가 구매한 임의 로또 번호와 실제 로또 번호 일치 개수 판정", () => {
       const userNumbers = [1, 2, 3, 4, 5, 6];
       lottoModel.targetNumbers = [1, 2, 3, 4, 5, 6];

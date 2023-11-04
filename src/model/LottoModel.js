@@ -4,9 +4,14 @@ import Lotto from "../Lotto";
 import { Random } from "@woowacourse/mission-utils";
 
 class LottoModel {
-  constructor() {
-    this.totalPrice = null;
-    this.totalCount = null;
+  #price;
+  #count;
+
+  constructor(price) {
+    this.validatePrice(price);
+    this.#price = price;
+    this.#count = parseInt(price / SETTINGS.priceUnit);
+
     this.targetNumbers = [];
     this.lottos = [];
     this.bonusNumber = null;
@@ -14,24 +19,18 @@ class LottoModel {
     this.income = null;
   }
 
-  setPriceInfo(totalPrice) {
-    this.validateTotalPrice(totalPrice);
-    this.totalPrice = totalPrice;
-    this.totalCount = parseInt(totalPrice / SETTINGS.priceUnit);
-  }
-
-  validateTotalPrice(price) {
+  validatePrice(price) {
     if (Number.isNaN(price)) throw new Error(MESSAGES.error.notNumber);
     if (price % SETTINGS.priceUnit)
       throw new Error(MESSAGES.error.invalidPricUnit);
   }
 
-  getTotalPrice() {
-    return this.totalPrice;
+  getPrice() {
+    return this.#price;
   }
 
-  getTotalCount() {
-    return this.totalCount;
+  getCount() {
+    return this.#count;
   }
 
   setTargetNumbers(targetNumbers) {
@@ -66,7 +65,7 @@ class LottoModel {
 
   setLottos() {
     const { minimum, maximum } = SETTINGS.targetNumber;
-    for (let count = 0; count < this.totalCount; count++) {
+    for (let count = 0; count < this.#count; count++) {
       const numbers = Random.pickUniqueNumbersInRange(count, minimum, maximum);
       numbers.sort((a, b) => a - b);
       this.lottos.push(new Lotto(numbers));
@@ -145,7 +144,7 @@ class LottoModel {
   }
 
   getIncomeData() {
-    return ((this.income / this.totalPrice) * 100).toLocaleString();
+    return ((this.income / this.#price) * 100).toLocaleString();
   }
 }
 
