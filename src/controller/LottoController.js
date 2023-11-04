@@ -1,6 +1,7 @@
 import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 import Validator from "../model/Validator.js";
+import Calculate from "../model/Calculate.js";
 import { Console } from "@woowacourse/mission-utils";
 
 export default class LottoController {
@@ -15,8 +16,7 @@ export default class LottoController {
   async initializeLottoAmount() {
     const moneyInput = await InputView.moneyInput();
     this.#validate(moneyInput, Validator.moneyCheck);
-    this.#countLotto(moneyInput);
-    // Console.print(this.#lottoAmount);
+    this.#lottoAmount = Calculate.countLottoAmounnt(moneyInput);
   }
 
   // 유효성 검사로 가는 함수
@@ -27,10 +27,5 @@ export default class LottoController {
       OutputView.printError(error);
       this.initializeLottoAmount();
     }
-  }
-
-  // 로또 개수 count
-  #countLotto(moneyInput) {
-    this.#lottoAmount = parseInt(Number(moneyInput) / 1000);
   }
 }
