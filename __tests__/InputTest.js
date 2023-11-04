@@ -137,7 +137,6 @@ describe("입력 예외 처리", () => {
     const inputValidator = new InputValidator();
 
     inputs.forEach((input) => {
-      console.log(input);
       expect(() => {
         inputValidator.winningNumbersValidator(input);
       }).toThrow("[ERROR]");
