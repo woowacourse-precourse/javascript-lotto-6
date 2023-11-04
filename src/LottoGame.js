@@ -7,11 +7,13 @@ import WinLotto from './WinLotto.js';
 class LottoGame {
   #buyer;
   #winLotto;
+  #bonusLotto;
 
   async start() {
     await this.setBuyer();
     this.printPurchaseInfo();
     await this.setWinLotto();
+    await this.setBonusLotto();
   }
 
   async setBuyer() {
@@ -23,7 +25,13 @@ class LottoGame {
     const winLotto = await Input.getWinLotto();
     const parsedWinLotto = Util.splitStringToNumberArray(winLotto);
 
-    this.#winLotto = new WinLotto(parsedWinLotto).getLotto();
+    this.#winLotto = new WinLotto(parsedWinLotto);
+  }
+
+  async setBonusLotto() {
+    const bonusLotto = await Input.getBonusLotto();
+    this.#winLotto.setBonusLotto(Number(bonusLotto));
+    this.#bonusLotto = this.#winLotto.getBonusLotto();
   }
 
   printPurchaseInfo() {

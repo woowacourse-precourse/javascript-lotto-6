@@ -1,6 +1,7 @@
 export const PROMPT = Object.freeze({
   lottoBudget: '구입금액을 입력해 주세요.\n',
   winLotto: '당첨 번호를 입력해 주세요.\n',
+  bonusLotto: '보너스 번호를 입력해 주세요.\n',
 });
 
 export const LOTTO = Object.freeze({
@@ -18,6 +19,7 @@ export const ERROR = Object.freeze({
   range: `${ERROR_PREFIX} 로또 번호는 1부터 45까지만 입력가능합니다.`,
   numberOnly: `${ERROR_PREFIX} 숫자만 입력하세요.`,
   duplicated: `${ERROR_PREFIX} 중복을 허용하지 않습니다.`,
+  duplicatedWithWinLotto : `${ERROR_PREFIX} 보너스 번호는 당첨 번호와 중복을 허용하지 않습니다.`,
 });
 
 export const MESSAGE = Object.freeze({
