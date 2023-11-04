@@ -17,5 +17,13 @@ describe("로또게임 클래스 테스트", () => {
   test("로또 번호 사이에 공백이 있는 경우 공백 제거", () => {
     expect(LottoGame.winningNumberToWinningNumberArray('1,2,3,4, 5,6')).toEqual([1,2,3,4,5,6]);
   });
+
+  test('보너스 번호에 1~45 정수 이외의 문자인 경우 예외 발생', () => {
+    expect(() => LottoGame.validatebonusNumber('0.8', [1,2,3,4,5,6])).toThrow('[ERROR]');
+  });
+
+  test('보너스 번호가 로또 번호에 중복 시 예외 발생', () => {
+    expect(() => LottoGame.validatebonusNumber('1', [1,2,3,4,5,6])).toThrow('[ERROR]');
+  });
   // 아래에 추가 테스트 작성 가능
 });
