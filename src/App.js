@@ -9,8 +9,12 @@ class App {
 
   async play() {
     const userInput = await this.#view.readPurchaseAmount();
+    const winningNumber = await this.#view.readWinningNumber();
+    const bonusNumber = await this.#view.readBonusNumber();
 
     this.#view.print(userInput);
+    this.#view.print(winningNumber);
+    this.#view.print(bonusNumber);
   }
 }
 
