@@ -1,5 +1,5 @@
 import { CONSTANT } from "./Constant.js";
-import { Data } from "./Model.js";
+import { Random } from "@woowacourse/mission-utils";
 
 class Controller {
     // 가격을 로또 갯수로 반환
@@ -30,12 +30,21 @@ class Controller {
 
     // 결과가 로또 상금과 관련이 있는 숫자인지 bool반환
     static isAllowedResult(result) {
-        return Object.keys(Data.lottoResult).includes(result);
+        return Object.keys(CONSTANT.WINNER_PRICE).includes(result);
     }
 
     // 6개의 랜덤 숫자 배열 반환
     static generateRandomLottoNum() {
         return Random.pickUniqueNumbersInRange(1, 45, 6);
+    }
+
+    // 수익률 계산
+    static rateOfReturnCal(userPurchasePrice, lottoResult) {
+        let price = 0;
+        Object.entries(lottoResult).forEach((element) => {
+            price += CONSTANT.WINNER_PRICE[element[0]] * element[1];
+        });
+        return (price / userPurchasePrice).toFixed(1);
     }
 }
 

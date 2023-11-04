@@ -11,13 +11,13 @@ class Lotto {
 
     // 예외처리
     #validate(numbers) {
-        if (
-            numbers.length !== 6 ||
-            isNaN(element) ||
-            !(element >= 1 && element <= 45)
-        ) {
+        if (numbers.length !== 6) {
             throw new Error(CONSTANT.ERROR_LOTTO_NUM_INPUT);
         }
+        numbers.forEach((element) => {
+            if (isNaN(element) || !(element >= 1 && element <= 45))
+                throw new Error(CONSTANT.ERROR_LOTTO_NUM_INPUT);
+        });
     }
 
     // TODO: 추가 기능 구현
