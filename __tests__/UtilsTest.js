@@ -18,6 +18,6 @@ describe("Utils 클래스 테스트", () => {
   });
 
   test("숫자를 입력하면 원 단위로 표시해준다. 세 자리마다 쉼표로 표시해준다.", () => {
-    expect(Utils.convertKoreaWonUnit(1_000_000)).toBe("1,000,000");
+    expect(Utils.convertToLocaleUnit(1_000_000, "ko-KR")).toBe("1,000,000");
   });
 });

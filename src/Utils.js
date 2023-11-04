@@ -16,8 +16,8 @@ class Utils {
       .map((value) => parseInt(value, 10));
   }
 
-  static convertKoreaWonUnit(number) {
-    return number.toLocaleString("ko-KR");
+  static convertToLocaleUnit(number, locale) {
+    return number.toLocaleString(locale);
   }
 }
 
