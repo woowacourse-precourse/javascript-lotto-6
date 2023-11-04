@@ -8,7 +8,9 @@ const OutputView = {
   },
 
   outputUserLotto(userLotto) {
-    userLotto.forEach((lotto) => Console.print(lotto));
+    userLotto.forEach((lotto) => {
+      Console.print(OUTPUT_MESSAGE.userLotto(lotto));
+    });
   },
 
   outputMessage(message) {

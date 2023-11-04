@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
-import CONSTANTS from '../../../Util/Constants.js';
-import { ERROR_MESSAGE } from '../../../Util/Message.js';
+import CONSTANTS from './Util/Constants.js';
+import { ERROR_MESSAGE } from './Util/Message.js';
 
 class Lotto {
   #numbers;
@@ -13,7 +13,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== CONSTANTS.lottoCount) {
-      throw new Error(ERROR_MESSAGE.isNotLength);
+      throw ERROR_MESSAGE.isNotLength;
     }
     this.#validateIsAllNumber(numbers);
     this.#validateNumberRange(numbers);
@@ -22,7 +22,7 @@ class Lotto {
 
   #validateIsAllNumber(numbers) {
     numbers.forEach((lottoNumber) => {
-      if (Number.isNaN(Number(lottoNumber))) throw new Error(ERROR_MESSAGE.isChar);
+      if (Number.isNaN(Number(lottoNumber))) throw ERROR_MESSAGE.isChar;
     });
   }
 
@@ -30,12 +30,12 @@ class Lotto {
     const filterNumbers = numbers.filter(
       (lottoNumber) => CONSTANTS.lottoMin <= lottoNumber && lottoNumber <= CONSTANTS.lottoMax,
     );
-    if (filterNumbers.length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.isNotInRange);
+    if (filterNumbers.length !== CONSTANTS.lottoCount) throw ERROR_MESSAGE.isNotInRange;
   }
 
   #validateDuplicateNumber(numbers) {
     const numberSet = new Set(numbers);
-    if ([...numberSet].length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.isDuplicate);
+    if ([...numberSet].length !== CONSTANTS.lottoCount) throw ERROR_MESSAGE.isDuplicate;
   }
 
   get numbers() {

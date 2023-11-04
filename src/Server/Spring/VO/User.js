@@ -2,7 +2,7 @@
 /* eslint-disable import/extensions */
 import { ERROR_MESSAGE } from '../../../Util/Message.js';
 import CONSTANTS from '../../../Util/Constants.js';
-import Lotto from './Lotto.js';
+import Lotto from '../../../Lotto.js';
 
 class User {
   #purchaseAmount;
@@ -20,9 +20,9 @@ class User {
 
   #validate(paramPurchaseAmount) {
     const purchaseAmount = paramPurchaseAmount.trim();
-    if (purchaseAmount === '') throw new Error(ERROR_MESSAGE.isBlank);
-    if (Number.isNaN(Number(purchaseAmount))) throw new Error(ERROR_MESSAGE.isChar);
-    if (Number(purchaseAmount) % 1000 !== 0) throw new Error(ERROR_MESSAGE.isNotThousandDivide);
+    if (purchaseAmount === '') throw ERROR_MESSAGE.isBlank;
+    if (Number.isNaN(Number(purchaseAmount))) throw ERROR_MESSAGE.isChar;
+    if (Number(purchaseAmount) % 1000 !== 0) throw ERROR_MESSAGE.isNotThousandDivide;
   }
 
   #purchaseLotto(generateLottoNumber) {
