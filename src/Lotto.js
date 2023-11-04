@@ -1,9 +1,9 @@
 class Lotto {
 	constructor() {
-		this.numbers;
-		this.bonus;
-		this.amount;
-		this.randomArraySet;
+		this.numbers; //number[]
+		this.bonus; //number
+		this.amount; //number
+		this.randomArraySet = new Set();
 	}
 }
 
