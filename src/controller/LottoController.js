@@ -6,21 +6,21 @@ import Sort from "../utils/calc/Sort.js";
 import { STATIC_NUMBER } from "../static/Static.js";
 class LottoController {
   #lottos = [];
-  #quantity;
+  #purchaseQty;
 
   async playGame() {
-    await this.askPurchasePrice();
+    await this.setPurchaseQty();
     this.showPurchaseQuantity();
     this.setLottos();
     this.showLottos();
   }
 
-  async askPurchasePrice() {
-    this.#quantity = await InputView.readPurchasePrice();
+  async setPurchaseQty() {
+    this.#purchaseQty = await InputView.readPurchasePrice();
   }
 
   showPurchaseQuantity() {
-    OutputView.printPurchaseQuantity(this.#quantity);
+    OutputView.printPurchaseQuantity(this.#purchaseQty);
   }
 
   makeRandomNumArr() {
@@ -35,7 +35,7 @@ class LottoController {
   }
 
   setLottos() {
-    for (let i = 0; i < this.#quantity; i++) {
+    for (let i = 0; i < this.#purchaseQty; i++) {
       const candidateNumArr = this.makeRandomNumArr();
       this.#lottos.push(candidateNumArr);
     }
