@@ -1,6 +1,6 @@
-import LottoGameError from "./Error";
-import { LOTTO_ERROR_MSG } from "./constants/error";
-import { LOTTO_CONSTANT } from "./constants/game";
+import LottoGameError from "../Error";
+import { LOTTO_ERROR_MSG } from "../constants/error";
+import { LOTTO_CONSTANT } from "../constants/game";
 
 class Lotto {
   #numbers;
