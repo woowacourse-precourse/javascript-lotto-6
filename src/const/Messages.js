@@ -23,4 +23,5 @@ export const ERROR = {
   HOW_MANY_SIX: "[ERROR] 로또 번호는 6개여야 합니다.",
   HOW_MANY_ONE: "[ERROR] 보너스 숫자는 1개여야 합니다.",
   THOUSAND_UNIT: "[ERROR] 구입금액은 천 원 단위여야 합니다.",
+  EMPTY_VALUE: "[ERROR] 로또 번호에 빈 값이 있습니다.",
 };

@@ -24,6 +24,10 @@ class Lotto {
     if (!numbers.every((n) => n >= 1 && n <= 45)) {
       throw new Error(ERROR.NUMBER_RANGE);
     }
+
+    if (numbers.some((n) => !n)) {
+      throw new Error(ERROR.EMPTY_VALUE);
+    }
   }
 
   // TODO: 추가 기능 구현
