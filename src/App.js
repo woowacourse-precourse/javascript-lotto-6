@@ -1,8 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
 import LottoGenerator from "./LottoGenerator.js";
-import Lotto from "./Lotto.js";
+import LottoValidator from "./utils/LottoValidator.js";
 
 const lottoTickets = new LottoGenerator();
+const lottoValidator = new LottoValidator();
 
 class App {
   async getWinningNumbersFromUserInput() {
@@ -14,13 +15,9 @@ class App {
       .split(",")
       .map((number) => parseInt(number.trim(), 10));
 
-    this.validateWinningNumbers(winningNumbers);
+    lottoValidator.validateWinningNumbers(winningNumbers);
 
     return winningNumbers;
-  }
-
-  validateWinningNumbers(winningNumbers) {
-    new Lotto(winningNumbers); // 생성 과정에서 유효성 검사가 수행됨
   }
 
   async getBonusNumbersFromUserInput() {
@@ -34,8 +31,9 @@ class App {
   async play() {
     try {
       await lottoTickets.getLottoTickets();
-      await this.getWinningNumbersFromUserInput();
-      await this.getBonusNumbersFromUserInput();
+      const winningNumbers = await this.getWinningNumbersFromUserInput();
+      const bonusNumber = await this.getBonusNumbersFromUserInput();
+      lottoValidator.validateBonusNumbers(bonusNumber, winningNumbers);
     } catch (error) {
       throw new Error(error.message);
     }

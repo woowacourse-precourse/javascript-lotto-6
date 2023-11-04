@@ -1,9 +1,12 @@
-import { LOTTO_NUMBER_END, LOTTO_NUMBER_START } from "./utils/lottoConstants";
+import {
+  LOTTO_NUMBER_END,
+  LOTTO_NUMBER_START,
+} from "./utils/lottoConstants.js";
 import {
   isArrayAllIntegers,
   isArrayOfNumbersInRange,
   isArrayOfUniqueNumbers,
-} from "./utils/numberArrayUtils";
+} from "./utils/numberArrayUtils.js";
 
 class Lotto {
   #numbers;
