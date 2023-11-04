@@ -29,6 +29,7 @@ class LottoController {
     await this.setWinningNums();
     await this.setBonusNum();
     this.checkLottoList();
+    this.showResult();
   }
 
   async setPurchaseQty() {
@@ -66,7 +67,7 @@ class LottoController {
 
   async setWinningNums() {
     const winningNumsString = await InputView.readWinningNums();
-    const winningNumsArr = winningNumsString.split(SEPARATOR.lottoNumSeparator);
+    const winningNumsArr = winningNumsString.split(SEPARATOR.lottoNum);
     this.#winningNums = winningNumsArr.map((winningNum) => Number(winningNum));
   }
 
@@ -87,6 +88,10 @@ class LottoController {
 
   setWinningStatistic(result) {
     this.#winningStatistic[result] += 1;
+  }
+
+  showResult() {
+    OutputView.printResult(this.#winningStatistic);
   }
 }
 
