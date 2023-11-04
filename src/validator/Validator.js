@@ -15,6 +15,12 @@ const Validator = {
     this.checkHasDuplicate(lotto);
   },
 
+  validateBonusNumber(bonusNumber) {
+    this.checkIsNotNumber(bonusNumber);
+    this.checkIsNotPositive(bonusNumber);
+    this.checkIsOutOfRange(bonusNumber);
+  },
+
   checkIsNotNumber(userInput) {
     if (Number.isNaN(Number(userInput)) || userInput === '') {
       throw new ValidationError(ERROR.isNotNumber);

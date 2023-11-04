@@ -3,6 +3,7 @@ import Validator from '../validator/Validator.js';
 import { CONSTANT, SYMBOL } from '../constants/Constant.js';
 import LottoBundle from '../model/LottoBundle.js';
 import OutputView from '../view/OutputView.js';
+import Lotto from '../model/Lotto.js';
 
 class LottoGame {
   #lottoBundle;
@@ -54,6 +55,7 @@ class LottoGame {
 
   async #getBonusNumberInput() {
     const bonusNumber = await InputView.readBonusNumber();
+    Validator.validateBonusNumber(bonusNumber);
   }
 }
 
