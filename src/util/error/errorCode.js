@@ -10,5 +10,7 @@ export const PURCHASE_ERROR_CODE = {
 
 export const LOTTO_ERROR_CODE = {
   failToCreateLotto: '[ERROR] 로또 번호를 생상하는 도중에 예상치 못한 에러가 발생 했습니다.',
-  valueIsEmpty: '[ERROR] 로또 번호에 빈값이 존재 합니다.',
+  valueIsEmptyOrZero: '[ERROR] 로또 번호에 빈값 또는 0이 존재 합니다.',
+  valueIsOutOfRange: '[ERROR] 로또 번호는 1 ~ 45 까지의 숫자로 이루어져야 합니다.',
+  valueIsNotInteger: '[ERROR] 로또 번호는 정수로만 이루어져야 합니다.',
 };
