@@ -1,14 +1,21 @@
 import InputView from './InputView.js';
 import Purchase from './Purchase.js';
+import OutputView from './OutputView.js';
 
 class Game {
+  #quantity;
+
+  constructor() {
+    this.#quantity;
+  }
+
   purchase() {
     InputView.purchaseLotto(this.handleLottoQuantity);
   }
 
-  handleLottoQuantity = (quantity) => {
-    const AMOUNT = new Purchase(quantity).getAmount();
-    console.log(AMOUNT);
+  handleLottoQuantity = (amount) => {
+    this.#quantity = new Purchase(amount).getAmount();
+    OutputView.printQuantity(this.#quantity);
   };
 }
 

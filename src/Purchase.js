@@ -25,7 +25,7 @@ class Purchase {
   }
 
   getAmount() {
-    return this.#amount;
+    return this.#amount / 1000;
   }
 }
 
