@@ -1,4 +1,8 @@
-export const MESSAGE = Object.freeze({});
+export const MESSAGE = Object.freeze({
+  ERROR_PREFIX: '[ERROR] ',
+  INVALID_NUMBER_TYPE: '로또 번호는 1 이상의 정수만 입력해 주세요.',
+  INVALID_NUMBER_RANGE: '유효한 범위 내에서 로또 번호를 입력해 주세요.',
+});
 
 export const OPTION = Object.freeze({
   /** 로또 1 게임 가격 */
