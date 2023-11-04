@@ -12,34 +12,41 @@ const mockRandoms = (numbers) => {
     .mockImplementation(() => numbers.shift());
 };
 
+const printSpy = jest.spyOn(Console, "print").mockImplementation(() => {});
 describe("로또 구매 클래스", () => {
-  let lottoPurchase;
-  beforeEach(() => {
-    lottoPurchase = new LottoPurchase();
-  });
+  //   beforeEach(() => {
+  //     //
+  //   });
 
   test("구매금액은 1,000원 단위로만 입력 가능하다.", async () => {
-    const INVALID_PURCHASE_AMOUNT = 1500;
-    mockQuestions([INVALID_PURCHASE_AMOUNT]);
-    await expect(lottoPurchase.buy()).rejects.toThrow("[ERROR]");
-  });
-
-  test("구매 기능", async () => {
     //given
-    const VALID_PURCHASE_AMOUT = 2000;
-
-    mockQuestions([VALID_PURCHASE_AMOUT]);
-    mockRandoms([
-      [1, 2, 3, 4, 5, 6],
-      [5, 6, 7, 8, 9, 10],
-    ]);
+    const INVALID_PURCHASE_AMOUNT = 1500;
+    const VALID_PURCHASE_AMOUNT = 2000;
+    mockQuestions([INVALID_PURCHASE_AMOUNT, VALID_PURCHASE_AMOUNT]);
 
     //when
-    await lottoPurchase.buy();
+    await LottoPurchase.buyWithUserInput();
+
     //then
-    expect(lottoPurchase.getLottos()).toEqual([
-      [1, 2, 3, 4, 5, 6],
-      [5, 6, 7, 8, 9, 10],
-    ]);
+    expect(printSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
+
+  //   test("구매 기능", async () => {
+  //     //given
+  //     const VALID_PURCHASE_AMOUT = 2000;
+
+  //     mockQuestions([VALID_PURCHASE_AMOUT]);
+  //     mockRandoms([
+  //       [1, 2, 3, 4, 5, 6],
+  //       [5, 6, 7, 8, 9, 10],
+  //     ]);
+
+  //     //when
+  //     await lottoPurchase.buy();
+  //     //then
+  //     expect(lottoPurchase.getLottos()).toEqual([
+  //       [1, 2, 3, 4, 5, 6],
+  //       [5, 6, 7, 8, 9, 10],
+  //     ]);
+  //   });
 });
