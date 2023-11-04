@@ -1,4 +1,4 @@
-import { CONSTANT } from "./Model.js";
+import { CONSTANT } from "./Constant.js";
 
 class Controller {
     static priceToAmount(price) {
@@ -13,6 +13,16 @@ class Controller {
     static lottoNumToArray(lottoNumStr) {
         const LOTTO_NUM_ARRAY = lottoNumStr.trim().split(",").map(Number);
         return LOTTO_NUM_ARRAY;
+    }
+
+    static compareLottoNum(userLotto, winningLotto, bonusNum) {
+        let result = 0;
+        winningLotto.forEach((element) => {
+            if (userLotto.includes(element)) result += 1;
+        });
+        if (result == 5 && userLotto.includes(bonusNum))
+            result = "" + result + "b";
+        return result;
     }
 }
 

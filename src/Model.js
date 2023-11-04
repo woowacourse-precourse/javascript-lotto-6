@@ -1,7 +1,7 @@
 export const Data = {
     userPurchasePrice: 0,
-    userLotto: [],
+    userLottoArray: [],
     winningLotto: null,
     bonusNum: 0,
-    lottoResult: {},
+    lottoResult: { 3: 0, 4: 0, 5: 0, "5b": 123, 6: 0 },
 };
