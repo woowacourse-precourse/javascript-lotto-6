@@ -4,12 +4,14 @@ import {
   GAME_WINNER,
   INPUT_MESSAGES,
   PRINT_MESSAGES,
-} from '../constant/constants.js';
+} from '../constant/Constants.js';
 import {
   checkPurchasingMoney,
   checkBonusNumber,
+  checkBonusDuplicated,
   checkWinningNumbers,
 } from './Validation.js';
+import Lotto from '../Lotto.js';
 
 async function getInputPurchasingMoney() {
   let userInput;
@@ -18,31 +20,34 @@ async function getInputPurchasingMoney() {
     checkPurchasingMoney(userInput);
   } catch (error) {
     Console.print(error.message);
-    await getInputPurchasingMoney();
+    userInput = await getInputPurchasingMoney();
   }
   return userInput;
 }
 
 async function getInputWinningNumbers() {
   let userInput;
+  let lotto;
   try {
     userInput = await Console.readLineAsync(INPUT_MESSAGES.lottoWinningNumbers);
     checkWinningNumbers(userInput);
+    lotto = new Lotto(userInput.split(','));
   } catch (error) {
     Console.print(error.message);
-    await getInputWinningNumbers();
+    userInput = await getInputWinningNumbers();
   }
-  return userInput;
+  return lotto.getNumbers().toString();
 }
 
-async function getInputBonusNumber() {
+async function getInputBonusNumber(winningNumbers) {
   let userInput;
   try {
     userInput = await Console.readLineAsync(INPUT_MESSAGES.lottoBonusNumber);
     checkBonusNumber(userInput);
+    checkBonusDuplicated(userInput, winningNumbers);
   } catch (error) {
     Console.print(error.message);
-    await getInputBonusNumber();
+    userInput = await getInputBonusNumber(winningNumbers);
   }
   return userInput;
 }

@@ -3,7 +3,7 @@ const GAME_RULE_NUMBER = {
   max: 45,
   length: 6,
   price: 1000,
-  winningNumbersLength: 6,
+  lottoLength: 6,
   bonusNumberLength: 1,
 };
 
@@ -47,20 +47,25 @@ const INPUT_MESSAGES = {
   lottoBonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 };
 
+const SYMBOLS = {
+  sort: ',',
+};
+
 const ERROR_MESSAGES = {
   divisibleByLottoPrice: `[ERROR] 로또 구매 금액은 ${GAME_RULE_NUMBER.price}원 단위만 가능합니다.`,
   inputMoneyType: '[ERROR] 구매 금액은 숫자여야 합니다.',
   inputMoneyMinimun: `[ERROR] 로또 구매 금액은 최소 ${GAME_RULE_NUMBER.price}이상이어야 합니다.`,
-  winningSplit: '[ERROR] 당첨 번호는 반드시 쉼표(,)로 구분되어야 합니다.',
-  winningType: '[ERROR] 당첨 번호는 반드시 숫자 혹은 정수여야 합니다.',
-  winningRange: `[ERROR] 당첨 번호는 반드시 ${GAME_RULE_NUMBER.min}~${GAME_RULE_NUMBER.max}여야 합니다.`,
-  winningLength: `[ERROR] 당첨 번호는 반드시 ${GAME_RULE_NUMBER.winningNumbersLength}자리여야 합니다.`,
+  lottoSplit: `[ERROR] 로또 번호는 반드시 쉼표(${SYMBOLS.sort})로 구분되어야 합니다.`,
+  lottoType: '[ERROR] 로또 번호는 반드시 숫자 혹은 정수여야 합니다.',
+  lottoRange: `[ERROR] 로또 번호는 반드시 ${GAME_RULE_NUMBER.min}~${GAME_RULE_NUMBER.max}여야 합니다.`,
+  lottoLength: `[ERROR] 로또 번호는 ${GAME_RULE_NUMBER.lottoLength}개여야 합니다.`,
   bonusDuplicated: '[ERROR] 보너스 번호는 당첨 번호와 중복되면 안됩니다.',
   bonusType: '[ERROR] 보너스 번호는 반드시 숫자 혹은 정수여야 합니다.',
   bonusRange: `[ERROR] 보너스 번호는 반드시 ${GAME_RULE_NUMBER.min}~${GAME_RULE_NUMBER.max}여야 합니다.`,
   bonusLength: `[ERROR] 보너스 번호는 반드시 ${GAME_RULE_NUMBER.bonusNumberLength}자리여야 합니다.`,
   inputBlank: '[ERROR] 입력 값이 없습니다.',
   inputSpace: '[ERROR] 입력 값에 공백이 포함되어 있습니다.',
+  duplicatedNumber: '[ERROR] 로또 번호는 중복되면 안됩니다.',
 };
 
 export {

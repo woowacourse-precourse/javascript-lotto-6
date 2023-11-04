@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { GAME_RULE_NUMBER, RANKING } from '../constant/constants.js';
+import { GAME_RULE_NUMBER, RANKING } from '../constant/Constants.js';
 import {
   getInputBonusNumber,
   getInputPurchasingMoney,
@@ -7,20 +7,40 @@ import {
   printPurchasedAmount,
   printRankingList,
 } from '../util/Utils.js';
+import Lotto from '../Lotto.js';
 
 class LottoCompany {
   async lottoProcess() {
     this.money = await getInputPurchasingMoney();
     this.winningNumbers = await getInputWinningNumbers();
-    this.bonusNumber = await getInputBonusNumber();
-    await this.generateUserLottos();
-    await this.checkWinner();
+    this.bonusNumber = await getInputBonusNumber(this.winningNumbers);
+    this.generateUserLottos();
+    this.checkWinner();
   }
 
   generateUserLottos() {
     const amount = this.money / GAME_RULE_NUMBER.price;
     this.lottos = this.getUserLottoNumbers(amount);
     printPurchasedAmount(amount, this.lottos);
+  }
+
+  getUserLottoNumbers(amount) {
+    const userLottoNumbers = [];
+    let lotto;
+    for (let i = 0; i < amount; i += 1) {
+      lotto = new Lotto(this.generateLottoNumber().sort((a, b) => a - b));
+      userLottoNumbers.push(lotto.getNumbers());
+    }
+    return userLottoNumbers;
+  }
+
+  generateLottoNumber() {
+    const lottoNumber = Random.pickUniqueNumbersInRange(
+      GAME_RULE_NUMBER.min,
+      GAME_RULE_NUMBER.max,
+      GAME_RULE_NUMBER.length,
+    );
+    return lottoNumber;
   }
 
   checkWinner() {
@@ -43,22 +63,6 @@ class LottoCompany {
         lotto.filter((number) => this.winningNumbers.match(number)).length,
     );
     return accordList;
-  }
-
-  getUserLottoNumbers(amount) {
-    const userLottoNumbers = [];
-    for (let i = 0; i < amount; i += 1) {
-      userLottoNumbers.push(this.generateLottoNumber().sort((a, b) => a - b));
-    }
-    return userLottoNumbers;
-  }
-
-  generateLottoNumber() {
-    return Random.pickUniqueNumbersInRange(
-      GAME_RULE_NUMBER.min,
-      GAME_RULE_NUMBER.max,
-      GAME_RULE_NUMBER.length,
-    );
   }
 
   getWinningNumbers() {

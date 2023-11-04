@@ -1,19 +1,27 @@
+import { ERROR_MESSAGES } from './constant/Constants.js';
+import { checkLottoNumbers } from './util/Validation.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#checkNumber(numbers);
     this.#numbers = numbers;
   }
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR_MESSAGES.lottoLength);
     }
-    numbers.forEach((number) => {
-      if (numbers.includes(number))
-        throw new Error('[ERROR] 로또 번호는 중복되면 안됩니다.');
-    });
+  }
+
+  #checkNumber(input) {
+    checkLottoNumbers(input);
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 
