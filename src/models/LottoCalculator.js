@@ -12,6 +12,23 @@ class LottoCalculator {
   #bonus;
 
   /**
+   * 추첨 결과 통계로 수익률 구하기
+   * @param {number[]} result
+   * @returns {{prize: number, profit: number}}
+   */
+  static getProfitWithResult(result) {
+    const cost = result.reduce(
+      (sum, value) => sum + value * OPTION.LOTTO_PRICE,
+      0,
+    );
+    const prize = result
+      .slice(1)
+      .reduce((sum, value, rank) => sum + value * OPTION.LOTTO_PRIZE[rank], 0);
+    const profit = Math.round((prize / cost) * 1000) / 10;
+    return { prize, profit };
+  }
+
+  /**
    * 당첨 번호와 보너스 번호 정하기
    * @param {number[]} numbers
    * @param {number} bonus
