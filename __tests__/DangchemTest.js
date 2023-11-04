@@ -5,7 +5,6 @@ import App from '../src/App.js';
 describe('로또 클래스 테스트', () => {
   test('로또 당첨 결과를 확인한다.', () => {
     const app = new App();
-    const num = 6;
     const arrayofLotto = [
       [1, 2, 3, 4, 5, 6],
       [1, 2, 3, 4, 5, 6],
@@ -17,6 +16,8 @@ describe('로또 클래스 테스트', () => {
       winning: [1, 2, 3, 4, 5, 6],
       bonus: 7,
     };
-    expect(app.play(num, arrayofLotto, inputNumbers)).toEqual([2, 2, 0, 1, 0]);
+    const answer = [2, 2, 0, 1, 0];
+    const qusetion = app.test(arrayofLotto, inputNumbers);
+    expect(qusetion).toBe(answer);
   });
 });

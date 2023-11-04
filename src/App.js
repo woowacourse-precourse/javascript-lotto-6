@@ -1,52 +1,72 @@
 /* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import NumOfBuy from './make_lotto_num';
 
 class App {
+  #numOfBuy;
+
+  constructor() {
+    this.#numOfBuy = new NumOfBuy();
+  }
+
   async play() {
-    const numOfBuy = await this.#allOfMoneyfunc();
+    const numOfBuy = this.#numOfBuy.run();
     const arrayofLotto = this.#makeArrayOfLottoNum(numOfBuy);
     const numbers = await this.#allOfInputfunc();
     this.#allofPrizeMoneyCalculfunc(numOfBuy, arrayofLotto, numbers);
   }
 
+  // async play() {
+  //  const numOfBuy = await this.#allOfMoneyfunc();
+  //  const arrayofLotto = this.#makeArrayOfLottoNum(numOfBuy);
+  //  const numbers = await this.#allOfInputfunc();
+  //  this.#allofPrizeMoneyCalculfunc(numOfBuy, arrayofLotto, numbers);
+  // }
+
+  // async test(a, b) {
+  //  const result = this.#calculatePrize(a, b);
+  //  Console.print(result);
+  //  return result;
+  // }
+
   // ------로또구입 함수------
-  async #allOfMoneyfunc() {
-    const inputMoney = await this.#getMoney();
-    this.#validateMoneyIsNum(inputMoney);
-    this.#validateMoneyUnit(inputMoney);
-    const numOfBuy = this.#claculateNumOfBuy(inputMoney);
+  // async #allOfMoneyfunc() {
+  //  const inputMoney = await this.#inputMoney();
+  //  this.#validateMoneyIsNum(inputMoney);
+  //  this.#validateMoneyUnit(inputMoney);
+  //  const numOfBuy = this.#claculateNumOfBuy(inputMoney);
 
-    return numOfBuy; // 숫자형
-  }
+  //  return numOfBuy; // 숫자형
+  // }
 
-  // 로또 구입 금액 입력받기
-  async #getMoney() {
-    const inputMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+  /// / 로또 구입 금액 입력받기
+  // async #inputMoney() {
+  //  const inputMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
-    return Number(inputMoney);
-  }
+  //  return Number(inputMoney);
+  // }
 
-  // 구입금액 유효성 확인
-  #validateMoneyIsNum(inputMoney) {
-    if (Number.isNaN(inputMoney)) {
-      throw new Error(`[ERROR] 구입금액은 숫자만 입력 가능합니다.`);
-    }
-  }
+  /// / 구입금액 유효성 확인
+  // #validateMoneyIsNum(inputMoney) {
+  //  if (Number.isNaN(inputMoney)) {
+  //    throw new Error(`[ERROR] 구입금액은 숫자만 입력 가능합니다.`);
+  //  }
+  // }
 
-  #validateMoneyUnit(inputMoney) {
-    const MONEY_UNIT = 1000;
-    if (inputMoney % MONEY_UNIT !== 0) {
-      throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
-    }
-  }
+  // #validateMoneyUnit(inputMoney) {
+  //  const MONEY_UNIT = 1000;
+  //  if (inputMoney % MONEY_UNIT !== 0) {
+  //    throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
+  //  }
+  // }
 
-  // 로또 구입 갯수 계산
-  #claculateNumOfBuy(inputMoney) {
-    const MONEY_UNIT = 1000;
-    const numOfBuy = inputMoney / MONEY_UNIT;
-    Console.print(`\n${numOfBuy}개를 구매했습니다.`);
-    return numOfBuy;
-  }
+  /// / 로또 구입 갯수 계산
+  // #claculateNumOfBuy(inputMoney) {
+  //  const MONEY_UNIT = 1000;
+  //  const numOfBuy = inputMoney / MONEY_UNIT;
+  //  Console.print(`\n${numOfBuy}개를 구매했습니다.`);
+  //  return numOfBuy;
+  // }
 
   // -------------------------------랜덤 로또생성함수-----
 
