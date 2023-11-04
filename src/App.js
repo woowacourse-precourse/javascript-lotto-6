@@ -16,6 +16,7 @@ async function inputMoney() {
 
 function checkMoney(lottoMoney) {
   if (Number.isNaN(lottoMoney)) throw new Error(ERROR.MONEY_IS_NAN);
+  if (lottoMoney % 1000 != 0) throw new Error(ERROR.MONEY_HAS_REMAINDER);
 }
 
 export default App;
