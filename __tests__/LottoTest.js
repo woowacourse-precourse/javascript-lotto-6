@@ -26,8 +26,9 @@ describe("로또 클래스 테스트", () => {
 
     // when
     const model = new Model();
+    model.makeLotto("1000");
 
     // then
-    expect(model.makeLotto("1000")[0].lottoNumbers).toEqual(LOTTO_RANDOM_NUMBERS.sort((a, b) => a - b));
+    expect(model.getLotties[0].lottoNumbers).toEqual(LOTTO_RANDOM_NUMBERS.sort((a, b) => a - b));
   });
 });
