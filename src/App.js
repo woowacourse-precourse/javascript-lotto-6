@@ -5,18 +5,31 @@ class App {
   async play() {
     // 보유 금액 입력 - 유효한지 확인하는 코드 추가하기
     const userMoney = await Console.readLineAsync(MESSAGE.START);
-    const count = (userMoney / 1000);
-    Console.print(MESSAGE_INPUT(count).COUNT);
+    const randomCount = (userMoney / 1000);
+    Console.print(MESSAGE_INPUT(randomCount).COUNT);
     
-    // 랜덤한 6개 번호를 count 개수만큼 출력
+    // 랜덤한 6개 번호를 randomCount 개수만큼 출력
+    // 동일한 값 나왔을때의 예외처리 테스트 필요
     let userRandomNums = [];
-    for (let i=0; i < count; i++) {
+    let count = 0;
+    
+    while (1) {
       const randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      userRandomNums.push(randomNums);
-      Console.print(randomNums);
-    }
-    // Console.print(userRandomNums)
+      randomNums.sort((a, b) => a - b); // 오름차순 정렬
+      if (!randomNums.includes(userRandomNums)) {
+        userRandomNums.push(randomNums);
+        count++;
+      }
+      if (count === randomCount) {
+        break
+      }
+    };
 
+    for (let i = 0; i < count; i++) {
+      Console.print(userRandomNums[i])
+    }
+
+    
     // 당첨 번호 입력 - 유효한지 확인하는 코드 추가하기
     const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
     
