@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { OUTPUT_MESSAGES } from '../constants/messages.js';
 
 const printLottoNumber = (lottoTicketNumber, lottoBox) => {
   Console.print(OUTPUT_MESSAGES.lottoTicketNumber(lottoTicketNumber));
