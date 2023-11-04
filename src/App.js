@@ -1,3 +1,4 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
 import View from "./View.js";
 import Lotto from "./Lotto.js";
 import LottoTickets from "./LottoTickets.js";
@@ -19,7 +20,7 @@ class App {
     });
     const result = await WinLotto.calculateEarnings(this.lottoTickets);
     const statisticPrint = View.printRewardStatistics(result);
-    console.log(statisticPrint);
+    MissionUtils.Console.print(statisticPrint);
   }
 }
 

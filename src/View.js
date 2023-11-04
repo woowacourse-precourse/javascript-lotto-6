@@ -19,7 +19,7 @@ class View {
 
   static async showTickets(tickets) {
     tickets.forEach((ticket) => {
-      console.log(`[${ticket.join(", ")}]`);
+      MissionUtils.Console.print(`[${ticket.join(", ")}]`);
     });
   }
 
