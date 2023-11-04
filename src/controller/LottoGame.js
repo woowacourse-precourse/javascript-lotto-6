@@ -11,7 +11,7 @@ class LottoGame {
       const amount = await LottoGameInput.purchaseAmount();
       return amount;
     } catch (error) {
-      LottoGameOutput.isNotNumber(error);
+      LottoGameOutput.purchaseAmountError(error);
       const amount = await this.inputPurchaseAmount();
       return amount;
     }

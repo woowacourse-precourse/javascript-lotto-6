@@ -1,7 +1,7 @@
 import ConsoleOutput from '../console/ConsoleOutput.js';
 
 class LottoGameOutput {
-  static isNotNumber(error) {
+  static purchaseAmountError(error) {
     ConsoleOutput.output(error.message);
   }
 }
