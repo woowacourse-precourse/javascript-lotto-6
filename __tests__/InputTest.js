@@ -90,4 +90,18 @@ describe("입력 변환하기", () => {
       expect(result).toEqual(output);
     });
   });
+
+  test("보너스 번호", () => {
+    const inputs = ["1", "45", "17", "7"];
+    const outputs = [1, 45, 17, 7];
+
+    const inputConverter = new InputConverter();
+
+    outputs.forEach((output) => {
+      const input = inputs.shift();
+      const result = inputConverter.bonusNumberConverter(input);
+
+      expect(result).toEqual(output);
+    });
+  });
 });
