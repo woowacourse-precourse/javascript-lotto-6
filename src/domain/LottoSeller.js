@@ -7,10 +7,6 @@ export class LottoSeller {
      * @type {LottoGenerator}
      */
     #lottoGenerator
-    /**
-     * @type {number}
-     */
-    #lottoAmount
 
     /**
      *
@@ -20,7 +16,7 @@ export class LottoSeller {
     constructor(lottoGenerator) {
         this.#lottoGenerator = lottoGenerator;
         this.#validateLottoGenerator(lottoGenerator)
-        this.buyManyLottos(this.#lottoAmount)
+
     }
 
     /**
@@ -44,27 +40,40 @@ export class LottoSeller {
     }
 
     /**
-     * @return {Lottos[]}
+     * @param {Money} money
+     * @return {Lottos}
      * @description 전달받은 lottoAmount 수만큼 로또 구매
+     *
+     * 돈 차감하고 로또까지 만들어준다 -> 추상화가 된 것!
      *
      * lottos로 갈 것이다
      */
-    buyMany() {
-        const amount = (money / 1000);
-        for (let i = 0; i < amount; i++) {
-            // Lottos안에 로또를 하나씩 넣어준다???
-            new Lottos(this.buyLotto())
+    buyMany(money) {
+        /**
+         *
+         * @type {Lotto[]}
+         */
+        const lottos = []
+        //돈 떨어질때까지 0원될때까지 구매해서 lottos에 넣음!! 게터는 프로퍼티라서 함수로 호출x
+        while (!money.isZero) {
+            const lotto = this.#buy(money)
+            lottos.push(lotto)
         }
-        return Lottos
+        return new Lottos(lottos)
     }
+
 
     /**
      *
+     * @param {Money} money
      * @return {Lotto}
-     * @description 로또 1장 구매
+     * @description 로또 1장 구매 = money rorcp soqnfmf Wnr qkRnf tn dlTdma
      */
-    buy() {
-        return new Lotto(this.#lottoGenerator.generate())
+    #buy(money) {
+        //로또 금액만큼 잔액 차감
+        money.subtract(Lotto.PRICE)
+        //새로운 로또 발행해서 넘기기!
+        return this.#lottoGenerator.generate()
     }
 
 }

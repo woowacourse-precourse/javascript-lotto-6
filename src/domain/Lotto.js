@@ -2,10 +2,23 @@ import {LottoDto} from "./dto/LottoDto.js";
 
 export class Lotto {
     /**
-     * @type
-     * @description - 구매한 로또 한장 + 로또 용지에 적힌 번호 저장
+     * 로또 가격이 인상되더라도 상수로 만들었기 때문에
+     * PRICE 한번만 바꾸면 된다!
+     *
+     * 1000이라는 리터럴 그대로 사용하지 않기~
+     *
+     * @type {number}
+     */
+    static PRICE = 1000;
+    /**
+     * @type {number[]}
      */
     #numbers;
+
+    /**
+     * @param {number[]} numbers
+     * @description - 구매한 로또 한장 + 로또 용지에 적힌 번호 저장
+     */
 
     constructor(numbers) {
         this.#validate(numbers);
@@ -18,7 +31,7 @@ export class Lotto {
 
     /**
      *
-     * @param numbers
+     * @param {number[]} numbers
      */
     #validate(numbers) {
         if (numbers.length !== 6) {

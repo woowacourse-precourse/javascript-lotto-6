@@ -1,5 +1,7 @@
 // 사용자 입력값의 타입을 변환하는 컨버터
 
+import {Money} from "../domain/Money.js";
+
 export class InputConverter {
     bonusNumber;
     winningNumbers;
@@ -7,8 +9,8 @@ export class InputConverter {
 
     /**
      *
-     * @param input
-     * @return number
+     * @param {string} input
+     * @return Money
      * @description [구매 금액 변환기]
      *
      * 사용자가 입력한 구매 금액을 `number`로 가져옴
@@ -16,8 +18,8 @@ export class InputConverter {
      * '5000' -> 5000
      */
     convertToMoney(input) {
-        const money = Number(input)
-        return money
+        const amount = Number(input)
+        return new Money(amount)
     }
 
     /**
