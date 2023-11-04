@@ -1,8 +1,12 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from "../src/Lotto.js";
+
 class App {
   async play() {
     const amount = await this.getAmount();
     this.getLottoNumbers(amount);
+
+    await this.getWinningNumbers();
   }
 
   async getAmount() {
@@ -29,6 +33,12 @@ class App {
   printRandomLottoNumbers() {
     const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
     Console.print(randomNumbers);
+  }
+
+  async getWinningNumbers() {
+    const inputString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const numbers = inputString.split(',').map(Number);
+    new Lotto(numbers);
   }
 }
 
