@@ -13,6 +13,6 @@ const MESSAGE_INPUT = (num) => Object.freeze({
   RANK_BONUS: `5개 일치, 보너스 볼 일치 (30,000,000원) - ${num}개`,
   RANK_SIX: `6개 일치 (2,000,000,000원) - ${num}개`,
   RATE: `총 수익률은 ${num}%입니다.`
-})
+});
 
 export { MESSAGE, MESSAGE_INPUT };
