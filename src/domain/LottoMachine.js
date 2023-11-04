@@ -3,6 +3,8 @@ import Lotto from '../Lotto.js';
 import LottoNumber from './LottoNumber.js';
 import { sortAscending } from '../utils/sort.js';
 import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
+import { isIndivisible } from '../utils/validator.js';
+import ApplicationError from '../exceptions/ApplicationError.js';
 
 class LottoMachine {
   /**
@@ -12,7 +14,7 @@ class LottoMachine {
   static LOTTO_PRICE = 1_000;
 
   static ERROR_MESSAGES = Object.freeze({
-    notNumber: ERROR_MESSAGE_GENERATOR.notNumber('구매 금액'),
+    notNumberMoney: ERROR_MESSAGE_GENERATOR.notNumber('구매 금액'),
     indivisible: `${LottoMachine.LOTTO_PRICE.toLocaleString()}으로 나누어 떨어지는 금액을 입력해주세요!`,
   });
 
@@ -29,10 +31,21 @@ class LottoMachine {
    * @returns {Lotto[]}
    */
   buy(money) {
+    this.#validateMoney(money);
+
     const sheets = money / LottoMachine.LOTTO_PRICE;
     const lottos = Array.from({ length: sheets }, () => this.#publish());
 
     return lottos;
+  }
+
+  #validateMoney(money) {
+    if (typeof money !== 'number') {
+      throw new ApplicationError(LottoMachine.ERROR_MESSAGES.notNumberMoney);
+    }
+    if (isIndivisible(LottoMachine.LOTTO_PRICE, money)) {
+      throw new ApplicationError(LottoMachine.ERROR_MESSAGES.indivisible);
+    }
   }
 
   /**
