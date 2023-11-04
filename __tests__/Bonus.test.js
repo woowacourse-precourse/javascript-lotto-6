@@ -4,7 +4,7 @@ import Bonus from "../src/model/Bonus";
 describe("구입 금액 클래스 테스트", () => {
   test("타입이 number가 아니면 예외를 발생한다.", () => {
     expect(() => {
-      new Bonus("1000j");
+      new Bonus("1j");
     }).toThrow(ERROR_CONVENTION);
   });
 
