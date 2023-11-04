@@ -1,3 +1,7 @@
+import { Console } from '@woowacourse/mission-utils';
+import CustomError from './errors/CustomError';
+import { ERROR_MESSAGES } from './constants/messages';
+
 class Lotto {
   #numbers;
 
@@ -7,11 +11,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    if (numbers.length !== 6) throw new CustomError(ERROR_MESSAGES.lottoNumber);
   }
-
+  get numbers() {
+    return this.#numbers;
+  }
   // TODO: 추가 기능 구현
 }
 
