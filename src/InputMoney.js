@@ -1,7 +1,7 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
 
 const INPUT_MONEY = async () => {
-    const MONEY = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.");
+    const MONEY = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
     MONEY_VALIDATE(MONEY);
     return MONEY;
 };
