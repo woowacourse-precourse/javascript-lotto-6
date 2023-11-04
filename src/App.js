@@ -24,6 +24,8 @@ class App {
   async gameProgress() {
     await this.getLottoNumber();
     await this.getLottoBounce();
+    this.checkLottoRank();
+    this.printLottoRank();
   }
 
   async getLottoPrice() {
