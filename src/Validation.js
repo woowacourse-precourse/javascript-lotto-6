@@ -1,12 +1,17 @@
 class Validation {
   static validatePurchaseAmount(purchaseAmount) {
-    if (!Number.isSafeInteger(Number(purchaseAmount))) {
+    const getPurchaseAmount = purchaseAmount.trim();
+    if (!getPurchaseAmount) {
+      throw new Error('[ERROR] 구입 금액을 입력해주세요.');
+    }
+
+    if (!Number.isSafeInteger(Number(getPurchaseAmount))) {
       throw new Error('[ERROR] 숫자를 입력해주세요.');
     }
-    if (purchaseAmount % 1000 !== 0) {
+    if (getPurchaseAmount % 1000 !== 0) {
       throw new Error('[ERROR] 1000원 단위로 입력해주세요.');
     }
-    return purchaseAmount;
+    return getPurchaseAmount;
   }
 
   static validateWinningNumbers(winningNumbers) {
