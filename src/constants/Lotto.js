@@ -17,6 +17,7 @@ export const MESSAGE = Object.freeze({
   INVALID_NUMBER_RANGE: `${OPTION.BALL_NUMBER_RANGE[0]} 이상, ${OPTION.BALL_NUMBER_RANGE[1]} 이하의 로또 번호를 입력해 주세요.`,
   INVALID_NUMBER_COUNT: `로또 번호는 ${OPTION.BALL_COUNT}개입니다.`,
   DUPLICATE_NUMBER: `로또 번호는 ${OPTION.BALL_COUNT}개입니다.`,
+  INVALID_MONEY: '올바른 구입금액을 입력해 주세요.',
 });
 
 export default { MESSAGE, OPTION };

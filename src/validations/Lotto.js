@@ -67,6 +67,16 @@ const Validation = {
     }
     concattedNumber.forEach((number) => Validation.validateLottoNumber(number));
   },
+
+  /**
+   * 구입금액에 대한 유효성 검사
+   * @param {number} money
+   */
+  validateMoney: (money) => {
+    if (!Number.isSafeInteger(money) || money < 0) {
+      throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.INVALID_MONEY}`);
+    }
+  },
 };
 
 export default Validation;
