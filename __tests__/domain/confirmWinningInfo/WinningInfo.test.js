@@ -1,15 +1,15 @@
 /* eslint-disable max-lines-per-function */
-import winningResult from '../../src/domain/confirmWinningInfo/winningResult';
+import winningInfo from '../../../src/domain/confirmWinningInfo/winningInfo.js';
 
 const PRIZES = {
-  '1st': winningResult.constants.prizeInfo['1st'],
-  '2nd': winningResult.constants.prizeInfo['2nd'],
-  '3rd': winningResult.constants.prizeInfo['3rd'],
-  '4th': winningResult.constants.prizeInfo['4th'],
-  '5th': winningResult.constants.prizeInfo['5th'],
+  '1st': winningInfo.constants.prizeInfo['1st'],
+  '2nd': winningInfo.constants.prizeInfo['2nd'],
+  '3rd': winningInfo.constants.prizeInfo['3rd'],
+  '4th': winningInfo.constants.prizeInfo['4th'],
+  '5th': winningInfo.constants.prizeInfo['5th'],
 };
 
-describe('당첨 결과 테스트', () => {
+describe('당첨 정보 테스트', () => {
   test.each([
     {
       input: [
@@ -48,7 +48,7 @@ describe('당첨 결과 테스트', () => {
     '입력 값에 대한 당첨 결과로 총 상금은 $output.prize원 이며, 당첨 정보는 $output.rewardInfo 이다.',
     ({ input, output }) => {
       // given - when
-      const result = winningResult.createWinningResult(input);
+      const result = winningInfo.createWinningInfo(input);
       // then
       expect(result.prize).toBe(output.prize);
       expect(result.rewardInfo).toStrictEqual(output.rewardInfo);

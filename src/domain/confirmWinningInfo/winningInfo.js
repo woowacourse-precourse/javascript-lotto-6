@@ -2,11 +2,11 @@ import { countBy } from '../../utils/array.js';
 import { isEmptyObject } from '../../utils/object.js';
 
 const PRIZE_CATEGORY = Object.freeze({
-  FIRST: '1st',
-  SECOND: '2nd',
-  THIRD: '3rd',
-  FOURTH: '4th',
-  FIFTH: '5th',
+  first: '1st',
+  second: '2nd',
+  third: '3rd',
+  fourth: '4th',
+  fifth: '5th',
 });
 
 const calculatePrize = (prizeInfo, rewardInfo) =>
@@ -16,15 +16,15 @@ const calculatePrize = (prizeInfo, rewardInfo) =>
   );
 
 const createPrizeCategory = ({ matchCount, hasBonusNumber }) => {
-  if (matchCount === 6) return PRIZE_CATEGORY.FIRST;
+  if (matchCount === 6) return PRIZE_CATEGORY.first;
 
-  if (matchCount === 5 && hasBonusNumber) return PRIZE_CATEGORY.SECOND;
+  if (matchCount === 5 && hasBonusNumber) return PRIZE_CATEGORY.second;
 
-  if (matchCount === 5) return PRIZE_CATEGORY.THIRD;
+  if (matchCount === 5) return PRIZE_CATEGORY.third;
 
-  if (matchCount === 4) return PRIZE_CATEGORY.FOURTH;
+  if (matchCount === 4) return PRIZE_CATEGORY.fourth;
 
-  if (matchCount === 3) return PRIZE_CATEGORY.FIFTH;
+  if (matchCount === 3) return PRIZE_CATEGORY.fifth;
 
   return null;
 };
@@ -35,18 +35,18 @@ const createRewardInfo = (lottoMatchingResult) => {
   return countBy(matchedPrizeCategories);
 };
 
-const winningResult = Object.freeze({
+const winningInfo = Object.freeze({
   constants: Object.freeze({
     prizeInfo: Object.freeze({
-      [PRIZE_CATEGORY.FIRST]: 2_000_000_000,
-      [PRIZE_CATEGORY.SECOND]: 30_000_000,
-      [PRIZE_CATEGORY.THIRD]: 1_500_000,
-      [PRIZE_CATEGORY.FOURTH]: 50_000,
-      [PRIZE_CATEGORY.FIFTH]: 5_000,
+      [PRIZE_CATEGORY.first]: 2_000_000_000,
+      [PRIZE_CATEGORY.second]: 30_000_000,
+      [PRIZE_CATEGORY.third]: 1_500_000,
+      [PRIZE_CATEGORY.fourth]: 50_000,
+      [PRIZE_CATEGORY.fifth]: 5_000,
     }),
   }),
 
-  createWinningResult(lottoMatchingResult) {
+  createWinningInfo(lottoMatchingResult) {
     const rewardInfo = createRewardInfo(lottoMatchingResult);
 
     if (isEmptyObject(rewardInfo)) return { rewardInfo: null, prize: 0 };
@@ -57,4 +57,4 @@ const winningResult = Object.freeze({
   },
 });
 
-export default winningResult;
+export default winningInfo;

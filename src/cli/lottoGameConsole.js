@@ -7,7 +7,7 @@ import { validateBonusNumber } from '../validations/bonusNumberValidation.js';
 
 import { SYMBOLS } from '../constants/symbols.js';
 
-import winningResult from '../domain/confirmWinningInfo/winningResult.js';
+import winningInfo from '../domain/confirmWinningInfo/winningInfo.js';
 
 import systemConsole from './systemConsole.js';
 
@@ -62,7 +62,7 @@ const lottoGameConsole = Object.freeze({
       },
 
       rewardInfo(rewardInfo) {
-        const { prizeInfo } = winningResult.constants;
+        const { prizeInfo } = winningInfo.constants;
         return Object.keys(this.prizeDescription)
           .reverse()
           .map(
