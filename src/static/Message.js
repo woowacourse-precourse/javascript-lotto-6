@@ -6,6 +6,7 @@ const MESSAGE = Object.freeze({
   revenuePrefix: "총 수익률은",
   revenueSuffix: " %입니다.\n",
   resultStatic: "\n당첨통계\n---",
+  staticSuffix: "개",
 });
 
 export default MESSAGE;
