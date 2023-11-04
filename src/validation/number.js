@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../constants/error";
+import { ERROR_MESSAGE } from "../constants/error.js";
 
 export const getValidatedNumbers = (numbers) => {
   validateNumbers(numbers);
