@@ -1,4 +1,5 @@
 import Lotto from "../src/Lotto.js";
+import Lottory from "../src/Lottory.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -15,4 +16,10 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("로또 정답과 입력을 비교하여 몇개 맞췄는지 출력", () => {
+    const LOTTO = [1, 2, 3, 4, 5, 6];
+    const ANSWER = [4, 5, 6, 7, 8, 9];
+    const MY_ANSWER = new Lottory(LOTTO, ANSWER);
+    expect(MY_ANSWER.check(LOTTO)).toBe(3);
+  });
 });
