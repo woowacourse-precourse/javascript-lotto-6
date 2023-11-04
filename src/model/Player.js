@@ -10,7 +10,9 @@ class Player {
   constructor(seedMoney) {
     this.#validate(seedMoney);
     this.#seedMoney = seedMoney;
+
     this.#reward = 0;
+
     this.#lottos = [];
   }
 
@@ -41,3 +43,5 @@ class Player {
     this.#reward = reward;
   }
 }
+
+export default Player;
