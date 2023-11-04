@@ -1,4 +1,4 @@
-import ERROR_CODE from '../error/errorCode';
+import ERROR_CODE from '../error/errorCode.js';
 
 export function checkHasDuplicate(numbers) {
   const LottoSet = new Set(numbers);
@@ -12,11 +12,13 @@ export function checkHasDuplicate(numbers) {
 
 export function checkLottoDuplicate(createdLotto, lottoList) {
   let isDuplicated = false;
+
   lottoList.forEach((element) => {
     const elementSet = new Set([...element, ...createdLotto]);
     if (elementSet.size === 6) {
       isDuplicated = true;
     }
   });
+
   return isDuplicated;
 }
