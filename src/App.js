@@ -20,6 +20,7 @@ class App {
 
   async gameStart() {
     await this.getLottoPrice();
+    this.checkLottos();
     this.printLottos();
   }
 
@@ -65,6 +66,18 @@ class App {
     } catch (error) {
       Console.print(error.message);
       await this.getLottoBounce();
+    }
+  }
+
+  checkLottos() {
+    const lottoPrice = this.lottos.getLottoPrice();
+
+    for (let i = 0; i < lottoPrice / 1000; i++) {
+      let lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+
+      lotto = lotto.sort((a, b) => a - b);
+
+      this.lottos.setLottos(lotto);
     }
   }
 
@@ -132,18 +145,13 @@ class App {
   }
 
   printLottos() {
+    const lottos = this.lottos.getLottos();
     const lottoPrice = this.lottos.getLottoPrice();
 
     Console.print(RESULT_MESSAGE.count(lottoPrice / 1000));
 
-    for (let i = 0; i < lottoPrice / 1000; i++) {
-      let lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
-
-      lotto = lotto.sort((a, b) => a - b);
-
-      Console.print(`[${lotto.join(", ")}]`);
-
-      this.lottos.setLottos(lotto);
+    for (let i = 0; i < lottos.length; i++) {
+      Console.print(`[${lottos[i].join(", ")}]`);
     }
   }
 }
