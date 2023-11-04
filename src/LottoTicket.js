@@ -1,9 +1,17 @@
+import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
+
 class LottoTicket {
   #purchaseAmount;
+
+  #totalIssueLotto;
+
+  #lottoList;
 
   constructor(inputValue) {
     this.#validate(inputValue);
     this.#purchaseAmount = inputValue;
+    this.#totalIssueLotto = this.#purchaseAmount / 1000;
+    this.#generate();
   }
 
   #validate(inputValue) {
@@ -18,6 +26,18 @@ class LottoTicket {
       throw new Error('[ERROR] 구매 금액은 1000원 단위여야 합니다.');
     }
     this.#purchaseAmount = valueToNumber;
+  }
+
+  #generate() {
+    const issuedLottoList = [];
+    while (issuedLottoList.length < this.#totalIssueLotto) {
+      issuedLottoList.push(RandomNumberGenerator());
+    }
+    this.#lottoList = issuedLottoList;
+  }
+
+  get getLottoList() {
+    return this.#lottoList;
   }
 }
 

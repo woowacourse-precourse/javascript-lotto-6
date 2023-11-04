@@ -1,8 +1,10 @@
 import InputView from './InputView.js';
-import LottoPurchase from './LottoTicket.js';
+import LottoTicket from './LottoTicket.js';
 import OutputView from './OutputView.js';
 
 class Controller {
+  #lottoTicketList;
+
   async progress() {
     try {
       await this.setLottoTicket();
@@ -14,7 +16,9 @@ class Controller {
 
   async setLottoTicket() {
     const inputLottoPurchaseAmount = await InputView.readLottoPurchaseAmount();
-    this.lottoPurchase = new LottoPurchase(inputLottoPurchaseAmount);
+    this.#lottoTicketList = new LottoTicket(
+      inputLottoPurchaseAmount,
+    ).getLottoList;
   }
 }
 
