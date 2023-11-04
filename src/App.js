@@ -21,6 +21,10 @@ class App {
     const winnigNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputWinnigNum
     );
+
+    const bonusNum = await MissionUtils.Console.readLineAsync(
+      LOTTO_INPUT_MESSAGE.inputBonusNum
+    );
   }
 
   async createLotto(purchaseCost) {
