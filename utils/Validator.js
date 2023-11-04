@@ -2,43 +2,51 @@ import ErrorMessage from '../constants/ErrorMessage.js';
 
 class Validator {
   static validatePrice(price) {
-    if (isNaN(price)) {
-      throw new Error(ErrorMessage.INVALID_INPUT);
-    }
+    Validator.isNumber(price);
     if (price % 1000 !== 0) {
       throw new Error(ErrorMessage.INVALID_PRICE);
     }
   }
 
   static validateWinNum(win) {
-    if (win.length !== 6) {
-      throw new Error(ErrorMessage.INVALID_NUM_COUNT);
-    }
-
-    const set = new Set(win);
-    if (win.length !== set.size) {
-      throw new Error(ErrorMessage.DUPLICATE_NUMBER);
-    }
-
+    Validator.isValidDigit(win);
+    Validator.isDuplicate(win);
     win.map((num) => {
-      if (isNaN(num)) {
-        throw new Error(ErrorMessage.INVALID_INPUT);
-      }
-      if (num < 1 || num > 45) {
-        throw new Error(ErrorMessage.INVALID_RANGE);
-      }
+      Validator.isValidRange(num);
     });
   }
 
   static validateBonusNum(bonus, win) {
-    if (isNaN(bonus)) {
-      throw new Error(ErrorMessage.INVALID_INPUT);
-    }
-    if (bonus < 1 || bonus > 45) {
-      throw new Error(ErrorMessage.INVALID_RANGE);
-    }
+    Validator.isNumber(bonus);
+    Validator.isValidRange(bonus);
     if (win.includes(bonus)) {
       throw new Error(ErrorMessage.DUPLICATE_BONUS_WIN);
+    }
+  }
+
+  // Common Exceptions
+  static isNumber(value) {
+    if (isNaN(value)) {
+      throw new Error(ErrorMessage.INVALID_INPUT);
+    }
+  }
+
+  static isDuplicate(value) {
+    const set = new Set(value);
+    if (value.length !== set.size) {
+      throw new Error(ErrorMessage.DUPLICATE_NUMBER);
+    }
+  }
+
+  static isValidDigit(value) {
+    if (value.length !== 6) {
+      throw new Error(ErrorMessage.INVALID_NUM_COUNT);
+    }
+  }
+
+  static isValidRange(value) {
+    if (value < 1 || value > 45) {
+      throw new Error(ErrorMessage.INVALID_RANGE);
     }
   }
 }

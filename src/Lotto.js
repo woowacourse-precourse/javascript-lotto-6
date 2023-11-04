@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import ErrorMessage from '../constants/ErrorMessage.js';
+import Validator from '../utils/Validator.js';
 
 class Lotto {
   #numbers;
@@ -10,13 +11,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error(ErrorMessage.INVALID_NUM_COUNT);
-    }
-    const set = new Set(numbers);
-    if (numbers.length !== set.size) {
-      throw new Error(ErrorMessage.DUPLICATE_NUMBER);
-    }
+    Validator.isValidDigit(numbers);
+    Validator.isDuplicate(numbers);
   }
 
   getNumbers() {
