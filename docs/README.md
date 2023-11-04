@@ -20,7 +20,7 @@
     - [x] 로또의 발행은 pickUniqueNumbersInRange()을 사용하고, 그 값을 정렬한다.
     - [x] Lotto 클래스를 사용해서 필드값에 넣는다.
 
-- [ ] 구입한 수량을 출력한다. prompt.out(lottoCount());
+- [x] 구입한 수량을 출력한다. prompt.out(lottoCount());
 - [ ] 구입한 로또를 출력한다. prompt.out(#lottos);
 
 - [ ] 당청 번호를 입력 받는다. request.winningNumber 

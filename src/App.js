@@ -1,6 +1,7 @@
 import Request from './request.js';
 import calculate from './calculate.js';
 import lottoMachine from './lottoMachine.js';
+import notice from './notice.js';
 
 class App {
   #money;
@@ -19,6 +20,7 @@ class App {
     this.#money = await Request.money();
     this.#lottoQuantity = calculate.countFrom(this.#money);
     this.#lottos = lottoMachine.make(this.#lottoQuantity);
+    notice.quantity(this.#lottoQuantity);
   }
 }
 
