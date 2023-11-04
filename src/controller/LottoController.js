@@ -4,7 +4,6 @@ import WinningLotto from '../model/WinningLotto.js';
 
 class LottoController {
   #lottos;
-
   #winningLottos;
 
   async playLotto() {
@@ -12,6 +11,7 @@ class LottoController {
     await this.inputWinningLottoNumbers();
     await this.inputBonusLottoNumber();
     this.calculateMatchingNumbers();
+    this.displayLottoMatchResults();
   }
 
   async inputMoney() {
@@ -69,6 +69,27 @@ class LottoController {
       this.#winningLottos.getWinningLottoNumbers(),
       this.#winningLottos.getBonusLottoNumber(),
     );
+  }
+
+  displayLottoMatchResults() {
+    const rankCount = this.#lottos.getRankCount();
+
+    Console.print(this.formatLottoResults(rankCount));
+  }
+
+  formatLottoResults(rankCount) {
+    const rankOrder = ['3', '4', '5', '5+', '6'];
+    const rankDescriptions = {
+      3: '3개 일치 (5,000원)',
+      4: '4개 일치 (50,000원)',
+      5: '5개 일치 (1,500,000원)',
+      '5+': '5개 일치, 보너스 볼 일치 (30,000,000원)',
+      6: '6개 일치 (2,000,000,000원)',
+    };
+
+    return rankOrder
+      .map(rank => `${rankDescriptions[rank]} - ${rankCount[rank] || 0}개`)
+      .join('\n');
   }
 }
 
