@@ -56,7 +56,7 @@ class App {
       "구입 금액을 입력해 주세요."
     );
     if (!/^\d+$/.test(purchaseAmountInput)) {
-      throw new Error("구입 금액을 다시 확인하십시오.");
+      throw new Error("구입 금액은 숫자여야 합니다.");
     }
 
     const purchaseAmount = parseInt(purchaseAmountInput, 10);
@@ -95,19 +95,33 @@ class App {
       "\n당첨 번호를 입력해 주세요."
     );
 
-    const winningNumbers = this.parseNumbers(winningNumbersInput);
+    // 입력된 당첨 번호를 구분자로 분리하고 공백을 제거한 후 숫자로 변환합니다.
+    const winningNumbers = winningNumbersInput
+      .split(",")
+      .map((num) => num.trim())
+      .map(Number); // 문자열을 숫자로 변환
 
+    // 숫자의 개수가 6개인지 확인합니다.
     if (winningNumbers.length !== 6) {
       throw new Error("당첨 번호는 6개여야 합니다.");
+    }
+
+    // 모든 입력값이 숫자인지 확인합니다.
+    if (winningNumbers.some(isNaN)) {
+      throw new Error("당첨 번호는 숫자여야 합니다.");
     }
 
     const bonusNumberInput = await MissionUtils.Console.readLineAsync(
       "보너스 번호를 입력해 주세요."
     );
     const bonusNumber = parseInt(bonusNumberInput, 10);
+
+    // 보너스 번호가 유효한 숫자인지 확인합니다.
     if (isNaN(bonusNumber)) {
       throw new Error("보너스 번호가 올바르지 않습니다.");
     }
+
+    // 보너스 번호가 당첨 번호와 중복되는지 확인합니다.
     if (winningNumbers.includes(bonusNumber)) {
       throw new Error("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
