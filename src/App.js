@@ -84,7 +84,7 @@ class App {
   async #generateBonus() {
     try {
       const answer = await InputView.getBonus();
-      return new Bonus(answer);
+      return new Bonus(answer, this.#winningLotto.getLotto());
     } catch (error) {
       OutputView.printError(error.message);
       return this.#generateBonus();
