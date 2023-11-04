@@ -17,15 +17,17 @@ class Lotto {
       throw new Error(ERROR.duplicated);
     }
 
-    numbers.forEach((number) => {
-      if (number > LOTTO.maxRange || number < LOTTO.minRange) {
-        throw new Error(ERROR.range);
-      }
+    numbers.forEach(this.#validateEachNumber);
+  }
 
-      if (!REGEX.isNumber.test(number)) {
-        throw new Error(ERROR.numberOnly);
-      }
-    });
+  #validateEachNumber(number) {
+    if (number > LOTTO.maxRange || number < LOTTO.minRange) {
+      throw new Error(ERROR.range);
+    }
+
+    if (!REGEX.isNumber.test(number)) {
+      throw new Error(ERROR.numberOnly);
+    }
   }
 
   getLotto() {
