@@ -51,53 +51,80 @@ describe('LottoReward 테스트', () => {
   });
 
   it.each([
-    { requirement: { match: 6, hasBonus: true }, result: 1 },
-    { requirement: { match: 3, hasBonus: true }, result: 1 },
+    { requirement: { match: 6, hasBonus: false } },
+    { requirement: { match: 3, hasBonus: false } },
   ])(
-    '`checkRequirement(requirement)` 호출 시 `requirement`와 같을 시 갯수를 증가한다.',
-    ({ requirement, result }) => {
+    '`checkRequirement(requirement)` 호출 시 보너스가 필요없고 `requirement`와 같을 시 갯수를 증가하고 true를 반환한다.',
+    ({ requirement }) => {
       // given
       const prize = 1_000;
       const reward = LottoReward.of(requirement, 1_000);
 
       // when
-      reward.checkRequirement(requirement);
+      const result = reward.checkRequirement(requirement);
 
       // then
-      expect(reward.getQuantity()).toBe(result);
-      expect(reward.getTotalPrize()).toBe(prize * result);
+      expect(reward.getQuantity()).toBe(1);
+      expect(reward.getTotalPrize()).toBe(prize * 1);
+      expect(result).toBeTruthy();
     },
   );
 
   it.each([
-    {
-      requirement: { match: 6, hasBonus: true },
-      lottoResult: { match: 6, hasBonus: false },
-      result: 0,
-    },
-    {
-      requirement: { match: 3, hasBonus: true },
-      lottoResult: { match: 6, hasBonus: true },
-      result: 0,
-    },
-    {
-      requirement: { match: 3, hasBonus: true },
-      lottoResult: { match: 6, hasBonus: false },
-      result: 0,
-    },
+    { requirement: { match: 6, hasBonus: true } },
+    { requirement: { match: 3, hasBonus: true } },
   ])(
-    '`checkRequirement(requirement)` 호출 시 `requirement`와 같을 시 갯수를 증가한다.',
-    ({ requirement, lottoResult, result }) => {
+    '`checkRequirement(requirement)` 호출 시 보너스가 필요하고 `requirement`와 같을 시 갯수를 증가하고 true를 반환한다.',
+    ({ requirement }) => {
       // given
       const prize = 1_000;
-      const reward = LottoReward.of(requirement, prize);
+      const reward = LottoReward.of(requirement, 1_000);
 
       // when
-      reward.checkRequirement(lottoResult);
+      const result = reward.checkRequirement(requirement);
 
       // then
-      expect(reward.getQuantity()).toBe(result);
-      expect(reward.getTotalPrize()).toBe(prize * result);
+      expect(reward.getQuantity()).toBe(1);
+      expect(reward.getTotalPrize()).toBe(prize * 1);
+      expect(result).toBeTruthy();
+    },
+  );
+
+  it.each([
+    { requirement: { match: 6, hasBonus: true } },
+    { requirement: { match: 3, hasBonus: true } },
+  ])(
+    '`checkRequirement(requirement)` 호출 시 보너스가 필요하고 `requirement.hasBonus`가 false일시 false를 반환한다.',
+    ({ requirement }) => {
+      // given
+      const reward = LottoReward.of(requirement, 1_000);
+
+      // when
+      const result = reward.checkRequirement({ match: 6, hasBonus: false });
+
+      // then
+      expect(reward.getQuantity()).toBe(0);
+      expect(reward.getTotalPrize()).toBe(0);
+      expect(result).toBeFalsy();
+    },
+  );
+
+  it.each([
+    { requirement: { match: 6, hasBonus: false } },
+    { requirement: { match: 3, hasBonus: false } },
+  ])(
+    '`checkRequirement(requirement)` 호출 시 보너스가 필요없고 `requirement.match`가 다르면 false를 반환한다.',
+    ({ requirement }) => {
+      // given
+      const reward = LottoReward.of(requirement, 1_000);
+
+      // when
+      const result = reward.checkRequirement({ match: 2, hasBonus: false });
+
+      // then
+      expect(reward.getQuantity()).toBe(0);
+      expect(reward.getTotalPrize()).toBe(0);
+      expect(result).toBeFalsy();
     },
   );
 });

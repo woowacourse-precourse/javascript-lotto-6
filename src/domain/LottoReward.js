@@ -1,6 +1,6 @@
 import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
 import ApplicationError from '../exceptions/ApplicationError.js';
-import { isEqualObject, isSameKeyList } from '../utils/object.js';
+import { isSameKeyList } from '../utils/object.js';
 
 /**
  * @typedef {object} RewardRequirement
@@ -85,13 +85,21 @@ class LottoReward {
   /**
    * 조건을 비교하여 갯수를 증가시킵니다.
    * @param {RewardRequirement} requirement
-   * @returns {void}
+   * @returns {boolean}
    */
   checkRequirement(requirement) {
     this.#validateRequirement(requirement);
-    if (isEqualObject(requirement, this.#requirement)) {
-      this.#quantity += 1;
+
+    if (this.#requirement.hasBonus && !requirement.hasBonus) {
+      return false;
     }
+
+    if (this.#requirement.match === requirement.match) {
+      this.#quantity += 1;
+      return true;
+    }
+
+    return false;
   }
 
   #validateRequirement(requirement) {

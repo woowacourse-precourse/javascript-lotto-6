@@ -214,7 +214,7 @@
   </tr>
   <tr>
     <td>checkRequirement({ match, bonus })</td>
-    <td>조건을 비교하여 갯수를 증가시킵니다.</td>
+    <td>조건을 비교하여 갯수를 증가시키고 결과를 반환한다.</td>
   </tr>
 </table>
 
@@ -241,7 +241,7 @@
     <th>설명</th>
   </tr>
   <tr>
-    <td>getLottoResult(lottos)</td>
+    <td>getLottosResult(lottos)</td>
     <td>입력받은 로또를 기반으로 결과를 반환합니다.</td>
   </tr>
 </table>
@@ -336,7 +336,7 @@
   - [x] `getRequirement()` 호출 시 경품 조건을 반환한다.
   - [x] `getQuantity()` 호출 시 경품 갯수를 반환한다.
   - [x] `getTotalPrize()` 호출 시 갯수에 비례한 총 금액을 반환한다.
-  - [x] `checkRequirement(requirement)` 호출 시 `requirement`와 조건을 비교하고 갯수를 증가한다.
+  - [x] `checkRequirement(requirement)` 호출 시 `requirement`와 조건을 비교하고 갯수를 증가한 후 결과를 반환합니다.
 
 - [x] LottoReward 예외 처리
 
@@ -346,11 +346,11 @@
 
 - [ ] LottoRewards
 
-  - [ ] `getLottoResult(lottos)` 호출 시 입력받은 로또의 총 결과를 반환한다.
+  - [ ] `getLottosResult(lottos)` 호출 시 입력받은 로또의 총 결과를 반환한다.
 
 - [ ] LottoRewards 예외 처리
 
-  - [ ] `getLottoResult(lottos)` 호출 시 인자로 `Lotto`가 아닌 값이 존재할 시 에러가 발생한다.
+  - [ ] `getLottosResult(lottos)` 호출 시 인자로 `Lotto`가 아닌 값이 존재할 시 에러가 발생한다.
 
 - [ ] Calculator
 
