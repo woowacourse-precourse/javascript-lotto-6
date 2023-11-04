@@ -1,11 +1,11 @@
 import { PURCHASE_ERROR_CODE } from '../error/errorCode.js';
 import { pickSixNumber } from '../libararyFeatures/MissionUtilHandler.js';
-import acendingSortList from '../parse/acendingSortList.js';
+import ascendingSortList from '../parse/ascendingSortList.js';
 
 export default async function createPurchaseData(lottoCount, lottos) {
   try {
     const singleLotto = pickSixNumber();
-    const sortedLotto = acendingSortList(singleLotto);
+    const sortedLotto = ascendingSortList(singleLotto);
     const lottoList = [...lottos];
 
     lottoList.push(sortedLotto);

@@ -1,4 +1,4 @@
-import { consoleInput, consolePrint } from '../../libararyFeatures/MissionUtilHandler';
+import { consoleInput, consolePrint } from '../../libararyFeatures/MissionUtilHandler.js';
 
 export default async function receiveWinningLottoUI() {
   try {
