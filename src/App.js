@@ -1,4 +1,4 @@
-import GameController from "./LottoGame/GameController";
+import GameController from './LottoGame/GameController';
 
 class App {
   constructor() {
