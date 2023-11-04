@@ -1,5 +1,9 @@
 import { Random } from '@woowacourse/mission-utils';
 
+const LOTTO = {
+  price: 1000,
+};
+
 class Utils {
   static getRandomNumbers() {
     const numbersArray = [];
@@ -19,6 +23,11 @@ class Utils {
     const convertNumbers = numbersArray.map((number) => Number(number.trim()));
 
     return convertNumbers;
+  }
+
+  static calculateLottoCount(lottoCost) {
+    const lottoCostToNumber = Number(lottoCost);
+    return lottoCostToNumber / LOTTO.price;
   }
 }
 
