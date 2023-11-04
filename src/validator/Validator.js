@@ -4,7 +4,7 @@ import ValidationError from '../ValidationError.js';
 const Validator = {
   validateAmount(amount) {
     this.checkIsNotNumber(amount);
-    this.checkIsNegative(amount);
+    this.checkIsNotPositive(amount);
     this.checkIsNotInUnit(amount);
   },
 
@@ -27,7 +27,7 @@ const Validator = {
     }
   },
 
-  checkIsNegative(userInput) {
+  checkIsNotPositive(userInput) {
     if (Number(userInput) <= 0) {
       throw new ValidationError(ERROR.isNegative);
     }
