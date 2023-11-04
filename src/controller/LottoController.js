@@ -1,74 +1,56 @@
 import MESSAGES from "../constants/messages";
-import SETTINGS from "../constants/settings";
 import LottoModel from "../model/LottoModel";
+import InputView from "../views/InputView";
+import OutputView from "../views/OutputView";
 
 class LottoController {
+  #inputView = new InputView();
+  #outputView = new OutputView();
   #lottoModel;
 
-  constructor(inputView, outputView) {
-    this.inputView = inputView;
-    this.outputView = outputView;
-  }
-
   async play() {
-    await this.init();
-    await this.setNumbers();
-    this.printResult();
-  }
-
-  async init() {
     await this.setPrice();
-    const count = this.#lottoModel.getCount();
+    const { price, count, lottos } = this.#lottoModel.generateLottos();
+    this.#outputView.printLottos(count, lottos);
 
-    this.#lottoModel.setLottos();
-    const lottosData = this.#lottoModel.getLottosData();
+    await this.setTargetNumbers();
+    await this.setBonusNumber();
+    const result = this.#lottoModel.judgeResult();
 
-    this.outputView.printLottos(count, lottosData);
+    this.#lottoModel.setIncome();
+    const income = this.#lottoModel.getIncome();
+
+    this.#outputView.printResult(income, price, result);
   }
 
   async setPrice() {
-    const input = await this.inputView.read(MESSAGES.read.buyPrice);
+    const input = await this.#inputView.read(MESSAGES.read.buyPrice);
     try {
       this.#lottoModel = new LottoModel(input);
     } catch ({ message }) {
-      this.outputView.print(message);
+      this.#outputView.print(message);
       await this.setPriceInfo();
     }
   }
 
-  async setNumbers() {
-    await this.setTargetNumbers();
-    await this.setBonusNumber();
-  }
-
   async setTargetNumbers() {
-    const targetNumbers = await this.inputView.read(MESSAGES.read.targetNumber);
+    const input = await this.#inputView.read(MESSAGES.read.targetNumber);
     try {
-      this.#lottoModel.setTargetNumbers(targetNumbers.split(","));
+      this.#lottoModel.setTargetNumbers(input.split(","));
     } catch ({ message }) {
-      this.outputView.print(message);
+      this.#outputView.print(message);
       await this.setTargetNumbers();
     }
   }
 
   async setBonusNumber() {
-    const bonusNumber = this.inputView.read(MESSAGES.read.bonusNumber);
+    const input = this.#inputView.read(MESSAGES.read.bonusNumber);
     try {
-      this.#lottoModel.setBonusNumber(bonusNumber);
+      this.#lottoModel.setBonusNumber(input);
     } catch ({ message }) {
-      this.outputView.print(message);
+      this.#outputView.print(message);
       await this.setBonusNumber();
     }
-  }
-
-  printResult() {
-    this.#lottoModel.judgeResult();
-    const result = this.#lottoModel.getResult();
-
-    this.#lottoModel.setIncome();
-    const incomeData = this.#lottoModel.getIncomeData();
-
-    this.outputView.printResult(incomeData, result);
   }
 }
 
