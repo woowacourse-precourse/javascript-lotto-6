@@ -10,6 +10,9 @@ class LottoRewards {
     notLottoInstance: 'lottos에 Lotto가 아닌 인스턴스가 있습니다!',
   });
 
+  /**
+   * 등수별 로또 경품입니다.
+   */
   #prizeTable = [
     // 1등
     LottoReward.of({ match: 6, hasBonus: false }, 2_000_000_000),
@@ -28,6 +31,7 @@ class LottoRewards {
   ];
 
   /**
+   * 경품을 결정할 우승 로또입니다.
    * @type {WinningLotto}
    */
   #winningLotto;
@@ -39,11 +43,17 @@ class LottoRewards {
     this.#winningLotto = winningLotto;
   }
 
+  /**
+   *
+   * @param {WinningLotto} winningLotto
+   * @returns {LottoRewards}
+   */
   static of(winningLotto) {
     return new LottoRewards(winningLotto);
   }
 
   /**
+   * 입력한 로또들의 경품 결과를 반환합니다.
    * @param {Lotto[]} lottos
    * @returns {LottoReward[]}
    */
@@ -63,6 +73,7 @@ class LottoRewards {
   }
 
   /**
+   * 로또에 대한 경품을 확인합니다.
    * @param {Lotto} lotto
    */
   #compareLotto(lotto) {
