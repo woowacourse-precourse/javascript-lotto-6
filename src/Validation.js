@@ -24,6 +24,22 @@ class Validation {
     return numbers;
   }
 
+  static validateBonusNumber(bonusNumber, winningNumbers) {
+    const cleanedBonusNumber = Number(Validation.cleanInput(bonusNumber));
+    if (
+      !cleanedBonusNumber ||
+      !Validation.isSafeInteger(cleanedBonusNumber) ||
+      !Validation.isInRange(cleanedBonusNumber)
+    ) {
+      throw new Error('[ERROR] 1부터 45 사이의 보너스 번호를 입력해주세요.');
+    }
+    if (winningNumbers.includes(cleanedBonusNumber)) {
+      throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복되면 안됩니다.');
+    }
+
+    return cleanedBonusNumber;
+  }
+
   static cleanInput(input) {
     return input.trim();
   }

@@ -6,12 +6,10 @@ class Inputs {
     return this.getPromptedAmount('구입금액을 입력해 주세요.');
   }
 
-  returnWinningNumbers() {
-    return this.getPromptedWinningNumbers('당첨 번호를 입력해 주세요.');
-  }
-
-  returnBonnusNumber() {
-    return this.getPromptedBonusNumber('보너스 번호를 입력해 주세요.');
+  async returnWinningNumbers() {
+    const winningNumbers = await this.getPromptedWinningNumbers('당첨 번호를 입력해 주세요.');
+    const bonusNumber = await this.getPromptedBonusNumber('보너스 번호를 입력해 주세요.', winningNumbers);
+    return { winningNumbers, bonusNumber };
   }
 
   async getPromptedAmount(message) {
@@ -34,13 +32,13 @@ class Inputs {
     }
   }
 
-  async getPromptedBonusNumber(message) {
+  async getPromptedBonusNumber(message, winningNumbers) {
     try {
-      const bonusNumbers = await this.getInput(message);
-      return bonusNumbers;
+      const bonusNumber = await this.getInput(message);
+      return Validation.validateBonusNumber(bonusNumber, winningNumbers);
     } catch (error) {
       Console.print(error.message);
-      return this.getPromptedBonusNumber(message);
+      return this.getPromptedBonusNumber(message, winningNumbers);
     }
   }
 
