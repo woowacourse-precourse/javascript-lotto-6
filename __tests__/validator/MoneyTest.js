@@ -1,4 +1,4 @@
-import MoneyValidator from '../src/validator/Money';
+import MoneyValidator from '../../src/validator/Money';
 
 describe('Money Validator 클래스 테스트', () => {
   describe('구매금액이 숫자인지 테스트', () => {
