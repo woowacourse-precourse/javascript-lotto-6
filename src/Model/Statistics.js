@@ -1,5 +1,3 @@
-import { Console } from '@woowacourse/mission-utils'
-
 class Statistics {
   #winningNumber
   #lottoNumber
@@ -13,8 +11,10 @@ class Statistics {
     this.#bonus = bonus;
     this.#checkArray = [];
     this.#result = [0, 0, 0, 0, 0];
+  }
 
-    // 각 로또에 일치하는 숫자 개수 집계
+  // 각 로또에 당첨 번호와 일치하는 숫자 개수 집계
+  #sameNumberCheck() {
     this.#lottoNumber.forEach(innerArray => {
       const sameNumber = innerArray.filter(element => this.#winningNumber.includes(element));
       this.#checkArray.push(sameNumber.length);
@@ -23,6 +23,8 @@ class Statistics {
 
   // 등수 집계
   #winningRank() {
+    this.#sameNumberCheck();
+    
     for (let i=0; i<this.#checkArray.length; i+=1) {
       if (this.#checkArray[i] === 3) {
         this.#result[0] += 1;
@@ -65,7 +67,6 @@ class Statistics {
     }
 
     const roi = (profit/investment)*100;
-
     return roi.toFixed(1);
   }
 }
