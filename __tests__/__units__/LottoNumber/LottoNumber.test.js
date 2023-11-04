@@ -11,7 +11,6 @@ describe('LottoNumber 테스트', () => {
       const result = lottoNumber.equal(LottoNumber.valueOf(number));
 
       // then
-
       expect(result).toBeTruthy();
     },
   );
@@ -29,7 +28,6 @@ describe('LottoNumber 테스트', () => {
     const result = lottoNumber.equal(LottoNumber.valueOf(otherNumber));
 
     // then
-
     expect(result).toBeFalsy();
   });
 });
