@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO_NUMBER } from '../constants/Constant.js';
+import { LOTTO_NUMBER, RANK } from '../constants/Constant.js';
 import Lotto from './Lotto.js';
 
 class LottoBundle {
@@ -25,6 +25,18 @@ class LottoBundle {
   getTotalLottoNumberString() {
     return this.#lottoList.map((lotto) => lotto.getNumberString()).join('\n');
   }
+
+  getTotalRank(winningLotto, bonusNumber) {
+    const rank = [0, 0, 0, 0, 0];
+
+    this.#lottoList.forEach((lotto) => {
+      const matchingCount = lotto.getMatchingCount(winningLotto, bonusNumber);
+      rank[this.getRankIndex(matchingCount)] += 1;
+    });
+
+    return rank;
+  }
+
   getRankIndex(matchingCount) {
     return Object.values(RANK).reduce(
       (rankIndex, rankItem) => (rankItem.match === matchingCount ? rankItem.index : rankIndex),
