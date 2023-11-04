@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import ERROR from '../constant/error';
+import ERROR from '../constant/error.js';
 
 const validator = {
   validatePrice(price) {
