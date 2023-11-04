@@ -1,7 +1,6 @@
 const MONEY_ERROR = Object.freeze({
   string_error: "[ERROR] 문자가 포함되어 있습니다.",
   space_error: "[ERROR] 공백이 입력되어 있습니다.",
-  point_error: "[ERROR] 소수점이 입력되었습니다.",
   amount_error: "[ERROR] 1000원 단위로 입력해주세요.",
 });
 
