@@ -23,9 +23,9 @@ class Counter {
     this.#lottoTicketNumber = inputAmount / 1000;
   }
   #generateLotto() {
-    const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(LOTTO_CONSTANT.min, LOTTO_CONSTANT.max, LOTTO_CONSTANT.count);
-    lottoNumber.sort((a, b) => a - b);
-    return lottoNumber;
+    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(LOTTO_CONSTANT.min, LOTTO_CONSTANT.max, LOTTO_CONSTANT.count);
+    lottoNumbers.sort((a, b) => a - b);
+    return lottoNumbers;
   }
   get lottoTicketNumber() {
     return this.#lottoTicketNumber;
