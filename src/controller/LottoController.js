@@ -1,4 +1,4 @@
-import MESSAGES from "../constants/messages.js";
+import MESSAGES from "../constants/messages";
 
 class LottoController {
   constructor(inputView, outputView, lottoModel) {
@@ -24,7 +24,7 @@ class LottoController {
   }
 
   async setPriceInfo() {
-    const totalPrice = await this.inputView.read(MESSAGES.buyPrice);
+    const totalPrice = await this.inputView.read(MESSAGES.read.buyPrice);
     try {
       this.lottoModel.setPriceInfo(totalPrice);
     } catch ({ message }) {
@@ -39,7 +39,7 @@ class LottoController {
   }
 
   async setTargetNumbers() {
-    const targetNumbers = await this.inputView.read(MESSAGES.targetNumber);
+    const targetNumbers = await this.inputView.read(MESSAGES.read.targetNumber);
     try {
       this.lottoModel.setTargetNumbers(targetNumbers.split(","));
     } catch ({ message }) {
@@ -49,7 +49,7 @@ class LottoController {
   }
 
   async setBonusNumber() {
-    const bonusNumber = this.inputView.read(MESSAGES.bonusNumber);
+    const bonusNumber = this.inputView.read(MESSAGES.read.bonusNumber);
     try {
       this.lottoModel.setBonusNumber(bonusNumber);
     } catch ({ message }) {

@@ -13,10 +13,12 @@ const MESSAGES = {
     notDuplicateTargetNumbers: "[ERROR] 중복된 숫자 없이 입력해 주세요.",
     invalidRange: "[ERROR] 1-45 범위의 숫자를 입력해 주세요.",
   },
+  read: {
+    buyPrice: "구입금액을 입력해 주세요.\n",
+    targetNumber: "당첨 번호를 입력해 주세요.\n",
+    bonusNumber: "보너스 번호를 입력해 주세요.\n",
+  },
   buy: "구매했습니다.",
-  buyPrice: "구입금액을 입력해 주세요.\n",
-  targetNumber: "당첨 번호를 입력해 주세요.\n",
-  bonusNumber: "보너스 번호를 입력해 주세요.\n",
 };
 
 export default Object.freeze(MESSAGES);
