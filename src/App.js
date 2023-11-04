@@ -26,12 +26,18 @@ class App {
     const winningNumber = MissionUtils.Console.readLineAsync(
       MESSAGE_WINNING_NUMBER
     );
-    const checkedWinningNumber = new Lotto(winningNumber);
+    const lotto = new Lotto(winningNumber);
 
     const bonus = await MissionUtils.Console.readLineAsync(
       MESSAGE_BONUS_NUMBER
     );
-    const bonusNumber = new Bonus(bonus, checkedWinningNumber.get());
+    const bonusNumber = new Bonus(bonus, lotto.get());
+
+    const comparedResult = lotto.compareResult(
+      issuance,
+      bonusNumber.get()
+    );
+
   }
 }
 

@@ -58,6 +58,19 @@ class Lotto {
   get() {
     return this.#numbers;
   }
+
+  compareResult(issuedNumbers, bonusNumber) {
+    const compareResult = [0, 0, 0, 0, 0];
+    issuedNumbers.map((issuedNumber, index) => {
+      compareResult.push(0);
+
+      this.#numbers.map((winningNumber) => {
+        issuedNumber.include(winningNumber) && (compareResult[index] += 1);
+        issuedNumber.include(bonusNumber) && (compareResult[index] += 0.5);
+      });
+    });
+    return compareResult;
+  }
 }
 
 export default Lotto;
