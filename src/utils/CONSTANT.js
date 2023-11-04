@@ -22,7 +22,7 @@ const ERROR_MESSAGE = {
   notInRange: "[ERROR] 1 ~ 45 사이의 숫자를 입력해야 합니다.",
 };
 
-const RANK = [
+const RANKS = [
   {
     rank: "first",
     matchCount: 6,
@@ -54,3 +54,5 @@ const RANK = [
     prize: 5000,
   },
 ];
+
+export { INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE, RANKS };
