@@ -20,7 +20,7 @@ class App {
       this.gatherResult();
       this.printResult();
     } catch (e) {
-      console.error(e);
+      MissionUtils.Console.print(e.message);
     }
   }
 
