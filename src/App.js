@@ -53,6 +53,8 @@ class App {
   }
 
   printLottoResult(lottoResult, lottoRate){
+    Console.print('당첨 통계');
+    Console.print('---');
     Console.print(`3개 일치 (5,000원) - ${lottoResult[0]}개\n`);
     Console.print(`4개 일치 (50,000원) - ${lottoResult[1]}개\n`);
     Console.print(`5개 일치 (1,500,000원) - ${lottoResult[2]}개\n`);
@@ -88,8 +90,6 @@ class App {
       const lotto = new Lotto(lottoNumberArray);
       let lottoResult = lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
       const lottoRate = lotto.getLottoRate(lottoResult, lottoPrice);
-      Console.print('당첨 통계');
-      Console.print('---');
       this.printLottoResult(lottoResult, lottoRate);
     }catch(error){
       Console.print(error.message);
