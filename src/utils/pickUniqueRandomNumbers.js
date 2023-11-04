@@ -1,11 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const pickUniqueRandomNumbers = (min, max, count) => {
-  const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
-    min,
-    max,
-    count,
-  ).sort((a, b) => a - b);
+  const numbers = MissionUtils.Random.pickUniqueNumbersInRange(min, max, count);
 
   return numbers;
 };

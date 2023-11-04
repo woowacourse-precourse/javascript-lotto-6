@@ -1,17 +1,6 @@
 import pickUniqueRandomNumbers from '../src/utils/pickUniqueRandomNumbers';
 
 describe('pickUniqueRandomNumbers 테스트 ', () => {
-  test('오름차순으로 정렬된 배열인지 확인', () => {
-    const MIN = 1;
-    const MAX = 45;
-    const COUNT = 6;
-
-    const randomNumbers = pickUniqueRandomNumbers(MIN, MAX, COUNT);
-    const answer = [...randomNumbers].sort((a, b) => a - b);
-
-    expect(randomNumbers).toEqual(answer);
-  });
-
   test('조건에 맞는지 확인(최소값, 최대값, 개수)', () => {
     const MIN = 1;
     const MAX = 45;
