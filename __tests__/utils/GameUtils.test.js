@@ -24,4 +24,16 @@ describe('게임 유틸 테스트', () => {
     // then
     expect(randomNumber.length).toEqual(randomNumberCount);
   });
+
+  test('1,4,5,7,2,9를 오름차순으로 정렬하여 1,2,4,5,7,9로 반환받습니다.', () => {
+    // given
+    const randomNumber = [1, 4, 5, 7, 2, 9];
+    const answer = [1, 2, 4, 5, 7, 9];
+
+    // when
+    GameUtils.sortRandomNumberInAscendingOrder(randomNumber);
+
+    // then
+    expect(randomNumber).toEqual(answer);
+  });
 });
