@@ -53,13 +53,6 @@ const notNumberElement = numberList => {
   });
 };
 
-//split했을 빈 값을 입력한 경우
-const notInputUserNumber = numberList => {
-  numberList.forEach(number => {
-    return notInputValue(number);
-  });
-};
-
 // 6개가 아닌 경우
 const notSixNumber = numberList => {
   if (numberList.length !== 6) {
