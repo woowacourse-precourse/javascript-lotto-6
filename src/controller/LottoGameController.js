@@ -2,6 +2,7 @@ import Lotto from '../Lotto.js';
 import Money from '../model/Money.js';
 import InputValidator from '../validator/InputValidator.js';
 import convertType from '../utils/convertType.js';
+import formatLottoNumbers from '../utils/formatLottoNumbers.js';
 import { MESSAGE } from '../constants/messages.js';
 
 class LottoGameController {
@@ -32,6 +33,7 @@ class LottoGameController {
         this.generateLottoNumbers().sort((a, b) => a - b),
       );
       this.lottoTickets.addLotto(lotto.getLottoNumbers());
+      this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
     });
   }
 
