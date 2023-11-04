@@ -25,5 +25,10 @@ describe("로또게임 클래스 테스트", () => {
   test('보너스 번호가 로또 번호에 중복 시 예외 발생', () => {
     expect(() => LottoGame.validatebonusNumber('1', [1,2,3,4,5,6])).toThrow('[ERROR]');
   });
+
+  test('당첨 번호와 랜덤 번호와 count', () => {
+    const tickets = [new Lotto([1,2,3,4,5,6])]
+    expect(LottoGame.calculateResult(23, tickets, [1,2,3,8,9,10])).toEqual([1,0,0,0,0]);
+  });
   // 아래에 추가 테스트 작성 가능
 });
