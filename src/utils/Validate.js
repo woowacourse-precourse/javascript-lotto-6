@@ -1,4 +1,4 @@
-import { ERROR } from './constant.js';
+import { ERROR } from '../constant/constant.js';
 
 class Validate {
   static isEmpty(value) {

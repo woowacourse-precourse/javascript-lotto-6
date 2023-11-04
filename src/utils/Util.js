@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO } from './constant.js';
+import { LOTTO } from '../constant/constant.js';
 
 class Util {
   static createLottoNumber() {

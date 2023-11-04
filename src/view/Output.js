@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from './constant.js';
+import { MESSAGE } from '../constant/constant.js';
 
 class Output {
   static printPurchaseCount(count) {

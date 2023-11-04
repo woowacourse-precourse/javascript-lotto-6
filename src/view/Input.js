@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PROMPT } from './constant.js';
+import { PROMPT } from '../constant/constant.js';
 
 class Input {
   static async getLottoBudget() {

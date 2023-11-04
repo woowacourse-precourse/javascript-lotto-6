@@ -1,6 +1,6 @@
-import { ERROR, LOTTO } from './constant.js';
+import { ERROR, LOTTO } from '../constant/constant.js';
 import Lotto from './Lotto.js';
-import Util from './Util.js';
+import Util from '../utils/Util.js';
 
 class Buyer {
   #budget;

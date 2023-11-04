@@ -1,8 +1,8 @@
-import Input from './Input.js';
-import Output from './Output.js';
-import Buyer from './Buyer.js';
-import Util from './Util.js';
-import WinLotto from './WinLotto.js';
+import Input from '../view/Input.js';
+import Output from '../view/Output.js';
+import Buyer from '../model/Buyer.js';
+import Util from '../utils/Util.js';
+import WinLotto from '../model/WinLotto.js';
 
 class LottoGame {
   #buyer;

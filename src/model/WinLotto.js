@@ -1,5 +1,5 @@
 import Lotto from './Lotto.js';
-import { ERROR, LOTTO, REGEX } from './constant.js';
+import { ERROR, LOTTO, REGEX } from '../constant/constant.js';
 
 class WinLotto extends Lotto {
   #bonusLotto;

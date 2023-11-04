@@ -1,4 +1,4 @@
-import { ERROR, LOTTO, REGEX } from './constant.js';
+import { ERROR, LOTTO, REGEX } from '../constant/constant.js';
 
 class Lotto {
   #numbers;
