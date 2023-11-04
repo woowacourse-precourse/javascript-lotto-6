@@ -13,6 +13,10 @@ class LottoGame {
     const bonusNumber = await LottoGame.setBonusNumber([
       ...winningNumbersArray.getNumbers(),
     ]);
+    const results = LottoGame.calculateResult(bonusNumber, [...this.#tickets], [
+      ...winningNumbersArray.getNumbers(),
+    ]);
+    LottoGame.printResults(results);
   }
 
   static validatePurchaseAmount(purchaseAmount = '0') {
@@ -93,6 +97,29 @@ class LottoGame {
       throw new Error('[ERROR] 보너스 숫자가 잘못되었습니다.');
     }
     return bonusNumberInt;
+  }
+
+  static getRank(matchCount, hasBonus) {
+    if (matchCount === 6) return 5;
+    if (matchCount === 5) return hasBonus ? 4 : 3;
+    if (matchCount === 4) return 2;
+    if (matchCount === 3) return 1;
+    return 0; // 당첨되지 않음
+  }
+
+  static calculateResult(bonusNumber = 0, tickets = [], winningNumbersArray = []) {
+    return tickets.reduce(
+      (matchCounts, ticket) => {
+        const matchCount = ticket.getMatchCount(winningNumbersArray);
+        const rank = LottoGame.getRank(
+          matchCount,
+          ticket.hasNumber(bonusNumber)
+        );
+        if (rank > 0) matchCounts[rank - 1]++;
+        return matchCounts;
+      },
+      [0, 0, 0, 0, 0]
+    );
   }
 }
 

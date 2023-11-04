@@ -40,6 +40,14 @@ class Lotto {
   toString() {
     return `[${this.#numbers.join(', ')}]`;
   }
+
+  getMatchCount(winningNumbersArray = []) {
+    return this.#numbers.filter(number => winningNumbersArray.includes(number)).length;
+  }
+
+  hasNumber(number) {
+    return this.#numbers.includes(number);
+  }
 }
 
 export default Lotto;
