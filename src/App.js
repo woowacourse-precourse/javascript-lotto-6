@@ -23,19 +23,19 @@ class LottoPurchase {
   }
 
   async #purchaseLottoAmount() {
-    let amount;
+    let purchaseAmount;
 
     while (true) {
       try {
-        amount = await this.#lottoAmount();
-        this.#validateAmount(amount);
+        purchaseAmount = await this.#lottoAmount();
+        this.#validateAmount(purchaseAmount);
         break;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
     }
 
-    return amount;
+    return purchaseAmount;
   }
 
   async askPurchaseLottoAmount() {
