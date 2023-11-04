@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR } from '../constant/index';
+import { ERROR, INPUT } from '../constant/index';
 
 class InputView {
   static async readBuyingPrice() {
-    const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    const input = await Console.readLineAsync(INPUT.BUYING_PRICE);
     InputView.#validateBuyingPrice(input);
     return Number(input);
   }
