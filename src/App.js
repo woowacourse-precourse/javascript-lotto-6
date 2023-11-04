@@ -20,7 +20,7 @@ export default App;
 const PURCASE_COMMENT = "구입금액을 입력해 주세요."
 const WINNING_NUMBER_COMMENT = "당첨 번호를 입력해 주세요.";
 const BONUS_NUMBER_COMMENT = "보너스 번호를 입력해 주세요.";
-const LOTTO_PRICE = 1000;
+//const LOTTO_PRICE = 1000;
 
 async function inputMoney() {
   let comment = PURCASE_COMMENT;
@@ -57,12 +57,4 @@ function lottoCountPrinter(counts) {
 export function winningNumberSpliter(input) {
   const winningNumberSplit = input.split(',');
   return winningNumberSplit;
-}
-
-export async function bonusNumberDuplicateValidater(winning, bonus) {
-  for (let i = 0; i < winning.length; i++) {
-    if (winning[i] === bonus) {
-      throw new Error("[ERROR] 보너스 번호가 중복되었습니다.")
-    }
-  }
 }
