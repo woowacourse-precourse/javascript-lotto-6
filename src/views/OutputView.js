@@ -14,6 +14,10 @@ class OutputView {
     Console.print(OUTPUT_MSG.LOTTO_STATIC_OUT);
     Console.print(OUTPUT_MSG.userLottoResult(staticObject));
   }
+
+  totalRevenue(revenue) {
+    Console.print(OUTPUT_MSG.LOTTO_REVENUE_IS(revenue));
+  }
 }
 
 export default OutputView;

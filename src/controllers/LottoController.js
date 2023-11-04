@@ -82,7 +82,7 @@ class LottoController {
 
   async #printRate(lottoStatic) {
     const rateUtill = new LottoUtill(this.#USER_MONEY, lottoStatic);
-    console.log(rateUtill);
+    this.OUTPUT_VIEW.totalRevenue(rateUtill.getRate());
   }
 }
 

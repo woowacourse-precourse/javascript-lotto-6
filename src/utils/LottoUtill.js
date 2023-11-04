@@ -1,3 +1,5 @@
+import { LottoRate } from '../constants/constant.js';
+
 class LottoUtill {
   #calcNumber;
 
@@ -55,6 +57,22 @@ class LottoUtill {
       return;
     }
     this.#staticObject[5] += 1;
+  }
+
+  getRate() {
+    const earnMoney = Object.entries(this.#staticObject)
+      .map((status) => {
+        if (status[1] !== 0) {
+          return LottoRate[status[0]];
+        }
+        return 0;
+      })
+      .reduce((a, b) => a + b);
+    return this.#calcRate(earnMoney);
+  }
+
+  #calcRate(earnMoney) {
+    return Math.round((earnMoney / this.#calcNumber) * 100 * 100) / 100;
   }
 }
 

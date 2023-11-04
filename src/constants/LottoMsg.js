@@ -13,7 +13,8 @@ export const OUTPUT_MSG = {
   4개 일치 (50,000원) - ${result[4]}개
   5개 일치 (1,500,000원) - ${result[5]}개
   5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.bonus}개
-  6개 일치 (2,000,000,000원) - ${result[6]}개`,
+  6개 일치 (2,000,000,000원) - ${result[6]}개\n`,
+  LOTTO_REVENUE_IS: (revenue) => `총 수익률은 ${revenue}%입니다.\n`,
 };
 
 export const ERROR_MSG = {
