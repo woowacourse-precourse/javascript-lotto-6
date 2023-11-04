@@ -5,20 +5,18 @@ import Lotto from "./Lotto.js";
 import { Random } from "@woowacourse/mission-utils";
 
 class Player {
-  #seedMoney;
-  #reward;
+  #money;
   #lottos;
 
-  constructor(seedMoney) {
-    this.#validate(seedMoney);
-    this.#seedMoney = seedMoney;
-    this.#reward = 0;
+  constructor(money) {
+    this.#validate(money);
+    this.#money = money;
     this.#lottos = this.#buyLottos();
   }
 
-  #validate(seedMoney) {
-    this.#validateDigit(seedMoney);
-    if (seedMoney % MONEY_CONSTANT.LOTTO_PRICE !== 0) {
+  #validate(money) {
+    this.#validateDigit(money);
+    if (money % MONEY_CONSTANT.LOTTO_PRICE !== 0) {
       throw new LottoGameError(LOTTO_ERROR_MSG.DIVIDE_ERR);
     }
   }
@@ -33,7 +31,7 @@ class Player {
   }
 
   #getBuyableLottos() {
-    return this.#seedMoney / MONEY_CONSTANT.LOTTO_PRICE;
+    return this.#money / MONEY_CONSTANT.LOTTO_PRICE;
   }
 
   #buyLottos() {
@@ -47,14 +45,6 @@ class Player {
 
   get playerLottos() {
     return this.#lottos;
-  }
-
-  get playerReward() {
-    return this.#reward;
-  }
-
-  set playerReward(reward) {
-    this.#reward = reward;
   }
 }
 

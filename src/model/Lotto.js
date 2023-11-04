@@ -13,9 +13,11 @@ class Lotto {
 
   #validate(numbers) {
     this.#validateLength(numbers);
-    this.#validateDigit(numbers);
-    this.#validateRange(numbers);
     this.#validateDuplication(numbers);
+    numbers.forEach((number) => {
+      this.validateDigitNumber(number);
+      this.validateRange(number);
+    });
   }
 
   #validateLength(numbers) {
@@ -32,23 +34,18 @@ class Lotto {
     });
   }
 
-  #validateRange(numbers) {
-    const abnormalRange = numbers.some(
-      (number) =>
-        number < LOTTO_CONSTANT.RANGE.MIN || number > LOTTO_CONSTANT.RANGE.MAX
-    );
+  validateDigitNumber(num) {
+    const DIGIT_CHECK = /^[0-9]+$/;
+    const isDigit = DIGIT_CHECK.test(num);
 
-    if (abnormalRange) {
-      throw new LottoGameError(LOTTO_ERROR_MSG.RANGE_ERR);
+    if (!isDigit) {
+      throw new LottoGameError(LOTTO_ERROR_MSG.NOT_DIGIT_ERR);
     }
   }
 
-  #validateDigit(numbers) {
-    const DIGIT_CHECK = /^[0-9]+$/;
-
-    const isDigit = numbers.every((number) => DIGIT_CHECK.test(number));
-    if (!isDigit) {
-      throw new LottoGameError(LOTTO_ERROR_MSG.NOT_DIGIT_ERR);
+  validateRange(num) {
+    if (num < LOTTO_CONSTANT.RANGE.MIN || num > LOTTO_CONSTANT.RANGE.MAX) {
+      throw new LottoGameError(LOTTO_ERROR_MSG.RANGE_ERR);
     }
   }
 
