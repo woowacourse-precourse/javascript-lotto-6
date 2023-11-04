@@ -13,9 +13,11 @@ import {
 
 class Game {
   #lottos;
+  #winningLotto;
 
   constructor() {
     this.#lottos = [];
+    this.#winningLotto = null;
   }
 
   async start() {
@@ -23,6 +25,7 @@ class Game {
     this.validate(purchaseAmount);
     this.purchaseLotto(Number(purchaseAmount));
     this.printPurchaseLottos();
+    await this.createWinningLotto();
   }
 
   validate(amount) {
@@ -34,6 +37,16 @@ class Game {
   async getPurchaseAmount() {
     const purchaseAmount = await getUserInput(INPUT_MESSAGE.purchaseAmount);
     return purchaseAmount;
+  }
+
+  async getWinningNumbers() {
+    const winningNumbers = await getUserInput(INPUT_MESSAGE.winningNumber);
+    return winningNumbers.split(',').map((number) => Number(number.trim()));
+  }
+
+  async createWinningLotto() {
+    const winningNumbers = await this.getWinningNumbers();
+    this.#winningLotto = new Lotto(winningNumbers);
   }
 
   purchaseLotto(amount) {

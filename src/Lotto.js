@@ -14,10 +14,10 @@ class Lotto {
   }
 
   #validate(numbers) {
+    validateLottoLength(numbers);
     numbers.forEach((number) => {
       validateNumberType(number);
     });
-    validateLottoLength(numbers);
     validateDuplicateNumber(numbers);
     validateLottoRange(numbers);
   }
