@@ -1,6 +1,8 @@
-import LottoGameError from "../Error";
-import { LOTTO_ERROR_MSG } from "../constants/error";
-import { MONEY_CONSTANT } from "../constants/game";
+import LottoGameError from "../Error.js";
+import { LOTTO_ERROR_MSG } from "../constants/error.js";
+import { MONEY_CONSTANT } from "../constants/game.js";
+import Lotto from "./Lotto.js";
+import { Random } from "@woowacourse/mission-utils";
 
 class Player {
   #seedMoney;
@@ -10,10 +12,8 @@ class Player {
   constructor(seedMoney) {
     this.#validate(seedMoney);
     this.#seedMoney = seedMoney;
-
     this.#reward = 0;
-
-    this.#lottos = [];
+    this.#lottos = this.#buyLottos();
   }
 
   #validate(seedMoney) {
@@ -32,8 +32,22 @@ class Player {
     }
   }
 
-  #getBuyableLottos() {}
-  #buyLottos() {}
+  #getBuyableLottos() {
+    return this.#seedMoney / MONEY_CONSTANT.LOTTO_PRICE;
+  }
+
+  #buyLottos() {
+    const lottos = [];
+    const lottoQuantity = this.#getBuyableLottos();
+    for (let i = 0; i < lottoQuantity; i++) {
+      lottos.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)));
+    }
+    return lottos;
+  }
+
+  get playerLottos() {
+    return this.#lottos;
+  }
 
   get playerReward() {
     return this.#reward;

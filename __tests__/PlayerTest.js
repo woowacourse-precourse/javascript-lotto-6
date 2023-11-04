@@ -12,4 +12,9 @@ describe("플레이어 클래스 테스트", () => {
       new Player(5100);
     }).toThrow("[ERROR]");
   });
+
+  test("Player 생성시 금액 만큼 로또를 구입하는지 test", () => {
+    const player = new Player(5000);
+    expect(player.playerLottos.length).toBe(5);
+  });
 });

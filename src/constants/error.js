@@ -1,4 +1,4 @@
-import { LOTTO_CONSTANT } from "./game";
+import { LOTTO_CONSTANT } from "./game.js";
 
 export const LOTTO_ERROR_MSG = {
   LENGTH_ERR: `로또 번호는 ${LOTTO_CONSTANT.SIZE}개여야 합니다.`,
