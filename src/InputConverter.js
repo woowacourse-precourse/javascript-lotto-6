@@ -6,7 +6,8 @@ export class InputConverter {
   winningNumbersConverter(numbers) {
     return numbers.split(",").map(Number);
   }
-}
 
-const inputConverter = new InputConverter();
-console.log(inputConverter.winningNumbersConverter("1,2,3,4,5,6"));
+  bonusNumberConverter(number) {
+    return Number(number);
+  }
+}
