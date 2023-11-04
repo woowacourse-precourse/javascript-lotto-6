@@ -5,6 +5,7 @@ import { DELIMITER } from '../constants/message/setting.js';
 import Converter from '../utils/converter.js';
 import MoneyValidator from '../validator/Money.js';
 import Lotto from '../Lotto.js';
+import CommonValidator from '../validator/Common.js';
 
 class InputView {
   static async readMoney() {
@@ -33,6 +34,7 @@ class InputView {
       INPUT_MESSAGE.bonusNumber,
     );
     const bonusNumber = Converter.stringToNumber(inputBonusNumber);
+    CommonValidator.validateLottoNumber(bonusNumber);
 
     return bonusNumber;
   }
