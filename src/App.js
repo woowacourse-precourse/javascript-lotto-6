@@ -4,6 +4,11 @@ class App {
     this.purchasePrice = 0;
     this.purchaseCount = 0;
     this.randomLottoNumber = [];
+    this.threeMatches = 0;
+    this.fourMatches = 0;
+    this.fivthMatches = 0;
+    this.fiveAndBonusMatches = 0;
+    this.sixMatches = 0;
   }
   async play() {
     this.purchasePrice = await this.inputPurchasePrice();
@@ -23,6 +28,10 @@ class App {
     this.checkValidateInputLottoNum(this.inputLottoNumArr);
     this.bonus = await this.inputBonusNumber();
     this.checkValidateInputBonus(this.bonus);
+    this.bonusArr = this.countBonuses(this.randomLottoNumber);
+    console.log(this.inputLottoNumArr);
+    console.log(this.randomLottoNumber);
+    console.log(this.bonusArr);
   }
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -58,11 +67,11 @@ class App {
     return input;
   }
   convertToArr(inputNum) {
-    return inputNum.split(",").map((element) => String(element));
+    return inputNum.split(",").map((element) => parseInt(element));
   }
 
   checkValidateInputLottoNum(inputNum) {
-    if (inputNum.length !== 6 || inputNum.some((num) => num.trim() === "")) {
+    if (inputNum.length !== 6) {
       throw new Error("[ERROR] 당첨 번호는 6자리를 입력해 주세요.");
     }
     if (
@@ -94,6 +103,17 @@ class App {
       throw new Error("[Error] 자연수만 입력이 가능합니다.");
     }
   }
-}
 
+  countBonuses(randomArrs) {
+    const bonusArray = Array.from({ length: randomArrs.length }, () => 0);
+
+    for (const randomArr of randomArrs) {
+      if (randomArr.includes(this.bonus)) {
+        bonusArray[randomArrs.indexOf(randomArr)] += 1;
+      }
+    }
+
+    return bonusArray;
+  }
+}
 export default App;
