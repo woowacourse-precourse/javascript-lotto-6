@@ -7,11 +7,11 @@ const lottoNumber = Object.freeze({
 	thirdPlaceCount: 5,
 	secondPlaceCount: 5,
 	firstPlaceCount: 6,
-	fifthPlacePrice: 5000,
-	fourthPlacePrice: 50000,
-	thirdPlacePrice: 1500000,
-	secondPlacePrice: 30000000,
-	firstPlacePrice: 2000000000,
+	fifthPlacePrice: 5_000,
+	fourthPlacePrice: 50_000,
+	thirdPlacePrice: 1_500_000,
+	secondPlacePrice: 30_000_000,
+	firstPlacePrice: 2_000_000_000,
 });
 
 export default lottoNumber;
