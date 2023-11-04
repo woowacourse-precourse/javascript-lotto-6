@@ -17,6 +17,30 @@ class InputView {
       throw new Error(ERROR.BUYING_PRICE_UNIT);
     }
   }
+
+  static async readWinningNumbers() {
+    const input = await Console.readLineAsync(INPUT.WINNING_NUMBERS);
+    InputView.#validateWinningNumbers(input);
+    return input.split(',').map(Number);
+  }
+
+  static #validateWinningNumbers(input) {
+    const numbers = input.split(',').map(number => number.trim());
+
+    if (numbers.length !== 6) {
+      throw new Error(ERROR.WINNING_NUMBERS_LENGTH);
+    }
+
+    const INVALID_RANGE = numbers.some(number => number < 1 || number > 45);
+    if (INVALID_RANGE) {
+      throw new Error(ERROR.WINNING_NUMBERS_RANGE);
+    }
+
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== 6) {
+      throw new Error(ERROR.WINNING_NUMBERS_UNIQE);
+    }
+  }
 }
 
 export default InputView;
