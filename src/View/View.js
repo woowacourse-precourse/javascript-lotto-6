@@ -1,25 +1,19 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class View {
-  #price;
-  #winningNumber;
-  #bonusNumber;
-  
   async inputPrice() {
-    this.#price = await Console.readLineAsync('구매금액을 입력해 주세요.\n');
-    return this.#price;
+    const price = await Console.readLineAsync('구매금액을 입력해 주세요.\n');
+    return price;
   }
-  
+
   async inputWinningNumber() {
-    const winningNumber = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    this.#winningNumber = winningNumber.split(',');
-    this.#winningNumber = this.#winningNumber.map(num => Number(num));
-    return this.#winningNumber;
+    const winningNumber = (await Console.readLineAsync('당첨 번호를 입력해 주세요.\n')).split(',').map(Number);
+    return winningNumber;
   }
 
   async inputBonus() {
-    this.#bonusNumber = Number(await Console.readLineAsync('보너스 번호를 입력해 주세요.\n'));
-    return this.#bonusNumber;
+    const bonusNumber = Number(await Console.readLineAsync('보너스 번호를 입력해 주세요.\n'));
+    return bonusNumber;
   }
 
   printQuantity(quantity) {
