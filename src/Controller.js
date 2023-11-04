@@ -7,15 +7,15 @@ class Controller {
 
   async progress() {
     try {
-      await this.setLottoTicket();
+      await this.#generateLottoTicketList();
     } catch (error) {
       OutputView.printMessage(error.message);
-      await this.setLottoTicket();
+      await this.#generateLottoTicketList();
     }
     this.#displayLottoTicket();
   }
 
-  async setLottoTicket() {
+  async #generateLottoTicketList() {
     const inputLottoPurchaseAmount = await InputView.readLottoPurchaseAmount();
     this.#lottoTicketList = new LottoTicket(
       inputLottoPurchaseAmount,
