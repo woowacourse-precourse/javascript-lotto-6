@@ -1,6 +1,6 @@
-import { Console } from '@woowacourse/mission-utils';
 import ERROR from './constant/error.js';
 import outputView from './View/outputView.js';
+import validator from './utils/validator.js';
 
 class Lotto {
   #numbers;
@@ -14,15 +14,8 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error(ERROR.NUMBER_LENGTH);
     }
-    const tempArray = [];
-    for (let i = 0; i < numbers.length; i++) {
-      if (tempArray.includes(numbers[i])) throw new Error(ERROR.NUMBER_DUPPLICATE);
-      else tempArray.push(numbers[i]);
-    }
-
-    numbers.forEach((number) => {
-      if (number < 1 || number > 45) throw new Error(ERROR.NUMBER_RANGE);
-    });
+    validator.isDupplicateLottoNumber(numbers);
+    validator.isValidRangeNumber(numbers);
   }
 
   validateBonusNumber(bonusNumber) {
