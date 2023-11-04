@@ -1,6 +1,5 @@
 import LottoGameError from "../Error";
 import { LOTTO_ERROR_MSG } from "../constants/error";
-import { LOTTO_CONSTANT } from "../constants/game";
 import Lotto from "./Lotto";
 
 class WinningLotto extends Lotto {
@@ -11,14 +10,9 @@ class WinningLotto extends Lotto {
   }
 
   setBonusNumber(bonusNumber) {
-    this.#validateBonusNumber(bonusNumber);
-    this.#bonusNumber = bonusNumber;
-  }
-
-  #validateBonusNumber(bonusNumber) {
-    this.validateDigitNumber(bonusNumber);
     this.validateRange(bonusNumber);
     this.#validateDuplication(bonusNumber);
+    this.#bonusNumber = bonusNumber;
   }
 
   #validateDuplication(num) {
@@ -27,3 +21,5 @@ class WinningLotto extends Lotto {
     }
   }
 }
+
+export default WinningLotto;

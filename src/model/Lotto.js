@@ -15,7 +15,6 @@ class Lotto {
     this.#validateLength(numbers);
     this.#validateDuplication(numbers);
     numbers.forEach((number) => {
-      this.validateDigitNumber(number);
       this.validateRange(number);
     });
   }
@@ -32,15 +31,6 @@ class Lotto {
         throw new LottoGameError(LOTTO_ERROR_MSG.DUPLICATION_ERR);
       }
     });
-  }
-
-  validateDigitNumber(num) {
-    const DIGIT_CHECK = /^[0-9]+$/;
-    const isDigit = DIGIT_CHECK.test(num);
-
-    if (!isDigit) {
-      throw new LottoGameError(LOTTO_ERROR_MSG.NOT_DIGIT_ERR);
-    }
   }
 
   validateRange(num) {
