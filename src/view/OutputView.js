@@ -8,7 +8,7 @@ class OutputView {
 	}
 
 	static printPurchaseHistory(lottoNumberList) {
-		Console.print(`${lottoNumberList.length}${viewMessage.OUTPUT_PURCHASE_HISTORY}`);
+		Console.print(viewMessage.OUTPUT_PURCHASE_HISTORY(lottoNumberList.length));
 		lottoNumberList.forEach(lottoNumber => {
 			Console.print(Formatting.convertArrayToString(lottoNumber));
 		});
@@ -16,12 +16,12 @@ class OutputView {
 
 	static printWinningResult(lottoResult, rateOfReturn) {
 		Console.print(viewMessage.OUTPUT_WINNING_RESULT);
-		Console.print(`${viewMessage.OUTPUT_FIFTH_PLACE}${lottoResult.fifthPlaceCount}${viewMessage.OUTPUT_COUNT}`);
-		Console.print(`${viewMessage.OUTPUT_FOURTH_PLACE}${lottoResult.fourthPlaceCount}${viewMessage.OUTPUT_COUNT}`);
-		Console.print(`${viewMessage.OUTPUT_THIRD_PLACE}${lottoResult.thirdPlaceCount}${viewMessage.OUTPUT_COUNT}`);
-		Console.print(`${viewMessage.OUTPUT_SECOND_PLACE}${lottoResult.secondPlaceCount}${viewMessage.OUTPUT_COUNT}`);
-		Console.print(`${viewMessage.OUTPUT_FIRST_PLACE}${lottoResult.firstPlaceCount}${viewMessage.OUTPUT_COUNT}`);
-		Console.print(`${viewMessage.OUTPUT_RATE_RETURN_PRE}${rateOfReturn}${viewMessage.OUTPUT_RATE_RETURN_POST}`);
+		Console.print(viewMessage.OUTPUT_FIFTH_PLACE(lottoResult.fifthPlaceCount));
+		Console.print(viewMessage.OUTPUT_FOURTH_PLACE(lottoResult.fourthPlaceCount));
+		Console.print(viewMessage.OUTPUT_THIRD_PLACE(lottoResult.thirdPlaceCount));
+		Console.print(viewMessage.OUTPUT_SECOND_PLACE(lottoResult.secondPlaceCount));
+		Console.print(viewMessage.OUTPUT_FIRST_PLACE(lottoResult.firstPlaceCount));
+		Console.print(viewMessage.OUTPUT_RATE_RETURN(rateOfReturn));
 	}
 }
 
