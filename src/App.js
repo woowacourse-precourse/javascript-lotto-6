@@ -18,11 +18,23 @@ class App {
 
     await this.createLotto(purchaseCost);
 
+    const enterWinnigNum = await MissionUtils.Console.readLineAsync(
+      LOTTO_INPUT_MESSAGE.inputWinnigNum
+    );
+
     const winningNum = enterWinnigNum.split(",");
 
-    if (winningNum.length == !6) {
+    if (winningNum.length !== 6) {
       throw new Error(`${ERROR_MESSAGE.isOnlySixNum}`);
     }
+
+    const verifyNumber = /^[0-9]+$/;
+
+    if (verifyNumber.test(winningNum) === false) {
+      throw new Error(`${ERROR_MESSAGE.isNotwNumber}`);
+    }
+
+    for (let i=0;)
 
     const bonusNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputBonusNum
