@@ -15,6 +15,10 @@ class Lotto {
     }
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   static generateRandomLotto() {
     const lottoNum = Random.pickUniqueNumbersInRange(1, 45, 6);
     const sortedLottoNum = lottoNum.sort((a, b) => {
