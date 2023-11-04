@@ -1,11 +1,24 @@
 import { Console } from "@woowacourse/mission-utils";
+import InputError from "../errors/InputError.js";
 
 class UserInput {
+  static validateAmount(input) {
+    InputError.checkEmptyInputError(input);
+
+    const inputToNumber = parseInt(input, 10);
+
+    InputError.checkAmountInputError(inputToNumber);
+
+    return inputToNumber;
+  }
+
   static async getPurchaseAmount() {
     const lottoAmount = await Console.readLineAsync(
       "구입금액을 입력해 주세요.\n"
     );
-    return lottoAmount;
+
+    const amount = this.validateAmount(lottoAmount);
+    return amount;
   }
 
   static async getLottoNumbers() {
