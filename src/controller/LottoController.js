@@ -12,6 +12,7 @@ class LottoController {
     await this.inputBonusLottoNumber();
     this.calculateMatchingNumbers();
     this.displayLottoMatchResults();
+    const totalPrize = this.calculatePrizeAmount(this.#lottos.getRankCount());
   }
 
   async inputMoney() {
@@ -90,6 +91,23 @@ class LottoController {
     return rankOrder
       .map(rank => `${rankDescriptions[rank]} - ${rankCount[rank] || 0}개`)
       .join('\n');
+  }
+
+  calculatePrizeAmount(rankCount) {
+    const rankEarnings = {
+      3: 5000,
+      4: 50000,
+      5: 1500000,
+      '5+': 30000000,
+      6: 2000000000,
+    };
+
+    const prizeAmount = Object.keys(rankCount).reduce(
+      (sum, rank) => sum + rankEarnings[rank] * rankCount[rank],
+      0,
+    );
+
+    return prizeAmount;
   }
 }
 
