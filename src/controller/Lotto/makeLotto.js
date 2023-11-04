@@ -11,4 +11,4 @@ const makeLotto = () => {
   return randomLottoNumbers.sort((a, b) => a - b);
 };
 
-export default makeLotto();
+export default makeLotto;
