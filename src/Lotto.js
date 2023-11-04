@@ -4,15 +4,22 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.#sortNumbers();
   }
 
   #validate(numbers) {
+    const set = new Set(numbers);
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+    if (numbers.length !== set.size) {
+      throw new Error('[ERROR] 로또 번호는 중복되지 말아야 합니다.');
     }
   }
 
-  // TODO: 추가 기능 구현
+  #sortNumbers() {
+    this.#numbers.sort((a, b) => a - b);
+  }
 }
 
 export default Lotto;
