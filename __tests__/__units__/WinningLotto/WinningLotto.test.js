@@ -23,17 +23,18 @@ describe('WinningLotto 테스트', () => {
   );
 
   it.each([
-    { winningNumbers: [1, 2, 3, 4, 5, 6], bonusNumber: 3 },
-    { winningNumbers: [11, 22, 33, 44, 5, 6], bonusNumber: 11 },
+    { numbers: [1, 2, 3, 4, 5, 6], bonusNumber: 3 },
+    { numbers: [11, 22, 33, 44, 5, 6], bonusNumber: 22 },
   ])(
-    '입력받은 bonus를 WinningLotto의 lotto가 소유하였을시 true를 반환합니다.',
-    ({ winningNumbers, bonusNumber }) => {
+    '입력받은 bonus를 WinningLotto의 lotto가 소유하지 않았을시 false를 반환합니다.',
+    ({ numbers, bonusNumber }) => {
       // given
+      const lotto = Lotto.of(numbers);
       const bonus = LottoNumber.valueOf(bonusNumber);
-      const winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonus);
+      const winningLotto = WinningLotto.of(Lotto.of([1, 2, 3, 4, 5, 6]), bonus);
 
       // when
-      const result = winningLotto.hasBonus(bonus);
+      const result = winningLotto.hasBonus(lotto);
 
       // then
       expect(result).toBeTruthy();
@@ -41,17 +42,18 @@ describe('WinningLotto 테스트', () => {
   );
 
   it.each([
-    { winningNumbers: [1, 2, 3, 4, 5, 6], bonusNumber: 8 },
-    { winningNumbers: [11, 22, 33, 44, 5, 6], bonusNumber: 7 },
+    { numbers: [1, 2, 3, 4, 5, 6], bonusNumber: 8 },
+    { numbers: [11, 22, 33, 44, 5, 6], bonusNumber: 7 },
   ])(
     '입력받은 bonus를 WinningLotto의 lotto가 소유하지 않았을시 false를 반환합니다.',
-    ({ winningNumbers, bonusNumber }) => {
+    ({ numbers, bonusNumber }) => {
       // given
+      const lotto = Lotto.of(numbers);
       const bonus = LottoNumber.valueOf(bonusNumber);
-      const winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonus);
+      const winningLotto = WinningLotto.of(Lotto.of([1, 2, 3, 4, 5, 6]), bonus);
 
       // when
-      const result = winningLotto.hasBonus(bonus);
+      const result = winningLotto.hasBonus(lotto);
 
       // then
       expect(result).toBeFalsy();

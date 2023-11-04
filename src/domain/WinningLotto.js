@@ -47,11 +47,11 @@ class WinningLotto {
 
   /**
    * 입력받은 bonus가 WinningLotto의 lotto가 소유하였는지 확인합니다.
-   * @param {LottoNumber} bonus
+   * @param {Lotto} lotto
    * @returns {boolean}
    */
-  hasBonus(bonus) {
-    return this.#lotto.match(bonus);
+  hasBonus(lotto) {
+    return lotto.match(this.#bonus);
   }
 }
 

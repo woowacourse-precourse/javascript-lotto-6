@@ -145,8 +145,8 @@
     <td>입력받은 <code>lotto</code>가 <code>WinningLotto</code>의<code>lotto</code>와 몇개가 동일한지 계산합니다.</td>
   </tr>
   <tr>
-    <td>hasBonus(bonus)</td>
-    <td>입력받은 <code>bonus</code>를 <code>WinningLotto</code>의<code>lotto</code>가 소유하였는지 확인합니다.</td>
+    <td>hasBonus(lotto)</td>
+    <td>입력받은 <code>lotto</code>가 <code>WinningLotto</code>의<code>bonus</code>를 소유하였는지 확인합니다.</td>
   </tr>
 </table>
 
@@ -321,12 +321,13 @@
 - [x] WinningLotto
 
   - [x] `prepare(lotto)` 호출 시 `lotto`와 우승 로또가 몇 개의 숫자가 같은지 확인한다.
-  - [x] `hasBonus(number)` 호출 시 `number`가 우승 로또에 소유했는지 확인한다.
+  - [x] `hasBonus(lotto)` 호출 시 `lotto`가 우승 로또의 보너스를 소유했는지 확인한다.
 
 - [ ] WinningLotto 예외 처리
 
   - [ ] 인스턴스 생성 시 `lotto`에 `Lotto`가 아닌 값이 입력될 시 에러가 발생한다.
   - [ ] 인스턴스 생성 시 `bonus`에 `LottoNumber`가 아닌 값이 입력될 시 에러가 발생한다.
+  - [ ] 인스턴스 생성 시 `bonus`가 `lotto`에 이미 존재할 시 에러가 발생한다.
   - [ ] `prepare(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.
   - [ ] `hasBonus(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
 
