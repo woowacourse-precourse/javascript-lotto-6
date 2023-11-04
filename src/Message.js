@@ -15,6 +15,7 @@ export const Message = Object.freeze({
   PRINT_RATE: '총 수익률은 ',
 
   error: {
+    NOT_NUMBER: '[ERROR] 숫자형태로 입력해주세요.',
     NOT_ONETHOUSAND: '[ERROR] 1000원 단위로 입력해주세요.',
     NOT_SPLIT_COMMA: '[ERROR] 쉼표(,)로 구분해서 입력해주세요.',
     NOT_RANGE: '[ERROR] 1~45 사이의 숫자를 입력해주세요.',
