@@ -16,6 +16,7 @@ class Lotto {
       validationUtils.checkRange(numbers[i]);
       this.#checkDuplicateNumber(numbers[i], i);
     }
+
     this.#checkLength();
   }
 
