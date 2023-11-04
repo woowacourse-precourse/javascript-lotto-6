@@ -1,10 +1,10 @@
-import Lotto from '../../src/Lotto';
-import { PURCHASE_ERROR_CODE } from '../../src/util/error/errorCode';
-import { checkHasDuplicate } from '../../src/util/validate/checkHasDuplicate';
-import checkHasNoRemainder from '../../src/util/validate/checkHasNoRemainder';
-import { checkIsEmpty } from '../../src/util/validate/checkIsEmpty';
-import { checkIsNaN } from '../../src/util/validate/checkIsNaN';
-import checkIsTooSmall from '../../src/util/validate/checkIsTooSmall';
+import Lotto from '../../src/Lotto.js';
+import { PURCHASE_ERROR_CODE } from '../../src/util/error/errorCode.js';
+import { checkHasDuplicate } from '../../src/util/validate/checkHasDuplicate.js';
+import checkHasNoRemainder from '../../src/util/validate/checkHasNoRemainder.js';
+import { checkIsEmpty } from '../../src/util/validate/checkIsEmpty.js';
+import { checkIsNaN } from '../../src/util/validate/checkIsNaN.js';
+import { checkPurchaseIsNotInRange } from '../../src/util/validate/checkIsNotInRange.js';
 
 describe('[Lotto] 유효성 검사 테스트', () => {
   test('로또 번호에 중복된 숫자가 존재할 경우 에러를 발생시킨다', () => {
@@ -73,6 +73,6 @@ describe('[function] 유효성 검사 테스트 ', () => {
     const testInputValue = '0';
 
     // then
-    expect(() => checkIsTooSmall(testInputValue)).toThrow(`${PURCHASE_ERROR_CODE.valueIsTooSmall}`);
+    expect(() => checkPurchaseIsNotInRange(testInputValue)).toThrow(`${PURCHASE_ERROR_CODE.valueIsTooSmall}`);
   });
 });
