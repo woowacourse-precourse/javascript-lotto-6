@@ -1,4 +1,3 @@
-import InputManager from "./functions/InputManager.js";
 import OutputManager from "./functions/OutputManager.js";
 import {
   devideMoneyForLotto,
@@ -15,19 +14,18 @@ import {
   countMatchingBalls,
   recordRanks,
 } from "./utils/condition.js";
-import Lotto from "./Lotto.js";
+import ValidateManager from "./functions/validateManager.js";
 
 class App {
   constructor() {
-    this.inputManager = new InputManager();
     this.outputManager = new OutputManager();
+    this.validateManager = new ValidateManager();
   }
 
   async play() {
     try {
-      const moneyForLotto = await this.inputManager.moneyForLotto();
+      const moneyForLotto = await this.validateManager.getMoneyForLotto();
       const moneyForLottoToNumber = stringToNumber(moneyForLotto);
-
       const countsOfLotto = devideMoneyForLotto(moneyForLottoToNumber);
       this.outputManager.showPurchaseAmount(countsOfLotto);
       const countsOfLottoToNumber = stringToNumber(countsOfLotto);
@@ -37,11 +35,11 @@ class App {
       );
       this.outputManager.showEmptyLine();
 
-      const winningBalls = await this.inputManager.winningBallNumbers();
+      const winningBalls = await this.validateManager.getWinningBalls();
       const winningBallsArr = devideIntoCommas(winningBalls);
       const winningBallsToNumberArr = stringsToNumbers(winningBallsArr);
 
-      const bonusBall = await this.inputManager.bonusBallNumbers();
+      const bonusBall = await this.validateManager.getBonusBall();
       const bonusBallToNumber = stringToNumber(bonusBall);
 
       const countMatchArr = countMatchingBalls(
@@ -50,7 +48,6 @@ class App {
       );
       const checkBonusArr = checkBonusBall(purchasedLotto, bonusBallToNumber);
 
-      // +1을 해서 1등~N등까지 그대로 적용할 수 있도록 하기(시작값 = 0)
       const rankCounts = recordRanks(countMatchArr, checkBonusArr);
       const winningPrizeSum = sumOfWinning(rankCounts);
 
@@ -58,7 +55,7 @@ class App {
 
       this.outputManager.showStatistics(rankCounts, earnRate);
     } catch (error) {
-      throw error;
+      this.outputManager.showError(error.message);
     }
   }
 }
