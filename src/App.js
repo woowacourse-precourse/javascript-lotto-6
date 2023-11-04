@@ -69,7 +69,7 @@ class App {
     prize += prizeCounts['bonus'] * PRIZE['bonus'];
     prize += prizeCounts[6] * PRIZE[6];
 
-    const rate = (prize / money * 100).toFixed(2);
+    const rate = (prize / money * 100).toFixed(1);
     return rate;
   }
 
