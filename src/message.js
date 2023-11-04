@@ -4,8 +4,6 @@ export const MESSAGE = Object.freeze({
   WINNING_NUMBER: '당첨 번호를 입력해 주세요.(쉼표(,)를 기준으로 구분)\n',
 
   BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
-
-  PURCHASE_LIST: '개를 구매했습니다.\n',
   
   WINNING_LIST: '당첨 통계\n',
 
