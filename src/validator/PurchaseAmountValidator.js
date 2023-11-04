@@ -13,7 +13,7 @@ class PurchaseAmountValidator {
 		}
 	}
 
-	validateValidAmount(purchaseAmount) {
+	validateNoChangeRemaining(purchaseAmount) {
 		if (purchaseAmount % 1000 !== 0) {
 			throw new Error(errorMessage.INVALID_PURCHASE_AMOUNT);
 		}
@@ -23,7 +23,7 @@ class PurchaseAmountValidator {
 		const purchaseAmountValidator = new PurchaseAmountValidator();
 		purchaseAmountValidator.validateNumber(purchaseAmount);
 		purchaseAmountValidator.validateEnoughAmount(purchaseAmount);
-		purchaseAmountValidator.validateValidAmount(purchaseAmount);
+		purchaseAmountValidator.validateNoChangeRemaining(purchaseAmount);
 	}
 }
 export default PurchaseAmountValidator;
