@@ -35,5 +35,20 @@ class LottoValidator {
 
     throw new ValidationError(LOTTO_ERROR_MESSAGE.range);
   }
+
+  static bonusValidate(winningNumbers, bonusNumber) {
+    this.duplicateBonusNumber(winningNumbers, bonusNumber);
+    this.isLottoNumberRange(bonusNumber);
+
+    return true;
+  }
+
+  static duplicateBonusNumber(winningNumbers, bonusNumber) {
+    if (winningNumbers.find(bonusNumber)) {
+      throw new ValidationError(LOTTO_ERROR_MESSAGE.input_six_digit);
+    }
+
+    return true;
+  }
 }
 export default LottoValidator;
