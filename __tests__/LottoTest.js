@@ -15,6 +15,16 @@ describe('로또 클래스 테스트', () => {
     }).toThrow(getErrorMessage(ERROR_MESSAGE.duplicateNumber));
   });
 
+  test('로또 클래스는 숫자배열을 파라미터로 받으며, 그렇지 않을 경우 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, '숫자']);
+    }).toThrow(getErrorMessage(ERROR_MESSAGE.isNotNumberArray));
+
+    expect(() => {
+      new Lotto('1,2,3,4,5,6');
+    }).toThrow(getErrorMessage(ERROR_MESSAGE.isNotNumberArray));
+  });
+
   test('로또 번호가 1부터 45외의 숫자가 포함되어 있으면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 0]);
