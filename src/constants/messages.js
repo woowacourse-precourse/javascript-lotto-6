@@ -15,8 +15,8 @@ const MATCH_ARRAY = [
 ];
 
 const ERROR = {
-    MONEY_NUMBER: "[ERROR] 로또 금액은 숫자만 입력해야 합니다.",
-    MONEY_UNIT: "[ERROR] 로또 금액은 천원 단위로 입력해야 합니다.",
+    AMOUNT_NUMBER: "[ERROR] 로또 금액은 숫자만 입력해야 합니다.",
+    AMOUNT_UNIT: "[ERROR] 로또 금액은 천원 단위로 입력해야 합니다.",
     LOTTO_LENGTH: "[ERROR] 당첨 번호는 6개를 입력해야 합니다.",
     LOTTO_RANGE: "[ERROR] 당첨 번호는 1~45 사이의 번호만 입력해야 합니다.",
     LOTTO_DIVISION: "[ERROR] 당첨 번호 사이에 쉼표만 입력해야 합니다.",

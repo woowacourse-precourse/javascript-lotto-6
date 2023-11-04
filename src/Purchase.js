@@ -1,22 +1,23 @@
 import { ERROR } from "./constants/messages";
+import { AMOUNT } from "./constants/values";
 import { Console } from "@woowacourse/mission-utils";
 
-class Money {
-    #money;
+class Purchase {
+    #amount;
 
-    constructor(money) {
-        this.#money = Number(money);
+    constructor(amount) {
+        this.#amount = Number(amount);
         this.#validate();
     }
 
     #validate() {
-        this.checkNumber();
-        this.checkUnit();
+        this.validateNumber();
+        this.validateUnit();
     }
 
-    checkNumber() {
+    validateNumber() {
         try {
-            if (isNaN(this.#money)) throw new Error(ERROR.MONEY_NUMBER);
+            if (isNaN(this.#amount)) throw new Error(ERROR.AMOUNT_NUMBER);
         }
         catch (error) {
             Console.print(error.message);
@@ -26,9 +27,9 @@ class Money {
         }
     }
 
-    checkUnit() {
+    validateUnit() {
         try {
-            if (this.#money % 1000 !== 0) throw new Error(ERROR.MONEY_UNIT);
+            if (this.#amount % AMOUNT.UNIT !== 0) throw new Error(ERROR.AMOUNT_UNIT);
         }
         catch (error) {
             Console.print(error.message);
@@ -39,8 +40,8 @@ class Money {
     }
 
     getPurchaseAmount() {
-        return this.#money;
+        return this.#amount;
     }
 }
 
-export default Money;
+export default Purchase;

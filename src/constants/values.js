@@ -4,9 +4,8 @@ const LOTTO = {
     LEN: 6,
   };
   
-const MONEY = { 
-    UNIT: 1000,
-    MIN: 1,
+const AMOUNT = { 
+    UNIT: 1000
 };
 
 const REWARD = {
