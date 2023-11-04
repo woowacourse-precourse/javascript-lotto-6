@@ -21,7 +21,6 @@ class CombinationMachine {
     const result = Array.from({ length: 5 }).fill(0);
 
     matchedLottos.forEach(([matchedLength, hasBonus]) => {
-      console.log('matchedLength', matchedLength);
       if (matchedLength < 3) return;
       if (matchedLength === 3) result[matchedLength - 3] += 1;
       if (matchedLength === 4) result[matchedLength - 3] += 1;
