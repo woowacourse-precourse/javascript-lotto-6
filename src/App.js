@@ -16,9 +16,10 @@ class App {
   #lottoGame;
 
   async play() {
-    const purchaseAmount = await this.#getPurchaseAmount();
-    this.#purchaseLotto = this.#getAutoLotto(purchaseAmount);
+    const { purchaseLotto, purchaseAmount } = await this.#getPurchaseLotto();
+    this.#purchaseLotto = purchaseLotto;
     OutputView.printAutoLotto(this.#purchaseLotto, purchaseAmount);
+
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
     const { winningResult, income } = this.#getlotteryResultsSummary(
@@ -30,38 +31,19 @@ class App {
     OutputView.printLotteryResultsSummary(winningResult, rateOfReturn);
   }
 
-  #getRateOfReturn(purchaseAmount, income) {
-    const inputMoney = purchaseAmount * 1000;
-    const rateOfReturn = (income / inputMoney) * 100;
-    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
-  }
-
-  #getlotteryResultsSummary(purchaseLotto, winningLotto, bonus) {
-    this.#lottoGame = new LottoGame(purchaseLotto, winningLotto, bonus);
-    return {
-      winningResult: this.#lottoGame.getWinningResult(),
-      income: this.#lottoGame.getIncome(),
-    };
-  }
-
-  async #getPurchaseAmount() {
+  async #getPurchaseLotto() {
     try {
       const answer = await InputView.getLottoPurchaseAmount();
       if (InputValidator.validatePurchaseAmount(answer)) {
-        return answer / 1000;
+        const purchaseAmount = answer / 1000;
+        return {
+          purchaseLotto: autoLottoGenerator(purchaseAmount),
+          purchaseAmount,
+        };
       }
     } catch (error) {
       OutputView.printError(error.message);
-      return this.#getPurchaseAmount();
-    }
-  }
-
-  #getAutoLotto(purchaseAmount) {
-    try {
-      return autoLottoGenerator(purchaseAmount);
-    } catch (error) {
-      OutputView.printError(error.message);
-      return this.#getAutoLotto();
+      return this.#getPurchaseLotto();
     }
   }
 
@@ -76,6 +58,20 @@ class App {
       OutputView.printError(error.message);
       return this.#generateWinningLotto();
     }
+  }
+
+  #getRateOfReturn(purchaseAmount, income) {
+    const inputMoney = purchaseAmount * 1000;
+    const rateOfReturn = (income / inputMoney) * 100;
+    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
+  }
+
+  #getlotteryResultsSummary(purchaseLotto, winningLotto, bonus) {
+    this.#lottoGame = new LottoGame(purchaseLotto, winningLotto, bonus);
+    return {
+      winningResult: this.#lottoGame.getWinningResult(),
+      income: this.#lottoGame.getIncome(),
+    };
   }
 
   /* 
