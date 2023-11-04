@@ -5,8 +5,10 @@ import CheckLotto from './util/CheckLotto.js';
 
 class LottoBuyer {
 	#lottoArray;
+	#purchaseAmount;
 
 	constructor(purchaseAmount) {
+		this.#purchaseAmount = purchaseAmount;
 		this.#lottoArray = this.#buyLotto(purchaseAmount);
 	}
 
@@ -42,6 +44,10 @@ class LottoBuyer {
 		return this.#lottoArray.map(lotto => {
 			return lotto.getNumberArray();
 		});
+	}
+
+	getPurchaseAmount() {
+		return this.#purchaseAmount;
 	}
 }
 
