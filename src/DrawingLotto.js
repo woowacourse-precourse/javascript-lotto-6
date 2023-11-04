@@ -1,5 +1,6 @@
 import UserInputs from './UserInputs.js';
 import Utils from './Utils.js';
+import Validation from './Validation.js';
 
 class DrawingLotto {
   QUESTIONS = {
@@ -10,11 +11,20 @@ class DrawingLotto {
   async #drawWinningNumbers() {
     const userNumbers = await UserInputs.ask(this.QUESTIONS.winningNumbers);
     const winningNumbers = Utils.convertInputNumbers(userNumbers);
+
+    const validation = new Validation();
+    validation.isValidWinningNumbers(winningNumbers);
+
     return winningNumbers;
   }
 
   async #drawBonusNumber() {
     const userNumber = await UserInputs.ask(this.QUESTIONS.bonusNumber);
+    const winningNumbers = await this.getWinningNumbers();
+
+    const validation = new Validation();
+    validation.isValidBonusNumber(userNumber, winningNumbers);
+
     return userNumber;
   }
 
