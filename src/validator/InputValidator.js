@@ -1,3 +1,4 @@
+import convertType from '../utils/convertType.js';
 import { GAME_RULE } from '../constants/gameRule.js';
 import { ERROR_MESSAGE } from '../constants/messages.js';
 
@@ -7,7 +8,7 @@ class InputValidator {
    * @return {Error | undefined}
    */
   static validateMoney(money) {
-    if (Number.isNaN(money)) {
+    if (Number.isNaN(convertType(money))) {
       throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
     }
 
