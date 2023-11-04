@@ -11,7 +11,6 @@ export default class View {
 
   async readPurchasePrice() {
     const userInput = await this.#inputView.readLineAsync(PURCHASE_PRICE);
-    const purchasePrice = Number(userInput);
-    return purchasePrice;
+    return Number(userInput);
   }
 }
