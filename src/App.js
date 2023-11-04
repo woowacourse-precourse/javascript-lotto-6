@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-import NumOfBuy from './make_lotto_num';
+import NumOfBuy from './numofbuy.js';
+import MakeLottoNum from './makelottonum.js';
 
 class App {
   #numOfBuy;
@@ -70,31 +71,31 @@ class App {
 
   // -------------------------------랜덤 로또생성함수-----
 
-  // 랜덤 로또 번호 생성 함수 (반복되어야 함)
-  #makeLottoNum() {
-    const NEED_NUM = 6;
-    const myLottoNum = [];
-    while (myLottoNum.length < NEED_NUM) {
-      const pick = MissionUtils.Random.pickNumberInRange(1, 45);
-      if (!myLottoNum.includes(pick)) {
-        myLottoNum.push(pick); // 일단 이 배열은 정렬 안되어 있음. 하지만 숫자상태
-      }
-    }
-    const sortLottoNum = myLottoNum.sort((a, b) => a - b);
-    // MissionUtils.Console.print(myLottoNum.sort((a, b) => a - b)); // 정렬되었지만 숫자형태 다른함수로 뺄거임.
-    Console.print(sortLottoNum);
+  //// 랜덤 로또 번호 생성 함수 (반복되어야 함)
+  //#makeLottoNum() {
+  //  const NEED_NUM = 6;
+  //  const myLottoNum = [];
+  //  while (myLottoNum.length < NEED_NUM) {
+  //    const pick = MissionUtils.Random.pickNumberInRange(1, 45);
+  //    if (!myLottoNum.includes(pick)) {
+  //      myLottoNum.push(pick); // 일단 이 배열은 정렬 안되어 있음. 하지만 숫자상태
+  //    }
+  //  }
+  //  const sortLottoNum = myLottoNum.sort((a, b) => a - b);
+  //  // MissionUtils.Console.print(myLottoNum.sort((a, b) => a - b)); // 정렬되었지만 숫자형태 다른함수로 뺄거임.
+  //  Console.print(sortLottoNum);
 
-    return sortLottoNum;
-  }
+  //  return sortLottoNum;
+  //}
 
-  #makeArrayOfLottoNum(numOfBuy) {
-    const arrayofLotto = [];
-    while (arrayofLotto.length < numOfBuy) {
-      arrayofLotto.push(this.#makeLottoNum());
-    }
+  //#makeArrayOfLottoNum(numOfBuy) {
+  //  const arrayofLotto = [];
+  //  while (arrayofLotto.length < numOfBuy) {
+  //    arrayofLotto.push(this.#makeLottoNum());
+  //  }
 
-    return arrayofLotto;
-  }
+  //  return arrayofLotto;
+  //}
 
   // ------------------당첨번호 & 보너스번호 입력 함수 총집합--------------------
   async #allOfInputfunc() {

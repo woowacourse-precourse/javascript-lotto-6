@@ -6,6 +6,7 @@ class NumOfBuy {
     const inputMoney = await this.#inputMoney();
     this.#validateMoneyIsNum(inputMoney);
     this.#validateMoneyUnit(inputMoney);
+    this.#checkNotZero(inputMoney);
     const numOfBuy = this.#claculateNumOfBuy(inputMoney);
 
     return numOfBuy; // 숫자형
@@ -32,6 +33,13 @@ class NumOfBuy {
     }
   }
 
+  // 입력값은 0보다 커야 함.
+  #checkNotZero(inputMoney) {
+    if (inputMoney <= 0) {
+      throw new Error(`[ERROR] 구입금액은 0보다 커야합니다.`);
+    }
+  }
+
   // 로또 구입 갯수 계산
   #claculateNumOfBuy(inputMoney) {
     const MONEY_UNIT = 1000;
@@ -42,3 +50,6 @@ class NumOfBuy {
 }
 
 export default NumOfBuy;
+
+// const buy = new NumOfBuy();
+// buy.run();
