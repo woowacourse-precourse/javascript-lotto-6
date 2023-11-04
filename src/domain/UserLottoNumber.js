@@ -15,6 +15,10 @@ class UserLottoNumber {
     this.bonusNumber = parseInt(input.trim(), 10);
     return this.bonusNumber;
   }
+
+  ascendingOrder() {
+    this.baseNumbers.sort((a, b) => a - b);
+  }
 }
 
 export default UserLottoNumber;
