@@ -218,8 +218,7 @@
 
 출력값 테스트 - 수익률
 
-- [ ] 수익률 소숫점 자릿수가 다를 경우에 대한 예외처리
-- [ ] 올바르게 계산되어있는지에 대한 예외처리
+- [x] 수익률 소숫점 자릿수가 다를 경우에 대한 예외처리
 
 ---
 
@@ -262,11 +261,11 @@
   - [ ] 여러 함수에서 중복되어 사용하는 코드를 함수 분리를 통해 관리하였는가?
   - [ ] 함수의 길이를 15라인을 넘지 않도록 분리하였는가?
 - [ ] JavaScript에서 객체를 만드는 다양한 방법을 이해하고 사용한다.
-  - [ ] **[JavaScript 객체 기본](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)** 참고
-  - [ ] [Classes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes) 참고
+  - [x] **[JavaScript 객체 기본](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)** 참고
+  - [x] [Classes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes) 참고
 - [ ] 테스트를 작성하는 이유에 대해 본인의 경험을 토대로 정리해본다
   - [ ] 테스트에 어떤 유용함을 느꼈는 지 알아본다
-  - [ ] [학습테스트를 통해 JUnit 학습하기](https://techcourse-storage.s3.ap-northeast-2.amazonaws.com/9b82d8a360c548fcadd14c551dbcbe06) 참고
+  - [x] [학습테스트를 통해 JUnit 학습하기](https://techcourse-storage.s3.ap-northeast-2.amazonaws.com/9b82d8a360c548fcadd14c551dbcbe06) 참고
 - [x] 처음부터 큰 단위의 테스트를 만들지 않는다
-  - [ ] 문제를 작게 나누었는가?
-  - [ ] 핵심 기능에 가까운 부분부터 테스트를 만들었는가?
+  - [x] 문제를 작게 나누었는가?
+  - [x] 핵심 기능에 가까운 부분부터 테스트를 만들었는가?
