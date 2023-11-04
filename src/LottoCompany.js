@@ -3,7 +3,7 @@ import PurchaseAmountValidator from './Validator/purchaseAmountValidator.js';
 import CheckLotto from './util/CheckLotto.js';
 import Formatting from './util/Formatting.js';
 import BonusNumberValidator from './validator/BonusNumberValidator.js';
-import winningNumberArrayValidator from './validator/WinningNumberArrayValidator.js';
+import WinningNumberArrayValidator from './validator/WinningNumberArrayValidator.js';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import { Console } from '@woowacourse/mission-utils';
@@ -21,7 +21,7 @@ class LottoCompany {
 
 	async #getWinningNumberArrayFromUser() {
 		const winningNumberArray = (await InputView.inputWinningNumbersAsync()).split(',').map(Number);
-		winningNumberArrayValidator.validate(winningNumberArray);
+		WinningNumberArrayValidator.validate(winningNumberArray);
 		return winningNumberArray;
 	}
 
@@ -72,7 +72,7 @@ class LottoCompany {
 		} while (!isDrawn);
 	}
 
-	async announceResult() {
+	announceResult() {
 		const purchaseAmount = this.#lottoBuyer.getPurchaseAmount();
 		const lottoResult = this.#lottoBuyer.checkResult(this.#winningNumberArray, this.#bonusNumber);
 		OutputView.printWinningResult(lottoResult, Formatting.insertCommasByThousandUnits(CheckLotto.calculateRateOfReturn(purchaseAmount, lottoResult)));
@@ -82,7 +82,7 @@ class LottoCompany {
 		await this.publishLottos();
 		await this.drawWinningNumberArray();
 		await this.drawBonusNumber();
-		await this.announceResult();
+		this.announceResult();
 	}
 }
 
