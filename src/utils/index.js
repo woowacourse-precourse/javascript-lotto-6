@@ -1,5 +1,5 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, LOTTO } from './constants.js';
+import { ERROR_MESSAGE, LOTTO, LOTTO_STATISTICS_KEY } from './constants.js';
 
 function printMessage(message) {
   return Console.print(message);
@@ -25,4 +25,17 @@ function throwError(message, condition = true) {
   throw new Error(`${ERROR_MESSAGE.header} ${message}`);
 }
 
-export { printMessage, readLineAsync, generateLotteryNumber, throwError };
+function generateStatistics() {
+  return LOTTO_STATISTICS_KEY.reduce((acc, key) => {
+    acc[key] = 0;
+    return acc;
+  }, {});
+}
+
+export {
+  printMessage,
+  readLineAsync,
+  generateLotteryNumber,
+  generateStatistics,
+  throwError,
+};
