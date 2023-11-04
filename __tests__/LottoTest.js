@@ -31,5 +31,19 @@ describe("로또 클래스 테스트", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 46]);
     }).toThrow("[ERROR]");
+
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, -1]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("로또 번호가 빈 값을 반환하면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, ""]);
+    }).toThrow("[ERROR]");
+
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, " "]);
+    }).toThrow("[ERROR]");
   });
 });
