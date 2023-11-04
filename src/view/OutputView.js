@@ -8,7 +8,8 @@ const OutputView = {
   printAutoLotto(lottos, purchaseAmount) {
     Console.print(`${purchaseAmount}개를 구매했습니다.`);
     lottos.forEach((lotto) => {
-      Console.print(lotto);
+      const lottoString = `[${lotto.join(', ')}]`;
+      Console.print(lottoString);
     });
   },
 
