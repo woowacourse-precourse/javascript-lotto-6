@@ -27,6 +27,7 @@ function issueTickets(lottoMoney) {
   for (let i = 0; i < ticketsToIssue; i++) {
     ticketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     ticket = Lotto(ticketNumbers);
+    ticket.sortNumbers();
     tickets.append(ticket);
   }
 

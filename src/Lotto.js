@@ -12,7 +12,12 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  sortNumbers() {
+    this.#numbers.sort(function(a, b) {
+      if (a > b) return 1;
+      if (a < b) return -1;
+    });
+  }
 }
 
 export default Lotto;
