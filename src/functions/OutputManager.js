@@ -14,7 +14,8 @@ class OutputManager {
     for (let i = 0; i < countsOfLottoToNumber; i += 1) {
       let newLottoNumbers = sortNumbers(generateUniqueRandomNumbers());
       new Lotto(newLottoNumbers); // validation check
-      Console.print(newLottoNumbers);
+      // 그대로 출력할 경우 배열 모양의 문자열 형태로 출력하지 못하기에 가공하여 출력한다.
+      Console.print(`[${newLottoNumbers.join(", ")}]`);
       purchasedLotto.push(newLottoNumbers);
     }
     return purchasedLotto;
@@ -49,6 +50,10 @@ class OutputManager {
 
   showEmptyLine() {
     Console.print(EMPTY_LINE);
+  }
+
+  showError(error) {
+    Console.print(error);
   }
 }
 
