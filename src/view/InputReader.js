@@ -4,6 +4,11 @@ import GameError from '../errors/GameError.js';
 import paramType from '../lib/paramType/src/paramType.js';
 
 export default class InputReader {
+  async winningNumbers() {
+    const userInput = await this.#onRead(REQUEST_MESSAGE.WINNING_NUMBERS);
+    return userInput;
+  }
+
   async purchasePrice() {
     const userInput = await this.#onRead(REQUEST_MESSAGE.PURCHASE_PRISE);
     return userInput;
@@ -27,7 +32,7 @@ export default class InputReader {
     return response !== undefined || response !== null;
   }
 
-  #alert(message) {
+  #alert(message, _ = paramType(message, 'string')) {
     console.warn(message);
   }
 }
