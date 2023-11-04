@@ -25,12 +25,13 @@
 
 - [x] 당청 번호를 입력 받는다. request.winningNumber 
     - [x] 입력값이 적당한지 확인한다. validate.winningNumber()
+    ** 유효 검사 추후 보충 
     - [x] 유효하지 않으면 [ERROR]를 출력하고, 해당 부분에서 다시 진행한다.
     - [x] 당첨번호를 정렬한 후 값으로 저장한다.
-- [ ] 보너스 번호를 입력 받는다. request.bonusNumber
-    - [ ] 입력값이 적당한지 확인한다. validate.bonusNumber()
-    - [ ] 유효하지 않으면 [ERROR]를 출력하고, 해당 부분에서 다시 진행한다.
-    - [ ] 보너스 번호를 값으로 저장한다.
+- [x] 보너스 번호를 입력 받는다. request.bonusNumber
+    - [x] 입력값이 적당한지 확인한다. validate.bonusNumber()
+    - [x] 유효하지 않으면 [ERROR]를 출력하고, 해당 부분에서 다시 진행한다.
+    - [x] 보너스 번호를 값으로 저장한다.
 
 - [ ] 구입한 로또와 당첨번호를 비교해서 당첨결과를 만든다. lottoMachine.read();
 - [ ] 수익률을 계산한다. calculate.profitFrom();

@@ -29,6 +29,20 @@ class Request {
       }
     }
   }
+
+  static async bonusNumber() {
+    let condition = false;
+    while (!condition) {
+      try {
+        const input = await prompt.in('\n보너스 번호를 입력해 주세요.\n');
+        validate.bonusNumber(input);
+        condition = true;
+        return input;
+      } catch (error) {
+        prompt.out(error.message);
+      }
+    }
+  }
 }
 
 export default Request;

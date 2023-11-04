@@ -12,11 +12,14 @@ class App {
 
   #winningNumbers;
 
+  #bonusNumber;
+
   constructor() {
     this.#money = 0;
     this.#lottoQuantity = 0;
     this.#lottos = [];
     this.#winningNumbers = 0;
+    this.#bonusNumber = 0;
   }
 
   async play() {
@@ -26,6 +29,7 @@ class App {
     notice.quantity(this.#lottoQuantity);
     notice.totalLotto(this.#lottos);
     this.#winningNumbers = await Request.winningNumbers();
+    this.#bonusNumber = await Request.bonusNumber();
   }
 }
 
