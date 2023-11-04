@@ -1,8 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 
 import { INPUT_MESSAGE } from '../constants/message/io.js';
+import { DELIMITER } from '../constants/message/setting.js';
 import Converter from '../utils/converter.js';
-import DELIMITER from '../constants/message/setting.js';
 
 class InputView {
   static async readMoney() {
