@@ -28,35 +28,31 @@ class Lotto {
   }
 
   getLottoResult(myLottoNumbers, bonusNumber, purchasePrice) {
-    const lottoResult = { first: 0, second: 0, third: 0, fourth: 0, fifth: 0 };
-
-    myLottoNumbers.forEach((lotto) => {
-      const correctCount = lotto.filter((number) => this.#numbers.includes(number)).length;
-      const bonus = lotto.includes(bonusNumber);
-      if (correctCount === 3) {
-        lottoResult['fifth'] += 1;
-      } else if (correctCount === 4) {
-        lottoResult['fourth'] += 1;
-      } else if (correctCount === 5) {
-        if (bonus) lottoResult['second'] += 1;
-        else lottoResult['third'] += 1;
-      } else if (correctCount === 6) {
-        lottoResult['first'] += 1;
-      }
-    });
-
+    const lottoResult = this.#compareWinningNumber(myLottoNumbers, bonusNumber);
     const rate = this.#getProfitRate(lottoResult, purchasePrice);
     outputView.printLottoResult(lottoResult, rate);
   }
 
+  #compareWinningNumber(myLottoNumbers, bonusNumber) {
+    const lottoResult = { first: 0, second: 0, third: 0, fourth: 0, fifth: 0 };
+    myLottoNumbers.forEach((lotto) => {
+      const correctCount = lotto.filter((number) => this.#numbers.includes(number)).length;
+      const bonus = lotto.includes(bonusNumber);
+      if (correctCount === 3) lottoResult['fifth'] += 1;
+      else if (correctCount === 4) lottoResult['fourth'] += 1;
+      else if (correctCount === 5) {
+        if (bonus) lottoResult['second'] += 1;
+        else lottoResult['third'] += 1;
+      } else if (correctCount === 6) lottoResult['first'] += 1;
+    });
+    return lottoResult;
+  }
+
   #getProfitRate(lottoResult, purchasePrice) {
     let totalProfit = 0;
-    const prices = WINNING_PRICE;
-
     for (let key in lottoResult) {
-      totalProfit += lottoResult[key] * prices[key];
+      totalProfit += lottoResult[key] * WINNING_PRICE[key];
     }
-
     return ((totalProfit / purchasePrice) * 100).toFixed(1);
   }
 }

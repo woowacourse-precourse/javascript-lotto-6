@@ -1,4 +1,4 @@
-import { Random, Console } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 import MESSAGE from './constant/message.js';
 import Lotto from './Lotto.js';
 import inputView from './View/inputView.js';
