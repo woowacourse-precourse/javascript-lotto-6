@@ -1,22 +1,24 @@
 import { INDEX, PRIZE, RANK, UNIT } from "./constants/rule.js";
 
 class Result {
+  #result;
+
   constructor(lottos, userLotto, bonus) {
-    this.result = [];
-    this.calculateResult(lottos, userLotto, bonus);
+    this.#result = [];
+    this.#calculateResult(lottos, userLotto, bonus);
     this.statistics = Array.from({ length: RANK.LENGTH }).fill(0);
   }
 
-  calculateResult(lottos, userLotto, bonus) {
+  #calculateResult(lottos, userLotto, bonus) {
     lottos.forEach((lotto) => {
-      const count = this.calculateEachLotto(lotto, userLotto);
-      const isBonus = this.calculateBonus(lotto, bonus);
-      const prize = this.calculatePrize(count, isBonus);
-      this.saveEachResult(count, isBonus, prize);
+      const count = this.#calculateEachLotto(lotto, userLotto);
+      const isBonus = this.#calculateBonus(lotto, bonus);
+      const prize = this.#calculatePrize(count, isBonus);
+      this.#saveEachResult(count, isBonus, prize);
     });
   }
 
-  calculateEachLotto(lotto, userLotto) {
+  #calculateEachLotto(lotto, userLotto) {
     let count = 0;
 
     lotto.forEach((value) => {
@@ -28,21 +30,21 @@ class Result {
     return count;
   }
 
-  calculateBonus(lotto, bonus) {
+  #calculateBonus(lotto, bonus) {
     return lotto.includes(bonus);
   }
 
-  saveEachResult(count, isBonus, prize) {
+  #saveEachResult(count, isBonus, prize) {
     const data = {
       count,
       isBonus,
       prize,
     };
 
-    this.result.push(data);
+    this.#result.push(data);
   }
 
-  calculatePrize(count, isBonus) {
+  #calculatePrize(count, isBonus) {
     if (count === RANK.FIRST) {
       return PRIZE.FIRST;
     } else if (count === RANK.SECOND && isBonus) {
@@ -59,14 +61,14 @@ class Result {
   }
 
   getStatistics() {
-    this.result.forEach((each) => {
-      this.calculateStatistics(each);
+    this.#result.forEach((each) => {
+      this.#calculateStatistics(each);
     });
 
     return this.statistics;
   }
 
-  calculateStatistics(result) {
+  #calculateStatistics(result) {
     if (result.count === RANK.FIRST) {
       this.statistics[INDEX.FIRST_RANK] += 1;
     } else if (result.count === RANK.SECOND && result.isBonus) {
@@ -81,19 +83,19 @@ class Result {
   }
 
   getEarningRate(sum) {
-    const earningRate = this.calculateEarningRate(sum);
+    const earningRate = this.#calculateEarningRate(sum);
     return earningRate;
   }
 
-  calculateEarningRate(sum) {
-    const sumOfPrize = this.calculateSumOfPrize();
+  #calculateEarningRate(sum) {
+    const sumOfPrize = this.#calculateSumOfPrize();
     const earningRate = (sumOfPrize / sum) * 100;
     const fixedEarningRate = earningRate.toFixed(1);
     return fixedEarningRate;
   }
 
-  calculateSumOfPrize() {
-    const sumOfPrize = this.result.reduce((acc, curr) => {
+  #calculateSumOfPrize() {
+    const sumOfPrize = this.#result.reduce((acc, curr) => {
       return acc + curr.prize;
     }, 0);
 

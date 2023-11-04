@@ -3,14 +3,14 @@ import { ERROR } from "./constants/message.js";
 
 class Validate {
   isValidPurchaseSum(num) {
-    if (!this.isOnlyNumber(num) || !this.isThousandUnit(num)) {
+    if (!this.#isOnlyNumber(num) || !this.#isThousandUnit(num)) {
       return false;
     }
 
     return true;
   }
 
-  isOnlyNumber(input) {
+  #isOnlyNumber(input) {
     if (!REGEX.ONLY_NUMBER.test(input)) {
       throw new Error(ERROR.NOT_ONLY_NUMBER);
     }
@@ -18,7 +18,7 @@ class Validate {
     return true;
   }
 
-  isThousandUnit(input) {
+  #isThousandUnit(input) {
     const number = parseInt(input, 10);
 
     if (number % UNIT.PURCHASE !== 0) {
@@ -38,10 +38,10 @@ class Validate {
 
   isValidUserLottoInput(input) {
     if (
-      this.isExistNaN(input) ||
-      !this.isValidLength(input) ||
-      !this.isValidRangeEachLotto(input) ||
-      this.isDuplicate(input)
+      this.#isExistNaN(input) ||
+      !this.#isValidLength(input) ||
+      !this.#isValidRangeEachLotto(input) ||
+      this.#isDuplicate(input)
     ) {
       return false;
     }
@@ -49,7 +49,7 @@ class Validate {
     return true;
   }
 
-  isExistNaN(input) {
+  #isExistNaN(input) {
     const isAnyNaN = input.some((value) => Number.isNaN(value));
 
     if (isAnyNaN) {
@@ -59,7 +59,7 @@ class Validate {
     return false;
   }
 
-  isValidLength(input) {
+  #isValidLength(input) {
     if (input.length !== LOTTO.LENGTH) {
       throw new Error(ERROR.INVALID_LOTTO_LENGTH);
     }
@@ -67,8 +67,8 @@ class Validate {
     return true;
   }
 
-  isValidRangeEachLotto(input) {
-    const isValid = input.every((value) => this.isValidRange(value));
+  #isValidRangeEachLotto(input) {
+    const isValid = input.every((value) => this.#isValidRange(value));
 
     if (!isValid) {
       return false;
@@ -77,7 +77,7 @@ class Validate {
     return true;
   }
 
-  isValidRange(value) {
+  #isValidRange(value) {
     if (typeof value !== "number") {
       value = parseInt(value, 10);
     }
@@ -89,7 +89,7 @@ class Validate {
     return true;
   }
 
-  isDuplicate(input) {
+  #isDuplicate(input) {
     const set = new Set(input);
 
     if (set.size !== input.length) {
@@ -101,9 +101,9 @@ class Validate {
 
   isValidBonusNumber(input, lotto) {
     if (
-      !this.isOnlyNumber(input) ||
-      !this.isValidRange(input) ||
-      this.isExistInLotto(input, lotto)
+      !this.#isOnlyNumber(input) ||
+      !this.#isValidRange(input) ||
+      this.#isExistInLotto(input, lotto)
     ) {
       return false;
     }
@@ -111,7 +111,7 @@ class Validate {
     return true;
   }
 
-  isExistInLotto(input, lotto) {
+  #isExistInLotto(input, lotto) {
     if (typeof input !== "number") {
       input = parseInt(input, 10);
     }

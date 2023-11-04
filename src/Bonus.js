@@ -1,9 +1,11 @@
 import Validate from "./Validate.js";
 
 class Bonus {
+  #bonus;
+
   constructor(bonus, userLotto) {
     this.#validate(bonus, userLotto);
-    this.bonus = parseInt(bonus, 10);
+    this.#bonus = parseInt(bonus, 10);
   }
 
   #validate(bonus, userLotto) {
@@ -12,7 +14,7 @@ class Bonus {
   }
 
   getBonus() {
-    return this.bonus;
+    return this.#bonus;
   }
 }
 

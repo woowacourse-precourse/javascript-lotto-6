@@ -4,37 +4,36 @@ import { LOTTO } from "./constants/rule.js";
 import Utils from "./Utils.js";
 
 class Purchase {
+  #amount;
+  #lottos = [];
+
   constructor(sum) {
-    this.checkValidPurchaseSum(sum);
-    this.amount = Utils.getLottoAmount(sum);
-    this.lottos = this.purchaseLottos();
+    this.#checkValidPurchaseSum(sum);
+    this.#amount = Utils.getLottoAmount(sum);
+    this.#purchaseLottos();
   }
 
-  checkValidPurchaseSum(sum) {
+  #checkValidPurchaseSum(sum) {
     const validate = new Validate();
     validate.isValidPurchaseSum(sum);
   }
 
   getAmount() {
-    return this.amount;
+    return this.#amount;
   }
 
   getLottos() {
-    return this.lottos;
+    return this.#lottos;
   }
 
-  purchaseLottos() {
-    let lottos = [];
-
-    for (let i = 0; i < this.amount; i++) {
-      const lotto = this.purhcaseLotto();
-      lottos.push(lotto);
+  #purchaseLottos() {
+    for (let i = 0; i < this.#amount; i++) {
+      const lotto = this.#purhcaseLotto();
+      this.#lottos.push(lotto);
     }
-
-    return lottos;
   }
 
-  purhcaseLotto() {
+  #purhcaseLotto() {
     const lotto = Random.pickUniqueNumbersInRange(
       LOTTO.MIN_RANGE,
       LOTTO.MAX_RANGE,

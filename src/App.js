@@ -17,15 +17,15 @@ class App {
   async play() {
     try {
       this.#sum = await Print.getPurchaseSum();
-      this.purchaseLotto();
-      await this.getUserLottoInput();
+      this.#purchaseLotto();
+      await this.#getUserLottoInput();
     } catch (error) {
       Print.showErrorMessage(error.message);
       await this.play();
     }
   }
 
-  purchaseLotto() {
+  #purchaseLotto() {
     const purchase = new Purchase(this.#sum);
     const amount = purchase.getAmount();
     this.#lottos = purchase.getLottos();
@@ -36,48 +36,48 @@ class App {
     });
   }
 
-  async getUserLottoInput() {
+  async #getUserLottoInput() {
     try {
       const userLottoInput = await Print.getUserLottoNumber();
       Validate.isOnlyNumberAndComma(userLottoInput);
-      this.createUserLotto(userLottoInput);
-      await this.getUserBonusInput();
+      this.#createUserLotto(userLottoInput);
+      await this.#getUserBonusInput();
     } catch (error) {
       Print.showErrorMessage(error.message);
-      await this.getUserLottoInput();
+      await this.#getUserLottoInput();
     }
   }
 
-  createUserLotto(input) {
+  #createUserLotto(input) {
     const numbersArray = Utils.convertStringIntoNumberArray(input);
     const lotto = new Lotto(numbersArray);
     this.#userLotto = lotto.getUserLotto();
   }
 
-  async getUserBonusInput() {
+  async #getUserBonusInput() {
     try {
       const bonusInput = await Print.getUserBonusNumber();
       const bonus = new Bonus(bonusInput, this.#userLotto);
       this.#bonus = bonus.getBonus();
-      this.getResult();
+      this.#getResult();
     } catch (error) {
       Print.showErrorMessage(error.message);
-      await this.getUserBonusInput();
+      await this.#getUserBonusInput();
     }
   }
 
-  getResult() {
-    this.calculateResult();
-    this.showResult();
+  #getResult() {
+    this.#calculateResult();
+    this.#showResult();
   }
 
-  calculateResult() {
+  #calculateResult() {
     const result = new Result(this.#lottos, this.#userLotto, this.#bonus);
     this.#statistics = result.getStatistics();
     this.#earningRate = result.getEarningRate(this.#sum);
   }
 
-  showResult() {
+  #showResult() {
     Print.showResultPhrase();
     this.#statistics.forEach((statistic, rankIndex) => {
       Print.showStatistic(statistic, rankIndex);
