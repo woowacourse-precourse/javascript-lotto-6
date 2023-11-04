@@ -3,14 +3,14 @@ import BasicError from "../src/error/BasicError.js";
 import Lotto from "../src/model/Lotto.js";
 import { ErrorMessage } from "../src/utils/message.js";
 
-const getLottoNumbers = (start, end) => {
+export const getLottoNumbers = (start, end) => {
   if (end - start < LOTTO.NUMBER_COUNT) {
     throw new BasicError("로또 번호 만들기 불가능");
   }
   return [start, start + 1, start + 2, start + 3, start + 4, end];
 };
 
-const createLotto = (numbers) => () => new Lotto(numbers);
+export const createLotto = (numbers) => () => new Lotto(numbers);
 
 describe("로또 클래스 테스트", () => {
   test(`로또 번호의 개수가 ${LOTTO.NUMBER_COUNT}와 다르면 IncorrectLottoCountError`, () => {
