@@ -1,4 +1,4 @@
-import { CONSTANT, ERROR, REGEX } from '../constants/Constant.js';
+import { CONSTANT, ERROR, LOTTO_NUMBER } from '../constants/Constant.js';
 import ValidationError from '../ValidationError.js';
 
 const Validator = {
@@ -9,7 +9,7 @@ const Validator = {
   },
 
   validateLotto(lotto) {
-    this.checkIsInvalidDigit(lotto);
+    this.checkIsInvalidCount(lotto);
     this.checkHasNonNumericElements(lotto);
     this.checkHasDuplicate(lotto);
   },
@@ -32,8 +32,8 @@ const Validator = {
     }
   },
 
-  checkIsInvalidDigit(userInput) {
-    if (userInput.length !== CONSTANT.digit) {
+  checkIsInvalidCount(userInput) {
+    if (userInput.length !== LOTTO_NUMBER.count) {
       throw new ValidationError(ERROR.isInvalidDigit);
     }
   },

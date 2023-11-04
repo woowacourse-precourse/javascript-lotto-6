@@ -7,7 +7,7 @@ export const SYMBOL = Object.freeze({
   comma: ',',
 });
 
-export const RANDOM_NUMBER = Object.freeze({
+export const LOTTO_NUMBER = Object.freeze({
   minNum: 1,
   maxNum: 45,
   count: 6,
@@ -30,4 +30,5 @@ export const ERROR = Object.freeze({
   hasDuplicate: '로또 번호 중 중복된 숫자가 있습니다. 로또 번호는 모두 다른 수여야 합니다.',
   isInvalidDigit: `${CONSTANT.digit}개가 입력되지 않았습니다. ${CONSTANT.digit}개의 숫자를 입력해주세요.`,
   isNotInRange: '입력된 숫자 중 1-45 범위가 아닌 숫자가 있습니다. 범위 안의 숫자를 입력해주세요',
+  isInvalidCount: `${LOTTO_NUMBER.count}개가 입력되지 않았습니다. ${LOTTO_NUMBER.count}개의 숫자를 입력해주세요.`,
 });
