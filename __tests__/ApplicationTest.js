@@ -119,10 +119,10 @@ describe("로또 테스트", () => {
 
     const app = new App();
 
-    expect(app.checkLottoNumberValidate(winningNumbers)).toEqual([
+    expect(app.validateLottoNumbers(winningNumbers)).toEqual([
       1, 2, 3, 4, 5, 6,
     ]);
-    expect(app.checkBonusNumberValidate(bounsNumber, winningNumbers)).toBe(7);
+    expect(app.validateBonusNumber(bounsNumber, winningNumbers)).toBe(7);
   });
 
   test("당첨 결과 계산: 6자리 다 맞출 경우", () => {
