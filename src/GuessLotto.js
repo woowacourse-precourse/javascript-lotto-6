@@ -9,6 +9,38 @@ class GuessLotto {
 
   #lottoNumbers;
 
+  get guessNumbers() {
+    return this.#guessNumbers;
+  }
+
+  set guessNumbers(numbers) {
+    this.#guessNumbers = numbers;
+  }
+
+  get guessBonus() {
+    return this.#guessBonus;
+  }
+
+  set guessBonus(bonus) {
+    this.#guessBonus = bonus;
+  }
+
+  get lottoPieces() {
+    return this.#lottoPieces;
+  }
+
+  set lottoPieces(pieces) {
+    this.#lottoPieces = pieces;
+  }
+
+  get lottoNumbers() {
+    return this.#lottoNumbers;
+  }
+
+  set lottoNumbers(numbers) {
+    this.#lottoNumbers = numbers;
+  }
+
   constructor() {
     this.#guessNumbers = [];
     this.#guessBonus = null;
