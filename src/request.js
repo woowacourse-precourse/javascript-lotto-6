@@ -37,7 +37,7 @@ class Request {
         const input = await prompt.in('\n보너스 번호를 입력해 주세요.\n');
         validate.bonusNumber(input);
         condition = true;
-        return input;
+        return Number(input);
       } catch (error) {
         prompt.out(error.message);
       }

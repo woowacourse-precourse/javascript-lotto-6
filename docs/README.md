@@ -33,7 +33,7 @@
     - [x] 유효하지 않으면 [ERROR]를 출력하고, 해당 부분에서 다시 진행한다.
     - [x] 보너스 번호를 값으로 저장한다.
 
-- [ ] 구입한 로또와 당첨번호를 비교해서 당첨결과를 만든다. lottoMachine.read();
+- [x] 구입한 로또와 당첨번호를 비교해서 당첨결과를 만든다. lottoMachine.read();
 - [ ] 수익률을 계산한다. calculate.profitFrom();
 
 - [ ] 수익률과 당첨결과를 받아서 당첨 통계를 출력한다. prompt.out(statistic());

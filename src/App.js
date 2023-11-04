@@ -26,10 +26,22 @@ class App {
     this.#money = await Request.money();
     this.#lottoQuantity = calculate.countFrom(this.#money);
     this.#lottos = lottoMachine.make(this.#lottoQuantity);
-    // notice.quantity(this.#lottoQuantity);
     notice.totalLotto(this.#lottos, this.#lottoQuantity);
     this.#winningNumbers = await Request.winningNumbers();
     this.#bonusNumber = await Request.bonusNumber();
+    const result = App.getResult(this.#lottos, this.#winningNumbers);
+    lottoMachine.read(result, this.#bonusNumber);
+  }
+
+  static getResult(lottos, winningNumbers) {
+    const resultArray = [];
+
+    lottos.forEach((lotto) => {
+      const findResult = lottoMachine.find(lotto, winningNumbers);
+      resultArray.push(findResult);
+    });
+
+    return resultArray;
   }
 }
 
