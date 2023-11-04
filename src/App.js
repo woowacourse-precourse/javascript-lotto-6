@@ -18,6 +18,7 @@ class App {
       randomNums.sort((a, b) => a - b); // 오름차순 정렬
       if (!randomNums.includes(userRandomNums)) {
         userRandomNums.push(randomNums);
+        Console.print(randomNums)
         count++;
       }
       if (count === randomCount) {
@@ -25,11 +26,8 @@ class App {
       }
     };
 
-    for (let i = 0; i < count; i++) {
-      Console.print(userRandomNums[i])
-    }
 
-    
+
     // 당첨 번호 입력 - 유효한지 확인하는 코드 추가하기
     const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
     
