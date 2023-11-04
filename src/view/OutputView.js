@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import viewMessage from '../constants/viewMessage.js';
+import Formatting from '../util/Formatting.js';
 
 class OutputView {
 	static printNewLine() {
@@ -9,7 +10,7 @@ class OutputView {
 	static printPurchaseHistory(lottoNumberList) {
 		Console.print(`${lottoNumberList.length}${viewMessage.OUTPUT_PURCHASE_HISTORY}`);
 		lottoNumberList.forEach(lottoNumber => {
-			Console.print(`[${lottoNumber.join(', ')}]`);
+			Console.print(Formatting.convertArrayToString(lottoNumber));
 		});
 	}
 

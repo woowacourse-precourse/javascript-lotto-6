@@ -13,11 +13,11 @@ class CheckLotto {
 	static fifthPlace(lottoNumberArray, winningNumberArray) {
 		return this.getCorrectCount(lottoNumberArray, winningNumberArray) === lottoNumber.fifthPlaceCount;
 	}
-	
+
 	static fourthPlace(lottoNumberArray, winningNumberArray) {
 		return this.getCorrectCount(lottoNumberArray, winningNumberArray) === lottoNumber.fourthPlaceCount;
 	}
-	
+
 	static thirdPlace(lottoNumberArray, winningNumberArray, bonusNumber) {
 		if (this.getCorrectCount(lottoNumberArray, winningNumberArray) === lottoNumber.thirdPlaceCount) {
 			if (!lottoNumberArray.includes(bonusNumber)) {

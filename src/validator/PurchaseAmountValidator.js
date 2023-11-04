@@ -6,7 +6,7 @@ class PurchaseAmountValidator {
 			throw new Error(errorMessage.NOT_NUMBER);
 		}
 	}
-	
+
 	validateEnoughAmount(purchaseAmount) {
 		if (purchaseAmount < 1000) {
 			throw new Error(errorMessage.NOT_ENOUGH_PURCHASE_AMOUNT);
