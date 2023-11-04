@@ -1,11 +1,22 @@
 import { Random } from "@woowacourse/mission-utils";
+import Validate from "./Validate.js";
 import { LOTTO } from "./constants/rule.js";
 import Utils from "./Utils.js";
 
 class Purchase {
-  constructor(amount) {
+  constructor(sum) {
+    this.checkValidPurchaseSum(sum);
+    this.amount = Utils.getLottoAmount(sum);
     this.lottos = [];
-    this.amount = amount;
+  }
+
+  checkValidPurchaseSum(sum) {
+    const validate = new Validate();
+    validate.isValidPurchaseSum(sum);
+  }
+
+  getAmount() {
+    return this.amount;
   }
 
   getLottos() {

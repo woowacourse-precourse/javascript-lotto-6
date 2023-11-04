@@ -14,9 +14,7 @@ class App {
   async play() {
     try {
       this.#sum = await Print.getPurchaseSum();
-      this.checkValidPurchaseSum();
-      const amount = Utils.getLottoAmount(this.#sum);
-      this.purchaseLotto(amount);
+      this.purchaseLotto();
       await this.getUserLottoInput();
     } catch (error) {
       Print.showErrorMessage(error.message);
@@ -24,15 +22,12 @@ class App {
     }
   }
 
-  checkValidPurchaseSum() {
-    const validate = new Validate();
-    validate.isValidPurchaseSum(this.#sum);
-  }
-
-  purchaseLotto(amount) {
-    Print.showPurchaseMessage(amount);
-    const purchase = new Purchase(amount);
+  purchaseLotto() {
+    const purchase = new Purchase(this.#sum);
+    const amount = purchase.getAmount();
     this.#lottos = purchase.getLottos();
+
+    Print.showPurchaseMessage(amount);
     this.#lottos.forEach((lotto) => {
       Print.showLotto(lotto);
     });
