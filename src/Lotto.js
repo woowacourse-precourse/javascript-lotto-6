@@ -1,4 +1,4 @@
-import { lottoErrorMessage } from './constants/errorMessage';
+import { LOTTO_ERROR_MESSAGE } from './constants/errorMessage';
 import Validate from './Validate';
 
 class Lotto {
@@ -14,10 +14,10 @@ class Lotto {
   }
 
   static #validate(numbers) {
-    Validate.isSixNumbers(numbers, lottoErrorMessage.sixNumber);
-    Validate.isDuplicate(numbers, lottoErrorMessage.duplicate);
-    Validate.isInteger(numbers, lottoErrorMessage.integer);
-    Validate.isInRange(numbers, lottoErrorMessage.inRange);
+    Validate.isSixNumbers(numbers, LOTTO_ERROR_MESSAGE.sixNumber);
+    Validate.isDuplicate(numbers, LOTTO_ERROR_MESSAGE.duplicate);
+    Validate.isInteger(numbers, LOTTO_ERROR_MESSAGE.integer);
+    Validate.isInRange(numbers, LOTTO_ERROR_MESSAGE.inRange);
   }
 }
 

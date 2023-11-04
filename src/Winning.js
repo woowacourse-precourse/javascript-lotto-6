@@ -1,6 +1,6 @@
 import {
-  winningNumbersErrorMessage,
-  winningBonusErrorMessage,
+  WINNING_NUMBERS_ERROR_MESSAGE,
+  WINNING_BONUS_ERROR_MESSAGE,
 } from './constants/errorMessage';
 import Validate from './Validate';
 
@@ -44,15 +44,21 @@ class Winning {
   }
 
   static #validateWinningNumbers(winningNumbers) {
-    Validate.isSixNumbers(winningNumbers, winningBonusErrorMessage.sixNumber);
-    Validate.isDuplicate(winningNumbers, winningNumbersErrorMessage.duplicate);
-    Validate.isInteger(winningNumbers, winningNumbersErrorMessage.integer);
-    Validate.isInRange(winningNumbers, winningNumbersErrorMessage.inRange);
+    Validate.isSixNumbers(
+      winningNumbers,
+      WINNING_BONUS_ERROR_MESSAGE.sixNumber,
+    );
+    Validate.isDuplicate(
+      winningNumbers,
+      WINNING_NUMBERS_ERROR_MESSAGE.duplicate,
+    );
+    Validate.isInteger(winningNumbers, WINNING_NUMBERS_ERROR_MESSAGE.integer);
+    Validate.isInRange(winningNumbers, WINNING_NUMBERS_ERROR_MESSAGE.inRange);
   }
 
   static #validateBonusNumber(bonusNumber) {
-    Validate.isInteger([bonusNumber], winningBonusErrorMessage.integer);
-    Validate.isInRange([bonusNumber], winningBonusErrorMessage.inRange);
+    Validate.isInteger([bonusNumber], WINNING_BONUS_ERROR_MESSAGE.integer);
+    Validate.isInRange([bonusNumber], WINNING_BONUS_ERROR_MESSAGE.inRange);
   }
 
   static #isMatch(baseNumbers, targetNumber) {

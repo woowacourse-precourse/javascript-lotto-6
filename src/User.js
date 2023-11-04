@@ -1,7 +1,7 @@
 import Validate from './Validate';
 import Lotto from './Lotto';
 import pickUniqueRandomNumbers from './utils/pickUniqueRandomNumbers';
-import { purchaseAmountErrorMessage } from './constants/errorMessage';
+import { PURCHASE_AMOUNT_ERROR_MESSAGE } from './constants/errorMessage';
 import LOTTO_NUMBER from './constants/lottoNumber';
 
 class User {
@@ -48,10 +48,10 @@ class User {
   }
 
   static #validatePurchaseAmount(purchaseAmount) {
-    Validate.isInteger([purchaseAmount], purchaseAmountErrorMessage.integer);
+    Validate.isInteger([purchaseAmount], PURCHASE_AMOUNT_ERROR_MESSAGE.integer);
     Validate.isMultipleThousand(
       [purchaseAmount],
-      purchaseAmountErrorMessage.multipleThousand,
+      PURCHASE_AMOUNT_ERROR_MESSAGE.multipleThousand,
     );
   }
 }

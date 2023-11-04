@@ -23,12 +23,8 @@ class Validate {
     }
   }
 
-  static isAscendingOrder(numbers, errorMessage) {
-    const sortedNumbers = [...numbers].sort((a, b) => a - b);
-    const isEqual = (a, b) => a === b;
-    if (
-      !numbers.every((number, index) => isEqual(number, sortedNumbers[index]))
-    ) {
+  static isMultipleThousand(numbers, errorMessage) {
+    if (!numbers.every((number) => number % 1000 === 0)) {
       Validate.throwError(errorMessage);
     }
   }
