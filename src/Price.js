@@ -1,3 +1,4 @@
+import validationUtils from './utils/validationUtils.js';
 import MESSAGE from './constants/message.js';
 import VALUE from './constants/value.js';
 
@@ -6,18 +7,12 @@ class Price {
 
   constructor(price) {
     this.#price = price;
-    this.#validate();
+    this.#validate(price);
   }
 
-  #validate() {
-    this.#checkNumber();
+  #validate(price) {
+    validationUtils.checkNumber(price);
     this.#checkUnit();
-  }
-
-  #checkNumber() {
-    if (!Number.isSafeInteger(this.#price)) {
-      throw new Error(MESSAGE.error.numericPrice);
-    }
   }
 
   #checkUnit() {
