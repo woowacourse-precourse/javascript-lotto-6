@@ -14,5 +14,11 @@ class View {
     LottoValidator.isLotto(answer);
     return answer;
   }
+
+  static async askBonusNumber(winningNumbers, message) {
+    const answer = await MissionUtils.Console.readLineAsync(message);
+    LottoValidator.bonusValidate(winningNumbers, answer);
+    return answer;
+  }
 }
 export default View;
