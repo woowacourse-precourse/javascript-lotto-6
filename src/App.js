@@ -1,5 +1,7 @@
 class App {
-  async play() {}
+  async play() {
+    await this.null;
+  }
 }
 
 export default App;
