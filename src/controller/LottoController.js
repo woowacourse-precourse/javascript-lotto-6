@@ -7,12 +7,16 @@ import { STATIC_NUMBER } from "../static/Static.js";
 class LottoController {
   #lottos = [];
   #purchaseQty;
+  #winningNums = [];
+  #bonusNum;
 
   async playGame() {
     await this.setPurchaseQty();
     this.showPurchaseQuantity();
     this.setLottos();
     this.showLottos();
+    await this.setWinningNums();
+    await this.setBonusNum();
   }
 
   async setPurchaseQty() {
@@ -46,6 +50,14 @@ class LottoController {
       Sort.sortNumArrASC(lotto);
       OutputView.printLotto(lotto);
     });
+  }
+
+  async setWinningNums() {
+    this.#winningNums = await InputView.readWinningNums();
+  }
+
+  async setBonusNum() {
+    this.#winningNums = await InputView.readBonusNum();
   }
 }
 

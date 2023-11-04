@@ -9,4 +9,10 @@ const PRINT_MESSAGE = Object.freeze({
   quantity: "개를 구매했습니다.",
 });
 
-export { STATIC_NUMBER, PRINT_MESSAGE };
+const ASK_MESSAGE = Object.freeze({
+  purchasePrice: "구입금액을 입력해 주세요.\n",
+  winningNums: "\n당첨 번호를 입력해 주세요.\n",
+  bonusNum: "\n보너스 번호를 입력해 주세요.\n",
+});
+
+export { STATIC_NUMBER, PRINT_MESSAGE, ASK_MESSAGE };
