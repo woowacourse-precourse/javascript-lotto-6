@@ -6,10 +6,9 @@ class LottoSeller {
   }
 
   sellLotto(lottoPrice) {
-    return {
-      quantity: this.#computer.calculateQuantity(lottoPrice),
-      lottos: this.#computer.generateLotto(lottoPrice),
-    };
+    const tickets = this.#computer.generateLotto(lottoPrice);
+
+    return tickets;
   }
 }
 

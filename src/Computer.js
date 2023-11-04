@@ -8,15 +8,15 @@ class Computer {
   }
 
   generateLotto(lottoPrice) {
-    const quantity = this.calculateQuantity(Number(lottoPrice));
-    const lottoes = Array.from({ length: quantity }, () => {
+    const quantity = this.#calculateQuantity(Number(lottoPrice));
+    const lottos = Array.from({ length: quantity }, () => {
       return new Lotto(this.#generator()).findNumbers();
     });
 
-    return lottoes;
+    return { quantity, lottos };
   }
 
-  calculateQuantity(lottoPrice) {
+  #calculateQuantity(lottoPrice) {
     return lottoPrice / 1000;
   }
 }

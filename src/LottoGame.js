@@ -5,20 +5,22 @@ import { generator } from './util/generator.js';
 
 class LottoGame {
   #user;
-  #computer;
+  #seller;
 
   constructor() {
     this.#user = null;
-    this.#computer = null;
+    this.#seller = null;
   }
 
   setUpGame() {
-    this.#computer = new Computer(generator);
-    this.#user = new User(new LottoSeller(this.#computer));
+    const computer = new Computer(generator);
+    this.#seller = new LottoSeller(computer);
   }
 
   purchace(lottoPrice) {
-    const lottos = this.#user.purchaceLottos(lottoPrice);
+    this.#user = new User(this.#seller, lottoPrice);
+    const lottos = this.#user.purchaceLottos();
+
     return lottos;
   }
 }
