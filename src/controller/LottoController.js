@@ -1,8 +1,10 @@
-import PurchaseAmount from '../src/models/PurchaseAmount.js';
+import Lotto from '../models/Lotto.js';
+import LottoGenerator from '../models/LottoGenerator.js';
+import LottoTicket from '../models/LottoTicket.js';
+import PurchaseAmount from '../models/PurchaseAmount.js';
 
 class LottoController {
   #lottoCount;
-
   constructor(inputView, outputView) {
     this.inputView = inputView;
     this.outputView = outputView;
@@ -10,6 +12,7 @@ class LottoController {
 
   async start() {
     await this.setLottoCount();
+    const lottoTicket = this.setLottoTicket();
   }
 
   async setLottoCount() {
@@ -24,6 +27,19 @@ class LottoController {
         this.outputView.printError(error.message);
       }
     }
+  }
+
+  setLottoTicket() {
+    const lottoTicket = new LottoTicket();
+    while (lottoTicket.getLottoTicketLength() !== this.#lottoCount) {
+      try {
+        const lotto = new Lotto(LottoGenerator.generator());
+        lottoTicket.addLottoToLottoTicket(lotto.getLotto());
+      } catch (error) {
+        this.outputView.printError(error.message);
+      }
+    }
+    return lottoTicket.getLottoTicket();
   }
 }
 
