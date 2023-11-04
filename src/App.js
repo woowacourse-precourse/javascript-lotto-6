@@ -5,7 +5,9 @@ class App {
     const lottoCounts = await inputMoney();
     lottoCountPrinter(lottoCounts);
     const winningNumbers = await inputWinningNumber();
-    console.log(winningNumbers);
+    console.log();
+    const bonusNumber = await inputBonusNumber(winningNumbers);
+    console.log();
   }
 }
 
@@ -35,11 +37,12 @@ async function inputWinningNumber() {
   return winning.winningNumbers();
 }
 
-async function inputBonusNumber() {
+async function inputBonusNumber(winningNumbers) {
   let comment = BONUS_NUMBER_COMMENT;
   MissionUtils.Console.print(comment);
   const bonusNumber = await MissionUtils.Console.readLineAsync('');
-  return bonusNumber;
+  const bonus = new Bonus(bonusNumber,winningNumbers);
+  return bonus.bonusNumber();
 }
 
 function lottoCountPrinter(counts) {
@@ -176,5 +179,9 @@ export class Bonus {
         throw new Error("[ERROR] 보너스 번호가 중복되었습니다.")
       }
     }
+  }
+
+  bonusNumber() {
+    return this.#number
   }
 }
