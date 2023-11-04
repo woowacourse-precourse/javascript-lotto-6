@@ -1,8 +1,15 @@
 import Lotto from '../Lotto.js';
+import ApplicationError from '../exceptions/ApplicationError.js';
+import { invalidInstanceElement } from '../utils/validator.js';
 import LottoReward from './LottoReward.js';
 import WinningLotto from './WinningLotto.js';
 
 class LottoRewards {
+  static ERROR_MESSAGES = Object.freeze({
+    notLottoArray: 'lottos에 배열을 입력해주세요!',
+    notLottoInstance: 'lottos에 Lotto가 아닌 인스턴스가 있습니다!',
+  });
+
   #prizeTable = [
     // 1등
     LottoReward.of({ match: 6, hasBonus: false }, 2_000_000_000),
@@ -41,8 +48,18 @@ class LottoRewards {
    * @returns {LottoReward[]}
    */
   getLottosResult(lottos) {
+    this.#validateLottos(lottos);
     lottos.forEach((lotto) => this.#compareLotto(lotto));
     return this.#prizeTable;
+  }
+
+  #validateLottos(lottos) {
+    if (!Array.isArray(lottos)) {
+      throw new ApplicationError(LottoRewards.ERROR_MESSAGES.notLottoArray);
+    }
+    if (invalidInstanceElement(lottos, Lotto)) {
+      throw new ApplicationError(LottoRewards.ERROR_MESSAGES.notLottoInstance);
+    }
   }
 
   /**

@@ -1,3 +1,4 @@
+// eslint-disable-next-line object-curly-newline
 import { LottoNumber, LottoRewards, WinningLotto, Lotto } from '../../../src/domain/index.js';
 import DUMMY_INPUTS from '../../constants/dummy.js';
 

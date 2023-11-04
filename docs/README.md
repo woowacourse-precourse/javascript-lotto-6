@@ -353,9 +353,9 @@
 
   - [x] `getLottosResult(lottos)` 호출 시 입력받은 로또의 총 결과를 반환한다.
 
-- [ ] LottoRewards 예외 처리
+- [x] LottoRewards 예외 처리
 
-  - [ ] `getLottosResult(lottos)` 호출 시 인자로 `Lotto`가 아닌 값이 존재할 시 에러가 발생한다.
+  - [x] `getLottosResult(lottos)` 호출 시 인자로 `Lotto`가 아닌 값이 존재할 시 에러가 발생한다.
 
 - [ ] Calculator
 
