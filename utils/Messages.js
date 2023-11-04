@@ -4,6 +4,10 @@ const MESSAGES = Object.freeze({
   winningNumberQuery: '당첨 번호를 입력해 주세요.\n',
   bonusNumberQuery: '보너스 번호를 입력해 주세요.\n',
   drawStatistics: '당첨 통계\n---',
+  printLottoNumberDelimiter: ', ',
+  printLottoBracket(lottoNumbers) {
+    return `[${lottoNumbers}]`;
+  },
   drawResult([fifth, fourth, third, second, first]) {
     return [
       `3개 일치 (5,000원) - ${fifth}개`,
