@@ -27,6 +27,7 @@ class WinningLotto {
   /**
    * @param {Lotto} lotto
    * @param {LottoNumber} bonus
+   * @returns {WinningLotto}
    */
   static of(lotto, bonus) {
     return new WinningLotto(lotto, bonus);
@@ -35,6 +36,7 @@ class WinningLotto {
   /**
    * 입력받은 lotto가 WinningLotto의 lotto와 몇개가 동일한지 계산합니다.
    * @param {Lotto} lotto
+   * @returns {number}
    */
   prepare(lotto) {
     const numbers = lotto.getNumbers();
@@ -46,6 +48,7 @@ class WinningLotto {
   /**
    * 입력받은 bonus가 WinningLotto의 lotto가 소유하였는지 확인합니다.
    * @param {LottoNumber} bonus
+   * @returns {boolean}
    */
   hasBonus(bonus) {
     return this.#lotto.match(bonus);

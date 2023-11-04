@@ -51,6 +51,7 @@ class Lotto {
   /**
    * 로또의 numbers를 반환합니다.
    * @param {LottoNumber} number
+   * @returns {LottoNumber[]}
    */
   getNumbers() {
     return this.#numbers;
@@ -59,6 +60,7 @@ class Lotto {
   /**
    * 입력받은 LottoNumber가 numbers에 포함되었는지 비교합니다.
    * @param {LottoNumber} number
+   * @returns {boolean}
    */
   match(number) {
     this.#validateMatch(number);
