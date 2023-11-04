@@ -4,7 +4,7 @@ import { Outputs } from '../ui/Output.js';
 class Lotto {
   #numbers;
 
-  // numbers는 사용자가 입력한 금액이다.
+  // numbers는 사용자가 입력한 구입 금액이다.
   constructor(numbers, winningNum, bonusNum) {
     // this.#validate(numbers);
     this.#numbers = numbers;
@@ -27,7 +27,7 @@ class Lotto {
     return emptyArrays;
   }
 
-  async isWin() {
+  async isFit() {
     const resultObj = {
       three: 0,
       four: 0,
@@ -62,7 +62,7 @@ class Lotto {
           resultObj.six += 6;
       }
     }
-    Outputs.printStatistics(resultObj);
+    return resultObj;
   }
   // TODO: 추가 기능 구현
 }
