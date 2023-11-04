@@ -1,5 +1,6 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGE, INPUT_MESSAGE } from "./constants/constants";
+import Lotto from "./Lotto";
 
 class System {
   async getMoney() {
@@ -48,6 +49,35 @@ class System {
     if (this.#isAmountInValid(money)) {
       throw new Error(ERROR_MESSAGE.moneyFormatErrorMessage);
     }
+  }
+
+  async getLottoCount(money) {
+    return Math.floor(money / 1000);
+  }
+
+  generateLottoNumbers() {
+    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return new Lotto(randomNumbers);
+  }
+
+  saveLottoNumbers() {
+    let lotto;
+    while (true) {
+      lotto = this.generateLottoNumbers();
+      try {
+        lotto.duplicate(); // 중복 검사를 실행하여 중복이 있으면 예외가 발생
+        break;
+      } catch (error) {
+        console.error(error.message); // 중복이 있으면 예외 메시지를 출력
+      }
+    }
+
+    return lotto;
+  }
+
+  printLottoNumbers(lotto) {
+    const lottoStr = `[${lotto.getNumbers().join(", ")}]`;
+    Console.print(lottoStr);
   }
 }
 
