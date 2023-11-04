@@ -2,6 +2,7 @@ const MESSAGE = Object.freeze({});
 
 const ERROR_MESSAGE = Object.freeze({
   header: '[ERROR]',
+  isNotNumberArray: '숫자 배열이 아닙니다.',
   isNotNumber: '잘못된 형식입니다. 숫자와 ","만 사용가능합니다.',
   range: '사용 가능한 숫자 범위는 1부터 45까지입니다.',
   noReset:

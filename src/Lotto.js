@@ -7,6 +7,13 @@ class Lotto {
     this.#validateLottoNumbers(numbers);
     this.#numbers = numbers.sort();
   }
+  #isNumberArray(numbers) {
+    if (!Array.isArray(numbers)) throwError(ERROR_MESSAGE.isNotNumberArray);
+
+    if (!numbers.every((v) => typeof v === 'number'))
+      throwError(ERROR_MESSAGE.isNotNumberArray);
+  }
+
   #validateNumbersLength(numbers) {
     if (numbers.length !== LOTTO_FORM.length) {
       throwError(ERROR_MESSAGE.sixNumbers);
@@ -23,6 +30,7 @@ class Lotto {
   }
 
   #validateLottoNumbers(numbers) {
+    this.#isNumberArray(numbers);
     this.#validateNumbersLength(numbers);
     this.#validateNumbersRange(numbers);
     this.#hasNoRepeatNumber(numbers);
