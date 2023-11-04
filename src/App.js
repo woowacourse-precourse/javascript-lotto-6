@@ -5,13 +5,13 @@ class App {
   #lottoStore;
 
   async play() {
-    this.#submitLottoPurchaseQuantity();
+    this.#purchaseLottos();
   }
 
-  async #submitLottoPurchaseQuantity() {
+  async #purchaseLottos() {
     const lottoPurchaseAmount = await this.#getLottoPurchaseAmount();
     const lottoPurchaseQuantity = this.#changeAmountToQuantity(lottoPurchaseAmount);
-    this.#initializeLottoStore(lottoPurchaseQuantity);
+    this.#setUpLottoStore(lottoPurchaseQuantity);
   }
 
   async #getLottoPurchaseAmount() {
@@ -24,12 +24,8 @@ class App {
     return purchaseQuantity;
   }
 
-  #initializeLottoStore(purchaseQuantity) {
+  #setUpLottoStore(purchaseQuantity) {
     this.#lottoStore = new LottoStore(purchaseQuantity);
-  }
-
-  #buyLotto() {
-    this.#lottoStore.createLotto();
   }
 }
 
