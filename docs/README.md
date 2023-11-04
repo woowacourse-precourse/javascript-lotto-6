@@ -55,8 +55,14 @@
 
 #### Controller 클래스
 
-- View에서 입력 받은 값을 Model로 전달
-- Model에서 전달 받은 값을 View로 출력
+- view에서 금액을 입력받아 consumer로 전달한다.
+  - while문을 사용하여 예외가 발생할경우 메시지 출력하고 다시 입력받는다.
+- consumer에서 lotto를 발행해서 view로 출력한다.
+- view에서 로또 당첨 번호를 입력받아 lotto로 전달한다.
+  - while문을 사용하여 예외가 발생할경우 메시지 출력하고 다시 입력받는다.
+- view에서 보너스 번호를 입력받아 lotto로 전달한다.
+  - while문을 사용하여 예외가 발생할경우 메시지 출력하고 다시 입력받는다.
+- lotto와 consumer의 값을 statistics로 전달하고 결과와 수익률을 view에서 출력한다.
 
 ## 테스트 목록
 
