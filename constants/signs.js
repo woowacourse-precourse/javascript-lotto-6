@@ -1,4 +1,4 @@
-SIGNS = {
+const SIGNS = {
     PERCENT: "%",
     BLACNK: " ",
 }
