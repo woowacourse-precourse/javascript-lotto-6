@@ -1,4 +1,4 @@
-import { CONSTANT } from "./Constant";
+import { CONSTANT } from "./Constant.js";
 
 class Lotto {
     #numbers;
