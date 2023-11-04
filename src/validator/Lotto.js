@@ -1,3 +1,6 @@
+import { LOTTO_ERROR } from '../constants/message/error.js';
+import { LOTTO } from '../constants/setting.js';
+
 class LottoValidator {
   static validate(numbers) {
     LottoValidator.validateCount(numbers);
@@ -6,8 +9,8 @@ class LottoValidator {
   }
 
   static validateCount(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== LOTTO.count) {
+      throw new Error(LOTTO_ERROR.count);
     }
   }
 
@@ -15,7 +18,7 @@ class LottoValidator {
     const uniqueNumbers = new Set(numbers);
 
     if (uniqueNumbers.size !== numbers.length) {
-      throw new Error('[ERROR] 로또 번호는 중복될 수 없습니다.');
+      throw new Error(LOTTO_ERROR.duplication);
     }
   }
 
@@ -24,10 +27,8 @@ class LottoValidator {
   }
 
   static validateLottoNumber(number) {
-    if (number < 1 || number > 45) {
-      throw new Error(
-        '[ERROR] 로또 번호는 1이상 45이하의 숫자로 구성되어야 합니다.',
-      );
+    if (number < LOTTO.minNumber || number > LOTTO.maxNumber) {
+      throw new Error(LOTTO_ERROR.number);
     }
   }
 }

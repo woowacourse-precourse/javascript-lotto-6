@@ -1,4 +1,5 @@
-import { LOTTO_PRICE } from '../constants/setting.js';
+import { MONEY_ERROR } from '../constants/message/error.js';
+import { LOTTO } from '../constants/setting.js';
 
 class MoneyValidator {
   static validate(money) {
@@ -9,21 +10,19 @@ class MoneyValidator {
 
   static validateNumber(money) {
     if (Number.isNaN(money)) {
-      throw new Error('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
+      throw new Error(MONEY_ERROR.number);
     }
   }
 
   static validateLottoPurchaseAmount(money) {
-    if (money < LOTTO_PRICE) {
-      throw new Error('[ERROR] 구입금액은 1000원 이상만 가능합니다.');
+    if (money < LOTTO.price) {
+      throw new Error(MONEY_ERROR.purchaseAmount);
     }
   }
 
   static validateLottoAmountExactness(money) {
-    if (money % LOTTO_PRICE !== 0) {
-      throw new Error(
-        `[ERROR] 구입금액은 ${LOTTO_PRICE}원 단위로만 가능합니다.`,
-      );
+    if (money % LOTTO.price !== LOTTO.noRemainder) {
+      throw new Error(MONEY_ERROR.amountExactness);
     }
   }
 }
