@@ -23,15 +23,15 @@ describe('WinningLotto 테스트', () => {
   );
 
   it.each([
-    { numbers: [1, 2, 3, 4, 5, 6], bonusNumber: 3 },
-    { numbers: [11, 22, 33, 44, 5, 6], bonusNumber: 22 },
+    { winningNumbers: [1, 2, 3, 4, 5, 6], numbers: [1, 2, 3, 4, 5, 7], bonusNumber: 7 },
+    { winningNumbers: [1, 2, 3, 4, 5, 6], numbers: [11, 22, 33, 44, 5, 6], bonusNumber: 44 },
   ])(
-    '입력받은 bonus를 WinningLotto의 lotto가 소유하지 않았을시 false를 반환합니다.',
-    ({ numbers, bonusNumber }) => {
+    '입력받은 bonus를 WinningLotto의 lotto가 소유하였을시 true를 반환합니다.',
+    ({ winningNumbers, numbers, bonusNumber }) => {
       // given
       const lotto = Lotto.of(numbers);
       const bonus = LottoNumber.valueOf(bonusNumber);
-      const winningLotto = WinningLotto.of(Lotto.of([1, 2, 3, 4, 5, 6]), bonus);
+      const winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonus);
 
       // when
       const result = winningLotto.hasBonus(lotto);
