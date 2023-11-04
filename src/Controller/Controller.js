@@ -18,8 +18,7 @@ class Controller {
 
     while(errorCheck){
       try {
-        const price = await this.#view.inputPrice()
-        this.#consumer = new Consumer(price);
+        this.#consumer = new Consumer(await this.#view.inputPrice());
         errorCheck = false;
       } catch (error) {
         this.#view.printError(error.message);
@@ -69,11 +68,10 @@ class Controller {
     const winningNumber = this.#lotto.getWinningNumbers();
     const bonus = this.#lotto.getBonus();
     const lottoNumber = this.#consumer.getLottoNumber();
+    
     this.#statistics = new Statistics(winningNumber, lottoNumber, bonus);
-    const result = this.#statistics.getResult();
-    this.#view.printResult(result);
-    const roi = this.#statistics.getROI();
-    this.#view.printROI(roi);
+    this.#view.printResult(this.#statistics.getResult());
+    this.#view.printROI(this.#statistics.getROI());
   }
 }
 
