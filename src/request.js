@@ -3,16 +3,18 @@ import validate from './Validation.js';
 
 class Request {
   static async money() {
-    const condition = true;
-    do {
+    let condition = false;
+
+    while (!condition) {
       try {
-        const input = await prompt.in('숫자로 입력해주세요.');
+        const input = await prompt.in('구입금액을 입력해 주세요.');
         validate.money(input);
+        condition = true;
         return input;
       } catch (error) {
-        prompt.out(error);
+        prompt.out(error.message);
       }
-    } while (condition);
+    }
   }
 }
 

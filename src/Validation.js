@@ -1,7 +1,7 @@
 const validate = {
   money: (input) => {
     const reg = /[^0-9]/;
-    if (reg.test(input)) throw new Error('숫자를 입력해주세요.');
+    if (reg.test(input)) throw new Error('[ERROR] 정확한 값이 아닙니다.');
     return input;
   },
 };
