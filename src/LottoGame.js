@@ -24,7 +24,7 @@ class LottoGame {
       Number(purchaseAmount) % 1000 !== 0 ||
       Number(purchaseAmount) < 1000
     ) {
-      throw new Error('[ERROR] 구입 금액이 잘못 입력되었습니다.');
+      throw '[ERROR] 구입 금액이 잘못 입력되었습니다.';
     }
     return Number(purchaseAmount) / 1000;
   }
@@ -93,7 +93,7 @@ class LottoGame {
       bonusNumberInt < 1 ||
       bonusNumberInt > 45
     ) {
-      throw new Error('[ERROR] 보너스 숫자가 잘못되었습니다.');
+      throw '[ERROR] 보너스 숫자가 잘못되었습니다.';
     }
     return bonusNumberInt;
   }
