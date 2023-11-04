@@ -70,9 +70,56 @@ node index.js
 
 ### validate
 
+- checkHasDuplicate()
+
+> 생성된 배열의 중복값을 판단  
+> 중복값이 존재할 경우 ERROR_CODE.isDuplicated 로 예외처리
+
+- checkIsNaN()
+
+> 입력값이 숫자인지 판단
+> 숫자가 아닌 경우 ERROR_CODE.valueIsNaN 로 예외처리
+
+- checkHasNoRemainder()
+
+> 입력값이 1000으로 나누어 떨어지는지 판단  
+> 나누어 떨어지지 않을 경우 ERROR_CODE.hasRemainder 로 예외처리
+
+- checkIsEmpty()
+
+> 입력값이 빈값인지 판단  
+> 빈값인 경우 ERROR_CODE.valueIsEmpty 로 예외처리
+
+- checkIsTooSmall()
+
+> 입력값 < 1000인지 판별
+> 작은 값이 입력되었을 경우 ERROR_CODE.valueIsTooSmall 로 예외처리
+
 ### parse
 
+divideInput.js
+
+- 유효한 입력값을 1000으로 나눈 값을 반환
+
 ### error
+
+errorCode.js  
+
+ - 예상되는 에러의 메시지를 Object로 관리
+
+> purchaseAmount: '[ERROR] 입력을 받는 중에 예상치 못한 에러가 발생 했습니다.',
+> createPurchaseData: '[ERROR] 로또를 구매하는 도중에 예상치 못한 에러가 발생 했습니다.',
+> isDuplicated: '[ERROR] 로또 번호에 중복된 숫자가 존재합니다',
+> hasRemainder: '[ERROR] 구입 금액이 1000으로 나누어 떨어지지 않습니다.',
+> valueIsNaN: '[ERROR] 입력값이 유효하지 않습니다.',
+> valueIsEmpty: '[ERROR] 입력값에 빈값이 존재합니다.',
+> valueIsTooSmall: '[ERROR] 로또를 구매할 수 없습니다.', 
+
+### service
+
+purchaseValidService.js
+
+- 구매금액의 valid 검사기능의 통합 서비스
 
 ### test
 
