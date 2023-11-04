@@ -44,6 +44,11 @@ const MESSAGE_ASK = Object.freeze({
   bonusNum: "보너스 번호를 입력해 주세요.\n",
 });
 
+const MESSAGE_ERROR = Object.freeze({
+  header: "[ERROR]",
+  purchasePrice: "1,000원 단위로 입력해주세요.",
+  blank: "빈 입력값입니다.",
+});
 export {
   STATIC_NUMBER,
   RETURN_MONEY,
@@ -52,4 +57,5 @@ export {
   MESSAGE_ALERT,
   MESSAGE_RESULT,
   MESSAGE_ASK,
+  MESSAGE_ERROR,
 };
