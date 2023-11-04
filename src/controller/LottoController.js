@@ -10,17 +10,13 @@ class LottoController {
 
   async play() {
     await this.setPrice();
-    const { price, count, lottos } = this.#lottoModel.generateLottos();
+    const [price, count, lottos] = this.#lottoModel.buyLottos();
     this.#outputView.printLottos(count, lottos);
 
     await this.setTargetNumbers();
     await this.setBonusNumber();
-    const result = this.#lottoModel.judgeResult();
-
-    this.#lottoModel.setIncome();
-    const income = this.#lottoModel.getIncome();
-
-    this.#outputView.printResult(income, price, result);
+    const [result, income] = this.#lottoModel.checkNumbers();
+    this.#outputView.printResult(price, result, income);
   }
 
   async setPrice() {

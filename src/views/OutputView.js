@@ -9,7 +9,7 @@ class OutputView {
     }
   }
 
-  printResult(income, price, result) {
+  printResult(price, result, income) {
     const rateOnReturn = ((income / price) * 100).toLocaleString();
     Console.print(`${MESSAGES.prize.fifth} - ${result[5]}개`);
     Console.print(`${MESSAGES.prize.fourth} - ${result[4]}개`);

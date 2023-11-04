@@ -7,9 +7,10 @@ class LottoModel {
   #price;
   #count;
   #lottos = [];
+
   #targetNumbers = [];
   #bonusNumber;
-  #result = Array(6).fill(0);
+  #result = Array(SETTINGS.targetNumber.count).fill(SETTINGS.default);
   #income;
 
   constructor(price) {
@@ -32,18 +33,20 @@ class LottoModel {
     return this.#count;
   }
 
-  generateLottos() {
+  buyLottos() {
     const { minimum, maximum } = SETTINGS.targetNumber;
+
     for (let count = 0; count < this.#count; count++) {
       const numbers = Random.pickUniqueNumbersInRange(count, minimum, maximum);
       this.#lottos.push(new Lotto(numbers));
     }
-    return { price: this.#price, count: this.#count, lottos: this.#lottos };
+
+    return [this.#price, this.#count, this.#lottos];
   }
 
-  setTargetNumbers(targetNumbers) {
-    this.validateTargetNumbers(targetNumbers);
-    this.#targetNumbers = targetNumbers;
+  setTargetNumbers(numbers) {
+    this.validateTargetNumbers(numbers);
+    this.#targetNumbers = numbers;
   }
 
   validateTargetNumbers(numbers) {
@@ -70,28 +73,27 @@ class LottoModel {
 
   validateBonusNumbers = (number) => {
     const { minimum, maximum } = SETTINGS.targetNumber;
+
     if (number > maximum || number < minimum)
       throw new Error(MESSAGES.error.invalidRange);
     if (this.#targetNumbers.includes(number))
       throw Error(MESSAGES.error.notDuplicateTargetNumbers);
   };
 
-  getBonusNumber() {
-    return this.#bonusNumber;
-  }
-
-  judgeResult() {
+  checkNumbers() {
     for (let lotto of this.#lottos) {
       const numbers = lotto.getNumbers();
       const [correctTarget, correctBonus] = this.calculateCorrect(numbers);
       this.calculateResult(correctTarget, correctBonus);
     }
-    return this.#result;
+    this.setIncome();
+    return [this.#result, this.#income];
   }
 
   calculateCorrect(numbers) {
     let correctTarget = 0;
     let correctBonus = numbers.includes(Number(this.#bonusNumber)) ? 1 : 0;
+
     for (let targetNumber of this.#targetNumbers) {
       if (numbers.includes(Number(targetNumber))) correctTarget += 1;
     }
@@ -100,19 +102,24 @@ class LottoModel {
 
   calculateResult(correctTarget, correctBonus) {
     const { count } = SETTINGS.targetNumber;
-    if (correctTarget === count) this.addResult(1);
-    if (correctTarget === count - 1 && correctBonus) this.addResult(2);
-    if (correctTarget === count - 1 && !correctBonus) this.addResult(3);
-    if (correctTarget === count - 2) this.addResult(4);
-    if (correctTarget === count - 3) this.addResult(5);
+    let ranking = 0;
+
+    if (correctTarget === count) ranking = 1;
+    if (correctTarget === count - 1 && correctBonus) ranking = 2;
+    if (correctTarget === count - 1 && !correctBonus) ranking = 3;
+    if (correctTarget === count - 2) ranking = 4;
+    if (correctTarget === count - 3) ranking = 5;
+
+    this.addCount(ranking);
   }
 
-  addResult(prize) {
-    this.#result[prize] += 1;
+  addCount(ranking) {
+    this.#result[ranking] += 1;
   }
 
   setIncome() {
     const { first, second, third, fourth, fifth } = SETTINGS.income;
+
     this.#income =
       this.#result[1] * first +
       this.#result[2] * second +

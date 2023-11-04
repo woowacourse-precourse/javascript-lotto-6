@@ -35,18 +35,18 @@ describe("LottoModel 테스트", () => {
   describe("수익 계산 테스트", () => {
     test("수익을 계산할 때 올바른 결과 반환", () => {
       const lottoModel = new LottoModel(10000);
-      const result = [0, 5, 3, 2, 1, 0];
+      const dummy_result = [0, 5, 3, 2, 1, 0];
       for (let prize = 1; prize < SETTINGS.targetNumber.count; prize++) {
-        for (let i = 0; i < result[prize]; i++) {
-          lottoModel.addResult(prize);
+        for (let i = 0; i < dummy_result[prize]; i++) {
+          lottoModel.addCount(prize);
         }
       }
       const expectedIncome =
-        result[1] * SETTINGS.income.first +
-        result[2] * SETTINGS.income.second +
-        result[3] * SETTINGS.income.third +
-        result[4] * SETTINGS.income.fourth +
-        result[5] * SETTINGS.income.fifth;
+        dummy_result[1] * SETTINGS.income.first +
+        dummy_result[2] * SETTINGS.income.second +
+        dummy_result[3] * SETTINGS.income.third +
+        dummy_result[4] * SETTINGS.income.fourth +
+        dummy_result[5] * SETTINGS.income.fifth;
 
       lottoModel.setIncome();
 
