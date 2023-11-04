@@ -5,7 +5,7 @@ class Lotto {
     this.#validate(numbers);
     this.#duplicate(numbers);
     this.#validateRange(numbers);
-    this.#numbers = numbers;
+    this.#numbers = this.#sorted(numbers);
   }
 
   #validate(numbers) {
@@ -31,6 +31,14 @@ class Lotto {
         );
       }
     });
+  }
+
+  #sorted(numbers) {
+    return numbers.sort((a, b) => a - b);
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 
