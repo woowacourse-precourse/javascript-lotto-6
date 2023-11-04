@@ -23,6 +23,10 @@ class OutputView {
 		Console.print(viewMessage.OUTPUT_FIRST_PLACE(lottoResult.firstPlaceCount));
 		Console.print(viewMessage.OUTPUT_RATE_RETURN(rateOfReturn));
 	}
+
+	static printErrorMessage(errorMessage) {
+		Console.print(errorMessage);
+	}
 }
 
 export default OutputView;

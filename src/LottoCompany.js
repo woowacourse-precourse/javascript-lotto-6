@@ -12,7 +12,7 @@ class LottoCompany {
 	#winningNumberArray;
 	#bonusNumber;
 	#lottoBuyer;
-	
+
 	async #getPurchaseAmountFromUser() {
 		const purchaseAmount = Number(await InputView.inputPurchaseAmountAsync());
 		PurchaseAmountValidator.validate(purchaseAmount);
@@ -41,7 +41,7 @@ class LottoCompany {
 				OutputView.printNewLine();
 				isPublished = true;
 			} catch (error) {
-				Console.print(error.message);
+				OutputView.printErrorMessage(error.message);
 			}
 		} while (!isPublished);
 	}
@@ -54,7 +54,7 @@ class LottoCompany {
 				OutputView.printNewLine();
 				isDrawn = true;
 			} catch (error) {
-				Console.print(error.message);
+				OutputView.printErrorMessage(error.message);
 			}
 		} while (!isDrawn);
 	}
@@ -67,7 +67,7 @@ class LottoCompany {
 				OutputView.printNewLine();
 				isDrawn = true;
 			} catch (error) {
-				Console.print(error.message);
+				OutputView.printErrorMessage(error.message);
 			}
 		} while (!isDrawn);
 	}
