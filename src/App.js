@@ -4,7 +4,8 @@ class App {
   async play() {
     const lottoPrice = await this.totalPrice();
     const lottoTickets = this.totalLottoTickets(lottoPrice); 
-    const winningNumbers = await this.winningNumber(); 
+    const lottoMainNumbers = await this.lottoMainNumber(); 
+    const lottoBonusNumber = await this.lottoBonusNumber(lottoMainNumbers);
   }
 
   async totalPrice() {
@@ -41,10 +42,10 @@ class App {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  async winningNumber() {
-    const winningNumberInput = await Console.readLineAsync('당첨 번호를 입력해 주세요. \n');
-    const lottoNumbers = winningNumberInput.split(',').map(Number);
-    if (!this.inputNumbersValidity(winningNumberInput)) {
+  async lottoMainNumber() {
+    const lottoMainNumberInput = await Console.readLineAsync('당첨 번호를 입력해 주세요. \n');
+    const lottoNumbers = lottoMainNumberInput.split(',').map(Number);
+    if (!this.inputNumbersValidity(lottoMainNumberInput)) {
       throw new Error("[ERROR] 당첨 번호가 잘못된 형식입니다.");
     }
     return lottoNumbers;
@@ -57,6 +58,21 @@ class App {
     const rangeError = Numbers.some(number => number < 1 || number > 45);
     const overlapError = uniqueNumbers.length !== 6
     return (!lengthError && !rangeError && !overlapError) 
+  }
+
+  async lottoBonusNumber(lottoMainNumbers) {
+    const lottoBonusNumberInput = await Console.readLineAsync('보너스 번호를 입력해 주세요. \n');
+    const bonusNumber = parseInt(lottoBonusNumberInput);
+    if (!this.inputBonusValidity(lottoMainNumbers, bonusNumber)) {
+      throw new Error("[ERROR] 보너스 번호가 잘못된 형식입니다.");
+    }
+    return bonusNumber;
+  }
+
+  inputBonusValidity(lottoMainNumbers, bonusNumber) { 
+    const rangeError = bonusNumber < 1 || bonusNumber > 45;
+    const overlapError = lottoMainNumbers.includes(bonusNumber); 
+    return (!rangeError && !overlapError);
   }
 }
 
