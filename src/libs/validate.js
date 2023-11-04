@@ -12,8 +12,8 @@ function isInputNumeric(input) {
   }
 }
 
-function isDivisibleByThousand(num) {
-  if (num % 1000 !== 0) {
+function isDivisibleByThousand(input) {
+  if (input % 1000 !== 0) {
     throw new Error(ERRORS.INVALID_PURCHASE_AMOUNT);
   }
 }

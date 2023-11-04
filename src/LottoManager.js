@@ -8,8 +8,8 @@ class LottoManager {
     this.user = user;
   }
 
-  calculateLottoCount(money) {
-    this.lottoCount = money / 1000;
+  calculateLottoCount() {
+    this.lottoCount = this.user.money / 1000;
   }
 }
 
