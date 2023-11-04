@@ -1,4 +1,5 @@
-import LottoController from "./controller/LottoController";
+import LottoController from "./controller/LottoController.js";
+
 class App {
 
   constructor(){
