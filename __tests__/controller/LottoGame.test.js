@@ -17,7 +17,6 @@ const mockQuestions = (inputs) => {
   });
 };
 
-
 describe('로또 게임 컨트롤 클래스 테스트.', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
