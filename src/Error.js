@@ -1,7 +1,9 @@
-// class LottoError extends Error {
-// 	constructor(...params) {
-// 		this.super(...params);
-// 	}
-// }
+class CustomError extends Error {
+	constructor(value, ...params) {
+		this.super(...params);
+		this.message = [...params];
+		this.name = value;
+	}
+}
 
-// export default LottoError;
+export default CustomError;
