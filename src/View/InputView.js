@@ -40,16 +40,29 @@ class InputView {
     if (isValidRangeofNumbers.length !== numbers.length) {
       throw new Error('[ERROR] 당첨 번호는 1부터 45 범위 내이어야 합니다.');
     }
-    
+
     const set = new Set(numbers);
     if (numbers.length !== set.size) {
       throw new Error('[ERROR] 중복된 숫자를 입력하면 안됩니다.');
     }
   }
 
-  static async requestBonusNumber() {
+  static async requestBonusNumber(winningNumbers) {
     const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+    this.validateBonusNumber(bonusNumber, winningNumbers)
     return bonusNumber;
+  }
+
+  static validateBonusNumber(bonusNumber, winningNumbers) {
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error('[ERROR] 보너스 번호는 1부터 45 범위 내이어야 합니다.');
+    }
+    if (winningNumbers.includes(Number(bonusNumber))) {
+      throw new Error('[ERROR] 당첨 번호와 중복된 숫자를 입력하면 안됩니다.')
+    }
+    if (isNaN(bonusNumber)) {
+      throw new Error('[ERROR] 당첨 번호는 숫자여야 합니다.');
+    }
   }
 }
 
