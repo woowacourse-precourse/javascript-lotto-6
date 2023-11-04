@@ -1,5 +1,5 @@
 import { readLineAsync, throwError } from '../utils/index.js';
-import { ERROR_MESSAGE, LOTTO, MESSAGE } from '../utils/constants.js';
+import { ERROR_MESSAGE, MESSAGE, REGEX } from '../utils/constants.js';
 
 class InputView {
   async inputAmount() {
@@ -8,7 +8,6 @@ class InputView {
     const amount = Number(input);
 
     this.#isNotNumber(amount);
-    this.#isAmountUnit(amount);
 
     return amount;
   }
@@ -16,7 +15,9 @@ class InputView {
   async inputWinningNumbers() {
     const input = await readLineAsync(MESSAGE.input_winning_numbers);
 
-    const winningNumbers = input.split(',').map((number) => Number(number));
+    const winningNumbers = input
+      .split(REGEX.comma)
+      .map((number) => Number(number));
 
     winningNumbers.forEach((number) => {
       this.#isNotNumber(number);
@@ -37,10 +38,6 @@ class InputView {
 
   #isNotNumber(value) {
     throwError(ERROR_MESSAGE.not_number, Number.isNaN(value));
-  }
-
-  #isAmountUnit(amount) {
-    throwError(ERROR_MESSAGE.amount_division, amount % LOTTO.amount_unit !== 0);
   }
 }
 
