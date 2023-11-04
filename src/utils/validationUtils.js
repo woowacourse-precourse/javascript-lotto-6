@@ -1,4 +1,5 @@
 import MESSAGE from '../constants/message.js';
+import VALUE from '../constants/value.js';
 
 function checkNumber(number) {
   if (!Number.isSafeInteger(number)) {
@@ -6,8 +7,16 @@ function checkNumber(number) {
   }
 }
 
+function checkRange(number) {
+  const { start, end } = VALUE.range;
+  if (number < start || number > end) {
+    throw new Error(MESSAGE.error.rangeLotto);
+  }
+}
+
 const validationUtils = {
   checkNumber,
+  checkRange,
 };
 
 export default validationUtils;
