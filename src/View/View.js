@@ -1,6 +1,7 @@
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import MESSAGE from '../constants/message.js';
+import MessageFormat from '../utils/messageFormat.js';
 
 class View {
   #inputView = InputView;
@@ -31,7 +32,20 @@ class View {
     return userInput;
   }
 
-  print(message) {
+  printPurchasedResult(purchasedLottos) {
+    this.#printPurchasedQuantity(purchasedLottos.length);
+    this.#printPurchasedLotto(purchasedLottos);
+  }
+
+  #printPurchasedQuantity(purchaseQuantity) {
+    const message = MessageFormat.purchasedQuantity(purchaseQuantity);
+
+    this.#outputView.print(message);
+  }
+
+  #printPurchasedLotto(purchasedLottos) {
+    const message = MessageFormat.purchasedLotto(purchasedLottos);
+
     this.#outputView.print(message);
   }
 }
