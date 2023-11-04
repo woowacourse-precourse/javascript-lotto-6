@@ -13,6 +13,10 @@ class Input {
       throw new Error('[ERROR] 1000원 단위로 입력해주세요.');
     }
 
+    if (cost < 1000) {
+      throw new Error('[ERROR] 1000원 이상의 금액을 입력해주세요.');
+    }
+
     return cost;
   }
 
