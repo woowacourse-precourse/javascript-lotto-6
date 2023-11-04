@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { OPTION } from '../constants/Lotto.js';
+import Validation from '../validations/Lotto.js';
 
 class Lotto {
   /** @type {number[]} */
@@ -10,12 +11,7 @@ class Lotto {
    * @param {number[]} numbers
    */
   constructor(numbers) {
-    console.log(
-      Random.pickUniqueNumbersInRange(
-        ...OPTION.BALL_NUMBER_RANGE,
-        OPTION.BALL_COUNT,
-      ).sort((a, b) => a - b),
-    );
+    Validation.validateLottoNumbers(numbers);
     this.#numbers = numbers;
   }
 
