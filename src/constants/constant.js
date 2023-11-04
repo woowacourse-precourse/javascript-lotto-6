@@ -15,4 +15,8 @@ const MESSAGE_INPUT = (num) => Object.freeze({
   RATE: `총 수익률은 ${num}%입니다.`
 });
 
+const ERROR_MESSAGE = Object.freeze({
+  NUM_RANGE: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
+})
+
 export { MESSAGE, MESSAGE_INPUT };
