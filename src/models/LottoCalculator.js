@@ -1,3 +1,4 @@
+import { OPTION } from '../constants/Lotto';
 import Validation from '../validations/Lotto';
 
 class LottoCalculator {
@@ -28,6 +29,22 @@ class LottoCalculator {
    */
   setLottoes(lottoes) {
     this.#lottoes = lottoes;
+  }
+
+  /**
+   * 등록된 로또의 추첨 결과 통계 구하기 (낙첨, 1~n등순)
+   * @returns {number[]}
+   */
+  getResult() {
+    return this.#lottoes.reduce(
+      (previousValue, lotto) => {
+        const result = previousValue;
+        const rank = lotto.getRank(this.#numbers, this.#bonus);
+        result[rank] += 1;
+        return result;
+      },
+      new Array(OPTION.WINNING_RANKING + 1).fill(0),
+    );
   }
 }
 
