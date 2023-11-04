@@ -1,17 +1,26 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-// import Lotto from "./Lotto";
+import {
+  LOTTO_INPUT_MESSAGE,
+  LOTTO_OUTPUT_MESSAGE,
+  ERROR_MESSAGE,
+} from "./constants.js";
+import Lotto from "./Lotto.js";
 
 class App {
   async play() {
     const purchaseCost = await MissionUtils.Console.readLineAsync(
-      "구입 금액을 입력해 주세요. \n"
+      LOTTO_INPUT_MESSAGE.cost
     );
 
-    const numberOfLotto = purchaseCost / 1000;
+    const numOfLotto = purchaseCost / 1000;
 
     if (purchaseCost % 1000 !== 0) {
-      throw new Error("[ERROR] 구입 금액은 1,000원 단위로 입력 가능합니다.");
+      throw new Error(ERROR_MESSAGE.isInvaildUnit);
     }
+
+    let lottoNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+
+    const lotto = new Lotto(lottoNum);
   }
 }
 
