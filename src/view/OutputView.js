@@ -1,32 +1,31 @@
 import { Console } from '@woowacourse/mission-utils';
 
-class OutputView {
+const OutputView = {
   printTotalLottos({ quantity, lottos }) {
-    this.#printPurchaceTitle(quantity);
-    this.#printLottos(lottos);
-  }
+    OutputView.printPurchaceTitle(quantity);
+    OutputView.printLottos(lottos);
+  },
 
-  #printPurchaceTitle(quantity) {
+  printPurchaceTitle(quantity) {
     if (Number.isNaN(quantity)) return;
+    OutputView.print(`\n${quantity}개를 구매했습니다.`);
+  },
 
-    this.#print(`\n${quantity}개를 구매했습니다.`);
-  }
-
-  #printLottos(lottos) {
+  printLottos(lottos) {
     const result = [...lottos].reduce(
       (totalLottos, currentLotto) => (totalLottos += `[${currentLotto.join(', ')}]\n`),
       ''
     );
 
-    this.#print(result);
-  }
+    OutputView.print(result);
+  },
 
   printResult(result) {
     const prize = Object.keys(result[0]).map((price) => Number(price).toLocaleString());
     const matchedLength = Object.values(result[0]);
     const rateOfReturn = result[1];
 
-    this.#print(
+    OutputView.print(
       `\n당첨 통계
 ---
 3개 일치 (${prize[0]}원) - ${matchedLength[0]}개
@@ -36,11 +35,11 @@ class OutputView {
 6개 일치 (${prize[4]}원) - ${matchedLength[4]}개
 총 수익률은 ${rateOfReturn}%입니다.`
     );
-  }
+  },
 
-  #print(message) {
+  print(message) {
     Console.print(message);
-  }
-}
+  },
+};
 
 export default OutputView;
