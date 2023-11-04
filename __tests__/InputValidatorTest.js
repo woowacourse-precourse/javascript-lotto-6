@@ -38,4 +38,12 @@ describe('💙 InputValidator 클래스를 테스트합니다. ฅ^._.^ฅ', () 
       );
     });
   });
+
+  test(`[validateWinningNumbers] 인자로 받은 winningNumbers 배열에 숫자가 아닌 값이 있으면 에러가 발생한다.`, () => {
+    const invalideWinningNumberList = ['reason', 1, 2, 3, 4, 5];
+
+    expect(() =>
+      InputValidator.validateWinningNumbers(invalideWinningNumberList),
+    ).toThrow(ERROR_MESSAGE.NOT_A_NUMBER);
+  });
 });
