@@ -42,6 +42,42 @@ const runException = async (input) => {
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
 }
 
+const numberException = async (input) => {
+  // given
+  const logSpy = getLogSpy();
+
+  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const INPUT_NUMBERS_TO_END = ["1000", input, "1,2,3,4,5,6", "7"];
+
+  mockRandoms([RANDOM_NUMBERS_TO_END]);
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+
+  // when
+  const app = new App();
+  await app.play();
+
+  // then
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+}
+
+const bonusException = async (input) => {
+  // given
+  const logSpy = getLogSpy();
+
+  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", input, "7"];
+
+  mockRandoms([RANDOM_NUMBERS_TO_END]);
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+
+  // when
+  const app = new App();
+  await app.play();
+
+  // then
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+}
+
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
@@ -94,5 +130,38 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
+
+  test("예외 테스트: 음수 입력", async () => {
+    await runException("-500");
+  });
+
+  test("예외 테스트: 1000원으로 안떨어지는 값", async () => {
+    await runException("1200");
+  });
+
+  test("예외 테스트: 1 ~ 45 범위를 벗어난 경우", async () => {
+    await numberException("1,2,3,4,5,48");
+  });
+
+  test("예외 테스트: 중복되는 당첨 번호 입력", async () => {
+    await numberException("1,2,3,4,5,5");
+  });
+
+  test("예외 테스트: 6개의 숫자가 아닌 경우", async () => {
+    await numberException("1,2,3,4,5");
+  });
+
+  test("예외 테스트: 2개의 숫자가 들어간 경우", async () => {
+    await bonusException("1,2");
+  });
+
+  test("예외 테스트: 1 ~ 45 범위를 벗어난 경우", async () => {
+    await bonusException("46");
+  });
+
+  test("예외 테스트: 숫자가 아닌 경우", async () => {
+    await bonusException("a");
+  });
+
 });
 
