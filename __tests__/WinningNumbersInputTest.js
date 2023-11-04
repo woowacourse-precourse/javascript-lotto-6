@@ -1,4 +1,5 @@
-import { winningNumberSpliter, winnningNumberValidater, winnningNumberDuplicateValidater, winnningNumberRangeValidater, bonusNumberDuplicateValidater } from "../src/App.js";
+import { winningNumberSpliter, bonusNumberDuplicateValidater } from "../src/App.js";
+import { Winning } from "../src/App.js";
 
 describe("당첨 번호 입력 테스트", () => {
   test("당첨 번호를 쉼표로 구분한다.", () => {
@@ -9,27 +10,26 @@ describe("당첨 번호 입력 테스트", () => {
   });
 
   test.each([
-    [["숫자"]],
-    [["1.0"]],
-    [["-5"]],
-    [["0b101"]],
-    [["1E3"]],
+    [["1","2","3","4","5","숫자"]],
+    [["1","2","3","4","5","4.5"]],
+    [["1","2","3","4","5","-5"]],
+    [["1","2","3","4","5","0b101"]],
+    [["1","2","3","4","5","1E3"]]
   ])("당첨 번호 입력중 하나라도 숫자가 아닐 경우, 에러가 발생한다.", (inputs) => {
-  
-    // then
-    expect(winnningNumberValidater(inputs)).rejects.toThrow("[ERROR]");
+
+    expect(()=> {new Winning(inputs)}).toThrow("[ERROR]");
   });
 
   test("당첨 번호가 중복될 경우, 에러가 발생한다.", () => {
     const input = ["1","2","2","4","5","6"];
 
-    expect(winnningNumberDuplicateValidater(input)).rejects.toThrow("[ERROR]");
+    expect(()=> {new Winning(input)}).toThrow("[ERROR]");
   });
 
   test("당첨 번호가 1~45 사이가 아닐 경우, 에러가 발생한다.", () => {
-    const INPUT = 46;
+    const input = ["1","2","3","4","5","46"];
 
-    expect(winnningNumberRangeValidater(INPUT)).rejects.toThrow("[ERROR]");
+    expect(()=> {new Winning(input)}).toThrow("[ERROR]");
   });
 
   test("당첨 번호와 보너스 번호가 중복될 경우, 에러가 발생한다.", () => {

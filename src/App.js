@@ -2,7 +2,8 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
   async play() {
-    await inputMoney();
+    const lottoCounts = await inputMoney();
+    lottoCountPrinter(lottoCounts);
     await inputWinningNumber();
   }
 }
@@ -19,11 +20,14 @@ async function inputMoney() {
   MissionUtils.Console.print(comment);
   const totalMoney = await MissionUtils.Console.readLineAsync('');
   const counter = new Counter(totalMoney);
-  console.log(counter.lottoCounter())
+  const lottoCounts = counter.lottoCounter();
+  //console.log(counter.lottoCounter())
+  return lottoCounts;
 }
 
 async function inputWinningNumber() {
   let comment = WINNING_NUMBER_COMMENT;
+  MissionUtils.Console.print("");
   MissionUtils.Console.print(comment);
   const winningNumber = await MissionUtils.Console.readLineAsync('');
   return winningNumber;
@@ -34,6 +38,11 @@ async function inputBonusNumber() {
   MissionUtils.Console.print(comment);
   const bonusNumber = await MissionUtils.Console.readLineAsync('');
   return bonusNumber;
+}
+
+function lottoCountPrinter(counts) {
+  MissionUtils.Console.print("");
+  MissionUtils.Console.print(`${counts}개를 구매했습니다.`);
 }
 
 export function winningNumberSpliter(input) {
@@ -97,5 +106,49 @@ export class Counter {
     let price = LOTTO_PRICE;
     const lottocounts = this.#money/price;
     return lottocounts
+  }
+}
+
+export class Winning {
+  #numbers
+
+  constructor(numbers) {
+    this.#winnningNumberValidater(numbers);
+    this.#winnningNumberDuplicateValidater(numbers);
+    this.#winnningNumberRangeValidater(numbers);
+    this.#numbers = numbers;
+  };
+
+  #winnningNumberValidater(numbers) {
+    for (let i = 0; i < numbers.length; i++) {
+      this.#winnningEachNumberValidater(numbers[i]);
+    }
+  }
+
+  #winnningEachNumberValidater(number) {
+    if (/^[+]?[1-9]\d*$/.test(number)) {
+      return Number(number);
+    } 
+    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+  }
+
+  #winnningNumberDuplicateValidater(numbers) {
+    for (let i = 0; i < numbers.length-1; i++) {
+      if (numbers[i] === numbers[i+1]) {
+        throw new Error("[ERROR] 로또 번호가 중복되었습니다.")
+      }
+    }
+  }
+
+  #winnningNumberRangeValidater(numbers) {
+    for (let i = 0; i < numbers.length; i++) {
+      this.#winnningEachNumberRangeValidater(numbers[i]);
+    }
+  }
+
+  #winnningEachNumberRangeValidater(number) {
+    if (number > 45) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+    }
   }
 }
