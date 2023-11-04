@@ -1,3 +1,7 @@
+// numbers의 #prefix를 변경할 수 없음
+// Lotto에 필드를 추가할 수 없음
+// #prefix, 필드란?
+
 class Lotto {
   #numbers;
 
