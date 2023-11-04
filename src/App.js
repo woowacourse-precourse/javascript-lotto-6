@@ -19,8 +19,9 @@ class App {
       new Lotto(ticket);
     });
     const result = await WinLotto.calculateEarnings(this.lottoTickets);
-    const statisticPrint = View.printRewardStatistics(result);
-    MissionUtils.Console.print(statisticPrint);
+    View.printRewardStatistics(result);
+    const returnPrint = View.printReturn(result, inputMoney);
+    MissionUtils.Console.print(returnPrint);
   }
 }
 

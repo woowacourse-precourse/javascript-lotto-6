@@ -43,7 +43,7 @@ class View {
   }
 
   static printRewardStatistics(calculateEarningResults) {
-    const statisticResult = [];
+    const statisticsOrder = [3, 4, 5, "5+1", 6];
     const statisticsQuery = {
       3: "3개 일치 (5,000원) - ",
       4: "4개 일치 (50,000원) - ",
@@ -51,16 +51,24 @@ class View {
       "5+1": "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
       6: "6개 일치 (2,000,000,000원) - ",
     };
-    Object.entries(calculateEarningResults.countResults).forEach(
-      ([matchCount, count]) => {
-        const query = statisticsQuery[matchCount];
-        if (query) {
-          const resultString = query + count + "개";
-          statisticResult.push(resultString);
-        }
-      }
-    );
-    return statisticResult;
+
+    const statisticResult = statisticsOrder.map((matchCount) => {
+      const count = calculateEarningResults.countResults[matchCount] || 0;
+      return statisticsQuery[matchCount] + count + "개";
+    });
+
+    statisticResult.forEach((line) => {
+      MissionUtils.Console.print(line);
+    });
+  }
+
+  static printReturn(calculateEarningResults, inputMoney) {
+    const totalReturn = calculateEarningResults.totalEarnings;
+    const isValidCount = calculateEarningResults.countResults;
+    if (isValidCount) {
+      const rateOfReturn = (totalReturn / inputMoney) * 100;
+      return `${rateOfReturn.toFixed(2)}%`;
+    }
   }
 }
 
