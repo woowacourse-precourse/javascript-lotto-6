@@ -9,6 +9,7 @@ class App {
   lottos;
   lotto;
   bounce;
+  rank;
 
   async play() {
     await this.gameStart();
@@ -56,6 +57,50 @@ class App {
       Console.print(error.message);
       await this.getLottoBounce();
     }
+  }
+
+  checkLottoRank() {
+    const lottos = this.lottos.getLottos();
+    const result = [0, 0, 0, 0, 0, 0, 0, 0];
+
+    lottos.forEach((lotto) => {
+      const lottoCount = this.checkLottoCount(lotto);
+      const bounceCount = this.checkBounceCount(lotto, lottoCount);
+
+      if (bounceCount) result[7] += 1;
+
+      if (!bounceCount) result[lottoCount] += 1;
+    });
+
+    this.rank = result;
+  }
+
+  checkLottoCount(target) {
+    let lottoCount = 0;
+    const lotto = this.lotto.getLotto();
+
+    lotto.forEach((element) => {
+      if (target.includes(element)) lottoCount += 1;
+    });
+
+    return lottoCount;
+  }
+
+  checkBounceCount(target, lottoCount) {
+    let bouncCount = false;
+    const bounce = this.bounce.getBounce();
+
+    if (lottoCount === 5 && target.includes(bounce)) {
+      bouncCount = true;
+    }
+
+    return bouncCount;
+  }
+
+  printLottoRank() {
+    const rank = this.rank;
+
+    Console.print(RESULT_MESSAGE.rank(rank));
   }
 
   printLottos() {
