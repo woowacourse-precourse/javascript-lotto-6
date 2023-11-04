@@ -18,10 +18,10 @@ export default class Bonus {
     if (!isNumber.test(number)) {
       throw new Error('[ERROR] 숫자만 입력해주세요.');
     }
-    if (Number(number) < 1 || Number(number) > 45) {
+    if (number < 1 || number > 45) {
       throw new Error('[ERROR] 1부터 45사이의 수를 입력해주세요.');
     }
-    if (winningLotto.includes(Number(number))) {
+    if (winningLotto.includes(number)) {
       throw new Error('[ERROR] 당첨번호와 중복됩니다. 다시 입력해주세요.');
     }
   }

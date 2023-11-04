@@ -60,6 +60,19 @@ class App {
     }
   }
 
+  /* 
+  🐛FIX: DI로 구현할 것
+  */
+  async #generateBonus() {
+    try {
+      const answer = await InputView.getBonus();
+      return new Bonus(Number(answer), this.#winningLotto.getLotto());
+    } catch (error) {
+      OutputView.printError(error.message);
+      return this.#generateBonus();
+    }
+  }
+
   #getRateOfReturn(purchaseAmount, income) {
     const inputMoney = purchaseAmount * 1000;
     const rateOfReturn = (income / inputMoney) * 100;
@@ -72,19 +85,6 @@ class App {
       winningResult: this.#lottoGame.getWinningResult(),
       income: this.#lottoGame.getIncome(),
     };
-  }
-
-  /* 
-  🐛FIX: DI로 구현할 것
-  */
-  async #generateBonus() {
-    try {
-      const answer = await InputView.getBonus();
-      return new Bonus(answer, this.#winningLotto.getLotto());
-    } catch (error) {
-      OutputView.printError(error.message);
-      return this.#generateBonus();
-    }
   }
 }
 
