@@ -1,5 +1,4 @@
 import createLottoNumber from './utils/random';
-import InputView from './View/InputView';
 import Lotto from './Lotto';
 
 class LottoVendingMachine {
@@ -9,7 +8,7 @@ class LottoVendingMachine {
     this.#winningNumbers = [];
   }
 
-  static async buyLottoTickets(buyingPrice) {
+  static buyLottoTickets(buyingPrice) {
     const mount = buyingPrice / 1000;
     const lottoNumber = createLottoNumber();
     return Array.from({ length: mount }, () => new Lotto(lottoNumber));
