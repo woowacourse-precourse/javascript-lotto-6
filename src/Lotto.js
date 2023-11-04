@@ -1,18 +1,40 @@
+import validationUtils from './utils/validationUtils.js';
+import MESSAGE from './constants/message.js';
+import VALUE from './constants/value.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
+    this.#validate(numbers);
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    for (let i = 0; i < numbers.length; i += 1) {
+      validationUtils.checkNumber(numbers[i]);
+      validationUtils.checkRange(numbers[i]);
+      this.#checkDuplicateNumber(numbers[i], i);
+    }
+    this.#checkLength();
+  }
+
+  #checkDuplicateNumber(number, currentIndex) {
+    const lastIndex = this.#numbers.lastIndexOf(number);
+    if (lastIndex !== currentIndex) {
+      throw new Error(MESSAGE.error.duplicateNumber);
     }
   }
 
-  // TODO: 추가 기능 구현
+  #checkLength() {
+    if (this.#numbers.length !== VALUE.range.count) {
+      throw new Error(MESSAGE.error.lottoLength);
+    }
+  }
+
+  finishValidation() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
