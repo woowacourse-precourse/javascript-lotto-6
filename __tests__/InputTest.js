@@ -73,4 +73,21 @@ describe("입력 변환하기", () => {
       expect(result).toEqual(output);
     });
   });
+
+  test("당첨 번호", () => {
+    const inputs = ["1,2,3,4,5,6", "11,23,45,22,12,38"];
+    const outputs = [
+      [1, 2, 3, 4, 5, 6],
+      [11, 23, 45, 22, 12, 38],
+    ];
+
+    const inputConverter = new InputConverter();
+
+    outputs.forEach((output) => {
+      const input = inputs.shift();
+      const result = inputConverter.winningNumbersConverter(input);
+
+      expect(result).toEqual(output);
+    });
+  });
 });
