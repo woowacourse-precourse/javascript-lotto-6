@@ -14,6 +14,10 @@ class GameUtils {
       LOTTO_NUMBER.COUNT,
     );
   }
+
+  static sortRandomNumberInAscendingOrder(randomNumbers) {
+    randomNumbers.sort((a, b) => a - b);
+  }
 }
 
 export default GameUtils;
