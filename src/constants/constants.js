@@ -3,5 +3,6 @@ export const INPUT_MESSAGE = Object.freeze({
 });
 
 export const ERROR_MESSAGE = Object.freeze({
-  moneyError: "[ERROR] 숫자만 입력해주세요.",
+  invalidMoneyError: "[ERROR] 숫자만 입력해주세요.",
+  moneyFormatErrorMessage: "[ERROR] 1,000원 단위로 입력해 주세요.",
 });
