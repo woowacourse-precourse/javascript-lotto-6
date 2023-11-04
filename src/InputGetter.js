@@ -7,7 +7,15 @@ export class InputGetter {
 
     return money;
   }
+
+  async inputWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(
+      MESSAGES.INPUT_WINNING_NUMBERS + "\n"
+    );
+
+    return winningNumbers;
+  }
 }
 
 const inputGetter = new InputGetter();
-inputGetter.inputMoney();
+inputGetter.inputWinningNumbers();
