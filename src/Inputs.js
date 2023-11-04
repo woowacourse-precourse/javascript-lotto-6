@@ -2,31 +2,31 @@ import { Console } from '@woowacourse/mission-utils';
 import Validation from './Validation.js';
 
 class Inputs {
-  returnPurchaseAmount() {
-    return this.getPromptedAmount();
+  async returnPurchaseAmount() {
+    return this.getPromptedAmount('구입금액을 입력해 주세요.');
   }
 
-  async getPromptedAmount() {
+  async returnWinningNumbers() {
+    return this.getPromptedWinningNumbers('당첨 번호를 입력해 주세요.');
+  }
+
+  async getPromptedAmount(message) {
     try {
-      const purchaseAmount = await this.getInput('구입금액을 입력해 주세요.');
+      const purchaseAmount = await this.getInput(message);
       return Validation.validatePurchaseAmount(purchaseAmount);
     } catch (error) {
       Console.print(error.message);
-      return this.getPromptedAmount();
+      return this.getPromptedAmount(message);
     }
   }
 
-  returnWinningNumbers() {
-    this.getPromptedWinningNumbers();
-  }
-
-  async getPromptedWinningNumbers() {
+  async getPromptedWinningNumbers(message) {
     try {
-      const winningNumbers = await this.getInput('당첨 번호를 입력해 주세요.');
-      return winningNumbers;
+      const winningNumbers = await this.getInput(message);
+      return Validation.validateWinningNumbers(winningNumbers);
     } catch (error) {
       Console.print(error.message);
-      return this.getPromptedWinningNumbers;
+      return this.getPromptedWinningNumbers(message);
     }
   }
 
