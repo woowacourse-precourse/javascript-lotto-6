@@ -39,7 +39,11 @@ export class RandomNumbersGenerator {
 
 
     static generate() {
-        return Random.pickUniqueNumbersInRange(1, 45, 6).sort();
+        return Random.pickUniqueNumbersInRange(1, 45, 6)
+            // 자바스크립트는 정렬할 떄 모든 요소를 문자열로 바꿔 비교 정렬하기때문에
+            // a - b 넣어줘야 오름차순 정렬한다!
+            // cf. é b-a는 내림차순
+            .sort((a, b) => a - b);
 
     }
 
