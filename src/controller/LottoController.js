@@ -1,4 +1,4 @@
-import { Console, Console } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import Lottos from '../model/Lottos.js';
 import WinningLotto from '../model/WinningLotto.js';
 
@@ -11,6 +11,7 @@ class LottoController {
     await this.inputMoney();
     await this.inputWinningLottoNumbers();
     await this.inputBonusLottoNumber();
+    this.calculateMatchingNumbers();
   }
 
   async inputMoney() {
@@ -60,6 +61,13 @@ class LottoController {
     this.#winningLottos = new WinningLotto(
       this.#winningLottos,
       Number(winningBonusNumber),
+    );
+  }
+
+  calculateMatchingNumbers() {
+    this.#lottos.calculateRanks(
+      this.#winningLottos.getWinningLottoNumbers(),
+      this.#winningLottos.getBonusLottoNumber(),
     );
   }
 }
