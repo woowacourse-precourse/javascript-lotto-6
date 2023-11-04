@@ -2,8 +2,8 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import Validator from "./Validate.js";
 
 class WinningNum {
-  static #WINNINGNUM_INPUT = "당첨 번호를 입력해 주세요.\n";
-  static #BONUSNUM_INPUT = "보너스 번호를 입력해 주세요.\n";
+  static #WINNINGNUM_INPUT = "당첨 번호를 입력해 주세요.";
+  static #BONUSNUM_INPUT = "보너스 번호를 입력해 주세요.";
 
   async askWinningNum() {
     MissionUtils.Console.print(WinningNum.#WINNINGNUM_INPUT);
