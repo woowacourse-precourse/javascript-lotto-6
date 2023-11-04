@@ -40,7 +40,7 @@ class Purchase {
     }
 
     getPurchaseAmount() {
-        return this.#amount;
+        return parseInt(this.#amount / AMOUNT.UNIT);
     }
 }
 
