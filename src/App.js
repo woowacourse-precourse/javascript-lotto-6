@@ -10,8 +10,7 @@ class App {
     const counter = new Counter(Number(inputAmount));
     const lottoTicketNumber = counter.lottoTicketNumber;
     const lottoBox = counter.giveLotto;
-    printLottoTicketNumber(lottoTicketNumber);
-    printLottoNumber(lottoBox);
+    printLottoNumber(lottoTicketNumber, lottoBox);
   }
 }
 
