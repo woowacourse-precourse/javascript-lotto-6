@@ -35,10 +35,17 @@ function validateDuplicateNumber(numbers) {
   }
 }
 
+function validateMinimumAmount(amount) {
+  if (amount < LOTTO.price) {
+    throw new Error(ERROR_MESSAGE.invalidAmount);
+  }
+}
+
 export {
   validateNumberType,
   validateUnit,
   validateLottoLength,
   validateLottoRange,
   validateDuplicateNumber,
+  validateMinimumAmount,
 };

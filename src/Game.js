@@ -5,7 +5,11 @@ import getUserInput from './utils/getUserInput.js';
 import createLottoNumbers from './utils/createLottoNumbers.js';
 import { LOTTO } from './constants/lotto.js';
 import { INPUT_MESSAGE, PURCHASE_MESSAGE } from './constants/messages.js';
-import { validateNumberType, validateUnit } from './utils/validate.js';
+import {
+  validateMinimumAmount,
+  validateNumberType,
+  validateUnit,
+} from './utils/validate.js';
 
 class Game {
   #lottos;
@@ -23,6 +27,7 @@ class Game {
 
   validate(amount) {
     validateNumberType(amount);
+    validateMinimumAmount(amount);
     validateUnit(amount);
   }
 
