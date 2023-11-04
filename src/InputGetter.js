@@ -15,7 +15,15 @@ export class InputGetter {
 
     return winningNumbers;
   }
+
+  async inputBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+      MESSAGES.INPUT_BONUS_NUMBER + "\n"
+    );
+
+    return bonusNumber;
+  }
 }
 
 const inputGetter = new InputGetter();
-inputGetter.inputWinningNumbers();
+inputGetter.inputBonusNumber();
