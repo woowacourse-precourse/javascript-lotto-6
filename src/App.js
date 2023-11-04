@@ -11,6 +11,8 @@ class App {
   async play() {
     await this.user.buyLotto();
     this.lottoManager.calculateLottoCount();
+
+    this.lottoManager.publishLotto();
   }
 }
 
