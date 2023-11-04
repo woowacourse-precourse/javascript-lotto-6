@@ -27,6 +27,7 @@ const ERROR_MESSAGE = {
   duplicateLottoNumber: `${ERROR_PREFIX} 로또 번호는 중복될 수 없습니다.`,
   invalidUnit: `구입 금액은 ${ERROR_PREFIX} 로또 구입 금액은 ${LOTTO.price}원 단위로 입력해야 합니다.`,
   invalidAmount: `${ERROR_PREFIX} 구입 금액은 ${LOTTO.price}원 이상이어야 합니다.`,
+  invalidBonusNumber: `${ERROR_PREFIX} 보너스 번호는 당첨 번호와 달라야 합니다.`,
 };
 
 export { INPUT_MESSAGE, PURCHASE_MESSAGE, STATISTICS_MESSAGE, ERROR_MESSAGE };

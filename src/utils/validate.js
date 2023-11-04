@@ -39,6 +39,12 @@ function validateMinimumAmount(amount) {
   }
 }
 
+function validateExistingNumber(number, numbers) {
+  if (numbers.includes(number)) {
+    throw new Error(ERROR_MESSAGE.invalidBonusNumber);
+  }
+}
+
 export {
   validateNumberType,
   validateUnit,
@@ -46,4 +52,5 @@ export {
   validateLottoRange,
   validateDuplicateNumber,
   validateMinimumAmount,
+  validateExistingNumber,
 };

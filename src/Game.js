@@ -9,15 +9,19 @@ import {
   validateMinimumAmount,
   validateNumberType,
   validateUnit,
+  validateExistingNumber,
+  validateLottoRange,
 } from './utils/validate.js';
 
 class Game {
   #lottos;
   #winningLotto;
+  #bonusNumber;
 
   constructor() {
     this.#lottos = [];
     this.#winningLotto = null;
+    this.#bonusNumber = null;
   }
 
   async start() {
@@ -26,6 +30,7 @@ class Game {
     this.purchaseLotto(Number(purchaseAmount));
     this.printPurchaseLottos();
     await this.createWinningLotto();
+    await this.createBonusNumber();
   }
 
   validate(amount) {
@@ -47,6 +52,20 @@ class Game {
   async createWinningLotto() {
     const winningNumbers = await this.getWinningNumbers();
     this.#winningLotto = new Lotto(winningNumbers);
+  }
+
+  async createBonusNumber() {
+    const input = await getUserInput(INPUT_MESSAGE.bonusNumber);
+    const bonusNumber = Number(input);
+    this.validateBonusNumber(bonusNumber);
+    this.#bonusNumber = bonusNumber;
+  }
+
+  validateBonusNumber(number) {
+    const winningNumbers = this.#winningLotto.getNumbers();
+    validateNumberType(number);
+    validateLottoRange(number);
+    validateExistingNumber(number, winningNumbers);
   }
 
   purchaseLotto(amount) {
