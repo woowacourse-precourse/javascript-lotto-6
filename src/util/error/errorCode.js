@@ -1,4 +1,4 @@
-const ERROR_CODE = {
+export const PURCHASE_ERROR_CODE = {
   purchaseAmount: '[ERROR] 입력을 받는 중에 예상치 못한 에러가 발생 했습니다.',
   createPurchaseData: '[ERROR] 로또를 구매하는 도중에 예상치 못한 에러가 발생 했습니다.',
   isDuplicated: '[ERROR] 로또 번호에 중복된 숫자가 존재합니다',
@@ -8,4 +8,7 @@ const ERROR_CODE = {
   valueIsTooSmall: '[ERROR] 로또를 구매할 수 없습니다.',
 };
 
-export default ERROR_CODE;
+export const LOTTO_ERROR_CODE = {
+  failToCreateLotto: '[ERROR] 로또 번호를 생상하는 도중에 예상치 못한 에러가 발생 했습니다.',
+  valueIsEmpty: '[ERROR] 로또 번호에 빈값이 존재 합니다.',
+};
