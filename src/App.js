@@ -16,8 +16,11 @@ class App {
 
     const winningNumberInput =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+    const bonusNumberInput =
+      await Console.readLineAsync('보너스 번호를 입력해 주세요.');
 
     lottoGame.addWinningNumbers(winningNumberInput.split(','));
+    lottoGame.addBonusNumber(bonusNumberInput);
 
     Console.print(lottoGame);
   }

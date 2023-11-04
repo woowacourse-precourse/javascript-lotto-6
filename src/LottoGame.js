@@ -4,6 +4,7 @@ class LottoGame {
     this.count = this.calculateLottoCount(price);
     this.lottos = [];
     this.winningNumbers = [];
+    this.bonusNumber = '';
   }
 
   calculateLottoCount(price) {
@@ -16,6 +17,10 @@ class LottoGame {
 
   addWinningNumbers(numberArray) {
     this.winningNumbers = numberArray;
+  }
+
+  addBonusNumber(number) {
+    this.bonusNumber = number;
   }
 }
 
