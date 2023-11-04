@@ -7,10 +7,10 @@ export function checkIsEmpty(verifyValue) {
   }
 }
 
-export function checkLottoIsEmpty(verifyValue) {
+export function checkLottoIsEmptyOrZero(verifyValue) {
   verifyValue.forEach((element) => {
-    if (element === '') {
-      throw new Error(`${LOTTO_ERROR_CODE}`);
+    if (element === 0) {
+      throw new Error(`${LOTTO_ERROR_CODE.valueIsEmptyOrZero}`);
     }
   });
 }
