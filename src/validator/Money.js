@@ -1,17 +1,12 @@
 import { MONEY_ERROR } from '../constants/message/error.js';
 import { LOTTO } from '../constants/setting.js';
+import CommonValidator from './Common.js';
 
 class MoneyValidator {
   static validate(money) {
-    this.validateNumber(money);
+    CommonValidator.validateIsNumber(money);
     this.validateLottoPurchaseAmount(money);
     this.validateLottoAmountExactness(money);
-  }
-
-  static validateNumber(money) {
-    if (Number.isNaN(money)) {
-      throw new Error(MONEY_ERROR.number);
-    }
   }
 
   static validateLottoPurchaseAmount(money) {
