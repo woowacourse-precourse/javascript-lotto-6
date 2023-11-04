@@ -60,6 +60,12 @@ const Validator = {
       throw new ValidationError(ERROR.hasDuplicate);
     }
   },
+
+  checkIsOutOfRange(input) {
+    if (input < LOTTO_NUMBER.minNum || input > LOTTO_NUMBER.maxNum) {
+      throw new ValidationError(ERROR.isOutOfRange);
+    }
+  },
 };
 
 export default Validator;

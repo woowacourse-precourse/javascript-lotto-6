@@ -30,4 +30,5 @@ export const ERROR = Object.freeze({
   hasDuplicate: '로또 번호 중 중복된 숫자가 있습니다. 로또 번호는 모두 다른 수여야 합니다.',
   isInvalidCount: `${LOTTO_NUMBER.count}개가 입력되지 않았습니다. ${LOTTO_NUMBER.count}개의 숫자를 입력해주세요.`,
   hasOutOfRange: `입력된 숫자 중 ${LOTTO_NUMBER.minNum}-${LOTTO_NUMBER.maxNum} 범위가 아닌 숫자가 있습니다. 범위 안의 숫자를 입력해주세요`,
+  isOutOfRange: `입력된 숫자가 ${LOTTO_NUMBER.minNum}-${LOTTO_NUMBER.maxNum} 범위가 아닙니다. 범위 안의 숫자를 입력해주세요`,
 });
