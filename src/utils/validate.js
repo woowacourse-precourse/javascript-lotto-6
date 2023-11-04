@@ -19,12 +19,10 @@ function validateLottoLength(numbers) {
   }
 }
 
-function validateLottoRange(numbers) {
-  numbers.forEach((number) => {
-    if (number < LOTTO.range.start || number > LOTTO.range.end) {
-      throw new Error(ERROR_MESSAGE.invalidLottoRange);
-    }
-  });
+function validateLottoRange(number) {
+  if (number < LOTTO.range.start || number > LOTTO.range.end) {
+    throw new Error(ERROR_MESSAGE.invalidLottoRange);
+  }
 }
 
 function validateDuplicateNumber(numbers) {

@@ -17,9 +17,9 @@ class Lotto {
     validateLottoLength(numbers);
     numbers.forEach((number) => {
       validateNumberType(number);
+      validateLottoRange(number);
     });
     validateDuplicateNumber(numbers);
-    validateLottoRange(numbers);
   }
 
   getNumbers() {
