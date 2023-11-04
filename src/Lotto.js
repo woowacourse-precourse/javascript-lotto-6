@@ -6,6 +6,7 @@ class Lotto {
   constructor(numbers) {
     this.#validateDraw(numbers);
     this.#drawNumbers = numbers;
+    this.rank = 0;
   }
 
   getLottoNumbers() {
@@ -58,21 +59,21 @@ class Lotto {
     let result = this.matchCountCheck(drew, bonus);
     let isBonus = this.matchBonusCheck(drew, bonus);
     if (result === 3) {
-      return (rank = 5);
+      return (this.rank = 5);
     }
     if (result === 4) {
-      return (rank = 4);
+      return (this.rank = 4);
     }
     if (result === 5) {
-      return (rank = 3);
+      return (this.rank = 3);
     }
     if (result === 5 && isBonus === true) {
-      return (rank = 2);
+      return (this.rank = 2);
     }
     if (result === 6) {
-      return (rank = 1);
+      return (this.rank = 1);
     }
-    return (rank = 0);
+    return (this.rank = 0);
   }
 
   matchCountCheck = (random, drew) => {
