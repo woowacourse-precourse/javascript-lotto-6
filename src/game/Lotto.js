@@ -1,15 +1,11 @@
 import { Random } from '@woowacourse/mission-utils';
-import { Inputs } from '../ui/Input.js';
-import { Outputs } from '../ui/Output.js';
 class Lotto {
   #numbers;
 
   // numbers는 사용자가 입력한 구입 금액이다.
-  constructor(numbers, winningNum, bonusNum) {
+  constructor(numbers) {
     // this.#validate(numbers);
     this.#numbers = numbers;
-    this.winningNum = winningNum;
-    this.bonusNum = bonusNum;
   }
 
   // #validate(numbers) {
@@ -27,6 +23,17 @@ class Lotto {
     return emptyArrays;
   }
 
+  // TODO: 추가 기능 구현
+}
+
+class LottoResult extends Lotto {
+  constructor(numbers, winningNum, bonusNum, myLottos) {
+    super(numbers);
+    this.winningNum = winningNum;
+    this.bonusNum = bonusNum;
+    this.myLottos = myLottos;
+  }
+
   async isFit() {
     const resultObj = {
       three: 0,
@@ -35,10 +42,9 @@ class Lotto {
       bonus: 0,
       six: 0,
     };
-    const lottos = this.makeLottos();
-    for (let i = 0; i < lottos.length; i++) {
+    for (let i = 0; i < this.myLottos.length; i++) {
       let count = 0;
-      const currentLotto = lottos[i];
+      const currentLotto = this.myLottos[i];
       for (let j = 0; j < currentLotto.length; j++) {
         if (this.winningNum.includes(currentLotto[j])) {
           count += 1;
@@ -64,7 +70,6 @@ class Lotto {
     }
     return resultObj;
   }
-  // TODO: 추가 기능 구현
 }
 
-export default Lotto;
+export default { Lotto, LottoResult };

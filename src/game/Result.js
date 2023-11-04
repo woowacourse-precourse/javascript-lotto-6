@@ -1,22 +1,22 @@
-class Result {
+import { Outputs } from '../ui/Output.js';
+
+export class Result {
   #numbers;
 
   #fitObj;
 
   //numbers는 구입 금액입니다.
   constructor(numbers, fitObj) {
-    this.fitObj = fitObj;
-    this.numbers = numbers;
+    this.#fitObj = fitObj;
+    this.#numbers = numbers;
   }
 
   getRateOfReturn() {
     let revenue = 0;
-    console.log(1);
-    Object.entries(this.fitObj).forEach(([key, value]) => {
+    Object.entries(this.#fitObj).forEach(([key, value]) => {
       switch (key) {
         case 'three':
           if (value > 0) {
-            console.log(3);
             revenue += 5000 * value;
           }
           break;
@@ -42,6 +42,11 @@ class Result {
           break;
       }
     });
-    return revenue / (this.numbers / 100);
+    return revenue / (this.#numbers / 100);
+  }
+
+  printResult() {
+    Outputs.printStatistics(this.#fitObj);
+    Outputs.printRateOfReturn(this.getRateOfReturn());
   }
 }
