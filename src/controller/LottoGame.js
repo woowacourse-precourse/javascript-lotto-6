@@ -2,9 +2,12 @@ import PurchaseAmount from '../domain/PurchaseAmount.js';
 import LottoGameInput from '../view/LottoGameInput.js';
 import LottoGameOutput from '../view/LottoGameOutput.js';
 import GameUtils from '../utils/GameUtils.js';
+import LottoTickets from '../collection/LottoTickets.js';
 
 class LottoGame {
   #purchaseAmount;
+
+  #lottoTickets;
 
   start() {
     return this;
@@ -23,6 +26,8 @@ class LottoGame {
   issueLottoTickets() {
     const amount = this.#purchaseAmount.getPurchaseAmount();
     const lottoTicketsCount = GameUtils.dividedByThousand(amount);
+
+    this.#lottoTickets = new LottoTickets(lottoTicketsCount);
   }
 }
 
