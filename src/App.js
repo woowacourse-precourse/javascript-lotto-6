@@ -8,10 +8,11 @@ class App {
   async play() {
     const lottoCounts = await inputMoney();
     lottoCountPrinter(lottoCounts);
+    lottoPrinter(lottoCounts);
     const winningNumbers = await inputWinningNumber();
-    console.log();
+    MissionUtils.Console.print("");
     const bonusNumber = await inputBonusNumber(winningNumbers);
-    console.log();
+    MissionUtils.Console.print("");
   }
 }
 
@@ -57,4 +58,20 @@ function lottoCountPrinter(counts) {
 export function winningNumberSpliter(input) {
   const winningNumberSplit = input.split(',');
   return winningNumberSplit;
+}
+
+function lottoPrinter(counts) {
+  for (let i = 0; i < counts; i++) {
+    MissionUtils.Console.print(randomNumberCreater());
+  }
+}
+
+function randomNumberCreater() {
+  const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  return lottoCreater(randomNumber);
+}
+
+function lottoCreater(numbers) {
+  const lotto = new Lotto(numbers);
+  return lotto;
 }

@@ -6,6 +6,7 @@ class Lotto {
     this.#validateDuplicate(numbers);
     this.#validateRange(numbers);
     this.#numbers = numbers;
+    return this.#numbers;
   }
 
   #validate(numbers) {
