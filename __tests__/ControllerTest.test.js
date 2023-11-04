@@ -21,4 +21,29 @@ describe("컨트롤러 클래스 테스트", () => {
             expect(TMP).toEqual([1, 2, 3, 4, 5, 6]);
         });
     });
+
+    describe("compareLottoNum", () => {
+        test("일치 개수를 반환한다.", () => {
+            const USER_LOTTO = [1, 2, 3, 4, 5, 6];
+            const WINNING_LOTTO = [1, 3, 5, 7, 9, 11];
+            const BONUS_NUM = 2;
+            const RESULT = Controller.compareLottoNum(
+                USER_LOTTO,
+                WINNING_LOTTO,
+                BONUS_NUM
+            );
+            expect(RESULT).toBe(3);
+        });
+        test("5개가 일치하고 보너스 점수도 일치하면 '5b'를 반환한다.", () => {
+            const USER_LOTTO = [1, 2, 3, 4, 5, 6];
+            const WINNING_LOTTO = [1, 2, 3, 4, 5, 11];
+            const BONUS_NUM = 6;
+            const RESULT = Controller.compareLottoNum(
+                USER_LOTTO,
+                WINNING_LOTTO,
+                BONUS_NUM
+            );
+            expect(RESULT).toBe("5b");
+        });
+    });
 });
