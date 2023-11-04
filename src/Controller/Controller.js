@@ -13,20 +13,56 @@ class Controller {
     this.#view = new View();
   }
   
+  async #pay() {
+    let errorCheck = true;
+
+    while(errorCheck){
+      try {
+        const price = await this.#view.inputPrice()
+        this.#consumer = new Consumer(price);
+        errorCheck = false;
+      } catch (error) {
+        this.#view.printError(error.message);
+      }
+    }
+  }
+
   async buyLotto() {
-    const price = await this.#view.inputPrice();
-    this.#consumer = new Consumer(price);
-    const quantity = this.#consumer.getQuantity();
-    this.#view.printQuantity(quantity);
-    const lottoNumber = this.#consumer.getLottoNumber();
-    this.#view.printLottoNumber(lottoNumber);
+    await this.#pay();
+    this.#view.printQuantity(this.#consumer.getQuantity());
+    this.#consumer.pickLottoNumber();
+    this.#view.printLottoNumber(this.#consumer.getLottoNumber());
+  }
+
+  async #winningPick() {
+    let errorCheck = true;
+
+    while(errorCheck){
+      try {
+        this.#lotto = new Lotto(await this.#view.inputWinningNumber());
+        errorCheck = false;
+      } catch (error) {
+        this.#view.printError(error.message);
+      }
+    }
+  }
+
+  async #bonusPick() {
+    let errorCheck = true;
+
+    while(errorCheck){
+      try {
+        this.#lotto.setBonus(await this.#view.inputBonus());
+        errorCheck = false;
+      } catch (error) {
+        this.#view.printError(error.message);
+      }
+    }
   }
 
   async playLotto() {
-    const winningNumber = await this.#view.inputWinningNumber();
-    this.#lotto = new Lotto(winningNumber);
-    const bonus = await this.#view.inputBonus();
-    this.#lotto.setBonus(bonus);
+    await this.#winningPick();
+    await this.#bonusPick();
   }
 
   result() {
