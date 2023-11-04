@@ -95,11 +95,18 @@ export class Winning {
   #numbers
 
   constructor(numbers) {
+    this.#validate(numbers);
     this.#winnningNumberValidater(numbers);
     this.#winnningNumberDuplicateValidater(numbers);
     this.#winnningNumberRangeValidater(numbers);
     this.#numbers = numbers;
   };
+
+  #validate(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error("[ERROR] 당첨 번호는 6개여야 합니다.");
+    }
+  }
 
   #winnningNumberValidater(numbers) {
     for (let i = 0; i < numbers.length; i++) {
