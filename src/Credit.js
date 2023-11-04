@@ -69,11 +69,7 @@ export class Profit {
   lottoStatsPrint(count) {
     const statCount = this.statCount;
     Console.print(
-      `당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n
-      4개 일치 (50,000원) - ${statCount[1]}개\n
-      5개 일치 (1,500,000원) - ${statCount[2]}개\n
-      5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n
-      6개 일치 (2,000,000,000원) - ${statCount[4]}개\n`
+      `당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n4개 일치 (50,000원) - ${statCount[1]}개\n5개 일치 (1,500,000원) - ${statCount[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n6개 일치 (2,000,000,000원) - ${statCount[4]}개\n`
     );
   }
 }
