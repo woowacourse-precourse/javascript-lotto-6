@@ -17,16 +17,12 @@ const validation = {
       throw new Error("[ERROR] 숫자는 1부터 45 사이 입니다.");
     }
   },
-  winNumEqualValue: (index, input, winNums) => {
-    if (index !== winNums.indexOf(input)) {
+  winNumEqualValue: (winNums) => {
+    if (winNums.size !== 7) {
       throw new Error("[ERROR] 중복된 숫자를 입력하면 안됩니다.");
     }
   },
-  bonusNumEqualValue: (input, winNums) => {
-    if (winNums.includes(input)) {
-      throw new Error("[ERROR] 중복된 숫자를 입력하면 안됩니다.");
-    }
-  },
+
   lottoNumsLength: (winNums) => {
     if (winNums.length !== 7) {
       throw new Error("[ERROR] 보너스 숫자까지 합해 갯수는 7개여야 합니다.");
@@ -71,9 +67,10 @@ function checkWinNums(winNums) {
   winNums.forEach((winNum, index) => {
     validation.inputType(winNum);
     validation.lottoNumberRange(winNum);
-    validation.winNumEqualValue(index, winNum, winNums);
   });
+
   validation.lottoNumsLength(winNums);
+  validation.winNumEqualValue(new Set(winNums));
 }
 
 export { validatePriceInput, validateWinLottoInput };
