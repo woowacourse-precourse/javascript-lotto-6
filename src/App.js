@@ -5,8 +5,6 @@ import * as func from "./Function.js";
 class App {
   async play() {
     const PAYMENT = await func.getPayment();
-    // console.log(PAYMENT, NUMBER_BONUS, NUMBER_GUESS);
-
     const LOTTO_MACHINE = new LottoMachine(PAYMENT);
 
     MissionUtils.Console.print(`${LOTTO_MACHINE.quantity}개를 구매했습니다.`);
@@ -18,6 +16,7 @@ class App {
     NUMBER_BONUS = Number(NUMBER_BONUS);
     LOTTO_MACHINE.calcPrize(NUMBER_GUESS, NUMBER_BONUS);
     LOTTO_MACHINE.printResult();
+    func.printReturnRate(LOTTO_MACHINE.prize, PAYMENT);
   }
 }
 

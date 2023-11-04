@@ -34,13 +34,13 @@ export async function getBonusNumber() {
   }
 }
 
-export function printResult(prize) {
-  MissionUtils.Console.print("\n당첨 통계\n___");
-  MissionUtils.Console.print(`3개 일치 (5,000원) - ${prize[0]}개`);
-  MissionUtils.Console.print(`4개 일치 (50,000원) - ${prize[1]}개`);
-  MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${prize[2]}개`);
-  MissionUtils.Console.print(
-    `5개 일치, 보너스 볼 일치 (30,000,000원) - ${prize[3]}개`
-  );
-  MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${prize[4]}개`);
+export function printReturnRate(prize, PAYMENT) {
+  let PRIZE =
+    prize[0] * 5000 +
+    prize[1] * 50000 +
+    prize[2] * 1500000 +
+    prize[3] * 30000000 +
+    prize[4] * 2000000000;
+  let RATE_RETURN = (PRIZE / PAYMENT).toFixed(1);
+  MissionUtils.Console.print(`총 수익률은 ${RATE_RETURN}%입니다.`);
 }
