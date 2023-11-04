@@ -1,5 +1,3 @@
-// 역할을 최대한 분리해보자!
-// 클래스 당 역할을 1개씩만 할당할 수 있으면 명확하게 이해할 수 있다고 한다!
 import {Random} from "@woowacourse/mission-utils";
 
 /**
@@ -41,7 +39,7 @@ export class RandomNumbersGenerator {
 
 
     static generate() {
-        return Random.pickUniqueNumbersInRange(1, 45, 6);
+        return Random.pickUniqueNumbersInRange(1, 45, 6).sort();
 
     }
 
