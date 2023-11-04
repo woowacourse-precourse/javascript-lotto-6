@@ -17,6 +17,14 @@ class App {
     }
     // Console.print(userRandomNums)
 
+    // 당첨 번호 입력 - 유효한지 확인하는 코드 추가하기
+    const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
+    
+
+    // 보너스 번호 입력 - 유효한지 확인하는 코드 추가하기
+    const bonusNums = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+    
+
   }
 }
 
