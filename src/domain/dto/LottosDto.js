@@ -19,6 +19,10 @@ export class LottosDto {
         this.#lottos = Object.freeze(manyLottoDto)
     }
 
+    /**
+     *
+     * @return {LottoDto[]}
+     */
     get lottos() {
         return this.#lottos
     }

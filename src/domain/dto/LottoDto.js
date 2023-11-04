@@ -1,14 +1,22 @@
 export class LottoDto {
     /**
-     * @type {Lotto[]}
+     * @type {number[]}
      */
     #numbers
 
+    /**
+     *
+     * @para {number[]} numbers
+     */
     constructor(numbers) {
         this.#numbers = numbers
     }
 
+    /**
+     *
+     * @return {number[]}
+     */
     get numbers() {
-        return this.numbers
+        return this.#numbers
     }
 }
