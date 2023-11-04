@@ -1,5 +1,5 @@
-import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE } from "../util/constant.js";
+import { Console } from '@woowacourse/mission-utils';
+import { MESSAGE } from '../util/constant.js';
 
 const OutputView = {
   printError(error) {
@@ -8,6 +8,12 @@ const OutputView = {
 
   printLottoAmount(amount) {
     Console.print(MESSAGE.lottoAmount(amount));
+  },
+
+  printLottoList(lottos) {
+    lottos.forEach(lotto => {
+      Console.print(MESSAGE.lottoList(lotto));
+    });
   },
 };
 

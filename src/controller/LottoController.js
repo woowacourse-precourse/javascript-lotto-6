@@ -7,6 +7,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 export default class LottoController {
   #lottoAmount;
+  #lottoList;
 
   constructor() {
     this.generate = new LottoGenerator();
@@ -30,6 +31,7 @@ export default class LottoController {
 
   async generateLottos(inputValue) {
     this.#lottoAmount = Calculate.countLottoAmounnt(inputValue);
-    this.generate.startGenerate(this.#lottoAmount);
+    this.#lottoList = this.generate.startGenerate(this.#lottoAmount);
+    OutputView.printLottoList(this.#lottoList);
   }
 }

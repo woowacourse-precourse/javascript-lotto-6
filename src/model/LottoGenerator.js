@@ -8,15 +8,17 @@ class LottoGenerator {
   startGenerate(amount) {
     this.#lottoAmount = amount;
     OutputView.printLottoAmount(this.#lottoAmount);
-    this.generateEachLotto();
+    return this.generateEachLotto();
   }
 
   generateEachLotto() {
     let numbers = new Array(this.#lottoAmount);
+
     Array.from({ length: this.#lottoAmount }, () => {
       numbers.push(this.randomNumberGenerator());
     });
-    Console.print(numbers);
+
+    return numbers;
   }
 
   randomNumberGenerator() {
