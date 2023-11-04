@@ -1,18 +1,22 @@
 import LottoStore from "../../src/Model/LottoStore";
 import Lotto from "../../src/Lotto";
-let lottoStore;
+
+jest.mock("../../src/Lotto");
+
+let lottoStore, purchaseQuantity;
 describe("LottoStore 클래스 테스트", () => {
   beforeEach(() => {
-    const purchaseQuantity = 5;
+    jest.clearAllMocks();
+    purchaseQuantity = 20;
     lottoStore = new LottoStore(purchaseQuantity);
   });
   test("LottoStore 인스턴스를 생성할 수 있어야 한다.", () => {
+    // then
     expect(lottoStore).toBeDefined();
   });
 
-  test("createLotto 메서드가 존재해야 한다.", () => {
-    expect(typeof lottoStore.createLotto).toBe("function");
+  test("LottoStore 인스턴스가 생성되면 purchaseQuantit 값 만큼의 Lotto 인스턴스가 생성되야 한다.", () => {
+    // then
+    expect(Lotto).toBeCalledTimes(purchaseQuantity);
   });
-
-  test("createLotto 메서드를 호출하면 입력 받은 금액 만큼 Lotto 인스턴스를 생성해야 한다.", () => {});
 });
