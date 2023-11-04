@@ -8,6 +8,8 @@ import { CONSTANTS } from '../constants/constant.js';
 class LottoController {
   #USER_MONEY;
 
+  #USER_NUMBER;
+
   #WIN_NUMBER;
 
   #BONUS_NUMBER;
@@ -15,6 +17,7 @@ class LottoController {
   constructor() {
     this.INPUT_VIEW = new InputView();
     this.OUTPUT_VIEW = new OutputView();
+    this.#USER_NUMBER = [];
   }
 
   async inputPurchaseMoney() {
@@ -40,6 +43,7 @@ class LottoController {
     if (canBuy > 0) {
       const generateNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       const lottoNumber = await Lotto.createLottoInstance(generateNumber);
+      this.#USER_NUMBER.push(generateNumber);
       this.OUTPUT_VIEW.userLottoNumber(lottoNumber.sortingNumber());
       await this.#lottoGenerator(canBuy - 1);
     }
@@ -66,7 +70,14 @@ class LottoController {
   }
 
   async printStatistic() {
-    console.log(this.#USER_MONEY, this.#WIN_NUMBER, this.#BONUS_NUMBER);
+    const clacStatic = new LottoUtill();
+    this.OUTPUT_VIEW.lottoStatic(
+      await clacStatic.checkLottoCorrect(
+        this.#USER_NUMBER,
+        this.#WIN_NUMBER,
+        this.#BONUS_NUMBER,
+      ),
+    );
   }
 }
 

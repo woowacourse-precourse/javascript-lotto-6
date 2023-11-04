@@ -9,6 +9,11 @@ class OutputView {
   userLottoNumber(numbers) {
     Console.print(OUTPUT_MSG.userLottoNumber(numbers));
   }
+
+  lottoStatic(staticObject) {
+    Console.print(OUTPUT_MSG.LOTTO_STATIC_OUT);
+    Console.print(OUTPUT_MSG.userLottoResult(staticObject));
+  }
 }
 
 export default OutputView;
