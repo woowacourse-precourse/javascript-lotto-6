@@ -6,7 +6,6 @@ import BonusNumberValidator from './validator/BonusNumberValidator.js';
 import WinningNumberArrayValidator from './validator/WinningNumberArrayValidator.js';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class LottoCompany {
 	#winningNumberArray;

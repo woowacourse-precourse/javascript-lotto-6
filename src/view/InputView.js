@@ -1,17 +1,17 @@
 import { Console } from '@woowacourse/mission-utils';
-import viewMessage from '../constants/viewMessage.js';
+import { INPUT_VIEW_MESSAGE } from '../constants/viewMessage.js';
 
 class InputView {
 	static async inputPurchaseAmountAsync() {
-		return await Console.readLineAsync(viewMessage.INPUT_PURCHASE_AMOUNT);
+		return await Console.readLineAsync(INPUT_VIEW_MESSAGE.purchaseAmount);
 	}
 
 	static async inputWinningNumbersAsync() {
-		return await Console.readLineAsync(viewMessage.INPUT_WINNING_NUMBERS);
+		return await Console.readLineAsync(INPUT_VIEW_MESSAGE.winningNumbers);
 	}
 
 	static async inputBonusNumberAsync() {
-		return await Console.readLineAsync(viewMessage.INPUT_BONUS_NUMBER);
+		return await Console.readLineAsync(INPUT_VIEW_MESSAGE.bonusNumber);
 	}
 }
 

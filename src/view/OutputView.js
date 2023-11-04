@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import viewMessage from '../constants/viewMessage.js';
+import { OUTPUT_VIEW_MESSAGE } from '../constants/viewMessage.js';
 import Formatting from '../util/Formatting.js';
 
 class OutputView {
@@ -8,20 +8,21 @@ class OutputView {
 	}
 
 	static printPurchaseHistory(lottoNumberList) {
-		Console.print(viewMessage.OUTPUT_PURCHASE_HISTORY(lottoNumberList.length));
+		Console.print(OUTPUT_VIEW_MESSAGE.purchaseHistoryFn(lottoNumberList.length));
+
 		lottoNumberList.forEach(lottoNumber => {
 			Console.print(Formatting.convertArrayToString(lottoNumber));
 		});
 	}
 
 	static printWinningResult(lottoResult, rateOfReturn) {
-		Console.print(viewMessage.OUTPUT_WINNING_RESULT);
-		Console.print(viewMessage.OUTPUT_FIFTH_PLACE(lottoResult.fifthPlaceCount));
-		Console.print(viewMessage.OUTPUT_FOURTH_PLACE(lottoResult.fourthPlaceCount));
-		Console.print(viewMessage.OUTPUT_THIRD_PLACE(lottoResult.thirdPlaceCount));
-		Console.print(viewMessage.OUTPUT_SECOND_PLACE(lottoResult.secondPlaceCount));
-		Console.print(viewMessage.OUTPUT_FIRST_PLACE(lottoResult.firstPlaceCount));
-		Console.print(viewMessage.OUTPUT_RATE_RETURN(rateOfReturn));
+		Console.print(OUTPUT_VIEW_MESSAGE.winningResult);
+		Console.print(OUTPUT_VIEW_MESSAGE.fifthPlaceFn(lottoResult.fifthPlaceCount));
+		Console.print(OUTPUT_VIEW_MESSAGE.fourthPlaceFn(lottoResult.fourthPlaceCount));
+		Console.print(OUTPUT_VIEW_MESSAGE.thirdPlaceFn(lottoResult.thirdPlaceCount));
+		Console.print(OUTPUT_VIEW_MESSAGE.secondPlaceFn(lottoResult.secondPlaceCount));
+		Console.print(OUTPUT_VIEW_MESSAGE.firstPlaceFn(lottoResult.firstPlaceCount));
+		Console.print(OUTPUT_VIEW_MESSAGE.rateReturnFn(rateOfReturn));
 	}
 
 	static printErrorMessage(errorMessage) {
