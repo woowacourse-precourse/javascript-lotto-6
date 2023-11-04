@@ -8,6 +8,10 @@ const InputView = {
   readWinningNumbers(callback) {
     MissionUtils.Console.readLine('당첨 번호를 입력해 주세요.\n', callback);
   },
+
+  readBonusNumbers(callback) {
+    MissionUtils.Console.readLine('보너스 번호를 입력해 주세요.\n', callback);
+  },
 };
 
 export default InputView;
