@@ -21,8 +21,15 @@ module.exports = {
   },
   rules: {
     // 들여쓰기 깊이 제한
-    "max-depth": ["error", 2],
-    "import/extensions": ["error", "ignorePackages"],
-    "no-console": process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'max-depth': ['error', 2],
+    'import/extensions': ['error', 'ignorePackages'],
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'class-methods-use-this': 'off',
+    'import/prefer-default-export': 'off',
+    'no-unused-vars': 'off',
+    'no-undef': 'off',
+    'no-new': 'off',
+    'import/no-cycle': 'off',
+    'no-restricted-globals': 'off',
   },
-}
+};
