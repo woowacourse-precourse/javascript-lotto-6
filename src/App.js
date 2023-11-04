@@ -2,17 +2,23 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "./constants/inputMessage.js";
 import { RESULT_MESSAGE } from "./constants/resultMessage.js";
 import Lottos from "./Lottos.js";
+import Lotto from "./Lotto.js";
 
 class App {
   lottos;
 
   async play() {
     await this.gameStart();
+    await this.gameProgress();
   }
 
   async gameStart() {
     await this.getLottoPrice();
     this.printLottos();
+  }
+
+  async gameProgress() {
+    await this.getLottoNumber();
   }
 
   async getLottoPrice() {
@@ -23,6 +29,17 @@ class App {
     } catch (error) {
       Console.print(error.message);
       await this.getLottoPrice();
+    }
+  }
+
+  async getLottoNumber() {
+    const lottoNumberInput = await Console.readLineAsync(INPUT_MESSAGE.numbers);
+
+    try {
+      this.lotto = new Lotto(lottoNumberInput.split(","));
+    } catch (error) {
+      Console.print(error.message);
+      await this.getLottoNumber();
     }
   }
 
