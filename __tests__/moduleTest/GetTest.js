@@ -49,7 +49,6 @@ describe('Get 테스트', () => {
   ])('lottoResult()', (lottoArray, lottoBoard, expectedValue) => {
     //when
     const lottoResult = Get.lottoResult(lottoArray, lottoBoard);
-    console.log(lottoResult);
 
     //then
     expect(lottoResult).toEqual(expectedValue);

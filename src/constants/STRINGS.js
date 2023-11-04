@@ -14,12 +14,22 @@ const STRINGS = Object.freeze({
   SAME_ELEMENT_IN_ARRAY_ERROR_MESSAGE: `${ERROR_HEADER} 중복된 요소가 존재합니다.`,
   EXIST_NUMBER_IN_BOARD_ERROR_MESSAGE: `${ERROR_HEADER} 중복된 번호가 존재합니다.`,
 
+  PURCHASED_LOTTO_FORMAT: '개를 구매했습니다.',
+
+  LOTTO_RESULT_HEADER: '당첨 통계',
+  FIRST_PLACE_RESULT_HEADER: '6개 일치 (2,000,000,000원)',
+  SECOND_PLACE_RESULT_HEADER: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+  THIRD_PLACE_RESULT_HEADER: '5개 일치 (1,500,000원)',
+  FOURTH_PLACE_RESULT_HEADER: '4개 일치 (50,000원)',
+  FIFTH_PLACE_RESULT_HEADER: '3개 일치 (5,000원)',
+
   STRING_TYPE: 'string',
   BLANK: '',
-
-  PURCHASED_LOTTO_FORMAT: '개를 구매했습니다.',
   LOTTO_FRONT_COVER: '[',
   LOTTO_BEHIND_COVER: ']',
+  DASH: '-',
+  SPACE: ' ',
+  UNIT_OF_LOTTO: '개',
 });
 
 export default STRINGS;
