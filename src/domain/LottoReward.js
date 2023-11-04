@@ -67,6 +67,14 @@ class LottoReward {
   }
 
   /**
+   * 로또 경품의 상금을 반환합니다.
+   * @returns {number}
+   */
+  getPrize() {
+    return this.#prize;
+  }
+
+  /**
    * 갯수와 비례한 로또 경품의 총 상금을 반환합니다.
    * @returns {number}
    */

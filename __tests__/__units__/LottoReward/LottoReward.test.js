@@ -28,7 +28,18 @@ describe('LottoReward 테스트', () => {
     expect(result).toBe(0);
   });
 
-  it('`getTotalPrize()` 호출 시 경품 조건을 반환한다.', () => {
+  it('`getPrize()` 호출 시 경품의 상금을 반환한다.', () => {
+    // given
+    const reward = LottoReward.of({ match: 6, hasBonus: true }, 1_000);
+
+    // when
+    const result = reward.getPrize();
+
+    // then
+    expect(result).toBe(1_000);
+  });
+
+  it('`getTotalPrize()` 호출 시 갯수와 비례한 총 상금을 반환한다.', () => {
     // given
     const reward = LottoReward.of({ match: 6, hasBonus: true }, 1_000);
 

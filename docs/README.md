@@ -209,6 +209,10 @@
     <td>현재 경품의 갯수를 반환합니다.</td>
   </tr>
   <tr>
+    <td>getPrize()</td>
+    <td>로또 경품의 상금을 반환합니다.</td>
+  </tr>
+  <tr>
     <td>getTotalPrize()</td>
     <td>갯수와 비례한 로또 경품의 총 상금을 반환합니다.</td>
   </tr>
@@ -335,6 +339,7 @@
 
   - [x] `getRequirement()` 호출 시 경품 조건을 반환한다.
   - [x] `getQuantity()` 호출 시 경품 갯수를 반환한다.
+  - [x] `getPrize()` 호출 시 상금을 반환한다.
   - [x] `getTotalPrize()` 호출 시 갯수에 비례한 총 금액을 반환한다.
   - [x] `checkRequirement(requirement)` 호출 시 `requirement`와 조건을 비교하고 갯수를 증가한 후 결과를 반환합니다.
 
