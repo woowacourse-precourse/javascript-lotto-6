@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 import Print from '../../src/modules/Print.js';
-import Lotto from '../../src/Lotto.js';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(Console, 'print');
@@ -8,26 +7,6 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const purchasedLottoTestInput = [
-  [
-    [
-      new Lotto([1, 2, 3, 4, 5, 6]),
-      new Lotto([7, 8, 9, 10, 11, 12]),
-      new Lotto([43, 21, 12, 32, 31, 35]),
-    ],
-    [
-      '',
-      '3개를 구매했습니다.',
-      '[1, 2, 3, 4, 5, 6]',
-      '[7, 8, 9, 10, 11, 12]',
-      '[43, 21, 12, 32, 31, 35]',
-    ],
-  ],
-  [
-    [new Lotto([2, 4, 6, 8, 10, 14])],
-    ['', '1개를 구매했습니다.', '[2, 4, 6, 8, 10, 14]'],
-  ],
-];
 const lottoResultTestInput = [
   [
     [0, 1, 0, 3, 2, 0, 0, 0, 1, 0, 1, 0, 1],
@@ -69,33 +48,16 @@ const lottoResultTestInput = [
     ],
   ],
 ];
-describe('Print 테스트', () => {
-  test.each(purchasedLottoTestInput)(
-    'purchasedLotto()',
-    (input, expectedValue) => {
-      //given
-      const logSpy = getLogSpy();
 
-      //when
-      Print.purchasedLotto(input);
+test.each(lottoResultTestInput)('lottoResult()', (input, expectedValue) => {
+  //given
+  const logSpy = getLogSpy();
 
-      //then
-      logSpy.mock.calls.forEach((call, index) => {
-        expect(String(call[0])).toBe(expectedValue[index]);
-      });
-    }
-  );
+  //when
+  Print.lottoResult(input);
 
-  test.each(lottoResultTestInput)('lottoResult()', (input, expectedValue) => {
-    //given
-    const logSpy = getLogSpy();
-
-    //when
-    Print.lottoResult(input);
-
-    //then
-    logSpy.mock.calls.forEach((call, index) => {
-      expect(String(call[0])).toBe(expectedValue[index]);
-    });
+  //then
+  logSpy.mock.calls.forEach((call, index) => {
+    expect(String(call[0])).toBe(expectedValue[index]);
   });
 });
