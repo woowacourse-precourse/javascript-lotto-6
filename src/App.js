@@ -51,7 +51,20 @@ class App {
     
 
     // 보너스 번호 입력 - 유효한지 확인하는 코드 추가하기
-    const bonusNums = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+    const bonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+    const bonusNum = Number(bonus);
+    // 숫자인지 확인
+    if (isNaN(bonusNum)) {
+      throw new Error(ERROR_MESSAGE.INPUT_TYPE_ERROR);
+    };
+    // 범위 확인
+    if (bonusNum > 45 || bonusNum < 0) {
+      throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+    };
+    // 당첨 번호와 중복되는지 확인
+    if (splitWinningNums.includes(bonusNum)) {
+      throw new Error(ERROR_MESSAGE.INPUT_INCLUDES_ERROR)
+    };
     
     // 당첨 확인
     let winningThree = 0;
