@@ -19,7 +19,7 @@ class App {
     if(isNaN(lottoPrice)) throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
     if (lottoPrice < 1000)
       throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
-    if (Number(lottoPrice) % 1000 !== 0)
+    if (lottoPrice % 1000 !== 0)
       throw new Error('[ERROR] 금액은 1,000원 단위로 입력해주세요.');
   }
 
@@ -29,6 +29,7 @@ class App {
   }
 
   pushArray(randomNumberArray) {
+    // test code
     this.lottoRandomNumber.push(randomNumberArray);
   }
 
@@ -46,10 +47,11 @@ class App {
   }
 
   checkBonusNumber(userBonusNumber){
+    // test code
     if(userBonusNumber === '') throw new Error('[ERROR] 숫자를 입력하세요.');
     userBonusNumber = Number(userBonusNumber);
     if(isNaN(userBonusNumber)) throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
-    if(1>userBonusNumber || userBonusNumber>45) throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    if(1>userBonusNumber || userBonusNumber>45) throw new Error('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
   }
 
   printLottoResult(lottoResult, lottoRate){
@@ -67,6 +69,13 @@ class App {
     return userLottoNumber.split(',').map((value) => Number(value));
   }
 
+  sortNumber(randomNumberArray){
+    randomNumberArray.sort(function(a,b){
+      return a-b;
+    })
+    return randomNumberArray;
+  }
+
   async play() {
     try{
       const lottoPrice =
@@ -76,7 +85,8 @@ class App {
       Console.print(`${this.lottoTicket}개를 구매했습니다.`);
 
       while (this.countNumber < this.lottoTicket) {
-        const randomNumberArray = this.makeRandomNumber();
+        let randomNumberArray = this.makeRandomNumber();
+        randomNumberArray = this.sortNumber(randomNumberArray);
         this.pushArray(randomNumberArray);
         this.countNumber += 1;
       }
