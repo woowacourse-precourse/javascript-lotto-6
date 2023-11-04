@@ -19,15 +19,17 @@ const ERROR_MESSAGE = Object.freeze({
 const LOTTO = Object.freeze({
   max_number: 45,
   min_number: 1,
-  length: 6,
-  amount_unit: 1000,
   max_match_count: 6,
   min_match_count: 3,
+  amount_unit: 1000,
+  length: 6,
 });
 
-const PAYABLE = Object.freeze([5000, 50000, 1500000, 30000000, 2000000000]);
-
-const LOTTO_STATISTICS = Object.freeze([
+const LOTTO_RANK_PAYABLE = Object.freeze([
+  5000, 50000, 1500000, 30000000, 2000000000,
+]);
+const LOTTO_STATISTICS_KEY = Object.freeze(['3,0', '4,0', '5,0', '5,1', '6,0']);
+const LOTTO_STATISTICS_MESSAGE = Object.freeze([
   `3개 일치 (5,000원) - `,
   `4개 일치 (50,000원) - `,
   `5개 일치 (1,500,000원) - `,
@@ -35,4 +37,18 @@ const LOTTO_STATISTICS = Object.freeze([
   `6개 일치 (2,000,000,000원) - `,
 ]);
 
-export { MESSAGE, ERROR_MESSAGE, PAYABLE, LOTTO, LOTTO_STATISTICS };
+const REGEX = Object.freeze({
+  three_digits_comma: /\B(?=(\d{3})+(?!\d))/g,
+  comma: ',',
+  comma_space: ', ',
+});
+
+export {
+  LOTTO,
+  REGEX,
+  MESSAGE,
+  ERROR_MESSAGE,
+  LOTTO_RANK_PAYABLE,
+  LOTTO_STATISTICS_KEY,
+  LOTTO_STATISTICS_MESSAGE,
+};
