@@ -25,11 +25,14 @@ class App {
       VERIFIED_WINNING_NUMBER,
       BOUNUS_NUMBER
     );
-    this.compareLottoNumber(
+    const NUMBER_OF_WINS = this.compareLottoNumber(
       ARRAY_OF_GAMES,
       VERIFIED_WINNING_NUMBER,
       VERIFIED_BOUNUS_NUMBER
     );
+    this.showLottoResult();
+
+    console.log(NUMBER_OF_WINS);
   }
 
   inputCash() {
@@ -80,11 +83,7 @@ class App {
     if (WINNING_NUMBER_ARRAY.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
-    if (
-      WINNING_NUMBER_ARRAY.forEach((number) => {
-        +number < 1 || +number > 45;
-      })
-    ) {
+    if (!WINNING_NUMBER_ARRAY.every((number) => number >= 1 && number <= 45)) {
       throw new Error("[ERROR] 로또 번호는 1 ~ 45 사이의 수여야 합니다.");
     }
     if (WINNING_NUMBER_ARRAY.length !== UNIQUE_ARRAY.length) {
@@ -108,13 +107,29 @@ class App {
     if (VERIFIED_WINNING_NUMBER.includes(BOUNUS_NUMBER)) {
       throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
+
+    return BOUNUS_NUMBER;
   }
 
   compareLottoNumber(lottoNumber, winningNumber, bonusNumber) {
+    const NUMBER_OF_WINS = [];
+    let bonus = 0;
     for (let i = 0; i < lottoNumber.length; i++) {
-      const EACH_LOTTO_GAME = lottoNumber[i].map();
+      const EACH_LOTTO_GAME = lottoNumber[i];
+      const MATCHING_NUMBER = EACH_LOTTO_GAME.filter((element) =>
+        winningNumber.includes(element)
+      );
+      NUMBER_OF_WINS.push(MATCHING_NUMBER.length);
+      if (
+        MATCHING_NUMBER.length === 5 &&
+        EACH_LOTTO_GAME.includes(bonusNumber)
+      ) {
+        bonus++;
+      }
     }
+    return [NUMBER_OF_WINS, bonus];
   }
-}
 
+  showLottoResult() {}
+}
 export default App;
