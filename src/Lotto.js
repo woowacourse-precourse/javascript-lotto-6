@@ -1,37 +1,58 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+const PRIZE_VALUES = {
+  3: 5000,
+  4: 50000,
+  5: 1500000,
+  "5+1": 30000000,
+  6: 2000000000,
+};
+
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
+  constructor(numbers, shouldSort = true) {
     this.#validate(numbers);
-    this.#numbers = numbers.sort((a, b) => a - b);
+    this.#numbers = shouldSort ? numbers.sort((a, b) => a - b) : [...numbers];
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (new Set(numbers).size !== 6) {
+      throw new Error("[ERROR] 로또 번호는 중복되지 않는 6개여야 합니다.");
     }
-    const numberSet = new Set(numbers);
-    if (numberSet.size !== numbers.length) {
-      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
+    if (numbers.some((number) => number < 1 || number > 45)) {
+      throw new Error("[ERROR] 로또 번호는 1에서 45 사이여야 합니다.");
     }
-    numbers.forEach((number) => {
-      if (number < 1 || number > 45) {
-        throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 값이어야 합니다.");
-      }
-    });
   }
 
   get numbers() {
     return this.#numbers;
   }
 
-  contains(number) {
-    return this.#numbers.includes(number);
+  static generateRandom() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  matchCount(otherNumbers) {
-    return this.#numbers.filter((number) => otherNumbers.includes(number))
-      .length;
+  checkWinning(winningNumbers, bonusNumber) {
+    let matchCount = this.numbers.filter((number) =>
+      winningNumbers.includes(number)
+    ).length;
+    let isBonusMatched = this.numbers.includes(bonusNumber);
+    let prize = this.calculatePrize(matchCount, isBonusMatched);
+
+    return {
+      matchCount,
+      isBonusMatched,
+      prize,
+    };
+  }
+
+  calculatePrize(matchCount, isBonusMatched) {
+    if (matchCount === 5 && isBonusMatched) {
+      return PRIZE_VALUES["5+1"];
+    } else {
+      return PRIZE_VALUES[matchCount] || 0;
+    }
   }
 }
 
