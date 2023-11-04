@@ -106,3 +106,9 @@ describe('유저 구매금액 입력 테스트', () => {
     expect(await view.readPurchasePrice()).toBe(expected);
   });
 });
+
+describe('유저 구매금액 입력 유효성 검사 테스트', () => {
+  test.each([['3020'], ['2200'], ['100'], ['33j0']])('', async (input) => {
+    await runException(input);
+  });
+});
