@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 
-class Credit {
+class Purchase {
   #amountOfLotto;
   constructor() {
     this.#amountOfLotto = 0;
@@ -30,4 +30,8 @@ class Credit {
   }
 }
 
-export default Credit;
+class Profit {
+  constructor() {}
+}
+
+export default Purchase;
