@@ -1,11 +1,14 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import { ERROR } from './Constant.js'
+import Lotto from './Lotto.js'
 
 class App {
   async play() {
     let lottoMoney = await inputMoney();
     checkMoney(lottoMoney);
+
     let tickets = issueTickets(lottoMoney);
+    printTicketInformation(tickets);
   }
 }
 
@@ -21,17 +24,25 @@ function checkMoney(lottoMoney) {
 }
 
 function issueTickets(lottoMoney) {
-  ticketsToIssue = lottoMoney / 1000;
-  tickets = [];
+  let ticketsToIssue = lottoMoney / 1000;
+  let tickets = [];
 
   for (let i = 0; i < ticketsToIssue; i++) {
-    ticketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-    ticket = Lotto(ticketNumbers);
+    let ticketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    let ticket = new Lotto(ticketNumbers);
     ticket.sortNumbers();
-    tickets.append(ticket);
+    tickets.push(ticket);
   }
 
-  return tickets
+  return tickets;
+}
+
+function printTicketInformation(tickets) {
+  let ticketsIssued = tickets.length;
+  Console.print(`${ticketsIssued}개를 구매했습니다.`);
+  tickets.forEach((ticket) => {
+    ticket.printNumbers();
+  });
 }
 
 export default App;
