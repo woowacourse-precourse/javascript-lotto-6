@@ -1,4 +1,4 @@
-import { LOTTO_PRICE } from '../constants/message/setting.js';
+import { LOTTO_PRICE } from '../constants/setting.js';
 
 class MoneyValidator {
   static validate(money) {
