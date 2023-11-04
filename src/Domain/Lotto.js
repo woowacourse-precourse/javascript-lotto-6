@@ -1,5 +1,10 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { MATCH_COUNT_PRIZES, OUTPUT_MESSAGE } from './constants/index.js';
+
+import AppError from '../errors/error.js';
+import ERROR from '../constants/error.js';
+import LOTTO from '../constants/lotto.js';
+import MESSAGE from '../constants/message.js';
+import { MessageFormat } from '../utils/messageFormat.js';
 
 class Lotto {
   #numbers;
@@ -14,27 +19,23 @@ class Lotto {
       '5_bonus': 0,
       6: 0,
     };
-    this.MATH_COUNT = {
-      min: 3,
-      max: 6,
-    };
   }
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new AppError(ERROR.message.invalidNumberLimit);
     }
 
     if (!numbers.every((num) => num >= 1 && num <= 45 && Number.isInteger(num))) {
-      throw new Error('[ERROR] 1에서 45 사이의 정수를 입력해주세요.');
+      throw new AppError(ERROR.message.invalidNumberRange);
     }
 
     if (new Set(numbers).size !== 6) {
-      throw new Error('[ERROR] 6개의 서로 다른 숫자를 입력해주세요.');
+      throw new AppError(ERROR.message.duplicateNumber);
     }
   }
-  // TODO: 함수 분리, SOLID 원칙 적용하기
 
+  // TODO: 1. 로또 생성 관련 기능 분리 :
   // 로또 번호 생성
   static generateRandomLottoNumber() {
     return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
@@ -45,15 +46,18 @@ class Lotto {
     return Array.from({ length: num }, () => this.generateRandomLottoNumber());
   }
 
+  // TODO: 2. 당첨 번호 비교 관련 기능 분리 :
+  // 당첨통계
   printCompareWinningAndLotto() {
-    Console.print(OUTPUT_MESSAGE.RESULT_HEADER);
+    Console.print(MESSAGE.output.resultHeader);
   }
 
   compareWinningAndLotto(userLotto, lottoList) {
-    const { userNumbers, bonusNumber } = userLotto;
+    this.printCompareWinningAndLotto();
+    const { winningNumbers, bonusNumber } = userLotto;
 
     lottoList.forEach((lotto) => {
-      const hasUserNumber = userNumbers
+      const hasUserNumber = winningNumbers
         .split(',')
         .map(Number)
         .filter((num) => lotto.includes(num)).length;
@@ -70,32 +74,35 @@ class Lotto {
   }
 
   printTotalResult() {
-    Array.from(MATCH_COUNT_PRIZES.keys()).forEach((key) => {
-      Console.print(OUTPUT_MESSAGE.RESULT_ROW(key, this.result[key]));
+    Array.from(LOTTO.lottoPrizesMap.keys()).forEach((key) => {
+      Console.print(MessageFormat.resultRow(key, this.result[key]));
     });
   }
 
+  // TODO: 3. 수익관련 기능 분리
   // 수익률 계산
   // 총 당첨 금액 계산 + 총 수익률 계산 및 출력
   calculateTotalPrizeAmount() {
     return Object.keys(this.result).reduce((total, key) => {
       const count = this.result[key];
-      const prizeInfo = MATCH_COUNT_PRIZES.get(key);
+      const prizeInfo = LOTTO.lottoPrizesMap.get(key);
 
       if (prizeInfo) total += prizeInfo.prize * count;
       return total;
     }, 0);
   }
 
+  /**
+   * (1 - (구매가격 - 당첨금액) / 구매가격) * 100
+   */
   calculateReturnRate(totalPurchaseAmount) {
-    const totalPrizeAmount = this.calculateTotalPrizeAmount();
-    const totalProfit = totalPurchaseAmount - totalPrizeAmount;
-    const totalReturnRate = 100 - (totalProfit / totalPurchaseAmount) * 100;
+    const totalProfit = totalPurchaseAmount - this.calculateTotalPrizeAmount();
+    const totalReturnRate = Math.abs(1 - totalProfit / totalPurchaseAmount) * 100;
     this.printTotalReturnRate(totalReturnRate);
   }
 
   printTotalReturnRate(totalReturnRate) {
-    Console.print(OUTPUT_MESSAGE.TOTAL_RETURN_RATE(totalReturnRate));
+    Console.print(MessageFormat.totalReturnRate(totalReturnRate));
   }
 }
 
