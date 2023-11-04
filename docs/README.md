@@ -338,11 +338,11 @@
   - [x] `getTotalPrize()` 호출 시 갯수에 비례한 총 금액을 반환한다.
   - [x] `checkRequirement(requirement)` 호출 시 `requirement`와 조건을 비교하고 갯수를 증가한다.
 
-- [ ] LottoReward 예외 처리
+- [x] LottoReward 예외 처리
 
-  - [ ] 인스턴스 생성 시 `rewardRequirement`에 `RewardRequirement`가 아닌 값이 입력될 시 에러가 발생한다.
-  - [ ] 인스턴스 생성 시 `prize`에 숫자가 아닌 값이 입력될 시 에러가 발생한다.
-  - [ ] `checkRequirement(requirement)` 호출 시 인자로 `RewardRequirement`가 아닌 값이 입력될 시 에러가 발생한다.
+  - [x] 인스턴스 생성 시 `rewardRequirement`에 `RewardRequirement`가 아닌 값이 입력될 시 에러가 발생한다.
+  - [x] 인스턴스 생성 시 `prize`에 숫자가 아닌 값이 입력될 시 에러가 발생한다.
+  - [x] `checkRequirement(requirement)` 호출 시 인자로 `RewardRequirement`가 아닌 값이 입력될 시 에러가 발생한다.
 
 - [ ] LottoRewards
 
