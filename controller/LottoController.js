@@ -79,6 +79,12 @@ class LottoController {
     }
     // Console.print(this.totalPrice);
   }
+
+  printReturnRate(price) {
+    let returnRate = 0;
+    returnRate = (100 * (this.totalPrice / price)).toFixed(1);
+    Console.print(PromptMessage.PRINT_RETURN_RATE(returnRate));
+  }
 }
 
 export default LottoController;
