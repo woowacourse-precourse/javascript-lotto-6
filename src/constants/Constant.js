@@ -25,10 +25,9 @@ export const ERROR = Object.freeze({
   isNotNumber: '입력값이 숫자가 아닙니다. 구매 금액은 숫자만 입력할 수 있습니다.',
   isNotInAmountUnit: `입력된 금액이 ${CONSTANT.amountUnit}원 단위가 아닙니다.`,
   isNegative: '입력된 금액이 음수입니다. 금액은 양수여야 합니다.',
-  isEmpty: '공백이 입력되었습니다. 6자리의 숫자를 입력해야합니다.',
+  isEmpty: `공백이 입력되었습니다. ${LOTTO_NUMBER.count}개의 숫자를 입력해야합니다.`,
   hasNonNumericElements: '로또 번호 중 숫자가 아닌 요소가 있습니다. 로또 번호는 숫자만 가능합니다.',
   hasDuplicate: '로또 번호 중 중복된 숫자가 있습니다. 로또 번호는 모두 다른 수여야 합니다.',
-  isInvalidDigit: `${CONSTANT.digit}개가 입력되지 않았습니다. ${CONSTANT.digit}개의 숫자를 입력해주세요.`,
-  isNotInRange: '입력된 숫자 중 1-45 범위가 아닌 숫자가 있습니다. 범위 안의 숫자를 입력해주세요',
   isInvalidCount: `${LOTTO_NUMBER.count}개가 입력되지 않았습니다. ${LOTTO_NUMBER.count}개의 숫자를 입력해주세요.`,
+  hasOutOfRange: `입력된 숫자 중 ${LOTTO_NUMBER.minNum}-${LOTTO_NUMBER.maxNum} 범위가 아닌 숫자가 있습니다. 범위 안의 숫자를 입력해주세요`,
 });

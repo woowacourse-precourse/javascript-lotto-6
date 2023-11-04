@@ -11,6 +11,7 @@ const Validator = {
   validateLotto(lotto) {
     this.checkIsInvalidCount(lotto);
     this.checkHasNonNumericElements(lotto);
+    this.checkHasOutOfRange(lotto);
     this.checkHasDuplicate(lotto);
   },
 
@@ -42,6 +43,14 @@ const Validator = {
     inputs.forEach((element) => {
       if (Number.isNaN(Number(element)) || element === '') {
         throw new ValidationError(ERROR.hasNonNumericElements);
+      }
+    });
+  },
+
+  checkHasOutOfRange(inputs) {
+    inputs.forEach((number) => {
+      if (number < LOTTO_NUMBER.minNum || number > LOTTO_NUMBER.maxNum) {
+        throw new ValidationError(ERROR.hasOutOfRange);
       }
     });
   },
