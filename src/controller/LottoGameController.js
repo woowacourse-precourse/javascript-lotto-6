@@ -1,3 +1,4 @@
+import Lotto from '../Lotto.js';
 import Money from '../model/Money.js';
 import InputValidator from '../validator/InputValidator.js';
 import convertType from '../utils/convertType.js';
@@ -6,7 +7,8 @@ import { MESSAGE } from '../constants/messages.js';
 class LottoGameController {
   #moneyInstance;
 
-  constructor({ randomNumberGeneration, inputView, outputView }) {
+  constructor({ lottoTickets, randomNumberGeneration, inputView, outputView }) {
+    this.lottoTickets = lottoTickets;
     this.randomNumberGeneration = randomNumberGeneration;
     this.inputView = inputView;
     this.outputView = outputView;
@@ -40,8 +42,14 @@ class LottoGameController {
 
   printPurchaseCount() {
     const purchaseCount = this.#moneyInstance.getPurchaseCount();
-    this.outputView.print(`${purchaseCount}${MESSAGE.BUY}`);
+    this.outputView.print(`\n${purchaseCount}${MESSAGE.BUY}`);
   }
+
+  generateLottoNumbers() {
+    return this.randomNumberGeneration.generateLottoNumber();
+  }
+
+  printBuyLottos() {}
 }
 
 export default LottoGameController;
