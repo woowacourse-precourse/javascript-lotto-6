@@ -26,6 +26,19 @@ class Get {
       ).sort((a, b) => a - b)
     );
   }
+
+  static lottoResult(lottoArray, lottoBoard) {
+    const result = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(0);
+    lottoArray.forEach(lotto => result[Get.lottoCheck(lotto, lottoBoard)]++);
+
+    return Object.freeze(result);
+  }
+
+  static lottoCheck(lotto, lottoBoard) {
+    return lotto
+      .getNumbers()
+      .reduce((previous, current) => previous + lottoBoard[current], 0);
+  }
 }
 
 export default Get;
