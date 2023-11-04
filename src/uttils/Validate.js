@@ -9,16 +9,9 @@ const validateNumberRange = (number) => {
   if (number < min || number > max) throwError(ERROR_MESSAGE.range);
 };
 
-//유지
 const hasNoReset = (string) => {
   if (!string.includes(','))
     throw new Error(getErrorMessage(ERROR_MESSAGE.noReset));
 };
 
-// 보너스 볼
-const hasNoBonusBall = (...args) => {
-  const { numbers, bonusBall } = args;
-  if (numbers.contains(bonusBall)) throw new Error();
-};
-
-export { validateNumberRange };
+export { validateNumberRange, hasNoReset };
