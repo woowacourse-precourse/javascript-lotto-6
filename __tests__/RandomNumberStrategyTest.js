@@ -16,4 +16,15 @@ describe('💙 RandomNumberStrategy 클래스를 테스트합니다. ฅ^._.^ฅ
 
     expect(lottoNumbers).toBe(GAME_RULE.LOTTO_NUMBER_COUNT);
   });
+
+  test('[generateLottoNumber] 반환한 로또 번호는 1부터 45까지의 숫자로만 이루어져있다.', () => {
+    const lottoNumbers = lottoNumberGenerator.generateLottoNumber();
+    const isLottoNumbersValidRange = lottoNumbers.every(
+      (lottoNumber) =>
+        lottoNumber >= GAME_RULE.START_LOTTO_NUMBER &&
+        lottoNumber <= GAME_RULE.END_LOTTO_NUMBER,
+    );
+
+    expect(isLottoNumbersValidRange).toBeTruthy();
+  });
 });
