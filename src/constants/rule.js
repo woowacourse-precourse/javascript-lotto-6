@@ -43,3 +43,5 @@ export const INDEX = {
   FOURTH_RANK: 1,
   FIFTH_RANK: 0,
 };
+
+export const LOCALE = "ko-KR";

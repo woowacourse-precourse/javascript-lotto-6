@@ -1,4 +1,4 @@
-import { UNIT, SEPARATOR, LOTTO, RANK, PRIZE } from "./rule";
+import { UNIT, SEPARATOR, LOTTO, RANK, PRIZE, LOCALE } from "./rule";
 import Utils from "../Utils";
 
 export const MESSAGE = {
@@ -21,31 +21,31 @@ export const RESULT = [
   function FIFITH_RANK_RESULT(count) {
     return `${RANK.FIFTH}개 일치 (${Utils.convertToLocaleUnit(
       PRIZE.FIFTH,
-      "ko-KR"
+      LOCALE
     )}원) - ${count}개`;
   },
   function FOURTH_RANK_RESULT(count) {
     return `${RANK.FOURTH}개 일치 (${Utils.convertToLocaleUnit(
       PRIZE.FOURTH,
-      "ko-KR"
+      LOCALE
     )}원) - ${count}개`;
   },
   function THIRD_RANK_RESULT(count) {
     return `${RANK.THIRD}개 일치 (${Utils.convertToLocaleUnit(
       PRIZE.THIRD,
-      "ko-KR"
+      LOCALE
     )}원) - ${count}개`;
   },
   function SECOND_RANK_RESULT(count) {
     return `${RANK.SECOND}개 일치, 보너스 볼 일치 (${Utils.convertToLocaleUnit(
       PRIZE.SECOND,
-      "ko-KR"
+      LOCALE
     )}원) - ${count}개`;
   },
   function FIRST_RANK_RESULT(count) {
     return `${RANK.FIRST}개 일치 (${Utils.convertToLocaleUnit(
       PRIZE.FIRST,
-      "ko-KR"
+      LOCALE
     )}원) - ${count}개`;
   },
 ];
