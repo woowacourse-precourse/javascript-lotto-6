@@ -10,12 +10,22 @@ describe("금액 입력 테스트", () => {
 
   test("문자가 들어간 경우", async () => {
     // given
-    const input = ["a1000", "1a000", "10a00", "100a0", "1000a", "a"];
+    const input = [
+      ["a1000"],
+      ["1a000"],
+      ["10a00"],
+      ["100a0"],
+      ["1000a"],
+      ["a"],
+    ];
 
     // when, then
-    await expect(() => moneyValid.moneyIsValid(input)).toThrow(
-      `${MONEY_ERROR.string_error}`
-    );
+    input.forEach((testCase) => {
+      const [testInput] = testCase;
+      expect(() => moneyValid.moneyIsValid(testInput)).toThrow(
+        `${MONEY_ERROR.string_error}`
+      );
+    });
   });
 
   test.each([["10 00"], ["1 000"], ["100 0"], [" 1000"], ["1000 "], [" "]])(
