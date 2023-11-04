@@ -15,19 +15,13 @@ const InputView = {
 
   async readWinningNums() {
     try {
-      const purchasePrice = await Console.readLineAsync(
-        ASK_MESSAGE.winningNums
-      );
-      const purchaseQuantity = Calculator.calcPurchaseQuantity(purchasePrice);
-      return purchaseQuantity;
+      return await Console.readLineAsync(ASK_MESSAGE.winningNums);
     } catch (error) {}
   },
 
   async readBonusNum() {
     try {
-      const purchasePrice = await Console.readLineAsync(ASK_MESSAGE.bonusNum);
-      const purchaseQuantity = Calculator.calcPurchaseQuantity(purchasePrice);
-      return purchaseQuantity;
+      return await Console.readLineAsync(ASK_MESSAGE.bonusNum);
     } catch (error) {}
   },
 };
