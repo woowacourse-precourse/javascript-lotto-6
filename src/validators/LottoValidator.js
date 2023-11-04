@@ -11,7 +11,9 @@ class LottoValidator {
   }
 
   static isSixDigit(lotto) {
-    if (lotto.length === 6) {
+    const inputLotto = this.getInputArray(lotto);
+
+    if (inputLotto.length === 6) {
       return true;
     }
 
@@ -49,6 +51,20 @@ class LottoValidator {
     }
 
     return true;
+  }
+
+  static getInputArray(input) {
+    let result = [];
+
+    if (typeof input === 'string') {
+      result = input.split(',');
+    }
+
+    if (Array.isArray(input)) {
+      result = input;
+    }
+
+    return result;
   }
 }
 export default LottoValidator;
