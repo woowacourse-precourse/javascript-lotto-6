@@ -1,5 +1,6 @@
 import { LOTTO_ERROR } from '../constants/message/error.js';
 import { LOTTO } from '../constants/setting.js';
+import InputError from '../error/InputError.js';
 import CommonValidator from './Common.js';
 
 class LottoValidator {
@@ -11,7 +12,7 @@ class LottoValidator {
 
   static validateCount(numbers) {
     if (numbers.length !== LOTTO.count) {
-      throw new Error(LOTTO_ERROR.count);
+      throw new InputError(LOTTO_ERROR.count);
     }
   }
 
@@ -19,7 +20,7 @@ class LottoValidator {
     const uniqueNumbers = new Set(numbers);
 
     if (uniqueNumbers.size !== numbers.length) {
-      throw new Error(LOTTO_ERROR.duplication);
+      throw new InputError(LOTTO_ERROR.duplication);
     }
   }
 
@@ -32,7 +33,7 @@ class LottoValidator {
 
   static validateLottoNumber(number) {
     if (number < LOTTO.minNumber || number > LOTTO.maxNumber) {
-      throw new Error(LOTTO_ERROR.number);
+      throw new InputError(LOTTO_ERROR.number);
     }
   }
 }
