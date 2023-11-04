@@ -22,5 +22,16 @@ describe('Input', () => {
       // then
       expect(Console.readLineAsync).toHaveBeenCalledWith(expectedMessage);
     });
+
+    test('입력받은 값이 정수가 아니라면 에러를 던진다.', async () => {
+      // given
+      Console.readLineAsync.mockResolvedValue('1.1');
+
+      // when
+      const result = Input.getCost();
+
+      // then
+      await expect(result).rejects.toThrow('[ERROR]');
+    });
   });
 });
