@@ -1,6 +1,8 @@
 import { getPurchase } from "../src/utils/getPurchase.js";
 import { getLottoCount } from "./utils/getLottoCount.js";
+import { createLotto } from "./utils/createLotto.js";
 
+import Lotto from "./Lotto.js"
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
@@ -8,7 +10,7 @@ class App {
     const cash = await getPurchase();
     const lottoCount = getLottoCount(cash);
 
-    Console.print(`\n${lottoCount}개를 구매했습니다.`);
+    createLotto(lottoCount);
   }
 }
 
