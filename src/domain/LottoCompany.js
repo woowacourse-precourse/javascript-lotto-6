@@ -1,44 +1,26 @@
 import { Random } from '@woowacourse/mission-utils';
+import { GAME_RULE_NUMBER, RANKING } from '../constant/constants.js';
 import {
-  GAME_RULE_NUMBER,
-  INPUT_MESSAGES,
-  RANKING,
-} from '../constant/constants.js';
-import {
-  getUserInput,
+  getInputBonusNumber,
+  getInputPurchasingMoney,
+  getInputWinningNumbers,
   printPurchasedAmount,
-  printPurchasedLottos,
   printRankingList,
 } from '../util/Utils.js';
 
-class LottoShop {
-  async lottoPurchase() {
-    await this.receiveUserMoney();
+class LottoCompany {
+  async lottoProcess() {
+    this.money = await getInputPurchasingMoney();
+    this.winningNumbers = await getInputWinningNumbers();
+    this.bonusNumber = await getInputBonusNumber();
     await this.generateUserLottos();
-    await this.receiveWinningNumbers();
-    await this.receiveBonusNumber();
     await this.checkWinner();
-  }
-
-  async receiveUserMoney() {
-    this.money = await getUserInput(INPUT_MESSAGES.purcahsingMoney);
   }
 
   generateUserLottos() {
     const amount = this.money / GAME_RULE_NUMBER.price;
     this.lottos = this.getUserLottoNumbers(amount);
-    printPurchasedAmount(amount);
-    printPurchasedLottos(this.lottos);
-  }
-
-  async receiveWinningNumbers() {
-    this.winningNumbers = await getUserInput(
-      INPUT_MESSAGES.lottoWinningNumbers,
-    );
-  }
-
-  async receiveBonusNumber() {
-    this.bonusNumber = await getUserInput(INPUT_MESSAGES.lottoBonusNumber);
+    printPurchasedAmount(amount, this.lottos);
   }
 
   checkWinner() {
@@ -88,4 +70,4 @@ class LottoShop {
   }
 }
 
-export default LottoShop;
+export default LottoCompany;

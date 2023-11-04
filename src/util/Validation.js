@@ -6,7 +6,7 @@ const checkDivisibleByLottoPrice = (money) => {
 };
 
 const checkInputType = (input, message) => {
-  if (input.match(/\D/)) throw new Error(message);
+  if (input.match(/\D/g)) throw new Error(message);
 };
 
 const checkInputSpace = (input) => {
@@ -31,53 +31,44 @@ const checkInputRange = (input, message) => {
     throw new Error(message);
 };
 
-const checkWinningRange = (input) => {
-  input
-    .split(',')
-    .forEach((number) => checkInputRange(number, ERROR_MESSAGES.winningRange));
-};
-const checkWinningType = (input) => {
-  input
-    .split(',')
-    .forEach((number) => checkInputType(number, ERROR_MESSAGES.winningType));
-};
-
 const checkInput = (input) => {
   checkInputSpace(input);
   checkInputBlank(input);
 };
 
-const checkPurchasingMoney = (input) => {
-  checkInput(input);
-  checkDivisibleByLottoPrice(input);
-  checkInputType(input, ERROR_MESSAGES.inputMoneyType);
-  checkMoneyMinimun(input);
+const checkPurchasingMoney = (inputs) => {
+  checkInputType(inputs, ERROR_MESSAGES.inputMoneyType);
+  checkDivisibleByLottoPrice(inputs);
+  checkMoneyMinimun(inputs);
+  inputs.split(',').forEach((input) => {
+    checkInput(input);
+  });
 };
 
-const checkWinningNumbers = (input) => {
-  checkInput(input);
-  checkWinningType(input);
-  checkWinningRange(input);
+const checkWinningNumbers = (inputs) => {
   checkInputLength(
-    input,
+    inputs,
     GAME_RULE_NUMBER.winningNumbersLength,
     ERROR_MESSAGES.winningLength,
   );
+  inputs.split(',').forEach((input) => {
+    checkInput(input);
+    checkInputType(input, ERROR_MESSAGES.winningType);
+    checkInputRange(input, ERROR_MESSAGES.winningRange);
+  });
 };
 
-const checkBonusNumber = (input) => {
-  checkInput(input);
+const checkBonusNumber = (inputs) => {
   checkInputLength(
-    input,
+    inputs,
     GAME_RULE_NUMBER.bonusNumberLength,
     ERROR_MESSAGES.bonusLength,
   );
-  checkInputType(input, ERROR_MESSAGES.bonusType);
-  checkInputRange(input, ERROR_MESSAGES.bonusRange);
+  inputs.split(',').forEach((input) => {
+    checkInput(input);
+    checkInputType(input, ERROR_MESSAGES.bonusType);
+    checkInputRange(input, ERROR_MESSAGES.bonusRange);
+  });
 };
-
-checkBonusNumber('11');
-checkPurchasingMoney('8000');
-checkWinningNumbers('1,2,3,4,5,6');
 
 export { checkPurchasingMoney, checkWinningNumbers, checkBonusNumber };

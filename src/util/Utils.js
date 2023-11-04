@@ -2,19 +2,54 @@ import { Console } from '@woowacourse/mission-utils';
 import {
   GAME_RULE_NUMBER,
   GAME_WINNER,
+  INPUT_MESSAGES,
   PRINT_MESSAGES,
 } from '../constant/constants.js';
+import {
+  checkPurchasingMoney,
+  checkBonusNumber,
+  checkWinningNumbers,
+} from './Validation.js';
 
-async function getUserInput(message) {
-  const userInput = await Console.readLineAsync(message);
+async function getInputPurchasingMoney() {
+  let userInput;
+  try {
+    userInput = await Console.readLineAsync(INPUT_MESSAGES.purcahsingMoney);
+    checkPurchasingMoney(userInput);
+  } catch (error) {
+    Console.print(error.message);
+    await getInputPurchasingMoney();
+  }
   return userInput;
 }
-const printPurchasedAmount = (amount) => {
-  Console.print(PRINT_MESSAGES.purcahsedAmount(amount));
-};
 
-const printPurchasedLottos = (lottos) => {
-  lottos.map((lotto) => Console.print(lotto));
+async function getInputWinningNumbers() {
+  let userInput;
+  try {
+    userInput = await Console.readLineAsync(INPUT_MESSAGES.lottoWinningNumbers);
+    checkWinningNumbers(userInput);
+  } catch (error) {
+    Console.print(error.message);
+    await getInputWinningNumbers();
+  }
+  return userInput;
+}
+
+async function getInputBonusNumber() {
+  let userInput;
+  try {
+    userInput = await Console.readLineAsync(INPUT_MESSAGES.lottoBonusNumber);
+    checkBonusNumber(userInput);
+  } catch (error) {
+    Console.print(error.message);
+    await getInputBonusNumber();
+  }
+  return userInput;
+}
+
+const printPurchasedAmount = (amount, lottos) => {
+  Console.print(PRINT_MESSAGES.purcahsedAmount(amount));
+  lottos.forEach((lotto) => Console.print(`[${lotto.join(', ')}]`));
 };
 
 const printProfit = (rankAmount) => {
@@ -48,9 +83,10 @@ const printRankingList = (rankingList) => {
 };
 
 export {
-  getUserInput,
+  getInputPurchasingMoney,
+  getInputBonusNumber,
+  getInputWinningNumbers,
   printPurchasedAmount,
-  printPurchasedLottos,
   printRankingList,
   printProfit,
 };

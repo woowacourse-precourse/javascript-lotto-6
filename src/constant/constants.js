@@ -8,7 +8,7 @@ const GAME_RULE_NUMBER = {
 };
 
 const PRINT_MESSAGES = {
-  purcahsedAmount: (amount) => `\n${amount}개를 구입했습니다.`,
+  purcahsedAmount: (amount) => `\n${amount}개를 구매했습니다.`,
   winStatistics: '\n당첨 통계',
   dashLine: '---',
   winnerMessage: (ranking, rankingPrize, amount) =>
