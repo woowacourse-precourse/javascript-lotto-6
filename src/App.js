@@ -37,6 +37,43 @@ class App {
       issuance,
       bonusNumber.get()
     );
+    
+    const lottoResult = [0, 0, 0, 0, 0, 0]; // 일치 개수 : [3개, 4개, 5개, 5개 + 보너스. 6개]
+    const totalProfits = 0;
+    comparedResult.forEach((result) => {
+      
+      switch (result) {
+        case 3: {
+          lottoResult[0] += 1;
+          totalProfits += 5000;
+          break;
+        }
+        case 4: {
+          lottoResult[1] += 1;
+          totalProfits += 50000;
+          break;
+        }
+        case 5: {
+          lottoResult[2] += 1;
+          totalProfits += 1500000;
+          break;
+        }
+        case 5.5: {
+          lottoResult[3] += 1;
+          totalProfits += 30000000;
+          break;
+        }
+        case 6: {
+          lottoResult[4] += 1;
+          totalProfits += 2000000000;
+          break;
+        }
+        default:{
+          break;
+        }
+          
+      }
+    })
 
   }
 }
