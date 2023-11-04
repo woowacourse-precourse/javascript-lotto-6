@@ -9,11 +9,12 @@ import {
   getValidatedNumbers,
 } from "./validation/number.js";
 import { validateMoney } from "./validation/money.js";
+import { PRIZE } from "./constants/prize.js";
 class App {
   lottos = [];
 
   getLottoCount(money) {
-    validateMoney(money);
+    
     return money / 1000;
   }
 
@@ -59,15 +60,22 @@ class App {
     return prizeCounts;
   }
 
-  getRate(prizeCounts){
+  getRate(prizeCounts, money){
     let prize = 0;
-    
-    return 0;
+
+    prize += prizeCounts[3] * PRIZE[3];
+    prize += prizeCounts[4] * PRIZE[4];
+    prize += prizeCounts[5] * PRIZE[5];
+    prize += prizeCounts['bonus'] * PRIZE['bonus'];
+    prize += prizeCounts[6] * PRIZE[6];
+
+    const rate = (prize / money * 100).toFixed(2);
+    return rate;
   }
 
-  getResult(numbers, bonusNumber) {
+  getResult(numbers, bonusNumber, money) {
     const prizeCounts = this.getPrizeCounts(numbers, bonusNumber);
-    const rate = this.getRate(prizeCounts);
+    const rate = this.getRate(prizeCounts, money);
     return {prizeCounts, rate};
   }
 
@@ -93,23 +101,22 @@ class App {
     return getValidatedNumber(inputBonusNumber);
   }
 
-  async setLottos() {
-    //TODO: 함수 밖으로?
-    //돈 입력 및 로또 개수 구하기
-    const inputMoney = await input(PRINT_MESSAGE.INPUT_MONEY);
-    const lottoCount = this.getLottoCount(+inputMoney);
-
+  async setLottos(money) {
+    const lottoCount = this.getLottoCount(money);
+    
     await this.printBuyCount(lottoCount);
     print("");
 
-    //로또 생성
     await this.createLottos(lottoCount);
   }
 
   //TODO: 보너스 숫자 이전 6 숫자 중복 시 에러
   async play() {
+    const inputMoney = await input(PRINT_MESSAGE.INPUT_MONEY);
+    validateMoney(+inputMoney);
+
     //로또 생성
-    await this.setLottos();
+    await this.setLottos(+inputMoney);
 
     //당첨 로또 번호 생성
     const numbers = await this.getPrizeNumbers();
@@ -117,7 +124,7 @@ class App {
     //보너스 번호 생성
     const bonusNumber = await this.getBonusNumber();
 
-    const result = this.getResult(numbers, bonusNumber);
+    const result = this.getResult(numbers, bonusNumber, +inputMoney);
     this.printResult(result);
   }
 }
