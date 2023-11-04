@@ -27,7 +27,7 @@ class Game {
   };
 
   askWinningNumbers() {
-    InputView.getWinningNumbers(this.handleWinningNumbers);
+    InputView.readWinningNumbers(this.handleWinningNumbers);
   }
 
   handleWinningNumbers = (numbers) => {
