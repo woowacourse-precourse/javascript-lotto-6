@@ -39,7 +39,7 @@ class Lotto {
     }
   }
 
-  findNumbers() {
+  getAscendingNumber() {
     return this.#numbers.sort((a, b) => a - b);
   }
 }
