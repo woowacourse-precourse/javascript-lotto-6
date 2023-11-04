@@ -12,3 +12,7 @@ export const WINNING_PRIZE_NUMBERS = Object.freeze({
   rank2: 30000000,
   rank1: 2000000000,
 });
+
+export const WINNING_NUMBER = Object.freeze({
+  count: 6,
+});
