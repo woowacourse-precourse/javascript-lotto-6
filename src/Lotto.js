@@ -1,8 +1,11 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#validateDuplicate(numbers);
     this.#numbers = numbers;
   }
 
@@ -12,7 +15,13 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  #validateDuplicate(numbers) {
+    for (let i = 0; i < numbers.length-1; i++) {
+      if (numbers[i] === numbers[i+1]) {
+        throw new Error("[ERROR] 로또 번호가 중복되었습니다.")
+      }
+    }
+  }
 }
 
 export default Lotto;
