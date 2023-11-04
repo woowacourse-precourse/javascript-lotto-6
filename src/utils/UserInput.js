@@ -7,6 +7,13 @@ class UserInput {
     );
     return lottoAmount;
   }
+
+  static async getLottoNumbers() {
+    const lottoNumbers = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요.\n"
+    );
+    return lottoNumbers.split(",");
+  }
 }
 
 export default UserInput;

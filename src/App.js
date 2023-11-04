@@ -5,6 +5,9 @@ class App {
   async play() {
     const lottoAmount = await UserInput.getPurchaseAmount();
     Console.print(lottoAmount);
+
+    const lottoNumbers = await UserInput.getLottoNumbers();
+    Console.print(lottoNumbers);
   }
 }
 
