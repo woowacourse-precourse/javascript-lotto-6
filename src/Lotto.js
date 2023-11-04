@@ -1,6 +1,7 @@
 import ERROR from './constant/error.js';
 import outputView from './View/outputView.js';
 import validator from './utils/validator.js';
+import WINNING_PRICE from './constant/price.js';
 
 class Lotto {
   #numbers;
@@ -50,12 +51,11 @@ class Lotto {
 
   #getProfitRate(lottoResult, purchasePrice) {
     let totalProfit = 0;
+    const prices = WINNING_PRICE;
 
-    totalProfit += lottoResult.first * 2000000000;
-    totalProfit += lottoResult.second * 30000000;
-    totalProfit += lottoResult.third * 1500000;
-    totalProfit += lottoResult.fourth * 50000;
-    totalProfit += lottoResult.fifth * 5000;
+    for (let key in lottoResult) {
+      totalProfit += lottoResult[key] * prices[key];
+    }
 
     return ((totalProfit / purchasePrice) * 100).toFixed(1);
   }
