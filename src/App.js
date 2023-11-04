@@ -31,10 +31,12 @@ class App {
 
     // 수익률 계산
     const profit = totalPrize - purchaseAmount;
-    const profitRate = (profit / purchaseAmount) * 100;
+    let profitRate = (profit / purchaseAmount) * 100;
 
     // 수익률 출력
-    MissionUtils.Console.print(`총 수익률은 ${profitRate.toFixed(1)}%입니다.`);
+    MissionUtils.Console.print(
+      `총 수익률은 ${100 - Math.abs(profitRate).toFixed(1)}%입니다.`
+    );
   }
 
   getPrizeValue(match) {
@@ -54,17 +56,17 @@ class App {
       "구입 금액을 입력해 주세요."
     );
     if (!/^\d+$/.test(purchaseAmountInput)) {
-      throw new Error("[ERROR] 구입 금액을 다시 확인하십시오.");
+      throw new Error("구입 금액을 다시 확인하십시오.");
     }
 
     const purchaseAmount = parseInt(purchaseAmountInput, 10);
 
     if (isNaN(purchaseAmount) || purchaseAmount <= 0) {
-      throw new Error("[ERROR] 올바른 금액을 입력십시오.");
+      throw new Error("올바른 금액을 입력십시오.");
     }
 
     if (purchaseAmount % 1000 !== 0) {
-      throw new Error("[ERROR] 구입 금액은 1000원 단위로 입력해야 합니다.");
+      throw new Error("구입 금액은 1000원 단위로 입력해야 합니다.");
     }
 
     return purchaseAmount;
@@ -82,7 +84,9 @@ class App {
   displayPurchasedLottos(lottos) {
     MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
     lottos.forEach((lotto) => {
-      MissionUtils.Console.print(`[${lotto.numbers.join(", ")}]`); // 번호의 순서를 유지합니다.
+      // 로또 번호를 오름차순으로 정렬합니다.
+      const sortedNumbers = lotto.numbers.sort((a, b) => a - b);
+      MissionUtils.Console.print(`[${sortedNumbers.join(", ")}]`); // 정렬된 번호를 출력합니다.
     });
   }
 
@@ -102,10 +106,10 @@ class App {
     );
     const bonusNumber = parseInt(bonusNumberInput, 10);
     if (isNaN(bonusNumber)) {
-      throw new Error("[ERROR] 보너스 번호가 올바르지 않습니다.");
+      throw new Error("보너스 번호가 올바르지 않습니다.");
     }
     if (winningNumbers.includes(bonusNumber)) {
-      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+      throw new Error("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 
     return { winningNumbers, bonusNumber };
