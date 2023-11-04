@@ -1,5 +1,5 @@
 import { winningNumberSpliter, bonusNumberDuplicateValidater } from "../src/App.js";
-import { Winning } from "../src/App.js";
+import { Winning, Bonus } from "../src/App.js";
 
 describe("당첨 번호 입력 테스트", () => {
   test("당첨 번호를 쉼표로 구분한다.", () => {
@@ -48,6 +48,8 @@ describe("당첨 번호 입력 테스트", () => {
     const input = ["1","2","3","4","5","6"];
     const BONUS_INPUT = "2";
 
-    expect(bonusNumberDuplicateValidater(input, BONUS_INPUT)).rejects.toThrow("[ERROR]");
+    expect(()=> {
+      new Winning(BONUS_INPUT, input)
+    }).toThrow("[ERROR]");
   });
 });
