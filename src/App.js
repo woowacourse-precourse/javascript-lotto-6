@@ -17,12 +17,19 @@ else를 지양한다.
 class App {
   async play() {
     const INPUT_CASH = await this.inputCash();
-    this.showLottoNumbers(this.validateCash(INPUT_CASH));
+    const ARRAY_OF_GAMES = this.getLottoNumbers(this.validateCash(INPUT_CASH));
     const WINNING_NUMBER = await this.inputWinningNumber();
-    this.validateWinningNumber(WINNING_NUMBER);
-    const BOUNUS_NUMBER = await this.inputBonusNumber();
-    this.validateBonusNumber(BOUNUS_NUMBER);
-    MissionUtils.Console.print(WINNING_NUMBER, BOUNUS_NUMBER);
+    const VERIFIED_WINNING_NUMBER = this.validateWinningNumber(WINNING_NUMBER);
+    const BOUNUS_NUMBER = Number(await this.inputBonusNumber());
+    const VERIFIED_BOUNUS_NUMBER = this.validateBonusNumber(
+      VERIFIED_WINNING_NUMBER,
+      BOUNUS_NUMBER
+    );
+    this.compareLottoNumber(
+      ARRAY_OF_GAMES,
+      VERIFIED_WINNING_NUMBER,
+      VERIFIED_BOUNUS_NUMBER
+    );
   }
 
   inputCash() {
@@ -41,7 +48,7 @@ class App {
     throw new Error("[ERROR] 구입금액은 1000 단위 정수로 입력이 가능합니다.");
   }
 
-  showLottoNumbers(cash) {
+  getLottoNumbers(cash) {
     MissionUtils.Console.print(cash + OUTPUT_MESSAGES.OUTPUT_PURCHASE_QUANTITY);
     const ARRAY_OF_GAMES = [];
     for (let i = 0; i < cash; i++) {
@@ -50,8 +57,11 @@ class App {
         45,
         6
       );
-      console.log(LOTTO_NUMBER);
-      ARRAY_OF_GAMES.push(LOTTO_NUMBER);
+      const SORTED_LOTTO_NUMBER = LOTTO_NUMBER.sort((a, b) => {
+        return a - b;
+      });
+      console.log(SORTED_LOTTO_NUMBER);
+      ARRAY_OF_GAMES.push(SORTED_LOTTO_NUMBER);
     }
     console.log("");
     return ARRAY_OF_GAMES;
@@ -65,7 +75,7 @@ class App {
   }
 
   validateWinningNumber(WINNING_NUMBER) {
-    const WINNING_NUMBER_ARRAY = WINNING_NUMBER.split(",");
+    const WINNING_NUMBER_ARRAY = WINNING_NUMBER.split(",").map(Number);
     const UNIQUE_ARRAY = [...new Set(WINNING_NUMBER_ARRAY)];
     if (WINNING_NUMBER_ARRAY.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
@@ -78,11 +88,10 @@ class App {
       throw new Error("[ERROR] 로또 번호는 1 ~ 45 사이의 수여야 합니다.");
     }
     if (WINNING_NUMBER_ARRAY.length !== UNIQUE_ARRAY.length) {
-      console.log(WINNING_NUMBER_ARRAY);
-      console.log(UNIQUE_ARRAY);
       throw new Error("[ERROR] 로또 번호는 중복되지 않는 수여야 합니다.");
     }
     //정수 여부 확인?
+    return WINNING_NUMBER_ARRAY;
   }
 
   inputBonusNumber() {
@@ -92,9 +101,18 @@ class App {
     return BOUNUS_NUMBER;
   }
 
-  validateBonusNumber(BOUNUS_NUMBER) {
+  validateBonusNumber(VERIFIED_WINNING_NUMBER, BOUNUS_NUMBER) {
     if (BOUNUS_NUMBER < 1 || BOUNUS_NUMBER > 45) {
       throw new Error("[ERROR] 보너스 번호는 1 ~ 45 사이의 수여야 합니다.");
+    }
+    if (VERIFIED_WINNING_NUMBER.includes(BOUNUS_NUMBER)) {
+      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+    }
+  }
+
+  compareLottoNumber(lottoNumber, winningNumber, bonusNumber) {
+    for (let i = 0; i < lottoNumber.length; i++) {
+      const EACH_LOTTO_GAME = lottoNumber[i].map();
     }
   }
 }
