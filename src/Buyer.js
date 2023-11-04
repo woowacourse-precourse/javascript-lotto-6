@@ -4,7 +4,6 @@ import Util from './Util.js';
 
 class Buyer {
   #budget;
-
   #lottoList;
 
   constructor(budget) {
@@ -26,11 +25,9 @@ class Buyer {
 
   setLottoList() {
     for (let i = 0; i < this.getPurchaseCount(); i += 1) {
-      const lotto = new Lotto(Util.createLottoNumber());
-      this.#lottoList.push(lotto.getLotto());
+      const lotto = new Lotto(Util.createLottoNumber()).getLotto();
+      this.#lottoList.push(lotto);
     }
-
-    
   }
 
   getLottoList() {

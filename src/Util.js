@@ -10,6 +10,10 @@ class Util {
   static sortAscendingArray(array) {
     return array.sort((a, b) => a - b);
   }
+
+  static splitStringToNumberArray(string) {
+    return string.split(',').map((value) => Number(value.trim()));
+  }
 }
 
 export default Util;

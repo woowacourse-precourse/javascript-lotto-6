@@ -1,11 +1,12 @@
 import Input from './Input.js';
 import Output from './Output.js';
 import Buyer from './Buyer.js';
+import Util from './Util.js';
+import WinLotto from './WinLotto.js';
 
 class LottoGame {
   #buyer;
-
-  #lottos;
+  #winLotto;
 
   async start() {
     await this.setBuyer();
@@ -20,6 +21,9 @@ class LottoGame {
 
   async setWinLotto() {
     const winLotto = await Input.getWinLotto();
+    const parsedWinLotto = Util.splitStringToNumberArray(winLotto);
+
+    this.#winLotto = new WinLotto(parsedWinLotto).getLotto();
   }
 
   printPurchaseInfo() {
