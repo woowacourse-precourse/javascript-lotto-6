@@ -65,4 +65,12 @@ describe('class App test', () => {
       expect(testString).toBe('[1, 2, 3, 4, 5, 6]');
     });
   });
+
+  describe('method test : pushArray()', () => {
+    test('배열이 배열 안에 push 되는가 ?', () => {
+      const lottoArray = [1, 2, 3, 4, 5, 6];
+      const testArray = app.pushArray(lottoArray);
+      expect(app.lottoRandomNumber).toEqual([[1,2,3,4,5,6]]);
+    });
+  });
 });
