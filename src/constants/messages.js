@@ -3,7 +3,7 @@ import { GAME_RULE } from './gameRule.js';
 export const MESSAGE = Object.freeze({
   INPUT: '구입금액을 입력해 주세요.\n',
   BUY: '개를 구매했습니다.',
-  WIN_NUMBER: '당첨 번호를 입력해 주세요.\n',
+  WIN_NUMBER: '\n당첨 번호를 입력해 주세요.\n',
   BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
   WINNING_STATS: '당첨 통계\n---\n',
 });
@@ -17,4 +17,5 @@ export const ERROR_MESSAGE = Object.freeze({
   OVER_THE_LIMIT: `${ERROR_PREFIX} 한 회차에 ${GAME_RULE.MAX_AMOUNT_UNIT}만 원을 초과하여 구매할 수 없습니다.`,
   INVALID_COUNT: `${ERROR_PREFIX} 로또 번호는 6개여야 합니다.`,
   NOT_A_UNIQUE: `${ERROR_PREFIX} 로또 번호에 중복된 번호가 존재합니다.`,
+  OUT_OF_RANGE: `${ERROR_PREFIX} 로또 번호는 1부터 45까지의 숫자로만 이루어져야 합니다.`,
 });
