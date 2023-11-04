@@ -4,4 +4,6 @@ export const ERROR_MESSAGE = Object.freeze({
   isNumberDuplicated: `${ERROR_CONVENTION} 중복된 숫자가 있습니다.`,
   isEmpty: `${ERROR_CONVENTION} 입력받은 값이 존재하지 않습니다.`,
   typeDismatching: `${ERROR_CONVENTION} 유효하지 않는 타입입니다.`,
+  winningCount: `${ERROR_CONVENTION} 입력된 당첨번호의 개수가 올바르지 않습니다.`,
+  hasEmpty: `${ERROR_CONVENTION} 입력받은 값에 공백이 존재합니다.`,
 });
