@@ -9,7 +9,7 @@ import Lotto from "./Lotto.js";
 class App {
   async play() {
     const purchaseCost = await MissionUtils.Console.readLineAsync(
-      LOTTO_INPUT_MESSAGE.cost
+      LOTTO_INPUT_MESSAGE.inputCost
     );
 
     if (purchaseCost % 1000 !== 0) {
@@ -17,6 +17,10 @@ class App {
     }
 
     this.createLotto(purchaseCost);
+
+    const winnigNum = await MissionUtils.Console.readLineAsync(
+      LOTTO_INPUT_MESSAGE.inputWinnigNum
+    );
   }
 
   async createLotto(purchaseCost) {

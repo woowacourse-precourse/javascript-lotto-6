@@ -1,7 +1,7 @@
 export const LOTTO_INPUT_MESSAGE = {
-  cost: "구입금액을 입력해 주세요. \n",
-  winnigNum: "당첨 번호를 입력해 주세요. \n",
-  bonusNum: "보너스 번호를 입력해 주세요. \n",
+  inputCost: "구입금액을 입력해 주세요. \n",
+  inputWinnigNum: "당첨 번호를 입력해 주세요. \n",
+  inputBonusNum: "보너스 번호를 입력해 주세요. \n",
 };
 
 export const LOTTO_OUTPUT_MESSAGE = {
