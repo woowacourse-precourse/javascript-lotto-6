@@ -4,6 +4,11 @@ export const LOTTO_SETTING = Object.freeze({
   length: 6,
   max_purchase: 50000,
   unit: 1000,
+  five_rank_prize: 5000,
+  four_rank_prize: 50000,
+  three_rank_prize: 1500000,
+  two_rank_prize: 30000000,
+  one_rank_prize: 2000000000,
 });
 
 export const LOTTO_ERROR_MESSAGE = Object.freeze({
@@ -29,9 +34,9 @@ export const OUTPUT_MESSAGE = Object.freeze({
   purchase: '개를 구매했습니다.',
   divider: '---',
   statistics: '당첨 통계',
-  five_rank: '3개 일치 (5,000원) - ',
-  four_rank: '4개 일치 (50,000원) - ',
-  three_rank: '5개 일치 (1,500,000원) - ',
-  two_rank: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
-  one_rank: '6개 일치 (2,000,000,000원) - ',
+  five_rank: `3개 일치 (${LOTTO_SETTING.five_rank_prize.toLocaleString()}원) - `,
+  four_rank: `4개 일치 (${LOTTO_SETTING.four_rank_prize.toLocaleString()}원) - `,
+  three_rank: `5개 일치 (${LOTTO_SETTING.three_rank_prize.toLocaleString()}원) - `,
+  two_rank: `5개 일치, 보너스 볼 일치 (${LOTTO_SETTING.two_rank_prize.toLocaleString()}원) - `,
+  one_rank: `6개 일치 (${LOTTO_SETTING.one_rank_prize.toLocaleString()}원) - `,
 });
