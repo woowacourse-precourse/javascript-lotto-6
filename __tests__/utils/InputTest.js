@@ -33,6 +33,17 @@ describe('Input', () => {
       // then
       await expect(result).rejects.toThrow('[ERROR]');
     });
+
+    test('입력받은 값이 1000원 단위가 아니라면 에러를 던진다.', async () => {
+      // given
+      Console.readLineAsync.mockResolvedValue('1001');
+
+      // when
+      const result = Input.getCost();
+
+      // then
+      await expect(result).rejects.toThrow('[ERROR]');
+    });
   });
 
   describe('readIntegerAsync', () => {
