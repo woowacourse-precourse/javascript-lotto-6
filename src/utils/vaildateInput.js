@@ -24,22 +24,28 @@ const validation = {
     }
   },
   lottoNumsLength: (winNums) => {
-    if (winNums.length !== 6) {
-      throw new Error("[ERROR] 숫자는 6개여야 합니다.");
+    if (winNums.length !== 7) {
+      throw new Error("[ERROR] 보너스 숫자까지 합해 갯수는 7개여야 합니다.");
+    }
+  },
+
+  priceRange: (priceInput) => {
+    if (Number(priceInput) <= 0) {
+      throw new Error("[ERROR] 올바른 숫자 형식이 아닙니다.");
+    }
+  },
+
+  price: (priceInput) => {
+    if (Number(priceInput) % 1000) {
+      throw new Error("[ERROR] 로또 가격은 하나당 1000원 입니다.");
     }
   },
 };
 
 function validatePriceInput(priceInput) {
   validation.inputType(priceInput);
-
-  if (Number(priceInput) <= 0) {
-    throw new Error("[ERROR] 올바른 숫자 형식이 아닙니다.");
-  }
-
-  if (Number(priceInput) % 1000) {
-    throw new Error("[ERROR] 로또 가격은 하나당 1000원 입니다.");
-  }
+  validation.priceRange(priceInput);
+  validation.price(priceInput);
 
   const price = Number(priceInput) / 1000;
 
@@ -48,11 +54,9 @@ function validatePriceInput(priceInput) {
 
 function validateWinLottoInput(winNumsInput, bonusNum) {
   let winNums = winNumsInput.replace(/\s/g, "").split(",");
+  winNums.push(bonusNum);
 
   checkWinNums(winNums);
-  checkBonusNum(bonusNum, winNums);
-
-  winNums.push(bonusNum);
 
   winNums = winNums.map((num) => Number(num));
 
@@ -61,19 +65,11 @@ function validateWinLottoInput(winNumsInput, bonusNum) {
 
 function checkWinNums(winNums) {
   winNums.forEach((winNum, index) => {
-    checkNumber(winNum, winNums);
+    validation.inputType(winNum);
+    validation.lottoNumberRange(winNum);
     validation.winNumEqualValue(index, winNum, winNums);
   });
   validation.lottoNumsLength(winNums);
 }
 
-function checkBonusNum(bonusNum, winNums) {
-  checkNumber(bonusNum);
-  validation.bonusNumEqualValue(bonusNum, winNums);
-}
-
-function checkNumber(num) {
-  validation.inputType(num);
-  validation.lottoNumberRange(num);
-}
 export { validatePriceInput, validateWinLottoInput };
