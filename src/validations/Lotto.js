@@ -1,6 +1,6 @@
 import { MESSAGE, OPTION } from '../constants/Lotto.js';
 
-export default {
+const Validation = {
   /**
    * number가 자연수인지
    * @param {number} number
@@ -22,10 +22,10 @@ export default {
    * @param {number} number
    */
   validateLottoNumber: (number) => {
-    if (!this.isNaturalNumber(number)) {
+    if (!Validation.isNaturalNumber(number)) {
       throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.INVALID_NUMBER_TYPE}`);
     }
-    if (!this.isInRange(number)) {
+    if (!Validation.isInRange(number)) {
       throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.INVALID_NUMBER_RANGE}`);
     }
   },
@@ -45,10 +45,10 @@ export default {
     if (numbers.length !== OPTION.BALL_COUNT) {
       throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.INVALID_NUMBER_COUNT}`);
     }
-    if (this.isDuplicate(numbers)) {
+    if (Validation.isDuplicate(numbers)) {
       throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.DUPLICATE_NUMBER}`);
     }
-    numbers.forEach((number) => this.validateLottoNumber(number));
+    numbers.forEach((number) => Validation.validateLottoNumber(number));
   },
 
   /**
@@ -62,9 +62,11 @@ export default {
     if (numbers.length !== OPTION.BALL_COUNT) {
       throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.INVALID_NUMBER_COUNT}`);
     }
-    if (this.isDuplicate(concattedNumber)) {
+    if (Validation.isDuplicate(concattedNumber)) {
       throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.DUPLICATE_NUMBER}`);
     }
-    concattedNumber.forEach((number) => this.validateLottoNumber(number));
+    concattedNumber.forEach((number) => Validation.validateLottoNumber(number));
   },
 };
+
+export default Validation;
