@@ -71,6 +71,12 @@ class LottoCompany {
 			}
 		} while (!isDrawn);
 	}
+
+	async announceResult() {
+		const purchaseAmount = this.#lottoBuyer.getPurchaseAmount();
+		const lottoResult = this.#lottoBuyer.checkResult(this.#winningNumberArray, this.#bonusNumber);
+		OutputView.printWinningResult(lottoResult, Formatting.insertCommasByThousandUnits(CheckLotto.calculateRateOfReturn(purchaseAmount, lottoResult)));
+	}
 }
 
 export default LottoCompany;
