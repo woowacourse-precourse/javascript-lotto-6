@@ -1,12 +1,12 @@
 import OutputManager from "./OutputManager.js";
 import ValidateManager from "./ValidateManager.js";
 import {
-  devideMoneyForLotto,
+  divideMoneyForLotto,
   profitRate,
   sumOfWinning,
 } from "../utils/caculate.js";
 import {
-  devideIntoCommas,
+  divideIntoCommas,
   stringToNumber,
   stringsToNumbers,
 } from "../utils/conversion.js";
@@ -26,7 +26,7 @@ class LottoGameManager {
     try {
       const moneyForLotto = await this.validateManager.getMoneyForLotto();
       const moneyForLottoToNumber = stringToNumber(moneyForLotto);
-      const countsOfLotto = devideMoneyForLotto(moneyForLottoToNumber);
+      const countsOfLotto = divideMoneyForLotto(moneyForLottoToNumber);
       const countsOfLottoToNumber = stringToNumber(countsOfLotto);
       this.outputManager.showPurchaseAmount(countsOfLotto);
 
@@ -43,7 +43,7 @@ class LottoGameManager {
   async setWinningNumbers() {
     try {
       const winningBalls = await this.validateManager.getWinningBalls();
-      const winningBallsArr = devideIntoCommas(winningBalls);
+      const winningBallsArr = divideIntoCommas(winningBalls);
       const winningBallsToNumberArr = stringsToNumbers(winningBallsArr);
       return winningBallsToNumberArr;
     } catch (error) {

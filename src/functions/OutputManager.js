@@ -27,7 +27,7 @@ class OutputManager {
 
   showStatistics(rankCounts, earnRate) {
     Console.print(STATISTICS_MESSAGE.winningStatistics);
-    Console.print(STATISTICS_MESSAGE.devideLine);
+    Console.print(STATISTICS_MESSAGE.divideLine);
     Console.print(
       `${STATISTICS_MESSAGE.rank5}${rankCounts[5]}${STATISTICS_MESSAGE.unit}`
     );

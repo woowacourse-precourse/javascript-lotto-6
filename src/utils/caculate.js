@@ -1,6 +1,6 @@
 import { LOTTERY_WINNINGS, LOTTO_NUMBERS } from "../constants/numbers.js";
 
-export function devideMoneyForLotto(moneyForLotto) {
+export function divideMoneyForLotto(moneyForLotto) {
   return moneyForLotto / LOTTO_NUMBERS.amount;
 }
 

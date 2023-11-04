@@ -10,7 +10,7 @@ export const PURCHASE_MESSAGE = Object.freeze({
 
 export const STATISTICS_MESSAGE = Object.freeze({
   winningStatistics: "당첨 통계",
-  devideLine: "---",
+  divideLine: "---",
   rank5: "3개 일치 (5,000원) - ",
   rank4: "4개 일치 (50,000원) - ",
   rank3: "5개 일치 (1,500,000원) - ",
