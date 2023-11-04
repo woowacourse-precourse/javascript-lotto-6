@@ -19,12 +19,7 @@ class App {
   async play() {
     this.#lottoGame.setUpGameProcess();
     await this.#generateLottoProcess();
-
-    const winnigNumbers = await this.#inputView.getWinnigNumbers();
-    const bonusNumber = await this.#inputView.getBonusNumber();
-    const result = this.#lottoGame.resultOfWinningDetails(winnigNumbers, bonusNumber);
-    this.#outputView.printResult(result);
-
+    await this.#lottoResultProcess();
     this.#gameOver();
   }
 
@@ -37,6 +32,13 @@ class App {
       this.#outputView.printTotalLottos(lottos);
       if (isValid) break;
     }
+  }
+
+  async #lottoResultProcess() {
+    const winnigNumbers = await this.#inputView.getWinnigNumbers();
+    const bonusNumber = await this.#inputView.getBonusNumber();
+    const result = this.#lottoGame.resultOfWinningDetails(winnigNumbers, bonusNumber);
+    this.#outputView.printResult(result);
   }
 
   #gameOver() {
