@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 class View {
   printError(error) {
-    Console.print(error);
+    Console.print(`\n${error}\n`);
   }
   
   async inputPrice() {
@@ -16,7 +16,7 @@ class View {
   }
 
   async inputBonus() {
-    const bonusNumber = Number(await Console.readLineAsync('보너스 번호를 입력해 주세요.\n'));
+    const bonusNumber = Number(await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n'));
     return bonusNumber;
   }
 
