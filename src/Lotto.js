@@ -21,6 +21,7 @@ class Lotto {
     if (numbers.length !== new Set(numbers).size) {
       throw new Error(ERROR.notUnique);
     }
+    throw new Error(ERROR.notOneToFortyFive);
   }
 
   // TODO: 추가 기능 구현
