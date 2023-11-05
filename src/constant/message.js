@@ -23,7 +23,8 @@ export const OUTPUT_MESSAGE = Object.freeze({
   OUTPUT_THREE_MATCH: '3개 일치 (5,000원)',
   OUTPUT_FOUR_MATCH: '4개 일치 (50,000원)',
   OUTPUT_FIVE_MATCH: '5개 일치 (1,500,000원)',
-  OUTPUT_FIVE_AND_BONUS_MATCH: '5개 일치, 보너스볼 일치 (30,000,000원)',
+  OUTPUT_FIVE_AND_BONUS_MATCH: '5개 일치, 보너스 볼 일치 (30,000,000원)',
   OUTPUT_SIX_MATCH: '6개 일치 (2,000,000,000원)',
   OUTPUT_MATCH_AMOUNT: (matchNum) => `${matchNum}개`,
+  OUTPUT_TOTAL_BENEFIT: (percetage) => `총 수익률은 ${percetage}%입니다.`,
 });
