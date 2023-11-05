@@ -14,6 +14,8 @@ import {
   throwError,
 } from './MessageFactory';
 
+import { changeStringToMoney } from './Money';
+
 import {
   getBonusBallNumber,
   getLottoRandomNumbers,
@@ -25,6 +27,7 @@ import { getWinningResult } from './WinningResult';
 import { validateNumberRange, hasNoComma } from './Validate';
 
 export {
+  changeStringToMoney,
   getBonusBallNumber,
   getErrorMessage,
   getLottoRandomNumbers,
