@@ -20,6 +20,6 @@ export default class OutputView {
   }
 
   static displayError(message) {
-    Console.print(`[ERROR] ${message}`);
+    Console.print(`${message}`);
   }
 }
