@@ -20,7 +20,10 @@ class App {
       "구입금액을 입력해 주세요.\n"
     );
 
-    //TODO: 예외처리, 매직넘버
+
+    if (Number(purchaseAmountInput)%1000) {
+      throw new Error("[ERROR] 구매 금액은 1,000원 단위이어야 합니다.");
+    }
     
     const lottoCnt = Number(purchaseAmountInput)/1000;
 
@@ -79,7 +82,7 @@ class App {
     5개 일치 (1,500,000원) - ${this.statistics.third_prize}개
     5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.statistics.second_prize}개
     6개 일치 (2,000,000,000원) - ${this.statistics.first_prize}개
-    총 수익률은 ${totalPrice/Number(purchaseAmountInput)}%입니다.
+    총 수익률은 ${this.statistics.totalPrice/Number(purchaseAmountInput)}%입니다.
 `);
   }
 }

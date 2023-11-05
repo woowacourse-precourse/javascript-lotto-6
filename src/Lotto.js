@@ -10,6 +10,10 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== 6) {
+      throw new Error("[ERROR] 로또 번호는 중복되지 않은 숫자로 이루어져야 합니다.");
+    }
   }
 
   result(winningNum, bonusNum){
