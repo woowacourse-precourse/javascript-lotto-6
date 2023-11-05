@@ -9,9 +9,7 @@ class App {
   #userWinningNumbers;
   #userBonusNumber;
 
-  constructor() {
-    this.purchaseLottos = new PurchaseLottos();
-  }
+  constructor() {}
 
   async play() {
     await this.getLottoCount();
@@ -19,8 +17,18 @@ class App {
     await this.getUserWinningAndBonusNumbers();
   }
 
+  async inputLottoCount() {
+    try {
+      const input = await Console.readLineAsync(USER_PROMPT.PURCHASE_AMOUNT);
+      const purchaseLottos = new PurchaseLottos(input);
+      return purchaseLottos.getLottoCount();
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getLottoCount() {
-    this.#lottoCount = await this.purchaseLottos.getLottoAmount();
+    this.#lottoCount = await this.inputLottoCount();
     Console.print(USER_PROMPT.SHOW_LOTTO_COUNT(this.#lottoCount));
   }
 
@@ -34,9 +42,27 @@ class App {
     }
   }
 
+  async inputWinningNumbers() {
+    try {
+      const input = await Console.readLineAsync(USER_PROMPT.WINNING_NUMBERS);
+      return input;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async inputBonusNumber() {
+    try {
+      const input = await Console.readLineAsync(USER_PROMPT.BONUS_NUMBER);
+      return input;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getUserWinningAndBonusNumbers() {
-    this.#userWinningNumbers = await this.purchaseLottos.inputWinningNumbers();
-    this.#userBonusNumber = await this.purchaseLottos.inputBonusNumber();
+    this.#userWinningNumbers = await this.inputWinningNumbers();
+    this.#userBonusNumber = await this.inputBonusNumber();
   }
 }
 

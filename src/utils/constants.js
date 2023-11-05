@@ -9,4 +9,8 @@ const USER_PROMPT = {
 
 const DIVISOR = 1000;
 
-export { USER_PROMPT, DIVISOR };
+const ERROR = {
+  INVALID_AMOUNT: "[ERROR] 로또 구입 금액은 1000원 단위여야 합니다.",
+};
+
+export { USER_PROMPT, DIVISOR, ERROR };
