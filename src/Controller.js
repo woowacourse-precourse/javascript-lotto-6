@@ -51,10 +51,7 @@ class Controller {
     if(!allLotto.length){
       return;
     }
-
-    allLotto.forEach((lotto) => {
-      this.#outputView.printLottoNumbes(lotto.getNumbers());
-    })
+    this.#outputView.printLottoNumbes(allLotto);
   }
 
 }
