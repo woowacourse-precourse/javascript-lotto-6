@@ -8,4 +8,14 @@ export class Output {
 
     Console.print(`${"\n"}${howManyLotto}${MESSAGES.YOU_BOUGHT}`);
   }
+
+  printMyLotto(lottos) {
+    let result = "";
+
+    lottos.forEach((lotto) => {
+      result += `[${lotto.join(", ")}]${"\n"}`;
+    });
+
+    Console.print(result);
+  }
 }
