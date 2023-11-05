@@ -8,7 +8,8 @@ class App {
     const lottoCount = await system.getLottoCount(money);
     Console.print(`${lottoCount}개를 구매했습니다.`);
 
-    const lottos = await system.purchaseAndPrintLottos(money);
+    const lottos = await system.purchaseLottos(lottoCount);
+    system.printLottos(lottos);
     const [lottoNumbers, lotto] = await system.getLotto();
     const [bonusNumber, lottoNumbersSet] = await system.getBonusNumber(lotto);
   }

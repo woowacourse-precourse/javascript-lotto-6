@@ -75,20 +75,24 @@ class System {
     return lotto;
   }
 
+  async purchaseLottos(lottoCount) {
+    const lottos = [];
+    for (let i = 0; i < lottoCount; i++) {
+      const lotto = this.saveLottoNumbers();
+      lottos.push(lotto);
+    }
+    return lottos;
+  }
+
   printLottoNumbers(lotto) {
     const lottoStr = `[${lotto.getNumbers().join(", ")}]`;
     Console.print(lottoStr);
   }
 
-  async purchaseAndPrintLottos(money) {
-    const lottoCount = await this.getLottoCount(money);
-    const lottos = [];
-    for (let i = 0; i < lottoCount; i++) {
-      const lotto = this.saveLottoNumbers();
-      this.printLottoNumbers(lotto);
-      lottos.push(lotto);
+  printLottos(lottos) {
+    for (let i = 0; i < lottos.length; i++) {
+      this.printLottoNumbers(lottos[i]);
     }
-    return lottos;
   }
 
   async getLotto() {
