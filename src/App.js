@@ -43,7 +43,8 @@ class App {
   // 당첨 번호 관련 함수들
   async inputWinnerNum() {
     const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    this.#winningNum = new Lotto(input.split(","));
+    this.#winningNum = new Lotto(input.split(",").map(Number));
+    MissionUtils.Console.print(this.#winningNum.getNumbers());
   }
 
   async play() {
