@@ -51,7 +51,7 @@ class LottoMachine {
     return USER_INPUT_NUMBERS;
   }
 
-  async #setWinningNumbers() {
+  async #askWinningNumbers() {
     let winningNumbers;
 
     while (true) {
@@ -95,7 +95,7 @@ class LottoMachine {
     return USER_INPUT_PRICE;
   }
 
-  async #setBonusNumber() {
+  async #askBonusNumber() {
     let bonusNumber;
 
     while (true) {
