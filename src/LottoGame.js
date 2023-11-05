@@ -21,6 +21,13 @@ class LottoGame {
             this.#lottos.push(LOTTO);
         }
     }
+    getLottoNumbers() {
+        const LOTTO_NUMBERS = []
+        for (let i=0; i<this.#lottos.length; i++){
+            LOTTO_NUMBERS.push(this.#lottos[i].getNumbers());
+        }
+        return LOTTO_NUMBERS;
+    }
 
     generateRandomNumbers() {
         const RANDOM_NUMBERS = [];
