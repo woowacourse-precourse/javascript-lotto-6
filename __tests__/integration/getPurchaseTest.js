@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import gameStart from '../../src/service/gameStart';
+import getPurchase from '../../src/service/getPurchase.js';
 
 const mockInput = (inputs) => {
   try {
@@ -48,7 +48,7 @@ describe('게임 시작 기능 테스트', () => {
     mockPurchase(createdPurchase);
 
     // when
-    const result = await gameStart();
+    const result = await getPurchase();
 
     // then
     expect(result).toEqual(createdPurchase);
@@ -62,7 +62,7 @@ describe('게임 시작 기능 테스트', () => {
 
     // then
     try {
-      await gameStart();
+      await getPurchase();
     } catch (error) {
       expect(error.message).toEqual(expect.stringContaining('[ERROR]'));
     }
