@@ -1,3 +1,37 @@
+#  ⚙️ 설계
+## 🎯 Client, Server구조와 Spring MVC 패턴 설계 배경
+3주차까지 프리코스를 진행하면서 MVC패턴이 사용하는 것이 답안지처럼 느껴졌습니다. `MVC패턴이라는 틀 안에서 미션을 수행하는 것이 아니라 MVC패턴이라는 틀을 넘어 이번 미션을 수행`하기로 했습니다.
+구조는 크게 `클라이언트`와 `서버`로 나누어서 생각했습니다. 우리는 클라이언트인 로또 포스기를 통해 로또를 구입할 수 있으며, 로또 당첨 번호, 로또 보너스 번호를 입력할 수 있습니다. 그뿐만 아니라 로또 포스기에서 `API`개념을 도입하여 서버로부터 `요청`에 대한 `응답`을 받을 수 있고 응답의 대한 결과로 로또 포스기에 보여질 수 있습니다.
+
+이 때 서버는 `spring MVC 패턴`을 사용합니다. 이전 미션까지는 Model, Controller, View라는 범주 안에서 생각했지만, 이번 미션은 MVC 동작과정을 미션에 녹여내려고 했습니다. 물론 저의 부족함과 미션의 한계로 많은 부분을 저의 입 맛대로 대체하고 건너띄고, 수정했습니다.
+
+## 🎯 패턴 구조 도식화
+![image](https://github.com/qjatjs123123/MyStory/assets/74814641/7f1b5f8a-418c-41fe-ab2c-9e4b08091b52)
+
+## 🎯 한계점
+```
+1. 미션 특성상 express 서버를 열고 클라이언트와 통신 할 수 없으므로 클라이언트(LottoPos)에서 서버 객체를 생성하여 통신하는 방법으로 대체한다.
+2. 서버와 API를 통해 통신을 한다고 가정하고 호출 URL은 /src/Util/API.js에 정리한다.
+3. 클라이언트와 서버와 통신 결과로 200,404... 가 아닌 error, success로 구분한다.
+4. 클라이언트와 서버와의 통신 프로토콜로는 HTTP를 사용하고 HTTP 메시지 구조는 HttpRequest(요청), HttpResponse(응답)으로 직접 정의한다.
+5. DB는 자바스크립트에 자료구조 Map으로 대체한다.
+6. 실제 SQL문 중 select, insert를 자료구조 map에서 set, get으로 대체한다.
+7. Spring에서 어노테이션으로 스프링 빈으로 등록하는 과정은 폴더구조로 대체한다.
+8. 본 미션에서 @Controller는 하나의 인스턴스만 가질 수 있도록 싱글턴으로 구현한다.
+9. @Repository, @Service는 객체화하지 않고 함수화하여 하나의 인스턴스만 가질수 있도록 대체한다.
+10. @Controller는 핵심로직을 @service로 위임하고 @service로 부터 받은 데이터를 가지고 ModelAndView객체를 생성하여 리턴한다.
+11. @service는 핵심로직을 수행하고 @controller에게 핵심로직을 수행한 데이터를 반환한다.
+12. @Repository는 SQL문 대신 set, get을 통해 DB(여기선 map자료구조)에 데이터를 넣거나 뺀다.
+13. spring에서 Controller에서 다양한 ResquestMapping을 가질 수 있지만 본 프로그램에서는 하나의 컨트롤러에 하나의 RequestMapping을 가지도록 한다.
+14. spring에서 ViewResolver에서 반환되는 view객체는 많지만 본 프로그램에서는 하나의 view객체 LottoPosView를 반환한다고 가정한다.
+```
+
+## 🎯 참고 블로그
+- [Spring MVC 동작 방식과 구성요소] (https://kchs94.tistory.com/201)
+- [스프링 MVC - 구조이해] (https://catsbi.oopy.io/f52511f3-1455-4a01-b8b7-f10875895d5b)
+- [HTTP 통신을 알아보자] (https://www.mobiinside.co.kr/2022/09/08/http/)
+
+
 # 📘 Docs
 
 ## 입/출력 요구사항 🐱‍🐉
