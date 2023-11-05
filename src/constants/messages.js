@@ -1,17 +1,9 @@
-const MATCH = {
-    THREE: "3개 일치",
-    FOUR: "4개 일치",
-    FIVE: "5개 일치",
-    FIVE_BONUS: "5개 일치, 보너스 볼 일치",
-    SIX: "6개 일치",
-};
-
-const MATCH_ARRAY = [
-    MATCH.SIX,
-    MATCH.FIVE_BONUS,
-    MATCH.FIVE,
-    MATCH.FOUR,
-    MATCH.THREE,
+const RESULT_ARRAY = [
+    '3개 일치 (5,000원) - ',
+    '4개 일치 (50,000원) - ',
+    '5개 일치 (1,500,000원) - ',
+    '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+    '6개 일치 (2,000,000,000원) - '
 ];
 
 const ERROR = {
@@ -34,10 +26,9 @@ const INPUT = {
 
 const OUTPUT = {
     PURCHASE: (quantity) => `${quantity}개를 구매했습니다.`,
-    RESULT_TITLE: "당첨 통계\n---",
-    RESULT: (match, reward, quantity) => `${match} (${reward}원) - ${quantity}개`,
+    RESULT_TITLE: "당첨 통계\n---\n",
     RETURN: (returns) => `총 수익률은 ${returns}%입니다.`,
     LINE: "\n",
 };
 
-export { MATCH, MATCH_ARRAY, ERROR, INPUT, OUTPUT };
+export { RESULT_ARRAY, ERROR, INPUT, OUTPUT };
