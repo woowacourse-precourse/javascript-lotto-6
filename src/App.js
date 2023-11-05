@@ -1,3 +1,6 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable class-methods-use-this */
 import { MissionUtils } from "@woowacourse/mission-utils";
 import {
   BASE_AMOUNT,
@@ -8,7 +11,9 @@ import { validatePurchase, validateWinningNumber } from "./utils/validation.js";
 
 class App {
   #purchaseAmount;
+
   #ticketCount;
+
   #tickets;
 
   constructor() {
@@ -23,7 +28,7 @@ class App {
     validatePurchase(input);
 
     this.#purchaseAmount = input;
-    this.#ticketCount = parseInt(input) / BASE_AMOUNT;
+    this.#ticketCount = parseInt(input, 10) / BASE_AMOUNT;
   }
 
   createLottoTickets() {
