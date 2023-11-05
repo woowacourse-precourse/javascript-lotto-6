@@ -14,6 +14,7 @@ class LottoController {
   async playLotto() {
     this.usedMoney = await InputView.inputMoney(); // 정상 입력 시에 통과
     this.countOfLottos = this.howManyLottos();
+    this.makeNewLottos();
     OutputView.printLottos(this.countOfLottos, this.lottoArray);
   }
 
@@ -24,13 +25,15 @@ class LottoController {
   // 로또 구매 개수만큼 객체 생성
   makeNewLottos() {
     for (let i = 0; i < this.countOfLottos; i += 1) {
-      const lotto = new Lotto(this.pickRandomNumbers());
+      const lottoNumbers = this.pickRandomNumbers();
+      const sortedlottoNumbers = lottoNumbers.sort((a, b) => a - b);
+      const lotto = new Lotto([...sortedlottoNumbers]);
       this.lottoArray.push(lotto);
     }
   }
 
   pickRandomNumbers() {
-    Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   calculateBenefit(earnedMoney) {
