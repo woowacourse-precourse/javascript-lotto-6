@@ -1,4 +1,4 @@
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 
 class Lotto {
   #numbers;
@@ -38,34 +38,12 @@ class Lotto {
     const matchingNumbers = this.#numbers.filter(number => winningNumbers.includes(number));
     const matchingCount = matchingNumbers.length;
   
-    let results = {
-      three: 0,
-      four: 0,
-      five: 0,
-      bonus: 0,
-      all: 0,
-    };
+    if (matchingCount == 3) return 'three';
+    if (matchingCount == 4) return 'four';
+    if (matchingCount == 6) return 'all';
+    if (matchingCount == 5 && this.#numbers.includes(bonusNumber)) return 'bonus';
   
-    switch (matchingCount) {
-      case 3:
-        results.three++;
-        break;
-      case 4:
-        results.four++;
-        break;
-      case 5:
-        if (this.#numbers.includes(bonusNumber)) {
-          results.bonus++;
-        } else {
-          results.five++;
-        }
-        break;
-      case 6:
-        results.all++;
-        break;
-    }
-  
-    return results;
+    return 'zero';
   }
   
   printResult(results) {

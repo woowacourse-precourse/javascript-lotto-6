@@ -18,14 +18,9 @@ class App {
     
     for (const lottoNumbers of lottoNumbersArray) {
       const matchResult = numbers.matchLotto(lottoNumbers, bonusNumber);
-      
-      results.three += matchResult.three;
-      results.four += matchResult.four;
-      results.five += matchResult.five;
-      results.bonus += matchResult.bonus;
-      results.all += matchResult.all;
+      if (matchResult == 'zero') continue;
+      results[matchResult]++;
     }
-    
     numbers.printResult(results);
 
     const profitRate = this.getProfitRate(amount, results);
