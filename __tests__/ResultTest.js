@@ -60,4 +60,22 @@ describe("로또 결과 테스트", () => {
 
     expect(dashboard.rankCount).toStrictEqual([1, 0, 0, 1, 2]);
   });
+
+  test("수익률 계산 테스트 1", () => {
+    dashboard.updateDashboard(5);
+    const earningsRate = dashboard.calculateEarnings(8000);
+
+    expect(earningsRate).toBe("62.5");
+  });
+
+  test("수익률 계산 테스트 2", () => {
+    dashboard.updateDashboard(1);
+    dashboard.updateDashboard(5);
+    dashboard.updateDashboard(4);
+    dashboard.updateDashboard(5);
+
+    const earningsRate = dashboard.calculateEarnings(8000);
+
+    expect(earningsRate).toBe("25000750.0");
+  });
 });

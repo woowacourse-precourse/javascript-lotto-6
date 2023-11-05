@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Dashboard {
   #winning;
   #bonus;
@@ -39,7 +41,7 @@ class Dashboard {
   }
 
   calculateEarnings(investment) {
-    const winningAmounts = [5000, 50000, 1500000, 30000000, 2000000000];
+    const winningAmounts = [2000000000, 30000000, 1500000, 50000, 5000];
 
     const totalEarnings = this.rankCount.reduce((total, count, index) => {
       return total + count * winningAmounts[index];
