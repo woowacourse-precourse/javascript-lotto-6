@@ -1,4 +1,4 @@
-import {MONEY_VALIDATE} from "../src/InputMoney.js";
+import {MONEY_VALIDATE} from "../src/ui/InputMoney.js";
 
 describe("입력 예외 처리 테스트", () => {
 
