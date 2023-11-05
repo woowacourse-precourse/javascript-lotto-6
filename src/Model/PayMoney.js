@@ -1,4 +1,5 @@
 class PayMoney {
+    
     constructor(money){
         this.validatePayMoney(money);
         this.money = money
@@ -10,6 +11,10 @@ class PayMoney {
         if (Number(money)%1000 !==0) {
             throw new Error("[ERROR] 구매 금액은 1000원 단위로만 입력할 수 있습니다.")
         }
+    }
+
+    getMoney() {
+        return this.money;
     }
 }
 
