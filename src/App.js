@@ -1,37 +1,22 @@
-import { Random } from '@woowacourse/mission-utils';
 import { INFO_MESSAGE } from './constants/messages.js';
-import { MAGIC_NUMBER } from './constants/magicNumber.js';
+
 import View from './View.js';
 import TicketMachine from './TicketMachine.js';
 import Lotto from './Lotto.js';
 
 class App {
-  #state = { ticktes: null };
+  #state = { ticktes: null, numbers: null, bonus: null };
 
   buyTickets(purchaseAmount) {
-    this.ticketMachine = new TicketMachine({
-      purchaseAmount,
-      getTickets: purchasedTicktesCount => {
-        this.#state.ticktes = Array.from(
-          { length: purchasedTicktesCount },
-          () =>
-            Random.pickUniqueNumbersInRange(
-              MAGIC_NUMBER.MIN_NUMBER,
-              MAGIC_NUMBER.MAX_NUMBER,
-              MAGIC_NUMBER.LOTTO_NUMBER_COUNT,
-            ),
-        );
-        View.printPurchasedTicketsInfo(
-          purchasedTicktesCount,
-          this.#state.ticktes,
-        );
-      },
-    });
+    this.ticketMachine = new TicketMachine(purchaseAmount);
+    this.#state.ticktes = this.ticketMachine.getNumberOfGame();
   }
 
-  setlottoNumbers(lottoNumbers) {
+  async setlottoNumbers(lottoNumbers) {
     const lottoNumbersArray = lottoNumbers.split(',').map(Number);
     this.lotto = new Lotto(lottoNumbersArray);
+    this.#state.numbers = lottoNumbersArray;
+    this.#state.bonus = await Lotto.getBonusNumber(lottoNumbersArray);
   }
 
   async play() {
@@ -43,11 +28,7 @@ class App {
     const lottoNumbers = await View.getUserInput(
       INFO_MESSAGE.LOTTO_NUMBERS_ASK_MESSAGE,
     );
-    this.setlottoNumbers(lottoNumbers);
-
-    const bonusNumber = await View.getUserInput(
-      INFO_MESSAGE.BONUS_NUMBER_ASK_MESSAGE,
-    );
+    await this.setlottoNumbers(lottoNumbers);
   }
 }
 

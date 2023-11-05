@@ -18,8 +18,15 @@ class Validator {
       Validator.#isNotNaN(array) &&
       Validator.#isNumber(array) &&
       Validator.#isLengthSix(array) &&
-      Validator.#isNumberInRange(array) &&
+      Validator.#isNumbersInRange(array) &&
       Validator.#isNotDuplicated(array)
+    );
+  }
+
+  static checkBonusNumber(number, array) {
+    return (
+      Validator.#isNumberInRange(number) &&
+      Validator.#isNotInclude(number, array)
     );
   }
 
@@ -51,7 +58,7 @@ class Validator {
     );
   }
 
-  static #isNumberInRange(value) {
+  static #isNumbersInRange(value) {
     return this.#validate(
       value.every(
         elem =>
@@ -61,9 +68,23 @@ class Validator {
     );
   }
 
+  static #isNumberInRange(value) {
+    return this.#validate(
+      value >= MAGIC_NUMBER.MIN_NUMBER && value <= MAGIC_NUMBER.MAX_NUMBER,
+      ERROR_MESSAGE.NUMBER_RANGE_ERROR,
+    );
+  }
+
   static #isNotDuplicated(value) {
     const set = new Set(value);
     return this.#validate(set.size === 6, ERROR_MESSAGE.DUPLICATE_ERROR);
+  }
+
+  static #isNotInclude(number, array) {
+    return this.#validate(
+      !array.includes(number),
+      ERROR_MESSAGE.DUPLICATE_ERROR,
+    );
   }
 }
 
