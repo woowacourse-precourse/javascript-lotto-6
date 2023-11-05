@@ -2,6 +2,7 @@ import LottoGenerator from "./LottoGenerator.js";
 import LottoValidator from "./utils/LottoValidator.js";
 import LottoDisplay from "./LottoDisplay.js";
 import LottoResult from "./LottoResult.js";
+import { DECIMAL, INPUT_SEPARATOR } from "./utils/lottoConstants.js";
 
 const display = new LottoDisplay();
 const generator = new LottoGenerator();
@@ -9,49 +10,44 @@ const validator = new LottoValidator();
 const result = new LottoResult();
 
 class App {
-  async getValidMoneyInput() {
+  async getValidInput(requestFunction, validationFunction, ...validationArgs) {
     while (true) {
       try {
-        const money = await display.requestMoneyInput();
-        validator.validateMoney(money);
-        return money;
+        const rawInput = await requestFunction();
+        const validInput = validationFunction(rawInput, ...validationArgs);
+        return validInput;
       } catch (error) {
         display.displayError(error.message);
       }
     }
   }
 
-  async getValidWinningNumbers() {
-    while (true) {
-      try {
-        const rawWinningNumbers = await display.requestWinningNumbersInput();
-        const winningNumbers = rawWinningNumbers
-          .split(",")
-          .map((number) => parseInt(number.trim(), 10));
-        validator.validateWinningNumbers(winningNumbers);
-        return winningNumbers;
-      } catch (error) {
-        display.displayError(error.message);
-      }
-    }
+  validateMoneyInput(rawMoney) {
+    const money = parseInt(rawMoney, DECIMAL);
+    validator.validateMoney(money);
+    return money;
   }
 
-  async getValidBonusNumber(winningNumbers) {
-    while (true) {
-      try {
-        const bonusNumberInput = await display.requestBonusNumberInput();
-        const bonusNumber = parseInt(bonusNumberInput, 10);
-        validator.validateBonusNumbers(bonusNumber, winningNumbers);
-        return bonusNumber;
-      } catch (error) {
-        display.displayError(error.message);
-      }
-    }
+  validateWinningNumbersInput(rawWinningNumbers) {
+    const winningNumbers = rawWinningNumbers
+      .split(INPUT_SEPARATOR)
+      .map((number) => parseInt(number.trim(), DECIMAL));
+    validator.validateWinningNumbers(winningNumbers);
+    return winningNumbers;
+  }
+
+  validateBonusNumberInput(rawBonusNumber, winningNumbers) {
+    const bonusNumber = parseInt(rawBonusNumber, DECIMAL);
+    validator.validateBonusNumbers(bonusNumber, winningNumbers);
+    return bonusNumber;
   }
 
   async getMoneyAndTickets() {
-    const money = await this.getValidMoneyInput();
-    const lottoTickets = await generator.getLottoTickets(money);
+    const money = await this.getValidInput(
+      display.requestMoneyInput.bind(display),
+      this.validateMoneyInput.bind(this)
+    );
+    const lottoTickets = generator.getLottoTickets(money);
 
     display.displayNumberOfTickets(lottoTickets.length);
     display.displayLottoTickets(lottoTickets);
@@ -60,8 +56,15 @@ class App {
   }
 
   async getWinningData() {
-    const winningNumbers = await this.getValidWinningNumbers();
-    const bonusNumber = await this.getValidBonusNumber(winningNumbers);
+    const winningNumbers = await this.getValidInput(
+      display.requestWinningNumbersInput.bind(display),
+      this.validateWinningNumbersInput.bind(this)
+    );
+    const bonusNumber = await this.getValidInput(
+      display.requestBonusNumberInput.bind(display),
+      this.validateBonusNumberInput.bind(this),
+      winningNumbers
+    );
 
     return { winningNumbers, bonusNumber };
   }

@@ -1,3 +1,6 @@
+export const INPUT_SEPARATOR = ",";
+export const DECIMAL = 10;
+
 export const LOTTO_PRICE = 1000;
 export const LOTTO_NUMBER_START = 1;
 export const LOTTO_NUMBER_END = 45;
