@@ -7,13 +7,13 @@ class App {
 
   async play() {
     await this.#purchaseLottos();
-    this.#printPurchasedLottoNumbers();
   }
 
   async #purchaseLottos() {
     const lottoPurchaseAmount = await this.#getLottoPurchaseAmount();
     const lottoPurchaseQuantity = this.#changeAmountToQuantity(lottoPurchaseAmount);
     this.#setUpLottoStore(lottoPurchaseQuantity);
+    this.#printPurchasedLottoNumbers();
   }
 
   async #getLottoPurchaseAmount() {
@@ -38,6 +38,11 @@ class App {
   #getPurchasedLottoNumbers() {
     const purchasedLottoNumbers = this.#lottoStore.getLottoNumbers();
     return purchasedLottoNumbers;
+  }
+
+  async #getLottoWinningNumbers() {
+    const lottoWinningNumbers = await InputView.readLottoWinningNumbers();
+    return lottoWinningNumbers;
   }
 }
 
