@@ -1,5 +1,13 @@
-import { EMPTY_LENGTH, CURRENCY_NUMBER_TO_DIVIDE } from "./constants/constants.js";
-import { PURCHASE_AMOUNT_ERROR_MESSAGE } from "./constants/messages.js";
+import {
+  EMPTY_LENGTH,
+  CURRENCY_NUMBER_TO_DIVIDE,
+  WINNING_NUMBER_COUNTS,
+} from "./constants/constants.js";
+import {
+  BONUS_NUMBER_ERROR_MESSAGE,
+  PURCHASE_AMOUNT_ERROR_MESSAGE,
+  WINNING_NUMBERS_ERROR_MESSAGE,
+} from "./constants/messages.js";
 
 const Validator = Object.freeze({
   validatePurchaseAmount: (purchaseAmount) => {
@@ -19,6 +27,56 @@ const Validator = Object.freeze({
       throw PURCHASE_AMOUNT_ERROR_MESSAGE.not_divisible_by_currency_number;
     }
   },
+
+  validateWinningNumbers: (winningNumbers) => {
+    if (isDuplicated(winningNumbers)) {
+      throw WINNING_NUMBERS_ERROR_MESSAGE.duplicated;
+    }
+
+    if (!hasCorrectLength(winningNumbers)) {
+      throw WINNING_NUMBERS_ERROR_MESSAGE.empty_numbers;
+    }
+
+    winningNumbers.map((number) => {
+      if (isEmpty(number)) {
+        throw WINNING_NUMBERS_ERROR_MESSAGE.empty_numbers;
+      }
+
+      if (!isNumeric(number)) {
+        throw WINNING_NUMBERS_ERROR_MESSAGE.invalid_character;
+      }
+
+      if (!isInteger(number)) {
+        throw WINNING_NUMBERS_ERROR_MESSAGE.not_integer;
+      }
+
+      if (!isInRange(number)) {
+        throw WINNING_NUMBERS_ERROR_MESSAGE.not_in_range;
+      }
+    });
+  },
+
+  validateBonusNumber: (number, numbers) => {
+    if (isEmpty(number)) {
+      throw BONUS_NUMBER_ERROR_MESSAGE.empty_number;
+    }
+
+    if (!isNumeric(number)) {
+      throw BONUS_NUMBER_ERROR_MESSAGE.contains_character;
+    }
+
+    if (!isInteger(number)) {
+      throw BONUS_NUMBER_ERROR_MESSAGE.not_integer;
+    }
+
+    if (!isInRange(number)) {
+      throw BONUS_NUMBER_ERROR_MESSAGE.not_in_range;
+    }
+
+    if (isDuplicated([...numbers, number])) {
+      throw BONUS_NUMBER_ERROR_MESSAGE.duplicated;
+    }
+  },
 });
 
 const isEmpty = (string) => {
@@ -33,8 +91,18 @@ const isInteger = (string) => {
   return Number.isInteger(Number(string));
 };
 
-const isDivisibleByCurrencyNumber = (string) => {
-  return Number(string) % CURRENCY_NUMBER_TO_DIVIDE === 0 ? true : false ;
+const isDivisibleByCurrencyNumber = (string) =>
+  Number(string) % CURRENCY_NUMBER_TO_DIVIDE === 0 ? true : false;
+
+const isInRange = (string) => Number(string) >= 1 && Number(string) <= 45;
+
+const isDuplicated = (array) => {
+  const set = new Set(array);
+
+  return set.size !== array.length;
 };
+
+const hasCorrectLength = (winningNumbers) =>
+  winningNumbers.length === WINNING_NUMBER_COUNTS;
 
 export default Validator;

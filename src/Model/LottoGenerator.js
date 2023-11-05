@@ -11,7 +11,7 @@ const generateRandomLottery = () => {
         }
     }
     
-    return lottery;
+    return lottery.toSorted((a, b) => a - b);
 }
 
 export const generateLotteries = (numberOfLotteries) => {
