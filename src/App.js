@@ -6,6 +6,7 @@ class App {
   async play() {
     this.#lottoGame = new LottoGame();
     await this.#lottoGame.start();
+    this.#lottoGame.play();
   }
 }
 
