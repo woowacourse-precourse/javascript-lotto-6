@@ -42,7 +42,9 @@ class BuyLotto {
   }
 
   #printPurchasedLotto() {
-    let message = `${this.lottos.length}${OUTPUT_MESSAGE.PRINT_PURCHASE_QUANTITY}`;
+    let message = `${this.#lottos.length}${
+      OUTPUT_MESSAGE.PRINT_PURCHASE_QUANTITY
+    }`;
     this.#lottos.forEach(lotto => {
       message += `[${lotto}]\n`;
     });
