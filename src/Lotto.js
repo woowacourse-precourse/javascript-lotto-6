@@ -23,8 +23,6 @@ class Lotto {
       throw new Error(Message.error.NOT_UNIQUE);
     }
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
