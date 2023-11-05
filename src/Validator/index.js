@@ -1,10 +1,20 @@
-import BuyValidator from './BuyValidator.js';
+import Validator from './Validator.js';
+import PriceValidator from './PriceValidator.js';
 
-class Validator {
+class ValidatorFactory {
+  /**
+   *
+   * @param {'price' | 'bonus' | 'win'} type
+   * @returns
+   */
   static initialize(type) {
-    if (type === 'buy') return new BuyValidator();
-    throw new Error('[ERROR]');
+    switch (type) {
+      case ('price'):
+        return new PriceValidator();
+      default:
+        return new Validator();
+    }
   }
 }
 
-export default Validator;
+export default ValidatorFactory;

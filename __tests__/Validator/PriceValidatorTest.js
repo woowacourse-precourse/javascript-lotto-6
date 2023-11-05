@@ -1,7 +1,7 @@
-import Validator from '../../src/Validator/index.js';
+import ValidatorFactory from '../../src/Validator';
 
 describe('구입 금액 입력이', () => {
-  const validator = Validator.initialize('buy');
+  const validator = ValidatorFactory.initialize('price');
 
   test('1000으로 나뉘어지지 않을 경우 예외가 발생하는가?', () => {
     const input = 10003;
