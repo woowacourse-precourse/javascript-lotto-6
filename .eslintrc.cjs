@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: ['airbnb'],
+  extends: ['airbnb', 'prettier'],
   overrides: [
     {
       env: {
