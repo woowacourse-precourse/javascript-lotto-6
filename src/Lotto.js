@@ -1,3 +1,10 @@
+import { Random, Console } from '@woowacourse/mission-utils';
+import { NUMBER, TEXT } from './data.js';
+
+export async function lottoAmountGet() {
+  const inputAmount = await Console.readLineAsync(TEXT.INPUT_AMOUNT);
+}
+
 class Lotto {
   #numbers;
 
@@ -8,7 +15,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
   }
 

@@ -1,5 +1,9 @@
+import Lotto, { lottoAmountGet } from './Lotto.js';
+
 class App {
-  async play() {}
+  async play() {
+    lottoAmountGet();
+  }
 }
 
 export default App;
