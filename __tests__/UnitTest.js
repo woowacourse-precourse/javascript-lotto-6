@@ -11,6 +11,16 @@ describe("수익률 테스트", () => {
     const result = `${rate}%`;
     expect(result).toEqual(output);
   });
+
+  test("수익률 소수점 둘째 자리에서 반올림", () => {
+    const payment = 7000;
+    const prize = 50000;
+    const rate = (prize / payment) * 100;
+    const rounding = parseFloat(rate.toFixed(2));
+    const output = "714.29%";
+    const result = `${rounding}%`;
+    expect(result).toEqual(output);
+  });
 });
 
 // UserPayment.js 관련 단위 테스트
