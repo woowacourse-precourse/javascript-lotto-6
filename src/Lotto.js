@@ -30,7 +30,9 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  ascendingOrder() {
+    this.numbers.sort((a, b) => a - b);
+  }
 }
 
 export default Lotto;

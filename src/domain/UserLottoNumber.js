@@ -21,10 +21,6 @@ class UserLottoNumber {
     return this.bonusNumber;
   }
 
-  ascendingOrder() {
-    this.baseNumbers.sort((a, b) => a - b);
-  }
-
   #bonusValidate(number) {
     if (isNaN(number)) {
       throw new Error(ERROR.ONLY_NUMBER);
