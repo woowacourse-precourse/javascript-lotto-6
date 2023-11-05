@@ -13,6 +13,7 @@ class App {
     MissionUtils.Console.print("");
     const bonusNumber = await inputBonusNumber(winningNumbers);
     MissionUtils.Console.print("");
+    lottoResultPrinter([5,0], 2)
   }
 }
 
@@ -99,13 +100,19 @@ export function lottoResultPrinter(results, count) {
   const indexNumber = findIndexBySameValue(results)
   const prize = winningDetails.prize[indexNumber];
   const currencyPrize = formatCurrency(prize);
-  MissionUtils.Console.print(`${results[0]}개 일치 (${currencyPrize}원) - ${count}개`);
+  if (indexNumber !== 3) {
+    MissionUtils.Console.print(`${results[0]}개 일치 (${currencyPrize}원) - ${count}개`);
+  }
+  if (indexNumber === 3) {
+    MissionUtils.Console.print(`${results[0]}개 일치, 보너스 볼 일치 (${currencyPrize}원) - ${count}개`);
+  }
 }
 
 function findIndexBySameValue(valueToFind) {
   const sameValues = winningDetails.same;
   if (valueToFind[0] === 5) {
-    return findIndexByBonus(valueToFind);
+    const index = findIndexByBonus(valueToFind);
+    return index;
   }
   for (let i = 0; i < sameValues.length; i++) {
     if (sameValues[i] === valueToFind[0]) {
@@ -116,11 +123,12 @@ function findIndexBySameValue(valueToFind) {
 
 function findIndexByBonus(valueToFind) {
   const sameValues = winningDetails.same;
-  if (sameValues[3] === valueToFind) {
-    return 3;
+  if (sameValues[2][1] === valueToFind[1]) {
+    //console.log(valueToFind);
+    return 2;
   }
-  if (sameValues[4] === valueToFind) {
-    return 4;
+  if (sameValues[3][1] === valueToFind[1]) {
+    return 3;
   }
 }
 
