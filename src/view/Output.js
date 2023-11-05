@@ -2,6 +2,10 @@ import { Console } from "@woowacourse/mission-utils";
 import { OUTPUT_MSG } from "../constants/output.js";
 
 class Output {
+  static printNewLine() {
+    Console.print("");
+  }
+
   static printLotto(player) {
     const lottos = player.playerLottos;
 

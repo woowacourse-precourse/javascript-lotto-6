@@ -1,6 +1,6 @@
-import LottoGameError from "../Error";
-import { LOTTO_ERROR_MSG } from "../constants/error";
-import Lotto from "./Lotto";
+import LottoGameError from "../Error.js";
+import { LOTTO_ERROR_MSG } from "../constants/error.js";
+import Lotto from "./Lotto.js";
 
 class WinningLotto extends Lotto {
   #bonusNumber;
@@ -19,6 +19,10 @@ class WinningLotto extends Lotto {
     if (this.lottoNumbers.includes(num)) {
       throw new LottoGameError(LOTTO_ERROR_MSG.DUPLICATION_ERR);
     }
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
   }
 }
 
