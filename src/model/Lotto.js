@@ -27,11 +27,10 @@ class Lotto {
   #validate(numbers) {
     numbers.forEach((element) => {
       validateNumber(element.toString());
+      validateRange(element);
     });
-    validateRange(numbers);
     validateLength(numbers);
     validateUnique(numbers);
-    return;
   }
 }
 
