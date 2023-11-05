@@ -42,6 +42,10 @@ class App {
     Console.print('');
 
     const numbers = await Input.getLottoNumber();
+    Console.print('');
+
+    const bonusNumber = await Input.getLottoBonusNumber();
+    Console.print('');
   }
 }
 
