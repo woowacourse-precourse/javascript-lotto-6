@@ -10,14 +10,18 @@ class App {
     await App.displayPurchase(numberIssuance.EA, numberIssuance.lottoNumbers);
 
     const winningNumber = await this.getWinningNumber();
+
+    const bonusNumber = await this.getBonusNumber();
+
+    Console.print(winningNumber);
+    Console.print(bonusNumber);
   }
 
   async getAmount() {
-    let amount;
     while (true) {
       try {
         const input = await Console.readLineAsync("구입금액을 입력해주세요.\n");
-        amount = Number(input);
+        const amount = Number(input);
         ValidateInput.validateAmount(amount);
         return amount;
       } catch (error) {
@@ -27,14 +31,27 @@ class App {
   }
 
   async getWinningNumber() {
-    let numbers;
     while (true) {
       try {
         const input =
           await Console.readLineAsync("당첨 번호를 입력해주세요.\n");
-        numbers = input.split(",").map((item) => Number(item));
+        const numbers = input.split(",").map((item) => Number(item));
         ValidateInput.validateWinningNumber(numbers);
         return numbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  async getBonusNumber() {
+    while (true) {
+      try {
+        const input =
+          await Console.readLineAsync("보너스 번호를 입력해주세요.\n");
+        const number = Number(input);
+        ValidateInput.validateBonusNumber(number);
+        return number;
       } catch (error) {
         Console.print(error.message);
       }

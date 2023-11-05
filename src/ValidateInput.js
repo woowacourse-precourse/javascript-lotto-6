@@ -32,6 +32,18 @@ class ValidateInput {
       );
     }
   }
+
+  static validateBonusNumber(number) {
+    if (
+      isNaN(number) ||
+      number < MIN_WINNING_NUMBER ||
+      number > MAX_WINNING_NUMBER
+    ) {
+      throw new Error(
+        "[ERROR] 보너스 번호는 1부터 45사이의 숫자로 입력해주세요.\n",
+      );
+    }
+  }
 }
 
 export default ValidateInput;

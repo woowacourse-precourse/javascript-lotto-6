@@ -30,7 +30,7 @@ module.exports = {
   rules: {
     "class-methods-use-this": [
       "error",
-      { exceptMethods: ["getAmount", "getWinningNumber"] },
+      { exceptMethods: ["getAmount", "getWinningNumber", "getBonusNumber"] },
     ],
     "import/extensions": [
       "error",
