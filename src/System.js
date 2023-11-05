@@ -7,11 +7,7 @@ class System {
     let money = 0;
     while (true) {
       try {
-        const inputMoney = await this.#getInputMoney();
-        money = Number(inputMoney);
-        this.#validateMoney(money);
-        this.#validateMoneyFormat(money);
-
+        money = await this.#retrieveValidMoney();
         break;
       } catch (error) {
         await Console.print(error.message);
@@ -21,10 +17,24 @@ class System {
     return money;
   }
 
+  async #retrieveValidMoney() {
+    const inputMoney = await this.#getInputMoney();
+    const money = this.#validateAndConvertMoney(inputMoney);
+    return money;
+  }
+
   // 사용자로부터 금액을 입력받는 부분
   async #getInputMoney() {
     const inputMoney = await Console.readLineAsync(INPUT_MESSAGE.money);
     return inputMoney;
+  }
+
+  // 숫자로 바꾸고 유효성 검사
+  #validateAndConvertMoney(inputMoney) {
+    const money = Number(inputMoney);
+    this.#validateMoney(money);
+    this.#validateMoneyFormat(money);
+    return money;
   }
 
   // 금액의 유효성을 검사하는 부분
