@@ -10,7 +10,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const regex = /^(?!.*(\d).*\1)(?:(?:[1-9]|[1-4][0-5])(?:, ?|$)){6}$/;
+    console.log(new Set(numbers).size);
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error(`${WINNING_ERROR.error}`);
+    }
+    const regex = /^(?:(?:[1-9]|[1-3][0-9]|4[0-5])(?:, ?|$)){6}$/;
     if (!regex.test(numbers)) {
       throw new Error(`${WINNING_ERROR.error}`);
     }
