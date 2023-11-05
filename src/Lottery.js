@@ -6,6 +6,9 @@ import { validation } from './utils/validation.js';
 import ValidateError from './error/ValidateError.js';
 
 class Lottery {
+  #winningNumbers;
+  #bonusNumber;
+
   async getLottoWinningNumbers() {
     while (true) {
       try {
@@ -14,7 +17,9 @@ class Lottery {
 
         this.#validateNumbers(lottoWinningNumbers);
 
-        return lottoWinningNumbers;
+        this.#winningNumbers = lottoWinningNumbers;
+
+        break;
       } catch (error) {
         Console.print(error);
       }
@@ -22,8 +27,19 @@ class Lottery {
   }
 
   async getLottoBonusNumber() {
-    const lottoBonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
-    return lottoBonusNumber;
+    while (true) {
+      try {
+        const lottoBonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
+
+        this.#validateNumber(Number(lottoBonusNumber));
+
+        this.#bonusNumber = lottoBonusNumber;
+
+        break;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
   }
 
   #validateNumbers(numbers) {
@@ -56,7 +72,28 @@ class Lottery {
     }
   }
 
-  #validateNumber(numbers) {}
+  #validateNumber(number) {
+    if (validation.isEmpty(number)) {
+      throw new ValidateError(ERROR_MESSAGE.empty);
+    }
+
+    if (!validation.isLottoNumberRange(number)) {
+      throw new ValidateError(ERROR_MESSAGE.lottoNumberRangee);
+    }
+
+    const isWinningNumbersIncludeBonusNumber = this.#winningNumbers.includes(number);
+
+    if (isWinningNumbersIncludeBonusNumber) {
+      throw new ValidateError(ERROR_MESSAGE.bonusNumberIncludeWinningNumber);
+    }
+  }
+
+  getWinningNumbers() {
+    return {
+      winningNumbers: this.#winningNumbers,
+      bonusNumber: this.#bonusNumber,
+    };
+  }
 }
 
 export default Lottery;

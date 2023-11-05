@@ -22,7 +22,6 @@ export const validation = {
   isLottoNumberRange: (number) => {
     return LOTTO.minNumber <= number && number <= LOTTO.maxNumber;
   },
-  isDuplicateNumbers: (number, arr) => {},
 };
 
 export const abc = {};
