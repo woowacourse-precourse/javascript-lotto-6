@@ -1,5 +1,6 @@
 import Lotto from './Lotto.js';
 import ERROR from './constants/error.js';
+import LOTTO from './constants/lotto.js';
 import CustomError from './errors/CustomError.js';
 
 class WinningLotto extends Lotto {
@@ -13,6 +14,18 @@ class WinningLotto extends Lotto {
   #validateBonusNumber(number) {
     if (this.isInvalidLottoNumber(number)) {
       throw new CustomError(ERROR.lotto.invalidNumber);
+    }
+
+    this.#ifNumberIsDuplicated(number, () => {
+      throw new CustomError(ERROR.lotto.duplicatedNumber);
+    });
+  }
+
+  #ifNumberIsDuplicated(number, callback) {
+    const setAllNumbers = new Set([...this.numbers, number]);
+    const sizeOfWinningLotto = LOTTO.size + LOTTO.sizeOfBonusNumber;
+    if (setAllNumbers.size !== sizeOfWinningLotto) {
+      callback();
     }
   }
 }

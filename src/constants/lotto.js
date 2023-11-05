@@ -5,6 +5,7 @@ const LOTTO = Object.freeze({
     max: 45,
   }),
   size: 6,
+  sizeOfBonusNumber: 1,
 });
 
 export default LOTTO;
