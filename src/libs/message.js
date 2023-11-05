@@ -1,5 +1,6 @@
 const MESSAGES = {
-  LOTTO_PURCHASE_MESSAGE: "구입금액을 입력해 주세요.\n",
+  INPUT_LOTTO_PURCHASE: "구입금액을 입력해 주세요.\n",
+  INPUT_WINNING_NUMBERS: "\n당첨 번호를 입력해 주세요.\n",
 };
 
 const ERRORS = {

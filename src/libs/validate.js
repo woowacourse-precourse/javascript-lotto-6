@@ -18,7 +18,7 @@ function isDivisibleByThousand(input) {
   }
 }
 
-function checkLottoNumbersLength(numbers) {
+function isNumbersLengthSix(numbers) {
   if (numbers.length !== 6) {
     throw new Error(ERRORS.INVALID_NUMBERS_LENGTH);
   }
@@ -31,19 +31,17 @@ function hasDuplicate(numbers) {
   }
 }
 
-function isNumberInRange(numbers) {
-  numbers.forEach((number) => {
-    if (number < 1 || number > 45) {
-      throw new Error(ERRORS.NUMBER_RANGE_ALERT);
-    }
-  });
+function isNumberInRange(number) {
+  if (number < 1 || number > 45) {
+    throw new Error(ERRORS.NUMBER_RANGE_ALERT);
+  }
 }
 
 export {
   isInputEmpty,
   isInputNumeric,
   isDivisibleByThousand,
-  checkLottoNumbersLength,
+  isNumbersLengthSix,
   hasDuplicate,
   isNumberInRange,
 };

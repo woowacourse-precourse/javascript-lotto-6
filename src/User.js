@@ -13,7 +13,7 @@ class User {
   }
 
   async buyLotto() {
-    const input = await Console.readLineAsync(MESSAGES.LOTTO_PURCHASE_MESSAGE);
+    const input = await Console.readLineAsync(MESSAGES.INPUT_LOTTO_PURCHASE);
     this.#validate(input);
     this.money = parseInt(input);
   }

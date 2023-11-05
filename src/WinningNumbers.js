@@ -1,11 +1,6 @@
-import { Console } from "@woowacourse/mission-utils";
-import {
-  isNumbersLengthSix,
-  hasDuplicate,
-  isNumberInRange,
-} from "./libs/validate.js";
+import { hasDuplicate, isNumbersLengthSix } from "./libs/validate";
 
-class Lotto {
+class WinningNumbers {
   #numbers;
 
   constructor(numbers) {
@@ -30,11 +25,6 @@ class Lotto {
       isNumberInRange(number);
     });
   }
-
-  printNumbers() {
-    this.#numbers.sort((a, b) => a - b);
-    Console.print(this.#numbers);
-  }
 }
 
-export default Lotto;
+export default WinningNumbers;
