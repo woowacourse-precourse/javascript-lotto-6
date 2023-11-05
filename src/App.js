@@ -1,8 +1,11 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import LottoManagement from "./LottoManagement.js";
 const lottoPrice = 1000;
 class App {
-  constructor() {}
+  constructor() {
+    this.lottoManagement = new LottoManagement();
+  }
   async play() {
     const purchasePrice = await this.inputPurchasePrice();
     const lottoCount = Number(purchasePrice / lottoPrice);
