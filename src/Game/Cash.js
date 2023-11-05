@@ -15,7 +15,7 @@ export default class Cash {
         this.Check.money(parseInt(cash.trim(), 10));
         break;
       } catch (error) {
-        IO.print(error);
+        IO.print(error.message);
       }
     }
     return parseInt(cash, 10);

@@ -24,7 +24,7 @@ export default class Prize {
         this.#line = numbers;
         return;
       } catch (error) {
-        IO.print(error);
+        IO.print(error.message);
         if (test == "test") throw error;
       }
     }

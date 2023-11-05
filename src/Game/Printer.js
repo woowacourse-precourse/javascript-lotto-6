@@ -35,7 +35,7 @@ export default class Printer {
   print() {
     let index = 0;
     while (index < this.amount) {
-      IO.print(this.#ticket[index].show());
+      IO.print(`[${this.#ticket[index].show().join(", ")}]`);
       index += 1;
     }
   }
