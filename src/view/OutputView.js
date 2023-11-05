@@ -10,9 +10,7 @@ export default class OutputView {
 
   static displayResults(resultStrings) {
     Console.print('당첨 통계\n---');
-    resultStrings.forEach((resultString) => {
-      Console.print(resultString);
-    });
+    Console.print(resultStrings);
   }
 
   static displayProfitRate(profitRate) {
