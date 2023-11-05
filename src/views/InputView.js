@@ -9,4 +9,10 @@ export default class InputView {
     PurchasePriceValidator.validatePurchasePrice(purchasePrice);
     return purchasePrice;
   }
+
+  static async getTargetNumbers() {
+    Console.print("당첨 번호를 입력해 주세요.");
+    const targetNumbers = await Console.readLineAsync("");
+    return targetNumbers.split(',').map(num => parseInt(num.trim()));
+  }
 }
