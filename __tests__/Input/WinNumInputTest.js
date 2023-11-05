@@ -13,6 +13,7 @@ describe('당첨 번호 입력이', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+  
   const Input = InputFactory.initialize('win');
   test('쉼표로 구분되지 않으면 예외가 발생하는가?', () => {
     const inputs = ['12 34 43 0 12 6', '123456'];
