@@ -10,6 +10,10 @@ const OutputView = {
     Console.print(MESSAGES.blank);
     Console.print(purchaseAmount / CONSTANTS.eachLottoPrice + MESSAGES.purchaseResult);
   },
+  printLottoString(user) {
+    user.getLottoStringArray().forEach((lottoString) => Console.print(lottoString));
+    Console.print(MESSAGES.blank);
+  },
 };
 
 export default OutputView;

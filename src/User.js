@@ -1,6 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import CONSTANTS from '../utils/Constants.js';
+import MESSAGES from '../utils/Messages.js';
 
 class User {
   lottos;
@@ -22,6 +23,12 @@ class User {
         CONSTANTS.maximumNumber,
         CONSTANTS.mainNumberCount,
       ).sort((a, b) => a - b),
+    );
+  }
+
+  getLottoStringArray() {
+    return this.lottos.map((lotto) =>
+      MESSAGES.printLottoBracket(lotto.getNumbers().join(MESSAGES.printLottoNumberDelimiter)),
     );
   }
 }
