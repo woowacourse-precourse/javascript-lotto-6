@@ -8,7 +8,7 @@ class App {
       const guess = new GuessLotto();
       await guess.buyLotto();
 
-      Console.print(`${guess.lottoPieces}개를 구매했습니다.`);
+      Console.print(`\n${guess.lottoPieces}개를 구매했습니다.`);
 
       for (let i = 1; i <= guess.lottoPieces; i += 1) {
         Console.print(guess.generateLottoNumber());
