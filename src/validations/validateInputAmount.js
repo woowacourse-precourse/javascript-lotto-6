@@ -6,8 +6,8 @@ const THOUSAND = 1000;
 const validateInputAmount = (inputAmount) => {
   if (!Number.isInteger(inputAmount)) throw new CustomError(ERROR_MESSAGES.inputAmount.type);
 
-  if (inputAmount < THOUSAND) throw new CustomError(ERROR_MESSAGES.inputAmount.low);
-  if (inputAmount > THOUSAND * 100) throw new CustomError(ERROR_MESSAGES.inputAmount.high);
+  if (inputAmount < THOUSAND) throw new CustomError(ERROR_MESSAGES.inputAmount.min);
+  if (inputAmount > THOUSAND * 100) throw new CustomError(ERROR_MESSAGES.inputAmount.max);
 
   if (inputAmount % THOUSAND != 0) throw new CustomError(ERROR_MESSAGES.inputAmount.unit);
 };

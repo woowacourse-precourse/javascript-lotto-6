@@ -25,10 +25,8 @@ class Counter {
   #generateLotto() {
     const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(LOTTO_CONSTANT.min, LOTTO_CONSTANT.max, LOTTO_CONSTANT.count);
     lottoNumbers.sort((a, b) => a - b);
+
     return lottoNumbers;
-  }
-  get lottoTicketNumber() {
-    return this.#lottoTicketNumber;
   }
   get giveLotto() {
     const lottoBox = [];
@@ -37,6 +35,7 @@ class Counter {
       lottoBox.push(new Lotto(lotto));
       this.#lottoTicketNumber--;
     }
+
     return lottoBox;
   }
 }
