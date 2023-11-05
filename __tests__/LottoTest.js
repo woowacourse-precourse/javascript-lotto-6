@@ -13,34 +13,37 @@ export const getLottoNumbers = (start, end) => {
 export const createLotto = (numbers) => () => new Lotto(numbers);
 
 describe("로또 클래스 테스트", () => {
+  let numbers = [];
+
+  beforeEach(() => {
+    numbers = getLottoNumbers(LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER);
+  });
+
   test(`로또 번호의 개수가 ${LOTTO.NUMBER_COUNT}와 다르면 IncorrectLottoCountError`, () => {
-    const numbers = [...getLottoNumbers(LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER), 1];
+    numbers.push(1);
 
     expect(createLotto(numbers)).toThrow(ErrorMessage.incorrectLottoCount());
   });
 
   test(`로또 번호가 숫자 형식이 아니면 IncorrectFormatError`, () => {
-    const numbers = getLottoNumbers(LOTTO.MIN_NUMBER - 1, LOTTO.MAX_NUMBER);
     numbers[0] = "0";
 
     expect(createLotto(numbers)).toThrow(ErrorMessage.incorrectFormat());
   });
 
   test(`${LOTTO.MIN_NUMBER} ~ ${LOTTO.MAX_NUMBER} 사이의 숫자가 아니면 IncorrectLottoNumberError`, () => {
-    const numbers = getLottoNumbers(LOTTO.MIN_NUMBER - 1, LOTTO.MAX_NUMBER);
+    numbers[0] = LOTTO.MIN_NUMBER - 1;
 
     expect(createLotto(numbers)).toThrow(ErrorMessage.incorrectLottoNumber());
   });
 
   test("로또 번호가 중복된 값을 가지면 DuplicateNumbersError", () => {
-    const numbers = getLottoNumbers(LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER);
     numbers[0] = numbers[1];
 
     expect(createLotto(numbers)).toThrow(ErrorMessage.duplicateNumbers());
   });
 
   test("getMatchCount : 정답 번호와 일치하는 개수 리턴", () => {
-    const numbers = getLottoNumbers(LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER);
     const lotto = new Lotto(numbers);
     const bonusNumber = [LOTTO.MAX_NUMBER];
 
