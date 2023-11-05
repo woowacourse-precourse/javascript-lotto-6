@@ -72,7 +72,7 @@ class LottoUtill {
   }
 
   #calcRate(earnMoney) {
-    return Math.round((earnMoney / this.#calcNumber) * 100 * 100) / 100;
+    return Math.round((earnMoney / this.#calcNumber) * 10000) / 100;
   }
 }
 

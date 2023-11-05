@@ -98,4 +98,38 @@ describe('LottoUtill Class 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
+
+  test('수익률 테스트', () => {
+    const output = new OutputView();
+    const lottoUtill = new LottoUtill();
+
+    const userMoney = 1000;
+    const userNumber = [[1, 2, 3, 4, 5, 6]];
+    const winNumber = [1, 2, 3, 19, 22, 23];
+    const bonusNumber = 45;
+
+    const logSpy = getLogSpy();
+
+    const logs = [
+      '3개 일치 (5,000원) - 1개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      '총 수익률은 500%입니다.',
+    ];
+
+    const staticObject = lottoUtill.checkLottoCorrect(
+      userNumber,
+      winNumber,
+      bonusNumber,
+    );
+    // 실행 부
+    output.lottoStatic(staticObject);
+    const rateUtill = new LottoUtill(userMoney, staticObject);
+    output.totalRevenue(rateUtill.getRate());
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
 });
