@@ -73,6 +73,14 @@ class Lotto {
     }
     return OPTION.BALL_COUNT - match + 2;
   }
+
+  /**
+   * 로또 게임 번호
+   * @returns {number[]}
+   */
+  getNumbers() {
+    return Object.freeze(this.#numbers);
+  }
 }
 
 export default Lotto;
