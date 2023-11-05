@@ -12,7 +12,7 @@ class App {
     const lottos = GenerateLottoNumbers.getLottos(lottoCount);
     OutputView.printLottos(lottos);
 
-    const targetNumbers = await InputView.getTargetNumbers();
+    const WinningNumbers = await InputView.getWinningNumbers();
   }
 }
 

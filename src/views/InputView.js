@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GUIDE_MESSAGE } from "../constants/Message";
 import PurchasePriceValidator from "../validate/PurchasePriceValidator";
+import WinningNumbersValidator from "../validate/WinningNumbersValidator";
 
 export default class InputView {
   static async getPurchasePrice() {
@@ -10,9 +11,11 @@ export default class InputView {
     return purchasePrice;
   }
 
-  static async getTargetNumbers() {
-    Console.print("당첨 번호를 입력해 주세요.");
-    const targetNumbers = await Console.readLineAsync("");
-    return targetNumbers.split(',').map(num => parseInt(num.trim()));
+  static async getWinningNumbers() {
+    Console.print(GUIDE_MESSAGE.insertWinningNumbers);
+    const WinningNumbers = await Console.readLineAsync("");
+    const numbersArray = WinningNumbers.split(',').map(num => parseInt(num.trim()));
+    WinningNumbersValidator.validateWinningNumbers(numbersArray);
+    return numbersArray;
   }
 }
