@@ -1,4 +1,4 @@
-import { DIVISOR } from "./utils/constants.js";
+import { NUMBER, ERROR } from "./utils/constants.js";
 
 class PurchaseLottos {
   #amount;
@@ -8,10 +8,18 @@ class PurchaseLottos {
     this.#amount = amount;
   }
 
-  #validate(amount) {}
+  #validate(amount) {
+    this.checkInvalidAmount(amount);
+  }
+
+  checkInvalidAmount(amount) {
+    if (amount % NUMBER.DIVISOR !== 0) {
+      throw new Error(ERROR.INVALID_AMOUNT);
+    }
+  }
 
   getLottoCount() {
-    return this.#amount / DIVISOR;
+    return this.#amount / NUMBER.DIVISOR;
   }
 }
 
