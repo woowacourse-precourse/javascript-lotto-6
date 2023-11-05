@@ -23,4 +23,24 @@ describe('LottoGame', () => {
       expect(lottoNumbers).toHaveLength(6);
     });
   });
+
+  test('일치한 수와 보너스번호의 포함여부에 따라 당첨등수를 증가시키는지 테스트한다.', () => {
+    const comparisonResults = [
+      { matchingCount: 4, hasBonusNumber: true },
+      { matchingCount: 5, hasBonusNumber: true },
+      { matchingCount: 5, hasBonusNumber: false },
+    ];
+
+    const expectedResult = {
+      firstPrize: 0,
+      secondPrize: 1,
+      thirdPrize: 1,
+      fourthPrize: 1,
+      fifthPrize: 0,
+    };
+
+    const result = lottoGame.getStatistics(comparisonResults);
+
+    expect(result).toEqual(expectedResult);
+  });
 });
