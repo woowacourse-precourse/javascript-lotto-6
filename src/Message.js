@@ -3,8 +3,7 @@ export const Message = Object.freeze({
   COUNT_PURCHASING_AMOUNT: '개를 구매했습니다.',
   INPUT_WINNING_NUMBER: '당첨 번호를 입력해 주세요.',
   INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
-  RESULT_STRING: `당첨통계
-  ---`,
+  RESULT_STRING: `\n당첨통계\n---`,
 
   FIFTH: '3개 일치 (5,000원) - ',
   FOURTH: '4개 일치 (50,000원) - ',
