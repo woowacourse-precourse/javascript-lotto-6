@@ -36,6 +36,19 @@ class App {
 6개 일치 (2,000,000,000원) - ${lottoRanks[0]}개`;
     MissionUtils.Console.print(PRINT_STRING);
   }
+
+  static printRateOfIncome(lottoRanks, amountOfMoney) {
+    const RANK_MONEY = [2000000000, 30000000, 1500000, 50000, 5000];
+    let income = 0;
+    lottoRanks.forEach((number, rank) => {
+      income += number * RANK_MONEY[rank];
+    });
+    MissionUtils.Console.print(
+      `총 수익률은 ${
+        Math.round((income / amountOfMoney) * 10000) / 100
+      }%입니다.`
+    );
+  }
 }
 
 export default App;
