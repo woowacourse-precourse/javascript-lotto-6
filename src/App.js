@@ -5,6 +5,7 @@ import Lotto from "./Lotto.js";
 const validate = new Validate();
 class App {
   LottoList = [];
+  prizeNumber = 0;
 
   async start() {
     const price = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -25,13 +26,19 @@ class App {
     }
   }
 
+  async inputPrizeNumber() {
+    const number = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+
+    this.prizeNumber = number.split(",");
+  }
+
   async play() {
     const lottoCount = await this.start();
     Console.print(lottoCount + "개를 구매했습니다.");
 
     this.getLottoList(lottoCount);
 
-    this.input;
+    await this.inputPrizeNumber();
   }
 }
 
