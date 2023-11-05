@@ -10,6 +10,9 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    if (this.duplicate(numbers)){
+      throw new Error("[ERROR] 로또 번호는 중복되면 안됩니다.")
+    }
   }
 
   checkWin(winNum, bonusNum){ 
@@ -30,6 +33,10 @@ class Lotto {
     let isBonusMatched = this.#numbers.includes(bonusNum);
     if (!isBonusMatched) return 2;
     if (isBonusMatched) return 3;
+  }
+
+  duplicate(numbers){
+    return new Set(numbers).size !== numbers.length;
   }
 }
 
