@@ -1,14 +1,14 @@
-import { Random } from '@woowacourse/mission-utils';
-import { ERROR, LOTTO } from './Constant';
+import { Console, Random } from '@woowacourse/mission-utils';
+import { ERROR, LOTTO, OUTPUT_MESSAGE } from './Constant';
 
 class BuyLotto {
   #price;
-  lottos;
+  #lottos;
 
   constructor(price) {
     this.#validatePrice(price);
     this.#price = Number(price);
-    this.lottos = [];
+    this.#lottos = [];
     this.#setLottos();
   }
 
@@ -28,21 +28,32 @@ class BuyLotto {
   #setLottos() {
     const quantity = this.#getLottoQuantity();
     for (let i = 0; i < quantity; i++) {
-      this.lottos.push(this.#getLottoNumbers());
+      this.#lottos.push(this.#setLottoNumbers());
     }
   }
 
-  #getLottoNumbers() {
-    const lottoNumbers = new Set();
-    while (lottoNumbers.size < LOTTO.LOTTO_LENGHT) {
-      lottoNumbers.add(Random.pickNumberInRange(1, 45));
-    }
+  #setLottoNumbers() {
+    const lottoNumbers = Random.pickUniqueNumbersInRange(
+      LOTTO.MIN_NUMBER,
+      LOTTO.MAX_NUMBER,
+      LOTTO.LOTTO_LENGHT,
+    );
+    return lottoNumbers.sort((a, b) => a - b);
+  }
 
-    return Array.from(lottoNumbers).sort((a, b) => a - b);
+  #printPurchasedLotto() {
+    let message = `${this.lottos.length}${OUTPUT_MESSAGE.PRINT_PURCHASE_QUANTITY}`;
+    this.#lottos.forEach(lotto => {
+      message += `[${lotto}]\n`;
+    });
+    Console.print(
+      message.replaceAll(OUTPUT_MESSAGE.COMMA, `${OUTPUT_MESSAGE.COMMA} `),
+    );
   }
 
   getLottos() {
-    return this.lottos;
+    this.#printPurchasedLotto();
+    return this.#lottos;
   }
 }
 
