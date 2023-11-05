@@ -11,6 +11,7 @@ class App {
     await this.lottoController.startLotto();
     await this.lottoController.setWinningNumbers();
     this.lottoController.compareLottoNumbers();
+    this.lottoController.printTotalProfit();
   }
 }
 

@@ -5,6 +5,7 @@ import ERROR_MESSAGE from '../constants/erroeMessage.js';
 import LottoStore from '../models/LottoStore.js';
 import LottoComparer from '../models/LottoComparer.js';
 import LottoWinnerPrize from '../models/LottoWinnerPrize.js';
+import LottoProfitCalculator from '../models/LottoProfitCalculator.js';
 
 const { bonusNumber, winningNumber, purchasePrice } = PROPMT_MESSAGE;
 const { purchaseInvalidAmount } = ERROR_MESSAGE;
@@ -56,6 +57,16 @@ class LottoController {
       printOutput(purchaseInvalidAmount);
       return this.propmtPurchasedPrice();
     }
+  }
+
+  printTotalProfit() {
+    const { printOutput } = OutputView;
+    const lottoProfitCalculator = new LottoProfitCalculator(
+      this.lottoWinnerPrize,
+      this.purchasedPrice,
+    );
+    const profitRate = lottoProfitCalculator.rate();
+    printOutput(`총 수익률은 ${profitRate}%입니다.`);
   }
 
   validatePrice(price, lottoPrice) {

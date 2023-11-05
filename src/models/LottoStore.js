@@ -16,4 +16,5 @@ class LottoStore {
     return lottos;
   }
 }
+
 export default LottoStore;
