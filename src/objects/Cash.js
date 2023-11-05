@@ -1,4 +1,4 @@
-import { isPositiveInteger } from './utils.js';
+import { isPositiveInteger } from '../utils.js';
 
 class Cash {
   constructor(value) {
