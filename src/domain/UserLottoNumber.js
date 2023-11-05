@@ -5,10 +5,6 @@ class UserLottoNumber {
     this.lottoNumbers = { baseNumbers: [], bonusNumber: null };
   }
 
-  setUserLottoNumbers(input) {
-    return input.split(",").map((numStr) => parseInt(numStr.trim(), 10));
-  }
-
   async userLotto() {
     const baseInput = await readUserInput();
     this.lottoNumbers.baseNumbers = this.setUserLottoNumbers(baseInput);

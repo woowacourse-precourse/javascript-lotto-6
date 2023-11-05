@@ -33,6 +33,10 @@ class Lotto {
   ascendingOrder() {
     this.numbers.sort((a, b) => a - b);
   }
+
+  setUserLottoNumbers() {
+    this.numbers.split(",").map((numStr) => parseInt(numStr.trim(), 10));
+  }
 }
 
 export default Lotto;
