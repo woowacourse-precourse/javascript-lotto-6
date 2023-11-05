@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from '../Lotto.js';
+import Lotto from '../../Lotto.js';
 
-import CONSTANTS from '../constants/CONSTANTS.js';
+import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const {
   MISS_STATE,

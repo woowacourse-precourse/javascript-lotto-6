@@ -3,7 +3,7 @@ import ErrorCheck from './ErrorCheck.js';
 import Get from './Get.js';
 import Print from './Print.js';
 
-import CONSTANTS from '../constants/CONSTANTS.js';
+import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const {
   PURCHASE_PRICE_INPUT_MESSAGE,
@@ -42,6 +42,8 @@ class ConvertInputTo {
     (await ConvertInputTo.winningNumbersArray()).forEach(
       number => (board[number] = HIT_STATE)
     );
+
+    Print.lineBreak();
 
     board[await ConvertInputTo.bonusNumber(board)] = BONUS_STATE;
     return Object.freeze(board);

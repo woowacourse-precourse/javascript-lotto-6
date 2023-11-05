@@ -1,4 +1,4 @@
-import CONSTANTS from '../constants/CONSTANTS.js';
+import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const { BLANK, STRING_TYPE } = CONSTANTS;
 

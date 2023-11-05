@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import CONSTANTS from '../constants/CONSTANTS.js';
+import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const {
   PURCHASED_LOTTO_FORMAT,
@@ -39,7 +39,6 @@ class Print {
   }
 
   static lottoResult(resultArray) {
-    Print.lineBreak();
     Console.print(LOTTO_RESULT_HEADER);
     Console.print(`${DASH}${DASH}${DASH}`);
     Print.fifthPlaceResult(resultArray);
