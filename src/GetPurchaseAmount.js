@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { validatePurchaseAmount } from "./validateInput";
+import { validatePurchaseAmount } from "./ValidateInput.js";
 
 export const getPurchaseAmount = async () => {
   const INPUT = await Console.readLineAsync("");

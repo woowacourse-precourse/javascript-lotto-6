@@ -7,3 +7,5 @@ export const WINNING_STATISTICS_PRINT_MESSAGE = "당첨 통계";
 export const TYPE_ERROR = "[ERROR] 입력값의 형식이 잘못되었습니다.";
 export const UNIT_ERROR = "[ERROR] 입력값의 단위가 잘못되었습니다.";
 export const MIN_INPUT_ERROR = "[ERROR] 입력값은 0보다 커야 합니다.";
+// 숫자
+export const PURCHASE_AMOUNT_UNIT = 1000;
