@@ -1,9 +1,7 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-import { getPurchase } from './utils/getPurchase';
-import { getLottoCount } from './utils/getLottoCount';
-import { createLotto } from './utils/createLotto';
-
-import Lotto from './Lotto';
+import { getPurchase } from "./utils/getPurchase";
+import { getLottoCount } from "./utils/getLottoCount";
+import { createLotto } from "./utils/createLotto";
+import { getLottoNumber } from "./utils/getLottoNumber";
 
 class App {
   async play() {
@@ -11,6 +9,7 @@ class App {
     const lottoCount = getLottoCount(cash);
 
     createLotto(lottoCount);
+    const lotto = await getLottoNumber();
   }
 }
 
