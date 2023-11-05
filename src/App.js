@@ -1,5 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable import/extensions */
 import LottoPos from './Client/LottoPos.js';
 
 class App {

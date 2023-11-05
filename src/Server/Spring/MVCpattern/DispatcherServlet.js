@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable class-methods-use-this */
 /**
  * DispatcherServlet 역할
  * 1. DispatcherServlet은 클라이언트 요청을 처리할 Controller에 대한 검색을 HandlerMapping 인터페이스에게 요청합니다.

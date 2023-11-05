@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable class-methods-use-this */
 /**
  * View객체
  * View 객체에게 클라이언트에게 전달할 응답 데이터 생성을 요청합니다.

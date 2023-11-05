@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import { Random } from '@woowacourse/mission-utils';
 import CONSTANTS from '../../../../Util/Constants.js';
 

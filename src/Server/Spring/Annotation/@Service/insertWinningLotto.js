@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import Lotto from '../../../../Lotto.js';
 import insertSqlWinningLotto from '../@Repository/insertSqlWinningLotto.js';
 

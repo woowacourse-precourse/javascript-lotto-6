@@ -1,6 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable no-constructor-return */
-/* eslint-disable class-methods-use-this */
 import createUser from '../@Service/createUser.js';
 import generateLottoNumber from '../@Service/generateLottoNumber.js';
 import ModelAndView from '../../Objects/ModelAndView.js';

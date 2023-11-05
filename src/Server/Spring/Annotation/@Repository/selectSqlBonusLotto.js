@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import database from '../../../DB/database.js';
 import CONSTANTS from '../../../../Util/Constants.js';
 

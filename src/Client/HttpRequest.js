@@ -1,7 +1,7 @@
 const HttpRequest = (restfulAPI, inputData) => {
   return {
     url: restfulAPI,
-    type: 'POST',
+    type: 'POST1',
     body: inputData,
   };
 };

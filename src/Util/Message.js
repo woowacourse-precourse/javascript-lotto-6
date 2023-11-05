@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import CONSTANTS from './Constants.js';
 
 const INPUT_MESSAGE = Object.freeze({

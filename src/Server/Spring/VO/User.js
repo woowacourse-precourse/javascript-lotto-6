@@ -1,5 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable import/extensions */
 import { ERROR_MESSAGE } from '../../../Util/Message.js';
 import CONSTANTS from '../../../Util/Constants.js';
 import Lotto from '../../../Lotto.js';

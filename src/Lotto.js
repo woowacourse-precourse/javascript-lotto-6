@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable class-methods-use-this */
 import CONSTANTS from './Util/Constants.js';
 import { ERROR_MESSAGE } from './Util/Message.js';
 

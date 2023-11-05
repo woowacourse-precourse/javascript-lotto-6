@@ -1,6 +1,4 @@
 /* eslint-disable no-return-await */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable import/extensions */
 // 미션 특성상 서버를 열고 클라이언트와 통신 할 수 없으므로 서버 객체를 생성하는 방법으로 대체
 import DispatcherServlet from '../Server/Spring/MVCpattern/DispatcherServlet.js';
 import HttpRequest from './HttpRequest.js';

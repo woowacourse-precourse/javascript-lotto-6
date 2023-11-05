@@ -1,6 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable no-constructor-return */
-/* eslint-disable class-methods-use-this */
 import ModelAndView from '../../Objects/ModelAndView.js';
 import insertWinningLotto from '../@Service/insertWinningLotto.js';
 

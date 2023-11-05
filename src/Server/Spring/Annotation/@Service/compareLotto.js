@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import selectSqlBonusLotto from '../@Repository/selectSqlBonusLotto.js';
 import selectSqlWinningLotto from '../@Repository/selectSqlWinningLotto.js';
 import CONSTANTS from '../../../../Util/Constants.js';

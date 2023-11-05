@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import Bonus from '../../VO/Bonus.js';
 import insertSqlBonusLotto from '../@Repository/insertSqlBonusLotto.js';
 import selectSqlWinningLotto from '../@Repository/selectSqlWinningLotto.js';

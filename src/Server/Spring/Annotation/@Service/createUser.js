@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import User from '../../VO/User.js';
 
 const createUser = (purchaseAmount, generateLottoNumber) => {
