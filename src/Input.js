@@ -71,4 +71,8 @@ export class Input {
   convertToNumber(input) {
     return Number(input);
   }
+
+  convertToArray(input) {
+    return input.split(",").map(Number);
+  }
 }
