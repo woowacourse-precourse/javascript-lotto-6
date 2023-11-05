@@ -1,4 +1,4 @@
-import LIMITS from '../constants/limits.js';
+import { LIMITS } from '../constants/fixedValue.js';
 import { pickUniqueNumbersInRange } from '../utils/missionUtils.js';
 import { ascendingSortNumbers } from '../utils/arrayUtils.js';
 
