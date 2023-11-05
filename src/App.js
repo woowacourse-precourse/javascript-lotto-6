@@ -64,17 +64,39 @@ class App {
     });
   }
 
-  async play() {
-    const inputMoney = await this.askMoney();
-    this.moneyTypeCheck(inputMoney);
-
-    MissionUtils.Console.print(
-      this.howManyLotto(inputMoney) + PRINT.RESULT_BUY
+  async askBonus(winNumber) {
+    const bonus = await MissionUtils.Console.readLineAsync(
+      PRINT.ASK_BONUS_NUMBER
     );
-    this.printAllLottos();
+    this.checkBonusError(winNumber, bonus);
+    return bonus;
+  }
+
+  checkBonusError(winNumber, bonus) {
+    if (bonus === "") {
+      throw new Error(ERROR.BLANK);
+    }
+    if (bonus < 1 || bonus > 45) {
+      throw new Error(ERROR.NOT_RANGE);
+    }
+    winNumber.forEach((win) => {
+      if (win == bonus) {
+        throw new Error(ERROR.DUPLICATION);
+      }
+    });
+  }
+
+  async play() {
+    // const inputMoney = await this.askMoney();
+    // this.moneyTypeCheck(inputMoney);
+
+    // MissionUtils.Console.print(
+    //   this.howManyLotto(inputMoney) + PRINT.RESULT_BUY
+    // );
+    // this.printAllLottos();
 
     const winNumber = await this.askWinNumber();
-    MissionUtils.Console.print(winNumber);
+    const winBonus = await this.askBonus(winNumber);
   }
 }
 
