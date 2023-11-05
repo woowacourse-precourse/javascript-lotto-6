@@ -1,5 +1,8 @@
 const INPUT_MESSAGES = Object.freeze({
   inputAmount: '구입금액을 입력해 주세요.\n',
+  winningNumbers: '당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
+  winningStatistics: '당첨 통계\n ---\n',
 });
 
 const OUTPUT_MESSAGES = Object.freeze({
