@@ -1,4 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 class GuessLotto {
   #guessNumbers;
@@ -49,11 +50,18 @@ class GuessLotto {
   }
 
   async inputLottoNumber() {
-    const personalLottoNumber =
-      await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    try {
+      const personalLottoNumber =
+        await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
 
-    this.#guessNumbers = personalLottoNumber.split(',');
-    return this.#guessNumbers;
+      this.#guessNumbers = personalLottoNumber.split(',');
+      const lotto = new Lotto(this.#guessNumbers);
+
+      return this.#guessNumbers;
+    } catch (error) {
+      Console.print(error.message);
+      return this.inputLottoNumber();
+    }
   }
 
   async inputBonusNumber() {
