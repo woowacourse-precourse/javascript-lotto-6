@@ -7,9 +7,9 @@ class User {
     this.#lottos = [];
   }
 
-  purchaceLottos(lottoSeller) {
+  getLottos(lottoSeller) {
     this.#lottos = lottoSeller.sellLotto(this.#lottoPrice);
-    return this.#lottos;
+    return [...this.#lottos];
   }
 
   checkResult(combinationMachine) {

@@ -20,7 +20,7 @@ class LottoGame {
 
   purchace(lottoPrice) {
     this.#user = new User(lottoPrice);
-    const lottos = this.#user.purchaceLottos(this.#lottoSeller);
+    const lottos = this.#user.getLottos(this.#lottoSeller);
 
     return lottos;
   }
