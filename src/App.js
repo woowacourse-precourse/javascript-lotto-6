@@ -37,8 +37,13 @@ const autoLottoNumber = function generateAutoLottoNumber(amount) {
     while (lottoNumberSet.size < 6) {
       lottoNumberSet.add(Random.pickNumberInRange(1, 45));
     }
-    lottoNumbers.push([...lottoNumberSet]);
+    const sortedNumber = sortLottoNumber([...lottoNumberSet]);
+    lottoNumbers.push(sortedNumber);
   }
   console.log(lottoNumbers);
   return lottoNumbers;
+};
+
+const sortLottoNumber = function sorting(number) {
+  return number.sort((a, b) => a - b);
 };
