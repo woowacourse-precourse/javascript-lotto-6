@@ -67,7 +67,12 @@ class App {
   }
 
   requestResult() {
-    this.output.printStats();
+    this.lotto = new Lotto(this.#winningNumbers);
+    const STATS = this.lotto.calculateWinningStats(this.#lottos, this.#bonusNumber);
+    
+    this.output.printStats(STATS)
+
+    this.requestRate(STATS, this.#money)
   }
 }
 

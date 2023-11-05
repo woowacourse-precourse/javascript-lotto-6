@@ -29,9 +29,13 @@ class Output {
     this.print(bonusNumber)
   }
 
-  printStats() {
+  printStats(STATS) {
     this.print(GUIDE_MESSAGE.winningStats)
     this.print(GUIDE_MESSAGE.divider)
+
+    Object.keys(WINNING_RESULT_DETAILS).map((name, idx) => {
+      this.print(`${WINNING_RESULT_DETAILS[name]}${STATS[4 - idx]}개`)
+    })
   }
 
   printRate(profit) {
