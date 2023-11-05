@@ -1,6 +1,6 @@
-import ERROR_MESSAGES from '../constants/ErrorMessages';
-import LOTTO_SYSTEM from '../constants/LottoSystem';
-import PURCHASE_CONDITIONS from '../constants/PurchaseConditions';
+import ERROR_MESSAGES from '../constants/ErrorMessages.js';
+import LOTTO_SYSTEM from '../constants/LottoSystem.js';
+import PURCHASE_CONDITIONS from '../constants/PurchaseConditions.js';
 
 const validateCondition = {
 	isDigit(value) {
