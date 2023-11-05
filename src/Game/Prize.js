@@ -10,6 +10,11 @@ export default class Prize {
     this.Check = new Check();
   }
 
+  async init() {
+    await this.lotteryLine();
+    await this.bonusNum();
+  }
+
   async lotteryLine(test = null) {
     while (true) {
       try {

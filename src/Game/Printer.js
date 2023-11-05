@@ -15,7 +15,7 @@ export default class Printer {
   }
 
   getAmount(money) {
-    const amount = money / this.#unit.LOTTO_PRICE;
+    const amount = parseInt(money, 10) / this.#unit.LOTTO_PRICE;
     IO.print(`${amount}개를 구매했습니다.`);
     return amount;
   }
@@ -38,6 +38,9 @@ export default class Printer {
       IO.print(this.#ticket[index].show());
       index += 1;
     }
+  }
+
+  getTicket() {
     return this.#ticket;
   }
 }
