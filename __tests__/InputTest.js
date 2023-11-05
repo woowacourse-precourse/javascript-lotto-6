@@ -20,6 +20,10 @@ describe('유저 입력 테스트', () => {
         expect(() => UserInput.checkPurchaseAmountValidation(input)).toThrow('[ERROR]');
       },
     );
+
+    test.each(['1000', '10000'])('값을 올바르게 입력할 경우 예외를 발생시키지 않는다.', (input) => {
+      expect(() => UserInput.checkPurchaseAmountValidation(input)).not.toThrow('[ERROR]');
+    });
   });
 
   describe('당첨 번호 입력 테스트', () => {
@@ -55,7 +59,7 @@ describe('유저 입력 테스트', () => {
       },
     );
 
-    test('값을 올바르게 입력할 경우 예외를 발생하지 않는다.', () => {
+    test('값을 올바르게 입력할 경우 예외를 발생시키지 않는다.', () => {
       expect(() => UserInput.checkWinningNumbersValidation('1,2,3,4,5,6')).not.toThrow('[ERROR]');
     });
   });
