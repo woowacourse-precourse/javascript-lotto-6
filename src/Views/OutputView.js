@@ -1,8 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
-  printError(error) {
-    Console.print(error);
+  printMessage(message) {
+    Console.print(message);
   },
 };
 

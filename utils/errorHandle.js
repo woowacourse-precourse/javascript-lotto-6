@@ -4,7 +4,7 @@ const errorHandle = (error) => {
   try {
     throw new Error(error);
   } catch {
-    OutputView.printError(error);
+    OutputView.printMessage(error);
     return false;
   }
 };
