@@ -28,6 +28,7 @@ class LottoGame {
 
     const winningStr = await IO.receiveUserInput('\n당첨 번호를 입력해 주세요.\n');
     const winningArr = winningStr.split(',');
+    Validation.isValidLen(winningArr);
   }
 
   calculateLottomNum(amount) {
