@@ -9,6 +9,7 @@ const Input = {
   },
   async getLottoNumber() {
     const numbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    Validate.checkDuplicateNumber(numbers.split(','));
     return numbers.split(',').map((number) => Number(number));
   },
   async getLottoBonusNumber() {
