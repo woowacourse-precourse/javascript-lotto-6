@@ -1,3 +1,4 @@
+import MESSAGE from '../constants/message.js';
 import VALUE from '../constants/value.js';
 
 const statsModel = {
@@ -41,6 +42,17 @@ const statsModel = {
     });
 
     return matchCounts;
+  },
+
+  // ['3개 일치 (5,000원) - ', ...] + [1, 0, 0, 0, 0] ---> ['3개 일치 (5,000원) - 1개', ...]
+  getStats(matchCounts) {
+    const stats = VALUE.stats.map((string, index) => {
+      const updatedString = `${string}${matchCounts[index]}${MESSAGE.unit.number}`;
+
+      return updatedString;
+    });
+
+    return stats;
   },
 };
 
