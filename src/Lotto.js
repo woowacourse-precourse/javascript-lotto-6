@@ -1,4 +1,4 @@
-import { ERROR_LOTTO_RANGE, ERROR_LOTTO_SIX_NUMBERS } from './Constant';
+import { ERROR_LOTTO_RANGE, ERROR_LOTTO_REPEAT, ERROR_LOTTO_SIX_NUMBERS } from './Constant';
 
 class Lotto {
   #numbers;
@@ -11,6 +11,11 @@ class Lotto {
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error(ERROR_LOTTO_SIX_NUMBERS);
+    }
+
+    const repeatNumbers = [...new Set(numbers)];
+    if (repeatNumbers.length < 6) {
+      throw new Error(ERROR_LOTTO_REPEAT);
     }
   }
 
