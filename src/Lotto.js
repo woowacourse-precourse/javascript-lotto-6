@@ -20,7 +20,7 @@ class Lotto {
     this.#numbers = numbers.split(',').map((number) => Number(number));
   }
 
-  get getWinningNumber() {
+  get winningNumbers() {
     return this.#numbers;
   }
 }

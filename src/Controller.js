@@ -10,34 +10,32 @@ class Controller {
 
   async progress() {
     try {
-      await this.#generateLottoTicketList();
+      await this.#getLottoTicketList();
     } catch (error) {
       OutputView.printMessage(error.message);
-      await this.#generateLottoTicketList();
+      await this.#getLottoTicketList();
     }
     this.#displayLottoTicket();
     try {
-      await this.#generateLottoMatching();
+      await this.#getWinningNumbers();
     } catch (error) {
       OutputView.printMessage(error.message);
-      await this.#generateLottoMatching();
+      await this.#getWinningNumbers();
     }
   }
 
-  async #generateLottoTicketList() {
+  async #getLottoTicketList() {
     const inputLottoPurchaseAmount = await InputView.readLottoPurchaseAmount();
-    this.#lottoTicketList = new LottoTicket(
-      inputLottoPurchaseAmount,
-    ).getLottoList;
+    this.#lottoTicketList = new LottoTicket(inputLottoPurchaseAmount).lottoList;
   }
 
   #displayLottoTicket() {
     OutputView.printLottoTicket(this.#lottoTicketList);
   }
 
-  async #generateLottoMatching() {
+  async #getWinningNumbers() {
     const inputLottoWinningNumbers = await InputView.readLottoWinningNumbers();
-    this.#winningNumbers = new Lotto(inputLottoWinningNumbers).getWinningNumber;
+    this.#winningNumbers = new Lotto(inputLottoWinningNumbers).winningNumbers;
   }
 }
 

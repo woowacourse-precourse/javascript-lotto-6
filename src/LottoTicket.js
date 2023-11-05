@@ -36,7 +36,7 @@ class LottoTicket {
     this.#lottoList = issuedLottoList;
   }
 
-  get getLottoList() {
+  get lottoList() {
     return this.#lottoList;
   }
 }
