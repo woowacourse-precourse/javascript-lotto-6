@@ -19,6 +19,8 @@ export const MESSAGE = Object.freeze({
   DUPLICATE_NUMBER: `로또 번호는 ${OPTION.BALL_COUNT}개입니다.`,
   INVALID_MONEY: '올바른 구입금액을 입력해 주세요.',
   INPUT_MONEY: '구입금액을 입력해 주세요.\n',
+  INPUT_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  INPUT_BONUS: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export default { MESSAGE, OPTION };

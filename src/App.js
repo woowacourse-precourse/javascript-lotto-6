@@ -14,13 +14,23 @@ class App {
 
   async inputMoney() {
     const answer = await InputView.readMoney();
-    this.buyLotto(answer);
+    await this.buyLotto(answer);
   }
 
-  buyLotto(money) {
+  async buyLotto(money) {
     const lottoes = Lotto.buyAutomaticLotto(money);
+    this.lottoCalculator.setLottoes(lottoes);
+
     const numbers = lottoes.map((lotto) => lotto.getNumbers());
     OutputView.outputBuyResult(numbers);
+
+    await this.inputNumbers();
+  }
+
+  async inputNumbers() {
+    const numbers = await InputView.readNumbers();
+    const bonus = await InputView.readBonus();
+    this.lottoCalculator.setWinningNumber(numbers, bonus);
   }
 }
 
