@@ -5,11 +5,11 @@ import PRICE from "./constant/PRICE.js";
 import LOTTO from "./constant/LOTTO.js";
 
 class LottoController {
-  #ticketAmount;
+  #lottoArray;
 
-  constructor(totalPrice) {
-    this.#validateTotalPrice(totalPrice);
-    this.#ticketAmount = this.#calculateTicketAmount(totalPrice);
+  constructor(totalPriceStr) {
+    this.#validateTotalPrice(totalPriceStr);
+    this.#lottoArray = this.#createLottoAsTicketAmount(+totalPriceStr);
   }
 
   #validateTotalPrice(string) {
@@ -22,8 +22,17 @@ class LottoController {
     }
   }
 
-  #calculateTicketAmount(string) {
-    return +string / PRICE.TICKET;
+  #createLottoAsTicketAmount(totalPrice) {
+    const ticketAmount = this.#calculateTicketAmount(totalPrice);
+
+    return Array.from(
+      { length: ticketAmount },
+      () => new Lotto(this.#createRandomLottoNumber())
+    );
+  }
+
+  #calculateTicketAmount(number) {
+    return number / PRICE.TICKET;
   }
 
   #createRandomLottoNumber() {
