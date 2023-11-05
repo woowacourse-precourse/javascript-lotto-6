@@ -1,4 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import Price from './Price.js';
 import { CONSOLE_MESSAGE, ERROR_MESSAGE } from './constants.js';
 
@@ -18,10 +18,22 @@ class App {
     return price;
   }
 
+  generateLottos(lottoAmount) {
+    let generatedLottos = [];
+
+    for (let i = 0; i < lottoAmount; i++) {
+      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      numbers.sort((a, b) => a - b);
+      generatedLottos.push(numbers);
+    }
+
+    return generatedLottos;
+  }
+
   async play() {
     const userPriceInput = await this.getUserPrice();
     const lottoAmount = Price.calculateLottoAmount(userPriceInput);
-    console.log(lottoAmount);
+    const lottos = this.generateLottos(lottoAmount);
   }
 }
 
