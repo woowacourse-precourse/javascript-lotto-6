@@ -23,7 +23,7 @@ export class Winning {
 
   #winnningEachNumberValidater(number) {
     if (/^[+]?[1-9]\d*$/.test(number)) {
-      return true;
+      return Number(number);
     } 
     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
   }
@@ -49,6 +49,11 @@ export class Winning {
   }
 
   winningNumbers() {
-    return this.#numbers
+    return this.#convertToNumberArray(this.#numbers)
+  }
+
+  #convertToNumberArray(stringArray) {
+    const numberArray = stringArray.map((str) => parseInt(str, 10));
+    return numberArray;
   }
 }

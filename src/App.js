@@ -13,6 +13,10 @@ class App {
     MissionUtils.Console.print("");
     const bonusNumber = await inputBonusNumber(winningNumbers);
     MissionUtils.Console.print("");
+    lottosReader(lottoNumbers, winningNumbers, bonusNumber, lottoCounts);
+    console.log(lottoNumbers);
+    console.log(winningNumbers);
+    console.log(winningResults);
     //lottoResultPrinter([5,0], 2)
   }
 }
@@ -32,6 +36,8 @@ const winningDetails = {
 }
 
 var winningResults = [];
+
+var lottoNumbers = [];
 
 async function inputMoney() {
   let comment = PURCASE_COMMENT;
@@ -84,6 +90,7 @@ function randomNumberCreater() {
 function lottoCreater(numbers) {
   const lotto = new Lotto(numbers);
   const sortLotto = numberSort(lotto);
+  lottoNumbers.push(sortLotto);
   return sortLotto;
 }
 
@@ -94,7 +101,7 @@ export function numberSort(numbers) {
 
 function lottosReader(lotto, winning, bonus, count) {
   for (let i = 0; i < count; i++) {
-    const result = lottoReader(lotto, winning, bonus)
+    const result = lottoReader(lotto[i], winning, bonus)
     winningResults.push(result);
   }
 }
@@ -137,7 +144,7 @@ function lottoResultCounter(result) {
       winningDetails.winning[i-3] += 1;
     }
   }
-  if ( result[0] === 5) {
+  if (result[0] === 5) {
     lottoResultBonusCounter(result);
   }
 }
@@ -147,45 +154,6 @@ function lottoResultBonusCounter(result) {
     winningDetails.winning[2] += 1;
   }
   winningDetails.winning[3] += 1;
-}
-
-export function lottoResultPrinter(results, count) {
-  const indexNumber = findIndexBySameValue(results)
-  const prize = winningDetails.prize[indexNumber];
-  const currencyPrize = formatCurrency(prize);
-  if (indexNumber !== 3) {
-    MissionUtils.Console.print(`${results[0]}개 일치 (${currencyPrize}원) - ${count}개`);
-  }
-  if (indexNumber === 3) {
-    MissionUtils.Console.print(`${results[0]}개 일치, 보너스 볼 일치 (${currencyPrize}원) - ${count}개`);
-  }
-}
-
-function findIndexBySameValue(valueToFind) {
-  const sameValues = winningDetails.same;
-  if (valueToFind[0] === 5) {
-    const index = findIndexByBonus(valueToFind);
-    return index;
-  }
-  for (let i = 0; i < sameValues.length; i++) {
-    if (sameValues[i] === valueToFind[0]) {
-      winningDetails.winning[i] += 1;
-      return i;
-    }
-  }
-}
-
-function findIndexByBonus(valueToFind) {
-  const sameValues = winningDetails.same;
-  if (sameValues[2][1] === valueToFind[1]) {
-    //console.log(valueToFind);
-    winningDetails.winning[2] += 1;
-    return 2;
-  }
-  if (sameValues[3][1] === valueToFind[1]) {
-    winningDetails.winning[3] += 1;
-    return 3;
-  }
 }
 
 function formatCurrency(number) {
