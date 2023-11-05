@@ -1,4 +1,4 @@
-import { lottoReader, lottoResultPrinter } from "../src/App.js" 
+import { lottoReader, lottoResultPrinter, totalRate } from "../src/App.js" 
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const getLogSpy = () => {

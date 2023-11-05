@@ -139,3 +139,14 @@ function formatCurrency(number) {
   minimumFractionDigits: 0,  // 소수점 이하 자릿수 설정
   }).format(number).replace(/₩/g, '');
 }
+
+export function totalRate(money, prize) {
+  const roundedRate = calculateRate(money, prize);
+  MissionUtils.Console.print(`총 수익률은 ${roundedRate}%입니다.`);
+}
+
+function calculateRate(money, prize) {
+  const rate = (prize / money) * 100;
+  const roundedRate = rate.toFixed(2);
+  return Number(roundedRate);
+}
