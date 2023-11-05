@@ -4,6 +4,7 @@ import {
   validBonusNumber,
 } from "../../src/Valid";
 
+// eslint-disable-next-line
 describe("Validate Test", () => {
   const MONEY_ERROR_CASES = [
     ["asaa"],
