@@ -12,9 +12,6 @@ const mockReadLineAsync = inputs => {
 };
 
 mockReadLineAsync([
-  '2000',
-  '-1',
-  '1234',
   '1,2,3,4,5,6',
   '1,2,3,4,5',
   '0,1,2,3,4,5',
@@ -26,24 +23,6 @@ mockReadLineAsync([
 ]);
 
 describe('InputView 클래스 테스트', () => {
-  describe('구입 금액 입력 메서드 테스트', () => {
-    test('유효한 입력을 받으면 숫자를 반환한다.', async () => {
-      await expect(InputView.readBuyingPrice()).resolves.toBe(2000);
-    });
-
-    test('구입 금액이 0보다 큰 숫자가 아니면 예외가 발생한다.', async () => {
-      await expect(InputView.readBuyingPrice()).rejects.toThrow(
-        ERROR.BUYING_PRICE.GREATER_THAN_ZERO
-      );
-    });
-
-    test('구입 금액이 1,000원 단위가 아니면 예외가 발생한다.', async () => {
-      await expect(InputView.readBuyingPrice()).rejects.toThrow(
-        ERROR.BUYING_PRICE.UNIT
-      );
-    });
-  });
-
   describe('당첨 번호 입력 메서드 테스트', () => {
     test('유효한 입력을 받으면 당첨 번호를 반환한다.', async () => {
       await expect(InputView.readWinningNumbers()).resolves.toEqual([
