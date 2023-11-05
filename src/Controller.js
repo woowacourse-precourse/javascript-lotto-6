@@ -25,6 +25,12 @@ class Controller {
       OutputView.printMessage(error.message);
       await this.#getWinningNumbers();
     }
+    try {
+      await this.#getBonusNumber();
+    } catch (error) {
+      OutputView.printMessage(error.message);
+      await this.#getBonusNumber();
+    }
   }
 
   async #getLottoTicketList() {
@@ -43,6 +49,10 @@ class Controller {
 
   async #getBonusNumber() {
     const inputBonusNumber = await InputView.readLottoBonusNumber();
+    this.#bonusNumber = new Bonus(
+      this.#winningNumbers,
+      inputBonusNumber,
+    ).bonusNumber;
   }
 }
 
