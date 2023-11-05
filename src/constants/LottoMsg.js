@@ -18,10 +18,14 @@ export const OUTPUT_MSG = {
 };
 
 export const ERROR_MSG = {
-  MONEY_NOT_BLANK: '[ERROR] 공백이 포함되었습니다. 다시 입력해주세요',
+  MONEY_NUMBER_ERROR: '[ERROR] 구입 금액은 숫자(공백제외)로 입력해주세요.',
   MONEY_SHOULD_NUMBER: '[ERROR] 올바른 숫자를 입력해주세요.',
   MONEY_IS_THOUSAND: '[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.',
+  MONEY_NEGATIVE_ERROR: '[ERROR] 구입 금액은 음수로 입력할 수 없습니다.',
   LOTTO_SHOULD_SIX: '[ERROR] 로또 번호는 6자리를 입력해주세요.',
   LOTTO_DUPLICATE_ERROR: '[ERROR] 로또 번호가 중복되었습니다.',
+  LOTTO_STRING_ERROR: '[ERROR] 로또 번호는 숫자로 입력해주세요',
+  LOTTO_DECIMAL_ERROR: '[ERROR] 로또 번호가 소수로 입력되었습니다.',
+  LOTTO_RANGE_ERROR: '[ERROR] 로또 번호는 1 부터 45의 값으로 입력해주세요.',
   BONUS_NUMBER_NOT_NUMBER: '[ERROR] 보너스 번호는 숫자로 입력해주세요.',
 };

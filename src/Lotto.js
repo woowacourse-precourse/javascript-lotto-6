@@ -9,7 +9,7 @@ class Lotto {
 
   static async createLottoInstance(numbers) {
     const inputValidate = new InputValidate();
-    await inputValidate.lengthSix(numbers);
+    await inputValidate.lottoNumber(numbers);
     return new Lotto(numbers);
   }
 
