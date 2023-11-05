@@ -27,6 +27,10 @@ class GameUtils {
   static isNotFromOneToFourtyFive(number) {
     return number < LOTTO_NUMBER.FIRST || number > LOTTO_NUMBER.LAST;
   }
+
+  static checkDuplicateInList(list, element) {
+    return list.indexOf(element) !== list.lastIndexOf(element);
+  }
 }
 
 export default GameUtils;

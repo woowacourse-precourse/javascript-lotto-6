@@ -1,6 +1,7 @@
+import GameUtils from './utils/GameUtils.js';
 import ERROR_MESSAGE from './constants/ErrorMessage.js';
 import InvalidNumberError from './error/InvalidNumberError.js';
-import GameUtils from './utils/GameUtils.js';
+import DuplicateNumberError from './error/DuplicateNumberError.js';
 
 class Lotto {
   #numbers;
@@ -13,6 +14,7 @@ class Lotto {
   static #validate(numbers) {
     Lotto.#validateNumberLength(numbers);
     Lotto.#validateIsInLottoNumberRange(numbers);
+    Lotto.#validateDuplicateNumber(numbers);
   }
 
   static #validateNumberLength(numbers) {
@@ -24,6 +26,14 @@ class Lotto {
   static #validateIsInLottoNumberRange(numbers) {
     if (numbers.some((number) => GameUtils.isNotFromOneToFourtyFive(number))) {
       throw new InvalidNumberError(ERROR_MESSAGE.LOTTO_NUMBER_RANGE_ERROR);
+    }
+  }
+
+  static #validateDuplicateNumber(numbers) {
+    if (
+      numbers.some((number) => GameUtils.checkDuplicateInList(numbers, number))
+    ) {
+      throw new DuplicateNumberError(ERROR_MESSAGE.DUPLICATE_NUMBER_ERROR);
     }
   }
 
