@@ -14,6 +14,12 @@ class View {
     return true;
   }
 
+  announceLottery(lotteryResults) {
+    MESSAGES.COMMENT_WINNING_STATS.forEach((message, index) => {
+      this.#printConsole(`${message}${lotteryResults[index]}개`);
+    });
+  }
+
   /* ERROR */
   errorNoInput() {
     this.#printConsole(MESSAGES.ERROR_NO_INPUT);

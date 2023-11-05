@@ -1,7 +1,10 @@
-import { Console, Random } from "@woowacourse/mission-utils";
+import { Random } from "@woowacourse/mission-utils";
 
 const Utils = {
-  genRandomLottoNumber: () => Random.pickUniqueNumbersInRange(1, 45, 6),
+  genRandomLottoNumber: () =>
+    Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+      (numb1, numb2) => numb1 - numb2
+    ),
   splitInput: (input) => input.split(",").filter((element) => element !== ""),
   rankLotto: (winningMatch, bonusMatch) => {
     const rank =

@@ -67,6 +67,11 @@ export default class Domain {
     });
   }
 
+  announceLottery() {
+    this.setLotteryResult();
+    return this.#view.announceLottery(this.#lotteryResults);
+  }
+
   get getWinnings() {
     return this.#winnings;
   }

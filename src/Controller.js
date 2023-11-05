@@ -45,6 +45,10 @@ class Controller {
       if (result) isDone = true;
     }
   }
+
+  announceLottery() {
+    return this.#domain.announceLottery();
+  }
 }
 
 export default Controller;
