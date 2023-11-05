@@ -70,4 +70,12 @@ describe('💙 InputValidator 클래스를 테스트합니다. ฅ^._.^ฅ', () 
       InputValidator.validateWinningNumbers(invalidNumberList),
     ).toThrow(ERROR_MESSAGE.OUT_OF_RANGE);
   });
+
+  test('[validateWinningNumbers] 6개의 요소로 이루어져 있지 않으면 에러가 발생한다.', () => {
+    const invalidNumberList = [1, 2, 3, 4, 5, 6, 7, 8];
+
+    expect(() =>
+      InputValidator.validateWinningNumbers(invalidNumberList),
+    ).toThrow(ERROR_MESSAGE.INVALID_COUNT);
+  });
 });
