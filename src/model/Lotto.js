@@ -26,7 +26,7 @@ class Lotto {
 
   #validate(numbers) {
     numbers.forEach((element) => {
-      validateNumber(element.toString());
+      validateNumber(element);
       validateRange(element);
     });
     validateLength(numbers);

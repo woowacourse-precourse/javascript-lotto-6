@@ -1,7 +1,7 @@
 import { ERROR_MESSAGE } from '../constant/message.js';
 
 export const validateNumber = (number) => {
-  const splitNumber = number.split('');
+  const splitNumber = number.toString().split('');
 
   splitNumber.forEach((number) => {
     if (isNaN(number)) {
