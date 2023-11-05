@@ -13,6 +13,7 @@ export const OUTPUT_MESSAGES = Object.freeze({
 export const ERROR_MESSAGES = Object.freeze({
   ONLY_NUMBERS: '[ERROR] 숫자만 입력 가능합니다.',
   ONLY_SIX_NUMBERS: '[ERROR] 로또 번호는 6개여야 합니다.',
+  NUMBER_RANGE: '[ERROR] 1 ~ 45 사이의 숫자만 가능합니다.',
   INVALID_AMOUNT: '[ERROR] 구입 금액이 올바르지 않습니다.',
   DUPLICATE_NUMBER: '[ERROR] 중복 번호가 포함되어 있습니다.',
   ONE_BONUS_NUMBER_ALLOWED: '[ERROR] 보너스 번호는 하나만 입력 가능합니다.',
