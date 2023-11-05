@@ -4,4 +4,5 @@ export const GAME_RULE = Object.freeze({
   LOTTO_NUMBER_COUNT: 6,
   MIN_AMOUNT_UNIT: 1_000,
   MAX_AMOUNT_UNIT: 100_000,
+  SEPARATOR: ',',
 });
