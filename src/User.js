@@ -16,8 +16,7 @@ class User {
   }
 
   #generateRandomNumbers(lottoQuantity) {
-    return Array.from(
-      { length: lottoQuantity },
+    return Array.from({ length: lottoQuantity }, () =>
       Random.pickUniqueNumbersInRange(
         CONSTANTS.minimumNumber,
         CONSTANTS.maximumNumber,
