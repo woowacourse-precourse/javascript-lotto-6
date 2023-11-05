@@ -23,12 +23,11 @@ class App {
     while (!validPurchaseAmount) {
       try {
         purchaseAmountInput = await Console.readLineAsync(CONSTANTS.LOTTO_PURCHASE_MESSAGE);
-    
         if (isNaN(Number(purchaseAmountInput))) {
           throw new Error(CONSTANTS.ERROR_INVALID_NUMBER);
         }
     
-        if (Number(purchaseAmountInput) % 1000 !== 0) {
+        if (Number(purchaseAmountInput) % CONSTANTS.LOTTO_TICKET_PRICE !== 0) {
           throw new Error(CONSTANTS.ERROR_NOT_IN_1000_UNITS);
         }
     
@@ -38,7 +37,7 @@ class App {
       }
     }
     
-    const lottoCnt = Number(purchaseAmountInput)/1000;
+    const lottoCnt = Number(purchaseAmountInput)/CONSTANTS.LOTTO_TICKET_PRICE;
 
     Console.print(`${lottoCnt}개를 구매했습니다.`);
     for(let i = 0; i<lottoCnt; i++){
