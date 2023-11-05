@@ -17,27 +17,27 @@ class LottoController {
   constructor() {}
 
   async playGame() {
-    await this.inputPurchasePrice();
+    await this.#inputPurchasePrice();
   }
 
-  async inputPurchasePrice() {
+  async #inputPurchasePrice() {
     const price = await InputView.readPurchasePrice();
-    await this.purchaseLottos(price);
+    await this.#purchaseLottos(price);
   }
 
-  async inputWinningNumber() {
+  async #inputWinningNumber() {
     const winningNumber = await InputView.readWinningNumber();
     this.#winningNumber = new WinningNumber(winningNumber);
-    await this.inputBonusNumber();
+    await this.#inputBonusNumber();
   }
 
-  async inputBonusNumber() {
+  async #inputBonusNumber() {
     const bonusNumber = await InputView.readBonusNumber(
       this.#winningNumber.getWinningNumber()
     );
     this.#bonusNumber = new BonusNumber(bonusNumber);
     this.#winningStatic = new Rank(this.#lottos.getLottos());
-    this.displayResult(
+    this.#displayResult(
       this.#winningStatic.getRankStatistic(
         this.#winningNumber.getWinningNumber(),
         this.#bonusNumber.getBonusNumber()
@@ -45,15 +45,15 @@ class LottoController {
     );
   }
 
-  async purchaseLottos(input) {
+  async #purchaseLottos(input) {
     this.#count = new Money(input);
     this.#lottos = new Lottos(this.#count.getAmount());
     OutputView.printPurchaseAmount(this.#count.getAmount());
     OutputView.printLottos(this.#lottos.getLottos());
-    await this.inputWinningNumber();
+    await this.#inputWinningNumber();
   }
 
-  displayResult(winningStatic) {
+  #displayResult(winningStatic) {
     OutputView.printResultStatic(winningStatic);
     this.#revenueRate = this.#count.getRevenueRate(winningStatic);
     OutputView.printRevenueResult(this.#revenueRate);
