@@ -1,31 +1,35 @@
-import { ERROR, pattern } from '../constants.js';
+import { ERROR, pattern, NUMBER } from '../constants.js';
 
 const validate = {
   money(input) {
     if (!input) throw new Error(ERROR.TYPE_CHECK);
     if (pattern.notMoney.test(input)) throw new Error(ERROR.TYPE_CHECK);
-    if (input % 1000 !== 0) throw new Error(ERROR.AMOUNT_CHECK);
+    if (input % NUMBER.DEFAULT !== NUMBER.ZERO) throw new Error(ERROR.AMOUNT_CHECK);
+
     return input;
   },
 
   winningNumbers(input) {
     if (!input) throw new Error(ERROR.TYPE_CHECK);
-    const inputArray = input.split(',');
-    if (!inputArray) throw new Error(ERROR.INVALID_ARRAY);
-    if (inputArray.length !== 6) throw new Error(ERROR.INVALID_ARRAY);
-    if (inputArray.length !== new Set(inputArray).size) throw new Error(ERROR.DUPLICATE);
-    inputArray.forEach((element) => {
-      if (pattern.notNumber.test(element)) throw new Error(ERROR.TYPE_CHECK);
-      const checkNumber = Number(element);
-      if (checkNumber > 45 || checkNumber < 0) throw new Error(ERROR.TYPE_CHECK);
-    });
-    return inputArray.map((str) => Number(str)).sort((a, b) => a - b);
+    const inputArray = input.split(',').map(Number).sort((a, b) => a - b);
+
+    if (inputArray.some((number) => !number)) throw new Error(ERROR.TYPE_CHECK);
+    if (inputArray.some((number) => typeof number !== 'number')) throw new Error(ERROR.TYPE_CHECK);
+    if (inputArray.length !== NUMBER.SIX) throw new Error(ERROR.INVALID_ARRAY);
+
+    if (new Set(inputArray).size !== NUMBER.SIX) throw new Error(ERROR.DUPLICATE);
+    if (!inputArray.every((number) => number < NUMBER.LAST && number > NUMBER.ZERO)) {
+      throw new Error(ERROR.RANGE_CHECK);
+    }
+
+    return inputArray;
   },
 
   bonusNumber(input) {
     if (!input) throw new Error(ERROR.TYPE_CHECK);
     if (pattern.notNumber.test(input)) throw new Error(ERROR.TYPE_CHECK);
-    if (input > 45) throw new Error(ERROR.RANGE_CHECK);
+    if (input > NUMBER.LAST) throw new Error(ERROR.RANGE_CHECK);
+
     return input;
   },
 };
