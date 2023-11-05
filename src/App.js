@@ -24,18 +24,8 @@ import Lotto from "./Lotto.js";
 
 class App {
   async play() {
-    let isPass = false;
-    let inputMoney;
-    //TODO 질문 함수분리
-    while (!isPass) {
-      try {
-        inputMoney = await MissionUtils.Console.readLineAsync("구입 금액을 입력해 주세요.");
-        checkWonUnit(inputMoney);
-        isPass = true;
-      } catch (error) {
-        MissionUtils.Console.print(error.message);
-      }
-    }
+    const inputMoney = await askBuyMoneyQuestion();
+
     //TODO 로또 구매 함수 분리
     const lottoArray = [];
 
@@ -48,34 +38,9 @@ class App {
     }
     MissionUtils.Console.print(buyComment);
 
-    isPass = initIsPass(isPass);
-
     // TODO 당첨 번호 질문 함수 분리
-    let winNumberArray;
-    let bonusNumber;
+    const {winNumberArray, bonusNumber} = await askWinNumbersAndBonusNumberQuestion();
 
-    while (!isPass) {
-      try {
-        const winNumbers = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요");
-        checkWinNumbersType(winNumbers);
-        winNumberArray = winNumbers.split(",");
-        isPass = true;
-      } catch (error) {
-        MissionUtils.Console.print(error.message);
-      }
-    }
-    isPass = initIsPass(isPass);
-    //TODO 보너스 번호 질문 함수 분리
-    while (!isPass) {
-      try {
-        bonusNumber = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요");
-        //TODO 유횽성 검사
-        if (winNumberArray.includes(bonusNumber)) throw new Error("[ERROR]보너스 입력 문제 ");
-        isPass = true;
-      } catch (error) {
-        MissionUtils.Console.print(error.message);
-      }
-    }
     //TODO 로또 결과, 구매 결과 출력 함수 분리
     const results = [];
     for (let lotto of lottoArray) {
@@ -89,6 +54,7 @@ class App {
     MissionUtils.Console.print(resultComment);
   }
 }
+
 const LOTTO_PRIZES = {3: 5000, 4: 50000, 5: 1500000, "5B": 30000000, 6: 2000000000};
 
 const writeResultComment = (inputMoney, prizeMoney, countResult, LOTTO_PRIZES) => {
@@ -168,5 +134,51 @@ export const checkWonUnit = (inputMoney) => {
 const initIsPass = (isPass) => {
   isPass = false;
   return isPass;
+};
+
+const askBuyMoneyQuestion = async () => {
+  let isPass = false;
+  let inputMoney;
+  //TODO 질문 함수분리
+  while (!isPass) {
+    try {
+      inputMoney = await MissionUtils.Console.readLineAsync("구입 금액을 입력해 주세요.");
+      checkWonUnit(inputMoney);
+      isPass = true;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+    return inputMoney;
+  }
+};
+
+const askWinNumbersAndBonusNumberQuestion = async () => {
+  let isPass = false;
+  let winNumberArray;
+  let bonusNumber;
+  while (!isPass) {
+    try {
+      const winNumbers = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요");
+      checkWinNumbersType(winNumbers);
+      winNumberArray = winNumbers.split(",");
+      isPass = true;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+  }
+
+  //TODO 보너스 번호 질문 함수 분리
+  isPass = false;
+  while (!isPass) {
+    try {
+      bonusNumber = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요");
+      //TODO 유횽성 검사
+      if (winNumberArray.includes(bonusNumber)) throw new Error("[ERROR]보너스 입력 문제 ");
+      isPass = true;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+  }
+  return {winNumberArray, bonusNumber};
 };
 export default App;
