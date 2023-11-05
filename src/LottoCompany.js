@@ -13,21 +13,21 @@ class LottoCompany {
 	#lottoBuyer;
 
 	async #getPurchaseAmountFromUser() {
-		const purchaseAmount = Number(await InputView.inputPurchaseAmountAsync());
+		const purchaseAmount = await InputView.inputPurchaseAmountAsync();
 		PurchaseAmountValidator.validate(purchaseAmount);
-		return purchaseAmount;
+		return Number(purchaseAmount);
 	}
 
 	async #getWinningNumberArrayFromUser() {
-		const winningNumberArray = (await InputView.inputWinningNumbersAsync()).split(',').map(Number);
+		const winningNumberArray = await InputView.inputWinningNumbersAsync();
 		WinningNumberArrayValidator.validate(winningNumberArray);
-		return winningNumberArray;
+		return winningNumberArray.split(',').map(Number);
 	}
 
 	async #getBonusNumberFromUser() {
-		const bonusNumber = Number(await InputView.inputBonusNumberAsync());
+		const bonusNumber = await InputView.inputBonusNumberAsync();
 		BonusNumberValidator.validate(bonusNumber, this.#winningNumberArray);
-		return bonusNumber;
+		return Number(bonusNumber);
 	}
 
 	async publishLottos() {
