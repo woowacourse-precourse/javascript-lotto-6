@@ -1,9 +1,4 @@
-import {
-  isDuplication,
-  isEmptyString,
-  isNumber,
-  isNumberInValidScope,
-} from './utils/validators/index.js';
+import { isDuplication, isNumber, isNumberInValidScope } from './utils/validators/index.js';
 
 class Lotto {
   #numbers;
@@ -14,11 +9,10 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.some(isEmptyString)) throw new Error('[ERROR] 빈문자열은 입력하실 수 없습니다. ');
     if (!numbers.every(isNumber)) throw new Error('[ERROR] 숫자이외의 문자가 존재합니다.');
     if (isDuplication(numbers)) throw new Error('[ERROR] 중복되는 숫자가 존재합니다.');
-    if (!numbers.some(isNumberInValidScope)) {
-      throw new Error('ERROR] 숫자 1~45 만 입력이 가능합니다.');
+    if (!numbers.every((number) => isNumberInValidScope(number))) {
+      throw new Error('[ERROR] 숫자 1~45 만 입력이 가능합니다.');
     }
 
     if (numbers.length !== 6) {
@@ -28,6 +22,12 @@ class Lotto {
 
   static of(numbers) {
     return new Lotto(numbers);
+  }
+
+  checkUniqueNumber(number) {
+    if (this.#numbers.includes(number)) {
+      throw new Error(`[ERROR] ${number}는 당첨 번호에 이미 포함되어 있습니다.`);
+    }
   }
 }
 
