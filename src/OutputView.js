@@ -8,7 +8,7 @@ const OutputView = {
   printLottoTicket(tickets) {
     Console.print(`\n${tickets.length}개를 구매했습니다.`);
     tickets.map((ticket) => Console.print(ticket));
-    Console.print('\n');
+    Console.print('');
   },
 };
 
