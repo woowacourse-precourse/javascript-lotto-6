@@ -29,13 +29,9 @@ class System {
   }
 
   async getLotto() {
-    let lottoNumbers = [];
     let lotto;
     while (true) {
-      const inputLotteNumbers = await Console.readLineAsync(
-        INPUT_MESSAGE.lottoNumber
-      );
-      lottoNumbers = inputLotteNumbers.split(",").map(Number);
+      const lottoNumbers = await this.#inputLottoNumbers();
       try {
         lotto = new Lotto(lottoNumbers);
         lotto.duplicate();
@@ -45,7 +41,14 @@ class System {
       }
     }
 
-    return [lottoNumbers, lotto];
+    return lotto;
+  }
+
+  async #inputLottoNumbers() {
+    const userInput = await Console.readLineAsync(INPUT_MESSAGE.lottoNumber);
+    const lottoNumbers = userInput.split(",").map(Number);
+
+    return lottoNumbers;
   }
 
   async getBonusNumber(lotto) {
