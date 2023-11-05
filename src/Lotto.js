@@ -23,7 +23,7 @@ class Lotto {
     const lotto = this.getSortedNumbers();
 
     const lottoString = `[${lotto.join(", ")}]`;
-    MissionUtils.Console.print(lottoString);
+    MissionUtils.Console.print(`${lottoString}\n`);
   }
 }
 
