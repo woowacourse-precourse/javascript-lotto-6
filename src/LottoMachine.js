@@ -7,7 +7,11 @@ import CustomError from './errors/CustomError.js';
 class LottoMachine {
   #numberOfLottos;
 
-  constructor(money) {
+  constructor() {
+    this.#numberOfLottos = 0;
+  }
+
+  insertMoney(money) {
     this.#validateMoney(money);
     this.#numberOfLottos = money / LOTTO.price;
   }
