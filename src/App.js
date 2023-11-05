@@ -3,18 +3,23 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import { USER_PROMPT } from "./utils/constants.js";
 
 class App {
+  purchaseLottos;
   #lottoCount;
   #winningNumberList = [];
+  #userWinningNumbers;
+
+  constructor() {
+    this.purchaseLottos = new PurchaseLottos();
+  }
 
   async play() {
     await this.getLottoCount();
     this.generateWinningNumbers();
+    await this.getUserWinningAndBonusNumbers();
   }
 
   async getLottoCount() {
-    const purchaseLottos = new PurchaseLottos();
-    this.#lottoCount = await purchaseLottos.getLottoAmount();
-
+    this.#lottoCount = await this.purchaseLottos.getLottoAmount();
     Console.print(USER_PROMPT.SHOW_LOTTO_COUNT(this.#lottoCount));
   }
 
@@ -26,6 +31,10 @@ class App {
       this.#winningNumberList.push(winningNumbers);
       Console.print(winningNumbers);
     }
+  }
+
+  async getUserWinningAndBonusNumbers() {
+    this.#userWinningNumbers = await this.purchaseLottos.inputWinningNumbers();
   }
 }
 
