@@ -81,3 +81,12 @@ export function numberSort(numbers) {
   numbers.sort((a, b) => a - b);
   return numbers;
 }
+
+export function lottoReader(lotto, winning, bonus) {
+  const includeNumbers = winning.filter(number => lotto.includes(number))
+  const includeBonus = lotto.includes(bonus);
+  if (includeBonus === false) {
+    return [includeNumbers.length, 0];
+  }
+  return [includeNumbers.length, includeBonus.length];
+}
