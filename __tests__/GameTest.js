@@ -7,21 +7,21 @@ describe('Game 클래스 테스트', () => {
   test('로또 구입 금액이 1,000으로 나누어 떨어지지 않으면 예외가 발생한다.', () => {
     const game = new Game();
     expect(() => {
-      game.validate(1001);
+      game.validatePurchaseAmount('1001');
     }).toThrow(ERROR_MESSAGE.invalidUnit);
   });
 
   test('구입 금액에 숫자가 아닌 값이 입력되면 예외가 발생한다.', () => {
     const game = new Game();
     expect(() => {
-      game.validate('a');
+      game.validatePurchaseAmount('a');
     }).toThrow(ERROR_MESSAGE.invalidType);
   });
 
   test('구입 금액이 1,000원 미만이면 예외가 발생한다.', () => {
     const game = new Game();
     expect(() => {
-      game.validate(0);
+      game.validatePurchaseAmount('0');
     }).toThrow(ERROR_MESSAGE.invalidAmount);
   });
 
