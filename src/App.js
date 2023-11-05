@@ -2,7 +2,7 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 import Input from './Input';
 
-const LOTTO_PRICE = 1000;
+const LOTTO_COST = 1000;
 const LOTTO_PRIZE = new Map([
   [5, 5000],
   [4, 50000],
@@ -86,7 +86,7 @@ class App {
 
   async play() {
     this.#payment = await Input.payment();
-    const amount = this.#payment / LOTTO_PRICE;
+    const amount = this.#payment / LOTTO_COST;
     Console.print(`\n${amount}개를 구매했습니다.`);
 
     this.generateLottos(amount);
