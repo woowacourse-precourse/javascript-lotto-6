@@ -1,10 +1,15 @@
 export const ZERO = 0;
+export const INIT_ZERO = 0;
 
 export const LOTTO_PRICE = 1000;
 
 export const MIN_LOTTO_NUMBER = 1;
 export const MAX_LOTTO_NUMBER = 45;
 export const LOTTO_NUMBER_COUNT = 6;
+
+export const RADIX_TEN = 10;
+export const PERCENTAGE = 100;
+export const DEMICAL_POINT = 1;
 
 export const PRIZE_MAP = {
     '3': 5000,
