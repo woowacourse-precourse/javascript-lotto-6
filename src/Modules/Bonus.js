@@ -6,7 +6,7 @@ class Bonus { //예외처리 및 값 저장
     #bonus;
     
     constructor(bonus) {
-        this.#bonus = Number(bonus);
+        this.#bonus = bonus;
         this.#validate();
     }
 

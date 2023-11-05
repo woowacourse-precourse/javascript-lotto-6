@@ -6,7 +6,7 @@ class Purchase { //예외처리 및 값 저장
     #amount;
 
     constructor(amount) {
-        this.#amount = Number(amount);
+        this.#amount = amount;
         this.#validate();
     }
 

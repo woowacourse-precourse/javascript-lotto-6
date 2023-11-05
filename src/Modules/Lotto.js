@@ -6,7 +6,7 @@ class Lotto { //예외처리 및 값 저장
   #numbers;
 
   constructor(numbers) {
-    this.#numbers = numbers.split(',').map(Number);
+    this.#numbers = numbers;
     this.#validate();
   }
 
