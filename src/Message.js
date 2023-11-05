@@ -17,8 +17,10 @@ export const Message = Object.freeze({
   error: {
     NOT_NUMBER: '[ERROR] 숫자형태로 입력해주세요.',
     NOT_ONETHOUSAND: '[ERROR] 1000원 단위로 입력해주세요.',
-    NOT_SPLIT_COMMA: '[ERROR] 쉼표(,)로 구분해서 입력해주세요.',
+    NOT_SIX_LENGTH:
+      '[ERROR] 로또 번호는 쉼표(,)로 구분해서 6개로 입력해주세요.',
     NOT_RANGE: '[ERROR] 1~45 사이의 숫자를 입력해주세요.',
     NOT_UNIQUE: '[ERROR] 중복된 값이 존재합니다 다시 입력해주세요.',
+    INCLUDES_BLANK: '[ERROR] 입력에 공백이 존재합니다',
   },
 });
