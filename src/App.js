@@ -25,14 +25,18 @@ class App {
     const winningNumbers = this.lottoResultChecker.convertToArr(
       this.lottoResultChecker.inputWinningLottoNum()
     );
-    const bonusNumber = this.lottoResultChecker.convertToNum(
-      this.lottoResultChecker.inputBonusNumber()
-    );
+    const bonusNumber = this.convertToNum(await this.inputBonusNumber());
   }
 
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     return +input;
+  }
+  async inputBonusNumber() {
+    return await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+  }
+  convertToNum(bonus) {
+    return Number(bonus);
   }
 }
 export default App;
