@@ -12,13 +12,19 @@ class WinningLotto extends Lotto {
   }
 
   #validateBonusNumber(number) {
-    if (this.isInvalidLottoNumber(number)) {
+    this.#ifNumberIsInvalid(number, () => {
       throw new CustomError(ERROR.lotto.invalidNumber);
-    }
+    });
 
     this.#ifNumberIsDuplicated(number, () => {
       throw new CustomError(ERROR.lotto.duplicatedNumber);
     });
+  }
+
+  #ifNumberIsInvalid(number, callback) {
+    if (this.isInvalidLottoNumber(number)) {
+      callback();
+    }
   }
 
   #ifNumberIsDuplicated(number, callback) {
