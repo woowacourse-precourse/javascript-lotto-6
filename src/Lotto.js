@@ -23,6 +23,22 @@ class Lotto {
   getWinningNumbers() {
     return this.#numbers;
   }
+
+  checkMatchNumbers(winningNumbers) {
+    return this.#numbers.filter(number => winningNumbers.includes(number))
+      .length;
+  }
+
+  hasBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
+
+  checkPrize(winningNumbers, bonusNumber) {
+    const matchCount = this.checkMatchNumbers(winningNumbers);
+    const hasBonus = this.hasBonusNumber(bonusNumber);
+
+    console.log(matchCount, hasBonus);
+  }
 }
 
 export default Lotto;

@@ -1,3 +1,4 @@
+import Lotto from '../Lotto.js';
 import LottoTicket from '../model/LottoTicket.js';
 
 class LottoService {
@@ -11,6 +12,12 @@ class LottoService {
   issueTickets() {
     this.#tickets = new LottoTicket(this.#purchaseMoney).getTickets();
     return this.#tickets;
+  }
+
+  calculatePrizeResult(winningNumbers, bonusNumber) {
+    this.#tickets.map(numbers => {
+      return new Lotto(numbers).checkPrize(winningNumbers, bonusNumber);
+    });
   }
 }
 

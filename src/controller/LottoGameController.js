@@ -49,9 +49,17 @@ class LottoGameController {
         this.winningLotto.getWinningNumbers(),
         bonusNumber,
       );
+      this.#checkPrizeStage(
+        this.winningLotto.getWinningNumbers(),
+        Number(bonusNumber),
+      );
     } catch (error) {
       Console.print(error.message);
     }
+  }
+
+  #checkPrizeStage(winningNumbers, bonusNumber) {
+    this.#lottoService.calculatePrizeResult(winningNumbers, bonusNumber);
   }
 }
 
