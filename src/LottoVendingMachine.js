@@ -1,11 +1,10 @@
-import createLottoNumber from './utils/random';
-import Lotto from './Lotto';
+import createLottoNumber from './utils/random.js';
+import Lotto from './Lotto.js';
 
 class LottoVendingMachine {
   static buyLottoTickets(buyingPrice) {
     const mount = buyingPrice / 1000;
-    const lottoNumber = createLottoNumber();
-    return Array.from({ length: mount }, () => new Lotto(lottoNumber));
+    return Array.from({ length: mount }, () => new Lotto(createLottoNumber()));
   }
 }
 
