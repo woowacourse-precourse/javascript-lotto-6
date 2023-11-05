@@ -14,9 +14,8 @@ class ExceptionHandler {
       this.throwAppError(ERROR.message.invalidPurchase);
     }
 
-    // const parsedAmount = parseInt(amount.replace(/,/g, ''), 10);
     const parsedAmount = amount;
-    if (parsedAmount % LOTTO.unit.unit) {
+    if (parsedAmount % LOTTO.unit.value) {
       this.throwAppError(ERROR.message.invalidUnit);
     }
 
@@ -27,7 +26,7 @@ class ExceptionHandler {
     // 3.1 winningNumbers
     const splitedWinningNumbers = winningNumbers.split(LOTTO.string.comma);
     const winningNumbersSet = new Set(splitedWinningNumbers.map(Number));
-    const hasWhiteSpace = /\s/.test(splitedWinningNumbers);
+    const hasWhiteSpace = LOTTO.regexPatterns.whitespace.test(splitedWinningNumbers);
 
     // 3.1.1 (예외) 6개 이하
     if (splitedWinningNumbers.length !== LOTTO.number.limit) {
