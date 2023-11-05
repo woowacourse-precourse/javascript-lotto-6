@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from '../constants/messages.js';
+import { MAGIC_NUMBER } from '../constants/magicNumber.js';
 
 class Validator {
   static #validate(condition, errorMsg) {
@@ -16,7 +17,9 @@ class Validator {
     return (
       Validator.#isNotNaN(array) &&
       Validator.#isNumber(array) &&
-      Validator.#isLengthSix(array)
+      Validator.#isLengthSix(array) &&
+      Validator.#isNumberInRange(array) &&
+      Validator.#isNotDuplicated(array)
     );
   }
 
@@ -36,7 +39,7 @@ class Validator {
 
   static #isNotNaN(value) {
     return this.#validate(
-      !Number.isNaN(value[0]),
+      value.every(elem => !Number.isNaN(elem)),
       ERROR_MESSAGE.INPUT_TYPE_ERROR,
     );
   }
@@ -45,6 +48,23 @@ class Validator {
     return this.#validate(
       value.every(elem => typeof elem === 'number'),
       ERROR_MESSAGE.INPUT_TYPE_ERROR,
+    );
+  }
+
+  static #isNumberInRange(value) {
+    return this.#validate(
+      value.every(
+        elem =>
+          elem >= MAGIC_NUMBER.MIN_NUMBER && elem <= MAGIC_NUMBER.MAX_NUMBER,
+      ),
+      ERROR_MESSAGE.NUMBER_RANGE_ERROR,
+    );
+  }
+
+  static #isNotDuplicated(value) {
+    return this.#validate(
+      value.every(elem => !value.includes(elem)),
+      ERROR_MESSAGE.DUPLICATE_ERROR,
     );
   }
 }

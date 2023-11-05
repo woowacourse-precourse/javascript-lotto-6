@@ -1,8 +1,9 @@
 import { Random } from '@woowacourse/mission-utils';
+import { INFO_MESSAGE } from './constants/messages.js';
+import { MAGIC_NUMBER } from './constants/magicNumber.js';
 import View from './View.js';
 import TicketMachine from './TicketMachine.js';
 import Lotto from './Lotto.js';
-import { INFO_MESSAGE } from './constants/messages.js';
 import Validator from './utils/Validator.js';
 
 class App {
@@ -16,7 +17,12 @@ class App {
       getTickets: purchasedTicktesCount => {
         this.#state.ticktes = Array.from(
           { length: purchasedTicktesCount },
-          () => Random.pickUniqueNumbersInRange(1, 45, 6),
+          () =>
+            Random.pickUniqueNumbersInRange(
+              MAGIC_NUMBER.MIN_NUMBER,
+              MAGIC_NUMBER.MAX_NUMBER,
+              MAGIC_NUMBER.LOTTO_NUMBER_COUNT,
+            ),
         );
         View.printPurchasedTicketsInfo(
           purchasedTicktesCount,
@@ -28,7 +34,7 @@ class App {
 
   setlottoNumbers(lottoNumbers) {
     const lottoNumbersArray = lottoNumbers.split(',').map(Number);
-    console.log(lottoNumbersArray);
+
     Validator.checkLottoNumbers(lottoNumbersArray);
 
     this.lotto = new Lotto(lottoNumbersArray);
