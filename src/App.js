@@ -27,6 +27,7 @@ class App {
     this.requestLottoTickets()
     await this.requestWinningNumbers();
     await this.requestBonusNumber();
+    this.requestResult();
   }
 
   async requestPurchaseAmounts() {
@@ -73,6 +74,17 @@ class App {
     this.output.printStats(STATS)
 
     this.requestRate(STATS, this.#money)
+  }
+
+  requestRate(STATS, money) {
+    const PRIZE_MONEYS = Object.values(WINNING_AMOUNTS).map(Number)
+    let profits = 0;
+
+    STATS.forEach((n, i) => {
+      if (n > 0) {
+        profits += PRIZE_MONEYS[4 - i]
+      }
+    })
   }
 }
 
