@@ -4,7 +4,26 @@ let lottoValidator;
 
 beforeEach(() => {
   lottoValidator = new LottoValidator();
-  jest.restoreAllMocks();
+});
+
+describe("로또 구입 금액 테스트", () => {
+  test("금액이 숫자가 아닌 문자나 공백일 경우", () => {
+    const MONEY = "asd";
+
+    expect(() => lottoValidator.validateMoney(MONEY)).toThrow("[ERROR]");
+  });
+
+  test("금액이 0원일 경우", () => {
+    const MONEY = 0;
+
+    expect(() => lottoValidator.validateMoney(MONEY)).toThrow("[ERROR]");
+  });
+
+  test("금액이 1,000으로 나누어 떨어지지 않는 경우", () => {
+    const MONEY = 100;
+
+    expect(() => lottoValidator.validateMoney(MONEY)).toThrow("[ERROR]");
+  });
 });
 
 describe("보너스 번호 테스트", () => {
