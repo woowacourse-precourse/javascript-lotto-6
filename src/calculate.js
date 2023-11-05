@@ -12,7 +12,7 @@ const calculate = {
     const fourth = (prizeResult.fourth * REWARD.FOURTH);
     const fifth = (prizeResult.fifth * REWARD.FIFTH);
     const total = (first + second + third + fourth + fifth);
-    const profit = (((total / input)) * 100).toFixed(1);
+    const profit = ((total / input) * 100).toFixed(1);
     return profit;
   },
 };

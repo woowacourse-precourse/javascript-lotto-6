@@ -22,4 +22,24 @@ const totalReward = [
   `${NUMBER.SIX}개 일치 (${REWARD.FIRST.toLocaleString()}원) - `,
 ];
 
-export { REWARD, NUMBER, totalReward };
+const pattern = {
+  prefix: '[ERROR]',
+  notNumber: /[^1-9]/,
+  notMoney: /[^0-9]/,
+};
+
+const ERROR = {
+  ONLY_NUMBER: `${pattern.prefix} 정확한 값이 아닙니다.`,
+  AMOUNT_CHECK: `${pattern.prefix} 금액은 1000원 단위로 입력해주세요.`,
+  INVALID_ARRAY: `${pattern.prefix} 6개의 숫자를 쉼표(,)로 구분하여 입력해주세요.`,
+  DUPLICATE: `${pattern.prefix} 서로 다른 숫자를 입력해주세요.`,
+  RANGE_CHECK: `${pattern.prefix} 1에서 45사이에 숫자를 입력해주세요.`,
+};
+
+export {
+  REWARD,
+  NUMBER,
+  totalReward,
+  pattern,
+  ERROR,
+};

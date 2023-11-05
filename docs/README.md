@@ -25,7 +25,6 @@
 
 - [x] 당청 번호를 입력 받는다. request.winningNumber 
     - [x] 입력값이 적당한지 확인한다. validate.winningNumber()
-    ** 유효 검사 추후 보충 
     - [x] 유효하지 않으면 [ERROR]를 출력하고, 해당 부분에서 다시 진행한다.
     - [x] 당첨번호를 정렬한 후 값으로 저장한다.
 - [x] 보너스 번호를 입력 받는다. request.bonusNumber
@@ -37,3 +36,20 @@
 - [x] 수익률을 계산한다. calculate.profitFrom();
 
 - [x] 수익률과 당첨결과를 받아서 당첨 통계를 출력한다. prompt.out(statistic());
+
+
+### refactor 내용
+
+4. commit a886165
+refactor(Notice.js): 당첨 통계 메세지 상수 처리
+
+3. commit 10c89f7
+refactor(lotto): 파일 및 메서드명 수정
+
+2. commit 0e2f601
+refactor(App.js): 메서드 정리 및 순서 조정
+
+1. commit 2af62c7
+refactor(App.js): getResult 메서드 변경
+
+
