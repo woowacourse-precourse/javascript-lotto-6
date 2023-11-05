@@ -23,25 +23,20 @@ class Statistics {
 
   // 등수 집계
   #winningRank() {
+    const rankCondition = {
+      3: () => this.#result[0] += 1,
+      4: () => this.#result[1] += 1,
+      5: (i) => this.#checkBonus(i),
+      6: () => this.#result[4] += 1
+  };
+  
     this.#sameNumberCheck();
 
-    for (let i = 0; i < this.#checkArray.length; i += 1) {
-      if (this.#checkArray[i] === 3) {
-        this.#result[0] += 1;
+    this.#checkArray.forEach((item) => {
+      if (rankCondition[item]) {
+        rankCondition[item](this.#checkArray.indexOf(item));
       }
-
-      if (this.#checkArray[i] === 4) {
-        this.#result[1] += 1;
-      }
-
-      if (this.#checkArray[i] === 5) {
-        this.#checkBonus(i);
-      }
-
-      if (this.#checkArray[i] === 6) {
-        this.#result[4] += 1;
-      }
-    }
+    });
   }
 
   #checkBonus(i) {
