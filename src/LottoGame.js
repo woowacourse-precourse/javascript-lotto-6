@@ -73,6 +73,44 @@ class LottoGame {
     if(targetArr.includes(this.#bonus)) return true;
     return false;
   }
+
+  checkMatching() {
+    let resObj = {
+      threeMatches: 0,
+      fourMatches: 0,
+      fiveMatches: 0,
+      fiveMatchesAndBonus: 0,
+      sixMatches: 0
+    }
+
+    this.#lottos.forEach(el => {
+      resObj = this.updateResObj(resObj, el.get_numbers);
+    });
+
+    return resObj;
+  }
+
+  updateResObj(resObj, arr) {
+    switch(this.countWinningNum(arr)) {
+      case 3:
+        resObj.threeMatches += 1;
+        break;
+      case 4:
+        resObj.fourMatches += 1;
+        break;
+      case 5:
+        if (this.hasBonusNumber(arr)) resObj.fiveMatchesAndBonus += 1;
+        else resObj.fiveMatches += 1;
+        break;
+      case 6:
+        resObj.sixMatches += 1;
+        break;
+      default:
+        break;
+    };
+
+    return resObj;
+  }
 }
 
 export default LottoGame;
