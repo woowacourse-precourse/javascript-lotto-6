@@ -38,7 +38,7 @@ export default class LottoGame {
     this.#autoLottos.reduce((acc, autoLotto) => {
       let count = DEFAULT_NUM;
       acc.forEach((winningNum) => {
-        if (autoLotto.includes(winningNum)) count += COUNT.minus;
+        if (autoLotto.includes(winningNum)) count += COUNT.plus;
       });
       this.#updateRankingList(autoLotto, count);
       return acc;
