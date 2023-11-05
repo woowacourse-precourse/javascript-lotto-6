@@ -1,6 +1,7 @@
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import message from '../constants/message.js';
+import MessageFormat from '../utils/messageFormat.js';
 
 const { PURCHASE_PRICE } = message;
 
@@ -12,5 +13,9 @@ export default class View {
   async readPurchasePrice() {
     const userInput = await this.#inputView.readLineAsync(PURCHASE_PRICE);
     return Number(userInput);
+  }
+
+  printPurchaseCount(purchaseCount) {
+    this.#outputView.print(MessageFormat.purchaseCount(purchaseCount));
   }
 }

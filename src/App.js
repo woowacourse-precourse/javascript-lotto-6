@@ -15,11 +15,15 @@ class App {
   }
 
   async setGameConfig() {
-    const purchasePrice = await this.readGameConfig();
+    const { lotteryTickets } = await this.readGameConfig();
   }
 
   async readGameConfig() {
     const purchaseCount = await this.getPurchaseCount();
+    this.#view.printPurchaseCount(purchaseCount);
+    const lotteryTickets = this.getLotteryTickets(purchaseCount);
+
+    return { lotteryTickets };
   }
 
   async getPurchaseCount() {
@@ -33,6 +37,18 @@ class App {
         this.#outputView.print(MessageFormat.error(e.message));
       }
     }
+  }
+
+  getLotteryTickets(purchaseCount) {
+    const lottos = [];
+
+    for (let i = 0; i < purchaseCount; i += 1) {
+      const randomLottoNumber = Lotto.getRandomLottoNumber();
+      const lotto = new Lotto(randomLottoNumber);
+      lottos.push(lotto);
+      this.#outputView.print(lotto.getLottoNumber());
+    }
+    return lottos;
   }
 }
 
