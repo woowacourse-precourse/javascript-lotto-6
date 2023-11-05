@@ -11,7 +11,6 @@ export const MESSAGE = {
 };
 
 export const ERROR = {
-  getError: (error) => `[ERROR] ${error}`,
   BLANK_INPUT: '입력값이 없습니다.',
   NOT_A_NUMBER: '숫자여야 합니다.',
   NOT_A_NATURAL_NUMBER: '1 이상의 숫자여야 합니다.',
