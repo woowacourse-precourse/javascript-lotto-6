@@ -1,8 +1,11 @@
+import Output from "./utils/Output.js";
+
 class Statistics {
   #rankCounts;
 
   constructor(results) {
     this.#rankCounts = this.#updateRank(results);
+    Output.printRank(this.#rankCounts);
   }
 
   #updateRank(results) {
