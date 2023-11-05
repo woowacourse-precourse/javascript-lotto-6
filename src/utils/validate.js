@@ -15,9 +15,15 @@ const Validate = Object.freeze({
     }
   },
 
+  checkRange(elm, start, end) {
+    this.checkArrFormat([elm, start, end], "number");
+    if (!between(elm, start, end)) {
+      throw new IncorrectLottoNumberError();
+    }
+  },
+
   checkMultiple(targetNumber, number) {
-    this.checkFormat(targetNumber, "number");
-    this.checkFormat(number, "number");
+    this.checkArrFormat([targetNumber, number], "number");
     if (!Number.isInteger(targetNumber / number)) {
       throw new IncorrectFormatError();
     }
@@ -34,9 +40,7 @@ const Validate = Object.freeze({
   },
 
   checkArrRange(arr, start, end) {
-    if (arr.some((elm) => !between(elm, start, end))) {
-      throw new IncorrectLottoNumberError();
-    }
+    arr.forEach((elm) => this.checkRange(elm, start, end));
   },
 
   checkArrDuplicate(arr) {
@@ -65,15 +69,18 @@ const LottoValidate = Object.freeze({
     Validate.checkArrRange(numbers, start, end),
 
   // 로또 번호가 중복된 값을 가지면 DuplicateNumbersError
-  checkArrDuplicate: (numbers) => Validate.checkArrDuplicate(numbers),
+  checkArrDuplicate: (numbers, answerNumbers = []) =>
+    Validate.checkArrDuplicate(numbers.concat(answerNumbers)),
 
+  // 로또 번호 유효성 검사
   checkAllLottoNumbers(numbers, options) {
     this.checkArrLength(numbers, options?.count);
     this.checkArrFormat(numbers, options?.type);
     this.checkArrRange(numbers, options?.start, options?.end);
-    this.checkArrDuplicate(numbers);
+    this.checkArrDuplicate(numbers, options?.answerNumbers);
   },
 
+  // 로또 구매 금액 유효성 검사
   checkAllPurchaseAmount(purchaseAmount, price) {
     this.checkMultiple(purchaseAmount, price);
   },
