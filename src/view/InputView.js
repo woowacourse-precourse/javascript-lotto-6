@@ -9,4 +9,8 @@ export default class InputView {
   static async readWinningNumbers() {
     return await Console.readLineAsync(INPUT_MESSAGE.winningNumbers);
   }
+
+  static async readBonusNumber() {
+    return await Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
+  }
 }

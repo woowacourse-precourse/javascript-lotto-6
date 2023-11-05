@@ -9,6 +9,8 @@ export default class LottoMachine {
 
   #winningNumbers;
 
+  #bonusNumber;
+
   #LOTTO_RULES;
 
   #INPUT_UNIT;
@@ -27,6 +29,9 @@ export default class LottoMachine {
     await this.#makeLottos();
     OutputView.printLottoTickets(this.#player.getLottoTickets());
     this.#winningNumbers = await this.#getWinningNumbers();
+    OutputView.printNewLine();
+    this.#bonusNumber = await this.#getBonusNumber();
+    OutputView.printNewLine();
   }
 
   #makeOneLotto() {
@@ -67,6 +72,11 @@ export default class LottoMachine {
   async #getWinningNumbers() {
     const winningNumbersInput = await InputView.readWinningNumbers();
     return new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
+  }
+
+  async #getBonusNumber() {
+    const bonusNumberInput = await InputView.readBonusNumber();
+    return Number(bonusNumberInput);
   }
 }
 
