@@ -1,17 +1,13 @@
-import { Console, Random } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGE, INPUT_MESSAGE } from "./constants/constants";
 import Lotto from "./Lotto";
+import generateLottoNumbers from "./utils/generateLottoNumbers";
 
 class System {
-  generateLottoNumbers() {
-    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-    return new Lotto(randomNumbers);
-  }
-
   saveLottoNumbers() {
     let lotto;
     while (true) {
-      lotto = this.generateLottoNumbers();
+      lotto = generateLottoNumbers();
       try {
         lotto.duplicate(); // 중복 검사를 실행하여 중복이 있으면 예외가 발생
         break;
