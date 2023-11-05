@@ -18,6 +18,10 @@ class WinningLotto extends Lotto {
     this.#bonusNumber = Number(bonusNumber);
   }
 
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
+
   #validate(bonusNumber) {
     if (!this.isLottoNumber(bonusNumber)) {
       throw CustomError.lotto(ERROR.message.lotto.notInRange);

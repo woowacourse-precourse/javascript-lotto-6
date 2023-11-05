@@ -23,6 +23,10 @@ class Lotto {
     this.#numbers = this.#formatLotto(numbers);
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   toString() {
     return `[${this.#numbers.join(', ')}]`;
   }

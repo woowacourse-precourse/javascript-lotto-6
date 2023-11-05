@@ -3,16 +3,22 @@ class LottoGameController {
 
   #lottoService;
 
-  constructor({ view, lottoService }) {
+  #prizeService;
+
+  constructor({ view, lottoService, prizeService }) {
     this.#view = view;
     this.#lottoService = lottoService;
+    this.#prizeService = prizeService;
   }
 
   async startGame() {
     const lottos = await this.#purchaseLottos();
     this.#view.printPurchasedResult(lottos);
-
     const winningLotto = await this.#createWinningLotto();
+
+    const prizes = lottos.map((lotto) =>
+      this.#prizeService.getPrize({ lotto, winningLotto }),
+    );
   }
 
   async #purchaseLottos() {
