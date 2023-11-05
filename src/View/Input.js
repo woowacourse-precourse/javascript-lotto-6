@@ -1,6 +1,4 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../constants/index.js';
-import Validator from '../Validator/index.js';
 import Output from './Output.js';
 
 class Input {
@@ -11,41 +9,16 @@ class Input {
       return answer;
     } catch ({ message }) {
       Output.log(message);
-      callback();
+      const answer = await callback();
+      return answer;
     }
   }
 
-  static async readPurchaseAmount() {
-    const PurchaseAmount = await this.readAsync(
-      MESSAGE.askPurchaseAmount,
-      Validator.validatePurchaseAmount,
-      () => {
-        this.readPurchaseAmount();
-      },
+  static async readLine(message, validate) {
+    const answer = await this.readAsync(message, validate, () =>
+      this.readLine(message, validate),
     );
-    return PurchaseAmount;
-  }
-
-  static async readWinningNumbers() {
-    const winningNumber = await this.readAsync(
-      MESSAGE.askWinningNumbers,
-      Validator.validateWinningNumbers,
-      () => {
-        this.readWinningNumbers();
-      },
-    );
-    return winningNumber;
-  }
-
-  static async readBonusNumber() {
-    const lottoCount = await this.readAsync(
-      MESSAGE.askBonusNumber,
-      Validator.validateBonusNumber,
-      () => {
-        this.readBonusNumber();
-      },
-    );
-    return lottoCount;
+    return answer;
   }
 }
 
