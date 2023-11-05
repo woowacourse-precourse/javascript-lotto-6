@@ -1,8 +1,9 @@
 import Lotto from '../../src/Lotto.js';
-import { LOTTO_ERROR_CODE, PURCHASE_ERROR_CODE } from '../../src/util/error/errorCode.js';
+import { BONUS_ERROR_CODE, LOTTO_ERROR_CODE, PURCHASE_ERROR_CODE } from '../../src/util/error/errorCode.js';
 import { checkHasDuplicate } from '../../src/util/validate/checkHasDuplicate.js';
 import checkHasNoRemainder from '../../src/util/validate/checkHasNoRemainder.js';
 import { checkIsEmpty, checkLottoIsEmptyOrZero } from '../../src/util/validate/checkIsEmpty.js';
+import checkIsInWinningNumber from '../../src/util/validate/checkIsInWinningNumber.js';
 import { checkIsNaN, checkLottoIsNaN } from '../../src/util/validate/checkIsNaN.js';
 import { checkLottoIsOutOfRange, checkPurchaseIsNotInRange } from '../../src/util/validate/checkIsNotInRange.js';
 import { checkLottoIsInteger } from '../../src/util/validate/checkisInteger.js';
@@ -109,5 +110,20 @@ describe('[function] 유효성 검사 테스트 ', () => {
     // then
     expect(() => checkLottoIsOutOfRange(smallInValidInput)).toThrow(`${LOTTO_ERROR_CODE.valueIsOutOfRange}`);
     expect(() => checkLottoIsOutOfRange(bigInValidInput)).toThrow(`${LOTTO_ERROR_CODE.valueIsOutOfRange}`);
+  });
+
+  test('입력값이 당첨번호에 존재할 경우 에러를 발생', () => {
+    // given
+    const inValidBonusNumber = 1;
+    const validBonusNumber = 45;
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+    // then
+    expect(() => checkIsInWinningNumber(inValidBonusNumber, winningNumbers)).toThrow(
+      `${BONUS_ERROR_CODE.valueMatchesLotto}`,
+    );
+    expect(() => checkIsInWinningNumber(validBonusNumber, winningNumbers)).not.toThrow(
+      `${BONUS_ERROR_CODE.valueMatchesLotto}`,
+    );
   });
 });
