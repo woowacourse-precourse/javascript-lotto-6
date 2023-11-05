@@ -3,10 +3,12 @@ import LottoList from '../model/LottoList.js';
 import { inputMoney } from '../view/InputPrompt.js';
 import { validateDivisible, validateNumber } from '../utils/validateFn.js';
 import { printBuyLottery } from '../view/OutputPompt.js';
+import WinningLotto from '../model/WinningLotto.js';
 
 class LottoGame {
   #money = 0;
   #myLottos = new LottoList();
+  #winningLotto = new WinningLotto();
 
   async buyLotto() {
     await this.#setMoney();
@@ -27,6 +29,11 @@ class LottoGame {
     for (let i = 0; i < amount; i++) {
       this.#myLottos.add(Lotto.setLottery());
     }
+  }
+
+  async drawLotto() {
+    await this.#winningLotto.setWinningNumber();
+    await this.#winningLotto.setBonusNumber();
   }
 }
 
