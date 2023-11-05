@@ -12,6 +12,7 @@ export const TEXT = Object.freeze({
   AMOUNT_ERROR: '[ERROR] 금액은 1000단위로 입력해주세요.',
   LENGTH_ERROR: '[ERROR] 번호는 6자리여야 합니다.',
   NUMBER_ERROR: '[ERROR] 번호는 1부터 45사이의 숫자여야 합니다.',
+  OVERLAP_ERROR: '[ERROR] 번호는 중복되지 않아야 합니다.',
   STRING_ERROR: '[ERROR] 번호는 숫자로 작성해야 합니다.',
   OUTPUT_NUMBER: '개를 구매했습니다.',
   OUTPUT_PRIZE: '당첨 통계',

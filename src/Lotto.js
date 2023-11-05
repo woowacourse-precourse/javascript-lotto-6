@@ -1,5 +1,6 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import { NUMBER, TEXT } from './data.js';
+import LottoValidator from './LottoValidator.js';
 
 function lottoRandomNumer() {
   const randomNumbers = [];
@@ -16,6 +17,10 @@ function lottoRandomNumer() {
   return randomNumbers;
 }
 
+function winsNumber(lottoINITIAL) {
+  console.log(lottoINITIAL);
+}
+
 function outputNumber(inputAmount) {
   const lottoCount = inputAmount / NUMBER.INITIAL_AMOUNT;
   const lottoINITIAL = Array(lottoCount)
@@ -26,18 +31,7 @@ function outputNumber(inputAmount) {
     });
   Console.print(`${lottoCount}${TEXT.OUTPUT_NUMBER}`);
   lottoINITIAL.forEach((numbers) => Console.print(numbers));
-}
-
-function numberCheck(inputNumberList, inputBounsNumber) {
-  if (inputNumberList.length !== NUMBER.LOTTO_LENGTH)
-    throw new Error(TEXT.LENGTH_ERROR);
-  if (
-    Math.max(...inputNumberList) > NUMBER.MAX_LOTTO_NUMBER ||
-    Math.min(...inputNumberList) < NUMBER.MIN_LOTTO_NUMBER
-  )
-    throw new Error(TEXT.NUMBER_ERROR);
-  if (inputNumberList.includes(NaN) || Number.isNaN(inputBounsNumber))
-    throw new Error(TEXT.STRING_ERROR);
+  // winsNumber(...lottoINITIAL);
 }
 
 async function lottoNumberGet() {
@@ -46,13 +40,16 @@ async function lottoNumberGet() {
   const inputBounsNumber = Number(
     await Console.readLineAsync(TEXT.INPUT_BONUS),
   );
-  numberCheck(inputNumberList, inputBounsNumber);
+  const lottoValidator = new LottoValidator(inputNumberList, inputBounsNumber);
+  lottoValidator.validate();
+  return [...inputNumberList, inputBounsNumber];
 }
 export async function lottoAmountGet() {
   const inputAmount = await Console.readLineAsync(TEXT.INPUT_AMOUNT);
   if (inputAmount % 1000 !== 0) throw new Error(TEXT.AMOUNT_ERROR);
   outputNumber(inputAmount);
-  lottoNumberGet();
+  const 임시배열 = await lottoNumberGet();
+  winsNumber(임시배열);
 }
 
 class Lotto {
