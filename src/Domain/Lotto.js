@@ -1,14 +1,13 @@
-import { Random } from '@woowacourse/mission-utils';
 import ERROR from '../constants/error.js';
 import CustomError from '../errors/error.js';
 import Validator from '../utils/Validator.js';
 
 class Lotto {
-  static #minNumber = 1;
+  static minNumber = 1;
 
-  static #maxNumber = 45;
+  static maxNumber = 45;
 
-  static #length = 6;
+  static length = 6;
 
   static price = 1000;
 
@@ -24,19 +23,6 @@ class Lotto {
     this.#numbers = this.#formatLotto(numbers);
   }
 
-  static generateLottoNumbers() {
-    const lottoNumbers = new Set();
-    while (lottoNumbers.size < Lotto.#length) {
-      lottoNumbers.add(Lotto.#generateLottoNumber());
-    }
-
-    return [...lottoNumbers];
-  }
-
-  static #generateLottoNumber() {
-    return Random.pickNumberInRange(Lotto.#minNumber, Lotto.#maxNumber);
-  }
-
   toString() {
     return `[${this.#numbers.join(', ')}]`;
   }
@@ -44,8 +30,8 @@ class Lotto {
   isLottoNumber(number) {
     return (
       Validator.isPositiveInteger(number) &&
-      number >= Lotto.#minNumber &&
-      number <= Lotto.#maxNumber
+      number >= Lotto.minNumber &&
+      number <= Lotto.maxNumber
     );
   }
 
@@ -60,13 +46,13 @@ class Lotto {
   }
 
   #validateLength(numbers) {
-    if (numbers.length !== Lotto.#length) {
+    if (numbers.length !== Lotto.length) {
       throw CustomError.lotto(ERROR.message.lotto.length);
     }
   }
 
   #validateDuplicate(numbers) {
-    if (new Set(numbers).size !== Lotto.#length) {
+    if (new Set(numbers).size !== Lotto.length) {
       throw CustomError.lotto(ERROR.message.lotto.notUnique);
     }
   }

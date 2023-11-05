@@ -1,3 +1,4 @@
+import { Random } from '@woowacourse/mission-utils';
 import Lotto from '../Domain/Lotto.js';
 import ERROR from '../constants/error.js';
 import CustomError from '../errors/error.js';
@@ -13,7 +14,20 @@ class LottoService {
   }
 
   #generateLotto() {
-    return new Lotto(Lotto.generateLottoNumbers());
+    return new Lotto(this.#generateLottoNumbers());
+  }
+
+  #generateLottoNumbers() {
+    const lottoNumbers = new Set();
+    while (lottoNumbers.size < Lotto.length) {
+      lottoNumbers.add(this.#generateLottoNumber());
+    }
+
+    return [...lottoNumbers];
+  }
+
+  #generateLottoNumber() {
+    return Random.pickNumberInRange(Lotto.minNumber, Lotto.maxNumber);
   }
 
   #validatePurchaseAmount(purchaseAmount) {
