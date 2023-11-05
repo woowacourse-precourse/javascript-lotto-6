@@ -8,9 +8,9 @@ class LottoPrizeManager {
 
   constructor(winningNumberArray, bonusNumber) {
     this.#validateWinningNumber(winningNumberArray);
-    this.#validateBonusNumber(bonusNumber);
+    this.#winnningNumberArray = winningNumberArray.map((str) => +str);
 
-    this.#winnningNumberArray = winningNumberArray;
+    this.#validateBonusNumber(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
@@ -31,6 +31,10 @@ class LottoPrizeManager {
   #validateBonusNumber(numStr) {
     if (!Validator.isInLottoNumberRange(numStr)) {
       throw new Error(PRIZE.ERROR.BONUS_NUMBER_RANGE_NUMBER);
+    }
+
+    if (Validator.hasDuplicate([...this.#winnningNumberArray, +numStr])) {
+      throw new Error(PRIZE.ERROR.BONUS_NUMBER_DUPLICATE);
     }
   }
 }
