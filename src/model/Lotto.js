@@ -1,4 +1,4 @@
-import Place from '../utils/Place';
+import { Place } from '../utils/Place.js';
 
 class Lotto {
   #numbers;
@@ -29,7 +29,10 @@ class Lotto {
   }
 
   compareNumbers(winningNumbers, bonusNumber) {
-    this.winningCount = winningNumbers.filter((number) =>
+    const convertedWinningNumbers = winningNumbers.map((num) =>
+      parseInt(num, 10)
+    );
+    this.winningCount = convertedWinningNumbers.filter((number) =>
       this.#numbers.includes(number)
     ).length;
     this.addCountPlace(bonusNumber);
@@ -46,7 +49,7 @@ class Lotto {
   }
 
   checkBonusNumber(bonusNumber) {
-    if (this.#numbers.some((number) => number === bonusNumber)) {
+    if (this.#numbers.some((number) => number === parseInt(bonusNumber, 10))) {
       return true;
     }
     return false;
