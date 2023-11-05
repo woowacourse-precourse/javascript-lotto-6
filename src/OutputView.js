@@ -13,7 +13,8 @@ const InputView = {
         .getNumbers()
         .slice()
         .sort((a, b) => a - b);
-      MissionUtils.Console.print(sortedNumbers);
+      const output = "[" + sortedNumbers.join(", ") + "]";
+      MissionUtils.Console.print(output);
     }
   },
 
@@ -27,15 +28,15 @@ const InputView = {
   },
 
   createOutput(rank, statistics) {
-    if(rank === 'second') {
-        return (
-            WINNING_RANK[rank].matchingNumberCount +
-            "개 일치, 보너스 볼 일치 (" +
-            WINNING_RANK[rank].reward.toLocaleString().replace(/_/g, ",") +
-            "원) - " +
-            statistics[rank] +
-            "개"
-          );
+    if (rank === "second") {
+      return (
+        WINNING_RANK[rank].matchingNumberCount +
+        "개 일치, 보너스 볼 일치 (" +
+        WINNING_RANK[rank].reward.toLocaleString().replace(/_/g, ",") +
+        "원) - " +
+        statistics[rank] +
+        "개"
+      );
     }
     return (
       WINNING_RANK[rank].matchingNumberCount +
@@ -48,13 +49,13 @@ const InputView = {
   },
 
   printRateOfReturn(rateOfReturn) {
-    const output = rateOfReturn.toLocaleString('en', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      });
-    
+    const output = rateOfReturn.toLocaleString("en", {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
+
     MissionUtils.Console.print("총 수익률은 " + output + "%입니다.");
-  }
+  },
 };
 
 export default InputView;
