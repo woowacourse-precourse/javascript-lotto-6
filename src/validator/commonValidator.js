@@ -5,9 +5,9 @@ const commonValidator = {
     }
   },
 
-  checkEmpty(input) {
-    if (input.trim('') !== '') {
-      throw new Error('값을 입력해주세요');
+  checkDuplicate(input) {
+    if (new Set(input).size !== input.length) {
+      throw new Error('번호가 중복되면 안됩니다.');
     }
   },
 

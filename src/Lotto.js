@@ -22,9 +22,7 @@ class Lotto {
   }
 
   #validateDuplicated(numbers) {
-    if (new Set(numbers).size !== numbers.length) {
-      throw new Error('로또 번호가 중복되면 안됩니다.');
-    }
+    commonValidator.checkDuplicate(numbers);
   }
 
   #validateRangeNumber(numbers) {
