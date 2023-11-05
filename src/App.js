@@ -1,11 +1,12 @@
+/*
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-
 import { showLottoTicket, showStatisticsResult } from "./ui/output.js";
 import LotteryMachine from "./domain/LotteryMachine.js";
 import LottoReader from "./domain/LottoReader.js";
 import { validateBonusNumber, validatePurchaseAmount } from "./error/Validation.js";
 import { LOTTO_PLAY } from "./constants/Messeage.js";
+*/
 import LottoSimulator from "./ui/LottoSimulator.js";
 
 class App {

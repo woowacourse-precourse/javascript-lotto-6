@@ -2,37 +2,54 @@
 
 ### domain 파일
 
-- 로또 발행기(LotteryMachine)(구매 금액을 통해 로또발행 및 출력)
+- LotteryMachine : 로또 티켓 발행기
 
-- 로또 등수 계산기(LottoRankMaker) : 로또 티켓과 당첨번호를 통해 로또 등수 배열을 반환
+- LottoReader : 로또 티켓, 사용자 입력정보를 읽는 역할
 
-- 로또 리더기(LottoReader) : 로또 등수 계산기에 extends 하여 LottoRankMaker와 파라미터를 공유. 로또 당첨 통계기에게 등수 배열을 넘겨줌 
+- LottoRankMaker : 로또 등수 계산 로직
 
-- 로또 당첨 내역 정리기(LottoStatistic) : 당첨내역을 잘 포장해서 객체로 반환
+- LottoStatistic : 로또 당첨 통계 계산 로직
+
+<br>
 
 ### util 파일
 
-- 수익률 계산기
+- EarningRate : 증가율 계산기
+
+<br>
 
 ### constants 파일
 
 - 비즈니스 숫자들 상수화
 
-- 로또 UI 메세지 상수화
+- 로또 ui 메세지 상수화
 
 - 에러 메세지 상수화
 
+<br>
+
 ### ui 파일
 
-- 사용자 입력 처리 (입력 받음과 동시에 유효성 처리 들어감)
+- LottoManager : 사용자 입력 처리 
 
-- 사용자 출력 처리 (도메인 로직으로 부터 받은 값을 잘 가공해서 콘솔 출력)
+- LottoStamper : 출력 처리
+
+<br>
 
 ### error 파일
 
-- 사용자 입력에 대한 유효성 검증 로직 내포
-- PREFIX : [ERROR] 를 위한 CustomError 클래스 구현
+- Validation : 사용자 입력에 대한 유효성 검증 로직 내포
+- CustomError : PREFIX [ERROR] 를 위한 CustomError 클래스 구현
 
+<br>
+
+### App.js
+프로그램 시작점
+````
+const lottoManager = new LottoManager();
+lottoManager.startLottoSimulator(); 
+````
+<br>
 
 ## 예외 처리
 
