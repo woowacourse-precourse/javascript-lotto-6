@@ -1,3 +1,5 @@
+import { printLottery } from '../view/outputPompt.js';
+
 class LottoList {
   #myLottos = [];
 
@@ -7,6 +9,10 @@ class LottoList {
 
   getLottoCount() {
     return this.#myLottos.length;
+  }
+
+  printMyLottery() {
+    this.#myLottos.forEach((lotto) => printLottery(lotto.getLottery()));
   }
 }
 
