@@ -1,5 +1,7 @@
 class Lotto {
   #numbers;
+  #correctTarget = 0;
+  #correctBonus = 0;
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -17,7 +19,25 @@ class Lotto {
     return this.#numbers;
   }
 
-  // TODO: 추가 기능 구현
+  calculateResult(winningNumbers, bonusNumber) {
+    let correctTarget = 0;
+    let correctBonus = 0;
+    for (let number of winningNumbers) {
+      if (this.#numbers.includes(number)) correctTarget += 1;
+    }
+    if (this.#numbers.includes(bonusNumber)) correctBonus += 1;
+    this.correctTarget = correctTarget;
+    this.correctBonus = correctBonus;
+  }
+
+  judgeResult() {
+    if (this.correctTarget === 6) return 1;
+    if (this.correctTarget === 5 && this.correctBonus) return 2;
+    if (this.correctTarget === 5 && !this.correctBonus) return 3;
+    if (this.correctTarget === 4) return 4;
+    if (this.correctTarget === 3) return 5;
+    return 0;
+  }
 }
 
 export default Lotto;
