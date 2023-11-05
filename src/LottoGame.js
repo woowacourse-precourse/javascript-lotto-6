@@ -68,6 +68,11 @@ class LottoGame {
     })
     return cnt;
   }
+
+  hasBonusNumber(targetArr) {
+    if(targetArr.includes(this.#bonus)) return true;
+    return false;
+  }
 }
 
 export default LottoGame;
