@@ -45,7 +45,7 @@ class Lottory {
             + (1500000 * this.#RESULT[2])
             + (50000 * this.#RESULT[3])
             + (5000 * this.#RESULT[4]);
-        return (earning / (this.#MY_LOTTO.length * 1000) * 100).toFixed(2);
+        return (earning / (this.#MY_LOTTO.length * 1000) * 100).toFixed(1);
     }
 
     getEarning() {
