@@ -4,17 +4,19 @@ import LottoIssuance from './LottoIssuance.js';
 export class PrintValue {
 	#lottoQuantity;
 	#lottoList;
+	#winningList;
 
-	constructor(lottoQuantity, lottoList) {
+	constructor(lottoQuantity, lottoList, winningList) {
 		this.#lottoQuantity = lottoQuantity;
 		this.#lottoList = lottoList;
+		this.#winningList = winningList;
 	}
 
 	test() {
 		// console.log(this.#LOTTO_QUANTITY);
 		this.lottoIssuedQuantity();
 		// console.log(this.lottoList);
-		this.winningDetail();
+		this.winningDetail(this.#winningList);
 	}
 
 	lottoIssuedQuantity() {
@@ -22,7 +24,15 @@ export class PrintValue {
 		this.#lottoList.map((ticket) => Console.print(ticket));
 	}
 
-	winningDetail() {
-		Console.print('당첨 통계\n ---');
+	winningDetail(winningList) {
+		Console.print(`
+당첨 통계
+---
+3개 일치 (5,000원) - ${winningList[0]}개
+4개 일치 (50,000원) -  ${winningList[1]}개
+5개 일치 (1,500,000원) -  ${winningList[2]}개
+5개 일치, 보너스 볼 일치 (30,000,000원) -  ${winningList[3]}개
+6개 일치 (2,000,000,000원) -  ${winningList[4]}개
+    `);
 	}
 }
