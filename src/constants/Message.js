@@ -1,4 +1,4 @@
-export const GUIDE_MESSAGE =Object.freeze({
+export const GUIDE_MESSAGE = Object.freeze({
   insertMoney: '구입 금액을 입력해 주세요.\n',
   insertWinningNumbers: '당첨 번호를 입력해 주세요.\n',
   insertBonusNumber: '보너스 번호를 입력해 주세요.\n',

@@ -1,13 +1,9 @@
+import { INITIAL_RESULT } from "../constants/Constant";
+
 export default class LottoResultCalculator {
   constructor(lottos) {
     this.lottos = lottos;
-    this.result = {
-      5: 0,
-      4: 0,
-      3: 0,
-      2: 0,
-      1: 0,
-    };
+    this.result = { ...INITIAL_RESULT };
   }
 
   getResult(winningNumbers, bonusNumber) {
