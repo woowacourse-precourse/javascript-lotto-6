@@ -12,9 +12,9 @@ const inputs = {
     return lottoAnswer;
   },
 
-  async enterBonusNumber() {
-    const numberAnswer = await Console.readLineAsync(MESSAGE.input.bonusNumber);
-    return numberAnswer;
+  async enterBonus() {
+    const bonusAnswer = await Console.readLineAsync(MESSAGE.input.bonus);
+    return bonusAnswer;
   },
 };
 
