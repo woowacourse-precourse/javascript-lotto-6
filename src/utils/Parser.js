@@ -9,7 +9,11 @@ const Parser = {
 
   sort(value) {
     return value.sort((a, b) => a - b);
-  }  
+  },  
+
+  toFixedOneDecimal(number) {
+    return number.toFixed(1);
+  },
 };
 
 export default Parser;

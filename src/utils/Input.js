@@ -27,8 +27,16 @@ const Input = {
     }
   },
 
-  async getBonusNumber() {
-    return await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+  async getBonusNumber(winningNumbers) {
+    try {
+      const input = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+      const bonusNumber = Parser.valueToNumber(input); 
+      Validator.bonusNumber(winningNumbers, bonusNumber);
+      return bonusNumber;      
+    } catch (error) {
+      Console.print(error.message);
+      return await this.getBonusNumber(winningNumbers);      
+    }
   }
 }
   

@@ -21,6 +21,18 @@ const Validator = {
       throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
   },  
+
+  bonusNumber(winningNumbers, bonusNumber) {
+    const numbers = [...winningNumbers, bonusNumber];
+    const uniqueNumbers = new Set(numbers);
+
+    if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+    if (uniqueNumbers.size !== numbers.length) {
+      throw new Error("[ERROR] 당첨 번호와 중복된 숫자가 없어야 합니다.");
+    }
+  }
 };
 
 export default Validator;

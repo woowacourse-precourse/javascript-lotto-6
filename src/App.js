@@ -11,12 +11,12 @@ class App {
     const lottos = new Lottos(ticketCount);
 
     const winningNumbers = await Input.getWinningNumbers();
-    const bonusNumber = await Input.getBonusNumber();    
+    const bonusNumber = await Input.getBonusNumber(winningNumbers);    
 
-    const results = lottos.calculateResults(winningNumbers, bonusNumber)
+    const results = lottos.calculateResults(winningNumbers, bonusNumber)      
     const statistics = new Statistics(results);
     const profitRate = statistics.calculateProfitRate(purchaseAmount);
-    Output.printProfitRate(profitRate);
+    Output.printProfitRate(profitRate);    
   }    
 }
 
