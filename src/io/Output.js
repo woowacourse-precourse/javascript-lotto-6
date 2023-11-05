@@ -5,6 +5,7 @@ import {
     MATCH,
     ZERO,
     EARNING_MESSAGES,
+    BUYING_COUNT_MESSAGE,
 } from "../utils/Define";
 import { calculateEarnings } from "../utils/Calculate.js";
 
@@ -37,4 +38,8 @@ const displayResults = (results) => {
 const displayEarnings = (results, purchaseAmount) => {
     const earnings = calculateEarnings(results, purchaseAmount);
     Console.print(`${EARNING_MESSAGES.FIRST}${earnings.toLocaleString()}${EARNING_MESSAGES.SECOND}`);
+};
+
+export const printNumberOfLottos = (numberOfLottos) => {
+    Console.print(`${numberOfLottos}${BUYING_COUNT_MESSAGE}`);
 };

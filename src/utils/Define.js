@@ -11,6 +11,8 @@ export const RADIX_TEN = 10;
 export const PERCENTAGE = 100;
 export const DEMICAL_POINT = 1;
 
+export const BUYING_COUNT_MESSAGE = '개를 구매했습니다.';
+
 export const PRIZE_MAP = {
     '3': 5000,
     '4': 50000,
