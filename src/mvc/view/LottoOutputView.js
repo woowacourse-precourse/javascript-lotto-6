@@ -20,13 +20,13 @@ const {
 } = CONSTANTS;
 
 class LottoOutputView {
-  static purchasedLotto(lottoArray) {
+  purchasedLotto(lottoArray) {
     Print.lineBreak();
     Console.print(`${lottoArray.length}${PURCHASED_LOTTO_FORMAT}`);
     lottoArray.forEach(Print.lottoNumbers);
   }
 
-  static lottoNumbers(lotto) {
+  lottoNumbers(lotto) {
     Console.print(
       `${LOTTO_FRONT_COVER}${lotto
         .getNumbers()
@@ -34,27 +34,32 @@ class LottoOutputView {
     );
   }
 
-  static errorMessage(error) {
+  errorMessage(error) {
     Console.print(error.message);
   }
 
-  static lottoResult(resultArray) {
+  lottoResult(resultArray) {
     Console.print(LOTTO_RESULT_HEADER);
     Console.print(`${DASH}${DASH}${DASH}`);
-    Print.fifthPlaceResult(resultArray);
-    Print.fourthPlaceResult(resultArray);
-    Print.thirdPlaceResult(resultArray);
-    Print.secondPlaceResult(resultArray);
-    Print.firstPlaceResult(resultArray);
+    this.#fifthPlaceResult(resultArray);
+    this.#fourthPlaceResult(resultArray);
+    this.#thirdPlaceResult(resultArray);
+    this.#secondPlaceResult(resultArray);
+    this.#firstPlaceResult(resultArray);
   }
 
-  static lottoReturnRatio(returnRatio) {
+  lottoReturnRatio(returnRatio) {
     Console.print(
       `${RETURN_RATIO_HEADER}${returnRatio.toFixed(1)}${RETURN_RATIO_FOOTER}`
     );
   }
 
-  static fifthPlaceResult(resultArray) {
+  
+  lineBreak() {
+    Console.print('');
+  }
+
+  #fifthPlaceResult(resultArray) {
     Console.print(
       `${FIFTH_PLACE_RESULT_HEADER}${SPACE}${DASH}${SPACE}${
         resultArray[6] + resultArray[7]
@@ -62,7 +67,7 @@ class LottoOutputView {
     );
   }
 
-  static fourthPlaceResult(resultArray) {
+  #fourthPlaceResult(resultArray) {
     Console.print(
       `${FOURTH_PLACE_RESULT_HEADER}${SPACE}${DASH}${SPACE}${
         resultArray[8] + resultArray[9]
@@ -70,33 +75,24 @@ class LottoOutputView {
     );
   }
 
-  static thirdPlaceResult(resultArray) {
-    Console.print(
-      `${FOURTH_PLACE_RESULT_HEADER}${SPACE}${DASH}${SPACE}${resultArray[10]}${UNIT_OF_LOTTO}`
-    );
-  }
-
-  static thirdPlaceResult(resultArray) {
+  #thirdPlaceResult(resultArray) {
     Console.print(
       `${THIRD_PLACE_RESULT_HEADER}${SPACE}${DASH}${SPACE}${resultArray[10]}${UNIT_OF_LOTTO}`
     );
   }
 
-  static secondPlaceResult(resultArray) {
+  #secondPlaceResult(resultArray) {
     Console.print(
       `${SECOND_PLACE_RESULT_HEADER}${SPACE}${DASH}${SPACE}${resultArray[11]}${UNIT_OF_LOTTO}`
     );
   }
 
-  static firstPlaceResult(resultArray) {
+  #firstPlaceResult(resultArray) {
     Console.print(
       `${FIRST_PLACE_RESULT_HEADER}${SPACE}${DASH}${SPACE}${resultArray[12]}${UNIT_OF_LOTTO}`
     );
   }
 
-  static lineBreak() {
-    Console.print('');
-  }
 }
 
 export default LottoOutputView;
