@@ -8,6 +8,13 @@ class LottoGame {
 
     const amount = Number(amountStr);
     Validation.isDivisible(amount);
+
+    const lottoNum = this.calculateLottomNum(amount);
+    IO.printMsg(`\n${lottoNum}개를 구매했습니다.`);
+  }
+
+  calculateLottomNum(amount) {
+    return amount / 1000;
   }
 }
 
