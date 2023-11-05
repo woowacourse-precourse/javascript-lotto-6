@@ -1,6 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
-import {ERROR_MESSAGE} from './message';
+import {ERROR_MESSAGE, PRINT_MESSAGE} from './message';
 
 class App {
   constructor() {
@@ -56,14 +56,14 @@ class App {
   }
 
   printLottoResult(lottoResult, lottoRate){
-    Console.print('당첨 통계\n');
-    Console.print('---\n');
-    Console.print(`3개 일치 (5,000원) - ${lottoResult[0]}개\n`);
-    Console.print(`4개 일치 (50,000원) - ${lottoResult[1]}개\n`);
-    Console.print(`5개 일치 (1,500,000원) - ${lottoResult[2]}개\n`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${lottoResult[3]}개\n`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${lottoResult[4]}개\n`);
-    Console.print(`총 수익률은 ${lottoRate}%입니다.\n`);
+    Console.print(PRINT_MESSAGE.MATCH_STATS);
+    Console.print(PRINT_MESSAGE.LINE);
+    Console.print(PRINT_MESSAGE.THREE_MATCHES(lottoResult[0]));
+    Console.print(PRINT_MESSAGE.FOUR_MATCHES(lottoResult[1]));
+    Console.print(PRINT_MESSAGE.FIVE_MATCHES(lottoResult[2]));
+    Console.print(PRINT_MESSAGE.FIVE_BONUS(lottoResult[3]));
+    Console.print(PRINT_MESSAGE.SIX_MATCHES(lottoResult[4]));
+    Console.print(PRINT_MESSAGE.TOTAL_RATE(lottoRate));
   }
 
   getLottoNumberArray(userLottoNumber){
@@ -77,6 +77,7 @@ class App {
     })
     return randomNumberArray;
   }
+
 
   async play() {
     try{
