@@ -18,6 +18,11 @@ class UserPayment {
       throw new Error(ERROR.NO_THOUSAND_UNIT);
     }
   }
+
+  numberOfTickets() {
+    const ticketCounts = this.payment / 1000;
+    return ticketCounts;
+  }
 }
 
 export default UserPayment;
