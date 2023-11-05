@@ -3,11 +3,17 @@ import OutputView from '../views/OutputView.js';
 import PROPMT_MESSAGE from '../constants/propmtMessage.js';
 import ERROR_MESSAGE from '../constants/erroeMessage.js';
 import LottoStore from '../models/LottoStore.js';
+import LottoComparer from '../models/LottoComparer.js';
+import LottoWinnerPrize from '../models/LottoWinnerPrize.js';
 
 const { bonusNumber, winningNumber, purchasePrice } = PROPMT_MESSAGE;
 const { purchaseInvalidAmount } = ERROR_MESSAGE;
 
 class LottoController {
+  constructor() {
+    this.lottoWinnerPrize = new LottoWinnerPrize();
+  }
+
   // propmt
   purchasedPrice;
 
@@ -16,18 +22,24 @@ class LottoController {
   // model
   lottoComparer;
 
+  lottoWinnerPrize;
+
   // FINAL
   LOTTO_PRICE = '1000';
 
-  async buyLotto() {
+  async startLotto() {
     this.purchasedPrice = await this.propmtPurchasedPrice();
     this.purchasedAmount = this.calculateAmount(
       this.purchasedPrice,
       this.LOTTO_PRICE,
     );
+    this.createLottoDomain();
+  }
 
+  createLottoDomain() {
     const lottoStore = new LottoStore(this.purchasedAmount);
     const lottos = lottoStore.createLottoTickets();
+    this.lottoComparer = new LottoComparer(lottos, this.lottoWinnerPrize);
   }
 
   async propmtPurchasedPrice() {
@@ -54,6 +66,14 @@ class LottoController {
     return price / lottoPrice;
   }
 
+  async setWinningNumbers() {
+    const winningNumbers = await this.propmtWinningNumber();
+    const bonusNumbers = await this.propmtBonusNumber();
+
+    this.lottoComparer.WinningNumbers = winningNumbers.split(',').map(Number);
+    this.lottoComparer.bonusNumber = Number(bonusNumbers);
+  }
+
   async propmtBonusNumber() {
     const { readLineAsync } = InputView;
 
@@ -66,6 +86,10 @@ class LottoController {
 
     const winningNumbers = await readLineAsync(winningNumber);
     return winningNumbers;
+  }
+
+  compareLottoNumbers() {
+    this.lottoComparer.setComparedLottoNumbers();
   }
 }
 export default LottoController;

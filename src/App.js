@@ -8,7 +8,9 @@ class App {
   }
 
   async play() {
-    await this.lottoController.buyLotto();
+    await this.lottoController.startLotto();
+    await this.lottoController.setWinningNumbers();
+    this.lottoController.compareLottoNumbers();
   }
 }
 
