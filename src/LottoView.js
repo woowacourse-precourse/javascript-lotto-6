@@ -1,6 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class LottoView {
+  displayPurchaseInfo(numberOfSets, lottoNumbers) {
+    Console.print(`${numberOfSets}개를 구매했습니다.`);
+    lottoNumbers.forEach((numbers) => {
+      Console.print(`[${numbers}]`);
+    });
+  }
+
   displayStatistics(statistics) {
     Console.print("당첨 통계");
     Console.print("---");

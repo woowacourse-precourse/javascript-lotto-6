@@ -2,7 +2,6 @@ import Lotto from "./Lotto.js";
 import LottoCalculator from "./LottoResults.js";
 import UserInput from "./UserInput.js";
 import LottoView from "./LottoView.js";
-import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async play() {
@@ -12,15 +11,13 @@ class App {
     const numberOfSets = lottoAmount / 1000;
     const lottoNumbers = Lotto.generateNumbers(numberOfSets);
 
-    lottoNumbers.forEach((numbers) => {
-      Console.print(`[${numbers}]`);
-    });
+    const view = new LottoView();
+    view.displayPurchaseInfo(numberOfSets, lottoNumbers);
 
     const winningNumbers = await UserInput.inputNumber();
     const bonusNumber = await UserInput.inputBonus(winningNumbers);
 
     const calculator = new LottoCalculator(winningNumbers, numberOfSets);
-    const view = new LottoView(); // 뷰 인스턴스 생성
     const statistics = calculator.calculateStatistics(lottoNumbers);
     view.displayStatistics(statistics);
   }
