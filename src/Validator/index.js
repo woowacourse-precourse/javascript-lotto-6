@@ -5,7 +5,7 @@ class Validator {
   static #isNotNaturalNumber(value) {
     const num = Number(value);
 
-    if (!Number.isNaN(value) || !Number.isSafeInteger(num) || num <= 0) {
+    if (Number.isNaN(value) || !Number.isSafeInteger(num) || num <= 0) {
       return true;
     }
     return false;
@@ -13,8 +13,9 @@ class Validator {
 
   static #isOutOfRange(number) {
     if (
-      this.#isNotNaturalNumber(number) &&
-      (number > RANDOM.max || number < RANDOM.min)
+      this.#isNotNaturalNumber(number) ||
+      number > RANDOM.max ||
+      number < RANDOM.min
     ) {
       throw new ValidationError(ERROR.outOfRange);
     }
