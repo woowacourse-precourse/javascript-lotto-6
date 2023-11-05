@@ -28,6 +28,8 @@ const winningDetails = {
    prize : [5000, 50000, 1500000, 30000000, 2000000000]
 }
 
+const storage = {}
+
 async function inputMoney() {
   let comment = PURCASE_COMMENT;
   MissionUtils.Console.print(comment);
