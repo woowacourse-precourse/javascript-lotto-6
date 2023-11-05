@@ -17,6 +17,9 @@ class LottoController {
     OutputView.printUserLottos(userLottos);
 
     const { winningNumbers, bonusNumber } = await this.#drawLottery();
+    const winningResult = this.#lottoModel.getResult(winningNumbers, bonusNumber);
+
+    OutputView.printResult(this.#lottoModel.calculateResult(winningResult));
   }
 
   async #purchaseLotto() {
