@@ -12,7 +12,17 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  result(winningNum, bonusNum){
+    const res = {cnt: 0, hasBonus:false}
+    //TODO: 매직넘버로 바꾸기
+    for (let i = 0; i<6; i++){
+      if(this.#numbers.includes(winningNum[i])){
+        res.cnt++;
+      }
+    }
+    if(this.#numbers.includes(bonusNum)) res.hasBonus = true;
+    return res;
+  }
 }
 
 export default Lotto;
