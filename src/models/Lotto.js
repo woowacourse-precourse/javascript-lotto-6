@@ -29,14 +29,13 @@ class Lotto {
   /**
    * 자동 로또를 여러 장 발급
    * @param {number} money
-   * @returns {{lottoes: Lotto[], count: number}}
+   * @returns {Lotto[]}
    */
   static buyAutomaticLotto(money) {
     Validation.validateMoney(money);
-    const lottoes = new Array(Math.floor(money / OPTION.LOTTO_PRICE))
+    return new Array(Math.floor(money / OPTION.LOTTO_PRICE))
       .fill(0)
       .map(() => new Lotto(Lotto.pickRandomNumbers()));
-    return { lottoes, count: lottoes.length };
   }
 
   /**
