@@ -27,12 +27,12 @@ class InputView {
 
   static #parseWinningNumbers(numbers) {
     const splitedNumbers = numbers.split(COMMON.comma);
-    return splitedNumbers.map((number) => number.trim());
+    return splitedNumbers.map((number) => Number(number.trim()));
   }
 
   static async inputBonusNumber() {
     const bonusNumber = await Console.readLineAsync(MESSAGE.input.bonusNumber);
-    return bonusNumber;
+    return Number(bonusNumber);
   }
 }
 
