@@ -31,7 +31,7 @@ class App {
     numbers.printResult(results);
 
     const profitRate = this.getProfitRate(amount, results);
-    console.log(`수익률: ${profitRate}`);
+    Console.print(`총 수익률은 ${profitRate}입니다.`);
   }
 
   async getAmount() {
@@ -49,16 +49,16 @@ class App {
 
   getLottoNumbers(count) {
     const playCount = count / 1000;
-    const allLottoNumbers = [];
-
-    Console.print(`\n${playCount}개를 구매했습니다.`);
+    const allLottoTickets = [];
+  
+    Console.print(`${playCount}개를 구매했습니다.`);
     for (let i = 0; i < playCount; i++) {
-      const randomLottoNumbers = this.printRandomLottoNumbers();
-      allLottoNumbers.push(randomLottoNumbers);
-      Console.print(randomLottoNumbers);
+      const randomLottoTicket = this.printRandomLottoNumbers();
+      allLottoTickets.push(randomLottoTicket);
+      Console.print(`[${randomLottoTicket.join(', ')}]`);
     }
-
-    return allLottoNumbers;
+  
+    return allLottoTickets;
   }
 
   printRandomLottoNumbers() {
