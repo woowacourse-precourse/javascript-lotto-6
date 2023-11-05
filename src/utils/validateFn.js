@@ -22,12 +22,10 @@ export const validateLength = (numberArr) => {
   }
 };
 
-export const validateRange = (numberArr) => {
-  numberArr.forEach((number) => {
-    if (number < 1 || number > 45) {
-      throw new Error(ERROR_MESSAGE.INVALID_LOTTO_RANGE);
-    }
-  });
+export const validateRange = (number) => {
+  if (number < 1 || number > 45) {
+    throw new Error(ERROR_MESSAGE.INVALID_LOTTO_RANGE);
+  }
 };
 
 export const validateUnique = (numberArr) => {
