@@ -12,9 +12,9 @@ class Input {
       const inputValue = await Console.readLineAsync(this.content);
       const validator = ValidatorFactory.initialize(this.type);
       validator.evaluate(inputValue);
-      return Number(inputValue);
-    } catch (e) {
-      throw new Error(e);
+      return inputValue;
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }
