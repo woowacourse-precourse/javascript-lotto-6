@@ -53,6 +53,9 @@ class LottoGame {
     IO.printMsg(`5개 일치 (1,500,000원) - ${resultObj.fiveMatches}개`);
     IO.printMsg(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${resultObj.fiveMatchesAndBonus}개`);
     IO.printMsg(`6개 일치 (2,000,000,000원) - ${resultObj.sixMatches}개`);
+
+    const profitRate = this.calculateProfitRate(amount, resultObj);
+    IO.printMsg(`총 수익률은 ${profitRate}%입니다.`);
   }
 
   calculateLottomNum(amount) {
@@ -112,6 +115,18 @@ class LottoGame {
     };
 
     return resObj;
+  }
+
+  calculateProfitRate(amount, resObj) {
+    // 가격들 상수 처리
+    let total = 0;
+    total += resObj.threeMatches * 5000;
+    total += resObj.fourMatches * 50000;
+    total += resObj.fiveMatches * 1500000;
+    total += resObj.fiveMatchesAndBonus * 30000000;
+    total += resObj.sixMatches * 2000000000;
+    
+    return ((total / amount) * 100).toFixed(1);
   }
 }
 
