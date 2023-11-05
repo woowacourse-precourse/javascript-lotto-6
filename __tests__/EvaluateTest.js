@@ -1,4 +1,4 @@
-import LottoEvaluator from "../src/domain/LottoEvaluator";
+import LottoEvaluator from "../src/domain/LottoEvaluator.js";
 
 describe("로또 결과 평가", () => {
   let lottoEvaluator;

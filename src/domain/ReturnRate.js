@@ -1,4 +1,5 @@
-import { PRINT } from "../const/Messages";
+import { PRINT } from "../const/Messages.js";
+import { Console } from "@woowacourse/mission-utils";
 
 class ReturnRate {
   constructor(prize, payment) {
@@ -19,11 +20,8 @@ class ReturnRate {
   printReturnRate() {
     const print = PRINT.RETURN_RATE;
     const rateString = print.replace("${rate}", this.rounding().toString());
-    console.log(rateString);
+    Console.print(rateString);
   }
 }
-
-const result = new ReturnRate(5000, 50000);
-result.printReturnRate();
 
 export default ReturnRate;

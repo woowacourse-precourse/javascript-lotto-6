@@ -1,4 +1,4 @@
-import UserPayment from "../src/domain/UserPayment";
+import UserPayment from "../src/domain/UserPayment.js";
 import { Console } from "@woowacourse/mission-utils";
 
 // Result.js 관련 단위 테스트

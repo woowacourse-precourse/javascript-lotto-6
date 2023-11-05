@@ -1,4 +1,4 @@
-import { PRINT, PRIZE } from "../const/Messages";
+import { PRINT, PRIZE } from "../const/Messages.js";
 
 class LottoEvaluator {
   constructor(baseNumbers, bonusNumber) {
