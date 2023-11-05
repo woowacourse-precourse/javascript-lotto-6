@@ -1,9 +1,8 @@
-import { Console } from '@woowacourse/mission-utils';
-import Comparison from './domains/Comparison.js';
+import LottoComparison from './domains/LottoComparison.js';
 import Counter from './domains/Counter.js';
 import WinningLottoMachine from './domains/WinningLottoMachine.js';
-import { INPUT_MESSAGES } from './constants/messages.js';
 import printLottoNumbers from './print/printLottoNumbers.js';
+import getInputAmount from './input/getInputAmount.js';
 
 class LottoController {
   #myLotto;
@@ -14,7 +13,7 @@ class LottoController {
     await this.#compare();
   }
   async #buyLotto() {
-    const inputAmount = await Console.readLineAsync(INPUT_MESSAGES.inputAmount);
+    const inputAmount = await getInputAmount();
     const counter = new Counter(Number(inputAmount));
     this.#myLotto = counter.giveLotto;
 
@@ -24,8 +23,8 @@ class LottoController {
     this.#winningLottoMachine = await WinningLottoMachine.machineStart();
   }
   async #compare() {
-    const compare = new Comparison(this.#myLotto, this.#winningLottoMachine);
-    await compare.run();
+    const compare = new LottoComparison(this.#myLotto, this.#winningLottoMachine);
+    compare.run();
   }
 }
 

@@ -12,13 +12,9 @@ class Counter {
   #lottoTicketNumber;
 
   constructor(inputAmount) {
-    this.#validate(inputAmount);
     this.#calculateLottoTicketNumber(inputAmount);
   }
 
-  #validate(inputAmount) {
-    validateInputAmount(inputAmount);
-  }
   #calculateLottoTicketNumber(inputAmount) {
     this.#lottoTicketNumber = inputAmount / 1000;
   }
