@@ -1,9 +1,17 @@
+import Computer from "./Computer.js";
 import User from "./User.js";
+import { MIN_PURCHASE_AMOUNT } from "./constant.js";
 
 class App {
-  async play() {
+  constructor(){
     this.user = new User();
-    const purchaseAmount = this.user.inputPurchaseAmount();
+    this.computer = new Computer();
+    this.lottoList = [];
+  }
+
+  async play() {
+    const purchaseAmount = await this.user.inputPurchaseAmount();
+    this.lottoList = this.computer.makeLottoList(purchaseAmount);
   }
 }
 
