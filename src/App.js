@@ -1,20 +1,27 @@
 import { Console } from "@woowacourse/mission-utils";
 import NumberIssuance from "./NumberIssuance.js";
 import ValidateInput from "./ValidateInput.js";
+import LottoGame from "./LottoGame.js";
 
 class App {
   async play() {
     const amount = await this.getAmount();
     const numberIssuance = new NumberIssuance(amount);
+    const myLotto = numberIssuance.lottoNumbers;
 
-    await App.displayPurchase(numberIssuance.EA, numberIssuance.lottoNumbers);
+    await App.displayPurchase(numberIssuance.EA, myLotto);
 
     const winningNumber = await this.getWinningNumber();
-
     const bonusNumber = await this.getBonusNumber(winningNumber);
 
-    Console.print(winningNumber);
-    Console.print(bonusNumber);
+    const winningLotto = {
+      win: winningNumber,
+      bonus: bonusNumber,
+    };
+
+    const lottoGame = new LottoGame(myLotto, winningLotto);
+
+    Console.print(lottoGame.lottos);
   }
 
   async getAmount() {
