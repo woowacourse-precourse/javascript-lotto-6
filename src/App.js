@@ -53,7 +53,7 @@ class App {
   async #generateWinningLotto() {
     try {
       const answer = await InputView.getWinningLotto();
-      return new Lotto(answer.split(',').map((lottoNum) => Number(lottoNum)));
+      return new Lotto(answer.split(',').map((lottoNum) => lottoNum));
     } catch (error) {
       OutputView.printError(error.message);
       return this.#generateWinningLotto();
@@ -66,7 +66,7 @@ class App {
   async #generateBonus() {
     try {
       const answer = await InputView.getBonus();
-      return new Bonus(Number(answer), this.#winningLotto.getLotto());
+      return new Bonus(answer, this.#winningLotto.getLotto());
     } catch (error) {
       OutputView.printError(error.message);
       return this.#generateBonus();

@@ -17,10 +17,17 @@ describe('로또 클래스 테스트', () => {
 
   // 아래에 추가 테스트 작성 가능
   test('숫자가 아닌 값을 입력하면 예외가 발생한다.', () => {
-    const winningLotto = [NaN, 2, 3, 4, 5, 6];
-    expect(() => {
-      new Lotto(winningLotto);
-    }).toThrow(ERROR_MESSAGE.notNumber);
+    const winningLottoList = [
+      ['', 2, 3, 4, 5, 6],
+      [' ', 2, 3, 4, 5, 6],
+      ['1f', 2, 3, 4, 5, 6],
+    ];
+
+    winningLottoList.forEach((lotto) => {
+      expect(() => {
+        new Lotto(lotto);
+      }).toThrow(ERROR_MESSAGE.notNumber);
+    });
   });
 
   test('1부터 45사이의 수가 아니면 예외가 발생한다.', () => {
