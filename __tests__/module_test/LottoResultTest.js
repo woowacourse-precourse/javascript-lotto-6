@@ -21,7 +21,7 @@ describe('당첨 결과 확인 테스트.', () => {
   const expectedProfit = 40631100;
 
   test('당첨 번호와 로또 번호 비교.', () => {
-    const testResult = LottoResult.calculateNumbers(
+    const testResult = LottoResult.calculateResultBoard(
       lottoNumbers,
       winNumber,
       bonusNumber
