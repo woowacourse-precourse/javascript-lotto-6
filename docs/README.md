@@ -55,7 +55,7 @@
 
 ### [Controller] LottoGame
 
-- 멤버변수 : money(입력받은 돈), myLottos(LottoList 객체), winningLotto(WinningLotto 객체)
+- 멤버변수 : money(입력받은 돈), myLottos(LottoList 객체), winningLotto(WinningLotto 객체), rewardCount(당첨된 로또 카운팅)
 - [v] : 로또 구매
   - [v] : 돈 입력
     - [v] : 숫자 검사
@@ -67,6 +67,7 @@
   - [v] : 당첨 번호 입력
   - [v] : 보너스 번호 입력
 - [ ] : 결과 생성
+  - [ ] : 문구 출력
   - [ ] : 당첨 통계 계산
   - [ ] : 당첨 통계 출력
   - [ ] : 총 수익률 계산
