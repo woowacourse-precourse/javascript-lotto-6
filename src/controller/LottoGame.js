@@ -5,6 +5,7 @@ import { validateDivisible, validateNumber } from '../utils/validateFn.js';
 import {
   printBeforeResult,
   printBuyLottery,
+  printMyBenefit,
   printWinningStatus,
 } from '../view/outputPompt.js';
 import WinningLotto from '../model/WinningLotto.js';
@@ -51,6 +52,7 @@ class LottoGame {
     printBeforeResult();
     this.#compareWinningNumber();
     printWinningStatus(this.#rewardCount);
+    printMyBenefit(this.#calculateTotalBenefit());
   }
 
   #compareWinningNumber() {
@@ -89,6 +91,18 @@ class LottoGame {
     } else {
       this.#rewardCount[matchCount]++;
     }
+  }
+
+  #calculateTotalBenefit() {
+    const myWinningMoney =
+      5000 * this.#rewardCount['3'] +
+      50000 * this.#rewardCount['4'] +
+      1500000 * this.#rewardCount['5'] +
+      30000000 * this.#rewardCount['5b'] +
+      200000000 * this.#rewardCount['6'];
+
+    const myThrowMoney = this.#money;
+    return (myWinningMoney / myThrowMoney) * 100;
   }
 }
 
