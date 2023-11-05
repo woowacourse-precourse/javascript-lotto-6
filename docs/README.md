@@ -9,6 +9,13 @@
 - [ ] : 한개의 로또 티켓 set
 - [ ] : 한개의 로또 티켓 get
 
+### [Model]LottoList
+
+- 멤버변수 : myLottos(생성된 모든 로또를 담은 리스트)
+- [ ] : 리스트에 로또 추가
+- [ ] : 추가된 로또 갯수 반환
+- [ ] : 모든 로또의 정보 출력
+
 ### [Model]WinningLotto
 
 - 멤버변수 : winningNumber(당첨 번호), bonusNumer(보너스 번호)
