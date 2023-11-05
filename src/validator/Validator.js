@@ -15,12 +15,6 @@ const Validator = {
     this.checkHasDuplicate(lotto);
   },
 
-  validateBonusNumber(bonusNumber) {
-    this.checkIsNotNumber(bonusNumber);
-    this.checkIsNotPositive(bonusNumber);
-    this.checkIsOutOfRange(bonusNumber);
-  },
-
   checkIsNotNumber(userInput) {
     if (this.isNotNumber(userInput)) {
       throw new ValidationError(ERROR.isNotNumber);
