@@ -1,12 +1,4 @@
-import ValidationError from './ValidationError/index.js';
-import { NUMBER, ERROR, RANDOM, SYMBOLS } from '../constants/index.js';
 
-class Validator {
-  static #isNotNaturalNumber(value) {
-    const num = Number(value);
-
-    if (!Number.isNaN(value) || !Number.isSafeInteger(num) || num <= 0) {
-      return true;
     }
     return false;
   }
@@ -31,11 +23,3 @@ class Validator {
 
   static validateRangeOfNumbers(numbers) {
     numbers
-      .replace(/\s/g, '')
-      .split(SYMBOLS.numberDivider)
-      .filter(Boolean)
-      .forEach((value) => this.#isOutOfRange(value));
-  }
-}
-
-export default Validator;
