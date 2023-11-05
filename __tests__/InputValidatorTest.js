@@ -86,4 +86,12 @@ describe('💙 InputValidator 클래스를 테스트합니다. ฅ^._.^ฅ', () 
       InputValidator.validateWinningNumbers(invalidNumberList),
     ).toThrow(ERROR_MESSAGE.NOT_A_UNIQUE);
   });
+
+  test('[validateBonusNumber] 숫자가 아닌 값이면 에러가 발생한다.', () => {
+    const invalidBonusnumber = 'REASON';
+
+    expect(() =>
+      InputValidator.validateBonusNumber(invalidBonusnumber),
+    ).toThrow(ERROR_MESSAGE.NOT_A_NUMBER);
+  });
 });
