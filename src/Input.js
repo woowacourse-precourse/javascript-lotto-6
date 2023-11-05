@@ -16,4 +16,12 @@ export class Input {
 
     return winningNumbers;
   }
+
+  async getBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+      MESSAGES.INPUT_BONUS_NUMBER + "\n"
+    );
+
+    return bonusNumber;
+  }
 }
