@@ -1,5 +1,16 @@
+import View from "./View.js";
+
 class App {
-  async play() {}
+  view;
+  price;
+
+  constructor() {
+    this.view = new View();
+  }
+
+  async play() {
+    const INPUT = await this.view.getPrice();
+  }
 }
 
 export default App;
