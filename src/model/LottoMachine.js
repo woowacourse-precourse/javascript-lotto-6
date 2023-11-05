@@ -1,6 +1,6 @@
 import Lotto from './Lotto.js';
-import { generateUniqueNumbers } from '../utils/GenerateRandomNumberUtils.js';
-import { GAME_SETTINGS } from '../constants/gameSettings.js';
+import { generateUniqueNumbers } from '../utils/GenerateRandomNumberUtils';
+import { GAME_SETTINGS } from '../constants/gameSettings';
 
 export default class LottoMachine {
   generateTickets(purchaseAmount) {

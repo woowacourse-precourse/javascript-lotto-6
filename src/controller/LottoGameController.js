@@ -1,8 +1,8 @@
-import InputView from '../view/InputView.js';
-import OutputView from '../view/OutputView.js';
-import InputValidator from '../utils/InputValidator.js';
-import LottoMachine from '../model/LottoMachine.js';
-import LottoResult from '../model/LottoResult.js';
+import InputView from '../view/InputView';
+import OutputView from '../view/OutputView';
+import InputValidator from '../utils/InputValidator';
+import LottoMachine from '../model/LottoMachine';
+import LottoResult from '../model/LottoResult';
 
 export default class LottoGameController {
   constructor() {
