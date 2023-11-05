@@ -1,4 +1,4 @@
-import LIMITS from '../constants/limits.js';
+import { LIMITS } from '../constants/fixedValue.js';
 import Validate from '../utils/ValidateUtils.js';
 import { arrayWinningNumbers, changeType } from '../utils/arrayUtils.js';
 
@@ -44,7 +44,9 @@ class Validator {
       '[ERROR] 숫자가 잘못된 형식입니다.',
     );
     if (LIMITS.maxRange < bonusNumber) {
-      throw new Error('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
+      throw new Error(
+        `[ERROR] 보너스 번호는 ${LIMITS.minRange}부터 ${LIMITS.maxRange}사이의 숫자여야 합니다.`,
+      );
     }
 
     return bonusNumber;
