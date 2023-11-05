@@ -1,6 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lottos from '../model/Lottos.js';
 import WinningLotto from '../model/WinningLotto.js';
+import InputView from '../view/InputView.js';
+import OutputView from '../view/OutputView.js';
 
 class LottoController {
   #lottos;
@@ -17,7 +19,7 @@ class LottoController {
   }
 
   async inputMoney() {
-    const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    const money = await InputView.printPurchaseAmount();
     const getLottoCount = this.calculateLottoCount(money);
     this.#lottos = new Lottos(getLottoCount);
     this.showLottos();
@@ -30,33 +32,32 @@ class LottoController {
   }
 
   showLottos() {
-    Console.print('\n');
+    Console.print('');
     const lottos = this.#lottos.getLottos();
     this.printLottosCount(lottos.length);
     this.printLottoNumbers(lottos);
   }
 
   printLottosCount(lottoCount) {
-    Console.print(`${lottoCount}개를 구매했습니다.`);
+    OutputView.printLottosCount(lottoCount);
   }
 
   printLottoNumbers(lottos) {
     lottos.map(lotto => {
-      Console.print(`[${lotto.getNumbers().join(', ')}]`);
+      OutputView.printLottoNumbers(lotto);
     });
+    Console.print('');
   }
 
   async inputWinningLottoNumbers() {
-    const winningLottoNumbers =
-      await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const winningLottoNumbers = await InputView.printWinningLottoNumbers();
     Console.print('');
 
     this.#winningLottos = winningLottoNumbers.split(',').map(Number);
   }
 
   async inputBonusLottoNumber() {
-    const winningBonusNumber =
-      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const winningBonusNumber = await InputView.printWinningBonusNumber();
     Console.print('');
 
     this.#winningLottos = new WinningLotto(
@@ -114,7 +115,7 @@ class LottoController {
     const lottoPurchaseAmount = lottos.length * 1000;
     const lottoROI = ((totalPrize / lottoPurchaseAmount) * 100).toFixed(1);
 
-    Console.print(`총 수익률은 ${lottoROI}%입니다.`);
+    OutputView.printLottoROI(lottoROI);
   }
 }
 
