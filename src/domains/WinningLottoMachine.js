@@ -1,7 +1,5 @@
-import { Console } from '@woowacourse/mission-utils';
-import { INPUT_MESSAGES } from '../constants/messages.js';
-import validateWinningNumbers from '../validations/validateWinningNumbers.js';
-import validateBonusNumber from '../validations/validateBonusNumber.js';
+import getWinningNumbers from '../input/getWinningNumbers.js';
+import getBonusNumber from '../input/getBonusNumber.js';
 
 class WinningLottoMachine {
   #winningNumbers;
@@ -13,12 +11,8 @@ class WinningLottoMachine {
   }
 
   static async machineStart() {
-    const winningNumbers = (await Console.readLineAsync(INPUT_MESSAGES.winningNumbers)).split(',').map((number) => Number(number.trim()));
-    validateWinningNumbers(winningNumbers);
-    winningNumbers.sort((a, b) => a - b);
-
-    const bonusNumber = Number(await Console.readLineAsync(INPUT_MESSAGES.bonusNumber));
-    validateBonusNumber(winningNumbers, bonusNumber);
+    const winningNumbers = await getWinningNumbers();
+    const bonusNumber = await getBonusNumber(winningNumbers);
 
     return new WinningLottoMachine(winningNumbers, bonusNumber);
   }
