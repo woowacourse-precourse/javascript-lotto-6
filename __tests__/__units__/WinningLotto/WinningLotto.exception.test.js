@@ -57,37 +57,16 @@ describe('WinningLotto 예외 테스트', () => {
     { input: true },
     { input: undefined },
   ])(
-    '`prepare(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.',
+    '`grade(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.',
     ({ input }) => {
       // given
       const winningLotto = WinningLotto.of(Lotto.of([1, 2, 3, 4, 5, 6]), LottoNumber.valueOf(7));
 
       // when
-      const result = () => winningLotto.prepare(input);
+      const result = () => winningLotto.grade(input);
 
       // then
-      expect(result).toThrow(WinningLotto.ERROR_MESSAGES.invalidPrepareArg);
-    },
-  );
-
-  it.each([
-    { input: 1 },
-    { input: {} },
-    { input: [] },
-    { input: '1' },
-    { input: true },
-    { input: undefined },
-  ])(
-    '`hasBons(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.',
-    ({ input }) => {
-      // given
-      const winningLotto = WinningLotto.of(Lotto.of([1, 2, 3, 4, 5, 6]), LottoNumber.valueOf(7));
-
-      // when
-      const result = () => winningLotto.hasBonus(input);
-
-      // then
-      expect(result).toThrow(WinningLotto.ERROR_MESSAGES.invalidHasBonusArg);
+      expect(result).toThrow(WinningLotto.ERROR_MESSAGES.invalidGradeArg);
     },
   );
 });

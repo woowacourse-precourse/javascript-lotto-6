@@ -2,61 +2,45 @@ import { Lotto, LottoNumber, WinningLotto } from '../../../src/domain/index.js';
 
 describe('WinningLotto 테스트', () => {
   it.each([
-    { winningNumbers: [1, 2, 3, 4, 5, 6], numbers: [1, 2, 3, 4, 5, 6], matched: 6 },
-    { winningNumbers: [11, 22, 33, 44, 5, 6], numbers: [1, 2, 3, 4, 5, 6], matched: 2 },
-    { winningNumbers: [13, 15, 14, 18, 26, 7], numbers: [1, 13, 3, 7, 14, 6], matched: 3 },
-    { winningNumbers: [1, 2, 3, 4, 5, 6], numbers: [11, 22, 33, 44, 7, 9], matched: 0 },
-  ])(
-    '`prepare(lotto)` 호출 시 `lotto`와 우승 로또가 몇 개의 숫자가 같은지 확인한다.',
-    ({ winningNumbers, numbers, matched }) => {
-      // given
-      const bonus = LottoNumber.valueOf(38);
-      const winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonus);
-      const lotto = Lotto.of(numbers);
-
-      // when
-      const result = winningLotto.prepare(lotto);
-
-      // then
-      expect(result).toBe(matched);
+    {
+      winningNumbers: [1, 2, 3, 4, 5, 6],
+      bonusNumber: 7,
+      lottoNumbers: [1, 2, 3, 4, 5, 6],
+      result: { match: 6, hasBonus: false },
     },
-  );
-
-  it.each([
-    { winningNumbers: [1, 2, 3, 4, 5, 6], numbers: [1, 2, 3, 4, 5, 7], bonusNumber: 7 },
-    { winningNumbers: [1, 2, 3, 4, 5, 6], numbers: [11, 22, 33, 44, 5, 6], bonusNumber: 44 },
+    {
+      winningNumbers: [11, 22, 33, 44, 5, 6],
+      bonusNumber: 2,
+      lottoNumbers: [1, 2, 3, 4, 5, 6],
+      result: { match: 2, hasBonus: true },
+    },
+    {
+      winningNumbers: [13, 15, 14, 18, 26, 7],
+      bonusNumber: 8,
+      lottoNumbers: [1, 13, 3, 7, 14, 6],
+      result: { match: 3, hasBonus: false },
+    },
+    {
+      winningNumbers: [1, 2, 3, 4, 5, 6],
+      bonusNumber: 8,
+      lottoNumbers: [11, 22, 33, 44, 7, 9],
+      result: { match: 0, hasBonus: false },
+    },
   ])(
-    '입력받은 bonus를 WinningLotto의 lotto가 소유하였을시 true를 반환합니다.',
-    ({ winningNumbers, numbers, bonusNumber }) => {
+    '`grade(lotto)` 호출 시 `lotto`와 우승 로또가 몇 개의 숫자가 같은지와 보너스 소유 여부를 확인한다.',
+
+    // eslint-disable-next-line object-curly-newline
+    ({ winningNumbers, bonusNumber, lottoNumbers, result }) => {
       // given
-      const lotto = Lotto.of(numbers);
       const bonus = LottoNumber.valueOf(bonusNumber);
       const winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonus);
+      const lotto = Lotto.of(lottoNumbers);
 
       // when
-      const result = winningLotto.hasBonus(lotto);
+      const graded = winningLotto.grade(lotto);
 
       // then
-      expect(result).toBeTruthy();
-    },
-  );
-
-  it.each([
-    { numbers: [1, 2, 3, 4, 5, 6], bonusNumber: 8 },
-    { numbers: [11, 22, 33, 44, 5, 6], bonusNumber: 7 },
-  ])(
-    '입력받은 bonus를 WinningLotto의 lotto가 소유하지 않았을시 false를 반환합니다.',
-    ({ numbers, bonusNumber }) => {
-      // given
-      const lotto = Lotto.of(numbers);
-      const bonus = LottoNumber.valueOf(bonusNumber);
-      const winningLotto = WinningLotto.of(Lotto.of([1, 2, 3, 4, 5, 6]), bonus);
-
-      // when
-      const result = winningLotto.hasBonus(lotto);
-
-      // then
-      expect(result).toBeFalsy();
+      expect(graded).toEqual(result);
     },
   );
 });

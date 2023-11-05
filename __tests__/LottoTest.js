@@ -67,4 +67,27 @@ describe('로또 클래스 테스트', () => {
       expect(result).toBeFalsy();
     },
   );
+
+  it.each([
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], otherLottoNumbers: [1, 2, 3, 4, 5, 6], match: 6 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], otherLottoNumbers: [1, 2, 3, 4, 5, 16], match: 5 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], otherLottoNumbers: [1, 2, 3, 4, 15, 16], match: 4 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], otherLottoNumbers: [1, 2, 3, 14, 15, 16], match: 3 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], otherLottoNumbers: [1, 2, 13, 14, 15, 16], match: 2 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], otherLottoNumbers: [1, 12, 13, 14, 15, 16], match: 1 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], otherLottoNumbers: [11, 12, 13, 14, 15, 16], match: 0 },
+  ])(
+    '`prepare(lotto)` 호출 시 `lotto`와 몇 개의 숫자가 같은지 확인한다.',
+    ({ lottoNumbers, otherLottoNumbers, match }) => {
+      // given
+      const lotto = Lotto.of(lottoNumbers);
+      const otherLotto = Lotto.of(otherLottoNumbers);
+
+      // when
+      const result = lotto.prepare(otherLotto);
+
+      // then
+      expect(match).toBe(result);
+    },
+  );
 });

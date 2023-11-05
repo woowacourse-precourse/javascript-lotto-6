@@ -113,6 +113,10 @@
     <td><code>numbers</code>를 반환합니다.</td>
   </tr>
   <tr>
+    <td>prepare(lotto)</td>
+    <td>입력받은 <code>lotto</code>와 몇개가 동일한지 계산합니다.</td>
+  </tr>
+  <tr>
     <td>match(number)</td>
     <td>입력받은 <code>LottoNumber</code>가 <code>numbers</code>에 포함되었는지 비교합니다.</td>
   </tr>
@@ -141,12 +145,8 @@
     <th>설명</th>
   </tr>
   <tr>
-    <td>prepare(lotto)</td>
-    <td>입력받은 <code>lotto</code>가 <code>WinningLotto</code>의<code>lotto</code>와 몇개가 동일한지 계산합니다.</td>
-  </tr>
-  <tr>
-    <td>hasBonus(lotto)</td>
-    <td>입력받은 <code>lotto</code>가 <code>WinningLotto</code>의<code>bonus</code>를 소유하였는지 확인합니다.</td>
+    <td>grade(lotto)</td>
+    <td>입력받은 <code>lotto</code>의 맞춘 개수와 보너스 소유 여부를 반환합니다.</td>
   </tr>
 </table>
 
@@ -306,12 +306,14 @@
 - [x] Lotto
 
   - [x] `match(number)` 호출 시 `numbers`에 해당 인자를 보유하였는지 확인한다.
+  - [x] `prepare(lotto)` 호출 시 `lotto`와 몇 개의 숫자가 같은지 확인한다.
 
 - [x] Lotto 예외 처리
 
   - [x] 인스턴스 생성 시 `numbers`에 중복된 숫자가 존재할 시 에러가 발생한다.
   - [x] 인스턴스 생성 시 `numbers`가 6개가 아닐 시 에러가 발생한다.
   - [x] `match(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
+  - [x] `prepare(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.
 
 - [x] LottoMachine
 
@@ -324,16 +326,14 @@
 
 - [x] WinningLotto
 
-  - [x] `prepare(lotto)` 호출 시 `lotto`와 우승 로또가 몇 개의 숫자가 같은지 확인한다.
-  - [x] `hasBonus(lotto)` 호출 시 `lotto`가 우승 로또의 보너스를 소유했는지 확인한다.
+  - [x] `grade(lotto)` 호출 시 `lotto`와 우승 로또가 몇 개의 숫자가 같은지와 보너스 소유 여부를 확인한다.
 
 - [x] WinningLotto 예외 처리
 
   - [x] 인스턴스 생성 시 `lotto`에 `Lotto`가 아닌 값이 입력될 시 에러가 발생한다.
   - [x] 인스턴스 생성 시 `bonus`에 `LottoNumber`가 아닌 값이 입력될 시 에러가 발생한다.
   - [x] 인스턴스 생성 시 `bonus`가 `lotto`에 이미 존재할 시 에러가 발생한다.
-  - [x] `prepare(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.
-  - [x] `hasBonus(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다.
+  - [x] `grade(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.
 
 - [x] LottoReward
 
@@ -357,9 +357,9 @@
 
   - [x] `getLottosResult(lottos)` 호출 시 인자로 `Lotto`가 아닌 값이 존재할 시 에러가 발생한다.
 
-- [ ] Calculator
+- [x] Calculator
 
-  - [ ] `earningRate(income, rewards)` 호출 시 입력받은 `rewards`의 수익률을 소숫점 둘째자리에서 반올림하여 반환한다.
+  - [x] `earningRate(income, rewards)` 호출 시 입력받은 `rewards`의 수익률을 소숫점 둘째자리에서 반올림하여 반환한다.
 
 - [ ] Calculator 예외 처리
 

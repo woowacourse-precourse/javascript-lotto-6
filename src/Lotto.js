@@ -14,6 +14,7 @@ class Lotto {
     invalidQuantity: '6개의 로또 숫자를 입력해주세요!',
     duplicated: ERROR_MESSAGE_GENERATOR.duplicated('로또 숫자'),
     invalidMatchArg: 'match의 인자에 LottoNumber를 입력해주세요!',
+    invalidPrepareArg: 'prepare의 인자에 Lotto를 입력해주세요!',
   });
 
   /**
@@ -55,6 +56,22 @@ class Lotto {
    */
   getNumbers() {
     return this.#numbers;
+  }
+
+  /**
+   * 입력받은 `lotto`와 몇 개의 숫자가 같은지 확인랍니다.
+   * @param {Lotto} lotto
+   * @returns {number}
+   */
+  prepare(lotto) {
+    this.#validatePrepare(lotto);
+    return this.#numbers.filter((number) => lotto.match(number)).length;
+  }
+
+  #validatePrepare(lotto) {
+    if (!(lotto instanceof Lotto)) {
+      throw new ApplicationError(Lotto.ERROR_MESSAGES.invalidPrepareArg);
+    }
   }
 
   /**

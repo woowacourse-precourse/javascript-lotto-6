@@ -7,8 +7,7 @@ class WinningLotto {
     invalidLottoArg: 'lotto에 Lotto를 입력해주세요!',
     invalidBonusArg: 'bonus에 LottoNumber를 입력해주세요!',
     existBonus: '당첨 번호에 보너스 번호가 존재합니다!',
-    invalidPrepareArg: 'prepare의 인자에 Lotto를 입력해주세요!',
-    invalidHasBonusArg: 'hasBonus의 인자에 Lotto를 입력해주세요!',
+    invalidGradeArg: 'grade의 인자로 Lotto를 입력해주세요!',
   });
 
   /**
@@ -57,37 +56,22 @@ class WinningLotto {
   }
 
   /**
-   * 입력받은 lotto가 WinningLotto의 lotto와 몇개가 동일한지 계산합니다.
+   * `lotto`와 우승 로또가 몇 개의 숫자가 같은지와 보너스 소유 여부를 확인한다.
    * @param {Lotto} lotto
-   * @returns {number}
+   * @returns {import('./LottoReward.js').RewardRequirement}
    */
-  prepare(lotto) {
-    this.#validatePrepare(lotto);
-    const numbers = lotto.getNumbers();
-    const result = numbers.filter((number) => this.#lotto.match(number)).length;
+  grade(lotto) {
+    this.#validateGrade(lotto);
 
-    return result;
+    const match = lotto.prepare(this.#lotto);
+    const hasBonus = lotto.match(this.#bonus);
+
+    return { match, hasBonus };
   }
 
-  #validatePrepare(lotto) {
+  #validateGrade(lotto) {
     if (!(lotto instanceof Lotto)) {
-      throw new ApplicationError(WinningLotto.ERROR_MESSAGES.invalidPrepareArg);
-    }
-  }
-
-  /**
-   * 입력받은 bonus가 WinningLotto의 lotto가 소유하였는지 확인합니다.
-   * @param {Lotto} lotto
-   * @returns {boolean}
-   */
-  hasBonus(lotto) {
-    this.#validateHasBonus(lotto);
-    return lotto.match(this.#bonus);
-  }
-
-  #validateHasBonus(lotto) {
-    if (!(lotto instanceof Lotto)) {
-      throw new ApplicationError(WinningLotto.ERROR_MESSAGES.invalidHasBonusArg);
+      throw new ApplicationError(WinningLotto.ERROR_MESSAGES.invalidGradeArg);
     }
   }
 }

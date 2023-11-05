@@ -37,4 +37,39 @@ describe('Lotto 예외 테스트', () => {
       expect(result).toThrow(Lotto.ERROR_MESSAGES.invalidMatchArg);
     },
   );
+
+  it.each([{ number: 1 }, { number: '1' }, { number: {} }])(
+    '`match(number)` 호출 시 인자로 `LottoNumber`가 아닌 값이 들어올 시 에러가 발생한다',
+    ({ number }) => {
+      // given
+      const lotto = Lotto.of([1, 2, 3, 4, 5, 6]);
+
+      // when
+      const result = () => lotto.match(number);
+
+      // then
+      expect(result).toThrow(Lotto.ERROR_MESSAGES.invalidMatchArg);
+    },
+  );
+
+  it.each([
+    { input: 1 },
+    { input: {} },
+    { input: [] },
+    { input: '1' },
+    { input: true },
+    { input: undefined },
+  ])(
+    '`prepare(lotto)` 호출 시 인자로 `Lotto`가 아닌 값이 들어올 시 에러가 발생한다.',
+    ({ input }) => {
+      // given
+      const lotto = Lotto.of([1, 2, 3, 4, 5, 6]);
+
+      // when
+      const result = () => lotto.prepare(input);
+
+      // then
+      expect(result).toThrow(Lotto.ERROR_MESSAGES.invalidPrepareArg);
+    },
+  );
 });
