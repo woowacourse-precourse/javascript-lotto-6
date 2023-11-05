@@ -23,14 +23,14 @@ class App {
   }
 
   async play() {
-    this.#payment = await Input.inputPayment();
+    this.#payment = await Input.payment();
     const amount = this.#payment / LOTTO_PRICE;
     Console.print(`\n${amount}개를 구매했습니다.`);
 
     this.generateLottos(amount);
 
-    this.#winning = await Input.inputWinning();
-    this.#bonus = await Input.inputBonusNumber(this.#winning);
+    this.#winning = await Input.winning();
+    this.#bonus = await Input.bonusNumber(this.#winning);
   }
 }
 
