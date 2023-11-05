@@ -1,9 +1,24 @@
-import { Console } from '@woowacourse/mission-utils';
-import { PlayLotto, LottoResult } from './game/PlayLotto.js';
-import { Inputs } from './ui/Input.js';
-import { Lotto } from './Lotto.js';
+class Lotto {
+  #numbers;
 
-class App {
+  constructor(numbers) {
+    this.#validate(numbers);
+    this.#numbers = numbers;
+  }
+
+  #validate(numbers) {
+    // 중복 검사
+    const isDuplicated = new Set(numbers).size !== numbers.length;
+
+    if (isDuplicated) {
+      throw new Error('[ERROR] 중복 값이 존재합니다.');
+    }
+
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+  }
+
   async play() {
     try {
       const amount = await Inputs.getAmount(`구입금액을 입력해 주세요.`);
@@ -29,6 +44,7 @@ class App {
       Console.print(e);
     }
   }
+  // TODO: 추가 기능 구현
 }
 
-export default App;
+export default Lotto;
