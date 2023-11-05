@@ -59,11 +59,11 @@ class Calculation {
 
   calcTotalReturn() {
     let profit = 0;
-    for (const [key, value] of Object.entries(this.#rank)) {
+    Object.entries(this.#rank).forEach(([key, value]) => {
       if (value > 0) {
         profit += PRIZE_MONEY[PRIZE_MONEY.MATCH_COUNT[key]];
       }
-    }
+    });
 
     const purcahseAmount = this.#purchasedLotto.length * LOTTO.PRICE;
     const totalReturn = (profit / purcahseAmount) * 100;
