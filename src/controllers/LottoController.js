@@ -41,9 +41,23 @@ class LottoController {
         print.printLottoTikets(this.lottoCount);
     }
 
+    makeRandomLotto() {
+        //로또 생성
+        const generate = new GetLotto();
+        this.lottos = generate.generateLottoNumbers(this.lottoCount);
+        this.printRandomLotto();
+    }
+
+    printRandomLotto() {
+        //로또 출력
+        const print = new OutputView();
+        this.lottos.forEach(numbers => print.printLottoNum(numbers));
+    }
+
     async start() {
         await this.getBudget();
         this.purchaseLottoTickets();
+        this.makeRandomLotto();
     }
 }
 
