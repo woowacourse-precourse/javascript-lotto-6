@@ -7,3 +7,11 @@ export const GAME_RULE = Object.freeze({
   MAX_AMOUNT_UNIT: 100_000,
   SEPARATOR: ',',
 });
+
+export const GAME_REWARD = Object.freeze({
+  three: 5_000,
+  four: 50_000,
+  five: 1_500_000,
+  bonus: 30_000_000,
+  six: 2_000_000_000,
+});
