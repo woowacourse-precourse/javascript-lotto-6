@@ -65,10 +65,26 @@ class GuessLotto {
   }
 
   async inputBonusNumber() {
-    this.#guessBonus = await Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n',
-    );
-    return this.#guessBonus;
+    try {
+      this.#guessBonus = await Console.readLineAsync(
+        '\n보너스 번호를 입력해 주세요.\n',
+      );
+      this.validateBonusNumber(this.#guessBonus);
+      return this.#guessBonus;
+    } catch (error) {
+      Console.print(error.message);
+      return this.inputBonusNumber();
+    }
+  }
+
+  validateBonusNumber(number) {
+    if (Number.isNaN(+number) || +number < 1 || +number > 45) {
+      throw new Error('[ERROR] 보너스 번호 입력이 잘못되었습니다.');
+    }
+
+    if (this.#guessNumbers.includes(number) || !Number.isInteger(+number)) {
+      throw new Error('[ERROR] 보너스 번호 입력이 잘못되었습니다.');
+    }
   }
 
   async buyLotto() {
