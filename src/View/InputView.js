@@ -3,6 +3,7 @@ import MESSAGE from '../constants/message.js';
 import isPositiveInteger from '../utils/function.js';
 import ERROR from '../constants/error.js';
 import CustomError from '../errors/CustomError.js';
+import COMMON from '../constants/common.js';
 
 class InputView {
   static async inputMoney() {
@@ -21,7 +22,13 @@ class InputView {
     const winningNumbers = await Console.readLineAsync(
       MESSAGE.input.winningNumber,
     );
-    return winningNumbers;
+    return InputView.#parseWinningNumbers(winningNumbers);
+  }
+
+  static #parseWinningNumbers(numbers) {
+    const splitedNumbers = numbers.split(COMMON.comma);
+    splitedNumbers.map((number) => number.trim());
+    return splitedNumbers;
   }
 }
 
