@@ -23,16 +23,7 @@ describe("당첨 통계 테스트", () => {
   test("당첨 내역을 모두 출력한다.", () => {
     const logSpy = getLogSpy();
     
-    const COUNTS = 8;
-    const results = [
-      [1,0],
-      [1,0],
-      [0,0],
-      [3,1],
-      [1,0],
-      [2,0],
-      [1,0],
-      [2,1]];
+    const results = [1,0,0,0,0];
     const logs = [
       "3개 일치 (5,000원) - 1개",
       "4개 일치 (50,000원) - 0개",
@@ -41,32 +32,11 @@ describe("당첨 통계 테스트", () => {
       "6개 일치 (2,000,000,000원) - 0개"
     ];
 
-    lottoResultsPrinter(results, COUNTS);
+    lottoResultsPrinter(results);
 
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(logs));
-  });
-
-  test.each([
-    [[3,0],1,"3개 일치 (5,000원) - 1개"],
-    [[4,0],2,"4개 일치 (50,000원) - 2개"],
-    [[6,0],1,"6개 일치 (2,000,000,000원) - 1개"]
-  ])("당첨 내역을 출력한다.", (resultsInputs, countInputs, logs) => {
-    const logSpy = getLogSpy();
-
-    lottoResultPrinter(resultsInputs, countInputs);
-
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(logs));
-  });
-
-  test.each([
-    [[5,0],3,"5개 일치 (1,500,000원) - 3개",],
-    [[5,1],1,"5개 일치, 보너스 볼 일치 (30,000,000원) - 1개"]
-  ])("2등과 3등 당첨 내역을 출력한다.", (resultsInputs, countInputs, logs) => {
-    const logSpy = getLogSpy();
-
-    lottoResultPrinter(resultsInputs, countInputs);
-
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(logs));
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
   });
 
   test("총 수익률을 출력한다.", () => {

@@ -24,10 +24,11 @@ const WINNING_NUMBER_COMMENT = "당첨 번호를 입력해 주세요.";
 const BONUS_NUMBER_COMMENT = "보너스 번호를 입력해 주세요.";
 //const LOTTO_PRICE = 1000;
 const winningDetails = {
-   same : [3, 4, [5,0], [5,1], 6],
-   prize : [5000, 50000, 1500000, 30000000, 2000000000],
-   winning : [0,0,0,0,0],
-   totalPrize : 0
+  same : [3, 4, 5, 5, 6],
+  sameAndBounus : [3, 4, [5,0], [5,1], 6],
+  prize : [5000, 50000, 1500000, 30000000, 2000000000],
+  winning : [0,0,0,0,0],
+  totalPrize : 0
 }
 
 var winningResults = [];
@@ -107,7 +108,24 @@ export function lottoReader(lotto, winning, bonus) {
   return [sameNumbers.length, sameBonus.length];
 }
 
-export function lottoResultsPrinter(results, counts) {
+export function lottoResultsPrinter(results) {
+  for (let i = 0; i < results.length; i++) {
+    const prize = winningDetails.prize[i]
+    const currencyPrize = formatCurrency(prize);
+    if (i === 3) {
+      MissionUtils.Console.print(
+        `${winningDetails.same[i]}개 일치, 보너스 볼 일치 (${currencyPrize}원) - ${results[i]}개`
+      );
+    } else {
+      MissionUtils.Console.print(
+        `${winningDetails.same[i]}개 일치 (${currencyPrize}원) - ${results[i]}개`
+      );
+    }
+  }
+}
+
+
+function lottoResultsCounter(results, counts) {
   for (let i = 0; i < counts; i++) {
     lottoResultCounter(results[i]);
   }
