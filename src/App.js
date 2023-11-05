@@ -16,9 +16,11 @@ class App {
     const numbers = await this.UserInput.RequestNumbers();
 
     const bonus = await this.UserInput.RequestBonus(numbers);
-    const calculate = new Calculate(numbers, arrays, bonus);
+    const calculate = new Calculate(amount, numbers, arrays, bonus);
     const count = calculate.count();
-    console.log(calculate.collect(count));
+    const collected = calculate.collect(count);
+
+    console.log(calculate.rate(collected));
   }
 }
 
