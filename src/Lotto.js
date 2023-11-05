@@ -14,14 +14,12 @@ class Lotto {
       const lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       this.sortLottoNumbers(lottoNumber);
     }
+
+    return this.lottoNumbersArray;
   }
 
   sortLottoNumbers(lottoNumber) {
     this.lottoNumbersArray.push(lottoNumber.sort((num1, num2) => num1 - num2));
-  }
-
-  printLottoNumbersArray() {
-    return this.lottoNumbersArray;
   }
 
   #validate(numbers) {

@@ -10,8 +10,11 @@ class App {
   }
 
   async startLotto() {
-    this.lottoController.handlePurchase();
+    const numberOfLottos = this.lottoController.handlePurchase();
+    this.outputView.printLottoCounts(numberOfLottos);
 
+    const lottoNumbersArray = this.lotto.generateLottoNumbers(numberOfLottos);
+    this.outputView.printLottos(lottoNumbersArray);
   }
 }
 

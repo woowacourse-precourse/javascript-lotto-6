@@ -15,11 +15,8 @@ class LottoController {
   async handlePurchase() {
     const purchaseAmount = await this.inputView.promptPurchaseAmount();
     const numberOfLottos = this.lottoMachine.calculateLottoCount(purchaseAmount);
-    this.outputView.printLottoCounts(numberOfLottos);
     
-    this.lotto.generateLottoNumbers(numberOfLottos);
-    const lottoNumbersArray = this.lotto.printLottoNumbersArray();
-    this.outputView.printLottos(lottoNumbersArray);
+    return numberOfLottos;
   }
 }
 

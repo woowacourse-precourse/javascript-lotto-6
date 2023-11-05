@@ -50,9 +50,6 @@ generateLottoNumbers
 sortLottoNumbers
 - [x] 로또 번호를 오름차순으로 정렬
 
-printLottoNumbersArray
-- [x] 로또 번호들의 값을 넘김
-
 <br/>
 
 ## LottoMachine.js 
