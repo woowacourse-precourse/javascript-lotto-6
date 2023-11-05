@@ -10,7 +10,7 @@ class MVC {
     const OUTPUT_VIEW = new LottoOutputView();
     const CONTROLLER = new LottoController(MODEL, INPUT_VIEW, OUTPUT_VIEW);
 
-    CONTROLLER.play();
+    await CONTROLLER.play();
   }
 }
 

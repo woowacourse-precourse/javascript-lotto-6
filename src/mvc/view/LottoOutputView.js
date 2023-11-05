@@ -53,7 +53,6 @@ class LottoOutputView {
     );
   }
 
-  
   printLineBreak() {
     Console.print('');
   }
@@ -91,7 +90,6 @@ class LottoOutputView {
       `${FIRST_PLACE_RESULT_HEADER}${SPACE}${DASH}${SPACE}${resultArray[12]}${UNIT_OF_LOTTO}`
     );
   }
-
 }
 
 export default LottoOutputView;
