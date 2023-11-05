@@ -1,12 +1,12 @@
 import { MONEY_ERROR } from "../../src/constants/errorMessage.js";
-import MoneyValid from "../../src/utils/MoneyValid.js";
+import moneyIsValid from "../../src/utils/moneyIsValid.js";
 
 describe("금액 입력 테스트", () => {
-  let moneyValid;
+  // let moneyValid;
 
-  beforeAll(() => {
-    moneyValid = new MoneyValid();
-  });
+  // beforeAll(() => {
+  //   moneyValid = new MoneyValid();
+  // });
 
   test("문자가 들어간 경우", async () => {
     // given
@@ -22,7 +22,7 @@ describe("금액 입력 테스트", () => {
     // when, then
     inputs.forEach((testCase) => {
       const [testInput] = testCase;
-      expect(() => moneyValid.moneyIsValid(testInput)).toThrow(
+      expect(() => moneyIsValid(testInput)).toThrow(
         `${MONEY_ERROR.string_error}`
       );
     });
@@ -32,7 +32,7 @@ describe("금액 입력 테스트", () => {
     "공백이 들어간 경우",
     async (input) => {
       // when, then
-      await expect(() => moneyValid.moneyIsValid(input)).toThrow(
+      await expect(() => moneyIsValid(input)).toThrow(
         `${MONEY_ERROR.space_error}`
       );
     }
@@ -47,7 +47,7 @@ describe("금액 입력 테스트", () => {
     [`${Math.PI}`],
   ])("소수점이 들어간 경우", async (input) => {
     //when, then
-    await expect(() => moneyValid.moneyIsValid(input)).toThrow(
+    await expect(() => moneyIsValid(input)).toThrow(
       `${MONEY_ERROR.string_error}`
     );
   });
@@ -56,7 +56,7 @@ describe("금액 입력 테스트", () => {
     "1000원 미만의 금액이 입력 된 경우",
     async (input) => {
       //when, then
-      await expect(() => moneyValid.moneyIsValid(input)).toThrow(
+      await expect(() => moneyIsValid(input)).toThrow(
         `${MONEY_ERROR.amount_error}`
       );
     }
@@ -70,7 +70,7 @@ describe("금액 입력 테스트", () => {
     ["2147483647"],
   ])("1000원 단위 금액이 입력되지 않은 경우", async (input) => {
     //when, then
-    await expect(() => moneyValid.moneyIsValid(input)).toThrow(
+    await expect(() => moneyIsValid(input)).toThrow(
       `${MONEY_ERROR.amount_error}`
     );
   });

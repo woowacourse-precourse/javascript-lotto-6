@@ -10,7 +10,6 @@ class Lotto {
   }
 
   #validate(numbers) {
-    console.log(new Set(numbers).size);
     if (new Set(numbers).size !== numbers.length) {
       throw new Error(`${WINNING_ERROR.error}`);
     }

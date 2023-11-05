@@ -15,7 +15,6 @@ class LottoGame {
 
   lottoLogic() {
     const rank = NUMBERS.rank;
-    // console.log(this.#numbers);
     this.#userNumbers.forEach((value) => {
       const match = value.filter((number) =>
         this.#numbers.includes(number)

@@ -1,12 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
 import GAME_MESSAGE from "../../constants/gameMessage.js";
 import NUMBERS from "../../constants/numbers.js";
-import MoneyValid from "../../utils/MoneyValid.js";
+import moneyIsValid from "../../utils/moneyIsValid.js";
 
 class MoneyInput {
-  constructor() {
-    this.moneyValid = new MoneyValid();
-  }
+  constructor() {}
   async userInput() {
     return await Console.readLineAsync(`${GAME_MESSAGE.buy_money}`);
   }
@@ -15,7 +13,7 @@ class MoneyInput {
     do {
       money = await this.userInput();
       try {
-        valid = this.moneyValid.moneyIsValid(money);
+        valid = moneyIsValid(money);
       } catch (error) {
         Console.print(error.message);
         valid = false;
