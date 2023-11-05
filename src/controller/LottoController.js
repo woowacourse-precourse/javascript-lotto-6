@@ -11,7 +11,7 @@ class LottoController {
   #count;
   #winningNumber;
   #bonusNumber;
-  #winningStatic;
+  #winningStatistic;
   #revenueRate;
 
   constructor() {}
@@ -36,7 +36,7 @@ class LottoController {
       this.#winningNumber.getWinningNumber()
     );
     this.#bonusNumber = new BonusNumber(bonusNumber);
-    this.#winningStatic = new Rank(this.#lottos.getLottos());
+    this.#winningStatistic = new Rank(this.#lottos.getLottos());
     this.#displayResult();
   }
 
@@ -49,12 +49,12 @@ class LottoController {
   }
 
   #displayResult() {
-    const winningStatic = this.#winningStatic.getRankStatistic({
+    const winningStatistic = this.#winningStatistic.getRankStatistic({
       winningNumber: this.#winningNumber.getWinningNumber(),
       bonusNumber: this.#bonusNumber.getBonusNumber(),
     });
-    OutputView.printResultStatic(winningStatic);
-    this.#revenueRate = this.#count.getRevenueRate(winningStatic);
+    OutputView.printResultStatic(winningStatistic);
+    this.#revenueRate = this.#count.getRevenueRate(winningStatistic);
     OutputView.printRevenueResult(this.#revenueRate);
     return;
   }

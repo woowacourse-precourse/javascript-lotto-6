@@ -14,9 +14,9 @@ class Money {
     return this.#count;
   }
 
-  getRevenueRate(winningStatic) {
+  getRevenueRate(winningStatistic) {
     const purchasePrice = this.#count * NUMBER.price;
-    winningStatic.forEach((count, index) => {
+    winningStatistic.forEach((count, index) => {
       this.#revenue += WINNING_REWARD[index] * count;
     });
 

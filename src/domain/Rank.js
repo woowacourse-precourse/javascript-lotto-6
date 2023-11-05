@@ -2,10 +2,10 @@ import NUMBER from "../static/Number.js";
 
 class Rank {
   #lottos;
-  #rankStatic;
+  #rankStatistic;
 
   constructor(lottos) {
-    this.#rankStatic = Array(NUMBER.lottoRank).fill(0);
+    this.#rankStatistic = Array(NUMBER.lottoRank).fill(0);
     this.#lottos = lottos;
   }
   /**
@@ -30,9 +30,9 @@ class Rank {
   getRankStatistic(props) {
     this.#lottos.forEach((lotto) => {
       const rank = this.#getRank(lotto, props);
-      if (rank) this.#rankStatic[rank - 1] += 1;
+      if (rank) this.#rankStatistic[rank - 1] += 1;
     });
-    return this.#rankStatic;
+    return this.#rankStatistic;
   }
 
   #getSameNumberCount(lotto, winningNumber) {
