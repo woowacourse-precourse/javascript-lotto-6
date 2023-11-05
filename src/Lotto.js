@@ -1,4 +1,5 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE } from './constant.js';
 
 class Lotto {
   #numbers;
@@ -8,22 +9,26 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    } else if (numbers.length !== new Set(numbers).size) {
-      throw new Error('[ERROR] 로또는 중복된 번호가 나올 수 없습니다.');
-    }
+  static createLottoNumbers() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  #compareNumber(a, b) {
-    return a - b;
+  #validate(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error(ERROR_MESSAGE.THE_NUMBER);
+    } else if (numbers.length !== new Set(numbers).size) {
+      throw new Error(ERROR_MESSAGE.OVERLAP);
+    }
+    numbers.forEach((number) => {
+      if (!Number.isInteger(number) || number < 1 || number > 45) {
+        throw new Error(ERROR_MESSAGE.LOTTO_NUMBER_CONDITION);
+      }
+    });
   }
 
   // TODO: 추가 기능 구현
   printNumbers() {
-    const sortedNumbers = this.#numbers.sort(this.#compareNumber);
-    // "[1, 8, 11, 31, 41, 42]"
+    const sortedNumbers = this.#numbers.sort((a, b) => a - b);
     Console.print(
       `[${sortedNumbers[0]}, ${sortedNumbers[1]}, ${sortedNumbers[2]}, ${sortedNumbers[3]}, ${sortedNumbers[4]}, ${sortedNumbers[5]}]`
     );

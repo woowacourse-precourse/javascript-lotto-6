@@ -1,12 +1,9 @@
-import { Random, Console } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_MESSAGE, ERROR_MESSAGE } from './constant.js';
 import Lotto from './Lotto.js';
+import Statistics from './Statistics.js';
 
 class App {
-  static createLotto() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
-  }
-
   async inputMoney() {
     let money;
     try {
@@ -19,59 +16,6 @@ class App {
       money = await this.inputMoney();
     }
     return money;
-  }
-
-  static formatNumber(number) {
-    let roundedNumber = number.toFixed(2);
-    if (roundedNumber.slice(-3) === '.00') {
-      roundedNumber = roundedNumber.slice(0, -3);
-    } else if (roundedNumber.slice(-1) === '0') {
-      roundedNumber = roundedNumber.slice(0, -1);
-    }
-    return roundedNumber;
-  }
-
-  static calculateStatistics(winningNumber, bonusNumber, lottos) {
-    const statistics = {
-      first: 0,
-      second: 0,
-      third: 0,
-      fourth: 0,
-      fifth: 0,
-      earningRate: 0,
-    };
-    let earningMoney = 0;
-    lottos.forEach((lotto) => {
-      const score = lotto.filter((number) => winningNumber.includes(number)).length;
-      if (score === 6) {
-        statistics.first += 1;
-        earningMoney += 2000000000;
-      } else if (score === 5 && lotto.includes(bonusNumber)) {
-        statistics.second += 1;
-        earningMoney += 30000000;
-      } else if (score === 5) {
-        statistics.third += 1;
-        earningMoney += 1500000;
-      } else if (score === 4) {
-        statistics.fourth += 1;
-        earningMoney += 50000;
-      } else if (score === 3) {
-        statistics.fifth += 1;
-        earningMoney += 5000;
-      }
-    });
-    statistics.earningRate = App.formatNumber((earningMoney / (lottos.length * 1000)) * 100);
-    return statistics;
-  }
-
-  static printStatistics(statistics) {
-    Console.print(LOTTO_MESSAGE.WINNING_STATISTICS);
-    Console.print(`3개 일치 (5,000원) - ${statistics.fifth}개`);
-    Console.print(`4개 일치 (50,000원) - ${statistics.fourth}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${statistics.third}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${statistics.second}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${statistics.first}개`);
-    Console.print(`총 수익률은 ${statistics.earningRate}%입니다.`);
   }
 
   async inputWinningNumbers() {
@@ -112,17 +56,17 @@ class App {
   async play() {
     const lottos = [];
     const money = await this.inputMoney();
-    const lottoNumber = money / 1000;
-    Console.print(`${lottoNumber}개를 구매했습니다.`);
-    for (let i = 0; i < lottoNumber; i += 1) {
-      const lotto = new Lotto(App.createLotto());
+    const numberOfLotto = money / 1000;
+    Console.print(`${numberOfLotto}개를 구매했습니다.`);
+    for (let i = 0; i < numberOfLotto; i += 1) {
+      const lotto = new Lotto(Lotto.createLottoNumbers());
       lotto.printNumbers();
       lottos.push(lotto.getNumbers());
     }
     const winningNumbers = await this.inputWinningNumbers();
     const bonusNumber = await this.inputBonusNumber();
-    const statistics = App.calculateStatistics(winningNumbers, bonusNumber, lottos);
-    App.printStatistics(statistics);
+    const statistics = new Statistics(winningNumbers, bonusNumber, lottos);
+    statistics.printStatistics();
   }
 }
 
