@@ -37,11 +37,12 @@ class Lotto {
   matchLotto(winningNumbers, bonusNumber) {
     const matchingNumbers = this.#numbers.filter(number => winningNumbers.includes(number));
     const matchingCount = matchingNumbers.length;
-  
+
     if (matchingCount == 3) return 'three';
     if (matchingCount == 4) return 'four';
     if (matchingCount == 6) return 'all';
-    if (matchingCount == 5 && this.#numbers.includes(bonusNumber)) return 'bonus';
+    if (matchingCount == 5 && winningNumbers.includes(bonusNumber)) return 'bonus';
+    if (matchingCount == 5) return 'five';
   
     return 'zero';
   }

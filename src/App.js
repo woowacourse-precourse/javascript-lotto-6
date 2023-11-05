@@ -7,7 +7,8 @@ class App {
     const lottoNumbersArray = this.getLottoNumbers(amount);
     const numbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(numbers);
-  
+    const intBonusNumber = parseInt(bonusNumber, 10);
+
     const results = {
       three: 0,
       four: 0,
@@ -17,7 +18,7 @@ class App {
     };
     
     for (const lottoNumbers of lottoNumbersArray) {
-      const matchResult = numbers.matchLotto(lottoNumbers, bonusNumber);
+      const matchResult = numbers.matchLotto(lottoNumbers, intBonusNumber);
       if (matchResult == 'zero') continue;
       results[matchResult]++;
     }
