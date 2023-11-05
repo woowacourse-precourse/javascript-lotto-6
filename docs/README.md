@@ -47,3 +47,66 @@
    4. 반올림 시킨 값을 출력한다.
 
 ## 세부적인 기능 목록 (각 함수의 역할 밎 기능 중심)
+
+### 1. App class
+
+- **game Start Function**
+  : 로또 금액을 입력받고 금액만큼 무작위 로또 번호를 생성 및 출력하는 함수
+
+  - **getLottoPrice** : 로또 금액을 입력 받고 그 값을 Lottos 클래스(객체)에 넘겨주는 함수
+
+  - **checkLottos** : 로또 금액을 가지고 무작위 로또를 확인하는 함수
+
+  - **printLottos** : 무작위 로또를 출력하는 함수
+
+---
+
+- **game Progress Function**
+  : 로또 번호와 보너스 번호를 입력받고 무작위 로또 번호들과 일치하는 갯수를 판별 및 출력하는 함수
+
+  - **getLottoNumber , getLottoBounce** : 로또 번호와 보너스 번호를 입력받는 함수
+
+  - **checkLottoRank** : 로또 번호 + 보너스 번호와 무작위 로또 번호 사이에 일치하는 로또의 갯수를 확인하는 함수
+
+  - **printLottoRank** : 일치하는 로또 갯수를 통해서 로또 순위를 출력하는 함수
+
+---
+
+- **game End Function**
+  : 로또 금액과 상금을 통해 수익률을 개산 및 출력하는 함수
+
+  - **checkLottoBenfit** : 로또 금액과 상금을 통해 수익률을 계산하는 함수
+
+  - **printLottoBenfit** : 수익률을 출력하는 함수
+
+### 2. Lottos class
+
+- **lottoPrice , lottos** (field)
+
+- **validateLottoPrice , getLottos , setLottos , getLottoPrice** (method)
+
+  - **validateLottoPrice** : 로또 금액의 값이 정상적인 값인지 확인하는 함수
+
+  - **getLottos, getLottoPrice** : 로또 금액과 무작위 로또를 반환하는 함수
+
+  - **setLottos** : 무작위 로또를 생성하는 함수
+
+### 3. Lotto class
+
+- **lotto** (field)
+
+- **validate , getLotto** (method)
+
+  - **validate** : 로또의 번호들이 정상적인 값인지 확인하는 함수
+
+  - **getLotto** : 로또의 번호들을 반환하는 함수
+
+### 4. Bounce class
+
+- **bounce** (field)
+
+- **validateBounce , getBounce** (method)
+
+  - **validateBounce** : 로또의 보너스 번호가 정상적인 값이 들어왔는지 확인하는 함수
+
+  - **getBounce** : 로또의 보너스 번호를 반환하는 함수

@@ -36,23 +36,6 @@ class App {
     this.printLottoBenfit();
   }
 
-  /**
-   *
-   * Get Functions For Lotto
-   *
-   * elements
-   *
-   * getLottoPrice
-   * : the function to get the price
-   *
-   *
-   * getLottoNumber
-   * : the function to get the number
-   *
-   * getLottoBounce
-   * : the function to get the Bounce
-   */
-
   async getLottoPrice() {
     const lottoPriceInput = await Console.readLineAsync(INPUT_MESSAGE.price);
 
@@ -85,31 +68,6 @@ class App {
       await this.getLottoBounce();
     }
   }
-
-  /**
-   *
-   * Check Functions For Lotto
-   *
-   * elements
-   *
-   * checkLottos
-   * : the function to check Lottos from the lotto number
-   *
-   *
-   * checkLottoRank
-   * : the function to check LottoRank from the lotto
-   * is consisted by (checkLottoCount , checkBounceCount)
-   *
-   * checkLottoCount
-   * : the function to check LottoCount from the lotto
-   *
-   * checkBounceCount
-   * : the function to check BounceCount from the lotto
-   *
-   * checkLottoBenfit
-   * : the function to check LottoBenfit from the lotto
-   *
-   */
 
   checkLottos() {
     const lottoPrice = this.lottos.getLottoPrice();
@@ -173,25 +131,6 @@ class App {
 
     this.benefit = ((lottoGetPrice / lottoPostPrice) * 100).toFixed(1);
   }
-
-  /**
-   * Print Functions For Lotto
-   *
-   * elements
-   *
-   * printLottoBenfit
-   * : the function to print Lotto benfit
-   *
-   *
-   * printLottoRank
-   * : the function to print Lotto rank
-   *
-   *
-   * printLottos
-   * : the function to print Lottos
-   *
-   *
-   */
 
   printLottoBenfit() {
     const totalBenfit = this.benefit;
