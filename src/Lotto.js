@@ -28,6 +28,10 @@ class Lotto {
       this.#numbers.includes(winningNumber),
     );
   }
+
+  isMatchBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
 }
 
 export default Lotto;
