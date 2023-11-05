@@ -26,12 +26,17 @@ describe("당첨 번호 입력 테스트", () => {
     await expect(() => new Lotto(inputs)).toThrow(`${WINNING_ERROR.error}`);
   });
   test.each([
+    [1],
+    [1, 2],
+    [1, 2, 3],
+    [1, 2, 3, 4],
+    [1, 2, 3, 4, 5],
     [1, 2, 3, 4, 5, 6, 7],
     [1, 2, 3, 4, 5, 6, 7, 8],
     [1, 2, 3, 4, 5, 6, 7, 8, 9],
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  ])("6개 보다 초과된 숫자를 입력한 경우", async (inputs) => {
+  ])("숫자가 6개가 아닌 경우", async (inputs) => {
     //when, then
     await expect(() => new Lotto(inputs)).toThrow(`${WINNING_ERROR.error}`);
   });
