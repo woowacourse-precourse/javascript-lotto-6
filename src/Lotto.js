@@ -20,6 +20,16 @@ class Lotto {
   getLottoNumber() {
     return this.#numbers;
   }
+
+  getCorrectNumber(winNumber) {
+    let correct = 0;
+    winNumber.forEach((win) => {
+      if (this.#numbers.includes(parseInt(win))) {
+        correct++;
+      }
+    });
+    return correct;
+  }
 }
 
 export default Lotto;

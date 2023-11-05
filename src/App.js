@@ -8,6 +8,7 @@ class App {
   lottoPrice = 1000;
   lottoTotal;
   allLottos = [];
+  winResult = [];
 
   async askMoney() {
     const money = await MissionUtils.Console.readLineAsync(PRINT.ASK_BUY);
@@ -23,7 +24,7 @@ class App {
     }
   }
 
-  howManyLotto(money) {
+  gethowManyLotto(money) {
     this.lottoTotal = money / this.lottoPrice;
     return this.lottoTotal;
   }
@@ -95,16 +96,21 @@ class App {
   }
 
   async play() {
-    // const inputMoney = await this.askMoney();
-    // this.moneyTypeCheck(inputMoney);
+    const inputMoney = await this.askMoney();
+    this.moneyTypeCheck(inputMoney);
 
-    // MissionUtils.Console.print(
-    //   this.howManyLotto(inputMoney) + PRINT.RESULT_BUY
-    // );
-    // this.printAllLottos();
+    MissionUtils.Console.print(
+      this.gethowManyLotto(inputMoney) + PRINT.RESULT_BUY
+    );
+    this.printAllLottos();
 
     const winNumber = await this.askWinNumber();
-    // const winBonus = await this.askBonus(winNumber);
+    const winBonus = await this.askBonus(winNumber);
+
+    this.allLottos.forEach((lotto) => {
+      this.winResult.push(lotto.getCorrectNumber(winNumber));
+    });
+    MissionUtils.Console.print(this.winResult);
   }
 }
 
