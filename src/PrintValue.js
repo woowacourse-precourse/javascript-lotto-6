@@ -2,27 +2,27 @@ import { Console } from '@woowacourse/mission-utils';
 import LottoIssuance from './LottoIssuance.js';
 
 export class PrintValue {
-	#buyLotto;
+	#lottoQuantity;
+	#lottoList;
 
-	constructor(buyLotto) {
-		this.#buyLotto = buyLotto;
-		this.lottoQuantity = this.#calcQuantity();
-		this.lottoList = LottoIssuance(this.lottoQuantity);
-	}
-
-	#calcQuantity() {
-		return this.#buyLotto / 1000;
+	constructor(lottoQuantity, lottoList) {
+		this.#lottoQuantity = lottoQuantity;
+		this.#lottoList = lottoList;
 	}
 
 	test() {
-		console.log(this.lottoQuantity);
-		console.log(this.#buyLotto);
+		// console.log(this.#LOTTO_QUANTITY);
 		this.lottoIssuedQuantity();
 		// console.log(this.lottoList);
+		this.winningDetail();
 	}
 
 	lottoIssuedQuantity() {
-		Console.print(`${this.lottoQuantity}개를 구매했습니다.`);
-		this.lottoList.map((ticket) => Console.print(ticket));
+		Console.print(`${this.#lottoQuantity}개를 구매했습니다.`);
+		this.#lottoList.map((ticket) => Console.print(ticket));
+	}
+
+	winningDetail() {
+		Console.print('당첨 통계\n ---');
 	}
 }
