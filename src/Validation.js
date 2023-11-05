@@ -15,6 +15,10 @@ class Validation {
   static isValidLottoNum(num) {
     if((num < 1) || (num > 45)) throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자 형식이어야 합니다.');
   }
+
+  static isBonusInWinning(winningNumArr, bonusNum) {
+    if(winningNumArr.includes(bonusNum)) throw new Error('[ERROR] 보너스 번호는 당첨 번호에 없는 숫자를 입력해야 합니다.');
+  }
 }
 
 export default Validation;
