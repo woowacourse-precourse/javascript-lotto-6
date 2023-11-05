@@ -1,6 +1,6 @@
 import LottoPrizeManager from "../src/LottoPrizeManager.js";
 import PRIZE from "../src/constant/PRIZE.js";
-가;
+
 const correctWinningNumberArray = ["1", "2", "3", "4", "5", "6"];
 
 describe("LottoPrizeManager 클래스 테스트", () => {
@@ -39,4 +39,11 @@ describe("LottoPrizeManager 클래스 테스트", () => {
       }).toThrow(PRIZE.ERROR.BONUS_NUMBER_RANGE_NUMBER);
     }
   );
+
+  test("보너스 번호가 당첨 번호와 중복되면 예외 처리한다", () => {
+    const bonusNumber = "1";
+    expect(() => {
+      new LottoPrizeManager(correctWinningNumberArray, bonusNumber);
+    }).toThrow(PRIZE.ERROR.BONUS_NUMBER_DUPLICATE);
+  });
 });
