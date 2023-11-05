@@ -1,3 +1,4 @@
+import { Random } from '@woowacourse/mission-utils';
 import ERROR from '../constants/error.js';
 import CustomError from '../errors/error.js';
 import Validator from '../utils/Validator.js';
@@ -9,16 +10,35 @@ class Lotto {
 
   static #length = 6;
 
+  static price = 1000;
+
   #numbers;
 
   /**
    *
-   * @param {string[]} numbers
+   * @param {string[] | number[]} numbers
    */
   constructor(numbers) {
     this.#validate(numbers);
 
     this.#numbers = this.#formatLotto(numbers);
+  }
+
+  static generateLottoNumbers() {
+    const lottoNumbers = new Set();
+    while (lottoNumbers.size < Lotto.#length) {
+      lottoNumbers.add(Lotto.#generateLottoNumber());
+    }
+
+    return [...lottoNumbers];
+  }
+
+  static #generateLottoNumber() {
+    return Random.pickNumberInRange(Lotto.#minNumber, Lotto.#maxNumber);
+  }
+
+  toString() {
+    return `[${this.#numbers.join(', ')}]`;
   }
 
   isLottoNumber(number) {
@@ -31,10 +51,6 @@ class Lotto {
 
   hasInclude(number) {
     return this.#numbers.includes(number);
-  }
-
-  #formatLotto(numbers) {
-    return numbers.map(Number).sort((a, b) => a - b);
   }
 
   #validate(numbers) {
@@ -61,6 +77,10 @@ class Lotto {
     if (!validNumbers) {
       throw CustomError.lotto(ERROR.message.lotto.notInRange);
     }
+  }
+
+  #formatLotto(numbers) {
+    return numbers.map(Number).sort((a, b) => a - b);
   }
 }
 

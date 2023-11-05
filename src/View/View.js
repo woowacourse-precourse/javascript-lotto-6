@@ -44,13 +44,9 @@ class View {
   }
 
   #printPurchasedLotto(purchasedLottos) {
-    const message = MessageFormat.purchasedLotto(purchasedLottos);
+    const message = purchasedLottos.map((lotto) => lotto.toString()).join('\n');
 
     this.#outputView.print(message);
-  }
-
-  print(userInput) {
-    this.#outputView.print(userInput);
   }
 }
 

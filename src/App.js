@@ -1,20 +1,21 @@
+import LottoGameController from './Controller/LottoGameController.js';
 import View from './View/View.js';
+import LottoService from './services/LottoService.js';
 
 class App {
+  #controller;
+
   #view;
 
   constructor() {
-    this.#view = new View();
+    this.#controller = new LottoGameController({
+      view: new View(),
+      lottoService: new LottoService(),
+    });
   }
 
   async play() {
-    const userInput = await this.#view.readPurchaseAmount();
-    const winningNumber = await this.#view.readWinningNumber();
-    const bonusNumber = await this.#view.readBonusNumber();
-
-    this.#view.print(userInput);
-    this.#view.print(winningNumber);
-    this.#view.print(bonusNumber);
+    await this.#controller.startGame();
   }
 }
 
