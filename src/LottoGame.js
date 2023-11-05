@@ -1,3 +1,4 @@
+import { Random } from "@woowacourse/mission-utils";
 import IO from "./IO.js";
 import Validation from "./Validation.js";
 
@@ -15,6 +16,10 @@ class LottoGame {
 
   calculateLottomNum(amount) {
     return amount / 1000;
+  }
+
+  pickLottoNums() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 }
 
