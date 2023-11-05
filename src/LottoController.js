@@ -8,7 +8,11 @@ class LottoController {
 
   async readPurchaseAmount() {
     const purchaseAmount = await InputView.readPurchaseAmount();
-    Validator.validatePurchaseAmount(purchaseAmount);
+    this.handlePurchaseAmount(purchaseAmount);
+  }
+
+  async handlePurchaseAmount(purchaseAmount) {
+    if (!Validator.validatePurchaseAmount(purchaseAmount)) this.readPurchaseAmount();
   }
 }
 
