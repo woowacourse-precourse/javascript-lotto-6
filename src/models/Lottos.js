@@ -27,6 +27,14 @@ class Lottos {
     const randomNumber = Util.getLottoNumberList();
     return new Lotto(randomNumber);
   }
+
+  getLottos() {
+    if (this.#lottos.length === 0) {
+      return [];
+    }
+
+    return this.#lottos.map((lotto) => lotto.getLottoNumbers());
+  }
 }
 
 export default Lottos;
