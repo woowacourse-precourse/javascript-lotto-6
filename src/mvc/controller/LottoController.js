@@ -13,17 +13,31 @@ class LottoController{
 
   async play(){
     this.#model.setPurchasedLottoArray( await this.getPurchasePrice() );
+    this.#outputView.printPurchasedLotto( this.#model.PurchasedLottoArray );
+    this.#outputView.printLineBreak();
   }
 
   async getPurchasePrice(){
     while(true){
-      const input=this.#inputView.purchasePrice();
+      const input = this.#inputView.purchasePrice();
       try{
         ErrorCheck.purchasePrice(input);
-        return input;
+        return Number(input);
       }
       catch(error){
         this.#outputView.errorMessage(error);
+      }
+    }
+  }
+
+  async winningNumbersArray() {
+    while (true) {
+      const numbersString = this.#inputView.winningNumbers();
+      try {
+        ErrorCheck.lottoNumbersString(numbersString);
+        return numbersString.split(',').map(Number);
+      } catch (error) {
+        Print.errorMessage(error);
       }
     }
   }
