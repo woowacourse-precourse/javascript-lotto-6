@@ -60,10 +60,8 @@ const printPurchasedAmount = (amount, lottos) => {
 const printProfit = (rankAmount) => {
   let totalAmount = 0;
   let totalProfit = 0;
-  rankAmount.forEach((rank, idx) => {
-    totalProfit += +GAME_WINNER.lottoPrize[idx] * rank;
-  });
-  rankAmount.forEach((amount) => {
+  rankAmount.forEach((amount, idx) => {
+    totalProfit += +GAME_WINNER.lottoPrize[idx] * amount;
     totalAmount += amount;
   });
   Console.print(

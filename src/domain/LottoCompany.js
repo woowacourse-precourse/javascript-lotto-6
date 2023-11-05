@@ -9,13 +9,13 @@ import {
 } from '../util/Utils.js';
 import Lotto from '../Lotto.js';
 
-class LottoCompany {
+class LottoGame {
   async lottoProcess() {
     this.money = await getInputPurchasingMoney();
     this.winningNumbers = await getInputWinningNumbers();
     this.bonusNumber = await getInputBonusNumber(this.winningNumbers);
     this.generateUserLottos();
-    this.checkWinner();
+    this.checkWinning();
   }
 
   generateUserLottos() {
@@ -43,7 +43,7 @@ class LottoCompany {
     return lottoNumber;
   }
 
-  checkWinner() {
+  checkWinning() {
     const accordList = this.checkAccord();
     const rankingList = accordList.map((number, idx) => {
       if (number <= 2) return RANKING.nothing;
@@ -52,8 +52,6 @@ class LottoCompany {
       }
       return RANKING[number];
     });
-    rankingList.sort((a, b) => b - a);
-
     printRankingList(rankingList);
   }
 
@@ -74,4 +72,4 @@ class LottoCompany {
   }
 }
 
-export default LottoCompany;
+export default LottoGame;
