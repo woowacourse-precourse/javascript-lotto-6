@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import InputVeiw from "../src/veiw/input-veiw";
+import InputVeiw from "../../src/veiw/input-veiw";
 
 const mockInput = (input) => {
     MissionUtils.Console.readLineAsync = jest.fn();
