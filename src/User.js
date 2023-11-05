@@ -21,7 +21,7 @@ class User {
         CONSTANTS.minimumNumber,
         CONSTANTS.maximumNumber,
         CONSTANTS.mainNumberCount,
-      ),
+      ).sort((a, b) => a - b),
     );
   }
 }
