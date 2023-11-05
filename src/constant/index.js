@@ -4,10 +4,11 @@ import {
   LOTTO_NUMBERS,
   WINNING_NUMBERS,
 } from './error.js';
+import { NUMBERS, PRICE } from './lotto.js';
 import INPUT from './input.js';
-import LOTTO_PRICE from './lottoPrice.js';
 import RANDOM from './random.js';
 
 const ERROR = { BONUS_NUMBER, BUYING_PRICE, LOTTO_NUMBERS, WINNING_NUMBERS };
+const LOTTO = { NUMBERS, PRICE };
 
-export { ERROR, INPUT, LOTTO_PRICE, RANDOM };
+export { ERROR, INPUT, LOTTO, RANDOM };

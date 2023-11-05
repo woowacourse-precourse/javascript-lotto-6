@@ -1,4 +1,4 @@
-import { ERROR } from './constant/index.js';
+import { ERROR, LOTTO } from './constant/index.js';
 
 class Lotto {
   #numbers;
@@ -13,17 +13,19 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO.NUMBERS.LENGTH) {
       throw new Error(ERROR.LOTTO_NUMBERS.LENGTH);
     }
 
-    const isInvalidRange = numbers.some(number => number < 1 || number > 45);
+    const isInvalidRange = numbers.some(
+      number => number < LOTTO.NUMBERS.MIN || number > LOTTO.NUMBERS.MAX
+    );
     if (isInvalidRange) {
       throw new Error(ERROR.LOTTO_NUMBERS.RANGE);
     }
 
     const uniqueNumbers = new Set(numbers);
-    if (uniqueNumbers.size !== 6) {
+    if (uniqueNumbers.size !== LOTTO.NUMBERS.LENGTH) {
       throw new Error(ERROR.LOTTO_NUMBERS.UNIQE);
     }
   }

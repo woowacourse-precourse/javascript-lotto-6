@@ -1,4 +1,4 @@
-import { ERROR, LOTTO_PRICE } from './constant/index.js';
+import { ERROR, LOTTO } from './constant/index.js';
 import createLottoNumber from './utils/random.js';
 import Lotto from './Lotto.js';
 
@@ -6,7 +6,7 @@ class LottoVendingMachine {
   static buyLottoTickets(buyingPrice) {
     LottoVendingMachine.#validate(buyingPrice);
 
-    const mount = Number(buyingPrice) / LOTTO_PRICE;
+    const mount = Number(buyingPrice) / LOTTO.PRICE;
     return Array.from({ length: mount }, () => new Lotto(createLottoNumber()));
   }
 
@@ -15,7 +15,7 @@ class LottoVendingMachine {
       throw new Error(ERROR.BUYING_PRICE.POSITIVE_INTEGER);
     }
 
-    if (Number(buyingPrice) % LOTTO_PRICE !== 0) {
+    if (Number(buyingPrice) % LOTTO.PRICE !== 0) {
       throw new Error(ERROR.BUYING_PRICE.UNIT);
     }
   }
