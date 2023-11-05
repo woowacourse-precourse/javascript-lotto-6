@@ -20,10 +20,15 @@ class Main {
     try {
       const money = await Console.readLineAsync('');
       const numberOfLotto = await this.lottoStore.purchaseLotto(money);
+      this.PrintNumberOfLotto(numberOfLotto);
     } catch (error) {
       Console.print(error.message);
       this.InputMoney();
     }
+  };
+
+  PrintNumberOfLotto = (numberOfLotto) => {
+    Console.print(`${numberOfLotto}${Message.COUNT_PURCHASING_AMOUNT}`);
   };
 }
 
