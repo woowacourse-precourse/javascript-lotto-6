@@ -9,7 +9,8 @@ class App {
   }
 
   static getLottoWithMoney(money) {
-    const NUMBER_OF_LOTTO = Math.floor(money / 1000);
+    const LOTTO_PIRCE = 1000;
+    const NUMBER_OF_LOTTO = Math.floor(money / LOTTO_PIRCE);
     return Array.from(
       { length: NUMBER_OF_LOTTO },
       () => new Lotto(this.getRandomSixNumbers())
