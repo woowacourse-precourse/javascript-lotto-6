@@ -14,6 +14,13 @@ describe("구입 금액 테스트", () => {
     const pay = new UserPayment();
     await expect(pay.userPayment()).rejects.toThrow("[ERROR]");
   });
+
+  test("구입한 로또 수량 구하기", () => {
+    const input = 56000;
+    const output = 56;
+    const result = input / 1000;
+    expect(result).toEqual(output);
+  });
 });
 
 // UserLottoNumber.js 관련 단위 테스트
