@@ -33,13 +33,13 @@ describe('InputView 클래스 테스트', () => {
 
     test('구입 금액이 0보다 큰 숫자가 아니면 예외가 발생한다.', async () => {
       await expect(InputView.readBuyingPrice()).rejects.toThrow(
-        ERROR.NUMBERS_GREATER_THAN_ZERO
+        ERROR.BUYING_PRICE.GREATER_THAN_ZERO
       );
     });
 
     test('구입 금액이 1,000원 단위가 아니면 예외가 발생한다.', async () => {
       await expect(InputView.readBuyingPrice()).rejects.toThrow(
-        ERROR.BUYING_PRICE_UNIT
+        ERROR.BUYING_PRICE.UNIT
       );
     });
   });
@@ -53,19 +53,19 @@ describe('InputView 클래스 테스트', () => {
 
     test('당첨 번호가 6개가 아니면 예외가 발생한다.', async () => {
       await expect(InputView.readWinningNumbers()).rejects.toThrow(
-        ERROR.WINNING_NUMBERS_LENGTH
+        ERROR.WINNING_NUMBERS.LENGTH
       );
     });
 
     test('당첨 번호가 1과 45 사이의 숫자가 아니라면 예외가 발생한다.', async () => {
       await expect(InputView.readWinningNumbers()).rejects.toThrow(
-        ERROR.WINNING_NUMBERS_RANGE
+        ERROR.WINNING_NUMBERS.RANGE
       );
     });
 
     test('당첨 번호에 중복된 숫자가 있으면 예외가 발생한다.', async () => {
       await expect(InputView.readWinningNumbers()).rejects.toThrow(
-        ERROR.WINNING_NUMBERS_UNIQE
+        ERROR.WINNING_NUMBERS.UNIQE
       );
     });
   });
@@ -79,19 +79,19 @@ describe('InputView 클래스 테스트', () => {
 
     test('보너스 번호가 숫자가 아니라면 예외가 발생한다.', async () => {
       await expect(InputView.readBonusNumber(winningNumbers)).rejects.toThrow(
-        ERROR.BONUS_NUMBER_INTEGER
+        ERROR.BONUS_NUMBER.NUMBER
       );
     });
 
     test('보너스 번호가 1과 45 사이의 숫자가 아니라면 예외가 발생한다.', async () => {
       await expect(InputView.readBonusNumber(winningNumbers)).rejects.toThrow(
-        ERROR.BONUS_NUMBER_RANGE
+        ERROR.BONUS_NUMBER.RANGE
       );
     });
 
     test('보너스 번호가 당첨 번호와 중복된 숫자가 있으면 예외가 발생한다.', async () => {
       await expect(InputView.readBonusNumber(winningNumbers)).rejects.toThrow(
-        ERROR.BONUS_NUMBER_UNIQE
+        ERROR.BONUS_NUMBER.UNIQE
       );
     });
   });

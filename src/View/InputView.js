@@ -10,11 +10,11 @@ class InputView {
 
   static #validateBuyingPrice(input) {
     if (!/^[1-9][0-9]*$/.test(input)) {
-      throw new Error(ERROR.NUMBERS_GREATER_THAN_ZERO);
+      throw new Error(ERROR.BUYING_PRICE.GREATER_THAN_ZERO);
     }
 
     if (Number(input) % 1000 !== 0) {
-      throw new Error(ERROR.BUYING_PRICE_UNIT);
+      throw new Error(ERROR.BUYING_PRICE.UNIT);
     }
   }
 
@@ -28,17 +28,17 @@ class InputView {
     const numbers = input.split(',').map(number => number.trim());
 
     if (numbers.length !== 6) {
-      throw new Error(ERROR.WINNING_NUMBERS_LENGTH);
+      throw new Error(ERROR.WINNING_NUMBERS.LENGTH);
     }
 
     const INVALID_RANGE = numbers.some(number => number < 1 || number > 45);
     if (INVALID_RANGE) {
-      throw new Error(ERROR.WINNING_NUMBERS_RANGE);
+      throw new Error(ERROR.WINNING_NUMBERS.RANGE);
     }
 
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== 6) {
-      throw new Error(ERROR.WINNING_NUMBERS_UNIQE);
+      throw new Error(ERROR.WINNING_NUMBERS.UNIQE);
     }
   }
 
@@ -50,15 +50,15 @@ class InputView {
 
   static #validateBonusNumber(input, winningNumbers) {
     if (!/^[1-9][0-9]*$/.test(input)) {
-      throw new Error(ERROR.BONUS_NUMBER_INTEGER);
+      throw new Error(ERROR.BONUS_NUMBER.NUMBER);
     }
 
     if (input < 1 || input > 45) {
-      throw new Error(ERROR.BONUS_NUMBER_RANGE);
+      throw new Error(ERROR.BONUS_NUMBER.RANGE);
     }
 
     if (winningNumbers.includes(Number(input))) {
-      throw new Error(ERROR.BONUS_NUMBER_UNIQUE);
+      throw new Error(ERROR.BONUS_NUMBER.UNIQUE);
     }
   }
 }

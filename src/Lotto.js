@@ -14,17 +14,17 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error(ERROR.LOTTO_NUMBERS_LENGTH);
+      throw new Error(ERROR.LOTTO_NUMBERS.LENGTH);
     }
 
-    const INVALID_RANGE = numbers.some(number => number < 1 || number > 45);
-    if (INVALID_RANGE) {
-      throw new Error(ERROR.LOTTO_NUMBERS_RANGE);
+    const isInvalidRange = numbers.some(number => number < 1 || number > 45);
+    if (isInvalidRange) {
+      throw new Error(ERROR.LOTTO_NUMBERS.RANGE);
     }
 
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== 6) {
-      throw new Error(ERROR.LOTTO_NUMBERS_UNIQE);
+      throw new Error(ERROR.LOTTO_NUMBERS.UNIQE);
     }
   }
 }
