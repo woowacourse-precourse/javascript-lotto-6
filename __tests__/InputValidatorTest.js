@@ -39,11 +39,35 @@ describe('💙 InputValidator 클래스를 테스트합니다. ฅ^._.^ฅ', () 
     });
   });
 
-  test(`[validateWinningNumbers] 인자로 받은 winningNumbers 배열에 숫자가 아닌 값이 있으면 에러가 발생한다.`, () => {
-    const invalideWinningNumberList = ['reason', 1, 2, 3, 4, 5];
+  test('[validateWinningNumbers] 인자로 받은 배열에 숫자가 아닌 값이 있으면 에러가 발생한다.', () => {
+    const invalidNumberList = ['reason', 1, 2, 3, 4, 5];
 
     expect(() =>
-      InputValidator.validateWinningNumbers(invalideWinningNumberList),
+      InputValidator.validateWinningNumbers(invalidNumberList),
     ).toThrow(ERROR_MESSAGE.NOT_A_NUMBER);
+  });
+
+  test('[validateWinningNumbers] 인자로 받은 배열 요소에 0이 있으면 에러가 발생한다.', () => {
+    const invalidNumberList = [0, 1, 2, 3, 4, 5];
+
+    expect(() =>
+      InputValidator.validateWinningNumbers(invalidNumberList),
+    ).toThrow(ERROR_MESSAGE.OUT_OF_RANGE);
+  });
+
+  test('[validateWinningNumbers] 인자로 받은 배열 요소에 음수가 있으면 에러가 발생한다.', () => {
+    const invalidNumberList = [1, 2, 3, 4, 5, -6];
+
+    expect(() =>
+      InputValidator.validateWinningNumbers(invalidNumberList),
+    ).toThrow(ERROR_MESSAGE.OUT_OF_RANGE);
+  });
+
+  test('[validateWinningNumbers] 인자로 받은 배열 요소에 45를 초과하는 수가 있으면 에러가 발생한다.', () => {
+    const invalidNumberList = [1, 2, 3, 4, 5, 100];
+
+    expect(() =>
+      InputValidator.validateWinningNumbers(invalidNumberList),
+    ).toThrow(ERROR_MESSAGE.OUT_OF_RANGE);
   });
 });
