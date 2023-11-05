@@ -1,5 +1,5 @@
 import Lotto from "./Lotto.js";
-import LottoCalculator from "./LottoResults.js";
+import LottoCalculator from "./LottoCalculator.js";
 import UserInput from "./UserInput.js";
 import LottoView from "./LottoView.js";
 
