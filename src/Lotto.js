@@ -9,12 +9,12 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  /*
-  🤔당첨번호와 중복여부도 판단해야하는지?
-  */
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.invalidLottoLength);
+    }
+    if (numbers.some((number) => Number.isNaN(number))) {
+      throw new Error(ERROR_MESSAGE.notNumber);
     }
     if (numbers.length !== new Set(numbers).size) {
       throw new Error(ERROR_MESSAGE.duplicatedLottoNum);
