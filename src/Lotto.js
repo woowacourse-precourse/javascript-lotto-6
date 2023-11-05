@@ -1,4 +1,4 @@
-import PRICE from './constants/price.js';
+import PRIZE from './constants/Prize.js';
 
 class Lotto {
   #numbers;
@@ -20,15 +20,15 @@ class Lotto {
 
     const number = correct.length;
     if (number === 6) {
-      return PRICE.six;
+      return PRIZE.six;
     } else if (number === 5 && this.#numbers.includes(bonus)) {
-      return PRICE.fivePlus;
+      return PRIZE.fivePlus;
     } else if (number === 5) {
-      return PRICE.five;
+      return PRIZE.five;
     } else if (number === 4) {
-      return PRICE.four;
+      return PRIZE.four;
     } else if (number === 3) {
-      return PRICE.three;
+      return PRIZE.three;
     } else {
       return 0;
     }

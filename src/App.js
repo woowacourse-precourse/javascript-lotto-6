@@ -1,7 +1,7 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Input from './Input.js';
 import Lotto from './Lotto.js';
-import PRICE from './constants/price.js';
+import PRIZE from './constants/Prize.js';
 
 class App {
   #count;
@@ -14,11 +14,11 @@ class App {
     this.#count = 0;
     this.#lottos = [];
     this.#results = {
-      [PRICE.three]: 0,
-      [PRICE.four]: 0,
-      [PRICE.five]: 0,
-      [PRICE.fivePlus]: 0,
-      [PRICE.six]: 0,
+      [PRIZE.three]: 0,
+      [PRIZE.four]: 0,
+      [PRIZE.five]: 0,
+      [PRIZE.fivePlus]: 0,
+      [PRIZE.six]: 0,
     };
   }
 
@@ -41,20 +41,30 @@ class App {
   printResults() {
     Console.print('당첨 통계\n---');
     Console.print(
-      `3개 일치 (${PRICE.three}원) - ${this.#results[PRICE.three]}개`
-    );
-    Console.print(
-      `4개 일치 (${PRICE.four}원) - ${this.#results[PRICE.four]}개`
-    );
-    Console.print(
-      `5개 일치 (${PRICE.five}원) - ${this.#results[PRICE.five]}개`
-    );
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (${PRICE.fivePlus}원) - ${
-        this.#results[PRICE.fivePlus]
+      `3개 일치 (${PRIZE.three.toLocaleString('ko-KR')}원) - ${
+        this.#results[PRIZE.three]
       }개`
     );
-    Console.print(`6개 일치 (${PRICE.six}원) - ${this.#results[PRICE.six]}개`);
+    Console.print(
+      `4개 일치 (${PRIZE.four.toLocaleString('ko-KR')}원) - ${
+        this.#results[PRIZE.four]
+      }개`
+    );
+    Console.print(
+      `5개 일치 (${PRIZE.five.toLocaleString('ko-KR')}원) - ${
+        this.#results[PRIZE.five]
+      }개`
+    );
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${PRIZE.fivePlus.toLocaleString(
+        'ko-KR'
+      )}원) - ${this.#results[PRIZE.fivePlus]}개`
+    );
+    Console.print(
+      `6개 일치 (${PRIZE.six.toLocaleString('ko-KR')}원) - ${
+        this.#results[PRIZE.six]
+      }개`
+    );
   }
 
   async play() {
