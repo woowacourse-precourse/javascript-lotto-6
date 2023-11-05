@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import LottoMachine from './LottoMachine.js';
 import InputView from './View/InputView.js';
 import OutputView from './View/OutputView.js';
+import Lotto from './Lotto.js';
 
 class GameController {
   #lottoMachine;
@@ -50,6 +51,7 @@ class GameController {
     while (true) {
       try {
         const winningNumber = await InputView.inputWinningNumbers();
+        const winningLotto = new Lotto(winningNumber);
         break;
       } catch (error) {
         Console.print(error.message);

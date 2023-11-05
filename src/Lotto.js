@@ -1,6 +1,7 @@
 import ERROR from './constants/error.js';
 import LOTTO from './constants/lotto.js';
 import CustomError from './errors/CustomError.js';
+import isPositiveInteger from './utils/function.js';
 
 class Lotto {
   #numbers;
@@ -15,6 +16,10 @@ class Lotto {
     if (numbers.length !== LOTTO.size) {
       throw new CustomError(ERROR.lotto.invalidSize);
     }
+
+    this.#ifNumberIsInvalid(numbers, () => {
+      throw new CustomError(ERROR.lotto.invalidNumber);
+    });
   }
 
   get numbers() {
@@ -23,6 +28,18 @@ class Lotto {
 
   #sortNumbers() {
     this.#numbers.sort((a, b) => a - b);
+  }
+
+  #ifNumberIsInvalid(numbers, callback) {
+    numbers.forEach((number) => {
+      if (
+        number < LOTTO.range.min ||
+        number > LOTTO.range.max ||
+        !isPositiveInteger(number)
+      ) {
+        callback();
+      }
+    });
   }
 }
 
