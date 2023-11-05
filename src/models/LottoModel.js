@@ -19,15 +19,17 @@ class LottoModel {
   }
 
   checkNumber(targetNumber) {
-    const rewardList = Object.keys(MATCHES);
+    const keyList = Object.keys(MATCHES).filter(
+      (key) => key !== CONFIG.bonusMatchKey
+    );
     const winCount = +getCommonElementCount(this.#correctNumber, targetNumber);
-    if (winCount === 5) {
+    if (winCount === CONFIG.bonusNumberMatch) {
       // prettier-ignore
-      targetNumber.includes(this.#bonusNumber) && (this.#winCounts[rewardList[rewardList.length - 1]] += 1);
+      targetNumber.includes(this.#bonusNumber)? this.#winCounts[CONFIG.bonusMatchKey] += 1: this.#winCounts[keyList[winCount-CONFIG.minLottoWinningNumber]] += 1;
       return;
     }
     // prettier-ignore
-    winCount >= 3 && (this.#winCounts[rewardList[CONFIG.LOTTO_LENGTH - winCount]] += 1);
+    winCount >= CONFIG.minLottoWinningNumber && (this.#winCounts[keyList[winCount-CONFIG.minLottoWinningNumber]] += 1);
   }
 
   setCorrectNumber(correctNumber) {
