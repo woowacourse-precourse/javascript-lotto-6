@@ -28,7 +28,7 @@ class LottoController {
       OutputView.printLotto(this.#lottos.getLottos());
     } catch (error) {
       OutputView.print(error.message);
-      await this.askPurchase();
+      await this.#askPurchase();
     }
   }
 
@@ -38,7 +38,7 @@ class LottoController {
       this.#winnginNumber.setWinningNumber(winningNumber);
     } catch (error) {
       OutputView.print(error.message);
-      await this.askWinningNumber();
+      await this.#askWinningNumber();
     }
   }
 
@@ -48,7 +48,7 @@ class LottoController {
       this.#winnginNumber.setBonusNumber(bonusNumber);
     } catch (error) {
       OutputView.print(error.message);
-      await this.askBonusNumber();
+      await this.#askBonusNumber();
     }
   }
 
