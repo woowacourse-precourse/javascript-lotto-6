@@ -5,7 +5,7 @@ class BonusNumber {
 
   constructor(number) {
     this.#validateBonusNumber(number);
-    this.#number = number;
+    this.#number = Number(number);
   }
 
   #validateBonusNumber(number) {
