@@ -29,7 +29,7 @@ describe('lottoGameConsole 테스트', () => {
       });
     });
 
-    describe('rewardInfo 메서드 테스트', () => {
+    describe('rankDistributionTable 메서드 테스트', () => {
       test.each([
         {
           input: { '1st': 1, '2nd': 1, '3rd': 1, '4th': 1, '5th': 1 },
@@ -46,10 +46,13 @@ describe('lottoGameConsole 테스트', () => {
           output:
             '3개 일치 (5,000원) - 0개\n4개 일치 (50,000원) - 0개\n5개 일치 (1,500,000원) - 0개\n5개 일치, 보너스 볼 일치 (30,000,000원) - 0개\n6개 일치 (2,000,000,000원) - 0개',
         },
-      ])('rewardInfo가 $input일 때 포맷팅 된 메시지는 $output이다.', ({ input, output }) => {
-        // given - when - then
-        expect(lottoGameConsole.output.messages.rewardInfo(input)).toMatch(output);
-      });
+      ])(
+        'rankDistributionTable가 $input일 때 포맷팅 된 메시지는 $output이다.',
+        ({ input, output }) => {
+          // given - when - then
+          expect(lottoGameConsole.output.messages.rankDistributionTable(input)).toMatch(output);
+        },
+      );
     });
 
     describe('rateOfReturn 메서드 테스트', () => {

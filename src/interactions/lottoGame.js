@@ -19,11 +19,11 @@ const processWinningResult = ({
   const lottoNumberInfo = { lottoNumbers, winningLottoInfo };
   const lottoMatchingResult = lottoNumberMatching.createLottoMatchingResult(lottoNumberInfo);
 
-  const { rewardInfo, prize } = winningInfo.createWinningInfo(lottoMatchingResult);
+  const { rankDistributionTable, prize } = winningInfo.createWinningInfo(lottoMatchingResult);
 
   const rateOfReturn = rateOfReturnCalculation.calculate({ purchasedLottoAmount, prize });
 
-  lottoGameConsole.output.printWinningResult({ rewardInfo, rateOfReturn });
+  lottoGameConsole.output.printWinningResult({ rankDistributionTable, rateOfReturn });
 };
 
 const processInputWinningLottoInfo = async () => {

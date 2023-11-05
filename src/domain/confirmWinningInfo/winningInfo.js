@@ -1,9 +1,9 @@
 import { countBy } from '../../utils/array.js';
 import { isEmptyObject } from '../../utils/object.js';
 
-const calculatePrize = (prizeInfo, rewardInfo) =>
-  Object.entries(rewardInfo).reduce(
-    (prevPrize, [prizeCategory, count]) => prevPrize + (prizeInfo[prizeCategory] ?? 0) * count,
+const calculatePrize = (prizeInfo, rankDistributionTable) =>
+  Object.entries(rankDistributionTable).reduce(
+    (prevPrize, [rank, count]) => prevPrize + (prizeInfo[rank] ?? 0) * count,
     0,
   );
 
@@ -24,7 +24,7 @@ const createPrizeRank = ({ lottoMatchingInfo: { matchCount, hasBonusNumber }, ra
   return matchingRankCategory?.rank ?? null;
 };
 
-const createRewardInfo = ({ lottoMatchingResult, rankInfo }) => {
+const createRankDistributionTable = ({ lottoMatchingResult, rankInfo }) => {
   const matchedPrizeRanks = lottoMatchingResult.map((lottoMatchingInfo) =>
     createPrizeRank({ lottoMatchingInfo, rankInfo }),
   );
@@ -69,13 +69,16 @@ const winningInfo = Object.freeze({
   }),
 
   createWinningInfo(lottoMatchingResult) {
-    const rewardInfo = createRewardInfo({ lottoMatchingResult, rankInfo: this.constants.rankInfo });
-    if (isEmptyObject(rewardInfo)) return { rewardInfo: null, prize: 0 };
+    const rankDistributionTable = createRankDistributionTable({
+      lottoMatchingResult,
+      rankInfo: this.constants.rankInfo,
+    });
+    if (isEmptyObject(rankDistributionTable)) return { rankDistributionTable: null, prize: 0 };
 
     const prizeInfo = createPrizeInfo(this.constants.rankInfo);
-    const prize = calculatePrize(prizeInfo, rewardInfo);
+    const prize = calculatePrize(prizeInfo, rankDistributionTable);
 
-    return { rewardInfo, prize };
+    return { rankDistributionTable, prize };
   },
 });
 

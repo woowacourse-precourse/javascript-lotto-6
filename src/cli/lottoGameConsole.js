@@ -63,19 +63,19 @@ const lottoGameConsole = Object.freeze({
         return lottoNumbers.map(formatLottoNumber).join('\n');
       },
 
-      rewardInfo(rewardInfo) {
-        const prizeCategories = Object.keys(this.prizeDescription).reverse();
+      rankDistributionTable(rankDistributionTable) {
+        const ranks = Object.keys(this.prizeDescription).reverse();
 
-        const formatPrizeDescription = (category) => {
+        const formatPrizeDescription = (rank) => {
           const { rankInfo } = winningInfo.constants;
-          const description = this.prizeDescription[category];
-          const prizeAmount = rankInfo[category].prizeAmount.toLocaleString();
-          const count = rewardInfo[category] ?? 0;
+          const description = this.prizeDescription[rank];
+          const prizeAmount = rankInfo[rank].prizeAmount.toLocaleString();
+          const count = rankDistributionTable[rank] ?? 0;
 
           return `${description} (${prizeAmount}원) - ${count}개`;
         };
 
-        return prizeCategories.map(formatPrizeDescription).join('\n');
+        return ranks.map(formatPrizeDescription).join('\n');
       },
 
       rateOfReturn(rateOfReturn) {
@@ -88,9 +88,9 @@ const lottoGameConsole = Object.freeze({
       Console.print(this.messages.lottoNumbers(lottoNumbers));
     },
 
-    printWinningResult({ rewardInfo, rateOfReturn }) {
+    printWinningResult({ rankDistributionTable, rateOfReturn }) {
       Console.print(this.messages.title);
-      Console.print(this.messages.rewardInfo(rewardInfo));
+      Console.print(this.messages.rankDistributionTable(rankDistributionTable));
       Console.print(this.messages.rateOfReturn(rateOfReturn));
     },
   }),

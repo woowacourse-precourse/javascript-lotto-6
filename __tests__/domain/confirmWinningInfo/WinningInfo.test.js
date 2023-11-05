@@ -21,7 +21,7 @@ describe('당첨 정보 테스트', () => {
       ],
       output: {
         prize: PRIZES['1st'] + PRIZES['2nd'] + PRIZES['3rd'] + PRIZES['4th'] + PRIZES['5th'],
-        rewardInfo: { '1st': 1, '2nd': 1, '3rd': 1, '4th': 1, '5th': 1 },
+        rankDistributionTable: { '1st': 1, '2nd': 1, '3rd': 1, '4th': 1, '5th': 1 },
       },
     },
     {
@@ -34,24 +34,24 @@ describe('당첨 정보 테스트', () => {
       ],
       output: {
         prize: PRIZES['1st'] + PRIZES['2nd'] + PRIZES['4th'] + PRIZES['5th'],
-        rewardInfo: { '1st': 1, '2nd': 1, '4th': 1, '5th': 1 },
+        rankDistributionTable: { '1st': 1, '2nd': 1, '4th': 1, '5th': 1 },
       },
     },
     {
       input: [{ matchCount: 0, hasBonusNumber: false }],
       output: {
         prize: 0,
-        rewardInfo: null,
+        rankDistributionTable: null,
       },
     },
   ])(
-    '입력 값에 대한 당첨 결과로 총 상금은 $output.prize원 이며, 당첨 정보는 $output.rewardInfo 이다.',
+    '입력 값에 대한 당첨 결과로 총 상금은 $output.prize원 이며, 당첨 정보는 $output.rankDistributionTable 이다.',
     ({ input, output }) => {
       // given - when
       const result = winningInfo.createWinningInfo(input);
       // then
       expect(result.prize).toBe(output.prize);
-      expect(result.rewardInfo).toStrictEqual(output.rewardInfo);
+      expect(result.rankDistributionTable).toStrictEqual(output.rankDistributionTable);
     },
   );
 });
