@@ -35,10 +35,6 @@ class LottoGame {
     return { purchaseAmount, lottos };
   }
 
-  /**
-   * 당첨 번호 입력 받기
-   * @returns {{answerNumbers: number[], bonusNumbers: number[]}}
-   */
   async #getAnswerNumbers() {
     // 당첨 번호 입력 받기 (로또 번호 유효성 체크 포함)
     const answerNumbers = await Read.answerNumbers();
@@ -74,7 +70,7 @@ class LottoGame {
    * @param {number[]} bonusNumbers
    */
   #addWinning(lotto, answerNumbers, bonusNumbers) {
-    const [matchLotto, matchBonus] = lotto.getMatchCount(answerNumbers, bonusNumbers);
+    const { matchLotto, matchBonus } = lotto.getMatchCount(answerNumbers, bonusNumbers);
     const index = REWARD.findIndex(
       ({ match, bonus }) => match === matchLotto && matchBonus >= bonus
     );

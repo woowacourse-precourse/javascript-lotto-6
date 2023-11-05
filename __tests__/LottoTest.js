@@ -44,7 +44,7 @@ describe("로또 클래스 테스트", () => {
     const lotto = new Lotto(numbers);
     const bonusNumber = [LOTTO.MAX_NUMBER];
 
-    const [matchLotto, matchBonus] = lotto.getMatchCount(numbers, bonusNumber);
+    const { matchLotto, matchBonus } = lotto.getMatchCount(numbers, bonusNumber);
 
     expect(matchLotto).toBe(LOTTO.NUMBER_COUNT);
     expect(matchBonus).toBeTruthy();
