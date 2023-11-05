@@ -57,8 +57,9 @@ class GuessLotto {
   }
 
   async inputBonusNumber() {
-    this.#guessBonus =
-      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    this.#guessBonus = await Console.readLineAsync(
+      '\n보너스 번호를 입력해 주세요.\n',
+    );
     return this.#guessBonus;
   }
 
@@ -66,11 +67,13 @@ class GuessLotto {
     const lottoPurchaseMoney =
       await Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
-    if (Number.isNaN(+lottoPurchaseMoney))
+    if (Number.isNaN(+lottoPurchaseMoney) || lottoPurchaseMoney.trim() === '')
       throw new Error('[ERROR] 구입 금액이 잘못되었습니다.');
 
-    if (lottoPurchaseMoney % 1000 !== 0)
-      throw new Error('[ERROR] 구입 금액이 잘못되었습니다.');
+    if (+lottoPurchaseMoney < 1000 || lottoPurchaseMoney % 1000 !== 0)
+      throw new Error(
+        '[ERROR] 구입 금액이 잘못되었습니다. 1000원 단위로 입력해주세요.',
+      );
 
     this.#lottoPieces = lottoPurchaseMoney / 1000;
     return this.#lottoPieces;
