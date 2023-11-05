@@ -15,6 +15,7 @@ class App {
 
     const results = lottos.calculateResults(winningNumbers, bonusNumber)
     const statistics = new Statistics(results);
+    const profitRate = statistics.calculateProfitRate(purchaseAmount);
   }    
 }
 

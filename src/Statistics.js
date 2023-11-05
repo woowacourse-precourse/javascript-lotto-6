@@ -2,10 +2,12 @@ import Output from "./utils/Output.js";
 
 class Statistics {
   #rankCounts;
+  #profit;
 
   constructor(results) {
     this.#rankCounts = this.#updateRank(results);
     Output.printRank(this.#rankCounts);
+    this.#profit = this.#calculateProfit();
   }
 
   #updateRank(results) {
@@ -27,6 +29,22 @@ class Statistics {
 
     return rankCounts;
   }
+
+  #calculateProfit() {
+    const profit = [
+      this.#rankCounts[4] * 5000,
+      this.#rankCounts[3] * 50000,
+      this.#rankCounts[2] * 1500000,
+      this.#rankCounts[1] * 30000000,
+      this.#rankCounts[0] * 2000000000,
+    ];
+    return profit.reduce((sum, currentValue) => sum + currentValue, 0);
+  }
+
+  calculateProfitRate(purchaseAmount) {
+    return (this.#profit / purchaseAmount) * 100;
+  }  
+
 }
 
 export default Statistics;
