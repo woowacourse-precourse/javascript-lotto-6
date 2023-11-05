@@ -1,11 +1,11 @@
 import PurchaseLottos from "./PurchaseLottos.js";
 import Lotto from "./Lotto.js";
 import Bonus from "./Bonus.js";
+import Result from "./Result.js";
 import { Console, Random } from "@woowacourse/mission-utils";
 import { USER_PROMPT } from "./utils/constants.js";
 
 class App {
-  purchaseLottos;
   #lottoCount;
   #winningNumberList = [];
   #userWinningNumbers;
@@ -17,6 +17,7 @@ class App {
     await this.getLottoCount();
     this.generateWinningNumbers();
     await this.getUserWinningAndBonusNumbers();
+    this.getResult();
   }
 
   async inputLottoCount() {
@@ -67,6 +68,16 @@ class App {
   async getUserWinningAndBonusNumbers() {
     this.#userWinningNumbers = await this.inputWinningNumbers();
     this.#userBonusNumber = await this.inputBonusNumber();
+  }
+
+  getResult() {
+    const result = new Result(
+      this.#winningNumberList,
+      this.#userWinningNumbers,
+      this.#userBonusNumber
+    );
+
+    Console.print(result.getResult()); // 디버깅
   }
 }
 
