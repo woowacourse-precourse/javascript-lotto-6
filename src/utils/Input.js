@@ -1,8 +1,18 @@
 import { Console } from '@woowacourse/mission-utils';
+import Parser from './Parser.js';
+import Validator from './Validator.js';
 
 const Input = {
-  async getPurchaseAmount() {    
-    return await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+  async getPurchaseAmount() {
+    try {
+      const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      const purchaseAmount = Parser.valueToNumber(input);      
+      Validator.purchaseAmount(purchaseAmount);
+      return purchaseAmount;      
+    } catch (error) {
+      Console.print(error.message);
+      return await this.getPurchaseAmount();            
+    }
   },
 
   async getWinningNumbers() {
