@@ -1,14 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 import Validate from './Validate';
+import INPUT_MESSAGE from './InputMessage';
 
 class Input {
   static async payment() {
     while (true) {
       try {
-        const payment = await Console.readLineAsync(
-          '구입금액을 입력해 주세요.\n',
-        );
+        const payment = await Console.readLineAsync(INPUT_MESSAGE.payment);
         Validate.validatePayment(payment);
         return Number(payment);
       } catch (error) {
@@ -20,9 +19,7 @@ class Input {
   static async winning() {
     while (true) {
       try {
-        const userSelected = await Console.readLineAsync(
-          '\n당첨 번호를 입력해 주세요.\n',
-        );
+        const userSelected = await Console.readLineAsync(INPUT_MESSAGE.winning);
         return new Lotto(
           userSelected.split(',').map((string) => Number(string)),
         );
@@ -35,9 +32,7 @@ class Input {
   static async bonusNumber(winning) {
     while (true) {
       try {
-        const bonus = await Console.readLineAsync(
-          '\n보너스 번호를 입력해 주세요.\n',
-        );
+        const bonus = await Console.readLineAsync(INPUT_MESSAGE.bonus);
         Validate.validateBonusNumber(bonus, winning);
         return Number(bonus);
       } catch (error) {
