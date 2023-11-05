@@ -7,22 +7,24 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;    
-    const sortedNumbers = Parser.sort(numbers)    
+    this.#numbers = numbers;
+    const sortedNumbers = Parser.sort(numbers);
     Output.printLottoNumbers(sortedNumbers);
   }
 
   #validate(numbers) {
-    Validator.winningNumbers(numbers);    
+    Validator.winningNumbers(numbers);
   }
 
   calculateResult(winningNumbers, bonusNumber) {
-    const matchingNumbers = this.#numbers.filter(number => winningNumbers.includes(number));
+    const matchingNumbers = this.#numbers.filter((number) =>
+      winningNumbers.includes(number)
+    );
     const bonusMatch = this.#numbers.includes(bonusNumber);
 
     return {
       matchingNumbers: matchingNumbers.length,
-      bonusMatch: bonusMatch
+      bonusMatch: bonusMatch,
     };
   }
 }

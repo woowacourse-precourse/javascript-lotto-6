@@ -1,3 +1,4 @@
+import LOTTO_RULE from "./constant/LottoRule.js";
 import Output from "./utils/Output.js";
 
 class Statistics {
@@ -15,11 +16,11 @@ class Statistics {
 
     results.forEach(({ matchingNumbers, bonusMatch }) => {
       if (matchingNumbers === 6) {
-        rankCounts[0]++; 
+        rankCounts[0]++;
       } else if (matchingNumbers === 5 && bonusMatch) {
-        rankCounts[1]++; 
+        rankCounts[1]++;
       } else if (matchingNumbers === 5) {
-        rankCounts[2]++; 
+        rankCounts[2]++;
       } else if (matchingNumbers === 4) {
         rankCounts[3]++;
       } else if (matchingNumbers === 3) {
@@ -31,20 +32,14 @@ class Statistics {
   }
 
   #calculateProfit() {
-    const profit = [
-      this.#rankCounts[4] * 5000,
-      this.#rankCounts[3] * 50000,
-      this.#rankCounts[2] * 1500000,
-      this.#rankCounts[1] * 30000000,
-      this.#rankCounts[0] * 2000000000,
-    ];
-    return profit.reduce((sum, currentValue) => sum + currentValue, 0);
+    return this.#rankCounts.reduce((profit, count, index) => {
+      return profit + count * LOTTO_RULE.PRIZE_MONEY[index];
+    }, 0);
   }
 
   calculateProfitRate(purchaseAmount) {
-    return (this.#profit / purchaseAmount) * 100;
-  }  
-
+    return (this.#profit / purchaseAmount) * LOTTO_RULE.PROFIT_RATE_PERCENT;
+  }
 }
 
 export default Statistics;

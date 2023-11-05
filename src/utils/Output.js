@@ -1,27 +1,28 @@
 import { Console } from "@woowacourse/mission-utils";
 import Parser from "./Parser.js";
+import OUTPUT_MESSAGE from "../constant/OutputMessage.js";
 
 const Output = {
-  printTicketCount(ticketCount) {    
-    Console.print(`\n${ticketCount}개를 구매했습니다.`)            
+  printTicketCount(ticketCount) {
+    Console.print(OUTPUT_MESSAGE.PURCHASE(ticketCount));
   },
 
   printLottoNumbers(lotto) {
-    Console.print(`[${Parser.joinWithComma(lotto)}]`);      
+    Console.print(OUTPUT_MESSAGE.NUMBERS(lotto));
   },
 
-  printRank(rank) {    
-    Console.print(`\n당첨 통계\n---`)
-    Console.print(`3개 일치 (5,000원) - ${rank[4]}개`)
-    Console.print(`4개 일치 (50,000원) - ${rank[3]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${rank[2]}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${rank[1]}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${rank[0]}개`);             
+  printRank(rank) {
+    Console.print(OUTPUT_MESSAGE.STATISTICS);
+    Console.print(OUTPUT_MESSAGE.FIFTH_PLACE(rank[4]));
+    Console.print(OUTPUT_MESSAGE.FOURTH_PLACE(rank[3]));
+    Console.print(OUTPUT_MESSAGE.THIRD_PLACE(rank[2]));
+    Console.print(OUTPUT_MESSAGE.SECOND_PLACE(rank[1]));
+    Console.print(OUTPUT_MESSAGE.FIRST_PLACE(rank[0]));
   },
 
-  printProfitRate(profitRate) {    
-    Console.print(`총 수익률은 ${Parser.toFixedOneDecimal(profitRate)}%입니다.`);    
-  }
-}
+  printProfitRate(profitRate) {
+    Console.print(OUTPUT_MESSAGE.PROFIT_RATE(profitRate));
+  },
+};
 
 export default Output;
