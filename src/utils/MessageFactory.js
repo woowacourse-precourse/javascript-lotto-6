@@ -7,12 +7,14 @@ const getErrorMessage = (error) => {
 const throwError = (error) => {
   throw new Error(getErrorMessage(error));
 };
-
+/**
+ *
+ * @param {Lotto[]} lottos
+ */
 const printPurchasedLottos = (lottos) => {
   printMessage(`${lottos.length}${MESSAGE.numberOfTickets}`);
   lottos.forEach((v) => {
-    printMessage(v);
-    printMessage();
+    printMessage(JSON.stringify(v.getLottoNumbers()));
   });
 };
 
