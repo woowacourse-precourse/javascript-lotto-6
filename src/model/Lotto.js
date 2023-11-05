@@ -10,7 +10,10 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validator.validateLotto(numbers);
+    Validator.checkIsInvalidCount(numbers);
+    Validator.checkHasNonNumericElements(numbers);
+    Validator.checkHasOutOfRange(numbers);
+    Validator.checkHasDuplicate(numbers);
   }
 
   #sortNumbers(numbers) {

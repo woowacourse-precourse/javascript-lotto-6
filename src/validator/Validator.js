@@ -8,13 +8,6 @@ const Validator = {
     this.checkIsNotInUnit(amount);
   },
 
-  validateLotto(lotto) {
-    this.checkIsInvalidCount(lotto);
-    this.checkHasNonNumericElements(lotto);
-    this.checkHasOutOfRange(lotto);
-    this.checkHasDuplicate(lotto);
-  },
-
   checkIsNotNumber(userInput) {
     if (this.isNotNumber(userInput)) {
       throw new ValidationError(ERROR.isNotNumber);
