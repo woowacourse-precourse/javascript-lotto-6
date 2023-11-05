@@ -32,7 +32,6 @@ class Lotto {
       }
     }
     if(this.#numbers.includes(bonusNum)) res.hasBonus = true;
-    Console.print( winningNums, bonusNum);
     return res;
   }
 }
