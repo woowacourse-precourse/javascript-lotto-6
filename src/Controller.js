@@ -13,6 +13,7 @@ class Controller {
       await this.#generateLottoTicketList();
     }
     this.#displayLottoTicket();
+    await this.#generateLottoMatching();
   }
 
   async #generateLottoTicketList() {
@@ -24,6 +25,10 @@ class Controller {
 
   #displayLottoTicket() {
     OutputView.printLottoTicket(this.#lottoTicketList);
+  }
+
+  async #generateLottoMatching() {
+    const inputLottoWinningNumbers = await InputView.readLottoWinningNumbers();
   }
 }
 
