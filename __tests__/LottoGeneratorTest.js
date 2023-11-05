@@ -18,7 +18,7 @@ beforeEach(() => {
 describe("로또 발행 테스트", () => {
   test("금액을 기반으로 로또 티켓 수를 정확하게 계산", () => {
     const MONEY = 20000;
-    const numberOfLotto = lottoGenerator.calculateNumberOfLotto(MONEY);
+    const numberOfLotto = lottoGenerator.calculateNumberOfLottoTickets(MONEY);
 
     expect(numberOfLotto).toBe(20);
   });
