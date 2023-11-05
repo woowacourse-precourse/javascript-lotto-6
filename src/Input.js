@@ -30,5 +30,23 @@ class Input {
       throw new Error(`[ERROR] ${error.message}`);
     }
   }
+  static async getBonusNumber() {
+    try {
+      const input = await Console.readLineAsync('보너스 번호를 입력해 주세요: ');
+      const bonusNumber = parseInt(input, 10);
+
+      if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
+        throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+      }
+
+      return bonusNumber;
+    } catch (error) {
+      throw new Error(`[ERROR] ${error.message}`);
+    }
+  }
+
+  static isValidRange(numbers) {
+    return numbers.every((number) => number >= 1 && number <= 45);
+  }
 }
 export default Input;
