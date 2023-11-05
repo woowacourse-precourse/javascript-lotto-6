@@ -12,6 +12,21 @@ const Validator = {
     }
     return true;
   },
+
+  /**
+   *
+   * @param {array} lottoNumbers
+   */
+
+  validateLottoNumbers(lottoNumbers) {
+    if (new Set(lottoNumbers).size !== 6) throw new Error(ERROR_MESSAGES.invalidLottoNumber);
+    if (
+      lottoNumbers.some(
+        (lottoNumber) => lottoNumber > 45 || lottoNumber < 1 || !Number.isSafeInteger(lottoNumber),
+      )
+    )
+      throw new Error(ERROR_MESSAGES.invalidLottoNumber);
+  },
 };
 
 export default Validator;
