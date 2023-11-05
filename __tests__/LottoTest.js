@@ -1,5 +1,5 @@
 import Lotto from "../src/Lotto.js";
-import { checkLottoAmount } from "../src/LottoInput.js";
+import { checkLottoAmount, checkLottoBonusNumber } from "../src/LottoInput.js";
 import { lottoMachine } from "../src/LottoMachine.js";
 
 describe("로또 클래스 테스트", () => {
@@ -23,5 +23,17 @@ describe("로또 클래스 테스트", () => {
 
   test("구입 개수만큼 로또를 발행한다.", () => {
     expect(lottoMachine(6).length).toEqual(6);
+  });
+
+  test("보너스 번호가 숫자가 아닌 경우 예외가 발생한다.", () => {
+    expect(() => checkLottoBonusNumber([1, 2, 3, 4, 5, 6], 'abc')).toThrow("[ERROR]");
+  });
+
+  test("보너스 번호가 1 ~ 45의 숫자가 아닌 경우 예외가 발생한다.", () => {
+    expect(() => checkLottoBonusNumber([1, 2, 3, 4, 5, 6], 48)).toThrow("[ERROR]");
+  });
+  
+  test("보너스 번호가 당첨 번호와 중복된 경우 예외가 발생한다. ", () => {
+    expect(() => checkLottoBonusNumber([1, 2, 3, 4, 5, 6], 5)).toThrow("[ERROR]");
   });
 });
