@@ -60,6 +60,12 @@ class LottoGameController {
 
   #checkPrizeStage(winningNumbers, bonusNumber) {
     this.#lottoService.calculatePrizeResult(winningNumbers, bonusNumber);
+    this.#printResultStage();
+  }
+
+  #printResultStage() {
+    OutputView.printPrizeTitle();
+    OutputView.printPrizeResult(this.#lottoService.getPrize());
   }
 }
 

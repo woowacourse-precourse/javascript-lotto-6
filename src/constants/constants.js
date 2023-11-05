@@ -56,6 +56,11 @@ const INPUT_MESSAGE = Object.freeze({
 const OUTPUT_MESSAGE = Object.freeze({
   purchaseCount: tickets => `\n${tickets.length}개를 구매했습니다.`,
   tickets: ticket => `[${ticket.join(', ')}]`,
+  resultTitle: `\n당첨통계\n---`,
+  prizeResult: (prize, matchCount) =>
+    `${PRIZE[prize].matchCount}개 일치${PRIZE[prize].extraWord} (${PRIZE[
+      prize
+    ].money.toLocaleString()}원) - ${matchCount}개`,
 });
 
 export { LOTTO, INPUT_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE, PRIZE };

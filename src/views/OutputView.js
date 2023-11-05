@@ -9,6 +9,16 @@ const OutputView = {
       Console.print(OUTPUT_MESSAGE.tickets(ticket));
     });
   },
+
+  printPrizeTitle() {
+    Console.print(OUTPUT_MESSAGE.resultTitle);
+  },
+
+  printPrizeResult(result) {
+    result.forEach((matchCount, prize) => {
+      Console.print(OUTPUT_MESSAGE.prizeResult(prize, matchCount));
+    });
+  },
 };
 
 export default OutputView;
