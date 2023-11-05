@@ -12,7 +12,11 @@ import {
   throwError,
 } from './MessageFactory';
 
-import { getBonusBallNumber, getLottoRandomNumbers } from './RandomNumbers';
+import {
+  getBonusBallNumber,
+  getLottoRandomNumbers,
+  getRandomNumbers,
+} from './RandomNumbers';
 
 import { validateNumberRange, hasNoReset } from './Validate';
 
@@ -20,6 +24,7 @@ export {
   getBonusBallNumber,
   getErrorMessage,
   getLottoRandomNumbers,
+  getRandomNumbers,
   hasNoReset,
   readBonusNumber,
   readInput,

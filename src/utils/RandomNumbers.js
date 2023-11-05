@@ -17,4 +17,4 @@ const getBonusBallNumber = () => {
   return getRandomNumbers(range, length);
 };
 
-export { getLottoRandomNumbers, getBonusBallNumber };
+export { getRandomNumbers, getLottoRandomNumbers, getBonusBallNumber };
