@@ -10,10 +10,6 @@ const lottoPrizesMap = deepFreeze(
   ]),
 );
 
-const unit = Object.freeze({
-  unit: 1000,
-});
-
 const number = deepFreeze({
   zero: 0,
   winningMin: 3,
@@ -24,6 +20,10 @@ const number = deepFreeze({
     count: 5,
     key: '5_bonus',
   },
+});
+
+const unit = Object.freeze({
+  value: 1000,
 });
 
 const rate = Object.freeze({
@@ -45,7 +45,6 @@ const LOTTO = Object.freeze({
   unit,
   number,
   rate,
-  // bonus,
   string,
   regexPatterns,
 });
