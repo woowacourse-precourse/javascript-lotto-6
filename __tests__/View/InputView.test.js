@@ -49,4 +49,24 @@ describe("InputView 객체 테스트", () => {
       expect(winningNumbers).toBe(winningNumbersInput);
     });
   });
+
+  describe("readBonousNumber 메서드 테스트", () => {
+    test("readBonousNumber 메서드가 존재해야 한다.", () => {
+      expect(typeof InputView.readBonousNumber).toBe("function");
+    });
+
+    test("readBonousNumber메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
+      InputView.readBonousNumber();
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.LOTTO_BONOUS_NUMBER);
+    });
+
+    test("readBonousNumber메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
+      const bonousNumberInput = "7";
+      const resolvedPromise = Promise.resolve(bonousNumberInput);
+      Console.readLineAsync.mockReturnValue(resolvedPromise);
+
+      const bonousNumber = await InputView.readBonousNumber();
+      expect(bonousNumber).toBe(bonousNumberInput);
+    });
+  });
 });
