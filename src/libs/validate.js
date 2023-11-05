@@ -31,7 +31,14 @@ function hasDuplicate(arr) {
   }
 }
 
-function isNumberInRange(number) {
+function isInteger(input) {
+  if (!Number.isInteger(Number(input))) {
+    throw new Error(ERRORS.NOT_INTEGER);
+  }
+}
+
+function isNumberInRange(input) {
+  const number = parseFloat(input);
   if (number < 1 || number > 45) {
     throw new Error(ERRORS.NUMBER_RANGE_ALERT);
   }
@@ -43,5 +50,6 @@ export {
   isDivisibleByThousand,
   isArrLengthSix,
   hasDuplicate,
+  isInteger,
   isNumberInRange,
 };

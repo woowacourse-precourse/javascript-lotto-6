@@ -26,6 +26,12 @@ describe("당첨 번호 입력 테스트", () => {
     }).toThrow(ERRORS.NOT_NUMBER);
   });
 
+  test("입력값이 정수가 아닌 경우", () => {
+    expect(() => {
+      new WinningNumbers("1.5, 2, 3, 4, 5, 6");
+    }).toThrow(ERRORS.NOT_INTEGER);
+  });
+
   test("1부터 45 사이의 숫자가 아닌 경우", () => {
     expect(() => {
       new WinningNumbers("1, 2, 3, 100, 5, 6");

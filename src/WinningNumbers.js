@@ -4,6 +4,7 @@ import {
   isNumberInRange,
   isInputEmpty,
   isInputNumeric,
+  isInteger,
 } from "./libs/validate.js";
 
 class WinningNumbers {
@@ -29,6 +30,7 @@ class WinningNumbers {
     arr.forEach((element) => {
       isInputEmpty(element);
       isInputNumeric(element);
+      isInteger(element);
       isNumberInRange(element);
     });
   }

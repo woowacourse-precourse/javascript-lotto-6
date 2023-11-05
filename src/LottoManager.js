@@ -2,6 +2,7 @@ import Lotto from "./Lotto.js";
 import { Console, Random } from "@woowacourse/mission-utils";
 import WinningNumbers from "./WinningNumbers.js";
 import { MESSAGES } from "./libs/message.js";
+import BonusNumber from "./BonusNumber.js";
 
 class LottoManager {
   constructor() {
@@ -37,9 +38,14 @@ class LottoManager {
     this.winningNumber = new WinningNumbers(input);
   }
 
+  async setBonusNumber() {
+    const input = await Console.readLineAsync(MESSAGES.INPUT_BONNUS_NUMBER);
+    this.bonusNumber = new BonusNumber(input);
+  }
+
   async setWinningNumbersAndBonus() {
     await this.setWinningNumber();
-    // await this.setBonnusNumber();
+    await this.setBonusNumber();
   }
 }
 
