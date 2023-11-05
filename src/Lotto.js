@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { Console, Random } from '@woowacourse/mission-utils';
 
 class Lotto {
@@ -21,9 +22,6 @@ class Lotto {
     const compare = this.#numbers.filter(x => published.includes(x));
     return compare.length;
   }
-
-
-  
 }
 
 const inputAmount = async() => {
@@ -62,6 +60,35 @@ const getBonus = async() => {
   const bonus = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
   return bonus;
 }
+
+const getRank = async(lotto, bonus) => {
+  for (let i = 0; i < PublishedLotto.numbers.length; i += 1) {
+    const result = lotto.compareNumbers(PublishedLotto.numbers[i]);
+    organizeRank(result);
+    if (result === 5 && PublishedLotto.numbers.includes(bonus)) {
+      PublishedLotto.rank[2] -= 1;
+      PublishedLotto.rank[1] += 1;
+    }
+  }
+}
+
+const organizeRank = (result) => {
+  switch(result) {
+    case 6 :
+      PublishedLotto.rank[0] += 1;
+      break;
+    case 5 : 
+      PublishedLotto.rank[2] += 1;
+      break;
+    case 4 :
+      PublishedLotto.rank[3] += 1;
+      break;
+    case 3 :
+      PublishedLotto.rank[4] += 1;
+      break;
+  }
+}
+
 
 
 
