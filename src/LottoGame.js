@@ -1,4 +1,4 @@
-import { PRICE_UNIT, Random } from './Constant';
+import { PRICE_UNIT, Random, ERROR_LOTTO_TYPE } from './Constant';
 import InputView from './InputView';
 import Lotto from './Lotto';
 import OutputView from './OutputView';
@@ -7,6 +7,7 @@ class LottoGame {
   #purchaseAmount;
   #lottoList;
   #winningLotto;
+  #bonusNumber;
 
   async gameStart() {
     this.#lottoList = [];
@@ -20,7 +21,9 @@ class LottoGame {
     this.#lottoList.map(lotto => {
       OutputView.printLotto(lotto.numbers);
     });
-    this.#winningLotto = await InputView.readWinningNumbers();
+    this.#winningLotto = new Lotto(await InputView.readWinningNumbers());
+    this.#bonusNumber = await InputView.readBonusNumbers();
+    console.log(this.#bonusNumber);
   }
 
   getRandomNumbers() {
