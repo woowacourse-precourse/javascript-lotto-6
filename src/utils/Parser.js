@@ -11,6 +11,10 @@ const Parser = {
     return value.sort((a, b) => a - b);
   },  
 
+  joinWithComma(value) {
+    return value.join(', ');
+  },
+
   toFixedOneDecimal(number) {
     return number.toFixed(1);
   },

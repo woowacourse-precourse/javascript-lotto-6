@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import Parser from "./Parser.js";
 
 const Output = {
   printTicketCount(ticketCount) {    
@@ -6,7 +7,7 @@ const Output = {
   },
 
   printLottoNumbers(lotto) {
-    Console.print(`[${lotto.join(', ')}]`);      
+    Console.print(`[${Parser.joinWithComma(lotto)}]`);      
   },
 
   printRank(rank) {    
