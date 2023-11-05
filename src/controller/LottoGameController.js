@@ -26,54 +26,61 @@ class LottoGameController {
   }
 
   async start() {
+    await this.buyLottos();
+
+    // const loopCount = this.#moneyInstance.getPurchaseCount();
+    // Array.from({ length: loopCount }).forEach(() => {
+    //   const lotto = new Lotto(
+    //     this.generateLottoNumbers().sort((a, b) => a - b),
+    //   );
+    //   this.lottoTickets.addLotto(lotto);
+    //   this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
+    // });
+
+    // while (true) {
+    //   try {
+    //     this.#winningNumbers = await this.getWinningNumbers();
+    //     break;
+    //   } catch (error) {
+    //     this.outputView.print(error);
+    //   }
+    // }
+
+    // while (true) {
+    //   try {
+    //     this.#bonusNumber = await this.getBonusNumber();
+    //     break;
+    //   } catch (error) {
+    //     this.outputView.print(error);
+    //   }
+    // }
+  }
+
+  async createMoneyInstance() {
+    const money = await this.getPurchaseAmount();
+    return new Money(money);
+  }
+
+  async setMoney() {
+    this.#moneyInstance = await this.createMoneyInstance();
+  }
+
+  async buyLottos() {
     while (true) {
       try {
-        this.#moneyInstance = await this.createMoneyInstance();
+        await this.setMoney();
         break;
       } catch (error) {
         this.outputView.print(error);
       }
     }
-
     this.printPurchaseCount();
-
-    const loopCount = this.#moneyInstance.getPurchaseCount();
-    Array.from({ length: loopCount }).forEach(() => {
-      const lotto = new Lotto(
-        this.generateLottoNumbers().sort((a, b) => a - b),
-      );
-      this.lottoTickets.addLotto(lotto);
-      this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
-    });
-
-    while (true) {
-      try {
-        this.#winningNumbers = await this.getWinningNumbers();
-        break;
-      } catch (error) {
-        this.outputView.print(error);
-      }
-    }
-
-    while (true) {
-      try {
-        this.#bonusNumber = await this.getBonusNumber();
-        break;
-      } catch (error) {
-        this.outputView.print(error);
-      }
-    }
   }
 
   async getPurchaseAmount() {
     const money = Number(await this.inputView.getUserInputAsync(MESSAGE.INPUT));
     InputValidator.validateMoney(money);
     return money;
-  }
-
-  async createMoneyInstance() {
-    const money = await this.getPurchaseAmount();
-    return new Money(money);
   }
 
   printPurchaseCount() {
