@@ -1,9 +1,17 @@
 import { Random } from '@woowacourse/mission-utils';
+import {
+  validateLength,
+  validateNumber,
+  validateRange,
+  validateUnique,
+} from '../utils/validateFn';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
+    numbers.sort((a, b) => a - b);
+    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
@@ -14,6 +22,16 @@ class Lotto {
 
   getLottery() {
     return this.#numbers;
+  }
+
+  #validate(numbers) {
+    numbers.forEach((element) => {
+      validateNumber(element);
+      validateRange(element);
+    });
+    validateLength(numbers);
+    validateUnique(numbers);
+    return;
   }
 }
 
