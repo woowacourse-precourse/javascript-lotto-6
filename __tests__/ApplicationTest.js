@@ -125,7 +125,7 @@ describe('유저 로또 구매 갯수 테스트', () => {
     const purchaseCount = input / 1000;
 
     const app = new App();
-    const lotteryTicket = await app.getLotteryTickets(purchaseCount);
+    const lotteryTicket = await app.getLottos(purchaseCount);
 
     expect(lotteryTicket.length).toBe(purchaseCount);
   });
