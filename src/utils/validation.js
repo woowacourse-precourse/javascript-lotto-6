@@ -7,6 +7,9 @@ import {
 
 const isEmpty = (value) => value === "";
 
+const isAllNumbers = (values) =>
+  values.filter((value) => isNumber(value)).length === NUMBER_COUNT;
+
 const isNumber = (value) => NUMBER_REGEX.test(value);
 
 const isInMultiplesOfThousand = (value) => value % BASE_AMOUNT;
@@ -32,6 +35,9 @@ const validateWinningNumber = (winningNumber) => {
   }
   if (!isSixNumbers(numbers)) {
     throw new Error(ERROR_MESSAGE.notSixNumbers);
+  }
+  if (!isAllNumbers(numbers)) {
+    throw new Error(ERROR_MESSAGE.textIncluded);
   }
 };
 
