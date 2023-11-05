@@ -1,9 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GUIDE_MESSAGE } from "../constants/Message";
+import WinningNumbersValidator from "../validate/WinningNumbersValidator";
 
 const InputView = {
-  async readPurchasePrice() {
-    return await Console.readLineAsync(GUIDE_MESSAGE.insertMoney);
+  async getPurchasePrice() {
+    Console.print(GUIDE_MESSAGE.insertMoney);
+    const purchasePrice = await Console.readLineAsync("");
+    WinningNumbersValidator.validatePurchasePrice(purchasePrice);
+    return purchasePrice;
   }
 };
 
