@@ -2,13 +2,13 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 
 class GuessLotto {
-  #guessNumbers;
+  #guessNumbers = [];
 
-  #guessBonus;
+  #guessBonus = null;
 
-  #lottoPieces;
+  #lottoPieces = 0;
 
-  #lottoNumbers;
+  #lottoNumbers = [];
 
   get guessNumbers() {
     return this.#guessNumbers;
@@ -40,13 +40,6 @@ class GuessLotto {
 
   set lottoNumbers(numbers) {
     this.#lottoNumbers = numbers;
-  }
-
-  constructor() {
-    this.#guessNumbers = [];
-    this.#guessBonus = null;
-    this.#lottoPieces = 0;
-    this.#lottoNumbers = [];
   }
 
   async inputLottoNumber() {
