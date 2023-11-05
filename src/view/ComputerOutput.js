@@ -15,17 +15,12 @@ class ComputerOutput {
     print(printing);
   }
 
-  static printWinningStats(rankCounts) {
+  static printWinningStats(rankCounts, profitPercentage) {
     print('당첨통계');
     print('---');
-    RESULT_MESSAGE.forEach((message) => {
-      let i = 0;
-      print(message + rankCounts[i]);
-      i += 1;
+    RESULT_MESSAGE.forEach((message, i) => {
+      print(`${message[Object.keys(message)[0]] + rankCounts[i]}개`);
     });
-  }
-
-  static printTotalProfitPercentage(profitPercentage) {
     print(`총 수익률은 ${profitPercentage}%입니다.`);
   }
 }
