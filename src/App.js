@@ -9,6 +9,8 @@ class App {
     const purchaseAmount = await Console.readLineAsync(PROPT_MESSAGE.INPUT_PURCHASE_AMOUNT);
     const lottoMachine = new LottoMachine(purchaseAmount);
     LottoViewer.purchasedLottos(lottoMachine.getLotto());
+    const lottoWinningNumber = await Console.readLineAsync(PROPT_MESSAGE.INPUT_WINNING_NUMBER);
+    const lotto = new Lotto(lottoWinningNumber);
   }
 }
 
