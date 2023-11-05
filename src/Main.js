@@ -6,7 +6,7 @@ class Main {
   }
 
   start = async () => {
-    await this.lottoStroreUI.printPurchasAmount();
+    const numberOfLotto = await this.lottoStroreUI.printPurchasAmount();
   };
 }
 
