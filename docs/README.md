@@ -96,27 +96,9 @@
 
 - 로또 숫자의 범위: `1` ~ `45`
 
-- 당첨 금액 : { 
+- 당첨 금액 : `{일치 갯수, 당첨 금액, 등수}`
 
-  ```
-  일치 갯수
-  ```
-
-   : { 
-
-  ```
-  당첨 금액
-  ```
-
-   , 
-
-  ```
-  등수
-  ```
-
-  }}
-
-  - `Object.freeze()` 로 할 것
+  - `Object.freeze()` 로 상수 처리
 
 - 로또 당첨 숫자 갯수 : `6`
 
@@ -124,13 +106,13 @@
 
 - `Lotto` 클래스 : 로또 티켓
 - `LottoChecker` : 로또 추첨기
-- `CalculateYield` ****함수 : 수익률 계산기
+- `CalculateYield` 함수 : 수익률 계산기
 - `IsUniqueNumbersInArray` 함수 : 서로 다른 번호인지 확인
 - `IsNumbersInArray` 함수 : 배열 안에 숫자로만 이루어졌는지 확인
 - `IsNumber` 함수 : 숫자로만 이루어졌는지 확인
 - `IsNumberRange` 함수 : 숫자 범위가 예상 범위인지 체크
 
-## 🎱 ****주의 사항
+## 🎱 주의 사항
 
 - **indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.**
 - 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동하지 않는다.
@@ -155,18 +137,18 @@
   ```jsx
   class Lotto {
     #numbers;
-  
+
     constructor(numbers) {
       this.#validate(numbers);
       this.#numbers = numbers;
     }
-  
+
     #validate(numbers) {
       if (numbers.length !== 6) {
         throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
       }
     }
-  
+
     // TODO: 추가 기능 구현
   }
   ```
