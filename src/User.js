@@ -32,6 +32,12 @@ class User {
 
     return winningNumber.split(',');
   }
+
+  async inputBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(GAME_MESSAGE.bonusNumber);
+
+    return bonusNumber;
+  }
 }
 
 export default User;
