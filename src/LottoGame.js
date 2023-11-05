@@ -38,18 +38,36 @@ class LottoGame {
   }
 
   async setPlayer() {
-    const money = await Input.getMoney();
-
-    this.player = new Player(money);
-    this.player.print();
+    try {
+      const money = await Input.getMoney();
+      this.player = new Player(money);
+      this.player.print();
+    } catch (LottoGameError) {
+      Output.printError(LottoGameError.message);
+      await this.setPlayer();
+    }
   }
 
   async setWinningLotto() {
-    const winningNumbers = await Input.getWinningNumber();
-    this.winningLotto = new WinningLotto(winningNumbers);
+    try {
+      const winningNumbers = await Input.getWinningNumber();
 
-    const bonusNumber = await Input.getBonusNumber();
-    this.winningLotto.setBonusNumber(bonusNumber);
+      this.winningLotto = new WinningLotto(winningNumbers);
+      await this.setBonusNumber();
+    } catch (LottoGameError) {
+      Output.printError(LottoGameError.message);
+      await this.setWinningLotto();
+    }
+  }
+
+  async setBonusNumber() {
+    try {
+      const bonusNumber = await Input.getBonusNumber();
+      this.winningLotto.setBonusNumber(bonusNumber);
+    } catch (LottoGameError) {
+      Output.printError(LottoGameError.message);
+      await this.setBonusNumber();
+    }
   }
 
   saveLottoRank() {
@@ -98,3 +116,6 @@ class LottoGame {
 }
 
 export default LottoGame;
+
+const game = new LottoGame();
+game.initGame();
