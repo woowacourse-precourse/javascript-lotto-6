@@ -14,6 +14,10 @@ class Lotto {
     if (SET_NUM.size !== numbers.length) {
       throw new Error("[ERROR] 중복된 값을 입력하지 마세요");
     }
+    numbers.forEach(v => {
+      if (isNaN(v)) throw new Error("[ERROR] 숫자만 입력");
+      if (v < 1 && v>45) throw new Error("[ERROR] 1부터 45까지만 가능");
+    });
   }
 
   // TODO: 추가 기능 구현
@@ -21,5 +25,4 @@ class Lotto {
     return this.#numbers;
   }
 }
-
 export default Lotto;
