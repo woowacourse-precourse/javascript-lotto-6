@@ -14,10 +14,7 @@ describe("OutputView 객체 테스트", () => {
       [8, 21, 23, 41, 42, 43],
       [3, 5, 11, 16, 32, 38],
     ];
-    const purchaseResultMessage = `
-    [8, 21, 23, 41, 42, 43]
-    [3, 5, 11, 16, 32, 38]
-    `;
+    const purchaseResultMessage = "\n2개를 구매했습니다.\n[8, 21, 23, 41, 42, 43]\n[3, 5, 11, 16, 32, 38]";
     OutputView.printPurchaseResult(purchaseResult);
     expect(Console.print).toBeCalledWith(purchaseResultMessage);
   });
