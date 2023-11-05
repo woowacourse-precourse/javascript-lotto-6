@@ -1,6 +1,6 @@
 class BonusNumber {
     constructor(number){
-        this.number = number
+        this.number = Number(number)
     }
 }
 
