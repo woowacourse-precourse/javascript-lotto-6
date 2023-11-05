@@ -4,11 +4,31 @@ import Lotto from "../src/Lotto.js";
 class App {
   async play() {
     const amount = await this.getAmount();
-    this.getLottoNumbers(amount);
+    const lottoNumbersArray = this.getLottoNumbers(amount);
 
     const numbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber();
-    this.validateBonusNumber(numbers,bonusNumber);
+    this.validateBonusNumber(numbers, bonusNumber);
+  
+    const results = {
+      three: 0,
+      four: 0,
+      five: 0,
+      bonus: 0,
+      all: 0,
+    };
+    
+    for (const lottoNumbers of lottoNumbersArray) {
+      const matchResult = numbers.matchLotto(lottoNumbers, bonusNumber);
+      
+      results.three += matchResult.three;
+      results.four += matchResult.four;
+      results.five += matchResult.five;
+      results.bonus += matchResult.bonus;
+      results.all += matchResult.all;
+    }
+    
+    numbers.printResult(results);
   }
 
   async getAmount() {
@@ -26,15 +46,21 @@ class App {
 
   getLottoNumbers(count) {
     const playCount = count / 1000;
+    const allLottoNumbers = [];
 
-    for(let i = 0; i < playCount; i++) {
-      this.printRandomLottoNumbers();
+    Console.print(`\n${playCount}개를 구매했습니다.`);
+    for (let i = 0; i < playCount; i++) {
+      const randomLottoNumbers = this.printRandomLottoNumbers();
+      allLottoNumbers.push(randomLottoNumbers);
+      Console.print(randomLottoNumbers);
     }
+
+    return allLottoNumbers;
   }
 
   printRandomLottoNumbers() {
     const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    Console.print(randomNumbers);
+    return randomNumbers;
   }
 
   async getWinningNumbers() {
