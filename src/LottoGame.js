@@ -5,18 +5,18 @@ import View from './View.js';
 class LottoGame {
   #purchaser;
 
-  async start() {
+  async play() {
     try {
       const purchaseAmount = await View.askPurchaseAmount();
       this.#purchaser = new LottoPurchaser(purchaseAmount);
-      this.#play();
+      this.#purchaseLottos();
     } catch (error) {
       View.print(error.message);
-      await this.start();
+      await this.play();
     }
   }
 
-  #play() {
+  #purchaseLottos() {
     this.#purchaser.purchase();
     this.#showNumberOfLottos();
     this.#showSortedLottos();
