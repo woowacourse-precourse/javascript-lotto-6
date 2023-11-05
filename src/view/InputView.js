@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-const Console = MissionUtils.console;
+const { Console } = MissionUtils;
 class InputView {
   money = 0;
 
@@ -11,6 +11,7 @@ class InputView {
   async inputMoney() {
     this.money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     // 금액 입력 예외 처리
+    return this.money;
   }
 
   async inputNumbers() {
