@@ -21,6 +21,7 @@ export const MESSAGE = Object.freeze({
   INPUT_MONEY: '구입금액을 입력해 주세요.\n',
   INPUT_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
   INPUT_BONUS: '\n보너스 번호를 입력해 주세요.\n',
+  WINNING_RESULT: '\n당첨 통계\n---',
 });
 
 export default { MESSAGE, OPTION };

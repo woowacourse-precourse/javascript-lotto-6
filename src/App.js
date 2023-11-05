@@ -31,6 +31,14 @@ class App {
     const numbers = await InputView.readNumbers();
     const bonus = await InputView.readBonus();
     this.lottoCalculator.setWinningNumber(numbers, bonus);
+
+    await this.printResult();
+  }
+
+  async printResult() {
+    const result = this.lottoCalculator.getResult();
+    const { profit } = LottoCalculator.getProfitWithResult(result);
+    OutputView.printWinningResult(result.slice(1).reverse(), profit);
   }
 }
 
