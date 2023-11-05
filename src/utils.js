@@ -15,9 +15,8 @@ function generateRandomNumbers(count) {
   ).sort((a, b) => a - b);
 }
 
-function getMatchCount(lotto, winningNumbers, bonus) {
+function getMatchCount(lottoNumbers, winningNumbers, bonus) {
   let match = 0;
-  const lottoNumbers = lotto.getLottoNumbers();
 
   lottoNumbers.forEach((number) => {
     if (winningNumbers.includes(number)) {

@@ -101,7 +101,12 @@ class App {
 
   #setMatchCounter() {
     [...this.#lottoEntries.values()].forEach((lotto) => {
-      const match = getMatchCount(lotto, this.#winningNumbers, this.#bonus);
+      const match = getMatchCount(
+        lotto.getLottoNumbers(),
+        this.#winningNumbers,
+        this.#bonus
+      );
+
       this.#matchCounter[match] += 1;
     });
   }
