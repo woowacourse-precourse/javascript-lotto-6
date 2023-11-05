@@ -1,10 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
+import { QUERY } from './Message.js';
 
 class View {
-  static #PURCHASE_AMOUNT_QUERY = '구입금액을 입력해 주세요. ';
-
   static async askPurchaseAmount() {
-    const answer = await Console.readLineAsync(View.#PURCHASE_AMOUNT_QUERY);
+    const answer = await Console.readLineAsync(QUERY.purchaseAmount);
     return answer;
   }
 }

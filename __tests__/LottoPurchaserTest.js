@@ -1,0 +1,20 @@
+import LottoPurchaser from '../src/LottoPurchaser.js';
+import { ERROR } from '../src/Message.js';
+
+describe('로또 구매자 클래스 테스트', () => {
+  test('로또 구입 금액이 빈 값이면 예외가 발생한다.', () => {
+    expect(() => {
+      new LottoPurchaser('');
+    }).toThrow(ERROR.falsy);
+  });
+  test('로또 구입 금액이 0이면 예외가 발생한다', () => {
+    expect(() => {
+      new LottoPurchaser(0);
+    }).toThrow(ERROR.falsy);
+  });
+  test('로또 구입 금액이 숫자가 아니면 예외가 발생한다', () => {
+    expect(() => {
+      new LottoPurchaser('천원');
+    }).toThrow(ERROR.falsy);
+  });
+});
