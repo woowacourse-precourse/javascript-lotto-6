@@ -1,6 +1,7 @@
 import InputView from './Views/InputView.js';
 import Validator from '../utils/Validator.js';
 import User from './User.js';
+import OutputView from './Views/OutputView.js';
 
 class LottoController {
   #user;
@@ -17,6 +18,7 @@ class LottoController {
   async handlePurchaseAmount(purchaseAmount) {
     if (!Validator.validatePurchaseAmount(purchaseAmount)) return this.readPurchaseAmount();
     this.#user = new User(purchaseAmount);
+    OutputView.printQuantity(purchaseAmount);
   }
 }
 
