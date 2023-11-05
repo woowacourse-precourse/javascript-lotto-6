@@ -6,10 +6,10 @@ class Validation {
     });
 
     if (numbers.length !== set.size) {
-      return false;
+      return true;
     }
 
-    return true;
+    return false;
   }
 }
 export default Validation;
