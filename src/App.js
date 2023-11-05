@@ -1,15 +1,15 @@
-import { Console } from "@woowacourse/mission-utils";
 import System from "./System";
+import ConsolePrint from "./views/ConsolePrint";
 
 class App {
   async play() {
     const system = new System();
+    const consolePrint = new ConsolePrint();
     const money = await system.getMoney();
     const lottoCount = await system.getLottoCount(money);
-    Console.print(`${lottoCount}개를 구매했습니다.`);
 
     const lottos = await system.purchaseLottos(lottoCount);
-    system.printLottos(lottos);
+    consolePrint.printLottos(lottos);
     const [lottoNumbers, lotto] = await system.getLotto();
     const [bonusNumber, lottoNumbersSet] = await system.getBonusNumber(lotto);
   }

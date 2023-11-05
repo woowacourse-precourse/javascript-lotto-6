@@ -84,17 +84,6 @@ class System {
     return lottos;
   }
 
-  printLottoNumbers(lotto) {
-    const lottoStr = `[${lotto.getNumbers().join(", ")}]`;
-    Console.print(lottoStr);
-  }
-
-  printLottos(lottos) {
-    for (let i = 0; i < lottos.length; i++) {
-      this.printLottoNumbers(lottos[i]);
-    }
-  }
-
   async getLotto() {
     let lottoNumbers = [];
     let lotto;

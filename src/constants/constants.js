@@ -9,3 +9,7 @@ export const ERROR_MESSAGE = Object.freeze({
   moneyFormatErrorMessage: "[ERROR] 1,000원 단위로 입력해 주세요.",
   duplicateLottoNumber: "[ERROR] 당첨 번호와 보너스 번호가 중복됩니다.",
 });
+
+export const OUTPUT_MESSAGE = Object.freeze({
+  lottoCounts: (count) => `${count}개를 구매했습니다.`,
+});
