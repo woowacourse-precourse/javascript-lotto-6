@@ -5,14 +5,14 @@ import Lotto from '../../../Lotto.js';
 class User {
   #purchaseAmount;
 
-  #LottoCount;
+  #lottoCount;
 
   #userLotto;
 
   constructor(purchaseAmount, generateLottoNumber) {
     this.#validate(purchaseAmount);
     this.#purchaseAmount = Number(purchaseAmount);
-    this.#LottoCount = this.#purchaseAmount / CONSTANTS.lottoPrice;
+    this.#lottoCount = this.#purchaseAmount / CONSTANTS.lottoPrice;
     this.#purchaseLotto(generateLottoNumber);
   }
 
@@ -25,9 +25,13 @@ class User {
 
   #purchaseLotto(generateLottoNumber) {
     this.#userLotto = [];
-    for (let count = 0; count < this.#LottoCount; count += 1) {
+    for (let count = 0; count < this.#lottoCount; count += 1) {
       this.#userLotto.push(new Lotto(generateLottoNumber()));
     }
+  }
+
+  get lottoCount() {
+    return this.#lottoCount;
   }
 
   get userLotto() {
