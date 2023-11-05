@@ -16,7 +16,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/__tests__/*.js'],
+      files: ['**/__tests__/**/*.js'],
       rules: {
         'max-depth': 'off',
         'max-lines-per-function': 'off',
