@@ -56,4 +56,15 @@ describe('Validator', () => {
       }
     }).toThrow();
   });
+
+  test('보너스 번호가 당첨 번호와 중복되는지 확인한다.', () => {
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const bonus = 6;
+
+    expect(() => {
+      if (numbers.includes(bonus)) {
+        throw new Error(ERROR_MESSAGE.bonus);
+      }
+    }).toThrow();
+  });
 });
