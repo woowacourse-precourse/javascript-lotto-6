@@ -38,28 +38,6 @@ class LottoWinnerVerifier {
   #hasBonusNumber(lotto) {
     return lotto.getNumbers().includes(this.#bonusNumber);
   }
-
-  static calulateLottoPayoutRate(outcome, buyingPrice) {
-    const totalPayout = LottoWinnerVerifier.#getTotalPayout(outcome);
-    const rate = (totalPayout / buyingPrice) * 100;
-    return Math.round((rate + Number.EPSILON) * 100) / 100;
-  }
-
-  static #getTotalPayout(outcome) {
-    const prize = {
-      first: 2000000000,
-      second: 30000000,
-      third: 1500000,
-      fourth: 50000,
-      fifth: 5000,
-    };
-    let result = 0;
-
-    for (const win in prize) {
-      result = prize[win] * outcome[win];
-    }
-    return result;
-  }
 }
 
 export default LottoWinnerVerifier;
