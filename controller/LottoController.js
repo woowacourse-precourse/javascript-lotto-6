@@ -1,34 +1,22 @@
-import { Random, Console } from '@woowacourse/mission-utils';
 import Lotto from '../src/Lotto.js';
 import InputView from '../view/InputView.js';
-import PromptMessage from '../constants/PromptMessage.js';
 import Label from '../constants/Label.js';
 
 class LottoController {
   constructor() {
     this.input = new InputView();
-    this.lottoCount = 0;
-    this.lottoArr = []; // [ Lotto{}, Lotto{} ]
     this.sameNumCountArr = [];
-
-    this.winCountArr = [];
     this.totalPrice = 0;
   }
 
-  printLotto(price) {
-    this.lottoCount = price / 1000;
-    Console.print(PromptMessage.PRINT_PURCHASED_NUM(this.lottoCount));
-    while (this.lottoCount > 0) {
-      const lottoNumbers = Lotto.generateRandomLotto();
-      Console.print(`[${lottoNumbers.getNumbers().join(', ')}]`);
-      this.lottoArr.push(lottoNumbers);
-      this.lottoCount -= 1;
-    }
+  generateAndStoreLotto(arr) {
+    const lottoNumbers = Lotto.generateRandomLotto();
+    arr.push(lottoNumbers);
   }
 
-  checkWin(price, win, bonus) {
+  checkWin(price, win, bonus, arr) {
     for (let i = 0; i < price / 1000; i++) {
-      const lotto = this.lottoArr[i].getNumbers();
+      const lotto = arr[i].getNumbers();
       const sameNumArr = lotto.filter((num) => win.includes(num));
       if (sameNumArr.length === 5) {
         this.checkIsBonus(lotto, bonus);
@@ -36,7 +24,6 @@ class LottoController {
         this.sameNumCountArr.push(sameNumArr.length);
       }
     }
-    // Console.print(this.sameNumCountArr);
   }
 
   checkIsBonus(arr, bonus) {
@@ -47,43 +34,23 @@ class LottoController {
     }
   }
 
-  getWinCountArr() {
+  getWinCountArr(arr) {
     for (let i = 3; i <= 7; i++) {
       const count = this.sameNumCountArr.reduce(
         (cnt, element) => cnt + (element === i),
         0,
       );
-      this.winCountArr.push(count);
+      arr.push(count);
     }
-    [this.winCountArr[3], this.winCountArr[4]] = [
-      this.winCountArr[4],
-      this.winCountArr[3],
-    ];
-    // Console.print(this.winCountArr);
+    [arr[3], arr[4]] = [arr[4], arr[3]];
   }
 
-  printWinCount() {
-    Console.print(PromptMessage.PRINT_STATISTICS);
-    for (let i = 0; i < this.winCountArr.length; i++) {
-      Console.print(
-        `${Label.WIN_COUNT_LABELS[i]} (${Label.PRICE_AMOUNT[
-          i
-        ].toLocaleString()}원) - ${this.winCountArr[i]}개`,
-      );
+  calculateReturnRate(arr, price) {
+    for (let i = 0; i < arr.length; i++) {
+      this.totalPrice += arr[i] * Label.PRICE_AMOUNT[i];
     }
-  }
-
-  calculatePrice() {
-    for (let i = 0; i < this.winCountArr.length; i++) {
-      this.totalPrice += this.winCountArr[i] * Label.PRICE_AMOUNT[i];
-    }
-    // Console.print(this.totalPrice);
-  }
-
-  printReturnRate(price) {
-    let returnRate = 0;
-    returnRate = (100 * (this.totalPrice / price)).toFixed(1);
-    Console.print(PromptMessage.PRINT_RETURN_RATE(returnRate));
+    const returnRate = (100 * (this.totalPrice / price)).toFixed(1);
+    return returnRate;
   }
 }
 

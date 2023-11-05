@@ -1,25 +1,39 @@
 import { Console } from '@woowacourse/mission-utils';
-import Lotto from '../src/Lotto.js';
 import InputView from './InputView.js';
 import PromptMessage from '../constants/PromptMessage.js';
+import LottoController from '../controller/LottoController.js';
+import Label from '../constants/Label.js';
 
 class OutputView {
   constructor() {
+    this.controller = new LottoController();
     this.input = new InputView();
-    this.lottoCount = 0;
-    this.lottoArr = [];
-    this.lottoNumArr = [];
   }
 
-  printLotto(price) {
-    this.lottoCount = price / 1000;
-    Console.print(PromptMessage.PRINT_PURCHASED_NUM(this.lottoCount));
-    while (this.lottoCount > 0) {
-      const lottoNumbers = Lotto.generateRandomLotto();
-      Console.print(lottoNumbers.getNumbers());
-      this.lottoArr.push(lottoNumbers);
-      this.lottoCount -= 1;
+  printLotto(price, arr) {
+    let lottoCount = price / 1000;
+    Console.print(PromptMessage.PRINT_PURCHASED_NUM(lottoCount));
+    while (lottoCount > 0) {
+      this.controller.generateAndStoreLotto(arr);
+      const lottoNumbers = arr[arr.length - 1];
+      Console.print(`[${lottoNumbers.getNumbers().join(', ')}]`);
+      lottoCount -= 1;
     }
+  }
+
+  printWinCount(arr) {
+    Console.print(PromptMessage.PRINT_STATISTICS);
+    for (let i = 0; i < arr.length; i++) {
+      Console.print(
+        `${Label.WIN_COUNT_LABELS[i]} (${Label.PRICE_AMOUNT[
+          i
+        ].toLocaleString()}원) - ${arr[i]}개`,
+      );
+    }
+  }
+
+  printReturnRate(returnRate) {
+    Console.print(PromptMessage.PRINT_RETURN_RATE(returnRate));
   }
 }
 

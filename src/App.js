@@ -8,30 +8,38 @@ class App {
     this.controller = new LottoController();
     this.input = new InputView();
     this.output = new OutputView();
+
+    this.lottoArr = [];
+    this.winCountArr = [];
   }
 
   async play() {
     await this.input.getPrice();
-    this.controller.printLotto(this.input.price);
+    // this.controller.printLotto(this.input.price);
+    this.output.printLotto(this.input.price, this.lottoArr);
+    // this.controller.generateAndStoreLotto();
+
     await this.input.getWinNum();
     await this.input.getBonusNum();
     Validator.validateBonusNum(this.input.bonusNum, this.input.winNum);
-    this.getWinningDetails();
+    this.getWinStatistics();
   }
 
-  getWinningDetails() {
+  getWinStatistics() {
     this.controller.checkWin(
       this.input.price,
       this.input.winNum,
       this.input.bonusNum,
+      this.lottoArr,
     );
-    this.controller.getWinCountArr();
-    this.controller.printWinCount();
-    this.controller.calculatePrice();
-    this.controller.printReturnRate(this.input.price);
+    this.controller.getWinCountArr(this.winCountArr);
+    this.output.printWinCount(this.winCountArr);
+    const returnRate = this.controller.calculateReturnRate(
+      this.winCountArr,
+      this.input.price,
+    );
+    this.output.printReturnRate(returnRate);
   }
 }
-const app = new App();
-app.play();
 
 export default App;

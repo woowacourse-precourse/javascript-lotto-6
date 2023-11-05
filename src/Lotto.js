@@ -1,5 +1,4 @@
 import { Random } from '@woowacourse/mission-utils';
-import ErrorMessage from '../constants/ErrorMessage.js';
 import Validator from '../utils/Validator.js';
 
 class Lotto {
