@@ -1,3 +1,7 @@
+export const MESSAGE = {
+  PURCHASED: '개를 구매했습니다.',
+};
+
 export const PROPT_MESSAGE = {
   INPUT_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.',
 };
