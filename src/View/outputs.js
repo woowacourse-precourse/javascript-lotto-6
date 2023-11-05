@@ -5,8 +5,18 @@ const outputs = {
   printNumberOfLotto(number) {
     Console.print(`${number}${MESSAGE.output.numberOfLotto}\n`);
   },
+
   printRandoms(random) {
     const output = random.join('');
+    Console.print(output);
+  },
+
+  printStatsTitle() {
+    Console.print(MESSAGE.output.stats);
+  },
+
+  printStats(stats) {
+    const output = stats.join('\n');
     Console.print(output);
   },
 };

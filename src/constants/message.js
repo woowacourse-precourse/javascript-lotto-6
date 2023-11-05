@@ -6,6 +6,10 @@ const MESSAGE = {
   },
   output: {
     numberOfLotto: '개를 구매했습니다.\n',
+    stats: '\n당첨 통계\n---\n',
+  },
+  unit: {
+    number: '개',
   },
   error: {
     notNumber: '[ERROR] 숫자가 아닌 값이 입력되었습니다.',
@@ -18,6 +22,7 @@ const MESSAGE = {
 
 Object.freeze(MESSAGE.input);
 Object.freeze(MESSAGE.output);
+Object.freeze(MESSAGE.unit);
 Object.freeze(MESSAGE.error);
 Object.freeze(MESSAGE);
 
