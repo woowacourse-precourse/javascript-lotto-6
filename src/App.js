@@ -16,16 +16,29 @@ class App {
   }
   async play() {
 
-    const purchaseAmountInput = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
-
-    if (isNaN(Number(purchaseAmountInput))) {
-      throw new Error("[ERROR] 구매 금액은 유효한 숫자여야 합니다.");
-    }
-
-    if (Number(purchaseAmountInput)%1000) {
-      throw new Error("[ERROR] 구매 금액은 1,000원 단위이어야 합니다.");
+    let validPurchaseAmount = false;
+    let purchaseAmountInput;
+    
+    while (!validPurchaseAmount) {
+      try {
+        purchaseAmountInput = await Console.readLineAsync(
+          "구입금액을 입력해 주세요.\n"
+        );
+    
+        Console.print(purchaseAmountInput);
+    
+        if (isNaN(Number(purchaseAmountInput))) {
+          throw new Error("[ERROR] 구매 금액은 유효한 숫자여야 합니다.");
+        }
+    
+        if (Number(purchaseAmountInput) % 1000 !== 0) {
+          throw new Error("[ERROR] 구매 금액은 1,000원 단위이어야 합니다.");
+        }
+    
+        validPurchaseAmount = true;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
     
     const lottoCnt = Number(purchaseAmountInput)/1000;
