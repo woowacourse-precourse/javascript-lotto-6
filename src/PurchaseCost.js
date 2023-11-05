@@ -1,9 +1,13 @@
+import Computer from "../utils/Computer.js";
+
 class PurchaseCost {
   #cost;
+  #randomLottoNumbersList;
 
   constructor(cost) {
     this.#validate(cost);
     this.#cost = cost;
+    this.#randomLottoNumbersList = this.#getRandomLottoNumbersList();
   }
   
   #validate(cost) {
@@ -14,6 +18,14 @@ class PurchaseCost {
     } else if (cost % 1000) {
       throw new Error("[ERROR] 금액은 1000원 단위로 입력되어야 합니다.");
     }
+  }
+
+  #getRandomLottoNumbersList() {
+    const purchaseLottoList = []
+    for (let i = 0; i < parseInt(this.#cost / 1000); i++) {
+      purchaseLottoList.push(Computer.getRandomLottoNumbers());
+    };
+    return purchaseLottoList
   }
 }
 
