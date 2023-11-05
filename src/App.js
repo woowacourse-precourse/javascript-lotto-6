@@ -1,6 +1,5 @@
-import { Console, Random } from '@woowacourse/mission-utils';
-import { LOTTO, INPUT, OUTPUT, ERROR } from './Constant';
-import ValidationCheck from './Validation';
+import { Console } from '@woowacourse/mission-utils';
+import { ERROR, INPUT, LOTTO, OUTPUT } from './Constant';
 import BuyLotto from './BuyLotto';
 import Lotto from './Lotto';
 
@@ -8,6 +7,7 @@ class App {
   async play() {
     const purchasedLotto = await this.getPurchaseLotto();
     const winningNumber = await this.getWinningNumber();
+    const bonusNumer = await this.getBonusNumber();
   }
 
   async getPurchaseLotto() {
@@ -21,6 +21,7 @@ class App {
         Console.print(error.message);
       }
     }
+
     return purchasedLotto;
   }
 
@@ -28,16 +29,38 @@ class App {
     let winningNumber;
     while (!winningNumber) {
       try {
-        const winningNumbers = await Console.readLineAsync(
-          INPUT.WINNING_NUMBER,
-        );
-        const winningLotto = new Lotto(winningNumbers.split(OUTPUT.COMMA));
-        winningNumber = winningNumbers;
+        const inputNumbers = await Console.readLineAsync(INPUT.WINNING_NUMBER);
+        const winningLotto = new Lotto(inputNumbers.split(OUTPUT.COMMA));
+        winningNumber = winningLotto.getLottoNumbers();
       } catch (error) {
         Console.print(error.message);
       }
     }
-    return winningNumber;
+
+    return winningNumber.map(number => Number(number));
+  }
+
+  async getBonusNumber() {
+    let bonusNumber;
+    while (!bonusNumber) {
+      try {
+        const inputBonus = await Console.readLineAsync(INPUT.BONUS_NUMBER);
+        this.#validateBonus(inputBonus);
+        bonusNumber = inputBonus;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return bonusNumber;
+  }
+
+  #validateBonus(bonusNumber) {
+    if (!bonusNumber || !bonusNumber.trim) {
+      throw new Error(`${ERROR.PREFIX} ${INPUT.BONUS_NUMBER}`);
+    }
+    if (LOTTO.REG_NUMBER.test(bonusNumber)) {
+      throw new Error(ERROR.BONUS_ONLY_NUMBER);
+    }
   }
 }
 
