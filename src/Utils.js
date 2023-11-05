@@ -1,10 +1,16 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 
 const LOTTO = {
   price: 1000,
 };
 
 class Utils {
+  static async ask(question) {
+    const userAnswer = await Console.readLineAsync(question);
+
+    return userAnswer;
+  }
+
   static getRandomNumbers() {
     const numbersArray = [];
     while (numbersArray.length < 6) {

@@ -1,4 +1,3 @@
-import UserInputs from './UserInputs.js';
 import Utils from './Utils.js';
 
 const QUESTIONS = {
@@ -8,13 +7,13 @@ const QUESTIONS = {
 
 class DrawingLotto {
   async #drawWinningNumbers() {
-    const userNumbers = await UserInputs.ask(QUESTIONS.winningNumbers);
+    const userNumbers = await Utils.ask(QUESTIONS.winningNumbers);
     const winningNumbers = Utils.convertInputNumbers(userNumbers);
     return winningNumbers;
   }
 
   async #drawBonusNumber() {
-    const userNumber = await UserInputs.ask(QUESTIONS.bonusNumber);
+    const userNumber = await Utils.ask(QUESTIONS.bonusNumber);
     return userNumber;
   }
 
