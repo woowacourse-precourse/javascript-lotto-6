@@ -15,7 +15,7 @@ class LottoController {
   }
 
   async handlePurchaseAmount(purchaseAmount) {
-    if (!Validator.validatePurchaseAmount(purchaseAmount)) this.readPurchaseAmount();
+    if (!Validator.validatePurchaseAmount(purchaseAmount)) return this.readPurchaseAmount();
     this.#user = new User(purchaseAmount);
   }
 }
