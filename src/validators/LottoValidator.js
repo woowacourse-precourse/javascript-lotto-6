@@ -37,7 +37,7 @@ class LottoValidator {
       return true;
     }
 
-    throw new ValidationError(LOTTO_ERROR_MESSAGE.range);
+    throw new ValidationError(LOTTO_ERROR_MESSAGE.out_of_range);
   }
 
   static bonusValidate(winningNumbers, bonusNumber) {
@@ -49,7 +49,7 @@ class LottoValidator {
 
   static duplicateBonusNumber(winningNumbers, bonusNumber) {
     if (winningNumbers.includes(bonusNumber)) {
-      throw new ValidationError(LOTTO_ERROR_MESSAGE.input_six_digit);
+      throw new ValidationError(LOTTO_ERROR_MESSAGE.duplicated_bonus);
     }
 
     return true;

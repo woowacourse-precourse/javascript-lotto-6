@@ -22,11 +22,10 @@ export const LOTTO_SETTING = Object.freeze({
 });
 
 export const LOTTO_ERROR_MESSAGE = Object.freeze({
-  six_digit: '숫자는 6자리이어야 합니다.',
+  six_digit: ',으로 구분하여 6자리여야 합니다.',
   duplicate: '중복되지 않은 6자리 숫자여야합니다.',
-  out_of_range: '1~45 사이의 중복되지 않은 숫자여야합니다.',
+  out_of_range: '1~45 사이의 숫자여야합니다.',
   duplicated_bonus: '보너스 번호가 당첨번호와 중복됩니다.',
-  input_six_digit: ',으로 구분하여 6자리여야 합니다.',
 });
 
 export const INPUT_ERROR_MESSAGE = Object.freeze({
