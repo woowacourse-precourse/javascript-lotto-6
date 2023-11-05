@@ -1,5 +1,6 @@
 import Validator from './Validator.js';
 import PriceValidator from './PriceValidator.js';
+import BonusNumberValidator from './BonusNumValidator.js';
 
 class ValidatorFactory {
   /**
@@ -11,6 +12,8 @@ class ValidatorFactory {
     switch (type) {
       case ('price'):
         return new PriceValidator();
+      case ('bonus'):
+        return new BonusNumberValidator();
       default:
         return new Validator();
     }
