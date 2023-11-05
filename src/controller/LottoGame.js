@@ -2,7 +2,7 @@ import Lotto from '../model/Lotto.js';
 import LottoList from '../model/LottoList.js';
 import { inputMoney } from '../view/InputPrompt.js';
 import { validateDivisible, validateNumber } from '../utils/validateFn.js';
-import { printBuyLottery } from '../view/OutputPompt.js';
+import { printBeforeResult, printBuyLottery } from '../view/OutputPompt.js';
 import WinningLotto from '../model/WinningLotto.js';
 
 class LottoGame {
@@ -34,6 +34,21 @@ class LottoGame {
   async drawLotto() {
     await this.#winningLotto.setWinningNumber();
     await this.#winningLotto.setBonusNumber();
+  }
+
+  async result() {
+    printBeforeResult();
+  }
+
+  #matchingOneLottery(lotto, winningNumbers, bonusNumber) {
+    const matchCount = lotto.filter((num) =>
+      winningNumbers.includes(num),
+    ).length;
+    const hasBonusNumber = lotto.some((num) => {
+      return num === bonusNumber;
+    });
+
+    return [matchCount, hasBonusNumber];
   }
 }
 
