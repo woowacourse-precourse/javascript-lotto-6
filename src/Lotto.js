@@ -1,8 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Validator from "./validator/Validator";
+import { TOTAL_LOTTO_NUMBERS } from "./constants/constants";
+import Output from "./view/Output";
 
-
-// @NOTE - 당첨된 번호
 class Lotto {
   #numbers;
 
@@ -22,8 +22,14 @@ class Lotto {
   }
   
   returnValue() {
-    this.#numbers = String(this.#numbers).split(',')
-    return this.#numbers
+    this.#numbers = String(this.#numbers).split(',').map(Number)
+
+    if (this.#numbers.length === TOTAL_LOTTO_NUMBERS) {
+      this.output = new Output();
+      this.output.print(this.#numbers)
+      return true
+    }
+    return false
   }
 
   calculateWinningStats(lottos, bonusNumber) {

@@ -1,14 +1,18 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants";
 import Validator from "./validator/Validator";
+import Output from "./view/Output";
 
 
 // @NOTE - 로또 발행 및 로또 개수 출력
 class LottoTickets {
+  #money
+  #boughtTickets
+
   constructor(money) {
     this.#validate(money)
-    this.money = money
-    this.boughtTickets = Number(money) / 1000
+    this.#money = money
+    this.#boughtTickets = Number(money) / 1000
     this.tickets = []
   }
 
@@ -23,7 +27,7 @@ class LottoTickets {
   }
 
   publishTickets() {
-    for (let i = 0; i < this.boughtTickets; i += 1) {
+    for (let i = 0; i < this.#boughtTickets; i += 1) {
       const LOTTO = this.generateOneLotto();
       this.addToTickets(LOTTO);
     }
@@ -47,7 +51,14 @@ class LottoTickets {
   }
 
   returnMoney() {
-    return this.money
+    this.#money = Number(this.#money);
+
+    if (/^[1-9]\d*$/.test(this.#money)) {
+      this.output = new Output();
+      this.output.print(this.#money)
+      return true
+    }
+    return false
   }
 }
 

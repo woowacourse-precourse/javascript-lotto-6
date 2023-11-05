@@ -1,8 +1,7 @@
-import { Console, MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from "@woowacourse/mission-utils";
 import Validator from "./validator/Validator";
+import Output from "./view/Output";
 
-
-// @NOTE - 보너스 넘버 유효성 검사 후 반환
 class BonusNumber {
   #bonusNumber
 
@@ -22,7 +21,14 @@ class BonusNumber {
   }
 
   returnValue() {
-    return Number(this.#bonusNumber)
+    this.#bonusNumber = Number(this.#bonusNumber);
+
+    if (/^[1-9]\d*$/.test(this.#bonusNumber)) {
+      this.output = new Output();
+      this.output.print(this.#bonusNumber)
+      return true
+    }
+    return false
   }
 }
 
