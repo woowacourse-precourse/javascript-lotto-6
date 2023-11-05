@@ -1,8 +1,10 @@
 import InputView from './../views/InputView.js';
 import OutputView from './../views/OutputView.js';
 import PROPMT_MESSAGE from '../constants/propmtMessage.js';
+import ERROR_MESSAGE from '../constants/erroeMessage.js';
 
 const { bonusNumber, winningNumber, purchasePrice } = PROPMT_MESSAGE;
+const { purchaseInvalidAmount } = ERROR_MESSAGE;
 
 class LottoController {
   // propmt
@@ -28,7 +30,7 @@ class LottoController {
       }
       return price;
     } catch (error) {
-      printOutput('[ERROR]ㅠ.ㅠ 에러!!');
+      printOutput(purchaseInvalidAmount);
       return this.propmtPurchasedPrice();
     }
   }
