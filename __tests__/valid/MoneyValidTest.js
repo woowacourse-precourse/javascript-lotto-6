@@ -10,7 +10,7 @@ describe("금액 입력 테스트", () => {
 
   test("문자가 들어간 경우", async () => {
     // given
-    const input = [
+    const inputs = [
       ["a1000"],
       ["1a000"],
       ["10a00"],
@@ -20,7 +20,7 @@ describe("금액 입력 테스트", () => {
     ];
 
     // when, then
-    input.forEach((testCase) => {
+    inputs.forEach((testCase) => {
       const [testInput] = testCase;
       expect(() => moneyValid.moneyIsValid(testInput)).toThrow(
         `${MONEY_ERROR.string_error}`

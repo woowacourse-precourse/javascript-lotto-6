@@ -1,5 +1,4 @@
-import NUMBERS from "../constants/numbers.js";
-import WinningValid from "../utils/WinningValid.js";
+import { WINNING_ERROR } from "../constants/errorMessage.js";
 import BonusInput from "../view/input/BonusInput.js";
 
 class Lotto {
@@ -11,15 +10,12 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const valid = new WinningValid();
-    const integerNumber = numbers.filter((number) =>
-      Number.isInteger(Number(number))
-    );
-    const outOfRangeNumber = numbers.filter(
-      (number) => number < NUMBERS.start_number || number > NUMBERS.end_number
-    );
-    valid.winningIsValid(numbers, integerNumber, outOfRangeNumber);
+    const regex = /^(?!.*(\d).*\1)(?:(?:[1-9]|[1-4][0-5])(?:, ?|$)){6}$/;
+    if (!regex.test(numbers)) {
+      throw new Error(`${WINNING_ERROR.error}`);
+    }
   }
+
   async bonus() {
     const bonus = new BonusInput();
     const bonusNumber = await bonus.number(this.#numbers);
@@ -28,3 +24,7 @@ class Lotto {
 }
 
 export default Lotto;
+
+// 해당 클래스에서는 어떤걸 하는게 좋을까..
+// 1. 로또 번호를 보내고 검증한 다음에 보너스 번호를 받는 방법.
+// 2.

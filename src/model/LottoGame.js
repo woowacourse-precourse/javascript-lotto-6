@@ -3,11 +3,14 @@ import PRIZE_MONEY from "../constants/prize.js";
 import resultOutput from "../view/output/resultOutput.js";
 
 class LottoGame {
-  #numbers;
   #userNumbers;
+  #numbers;
   #bonusNumber;
 
   constructor(userNumbers, numbers, bonusNumber) {
+    console.log(userNumbers);
+    console.log(numbers);
+    console.log(bonusNumber);
     this.#userNumbers = userNumbers;
     this.#numbers = numbers;
     this.#bonusNumber = bonusNumber;
@@ -15,6 +18,7 @@ class LottoGame {
 
   lottoLogic() {
     const rank = NUMBERS.rank;
+    // console.log(this.#numbers);
     this.#userNumbers.forEach((value) => {
       const match = value.filter((number) =>
         this.#numbers.includes(number)
