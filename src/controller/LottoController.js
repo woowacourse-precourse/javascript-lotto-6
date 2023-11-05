@@ -6,17 +6,15 @@ import Lotto from '../model/Lotto.js';
 const { Random } = MissionUtils;
 class LottoController {
   constructor() {
-    this.inputView = new InputView();
-    this.outputView = new OutputView();
     this.usedMoney = 0;
     this.countOfLottos = 0;
     this.lottoArray = [];
   }
 
   async playLotto() {
-    this.usedMoney = await this.inputView.inputMoney(); // 정상 입력 시에 통과
+    this.usedMoney = await InputView.inputMoney(); // 정상 입력 시에 통과
     this.countOfLottos = this.howManyLottos();
-    this.lottoArray = this.makeNewLottos(); // 개수만큼 로또생성
+    OutputView.printLottos(this.countOfLottos, this.lottoArray);
   }
 
   howManyLottos() {

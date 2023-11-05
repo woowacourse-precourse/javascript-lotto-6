@@ -1,9 +1,9 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-const Console = MissionUtils.console;
+const { Console } = MissionUtils;
 
 class OutputView {
-  printLottos(count, lottos) {
+  static printLottos(count, lottos) {
     Console.print(`${count}개를 구매했습니다. \n`);
     lottos.forEach((lotto) => {
       Console.print(lotto.numbers);
@@ -11,6 +11,6 @@ class OutputView {
     });
   }
 
-  printResult() {}
+  static printResult() {}
 }
 export default OutputView;
