@@ -2,6 +2,7 @@ import {
     PRIZE_MAP,
     RESULT_MESSAGES,
     MATCH,
+    ZERO,
 } from "../utils/Define";
 
 const printWinningHead = () => {
