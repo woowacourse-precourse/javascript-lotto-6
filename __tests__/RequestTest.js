@@ -1,6 +1,7 @@
 import Request from '../src/views/Request.js';
 import prompt from '../src/views/prompt.js';
 import validate from '../src/domains/validation.js';
+import { REQUEST, ERROR } from '../src/constants.js';
 
 prompt.in = jest.fn();
 prompt.out = jest.fn();
@@ -21,7 +22,7 @@ describe('Request', () => {
     const result = await Request.money();
 
     expect(result).toBe(8000);
-    expect(prompt.in).toHaveBeenCalledWith('구입금액을 입력해 주세요.\n');
+    expect(prompt.in).toHaveBeenCalledWith(REQUEST.MONEY);
     expect(validate.money).toHaveBeenCalledWith('8000');
   });
 
@@ -31,16 +32,16 @@ describe('Request', () => {
       .mockResolvedValueOnce('8000');
 
     validate.money.mockImplementationOnce(() => {
-      throw new Error('[ERROR] 정확한 값이 아닙니다.');
+      throw new Error(ERROR.TYPE_CHECK);
     });
     validate.money.mockImplementationOnce(true);
 
     const result = await Request.money();
 
     expect(result).toBe(8000);
-    expect(prompt.in).toHaveBeenCalledWith('구입금액을 입력해 주세요.\n');
+    expect(prompt.in).toHaveBeenCalledWith(REQUEST.MONEY);
     expect(validate.money).toHaveBeenCalledWith('팔천원');
     expect(validate.money).toHaveBeenCalledWith('8000');
-    expect(prompt.out).toHaveBeenCalledWith('[ERROR] 정확한 값이 아닙니다.');
+    expect(prompt.out).toHaveBeenCalledWith(ERROR.TYPE_CHECK);
   });
 });

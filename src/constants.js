@@ -31,6 +31,12 @@ const pattern = {
   notMoney: /[^0-9]/,
 };
 
+const REQUEST = {
+  MONEY: '구입금액을 입력해 주세요.\n',
+  WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
+};
+
 const ERROR = {
   TYPE_CHECK: `${pattern.prefix} 정확한 값이 아닙니다.`,
   AMOUNT_CHECK: `${pattern.prefix} 금액은 ${NUMBER.DEFAULT}원 단위로 입력해주세요.`,
@@ -45,4 +51,5 @@ export {
   totalReward,
   pattern,
   ERROR,
+  REQUEST,
 };
