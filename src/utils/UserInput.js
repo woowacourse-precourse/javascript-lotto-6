@@ -14,6 +14,19 @@ class UserInput {
     return inputToNumber;
   }
 
+  static validateLottoNumbers(input) {
+    InputError.checkLottoLength(input);
+    InputError.checkDuplicateNumbers(input);
+
+    input.forEach((number) => {
+      const inputToNumber = parseInt(number, 10);
+
+      InputError.checkNumberError(inputToNumber);
+      InputError.checkNagativeNumberError(inputToNumber);
+      InputError.checkOutOfRangeNumbers(inputToNumber);
+    });
+  }
+
   static async getPurchaseAmount() {
     const lottoAmount = await Console.readLineAsync(
       "구입금액을 입력해 주세요.\n"
@@ -29,7 +42,11 @@ class UserInput {
       "당첨 번호를 입력해 주세요.\n"
     );
 
-    return lottoNumbers.split(",");
+    const lottoList = lottoNumbers.split(",");
+
+    this.validateLottoNumbers(lottoList);
+
+    return lottoList;
   }
 
   static async getBonusNumber() {
