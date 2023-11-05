@@ -15,7 +15,7 @@ describe("InputView 객체 테스트", () => {
       // when
       InputView.readLottoPurchaseAmount();
       // tehn
-      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.PURCHASE_LOTTO);
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.LOTTO_PURCHASE_AMOUNT);
     });
 
     test("readLottoPurchaseAmount 메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
@@ -27,6 +27,17 @@ describe("InputView 객체 테스트", () => {
       const purchaseAmount = await InputView.readLottoPurchaseAmount();
       // then
       expect(purchaseAmount).toBe(purchaseAmountInput);
+    });
+  });
+
+  describe("readLottoWinningNumbers 메서드 테스트", () => {
+    test("readLottoWinningNumbers 메서드가 존재해야 한다.", () => {
+      expect(typeof InputView.readLottoWinningNumbers).toBe("function");
+    });
+
+    test("readLottoWinningNumbers메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
+      InputView.readLottoWinningNumbers();
+      expect(Console.readLineAsync).toBeCalledWith();
     });
   });
 });

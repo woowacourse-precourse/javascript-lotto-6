@@ -3,7 +3,7 @@ import { INPUT_MESSAGE } from "../constants/message.js";
 
 const InputView = {
   async readLottoPurchaseAmount() {
-    const lottoPurchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.PURCHASE_LOTTO);
+    const lottoPurchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.LOTTO_PURCHASE_AMOUNT);
     return Number(lottoPurchaseAmount);
   },
 };
