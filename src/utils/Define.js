@@ -33,3 +33,8 @@ export const ERROR = {
     INVALID_WINNING_NUMBERS_MESSAGE: '당첨 번호는 1부터 45 사이의 유니크한 6개 숫자여야 합니다.',
     INVALID_BONUS_NUMBER_MESSAGE: '보너스 볼은 당첨 번호와 달라야 하며, 1부터 45 사이의 숫자여야 합니다.',
 };
+
+export const RESULT_MESSAGES = {
+    WINNING_HEAD: '당첨 통계',
+    DIVIDING_LINE: '---',
+};
