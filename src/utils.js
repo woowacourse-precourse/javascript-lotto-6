@@ -16,6 +16,9 @@ function readLineLottoCount() {
 function consoleWinner() {
   return MissionUtils.Console.print(WINNER_MESSAGE.WINLOG);
 }
+function consoleError(error) {
+  return MissionUtils.Console.print(error);
+}
 
 function winCount(count) {
   return MissionUtils.Console.print(WINNER_MESSAGE.WINCOUNT(count));
@@ -38,6 +41,7 @@ export {
   parchasedLotto,
   readLineLottoCount,
   consoleWinner,
+  consoleError,
   winCount,
   resultProfit,
   randomNum,

@@ -2,6 +2,7 @@ const LOTTO_NUMBERS = {
   MIN_RANGE: 1,
   MAX_RANGE: 45,
   NUMBER_SIZE: 6,
+  PAY_LOTTO_MONEY: 1000,
 };
 
 const GRADING_COUNT = {
