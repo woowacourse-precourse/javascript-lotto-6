@@ -37,4 +37,16 @@ export const ERROR = {
 export const RESULT_MESSAGES = {
     WINNING_HEAD: '당첨 통계',
     DIVIDING_LINE: '---',
+    FIVE_BOUNS: '5개 일치, 보너스 볼 일치 (',
+    FIRST: '개 일치 (',
+    SECOND: '원) - ',
+    COUNT: '개',
+};
+
+export const MATCH = {
+    THREE: 3,
+    FOUR: 4,
+    FIVE: 5,
+    FIVE_BONUS: '5+',
+    SIX: 6,
 };
