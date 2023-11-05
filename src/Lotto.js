@@ -1,3 +1,7 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+import PRINT from "../src/constant/print.js";
+
 class Lotto {
   #numbers;
 
@@ -13,6 +17,9 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  getLottoNumber() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
