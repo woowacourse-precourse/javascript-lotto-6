@@ -1,6 +1,6 @@
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import validateInputAmount from './validations/validateInputAmount.js';
+import validateInputAmount from '../validations/validateInputAmount.js';
 
 const LOTTO_CONSTANT = Object.freeze({
   min: 1,

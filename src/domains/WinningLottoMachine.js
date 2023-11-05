@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT_MESSAGES } from './constants/messages.js';
+import { INPUT_MESSAGES } from '../constants/messages.js';
 
 class WinningLottoMachine {
   #winningNumbers;

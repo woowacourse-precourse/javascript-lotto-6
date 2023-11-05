@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import Counter from './Counter.js';
+import Counter from './domains/Counter.js';
 import { INPUT_MESSAGES } from './constants/messages.js';
-import WinningLottoMachine from './WinningLottoMachine.js';
+import WinningLottoMachine from './domains/WinningLottoMachine.js';
 import printLottoNumbers from './print/printLottoNumbers.js';
 
 class App {
