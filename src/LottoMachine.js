@@ -18,6 +18,10 @@ class LottoMachine {
     }
   }
 
+  get numberOfLottos() {
+    return this.#numberOfLottos;
+  }
+
   createLottos() {
     const lottos = [];
     for (let index = 0; index < this.#numberOfLottos; index += 1) {
