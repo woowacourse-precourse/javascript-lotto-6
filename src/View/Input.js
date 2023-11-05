@@ -8,6 +8,15 @@ const getLottoPurchaseAmount = (async () => {
   return (lottoPurchaseAmount);
 })
 
+const getLottoCommonWinningNumbers = (async () => {
+  const lottoCommonWinningNumbers = await Console.readLineAsync(
+    INPUT_CONSTANT.GET_LOTTO_COMMON_WINNING_NUMBERS_MESSAGE
+  );
+
+  return (lottoCommonWinningNumbers);
+})
+
 export default {
   getLottoPurchaseAmount,
+  getLottoCommonWinningNumbers,
 };
