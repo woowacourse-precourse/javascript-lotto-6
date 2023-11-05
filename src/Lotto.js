@@ -17,6 +17,11 @@ class Lotto {
   
   }
 
+  compareNumbers(published) {
+    const compare = this.#numbers.filter(x => published.includes(x));
+    return compare.length;
+  }
+
 
   
 }
@@ -50,7 +55,9 @@ const inputLottoNumbers = async() => {
   const input = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
   const inputNumbers = input.split(',').map(Number);
   const lotto = new Lotto(inputNumbers);
-  
+  for (let i = 0; i < PublishedLotto.length; i += 1) {
+
+  }
 }
 
 
