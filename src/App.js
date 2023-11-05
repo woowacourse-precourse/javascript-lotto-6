@@ -26,5 +26,7 @@ class App {
     results.printResult();
   }
 }
+const aa = new App();
+aa.play();
 
 export default App;

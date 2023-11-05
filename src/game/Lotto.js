@@ -1,4 +1,6 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
+import { Outputs } from '../ui/Output.js';
+
 class Lotto {
   #numbers;
 
@@ -15,11 +17,14 @@ class Lotto {
   // }
 
   makeLottos() {
+    Console.print(`${this.#numbers / 1000}개를 구매했습니다.`);
     const quantity = this.#numbers / 1000;
     const emptyArrays = Array.from({ length: quantity }, () => {
-      return Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lottosNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+      Console.print(`[${lottosNumber.join(', ')}]`);
+      return lottosNumber;
     });
-
+    Console.print('');
     return emptyArrays;
   }
 

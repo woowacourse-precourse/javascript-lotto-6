@@ -3,6 +3,7 @@ import { Console } from '@woowacourse/mission-utils';
 export const Inputs = {
   async getAmount(message) {
     const userInput = await Console.readLineAsync(`${message}\n`);
+    Console.print('');
     if (userInput % 1000 !== 0) {
       throw new Error('[ERROR] 구매 단위가 1000원으로 떨어져야 합니다.');
     }
@@ -28,6 +29,8 @@ export const Inputs = {
     if (userInputList.length !== 6) {
       throw new Error('[ERROR] 당첨 번호가 6자리가 아닙니다.');
     }
+
+    Console.print('');
     return userInputList;
   },
 
@@ -39,7 +42,7 @@ export const Inputs = {
         throw new Error('[ERROR] 당첨 번호 중 중복된 번호가 있습니다.');
       }
     });
-    userInput;
+    Console.print('');
     return userInput;
   },
 };
