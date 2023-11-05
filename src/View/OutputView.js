@@ -5,6 +5,12 @@ class OutputView {
   printLottoCounts(lottoCounts) {
     Console.print(lottoCounts + GAME_MESSAGES.CONFIRM_PURCHASED_LOTTOS_AMOUNT);
   }
+
+  printLottos(lottos) {
+    lottos.map((lotto, _) => {
+      Console.print(lotto);
+    })
+  }
 }
 
 export default OutputView;

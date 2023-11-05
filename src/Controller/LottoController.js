@@ -19,7 +19,7 @@ class LottoController {
     
     this.lotto.generateLottoNumbers(numberOfLottos);
     const lottoNumbersArray = this.lotto.printLottoNumbersArray();
-    Console.print(lottoNumbersArray);
+    this.outputView.printLottos(lottoNumbersArray);
   }
 }
 

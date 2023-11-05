@@ -118,7 +118,7 @@ printLottoCounts
 - [x] 구매한 로또 개수를 화면에 출력하기
 
 printLottos
-- [ ] 구매한 로또 번호를 화면에 출력하기
+- [x] 구매한 로또 번호를 화면에 출력하기
 
 printLottoResult
 - [ ] 당첨 결과를 화면에 출력하기
