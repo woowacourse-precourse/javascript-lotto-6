@@ -6,6 +6,14 @@ export const MIN_LOTTO_NUMBER = 1;
 export const MAX_LOTTO_NUMBER = 45;
 export const LOTTO_NUMBER_COUNT = 6;
 
+export const PRIZE_MAP = {
+    '3': 5000,
+    '4': 50000,
+    '5': 1500000,
+    '5+': 30000000,
+    '6': 2000000000,
+};
+
 export const ERROR = {
     HEAD: '[ERROR]',
     DUPLICATE_LOTTO_NUMBER: '로또 번호는 중복된 값을 가질 수 없습니다.',

@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import { PRIZE_MAP } from './Define';
 
 export const calculateEarnings = (results, purchaseAmount) => {
     const totalPrize = Object.keys(results).reduce((acc, matchCount) => {
