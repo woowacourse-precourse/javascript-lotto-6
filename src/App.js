@@ -8,7 +8,8 @@ class App {
   lottoPrice = 1000;
   lottoTotal;
   allLottos = [];
-  winResult = [];
+  userResult = [];
+  winResult = [0, 0, 0, 0, 0];
 
   async askMoney() {
     const money = await MissionUtils.Console.readLineAsync(PRINT.ASK_BUY);
@@ -98,6 +99,40 @@ class App {
     });
   }
 
+  isBonus(number) {
+    if (number == bonus) {
+      return true;
+    }
+    return false;
+  }
+
+  getWinResult(userResult) {
+    userResult.forEach((result) => {
+      switch (result) {
+        case 6:
+          this.winResult[4]++;
+          break;
+        case 5:
+          this.isBonus(result) ? this.winResult[3]++ : this.winResult[2]++;
+          break;
+        case 4:
+          this.winResult[1]++;
+          break;
+        case 3:
+          this.winResult[0]++;
+      }
+    });
+  }
+
+  printWinResult(winResult) {
+    MissionUtils.Console.print(PRINT.RESULT_WIN);
+    MissionUtils.Console.print(PRINT.RESULT_5TH + `${winResult[0]}개`);
+    MissionUtils.Console.print(PRINT.RESULT_4TH + `${winResult[1]}개`);
+    MissionUtils.Console.print(PRINT.RESULT_3RD + `${winResult[2]}개`);
+    MissionUtils.Console.print(PRINT.RESULT_2ND + `${winResult[3]}개`);
+    MissionUtils.Console.print(PRINT.RESULT_1ST + `${winResult[4]}개`);
+  }
+
   async play() {
     const inputMoney = await this.askMoney();
     this.moneyTypeCheck(inputMoney);
@@ -112,9 +147,12 @@ class App {
     const winBonus = await this.askBonus(winNumber);
 
     this.allLottos.forEach((lotto) => {
-      this.winResult.push(lotto.getCorrectNumber(winNumber));
+      this.userResult.push(lotto.getCorrectNumber(winNumber));
     });
-    MissionUtils.Console.print(this.winResult);
+    MissionUtils.Console.print(this.userResult);
+
+    this.getWinResult(this.userResult);
+    this.printWinResult(this.winResult);
   }
 }
 
