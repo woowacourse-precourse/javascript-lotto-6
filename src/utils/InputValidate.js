@@ -2,7 +2,16 @@ import { ERROR_MSG } from '../constants/LottoMsg.js';
 import InputError from './InputError.js';
 
 class InputValidate {
+  #MONEY_REGAX;
+
+  constructor() {
+    this.#MONEY_REGAX = /\s/;
+  }
+
   async inputMoney(money) {
+    if (this.#MONEY_REGAX.test(money)) {
+      throw new InputError(ERROR_MSG.MONEY_NOT_BLANK);
+    }
     if (!Number.isSafeInteger(Number(money))) {
       throw new InputError(ERROR_MSG.MONEY_SHOULD_NUMBER);
     }

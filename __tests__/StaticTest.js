@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { MissionUtils } from '@woowacourse/mission-utils';
 import LottoUtill from '../src/utils/LottoUtill.js';
 import OutputView from '../src/views/OutputView.js';
@@ -99,6 +100,7 @@ describe('LottoUtill Class 테스트', () => {
     });
   });
 
+  // eslint-disable-next-line max-lines-per-function
   test('수익률 테스트', () => {
     const output = new OutputView();
     const lottoUtill = new LottoUtill();

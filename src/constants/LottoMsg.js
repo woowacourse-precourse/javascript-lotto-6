@@ -18,6 +18,7 @@ export const OUTPUT_MSG = {
 };
 
 export const ERROR_MSG = {
+  MONEY_NOT_BLANK: '[ERROR] 공백이 포함되었습니다. 다시 입력해주세요',
   MONEY_SHOULD_NUMBER: '[ERROR] 올바른 숫자를 입력해주세요.',
   MONEY_IS_THOUSAND: '[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.',
   LOTTO_SHOULD_SIX: '[ERROR] 로또 번호는 6자리를 입력해주세요.',
