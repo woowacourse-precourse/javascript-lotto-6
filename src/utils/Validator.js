@@ -1,5 +1,6 @@
 import ERROR from '../constants/error.js';
 import PURCHASE_PRICE from '../constants/purchasePrice.js';
+import LOTTO_NUMBER from '../constants/lottoNumber.js';
 
 const { errorCase, errorMessage } = ERROR;
 
@@ -22,16 +23,45 @@ const Validator = {
     }
   },
 
-  validateRegExp(input, regExp) {
+  validateRegExp(input, regExp, error) {
     if (!regExp.test(input)) {
-      throw new Error(errorMessage.INVALID_STRING_PRICE);
+      throw new Error(error);
+    }
+  },
+
+  validateInRange(number) {
+    for (let i = 0; i < number.length; i += 1) {
+      const curNum = Number(number[i]);
+      if (LOTTO_NUMBER.minNum > curNum || LOTTO_NUMBER.maxNum < curNum) {
+        throw new Error(errorMessage.INVALID_IN_RANGE_WINNING_NUMBER);
+      }
+    }
+  },
+
+  validateUnique(number) {
+    const setNumber = new Set(number);
+    if (setNumber.size !== number.length) {
+      throw new Error(errorMessage.INVALID_UNIQUE_WINNING_NUMBER);
+    }
+  },
+
+  validateLength(number, length) {
+    if (number.length !== length) {
+      throw new Error(errorMessage.INVALID_LENGTH_WINNING_NUMBER);
     }
   },
 
   validatePurchasePrice(input) {
-    this.validateRegExp(input, PURCHASE_PRICE.regExp);
+    this.validateRegExp(input, PURCHASE_PRICE.regExp, errorMessage.INVALID_STRING_PRICE);
     this.validateMinPrice(input);
     this.validateDivisible(input);
+  },
+
+  validateWinningNumber(number) {
+    this.validateRegExp(number.join(''), LOTTO_NUMBER.regExp, errorMessage.INVALID_STRING_WINNING_NUMBER);
+    this.validateInRange(number);
+    this.validateUnique(number);
+    this.validateLength(number, LOTTO_NUMBER.count);
   },
 };
 

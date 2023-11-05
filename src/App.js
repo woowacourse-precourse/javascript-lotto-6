@@ -22,7 +22,7 @@ class App {
     const purchaseCount = await this.getPurchaseCount();
     this.#view.printPurchaseCount(purchaseCount);
     const lotteryTickets = this.getLotteryTickets(purchaseCount);
-
+    const winningNumbers = await this.getWinningNumbers();
     return { lotteryTickets };
   }
 
@@ -33,8 +33,8 @@ class App {
         Validator.validatePurchasePrice(purchasePrice);
         const purchaseCount = purchasePrice / PURCHASE_PRICE.divisionUnit;
         return purchaseCount;
-      } catch (e) {
-        this.#outputView.print(MessageFormat.error(e.message));
+      } catch (error) {
+        this.#outputView.print(MessageFormat.error(error.message));
       }
     }
   }
@@ -48,6 +48,18 @@ class App {
       lottos.push(lotto);
     }
     return lottos;
+  }
+
+  async getWinningNumbers() {
+    while (true) {
+      try {
+        const winningNumbers = await this.#view.readWinningNumber();
+        Validator.validateWinningNumber(winningNumbers);
+        return winningNumbers;
+      } catch (error) {
+        this.#outputView.print(MessageFormat.error(error.message));
+      }
+    }
   }
 }
 

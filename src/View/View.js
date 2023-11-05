@@ -3,7 +3,7 @@ import OutputView from './OutputView.js';
 import message from '../constants/message.js';
 import MessageFormat from '../utils/messageFormat.js';
 
-const { PURCHASE_PRICE } = message;
+const { PURCHASE_PRICE, WINNING_NUMBER } = message;
 
 export default class View {
   #inputView = InputView;
@@ -13,6 +13,12 @@ export default class View {
   async readPurchasePrice() {
     const userInput = await this.#inputView.readLineAsync(PURCHASE_PRICE);
     return Number(userInput);
+  }
+
+  async readWinningNumber() {
+    const userInput = await this.#inputView.readLineAsync(WINNING_NUMBER);
+    const winningNumbers = userInput.split(',');
+    return winningNumbers;
   }
 
   printPurchaseCount(purchaseCount) {
