@@ -57,7 +57,7 @@ class App {
     printMessage("\n");
     printMessage(BONUS_NUMBER_INPUT_REQUEST);
     // 10. 보너스 번호 입력받기
-    // this.#bonus_number = await getInput(validateBonusNumber);
+    this.#bonus_number = await getInput(validateBonusNumber);
   }
 }
 
