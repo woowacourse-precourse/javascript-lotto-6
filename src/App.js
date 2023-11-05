@@ -4,7 +4,7 @@ import Lotto from './objects/Lotto.js';
 import { generateRandomNumbers, getMatchCount } from './utils.js';
 import Bonus from './objects/Bonus.js';
 import { ERROR, INQUIRY, OUTPUT } from './messages.js';
-import { rewardCountMap, rewardMessageMap } from './data.js';
+import { CASH, LOTTO, rewardCountMap, rewardMessageMap } from './data.js';
 
 class App {
   #cash;
@@ -41,7 +41,7 @@ class App {
 
   #fillLottoNumbers(lottoCount) {
     while (this.#lottoEntries.size < lottoCount) {
-      const randomNumbers = generateRandomNumbers(6);
+      const randomNumbers = generateRandomNumbers(LOTTO.COUNT_OF_NUMBERS);
       const id = randomNumbers.join('');
 
       if (!this.#lottoEntries.has(id)) {
@@ -51,7 +51,7 @@ class App {
   }
 
   async #generateLottoNumbers() {
-    const lottoCount = this.#cash / 1000;
+    const lottoCount = this.#cash / CASH.UNIT;
     Console.print(OUTPUT.BUY_LOTTO(lottoCount));
     this.#fillLottoNumbers(lottoCount);
     this.#printLottoNumbers();
