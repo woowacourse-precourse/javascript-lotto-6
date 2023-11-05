@@ -5,6 +5,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validateDraw(numbers);
+    this.#validateBonus(numbers);
     this.#drawNumbers = numbers;
     this.rank = 0;
   }
@@ -36,8 +37,8 @@ class Lotto {
 
   async enterBonusNumber() {
     const input = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
-    const number = input.split("");
-    return this.#valudateBonus(number).map(Number);
+    const number = input.split(",");
+    return this.#validateBonus(number).map(Number);
   }
 
   #validateDraw(numbers) {
@@ -45,12 +46,12 @@ class Lotto {
       return;
     }
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error("[ERROR] : 로또 번호는 6개여야 합니다.");
     }
     return numbers;
   }
 
-  #valudateBonus(bonus) {
+  #validateBonus(bonus) {
     if (!bonus) {
       return;
     }
@@ -69,7 +70,7 @@ class Lotto {
     if (result === 4) {
       return (this.rank = 4);
     }
-    if (result === 5) {
+    if (result === 5 && isBonus === false) {
       return (this.rank = 3);
     }
     if (result === 5 && isBonus === true) {
@@ -84,6 +85,7 @@ class Lotto {
   matchCountCheck = (random, drew) => {
     let count = 0;
     const setLottoNumbers = [].concat(...new Set(random.flat()));
+    console.log(setLottoNumbers);
     for (let i = 0; i < setLottoNumbers.length; i++) {
       if (drew.includes(setLottoNumbers[i])) {
         count++;
@@ -93,10 +95,14 @@ class Lotto {
   };
 
   matchBonusCheck = (random, bonus) => {
-    if (random.includes(bonus)) {
-      return true;
+    let isBonus = false;
+    const setLottoNumbers = [].concat(...new Set(random.flat()));
+    for (let i = 0; i < setLottoNumbers.length; i++) {
+      if (bonus.includes(setLottoNumbers[i])) {
+        isBonus = true;
+      }
     }
-    return false;
+    return isBonus;
   };
 }
 export default Lotto;

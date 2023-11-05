@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 class Profit {
   constructor() {
     this.statCount = [0, 0, 0, 0, 0];
@@ -20,7 +21,7 @@ class Profit {
 
       return;
     }
-    if (rank === 2 && isBonus === true) {
+    if (rank === 2) {
       statCount[3] = 1;
 
       return;
