@@ -1,7 +1,7 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
 import {LOTTO_PRICE} from "./constants/Constants.js";
 
-class User {
+class LottoSeller {
     constructor(money) {
         this.money = money;
         this.lottoTickets = null;
@@ -29,4 +29,4 @@ class User {
     }
 }
 
-export default User;
+export default LottoSeller;

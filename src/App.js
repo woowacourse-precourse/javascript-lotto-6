@@ -1,36 +1,34 @@
-import LottoMaker from "./LottoMaker.js";
 import inputHandler from "./utils/inputHandler.js";
 import {INPUT_MESSAGE} from "./constants/Constants.js";
-import User from "./User.js";
+import LottoSeller from "./LottoSeller.js";
+import LottoManager from "./LottoManager.js";
+import Lotto from "./Lotto.js";
 
 class App {
-    #lottoTickets
-
-    constructor() {
-        this.#lottoTickets = 0;
-    }
-
 
     async play() {
-        const lottoMaker = new LottoMaker();
-        const input =
+        const lottoManager = new LottoManager();
+        const moneyInput =
             await inputHandler.getInput(INPUT_MESSAGE.MONEY);
 
-        const user = await new User(parseInt(input));
+        const lottoSeller = await new LottoSeller(parseInt(moneyInput));
+        await lottoSeller.buyLotto();
+        const lottoTickets = lottoSeller.lottoTicketsNumber;
+        lottoManager.makeNumbersAndPrint(lottoTickets);
 
-        await user.buyLotto();
+        const numbersInput =
+            await inputHandler.getInput(INPUT_MESSAGE.WINNING_NUMBERS);
 
-        this.#lottoTickets = user.lottoTicketsNumber;
-        lottoMaker.makeLottoAndPrint(this.#lottoTickets);
+        const winningNumbers =
+            numbersInput.split(',').map((input) => parseInt(input))
 
-        await lottoMaker.setLottoNumbers();
+        await lottoManager.getBonusNumber(winningNumbers);
 
+        const lotto = new Lotto(winningNumbers);
+        lottoManager.decideWinning(lotto.winningNumbers)
+        lottoManager.printResultTable();
     }
 
-
-    checkWinning() {
-
-    }
 }
 
 const app = new App();
