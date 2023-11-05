@@ -5,9 +5,9 @@ import {
   ERROR,
   LOTTO_ERROR_MSG,
   PURCHASE_ERROR_MSG,
-} from "./Utils/Constants";
-import { Lotto } from "./Lotto";
-import { Validate } from "./Utils/Validate";
+} from "./Constants";
+import { Lotto } from "../Lotto";
+import { Validate } from "./Validate";
 
 class View {
   static outputPurchaseAmount(input) {
