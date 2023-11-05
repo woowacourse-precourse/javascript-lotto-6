@@ -9,6 +9,7 @@ const ERROR = {
   falsy: '[ERROR] 정확한 숫자를 입력하셔야 합니다.',
   notBeDividedByThousand: '[ERROR] 1000으로 나누어 떨어져야 합니다.',
   notSix: '[ERROR] 로또 번호는 6개여야 합니다.',
+  notUnique: '[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.',
 };
 Object.freeze(ERROR);
 

@@ -1,6 +1,8 @@
 import { ERROR } from './Message.js';
 
 class Lotto {
+  #LENGTH = 6;
+
   #numbers;
 
   constructor(numbers) {
@@ -13,8 +15,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== this.#LENGTH) {
       throw new Error(ERROR.notSix);
+    }
+    if (numbers.length !== new Set(numbers).size) {
+      throw new Error(ERROR.notUnique);
     }
   }
 
