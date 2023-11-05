@@ -1,58 +1,8 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import ERROR_MESSAGE from './ErrorMessage.js';
-import Lotto from './Lotto.js';
+import Lotto from './Lotto';
+import Input from './Input';
 
 const LOTTO_PRICE = 1000;
-
-class Input {
-  static async inputPayment() {
-    const payment = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    Validate.validatePayment(payment);
-    return Number(payment);
-  }
-
-  static async inputWinning() {
-    const userSelected = await Console.readLineAsync(
-      '\n당첨 번호를 입력해 주세요.\n',
-    );
-    return new Lotto(userSelected.split(',').map((string) => Number(string)));
-  }
-
-  static async inputBonusNumber(winning) {
-    const bonus = await Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n',
-    );
-    Validate.validateBonusNumber(bonus, winning);
-    return bonus;
-  }
-}
-
-class Validate {
-  static validatePayment(input) {
-    const payment = Number(input);
-
-    if (Number.isNaN(payment)) {
-      throw new Error(ERROR_MESSAGE.nonNumeric);
-    }
-    if (payment <= 0 || !Number.isInteger(payment / LOTTO_PRICE)) {
-      throw new Error(ERROR_MESSAGE.invalidAmount);
-    }
-  }
-
-  static validateBonusNumber(input, winning) {
-    const bonus = Number(input);
-
-    if (Number.isNaN(bonus)) {
-      throw new Error(ERROR_MESSAGE.nonNumeric);
-    }
-    if (!Number.isInteger(bonus) || bonus < 1 || bonus > 45) {
-      throw new Error(ERROR_MESSAGE.outOfRange);
-    }
-    if (winning.includes(bonus)) {
-      throw new Error(ERROR_MESSAGE.duplicateWinningNumber);
-    }
-  }
-}
 
 class App {
   #winning;
