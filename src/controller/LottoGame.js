@@ -9,6 +9,13 @@ class LottoGame {
   #money = 0;
   #myLottos = new LottoList();
   #winningLotto = new WinningLotto();
+  #rewardCount = {
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    '5b': 0,
+  };
 
   async buyLotto() {
     await this.#setMoney();
@@ -49,6 +56,18 @@ class LottoGame {
     });
 
     return [matchCount, hasBonusNumber];
+  }
+
+  #setRewardCount(matchCount, hasBonusNumber) {
+    if (matchCount < 3 || matchCount > 6) return;
+
+    if (matchCount === 5) {
+      hasBonusNumber
+        ? this.#rewardCount['5b']++
+        : this.#rewardCount[matchCount]++;
+    } else {
+      this.#rewardCount[matchCount]++;
+    }
   }
 }
 
