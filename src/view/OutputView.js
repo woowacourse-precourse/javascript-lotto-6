@@ -17,4 +17,23 @@ export default class OutputView {
 
     OutputView.printNewLine();
   }
+
+  static printwinningStats() {
+    Console.print(OUTPUT_MESSAGE.winningStats);
+  }
+
+  static foramtPrice(price) {
+    const KOREAN_FORMAT = 'ko-KR';
+    return price.toLocaleString(KOREAN_FORMAT);
+  }
+
+  static printCorrectCounts(matchCounts, price, correctCounts) {
+    const parsingPrice = OutputView.foramtPrice(price);
+    Console.print(`${matchCounts}개 일치 (${parsingPrice}원) - ${correctCounts}개`);
+  }
+
+  static printCorrectCountsContainBonusBall(matchCounts, price, correctCounts) {
+    const parsingPrice = OutputView.foramtPrice(price);
+    Console.print(`${matchCounts}개 일치, 보너스 볼 일치 (${parsingPrice}원) - ${correctCounts}개`);
+  }
 }

@@ -3,6 +3,7 @@ import InputView from '../view/InputView.js';
 import LottoPlayer from '../model/LottoPlayer.js';
 import Lotto from '../Lotto.js';
 import OutputView from '../view/OutputView.js';
+import { LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
 
 export default class LottoMachine {
   #player;
@@ -13,18 +14,11 @@ export default class LottoMachine {
 
   #MINIMUM_WINNING_COUNT;
 
-  #LOTTO_RULES;
-
   #INPUT_UNIT;
 
   constructor() {
     this.#player = new LottoPlayer();
     this.#MINIMUM_WINNING_COUNT = 3;
-    this.#LOTTO_RULES = {
-      minNumber: 1,
-      maxNumber: 45,
-      pickCount: 6,
-    };
     this.#INPUT_UNIT = 1000;
   }
 
@@ -36,14 +30,15 @@ export default class LottoMachine {
     this.#bonusNumber = await this.#getBonusNumber();
     OutputView.printNewLine();
     this.#findMatchCount();
+    this.#calculateWinningStats();
   }
 
   #makeOneLotto() {
     // 추후 리팩토링 시 분리 고려
     const pickRandomUniqueNumbers = Random.pickUniqueNumbersInRange(
-      this.#LOTTO_RULES.minNumber,
-      this.#LOTTO_RULES.maxNumber,
-      this.#LOTTO_RULES.pickCount,
+      LOTTO_RULES.minNumber,
+      LOTTO_RULES.maxNumber,
+      LOTTO_RULES.pickCount,
     );
 
     const sortNumbers = this.#sortLottoNumbers(pickRandomUniqueNumbers);
@@ -96,6 +91,18 @@ export default class LottoMachine {
 
       if (correctCount >= this.#MINIMUM_WINNING_COUNT) {
         this.#player.setRankCounts(correctCount, isIncludedBonusNumber);
+      }
+    });
+  }
+
+  #calculateWinningStats() {
+    OutputView.printwinningStats();
+    const rankCountsObjectEntries = Object.entries(this.#player.getRankCounts()).reverse();
+    rankCountsObjectEntries.forEach(([rank, counts]) => {
+      if (rank === '2') {
+        OutputView.printCorrectCountsContainBonusBall(MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
+      } else {
+        OutputView.printCorrectCounts(MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
       }
     });
   }

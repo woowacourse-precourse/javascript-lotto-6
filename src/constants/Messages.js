@@ -8,6 +8,7 @@ const INPUT_MESSAGE = {
 
 const OUTPUT_MESSAGE = {
   purchaseAmount: `개를 구매했습니다.`,
+  winningStats: `당첨 통계${NEW_LINE}---`,
 };
 
 export { INPUT_MESSAGE, OUTPUT_MESSAGE };
