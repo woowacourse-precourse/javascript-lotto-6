@@ -33,3 +33,13 @@ export const validateUnique = (numberArr) => {
     throw new Error(ERROR_MESSAGE.INVALID_LOTTO_UNIQUE);
   }
 };
+
+export const validateFindEqual = (numberArr, number) => {
+  if (
+    numberArr.some((element) => {
+      return element === number;
+    })
+  ) {
+    throw new Error(ERROR_MESSAGE.INVALID_LOTTO_BONUS);
+  }
+};
