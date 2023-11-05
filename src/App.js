@@ -22,7 +22,8 @@ class App {
     this.#purchase_quantity = calcPurchaseQuantity(this.#purchase_amount);
     const LOTTO = new Lotto();
     this.#lotto = LOTTO.returnLotto(this.#purchase_quantity);
-    Console.print(this.#lotto);
+    printMessage("\n");
+    printMessage(`${this.#purchase_quantity}개를 구매했습니다.`);
   }
 }
 
