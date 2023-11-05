@@ -27,8 +27,10 @@
   - line endings 개행, 개행문자 - cr/lf (carriage-Return, \r /Line Feed, \n)
   - windows는 둘 다 사용하고, unix나 mac os는 LF만 사용한다
   - mac북 os에서 permission오류가 날 경우 : sudo chown -R $USER /usr/local/lib/node_modules
-- ✅ [클래스 필드가 무엇인지 공부하기 ](https://velog.io/@yoondgu/Java-%ED%81%B4%EB%9E%98%EC%8A%A4%ED%95%84%EB%93%9C-%EB%A9%94%EC%86%8C%EB%93%9C-%EC%83%9D%EC%84%B1%EC%9E%90-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC) 
-  - JAVA 문법이었다.
+- ✅ ✅ [클래스 필드가 무엇인지 공부하기 ](https://velog.io/@yoondgu/Java-%ED%81%B4%EB%9E%98%EC%8A%A4%ED%95%84%EB%93%9C-%EB%A9%94%EC%86%8C%EB%93%9C-%EC%83%9D%EC%84%B1%EC%9E%90-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC) 
+  - 필드 : 클래스 내에서 쓰이는 전역변수
+  - 생성자
+  - 메서드
 - ✅ 지난주 코드 중 하드코딩 있는지 확인하기
   - 의심 1: randomNumber > 4 ? true : false; 의 4 -> const TARGET_NUMBER = 4;
   - 의심 2: 테스트코드 인풋
@@ -41,12 +43,62 @@
     - 인자로 반복횟수(moveNumber)를 받던 compete 함수의 이름을 repeat으로 변경
     - getWinner 함수를 1등 한 명만을 반환하는 함수로 변경
     - getCommonWinner라는 함수를 추가로 만들어 공동 1등이 있는지 확인하는 기능을 분리
-- [JS 객체 만드는 방법 공부](http://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)
+- ✅ [JS 객체 만드는 방법 공부](http://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Basics)
+  - 기본: `{key: 'value'}` 키와 밸류(값)을 쌍으로 갖는 데이터
+  - this: 지금 동작하고 있는 코드를 가지고있는 객체 
 - [테스트 작성하는 이유 정리하기]((chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://techcourse-storage.s3.ap-northeast-2.amazonaws.com/9b82d8a360c548fcadd14c551dbcbe06))
-- 커밋컨벤션 공부하기
+- ✅ 커밋컨벤션 공부하기
+  - commit: 제목/ 바디/ 푸터로 구성됨
+    - 제목 : 타입/ 스코프/ 제목 내용
+    - 타입과 제목: 기존에 쓰던 방식
+    - 기존에 하던 것: 제목만 날린 것, 일반적으로는 충분
+    - 스코프는? 커밋이 발생한 위치를 특정할 수 있다면 뭐든지 가능
+      - ex)$location, $browser, $compile, $rootScope
+      - 이번 미션의 경우 기능 별로 지정할 수 있을 듯
+        - ex)$입력, $반복수행, $번호뽑기
+    - 제목은? 끝에 마침표(.) X, 명령어로 (한국어는 명사형으로 끝내기)
+    - 바디
+      - 변경한 이유 + 변경 사항 비교
+      - 이 커밋을 적용하면 어떤 일이 일어나는지
+    - 푸터
+      - 주요 변경 사항
+      - 옮기는(migrate) 방법 
+  - ex) 
+    ```
+    feat($출력): onClick 함수
+    
+    $출력 객체에 onClick함수 추가
+    - 버튼 1 클릭하면 'clicked!'를 출력
+    - 버튼 2 클릭하면 'clicked'를 출력
+    - 버튼 1 비활성화
+
+    Breaks $입력 버튼 기능 추가 삭제 등 변경
+    ```
+
 - ✅ 기능 목록 작성
-- 예상되는 예외상황을 포함하여 작성
-- #prefix의 의미 공부하기
+  - 예상되는 예외상황을 포함하여 작성
+- ✅ #prefix의 의미 공부하기
+  - private 변수: class 바깥에서 getter setter함수 없이는 접근하거나 변경 불가
+  - 
+  ```javascript
+  class Race {
+    #winner;
+
+    getWinner () {
+      return this.#winner;
+    }
+
+    setWinner (player) {
+      this.#winner = player;
+    }
+  }
+
+  const race =new Race();
+  car.setWinner('sohee'); // ok
+  car.#wineer = 'sohee'; // 안돼
+  car.getWinner(); // > 'sohee'
+  console.log(car.#winner); // 안돼
+  ```
 
 # 2. 2주차 
 ## 2.1 기능 목록
@@ -118,8 +170,8 @@
 - 지원 플랫폼 예제테스트 작성
 - 지원 플랫폼 소감작성
 
-## 99. 커밋 컨벤션
-| type | subject line |
+## 99. 커밋 제목 컨벤션
+| type(scope) | subject line |
 | --- | --- |
 | ✨ feat | 기능 추가, 삭제, 변경 |
 | 🐛 fix | 버그, 오류 수정 |
