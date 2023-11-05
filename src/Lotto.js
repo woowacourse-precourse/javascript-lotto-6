@@ -29,6 +29,8 @@ class Lotto {
         )
       );
     }
+
+    return lottos;
   }
 }
 
