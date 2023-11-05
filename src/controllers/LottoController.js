@@ -69,6 +69,33 @@ class LottoController {
     printOutput(`총 수익률은 ${profitRate}%입니다.`);
   }
 
+  printPurchaseHistory() {
+    const { printOutput } = OutputView;
+    printOutput(`${this.purchasedAmount}개를 구매했습니다.`);
+
+    this.lottoComparer.lottos.forEach(lotto => {
+      const lottos = lotto.getNumbers();
+      const formattedArray = `[${lottos.join(', ')}]`;
+      printOutput(formattedArray);
+    });
+  }
+
+  printWinningResult() {
+    const { printOutput } = OutputView;
+    const winningResult = Object.values(this.lottoComparer.lottoWinnerPrize);
+
+    printOutput('당첨 통계');
+    printOutput('---');
+
+    winningResult.forEach(
+      ({ count, prizeMoney, matchedNumbers, hasBonusNumber }) => {
+        const bonusText = hasBonusNumber ? ', 보너스 볼 일치' : '';
+        const printResult = `${matchedNumbers}개 일치${bonusText} (${prizeMoney.toLocaleString()}원) - ${count}개`;
+        printOutput(printResult);
+      },
+    );
+  }
+
   validatePrice(price, lottoPrice) {
     return price % lottoPrice !== 0;
   }

@@ -9,8 +9,12 @@ class App {
 
   async play() {
     await this.lottoController.startLotto();
+    this.lottoController.printPurchaseHistory();
+
     await this.lottoController.setWinningNumbers();
     this.lottoController.compareLottoNumbers();
+
+    this.lottoController.printWinningResult();
     this.lottoController.printTotalProfit();
   }
 }
