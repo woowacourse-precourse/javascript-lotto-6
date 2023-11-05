@@ -98,7 +98,7 @@ class Game {
       if (rank !== 0) rankCount[rank - 1] += 1;
     });
 
-    return rankCount;
+    return rankCount.reverse();
   }
 
   getRank(lottoNumbers, winningNumbers, bonusNumber) {
@@ -151,14 +151,10 @@ class Game {
 
   printStatistics(rankCountResult, returnRate) {
     Console.print(STATISTICS_MESSAGE.output);
-    let messages = [];
     rankCountResult.forEach((count, idx) => {
-      messages.push(STATISTICS_MESSAGE.result(idx, count));
+      Console.print(STATISTICS_MESSAGE.result(idx, count, LOTTO_PRIZE[idx]));
     });
-    messages.reverse();
-    messages.push(STATISTICS_MESSAGE.rateOfReturn(returnRate));
-
-    Console.print(messages.join(''));
+    Console.print(STATISTICS_MESSAGE.rateOfReturn(returnRate));
   }
 }
 

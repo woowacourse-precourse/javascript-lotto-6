@@ -59,17 +59,17 @@ describe('Game 클래스 테스트', () => {
         BONUS_NUMBER,
       );
 
-      expect(result).toEqual([0, 1, 0, 0, 1]);
+      expect(result).toEqual([1, 0, 0, 1, 0]);
     });
 
     test.each([
       {
-        result: [0, 0, 1, 0, 1],
+        result: [1, 0, 1, 0, 0],
         purchaseAmount: 6000,
         expectedRate: 25083.3,
       },
       {
-        result: [0, 0, 0, 1, 0],
+        result: [0, 1, 0, 0, 0],
         purchaseAmount: 3000,
         expectedRate: 1666.7,
       },
