@@ -88,10 +88,20 @@ describe('💙 InputValidator 클래스를 테스트합니다. ฅ^._.^ฅ', () 
   });
 
   test('[validateBonusNumber] 숫자가 아닌 값이면 에러가 발생한다.', () => {
-    const invalidBonusnumber = 'REASON';
+    const invalidBonusNumber = 'REASON';
 
     expect(() =>
-      InputValidator.validateBonusNumber(invalidBonusnumber),
+      InputValidator.validateBonusNumber(invalidBonusNumber),
     ).toThrow(ERROR_MESSAGE.NOT_A_NUMBER);
+  });
+
+  test('[validateBonusNumber] 1 ~ 45 사이의 숫자가 아니면 에러가 발생한다.', () => {
+    const invalidBonusNumber = [0, 46, 10000];
+
+    invalidBonusNumber.forEach((bonusNumber) => {
+      expect(() => InputValidator.validateBonusNumber(bonusNumber)).toThrow(
+        ERROR_MESSAGE.OUT_OF_RANGE,
+      );
+    });
   });
 });
