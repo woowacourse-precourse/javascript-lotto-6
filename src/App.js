@@ -1,4 +1,4 @@
-import GameController from './GameController.js';
+import GameController from './Controller/GameController';
 
 class App {
   constructor() {
