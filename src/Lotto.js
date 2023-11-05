@@ -28,9 +28,31 @@ function outputNumber(inputAmount) {
   lottoINITIAL.forEach((numbers) => Console.print(numbers));
 }
 
+function numberCheck(inputNumberList, inputBounsNumber) {
+  if (inputNumberList.length !== NUMBER.LOTTO_LENGTH)
+    throw new Error(TEXT.LENGTH_ERROR);
+  if (
+    Math.max(...inputNumberList) > NUMBER.MAX_LOTTO_NUMBER ||
+    Math.min(...inputNumberList) < NUMBER.MIN_LOTTO_NUMBER
+  )
+    throw new Error(TEXT.NUMBER_ERROR);
+  if (inputNumberList.includes(NaN) || Number.isNaN(inputBounsNumber))
+    throw new Error(TEXT.STRING_ERROR);
+}
+
+async function lottoNumberGet() {
+  const inputNumber = await Console.readLineAsync(TEXT.INPUT_NUMBER);
+  const inputNumberList = inputNumber.split(',').map((number) => +number);
+  const inputBounsNumber = Number(
+    await Console.readLineAsync(TEXT.INPUT_BONUS),
+  );
+  numberCheck(inputNumberList, inputBounsNumber);
+}
 export async function lottoAmountGet() {
   const inputAmount = await Console.readLineAsync(TEXT.INPUT_AMOUNT);
+  if (inputAmount % 1000 !== 0) throw new Error(TEXT.AMOUNT_ERROR);
   outputNumber(inputAmount);
+  lottoNumberGet();
 }
 
 class Lotto {
