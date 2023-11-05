@@ -1,8 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
+import { INPUT_MESSAGE } from "../constants/constants.js";
 
 class InputVeiw{
     async readPurchaseAmount(){
-        const inputMoney = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+        const inputMoney = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
         return inputMoney/1000;
     }
 
