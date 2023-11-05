@@ -1,4 +1,5 @@
 import ERROR_MESSAGE from '../constants/ErrorMessage.js';
+import DuplicateNumberError from '../error/DuplicateNumberError.js';
 import InvalidNumberError from '../error/InvalidNumberError.js';
 import GameUtils from '../utils/GameUtils.js';
 
@@ -14,6 +15,7 @@ class BonusNumber {
   static #validate(number, winningNumbers) {
     BonusNumber.#validateIsNumber(number);
     BonusNumber.#validateIsInLottoNumberRange(number);
+    BonusNumber.#validateDuplicateWinningNumbers(number, winningNumbers);
   }
 
   static #validateIsNumber(number) {
@@ -25,6 +27,12 @@ class BonusNumber {
   static #validateIsInLottoNumberRange(number) {
     if (GameUtils.isNotFromOneToFourtyFive(number)) {
       throw new InvalidNumberError(ERROR_MESSAGE.LOTTO_NUMBER_RANGE_ERROR);
+    }
+  }
+
+  static #validateDuplicateWinningNumbers(number, winningNumbers) {
+    if (winningNumbers.find((winningNumber) => winningNumber === number)) {
+      throw new DuplicateNumberError(ERROR_MESSAGE.DUPLICATE_BONUS_NUMBER);
     }
   }
 }

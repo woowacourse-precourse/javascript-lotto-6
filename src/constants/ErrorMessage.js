@@ -4,6 +4,7 @@ const ERROR_MESSAGE = {
   INCLUDE_EMPTY_NUMBER: '[ERROR]: 빈 입력이 포함되어있습니다.',
   LOTTO_NUMBER_RANGE_ERROR: '[ERROR]: 로또 숫자는 1부터 45까지 허용됩니다.',
   DUPLICATE_NUMBER_ERROR: '[ERROR]: 중복된 숫자가 존재합니다.',
+  DUPLICATE_BONUS_NUMBER: '[ERROR]: 보너스 번호가 로또 번호에 이미 존재합니다.',
 };
 
 Object.freeze(ERROR_MESSAGE);
