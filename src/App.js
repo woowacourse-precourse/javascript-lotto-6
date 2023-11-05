@@ -1,6 +1,7 @@
 import Input from "./utils/Input.js";
 import Output from "./utils/Output.js";
 import Lottos from "./Lottos.js";
+import Statistics from "./Statistics.js";
 
 class App {  
   async play() {    
@@ -13,6 +14,7 @@ class App {
     const bonusNumber = await Input.getBonusNumber();    
 
     const results = lottos.calculateResults(winningNumbers, bonusNumber)
+    const statistics = new Statistics(results);
   }    
 }
 
