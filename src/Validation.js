@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from './constants.js';
+
 class Validation {
   static cleanAndValidateInput({ input, errorMessage, checkRange = false }) {
     const cleanedInput = Validation.cleanInput(input);
@@ -27,7 +29,7 @@ class Validation {
     if (purchaseAmount % 1000 !== 0 || purchaseAmount < 1000) {
       Validation.cleanAndValidateInput({
         input: purchaseAmount,
-        errorMessage: '[ERROR] 1000원 단위로 구입 금액을 입력해주세요.',
+        errorMessage: ERROR_MESSAGE.invalidPusrchaseAmount,
         checkRange: true,
       });
     }
@@ -36,13 +38,10 @@ class Validation {
   }
 
   static validateWinningNumbers(winningNumbers) {
-    const numbers = Validation.validateIntegerArray(
-      winningNumbers,
-      '[ERROR] 1부터 45 사이의 6개 중복되지 않는 자연수를 입력해주세요.',
-    );
+    const numbers = Validation.validateIntegerArray(winningNumbers, ERROR_MESSAGE.duplicationWinningNumbers);
 
     if (numbers.length !== 6 || new Set(numbers).size !== 6) {
-      throw new Error('[ERROR] 1부터 45 사이의 6개 중복되지 않는 자연수를 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.duplicationWinningNumbers);
     }
 
     return numbers;
@@ -51,12 +50,12 @@ class Validation {
   static validateBonusNumber(bonusNumber, winningNumbers) {
     const cleanedBonusNumber = Validation.cleanAndValidateInput({
       input: bonusNumber,
-      errorMessage: '[ERROR] 1부터 45 사이의 보너스 번호를 입력해주세요.',
+      errorMessage: ERROR_MESSAGE.invalidBonusNumber,
       checkRange: true,
     });
 
     if (winningNumbers.includes(cleanedBonusNumber)) {
-      throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복되면 안됩니다.');
+      throw new Error(ERROR_MESSAGE.duplicationBonusNumber);
     }
 
     return cleanedBonusNumber;

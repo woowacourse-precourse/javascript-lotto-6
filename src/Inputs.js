@@ -1,14 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
 import Validation from './Validation.js';
+import { PROMPT_MESSAGE } from './constants.js';
 
 class Inputs {
   returnPurchaseAmount() {
-    return this.getPromptedAmount('구입금액을 입력해 주세요.');
+    return this.getPromptedAmount(PROMPT_MESSAGE.promptPurchaseAmount);
   }
 
   async returnWinningNumbers() {
-    const winningNumbers = await this.getPromptedWinningNumbers('당첨 번호를 입력해 주세요.');
-    const bonusNumber = await this.getPromptedBonusNumber('보너스 번호를 입력해 주세요.', winningNumbers);
+    const winningNumbers = await this.getPromptedWinningNumbers(PROMPT_MESSAGE.promptWinningNumbers);
+    const bonusNumber = await this.getPromptedBonusNumber(PROMPT_MESSAGE.promptBonusNumber, winningNumbers);
     return { winningNumbers, bonusNumber };
   }
 
