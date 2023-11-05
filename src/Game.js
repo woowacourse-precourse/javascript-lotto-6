@@ -30,8 +30,7 @@ class Game {
 
   async start() {
     const purchaseAmount = await this.getPurchaseAmount();
-    this.validate(purchaseAmount);
-    this.purchaseLotto(Number(purchaseAmount));
+    this.purchaseLotto(purchaseAmount);
     this.printPurchaseLottos();
     await this.createWinningLotto();
     await this.createBonusNumber();
@@ -40,22 +39,25 @@ class Game {
       this.#winningLotto.getNumbers(),
       this.#bonusNumber,
     );
-    const returnRate = this.calculateRate(
-      Number(purchaseAmount),
-      rankCountResult,
-    );
+    const returnRate = this.calculateRate(purchaseAmount, rankCountResult);
     this.printStatistics(rankCountResult, returnRate);
   }
 
-  validate(amount) {
+  validatePurchaseAmount(amount) {
     validateNumberType(amount);
     validateMinimumAmount(amount);
     validateUnit(amount);
   }
 
   async getPurchaseAmount() {
-    const purchaseAmount = await getUserInput(INPUT_MESSAGE.purchaseAmount);
-    return purchaseAmount;
+    try {
+      const purchaseAmount = await getUserInput(INPUT_MESSAGE.purchaseAmount);
+      this.validatePurchaseAmount(purchaseAmount);
+      return Number(purchaseAmount);
+    } catch (error) {
+      Console.print(error.message);
+      return await this.getPurchaseAmount();
+    }
   }
 
   async getWinningNumbers() {
@@ -64,15 +66,25 @@ class Game {
   }
 
   async createWinningLotto() {
-    const winningNumbers = await this.getWinningNumbers();
-    this.#winningLotto = new Lotto(winningNumbers);
+    try {
+      const winningNumbers = await this.getWinningNumbers();
+      this.#winningLotto = new Lotto(winningNumbers);
+    } catch (error) {
+      Console.print(error.message);
+      await this.createWinningLotto();
+    }
   }
 
   async createBonusNumber() {
-    const input = await getUserInput(INPUT_MESSAGE.bonusNumber);
-    const bonusNumber = Number(input);
-    this.validateBonusNumber(bonusNumber);
-    this.#bonusNumber = bonusNumber;
+    try {
+      const input = await getUserInput(INPUT_MESSAGE.bonusNumber);
+      const bonusNumber = Number(input);
+      this.validateBonusNumber(bonusNumber);
+      this.#bonusNumber = bonusNumber;
+    } catch (error) {
+      Console.print(error.message);
+      await this.createBonusNumber();
+    }
   }
 
   validateBonusNumber(number) {

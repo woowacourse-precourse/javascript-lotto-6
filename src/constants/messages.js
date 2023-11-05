@@ -21,7 +21,7 @@ const STATISTICS_MESSAGE = {
   result(idx, count, prize) {
     return `${
       MATCHING_MESSAGE[idx]
-    } (${prize.toLocaleString()}원) - ${count}개\n`;
+    } (${prize.toLocaleString()}원) - ${count}개`;
   },
   rateOfReturn(rate) {
     return `총 수익률은 ${rate}%입니다.`;
