@@ -36,27 +36,25 @@ const LottoResult = {
     let totalProfit = 0;
     let profitPercent = 0;
 
-    for (let correctNumber in resultBoard) {
-      let correctCount = resultBoard[correctNumber];
-
-      switch (correctNumber) {
+    Object.entries(resultBoard).forEach((correctNumber) => {
+      switch (correctNumber[0]) {
         case 'three':
-          totalProfit += correctCount * 5000;
+          totalProfit += correctNumber[1] * 5000;
           break;
         case 'four':
-          totalProfit += correctCount * 50000;
+          totalProfit += correctNumber[1] * 50000;
           break;
         case 'five':
-          totalProfit += correctCount * 1500000;
+          totalProfit += correctNumber[1] * 1500000;
           break;
         case 'fiveBonus':
-          totalProfit += correctCount * 30000000;
+          totalProfit += correctNumber[1] * 30000000;
           break;
         case 'six':
-          totalProfit += correctCount * 2000000000;
+          totalProfit += correctNumber[1] * 2000000000;
           break;
       }
-    }
+    });
 
     profitPercent = (totalProfit / (purchaseAmount * 1000)) * 100;
 
