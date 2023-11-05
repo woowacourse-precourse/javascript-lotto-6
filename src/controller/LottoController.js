@@ -14,6 +14,7 @@ class LottoController {
     await this.setLottoCount();
     const lottoTicket = this.setLottoTicket();
     this.outputView.printLottoCount(this.#lottoCount);
+    this.outputView.printLotto(lottoTicket);
   }
 
   async setLottoCount() {
