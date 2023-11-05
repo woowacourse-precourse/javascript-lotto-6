@@ -65,7 +65,8 @@ class App {
 
   printRandomLottoNumbers() {
     const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    return randomNumbers;
+    const sortedNumbers = randomNumbers.sort((a, b) => a - b);
+    return sortedNumbers;
   }
 
   async getWinningNumbers() {
