@@ -37,12 +37,7 @@ class LottoController {
     );
     this.#bonusNumber = new BonusNumber(bonusNumber);
     this.#winningStatic = new Rank(this.#lottos.getLottos());
-    this.#displayResult(
-      this.#winningStatic.getRankStatistic(
-        this.#winningNumber.getWinningNumber(),
-        this.#bonusNumber.getBonusNumber()
-      )
-    );
+    this.#displayResult();
   }
 
   async #purchaseLottos(input) {
@@ -53,7 +48,11 @@ class LottoController {
     await this.#inputWinningNumber();
   }
 
-  #displayResult(winningStatic) {
+  #displayResult() {
+    const winningStatic = this.#winningStatic.getRankStatistic({
+      winningNumber: this.#winningNumber.getWinningNumber(),
+      bonusNumber: this.#bonusNumber.getBonusNumber(),
+    });
     OutputView.printResultStatic(winningStatic);
     this.#revenueRate = this.#count.getRevenueRate(winningStatic);
     OutputView.printRevenueResult(this.#revenueRate);

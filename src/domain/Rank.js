@@ -8,19 +8,28 @@ class Rank {
     this.#rankStatic = Array(NUMBER.lottoRank).fill(0);
     this.#lottos = lottos;
   }
-
-  #getRank(lotto, winningNumber, bonusNumber) {
-    const sameNumberCount = this.#getSameNumberCount(lotto, winningNumber);
-    if (sameNumberCount === 3) return 5;
-    if (sameNumberCount === 4) return 4;
-    if (sameNumberCount === 5 && lotto.includes(bonusNumber)) return 2;
-    if (sameNumberCount === 5) return 3;
-    if (sameNumberCount === 6) return 1;
+  /**
+   * @param Object props { winningNumber: 당첨 번호 배열, bonusNumber: 보너스 번호 }
+   * @returns {number} 구매한 로또 당첨 등수
+   */
+  #getRank(lotto, props) {
+    const count = this.#getSameNumberCount(lotto, props.winningNumber);
+    switch (count) {
+      case 3:
+        return 5;
+      case 4:
+        return 4;
+      case 5:
+        if (lotto.includes(props.bonusNumber)) return 2;
+        return 3;
+      case 6:
+        return 1;
+    }
   }
 
-  getRankStatistic(winningNumber, bonusNumber) {
+  getRankStatistic(props) {
     this.#lottos.forEach((lotto) => {
-      const rank = this.#getRank(lotto, winningNumber, bonusNumber);
+      const rank = this.#getRank(lotto, props);
       if (rank) this.#rankStatic[rank - 1] += 1;
     });
     return this.#rankStatic;
