@@ -2,19 +2,24 @@ import Input from "./view/Input.js";
 import Player from "./model/Player.js";
 import WinningLotto from "./model/WinningLotto.js";
 import { MONEY_CONSTANT } from "./constants/game.js";
+import Output from "./view/Output.js";
 
 class LottoGame {
   async initGame() {
     await this.setPlayer();
     await this.setWinningLotto();
+    this.getResult();
   }
 
   getResult() {
     const ranks = this.saveLottoRank();
     const returnRate = this.getReturnRate(ranks);
+    this.print(ranks, returnRate);
   }
 
-  print(ranks, print) {}
+  print(ranks, returnRate) {
+    Output.printResult(ranks, returnRate);
+  }
 
   getReturnRate(ranks) {
     const returnRate =
