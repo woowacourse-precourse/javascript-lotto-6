@@ -37,7 +37,16 @@ describe("InputView 객체 테스트", () => {
 
     test("readLottoWinningNumbers메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
       InputView.readLottoWinningNumbers();
-      expect(Console.readLineAsync).toBeCalledWith();
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.LOTTO_WINNING_NUMBERS);
+    });
+
+    test("readLottoPurchaseAmount 메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
+      const winningNumbersInput = "1,2,3,4,5,6";
+      const resolvedPromise = Promise.resolve(winningNumbersInput);
+      Console.readLineAsync.mockReturnValue(resolvedPromise);
+
+      const winningNumbers = await InputView.readLottoPurchaseAmount();
+      expect(winningNumbers).toBe(winningNumbersInput);
     });
   });
 });
