@@ -4,6 +4,8 @@ const CONFIG = Object.freeze({
   LOTTO_PRICE: 1000,
   SPLIT_STRING: ',',
   LOTTO_LENGTH: 6,
+  minLottoWinningNumber: 3,
+  bonusNumberMatch: 5,
 });
 
 export default CONFIG;
