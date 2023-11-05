@@ -19,6 +19,10 @@ export const PRIZE_MAP = {
     '6': 2000000000,
 };
 
+export const INPUT_MESSAGES = {
+    PURCHACE_PRICE: '구매 금액을 입력해 주세요.',
+};
+
 export const ERROR = {
     HEAD: '[ERROR]',
     DUPLICATE_LOTTO_NUMBER: '로또 번호는 중복된 값을 가질 수 없습니다.',
