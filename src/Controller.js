@@ -1,3 +1,4 @@
+import Bonus from './Bonus.js';
 import InputView from './InputView.js';
 import Lotto from './Lotto.js';
 import LottoTicket from './LottoTicket.js';
@@ -7,6 +8,8 @@ class Controller {
   #lottoTicketList;
 
   #winningNumbers;
+
+  #bonusNumber;
 
   async progress() {
     try {
@@ -36,6 +39,10 @@ class Controller {
   async #getWinningNumbers() {
     const inputLottoWinningNumbers = await InputView.readLottoWinningNumbers();
     this.#winningNumbers = new Lotto(inputLottoWinningNumbers).winningNumbers;
+  }
+
+  async #getBonusNumber() {
+    const inputBonusNumber = await InputView.readLottoBonusNumber();
   }
 }
 

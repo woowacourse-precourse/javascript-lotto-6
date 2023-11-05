@@ -14,6 +14,13 @@ const InputView = {
     );
     return inputValue;
   },
+
+  async readLottoBonusNumber() {
+    const inputValue = await Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.\n',
+    );
+    return inputValue;
+  },
 };
 
 export default InputView;
