@@ -31,7 +31,7 @@ class App {
     }
   }
   makeLotto() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
   }
 
   async play() {
