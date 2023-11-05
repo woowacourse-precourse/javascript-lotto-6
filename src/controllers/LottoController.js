@@ -2,6 +2,7 @@ import inputView from "../views/InputView";
 import BudgetValidation from "../validation/BudgetValidation";
 import GetLotto from "../models/GetLotto";
 import OutputView from "../views/OutputView";
+import Lotto from "../Lotto";
 
 class LottoController {    
     budget = 0;
@@ -11,7 +12,7 @@ class LottoController {
     async getBudget() {
         //입력받은 값을 유효성 검사를 위해 넘겨줌
         const inputBudget = await this.getInputBudget();
-        this.validateAndSetBudget(inputBudget);
+        this.checkValidateBudget(inputBudget);
     }
 
     async getInputBudget() {
@@ -20,7 +21,7 @@ class LottoController {
         return await inputViewInstance.inputBudget();
     }
     
-    validateAndSetBudget(inputBudget) {
+    checkValidateBudget(inputBudget) {
         //사용자에게 입력받은 로또 구매 양에 대한 유효성 검사를 진행
         const validBudget = new BudgetValidation();
         this.budget = validBudget.budgetValid(inputBudget);
@@ -43,8 +44,8 @@ class LottoController {
 
     makeRandomLotto() {
         //로또 생성
-        const generate = new GetLotto();
-        this.lottos = generate.generateLottoNumbers(this.lottoCount);
+        const lotto = new Lotto();
+        this.lottos = lotto.generateLottoNumbers(this.lottoCount);
         this.printRandomLotto();
     }
 
