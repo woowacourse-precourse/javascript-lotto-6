@@ -22,3 +22,9 @@ export const WINNING_NUMBERS_ERROR_MESSAGE = Object.freeze({
   wrongCount: '[ERROR] 잘못된 입력입니다. 로또 한 장의 숫자 개수는 6개 입니다. 게임을 종료합니다.',
   emptyInput: '[ERROR] 입력된 값이 없습니다. 게임을 종료합니다.',
 })
+
+export const BONUS_NUMBER_ERROR_MESSAGE = Object.freeze({
+  wrongBonusNumber: '[ERROR]: 잘못된 개수입니다. 보너스 숫자는 한 개만 입력할 수 있습니다. 게임을 종료합니다.',
+  notNaturalNumber: '[ERROR]: 잘못된 입력입니다. 0 이하의 값은 입력이 불가합니다. 게임을 종료합니다.',
+  duplicatedNumbers: '[ERROR]: 잘못된 숫자입니다. 당첨 번호에 포함된 숫자는 입력이 불가합니다. 게임을 종료합니다.',
+})
