@@ -27,7 +27,7 @@ class InputValidator {
 
   /**
    * 사용자로부터 입력 받은 당첨 번호 유효성 검사
-   * @param {string[]} winningNumbers
+   * @param {string[] | number[]} winningNumbers
    * @return {Error | undefined}
    */
   static validateWinningNumbers(winningNumbers) {
@@ -55,22 +55,34 @@ class InputValidator {
 
   /**
    * 사용자로부터 입력 받은 보너스 번호 유효성 검사
-   * @param {string} - bonusNumber
+   * @param {string | number} - bonusNumber
    * @return {Error | undefined}
    */
   static validateBonusNumber(bonusNumber) {
-    // 보너스 넘버가 숫자가 맞는지
-    // 1개로 이루어져있는지
-    // 빈 값이 아닌지
+    const convertedNumber = convertType(bonusNumber);
+    if (Number.isNaN(convertedNumber)) {
+      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
+    }
+
+    if (
+      convertedNumber < GAME_RULE.START_LOTTO_NUMBER ||
+      convertedNumber > GAME_RULE.END_LOTTO_NUMBER
+    ) {
+      throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
+    }
   }
 
   /**
    * 보너스 번호와 당첨 번호 유효성 검사
-   * @param {string} - bonusNumber
+   * @param {string | number} - bonusNumber
+   * @param {string[] | number[]} - winningNumbers
    * @return {Error | undefined}
    */
   static validateLottoNumbers(bonusNumber, winningNumbers) {
-    // 당첨 번호와 중복되는 번호가 없는지
+    const lottoNumbers = new Set([bonusNumber, ...winningNumbers].map(Number));
+    if (lottoNumbers.size !== GAME_RULE.TOTAL_LOTTO_COUNT) {
+      throw new Error(ERROR_MESSAGE.NOT_A_UNIQUE);
+    }
   }
 }
 
