@@ -5,10 +5,8 @@ class App {
   async play() {
     const amount = await this.getAmount();
     const lottoNumbersArray = this.getLottoNumbers(amount);
-
     const numbers = await this.getWinningNumbers();
-    const bonusNumber = await this.getBonusNumber();
-    this.validateBonusNumber(numbers, bonusNumber);
+    const bonusNumber = await this.getBonusNumber(numbers);
   
     const results = {
       three: 0,
@@ -71,21 +69,31 @@ class App {
   }
 
   async getWinningNumbers() {
-    const inputString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    const numbers = inputString.split(',').map(Number);
-    return new Lotto(numbers);
+    try {
+      const inputString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+      const numbers = inputString.split(',').map(Number);
+      return new Lotto(numbers);
+    } catch (error) {
+      Console.print(error.message);
+      return this.getWinningNumbers();
+    }
   }
 
-  async getBonusNumber() {
-    const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-
-    return bonusNumber;
+  async getBonusNumber(numbers) {
+    try {
+      const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+      this.validateBonusNumber(numbers, bonusNumber);
+      return bonusNumber;
+    } catch (error) {
+      Console.print(error.message);
+      return this.getBonusNumber(numbers);
+    }
   }
 
   validateBonusNumber(lottoNumbers, bonusNumber) {
     const parsedBonusNumber = Number.parseFloat(bonusNumber);
 
-    if (isNaN(parsedBonusNumber) || parsedBonusNumber < 1 || parsedBonusNumber > 45 || !Number.isInteger(parsedBonusNumber)) {
+    if (isNaN(bonusNumber) || parsedBonusNumber < 1 || parsedBonusNumber > 45 || !Number.isInteger(parsedBonusNumber)) {
       throw new Error('[ERROR] 보너스 번호는 1부터 45 사이의 한개의 정수여야 합니다.');
     }
     if (lottoNumbers.isBonusNumberDuplicate(parsedBonusNumber)) {
