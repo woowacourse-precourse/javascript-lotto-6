@@ -26,4 +26,17 @@ describe("출력 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("구매한 로또", () => {
+    const logSpy = getLogSpy();
+    const input = [
+      [1, 2, 3, 4, 5, 6],
+      [10, 20, 30, 35, 40, 42],
+    ];
+    const output = `[1, 2, 3, 4, 5, 6]${"\n"}[10, 20, 30, 35, 40, 42]`;
+    const printing = new Output();
+
+    printing.printMyLotto(input);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+  });
 });
