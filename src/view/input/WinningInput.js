@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import GAME_MESSAGE from "../../constants/gameMessage.js";
+import { GAME_MESSAGE } from "../../constants/gameMessage.js";
 import SYMBOLS from "../../constants/symbols.js";
 import BonusInput from "./BonusInput.js";
 import Lotto from "../../controller/Lotto.js";

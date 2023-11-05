@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import GAME_MESSAGE from "../../constants/gameMessage.js";
+import { GAME_MESSAGE } from "../../constants/gameMessage.js";
 import bonusIsValid from "../../utils/bonusIsValid.js";
 
 class BonusInput {

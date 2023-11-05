@@ -1,5 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import GAME_MESSAGE from "../constants/gameMessage.js";
+import { GAME_MESSAGE } from "../constants/gameMessage.js";
 import NUMBERS from "../constants/numbers.js";
 import userLottoOutput from "../view/output/userLottoOutput.js";
 
