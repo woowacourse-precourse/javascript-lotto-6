@@ -82,7 +82,7 @@ class App {
     Console.print(`5개 일치 (1,500,000원) - ${this.statistics.third_prize}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.statistics.second_prize}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${this.statistics.first_prize}개`);
-    Console.print(`수익률은 ${roundedProfitPercentage}%입니다.`);
+    Console.print(`총 수익률은 ${roundedProfitPercentage}%입니다.`);
   }
 }
 export default App;
