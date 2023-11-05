@@ -8,13 +8,13 @@ const INPUT_MESSAGE = {
 
 const PURCHASE_MESSAGE = (count) => `\n${count}개를 구매했습니다.`;
 
-const MATCHING_MESSAGE = {
-  first: '6개 일치',
-  second: '5개 일치, 보너스 볼 일치',
-  third: '5개 일치',
-  fourth: '4개 일치',
-  fifth: '3개 일치',
-};
+const MATCHING_MESSAGE = [
+  '6개 일치',
+  '5개 일치, 보너스 볼 일치',
+  '5개 일치',
+  '4개 일치',
+  '3개 일치',
+];
 
 const STATISTICS_MESSAGE = {
   output: '\n당첨 통계\n---\n',

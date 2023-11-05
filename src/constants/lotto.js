@@ -7,13 +7,7 @@ const LOTTO = {
   price: 1000,
 };
 
-const LOTTO_PRIZE = {
-  first: 2000000000,
-  second: 30000000,
-  third: 1500000,
-  fourth: 50000,
-  fifth: 5000,
-};
+const LOTTO_PRIZE = [2000000000, 30000000, 1500000, 50000, 5000];
 
 const MATCHING_COUNT = {
   first: 6,
