@@ -1,47 +1,60 @@
+import { GAME_SETTINGS } from '../constants/gameSettings';
+import { PRIZES } from '../constants/Prizes';
+
 export default class LottoResult {
+  #winningNumbers;
+
+  #bonusNumber;
+
+  #tickets;
+
+  #result;
+
   constructor(winningNumbers, bonusNumber, tickets) {
-    this.winningNumbers = winningNumbers;
-    this.bonusNumber = bonusNumber;
-    this.tickets = tickets;
-    this.result = {
-      3: { count: 0, prize: 5000 },
-      4: { count: 0, prize: 50000 },
-      5: { count: 0, prize: 1500000 },
-      '5+1': { count: 0, prize: 30000000 },
-      6: { count: 0, prize: 2000000000 },
-    };
+    this.#winningNumbers = winningNumbers;
+    this.#bonusNumber = bonusNumber;
+    this.#tickets = tickets;
+    this.#result = this.#initializeResult();
+    this.#calculateResults();
   }
 
-  calculateResults() {
-    this.tickets.forEach((ticket) => {
-      const matchCount = this.getMatchCount(ticket);
-      if (matchCount === 5 && ticket.numbers.includes(this.bonusNumber)) {
-        this.result['5+1'].count += 1;
-      } else if (this.result[matchCount]) {
-        this.result[matchCount].count += 1;
+  #initializeResult() {
+    return Object.keys(PRIZES).reduce((acc, key) => {
+      acc[key] = { count: 0, prize: PRIZES[key] };
+      return acc;
+    }, []);
+  }
+
+  #calculateResults() {
+    this.#tickets.forEach((ticket) => {
+      const matchCount = ticket.matchNumbers(this.#winningNumbers);
+      const isBonusMatch = matchCount === 5 && ticket.includesBonusNumber(this.#bonusNumber);
+      const key = isBonusMatch ? '5+1' : matchCount;
+      if (this.#result[key]) {
+        this.#result[key].count += 1;
       }
     });
   }
 
-  getMatchCount(ticket) {
-    return ticket.numbers.filter((number) => this.winningNumbers.includes(number)).length;
-  }
-
   getFormattedResultString() {
-    const resultStrings = Object.entries(this.result).map(([match, data]) => {
-      const matchText = match === '5+1' ? '5개 일치, 보너스 볼 일치' : `${match}개 일치`;
-      return `${matchText} (${data.prize.toLocaleString()}원) - ${data.count}개`;
-    });
-    return resultStrings;
+    const sortOrder = ['3', '4', '5', '5+1', '6'];
+    return sortOrder
+      .map((match) => {
+        const data = this.#result[match];
+        const matchText =
+          GAME_SETTINGS.MATCH_TEXTS[match] || `${match}${GAME_SETTINGS.MATCH_TEXTS.DEFAULT}`;
+        return `${matchText} (${data.prize.toLocaleString()}원) - ${data.count}개`;
+      })
+      .join('\n');
   }
 
   calculateProfitRate() {
-    const totalSpent = this.tickets.length * 1000;
-    const totalPrize = Object.values(this.result).reduce(
-      (acc, cur) => acc + cur.count * cur.prize,
-      0,
-    );
-    const profitRate = (totalPrize / totalSpent) * 100;
-    return Number(profitRate.toFixed(2));
+    const totalSpent = this.#tickets.length * 1000;
+    const totalPrize = this.#calculateTotalPrize();
+    return Number(((totalPrize / totalSpent) * 100).toFixed(2));
+  }
+
+  #calculateTotalPrize() {
+    return Object.values(this.#result).reduce((acc, { count, prize }) => acc + count * prize, 0);
   }
 }
