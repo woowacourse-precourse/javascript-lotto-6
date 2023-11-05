@@ -1,16 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
 import { prompt, result } from './constants/message.js';
-import Buyer from './Buyer.js';
+import BuyLotto from './BuyLotto.js';
 
 class App {
-  buyer = new Buyer();
+  buyLotto = new BuyLotto();
 
   async play() {
     const expense = await Console.readLineAsync(prompt.ASK_AMOUNT);
-    const lotteryTicketCount = this.buyer.buyLottoCount(expense);
+    const lotteryTicketCount = this.buyLotto.buyLottoCount(expense);
 
     Console.print(`\n${lotteryTicketCount}${result.PURCHASE}`);
   }
 }
-
 export default App;
