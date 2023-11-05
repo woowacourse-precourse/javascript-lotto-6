@@ -37,10 +37,10 @@ mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능
   - [ ] 입력한 값에 맞게 lottoBoard 만들기
   - [ ] purchasedLottoArray와 lottoBoard에 맞는 lottoResult 값 생성 
 - [ ] view
-  - [ ] input
-    - [ ] 로또 구입 금액 입력
-    - [ ] 당첨번호 입력
-    - [ ] 보너스 번호 입력
+  - [x] input
+    - [x] 로또 구입 금액 입력
+    - [x] 당첨번호 입력
+    - [x] 보너스 번호 입력
   - [ ] output
     - [ ] 발행한 로또 수량 및 번호 출력
     - [ ] 당첨통계 출력
