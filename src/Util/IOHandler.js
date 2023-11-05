@@ -9,4 +9,10 @@ export default class IO {
   static print(input) {
     Console.print(input);
   }
+
+  static stringConverter(string) {
+    const aryStrings = string.split(",").map((el) => el.trim());
+    const aryNumbers = aryStrings.map((el) => parseInt(el, 10));
+    return aryNumbers;
+  }
 }
