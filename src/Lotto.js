@@ -71,6 +71,11 @@ class Lotto {
     const rankArr = Object.entries(rankBoard);
     return rankArr.reduce((money, [rank, count]) => money + count * rankMoney[rank], 0);
   }
+
+  static getProfitAbility(initalMoney, finalMoney) {
+    const profitAbility = finalMoney / initalMoney;
+    return (profitAbility * 100).toFixed(1);
+  }
 }
 
 export default Lotto;

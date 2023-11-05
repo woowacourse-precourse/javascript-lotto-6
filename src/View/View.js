@@ -39,7 +39,7 @@ export default class View {
     this.#outputView.print(MessageFormat.rankResult(rankBoard));
   }
 
-  printRevenue(revenue) {
-    this.#outputView.print()
+  printProfitAbility(profitAbility) {
+    this.#outputView.print(MessageFormat.profitAbilityResult(profitAbility));
   }
 }
