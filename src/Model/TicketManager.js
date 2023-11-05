@@ -1,7 +1,6 @@
 import { pickUniqueNumbersInRange } from '../../utils/index.js';
 import { LOTTO } from '../../constants/index.js';
-import Lotto from './Lotto.js';
-import BonusNumber from '../Model/BonusNumber.js'
+
 class TicketManager {
     constructor() {
         this.tickets = [];
@@ -49,16 +48,5 @@ class TicketManager {
     }
 }
 
-const tick = new TicketManager();
-
-tick.tickets.push([1,2,3,4,5,7]);
-tick.tickets.push([1,2,3,4,5,6]);
-tick.tickets.push([1,2,3,4,9,10]);
-tick.tickets.push([1,2,3,11,12,13]);
-const lotto = new Lotto([1,2,3,4,5,6]);
-const bonus = new BonusNumber(7);
-tick.countMatchAllNumber(lotto,bonus);
-console.log(tick.getTickets());
-console.log(tick.matches);
 
 export default TicketManager;
