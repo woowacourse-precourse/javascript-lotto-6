@@ -26,6 +26,10 @@ class App {
     
     while (1) {
       const randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+
+      if (!Array.isArray(randomNums)) {
+        throw new Error(ERROR_MESSAGE.RANDOM_ERROR);
+      }
       randomNums.sort((a, b) => a - b); // 오름차순 정렬
       if (!randomNums.includes(userRandomNums)) {
         userRandomNums.push(randomNums);
