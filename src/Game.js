@@ -3,7 +3,7 @@ import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import getUserInput from './utils/getUserInput.js';
 import createLottoNumbers from './utils/createLottoNumbers.js';
-import { LOTTO, MATCHING_COUNT } from './constants/lotto.js';
+import { LOTTO, MATCHING_COUNT, LOTTO_PRIZE } from './constants/lotto.js';
 import { INPUT_MESSAGE, PURCHASE_MESSAGE } from './constants/messages.js';
 import {
   validateMinimumAmount,
@@ -36,7 +36,7 @@ class Game {
       this.#winningLotto.getNumbers(),
       this.#bonusNumber,
     );
-    console.log(rankCountResult);
+    this.calculateRate(Number(purchaseAmount), rankCountResult);
   }
 
   validate(amount) {
@@ -117,6 +117,16 @@ class Game {
       return 5;
     }
     return 0;
+  }
+
+  calculateRate(purchaseAmount, rankCount) {
+    const totalPrize = rankCount.reduce((acc, count, idx) => {
+      return acc + count * LOTTO_PRIZE[idx];
+    }, 0);
+
+    const returnRate = (totalPrize / purchaseAmount) * 100;
+
+    return Number(returnRate.toFixed(1));
   }
 
   getLottos() {
