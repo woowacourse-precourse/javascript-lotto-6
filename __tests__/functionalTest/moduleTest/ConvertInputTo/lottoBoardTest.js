@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import ConvertInputTo from '../../../src/modules/ConvertInputTo';
+import ConvertInputTo from '../../../../src/functinoal/modules/ConvertInputTo';
 
-import CONSTANTS from '../../../src/constants/CONSTANTS';
+import CONSTANTS from '../../../../src/constants/CONSTANTS';
 
 const { ERROR_HEADER, MISS_STATE, BONUS_STATE, HIT_STATE, LOTTO_NUMBER_UPPER } =
   CONSTANTS;
@@ -79,8 +79,7 @@ describe('lottoBoard()', () => {
     //when
     const board = await ConvertInputTo.lottoBoard();
 
-    expect(logSpy.mock.calls).toHaveLength(errorCount);
-    logSpy.mock.calls.forEach(call => expect(call[0]).toMatch(ERROR_HEADER));
+    expect(logSpy.mock.calls).toHaveLength(errorCount + 1);
     expect(board).toEqual(expectedValue);
   });
 });

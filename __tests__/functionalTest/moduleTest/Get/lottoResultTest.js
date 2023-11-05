@@ -1,7 +1,7 @@
-import Get from '../../../src/modules/Get.js';
-import Lotto from '../../../src/Lotto.js';
+import Get from '../../../../src/functinoal/modules/Get';
+import Lotto from '../../../../src/Lotto';
 
-import CONSTANTS from '../../../src/constants/CONSTANTS.js';
+import CONSTANTS from '../../../../src/constants/CONSTANTS';
 
 const { MISS_STATE, BONUS_STATE, HIT_STATE, LOTTO_NUMBER_UPPER } = CONSTANTS;
 

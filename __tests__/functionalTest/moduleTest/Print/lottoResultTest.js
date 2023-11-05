@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import Print from '../../../src/modules/Print.js';
+import Print from '../../../../src/functinoal/modules/Print';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(Console, 'print');
@@ -11,7 +11,6 @@ const lottoResultTestInput = [
   [
     [0, 1, 0, 3, 2, 0, 0, 0, 1, 0, 1, 0, 1],
     [
-      '',
       '당첨 통계',
       '---',
       '3개 일치 (5,000원) - 0개',
@@ -24,7 +23,6 @@ const lottoResultTestInput = [
   [
     [0, 0, 1, 1, 0, 0, 4, 3, 5, 0, 5, 1, 0],
     [
-      '',
       '당첨 통계',
       '---',
       '3개 일치 (5,000원) - 7개',
@@ -37,7 +35,6 @@ const lottoResultTestInput = [
   [
     [5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0],
     [
-      '',
       '당첨 통계',
       '---',
       '3개 일치 (5,000원) - 0개',

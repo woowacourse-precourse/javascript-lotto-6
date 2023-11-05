@@ -1,4 +1,4 @@
-import Get from '../../../src/modules/Get.js';
+import Get from '../../../../src/functinoal/modules/Get';
 
 test.each([
   [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 100, 0],

@@ -1,4 +1,4 @@
-import Get from '../../../src/modules/Get.js';
+import Get from '../../../../src/functinoal/modules/Get';
 
 test.each([[1], [2], [6], [10]])('lottoArray', input => {
   //when

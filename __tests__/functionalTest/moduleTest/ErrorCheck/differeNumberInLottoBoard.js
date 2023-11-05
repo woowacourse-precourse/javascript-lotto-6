@@ -1,6 +1,6 @@
-import ErrorCheck from '../../../src/modules/ErrorCheck';
+import ErrorCheck from '../../../../src/functinoal/modules/ErrorCheck';
 
-import CONSTANTS from '../../../src/constants/CONSTANTS';
+import CONSTANTS from '../../../../src/constants/CONSTANTS';
 
 const { ERROR_HEADER, LOTTO_NUMBER_UPPER, MISS_STATE, HIT_STATE } = CONSTANTS;
 

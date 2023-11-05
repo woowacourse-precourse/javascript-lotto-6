@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import ConvertInputTo from '../../../src/modules/ConvertInputTo';
+import ConvertInputTo from '../../../../src/functinoal/modules/ConvertInputTo';
 
-import CONSTANTS from '../../../src/constants/CONSTANTS';
+import CONSTANTS from '../../../../src/constants/CONSTANTS';
 
 const { ERROR_HEADER } = CONSTANTS;
 
