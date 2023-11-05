@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './constants.js';
+import { ERROR_MESSAGE, LOTTO_NUMBERS } from './constants.js';
 
 const Validation = {
   isNumber(inputLottoNumber) {
@@ -9,21 +9,23 @@ const Validation = {
   },
 
   numberCountLength(inputLottoNumber) {
-    if (inputLottoNumber.length !== 6) {
+    if (inputLottoNumber.length !== LOTTO_NUMBERS.NUMBER_SIZE) {
       throw new Error(ERROR_MESSAGE.COUNT);
     }
     return true;
   },
 
   dupliCatedNum(inputLottoNumber) {
-    if (new Set(inputLottoNumber).size !== 6) {
+    if (new Set(inputLottoNumber).size !== LOTTO_NUMBERS.NUMBER_SIZE) {
       throw new Error(ERROR_MESSAGE.DUPLICATED);
     }
     return true;
   },
 
-  numberRange() {
-    if (!numbers.every((n) => Number.isInteger(n) && n >= 1 && n <= 45)) {
+  numberRange(inputLottoNumber) {
+    if (
+      !inputLottoNumber.every((n) => Number.isInteger(n) && n >= 1 && n <= 45)
+    ) {
       throw new Error(ERROR_MESSAGE.RANGE);
     }
     return true;
