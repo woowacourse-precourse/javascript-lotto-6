@@ -21,6 +21,14 @@ class Lotto {
       pick = Random.pickUniqueNumbersInRange(1, 45);
       if (!lottoNumberList.includes(pick)) lottoNumberList.push(pick);
     }
+    return lottoNumberList;
+  }
+
+  sortAscending(numList) {
+    const result = [...numList];
+    return result.sort((a, b) => {
+      return a - b;
+    });
   }
 }
 
