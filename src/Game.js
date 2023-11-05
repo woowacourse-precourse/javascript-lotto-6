@@ -77,10 +77,9 @@ class Game {
 
   async createBonusNumber() {
     try {
-      const input = await getUserInput(INPUT_MESSAGE.bonusNumber);
-      const bonusNumber = Number(input);
+      const bonusNumber = await getUserInput(INPUT_MESSAGE.bonusNumber);
       this.validateBonusNumber(bonusNumber);
-      this.#bonusNumber = bonusNumber;
+      this.#bonusNumber = Number(bonusNumber);
     } catch (error) {
       Console.print(error.message);
       await this.createBonusNumber();
@@ -90,8 +89,8 @@ class Game {
   validateBonusNumber(number) {
     const winningNumbers = this.#winningLotto.getNumbers();
     validateNumberType(number);
-    validateLottoRange(number);
-    validateExistingNumber(number, winningNumbers);
+    validateLottoRange(Number(number));
+    validateExistingNumber(Number(number), winningNumbers);
   }
 
   purchaseLotto(amount) {
