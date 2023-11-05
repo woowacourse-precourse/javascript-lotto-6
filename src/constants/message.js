@@ -14,4 +14,8 @@ export const ERROR_MESSAGE = {
   INVALID_SELLING_PRISE: `최소 구매 금액은 ${LOTTO.SELLING_PRISE}입니다.`,
   RECEIVE_LESS_THAN_MINIMUM_PURCHASE_PRISE: `최소 구매 금액은 ${LOTTO.SELLING_PRISE}입니다.`,
   INVALID_PURCHASE_PRISE_CURRENCY: `${LOTTO.SELLING_PRISE}원 단위로 입력해주세요 !`,
+  INVALID_NUMBERS_COUNT: '로또 번호는 6개여야 합니다.',
+  EXIST_DUPLICATE_NUMBER: '발행된 로또번호에 중복이 있습니다.',
+  EXIST_OVER_RANGE_NUMBER: `발행 가능한 번호의 범위 외의 값이 있습니다. (로또 번호 범위 : ${LOTTO.NUMBER_RANGE.MIN}~${LOTTO.NUMBER_RANGE.MAX})`,
+  EXIST_NOT_NUMBER_TYPE: '숫자형이 아닌 값이 있습니다.',
 };
