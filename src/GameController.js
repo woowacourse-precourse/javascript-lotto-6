@@ -14,6 +14,7 @@ class GameController {
     await this.getMoney();
     this.createLottos();
     this.printLottoInfo();
+    this.getWinningNumbers();
   }
 
   async getMoney() {
@@ -43,6 +44,17 @@ class GameController {
     OutputView.printLineBreak();
     OutputView.printNumberOfLottos(this.#lottoMachine.numberOfLottos);
     OutputView.printLottos(this.#lottoMachine.lottos);
+  }
+
+  async getWinningNumbers() {
+    while (true) {
+      try {
+        const winningNumber = await InputView.inputWinningNumbers();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
 

@@ -16,6 +16,13 @@ class InputView {
       throw new CustomError(ERROR.input.invalidMoney);
     }
   }
+
+  static async inputWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(
+      MESSAGE.input.winningNumber,
+    );
+    return winningNumbers;
+  }
 }
 
 export default InputView;
