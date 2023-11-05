@@ -1,10 +1,10 @@
-import { BASEAMOUNT, ERROR_MESSAGE, NUMBERREGEX } from "./CONSTANT.js";
+import { BASE_AMOUNT, ERROR_MESSAGE, NUMBER_REGEX } from "./CONSTANT.js";
 
 const isEmpty = (value) => value === "";
 
-const isNumber = (value) => NUMBERREGEX.test(value);
+const isNumber = (value) => NUMBER_REGEX.test(value);
 
-const isInMultiplesOfThousand = (value) => value % BASEAMOUNT;
+const isInMultiplesOfThousand = (value) => value % BASE_AMOUNT;
 
 const validatePurchase = (purchaseAmount) => {
   if (isEmpty(purchaseAmount)) {

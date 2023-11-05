@@ -55,14 +55,16 @@ const RANKS = [
   },
 ];
 
-const BASEAMOUNT = 1000;
-const NUMBERREGEX = /^[0-9]+$/;
+const BASE_AMOUNT = 1000;
+const NUMBER_REGEX = /^[0-9]+$/;
+const NUMBER_COUNT = 6;
 
 export {
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
   ERROR_MESSAGE,
   RANKS,
-  BASEAMOUNT,
-  NUMBERREGEX,
+  BASE_AMOUNT,
+  NUMBER_REGEX,
+  NUMBER_COUNT,
 };
