@@ -1,7 +1,7 @@
 import { ERROR_MESSAGE } from "../constants/constants.js";
 
-export const inputPerChaseValidation = (perchase) => {
-    if (!Number.isInteger(perchase / 1000)) {
+export const inputPerChaseValidation = (price) => {
+    if (!Number.isInteger(price / 1000)) {
         throw new Error(ERROR_MESSAGE.perchaseError);
     }
 };

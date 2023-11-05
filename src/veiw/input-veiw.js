@@ -4,9 +4,9 @@ import { inputPerChaseValidation } from "../validation/input-validation.js";
 
 class InputVeiw{
     async readPurchaseAmount() {
-        const inputMoney = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
-        inputPerChaseValidation(inputMoney);
-        return inputMoney / 1000;
+        const inputPrice = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
+        inputPerChaseValidation(inputPrice);
+        return inputPrice / 1000;
     }
 
     async readWinningNumber() {
