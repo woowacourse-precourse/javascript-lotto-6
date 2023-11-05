@@ -1,4 +1,5 @@
 import InputView from './Views/InputView.js';
+import Validator from '../utils/Validator.js';
 
 class LottoController {
   async play() {
@@ -7,6 +8,7 @@ class LottoController {
 
   async readPurchaseAmount() {
     const purchaseAmount = await InputView.readPurchaseAmount();
+    Validator.validatePurchaseAmount(purchaseAmount);
   }
 }
 
