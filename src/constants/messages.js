@@ -7,6 +7,10 @@ const MESSAGES = {
   inputLimitMessage: `${NUMBERS.maxPerchaseAmount}원이 넘지 않게 입력해주세요.`,
   emptyPurchaseAmountInput: '금액을 입력해주세요.',
   purchaseQuantity: '개를 구매했습니다.',
+  userLottoNumberInput: `${NUMBERS.minLottoNumber}~${NUMBERS.maxLottoNumber}사이의 당첨 번호 ${NUMBERS.lottoNumberLength}개를 입력해 주세요.`,
+  invalidLength: `${NUMBERS.lottoNumberLength}개의 숫자를 입력해주세요`,
+  invalidRange: `${NUMBERS.minLottoNumber}~${NUMBERS.maxLottoNumber}사이의 번호를 입력해주세요.`,
+  duplicatedNumber: '중복되지 않은 숫자를 입력해주세요',
 };
 
 Object.freeze(MESSAGES);

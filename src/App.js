@@ -1,7 +1,11 @@
+import { Console } from '@woowacourse/mission-utils';
 import { printMessage } from './utils/printMessage.js';
 import MESSAGES from './constants/messages.js';
 import NUMBERS from './constants/numbers.js';
-import isValidPerchaseAmount from './utils/validator.js';
+import {
+  isValidPerchaseAmount,
+  isValidLottoNumber,
+} from './utils/validator.js';
 import Lotto from './Lotto.js';
 import makeLottoNumbers from './utils/makeLottoNumbers.js';
 
@@ -17,6 +21,11 @@ class App {
     );
     printMessage(`${perchaseQuentity}${MESSAGES.purchaseQuantity}`);
     makeLottoNumbers(perchaseQuentity);
+    const userNumber = await Console.readLineAsync(
+      MESSAGES.userLottoNumberInput,
+    );
+    const userLottoNumberInput = userNumber.split(',');
+    isValidLottoNumber(userLottoNumberInput);
   }
 }
 
