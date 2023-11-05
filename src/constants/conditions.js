@@ -22,10 +22,10 @@ const PRIZE_MONEY = Object.freeze({
 });
 
 const MATCH_COUNTS = Object.freeze({
-  threeMatch: 3,
-  fourMathch: 4,
-  fiveMatch: 5,
-  allMatch: 6,
+  three: 3,
+  four: 4,
+  five: 5,
+  all: 6,
 });
 
 const RANKING = Object.freeze({

@@ -25,19 +25,18 @@ const OutputView = {
   },
 
   getResultStringTemplate(winningResult) {
-    return [
-      { label: RESULT_MESSAGE.threeMatch, count: winningResult.threeMatching },
-      { label: RESULT_MESSAGE.fourMatch, count: winningResult.fourMatching },
-      {
-        label: RESULT_MESSAGE.fiveMatchNotBonus,
-        count: winningResult.fiveMatchingNotBonus,
-      },
-      {
-        label: RESULT_MESSAGE.fiveMatchAndBonus,
-        count: winningResult.fiveMatchingAndBonus,
-      },
-      { label: RESULT_MESSAGE.allMatch, count: winningResult.allMatching },
+    const matchingCounts = [...winningResult.values()];
+    const messages = [
+      RESULT_MESSAGE.threeMatch,
+      RESULT_MESSAGE.fourMatch,
+      RESULT_MESSAGE.fiveMatchNotBonus,
+      RESULT_MESSAGE.fiveMatchAndBonus,
+      RESULT_MESSAGE.allMatch,
     ];
+    return messages.map((message, i) => ({
+      label: message,
+      count: matchingCounts[i],
+    }));
   },
 };
 

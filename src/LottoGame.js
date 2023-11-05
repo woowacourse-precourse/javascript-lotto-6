@@ -5,8 +5,6 @@ import {
   LOTTO_TICKET_PRICE,
   MATCH_COUNTS,
   PERCENTAGE,
-  PRIZE_MONEY,
-  RANKING,
 } from './constants/conditions.js';
 
 export default class LottoGame {
@@ -18,20 +16,16 @@ export default class LottoGame {
 
   #matchingTable;
 
-  #rankingList;
-
   constructor(autoLottos, winningLotto, bonus) {
     this.#autoLottos = autoLottos;
     this.#winningLotto = winningLotto;
     this.#bonus = bonus;
     this.#matchingTable = new MatchingTable();
-    this.#rankingList = [];
   }
 
   getWinningResult() {
     this.#countMatchingNumbers();
-    this.#matchingTable.updateMatchingCount(this.#rankingList);
-    return this.#matchingTable.getMatchingTable();
+    return this.#matchingTable.getTable();
   }
 
   #countMatchingNumbers() {
@@ -40,22 +34,18 @@ export default class LottoGame {
       acc.forEach((winningNum) => {
         if (autoLotto.includes(winningNum)) count += COUNT.plus;
       });
-      this.#updateRankingList(autoLotto, count);
+      this.#updateMatchingTable(autoLotto, count);
       return acc;
     }, this.#winningLotto);
   }
 
-  #updateRankingList(autoLotto, count) {
-    if (count === MATCH_COUNTS.threeMatch)
-      this.#rankingList.push(RANKING.fifth);
-    if (count === MATCH_COUNTS.fourMathch)
-      this.#rankingList.push(RANKING.fourth);
-    if (count === MATCH_COUNTS.fiveMatch) {
+  #updateMatchingTable(autoLotto, count) {
+    if (count === MATCH_COUNTS.five) {
       if (autoLotto.includes(this.#bonus))
-        this.#rankingList.push(RANKING.second);
-      else this.#rankingList.push(RANKING.third);
+        this.#matchingTable.updateTable(count, true);
+      else this.#matchingTable.updateTable(count, false);
     }
-    if (count === MATCH_COUNTS.allMatch) this.#rankingList.push(RANKING.first);
+    this.#matchingTable.updateTable(count);
   }
 
   getRateOfReturn() {
@@ -67,12 +57,9 @@ export default class LottoGame {
 
   #getIncome() {
     let income = 0;
-    this.#rankingList.forEach((ranking) => {
-      if (ranking === RANKING.fifth) income += PRIZE_MONEY.fifth;
-      if (ranking === RANKING.fourth) income += PRIZE_MONEY.fourth;
-      if (ranking === RANKING.third) income += PRIZE_MONEY.third;
-      if (ranking === RANKING.second) income += PRIZE_MONEY.second;
-      if (ranking === RANKING.first) income += PRIZE_MONEY.first;
+    const table = this.#matchingTable.getTable();
+    table.forEach((count, { prize }) => {
+      income += prize * count;
     });
     return income;
   }

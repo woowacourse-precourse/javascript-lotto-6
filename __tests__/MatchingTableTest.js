@@ -1,17 +1,33 @@
 import MatchingTable from '../src/MatchingTable';
 
-describe('로또 당첨내역 테스트', () => {
-  test('당첨순위를 전달하면 순위에 맞게 몇 개의 로또를 맞췄는지 매칭테이블 생성', () => {
-    const matchingTable = new MatchingTable();
-    const rankingList = [5, 4, 3, 2, 1];
-    matchingTable.updateMatchingCount(rankingList);
+describe('매칭 테이블 테스트', () => {
+  test('로또번호와 일치 갯수에 맞게 매칭 테이블을 업데이트합니다.', () => {
+    const mapTable = new MatchingTable();
+    const updatedTable = mapTable.updateTable(3);
+    const entry = [...updatedTable].find(
+      ([key, value]) => key.matchCount === 3,
+    );
 
-    expect(matchingTable.getMatchingTable()).toEqual({
-      threeMatching: 1,
-      fourMatching: 1,
-      fiveMatchingNotBonus: 1,
-      fiveMatchingAndBonus: 1,
-      allMatching: 1,
-    });
+    expect(entry[1]).toBe(1);
+  });
+
+  test('5개가 일치하고 보너스 번호가 일치합니다.', () => {
+    const mapTable = new MatchingTable();
+    const updatedTable = mapTable.updateTable(5, true);
+    const entry = [...updatedTable].find(
+      ([key, value]) => key.matchCount === 5 && key.isBonusMatch,
+    );
+
+    expect(entry[1]).toBe(1);
+  });
+
+  test('5개가 일치하고 보너스 번호가 일치하지 않습니다.', () => {
+    const mapTable = new MatchingTable();
+    const updatedTable = mapTable.updateTable(5, false);
+    const entry = [...updatedTable].find(
+      ([key, value]) => key.matchCount === 5 && !key.isBonusMatch,
+    );
+
+    expect(entry[1]).toBe(1);
   });
 });
