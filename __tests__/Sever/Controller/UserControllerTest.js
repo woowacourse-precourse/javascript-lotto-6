@@ -1,21 +1,11 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import UserController from '../../../src/Server/Spring/Annotation/@Controller/UserController.js';
-import InputView from '../../../src/Client/InputView.js';
+import User from '../../../src/Server/Spring/VO/User.js';
 
-const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
-
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-    return Promise.resolve(input);
-  });
-};
-
-describe('User 테스트', () => {
+describe('UserController 테스트', () => {
   let userController;
-  let purchaseAmount;
+  const purchaseAmount = '8000';
   beforeEach(() => {
-    purchaseAmount = '8000';
     userController = new UserController();
   });
 
@@ -28,8 +18,19 @@ describe('User 테스트', () => {
 
   describe(`사용자로부터 ${purchaseAmount}를 입력받는다.`, () => {
     test('requestMapping을 실행 후 반환받은 modelAndView 객체의 view값은 LottoPos다.', () => {
+      // when
       const modelAndView = userController.requestMapping(purchaseAmount);
+
+      // then
       expect(modelAndView.view).toBe('LottoPos');
+    });
+
+    test('requestMapping을 실행 후 반환받은 modelAndView 객체의 data값은 user객체이다.', () => {
+      // when
+      const modelAndView = userController.requestMapping(purchaseAmount);
+      console.log(modelAndView);
+      // then
+      expect(modelAndView.model.data).toBeInstanceOf(User);
     });
   });
 });
