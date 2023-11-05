@@ -16,8 +16,18 @@ const Validate = {
     }
   },
   checkNumberRange(number) {
-    if (number < 1 || number > 45) {
+    const pattern = /^[0-9]+$/;
+    if (!pattern.test(number)) {
+      throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.');
+    } else if (number < 1 || number > 45) {
       throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }
+  },
+  checkIncludeComma(numbers) {
+    if (!numbers.includes(',')) {
+      throw new Error(
+        '[ERROR] 로또 번호는 쉼표(,)를 기준으로 구분해야 합니다.'
+      );
     }
   },
 };

@@ -17,6 +17,8 @@ const Input = {
       const numbers = await Console.readLineAsync(
         '당첨 번호를 입력해 주세요.\n'
       );
+      Validate.checkIncludeComma(numbers);
+
       const NumberList = numbers.split(',');
       Validate.checkDuplicateNumber(NumberList);
       NumberList.forEach((number) => Validate.checkNumberRange(number));
