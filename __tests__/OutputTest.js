@@ -2,6 +2,7 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Input from "../src/view/Input";
 import Output from "../src/view/Output";
 import Player from "../src/model/Player";
+import LottoGame from "../src/LottoGame";
 
 const mockQuestions = (inputs) => {
   Console.readLineAsync = jest.fn();
@@ -60,6 +61,31 @@ describe("Output class 출력 테스트", () => {
     const money = await Input.getMoney();
     const player = new Player(money);
     Output.printLotto(player);
+    logs.forEach((log) =>
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log))
+    );
+  });
+
+  test("당첨 금액과 수익률 출력 테스트", async () => {
+    //given
+    const logSpy = getLogSpy();
+
+    //when
+    const game = new LottoGame();
+    game.print([0, 0, 0, 0, 0, 1], "50.0");
+
+    //then
+    const logs = [
+      "당첨내역",
+      "---",
+      "3개 일치 (5,000원) - 1개",
+      "4개 일치 (50,000원) - 0개",
+      "5개 일치 (1,500,000원) - 0개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+      "6개 일치 (2,000,000,000원) - 0개",
+      "총 수익률은 50.0% 입니다.",
+    ];
+
     logs.forEach((log) =>
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log))
     );
