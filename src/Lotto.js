@@ -1,3 +1,5 @@
+import AppError from './constant/AppError.js';
+
 class Lotto {
   #numbers;
 
@@ -23,19 +25,20 @@ class Lotto {
   }
 
   checkNumber(Number, bonusNumber) {
-    let Count = 0;
+    let lottoCount = 0; // 수정된 부분
     for (const num of this.#numbers) {
       if (Number.includes(num)) {
-        Count++;
+        lottoCount++; // 수정된 부분
       }
     }
-    const bonus = this.#numbers.includes(bonusNumber);
+    const bonusIncluded = this.#numbers.includes(bonusNumber); // 수정된 부분
   
     return {
-      Count: Count,
-      bonus: bonus,
+      lottoCount: lottoCount, // 수정된 부분
+      bonusIncluded: bonusIncluded, // 수정된 부분
     };
   }
+  
 }
 
 export default Lotto;

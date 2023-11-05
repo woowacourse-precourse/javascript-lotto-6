@@ -38,6 +38,7 @@ ${formattedLottoInfos}`;
     six: 0,
   }
 };
+
 Object.freeze(MESSAGE.input);
 Object.freeze(MESSAGE.output);
 Object.freeze(MESSAGE.money);

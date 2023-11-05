@@ -7,7 +7,7 @@ const issueLotto = () => {
   return new Lotto(lottoNumbers);
 };
 
-class LottoMachine {
+class Computer{
   #price;
 
   constructor(price = 1000) {
@@ -20,4 +20,4 @@ class LottoMachine {
   }
 }
 
-export default LottoMachine;
+export default Computer;

@@ -4,12 +4,16 @@ import MESSAGE from "../constant/Message.js";
 
 class Output {
     
-    printLottoPurchaseInformation(lottoInformations) {
+    PurchaseInformation(lottoInformations) {
       Console.print(MESSAGE.output.purchaseInformation(lottoInformations));
     }
   
-    printStatistics(totalLottoResult, profitRate) {
+    Statistics(totalLottoResult, profitRate) {
       Console.print(MESSAGE.output.statistics(totalLottoResult, profitRate));
+    
+    }
+    print(message) {
+      Console.print(message);
     }
   }
   

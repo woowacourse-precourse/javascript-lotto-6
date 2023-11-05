@@ -1,48 +1,60 @@
 import AppError from "../constant/AppError.js";
-
+import LOTTOERROR from "../constant/LottoError.js"
 
 
 class Validate {
+
   validateAmount(input) {
-    if (!AppError.REGEX.number.test(input)) {
-      throw new AppError(AppError.ERROR_MESSAGE.amount);
+    if (!LOTTERROR.regex.number.test(input)) { // 수정된 부분
+      throw new AppError(LOTTOERROR.errormessage.amount);
     }
     if (input.slice(-3) !== "000") {
-      throw new AppError(AppError.ERROR_MESSAGE.unit);
+      throw new AppError(LOTTOERROR.errormessage.unit);
     }
   }
 
-  validateWinningNumbers(input) {
+
+validateAmount(input) {
+  if (!LOTTOERROR.regex.number.test(input)) { // 수정된 부분
+    throw new AppError(LOTTOERROR.errormessage.amount);
+  }
+  if (input.slice(-3) !== "000") {
+    throw new AppError(LOTTOERROR.errormessage.unit);
+  }
+}
+
+
+  validateNumbers(input) {
     const nums = input.split(",");
-    if (nums.findIndex((num) => !AppError.REGEX.lottoNumber.test(num)) !== -1) {
+    if (nums.findIndex((num) => !LOTTOERROR.regex.lottoNumber.test(num)) !== -1) {
       throw new AppError(
-        AppError.ERROR_MESSAGE.anotherNumber
+        LOTTOERROR.errormessage.anotherNumber
       );
     }
     if (nums.length !== 6) {
       throw new AppError(
-        AppError.ERROR_MESSAGE.anotherLength
+        LOTTOERROR.errormessage.anotherLength
       );
     }
     if (new Set(nums).size < 6) {
       throw new AppError(
-        AppError.ERROR_MESSAGE.duplication
+        LOTTOERROR.errormessage.duplication
       );
     }
   }
 
-  validateBonusNumber(input, winningNumbers) {
-    if (!AppError.REGEX.lottoNumber.test(input)) {
+  validateBonusNumber(input, Number) {
+    if (!LOTTOERROR.REGEX.lottoNumber.test(input)) {
       throw new AppError(
-        AppError.ERROR_MESSAGE.anotherNumber
+        LOTTOERROR.errormessage.anotherNumber
       );
     }
-    if (winningNumbers.includes(Number(input))) {
+    if (Number.includes(Number(input))) {
       throw new AppError(
-        AppError.ERROR_MESSAGE.duplication
+        LOTTOERROR.errormessage.duplication
       );
     }
   }
 }
 
-export default InputValidator;
+export default Validate;

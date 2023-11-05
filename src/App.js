@@ -1,35 +1,39 @@
-import INPUT from "../view/Input.js";
-import OUTPUT from "../view/Output.js";
-import COMPUTER from "./Computer.js";
-import AppError from "../constant/AppError.js";
-import MESSAGE from "../constant/Message.js";
-import CALCULATE from "../calculate/Calculate.js";
+import INPUT from './view/Input.js';
+import OUTPUT from './view/Output.js';
+import COMPUTER from './Computer.js';
+import AppError from './constant/AppError.js';
+import CALCULATE from './calculate/Calculate.js';
+import { AppError, ERROR_TYPE } from './constant/AppError.js'; // 수정된 부분
+
 
 class App {
-  async play() {
-    try {
-      const amount = await INPUT.Price();
-      const lotteries = COMPUTER.sell(amount);
-      OUTPUT.printLottoPurchaseInformation(lotteries.map(lotto => lotto.getInformation()));
-      
-      const Number = await INPUT.Number();
-      const bonusNumber = await INPUT.BonusNumber(Number);
-      const lottoResult = lotteries.map(lotto => lotto.checkNumbers(Number, bonusNumber));
-      
-      const finalResult = CALCULATE.calculateTotalResult(lottoResult);
-      const Rate = CALCULATE.calculateProfitRate(finalResult, amount);
-      this.OUTPUT.printStatistics(finalResult, Rate);
-    } catch (error) {
-      if (error instanceof AppError) {
-        Consle.print(error.message);
-        await this.play();
-      }
-      throw error;
-    }
+  constructor() {
+    this.input = new INPUT();
+    this.output = new OUTPUT();
+    this.computer = new COMPUTER();
+    this.calculate = new CALCULATE();
   }
 
- 
+  async play() {
+    try {
+      const amount = await this.input.Price();
+      const lotteries = this.computer.sell(amount);
+      this.output.PurchaseInformation(lotteries.map(Lotto => Lotto.getInformation()));
+
+      const Number = await this.input.Number();
+      const bonusNumber = await this.input.BonusNumber(Number);
+      const lottoResult = lotteries.map(lotto => lotto.checkNumber(Number, bonusNumber));
+
+      const finalResult = this.calculate.calculateResult(lottoResult);
+      const Rate = this.calculate.calculateRate(finalResult, amount);
+      this.output.Statistics(finalResult, Rate);
+    }catch (error) {
+      if (error instanceof AppError && error.type === ERROR_TYPE.inputError) {
+        this.input.print(error.message);
+      } else {
+        throw error;
+      }
+    }
+  }
 }
-
 export default App;
-
