@@ -1,5 +1,9 @@
+import InputView from '../view/InputView.js';
+
 class GameController {
-  constructor() {}
+  constructor() {
+    this.inputView = new InputView();
+  }
 
   async start() {}
 }
