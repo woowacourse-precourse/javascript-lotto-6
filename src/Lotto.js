@@ -55,7 +55,7 @@ class Lotto {
    * @returns {LottoNumber[]}
    */
   getNumbers() {
-    return this.#numbers;
+    return Array.from(this.#numbers, (v) => v.getNumber());
   }
 
   /**

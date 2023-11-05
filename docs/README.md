@@ -81,6 +81,10 @@
     <th>설명</th>
   </tr>
   <tr>
+    <td>getNumber()</td>
+    <td><code>LottoNumber</code>의 숫자를 반환합니다.</td>
+  </tr>
+  <tr>
     <td>equal(number)</td>
     <td>입력받은 <code>LottoNumber</code>가 같은 인스턴스인지 비교합니다.</td>
   </tr>
@@ -110,7 +114,7 @@
   </tr>
   <tr>
     <td>getNumbers()</td>
-    <td><code>numbers</code>를 반환합니다.</td>
+    <td><code>numbers</code>를 숫자 배열로 변환해서 반환합니다.</td>
   </tr>
   <tr>
     <td>prepare(lotto)</td>
@@ -294,6 +298,7 @@
 
 - [x] LottoNumber
 
+  - [ ] `getNumber()` 호출 시 `LottoNumber`의 숫자를 반환한다.
   - [x] `equal(number)` 호출 시 같은 인스턴스인지 비교한다.
 
 - [x] LottoNumber 예외 처리
@@ -305,6 +310,7 @@
 
 - [x] Lotto
 
+  - [x] `getNumbers` 호출 시 `numbers`를 숫자 배열로 변환해서 반환한다.
   - [x] `match(number)` 호출 시 `numbers`에 해당 인자를 보유하였는지 확인한다.
   - [x] `prepare(lotto)` 호출 시 `lotto`와 몇 개의 숫자가 같은지 확인한다.
 

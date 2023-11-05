@@ -1,6 +1,20 @@
 import { LottoNumber } from '../../../src/domain/index.js';
 
 describe('LottoNumber 테스트', () => {
+  it.each([{ number: 1 }, { number: 2 }, { number: 3 }, { number: 45 }])(
+    '`getNumber()` 호출 시 `LottoNumber`의 숫자를 반환한다.',
+    ({ number }) => {
+      // given
+      const lottoNumber = LottoNumber.valueOf(number);
+
+      // when
+      const result = lottoNumber.getNumber();
+
+      // then
+      expect(result).toBe(number);
+    },
+  );
+
   it.each([{ number: 1 }, { number: 2 }, { number: 3 }, { number: 4 }])(
     '`equal(number)` 호출 시 같은 인스턴스인지 비교한다.',
     ({ number }) => {

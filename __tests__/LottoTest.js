@@ -15,20 +15,19 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  it.each([
-    { numbers: [1, 2, 3, 4, 5, 6] },
-    { numbers: [1, 2, 3, 4, 5, 6] },
-    { numbers: [1, 2, 3, 4, 5, 6] },
-  ])('`getNumbers` 호출 시 `numbers`를 반환한다.', ({ numbers }) => {
-    // given
-    const lotto = Lotto.of(numbers);
+  it.each([{ numbers: [1, 2, 3, 4, 5, 6] }, { numbers: [11, 12, 13, 14, 15, 16] }])(
+    '`getNumbers` 호출 시 `numbers`를 반환한다.',
+    ({ numbers }) => {
+      // given
+      const lotto = Lotto.of(numbers);
 
-    // when
-    const result = lotto.getNumbers();
+      // when
+      const result = lotto.getNumbers();
 
-    // then
-    expect(result).toEqual(Array.from(numbers, LottoNumber.valueOf));
-  });
+      // then
+      expect(result).toEqual(numbers);
+    },
+  );
 
   it.each([
     { numbers: [1, 2, 3, 4, 5, 6], number: LottoNumber.valueOf(1) },

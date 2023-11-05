@@ -19,9 +19,18 @@ class LottoNumber {
   static #numbers = Object.fromEntries(
     Array.from({ length: LottoNumber.MAX_NUMBER - LottoNumber.MIN_NUMBER + 1 }, (_, i) => [
       i + LottoNumber.MIN_NUMBER,
-      new LottoNumber(),
+      new LottoNumber(i + LottoNumber.MIN_NUMBER),
     ]),
   );
+
+  /**
+   * @type {number}
+   */
+  #number;
+
+  constructor(number) {
+    this.#number = number;
+  }
 
   static valueOf(number) {
     LottoNumber.#validate(number);
@@ -41,9 +50,14 @@ class LottoNumber {
     }
   }
 
+  getNumber() {
+    return this.#number;
+  }
+
   /**
    * 입력받은 LottoNumber가 같은 인스턴스인지 비교합니다.
    * @param {LottoNumber} number
+   * @returns {boolean}
    */
   equal(number) {
     return this === number;
