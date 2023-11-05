@@ -17,8 +17,9 @@ class App {
     let selectedNumber = [];
     for (let i = 0; i < count; i++) {
       selectedNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-      selectedNumber.sort((x, y) => x - y);
+      const lotto = new Lotto(selectedNumber);
 
+      selectedNumber = lotto.sortLottoList();
       this.LottoList.push(selectedNumber);
       Console.print(selectedNumber);
     }
@@ -29,6 +30,8 @@ class App {
     Console.print(lottoCount + "개를 구매했습니다.");
 
     this.getLottoList(lottoCount);
+
+    this.input;
   }
 }
 
