@@ -1,4 +1,5 @@
 import { 
+    PRIZE_MAP,
     RESULT_MESSAGES,
     MATCH,
 } from "../utils/Define";
