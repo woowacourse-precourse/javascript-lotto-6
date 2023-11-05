@@ -159,6 +159,16 @@ class LottoMachine {
     return bonusNumber;
   }
 
+  displayLottoTickets(lottoTicket) {
+    const TICKETS = lottoTicket.getLottoTickets();
+
+    MissionUtils.Console.print(`${TICKETS.length}개를 구매했습니다.`);
+
+    for (const TICKET of TICKETS) {
+      MissionUtils.Console.print(`${[TICKET.getLottoNumbers().join(", ")]}`);
+    }
+  }
+
   async drawWinningNumbers() {
     this.winningNumbers = new Set(await this.#askWinningNumbers());
     this.bonusNumber = await this.#askBonusNumber();
