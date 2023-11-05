@@ -1,33 +1,15 @@
-import { ERROR, LOTTO } from './constant/index.js';
+import LottoNumbers from './LottoNumbers.js';
 
-class Lotto {
+class Lotto extends LottoNumbers {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    super(numbers);
     this.#numbers = numbers;
   }
 
   getNumbers() {
     return [...this.#numbers];
-  }
-
-  #validate(numbers) {
-    if (numbers.length !== LOTTO.NUMBERS.LENGTH) {
-      throw new Error(ERROR.LOTTO_NUMBERS.LENGTH);
-    }
-
-    const isInvalidRange = numbers.some(
-      number => number < LOTTO.NUMBERS.MIN || number > LOTTO.NUMBERS.MAX
-    );
-    if (isInvalidRange) {
-      throw new Error(ERROR.LOTTO_NUMBERS.RANGE);
-    }
-
-    const uniqueNumbers = new Set(numbers);
-    if (uniqueNumbers.size !== LOTTO.NUMBERS.LENGTH) {
-      throw new Error(ERROR.LOTTO_NUMBERS.UNIQE);
-    }
   }
 }
 
