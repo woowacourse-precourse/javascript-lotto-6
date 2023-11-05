@@ -30,7 +30,7 @@ describe('게임 시작 기능 테스트', () => {
 
   test('입력값이 유효할 경우 구매기록을 반환', async () => {
     // given
-    const validInput = ['10000'];
+    const validInput = '10000';
     const createdPurchase = [
       [8, 21, 23, 41, 42, 43],
       [3, 5, 11, 16, 32, 38],
@@ -43,15 +43,21 @@ describe('게임 시작 기능 테스트', () => {
       [3, 4, 5, 6, 7, 8],
       [1, 3, 5, 15, 21, 40],
     ];
+    const parsedInput = 10000;
 
     mockInput(validInput);
     mockPurchase(createdPurchase);
 
     // when
-    const result = await getPurchase();
+    const result = await getPurchase(validInput);
 
     // then
-    expect(result).toEqual(createdPurchase);
+    expect(result).toEqual(
+      expect.objectContaining({
+        purchaseAmount: parsedInput,
+        purchasedLotto: createdPurchase,
+      }),
+    );
   });
 
   const invalidInputs = ['asdf', '0', '0000', '999', ';;;;'];
