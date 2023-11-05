@@ -58,6 +58,15 @@ export default class Domain {
     return true;
   }
 
+  setLotteryResult() {
+    this.#lottos.forEach((lotto) => {
+      const matching = lotto.checkLotto(this.#winnings, this.#bonus);
+      if (matching !== "") {
+        this.#lotteryResults[matching] += 1;
+      }
+    });
+  }
+
   get getWinnings() {
     return this.#winnings;
   }

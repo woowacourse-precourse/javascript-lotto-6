@@ -1,3 +1,5 @@
+import Utils from "./Utils.js";
+
 class Lotto {
   #numbers;
 
@@ -15,6 +17,13 @@ class Lotto {
   // TODO: 추가 기능 구현
   get getLottoNumbers() {
     return this.#numbers;
+  }
+
+  checkLotto(winnings, bonus) {
+    return Utils.rankLotto(
+      winnings.filter((winning) => this.#numbers.includes(winning)).length,
+      this.#numbers.includes(bonus) ? 1 : 0
+    );
   }
 }
 

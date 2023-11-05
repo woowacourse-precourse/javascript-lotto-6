@@ -40,8 +40,7 @@
   - [x] purchaseLottos - 입력받은 금액만큼 로또 인스턴스를 생성하여 배열로 할당
   - [x] setWinnings - `async` 입력받은 문자열 숫자 조합을 당첨 번호 숫자 배열로 할당
   - [x] setBonus - `async` 입력받은 문자열 숫자를 보너스 번호 숫자로 할당
-  - [ ] matchWinnings(winnings, bonus) - 생성된 로또 번호를 당첨 번호, 보너스 번호와 비교한 결과를 반환
-  - [ ] lottery - 로또 배열을 순환하면서 로또 인스턴스의 matchWinnings 메서드를 호출하여 lotteryResults 배열 상태 업데이트
+  - [x] setLottoResults - 로또 배열을 순환하면서 로또 인스턴스의 matchWinnings 메서드를 호출하여 lotteryResults 배열 상태 업데이트
   - [ ] announceLottery - lottery 메서드 호출, 로또 결과 발표
 
   getter
@@ -67,6 +66,7 @@
 - [x] Lotto
 
   - [x] getNumbers (getter) - 로또 번호 배열을 반환하는 게터
+  - [x] matchWinnings(winnings, bonus) - 생성된 로또 번호를 당첨 번호, 보너스 번호와 비교한 결과를 반환
 
 --
 
