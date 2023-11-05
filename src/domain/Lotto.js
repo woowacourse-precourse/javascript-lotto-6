@@ -7,9 +7,9 @@ class Lotto {
   #lotto;
 
   constructor(lotto) {
-    const parsedLotto = Parser.parseLotto(lotto).map(
-      (num) => new LottoNumber(num),
-    );
+    const parsedLotto = Array.isArray(lotto)
+      ? lotto
+      : Parser.parseLotto(lotto).map((num) => new LottoNumber(num));
 
     Lotto.#validate(parsedLotto);
 
