@@ -14,3 +14,8 @@ export const ERROR_MESSAGES = {
 };
 
 export const LOTTO_PRICE = 1000;
+
+export const NUMBER_RANGE = {
+  MIN: 1,
+  MAX: 45,
+};
