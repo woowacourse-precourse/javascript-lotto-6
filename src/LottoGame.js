@@ -14,6 +14,8 @@ class LottoGame {
     const returnRate = this.getReturnRate(ranks);
   }
 
+  print(ranks, print) {}
+
   getReturnRate(ranks) {
     const returnRate =
       (this.getWinningAmount(ranks) / this.player.playerMoney) * 100;
@@ -22,11 +24,11 @@ class LottoGame {
 
   getWinningAmount(ranks) {
     let amount = 0;
-    amount += MONEY_CONSTANT.REWARD.FIRST * ranks[1];
-    amount += MONEY_CONSTANT.REWARD.SECOND * ranks[2];
-    amount += MONEY_CONSTANT.REWARD.THIRD * ranks[3];
-    amount += MONEY_CONSTANT.REWARD.FOURTH * ranks[4];
-    amount += MONEY_CONSTANT.REWARD.FIFTH * ranks[5];
+    const rewards = Object.values(MONEY_CONSTANT.REWARD);
+    amount = rewards.reduce(
+      (acc, reward, idx) => acc + reward * ranks[idx + 1],
+      amount
+    );
     return amount;
   }
 
