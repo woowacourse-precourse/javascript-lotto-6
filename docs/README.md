@@ -35,12 +35,10 @@
   - [ ] getBonus() - 보너스 번호 반환
   - [ ] getLottos() - 구매한 로또 인스턴스 배열 반환
 
-- [ ] View
+- [x] View
 
-  메서드
-
-  - [ ] printConsole
-  - [ ] readInput
+  - [x] printConsole
+  - [x] readInput
 
 - [ ] Lotto
 
