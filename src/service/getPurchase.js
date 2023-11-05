@@ -7,11 +7,12 @@ export default async function getPurchase() {
   try {
     const input = await purchaseAmountUI();
     const purchaseCount = await purchaseValidService(input);
+    const purchaseAmount = Number(input);
     const lottos = [];
     const purchasedLotto = await createPurchaseData(purchaseCount, lottos);
     await purchaseResaultUI(purchaseCount, purchasedLotto);
 
-    return { input, purchasedLotto };
+    return { purchaseAmount, purchasedLotto };
   } catch (error) {
     throw new Error(error.message);
   }
