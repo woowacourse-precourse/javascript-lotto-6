@@ -11,3 +11,11 @@ export const INPUT_MESSAGE = Object.freeze({
   INPUT_WINNER_NUMBER: '당첨 번호를 입력해 주세요.\n',
   INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
 });
+
+export const OUTPUT_MESSAGE = Object.freeze({
+  OUTPUT_BUY_LOTTERY: (totalTicket) => {
+    return `\n${totalTicket}개를 구매했습니다.`;
+  },
+  OUTPUT_RESULT: '당첨 통계\n',
+  OUTPUT_DIVIDER: '---\n',
+});
