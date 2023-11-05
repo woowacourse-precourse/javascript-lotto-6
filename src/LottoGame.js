@@ -33,6 +33,7 @@ class LottoGame {
     const winningStr = await IO.receiveUserInput('\n당첨 번호를 입력해 주세요.\n');
     const winningArr = winningStr.split(',');
     Validation.isValidLen(winningArr);
+    Validation.isDuplicate(winningArr);
     winningArr.forEach(el => Validation.isNumber(el, '[ERROR] 당첨 번호는 \,으로 구분되는 6개의 숫자 형식입니다.'));
     winningArr.forEach(el => Validation.isValidLottoNum(el));
     this.#winnings = winningArr.map(el => {return Number(el)});

@@ -12,6 +12,10 @@ class Validation {
     if(winningArr.length !== 6) throw new Error('[ERROR] 당첨 번호는 여섯 개를 입력해야 합니다.');
   }
 
+  static isDuplicate(winningArr) {
+    if(new Set(winningArr).size !== winningArr.length) throw new Error('[ERROR] 당첨 번호 여섯 개에는 중복이 없어야 합니다.');
+  }
+
   static isValidLottoNum(num) {
     if((num < 1) || (num > 45)) throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자 형식이어야 합니다.');
   }
