@@ -1,4 +1,5 @@
 import SYMBOLS from '../constants/symbols.js';
+import Bonus from '../model/Bonus.js';
 import Lotto from '../model/Lotto.js';
 import LottoStore from '../model/LottoStore.js';
 import InputView from '../view/InputView.js';
@@ -13,6 +14,8 @@ class LottoController {
 
   #winningNumbers;
 
+  #bonusNumber;
+
   constructor() {
     this.#inputView = new InputView();
   }
@@ -21,6 +24,7 @@ class LottoController {
     await this.#buyLottos();
     await this.#showLottos();
     await this.#drawWinningNumbers();
+    await this.#drawBonusNumber();
   }
 
   async #buyLottos() {
@@ -47,6 +51,19 @@ class LottoController {
     } catch (error) {
       OutputView.printError(error);
       await this.#drawWinningNumbers();
+    }
+  }
+
+  async #drawBonusNumber() {
+    try {
+      const readInput = await this.#inputView.readBonusNumber();
+      this.#bonusNumber = new Bonus(
+        readInput,
+        this.#winningNumbers,
+      ).getBonusNumber();
+    } catch (error) {
+      OutputView.printError(error);
+      await this.#drawBonusNumber();
     }
   }
 }

@@ -10,7 +10,7 @@ describe('유효성 검사 로직 테스트', () => {
     }).toThrow(ERROR_MESSAGES.invalidAmount);
   });
   test('올바르지 않은 구입금액 데이터 타입', () => {
-    const purchaseAmount = 'aa';
+    const purchaseAmount = Number('1a');
 
     expect(() => {
       Validator.validatePurchaseAmount(purchaseAmount);
@@ -31,5 +31,30 @@ describe('유효성 검사 로직 테스트', () => {
     expect(() => {
       Validator.validateLottoNumbers(numbers);
     }).toThrow(ERROR_MESSAGES.invalidUnique);
+  });
+
+  test('올바르지 않은 보너스 번호 타입', () => {
+    const bonusNumber = Number('1a');
+
+    expect(() => {
+      Validator.validateBonusNumber(bonusNumber);
+    }).toThrow(ERROR_MESSAGES.invalidType);
+  });
+
+  test('유효하지 않은 범위의 보너스 번호', () => {
+    const bonusNumber = 46;
+
+    expect(() => {
+      Validator.validateBonusNumber(bonusNumber);
+    }).toThrow(ERROR_MESSAGES.invalidNumberRange);
+  });
+
+  test('당첨 번호와 중복되는 보너스 번호 입력', () => {
+    const bonusNumber = 1;
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+    expect(() => {
+      Validator.validateBonusNumber(bonusNumber, winningNumbers);
+    }).toThrow(ERROR_MESSAGES.invalidBonusNumber);
   });
 });

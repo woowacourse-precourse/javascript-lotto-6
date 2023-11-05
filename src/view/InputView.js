@@ -15,6 +15,12 @@ class InputView {
 
     return winningNumber;
   }
+
+  async readBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(INPUT_MESSAGES.bonusNumber);
+
+    return bonusNumber;
+  }
 }
 
 export default InputView;

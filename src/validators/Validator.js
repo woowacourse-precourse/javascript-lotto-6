@@ -1,5 +1,6 @@
 import { ERROR_MESSAGES } from '../constants/messages.js';
 import AppError from '../errors/AppError.js';
+import isValidBonus from './is-valid-number/index.js';
 import {
   isValidLength,
   isValidRange,
@@ -28,8 +29,24 @@ const Validator = {
       throw new AppError(ERROR_MESSAGES.invalidUnique);
     }
 
-    if (!isValidRange(numbers)) {
+    numbers.forEach(number => {
+      if (!isValidRange(number)) {
+        throw new AppError(ERROR_MESSAGES.invalidNumberRange);
+      }
+    });
+  },
+
+  validateBonusNumber(bonusNumber, winningNumbers) {
+    if (!isValidType(bonusNumber)) {
+      throw new AppError(ERROR_MESSAGES.invalidType);
+    }
+
+    if (!isValidRange(bonusNumber)) {
       throw new AppError(ERROR_MESSAGES.invalidNumberRange);
+    }
+
+    if (!isValidBonus(bonusNumber, winningNumbers)) {
+      throw new AppError(ERROR_MESSAGES.invalidBonusNumber);
     }
   },
 };

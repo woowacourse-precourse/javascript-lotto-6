@@ -1,6 +1,7 @@
 export const INPUT_MESSAGES = Object.freeze({
   purchase: '구입금액을 입력해 주세요.\n',
   winningNumber: '\n당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export const OUTPUT_MESSAGES = Object.freeze({
@@ -14,4 +15,5 @@ export const ERROR_MESSAGES = Object.freeze({
   invalidNumberLength: '로또 번호는 6개여야 합니다.',
   invalidUnique: '로또 번호는 서로 다른 숫자여야 합니다.',
   invalidNumberRange: '로또 번호의 숫자 범위는 1~45까지입니다.',
+  invalidBonusNumber: '당첨 번호와 중복되지 않아야 합니다.',
 });

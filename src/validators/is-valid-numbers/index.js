@@ -8,6 +8,6 @@ export const isValidUnique = numbers => {
   return new Set(numbers).size === numbers.length;
 };
 
-export const isValidRange = numbers => {
-  return numbers.every(number => REGEXS.rNumberRange.test(number));
+export const isValidRange = number => {
+  return REGEXS.rNumberRange.test(number);
 };

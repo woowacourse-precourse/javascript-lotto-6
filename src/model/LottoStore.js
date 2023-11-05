@@ -11,7 +11,7 @@ class LottoStore {
   #quantity;
 
   constructor(purchaseAmount) {
-    this.#purchaseAmount = purchaseAmount;
+    this.#purchaseAmount = Number(purchaseAmount);
     this.#validate();
   }
 
