@@ -1,3 +1,4 @@
+import ERROR_MESSAGE from '../src/constants/error';
 import InputValidator from '../src/utils/InputValidator';
 
 describe('로또 구입금액 유효성 검사 테스트', () => {
@@ -15,7 +16,7 @@ describe('로또 구입금액 유효성 검사 테스트', () => {
     (input) => {
       expect(() => {
         InputValidator.validatePurchaseAmount(input);
-      }).toThrow('[ERROR] 숫자만 입력해주세요.');
+      }).toThrow(ERROR_MESSAGE.notNumber);
     },
   );
 
@@ -24,9 +25,7 @@ describe('로또 구입금액 유효성 검사 테스트', () => {
     (input) => {
       expect(() => {
         InputValidator.validatePurchaseAmount(input);
-      }).toThrow(
-        '[ERROR] 입력한 금액이 1000원으로 나누어떨어지지 않습니다. 다시 입력해주세요.',
-      );
+      }).toThrow(ERROR_MESSAGE.invalidInput);
     },
   );
 });

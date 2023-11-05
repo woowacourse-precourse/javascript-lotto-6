@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { LOTTO_END, LOTTO_START, RESULT_MESSAGE } from '../constants/output.js';
 
 const OutputView = {
   printError(message) {
@@ -8,13 +9,14 @@ const OutputView = {
   printAutoLotto(lottos, purchaseAmount) {
     Console.print(`${purchaseAmount}개를 구매했습니다.`);
     lottos.forEach((lotto) => {
-      const lottoString = `[${lotto.join(', ')}]`;
+      const lottoString = `${LOTTO_START}${lotto.join(', ')}${LOTTO_END}`;
       Console.print(lottoString);
     });
   },
 
   printLotteryResultsSummary(winningResult, rateOfReturn) {
     const template = this.getResultStringTemplate(winningResult);
+    Console.print(RESULT_MESSAGE.title);
     template.forEach(({ label, count }) => {
       Console.print(`${label} - ${count}개`);
     });
@@ -24,17 +26,17 @@ const OutputView = {
 
   getResultStringTemplate(winningResult) {
     return [
-      { label: '3개 일치 (5,000원)', count: winningResult.threeMatching },
-      { label: '4개 일치 (50,000원)', count: winningResult.fourMatching },
+      { label: RESULT_MESSAGE.threeMatch, count: winningResult.threeMatching },
+      { label: RESULT_MESSAGE.fourMatch, count: winningResult.fourMatching },
       {
-        label: '5개 일치 (1,500,000원)',
+        label: RESULT_MESSAGE.fiveMatchNotBonus,
         count: winningResult.fiveMatchingNotBonus,
       },
       {
-        label: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+        label: RESULT_MESSAGE.fiveMatchAndBonus,
         count: winningResult.fiveMatchingAndBonus,
       },
-      { label: '6개 일치 (2,000,000,000원)', count: winningResult.allMatching },
+      { label: RESULT_MESSAGE.allMatch, count: winningResult.allMatching },
     ];
   },
 };

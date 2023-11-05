@@ -1,3 +1,6 @@
+import { LOTTO_NUM_RANGE } from './constants/conditions.js';
+import ERROR_MESSAGE from './constants/error.js';
+
 class Lotto {
   #numbers;
 
@@ -11,13 +14,17 @@ class Lotto {
   */
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 당첨번호를 6자리 이하로 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.invalidLottoLength);
     }
     if (numbers.length !== new Set(numbers).size) {
-      throw new Error('[ERROR] 중복된 숫자가 있습니다. 다시 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.duplicatedLottoNum);
     }
-    if (!numbers.every((num) => num >= 1 && num <= 45)) {
-      throw new Error('[ERROR] 1부터 45사이의 숫자를 입력해주세요.');
+    if (
+      !numbers.every(
+        (num) => num >= LOTTO_NUM_RANGE.min && num <= LOTTO_NUM_RANGE.max,
+      )
+    ) {
+      throw new Error(ERROR_MESSAGE.invalidLottoNumRange);
     }
   }
 

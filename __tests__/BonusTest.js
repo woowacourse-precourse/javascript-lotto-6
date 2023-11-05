@@ -1,4 +1,5 @@
 import Bonus from '../src/Bonus';
+import ERROR_MESSAGE from '../src/constants/error';
 
 describe('보너스 번호 테스트', () => {
   let winningLotto;
@@ -11,7 +12,7 @@ describe('보너스 번호 테스트', () => {
     (input) => {
       expect(() => {
         Bonus.generateBonus(input, winningLotto);
-      }).toThrow('[ERROR] 숫자만 입력해주세요.');
+      }).toThrow(ERROR_MESSAGE.notNumber);
     },
   );
 
@@ -20,7 +21,7 @@ describe('보너스 번호 테스트', () => {
     (input) => {
       expect(() => {
         Bonus.generateBonus(input, winningLotto);
-      }).toThrow('[ERROR] 1부터 45사이의 수를 입력해주세요.');
+      }).toThrow(ERROR_MESSAGE.invalidLottoNumRange);
     },
   );
 
@@ -28,6 +29,6 @@ describe('보너스 번호 테스트', () => {
     const bonus = 1;
     expect(() => {
       Bonus.generateBonus(bonus, winningLotto);
-    }).toThrow('[ERROR] 당첨번호와 중복됩니다. 다시 입력해주세요.');
+    }).toThrow(ERROR_MESSAGE.duplicatedWinningLotto);
   });
 });

@@ -1,19 +1,26 @@
+import { COUNT, DEFAULT_NUM, RANKING } from './constants/conditions.js';
+
 export default class MatchingTable {
   #matchingTable = {
-    threeMatching: 0,
-    fourMatching: 0,
-    fiveMatchingNotBonus: 0,
-    fiveMatchingAndBonus: 0,
-    allMatching: 0,
+    threeMatching: DEFAULT_NUM,
+    fourMatching: DEFAULT_NUM,
+    fiveMatchingNotBonus: DEFAULT_NUM,
+    fiveMatchingAndBonus: DEFAULT_NUM,
+    allMatching: DEFAULT_NUM,
   };
 
   updateMatchingCount(rankingList) {
     rankingList.forEach((ranking) => {
-      if (ranking === 5) this.#matchingTable.threeMatching += 1;
-      if (ranking === 4) this.#matchingTable.fourMatching += 1;
-      if (ranking === 3) this.#matchingTable.fiveMatchingNotBonus += 1;
-      if (ranking === 2) this.#matchingTable.fiveMatchingAndBonus += 1;
-      if (ranking === 1) this.#matchingTable.allMatching += 1;
+      if (ranking === RANKING.fifth)
+        this.#matchingTable.threeMatching += COUNT.plus;
+      if (ranking === RANKING.fourth)
+        this.#matchingTable.fourMatching += COUNT.plus;
+      if (ranking === RANKING.third)
+        this.#matchingTable.fiveMatchingNotBonus += COUNT.plus;
+      if (ranking === RANKING.second)
+        this.#matchingTable.fiveMatchingAndBonus += COUNT.plus;
+      if (ranking === RANKING.first)
+        this.#matchingTable.allMatching += COUNT.plus;
     });
   }
 

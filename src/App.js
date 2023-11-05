@@ -2,9 +2,10 @@ import Bonus from './Bonus.js';
 import Lotto from './Lotto.js';
 import LottoGame from './LottoGame.js';
 import InputValidator from './utils/InputValidator.js';
-import autoLottoGenerator from './utils/autoLottoGenerator.js';
+import AutoLottoGenerator from './utils/AutoLottoGenerator.js';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
+import { LOTTO_TICKET_PRICE } from './constants/conditions.js';
 
 class App {
   #purchaseLotto;
@@ -27,7 +28,6 @@ class App {
       this.#winningLotto.getLotto(),
       this.#bonus.getBonus(),
     );
-
     OutputView.printLotteryResultsSummary(winningResult, rateOfReturn);
   }
 
@@ -35,9 +35,9 @@ class App {
     try {
       const answer = await InputView.getLottoPurchaseAmount();
       if (InputValidator.validatePurchaseAmount(answer)) {
-        const purchaseAmount = answer / 1000;
+        const purchaseAmount = answer / LOTTO_TICKET_PRICE;
         return {
-          purchaseLotto: autoLottoGenerator(purchaseAmount),
+          purchaseLotto: AutoLottoGenerator.getLotto(purchaseAmount),
           purchaseAmount,
         };
       }

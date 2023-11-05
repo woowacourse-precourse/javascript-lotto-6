@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import autoLottoGenerator from '../src/utils/autoLottoGenerator';
+import AutoLottoGenerator from '../src/utils/AutoLottoGenerator';
+import ERROR_MESSAGE from '../src/constants/error';
 
 const mockRandoms = (numbers) => {
   Random.pickUniqueNumbersInRange = jest.fn();
@@ -8,6 +9,7 @@ const mockRandoms = (numbers) => {
     Random.pickUniqueNumbersInRange,
   );
 };
+const errorMessage = ERROR_MESSAGE.generateIssue;
 
 describe('자동 로또생성 테스트', () => {
   test('구매갯수를 입력하면 갯수에 맞게 로또를 자동생성하여 오름차순 정렬합니다', () => {
@@ -17,7 +19,7 @@ describe('자동 로또생성 테스트', () => {
       [16, 15, 14, 13, 12, 11],
     ]);
 
-    expect(autoLottoGenerator(lottoCount)).toEqual([
+    expect(AutoLottoGenerator.getLotto(lottoCount)).toEqual([
       [1, 2, 3, 4, 5, 6],
       [11, 12, 13, 14, 15, 16],
     ]);
@@ -33,8 +35,8 @@ describe('자동 로또 생성 오류 테스트', () => {
     ]);
 
     expect(() => {
-      autoLottoGenerator(lottoCount);
-    }).toThrow('[ERROR] 로또가 제대로 발행되지 않았습니다. 다시 발행합니다.');
+      AutoLottoGenerator.getLotto(lottoCount);
+    }).toThrow(errorMessage);
   });
 
   test('로또에 중복된 수가 있으면 예외처리', () => {
@@ -45,8 +47,8 @@ describe('자동 로또 생성 오류 테스트', () => {
     ]);
 
     expect(() => {
-      autoLottoGenerator(lottoCount);
-    }).toThrow('[ERROR] 로또가 제대로 발행되지 않았습니다. 다시 발행합니다.');
+      AutoLottoGenerator.getLotto(lottoCount);
+    }).toThrow(errorMessage);
   });
 
   test('로또의 길이가 6개가 아니면 예외처리', () => {
@@ -58,7 +60,7 @@ describe('자동 로또 생성 오류 테스트', () => {
     ]);
 
     expect(() => {
-      autoLottoGenerator(lottoCount);
-    }).toThrow('[ERROR] 로또가 제대로 발행되지 않았습니다. 다시 발행합니다.');
+      AutoLottoGenerator.getLotto(lottoCount);
+    }).toThrow(errorMessage);
   });
 });

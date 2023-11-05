@@ -1,3 +1,6 @@
+import ERROR_MESSAGE from './constants/error.js';
+import { LOTTO_NUM_RANGE } from './constants/conditions.js';
+
 export default class Bonus {
   #bonus;
 
@@ -16,13 +19,13 @@ export default class Bonus {
   #validate(number, winningLotto) {
     const isNumber = /^\d+$/;
     if (!isNumber.test(number)) {
-      throw new Error('[ERROR] 숫자만 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.notNumber);
     }
-    if (number < 1 || number > 45) {
-      throw new Error('[ERROR] 1부터 45사이의 수를 입력해주세요.');
+    if (number < LOTTO_NUM_RANGE.min || number > LOTTO_NUM_RANGE.max) {
+      throw new Error(ERROR_MESSAGE.invalidLottoNumRange);
     }
     if (winningLotto.includes(number)) {
-      throw new Error('[ERROR] 당첨번호와 중복됩니다. 다시 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.duplicatedWinningLotto);
     }
   }
 

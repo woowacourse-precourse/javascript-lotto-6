@@ -1,6 +1,12 @@
+import { LOTTO_NUM_RANGE } from '../constants/conditions.js';
+import ERROR_MESSAGE from '../constants/error.js';
+
 const AutoLottoValidator = {
   isCorrectLotto(lottos) {
-    return lottos.every((lotto) => Array.isArray(lotto) && lotto.length === 6);
+    return lottos.every(
+      (lotto) =>
+        Array.isArray(lotto) && lotto.length === LOTTO_NUM_RANGE.length,
+    );
   },
 
   isNotDuplicated(lottos) {
@@ -9,9 +15,7 @@ const AutoLottoValidator = {
 
   validateAutoLotto(lottos) {
     if (!this.isCorrectLotto(lottos) || !this.isNotDuplicated(lottos))
-      throw new Error(
-        '[ERROR] 로또가 제대로 발행되지 않았습니다. 다시 발행합니다.',
-      );
+      throw new Error(ERROR_MESSAGE.generateIssue);
     return lottos;
   },
 };
