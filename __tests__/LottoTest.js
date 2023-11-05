@@ -18,9 +18,12 @@ describe('로또 클래스 테스트', () => {
 
   // 아래에 추가 테스트 작성 가능
 
-  test.each(['1,000원', '', ' ', '8장이요'])('로또 구매 예외 테스트', input => {
-    expect(() => new BuyLotto(input)).toThrow(ERROR.INPUT_ONLY_NUMBER);
-  });
+  test.each(['1,000원', '', ' ', '8장이요', '-1'])(
+    '로또 구매 예외 테스트',
+    input => {
+      expect(() => new BuyLotto(input)).toThrow(ERROR.INPUT_ONLY_NUMBER);
+    },
+  );
 
   test('로또 구매 금액이 1,000원 단위가 아닐경우', () => {
     expect(() => new BuyLotto('2500')).toThrow(ERROR.NOT_PRICE_UNIT);
