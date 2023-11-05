@@ -85,6 +85,14 @@ class LottoTicket {
 }
 
 class LottoMachine {
+  prizeList = {
+    3: { countMatch: 0, prize: 5000 },
+    4: { countMatch: 0, prize: 50000 },
+    5: { countMatch: 0, prize: 1500000 },
+    "5+1": { countMatch: 0, prize: 30000000 },
+    6: { countMatch: 0, prize: 2000000000 },
+  };
+
   constructor() {
     this.winningNumbers = new Set(); // 각 번호 간 중복 방지
     this.bonusNumber = null;
@@ -175,31 +183,45 @@ class LottoMachine {
   }
 
   calculatePrize(lottoTickets) {
-    const LOTTO_GAME_RESULTS = { 3: 0, 4: 0, 5: 0, "5+1": 0, 6: 0 };
-
     lottoTickets.getLottoTickets().forEach((lottoTicket) => {
       const MATCH_COUNT = lottoTicket.countMatchNumbers(this.winningNumbers);
       const BONUS_MATCH_COUNT = this.isBonusNumberMatch(lottoTicket);
-      this.updatePrizeResults(
-        LOTTO_GAME_RESULTS,
-        MATCH_COUNT,
-        BONUS_MATCH_COUNT
-      );
+
+      if (MATCH_COUNT === 5 && BONUS_MATCH_COUNT) {
+        this.prizeList["5+1"].countMatch += 1;
+      } else if (this.prizeList[MATCH_COUNT]) {
+        this.prizeList[MATCH_COUNT].countMatch += 1;
+      }
     });
 
-    return LOTTO_GAME_RESULTS;
+    return this.prizeList;
   }
 
   isBonusNumberMatch(lottoTicket) {
     return lottoTicket.getLottoNumbers().includes(this.bonusNumber);
   }
 
-  updatePrizeResults(gameResults, matchCount, isBonusNumberMatch) {
-    if (matchCount === 5 && isBonusNumberMatch) {
-      gameResults["5+1"] += 1;
-    } else if (gameResults[matchCount]) {
-      gameResults[matchCount] += 1;
-    }
+  displayGameResult(prizeList, ticketAmount) {
+    MissionUtils.Console.print("당첨 통계\n---");
+
+    Object.entries(prizeList).forEach(([match, { countMatch, prize }]) => {
+      const COUNT_MATCH_OUTPUT =
+        match === "5+1" ? "5개 일치, 보너스 볼 일치" : `${match}개 일치`;
+      MissionUtils.Console.print(
+        `${COUNT_MATCH_OUTPUT} (${prize.toLocaleString()}원) - ${countMatch}개`
+      );
+    });
+
+    const TOTAL_PRIZE = this.#calculateTotalPrize(prizeList);
+    const PROFIT_RATE = (TOTAL_PRIZE / ticketAmount) * 100;
+    MissionUtils.Console.print(`총 수익률은 ${PROFIT_RATE.toFixed(2)}%입니다.`);
+  }
+
+  #calculateTotalPrize(prize) {
+    return Object.values(prize).reduce(
+      (acc, { countMatch, prize }) => acc + countMatch * prize,
+      0
+    );
   }
 }
 
