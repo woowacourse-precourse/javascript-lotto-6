@@ -9,8 +9,7 @@ class WinningNumber {
     WinningNumber.#validateIsNumber(winningNumbers);
     WinningNumber.#validateEmptyNumber(winningNumbers);
 
-    const lotto = new Lotto(winningNumbers);
-    this.#winningLotto = lotto;
+    this.#winningLotto = new Lotto(winningNumbers);
   }
 
   static #validateIsNumber(winningNumbers) {
@@ -23,6 +22,10 @@ class WinningNumber {
     if (winningNumbers.some((number) => number === 0)) {
       throw new InvalidNumberError(ERROR_MESSAGE.INCLUDE_EMPTY_NUMBER);
     }
+  }
+
+  getWinningNumbers() {
+    return this.#winningLotto.getLottoNumbers();
   }
 }
 

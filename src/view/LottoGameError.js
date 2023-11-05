@@ -8,6 +8,10 @@ class LottoGameError {
   static printInputWinningNumberError(error) {
     ConsoleOutput.output(error.message);
   }
+
+  static printInputBonusNumberError(error) {
+    ConsoleOutput.output(error.message);
+  }
 }
 
 export default LottoGameError;

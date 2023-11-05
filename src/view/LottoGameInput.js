@@ -16,6 +16,13 @@ class LottoGameInput {
 
     return sixNumbers;
   }
+
+  static async inputBonusNumber() {
+    const userInput = await ConsoleInput.input(MESSAGE.INPUT_BONUS_NUMBER);
+    const bonusNumber = Number(userInput);
+
+    return bonusNumber;
+  }
 }
 
 export default LottoGameInput;
