@@ -3,14 +3,13 @@ import Lotto from "./Lotto.js";
 import Price from "./Price.js";
 import BonusNumber from "./BonusNumber.js";
 import { Console, Random } from "@woowacourse/mission-utils";
+import Result from "./Result.js";
 
 class App {
   #view;
   #price;
-  #winningNumber;
-  #bonusNumber;
   #boughtLottos = [];
-  #result = {};
+  #result;
 
   constructor() {
     this.#view = new View();
@@ -42,12 +41,10 @@ class App {
     this.#price = new Price(ENTERED_INPUT_PRICE);
     this.buyLottoNTimes(this.#price.price / 1000);
     const ENTERED_WINNING_NUMBER = await this.#view.getWinninNumber();
-    this.#winningNumber = new Lotto(ENTERED_WINNING_NUMBER);
     const ENTERED_BONUS_NUMBER = await this.#view.getBonusNumber();
-    this.#bonusNumber = new BonusNumber(
-      ENTERED_BONUS_NUMBER,
-      this.#winningNumber.numbers
-    );
+    this.#result = new Result(ENTERED_WINNING_NUMBER, ENTERED_BONUS_NUMBER);
+    this.#result.getResults(this.#boughtLottos);
+    this.#result.printResult(this.#price.price);
   }
 }
 
