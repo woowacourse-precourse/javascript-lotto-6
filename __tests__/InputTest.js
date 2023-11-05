@@ -19,5 +19,17 @@ describe("입력값 테스트", () => {
         //then
         expect(output).toEqual(14);
     });
+
+    test("구입금액이 1000으로 나누어 떨어지지 않을 경우 예외 처리", async () => {
+        //given
+        const input = 14500;
+        mockInput(input);
+
+        //when
+        const inputValue = new InputVeiw()
+
+        //then
+        await expect(inputValue.readPurchaseAmount()).rejects.toThrow("[ERROR]");
+    });
 });
   
