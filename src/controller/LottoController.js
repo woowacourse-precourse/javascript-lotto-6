@@ -48,6 +48,28 @@ class LottoController {
 
     return lotto;
   }
+
+  compareLottos(winningNumbers, bonusNumber) {
+    this.#lottos.forEach(lotto => {
+      const result = this.matchLotto(lotto, winningNumbers, bonusNumber);
+    });
+  }
+
+  matchLotto(lotto, winningNumbers, bonusNumber) {
+    const numbers = lotto.getNumbers();
+    let count = 0;
+    const bonus = this.includeBonusNumber(numbers, bonusNumber);
+
+    numbers.forEach(number => {
+      if (winningNumbers.includes(number)) count += 1;
+    });
+
+    return { count, bonus };
+  }
+
+  includeBonusNumber(numbers, bonusNumber) {
+    return numbers.includes(bonusNumber);
+  }
 }
 
 export default LottoController;
