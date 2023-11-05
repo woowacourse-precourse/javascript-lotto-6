@@ -1,8 +1,19 @@
 import InputView from './View/InputView.js';
+import LottoArray from './LottoArray.js';
 
 class LottoGame {
+  #lottoArray;
+
+  constructor() {
+    this.#lottoArray = new LottoArray();
+  }
+
   async play() {
-    await this.getPurchaseAmount();
+    this.buyLottos(await this.getPurchaseAmount());
+  }
+
+  buyLottos(money) {
+    this.#lottoArray.set(money);
   }
 
   async getPurchaseAmount() {
