@@ -14,48 +14,57 @@ class LottoGameController {
 
   async #takePurchaseMoneyStage() {
     let purchaseMoney;
-    try {
-      purchaseMoney = await InputView.readPurchaseMoney();
-      Validator.validateMoney(purchaseMoney);
-      this.#issueTicketStage(purchaseMoney);
-    } catch (error) {
-      Console.print(error.message);
+    while (true) {
+      try {
+        purchaseMoney = await InputView.readPurchaseMoney();
+        Validator.validateMoney(purchaseMoney);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
+    return this.#issueTicketStage(purchaseMoney);
   }
 
   #issueTicketStage(purchaseMoney) {
     this.#lottoService = new LottoService(Number(purchaseMoney));
     OutputView.printTickets(this.#lottoService.issueTickets());
-    this.#takeWinningNumberStage();
+    return this.#takeWinningNumberStage();
   }
 
   async #takeWinningNumberStage() {
     let winningNumbers;
-    try {
-      winningNumbers = await InputView.readWinningNumbers();
-      Validator.validateNumberForm(winningNumbers);
-      this.winningLotto = new Lotto(winningNumbers.split(',').map(Number));
-      this.#takeBonusNumberStage();
-    } catch (error) {
-      Console.print(error.message);
+    while (true) {
+      try {
+        winningNumbers = await InputView.readWinningNumbers();
+        Validator.validateNumberForm(winningNumbers);
+        this.winningLotto = new Lotto(winningNumbers.split(',').map(Number));
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
+    return this.#takeBonusNumberStage();
   }
 
   async #takeBonusNumberStage() {
     let bonusNumber;
-    try {
-      bonusNumber = await InputView.readBonusNumber();
-      Validator.validateBouns(
-        this.winningLotto.getWinningNumbers(),
-        bonusNumber,
-      );
-      this.#checkPrizeStage(
-        this.winningLotto.getWinningNumbers(),
-        Number(bonusNumber),
-      );
-    } catch (error) {
-      Console.print(error.message);
+    while (true) {
+      try {
+        bonusNumber = await InputView.readBonusNumber();
+        Validator.validateBouns(
+          this.winningLotto.getWinningNumbers(),
+          bonusNumber,
+        );
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
+    return this.#checkPrizeStage(
+      this.winningLotto.getWinningNumbers(),
+      Number(bonusNumber),
+    );
   }
 
   #checkPrizeStage(winningNumbers, bonusNumber) {
