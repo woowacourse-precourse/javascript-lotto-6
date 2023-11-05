@@ -66,6 +66,7 @@ class GameController {
     while (true) {
       try {
         const bonusNumber = await InputView.inputBonusNumber();
+        this.#winningLotto.bonusNumber = bonusNumber;
         break;
       } catch (error) {
         Console.print(error.message);

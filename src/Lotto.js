@@ -40,13 +40,17 @@ class Lotto {
     }
   }
 
+  isInvalidLottoNumber(number) {
+    return (
+      number < LOTTO.range.min ||
+      number > LOTTO.range.max ||
+      !isPositiveInteger(number)
+    );
+  }
+
   #ifNumberIsInvalid(numbers, callback) {
     numbers.forEach((number) => {
-      if (
-        number < LOTTO.range.min ||
-        number > LOTTO.range.max ||
-        !isPositiveInteger(number)
-      ) {
+      if (this.isInvalidLottoNumber(number)) {
         callback();
       }
     });
