@@ -1,21 +1,45 @@
+import { GAME_SETTINGS } from '../constants/gameSettings';
+import { ERROR_MESSAGES } from '../constants/ErrorMessages';
+
 export default class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers.sort((a, b) => a - b);
+    this.#numbers = this.#sortNumbers(numbers);
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    this.#validateNumbersCount(numbers);
+    this.#validateUniqueness(numbers);
+    this.#validateNumberRange(numbers);
+  }
+
+  #validateNumbersCount(numbers) {
+    if (numbers.length !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
+      throw new Error(ERROR_MESSAGES.INVALID_NUMBERS_COUNT);
     }
-    if (new Set(numbers).size !== 6) {
-      throw new Error('[ERROR] 로또 번호는 중복될 수 없습니다.');
+  }
+
+  #validateUniqueness(numbers) {
+    if (new Set(numbers).size !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
+      throw new Error(ERROR_MESSAGES.DUPLICATE_NUMBERS);
     }
-    if (numbers.some((number) => number < 1 || number > 45)) {
-      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+  }
+
+  #validateNumberRange(numbers) {
+    if (
+      numbers.some(
+        (number) =>
+          number < GAME_SETTINGS.MIN_LOTTO_NUMBER || number > GAME_SETTINGS.MAX_LOTTO_NUMBER,
+      )
+    ) {
+      throw new Error(ERROR_MESSAGES.NUMBER_OUT_OF_RANGE);
     }
+  }
+
+  #sortNumbers(numbers) {
+    return [...numbers].sort((a, b) => a - b);
   }
 
   matchNumbers(winningNumbers) {
