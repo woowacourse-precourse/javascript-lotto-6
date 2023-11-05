@@ -1,6 +1,6 @@
-import { INPUT, ERROR } from "./Constants.js";
+import { INPUT, ERROR } from "./Constants/Constants.js";
 import { Console } from "@woowacourse/mission-utils";
-import Validation from "./Validation.js";
+import Validation from "./Validation/Validation.js";
 
 class WinNumber {
   #winNumber;

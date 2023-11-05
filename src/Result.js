@@ -1,4 +1,4 @@
-import { OUTPUT, MATCH } from "./Constants.js";
+import { OUTPUT, MATCH } from "./Constants/Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class Result {

@@ -1,7 +1,7 @@
 import { Random } from "@woowacourse/mission-utils";
 import { Console } from "@woowacourse/mission-utils";
-import { INPUT, OUTPUT, ERROR, OPTION } from "./Constants.js";
-import Validation from "./Validation.js";
+import { INPUT, OUTPUT, ERROR, OPTION } from "./Constants/Constants.js";
+import Validation from "./Validation/Validation.js";
 
 class LottoData {
   #lottoData;
