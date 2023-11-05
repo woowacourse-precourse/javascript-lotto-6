@@ -5,7 +5,9 @@ class App {
   async play() {}
 
   static getRandomSixNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+      (a, b) => a - b
+    );
   }
 
   static getLottoWithMoney(money) {
