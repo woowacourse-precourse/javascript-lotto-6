@@ -5,3 +5,9 @@ export const inputPerChaseValidation = (price) => {
         throw new Error(ERROR_MESSAGE.perchaseError);
     }
 };
+
+export const perchaseRangeValidation = (price) => {
+    if (price <= 0){
+        throw new Error(ERROR_MESSAGE.perchaseRangeError);
+    }
+};
