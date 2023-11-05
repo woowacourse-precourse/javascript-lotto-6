@@ -1,3 +1,4 @@
+import { LOTTO } from '../data.js';
 import { ERROR } from '../messages.js';
 
 class Lotto {
@@ -14,7 +15,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO.COUNT_OF_NUMBERS) {
       throw new Error(ERROR.LOTTO.COUNT);
     }
 
@@ -22,11 +23,15 @@ class Lotto {
       throw new Error(ERROR.LOTTO.NOT_INTEGER);
     }
 
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== LOTTO.COUNT_OF_NUMBERS) {
       throw new Error(ERROR.LOTTO.DUPLICATED);
     }
 
-    if (numbers.some((number) => number < 1 || number > 45)) {
+    if (
+      numbers.some(
+        (number) => number < LOTTO.MIN_NUMBER || number > LOTTO.MAX_NUMBER
+      )
+    ) {
       throw new Error(ERROR.LOTTO.OUT_OF_RANGE);
     }
   }

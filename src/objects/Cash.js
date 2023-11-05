@@ -1,3 +1,4 @@
+import { CASH } from '../data.js';
 import { ERROR } from '../messages.js';
 import { isPositiveInteger } from '../utils.js';
 
@@ -16,7 +17,7 @@ class Cash {
       throw new Error(ERROR.CASH.NOT_POSITIVE_INTEGER);
     }
 
-    if (Number(value) % 1000 > 0) {
+    if (Number(value) % CASH.UNIT > 0) {
       throw new Error(ERROR.CASH.UNIT);
     }
   }

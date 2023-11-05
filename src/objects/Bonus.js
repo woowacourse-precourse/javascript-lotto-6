@@ -1,3 +1,4 @@
+import { LOTTO } from '../data.js';
 import { ERROR } from '../messages.js';
 
 class Bonus {
@@ -17,7 +18,7 @@ class Bonus {
       throw new Error(ERROR.BONUS_NUMBER.NOT_INTEGER);
     }
 
-    if (number < 1 || number > 45) {
+    if (number < LOTTO.MIN_NUMBER || number > LOTTO.MAX_NUMBER) {
       throw new Error(ERROR.BONUS_NUMBER.OUT_OF_RANGE);
     }
   }

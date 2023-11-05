@@ -6,6 +6,8 @@ const INQUIRY = {
 
 const OUTPUT = {
   BUY_LOTTO: (lottoCount) => `\n${lottoCount}개를 구매했습니다.`,
+  RESULT: '\n당첨 통계\n---',
+  PROFIT: (percent) => `총 수익률은 ${percent}%입니다.`,
 };
 
 const ERROR = {
