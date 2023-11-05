@@ -1,16 +1,16 @@
 /* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
+// import Lotto from './Lotto.js';
 
 class Bonus {
-  #winningNum;
+  // #winningNum;
 
-  constructor() {
-    this.#winningNum = new Lotto();
-  }
+  // constructor() {
+  //  this.#winningNum = new Lotto();
+  // }
 
-  async run() {
-    const winningNum = await this.#winningNum.run();
+  async run(winningNum) {
+    // const winningNum = await this.#winningNum.run();
     const bonusNum = await this.#getBonusNum();
     this.#duplCheckOfBonus(winningNum, bonusNum);
     this.#validateNumRange([bonusNum]); // 배열 형태로 전달
@@ -48,5 +48,5 @@ class Bonus {
 
 export default Bonus;
 
-const run = new Bonus();
-run.run();
+// const run = new Bonus();
+// run.run();

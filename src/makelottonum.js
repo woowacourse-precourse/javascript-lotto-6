@@ -1,12 +1,12 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-import NumOfBuy from './numofbuy.js';
+// import NumOfBuy from './numofbuy.js';
 
 class MakeLottoNum {
-  #numOfBuy;
+  // #numOfBuy;
 
-  constructor() {
-    this.#numOfBuy = new NumOfBuy();
-  }
+  // constructor() {
+  //  this.#numOfBuy = new NumOfBuy();
+  // }
 
   // 랜덤 로또 번호 생성 함수 (반복되어야 함)
   #makeLottoNum() {
@@ -25,8 +25,8 @@ class MakeLottoNum {
     return sortLottoNum;
   }
 
-  async makeArrayOfLottoNum() {
-    const numOfBuy = await this.#numOfBuy.run();
+  async makeArrayOfLottoNum(numOfBuy) {
+    // const numOfBuy = await this.#numOfBuy.run();
     const arrayofLotto = [];
     while (arrayofLotto.length < numOfBuy) {
       arrayofLotto.push(this.#makeLottoNum());
