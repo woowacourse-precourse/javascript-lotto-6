@@ -15,6 +15,10 @@ class LottoArray {
     }
   }
 
+  get() {
+    return this.#lottoArray;
+  }
+
   #createLotto() {
     const lotto = new Lotto(RandomNumbers.create());
     this.#lottoArray.push(lotto);

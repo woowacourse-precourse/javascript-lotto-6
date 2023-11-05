@@ -4,22 +4,28 @@ import LottoArray from './LottoArray.js';
 import Validator from './validator/Validator.js';
 
 class LottoGame {
-  #lottoArray;
+  #lottos;
 
   constructor() {
-    this.#lottoArray = new LottoArray();
+    this.#lottos = new LottoArray();
   }
 
   async play() {
-    const money = Number(await InputView.readPurchaseAmount());
+    await this.buyLottos();
+  }
+
+  async buyLottos() {
+    const money = await InputView.readPurchaseAmount();
 
     try {
       this.validate(money);
-      this.buyLottos(money);
     } catch (error) {
       OutputView.print(error.message);
-      await this.play();
+      await this.buyLottos();
     }
+
+    this.issueLottos(money);
+    OutputView.printLottos(this.#lottos.get());
   }
 
   validate(money) {
@@ -27,8 +33,8 @@ class LottoGame {
     Validator.unit(money);
   }
 
-  buyLottos(money) {
-    this.#lottoArray.set(money);
+  issueLottos(money) {
+    this.#lottos.set(money);
   }
 }
 
