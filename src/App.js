@@ -10,6 +10,8 @@ class App {
 
   #bonusNumber;
 
+  #winningList = [0, 0, 0, 0, 0];
+
   static #isPositiveInteger(input) {
     const regex = /^\d+$/;
     return regex.test(input);
@@ -83,7 +85,7 @@ class App {
       "당첨 번호를 입력해 주세요.\n",
     );
     App.#validateWinningNumbers(numbers);
-    this.#winningNumbers = new Set(numbers.split(" "));
+    this.#winningNumbers = new Set(numbers.split(",").map(Number));
   }
 
   static #validateBonusNumber(bonusNumber) {
@@ -103,6 +105,55 @@ class App {
     this.#bonusNumber = bonusNumber;
   }
 
+  static #DecideSecondOrThird(hasBonus) {
+    const THIRD = 2;
+    const SECOND = 3;
+    if (hasBonus) {
+      this.#winningList[SECOND] += 1;
+      return;
+    }
+    this.#winningList[THIRD] += 1;
+  }
+
+  checkLotto(lotto) {
+    let win = 0;
+    let hasBonus = false;
+    const numbers = lotto.getNumbers();
+    const FIFTH = 0;
+    const FOURTH = 1;
+    const FIRST = 4;
+
+    for (let i = 0; i < numbers.length; i += 1) {
+      if (this.#winningNumbers.has(numbers[i])) {
+        win += 1;
+      }
+      if (this.#bonusNumber === numbers[i]) {
+        hasBonus = true;
+      }
+    }
+    switch (win) {
+      case 3:
+        this.#winningList[FIFTH] += 1;
+        break;
+      case 4:
+        this.#winningList[FOURTH] += 1;
+        break;
+      case 5:
+        App.#DecideSecondOrThird(hasBonus);
+        break;
+      case 6:
+        this.#winningList[FIRST] += 1;
+        break;
+      default:
+    }
+  }
+
+  checkLottos() {
+    for (let i = 0; i < this.#lottos.length; i += 1) {
+      this.checkLotto(this.#lottos[i]);
+    }
+  }
+
   async play() {
     await this.getMoneyInput();
     for (let i = 0; i < this.#money / 1000; i += 1) {
@@ -111,6 +162,7 @@ class App {
     this.printLottoList();
     await this.getWinningNumbers();
     await this.getBonusNumber();
+    this.checkLottos();
   }
 }
 
