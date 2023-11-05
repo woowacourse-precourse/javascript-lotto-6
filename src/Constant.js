@@ -1,18 +1,27 @@
-export const Constant = Object.freeze({
-  THOUSAND: 1000,
-});
-
 export const LOTTO = Object.freeze({
   REG_NUMBER: /[^0-9]+/,
+  PRICE: 1000,
   MIN_NUMBER: 1,
   MAX_NUMBER: 45,
+  MATCH_THREE: 3,
+  MATCH_FOUR: 4,
+  MATCH_FIVE: 5,
   LOTTO_LENGHT: 6,
-  PRICE: 1000,
-  FIRST_PLACE: 2000000000,
-  SECOND_PLACE: 30000000,
-  THIRD_PLACE: 1500000,
-  FOURTH_PLACE: 50000,
-  FIFTH_PLACE: 5000,
+});
+
+export const PRIZE_MONEY = Object.freeze({
+  MATCH_COUNT: {
+    THREE: 'FIFTH_PRIZE',
+    FOUR: 'FOURTH_PRIZE',
+    FIVE: 'THIRD_PRIZE',
+    BONUS: 'SECOND_PRIZE',
+    SIX: 'FIRST_PRIZE',
+  },
+  FIRST_PRIZE: 2000000000,
+  SECOND_PRIZE: 30000000,
+  THIRD_PRIZE: 1500000,
+  FOURTH_PRIZE: 50000,
+  FIFTH_PRIZE: 5000,
 });
 
 export const INPUT = Object.freeze({
@@ -25,12 +34,14 @@ export const OUTPUT = Object.freeze({
   PRINT_PURCHASE_QUANTITY: '개를 구매했습니다.\n',
   PRINT_WINNING_STATISTICS: '당첨 통계\n',
   PRINT_LINE: '---\n',
-  PRINT_MATCH: (matches, matchCount) =>
-    `${matches}개 일치 (${LOTTO.FIRST_PLACE.toLocaleString()}원) - ${matchCount}개\n`,
-  PRINT_MATCH_BONUS: matchCount =>
-    `5개 일치, 보너스 볼 일치 (${LOTTO.SECOND_PLACE.toLocaleString()}원) - ${matchCount}개\n`,
-  PRINT_TOTAL_RETURN: number => `총 수익률은 ${number}%입니다.`,
   COMMA: ',',
+  PRINT_MATCH_THREE: count => `3개 일치 (5,000원) - ${count}개\n`,
+  PRINT_MATCH_FOUR: count => `4개 일치 (50,000원) - ${count}개\n`,
+  PRINT_MATCH_FIVE: count => `5개 일치 (1,500,000원) - ${count}개\n`,
+  PRINT_MATCH_BONUS: count =>
+    `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`,
+  PRINT_MATCH_SIX: count => `6개 일치 (2,000,000,000원) - ${count}개\n`,
+  PRINT_TOTAL_RETURN: number => `총 수익률은 ${number}%입니다.`,
 });
 
 export const ERROR = Object.freeze({
