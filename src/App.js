@@ -73,7 +73,7 @@ class App {
     let winningSix = 0;
 
     // 두 문자열 사이 중복되는 값의 개수 확인
-    Console.print(userRandomNums)
+    // Console.print(userRandomNums)
     for (let i=0; i<userRandomNums.length; i++) {
       let sameNum = 0;
       let isBonus = false;
@@ -112,7 +112,8 @@ class App {
     // 깔끔하게 수정하기
     const sums = 5000 * winningThree + 50000 * winningFour + 1500000 * winningFive
     + 30000000 * winningBonus + 2000000000 * winningSix
-    const rate = (1000000 / userMoney).toFixed(1);
+    const rate = (sums / userMoney * 0.01).toFixed(1);
+    // console.log(sums, rate, userMoney)
     Console.print(MESSAGE_INPUT(rate).RATE);
     
   }
