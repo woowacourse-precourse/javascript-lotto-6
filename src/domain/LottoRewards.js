@@ -12,6 +12,7 @@ class LottoRewards {
 
   /**
    * 등수별 로또 경품입니다.
+   * @type {LottoReward[]}
    */
   #prizeTable = [
     // 1등
