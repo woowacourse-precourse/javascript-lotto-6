@@ -12,6 +12,7 @@ class GameController {
 
   async play() {
     await this.getMoney();
+    this.createLottos();
   }
 
   async getMoney() {
@@ -26,4 +27,14 @@ class GameController {
     }
   }
 
+  createLottos() {
+    while (true) {
+      try {
+        this.#lottoMachine.createLottos();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
 export default GameController;
