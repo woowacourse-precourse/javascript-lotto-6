@@ -68,4 +68,11 @@ describe("App Unit Test", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("수익률 출력", () => {
+    const logSpy = getLogSpy();
+    App.printRateOfIncome([0, 0, 0, 0, 1], 8000);
+    const answer = "총 수익률은 62.5%입니다.";
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(answer));
+  });
 });
