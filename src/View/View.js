@@ -48,6 +48,10 @@ class View {
 
     this.#outputView.print(message);
   }
+
+  print(userInput) {
+    this.#outputView.print(userInput);
+  }
 }
 
 export default View;

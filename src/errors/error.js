@@ -10,6 +10,10 @@ class CustomError extends Error {
   static inputView(message) {
     return new CustomError(message, ERROR.name.inputView);
   }
+
+  static lotto(message) {
+    return new CustomError(message, ERROR.name.lotto);
+  }
 }
 
 export default CustomError;

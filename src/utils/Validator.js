@@ -42,13 +42,13 @@ const Validator = {
   /* Validation */
   validateUserInput(value) {
     if (this.isEmptyString(value) || this.isSpace(value)) {
-      throw CustomError.inputView(ERROR.message.emptyString);
+      throw CustomError.inputView(ERROR.message.inputView.emptyString);
     }
   },
 
   validatePositiveInteger(value) {
     if (!this.isPositiveInteger(value)) {
-      throw CustomError.inputView(ERROR.message.notPositiveInteger);
+      throw CustomError.inputView(ERROR.message.inputView.notPositiveInteger);
     }
   },
 };
