@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import InputError from "../errors/InputError.js";
+import Lotto from "../lotto/Lotto.js";
 
 class UserInput {
   static validateAmount(input) {
@@ -14,17 +15,8 @@ class UserInput {
     return inputToNumber;
   }
 
-  static validateLottoNumbers(input) {
-    InputError.checkLottoLength(input);
-    InputError.checkDuplicateNumbers(input);
-
-    input.forEach((number) => {
-      const inputToNumber = parseInt(number, 10);
-
-      InputError.checkNumberError(inputToNumber);
-      InputError.checkNagativeNumberError(inputToNumber);
-      InputError.checkOutOfRangeNumbers(inputToNumber);
-    });
+  static validateEmptyLottoNumbers(input) {
+    InputError.checkEmptyInputError(input);
   }
 
   static validateBonusNumber(input) {
@@ -54,11 +46,9 @@ class UserInput {
       "당첨 번호를 입력해 주세요.\n"
     );
 
-    const lottoList = lottoNumbers.split(",");
+    InputError.checkEmptyInputError(lottoNumbers);
 
-    this.validateLottoNumbers(lottoList);
-
-    return lottoList.map(Number);
+    new Lotto(lottoNumbers.split(",").map(Number));
   }
 
   static async getBonusNumber() {
