@@ -11,7 +11,7 @@ class BonusValidation {
   #checkDuplicateNumber(lotto) {
     const number = Number(this.#answer);
 
-    if (lotto.indexOf(number) >= 0) {
+    if (lotto.includes(number)) {
       throw new Error(MESSAGE.error.duplicateNumber);
     }
   }
