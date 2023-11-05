@@ -6,7 +6,7 @@ async function inputPrice() {
   try {
     const INPUT = await Console.readLineAsync(ASK_PRICE);
     const PRICE = Number(INPUT);
-    if (!isValidPrice(PRICE)) process.exit();
+    if (!isValidPrice(PRICE)) return 0;
     return PRICE;
   } catch (error) {
     throw new Error(error);
