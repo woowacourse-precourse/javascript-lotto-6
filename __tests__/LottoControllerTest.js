@@ -15,4 +15,12 @@ describe("로또 컨트롤러 클래스 테스트", () => {
       new LottoController(totalPrice);
     }).toThrow(PRICE.ERROR.NOT_DIVISIBLE_BY_TICKET);
   });
+
+  test.each([["10000"], ["15000"]])(
+    "사용자가 입력한 구입 금액의 티켓 장수만큼 로또 티켓을 발행한다 - %s원",
+    (money) => {
+      const lottoController = new LottoController(money);
+      expect(lottoController.lottoArray.length).toBe(+money / PRICE.TICKET);
+    }
+  );
 });
