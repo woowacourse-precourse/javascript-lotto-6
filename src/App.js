@@ -16,16 +16,19 @@ class App {
     Console.print(`${lottoCnt}개를 구매했습니다.\n`);
     for(let i = 0; i<lottoCnt; i++){
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+     numbers.sort((a,b)=>a-b);
       Console.print(numbers) //TODO: 로또에 메서드 넣기
       const lotto = new Lotto(numbers);
     }
 
-    const WinningNum = await Console.readLineAsync(
+    const winningNum = await Console.readLineAsync(
       "당첨 번호를 입력해 주세요.\n"
     );
-    const BonusNum = await Console.readLineAsync(
+    const bonusNum = await Console.readLineAsync(
       "보너스 번호를 입력해 주세요.\n"
     );
+
+    
   }
 }
 export default App;
