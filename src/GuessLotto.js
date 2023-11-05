@@ -70,9 +70,14 @@ class GuessLotto {
     if (Number.isNaN(+lottoPurchaseMoney) || lottoPurchaseMoney.trim() === '')
       throw new Error('[ERROR] 구입 금액이 잘못되었습니다.');
 
+    if (+lottoPurchaseMoney > 100000)
+      throw new Error(
+        '[ERROR] 구입 금액이 잘못되었습니다. 구매 최대 금액은 100,000원입니다.',
+      );
+
     if (+lottoPurchaseMoney < 1000 || lottoPurchaseMoney % 1000 !== 0)
       throw new Error(
-        '[ERROR] 구입 금액이 잘못되었습니다. 1000원 단위로 입력해주세요.',
+        '[ERROR] 구입 금액이 잘못되었습니다. 1,000원 단위로 입력해주세요.',
       );
 
     this.#lottoPieces = lottoPurchaseMoney / 1000;
