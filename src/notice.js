@@ -10,8 +10,8 @@ class notice {
   }
 
   static finalProfit(profit, prizeResult) {
-    prompt.out('당첨 통계');
-    prompt.out('---');
+    prompt.out('당첨 통계\n---');
+    // prompt.out('---');
     prompt.out(`${NUMBER.THREE}개 일치 (5,000원) - ${prizeResult.fifth}개`);
     prompt.out(`${NUMBER.FOUR}개 일치 (50,000원) - ${prizeResult.fourth}개`);
     prompt.out(`${NUMBER.FIVE}개 일치 (1,500,000원) - ${prizeResult.third}개`);
