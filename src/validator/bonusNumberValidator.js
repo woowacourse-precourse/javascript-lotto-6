@@ -1,8 +1,9 @@
-import commonValidator from './commonValidator';
+import commonValidator from './commonValidator.js';
 
 const bonusNumberValidator = {
   checkBonusNumber(winnigNumbers) {
     commonValidator.checkNumberType(winnigNumbers);
+    commonValidator.checkLottoNumberRange(winnigNumbers);
   },
 };
 
