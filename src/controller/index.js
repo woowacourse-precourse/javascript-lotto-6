@@ -1,3 +1,4 @@
+import Lotto from '../Lotto.js';
 import LottoModel from '../model/index.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
@@ -14,7 +15,7 @@ class LottoController {
 
     OutputView.printUserLottos(userLottos);
 
-    await this.#drawLottery();
+    const { winningNumbers } = await this.#drawLottery();
   }
 
   async #purchaseLotto() {
@@ -33,9 +34,21 @@ class LottoController {
   }
 
   async #drawLottery() {
-    const winningNumbers = await InputView.readLottoWinningNumbers();
+    const winningNumbers = await this.#getWinningNumbers();
 
-    return winningNumbers;
+    return { winningNumbers };
+  }
+
+  async #getWinningNumbers() {
+    try {
+      const winningNumbers = await InputView.readLottoWinningNumbers();
+
+      return Lotto.of(winningNumbers.split(','));
+    } catch (error) {
+      OutputView.print(error.message);
+
+      await this.#getWinningNumbers();
+    }
   }
 }
 
