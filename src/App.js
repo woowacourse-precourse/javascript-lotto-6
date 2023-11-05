@@ -17,7 +17,7 @@ class App {
   async setGameConfig() {
     const { lotteryTickets, winningNumbers, bonusNumber } = await this.readGameConfig();
     const rankBoard = Lotto.getRankBoard(lotteryTickets, winningNumbers, bonusNumber);
-    
+    this.#view.printRankResult(rankBoard);
   }
 
   async readGameConfig() {

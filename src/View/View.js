@@ -34,4 +34,8 @@ export default class View {
     const stringTicket = MessageFormat.stringTicket(ticket);
     this.#outputView.print(stringTicket);
   }
+
+  printRankResult(rankBoard) {
+    this.#outputView.print(MessageFormat.rankResult(rankBoard));
+  }
 }
