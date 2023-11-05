@@ -15,4 +15,16 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test.each([null, undefined, '', false])(
+    '배열이 아닌 경우 예외가 발생한다.', (input) => {
+      expect(() => {
+        new Lotto(input);
+      }).toThrow("[ERROR]");
+    });
+
+  test("배열 중에 숫자가 아닌 값이 있으면 예외가 발생한디.", () => {
+    expect(() => {
+      new Lotto(['a',3,4,5,6,7]);
+    }).toThrow("[ERROR]");
+  });
 });

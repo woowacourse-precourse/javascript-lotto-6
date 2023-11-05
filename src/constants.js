@@ -31,7 +31,7 @@ const pattern = {
 };
 
 const ERROR = {
-  ONLY_NUMBER: `${pattern.prefix} 정확한 값이 아닙니다.`,
+  TYPE_CHECK: `${pattern.prefix} 정확한 값이 아닙니다.`,
   AMOUNT_CHECK: `${pattern.prefix} 금액은 ${NUMBER.DEFAULT}원 단위로 입력해주세요.`,
   INVALID_ARRAY: `${pattern.prefix} ${NUMBER.SIX}개의 숫자를 쉼표(,)로 구분하여 입력해주세요.`,
   DUPLICATE: `${pattern.prefix} 서로 다른 숫자를 입력해주세요.`,
