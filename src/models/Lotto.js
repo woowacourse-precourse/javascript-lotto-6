@@ -1,9 +1,11 @@
+import { sortNumbers } from '../utils/numberUtils.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = sortNumbers(numbers);
   }
 
   #validate(numbers) {
