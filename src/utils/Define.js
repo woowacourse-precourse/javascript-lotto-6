@@ -21,6 +21,8 @@ export const PRIZE_MAP = {
 
 export const INPUT_MESSAGES = {
     PURCHACE_PRICE: '구매 금액을 입력해 주세요.',
+    LOTTO_NUMBER: '당첨 번호를 입력해 주세요.',
+    BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
 };
 
 export const ERROR = {
