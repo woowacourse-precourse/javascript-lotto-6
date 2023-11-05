@@ -18,6 +18,20 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  compareLottos(lotto, bonusNumber) {
+    let sameCnt = 0;
+    let bonusCnt = 0;
+
+    for (let i = 0; i < lotto.length; i++) {
+      if (this.#numbers.includes(lotto[i])) {
+        sameCnt += 1;
+      } else if (bonusNumber === lotto[i]) {
+        bonusCnt += 1;
+      }
+    }
+
+    return [sameCnt, bonusCnt];
+  }
 }
 
 export default Lotto;
