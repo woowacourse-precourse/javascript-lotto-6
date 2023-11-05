@@ -2,16 +2,37 @@ import { LOTTO } from '../constants/lottoGame.js';
 
 const isPositiveInteger = (input) => input > 0 && Number.isInteger(input);
 
+const inRange = (input) =>
+  input >= LOTTO.MIN_NUMBER && input <= LOTTO.MAX_NUMBER;
+
 const Validator = {
   unit(input) {
     if (input % LOTTO.PRICE) {
-      throw new Error('[ERROR] 1,000원 단위의 금액이어야 합니다.');
+      throw new Error('[ERROR] 구매 금액은 1,000원 단위여야 합니다.');
     }
   },
 
   numberType(input) {
     if (!isPositiveInteger(input)) {
-      throw new Error('[ERROR] 0보다 큰 정수 형태여야 합니다.');
+      throw new Error('[ERROR] 구매 금액은 0원보다 커야 합니다.');
+    }
+  },
+
+  length(input) {
+    if (input.length !== LOTTO.LENGTH) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+  },
+
+  range(input) {
+    if (!input.every(inRange)) {
+      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }
+  },
+
+  duplication(input) {
+    if (new Set(input).size !== input.length) {
+      throw new Error('[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.');
     }
   },
 };

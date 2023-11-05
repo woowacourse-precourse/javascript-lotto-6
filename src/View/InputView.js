@@ -11,7 +11,7 @@ const InputView = {
       INPUT_MESSAGE.WINNING_NUMBERS
     );
 
-    return winningNumbers.split(',');
+    return winningNumbers.split(',').map(Number);
   },
 
   async readBonusNumber() {

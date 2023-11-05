@@ -1,15 +1,17 @@
+import Validator from './validator/Validator.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = this.sort(numbers);
+    this.#numbers = this.#sort(numbers);
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
+    Validator.length(numbers);
+    Validator.range(numbers);
+    Validator.duplication(numbers);
   }
 
   // TODO: 추가 기능 구현
@@ -17,7 +19,7 @@ class Lotto {
     return this.#numbers;
   }
 
-  sort(numbers) {
+  #sort(numbers) {
     return numbers.sort((a, b) => a - b);
   }
 }
