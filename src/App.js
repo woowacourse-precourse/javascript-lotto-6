@@ -78,6 +78,9 @@ class App {
     return randomNumberArray;
   }
 
+  printPurchaseAmount(lottoTicket){
+    Console.print(PRINT_MESSAGE.PURCHASE(lottoTicket));
+  }
 
   async play() {
     try{
@@ -85,7 +88,7 @@ class App {
       await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
       this.checkLottoPrice(lottoPrice);
       this.lottoTicket = this.getLottoTicket(lottoPrice);
-      Console.print(`${this.lottoTicket}개를 구매했습니다.`);
+      this.printPurchaseAmount(this.lottoTicket);
 
       while (this.countNumber < this.lottoTicket) {
         let randomNumberArray = this.makeRandomNumber();
