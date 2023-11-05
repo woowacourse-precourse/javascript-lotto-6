@@ -4,9 +4,7 @@ import BonusNumber from "../src/Model/BonusNumber.js";
 describe("TicketManager 클래스 테스트", () => {
     test("ticket 길이 테스트", () => {
         const ticketsManager = new TicketManager();
-        ticketsManager.addTicket();
-        ticketsManager.addTicket();
-        ticketsManager.addTicket();
+        ticketsManager.addTicket(3);
         const tickets = ticketsManager.getTickets();
         expect(tickets.length).toBe(3);
     });
@@ -21,11 +19,11 @@ describe("TicketManager 클래스 테스트", () => {
         const bonus = new BonusNumber(7);
         tick.countMatchAllNumber(lotto, bonus);
         expect(tick.matches).toEqual({
-            three: 1, 
-            four: 1, 
-            five: 0, 
-            bonus: 1, 
-            six: 1
+            "3": 1, 
+            "4": 1, 
+            "5": 0, 
+            "5b": 1, 
+            "6": 1
         })
     })
 });

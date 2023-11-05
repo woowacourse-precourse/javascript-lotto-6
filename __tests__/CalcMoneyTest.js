@@ -8,14 +8,14 @@ describe("CalcMoney 클래스 테스트", () => {
     
     test("수익금 테스트", () => {
         const matches = {
-            three: 1, 
-            four: 1, 
-            five: 0, 
-            bonus: 1, 
-            six: 1
+            "3": 1, 
+            "4": 1, 
+            "5": 0, 
+            "5b": 1, 
+            "6": 1
         }
         const returnMoney = calcMoney.calcReturnMoney(matches);
-        expect(returnMoney).toBe(MONEY.THREE + MONEY.FOUR + MONEY.BONUS + MONEY.SIX); 
+        expect(returnMoney).toBe(MONEY["3"] + MONEY["4"] + MONEY["5b"] + MONEY["6"]); 
     });
 
     test("수익률 테스트", () => {
