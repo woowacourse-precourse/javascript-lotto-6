@@ -30,6 +30,20 @@ class App {
     ]);
   }
 
+  async play() {
+    this.#payment = await Input.payment();
+    const amount = this.#payment / LOTTO_COST;
+    Console.print(`\n${amount}개를 구매했습니다.`);
+
+    this.generateLottos(amount);
+
+    this.#winning = await Input.winning();
+    this.#bonus = await Input.bonusNumber(this.#winning);
+
+    this.calculateResult();
+    this.printResult();
+  }
+
   generateLottos(amount) {
     for (let i = 0; i < amount; i += 1) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -82,20 +96,6 @@ class App {
       this.printRankedLotto(rank, LOTTO_PRIZE.get(rank), count);
     });
     this.printMarginRate();
-  }
-
-  async play() {
-    this.#payment = await Input.payment();
-    const amount = this.#payment / LOTTO_COST;
-    Console.print(`\n${amount}개를 구매했습니다.`);
-
-    this.generateLottos(amount);
-
-    this.#winning = await Input.winning();
-    this.#bonus = await Input.bonusNumber(this.#winning);
-
-    this.calculateResult();
-    this.printResult();
   }
 }
 
