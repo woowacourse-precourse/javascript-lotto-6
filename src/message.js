@@ -24,4 +24,4 @@ const INPUT_MESSAGE = ({
     BONUS_NUMBER : '보너스 번호를 입력해 주세요.\n',
 });
 
-export {ERROR_MESSAGE, PRINT_MESSAGE};
+export {ERROR_MESSAGE, PRINT_MESSAGE, INPUT_MESSAGE};
