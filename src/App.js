@@ -94,3 +94,40 @@ export function lottoReader(lotto, winning, bonus) {
   }
   return [sameNumbers.length, sameBonus.length];
 }
+
+export function lottoResultPrinter(results, count) {
+  const indexNumber = findIndexBySameValue(results)
+  const prize = winningDetails.prize[indexNumber];
+  const currencyPrize = formatCurrency(prize);
+  MissionUtils.Console.print(`${results[0]}개 일치 (${currencyPrize}원) - ${count}개`);
+}
+
+function findIndexBySameValue(valueToFind) {
+  const sameValues = winningDetails.same;
+  if (valueToFind[0] === 5) {
+    return findIndexByBonus(valueToFind);
+  }
+  for (let i = 0; i < sameValues.length; i++) {
+    if (sameValues[i] === valueToFind[0]) {
+      return i;
+    }
+  }
+}
+
+function findIndexByBonus(valueToFind) {
+  const sameValues = winningDetails.same;
+  if (sameValues[3] === valueToFind) {
+    return 3;
+  }
+  if (sameValues[4] === valueToFind) {
+    return 4;
+  }
+}
+
+function formatCurrency(number) {
+  return new Intl.NumberFormat("ko-KR", {
+    style: "currency",
+    currency: "KRW",
+  minimumFractionDigits: 0,  // 소수점 이하 자릿수 설정
+  }).format(number).replace(/₩/g, '');
+}

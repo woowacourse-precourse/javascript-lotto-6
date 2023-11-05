@@ -1,4 +1,12 @@
 import { lottoReader, lottoResultPrinter } from "../src/App.js" 
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
 
 describe("당첨 통계 테스트", () => {
   test("당첨 번호와 로또 번호를 비교한다.", () => {
@@ -12,13 +20,17 @@ describe("당첨 통계 테스트", () => {
     expect(result).toEqual(output);
   });
 
-  test("당첨 내역을 출력한다.", () => {
-    const winningInput = [3,0];
-    const countInput = 1;
-    const output = "3개 일치 (5,000원) - 1개";
+  test.each([
+    [[3,0],1,"3개 일치 (5,000원) - 1개"],
+    [[4,0],2,"4개 일치 (50,000원) - 2개"],
+    [[5,0],3,"5개 일치 (1,500,000원) - 3개",],
+    [[5,1],1,"5개 일치, 보너스 볼 일치 (30,000,000원) - 1개"],
+    [[6,0],1,"6개 일치 (2,000,000,000원) - 1개"]
+  ])("당첨 내역을 출력한다.", (resultsInputs, countInputs,logs) => {
+    const logSpy = getLogSpy();
 
-    const result = lottoResultPrinter(winningInput, countInput);
+    lottoResultPrinter(resultsInputs, countInputs);
 
-    expect(result).toEqual(output);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(logs));
   });
 });
