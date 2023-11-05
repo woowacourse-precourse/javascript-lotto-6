@@ -6,18 +6,21 @@ class UserLottoNumber {
     this.bonusNumber = null;
   }
 
-  async userBaseNumber() {
+  async setUserLottoNumbers() {
     const input = await Console.readLineAsync();
-    this.baseNumbers = input.split(",").map((number) => parseInt(number.trim(), 10));
+    return input.split(",").map((numStr) => parseInt(numStr.trim(), 10));
+  }
+
+  async userBaseNumber() {
+    this.baseNumbers = await this.setUserLottoNumbers();
     return this.baseNumbers;
   }
 
   async userBonusNumber() {
-    const input = await Console.readLineAsync();
-    const number = parseInt(input.trim(), 10);
-
-    this.#bonusValidate(number);
-    this.bonusNumber = number;
+    const bonusNumberArray = await this.setUserLottoNumbers();
+    const bonusNumber = bonusNumberArray[0];
+    this.#bonusValidate(bonusNumber);
+    this.bonusNumber = bonusNumber;
     return this.bonusNumber;
   }
 
