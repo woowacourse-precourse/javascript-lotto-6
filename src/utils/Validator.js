@@ -15,7 +15,7 @@ class Validator {
 
   static checkLottoNumbers(array) {
     return (
-      Validator.#isNotNaN(array) &&
+      Validator.#isArrayNotNaN(array) &&
       Validator.#isNumber(array) &&
       Validator.#isLengthSix(array) &&
       Validator.#isNumbersInRange(array) &&
@@ -25,6 +25,7 @@ class Validator {
 
   static checkBonusNumber(number, array) {
     return (
+      Validator.#isNotNaN(number) &&
       Validator.#isNumberInRange(number) &&
       Validator.#isNotInclude(number, array)
     );
@@ -44,11 +45,15 @@ class Validator {
     );
   }
 
-  static #isNotNaN(value) {
+  static #isArrayNotNaN(value) {
     return this.#validate(
       value.every(elem => !Number.isNaN(elem)),
       ERROR_MESSAGE.INPUT_TYPE_ERROR,
     );
+  }
+
+  static #isNotNaN(value) {
+    return this.#validate(!Number.isNaN(value), ERROR_MESSAGE.INPUT_TYPE_ERROR);
   }
 
   static #isNumber(value) {
