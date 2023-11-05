@@ -40,7 +40,7 @@ const processInputWinningLottoInfo = async () => {
 
 const processLottoPurchase = (purchasedLottoAmount) => {
   const params = { randomNumberGenerator: Random, purchasedLottoAmount };
-  const lottoNumbers = lottoPurchase.generateLottoNumbers(params);
+  const lottoNumbers = lottoPurchase.buyLottoNumbers(params);
 
   lottoGameConsole.output.printLottoNumbers(lottoNumbers);
 

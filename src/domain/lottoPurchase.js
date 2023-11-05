@@ -13,11 +13,11 @@ const calculatePurchaseCount = (purchasedLottoAmount, lottoUnit) =>
 const lottoPurchase = Object.freeze({
   constants: Object.freeze({
     unit: 1_000,
-    minRange: 1_000,
-    maxRange: 10_000,
+    minAmount: 1_000,
+    maxAmount: 10_000,
   }),
 
-  generateLottoNumbers({ randomNumberGenerator, purchasedLottoAmount }) {
+  buyLottoNumbers({ randomNumberGenerator, purchasedLottoAmount }) {
     const purchasedCount = calculatePurchaseCount(purchasedLottoAmount, this.constants.unit);
     return Array.from({ length: purchasedCount }, () => generateLottoNumber(randomNumberGenerator));
   },

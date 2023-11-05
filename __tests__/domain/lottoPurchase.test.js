@@ -16,9 +16,9 @@ describe('로또 구매 테스트', () => {
     '구매한 로또 금액이 $purchasedLottoAmount일 때, 구매한 로또 번호의 갯수는 $expectedCount이다.',
     ({ purchasedLottoAmount, expectedCount }) => {
       // given
-      const generateLottoNumbersParams = { randomNumberGenerator, purchasedLottoAmount };
+      const params = { randomNumberGenerator, purchasedLottoAmount };
       // when
-      const lottoNumbers = lottoPurchase.generateLottoNumbers(generateLottoNumbersParams);
+      const lottoNumbers = lottoPurchase.buyLottoNumbers(params);
       // then
       expect(lottoNumbers).toHaveLength(expectedCount);
     },

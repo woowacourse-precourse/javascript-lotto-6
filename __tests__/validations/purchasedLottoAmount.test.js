@@ -12,15 +12,15 @@ describe('validatePurchasedLottoAmount 테스트', () => {
   describe('예외 테스트', () => {
     test.each([
       {
-        input: lottoPurchase.constants.minRange - 2000,
+        input: lottoPurchase.constants.minAmount - 2000,
         expectedErrorMessage: PURCHASED_LOTTO_AMOUNT_VALIDATION_TYPES.amountRange.errorMessage,
       },
       {
-        input: lottoPurchase.constants.minRange - 1,
+        input: lottoPurchase.constants.minAmount - 1,
         expectedErrorMessage: PURCHASED_LOTTO_AMOUNT_VALIDATION_TYPES.amountRange.errorMessage,
       },
       {
-        input: lottoPurchase.constants.maxRange + 1,
+        input: lottoPurchase.constants.maxAmount + 1,
         expectedErrorMessage: PURCHASED_LOTTO_AMOUNT_VALIDATION_TYPES.amountRange.errorMessage,
       },
       {
@@ -39,10 +39,10 @@ describe('validatePurchasedLottoAmount 테스트', () => {
   describe('비 예외 테스트', () => {
     test.each([
       {
-        input: lottoPurchase.constants.minRange,
+        input: lottoPurchase.constants.minAmount,
       },
       {
-        input: lottoPurchase.constants.maxRange,
+        input: lottoPurchase.constants.maxAmount,
       },
       {
         input: lottoPurchase.constants.unit,

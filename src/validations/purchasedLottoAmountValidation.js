@@ -6,10 +6,10 @@ import AppError from '../error/customErrors/AppError.js';
  */
 export const PURCHASED_LOTTO_AMOUNT_VALIDATION_TYPES = Object.freeze({
   amountRange: Object.freeze({
-    errorMessage: `구매 로또 금액은 ${lottoPurchase.constants.minRange} ~ ${lottoPurchase.constants.maxRange}원 사이로 입력해주세요.`,
+    errorMessage: `구매 로또 금액은 ${lottoPurchase.constants.minAmount} ~ ${lottoPurchase.constants.maxAmount}원 사이로 입력해주세요.`,
     isValid(purchasedLottoAmount) {
-      const { minRange, maxRange } = lottoPurchase.constants;
-      return purchasedLottoAmount >= minRange && purchasedLottoAmount <= maxRange;
+      const { minAmount, maxAmount } = lottoPurchase.constants;
+      return purchasedLottoAmount >= minAmount && purchasedLottoAmount <= maxAmount;
     },
   }),
 
