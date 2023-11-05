@@ -1,3 +1,4 @@
+import { ERROR } from '../messages.js';
 import { isPositiveInteger } from '../utils.js';
 
 class Cash {
@@ -6,17 +7,17 @@ class Cash {
     this.value = Number(value);
   }
 
-  get() {
+  getValue() {
     return this.value;
   }
 
   #validate(value) {
     if (!isPositiveInteger(value)) {
-      throw new Error('[ERROR] 입력은 양의 정수여야 합니다.\n');
+      throw new Error(ERROR.CASH.NOT_POSITIVE_INTEGER);
     }
 
     if (Number(value) % 1000 > 0) {
-      throw new Error('[ERROR] 입력은 1000원 단위여야 합니다.\n');
+      throw new Error(ERROR.CASH.UNIT);
     }
   }
 }

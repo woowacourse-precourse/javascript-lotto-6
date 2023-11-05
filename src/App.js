@@ -1,104 +1,90 @@
 import { Console } from '@woowacourse/mission-utils';
-import Cash from './Cash.js';
-import Lotto from './Lotto.js';
-import { generateLottoNumbers } from './utils.js';
+import Cash from './objects/Cash.js';
+import Lotto from './objects/Lotto.js';
+import { generateRandomNumbers } from './utils.js';
+import Bonus from './objects/Bonus.js';
+import { ERROR, INQUIRY, OUTPUT } from './messages.js';
 
 class App {
   #cash;
-  #lottoCount;
   #lottoEntries;
   #winNumbers;
   #bonus;
 
   constructor() {
-    this.#lottoCount = 0;
     this.#lottoEntries = new Map();
   }
 
-  async #initCash() {
+  async buyLotto() {
     try {
-      const cashInput = await Console.readLineAsync(
-        '구입금액을 입력해 주세요.\n'
-      );
+      const cashInput = await Console.readLineAsync(INQUIRY.CASH);
 
       const cash = new Cash(cashInput);
-      this.#cash = cash.get();
+      this.#cash = cash.getValue();
+      await this.#generateLottoNumbers();
     } catch (error) {
       Console.print(error.message);
-      this.play();
+      await this.play();
     }
   }
 
-  async #initLotto() {
-    if (!this.#cash) return;
+  async #generateLottoNumbers() {
+    const lottoCount = this.#cash / 1000;
+    Console.print(OUTPUT.BUY_LOTTO(lottoCount));
 
-    this.#lottoCount = this.#cash / 1000;
-    Console.print(`\n${this.#lottoCount}개를 구매했습니다.`);
-
-    while (this.#lottoEntries.size < this.#lottoCount) {
-      const randomNumbers = generateLottoNumbers();
+    while (this.#lottoEntries.size < lottoCount) {
+      const randomNumbers = generateRandomNumbers(6);
       const id = randomNumbers.join('');
 
       if (!this.#lottoEntries.has(id)) {
         this.#lottoEntries.set(id, new Lotto(randomNumbers));
       }
     }
+
+    this.#printLottoNumbers();
   }
 
-  printLottoList() {
-    for (const value of this.#lottoEntries.values()) {
-      Console.print(value.getNumbers());
+  #printLottoNumbers() {
+    for (const lotto of this.#lottoEntries.values()) {
+      Console.print(lotto.getLottoNumbers());
     }
+
     Console.print('');
+    this.#inputWinningNumbers();
   }
 
-  async #initWinNunmbers() {
-    if (!this.#cash) return;
-
+  async #inputWinningNumbers() {
     try {
-      const input = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-      const winNumbers = new Lotto(input.split(',').map(Number)).getNumbers();
-      if (this.#lottoEntries.has([...winNumbers].map(String).join(''))) {
-        this.#initWinNunmbers();
-      }
-
-      this.#winNumbers = winNumbers;
-      await this.#initBonusNumber();
+      const input = await Console.readLineAsync(INQUIRY.WINNING_NUMBERS);
+      const inputNumbers = input.split(',').map((value) => Number(value));
+      const winNumbers = new Lotto(inputNumbers);
+      this.#winNumbers = winNumbers.getLottoNumbers();
+      await this.#inputBonusNumber();
     } catch (error) {
       Console.print(error.message);
-      this.#initWinNunmbers();
+      this.#inputWinningNumbers();
     }
   }
 
-  async #initBonusNumber() {
-    if (!this.#winNumbers) return;
-
+  async #inputBonusNumber() {
     try {
-      const input = await Console.readLineAsync(
-        '보너스 번호를 입력해 주세요.\n'
-      );
+      const input = await Console.readLineAsync(INQUIRY.BONUS_NUMBER);
 
-      if (this.#winNumbers.includes(Number(input))) {
-        throw new Error(
-          '[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.'
-        );
-      }
-      if (!Number.isInteger(Number(input))) {
-        throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
+      const bonus = new Bonus(Number(input));
+
+      if (this.#winNumbers.includes(bonus.getValue())) {
+        throw new Error(ERROR.BONUS_NUMBER.DUPLICATED);
       }
 
-      if (Number(input) < 1 || Number(input) > 45) {
-        throw new Error('[ERROR] 로또 번호는 1 ~ 45 사이여야 합니다.');
-      }
-      this.#bonus = Number(input);
-      this.printResult();
+      this.#bonus = bonus.getValue();
+      this.#printResult();
     } catch (error) {
       Console.print(error.message);
-      this.#initBonusNumber();
+      this.#inputBonusNumber();
     }
   }
 
-  printResult() {
+  #printResult() {
     const result = {
       6: 0,
       '5 + 1': 0,
@@ -109,16 +95,17 @@ class App {
 
     let totalReward = 0;
 
+    // lotto is Lotto class
     for (const lotto of this.#lottoEntries.values()) {
       let match = 0;
-      const numbers = lotto.getNumbers();
+      const lottoNumbers = lotto.getLottoNumbers();
 
-      for (const number of numbers) {
+      for (const number of lottoNumbers) {
         if (this.#winNumbers.includes(number)) {
           match += 1;
         }
 
-        if (match === 5 && numbers.includes(this.#bonus)) {
+        if (match === 5 && lottoNumbers.includes(this.#bonus)) {
           match = '5 + 1';
         }
       }
@@ -146,10 +133,7 @@ class App {
   }
 
   async play() {
-    await this.#initCash();
-    await this.#initLotto();
-    this.printLottoList();
-    await this.#initWinNunmbers();
+    await this.buyLotto();
   }
 }
 

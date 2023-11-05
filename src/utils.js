@@ -6,8 +6,8 @@ function isPositiveInteger(value) {
   return Number.isInteger(number) && number > 0;
 }
 
-function generateLottoNumbers() {
-  return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+function generateRandomNumbers(count) {
+  return Random.pickUniqueNumbersInRange(1, 45, count).sort((a, b) => a - b);
 }
 
-export { isPositiveInteger, generateLottoNumbers };
+export { isPositiveInteger, generateRandomNumbers };
