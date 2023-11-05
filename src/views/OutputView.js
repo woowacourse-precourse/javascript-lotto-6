@@ -19,6 +19,10 @@ const OutputView = {
       Console.print(OUTPUT_MESSAGE.prizeResult(prize, matchCount));
     });
   },
+
+  printProfitRate(profitRate) {
+    Console.print(OUTPUT_MESSAGE.profitRate(profitRate));
+  },
 };
 
 export default OutputView;

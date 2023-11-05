@@ -38,6 +38,14 @@ class LottoService {
     if (prize === undefined) return;
     this.#prize.set(prize, this.#prize.get(prize) + 1);
   }
+
+  calculateProfitRate() {
+    let prizeMoney = 0;
+    this.#prize.forEach((matchCount, prize) => {
+      prizeMoney += matchCount * PRIZE[prize].money;
+    });
+    return (prizeMoney / this.#purchaseMoney) * 100;
+  }
 }
 
 export default LottoService;

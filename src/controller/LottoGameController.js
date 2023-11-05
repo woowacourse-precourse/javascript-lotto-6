@@ -66,6 +66,7 @@ class LottoGameController {
   #printResultStage() {
     OutputView.printPrizeTitle();
     OutputView.printPrizeResult(this.#lottoService.getPrize());
+    OutputView.printProfitRate(this.#lottoService.calculateProfitRate());
   }
 }
 

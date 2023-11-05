@@ -22,7 +22,7 @@ const PRIZE = Object.freeze({
     name: 'third',
     matchCount: 5,
     extraWord: '',
-    money: 1_500_000,
+    money: 1500000,
   },
   fourth: {
     name: 'fourth',
@@ -61,6 +61,11 @@ const OUTPUT_MESSAGE = Object.freeze({
     `${PRIZE[prize].matchCount}개 일치${PRIZE[prize].extraWord} (${PRIZE[
       prize
     ].money.toLocaleString()}원) - ${matchCount}개`,
+  profitRate: profitRate =>
+    `총 수익률은 ${profitRate.toLocaleString(undefined, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    })}%입니다.`,
 });
 
 export { LOTTO, INPUT_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE, PRIZE };
