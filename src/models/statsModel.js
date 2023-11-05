@@ -1,0 +1,36 @@
+import VALUE from '../constants/value.js';
+
+const statsModel = {
+  /*
+  [1, 2, 3, 4, 5, 6] ---> 5000
+  [7, 8, 9, 10, 11, 12] ---> 0
+  */
+  getRevenue(numbers, bonus, count) {
+    let revenue = 0;
+
+    if (count === VALUE.range.bonus && numbers.includes(bonus)) {
+      revenue += VALUE.revenues.at(-2);
+    } else if (count === VALUE.range.count) {
+      revenue += VALUE.revenues.at(-1);
+    } else if (count >= VALUE.range.win) {
+      revenue += VALUE.revenues.at(count - VALUE.range.win);
+    }
+
+    return revenue;
+  },
+
+  // [[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12]] ---> [5000, 0] ---> [5000]
+  getRevenues(random, lotto, bonus) {
+    const revenues = random
+      .map((numbers) => {
+        const count = numbers.filter((number) => lotto.includes(number)).length;
+
+        return this.getRevenue(numbers, bonus, count);
+      })
+      .filter((revenue) => revenue > 0);
+
+    return revenues;
+  },
+};
+
+export default statsModel;
