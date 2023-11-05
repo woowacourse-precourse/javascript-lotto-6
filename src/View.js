@@ -6,6 +6,10 @@ class View {
     const answer = await Console.readLineAsync(QUERY.purchaseAmount);
     return answer;
   }
+
+  static async print(message) {
+    Console.print(message);
+  }
 }
 
 export default View;

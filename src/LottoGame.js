@@ -3,8 +3,13 @@ import View from './View.js';
 
 class LottoGame {
   async start() {
-    const purchaseAmount = await View.askPurchaseAmount();
-    const purchaser = new LottoPurchaser(purchaseAmount);
+    try {
+      const purchaseAmount = await View.askPurchaseAmount();
+      const purchaser = new LottoPurchaser(purchaseAmount);
+    } catch (error) {
+      View.print(error.message);
+      await this.start();
+    }
   }
 }
 
