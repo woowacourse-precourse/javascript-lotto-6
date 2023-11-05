@@ -1,11 +1,11 @@
 import { Random } from "@woowacourse/mission-utils";
 
 class LottoUtils {
-  generateRandomNumber() {
+  static generateRandomNumber() {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  ascendingSort(numbers) {
+  static ascendingSort(numbers) {
     return numbers.sort((a, b) => a - b);
   }
 }

@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import UserInput from "./utils/UserInput.js";
+import LottoGame from "./lottoGame/LottoGame.js";
 
 class App {
   async play() {
@@ -12,6 +13,9 @@ class App {
         Console.print(error.message);
       }
     }
+
+    const lottoGame = new LottoGame();
+    lottoGame.generateLotto(lottoAmount / 1000);
 
     let lottoNumbers;
     while (true) {
