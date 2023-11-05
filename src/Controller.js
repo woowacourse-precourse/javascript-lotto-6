@@ -1,4 +1,5 @@
 import InputView from './InputView.js';
+import Lotto from './Lotto.js';
 import LottoTicket from './LottoTicket.js';
 import OutputView from './OutputView.js';
 
@@ -13,7 +14,12 @@ class Controller {
       await this.#generateLottoTicketList();
     }
     this.#displayLottoTicket();
-    await this.#generateLottoMatching();
+    try {
+      await this.#generateLottoMatching();
+    } catch (error) {
+      OutputView.printMessage(error.message);
+      await this.#generateLottoMatching();
+    }
   }
 
   async #generateLottoTicketList() {
@@ -29,6 +35,7 @@ class Controller {
 
   async #generateLottoMatching() {
     const inputLottoWinningNumbers = await InputView.readLottoWinningNumbers();
+    new Lotto(inputLottoWinningNumbers);
   }
 }
 
