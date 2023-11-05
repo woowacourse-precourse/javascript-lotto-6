@@ -27,13 +27,8 @@ class App {
   }
 
   createLotto() {
-    const lotto = [];
-    while (lotto.length < 6) {
-      const number = Random.pickNumberInRange(1, 45);
-      if (!lotto.includes(number)) {
-        lotto.push(number);
-      }
-    }
+    const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+
     lotto.sort((a, b) => a - b);
     return lotto;
   }
