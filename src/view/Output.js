@@ -3,10 +3,6 @@ import { OUTPUT_MSG } from "../constants/output.js";
 import { MONEY_CONSTANT } from "../constants/game.js";
 
 class Output {
-  static printNewLine() {
-    Console.print("");
-  }
-
   static printLotto(player) {
     const lottos = player.playerLottos;
 

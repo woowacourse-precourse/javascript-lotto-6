@@ -17,7 +17,6 @@ class Player {
 
   print() {
     Output.printLotto(this);
-    Output.printNewLine();
   }
 
   #validate(money) {
