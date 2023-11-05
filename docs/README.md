@@ -1,11 +1,20 @@
 ## 3주차 미션 - 로또
 
+### 기능목록
+
 > 구현할 기능 목록
 
-- [ ] 로또 구입 금액 유효성 검사
+- [x] 로또 구입 금액 유효성 검사
+  - 클래스 `PurchaseAmount`와 메서드 `createPurchaseAmount`를 이용해서 구입 금액을 받아옴.
+  - 또한 `validatePurchaseAmount` 메서드를 이용해 유효성검사 완료.
+  - [x] 로또 구입 금액 테스트
+    - `PurchaseAmountTest.js`로 작은 단위인 유효성 검사 테스트 완료.
+- [x] 랜덤으로 나오는 로또 번호 출력
+  - `RandomNumber` 클래스를 이용해서 랜덤으로 나오는 로또 번호 생성 및 출력.
+- [x] 당첨 번호 입력 및 생성
+  - `Lotto` 클래스를 이용해 당첨번호 입력을 받고, 생성.
 - [ ] 당첨 번호 입력 유효성 검사
 - [ ] 보너스 번호 입력 유효성 검사
-- [ ] 랜덤으로 나오는 로또 번호 출력
 - [ ] 당첨번호(당첨번호, 보너스번호)와 로또번호 비교
 - [ ] 당첨 금액 출력
 - [ ] 수익률 계산
@@ -24,6 +33,34 @@
 
 <br>
 
+---
+
+### 테스트 시나리오
+
+- 구입비용에 대한 테스트 시나리오
+
+  ```
+  1. 입력받은 수가 숫자인지
+    1-1. 입력받은 수가 숫자일 때
+        - 구입비용 클래스를 생성하는 인자로 활용
+    1-2. 입력받은 수가 숫자가 아닐 때
+        - 에러를 발생시키며 종료
+  2. 입력받은 객체가 빈공간이 있는지
+    2-1. 입력받은 객체가 빈공간이 없을 때
+        - 구입비용 클래스를 생성하는 인자로 활용
+    2-2. 입력받은 객체가 빈공간이 있을 때
+        - 에러를 발생시키며 종료
+  3. 조건(1000단위로 입력)에 맞는지
+    3-1. 조건에 맞을 때
+        - 구입비용 클래스를 생성하는 인자로 활용
+    3-2. 조건에 맞지 않을 때(1000단위로 나누어 떨어지지 않을 때)
+        - 에러를 발생시키며 종료
+  ```
+
+<br>
+
+---
+
 ### 유의사항
 
 - 클래스의 구현순서를 유의하자.
@@ -41,3 +78,66 @@
 - 작은 단위의 테스트부터 큰 단위의 테스트로 나아간다.
 
 ---
+
+<br>
+
+### 디렉토리 설명 (기능 메서드)
+
+| 디렉토리 명                  |                             설명                             |
+| :--------------------------- | :----------------------------------------------------------: |
+| constants                    |                       상수화 시킨 모듈                       |
+| constants/input-constants    |                       입력문 질문 상수                       |
+| constants/magic-number       |                          숫자 상수                           |
+| constants/validate-constants |                  유효성 검사 에러 출력 상수                  |
+|                              |                                                              |
+| lotto-game                   |                   로또 게임 진행하는 모듈                    |
+|                              |                                                              |
+| lotto                        |               로또 게임(미션 전체) 클래스 모듈               |
+| lotto/PurchaseAmount         |                       구입비용 클래스                        |
+| lotto/RandomNumber           |                    랜덤 로또 번호 클래스                     |
+| lotto/Lotto                  |                       당첨 번호 클래스                       |
+|                              |                                                              |
+| utils                        |                     각종 실행 함수 모듈                      |
+| utils/create-object          |      **PurchaseAmount**, **Lotto** 클래스 만드는 메서드      |
+| utils/input-number           |                       입력받는 메서드                        |
+| utils/ui-method              | **readLineAsync**, **print** 메서드를 재사용하기 위한 메서드 |
+| utils/validate               | **PurchaseAmount**, **Lotto** 클래스 유효성 검사하는 메서드  |
+
+---
+
+### eslint 와 ES6문법 충돌사항
+
+> import 오류
+
+- Babel없이 import하려면 확장자를 붙여야 한다.  
+  하지만 eslint는 확장자를 없애는 것을 규칙으로 하기에,
+  계속해서 오류가 뜨게 된다.
+
+- .eslintrc.cjs 파일의 `rules`에  
+  `"import/extensions": [ "error", "ignorePackages" ]` 를 추가한다.
+
+  ```cjs
+  "rules": {
+  "import/extensions": [<severity>, "never" | "always" | "ignorePackages"]
+  }
+  ```
+
+  `<severity>` 에는 `error`, `warn`등의 엄격도를 표시한다.  
+  `never` : 확장자 사용을 금지한다.  
+  `always` : 모든 구문에 확장자를 사용한다.  
+  `ignorePackages` : 라이브러리 패키지를 제외하고 확장자를 사용한다.
+
+> no-console 오류
+
+- 코드 작성 도중에 상당히 거슬리므로,
+  이것 또한 `rules`에 추가해서 없앨 수 있다.
+
+  ```cjs
+  "no-console": process.env.NODE_ENV === 'production' ? 'error' : 'off',
+  ```
+
+<br>
+
+---
+
+_npm i -D eslint-plugin-import 설치가 효과가 있었는지는 모르겠음...._
