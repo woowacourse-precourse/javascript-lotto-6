@@ -33,6 +33,7 @@ class Lotto {
     if (allCount === 5) return '3등';
     if (allCount === 6 && bonus) return '2등';
     if (allCount === 6) return '1등';
+    return '낙첨';
   }
 }
 

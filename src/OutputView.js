@@ -2,9 +2,9 @@ import { Console } from '@woowacourse/mission-utils';
 
 class OutputView {
   printLottoNumbes(lottos) {
-    Console.print(`\n${lottos.length}개를 구매하였습니다.`);
+    Console.print(`${lottos.length}개를 구매했습니다.`);
     lottos.forEach((lotto) => {
-      Console.print(lotto.getNumbers());
+      Console.print(`[${lotto.getNumbers().join(', ')}]`);
     });
   }
 
@@ -21,6 +21,11 @@ class OutputView {
   printSpace() {
     Console.print('');
   }
+
+  printPrice(profit, cost) {
+    Console.print(`총 수익률은 ${Math.round(profit / cost * 100 * 100) / 100}%입니다.`);
+  }
+  
 }
 
 export default OutputView;
