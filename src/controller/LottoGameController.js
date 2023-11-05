@@ -1,5 +1,6 @@
 import LottoService from '../service/LottoService.js';
 import InputView from '../views/InputView.js';
+import OutputView from '../views/OutputView.js';
 
 class LottoGameController {
   #lottoService;
@@ -15,7 +16,7 @@ class LottoGameController {
 
   #issueTicketStage(purchaseMoney) {
     this.#lottoService = new LottoService(Number(purchaseMoney));
-    console.log(this.#lottoService.issueTickets());
+    OutputView.printTickets(this.#lottoService.issueTickets());
   }
 }
 
