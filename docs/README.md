@@ -29,7 +29,7 @@
 
 ### 결과 출력하기
 
-- [ ] 구매한 로또 개수와 로또 번호 출력
+- [x] 구매한 로또 개수와 로또 번호 출력
 - [ ] 게임 종료 후, 일치하는 번호의 개수와 당첨금, 수익률 출력
 
 ## 폴더 구조 설계
@@ -39,7 +39,7 @@ lotto
   ├── App.js
   ├── lottoGame
   │   ├── LottoGame.js
-  │   ├── lottoGameUtils.js
+  │   ├── LottoGameUtils.js
   │
   ├── utils
   │   ├── UserInput.js
