@@ -1,9 +1,10 @@
 import {
   Console,
+  ERROR_PURCHASE_AMOUNT_PRICE,
   ERROR_PURCHASE_AMOUNT_STRING,
   ERROR_PURCHASE_AMOUNT_UNIT,
-  PAYMENT_UNIT,
   PLZ_PURCHASE_AMOUNT,
+  PRICE_UNIT,
 } from './Constant';
 
 const InputView = {
@@ -11,8 +12,9 @@ const InputView = {
     while (true) {
       try {
         const answer = await Console.readLineAsync('로또 구입 금액을 입력하세요: ');
-        this.paymentAmountNumberValidator(answer);
-        this.paymentUnitValidator(answer);
+        this.priceNumberValidator(answer);
+        this.priceCheckValidator(answer);
+        this.priceUnitValidator(answer);
         return answer;
       } catch (error) {
         Console.print(error.message);
@@ -20,17 +22,24 @@ const InputView = {
     }
   },
 
-  paymentAmountNumberValidator(answer) {
+  priceNumberValidator(answer) {
     const purchaseAmount = Number(answer);
-    if (isNaN(purchaseAmount) || purchaseAmount % 1000 !== 0) {
+    if (isNaN(purchaseAmount)) {
       throw new Error(ERROR_PURCHASE_AMOUNT_STRING);
     }
   },
 
-  paymentUnitValidator(answer) {
+  priceUnitValidator(answer) {
     const purchaseAmount = Number(answer);
-    if (purchaseAmount % PAYMENT_UNIT !== 0) {
+    if (purchaseAmount % PRICE_UNIT !== 0) {
       throw new Error(ERROR_PURCHASE_AMOUNT_UNIT);
+    }
+  },
+
+  priceCheckValidator(answer) {
+    const purchaseAmount = Number(answer);
+    if (purchaseAmount < PRICE_UNIT || purchaseAmount === 0) {
+      throw new Error(ERROR_PURCHASE_AMOUNT_PRICE);
     }
   },
 };
