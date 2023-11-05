@@ -10,6 +10,26 @@ const purchase = {
     }
     return money / lottoInfo.PRICE;
   },
+
+  getLottos: function (number) {
+    let lottos = [];
+
+    for (let i = 0; i < number; i++) {
+      const numbers = Random.pickUniqueNumbersInRange(
+        lottoInfo.START_INCLUSIVE,
+        lottoInfo.END_INCLUSIVE,
+        lottoInfo.COUNT
+      );
+      const sorted = this.sortInAscendingOrder(numbers);
+      lottos.push(new Lotto(sorted));
+    }
+
+    return lottos;
+  },
+
+  sortInAscendingOrder: function (arr) {
+    arr.sort((a, b) => a - b);
+  },
 };
 
 export default purchase;
