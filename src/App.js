@@ -8,6 +8,7 @@ import Lotto from "./Lotto.js";
 
 class App {
   async play() {
+    //----------------- LOTTO CLASS
     const purchaseCost = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputCost
     );
@@ -15,9 +16,11 @@ class App {
     if (purchaseCost % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.isInvaildUnit);
     }
+    //-----------------
 
     let lottoArr = await this.createLotto(purchaseCost);
 
+    //-----------------
     const enterWinnigNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputWinnigNum
     );
@@ -27,12 +30,14 @@ class App {
     if (winningNum.length !== 6) {
       throw new Error(`${ERROR_MESSAGE.isOnlySixNum}`);
     }
+    //-----------------
 
     const verifyNumber = /^[0-9]+$/;
 
+    //-----------------
     for (let i = 0; i < winningNum.length; i++) {
       if (verifyNumber.test(winningNum[i]) === false) {
-        throw new Error(`${ERROR_MESSAGE.isNotwNumber}`);
+        throw new Error(`${ERROR_MESSAGE.isNotNumber}`);
       }
     }
 
@@ -42,21 +47,33 @@ class App {
       }
     }
 
+    //-----------------
     const bonusNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputBonusNum
     );
 
-    console.log(winningNum, bonusNum, lottoArr);
+    for (let i = 0; i < lottoArr.length; i++) {
+      const lottoNums = lottoArr[i];
+      let isBonus = false;
 
-    const a = lottoArr.map((ele) =>
-      ele.filter((item) => winningNum.includes(String(item)))
-    );
+      const winning = lottoNums.filter((ele) =>
+        winningNum.includes(String(ele))
+      );
 
-    const winningTickets = a.map((ele) => this.totalPrize(ele.length));
+      if (winning.length < 3) continue;
+      if (winning.length === 5) isBonus = lottoNums.includes(Number(bonusNum));
 
-    console.log(winningTickets);
+      console.log(this.totalPrize(winning.length, isBonus));
+    }
+
+    // const a = lottoArr.map((ele) =>
+    //   ele.filter((item) => winningNum.includes(String(item)))
+    // );
+
+    // const winningTickets = a.map((ele) => this.totalPrize(ele.length));
   }
 
+  //----------------- LOTTO
   async createLotto(purchaseCost) {
     const numOfLotto = purchaseCost / 1000;
     const tellNumOfLotto = await MissionUtils.Console.print(
@@ -71,7 +88,9 @@ class App {
         6
       );
 
-      const printLottNum = await MissionUtils.Console.print(lottoNum);
+      const printLottNum = await MissionUtils.Console.print(
+        `[${lottoNum.join(", ")}]`
+      );
 
       const lotto = new Lotto(lottoNum);
 
@@ -80,9 +99,11 @@ class App {
 
     return lottoArr;
   }
+  //----------------- LOTTO
 
-  totalPrize(b) {
-    switch (b) {
+  totalPrize(count, isBonus = false) {
+    if (isBonus) return 30000000;
+    switch (count) {
       case 3:
         return 5000;
       case 4:
