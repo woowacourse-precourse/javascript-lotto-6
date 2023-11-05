@@ -17,8 +17,11 @@ const Input = {
       const numbers = await Console.readLineAsync(
         '당첨 번호를 입력해 주세요.\n'
       );
-      Validate.checkDuplicateNumber(numbers.split(','));
-      return numbers.split(',').map((number) => Number(number));
+      const NumberList = numbers.split(',');
+      Validate.checkDuplicateNumber(NumberList);
+      NumberList.forEach((number) => Validate.checkNumberRange(number));
+
+      return NumberList.map((number) => Number(number));
     } catch (error) {
       Console.print(error.message);
       return this.getLottoNumber();
@@ -29,6 +32,8 @@ const Input = {
       const number = await Console.readLineAsync(
         '보너스 번호를 입력해 주세요.\n'
       );
+      Validate.checkNumberRange(number);
+
       return Number(number);
     } catch (error) {
       Console.print(error.message);

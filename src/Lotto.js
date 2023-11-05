@@ -7,6 +7,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#validateDuplicate(numbers);
+    this.#validateRange(numbers);
     this.#numbers = numbers;
   }
 
@@ -19,6 +20,10 @@ class Lotto {
   // TODO: 추가 기능 구현
   #validateDuplicate(numbers) {
     Validate.checkDuplicateNumber(numbers);
+  }
+
+  #validateRange(numbers) {
+    numbers.forEach((number) => Validate.checkNumberRange(number));
   }
 
   compareLotto(answer, bonus) {
