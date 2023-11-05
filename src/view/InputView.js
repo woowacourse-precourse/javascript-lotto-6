@@ -6,7 +6,7 @@ export default class InputView {
   }
 
   static async getWinningNumbers() {
-    return Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    return Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
   }
 
   static async getBonusNumber() {
