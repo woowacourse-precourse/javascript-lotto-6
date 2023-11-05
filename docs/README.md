@@ -91,7 +91,7 @@ checkWinning
 <br/>
 
 # View
-## LottoInputView.js 
+## InputView.js 
 > **사용자로부터 입력을 받는 부분을 담당** <br>
   금액 입력, 당첨 번호 입력
 
@@ -108,11 +108,14 @@ promptBonusNumber
 
 <br/>
 
-## LottoOutputView.js 
+## OutputView.js 
 > **결과나 메세지를 사용자에게 표시하는 부분을 담당** <br>
   로또 번호, 당첨 결과, 수익률 등을 사용자에게 표시하는 함수들을 관리
 
 <br/>
+
+printLottoCounts
+- [x] 구매한 로또 개수를 화면에 출력하기
 
 printLottos
 - [ ] 구매한 로또 번호를 화면에 출력하기
