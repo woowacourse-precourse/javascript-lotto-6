@@ -52,4 +52,6 @@ export const ERROR = Object.freeze({
   DUPLICATE_NUMBER: '[ERROR] 로또 번호가 중복되었습니다.',
   NOT_LOTTO_RANGE: '[ERROR] 로또 번호는 1~45 사이의 숫자를 입력해주세요.',
   BONUS_ONLY_NUMBER: '[ERROR] 보너스번호는 1~45 사이의 숫자로만 입력해주세요.',
+  BONUS_NOT_WINNING:
+    '[ERROR] 보너스번호는 당첨 번호에 없는 번호로 입력해주세요.',
 });

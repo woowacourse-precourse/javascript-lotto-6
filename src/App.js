@@ -8,7 +8,7 @@ class App {
   async play() {
     const purchasedLotto = await this.getPurchaseLotto();
     const winningNumber = await this.getWinningNumber();
-    const bonusNumer = await this.getBonusNumber();
+    const bonusNumer = await this.getBonusNumber(winningNumber);
 
     const calc = new Calculation(purchasedLotto, winningNumber, bonusNumer);
     calc.checkMatchNumbers();
@@ -45,12 +45,12 @@ class App {
     return winningNumber.map(number => Number(number));
   }
 
-  async getBonusNumber() {
+  async getBonusNumber(winningNumber) {
     let bonusNumber;
     while (!bonusNumber) {
       try {
         const inputBonus = await Console.readLineAsync(INPUT.BONUS_NUMBER);
-        this.#validateBonus(inputBonus);
+        this.#validateBonus(inputBonus, winningNumber);
         bonusNumber = inputBonus;
       } catch (error) {
         Console.print(error.message);
@@ -59,12 +59,15 @@ class App {
     return bonusNumber;
   }
 
-  #validateBonus(bonusNumber) {
+  #validateBonus(bonusNumber, winningNumber) {
     if (!bonusNumber || !bonusNumber.trim) {
       throw new Error(`${ERROR.PREFIX} ${INPUT.BONUS_NUMBER}`);
     }
     if (LOTTO.REG_NUMBER.test(bonusNumber)) {
       throw new Error(ERROR.BONUS_ONLY_NUMBER);
+    }
+    if (winningNumber.includes(bonusNumber)) {
+      throw new Error(ERROR.BONUS_NOT_WINNING);
     }
   }
 }
