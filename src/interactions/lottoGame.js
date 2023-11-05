@@ -9,12 +9,14 @@ import lottoGameConsole from '../cli/lottoGameConsole.js';
 
 import systemErrorHandler from '../error/handlers/systemErrorHandler.js';
 
+const { readWinningLottoNumber, readBonusNumber, readPurchasedLottoAmount } =
+  lottoGameConsole.input;
+
 const processWinningResult = ({
   purchasedLottoInfo: { purchasedLottoAmount, lottoNumbers },
   winningLottoInfo,
 }) => {
   const lottoNumberInfo = { lottoNumbers, winningLottoInfo };
-
   const lottoMatchingResult = lottoNumberMatching.createLottoMatchingResult(lottoNumberInfo);
 
   const { rewardInfo, prize } = winningInfo.createWinningInfo(lottoMatchingResult);
@@ -25,8 +27,6 @@ const processWinningResult = ({
 };
 
 const processInputWinningLottoInfo = async () => {
-  const { readWinningLottoNumber, readBonusNumber } = lottoGameConsole.input;
-
   const winningLottoNumber = await systemErrorHandler.retryOnErrors(
     readWinningLottoNumber.bind(lottoGameConsole.input),
   );
@@ -39,10 +39,8 @@ const processInputWinningLottoInfo = async () => {
 };
 
 const processLottoPurchase = (purchasedLottoAmount) => {
-  const lottoNumbers = lottoPurchase.generateLottoNumbers({
-    randomNumberGenerator: Random,
-    purchasedLottoAmount,
-  });
+  const params = { randomNumberGenerator: Random, purchasedLottoAmount };
+  const lottoNumbers = lottoPurchase.generateLottoNumbers(params);
 
   lottoGameConsole.output.printLottoNumbers(lottoNumbers);
 
@@ -51,8 +49,9 @@ const processLottoPurchase = (purchasedLottoAmount) => {
 
 const processInputPurchasedLottoAmount = async () => {
   const purchasedLottoAmount = await systemErrorHandler.retryOnErrors(
-    lottoGameConsole.input.readPurchasedLottoAmount.bind(lottoGameConsole.input),
+    readPurchasedLottoAmount.bind(lottoGameConsole.input),
   );
+
   return purchasedLottoAmount;
 };
 
@@ -62,9 +61,8 @@ const lottoGame = {
 
     const lottoNumbers = processLottoPurchase(purchasedLottoAmount);
 
-    const purchasedLottoInfo = { lottoNumbers, purchasedLottoAmount };
-
     const winningLottoInfo = await processInputWinningLottoInfo();
+    const purchasedLottoInfo = { lottoNumbers, purchasedLottoAmount };
 
     processWinningResult({ purchasedLottoInfo, winningLottoInfo });
   },
