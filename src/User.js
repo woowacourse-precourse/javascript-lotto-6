@@ -19,11 +19,13 @@ class User {
   }
 
   purchaseLottoNumber(lottoCount) {
-    const userLotto = new Array(lottoCount);
-
-    [...userLotto].forEach(() => {
+    const userLotto = new Array(lottoCount).fill(0).map(() => {
       const userLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-      Console.print(userLottoNumber.sort((a, b) => a - b));
+      return userLottoNumber.sort((a, b) => a - b);
+    });
+
+    userLotto.forEach(numbers => {
+      Console.print(numbers);
     });
   }
 }
