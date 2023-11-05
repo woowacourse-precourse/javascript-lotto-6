@@ -6,7 +6,14 @@ class App {
   async play() {
     const payAmount = await Console.readLineAsync('구입금액을 입력해주세요.\n');
 
+    Console.print(payAmount);
+
     const purchaseQuantity = Number(payAmount) / 1000;
+
+    if (Number.isNaN(purchaseQuantity)) {
+      Console.print('[ERROR] 잘못된 입력 값입니다.');
+      return;
+    }
     Console.print(`${purchaseQuantity}개를 구매했습니다.`);
 
     const lottoNumbers = Array.from({ length: purchaseQuantity }, () => {
@@ -21,13 +28,14 @@ class App {
       '당첨 번호를 입력해 주세요.\n'
     );
     const result = userNumber.split(',').map(Number);
+
+    Console.print(`숫자야${result}`);
     const lotto = new Lotto(result);
 
     const BonusNumber = await Console.readLineAsync(
       '보너스 번호를 입력해 주세요.\n'
     );
 
-    const winningNumbers = {};
     const stats = {
       3: '3개 일치 (5,000원)',
       4: '4개 일치 (50,000원)',
@@ -48,6 +56,8 @@ class App {
       if (sameCount > 2) initialLottoStats[stats[sameCount]] += 1;
     });
 
+    let getMoneyAmount = 0;
+
     Object.keys(initialLottoStats).forEach((el) => {
       const regex1 = /\(([^)]+)\)/;
       const splitAmount = el.match(regex1)[0];
@@ -55,11 +65,17 @@ class App {
       Console.print(`${splitAmount}`);
 
       const moneyAmount = splitAmount.replace(/[^0-9]/g, '');
-      const getMoneyAmount = moneyAmount * initialLottoStats[el];
+      getMoneyAmount += moneyAmount * initialLottoStats[el];
 
       Console.print(`${el} - ${initialLottoStats[el]}개`);
-      Console.print(`결과${getMoneyAmount}`);
     });
+
+    // Console.print(getMoneyAmount);
+    Console.print(
+      `총 수익률은 ${parseFloat(
+        ((getMoneyAmount / payAmount) * 100).toFixed(2)
+      )}%입니다.`
+    );
   }
 }
 
