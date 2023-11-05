@@ -1,6 +1,7 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 
 import Lotto from "./Lotto.js";
+import * as CONSTANTS from "./constants.js"
 
 class App {
   constructor() {
@@ -21,18 +22,14 @@ class App {
     
     while (!validPurchaseAmount) {
       try {
-        purchaseAmountInput = await Console.readLineAsync(
-          "구입금액을 입력해 주세요.\n"
-        );
-    
-        Console.print(purchaseAmountInput);
+        purchaseAmountInput = await Console.readLineAsync(CONSTANTS.LOTTO_PURCHASE_MESSAGE);
     
         if (isNaN(Number(purchaseAmountInput))) {
-          throw new Error("[ERROR] 구매 금액은 유효한 숫자여야 합니다.");
+          throw new Error(CONSTANTS.ERROR_INVALID_NUMBER);
         }
     
         if (Number(purchaseAmountInput) % 1000 !== 0) {
-          throw new Error("[ERROR] 구매 금액은 1,000원 단위이어야 합니다.");
+          throw new Error(CONSTANTS.ERROR_NOT_IN_1000_UNITS);
         }
     
         validPurchaseAmount = true;
@@ -50,13 +47,9 @@ class App {
       const lotto = new Lotto(numbers);
       this.lottos.push(lotto);
     }
-    const winningNumbersInput = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
-    );
+    const winningNumbersInput = await Console.readLineAsync(CONSTANTS.WINNING_NUMBER_INPUT_MESSAGE);
     const winningNums = winningNumbersInput.split(',').map(number => Number(number.trim()));
-    const bonusNum = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
-    );
+    const bonusNum = await Console.readLineAsync(CONSTANTS.BONUS_NUMBER_INPUT_MESSAGE);
 
     //TODO: 함수로 빼기 countMatchingNum
     for(let i = 0; i<lottoCnt; i++){
@@ -65,37 +58,37 @@ class App {
       switch (res.cnt){
         case 3:
           this.statistics.fifth_prize++;
-          this.statistics.totalPrice+=5000;
+          this.statistics.totalPrice+=CONSTANTS.MATCH_3;
           break;
         case 4:
           this.statistics.fourth_prize++;
-          this.statistics.totalPrice+=50000;
+          this.statistics.totalPrice+=CONSTANTS.MATCH_4;
           break;
         case 5:
           if(res.hasBonus) {
             this.statistics.second_prize++;
-            this.statistics.totalPrice+=30000000;
+            this.statistics.totalPrice+=CONSTANTS.MATCH_5_WITH_BONUS;
             break;
           }
           this.statistics.third_prize++;
-          this.statistics.totalPrice+=1500000;
+          this.statistics.totalPrice+=CONSTANTS.MATCH_5;
           break;
         case 6:
           this.statistics.first_prize++;
-          this.statistics.totalPrice+=2000000000;
+          this.statistics.totalPrice+=CONSTANTS.MATCH_6;
           break;
         default:
           break;
       }
     }
     const roundedProfitPercentage = (Number(this.statistics.totalPrice)/Number(purchaseAmountInput)*100).toFixed(1);
-    Console.print("당첨 통계\n---");
-    Console.print(`3개 일치 (5,000원) - ${this.statistics.fifth_prize}개`);
-    Console.print(`4개 일치 (50,000원) - ${this.statistics.fourth_prize}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${this.statistics.third_prize}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.statistics.second_prize}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${this.statistics.first_prize}개`);
-    Console.print(`총 수익률은 ${roundedProfitPercentage}%입니다.`);
+    Console.print(CONSTANTS.LOTTO_STATISTICS_HEADER);
+    Console.print(`${CONSTANTS.PRIZE_3_MATCH}${this.statistics.fifth_prize}개`);
+    Console.print(`${CONSTANTS.PRIZE_4_MATCH}${this.statistics.fourth_prize}개`);
+    Console.print(`${CONSTANTS.PRIZE_5_MATCH}${this.statistics.third_prize}개`);
+    Console.print(`${CONSTANTS.PRIZE_5_MATCH_WITH_BONUS}${this.statistics.second_prize}개`);
+    Console.print(`${CONSTANTS.PRIZE_6_MATCH}${this.statistics.first_prize}개`);
+    Console.print(`${CONSTANTS.TOTAL_PROFIT_PERCENTAGE}${roundedProfitPercentage}%입니다.`);
   }
 }
 export default App;
