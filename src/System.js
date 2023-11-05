@@ -7,9 +7,8 @@ class System {
   saveLottoNumbers() {
     let lotto;
     while (true) {
-      lotto = generateLottoNumbers();
       try {
-        lotto.duplicate(); // 중복 검사를 실행하여 중복이 있으면 예외가 발생
+        lotto = generateLottoNumbers();
         break;
       } catch (error) {
         console.error(error.message); // 중복이 있으면 예외 메시지를 출력
@@ -34,7 +33,6 @@ class System {
       const lottoNumbers = await this.#inputLottoNumbers();
       try {
         lotto = new Lotto(lottoNumbers);
-        lotto.duplicate();
         break;
       } catch (error) {
         Console.print(error.message);
