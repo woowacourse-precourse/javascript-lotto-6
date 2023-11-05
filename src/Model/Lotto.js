@@ -38,16 +38,16 @@ class Lotto {
     getMatchCount(numbers, bonusNumber){
         const combine = [...this.#numbers, ...numbers];
         const setCombine = new Set(combine);
-        
+    
         const matchCount = {
             main : 12-setCombine.size,
             bonus : false
         }
 
-        if(matchCount.main === 5){
+        if(matchCount.main == 5){
             matchCount.bonus = numbers.includes(bonusNumber);
         }
-
+        
         return matchCount;
     }
 }
