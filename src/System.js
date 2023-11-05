@@ -79,6 +79,17 @@ class System {
     const lottoStr = `[${lotto.getNumbers().join(", ")}]`;
     Console.print(lottoStr);
   }
+
+  async purchaseAndPrintLottos(money) {
+    const lottoCount = await this.getLottoCount(money);
+    const lottos = [];
+    for (let i = 0; i < lottoCount; i++) {
+      const lotto = this.saveLottoNumbers();
+      this.printLottoNumbers(lotto);
+      lottos.push(lotto);
+    }
+    return lottos;
+  }
 }
 
 export default System;
