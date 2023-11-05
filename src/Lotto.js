@@ -26,7 +26,7 @@ class Lotto {
       FIRST_PRIZE: 2000000000,
       SECOND_PRIZE: 30000000,
       THIRD_PRIZE: 1500000,
-      FOURTH_PRIZE: 5000,
+      FOURTH_PRIZE: 50000,
       FIFTH_PRIZE: 5000,
     });
   }
@@ -57,13 +57,8 @@ class Lotto {
   }
 
   checkWin(bonusNumber, guessNumber) {
-    const bonusGuess = [];
-
-    guessNumber.map(each => {
-      const matchNumber = each.filter(num => {
-        if (!this.#numbers.includes(+num)) bonusGuess.push(+num);
-        return this.#numbers.includes(+num);
-      });
+    guessNumber.forEach(each => {
+      const matchNumber = each.filter(num => this.#numbers.includes(+num));
 
       switch (matchNumber.length) {
         case 3:
@@ -75,7 +70,7 @@ class Lotto {
           this.winCheck.total += this.prize.FOURTH_PRIZE;
           break;
         case 5:
-          if (bonusGuess.includes(+bonusNumber)) {
+          if (this.#numbers.includes(+bonusNumber)) {
             this.winCheck['5+'] += 1;
             this.winCheck.total += this.prize.SECOND_PRIZE;
           } else {
@@ -91,8 +86,6 @@ class Lotto {
         default:
           break;
       }
-
-      bonusGuess.length = 0;
     });
 
     Console.print(`\n당첨 통계\n---\n3개 일치 (5,000원) - ${
