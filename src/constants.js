@@ -9,3 +9,6 @@ export const UNIT_ERROR = "[ERROR] 입력값의 단위가 잘못되었습니다.
 export const MIN_INPUT_ERROR = "[ERROR] 입력값은 0보다 커야 합니다.";
 // 숫자
 export const PURCHASE_AMOUNT_UNIT = 1000;
+export const MIN_NUMBER = 1;
+export const MAX_NUMBER = 45;
+export const LOTTO_LENGTH = 6;
