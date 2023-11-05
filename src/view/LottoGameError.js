@@ -1,7 +1,11 @@
 import ConsoleOutput from '../console/ConsoleOutput.js';
 
 class LottoGameError {
-  static printIncludeNaNError(error) {
+  static purchaseAmountError(error) {
+    ConsoleOutput.output(error.message);
+  }
+
+  static printInputWinningNumberError(error) {
     ConsoleOutput.output(error.message);
   }
 }

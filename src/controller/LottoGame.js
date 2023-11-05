@@ -11,6 +11,8 @@ class LottoGame {
 
   #lottoTickets;
 
+  #winningNumbers;
+
   start() {
     return this;
   }
@@ -20,7 +22,7 @@ class LottoGame {
       const amount = await LottoGameInput.purchaseAmount();
       this.#purchaseAmount = new PurchaseAmount(amount);
     } catch (error) {
-      LottoGameOutput.purchaseAmountError(error);
+      LottoGameError.purchaseAmountError(error);
       await this.inputPurchaseAmount();
     }
   }
@@ -38,9 +40,9 @@ class LottoGame {
   async inputWinningNumbers() {
     try {
       const winningNumbers = await LottoGameInput.inputSixWinningNumbers();
-      const winningNumber = new WinningNumber(winningNumbers);
+      this.winningNumbers = new WinningNumber(winningNumbers);
     } catch (error) {
-      LottoGameError.printIncludeNaNError(error);
+      LottoGameError.printInputWinningNumberError(error);
       await this.inputWinningNumbers();
     }
   }
