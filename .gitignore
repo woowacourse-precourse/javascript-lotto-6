@@ -1,2 +1,9 @@
 node_modules
 package-lock.json
+pacake.json
+.DS_Store
+.eslintrc.cjs
+.prettierrc.cjs
+
+/VSCode
+/coverage
