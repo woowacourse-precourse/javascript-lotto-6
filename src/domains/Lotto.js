@@ -52,11 +52,18 @@ class Lotto {
 
   validate() {
     this.validateLength();
+    this.validateDuplication();
   }
 
   validateLength() {
     if (this.#numbers.length !== Lotto.LOTTO_LENGTH) {
       throw new LottoError(ERROR_MESSAGES.lotto_not_match_length);
+    }
+  }
+
+  validateDuplication() {
+    if (this.#numbers.length !== new Set(this.#numbers).size) {
+      throw new LottoError(ERROR_MESSAGES.lotto_have_duplication_number);
     }
   }
 }
