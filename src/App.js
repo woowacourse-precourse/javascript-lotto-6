@@ -5,8 +5,6 @@ import Input from './view/Input';
 import Output from './view/Output';
 import Lotto from './Lotto';
 
-// @note - 금액 저장, 당첨 번호 저장, 보너스 번호 저장, 수익률 출력
-
 class App {
   #money
   #lottos
@@ -31,12 +29,21 @@ class App {
   }
 
   async requestPurchaseAmounts() {
-    const INPUT = await this.input.getValue(GUIDE_MESSAGE.insertPurchaseAmount)
-
-    this.lottos = new LottoTickets(String(INPUT));
-    this.#money = this.lottos.returnMoney()
+    this.output.print(GUIDE_MESSAGE.insertMoney)
     
-    this.output.printMoney(this.#money);
+    let valid = false;
+
+    while (!valid) {
+      const INPUT = await this.input.getValue('')
+
+      this.lottos = new LottoTickets(String(INPUT));
+      const isValid = this.lottos.returnMoney()
+
+      if (isValid) {
+        valid = true
+        this.#money = String(INPUT)
+      }
+    }
   }
 
   requestLottoTickets() {
@@ -50,21 +57,39 @@ class App {
   }
 
   async requestWinningNumbers() {
-    const INPUT = await this.input.getValue(GUIDE_MESSAGE.insertWinnerNumbers)
+    this.output.print(GUIDE_MESSAGE.insertWinnerNumbers)
 
-    this.lotto = new Lotto(String(INPUT));
-    this.#winningNumbers = this.lotto.returnValue();
+    let valid = false;
 
-    this.output.printWinningNumbers(this.#winningNumbers)
+    while (!valid) {
+      const INPUT = await this.input.getValue('')
+
+      this.lotto = new Lotto(String(INPUT));
+      const isValid = this.lotto.returnValue();
+
+      if (isValid) {
+        valid = true
+        this.#winningNumbers = String(INPUT).split(',')
+      }
+    }
   }
 
   async requestBonusNumber() {
-    const INPUT = await this.input.getValue(GUIDE_MESSAGE.insertBonusNumber);
+    let valid = false;
 
-    this.bonus = new BonusNumber(String(INPUT), String(this.#winningNumbers))
-    this.#bonusNumber = this.bonus.returnValue();
+    this.output.print(GUIDE_MESSAGE.insertBonusNumber)
 
-    this.output.printBonus(this.#bonusNumber)
+    while (!valid) {
+      const INPUT = await this.input.getValue(GUIDE_MESSAGE.insertBonusNumber);
+
+      this.bonus = new BonusNumber(String(INPUT), String(this.#winningNumbers))
+      const isValid = this.bonus.returnValue();
+
+      if (isValid) {
+        valid = true
+        this.#bonusNumber = String(INPUT).split(',')
+      }
+    }
   }
 
   requestResult() {
@@ -72,7 +97,6 @@ class App {
     const STATS = this.lotto.calculateWinningStats(this.#lottos, this.#bonusNumber);
     
     this.output.printStats(STATS)
-
     this.requestRate(STATS, this.#money)
   }
 
