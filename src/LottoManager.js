@@ -3,11 +3,13 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import WinningNumbers from "./WinningNumbers.js";
 import { MESSAGES } from "./libs/message.js";
 import BonusNumber from "./BonusNumber.js";
+import LuckyNumbers from "./LuckyNumbers.js";
 
 class LottoManager {
   constructor() {
     this.user = null;
     this.lottoCount = 0;
+    this.luckyNumbers = new LuckyNumbers();
   }
 
   setUser(user) {
@@ -35,12 +37,12 @@ class LottoManager {
 
   async setWinningNumber() {
     const input = await Console.readLineAsync(MESSAGES.INPUT_WINNING_NUMBERS);
-    this.winningNumber = new WinningNumbers(input);
+    this.luckyNumbers.setWinningNumbers(input);
   }
 
   async setBonusNumber() {
     const input = await Console.readLineAsync(MESSAGES.INPUT_BONNUS_NUMBER);
-    this.bonusNumber = new BonusNumber(input);
+    this.luckyNumbers.setBonusNumber(input);
   }
 
   async setWinningNumbersAndBonus() {

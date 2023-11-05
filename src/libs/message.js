@@ -13,6 +13,8 @@ const ERRORS = {
   CONTAIN_DUPLICATE: "[ERROR] 중복된 로또 번호가 있습니다.",
   NOT_INTEGER: "[ERROR] 입력값이 정수가 아닙니다.",
   NUMBER_RANGE_ALERT: "[ERROR] 1부터 45사이의 숫자여야 합니다.",
+  BONUS_NUMBER_DUPLICATE:
+    "[ERROR] 보너스 번호는 당첨 번호와 중복되서는 안됩니다.",
 };
 
 export { MESSAGES, ERRORS };
