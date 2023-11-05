@@ -11,13 +11,16 @@ class InputView {
   static async inputNumbers() {
     const winningnumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    Console.print('\n');
     // 당첨 번호 입력 예외처리
-    return winningnumbers;
+    return winningnumbers.split(',');
   }
 
   static async inputBonusNumber() {
     const bonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    Console.print('\n');
+
     // 보너스 번호 입력 예외 처리
     return bonusNumber;
   }
