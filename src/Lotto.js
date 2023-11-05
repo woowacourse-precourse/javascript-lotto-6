@@ -1,32 +1,23 @@
 import validation from "./utils/valiidation.js";
-import valiidation from "./utils/valiidation.js";
 
+//보너스 번호를 어디서 관리할 것인가.. 여기가 맞는 것 같긴한데..
 class Lotto {
-  #numbers;
+    #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
-
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    constructor(numbers) {
+        this.#numbers = [];
+        this.#validate(numbers);
     }
-    valiidation.isInValidRange(numbers);
-    validation.hasSameNumber(numbers);
-  }
 
-  //기본 숫자 검사받기
-  checkValidation() {
-    this.#validate(this.#numbers);
-  }
+    #validate(numbers) {
+        validation.isValidInputCount(numbers, 6);
+        validation.isValidRange(numbers);
+        validation.hasSameNumber(numbers);
+    }
 
-  addBonusNumber(bonusNumber) {
-    this.#numbers.push(bonusNumber);
-  }
-
-  // TODO: 추가 기능 구현
+    get winningNumbers() {
+        return this.#numbers;
+    }
 }
 
 export default Lotto;
