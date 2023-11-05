@@ -33,13 +33,9 @@ class LottoMatcher {
   #updateResult(result, ticket) {
     const matchedNumbers = this.#getMatchedNumbers(ticket, this.winningNumbers);
     const matchedCount = matchedNumbers.length;
-
     if (matchedCount === NUMBER.SIX) {
       this.#updateFirstPrize(result);
-    } else if (
-      matchedCount === NUMBER.FIVE &&
-      matchedNumbers.includes(this.bonusNumber)
-    ) {
+    } else if (matchedCount === NUMBER.FIVE && matchedNumbers.includes(this.bonusNumber)) {
       this.#updateSecondPrize(result);
     } else if (matchedCount === NUMBER.FIVE) {
       this.#updateThirdPrize(result);
