@@ -1,8 +1,8 @@
 const MESSAGE = {
   input: {
-    purchasePrice: '구입금액을 입력해 주세요.\n',
-    winningNumbers: '당첨 번호를 입력해 주세요.\n',
-    bonusNumber: '보너스 번호를 입력해 주세요.\n',
+    price: '구입금액을 입력해 주세요.\n',
+    lotto: '당첨 번호를 입력해 주세요.\n',
+    bonus: '보너스 번호를 입력해 주세요.\n',
   },
   output: {
     numberOfLotto: '개를 구매했습니다.\n',
@@ -17,6 +17,8 @@ const MESSAGE = {
 };
 
 Object.freeze(MESSAGE.input);
+Object.freeze(MESSAGE.output);
+Object.freeze(MESSAGE.error);
 Object.freeze(MESSAGE);
 
 export default MESSAGE;
