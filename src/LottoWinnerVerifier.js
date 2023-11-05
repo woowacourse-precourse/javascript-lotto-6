@@ -8,27 +8,21 @@ class LottoWinnerVerifier {
   }
 
   checkLottoOutcome(lottos) {
-    const result = {
-      first: 0,
-      second: 0,
-      third: 0,
-      fourth: 0,
-      fifth: 0,
-      ['no prize']: 0,
-    };
-    lottos.forEach(lotto => (result[this.#getPrize(lotto)] += 1));
-    return result;
-  }
+    const result = lottos.map(lotto => ({
+      lotto,
+      matchCount: this.#getSameNumberCount(lotto),
+      hasBonus: this.#hasBonusNumber(lotto),
+    }));
 
-  #getPrize(lotto) {
-    const prize = {
-      6: 'first',
-      5: this.#hasBonusNumber(lotto) ? 'second' : 'third',
-      4: 'fourth',
-      3: 'fifth',
+    return {
+      first: result.filter(lotto => lotto.matchCount === 6).length,
+      second: result.filter(lotto => lotto.matchCount === 5 && lotto.hasBonus)
+        .length,
+      third: result.filter(lotto => lotto.matchCount === 5 && !lotto.hasBonus)
+        .length,
+      fourth: result.filter(lotto => lotto.matchCount === 4).length,
+      fifth: result.filter(lotto => lotto.matchCount === 3).length,
     };
-    const count = this.#getSameNumberCount(lotto);
-    return prize[count] ?? 'no prize';
   }
 
   #getSameNumberCount(lotto) {
