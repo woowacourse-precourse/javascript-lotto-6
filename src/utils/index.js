@@ -1,3 +1,5 @@
+import LOTTO from '../constants/lotto.js';
+
 /**
  * 중첩 객체까지 불변 객체 만들기
  */
@@ -19,3 +21,17 @@ export const formatNumberWithCommasAndDecimals = (number) => {
     maximumFractionDigits: 1,
   });
 };
+
+/**
+ * 1 ~ 45 사이의 정수
+ */
+export const isValidNumber = (num) => {
+  return Number.isInteger(num) && num >= 1 && num <= 45;
+};
+
+/**
+ * 1000원 단위로 나눔
+ */
+// export const calcaulateTicketCountFromAmount = (validateAmount) => {
+//   return validateAmount / LOTTO.unit.unit;
+// };
