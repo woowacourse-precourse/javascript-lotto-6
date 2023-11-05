@@ -3,6 +3,10 @@ import { PurchaseErrorMessage, PurchaseRule } from './models/const.js';
 class Purchase {
   #amount;
 
+  get amount() {
+    return this.#amount;
+  }
+
   constructor(amount) {
     this.#validate(amount);
     this.#amount = amount;
