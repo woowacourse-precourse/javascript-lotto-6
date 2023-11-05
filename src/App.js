@@ -12,8 +12,7 @@ class App {
     const lottoBox = counter.giveLotto;
     await printLottoNumbers(lottoTicketNumber, lottoBox);
 
-    const winningLottoMachine = new WinningLottoMachine();
-    await winningLottoMachine.machineStart();
+    const winningLottoMachine = await WinningLottoMachine.machineStart();
     const winningNumbers = winningLottoMachine.winningNumbers;
     const bonusNumber = winningLottoMachine.bonusNumber;
   }
