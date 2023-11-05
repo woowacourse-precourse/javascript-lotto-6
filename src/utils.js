@@ -1,11 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import {
-  LOTTO_NUMBERS,
-  GRADING_COUNT,
-  INPUT_MESSAGE,
-  ERROR_MESSAGE,
-  WINNER_MESSAGE,
-} from './constants.js';
+import { LOTTO_NUMBERS, INPUT_MESSAGE, WINNER_MESSAGE } from './constants.js';
 
 function inputLottoNum() {
   return MissionUtils.Console.readLineAsync(INPUT_MESSAGE.PURCHASE_MESSAGE);
@@ -32,7 +26,11 @@ function resultProfit(number) {
 }
 
 function randomNum() {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  return MissionUtils.Random.pickUniqueNumbersInRange(
+    LOTTO_NUMBERS.MIN_RANGE,
+    LOTTO_NUMBERS.MAX_RANGE,
+    LOTTO_NUMBERS.NUMBER_SIZE,
+  );
 }
 
 export {
