@@ -15,3 +15,7 @@ export const generateLotto = () => {
     const sortedNumbers = numbers.sort((a, b) => a - b);
     return new Lotto(sortedNumbers);
 };
+
+export const calculateMatchCount = (lotto, winningNumbers) => (
+    lotto.checkNumbers(winningNumbers)
+);
