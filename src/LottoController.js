@@ -1,5 +1,6 @@
 import Lotto from "./Lotto.js";
 import LottoView from "./LottoView.js";
+import { countMatchingNumbers, hasBonusNumber } from "./NumberComparison.js";
 import { Random } from "@woowacourse/mission-utils";
 
 class LottoController {
@@ -13,6 +14,7 @@ class LottoController {
     const amount = await this.view.askPayment();
     const countOfLotto = Math.floor(amount / 1000);
     this.lottos = this.makeLottoNumbers(countOfLotto);
+    console.log(this.lottos);
     this.view.showLottoNumbers(this.lottos);
   }
 
@@ -21,6 +23,17 @@ class LottoController {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       return new Lotto(numbers);
     });
+  }
+
+  async viewResults() {
+    const winningNumbers = await this.view.askWinningNumbers();
+    const bonusNumber = await this.view.askBonusNumber();
+    const results = this.lottos.map((lotto) => ({
+      lottoNumbers: lotto.numbers,
+      count: countMatchingNumbers(lotto.numbers, winningNumbers),
+      bonus: hasBonusNumber(lotto.numbers, bonusNumber),
+    }));
+    this.view.showResults(results);
   }
 }
 
