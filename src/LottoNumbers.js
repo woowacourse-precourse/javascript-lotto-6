@@ -1,8 +1,15 @@
 import { ERROR, LOTTO } from './constant/index.js';
 
 class LottoNumbers {
+  #numbers;
+
   constructor(numbers) {
     this.#validate(numbers);
+    this.#numbers = numbers;
+  }
+
+  getNumbers() {
+    return [...this.#numbers];
   }
 
   #validate(numbers) {

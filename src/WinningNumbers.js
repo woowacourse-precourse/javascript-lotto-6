@@ -1,11 +1,12 @@
 import LottoNumbers from './LottoNumbers.js';
 
 class WinningNumbers extends LottoNumbers {
-  #winningNumbers;
+  constructor(numbers) {
+    super(numbers);
+  }
 
-  constructor(winningNumbers) {
-    super(winningNumbers);
-    this.#winningNumbers = winningNumbers;
+  getNumbers() {
+    return super.getNumbers();
   }
 }
 
