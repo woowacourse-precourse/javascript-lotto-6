@@ -34,6 +34,13 @@ class Lotto {
   rateReturn(purchase, revenue) {
     return parseFloat((revenue / purchase) * 100).toFixed(1);
   }
+
+  winningRate(userNumList, winningNumList) {
+    const same = userNumList.filter((num) =>
+      winningNumList.includes(num),
+    ).length;
+    return same;
+  }
 }
 
 export default Lotto;
