@@ -15,6 +15,14 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+
+  countMatchNumbers(winningNumbers) {
+    return this.#numbers.filter((number) => winningNumbers.has(number)).length;
+  }
+
+  getLottoNumbers() {
+    return [...this.#numbers];
+  }
 }
 
 class LottoPurchase {
