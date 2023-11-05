@@ -9,5 +9,9 @@ class LotteryPrize {
       return matchCount;
     }, 0);
   }
+
+  static IsBonusNumberMatch([...lottoNumbers], bonusNumber) {
+    return lottoNumbers.includes(bonusNumber);
+  }
 }
 export default LotteryPrize;
