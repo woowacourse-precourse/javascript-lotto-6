@@ -35,11 +35,11 @@ class Validator {
     }
     
     if (WINNINGS.length > TOTAL_LOTTO_NUMBERS) {
-     throw new Error(WINNING_NUMBERS_ERROR_MESSAGE.wrongWinningNumber)
+     throw new Error(`${WINNING_NUMBERS_ERROR_MESSAGE.wrongWinningNumber} 게임을 종료합니다.`)
     }
 
     if (MY_NUMBERS !== REMOVE_DUPLICATE_NUMBERS) {
-      throw new Error(COMMON_ERROR_MESSAGE.detectedDuplicate)
+      throw new Error(`${COMMON_ERROR_MESSAGE.detectedDuplicate} 게임을 종료합니다.`)
     }
 
     if (FILTERED_NUMBERS.length) {
