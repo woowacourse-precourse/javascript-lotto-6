@@ -1,5 +1,4 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { Lotto } from "./Lotto.js";
 
 export async function getPayment() {
   try {
@@ -41,6 +40,6 @@ export function printReturnRate(prize, PAYMENT) {
     prize[2] * 1500000 +
     prize[3] * 30000000 +
     prize[4] * 2000000000;
-  let RATE_RETURN = (PRIZE / PAYMENT).toFixed(1);
+  let RATE_RETURN = ((100 * PRIZE) / PAYMENT).toFixed(1);
   MissionUtils.Console.print(`총 수익률은 ${RATE_RETURN}%입니다.`);
 }

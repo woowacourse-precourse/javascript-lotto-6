@@ -3,17 +3,10 @@ import { Lotto } from "./Lotto.js";
 
 export class LottoMachine {
   constructor(PAYMENT) {
-    this.#validate(PAYMENT);
     this.quantity = PAYMENT / 1000;
     this.inventory = [];
     this.#fillInventory(this.quantity);
     this.prize = [0, 0, 0, 0, 0];
-  }
-
-  #validate(PAYMENT) {
-    if (PAYMENT % 1000 !== 0) {
-      throw new Error("[ERROR] 지불 비용은 1000원으로 나누어 떨어져야 합니다");
-    }
   }
 
   #generateLotto() {
@@ -29,8 +22,8 @@ export class LottoMachine {
   }
 
   printInventory() {
-    for (let cnt = 0; cnt < this.quantity; cnt++) {
-      this.inventory[cnt].printNumbers();
+    for (let lotto of this.inventory) {
+      lotto.printNumbers();
     }
   }
 

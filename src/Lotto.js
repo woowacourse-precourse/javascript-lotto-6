@@ -12,10 +12,24 @@ export class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    for (let number of numbers) {
+      if (isNaN(number)) {
+        throw new Error("[ERROR] 당첨 번호는 숫자로만 입력이 되어야합니다.");
+      }
+      if (new Set(numbers).size !== numbers.length) {
+        throw new Error("[ERROR] 당첨 번호엔 중복이 없어야 합니다.");
+      }
+      if (number > 45 || number < 1) {
+        throw new Error("[ERROR] 당첨 번호는 1에서 45의 범위여야 합니다.");
+      }
+    }
   }
 
   printNumbers() {
-    MissionUtils.Console.print(this.#numbers.sort((a, b) => a - b));
+    let arr = this.#numbers.sort((a, b) => a - b);
+    MissionUtils.Console.print(
+      `[${arr[0]}, ${arr[1]}, ${arr[2]}, ${arr[3]}, ${arr[4]}, ${arr[5]}]`
+    );
   }
 
   calcGuess(NUMBER_GUESS) {
