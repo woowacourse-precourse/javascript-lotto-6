@@ -1,6 +1,7 @@
 import Validator from './Validator.js';
 import PriceValidator from './PriceValidator.js';
 import BonusNumberValidator from './BonusNumValidator.js';
+import WinNumValidator from './WinNumValidator.js';
 
 class ValidatorFactory {
   /**
@@ -14,6 +15,8 @@ class ValidatorFactory {
         return new PriceValidator();
       case ('bonus'):
         return new BonusNumberValidator();
+      case ('win'):
+        return new WinNumValidator();
       default:
         return new Validator();
     }
