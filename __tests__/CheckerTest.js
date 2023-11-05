@@ -2,26 +2,13 @@ import BonusBall from '../src/BonusBall';
 import Checker from '../src/Checker';
 import Lotto from '../src/Lotto';
 import { FIVE_AND_BONUS, FIVE_NO_BONUS, RANK } from '../src/constant';
+import { makeLottos, makeExpectedWinningResult } from '../testUtils';
 
 describe('Checker 클래스 테스트', () => {
   const winningNumbers = [1, 2, 3, 4, 5, 6];
   const bonusNumber = 7;
   const winningLotto = new Lotto(winningNumbers);
   const bonusBall = new BonusBall(bonusNumber, winningNumbers);
-  const makeLottos = (array) => array.map((v) => new Lotto(v));
-  const makeExpectedWinningResult = (
-    three,
-    four,
-    fiveNoBonus,
-    fiveAndBonus,
-    six,
-  ) => [
-    { rank: 'three', number: three },
-    { rank: 'four', number: four },
-    { rank: FIVE_NO_BONUS, number: fiveNoBonus },
-    { rank: FIVE_AND_BONUS, number: fiveAndBonus },
-    { rank: 'six', number: six },
-  ];
 
   const userLottoTestArray = [
     {

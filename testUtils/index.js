@@ -1,4 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import { FIVE_AND_BONUS, FIVE_NO_BONUS } from '../src/constant';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -23,4 +24,26 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-export { mockQuestions, mockRandoms, getLogSpy };
+const makeLottos = (array) => array.map((v) => new Lotto(v));
+
+const makeExpectedWinningResult = (
+  three,
+  four,
+  fiveNoBonus,
+  fiveAndBonus,
+  six,
+) => [
+  { rank: 'three', number: three },
+  { rank: 'four', number: four },
+  { rank: FIVE_NO_BONUS, number: fiveNoBonus },
+  { rank: FIVE_AND_BONUS, number: fiveAndBonus },
+  { rank: 'six', number: six },
+];
+
+export {
+  mockQuestions,
+  mockRandoms,
+  getLogSpy,
+  makeLottos,
+  makeExpectedWinningResult,
+};
