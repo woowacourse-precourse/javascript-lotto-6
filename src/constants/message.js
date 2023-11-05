@@ -54,6 +54,7 @@ export const STATISTICS = (count, rankIndex) => RESULT[rankIndex](count);
 
 export const ERROR = {
   NOT_ONLY_NUMBER: "[ERROR] 숫자만 입력 가능합니다.",
+  LOWER_THAN_ZERO: "[ERROR] 양의 정수를 입력해주세요.",
   INVALID_UNIT: `[ERROR] ${UNIT.PURCHASE} 단위로 입력 가능합니다.`,
   INVALID_LOTTO_LENGTH: `[ERROR] 로또 번호는 ${LOTTO.LENGTH}개여야 합니다.`,
   NOT_ONLY_NUMBER_AND_COMMA: `[ERROR] 숫자와 ${SEPARATOR.NAME}만 입력 가능합니다.`,

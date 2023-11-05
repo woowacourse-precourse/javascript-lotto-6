@@ -45,4 +45,10 @@ describe("Purchase 클래스 테스트", () => {
       new Purchase("800");
     }).toThrow(ERROR.INVALID_UNIT);
   });
+
+  test("인스턴스 생성 시 전달받은 인자에 0 이하의 값이 입력되면 에러가 발생한다.", () => {
+    expect(() => {
+      new Purchase("0");
+    }).toThrow(ERROR.LOWER_THAN_ZERO);
+  });
 });

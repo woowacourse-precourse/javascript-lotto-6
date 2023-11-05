@@ -3,7 +3,11 @@ import { ERROR } from "./constants/message";
 
 class Validate {
   isValidPurchaseSum(num) {
-    if (!this.#isOnlyNumber(num) || !this.#isThousandUnit(num)) {
+    if (
+      !this.#isOnlyNumber(num) ||
+      !this.#isGreaterThanZero(num) ||
+      !this.#isThousandUnit(num)
+    ) {
       return false;
     }
 
@@ -13,6 +17,16 @@ class Validate {
   #isOnlyNumber(input) {
     if (!REGEX.ONLY_NUMBER.test(input)) {
       throw new Error(ERROR.NOT_ONLY_NUMBER);
+    }
+
+    return true;
+  }
+
+  #isGreaterThanZero(input) {
+    const number = parseInt(input, 10);
+
+    if (number <= 0) {
+      throw new Error(ERROR.LOWER_THAN_ZERO);
     }
 
     return true;
