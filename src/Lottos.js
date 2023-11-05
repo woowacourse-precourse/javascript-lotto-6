@@ -16,6 +16,10 @@ class Lottos {
     const newNumbers = Random.pickUniqueNumbersInRange(1,45,6);
     return new Lotto(newNumbers);
   }
+
+  calculateResults(winningNumbers, bonusNumber) {
+    return this.#tickets.map(lotto => lotto.calculateResult(winningNumbers, bonusNumber));
+  }  
 }
 
 export default Lottos;
