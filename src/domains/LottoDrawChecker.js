@@ -18,4 +18,8 @@ export default class LottoDrawChecker {
     return lotto.filter((number) => this.#winningNumbers.includes(number))
       .length;
   }
+
+  haveBonusNumber(lotto, _ = paramType(lotto, Array)) {
+    return lotto.includes(this.#bonusNumber);
+  }
 }
