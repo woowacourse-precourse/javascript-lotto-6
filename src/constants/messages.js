@@ -7,3 +7,10 @@ export const INPUT_MESSAGE = Object.freeze({
   winningNumbers: '당첨 번호를 입력해 주세요.\n',
   bonusNumber: '보너스 번호를 입력해 주세요.\n',
 });
+
+export const ERROR_PRIFIX = '[ERROR] ';
+export const ERROR_MESSAGE = Object.freeze({
+  notDividedPrice: '로또 가격(1,000원) 단위로 입력해주세요.',
+  negativePrice: '가격은 음수가 될 수 없습니다.',
+  isNaN: '숫자를 입력해주세요.',
+});
