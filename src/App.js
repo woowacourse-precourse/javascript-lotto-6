@@ -22,6 +22,20 @@ class App {
     }
   }
 
+  validateBonusNumber(input) {
+    const bonus = Number(input);
+
+    if (Number.isNaN(bonus)) {
+      throw new Error(ERROR_MESSAGE.nonNumeric);
+    }
+    if (!Number.isInteger(bonus) || bonus < 1 || bonus > 45) {
+      throw new Error(ERROR_MESSAGE.outOfRange);
+    }
+    if (this.#winning.includes(bonus)) {
+      throw new Error(ERROR_MESSAGE.duplicateWinningNumber);
+    }
+  }
+
   generateLottos(amount) {
     for (let i = 0; i < amount; i += 1) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -40,11 +54,16 @@ class App {
     this.generateLottos(amount);
 
     const userSelected = await Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.\n',
+      '\n당첨 번호를 입력해 주세요.\n',
     );
     this.#winning = new Lotto(
       userSelected.split(',').map((string) => Number(string)),
     );
+
+    const bonusNumber = await Console.readLineAsync(
+      '\n보너스 번호를 입력해 주세요.\n',
+    );
+    this.validateBonusNumber(bonusNumber);
   }
 }
 
