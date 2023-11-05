@@ -8,4 +8,11 @@ describe("LottoPrizeManager 클래스 테스트", () => {
       new LottoPrizeManager(winningNumberArray);
     }).toThrow(PRIZE.ERROR.WINNING_NUMBER_SIZE);
   });
+
+  test("당첨 번호가 중복되면 예외 처리한다", () => {
+    const winningNumberArray = ["1", "1", "2", "3", "4", "5"];
+    expect(() => {
+      new LottoPrizeManager(winningNumberArray);
+    }).toThrow(PRIZE.ERROR.WINING_NUMBER_DUPLICATE);
+  });
 });
