@@ -1,9 +1,14 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import ERROR_MESSAGE from './ErrorMessage';
+import Lotto from './Lotto';
 
 const LOTTO_PRICE = 1000;
 
 class App {
+  constructor() {
+    this.lottos = [];
+  }
+
   static validatePayment(input) {
     const payment = Number(input);
 
@@ -20,6 +25,13 @@ class App {
     App.validatePayment(payment);
     const amount = payment / LOTTO_PRICE;
     Console.print(`\n${amount}개를 구매했습니다.`);
+
+    for (let i = 0; i < amount; i += 1) {
+      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      numbers.sort((a, b) => a - b);
+      this.lottos.push(new Lotto(numbers));
+      this.lottos[i].print();
+    }
   }
 }
 
