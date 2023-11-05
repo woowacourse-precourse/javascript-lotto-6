@@ -11,6 +11,10 @@ class Lotto {
     const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     return new Lotto(numbers);
   }
+
+  getLottery() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
