@@ -48,6 +48,12 @@ class App {
     this.output.printTickets(this.#money / 1000)
     this.output.printLotto(this.#lottos)
   }
+
+  async requestWinningNumbers() {
+    const INPUT = await this.input.getValue(GUIDE_MESSAGE.insertWinnerNumbers)
+
+    this.lotto = new Lotto(String(INPUT));
+  }
 }
 
 export default App;
