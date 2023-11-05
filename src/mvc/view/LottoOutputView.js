@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import CONSTANTS from '../../constants/CONSTANTS.js';
+import STRINGS from '../../constants/STRINGS.js';
 
 const {
   PURCHASED_LOTTO_FORMAT,
@@ -17,7 +17,7 @@ const {
   DASH,
   SPACE,
   UNIT_OF_LOTTO,
-} = CONSTANTS;
+} = STRINGS;
 
 class LottoOutputView {
   printPurchasedLotto(lottoArray) {

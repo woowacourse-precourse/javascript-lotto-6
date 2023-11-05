@@ -52,7 +52,7 @@ mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능
   - [x] 구입 금액에 맞춰 model의 purchasedLottoArray 업데이트
   - [x] 업데이트 한 purchasedLottoArray를 output view로 출력 지시
   
-  - [ ] model의 lottoBoard 업데이트
+  - [x] model의 lottoBoard 업데이트
     - [x] input view로부터 당첨번호 입력 받아오기
       - [x] 당첨 번호 예외 상황이면 에러 출력 후 다시 받기
     - [x] input view로부터 보너스 번호 입력 받아오기
