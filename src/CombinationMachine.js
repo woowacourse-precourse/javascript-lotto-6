@@ -22,11 +22,11 @@ class CombinationMachine {
 
     matchedLottos.forEach(([matchedLength, hasBonus]) => {
       if (matchedLength < 3) return;
-      if (matchedLength === 3) result[matchedLength - 3] += 1;
-      if (matchedLength === 4) result[matchedLength - 3] += 1;
-      if (matchedLength === 5 && !hasBonus) result[matchedLength - 3] += 1;
-      if (matchedLength === 5 && hasBonus) result[matchedLength - 2] += 1;
-      if (matchedLength === 6) result[matchedLength - 2] += 1;
+      if (matchedLength === 3) result[0] += 1;
+      if (matchedLength === 4) result[1] += 1;
+      if (matchedLength === 5 && !hasBonus) result[2] += 1;
+      if (matchedLength === 5 && hasBonus) result[3] += 1;
+      if (matchedLength === 6) result[4] += 1;
     });
 
     return result;
