@@ -10,7 +10,6 @@ class Input {
       });
 
       rl.question("구입금액을 입력해 주세요: ", (money) => {
-        // 입력 받은 구입금액을 정수로 변환
         const purchaseAmount = parseInt(money, 10);
 
         if (isNaN(purchaseAmount) || purchaseAmount % 1000 !== 0) {
@@ -18,6 +17,9 @@ class Input {
           rl.close();
           reject();
         } else {
+          const count = purchaseAmount / 1000;
+          const message = `${count}개를 구매했습니다.`;
+          console.log(message);
           rl.close();
           resolve(purchaseAmount);
         }
