@@ -4,16 +4,10 @@ import { INPUT_MESSAGE } from '../constants/constants.js';
 
 const InputView = {
   async readPurchaseMoney() {
-    let trimmedMoney;
-    try {
-      const purchaseMoney = await Console.readLineAsync(
-        INPUT_MESSAGE.purchaseMoney,
-      );
-      trimmedMoney = purchaseMoney.trim();
-      Validator.validateMoney(trimmedMoney);
-    } catch (error) {
-      Console.print(error.message);
-    }
+    const purchaseMoney = await Console.readLineAsync(
+      INPUT_MESSAGE.purchaseMoney,
+    );
+    const trimmedMoney = purchaseMoney.trim();
     return trimmedMoney;
   },
 
@@ -22,6 +16,12 @@ const InputView = {
       INPUT_MESSAGE.winningNumber,
     );
     return winningNumbers;
+  },
+
+  async readBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
+    const trimmedBonus = bonusNumber.trim();
+    return trimmedBonus;
   },
 };
 

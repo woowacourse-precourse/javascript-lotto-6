@@ -13,8 +13,14 @@ class LottoGameController {
   }
 
   async #takePurchaseMoneyStage() {
-    const purchaseMoney = await InputView.readPurchaseMoney();
-    this.#issueTicketStage(purchaseMoney);
+    let purchaseMoney;
+    try {
+      purchaseMoney = await InputView.readPurchaseMoney();
+      Validator.validateMoney(purchaseMoney);
+      this.#issueTicketStage(purchaseMoney);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   #issueTicketStage(purchaseMoney) {
@@ -29,6 +35,20 @@ class LottoGameController {
       winningNumbers = await InputView.readWinningNumbers();
       Validator.validateNumberForm(winningNumbers);
       this.winningLotto = new Lotto(winningNumbers.split(',').map(Number));
+      this.#takeBonusNumberStage();
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+
+  async #takeBonusNumberStage() {
+    let bonusNumber;
+    try {
+      bonusNumber = await InputView.readBonusNumber();
+      Validator.validateBouns(
+        this.winningLotto.getWinningNumbers(),
+        bonusNumber,
+      );
     } catch (error) {
       Console.print(error.message);
     }

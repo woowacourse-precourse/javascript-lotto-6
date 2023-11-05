@@ -27,6 +27,18 @@ const Validator = {
     });
   },
 
+  validateBouns(winningNumbers, bonusNumber) {
+    if (!this.isNumber(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.number);
+    }
+    if (this.isNumberInRange(Number(bonusNumber))) {
+      throw new Error(ERROR_MESSAGE.range);
+    }
+    if (winningNumbers.includes(Number(bonusNumber))) {
+      throw new Error(ERROR_MESSAGE.bonus);
+    }
+  },
+
   isNumber(input) {
     return /^\d+$/.test(input);
   },
