@@ -1,4 +1,4 @@
-const Message = {
+const message = {
   tryPurchaseLotto: '구입금액을 입력해 주세요.',
   winningNumbers: '당첨 번호를 입력해 주세요.',
   bonusNumber: '보너스 번호를 입력해 주세요.',
@@ -10,7 +10,7 @@ const Message = {
   sixMatches: '6개 일치 (2,000,000,000원) - ',
 };
 
-const Money = {
+const money = {
   threeMatches: 5000,
   fourMatches: 50000,
   fiveMatches: 1500000,
@@ -18,4 +18,17 @@ const Money = {
   sixMatches: 2000000000,
 };
 
-export { Message, Money };
+const errorMessage = {
+  purchaseNotNumber: '[ERROR] 구입금액을 숫자로 입력해 주세요.',
+  purchaseWrongUnit: '[ERROR] 1000원 단위로 입력해 주세요.',
+  winningNumbersNotNumber: '[ERROR] 로또 번호는 숫자여야 합니다.',
+  winningNumbersRange: '[ERROR] 로또 번호는 1에서 45 사이의 숫자여야 합니다.',
+  winningNumbersCount: '[ERROR] 로또 번호는 6개여야 합니다.',
+  duplicatedWinningNumbers: '[Error] 로또 번호는 중복되지 않아야 합니다.',
+  bonusNumberNotNumber: '[Error] 보너스 번호는 숫자여야 합니다.',
+  bonusNumberRange: '[Error] 보너스 번호는 1에서 45 사이의 숫자여야 합니다.',
+  duplicatedBonusNumber:
+    '[Error] 보너스 번호는 로또 번호와 중복되지 않아야 합니다.',
+};
+
+export { message, money, errorMessage };
