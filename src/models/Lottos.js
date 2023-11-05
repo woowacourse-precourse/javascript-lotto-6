@@ -8,6 +8,7 @@ import {
   TWO_RANK,
 } from '../constant.js';
 import Util from '../utils/Util.js';
+import PurChaseValidator from '../validators/PurchaseValidator.js';
 
 class Lottos {
   #purchase;
@@ -29,6 +30,7 @@ class Lottos {
   }
 
   setPurchase(purchase) {
+    PurChaseValidator.checkPurchase(purchase);
     this.#purchase = purchase;
   }
 
