@@ -45,10 +45,13 @@ calculateProfitRates
 <br/>
 
 generateLottoNumbers
-- [ ] 로또 번호의 숫자를 1~45까지 무작위로 6개를 생성
+- [x] 로또 번호의 숫자를 1~45까지 무작위로 6개를 생성
 
 sortLottoNumbers
 - [ ] 로또 번호를 오름차순으로 정렬
+
+printLottoNumbersArray
+- [x] 로또 번호들의 값을 넘김
 
 <br/>
 
@@ -58,7 +61,7 @@ sortLottoNumbers
 <br/>
 
 calculateLottoCount
-- [ ] 지불한 금액으로 구매할 수 있는 로또의 수를 계산
+- [x] 지불한 금액으로 구매할 수 있는 로또의 수를 계산
 
 printLottos
 - [ ] 구매한 로또의 번호를 출력
