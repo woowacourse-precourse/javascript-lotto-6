@@ -1,4 +1,4 @@
-import ERROR_MESSAGE from '../src/ErrorMessage.js';
+import ERROR_MESSAGE from '../src/constant/ErrorMessage.js';
 import Lotto from '../src/Lotto.js';
 
 describe('로또 클래스 테스트', () => {
