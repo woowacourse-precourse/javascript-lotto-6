@@ -5,8 +5,8 @@
 - 구매한 로또의 갯수와 로또 번호를 저장하고 처리하는 LottoData 클래스
   - [x]inputPurchaseAmount : 구입 금액 입력
     - [x]isValidationPurchaseAmount : 1000원 단위의 양수가 아닌 경우 예외처리, 에러 메시지 출력하고 다시 입력받도록
-  - [x]generateRandomLotto : 로또 번호 생성 후 정렬
-  - [x]pickRandomLotto : 구매한 개수에 맞게 로또 번호 뽑기
+  - [x]pickRandomLotto : 로또 번호 생성 후 정렬
+  - [x]iterRandomLottoAndSave: 구매한 개수에 맞게 로또 번호 뽑고 저장
   - [x]getLottoData : 로또 배열 반환
   - [x]getLottoCount : 로또 횟수 반환
   - [x]printLottoData : 로또 배열 출력

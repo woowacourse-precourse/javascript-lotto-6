@@ -24,7 +24,7 @@ class LottoData {
     }
   }
 
-  generateRandomLotto() {
+  pickRandomLotto() {
     const pick = Random.pickUniqueNumbersInRange(
       OPTION.min_random_num,
       OPTION.max_random_num,
@@ -34,9 +34,9 @@ class LottoData {
     return pick;
   }
 
-  pickRandomLotto() {
+  iterRandomLottoAndSave() {
     Array.from({ length: this.#lottoCount }).forEach(() => {
-      const pick = this.generateRandomLotto();
+      const pick = this.pickRandomLotto();
       this.printLottoData(pick);
       this.#lottoData.push(pick);
     });

@@ -10,7 +10,7 @@ class App {
 
     await lottoData.inputPurchaseAmount();
     lottoData.printLottoCount();
-    lottoData.pickRandomLotto();
+    lottoData.iterRandomLottoAndSave();
 
     await winNumber.inputWinNumber();
     await winNumber.inputBonusNumber();
