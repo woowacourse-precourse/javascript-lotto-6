@@ -1,10 +1,12 @@
 import LottoGenerator from "./LottoGenerator.js";
 import LottoValidator from "./utils/LottoValidator.js";
 import LottoDisplay from "./LottoDisplay.js";
+import LottoResult from "./LottoResult.js";
 
 const display = new LottoDisplay();
 const generator = new LottoGenerator();
 const validator = new LottoValidator();
+const result = new LottoResult();
 
 class App {
   async getValidMoneyInput() {
@@ -47,15 +49,44 @@ class App {
     }
   }
 
-  async play() {
+  async getMoneyAndTickets() {
     const money = await this.getValidMoneyInput();
     const lottoTickets = await generator.getLottoTickets(money);
 
     display.displayNumberOfTickets(lottoTickets.length);
     display.displayLottoTickets(lottoTickets);
 
+    return { money, lottoTickets };
+  }
+
+  async getWinningData() {
     const winningNumbers = await this.getValidWinningNumbers();
-    await this.getValidBonusNumber(winningNumbers);
+    const bonusNumber = await this.getValidBonusNumber(winningNumbers);
+
+    return { winningNumbers, bonusNumber };
+  }
+
+  async getGameData() {
+    const { money, lottoTickets } = await this.getMoneyAndTickets();
+    const { winningNumbers, bonusNumber } = await this.getWinningData();
+
+    return {
+      money,
+      lottoTickets,
+      winningNumbers,
+      bonusNumber,
+    };
+  }
+
+  async play() {
+    const gameData = await this.getGameData();
+
+    const { winningCounts, rateOfReturn } = result.calculateFinalResult(
+      gameData.lottoTickets,
+      gameData.winningNumbers,
+      gameData.bonusNumber
+    );
+    display.displayResults(winningCounts, rateOfReturn);
   }
 }
 
