@@ -4,8 +4,8 @@ import bonusNumberValidService from './validate/bonusNumberValidService.js';
 export default async function getBonusNumber(winningNumber) {
   try {
     const input = await receiveBonusNumberUI();
-    await bonusNumberValidService(input, winningNumber);
     const bonusNumber = Number(input);
+    await bonusNumberValidService(bonusNumber, winningNumber);
     return bonusNumber;
   } catch (error) {
     throw new Error(error.message);
