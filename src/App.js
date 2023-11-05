@@ -44,6 +44,11 @@ class App {
     const lottoWinningNumbers = await InputView.readLottoWinningNumbers();
     return lottoWinningNumbers;
   }
+
+  async #getBonousNumber() {
+    const bonousNumber = await InputView.readBonousNumber();
+    return bonousNumber;
+  }
 }
 
 export default App;
