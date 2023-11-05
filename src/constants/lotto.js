@@ -21,12 +21,11 @@ const number = Object.freeze({
 });
 
 const rate = Object.freeze({
-  total: 100,
   percent: 100,
 });
 
 const bonus = Object.freeze({
-  count: 5,
+  count: '5',
   key: '5_bonus',
 });
 
@@ -34,6 +33,19 @@ const string = Object.freeze({
   split: ',',
 });
 
-const LOTTO = Object.freeze({ lottoPrizesMap, unit, number, rate });
+const regexPatterns = Object.freeze({
+  numericPattern: /^(?:[1-9]\d{3,}|[1-9]\d{0,2}(,\d{3})+)$/,
+  whitespace: /\s/,
+});
+
+const LOTTO = Object.freeze({
+  lottoPrizesMap,
+  unit,
+  number,
+  rate,
+  bonus,
+  string,
+  regexPatterns,
+});
 
 export default LOTTO;
