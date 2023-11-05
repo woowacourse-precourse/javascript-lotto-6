@@ -14,10 +14,13 @@ class LottoController {
   }
 
   async play() {
-    await this.askPurchase();
+    await this.#askPurchase();
+    await this.#askWinningNumber();
+    await this.#askBonusNumber();
+    this.#printResult();
   }
 
-  async askPurchase() {
+  async #askPurchase() {
     try {
       const purchase = await InputView.askPurchase();
       this.#lottos.setPurchase(purchase);
@@ -29,7 +32,7 @@ class LottoController {
     }
   }
 
-  async askWinningNumber() {
+  async #askWinningNumber() {
     try {
       const winningNumber = await InputView.askWinningNumber();
       this.#winnginNumber.setWinningNumber(winningNumber);
@@ -39,7 +42,7 @@ class LottoController {
     }
   }
 
-  async askBonusNumber() {
+  async #askBonusNumber() {
     try {
       const bonusNumber = await InputView.askBonusNumber(this.#winnginNumber.getWinningNumber());
       this.#winnginNumber.setBonusNumber(bonusNumber);
@@ -47,6 +50,15 @@ class LottoController {
       OutputView.print(error.message);
       await this.askBonusNumber();
     }
+  }
+
+  #printResult() {
+    OutputView.winningStatistics(
+      this.#lottos.getWinningResult(
+        this.#winnginNumber.getWinningNumber(),
+        this.#winnginNumber.getBonusNumber(),
+      ),
+    );
   }
 }
 export default LottoController;
