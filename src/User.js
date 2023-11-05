@@ -3,19 +3,19 @@ import Lotto from './Lotto.js';
 import CONSTANTS from '../utils/Constants.js';
 
 class User {
-  #lottos;
+  lottos;
 
   constructor(purchaseAmount) {
-    this.#lottos = this.#generateLotto(purchaseAmount);
+    this.lottos = this.#generateLotto(purchaseAmount);
   }
 
   #generateLotto(purchaseAmount) {
     const lottoQuantity = purchaseAmount / CONSTANTS.eachLottoPrice;
-    const lottoNumbers = this.#generateRandomNumbers(lottoQuantity);
+    const lottoNumbers = this.generateRandomNumbers(lottoQuantity);
     return lottoNumbers.map((lottoNumber) => new Lotto(lottoNumber));
   }
 
-  #generateRandomNumbers(lottoQuantity) {
+  generateRandomNumbers(lottoQuantity) {
     return Array.from({ length: lottoQuantity }, () =>
       Random.pickUniqueNumbersInRange(
         CONSTANTS.minimumNumber,
