@@ -8,11 +8,13 @@ class LottoController {
   #money;
   #lottos;
   #statistics;
+  #totalRevenueRate;
 
   constructor(money) {
     this.#money = money;
     this.#lottos = [];
     this.#statistics = this.initLottoStatistics();
+    this.#totalRevenueRate = 0;
   }
 
   initLottoStatistics() {
@@ -96,6 +98,14 @@ class LottoController {
     if (this.#statistics[key]) {
       this.#statistics[key].count += 1;
     }
+  }
+
+  calculateRateOfReturn() {
+    const matches = Object.values(this.#statistics);
+    let totalRevenueMoney = 0;
+
+    matches.forEach(({ count, prize }) => (totalRevenueMoney += count * prize));
+    this.#totalRevenueRate = (totalRevenueMoney / this.#money) * 100;
   }
 }
 
