@@ -2,6 +2,7 @@ import Lotto from '../model/Lotto.js';
 import LottoList from '../model/LottoList.js';
 import { inputMoney } from '../view/InputPrompt.js';
 import { validateDivisible, validateNumber } from '../utils/validateFn.js';
+import { printBuyLottery } from '../view/OutputPompt.js';
 
 class LottoGame {
   #money = 0;
@@ -10,6 +11,8 @@ class LottoGame {
   async buyLotto() {
     await this.#setMoney();
     this.#setMyLottoList();
+    printBuyLottery(this.#myLottos.getLottoCount());
+    this.#myLottos.printMyLottery();
   }
 
   async #setMoney() {
