@@ -5,6 +5,7 @@ import InputView from './view/inputView.js';
 class App {
   async play() {
     const lottoAmount = await this.getLottoAmount();
+    const lottoCount = this.getLottoCount(lottoAmount);
   }
 
   async getLottoAmount() {
@@ -23,6 +24,10 @@ class App {
         Console.print(error.message);
       }
     }
+  }
+
+  getLottoCount(amount) {
+    return parseInt(amount / 1000);
   }
 }
 
