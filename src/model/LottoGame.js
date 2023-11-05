@@ -8,9 +8,6 @@ class LottoGame {
   #bonusNumber;
 
   constructor(userNumbers, numbers, bonusNumber) {
-    console.log(userNumbers);
-    console.log(numbers);
-    console.log(bonusNumber);
     this.#userNumbers = userNumbers;
     this.#numbers = numbers;
     this.#bonusNumber = bonusNumber;

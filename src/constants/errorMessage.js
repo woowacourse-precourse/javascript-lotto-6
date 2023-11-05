@@ -5,7 +5,7 @@ const MONEY_ERROR = Object.freeze({
 });
 
 const WINNING_ERROR = Object.freeze({
-  error: "[ERROR] 로또 번호는 숫자 6개여야 합니다.",
+  error: "[ERROR] 로또 번호는 1 이상 45 이하 숫자 6개여야 합니다.",
 });
 
 const BONUS_ERROR = Object.freeze({
