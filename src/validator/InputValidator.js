@@ -8,19 +8,19 @@ class InputValidator {
    */
   static validateMoney(money) {
     if (Number.isNaN(Number(money))) {
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
+      throw ERROR_MESSAGE.NOT_A_NUMBER;
     }
 
     if (money <= 0) {
-      throw new Error(ERROR_MESSAGE.NEGATIVE_VALUE);
+      throw ERROR_MESSAGE.NEGATIVE_VALUE;
     }
 
     if (money % GAME_RULE.MIN_AMOUNT_UNIT !== 0) {
-      throw new Error(ERROR_MESSAGE.NOT_BEING_DIVIDED);
+      throw ERROR_MESSAGE.NOT_BEING_DIVIDED;
     }
 
     if (money > GAME_RULE.MAX_AMOUNT_UNIT) {
-      throw new Error(ERROR_MESSAGE.OVER_THE_LIMIT);
+      throw ERROR_MESSAGE.OVER_THE_LIMIT;
     }
   }
 
@@ -39,16 +39,16 @@ class InputValidator {
         winningNumber < GAME_RULE.START_LOTTO_NUMBER ||
         winningNumber > GAME_RULE.END_LOTTO_NUMBER
       ) {
-        throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
+        throw ERROR_MESSAGE.OUT_OF_RANGE;
       }
     });
 
     if (winningNumbers.length !== GAME_RULE.LOTTO_NUMBER_COUNT) {
-      throw new Error(ERROR_MESSAGE.INVALID_COUNT);
+      throw ERROR_MESSAGE.INVALID_COUNT;
     }
 
     if (new Set(winningNumbers).size !== GAME_RULE.LOTTO_NUMBER_COUNT) {
-      throw new Error(ERROR_MESSAGE.NOT_A_UNIQUE);
+      throw ERROR_MESSAGE.NOT_A_UNIQUE;
     }
   }
 
@@ -60,14 +60,14 @@ class InputValidator {
   static validateBonusNumber(bonusNumber) {
     const convertedNumber = Number(bonusNumber);
     if (Number.isNaN(convertedNumber)) {
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
+      throw ERROR_MESSAGE.NOT_A_NUMBER;
     }
 
     if (
       convertedNumber < GAME_RULE.START_LOTTO_NUMBER ||
       convertedNumber > GAME_RULE.END_LOTTO_NUMBER
     ) {
-      throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
+      throw ERROR_MESSAGE.OUT_OF_RANGE;
     }
   }
 
@@ -80,7 +80,7 @@ class InputValidator {
   static validateLottoNumbers(bonusNumber, winningNumbers) {
     const lottoNumbers = new Set([bonusNumber, ...winningNumbers].map(Number));
     if (lottoNumbers.size !== GAME_RULE.TOTAL_LOTTO_COUNT) {
-      throw new Error(ERROR_MESSAGE.NOT_A_UNIQUE);
+      throw ERROR_MESSAGE.NOT_A_UNIQUE;
     }
   }
 }
