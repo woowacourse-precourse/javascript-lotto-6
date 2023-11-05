@@ -1,6 +1,7 @@
 import InputView from "../view/InputView";
 import OutputView from "../view/OutputView";
 import UserLottoModel from "../domain/UserLottoModel";
+import LottoMatcher from "../domain/LottoMatcher";
 import Lotto from "../domain/Lotto";
 
 import { Console } from "@woowacourse/mission-utils";
@@ -24,18 +25,13 @@ class LottoController {
         
         // 당첨 번호 입력
         const winningNumbers = await InputView.getWinningNumbers();
-  
-        const lotto = new Lotto(winningNumbers);
+ 
         // 보너스 번호 입력
         const bonusNumbers = await InputView.getBonusNumbers();
         
         // 로또 
-        const result = lotto.countMatches(
-          lottoTickets,
-          winningNumbers,
-          bonusNumbers,
-          ticketPrice
-        );
+        const lottoMatcher = new LottoMatcher(lottoTickets, winningNumbers, bonusNumbers, ticketPrice);
+        const result = lottoMatcher.countMatches();
   
         OutputView.printResultTitle();
   

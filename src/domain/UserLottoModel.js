@@ -8,23 +8,17 @@ class UserLottoModel {
   constructor() {
     this.#lottoTickets = [];
   }
-  
+
   generateLottoTicket(inputNum) {
     const tickets = this.#calculateNumberOfTickets(inputNum);
     for (let i = 0; i < tickets; i++) {
-      const lottoTicket = this.#generateRandomLottoTicket();
-      this.#lottoTickets.push(lottoTicket);
+      const ticket = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      this.#lottoTickets.push(new Lotto(ticket));
     }
   }
 
   #calculateNumberOfTickets(inputNum) {
     return inputNum / 1000;
-  }
-
-  #generateRandomLottoTicket() {
-    const lottoTicket = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    lottoTicket.sort((a, b) => a - b);
-    return lottoTicket;
   }
 
   getLottoTickets() {
