@@ -2,8 +2,8 @@ import { Console } from "@woowacourse/mission-utils";
 import { message } from "../constants";
 
 const input = {
-  enterPaymenteAmount: async function () {
-    return await Console.readLineAsync(message.ENTER_PAYMENT_AMOUNT);
+  enterPurchaseAmount: async function () {
+    return await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
   },
 
   enterWinningNumber: async function () {
