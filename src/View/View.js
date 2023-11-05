@@ -18,4 +18,9 @@ export default class View {
   printPurchaseCount(purchaseCount) {
     this.#outputView.print(MessageFormat.purchaseCount(purchaseCount));
   }
+
+  printLottoTicket(ticket) {
+    const strringTicket = `[${ticket.join(', ')}]`;
+    this.#outputView.print(strringTicket);
+  }
 }

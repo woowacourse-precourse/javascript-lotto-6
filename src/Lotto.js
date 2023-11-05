@@ -15,10 +15,6 @@ class Lotto {
     }
   }
 
-  getLottoNumber() {
-    return this.#numbers;
-  }
-
   static getRandomLottoNumber() {
     const { minNum, maxNum, count } = LOTTO_NUMBER;
     const randomLottoNumber = Random.pickUniqueNumbersInRange(minNum, maxNum, count);
