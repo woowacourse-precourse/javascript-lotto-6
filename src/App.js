@@ -1,10 +1,14 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 class App {
   amount;
+  lottos = [];
+  lottosCount;
 
   async play() {
     await this.start();
+    this.getLottos();
   }
 
   async start() {
@@ -27,6 +31,22 @@ class App {
     } else if (this.amount % 1000 !== 0) {
       throw new Error('[ERROR] 로또 구입은 1000원 단위로 가능합니다.');
     }
+  }
+
+  getLottos() {
+    this.lottosCount = this.amount / 1000;
+    let i = 0;
+    while (i < this.lottosCount) {
+      const lotto = new Lotto(this.getLottoASCNumbers());
+      this.lottos.push(lotto.numbers);
+      i++;
+    }
+  }
+
+  getLottoASCNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+      (a, b) => a - b
+    );
   }
 }
 
