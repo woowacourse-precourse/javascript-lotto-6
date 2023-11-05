@@ -1,7 +1,7 @@
 import Lotto from './Lotto.js';
 import { Random } from '@woowacourse/mission-utils';
 
-class lottoMachine {
+class LottoMachine {
   static make(lottoCount) {
     const lottoArray = [];
 
@@ -48,4 +48,4 @@ class lottoMachine {
   }
 }
 
-export default lottoMachine;
+export default LottoMachine;

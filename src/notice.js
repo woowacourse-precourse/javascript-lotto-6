@@ -1,7 +1,7 @@
 import prompt from './prompt.js';
 import { NUMBER } from './constants.js';
 
-class notice {
+class Notice {
   static totalLotto(lottos, quantity) {
     prompt.out(`${quantity}개를 구매했습니다.`);
     lottos.forEach((lotto) => {
@@ -21,4 +21,4 @@ class notice {
   }
 }
 
-export default notice;
+export default Notice;

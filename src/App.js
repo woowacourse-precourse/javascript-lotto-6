@@ -1,7 +1,7 @@
-import Request from './request.js';
+import Request from './Request.js';
 import calculate from './calculate.js';
-import lottoMachine from './lottoMachine.js';
-import notice from './notice.js';
+import LottoMachine from './LottoMachine.js';
+import Notice from './Notice.js';
 
 class App {
   #money;
@@ -31,19 +31,19 @@ class App {
   async play() {
     await this.makeLotto();
 
-    notice.totalLotto(this.#lottos, this.#lottoQuantity);
+    Notice.totalLotto(this.#lottos, this.#lottoQuantity);
 
     await this.getWinningNumbers();
     await this.getBonusNumber();
     this.makeResult();
 
-    notice.finalProfit(this.#profit, this.#prizeResult);
+    Notice.finalProfit(this.#profit, this.#prizeResult);
   }
 
   async makeLotto() {
     this.#money = await Request.money();
     this.#lottoQuantity = calculate.countFrom(this.#money);
-    this.#lottos = lottoMachine.make(this.#lottoQuantity);
+    this.#lottos = LottoMachine.make(this.#lottoQuantity);
   }
 
   async getWinningNumbers() {
@@ -56,12 +56,12 @@ class App {
 
   makeResult() {
     const result = this.getResult(this.#lottos, this.#winningNumbers);
-    this.#prizeResult = lottoMachine.read(result, this.#bonusNumber);
+    this.#prizeResult = LottoMachine.read(result, this.#bonusNumber);
     this.#profit = calculate.profitFrom(this.#prizeResult, this.#money);
   }
 
   getResult(lottos, winningNumbers) {
-    return lottos.map((lotto) => lottoMachine.find(lotto, winningNumbers));
+    return lottos.map((lotto) => LottoMachine.find(lotto, winningNumbers));
   }
 }
 
