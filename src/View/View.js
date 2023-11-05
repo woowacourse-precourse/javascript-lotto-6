@@ -20,7 +20,7 @@ export default class View {
   }
 
   printLottoTicket(ticket) {
-    const strringTicket = `[${ticket.join(', ')}]`;
-    this.#outputView.print(strringTicket);
+    const stringTicket = MessageFormat.stringTicket(ticket);
+    this.#outputView.print(stringTicket);
   }
 }

@@ -41,7 +41,6 @@ class App {
 
   getLotteryTickets(purchaseCount) {
     const lottos = [];
-
     for (let i = 0; i < purchaseCount; i += 1) {
       const randomLottoNumber = Lotto.getRandomLottoNumber();
       const lotto = new Lotto(randomLottoNumber);
