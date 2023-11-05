@@ -17,6 +17,20 @@ class UserInterface {
       MissionUtils.Console.print(`[${numbers}]`);
     });
   }
+
+  static async getWinningNumbers() {
+    const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
+    if (Validation.validateWinningNumbers(input)) {
+      return input.split(",").map((number) => Number(number));
+    }
+  }
+
+  static async getBonusNumber(winningNumbers) {
+    const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+    if (Validation.validateBonusNumber(input, winningNumbers)) {
+      return Number(input);
+    }
+  }
 }
 
 export default UserInterface;

@@ -8,6 +8,9 @@ class App {
     const lottos = LottoGame.generateLottos(lottoCount);
 
     UserInterface.displayLottos(lottos);
+
+    const winningNumbers = await UserInterface.getWinningNumbers();
+    const bonusNumber = await UserInterface.getBonusNumber(winningNumbers);
   }
 }
 
