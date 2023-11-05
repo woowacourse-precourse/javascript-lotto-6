@@ -15,4 +15,13 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("새로운 로또 생성", () => {
+    const money = 4000;
+    let newLotto;
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+    newLotto = lotto.makeLotto(money);
+
+    expect(newLotto.length).toEqual(money / 1000);
+  });
 });
