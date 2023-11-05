@@ -56,22 +56,26 @@ const lottoGameConsole = Object.freeze({
       },
 
       lottoNumbers(lottoNumbers) {
-        return lottoNumbers
-          .map((lottoNumber) => `[${lottoNumber.join(`${SYMBOLS.comma} `)}]`)
-          .join('\n');
+        const formatWithComma = (lottoNumber) => lottoNumber.join(', ');
+        const wrapWithBrackets = (text) => `[${text}]`;
+        const formatLottoNumber = (lottoNumber) => wrapWithBrackets(formatWithComma(lottoNumber));
+
+        return lottoNumbers.map(formatLottoNumber).join('\n');
       },
 
       rewardInfo(rewardInfo) {
-        const { prizeInfo } = winningInfo.constants;
-        return Object.keys(this.prizeDescription)
-          .reverse()
-          .map(
-            (category) =>
-              `${this.prizeDescription[category]} (${prizeInfo[category].toLocaleString()}원) - ${
-                rewardInfo[category] ?? 0
-              }개`,
-          )
-          .join('\n');
+        const prizeCategories = Object.keys(this.prizeDescription).reverse();
+
+        const formatPrizeDescription = (category) => {
+          const { prizeInfo } = winningInfo.constants;
+          const description = this.prizeDescription[category];
+          const prizeAmount = prizeInfo[category].toLocaleString();
+          const count = rewardInfo[category] ?? 0;
+
+          return `${description} (${prizeAmount}원) - ${count}개`;
+        };
+
+        return prizeCategories.map(formatPrizeDescription).join('\n');
       },
 
       rateOfReturn(rateOfReturn) {
