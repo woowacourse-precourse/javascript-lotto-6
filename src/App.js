@@ -17,6 +17,8 @@ class App {
     let selectedNumber = [];
     for (let i = 0; i < count; i++) {
       selectedNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+      selectedNumber.sort((x, y) => x - y);
+
       this.LottoList.push(selectedNumber);
       Console.print(selectedNumber);
     }
