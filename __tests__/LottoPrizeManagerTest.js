@@ -9,6 +9,19 @@ describe("LottoPrizeManager 클래스 테스트", () => {
     }).toThrow(PRIZE.ERROR.WINNING_NUMBER_SIZE);
   });
 
+  test.each([
+    ["숫자 범위 초과", ["1", "2", "3", "4", "5", "80"]],
+    ["숫자가 아님", ["1", "2", "3", "4", "5", "12s"]],
+    ["0으로 시작", ["1", "2", "3", "4", "5", "06"]],
+  ])(
+    "당첨 번호가 모두 로또 숫자 범위 내의 숫자가 아니라면 예외 처리한다 - %s",
+    (testName, winningNumberArray) => {
+      expect(() => {
+        new LottoPrizeManager(winningNumberArray);
+      }).toThrow(PRIZE.ERROR.WINING_NUMBER_RANGE_NUMBER);
+    }
+  );
+
   test("당첨 번호가 중복되면 예외 처리한다", () => {
     const winningNumberArray = ["1", "1", "2", "3", "4", "5"];
     expect(() => {
