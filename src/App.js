@@ -12,6 +12,7 @@ class App {
     Validator.validatePurchaseAmount(purchaseAmount);
 
     this.lotto = new Lotto(purchaseAmount);
+    console.log(this.lotto.getLotteries());
   }
 }
 

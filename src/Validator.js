@@ -1,7 +1,7 @@
-import { EMPTY_LENGTH, CURRENCY_NUMBER_TO_DIVIDE } from "./constants/constants";
-import { PURCHASE_AMOUNT_ERROR_MESSAGE } from "./constants/messages";
+import { EMPTY_LENGTH, CURRENCY_NUMBER_TO_DIVIDE } from "./constants/constants.js";
+import { PURCHASE_AMOUNT_ERROR_MESSAGE } from "./constants/messages.js";
 
-export default Validator = Object.freeze({
+const Validator = Object.freeze({
   validatePurchaseAmount: (purchaseAmount) => {
     if (isEmpty(purchaseAmount)) {
       throw PURCHASE_AMOUNT_ERROR_MESSAGE.empty_amount;
@@ -34,5 +34,7 @@ const isInteger = (string) => {
 };
 
 const isDivisibleByCurrencyNumber = (string) => {
-  return Number(string) % CURRENCY_NUMBER_TO_DIVIDE;
+  return Number(string) % CURRENCY_NUMBER_TO_DIVIDE === 0 ? true : false ;
 };
+
+export default Validator;

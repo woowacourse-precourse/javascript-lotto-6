@@ -8,7 +8,6 @@ class Lotto {
   #lotteries = [];
 
   constructor(purchaseAmount) {
-    this.#validate(purchaseAmount);
     this.#purchaseAmount = purchaseAmount;
     this.#numberOfLotteries = this.calculateNumberOfLotteries();
     this.#lotteries = generateLotteries(this.#numberOfLotteries);

@@ -15,7 +15,8 @@ const generateRandomLottery = () => {
 }
 
 export const generateLotteries = (numberOfLotteries) => {
-  return Array.from({ length : numberOfLotteries }, (lottery) => {
-    lottery = generateRandomLottery();
-  });
+  return Array.from(
+    { length : numberOfLotteries },
+    (lottery) => lottery = generateRandomLottery()
+  );
 }
