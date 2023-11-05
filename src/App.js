@@ -80,8 +80,8 @@ class App {
     for (let i = 0; i < this.#count; i++) {
       const lotto = this.createLotto();
       this.#lottos.push(lotto);
+      Console.print(`[${lotto.join(', ')}]`);
     }
-    this.#lottos.forEach((lotto) => Console.print(lotto));
     Console.print('');
 
     const answerNumbers = await Input.getLottoNumber();
