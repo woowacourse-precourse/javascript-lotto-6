@@ -94,12 +94,16 @@
         <th>테스트</th>
     </tr>
     <tr>
-        <td><input type="checkBox" checked></td>
+        <td><input type="checkBox" disabled></td>
         <td>로또 구입 금액을 입력하면 구입 금액에 해당하는 만큼 로또를 발행해야 한다.</td>
     </tr>
     <tr>
         <td><input type="checkBox" checked></td>
         <td>로또 1장의 가격은 1,000원이다. 1,000원으로 나누어 떨어지지 않는 경우 예외 처리한다.</td>
+    </tr>
+    <tr>
+        <td><input type="checkBox" disabled></td>
+        <td>로또 구입 금액이 0 이하일 경우 예외 처리한다.</td>
     </tr>
     <tr>
         <td><input type="checkBox" disabled></td>
