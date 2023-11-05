@@ -22,10 +22,10 @@ class Lotto {
     return [...this.#numbers].sort((a, b) => a - b);
   }
 
-  checkWinningNumbers(Numbers, bonusNumber) {
+  checkNumber(Number, bonusNumber) {
     let Count = 0;
     for (const num of this.#numbers) {
-      if (Numbers.includes(num)) {
+      if (Number.includes(num)) {
         Count++;
       }
     }

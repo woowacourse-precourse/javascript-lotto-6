@@ -5,11 +5,11 @@ import MESSAGE from "../constant/Message.js";
 class Output {
     
     printLottoPurchaseInformation(lottoInformations) {
-      Console.print(MESSAGE.Output.purchaseInformation(lottoInformations));
+      Console.print(MESSAGE.output.purchaseInformation(lottoInformations));
     }
   
     printStatistics(totalLottoResult, profitRate) {
-      Console.print(MESSAGE.Output.outstatistics(totalLottoResult, profitRate));
+      Console.print(MESSAGE.output.statistics(totalLottoResult, profitRate));
     }
   }
   
