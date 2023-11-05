@@ -14,6 +14,10 @@ class LottoList {
   printMyLottery() {
     this.#myLottos.forEach((lotto) => printLottery(lotto.getLottery()));
   }
+
+  getMyLottoList() {
+    return this.#myLottos;
+  }
 }
 
 export default LottoList;
