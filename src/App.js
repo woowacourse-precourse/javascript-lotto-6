@@ -1,9 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
+import NumberIssuance from "./NumberIssuance.js";
 
 class App {
   async play() {
     const amount = await this.getAmount();
-    Console.print(amount);
+    const numberIssuance = new NumberIssuance(amount);
+    Console.print(numberIssuance.lottoNumbers);
   }
 
   async getAmount() {
