@@ -60,6 +60,14 @@ class LottoGame {
   pickLottoNums() {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
+
+  countWinningNum(targetArr) {
+    let cnt = 0;
+    this.#winnings.forEach(el => {
+      if(targetArr.includes(el)) cnt += 1;
+    })
+    return cnt;
+  }
 }
 
 export default LottoGame;
