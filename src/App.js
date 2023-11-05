@@ -1,11 +1,13 @@
 import LottoStore from "./Model/LottoStore.js";
 import InputView from "./View/InputView.js";
+import OutputView from "./View/OutputView.js";
 
 class App {
   #lottoStore;
 
   async play() {
-    this.#purchaseLottos();
+    await this.#purchaseLottos();
+    this.#printPurchasedLottoNumbers();
   }
 
   async #purchaseLottos() {
@@ -26,6 +28,16 @@ class App {
 
   #setUpLottoStore(purchaseQuantity) {
     this.#lottoStore = new LottoStore(purchaseQuantity);
+  }
+
+  #printPurchasedLottoNumbers() {
+    const purchaseResult = this.#getPurchasedLottoNumbers();
+    OutputView.printPurchaseResult(purchaseResult);
+  }
+
+  #getPurchasedLottoNumbers() {
+    const purchasedLottoNumbers = this.#lottoStore.getLottoNumbers();
+    return purchasedLottoNumbers;
   }
 }
 
