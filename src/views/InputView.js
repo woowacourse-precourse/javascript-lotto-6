@@ -8,7 +8,7 @@ class InputView {
     const answer = await Console.readLineAsync(INPUT_MESSAGE.purchase);
     PurChaseValidator.checkPurchase(answer);
 
-    return answer;
+    return Number(answer);
   }
 
   static async askWinningNumber() {
@@ -21,9 +21,9 @@ class InputView {
 
   static async askBonusNumber(winningNumbers) {
     const answer = await Console.readLineAsync(INPUT_MESSAGE.bonus_number);
-    LottoValidator.bonusValidate(winningNumbers, answer);
+    LottoValidator.bonusValidate(winningNumbers, Number(answer));
 
-    return answer;
+    return Number(answer);
   }
 }
 export default InputView;
