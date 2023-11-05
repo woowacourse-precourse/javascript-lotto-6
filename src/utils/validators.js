@@ -35,6 +35,10 @@ const validateCondition = {
 		const uniqueValue = new Set(value);
 		if (uniqueValue.size !== value.length) throw new Error(ERROR_MESSAGES.duplicate_value);
 	},
+
+	checkIsInclude(arr, value) {
+		if (arr.includes(value)) throw new Error(ERROR_MESSAGES.invalid_bonus_number);
+	},
 };
 
 const validators = {
@@ -56,9 +60,10 @@ const validators = {
 		});
 	},
 
-	checkWinningBonusNumber(number) {
-		validateCondition.isDigit(number);
-		validateCondition.isLottoNumberInRange(number);
+	checkWinningBonusNumber(winningNumber, winningBonusNumber) {
+		validateCondition.isDigit(winningBonusNumber);
+		validateCondition.isLottoNumberInRange(winningBonusNumber);
+		validateCondition.checkIsInclude(winningNumber, winningBonusNumber);
 	},
 };
 
