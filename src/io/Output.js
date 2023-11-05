@@ -49,3 +49,8 @@ export const printLottoNumbers = (lotto) => {
     const numbers = lotto.getNumbers().join(JOIN_WITH_COMMA);
     Console.print(`[${numbers}]`);
 };
+
+export const displayGameResults = (results, purchaseAmount) => {
+    displayResults(results);
+    displayEarnings(results, purchaseAmount);
+};
