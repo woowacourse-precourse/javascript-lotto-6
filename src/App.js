@@ -45,7 +45,12 @@ class App {
       PRINT.ASK_WIN_NUMBER
     );
     const winNumber = input.split(",");
+    this.checkWinNumberError(winNumber);
 
+    return winNumber;
+  }
+
+  checkWinNumberError(winNumber) {
     if (winNumber.length !== 6) {
       throw new Error(ERROR.NOT_6);
     }
@@ -57,8 +62,6 @@ class App {
         throw new Error(ERROR.NOT_RANGE);
       }
     });
-
-    return winNumber;
   }
 
   async play() {
