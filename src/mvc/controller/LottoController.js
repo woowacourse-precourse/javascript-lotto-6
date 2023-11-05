@@ -26,7 +26,7 @@ class LottoController{
   async play(){
     const purchasePrice = await this.#inputPurchasePrice();
     this.#model.purchaseLottos(purchasePrice/LOTTO_PRICE);
-    this.#outputView.printPurchasedLotto(this.#model.purchasedLottoArray);
+    this.#outputView.printPurchasedLotto(this.#model.getPurchasedLottoArray());
     this.#outputView.printLineBreak();
     
     const winningNumbersArray = await this.#inputWinningNumbers();
