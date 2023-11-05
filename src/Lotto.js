@@ -1,3 +1,5 @@
+import { errorMessage } from './Consts';
+
 class Lotto {
   #numbers;
 
@@ -6,13 +8,25 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  static numbersArray(numbers) {
+    return numbers.split(',').map(Number);
   }
 
-  // TODO: 추가 기능 구현
+  #validate(numbers) {
+    const numbersArray = Lotto.numbersArray(numbers);
+    if (numbersArray.length !== 6) {
+      throw new Error(errorMessage.winningNumbersCount);
+    }
+    if (numbersArray.some(number => Number.isNaN(number))) {
+      throw new Error(errorMessage.winningNumbersNotNumber);
+    }
+    if (numbersArray.some(number => number < 1 || number > 45)) {
+      throw new Error(errorMessage.winningNumbersRange);
+    }
+    if (new Set(numbersArray).size !== 6) {
+      throw new Error(errorMessage.duplicatedWinningNumbers);
+    }
+  }
 }
 
 export default Lotto;
