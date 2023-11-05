@@ -34,12 +34,14 @@ class UserInterface {
 
   static displayResult(result, lottoPrice) {
     const profit =
-      (result[3] * 5 +
+      ((result[3] * 5 +
         result[4] * 50 +
         result[5] * 1500 +
         result["5+1"] * 30000 +
-        result[6] * 2000000000) /
-      lottoPrice;
+        result[6] * 2000000) /
+        lottoPrice) *
+      1000 *
+      100;
     MissionUtils.Console.print(MESSAGE.RESULT);
     MissionUtils.Console.print(`${MESSAGE.RESULT_THREE}${result[3]}개`);
     MissionUtils.Console.print(`${MESSAGE.RESULT_FOUR}${result[4]}개`);

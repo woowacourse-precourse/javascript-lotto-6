@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import Validation from "./Validation.js";
 
 class LottoGame {
   static generateLottos(count) {
@@ -8,7 +9,9 @@ class LottoGame {
       let lotto = new Lotto(
         MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
       );
-      lottos.push(lotto);
+      if (Validation.validateLottoNumbers(lotto.getNumbers())) {
+        lottos.push(lotto);
+      }
     }
     return lottos;
   }
