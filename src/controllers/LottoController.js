@@ -3,8 +3,7 @@ import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import PROPMT_MESSAGE from '../constants/propmtMessage.js';
 import ERROR_MESSAGE from '../constants/erroeMessage.js';
-import Lotto from '../models/Lotto.js';
-import createLottoNumbers from '../utils/createLottoNumbers.js';
+import LottoStore from '../models/LottoStore.js';
 
 const { bonusNumber, winningNumber, purchasePrice } = PROPMT_MESSAGE;
 const { purchaseInvalidAmount } = ERROR_MESSAGE;
@@ -24,7 +23,9 @@ class LottoController {
       this.purchasedPrice,
       this.LOTTO_PRICE,
     );
-    const lottos = this.createLottoTickets();
+
+    const lottoStore = new LottoStore(this.purchasedAmount);
+    const lottos = lottoStore.createLottoTickets();
   }
 
   async propmtPurchasedPrice() {
@@ -49,16 +50,6 @@ class LottoController {
 
   calculateAmount(price, lottoPrice) {
     return price / lottoPrice;
-  }
-
-  createLottoTickets() {
-    const lottos = Array.from({ length: this.purchasedAmount }, () => {
-      const randomNumbers = createLottoNumbers();
-      const sortedRandomNumbers = randomNumbers.sort((a, b) => a - b);
-      return new Lotto(sortedRandomNumbers);
-    });
-
-    return lottos;
   }
 }
 export default LottoController;
