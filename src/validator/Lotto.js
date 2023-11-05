@@ -7,7 +7,7 @@ class LottoValidator {
   static validate(numbers) {
     LottoValidator.validateCount(numbers);
     LottoValidator.validateDuplication(numbers);
-    LottoValidator.validateRange(numbers);
+    LottoValidator.validateLottoNumbers(numbers);
   }
 
   static validateCount(numbers) {
@@ -24,7 +24,7 @@ class LottoValidator {
     }
   }
 
-  static validateRange(numbers) {
+  static validateLottoNumbers(numbers) {
     numbers.forEach(number => {
       CommonValidator.validateIsNumber(number);
       LottoValidator.validateLottoNumber(number);

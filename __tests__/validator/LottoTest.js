@@ -18,13 +18,13 @@ describe('LottoValidator 클래스 예외 테스트', () => {
   describe('로또 번호 범위 테스트', () => {
     test('로또 번호에 0 이하의 숫자가 있으면 예외가 발생한다.', () => {
       expect(() => {
-        LottoValidator.validateRange([0, 1, 2, 3, 4, 5]);
+        LottoValidator.validateLottoNumbers([0, 1, 2, 3, 4, 5]);
       }).toThrow('[ERROR]');
     });
 
     test('로또 번호에 46 이상의 숫자가 있으면 예외가 발생한다.', () => {
       expect(() => {
-        LottoValidator.validateRange([1, 2, 3, 4, 5, 47]);
+        LottoValidator.validateLottoNumbers([1, 2, 3, 4, 5, 47]);
       }).toThrow('[ERROR]');
     });
   });
