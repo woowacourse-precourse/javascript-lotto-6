@@ -1,4 +1,5 @@
-import { Purchase, Profit } from "./Credit.js";
+import Purchase from "./Credit.js";
+import Profit from "./Profit.js";
 import Lotto from "./Lotto.js";
 class App {
   constructor() {
