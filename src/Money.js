@@ -5,14 +5,9 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 class Money {
   #price;
 
-  async input() {
-    try {
-      this.#price = await MissionUtils.Console.readLineAsync(INPUT.price);
-      this.#validate(this.#price);
-    } catch (error) {
-      console.error(`[ERROR] ${error.message}`);
-      return this.input();
-    }
+  constructor(price) {
+    this.#validate(price);
+    this.#price = price;
   }
 
   #validate(price) {
