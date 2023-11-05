@@ -44,6 +44,15 @@ class Validator {
       Utils.splitInput(input).length === new Set(Utils.splitInput(input)).size
     );
   }
+
+  isCorrectBonus(input) {
+    return (
+      !this.isNumber(input) ||
+      !this.isLength(input, 1) ||
+      Number(input) < 1 ||
+      Number(input) > 45
+    );
+  }
 }
 
 export default Validator;

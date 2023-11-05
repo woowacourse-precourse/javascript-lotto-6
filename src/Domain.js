@@ -49,8 +49,13 @@ export default class Domain {
   }
 
   setBonus(bonus) {
-    // 1. validation
-    // 2. after -> set
+    if (this.#validator.isEmpty(bonus)) return this.#view.errorNoInput();
+    if (this.#winnings.includes(Number(bonus)))
+      return this.#view.errorBonusRepeat();
+    if (this.#validator.isCorrectBonus(bonus)) return this.#view.errorBonus();
+
+    this.#bonus = Number(bonus);
+    return true;
   }
 
   get getWinnings() {

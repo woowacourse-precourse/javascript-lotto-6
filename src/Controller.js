@@ -33,6 +33,18 @@ class Controller {
       if (result) isDone = true;
     }
   }
+
+  async setBonus() {
+    let isDone = false;
+
+    while (!isDone) {
+      const input = await Console.readLineAsync(
+        MESSAGES.COMMENT_ENTER_BONUS_NUMBER
+      );
+      const result = this.#domain.setBonus(input);
+      if (result) isDone = true;
+    }
+  }
 }
 
 export default Controller;

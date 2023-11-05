@@ -39,6 +39,16 @@ class View {
     this.#printConsole(MESSAGES.ERROR_INPUT_WINNING_NUMBERS);
     return false;
   }
+
+  errorBonusRepeat() {
+    this.#printConsole(MESSAGES.ERROR_INPUT_BONNUS_NUMBER_REPEATATION);
+    return false;
+  }
+
+  errorBonus() {
+    this.#printConsole(MESSAGES.ERROR_INPUT_BONUS_NUMBERS);
+    return false;
+  }
 }
 
 export default View;
