@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import InputError from "./InputError.js";
 
 class Lotto {
@@ -21,6 +22,18 @@ class Lotto {
   #checkRange(number) {
     if (number < 1 || number > 45)
       throw new InputError("로또 번호는 1에서 45 사이의 수 입니다.");
+  }
+
+  get numbers() {
+    return [...this.#numbers];
+  }
+
+  printNumbers() {
+    Console.print(
+      `[${this.#numbers[0]}, ${this.#numbers[1]}, ${this.#numbers[2]}, ${
+        this.#numbers[3]
+      }, ${this.#numbers[4]}, ${this.#numbers[5]}]`
+    );
   }
 }
 

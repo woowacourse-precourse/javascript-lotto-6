@@ -13,6 +13,10 @@ class BonusNumber {
     if (bonusNumber < 1 || bonusNumber > 45)
       throw new InputError("1에서 45 사이의 수를 입력해야 합니다.");
   }
+
+  get bonusNumber() {
+    return this.#bonusNumber;
+  }
 }
 
 export default BonusNumber;
