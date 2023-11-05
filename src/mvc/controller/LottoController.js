@@ -12,7 +12,7 @@ class LottoController{
   }
 
   async play(){
-    this.#model.setsetPurchasedLottoArray( await this.getPurchasePrice() );
+    this.#model.setPurchasedLottoArray( await this.getPurchasePrice() );
   }
 
   async getPurchasePrice(){
