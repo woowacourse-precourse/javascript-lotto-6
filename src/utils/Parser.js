@@ -1,4 +1,8 @@
 const Parser = {
+  commaSeparatedValuesToNumbers(value) {
+    return value.split(',').map(number => Number(number.trim()));
+  },
+
   valueToNumber(value) {
     return Number(value.trim());
   },  

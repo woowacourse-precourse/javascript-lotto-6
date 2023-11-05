@@ -16,7 +16,15 @@ const Input = {
   },
 
   async getWinningNumbers() {
-    return await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    try {      
+      const input = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+      const winningNumbers = Parser.commaSeparatedValuesToNumbers(input);
+      Validator.winningNumbers(winningNumbers);
+      return winningNumbers;
+    } catch (error) {
+      Console.print(error.message);
+      return await this.getWinningNumbers();      
+    }
   },
 
   async getBonusNumber() {
