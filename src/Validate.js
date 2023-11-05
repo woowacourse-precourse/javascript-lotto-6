@@ -1,4 +1,4 @@
-import ERROR_MESSAGE from './ErrorMessage';
+import ERROR_MESSAGE from './constant/ErrorMessage';
 
 const LOTTO_PRICE = 1000;
 

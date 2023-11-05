@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 import Validate from './Validate';
-import INPUT_MESSAGE from './InputMessage';
+import INPUT_MESSAGE from './constant/InputMessage';
 
 class Input {
   static async payment() {

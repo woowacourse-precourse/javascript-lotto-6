@@ -1,4 +1,4 @@
-import ERROR_MESSAGE from '../src/ErrorMessage';
+import ERROR_MESSAGE from '../src/constant/ErrorMessage';
 import Validate from '../src/Validate';
 
 describe('Validate 클래스 테스트', () => {

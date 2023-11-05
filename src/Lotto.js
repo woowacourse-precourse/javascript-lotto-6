@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import ERROR_MESSAGE from './ErrorMessage';
+import ERROR_MESSAGE from './constant/ErrorMessage';
 
 class Lotto {
   #numbers;
@@ -27,6 +27,11 @@ class Lotto {
 
   includes(input) {
     return this.#numbers.includes(input);
+  }
+
+  calculate(winning) {
+    const intersection = this.#numbers.filter((n) => winning.includes(n));
+    return intersection.length;
   }
 }
 
