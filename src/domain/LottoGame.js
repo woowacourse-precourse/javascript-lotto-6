@@ -1,5 +1,7 @@
 import Lotto from '../Lotto.js';
 import randomNumberGenerator from '../utils/randomNumberGenerator.js';
+import { PRIZE_AMOUNT, PRICE_PER_TICKET } from '../constants/constants.js';
+
 class LottoGame {
   #purchasedLotto;
 
@@ -22,7 +24,6 @@ class LottoGame {
     return this.#purchasedLotto.map((lotto) => lotto.getSortedLotto());
   }
 
-  // 일치한 숫자에 따른 당첨등수
   createEmptyStatistics() {
     return {
       firstPrize: 0,
@@ -33,7 +34,6 @@ class LottoGame {
     };
   }
 
-  // 일치한 번호만큼 해당하는 등수를 카운팅해서 등수를 반환함
   getStatistics(comparisonResults) {
     const statistics = this.createEmptyStatistics();
 
@@ -47,18 +47,17 @@ class LottoGame {
 
     return statistics;
   }
+
+  calcTotalPrizeAmount(statistics) {
+    return Object.entries(statistics).reduce((acc, [prize, count]) => {
+      return acc + PRIZE_AMOUNT[prize] * count;
+    }, 0);
+  }
+
+  getProfitRatio(totalPrizeAmount) {
+    const profitRatio = (totalPrizeAmount / (this.#purchasedLotto.length * PRICE_PER_TICKET)) * 100;
+    return profitRatio.toFixed(1);
+  }
 }
 
 export default LottoGame;
-
-/* 테스트용 콘솔
-const lotto = new LottoGame(2);
-console.log(lotto.getPurchasedLotto(), '로또티켓');
-console.log(lotto.getLottoComparisonResults([1, 2, 3, 4, 5, 6], 7), '일치여부');
-console.log(
-  lotto.getStatistics([
-    { matchingCount: 5, hasBonusNumber: false },
-    { matchingCount: 5, hasBonusNumber: true },
-  ])
-);
-*/
