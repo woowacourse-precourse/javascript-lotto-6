@@ -36,6 +36,17 @@ class Input {
     );
     return winningNumber;
   }
+
+  static async readBonusNumber() {
+    const lottoCount = await this.readAsync(
+      MESSAGE.askBonusNumber,
+      Validator.validateBonusNumber,
+      () => {
+        this.readBonusNumber();
+      },
+    );
+    return lottoCount;
+  }
 }
 
 export default Input;

@@ -41,6 +41,10 @@ class Validator {
   static validateWinningNumbers(numbers) {
     this.#validateRangeOfNumbers(numbers);
   }
+
+  static validateBonusNumber(number) {
+    this.#validateRangeOfNumbers(number);
+  }
 }
 
 export default Validator;
