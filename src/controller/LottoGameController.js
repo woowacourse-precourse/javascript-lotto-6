@@ -28,23 +28,30 @@ class LottoGameController {
   async start() {
     await this.buyLottos();
     this.printMyLottoNumbers();
-    // while (true) {
-    //   try {
-    //     this.#winningNumbers = await this.getWinningNumbers();
-    //     break;
-    //   } catch (error) {
-    //     this.outputView.print(error);
-    //   }
-    // }
+    await this.setWinningNumbers();
+    await this.setBonusNumber();
+  }
 
-    // while (true) {
-    //   try {
-    //     this.#bonusNumber = await this.getBonusNumber();
-    //     break;
-    //   } catch (error) {
-    //     this.outputView.print(error);
-    //   }
-    // }
+  async setWinningNumbers() {
+    while (true) {
+      try {
+        this.#winningNumbers = await this.getWinningNumbers();
+        break;
+      } catch (error) {
+        this.outputView.print(error);
+      }
+    }
+  }
+
+  async setBonusNumber() {
+    while (true) {
+      try {
+        this.#bonusNumber = await this.getBonusNumber();
+        break;
+      } catch (error) {
+        this.outputView.print(error);
+      }
+    }
   }
 
   printMyLottoNumbers() {
@@ -98,10 +105,6 @@ class LottoGameController {
 
   generateLottoNumbers() {
     return this.randomNumberGeneration.generateLottoNumber();
-  }
-
-  printBuyLottos() {
-    // TODO: 구매한 로또 출력 로직 여기로 리팩토링
   }
 
   async getWinningNumbers() {
