@@ -2,6 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
 import LottoPlayer from '../model/LottoPlayer.js';
 import Lotto from '../Lotto.js';
+import OutputView from '../view/OutputView.js';
 
 export default class LottoMachine {
   #player;
@@ -22,6 +23,7 @@ export default class LottoMachine {
 
   async run() {
     await this.#makeLottos();
+    OutputView.printLottoTickets(this.#player.getLottoTickets());
   }
 
   #makeOneLotto() {
@@ -50,6 +52,8 @@ export default class LottoMachine {
     for (let i = 1; i <= lottoTicketCount; i += 1) {
       this.#player.setLottoTickets(this.#makeOneLotto());
     }
+
+    OutputView.printNewLine();
   }
 
   #sortLottoNumbers(lottoNumbers) {
