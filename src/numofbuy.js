@@ -22,7 +22,8 @@ class NumOfBuy {
   // 구입금액 유효성 확인
   #validateMoneyIsNum(inputMoney) {
     if (Number.isNaN(inputMoney)) {
-      throw new Error(`[ERROR] 구입금액은 숫자만 입력 가능합니다.`);
+      // Console.print('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
+      throw new Error('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
     }
   }
 
@@ -44,7 +45,8 @@ class NumOfBuy {
   #claculateNumOfBuy(inputMoney) {
     const MONEY_UNIT = 1000;
     const numOfBuy = inputMoney / MONEY_UNIT;
-    Console.print(`\n${numOfBuy}개를 구매했습니다.`);
+    // Console.print('\n');
+    Console.print(`${numOfBuy}개를 구매했습니다.`);
     return numOfBuy;
   }
 }

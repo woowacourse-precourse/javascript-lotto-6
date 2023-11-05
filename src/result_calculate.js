@@ -1,31 +1,7 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-import NumOfBuy from './numofbuy.js';
-import MakeLottoNum from './makelottonum.js';
-import Lotto from './Lotto.js';
-import Bonus from './bonus.js';
 
 class CalculationOfResult {
-  #numOfBuy;
-
-  #arrayOfLotto;
-
-  #winningNum;
-
-  #bounusNum;
-
-  constructor() {
-    this.#numOfBuy = new NumOfBuy();
-    this.#arrayOfLotto = new MakeLottoNum();
-    this.#winningNum = new Lotto();
-    this.#bounusNum = new Bonus();
-  }
-  // --------------------------------당첨금 계산 함수-------
-
-  async run() {
-    const numOfBuy = await this.#numOfBuy.run();
-    const arrayofLotto = await this.#arrayOfLotto.makeArrayOfLottoNum(numOfBuy);
-    const winningNum = await this.#winningNum.run();
-    const bonusNum = await this.#bounusNum.run(winningNum);
+  run(numOfBuy, arrayofLotto, winningNum, bonusNum) {
     const countOfWinning = this.#calculatePrize(arrayofLotto, winningNum, bonusNum);
     const allIncome = this.#calculatePrizemoney(countOfWinning);
     const yeild = this.#calculateYeild(numOfBuy, allIncome);
@@ -79,8 +55,8 @@ class CalculationOfResult {
   }
 
   #printOfResult(countOfWinning, yeild) {
-    Console.print(`
-당첨 통계
+    // Console.print('\n');
+    Console.print(`당첨 통계
 ---
 3개 일치 (5,000원) - ${countOfWinning[4]}개
 4개 일치 (50,000원) - ${countOfWinning[3]}개
@@ -93,5 +69,5 @@ class CalculationOfResult {
 
 export default CalculationOfResult;
 
-const run = new CalculationOfResult();
-run.run();
+// const run = new CalculationOfResult();
+// run.run();
