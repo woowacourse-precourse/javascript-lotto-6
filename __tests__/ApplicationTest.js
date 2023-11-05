@@ -95,7 +95,7 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 
-  test("로또 구입 금액에 해당하는 만큼 로또를 발행하는 기능 테스트", async () => {
+  test("발행한 로또가 구입 금액에 맞는 수량인지 테스트", async () => {
     const input = ["3000"];
 
     // given
@@ -106,7 +106,32 @@ describe("로또 테스트", () => {
     const quantity = await app.getLottoQuantity();
 
     // then
-    const expectedLottoCount = 3; // 예상 로또 수
+    const expectedLottoCount = 3;
     expect(quantity).toEqual(expectedLottoCount);
+  });
+
+  test("발행 수량에 맞게 로또가 생성되는지 테스트", async () => {
+    const input = "3";
+    const logSpy = getLogSpy();
+
+    mockRandoms([
+      [8, 21, 23, 41, 42, 43],
+      [3, 5, 11, 16, 32, 38],
+      [7, 11, 16, 35, 36, 44],
+    ]);
+
+    const logs = [
+      "3개를 구매했습니다.",
+      "[8, 21, 23, 41, 42, 43]",
+      "[3, 5, 11, 16, 32, 38]",
+      "[7, 11, 16, 35, 36, 44]",
+    ];
+
+    const app = new App();
+    app.setLotto(input);
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
   });
 });
