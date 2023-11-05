@@ -22,7 +22,7 @@ class App {
     this.lottoCalculator.setLottoes(lottoes);
 
     const numbers = lottoes.map((lotto) => lotto.getNumbers());
-    OutputView.outputBuyResult(numbers);
+    OutputView.printBuyResult(numbers);
 
     await this.inputNumbers();
   }
