@@ -43,4 +43,44 @@ describe('Game 클래스 테스트', () => {
 
     expect(lottos).toEqual([[1, 4, 12, 25, 35, 44]]);
   });
+
+  describe('구매한 로또와 당첨 번호를 비교한다.', () => {
+    test('당첨된 로또와 비교해 각 등수에 몇 개가 당첨되었는지 확인할 수 있는 결과를 반환한다.', () => {
+      const PURCHASED_LOTTO = [
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 10, 20, 7],
+      ];
+      const WINNING_LOTTO = [1, 2, 3, 10, 20, 35];
+      const BONUS_NUMBER = 7;
+      const game = new Game();
+      const result = game.compareLotto(
+        PURCHASED_LOTTO,
+        WINNING_LOTTO,
+        BONUS_NUMBER,
+      );
+
+      expect(result).toEqual([0, 1, 0, 0, 1]);
+    });
+
+    test.each([
+      {
+        result: [0, 0, 1, 0, 1],
+        purchaseAmount: 6000,
+        expectedRate: 25083.3,
+      },
+      {
+        result: [0, 0, 0, 1, 0],
+        purchaseAmount: 3000,
+        expectedRate: 1666.7,
+      },
+    ])(
+      '당첨 수익률을 계산한다.',
+      ({ result, purchaseAmount, expectedRate }) => {
+        const game = new Game();
+        const rate = game.calculateRate(purchaseAmount, result);
+
+        expect(rate).toBe(expectedRate);
+      },
+    );
+  });
 });
