@@ -3,11 +3,13 @@ import {
   validateRange,
   validateLength,
   validateUnique,
+  validateFindEqual,
 } from '../utils/validateFn.js';
-import { inputWinningNumber } from '../view/inputPrompt.js';
+import { inputBonusNumber, inputWinningNumber } from '../view/inputPrompt.js';
 
 class WinningLotto {
   #winningNumber;
+  #bonusNumber;
 
   async setWinningNumber() {
     const input = await inputWinningNumber();
@@ -23,6 +25,18 @@ class WinningLotto {
     });
     validateLength(winningNumberArr);
     validateUnique(winningNumberArr);
+  }
+
+  async setBonusNumber() {
+    const input = await inputBonusNumber();
+    this.#bonusNumberValidate(input);
+    this.#bonusNumber = parseInt(input);
+  }
+
+  #bonusNumberValidate(number) {
+    validateNumber(number);
+    validateRange(number);
+    validateFindEqual(this.#winningNumber, parseInt(number));
   }
 }
 
