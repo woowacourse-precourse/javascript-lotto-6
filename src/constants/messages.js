@@ -17,4 +17,6 @@ export const ERROR_MESSAGES = {
   ONLY_NUMBER: "[ERROR] 공백,특수기호 등은 사용할 수 없습니다.",
   ONLY_THOUSANDWON_UNIT: "[ERROR] 천원 단위로만 입력해 주세요.",
   UNCORRECT_INPUT: "[ERROR] 잘못된 입력입니다.",
+  CANT_USE_SAME_NUMBER: "[ERROR] 중복된 숫자는 사용할 수 없습니다.",
+  USE_SIX_NUMBERS: "[ERROR] 로또 번호는 6개여야 합니다.",
 };
