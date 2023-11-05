@@ -11,15 +11,22 @@
 
 <br />
 
+- [ ] Controller
+
+  - 유저 입력을 받아서 Domain 로직 처리 요청을 하는 클래스
+  - [ ] view - 입력, 반환할 View 인스턴스 : `View`
+  - [ ] domain - 주요 로직을 처리하는 Domain 인스턴스 : `Domain`
+
+--
+
 - [ ] Domain
 
   필드
 
-  - [ ] #winnings - 당첨 번호 : `Array<number>`
-  - [ ] #bonus - 보너스 번호 : `number`
-  - [ ] #lottos - 생성된 로또(들) : `Array<Lotto>`
-  - [ ] #lotteryResults - 로또 당첨 결과 배열 : `Array<number>`
-  - [ ] #view - 입력, 반환할 View 인스턴스 : `View`
+  - [x] #winnings - 당첨 번호 : `Array<number>`
+  - [x] #bonus - 보너스 번호 : `number`
+  - [x] #lottos - 생성된 로또(들) : `Array<Lotto>`
+  - [x] #lotteryResults - 로또 당첨 결과 배열 : `Array<number>`
 
   메서드
 
@@ -36,15 +43,21 @@
   - [ ] getBonus() - 보너스 번호 반환
   - [ ] getLottos() - 구매한 로또 인스턴스 배열 반환
 
+--
+
 - [x] View
 
   - [x] printConsole
   - [x] readInput
 
+--
+
 - [x] Lotto
 
   - [ ] #validate 메서드 안에서 로또 번호 검증 절차 진행
   - [x] getNumbers (getter) - 로또 번호 배열을 반환하는 게터
+
+--
 
 - [ ] Validation
 
@@ -55,6 +68,8 @@
   - [ ] validateWinnings(input) - 입력값이 올바른 당첨 번호인지 확인 (boolean)
   - [ ] validateBonus(input) - 입력값이 올바른 보너스 번호인지 확인 (boolean)
   - [ ] validatePurchasingCost(input) - 입력값이 올바른 구매액인지 확인 (boolean)
+
+--
 
 - [ ] Utils
   - [ ] generateRandoms - 로또를 생성할 6개의 난수 배열을 반환
