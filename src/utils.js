@@ -19,7 +19,7 @@ function getMatchCount(lotto, winningNumbers, bonus) {
   let match = 0;
   const lottoNumbers = lotto.getLottoNumbers();
 
-  for (const number of lottoNumbers) {
+  lottoNumbers.forEach((number) => {
     if (winningNumbers.includes(number)) {
       match += 1;
     }
@@ -27,7 +27,7 @@ function getMatchCount(lotto, winningNumbers, bonus) {
     if (match === 5 && lottoNumbers.includes(bonus)) {
       return '5 + 1';
     }
-  }
+  });
 
   return match;
 }

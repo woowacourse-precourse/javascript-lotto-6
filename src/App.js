@@ -58,11 +58,11 @@ class App {
   }
 
   #printLottoNumbers() {
-    for (const lotto of this.#lottoEntries.values()) {
+    [...this.#lottoEntries.values()].forEach((lotto) => {
       Console.print(
         JSON.stringify(lotto.getLottoNumbers()).replace(/,/g, ', ')
       );
-    }
+    });
 
     Console.print('');
     this.#inputWinningNumbers();
@@ -100,16 +100,17 @@ class App {
   }
 
   #setMatchCounter() {
-    for (const lotto of this.#lottoEntries.values()) {
+    [...this.#lottoEntries.values()].forEach((lotto) => {
       const match = getMatchCount(lotto, this.#winningNumbers, this.#bonus);
       this.#matchCounter[match] += 1;
-    }
+    });
   }
 
   #setTotalRewards() {
-    for (const [count, reward] of rewardCountMap) {
+    [...rewardCountMap.entries()].forEach((entry) => {
+      const [count, reward] = entry;
       this.#totalRewards += reward * this.#matchCounter[count];
-    }
+    });
   }
 
   #printResult() {
@@ -117,9 +118,11 @@ class App {
     this.#setTotalRewards();
 
     Console.print(OUTPUT.RESULT);
-    for (const [key, message] of rewardMessageMap) {
+
+    [...rewardMessageMap.entries()].forEach((entry) => {
+      const [key, message] = entry;
       Console.print(`${message}${this.#matchCounter[key]}개`);
-    }
+    });
 
     const profit = ((this.#totalRewards * 100) / this.#cash).toFixed(1);
     Console.print(OUTPUT.PROFIT(profit));
