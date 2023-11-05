@@ -13,7 +13,7 @@ class App {
     MissionUtils.Console.print("");
     const bonusNumber = await inputBonusNumber(winningNumbers);
     MissionUtils.Console.print("");
-    lottoResultPrinter([5,0], 2)
+    //lottoResultPrinter([5,0], 2)
   }
 }
 
@@ -25,10 +25,12 @@ const BONUS_NUMBER_COMMENT = "보너스 번호를 입력해 주세요.";
 //const LOTTO_PRICE = 1000;
 const winningDetails = {
    same : [3, 4, [5,0], [5,1], 6],
-   prize : [5000, 50000, 1500000, 30000000, 2000000000]
+   prize : [5000, 50000, 1500000, 30000000, 2000000000],
+   winning : [0,0,0,0,0],
+   totalPrize : 0
 }
 
-const storage = {}
+var winningResults = [];
 
 async function inputMoney() {
   let comment = PURCASE_COMMENT;
@@ -89,6 +91,13 @@ export function numberSort(numbers) {
   return numbers;
 }
 
+function lottosReader(lotto, winning, bonus, count) {
+  for (let i = 0; i < count; i++) {
+    const result = lottoReader(lotto, winning, bonus)
+    winningResults.push(result);
+  }
+}
+
 export function lottoReader(lotto, winning, bonus) {
   const sameNumbers = winning.filter(number => lotto.includes(number))
   const sameBonus = lotto.includes(bonus);
@@ -96,6 +105,10 @@ export function lottoReader(lotto, winning, bonus) {
     return [sameNumbers.length, 0];
   }
   return [sameNumbers.length, sameBonus.length];
+}
+
+function lottoResultsPrinter(results, count) {
+  
 }
 
 export function lottoResultPrinter(results, count) {
@@ -118,6 +131,7 @@ function findIndexBySameValue(valueToFind) {
   }
   for (let i = 0; i < sameValues.length; i++) {
     if (sameValues[i] === valueToFind[0]) {
+      winningDetails.winning[i] += 1;
       return i;
     }
   }
@@ -127,9 +141,11 @@ function findIndexByBonus(valueToFind) {
   const sameValues = winningDetails.same;
   if (sameValues[2][1] === valueToFind[1]) {
     //console.log(valueToFind);
+    winningDetails.winning[2] += 1;
     return 2;
   }
   if (sameValues[3][1] === valueToFind[1]) {
+    winningDetails.winning[3] += 1;
     return 3;
   }
 }

@@ -1,4 +1,4 @@
-import { lottoReader, lottoResultPrinter, totalRate } from "../src/App.js" 
+import { lottoReader, lottoResultPrinter, lottoResultsPrinter, totalRate } from "../src/App.js" 
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const getLogSpy = () => {
@@ -18,6 +18,32 @@ describe("당첨 통계 테스트", () => {
     const result = lottoReader(lotto,winninglotto,BONUS_NUMBER);
 
     expect(result).toEqual(output);
+  });
+
+  test("당첨 내역을 모두 출력한다.", () => {
+    const logSpy = getLogSpy();
+    
+    const COUNTS = 8;
+    const results = [
+      [1,0],
+      [1,0],
+      [0,0],
+      [3,1],
+      [1,0],
+      [2,0],
+      [1,0],
+      [2,1]];
+    const logs = [
+      "3개 일치 (5,000원) - 1개",
+      "4개 일치 (50,000원) - 0개",
+      "5개 일치 (1,500,000원) - 0개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+      "6개 일치 (2,000,000,000원) - 0개"
+    ];
+
+    lottoResultsPrinter(results, COUNTS);
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(logs));
   });
 
   test.each([
