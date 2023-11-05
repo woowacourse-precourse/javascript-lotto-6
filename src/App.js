@@ -82,7 +82,7 @@ class App {
       PRINT.ASK_BONUS_NUMBER
     );
     this.checkBonusError(winNumber, bonus);
-    return bonus;
+    return parseInt(bonus);
   }
 
   checkBonusError(winNumber, bonus) {
@@ -99,21 +99,14 @@ class App {
     });
   }
 
-  isBonus(number) {
-    if (number == bonus) {
-      return true;
-    }
-    return false;
-  }
-
   getWinResult(userResult) {
     userResult.forEach((result) => {
-      switch (result) {
+      switch (result.correct) {
         case 6:
           this.winResult[4]++;
           break;
         case 5:
-          this.isBonus(result) ? this.winResult[3]++ : this.winResult[2]++;
+          result.bonusCorrect ? this.winResult[3]++ : this.winResult[2]++;
           break;
         case 4:
           this.winResult[1]++;
@@ -147,11 +140,11 @@ class App {
     const winBonus = await this.askBonus(winNumber);
 
     this.allLottos.forEach((lotto) => {
-      this.userResult.push(lotto.getCorrectNumber(winNumber));
+      this.userResult.push(lotto.getCorrectNumber(winNumber, winBonus));
     });
     MissionUtils.Console.print(this.userResult);
 
-    this.getWinResult(this.userResult);
+    this.getWinResult(this.userResult, winBonus);
     this.printWinResult(this.winResult);
   }
 }

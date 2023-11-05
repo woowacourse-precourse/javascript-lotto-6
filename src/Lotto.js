@@ -21,14 +21,18 @@ class Lotto {
     return this.#numbers;
   }
 
-  getCorrectNumber(winNumber) {
+  getCorrectNumber(winNumber, winbonus) {
     let correct = 0;
+    let bonusCorrect = 0;
     winNumber.forEach((win) => {
       if (this.#numbers.includes(parseInt(win))) {
         correct++;
       }
     });
-    return correct;
+    if (this.#numbers.includes(winbonus)) {
+      bonusCorrect++;
+    }
+    return { correct: correct, bonusCorrect: bonusCorrect };
   }
 }
 
