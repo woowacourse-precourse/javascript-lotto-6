@@ -1,11 +1,13 @@
+import Place from '../utils/Place';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#checkNumber(numbers);
-    this.#checkSameNumber(numbers);
-    this.#numbers = numbers;
+    this.#numbers = [...numbers];
+    this.winningCount = 0;
   }
 
   get numbers() {
@@ -26,21 +28,28 @@ class Lotto {
     }
   }
 
-  #checkSameNumber(numbers) {
-    const set = new Set(numbers);
-    if (set.size() !== numbers.length) {
-      throw new Error('[ERROR] 숫자 중복');
-    }
+  compareNumbers(winningNumbers, bonusNumber) {
+    this.winningCount = winningNumbers.filter((number) =>
+      this.#numbers.includes(number)
+    ).length;
+    this.addCountPlace(bonusNumber);
   }
 
-  compareNumbers(winningNumbers, bonusNumber) {
-    // 로또번호 6자리 배열 vs 사용자 입력 7자리
-    // [1,2,3,4,5,6] vs [2,3,5,6,7,8] + 4
-    const winningCount = winningNumbers.filter((number) =>
-      this.#numbers.includes(number)
-    );
-    if (this.#numbers.some(bonusNumber)) {
+  addCountPlace(bonusNumber) {
+    if (this.winningCount === 3) Place['5th'] += 1;
+    if (this.winningCount === 4) Place['4th'] += 1;
+    if (this.winningCount === 5) Place['3rd'] += 1;
+    if (this.winningCount === 5 && this.checkBonusNumber(bonusNumber)) {
+      Place['2nd'] += 1;
     }
+    if (this.winningCount === 6) Place['1st'] += 1;
+  }
+
+  checkBonusNumber(bonusNumber) {
+    if (this.#numbers.some((number) => number === bonusNumber)) {
+      return true;
+    }
+    return false;
   }
 }
 
