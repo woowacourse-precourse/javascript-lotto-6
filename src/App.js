@@ -2,12 +2,17 @@ import { Console } from '@woowacourse/mission-utils';
 import { ERROR, INPUT, LOTTO, OUTPUT } from './Constant';
 import BuyLotto from './BuyLotto';
 import Lotto from './Lotto';
+import Calculation from './Calculation';
 
 class App {
   async play() {
     const purchasedLotto = await this.getPurchaseLotto();
     const winningNumber = await this.getWinningNumber();
     const bonusNumer = await this.getBonusNumber();
+
+    const calc = new Calculation(purchasedLotto, winningNumber, bonusNumer);
+    calc.checkMatchNumbers();
+    calc.calcTotalReturn();
   }
 
   async getPurchaseLotto() {
