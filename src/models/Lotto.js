@@ -1,4 +1,4 @@
-import { error } from "./constants";
+import { error } from "../constants";
 
 class Lotto {
   #numbers;
