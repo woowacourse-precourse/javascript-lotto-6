@@ -19,3 +19,15 @@ export const checkPurchaseAmount = (amount) => {
         throw new Error('구매 금액은 1,000원 단위여야 합니다.');
     }
 };
+
+export const checkWinningNumbers = (numbers) => {
+    if (numbers.some(isNaN)) {
+        throw new Error('당첨 번호는 1부터 45 사이의 유니크한 6개 숫자여야 합니다.');
+    }
+    if (numbers.length !== 6) {
+        throw new Error('당첨 번호는 1부터 45 사이의 유니크한 6개 숫자여야 합니다.');
+    }
+    if (new Set(numbers).size !== 6) {
+        throw new Error('당첨 번호는 1부터 45 사이의 유니크한 6개 숫자여야 합니다.');
+    }
+};
