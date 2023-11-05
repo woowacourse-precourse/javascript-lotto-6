@@ -45,6 +45,22 @@ class LottoGame {
 
   async result() {
     printBeforeResult();
+    this.#compareWinningNumber();
+  }
+
+  #compareWinningNumber() {
+    const myLottoList = this.#myLottos.getMyLottoList();
+    const winningNumbers = this.#winningLotto.getWinningNumber();
+    const bonusNumber = this.#winningLotto.getBonusNumber();
+
+    myLottoList.forEach((lotto) => {
+      const [matchCount, hasBonusNumber] = this.#matchingOneLottery(
+        lotto.getLottery(),
+        winningNumbers,
+        bonusNumber,
+      );
+      this.#setRewardCount(matchCount, hasBonusNumber);
+    });
   }
 
   #matchingOneLottery(lotto, winningNumbers, bonusNumber) {
