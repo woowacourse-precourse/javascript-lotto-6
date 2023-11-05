@@ -4,6 +4,8 @@ export const THREE_RANK = 'three_rank';
 export const FOUR_RANK = 'four_rank';
 export const FIVE_RANK = 'five_rank';
 
+export const EMPTY = '';
+
 export const LOTTO_SETTING = Object.freeze({
   min: 1,
   max: 45,
@@ -34,8 +36,8 @@ export const INPUT_ERROR_MESSAGE = Object.freeze({
 
 export const INPUT_MESSAGE = Object.freeze({
   purchase: '구입금액을 입력해 주세요.\n',
-  winning_number: '당첨 번호를 입력해 주세요.\n',
-  bonus_number: '보너스 번호를 입력해 주세요.\n',
+  winning_number: '\n당첨 번호를 입력해 주세요.\n',
+  bonus_number: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export const OUTPUT_MESSAGE = Object.freeze({
