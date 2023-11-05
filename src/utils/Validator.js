@@ -14,7 +14,8 @@ const Validator = {
   },
 
   inputPurchaseAmount(input) {
-    if (input === "0" || input === "") throw new Error(ERROR.purchaseZero);
+    if (input.replace(/0/g, "").length === 0)
+      throw new Error(ERROR.purchaseZero);
     if (input.replace(/\d/g, "").length > 0)
       throw new Error(ERROR.purchaseNumber);
     if (input % NUMBER.price !== 0) throw new Error(ERROR.purchaseUnit);
