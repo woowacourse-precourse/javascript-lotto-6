@@ -26,7 +26,7 @@ class LottoGame {
       IO.printMsg(tempLotto.formatNumbers());
     }
 
-    const answerStr = await IO.receiveUserInput('\n당첨 번호를 입력해 주세요.\n');
+    const winningStr = await IO.receiveUserInput('\n당첨 번호를 입력해 주세요.\n');
   }
 
   calculateLottomNum(amount) {
