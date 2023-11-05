@@ -1,12 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const systemErrorHandler = {
-  async retryOnErrors(retryFunction) {
+  async retryOnErrors(executeFunction) {
     try {
-      return await retryFunction();
+      return await executeFunction();
     } catch (error) {
       Console.print(error.message);
-      return this.retryOnErrors(retryFunction);
+      return this.retryOnErrors(executeFunction);
     }
   },
 };
