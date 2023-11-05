@@ -11,7 +11,7 @@ class OutputView {
     Console.print(`${lottos.length}${OUTPUT_MESSAGE.purchase}`);
 
     lottos.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(', ')}]`);
     });
   }
 
