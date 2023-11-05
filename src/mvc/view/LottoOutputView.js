@@ -22,7 +22,7 @@ const {
 class LottoOutputView {
   printPurchasedLotto(lottoArray) {
     Console.print(`${lottoArray.length}${PURCHASED_LOTTO_FORMAT}`);
-    lottoArray.forEach(Print.lottoNumbers);
+    lottoArray.forEach(this.printLottoNumbers);
   }
 
   printLottoNumbers(lotto) {

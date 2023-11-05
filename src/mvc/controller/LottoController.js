@@ -17,20 +17,20 @@ class LottoController{
   #inputView;
   #outputView;
 
-  constructor(model,inputView,outputView){
+  constructor(model, inputView, outputView){
     this.#model = model;
     this.#inputView = inputView;
     this.#outputView = outputView;
   }
 
   async play(){
-    const purchasePrice = await this.inputPurchasePrice();
-    this.#model.purchaseLotto(purchasePrice);
-    this.#outputView.printPurchasedLotto(this.#model.PurchasedLottoArray);
+    const purchasePrice = await this.#inputPurchasePrice();
+    this.#model.purchaseLottos(purchasePrice/LOTTO_PRICE);
+    this.#outputView.printPurchasedLotto(this.#model.purchasedLottoArray);
     this.#outputView.printLineBreak();
     
-    const winningNumbersArray = this.inputWinningNumbers();
-    const bonusNumber = this.inputBonusNumber(winningNumbersArray);
+    const winningNumbersArray = await this.#inputWinningNumbers();
+    const bonusNumber = await this.#inputBonusNumber(winningNumbersArray);
     this.#model.makeLottoBoard(winningNumbersArray, bonusNumber);
     const lottoResult = this.#model.getLottoResult();
 
@@ -42,39 +42,39 @@ class LottoController{
     );
   }
 
-  async inputPurchasePrice(){
+  async #inputPurchasePrice(){
     while(true){
       const input = await this.#inputView.purchasePrice();
       try{
-        ErrorCheck.purchasePrice(input);
+        ErrorCheck.purchasePrice(input, LOTTO_PRICE);
         return Number(input);
       }
       catch(error){
-        this.#outputView.errorMessage(error);
+        this.#outputView.printErrorMessage(error);
       }
     }
   }
 
-  async inputWinningNumbers() {
+  async #inputWinningNumbers() {
     while (true) {
       const numbersString = await this.#inputView.winningNumbers();
       try {
         ErrorCheck.lottoNumbersString(numbersString);
         return numbersString.split(',').map(Number);
       } catch (error) {
-        Print.errorMessage(error);
+        this.#outputView.printErrorMessage(error);
       }
     }
   }
 
-  async inputBonusNumber(winningNumbers) {
+  async #inputBonusNumber(winningNumbers) {
     while (true) {
       const numberString = await this.#inputView.bonusNumber();
       try {
         ErrorCheck.bonusNumberString(numberString, winningNumbers);
         return Number(numberString);
       } catch (error) {
-        Print.errorMessage(error);
+        this.#outputView.printErrorMessage(error);
       }
     }
   }

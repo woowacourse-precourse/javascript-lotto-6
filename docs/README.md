@@ -32,8 +32,7 @@
 
 mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능에 포함 X)
 
-- [x
-- ] model
+- [x] model
   - [x] 수에 맞게 purchasedLottoArray 랜덤으로 채워넣기
   - [x] 입력한 값에 맞게 lottoBoard 만들기
   - [x] purchasedLottoArray와 lottoBoard에 맞는 lottoResult 값 생성 

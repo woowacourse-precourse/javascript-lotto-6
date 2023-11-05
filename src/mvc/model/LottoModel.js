@@ -28,7 +28,7 @@ class LottoModel {
 
   getLottoResult() {
     const result = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(0);
-    lottoArray.forEach(
+    this.purchasedLottoArray.forEach(
       lotto => result[Get.lottoCheck(lotto, this.lottoBoard)]++
     );
 

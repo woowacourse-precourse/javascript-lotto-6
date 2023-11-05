@@ -30,7 +30,7 @@ class ErrorCheck {
 
   static bonusNumberString(string, winningNumbers) {
     ErrorCheck.lottoNumberString(string);
-    ErrorCheck.differeNumberInLottoBoard(Number(string), winningNumbers);
+    ErrorCheck.differeNumberInWinningNumbers(Number(string), winningNumbers);
   }
 
   static lottoNumberString(string) {
