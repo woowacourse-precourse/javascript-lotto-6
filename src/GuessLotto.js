@@ -88,7 +88,10 @@ class GuessLotto {
     let lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
     lottoNumber = lottoNumber.sort((a, b) => a - b);
     this.#lottoNumbers.push(lottoNumber);
-    return lottoNumber;
+    return `[${lottoNumber.map((item, index) => {
+      if (index === 0) return `${item}`;
+      return ` ${item}`;
+    })}]`;
   }
 }
 
