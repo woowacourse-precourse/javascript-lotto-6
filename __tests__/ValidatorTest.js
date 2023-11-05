@@ -42,4 +42,14 @@ describe("Validator 클래스 테스트", () => {
       expect(Validator.isDivisible(dividend, divisor)).toBe(expectedOutput);
     }
   );
+
+  test.each([
+    ["1000", false],
+    ["0100", true],
+  ])(
+    "문자열이 0으로 시작하면 true, 아니라면 false 반환 - %s",
+    (string, expectedOutput) => {
+      expect(Validator.startWithZero(string)).toBe(expectedOutput);
+    }
+  );
 });
