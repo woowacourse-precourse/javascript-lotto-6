@@ -5,6 +5,39 @@ const LOTTO = Object.freeze({
   price: 1000,
 });
 
+const PRIZE = Object.freeze({
+  first: {
+    name: 'first',
+    matchCount: 6,
+    extraWord: '',
+    money: 2000000000,
+  },
+  second: {
+    name: 'second',
+    matchCount: 5,
+    extraWord: ', 보너스 볼 일치',
+    money: 30000000,
+  },
+  third: {
+    name: 'third',
+    matchCount: 5,
+    extraWord: '',
+    money: 1_500_000,
+  },
+  fourth: {
+    name: 'fourth',
+    matchCount: 4,
+    extraWord: '',
+    money: 50000,
+  },
+  fifth: {
+    name: 'fifth',
+    matchCount: 3,
+    extraWord: '',
+    money: 5000,
+  },
+});
+
 const ERROR_MESSAGE = Object.freeze({
   number: '[ERROR] 숫자를 입력해주세요.',
   unit: `[ERROR] ${LOTTO.price.toLocaleString()}원 단위로 입력해주세요.`,
@@ -25,4 +58,4 @@ const OUTPUT_MESSAGE = Object.freeze({
   tickets: ticket => `[${ticket.join(', ')}]`,
 });
 
-export { LOTTO, INPUT_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE };
+export { LOTTO, INPUT_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE, PRIZE };

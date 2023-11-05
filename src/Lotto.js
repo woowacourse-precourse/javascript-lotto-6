@@ -1,4 +1,5 @@
 import Validator from './utils/Validator.js';
+import { PRIZE } from './constants/constants.js';
 
 class Lotto {
   #numbers;
@@ -35,9 +36,12 @@ class Lotto {
 
   checkPrize(winningNumbers, bonusNumber) {
     const matchCount = this.checkMatchNumbers(winningNumbers);
-    const hasBonus = this.hasBonusNumber(bonusNumber);
-
-    console.log(matchCount, hasBonus);
+    if (matchCount === 6) return PRIZE.first.name;
+    if (this.hasBonusNumber(bonusNumber) && matchCount === 5)
+      return PRIZE.second.name;
+    if (matchCount === 5) return PRIZE.third.name;
+    if (matchCount === 4) return PRIZE.fourth.name;
+    if (matchCount === 3) return PRIZE.fifth.name;
   }
 }
 
