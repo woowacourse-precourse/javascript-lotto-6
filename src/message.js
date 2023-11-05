@@ -18,4 +18,10 @@ const PRINT_MESSAGE = Object.freeze({
     TOTAL_RATE : (rate) => `총 수익률은 ${rate}%입니다.\n`,
 });
 
+const INPUT_MESSAGE = ({
+    PRICE : '구입 금액을 입력해 주세요.\n',
+    MATCH_NUMBERS : '당첨 번호를 입력해 주세요.\n',
+    BONUS_NUMBER : '보너스 번호를 입력해 주세요.\n',
+});
+
 export {ERROR_MESSAGE, PRINT_MESSAGE};
