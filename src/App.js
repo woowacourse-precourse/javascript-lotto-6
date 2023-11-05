@@ -6,6 +6,7 @@ class App {
 
     await lottoGame.buyLotto();
     await lottoGame.drawLotto();
+    await lottoGame.result();
   }
 }
 
