@@ -10,8 +10,29 @@ const Validator = {
     }
   },
 
+  validateNumberForm(numbers) {
+    if (!/^[0-9]+(,[0-9]+)+$/.test(numbers.replace(/\s/g, ''))) {
+      throw new Error(ERROR_MESSAGE.form);
+    }
+  },
+
+  validateLotto(numbers) {
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error(ERROR_MESSAGE.duplicates);
+    }
+    numbers.forEach(num => {
+      if (this.isNumberInRange(num)) {
+        throw new Error(ERROR_MESSAGE.range);
+      }
+    });
+  },
+
   isNumber(input) {
     return /^\d+$/.test(input);
+  },
+
+  isNumberInRange(num) {
+    return num < LOTTO.min || num > LOTTO.max;
   },
 };
 

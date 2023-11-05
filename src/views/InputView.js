@@ -16,6 +16,13 @@ const InputView = {
     }
     return trimmedMoney;
   },
+
+  async readWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(
+      INPUT_MESSAGE.winningNumber,
+    );
+    return winningNumbers;
+  },
 };
 
 export default InputView;
