@@ -2,11 +2,8 @@ import inputView from "../views/InputView";
 import BudgetValidation from "../validation/BudgetValidation";
 
 class LottoController {    
-    budget;
-
-    constructor() {
-        this.budget = 0;
-    }
+    budget = 0;
+    lottoCount = 0;
 
     async getBudget() {
         //입력받은 값을 유효성 검사를 위해 넘겨줌

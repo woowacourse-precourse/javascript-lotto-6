@@ -13,6 +13,11 @@ class BudgetValidation {
             throw new Error(INPUT_BUDGET_ERROR.INVALID_AMOUNT_ERROR);
         }
 
+        //3. 0원 이하일 경우
+        if (budget <= 0) {
+            throw new Error(INPUT_BUDGET_ERROR.NO_MONEY_ERROR);
+        }
+
         return budget;
     }
 }
