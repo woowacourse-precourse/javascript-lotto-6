@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import ExceptionHandler from './utils/ExceptionHandler.js';
 import LOTTO from './constants/lotto.js';
 import Lotto from './Domain/Lotto.js';
+import LottoNumberCreation from './Domain/LottoNumberCreation.js';
 import MESSAGE from './constants/message.js';
 import { MessageFormat } from './utils/messageFormat.js';
 
@@ -20,7 +21,7 @@ class App {
       // 6. (출력) 당첨 내역 출력
       const userLotto = await this.inputUserLotto();
       this.#lotto = new Lotto(userLotto.winningNumbers.split(',').map(Number));
-      this.#lotto.compareWinningAndLotto(userLotto, lottoTickets);
+      this.#lotto.compareWinningAndLotto(userLotto.bonusNumber, lottoTickets);
       this.#lotto.printTotalResult();
 
       this.resultReturnRate();
@@ -32,7 +33,6 @@ class App {
   /**
    * 1. (입력) 로또 구입 금액 입력
    */
-
   async inputUserPurchaseAmount() {
     while (true) {
       try {
@@ -69,8 +69,9 @@ class App {
    * 2.2 (출력) 구매 갯수만큼 로또 번호 출력
    */
   purchaseLottoTickets(ticketCount) {
-    const lottoTickets = Lotto.generateLottoTickets(ticketCount);
+    const lottoTickets = LottoNumberCreation.generateLottoTickets(ticketCount);
     lottoTickets.forEach((ticket) => this.printLottoTickets(ticket));
+
     return lottoTickets;
   }
 

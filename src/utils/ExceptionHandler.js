@@ -9,12 +9,13 @@ class ExceptionHandler {
   }
 
   static validateAmount(amount) {
-    const numericPattern = /^(?:[1-9]\d{3,}|[1-9]\d{0,2}(,\d{3})+)$/;
+    const numericPattern = LOTTO.regexPatterns.numericPattern;
     if (!numericPattern.test(amount)) {
       this.throwAppError(ERROR.message.invalidPurchase);
     }
-    const parsedAmount = parseInt(amount.replace(/,/g, ''), 10);
 
+    // const parsedAmount = parseInt(amount.replace(/,/g, ''), 10);
+    const parsedAmount = amount;
     if (parsedAmount % LOTTO.unit.unit) {
       this.throwAppError(ERROR.message.invalidUnit);
     }
@@ -24,22 +25,22 @@ class ExceptionHandler {
 
   static validateWinningNumbers(winningNumbers) {
     // 3.1 winningNumbers
-    const splitedWinningNumbers = winningNumbers.split(',');
+    const splitedWinningNumbers = winningNumbers.split(LOTTO.string.comma);
     const winningNumbersSet = new Set(splitedWinningNumbers.map(Number));
     const hasWhiteSpace = /\s/.test(splitedWinningNumbers);
 
     // 3.1.1 (예외) 6개 이하
-    if (splitedWinningNumbers.length !== 6) {
+    if (splitedWinningNumbers.length !== LOTTO.number.limit) {
       throw new AppError(ERROR.message.invalidNumberLimit);
     }
 
     // 3.1.2 (예외) 빈 문자열
     if (hasWhiteSpace) {
-      throw new AppError(ERROR.message.invalidEmpty);
+      throw new AppError(ERROR.message.invalidInput);
     }
 
     // 3.1.3 (예외) 중복인 경우
-    if (winningNumbersSet.size !== 6) {
+    if (winningNumbersSet.size !== LOTTO.number.limit) {
       throw new AppError(ERROR.message.duplicateNumber);
     }
 
@@ -50,20 +51,23 @@ class ExceptionHandler {
     }
 
     // // 3.1.5 (예외) ,, 이 중복으로 들어간 경우 : 1,2,,3,4,5 -> 0으로 처리함
-    if (winningNumbersSet.has(0)) {
+    if (winningNumbersSet.has(LOTTO.number.zero)) {
       throw new AppError(ERROR.message.noZero);
     }
-    // 1, ,4,3,25,3 -> undefined 나옴
 
     return winningNumbers;
   }
 
   static validateBonusNumber(inputbonusNumber, winningNumbers) {
-    const splitedWinningNumbers = winningNumbers.split(',');
+    const splitedWinningNumbers = winningNumbers.split(LOTTO.string.comma);
     const winningNumbersSet = new Set(splitedWinningNumbers.map(Number));
     const bonusNumber = Number(inputbonusNumber);
 
-    if (inputbonusNumber.includes(',') || inputbonusNumber.includes(' ')) {
+    // comma, ' ' 를 포함하는 경우
+    if (
+      inputbonusNumber.includes(LOTTO.string.comma) ||
+      inputbonusNumber.includes(LOTTO.string.space)
+    ) {
       throw new AppError(ERROR.message.invalidInput);
     }
 

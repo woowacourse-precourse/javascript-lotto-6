@@ -14,23 +14,25 @@ const unit = Object.freeze({
   unit: 1000,
 });
 
-const number = Object.freeze({
+const number = deepFreeze({
+  zero: 0,
+  winningMin: 3,
   min: 1,
   max: 45,
   limit: 6,
+  bonus: {
+    count: 5,
+    key: '5_bonus',
+  },
 });
 
 const rate = Object.freeze({
   percent: 100,
 });
 
-const bonus = Object.freeze({
-  count: '5',
-  key: '5_bonus',
-});
-
 const string = Object.freeze({
-  split: ',',
+  comma: ',',
+  space: ' ',
 });
 
 const regexPatterns = Object.freeze({
@@ -43,7 +45,7 @@ const LOTTO = Object.freeze({
   unit,
   number,
   rate,
-  bonus,
+  // bonus,
   string,
   regexPatterns,
 });

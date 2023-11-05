@@ -1,6 +1,5 @@
-import { Console, Random } from '@woowacourse/mission-utils';
-
 import AppError from '../errors/error.js';
+import { Console } from '@woowacourse/mission-utils';
 import ERROR from '../constants/error.js';
 import LOTTO from '../constants/lotto.js';
 import MESSAGE from '../constants/message.js';
@@ -19,10 +18,12 @@ class Lotto {
       '5_bonus': 0,
       6: 0,
     };
+
+    console.log('this.#numbers', this.#numbers); // Array
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO.number.limit) {
       throw new AppError(ERROR.message.invalidNumberLimit);
     }
 
@@ -30,20 +31,9 @@ class Lotto {
       throw new AppError(ERROR.message.invalidNumberRange);
     }
 
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== LOTTO.number.limit) {
       throw new AppError(ERROR.message.duplicateNumber);
     }
-  }
-
-  // TODO: 1. 로또 생성 관련 기능 분리 :
-  // 로또 번호 생성
-  static generateRandomLottoNumber() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
-  }
-
-  // 넘겨 받은 갯수만큼 로또 티켓 리스트 생성
-  static generateLottoTickets(num) {
-    return Array.from({ length: num }, () => this.generateRandomLottoNumber());
   }
 
   // TODO: 2. 당첨 번호 비교 관련 기능 분리 :
@@ -52,21 +42,22 @@ class Lotto {
     Console.print(MESSAGE.output.resultHeader);
   }
 
-  compareWinningAndLotto(userLotto, lottoList) {
+  compareWinningAndLotto(bonusNumber, lottoList) {
     this.printCompareWinningAndLotto();
-    const { winningNumbers, bonusNumber } = userLotto;
+
+    const { winningMin, bonus } = LOTTO.number;
+    const { count: bonusCount, key: bonusKey } = bonus;
 
     lottoList.forEach((lotto) => {
-      const hasUserNumber = winningNumbers
-        .split(',')
+      const hasWinningNumber = this.#numbers
         .map(Number)
         .filter((num) => lotto.includes(num)).length;
       const hasBonusNumber = lotto.includes(Number(bonusNumber));
 
-      if (hasUserNumber >= 3 && !hasBonusNumber) {
-        this.result[hasUserNumber] = (this.result[hasUserNumber] || 0) + 1;
-      } else if (hasUserNumber === 5 && hasBonusNumber) {
-        this.result['5_bonus'] = (this.result['5_bonus'] || 0) + 1;
+      if (hasWinningNumber >= winningMin && !hasBonusNumber) {
+        this.result[hasWinningNumber] = (this.result[hasWinningNumber] || 0) + 1;
+      } else if (hasWinningNumber === bonusCount && hasBonusNumber) {
+        this.result[bonusKey] = (this.result[bonusKey] || 0) + 1;
       }
     });
 
