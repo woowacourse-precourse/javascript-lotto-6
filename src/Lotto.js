@@ -1,9 +1,12 @@
+import Validator from './utils/Validator.js';
+
 class Lotto {
   #numbers;
 
   #tickets;
 
   constructor(numbers) {
+    Validator.checkLottoNumbers(numbers);
     // this.#validate(numbers);
     this.#numbers = numbers;
   }

@@ -1,9 +1,12 @@
+import Validator from './utils/Validator.js';
+
 class TicketMachine {
   #purchaseAmount = 0;
 
   #ticktes;
 
   constructor({ purchaseAmount, getTickets }) {
+    Validator.checkPurchaseAmount(purchaseAmount);
     this.#purchaseAmount = purchaseAmount;
     this.getTickets = getTickets;
     this.getNumberOfGame();

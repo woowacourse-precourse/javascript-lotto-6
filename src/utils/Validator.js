@@ -62,10 +62,8 @@ class Validator {
   }
 
   static #isNotDuplicated(value) {
-    return this.#validate(
-      value.every(elem => !value.includes(elem)),
-      ERROR_MESSAGE.DUPLICATE_ERROR,
-    );
+    const set = new Set(value);
+    return this.#validate(set.size === 6, ERROR_MESSAGE.DUPLICATE_ERROR);
   }
 }
 

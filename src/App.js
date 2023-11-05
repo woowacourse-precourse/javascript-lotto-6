@@ -4,14 +4,11 @@ import { MAGIC_NUMBER } from './constants/magicNumber.js';
 import View from './View.js';
 import TicketMachine from './TicketMachine.js';
 import Lotto from './Lotto.js';
-import Validator from './utils/Validator.js';
 
 class App {
   #state = { ticktes: null };
 
   buyTickets(purchaseAmount) {
-    Validator.checkPurchaseAmount(purchaseAmount);
-
     this.ticketMachine = new TicketMachine({
       purchaseAmount,
       getTickets: purchasedTicktesCount => {
@@ -34,9 +31,6 @@ class App {
 
   setlottoNumbers(lottoNumbers) {
     const lottoNumbersArray = lottoNumbers.split(',').map(Number);
-
-    Validator.checkLottoNumbers(lottoNumbersArray);
-
     this.lotto = new Lotto(lottoNumbersArray);
   }
 
