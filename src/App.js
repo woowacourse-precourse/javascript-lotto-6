@@ -37,7 +37,7 @@ class App {
     }
   }
 
-  async play() {
+  async setPrice() {
     while (true) {
       try {
         const ENTERED_INPUT_PRICE = await this.#view.getPrice();
@@ -47,8 +47,9 @@ class App {
         Console.print(e.message);
       }
     }
-    this.buyLottoNTimes(this.#price.price / 1000);
+  }
 
+  async setWinninNumber() {
     while (true) {
       try {
         const ENTERED_WINNING_NUMBER = await this.#view.getWinninNumber();
@@ -58,7 +59,9 @@ class App {
         Console.print(e.message);
       }
     }
+  }
 
+  async setBonusNumber() {
     while (true) {
       try {
         const ENTERED_BONUS_NUMBER = await this.#view.getBonusNumber();
@@ -68,6 +71,14 @@ class App {
         Console.print(e.message);
       }
     }
+  }
+
+  async play() {
+    await this.setPrice();
+    this.buyLottoNTimes(this.#price.price / 1000);
+    await this.setWinninNumber();
+    await this.setBonusNumber();
+
     this.#result.getResults(this.#boughtLottos);
     this.#result.printResult(this.#price.price);
   }
