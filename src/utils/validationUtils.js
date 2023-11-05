@@ -7,6 +7,12 @@ function checkNumber(number) {
   }
 }
 
+function checkNumberRegExp(string) {
+  if (VALUE.notNumber.test(string)) {
+    throw new Error(MESSAGE.error.notNumber);
+  }
+}
+
 function checkRange(number) {
   const { start, end } = VALUE.range;
   if (number < start || number > end) {
@@ -16,6 +22,7 @@ function checkRange(number) {
 
 const validationUtils = {
   checkNumber,
+  checkNumberRegExp,
   checkRange,
 };
 
