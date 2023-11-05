@@ -73,7 +73,7 @@ describe('Array 함수형 모듈 테스트', () => {
         output: [],
       },
     ])(
-      '첫 번째 배열이 $input.firstArray 이고, 두 번째 배열이 $input.firstArray 일 때, 교집합 결과는 $output 이다.',
+      '첫 번째 배열이 $input.firstArray 이고, 두 번째 배열이 $input.secondArray 일 때, 교집합 결과는 $output 이다.',
       ({ input, output }) => {
         // given
         const { firstArray, secondArray } = input;
