@@ -1,5 +1,6 @@
 import PurchaseLottos from "./PurchaseLottos.js";
 import Lotto from "./Lotto.js";
+import Bonus from "./Bonus.js";
 import { Console, Random } from "@woowacourse/mission-utils";
 import { USER_PROMPT } from "./utils/constants.js";
 
@@ -56,7 +57,8 @@ class App {
   async inputBonusNumber() {
     try {
       const input = await Console.readLineAsync(USER_PROMPT.BONUS_NUMBER);
-      return input;
+      const bouns = new Bonus(input, this.#userWinningNumbers);
+      return bouns.getBonusNumber();
     } catch (error) {
       throw error;
     }
