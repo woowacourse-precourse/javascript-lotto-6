@@ -21,8 +21,16 @@ class Lotto {
     this.#numbers = this.#formatLotto(numbers);
   }
 
-  get numbers() {
-    return this.#numbers;
+  isLottoNumber(number) {
+    return (
+      Validator.isPositiveInteger(number) &&
+      number >= Lotto.#minNumber &&
+      number <= Lotto.#maxNumber
+    );
+  }
+
+  hasInclude(number) {
+    return this.#numbers.includes(number);
   }
 
   #formatLotto(numbers) {
@@ -45,14 +53,6 @@ class Lotto {
     if (new Set(numbers).size !== Lotto.#length) {
       throw CustomError.lotto(ERROR.message.lotto.notUnique);
     }
-  }
-
-  isLottoNumber(number) {
-    return (
-      Validator.isPositiveInteger(number) &&
-      number >= Lotto.#minNumber &&
-      number <= Lotto.#maxNumber
-    );
   }
 
   #validateLottoNumbers(numbers) {
