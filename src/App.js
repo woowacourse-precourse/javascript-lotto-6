@@ -6,6 +6,7 @@ const validate = new Validate();
 class App {
   LottoList = [];
   prizeNumber = [];
+  bonusNumber = 0;
 
   async start() {
     const price = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -27,10 +28,16 @@ class App {
   }
 
   async inputPrizeNumber() {
-    const number = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    const prize = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
 
-    const stringList = number.split(",");
+    const stringList = prize.split(",");
     this.prizeNumber = stringList.map((data) => Number(data));
+  }
+
+  async inputBonusNumber() {
+    const bonus = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+
+    this.bonusNumber = Number(bonus);
   }
 
   async play() {
@@ -40,6 +47,7 @@ class App {
     this.getLottoList(lottoCount);
 
     await this.inputPrizeNumber();
+    await this.inputBonusNumber();
   }
 }
 
