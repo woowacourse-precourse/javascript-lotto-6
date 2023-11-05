@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../constants/messages.js';
 
 const InputView = {
-  inputPrices() {
+  inputPrice() {
     return Console.readLineAsync(INPUT_MESSAGE.price);
   },
 
