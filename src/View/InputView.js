@@ -27,8 +27,7 @@ class InputView {
 
   static #parseWinningNumbers(numbers) {
     const splitedNumbers = numbers.split(COMMON.comma);
-    splitedNumbers.map((number) => number.trim());
-    return splitedNumbers;
+    return splitedNumbers.map((number) => number.trim());
   }
 
   static async inputBonusNumber() {
