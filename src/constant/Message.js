@@ -1,9 +1,4 @@
-import {
-  BONUS_BALL_FORM,
-  LOTTO_FORM,
-  NUMBER_RANGE,
-  WINNING_AMOUNT,
-} from './Rule';
+import { BONUS_BALL_FORM, LOTTO_FORM, NUMBER_RANGE, WINNINGS } from './Rule';
 
 const MESSAGE = Object.freeze({
   paymentQuery: `구입금액을 입력해 주세요.(${LOTTO_FORM.price}원 이상, ${LOTTO_FORM.price}원 단위의 숫자로 입력해주세요. 예시:1000, 2000)`,
@@ -12,7 +7,7 @@ const MESSAGE = Object.freeze({
   bonusBallNumberQuery: `보너스 번호를 입력해 주세요.(보너스 번호는 ${LOTTO_FORM.range.min}~${LOTTO_FORM.range.max}의 숫자 중 이전에 입력한 당첨 번호와 중복되지 않는 하나의 숫자만 가능해요.)`,
 });
 
-const STATIC_MESSAGE = Object.freeze({
+const STATISTICS_MESSAGE = Object.freeze({
   header: '당첨 통계',
   division: '---',
   correctUnit: '개',
@@ -24,11 +19,11 @@ const STATIC_MESSAGE = Object.freeze({
 });
 
 const RANK_MESSAGE = Object.freeze({
-  three: `3개 일치 (${WINNING_AMOUNT.three}원)`,
-  four: `3개 일치 (${WINNING_AMOUNT.four}원)`,
-  fiveNoBonus: `5개 일치 (${WINNING_AMOUNT.fiveNoBonus}원)`,
-  fiveAndBonus: `5개 일치, 보너스 볼 일치 (${WINNING_AMOUNT.fiveAndBonus}원)`,
-  six: `6개 일치 (${WINNING_AMOUNT.six}원)`,
+  three: `3개 일치 (${WINNINGS.three}원)`,
+  four: `3개 일치 (${WINNINGS.four}원)`,
+  fiveNoBonus: `5개 일치 (${WINNINGS.fiveNoBonus}원)`,
+  fiveAndBonus: `5개 일치, 보너스 볼 일치 (${WINNINGS.fiveAndBonus}원)`,
+  six: `6개 일치 (${WINNINGS.six}원)`,
 });
 
 const ERROR_MESSAGE = Object.freeze({
@@ -46,4 +41,4 @@ const ERROR_MESSAGE = Object.freeze({
   duplicateBonusBall: '보너스 번호는 입력한 로또 번호 이외의 숫자여야 합니다.',
 });
 
-export { MESSAGE, ERROR_MESSAGE, STATIC_MESSAGE, RANK_MESSAGE };
+export { MESSAGE, ERROR_MESSAGE, STATISTICS_MESSAGE, RANK_MESSAGE };

@@ -13,7 +13,7 @@ const BONUS_BALL_FORM = Object.freeze({
   length: 1,
 });
 
-const WINNING_AMOUNT = Object.freeze({
+const WINNINGS = Object.freeze({
   three: '5,000',
   four: '50,000',
   fiveNoBonus: '1,500,000',
