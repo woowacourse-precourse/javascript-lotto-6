@@ -44,14 +44,22 @@ class Lotto {
     if(winNumber.includes(bonusNumber)){
       bonusCheck = true;
     }
+    return this.winningPrice(winCount,bonusCheck)
+  }
 
+  /**
+   * 당첨갯수와 보너스 여부를 통해 받는 금액을 반환받는다.
+   * @param {*} winCount 
+   * @param {*} bonusCheck 
+   * @returns 
+   */
+  winningPrice(winCount, bonusCheck){
     if(winCount<3) return 0;
     if(winCount===3) return 5000;
     if(winCount===4) return 50000;
     if(winCount===5&&bonusCheck) return 30000000;
     if(winCount===5) return 1500000
     if(winCount===6) return 2000000000;
-
   }
 }
 

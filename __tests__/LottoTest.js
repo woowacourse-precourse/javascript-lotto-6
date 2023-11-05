@@ -16,6 +16,11 @@ describe("로또 클래스 테스트", () => {
 
   // 아래에 추가 테스트 작성 가능
 
+  test("로또 당첨 안됨", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(lotto.winningCheck([5,6,7,8,9,10],10)).toEqual(0);
+  });
+
   test("로또 5등 당첨", () => {
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
     expect(lotto.winningCheck([1,2,3,7,8,9],10)).toEqual(5000);
