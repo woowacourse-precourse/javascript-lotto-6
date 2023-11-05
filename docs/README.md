@@ -10,11 +10,11 @@
 
   `[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.`
 
-### ⌨️ 입력
+### ⌨️ 입력 (InputVale)
 
 ---
 
-#### 로또 구입 금액 입력 (InputBuyLotto)
+#### 로또 구입 금액 입력 (BuyLotto / InputValue.buyLotto)
 
 - 입력 문구: `구입금액을 입력해 주세요.`
 - 구입 금액은 1,000원 단위로 입력
@@ -28,7 +28,7 @@
 2. 1,000원으로 나누어 떨어지는지 확인  
    떨어지지 않는다면 [예외] 출력 후, 종료
 
-#### 당첨 번호 입력 (InputWinningNumber)
+#### 당첨 번호 입력 (Lotto / InputValue.winningNumber)
 
 - 입력 문구: `당첨 번호를 입력해 주세요.`
 - 숫자만 입력 받을 것
@@ -49,7 +49,7 @@
    범위 밖일 경우 [예외]
 6. 당첨번호를 담은 배열 return
 
-#### 보너스 번호 입력 (InputBonusNumber)
+#### 보너스 번호 입력 (BonusLotto / InputValue.bonusNumber)
 
 - 입력 문구: `보너스 번호를 입력해 주세요.`
 - 입력 가능한 범위는 1~45
@@ -65,16 +65,16 @@
 4. 1~45의 범위에 있는지 확인, 아닐 경우 [예외]
 5. 보너스 번호를 <당첨 번호> 배열의 마지막 값으로 추가
 
-### 🖨️ 출력
+### 🖨️ 출력 (PrintValue)
 
 ---
 
-#### 발행 로또 출력 (PrintLottoQuantity)
+#### 발행 로또 출력 (PrintValue.lottoQuantity)
 
 `n개를 구매했습니다.` 출력  
  n개는 `InputBuyLotto`의 return 값
 
-#### 발행한 로또 수량 및 번호를 출력 (PrintLottoIssuance)
+#### 발행한 로또 수량 및 번호를 출력 (PrintValue.lottoIssuance)
 
 - 출력 문구 예시
 
@@ -97,14 +97,14 @@
   로또의 발행 범위는 1~45  
   발생한 로또를 배열에 저장
 
-#### 당첨 내역 시작 문구 출력 (PrintWinningStart)
+#### 당첨 내역 시작 문구 출력 (PrintValue.winningStart)
 
 ```
 당첨 통계
 ---
 ```
 
-#### 당첨 내역 출력 (PrintWinningDetail)
+#### 당첨 내역 출력 (PrintValue.winningDetail)
 
 - 출력 문구 예시
 
@@ -124,7 +124,7 @@
   만약, 5개가 일치할 경우 <보너스 번호>와 일치하는지 확인  
   일치한다면 5개+보너스 일치에 1 증가
 
-#### 총 수익률 출력 (PrintTotalReturn)
+#### 총 수익률 출력 (PrintValue.totalReturn)
 
 - 출력 문구 예시: `총 수익률은 62.5%입니다.`
 - 수익률은 소수점 둘째 자리에서 반올림 (ex. 100.0%, 51.5%, 1,000,000.0%)
