@@ -1,5 +1,6 @@
 // Input.js
 import readline from "readline";
+import Lotto from "./Lotto.js";
 
 class Input {
   static async inputMoney() {
@@ -9,7 +10,7 @@ class Input {
         output: process.stdout,
       });
 
-      rl.question("구입금액을 입력해 주세요: ", (money) => {
+      rl.question("구입금액을 입력해 주세요.\n", (money) => {
         const purchaseAmount = parseInt(money, 10);
 
         if (isNaN(purchaseAmount) || purchaseAmount % 1000 !== 0) {
@@ -22,6 +23,28 @@ class Input {
           console.log(message);
           rl.close();
           resolve(purchaseAmount);
+        }
+      });
+    });
+  }
+
+  static async inputNumber() {
+    return new Promise((resolve, reject) => {
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      });
+
+      rl.question("당첨 번호를 입력해 주세요.\n", (number) => {
+        const lottoNumbers = number.split(",").map((num) => parseInt(num, 10));
+
+        try {
+          const lotto = new Lotto(lottoNumbers);
+          rl.close();
+          resolve(lottoNumbers);
+        } catch (error) {
+          rl.close();
+          reject(error);
         }
       });
     });
