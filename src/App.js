@@ -5,6 +5,8 @@ import Lotto from './Lotto';
 const LOTTO_PRICE = 1000;
 
 class App {
+  #winning;
+
   constructor() {
     this.lottos = [];
   }
@@ -36,6 +38,13 @@ class App {
     Console.print(`\n${amount}개를 구매했습니다.`);
 
     this.generateLottos(amount);
+
+    const userSelected = await Console.readLineAsync(
+      '당첨 번호를 입력해 주세요.\n',
+    );
+    this.#winning = new Lotto(
+      userSelected.split(',').map((string) => Number(string)),
+    );
   }
 }
 
