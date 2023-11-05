@@ -6,6 +6,14 @@ class User {
     const purchaseAmount = await Console.readLineAsync(
       GAME_MESSAGE.purchaseAmount,
     );
+
+    return this.purchaseLottoCount(purchaseAmount);
+  }
+
+  purchaseLottoCount(purchaseAmount) {
+    const lottoCount = purchaseAmount / 1000;
+
+    Console.print(`\n${lottoCount}${GAME_MESSAGE.printPurchase}`);
   }
 }
 
