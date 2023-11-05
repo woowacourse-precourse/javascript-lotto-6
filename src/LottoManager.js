@@ -2,12 +2,14 @@ import Lotto from "./Lotto.js";
 import { Console, Random } from "@woowacourse/mission-utils";
 import { MESSAGES } from "./libs/message.js";
 import LuckyNumbers from "./LuckyNumbers.js";
+import Dashboard from "./Dashboard.js";
 
 class LottoManager {
   constructor() {
     this.user = null;
     this.lottoCount = 0;
     this.luckyNumbers = new LuckyNumbers();
+    this.dashboard = new Dashboard();
   }
 
   setUser(user) {
