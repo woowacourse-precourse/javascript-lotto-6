@@ -1,12 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class IO {
-  async receiveUserInput(guideMsg) {
+  static async receiveUserInput(guideMsg) {
     const userInput = await Console.readLineAsync(guideMsg);
     return userInput;
   }
 
-  printMsg(msg) {
+  static printMsg(msg) {
     Console.print(msg);
   }
 }
