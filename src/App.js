@@ -28,7 +28,7 @@ class App {
           PICK_NUMBERS.START_RANGE,
           PICK_NUMBERS.END_RANGE,
           PICK_NUMBERS.HOW_MANY
-        )
+        ).sort((a, b) => a - b)
       );
     }
 
