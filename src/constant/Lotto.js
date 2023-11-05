@@ -6,7 +6,11 @@ const LOTTO_NUMBER = {
 const LOTTO_COUNT = {
   count: 6,
   bonusCount: 1,
-  winnerCount: 5,
+  prizeCount: 5,
+};
+
+const MATCH = {
+  minMatchCount: 3,
 };
 
 const PRICE = {
@@ -16,6 +20,7 @@ const PRICE = {
 const LOTTO = Object.freeze({
   ...LOTTO_NUMBER,
   ...LOTTO_COUNT,
+  ...MATCH,
   ...PRICE,
 });
 
