@@ -12,7 +12,7 @@ class LottoGame {
 
   async start() {
     const amountStr = await IO.receiveUserInput('구입금액을 입력해 주세요.\n');
-    Validation.isNumber(amountStr);
+    Validation.isNumber(amountStr, '[ERROR] 구입 금액은 0으로 시작하지 않는 숫자 형식입니다.');
 
     const amount = Number(amountStr);
     Validation.isDivisible(amount);
@@ -27,6 +27,7 @@ class LottoGame {
     }
 
     const winningStr = await IO.receiveUserInput('\n당첨 번호를 입력해 주세요.\n');
+    const winningArr = winningStr.split(',');
   }
 
   calculateLottomNum(amount) {
