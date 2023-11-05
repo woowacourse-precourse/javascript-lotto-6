@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from '../Domain/Lotto.js';
+import WinningLotto from '../Domain/WinningLotto.js';
 import ERROR from '../constants/error.js';
 import CustomError from '../errors/error.js';
 import Validator from '../utils/Validator.js';
@@ -11,6 +12,10 @@ class LottoService {
     const quantity = Math.floor(purchaseAmount / Lotto.price);
 
     return Array.from({ length: quantity }, () => this.#generateLotto());
+  }
+
+  generateWinningLotto({ numbers, bonusNumber }) {
+    return new WinningLotto({ numbers, bonusNumber });
   }
 
   #generateLotto() {
