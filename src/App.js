@@ -9,6 +9,7 @@ import {
 } from './utils/validator.js';
 import Lotto from './Lotto.js';
 import makeLottoNumbers from './utils/makeLottoNumbers.js';
+import BonusNumber from './BonusNumber.js';
 
 class App {
   constructor() {}
@@ -26,10 +27,14 @@ class App {
       MESSAGES.userLottoNumberInput,
     );
     const userLottoNumberInput = userNumber.split(',');
-    isValidLottoNumber(userLottoNumberInput);
-    const bonusNumber = await Console.readLineAsync(MESSAGES.askBonusNumber);
-    userLottoNumberInput.push(bonusNumber);
-    isValidBouseNumber(bonusNumber, userLottoNumberInput);
+    const lotto = new Lotto(userLottoNumberInput);
+    const userBonusNumberInput = await Console.readLineAsync(
+      MESSAGES.askBonusNumber,
+    );
+    const bonusNumber = new BonusNumber(
+      userBonusNumberInput,
+      userLottoNumberInput,
+    );
   }
 }
 
