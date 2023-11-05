@@ -22,7 +22,7 @@ const Validator = {
   },
 
   checkIsNotNumber(userInput) {
-    if (Number.isNaN(Number(userInput)) || userInput === '') {
+    if (this.isNotNumber(userInput)) {
       throw new ValidationError(ERROR.isNotNumber);
     }
   },
@@ -47,7 +47,7 @@ const Validator = {
 
   checkHasNonNumericElements(inputs) {
     inputs.forEach((element) => {
-      if (Number.isNaN(Number(element)) || element === '') {
+      if (this.isNotNumber(element)) {
         throw new ValidationError(ERROR.hasNonNumericElements);
       }
     });
@@ -55,7 +55,7 @@ const Validator = {
 
   checkHasOutOfRange(inputs) {
     inputs.forEach((number) => {
-      if (Number(number) < LOTTO_NUMBER.minNum || Number(number) > LOTTO_NUMBER.maxNum) {
+      if (this.isOutOfRange(number)) {
         throw new ValidationError(ERROR.hasOutOfRange);
       }
     });
@@ -68,10 +68,15 @@ const Validator = {
   },
 
   checkIsOutOfRange(input) {
-    if (Number(input) < LOTTO_NUMBER.minNum || Number(input) > LOTTO_NUMBER.maxNum) {
+    if (this.isOutOfRange(input)) {
       throw new ValidationError(ERROR.isOutOfRange);
     }
   },
+
+  isOutOfRange: (input) =>
+    Number(input) < LOTTO_NUMBER.minNum || Number(input) > LOTTO_NUMBER.maxNum,
+
+  isNotNumber: (input) => Number.isNaN(Number(input)) || input === '',
 };
 
 export default Validator;
