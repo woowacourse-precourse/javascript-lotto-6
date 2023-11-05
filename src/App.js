@@ -35,14 +35,18 @@ class App {
   }
 
   async getAmount() {
-    const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    this.validateAmount(amount);
-
-    return amount;
+    try {
+      const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      this.validateAmount(amount);
+      return amount;
+    } catch (error) {
+      Console.print(error.message);
+      return this.getAmount();
+    }
   }
 
   validateAmount(amount) {
-    if (isNaN(amount) || amount < 1000 || amount % 1000 !== 0) {
+    if (amount < 1000 || amount % 1000 !== 0) {
       throw new Error('[ERROR] 입력 값이 잘못 되었습니다.');
     }
   }
