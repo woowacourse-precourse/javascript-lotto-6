@@ -47,4 +47,19 @@ describe("로또 클래스 테스트", () => {
       expect(result).toEqual(output);
     });
   });
+
+  test("로또 결과 저장", () => {
+    const input = [5, 1];
+    const lottoGame = new Lotto([1, 2, 3, 4, 5, 6]);
+    const lottoBoard = {
+      threeSame: 0,
+      fourSame: 0,
+      fiveSame: 0,
+      fiveAndBonusSame: 0,
+      sixSame: 0,
+    };
+
+    lottoGame.saveCompareResult(input, lottoBoard);
+    expect(lottoBoard.fiveAndBonusSame).toEqual(1);
+  });
 });
