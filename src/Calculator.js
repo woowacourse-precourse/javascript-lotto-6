@@ -14,8 +14,7 @@ class Calculator {
   }
 
   calculateRateOfReturn(paymentAmount, winnings) {
-    const value = ((paymentAmount - winnings) / paymentAmount) * 100;
-
+    const value = (winnings / paymentAmount) * 100;
     return this.round(value);
   }
 
