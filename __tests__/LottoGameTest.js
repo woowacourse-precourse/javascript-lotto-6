@@ -1,4 +1,4 @@
-import LottoGame from "../src/controller/LottoGame";
+import LottoGame from "../src/LottoGame";
 import WinningLotto from "../src/model/WinningLotto";
 import { Console, Random } from "@woowacourse/mission-utils";
 import Input from "../src/view/Input";

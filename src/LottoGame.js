@@ -1,7 +1,7 @@
-import Input from "../view/Input.js";
-import Player from "../model/Player.js";
-import WinningLotto from "../model/WinningLotto.js";
-import { MONEY_CONSTANT } from "../constants/game.js";
+import Input from "./view/Input.js";
+import Player from "./model/Player.js";
+import WinningLotto from "./model/WinningLotto.js";
+import { MONEY_CONSTANT } from "./constants/game.js";
 
 class LottoGame {
   async initGame() {
