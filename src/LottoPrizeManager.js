@@ -17,6 +17,10 @@ class LottoPrizeManager {
       throw new Error(PRIZE.ERROR.WINNING_NUMBER_SIZE);
     }
 
+    if (!array.every((numStr) => Validator.isInLottoNumberRange(numStr))) {
+      throw new Error(PRIZE.ERROR.WINING_NUMBER_RANGE_NUMBER);
+    }
+
     if (Validator.hasDuplicate(array)) {
       throw new Error(PRIZE.ERROR.WINING_NUMBER_DUPLICATE);
     }
