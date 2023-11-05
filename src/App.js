@@ -23,9 +23,10 @@ class App {
     });
 
     const winningNumbers = this.lottoResultChecker.convertToArr(
-      this.lottoResultChecker.inputWinningLottoNum()
+      await this.lottoResultChecker.inputWinningLottoNum()
     );
     const bonusNumber = this.convertToNum(await this.inputBonusNumber());
+    this.checkValidateInputBonus(bonusNumber);
   }
 
   async inputPurchasePrice() {
@@ -37,6 +38,19 @@ class App {
   }
   convertToNum(bonus) {
     return Number(bonus);
+  }
+  checkValidateInputBonus(bonus) {
+    if (isNaN(Number(bonus)) || bonus < 1 || bonus > 45) {
+      throw new Error(
+        "[ERROR] 1부터 45 사이의 숫자 한 개만 입력이 가능합니다."
+      );
+    }
+    if (bonus % 1 !== 0) {
+      throw new Error("[ERROR] 자연수만 입력이 가능합니다.");
+    }
+    if (this.inputLottoNumArr.includes(bonus)) {
+      throw new Error("[ERROR] 입력한 당첨 번호 외 숫자를 입력해 주세요.");
+    }
   }
 }
 export default App;
