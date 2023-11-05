@@ -32,11 +32,12 @@
 
 mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능에 포함 X)
 
-- [ ] model
+- [x
+- ] model
   - [x] 수에 맞게 purchasedLottoArray 랜덤으로 채워넣기
-  - [ ] 입력한 값에 맞게 lottoBoard 만들기
-  - [ ] purchasedLottoArray와 lottoBoard에 맞는 lottoResult 값 생성 
-- [ ] view
+  - [x] 입력한 값에 맞게 lottoBoard 만들기
+  - [x] purchasedLottoArray와 lottoBoard에 맞는 lottoResult 값 생성 
+- [x] view
   - [x] input
     - [x] 로또 구입 금액 입력
     - [x] 당첨번호 입력
@@ -58,8 +59,7 @@ mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능
     - [x] input view로부터 보너스 번호 입력 받아오기
       - [x] 보너스 번호 예외 상황이면 에러 출력 후 다시 받기
   
-  - [x] model의 lottoResult 업데이트
-  - [ ] model의 lottoResult로 당첨통계 output view로 출력 지시
+  - [x] model의 lottoResult로 당첨통계 output view로 출력 지시
 
   - [ ] model의 lottoResult로 수익률 만들기
   - [ ] 만든 수익률로 output view로 출력 지시
