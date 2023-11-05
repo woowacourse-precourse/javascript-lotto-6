@@ -1,4 +1,4 @@
-import LottoResult from '../../Controller/modules/LottoResult';
+import LottoResult from '../../Controller/modules/LottoResult.js';
 
 describe('당첨 결과 확인 테스트.', () => {
   const winNumber = [1, 2, 3, 4, 5, 6];
@@ -21,14 +21,19 @@ describe('당첨 결과 확인 테스트.', () => {
   const expectedProfit = 40631100;
 
   test('당첨 번호와 로또 번호 비교.', () => {
-    expect(() =>
-      LottoResult.calculateNumbers(lottoNumbers, winNumber, bonusNumber)
-    ).toBe(expectedResult);
+    const testResult = LottoResult.calculateNumbers(
+      lottoNumbers,
+      winNumber,
+      bonusNumber
+    );
+    expect(testResult).toEqual(expectedResult);
   });
 
   test('수익률 계산', () => {
-    expect(() =>
-      LottoResult.calculateProfit(purchaseAmount, expectedResult)
-    ).toBe(expectedProfit);
+    const testResult = LottoResult.calculateProfit(
+      purchaseAmount,
+      expectedResult
+    );
+    expect(testResult).toBe(expectedProfit);
   });
 });

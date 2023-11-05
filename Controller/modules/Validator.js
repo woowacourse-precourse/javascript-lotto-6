@@ -19,20 +19,20 @@ const Validator = {
     return true;
   },
 
-  checkWinNumberIsValid(winNumber) {
-    if (winNumber.length !== 6) throw new Error('[ERROR]');
+  checkLottoNumberIsValid(lottoNumber) {
+    if (lottoNumber.length !== 6) throw new Error('[ERROR]');
 
-    const winNumberIsNumber = winNumber.filter(
+    const lottoNumberIsNumber = lottoNumber.filter(
       (number) => !checkIsNumber(number)
     );
 
-    if (winNumberIsNumber.length !== 0) throw new Error('[ERROR]');
+    if (lottoNumberIsNumber.length !== 0) throw new Error('[ERROR]');
 
-    const winNumberIncludedZero = checkIncludedZero(winNumber);
-    if (winNumberIncludedZero) throw new Error('[ERROR]');
+    const lottoNumbersIncludedZero = checkIncludedZero(lottoNumber);
+    if (lottoNumbersIncludedZero) throw new Error('[ERROR]');
 
-    const winNumberIsDuplicated = checkIsDuplicated(winNumber);
-    if (winNumberIsDuplicated) throw new Error('[ERROR]');
+    const lottoNumberIsDuplicated = checkIsDuplicated(lottoNumber);
+    if (lottoNumberIsDuplicated) throw new Error('[ERROR]');
 
     return true;
   },
