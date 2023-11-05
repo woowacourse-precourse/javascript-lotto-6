@@ -13,7 +13,7 @@ const Input = {
     const number = await Console.readLineAsync(
       '보너스 번호를 입력해 주세요.\n'
     );
-    return number;
+    return Number(number);
   },
 };
 
