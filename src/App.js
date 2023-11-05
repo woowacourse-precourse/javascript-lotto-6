@@ -30,10 +30,18 @@ class App {
     return generatedLottos;
   }
 
+  printPurchasedLottos(lottos) {
+    Console.print(`${lottos.length}${CONSOLE_MESSAGE.PROMPT_PURCHASED_AMOUNT}`);
+    for (let lotto of lottos) {
+      Console.print(lotto);
+    }
+  }
+
   async play() {
     const userPriceInput = await this.getUserPrice();
     const lottoAmount = Price.calculateLottoAmount(userPriceInput);
     const lottos = this.generateLottos(lottoAmount);
+    this.printPurchasedLottos(lottos);
   }
 }
 

@@ -7,6 +7,7 @@ export const ERROR_MESSAGE = {
 
 export const CONSOLE_MESSAGE = {
   PROMPT_USER_PRICE: `로또 구입 금액을 1,000원 단위로 입력해 주세요.\n`,
+  PROMPT_PURCHASED_AMOUNT: `개를 구매했습니다.`,
 };
 
 export const LOTTO_PRICE_UNIT = 1000;
