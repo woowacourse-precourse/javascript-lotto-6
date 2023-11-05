@@ -14,4 +14,12 @@ const NUMBER = {
   ONE: '1',
 };
 
-export { REWARD, NUMBER };
+const totalReward = [
+  `${NUMBER.THREE}개 일치 (${REWARD.FIFTH.toLocaleString()}원) - `,
+  `${NUMBER.FOUR}개 일치 (${REWARD.FOURTH.toLocaleString()}원) - `,
+  `${NUMBER.FIVE}개 일치 (${REWARD.THIRD.toLocaleString()}원) - `,
+  `${NUMBER.FIVE}개 일치, 보너스 볼 일치 (${REWARD.SECOND.toLocaleString()}원) - `,
+  `${NUMBER.SIX}개 일치 (${REWARD.FIRST.toLocaleString()}원) - `,
+];
+
+export { REWARD, NUMBER, totalReward };
