@@ -6,6 +6,7 @@ const CONFIG = Object.freeze({
   LOTTO_LENGTH: 6,
   minLottoWinningNumber: 3,
   bonusNumberMatch: 5,
+  bonusMatchKey: 'bonusMatch',
 });
 
 export default CONFIG;
