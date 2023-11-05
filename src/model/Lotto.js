@@ -4,7 +4,7 @@ import {
   validateNumber,
   validateRange,
   validateUnique,
-} from '../utils/validateFn';
+} from '../utils/validateFn.js';
 
 class Lotto {
   #numbers;
@@ -26,9 +26,9 @@ class Lotto {
 
   #validate(numbers) {
     numbers.forEach((element) => {
-      validateNumber(element);
-      validateRange(element);
+      validateNumber(element.toString());
     });
+    validateRange(numbers);
     validateLength(numbers);
     validateUnique(numbers);
     return;
