@@ -5,4 +5,8 @@ export default class InputView {
   static async readPurchaseAmount() {
     return await Console.readLineAsync(INPUT_MESSAGE.purchaseAmount);
   }
+
+  static async readWinningNumbers() {
+    return await Console.readLineAsync(INPUT_MESSAGE.winningNumbers);
+  }
 }

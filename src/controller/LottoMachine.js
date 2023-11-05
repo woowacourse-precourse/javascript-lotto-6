@@ -7,6 +7,8 @@ import OutputView from '../view/OutputView.js';
 export default class LottoMachine {
   #player;
 
+  #winningNumbers;
+
   #LOTTO_RULES;
 
   #INPUT_UNIT;
@@ -24,6 +26,7 @@ export default class LottoMachine {
   async run() {
     await this.#makeLottos();
     OutputView.printLottoTickets(this.#player.getLottoTickets());
+    this.#winningNumbers = await this.#getWinningNumbers();
   }
 
   #makeOneLotto() {
@@ -60,4 +63,11 @@ export default class LottoMachine {
     const sortLottoNumbers = lottoNumbers.sort((number1, number2) => number1 - number2);
     return sortLottoNumbers;
   }
+
+  async #getWinningNumbers() {
+    const winningNumbersInput = await InputView.readWinningNumbers();
+    return new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
+  }
 }
+
+await new LottoMachine().run();
