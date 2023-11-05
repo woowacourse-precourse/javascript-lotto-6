@@ -20,13 +20,12 @@ const {
 } = CONSTANTS;
 
 class LottoOutputView {
-  purchasedLotto(lottoArray) {
-    Print.lineBreak();
+  printPurchasedLotto(lottoArray) {
     Console.print(`${lottoArray.length}${PURCHASED_LOTTO_FORMAT}`);
     lottoArray.forEach(Print.lottoNumbers);
   }
 
-  lottoNumbers(lotto) {
+  printLottoNumbers(lotto) {
     Console.print(
       `${LOTTO_FRONT_COVER}${lotto
         .getNumbers()
@@ -34,11 +33,11 @@ class LottoOutputView {
     );
   }
 
-  errorMessage(error) {
+  printErrorMessage(error) {
     Console.print(error.message);
   }
 
-  lottoResult(resultArray) {
+  printLottoResult(resultArray) {
     Console.print(LOTTO_RESULT_HEADER);
     Console.print(`${DASH}${DASH}${DASH}`);
     this.#fifthPlaceResult(resultArray);
@@ -48,14 +47,14 @@ class LottoOutputView {
     this.#firstPlaceResult(resultArray);
   }
 
-  lottoReturnRatio(returnRatio) {
+  printLottoReturnRatio(returnRatio) {
     Console.print(
       `${RETURN_RATIO_HEADER}${returnRatio.toFixed(1)}${RETURN_RATIO_FOOTER}`
     );
   }
 
   
-  lineBreak() {
+  printLineBreak() {
     Console.print('');
   }
 
