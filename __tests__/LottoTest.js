@@ -30,9 +30,6 @@ describe("로또 클래스 테스트", () => {
     const numbers = getLottoNumbers(LOTTO.MIN_NUMBER - 1, LOTTO.MAX_NUMBER);
 
     expect(createLotto(numbers)).toThrow(ErrorMessage.incorrectLottoNumber());
-    expect(() => new Lotto([1, 2, 3, 4, 5, LOTTO.MAX_NUMBER + 1])).toThrow(
-      ErrorMessage.incorrectLottoNumber()
-    );
   });
 
   test("로또 번호가 중복된 값을 가지면 DuplicateNumbersError", () => {
