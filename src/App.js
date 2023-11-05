@@ -8,16 +8,17 @@ class App {
       try{
         buyCost = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
         if(!Number.isFinite(Number(buyCost))) {
-          throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+          MissionUtils.Console.print("[ERROR] 숫자가 잘못된 형식입니다.");
         }
         if(Number(buyCost) % 1000 !== 0){
-          throw new Error("[ERROR] 구입급액은 1,000원 단위로 나누어 떨어져야 합니다.");
+          MissionUtils.Console.print("[ERROR] 구입급액은 1,000원 단위로 나누어 떨어져야 합니다.");
         }
         break;
       } catch(error){
         
       }
     }
+    
     const buyLotto = Number(buyCost) / 1000;
     MissionUtils.Console.print(buyLotto.toString() + '개를 구매했습니다.');
     const youBuy = [];
@@ -51,7 +52,9 @@ class App {
     MissionUtils.Console.print("6개 일치 (2,000,000,000원) - " + winList[4].toString() + "개");
     const rateOfReturn = (5000 * winList[0] + 50000 * winList[1] + 1500000 * winList[2] + 30000000 * winList[3] + 2000000000 * winList[4]) / Number(buyCost);
     MissionUtils.Console.print("총 수익률은 " + Number(rateOfReturn * 100).toFixed(1)  + "%입니다.");
+    
   }
+  
 }
 
 export default App;
