@@ -35,6 +35,13 @@ class LottoController {
     }
   }
 
+  showLottos() {
+    this.#lottos.forEach(lotto => {
+      const numbers = lotto.getNumbers();
+      OutputView.printIssuedLottoNumbers(numbers);
+    });
+  }
+
   issueLotto() {
     const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     const lotto = new Lotto(lottoNumbers);

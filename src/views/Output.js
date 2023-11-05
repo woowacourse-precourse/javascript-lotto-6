@@ -8,6 +8,10 @@ class OutputView {
   static printPurchaseMessage(lottoCount) {
     Console.print(`\n${lottoCount}개를 구매했습니다.`);
   }
+
+  static printIssuedLottoNumbers(numbers) {
+    Console.print(numbers);
+  }
 }
 
 export default OutputView;
