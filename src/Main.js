@@ -9,7 +9,7 @@ class Main {
   start = async () => {
     const numberOfLotto = await this.lottoStroreUI.printPurchasAmount();
     const lottoMachine = new LottoMachine(numberOfLotto);
-    await lottoMachine.createLottoNumber();
+    const lottoList = await lottoMachine.createLottoNumber();
   };
 }
 

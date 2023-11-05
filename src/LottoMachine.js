@@ -17,6 +17,7 @@ class LottoMachine {
     }
 
     this.lottomachineUI.printLottoList(this.lottoList);
+    return this.lottoList;
   };
 }
 export { LottoMachine };
