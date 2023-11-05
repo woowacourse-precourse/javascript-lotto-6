@@ -1,40 +1,51 @@
 import LOTTO from '../constant/Lotto.js';
-import calcMatchCount from '../utils/calcMatchCount.js';
 
 class LottosMatcher {
-  #matchResult;
+  #prizeCount;
 
-  matchResults(lottos, bonus, selectedLotto) {
-    this.#matchResult = new Array(LOTTO.prizeCount).fill(0);
+  calcPrizeCount(lottos, winningLotto, bonusNumber) {
+    this.#prizeCount = new Array(LOTTO.prizeCount).fill(0);
 
     lottos.forEach((lotto) => {
-      const [matchCount, isBonus] = this.#singleMatch(
-        lotto,
-        bonus,
-        selectedLotto,
-      );
+      const matchResult = this.#matchResult(lotto, winningLotto, bonusNumber);
 
-      this.#updateMatchResult(matchCount, isBonus);
+      this.#updatePrizeCount(matchResult);
     });
 
-    return this.#matchResult;
+    return this.#prizeCount;
   }
 
-  #singleMatch(lotto, bonus, selectedLotto) {
-    // console.log(this.#matchResult); // 걍 넣어놓음
-    const matchCount = calcMatchCount(lotto, selectedLotto);
-    const isBonus = lotto.includes(bonus);
+  #matchResult(lotto, winningLotto, bonusNumber) {
+    const matchCount = lotto.getMatchCount(winningLotto);
+    const isBonus = lotto.checkBonusMatch(bonusNumber);
 
     return [matchCount, isBonus];
   }
 
-  #updateMatchResult(matchCount, isBonus) {
-    if (matchCount === LOTTO.count)
-      this.#matchResult[this.#matchResult.length - 1] += 1;
-    else if (matchCount === LOTTO.count - 1 && isBonus)
-      this.#matchResult[this.#matchResult.length - 2] += 1;
-    else if (matchCount < LOTTO.count && matchCount >= LOTTO.minMatchCount)
-      this.#matchResult[matchCount - LOTTO.minMatchCount] += 1;
+  #updatePrizeCount(matchResult) {
+    this.#prizeCount[this.#getPrizeIndex(matchResult)] += 1;
+  }
+
+  #getPrizeIndex([matchCount, isBonus]) {
+    if (this.#isWin(matchCount)) return this.#prizeCount.length - 1;
+    if (this.#isBonusMatch(matchCount, isBonus))
+      return this.#prizeCount.length - 2;
+    if (this.#isRemainedValidMatch(matchCount))
+      return matchCount - LOTTO.minMatchCount;
+
+    return -1; // TODO 오류 처리필요
+  }
+
+  #isWin(matchCount) {
+    return matchCount === LOTTO.count;
+  }
+
+  #isBonusMatch(matchCount, isBonus) {
+    return matchCount === LOTTO.count - 1 && isBonus;
+  }
+
+  #isRemainedValidMatch(matchCount) {
+    return matchCount < LOTTO.count && matchCount >= LOTTO.minMatchCount;
   }
 }
 
