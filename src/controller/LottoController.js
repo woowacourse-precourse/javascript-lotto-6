@@ -107,6 +107,12 @@ class LottoController {
     matches.forEach(({ count, prize }) => (totalRevenueMoney += count * prize));
     this.#totalRevenueRate = (totalRevenueMoney / this.#money) * 100;
   }
+
+  showLottoResult() {
+    OutputView.printStatisticsHeader();
+    OutputView.printStatistics(this.#statistics);
+    OutputView.printTotalRevenueRate(this.#totalRevenueRate);
+  }
 }
 
 export default LottoController;
