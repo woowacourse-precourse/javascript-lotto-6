@@ -18,6 +18,15 @@ class App {
         
       }
     }
+    const buyLotto = Number(buyCost) / 1000;
+    MissionUtils.Console.print(buyLotto.toString() + '개를 구매했습니다.');
+    const youBuy = [];
+    for (let i = 0; i < buyLotto ; i++){
+      let randNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      randNum.sort((a,b) => a - b);
+      youBuy.push(randNum);
+      MissionUtils.Console.print(JSON.stringify(youBuy[i]).replace(/,/g, ', '));
+    }
   }
 }
 
