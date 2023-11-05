@@ -27,6 +27,11 @@ class LottoStore {
       (randomNumbers) => new Lotto(randomNumbers)
     );
   }
+
+  getLottoNumbers() {
+    const lottoNumbers = this.#lottos.map((lotto) => lotto.getNumbers());
+    return lottoNumbers;
+  }
 }
 
 export default LottoStore;
