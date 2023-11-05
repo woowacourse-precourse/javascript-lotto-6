@@ -5,9 +5,13 @@ import Lotto from "./Lotto.js";
 
 class LottoGame {
   #lottos;
+  #winnings;
+  #bonus;
 
   constructor() {
     this.#lottos = [];
+    this.#winnings = [];
+    this.#bonus = 0;
   }
 
   async start() {
@@ -31,14 +35,21 @@ class LottoGame {
     Validation.isValidLen(winningArr);
     winningArr.forEach(el => Validation.isNumber(el, '[ERROR] 당첨 번호는 \,으로 구분되는 6개의 숫자 형식입니다.'));
     winningArr.forEach(el => Validation.isValidLottoNum(el));
-    const winningNumArr = winningArr.map(el => {return Number(el)});
+    this.#winnings = winningArr.map(el => {return Number(el)});
 
     const bonusStr = await IO.receiveUserInput('\n보너스 번호를 입력해 주세요.\n');
     Validation.isNumber(bonusStr, '[ERROR] 보너스 번호는 하나의 숫자 형식입니다.');
     
-    const bonusNum = Number(bonusStr);
-    Validation.isValidLottoNum(bonusNum);
-    Validation.isBonusInWinning(winningNumArr, bonusNum);
+    this.#bonus = Number(bonusStr);
+    Validation.isValidLottoNum(this.#bonus);
+    Validation.isBonusInWinning(this.#winnings, this.#bonus);
+
+    // IO.printMsg('\n당첨 통계\n---');
+    // IO.printMsg('3개 일치 (5,000원) - 0개');
+    // IO.printMsg('4개 일치 (50,000원) - 0개');
+    // IO.printMsg('5개 일치 (1,500,000원) - 0개');
+    // IO.printMsg('5개 일치, 보너스 볼 일치 (30,000,000원) - 0개');
+    // IO.printMsg('6개 일치 (2,000,000,000원) - 0개');
   }
 
   calculateLottomNum(amount) {
