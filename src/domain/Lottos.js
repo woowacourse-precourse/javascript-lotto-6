@@ -5,10 +5,9 @@ class Lottos {
   #lottos;
 
   constructor(count) {
-    this.#lottos = new Array(count);
-    for (let i = 0; i < count; i += 1) {
-      this.#lottos[i] = new Lotto(LottoNumberGenerator.generate());
-    }
+    this.#lottos = new Array(count)
+      .fill(0)
+      .map(() => new Lotto(LottoNumberGenerator.generate()).getLotto());
   }
 
   getLottos() {

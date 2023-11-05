@@ -11,6 +11,10 @@ class Lotto {
   #validate(numbers) {
     Validator.lottoNumber(numbers);
   }
+
+  getLotto() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
