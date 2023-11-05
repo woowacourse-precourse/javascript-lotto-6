@@ -9,7 +9,7 @@ export async function createPurchaseAmount() {
 
 export async function createLottoNumber() {
   let lottoNumber = await inputLottoNumber();
-  lottoNumber = lottoNumber.split(',');
+  lottoNumber = lottoNumber.split(',').map((number) => Number(number));
   const lotto = new Lotto(lottoNumber);
   return lotto;
 }
