@@ -42,6 +42,10 @@ class LottoController {
       LOTTO.NUMBER_COUNT
     );
   }
+
+  get lottoArray() {
+    return this.#lottoArray;
+  }
 }
 
 export default LottoController;
