@@ -1,5 +1,6 @@
 import Lotto from "../src/domain/Lotto.js";
 import MyLottos from "../src/domain/MyLottos.js";
+import ScoreMyLottos from "../src/domain/ScoreMyLottos.js";
 
 describe("로또 클래스 테스트", () => {
     test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -27,10 +28,7 @@ describe("로또 클래스 테스트", () => {
         const ANSWER = [1, 2, 3, 4, 5, 6];
         const BONUS = 10;
         const ANSWER_ARR = [1, 1, 0, 0, 0];
-        const MY_ANSWER = new MyLottos(COIN);
-        MY_ANSWER.setAnswer(ANSWER);
-        MY_ANSWER.setBonus(BONUS);
-        MY_ANSWER.checkLotto(MY_LOTTOS);
+        const MY_ANSWER = new ScoreMyLottos(MY_LOTTOS,ANSWER,BONUS);
         expect(MY_ANSWER.getResult()).toStrictEqual(ANSWER_ARR);
     });
 
@@ -45,14 +43,10 @@ describe("로또 클래스 테스트", () => {
             [2, 13, 22, 32, 38, 45],
             [1, 3, 5, 14, 22, 45]
         ];
-        const COIN = 8;
         const ANSWER = [1, 2, 3, 4, 5, 6];
         const BONUS = 7;
-        const MY_ANSWER = new MyLottos(COIN);
+        const MY_ANSWER = new ScoreMyLottos(MY_LOTTOS,ANSWER,BONUS);
         const EARNING = "62.5";
-        MY_ANSWER.setAnswer(ANSWER);
-        MY_ANSWER.setBonus(BONUS);
-        MY_ANSWER.checkLotto(MY_LOTTOS);
 
         expect(MY_ANSWER.getEarning()).toStrictEqual(EARNING);
     });
