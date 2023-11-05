@@ -29,6 +29,9 @@ class App {
     }
     
     numbers.printResult(results);
+
+    const profitRate = this.getProfitRate(amount, results);
+    console.log(`수익률: ${profitRate}`);
   }
 
   async getAmount() {
@@ -84,6 +87,14 @@ class App {
     if (lottoNumbers.isBonusNumberDuplicate(parsedBonusNumber)) {
       throw new Error('[ERROR] 중복된 값이 있습니다.');
     }
+  }
+
+  getProfitRate(amount, results) {
+    const totalPrize = results.three * 5000 + results.four * 50000 + results.five * 1500000 + results.bonus * 30000000 + results.all * 2000000000;
+    const profitRate = (totalPrize / amount) * 100;
+    const roundedProfitRate = profitRate.toFixed(2).replace(/\.?0+$/, '');
+  
+    return `${roundedProfitRate}%`;
   }
 }
 
