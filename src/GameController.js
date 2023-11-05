@@ -40,6 +40,7 @@ class GameController {
   }
 
   printLottoInfo() {
+    OutputView.printLineBreak();
     OutputView.printNumberOfLottos(this.#lottoMachine.numberOfLottos);
     OutputView.printLottos(this.#lottoMachine.lottos);
   }
