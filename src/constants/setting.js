@@ -6,4 +6,6 @@ export const LOTTO = Object.freeze({
   count: 6,
   price: 1000,
   noRemainder: 0,
+  match3: 3,
+  match5: 5,
 });

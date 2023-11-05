@@ -74,14 +74,14 @@ class LottoController {
   }
 
   updateLottoStatistics(matchResult) {
-    if (matchResult.count < 3 && !matchResult.bonus) return;
+    if (matchResult.count < LOTTO.match3 && !matchResult.bonus) return;
 
     const key = this.determineStatisticsKey(matchResult);
     this.updateStatistics(key);
   }
 
   determineStatisticsKey({ count, bonus }) {
-    if (count === 5 && bonus) {
+    if (count === LOTTO.match5 && bonus) {
       return 'match5Bonus';
     }
 
