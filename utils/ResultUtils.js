@@ -1,15 +1,15 @@
 const ResultUtils = {
   compareNumberArr(baseArr, targetArr) {
-    let correctCount = 0;
+    let matchCount = 0;
     targetArr.forEach((number) => {
-      if (baseArr.includes(number)) correctCount += 1;
+      if (baseArr.includes(number)) matchCount += 1;
     });
 
-    return correctCount;
+    return matchCount;
   },
 
-  addCountOnResultBoard(count, numbers, bonus) {
-    switch (count) {
+  addCountOnResultBoard(matchCount, numbers, bonus) {
+    switch (matchCount) {
       case 3:
         return 'three';
       case 4:
@@ -22,18 +22,18 @@ const ResultUtils = {
     }
   },
 
-  addProfit(correctNumber) {
-    switch (correctNumber[0]) {
+  addProfit(matchNumber) {
+    switch (matchNumber[0]) {
       case 'three':
-        return correctNumber[1] * 5000;
+        return matchNumber[1] * 5000;
       case 'four':
-        return correctNumber[1] * 50000;
+        return matchNumber[1] * 50000;
       case 'five':
-        return correctNumber[1] * 1500000;
+        return matchNumber[1] * 1500000;
       case 'fiveBonus':
-        return correctNumber[1] * 30000000;
+        return matchNumber[1] * 30000000;
       case 'six':
-        return correctNumber[1] * 2000000000;
+        return matchNumber[1] * 2000000000;
     }
   },
 };

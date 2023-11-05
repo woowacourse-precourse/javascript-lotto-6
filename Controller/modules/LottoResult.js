@@ -5,13 +5,13 @@ const { compareNumberArr, addCountOnResultBoard, addProfit } = ResultUtils;
 const LottoResult = {
   calculateResultBoard(lottoNumbers, winNumber, bonusNumber) {
     const resultBoard = { three: 0, four: 0, five: 0, fiveBonus: 0, six: 0 };
-    let correctCount = 0;
-    let correctNumber = '';
+    let matchCount = 0;
+    let matchNumber = '';
 
     lottoNumbers.forEach((numbers) => {
-      correctCount = compareNumberArr(numbers, winNumber);
-      correctNumber = addCountOnResultBoard(correctCount, numbers, bonusNumber);
-      resultBoard[correctNumber] += 1;
+      matchCount = compareNumberArr(numbers, winNumber);
+      matchNumber = addCountOnResultBoard(matchCount, numbers, bonusNumber);
+      resultBoard[matchNumber] += 1;
     });
 
     return resultBoard;
@@ -21,8 +21,8 @@ const LottoResult = {
     let totalProfit = 0;
     let profitPercent = 0;
 
-    Object.entries(resultBoard).forEach((correctNumber) => {
-      totalProfit += addProfit(correctNumber);
+    Object.entries(resultBoard).forEach((matchNumber) => {
+      totalProfit += addProfit(matchNumber);
     });
 
     profitPercent = (totalProfit / (purchaseAmount * 1000)) * 100;
