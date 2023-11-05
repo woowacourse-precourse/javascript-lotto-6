@@ -1,15 +1,49 @@
+import {
+  ERROR_LOTTO_RANGE,
+  ERROR_LOTTO_REPEAT,
+  ERROR_LOTTO_SIX_NUMBERS,
+  ERROR_LOTTO_TYPE,
+} from './Constant';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.#lengthValidate(numbers);
+    this.#repeatValidate(numbers);
+    this.#rangeValidate(numbers);
+    this.#typeValidate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
+  #lengthValidate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR_LOTTO_SIX_NUMBERS);
     }
+  }
+
+  #repeatValidate(numbers) {
+    const repeatNumbers = [...new Set(numbers)];
+    if (repeatNumbers.length !== 6) {
+      throw new Error(ERROR_LOTTO_REPEAT);
+    }
+  }
+
+  #rangeValidate(numbers) {
+    numbers.map(number => {
+      if (number < 1 || number > 45) {
+        throw new Error(ERROR_LOTTO_RANGE);
+      }
+    });
+  }
+
+  #typeValidate(numbers) {
+    numbers.map(number => {
+      const numberType = Number(number);
+      if (isNaN(numberType)) {
+        throw new Error(ERROR_LOTTO_TYPE);
+      }
+    });
   }
 
   // TODO: 추가 기능 구현

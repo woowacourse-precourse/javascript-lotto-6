@@ -43,6 +43,17 @@ const InputView = {
       throw new Error(ERROR_PURCHASE_AMOUNT_PRICE);
     }
   },
+
+  async readWinningNumbers() {
+    while (true) {
+      try {
+        const answer = await Console.readLineAsync(PLZ_WINNING_NUMBERS);
+        return answer.split(',');
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  },
 };
 
 export default InputView;

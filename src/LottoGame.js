@@ -6,10 +6,7 @@ import OutputView from './OutputView';
 class LottoGame {
   #purchaseAmount;
   #lottoList;
-
-  constructor() {
-    this.#lottoList = [];
-  }
+  #winningLotto;
 
   async gameStart() {
     this.#lottoList = [];
@@ -23,6 +20,7 @@ class LottoGame {
     this.#lottoList.map(lotto => {
       OutputView.printLotto(lotto.numbers);
     });
+    this.#winningLotto = await InputView.readWinningNumbers();
   }
 
   getRandomNumbers() {
