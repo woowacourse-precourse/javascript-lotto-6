@@ -2,6 +2,8 @@ import { ERROR } from './Message.js';
 
 class Lotto {
   #LENGTH = 6;
+  #START = 1;
+  #END = 45;
 
   #numbers;
 
@@ -21,7 +23,9 @@ class Lotto {
     if (numbers.length !== new Set(numbers).size) {
       throw new Error(ERROR.notUnique);
     }
-    throw new Error(ERROR.notOneToFortyFive);
+    if (numbers.some((number) => number < this.#START || number > this.#END)) {
+      throw new Error(ERROR.notOneToFortyFive);
+    }
   }
 
   // TODO: 추가 기능 구현
