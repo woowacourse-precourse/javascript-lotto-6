@@ -1,0 +1,3 @@
+class LottoOutputView {}
+
+export default LottoOutputView;
