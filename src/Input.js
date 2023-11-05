@@ -37,4 +37,20 @@ export class Input {
       throw new Error(ERROR_MESSAGES.ONLY_THOUSANDWON_UNIT);
     }
   }
+
+  validateWinningNumbers(numbers) {
+    const winningNumbers = numbers.split(",").map(Number);
+
+    if (new Set(winningNumbers).size !== 6) {
+      throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+    }
+
+    winningNumbers.forEach((num) => {
+      if (num <= 0 || num > 45) {
+        throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+      } else if (Number.isNaN(num)) {
+        throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+      }
+    });
+  }
 }
