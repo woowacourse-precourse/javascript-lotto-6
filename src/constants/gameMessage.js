@@ -16,4 +16,5 @@ const GAME_RESULT = Object.freeze({
   money_return: "총 수익률은 ",
   text_end: "%입니다.",
 });
+
 export { GAME_MESSAGE, GAME_RESULT };
