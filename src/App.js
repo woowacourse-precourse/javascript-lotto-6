@@ -35,6 +35,20 @@ function lottoNumbersSort(lottoNum){  // 두 수의 차를 이용해 오름차�
   return lottoNum;
 }
 
+function isBonusNumValid(winningNumbers, bonusNumber) {  // 보너스 숫자가 유효한지, 겹치지 않는지 검증
+  if(bonusNumber % 1 !== 0) {
+    throw new Error("[ERROR] 보너스 번호는 정수여야 합니다.");
+  }
+  if(bonusNumber < 1 || bonusNumber > 45) {
+    throw new Error("[ERROR] 보너스 번호는 1~45 사이의 숫자여야 합니다.");
+  }
+  for(var i = 0; i < winningNumbers.getNumbers().length; i++){
+    if(winningNumbers.getNumbers()[i] === bonusNumber){
+      throw new Error("[ERROR] 보너스 번호는 로또 번호와 중복되지 않아야 합니다.");
+    }
+  }
+}
+
 class App {
   async play() {
 
@@ -49,6 +63,13 @@ class App {
       Console.print(lottoList[i].getNumbers());
     }
     
+    var winningNumbersList = [];
+    var winningNumbersStr = await getInput("\n당첨 번호를 입력해 주세요.\n");
+    winningNumbersList = winningNumbersStr.split(',');
+    var winningNumbers = new Lotto(winningNumbersList);
+    
+    var bonusNumber = await getInput("\n보너스 번호를 입력해 주세요.\n");
+    isBonusNumValid(winningNumbers, bonusNumber);
   }
 }
 
