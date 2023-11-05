@@ -47,7 +47,7 @@ class Lotto {
     return result;
   }
 
-  checkEqualNumber(randomNumberArray, equalNumber, userBonusNumber){
+  checkBonusNumber(randomNumberArray, equalNumber, userBonusNumber){
     if(equalNumber === 5){
       return this.compareBonusNumber(randomNumberArray, userBonusNumber);
     }
@@ -58,7 +58,7 @@ class Lotto {
     let bonusResult = 0;
     lottoRandomNumber.forEach(randomNumberArray => {
       const equalNumber = this.countEqualNumbers(randomNumberArray, userLottoNumber);
-      bonusResult = this.checkEqualNumber(randomNumberArray, equalNumber, userBonusNumber);
+      bonusResult = this.checkBonusNumber(randomNumberArray, equalNumber, userBonusNumber);
       lottoResult = this.getLottoResult(equalNumber, bonusResult);
     });
     return lottoResult;
