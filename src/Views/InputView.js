@@ -3,8 +3,7 @@ import MESSAGES from '../../utils/Messages.js';
 
 const InputView = {
   async readPurchaseAmount() {
-    const purchaseAmount = await Console.readLineAsync(MESSAGES.purchaseAmountQuery);
-    return purchaseAmount.replace(MESSAGES.comma, '');
+    return Number(await Console.readLineAsync(MESSAGES.purchaseAmountQuery));
   },
 };
 
