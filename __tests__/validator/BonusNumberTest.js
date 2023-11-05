@@ -38,4 +38,24 @@ describe('보너스 번호 테스트', () => {
       }).toThrow();
     });
   });
+
+  describe('보너스 번호 범위 테스트', () => {
+    test('보너스 번호가 올바른 범위안에 있는 경우 테스트', () => {
+      expect(() => {
+        bonusNumberValidator.checkBonusNumber('40');
+      }).not.toThrow();
+    });
+
+    test('보너스 번호가 범위밖인 0인 경우 테스트', () => {
+      expect(() => {
+        bonusNumberValidator.checkBonusNumber('0');
+      }).toThrow();
+    });
+
+    test('보너스 번호가 범위밖인 99인 경우 테스트', () => {
+      expect(() => {
+        bonusNumberValidator.checkBonusNumber('99');
+      }).toThrow();
+    });
+  });
 });
