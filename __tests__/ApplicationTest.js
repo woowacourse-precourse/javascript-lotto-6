@@ -103,7 +103,7 @@ describe("로또 테스트", () => {
 
     // when
     const app = new App();
-    const quantity = await app.getLottoQuantity();
+    const quantity = await app.getLottoQuantity(input);
 
     // then
     const expectedLottoCount = 3;
