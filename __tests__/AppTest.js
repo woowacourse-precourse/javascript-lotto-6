@@ -27,4 +27,15 @@ describe("app test", () => {
             app.lottoVendingMachine(input).map((el) => el.length)
         ).toEqual(result.map((el) => el.length));
     });
+
+    test.each([`[1,2,3,4,5,6,7]`, `[1,48,3,4,5,6]`,`[1,2,2,3,4,5]`])(
+        "로또 자판기 예외 처리 테스트",
+        async (value) => {
+            const app = new App();
+
+            await expect(() => app.isValidLotto(value)).toThrow(
+                "[ERROR] 로또가 잘못된 형식입니다."
+            );
+        }
+    );
 });
