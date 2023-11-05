@@ -65,4 +65,15 @@ export class WinningRecord {
       }
     }
   }
+
+  getRateOfReturn(tickets, statistics) {
+    let totalReward = 0;
+    for(let rank in statistics) {
+        if(statistics[rank] === 0) {
+            continue;
+        }
+        totalReward += WINNING_RANK[rank].reward * statistics[rank];
+    }
+    return (totalReward / (tickets.length * 1000)) * 100;
+  }
 }

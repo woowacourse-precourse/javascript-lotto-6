@@ -17,7 +17,7 @@ class App {
     const winningRecord = new WinningRecord(winningNumbers, bonusNumber);
     const winningStatistics = winningRecord.getWinningStatistics(tickets);
     OutputView.printWinningStatistics(winningStatistics);
-    //수익률 출력
+    OutputView.printRateOfReturn(winningRecord.getRateOfReturn(tickets, winningStatistics));
   }
 
   async purchaseLotto() {

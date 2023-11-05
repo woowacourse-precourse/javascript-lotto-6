@@ -46,6 +46,15 @@ const InputView = {
       "개"
     );
   },
+
+  printRateOfReturn(rateOfReturn) {
+    const output = rateOfReturn.toLocaleString('en', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    
+    MissionUtils.Console.print("총 수익률은 " + output + "%입니다.");
+  }
 };
 
 export default InputView;
