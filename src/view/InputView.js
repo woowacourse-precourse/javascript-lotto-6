@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../constants/message';
+import chageStringtoArray from '../util/chageStringtoArray.js';
+import { MESSAGE } from '../constants/message.js';
 
 class InputView {
   /**
@@ -8,25 +9,25 @@ class InputView {
    */
   static async writePurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync(MESSAGE.PURCHASING_MESSAGE);
-    return purchaseAmount;
+    return Number(purchaseAmount);
   }
 
   /**
    * 당첨 번호 6자리를 사용자에게 입력 받습니다.
-   * @returns {string} lottosNumbers
+   * @returns {number[]} lottosNumbers
    */
   static async writeWinningNumbers() {
     const lottosNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBERS);
-    return lottosNumbers;
+    return chageStringtoArray(lottosNumbers);
   }
 
   /**
    * 보너스 번호 1개를 사용자에게 입력 받습니다.
-   * @returns {string} bonusNnumber
+   * @returns {number} bonusNnumber
    */
   static async writeBonunsNumber() {
     const bonusNnumber = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
-    return bonusNnumber;
+    return Number(bonusNnumber);
   }
 }
 

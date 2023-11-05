@@ -13,10 +13,10 @@ const PURCHASE_AMOUNT_ERROR = Object.freeze({
   NUMBER: '구입 금액은 1000단위로 나누어 떨어져야 합니다.',
 });
 
-const ERROR_MESSAGE_OBJECT = Object.freeze({
+export const ERROR_MESSAGE_OBJECT = Object.freeze({
   SELECT_NUMBER_ERROR,
   BONUS_NUMBER_ERROR,
   PURCHASE_AMOUNT_ERROR,
 });
 
-export default ERROR_MESSAGE_OBJECT;
+export { SELECT_NUMBER_ERROR, BONUS_NUMBER_ERROR, PURCHASE_AMOUNT_ERROR };
