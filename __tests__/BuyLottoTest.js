@@ -1,7 +1,7 @@
 import User from "../src/User.js";
 import LottoManager from "../src/LottoManager.js";
 import { Console } from "@woowacourse/mission-utils";
-import { ERRORS } from "../src/libs/message";
+import { ERRORS } from "../src/libs/message.js";
 
 const mockQuestions = (inputs) => {
   Console.readLineAsync = jest.fn();

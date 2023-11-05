@@ -8,7 +8,7 @@ import {
 
 class User {
   constructor() {
-    this.money = 0;
+    this.money = null;
     this.lottoArr = [];
   }
 

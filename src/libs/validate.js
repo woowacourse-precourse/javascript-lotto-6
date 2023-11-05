@@ -18,16 +18,16 @@ function isDivisibleByThousand(input) {
   }
 }
 
-function isNumbersLengthSix(numbers) {
-  if (numbers.length !== 6) {
+function isArrLengthSix(arr) {
+  if (arr.length !== 6) {
     throw new Error(ERRORS.INVALID_NUMBERS_LENGTH);
   }
 }
 
-function hasDuplicate(numbers) {
-  const numberSet = new Set(numbers);
-  if (numbers.length !== numberSet.size) {
-    throw new Error(ERRORS.CONTAIN_DUPLICATE_NUMBER);
+function hasDuplicate(arr) {
+  const arrSet = new Set(arr);
+  if (arr.length !== arrSet.size) {
+    throw new Error(ERRORS.CONTAIN_DUPLICATE);
   }
 }
 
@@ -41,7 +41,7 @@ export {
   isInputEmpty,
   isInputNumeric,
   isDivisibleByThousand,
-  isNumbersLengthSix,
+  isArrLengthSix,
   hasDuplicate,
   isNumberInRange,
 };

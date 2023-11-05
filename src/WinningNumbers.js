@@ -1,28 +1,35 @@
-import { hasDuplicate, isNumbersLengthSix } from "./libs/validate";
+import {
+  isArrLengthSix,
+  hasDuplicate,
+  isNumberInRange,
+  isInputEmpty,
+  isInputNumeric,
+} from "./libs/validate.js";
 
 class WinningNumbers {
   #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+  constructor(input) {
+    const inputArr = input.split(",").map((element) => element.trim());
+    this.#validate(inputArr);
+    this.#numbers = inputArr.map(Number);
   }
 
-  #validate(numbers) {
-    this.#validateArr(numbers);
-    this.#validateElement(numbers);
+  #validate(arr) {
+    this.#validateArr(arr);
+    this.#validateElement(arr);
   }
 
-  #validateArr(numbers) {
-    isNumbersLengthSix(numbers);
-    hasDuplicate(numbers);
+  #validateArr(arr) {
+    isArrLengthSix(arr);
+    hasDuplicate(arr);
   }
 
-  #validateElement(numbers) {
-    numbers.forEach((number) => {
-      isInputEmpty(number);
-      isInputNumeric(number);
-      isNumberInRange(number);
+  #validateElement(arr) {
+    arr.forEach((element) => {
+      isInputEmpty(element);
+      isInputNumeric(element);
+      isNumberInRange(element);
     });
   }
 }

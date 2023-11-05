@@ -1,8 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
 import {
-  isNumbersLengthSix,
+  isArrLengthSix,
   hasDuplicate,
   isNumberInRange,
+  isInputEmpty,
+  isInputNumeric,
 } from "./libs/validate.js";
 
 class Lotto {
@@ -19,7 +21,7 @@ class Lotto {
   }
 
   #validateArr(numbers) {
-    isNumbersLengthSix(numbers);
+    isArrLengthSix(numbers);
     hasDuplicate(numbers);
   }
 

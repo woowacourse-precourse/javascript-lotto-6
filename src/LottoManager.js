@@ -34,8 +34,12 @@ class LottoManager {
 
   async setWinningNumber() {
     const input = await Console.readLineAsync(MESSAGES.INPUT_WINNING_NUMBERS);
-    const numbers = input.split(",").map(Number);
-    this.winningNumber = new WinningNumbers(numbers);
+    this.winningNumber = new WinningNumbers(input);
+  }
+
+  async setWinningNumbersAndBonus() {
+    await this.setWinningNumber();
+    // await this.setBonnusNumber();
   }
 }
 
