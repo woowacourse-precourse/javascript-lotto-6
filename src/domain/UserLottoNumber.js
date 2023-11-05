@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class UserLottoNumber {
   constructor() {
     this.baseNumbers = [];
@@ -12,12 +14,29 @@ class UserLottoNumber {
 
   async userBonusNumber() {
     const input = await Console.readLineAsync();
-    this.bonusNumber = parseInt(input.trim(), 10);
+    const number = parseInt(input.trim(), 10);
+
+    this.#bonusValidate(number);
+    this.bonusNumber = number;
     return this.bonusNumber;
   }
 
   ascendingOrder() {
     this.baseNumbers.sort((a, b) => a - b);
+  }
+
+  #bonusValidate(number) {
+    if (isNaN(number)) {
+      throw new Error(ERROR.ONLY_NUMBER);
+    }
+
+    if (number < 1 || number > 45) {
+      throw new Error(ERROR.NUMBER_RANGE);
+    }
+
+    if (this.baseNumbers.includes(number)) {
+      throw new Error(ERROR.NO_DUPLICATES);
+    }
   }
 }
 
