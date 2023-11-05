@@ -48,6 +48,33 @@ class Validator {
 
     return undefined
   }
+
+  isBonusNumberValid(winningNumbers, bonusNumber) {
+    const WINNINGS = winningNumbers.split(',').map(Number)
+    const NUMERIC_NUMBER = Number(bonusNumber)
+    
+    if (!bonusNumber) {
+      return COMMON_ERROR_MESSAGE.emptyString
+    }
+
+    if (isNaN(bonusNumber)) {
+      return COMMON_ERROR_MESSAGE.onlyNumber
+    }
+
+    if (NUMERIC_NUMBER === 0) {
+      return BONUS_NUMBER_ERROR_MESSAGE.underZero
+    }
+
+    if (NUMERIC_NUMBER < 1 || NUMERIC_NUMBER > 45) {
+      return COMMON_ERROR_MESSAGE.wrongRange
+    }
+
+    if (WINNINGS.includes(NUMERIC_NUMBER)) {
+      return BONUS_NUMBER_ERROR_MESSAGE.duplicatedNumberWithWinningNumbers
+    }
+
+    return undefined
+  }
 }
 
 export default Validator;

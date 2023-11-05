@@ -59,7 +59,11 @@ class App {
 
   async requestBonusNumber() {
     const INPUT = await this.input.getValue(GUIDE_MESSAGE.insertBonusNumber);
-    new BonusNumber(String(INPUT), String(this.#winningNumbers))
+
+    this.bonus = new BonusNumber(String(INPUT), String(this.#winningNumbers))
+    this.#bonusNumber = this.bonus.returnValue();
+
+    this.output.printBonus(this.#bonusNumber)
   }
 }
 
