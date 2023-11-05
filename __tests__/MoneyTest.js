@@ -1,4 +1,4 @@
-import divideMoney from '../src/utils/devideMoney';
+import divideMoney from '../src/utils/countLottoTickets';
 import validateMoney from '../src/validation/validateMoney';
 import ERROR from '../src/constants/error';
 
