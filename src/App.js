@@ -25,6 +25,9 @@ class App {
     const winningNumbers = this.lottoResultChecker.convertToArr(
       this.lottoResultChecker.inputWinningLottoNum()
     );
+    const bonusNumber = this.lottoResultChecker.convertToNum(
+      this.lottoResultChecker.inputBonusNumber()
+    );
   }
 
   async inputPurchasePrice() {
