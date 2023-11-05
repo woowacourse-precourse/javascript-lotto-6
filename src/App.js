@@ -11,6 +11,7 @@ class App {
     this.#lottoGame.start();
     await this.#lottoGame.inputPurchaseAmount();
     this.#lottoGame.issueLottoTickets();
+    await this.#lottoGame.inputWinningNumbers();
   }
 }
 

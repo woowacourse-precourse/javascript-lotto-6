@@ -3,6 +3,8 @@ import LottoGameInput from '../view/LottoGameInput.js';
 import LottoGameOutput from '../view/LottoGameOutput.js';
 import GameUtils from '../utils/GameUtils.js';
 import LottoTickets from '../collection/LottoTickets.js';
+import WinningNumber from '../domain/WinningNumber.js';
+import LottoGameError from '../view/LottoGameError.js';
 
 class LottoGame {
   #purchaseAmount;
@@ -31,6 +33,16 @@ class LottoGame {
     LottoGameOutput.showAllIssuedLottoTickets(
       this.#lottoTickets.getLottoTickets(),
     );
+  }
+
+  async inputWinningNumbers() {
+    try {
+      const winningNumbers = await LottoGameInput.inputSixWinningNumbers();
+      const winningNumber = new WinningNumber(winningNumbers);
+    } catch (error) {
+      LottoGameError.printIncludeNaNError(error);
+      await this.inputWinningNumbers();
+    }
   }
 }
 

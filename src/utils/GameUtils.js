@@ -18,6 +18,11 @@ class GameUtils {
   static sortRandomNumberInAscendingOrder(randomNumbers) {
     randomNumbers.sort((a, b) => a - b);
   }
+
+  static seperateNumbersByComma(numbers) {
+    const numbersTypeString = numbers.split(',');
+    return numbersTypeString.map((string) => Number(string));
+  }
 }
 
 export default GameUtils;
