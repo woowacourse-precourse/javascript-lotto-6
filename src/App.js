@@ -2,9 +2,17 @@ import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
-  #cost = 0;
-  #winningNum = [];
-  #extraNum = 0;
+  #cost;
+  #winningNum;
+  #extraNum;
+  #lottos;
+
+  constructor() {
+    this.#cost = 0;
+    this.#winningNum = [];
+    this.#extraNum = 0;
+    this.#lottos = [];
+  }
 
   async inputCost() {
     const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -17,11 +25,18 @@ class App {
       throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
     }
   }
-
-  constructor() {}
+  lottoGenerater() {
+    for (let i = 0; i < this.#cost / 1000; i++) {
+      this.#lottos.push(this.makeLotto());
+    }
+  }
+  makeLotto() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
 
   async play() {
     await this.inputCost();
+    this.lottoGenerater();
   }
 }
 
