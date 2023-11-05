@@ -24,10 +24,12 @@ export const OUTPUT = {
   percent_is: "%입니다.",
 };
 export const ERROR = {
-  lotto_count_error: "[ERROR] 로또 번호는 6개여야 합니다.",
-  lotto_num_error: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
-  same_num_error: "[ERROR] 로또 번호가 중복되었습니다.",
-  purchase_amount_error: "[ERROR] 로또 구입 금액은 1000원 단위 입니다.",
+  lotto_num_error:
+    "[ERROR] 로또 번호는 중복되지 않은 1-45 사이의 정수 6개여야 합니다.",
+  bonus_num_error:
+    "[ERROR] 보너스 번호는 로또 번호와 중복되지 않은 1-45 사이의 정수여야 합니다.",
+  purchase_amount_error:
+    "[ERROR] 로또 구입 금액은 1000원 단위의 양수여야 합니다.",
 };
 export const MATCH = {
   match_3: 3,

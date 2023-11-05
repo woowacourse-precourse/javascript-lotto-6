@@ -9,15 +9,18 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const uniqueNumbers = new Set(numbers);
     if (numbers.length !== 6) {
-      throw new Error(ERROR.lotto_count_error);
-    }
-    if (!numbers.every((number) => number >= 1 && number <= 45)) {
       throw new Error(ERROR.lotto_num_error);
     }
-    if (uniqueNumbers.size !== 6) {
-      throw new Error(ERROR.same_num_error);
+    if (
+      !numbers.every(
+        (number) => Number.isInteger(number) && number >= 1 && number <= 45
+      )
+    ) {
+      throw new Error(ERROR.lotto_num_error);
+    }
+    if (new Set(numbers).size !== 6) {
+      throw new Error(ERROR.lotto_num_error);
     }
   }
 

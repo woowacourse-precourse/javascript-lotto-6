@@ -1,6 +1,7 @@
 import { Random } from "@woowacourse/mission-utils";
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT, OUTPUT, ERROR, OPTION } from "./Constants.js";
+import Validation from "./Validation.js";
 
 class LottoData {
   #lottoData;
@@ -11,22 +12,11 @@ class LottoData {
     this.#lottoCount = 0;
   }
 
-  #validate(purchaseAmount) {
-    if (
-      typeof purchaseAmount !== "number" ||
-      isNaN(purchaseAmount) ||
-      purchaseAmount <= 0 ||
-      purchaseAmount % 1000 !== 0
-    ) {
-      throw new Error();
-    }
-  }
-
   async inputPurchaseAmount() {
     const input = await Console.readLineAsync(INPUT.purchase_amount);
     const purchaseAmount = Number(input);
     try {
-      this.#validate(purchaseAmount);
+      Validation.isValidPurchaseAmount(purchaseAmount);
       this.#lottoCount = purchaseAmount / 1000;
     } catch {
       Console.print(ERROR.purchase_amount_error);
