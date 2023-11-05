@@ -1,7 +1,6 @@
 import Lotto from '../Lotto.js';
 import Money from '../model/Money.js';
 import InputValidator from '../validator/InputValidator.js';
-import convertType from '../utils/convertType.js';
 import formatLottoNumbers from '../utils/formatLottoNumbers.js';
 import { MESSAGE } from '../constants/messages.js';
 import { GAME_RULE } from '../constants/gameRule.js';
@@ -10,6 +9,14 @@ class LottoGameController {
   #moneyInstance;
   #winningNumbers;
   #bonusNumber;
+  #matchCount = {
+    three: 0,
+    four: 0,
+    five: 0,
+    six: 0,
+    bonus: 0,
+  };
+  #prizeMoney = 0;
 
   constructor({ lottoTickets, randomNumberGeneration, inputView, outputView }) {
     this.lottoTickets = lottoTickets;
@@ -35,7 +42,7 @@ class LottoGameController {
       const lotto = new Lotto(
         this.generateLottoNumbers().sort((a, b) => a - b),
       );
-      this.lottoTickets.addLotto(lotto.getLottoNumbers());
+      this.lottoTickets.addLotto(lotto);
       this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
     });
 
@@ -59,9 +66,7 @@ class LottoGameController {
   }
 
   async getPurchaseAmount() {
-    const money = convertType(
-      await this.inputView.getUserInputAsync(MESSAGE.INPUT),
-    );
+    const money = Number(await this.inputView.getUserInputAsync(MESSAGE.INPUT));
     InputValidator.validateMoney(money);
     return money;
   }
@@ -100,7 +105,7 @@ class LottoGameController {
     );
     InputValidator.validateBonusNumber(bonusNumber);
     InputValidator.validateLottoNumbers(bonusNumber, [...this.#winningNumbers]);
-    return bonusNumber;
+    return Number(bonusNumber);
   }
 }
 

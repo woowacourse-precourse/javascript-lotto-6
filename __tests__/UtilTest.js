@@ -1,5 +1,4 @@
 import calcProfit from '../src/utils/calcProfit';
-import convertType from '../src/utils/convertType';
 import formatLottoNumbers from '../src/utils/formatLottoNumbers';
 
 describe('💙 Util 함수를 테스트합니다. ฅ^._.^ฅ', () => {
@@ -22,15 +21,5 @@ describe('💙 Util 함수를 테스트합니다. ฅ^._.^ฅ', () => {
         calcProfit(mockData.purchaseAmounts[i], mockData.winningAmounts[i]),
       ).toBe(expectedResult);
     });
-  });
-
-  test('[convertType] 첫 번째 인자로 받은 string 값을 number 타입으로 변환한다.', () => {
-    const value = '8000';
-    expect(convertType(value)).toBe(8_000);
-  });
-
-  test('[convertType] 숫자로 변환할 수 없는 값은 에러를 발생한다.', () => {
-    const value = '8000a';
-    expect(() => convertType(value)).toThrow('[ERROR]');
   });
 });
