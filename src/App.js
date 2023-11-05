@@ -1,5 +1,6 @@
 import UserInput from './view/userInput.js';
 import Purchase from './controller/Purchase.js';
+import Calculate from './model/Calculate.js';
 
 class App {
   constructor() {
@@ -15,6 +16,9 @@ class App {
     const numbers = await this.UserInput.RequestNumbers();
 
     const bonus = await this.UserInput.RequestBonus(numbers);
+    const calculate = new Calculate(numbers, arrays, bonus);
+    const count = calculate.count();
+    console.log(calculate.collect(count));
   }
 }
 
