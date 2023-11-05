@@ -5,6 +5,10 @@ class App {
     const userInput = await Console.readLineAsync(guideMsg);
     return userInput;
   }
+
+  printMsg(msg) {
+    Console.print(msg);
+  }
 }
 
 export default App;
