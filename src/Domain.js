@@ -36,8 +36,16 @@ export default class Domain {
   }
 
   setWinnings(winnings) {
-    // 1. validation
-    // 2. after -> set
+    if (this.#validator.isEmpty(winnings)) return this.#view.errorNoInput();
+    if (this.#validator.isWhiteSpace(winnings))
+      return this.#view.errorWhiteSpace();
+    if (!this.#validator.isRepeat(winnings))
+      return this.#view.errorWinningsRepeat();
+    if (this.#validator.isCorrectWinnings(winnings))
+      return this.#view.errorWinnings();
+
+    this.#winnings = winnings.split(",").map((element) => Number(element));
+    return true;
   }
 
   setBonus(bonus) {

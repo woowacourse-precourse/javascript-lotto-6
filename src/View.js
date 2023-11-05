@@ -24,6 +24,21 @@ class View {
     this.#printConsole(MESSAGES.ERROR_INPUT_PURCHASING_NUMBER);
     return false;
   }
+
+  errorWhiteSpace() {
+    this.#printConsole(MESSAGES.ERROR_INPUT_WINNING_NUMBERS_WHITESPACE);
+    return false;
+  }
+
+  errorWinningsRepeat() {
+    this.#printConsole(MESSAGES.ERROR_INPUT_WINNING_NUMBERS_REPEATATION);
+    return false;
+  }
+
+  errorWinnings() {
+    this.#printConsole(MESSAGES.ERROR_INPUT_WINNING_NUMBERS);
+    return false;
+  }
 }
 
 export default View;

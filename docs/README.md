@@ -19,7 +19,7 @@
   메서드
 
   - [x] purchaseLottos - `async` 로또 구매 금액을 입력받아 domain의 purchaseLotto 메서드를 호출
-  - [ ] setWinnings - `async` 로또 당첨 번호를 입력받아 domain의 setWinnings 메서드를 호출
+  - [x] setWinnings - `async` 로또 당첨 번호를 입력받아 domain의 setWinnings 메서드를 호출
   - [ ] setBonus - `async` 로또 보너스 번호를 입력받아 domain의 setBonus 메서드를 호출
   - [ ] announceLottery - domain의 announceLottery 메서드를 호출
 
@@ -38,7 +38,7 @@
   메서드
 
   - [x] purchaseLottos - 입력받은 금액만큼 로또 인스턴스를 생성하여 배열로 할당
-  - [ ] setWinnings - `async` 입력받은 문자열 숫자 조합을 당첨 번호 숫자 배열로 할당
+  - [x] setWinnings - `async` 입력받은 문자열 숫자 조합을 당첨 번호 숫자 배열로 할당
   - [ ] setBonus - `async` 입력받은 문자열 숫자를 보너스 번호 숫자로 할당
   - [ ] matchWinnings(winnings, bonus) - 생성된 로또 번호를 당첨 번호, 보너스 번호와 비교한 결과를 반환
   - [ ] lottery - 로또 배열을 순환하면서 로또 인스턴스의 matchWinnings 메서드를 호출하여 lotteryResults 배열 상태 업데이트
@@ -57,9 +57,9 @@
   - [x] printConsole
   - [x] announcePurchasing
   - [ ] announceLottery
-  - [ ] errorNoInput
-  - [ ] errorPurchaseCost
-  - [ ] errorWinnings
+  - [x] errorNoInput
+  - [x] errorPurchaseCost
+  - [x] errorWinnings
   - [ ] errorBonus
 
 --
@@ -74,10 +74,10 @@
 - [ ] Validation
 
   - [x] isEmpty(input) - 입력값이 비어있는지 확인
-  - [ ] isCorrectLength(input, length) - 입력값을 배열로 변환하였을 때, 길이가 맞는지 확인
-  - [ ] isNumber(input, length) - 입력값을 배열로 변환하였을 때, 요소가 전부 숫자형인지 확인
-  - [ ] isOverlap(input) - 입력값을 배열로 변환하였을 때, 요소 중 중복값이 있는지 확인
-  - [ ] validateWinnings(input) - 입력값이 올바른 당첨 번호인지 확인 (boolean)
+  - [x] isCorrectLength(input, length) - 입력값을 배열로 변환하였을 때, 길이가 맞는지 확인
+  - [x] isNumber(input, length) - 입력값을 배열로 변환하였을 때, 요소가 전부 숫자형인지 확인
+  - [x] isRepeatation(input) - 입력값을 배열로 변환하였을 때, 요소 중 중복값이 있는지 확인
+  - [x] isCorrectWinnings(input) - 입력값이 올바른 당첨 번호인지 확인 (boolean)
   - [ ] validateBonus(input) - 입력값이 올바른 보너스 번호인지 확인 (boolean)
   - [x] isCorrectCost(input) - 입력값이 올바른 구매액인지 확인 (boolean)
 
