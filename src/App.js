@@ -3,14 +3,35 @@ import UserInput from "./utils/UserInput.js";
 
 class App {
   async play() {
-    const lottoAmount = await UserInput.getPurchaseAmount();
-    Console.print(lottoAmount);
+    let lottoAmount;
+    while (true) {
+      try {
+        lottoAmount = await UserInput.getPurchaseAmount();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
 
-    const lottoNumbers = await UserInput.getLottoNumbers();
-    Console.print(lottoNumbers);
+    let lottoNumbers;
+    while (true) {
+      try {
+        lottoNumbers = await UserInput.getLottoNumbers();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
 
-    const bonusNumber = await UserInput.getBonusNumber();
-    Console.print(bonusNumber);
+    let bonusNumber;
+    while (true) {
+      try {
+        bonusNumber = await UserInput.getBonusNumber();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
 
