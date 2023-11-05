@@ -38,24 +38,25 @@ const validateCondition = {
 };
 
 const validators = {
-	inputPurchasePrice(price) {
+	checkPurchasePrice(price) {
 		validateCondition.isDigit(price);
 		validateCondition.isPositive(price);
 		validateCondition.isTotalPriceDivisibleByLottoPrice(price);
 		validateCondition.isPurchasePriceExceedMaximumPrice(price);
 	},
 
-	inputWinningNumber(numbers) {
+	checkLottoNumbers(numbers) {
 		validateCondition.checkDuplicate(numbers);
 		validateCondition.checkLottoNumberCount(numbers);
 
 		numbers.forEach((number) => {
 			validateCondition.isDigit(number);
+			validateCondition.isPositive(number);
 			validateCondition.isLottoNumberInRange(number);
 		});
 	},
 
-	inputWinningBonusNumber(number) {
+	checkWinningBonusNumber(number) {
 		validateCondition.isDigit(number);
 		validateCondition.isLottoNumberInRange(number);
 	},

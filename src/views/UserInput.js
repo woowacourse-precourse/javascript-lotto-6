@@ -6,7 +6,7 @@ class UserInput {
 	async lottoPurchase(question = SYSTEM_MESSAGES.input_purchase_amount) {
 		const userInput = await Console.readLineAsync(question);
 		const trimmedInput = userInput.trim();
-		validators.inputPurchasePrice(trimmedInput);
+		validators.checkPurchasePrice(trimmedInput);
 
 		return trimmedInput;
 	}
@@ -15,7 +15,7 @@ class UserInput {
 		const userInput = await Console.readLineAsync(question);
 		const splittedInput = userInput.split(',').map((input) => input.trim());
 
-		validators.inputWinningNumber(splittedInput);
+		validators.checkLottoNumbers(splittedInput);
 
 		return splittedInput;
 	}
@@ -23,7 +23,7 @@ class UserInput {
 	async winningBonusNumber(question = SYSTEM_MESSAGES.input_bonus_number) {
 		const userInput = await Console.readLineAsync(question);
 		const trimmedInput = userInput.trim();
-		validators.inputWinningBonusNumber(trimmedInput);
+		validators.checkWinningBonusNumber(trimmedInput);
 
 		return trimmedInput;
 	}
