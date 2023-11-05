@@ -34,9 +34,11 @@ export const OUTPUT = Object.freeze({
 });
 
 export const ERROR = Object.freeze({
+  PREFIX: '[ERROR]',
   NOT_PRICE_UNIT: `[ERROR] 로또 구입 금액은 ${LOTTO.PRICE.toLocaleString()}원 단위로 입력해주세요.`,
-  INPUT_ONLY_NUMBER: '[ERROR] 로또 구입 금액은 숫자로만 입력해주세요.',
+  PRICE_ONLY_NUMBER: '[ERROR] 로또 구입 금액은 숫자로만 입력해주세요.',
   NOT_LOTTO_LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
   DUPLICATE_NUMBER: '[ERROR] 로또 번호가 중복되었습니다.',
   NOT_LOTTO_RANGE: '[ERROR] 로또 번호는 1~45 사이의 숫자를 입력해주세요.',
+  BONUS_ONLY_NUMBER: '[ERROR] 보너스번호는 1~45 사이의 숫자로만 입력해주세요.',
 });
