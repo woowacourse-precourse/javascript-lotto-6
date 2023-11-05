@@ -1,4 +1,4 @@
-import LottoValidation from './validation/LottoValidation.js';
+import LottoValidation from '../validation/LottoValidation.js';
 
 class Lotto {
   #numbers;
@@ -14,7 +14,6 @@ class Lotto {
     LottoValidation.checkDuplicate(numbers);
   }
 
-  // TODO: 추가 기능 구현
   getLotto() {
     return this.#numbers;
   }
