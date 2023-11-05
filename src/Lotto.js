@@ -12,22 +12,28 @@ class Lotto {
     this.#sortNumbers();
   }
 
-  #validate(numbers) {
-    if (numbers.length !== LOTTO.size) {
-      throw new CustomError(ERROR.lotto.invalidSize);
-    }
-
-    this.#ifNumberIsInvalid(numbers, () => {
-      throw new CustomError(ERROR.lotto.invalidNumber);
-    });
-  }
-
   get numbers() {
     return this.#numbers;
   }
 
   #sortNumbers() {
     this.#numbers.sort((a, b) => a - b);
+  }
+
+  #validate(numbers) {
+    this.#ifSizeIsInvalid(numbers, () => {
+      throw new CustomError(ERROR.lotto.invalidSize);
+    });
+
+    this.#ifNumberIsInvalid(numbers, () => {
+      throw new CustomError(ERROR.lotto.invalidNumber);
+    });
+  }
+
+  #ifSizeIsInvalid(numbers, callback) {
+    if (numbers.length !== LOTTO.size) {
+      callback();
+    }
   }
 
   #ifNumberIsInvalid(numbers, callback) {
