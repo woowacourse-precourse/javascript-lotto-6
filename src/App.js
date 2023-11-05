@@ -48,9 +48,8 @@ class App {
         throw new Error(ERROR_MESSAGE.INPUT_ERROR);
       }
     }
-    
 
-    // 보너스 번호 입력 - 유효한지 확인하는 코드 추가하기
+    // 보너스 번호 입력
     const bonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
     const bonusNum = Number(bonus);
     // 숫자인지 확인
@@ -72,6 +71,34 @@ class App {
     let winningFive = 0;
     let winningBonus = 0;
     let winningSix = 0;
+
+    // 두 문자열 사이 중복되는 값의 개수 확인
+    Console.print(userRandomNums)
+    for (let i=0; i<userRandomNums.length; i++) {
+      let sameNum = 0;
+      let isBonus = false;
+      for (let j=0; j<userRandomNums[i].length; j++) {
+        if (splitWinningNums.includes(userRandomNums[i][j])) {
+          sameNum++;
+        }
+      };
+      if (userRandomNums[i].includes(bonusNum)) {
+        isBonus = true;
+      }
+      // return문으로 구현하기 (함수로)
+      if (isBonus && sameNum == 4) {
+        winningBonus++
+      } else if (sameNum === 3) {
+        winningThree++;
+      } else if (sameNum === 4) {
+        winningFour++;
+      } else if (sameNum === 5) {
+        winningFive++;
+      } else if (sameNum === 6) {
+        winningSix++;
+      }
+    };
+    
     
     // 통계
     Console.print(MESSAGE.CALC);
