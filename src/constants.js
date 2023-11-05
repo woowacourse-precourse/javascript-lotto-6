@@ -1,7 +1,8 @@
 const SETTING = Object.freeze({
   min_lotto_number: 1,
-  min_cost: 1000,
+  input_length: 6,
   max_lotto_number: 45,
+  min_cost: 1000,
 });
 
 const MESSAGE = Object.freeze({
