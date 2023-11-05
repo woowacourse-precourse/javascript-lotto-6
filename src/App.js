@@ -5,15 +5,17 @@ class App {
   async play() {
     const amount = await this.getAmount();
     const numberIssuance = new NumberIssuance(amount);
-    Console.print(numberIssuance.lottoNumbers);
+
+    await App.displayPurchase(numberIssuance.EA, numberIssuance.lottoNumbers);
   }
 
   async getAmount() {
     let amount;
     while (true) {
       try {
-        // eslint-disable-next-line no-await-in-loop
-        const input = await Console.readLineAsync("구입 금액을 입력해주세요.");
+        const input =
+          // eslint-disable-next-line no-await-in-loop
+          await Console.readLineAsync("구입 금액을 입력해주세요.\n");
         amount = Number(input);
         App.validateAmount(amount);
         return amount;
@@ -21,6 +23,13 @@ class App {
         Console.print(error.message);
       }
     }
+  }
+
+  static displayPurchase(EA, lottoNumbers) {
+    let str = "\n";
+    str += `${EA}개를 구매했습니다. \n`;
+    str += lottoNumbers.map((item) => `[${item.join(", ")}]`).join("\n");
+    Console.print(str);
   }
 
   static validateAmount(amount) {
