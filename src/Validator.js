@@ -16,6 +16,10 @@ class Validator {
   static isDivisible(dividend, divisor) {
     return dividend % divisor === 0;
   }
+
+  static startWithZero(string) {
+    return string.charAt(0) === "0";
+  }
 }
 
 export default Validator;
