@@ -1,14 +1,30 @@
+import ErrorCheck from "./utils/ErrorCheck.js";
+
 class LottoController{
   #model;
-  #inputViewer;
-  #outputViewer;
+  #inputView;
+  #outputView;
 
-  constructor(model,inputViewer,outputViewer){
-    this.#model=model;
-    this.#inputViewer=inputViewer;
-    this.#outputViewer=outputViewer;
+  constructor(model,inputView,outputView){
+    this.#model = model;
+    this.#inputView = inputView;
+    this.#outputView = outputView;
   }
 
+  async play(){}
+
+  async getPurchasePrice(){
+    while(true){
+      const input=this.#inputView.purchasePrice();
+      try{
+        ErrorCheck.purchasePrice(input);
+        return input;
+      }
+      catch(error){
+        this.#outputView.errorMessage(error);
+      }
+    }
+  }
 }
 
 export default LottoController;
