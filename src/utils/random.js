@@ -1,4 +1,4 @@
-import { RANDOM } from '../constant/index';
+import { RANDOM } from '../constant/index.js';
 import { Random } from '@woowacourse/mission-utils';
 
 function createLottoNumber() {

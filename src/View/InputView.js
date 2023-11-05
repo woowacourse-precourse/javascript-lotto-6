@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR, INPUT } from '../constant/index';
+import { ERROR, INPUT } from '../constant/index.js';
 
 class InputView {
   static async readBuyingPrice() {
