@@ -16,7 +16,7 @@ class App {
       throw new Error(ERROR_MESSAGE.isInvaildUnit);
     }
 
-    await this.createLotto(purchaseCost);
+    let lottoArr = await this.createLotto(purchaseCost);
 
     const enterWinnigNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputWinnigNum
@@ -45,6 +45,22 @@ class App {
     const bonusNum = await MissionUtils.Console.readLineAsync(
       LOTTO_INPUT_MESSAGE.inputBonusNum
     );
+
+    console.log(winningNum, bonusNum, lottoArr);
+
+    const a = lottoArr.map((ele) =>
+      ele.filter((item) => winningNum.includes(String(item)))
+    );
+
+    const b = a.map((ele) => ele.length);
+
+    console.log(b);
+  }
+
+  async matchLotto(winningNum, bonusNum, lottoArr) {
+    // for(let i=0; i<lottoArr.length; i++){
+    //   winningNum.filter()
+    // }
   }
 
   async createLotto(purchaseCost) {
@@ -52,6 +68,7 @@ class App {
     const tellNumOfLotto = await MissionUtils.Console.print(
       `${numOfLotto}${LOTTO_OUTPUT_MESSAGE.numOfLotto}`
     );
+    const lottoArr = [];
 
     for (let i = 0; i < numOfLotto; i++) {
       let lottoNum = await MissionUtils.Random.pickUniqueNumbersInRange(
@@ -63,8 +80,14 @@ class App {
       const printLottNum = await MissionUtils.Console.print(lottoNum);
 
       const lotto = new Lotto(lottoNum);
+
+      lottoArr.push(lottoNum);
     }
+
+    return lottoArr;
   }
+
+  async matchLottoNum() {}
 }
 
 export default App;
