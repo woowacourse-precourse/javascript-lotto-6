@@ -8,8 +8,13 @@ class Random {
     this.#random = [];
   }
 
-  controlRandom(number) {
+  #setRandom(number) {
     this.#random = randomModel.getRandom(number);
+  }
+
+  controlRandom(number) {
+    this.#setRandom(number);
+
     const randomString = randomModel.getStringOfRandom(this.#random);
 
     outputs.printRandoms(randomString);
