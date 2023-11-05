@@ -1,4 +1,5 @@
-import { PurchaseErrorMessage, PurchaseRule } from './models/const.js';
+import { PurchaseErrorMessage } from './models/message.js';
+import { PurchaseRule } from './models/rule.js';
 
 class Purchase {
   #amount;

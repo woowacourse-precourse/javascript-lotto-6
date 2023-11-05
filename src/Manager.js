@@ -1,5 +1,5 @@
 import Util from './utils/util.js';
-import { LottoRule } from './models/const.js';
+import { LottoRule } from './models/rule.js';
 
 class Manager {
   #soldLottos;

@@ -1,4 +1,5 @@
-import { LottoRule, RequestMessage, ResponseMessage } from './models/const.js';
+import { RequestMessage, ResponseMessage } from './models/message.js';
+import { LottoRule } from './models/rule.js';
 import Util from './utils/util.js';
 import Purchase from './Purchase.js';
 import Manager from './Manager.js';
@@ -12,7 +13,7 @@ class App {
   async play() {
     await this.#requestPurchase();
     this.#respondPurchaseResult();
-    await this.#requestWinnerNumbers();
+    await this.#requestWinningNumbers();
   }
 
   async #requestPurchase() {
@@ -39,16 +40,16 @@ class App {
     Util.printConsole('');
   }
 
-  async #requestWinnerNumbers() {
+  async #requestWinningNumbers() {
     try {
-      const value = await Util.readLineAsyncConsole(`${RequestMessage.WinnerNumbers}\n`);
+      const value = await Util.readLineAsyncConsole(`${RequestMessage.WinningNumbers}\n`);
       const numbers = value.split(',').map(v => Number(v.trim()));
 
       Util.printConsole('');
       this.#lotto = new Lotto(numbers);
     } catch (e) {
       Util.printConsole(`${e.message}`);
-      await this.#requestWinnerNumbers();
+      await this.#requestWinningNumbers();
     }
   }
 }

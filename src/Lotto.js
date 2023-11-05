@@ -1,4 +1,5 @@
-import { LottoRule, WinningNumberErrorMessage } from './models/const.js';
+import { WinningNumberErrorMessage } from './models/message.js';
+import { LottoRule } from './models/rule.js';
 
 class Lotto {
   #numbers;

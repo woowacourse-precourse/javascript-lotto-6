@@ -1,5 +1,5 @@
 import Purchase from '../src/Purchase.js';
-import { PurchaseErrorMessage } from '../src/models/const.js';
+import { PurchaseErrorMessage } from '../src/models/message.js';
 
 describe('로또 구입 클래스 테스트', () => {
   test('빈 값이면 예외가 발생한다.', () => {
