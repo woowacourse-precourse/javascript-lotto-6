@@ -1,3 +1,5 @@
+import { Console, Random } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -12,7 +14,26 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  
 }
+
+const inputAmount = async() => {
+  const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+  try {
+    if (isNaN(input)) throw new Error('[ERROR]');
+    if ((input % 1000) !== 0) throw new Error('[ERROR]');
+  } catch {
+    Console.print('[ERROR]');
+    return inputAmount();
+  }
+  return input;
+} 
+
+const publishedLotto = {
+  numbers : [],
+  rank : [0, 0, 0, 0, 0]
+}
+
+inputAmount();
 
 export default Lotto;
