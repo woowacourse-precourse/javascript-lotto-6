@@ -4,6 +4,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.result = "";
   }
 
   /* eslint-disable class-methods-use-this */
@@ -13,7 +14,37 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  checkResult({ win, bonus }) {
+    let cntCorrect = 0;
+    let checkBonus = false;
+    this.#numbers.forEach((number) => {
+      if (win.includes(number)) {
+        cntCorrect += 1;
+      }
+      if (number === bonus) checkBonus = true;
+    });
+
+    if (cntCorrect === 6) {
+      this.result = "6개 일치";
+    }
+    if (cntCorrect === 5 && checkBonus) {
+      this.result = "5개 일치, 보너스 볼 일치";
+    }
+    if (cntCorrect === 5) {
+      this.result = "5개 일치";
+    }
+    if (cntCorrect === 4) {
+      this.result = "4개 일치";
+    }
+    if (cntCorrect === 3) {
+      this.result = "3개 일치";
+    }
+  }
+  /* 
+   TODO: Lotto에서 당첨결과 확인 로직 구현, 
+   LottoGame에서는 Lotto객체들로 당첨결과 객체를 생성하고
+   당첨결과 출력문자 가공, 수익률 계산 등을 처리
+  */
 }
 
 export default Lotto;

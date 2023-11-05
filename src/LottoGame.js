@@ -6,7 +6,14 @@ class LottoGame {
     winningLotto == {win : [당첨 번호 6개], bonus : 당첨번호}
   */
   constructor(myLotto, winningLotto) {
-    this.lottos = myLotto.map((numbers) => new Lotto(numbers, winningLotto));
+    this.lottos = myLotto.map((numbers) => new Lotto(numbers));
+    this.winningLotto = winningLotto;
+  }
+
+  start() {
+    this.lottos.forEach((lotto) => {
+      lotto.checkResult(this.winningLotto);
+    });
   }
 }
 
