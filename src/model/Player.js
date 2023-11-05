@@ -1,6 +1,7 @@
 import LottoGameError from "../Error.js";
 import { LOTTO_ERROR_MSG } from "../constants/error.js";
 import { MONEY_CONSTANT } from "../constants/game.js";
+import Output from "../view/Output.js";
 import Lotto from "./Lotto.js";
 import { Random } from "@woowacourse/mission-utils";
 
@@ -15,7 +16,7 @@ class Player {
   }
 
   print() {
-    Output.printLotto(this.player);
+    Output.printLotto(this);
     Output.printNewLine();
   }
 

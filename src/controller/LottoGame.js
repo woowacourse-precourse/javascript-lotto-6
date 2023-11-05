@@ -15,7 +15,8 @@ class LottoGame {
   }
 
   getReturnRate(ranks) {
-    const returnRate = this.getWinningAmount(ranks) / this.player.playerMoney;
+    const returnRate =
+      (this.getWinningAmount(ranks) / this.player.playerMoney) * 100;
     return returnRate.toFixed(1);
   }
 
