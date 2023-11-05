@@ -45,13 +45,7 @@ class LottoGame {
 
   checkWinning() {
     const accordList = this.checkAccord();
-    const rankingList = accordList.map((number, idx) => {
-      if (number <= 2) return RANKING.nothing;
-      if (number === 5 && this.lottos[idx].includes(this.bonusNumber)) {
-        return RANKING['5+1'];
-      }
-      return RANKING[number];
-    });
+    const rankingList = this.checkRanking(accordList);
     printRankingList(rankingList);
   }
 
@@ -63,12 +57,14 @@ class LottoGame {
     return accordList;
   }
 
-  getWinningNumbers() {
-    return this.winningNumbers;
-  }
-
-  getBonusNumber() {
-    return this.bonusNumber;
+  checkRanking(accordList) {
+    return accordList.map((number, idx) => {
+      if (number < GAME_RULE_NUMBER.minimunAccord) return RANKING.nothing;
+      if (number === 5 && this.lottos[idx].includes(this.bonusNumber)) {
+        return RANKING['5+1'];
+      }
+      return RANKING[number];
+    });
   }
 }
 

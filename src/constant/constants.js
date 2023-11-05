@@ -5,6 +5,7 @@ const GAME_RULE_NUMBER = {
   price: 1000,
   lottoLength: 6,
   bonusNumberLength: 1,
+  minimunAccord: 3,
 };
 
 const PRINT_MESSAGES = {
