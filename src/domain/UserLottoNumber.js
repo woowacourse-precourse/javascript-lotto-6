@@ -2,8 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 
 class UserLottoNumber {
   constructor() {
-    this.baseNumbers = [];
-    this.bonusNumber = null;
+    this.lottoNumbers = { baseNumbers: [], bonusNumber: null };
   }
 
   async setUserLottoNumbers() {
@@ -11,17 +10,11 @@ class UserLottoNumber {
     return input.split(",").map((numStr) => parseInt(numStr.trim(), 10));
   }
 
-  async userBaseNumber() {
-    this.baseNumbers = await this.setUserLottoNumbers();
-    return this.baseNumbers;
-  }
-
-  async userBonusNumber() {
+  async userLotto() {
+    this.lottoNumbers.baseNumbers = await this.setUserLottoNumbers();
     const bonusNumberArray = await this.setUserLottoNumbers();
-    const bonusNumber = bonusNumberArray[0];
-    this.#bonusValidate(bonusNumber);
-    this.bonusNumber = bonusNumber;
-    return this.bonusNumber;
+    this.lottoNumbers.bonusNumber = bonusNumberArray[0];
+    return this.lottoNumbers;
   }
 
   #bonusValidate(number) {
