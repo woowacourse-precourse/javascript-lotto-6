@@ -7,14 +7,20 @@ import {
 
 const isEmpty = (value) => value === "";
 
-const isAllNumbers = (values) =>
-  values.filter((value) => isNumber(value)).length === NUMBER_COUNT;
-
 const isNumber = (value) => NUMBER_REGEX.test(value);
 
 const isInMultiplesOfThousand = (value) => value % BASE_AMOUNT;
 
-const isSixNumbers = (value) => value.length === NUMBER_COUNT;
+const isNumberInRange = (value) => value > 0 && value < 46;
+
+const isSixNumbers = (values) => values.length === NUMBER_COUNT;
+
+const isAllNumbers = (values) =>
+  values.filter((value) => isNumber(value)).length === NUMBER_COUNT;
+
+const isNumbersInRange = (values) =>
+  values.filter((value) => isNumberInRange(parseInt(value))).length ===
+  NUMBER_COUNT;
 
 const validatePurchase = (purchaseAmount) => {
   if (isEmpty(purchaseAmount)) {
@@ -38,6 +44,9 @@ const validateWinningNumber = (winningNumber) => {
   }
   if (!isAllNumbers(numbers)) {
     throw new Error(ERROR_MESSAGE.textIncluded);
+  }
+  if (!isNumbersInRange(numbers)) {
+    throw new Error(ERROR_MESSAGE.notInRange);
   }
 };
 
