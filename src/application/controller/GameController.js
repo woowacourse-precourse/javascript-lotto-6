@@ -1,4 +1,6 @@
 class GameController {
+  constructor() {}
+
   async start() {}
 }
 
