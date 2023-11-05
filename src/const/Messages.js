@@ -22,10 +22,10 @@ export const PRIZE = {
 
 export const ERROR = {
   ONLY_NUMBER: "[ERROR] 로또 번호는 숫자만 입력해야 합니다.",
-  NUMBER_RANGE: "[ERROR] 로또 번호는 1부터 45 사이여야 합니다.",
   NO_DUPLICATES: "[ERROR] 로또 번호는 서로 다른 숫자여야 합니다.",
   HOW_MANY_SIX: "[ERROR] 로또 번호는 6개여야 합니다.",
-  HOW_MANY_ONE: "[ERROR] 보너스 숫자는 1개여야 합니다.",
+  NUMBER_RANGE: "[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.",
+  NO_INCLUDE: "[ERROR] 보너스 번호는 기존 번호와 겹치지 않아야 합니다.",
+  ONE_NUMBER: "[ERROR] 보너스 번호는 1개의 숫자만 입력해야 합니다.",
   NO_THOUSAND_UNIT: "[ERROR] 구입금액은 천 원 단위여야 합니다.",
-  EMPTY_VALUE: "[ERROR] 로또 번호에 빈 값이 있습니다.",
 };
