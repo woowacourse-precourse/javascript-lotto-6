@@ -10,6 +10,7 @@ class App {
     const lottos = new Lottos(ticketCount);
 
     const winningNumbers = await Input.getWinningNumbers();
+    const bonusNumber = await Input.getBonusNumber();    
   }    
 }
 
