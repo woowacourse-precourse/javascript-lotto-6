@@ -3,6 +3,10 @@ import Lotto from "./Lotto.js";
 class App {
     async play() {
         const purchaseAmount = await this.getValidPurchaseAmount();
+        const lottoCount = Math.floor(purchaseAmount / 1000);
+        const lottos = this.purchaseLottos(lottoCount);
+
+        MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
     }
 
     async getValidPurchaseAmount() {
@@ -34,9 +38,20 @@ class App {
         if (purchaseAmount % 1000 === 0) {
             return true;
         } else {
-            Console.print("[ERROR] 1,000원 단위로 입력해 주세요.");
+            MissionUtils.Console.print("[ERROR] 1,000원 단위로 입력해 주세요.");
             return false;
         }
+    }
+    purchaseLottos(lottoCount) {
+        const lottos = [];
+
+        Array(lottoCount)
+            .fill(0)
+            .forEach(() => {
+                const lotto = Lotto.generateRandomLotto();
+                lottos.push(lotto);
+            });
+        return lottos;
     }
 }
 
