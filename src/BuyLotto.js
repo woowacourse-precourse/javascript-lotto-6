@@ -23,7 +23,7 @@ class BuyLotto {
       const randomPick = Random.pickUniqueNumbersInRange(
         strings.START_NUMBER,
         strings.END_NUMBER,
-        strings.SLICE_NUMBER,
+        strings.LOTTO_COUNT,
       );
 
       const lotto = new Lotto(randomPick);
