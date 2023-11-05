@@ -4,9 +4,12 @@ import InputValidator from '../validator/InputValidator.js';
 import convertType from '../utils/convertType.js';
 import formatLottoNumbers from '../utils/formatLottoNumbers.js';
 import { MESSAGE } from '../constants/messages.js';
+import { GAME_RULE } from '../constants/gameRule.js';
 
 class LottoGameController {
   #moneyInstance;
+  #winningNumbers;
+  #bonusNumber;
 
   constructor({ lottoTickets, randomNumberGeneration, inputView, outputView }) {
     this.lottoTickets = lottoTickets;
@@ -35,6 +38,15 @@ class LottoGameController {
       this.lottoTickets.addLotto(lotto.getLottoNumbers());
       this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
     });
+
+    while (true) {
+      try {
+        this.#winningNumbers = await this.getWinningNumbers();
+        break;
+      } catch (error) {
+        this.outputView.print(error);
+      }
+    }
   }
 
   async getPurchaseAmount() {
@@ -59,7 +71,19 @@ class LottoGameController {
     return this.randomNumberGeneration.generateLottoNumber();
   }
 
-  printBuyLottos() {}
+  printBuyLottos() {
+    // TODO: 구매한 로또 출력 로직 여기로 리팩토링
+  }
+
+  async getWinningNumbers() {
+    const winningNumbers = await this.inputView.getUserInputAsync(
+      MESSAGE.WIN_NUMBER,
+    );
+    InputValidator.validateWinningNumbers(
+      winningNumbers.split(GAME_RULE.SEPARATOR),
+    );
+    return winningNumbers;
+  }
 }
 
 export default LottoGameController;
