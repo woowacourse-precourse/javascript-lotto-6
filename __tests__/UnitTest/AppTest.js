@@ -1,5 +1,12 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
 import App from "../../src/App";
 import Lotto from "../../src/Lotto";
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
 
 // eslint-disable-next-line
 describe("App Unit Test", () => {
@@ -46,4 +53,19 @@ describe("App Unit Test", () => {
       expect(lottoRanks).toStrictEqual(expectedRsult);
     }
   );
+
+  test("당첨 내역 출력", () => {
+    const logSpy = getLogSpy();
+    App.printLottoResult([1, 1, 1, 1, 1]);
+    const answers = [
+      "3개 일치 (5,000원) - 1개",
+      "4개 일치 (50,000원) - 1개",
+      "5개 일치 (1,500,000원) - 1개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
+      "6개 일치 (2,000,000,000원) - 1개",
+    ];
+    answers.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
