@@ -1,3 +1,4 @@
+import Bonus from '../Bonus.js';
 import Lotto from '../Lotto.js';
 import LottoModel from '../model/index.js';
 import InputView from '../view/InputView.js';
@@ -15,7 +16,7 @@ class LottoController {
 
     OutputView.printUserLottos(userLottos);
 
-    const { winningNumbers } = await this.#drawLottery();
+    const { winningNumbers, bonusNumber } = await this.#drawLottery();
   }
 
   async #purchaseLotto() {
@@ -35,8 +36,9 @@ class LottoController {
 
   async #drawLottery() {
     const winningNumbers = await this.#getWinningNumbers();
+    const bonusNumber = await this.#getBonusNumber(winningNumbers);
 
-    return { winningNumbers };
+    return { winningNumbers, bonusNumber };
   }
 
   async #getWinningNumbers() {
@@ -47,7 +49,25 @@ class LottoController {
     } catch (error) {
       OutputView.print(error.message);
 
-      await this.#getWinningNumbers();
+      const winningNumbers = await this.#getWinningNumbers();
+
+      return winningNumbers;
+    }
+  }
+
+  async #getBonusNumber(winningNumbers) {
+    try {
+      const bonusNumber = await InputView.readBonusNumber();
+      const bonus = Bonus.of(bonusNumber);
+
+      winningNumbers.checkUniqueNumber(bonus.getBonusNumber());
+
+      return bonus;
+    } catch (error) {
+      OutputView.print(error.message);
+      const bonusNumber = await this.#getBonusNumber(winningNumbers);
+
+      return bonusNumber;
     }
   }
 }
