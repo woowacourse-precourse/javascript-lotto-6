@@ -32,6 +32,18 @@ class Lottos {
     }
   }
 
+  getLottosRanking(winningNumbers, bonusNumber) {
+    const rankingObj = {};
+    this.#lottos.forEach((lotto) => {
+      const ranking = lotto.determineRanking(winningNumbers, bonusNumber);
+      if (!rankingObj[ranking]) {
+        rankingObj[ranking] = 0;
+      }
+      rankingObj[ranking] += 1;
+    });
+    return rankingObj;
+  }
+
   getLottos() {
     return this.#lottos;
   }

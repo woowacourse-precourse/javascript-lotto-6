@@ -15,6 +15,25 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
+  getNumbersCount(winningNumbers, bonusNumbers) {
+    const winning = this.#numbers.filter((num) =>
+      winningNumbers.includes(num),
+    ).length;
+    const bonus = this.#numbers.includes(bonusNumbers);
+    
+    return [winning + bonus, bonus];
+  }
+
+  determineRanking(winningNumbers, bonusNumbers) {
+    const [allCount, bonus] = this.getNumbersCount(winningNumbers, bonusNumbers);
+
+    if (allCount === 3) return '5등';
+    if (allCount === 4) return '4등';
+    if (allCount === 5) return '3등';
+    if (allCount === 6 && bonus) return '2등';
+    if (allCount === 6) return '1등';
+  }
 }
 
 export default Lotto;

@@ -21,6 +21,7 @@ class Controller {
     this.printAllLottos();
     await this.createWinningLotto();
     await this.createBonusLottos();
+    this.printAllRanking();
   }
 
   async createLottos() {
@@ -44,6 +45,13 @@ class Controller {
     const bonusNum = await this.#inputView.readBonusNumber();
     this.checkDuplicate(parseInt(bonusNum));
     this.#bonusLotto = new BonusLotto(bonusNum);
+  }
+
+  async printAllRanking() {
+    const winningNumber = this.#winningLotto.getWinningNums();
+    const bonusNumber = this.#bonusLotto.getBonusNum();
+    const rankingObj = this.#lottos.getLottosRanking(winningNumber, bonusNumber);
+    this.#outputView.printRanking(rankingObj);
   }
 
   printAllLottos() {
