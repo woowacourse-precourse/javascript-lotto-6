@@ -11,12 +11,15 @@ export default class LottoMachine {
 
   #bonusNumber;
 
+  #MINIMUM_WINNING_COUNT;
+
   #LOTTO_RULES;
 
   #INPUT_UNIT;
 
   constructor() {
     this.#player = new LottoPlayer();
+    this.#MINIMUM_WINNING_COUNT = 3;
     this.#LOTTO_RULES = {
       minNumber: 1,
       maxNumber: 45,
@@ -32,6 +35,7 @@ export default class LottoMachine {
     OutputView.printNewLine();
     this.#bonusNumber = await this.#getBonusNumber();
     OutputView.printNewLine();
+    this.#findMatchCount();
   }
 
   #makeOneLotto() {
@@ -53,7 +57,7 @@ export default class LottoMachine {
   }
 
   async #makeLottos() {
-    const purchaseAmount = this.#getPurchaseAmount();
+    const purchaseAmount = await this.#getPurchaseAmount();
     const lottoTicketCount = purchaseAmount / this.#INPUT_UNIT;
 
     // 추후 예외 처리 분리 예정
@@ -82,6 +86,17 @@ export default class LottoMachine {
     const bonusNumberInput = await InputView.readBonusNumber();
     return Number(bonusNumberInput);
   }
-}
 
-await new LottoMachine().run();
+  #findMatchCount() {
+    this.#player.getLottoTickets().forEach((lotto) => {
+      const isIncludedBonusNumber = lotto.getNumbers().includes(this.#bonusNumber);
+      const correctCount = lotto
+        .getNumbers()
+        .filter((number) => this.#winningNumbers.getNumbers().includes(number)).length;
+
+      if (correctCount >= this.#MINIMUM_WINNING_COUNT) {
+        this.#player.setRankCounts(correctCount, isIncludedBonusNumber);
+      }
+    });
+  }
+}
