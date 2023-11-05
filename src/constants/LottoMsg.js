@@ -18,7 +18,7 @@ export const OUTPUT_MSG = {
 };
 
 export const ERROR_MSG = {
-  MONEY_NUMBER_ERROR: '[ERROR] 구입 금액은 숫자(공백제외)로 입력해주세요.',
+  MONEY_NUMBER_ERROR: '[ERROR] 숫자(공백제외)로 입력해주세요.',
   MONEY_SHOULD_NUMBER: '[ERROR] 올바른 숫자를 입력해주세요.',
   MONEY_IS_THOUSAND: '[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.',
   MONEY_NEGATIVE_ERROR: '[ERROR] 구입 금액은 음수로 입력할 수 없습니다.',
@@ -28,4 +28,6 @@ export const ERROR_MSG = {
   LOTTO_DECIMAL_ERROR: '[ERROR] 로또 번호가 소수로 입력되었습니다.',
   LOTTO_RANGE_ERROR: '[ERROR] 로또 번호는 1 부터 45의 값으로 입력해주세요.',
   BONUS_NUMBER_NOT_NUMBER: '[ERROR] 보너스 번호는 숫자로 입력해주세요.',
+  BONUS_NUMBER_RANGE_ERROR:
+    '[ERROR] 보너스 번호는 1 부터 45의 값으로 입력해주세요.',
 };

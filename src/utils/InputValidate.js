@@ -9,14 +9,14 @@ class InputValidate {
   }
 
   async inputMoney(money) {
-    this.#moneyString(money);
+    this.#numberString(money);
     this.#moneySafeNumber(money);
     this.#moneyThousand(money);
     this.#moneyNegative(money);
     return Number(money);
   }
 
-  #moneyString(money) {
+  #numberString(money) {
     if (this.#LOTTO_REGAX.test(money)) {
       throw new InputError(ERROR_MSG.MONEY_NUMBER_ERROR);
     }
@@ -79,8 +79,20 @@ class InputValidate {
   }
 
   async bonusNumber(bonus) {
+    this.#bonusSafeNumber(bonus);
+    this.#numberString(bonus);
+    this.#bonsuNumberRange(bonus);
+  }
+
+  #bonusSafeNumber(bonus) {
     if (!Number.isSafeInteger(Number(bonus))) {
       throw new InputError(ERROR_MSG.BONUS_NUMBER_NOT_NUMBER);
+    }
+  }
+
+  #bonsuNumberRange(bonus) {
+    if (Number(bonus) <= 0 || Number(bonus) > 45) {
+      throw new InputError(ERROR_MSG.BONUS_NUMBER_RANGE_ERROR);
     }
   }
 }
