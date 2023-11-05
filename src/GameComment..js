@@ -22,11 +22,14 @@ const WINNING_OUTCOME = (arr) => {
 
 const GENERATE_BONUS_NUM = "보너스 번호를 입력해 주세요.";
 
+const RATIO_OF_RETURN = (ratio) => `총 수익률은 ${ratio}%입니다.`
+
 export {
   BUY_LOTTO, 
   LOTTO_COUNT,
   PRINT_PURCHASE_LOTTO,
   INPUT_WINNING_NUMBER,
   WINNING_OUTCOME,
-  GENERATE_BONUS_NUM
+  GENERATE_BONUS_NUM,
+  RATIO_OF_RETURN
 }

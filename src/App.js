@@ -1,11 +1,10 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { BUY_LOTTO, LOTTO_COUNT, PRINT_PURCHASE_LOTTO, WINNING_OUTCOME, INPUT_WINNING_NUMBER,  GENERATE_BONUS_NUM} from "./GameComment.";
+import { BUY_LOTTO, LOTTO_COUNT, PRINT_PURCHASE_LOTTO, WINNING_OUTCOME, INPUT_WINNING_NUMBER,  GENERATE_BONUS_NUM, RATIO_OF_RETURN} from "./GameComment.";
 import Lotto from "./Lotto";
 class App {
   validPrice(price) {
      if(isNaN(price)) throw new Error("[ERROR]");
     if(price%1000) throw new Error("[ERROR]");
-
     return price/1000;
   }
 
@@ -28,13 +27,22 @@ class App {
     return;
   }
 
-  lottoResult(lottoContainer, winningNums, bonusNum) {
+  printTotalOutcome(result, price) {
+    const outcomes = [5000, 50000, 1500000, 30000000, 2000000000];
+    let totalOutcome = 0;
+    result.forEach((v, i) => totalOutcome += v * outcomes[i]);
+    const ratio = Math.round((totalOutcome/price * 100) *10)/10;
+    Console.print(RATIO_OF_RETURN(ratio));
+  }
+
+  lottoResult(lottoContainer, winningNums, bonusNum, price) {
     const result = Array.from({length :5}).fill(0);
     lottoContainer.forEach(v=> {
       const lotto = v.get();
-      this.matchNums(lotto, winningNums, bonusNum, result);
+      this.matchNums(lotto, winningNums, bonusNum, result, price);
     });
     Console.print(WINNING_OUTCOME(result));
+    this.printTotalOutcome(result, price);
   }
 
   async geterateWinNums() {
@@ -51,7 +59,7 @@ class App {
     Console.print(PRINT_PURCHASE_LOTTO(lottoContainer));
     const winningNums = new Lotto(await this.geterateWinNums());
     const bonusNum = await Console.readLineAsync(GENERATE_BONUS_NUM);
-    this.lottoResult(lottoContainer, winningNums, bonusNum);
+    this.lottoResult(lottoContainer, winningNums, bonusNum, price);
   }
 }
 
