@@ -1,7 +1,7 @@
-import View from '../View/View.js'
-import Consumer from '../Model/Consumer.js'
+import View from '../View/View.js';
+import Consumer from '../Model/Consumer.js';
 import Lotto from '../Lotto.js';
-import Statistics from '../Model/Statistics.js'
+import Statistics from '../Model/Statistics.js';
 
 class Controller {
   #view;
@@ -12,11 +12,11 @@ class Controller {
   constructor() {
     this.#view = new View();
   }
-  
+
   async #pay() {
     let errorCheck = true;
 
-    while(errorCheck){
+    while (errorCheck) {
       try {
         this.#consumer = new Consumer(await this.#view.inputPrice());
         errorCheck = false;
@@ -36,7 +36,7 @@ class Controller {
   async #winningPick() {
     let errorCheck = true;
 
-    while(errorCheck){
+    while (errorCheck) {
       try {
         this.#lotto = new Lotto(await this.#view.inputWinningNumber());
         errorCheck = false;
@@ -49,7 +49,7 @@ class Controller {
   async #bonusPick() {
     let errorCheck = true;
 
-    while(errorCheck){
+    while (errorCheck) {
       try {
         this.#lotto.setBonus(await this.#view.inputBonus());
         errorCheck = false;
@@ -68,7 +68,7 @@ class Controller {
     const winningNumber = this.#lotto.getWinningNumbers();
     const bonus = this.#lotto.getBonus();
     const lottoNumber = this.#consumer.getLottoNumber();
-    
+
     this.#statistics = new Statistics(winningNumber, lottoNumber, bonus);
     this.#view.printResult(this.#statistics.getResult());
     this.#view.printROI(this.#statistics.getROI());

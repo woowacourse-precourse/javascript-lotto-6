@@ -13,11 +13,11 @@ class Consumer {
 
   #validate(price) {
     if (isNaN(price)) {
-      throw new Error("[ERROR] 유효하지 않은 입력입니다.");
+      throw new Error('[ERROR] 유효하지 않은 입력입니다.');
     }
 
     if (price % 1000 !== 0) {
-      throw new Error("[ERROR] 1000원 단위로 입력해주세요.");
+      throw new Error('[ERROR] 1000원 단위로 입력해주세요.');
     }
   }
 
@@ -27,12 +27,12 @@ class Consumer {
   }
 
   pickLottoNumber() {
-    for(let i=0; i<this.#quantity; i+=1){
+    for (let i = 0; i < this.#quantity; i += 1) {
       this.#lottoNumber.push(Random.pickUniqueNumbersInRange(1, 45, 6));
       this.#lottoNumber[i].sort((a, b) => a - b);
     }
   }
-  
+
   getLottoNumber() {
     return this.#lottoNumber;
   }

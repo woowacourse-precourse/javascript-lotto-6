@@ -4,14 +4,16 @@ class View {
   printError(error) {
     Console.print(`\n${error}\n`);
   }
-  
+
   async inputPrice() {
     const price = Number(await Console.readLineAsync('구매금액을 입력해 주세요.\n'));
     return price;
   }
 
   async inputWinningNumber() {
-    const winningNumber = (await Console.readLineAsync('당첨 번호를 입력해 주세요.\n')).split(',').map(Number);
+    const winningNumber = (await Console.readLineAsync('당첨 번호를 입력해 주세요.\n'))
+      .split(',')
+      .map(Number);
     return winningNumber;
   }
 
@@ -25,8 +27,8 @@ class View {
   }
 
   printLottoNumber(lottoNumber) {
-    for (let i=0; i<lottoNumber.length; i+=1) {
-    Console.print(`[${lottoNumber[i].map((number) => number).join(', ')}]`);
+    for (let i = 0; i < lottoNumber.length; i += 1) {
+      Console.print(`[${lottoNumber[i].map((number) => number).join(', ')}]`);
     }
 
     Console.print('');

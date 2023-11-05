@@ -9,7 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Console.print(numbers)
+    Console.print(numbers);
     if (numbers.includes(NaN)) {
       throw new Error('[ERROR] 유효하지 않은 입력입니다.');
     }
@@ -22,7 +22,7 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 중복될 수 없습니다.');
     }
 
-    if (numbers.some(number => number > 45 || number < 1)) {
+    if (numbers.some((number) => number > 45 || number < 1)) {
       throw new Error('[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.');
     }
   }
@@ -36,7 +36,7 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.');
     }
 
-    if ((this.#numbers).includes(bonus)) {
+    if (this.#numbers.includes(bonus)) {
       throw new Error('[ERROR] 이미 입력된 숫자입니다.');
     }
   }
@@ -47,7 +47,7 @@ class Lotto {
   }
 
   getWinningNumbers() {
-    return this.#numbers.slice(0,6);
+    return this.#numbers.slice(0, 6);
   }
 
   getBonus() {

@@ -1,4 +1,4 @@
-import Controller from './Controller/Controller.js'
+import Controller from './Controller/Controller.js';
 
 class App {
   constructor() {
