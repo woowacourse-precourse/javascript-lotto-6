@@ -7,11 +7,9 @@ const inputs = {
     return priceAnswer;
   },
 
-  async enterWinningNumbers() {
-    const numbersAnswer = await Console.readLineAsync(
-      MESSAGE.input.winningNumbers,
-    );
-    return numbersAnswer;
+  async enterLotto() {
+    const lottoAnswer = await Console.readLineAsync(MESSAGE.input.lotto);
+    return lottoAnswer;
   },
 
   async enterBonusNumber() {
