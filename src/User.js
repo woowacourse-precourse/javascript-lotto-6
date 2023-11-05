@@ -7,13 +7,24 @@ class User {
       GAME_MESSAGE.purchaseAmount,
     );
 
-    return this.purchaseLottoCount(purchaseAmount);
+    this.purchaseLottoCount(purchaseAmount);
   }
 
   purchaseLottoCount(purchaseAmount) {
     const lottoCount = purchaseAmount / 1000;
 
     Console.print(`\n${lottoCount}${GAME_MESSAGE.printPurchase}`);
+
+    this.purchaseLottoNumber(lottoCount);
+  }
+
+  purchaseLottoNumber(lottoCount) {
+    const userLotto = new Array(lottoCount);
+
+    [...userLotto].forEach(() => {
+      const userLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+      Console.print(userLottoNumber.sort((a, b) => a - b));
+    });
   }
 }
 
