@@ -4,10 +4,15 @@ import {
   checkDuplicates,
   checkLottoNumber,
 } from "./validators/lottoNumberValidator.js";
+import {
+  checkBonusNumber,
+  checkBonusDuplicates,
+} from "./validators/bonusNumberValidator.js";
 import { errorMessage } from "./constants/messages.js";
 
 class Lotto {
   #numbers;
+  bonus;
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -23,6 +28,20 @@ class Lotto {
     }
     if (checkDuplicates(numbers)) {
       throw new Error(errorMessage.HAS_DUPLICATES);
+    }
+  }
+
+  getBonus(number) {
+    this.#validateBonus(number);
+    this.bonus = number;
+  }
+
+  #validateBonus(number) {
+    if (checkBonusNumber(number)) {
+      throw new Error(errorMessage.INVALID_RANGE);
+    }
+    if (checkBonusDuplicates(this.#numbers, number)) {
+      throw new Error(errorMessage.BONUS_DUPLICATES);
     }
   }
 
