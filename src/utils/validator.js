@@ -1,4 +1,4 @@
-import { printErrorMessage, printMessage } from './printMessage.js';
+import { printErrorMessage } from './printMessage.js';
 import MESSAGES from '../constants/messages.js';
 import NUMBERS from '../constants/numbers.js';
 
@@ -20,20 +20,35 @@ export const isValidPerchaseAmount = perchaseAmount => {
   }
 };
 
-export const isValidLottoNumber = userLottoNumberInput => {
-  if (userLottoNumberInput.length > 6 || userLottoNumberInput.length === 0) {
-    printErrorMessage(`${MESSAGES.errorHeader}${MESSAGES.invalidLength}`);
-  }
-
+const isInRange = numbers => {
   const numberRange = number =>
     number >= NUMBERS.minLottoNumber && number <= NUMBERS.maxLottoNumber;
 
-  if (!userLottoNumberInput.some(numberRange)) {
+  if (!numbers.some(numberRange)) {
     printErrorMessage(`${MESSAGES.errorHeader}${MESSAGES.invalidRange}`);
   }
+};
 
-  const deleteDuplication = new Set(userLottoNumberInput);
-  if (userLottoNumberInput.length !== deleteDuplication.length) {
+const isDuplicated = numbers => {
+  const deleteDuplication = new Set(numbers);
+
+  if (numbers.length !== deleteDuplication.size) {
     printErrorMessage(`${MESSAGES.errorHeader}${MESSAGES.duplicatedNumber}`);
   }
+};
+
+export const isValidLottoNumber = userLottoNumberInput => {
+  if (
+    userLottoNumberInput.length > NUMBERS.lottoNumberLength
+    || userLottoNumberInput.length === 0
+  ) {
+    printErrorMessage(`${MESSAGES.errorHeader}${MESSAGES.invalidLength}`);
+  }
+  isInRange(userLottoNumberInput);
+  isDuplicated(userLottoNumberInput);
+};
+
+export const isValidBouseNumber = (bonusNumber, includedBonusNumber) => {
+  isInRange(bonusNumber.split());
+  isDuplicated(includedBonusNumber);
 };

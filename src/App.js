@@ -5,6 +5,7 @@ import NUMBERS from './constants/numbers.js';
 import {
   isValidPerchaseAmount,
   isValidLottoNumber,
+  isValidBouseNumber,
 } from './utils/validator.js';
 import Lotto from './Lotto.js';
 import makeLottoNumbers from './utils/makeLottoNumbers.js';
@@ -26,6 +27,9 @@ class App {
     );
     const userLottoNumberInput = userNumber.split(',');
     isValidLottoNumber(userLottoNumberInput);
+    const bonusNumber = await Console.readLineAsync(MESSAGES.askBonusNumber);
+    userLottoNumberInput.push(bonusNumber);
+    isValidBouseNumber(bonusNumber, userLottoNumberInput);
   }
 }
 

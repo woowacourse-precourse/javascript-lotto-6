@@ -11,6 +11,7 @@ const MESSAGES = {
   invalidLength: `${NUMBERS.lottoNumberLength}개의 숫자를 입력해주세요`,
   invalidRange: `${NUMBERS.minLottoNumber}~${NUMBERS.maxLottoNumber}사이의 번호를 입력해주세요.`,
   duplicatedNumber: '중복되지 않은 숫자를 입력해주세요',
+  askBonusNumber: `${NUMBERS.minLottoNumber}~${NUMBERS.maxLottoNumber} 사이의 보너스 번호를 입력해 주세요.`,
 };
 
 Object.freeze(MESSAGES);
