@@ -4,7 +4,7 @@ export const { Console, Random } = MissionUtils;
 
 export const PRICE_UNIT = 1000;
 export const PLZ_PURCHASE_AMOUNT = '구매금액을 입력해 주세요.';
-export const PLZ_WINNING_NUMBER = '당첨 번호를 입력해 주세요.';
+export const PLZ_WINNING_NUMBERS = '당첨 번호를 입력해 주세요.';
 export const PLZ_BONUS_NUMBER = '보너스 번호를 입력해 주세요.';
 export const PRINT_PURCHASE_COUNT = '개를 구매했습니다.';
 export const PRINT_WINNING_STATISTIC = '당첨 통계\n---';
@@ -21,5 +21,5 @@ export const ERROR_PURCHASE_AMOUNT_STRING = '[ERROR] 로또 구매 금액은 숫
 
 export const ERROR_LOTTO_REPEAT = '[ERROR] 로또 번호는 중복될 수 없습니다.';
 export const ERROR_LOTTO_SIX_NUMBERS = '[ERROR] 로또 번호는 6자리여야 합니다.';
-export const ERROR_LOTTO_ARANGE = '[ERROR] 로또 번호의 범위는 1~45 사이 입니다.';
+export const ERROR_LOTTO_RANGE = '[ERROR] 로또 번호의 범위는 1~45 사이 입니다.';
 export const ERROR_LOTTO_TYPE = '[ERROR] 로또 번호는 숫자여야 합니다.';

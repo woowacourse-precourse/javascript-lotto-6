@@ -4,6 +4,7 @@ import {
   ERROR_PURCHASE_AMOUNT_STRING,
   ERROR_PURCHASE_AMOUNT_UNIT,
   PLZ_PURCHASE_AMOUNT,
+  PLZ_WINNING_NUMBERS,
   PRICE_UNIT,
 } from './Constant';
 
@@ -11,7 +12,7 @@ const InputView = {
   async readPurchaseAmount() {
     while (true) {
       try {
-        const answer = await Console.readLineAsync('로또 구입 금액을 입력하세요: ');
+        const answer = await Console.readLineAsync(PLZ_PURCHASE_AMOUNT);
         this.priceNumberValidator(answer);
         this.priceCheckValidator(answer);
         this.priceUnitValidator(answer);
@@ -40,6 +41,17 @@ const InputView = {
     const purchaseAmount = Number(answer);
     if (purchaseAmount < PRICE_UNIT || purchaseAmount === 0) {
       throw new Error(ERROR_PURCHASE_AMOUNT_PRICE);
+    }
+  },
+
+  async readWinningNumbers() {
+    while (true) {
+      try {
+        const winningNumbers = await Console.readLineAsync(PLZ_WINNING_NUMBERS);
+        return winningNumbers.split(',');
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
   },
 };
