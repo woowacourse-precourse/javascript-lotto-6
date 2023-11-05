@@ -5,9 +5,9 @@ import CommonValidator from './Common.js';
 
 class LottoValidator {
   static validate(numbers) {
-    LottoValidator.validateCount(numbers);
-    LottoValidator.validateDuplication(numbers);
-    LottoValidator.validateLottoNumbers(numbers);
+    this.validateCount(numbers);
+    this.validateDuplication(numbers);
+    this.validateLottoNumbers(numbers);
   }
 
   static validateCount(numbers) {
@@ -25,13 +25,15 @@ class LottoValidator {
   }
 
   static validateLottoNumbers(numbers) {
-    numbers.forEach(number => {
-      CommonValidator.validateIsNumber(number);
-      LottoValidator.validateLottoNumber(number);
-    });
+    numbers.forEach(number => this.validateLottoNumber(number));
   }
 
   static validateLottoNumber(number) {
+    CommonValidator.validateIsNumber(number);
+    this.validateLottoNumberInRange(number);
+  }
+
+  static validateLottoNumberInRange(number) {
     if (number < LOTTO.minNumber || number > LOTTO.maxNumber) {
       throw new InputError(LOTTO_ERROR.number);
     }

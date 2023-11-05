@@ -6,7 +6,6 @@ import Converter from '../utils/converter.js';
 import MoneyValidator from '../validator/Money.js';
 import LottoValidator from '../validator/Lotto.js';
 import OutputView from './Output.js';
-import CommonValidator from '../validator/Common.js';
 
 class InputView {
   static async retryOnError(callbackReadFunc) {
@@ -44,7 +43,6 @@ class InputView {
       INPUT_MESSAGE.bonusNumber,
     );
     const bonusNumber = Converter.stringToNumber(inputBonusNumber);
-    CommonValidator.validateIsNumber(bonusNumber);
     LottoValidator.validateLottoNumber(bonusNumber);
 
     return bonusNumber;
