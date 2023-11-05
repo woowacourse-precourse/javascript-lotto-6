@@ -13,15 +13,14 @@ class LottoController {
   }
 
   async run() {
-    await this.setUser();
+    await this.#setUser();
     this.#user.buyLottos();
-    this.getUserLottos();
-    await this.setWinningLottoNumbers();
-    await this.setWinningLottoBonus();
-    this.getResult();
+    this.#getUserLottos();
+    await this.#setWinningLottoNumbers();
+    await this.#setWinningLottoBonus();
   }
 
-  async setUser() {
+  async #setUser() {
     while (true) {
       const balance = await View.getInputByQuestion(MESSAGES.inputBalance);
       try {
@@ -33,14 +32,14 @@ class LottoController {
     }
   }
 
-  getUserLottos() {
+  #getUserLottos() {
     View.printOutput(`\n${this.#user.getLottos().length}${MESSAGES.outputLottoAmount}`)
     this.#user.getLottos().forEach(lotto => {
       View.printOutput(Utils.numberArrayToString(lotto));
     });
   }
 
-  async setWinningLottoNumbers() {
+  async #setWinningLottoNumbers() {
     while (true) {
       const numbers = await View.getInputByQuestion(MESSAGES.inputWinningNumbers);
       try {
@@ -52,7 +51,7 @@ class LottoController {
     }
   }
 
-  async setWinningLottoBonus() {
+  async #setWinningLottoBonus() {
     while (true) {
       const bonus = await View.getInputByQuestion(MESSAGES.inputBonusNumber);
       try {
@@ -62,19 +61,6 @@ class LottoController {
         View.printOutput(e.message);
       }
     }
-  }
-
-  getResult() {
-    const lottos = this.#user.getLottos();
-    let numbers = 0;
-    let bonus = false;
-
-    lottos.forEach((lotto) => {
-      numbers = this.#winningLotto.getMatchWithNumbers(lotto);
-      bonus = this.#winningLotto.getMatchWithBonus(lotto);
-    });
-
-    return { numbers, bonus };
   }
 }
 

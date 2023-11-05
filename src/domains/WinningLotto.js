@@ -50,8 +50,8 @@ class WinningLotto {
 
   getMatchWithNumbers(numbers) {
     let counter = 0;
-    numbers.forEach((number) => {
-      if (this.#numbers.includes(number)) {
+    this.#numbers.forEach((number) => {
+      if (numbers.includes(number)) {
         counter += 1;
       }
     });

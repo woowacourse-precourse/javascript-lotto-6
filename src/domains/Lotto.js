@@ -4,14 +4,15 @@ import { LottoLengthError, LottoRangeError, LottoTypeError, LottoDuplicatedError
 
 class Lotto {
   #numbers;
+  #prize;
 
   constructor(numbers) {
-    this._validate(numbers);
+    this.#validate(numbers);
     numbers.sort((a, b) => a - b);
     this.#numbers = numbers;
   }
 
-  _validate(numbers) {
+  #validate(numbers) {
     if (numbers.length !== SETTINGS.lottoLength) {
       throw new LottoLengthError(numbers);
     }
@@ -30,6 +31,41 @@ class Lotto {
 
   getNumbers() {
     return this.#numbers;
+  }
+
+  getMatchWithNumbers(numbers) {
+    let counter = 0;
+    this.#numbers.forEach((number) => {
+      if (numbers.includes(number)) {
+        counter += 1;
+      }
+    });
+
+    return counter;
+  }
+
+  getMatchWithBonus(bonus) {
+    if (this.#numbers.includes(bonus)) {
+      return true;
+    }
+    return false;
+  }
+
+  setPrize(numbers, bonus) {
+    switch (this.getMatchWithNumbers(numbers)) {
+      case 3: this.#prize = 5;
+      case 4: this.#prize = 4;
+      case 5:
+        this.#prize = 3;
+        if (this.getMatchWithBonus(bonus) == true) {
+          this.#prize = 2;
+        }
+      case 6: this.#prize = 1;
+    }
+  }
+
+  getPrize() {
+    return this.#prize;
   }
 }
 
