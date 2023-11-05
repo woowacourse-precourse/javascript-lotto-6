@@ -17,6 +17,10 @@ const Output = {
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${rank[1]}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${rank[0]}개`);             
   },
+
+  printProfitRate(profitRate) {    
+    Console.print(`총 수익률은 ${Parser.toFixedOneDecimal(profitRate)}%입니다.`);    
+  }
 }
 
 export default Output;
