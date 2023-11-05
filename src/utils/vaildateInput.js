@@ -64,7 +64,7 @@ function validateWinLottoInput(winNumsInput, bonusNum) {
 }
 
 function checkWinNums(winNums) {
-  winNums.forEach((winNum, index) => {
+  winNums.forEach((winNum) => {
     validation.inputType(winNum);
     validation.lottoNumberRange(winNum);
   });
