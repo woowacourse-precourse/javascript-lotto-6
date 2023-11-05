@@ -1,5 +1,17 @@
 import ErrorCheck from "./utils/ErrorCheck.js";
 
+import CONSTANTS from "../../constants/CONSTANTS.js";
+
+const {
+  LOTTO_PRICE,
+  FIRST_PLACE_WINNINGS,
+  SECOND_PLACE_WINNINGS,
+  THIRD_PLACE_WINNINGS,
+  FOURTH_PLACE_WINNINGS,
+  FIFTH_PLACE_WINNINGS,
+} = CONSTANTS;
+
+
 class LottoController{
   #model;
   #inputView;
@@ -12,7 +24,8 @@ class LottoController{
   }
 
   async play(){
-    this.#model.purchaseLotto(await this.inputPurchasePrice());
+    const purchasePrice = await this.inputPurchasePrice();
+    this.#model.purchaseLotto(purchasePrice);
     this.#outputView.printPurchasedLotto(this.#model.PurchasedLottoArray);
     this.#outputView.printLineBreak();
     
@@ -24,7 +37,9 @@ class LottoController{
     this.#outputView.printLineBreak();
     this.#outputView.printLottoResult(lottoResult);
 
-    
+    this.#outputView.printLottoReturnRatio(
+      this.getLottoReturnRatio(lottoResult, purchasePrice/LOTTO_PRICE)
+    );
   }
 
   async inputPurchasePrice(){
@@ -62,6 +77,18 @@ class LottoController{
         Print.errorMessage(error);
       }
     }
+  }
+
+  getLottoReturnRatio(resultArray, numberOfLotto) {
+    return (
+      (((resultArray[6] + resultArray[7]) * FIFTH_PLACE_WINNINGS +
+        (resultArray[8] + resultArray[9]) * FOURTH_PLACE_WINNINGS +
+        resultArray[10] * THIRD_PLACE_WINNINGS +
+        resultArray[11] * SECOND_PLACE_WINNINGS +
+        resultArray[12] * FIRST_PLACE_WINNINGS) /
+        (numberOfLotto * LOTTO_PRICE)) *
+      100
+    );
   }
 }
 

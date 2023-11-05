@@ -47,7 +47,7 @@ mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능
     - [x] 당첨통계 출력
     - [x] 수익률 출력
     - [x] 예외상황 출력
-- [ ] controller
+- [x] controller
   - [x] input view로부터 구매번호 입력 받아오기
     - [x] 구매 금액이 예외 상황이면 다시 받기
   - [x] 구입 금액에 맞춰 model의 purchasedLottoArray 업데이트
@@ -61,5 +61,5 @@ mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능
   
   - [x] model의 lottoResult로 당첨통계 output view로 출력 지시
 
-  - [ ] model의 lottoResult로 수익률 만들기
-  - [ ] 만든 수익률로 output view로 출력 지시
+  - [x] model의 lottoResult로 수익률 만들기
+  - [x] 만든 수익률로 output view로 출력 지시
