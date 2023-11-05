@@ -9,6 +9,7 @@ class App {
   async play() {
     await this.start();
     this.getLottos();
+    this.printLottos();
   }
 
   async start() {
@@ -47,6 +48,16 @@ class App {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
       (a, b) => a - b
     );
+  }
+
+  printLottos() {
+    MissionUtils.Console.print(`${this.lottosCount}개를 구매했습니다.`);
+    let i = 0;
+    while (i < this.lottosCount) {
+      MissionUtils.Console.print(this.lottos[i]);
+      i++;
+    }
+    MissionUtils.Console.print('');
   }
 }
 
