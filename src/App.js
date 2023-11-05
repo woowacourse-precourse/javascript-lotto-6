@@ -1,6 +1,8 @@
 import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
+const LOTTO_PRICE = 1000;
+
 class App {
   #cost;
   #winningNum;
@@ -20,13 +22,14 @@ class App {
     this.#cost = input;
   }
   costValid(input) {
-    if (!(/\d/.test(input) && input % 1000 === 0 && input > 0)) {
+    const numberInput = Number(input);
+    if (!(Number.isInteger(numberInput) && input % LOTTO_PRICE === 0 && input > 0)) {
       throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
     }
   }
   // lotto 생성 관련 함수들
   lottoGenerater() {
-    for (let i = 0; i < this.#cost / 1000; i++) {
+    for (let i = 0; i < this.#cost / LOTTO_PRICE; i++) {
       this.#lottos.push(this.makeLotto());
     }
   }
@@ -34,7 +37,7 @@ class App {
     return new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
   }
   showLottoList() {
-    MissionUtils.Console.print(`${this.#cost / 1000}개를 구매했습니다.`);
+    MissionUtils.Console.print(`${this.#cost / LOTTO_PRICE}개를 구매했습니다.`);
 
     this.#lottos.map((lotto) => {
       MissionUtils.Console.print(lotto.getNumbers());
@@ -46,12 +49,25 @@ class App {
     this.#winningNum = new Lotto(input.split(",").map(Number));
     MissionUtils.Console.print(this.#winningNum.getNumbers());
   }
+  // 보너스 번호 관련 함수들
+  async inputExtraNum() {
+    const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    this.extraNumValid(input);
+    this.#extraNum = input;
+  }
+  extraNumValid(input) {
+    const numberInput = Number(input);
+    if (!(Number.isInteger(numberInput) && input > 0)) {
+      throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+    }
+  }
 
   async play() {
     await this.inputCost();
     this.lottoGenerater();
     this.showLottoList();
     await this.inputWinnerNum();
+    await this.inputExtraNum();
   }
 }
 
