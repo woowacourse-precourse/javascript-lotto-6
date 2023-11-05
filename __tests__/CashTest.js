@@ -1,4 +1,4 @@
-import Cash from '../src/Cash.js';
+import Cash from '../src/objects/Cash.js';
 
 describe('캐시 클래스 테스트', () => {
   test('캐시가 숫자가 아니라면 예외가 발생한다.', () => {

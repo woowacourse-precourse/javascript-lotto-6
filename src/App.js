@@ -59,7 +59,9 @@ class App {
 
   #printLottoNumbers() {
     for (const lotto of this.#lottoEntries.values()) {
-      Console.print(lotto.getLottoNumbers());
+      Console.print(
+        JSON.stringify(lotto.getLottoNumbers()).replace(/,/g, ', ')
+      );
     }
 
     Console.print('');
