@@ -53,7 +53,7 @@ describe('당첨 번호 테스트', () => {
     });
   });
 
-  describe('쉼표(,)를 기준으로 각 값들에 대한 범위  테스트', () => {
+  describe('쉼표(,)를 기준으로 각 값들에 대한 범위 테스트', () => {
     test('6개의 숫자 모두 올바른 범위인 경우', () => {
       expect(() => {
         winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,6');
@@ -69,6 +69,20 @@ describe('당첨 번호 테스트', () => {
     test('범위밖인 46이 포함된 경우', () => {
       expect(() => {
         winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,46');
+      }).toThrow();
+    });
+  });
+
+  describe('쉼표(,)를 기준으로 각 값들에 대한 중복 테스트', () => {
+    test('6개의 숫자 모두 중복이 되지 않는 경우', () => {
+      expect(() => {
+        winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,6');
+      }).not.toThrow();
+    });
+
+    test('중복된 경우', () => {
+      expect(() => {
+        winnigNumberValidator.checkWinningNumbers('1,2,2,3,4,5');
       }).toThrow();
     });
   });
