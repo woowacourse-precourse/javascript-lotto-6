@@ -23,6 +23,7 @@ class LottoGame {
     for(let i = 0; i < lottoNum; i++){
       const tempLotto = new Lotto(this.pickLottoNums());
       this.#lottos.push(tempLotto);
+      IO.printMsg(tempLotto.formatNumbers());
     }
   }
 

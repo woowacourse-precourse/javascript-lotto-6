@@ -16,7 +16,12 @@ class Lotto {
     return this.#numbers;
   }
 
-  // TODO: 추가 기능 구현
+  formatNumbers() {
+    let str = '[';
+    str += (this.#numbers).join(', ');
+    str += ']';
+    return str;
+  }
 }
 
 export default Lotto;
