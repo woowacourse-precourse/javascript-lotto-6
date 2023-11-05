@@ -26,7 +26,7 @@ describe('보너스 번호 테스트', () => {
   );
 
   test('당첨번호와 보너스번호가 중복되면 예외처리한다.', () => {
-    const bonus = 1;
+    const bonus = '1';
     expect(() => {
       Bonus.generateBonus(bonus, winningLotto);
     }).toThrow(ERROR_MESSAGE.duplicatedWinningLotto);

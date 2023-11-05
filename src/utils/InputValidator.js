@@ -56,9 +56,8 @@ const InputValidator = {
     if (!this.isNumber(input)) throw new Error(ERROR_MESSAGE.notNumber);
     if (!this.isValidLottoRange(input))
       throw new Error(ERROR_MESSAGE.invalidLottoNumRange);
-    if (winningLotto.includes(input)) {
+    if (winningLotto.includes(Number(input)))
       throw new Error(ERROR_MESSAGE.duplicatedWinningLotto);
-    }
     return Number(input);
   },
 };
