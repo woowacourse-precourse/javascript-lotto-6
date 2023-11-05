@@ -1,6 +1,5 @@
-import { ERROR_MESSAGES } from "../utils/Messages.js";
-import { isDivisibleByThousand } from "../utils/Validation.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto";
 
 class UserLottoModel {
   #lottoTickets;
@@ -22,7 +21,7 @@ class UserLottoModel {
   }
 
   getLottoTickets() {
-    return this.#lottoTickets;
+    return this.#lottoTickets.map(lotto => lotto.getLottoNumber());
   }
 }
 
