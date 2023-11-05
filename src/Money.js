@@ -21,7 +21,7 @@ class Money {
         await Console.print(error.message);
       }
     }
-
+    this.#money = money;
     return money;
   }
 
