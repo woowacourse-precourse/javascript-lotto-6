@@ -1,5 +1,10 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, MESSAGE } from '../constant';
+import {
+  ERROR_MESSAGE,
+  MESSAGE,
+  RANK_MESSAGE,
+  STATISTICS_MESSAGE,
+} from '../constant';
 
 const getErrorMessage = (error) => {
   return `${ERROR_MESSAGE.header}${error}`;
@@ -22,4 +27,28 @@ const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
 
-export { getErrorMessage, printMessage, printPurchasedLottos, throwError };
+const makeStaticMessage = (...arg) => {
+  const { rank, number } = arg;
+  return `${RANK_MESSAGE[rank]} - ${number}${STATISTICS_MESSAGE.correctUnit}`;
+};
+// result :{rank: ,number: }[]
+const printWinningResult = (result) => {
+  result.forEach((v) => {
+    const message = makeStaticMessage(v);
+    printMessage(message);
+  });
+};
+
+const printRateOfReturn = (number) => {
+  const message = `${STATISTICS_MESSAGE.rateOfReturn.header}${number}${STATISTICS_MESSAGE.rateOfReturn.unit}${STATISTICS_MESSAGE.rateOfReturn.footer}`;
+  printMessage(message);
+};
+
+export {
+  getErrorMessage,
+  printMessage,
+  printPurchasedLottos,
+  printRateOfReturn,
+  printWinningResult,
+  throwError,
+};

@@ -9,6 +9,8 @@ import {
   getErrorMessage,
   printMessage,
   printPurchasedLottos,
+  printRateOfReturn,
+  printWinningResult,
   throwError,
 } from './MessageFactory';
 
@@ -18,6 +20,8 @@ import {
   getRandomNumbers,
 } from './RandomNumbers';
 
+import { getWinningResult } from './WinningResult';
+
 import { validateNumberRange, hasNoComma } from './Validate';
 
 export {
@@ -25,6 +29,7 @@ export {
   getErrorMessage,
   getLottoRandomNumbers,
   getRandomNumbers,
+  getWinningResult,
   hasNoComma,
   readBonusNumber,
   readInput,
@@ -32,6 +37,8 @@ export {
   readWinningNumbers,
   printMessage,
   printPurchasedLottos,
+  printRateOfReturn,
+  printWinningResult,
   throwError,
   validateNumberRange,
 };

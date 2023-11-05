@@ -20,4 +20,17 @@ const WINNINGS = Object.freeze({
   fiveAndBonus: '30,000,000',
   six: '2,000,000,000',
 });
-export { NUMBER_RANGE, LOTTO_FORM, BONUS_BALL_FORM, WINNING_AMOUNT };
+
+const FIVE_AND_BONUS = 'fiveAndBonus';
+const FIVE_NO_BONUS = 'fiveNoBonus';
+const RANK = ['three', 'four', FIVE_NO_BONUS, FIVE_AND_BONUS, 'six'];
+
+export {
+  NUMBER_RANGE,
+  LOTTO_FORM,
+  BONUS_BALL_FORM,
+  WINNINGS,
+  FIVE_AND_BONUS,
+  FIVE_NO_BONUS,
+  RANK,
+};
