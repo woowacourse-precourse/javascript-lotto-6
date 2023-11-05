@@ -63,6 +63,7 @@ const Validator = {
       throw new Error(errorMessage.WINNING_NUMBER_IN_BONUS_NUMBER);
     }
   },
+
   validateWinningNumber(number) {
     this.validateRegExp(number.join(''), LOTTO_NUMBER.regExp, errorMessage.INVALID_STRING_WINNING_NUMBER);
     for (let i = 0; i < number.length; i += 1) {
