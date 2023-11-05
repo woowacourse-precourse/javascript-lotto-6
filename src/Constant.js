@@ -15,24 +15,28 @@ export const LOTTO = Object.freeze({
   FIFTH_PLACE: 5000,
 });
 
-export const INPUT_MESSAGE = Object.freeze({
+export const INPUT = Object.freeze({
   PURCHASE_AMOUNT: '구입금액을 입력해 주세요.',
   WINNING_NUMBER: '당첨 번호를 입력해 주세요.',
   BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
 });
 
-export const OUTPUT_MESSAGE = Object.freeze({
-  PRINT_PURCHASE_QUANTITY: '개를 구매했습니다.',
-  PRINT_WINNING_STATISTICS: '당첨 통계',
-  PRINT_LINE: '---',
+export const OUTPUT = Object.freeze({
+  PRINT_PURCHASE_QUANTITY: '개를 구매했습니다.\n',
+  PRINT_WINNING_STATISTICS: '당첨 통계\n',
+  PRINT_LINE: '---\n',
   PRINT_MATCH: (matches, matchCount) =>
-    `${matches}개 일치 (${LOTTO.FIRST_PLACE.toLocaleString()}원) - ${matchCount}개`,
+    `${matches}개 일치 (${LOTTO.FIRST_PLACE.toLocaleString()}원) - ${matchCount}개\n`,
   PRINT_MATCH_BONUS: matchCount =>
-    `5개 일치, 보너스 볼 일치 (${LOTTO.SECOND_PLACE.toLocaleString()}원) - ${matchCount}개`,
-  PRINT_TOTAL_RETURN: '총 수익률은 $n%입니다.',
+    `5개 일치, 보너스 볼 일치 (${LOTTO.SECOND_PLACE.toLocaleString()}원) - ${matchCount}개\n`,
+  PRINT_TOTAL_RETURN: number => `총 수익률은 ${number}%입니다.`,
+  COMMA: ',',
 });
 
 export const ERROR = Object.freeze({
   NOT_PRICE_UNIT: `[ERROR] 로또 구입 금액은 ${LOTTO.PRICE.toLocaleString()}원 단위로 입력해주세요.`,
   INPUT_ONLY_NUMBER: '[ERROR] 로또 구입 금액은 숫자로만 입력해주세요.',
+  NOT_LOTTO_LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
+  DUPLICATE_NUMBER: '[ERROR] 로또 번호가 중복되었습니다.',
+  NOT_LOTTO_RANGE: '[ERROR] 로또 번호는 1~45 사이의 숫자를 입력해주세요.',
 });
