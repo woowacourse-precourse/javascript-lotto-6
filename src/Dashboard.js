@@ -37,6 +37,17 @@ class Dashboard {
     const rankIndex = rank - 1;
     this.rankCount[rankIndex] += 1;
   }
+
+  calculateEarnings(investment) {
+    const winningAmounts = [5000, 50000, 1500000, 30000000, 2000000000];
+
+    const totalEarnings = this.rankCount.reduce((total, count, index) => {
+      return total + count * winningAmounts[index];
+    }, 0);
+
+    const earningsRate = ((totalEarnings / investment) * 100).toFixed(1);
+    return earningsRate;
+  }
 }
 
 export default Dashboard;
