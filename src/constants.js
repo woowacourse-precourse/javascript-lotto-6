@@ -7,7 +7,7 @@ export const MESSAGE = {
   PURCHASE_COUNT: (cnt) => `${cnt}개를 구매했습니다.`,
   SAME_NUMBERS_COUNT: (numCnt, winnings, lottoCnt) =>
     `${numCnt}개 일치 (${winnings}원) - ${lottoCnt}개`,
-  TOTAL_ROR: (total) => `총 수익률은 ${total}%입니다.`,
+  TOTAL_RATE_OF_RETURN: (total) => `총 수익률은 ${total}%입니다.`,
 };
 
 export const ERROR = {
