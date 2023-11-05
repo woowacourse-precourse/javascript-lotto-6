@@ -59,6 +59,31 @@ class App {
     });
   }
 
+  printRankedLotto(rank, prize, count) {
+    const formattedPrize = new Intl.NumberFormat().format(prize);
+    const matched = rank > 2 ? 8 - rank : 7 - rank;
+
+    if (rank === 2) {
+      Console.print(
+        `${matched}개 일치, 보너스 볼 일치 (${formattedPrize}원) - ${count}개`,
+      );
+    } else {
+      Console.print(`${matched}개 일치 (${formattedPrize}원) - ${count}개`);
+    }
+  }
+
+  printMarginRate() {
+    const marginRate = (this.#totalPrize / this.#payment) * 100;
+    Console.print(`총 수익률은 ${marginRate.toFixed(1)}%입니다.`);
+  }
+
+  printResult() {
+    this.#rankedLotto.forEach((count, rank) => {
+      this.printRankedLotto(rank, LOTTO_PRIZE.get(rank), count);
+    });
+    this.printMarginRate();
+  }
+
   async play() {
     this.#payment = await Input.payment();
     const amount = this.#payment / LOTTO_PRICE;
@@ -70,6 +95,7 @@ class App {
     this.#bonus = await Input.bonusNumber(this.#winning);
 
     this.calculateResult();
+    this.printResult();
   }
 }
 
