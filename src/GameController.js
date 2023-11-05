@@ -13,6 +13,7 @@ class GameController {
   async play() {
     await this.getMoney();
     this.createLottos();
+    this.printLottoInfo();
   }
 
   async getMoney() {
@@ -37,4 +38,11 @@ class GameController {
       }
     }
   }
+
+  printLottoInfo() {
+    OutputView.printNumberOfLottos(this.#lottoMachine.numberOfLottos);
+    OutputView.printLottos(this.#lottoMachine.lottos);
+  }
+}
+
 export default GameController;

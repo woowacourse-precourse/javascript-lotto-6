@@ -37,6 +37,10 @@ class LottoMachine {
     }
   }
 
+  get lottos() {
+    return this.#lottos;
+  }
+
   #generateLottoNumbers() {
     return Random.pickUniqueNumbersInRange(
       LOTTO.range.min,
