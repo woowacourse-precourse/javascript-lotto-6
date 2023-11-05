@@ -1,6 +1,5 @@
-import AppError from './errors/error.js';
 import { Console } from '@woowacourse/mission-utils';
-import ERROR from './constants/error.js';
+import ExceptionHandler from './utils/ExceptionHandler.js';
 import LOTTO from './constants/lotto.js';
 import Lotto from './Domain/Lotto.js';
 import MESSAGE from './constants/message.js';
@@ -10,17 +9,13 @@ class App {
   #lotto;
 
   constructor() {
-    this.amount = 0;
+    this.validatedAmount = 0;
   }
 
   async play() {
     try {
-      /**
-       * 1. 로또 구입 금액 입력
-       */
-      this.amount = await this.inputUserPurchaseAmount();
-      const ticketCount = App.calculateTicketCountFromAmount(this.amount);
-      const lottoTickets = this.purchaseLotto(ticketCount);
+      const amount = await this.inputUserPurchaseAmount();
+      const lottoTickets = this.purchaseLotto(amount);
 
       // 6. (출력) 당첨 내역 출력
       const userLotto = await this.inputUserLotto();
@@ -30,36 +25,27 @@ class App {
 
       this.resultReturnRate();
     } catch (error) {
-      Console.print(`${error.message}`);
+      Console.print(`"play" ${error.message}`);
     }
   }
 
   /**
    * 1. (입력) 로또 구입 금액 입력
    */
+
   async inputUserPurchaseAmount() {
-    const amount = await Console.readLineAsync(MESSAGE.input.PurchaseAmount);
-    return App.validateNumericAmount(amount);
+    while (true) {
+      try {
+        const amount = await Console.readLineAsync(MESSAGE.input.PurchaseAmount);
+        this.validatedAmount = ExceptionHandler.validateAmount(amount);
+        return this.calculateTicketCountFromAmount(this.validatedAmount);
+      } catch (error) {
+        Console.print(`${error.message}`);
+      }
+    }
   }
 
-  /**
-   * 1.1. 문자가 포함되는 경우 걸러낸다.
-   */
-  static validateNumericAmount(amount) {
-    const numericPattern = /^(?:[1-9]\d{3,}|[1-9]\d{0,2}(,\d{3})+)$/;
-    if (!numericPattern.test(amount)) {
-      throw new AppError(ERROR.message.invalidPurchase);
-    }
-    return parseInt(amount.replace(/,/g, ''), 10);
-  }
-
-  /**
-   * 1.2. 1000단위 이상의 숫자를 받아서 티켓의 갯수를 알려준다.
-   */
-  static calculateTicketCountFromAmount(validatedAmount) {
-    if (validatedAmount % LOTTO.unit.unit) {
-      throw new AppError(ERROR.message.invalidUnit);
-    }
+  calculateTicketCountFromAmount(validatedAmount) {
     return validatedAmount / LOTTO.unit.unit;
   }
 
@@ -98,39 +84,34 @@ class App {
    */
 
   async inputUserLotto() {
-    // 3.1 winningNumbers
-    const winningNumbers = await Console.readLineAsync(MESSAGE.input.WinningNumbers);
-    const winningNumbersSet = new Set(winningNumbers.split(',').map(Number));
-    // 3.1.1 (예외) 중복인 경우
-    if (winningNumbersSet.size !== 6) {
-      throw new AppError(ERROR.message.duplicateNumber);
+    while (true) {
+      try {
+        const userLotto = await this.getUserLottoInput();
+        return userLotto;
+      } catch (error) {
+        Console.print(`${error.message}`);
+      }
     }
-    // // 3.1.2 (예외) ,, 이 중복으로 들어간 경우 : 1,2,,3,4,5
-    // if (winningNumbersSet.has(0)) {
-    //   throw new AppError(ERROR.message.noZero);
-    // }
-    // console.log(winningNumbersSet);
+  }
 
-    // 3.2 bonusNumber
-    const inputbonusNumber = await Console.readLineAsync(MESSAGE.input.BonusNumbers);
-    const bonusNumber = Number(inputbonusNumber);
-    if (winningNumbersSet.has(bonusNumber)) {
-      throw new AppError(ERROR.message.duplicateBonusNumber);
-    }
+  async getUserLottoInput() {
+    const inputWinningNumbers = await Console.readLineAsync(MESSAGE.input.WinningNumbers);
+    const winningNumbers = ExceptionHandler.validateWinningNumbers(inputWinningNumbers);
 
-    const userLotto = {
+    const inputBonusNumber = await Console.readLineAsync(MESSAGE.input.BonusNumbers);
+    const bonusNumber = ExceptionHandler.validateBonusNumber(inputBonusNumber, winningNumbers);
+
+    return {
       winningNumbers,
       bonusNumber,
     };
-
-    return userLotto;
   }
 
   /**
    * 4. 수익률
    */
   resultReturnRate() {
-    this.#lotto.calculateReturnRate(this.amount);
+    this.#lotto.calculateReturnRate(this.validatedAmount);
   }
 }
 
