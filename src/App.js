@@ -1,5 +1,6 @@
 import View from "./View.js";
 import Lotto from "./Lotto.js";
+import Price from "./Price.js";
 
 class App {
   view;
