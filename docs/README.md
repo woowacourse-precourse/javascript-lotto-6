@@ -102,6 +102,8 @@
 
 - Util
 
+  - LottoTicketExchange
+    > 구매금액만큼 로또갯수를 정제해주는 담당
   - NumberGenerator
     > 랜덤번호 생성 담당
   - Validator
