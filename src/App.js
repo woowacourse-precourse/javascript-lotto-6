@@ -6,6 +6,7 @@ const LOTTO_PRICE = 1000;
 
 class App {
   #winning;
+  #bonus;
 
   constructor() {
     this.lottos = [];
@@ -60,10 +61,10 @@ class App {
       userSelected.split(',').map((string) => Number(string)),
     );
 
-    const bonusNumber = await Console.readLineAsync(
+    this.#bonus = await Console.readLineAsync(
       '\n보너스 번호를 입력해 주세요.\n',
     );
-    this.validateBonusNumber(bonusNumber);
+    this.validateBonusNumber(this.#bonus);
   }
 }
 
