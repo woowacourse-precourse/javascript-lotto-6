@@ -5,6 +5,9 @@ import { inputPerChaseValidation } from "../validation/input-validation.js";
 class InputVeiw{
     async readPurchaseAmount() {
         const inputPrice = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
+        if (inputPrice <= 0){
+            throw new Error("[ERROR]");
+        }
         inputPerChaseValidation(inputPrice);
         return inputPrice / 1000;
     }
