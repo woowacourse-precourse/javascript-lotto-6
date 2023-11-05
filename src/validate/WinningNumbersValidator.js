@@ -1,7 +1,7 @@
 import { PURCHASE_AMOUNT_ERROR_MESSAGE } from "../constants/Message";
 
-const WinningNumbersValidator = {
-  validatePurchasePrice(price) {
+export default class WinningNumbersValidator {
+  static validatePurchasePrice(price) {
     if (price % 1000) {
       throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGE.wrongFormat);
     }
@@ -12,6 +12,4 @@ const WinningNumbersValidator = {
       throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGE.notNumber);
     }
   }
-};
-
-export default WinningNumbersValidator;
+}
