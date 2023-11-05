@@ -1,4 +1,5 @@
 export const ZERO = 0;
+export const ONE = 1;
 export const INIT_ZERO = 0;
 
 export const LOTTO_PRICE = 1000;
