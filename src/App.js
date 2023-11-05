@@ -8,6 +8,8 @@ class App {
     const ticketCount = purchaseAmount / 1000;
     Output.printTicketCount(ticketCount);
     const lottos = new Lottos(ticketCount);
+
+    const winningNumbers = await Input.getWinningNumbers();
   }    
 }
 
