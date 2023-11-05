@@ -30,3 +30,28 @@ export function checkLottoWinningNumbers(winningNumbers) {
 
     return splitNumbers;
 }
+
+
+export async function lottoBonusNumber(winningInputNumbers) {
+    const winninNumbers = winningInputNumbers.map((number) => parseInt(number, 10));
+    const bonusNumberInput = await MissionUtils.Console.readLineAsync(`\n${MESSAGES.LOTTO_BONUS_INPUT}\n`);
+    const bonusNumber = checkLottoBonusNumber(winninNumbers, bonusNumberInput);
+
+    return bonusNumber;
+}
+
+export function checkLottoBonusNumber(winninNumbers, bonusNumberInput) {
+    const bonusNumber = parseInt(bonusNumberInput, 10);
+
+    if (isNaN(bonusNumber)) {
+        throw new Error(MESSAGES.NUMBER_ERROR);
+    }
+    if (bonusNumber < 1 || bonusNumber > 45) {
+        throw new Error(MESSAGES.RANGE_ERROR);
+    }
+    if (new Set([...winninNumbers, bonusNumber]).size !== 7) {
+        throw new Error(MESSAGES.BONUS_ERROR);
+    }
+
+    return bonusNumber;
+}
