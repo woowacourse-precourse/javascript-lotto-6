@@ -22,7 +22,7 @@ const LOTTO_PRIZE_MONEY = {
 
 const INPUT_MESSAGE = {
   PURCHASE_MESSAGE: '구입금액을 입력해 주세요.\n',
-  PURCHASED_MESSAGE: (n) => `${n}개를 구매했습니다.\n`,
+  PURCHASED_MESSAGE: (n) => `\n${n}개를 구매했습니다.`,
   LOTTO_NUMBER: '당첨 번호를 입력해 주세요.\n',
   BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
 };
