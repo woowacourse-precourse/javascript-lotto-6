@@ -15,4 +15,11 @@ describe('숫자 테스트', () => {
 
     expect(Number.isInteger(input)).toEqual(result);
   });
+
+  test('toFixed 메서드로 인자 자리수까지 반올림이 하여 문자로 반환되는지 확인', () => {
+    const input = 62.54444333444333;
+    const result = '62.5';
+
+    expect(input.toFixed(1)).toEqual(result);
+  });
 });
