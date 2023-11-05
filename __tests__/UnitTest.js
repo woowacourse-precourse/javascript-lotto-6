@@ -1,6 +1,18 @@
 import UserPayment from "../src/domain/UserPayment";
 import { Console } from "@woowacourse/mission-utils";
 
+// Result.js 관련 단위 테스트
+describe("수익률 테스트", () => {
+  test("수익률 계산", () => {
+    const payment = 8000;
+    const prize = 5000;
+    const rate = (prize / payment) * 100;
+    const output = "62.5%";
+    const result = `${rate}%`;
+    expect(result).toEqual(output);
+  });
+});
+
 // UserPayment.js 관련 단위 테스트
 jest.mock("@woowacourse/mission-utils", () => ({
   Console: {
