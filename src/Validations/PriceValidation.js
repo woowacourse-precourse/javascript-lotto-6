@@ -12,7 +12,7 @@ class PriceValidation {
   #check1000Units() {
     const number = Number(this.#answer);
 
-    if (number % VALUE.condition.priceDivision > 0) {
+    if (number % VALUE.unit.price > 0) {
       throw new Error(MESSAGE.error.priceUnit);
     }
   }

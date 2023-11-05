@@ -2,7 +2,7 @@ import VALUE from '../constants/value.js';
 
 const priceModel = {
   calculateNumberOfLotto(price) {
-    return price / VALUE.condition.priceDivision;
+    return price / VALUE.unit.price;
   },
 };
 
