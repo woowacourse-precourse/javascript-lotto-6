@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -7,7 +9,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.every(item => isNaN(item))) {
+    Console.print(numbers)
+    if (numbers.includes(NaN)) {
       throw new Error('[ERROR] 유효하지 않은 입력입니다.');
     }
 
