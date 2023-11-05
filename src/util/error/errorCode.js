@@ -14,3 +14,7 @@ export const LOTTO_ERROR_CODE = {
   valueIsOutOfRange: '[ERROR] 로또 번호는 1 ~ 45 까지의 숫자로 이루어져야 합니다.',
   valueIsNotInteger: '[ERROR] 로또 번호는 정수로만 이루어져야 합니다.',
 };
+
+export const BONUS_ERROR_CODE = {
+  valueMatchesLotto: '[ERROR] 보너스 번호가 로또번호 중 하나 입니다.',
+};
