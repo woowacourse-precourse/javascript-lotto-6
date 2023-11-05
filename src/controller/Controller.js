@@ -2,7 +2,6 @@ import InputView from "../view/InputView";
 import OutputView from "../view/OutputView";
 import UserLottoModel from "../domain/UserLottoModel";
 import LottoMatcher from "../domain/LottoMatcher";
-import Lotto from "../domain/Lotto";
 
 import { Console } from "@woowacourse/mission-utils";
 
@@ -29,7 +28,7 @@ class LottoController {
         // 보너스 번호 입력
         const bonusNumbers = await InputView.getBonusNumbers();
         
-        // 로또 
+        // 로또 판별
         const lottoMatcher = new LottoMatcher(lottoTickets, winningNumbers, bonusNumbers, ticketPrice);
         const result = lottoMatcher.countMatches();
   

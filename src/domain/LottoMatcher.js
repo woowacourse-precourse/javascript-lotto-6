@@ -1,5 +1,6 @@
+import { GAME_PRIZES, NUMBER, PRIZE_AMOUNTS } from "../utils/Constans";
+
 class LottoMatcher {
-  
   constructor(tickets, winningNumbers, bonusNumber, ticketPrice) {
     this.tickets = tickets;
     this.winningNumbers = winningNumbers;
@@ -19,13 +20,13 @@ class LottoMatcher {
 
   #initializeResult() {
     return {
-      "5등": 0,
-      "4등": 0,
-      "3등": 0,
-      "2등": 0,
-      "1등": 0,
+      [GAME_PRIZES.FIRST_PRIZE]: NUMBER.ZERO,
+      [GAME_PRIZES.SECOND_PRIZE]: NUMBER.ZERO,
+      [GAME_PRIZES.THIRD_PRIZE]: NUMBER.ZERO,
+      [GAME_PRIZES.FOURTH_PRIZE]: NUMBER.ZERO,
+      [GAME_PRIZES.FIFTH_PRIZE]: NUMBER.ZERO,
       totalSpent: parseInt(this.ticketPrice),
-      totalEarnings: 0,
+      totalEarnings: NUMBER.ZERO,
     };
   }
 
@@ -33,15 +34,18 @@ class LottoMatcher {
     const matchedNumbers = this.#getMatchedNumbers(ticket, this.winningNumbers);
     const matchedCount = matchedNumbers.length;
 
-    if (matchedCount === 6) {
+    if (matchedCount === NUMBER.SIX) {
       this.#updateFirstPrize(result);
-    } else if (matchedCount === 5 && matchedNumbers.includes(this.bonusNumber)) {
+    } else if (
+      matchedCount === NUMBER.FIVE &&
+      matchedNumbers.includes(this.bonusNumber)
+    ) {
       this.#updateSecondPrize(result);
-    } else if (matchedCount === 5) {
+    } else if (matchedCount === NUMBER.FIVE) {
       this.#updateThirdPrize(result);
-    } else if (matchedCount === 4) {
+    } else if (matchedCount === NUMBER.FOUR) {
       this.#updateFourthPrize(result);
-    } else if (matchedCount === 3) {
+    } else if (matchedCount === NUMBER.THREE) {
       this.#updateFifthPrize(result);
     }
   }
@@ -51,28 +55,28 @@ class LottoMatcher {
   }
 
   #updateFirstPrize(result) {
-    result["1등"]++;
-    result.totalEarnings += 2000000000;
+    result[GAME_PRIZES.FIRST_PRIZE]++;
+    result.totalEarnings += PRIZE_AMOUNTS.FIRST_PRIZE;
   }
 
   #updateSecondPrize(result) {
-    result["2등"]++;
-    result.totalEarnings += 30000000;
+    result[GAME_PRIZES.SECOND_PRIZE]++;
+    result.totalEarnings += PRIZE_AMOUNTS.SECOND_PRIZE_AMOUNT;
   }
 
   #updateThirdPrize(result) {
-    result["3등"]++;
-    result.totalEarnings += 1500000;
+    result[GAME_PRIZES.THIRD_PRIZE]++;
+    result.totalEarnings += PRIZE_AMOUNTS.THIRD_PRIZE_AMOUNT;
   }
 
   #updateFourthPrize(result) {
-    result["4등"]++;
-    result.totalEarnings += 50000;
+    result[GAME_PRIZES.FOURTH_PRIZE]++;
+    result.totalEarnings += PRIZE_AMOUNTS.FOURTH_PRIZE_AMOUNT;
   }
 
   #updateFifthPrize(result) {
-    result["5등"]++;
-    result.totalEarnings += 5000;
+    result[GAME_PRIZES.FIFTH_PRIZE]++;
+    result.totalEarnings += PRIZE_AMOUNTS.FIFTH_PRIZE_AMOUNT;
   }
 }
 

@@ -1,3 +1,5 @@
+import { NUMBER } from "./Constans";
+
 const isDivisibleByThousand = (purchaseAmount) => {
     if (purchaseAmount % 1000 !== 0) {
         return false;
@@ -20,11 +22,11 @@ const isNumberLengthValid = (number) => {
             NumberSet.add(number);
         }
     });
-    return NumberSet.size === 6;
+    return NumberSet.size === NUMBER.SIX;
 }
 
 const isNumberInRange = (number) => {
-    return number >= 1 && number <= 45;
+    return number >= NUMBER.ONE && number <= NUMBER.FORTY_FIVE;
 }
 
 export { isDivisibleByThousand, isNumber, isNumberInRange, isNumberLengthValid };

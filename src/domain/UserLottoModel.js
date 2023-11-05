@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { NUMBER, PRIZE_AMOUNTS } from "../utils/Constans";
 import Lotto from "./Lotto";
 
 class UserLottoModel {
@@ -10,14 +11,14 @@ class UserLottoModel {
 
   generateLottoTicket(inputNum) {
     const tickets = this.#calculateNumberOfTickets(inputNum);
-    for (let i = 0; i < tickets; i++) {
-      const ticket = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    for (let index = NUMBER.ZERO; index < tickets; index++) {
+      const ticket = MissionUtils.Random.pickUniqueNumbersInRange(NUMBER.ONE, NUMBER.FORTY_FIVE, NUMBER.SIX);
       this.#lottoTickets.push(new Lotto(ticket));
     }
   }
 
   #calculateNumberOfTickets(inputNum) {
-    return inputNum / 1000;
+    return inputNum / PRIZE_AMOUNTS.TICKET_PRICE_AMOUNT;
   }
 
   getLottoTickets() {
