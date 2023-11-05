@@ -5,11 +5,13 @@ export class PrintValue {
 	#lottoQuantity;
 	#lottoList;
 	#winningList;
+	#roi;
 
-	constructor(lottoQuantity, lottoList, winningList) {
+	constructor(lottoQuantity, lottoList, winningList, roi) {
 		this.#lottoQuantity = lottoQuantity;
 		this.#lottoList = lottoList;
 		this.#winningList = winningList;
+		this.#roi = roi;
 	}
 
 	test() {
@@ -17,6 +19,7 @@ export class PrintValue {
 		this.lottoIssuedQuantity();
 		// console.log(this.lottoList);
 		this.winningDetail(this.#winningList);
+		this.totalReturn();
 	}
 
 	lottoIssuedQuantity() {
@@ -34,5 +37,9 @@ export class PrintValue {
 5개 일치, 보너스 볼 일치 (30,000,000원) -  ${winningList[3]}개
 6개 일치 (2,000,000,000원) -  ${winningList[4]}개
     `);
+	}
+
+	totalReturn() {
+		Console.print(`총 수익률은 ${this.#roi}%입니다.`);
 	}
 }
