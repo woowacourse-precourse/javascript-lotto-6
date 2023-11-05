@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { checkLength, checkDuplicates, checkLottoNumber } from "./validations/lottoNumberValidation";
+import { checkBonusNumber, checkBonusDuplicates } from "./validations/bonusNumberValidation";
 import { errorMessage } from "./constants/messages";
 
 class Lotto {
@@ -19,6 +20,20 @@ class Lotto {
     }
     if (checkDuplicates(numbers)) {
       throw new Error(errorMessage.HAS_DUPLICATES);
+    }
+  }
+
+  getBonus(number) {
+    this.#validateBonus(number);
+    this.bonus = number;
+  }
+
+  #validateBonus(number) {
+    if (checkBonusNumber(number)) {
+      throw new Error(errorMessage.INVALID_RANGE);
+    }
+    if (checkBonusDuplicates(this.#numbers, number)) {
+      throw new Error(errorMessage.BONUS_DUPLICATES);
     }
   }
 
