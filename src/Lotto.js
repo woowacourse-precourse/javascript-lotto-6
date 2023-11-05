@@ -9,10 +9,14 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    try {
+      if (numbers.length !== 6) throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    } catch {
+      return inputLottoNumbers();
     }
+  
   }
+
 
   
 }
@@ -42,7 +46,13 @@ const publishLotto = (count) => {
   }
 }
 
-publishLotto(3);
-console.log(PublishedLotto.numbers);
+const inputLottoNumbers = async() => {
+  const input = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+  const inputNumbers = input.split(',').map(Number);
+  const lotto = new Lotto(inputNumbers);
+  
+}
+
+
 
 export default Lotto;
