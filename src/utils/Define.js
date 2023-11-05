@@ -12,6 +12,7 @@ export const PERCENTAGE = 100;
 export const DEMICAL_POINT = 1;
 
 export const BUYING_COUNT_MESSAGE = '개를 구매했습니다.';
+export const JOIN_WITH_COMMA = ', ';
 
 export const PRIZE_MAP = {
     '3': 5000,

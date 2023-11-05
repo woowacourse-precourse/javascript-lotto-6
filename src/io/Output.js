@@ -6,6 +6,7 @@ import {
     ZERO,
     EARNING_MESSAGES,
     BUYING_COUNT_MESSAGE,
+    JOIN_WITH_COMMA,
 } from "../utils/Define";
 import { calculateEarnings } from "../utils/Calculate.js";
 
@@ -42,4 +43,9 @@ const displayEarnings = (results, purchaseAmount) => {
 
 export const printNumberOfLottos = (numberOfLottos) => {
     Console.print(`${numberOfLottos}${BUYING_COUNT_MESSAGE}`);
+};
+
+export const printLottoNumbers = (lotto) => {
+    const numbers = lotto.getNumbers().join(JOIN_WITH_COMMA);
+    Console.print(`[${numbers}]`);
 };
