@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import MESSAGE from "../constant/Message.js";
 
+
 class Input {
 
   async Price() {
