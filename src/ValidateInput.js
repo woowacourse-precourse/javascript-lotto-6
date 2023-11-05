@@ -19,6 +19,11 @@ class ValidateInput {
       );
     }
 
+    const set = new Set(numbers);
+    if (numbers.length !== set.size) {
+      throw new Error("[ERROR] 번호들 중 중복된 값이 존재합니다.\n");
+    }
+
     if (
       numbers.some(
         (number) =>
@@ -33,7 +38,7 @@ class ValidateInput {
     }
   }
 
-  static validateBonusNumber(number) {
+  static validateBonusNumber(number, winningNumber) {
     if (
       isNaN(number) ||
       number < MIN_WINNING_NUMBER ||
@@ -41,6 +46,12 @@ class ValidateInput {
     ) {
       throw new Error(
         "[ERROR] 보너스 번호는 1부터 45사이의 숫자로 입력해주세요.\n",
+      );
+    }
+
+    if (winningNumber.some((item) => item === number)) {
+      throw new Error(
+        "[ERROR] 당첨 번호들 중 보너스 번호와 중복된 값이 존재합니다.\n",
       );
     }
   }

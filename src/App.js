@@ -11,7 +11,7 @@ class App {
 
     const winningNumber = await this.getWinningNumber();
 
-    const bonusNumber = await this.getBonusNumber();
+    const bonusNumber = await this.getBonusNumber(winningNumber);
 
     Console.print(winningNumber);
     Console.print(bonusNumber);
@@ -44,13 +44,14 @@ class App {
     }
   }
 
-  async getBonusNumber() {
+  async getBonusNumber(winningNumber) {
     while (true) {
       try {
-        const input =
-          await Console.readLineAsync("보너스 번호를 입력해주세요.\n");
+        const input = await Console.readLineAsync(
+          "\n보너스 번호를 입력해주세요.\n",
+        );
         const number = Number(input);
-        ValidateInput.validateBonusNumber(number);
+        ValidateInput.validateBonusNumber(number, winningNumber);
         return number;
       } catch (error) {
         Console.print(error.message);
