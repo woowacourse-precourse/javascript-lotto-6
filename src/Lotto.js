@@ -27,13 +27,22 @@ const inputAmount = async() => {
     return inputAmount();
   }
   return input;
-} 
+}
 
-const publishedLotto = {
+const PublishedLotto = {
   numbers : [],
   rank : [0, 0, 0, 0, 0]
 }
 
-inputAmount();
+const publishLotto = (count) => {
+  for (let i = 0; i < count; i += 1) {
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    numbers.sort((a, b) => a - b);
+    PublishedLotto.numbers.push(numbers);
+  }
+}
+
+publishLotto(3);
+console.log(PublishedLotto.numbers);
 
 export default Lotto;
