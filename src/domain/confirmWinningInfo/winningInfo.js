@@ -1,57 +1,79 @@
 import { countBy } from '../../utils/array.js';
 import { isEmptyObject } from '../../utils/object.js';
 
-const PRIZE_CATEGORY = Object.freeze({
-  first: '1st',
-  second: '2nd',
-  third: '3rd',
-  fourth: '4th',
-  fifth: '5th',
-});
-
 const calculatePrize = (prizeInfo, rewardInfo) =>
   Object.entries(rewardInfo).reduce(
     (prevPrize, [prizeCategory, count]) => prevPrize + (prizeInfo[prizeCategory] ?? 0) * count,
     0,
   );
 
-const createPrizeCategory = ({ matchCount, hasBonusNumber }) => {
-  if (matchCount === 6) return PRIZE_CATEGORY.first;
+const createPrizeInfo = (rankInfo) =>
+  Object.values(rankInfo).reduce(
+    (prevInfo, { rank, prizeAmount }) => ({ ...prevInfo, [rank]: prizeAmount }),
+    {},
+  );
 
-  if (matchCount === 5 && hasBonusNumber) return PRIZE_CATEGORY.second;
+const createPrizeRank = ({ lottoMatchingInfo: { matchCount, hasBonusNumber }, rankInfo }) => {
+  const rankCategories = Object.values(rankInfo);
 
-  if (matchCount === 5) return PRIZE_CATEGORY.third;
+  const matchingRankCategory = rankCategories.find(
+    (category) =>
+      category?.matchCount === matchCount && category?.hasBonusNumber === hasBonusNumber,
+  );
 
-  if (matchCount === 4) return PRIZE_CATEGORY.fourth;
-
-  if (matchCount === 3) return PRIZE_CATEGORY.fifth;
-
-  return null;
+  return matchingRankCategory?.rank ?? null;
 };
 
-const createRewardInfo = (lottoMatchingResult) => {
-  const matchedPrizeCategories = lottoMatchingResult.map(createPrizeCategory);
+const createRewardInfo = ({ lottoMatchingResult, rankInfo }) => {
+  const matchedPrizeRanks = lottoMatchingResult.map((lottoMatchingInfo) =>
+    createPrizeRank({ lottoMatchingInfo, rankInfo }),
+  );
 
-  return countBy(matchedPrizeCategories);
+  return countBy(matchedPrizeRanks);
 };
 
 const winningInfo = Object.freeze({
   constants: Object.freeze({
-    prizeInfo: Object.freeze({
-      [PRIZE_CATEGORY.first]: 2_000_000_000,
-      [PRIZE_CATEGORY.second]: 30_000_000,
-      [PRIZE_CATEGORY.third]: 1_500_000,
-      [PRIZE_CATEGORY.fourth]: 50_000,
-      [PRIZE_CATEGORY.fifth]: 5_000,
+    rankInfo: Object.freeze({
+      '1st': Object.freeze({
+        matchCount: 6,
+        hasBonusNumber: false,
+        prizeAmount: 2_000_000_000,
+        rank: '1st',
+      }),
+      '2nd': Object.freeze({
+        matchCount: 5,
+        hasBonusNumber: true,
+        prizeAmount: 30_000_000,
+        rank: '2nd',
+      }),
+      '3rd': Object.freeze({
+        matchCount: 5,
+        hasBonusNumber: false,
+        prizeAmount: 1_500_000,
+        rank: '3rd',
+      }),
+      '4th': Object.freeze({
+        matchCount: 4,
+        hasBonusNumber: false,
+        prizeAmount: 50_000,
+        rank: '4th',
+      }),
+      '5th': Object.freeze({
+        matchCount: 3,
+        hasBonusNumber: false,
+        prizeAmount: 5_000,
+        rank: '5th',
+      }),
     }),
   }),
 
   createWinningInfo(lottoMatchingResult) {
-    const rewardInfo = createRewardInfo(lottoMatchingResult);
-
+    const rewardInfo = createRewardInfo({ lottoMatchingResult, rankInfo: this.constants.rankInfo });
     if (isEmptyObject(rewardInfo)) return { rewardInfo: null, prize: 0 };
 
-    const prize = calculatePrize(this.constants.prizeInfo, rewardInfo);
+    const prizeInfo = createPrizeInfo(this.constants.rankInfo);
+    const prize = calculatePrize(prizeInfo, rewardInfo);
 
     return { rewardInfo, prize };
   },

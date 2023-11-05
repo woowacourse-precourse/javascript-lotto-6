@@ -67,9 +67,9 @@ const lottoGameConsole = Object.freeze({
         const prizeCategories = Object.keys(this.prizeDescription).reverse();
 
         const formatPrizeDescription = (category) => {
-          const { prizeInfo } = winningInfo.constants;
+          const { rankInfo } = winningInfo.constants;
           const description = this.prizeDescription[category];
-          const prizeAmount = prizeInfo[category].toLocaleString();
+          const prizeAmount = rankInfo[category].prizeAmount.toLocaleString();
           const count = rewardInfo[category] ?? 0;
 
           return `${description} (${prizeAmount}원) - ${count}개`;

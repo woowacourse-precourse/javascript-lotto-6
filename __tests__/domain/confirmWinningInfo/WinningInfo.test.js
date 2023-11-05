@@ -2,11 +2,11 @@
 import winningInfo from '../../../src/domain/confirmWinningInfo/winningInfo.js';
 
 const PRIZES = {
-  '1st': winningInfo.constants.prizeInfo['1st'],
-  '2nd': winningInfo.constants.prizeInfo['2nd'],
-  '3rd': winningInfo.constants.prizeInfo['3rd'],
-  '4th': winningInfo.constants.prizeInfo['4th'],
-  '5th': winningInfo.constants.prizeInfo['5th'],
+  '1st': winningInfo.constants.rankInfo['1st'].prizeAmount,
+  '2nd': winningInfo.constants.rankInfo['2nd'].prizeAmount,
+  '3rd': winningInfo.constants.rankInfo['3rd'].prizeAmount,
+  '4th': winningInfo.constants.rankInfo['4th'].prizeAmount,
+  '5th': winningInfo.constants.rankInfo['5th'].prizeAmount,
 };
 
 describe('당첨 정보 테스트', () => {
