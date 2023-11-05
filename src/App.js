@@ -7,7 +7,7 @@ const LOTTO_PRICE = 1000;
 class Input {
   static async inputPayment() {
     const payment = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    App.validatePayment(payment);
+    Validate.validatePayment(payment);
     return Number(payment);
   }
 
@@ -22,20 +22,12 @@ class Input {
     const bonus = await Console.readLineAsync(
       '\n보너스 번호를 입력해 주세요.\n',
     );
-    App.validateBonusNumber(bonus, winning);
+    Validate.validateBonusNumber(bonus, winning);
     return bonus;
   }
 }
 
-class App {
-  #winning;
-  #bonus;
-  #payment;
-
-  constructor() {
-    this.lottos = [];
-  }
-
+class Validate {
   static validatePayment(input) {
     const payment = Number(input);
 
@@ -59,6 +51,16 @@ class App {
     if (winning.includes(bonus)) {
       throw new Error(ERROR_MESSAGE.duplicateWinningNumber);
     }
+  }
+}
+
+class App {
+  #winning;
+  #bonus;
+  #payment;
+
+  constructor() {
+    this.lottos = [];
   }
 
   generateLottos(amount) {
