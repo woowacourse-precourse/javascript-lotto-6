@@ -24,3 +24,8 @@ const printAllMatchResults = (results) => {
         printMatchResult(matchCount, prize, count);
     });
 };
+
+const displayResults = (results) => {
+    printWinningHead();
+    printAllMatchResults(results);
+};
