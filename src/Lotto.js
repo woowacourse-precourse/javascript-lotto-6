@@ -32,6 +32,22 @@ class Lotto {
 
     return [sameCnt, bonusCnt];
   }
+
+  saveCompareResult(compareResult, lottoBoard) {
+    const [sameCnt, bonusCnt] = compareResult;
+
+    if (sameCnt === 3) {
+      lottoBoard.threeSame += 1;
+    } else if (sameCnt === 4) {
+      lottoBoard.fourSame += 1;
+    } else if (sameCnt === 5 && bonusCnt === 1) {
+      lottoBoard.fiveAndBonusSame += 1;
+    } else if (sameCnt === 5) {
+      lottoBoard.fiveSame += 1;
+    } else if (sameCnt === 6) {
+      lottoBoard.sixSame += 1;
+    }
+  }
 }
 
 export default Lotto;
