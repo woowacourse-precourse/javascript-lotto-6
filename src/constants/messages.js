@@ -1,5 +1,6 @@
 const INPUT_QUERY = {
   lottoMoney: "구입금액을 입력해 주세요." + "\n",
+  lottoAnswer: "당첨 번호를 입력해 주세요." + "\n",
 };
 
 const errorString = (string) => `[ERROR] ${string}`;

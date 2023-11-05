@@ -1,8 +1,12 @@
+import { typeValidator } from "./utils/validators.js";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
+    Lotto.#validateNumbersInRange(numbers, 1, 45);
+    Lotto.#validateHasNoDuplicate(numbers);
     this.#numbers = numbers;
   }
 
@@ -17,6 +21,25 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  static #validateNumbersInRange(numbers, minInclusive, maxInclusive) {
+    numbers.forEach((number) => Lotto.#validateNumberInRange(number, minInclusive, maxInclusive));
+  }
+
+  static #validateHasNoDuplicate(array) {
+    if (new Set(array).size !== array.length) {
+      throw new Error("[ERROR] 로또에 중복된 값이 포함되어 있습니다.");
+    }
+  }
+
+  static #validateNumberInRange(number, minInclusive, maxInclusive) {
+    typeValidator.isValidNumber(number);
+
+    if (!(minInclusive <= number && number <= maxInclusive)) {
+      throw new Error(
+        `[ERROR] 로또 번호는 ${minInclusive}부터 ${maxInclusive} 사이의 숫자여야 합니다.`
+      );
+    }
+  }
 }
 
 export default Lotto;

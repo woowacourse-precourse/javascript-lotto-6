@@ -9,6 +9,10 @@ const InputView = {
   async readLottoMoney() {
     return await this.readInput(INPUT_QUERY.lottoMoney);
   },
+
+  async readLottoAnswer() {
+    return await this.readInput(INPUT_QUERY.lottoAnswer);
+  },
 };
 
 export { InputView };
