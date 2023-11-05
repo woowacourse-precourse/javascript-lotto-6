@@ -42,4 +42,16 @@ describe("당첨 통계 테스트", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(logs));
   });
+
+  test("총 수익률을 출력한다.", () => {
+    const logSpy = getLogSpy();
+
+    const inputMoney = 8000;
+    const totalPrize = 5000;
+    const log = "62.5%";
+
+    totalRate(inputMoney, totalPrize);
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+  });
 });
