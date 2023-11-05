@@ -67,6 +67,14 @@ class App {
     );
   }
 
+  calcReturn(purchase) {
+    let prize = 0;
+    for (const key in this.#results) {
+      prize += this.#results[key] * key;
+    }
+    return Math.floor((prize / purchase) * 100);
+  }
+
   async play() {
     const price = await Input.getLottoPrice();
     Console.print('');
@@ -96,6 +104,9 @@ class App {
     });
 
     this.printResults();
+
+    const returnRate = this.calcReturn(price);
+    Console.print(`총 수익률은 ${returnRate}%입니다.`);
   }
 }
 
