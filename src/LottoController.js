@@ -44,7 +44,7 @@ class LottoController {
     return Random.pickUniqueNumbersInRange(
       LOTTO.START_NUMBER,
       LOTTO.END_NUMBER,
-      LOTTO.NUMBER_COUNT
+      LOTTO.SIZE
     );
   }
 
