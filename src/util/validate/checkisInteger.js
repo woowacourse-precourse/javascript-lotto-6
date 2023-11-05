@@ -1,6 +1,6 @@
 import { LOTTO_ERROR_CODE } from '../error/errorCode.js';
 
-function checkIsInteger(verifyValue) {
+export function checkIsInteger(verifyValue) {
   const isNotInteger = !Number.isInteger(verifyValue);
 
   if (isNotInteger) {
@@ -8,7 +8,7 @@ function checkIsInteger(verifyValue) {
   }
 }
 
-export default function checkLottoIsInteger(list) {
+export function checkLottoIsInteger(list) {
   list.forEach((element) => {
     checkIsInteger(element);
   });

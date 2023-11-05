@@ -8,7 +8,7 @@ export function checkPurchaseIsNotInRange(input) {
   }
 }
 
-function checkNumberIsNotInRange(number) {
+export function checkNumberIsNotInRange(number) {
   const isOutOfRange = number < 1 || number > 45;
   if (isOutOfRange) {
     throw new Error(`${LOTTO_ERROR_CODE.valueIsOutOfRange}`);
