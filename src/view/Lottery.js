@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_MESSAGE } from './constants/message.js';
-import { LOTTO } from './constants/lotto.js';
-import { COMMON } from './constants/common.js';
-import { validation } from './utils/validation.js';
-import ValidateError from './error/ValidateError.js';
+import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/message.js';
+import { LOTTO } from '../constants/lotto.js';
+import { COMMON } from '../constants/common.js';
+import { validation } from '../utils/validation.js';
+import ValidateError from '../error/ValidateError.js';
 
 class Lottery {
   #winningNumbers;
