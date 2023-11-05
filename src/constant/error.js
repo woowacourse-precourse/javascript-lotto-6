@@ -5,7 +5,7 @@ const BONUS_NUMBER = Object.freeze({
 });
 
 const BUYING_PRICE = Object.freeze({
-  GREATER_THAN_ZERO: '[ERROR] 구입 금액은 0보다 큰 숫자여야 합니다.',
+  POSITIVE_INTEGER: '[ERROR] 구입 금액은 0보다 큰 숫자여야 합니다.',
   UNIT: '[ERROR] 구입 금액은 1,000원 단위여야 합니다.',
 });
 

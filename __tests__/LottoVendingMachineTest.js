@@ -9,7 +9,7 @@ describe('LottoVendingMachine 클래스 테스트', () => {
   test('구입 금액이 0보다 큰 숫자가 아니면 예외가 발생한다.', () => {
     expect(() => {
       LottoVendingMachine.buyLottoTickets('-1');
-    }).toThrow(ERROR.BUYING_PRICE.GREATER_THAN_ZERO);
+    }).toThrow(ERROR.BUYING_PRICE.POSITIVE_INTEGER);
   });
 
   test('구입 금액이 1,000원 단위가 아니면 예외가 발생한다.', () => {

@@ -11,8 +11,8 @@ class LottoVendingMachine {
   }
 
   static #validate(buyingPrice) {
-    if (!/^[1-9][0-9]*$/.test(buyingPrice)) {
-      throw new Error(ERROR.BUYING_PRICE.GREATER_THAN_ZERO);
+    if (!/^[1-9]\d*$/.test(buyingPrice)) {
+      throw new Error(ERROR.BUYING_PRICE.POSITIVE_INTEGER);
     }
 
     if (Number(buyingPrice) % 1000 !== 0) {
