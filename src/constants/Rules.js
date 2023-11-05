@@ -13,7 +13,7 @@ const MATCHES_TO_RANK = {
 };
 
 const WINNING_RANK_TO_PRIZE = {
-  1: 200_000_000,
+  1: 2_000_000_000,
   2: 30_000_000,
   3: 1_500_000,
   4: 50_000,
