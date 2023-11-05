@@ -22,7 +22,10 @@ const Validator = {
     if (new Set(lottoNumbers).size !== 6) throw new Error(ERROR_MESSAGES.invalidLottoNumber);
     if (
       lottoNumbers.some(
-        (lottoNumber) => lottoNumber > 45 || lottoNumber < 1 || !Number.isSafeInteger(lottoNumber),
+        (lottoNumber) =>
+          lottoNumber > CONSTANTS.maximumNumber ||
+          lottoNumber < CONSTANTS.minimumNumber ||
+          !Number.isSafeInteger(lottoNumber),
       )
     )
       throw new Error(ERROR_MESSAGES.invalidLottoNumber);
