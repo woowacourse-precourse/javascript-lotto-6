@@ -36,5 +36,7 @@ describe('로또 구매자 클래스 테스트', () => {
 
   test('에러가 발생하지 않는 경우', () => {
     expect(() => new LottoPurchaser(1000)).not.toThrow();
+    expect(() => new LottoPurchaser(2000)).not.toThrow();
+    expect(() => new LottoPurchaser(10000)).not.toThrow();
   });
 });
