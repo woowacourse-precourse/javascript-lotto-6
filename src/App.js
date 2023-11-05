@@ -43,6 +43,14 @@ class App {
       const winIdx = checking.checkWin(winNum, bonusNum);
       winList[winIdx] += 1;
     }
+
+    MissionUtils.Console.print("3개 일치 (5,000원) - " + winList[0].toString() + "개");
+    MissionUtils.Console.print("4개 일치 (50,000원) - " + winList[1].toString() + "개");
+    MissionUtils.Console.print("5개 일치 (1,500,000원) - " + winList[2].toString() + "개");
+    MissionUtils.Console.print("5개 일치, 보너스 볼 일치 (30,000,000원) - " + winList[3].toString() + "개");
+    MissionUtils.Console.print("6개 일치 (2,000,000,000원) - " + winList[4].toString() + "개");
+    const rateOfReturn = (5000 * winList[0] + 50000 * winList[1] + 1500000 * winList[2] + 30000000 * winList[3] + 2000000000 * winList[4]) / Number(buyCost);
+    MissionUtils.Console.print("총 수익률은 " + Number(rateOfReturn * 100).toFixed(1)  + "%입니다.");
   }
 }
 
