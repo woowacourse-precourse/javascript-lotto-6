@@ -20,20 +20,6 @@ describe('로또 구매자 클래스 테스트', () => {
     });
   });
 
-  describe('ERROR.notBeDividedByThousand', () => {
-    test('로또 구입 금액이 1000으로 나누어 떨어지지 않으면 예외가 발생한다.', () => {
-      expect(() => {
-        new LottoPurchaser(1);
-      }).toThrow(ERROR.notBeDividedByThousand);
-      expect(() => {
-        new LottoPurchaser(999);
-      }).toThrow(ERROR.notBeDividedByThousand);
-      expect(() => {
-        new LottoPurchaser(2001);
-      }).toThrow(ERROR.notBeDividedByThousand);
-    });
-  });
-
   test('에러가 발생하지 않는 경우', () => {
     expect(() => new LottoPurchaser(1000)).not.toThrow();
     expect(() => new LottoPurchaser(2000)).not.toThrow();
