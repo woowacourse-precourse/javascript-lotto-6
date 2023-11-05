@@ -1,3 +1,5 @@
+함수형
+
 구현해야할 기능
 - [x] 구입 금액 입력
   - [x] 양의 정수 확인
@@ -24,4 +26,40 @@
 
 - [x] 수익률 계산
 
-- [ ] 수익률 출력
+- [x] 수익률 출력
+
+---
+
+mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능에 포함 X)
+
+- [ ] model
+  - [ ] 수에 맞게 purchasedLottoArray 랜덤으로 채워넣기
+  - [ ] 입력한 값에 맞게 lottoBoard 만들기
+  - [ ] purchasedLottoArray와 lottoBoard에 맞는 lottoResult 값 생성 
+- [ ] view
+  - [ ] input
+    - [ ] 로또 구입 금액 입력
+    - [ ] 당첨번호 입력
+    - [ ] 보너스 번호 입력
+  - [ ] output
+    - [ ] 발행한 로또 수량 및 번호 출력
+    - [ ] 당첨통계 출력
+    - [ ] 수익률 출력
+    - [ ] 예외상황 출력
+- [ ] controller
+  - [ ] input view로부터 구매번호 입력 받아오기
+    - [ ] 구매 금액이 예외 상황이면 다시 받기
+  - [ ] 구입 금액에 맞춰 model의 purchasedLottoArray 업데이트
+  - [ ] 업데이트 한 purchasedLottoArray를 output view로 출력 지시
+  
+  - [ ] model의 lottoBoard 업데이트
+    - [ ] input view로부터 당첨번호 입력 받아오기
+      - [ ] 당첨 번호 예외 상황이면 에러 출력 후 다시 받기
+    - [ ] input view로부터 보너스 번호 입력 받아오기
+      - [ ] 보너스 번호 예외 상황이면 에러 출력 후 다시 받기
+  
+  - [ ] model의 lottoResult 업데이트
+  - [ ] model의 lottoResult로 당첨통계 output view로 출력 지시
+
+  - [ ] model의 lottoResult로 수익률 만들기
+  - [ ] 만든 수익률로 output view로 출력 지시
