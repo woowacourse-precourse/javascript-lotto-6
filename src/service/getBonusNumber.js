@@ -1,10 +1,8 @@
-import receiveBonusNumberUI from '../util/UI/gameStart/receiveBonusNumberUI.js';
 import bonusNumberValidService from './validate/bonusNumberValidService.js';
 
-export default async function getBonusNumber(winningNumber) {
+export default async function getBonusNumber(bonusInput, winningNumber) {
   try {
-    const input = await receiveBonusNumberUI();
-    const bonusNumber = Number(input);
+    const bonusNumber = Number(bonusInput);
     await bonusNumberValidService(bonusNumber, winningNumber);
     return bonusNumber;
   } catch (error) {
