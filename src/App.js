@@ -40,6 +40,27 @@ class App {
     });
   }
 
+  async askWinNumber() {
+    const input = await MissionUtils.Console.readLineAsync(
+      PRINT.ASK_WIN_NUMBER
+    );
+    const winNumber = input.split(",");
+
+    if (winNumber.length !== 6) {
+      throw new Error(ERROR.NOT_6);
+    }
+    winNumber.forEach((number) => {
+      if (number === "") {
+        throw new Error(ERROR.BLANK);
+      }
+      if (number < 1 || number > 45) {
+        throw new Error(ERROR.NOT_RANGE);
+      }
+    });
+
+    return winNumber;
+  }
+
   async play() {
     const inputMoney = await this.askMoney();
     this.moneyTypeCheck(inputMoney);
@@ -48,6 +69,9 @@ class App {
       this.howManyLotto(inputMoney) + PRINT.RESULT_BUY
     );
     this.printAllLottos();
+
+    const winNumber = await this.askWinNumber();
+    MissionUtils.Console.print(winNumber);
   }
 }
 
