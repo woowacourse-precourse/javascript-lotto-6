@@ -1,8 +1,8 @@
-import { ERROR } from "./constants/messages";
-import { AMOUNT } from "./constants/values";
+import { ERROR } from "../constants/messages";
+import { AMOUNT } from "../constants/values";
 import { Console } from "@woowacourse/mission-utils";
 
-class Purchase {
+class Purchase { //예외처리 및 값 저장
     #amount;
 
     constructor(amount) {

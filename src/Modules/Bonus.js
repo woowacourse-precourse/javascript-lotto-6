@@ -1,8 +1,8 @@
-import { ERROR } from "./constants/messages";
+import { ERROR } from "../constants/messages";
 import { Console } from "@woowacourse/mission-utils";
 
 
-class Bonus {
+class Bonus { //예외처리 및 값 저장
     #bonus;
     
     constructor(bonus) {

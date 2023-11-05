@@ -1,7 +1,8 @@
-import { ERROR } from "./constants/messages";
+import { ERROR } from "../constants/messages";
+import { LOTTO } from '../constants/values';
 import { Console } from "@woowacourse/mission-utils";
 
-class Lotto {
+class Lotto { //예외처리 및 값 저장
   #numbers;
 
   constructor(numbers) {
@@ -18,7 +19,7 @@ class Lotto {
 
   checkLength() {
     try {
-      if (this.#numbers.length < 6) throw new Error(ERROR.LOTTO_LENGTH);
+      if (this.#numbers.length < LOTTO.LEN) throw new Error(ERROR.LOTTO_LENGTH);
     }
     catch (error) {
       Console.print(error.message);
@@ -28,7 +29,7 @@ class Lotto {
 
   checkRange() {
     try {
-      if (this.#numbers.filter(v => v < 1 || v > 45).length > 0) throw new Error(ERROR.LOTTO_RANGE);
+      if (this.#numbers.filter(v => v < LOTTO.MIN || v > LOTTO.MAX).length > 0) throw new Error(ERROR.LOTTO_RANGE);
     }
     catch (error) {
       Console.print(error.message);
