@@ -1,11 +1,12 @@
+import Lotto from '../src/Lotto';
 import LottoWinnerVerifier from '../src/LottoWinnerVerifier';
 
 describe('LottoWinnerVerifier 클래스 테스트', () => {
   test('로또 당첨 결과 반환', () => {
     const verifier = new LottoWinnerVerifier([1, 2, 3, 4, 5, 6], 42);
     const lottos = [
-      [1, 2, 3, 4, 5, 6],
-      [1, 2, 3, 4, 5, 42],
+      new Lotto([1, 2, 3, 4, 5, 6]),
+      new Lotto([1, 2, 3, 4, 5, 42]),
     ];
     const outcome = verifier.checkLottoOutcome(lottos);
     const result = {

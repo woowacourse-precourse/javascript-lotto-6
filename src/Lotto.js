@@ -1,4 +1,4 @@
-import { ERROR } from './constant/index';
+import { ERROR } from './constant/index.js';
 
 class Lotto {
   #numbers;
@@ -6,6 +6,10 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+  }
+
+  getNumbers() {
+    return [...this.#numbers];
   }
 
   #validate(numbers) {

@@ -32,19 +32,21 @@ class LottoWinnerVerifier {
   }
 
   #getSameNumberCount(lotto) {
-    return lotto.reduce(
-      (mount, number) =>
-        this.#winningNumbers.includes(number) ? mount + 1 : mount,
-      0
-    );
+    return lotto
+      .getNumbers()
+      .reduce(
+        (mount, number) =>
+          this.#winningNumbers.includes(number) ? mount + 1 : mount,
+        0
+      );
   }
 
   #hasBonusNumber(lotto) {
-    return lotto.includes(this.#bonusNumber);
+    return lotto.getNumbers().includes(this.#bonusNumber);
   }
 
   static calulateLottoPayoutRate(outcome, buyingPrice) {
-    const totalPayout = this.#getTotalPayout(outcome);
+    const totalPayout = LottoWinnerVerifier.#getTotalPayout(outcome);
     const rate = (totalPayout / buyingPrice) * 100;
     return Math.round((rate + Number.EPSILON) * 100) / 100;
   }
