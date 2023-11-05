@@ -8,6 +8,9 @@ const LOTTO = Object.freeze({
 const ERROR_MESSAGE = Object.freeze({
   number: '[ERROR] 숫자를 입력해주세요.',
   unit: `[ERROR] ${LOTTO.price.toLocaleString()}원 단위로 입력해주세요.`,
+  form: '[ERROR] 숫자를 쉼표로 구분하여 입력해주세요.',
+  duplicates: '[ERROR] 로또 번호에 중복되는 숫자를 입력할 수 없습니다.',
+  range: `[ERROR] 로또 번호는 ${LOTTO.min}부터 ${LOTTO.max} 사이의 숫자여야 합니다.`,
 });
 
 const INPUT_MESSAGE = Object.freeze({

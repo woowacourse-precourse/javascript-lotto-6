@@ -22,4 +22,38 @@ describe('Validator', () => {
       }).toThrow();
     });
   });
+
+  test('당첨 번호가 쉼표로 구분되는지, 숫자인지 확인한다.', () => {
+    const winningNumber = ['1234', 'a'];
+
+    winningNumber.forEach(number => {
+      expect(() => {
+        if (!/^[0-9]+(,[0-9]+)+$/.test(number)) {
+          throw new Error(ERROR_MESSAGE.form);
+        }
+      }).toThrow();
+    });
+  });
+
+  test('로또 번호의 생성 범위를 확인한다.', () => {
+    const numbers = [0, 2, 3, 4, 5, 6];
+
+    expect(() => {
+      numbers.forEach(num => {
+        if (num < 1 || num > 45) {
+          throw new Error(ERROR_MESSAGE.range);
+        }
+      });
+    }).toThrow();
+  });
+
+  test('당첨 번호에 중복된 숫자가 있는지 확인한다.', () => {
+    const numbers = [1, 2, 3, 4, 5, 5];
+
+    expect(() => {
+      if (new Set(numbers).size !== numbers.length) {
+        throw new Error(ERROR_MESSAGE.duplicates);
+      }
+    }).toThrow();
+  });
 });
