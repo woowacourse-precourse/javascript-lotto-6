@@ -1,8 +1,12 @@
 import Lotto from '../model/Lotto.js';
 import LottoList from '../model/LottoList.js';
-import { inputMoney } from '../view/InputPrompt.js';
+import { inputMoney } from '../view/inputPrompt.js';
 import { validateDivisible, validateNumber } from '../utils/validateFn.js';
-import { printBeforeResult, printBuyLottery } from '../view/OutputPompt.js';
+import {
+  printBeforeResult,
+  printBuyLottery,
+  printWinningStatus,
+} from '../view/outputPompt.js';
 import WinningLotto from '../model/WinningLotto.js';
 
 class LottoGame {
@@ -46,6 +50,7 @@ class LottoGame {
   async result() {
     printBeforeResult();
     this.#compareWinningNumber();
+    printWinningStatus(this.#rewardCount);
   }
 
   #compareWinningNumber() {
