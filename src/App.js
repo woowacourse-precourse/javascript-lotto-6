@@ -2,12 +2,14 @@ import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
 import LottoGenerator from "./LottoGenerator.js";
 import LottoNumberGenerator from "./LottoNumberGenerator.js";
+import Lotto from "./Lotto.js";
 
 class App {
   #lottoGenerator = new LottoGenerator();
 
   async play() {
     const tickets = await this.purchaseLotto();
+    OutputView.printPurchaseLottoTickets(tickets);
     const winningNumbers = await this.pickWinningNumbers();
     const bonusNumber = await this.pickBonusNumber();
   }

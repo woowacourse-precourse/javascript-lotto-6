@@ -1,4 +1,5 @@
 import LottoNumberGenerator from "./LottoNumberGenerator.js";
+import Lotto from "./Lotto.js";
 
 class LottoGenerator {
   #PRICE_PER_TICKET = 1000;
@@ -8,7 +9,7 @@ class LottoGenerator {
     const quantity = Math.floor(price / this.#PRICE_PER_TICKET);
     const tickets = [];
     for (let i = 0; i < quantity; i++) {
-      tickets[i] = LottoNumberGenerator.generate();
+      tickets[i] = new Lotto(LottoNumberGenerator.generate());
     }
     return tickets;
   }
