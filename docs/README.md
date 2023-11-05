@@ -361,10 +361,10 @@
 
   - [x] `earningRate(income, rewards)` 호출 시 입력받은 `rewards`의 수익률을 소숫점 둘째자리에서 반올림하여 반환한다.
 
-- [ ] Calculator 예외 처리
+- [x] Calculator 예외 처리
 
-  - [ ] `earningRate(income, rewards)` 호출 시 `income`에 숫자가 아닌 값이 존재할 시 에러가 발생한다.
-  - [ ] `earningRate(income, rewards)` 호출 시 `rewards`에 `LottoReward`가 아닌 값이 존재할 시 에러가 발생한다.
+  - [x] `earningRate(income, rewards)` 호출 시 `income`에 숫자가 아닌 값이 존재할 시 에러가 발생한다.
+  - [x] `earningRate(income, rewards)` 호출 시 `rewards`에 `LottoReward`가 아닌 값이 존재할 시 에러가 발생한다.
 
 ## Service 구현
 
