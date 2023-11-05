@@ -8,7 +8,7 @@ const InputView = {
   },
   readNumbers: async () => {
     const answer = await Console.readLineAsync(MESSAGE.INPUT_NUMBERS);
-    return answer.split(',');
+    return answer.split(',').map((number) => Number(number));
   },
   readBonus: async () => {
     const answer = await Console.readLineAsync(MESSAGE.INPUT_BONUS);
