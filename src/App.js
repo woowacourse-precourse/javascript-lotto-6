@@ -31,7 +31,16 @@ async getLottoNumber(){
     await domain.GetLottoNumbers(COUNT,this.LOTTOS);
   }//도메인 로직
 
-
+  async getUserNumber() {
+    while(true){
+    const USERCHOOSENUMBERDATA = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    this.USERCHOOSENUMBER = String(USERCHOOSENUMBERDATA).split(",").map(Number);
+    try{
+      new Lotto(this.USERCHOOSENUMBER); 
+      break;
+    }catch(error){ Console.print(`${error}`); }
+    }
+  } // ui로직
 
 
 
@@ -39,6 +48,7 @@ async getLottoNumber(){
     while(true){
    await this.getUsersCashAndCheck();
    await this.getLottoNumber();
+   await this.getUserNumber();
    break;
     }
   }
