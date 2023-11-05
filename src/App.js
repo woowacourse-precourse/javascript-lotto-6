@@ -52,15 +52,9 @@ class App {
       ele.filter((item) => winningNum.includes(String(item)))
     );
 
-    const b = a.map((ele) => ele.length);
+    const winningTickets = a.map((ele) => this.totalPrize(ele.length));
 
-    console.log(b);
-  }
-
-  async matchLotto(winningNum, bonusNum, lottoArr) {
-    // for(let i=0; i<lottoArr.length; i++){
-    //   winningNum.filter()
-    // }
+    console.log(winningTickets);
   }
 
   async createLotto(purchaseCost) {
@@ -85,6 +79,21 @@ class App {
     }
 
     return lottoArr;
+  }
+
+  totalPrize(b) {
+    switch (b) {
+      case 3:
+        return 5000;
+      case 4:
+        return 50000;
+      case 5:
+        return 1500000;
+      case 6:
+        return 2000000000;
+      default:
+        return 0;
+    }
   }
 
   async matchLottoNum() {}
