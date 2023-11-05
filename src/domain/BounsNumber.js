@@ -14,7 +14,7 @@ class BonusNumber {
   }
 
   static #validateIsNumber(number) {
-    if (Number.isNaN(number)) {
+    if (Number.isNaN(Number(number))) {
       throw new TypeError(ERROR_MESSAGE.IS_NOT_NUMBER);
     }
   }

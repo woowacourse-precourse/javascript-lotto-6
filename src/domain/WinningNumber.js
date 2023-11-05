@@ -13,7 +13,7 @@ class WinningNumber {
   }
 
   static #validateIsNumber(winningNumbers) {
-    if (winningNumbers.some((number) => Number.isNaN(number))) {
+    if (winningNumbers.some((number) => Number.isNaN(Number(number)))) {
       throw new TypeError(ERROR_MESSAGE.IS_NOT_NUMBER);
     }
   }
