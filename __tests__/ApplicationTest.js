@@ -1,29 +1,6 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { getLogSpy, mockQuestions, mockRandoms } from '../__testUtils__/utils';
+import { ERROR_SYMBOL } from '../constants/message';
 import App from '../src/App';
-
-const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
-
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-
-    return Promise.resolve(input);
-  });
-};
-
-const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce(
-    (acc, number) => acc.mockReturnValueOnce(number),
-    MissionUtils.Random.pickUniqueNumbersInRange,
-  );
-};
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
 
 const runException = async (input) => {
   // given
@@ -38,9 +15,8 @@ const runException = async (input) => {
   // when
   const app = new App();
   await app.play();
-
   // then
-  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(ERROR_SYMBOL));
 };
 
 describe('로또 테스트', () => {

@@ -19,7 +19,7 @@ describe('LottoCompany 객체 테스트', () => {
       lottoCompany.numbers = input;
     };
     // then
-    expect(setNumbers).toThrow('[ERROR]');
+    expect(setNumbers).toThrow(ERROR_SYMBOL);
   });
 
   test('당첨 번호 6개를 통해 생성하면, 멤버 numbers가 정상적으로 생성된다.', () => {

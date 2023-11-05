@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import LOTTO from '../../constants/lotto';
 import loopRead from '../../utils/loopRead';
-import { MESSAGE } from '../../constants/message';
+import { ERROR_MESSAGE, MESSAGE } from '../../constants/message';
 import View from '../View/View';
 import LottoCompany from './LottoCompany';
 
@@ -11,6 +11,9 @@ class GameController {
 
   async purchaseLotto() {
     const money = await loopRead(this.#view.readMoney);
+    if (money % 1000 !== 0) {
+      throw new Error(ERROR_MESSAGE.unexpectedMoney);
+    }
     const numOfLottos = money / LOTTO.price;
     const lottos = this.#lottoCompany.issueLottos(numOfLottos);
     this.#view.printLottos(lottos);
