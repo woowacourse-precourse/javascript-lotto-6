@@ -2,6 +2,7 @@ import {
     INIT_ZERO,
     ONE,
     LOTTO_PRICE,
+    ERROR,
 } from './utils/Define';
 import {
     generateLotto,
@@ -10,7 +11,10 @@ import {
     printLottoNumbers,
     printNumberOfLottos,
 } from './io/Output';
-
+import {
+    inputPurchaseAmountAsync, 
+} from './io/Input';
+import { Console } from '@woowacourse/mission-utils';
 class App {
     lottos;
     results;
@@ -23,6 +27,11 @@ class App {
     }
 
     async play() {
+        try {
+            await this.setupGame();
+        } catch (error) {
+            Console.print(`${ERROR.HEAD} ${error.message}`);
+        }
     }
 
     generateAndPrintLottos(numberOfLottos) {
@@ -37,6 +46,11 @@ class App {
         const numberOfLottos = this.purchaseAmount / LOTTO_PRICE;
         printNumberOfLottos(numberOfLottos);
         this.generateAndPrintLottos(numberOfLottos);
+    }
+
+    async setupGame() {
+        this.purchaseAmount = await inputPurchaseAmountAsync();
+        this.purchaseLottos();
     }
 }
 
