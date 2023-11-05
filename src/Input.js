@@ -21,7 +21,7 @@ class Input {
       '\n보너스 번호를 입력해 주세요.\n',
     );
     Validate.validateBonusNumber(bonus, winning);
-    return bonus;
+    return Number(bonus);
   }
 }
 
