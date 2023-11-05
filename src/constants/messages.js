@@ -18,3 +18,5 @@ export const ERROR_MESSAGES = Object.freeze({
   DUPLICATE_NUMBER: '[ERROR] 중복 번호가 포함되어 있습니다.',
   ONE_BONUS_NUMBER_ALLOWED: '[ERROR] 보너스 번호는 하나만 입력 가능합니다.',
 });
+
+export const NUMBER_REGEX = /^[0-9]+$/;
