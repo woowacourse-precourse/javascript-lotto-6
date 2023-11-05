@@ -90,6 +90,26 @@ class System {
     }
     return lottos;
   }
+
+  async getLotto() {
+    let lottoNumbers = [];
+    let lotto;
+    while (true) {
+      const inputLotteNumbers = await Console.readLineAsync(
+        INPUT_MESSAGE.lottoNumber
+      );
+      lottoNumbers = inputLotteNumbers.split(",").map(Number);
+      try {
+        lotto = new Lotto(lottoNumbers);
+        lotto.duplicate();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    return [lottoNumbers, lotto];
+  }
 }
 
 export default System;
