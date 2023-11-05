@@ -31,6 +31,17 @@ const statsModel = {
 
     return revenues;
   },
+
+  // [5000, 50000, 1500000, 30000000, 2000000000] ---> [1, 0, 0, 0, 0]
+  getMatchCounts(revenues) {
+    const matchCounts = VALUE.revenues.map((amount) => {
+      const count = revenues.filter((revenue) => revenue === amount).length;
+
+      return count;
+    });
+
+    return matchCounts;
+  },
 };
 
 export default statsModel;
