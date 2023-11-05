@@ -7,11 +7,11 @@ class Validate{
     }
 
     // 당첨번호 입력 예외 검사
-    // 1~45 범위 내의 자연수인지 확인
-    checkNaturalNum(input){
-        const NUMBERS = /^[1-9]+$/;
+    // 1~45 범위 내의 자연수와 쉼표인지 확인
+    checkNaturalNumAndComma(input){
+        const regex = /^[1-9,]+$/;
         for(let i=0;i<input.lenght;i++){
-            if(!NUMBERS.test(input[i])) return true;
+            if(!regex.test(input[i])) return true;
         }
         return false;
     }
