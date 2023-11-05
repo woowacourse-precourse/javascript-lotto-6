@@ -1,4 +1,5 @@
 import { ERROR_MESSAGES, LOTTO_PRICE } from './constants.js';
+import { Random } from '@woowacourse/mission-utils';
 
 export const splitAndTrim = (inputString) => {
   if (inputString === '') {
@@ -30,4 +31,8 @@ export const validateMoney = (input) => {
   }
 
   return true;
+};
+
+export const generateRandomNumber = (min, max) => {
+  return Random.pickNumberInRange(min, max);
 };
