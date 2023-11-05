@@ -1,4 +1,4 @@
-import { isDivisibleBy, isEmptyString, isNumber } from './utils/validators/index.js';
+import { isDivisibleBy, isNumber } from './utils/validators/index.js';
 
 class PurchaseAmount {
   #purchaseAmount;
@@ -11,10 +11,6 @@ class PurchaseAmount {
 
   // eslint-disable-next-line
   #validate(purchaseAmount) {
-    if (isEmptyString(purchaseAmount)) {
-      throw new Error('[ERROR] 빈문자열을 입력하실 수 없습니다.');
-    }
-
     if (!isNumber(purchaseAmount)) {
       throw new Error('[ERROR] 숫자가 아닌 문자가 포함되어있습니다.');
     }
