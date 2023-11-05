@@ -1,19 +1,26 @@
 /* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-// 일단 보너스랑 정답 입력은 App으로 하고 나중에 클래스 분리하자.
+import Lotto from './Lotto.js';
+
 class Bonus {
-  #bonus;
+  #winningNum;
 
   constructor() {
-    this.#bonus = getBonusNum();
+    this.#winningNum = new Lotto();
+  }
+
+  async run() {
+    const winningNum = await this.#winningNum.run();
+    const bonusNum = await this.#getBonusNum();
+    this.#duplCheckOfBonus(winningNum, bonusNum);
+    this.#validateNumRange([bonusNum]); // 배열 형태로 전달
+
+    return bonusNum;
   }
 
   // 보너스 넘버
-  async getBonusNum() {
-    const bonusNum =
-      await MissionUtils.Console.readLineAsync(
-        '보너스 번호를 입력해 주세요.\n',
-      );
+  async #getBonusNum() {
+    const bonusNum = await MissionUtils.Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     const NumTypeBonus = Number(bonusNum);
     if (Number.isNaN(NumTypeBonus)) {
       throw new Error(`보너스 입력값은 숫자여야 합니다.`);
@@ -21,14 +28,14 @@ class Bonus {
     return NumTypeBonus;
   }
 
-  duplCheckOfBonus(winningNum, bonusNum) {
+  #duplCheckOfBonus(winningNum, bonusNum) {
     if (winningNum.includes(Number(bonusNum))) {
       throw new Error(`[ERRPR] 보너스 숫자는 중복될 수 없습니다.`);
     }
   }
 
   // 정답 숫자 입력 범위 확인, 정답, 보너스 둘 다 사용 가능
-  validateNumRange(inputNum) {
+  #validateNumRange(inputNum) {
     const MIN_NUM = 1;
     const MAX_NUM = 45;
     inputNum.forEach((number) => {
@@ -40,3 +47,6 @@ class Bonus {
 }
 
 export default Bonus;
+
+const run = new Bonus();
+run.run();

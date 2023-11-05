@@ -4,20 +4,20 @@ import { Console, MissionUtils } from '@woowacourse/mission-utils';
 class Lotto {
   #numbers; // 로또번호 입력값 배열, 여기가 필드
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#stringToNum(numbers);
-    this.#validateWinningNumLength(numbers);
-    this.#duplCheckOfWinngNum(numbers);
-    this.#validateNumRange(numbers);
-    this.#numbers = numbers;
-  }
+  // constructor(numbers) {
+  //  this.#validate(numbers);
+  //  this.#stringToNum(numbers);
+  //  this.#validateWinningNumLength(numbers);
+  //  this.#duplCheckOfWinngNum(numbers);
+  //  this.#validateNumRange(numbers);
+  //  this.#numbers = numbers;
+  // }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
-  }
+  // #validate(numbers) {
+  //  if (numbers.length !== 6) {
+  //    throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+  //  }
+  // }
 
   // TODO: 추가 기능 구현
 
