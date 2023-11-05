@@ -1,23 +1,26 @@
-import { Console } from "@woowacourse/mission-utils";
+import { readUserInput } from "../UI/inputView.js";
 
 class UserLottoNumber {
   constructor() {
     this.lottoNumbers = { baseNumbers: [], bonusNumber: null };
   }
 
-  async setUserLottoNumbers() {
-    const input = await Console.readLineAsync();
+  setUserLottoNumbers(input) {
     return input.split(",").map((numStr) => parseInt(numStr.trim(), 10));
   }
 
   async userLotto() {
-    this.lottoNumbers.baseNumbers = await this.setUserLottoNumbers();
-    const bonusNumberArray = await this.setUserLottoNumbers();
-    this.lottoNumbers.bonusNumber = bonusNumberArray[0];
+    const baseInput = await readUserInput();
+    this.lottoNumbers.baseNumbers = this.setUserLottoNumbers(baseInput);
+
+    const bonusInput = await readUserInput();
+    const bonusNumber = this.setUserLottoNumbers(bonusInput)[0];
+    this.lottoNumbers.bonusNumber = bonusNumber;
+
     return this.lottoNumbers;
   }
 
-  #bonusValidate(number) {
+  #validate(number) {
     if (isNaN(number)) {
       throw new Error(ERROR.ONLY_NUMBER);
     }
