@@ -1,3 +1,5 @@
+import { LottoRule, WinningNumberErrorMessage } from './models/const.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,40 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (LottoRule.Number !== numbers.length) {
+      throw new Error(WinningNumberErrorMessage.WrongNumber);
+    }
+
+    if (this.#isDuplicate(numbers)) {
+      throw new Error(WinningNumberErrorMessage.Duplicate);
+    }
+
+    if (this.#isNotInteger(numbers)) {
+      throw new Error(WinningNumberErrorMessage.NotInteger);
+    }
+
+    if (this.#outOfRange(numbers)) {
+      throw new Error(WinningNumberErrorMessage.OutOfRange);
     }
   }
 
-  // TODO: 추가 기능 구현
+  #isDuplicate(numbers) {
+    const numberSet = new Set();
+
+    numbers.forEach(number => {
+      numberSet.add(number);
+    });
+
+    return numberSet.size !== numbers.length;
+  }
+
+  #isNotInteger(numbers) {
+    return numbers.some(number => !Number.isInteger(number));
+  }
+
+  #outOfRange(numbers) {
+    return numbers.some(number => LottoRule.MinNumber > number || LottoRule.MaxNumber < number);
+  }
 }
 
 export default Lotto;

@@ -4,6 +4,7 @@ export const CommonMessage = {
 
 export const RequestMessage = {
   Purchase: '구입금액을 입력해 주세요.',
+  WinnerNumbers: '당첨 번호를 입력해 주세요.',
 };
 
 export const ResponseMessage = {
@@ -16,6 +17,7 @@ export const PurchaseRule = {
 
 export const LottoRule = {
   Price: 1000,
+  Number: 6,
   MinNumber: 1,
   MaxNumber: 45,
 };
@@ -23,4 +25,11 @@ export const LottoRule = {
 export const PurchaseErrorMessage = {
   NoValue: `${CommonMessage.ErrorPrefix} 값을 입력해 주세요.`,
   WrongUnit: `${CommonMessage.ErrorPrefix} ${PurchaseRule.UNIT}단위로 입력해 주세요.`,
+};
+
+export const WinningNumberErrorMessage = {
+  Duplicate: `${CommonMessage.ErrorPrefix} 서로 중복되지 않는 숫자를 입력해주세요.`,
+  WrongNumber: `${CommonMessage.ErrorPrefix} ${LottoRule.Number}개의 숫자를 입력해주세요.`,
+  NotInteger: `정수만 입력해주세요.`,
+  OutOfRange: `${CommonMessage.ErrorPrefix} ${LottoRule.MinNumber} ~ ${LottoRule.MaxNumber} 사이의 숫자를 입력해주세요.`,
 };
