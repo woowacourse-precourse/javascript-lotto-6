@@ -49,5 +49,14 @@ class Validator {
       throw new Error(ErrorMessage.INVALID_RANGE);
     }
   }
+
+  static isAscending(value) {
+    const arrStr = JSON.stringify(value);
+    const sortedArrStr = JSON.stringify(value.sort((a, b) => a - b));
+    if (sortedArrStr !== arrStr) {
+      throw new Error(ErrorMessage.ISNOT_ASCENDING);
+    }
+  }
 }
+
 export default Validator;

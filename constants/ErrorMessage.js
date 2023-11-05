@@ -9,7 +9,8 @@ class ErrorMessage {
 
   static INVALID_NUM_COUNT = '[ERROR] 번호는 6개여야 합니다.';
 
-  // 보너스 번호 예외
   static DUPLICATE_BONUS_WIN = '[ERROR] 당첨 번호와 중복되지 않아야 합니다.';
+
+  static ISNOT_ASCENDING = '[ERROR] 번호는 오름차순으로 정렬되어야 합니다.'
 }
 export default ErrorMessage;

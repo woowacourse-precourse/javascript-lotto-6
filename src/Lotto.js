@@ -12,6 +12,7 @@ class Lotto {
   #validate(numbers) {
     Validator.isValidDigit(numbers);
     Validator.isDuplicate(numbers);
+    Validator.isAscending(numbers);
   }
 
   getNumbers() {
@@ -20,11 +21,7 @@ class Lotto {
 
   static generateRandomLotto() {
     const lottoNum = Random.pickUniqueNumbersInRange(1, 45, 6);
-    const sortedLottoNum = lottoNum.sort((a, b) => {
-      if (a > b) return 1;
-      if (a === b) return 0;
-      if (a < b) return -1;
-    });
+    const sortedLottoNum = lottoNum.sort((a, b) => a - b);
     return new Lotto(sortedLottoNum);
   }
 }
