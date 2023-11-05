@@ -26,9 +26,16 @@ const Validation = {
     }
   },
 
-  isValidLength: (numbers) => {
+  isValidWinningNumbersLength: (numbers) => {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+  },
+
+  isValidBonusNumberLength: (number) => {
+    const splitedNumber = number.split(',');
+    if (splitedNumber.length !== 1) {
+      throw new Error('[ERROR] 보너스 번호는 1개여야 합니다.');
     }
   },
 };
