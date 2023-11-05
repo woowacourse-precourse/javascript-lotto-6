@@ -7,9 +7,11 @@ const MESSAGE = {
   output: {
     numberOfLotto: '개를 구매했습니다.\n',
     stats: '\n당첨 통계\n---\n',
+    rate: '총 수익률은 ',
   },
   unit: {
     number: '개',
+    percent: '%',
   },
   error: {
     notNumber: '[ERROR] 숫자가 아닌 값이 입력되었습니다.',
@@ -18,6 +20,7 @@ const MESSAGE = {
     lottoLength: '[ERROR] 로또 번호는 6개여야 합니다.',
     rangeLotto: '[ERROR] 1부터 45까지의 숫자들을 입력해주세요.',
   },
+  closing: '입니다.',
 };
 
 Object.freeze(MESSAGE.input);

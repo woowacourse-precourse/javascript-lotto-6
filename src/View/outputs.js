@@ -19,6 +19,11 @@ const outputs = {
     const output = stats.join('\n');
     Console.print(output);
   },
+
+  printRate(rate) {
+    const output = `${MESSAGE.output.rate}${rate}${MESSAGE.unit.percent}${MESSAGE.closing}`;
+    Console.print(output);
+  },
 };
 
 export default outputs;
