@@ -1,11 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
-import { CONSOLE_MESSAGE, ERROR_MESSAGE } from './constants.js';
+import {
+  CONSOLE_MESSAGE,
+  ERROR_MESSAGE,
+  LOTTO_PRICE_UNIT,
+} from './constants.js';
 
 class Price {
   constructor() {}
 
   static isValidPrice(price) {
-    return !isNaN(price) && price % 1000 === 0;
+    return !isNaN(price) && price % LOTTO_PRICE_UNIT === 0;
   }
 
   static async getUserPrice() {
@@ -21,6 +25,10 @@ class Price {
     }
     const price = Number(priceInput);
     return price;
+  }
+
+  static calculateLottoAmount(price) {
+    return price / LOTTO_PRICE_UNIT;
   }
 }
 

@@ -2,7 +2,8 @@ import Price from './Price.js';
 
 class App {
   async play() {
-    await Price.getUserPrice();
+    const userPriceInput = await Price.getUserPrice();
+    const lottoAmount = Price.calculateLottoAmount(userPriceInput);
   }
 }
 
