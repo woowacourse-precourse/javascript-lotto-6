@@ -26,18 +26,6 @@ class User {
       Console.print(userLottoNumber.sort((a, b) => a - b));
     });
   }
-
-  async inputWinningNumber() {
-    const winningNumber = await Console.readLineAsync(GAME_MESSAGE.inputNumber);
-
-    return winningNumber.split(',');
-  }
-
-  async inputBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(GAME_MESSAGE.bonusNumber);
-
-    return bonusNumber;
-  }
 }
 
 export default User;
