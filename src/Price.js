@@ -20,7 +20,6 @@ class Price {
       );
     }
     const price = Number(priceInput);
-    console.log(price);
     return price;
   }
 }
