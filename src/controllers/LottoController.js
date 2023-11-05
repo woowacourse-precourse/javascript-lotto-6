@@ -1,9 +1,12 @@
 import inputView from "../views/InputView";
 import BudgetValidation from "../validation/BudgetValidation";
+import GetLotto from "../models/GetLotto";
+import OutputView from "../views/OutputView";
 
 class LottoController {    
     budget = 0;
     lottoCount = 0;
+    lottos = [];
 
     async getBudget() {
         //입력받은 값을 유효성 검사를 위해 넘겨줌
@@ -24,8 +27,23 @@ class LottoController {
         console.log(this.budget);
     }
 
+
+    purchaseLottoTickets() {
+        //로또 개수 계산
+        const tickets = new GetLotto();
+        this.lottoCount = tickets.calculateLottoCount(this.budget);
+        this.printLottoTickets();
+    }
+
+    printLottoTickets() {
+        //로또 개수 출력
+        const print = new OutputView();
+        print.printLottoTikets(this.lottoCount);
+    }
+
     async start() {
         await this.getBudget();
+        this.purchaseLottoTickets();
     }
 }
 
