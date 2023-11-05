@@ -7,7 +7,6 @@ import {
   isInteger,
   isElementInArr,
 } from "./libs/validate.js";
-import { Console, Random } from "@woowacourse/mission-utils";
 
 class LuckyNumbers {
   #winning;
@@ -17,8 +16,6 @@ class LuckyNumbers {
     const inputArr = input.split(",").map((element) => element.trim());
     this.#validateWinning(inputArr);
     this.#winning = inputArr.map(Number);
-
-    Console.print(this.#winning);
   }
 
   #validateWinning(arr) {
@@ -36,8 +33,6 @@ class LuckyNumbers {
   setBonusNumber(input) {
     this.#validateBonus(input);
     this.#bonus = Number(input);
-
-    Console.print(this.#bonus);
   }
 
   #validateBonus(input) {

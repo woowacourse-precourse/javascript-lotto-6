@@ -1,8 +1,6 @@
 import Lotto from "./Lotto.js";
 import { Console, Random } from "@woowacourse/mission-utils";
-import WinningNumbers from "./WinningNumbers.js";
 import { MESSAGES } from "./libs/message.js";
-import BonusNumber from "./BonusNumber.js";
 import LuckyNumbers from "./LuckyNumbers.js";
 
 class LottoManager {
