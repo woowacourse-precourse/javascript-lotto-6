@@ -66,4 +66,9 @@ export class Input {
       throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
     }
   }
+
+  // 입력 타입 변환 기능
+  convertToNumber(input) {
+    return Number(input);
+  }
 }
