@@ -17,14 +17,13 @@ describe("Input 테스트", () => {
     const INPUT_STRING = ["3000", "aaa"];
 
     //when
-    const input = new Input();
     mockQuestions(INPUT_STRING);
 
     //then
-    const money = await input.getMoney();
+    const money = await Input.getMoney();
     expect(money).toBe(3000);
     expect(async () => {
-      await input.getMoney();
+      await Input.getMoney();
     }).rejects.toThrow("[ERROR]");
   });
 
@@ -33,14 +32,13 @@ describe("Input 테스트", () => {
     const INPUT_STRING = ["1,2, 3 , 4, 5,6  ", "1,2,3,4,a,6"];
 
     //when
-    const input = new Input();
     mockQuestions(INPUT_STRING);
 
     //then
-    const winnigNumber = await input.getWinningNumber();
+    const winnigNumber = await Input.getWinningNumber();
     expect(winnigNumber).toEqual([1, 2, 3, 4, 5, 6]);
     expect(async () => {
-      await input.getWinningNumber();
+      await Input.getWinningNumber();
     }).rejects.toThrow("[ERROR]");
   });
 
@@ -49,14 +47,13 @@ describe("Input 테스트", () => {
     const INPUT_STRING = ["1", "aa"];
 
     //when
-    const input = new Input();
     mockQuestions(INPUT_STRING);
 
     //then
-    const bonusNumber = await input.getBonusNumber();
+    const bonusNumber = await Input.getBonusNumber();
     expect(bonusNumber).toBe(1);
     expect(async () => {
-      await input.getBonusNumber();
+      await Input.getBonusNumber();
     }).rejects.toThrow("[ERROR]");
   });
 });

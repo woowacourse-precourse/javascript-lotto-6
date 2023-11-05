@@ -4,7 +4,7 @@ import LottoGameError from "./Error.js";
 import { LOTTO_ERROR_MSG } from "./constants/error.js";
 
 class Input {
-  async getMoney() {
+  static async getMoney() {
     let money = await Console.readLineAsync(INPUT_MSG.LOTTO_PRICE);
 
     this.#validateInput(money);
@@ -12,7 +12,7 @@ class Input {
     return parseInt(money);
   }
 
-  async getWinningNumber() {
+  static async getWinningNumber() {
     const inputString = await Console.readLineAsync(
       INPUT_MSG.WINNING_LOTTO_NUMBER
     );
@@ -27,7 +27,7 @@ class Input {
     return lottoNumbers.map((number) => parseInt(number));
   }
 
-  async getBonusNumber() {
+  static async getBonusNumber() {
     const bonusNumber = await Console.readLineAsync(INPUT_MSG.BONUS_NUMBER);
 
     this.#validateInput(bonusNumber);
@@ -35,7 +35,7 @@ class Input {
     return parseInt(bonusNumber);
   }
 
-  #validateInput(inputString) {
+  static #validateInput(inputString) {
     const DIGIT_CHECK = /^[0-9]+$/;
     if (!DIGIT_CHECK.test(inputString)) {
       throw new LottoGameError(LOTTO_ERROR_MSG.NOT_DIGIT_ERR);
