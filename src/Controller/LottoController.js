@@ -1,14 +1,17 @@
 import InputView from "../View/InputView.js";
+import LottoMachine from "../Model/LottoMachine.js";
 import { Console } from '@woowacourse/mission-utils';
 
 class LottoController {
   constructor() {
     this.inputView = new InputView();
+    this.lottoMachine = new LottoMachine();
   }
 
   async handlePurchase() {
     const purchaseAmount = await this.inputView.promptPurchaseAmount();
-    Console.print(purchaseAmount);
+    const numberOfLottos = this.lottoMachine.calculateLottoCount(purchaseAmount);
+    Console.print(numberOfLottos);
   }
 }
 
