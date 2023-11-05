@@ -23,6 +23,10 @@ class GameUtils {
     const numbersTypeString = numbers.split(',');
     return numbersTypeString.map((string) => Number(string));
   }
+
+  static isNotFromOneToFourtyFive(number) {
+    return number < LOTTO_NUMBER.FIRST || number > LOTTO_NUMBER.LAST;
+  }
 }
 
 export default GameUtils;
