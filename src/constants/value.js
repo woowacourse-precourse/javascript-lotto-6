@@ -1,4 +1,5 @@
 const VALUE = {
+  notNumber: /[^0-9]/,
   condition: {
     priceDivision: 1000,
   },
