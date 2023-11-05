@@ -18,4 +18,9 @@ export default class InputView {
     WinningNumbersValidator.validateWinningNumbers(numbersArray);
     return numbersArray;
   }
+
+  static async getBonusNumber() {
+    Console.print(GUIDE_MESSAGE.insertBonusNumber);
+    const bonusNumber = await Console.readLineAsync("");
+  }
 }

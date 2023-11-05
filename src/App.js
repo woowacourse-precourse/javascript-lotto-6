@@ -13,6 +13,7 @@ class App {
     OutputView.printLottos(lottos);
 
     const WinningNumbers = await InputView.getWinningNumbers();
+    const bonusNumber = await getBonusNumber();
   }
 }
 
