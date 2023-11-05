@@ -8,7 +8,7 @@
   - [x] pickRandomLotto : 로또 번호 생성 후 정렬
   - [x] iterRandomLottoAndSave: 구매한 개수에 맞게 로또 번호 뽑고 저장
   - [x] getLottoData : 로또 배열 반환
-  - [x] getLottoCount : 로또 횟수 반환
+  - [x] getLottoPurchaseAmount : 로또 구입 금액 반환
   - [x] printLottoData : 로또 배열 출력
   - [x] printLottoCount : 로또 횟수 출력
 - 당첨 번호와 보너스 번호를 입력받고 저장하는 WinNumber 클래스
@@ -25,7 +25,7 @@
   - [x] ERROR : 에러 메시지
   - [x] MATCH : 맞춘 로또 번호
 - 로또 번호를 비교하는 Lotto 클래스
-  - [x] checkLottoNumbers
+  - [x] checkLottoNumbers : 당첨 번호, 보너스 번호와 뽑은 로또 번호를 비교하여 몇 개의 번호를 맞췄는지 반환
   - [x] validate : 1-45 사이의 중복되지 않은 정수 6개가 아닌 경우 예외처리, error throw
 - 결과를 저장하고 출력하는 Result 클래스
   - [x] printStaticsMessage : 당첨 통계 메시지 출력

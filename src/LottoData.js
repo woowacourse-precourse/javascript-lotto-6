@@ -46,8 +46,8 @@ class LottoData {
     return this.#lottoData;
   }
 
-  getLottoCount() {
-    return this.#lottoCount;
+  getLottoPurchaseAmount() {
+    return this.#lottoCount * 1000;
   }
 
   printLottoData(lottoData) {

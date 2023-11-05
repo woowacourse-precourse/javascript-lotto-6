@@ -30,7 +30,7 @@ class App {
 
     result.printResult();
     result.printRateOfReturn(
-      lottoData.getLottoCount() * 1000,
+      lottoData.getLottoPurchaseAmount(),
       result.getWinningAmount()
     );
   }
