@@ -112,3 +112,21 @@ describe('유저 구매금액 입력 유효성 검사 테스트', () => {
     await runException(input);
   });
 });
+
+describe('유저 로또 구매 갯수 테스트', () => {
+  test.each([['3000'], ['5000']])('', async (input) => {
+    mockRandoms([
+      [8, 21, 23, 41, 42, 43],
+      [3, 5, 11, 16, 32, 38],
+      [7, 11, 16, 35, 36, 44],
+      [1, 8, 11, 31, 41, 42],
+      [13, 14, 16, 38, 42, 45],
+    ]);
+    const purchaseCount = input / 1000;
+
+    const app = new App();
+    const lotteryTicket = await app.getLotteryTickets(purchaseCount);
+
+    expect(lotteryTicket.length).toBe(purchaseCount);
+  });
+});
