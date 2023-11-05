@@ -8,11 +8,11 @@ const MESSAGE = {
     UNIT : "개", // 단위를 나타내는 "N개"
 
     RANK : {
-        FIRST : "6개 일치 (2,000,000,000원) - ",
-        SECOND : "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
-        THIRD : "5개 일치 (1,500,000원) - ",
-        FOURTH : "4개 일치 (50,000원) - ",
         FIFTH : "3개 일치 (5,000원) - ",
+        FOURTH : "4개 일치 (50,000원) - ",
+        THIRD : "5개 일치 (1,500,000원) - ",
+        SECOND : "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+        FIRST : "6개 일치 (2,000,000,000원) - ",
     },
     TOTAL_RETURN : {
         FRONT : "총 수익률은",
@@ -25,5 +25,6 @@ const ERROR_MESSAGE = {
     NUMBER_COUNT : "[ERROR] 로또 번호는 6개여야 합니다.",
     NUMBER_RANGE : "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
     NUMBER_TYPE : "[ERROR] 숫자가 잘못된 형식입니다.",
+    BONUS_NUMBER_DUPLICATE : "[ERROR] 로또 번호와 보너스 번호는 중복되지 않은 숫자여야 합니다.",
 }
 export {MESSAGE, ERROR_MESSAGE};
