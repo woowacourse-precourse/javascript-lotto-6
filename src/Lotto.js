@@ -36,7 +36,7 @@ class Lotto {
   }
 
   getAscendingNumber() {
-    return this.#numbers.sort((a, b) => a - b);
+    return [...this.#numbers].sort((a, b) => a - b);
   }
 }
 
