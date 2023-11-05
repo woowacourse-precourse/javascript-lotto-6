@@ -17,6 +17,10 @@ class LottoController {
       throw new Error(PRICE.ERROR.NOT_NUMBER);
     }
 
+    if (Validator.startWithZero(string)) {
+      throw new Error(PRICE.ERROR.START_WITH_ZERO);
+    }
+
     if (!Validator.isDivisible(+string, PRICE.TICKET)) {
       throw new Error(PRICE.ERROR.NOT_DIVISIBLE_BY_TICKET);
     }
