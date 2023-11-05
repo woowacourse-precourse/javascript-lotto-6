@@ -1,5 +1,7 @@
 import InputView from './View/InputView.js';
+import OutputView from './View/OutputView.js';
 import LottoArray from './LottoArray.js';
+import Validator from './validator/Validator.js';
 
 class LottoGame {
   #lottoArray;
@@ -9,15 +11,24 @@ class LottoGame {
   }
 
   async play() {
-    this.buyLottos(await this.getPurchaseAmount());
+    const money = Number(await InputView.readPurchaseAmount());
+
+    try {
+      this.validate(money);
+      this.buyLottos(money);
+    } catch (error) {
+      OutputView.print(error.message);
+      await this.play();
+    }
+  }
+
+  validate(money) {
+    Validator.numberType(money);
+    Validator.unit(money);
   }
 
   buyLottos(money) {
     this.#lottoArray.set(money);
-  }
-
-  async getPurchaseAmount() {
-    return await InputView.readPurchaseAmount();
   }
 }
 
