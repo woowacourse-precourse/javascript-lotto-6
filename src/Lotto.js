@@ -21,6 +21,14 @@ class Lotto {
       6: 0,
       total: 0,
     };
+
+    this.prize = Object.freeze({
+      FIRST_PRIZE: 2000000000,
+      SECOND_PRIZE: 30000000,
+      THIRD_PRIZE: 1500000,
+      FOURTH_PRIZE: 5000,
+      FIFTH_PRIZE: 5000,
+    });
   }
 
   #validate(numbers) {
@@ -60,24 +68,24 @@ class Lotto {
       switch (matchNumber.length) {
         case 3:
           this.winCheck[3] += 1;
-          this.winCheck.total += 5000;
+          this.winCheck.total += this.prize.FIFTH_PRIZE;
           break;
         case 4:
           this.winCheck[4] += 1;
-          this.winCheck.total += 50000;
+          this.winCheck.total += this.prize.FOURTH_PRIZE;
           break;
         case 5:
           if (bonusGuess.includes(+bonusNumber)) {
             this.winCheck['5+'] += 1;
-            this.winCheck.total += 30000000;
+            this.winCheck.total += this.prize.SECOND_PRIZE;
           } else {
             this.winCheck[5] += 1;
-            this.winCheck.total += 1500000;
+            this.winCheck.total += this.prize.THIRD_PRIZE;
           }
           break;
         case 6:
           this.winCheck[6] += 1;
-          this.winCheck.total += 2000000000;
+          this.winCheck.total += this.prize.FIRST_PRIZE;
           break;
 
         default:
