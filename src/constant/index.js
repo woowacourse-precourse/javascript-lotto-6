@@ -5,6 +5,7 @@ import {
   NUMBER_RANGE,
   BONUS_BALL_FORM,
   WINNINGS,
+  WINNINGS_MONEY,
   RANK,
 } from './Rule';
 import {
@@ -26,4 +27,5 @@ export {
   RANK_MESSAGE,
   STATISTICS_MESSAGE,
   WINNINGS,
+  WINNINGS_MONEY,
 };
