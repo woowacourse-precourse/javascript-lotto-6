@@ -24,17 +24,22 @@ class LottoData {
     }
   }
 
+  generateRandomLotto() {
+    const pick = Random.pickUniqueNumbersInRange(
+      OPTION.min_random_num,
+      OPTION.max_random_num,
+      OPTION.lotto_num_count
+    );
+    pick.sort((a, b) => a - b);
+    return pick;
+  }
+
   pickRandomLotto() {
-    for (let i = 0; i < this.#lottoCount; i++) {
-      const pick = Random.pickUniqueNumbersInRange(
-        OPTION.min_random_num,
-        OPTION.max_random_num,
-        OPTION.lotto_num_count
-      );
-      pick.sort((a, b) => a - b);
+    Array.from({ length: this.#lottoCount }).forEach(() => {
+      const pick = this.generateRandomLotto();
       this.printLottoData(pick);
       this.#lottoData.push(pick);
-    }
+    });
   }
 
   getLottoData() {
