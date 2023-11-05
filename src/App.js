@@ -3,8 +3,14 @@ import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE } from "./constants/constant.js";
 
 class App {
   async play() {
-    // 보유 금액 입력 - 유효한지 확인하는 코드 추가하기
+    // 보유 금액 입력
     const userMoney = await Console.readLineAsync(MESSAGE.START);
+
+    // 보유 금액 유효성 검사
+    if (userMoney % 1000 > 0 || String(userMoney)[0] === '0' || userMoney <= 0) {
+      throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
+    }
+
     const randomCount = (userMoney / 1000);
     Console.print(MESSAGE_INPUT(randomCount).COUNT);
     
