@@ -8,6 +8,9 @@ class App {
 
     const lottoNumbers = await UserInput.getLottoNumbers();
     Console.print(lottoNumbers);
+
+    const bonusNumber = await UserInput.getBonusNumber();
+    Console.print(bonusNumber);
   }
 }
 
