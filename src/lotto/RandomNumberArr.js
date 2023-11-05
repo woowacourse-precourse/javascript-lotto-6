@@ -15,7 +15,7 @@ export default class RandomNumber {
   printRandomNumber() {
     this.#randomNumber.forEach((numbers, idx) => {
       printMethod(numbers);
-      if (idx === numbers.length + 1) printMethod('\n');
+      if (idx === this.#randomNumber.length - 1) printMethod('\n');
     });
   }
 
@@ -23,7 +23,7 @@ export default class RandomNumber {
     const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
       magicNumber.START_RANGE,
       magicNumber.END_RANGE,
-      magicNumber.LOTTO_NUMBER_CNT,
+      magicNumber.RANDOM_NUMBER_CNT,
     );
     return numbers.sort((a, b) => a - b);
   }

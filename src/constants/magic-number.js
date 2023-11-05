@@ -3,7 +3,7 @@ const magicNumber = {
   ZERO: 0,
   START_RANGE: 1,
   END_RANGE: 45,
-  LOTTO_NUMBER_CNT: 6,
+  RANDOM_NUMBER_CNT: 6,
 };
 
 export default magicNumber;
