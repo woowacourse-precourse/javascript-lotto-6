@@ -25,4 +25,26 @@ describe("로또 클래스 테스트", () => {
 
     expect(newLotto.length).toEqual(money / 1000);
   });
+
+  test("로또 번호 비교", () => {
+    const inputs = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 32, 39, 45],
+    ];
+    const bonusNumber = [4, 5];
+    const outputs = [
+      [3, 1],
+      [6, 0],
+    ];
+
+    const lottoGame = new Lotto([1, 2, 3, 32, 39, 45]);
+
+    outputs.forEach((output) => {
+      const input = inputs.shift();
+      const bonusNum = bonusNumber.shift();
+      const result = lottoGame.compareLottos(input, bonusNum);
+
+      expect(result).toEqual(output);
+    });
+  });
 });
