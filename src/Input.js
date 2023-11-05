@@ -5,14 +5,19 @@ class UserInput {
   async getPurchasingPrice() {
     await this.getUserInput(inputMessage.purchasingPrice)
     this.validatePurchasingPrice()
-    return this
+    return this.input
   }
 
   async getLottoNumber() {
     await this.getUserInput(inputMessage.lottoNumber)
     this.parseLottoNumber()
-    return this
+    return this.parsedArray
   }
+
+  async getBonusNumber() {
+    await this.getUserInput(inputMessage.bonusNumber)
+    return parseInt(this.input)
+  } 
 
   async getUserInput(message) {
     this.input = await Console.readLineAsync(message);
