@@ -8,11 +8,11 @@
 
 # 📝 기능 목록
 ## 0. constants 파일 작성
-- [ ] GUIDE_MESSAGE
-- [ ] ERROR_MESSAGE
-- [ ] WINNING_RESULT_DETAILS
-- [ ] WINNING_AMOUNTS
-- [ ] 매직 넘버 상수화<br /><br />
+- [x] GUIDE_MESSAGE
+- [x] ERROR_MESSAGE
+- [x] WINNING_RESULT_DETAILS
+- [x] WINNING_AMOUNTS
+- [x] 매직 넘버 상수화<br /><br />
 
 ## 1. 게임 시작 및 구입 금액 입력하기
 ### 1. 구입 금액 입력`
