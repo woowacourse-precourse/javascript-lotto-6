@@ -1,11 +1,32 @@
 import Input from "../view/Input.js";
 import Player from "../model/Player.js";
 import WinningLotto from "../model/WinningLotto.js";
+import { MONEY_CONSTANT } from "../constants/game.js";
 
 class LottoGame {
   async initGame() {
     await this.setPlayer();
     await this.setWinningLotto();
+  }
+
+  getResult() {
+    const ranks = this.saveLottoRank();
+    const returnRate = this.getReturnRate(ranks);
+  }
+
+  getReturnRate(ranks) {
+    const returnRate = this.getWinningAmount(ranks) / this.player.playerMoney;
+    return returnRate.toFixed(1);
+  }
+
+  getWinningAmount(ranks) {
+    let amount = 0;
+    amount += MONEY_CONSTANT.REWARD.FIRST * ranks[1];
+    amount += MONEY_CONSTANT.REWARD.SECOND * ranks[2];
+    amount += MONEY_CONSTANT.REWARD.THIRD * ranks[3];
+    amount += MONEY_CONSTANT.REWARD.FOURTH * ranks[4];
+    amount += MONEY_CONSTANT.REWARD.FIFTH * ranks[5];
+    return amount;
   }
 
   async setPlayer() {

@@ -41,6 +41,10 @@ class Player {
   get playerLottos() {
     return this.#lottos;
   }
+
+  get playerMoney() {
+    return this.#money;
+  }
 }
 
 export default Player;
