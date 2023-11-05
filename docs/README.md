@@ -39,8 +39,8 @@
 
   getter
 
-  - [ ] getWinnings() - 당첨 번호 반환
-  - [ ] getBonus() - 보너스 번호 반환
+  - [x] getWinnings() - 당첨 번호 반환
+  - [x] getBonus() - 보너스 번호 반환
   - [ ] getLottos() - 구매한 로또 인스턴스 배열 반환
 
 --
@@ -72,6 +72,6 @@
 --
 
 - [ ] Utils
-  - [ ] generateRandoms - 로또를 생성할 6개의 난수 배열을 반환
+  - [x] genRandomLottoNumber - 로또를 생성할 6개의 난수 배열을 반환
   - [ ] rankLottos(winning, bonus) - matchWinnings 메서드 내에서 호출될 로또 당첨 순위 반환 메서드 (5등부터 0으로 시작해서 1등 4까지 배열의 인덱스 번호를 반환)
   - [ ] calculateProfit(rankArray, purchaseAmount) - 획득한 당첨금 / 구매 비용 으로 수익률을 계산하여 반환하는 메서드
