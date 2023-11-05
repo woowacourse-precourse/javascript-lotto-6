@@ -10,8 +10,8 @@ class Lotto {
 	#numbers;
 	constructor(numbers) {
 		this.#validate(numbers);
-		this.money;
 		this.#numbers = numbers; //number[]
+		this.money;
 		this.bonus; //number
 		this.randomArraySet;
 	}

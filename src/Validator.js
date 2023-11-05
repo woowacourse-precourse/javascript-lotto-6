@@ -1,18 +1,3 @@
-import {
-	EMPTY,
-	ONE_LOTTO_PRICE,
-	TYPE_LOTTO,
-	TYPE_BONUS,
-	MONEY_ERROR,
-	LOTTO_ERROR,
-	BONUS_ERROR,
-	POSSIBLE_MAX_NUMBER,
-	REG_EXP,
-	REG_EXP_EXCEPT_COMMA,
-	POSSIBLE_MIN_NUMBER,
-	TYPE_MONEY
-} from './constants';
-// import LottoError from './Error';
 
 class Validator {
 	constructor() {}
