@@ -5,6 +5,9 @@ import Lotto from '../model/Lotto.js';
 import OutputView from '../view/OutputView.js';
 import InputView from '../view/InputView.js';
 
+import calculateMatch from '../util/calculateMatch.js';
+import checkMatch from '../util/checkMatch.js';
+
 class Controller {
   #lotto;
 
@@ -14,6 +17,12 @@ class Controller {
 
   async lottoStart() {
     await this.#init();
+    this.#calculateLotto(
+      this.#money.getLottoList(),
+      this.#lotto.getLotto(),
+      this.#bonus.getBonusNumber(),
+      this.#money.getMatch(),
+    );
   }
 
   // 입력 값에 따른 초기화 작업 진행
@@ -37,6 +46,21 @@ class Controller {
   async #initBonus() {
     const input = await InputView.writeBonunsNumber();
     this.#bonus = new BonusNumber(input, this.#lotto.getLotto());
+  }
+
+  /**
+   *
+   * @param {number[][]} lottoList
+   * @param {number[]} lotto
+   * @param {number} bonus
+   * @param {{[key:string]: number}} match
+   */
+  #calculateLotto(lottoList, lotto, bonus, match) {
+    lottoList.forEach((item) => {
+      const { matchCount, bonusCount } = calculateMatch(item, lotto, bonus);
+      checkMatch(matchCount, bonusCount, match);
+    });
+    OutputView.printMatching(match);
   }
 }
 

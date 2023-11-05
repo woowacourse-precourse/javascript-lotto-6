@@ -11,21 +11,9 @@ describe('메시지를 생성하는 메서드가 정상적으로 메시지를 �
       { number: 0, message: '6개 일치 (2,000,000,000원) - 0개' },
     ];
 
-    const {
-      makeThreeMatchingFn,
-      makeFourMatchingFn,
-      makeFiveMatchingFn,
-      makeFiveAndBonusMatchingFn,
-      makeSixMatchingFn,
-    } = MESSAGE_OBJECT.MESSAGE_MATCHING;
+    const { three, four, five, fiveAndBonus, six } = MESSAGE_OBJECT.MESSAGE_MATCHING;
 
-    const testFn = [
-      makeThreeMatchingFn,
-      makeFourMatchingFn,
-      makeFiveMatchingFn,
-      makeFiveAndBonusMatchingFn,
-      makeSixMatchingFn,
-    ];
+    const testFn = [three, four, five, fiveAndBonus, six];
 
     cases.forEach(({ number, message }, index) => {
       // when

@@ -1,5 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import { makeNumberOfLottoMessageFn, MESSAGE, makeRateOfReturnMessageFn } from '../constants/message.js';
+import {
+  makeNumberOfLottoMessageFn,
+  MESSAGE,
+  makeRateOfReturnMessageFn,
+  MESSAGE_MATCHING,
+} from '../constants/message.js';
 
 class OutputView {
   /**
@@ -24,11 +29,14 @@ class OutputView {
 
   /**
    * 일치하는 숫자 여부 확인 메시지 출력
-   * @param {number} number
-   * @param {(number:number)=> string} fn
+   * @param {{ three: 0, four: 0, five: 0, fiveAndBonus: 0, six: 0 }} match
    */
-  static printMatching(number, fn) {
-    Console.print(fn(number));
+  static printMatching(match) {
+    const keys = Object.keys(match);
+    keys.forEach((key) => {
+      Console.print(MESSAGE_MATCHING[key](match[key]));
+    });
+    OutputView.printBlank();
   }
 
   /**

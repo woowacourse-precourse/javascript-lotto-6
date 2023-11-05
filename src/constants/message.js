@@ -10,11 +10,11 @@ const MESSAGE = Object.freeze({
 });
 
 const MESSAGE_MATCHING = Object.freeze({
-  makeThreeMatchingFn: (number = 0) => `3개 일치 (5,000원) - ${number}개`,
-  makeFourMatchingFn: (number = 0) => `4개 일치 (50,000원) - ${number}개`,
-  makeFiveMatchingFn: (number = 0) => `5개 일치 (1,500,000원) - ${number}개`,
-  makeFiveAndBonusMatchingFn: (number = 0) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${number}개`,
-  makeSixMatchingFn: (number = 0) => `6개 일치 (2,000,000,000원) - ${number}개`,
+  three: (number = 0) => `3개 일치 (5,000원) - ${number}개`,
+  four: (number = 0) => `4개 일치 (50,000원) - ${number}개`,
+  five: (number = 0) => `5개 일치 (1,500,000원) - ${number}개`,
+  fiveAndBonus: (number = 0) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${number}개`,
+  six: (number = 0) => `6개 일치 (2,000,000,000원) - ${number}개`,
 });
 
 const makeNumberOfLottoMessageFn = (number = 0) => `${number}개를 구매했습니다.`;
