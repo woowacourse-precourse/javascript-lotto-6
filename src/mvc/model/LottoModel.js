@@ -14,7 +14,6 @@ class LottoModel {
   constructor() {
     this.purchasedLottoArray;
     this.lottoBoard;
-    this.lottoResult;
   }
 
   purchaseLottos(numberOfLotto) {
@@ -27,13 +26,13 @@ class LottoModel {
     this.lottoBoard[bonusNumber] = BONUS_STATE;
   }
 
-  updateLottoResult() {
-    this.lottoResult = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(
-      0
-    );
+  getLottoResult() {
+    const result = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(0);
     lottoArray.forEach(
-      lotto => this.lottoResult[Get.lottoCheck(lotto, this.lottoBoard)]++
+      lotto => result[Get.lottoCheck(lotto, this.lottoBoard)]++
     );
+
+    return Object.freeze(result);
   }
 }
 

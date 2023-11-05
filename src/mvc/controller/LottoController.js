@@ -19,7 +19,6 @@ class LottoController{
     const winningNumbersArray = this.inputWinningNumbers();
     const bonusNumber = this.inputBonusNumber(winningNumbersArray);
     this.#model.makeLottoBoard(winningNumbersArray, bonusNumber);
-    this.#model.updateLottoResult();
   }
 
   async inputPurchasePrice(){
