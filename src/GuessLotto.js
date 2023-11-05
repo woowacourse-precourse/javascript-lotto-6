@@ -112,13 +112,11 @@ class GuessLotto {
   }
 
   generateLottoNumber() {
-    let lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-    lottoNumber = lottoNumber.sort((a, b) => a - b);
+    const lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+      (a, b) => a - b,
+    );
     this.#lottoNumbers.push(lottoNumber);
-    return `[${lottoNumber.map((item, index) => {
-      if (index === 0) return `${item}`;
-      return ` ${item}`;
-    })}]`;
+    return `[${lottoNumber.join(', ')}]`;
   }
 }
 
