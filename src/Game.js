@@ -146,7 +146,9 @@ class Game {
     const lottos = this.getLottos();
 
     Console.print(PURCHASE_MESSAGE(lottos.length));
-    lottos.forEach((lotto) => Console.print(lotto));
+    lottos.forEach((lotto) => {
+      Console.print(`[${lotto.join(', ')}]`);
+    });
   }
 
   printStatistics(rankCountResult, returnRate) {
