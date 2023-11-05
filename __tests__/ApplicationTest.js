@@ -1,5 +1,9 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import LottoGame from "../src/LottoGame.js";
+import Lotto from "../src/Lotto.js";
+import Validation from "../src/Validation.js";
+import UserInterface from "../src/UserInterface.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -93,5 +97,66 @@ describe("로또 테스트", () => {
 
   test("예외 테스트", async () => {
     await expect(runException("1000j")).rejects.toThrow("[ERROR]");
+  });
+
+  test("구입금액 0일 경우 예외 테스트", async () => {
+    mockQuestions(["0"]);
+    await expect(UserInterface.getLottoPrice()).rejects.toThrow("[ERROR]");
+  });
+
+  test("구입금액 1,000원 단위가 아닐경우 예외 테스트", async () => {
+    mockQuestions(["1100"]);
+    await expect(UserInterface.getLottoPrice()).rejects.toThrow("[ERROR]");
+  });
+
+  test("로또 번호 생성 테스트", async () => {
+    const count = 3;
+    const mockNumbers = [
+      [5, 10, 15, 20, 25, 30],
+      [1, 2, 3, 4, 5, 6],
+      [6, 7, 8, 9, 10, 11],
+    ];
+    MissionUtils.Random.pickUniqueNumbersInRange = jest
+      .fn()
+      .mockReturnValueOnce(mockNumbers[0])
+      .mockReturnValueOnce(mockNumbers[1])
+      .mockReturnValueOnce(mockNumbers[2]);
+
+    const lottos = LottoGame.generateLottos(count);
+    expect(lottos.length).toBe(count);
+
+    lottos.forEach((lotto, idx) => {
+      expect(lotto.getNumbers()).toEqual(mockNumbers[idx]);
+    });
+  });
+
+  test("당첨 번호 예외 테스트", async () => {
+    const mockInput = jest.spyOn(MissionUtils.Console, "readLineAsync");
+    mockInput.mockResolvedValueOnce("1,2,3,4,5,6,7");
+
+    await expect(() => UserInterface.getWinningNumbers()).rejects.toThrow("[ERROR]");
+  });
+
+  test("보너스 번호 예외 테스트", async () => {
+    const mockInput = jest.spyOn(MissionUtils.Console, "readLineAsync");
+    mockInput.mockResolvedValueOnce("1,2,3,4,5,6").mockResolvedValueOnce("1");
+
+    const winningNumbers = await UserInterface.getWinningNumbers();
+    await expect(() => UserInterface.getBonusNumber(winningNumbers)).rejects.toThrow("[ERROR]");
+  });
+
+  test("로또 번호 매칭 로직 테스트", async () => {
+    const lottos = [new Lotto([1, 3, 5, 7, 9, 11]), new Lotto([1, 2, 3, 4, 5, 6])];
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+    const result = LottoGame.calculateResult(lottos, winningNumbers, bonusNumber);
+    expect(result).toEqual({ 3: 1, 4: 0, 5: 0, "5+1": 0, 6: 1 });
+  });
+
+  test("로또 수익률 계산 테스트", async () => {
+    const result = { 3: 1, 4: 1, 5: 0, "5+1": 0, 6: 0 };
+    const lottoPrice = 2000;
+    const profit = UserInterface.displayResult(result, lottoPrice);
+    expect(profit.toFixed(1)).toEqual("2750.0");
   });
 });

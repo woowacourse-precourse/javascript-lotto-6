@@ -49,6 +49,7 @@ class UserInterface {
     MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE_BONUS}${result["5+1"]}개`);
     MissionUtils.Console.print(`${MESSAGE.RESULT_SIX}${result[6]}개`);
     MissionUtils.Console.print(`총 수익률은 ${profit.toFixed(1)}%입니다.`);
+    return profit;
   }
 }
 
