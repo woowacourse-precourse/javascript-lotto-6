@@ -1,6 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
-import {ERROR_MESSAGE, PRINT_MESSAGE} from './message';
+import {ERROR_MESSAGE, PRINT_MESSAGE, INPUT_MESSAGE} from './message';
 
 class App {
   constructor() {
@@ -85,7 +85,7 @@ class App {
   async play() {
     try{
       const lottoPrice =
-      await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
+      await Console.readLineAsync(INPUT_MESSAGE.PRICE);
       this.checkLottoPrice(lottoPrice);
       this.lottoTicket = this.getLottoTicket(lottoPrice);
       this.printPurchaseAmount(this.lottoTicket);
@@ -98,9 +98,9 @@ class App {
       }
       this.printLottoArray();
       const userLottoNumber =
-        await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+        await Console.readLineAsync(INPUT_MESSAGE.MATCH_NUMBERS);
       const userBonusNumber =
-        await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+        await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
       this.checkBonusNumber(userBonusNumber);
       const lottoNumberArray = this.getLottoNumberArray(userLottoNumber);
       const lotto = new Lotto(lottoNumberArray);
