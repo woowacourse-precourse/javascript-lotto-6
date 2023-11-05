@@ -1,30 +1,16 @@
-import { LOTTO_PRICE } from "./utils/lottoConstants.js";
-
-const RANKS = {
-  6: "1등",
-  5.5: "2등",
-  5: "3등",
-  4: "4등",
-  3: "5등",
-};
-
-const PRIZE_MONEY = {
-  "1등": 2000000000,
-  "2등": 30000000,
-  "3등": 1500000,
-  "4등": 50000,
-  "5등": 5000,
-};
+import {
+  BONUS_MATCH_VALUE,
+  LOTTO_PRICE,
+  MIN_MATCH_COUNT,
+  PRIZE_MONEY,
+  RANKS,
+} from "./utils/lottoConstants.js";
 
 class LottoResult {
   constructor() {
-    this.winningCounts = {
-      "1등": 0,
-      "2등": 0,
-      "3등": 0,
-      "4등": 0,
-      "5등": 0,
-    };
+    this.winningCounts = Object.fromEntries(
+      Object.values(RANKS).map((rank) => [rank, 0])
+    );
     this.rateOfReturn = 0;
   }
 
@@ -34,7 +20,7 @@ class LottoResult {
     ).length;
 
     if (matchedCount === 5 && ticket.includes(bonusNumber)) {
-      matchedCount += 0.5;
+      matchedCount += BONUS_MATCH_VALUE;
     }
 
     return matchedCount;
@@ -48,7 +34,7 @@ class LottoResult {
         bonusNumber
       );
 
-      if (matchedCount < 3) return;
+      if (matchedCount < MIN_MATCH_COUNT) return;
 
       const rank = RANKS[matchedCount];
       this.winningCounts[rank] += 1;
