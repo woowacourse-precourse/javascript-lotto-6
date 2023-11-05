@@ -1,14 +1,22 @@
+export const ONE_RANK = 'one_rank';
+export const TWO_RANK = 'two_rank';
+export const THREE_RANK = 'three_rank';
+export const FOUR_RANK = 'four_rank';
+export const FIVE_RANK = 'five_rank';
+
 export const LOTTO_SETTING = Object.freeze({
   min: 1,
   max: 45,
   length: 6,
   max_purchase: 50000,
   unit: 1000,
-  five_rank_prize: 5000,
-  four_rank_prize: 50000,
-  three_rank_prize: 1500000,
-  two_rank_prize: 30000000,
-  one_rank_prize: 2000000000,
+  prize: {
+    [FIVE_RANK]: 5000,
+    [FOUR_RANK]: 50000,
+    [THREE_RANK]: 1500000,
+    [TWO_RANK]: 30000000,
+    [ONE_RANK]: 2000000000,
+  },
 });
 
 export const LOTTO_ERROR_MESSAGE = Object.freeze({
@@ -34,9 +42,9 @@ export const OUTPUT_MESSAGE = Object.freeze({
   purchase: '개를 구매했습니다.',
   divider: '---',
   statistics: '당첨 통계',
-  five_rank: `3개 일치 (${LOTTO_SETTING.five_rank_prize.toLocaleString()}원) - `,
-  four_rank: `4개 일치 (${LOTTO_SETTING.four_rank_prize.toLocaleString()}원) - `,
-  three_rank: `5개 일치 (${LOTTO_SETTING.three_rank_prize.toLocaleString()}원) - `,
-  two_rank: `5개 일치, 보너스 볼 일치 (${LOTTO_SETTING.two_rank_prize.toLocaleString()}원) - `,
-  one_rank: `6개 일치 (${LOTTO_SETTING.one_rank_prize.toLocaleString()}원) - `,
+  [FIVE_RANK]: `3개 일치 (${LOTTO_SETTING.prize.five_rank.toLocaleString()}원) - `,
+  [FOUR_RANK]: `4개 일치 (${LOTTO_SETTING.prize.four_rank.toLocaleString()}원) - `,
+  [THREE_RANK]: `5개 일치 (${LOTTO_SETTING.prize.three_rank.toLocaleString()}원) - `,
+  [TWO_RANK]: `5개 일치, 보너스 볼 일치 (${LOTTO_SETTING.prize.two_rank.toLocaleString()}원) - `,
+  [ONE_RANK]: `6개 일치 (${LOTTO_SETTING.prize.one_rank.toLocaleString()}원) - `,
 });
