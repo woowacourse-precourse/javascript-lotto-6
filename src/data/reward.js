@@ -5,4 +5,5 @@ const REWORD = {
     SECOND_PLACE: 30000000,
     FIRST_PLACE: 2000000000,
 }
+
 export { REWORD };

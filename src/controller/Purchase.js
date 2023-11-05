@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-import { MESSAGE } from '../data/message.js';
+import { INPUT_MESSAGE } from '../data/message.js';
 
 class Purchase {
     #amount;
@@ -25,7 +25,7 @@ class Purchase {
     }
     
     countPrint() {
-        MissionUtils.Console.print(`\n${this.#count}${MESSAGE.PURCHASE_COUNT}`);
+        MissionUtils.Console.print(`\n${this.#count}${INPUT_MESSAGE.PURCHASE_COUNT}`);
     }
 
     numbersPrint(array) {

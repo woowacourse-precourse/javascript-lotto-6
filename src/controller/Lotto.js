@@ -1,6 +1,3 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-
-import { MESSAGE } from '../data/message.js';
 import { ERROR_MESSAGE } from '../data/message.js';
 
 class Lotto {
@@ -38,16 +35,6 @@ class Lotto {
     }
 
     return this.#numbers;
-  }
-
-  async print(result, rate) {
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_INFO}\n---\n`);
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_THREE} ${result[3] ?? 0}개`);
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_FOUR} ${result[4] ?? 0}개`);
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE} ${result[5] ?? 0}개`);
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_FIVE_BOUNS} ${result[5.5] ?? 0}개`);
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_SIX} ${result[6] ?? 0}개`);
-    await MissionUtils.Console.print(`${MESSAGE.RESULT_RATE} ${rate}%입니다.`);
   }
 }
 
