@@ -18,7 +18,7 @@
 
   메서드
 
-  - [ ] purchaseLottos - `async` 로또 구매 금액을 입력받아 domain의 purchaseLotto 메서드를 호출
+  - [x] purchaseLottos - `async` 로또 구매 금액을 입력받아 domain의 purchaseLotto 메서드를 호출
   - [ ] setWinnings - `async` 로또 당첨 번호를 입력받아 domain의 setWinnings 메서드를 호출
   - [ ] setBonus - `async` 로또 보너스 번호를 입력받아 domain의 setBonus 메서드를 호출
   - [ ] announceLottery - domain의 announceLottery 메서드를 호출
@@ -29,7 +29,7 @@
 
   필드
 
-  - [ ] view - 입력, 반환할 View 인스턴스 : `View`
+  - [x] view - 입력, 반환할 View 인스턴스 : `View`
   - [x] #winnings - 당첨 번호 : `Array<number>`
   - [x] #bonus - 보너스 번호 : `number`
   - [x] #lottos - 생성된 로또(들) : `Array<Lotto>`
@@ -37,7 +37,7 @@
 
   메서드
 
-  - [ ] setLottos - `async` 입력받은 금액만큼 로또 인스턴스를 생성하여 배열로 할당
+  - [x] purchaseLottos - 입력받은 금액만큼 로또 인스턴스를 생성하여 배열로 할당
   - [ ] setWinnings - `async` 입력받은 문자열 숫자 조합을 당첨 번호 숫자 배열로 할당
   - [ ] setBonus - `async` 입력받은 문자열 숫자를 보너스 번호 숫자로 할당
   - [ ] matchWinnings(winnings, bonus) - 생성된 로또 번호를 당첨 번호, 보너스 번호와 비교한 결과를 반환
@@ -55,7 +55,12 @@
 - [x] View
 
   - [x] printConsole
-  - [x] readInput
+  - [x] announcePurchasing
+  - [ ] announceLottery
+  - [ ] errorNoInput
+  - [ ] errorPurchaseCost
+  - [ ] errorWinnings
+  - [ ] errorBonus
 
 --
 
@@ -74,7 +79,7 @@
   - [ ] isOverlap(input) - 입력값을 배열로 변환하였을 때, 요소 중 중복값이 있는지 확인
   - [ ] validateWinnings(input) - 입력값이 올바른 당첨 번호인지 확인 (boolean)
   - [ ] validateBonus(input) - 입력값이 올바른 보너스 번호인지 확인 (boolean)
-  - [ ] validatePurchasingCost(input) - 입력값이 올바른 구매액인지 확인 (boolean)
+  - [x] isCorrectCost(input) - 입력값이 올바른 구매액인지 확인 (boolean)
 
 --
 

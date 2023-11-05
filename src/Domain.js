@@ -21,10 +21,18 @@ export default class Domain {
   }
 
   purchaseLottos(purchaseCost) {
-    if (this.#validator.isEmpty(purchaseCost)) {
-      return this.#view.purchaseLottoError();
-    }
-    return true;
+    if (this.#validator.isEmpty(purchaseCost)) return this.#view.errorNoInput();
+    if (this.#validator.isCorrectCost(purchaseCost))
+      return this.#view.errorPurchaseCost();
+
+    this.#lottos = Array(Number(purchaseCost) / 1000)
+      .fill("")
+      .map(() => new Lotto(Utils.genRandomLottoNumber()));
+
+    return this.#view.announcePurchasing(
+      Number(purchaseCost) / 1000,
+      this.#lottos
+    );
   }
 
   setWinnings(winnings) {

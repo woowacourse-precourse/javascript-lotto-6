@@ -1,6 +1,6 @@
 const MESSAGES = {
   COMMENT_ENTER_PURCHASE_PRICE: "구입금액을 입력해 주세요.\n",
-  COMMENT_PURCHASE_COUNT: "개를 구매했습니다.",
+  COMMENT_PURCHASE_AMOUNT: "개를 구매했습니다.",
   COMMENT_ENTER_WINNING_NUMBERS: "\n당첨 번호를 입력해 주세요.\n",
   COMMENT_ENTER_BONUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
   COMMENT_WINNING_STATS: [
