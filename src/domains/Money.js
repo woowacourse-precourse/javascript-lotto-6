@@ -1,4 +1,4 @@
-import AppError from '../errors/AppError.js';
+import MoneyError from '../errors/MoneyError.js';
 import { ERROR_MESSAGES } from '../constants/errorMessages.js';
 
 class Money {
@@ -42,19 +42,19 @@ class Money {
 
   validateType() {
     if (Number.isNaN(this.#money)) {
-      throw new AppError(ERROR_MESSAGES.not_a_number);
+      throw new MoneyError(ERROR_MESSAGES.money_not_a_number);
     }
   }
 
   validateLack() {
     if (this.#money < Money.MIN_AMOUNT) {
-      throw new AppError(ERROR_MESSAGES.lack_money);
+      throw new MoneyError(ERROR_MESSAGES.lack_money);
     }
   }
 
   validateDivide() {
     if (this.#money % Money.MIN_AMOUNT) {
-      throw new AppError(ERROR_MESSAGES.not_divded);
+      throw new MoneyError(ERROR_MESSAGES.not_divded);
     }
   }
 }

@@ -16,7 +16,7 @@ class AppError extends Error {
    */
 
   constructor(errorMessage) {
-    const message = `${AppError.PREFIX} ${errorMessage}`;
+    const message = `${AppError.PREFIX} ${errorMessage}\n`;
     super(message);
     this.name = this.constructor.name;
   }
