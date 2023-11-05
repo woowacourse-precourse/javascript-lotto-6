@@ -11,7 +11,7 @@ class View {
 
   async getWinninNumber() {
     const INPUT = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    return INPUT.split(",");
+    return INPUT.split(",").map((each) => +each);
   }
 
   async getBonusNumber() {
