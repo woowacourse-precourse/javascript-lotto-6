@@ -12,7 +12,7 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     } else if (numbers.length !== new Set(numbers).size) {
-      throw new Error('[ERROR] 로또를 중복된 번호가 나올 수 없습니다.');
+      throw new Error('[ERROR] 로또는 중복된 번호가 나올 수 없습니다.');
     }
   }
 
