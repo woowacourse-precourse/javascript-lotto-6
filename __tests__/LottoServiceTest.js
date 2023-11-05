@@ -32,4 +32,16 @@ describe('LottoService', () => {
     expect(prizeMap.get(PRIZE.fifth.name)).toBe(1);
     expect(prizeMap.get(PRIZE.second.name)).toBe(1);
   });
+
+  test('구입금액과 당첨 개수에 따른 상금으로 수익률을 계산한다.', () => {
+    const purchaseMoney = 2000;
+    let prizeMoney = 0;
+    prizeMap.forEach((matchCount, prize) => {
+      prizeMoney += matchCount * PRIZE[prize].money;
+    });
+
+    const profiRate = (prizeMoney / purchaseMoney) * 100;
+
+    expect(profiRate).toBe(1500250);
+  });
 });
