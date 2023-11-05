@@ -1,4 +1,4 @@
-import LottoValidator from "../src/utils/LottoValidator";
+import LottoValidator from "../src/utils/LottoValidator.js";
 
 let lottoValidator;
 

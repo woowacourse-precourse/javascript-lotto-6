@@ -13,7 +13,7 @@ class LottoValidator {
   }
 
   validateBonusNumberIsNumeric(bonusNumber) {
-    if (typeof bonusNumber !== "number") {
+    if (isNaN(bonusNumber)) {
       throw new Error("[ERROR] 보너스 번호는 숫자만 입력 가능합니다.");
     }
   }
