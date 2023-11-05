@@ -29,33 +29,38 @@ class App {
   }
 
   async play() {
-    this.#money = await Request.money();
-    this.#lottoQuantity = calculate.countFrom(this.#money);
-    this.#lottos = lottoMachine.make(this.#lottoQuantity);
+    await this.makeLotto();
 
     notice.totalLotto(this.#lottos, this.#lottoQuantity);
 
-    this.#winningNumbers = await Request.winningNumbers();
-    this.#bonusNumber = await Request.bonusNumber();
-    const result = App.getResult(this.#lottos, this.#winningNumbers);
-    this.#prizeResult = lottoMachine.read(result, this.#bonusNumber);
-    this.#profit = calculate.profitFrom(this.#prizeResult, this.#money);
+    await this.getWinningNumbers();
+    await this.getBonusNumber();
+    this.makeResult();
 
     notice.finalProfit(this.#profit, this.#prizeResult);
   }
 
-  // static getResult(lottos, winningNumbers) {
-  //   const resultArray = [];
+  async makeLotto() {
+    this.#money = await Request.money();
+    this.#lottoQuantity = calculate.countFrom(this.#money);
+    this.#lottos = lottoMachine.make(this.#lottoQuantity);
+  }
 
-  //   lottos.forEach((lotto) => {
-  //     const findResult = lottoMachine.find(lotto, winningNumbers);
-  //     resultArray.push(findResult);
-  //   });
+  async getWinningNumbers() {
+    this.#winningNumbers = await Request.winningNumbers();
+  }
 
-  //   return resultArray;
-  // }
+  async getBonusNumber() {
+    this.#bonusNumber = await Request.bonusNumber();
+  }
 
-  static getResult(lottos, winningNumbers) {
+  makeResult() {
+    const result = this.getResult(this.#lottos, this.#winningNumbers);
+    this.#prizeResult = lottoMachine.read(result, this.#bonusNumber);
+    this.#profit = calculate.profitFrom(this.#prizeResult, this.#money);
+  }
+
+  getResult(lottos, winningNumbers) {
     return lottos.map((lotto) => lottoMachine.find(lotto, winningNumbers));
   }
 }
