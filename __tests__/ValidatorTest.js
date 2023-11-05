@@ -32,3 +32,9 @@ describe('로또 번호 예외 처리 테스트', () => {
     expect(() => LottoValidator.isLotto(input)).toThrow();
   });
 });
+
+describe('구입금액 입력 테스트', () => {
+  test.each([8300, 100000, 500])('1000원단위로 최소금액과 최대금액 사이인지', (input) => {
+    expect(() => PurChaseValidator.checkPurchase(input)).toThrow();
+  });
+});
