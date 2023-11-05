@@ -1,5 +1,5 @@
-import { OPTION } from '../constants/Lotto';
-import Validation from '../validations/Lotto';
+import { OPTION } from '../constants/Lotto.js';
+import Validation from '../validations/Lotto.js';
 
 class LottoCalculator {
   /** @type {Lotto[]} */
