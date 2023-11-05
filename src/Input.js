@@ -1,7 +1,7 @@
-// InputMoney.js
+// Input.js
 import readline from "readline";
 
-class InputMoney {
+class Input {
   static async inputMoney() {
     return new Promise((resolve, reject) => {
       const rl = readline.createInterface({
@@ -26,4 +26,4 @@ class InputMoney {
   }
 }
 
-export default InputMoney;
+export default Input;
