@@ -18,9 +18,7 @@ class App {
     let amount;
     while (true) {
       try {
-        const input =
-          // eslint-disable-next-line no-await-in-loop
-          await Console.readLineAsync("구입금액을 입력해주세요.\n");
+        const input = await Console.readLineAsync("구입금액을 입력해주세요.\n");
         amount = Number(input);
         App.validateAmount(amount);
         return amount;
@@ -35,7 +33,6 @@ class App {
     while (true) {
       try {
         const input =
-          // eslint-disable-next-line no-await-in-loop
           await Console.readLineAsync("당첨 번호를 입력해주세요.\n");
         numbers = input.split(",").map((item) => Number(item));
         App.validateWinningNumber(numbers);
@@ -54,7 +51,6 @@ class App {
   }
 
   static validateAmount(amount) {
-    // eslint-disable-next-line no-restricted-globals
     if (isNaN(amount) || amount <= 0) {
       throw new Error("[ERROR] 구입금액은 자연수만 입력 가능합니다.\n");
     }
@@ -74,7 +70,6 @@ class App {
     if (
       numbers.some(
         (number) =>
-          // eslint-disable-next-line no-restricted-globals
           isNaN(number) ||
           number < MIN_WINNING_NUMBER ||
           number > MAX_WINNING_NUMBER,

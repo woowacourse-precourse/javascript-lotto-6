@@ -42,5 +42,7 @@ module.exports = {
     "prettier/prettier": ["error", { endOfLine: "auto" }],
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
+    "no-await-in-loop": "off",
+    "no-restricted-globals": "off",
   },
 };
