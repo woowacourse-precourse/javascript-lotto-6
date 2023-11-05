@@ -17,7 +17,7 @@ class App {
     });
 
     const winningNumbers = await UserInput.inputNumber();
-    const bonusNumber = await UserInput.inputBonus();
+    const bonusNumber = await UserInput.inputBonus(winningNumbers);
 
     const calculator = new LottoCalculator(winningNumbers, numberOfSets);
     const view = new LottoView(); // 뷰 인스턴스 생성
