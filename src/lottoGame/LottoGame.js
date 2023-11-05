@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "../lotto/Lotto.js";
-import LottoUtils from "./LottoUtils.js";
+import LottoUtils from "./lottoUtils.js";
 
 class LottoGame {
   #purchasedLottos;
@@ -21,7 +21,9 @@ class LottoGame {
 
   printPurchasedLottos(lottoCount) {
     Console.print(`${lottoCount}개를 구매했습니다.`);
-    this.#purchasedLottos.forEach((lotto) => Console.print(lotto.getNumbers()));
+    this.#purchasedLottos.forEach((lotto) =>
+      Console.print(LottoUtils.ascendingSort(lotto.getNumbers()))
+    );
   }
 }
 
