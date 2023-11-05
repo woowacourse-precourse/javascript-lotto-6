@@ -22,6 +22,10 @@ const PURCASE_COMMENT = "구입금액을 입력해 주세요."
 const WINNING_NUMBER_COMMENT = "당첨 번호를 입력해 주세요.";
 const BONUS_NUMBER_COMMENT = "보너스 번호를 입력해 주세요.";
 //const LOTTO_PRICE = 1000;
+const winningDetails = {
+   same : [3, 4, [5,0], [5,1], 6],
+   prize : [5000, 50000, 1500000, 30000000, 2000000000]
+}
 
 async function inputMoney() {
   let comment = PURCASE_COMMENT;
@@ -83,10 +87,10 @@ export function numberSort(numbers) {
 }
 
 export function lottoReader(lotto, winning, bonus) {
-  const includeNumbers = winning.filter(number => lotto.includes(number))
-  const includeBonus = lotto.includes(bonus);
-  if (includeBonus === false) {
-    return [includeNumbers.length, 0];
+  const sameNumbers = winning.filter(number => lotto.includes(number))
+  const sameBonus = lotto.includes(bonus);
+  if (sameBonus === false) {
+    return [sameNumbers.length, 0];
   }
-  return [includeNumbers.length, includeBonus.length];
+  return [sameNumbers.length, sameBonus.length];
 }
