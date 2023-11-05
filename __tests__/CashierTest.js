@@ -1,7 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Cashier from '../src/Cashier';
 import { ERROR_MESSAGE, LOTTO_FORM } from '../src/constant';
-import { getErrorMessage } from '../src/uttils';
+import { getErrorMessage } from '../src/utils';
 
 describe('Cashier 클래스 테스트', () => {
   const errorMessage = getErrorMessage(ERROR_MESSAGE.payment);

@@ -1,6 +1,6 @@
 import BonusBall from '../src/BonusBall';
 import { BONUS_BALL_FORM, ERROR_MESSAGE } from '../src/constant';
-import { getErrorMessage } from '../src/uttils';
+import { getErrorMessage } from '../src/utils';
 
 describe('BonusBall 클래스 테스트', () => {
   const correctLotto = [1, 2, 3, 4, 5, 6];

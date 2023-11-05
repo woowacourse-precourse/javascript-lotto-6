@@ -1,6 +1,6 @@
 import Lotto from './Lotto';
 import { ERROR_MESSAGE } from './constant';
-import { throwError, validateNumberRange } from './uttils';
+import { throwError, validateNumberRange } from './utils';
 
 class BonusBall {
   #number;

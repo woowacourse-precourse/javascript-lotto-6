@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE, LOTTO_FORM } from './constant';
-import { throwError, validateNumberRange } from './uttils';
+import { throwError, validateNumberRange } from './utils';
 class Lotto {
   #numbers; // number[]
 

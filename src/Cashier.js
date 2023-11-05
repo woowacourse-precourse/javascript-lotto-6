@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE, LOTTO_FORM } from './constant';
-import { getLottoRandomNumbers, throwError } from './uttils';
+import { getLottoRandomNumbers, throwError } from './utils';
 import Lotto from './Lotto';
 class Cashier {
   #numberOfTickets = 0;
