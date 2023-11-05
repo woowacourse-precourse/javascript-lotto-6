@@ -1,4 +1,3 @@
-// LottoStore.test.js
 import { LottoStore } from '../src/LottoStore.js';
 import { Message } from '../src/Message.js';
 
@@ -25,12 +24,12 @@ describe('LottoStore 테스트', () => {
     });
 
     it('입력값이 1000으로 나눠떨어질때', () => {
-      const input = 3000; // 1000의 배수인 유효한 금액
+      const input = 3000;
       expect(lottoStore.isValidMoney(input)).toBe(true);
     });
 
     it('구매금액이 0일때', () => {
-      const input = 0; // 금액이 0인 경우
+      const input = 0;
       expect(() => lottoStore.isValidMoney(input)).toThrowError(
         Message.error.NOT_ONETHOUSAND
       );
