@@ -1,29 +1,50 @@
 import { REGEX, LOTTO_RULE } from "../constants/BusinessNumber.js";
+import { LOTTO_ERROR } from "../constants/Messeage.js";
+import CustomError from "./CustomError.js";
+import Lotto from "../Lotto.js";
 
-//검증시 파라미터는 입력받은 문자열을 온전히 받아들인다.
-export const validatePurchaseAmount = (amount) => {
-  if (
-    REGEX.number.test(amount)
-    || Number(amount) > LOTTO_RULE.buyMax
-    || Number(amount) < LOTTO_RULE.buyUnit
-    || Number(amount) % LOTTO_RULE.buyUnit !== 0
-  ) throw new Error("[ERROR] 해응해응")
+export const validatePurchaseAmount = (amountString) => {
+  if (REGEX.number.test(amountString)) {
+    throw new CustomError(LOTTO_ERROR.form);
+  }
+
+  if (Number(amountString) > LOTTO_RULE.buyMax) {
+    throw new CustomError(LOTTO_ERROR.buyLimit);
+  }
+
+  if (Number(amountString) < LOTTO_RULE.buyUnit) {
+    throw new CustomError(LOTTO_ERROR.moneyLack);
+  }
+
+  if(Number(amountString) % LOTTO_RULE.buyUnit !== 0) {
+    throw new CustomError(LOTTO_ERROR.unitBreak);
+  }
 };
 
+export const validateLuckyNumbers = (luckyString) => {
+  if (REGEX.commaNumber.test(luckyString)) {
+    throw new CustomError(LOTTO_ERROR.form);
+  }
 
-// luckyNumberArray 는 숫자로된 배열이다
-export const validateBonusNumber = (bonus, luckyNumberArray) => {
-  if (
-    REGEX.number.test(bonus)
-    || Number(bonus) > LOTTO_RULE.maxNumber
-    || Number(bonus) < LOTTO_RULE.minNumber
-  ) throw new Error("[ERROR] 보너스 숫자오류 1")
+  const luckyNumbers = luckyString.split(',').map(Number);
+  const lotto = new Lotto(luckyNumbers);
 
-  if (luckyNumberArray.includes(Number(bonus))) throw new Error("[ERROR] 보너스 숫자 오류 2");
+  return lotto.getLuckyNumbers();
 }
 
-/*
-const a = "47";
-const b = [1,2,3,4,5,6];
-console.log(validateBonusNumber(a,b));*/
+export const validateBonusNumber = (bonus, luckyNumberArray) => {
+  if (REGEX.number.test(bonus)) {
+    throw new CustomError(LOTTO_ERROR.form);
+  }
+
+  if (
+    Number(bonus) > LOTTO_RULE.maxNumber
+    || Number(bonus) < LOTTO_RULE.minNumber
+  ) throw new Error(LOTTO_ERROR.luckyRange);
+
+  if (luckyNumberArray.includes(Number(bonus))) {
+    throw new CustomError(LOTTO_ERROR.bonusConflict);
+  } 
+};
+
 

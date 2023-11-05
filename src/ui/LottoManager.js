@@ -1,12 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import { LOTTO_PLAY } from "../constants/Messeage.js";
-import { validatePurchaseAmount, validateBonusNumber } from "../error/Validation.js";
-import Lotto from "../Lotto.js";
-import { showLottoTicket, showStatisticsResult } from "./output.js";
+import { validatePurchaseAmount, validateBonusNumber, validateLuckyNumbers } from "../error/Validation.js";
+
+import { showLottoTicket, showStatisticsResult } from "./LottoStamper.js";
 import LotteryMachine from "../domain/LotteryMachine.js";
 import LottoReader from "../domain/LottoReader.js";
 
-class LottoSimulator {
+class LottoManager {
   #purchaseAmount = 0;
 
   #luckyNumbers = [];
@@ -15,18 +15,17 @@ class LottoSimulator {
 
   #lottoTicket = [];
 
-  async start() {
+  async startLottoSimulator() {
     await this.#getPurchaseAmount();
     
     const lotteryMachine = new LotteryMachine(this.#purchaseAmount);
     this.#lottoTicket = lotteryMachine.getTiket();
-
     showLottoTicket(this.#lottoTicket);
  
-    await this.#luckyBonusSetting()
+    await this.#setWinningNumbers();
   }
 
-  async #luckyBonusSetting() {
+  async #setWinningNumbers() {
     await this.#getLuckyNumbers();
     await this.#getBonusNumber();
     
@@ -48,7 +47,6 @@ class LottoSimulator {
       this.#purchaseAmount = Number(purchaseAmount);
       
       Console.print('');
-
     } catch (messeage) {
       Console.print(`${messeage}`);
       await this.#getPurchaseAmount();
@@ -57,14 +55,10 @@ class LottoSimulator {
 
   async #getLuckyNumbers() {
     try {
-      const luckyStrings = await Console.readLineAsync(`${LOTTO_PLAY.inputLucky}\n`);
-      const luckyNumbers = luckyStrings.split(',').map((string) => Number(string));
-                                              
-      const lotto = new Lotto(luckyNumbers);//예외처리 부족 인지
-      this.#luckyNumbers = lotto.getLuckyNumbers();
+      const luckyStrings = await Console.readLineAsync(`${LOTTO_PLAY.inputLucky}\n`);                                        
+      this.#luckyNumbers = validateLuckyNumbers(luckyStrings);
 
       Console.print('');
-
     } catch (messeage) {
       Console.print(`${messeage}`);
       await this.#getLuckyNumbers();
@@ -77,8 +71,8 @@ class LottoSimulator {
       validateBonusNumber(bonusNumber, this.#luckyNumbers);
 
       this.#bonusNumber = Number(bonusNumber);
-      Console.print('');
 
+      Console.print('');
     } catch (messeage) {
       Console.print(`${messeage}`);
       await this.#getBonusNumber();
@@ -86,4 +80,4 @@ class LottoSimulator {
   }
 }
 
-export default LottoSimulator;
+export default LottoManager;

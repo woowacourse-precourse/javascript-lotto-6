@@ -7,13 +7,13 @@ import LottoReader from "./domain/LottoReader.js";
 import { validateBonusNumber, validatePurchaseAmount } from "./error/Validation.js";
 import { LOTTO_PLAY } from "./constants/Messeage.js";
 */
-import LottoSimulator from "./ui/LottoSimulator.js";
+import LottoManager from "./ui/LottoManager.js";
 
 class App {
   async play() {
-    const lottoSimulator = new LottoSimulator();
+    const lottoManager = new LottoManager();
 
-    await lottoSimulator.start();
+    await lottoManager.startLottoSimulator();
   }
 }
 
