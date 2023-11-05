@@ -17,6 +17,8 @@ class App {
   async setGameConfig() {
     const { lotteryTickets, winningNumbers, bonusNumber } = await this.readGameConfig();
     const rankBoard = Lotto.getRankBoard(lotteryTickets, winningNumbers, bonusNumber);
+    const initlMoney = lotteryTickets * PURCHASE_PRICE.divisionUnit;
+    const finalMoney = Lotto.getFinalMoney(rankBoard);
     this.#view.printRankResult(rankBoard);
   }
 

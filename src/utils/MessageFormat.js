@@ -10,5 +10,7 @@ const MessageFormat = {
 5개 일치 (1,500,000원) - ${rank[3]}개
 5개 일치, 보너스 볼 일치 (30,000,000원) - ${rank[2]}개
 6개 일치 (2,000,000,000원) - ${rank[1]}개`,
+  revenueResult: (revenue) => `총 수익률은 ${revenue}%입니다.`,
 };
+
 export default MessageFormat;

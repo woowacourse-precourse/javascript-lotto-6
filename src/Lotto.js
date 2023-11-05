@@ -2,7 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import LOTTO_NUMBER from './constants/lottoNumber.js';
 import ERROR from './constants/error.js';
 import MessageFormat from './utils/messageFormat.js';
-import RANK from './constants/rankBoard.js';
+import RANK from './constants/rank.js';
 
 class Lotto {
   #numbers;
@@ -64,6 +64,12 @@ class Lotto {
       return 5;
     }
     return 0;
+  }
+
+  static getFinalMoney(rankBoard) {
+    const { rankMoney } = RANK;
+    const rankArr = Object.entries(rankBoard);
+    return rankArr.reduce((money, [rank, count]) => money + count * rankMoney[rank], 0);
   }
 }
 

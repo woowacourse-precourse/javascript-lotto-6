@@ -38,4 +38,8 @@ export default class View {
   printRankResult(rankBoard) {
     this.#outputView.print(MessageFormat.rankResult(rankBoard));
   }
+
+  printRevenue(revenue) {
+    this.#outputView.print()
+  }
 }
