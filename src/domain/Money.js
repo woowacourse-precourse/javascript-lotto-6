@@ -20,7 +20,7 @@ class Money {
       this.#revenue += WINNING_REWARD[index] * count;
     });
 
-    return ((this.#revenue / purchasePrice) * 100).toFixed(2);
+    return ((this.#revenue / purchasePrice) * 100).toFixed(1);
   }
 }
 
