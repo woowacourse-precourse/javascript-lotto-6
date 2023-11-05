@@ -5,14 +5,13 @@ import { getLottoNumber } from './utils/getLottoNumber';
 import { getBonusNumber } from './utils/getBonusNumber';
 import { getLottoResult } from './utils/getLottoResult';
 import { getRanking, getRankResult } from './utils/getLottoRanking';
+import { getPrize, getEarningRate } from "./utils/getEarningRate";
 
 class App {
   async play() {
     const cash = await getPurchase();
     const lottoCount = getLottoCount(cash);
-
     const lottoArray = createLotto(lottoCount);
-
     const winningLotto = await getLottoNumber();
     const bonus = await getBonusNumber();
 
@@ -21,6 +20,8 @@ class App {
 
     const lottoRanking = getRanking(winningCount);
     getRankResult(lottoRanking);
+    const prize = getPrize(lottoRanking);
+    getEarningRate(prize, cash);
   }
 }
 
