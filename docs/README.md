@@ -28,15 +28,15 @@
 - [ ] : 보너스 번호 set
 - [ ] : 보너스 번호 get
 
-### [View]InputPrompt
+### [View]inputPrompt
 
 - [v] : 구입 금액 입력
 - [ ] : 당첨 번호 입력
 - [ ] : 보너스 번호 입력
 
-### [View]OutputPrompt
+### [View]outputPrompt
 
-- [ ] : 로또 구매한 갯수 출력
+- [v] : 구매한 로또 갯수 출력
 - [ ] : 로또 정보 출력
 - [ ] : 당첨 통계 출력
 - [ ] : 총 수익률 출력
