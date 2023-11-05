@@ -85,6 +85,8 @@ class App {
         profits += PRIZE_MONEYS[4 - i]
       }
     })
+
+    this.output.printRate(profits / money);
   }
 }
 
