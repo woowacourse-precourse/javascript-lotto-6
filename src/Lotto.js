@@ -15,7 +15,6 @@
  */
 
 class Lotto {
-  //생성자로 6개의 숫자를 한번에 받고 갯수 확인후 numbers에 저장한다. numbers는 private이다.
   #numbers;
 
   constructor(numbers) {
@@ -25,7 +24,6 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      //TODO 에러 처리로 다시 입력 받도록 한다.
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
     if (!hasNoDuplicates(numbers)) throw new Error("[ERROR] 중복된 숫자가 있습니다.");

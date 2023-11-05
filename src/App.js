@@ -1,6 +1,7 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import * as Validation from "./Validation.js";
+import * as constants from "./constants.js";
 /*
   기능 목록
 0. 구입 금액 받고 로또 구입 개수 산출x
@@ -32,19 +33,19 @@ class App {
     const winNumberArray = await askWinNumbersQuestion();
     const bonusNumber = await askBonusNumberQuestion(winNumberArray);
 
-    const results = getLottoResult(lottoArray, winNumberArray, bonusNumber);
+    const result = getLottoResult(lottoArray, winNumberArray, bonusNumber);
 
-    const prizeMoney = countPrizeMoney(results);
-    const countResult = countTotalWin(results);
-    const resultComment = writeResultComment(inputMoney, prizeMoney, countResult, LOTTO_PRIZES);
+    const prizeMoney = countPrizeMoney(result);
+    const countResult = countTotalWin(result);
+
+    const resultComment = writeResultComment(inputMoney, prizeMoney, countResult);
     MissionUtils.Console.print(resultComment);
   }
 }
 
-const LOTTO_PRIZES = {3: 5000, 4: 50000, 5: 1500000, "5B": 30000000, 6: 2000000000};
-
 const buyLottos = (inputMoney) => {
   const lottoArray = [];
+
   let buyComment = `${inputMoney / 1000}개를 구매했습니다.\n`;
   for (let i = 0; i < inputMoney; i += 1000) {
     const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
@@ -55,12 +56,21 @@ const buyLottos = (inputMoney) => {
   MissionUtils.Console.print(buyComment);
   return lottoArray;
 };
-const writeResultComment = (inputMoney, prizeMoney, countResult, LOTTO_PRIZES) => {
+
+const writeResultComment = (inputMoney, prizeMoney, countResult) => {
+  const lottoPrizes = {
+    3: constants.FIFTH_PRIZE,
+    4: constants.FOURTH_PRIZE,
+    5: constants.THIRD_PRIZE,
+    "5B": constants.SECOND_PRIZE,
+    6: constants.FIRST_PRIZE,
+  };
   let comment = `당첨 통계\n---\n`;
   for (let count in countResult) {
     if (count === "5B") comment += `5개 일치, 보너스 볼 일치`;
     else comment += `${count}개 일치`;
-    comment += ` (${LOTTO_PRIZES[count].toLocaleString("kor")}원) - ${countResult[count]}개\n`;
+
+    comment += ` (${lottoPrizes[count].toLocaleString("kor")}원) - ${countResult[count]}개\n`;
   }
   comment += `총 수익률은 ${getEarningRate(inputMoney, prizeMoney)}%입니다.`;
   return comment;
@@ -72,6 +82,7 @@ const getEarningRate = (input, output) => {
   const koreaInteger = Number(onZero).toLocaleString("kor");
   return koreaInteger + "." + underZero;
 };
+
 const getLottoResult = (lottoArray, winNumberArray, bonusNumber) => {
   const results = [];
   for (let lotto of lottoArray) {
@@ -80,14 +91,17 @@ const getLottoResult = (lottoArray, winNumberArray, bonusNumber) => {
   }
   return results;
 };
+
 const countTotalWin = (lottoResults) => {
   const countResult = {3: 0, 4: 0, 5: 0, "5B": 0, 6: 0};
   for (let result of lottoResults) {
-    if (result.winNumbersCount === 5 && result.isWinBonus) countResult["5B"]++;
-    else if (result.winNumbersCount >= 3) {
+    if (result.winNumbersCount === 5 && result.isWinBonus) {
+      countResult["5B"]++;
+    } else if (result.winNumbersCount >= 3) {
       countResult[result.winNumbersCount]++;
     }
   }
+
   return countResult;
 };
 
@@ -96,16 +110,16 @@ export const countPrizeMoney = (lottoResults) => {
   for (let result of lottoResults) {
     switch (result.winNumbersCount) {
       case 3:
-        prizeMoney += 5000;
+        prizeMoney += constants.FIFTH_PRIZE;
         break;
       case 4:
-        prizeMoney += 50000;
+        prizeMoney += constants.FOURTH_PRIZE;
         break;
       case 5:
-        prizeMoney += result.isWinBonus ? 30000000 : 1500000;
+        prizeMoney += result.isWinBonus ? constants.SECOND_PRIZE : constants.THIRD_PRIZE;
         break;
       case 6:
-        prizeMoney += 2000000000;
+        prizeMoney += constants.FIRST_PRIZE;
         break;
       default:
     }
@@ -120,6 +134,7 @@ const askBuyMoneyQuestion = async () => {
     try {
       inputMoney = await MissionUtils.Console.readLineAsync("구입 금액을 입력해 주세요.");
       Validation.checkWonUnit(inputMoney);
+      if (Number(inputMoney) <= 0) throw newError("[ERROR] 0원 넣어주세요");
       isPass = true;
     } catch (error) {
       MissionUtils.Console.print(error.message);
@@ -135,7 +150,7 @@ const askWinNumbersQuestion = async () => {
     try {
       const winNumbers = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요");
       Validation.checkWinNumbersType(winNumbers);
-      winNumberArray = winNumbers.split(",");
+      winNumberArray = winNumbers.split(",").map((number) => number.trim());
       isPass = true;
     } catch (error) {
       MissionUtils.Console.print(error.message);
