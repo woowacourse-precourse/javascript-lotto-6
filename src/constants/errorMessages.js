@@ -4,4 +4,6 @@ export const ERROR_MESSAGES = Object.freeze({
   not_divded: '로또 구입 금액은 1000원 단위로 나누어 떨어져야해요!',
   lotto_not_match_length: '로또는 총 6개의 숫자로 이루어져야해요!',
   lotto_have_duplication_number: '로또에 중복된 번호가 존재해요!',
+  lotto_not_a_number: '로또는 숫자로만 이루어져야해요!',
+  lotto_out_of_range: '로또는 1이상 45이하의 숫자로 이루어져야해요!',
 });

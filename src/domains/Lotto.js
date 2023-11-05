@@ -51,13 +51,27 @@ class Lotto {
   }
 
   validate() {
+    this.validateType();
     this.validateLength();
+    this.validateRange();
     this.validateDuplication();
+  }
+
+  validateType() {
+    if (!this.#numbers.every((number) => typeof number === 'number' && !Number.isNaN(number))) {
+      throw new LottoError(ERROR_MESSAGES.lotto_not_a_number);
+    }
   }
 
   validateLength() {
     if (this.#numbers.length !== Lotto.LOTTO_LENGTH) {
       throw new LottoError(ERROR_MESSAGES.lotto_not_match_length);
+    }
+  }
+
+  validateRange() {
+    if (!this.#numbers.every((number) => Lotto.MIN_NUM <= number && number <= Lotto.MAX_NUM)) {
+      throw new LottoError(ERROR_MESSAGES.lotto_out_of_range);
     }
   }
 
