@@ -36,7 +36,7 @@ class App {
       this.allLottos.push(lotto);
     }
     this.allLottos.forEach((lotto) => {
-      MissionUtils.Console.print(lotto.getLottoNumber());
+      MissionUtils.Console.print(lotto.getLottoNumber().sort((a, b) => a - b));
     });
   }
 
