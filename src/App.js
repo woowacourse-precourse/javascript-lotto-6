@@ -94,7 +94,16 @@ class App {
   }
 
   getProfitRate(amount, results) {
-    const totalPrize = results.three * 5000 + results.four * 50000 + results.five * 1500000 + results.bonus * 30000000 + results.all * 2000000000;
+    const prizePerResult = {
+      three: 5000,
+      four: 50000,
+      five: 1500000,
+      bonus: 30000000,
+      all: 2000000000,
+    };
+    const totalPrize = Object.keys(results).reduce((sum, key) => {
+      return sum + results[key] * prizePerResult[key];
+    }, 0);
     const profitRate = (totalPrize / amount) * 100;
     const roundedProfitRate = profitRate.toFixed(2).replace(/\.?0+$/, '');
   
