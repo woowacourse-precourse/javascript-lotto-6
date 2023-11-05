@@ -10,6 +10,12 @@ class App {
     const lotteryTicketCount = this.buyLotto.buyLottoCount(expense);
 
     Console.print(`\n${lotteryTicketCount}${result.PURCHASE}`);
+
+    const lotteryTicket = this.buyLotto.randomNumber(lotteryTicketCount);
+
+    lotteryTicket.forEach((lottoElement) => {
+      Console.print(lottoElement);
+    });
   }
 }
 export default App;
