@@ -1,4 +1,6 @@
-const Place = {
+import REWARD from './Constants.js';
+
+export const Place = {
   '1st': 0,
   '2nd': 0,
   '3rd': 0,
@@ -7,4 +9,12 @@ const Place = {
   profit: null
 };
 
-export default Place;
+export const calculateReward = () => {
+  const reward =
+    Place['1st'] * REWARD.FIRST +
+    Place['2nd'] * REWARD.SECOND +
+    Place['3rd'] * REWARD.THIRD +
+    Place['4th'] * REWARD.FOURTH +
+    Place['5th'] * REWARD.FIFTH;
+  return reward;
+};
