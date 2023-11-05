@@ -5,6 +5,10 @@ const GAME_MESSAGE = {
   STATIC: "당첨 통계\n---",
 };
 
-const ERROR_MESSAGE = {};
+const ERROR_MESSAGE = {
+  NUMBER: "[ERROR] 숫자만 입력할 수 있습니다",
+  MIN_MONEY: "[ERROR] 최소 구입 금액은 1000원입니다.",
+  DIVISION: "[ERROR] 1000원 단위의 로또를 구입해주세요.",
+};
 
 module.exports = { GAME_MESSAGE, ERROR_MESSAGE };
