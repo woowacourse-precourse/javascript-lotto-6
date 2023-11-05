@@ -11,4 +11,5 @@ export const STATISTICS = {
   "5+bonus": 0,
   6: 0,
   totalPrize: 0,
+  profitRate: 0,
 };
