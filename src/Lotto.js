@@ -1,3 +1,4 @@
+import { Random } from '@woowacourse/mission-utils';
 import InputValidate from './utils/InputValidate.js';
 
 class Lotto {
@@ -19,8 +20,8 @@ class Lotto {
     return this.#numbers.join(', ');
   }
 
-  getWinNumber() {
-    this.#numbers.sort((a, b) => a - b);
+  async generator() {
+    this.#numbers = await Random.pickUniqueNumbersInRange(1, 45, 6);
     return this.#numbers;
   }
 }

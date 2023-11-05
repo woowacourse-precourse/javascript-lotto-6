@@ -1,10 +1,10 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
+import { CONSTANTS } from '../constants/constant.js';
 import LottoData from '../models/LottoData.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import LottoUtill from '../utils/LottoUtill.js';
 import Lotto from '../Lotto.js';
-import { CONSTANTS } from '../constants/constant.js';
 
 class LottoController {
   constructor() {
@@ -34,10 +34,9 @@ class LottoController {
 
   async #lottoGenerator(canBuy) {
     if (canBuy > 0) {
-      const generateNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-      const lottoNumber = await Lotto.createLottoInstance(generateNumber);
-      this.LOTTO_DATA.userNumber.push(generateNumber);
-      this.OUTPUT_VIEW.userLottoNumber(lottoNumber.sortingNumber());
+      const lottoNumber = await new Lotto();
+      this.LOTTO_DATA.userNumber.push(await lottoNumber.generator());
+      this.OUTPUT_VIEW.userLottoNumber(await lottoNumber.sortingNumber());
       await this.#lottoGenerator(canBuy - 1);
     }
   }
