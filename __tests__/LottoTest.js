@@ -1,5 +1,6 @@
 import Lotto from "../src/Lotto.js";
 import { checkLottoAmount } from "../src/LottoInput.js";
+import { lottoMachine } from "../src/LottoMachine.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -18,5 +19,9 @@ describe("로또 클래스 테스트", () => {
   // 아래에 추가 테스트 작성 가능
   test("로또 구입 금액이 1000원으로 나누어 떨어지지 않으면 예외가 발생한다.", () => {
     expect(() => checkLottoAmount('3500')).toThrow("[ERROR]");
+  });
+
+  test("구입 개수만큼 로또를 발행한다.", () => {
+    expect(lottoMachine(6).length).toEqual(6);
   });
 });
