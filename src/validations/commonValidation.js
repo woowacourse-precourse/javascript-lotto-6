@@ -7,11 +7,16 @@ import { SYMBOLS } from '../constants/symbols.js';
 export const COMMON_VALIDATION_TYPES = Object.freeze({
   emptyValues: Object.freeze({
     errorMessage: '아무것도 입력하지 않았으므로 다시 입력해주세요.',
-    isValid: (inputValue) => inputValue !== SYMBOLS.emptyString,
+    isValid(inputValue) {
+      return inputValue !== SYMBOLS.emptyString;
+    },
   }),
+
   existSpaces: Object.freeze({
     errorMessage: '입력한 값에 공백이 존재합니다.',
-    isValid: (inputValue) => !inputValue.includes(SYMBOLS.space),
+    isValid(inputValue) {
+      return !inputValue.includes(SYMBOLS.space);
+    },
   }),
 });
 
