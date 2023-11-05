@@ -19,4 +19,35 @@ describe('Validate 클래스 테스트', () => {
       }).toThrow(ERROR_MESSAGE.invalidAmount);
     },
   );
+
+  test.each(['abc', '!@#'])(
+    'Bonus number: Number로 변환할 수 없는 값을 입력하면 예외가 발생한다.',
+    (input) => {
+      const winning = [1, 2, 3, 4, 5, 6];
+
+      expect(() => {
+        Validate.validateBonusNumber(input, winning);
+      }).toThrow(ERROR_MESSAGE.nonNumeric);
+    },
+  );
+
+  test.each(['0', '46', '1.234'])(
+    'Bonus number: 1~45 사이 숫자가 아닌 값을 입력하면 예외가 발생한다.',
+    (input) => {
+      const winning = [1, 2, 3, 4, 5, 6];
+
+      expect(() => {
+        Validate.validateBonusNumber(input, winning);
+      }).toThrow(ERROR_MESSAGE.outOfRange);
+    },
+  );
+
+  test('Bonus number: 당첨 번호와 중복되는 숫자를 넣으면 예외가 발생한다.', () => {
+    const input = 1;
+    const winning = [1, 2, 3, 4, 5, 6];
+
+    expect(() => {
+      Validate.validateBonusNumber(input, winning);
+    }).toThrow(ERROR_MESSAGE.duplicateWinningNumber);
+  });
 });
