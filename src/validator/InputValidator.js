@@ -1,6 +1,6 @@
 import convertType from '../utils/convertType.js';
 import { GAME_RULE } from '../constants/gameRule.js';
-import { ERROR_MESSAGE, MESSAGE } from '../constants/messages.js';
+import { ERROR_MESSAGE } from '../constants/messages.js';
 
 class InputValidator {
   /**
