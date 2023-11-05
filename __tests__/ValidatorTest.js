@@ -52,4 +52,18 @@ describe("Validator 클래스 테스트", () => {
       expect(Validator.startWithZero(string)).toBe(expectedOutput);
     }
   );
+
+  test.each([
+    ["10s", false],
+    ["010", false],
+    ["100", false],
+    ["23", true],
+  ])(
+    "문자열이 로또 숫자 범위 내의 숫자라면 true, 아니라면 false 반환 - %s",
+    (string, expectedOutput) => {
+      expect(Validator.isInLottoNumberRange(string, 1, 45)).toBe(
+        expectedOutput
+      );
+    }
+  );
 });
