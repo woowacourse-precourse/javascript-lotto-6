@@ -27,8 +27,10 @@ const ResultMessage = Object.freeze({
       const match = REWARD[index].match;
       const bonusMessage = REWARD[index].bonus !== 0 ? `, 보너스 볼 일치` : "";
       const reward = REWARD[index].reward.toLocaleString();
+
       return `${match}개 일치${bonusMessage} (${reward}원) - ${count}개`;
     });
+
     return `\n당첨 통계\n---\n${results.reverse().join("\n")}`;
   },
 

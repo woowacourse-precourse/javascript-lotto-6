@@ -82,7 +82,6 @@ describe("Read test", () => {
 
   test(`bonusNumbers : answerNumbers와 겹치는 숫자일 경우`, async () => {
     inputInit(lottoSample.join(","), String(lottoSample[0]), "7");
-
     const logSpy = getLogSpy();
 
     await Read.answerNumbers();
