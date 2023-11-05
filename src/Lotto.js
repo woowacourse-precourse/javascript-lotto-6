@@ -28,6 +28,10 @@ class Lotto {
     this.#ifNumberIsInvalid(numbers, () => {
       throw new CustomError(ERROR.lotto.invalidNumber);
     });
+
+    this.#ifNumberIsDuplicated(numbers, () => {
+      throw new CustomError(ERROR.lotto.duplicatedNumber);
+    });
   }
 
   #ifSizeIsInvalid(numbers, callback) {
@@ -46,6 +50,13 @@ class Lotto {
         callback();
       }
     });
+  }
+
+  #ifNumberIsDuplicated(numbers, callback) {
+    const setNumbers = new Set(numbers);
+    if (setNumbers.size !== numbers.length) {
+      callback();
+    }
   }
 }
 
