@@ -19,7 +19,7 @@ const lottoPriceValidator = {
     }
   },
 
-  inputLottoPrice(price) {
+  checkLottoPrice(price) {
     lottoPriceValidator.currencyAmount(price);
     lottoPriceValidator.limitPrice(price);
     lottoPriceValidator.minimumPrice(price);
