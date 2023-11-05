@@ -1,6 +1,6 @@
 import { PURCHASE_AMOUNT_ERROR_MESSAGE } from "../constants/Message";
 
-export default class WinningNumbersValidator {
+export default class PurchasePriceValidator {
   static validatePurchasePrice(price) {
     if (price % 1000) {
       throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGE.wrongFormat);

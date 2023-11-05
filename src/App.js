@@ -2,6 +2,7 @@ import InputView from "./views/InputView.js";
 import OutputView from "./views/OutputView.js";
 import GenerateLottoNumbers from "./models/GenerateLottoNumbers.js";
 
+
 class App {
   async play() {
     const purchasePrice = await InputView.getPurchasePrice();
