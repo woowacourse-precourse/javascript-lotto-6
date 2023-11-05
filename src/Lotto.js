@@ -1,9 +1,12 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.#printNumbers();
   }
 
   #validate(numbers) {
@@ -14,6 +17,10 @@ class Lotto {
     if (uniqueNumbers.size !== 6) {
       throw new Error("[ERROR] 로또 번호는 중복되지 않은 숫자로 이루어져야 합니다.");
     }
+  }
+
+  #printNumbers(){
+    Console.print(`[${this.#numbers.join(', ')}]`);
   }
 
   result(winningNum, bonusNum){
