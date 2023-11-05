@@ -57,7 +57,7 @@ sortLottoNumbers
 
 <br/>
 
-purchaseLottos
+calculateLottoCount
 - [ ] 지불한 금액으로 구매할 수 있는 로또의 수를 계산
 
 printLottos
@@ -95,7 +95,7 @@ checkWinning
 <br/>
 
 promptPurchaseAmount
-- [ ] 사용자에게 구입 금액을 입력받기
+- [x] 사용자에게 구입 금액을 입력받기
 
 promptWinnningNumbers
 - [ ] 사용자에게 당첨 번호를 입력받기
