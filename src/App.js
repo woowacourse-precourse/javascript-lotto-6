@@ -3,13 +3,14 @@ import Lotto from "./Lotto.js";
 import { InputValidator } from "./utils/InputValidator.js";
 import Output from "./Output.js";
 import Input from "./Input.js";
+import Compare from "./Compare.js";
 
 class App {
-  #money = 0;
   #trialNum = 0;
   #totalLotto = [];
   #winningLotto = [];
   #bonus = 0;
+  #compareResult = [];
 
   async play() {
     this.inputAmount();
@@ -17,9 +18,9 @@ class App {
 
   async inputAmount() {
     Console.print("구입금액을 입력해 주세요.");
-    this.#money = await Console.readLineAsync("");
+    const money = await Console.readLineAsync("");
 
-    const input = new Input(this.#money);
+    const input = new Input(money);
 
     this.#trialNum = input.inputMoney();
 
@@ -59,6 +60,18 @@ class App {
     Console.print(this.#winningLotto);
     Console.print(Number(this.#bonus));
     Console.print(this.#totalLotto);
+
+    this.#totalLotto.forEach((lotto) => {
+      const result = new Compare(
+        lotto,
+        this.#winningLotto,
+        Number(this.#bonus)
+      );
+      result.compareLotto();
+      const same = result.getResultObject();
+      this.#compareResult.push(same);
+    });
+    Console.print(this.#compareResult);
   }
 }
 

@@ -24,6 +24,7 @@ class Input {
       throw new Error("번호 오류");
     } else {
       this.#winningLotto = this.#money.split(",");
+      this.#winningLotto = this.#winningLotto.map(Number);
       new Lotto(this.#winningLotto);
       return this.#winningLotto;
     }
