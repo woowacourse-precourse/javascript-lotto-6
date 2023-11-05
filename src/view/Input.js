@@ -2,12 +2,14 @@ import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MSG } from "../constants/input.js";
 import LottoGameError from "../Error.js";
 import { LOTTO_ERROR_MSG } from "../constants/error.js";
+import Output from "./Output.js";
 
 class Input {
   static async getMoney() {
     let money = await Console.readLineAsync(INPUT_MSG.LOTTO_PRICE);
-
     this.#validateInput(money);
+
+    Output.printNewLine();
 
     return parseInt(money);
   }
@@ -24,6 +26,8 @@ class Input {
       this.#validateInput(number);
     });
 
+    Output.printNewLine();
+
     return lottoNumbers.map((number) => parseInt(number));
   }
 
@@ -31,6 +35,8 @@ class Input {
     const bonusNumber = await Console.readLineAsync(INPUT_MSG.BONUS_NUMBER);
 
     this.#validateInput(bonusNumber);
+
+    Output.printNewLine();
 
     return parseInt(bonusNumber);
   }

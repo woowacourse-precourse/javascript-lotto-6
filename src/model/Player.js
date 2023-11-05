@@ -14,6 +14,11 @@ class Player {
     this.#lottos = this.#buyLottos();
   }
 
+  print() {
+    Output.printLotto(this.player);
+    Output.printNewLine();
+  }
+
   #validate(money) {
     if (money % MONEY_CONSTANT.LOTTO_PRICE !== 0) {
       throw new LottoGameError(LOTTO_ERROR_MSG.DIVIDE_ERR);
