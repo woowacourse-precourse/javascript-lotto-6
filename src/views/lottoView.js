@@ -21,6 +21,9 @@ const LOTTO_VIEW = Object.freeze({
       Console.print(`${MATCHES[key].message} - ${result[key]}개`);
     });
   },
+  rateOfReturn(roi) {
+    Console.print(`총 수익률은 ${roi}%입니다.`);
+  },
 });
 
 export default LOTTO_VIEW;
