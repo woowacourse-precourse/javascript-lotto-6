@@ -43,7 +43,7 @@
 
 ### [Controller] LottoGame
 
-- 멤버변수 : money(입력받은 돈), myLottos(LottoList 객체)
+- 멤버변수 : money(입력받은 돈), myLottos(LottoList 객체), winningLotto(WinningLotto 객체)
 - [v] : 로또 구매
   - [v] : 돈 입력
     - [v] : 숫자 검사
@@ -51,7 +51,9 @@
   - [v] : 로또 리스트에 로또 추가
   - [v] : 구매한 로또 갯수 출력
   - [v] : 로또 번호 출력
-- [ ] : 당첨 번호 생성
+- [ ] : 당첨 번호 뽑기
+  - [ ] : 당첨 번호 입력
+  - [ ] : 보너스 번호 입력
 - [ ] : 결과 생성
 
 ### validateFn
