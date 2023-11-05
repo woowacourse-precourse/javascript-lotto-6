@@ -22,6 +22,12 @@ class Lotto {
   getLottoNumbers() {
     return [...this.#numbers];
   }
+
+  getMatchWinningNumbers(winningNumbers) {
+    return winningNumbers.filter((winningNumber) =>
+      this.#numbers.includes(winningNumber),
+    );
+  }
 }
 
 export default Lotto;
