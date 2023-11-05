@@ -110,6 +110,32 @@ class System {
 
     return [lottoNumbers, lotto];
   }
+
+  async getBonusNumber(lotto) {
+    let bonusNumber = 0;
+    let lottoNumbersSet = new Set();
+    while (true) {
+      const inputBonusNumber = await Console.readLineAsync(
+        INPUT_MESSAGE.bonusNumber
+      );
+      bonusNumber = Number(inputBonusNumber);
+      lottoNumbersSet = new Set(lotto.getNumbers());
+      try {
+        this.isDuplicateLottoNumber(bonusNumber, lottoNumbersSet);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    return [bonusNumber, lottoNumbersSet];
+  }
+
+  isDuplicateLottoNumber(bonusNumber, lottoNumbersSet) {
+    if (lottoNumbersSet.has(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.duplicateLottoNumber);
+    }
+  }
 }
 
 export default System;

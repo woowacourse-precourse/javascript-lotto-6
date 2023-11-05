@@ -10,6 +10,7 @@ class App {
 
     const lottos = await system.purchaseAndPrintLottos(money);
     const [lottoNumbers, lotto] = await system.getLotto();
+    const [bonusNumber, lottoNumbersSet] = await system.getBonusNumber(lotto);
   }
 }
 
