@@ -1,12 +1,14 @@
 import {
     INIT_ZERO,
     ONE,
+    LOTTO_PRICE,
 } from './utils/Define';
 import {
     generateLotto,
 } from './utils/Calculate';
 import {
     printLottoNumbers,
+    printNumberOfLottos,
 } from './io/Output';
 
 class App {
@@ -29,6 +31,12 @@ class App {
             this.lottos.push(lotto);
             printLottoNumbers(lotto);
         }
+    }
+
+    purchaseLottos() {
+        const numberOfLottos = this.purchaseAmount / LOTTO_PRICE;
+        printNumberOfLottos(numberOfLottos);
+        this.generateAndPrintLottos(numberOfLottos);
     }
 }
 
