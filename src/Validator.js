@@ -1,4 +1,5 @@
 import VALIDATOR from "./constant/VALIDATOR.js";
+import LOTTO from "./constant/LOTTO.js";
 
 class Validator {
   static isArrayLengthEqualTo(array, number) {
@@ -19,6 +20,17 @@ class Validator {
 
   static startWithZero(string) {
     return string.charAt(0) === "0";
+  }
+
+  static inRange(number, includedStart, includedEnd) {
+    return number >= includedStart && number <= includedEnd;
+  }
+
+  static isInLottoNumberRange(string) {
+    if (!this.isStringOnlyDigits(string)) return false;
+    if (this.startWithZero(string)) return false;
+
+    return this.inRange(+string, LOTTO.START_NUMBER, LOTTO.END_NUMBER);
   }
 }
 
