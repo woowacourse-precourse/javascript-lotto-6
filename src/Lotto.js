@@ -37,6 +37,10 @@ class Lotto {
     this.#numbers.sort((a, b) => a - b);
     Console.print(this.#numbers);
   }
+
+  get numbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

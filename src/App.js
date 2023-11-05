@@ -16,6 +16,8 @@ class App {
     this.lottoManager.printPublishedLotto();
 
     await this.lottoManager.setWinningNumbersAndBonus();
+
+    this.lottoManager.checkTotalResult();
   }
 }
 

@@ -9,7 +9,6 @@ class LottoManager {
     this.user = null;
     this.lottoCount = 0;
     this.luckyNumbers = new LuckyNumbers();
-    this.dashboard = new Dashboard();
   }
 
   setUser(user) {
@@ -48,6 +47,16 @@ class LottoManager {
   async setWinningNumbersAndBonus() {
     await this.setWinningNumber();
     await this.setBonusNumber();
+  }
+
+  checkTotalResult() {
+    this.dashboard = new Dashboard(this.luckyNumbers);
+    const lottoArr = this.user.lottoArr;
+
+    lottoArr.forEach((lotto) => {
+      const rank = this.dashboard.assignLottoRank(lotto);
+      this.dashboard.updateDashboard(rank);
+    });
   }
 }
 

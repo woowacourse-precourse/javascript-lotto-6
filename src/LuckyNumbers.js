@@ -42,6 +42,14 @@ class LuckyNumbers {
     isNumberInRange(input);
     isElementInArr({ element: Number(input), arr: this.#winning });
   }
+
+  get winning() {
+    return this.#winning;
+  }
+
+  get bonus() {
+    return this.#bonus;
+  }
 }
 
 export default LuckyNumbers;
