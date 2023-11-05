@@ -1,5 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
+import {ERROR_MESSAGE} from './message';
 
 class App {
   constructor() {
@@ -16,11 +17,11 @@ class App {
   checkLottoPrice(lottoPrice) {
     // test code
     lottoPrice = Number(lottoPrice);
-    if(isNaN(lottoPrice)) throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
+    if(isNaN(lottoPrice)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     if (lottoPrice < 1000)
-      throw new Error('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
+      throw new Error(ERROR_MESSAGE.MIN_PRICE);
     if (lottoPrice % 1000 !== 0)
-      throw new Error('[ERROR] 금액은 1,000원 단위로 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.THOUSAND_UNIT);
   }
 
   makeRandomNumber() {
@@ -48,10 +49,10 @@ class App {
 
   checkBonusNumber(userBonusNumber){
     // test code
-    if(userBonusNumber === '') throw new Error('[ERROR] 숫자를 입력하세요.');
+    if(userBonusNumber === '') throw new Error(ERROR_MESSAGE.EMPTY);
     userBonusNumber = Number(userBonusNumber);
-    if(isNaN(userBonusNumber)) throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
-    if(1>userBonusNumber || userBonusNumber>45) throw new Error('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
+    if(isNaN(userBonusNumber)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+    if(1>userBonusNumber || userBonusNumber>45) throw new Error(ERROR_MESSAGE.RANGE_BONUS);
   }
 
   printLottoResult(lottoResult, lottoRate){
@@ -70,6 +71,7 @@ class App {
   }
 
   sortNumber(randomNumberArray){
+    // test code
     randomNumberArray.sort(function(a,b){
       return a-b;
     })
