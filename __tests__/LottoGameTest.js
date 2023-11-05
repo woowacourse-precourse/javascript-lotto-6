@@ -43,4 +43,27 @@ describe('LottoGame', () => {
 
     expect(result).toEqual(expectedResult);
   });
+
+  test('당첨등수의 카운트에 따라 획득한 총 금액을 반환하는지 테스트한다.', () => {
+    const statistics = {
+      firstPrize: 0,
+      secondPrize: 0,
+      thirdPrize: 0,
+      fourthPrize: 0,
+      fifthPrize: 1,
+    };
+
+    const expectedResult = 5000;
+    const result = lottoGame.calcTotalPrizeAmount(statistics);
+
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('수익률을 소수점 첫번째 자리까지 반올림하여 반환하는지 테스트한다.', () => {
+    const lottoGame = new LottoGame(8);
+    const expectedResult = '62.5';
+    const result = lottoGame.getProfitRatio(5000);
+
+    expect(result).toEqual(expectedResult);
+  });
 });
