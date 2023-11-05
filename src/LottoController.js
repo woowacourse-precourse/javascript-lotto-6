@@ -1,15 +1,17 @@
 import { Random } from "@woowacourse/mission-utils";
 import Validator from "./Validator.js";
-import Lotto from "./Lotto.js";
 import PRICE from "./constant/PRICE.js";
 import LOTTO from "./constant/LOTTO.js";
 
 class LottoController {
   #lottoArray;
 
-  constructor(totalPriceStr) {
+  constructor(totalPriceStr, createLottoFunc) {
     this.#validateTotalPrice(totalPriceStr);
-    this.#lottoArray = this.#createLottoAsTicketAmount(+totalPriceStr);
+    this.#lottoArray = this.#createLottoAsTicketAmount(
+      +totalPriceStr,
+      createLottoFunc
+    );
   }
 
   #validateTotalPrice(string) {
@@ -26,13 +28,12 @@ class LottoController {
     }
   }
 
-  #createLottoAsTicketAmount(totalPrice) {
+  #createLottoAsTicketAmount(totalPrice, createLottoFunc) {
     const ticketAmount = this.#calculateTicketAmount(totalPrice);
 
-    return Array.from(
-      { length: ticketAmount },
-      () => new Lotto(this.#createRandomLottoNumber())
-    );
+    return Array.from({ length: ticketAmount }, () => {
+      return createLottoFunc(this.#createRandomLottoNumber());
+    });
   }
 
   #calculateTicketAmount(number) {
