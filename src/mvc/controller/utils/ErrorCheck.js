@@ -28,9 +28,9 @@ class ErrorCheck {
     ErrorCheck.differentElementArray(arrayFromString);
   }
 
-  static bonusNumberString(string, lottoBoard) {
+  static bonusNumberString(string, winningNumbers) {
     ErrorCheck.lottoNumberString(string);
-    ErrorCheck.differeNumberInLottoBoard(Number(string), lottoBoard);
+    ErrorCheck.differeNumberInLottoBoard(Number(string), winningNumbers);
   }
 
   static lottoNumberString(string) {
@@ -42,8 +42,8 @@ class ErrorCheck {
     );
   }
 
-  static differeNumberInLottoBoard(lottoNumber, lottoBoard) {
-    if (lottoBoard[lottoNumber] !== MISS_STATE)
+  static differeNumberInWinningNumbers(lottoNumber, winningNumbers) {
+    if (winningNumbers.includes(lottoNumber))
       throw new Error(EXIST_NUMBER_IN_BOARD_ERROR_MESSAGE);
   }
 

@@ -55,8 +55,8 @@ mvc 패턴(예외사항은 함수형과 같게 처리했으므로, 구현 기능
   - [ ] model의 lottoBoard 업데이트
     - [x] input view로부터 당첨번호 입력 받아오기
       - [x] 당첨 번호 예외 상황이면 에러 출력 후 다시 받기
-    - [ ] input view로부터 보너스 번호 입력 받아오기
-      - [ ] 보너스 번호 예외 상황이면 에러 출력 후 다시 받기
+    - [x] input view로부터 보너스 번호 입력 받아오기
+      - [x] 보너스 번호 예외 상황이면 에러 출력 후 다시 받기
   
   - [ ] model의 lottoResult 업데이트
   - [ ] model의 lottoResult로 당첨통계 output view로 출력 지시

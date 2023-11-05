@@ -12,14 +12,18 @@ class LottoController{
   }
 
   async play(){
-    this.#model.setPurchasedLottoArray( await this.getPurchasePrice() );
+    this.#model.setPurchasedLottoArray( await this.inputPurchasePrice() );
     this.#outputView.printPurchasedLotto( this.#model.PurchasedLottoArray );
     this.#outputView.printLineBreak();
+    
+    const winningNumbersArray = this.inputWinningNumbers();
+    const bonusNumber = this.inputBonusNumber(winningNumbersArray);
+    this.#model.makeLottoBoard(winningNumbersArray,bonusNumber);
   }
 
-  async getPurchasePrice(){
+  async inputPurchasePrice(){
     while(true){
-      const input = this.#inputView.purchasePrice();
+      const input = await this.#inputView.purchasePrice();
       try{
         ErrorCheck.purchasePrice(input);
         return Number(input);
@@ -30,12 +34,24 @@ class LottoController{
     }
   }
 
-  async winningNumbersArray() {
+  async inputWinningNumbers() {
     while (true) {
-      const numbersString = this.#inputView.winningNumbers();
+      const numbersString = await this.#inputView.winningNumbers();
       try {
         ErrorCheck.lottoNumbersString(numbersString);
         return numbersString.split(',').map(Number);
+      } catch (error) {
+        Print.errorMessage(error);
+      }
+    }
+  }
+
+  async inputBonusNumber(winningNumbers) {
+    while (true) {
+      const numberString = await this.#inputView.bonusNumber();
+      try {
+        ErrorCheck.bonusNumberString(numberString, winningNumbers);
+        return Number(numberString);
       } catch (error) {
         Print.errorMessage(error);
       }
