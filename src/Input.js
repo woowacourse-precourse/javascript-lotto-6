@@ -8,4 +8,12 @@ export class Input {
 
     return money;
   }
+
+  async getWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(
+      MESSAGES.INPUT_WINNING_NUMBERS + "\n"
+    );
+
+    return winningNumbers;
+  }
 }
