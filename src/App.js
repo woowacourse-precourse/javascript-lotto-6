@@ -87,7 +87,7 @@ class App {
     const answerNumbers = await Input.getLottoNumber();
     Console.print('');
 
-    const bonusNumber = await Input.getLottoBonusNumber();
+    const bonusNumber = await Input.getLottoBonusNumber(answerNumbers);
     Console.print('');
 
     this.#lottos.forEach((lotto) => {

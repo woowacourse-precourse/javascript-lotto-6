@@ -29,17 +29,18 @@ const Input = {
       return this.getLottoNumber();
     }
   },
-  async getLottoBonusNumber() {
+  async getLottoBonusNumber(answers) {
     try {
       const number = await Console.readLineAsync(
         '보너스 번호를 입력해 주세요.\n'
       );
       Validate.checkNumberRange(number);
+      Validate.checkDuplicateNumber([...answers, Number(number)]);
 
       return Number(number);
     } catch (error) {
       Console.print(error.message);
-      return this.getLottoBonusNumber();
+      return this.getLottoBonusNumber(answers);
     }
   },
 };
