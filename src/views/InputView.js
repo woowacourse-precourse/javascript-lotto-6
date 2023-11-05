@@ -2,6 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import { GUIDE_MESSAGE } from "../constants/Message";
 import PurchasePriceValidator from "../validate/PurchasePriceValidator";
 import WinningNumbersValidator from "../validate/WinningNumbersValidator";
+import BonusNumberValidator from "../validate/BonusNumberValidator";
 
 export default class InputView {
   static async getPurchasePrice() {
@@ -13,14 +14,16 @@ export default class InputView {
 
   static async getWinningNumbers() {
     Console.print(GUIDE_MESSAGE.insertWinningNumbers);
-    const WinningNumbers = await Console.readLineAsync("");
-    const numbersArray = WinningNumbers.split(',').map(num => parseInt(num.trim()));
+    const winningNumbers = await Console.readLineAsync("");
+    const numbersArray = winningNumbers.split(',').map(num => parseInt(num.trim()));
     WinningNumbersValidator.validateWinningNumbers(numbersArray);
     return numbersArray;
   }
 
-  static async getBonusNumber() {
+  static async getBonusNumber(winningNumbers) {
     Console.print(GUIDE_MESSAGE.insertBonusNumber);
     const bonusNumber = await Console.readLineAsync("");
+    BonusNumberValidator.validateBonusNumber(bonusNumber, winningNumbers);
+    return parseInt(bonusNumber, 10);
   }
 }

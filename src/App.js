@@ -12,8 +12,8 @@ class App {
     const lottos = GenerateLottoNumbers.getLottos(lottoCount);
     OutputView.printLottos(lottos);
 
-    const WinningNumbers = await InputView.getWinningNumbers();
-    const bonusNumber = await getBonusNumber();
+    const winningNumbers = await InputView.getWinningNumbers(); 
+    const bonusNumber = await InputView.getBonusNumber(winningNumbers);
   }
 }
 
