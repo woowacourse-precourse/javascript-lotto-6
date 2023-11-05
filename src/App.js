@@ -11,9 +11,12 @@ class App {
     // 입력 예외 검사
     const inspector = new Inspector();
     const isNumber = inspector.containNumberOnly(availableMoney);
-    if (!isNumber) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    const isThousand = inspector.getIsThousand(availableMoney);
+    if (!isNumber || !isThousand) {
+      throw new Error("[ERROR] 구입 금액은 1000으로 나누어떨어지는 숫자여야 합니다.");
     };
+
+
   }
 }
 

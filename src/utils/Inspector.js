@@ -7,6 +7,10 @@ class Inspector {
       return false;
     };
   }
+
+  getIsThousand (number) {
+    return number % 1000 === 0;
+  }
 }
 
 export default Inspector;
