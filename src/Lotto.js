@@ -30,6 +30,10 @@ class Lotto {
       return a - b;
     });
   }
+
+  rateReturn(purchase, revenue) {
+    return parseFloat((revenue / purchase) * 100).toFixed(1);
+  }
 }
 
 export default Lotto;
