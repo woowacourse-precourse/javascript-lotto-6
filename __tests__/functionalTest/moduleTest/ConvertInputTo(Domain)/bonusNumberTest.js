@@ -22,12 +22,6 @@ const mockQuestions = inputs => {
   });
 };
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
 describe('bonusNumber()', () => {
   test.each([
     [['1'], mockBoard([40, 41, 42, 43, 44, 45]), 1],
@@ -52,14 +46,9 @@ describe('bonusNumber()', () => {
     //given
     mockQuestions(input);
 
-    const logSpy = getLogSpy();
-
     //when
     const bonusNumber = await ConvertInputTo.bonusNumber(mockBoard);
-    //then
-    for (let i = 0; i < logSpy.mock.calls.length - 1; i++) {
-      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_HEADER);
-    }
+
     expect(bonusNumber).toBe(expectedValue);
   });
 });

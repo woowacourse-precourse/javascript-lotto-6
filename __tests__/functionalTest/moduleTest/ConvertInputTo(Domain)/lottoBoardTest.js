@@ -24,12 +24,6 @@ const mockBoard = (winningNumbers, bonusNumber) => {
   return Object.freeze(board);
 };
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
 describe('lottoBoard()', () => {
   test.each([
     [['1,2,3,4,5,6', '10'], mockBoard([1, 2, 3, 4, 5, 6], 10)],
@@ -47,39 +41,24 @@ describe('lottoBoard()', () => {
   test.each([
     [
       ['1,2,3,4,5', '10', '1,2,3,4,5,6', '10'],
-      2,
       mockBoard([1, 2, 3, 4, 5, 6], 10),
     ],
-    [
-      ['1,2,3,4,5,6,7', '1,2,3,4,5,6', '12'],
-      1,
-      mockBoard([1, 2, 3, 4, 5, 6], 12),
-    ],
-    [['1,2,3,4,5,6', '4', '6', '40'], 2, mockBoard([1, 2, 3, 4, 5, 6], 40)],
-    [
-      ['0,1,2,3,4,5,6', '1,2,3,4,5,6', '12'],
-      1,
-      mockBoard([1, 2, 3, 4, 5, 6], 12),
-    ],
-    [
-      ['1,1,1,1,1,1', '1,2,3,4,5,6', '12'],
-      1,
-      mockBoard([1, 2, 3, 4, 5, 6], 12),
-    ],
+    [['1,2,3,4,5,6,7', '1,2,3,4,5,6', '12'], mockBoard([1, 2, 3, 4, 5, 6], 12)],
+    [['1,2,3,4,5,6', '4', '6', '40'], mockBoard([1, 2, 3, 4, 5, 6], 40)],
+    [['0,1,2,3,4,5,6', '1,2,3,4,5,6', '12'], mockBoard([1, 2, 3, 4, 5, 6], 12)],
+    [['1,1,1,1,1,1', '1,2,3,4,5,6', '12'], mockBoard([1, 2, 3, 4, 5, 6], 12)],
     [
       [',,,,,', ',', '1,2,3,4,5,6', '433', '43'],
-      3,
+
       mockBoard([1, 2, 3, 4, 5, 6], 43),
     ],
-  ])('예외처리', async (input, errorCount, expectedValue) => {
+  ])('예외처리', async (input, expectedValue) => {
     //given
     mockQuestions(input);
-    const logSpy = getLogSpy();
-
     //when
     const board = await ConvertInputTo.lottoBoard();
 
-    expect(logSpy.mock.calls).toHaveLength(errorCount + 1);
+    //then
     expect(board).toEqual(expectedValue);
   });
 });

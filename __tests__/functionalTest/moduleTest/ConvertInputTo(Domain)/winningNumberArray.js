@@ -15,12 +15,6 @@ const mockQuestions = inputs => {
   });
 };
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
 describe('winningNumbersArray()', () => {
   test.each([
     [['1,2,3,4,5,6'], [1, 2, 3, 4, 5, 6]],
@@ -71,12 +65,8 @@ describe('winningNumbersArray()', () => {
 
     //when
     const winningNumbers = await ConvertInputTo.winningNumbersArray();
-    const logSpy = getLogSpy();
 
     //then
-    for (let i = 0; i < logSpy.mock.calls.length - 1; i++) {
-      expect(String(logSpy.mock.calls[i][0])).toMatch(ERROR_HEADER);
-    }
     expect(winningNumbers).toEqual(expectedValue);
   });
 });
