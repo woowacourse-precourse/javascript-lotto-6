@@ -6,6 +6,15 @@ import { getErrorMessage } from '../src/uttils';
 describe('Cashier 클래스 테스트', () => {
   const errorMessage = getErrorMessage(ERROR_MESSAGE.payment);
 
+  test('Cashier는 NaN이 아닌 숫자만 파라미터로 받는다. 그렇지 않을 경우 예외가 발생한다.', () => {
+    const wrongParameters = ['1000', '1000원', NaN];
+    wrongParameters.forEach((v) =>
+      expect(() => new Cashier(v)).toThrow(
+        getErrorMessage(ERROR_MESSAGE.isNotNumber),
+      ),
+    );
+  });
+
   test('손님이 지불한 금액이 1000원 미만이면 예외가 발생한다', () => {
     expect(() => {
       new Cashier(500);
