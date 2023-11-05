@@ -28,6 +28,17 @@ module.exports = {
   },
   plugins: ["jest", "prettier"],
   rules: {
+    "class-methods-use-this": [
+      "error",
+      { exceptMethods: ["getAmount", "getWinningNumbers"] },
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never",
+      },
+    ],
     "prettier/prettier": ["error", { endOfLine: "auto" }],
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
