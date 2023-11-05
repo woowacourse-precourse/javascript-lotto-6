@@ -53,4 +53,17 @@ export class Input {
       }
     });
   }
+
+  validateBonusNumber(number, winningNumbers) {
+    const bonusNumber = Number(number);
+
+    if (
+      bonusNumber < 1 ||
+      bonusNumber > 45 ||
+      Number.isNaN(bonusNumber) ||
+      winningNumbers.includes(bonusNumber)
+    ) {
+      throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+    }
+  }
 }
