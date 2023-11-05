@@ -35,7 +35,6 @@ const Validator = {
   inputBonusNumber(input, winningNumber) {
     const inputArray = [input];
     if (input.replace(/\d/g, "").length > 0) throw new Error(ERROR.bonusNumber);
-    if (inputArray.length !== 1) throw new Error(ERROR.bonusCount);
     if (RangeFilter(inputArray)) throw new Error(ERROR.bonusRange);
     if (winningNumber.includes(input)) throw new Error(ERROR.bonusDuplicate);
   },
