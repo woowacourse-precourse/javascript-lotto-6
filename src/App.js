@@ -10,13 +10,11 @@ import Lotto from './Lotto';
 class App {
   #money
   #lottos
-  #bonusNumber
   #winningNumbers
 
   constructor() {
     this.#money = 0;
     this.#lottos = [];
-    this.#bonusNumber = 0;
     this.#winningNumbers = [];
     this.input = new Input();
     this.output = new Output();
@@ -25,9 +23,6 @@ class App {
   async play() {
     await this.requestPurchaseAmounts();
     this.requestLottoTickets()
-    await this.requestWinningNumbers();
-    await this.requestBonusNumber();
-    this.requestResult();
   }
 
   async requestPurchaseAmounts() {
@@ -53,6 +48,9 @@ class App {
     const INPUT = await this.input.getValue(GUIDE_MESSAGE.insertWinnerNumbers)
 
     this.lotto = new Lotto(String(INPUT));
+    this.#winningNumbers = this.lotto.returnValue();
+
+    this.output.printWinningNumbers(this.#winningNumbers)
   }
 }
 
