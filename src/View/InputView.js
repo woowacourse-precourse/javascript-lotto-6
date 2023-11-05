@@ -1,17 +1,20 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT } from './constants/messages';
+import { INPUT } from '../constants/messages';
 
 const InputView = {
-    getPurchaseAmount(callback) {
-        Console.readLine(INPUT.MONEY, callback);
+    async getPurchaseAmount() {
+        const amount = await Console.readLineAsync(INPUT.MONEY);
+        return Number(amount);
     },
 
-    getWinningNumbers(callback) {
-        Console.readLine(INPUT.LOTTO, callback);
+    async getWinningNumbers() {
+        const winningNumbers =  await Console.readLineAsync(INPUT.LOTTO);
+        return winningNumbers.split(',').map(Number);
     },
 
-    getBonusNumber(callback) {
-        Console.readLine(INPUT.BONUS, callback);
+    async getBonusNumber() {
+        const bonusNumber = await Console.readLineAsync(INPUT.BONUS);
+        return Number(bonusNumber);
     }
 };
 
