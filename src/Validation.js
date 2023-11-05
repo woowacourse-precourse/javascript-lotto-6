@@ -38,6 +38,14 @@ const Validation = {
       throw new Error('[ERROR] 보너스 번호는 1개여야 합니다.');
     }
   },
+
+  isDividedIntoUnitPrice: (cost) => {
+    if (cost % 1000 !== 0) {
+      throw new Error(
+        '[ERROR] 로또 구입 금액은 1,000원 단위로 입력해야 합니다. ',
+      );
+    }
+  },
 };
 
 export default Validation;
