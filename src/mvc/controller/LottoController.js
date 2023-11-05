@@ -11,7 +11,9 @@ class LottoController{
     this.#outputView = outputView;
   }
 
-  async play(){}
+  async play(){
+    this.#model.setsetPurchasedLottoArray( await this.getPurchasePrice() );
+  }
 
   async getPurchasePrice(){
     while(true){
