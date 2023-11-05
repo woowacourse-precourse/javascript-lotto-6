@@ -45,9 +45,17 @@ class App {
       PRINT.ASK_WIN_NUMBER
     );
     const winNumber = input.split(",");
+    this.checkDuplication(winNumber);
     this.checkWinNumberError(winNumber);
 
     return winNumber;
+  }
+
+  checkDuplication(winNumber) {
+    const checkDup = new Set(winNumber);
+    if (checkDup.size !== winNumber.length) {
+      throw new Error(ERROR.DUPLICATION);
+    }
   }
 
   checkWinNumberError(winNumber) {
@@ -96,7 +104,7 @@ class App {
     // this.printAllLottos();
 
     const winNumber = await this.askWinNumber();
-    const winBonus = await this.askBonus(winNumber);
+    // const winBonus = await this.askBonus(winNumber);
   }
 }
 
