@@ -27,6 +27,22 @@ class App {
       youBuy.push(randNum);
       MissionUtils.Console.print(JSON.stringify(youBuy[i]).replace(/,/g, ', '));
     }
+
+    const winInput = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    const winNum = winInput.split(',');
+    
+    const bonusInput = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    const bonusNum = Number(bonusInput);
+
+    MissionUtils.Console.print('\n당첨 통계');
+    MissionUtils.Console.print('---');
+
+    const winList = [0,0,0,0,0]; 
+    for(let i = 0; i < buyLotto; i++){
+      let checking = new Lotto(youBuy[i]);
+      const winIdx = checking.checkWin(winNum, bonusNum);
+      winList[winIdx] += 1;
+    }
   }
 }
 
