@@ -18,6 +18,15 @@ class LottoView {
     const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
     return Number(input);
   }
+  showResults(results) {
+    results.forEach((result) => {
+      console.log(
+        `${result.count}개 일치${result.bonus ? ", 보너스 볼 일치" : ""}  ${
+          result.lottoNumbers
+        }`
+      );
+    });
+  }
 }
 
 export default LottoView;
