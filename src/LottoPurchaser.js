@@ -13,6 +13,7 @@ class LottoPurchaser {
   static #validate(value) {
     if (value === LottoPurchaser.#ZERO) throw new Error(ERROR.falsy);
     if (Number.isNaN(value)) throw new Error(ERROR.falsy);
+    throw new Error(ERROR.notBeDividedByThousand);
   }
 }
 
