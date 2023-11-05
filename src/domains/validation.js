@@ -1,4 +1,4 @@
-import { ERROR, pattern } from './constants.js';
+import { ERROR, pattern } from '../constants.js';
 
 const validate = {
   money(input) {

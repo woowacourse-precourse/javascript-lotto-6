@@ -1,7 +1,7 @@
-import Request from './Request.js';
-import calculate from './calculate.js';
-import LottoMachine from './LottoMachine.js';
-import Notice from './Notice.js';
+import Request from './views/Request.js';
+import calculate from './utils/calculate.js';
+import LottoMachine from './domains/LottoDomain.js';
+import Notice from './views/Notice.js';
 
 class App {
   #money;

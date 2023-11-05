@@ -1,6 +1,6 @@
-import Request from '../src/request.js';
-import prompt from '../src/prompt.js';
-import validate from '../src/Validation.js';
+import Request from '../src/views/Request.js';
+import prompt from '../src/views/prompt.js';
+import validate from '../src/domains/validation.js';
 
 prompt.in = jest.fn();
 prompt.out = jest.fn();

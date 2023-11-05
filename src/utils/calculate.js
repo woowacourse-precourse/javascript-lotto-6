@@ -1,4 +1,4 @@
-import { REWARD } from './constants.js';
+import { REWARD } from '../constants.js';
 
 const calculate = {
   countFrom: (money) => {

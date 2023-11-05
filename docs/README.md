@@ -40,6 +40,9 @@
 
 ### refactor 내용
 
+5. commit 25f19e5
+refactor(validation.js): Error 메세지 상수화
+
 4. commit a886165
 refactor(Notice.js): 당첨 통계 메세지 상수 처리
 

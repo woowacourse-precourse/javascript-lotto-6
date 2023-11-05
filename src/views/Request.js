@@ -1,5 +1,5 @@
 import prompt from './prompt.js';
-import validate from './Validation.js';
+import validate from '../domains/validation.js';
 
 class Request {
   static async money() {

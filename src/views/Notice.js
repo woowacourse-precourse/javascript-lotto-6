@@ -1,5 +1,5 @@
 import prompt from './prompt.js';
-import { totalReward } from './constants.js';
+import { totalReward } from '../constants.js';
 
 class Notice {
   static totalLotto(lottos, quantity) {
