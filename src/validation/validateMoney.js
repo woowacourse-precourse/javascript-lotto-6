@@ -1,13 +1,15 @@
 import validateMoneyError from '../constants/error';
 
 const validateMoney = (money) => {
-  if (!money) throw new Error('[ERROR]');
+  const moneyToNumber = parseInt(money);
 
-  if (Number.isNaN(money)) throw new Error('[ERROR]');
+  if (!moneyToNumber) throw new Error('[ERROR]');
 
-  if (money < 1000) throw new Error('[ERROR]');
+  if (Number.isNaN(moneyToNumber)) throw new Error('[ERROR]');
 
-  if (money % 1000 !== 0) throw new validateMoneyError();
+  if (moneyToNumber < 1000) throw new Error('[ERROR]');
+
+  if (moneyToNumber % 1000 !== 0) throw new Error('[ERROR]');
 };
 
 export default validateMoney;
