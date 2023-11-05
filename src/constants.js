@@ -4,6 +4,10 @@ export const USER_INPUT = Object.freeze({
   BONUS_NUMBER: '보너스 번호를 입력해 주세요. \n'
 })
 
+export const MESSAGE = Object.freeze({
+  LOTTO_TICKET: '개를 구매했습니다.'
+})
+
 export const ERROR_MESSAGE = Object.freeze({
   PRICE_NOT_INPUT: '[ERROR] 금액이 입력되지 않았습니다.',
   PRICE_NOT_STRING: '[ERROR] 금액은 숫자가 입력되어야 합니다',
