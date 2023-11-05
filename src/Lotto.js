@@ -13,21 +13,18 @@ class Lotto {
       throw new Error("[ERROR] 로또 번호는 숫자 형식으로 입력해 주세요.");
     } else if (numbers.length !== length) {
       throw new Error(`[ERROR] 로또 번호는 ${length}개여야 합니다.`);
-    } else if (!this.#compareElement(numbers)) {
-      throw new Error("[ERROR] 1부터 45 사이의 숫자만 가능합니다.");
     } else if (new Set(numbers).size != numbers.length) {
       throw new Error('[ERROR] 서로 다른 숫자를 입력해야 합니다.');
     }
+    this.#compareElement(numbers);
   }
 
   #compareElement(numbers) {
-    console.log('compareelement', numbers)
     numbers.forEach(el => {
       if ((el < 1) || (el > 45)) {
-        return true;
+        throw new Error("[ERROR] 1부터 45 사이의 숫자만 가능합니다.");
       }
     })
-    return false;
   }
 
   #validatePurchase(purchaseAmount) {

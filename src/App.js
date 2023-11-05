@@ -13,7 +13,8 @@ class App {
     const ticketAmount = await this.Lotto.inputPurchaseAmount();
     MissionUtils.Console.print(`\n${ticketAmount}개를 구매했습니다.\n`);
     const RandomArray = await this.PlayGame.getRandomNumber(ticketAmount);
-    const inputWinningNumber = await this.Lotto.inputWinningNumber()
+    const inputWinningNumber = await this.Lotto.inputWinningNumber();
+    MissionUtils.Console.print(`\n당첨통계\n`);
   }
 }
 
