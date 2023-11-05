@@ -1,12 +1,15 @@
 /* eslint-disable max-lines-per-function */
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import Read from './View/Input.js';
 
 class App {
-  async play() {
-    const payAmount = await Console.readLineAsync('구입금액을 입력해주세요.\n');
+  constructor() {
+    this.read = new Read();
+  }
 
-    Console.print(payAmount);
+  async play() {
+    const payAmount = await this.read.answer('구입금액을 입력해주세요.');
 
     const purchaseQuantity = Number(payAmount) / 1000;
 
@@ -24,9 +27,7 @@ class App {
     // 각 로또 번호를 콘솔 출력
     lottoNumbers.forEach((el) => Console.print(`[${el.join(', ')}]`));
 
-    const userNumber = await Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.\n'
-    );
+    const userNumber = await this.read.answer('당첨 번호를 입력해 주세요.\n');
     const result = userNumber.split(',').map(Number);
 
     Console.print(`숫자야${result}`);
@@ -70,7 +71,6 @@ class App {
       Console.print(`${el} - ${initialLottoStats[el]}개`);
     });
 
-    // Console.print(getMoneyAmount);
     Console.print(
       `총 수익률은 ${parseFloat(
         ((getMoneyAmount / payAmount) * 100).toFixed(2)
