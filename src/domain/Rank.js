@@ -1,9 +1,11 @@
+import NUMBER from "../static/Number";
+
 class Rank {
   #lottos;
   #rankStatic;
 
   constructor(lottos) {
-    this.#rankStatic = Array(5).fill(0);
+    this.#rankStatic = Array(NUMBER.lottoRank).fill(0);
     this.#lottos = lottos;
   }
 
