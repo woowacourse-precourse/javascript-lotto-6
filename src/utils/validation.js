@@ -1,10 +1,17 @@
-import { BASE_AMOUNT, ERROR_MESSAGE, NUMBER_REGEX } from "./CONSTANT.js";
+import {
+  BASE_AMOUNT,
+  ERROR_MESSAGE,
+  NUMBER_COUNT,
+  NUMBER_REGEX,
+} from "./CONSTANT.js";
 
 const isEmpty = (value) => value === "";
 
 const isNumber = (value) => NUMBER_REGEX.test(value);
 
 const isInMultiplesOfThousand = (value) => value % BASE_AMOUNT;
+
+const isSixNumbers = (value) => value.length === NUMBER_COUNT;
 
 const validatePurchase = (purchaseAmount) => {
   if (isEmpty(purchaseAmount)) {
@@ -22,6 +29,9 @@ const validateWinningNumber = (winningNumber) => {
   const numbers = winningNumber.split(",");
   if (isEmpty(winningNumber)) {
     throw new Error(ERROR_MESSAGE.empty);
+  }
+  if (!isSixNumbers(numbers)) {
+    throw new Error(ERROR_MESSAGE.notSixNumbers);
   }
 };
 
