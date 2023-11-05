@@ -21,10 +21,13 @@ class App {
       selectedNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       const lotto = new Lotto(selectedNumber);
 
-      selectedNumber = lotto.sortLottoList();
-      this.LottoList.push(selectedNumber);
-      Console.print(selectedNumber);
+      this.LottoList.push(lotto.sortLottoList());
+      this.printLottoList();
     }
+  }
+
+  printLottoList() {
+    this.LottoList.map((lotto) => Console.print(lotto));
   }
 
   async inputPrizeNumber() {
