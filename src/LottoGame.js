@@ -30,6 +30,8 @@ class LottoGame {
     const winningArr = winningStr.split(',');
     Validation.isValidLen(winningArr);
     winningArr.forEach(el => Validation.isNumber(el, '[ERROR] 당첨 번호는 \,으로 구분되는 6개의 숫자 형식입니다.'));
+
+    const bonusStr = await IO.receiveUserInput('보너스 번호를 입력해 주세요.\n');
   }
 
   calculateLottomNum(amount) {
