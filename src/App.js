@@ -15,11 +15,10 @@ class App {
     const lottoArray = createLotto(lottoCount);
 
     const winningLotto = await getLottoNumber();
-    const bonus = await getBonusNumber();
+    await getBonusNumber(winningLotto);
 
-    winningLotto.getBonus(bonus);
     const winningCount = getLottoResult(lottoArray, winningLotto);
-
+    
     const lottoRanking = getRanking(winningCount);
     getRankResult(lottoRanking);
 

@@ -1,9 +1,20 @@
 import { Console } from "@woowacourse/mission-utils";
 import { inputMessage } from "../constants/messages.js";
 
-export const getBonusNumber = async () => {
-  const input = await Console.readLineAsync(inputMessage.BONUS_MESSAGE);
-  const bonusNumber = parseInt(input);
+export const getBonusNumber = async (winningLotto) => {
+  Console.print(inputMessage.ENTER);
 
-  return bonusNumber;
-};
+  let input = await Console.readLineAsync(inputMessage.BONUS_MESSAGE);
+  let bonusNumber;
+
+  while (true) {
+    try {
+      bonusNumber = parseInt(input);
+      winningLotto.getBonus(bonusNumber);
+      break;
+    } catch (error) {
+      Console.print(error.message);
+      input = await Console.readLineAsync(inputMessage.BONUS_MESSAGE);
+    }
+  }
+}

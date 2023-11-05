@@ -12,6 +12,6 @@ export const getPrize = (ranking) => {
 };
 
 export const getEarningRate = (prize, cash) => {
-  const rate = ((prize / cash) * 100).toFixed(2)
+  const rate = ((prize / cash) * 100).toFixed(1);
   Console.print(`총 수익률은 ${rate}%입니다.`);
 };

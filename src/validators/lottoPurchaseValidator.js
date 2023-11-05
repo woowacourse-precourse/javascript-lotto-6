@@ -6,5 +6,5 @@ export const checkLottoPurchase = (cash) => {
   };
   if (isNotValid(cash)) throw new Error(errorMessage.INVALID_INTEGER);
 
-  return cash;
+  return true;
 };

@@ -13,6 +13,6 @@ export const checkBonusNumber = (number) => {
   return false;
 };
 
-export const checkBonusDuplicates = (lotto, number) => {
-  return lotto.includes(number);
+export const checkBonusDuplicates = (lottoNumbers, number) => {
+  return lottoNumbers.includes(number);
 };

@@ -33,11 +33,11 @@ class Lotto {
   }
 
   getBonus(number) {
-    this.#validateBonus(number);
+    this.validateBonus(number);
     this.bonus = number;
   }
 
-  #validateBonus(number) {
+  validateBonus(number) {
     if (checkBonusNumber(number)) {
       throw new Error(errorMessage.INVALID_RANGE);
     }
