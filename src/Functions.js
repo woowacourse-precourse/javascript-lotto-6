@@ -1,5 +1,5 @@
 import {Console,Random } from "@woowacourse/mission-utils";
-
+ const ERROR_MESSAGE = "[ERROR] 금액이 1000원 단위가 아닙니다.";
  const BUY_MESSAGE ="개를 구매했습니다.";
 class Functions {
   lottoRandomNumber() {
@@ -10,7 +10,7 @@ class Functions {
 
   buyLottoByAmount(amount) {
     if (amount % 1000 !== 0) {
-      throw new Error("[ERROR] 금액이 1000원 단위가 아닙니다.");
+      throw new Error(ERROR_MESSAGE);
     }
 
     const lottoList = [];
