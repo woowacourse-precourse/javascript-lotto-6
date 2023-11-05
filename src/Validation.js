@@ -25,6 +25,12 @@ const Validation = {
       throw new Error('[ERROR] 1이상 45이하의 숫자만 입력할 수 있습니다.');
     }
   },
+
+  isValidLength: (numbers) => {
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+  },
 };
 
 export default Validation;
