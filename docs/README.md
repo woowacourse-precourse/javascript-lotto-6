@@ -323,6 +323,7 @@
 
   - [x] `buy(money)` 호출 시 인자로 숫자가 아닌 값이 들어올 시 에러가 발생한다.
   - [x] `buy(money)` 호출 시 1000원으로 나누어 떨어지지 않는 값이 들어올 시 에러가 발생한다.
+  - [x] `buy(money)` 호출 시 1000원 이하의 금액이 들어올 시 에러가 발생한다.
 
 - [x] WinningLotto
 
@@ -368,14 +369,14 @@
 
 ## Service 구현
 
-- [ ] LottoPurchaseService
+- [x] LottoPurchaseService
 
-  - [ ] `buyLottos(money)` 호출 시 금액에 비례해 `Lotto`를 반환한다.
+  - [x] `buyLottos(money)` 호출 시 금액에 비례해 `Lotto`를 반환한다.
 
-- [ ] LottoRewardsService
+- [x] LottoRewardsService
 
-  - [ ] `getRewards()` 호출 시 `LottoReward`로 이루어진 배열을 반환한다.
-  - [ ] `getEarningRate(rewards)` 수익률을 반환한다.
+  - [x] `getRewards()` 호출 시 `LottoReward`로 이루어진 배열을 반환한다.
+  - [x] `getEarningRate(rewards)` 수익률을 반환한다.
 
 ## Controller 연결
 

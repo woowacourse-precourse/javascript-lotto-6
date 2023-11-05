@@ -15,6 +15,10 @@ class LottoMachine {
 
   static ERROR_MESSAGES = Object.freeze({
     notNumberMoney: ERROR_MESSAGE_GENERATOR.notNumber('구매 금액'),
+    insufficientMoney: ERROR_MESSAGE_GENERATOR.underMinNumber(
+      '구매 금액',
+      LottoMachine.LOTTO_PRICE.toLocaleString(),
+    ),
     indivisible: `${LottoMachine.LOTTO_PRICE.toLocaleString()}으로 나누어 떨어지는 금액을 입력해주세요!`,
   });
 
@@ -42,6 +46,9 @@ class LottoMachine {
   #validateMoney(money) {
     if (typeof money !== 'number') {
       throw new ApplicationError(LottoMachine.ERROR_MESSAGES.notNumberMoney);
+    }
+    if (money < LottoMachine.LOTTO_PRICE) {
+      throw new ApplicationError(LottoMachine.ERROR_MESSAGES.insufficientMoney);
     }
     if (isIndivisible(LottoMachine.LOTTO_PRICE, money)) {
       throw new ApplicationError(LottoMachine.ERROR_MESSAGES.indivisible);
