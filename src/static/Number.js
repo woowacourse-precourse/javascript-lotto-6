@@ -4,7 +4,7 @@ const NUMBER = Object.freeze({
   lottoCount: 6,
   lottoRank: 5,
   price: 1_000,
-  percentage: 100,
+  percent: 100,
   roundDigit: 1,
 });
 

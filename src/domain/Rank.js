@@ -1,4 +1,4 @@
-import NUMBER from "../static/Number";
+import NUMBER from "../static/Number.js";
 
 class Rank {
   #lottos;
