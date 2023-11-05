@@ -4,7 +4,11 @@ import Lotto from './Lotto.js';
 import getUserInput from './utils/getUserInput.js';
 import createLottoNumbers from './utils/createLottoNumbers.js';
 import { LOTTO, MATCHING_COUNT, LOTTO_PRIZE } from './constants/lotto.js';
-import { INPUT_MESSAGE, PURCHASE_MESSAGE } from './constants/messages.js';
+import {
+  INPUT_MESSAGE,
+  PURCHASE_MESSAGE,
+  STATISTICS_MESSAGE,
+} from './constants/messages.js';
 import {
   validateMinimumAmount,
   validateNumberType,
@@ -36,7 +40,11 @@ class Game {
       this.#winningLotto.getNumbers(),
       this.#bonusNumber,
     );
-    this.calculateRate(Number(purchaseAmount), rankCountResult);
+    const returnRate = this.calculateRate(
+      Number(purchaseAmount),
+      rankCountResult,
+    );
+    this.printStatistics(rankCountResult, returnRate);
   }
 
   validate(amount) {
@@ -139,6 +147,18 @@ class Game {
 
     Console.print(PURCHASE_MESSAGE(lottos.length));
     lottos.forEach((lotto) => Console.print(lotto));
+  }
+
+  printStatistics(rankCountResult, returnRate) {
+    Console.print(STATISTICS_MESSAGE.output);
+    let messages = [];
+    rankCountResult.forEach((count, idx) => {
+      messages.push(STATISTICS_MESSAGE.result(idx, count));
+    });
+    messages.reverse();
+    messages.push(STATISTICS_MESSAGE.rateOfReturn(returnRate));
+
+    Console.print(messages.join(''));
   }
 }
 

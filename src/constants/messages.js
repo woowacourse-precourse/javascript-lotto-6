@@ -17,9 +17,11 @@ const MATCHING_MESSAGE = [
 ];
 
 const STATISTICS_MESSAGE = {
-  output: '\n당첨 통계\n---\n',
+  output: '\n당첨 통계\n---',
   result(rank, count) {
-    return `${MATCHING_MESSAGE[rank]} (${LOTTO_PRIZE[rank]}원) - ${count}개\n`;
+    return `${MATCHING_MESSAGE[rank]} (${LOTTO_PRIZE[
+      rank
+    ].toLocaleString()}원) - ${count}개\n`;
   },
   rateOfReturn(rate) {
     return `총 수익률은 ${rate}%입니다.`;
