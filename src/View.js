@@ -13,9 +13,10 @@ class View {
     return await this.readLine("보너스 번호를 입력해 주세요.\n");
   }
 
+  // Lottos : Lotto 인스턴스 배열
   async getLottos(Lottos) {
     Lottos.map((Lotto) => {
-      Console.print(Lotto);
+      Lotto.print();
     });
   }
 
