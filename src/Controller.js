@@ -49,6 +49,10 @@ class Controller {
   announceLottery() {
     return this.#domain.announceLottery();
   }
+
+  announceProfit() {
+    return this.#domain.announceProfit();
+  }
 }
 
 export default Controller;
