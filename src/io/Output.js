@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import { 
     PRIZE_MAP,
     RESULT_MESSAGES,
