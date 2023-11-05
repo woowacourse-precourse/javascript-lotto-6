@@ -1,4 +1,4 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE } from "./message";
 
 class Lotto {
   #numbers;
@@ -9,15 +9,15 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length === 0) throw new Error('[ERROR] 로또 번호를 입력하세요.');
+    if (numbers.length === 0) throw new Error(ERROR_MESSAGE.LOTTO_EMPTY);
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR_MESSAGE.SIX_NUMBERS);
     }
     if (this.checkRange(numbers))
-      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+      throw new Error(ERROR_MESSAGE.LOTTO_RANGE);
     const numbersSet = this.getNumbersSet(numbers);
     if ([...numbersSet].length !== 6)
-      throw new Error('[ERROR] 중복되지 않는 숫자를 입력하세요');
+      throw new Error(ERROR_MESSAGE.SAME_NUMBERS);
   }
 
   checkRange(numbers) {
