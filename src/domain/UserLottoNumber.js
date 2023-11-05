@@ -15,20 +15,6 @@ class UserLottoNumber {
 
     return this.lottoNumbers;
   }
-
-  #validate(number) {
-    if (isNaN(number)) {
-      throw new Error(ERROR.ONLY_NUMBER);
-    }
-
-    if (number < 1 || number > 45) {
-      throw new Error(ERROR.NUMBER_RANGE);
-    }
-
-    if (this.baseNumbers.includes(number)) {
-      throw new Error(ERROR.NO_DUPLICATES);
-    }
-  }
 }
 
 export default UserLottoNumber;
