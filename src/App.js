@@ -1,59 +1,61 @@
-import { Console } from "@woowacourse/mission-utils";
 import LottoGenerator from "./LottoGenerator.js";
 import LottoValidator from "./utils/LottoValidator.js";
+import LottoDisplay from "./LottoDisplay.js";
 
-const lottoTickets = new LottoGenerator();
-const lottoValidator = new LottoValidator();
+const display = new LottoDisplay();
+const generator = new LottoGenerator();
+const validator = new LottoValidator();
 
 class App {
-  async requestWinningNumbersInput() {
-    Console.print(
-      "당첨 번호 6개를 입력해 주세요. 번호는 쉼표(,)를 기준으로 구분합니다"
-    );
-    const rawWinningNumbers = await Console.readLineAsync("");
-    const winningNumbers = rawWinningNumbers
-      .split(",")
-      .map((number) => parseInt(number.trim(), 10));
-
-    return winningNumbers;
-  }
-
-  async getWinningNumbersFromUserInput() {
+  async getValidMoneyInput() {
     while (true) {
       try {
-        const winningNumbers = await this.requestWinningNumbersInput();
-        lottoValidator.validateWinningNumbers(winningNumbers);
-        return winningNumbers;
+        const money = await display.requestMoneyInput();
+        validator.validateMoney(money);
+        return money;
       } catch (error) {
-        Console.print(error.message);
+        display.displayError(error.message);
       }
     }
   }
 
-  async requestBonusNumberInput() {
-    Console.print("보너스 번호를 입력해 주세요.");
-
-    const bonusNumber = await Console.readLineAsync("");
-
-    return parseInt(bonusNumber, 10);
-  }
-
-  async getBonusNumberFromUserInput(winningNumbers) {
+  async getValidWinningNumbers() {
     while (true) {
       try {
-        const bonusNumber = await this.requestBonusNumberInput();
-        lottoValidator.validateBonusNumbers(bonusNumber, winningNumbers);
+        const rawWinningNumbers = await display.requestWinningNumbersInput();
+        const winningNumbers = rawWinningNumbers
+          .split(",")
+          .map((number) => parseInt(number.trim(), 10));
+        validator.validateWinningNumbers(winningNumbers);
+        return winningNumbers;
+      } catch (error) {
+        display.displayError(error.message);
+      }
+    }
+  }
+
+  async getValidBonusNumber(winningNumbers) {
+    while (true) {
+      try {
+        const bonusNumberInput = await display.requestBonusNumberInput();
+        const bonusNumber = parseInt(bonusNumberInput, 10);
+        validator.validateBonusNumbers(bonusNumber, winningNumbers);
         return bonusNumber;
       } catch (error) {
-        Console.print(error.message);
+        display.displayError(error.message);
       }
     }
   }
 
   async play() {
-    await lottoTickets.getLottoTickets();
-    const winningNumbers = await this.getWinningNumbersFromUserInput();
-    await this.getBonusNumberFromUserInput(winningNumbers);
+    const money = await this.getValidMoneyInput();
+    const lottoTickets = await generator.getLottoTickets(money);
+
+    display.displayNumberOfTickets(lottoTickets.length);
+    display.displayLottoTickets(lottoTickets);
+
+    const winningNumbers = await this.getValidWinningNumbers();
+    await this.getValidBonusNumber(winningNumbers);
   }
 }
 
