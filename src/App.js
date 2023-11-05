@@ -11,6 +11,10 @@ class App {
 
     const winningNumbers = await UserInterface.getWinningNumbers();
     const bonusNumber = await UserInterface.getBonusNumber(winningNumbers);
+
+    const result = LottoGame.calculateResult(lottos, winningNumbers, bonusNumber);
+
+    UserInterface.displayResult(result, lottoPrice);
   }
 }
 

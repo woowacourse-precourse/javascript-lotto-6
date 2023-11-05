@@ -11,4 +11,11 @@ export const MESSAGE = Object.freeze({
   INPUT_BONUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
   ERROR_BONUS_DUPLICATED: "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.",
   ERROR_LOTTO_BOUND: "[ERROR] 로또 번호는 1부터 45까지의 숫자여야 합니다.",
+  RESULT: "\n당첨 통계\n---",
+  RESULT_THREE: "3개 일치 (5,000원) - ",
+  RESULT_FOUR: "4개 일치 (50,000원) - ",
+  RESULT_FIVE: "5개 일치 (1,500,000원) - ",
+  RESULT_FIVE_BONUS: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+  RESULT_SIX: "6개 일치 (2,000,000,000원) - ",
+  RESULT_PROFIT_RATE: "총 수익률은 ",
 });
