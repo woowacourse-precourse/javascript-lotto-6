@@ -33,7 +33,7 @@ handlePurchase
 LottoWinningInputHandler
 - [ ] 당첨 번호 입력을 처리
 
-calculateProfit
+calculateProfitRates
 - [ ] 수익률을 계산
 
 <br/>
@@ -103,17 +103,22 @@ promptWinnningNumbers
 promptBonusNumber
 - [ ] 사용자에게 보너스 번호를 입력받기
 
+<br/>
+
+## LottoOutputView.js 
+> **결과나 메세지를 사용자에게 표시하는 부분을 담당** <br>
+  로또 번호, 당첨 결과, 수익률 등을 사용자에게 표시하는 함수들을 관리
+
+<br/>
+
 printLottos
 - [ ] 구매한 로또 번호를 화면에 출력하기
 
 printLottoResult
 - [ ] 당첨 결과를 화면에 출력하기
 
-<br/>
-
-## LottoOutputView.js 
-> **결과나 메세지를 사용자에게 표시한느 부분을 담당** <br>
-  로또 번호, 당첨 결과, 수익률 등을 사용자에게 표시하는 함수들을 관리
+printProfitRates
+- [ ] 수익률을 화면에 출력하기
 
 <br/>
 
@@ -127,22 +132,21 @@ printLottoResult
 > 사용자로부터의 입력을 받고 검증하는 함수들을 관리
 
 getPurchaseAmount
-- [INPUT] 얼마로 살건지 
+- [ ] 로또를 구입하기 위해 지불할 금액 입력받기
 - `구입금액을 입력해 주세요.`
 
 getLottoWinningNumber
-- [INPUT] 당첨 번호 입력 (배열)
+- [ ] 당첨 번호 입력 (배열)
 - `당첨 번호를 입력해 주세요.`
 
 getLottoBonusWinningNumber
-- [INPUT] 보너스 번호 입력 (숫자)
+- [ ] 보너스 번호 입력 (숫자)
 - `보너스 번호를 입력해 주세요.`
 
 <br/>
 
 ## InputValidator.js 
-### `입력값이 유효한지 검사하는 로직을 관리`
-
+> 입력값이 유효한지 검사하는 로직을 관리
 
 <br/>
 
@@ -152,16 +156,16 @@ getLottoBonusWinningNumber
 <br/>
 
 printPurchaseCount
-- [OUTPUT] 몇개를 구입했는지 출력
+- [ ] 몇개를 구입했는지 출력
 - `${lottoCount}개를 구매했습니다.`
 
 printLottoNumber
-- [OUTPUT] 사용자가 구입한 로또 번호 출력
+- [ ] 사용자가 구입한 로또 번호 출력
 - `[8, 21, 23, 41, 42, 43]` <br/>
   `[3, 5, 11, 16, 32, 38]` ...
 
 announceWinningNumber
-- [OUTPUT] 당첨 통계
+- [ ] 당첨 통계
 - `당첨 통계` <br/>
   `---` <br/>
   `3개 일치 (5,000원) - 1개` <br/>
@@ -171,7 +175,7 @@ announceWinningNumber
   `6개 일치 (2,000,000,000원) - 0개` <br/>
 
 printWinningRates
-- [OUTPUT] 총 수익률 출력
+- [ ] 총 수익률 출력
 - `총 수익률은 ${winningRates}%입니다.`
 
 <br/>
