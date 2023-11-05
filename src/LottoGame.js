@@ -10,6 +10,7 @@ class LottoGame {
       const purchaseAmount = await View.askPurchaseAmount();
       this.#purchaser = new LottoPurchaser(purchaseAmount);
       this.#purchaseLottos();
+      await this.#createWinningLotto();
     } catch (error) {
       View.print(error.message);
       await this.play();
@@ -35,6 +36,12 @@ class LottoGame {
       '',
     );
     View.print(message);
+  }
+
+  async #createWinningLotto() {
+    const winningNumbers = await View.askWinningNumbers();
+    const bonusNumber = await View.askBonusNumber();
+    console.log(winningNumbers, bonusNumber);
   }
 }
 

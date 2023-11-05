@@ -8,8 +8,8 @@ class LottoPurchaser {
   #lottos = [];
 
   constructor(purchaseAmount) {
-    this.#validate(Number(purchaseAmount));
-    this.#purchaseAmount = Number(purchaseAmount);
+    this.#validate(purchaseAmount);
+    this.#purchaseAmount = purchaseAmount;
   }
 
   purchase() {
