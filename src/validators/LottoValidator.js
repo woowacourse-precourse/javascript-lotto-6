@@ -11,7 +11,7 @@ class LottoValidator {
   }
 
   static isSixDigit(lotto) {
-    const inputLotto = this.getInputArray(lotto);
+    const inputLotto = this.getInputNumberArray(lotto);
 
     if (inputLotto.length === 6) {
       return true;
@@ -21,7 +21,8 @@ class LottoValidator {
   }
 
   static isDuplicate(lotto) {
-    const deduplicate = new Set(lotto);
+    const inputLotto = this.getInputNumberArray(lotto);
+    const deduplicate = new Set(inputLotto);
 
     if (deduplicate.size === 6) {
       return true;
@@ -31,7 +32,8 @@ class LottoValidator {
   }
 
   static isLottoNumberRange(lotto) {
-    if (lotto.every((number) => number >= 1 && number <= 45)) {
+    const inputLotto = this.getInputNumberArray(lotto);
+    if (inputLotto.every((number) => number >= 1 && number <= 45)) {
       return true;
     }
 
@@ -46,22 +48,22 @@ class LottoValidator {
   }
 
   static duplicateBonusNumber(winningNumbers, bonusNumber) {
-    if (winningNumbers.find(bonusNumber)) {
+    if (winningNumbers.includes(bonusNumber)) {
       throw new ValidationError(LOTTO_ERROR_MESSAGE.input_six_digit);
     }
 
     return true;
   }
 
-  static getInputArray(input) {
+  static getInputNumberArray(input) {
     let result = [];
 
     if (typeof input === 'string') {
-      result = input.split(',');
+      result = input.split(',').map(Number);
     }
 
     if (Array.isArray(input)) {
-      result = input;
+      result = input.map(Number);
     }
 
     return result;
