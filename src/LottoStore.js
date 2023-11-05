@@ -1,28 +1,23 @@
-import { Console } from '@woowacourse/mission-utils';
 import { Message } from './Message.js';
 class LottoStore {
-  printPurchasingAmout = () => {
-    Console.print(Message.INPUT_PURCHASING_AMOUNT);
-    this.purchaseLotto();
-  };
+  constructor(pricerLotto = 1000) {
+    this.pricerLotto = pricerLotto;
+  }
 
-  static isValidMoney = (money) => {
+  isValidMoney = (money) => {
     if (isNaN(money)) {
       throw new Error(Message.error.NOT_NUMBER);
     }
-    if (money % 1000 !== 0) {
+
+    if (money % this.pricerLotto !== 0 || money == 0) {
       throw new Error(Message.error.NOT_ONETHOUSAND);
     }
+    return true;
   };
 
-  purchaseLotto = async () => {
-    const money = await Console.readLineAsync('');
-    try {
-      LottoStore.isValidMoney(money);
-    } catch (error) {
-      Console.print(error.message);
-      await this.purchaseLotto();
-    }
+  purchaseLotto = (money) => {
+    this.isValidMoney(parseInt(money));
+    return money / this.pricerLotto;
   };
 }
 

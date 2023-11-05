@@ -1,4 +1,6 @@
+import { Console } from '@woowacourse/mission-utils';
 import { LottoStore } from './LottoStore.js';
+import { Message } from './Message.js';
 
 class Main {
   constructor() {
@@ -6,7 +8,22 @@ class Main {
   }
 
   start = async () => {
-    await this.lottoStore.printPurchasingAmout();
+    this.printPurchasAmount();
+  };
+
+  printPurchasAmount = () => {
+    Console.print(Message.INPUT_PURCHASING_AMOUNT);
+    this.InputMoney();
+  };
+
+  InputMoney = async () => {
+    try {
+      const money = await Console.readLineAsync('');
+      const numberOfLotto = await this.lottoStore.purchaseLotto(money);
+    } catch (error) {
+      Console.print(error.message);
+      this.InputMoney();
+    }
   };
 }
 
