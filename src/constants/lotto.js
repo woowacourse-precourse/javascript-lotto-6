@@ -4,4 +4,5 @@ export const LOTTO = {
     MAX: 45,
   },
   NUMBER_COUNT: 6,
+  SELLING_PRISE: 1000,
 };
