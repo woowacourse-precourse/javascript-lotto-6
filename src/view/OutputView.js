@@ -36,4 +36,8 @@ export default class OutputView {
     const parsingPrice = OutputView.foramtPrice(price);
     Console.print(`${matchCounts}개 일치, 보너스 볼 일치 (${parsingPrice}원) - ${correctCounts}개`);
   }
+
+  static printProfit(profit) {
+    Console.print(`총 수익률은 ${profit}%입니다.`);
+  }
 }

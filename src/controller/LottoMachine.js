@@ -17,7 +17,6 @@ export default class LottoMachine {
   #INPUT_UNIT;
 
   constructor() {
-    this.#player = new LottoPlayer();
     this.#MINIMUM_WINNING_COUNT = 3;
     this.#INPUT_UNIT = 1000;
   }
@@ -31,6 +30,7 @@ export default class LottoMachine {
     OutputView.printNewLine();
     this.#findMatchCount();
     this.#calculateWinningStats();
+    this.#calculateProfit();
   }
 
   #makeOneLotto() {
@@ -59,6 +59,8 @@ export default class LottoMachine {
     if (purchaseAmount % this.#INPUT_UNIT !== 0) {
       throw new Error('[ERROR] 1,000원 단위의 금액을 입력하세요.');
     }
+
+    this.#player = new LottoPlayer(purchaseAmount);
 
     for (let i = 1; i <= lottoTicketCount; i += 1) {
       this.#player.setLottoTickets(this.#makeOneLotto());
@@ -105,5 +107,10 @@ export default class LottoMachine {
         OutputView.printCorrectCounts(MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
       }
     });
+  }
+
+  #calculateProfit() {
+    const roundProfit = ((this.#player.getWinningAmount() / this.#player.getPurchaseAmount()) * 100).toFixed(1);
+    OutputView.printProfit(roundProfit);
   }
 }
