@@ -1,10 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MSG } from '../constants/LottoMsg.js';
 import InputValidate from '../utils/InputValidate.js';
+import OutputView from './OutputView.js';
 
 class InputView {
   constructor() {
     this.INPUT_VAL = new InputValidate();
+    this.OUTPUT_VIEW = new OutputView();
   }
 
   async purchaseMoney() {
@@ -13,7 +15,7 @@ class InputView {
       await this.INPUT_VAL.inputMoney(inputMoney);
       return Number(inputMoney);
     } catch (error) {
-      Console.print(error.message);
+      this.OUTPUT_VIEW.printError(error.message);
       return error.name;
     }
   }
@@ -29,7 +31,7 @@ class InputView {
       await this.INPUT_VAL.bonusNumber(bonusNumber);
       return Number(bonusNumber);
     } catch (error) {
-      Console.print(error.message);
+      this.OUTPUT_VIEW.printError(error.message);
       return error.name;
     }
   }

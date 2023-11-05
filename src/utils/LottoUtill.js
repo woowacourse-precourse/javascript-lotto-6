@@ -23,11 +23,6 @@ class LottoUtill {
     return parseInt(this.#calcNumber / 1000, 10);
   }
 
-  sortingNumber() {
-    this.#calcNumber.sort((a, b) => a - b);
-    return this.#calcNumber.join(', ');
-  }
-
   checkLottoCorrect(userNumber, winNumber, bonusNumber) {
     userNumber.forEach((lotto) => {
       const correctAmount = this.#compareWin(lotto, winNumber);
@@ -61,14 +56,16 @@ class LottoUtill {
 
   getRate() {
     const earnMoney = Object.entries(this.#staticObject)
-      .map((status) => {
-        if (status[1] !== 0) {
-          return LottoRate[status[0]];
-        }
-        return 0;
-      })
+      .map((status) => this.#earnMoneyCheck(status))
       .reduce((a, b) => a + b);
     return this.#calcRate(earnMoney);
+  }
+
+  #earnMoneyCheck(status) {
+    if (status[1] !== 0) {
+      return LottoRate[status[0]];
+    }
+    return 0;
   }
 
   #calcRate(earnMoney) {

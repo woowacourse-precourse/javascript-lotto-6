@@ -1,4 +1,5 @@
 import { ERROR_MSG } from '../constants/LottoMsg.js';
+import { lottoVal } from '../constants/constant.js';
 import InputError from './InputError.js';
 
 class InputValidate {
@@ -61,19 +62,23 @@ class InputValidate {
   }
 
   #lottoLengthSix(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== lottoVal.lottoLength) {
       throw new InputError(ERROR_MSG.LOTTO_SHOULD_SIX);
     }
   }
 
   #lottoDuplicate(numbers) {
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== lottoVal.lottoLength) {
       throw new InputError(ERROR_MSG.LOTTO_DUPLICATE_ERROR);
     }
   }
 
   #lottoRangeCheck(numbers) {
-    if (numbers.some((eachNumber) => eachNumber > 45 || eachNumber <= 0)) {
+    if (
+      numbers.some(
+        (eachNumber) => eachNumber > lottoVal.max || eachNumber <= lottoVal.min,
+      )
+    ) {
       throw new Error(ERROR_MSG.LOTTO_RANGE_ERROR);
     }
   }
@@ -91,7 +96,7 @@ class InputValidate {
   }
 
   #bonsuNumberRange(bonus) {
-    if (Number(bonus) <= 0 || Number(bonus) > 45) {
+    if (Number(bonus) <= lottoVal.min || Number(bonus) > lottoVal.max) {
       throw new InputError(ERROR_MSG.BONUS_NUMBER_RANGE_ERROR);
     }
   }

@@ -18,6 +18,10 @@ class OutputView {
   totalRevenue(revenue) {
     Console.print(OUTPUT_MSG.LOTTO_REVENUE_IS(revenue));
   }
+
+  printError(message) {
+    Console.print(message);
+  }
 }
 
 export default OutputView;

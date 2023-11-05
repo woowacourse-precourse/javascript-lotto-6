@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import { CONSTANTS } from '../constants/constant.js';
 import LottoData from '../models/LottoData.js';
 import InputView from '../views/InputView.js';
@@ -47,7 +46,7 @@ class LottoController {
       await Lotto.createLottoInstance(this.LOTTO_DATA.winNumber);
       return this.#inputBonusNumber();
     } catch (error) {
-      Console.print(error.message);
+      this.OUTPUT_VIEW.printError(error.message);
       return this.#inputWinNumber();
     }
   }

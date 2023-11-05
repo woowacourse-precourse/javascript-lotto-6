@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import { lottoNumberRange } from './constants/constant.js';
 import InputValidate from './utils/InputValidate.js';
 
 class Lotto {
@@ -21,7 +22,11 @@ class Lotto {
   }
 
   async generator() {
-    this.#numbers = await Random.pickUniqueNumbersInRange(1, 45, 6);
+    this.#numbers = await Random.pickUniqueNumbersInRange(
+      lottoNumberRange.from,
+      lottoNumberRange.to,
+      lottoNumberRange.pick,
+    );
     return this.#numbers;
   }
 }
