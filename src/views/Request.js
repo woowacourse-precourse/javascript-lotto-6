@@ -21,9 +21,9 @@ class Request {
     while (!condition) {
       try {
         const input = await prompt.in('\n당첨 번호를 입력해 주세요.\n');
-        validate.winningNumbers(input);
+        const checkInput = validate.winningNumbers(input);
         condition = true;
-        return input;
+        return checkInput;
       } catch (error) {
         prompt.out(error.message);
       }

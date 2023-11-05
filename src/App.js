@@ -22,7 +22,7 @@ class App {
     this.#money = 0;
     this.#lottoQuantity = 0;
     this.#lottos = [];
-    this.#winningNumbers = 0;
+    this.#winningNumbers = [];
     this.#bonusNumber = 0;
     this.#prizeResult = {};
     this.#profit = 0;
