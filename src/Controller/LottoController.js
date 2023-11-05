@@ -6,6 +6,7 @@ class LottoController {
 
 	async start() {
 		this.inputPurchaseAmount();
+		this.getLottoNumbers();
 	}
 
 	async inputPurchaseAmount() {
