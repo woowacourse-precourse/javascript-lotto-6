@@ -1,6 +1,6 @@
-import ErrorCheck from "./utils/ErrorCheck.js";
+import ErrorCheck from './utils/ErrorCheck.js';
 
-import CONSTANTS from "../../constants/CONSTANTS.js";
+import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const {
   LOTTO_PRICE,
@@ -11,24 +11,23 @@ const {
   FIFTH_PLACE_WINNINGS,
 } = CONSTANTS;
 
-
-class LottoController{
+class LottoController {
   #model;
   #inputView;
   #outputView;
 
-  constructor(model, inputView, outputView){
+  constructor(model, inputView, outputView) {
     this.#model = model;
     this.#inputView = inputView;
     this.#outputView = outputView;
   }
 
-  async play(){
+  async play() {
     const purchasePrice = await this.#inputPurchasePrice();
-    this.#model.purchaseLottos(purchasePrice/LOTTO_PRICE);
+    this.#model.purchaseLottos(purchasePrice / LOTTO_PRICE);
     this.#outputView.printPurchasedLotto(this.#model.getPurchasedLottoArray());
     this.#outputView.printLineBreak();
-    
+
     const winningNumbersArray = await this.#inputWinningNumbers();
     const bonusNumber = await this.#inputBonusNumber(winningNumbersArray);
     this.#model.makeLottoBoard(winningNumbersArray, bonusNumber);
@@ -38,18 +37,17 @@ class LottoController{
     this.#outputView.printLottoResult(lottoResult);
 
     this.#outputView.printLottoReturnRatio(
-      this.getLottoReturnRatio(lottoResult, purchasePrice/LOTTO_PRICE)
+      this.getLottoReturnRatio(lottoResult, purchasePrice / LOTTO_PRICE)
     );
   }
 
-  async #inputPurchasePrice(){
-    while(true){
+  async #inputPurchasePrice() {
+    while (true) {
       const input = await this.#inputView.purchasePrice();
-      try{
+      try {
         ErrorCheck.purchasePrice(input, LOTTO_PRICE);
         return Number(input);
-      }
-      catch(error){
+      } catch (error) {
         this.#outputView.printErrorMessage(error);
       }
     }

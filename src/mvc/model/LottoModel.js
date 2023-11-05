@@ -13,7 +13,7 @@ const {
 class LottoModel {
   #purchasedLottoArray;
   #lottoBoard;
-  
+
   purchaseLottos(numberOfLotto) {
     this.#purchasedLottoArray = Get.randomLottoArray(numberOfLotto);
   }
@@ -24,7 +24,7 @@ class LottoModel {
     this.#lottoBoard[bonusNumber] = BONUS_STATE;
   }
 
-  getPurchasedLottoArray(){
+  getPurchasedLottoArray() {
     return this.#purchasedLottoArray;
   }
 
