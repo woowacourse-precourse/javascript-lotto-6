@@ -3,7 +3,13 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#checkNumber(numbers);
+    this.#checkSameNumber(numbers);
     this.#numbers = numbers;
+  }
+
+  get numbers() {
+    return this.#numbers;
   }
 
   #validate(numbers) {
@@ -24,6 +30,16 @@ class Lotto {
     const set = new Set(numbers);
     if (set.size() !== numbers.length) {
       throw new Error('[ERROR] 숫자 중복');
+    }
+  }
+
+  compareNumbers(winningNumbers, bonusNumber) {
+    // 로또번호 6자리 배열 vs 사용자 입력 7자리
+    // [1,2,3,4,5,6] vs [2,3,5,6,7,8] + 4
+    const winningCount = winningNumbers.filter((number) =>
+      this.#numbers.includes(number)
+    );
+    if (this.#numbers.some(bonusNumber)) {
     }
   }
 }
