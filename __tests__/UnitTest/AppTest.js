@@ -15,4 +15,35 @@ describe("App Unit Test", () => {
       expect(lotto instanceof Lotto).toBeTruthy();
     });
   });
+
+  const CAL_TEST = [
+    [
+      [
+        new Lotto([8, 10, 11, 17, 32, 35]),
+        new Lotto([9, 10, 14, 17, 28, 36]),
+        new Lotto([8, 10, 11, 17, 32, 35]),
+        new Lotto([8, 10, 11, 17, 32, 36]),
+      ],
+      [8, 10, 11, 17, 32, 36],
+      35,
+      [1, 2, 0, 0, 1],
+    ],
+    [
+      [new Lotto([8, 10, 11, 17, 28, 35]), new Lotto([9, 10, 11, 17, 28, 35])],
+      [7, 10, 11, 17, 28, 35],
+      8,
+      [0, 1, 1, 0, 0],
+    ],
+  ];
+  test.each(CAL_TEST)(
+    "당첨 내역 계산",
+    (lottos, winNumbers, bonusNumber, expectedRsult) => {
+      const lottoRanks = App.calculLottoResult({
+        lottos,
+        winNumbers,
+        bonusNumber,
+      });
+      expect(lottoRanks).toStrictEqual(expectedRsult);
+    }
+  );
 });
