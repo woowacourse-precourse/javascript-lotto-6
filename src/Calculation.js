@@ -1,5 +1,5 @@
-import { Console, Random } from '@woowacourse/mission-utils';
-import { LOTTO, INPUT, OUTPUT, ERROR, PRIZE_MONEY } from './Constant';
+import { Console } from '@woowacourse/mission-utils';
+import { LOTTO, OUTPUT, PRIZE_MONEY } from './Constant';
 
 class Calculation {
   #purchasedLotto;
