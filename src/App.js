@@ -7,6 +7,7 @@ class App {
   #lottoCount;
   #winningNumberList = [];
   #userWinningNumbers;
+  #userBonusNumber;
 
   constructor() {
     this.purchaseLottos = new PurchaseLottos();
@@ -35,6 +36,7 @@ class App {
 
   async getUserWinningAndBonusNumbers() {
     this.#userWinningNumbers = await this.purchaseLottos.inputWinningNumbers();
+    this.#userBonusNumber = await this.purchaseLottos.inputBonusNumber();
   }
 }
 

@@ -26,6 +26,15 @@ class PurchaseLottos {
       throw error;
     }
   }
+
+  async inputBonusNumber() {
+    try {
+      const input = await Console.readLineAsync(USER_PROMPT.BONUS_NUMBER);
+      return input;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PurchaseLottos;
