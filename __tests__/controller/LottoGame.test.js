@@ -54,18 +54,39 @@ describe('로또 게임 컨트롤 클래스 테스트.', () => {
     }
   });
 
-  test('당첨번호 입력에서 숫자가 아닌 입력이 들어오면 에러를 일으킵니다.', async () => {
-    // given
-    const invalidInput = '1,2,3,4,5,공습경보';
-    const validInput = '1,2,3,4,5,6';
-    const logSpy = getLogSpy();
-
-    mockQuestions([invalidInput, validInput]);
-
-    // when & then
-    const lottoGame = new LottoGame();
-    await lottoGame.inputWinningNumbers();
-
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  describe('당첨번호 입력 테스트', () => {
+    beforeEach(() => {
+      jest.restoreAllMocks();
+    });
+    
+    test('숫자가 아닌 입력이 들어오면 에러를 일으킵니다.', async () => {
+      // given
+      const invalidInput = '1,2,3,4,5,공습경보';
+      const validInput = '1,2,3,4,5,6';
+      const logSpy = getLogSpy();
+  
+      mockQuestions([invalidInput, validInput]);
+  
+      // when & then
+      const lottoGame = new LottoGame();
+      await lottoGame.inputWinningNumbers();
+  
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+    });
+  
+    test('로또 범위가 아닌 숫자가 들어오면 에러를 일으킵니다.', async () => {
+      // given
+      const invalidInput = '1,2,3,4,5,46';
+      const validInput = '1,2,3,4,5,15';
+      const logSpy = getLogSpy();
+  
+      mockQuestions([invalidInput, validInput]);
+  
+      // when & then
+      const lottoGame = new LottoGame();
+      await lottoGame.inputWinningNumbers();
+  
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+    });
   });
 });
