@@ -3,7 +3,6 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
   }
 
   #validate(numbers) {
@@ -21,7 +20,9 @@ class Lotto {
     this.#numbers = numbers.split(',').map((number) => Number(number));
   }
 
-  // TODO: 추가 기능 구현
+  get getWinningNumber() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

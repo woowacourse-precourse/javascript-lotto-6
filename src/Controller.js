@@ -6,6 +6,8 @@ import OutputView from './OutputView.js';
 class Controller {
   #lottoTicketList;
 
+  #winningNumbers;
+
   async progress() {
     try {
       await this.#generateLottoTicketList();
@@ -35,7 +37,7 @@ class Controller {
 
   async #generateLottoMatching() {
     const inputLottoWinningNumbers = await InputView.readLottoWinningNumbers();
-    new Lotto(inputLottoWinningNumbers);
+    this.#winningNumbers = new Lotto(inputLottoWinningNumbers).getWinningNumber;
   }
 }
 
