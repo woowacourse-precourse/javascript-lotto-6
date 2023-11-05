@@ -12,13 +12,17 @@ class UserLottoModel {
   generateLottoTicket(inputNum) {
     const tickets = this.#calculateNumberOfTickets(inputNum);
     for (let index = NUMBER.ZERO; index < tickets; index++) {
-      const ticket = MissionUtils.Random.pickUniqueNumbersInRange(NUMBER.ONE, NUMBER.FORTY_FIVE, NUMBER.SIX);
+      const ticket = this.#generateRandomNumber();
       this.#lottoTickets.push(new Lotto(ticket));
     }
   }
 
   #calculateNumberOfTickets(inputNum) {
     return inputNum / PRIZE_AMOUNTS.TICKET_PRICE_AMOUNT;
+  }
+
+  #generateRandomNumber(){
+    return MissionUtils.Random.pickUniqueNumbersInRange(NUMBER.ONE, NUMBER.FORTY_FIVE, NUMBER.SIX)
   }
 
   getLottoTickets() {
