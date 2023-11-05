@@ -52,6 +52,15 @@ class App {
       LOTTO_INPUT_MESSAGE.inputBonusNum
     );
 
+    let totalWinPrize = 0;
+    const winningObj = {
+      5000: 0,
+      50000: 0,
+      1500000: 0,
+      30000000: 0,
+      2000000000: 0,
+    };
+
     for (let i = 0; i < lottoArr.length; i++) {
       const lottoNums = lottoArr[i];
       let isBonus = false;
@@ -63,14 +72,20 @@ class App {
       if (winning.length < 3) continue;
       if (winning.length === 5) isBonus = lottoNums.includes(Number(bonusNum));
 
-      console.log(this.totalPrize(winning.length, isBonus));
+      const winningPrize = this.getPrize(winning.length, isBonus);
+      totalWinPrize += winningPrize;
+
+      winningObj[winningPrize]++;
     }
 
-    // const a = lottoArr.map((ele) =>
-    //   ele.filter((item) => winningNum.includes(String(item)))
-    // );
-
-    // const winningTickets = a.map((ele) => this.totalPrize(ele.length));
+    MissionUtils.Console.print(LOTTO_OUTPUT_MESSAGE.winningStatistics);
+    for (const key in winningObj) {
+      MissionUtils.Console.print(
+        `${LOTTO_OUTPUT_MESSAGE.matches(key)}${winningObj[key]}개`
+      );
+    }
+    let rateOfReturn = ((totalWinPrize / purchaseCost) * 100).toFixed(1);
+    MissionUtils.Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   }
 
   //----------------- LOTTO
@@ -101,20 +116,13 @@ class App {
   }
   //----------------- LOTTO
 
-  totalPrize(count, isBonus = false) {
+  getPrize(count, isBonus = false) {
     if (isBonus) return 30000000;
-    switch (count) {
-      case 3:
-        return 5000;
-      case 4:
-        return 50000;
-      case 5:
-        return 1500000;
-      case 6:
-        return 2000000000;
-      default:
-        return 0;
-    }
+    if (count === 3) return 5000;
+    if (count === 4) return 50000;
+    if (count === 5) return 1500000;
+    if (count === 6) return 200000000;
+    return 0;
   }
 
   async matchLottoNum() {}
