@@ -3,6 +3,8 @@ import OutputView from "../view/OutputView";
 import UserLottoModel from "../domain/UserLottoModel";
 import Lotto from "../domain/Lotto";
 
+import { Console } from "@woowacourse/mission-utils";
+
 class LottoController {
   #userLottoModel;
 
@@ -10,20 +12,24 @@ class LottoController {
     this.#userLottoModel = new UserLottoModel();
   }
   async playGame() {
-    // try {
+    try {
+        // 금액 입력
         const ticketPrice = await InputView.getLottoNumbers();
         OutputView.printQuantity(ticketPrice);
   
+        // 로또 생성
         this.#userLottoModel.generateLottoTicket(ticketPrice);
         const lottoTickets = this.#userLottoModel.getLottoTickets();
         OutputView.printLottoTickets(lottoTickets);
-  
+        
+        // 당첨 번호 입력
         const winningNumbers = await InputView.getWinningNumbers();
   
         const lotto = new Lotto(winningNumbers);
-  
+        // 보너스 번호 입력
         const bonusNumbers = await InputView.getBonusNumbers();
-  
+        
+        // 로또 
         const result = lotto.countMatches(
           lottoTickets,
           winningNumbers,
@@ -38,9 +44,9 @@ class LottoController {
         OutputView.formatResults(result);
   
         OutputView.calculateProfitRate(result);
-    // } catch (error) {
-    //   throw new Error(ERROR_MESSAGES.DEFAULT_ERROR);
-    // }
+    } catch (error) {
+        Console.print(error.message);
+    }
   }
 }
 
