@@ -1,4 +1,4 @@
-import LIMITS from '../constants/limits.js';
+import { LIMITS } from '../constants/fixedValue.js';
 
 class Validate {
   static isNaturalNumber(inputString) {
