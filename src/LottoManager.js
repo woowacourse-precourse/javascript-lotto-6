@@ -58,6 +58,19 @@ class LottoManager {
       this.dashboard.updateDashboard(rank);
     });
   }
+
+  printTotalResult() {
+    const dashboard = this.dashboard;
+    const earningsRate = dashboard.calculateEarnings(this.user.money);
+
+    Console.print("\n당첨 통계\n---");
+    Console.print(`${MESSAGES.FIFTH_RESULT} ${dashboard.rankCount[4]}개`);
+    Console.print(`${MESSAGES.FOURTH_RESULT} ${dashboard.rankCount[3]}개`);
+    Console.print(`${MESSAGES.THIRD_RESULT} ${dashboard.rankCount[2]}개`);
+    Console.print(`${MESSAGES.SECOND_RESULT} ${dashboard.rankCount[1]}개`);
+    Console.print(`${MESSAGES.FIRST_RESULT} ${dashboard.rankCount[0]}개`);
+    Console.print(`총 수익률은 ${earningsRate}%입니다.`);
+  }
 }
 
 export default LottoManager;

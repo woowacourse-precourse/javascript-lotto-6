@@ -2,6 +2,12 @@ const MESSAGES = {
   INPUT_LOTTO_PURCHASE: "구입금액을 입력해 주세요.\n",
   INPUT_WINNING_NUMBERS: "\n당첨 번호를 입력해 주세요.\n",
   INPUT_BONNUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
+
+  FIFTH_RESULT: "3개 일치 (5,000원) -",
+  FOURTH_RESULT: "4개 일치 (50,000원) -",
+  THIRD_RESULT: "5개 일치 (1,500,000원) -",
+  SECOND_RESULT: "5개 일치, 보너스 볼 일치 (30,000,000원) -",
+  FIRST_RESULT: "6개 일치 (2,000,000,000원) -",
 };
 
 const ERRORS = {
