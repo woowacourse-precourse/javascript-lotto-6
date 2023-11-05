@@ -10,38 +10,46 @@ export default class LottoGameController {
   }
 
   async start() {
-    try {
-      const purchaseAmount = await this.getValidatedInput(
-        InputView.getPurchaseAmount,
-        InputValidator.validatePurchaseAmount,
-      );
+    const purchaseAmount = await this.getPurchaseAmount();
+    const tickets = this.lottoMachine.generateTickets(purchaseAmount);
+    OutputView.displayTickets(tickets);
 
-      const tickets = this.lottoMachine.generateTickets(purchaseAmount);
-      OutputView.displayTickets(tickets);
+    const winningNumbers = await this.getWinningNumbers();
+    const bonusNumber = await this.getBonusNumber(winningNumbers);
+    const lottoResult = new LottoResult(winningNumbers, bonusNumber, tickets);
 
-      const winningNumbers = await this.getValidatedInput(
-        InputView.getWinningNumbers,
-        InputValidator.validateWinningNumbers,
-      );
+    this.displayResults(lottoResult);
+  }
 
-      const bonusNumber = await this.getValidatedInput(InputView.getBonusNumber, (inputNumber) =>
-        InputValidator.validateBonusNumber(inputNumber, winningNumbers),
-      );
-
-      const lottoResult = new LottoResult(winningNumbers, bonusNumber, tickets);
-
-      this.displayResults(lottoResult);
-    } catch (error) {
-      OutputView.displayError(error.message);
-      await this.start();
+  async getPurchaseAmount() {
+    while (true) {
+      try {
+        const input = await InputView.getPurchaseAmount();
+        InputValidator.validatePurchaseAmount(input);
+        return input;
+      } catch (error) {
+        OutputView.displayError(error.message);
+      }
     }
   }
 
-  async getValidatedInput(inputFunction, validationFunction) {
+  async getWinningNumbers() {
     while (true) {
       try {
-        const input = await inputFunction();
-        validationFunction(input);
+        const input = await InputView.getWinningNumbers();
+        InputValidator.validateWinningNumbers(input);
+        return input;
+      } catch (error) {
+        OutputView.displayError(error.message);
+      }
+    }
+  }
+
+  async getBonusNumber(winningNumbers) {
+    while (true) {
+      try {
+        const input = await InputView.getBonusNumber();
+        InputValidator.validateBonusNumber(input, winningNumbers);
         return input;
       } catch (error) {
         OutputView.displayError(error.message);
@@ -50,7 +58,6 @@ export default class LottoGameController {
   }
 
   displayResults(lottoResult) {
-    lottoResult.calculateResults();
     const resultStrings = lottoResult.getFormattedResultString();
     OutputView.displayResults(resultStrings);
     OutputView.displayProfitRate(lottoResult.calculateProfitRate());
