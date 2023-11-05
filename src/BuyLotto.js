@@ -1,6 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import error from './constants/error.js';
+import strings from './constants/strings.js';
 
 class BuyLotto {
   expense = 0;
@@ -13,29 +14,32 @@ class BuyLotto {
     this.expense = Number(expense);
     BuyLotto.validationExpense(this.expense);
 
-    const lottoCount = this.expense / 1000;
+    const lottoCount = this.expense / strings.LOTTO_PRICE;
 
     return lottoCount;
   }
 
   static validationExpense(expense) {
-    if (/[^0-9]/.test(expense)) {
+    if (strings.EXCLUDING_NUMBERS_REGEX.test(expense)) {
       throw new Error(error.EXPENSE_INTEGER);
     }
 
-    if (expense < 1000) {
+    if (expense < strings.LOTTO_PRICE) {
       throw new Error(error.EXPENSE_MORE_THEN_ONE_THOUSAND_WON);
     }
 
-    if (expense % 1000 !== 0) {
+    if (expense % strings.LOTTO_PRICE !== strings.REMAIN) {
       throw new Error(error.EXPENSE_UNIT_ONE_THOUSAND_WON);
     }
   }
 
-  // 로또 개수만큼 랜덤 번호 배열 생성
   randomNumber(lotteryTicketCount) {
     while (this.count < lotteryTicketCount) {
-      const randomPick = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const randomPick = Random.pickUniqueNumbersInRange(
+        strings.START_NUMBER,
+        strings.END_NUMBER,
+        strings.SLICE_NUMBER,
+      );
 
       const lotto = new Lotto(randomPick);
       this.lottoArray.push(lotto.getNumber());

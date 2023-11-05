@@ -13,7 +13,7 @@ class Lotto {
   }
 
   #sortNumber(validNumbers) {
-    this.#numbers = validNumbers.sort((a, b) => a - b);
+    this.#numbers = validNumbers.sort((first, second) => first - second);
     return this.#numbers;
   }
 
