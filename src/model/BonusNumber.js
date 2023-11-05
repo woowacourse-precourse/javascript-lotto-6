@@ -13,6 +13,10 @@ class BonusNumber {
     BonusValidation.checkNumber(bonusNumber);
   }
 
+  /**
+   *
+   * @returns {number} bonunNumber
+   */
   getBonusNumber() {
     return this.getBonusNumber;
   }

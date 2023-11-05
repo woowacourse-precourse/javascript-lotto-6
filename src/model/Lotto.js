@@ -14,6 +14,10 @@ class Lotto {
     LottoValidation.checkDuplicate(numbers);
   }
 
+  /**
+   *
+   * @returns {number[]} numbers
+   */
   getLotto() {
     return this.#numbers;
   }
