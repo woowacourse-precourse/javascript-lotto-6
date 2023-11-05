@@ -1,39 +1,41 @@
-import validationUtils from './utils/validationUtils.js';
-import MESSAGE from './constants/message.js';
-import VALUE from './constants/value.js';
+import { Console } from '@woowacourse/mission-utils';
+import lottoModel from './models/lottoModel.js';
+import LottoValidation from './Validations/LottoValidation.js';
+import inputs from './View/inputs.js';
 
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
-    this.#numbers = numbers;
-    this.#validate(numbers);
+  constructor() {
+    this.#numbers = [];
   }
 
-  #validate(numbers) {
-    for (let i = 0; i < numbers.length; i += 1) {
-      validationUtils.checkNumber(numbers[i]);
-      validationUtils.checkRange(numbers[i]);
-      this.#checkDuplicateNumber(numbers[i], i);
-    }
+  async #validate() {
+    try {
+      const lottoAnswer = await inputs.enterLotto();
+      const strings = lottoAnswer.split(',');
+      const validation = new LottoValidation(strings);
 
-    this.#checkLength();
-  }
+      validation.finishValidation();
 
-  #checkDuplicateNumber(number, currentIndex) {
-    const lastIndex = this.#numbers.lastIndexOf(number);
-    if (lastIndex !== currentIndex) {
-      throw new Error(MESSAGE.error.duplicateNumber);
+      return strings;
+    } catch (error) {
+      Console.print(error.message);
+      return this.#validate();
     }
   }
 
-  #checkLength() {
-    if (this.#numbers.length !== VALUE.range.count) {
-      throw new Error(MESSAGE.error.lottoLength);
-    }
+  #setLotto(answer) {
+    this.#numbers = lottoModel.convertToNumber(answer);
   }
 
-  finishValidation() {
+  async controlLotto() {
+    const answer = await this.#validate();
+
+    this.#setLotto(answer);
+  }
+
+  getLotto() {
     return this.#numbers;
   }
 }
