@@ -17,7 +17,7 @@ class Lotto {
     if (numbersArray.length !== 6) {
       throw new Error(errorMessage.winningNumbersCount);
     }
-    if (numbersArray.some(number => Number.isNaN(number))) {
+    if (numbersArray.some(number => Number.isNaN(Number(number)))) {
       throw new Error(errorMessage.winningNumbersNotNumber);
     }
     if (numbersArray.some(number => number < 1 || number > 45)) {
