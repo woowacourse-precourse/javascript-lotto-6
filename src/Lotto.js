@@ -158,6 +158,39 @@ class LottoMachine {
 
     return bonusNumber;
   }
+
+  async drawWinningNumbers() {
+    this.winningNumbers = new Set(await this.#askWinningNumbers());
+    this.bonusNumber = await this.#askBonusNumber();
+  }
+
+  calculatePrize(lottoTickets) {
+    const LOTTO_GAME_RESULTS = { 3: 0, 4: 0, 5: 0, "5+1": 0, 6: 0 };
+
+    lottoTickets.getLottoTickets().forEach((lottoTicket) => {
+      const MATCH_COUNT = lottoTicket.countMatchNumbers(this.winningNumbers);
+      const BONUS_MATCH_COUNT = this.isBonusNumberMatch(lottoTicket);
+      this.updatePrizeResults(
+        LOTTO_GAME_RESULTS,
+        MATCH_COUNT,
+        BONUS_MATCH_COUNT
+      );
+    });
+
+    return LOTTO_GAME_RESULTS;
+  }
+
+  isBonusNumberMatch(lottoTicket) {
+    return lottoTicket.getLottoNumbers().includes(this.bonusNumber);
+  }
+
+  updatePrizeResults(gameResults, matchCount, isBonusNumberMatch) {
+    if (matchCount === 5 && isBonusNumberMatch) {
+      gameResults["5+1"] += 1;
+    } else if (gameResults[matchCount]) {
+      gameResults[matchCount] += 1;
+    }
+  }
 }
 
-export default Lotto = { Lotto, LottoTicket };
+export default Lotto;
