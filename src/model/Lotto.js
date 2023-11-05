@@ -22,15 +22,7 @@ export default class Lotto {
     return this.#numbers.filter((number) => winningNumbers.includes(number)).length;
   }
 
-  includesBonusNumber(bonusNumber) {
-    return this.#numbers.includes(bonusNumber);
-  }
-
   get numbers() {
     return this.#numbers;
-  }
-
-  toString() {
-    return `[${this.#numbers.join(', ')}]`;
   }
 }
