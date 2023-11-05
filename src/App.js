@@ -13,6 +13,7 @@ class App {
 
   constructor() {
     this.#view = new View();
+    this.#result = new Result();
   }
 
   buyLotto() {
@@ -37,12 +38,36 @@ class App {
   }
 
   async play() {
-    const ENTERED_INPUT_PRICE = await this.#view.getPrice();
-    this.#price = new Price(ENTERED_INPUT_PRICE);
+    while (true) {
+      try {
+        const ENTERED_INPUT_PRICE = await this.#view.getPrice();
+        this.#price = new Price(ENTERED_INPUT_PRICE);
+        break;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
     this.buyLottoNTimes(this.#price.price / 1000);
-    const ENTERED_WINNING_NUMBER = await this.#view.getWinninNumber();
-    const ENTERED_BONUS_NUMBER = await this.#view.getBonusNumber();
-    this.#result = new Result(ENTERED_WINNING_NUMBER, ENTERED_BONUS_NUMBER);
+
+    while (true) {
+      try {
+        const ENTERED_WINNING_NUMBER = await this.#view.getWinninNumber();
+        this.#result.winningNumber = ENTERED_WINNING_NUMBER;
+        break;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
+
+    while (true) {
+      try {
+        const ENTERED_BONUS_NUMBER = await this.#view.getBonusNumber();
+        this.#result.bonusNumber = ENTERED_BONUS_NUMBER;
+        break;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
     this.#result.getResults(this.#boughtLottos);
     this.#result.printResult(this.#price.price);
   }

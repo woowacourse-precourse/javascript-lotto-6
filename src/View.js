@@ -1,5 +1,4 @@
 import { Console } from "@woowacourse/mission-utils";
-import InputError from "./InputError.js";
 
 class View {
   constructor() {}

@@ -15,8 +15,13 @@ class Result {
   #FOURTH_REWARD = 50000;
   #FIFTH_REWARD = 5000;
 
-  constructor(winningNumber, bonusNumber) {
+  constructor() {}
+
+  set winningNumber(winningNumber) {
     this.#winningNumber = new Lotto(winningNumber);
+  }
+
+  set bonusNumber(bonusNumber) {
     this.#bonusNumber = new BonusNumber(
       bonusNumber,
       this.#winningNumber.numbers
