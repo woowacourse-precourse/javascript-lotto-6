@@ -2,19 +2,27 @@ import { COMMON } from '../constants/common.js';
 import { LOTTO } from '../constants/lotto.js';
 
 export const validation = {
-  isExistDuplicateNumbers: arr => {},
-  isLottoNumberRange: number => {
-    return LOTTO.min <= number && number <= LOTTO.max;
-  },
-  isNotLottoPurchagePriceRange: price => {
-    return price % LOTTO.unitPrice !== 0;
-  },
-  isWinningLottoNumbers: str => {},
-  isDuplicateNumbers: (number, arr) => {},
-  isEmpty: str => {
+  isEmpty: (str) => {
     return str === '';
   },
-  isNumberZero: number => {
+  isNumberZero: (number) => {
     return number === COMMON.zero;
   },
+  isNotLottoPurchagePriceRange: (price) => {
+    return price % LOTTO.unitPrice !== 0;
+  },
+  isNotSeparateCommaNumbers: (str) => {
+    const separateCommaNumbersRegexp = /^([0-9]+(,[0-9]+)+)$/g;
+    return !separateCommaNumbersRegexp.test(str);
+  },
+  isExistDuplicateNumbers: (arr) => {
+    const deDuplicateNumbers = new Set(arr);
+    return arr.length !== deDuplicateNumbers.size;
+  },
+  isLottoNumberRange: (number) => {
+    return LOTTO.minNumber <= number && number <= LOTTO.maxNumber;
+  },
+  isDuplicateNumbers: (number, arr) => {},
 };
+
+export const abc = {};
