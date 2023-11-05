@@ -29,13 +29,16 @@ class App {
     return this.lottoTotal;
   }
 
-  printAllLottos() {
+  createLottos() {
     for (let l = 0; l < this.lottoTotal; l++) {
       const lotto = new Lotto(
         MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)
       );
       this.allLottos.push(lotto);
     }
+  }
+
+  printAllLottos() {
     this.allLottos.forEach((lotto) => {
       MissionUtils.Console.print(lotto.getLottoNumber().sort((a, b) => a - b));
     });
@@ -102,6 +105,7 @@ class App {
     MissionUtils.Console.print(
       this.gethowManyLotto(inputMoney) + PRINT.RESULT_BUY
     );
+    this.createLottos();
     this.printAllLottos();
 
     const winNumber = await this.askWinNumber();
