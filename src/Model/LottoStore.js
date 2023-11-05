@@ -6,6 +6,7 @@ class LottoStore {
 
   constructor(purchaseQuantity) {
     const randomLottoNumbers = this.#createRandomLottoNumbers(purchaseQuantity);
+    this.#createLottos(randomLottoNumbers);
   }
 
   #createRandomLottoNumbers(purchaseQuantity) {
@@ -19,6 +20,12 @@ class LottoStore {
   #pickRandomNumbers() {
     const RandomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     return RandomNumbers;
+  }
+
+  #createLottos(randomLottoNumbers) {
+    this.#lottos = randomLottoNumbers.map(
+      (randomNumbers) => new Lotto(randomNumbers)
+    );
   }
 }
 
