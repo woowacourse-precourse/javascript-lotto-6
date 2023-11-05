@@ -5,6 +5,7 @@ class Lotto {
     this.#validate(numbers);
     this.#inRange(numbers);
     this.#noSameNumber(numbers);
+    this.#noNumber(numbers);
     this.#numbers = numbers;
   }
 
@@ -12,6 +13,13 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+  }
+  #noNumber(numbers) {
+    numbers.map((number) => {
+      if (!Number.isInteger(number)) {
+        throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+      }
+    });
   }
   #inRange(numbers) {
     numbers.map((number) => {
