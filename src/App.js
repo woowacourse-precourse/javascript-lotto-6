@@ -2,7 +2,8 @@ import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
 import LottoGenerator from "./LottoGenerator.js";
 import LottoNumberGenerator from "./LottoNumberGenerator.js";
-import Lotto from "./Lotto.js";
+import { WinningRecord } from './WinningRecord.js';
+
 
 class App {
   #lottoGenerator = new LottoGenerator();
@@ -10,8 +11,13 @@ class App {
   async play() {
     const tickets = await this.purchaseLotto();
     OutputView.printPurchaseLottoTickets(tickets);
+
     const winningNumbers = await this.pickWinningNumbers();
     const bonusNumber = await this.pickBonusNumber();
+    const winningRecord = new WinningRecord(winningNumbers, bonusNumber);
+    const winningStatistics = winningRecord.getWinningStatistics(tickets);
+    OutputView.printWinningStatistics(winningStatistics);
+    //수익률 출력
   }
 
   async purchaseLotto() {

@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
+import { WINNING_RANK } from "./WinningRecord.js";
 
 const InputView = {
   printError(error) {
@@ -7,11 +7,44 @@ const InputView = {
   },
 
   printPurchaseLottoTickets(tickets) {
-    MissionUtils.Console.print(tickets.length + "개를 구매했습니다.")
+    MissionUtils.Console.print(tickets.length + "개를 구매했습니다.");
     for (let lotto of tickets) {
-      const sortedNumbers = lotto.getNumbers().slice().sort((a, b) => a - b);
+      const sortedNumbers = lotto
+        .getNumbers()
+        .slice()
+        .sort((a, b) => a - b);
       MissionUtils.Console.print(sortedNumbers);
     }
+  },
+
+  printWinningStatistics(statistics) {
+    MissionUtils.Console.print("당첨 통계\n---");
+    const ranks = Object.keys(WINNING_RANK).reverse();
+    for (let rank of ranks) {
+      let output = this.createOutput(rank, statistics);
+      MissionUtils.Console.print(output);
+    }
+  },
+
+  createOutput(rank, statistics) {
+    if(rank === 'second') {
+        return (
+            WINNING_RANK[rank].matchingNumberCount +
+            "개 일치, 보너스 볼 일치 (" +
+            WINNING_RANK[rank].reward.toLocaleString().replace(/_/g, ",") +
+            "원) - " +
+            statistics[rank] +
+            "개"
+          );
+    }
+    return (
+      WINNING_RANK[rank].matchingNumberCount +
+      "개 일치 (" +
+      WINNING_RANK[rank].reward.toLocaleString().replace(/_/g, ",") +
+      "원) - " +
+      statistics[rank] +
+      "개"
+    );
   },
 };
 
