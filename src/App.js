@@ -3,18 +3,23 @@ import {
     ONE,
     LOTTO_PRICE,
     ERROR,
+    MATCH,
 } from './utils/Define';
 import {
     generateLotto,
+    calculateMatchCount,
 } from './utils/Calculate';
 import {
     printLottoNumbers,
     printNumberOfLottos,
 } from './io/Output';
 import {
-    inputPurchaseAmountAsync, 
+    inputPurchaseAmountAsync,
+    inputWinningNumbersAsync,
 } from './io/Input';
 import { Console } from '@woowacourse/mission-utils';
+import { checkBonus } from './utils/Validation';
+
 class App {
     lottos;
     results;
@@ -29,6 +34,8 @@ class App {
     async play() {
         try {
             await this.setupGame();
+            const winningNumbers = await inputWinningNumbersAsync();
+            this.evaluateLottos(winningNumbers);
         } catch (error) {
             Console.print(`${ERROR.HEAD} ${error.message}`);
         }
@@ -51,6 +58,24 @@ class App {
     async setupGame() {
         this.purchaseAmount = await inputPurchaseAmountAsync();
         this.purchaseLottos();
+    }
+
+    updateResults(matchCount, hasBonus) {
+        if (matchCount === MATCH.FIVE && hasBonus) {
+            this.results[MATCH.FIVE_BONUS]++;
+            return;
+        }
+        if (this.results.hasOwnProperty(matchCount)) {
+            this.results[matchCount]++;
+        }
+    }
+
+    evaluateLottos({ winningNumbers, bonusNumber }) {
+        this.lottos.forEach(lotto => {
+            const matchCount = calculateMatchCount(lotto, winningNumbers);
+            const hasBonus = checkBonus(lotto, bonusNumber);
+            this.updateResults(matchCount, hasBonus);
+        });
     }
 }
 
