@@ -1,26 +1,12 @@
 import { ERROR_MESSAGES } from '../constants/messages.js';
+import InputValidator from '../utils/InputValidator.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    InputValidator.validateNumbers(numbers);
     this.#numbers = numbers;
-  }
-
-  #validate(numbers) {
-    const numberReg = /^[0-9]+$/;
-    if (numbers.length !== 6) {
-      throw new Error(ERROR_MESSAGES.ONLY_SIX_NUMBERS);
-    }
-    numbers.forEach(number => {
-      if (!numberReg.test(number)) {
-        throw new Error(ERROR_MESSAGES.ONLY_NUMBERS);
-      }
-      if (number > 45 || number < 1) {
-        throw new Error(ERROR_MESSAGES.NUMBER_RANGE);
-      }
-    });
   }
 
   getNumbers() {
