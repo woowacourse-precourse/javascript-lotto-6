@@ -54,12 +54,26 @@ async getLottoNumber(){
   }// ui 로직
 
 
+  async result() {
+    Console.print("당첨 통계\n"+"---");
+    await domain.ScoreSet(this.LOTTOS,this.SCORE,this.USERCHOOSENUMBER,this.USERBONUSNUMBER);
+       Console.print(`3개 일치 (5,000원) - ${this.SCORE[0]}개`)
+       Console.print(`4개 일치 (50,000원) - ${this.SCORE[1]}개`)
+       Console.print(`5개 일치 (1,500,000원) - ${this.SCORE[2]}개`)
+       Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.SCORE[3]}개`)
+       Console.print(`6개 일치 (2,000,000,000원) - ${this.SCORE[4]}개`)
+ 
+     await domain.Result(this.SCORE,this.USERSCASH);
+       
+   }//도메인 로직
+
   async play() {
     while(true){
    await this.getUsersCashAndCheck();
    await this.getLottoNumber();
    await this.getUserNumber();
    await this.getUserBonusNumber();
+   this.result();
    break;
     }
   }
