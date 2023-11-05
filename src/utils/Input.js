@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { MESSAGE } from '../constant';
-import { hasNoReset, throwError } from '.';
+import { hasNoComma, throwError } from '.';
 
 const readInput = async (query) => {
   try {
@@ -14,7 +14,7 @@ const readInput = async (query) => {
 const readWinningNumbers = async () => {
   try {
     const value = await readInput(MESSAGE.winningNumbersQuery);
-    hasNoReset(value);
+    hasNoComma(value);
     return value.split(',').map((v) => Number(v));
   } catch (error) {
     throwError(error);

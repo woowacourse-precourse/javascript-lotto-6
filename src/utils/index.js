@@ -18,14 +18,14 @@ import {
   getRandomNumbers,
 } from './RandomNumbers';
 
-import { validateNumberRange, hasNoReset } from './Validate';
+import { validateNumberRange, hasNoComma } from './Validate';
 
 export {
   getBonusBallNumber,
   getErrorMessage,
   getLottoRandomNumbers,
   getRandomNumbers,
-  hasNoReset,
+  hasNoComma,
   readBonusNumber,
   readInput,
   readPayment,

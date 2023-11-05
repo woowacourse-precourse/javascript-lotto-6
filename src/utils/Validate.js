@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE, NUMBER_RANGE } from '../constant';
-import { getErrorMessage, throwError } from './MessageFactory';
+import { throwError } from './MessageFactory';
 /**
  * 번호가 1~45까지의 범위 내의 숫자인지 확인
  * @param {*} number
@@ -9,9 +9,10 @@ const validateNumberRange = (number) => {
   if (number < min || number > max) throwError(ERROR_MESSAGE.range);
 };
 
-const hasNoReset = (string) => {
-  if (!string.includes(','))
-    throw new Error(getErrorMessage(ERROR_MESSAGE.noReset));
+const hasNoComma = (string) => {
+  if (!string.includes(',')) {
+    throwError(ERROR_MESSAGE.noReset);
+  }
 };
 
-export { validateNumberRange, hasNoReset };
+export { validateNumberRange, hasNoComma };
