@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Purchase from "./Purchase";
+import Purchase from "./Purchase.js";
 
 class App {
   /**1. 구입금액을 입력받는다.
@@ -13,11 +13,12 @@ class App {
 
     const purchase = new Purchase(input);
 
-    //발행한 로또 수량 및 번호를 출력
-    //MissionUtils.Console.print(`${input / 1000}개를 구매했습니다.`);
+    return purchase;
   }
 
-  async play() {}
+  async play() {
+    const myPurchase = await this.getPurchasePrice();
+  }
 }
 
 export default App;
