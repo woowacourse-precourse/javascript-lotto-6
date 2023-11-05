@@ -12,8 +12,12 @@ class Lotto {
   generateLottoNumbers(lottoCount) {
     for (let i = 0; i < lottoCount; i += 1) {
       const lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-      this.lottoNumbersArray.push(lottoNumber);
+      this.sortLottoNumbers(lottoNumber);
     }
+  }
+
+  sortLottoNumbers(lottoNumber) {
+    this.lottoNumbersArray.push(lottoNumber.sort((num1, num2) => num1 - num2));
   }
 
   printLottoNumbersArray() {

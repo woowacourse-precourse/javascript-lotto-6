@@ -48,7 +48,7 @@ generateLottoNumbers
 - [x] 로또 번호의 숫자를 1~45까지 무작위로 6개를 생성
 
 sortLottoNumbers
-- [ ] 로또 번호를 오름차순으로 정렬
+- [x] 로또 번호를 오름차순으로 정렬
 
 printLottoNumbersArray
 - [x] 로또 번호들의 값을 넘김
