@@ -32,7 +32,9 @@ export default class LottoMachine {
       this.#LOTTO_RULES.pickCount,
     );
 
-    return new Lotto(pickRandomUniqueNumbers);
+    const sortNumbers = this.#sortLottoNumbers(pickRandomUniqueNumbers);
+
+    return new Lotto(sortNumbers);
   }
 
   async #makeLottos() {
@@ -48,5 +50,10 @@ export default class LottoMachine {
     for (let i = 1; i <= lottoTicketCount; i += 1) {
       this.#player.setLottoTickets(this.#makeOneLotto());
     }
+  }
+
+  #sortLottoNumbers(lottoNumbers) {
+    const sortLottoNumbers = lottoNumbers.sort((number1, number2) => number1 - number2);
+    return sortLottoNumbers;
   }
 }
