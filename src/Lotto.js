@@ -9,6 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
+    // test code
     if (numbers.length === 0) throw new Error(ERROR_MESSAGE.LOTTO_EMPTY);
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.SIX_NUMBERS);
@@ -46,7 +47,7 @@ class Lotto {
     return result;
   }
 
-  checkEqualNumber(equalNumber){
+  checkEqualNumber(randomNumberArray, equalNumber, userBonusNumber){
     if(equalNumber === 5){
       return this.compareBonusNumber(randomNumberArray, userBonusNumber);
     }
@@ -57,7 +58,7 @@ class Lotto {
     let bonusResult = 0;
     lottoRandomNumber.forEach(randomNumberArray => {
       const equalNumber = this.countEqualNumbers(randomNumberArray, userLottoNumber);
-      bonusResult = this.checkEqualNumber(equalNumber);
+      bonusResult = this.checkEqualNumber(randomNumberArray, equalNumber, userBonusNumber);
       lottoResult = this.getLottoResult(equalNumber, bonusResult);
     });
     return lottoResult;
