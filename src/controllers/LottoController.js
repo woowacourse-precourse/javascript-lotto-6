@@ -11,10 +11,6 @@ const { bonusNumber, winningNumber, purchasePrice } = PROPMT_MESSAGE;
 const { purchaseInvalidAmount } = ERROR_MESSAGE;
 
 class LottoController {
-  constructor() {
-    this.lottoWinnerPrize = new LottoWinnerPrize();
-  }
-
   // propmt
   purchasedPrice;
 
@@ -27,6 +23,10 @@ class LottoController {
 
   // FINAL
   LOTTO_PRICE = '1000';
+
+  constructor() {
+    this.lottoWinnerPrize = new LottoWinnerPrize();
+  }
 
   async startLotto() {
     this.purchasedPrice = await this.propmtPurchasedPrice();
