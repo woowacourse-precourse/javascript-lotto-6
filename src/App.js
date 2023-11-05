@@ -65,6 +65,10 @@ class App {
 
     this.output.printBonus(this.#bonusNumber)
   }
+
+  requestResult() {
+    this.output.printStats();
+  }
 }
 
 export default App;
