@@ -12,7 +12,7 @@ export const MESSAGE = {
 
 export const ERROR = {
   getError: (error) => `[ERROR] ${error}`,
-  BLANK_INPUT: '값을 입력해 주세요ㄹ.',
+  BLANK_INPUT: '값을 입력해 주세요.',
   NOT_A_NUMBER: '숫자를 입력해 주세요.',
   NOT_A_NATURAL_NUMBER: '1 이상의 숫자를 입력해 주세요.',
   NOT_DIVIDED_BY_THOUSAND: '1000 단위로 입력해 주세요.',
