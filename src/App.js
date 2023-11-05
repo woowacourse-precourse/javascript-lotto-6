@@ -11,15 +11,21 @@ class App {
     const numberOfSets = lottoAmount / 1000;
     const lottoNumbers = Lotto.generateNumbers(numberOfSets);
 
-    const view = new LottoView();
-    view.displayPurchaseInfo(numberOfSets, lottoNumbers);
-
     const winningNumbers = await UserInput.inputNumber();
     const bonusNumber = await UserInput.inputBonus(winningNumbers);
 
     const calculator = new LottoCalculator(winningNumbers, numberOfSets);
     const statistics = calculator.calculateStatistics(lottoNumbers);
-    view.displayStatistics(statistics);
+
+    const view = new LottoView();
+    const purchaseInfo = view.createPurchaseInfoString(
+      numberOfSets,
+      lottoNumbers
+    );
+    const statisticsInfo = view.createStatisticsString(statistics);
+    const result = `${purchaseInfo}\n${statisticsInfo}`;
+
+    view.displayResult(result);
   }
 }
 

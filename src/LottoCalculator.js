@@ -48,9 +48,8 @@ class LottoCalculator {
 
     const totalSpent = this.#totalSets * 1000;
     const profit = statistics.totalPrize - totalSpent;
-    const profitRate = ((profit / totalSpent) * 100).toFixed(2);
+    const profitRate = ((profit / totalSpent) * 100 + 100).toFixed(2);
 
-    // console.log(`총 수익률은 ${profitRate}%입니다.`);
     statistics.profitRate = parseFloat(profitRate);
 
     return statistics;

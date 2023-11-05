@@ -10,7 +10,7 @@ const UserInput = {
       lottoAmount = Number(lottoAmount);
       Validator.validateAmount(lottoAmount);
     } catch (error) {
-      console.log(error.message);
+      Console.print(error.message);
       return this.inputAmount();
     }
     return lottoAmount;
@@ -27,7 +27,7 @@ const UserInput = {
         .map((number) => parseInt(number, 10));
       Validator.validateNumbers(lottoNumbersArray);
     } catch (error) {
-      console.log(error.message);
+      Console.print(error.message);
       return this.inputNumber();
     }
     return lottoNumbersArray;
@@ -40,7 +40,7 @@ const UserInput = {
       bonusNumber = Number(bonusNumber);
       Validator.validateBonusNumber(bonusNumber, lottoNumbersArray);
     } catch (error) {
-      console.log(error.message);
+      Console.print(error.message);
       return this.inputBonus(lottoNumbersArray);
     }
     return bonusNumber;
