@@ -25,21 +25,21 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.\n');
     }
 
     const checkNumberSet = new Set(numbers);
 
     if (numbers.length !== checkNumberSet.size)
-      throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.');
+      throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
 
     this.#numbers = numbers.map(num => {
       if (Number.isNaN(+num) || +num < 1 || +num > 45) {
-        throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.');
+        throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
       }
 
       if (!Number.isInteger(+num)) {
-        throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.');
+        throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
       }
 
       return +num;
@@ -56,6 +56,8 @@ class Lotto {
         if (!this.#numbers.includes(+num)) bonusGuess.push(+num);
         return this.#numbers.includes(+num);
       });
+
+      console.log(bonusGuess, bonusNumber, bonusGuess.includes(bonusNumber));
 
       switch (matchNumber.length) {
         case 3:
@@ -87,7 +89,7 @@ class Lotto {
       bonusGuess.length = 0;
     });
 
-    Console.print(`\n당첨 통계---\n3개 일치 (5,000원) - ${
+    Console.print(`\n당첨 통계\n---\n3개 일치 (5,000원) - ${
       this.winCheck[3]
     }개\n4개 일치 (50,000원) - ${
       this.winCheck[4]
