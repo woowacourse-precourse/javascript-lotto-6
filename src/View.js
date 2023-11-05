@@ -1,13 +1,17 @@
 import { Console } from "@woowacourse/mission-utils";
-import { checkPrice } from "./checkInputValidate.js";
+import InputError from "./InputError.js";
 
 class View {
   constructor() {}
 
   async getPrice() {
     const INPUT = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    checkPrice(INPUT);
     return +INPUT;
+  }
+
+  async getWinninNumber() {
+    const INPUT = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    return INPUT.split(",");
   }
 }
 

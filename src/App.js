@@ -1,15 +1,22 @@
 import View from "./View.js";
+import Lotto from "./Lotto.js";
 
 class App {
   view;
   price;
+  winningNumber;
+  bonusNumber;
+  boughtLotto;
 
   constructor() {
     this.view = new View();
   }
 
   async play() {
-    const INPUT = await this.view.getPrice();
+    const INPUT_PRICE = await this.view.getPrice();
+    this.price = new Price(INPUT_PRICE);
+    const ENTERED_WINNING_NUMBER = await this.view.getWinninNumber();
+    this.winningNumber = new Lotto(ENTERED_WINNING_NUMBER);
   }
 }
 
