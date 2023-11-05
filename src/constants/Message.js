@@ -7,3 +7,9 @@ export const GUIDE_MESSAGE =Object.freeze({
   divider: '---',
   totalReturn: '총 수익률은 *%입니다.'
 })
+
+export const PURCHASE_AMOUNT_ERROR_MESSAGE = Object.freeze({
+  wrongFormat: '[ERROR] 잘못된 입력입니다. 1,000원 단위로 입력해야합니다. 게임을 종료합니다.',
+  underThousand: '[ERROR] 잘못된 입력입니다. 1,000원 미만의 금액은 입력이 불가합니다. 게임을 종료합니다.',
+  notNumber: '[ERROR] 잘못된 입력입니다. 구입 금액은 숫자여야 합니다. 게임을 종료합니다.',
+})
