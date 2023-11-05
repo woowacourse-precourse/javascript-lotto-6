@@ -40,7 +40,13 @@ class App {
   }
 
   requestLottoTickets() {
+    this.tickets = new LottoTickets(this.#money);
+    
+    this.tickets.publishTickets();
+    this.#lottos = this.tickets.returnTickets();
+
     this.output.printTickets(this.#money / 1000)
+    this.output.printLotto(this.#lottos)
   }
 }
 
