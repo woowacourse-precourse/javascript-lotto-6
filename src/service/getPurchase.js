@@ -11,7 +11,7 @@ export default async function getPurchase() {
     const purchasedLotto = await createPurchaseData(purchaseCount, lottos);
     await purchaseResaultUI(purchaseCount, purchasedLotto);
 
-    return purchasedLotto;
+    return { input, purchasedLotto };
   } catch (error) {
     throw new Error(error.message);
   }
