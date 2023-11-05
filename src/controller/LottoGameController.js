@@ -47,6 +47,15 @@ class LottoGameController {
         this.outputView.print(error);
       }
     }
+
+    while (true) {
+      try {
+        this.#bonusNumber = await this.getBonusNumber();
+        break;
+      } catch (error) {
+        this.outputView.print(error);
+      }
+    }
   }
 
   async getPurchaseAmount() {
@@ -82,7 +91,16 @@ class LottoGameController {
     InputValidator.validateWinningNumbers(
       winningNumbers.split(GAME_RULE.SEPARATOR),
     );
-    return winningNumbers;
+    return winningNumbers.split(GAME_RULE.SEPARATOR).map(Number);
+  }
+
+  async getBonusNumber() {
+    const bonusNumber = await this.inputView.getUserInputAsync(
+      MESSAGE.BONUS_NUMBER,
+    );
+    InputValidator.validateBonusNumber(bonusNumber);
+    InputValidator.validateLottoNumbers(bonusNumber, [...this.#winningNumbers]);
+    return bonusNumber;
   }
 }
 
