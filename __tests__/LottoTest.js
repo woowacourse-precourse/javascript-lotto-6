@@ -1,5 +1,7 @@
 import Lotto from "../src/Lotto.js";
 
+let randomNumbers, lotto;
+
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
     expect(() => {
@@ -15,4 +17,18 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  describe("getNumbers 메서드 테스트", () => {
+    beforeEach(() => {
+      randomNumbers = [1, 2, 3, 4, 5, 6, 7];
+      lotto = new Lotto(randomNumbers);
+    });
+    test("getNumbers 메서드가 존재해야 한다.", () => {
+      expect(typeof lotto.getNumbers).toBe("function");
+    });
+
+    test("getNumbers 메서드를 호출하면 생성할때 전달한 로또 숫자를 반환해야 한다.", () => {
+      const receivedNumbers = lotto.getNumbers();
+      expect(receivedNumbers).toBe(randomNumbers);
+    });
+  });
 });
