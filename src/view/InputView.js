@@ -9,7 +9,7 @@ class InputView{
     return inputAmounts;
   }
 
-  async readWinNumbers(){
+  async readLottoNumbers(){
     const inputWinNumber = await Console.readLineAsync(MESSAGE.input.winNumber);
 
     return inputWinNumber;

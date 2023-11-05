@@ -8,7 +8,7 @@ const amounts = Object.freeze({
   rest: '잔돈이 생기지 않도록 금액을 입력해주세요.',
 })
 
-const winNumber = Object.freeze({
+const lotto = Object.freeze({
   unsplit: '쉼표(,)로 숫자를 구분해주세요.',
   invalidRange: '1에서 45 사이의 숫자를 입력해주세요.',
   invalidCount: '6개의 숫자를 입력해주세요.',
@@ -19,7 +19,7 @@ const winNumber = Object.freeze({
 const ERROR = Object.freeze({
   common,
   amounts,
-  winNumber,
+  lotto,
 })
 
 export default ERROR

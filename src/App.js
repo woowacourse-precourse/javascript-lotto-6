@@ -7,6 +7,7 @@ class App {
 
   #amounts
   #Lotto
+  #Bonus
   #inputView
 
   constructor(){
@@ -19,15 +20,26 @@ class App {
   }
 
   async setGame(){
-    this.setAmounts();
-    this.setLottoNumbers();
+    await this.setAmounts();
+    await this.setLottoNumbers();
   }
 
   async setAmounts(){
-    const inputAmounts = await this.#inputView.readAmounts()
-    const amounts = new Amounts(inputAmounts)
+    const inputAmounts = await this.#inputView.readAmounts();
+    const amounts = new Amounts(inputAmounts);
 
     this.#amounts = amounts.getAmounts();
+  }
+
+  async setLottoNumbers(){
+    const inputLotto = await this.#inputView.readLottoNumbers();
+    const lottoNumbers = inputLotto.split(',').map((number) => Number(number));
+    const lotto = new Lotto(lottoNumbers);
+
+    this.#Lotto = lotto.getLottoNumbers();
+
+    const bonus = await this.#inputView.readBonusNumber();
+    this.#Bonus = lotto.getBonus(Number(bonus));
   }
 
 }
