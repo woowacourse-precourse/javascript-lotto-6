@@ -5,47 +5,41 @@ class TicketManager {
     constructor() {
         this.tickets = [];
         this.matches = {
-            three: 0,
-            four : 0,
-            five : 0,
-            bonus: 0,
-            six: 0
+            "3": 0,
+            "4" : 0,
+            "5" : 0,
+            "5b": 0,
+            "6": 0
         }
     }
 
-    addTicket() {
-        const ticket = pickUniqueNumbersInRange(LOTTO.MIN, LOTTO.MAX, LOTTO.COUNT);
-        this.tickets.push(ticket);
+    addTicket(number) {
+        for(let i = 0; i<number; i++){
+            const ticket = pickUniqueNumbersInRange(LOTTO.MIN, LOTTO.MAX, LOTTO.COUNT);
+            this.tickets.push(ticket);
+        }
     }
-
+    
     getTickets() {
         return this.tickets;
+    }
+    getMatches() {
+        return this.matches;
     }
 
     countMatchAllNumber(lotto, bonus){
         this.tickets.forEach((ticket) => {
             const lottoMatch = lotto.getMatchCount(ticket, bonus.number);
             this.countMatchNumber(lottoMatch);
-            console.log(ticket);
         })
     }
 
     countMatchNumber(lottoMatch) {
-        switch (lottoMatch.main) {
-            case 3:
-                this.matches.three++;
-                break;
-            case 4:
-                this.matches.four++;
-                break;
-            case 5:
-                lottoMatch.bonus? this.matches.bonus++ :this.matches.five++;
-                break;
-            case 6:
-                this.matches.six++;
-                break;
+        if(lottoMatch.main >2){
+            lottoMatch.bonus == true ? this.matches["5b"]++ :this.matches[lottoMatch.main.toString()]++;
         }
     }
+    
 }
 
 
