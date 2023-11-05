@@ -3,8 +3,10 @@ import {INPUT_MESSAGE} from "./constants/Constants.js";
 import LottoSeller from "./LottoSeller.js";
 import LottoManager from "./LottoManager.js";
 import Lotto from "./Lotto.js";
+import ResultBoard from "./ResultBoard.js";
 
 class App {
+
 
     async play() {
         const lottoManager = new LottoManager();
@@ -19,14 +21,20 @@ class App {
         const numbersInput =
             await inputHandler.getInput(INPUT_MESSAGE.WINNING_NUMBERS);
 
+        const lotto = new Lotto(numbersInput.split(','));
+
+
         const winningNumbers =
             numbersInput.split(',').map((input) => parseInt(input))
-
+        
         await lottoManager.getBonusNumber(winningNumbers);
 
-        const lotto = new Lotto(winningNumbers);
-        lottoManager.decideWinning(lotto.winningNumbers)
-        lottoManager.printResultTable();
+
+        const resultBoard = new ResultBoard(lottoManager.myLottoNumbers);
+        resultBoard.decideWinning(lotto.winningNumbers, lottoManager.bonusNumber)
+        resultBoard.printResultTable();
+
+        resultBoard.calculateEarning(lottoSeller.lottoTickets)
     }
 
 }

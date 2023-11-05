@@ -1,5 +1,5 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
-import {LOTTO_PRICE} from "./constants/Constants.js";
+import {LOTTO_INFO} from "./constants/Constants.js";
 
 class LottoSeller {
     constructor(money) {
@@ -9,7 +9,7 @@ class LottoSeller {
     }
 
     async buyLotto() {
-        this.lottoTickets = this.money / LOTTO_PRICE;
+        this.lottoTickets = this.money / LOTTO_INFO.LOTTO_PRICE;
         this.#printTicketsNumber()
     }
 
@@ -24,7 +24,7 @@ class LottoSeller {
 
     #validate(money) {
         console.log(money);
-        if (money % LOTTO_PRICE !== 0 || isNaN(money))
+        if (money % LOTTO_INFO.LOTTO_PRICE !== 0 || isNaN(money))
             throw new Error("[ERROR] 유효한 숫자가 아닙니다.");
     }
 }
