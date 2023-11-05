@@ -57,8 +57,6 @@ class Lotto {
         return this.#numbers.includes(+num);
       });
 
-      console.log(bonusGuess, bonusNumber, bonusGuess.includes(bonusNumber));
-
       switch (matchNumber.length) {
         case 3:
           this.winCheck[3] += 1;
@@ -69,12 +67,12 @@ class Lotto {
           this.winCheck.total += 50000;
           break;
         case 5:
-          if (bonusGuess.includes(bonusNumber)) {
+          if (bonusGuess.includes(+bonusNumber)) {
             this.winCheck['5+'] += 1;
-            this.winCheck.total += 1500000;
+            this.winCheck.total += 30000000;
           } else {
             this.winCheck[5] += 1;
-            this.winCheck.total += 30000000;
+            this.winCheck.total += 1500000;
           }
           break;
         case 6:
