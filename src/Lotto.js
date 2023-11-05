@@ -22,10 +22,8 @@ class Lotto {
     }
     catch (error) {
       Console.print(error.message);
-    } 
-    finally {
       //숫자를 재입력할 Console.readLine()함수 
-    }
+    } 
   }
 
   checkRange() {
@@ -34,20 +32,16 @@ class Lotto {
     }
     catch (error) {
       Console.print(error.message);
-    } 
-    finally {
       //숫자를 재입력할 Console.readLine()함수 
-    }
+    } 
   }
 
   checkDuplicate() {
     try {
-      if (this.#numbers.length !== new Set(input).size) throw new Error(ERROR.LOTTO_DUPILICATE);
+      if (this.#numbers.length !== new Set(this.#numbers).size) throw new Error(ERROR.LOTTO_DUPILICATE);
     }
     catch (error) {
       Console.print(error.message);
-    }
-    finally {
       //숫자를 재입력할 Console.readLine()함수 
     }
   }
@@ -58,8 +52,6 @@ class Lotto {
     }
     catch (error) {
       Console.print(error.message);
-    }
-    finally {
       //숫자를 재입력할 Console.readLine()함수 
     }
   }
