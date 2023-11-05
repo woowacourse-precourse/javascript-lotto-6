@@ -12,6 +12,7 @@ class LottoGame {
 
   async play() {
     await this.buyLottos();
+    await this.issueWinningLotto();
   }
 
   async buyLottos() {
@@ -35,6 +36,11 @@ class LottoGame {
 
   issueLottos(money) {
     this.#lottos.set(money);
+  }
+
+  async issueWinningLotto() {
+    const winningLotto = await InputView.readWinningNumbers();
+    const bonusNumber = await InputView.readBonusNumber();
   }
 }
 
