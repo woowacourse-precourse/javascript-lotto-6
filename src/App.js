@@ -1,20 +1,9 @@
-import { Console } from '@woowacourse/mission-utils';
-import Counter from './domains/Counter.js';
-import { INPUT_MESSAGES } from './constants/messages.js';
-import WinningLottoMachine from './domains/WinningLottoMachine.js';
-import printLottoNumbers from './print/printLottoNumbers.js';
+import LottoController from './LottoController.js';
 
 class App {
+  #lottoController = new LottoController();
   async play() {
-    const inputAmount = await Console.readLineAsync(INPUT_MESSAGES.inputAmount);
-    const counter = new Counter(Number(inputAmount));
-    const lottoTicketNumber = counter.lottoTicketNumber;
-    const lottoBox = counter.giveLotto;
-    await printLottoNumbers(lottoTicketNumber, lottoBox);
-
-    const winningLottoMachine = await WinningLottoMachine.machineStart();
-    const winningNumbers = winningLottoMachine.winningNumbers;
-    const bonusNumber = winningLottoMachine.bonusNumber;
+    await this.#lottoController.run();
   }
 }
 
