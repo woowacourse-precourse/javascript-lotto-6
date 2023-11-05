@@ -1,5 +1,5 @@
-import Input from "./Input.js";
-import Output from "./Output.js";
+import Input from "./view/Input.js";
+import Output from "./view/Output.js";
 import Player from "./model/Player.js";
 
 class LottoGame {

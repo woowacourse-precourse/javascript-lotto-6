@@ -1,6 +1,6 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import Input from "../src/Input";
-import Output from "../src/Output";
+import Input from "../src/view/Input";
+import Output from "../src/view/Output";
 import Player from "../src/model/Player";
 
 const mockQuestions = (inputs) => {

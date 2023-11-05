@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { OUTPUT_MSG } from "./constants/output.js";
+import { OUTPUT_MSG } from "../constants/output.js";
 
 class Output {
   static printLotto(player) {

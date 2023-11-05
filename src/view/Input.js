@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
-import { INPUT_MSG } from "./constants/input.js";
-import LottoGameError from "./Error.js";
-import { LOTTO_ERROR_MSG } from "./constants/error.js";
+import { INPUT_MSG } from "../constants/input.js";
+import LottoGameError from "../Error.js";
+import { LOTTO_ERROR_MSG } from "../constants/error.js";
 
 class Input {
   static async getMoney() {
