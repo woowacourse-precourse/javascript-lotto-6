@@ -67,12 +67,7 @@
 
 ---
 
-#### 발행 로또 출력 (PrintValue.lottoQuantity)
-
-`n개를 구매했습니다.` 출력  
- n개는 `InputBuyLotto`의 return 값
-
-#### 발행한 로또 수량 및 번호를 출력 (PrintValue.lottoIssuance)
+#### 발행 로또 출력 (PrintValue.lottoIssuedQuantity)
 
 - 출력 문구 예시
 
@@ -89,8 +84,8 @@
   ```
 
 - 각 로또의 숫자는 오름차순으로 정렬
-- 로또 발행  
-  발행 로또 수량`(InputBuyLotto)`만큼 반복 진행  
+- 로또 발행 (LottoIssuance)  
+  발행 로또 수량만큼 반복 진행  
   1개의 로또에 6개의 숫자가 중복되지 않아야 함  
   로또의 발행 범위는 1~45  
   발생한 로또를 배열에 저장
