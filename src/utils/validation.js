@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable implicit-arrow-linebreak */
 import {
   BASE_AMOUNT,
   ERROR_MESSAGE,
@@ -15,11 +17,13 @@ const isNumberInRange = (value) => value > 0 && value < 46;
 
 const isSixNumbers = (values) => values.length === NUMBER_COUNT;
 
+const isDuplicated = (values) => [...new Set(values)].length !== NUMBER_COUNT;
+
 const isAllNumbers = (values) =>
   values.filter((value) => isNumber(value)).length === NUMBER_COUNT;
 
 const isNumbersInRange = (values) =>
-  values.filter((value) => isNumberInRange(parseInt(value))).length ===
+  values.filter((value) => isNumberInRange(parseInt(value, 10))).length ===
   NUMBER_COUNT;
 
 const validatePurchase = (purchaseAmount) => {
@@ -36,18 +40,12 @@ const validatePurchase = (purchaseAmount) => {
 
 const validateWinningNumber = (winningNumber) => {
   const numbers = winningNumber.split(",");
-  if (isEmpty(winningNumber)) {
-    throw new Error(ERROR_MESSAGE.empty);
-  }
-  if (!isSixNumbers(numbers)) {
-    throw new Error(ERROR_MESSAGE.notSixNumbers);
-  }
-  if (!isAllNumbers(numbers)) {
-    throw new Error(ERROR_MESSAGE.textIncluded);
-  }
-  if (!isNumbersInRange(numbers)) {
-    throw new Error(ERROR_MESSAGE.notInRange);
-  }
+
+  if (isEmpty(winningNumber)) throw new Error(ERROR_MESSAGE.empty);
+  if (!isSixNumbers(numbers)) throw new Error(ERROR_MESSAGE.notSixNumbers);
+  if (!isAllNumbers(numbers)) throw new Error(ERROR_MESSAGE.textIncluded);
+  if (!isNumbersInRange(numbers)) throw new Error(ERROR_MESSAGE.notInRange);
+  if (isDuplicated(numbers)) throw new Error(ERROR_MESSAGE.duplicated);
 };
 
 export { validatePurchase, validateWinningNumber };
