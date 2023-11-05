@@ -29,9 +29,9 @@ class Lotto {
     return this.#numbers.includes(input);
   }
 
-  calculate(winning) {
-    const intersection = this.#numbers.filter((n) => winning.includes(n));
-    return intersection.length;
+  countMatched(winning) {
+    const matched = this.#numbers.filter((n) => winning.includes(n));
+    return matched.length;
   }
 }
 
