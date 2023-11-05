@@ -20,6 +20,17 @@ describe("당첨 통계 테스트", () => {
     expect(result).toEqual(output);
   });
 
+  test("당첨 번호와 로또 번호를 비교한다. 보너스 번호를 점검한다.", () => {
+    const lotto = [1, 3, 5, 14, 22, 45];
+    const winninglotto = [1, 2, 3, 4, 5, 6];
+    const BONUS_NUMBER = 45;
+    const output = [3,1];
+
+    const result = lottoReader(lotto,winninglotto,BONUS_NUMBER);
+
+    expect(result).toEqual(output);
+  });
+
   test("당첨 내역을 모두 출력한다.", () => {
     const logSpy = getLogSpy();
     

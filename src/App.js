@@ -14,9 +14,11 @@ class App {
     const bonusNumber = await inputBonusNumber(winningNumbers);
     MissionUtils.Console.print("");
     lottosReader(lottoNumbers, winningNumbers, bonusNumber, lottoCounts);
+    console.log(bonusNumber);
     console.log(lottoNumbers);
     console.log(winningNumbers);
     console.log(winningResults);
+    lottoResultsPrinter(winningDetails.winning);
     //lottoResultPrinter([5,0], 2)
   }
 }
