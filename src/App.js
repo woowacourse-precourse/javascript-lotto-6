@@ -1,12 +1,17 @@
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
+import LottoManager from './LottoManager.js';
 
 class App {
   async play() {
     // 기능 ➊ 사용자에게 구입 금액을 입력받는다.
     const money = await InputView.readMoney();
-    // 기능 ➊ 구입한 로또 장수를 출력한다.
-    OutputView.printPurchase(money / 1000);
+    const amount = money / 1000;
+    OutputView.printPurchase(amount);
+
+    // 기능 ➋ 구매 장수만큼 랜덤한 로또 번호를 생성한다.
+    const lottoManager = new LottoManager(amount);
+    lottoManager.generateLotto();
   }
 }
 
