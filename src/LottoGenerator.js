@@ -7,7 +7,7 @@ import {
 } from "./utils/lottoConstants.js";
 
 class LottoGenerator {
-  calculateNumberOfLotto(money) {
+  calculateNumberOfLottoTickets(money) {
     return money / LOTTO_PRICE;
   }
 
@@ -19,15 +19,11 @@ class LottoGenerator {
     );
   }
 
-  async getLottoTickets(money) {
-    const numberOfLotto = this.calculateNumberOfLotto(money);
-    const lottoTickets = [];
-
-    for (let i = 0; i < numberOfLotto; i += 1) {
-      const lottoTicket = this.generateSingleLottoTicket();
-      lottoTickets.push(lottoTicket);
-    }
-
+  getLottoTickets(money) {
+    const numberOfLotto = this.calculateNumberOfLottoTickets(money);
+    const lottoTickets = Array(numberOfLotto)
+      .fill()
+      .map(() => this.generateSingleLottoTicket());
     return lottoTickets;
   }
 }
