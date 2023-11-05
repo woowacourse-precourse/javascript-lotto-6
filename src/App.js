@@ -12,6 +12,7 @@ import {
 import {
     printLottoNumbers,
     printNumberOfLottos,
+    displayGameResults,
 } from './io/Output';
 import {
     inputPurchaseAmountAsync,
@@ -36,6 +37,7 @@ class App {
             await this.setupGame();
             const winningNumbers = await inputWinningNumbersAsync();
             this.evaluateLottos(winningNumbers);
+            displayGameResults(this.results, this.purchaseAmount);
         } catch (error) {
             Console.print(`${ERROR.HEAD} ${error.message}`);
         }
