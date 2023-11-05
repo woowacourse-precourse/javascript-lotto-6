@@ -50,3 +50,8 @@ export const MATCH = {
     FIVE_BONUS: '5+',
     SIX: 6,
 };
+
+export const EARNING_MESSAGES = {
+    FIRST: '총 수익률은 ',
+    SECOND: '%입니다.',
+};

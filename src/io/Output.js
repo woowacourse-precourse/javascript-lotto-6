@@ -3,7 +3,9 @@ import {
     RESULT_MESSAGES,
     MATCH,
     ZERO,
+    EARNING_MESSAGES,
 } from "../utils/Define";
+import { calculateEarnings } from "../utils/Calculate.js";
 
 const printWinningHead = () => {
     Console.print(RESULT_MESSAGES.WINNING_HEAD);
@@ -29,4 +31,9 @@ const printAllMatchResults = (results) => {
 const displayResults = (results) => {
     printWinningHead();
     printAllMatchResults(results);
+};
+
+const displayEarnings = (results, purchaseAmount) => {
+    const earnings = calculateEarnings(results, purchaseAmount);
+    Console.print(`${EARNING_MESSAGES.FIRST}${earnings.toLocaleString()}${EARNING_MESSAGES.SECOND}`);
 };
