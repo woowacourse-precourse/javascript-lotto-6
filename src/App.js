@@ -67,7 +67,7 @@ class App {
     for (const key in this.#results) {
       prize += this.#results[key] * key;
     }
-    return Math.floor((prize / purchase) * 100);
+    return ((prize / purchase) * 100).toFixed(1);
   }
 
   async play() {
