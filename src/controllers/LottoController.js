@@ -1,4 +1,3 @@
-import { Random } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import PROPMT_MESSAGE from '../constants/propmtMessage.js';
@@ -13,6 +12,9 @@ class LottoController {
   purchasedPrice;
 
   purchasedAmount;
+
+  // model
+  lottoComparer;
 
   // FINAL
   LOTTO_PRICE = '1000';
@@ -50,6 +52,20 @@ class LottoController {
 
   calculateAmount(price, lottoPrice) {
     return price / lottoPrice;
+  }
+
+  async propmtBonusNumber() {
+    const { readLineAsync } = InputView;
+
+    const bonusNumbers = await readLineAsync(bonusNumber);
+    return bonusNumbers;
+  }
+
+  async propmtWinningNumber() {
+    const { readLineAsync } = InputView;
+
+    const winningNumbers = await readLineAsync(winningNumber);
+    return winningNumbers;
   }
 }
 export default LottoController;
