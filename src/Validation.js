@@ -1,10 +1,6 @@
 class Validation {
   static hasDuplication([...numbers]) {
-    const set = new Set();
-    numbers.forEach((number) => {
-      set.add(number);
-    });
-
+    const set = new Set(numbers);
     if (numbers.length !== set.size) {
       return true;
     }
