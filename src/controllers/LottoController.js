@@ -102,7 +102,7 @@ class LottoController {
   }
 
   validatePrice(price, lottoPrice) {
-    return price % lottoPrice !== 0;
+    return price % lottoPrice !== 0 || price <= 0;
   }
 
   calculateAmount(price, lottoPrice) {

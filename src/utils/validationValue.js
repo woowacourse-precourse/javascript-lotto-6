@@ -16,7 +16,7 @@ export function validateDuplicate(numbers) {
 }
 
 export function validateNumber(number) {
-  if (isNaN(number) || number < 1 || number > 45) {
+  if (isNaN(number) || number < 1 || number > 45 || number % 1 !== 0) {
     throw new Error(validRange);
   }
 }
