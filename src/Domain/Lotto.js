@@ -4,6 +4,7 @@ import ERROR from '../constants/error.js';
 import LOTTO from '../constants/lotto.js';
 import MESSAGE from '../constants/message.js';
 import { MessageFormat } from '../utils/messageFormat.js';
+import { isValidNumber } from '../utils/index.js';
 
 class Lotto {
   #numbers;
@@ -18,8 +19,6 @@ class Lotto {
       '5_bonus': 0,
       6: 0,
     };
-
-    console.log('this.#numbers', this.#numbers); // Array
   }
 
   #validate(numbers) {
@@ -27,7 +26,7 @@ class Lotto {
       throw new AppError(ERROR.message.invalidNumberLimit);
     }
 
-    if (!numbers.every((num) => num >= 1 && num <= 45 && Number.isInteger(num))) {
+    if (!numbers.every(isValidNumber)) {
       throw new AppError(ERROR.message.invalidNumberRange);
     }
 
@@ -49,16 +48,14 @@ class Lotto {
     const { count: bonusCount, key: bonusKey } = bonus;
 
     lottoList.forEach((lotto) => {
-      const hasWinningNumber = this.#numbers
-        .map(Number)
-        .filter((num) => lotto.includes(num)).length;
+      const matchedNumbers = this.#numbers.map(Number).filter((num) => lotto.includes(num));
+      const matchedNumbersKey = matchedNumbers.length;
       const hasBonusNumber = lotto.includes(Number(bonusNumber));
 
-      if (hasWinningNumber >= winningMin && !hasBonusNumber) {
-        this.result[hasWinningNumber] = (this.result[hasWinningNumber] || 0) + 1;
-      } else if (hasWinningNumber === bonusCount && hasBonusNumber) {
-        this.result[bonusKey] = (this.result[bonusKey] || 0) + 1;
-      }
+      if (matchedNumbers.length < winningMin) return;
+
+      const key = hasBonusNumber && matchedNumbersKey === bonusCount ? bonusKey : matchedNumbersKey;
+      this.result[key] = (this.result[key] || 0) + 1;
     });
 
     return this.result;
@@ -79,6 +76,7 @@ class Lotto {
       const prizeInfo = LOTTO.lottoPrizesMap.get(key);
 
       if (prizeInfo) total += prizeInfo.prize * count;
+
       return total;
     }, 0);
   }
@@ -88,13 +86,18 @@ class Lotto {
    */
   calculateReturnRate(totalPurchaseAmount) {
     const totalProfit = totalPurchaseAmount - this.calculateTotalPrizeAmount();
-    const totalReturnRate = Math.abs(1 - totalProfit / totalPurchaseAmount) * 100;
+    const totalReturnRate = Math.abs(1 - totalProfit / totalPurchaseAmount) * LOTTO.rate.percent;
     this.printTotalReturnRate(totalReturnRate);
   }
 
   printTotalReturnRate(totalReturnRate) {
     Console.print(MessageFormat.totalReturnRate(totalReturnRate));
   }
+  /**
+   * 당첨금 - 총비용 = 이익
+   * 이익 / 총비용 = 이익률
+   * 이익률 * 100 = 백분율
+   */
 }
 
 export default Lotto;
