@@ -48,8 +48,7 @@ export default class LottoMachine {
   }
 
   async #makeLottos() {
-    const purchaseAmountInput = await InputView.readPurchaseAmount();
-    const purchaseAmount = Number(purchaseAmountInput);
+    const purchaseAmount = this.#getPurchaseAmount();
     const lottoTicketCount = purchaseAmount / this.#INPUT_UNIT;
 
     // 추후 예외 처리 분리 예정
@@ -67,6 +66,11 @@ export default class LottoMachine {
   #sortLottoNumbers(lottoNumbers) {
     const sortLottoNumbers = lottoNumbers.sort((number1, number2) => number1 - number2);
     return sortLottoNumbers;
+  }
+
+  async #getPurchaseAmount() {
+    const purchaseAmountInput = await InputView.readPurchaseAmount();
+    return Number(purchaseAmountInput);
   }
 
   async #getWinningNumbers() {
