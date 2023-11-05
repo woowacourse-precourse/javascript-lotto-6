@@ -1,7 +1,7 @@
 import { inputBuyAmount } from '../view/View.js';
 
 export default class LottoGameController {
-  #buyAmount;
+  #buyLottoAmount;
 
   async play() {
     inputBuyAmount();

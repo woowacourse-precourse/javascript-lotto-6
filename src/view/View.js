@@ -9,7 +9,7 @@ export async function inputBuyAmount() {
       return inputValue;
     }
   } catch (err) {
-    Console.print(err.message);
+    Console.print(err);
     return inputBuyAmount();
   }
 }
