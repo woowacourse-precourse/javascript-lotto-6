@@ -51,13 +51,16 @@ const publishLotto = (count) => {
   }
 }
 
-const inputLottoNumbers = async() => {
+const getLotto = async() => {
   const input = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
   const inputNumbers = input.split(',').map(Number);
   const lotto = new Lotto(inputNumbers);
-  for (let i = 0; i < PublishedLotto.length; i += 1) {
+  return lotto;
+}
 
-  }
+const getBonus = async() => {
+  const bonus = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+  return bonus;
 }
 
 
