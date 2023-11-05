@@ -1,5 +1,8 @@
-import { checkHasDuplicate } from './util/validate/checkHasDuplicate';
-import { checkLottoIsNaN } from './util/validate/checkIsNaN';
+import { checkHasDuplicate } from './util/validate/checkHasDuplicate.js';
+import { checkLottoIsEmptyOrZero } from './util/validate/checkIsEmpty.js';
+import { checkLottoIsNaN } from './util/validate/checkIsNaN.js';
+import { checkLottoIsOutOfRange } from './util/validate/checkIsNotInRange.js';
+import { checkLottoIsInteger } from './util/validate/checkisInteger.js';
 
 class Lotto {
   #numbers;
@@ -13,10 +16,16 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
-    checkHasDuplicate(numbers);
     checkLottoIsNaN(numbers);
+    checkLottoIsEmptyOrZero(numbers);
+    checkLottoIsOutOfRange(numbers);
+    checkLottoIsInteger(numbers);
+    checkHasDuplicate(numbers);
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
   // TODO: 추가 기능 구현
 }
 
