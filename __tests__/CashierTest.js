@@ -1,4 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { mockRandoms } from '../testUtils';
 import Cashier from '../src/Cashier';
 import { ERROR_MESSAGE, LOTTO_FORM } from '../src/constant';
 import { getErrorMessage } from '../src/utils';
@@ -48,13 +48,6 @@ describe('Cashier 클래스 테스트', () => {
       [7, 11, 12, 8, 9, 10],
       [13, 14, 10, 16, 17, 1],
     ];
-
-    const mockRandoms = (numbers) => {
-      MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-      numbers.reduce((acc, number) => {
-        return acc.mockReturnValueOnce(number);
-      }, MissionUtils.Random.pickUniqueNumbersInRange);
-    };
 
     mockRandoms(RANDOM_NUMBERS);
 
