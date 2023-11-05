@@ -41,3 +41,7 @@ export const printWinningStatus = (rewardCount) => {
     )}`,
   );
 };
+
+export const printMyBenefit = (percetage) => {
+  Console.print(OUTPUT_MESSAGE.OUTPUT_TOTAL_BENEFIT(percetage));
+};
