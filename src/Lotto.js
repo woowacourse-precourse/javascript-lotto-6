@@ -21,9 +21,7 @@ class Lotto {
 
 	#validateNumberRange(numbers) {
 		const REGEX = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
-		const filterNumber = numbers.filter((num) => {
-			REGEX.test(num);
-		});
+		const filterNumber = numbers.filter((num) => REGEX.test(num));
 		if (filterNumber.length !== 6) {
 			throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
 		}
