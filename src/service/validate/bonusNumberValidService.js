@@ -1,8 +1,8 @@
 import { checkIsEmpty } from '../../util/validate/checkIsEmpty.js';
 import checkIsInWinningNumber from '../../util/validate/checkIsInWinningNumber.js';
-import { checkIsNaN } from '../../util/validate/checkIsNaN';
-import { checkNumberIsNotInRange } from '../../util/validate/checkIsNotInRange';
-import { checkIsInteger } from '../../util/validate/checkisInteger';
+import { checkIsNaN } from '../../util/validate/checkIsNaN.js';
+import { checkNumberIsNotInRange } from '../../util/validate/checkIsNotInRange.js';
+import { checkIsInteger } from '../../util/validate/checkisInteger.js';
 
 export default async function bonusNumberValidService(verifyValue, winningNumber) {
   try {
