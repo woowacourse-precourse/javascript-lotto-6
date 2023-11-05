@@ -1,17 +1,25 @@
 import LottoGenerator from "../src/LottoGenerator.js";
 
 describe("로또 생성 클래스 테스트", () => {
-  test("생성되는 로또 번호는 유니크한 1~45 범위의 6개 숫자로 구성된다.", () => {
-    const lottoNumbers = new LottoGenerator().generate();
-
-    for (const number of lottoNumbers) {
-      expect(number).toBeGreaterThanOrEqual(1);
-      expect(number).toBeLessThanOrEqual(45);
+  test.each([
+    [1000, 1],
+    [2000, 2],
+    [3000, 3],
+    [4000, 4],
+  ])(
+    "구입 금액 %p원만큼의 로또를 생성한다. (로또 1개당 1000원)",
+    (purchaseAmount, expectedCount) => {
+      const lottoGenerator = new LottoGenerator();
+      expect(lottoGenerator.purchase(purchaseAmount)).toHaveLength(
+        expectedCount
+      );
     }
+  );
 
-    expect(lottoNumbers).toHaveLength(6);
-
-    const uniqueLottoNumbers = new Set(lottoNumbers);
-    expect(uniqueLottoNumbers.size).toBe(6);
+  test("구입 금액이 1000원으로 나누어 떨어지지 않으면 예외처리한다.", () => {
+    const lottoGenerator = new LottoGenerator();
+    expect(() => {
+      lottoGenerator.purchase(12300);
+    }).toThrow("[ERROR]");
   });
 });
