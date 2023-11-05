@@ -13,6 +13,12 @@ class View {
     return await this.readLine("보너스 번호를 입력해 주세요.\n");
   }
 
+  async getLottos(Lottos) {
+    Lottos.map((Lotto) => {
+      Console.print(Lotto);
+    });
+  }
+
   async readLine(query) {
     return await Console.readLineAsync(query);
   }
