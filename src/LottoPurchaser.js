@@ -3,7 +3,6 @@ import { ERROR } from './Message.js';
 
 class LottoPurchaser {
   #ZERO = 0;
-  #THOUSAND = 1000;
 
   #purchaseAmount;
   #lottos = [];
@@ -26,9 +25,6 @@ class LottoPurchaser {
   #validate(value) {
     if (value === this.#ZERO) throw new Error(ERROR.falsy);
     if (Number.isNaN(value)) throw new Error(ERROR.falsy);
-    if (value % this.#THOUSAND !== this.#ZERO) {
-      throw new Error(ERROR.notBeDividedByThousand);
-    }
   }
 }
 
