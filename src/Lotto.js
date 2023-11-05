@@ -13,6 +13,9 @@ class Lotto {
     if (numbersSet.size !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    if (numbers.length !== numbersSet.size) {
+      throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
+    }
   }
 
   getNumbers() {
