@@ -30,11 +30,8 @@ const Validator = {
   },
 
   validateInRange(number) {
-    for (let i = 0; i < number.length; i += 1) {
-      const curNum = Number(number[i]);
-      if (LOTTO_NUMBER.minNum > curNum || LOTTO_NUMBER.maxNum < curNum) {
-        throw new Error(errorMessage.INVALID_IN_RANGE_WINNING_NUMBER);
-      }
+    if (LOTTO_NUMBER.minNum > number || LOTTO_NUMBER.maxNum < number) {
+      throw new Error(errorMessage.INVALID_IN_RANGE_WINNING_NUMBER);
     }
   },
 
@@ -56,12 +53,29 @@ const Validator = {
     this.validateMinPrice(input);
     this.validateDivisible(input);
   },
-
+  validateBonusNumberString(number) {
+    if (Number.isNaN(number)) {
+      throw new Error(errorMessage.INVALID_STRING_BONUS_NUMBER);
+    }
+  },
+  validateNumberInWinningNumbers(number, winningNumbers) {
+    if (winningNumbers.includes(number)) {
+      throw new Error(errorMessage.WINNING_NUMBER_IN_BONUS_NUMBER);
+    }
+  },
   validateWinningNumber(number) {
     this.validateRegExp(number.join(''), LOTTO_NUMBER.regExp, errorMessage.INVALID_STRING_WINNING_NUMBER);
-    this.validateInRange(number);
+    for (let i = 0; i < number.length; i += 1) {
+      this.validateInRange(number[i]);
+    }
     this.validateUnique(number);
     this.validateLength(number, LOTTO_NUMBER.count);
+  },
+
+  validateBonusNumber(number, winningNumbers) {
+    this.validateInRange(number);
+    this.validateBonusNumberString(number);
+    this.validateNumberInWinningNumbers(number, winningNumbers);
   },
 };
 

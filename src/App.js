@@ -15,7 +15,7 @@ class App {
   }
 
   async setGameConfig() {
-    const { lotteryTickets } = await this.readGameConfig();
+    const { lotteryTickets, winningNumbers } = await this.readGameConfig();
   }
 
   async readGameConfig() {
@@ -23,7 +23,8 @@ class App {
     this.#view.printPurchaseCount(purchaseCount);
     const lotteryTickets = this.getLotteryTickets(purchaseCount);
     const winningNumbers = await this.getWinningNumbers();
-    return { lotteryTickets };
+    const bonusNumber = await this.getBonusNumber(winningNumbers);
+    return { lotteryTickets, winningNumbers, bonusNumber };
   }
 
   async getPurchaseCount() {
@@ -55,7 +56,19 @@ class App {
       try {
         const winningNumbers = await this.#view.readWinningNumber();
         Validator.validateWinningNumber(winningNumbers);
-        return winningNumbers;
+        return winningNumbers.map(Number);
+      } catch (error) {
+        this.#outputView.print(MessageFormat.error(error.message));
+      }
+    }
+  }
+
+  async getBonusNumber(winningNumbers) {
+    while (true) {
+      try {
+        const bonusNumber = await this.#view.readBonusNumber();
+        Validator.validateBonusNumber(bonusNumber, winningNumbers);
+        return bonusNumber;
       } catch (error) {
         this.#outputView.print(MessageFormat.error(error.message));
       }
