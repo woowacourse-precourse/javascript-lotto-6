@@ -3,12 +3,12 @@ import LOTTO from "./constant/LOTTO.js";
 import PRIZE from "./constant/PRIZE.js";
 
 class LottoPrizeManager {
-  #winnningNumberArray;
+  #winningNumberArray;
   #bonusNumber;
 
   constructor(winningNumberArray, bonusNumber) {
     this.#validateWinningNumber(winningNumberArray);
-    this.#winnningNumberArray = winningNumberArray.map((str) => +str);
+    this.#winningNumberArray = winningNumberArray.map((str) => +str);
 
     this.#validateBonusNumber(bonusNumber);
     this.#bonusNumber = bonusNumber;
