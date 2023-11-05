@@ -1,4 +1,5 @@
 import Lotto from "../src/Lotto.js";
+import App from "../src/App.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -18,9 +19,9 @@ describe("로또 클래스 테스트", () => {
   test("새로운 로또 생성", () => {
     const money = 4000;
     let newLotto;
-    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const app = new App();
 
-    newLotto = lotto.makeLotto(money);
+    newLotto = app.makeLotto(money);
 
     expect(newLotto.length).toEqual(money / 1000);
   });
