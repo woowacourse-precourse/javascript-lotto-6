@@ -15,7 +15,7 @@ class Lotto {
       const RANDOM_NUMBER = Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
       if (!LOTTO.includes(RANDOM_NUMBER)) LOTTO.push(RANDOM_NUMBER);
     }
-    return LOTTO;
+    return LOTTO.sort((a, b) => a - b);
   }
 
   // #validate(numbers) {
@@ -33,6 +33,7 @@ class Lotto {
       LOTTO_LIST.push(LOTTO);
       count++;
     }
+
     return LOTTO_LIST;
   }
 }
