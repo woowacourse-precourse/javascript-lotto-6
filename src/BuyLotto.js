@@ -1,5 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { ERROR, LOTTO, OUTPUT_MESSAGE } from './Constant';
+import { ERROR, LOTTO, OUTPUT } from './Constant';
 
 class BuyLotto {
   #price;
@@ -42,15 +42,11 @@ class BuyLotto {
   }
 
   #printPurchasedLotto() {
-    let message = `${this.#lottos.length}${
-      OUTPUT_MESSAGE.PRINT_PURCHASE_QUANTITY
-    }`;
+    let message = `${this.#lottos.length}${OUTPUT.PRINT_PURCHASE_QUANTITY}`;
     this.#lottos.forEach(lotto => {
       message += `[${lotto}]\n`;
     });
-    Console.print(
-      message.replaceAll(OUTPUT_MESSAGE.COMMA, `${OUTPUT_MESSAGE.COMMA} `),
-    );
+    Console.print(message.replaceAll(OUTPUT.COMMA, `${OUTPUT.COMMA} `));
   }
 
   getLottos() {
