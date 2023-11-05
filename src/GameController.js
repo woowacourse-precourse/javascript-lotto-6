@@ -15,7 +15,7 @@ class GameController {
     await this.getMoney();
     this.createLottos();
     this.printLottoInfo();
-    this.getWinningNumbers();
+    await this.getWinningNumbers();
   }
 
   async getMoney() {
