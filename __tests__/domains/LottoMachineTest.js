@@ -1,4 +1,3 @@
-import { Random } from '@woowacourse/mission-utils';
 import { LOTTO } from '../../src/constants/lotto';
 import LottoMachine from '../../src/domains/LottoMachine';
 import RandomNumberGenerator from '../../src/utils/RandomNumberGenerator';
