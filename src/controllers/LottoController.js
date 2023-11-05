@@ -28,5 +28,15 @@ class LottoController {
       await this.askPurchase();
     }
   }
+
+  async askWinningNumber() {
+    try {
+      const winningNumber = await InputView.askWinningNumber();
+      this.#winnginNumber.setWinningNumber(winningNumber);
+    } catch (error) {
+      OutputView.print(error.message);
+      await this.askWinningNumber();
+    }
+  }
 }
 export default LottoController;
