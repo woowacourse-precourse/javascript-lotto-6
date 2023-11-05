@@ -41,7 +41,8 @@ class App {
     // 7. 당첨 번호 입력 안내 문구 출력
     printMessage("\n");
     printMessage(WINNING_NUMBERS_INPUT_REQUEST);
-    // this.#winning_number = await getPurchaseAmount(validateWinningNumber);
+    // 8. 당첨 번호 입력받기
+    this.#winning_number = await getPurchaseAmount(validateWinningNumber);
   }
 }
 
