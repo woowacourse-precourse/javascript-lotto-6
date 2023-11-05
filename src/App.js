@@ -10,6 +10,11 @@ class App {
     if (userMoney % 1000 > 0 || String(userMoney)[0] === '0' || userMoney <= 0) {
       throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
     }
+    for (let i=0; i < userMoney.length; i++) {
+      if (isNaN(userMoney[i])) {
+        throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
+      }
+    };
 
     const randomCount = (userMoney / 1000);
     Console.print(MESSAGE_INPUT(randomCount).COUNT);
