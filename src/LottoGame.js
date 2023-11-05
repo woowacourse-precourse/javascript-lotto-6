@@ -8,11 +8,13 @@ class LottoGame {
   constructor(myLotto, winningLotto) {
     this.lottos = myLotto.map((numbers) => new Lotto(numbers));
     this.winningLotto = winningLotto;
+    this.statistics = [];
   }
 
   start() {
     this.lottos.forEach((lotto) => {
       lotto.checkResult(this.winningLotto);
+      this.statistics.push(lotto.result);
     });
   }
 }

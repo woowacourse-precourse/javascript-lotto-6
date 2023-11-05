@@ -21,7 +21,8 @@ class App {
 
     const lottoGame = new LottoGame(myLotto, winningLotto);
 
-    Console.print(lottoGame.lottos);
+    lottoGame.start();
+    Console.print(lottoGame.statistics.join("\n"));
   }
 
   async getAmount() {

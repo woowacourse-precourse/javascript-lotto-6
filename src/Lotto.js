@@ -27,11 +27,13 @@ class Lotto {
     if (cntCorrect === 6) {
       this.result = "6개 일치";
     }
-    if (cntCorrect === 5 && checkBonus) {
-      this.result = "5개 일치, 보너스 볼 일치";
-    }
+
     if (cntCorrect === 5) {
-      this.result = "5개 일치";
+      if (checkBonus) {
+        this.result = "5개 일치, 보너스 볼 일치";
+      } else {
+        this.result = "5개 일치";
+      }
     }
     if (cntCorrect === 4) {
       this.result = "4개 일치";
