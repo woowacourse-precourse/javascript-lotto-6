@@ -13,8 +13,13 @@ class App {
   }
 
   async inputMoney() {
-    const answer = await InputView.readMoney();
-    await this.buyLotto(answer);
+    try {
+      const answer = await InputView.readMoney();
+      await this.buyLotto(answer);
+    } catch (e) {
+      OutputView.printError(e);
+      await this.inputMoney();
+    }
   }
 
   async buyLotto(money) {
@@ -28,11 +33,15 @@ class App {
   }
 
   async inputNumbers() {
-    const numbers = await InputView.readNumbers();
-    const bonus = await InputView.readBonus();
-    this.lottoCalculator.setWinningNumber(numbers, bonus);
-
-    await this.printResult();
+    try {
+      const numbers = await InputView.readNumbers();
+      const bonus = await InputView.readBonus();
+      this.lottoCalculator.setWinningNumber(numbers, bonus);
+      await this.printResult();
+    } catch (e) {
+      OutputView.printError(e);
+      await this.inputNumbers();
+    }
   }
 
   async printResult() {

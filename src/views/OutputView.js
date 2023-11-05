@@ -46,6 +46,14 @@ const OutputView = {
     });
     Console.print(`총 수익률은 ${profit}%입니다.`);
   },
+
+  /**
+   * 에러 메시지 출력
+   * @param {Error} error
+   */
+  printError: (error) => {
+    Console.print(error.message);
+  },
 };
 
 export default OutputView;
