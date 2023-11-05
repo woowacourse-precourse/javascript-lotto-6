@@ -1,4 +1,4 @@
-import { LOTTO, LOTTO_MATCHING, LOTTO_PRIZE } from './lotto.js';
+import { LOTTO, LOTTO_PRIZE } from './lotto.js';
 
 const INPUT_MESSAGE = {
   purchaseAmount: '구입금액을 입력해 주세요.\n',
@@ -8,11 +8,18 @@ const INPUT_MESSAGE = {
 
 const PURCHASE_MESSAGE = (count) => `\n${count}개를 구매했습니다.`;
 
+const MATCHING_MESSAGE = {
+  first: '6개 일치',
+  second: '5개 일치, 보너스 볼 일치',
+  third: '5개 일치',
+  fourth: '4개 일치',
+  fifth: '3개 일치',
+};
+
 const STATISTICS_MESSAGE = {
   output: '\n당첨 통계\n---\n',
-  bonusMatching: '보너스 볼 일치',
   result(rank, count) {
-    return `${LOTTO_MATCHING[rank]} (${LOTTO_PRIZE[rank]}원) - ${count}개\n`;
+    return `${MATCHING_MESSAGE[rank]} (${LOTTO_PRIZE[rank]}원) - ${count}개\n`;
   },
   rateOfReturn(rate) {
     return `총 수익률은 ${rate}%입니다.`;

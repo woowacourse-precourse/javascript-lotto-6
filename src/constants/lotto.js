@@ -15,12 +15,12 @@ const LOTTO_PRIZE = {
   fifth: 5000,
 };
 
-const LOTTO_MATCHING = {
-  first: '6개 일치',
-  second: '5개 일치, 보너스 볼 일치',
-  third: '5개 일치',
-  fourth: '4개 일치',
-  fifth: '3개 일치',
+const MATCHING_COUNT = {
+  first: 6,
+  second: 5,
+  third: 5,
+  fourth: 4,
+  fifth: 3,
 };
 
-export { LOTTO, LOTTO_PRIZE, LOTTO_MATCHING };
+export { LOTTO, LOTTO_PRIZE, MATCHING_COUNT };
