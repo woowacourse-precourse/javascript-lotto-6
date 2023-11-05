@@ -2,6 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import Lotto from '../model/Lotto.js';
+import { Place, calculateReward } from '../utils/Place.js';
 
 const { Random } = MissionUtils;
 class LottoController {
@@ -20,6 +21,8 @@ class LottoController {
     OutputView.printLottos(this.countsOfLottos, this.lottoArray);
     this.winningNumbers = await InputView.inputNumbers();
     this.bonusNumber = await InputView.inputBonusNumber();
+    this.makeStatistics();
+    OutputView.printResult();
   }
 
   howManyLottos() {
@@ -31,7 +34,7 @@ class LottoController {
     for (let i = 0; i < this.countsOfLottos; i += 1) {
       const lottoNumbers = this.pickRandomNumbers();
       const sortedlottoNumbers = lottoNumbers.sort((a, b) => a - b);
-      const lotto = new Lotto([...sortedlottoNumbers]);
+      const lotto = new Lotto(sortedlottoNumbers);
       this.lottoArray.push(lotto);
     }
   }
@@ -40,8 +43,18 @@ class LottoController {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  calculateBenefit(earnedMoney) {
-    // this.usedMoney
+  makeStatistics() {
+    this.lottoArray.forEach((lotto) =>
+      lotto.compareNumbers(this.winningNumbers, this.bonusNumber)
+    );
+    this.calculateProfit();
+  }
+
+  calculateProfit() {
+    // 돈 계산하고, 수익률 Place에 저장
+    const profitPercentage = (calculateReward() / this.usedMoney) * 100;
+    const rounded = Number(profitPercentage.toFixed(2));
+    Place.profit = rounded;
   }
 }
 
