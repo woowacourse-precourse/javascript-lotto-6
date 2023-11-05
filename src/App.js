@@ -25,6 +25,12 @@ class App {
   } // ui로직
 }
 
+async getLottoNumber(){ 
+  let COUNT = this.USERSCASH / 1000;
+  Console.print(`${COUNT}개를 구매했습니다.`);
+    await domain.GetLottoNumbers(COUNT,this.LOTTOS);
+  }//도메인 로직
+
 
 
 
@@ -32,7 +38,7 @@ class App {
   async play() {
     while(true){
    await this.getUsersCashAndCheck();
-
+   await this.getLottoNumber();
    break;
     }
   }
@@ -40,6 +46,6 @@ class App {
 }
 
 let app = new App();
-
+let domain = new Domain();
 
 export default App;
