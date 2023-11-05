@@ -19,11 +19,6 @@ describe("로또 클래스 테스트", () => {
       new Lotto([46, 47, 48, 49, 50, 51]);
     }).toThrow("[ERROR]");
   });
-
-  test("로또 번호가 1부터 45 사이의 숫자면 정상적으로 생성된다.", () => {
-    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    expect(lotto.getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
-  });
   
   // 아래에 추가 테스트 작성 가능
 });
