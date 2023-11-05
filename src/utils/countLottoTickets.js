@@ -1,4 +1,5 @@
-import { Random, Console } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
+import generateLottoTickets from './generateLottoTickets';
 
 const countLottoTickets = (money) => {
   const getNumberOfLottoTickets = money / 1000;
@@ -8,4 +9,4 @@ const countLottoTickets = (money) => {
   return generatedTickets;
 };
 
-module.exports = { countLottoTickets };
+export default countLottoTickets;
