@@ -1,26 +1,45 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT_MESSAGE } from './constants/message.js';
+import { ERROR_MESSAGE, INPUT_MESSAGE } from './constants/message.js';
+import { validation } from './utils/validation.js';
+import ValidateError from './error/ValidateError.js';
 
 class User {
   async getLottoPurchasePrice() {
-    const lottoPurchasePrice = await Console.readLineAsync(
-      INPUT_MESSAGE.lottoPurchasePrice,
-    );
-    return lottoPurchasePrice;
+    while (true) {
+      try {
+        const lottoPurchasePrice = await Console.readLineAsync(INPUT_MESSAGE.lottoPurchasePrice);
+
+        this.#validate(lottoPurchasePrice);
+
+        return Number(lottoPurchasePrice);
+      } catch (error) {
+        Console.print(error);
+      }
+    }
   }
 
-  async getLottoWinningNumbers() {
-    const lottoWinningNumbers = await Console.readLineAsync(
-      INPUT_MESSAGE.lottoWnningNumbers,
-    );
-    return lottoWinningNumbers;
+  #validate(price) {
+    if (validation.isEmpty(price)) {
+      throw new ValidateError(ERROR_MESSAGE.empty);
+    }
+
+    const numberPrice = Number(price);
+
+    this.#numberValidate(numberPrice);
   }
 
-  async getLottoBonusNumber() {
-    const lottoBonusNumber = await Console.readLineAsync(
-      INPUT_MESSAGE.lottoBonusNumber,
-    );
-    return lottoBonusNumber;
+  #numberValidate(price) {
+    if (validation.isNumberZero(price)) {
+      throw new ValidateError(ERROR_MESSAGE.notZero);
+    }
+
+    if (isNaN(price)) {
+      throw new ValidateError(ERROR_MESSAGE.notNumber);
+    }
+
+    if (validation.isNotLottoPurchagePriceRange(price)) {
+      throw new ValidateError(ERROR_MESSAGE.lottoPurchasePriceRange);
+    }
   }
 }
 
