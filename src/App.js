@@ -107,8 +107,28 @@ export function lottoReader(lotto, winning, bonus) {
   return [sameNumbers.length, sameBonus.length];
 }
 
-function lottoResultsPrinter(results, count) {
-  
+export function lottoResultsPrinter(results, counts) {
+  for (let i = 0; i < counts; i++) {
+    lottoResultCounter(results[i]);
+  }
+}
+
+function lottoResultCounter(result) {
+  for (let i = 3; i < 7; i++) {
+    if (result[0] === i && i !== 5) {
+      winningDetails.winning[i-3] += 1;
+    }
+  }
+  if ( result[0] === 5) {
+    lottoResultBonusCounter(result);
+  }
+}
+
+function lottoResultBonusCounter(result) {
+  if (result[1] === 0) {
+    winningDetails.winning[2] += 1;
+  }
+  winningDetails.winning[3] += 1;
 }
 
 export function lottoResultPrinter(results, count) {
