@@ -16,6 +16,10 @@ class LottoPrizeManager {
     if (!Validator.isArrayLengthEqualTo(array, LOTTO.SIZE)) {
       throw new Error(PRIZE.ERROR.WINNING_NUMBER_SIZE);
     }
+
+    if (Validator.hasDuplicate(array)) {
+      throw new Error(PRIZE.ERROR.WINING_NUMBER_DUPLICATE);
+    }
   }
 }
 
