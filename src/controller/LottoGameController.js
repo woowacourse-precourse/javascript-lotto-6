@@ -27,16 +27,7 @@ class LottoGameController {
 
   async start() {
     await this.buyLottos();
-
-    // const loopCount = this.#moneyInstance.getPurchaseCount();
-    // Array.from({ length: loopCount }).forEach(() => {
-    //   const lotto = new Lotto(
-    //     this.generateLottoNumbers().sort((a, b) => a - b),
-    //   );
-    //   this.lottoTickets.addLotto(lotto);
-    //   this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
-    // });
-
+    this.printMyLottoNumbers();
     // while (true) {
     //   try {
     //     this.#winningNumbers = await this.getWinningNumbers();
@@ -54,6 +45,23 @@ class LottoGameController {
     //     this.outputView.print(error);
     //   }
     // }
+  }
+
+  printMyLottoNumbers() {
+    const loopCount = this.#moneyInstance.getPurchaseCount();
+    Array.from({ length: loopCount }).forEach(() => {
+      const lotto = this.createLottoInstance();
+      this.addLottoTicket(lotto);
+      this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
+    });
+  }
+
+  addLottoTicket(lottoInstance) {
+    this.lottoTickets.addLotto(lottoInstance);
+  }
+
+  createLottoInstance() {
+    return new Lotto(this.generateLottoNumbers().sort((a, b) => a - b));
   }
 
   async createMoneyInstance() {
