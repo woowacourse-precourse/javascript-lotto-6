@@ -1,12 +1,17 @@
+import Money from "./Money";
 import System from "./System";
 import ConsolePrint from "./views/ConsolePrint";
 
 class App {
   async play() {
+    const moneyInstance = new Money();
+    await moneyInstance.initialize();
+    const money = moneyInstance.getMoney();
+
     const system = new System();
+
     const consolePrint = new ConsolePrint();
-    const money = await system.getMoney();
-    const lottoCount = await system.getLottoCount(money);
+    const lottoCount = await moneyInstance.getLottoCount();
 
     const lottos = await system.purchaseLottos(lottoCount);
     consolePrint.printLottos(lottos);
