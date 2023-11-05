@@ -16,6 +16,7 @@ class GameController {
     this.createLottos();
     this.printLottoInfo();
     await this.getWinningNumbers();
+    await this.getBonusNumbers();
   }
 
   async getMoney() {
@@ -52,6 +53,17 @@ class GameController {
       try {
         const winningNumber = await InputView.inputWinningNumbers();
         const winningLotto = new Lotto(winningNumber);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  async getBonusNumbers() {
+    while (true) {
+      try {
+        const bonusNumber = await InputView.inputBonusNumber();
         break;
       } catch (error) {
         Console.print(error.message);

@@ -30,6 +30,11 @@ class InputView {
     splitedNumbers.map((number) => number.trim());
     return splitedNumbers;
   }
+
+  static async inputBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(MESSAGE.input.bonusNumber);
+    return bonusNumber;
+  }
 }
 
 export default InputView;
