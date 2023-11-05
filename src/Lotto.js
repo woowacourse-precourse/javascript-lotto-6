@@ -23,15 +23,16 @@ class Lotto {
     Console.print(`[${this.#numbers.join(', ')}]`);
   }
 
-  result(winningNum, bonusNum){
+  result(winningNums, bonusNum){
     const res = {cnt: 0, hasBonus:false}
     //TODO: 매직넘버로 바꾸기
     for (let i = 0; i<6; i++){
-      if(this.#numbers.includes(winningNum[i])){
+      if(this.#numbers.includes(winningNums[i])){
         res.cnt++;
       }
     }
     if(this.#numbers.includes(bonusNum)) res.hasBonus = true;
+    Console.print( winningNums, bonusNum);
     return res;
   }
 }

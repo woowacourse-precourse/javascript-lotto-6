@@ -37,17 +37,19 @@ class App {
       const lotto = new Lotto(numbers);
       this.lottos.push(lotto);
     }
-
-    const winningNum = await Console.readLineAsync(
+    const winningNumbersInput = await Console.readLineAsync(
       "당첨 번호를 입력해 주세요.\n"
     );
+    const winningNums = winningNumbersInput.split(',').map(number => Number(number.trim()));
     const bonusNum = await Console.readLineAsync(
       "보너스 번호를 입력해 주세요.\n"
     );
 
     //TODO: 함수로 빼기 countMatchingNum
     for(let i = 0; i<lottoCnt; i++){
-      const res = this.lottos[i].result(winningNum, bonusNum);
+      const res = this.lottos[i].result(winningNums, bonusNum);
+    Console.print(res);
+
       switch (res.cnt){
         case 3:
           this.statistics.fifth_prize++;
@@ -74,18 +76,25 @@ class App {
           break;
       }
     }
+    Console.print(`
+    당첨 통계
+    ---
+    3개 일치 (5,000원) - ${this.statistics.fifth_prize}개
+    4개 일치 (50,000원) - ${this.statistics.fourth_prize}개
+    5개 일치 (1,500,000원) - ${this.statistics.third_prize}개
+    5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.statistics.second_prize}개
+    6개 일치 (2,000,000,000원) - ${this.statistics.first_prize}개
+    총 수익률은 ${Number(this.statistics.totalPrice)/Number(purchaseAmountInput)}%입니다.
+    `);
 
    
-    Console.print(`
-당첨 통계
----
-3개 일치 (5,000원) - ${this.statistics.fifth_prize}개
-4개 일치 (50,000원) - ${this.statistics.fourth_prize}개
-5개 일치 (1,500,000원) - ${this.statistics.third_prize}개
-5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.statistics.second_prize}개
-6개 일치 (2,000,000,000원) - ${this.statistics.first_prize}개
-총 수익률은 ${Number(this.statistics.totalPrice)/Number(purchaseAmountInput)}%입니다.
-`);
+    // Console.print("당첨 통계\n---");
+    // Console.print(`3개 일치 (5,000원) - ${this.statistics.fifth_prize}개`);
+    // Console.print(`4개 일치 (50,000원) - ${this.statistics.fourth_prize}개`);
+    // Console.print(`5개 일치 (1,500,000원) - ${this.statistics.third_prize}개`);
+    // Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.statistics.second_prize}개`);
+    // Console.print(`6개 일치 (2,000,000,000원) - ${this.statistics.first_prize}개`);
+    // Console.print(`수익률은 ${Number(this.statistics.totalPrice)/Number(purchaseAmountInput)}%입니다.`);
   }
 }
 export default App;
