@@ -12,24 +12,18 @@ class Controller {
   #bonusNumber;
 
   async progress() {
-    try {
-      await this.#getLottoTicketList();
-    } catch (error) {
-      OutputView.printMessage(error.message);
-      await this.#getLottoTicketList();
-    }
+    await this.#handlerErrorAndProceed(this.#getLottoTicketList);
     this.#displayLottoTicket();
+    await this.#handlerErrorAndProceed(this.#getWinningNumbers);
+    await this.#handlerErrorAndProceed(this.#getBonusNumber);
+  }
+
+  async #handlerErrorAndProceed(method) {
     try {
-      await this.#getWinningNumbers();
+      await method.call(this);
     } catch (error) {
       OutputView.printMessage(error.message);
-      await this.#getWinningNumbers();
-    }
-    try {
-      await this.#getBonusNumber();
-    } catch (error) {
-      OutputView.printMessage(error.message);
-      await this.#getBonusNumber();
+      await this.#handlerErrorAndProceed(method);
     }
   }
 
