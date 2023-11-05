@@ -1,5 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import LOTTO_NUMBER from './constants/lottoNumber.js';
+import ERROR from './constants/error.js';
+import MessageFormat from './utils/messageFormat.js';
 
 class Lotto {
   #numbers;
@@ -11,7 +13,11 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(MessageFormat.error(ERROR.errorMessage.INVALID_LENGTH_WINNING_NUMBER));
+    }
+    const setNumber = new Set(numbers);
+    if (numbers.length !== setNumber.size) {
+      throw new Error(MessageFormat.error(ERROR.errorMessage.INVALID_UNIQUE_WINNING_NUMBER));
     }
   }
 
