@@ -13,7 +13,7 @@ class Input {
 
   inputMoney() {
     if (!InputValidator.validMoney(this.#money)) {
-      throw new Error("금액 오류");
+      throw new Error("금액 오류"); // 다시 입력받아야 함
     } else {
       return Math.floor(this.#money / 1000);
     }

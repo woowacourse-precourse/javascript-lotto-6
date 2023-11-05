@@ -21,6 +21,7 @@ class Lotto {
       }
     }
   }
+  //중복 체크도 해야 함
 }
 
 export default Lotto;

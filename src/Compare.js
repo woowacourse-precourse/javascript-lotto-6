@@ -21,8 +21,6 @@ class Compare {
     this.#totalLotto.forEach((num) => {
       this.conpareNum(num);
     });
-    Console.print(this.#sameNum);
-    Console.print(this.#sameBonus);
   }
 
   conpareNum(num) {

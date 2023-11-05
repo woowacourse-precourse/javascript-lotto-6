@@ -6,6 +6,7 @@ import Input from "./Input.js";
 import Compare from "./Compare.js";
 
 class App {
+  #inputMoney = 0;
   #trialNum = 0;
   #totalLotto = [];
   #winningLotto = [];
@@ -18,9 +19,9 @@ class App {
 
   async inputAmount() {
     Console.print("구입금액을 입력해 주세요.");
-    const money = await Console.readLineAsync("");
+    this.#inputMoney = await Console.readLineAsync("");
 
-    const input = new Input(money);
+    const input = new Input(this.#inputMoney);
 
     this.#trialNum = input.inputMoney();
 
@@ -36,9 +37,9 @@ class App {
     this.#winningLotto = inputWinnNum.inputWin();
 
     Console.print("보너스 번호를 입력해 주세요.");
-    this.#bonus = await Console.readLineAsync("");
+    const bonus = await Console.readLineAsync("");
 
-    const inputBonus = new Input(this.#bonus);
+    const inputBonus = new Input(bonus);
     this.#bonus = inputBonus.inputBonus();
 
     this.compare();
@@ -51,16 +52,10 @@ class App {
       Console.print(newLotto);
       this.#totalLotto.push(newLotto);
     }
-
-    Console.print(this.#totalLotto);
     this.inputWinning();
   }
 
   compare() {
-    Console.print(this.#winningLotto);
-    Console.print(Number(this.#bonus));
-    Console.print(this.#totalLotto);
-
     this.#totalLotto.forEach((lotto) => {
       const result = new Compare(
         lotto,
@@ -72,6 +67,16 @@ class App {
       this.#compareResult.push(same);
     });
     Console.print(this.#compareResult);
+
+    this.printResult();
+  }
+
+  printResult() {
+    let result = new Output();
+    const lottoResult = result.calcLottoResult(
+      this.#compareResult,
+      this.#inputMoney
+    );
   }
 }
 
