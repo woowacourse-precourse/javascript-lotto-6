@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { LOTTO } from "../constants/lotto.js";
 
 const pickUniqueNumbersInRange = (start, end, count) =>
   MissionUtils.Random.pickUniqueNumbersInRange(start, end, count);

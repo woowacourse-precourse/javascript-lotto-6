@@ -4,7 +4,8 @@ import { ResultMessage } from "./message.js";
 const print = (msg) => MissionUtils.Console.print(msg);
 
 const Print = Object.freeze({
-  purchaseCount: (num) => print(ResultMessage.purchaseCount(num)),
+  error: (e) => print(e.message),
+  purchaseLottos: (lottos) => print(ResultMessage.purchaseLottos(lottos)),
   lottoResult: (arr) => print(ResultMessage.lottoResult(arr)),
   lottoProfit: (ratio) => print(ResultMessage.lottoProfit(ratio)),
 });

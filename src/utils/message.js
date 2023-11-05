@@ -13,9 +13,9 @@ const ErrorMessage = Object.freeze({
 });
 
 const ReadMessage = Object.freeze({
-  purchaseAmount: () => `구입금액을 입력해 주세요.`,
-  answerNumbers: () => `\n당첨 번호를 입력해 주세요.`,
-  bonusNumber: () => `\n보너스 번호를 입력해 주세요.`,
+  purchaseAmount: () => `구입금액을 입력해 주세요.\n`,
+  answerNumbers: () => `\n당첨 번호를 입력해 주세요.\n`,
+  bonusNumber: () => `\n보너스 번호를 입력해 주세요.\n`,
 });
 
 const ResultMessage = Object.freeze({
@@ -29,7 +29,7 @@ const ResultMessage = Object.freeze({
       const reward = REWARD[index].reward.toLocaleString();
       return `${match}개 일치${bonusMessage} (${reward}원) - ${count}개`;
     });
-    return `당첨 통계\n---\n${results.reverse().join("\n")}`;
+    return `\n당첨 통계\n---\n${results.reverse().join("\n")}`;
   },
 
   lottoProfit: (ratio) => `총 수익률은 ${ratio}%입니다.`,
