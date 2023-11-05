@@ -1,3 +1,7 @@
+// Model
+
+import { ERROR } from './lib/Prompt';
+
 class Lotto {
   #numbers;
 
@@ -7,9 +11,9 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    if (numbers.length !== 6) throw new Error(ERROR.length);
+    const tempSet = new Set(numbers);
+    if (tempSet.size !== numbers.legnth) throw new Error(ERROR.duplicate);
   }
 
   // TODO: 추가 기능 구현
