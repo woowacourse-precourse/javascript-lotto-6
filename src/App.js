@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { isValidLottoAmountInput } from './Utils/validation.js';
 import InputView from './view/inputView.js';
 
 class App {
@@ -13,7 +14,7 @@ class App {
       try {
         lottoAmount = await InputView.readLottoAmount();
 
-        if (!this.isValidLottoAmountInput(lottoAmount)) {
+        if (!isValidLottoAmountInput(lottoAmount)) {
           throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
         } else {
           return lottoAmount;
