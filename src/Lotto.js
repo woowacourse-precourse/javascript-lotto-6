@@ -9,6 +9,7 @@ import {
   checkBonusDuplicates,
 } from "./validators/bonusNumberValidator.js";
 import { errorMessage } from "./constants/messages.js";
+import { lottoCount } from "./constants/constants.js";
 
 class Lotto {
   #numbers;
@@ -47,6 +48,19 @@ class Lotto {
 
   printLottoNumbers() {
     Console.print(`[${this.#numbers.join(", ")}]`);
+  }
+
+  compareLotto(winningLotto) {
+    const compareCount = this.#numbers.filter((number) =>
+      winningLotto.#numbers.includes(number)
+    );
+    if (
+      compareCount.length === lottoCount.THIRD &&
+      this.#numbers.includes(winningLotto.bonus)
+    ) {
+      return lottoCount.SECOND;
+    }
+    return compareCount.length;
   }
 }
 
