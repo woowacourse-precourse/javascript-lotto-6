@@ -9,6 +9,14 @@ class UserInterface {
       return Number(input);
     }
   }
+
+  static displayLottos(lottos) {
+    MissionUtils.Console.print(`\n${lottos.length}${MESSAGE.RESULT_LOTTO_COUNT}`);
+    lottos.map((lotto) => {
+      const numbers = lotto.getNumbers().join(", ");
+      MissionUtils.Console.print(`[${numbers}]`);
+    });
+  }
 }
 
 export default UserInterface;
