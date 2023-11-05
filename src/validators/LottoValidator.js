@@ -1,4 +1,4 @@
-import { LOTTO_ERROR_MESSAGE } from '../constant.js';
+import { LOTTO_ERROR_MESSAGE, ONLY_NUMBER_REGEXP } from '../constant.js';
 import ValidationError from '../errors/ValidationError.js';
 
 class LottoValidator {
@@ -41,6 +41,7 @@ class LottoValidator {
   }
 
   static bonusValidate(winningNumbers, bonusNumber) {
+    this.isNumber(bonusNumber);
     this.duplicateBonusNumber(winningNumbers, bonusNumber);
     this.isLottoNumberRange(bonusNumber);
 
@@ -48,11 +49,19 @@ class LottoValidator {
   }
 
   static duplicateBonusNumber(winningNumbers, bonusNumber) {
-    if (winningNumbers.includes(bonusNumber)) {
+    if (winningNumbers.includes(Number(bonusNumber))) {
       throw new ValidationError(LOTTO_ERROR_MESSAGE.duplicated_bonus);
     }
 
     return true;
+  }
+
+  static isNumber(number) {
+    if (ONLY_NUMBER_REGEXP.test(number)) {
+      return true;
+    }
+
+    throw new ValidationError(LOTTO_ERROR_MESSAGE.out_of_range);
   }
 
   static getInputNumberArray(input) {

@@ -5,6 +5,7 @@ export const FOUR_RANK = 'four_rank';
 export const FIVE_RANK = 'five_rank';
 
 export const EMPTY = '';
+export const ONLY_NUMBER_REGEXP = /^\d+$/;
 
 export const LOTTO_SETTING = Object.freeze({
   min: 1,

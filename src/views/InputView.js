@@ -21,7 +21,7 @@ class InputView {
 
   static async askBonusNumber(winningNumbers) {
     const answer = await Console.readLineAsync(INPUT_MESSAGE.bonus_number);
-    LottoValidator.bonusValidate(winningNumbers, Number(answer));
+    LottoValidator.bonusValidate(winningNumbers, answer);
 
     return Number(answer);
   }
