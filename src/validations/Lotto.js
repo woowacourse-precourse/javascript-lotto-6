@@ -73,7 +73,7 @@ const Validation = {
    * @param {number} money
    */
   validateMoney: (money) => {
-    if (!Number.isSafeInteger(money) || money < 0) {
+    if (!Number.isSafeInteger(Number(money)) || money < 0) {
       throw new Error(`${MESSAGE.ERROR_PREFIX}${MESSAGE.INVALID_MONEY}`);
     }
   },
