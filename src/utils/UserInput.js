@@ -27,6 +27,18 @@ class UserInput {
     });
   }
 
+  static validateBonusNumber(input) {
+    InputError.checkEmptyInputError(input);
+
+    const inputToNumber = parseInt(input, 10);
+
+    InputError.checkNumberError(inputToNumber);
+    InputError.checkNagativeNumberError(inputToNumber);
+    InputError.checkOutOfRangeNumbers(inputToNumber);
+
+    return inputToNumber;
+  }
+
   static async getPurchaseAmount() {
     const lottoAmount = await Console.readLineAsync(
       "구입금액을 입력해 주세요.\n"
@@ -46,7 +58,7 @@ class UserInput {
 
     this.validateLottoNumbers(lottoList);
 
-    return lottoList;
+    return lottoList.map(Number);
   }
 
   static async getBonusNumber() {
@@ -54,7 +66,9 @@ class UserInput {
       "보너스 번호를 입력해 주세요.\n"
     );
 
-    return bonusNumber;
+    const validateNumber = this.validateBonusNumber(bonusNumber);
+
+    return validateNumber;
   }
 }
 
