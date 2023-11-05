@@ -15,11 +15,16 @@ const winnigNumberValidator = {
     splitedWinnigNumbers.forEach((number) => commonValidator.checkLottoNumberRange(number));
   },
 
+  checkDuplicate(splitedWinnigNumbers) {
+    commonValidator.checkDuplicate(splitedWinnigNumbers);
+  },
+
   checkWinningNumbers(winnigNumbers) {
     const splitedWinnigNumbers = winnigNumbers.split(',');
     winnigNumberValidator.numberOfLottoLitmit(splitedWinnigNumbers);
     winnigNumberValidator.checkNumberType(splitedWinnigNumbers);
     winnigNumberValidator.checkLottoNumberRange(splitedWinnigNumbers);
+    winnigNumberValidator.checkDuplicate(splitedWinnigNumbers);
   },
 };
 
