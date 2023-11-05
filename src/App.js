@@ -6,9 +6,9 @@ import {
   WINNING_NUMBERS_INPUT_REQUEST,
   BONUS_NUMBER_INPUT_REQUEST,
 } from "./constants.js";
-import { validatePurchaseAmount } from "./ValidatePurchaseAmount.js";
-import { validateWinningNumber } from "./ValidateWinningNumber.js";
-import { validateBonusNumber } from "./ValidateBonusNumber.js";
+import { validatePurchaseAmount } from "./ValidateInput/ValidatePurchaseAmount.js";
+import { validateWinningNumber } from "./ValidateInput/ValidateWinningNumber.js";
+import { validateBonusNumber } from "./ValidateInput/ValidateBonusNumber.js";
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
@@ -58,6 +58,7 @@ class App {
     printMessage(BONUS_NUMBER_INPUT_REQUEST);
     // 10. 보너스 번호 입력받기
     this.#bonus_number = await getInput(validateBonusNumber);
+    // 11. 발행한 로또 번호와 당첨 번호 비교하기
   }
 }
 

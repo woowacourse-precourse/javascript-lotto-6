@@ -1,4 +1,4 @@
-import { TYPE_ERROR, UNIT_ERROR, MIN_INPUT_ERROR } from "./constants.js";
+import { TYPE_ERROR, UNIT_ERROR, MIN_INPUT_ERROR } from "../constants.js";
 
 export const validatePurchaseAmount = (input) => {
   if (isNaN(+input)) {

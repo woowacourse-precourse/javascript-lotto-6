@@ -6,7 +6,7 @@ import {
   MIN_NUMBER,
   MAX_NUMBER,
   LOTTO_LENGTH,
-} from "./constants.js";
+} from "../constants.js";
 
 export const validateWinningNumber = (input) => {
   // 쉼표로 구분되지 않은 경우, 하나의 번호라도 숫자가 아닌 경우, 하나의 번호라도 1~45에 포함되지 않는 경우, 번호가 중복되는 경우, 번호가 6개가 아닌 경우
