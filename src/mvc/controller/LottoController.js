@@ -12,13 +12,14 @@ class LottoController{
   }
 
   async play(){
-    this.#model.purchaseLotto( await this.inputPurchasePrice() );
-    this.#outputView.printPurchasedLotto( this.#model.PurchasedLottoArray );
+    this.#model.purchaseLotto(await this.inputPurchasePrice());
+    this.#outputView.printPurchasedLotto(this.#model.PurchasedLottoArray);
     this.#outputView.printLineBreak();
     
     const winningNumbersArray = this.inputWinningNumbers();
     const bonusNumber = this.inputBonusNumber(winningNumbersArray);
-    this.#model.makeLottoBoard(winningNumbersArray,bonusNumber);
+    this.#model.makeLottoBoard(winningNumbersArray, bonusNumber);
+    this.#model.updateLottoResult();
   }
 
   async inputPurchasePrice(){

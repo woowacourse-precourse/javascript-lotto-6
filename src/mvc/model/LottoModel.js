@@ -2,7 +2,13 @@ import Get from './utils/Get.js';
 
 import CONSTANTS from '../../constants/CONSTANTS.js';
 
-const { LOTTO_NUMBER_UPPER, MISS_STATE, BONUS_STATE, HIT_STATE } = CONSTANTS;
+const {
+  LOTTO_NUMBER_UPPER,
+  NUMBER_OF_LOTTO_NUMBERS,
+  MISS_STATE,
+  BONUS_STATE,
+  HIT_STATE,
+} = CONSTANTS;
 
 class LottoModel {
   constructor() {
@@ -19,6 +25,15 @@ class LottoModel {
     this.lottoBoard = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
     winningNumbers.forEach(number => (this.lottoBoard[number] = HIT_STATE));
     this.lottoBoard[bonusNumber] = BONUS_STATE;
+  }
+
+  updateLottoResult() {
+    this.lottoResult = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(
+      0
+    );
+    lottoArray.forEach(
+      lotto => this.lottoResult[Get.lottoCheck(lotto, this.lottoBoard)]++
+    );
   }
 }
 
