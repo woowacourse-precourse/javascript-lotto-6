@@ -1,6 +1,15 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH } from './constants.js';
+import {
+  MIN,
+  MAX,
+  UNIT,
+  LOTTO_LENGTH,
+  MATCH,
+  INPUT_MESSAGE,
+  RESULT_MESSAGE,
+  ERROR_MESSAGE,
+} from './constants.js';
 import {
   isValidAmount,
   isValidBonusNumber,
@@ -8,9 +17,8 @@ import {
 } from './Validation.js';
 export const inputAmount = async () => {
   try {
-    const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    if (!isValidAmount(amount))
-      throw new Error('[ERROR] 금액이 잘못된 형식입니다.\n');
+    const amount = await Console.readLineAsync(INPUT_MESSAGE.amount);
+    if (!isValidAmount(amount)) throw new Error(ERROR_MESSAGE.amount);
     return amount;
   } catch (error) {
     Console.print(error.message);
@@ -27,10 +35,11 @@ export const multiInputAmount = async () => {
 };
 export const inputWinningNumbers = async () => {
   try {
-    const winningNumbers =
-      await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const winningNumbers = await Console.readLineAsync(
+      INPUT_MESSAGE.winningNumbers,
+    );
     if (!isValidWinningNumbers(winningNumbers))
-      throw new Error('[ERROR] 당첨 번호가 잘못된 형식입니다.\n');
+      throw new Error(ERROR_MESSAGE.winningNumbers);
     return winningNumbers.split(',').map(x => Number(x));
   } catch (error) {
     Console.print(error.message);
@@ -47,11 +56,9 @@ export const multiInputWinningNumbers = async () => {
 };
 export const inputBonusNumber = async winningNumbers => {
   try {
-    const bonusNumber = await Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n',
-    );
+    const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
     if (!isValidBonusNumber(winningNumbers, Number(bonusNumber)))
-      throw new Error('[ERROR] 보너스 번호가 잘못된 형식입니다.\n');
+      throw new Error(ERROR_MESSAGE.bonusNumber);
     return Number(bonusNumber);
   } catch (error) {
     Console.print(error.message);
@@ -108,7 +115,7 @@ export const getResult = (lottos, winningNumbers, bonusNumber) => {
   return result;
 };
 export const printResult = result => {
-  Console.print('\n당첨 통계\n---');
+  Console.print(RESULT_MESSAGE);
   Object.keys(result)
     .reverse()
     .forEach(rank => {

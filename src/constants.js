@@ -12,4 +12,24 @@ const MATCH = {
   rank4: { message: '4개 일치 (50,000원)', money: 50000 },
   rank5: { message: '3개 일치 (5,000원)', money: 5000 },
 };
-export { MIN, MAX, UNIT, LOTTO_LENGTH, MATCH };
+const INPUT_MESSAGE = {
+  amount: '구입금액을 입력해 주세요.\n',
+  winningNumbers: '당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
+};
+const RESULT_MESSAGE = '\n당첨 통계\n---';
+const ERROR_MESSAGE = {
+  amount: '[ERROR] 금액이 잘못된 형식입니다.\n',
+  winningNumbers: '[ERROR] 당첨 번호가 잘못된 형식입니다.\n',
+  bonusNumber: '[ERROR] 보너스 번호가 잘못된 형식입니다.\n',
+};
+export {
+  MIN,
+  MAX,
+  UNIT,
+  LOTTO_LENGTH,
+  MATCH,
+  INPUT_MESSAGE,
+  RESULT_MESSAGE,
+  ERROR_MESSAGE,
+};
