@@ -13,7 +13,7 @@ class User {
   }
 
   checkResult(combinationMachine) {
-    const { lottos } = this.#lottos;
+    const lottos = this.#lottos;
     const lottoResult = combinationMachine.compareLottoNumbers(lottos);
 
     return [lottoResult, this.#calculateRateOfReturn(lottoResult).toFixed(1)];

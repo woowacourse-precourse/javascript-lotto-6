@@ -13,7 +13,7 @@ class Computer {
       return new Lotto(this.#generator()).getAscendingNumber();
     });
 
-    return { quantity, lottos };
+    return lottos;
   }
 
   #calculateQuantity(lottoPrice) {
