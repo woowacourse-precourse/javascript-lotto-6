@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import { LOTTERY_CONSTANTS } from "../constants/constants";
+import { LOTTERY_CONSTANTS } from "../constants/constants.js";
 
 const generateRandomLottery = () => {
     const lottery = [];

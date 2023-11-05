@@ -1,4 +1,4 @@
-import { generateLotteries } from "./LottoGenerator";
+import { generateLotteries } from "./LottoGenerator.js";
 
 const CURRENY_NUMBER_TO_DIVIDE = 1000;
 

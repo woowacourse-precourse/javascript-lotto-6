@@ -1,6 +1,6 @@
-import InputView from "./View/InputView";
-import Lotto from "./Model/Lotto";
-import Validator from "./Validator";
+import InputView from "./View/InputView.js";
+import Lotto from "./Model/Lotto.js";
+import Validator from "./Validator.js";
 
 class App {
   async play() {
