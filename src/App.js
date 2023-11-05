@@ -18,6 +18,15 @@ class App {
       () => new Lotto(this.getRandomSixNumbers())
     );
   }
+
+  static calculLottoResult({ lottos, winNumbers, bonusNumber }) {
+    const LOTTO_RANKS = Array.from({ length: 5 }, () => 0);
+    lottos.forEach((lotto) => {
+      const RANK = lotto.getLottoResult({ winNumbers, bonusNumber });
+      if (RANK < 6) LOTTO_RANKS[RANK - 1] += 1;
+    });
+    return LOTTO_RANKS;
+  }
 }
 
 export default App;
