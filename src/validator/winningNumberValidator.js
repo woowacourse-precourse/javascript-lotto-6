@@ -1,5 +1,7 @@
 import commonValidator from './commonValidator.js';
 
+const WINNINGNUMBER_PRIFIX_MESSAGE = '당첨 번호는';
+
 const winnigNumberValidator = {
   numberOfLottoLitmit(splitedWinnigNumbers) {
     if (splitedWinnigNumbers.length !== 6) {
@@ -8,15 +10,19 @@ const winnigNumberValidator = {
   },
 
   checkNumberType(splitedWinnigNumbers) {
-    splitedWinnigNumbers.forEach((number) => commonValidator.checkNumberType(number));
+    splitedWinnigNumbers.forEach((number) =>
+      commonValidator.checkNumberType(WINNINGNUMBER_PRIFIX_MESSAGE, number)
+    );
   },
 
   checkLottoNumberRange(splitedWinnigNumbers) {
-    splitedWinnigNumbers.forEach((number) => commonValidator.checkLottoNumberRange(number));
+    splitedWinnigNumbers.forEach((number) =>
+      commonValidator.checkLottoNumberRange(WINNINGNUMBER_PRIFIX_MESSAGE, number)
+    );
   },
 
   checkDuplicate(splitedWinnigNumbers) {
-    commonValidator.checkDuplicate(splitedWinnigNumbers);
+    commonValidator.checkDuplicate(WINNINGNUMBER_PRIFIX_MESSAGE, splitedWinnigNumbers);
   },
 
   checkWinningNumbers(winnigNumbers) {

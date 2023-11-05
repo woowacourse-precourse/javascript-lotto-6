@@ -1,5 +1,5 @@
 import commonValidator from './validator/commonValidator.js';
-
+const BONUS_NUMBER_PRIFIX_MESSAGE = '로또 번호는';
 class Lotto {
   #numbers;
 
@@ -22,15 +22,19 @@ class Lotto {
   }
 
   #validateDuplicated(numbers) {
-    commonValidator.checkDuplicate(numbers);
+    commonValidator.checkDuplicate(BONUS_NUMBER_PRIFIX_MESSAGE, numbers);
   }
 
   #validateRangeNumber(numbers) {
-    numbers.forEach((number) => commonValidator.checkLottoNumberRange(number));
+    numbers.forEach((number) =>
+      commonValidator.checkLottoNumberRange(BONUS_NUMBER_PRIFIX_MESSAGE, number)
+    );
   }
 
   #validateNumberType(numbers) {
-    numbers.forEach((number) => commonValidator.checkNumberType(number));
+    numbers.forEach((number) =>
+      commonValidator.checkNumberType(BONUS_NUMBER_PRIFIX_MESSAGE, number)
+    );
   }
 
   getAscendingNumber() {
