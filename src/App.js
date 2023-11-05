@@ -5,9 +5,7 @@ import { getLottoNumber } from "./utils/getLottoNumber.js";
 import { getBonusNumber } from "./utils/getBonusNumber.js";
 import { getLottoResult } from "./utils/getLottoResult.js";
 import { getRanking, getRankResult } from "./utils/getLottoRanking.js";
-
-import Lotto from "./Lotto.js"
-import { Console } from "@woowacourse/mission-utils";
+import { getPrize, getEarningRate } from "./utils/getEarningRate.js";
 
 class App {
   async play() {
@@ -24,6 +22,9 @@ class App {
 
     const lottoRanking = getRanking(winningCount);
     getRankResult(lottoRanking);
+
+    const prize = getPrize(lottoRanking);
+    getEarningRate(prize, cash);
   }
 }
 

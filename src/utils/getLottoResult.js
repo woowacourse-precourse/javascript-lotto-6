@@ -1,4 +1,3 @@
-// import Lotto from "../Lotto.js";
 import { Console } from "@woowacourse/mission-utils";
 import { inputMessage } from "../constants/messages.js";
 
