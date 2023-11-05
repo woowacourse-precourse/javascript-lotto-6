@@ -13,6 +13,8 @@ class RandomNumberGenerator {
 
       return Array.from(UNIQUE_NUMBERS);
     });
+
+    return RANDOM_NUMBER_ARRAY;
   }
 }
 

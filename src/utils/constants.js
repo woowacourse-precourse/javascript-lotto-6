@@ -18,4 +18,6 @@ export const NUMBER = Object.freeze({
 
 export const OTHERS = Object.freeze({
   number: 'number',
+  emptyString: '',
+  commaWithSpace: ', ',
 });
