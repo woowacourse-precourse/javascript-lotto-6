@@ -18,6 +18,10 @@ class WinningLotto {
     this.#winningNumber = winningNumberArr;
   }
 
+  getWinningNumber() {
+    return this.#winningNumber;
+  }
+
   #winningNumberValidate(winningNumberArr) {
     winningNumberArr.forEach((element) => {
       validateNumber(element);
@@ -31,6 +35,10 @@ class WinningLotto {
     const input = await inputBonusNumber();
     this.#bonusNumberValidate(input);
     this.#bonusNumber = parseInt(input);
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
   }
 
   #bonusNumberValidate(number) {
