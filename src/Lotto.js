@@ -1,4 +1,4 @@
-import { LOTTO_ERROR_MSG } from "./Constants";
+import { LOTTO_ERROR_MSG } from "./Utils/Constants";
 
 class Lotto {
   #numbers;
