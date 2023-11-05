@@ -21,6 +21,14 @@ class Validator {
     }
   }
 
+  static #validateRangeOfNumbers(numbers) {
+    numbers
+      .replace(/\s/g, '')
+      .split(SYMBOLS.numberDivider)
+      .filter(Boolean)
+      .forEach((value) => this.#isOutOfRange(value));
+  }
+
   static validatePurchaseAmount(amount) {
     if (
       this.#isNotNaturalNumber(amount) ||
@@ -30,12 +38,8 @@ class Validator {
     }
   }
 
-  static validateRangeOfNumbers(numbers) {
-    numbers
-      .replace(/\s/g, '')
-      .split(SYMBOLS.numberDivider)
-      .filter(Boolean)
-      .forEach((value) => this.#isOutOfRange(value));
+  static validateWinningNumbers(numbers) {
+    this.#validateRangeOfNumbers(numbers);
   }
 }
 

@@ -25,6 +25,17 @@ class Input {
     );
     return PurchaseAmount;
   }
+
+  static async readWinningNumbers() {
+    const winningNumber = await this.readAsync(
+      MESSAGE.askWinningNumbers,
+      Validator.validateWinningNumbers,
+      () => {
+        this.readWinningNumbers();
+      },
+    );
+    return winningNumber;
+  }
 }
 
 export default Input;
