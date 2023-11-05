@@ -5,7 +5,7 @@ import checkHasNoRemainder from '../../src/util/validate/checkHasNoRemainder.js'
 import { checkIsEmpty, checkLottoIsEmptyOrZero } from '../../src/util/validate/checkIsEmpty.js';
 import { checkIsNaN, checkLottoIsNaN } from '../../src/util/validate/checkIsNaN.js';
 import { checkLottoIsOutOfRange, checkPurchaseIsNotInRange } from '../../src/util/validate/checkIsNotInRange.js';
-import checkLottoIsInteger from '../../src/util/validate/checkisInteger.js';
+import { checkLottoIsInteger } from '../../src/util/validate/checkisInteger.js';
 
 describe('[Lotto] 유효성 검사 테스트', () => {
   test('로또 번호에 중복된 숫자가 존재할 경우 에러를 발생시킨다', () => {
