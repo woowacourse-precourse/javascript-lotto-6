@@ -33,10 +33,16 @@ class App {
   makeLotto() {
     return new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
   }
+  showLottoList() {
+    this.#lottos.map((lotto) => {
+      MissionUtils.Console.print(lotto.getNumbers());
+    });
+  }
 
   async play() {
     await this.inputCost();
     this.lottoGenerater();
+    this.showLottoList();
   }
 }
 
