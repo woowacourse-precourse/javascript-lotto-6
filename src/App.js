@@ -38,8 +38,10 @@ class App {
       const lotto = this.createLotto();
       this.#lottos.push(lotto);
     }
-
     this.#lottos.forEach((lotto) => Console.print(lotto));
+    Console.print('');
+
+    const numbers = await Input.getLottoNumber();
   }
 }
 
