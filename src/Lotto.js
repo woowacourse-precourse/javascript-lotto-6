@@ -24,6 +24,10 @@ class Lotto {
   print() {
     Console.print(`[${this.#numbers.join(', ')}]`);
   }
+
+  includes(input) {
+    return this.#numbers.includes(input);
+  }
 }
 
 export default Lotto;
