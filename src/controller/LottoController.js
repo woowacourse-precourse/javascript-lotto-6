@@ -7,15 +7,19 @@ const { Random } = MissionUtils;
 class LottoController {
   constructor() {
     this.usedMoney = 0;
-    this.countOfLottos = 0;
+    this.countsOfLottos = 0;
     this.lottoArray = [];
+    this.winningNumbers = [];
+    this.bonusNumber = 0;
   }
 
   async playLotto() {
     this.usedMoney = await InputView.inputMoney(); // 정상 입력 시에 통과
-    this.countOfLottos = this.howManyLottos();
+    this.countsOfLottos = this.howManyLottos();
     this.makeNewLottos();
-    OutputView.printLottos(this.countOfLottos, this.lottoArray);
+    OutputView.printLottos(this.countsOfLottos, this.lottoArray);
+    this.winningNumbers = await InputView.inputNumbers();
+    this.bonusNumber = await InputView.inputBonusNumber();
   }
 
   howManyLottos() {
@@ -24,7 +28,7 @@ class LottoController {
 
   // 로또 구매 개수만큼 객체 생성
   makeNewLottos() {
-    for (let i = 0; i < this.countOfLottos; i += 1) {
+    for (let i = 0; i < this.countsOfLottos; i += 1) {
       const lottoNumbers = this.pickRandomNumbers();
       const sortedlottoNumbers = lottoNumbers.sort((a, b) => a - b);
       const lotto = new Lotto([...sortedlottoNumbers]);
