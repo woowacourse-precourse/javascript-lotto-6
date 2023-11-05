@@ -42,6 +42,16 @@ async getLottoNumber(){
     }
   } // ui로직
 
+  async getUserBonusNumber() {
+    while(true){
+   const GETUSERBONUSNUMBERDATA =  await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+   try{
+   new Bonus(GETUSERBONUSNUMBERDATA,this.USERCHOOSENUMBER)
+   this.USERBONUSNUMBER = Number(GETUSERBONUSNUMBERDATA);
+   break;
+   }catch(error){ Console.print(`${error}`) ;}
+  }
+  }// ui 로직
 
 
   async play() {
@@ -49,6 +59,7 @@ async getLottoNumber(){
    await this.getUsersCashAndCheck();
    await this.getLottoNumber();
    await this.getUserNumber();
+   await this.getUserBonusNumber();
    break;
     }
   }
