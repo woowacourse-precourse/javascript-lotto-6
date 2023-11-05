@@ -18,4 +18,11 @@ const validatePurchase = (purchaseAmount) => {
   }
 };
 
-export { validatePurchase };
+const validateWinningNumber = (winningNumber) => {
+  const numbers = winningNumber.split(",");
+  if (isEmpty(winningNumber)) {
+    throw new Error(ERROR_MESSAGE.empty);
+  }
+};
+
+export { validatePurchase, validateWinningNumber };
