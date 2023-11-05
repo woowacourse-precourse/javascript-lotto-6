@@ -9,4 +9,10 @@ const ERROR = {
 };
 Object.freeze(ERROR);
 
-export { QUERY, ERROR };
+const TEMPLATE = {
+  numberOfLottos: (numberOfLottos) => `\n${numberOfLottos}개를 구매했습니다.`,
+  sortedLotto: (sortedLotto) => `[${sortedLotto}]\n`,
+};
+Object.freeze(TEMPLATE);
+
+export { QUERY, ERROR, TEMPLATE };

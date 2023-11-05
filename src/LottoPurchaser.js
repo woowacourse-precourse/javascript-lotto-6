@@ -17,9 +17,17 @@ class LottoPurchaser {
     this.#set(lottos);
   }
 
+  getNumbersOfLottos() {
+    return this.#lottos.length;
+  }
+
+  getSortedLottos() {
+    const array = this.#lottos.map((lotto) => lotto.getSortedLotto());
+    return array;
+  }
+
   #set(lottos) {
     this.#lottos = lottos;
-    console.log(this.#lottos);
   }
 
   #validate(value) {
