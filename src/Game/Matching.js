@@ -1,4 +1,4 @@
-export default class Comparison {
+export default class Matching {
   static between(lottoAry, prizeObj) {
     const lineAry = prizeObj.line;
     const bonusNum = prizeObj.bonus;
