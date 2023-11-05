@@ -30,17 +30,19 @@ class Controller {
 
   async createWinningLotto() {
     const winningNumbers = await this.#inputView.readWinningNumber();
-    this.winningLotto = new WinningLotto(winningNumbers);
+    this.#winningLotto = new WinningLotto(winningNumbers);
   }
 
   checkDuplicate(bonusNum) {
-    const winningLotto = this.#lottos.getLottos().map((lotto) => lotto.getNumbers());
-    console.log(winningLotto);
+    const winningLotto = this.#winningLotto.getWinningNums();
+    if(winningLotto.includes(bonusNum)){
+      throw new Error('[ERROR] 기존 6개의 당첨번호와 중복 되면 안됩니다.');
+    }
   }
 
   async createBonusLottos() {
     const bonusNum = await this.#inputView.readBonusNumber();
-    this.checkDuplicate(bonusNum);
+    this.checkDuplicate(parseInt(bonusNum));
     this.#bonusLotto = new BonusLotto(bonusNum);
   }
 
