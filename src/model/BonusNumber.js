@@ -9,7 +9,7 @@ class BonusNumber {
   }
 
   #validate(bonusNumber, lottos) {
-    BonusValidation.checkDuplicatie(bonusNumber, lottos.getLottos());
+    BonusValidation.checkDuplicatie(bonusNumber, lottos);
     BonusValidation.checkNumber(bonusNumber);
   }
 

@@ -1,16 +1,20 @@
 import { Random } from '@woowacourse/mission-utils';
-import MoneyValidation from '../validation/MoneyValidation.js';
 import { MAX_NUMBER, MIN_NUMBER, LOTTO_LENGTH, MULTIPLE } from '../constants/contant.js';
+import MoneyValidation from '../validation/MoneyValidation.js';
+import makeAsendingOrder from '../util/makeAsendingOrder.js';
 
 class Money {
   #money;
+
+  #count;
 
   #lottoList;
 
   constructor(money) {
     this.#validate(money);
     this.#money = money;
-    this.#setLottoList(money);
+    this.#count = money / MULTIPLE;
+    this.#setLottoList();
   }
 
   #validate(money) {
@@ -18,11 +22,12 @@ class Money {
     MoneyValidation.checkMultiple(money);
   }
 
-  #setLottoList(money) {
-    const count = money / MULTIPLE;
+  #setLottoList() {
     const lottoList = [];
-    for (let i = 0; i < count; i += 1) {
-      lottoList.push(Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH));
+    for (let i = 0; i < this.#count; i += 1) {
+      const lotto = Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH);
+      const sortlotto = makeAsendingOrder(lotto);
+      lottoList.push(sortlotto);
     }
     this.#lottoList = lottoList;
   }
@@ -41,6 +46,14 @@ class Money {
    */
   getMoney() {
     return this.#money;
+  }
+
+  /**
+   *
+   * @returns {number} money/MULTIPLE
+   */
+  getCount() {
+    return this.#count;
   }
 }
 

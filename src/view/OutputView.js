@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { makeNumberOfLottoMessageFn, MESSAGE, makeRateOfReturnMessageFn } from '../constants/message';
+import { makeNumberOfLottoMessageFn, MESSAGE, makeRateOfReturnMessageFn } from '../constants/message.js';
 
 class OutputView {
   /**
@@ -9,7 +9,10 @@ class OutputView {
    */
   static printPurchacingLotto(number, lottos) {
     Console.print(makeNumberOfLottoMessageFn(number));
-    Console.print(...lottos);
+    lottos.forEach((lotto) => {
+      Console.print(lotto);
+    });
+    OutputView.printBlank();
   }
 
   /**
@@ -37,7 +40,7 @@ class OutputView {
   }
 
   static printBlank() {
-    Console.print(MESSAGE.COMMA);
+    Console.print(MESSAGE.BLANK);
   }
 }
 

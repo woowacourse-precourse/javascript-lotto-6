@@ -1,11 +1,12 @@
 import LottoValidation from '../validation/LottoValidation.js';
+import makeAsendingOrder from '../util/makeAsendingOrder.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = makeAsendingOrder(numbers);
   }
 
   #validate(numbers) {

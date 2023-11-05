@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import OutputView from './OutputView.js';
 import chageStringtoArray from '../util/chageStringtoArray.js';
 import { MESSAGE } from '../constants/message.js';
 
@@ -9,6 +10,7 @@ class InputView {
    */
   static async writePurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync(MESSAGE.PURCHASING_MESSAGE);
+    OutputView.printBlank();
     return Number(purchaseAmount);
   }
 
@@ -18,6 +20,7 @@ class InputView {
    */
   static async writeWinningNumbers() {
     const lottosNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBERS);
+    OutputView.printBlank();
     return chageStringtoArray(lottosNumbers);
   }
 
@@ -27,6 +30,7 @@ class InputView {
    */
   static async writeBonunsNumber() {
     const bonusNnumber = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
+    OutputView.printBlank();
     return Number(bonusNnumber);
   }
 }
