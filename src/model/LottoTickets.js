@@ -9,11 +9,15 @@ class LottoTickets {
     return [...this.#lottoTickets];
   }
 
-  // TODO 로또 생성 여기서 하도록 위임할지 ?
-
   getMatchWinningNumbersCount(winningNumbers) {
     return this.#lottoTickets.map((lottoInstance) => {
       return lottoInstance.getMatchWinningNumbers(winningNumbers).length;
+    });
+  }
+
+  compareBonusNumber(bonusNumber) {
+    return this.#lottoTickets.map((lottoInstance) => {
+      return lottoInstance.isMatchBonusNumber(bonusNumber);
     });
   }
 }
