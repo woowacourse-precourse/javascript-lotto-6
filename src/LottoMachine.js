@@ -7,8 +7,11 @@ import CustomError from './errors/CustomError.js';
 class LottoMachine {
   #numberOfLottos;
 
+  #lottos;
+
   constructor() {
     this.#numberOfLottos = 0;
+    this.#lottos = [];
   }
 
   insertMoney(money) {
@@ -27,13 +30,11 @@ class LottoMachine {
   }
 
   createLottos() {
-    const lottos = [];
-    for (let index = 0; index < this.#numberOfLottos; index += 1) {
+    for (let i = 0; i < this.#numberOfLottos; i += 1) {
       const numbers = this.#generateLottoNumbers();
       const lotto = new Lotto(numbers);
-      lottos.push(lotto);
+      this.#lottos.push(lotto);
     }
-    return lottos;
   }
 
   #generateLottoNumbers() {
