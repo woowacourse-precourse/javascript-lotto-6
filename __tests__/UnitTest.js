@@ -9,7 +9,7 @@ jest.mock("@woowacourse/mission-utils", () => ({
 }));
 
 describe("구입 금액 테스트", () => {
-  test("구입 금액이 천 원 단위가 아니면 예외가 발생한다", async () => {
+  test("구입 금액이 천 원 단위가 아니면 예외가 발생한다.", async () => {
     Console.readLineAsync.mockResolvedValue("58744");
     const pay = new UserPayment();
     await expect(pay.userPayment()).rejects.toThrow("[ERROR]");
@@ -32,12 +32,23 @@ describe("사용자 로또 번호", () => {
     expect(result).toEqual(output);
   });
 
-  test("오름차순", () => {
+  test("배열을 오름차순으로 정렬", () => {
     const input = "5,8,3,1,9,7";
     const output = ["1", "3", "5", "7", "8", "9"];
     const array = input.split(",");
     const result = array.sort((a, b) => a - b);
     expect(result).toEqual(output);
+  });
+
+  test("보너스 번호가 중복 숫자일 경우 예외가 발생한다.", () => {
+    const number = 5;
+    const array = [1, 2, 3, 4, 5, 6];
+
+    expect(() => {
+      if (array.includes(number)) {
+        throw new Error("[ERROR]");
+      }
+    }).toThrow("[ERROR]");
   });
 });
 
