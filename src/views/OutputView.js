@@ -1,26 +1,23 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE_PRINT } from '../constants/Mesaage';
+import { MESSAGE_PRINT, MESSAGE_RESULT_STATISTICS } from '../constants/Message';
 
 const OutputView = {
   printLottoCount(lottoCount) {
     Console.print(`${lottoCount}${MESSAGE_PRINT.LOTTO_COUNT}`);
   },
 
-  printMyLottoNumbers(lottoNumbers) {
+  printLottoNumbers(lottoNumbers) {
     Console.print(
       `${MESSAGE_PRINT.LOTTO_NUMBER_HEAD}${lottoNumbers}${MESSAGE_PRINT.LOTTO_NUMBER_TAIL}`,
     );
   },
 
-  printResultStatistics(resultList) {
+  printResultStatistics(results) {
     Console.print(MESSAGE_PRINT.STATISTICS);
 
-    // resultList는 객체 배열 { rank, count }
-    resultList.forEach(result =>
+    Object.keys(results).forEach(key =>
       Console.print(
-        `${MESSAGE_PRINT.MESSAGE_RESULT_STATISTICS[result.rank - 1]}${
-          result.count
-        }${MESSAGE_PRINT.COUNT_UNIT}`,
+        `${MESSAGE_RESULT_STATISTICS[key]}${results[key]}${MESSAGE_PRINT.COUNT_UNIT}`,
       ),
     );
   },
