@@ -7,13 +7,17 @@ class LottoStore {
   }
 
   createLottoTickets() {
-    const lottos = Array.from({ length: this.purchasedAmount }, () => {
-      const randomNumbers = createLottoNumbers();
-      const sortedRandomNumbers = randomNumbers.sort((a, b) => a - b);
-      return new Lotto(sortedRandomNumbers);
-    });
-
+    const lottos = Array.from(
+      { length: this.purchasedAmount },
+      this.createLottoTicket,
+    );
     return lottos;
+  }
+
+  createLottoTicket() {
+    const randomNumbers = createLottoNumbers();
+    const sortedRandomNumbers = randomNumbers.sort((a, b) => a - b);
+    return new Lotto(sortedRandomNumbers);
   }
 }
 
