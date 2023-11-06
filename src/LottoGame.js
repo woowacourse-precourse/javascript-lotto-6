@@ -116,6 +116,3 @@ class LottoGame {
 }
 
 export default LottoGame;
-
-const game = new LottoGame();
-game.initGame();
