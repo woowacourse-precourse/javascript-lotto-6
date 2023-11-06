@@ -12,7 +12,8 @@ class App {
     const lottoCount = parseInt(payment / this.LOTTO_UNIT);
     const lottoList = this.getPickedLottoList(lottoCount);
     this.printPickedLotto(lottoCount, lottoList);
-    const winningNumbers = await  this.getWinningNumber();
+    const winningNumbers = await this.getWinningNumber();
+    const bonusNumber = await this.getBonusNumber();
   }
 
   async getPayment() {
@@ -22,7 +23,7 @@ class App {
   }
 
   validatePayment(payment) {
-    if (!/^\d$/g.test(payment)) {
+    if (!/\d/g.test(payment)) {
       throw new Error("[ERROR] 구입 금액은 숫자로 입력하셔야 합니다.");
     } else if (+payment <= 0) {
       throw new Error("[ERROR] 구입 금액은 0원 이상 입력하셔야 합니다.");
@@ -60,6 +61,11 @@ class App {
     const numbers = await Console.readLineAsync(
         "\n당첨 번호를 입력해 주세요.\n"
     ).split(",");
+    const winningNumber = this.validateWinningNumber(numbers);
+    return new Lotto(winningNumber);
+  }
+
+  validateWinningNumber(numbers) {
     const winningNumber = [];
     numbers.forEach((number) => {
       if (!/\d/g.test(number)) {
@@ -73,7 +79,20 @@ class App {
       }
       winningNumber.push(+number);
     });
-    return new Lotto(winningNumber);
+    return winningNumber;
+  }
+
+  async getBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+        "\n보너스 번호를 입력해 주세요.\n"
+    );
+
+    if (!/\d/g.test(bonusNumber) || +bonusNumber < 1 || +bonusNumber > 45) {
+      throw new Error(
+          "[ERROR] 보너스 번호는 1과 45 사이의 숫자로 입력하셔야 합니다."
+      );
+    }
+    return +bonusNumber;
   }
 }
 
