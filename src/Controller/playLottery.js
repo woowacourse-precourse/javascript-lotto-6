@@ -3,45 +3,37 @@ import Print from '../View/Output.js';
 import Computer from '../Domain/Computer.js';
 import User from '../Domain/User.js';
 import MESSAGE from '../Constant/message.js';
-import Lottery from '../Domain/Lottery.js';
+import Lotto from '../Lotto.js';
 
 class PlayLottery {
   #randomLottery;
 
   constructor() {
     this.random = new Computer();
-    this.#randomLottery = null;
   }
 
   async getLotteryResult() {
-    await this.createLotteries(await this.UserpurchaseTimes());
-    this.lottery(await this.userSelectNumbers()).compareNumbers();
+    const randoms = await this.createLotteries(await this.userpurchaseTimes());
+    await this.lotto(await new User().selectNumbers()).getResult(randoms);
   }
 
-  async UserpurchaseTimes() {
+  async userpurchaseTimes() {
     const userInput = await Read.input(MESSAGE.QUESTION_PURCHASE);
 
     return new User(userInput).getNumberofPurchase();
   }
 
   async createLotteries(times) {
+    const randomNum = this.random.getLotteryNumbers(times);
+
     Print.output(`${times}${MESSAGE.PAID_RESULT}`);
-    Print.repeat(this.random.getLotteryNumbers(times));
+    Print.repeatLottery(randomNum);
 
-    this.#randomLottery = this.random.getLotteryNumbers(times);
-
-    return this.#randomLottery;
+    return randomNum;
   }
 
-  async userSelectNumbers() {
-    const lotteryNumber = await Read.input(MESSAGE.QUESTION_PRIZE_NUMBER);
-    const bonusNumber = await Read.input(MESSAGE.QUESTION_BONUS_NUMBER);
-
-    return { lotteryNumber, bonusNumber };
-  }
-
-  lottery(userInput) {
-    return new Lottery(this.#randomLottery, userInput);
+  lotto(userNum) {
+    return new Lotto(userNum);
   }
 }
 

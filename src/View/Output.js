@@ -5,8 +5,12 @@ class Print {
     Console.print(message);
   }
 
-  static repeat(array) {
+  static repeatLottery(array) {
     array.forEach((el) => Console.print(`[${el.join(', ')}]`));
+  }
+
+  static repeatResult(array) {
+    array.forEach((el) => Console.print(el));
   }
 }
 
