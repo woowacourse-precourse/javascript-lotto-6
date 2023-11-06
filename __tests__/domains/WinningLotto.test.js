@@ -1,6 +1,11 @@
 import WinningLotto from '../../src/domains/WinningLotto'
 import { LottoDuplicatedError, LottoLengthError, LottoRangeError, LottoTypeError, BonusTypeError, BonusRangeError, BonusIncludedError } from '../../src/error/CustomErrors.js';
 
+const INPUT_NUMBERS = '1,2,3,4,5,6';
+const INPUT_BONUS = '7';
+const RESULT_NUMBERS = [1,2,3,4,5,6];
+const RESULT_BONUS = 7;
+
 describe('WinningLotto - setNumbers 메소드 : 당첨 번호 유효성 검사 테스트', () => {
   const winning = new WinningLotto();
 
@@ -45,30 +50,9 @@ describe('WinningLotto - setNumbers 메소드 : 당첨 번호 유효성 검사 �
   });
 });
 
-describe('WinningLotto - getNumbers, getBonus 메소드 : 당첨 번호 및 보너스 번호 반환값 테스트', () => {
-  const winning = new WinningLotto();
-  winning.setNumbers('1,2,3,4,5,6');
-  winning.setBonus('7');
-
-  test('설정한 당첨 번호와 반환한 당첨번호가 같아야 한다.', () => {
-    const result = winning.getNumbers();
-
-    expect(result).toEqual([1,2,3,4,5,6]);
-  });
-
-  test('설정한 보너스 번호와 반환한 보너스가 같아야 한다.', () => {
-    const result = winning.getBonus();
-
-    expect(result).toEqual(7);
-  });
-});
-
 describe('WinningLotto - setBonus 메소드 : 보너스 번호 유효성 검사 테스트', () => {
   const winning = new WinningLotto();
-
-  beforeEach(() => {
-    winning.setNumbers('1,2,3,4,5,6');
-  });
+  winning.setNumbers(INPUT_NUMBERS);
 
   test.each([
     '-1', '3.14', '9.81', 'f', '다섯', ' ',
@@ -94,3 +78,24 @@ describe('WinningLotto - setBonus 메소드 : 보너스 번호 유효성 검사 
     expect(result).toThrowError(BonusIncludedError);
   });
 });
+
+describe('WinningLotto - getNumbers, getBonus 메소드 : 당첨 번호 및 보너스 번호 반환값 테스트', () => {
+  const winning = new WinningLotto();
+  winning.setNumbers(INPUT_NUMBERS);
+  winning.setBonus(INPUT_BONUS);
+
+  test('설정한 당첨 번호와 반환한 당첨번호가 같아야 한다.', () => {
+    const result = winning.getNumbers();
+
+    expect(result).toEqual(RESULT_NUMBERS);
+  });
+
+  test('설정한 보너스 번호와 반환한 보너스가 같아야 한다.', () => {
+    const result = winning.getBonus();
+
+    expect(result).toEqual(7);
+  });
+});
+
+
+

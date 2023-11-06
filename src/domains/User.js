@@ -47,7 +47,9 @@ class User {
   setPrizes(winningLotto) {
     this.#lottos.forEach((lotto) => {
       const prize = lotto.getPrize(winningLotto.getNumbers(), winningLotto.getBonus());
-      this.#prizes[prize] += 1;
+      if (this.#prizes[prize] !== undefined) {
+        this.#prizes[prize] += 1
+      };
     });
   }
 
