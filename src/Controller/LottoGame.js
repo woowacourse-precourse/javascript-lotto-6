@@ -3,7 +3,7 @@ import InputView from "../View/InputView.js";
 import OutputView from "../View/OutputView.js";
 import Lotto from "../Lotto.js";
 import Lottos from "../Lottos.js";
-import Winning from "../WinningNumbers.js";
+import Winning from "../Winning.js";
 
 class LottoGame {
   lottos = new Lottos();
