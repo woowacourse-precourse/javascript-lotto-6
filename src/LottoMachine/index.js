@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { NUMBER, RANDOM } from '../constants/index.js';
+import { NUMBER, MESSAGE, RANDOM, SYMBOLS } from '../constants/index.js';
 import Lotto from '../Lotto.js';
 
 class LottoMachine {
@@ -18,6 +18,15 @@ class LottoMachine {
       );
       return new Lotto(numbers);
     });
+  }
+
+  buy(lottoCount) {
+    this.#lottos = this.#pickLottos(lottoCount);
+    const lottoStrings = this.#lottos
+      .map((lotto) => lotto.formatString())
+      .join(SYMBOLS.lineBreak);
+
+    return `${lottoCount}${MESSAGE.purchase}${lottoStrings}`;
   }
 }
 
