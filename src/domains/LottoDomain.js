@@ -1,4 +1,5 @@
 import Lotto from '../Lotto.js';
+import { NUMBER } from '../constants.js';
 import { Random } from '@woowacourse/mission-utils';
 
 class LottoMachine {
@@ -6,7 +7,7 @@ class LottoMachine {
     const lottoArray = [];
 
     Array.from({ length: lottoCount }).forEach(() => {
-      const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lottoNumbers = this.makeNumbers(NUMBER.START, NUMBER.LAST, NUMBER.LOTTO_LENGTH);
       lottoNumbers.sort((a, b) => a - b);
       const lotto = new Lotto(lottoNumbers);
       lottoArray.push(lotto);
@@ -15,36 +16,47 @@ class LottoMachine {
     return lottoArray;
   }
 
+  static makeNumbers(start, end, length) {
+    return Random.pickUniqueNumbersInRange(start, end, length);
+  }
+
   static find(lotto, winningNumbers) {
     const result = {
-      matchCount: 0,
-      notMatchNumber: 0,
+      matchCount: NUMBER.DEFAULT,
+      notMatchNumber: NUMBER.DEFAULT,
     };
 
     lotto.getNumbers().filter((num) => {
-      if (winningNumbers.includes(num)) result.matchCount += 1;
+      if (winningNumbers.includes(num)) result.matchCount += NUMBER.ADD;
       else result.notMatchNumber = num;
     });
 
     return result;
   }
 
-  static read(resultArray, bonusNumber) {
-    const rank = {
-      first: 0,
-      second: 0,
-      third: 0,
-      fourth: 0,
-      fifth: 0,
-    };
-    resultArray.forEach((result) => {
-      if (result.matchCount === 6) rank.first += 1;
-      if (result.matchCount === 5 && result.notMatchNumber === bonusNumber) rank.second += 1;
-      if (result.matchCount === 5 && result.notMatchNumber !== bonusNumber) rank.third += 1;
-      if (result.matchCount === 4) rank.fourth += 1;
-      if (result.matchCount === 3) rank.fifth += 1;
+  static read(resultObject, bonusNumber, rank) {
+    const rankObject = rank;
+
+    resultObject.forEach((result) => {
+      switch (result.matchCount) {
+        case NUMBER.LOTTO_LENGTH:
+          rankObject.first += NUMBER.ADD;
+          break;
+        case NUMBER.SECOND_THIRD:
+          if (result.notMatchNumber === bonusNumber) rankObject.second += NUMBER.ADD;
+          else rankObject.third += NUMBER.ADD;
+          break;
+        case NUMBER.FOURTH:
+          rankObject.fourth += NUMBER.ADD;
+          break;
+        case NUMBER.FIFTH:
+          rankObject.fifth += NUMBER.ADD;
+          break;
+        default:
+      }
     });
-    return rank;
+
+    return rankObject;
   }
 }
 

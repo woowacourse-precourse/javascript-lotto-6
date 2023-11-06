@@ -2,6 +2,7 @@ import Request from './views/Request.js';
 import calculate from './utils/calculate.js';
 import LottoMachine from './domains/LottoDomain.js';
 import Notice from './views/Notice.js';
+import { NUMBER } from './constants.js';
 
 class App {
   #money;
@@ -19,13 +20,19 @@ class App {
   #profit;
 
   constructor() {
-    this.#money = 0;
-    this.#lottoQuantity = 0;
+    this.#money = NUMBER.DEFAULT;
+    this.#lottoQuantity = NUMBER.DEFAULT;
     this.#lottos = [];
     this.#winningNumbers = [];
-    this.#bonusNumber = 0;
-    this.#prizeResult = {};
-    this.#profit = 0;
+    this.#bonusNumber = NUMBER.DEFAULT;
+    this.#prizeResult = {
+      first: NUMBER.DEFAULT,
+      second: NUMBER.DEFAULT,
+      third: NUMBER.DEFAULT,
+      fourth: NUMBER.DEFAULT,
+      fifth: NUMBER.DEFAULT,
+    };
+    this.#profit = NUMBER.DEFAULT;
   }
 
   async play() {
@@ -56,7 +63,7 @@ class App {
 
   makeResult() {
     const result = this.getResult(this.#lottos, this.#winningNumbers);
-    this.#prizeResult = LottoMachine.read(result, this.#bonusNumber);
+    this.#prizeResult = LottoMachine.read(result, this.#bonusNumber, this.#prizeResult);
     this.#profit = calculate.profitFrom(this.#prizeResult, this.#money);
   }
 

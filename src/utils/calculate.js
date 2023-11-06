@@ -1,8 +1,8 @@
-import { REWARD } from '../constants.js';
+import { NUMBER, REWARD } from '../constants.js';
 
 const calculate = {
   countFrom: (money) => {
-    return (Number(money) / 1000);
+    return (Number(money) / NUMBER.DEFAULT_WON);
   },
 
   profitFrom: (prizeResult, input) => {
@@ -12,7 +12,7 @@ const calculate = {
     const fourth = (prizeResult.fourth * REWARD.FOURTH);
     const fifth = (prizeResult.fifth * REWARD.FIFTH);
     const total = (first + second + third + fourth + fifth);
-    const profit = ((total / input) * 100).toFixed(1);
+    const profit = ((total / input) * NUMBER.DIVISOR).toFixed(NUMBER.DECIMAL);
     return profit;
   },
 };

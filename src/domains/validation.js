@@ -4,7 +4,7 @@ const validate = {
   money(input) {
     if (!input) throw new Error(ERROR.TYPE_CHECK);
     if (pattern.notMoney.test(input)) throw new Error(ERROR.TYPE_CHECK);
-    if (input % NUMBER.DEFAULT !== NUMBER.ZERO) throw new Error(ERROR.AMOUNT_CHECK);
+    if (input % NUMBER.DEFAULT_WON !== NUMBER.DEFAULT) throw new Error(ERROR.AMOUNT_CHECK);
 
     return input;
   },
@@ -15,10 +15,10 @@ const validate = {
 
     if (inputArray.some((number) => !number)) throw new Error(ERROR.TYPE_CHECK);
     if (inputArray.some((number) => typeof number !== 'number')) throw new Error(ERROR.TYPE_CHECK);
-    if (inputArray.length !== NUMBER.SIX) throw new Error(ERROR.INVALID_ARRAY);
+    if (inputArray.length !== NUMBER.LOTTO_LENGTH) throw new Error(ERROR.INVALID_ARRAY);
 
-    if (new Set(inputArray).size !== NUMBER.SIX) throw new Error(ERROR.DUPLICATE);
-    if (!inputArray.every((number) => number < NUMBER.LAST && number > NUMBER.ZERO)) {
+    if (new Set(inputArray).size !== NUMBER.LOTTO_LENGTH) throw new Error(ERROR.DUPLICATE);
+    if (!inputArray.every((number) => number < NUMBER.LAST && number > NUMBER.DEFAULT)) {
       throw new Error(ERROR.RANGE_CHECK);
     }
 

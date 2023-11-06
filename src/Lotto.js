@@ -1,4 +1,5 @@
 import { ERROR } from './constants.js';
+import { NUMBER } from './constants.js';
 
 class Lotto {
   #numbers;
@@ -11,7 +12,7 @@ class Lotto {
   #validate(numbers) {
     if (!numbers) throw new Error(ERROR.TYPE_CHECK);
 
-    if (numbers.length !== 6) throw new Error(ERROR.LENGTH_CHECK);
+    if (numbers.length !== NUMBER.LOTTO_LENGTH) throw new Error(ERROR.LENGTH_CHECK);
 
     if (numbers.length !== new Set(numbers).size) throw new Error(ERROR.DUPLICATE);
 

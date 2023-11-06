@@ -7,22 +7,25 @@ const REWARD = {
 };
 
 const NUMBER = {
-  SIX: 6,
-  FIVE: 5,
-  FOUR: 4,
-  THREE: 3,
-  ONE: 1,
-  ZERO: 0,
+  LOTTO_LENGTH: 6,
+  SECOND_THIRD: 5,
+  FOURTH: 4,
+  FIFTH: 3,
+  START: 1,
+  DEFAULT: 0,
   LAST: 45,
-  DEFAULT: 1000,
+  DECIMAL: 1,
+  DIVISOR: 100,
+  DEFAULT_WON: 1000,
+  ADD: 1,
 };
 
 const totalReward = [
-  `${NUMBER.THREE}개 일치 (${REWARD.FIFTH.toLocaleString()}원) - `,
-  `${NUMBER.FOUR}개 일치 (${REWARD.FOURTH.toLocaleString()}원) - `,
-  `${NUMBER.FIVE}개 일치 (${REWARD.THIRD.toLocaleString()}원) - `,
-  `${NUMBER.FIVE}개 일치, 보너스 볼 일치 (${REWARD.SECOND.toLocaleString()}원) - `,
-  `${NUMBER.SIX}개 일치 (${REWARD.FIRST.toLocaleString()}원) - `,
+  `${NUMBER.FIFTH}개 일치 (${REWARD.FIFTH.toLocaleString()}원) - `,
+  `${NUMBER.FOURTH}개 일치 (${REWARD.FOURTH.toLocaleString()}원) - `,
+  `${NUMBER.SECOND_THIRD}개 일치 (${REWARD.THIRD.toLocaleString()}원) - `,
+  `${NUMBER.SECOND_THIRD}개 일치, 보너스 볼 일치 (${REWARD.SECOND.toLocaleString()}원) - `,
+  `${NUMBER.LOTTO_LENGTH}개 일치 (${REWARD.FIRST.toLocaleString()}원) - `,
 ];
 
 const pattern = {
@@ -40,10 +43,10 @@ const REQUEST = {
 const ERROR = {
   TYPE_CHECK: `${pattern.prefix} 정확한 값이 아닙니다.`,
   AMOUNT_CHECK: `${pattern.prefix} 금액은 ${NUMBER.DEFAULT}원 단위로 입력해주세요.`,
-  INVALID_ARRAY: `${pattern.prefix} ${NUMBER.SIX}개의 숫자를 쉼표(,)로 구분하여 입력해주세요.`,
+  INVALID_ARRAY: `${pattern.prefix} ${NUMBER.LOTTO_LENGTH}개의 숫자를 쉼표(,)로 구분하여 입력해주세요.`,
   DUPLICATE: `${pattern.prefix} 서로 다른 숫자를 입력해주세요.`,
-  RANGE_CHECK: `${pattern.prefix} ${NUMBER.ONE}에서 ${NUMBER.LAST}사이에 숫자를 입력해주세요.`,
-  LENGTH_CHECK: `${pattern.prefix} 로또 번호는 ${NUMBER.SIX}개여야 합니다.`,
+  RANGE_CHECK: `${pattern.prefix} ${NUMBER.START}에서 ${NUMBER.LAST}사이에 숫자를 입력해주세요.`,
+  LENGTH_CHECK: `${pattern.prefix} 로또 번호는 ${NUMBER.LOTTO_LENGTH}개여야 합니다.`,
 };
 
 export {
