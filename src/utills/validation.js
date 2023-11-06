@@ -56,8 +56,6 @@ class Validation {
 		const invalidReason = this.validationList.find(factor => !factor.func(numbers));
 
 		if (invalidReason !== undefined) throw new Error(invalidReason.message);
-
-		return true;
 	}
 }
 

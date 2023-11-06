@@ -22,6 +22,18 @@ class Input {
 		return purchaseAmount;
 	}
 
+	async winNumberInput() {
+		Output.winNumberInputMessage();
+
+		const winNumber = await Console.readLineAsync();
+
+		const winNumberArr = winNumber.toString().trim().split(',').map(a => +a);
+
+		Validation.validate(winNumberArr);
+
+		return winNumberArr;
+	}
+
 	async bonusNumberInput() {
 		Output.bonusNumberPrint();
 

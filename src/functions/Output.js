@@ -17,8 +17,12 @@ const Output = {
 		});
 	},
 
+	winNumberInputMessage() {
+		Console.print(MESSAGE.WIN_NUMBER_MESSAGE);
+	},
+
 	bonusNumberPrint() {
 		Console.print(MESSAGE.BONUS_NUMBER_MESSAGE);
-	}
+	},
 }
 export default Output;
