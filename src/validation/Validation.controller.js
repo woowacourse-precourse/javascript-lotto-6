@@ -25,8 +25,9 @@ export default class ValidationController {
     this.#validationService.isUnique(ticket);
   }
 
-  validateBonusNumber(bonus) {
+  validateBonusNumber(bonus, winningNumbers) {
     this.#validationService.isNumber(bonus);
     this.#validationService.isInRange([bonus]);
+    this.#validationService.isUnique([...winningNumbers, bonus]);
   }
 }

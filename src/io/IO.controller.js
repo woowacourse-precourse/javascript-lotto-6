@@ -27,10 +27,10 @@ export default class IOController {
     return NUMBERS;
   }
 
-  async readBonusNumber() {
+  async readBonusNumber(winningNumbers) {
     const INPUT = await this.#InputService.readBonusNumber();
     const BONUS = +INPUT;
-    this.#ValidationController.validateBonusNumber(BONUS);
+    this.#ValidationController.validateBonusNumber(BONUS, winningNumbers);
     return BONUS;
   }
 

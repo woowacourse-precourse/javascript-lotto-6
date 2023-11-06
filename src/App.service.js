@@ -44,7 +44,9 @@ export default class AppService {
       bonusNumber: null,
     };
     result.winningNumbers = await this.#IOController.readWinningNumbers();
-    result.bonusNumber = await this.#IOController.readBonusNumber();
+    result.bonusNumber = await this.#IOController.readBonusNumber(
+      result.winningNumbers
+    );
     return result;
   }
 }
