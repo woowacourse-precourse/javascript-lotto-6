@@ -3,22 +3,14 @@ import { CONSOLE_MESSAGE, format } from "../constants/ConsoleMessgaes.js";
 import { SETTING } from "../constants/Settings.js";
 
 class OutputView {
-  static async printLottoPaperCount(number) {
-    try {
-      Console.print(format(CONSOLE_MESSAGE.outputLottoCount, number));
-    } catch (error) {
-      throw error;
-    }
+  static printLottoPaperCount(number) {
+    Console.print(format(CONSOLE_MESSAGE.outputLottoCount, number));
   }
 
-  static async printLotto(numberList) {
-    try {
-      numberList.map((number) => {
-        Console.print("[" + number.join(", ") + "]");
-      });
-    } catch (error) {
-      throw error;
-    }
+  static printLotto(numberList) {
+    numberList.map((number) => {
+      Console.print("[" + number.join(", ") + "]");
+    });
   }
 
   static printLottoResult(list) {

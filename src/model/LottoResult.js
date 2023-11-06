@@ -52,10 +52,6 @@ class LottoResult {
     this.#bonusNumber = number;
   }
 
-  getBonusNumber() {
-    return this.#bonusNumber;
-  }
-
   getLottoRank() {
     return this.#lottoRank;
   }

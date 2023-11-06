@@ -3,34 +3,22 @@ import { CONSOLE_MESSAGE } from "../constants/ConsoleMessgaes.js";
 
 class InputView {
   static async getPrice() {
-    try {
-      const price = await Console.readLineAsync(CONSOLE_MESSAGE.inputPrice);
-      return price;
-    } catch (error) {
-      throw error;
-    }
+    const price = await Console.readLineAsync(CONSOLE_MESSAGE.inputPrice);
+    return price;
   }
 
   static async getLottoNumbers() {
-    try {
-      const lottoNumbers = await Console.readLineAsync(
-        CONSOLE_MESSAGE.inputLottoNumbers
-      );
-      return lottoNumbers;
-    } catch (error) {
-      throw error;
-    }
+    const lottoNumbers = await Console.readLineAsync(
+      CONSOLE_MESSAGE.inputLottoNumbers
+    );
+    return lottoNumbers;
   }
 
   static async getBonusNumber() {
-    try {
-      const bonuseNubmer = await Console.readLineAsync(
-        CONSOLE_MESSAGE.inputBonusNumber
-      );
-      return bonuseNubmer;
-    } catch (error) {
-      throw error;
-    }
+    const bonuseNubmer = await Console.readLineAsync(
+      CONSOLE_MESSAGE.inputBonusNumber
+    );
+    return bonuseNubmer;
   }
 }
 
