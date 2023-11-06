@@ -32,12 +32,23 @@ export class LottoDrawMachine {
     OutputView.print(this.#bonusNumber);
   }
 
+  printResult(lottos) {
+    const boughtAmount = lottos.length * LOTTO_RULE.PRICE;
+    const lottoWinnings = this.#calculateLottoWinnings(lottos);
+    const totalReturn = this.#calculateTotalReturn(lottoWinnings, boughtAmount);
+
+    OutputView.print(MESSAGES.WINNING_STATISTICS.PREFIX);
+    lottoWinnings.forEach((lottoWinning, i) => {
+      OutputView.print(MESSAGES.WINNING_STATISTICS[5 - i](lottoWinning));
+    });
+    OutputView.print(MESSAGES.WINNING_STATISTICS.SUFFIX(totalReturn));
+  }
+
   #formatWinningNumber(str) {
     return str.split(",").map(Number);
   }
 
   #validateWinningNumber(winningNumbers) {
-    console.log(winningNumbers);
     if (!Validation.isLength(winningNumbers, LENGTH)) {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_LENGTH(LENGTH));
     }
@@ -73,5 +84,61 @@ export class LottoDrawMachine {
     if (!Validation.isInteger(bonusNumber)) {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_INTEGER);
     }
+  }
+
+  #calculateLottoWinnings(lottos) {
+    let lottoWinnings = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+    };
+
+    lottos.forEach((lotto) => {
+      const matchCount = this.#calculateMatchCount(lotto);
+
+      if (matchCount === 6) {
+        lottoWinnings[1] += 1;
+        return;
+      }
+
+      if (matchCount === 5 && lotto.includes(this.#bonusNumber)) {
+        lottoWinnings[2] += 1;
+        return;
+      }
+
+      if (matchCount === 5) {
+        lottoWinnings[3] += 1;
+        return;
+      }
+
+      if (matchCount === 4) {
+        lottoWinnings[4] += 1;
+        return;
+      }
+
+      if (matchCount === 3) {
+        lottoWinnings[5] += 1;
+        return;
+      }
+
+      return;
+    });
+
+    return Object.values(lottoWinnings).reverse();
+  }
+
+  #calculateMatchCount(lotto) {
+    return lotto.filter((number) => this.#winningNumbers.includes(number))
+      .length;
+  }
+
+  #calculateTotalReturn(lottoWinnings, boughtAmount) {
+    let totalWinningAmount = 0;
+    lottoWinnings.forEach((x, i) => {
+      totalWinningAmount += x * LOTTO_RULE.WINNING_AMOUNT[5 - i];
+    });
+    return ((totalWinningAmount / boughtAmount) * 100).toFixed(1);
   }
 }
