@@ -15,9 +15,9 @@ const CORRECT_MESSAGE = {
 }
 
 const LOTTO_MESSAGE = {
-    RESULT_VIEW: '당첨 통계',
-    WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-    BONUS_NUMBERS: '보너스 번호를 입력해 주세요.\n',
+    RESULT_VIEW: '\n당첨 통계\n---',
+    WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+    BONUS_NUMBERS: '\n보너스 번호를 입력해 주세요.\n',
     BUY_LOTTO: "구입금액을 입력해 주세요.\n"
 }
 
