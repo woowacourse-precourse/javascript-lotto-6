@@ -21,14 +21,15 @@ class Player {
     };
   }
 
-  getPurchaseAmount() {
-    return this.#budget / 1000;
+  getNumOfLottos() {
+    return this.#lottos.length;
   }
 
   buyLottos() {
-    const purchaseAmount = this.#budget / 1000;
-    for (let i = 0; i < purchaseAmount; i++)
+    while (this.#budget > 0) {
       this.#lottos.push(new Lotto(generateRandomLottoNumbers()));
+      this.#budget -= 1000;
+    }
   }
 
   checkLottos(winningNumbers, bonusNumber) {

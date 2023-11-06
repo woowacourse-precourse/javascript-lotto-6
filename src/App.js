@@ -12,8 +12,8 @@ class App {
     player.buyLottos();
 
     // 구매한 양 출력
-    const purchaseAmount = player.getPurchaseAmount();
-    LottoConsole.printAmountOfLotto(purchaseAmount);
+    const numOfLottos = player.getNumOfLottos();
+    LottoConsole.printAmountOfLotto(numOfLottos);
 
     // 당첨번호 입력
     const lottoNumbers = await LottoConsole.getLottoNumbers();
