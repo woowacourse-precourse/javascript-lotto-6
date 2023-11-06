@@ -1,10 +1,10 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO } from './data.js';
+import { LOTTO, MATCH, UTILITY } from './data.js';
 
 function isPositiveInteger(value) {
   const number = Number(value);
 
-  return Number.isInteger(number) && number > 0;
+  return Number.isInteger(number) && number > UTILITY.ZERO;
 }
 
 function generateRandomNumbers(count) {
@@ -16,15 +16,15 @@ function generateRandomNumbers(count) {
 }
 
 function getMatchCount(lottoNumbers, winningNumbers, bonus) {
-  let match = 0;
+  let match = MATCH.INITIAL_COUNT;
 
   lottoNumbers.forEach((number) => {
     if (winningNumbers.includes(number)) {
-      match += 1;
+      match += MATCH.UNIT;
     }
 
-    if (match === 5 && lottoNumbers.includes(bonus)) {
-      return '5 + 1';
+    if (match === MATCH.FIVE && lottoNumbers.includes(bonus)) {
+      return MATCH.SECOND_REWARD_CONDITION;
     }
   });
 

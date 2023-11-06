@@ -4,7 +4,6 @@ import { ERROR } from '../messages.js';
 class Lotto {
   #numbers;
 
-  // numbers는 숫자 배열
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
