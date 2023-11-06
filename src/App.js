@@ -3,18 +3,14 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable class-methods-use-this */
 import { MissionUtils } from "@woowacourse/mission-utils";
-import {
-  BASE_AMOUNT,
-  INPUT_MESSAGE,
-  OUTPUT_MESSAGE,
-} from "./utils/CONSTANT.js";
+import { BASE_AMOUNT, INPUT_MESSAGE } from "./utils/CONSTANT.js";
 import {
   validateBonusNumber,
   validatePurchase,
   validateWinningNumber,
 } from "./utils/validation.js";
 import Lotto from "./Lotto.js";
-import { printResults } from "./utils/consoleOutput.js";
+import { printPurchaseResults, printResults } from "./utils/consoleOutput.js";
 
 class App {
   #purchaseAmount;
@@ -63,19 +59,10 @@ class App {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  printPurchaseResults() {
-    MissionUtils.Console.print(
-      `\n${this.#ticketCount + OUTPUT_MESSAGE.purchaseResult}`,
-    );
-    this.#tickets.forEach((ticket) =>
-      MissionUtils.Console.print(`[${ticket.numbers.join(", ")}]`),
-    );
-  }
-
   async startPurchase() {
     await this.inputPurchaseAmount();
     this.createLottoTickets();
-    this.printPurchaseResults();
+    printPurchaseResults(this.#ticketCount, this.#tickets);
   }
 
   async inputWinningNumber() {

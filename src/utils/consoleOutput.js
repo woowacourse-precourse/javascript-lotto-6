@@ -1,3 +1,5 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { OUTPUT_MESSAGE, RANKS } from "./CONSTANT";
 
@@ -28,4 +30,13 @@ const printResults = (result, profitPercentage) => {
   printProfitPercentage(profitPercentage);
 };
 
-export { printResults };
+const printPurchaseResults = (ticketCount, tickets) => {
+  MissionUtils.Console.print(
+    `\n${ticketCount + OUTPUT_MESSAGE.purchaseResult}`,
+  );
+  tickets.forEach((ticket) =>
+    MissionUtils.Console.print(`[${ticket.numbers.join(", ")}]`),
+  );
+};
+
+export { printResults, printPurchaseResults };
