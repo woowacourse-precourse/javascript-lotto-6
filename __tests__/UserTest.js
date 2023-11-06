@@ -12,7 +12,7 @@ describe('User 클래스 테스트', () => {
       mockQuestions([v]);
 
       const user = new User();
-      const money = await user.pay();
+      await user.pay();
 
       expect(user.getReceipt().paymentAmount).toEqual(expectedOutput[i]);
     });
