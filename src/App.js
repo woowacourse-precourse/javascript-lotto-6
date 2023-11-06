@@ -21,7 +21,7 @@ class App {
 			return a - b;
 		});
 	}
-	lottoPrinter(tickets) {
+	createLotto(tickets) {
 		const lottos = [];
 		let numbers = [];
 		while (lottos.length < tickets) {
@@ -29,15 +29,20 @@ class App {
 			this.sortNumber(numbers);
 			lottos.push(numbers);
 		}
+		validation.duplicateLottoNumber(lottos);
 		return lottos;
 	}
-	createLotto(tickets) {
-		const lottos = this.lottoPrinter(tickets);
+	lottoPrinter(tickets, lottos) {
+		Console.print(`\n${tickets}개를 구매했습니다.`);
+		for (let lotto of lottos) {
+			Console.print(`[${lotto.toString().split(',').join(', ')}]`);
+		}
 	}
 	async play() {
 		try {
 			const tickets = await this.buy();
-			this.createLotto(tickets);
+			const lottos = this.createLotto(tickets);
+			this.lottoPrinter(tickets, lottos);
 		} catch (error) {
 			throw error;
 		}
