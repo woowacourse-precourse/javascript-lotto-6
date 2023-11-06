@@ -12,13 +12,13 @@ class Lotto {
 
   #validate(numbers) {
     if (!InputValidator.checkMatchLength(numbers.length)) {
-      throw new ValidationError(ERROR_MESSAGE.notMatchedLength);
+      throw new ValidationError(ERROR_MESSAGE.notMatchedLength).toString();
     }
     if (!InputValidator.checkDuplicateNumber(numbers)) {
-      throw new ValidationError(ERROR_MESSAGE.duplicateNumber);
+      throw new ValidationError(ERROR_MESSAGE.duplicateNumber).toString();
     }
     if (!InputValidator.checkIncludeNumbers(numbers)) {
-      throw new ValidationError(ERROR_MESSAGE.invalidNumber);
+      throw new ValidationError(ERROR_MESSAGE.invalidNumber).toString();
     }
   }
 

@@ -27,13 +27,13 @@ class LottoMaker {
 
   validateLottoPublishCount(count) {
     if (InputValidator.checkNaN(count)) {
-      throw new ValidationError(ERROR_MESSAGE.isNaN);
+      throw new ValidationError(ERROR_MESSAGE.isNaN).toString();
     }
     if (!InputValidator.checkInteger(count)) {
-      throw new ValidationError(ERROR_MESSAGE.notDividedPrice);
+      throw new ValidationError(ERROR_MESSAGE.notDividedPrice).toString();
     }
     if (!InputValidator.checkPositiveNumber(count)) {
-      throw new ValidationError(ERROR_MESSAGE.negativePrice);
+      throw new ValidationError(ERROR_MESSAGE.negativePrice).toString();
     }
   }
 
@@ -59,13 +59,13 @@ class LottoMaker {
 
   validateBonusNumber(number) {
     if (!InputValidator.checkIncludeNumber(number)) {
-      throw new ValidationError(ERROR_MESSAGE.invalidNumber);
+      throw new ValidationError(ERROR_MESSAGE.invalidNumber).toString();
     }
     if (this.#winningLotto.numbers.includes(number)) {
-      throw new ValidationError(ERROR_MESSAGE.duplicateBonusNumber);
+      throw new ValidationError(ERROR_MESSAGE.duplicateBonusNumber).toString();
     }
     if (InputValidator.checkNaN(number)) {
-      throw new ValidationError(ERROR_MESSAGE.isNaN);
+      throw new ValidationError(ERROR_MESSAGE.isNaN).toString();
     }
   }
 

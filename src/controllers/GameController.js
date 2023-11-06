@@ -40,7 +40,7 @@ class GameController {
       this.#lottoMaker.validateLottoPublishCount(count);
       return count;
     } catch (e) {
-      Console.print(e.toString());
+      Console.print(e);
       return this.getLottoPublishCount();
     }
   }
@@ -54,7 +54,7 @@ class GameController {
       this.#lottoMaker.winningLotto = convertNumbersArray;
       return null;
     } catch (e) {
-      Console.print(e.toString());
+      Console.print(e);
       return this.setWinningLotto();
     }
   }
@@ -66,7 +66,7 @@ class GameController {
       this.#lottoMaker.bonusNumber = number;
       return null;
     } catch (e) {
-      Console.print(e.toString());
+      Console.print(e);
       return this.setBounusNumber();
     }
   }
