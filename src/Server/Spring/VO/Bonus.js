@@ -10,11 +10,11 @@ class Bonus {
   }
 
   #validate(bonusLotto, winningLotto) {
-    if (bonusLotto === '') throw new Error(ERROR_MESSAGE.isBlank);
-    if (Number.isNaN(Number(bonusLotto))) throw new Error(ERROR_MESSAGE.isChar);
-    if (winningLotto.includes(Number(bonusLotto))) throw new Error(ERROR_MESSAGE.isDuplicate);
+    if (bonusLotto === '') throw ERROR_MESSAGE.isBlank;
+    if (Number.isNaN(Number(bonusLotto))) throw ERROR_MESSAGE.isChar;
+    if (winningLotto.includes(Number(bonusLotto))) throw ERROR_MESSAGE.isDuplicate;
     if (CONSTANTS.lottoMin > Number(bonusLotto) || Number(bonusLotto) > CONSTANTS.lottoMax)
-      throw new Error(ERROR_MESSAGE.isNotInRange);
+      throw ERROR_MESSAGE.isNotInRange;
   }
 
   get bonus() {

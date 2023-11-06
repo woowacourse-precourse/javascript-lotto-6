@@ -15,7 +15,6 @@ class LottoPos {
     this.#userLotto = null;
   }
 
-  // eslint-disable-next-line consistent-return
   handlerPurchaseAmount = async () => {
     const purchaseAmount = await InputView.inputPurchaseAmount();
     const responseData = await this.ajax(
