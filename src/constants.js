@@ -28,11 +28,11 @@ const INPUT_MESSAGE = {
 };
 
 const ERROR_MESSAGE = {
-  ISNAN: '\n[ERROR] 숫자만 입력해 주세요',
-  RANGE: '\n[ERROR] 1~45의 범위로 입력해 주세요.',
-  COUNT: '\n[ERROR] 6개의 숫자를 입력해 주세요.',
-  DUPLICATED: '\n[ERROR] 중복된 숫자는 입력할 수 없습니다.',
-  UNIT: '\n[ERROR] 1,000원 단위로 입력해 주세요.',
+  ISNAN: `\n[ERROR] 숫자만 입력해 주세요`,
+  RANGE: `\n[ERROR] ${LOTTO_NUMBERS.MIN_RANGE}~${LOTTO_NUMBERS.MAX_RANGE}의 범위로 입력해 주세요.`,
+  COUNT: `\n[ERROR] ${LOTTO_NUMBERS.NUMBER_SIZE}개의 숫자를 입력해 주세요.`,
+  DUPLICATED: `\n[ERROR] 중복된 숫자는 입력할 수 없습니다.`,
+  UNIT: `\n[ERROR] ${LOTTO_NUMBERS.PAY_LOTTO_MONEY}원 단위로 입력해 주세요.`,
 };
 
 const WINNER_MESSAGE = {
