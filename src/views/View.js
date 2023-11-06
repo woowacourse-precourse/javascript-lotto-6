@@ -3,6 +3,10 @@ import MESSAGE from '../utils/constants/string.js';
 import SYMBOL from '../utils/constants/symbol.js';
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
+import NUMBER from '../utils/constants/number.js';
+
+const { statistics } = NUMBER;
+const { prizes } = statistics;
 
 class View {
   #inputView = InputView;
@@ -39,6 +43,34 @@ class View {
     );
     lottoNumbers.forEach(item => this.#outputView.print(item));
     this.printNewLine();
+  }
+
+  printLottoStats(result) {
+    this.#printLottoStatsHeader();
+    Object.entries(result).forEach(([category, count]) => {
+      this.#printLottoStatItem(category, count);
+    });
+    this.printNewLine();
+  }
+
+  #printLottoStatsHeader() {
+    this.printNewLine();
+    this.#outputView.print(MESSAGE.statsHeader);
+  }
+
+  #printLottoStatItem(category, count) {
+    const prize = prizes[category];
+    const resultMessage = MessageFormat.lottoResultMessage(
+      category,
+      prize,
+      count,
+    );
+    this.#outputView.print(resultMessage);
+  }
+
+  printProfitRate(profitRate) {
+    const profitRateMessage = MessageFormat.profitRateMessage(profitRate);
+    this.#outputView.print(profitRateMessage);
   }
 
   printNewLine() {
