@@ -1,6 +1,5 @@
 import { printMessage, readLineAsync } from './utils';
-import { isDivideMinCost } from './utils';
-import { MESSAGE, SETTING } from './constants';
+import { MATCH, MESSAGE, PRICE, SETTING } from './constants';
 import LottoShop from './LottoShop';
 
 class App {
@@ -12,6 +11,8 @@ class App {
     this.printLotto(lottos);
     await this.setPrizeNumber();
     await this.setBonusNumber();
+    this.printMatchResult(lottos);
+    this.printTotalReturn(lottos);
   }
 
   async payLottoCost() {
@@ -56,6 +57,26 @@ class App {
       printMessage(error.message);
       await this.setBonusNumber();
     }
+  }
+
+  printMatchResult(lottos) {
+    const stat = this.#lottoShop.calculateStat(lottos);
+    printMessage(MESSAGE.prize_stats);
+    printMessage(MESSAGE.line);
+    Object.keys(stat).forEach((key) => {
+      if (key === SETTING.bonus) {
+        const price = PRICE.bonus.toLocaleString();
+        printMessage(MATCH.bonus_match(price, stat[key]));
+        return;
+      }
+      const price = PRICE[key].toLocaleString();
+      printMessage(MATCH.normal_match(key, price, stat[key]));
+    });
+  }
+  
+  printTotalReturn(lottos) {
+    const totalReturn = this.#lottoShop.calculateTotalReturn(lottos);
+    printMessage(MESSAGE.total_return(totalReturn));
   }
 }
 
