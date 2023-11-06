@@ -1,5 +1,6 @@
 class LottoGame {
   constructor(price) {
+    this.validatePrice(price);
     this.price = price;
     this.count = this.calculateLottoCount(price);
     this.lottos = [];
@@ -11,6 +12,12 @@ class LottoGame {
     this.third = 0;
     this.fourth = 0;
     this.fifth = 0;
+  }
+
+  validatePrice(price) {
+    if (Number.isNaN(Number(price))) {
+      throw Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }
   }
 
   calculateLottoCount(price) {
@@ -29,30 +36,40 @@ class LottoGame {
     this.bonusNumber = number;
   }
 
-  calculateLottoResult() {
+  calculateResultArray() {
     const resultArray = this.lottos.map(lotto => {
-      console.log(lotto.findMatchingNumbers(this.winningNumbers));
-      return lotto.findMatchingNumbers(this.winningNumbers);
+      return lotto.findMatchingNumbers(this.winningNumbers, this.bonusNumber);
     });
+    return resultArray;
+  }
 
-    console.log(`리턴된 ${resultArray}`);
+  calculateLottoResult() {
+    const resultArray = this.calculateResultArray();
+    // console.log(`리턴된 ${resultArray}`);
 
     resultArray.forEach(result => {
-      switch (result.length) {
-        case 3:
-          this.fifth += 1;
-          break;
-        case 4:
-          this.fourth += 1;
-          break;
-        case 5:
-          this.checkBonusNumber(result);
-          break;
-        case 6:
-          this.first += 1;
-          break;
-        default:
-          break;
+      if (result.includes(this.bonusNumber) && result.length === 6) {
+        this.checkBonusNumber(result);
+      } else {
+        const withoutBonus = result.filter(
+          eachResult => eachResult !== this.bonusNumber,
+        );
+        switch (withoutBonus.length) {
+          case 3:
+            this.fifth += 1;
+            break;
+          case 4:
+            this.fourth += 1;
+            break;
+          case 5:
+            this.third += 1;
+            break;
+          case 6:
+            this.first += 1;
+            break;
+          default:
+            break;
+        }
       }
     });
   }
@@ -72,15 +89,11 @@ class LottoGame {
       this.third * 1500000 +
       this.seccond * 30000000 +
       this.first * 2000000000;
-    console.log('전체수익');
-    console.log(prize);
-    return prize;
+    this.lottoPrize = prize;
   }
 
   calculateProfitability(price, prize) {
-    const profit = prize - price;
-    const ROI = (profit / price) * 100;
-    return ROI;
+    return (prize / price) * 100;
   }
 }
 
