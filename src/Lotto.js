@@ -9,6 +9,10 @@ class Lotto {
     this.#numbers = [];
   }
 
+  async main() {
+    return this.print();
+  }
+
   #validate(numbers) {
     if (!validateWinningLotto(numbers))
       throw new Error(`${ErrorMessages.WINNING_LOTTO_ERROR_MESSAGE}`);
@@ -18,11 +22,7 @@ class Lotto {
     const lottoNumbers = await printWinningLotto();
     this.#validate(lottoNumbers);
     this.#numbers = lottoNumbers;
-    console.log(this.#numbers);
-  }
-
-  main() {
-    this.print();
+    return lottoNumbers;
   }
 }
 
