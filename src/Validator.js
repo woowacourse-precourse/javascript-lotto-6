@@ -41,13 +41,17 @@ class Validator {
     return true;
   }
 
-  validateUserInputBonusNumber(userInputBonusNumber) {
+  validateUserInputBonusNumber(userInputBonusNumber, winningNumbers) {
     if (Number.isNaN(userInputBonusNumber)) {
       throw new Error(ERROR_MESSAGE.isNotAnumber);
     }
 
     if (userInputBonusNumber <= 0 || userInputBonusNumber > 45) {
       throw new Error(ERROR_MESSAGE.isNotInRange);
+    }
+
+    if (winningNumbers.includes(userInputBonusNumber)) {
+      throw new Error(ERROR_MESSAGE.bonusNumDuplicated);
     }
 
     return true;

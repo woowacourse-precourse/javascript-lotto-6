@@ -22,10 +22,10 @@ class GameController {
       this.gameMessageGenerator.getLottoNumberListMessage(LOTTO_NUMBER_ARRAY);
     this.outputView.showLottoNumberListOutput(LOTTO_TICKET_NUMBER, LOTTO_NUMBER_LIST_MESSAGE);
     const WINNING_NUMBERS = await this.inputView.getUserInputWinningNumbers();
-    const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber();
+    const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber(WINNING_NUMBERS);
     const GAME_CALCULATOR = new GameCalculator(LOTTO_NUMBER_ARRAY, WINNING_NUMBERS, BONUS_NUMBER);
     const OBJ_FOR_RESULT = GAME_CALCULATOR.calculate();
-    console.log(OBJ_FOR_RESULT);
+
     const GAME_RESULT_MASSAGE = this.gameMessageGenerator.getResultMessageForEachCorrect;
   }
 }

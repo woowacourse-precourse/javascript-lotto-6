@@ -17,6 +17,7 @@ export const ERROR_MESSAGE = Object.freeze({
   isNotSixDigit: '[ERROR] 총 6개의 숫자를 입력해야 합니다.',
   numDuplicated: '[ERROR] 중복된 숫자가 있습니다.',
   isNotAnumber: '[ERROR] 한 개의 숫자를 입력해주세요.',
+  bonusNumDuplicated: '[ERROR] 보너스 번호는 당첨 번호와 달라야 합니다.',
 });
 
 export const NUMBER = Object.freeze({

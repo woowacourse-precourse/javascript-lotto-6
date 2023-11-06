@@ -27,11 +27,11 @@ class InputView {
     return USER_INPUT_WINNING_NUMBERS.split(OTHERS.comma).map(Number);
   }
 
-  async getUserInputBonusNumber() {
+  async getUserInputBonusNumber(winningNumbers) {
     const USER_INPUT_BONUS_NUMBER = await Console.readLineAsync(
       `${OTHERS.lineBreak}${INPUT_MESSAGE.bonusNumber}${OTHERS.lineBreak}`
     );
-    this.validator.validateUserInputBonusNumber(Number(USER_INPUT_BONUS_NUMBER));
+    this.validator.validateUserInputBonusNumber(Number(USER_INPUT_BONUS_NUMBER), winningNumbers);
 
     return Number(USER_INPUT_BONUS_NUMBER);
   }
