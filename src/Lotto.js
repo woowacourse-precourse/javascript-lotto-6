@@ -9,7 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validation.isValidLength(numbers);
+    Validation.isValidWinningNumbersLength(numbers);
 
     numbers.forEach((number) => {
       Validation.isNumber(number);
