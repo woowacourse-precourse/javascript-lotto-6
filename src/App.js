@@ -53,9 +53,20 @@ class App {
     return userTickets;
   }
 
+  printLottoTicketCount(userTickets) {
+    Console.print(`${userTickets.length}개를 구매했습니다.`);
+  }
+
+  printLottoTicketNumbers(userTickets) {
+    userTickets.forEach((userTicket) => userTicket.printLottoNumbers());
+  }
+
   async play() {
     const userMoney = await this.getUserPurchaseMoney();
     const userTickets = this.purchaseLottoTickets(userMoney);
+
+    this.printLottoTicketCount(userTickets);
+    this.printLottoTicketNumbers(userTickets);
   }
 }
 
