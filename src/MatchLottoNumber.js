@@ -1,10 +1,15 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-const { Random } = MissionUtils;
-class BuyLotto {
+
+class MatchLottoNumber {
   #sameNumberCount = 0;
+  #rank;
 
   constructor(numbers, bonusNumbers, lotto) {
     this.#compare(numbers, bonusNumbers, lotto);
+  }
+
+  get getRank() {
+    return this.#rank;
   }
 
   #compare(numbers, bonusNumbers, lotto) {
@@ -13,7 +18,7 @@ class BuyLotto {
         this.#sameNumberCount++;
       }
     });
-    return this.#ranking(bonusNumbers, lotto);
+    this.#rank = this.#ranking(bonusNumbers, lotto);
   }
 
   #ranking(bonusNumbers, lotto) {
@@ -35,10 +40,11 @@ class BuyLotto {
   }
 }
 
-const matchLottoNumber = new BuyLotto(
+const matchLottoNumber = new MatchLottoNumber(
   [1, 2, 3, 4, 5, 6],
   7,
   [1, 2, 3, 4, 5, 7]
 );
+console.log(matchLottoNumber.getRank);
 
-export default BuyLotto;
+export default MatchLottoNumber;
