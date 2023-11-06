@@ -3,12 +3,15 @@ import { WINNIG_PROFITS, WINNING_NUMBERS } from '../Constants.js';
 import GameUtils from '../lotto/GameUtils.js';
 class OutputUi {
   constructor() {}
-
+  printNumberOfLotts(NUMBER_OF_LOTTOS) {
+    MissionUtils.Console.print('');
+    MissionUtils.Console.print(`${NUMBER_OF_LOTTOS}개를 구매했습니다.`);
+  }
   printPurchasedLottos(lottos) {
     const NUMBER_OF_LOTTOS = lottos.length;
-    MissionUtils.Console.print(`\n${NUMBER_OF_LOTTOS}개를 구매했습니다.`);
+    this.printNumberOfLotts(NUMBER_OF_LOTTOS);
     for (let i = 0; i < NUMBER_OF_LOTTOS; i++) {
-      MissionUtils.Console.print(lottos[i]);
+      MissionUtils.Console.print(`[${lottos[i].join(', ')}]`);
     }
     MissionUtils.Console.print('\n');
   }

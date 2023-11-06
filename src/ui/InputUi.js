@@ -4,13 +4,13 @@ class InputUi {
   constructor() {}
   async askpurchaseAmount() {
     const PURCHASE_AMOUNT = await MissionUtils.Console.readLineAsync(
-      '구입 금액을 입력하세요.'
+      '구입 금액을 입력하세요.\n'
     );
     return PURCHASE_AMOUNT;
   }
   async askWinningNumber() {
     const WINNING_NUMBER = await MissionUtils.Console.readLineAsync(
-      '당첨 번호를 입력하세요.'
+      '당첨 번호를 입력하세요.\n'
     );
     return WINNING_NUMBER;
   }

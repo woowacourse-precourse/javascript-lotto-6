@@ -37,13 +37,7 @@ class LottoGame {
 
   generateRandomNumbers() {
     const RANDOM_NUMBERS = [];
-    while (RANDOM_NUMBERS.length < 6) {
-      const NEW_ELEMENT = MissionUtils.Random.pickNumberInRange(1, 45);
-      if (!RANDOM_NUMBERS.includes(NEW_ELEMENT)) {
-        RANDOM_NUMBERS.push(NEW_ELEMENT);
-      }
-    }
-    return RANDOM_NUMBERS;
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   getWinningStatus(winningNumbers, bonusNumber) {
