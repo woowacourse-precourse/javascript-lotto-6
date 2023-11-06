@@ -116,7 +116,15 @@ class App {
     }, initValue);
   }
 
+  calcTotalProfitPercentage() {
+    this.#profitPercentage = (this.#totalProfit / this.#purchaseAmount) * 100;
+  }
+
   printResults() {
+    this.printWinnigList();
+  }
+
+  printWinnigList() {
     this.#result.forEach((rank) => {
       const mathing = rank.bonus
         ? OUTPUT_MESSAGE.matchCount + OUTPUT_MESSAGE.matchBonus
@@ -129,12 +137,9 @@ class App {
     });
   }
 
-  calcTotalProfitPercentage() {
-    this.#profitPercentage = (this.#totalProfit / this.#purchaseAmount) * 100;
-  }
-
   getResult() {
     this.matchLotteryResults();
+    this.calcTotalProfitPercentage();
     this.printResults();
   }
 
