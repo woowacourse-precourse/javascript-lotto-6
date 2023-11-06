@@ -1,7 +1,7 @@
 class LottoGameController {
-  #lottoService;
+  #lottoMachine;
 
-  #winningService;
+  #winningJudge;
 
   #inputview;
 
@@ -9,20 +9,22 @@ class LottoGameController {
 
   #lottoList;
 
-  constructor({ lottoService, winningService, inputview, outputview }) {
-    this.#lottoService = lottoService;
-    this.#winningService = winningService;
+  constructor({ LottoMachine, WinningJudge, inputview, outputview }) {
+    this.#lottoMachine = LottoMachine;
+    this.#winningJudge = WinningJudge;
     this.#inputview = inputview;
     this.#outputview = outputview;
   }
 
-  startGame() {
-    this.readMoney();
+  async startGame() {
+    await this.readMoney();
     this.printLottos();
     this.printGameResult();
   }
 
-  readMoney() {}
+  async readMoney() {
+    const userMoney = await this.#inputview.readMoney();
+  }
 
   printLottos() {}
 

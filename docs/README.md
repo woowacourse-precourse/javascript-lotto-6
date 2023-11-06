@@ -74,13 +74,13 @@ else를 지양한다
 
 > 로또 게임을 진행하는 컨트롤러로, Model(LottoMachine,WinningJudge)와 View(InputView, OutputView)로 명령을 전달합니다
 
-- [ ] 멤버 필드
+- [x] 멤버 필드
   - lottoMachine
   - winningJudge
   - inputView
   - outputView
   - lottoList : 로또 배열 저장
-- [ ] 로또 구매금액 입력받기
+- [x] 로또 구매금액 입력받기
 - [ ] 구매한 로또 출력하기
 - [ ] 당첨 정보 입력받기
 - [ ] 결과 출력하기
