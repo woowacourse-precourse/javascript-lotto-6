@@ -19,7 +19,7 @@ class LottoList {
         MIN_LOTTO_NUMBER,
         MAX_LOTTO_NUMBER,
         LOTTO_LENGTH
-      );
+      ).sort((a, b) => a - b);
       return new Lotto(lottoNumbers).getLotto();
     });
     this.#printLottoCnt(lottoCnt);
