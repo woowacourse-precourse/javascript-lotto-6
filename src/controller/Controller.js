@@ -3,7 +3,7 @@ import UserLotto from '../model/UserLotto.js';
 import Statistics from '../model/statistics.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import { MESSAGE, CHARACTER } from '../constants/constants.js'
+import { MESSAGE, CHARACTER } from '../constants/constants.js';
 
 class controller {
   #inputView;
@@ -74,9 +74,8 @@ class controller {
       );
     });
     this.#outputView.print(
-      `총 수익률은 ${this.#statistics.getRateOfReturns()}${
-        CHARACTER.percent
-      }입니다.`
+      `${CHARACTER.returnpreffix}${this.#statistics.getRateOfReturns()}${
+        CHARACTER.returnsuffix}`
     );
   }
 }
