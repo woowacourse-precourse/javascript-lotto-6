@@ -14,9 +14,10 @@ class UserLotto {
   #setPurchaseVariable(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
     this.#numberOfPurchase = purchaseAmount / NUMBER.lottoprice;
-    for (let i = 0; i < this.#numberOfPurchase; i++) {
-      this.#userLottoNumbers.push(new UserLottoNumber());
-    }
+    this.#userLottoNumbers = Array.from(
+      { length: this.#numberOfPurchase },
+      () => new UserLottoNumber()
+    );
   }
 
   getNumberOfPurchase() {
