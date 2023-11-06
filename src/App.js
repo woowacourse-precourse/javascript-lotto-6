@@ -8,7 +8,7 @@ class App {
   async play() {
     const count = await inputAmount() / 1000;
     publishLotto(count);
-    console.log(PublishedLottoes.numbers);
+    printLottoNumbers();
   
   }
 }
@@ -49,6 +49,13 @@ const publishLotto = (count) => {
     numbers.sort((a, b) => a - b);
     PublishedLottoes.numbers.push(numbers);
   }
+}
+
+const printLottoNumbers = () => {
+  Console.print(`\n${PublishedLottoes.numbers.length}개를 구매했습니다.`);
+  PublishedLottoes.numbers.forEach((number) => {
+    Console.print(number);
+  })
 }
 
 const app = new App();
