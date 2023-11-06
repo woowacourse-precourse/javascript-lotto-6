@@ -26,4 +26,11 @@ describe('입력 예외 상황 테스트', () => {
       Validator.negativeNumber(received);
     }).toThrow(ERROR.message.negativeNumber);
   });
+  test('쉼표 구분을 잘못 기입했을 경우', () => {
+    const received = ',1,2,3,4,5';
+
+    expect(() => {
+      Validator.invalidSeparator(received);
+    }).toThrow(ERROR.message.invalidSeparator);
+  });
 });
