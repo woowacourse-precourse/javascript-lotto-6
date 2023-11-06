@@ -28,8 +28,10 @@ export default class IOController {
   }
 
   async readBonusNumber() {
-    const BONUS = await this.#InputService.readBonusNumber();
-    return +BONUS;
+    const INPUT = await this.#InputService.readBonusNumber();
+    const BONUS = +INPUT;
+    this.#ValidationController.validateBonusNumber(BONUS);
+    return BONUS;
   }
 
   printTicketCount(tickets) {

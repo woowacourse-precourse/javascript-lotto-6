@@ -20,7 +20,13 @@ export default class ValidationController {
 
   validateWinningNumbers(ticket) {
     this.#validationService.hasSixNumbers(ticket);
+    ticket.forEach((num) => this.#validationService.isNumber(num));
     this.#validationService.isInRange(ticket);
     this.#validationService.isUnique(ticket);
+  }
+
+  validateBonusNumber(bonus) {
+    this.#validationService.isNumber(bonus);
+    this.#validationService.isInRange([bonus]);
   }
 }
