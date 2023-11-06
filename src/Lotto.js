@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { PRIZE } from './constant.js';
 
 class Lotto {
   #numbers;
@@ -39,7 +40,7 @@ class Lotto {
 5개 일치 (1,500,000원) - ${result.five}개
 5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.bonusFive}개
 6개 일치 (2,000,000,000원) - ${result.six}개`);
-    return result;
+    return this.#calculateWinningPrize(result);
   }
 
   #getResult(issuedTickets, bonus) {
@@ -62,6 +63,17 @@ class Lotto {
       if (this.#numbers.includes(number)) totalMatched += 1;
     });
     return totalMatched;
+  }
+
+  #calculateWinningPrize(result) {
+    const { three, four, five, bonusFive, six } = result;
+    const prize =
+      three * PRIZE.THREE +
+      four * PRIZE.FOUR +
+      five * PRIZE.FIVE +
+      bonusFive * PRIZE.BONUS_FIVE +
+      six * PRIZE.SIX;
+    return prize;
   }
 }
 
