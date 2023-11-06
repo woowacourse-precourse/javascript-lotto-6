@@ -1,23 +1,26 @@
 import Lotto from './Lotto.js';
 import { ERROR } from './Message.js';
 
-class WinningLotto extends Lotto {
+class WinningLotto {
   #START = 1;
   #END = 45;
 
+  #numbers;
   #bonusNumber;
 
   constructor(numbers, bonusNumber) {
-    super(numbers);
+    this.#numbers = new Lotto(numbers);
     this.#validate(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
-  #validate(number) {
-    if (number < this.#START || number > this.#END) {
+  #validate(bonusNumber) {
+    if (bonusNumber < this.#START || bonusNumber > this.#END) {
       throw new Error(ERROR.notOneToFortyFive);
     }
-    throw new Error(ERROR.notUniqueBonusNumber);
+    if (this.#numbers.includes(bonusNumber)) {
+      throw new Error(ERROR.notUniqueBonusNumber);
+    }
   }
 }
 

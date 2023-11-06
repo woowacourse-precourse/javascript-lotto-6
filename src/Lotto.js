@@ -16,6 +16,10 @@ class Lotto {
     return this.#numbers.sort((a, b) => a - b);
   }
 
+  includes(number) {
+    return this.#numbers.includes(number);
+  }
+
   #validate(numbers) {
     if (numbers.length !== this.#LENGTH) {
       throw new Error(ERROR.notSix);

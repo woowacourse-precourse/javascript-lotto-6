@@ -27,7 +27,7 @@ describe('당첨 번호 클래스 테스트', () => {
 
   test('예외가 발생하지 않는 경우', () => {
     expect(() => {
-      new WinningLotto([1, 2, 3, 4, 5, 6], 1);
+      new WinningLotto([1, 2, 3, 4, 5, 6], 9);
     }).not.toThrow();
   });
 });
