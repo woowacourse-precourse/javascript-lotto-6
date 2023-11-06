@@ -5,11 +5,11 @@ class ResultCalculator {
 
   constructor() {
     this.#ranking = {
-      six: 0, // match 6 numbers
-      fiveWithBonus: 0, // match 5 numbers + bonus number
-      five: 0, // match 5 numbers
-      four: 0, // match 4 numbers
-      three: 0, // match 3 numbers
+      first: 0, // match 6 numbers
+      second: 0, // match 5 numbers + bonus number
+      third: 0, // match 5 numbers
+      fourth: 0, // match 4 numbers
+      fifth: 0, // match 3 numbers
     };
   }
 
@@ -26,15 +26,15 @@ class ResultCalculator {
 
   #rankLotto(cnt, lotto, winningLotto) {
     if (cnt === 6) {
-      this.#ranking.six += 1;
+      this.#ranking.first += 1;
     } else if (cnt === 5 && this.#isBonusMatch(lotto, winningLotto)) {
-      this.#ranking.fiveWithBonus += 1;
+      this.#ranking.second += 1;
     } else if (cnt === 5) {
-      this.#ranking.five += 1;
+      this.#ranking.third += 1;
     } else if (cnt === 4) {
-      this.#ranking.four += 1;
+      this.#ranking.fourth += 1;
     } else if (cnt === 3) {
-      this.#ranking.three += 1;
+      this.#ranking.fifth += 1;
     }
   }
 
