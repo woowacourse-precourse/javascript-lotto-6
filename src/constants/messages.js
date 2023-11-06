@@ -14,7 +14,7 @@ const MESSAGES = Object.freeze({
    * @returns {string}
    */
   printLottos(lottos) {
-    return `${lottos.map((lotto) => `[${lotto.getNumbers().join(', ')}]`).join('\n')}\n`;
+    return `${Array.from(lottos, (lotto) => `[${lotto.getNumbers().join(', ')}]`).join('\n')}\n`;
   },
 
   printWinningStatistics: '\n당첨 통계\n---',
