@@ -5,8 +5,9 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#numbers = numbers;
     this.#checkNumber(numbers);
-    this.#numbers = [...numbers];
+    this.#checkSameNumber(numbers);
     this.winningCount = 0;
   }
 
@@ -23,8 +24,15 @@ class Lotto {
   #checkNumber(numbers) {
     for (let i = 0; i < numbers.length; i += 1) {
       if (numbers[i] < 1 || numbers[i] > 45 || !Number.isInteger(numbers[i])) {
-        throw new Error('[ERROR] 자연수');
+        throw new Error('[ERROR] 로또 번호는 자연수 1~45 값이어야 합니다.');
       }
+    }
+  }
+
+  #checkSameNumber(numbers) {
+    const set = new Set(numbers);
+    if (set.size() !== numbers.length) {
+      throw new Error('[ERROR] 로또 번호가 중복됩니다.');
     }
   }
 
