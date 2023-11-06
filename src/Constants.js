@@ -7,3 +7,4 @@ export const CREATE_LOTTO_MESSAGE = "개를 구매했습니다.";
 export const MIN = 1;
 export const MAX = 45;
 export const PICK_NUMBER = 6;
+export const INPUT_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
