@@ -5,6 +5,7 @@ import OutputView from "../view/OutputView.js";
 import lottoNumberGenerator from "../utils/RandomNumberGenerator.js";
 class LottoGameController {
   #lotto = [];
+  #winningLotto;
   #purchaseAmount;
   #lottoTicket;
 
@@ -12,17 +13,38 @@ class LottoGameController {
 
   async startGame() {
     await this.readPurchaseAmount();
-    await this.handleError(this.#purchaseAmount);
+    await this.handlePurchaseAmountError(this.#purchaseAmount);
     this.showLottoTicketCount();
     this.setLottoNumbers();
     this.showLottoNumbers();
+    await this.readLottoWinningNumber();
+    await this.handleWinningNumberError(this.#winningLotto.getTicketNumbers());
   }
 
   async readPurchaseAmount() {
     this.#purchaseAmount = await InputView.purchaseAmount();
   }
 
-  async handleError(amount) {
+  async readLottoWinningNumber() {
+    const input = await InputView.lottoWinningNumber().then((input) =>
+      input.split(",")
+    );
+    this.#winningLotto = new Lotto(input);
+  }
+
+  async handleWinningNumberError(numbers) {
+    try {
+      InputValidator.winningNumber(numbers);
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+      await this.readLottoWinningNumber();
+      await this.handleWinningNumberError(
+        this.#winningLotto.getTicketNumbers()
+      );
+    }
+  }
+
+  async handlePurchaseAmountError(amount) {
     try {
       InputValidator.purchaseAmount(amount);
       this.#purchaseAmount = amount;
@@ -30,7 +52,7 @@ class LottoGameController {
     } catch (error) {
       OutputView.printErrorMessage(error);
       await this.readPurchaseAmount();
-      await this.handleError(this.#purchaseAmount);
+      await this.handlePurchaseAmountError(this.#purchaseAmount);
     }
   }
 
