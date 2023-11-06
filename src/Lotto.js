@@ -4,7 +4,6 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
-    console.log(numbers)
   }
 
   #validate(numbers) {
@@ -19,7 +18,7 @@ class Lotto {
         throw new Error('[ERROR] 1 ~ 45 사이의 숫자여야 합니다.')
       } 
     });
-    if (numbersSet.length !== numbers){
+    if (numbersSet.length !== numbers.length){
       throw new Error('[ERROR] 중복된 값이 있습니다.')
     }
   }
