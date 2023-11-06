@@ -18,6 +18,8 @@ class LottoController {
     this.#getUserLottos();
     await this.#setWinningLottoNumbers();
     await this.#setWinningLottoBonus();
+    this.#user.setPrizes(this.#winningLotto);
+    this.#getResult();
   }
 
   async #setUser() {
@@ -61,6 +63,18 @@ class LottoController {
         View.printOutput(e.message);
       }
     }
+  }
+
+  #getResult() {
+    const prizes = this.#user.getPrizes();
+    const returnRate = this.#user.getReturnRate();
+    View.printOutput(MESSAGES.outputResultTitle);
+    View.printOutput(`${MESSAGES.outputFifthPrize}${prizes['5']}${MESSAGES.suffixAmount}`);
+    View.printOutput(`${MESSAGES.outputFourthPrize}${prizes['4']}${MESSAGES.suffixAmount}`);
+    View.printOutput(`${MESSAGES.outputThirdPrize}${prizes['3']}${MESSAGES.suffixAmount}`);
+    View.printOutput(`${MESSAGES.outputSecondPrize}${prizes['2']}${MESSAGES.suffixAmount}`);
+    View.printOutput(`${MESSAGES.outputFirstPrize}${prizes['1']}${MESSAGES.suffixAmount}`);
+    View.printOutput(`${MESSAGES.outputReturnRate}${returnRate}${MESSAGES.suffixReturnRate}`);
   }
 }
 

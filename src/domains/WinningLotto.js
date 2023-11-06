@@ -48,22 +48,12 @@ class WinningLotto {
     }
   }
 
-  getMatchWithNumbers(numbers) {
-    let counter = 0;
-    this.#numbers.forEach((number) => {
-      if (numbers.includes(number)) {
-        counter += 1;
-      }
-    });
-
-    return counter;
+  getNumbers() {
+    return this.#numbers;
   }
 
-  getMatchWithBonus(numbers) {
-    if (numbers.includes(this.#bonus)) {
-      return true;
-    }
-    return false;
+  getBonus() {
+    return this.#bonus;
   }
 }
 

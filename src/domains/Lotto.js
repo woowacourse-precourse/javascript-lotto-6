@@ -4,7 +4,6 @@ import { LottoLengthError, LottoRangeError, LottoTypeError, LottoDuplicatedError
 
 class Lotto {
   #numbers;
-  #prize;
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -33,7 +32,7 @@ class Lotto {
     return this.#numbers;
   }
 
-  getMatchWithNumbers(numbers) {
+  #getMatchWithNumbers(numbers) {
     let counter = 0;
     this.#numbers.forEach((number) => {
       if (numbers.includes(number)) {
@@ -44,28 +43,24 @@ class Lotto {
     return counter;
   }
 
-  getMatchWithBonus(bonus) {
+  #getMatchWithBonus(bonus) {
     if (this.#numbers.includes(bonus)) {
       return true;
     }
     return false;
   }
 
-  setPrize(numbers, bonus) {
-    switch (this.getMatchWithNumbers(numbers)) {
-      case 3: this.#prize = 5;
-      case 4: this.#prize = 4;
+  getPrize(numbers, bonus) {
+    switch (this.#getMatchWithNumbers(numbers)) {
+      case 3: return 5;
+      case 4: return 4;
       case 5:
-        this.#prize = 3;
-        if (this.getMatchWithBonus(bonus) == true) {
-          this.#prize = 2;
+        if (this.#getMatchWithBonus(bonus) === false) {
+          return 3;
         }
-      case 6: this.#prize = 1;
+        return 2;
+      case 6: return 1;
     }
-  }
-
-  getPrize() {
-    return this.#prize;
   }
 }
 
