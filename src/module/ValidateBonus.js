@@ -1,4 +1,4 @@
-import { errorMessage } from '../Consts';
+import { errorMessage } from '../Consts.js';
 
 class ValidateBonus {
   #userInput;
@@ -10,10 +10,10 @@ class ValidateBonus {
 
   #validate(userInput) {
     if (Number.isNaN(Number(userInput))) {
-      throw new Error(errorMessage.purchaseNotNumber);
+      throw new Error(errorMessage.bonusNumberNotNumber);
     }
-    if (userInput % 1000 !== 0) {
-      throw new Error(errorMessage.purchaseWrongUnit);
+    if (userInput < 1 || userInput > 45) {
+      throw new Error(errorMessage.bonusNumberRange);
     }
   }
 }

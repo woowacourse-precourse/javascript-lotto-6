@@ -1,7 +1,7 @@
 const matchLotto = (purchasedLottoArray, winningNumbers, bonus) => {
   const matchCount = {
     threeMatches: 0,
-    foutMatches: 0,
+    fourMatches: 0,
     fiveMatches: 0,
     fiveBonusMatches: 0,
     sixMatches: 0,

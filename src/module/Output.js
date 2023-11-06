@@ -1,11 +1,11 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { message } from '../Consts';
-import totalReturn from './TotalReturn';
+import { message } from '../Consts.js';
+import totalReturn from './TotalReturn.js';
 
 class Output {
   static printUserLottos(purchasedLottoArray) {
     MissionUtils.Console.print(
-      `${purchasedLottoArray.length}개를 구매했습니다.`,
+      `\n${purchasedLottoArray.length}개를 구매했습니다.`,
     );
     purchasedLottoArray.forEach(lotto => MissionUtils.Console.print(lotto));
   }
@@ -19,10 +19,10 @@ class Output {
       `${message.fourMatches + matchCount.fourMatches}개`,
     );
     MissionUtils.Console.print(
-      `${message.fiveMatchesMatches + matchCount.fiveMatches}개`,
+      `${message.fiveMatches + matchCount.fiveMatches}개`,
     );
     MissionUtils.Console.print(
-      `${message.fiveBonusMatchesMatches + matchCount.fiveBonusMatches}개`,
+      `${message.fiveBonusMatches + matchCount.fiveBonusMatches}개`,
     );
     MissionUtils.Console.print(
       `${message.sixMatches + matchCount.sixMatches}개`,
