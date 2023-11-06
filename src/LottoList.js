@@ -1,15 +1,25 @@
+import Lotto from './Lotto.js';
 import { PurchaseLotto } from './PurchaseLotto.js';
 import { LOTTO_NUMBERS } from './constants.js';
 import { randomNum } from './utils.js';
 
-class LottoGame {
+class LottoList {
+  #lottos;
+
   constructor() {
+    this.#lottos = [];
     this.purchaseLotto = new PurchaseLotto();
+  }
+
+  makeLotto(lottoNumbers) {
+    const lotto = new Lotto(lottoNumbers);
+
+    this.#lottos.push(lotto);
   }
 
   async lottoCount() {
     await this.purchaseLotto.initialize(); // 비동기 초기화를 기다린 후에
-    return this.purchaseLotto.getLottoCount(); // 로또 개수를 반환합니다.
+    return this.purchaseLotto.getLottoCount(); // 로또 개수를 반환.
   }
 
   async createLotto() {
@@ -30,4 +40,4 @@ class LottoGame {
   }
 }
 
-export default LottoGame;
+export default LottoList;
