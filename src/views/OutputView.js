@@ -28,7 +28,12 @@ const OutputView = {
   },
 
   printReturnRate(returnRate) {
-    Console.print(`총 수익률은 ${returnRate}%입니다.`);
+    Console.print(
+      `총 수익률은 ${returnRate.toLocaleString(undefined, {
+        maximumFractionDigits: 1,
+        minimumFractionDigits: 1,
+      })}%입니다.`
+    );
   },
 };
 
