@@ -42,6 +42,9 @@ class App {
 
     this.checkNaN(checkPrice);
     this.checkThousand(remainder);
+
+    console.log(checkPrice);
+    console.log(remainder);
     // try {
     //   if(isNaN(checkPrice)) {
     //      throw new Error;
@@ -56,8 +59,6 @@ class App {
     // } catch (err){
     //   MissionUtils.Console.print(ERROR.THOUSAND);
     // }
-    // if(isNaN(checkPrice)) {throw new Error(ERROR.NAN)};
-    // if(remainder !== 0 ) {throw new Error(ERROR.THOUSAND)};
 
     this.price = checkPrice;
     return share;
