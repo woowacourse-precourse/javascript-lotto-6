@@ -6,22 +6,26 @@ export const Input = {
   async readMultipleValues(inputString) {
     try {
       const userInput = await Console.readLineAsync(inputString);
-      Validator.CommonUserInput.multipleValue.validate(stringToArray(userInput));
+      Validator.CommonUserInput.validate(userInput);
 
       return stringToArray(userInput);
     } catch (e) {
       Console.print(`${e.name} ${e.message} `);
+      return await this.readMultipleValues(inputString);
     }
   },
 
   async readInteger(inputString) {
     try {
       const userInput = await Console.readLineAsync(inputString);
+      Validator.CommonUserInput.validate(userInput);
+
       Validator.CommonUserInput.integerValue.validate(stringToNumber(userInput));
 
       return stringToNumber(userInput);
     } catch (e) {
       Console.print(`${e.name} ${e.message} `);
+      return await this.readInteger(inputString);
     }
   },
 };
