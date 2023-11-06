@@ -27,5 +27,17 @@ export default class LottoGame {
     });
     OutputView.printPurchseResults(money.getMoney() / 1000);
     OutputView.printLottos(lottos);
+
+    let drawnLotto;
+    while (true) {
+      try {
+        const inputdrawnLottoNumbers =
+          await InputView.promptForDrawnLottoNumbers();
+        drawnLotto = new DrawnLotto(inputdrawnLottoNumbers);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
