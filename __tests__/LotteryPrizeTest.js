@@ -1,40 +1,67 @@
 import LotteryPrize from '../src/LotteryPrize.js';
-describe('LotteryPrize.getMatchCount', () => {
-  test('두 번호를 비교해 공통된 번호의 개수를 리턴해야 한다.', () => {
-    expect(
-      LotteryPrize.getMatchCount([1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12])
-    ).toBe(0);
-    expect(
-      LotteryPrize.getMatchCount([1, 2, 3, 4, 5, 6], [1, 11, 12, 13, 14, 15])
-    ).toBe(1);
-    expect(
-      LotteryPrize.getMatchCount([1, 2, 3, 4, 5, 6], [1, 2, 11, 12, 13, 14])
-    ).toBe(2);
-    expect(
-      LotteryPrize.getMatchCount([1, 2, 3, 4, 5, 6], [1, 2, 3, 12, 13, 14])
-    ).toBe(3);
-    expect(
-      LotteryPrize.getMatchCount([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 13, 14])
-    ).toBe(4);
-    expect(
-      LotteryPrize.getMatchCount([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 14])
-    ).toBe(5);
-    expect(
-      LotteryPrize.getMatchCount([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6])
-    ).toBe(6);
-  });
-});
+import WinningStatistic from '../src/WinningStatistic.js';
 
-describe('LotteryPrize.IsBonusNumberMatch', () => {
-  test('보너스 번호가 포함되면 true이다.', () => {
-    expect(LotteryPrize.IsBonusNumberMatch([1, 2, 3, 4, 5, 6], 1)).toBe(true);
-    expect(LotteryPrize.IsBonusNumberMatch([1, 2, 3, 4, 5, 6], 2)).toBe(true);
-    expect(LotteryPrize.IsBonusNumberMatch([1, 2, 3, 4, 5, 6], 3)).toBe(true);
+describe('LotteryPrize.calculatePrize', () => {
+  test('1등 당첨, 수익률 200,000,000%', () => {
+    const lottoBundle = [[1, 2, 3, 4, 5, 6]];
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+    const lotteryPrize = new LotteryPrize(lottoBundle, winningNumbers, 7);
+    let winningStatistic = lotteryPrize.getWinningStatistics();
+
+    expect(winningStatistic.getFirstPrize()).toBe(1);
+    expect(winningStatistic.getSecondPrize()).toBe(0);
+    expect(winningStatistic.getThirdPrize()).toBe(0);
+    expect(winningStatistic.getFourthPrize()).toBe(0);
+    expect(winningStatistic.getFifthPrize()).toBe(0);
+    expect(winningStatistic.getEaringRate()).toBe(200000000);
   });
 
-  test('보너스 번호가 포함되지 않으면 false이다.', () => {
-    expect(LotteryPrize.IsBonusNumberMatch([1, 2, 3, 4, 5, 6], 7)).toBe(false);
-    expect(LotteryPrize.IsBonusNumberMatch([1, 2, 3, 4, 5, 6], 8)).toBe(false);
-    expect(LotteryPrize.IsBonusNumberMatch([1, 2, 3, 4, 5, 6], 9)).toBe(false);
+  test('3등 당첨, 수익률 62.5%', () => {
+    const lottoBundle = [
+      [8, 21, 23, 41, 42, 43],
+      [3, 5, 11, 16, 32, 38],
+      [7, 11, 16, 35, 36, 44],
+      [1, 8, 11, 31, 41, 42],
+      [13, 14, 16, 38, 42, 45],
+      [7, 11, 30, 40, 42, 43],
+      [2, 13, 22, 32, 38, 45],
+      [1, 3, 5, 14, 22, 45],
+    ];
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+    const lotteryPrize = new LotteryPrize(lottoBundle, winningNumbers, 7);
+    let winningStatistic = lotteryPrize.getWinningStatistics();
+
+    expect(winningStatistic.getFirstPrize()).toBe(0);
+    expect(winningStatistic.getSecondPrize()).toBe(0);
+    expect(winningStatistic.getThirdPrize()).toBe(0);
+    expect(winningStatistic.getFourthPrize()).toBe(0);
+    expect(winningStatistic.getFifthPrize()).toBe(1);
+    expect(winningStatistic.getEaringRate()).toBe(62.5);
+  });
+
+  test('4등 1개, 5등 3개당첨 수익률 812.5%', () => {
+    const lottoBundle = [
+      [1, 34, 2, 3, 4, 42],
+      [1, 3, 4, 7, 8, 9],
+      [1, 2, 3, 42, 43, 44],
+      [1, 2, 3, 12, 13, 14],
+      [13, 14, 16, 38, 42, 45],
+      [7, 11, 30, 40, 42, 43],
+      [2, 13, 22, 32, 38, 45],
+      [31, 32, 355, 14, 22, 45],
+    ];
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+    const lotteryPrize = new LotteryPrize(lottoBundle, winningNumbers, 7);
+    let winningStatistic = lotteryPrize.getWinningStatistics();
+
+    expect(winningStatistic.getFirstPrize()).toBe(0);
+    expect(winningStatistic.getSecondPrize()).toBe(0);
+    expect(winningStatistic.getThirdPrize()).toBe(0);
+    expect(winningStatistic.getFourthPrize()).toBe(1);
+    expect(winningStatistic.getFifthPrize()).toBe(3);
+    expect(winningStatistic.getEaringRate()).toBe(812.5);
   });
 });
