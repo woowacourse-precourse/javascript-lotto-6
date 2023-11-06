@@ -19,7 +19,8 @@ describe('Statistics 클래스 테스트', () => {
     ];
     const logSpy = getLogSpy();
 
-    new Statistics(winningResult, rateOfReturn);
+    const statistic = new Statistics();
+    statistic.print(winningResult, rateOfReturn);
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
