@@ -27,10 +27,10 @@ class LottoTickets {
   }
 
   publishTickets() {
-    for (let i = 0; i < this.#boughtTickets; i += 1) {
+    Array(this.#boughtTickets).fill().map(() => {
       const LOTTO = this.generateOneLotto();
-      this.addToTickets(LOTTO);
-    }
+      this.addToTickets(LOTTO)
+    });
   }
 
   generateOneLotto() {
