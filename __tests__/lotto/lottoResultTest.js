@@ -1,5 +1,4 @@
 import LottoResult from "../../src/model/LottoResult.js";
-import { ERROR_MESSAGE } from "../../src/constants/ErrorMessages.js";
 
 describe("로또 결과 테스트", () => {
   test("1등", () => {
