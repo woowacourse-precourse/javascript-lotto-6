@@ -1,10 +1,11 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { MESSAGE } from "../constant/gameMessge.js";
 
 const InputView = {
   async getUserPurchaseAmout() {
     try {
       const userPurchaseAmout = await MissionUtils.Console.readLineAsync(
-        "구입 금액을 입력해주세요.\n",
+        `${MESSAGE.purchase.amount}`,
       );
 
       return userPurchaseAmout;
@@ -16,7 +17,7 @@ const InputView = {
   async getWinningNumbers() {
     try {
       const userInputWinningNumbers = await MissionUtils.Console.readLineAsync(
-        "\n당첨 번호를 입력해주세요.\n",
+        `${MESSAGE.purchase.winningNumber}`,
       );
 
       return userInputWinningNumbers;
@@ -28,7 +29,7 @@ const InputView = {
   async getBonusNumbers() {
     try {
       const userInputBonumsNumbers = await MissionUtils.Console.readLineAsync(
-        "\n보너스 번호를 입력해주세요.\n",
+        `\n${MESSAGE.purchase.bonusNumber}\n`,
       );
       const bonusNumber = parseInt(userInputBonumsNumbers, 10);
 

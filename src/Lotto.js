@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { ERROR } from "./constant/gameMessge.js";
 
 class Lotto {
   #numbers;
@@ -8,46 +9,56 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  static NUMBER_LENTH = 6;
+  static NUMBER_MIN = 1;
+  static NUMBER_MAX = 45;
+  static UNIT = 1000;
+
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== Lotto.NUMBER_LENTH) {
+      throw new Error(ERROR.lotto.length);
     }
 
     numbers.forEach((number) => {
-      if (!(1 <= number && number <= 45)) {
-        throw new Error("[ERROR] 로또 번호는 1부터 45사이의 자연수입니다.");
+      if (!(Lotto.NUMBER_MIN <= number && number <= Lotto.NUMBER_MAX)) {
+        throw new Error(ERROR.lotto.numberRange);
       }
 
       if (typeof number !== "number" || Number.isNaN(number)) {
-        throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+        throw new Error(ERROR.lotto.numeric);
       }
     });
 
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error("[ERROR] 중복된 숫자입니다.");
+      throw new Error(ERROR.lotto.duplicate);
     }
   }
 
   static generateLottoNumber() {
-    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+      Lotto.NUMBER_MIN,
+      Lotto.NUMBER_MAX,
+      Lotto.NUMBER_LENTH,
+    );
     const numbers = randomNumbers.sort((current, next) => current - next);
 
     return new Lotto(numbers);
   }
 
   static buyLottoTickets(money) {
-    if (money < 1000) {
-      throw new Error("[ERROR] 로또는 1000원부터 구입할 수 있습니다.");
+    if (money < Lotto.UNIT) {
+      throw new Error(ERROR.purchase.minimunAmount);
     }
 
     if (isNaN(money)) {
-      throw new Error("[ERROR] 숫자만 입력해주세요");
+      throw new Error(ERROR.purchase.numeric);
     }
 
-    if (money % 1000 !== 0) {
-      throw new Error("[ERROR] 구입 금액은 1000원 단위입니다.");
+    if (money % Lotto.UNIT !== 0) {
+      throw new Error(ERROR.purchase.amountUnit);
     }
-    const purchaseAmount = money / 1000;
+
+    const purchaseAmount = money / Lotto.UNIT;
 
     const lottoTickets = [];
     for (let i = 0; i < purchaseAmount; i++) {

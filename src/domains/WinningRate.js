@@ -1,3 +1,5 @@
+import { ERROR } from "../constant/gameMessge.js";
+
 class WinningRate {
   #lotto;
 
@@ -11,11 +13,11 @@ class WinningRate {
 
   #validate(bonusNumber) {
     if (this.#lotto.includesNumber(bonusNumber)) {
-      throw new Error("[ERROR] 보너스 번호가 당첨번호와 중복되었습니다.");
+      throw new Error(ERROR.bonus.duplicate);
     }
 
     if (typeof bonusNumber !== "number" || Number.isNaN(bonusNumber)) {
-      throw new Error("[ERROR] 보너스 번호는 숫자여야 합니다.");
+      throw new Error(ERROR.bonus.numeric);
     }
   }
 

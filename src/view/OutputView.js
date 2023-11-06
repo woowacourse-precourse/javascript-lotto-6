@@ -1,12 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { MESSAGE } from "../constant/gameMessge.js";
 
 const OutputView = {
-  printPurchaseAmout(input) {
-    MissionUtils.Console.print(`\n${input}개를 구매했습니다.`);
+  printPurchaseAmout(quantity) {
+    MissionUtils.Console.print(MESSAGE.result.Amount(quantity));
   },
 
   printResultMsg() {
-    MissionUtils.Console.print(`\n당첨 통계\n---`);
+    MissionUtils.Console.print(MESSAGE.result.title);
   },
 
   printResults(results) {
@@ -19,27 +20,27 @@ const OutputView = {
   },
 
   ThreeCorrectMsg(input) {
-    MissionUtils.Console.print(`3개 일치 (5,000원) - ${input}개`);
+    MissionUtils.Console.print(MESSAGE.match.three(input));
   },
 
   fourCorrectMsg(input) {
-    MissionUtils.Console.print(`4개 일치 (50,000원) - ${input}개`);
+    MissionUtils.Console.print(MESSAGE.match.four(input));
   },
 
   fiveCorrectMsg(input) {
-    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${input}개`);
+    MissionUtils.Console.print(MESSAGE.match.five(input));
   },
 
   fiveBonusCorrectMsg(input) {
-    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${input}개`);
+    MissionUtils.Console.print(MESSAGE.match.bonus(input));
   },
 
   sixCorrectMsg(input) {
-    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${input}개`);
+    MissionUtils.Console.print(MESSAGE.match.six(input));
   },
 
   printRoi(input) {
-    MissionUtils.Console.print(`총 수익률은 ${input}%입니다.`);
+    MissionUtils.Console.print(MESSAGE.result.benefit(input));
   },
 };
 
