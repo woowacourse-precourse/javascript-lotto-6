@@ -1,4 +1,4 @@
-import WINNING_AMOUNT_STRING, { MATCHING_COUNT } from './WinningAmount';
+import { MATCHING_COUNT, WINNING_AMOUNT_STRING } from './WinningAmount';
 
 export const MESSAGE_GET = Object.freeze({
   PURCHASE_AMOUNT: '구입금액을 입력해 주세요. \n',
@@ -11,7 +11,7 @@ export const MESSAGE_PRINT = Object.freeze({
   STATISTICS: '당첨 통계 \n--- \n',
   COUNT_UNIT: '개 \n',
   LOTTO_NUMBER_HEAD: '[',
-  LOTTO_NUMBER_TAIL: ']',
+  LOTTO_NUMBER_TAIL: '] \n',
   TOTAL_RATE_HEAD: '총 수익률은 ',
   TOTAL_RATE_TAIL: '%입니다. \n',
 });
