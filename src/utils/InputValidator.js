@@ -30,6 +30,9 @@ export default class InputValidator {
     if (money % 1000 !== 0) {
       throw new Error(ERROR_MESSAGES.PURCHASE_AMOUNT_THOUSANDS_ONLY);
     }
+    if (money < 0) {
+      throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
+    }
   }
 
   static validateBonusNumber(bonus, numbers) {
