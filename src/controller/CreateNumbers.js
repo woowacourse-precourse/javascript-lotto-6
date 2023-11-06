@@ -5,17 +5,19 @@ import userLottoOutput from "../view/output/userLottoOutput.js";
 
 const createNumbers = (lottoAmount) => {
   Console.print(`\n${lottoAmount}${GAME_MESSAGE.bought}`);
-  const numberOfLottos = [];
-  for (let i = NUMBERS.zero; i < lottoAmount; i++) {
-    const numbers = Random.pickUniqueNumbersInRange(
-      NUMBERS.start_number,
-      NUMBERS.end_number,
-      NUMBERS.piece
-    ).sort((a, b) => a - b);
-    numberOfLottos.push(numbers);
-  }
+  const numberOfLottos = Array.from({ length: lottoAmount }, () =>
+    randomLotto()
+  );
   userLottoOutput(numberOfLottos);
   return numberOfLottos;
+};
+
+const randomLotto = () => {
+  return Random.pickUniqueNumbersInRange(
+    NUMBERS.start_number,
+    NUMBERS.end_number,
+    NUMBERS.piece
+  ).sort((a, b) => a - b);
 };
 
 export default createNumbers;

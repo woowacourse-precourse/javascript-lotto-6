@@ -27,11 +27,22 @@ class LottoGame {
     return numbers.filter((number) => this.#numbers.includes(number)).length;
   }
   checkRank(match, rank, bonus) {
+    const {
+      three_match,
+      four_match,
+      five_match,
+      six_match,
+      five_place,
+      four_place,
+      third_place,
+      second_place,
+      first_place,
+    } = NUMBERS;
     const rankObj = {
-      3: 4,
-      4: 3,
-      5: bonus ? 1 : 2,
-      6: 0,
+      [three_match]: [five_place],
+      [four_match]: [four_place],
+      [five_match]: bonus ? [second_place] : [third_place],
+      [six_match]: [first_place],
     };
     rank[rankObj[match]] += NUMBERS.stack;
   }
