@@ -36,16 +36,22 @@ const inputAmount = async() => {
   return input;
 }
 
-const PublishedLotto = {
+const PublishedLottos = {
   numbers : [],
-  rank : [0, 0, 0, 0, 0]
+  rank : {
+    first : 0,
+    second : 0,
+    third : 0,
+    forth : 0,
+    fifth : 0
+  }
 }
 
 const publishLotto = (count) => {
   for (let i = 0; i < count; i += 1) {
     const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     numbers.sort((a, b) => a - b);
-    PublishedLotto.numbers.push(numbers);
+    PublishedLottos.numbers.push(numbers);
   }
 }
 
