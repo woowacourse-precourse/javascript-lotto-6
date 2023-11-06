@@ -2,7 +2,7 @@ import App from "../src/App";
 import { validateMoney } from "../src/validation/money";
 import { getLogSpy, mockQuestions, mockRandoms } from "./ApplicationTest";
 
-describe("구매 가격 테스트", () => {
+describe("구매 가격 입력 테스트", () => {
   test("1000원 이하인 경우 에러", async () => {
     const logSpy = getLogSpy();
 

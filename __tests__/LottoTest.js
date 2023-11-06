@@ -49,10 +49,10 @@ describe("로또 클래스 테스트", () => {
     });
   });
 
-  test("로또 출력 테스트", () => {
+  test("로또 출력 테스트", async () => {
     const log = getLogSpy();
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    lotto.printLottos();
+    await lotto.printLottos();
     expect(log).toHaveBeenCalledWith(expect.stringContaining("[1, 2, 3, 4, 5, 6]"));
   });
 });
