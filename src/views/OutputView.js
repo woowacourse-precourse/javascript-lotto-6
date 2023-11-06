@@ -16,16 +16,12 @@ const OutputView = {
     Console.print(MESSAGE_PRINT.STATISTICS);
 
     Object.keys(results).forEach(key =>
-      Console.print(
-        `${MESSAGE_RESULT_STATISTICS[key]}${results[key]}${MESSAGE_PRINT.COUNT_UNIT}`,
-      ),
+      Console.print(`${MESSAGE_RESULT_STATISTICS[key]}${results[key]}${MESSAGE_PRINT.COUNT_UNIT}`),
     );
   },
 
   printTotalRate(totalRate) {
-    Console.print(
-      `${MESSAGE_PRINT.TOTAL_RATE_HEAD}${totalRate}${MESSAGE_PRINT.TOTAL_RATE_TAIL}`,
-    );
+    Console.print(`${MESSAGE_PRINT.TOTAL_RATE_HEAD}${totalRate}${MESSAGE_PRINT.TOTAL_RATE_TAIL}`);
   },
 };
 

@@ -3,7 +3,7 @@ class InputController {
     let result;
 
     while (!result) {
-      result = inputFunction();
+      result = inputFunction;
     }
     return result;
   }
@@ -13,9 +13,7 @@ class InputController {
   }
 
   static converList(numbersString) {
-    const numberList = numbersString
-      .split(',')
-      .map(numberString => Number(numberString.trim()));
+    const numberList = numbersString.split(',').map(numberString => Number(numberString.trim()));
 
     return numberList;
   }
