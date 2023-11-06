@@ -11,7 +11,7 @@ class OutputView {
       lottoAmount.toString() + OUTPUT_MESSAGE.PRINT_PURCHASED_NUMBER
     );
     lottoArray.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(', ')}]`);
     });
     Console.print(OUTPUT_MESSAGE.PRINT_ENTER);
   }
@@ -20,11 +20,11 @@ class OutputView {
     Console.print(OUTPUT_MESSAGE.PRINT_ENTER);
     Console.print(OUTPUT_MESSAGE.PRINT_WINNING_LOG);
     Console.print(OUTPUT_MESSAGE.PRINT_HORIZONTAL_LINE);
-    Console.print(OUTPUT_MESSAGE.PRINT_FIFTH_PLACE(placeArray[0]));
-    Console.print(OUTPUT_MESSAGE.PRINT_FORTH_PLACE(placeArray[1]));
+    Console.print(OUTPUT_MESSAGE.PRINT_FIRST_PLACE(placeArray[0]));
+    Console.print(OUTPUT_MESSAGE.PRINT_SECOND_PLACE(placeArray[1]));
     Console.print(OUTPUT_MESSAGE.PRINT_THIRD_PLACE(placeArray[2]));
-    Console.print(OUTPUT_MESSAGE.PRINT_SECOND_PLACE(placeArray[3]));
-    Console.print(OUTPUT_MESSAGE.PRINT_FIRST_PLACE(placeArray[4]));
+    Console.print(OUTPUT_MESSAGE.PRINT_FORTH_PLACE(placeArray[3]));
+    Console.print(OUTPUT_MESSAGE.PRINT_FIFTH_PLACE(placeArray[4]));
   }
 
   static printTotalReturn(returnRate) {
