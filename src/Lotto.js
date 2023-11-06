@@ -12,7 +12,25 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  // TODO: 추가 기능 구현수
+  getNumber() {
+    return this.#numbers;
+  }
+
+  match(winningNumber, bonusNumber) {
+    let count = 0;
+    let isMatchedBonus = false;
+
+    winningNumber.forEach((number, idx) => {
+      if (number === this.#numbers[idx]) {
+        count += 1;
+      } else if (!isMatchedBonus && bonusNumber === this.#numbers[idx]) {
+        isMatchedBonus = true;
+      }
+    });
+
+    return [count, isMatchedBonus];
+  }
 }
 
 export default Lotto;
