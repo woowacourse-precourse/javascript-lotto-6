@@ -7,7 +7,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.some((number) => Number.isNaN(number))) {
+    if (numbers.some((number) => Number.isNaN(Number(number)))) {
       throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
     }
     if (numbers.length !== 6) {

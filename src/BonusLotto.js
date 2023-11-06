@@ -3,12 +3,12 @@ class BonusLotto {
   #bonusNumbers;
 
   constructor(numbers, bonusNumbers) {
-    this.#validate(bonusNumbers, numbers);
+    this.#validate(numbers, bonusNumbers);
     this.#bonusNumbers = bonusNumbers;
   }
 
   #validate(numbers, bonusNumbers) {
-    if (Number.isNaN(bonusNumbers)) {
+    if (Number.isNaN(Number(bonusNumbers))) {
       throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
     }
     if (numbers.some((number) => number === bonusNumbers)) {
