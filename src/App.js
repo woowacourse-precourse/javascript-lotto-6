@@ -65,9 +65,8 @@ class App {
 
   printPurchaseResults() {
     MissionUtils.Console.print(
-      this.#ticketCount + OUTPUT_MESSAGE.purchaseResult,
+      `\n${this.#ticketCount + OUTPUT_MESSAGE.purchaseResult}`,
     );
-    // MissionUtils.Console.print(OUTPUT_MESSAGE.divide);
     this.#tickets.forEach((ticket) =>
       MissionUtils.Console.print(`[${ticket.numbers.join(", ")}]`),
     );

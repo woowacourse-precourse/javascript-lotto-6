@@ -1,12 +1,12 @@
 const INPUT_MESSAGE = {
   purchaseAmount: "구입금액을 입력해 주세요.\n",
-  winningNumbers: "당첨 번호를 입력해 주세요.\n",
-  bonusNumber: "보너스 번호를 입력해 주세요.\n",
+  winningNumbers: "\n당첨 번호를 입력해 주세요.\n",
+  bonusNumber: "\n보너스 번호를 입력해 주세요.\n",
 };
 
 const OUTPUT_MESSAGE = {
   purchaseResult: "개를 구매했습니다.",
-  prizeDistribution: "당첨 통계",
+  prizeDistribution: "\n당첨 통계\n---",
   divide: "---",
   matchCount: "개 일치",
   matchBonus: ", 보너스 볼 일치",
