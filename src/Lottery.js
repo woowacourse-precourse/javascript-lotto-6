@@ -1,12 +1,11 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 
 // 추후 리팩토링하기
+const PAYMENTCOMMENT = '구입금액을 입력해 주세요.\n';
+const WINNINGNUMBERSCOMMENT = '당첨 번호를 입력해 주세요.\n';
+const BONUSNUMBERCOMMENT = '보너스 번호를 입력해 주세요.\n';
 
-const PAYMENTCOMMENT = '구입금액을 입력해 주세요.';
-const WINNINGNUMBERSCOMMENT = '당첨 번호를 입력해 주세요.';
-const BONUSNUMBERCOMMENT = '보너스 번호를 입력해 주세요.';
-
-class Lottery {
+export default class Lottery {
   #payMoney;
 
   #winningNumberList;
@@ -19,14 +18,14 @@ class Lottery {
     this.#bonusNumer = 0;
   }
 
-  commomValidator(input) {
-    if (Number.isNaN(this.#payMoney)) throw Error('숫자 형식이 아닙니다.');
-    if (!Number.isInteger(this.#payMoney)) throw Error('정수가 아닙니다.');
-    if (this.#payMoney <= 0) throw Error('앙의 정수가 아닙니다.');
+  commomValidator(inputValue) {
+    if (Number.isNaN(inputValue)) throw Error('숫자 형식이 아닙니다.');
+    if (!Number.isInteger(inputValue)) throw Error('정수가 아닙니다.');
+    if (inputValue <= 0) throw Error('앙의 정수가 아닙니다.');
   }
 
   async readPayMoney() {
-    this.#payMoney = await Console.readLineAsync(PAYMENTCOMMENT);
+    this.#payMoney = Number(await Console.readLineAsync(PAYMENTCOMMENT));
 
     // exception check
     this.commomValidator(this.#payMoney);
@@ -40,7 +39,9 @@ class Lottery {
   async readWinningNumberList() {
     this.#winningNumberList = (
       await Console.readLineAsync(WINNINGNUMBERSCOMMENT)
-    ).split(',');
+    )
+      .split(',')
+      .map((element) => Number(element));
 
     // exception check
     if (this.#winningNumberList.length !== 6)
@@ -48,7 +49,7 @@ class Lottery {
 
     this.#winningNumberList.forEach((winningNumber) => {
       this.commomValidator(winningNumber);
-      if (winningNumber >= 1 <= 45)
+      if (winningNumber < 1 || winningNumber > 45)
         throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
     });
   }
