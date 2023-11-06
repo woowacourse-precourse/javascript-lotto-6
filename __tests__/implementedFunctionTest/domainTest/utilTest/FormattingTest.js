@@ -1,4 +1,4 @@
-import Formatting from '../../../src/util/Formatting.js';
+import Formatting from '../../../../src/util/Formatting.js';
 
 describe('Formatting 테스트', () => {
 	test('insertCommasByThousandUnits 테스트', () => {

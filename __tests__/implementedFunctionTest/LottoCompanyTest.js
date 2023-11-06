@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoCompany from '../../../src/LottoCompany';
-import errorMessage from '../../../src/constants/errorMessage';
+import LottoCompany from '../../src/LottoCompany';
+import errorMessage from '../../src/constants/errorMessage';
 
 const mockQuestions = (inputs) => {
 	MissionUtils.Console.readLineAsync = jest.fn();
