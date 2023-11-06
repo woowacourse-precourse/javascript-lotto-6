@@ -1,4 +1,5 @@
 import { SETTING } from "../constants/Settings.js";
+
 class LottoResult {
   #lottoRank;
   #lottoPrize;
@@ -12,7 +13,6 @@ class LottoResult {
 
   setRank(userNumbers, answerNumbers) {
     const isBonusNumberMatch = userNumbers.includes(this.#bonusNumber);
-
     userNumbers = userNumbers.map((number) => Number(number));
     answerNumbers = answerNumbers.map((number) => Number(number));
 
@@ -29,6 +29,7 @@ class LottoResult {
       isBonusNumberMatch ? SETTING.second_rank : SETTING.third_rank,
       SETTING.first_rank,
     ];
+
     if (matchCount >= 3) this.#lottoRank[ranking[matchCount] - 1] += 1;
   }
 
@@ -40,6 +41,7 @@ class LottoResult {
       SETTING.fourth_prize,
       SETTING.fifth_prize,
     ];
+
     this.#lottoRank.reduce((acc, cur, idx) => {
       acc += cur * prize[idx];
       return (this.#lottoPrize = acc);
