@@ -7,7 +7,7 @@ export const setPurchaseLotto = (purchaseAmount) => {
 
   for (let i = 0; i < lottoCount; i++) {
     const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    lottoArray.push(lottoNumber);
+    lottoArray.push(lottoNumber.sort((a, b) => a - b));
   }
 
   return lottoArray;
