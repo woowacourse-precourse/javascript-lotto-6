@@ -6,6 +6,8 @@ class App {
     const purchaseAmount = await this.getPurchaseAmount();
     const tickets = this.createTickets(purchaseAmount);
 
+    return MissionUtils.Console.print(tickets);
+
     this.printTickets(tickets);
 
     const winningNumbers = await this.getWinningNumbers();
@@ -33,16 +35,16 @@ class App {
   createTickets(amount) {
     this.validateAmount(amount);
 
-    const count = amount / 1000;
-    const tickets = [];
+    const ticketCount = amount / 1000;
+    const ticketsPurchased = [];
 
-    for (let i = 0; i < count; i += 1) {
-      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      const newTicket = new Lotto(numbers);
-      tickets.push(newTicket);
+    for (let i = 0; i < ticketCount; i += 1) {
+      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      randomNumbers.sort((a, b) => a - b);
+      ticketsPurchased.push(randomNumbers);
     }
     
-    return tickets;
+    return ticketsPurchased;
   }
 
   printTickets(tickets) {
@@ -58,7 +60,7 @@ class App {
 
   validateAmount(amount) {
     const remainder = amount % 1000;
-    if (remainder) throw new Error('[ERROR] Amount isn\'t valid.');
+    if (remainder) throw new Error('[ERROR] 구매 금액은 1000의 배수여야 합니다.');
   }
 }
 
