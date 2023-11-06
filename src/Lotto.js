@@ -1,11 +1,8 @@
-import WinningNumberArrayValidator from './validator/WinningNumberArrayValidator.js';
-
 class Lotto	{
 	#numbers;
 
 	constructor(numbers) {
 		this.#validate(numbers);
-		// WinningNumberArrayValidator.validate(numbers);
 		this.#numbers = numbers;
 	}
 
