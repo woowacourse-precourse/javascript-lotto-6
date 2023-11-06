@@ -1,8 +1,8 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import { ERROR } from './Constant.js';
-import Lotto from './Lotto.js';
 import WinningNumbers from './WinningNumbers.js';
 import TicketManager from "./TicketManager.js";
+import MoneyManager from "./MoneyManager.js";
 
 class App {
   async play() {
@@ -10,9 +10,15 @@ class App {
     checkMoney(lottoMoney);
 
     let ticketManager = new TicketManager(lottoMoney);
-    ticketManager.printTicketInformation(tickets);
+    ticketManager.printTicketInformation();
 
     let winningNumbers = await inputWinningNumbers();
+
+    let moneyManager = new MoneyManager();
+    let tickets = ticketManager.getTickets();
+    tickets.forEach((ticket) => {
+      const {matchingNumbers, bonus} = winningNumbers.checkYourLotto(ticket);
+    })
   }
 }
 

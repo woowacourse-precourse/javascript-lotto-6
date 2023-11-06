@@ -3,13 +3,6 @@ import Lotto from './Lotto.js'
 
 class TicketManager {
   #tickets = [];
-  #first = 0;
-  #second = 0;
-  #third = 0;
-  #fourth = 0;
-  #fifth = 0;
-  #money = 0;
-  #rateOfReturn = 0.0;
 
   constructor(lottoMoney) {
     this.issueTickets(lottoMoney);
@@ -22,7 +15,7 @@ class TicketManager {
       let ticketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       let ticket = new Lotto(ticketNumbers);
       ticket.sortNumbers();
-      this.#tickets.push(ticket);
+      this.#tickets.push(ticket.getNumbers());
     }
   }
 
@@ -34,9 +27,10 @@ class TicketManager {
     });
   }
 
-  checkTickets(winningNumber) {
-
+  getTickets() {
+    return this.#tickets;
   }
+
 }
 
 export default TicketManager;

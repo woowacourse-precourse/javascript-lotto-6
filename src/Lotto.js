@@ -26,6 +26,10 @@ class Lotto {
     }
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   sortNumbers() {
     this.#numbers.sort(function(a, b) {
       if (a > b) return 1;
