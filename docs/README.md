@@ -1,9 +1,9 @@
-# javascript-racingcar-6 #
+# 🚘javascript-racingcar-6🚗 #
 
 ### 작성자
 프론트엔드 6기 참가자 조수민
 
-# 구조
+# 📂구조
 ```
 + src
   + constants
@@ -23,16 +23,16 @@
 
 ```
 
-# 기능 구현 목록
+# 🗂기능 구현 목록
 
 ## Lotto.js
 
-### variable
+### 🔬variable
 
   - #numbers - 로또 번호를 저장하는 배열
   - #bonusNumbers - 보너스 번호
 
-### 주요 기능
+### 🛠주요 메소드
 
 __constructor(numbers)__ 
 
@@ -45,12 +45,12 @@ ___
 
 ## Statistics.js
 
-### variable
+### 🔬variable
 
   - #rateOfReturns - 수익률
   - #statistics - 통계 결과를 저장하는 객체
 
-### 주요 기능
+### 🛠주요 메소드
 
 __constructor()__
 
@@ -64,12 +64,12 @@ __calculateStatistics(userLotto, lotto)__
 
 ## UserLotto.js ##
 
-### variable
+### 🔬variable
   - #purchaseAmount - 구매 금액
   - #numberOfLotto - 구매한 로또의 개수
   - #userLottoNumbers - 유저의 로또를 저장하는 배열
 
-### 주요 기능
+### 🛠주요 메소드
 
 __constructor(purchaseAmount)__
 
@@ -83,10 +83,10 @@ ___
 
 ## UserLottoNumber.js ##
 
-### variable
+### 🔬variable
   - #lottoNumber - 로또 번호를 저장하는 배열
 
-### 주요 기능
+### 🛠주요 메소드
 
 __constructor()__
 
@@ -107,14 +107,14 @@ __calculateMatchingNumber(winningLotto)__
 
 ## Controller.js ##
 
-### variable
+### 🔬variable
   - #userLotto - UserLotto class 객체
   - #winningLotto - Lotto class 객체
   - #statistics - Statistics class 객체
   - #inputView - InputView class 객체
   - #outputView - OutputView class 객체
 
-### 주요 기능
+### 🛠주요 메소드
 
 __constructor()__
 
