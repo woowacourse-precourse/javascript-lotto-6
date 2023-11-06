@@ -8,6 +8,7 @@ class User {
   async pay() {
     const money = await readPayment();
     this.#paymentAmount = money;
+    return money;
   }
   /**
    *
