@@ -17,27 +17,31 @@ class LottoGameController {
     this.showLottoTicketCount();
     this.setLottoNumbers();
     this.showLottoNumbers();
-    await this.readLottoWinningNumber();
+    await this.readWinningNumber();
     await this.handleWinningNumberError(this.#winningLotto.getTicketNumbers());
+    await this.readBonusNumber();
   }
 
   async readPurchaseAmount() {
     this.#purchaseAmount = await InputView.purchaseAmount();
   }
 
-  async readLottoWinningNumber() {
+  async readWinningNumber() {
     const input = await InputView.lottoWinningNumber().then((input) =>
       input.split(",")
     );
     this.#winningLotto = new Lotto(input);
   }
 
+  async readBonusNumber() {
+    const input = await InputView.lottoBonusNumber();
+  }
   async handleWinningNumberError(numbers) {
     try {
       InputValidator.winningNumber(numbers);
     } catch (error) {
       OutputView.printErrorMessage(error);
-      await this.readLottoWinningNumber();
+      await this.readWinningNumber();
       await this.handleWinningNumberError(
         this.#winningLotto.getTicketNumbers()
       );

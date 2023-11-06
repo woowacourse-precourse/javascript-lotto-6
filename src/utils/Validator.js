@@ -22,6 +22,14 @@ const InputValidator = {
       }
     });
   },
+  bonusNumber(input) {
+    if (!Number.isInteger(+input) || input.trim() === "") {
+      throw new Error("[ERROR] 입력한 값이 숫자가 아닙니다.");
+    }
+    if (+input < 1 || +input > 45) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+  },
 };
 
 export default InputValidator;

@@ -10,6 +10,12 @@ const InputView = {
     const input = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
     return input;
   },
+  async lottoBonusNumber() {
+    const input = await Console.readLineAsync(
+      "\n보너스 번호를 입력해 주세요.\n"
+    );
+    return input;
+  },
 };
 
 export default InputView;
