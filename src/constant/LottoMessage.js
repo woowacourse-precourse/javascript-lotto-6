@@ -9,7 +9,7 @@ const LOTTO_MESSAGE = Object.freeze({
   ...MARK,
   requestMoney: '구입금액을 입력해 주세요.\n',
   lottoCount: (count) => `${count}개를 구매했습니다.\n`,
-  requestLotto: '당첨 번호를 입력해주세요.\n',
+  requestWinningLotto: '당첨 번호를 입력해주세요.\n',
   lottoNumberDelimiter: ',', // TODO: 그냥 구분자와 혼동되므로 수정 필요
   requestBonusNumber: '보너스 번호를 입력해주세요.\n',
   resultHeader: '당첨 통계',
