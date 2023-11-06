@@ -3,6 +3,8 @@ const OPTIONS = Object.freeze({
   numbersToPick: 6,
   minLottoNumber: 1,
   maxLottoNumber: 45,
+  totalRank: 5,
+  secondThresHold: 5,
 });
 
 export default OPTIONS;

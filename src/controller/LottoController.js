@@ -2,6 +2,7 @@ import SYMBOLS from '../constants/symbols.js';
 import Bonus from '../model/Bonus.js';
 import Lotto from '../model/Lotto.js';
 import LottoStore from '../model/LottoStore.js';
+import Stats from '../model/Stats.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 
@@ -16,38 +17,41 @@ class LottoController {
 
   #bonusNumber;
 
+  #stats;
+
   constructor() {
     this.#inputView = new InputView();
   }
 
   async start() {
     await this.#buyLottos();
-    await this.#showLottos();
     await this.#drawWinningNumbers();
     await this.#drawBonusNumber();
+    this.#analyzeLottos();
   }
 
   async #buyLottos() {
     try {
       this.#purchaseAmount = await this.#inputView.readPurchaseAmount();
-      this.#userLottos = new LottoStore(this.#purchaseAmount).getUserLottos();
+      const LottoStoreInstance = new LottoStore(this.#purchaseAmount);
+      this.#userLottos = LottoStoreInstance.getUserLottos();
+
+      OutputView.printLottosQuantity(this.#userLottos.length);
+      OutputView.printLottos(this.#userLottos);
     } catch (error) {
       OutputView.printError(error);
       await this.#buyLottos();
     }
   }
 
-  async #showLottos() {
-    OutputView.printLottosQuantity(this.#userLottos.length);
-    OutputView.printLottos(this.#userLottos);
-  }
-
   async #drawWinningNumbers() {
     try {
-      const readInput = (await this.#inputView.readWinningNumbers())
+      const winningNumbersInput = (await this.#inputView.readWinningNumbers())
         .split(SYMBOLS.comma)
         .map(Number);
-      this.#winningNumbers = new Lotto(readInput).getWinningNumbers();
+
+      const LottoInstance = new Lotto(winningNumbersInput);
+      this.#winningNumbers = LottoInstance.getWinningNumbers();
     } catch (error) {
       OutputView.printError(error);
       await this.#drawWinningNumbers();
@@ -56,15 +60,26 @@ class LottoController {
 
   async #drawBonusNumber() {
     try {
-      const readInput = await this.#inputView.readBonusNumber();
-      this.#bonusNumber = new Bonus(
-        readInput,
-        this.#winningNumbers,
-      ).getBonusNumber();
+      const bonusNumberInput = await this.#inputView.readBonusNumber();
+      const bonusInstance = new Bonus(bonusNumberInput, this.#winningNumbers);
+      this.#bonusNumber = bonusInstance.getBonusNumber();
     } catch (error) {
       OutputView.printError(error);
       await this.#drawBonusNumber();
     }
+  }
+
+  #analyzeLottos() {
+    OutputView.printResult();
+
+    const statInstance = new Stats(
+      this.#userLottos,
+      this.#winningNumbers,
+      this.#bonusNumber,
+    );
+    this.#stats = statInstance.getStats();
+
+    OutputView.printStats(this.#stats);
   }
 }
 
