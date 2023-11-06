@@ -24,6 +24,12 @@ class App {
     return number;
   }
 
+  checkIsValidNumber = (userInputNum) => {
+    if(!Number.isInteger(userInputNum)) throw new Error('[ERROR] : input is not a integer');
+    if(userInputNum <= 0) throw new Error('[ERROR] : pirce must greater than 0');
+    if(userInputNum % 1000 != 0) throw new Error('[ERROR] : cannot divide price by 1,000');
+  }
+
   checkValidPrice = (userInput) => {
     
   }
@@ -31,9 +37,13 @@ class App {
 
   async play() {
     try {
+      MissionUtils.Console.print('구입금액을 입력해 주세요.');
+      
       const userInput = await this.getUserInput();
 
       const number = this.stringToNumber(userInput);
+
+      this.checkIsValidNumber(number);
 
     } catch(err) {
       return Promise.reject(err);
