@@ -14,6 +14,14 @@ class LottoMachine {
     this.#lottos = [];
   }
 
+  get numberOfLottos() {
+    return this.#numberOfLottos;
+  }
+
+  get lottos() {
+    return this.#lottos;
+  }
+
   insertMoney(money) {
     this.#validateMoney(money);
     this.#numberOfLottos = money / LOTTO.price;
@@ -25,20 +33,12 @@ class LottoMachine {
     }
   }
 
-  get numberOfLottos() {
-    return this.#numberOfLottos;
-  }
-
   createLottos() {
     for (let i = 0; i < this.#numberOfLottos; i += 1) {
       const numbers = this.#generateLottoNumbers();
       const lotto = new Lotto(numbers);
       this.#lottos.push(lotto);
     }
-  }
-
-  get lottos() {
-    return this.#lottos;
   }
 
   #generateLottoNumbers() {
