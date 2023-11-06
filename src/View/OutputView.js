@@ -13,9 +13,11 @@ const OutputView = {
     const matchResultString = messageGenerator.matchResultString();
     const matchResultSeperator = messageGenerator.matchResultSeperator();
     const matchResult = Object.entries(lottoMatchResult)
-      .map(([place, count]) => messageGenerator[place](count))
+      .filter(([place, count]) => place !== "returnRate")
+      .map(([place, count]) => messageGenerator.generatePlaceMessage(place, count))
       .join("");
-    const matchResultMessage = `\n${matchResultString}${matchResultSeperator}${matchResult}`;
+    const returnRateResult = messageGenerator.returnRate(lottoMatchResult.returnRate);
+    const matchResultMessage = `\n${matchResultString}${matchResultSeperator}${matchResult}${returnRateResult}`;
     Console.print(matchResultMessage);
   },
 };
@@ -33,20 +35,8 @@ const messageGenerator = {
   matchResultSeperator() {
     return OUTPUT_MESSAGE.seperator;
   },
-  fifthPlace(matchCount) {
-    return `${OUTPUT_MESSAGE.fifthPlace}${matchCount}${OUTPUT_MESSAGE.resultUnit}`;
-  },
-  fourthPlace(matchCount) {
-    return `${OUTPUT_MESSAGE.fourthPlace}${matchCount}${OUTPUT_MESSAGE.resultUnit}`;
-  },
-  thirdPlace(matchCount) {
-    return `${OUTPUT_MESSAGE.thirdPlace}${matchCount}${OUTPUT_MESSAGE.resultUnit}`;
-  },
-  secondPlace(matchCount) {
-    return `${OUTPUT_MESSAGE.secondPlace}${matchCount}${OUTPUT_MESSAGE.resultUnit}`;
-  },
-  firstPlace(matchCount) {
-    return `${OUTPUT_MESSAGE.firstPlace}${matchCount}${OUTPUT_MESSAGE.resultUnit}`;
+  generatePlaceMessage(place, matchCount) {
+    return `${OUTPUT_MESSAGE[place]}${matchCount}${OUTPUT_MESSAGE.resultUnit}`;
   },
   returnRate(rate) {
     return `${OUTPUT_MESSAGE.returnRate}${rate}${OUTPUT_MESSAGE.returnRatePostFix}`;
