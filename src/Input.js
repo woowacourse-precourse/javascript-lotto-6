@@ -1,7 +1,7 @@
 // Input.js
 import readline from "readline";
 import Lotto from "./Lotto.js";
-import { Random, Console } from "@woowacourse/mission-utils";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Input {
   static async inputMoney() {
@@ -24,7 +24,11 @@ class Input {
           console.log(message);
 
           for (let i = 0; i < count; i++) {
-            const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+            const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+              1,
+              45,
+              6
+            );
             console.log(`[${lottoNumbers.join(", ")}]`);
           }
           rl.close();
