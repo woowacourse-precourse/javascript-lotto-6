@@ -1,7 +1,7 @@
 import { GAME_MESSAGE } from "./Constant.js";
 
 const { Console } = require("@woowacourse/mission-utils");
-const validate = require("./validate.js");
+const validate = require("./LottoGame.js");
 
 class App {
   constructor() {

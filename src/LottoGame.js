@@ -1,8 +1,8 @@
 import { ERROR_MESSAGE } from "./Constant.js";
 
-class validate {
+class LottoGame {
   constructor() {
-    this.lottocount = null;
+    this.lottoCount = null;
   }
 
   setLotteCount(money) {
@@ -18,4 +18,4 @@ class validate {
   }
 }
 
-module.exports = validate;
+module.exports = LottoGame;
