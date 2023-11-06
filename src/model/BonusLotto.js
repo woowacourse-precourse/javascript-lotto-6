@@ -1,6 +1,10 @@
 import { validateLottoBonusNumber } from '../validator/index.js';
 
 export default class BonusLotto {
+  /**
+   * @private
+   * @type {number}
+   */
   #bonusNumber;
 
   constructor(lottoNumbers, bonusLottoNumber) {
@@ -8,6 +12,10 @@ export default class BonusLotto {
     this.#bonusNumber = Number(bonusLottoNumber);
   }
 
+  /**
+   * @public
+   * @returns {number}
+   */
   getBonusLottoNumber() {
     return this.#bonusNumber;
   }

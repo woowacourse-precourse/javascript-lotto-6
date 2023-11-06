@@ -1,4 +1,8 @@
 export default class PlayerLotto {
+  /**
+   * @private
+   * @type {number[]}
+   */
   #lottoNumbers;
 
   constructor(numbers) {

@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import {
   LOTTO_PRICE,
   PROFIT_ROUND_UP_VALUE,
@@ -18,6 +17,10 @@ import {
 export default class LottoController {
   #lottoService;
 
+  /**
+   * @public
+   * @returns {Promise<void>}
+   */
   async run() {
     try {
       const lottoSeedMoney = await readLottoSeedMoney();
@@ -30,6 +33,11 @@ export default class LottoController {
     }
   }
 
+  /**
+   * @private
+   * @async
+   * @returns {Promise<void>}
+   */
   async #printLottoList() {
     const createdLottoList = this.#lottoService.getLottoList();
 
@@ -37,6 +45,11 @@ export default class LottoController {
     await this.#readLottoNumbers();
   }
 
+  /**
+   * @private
+   * @asnyc
+   * @returns {Promise<void>}
+   */
   async #readLottoNumbers() {
     try {
       const lottoNumbers = await readLottoMainNumbers();
@@ -47,6 +60,12 @@ export default class LottoController {
     }
   }
 
+  /**
+   * @private
+   * @async
+   * @param {string} lottoNumbers
+   * @returns {Promise<void>}
+   */
   async #readLottoBonusNumber(lottoNumbers) {
     try {
       const lottoBonusNumber = await readLottoBonusNumber(lottoNumbers);
@@ -59,6 +78,11 @@ export default class LottoController {
     }
   }
 
+  /**
+   * @private
+   * @param {string} lottoNumbers
+   * @param {string} lottoBonusNumber
+   */
   #compare(lottoNumbers, lottoBonusNumber) {
     const { lottoResults, lottoAmount } = this.#lottoService.getCompareResults(
       lottoNumbers,

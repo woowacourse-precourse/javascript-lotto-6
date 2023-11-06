@@ -4,8 +4,16 @@ import { validateLottoSeedMoney } from '../validator/index.js';
 import PlayerLotto from './PlayerLotto.js';
 
 export default class LottoGame {
+  /**
+   * @private
+   * @type {number}
+   */
   #seedMoney;
 
+  /**
+   * @private
+   * @type {PlayerLotto[]}
+   */
   #lottoList;
 
   constructor(seedMoney) {
@@ -14,6 +22,9 @@ export default class LottoGame {
     this.#buyLottoes();
   }
 
+  /**
+   * @private
+   */
   #buyLottoes() {
     const amount = this.#seedMoney / LOTTO_PRICE;
 
@@ -28,6 +39,10 @@ export default class LottoGame {
     });
   }
 
+  /**
+   * @public
+   * @returns {{lottoAmount: number, lottoList: PlayerLotto[]}}
+   */
   getLottoes() {
     return {
       lottoList: this.#lottoList,

@@ -1,10 +1,25 @@
 import { LOTTO_RANK } from '../constants/LottoOption.js';
 
 export default class LottoResultCalculator {
+  /**
+   * @private
+   * @type {number[]}
+   */
   #prizeTable = [0, 0, 0, 0, 0];
 
+  /**
+   * @private
+   * @type {number}
+   */
   #prizeTotal = 0;
 
+  /**
+   * @public
+   * @param {PlayerLotto[]} lottoNumbers
+   * @param {number[]} winningNumbers
+   * @param {number} winningBonusNumber
+   * @returns {{prizeAmount: number[], prizeTotal: number}}
+   */
   calculateResults(lottoNumbers, winningNumbers, winningBonusNumber) {
     lottoNumbers.forEach((lotto) => {
       const match = lotto.compare(winningNumbers, winningBonusNumber);
@@ -19,6 +34,10 @@ export default class LottoResultCalculator {
     return { prizeAmount: this.#prizeTable, prizeTotal: this.#prizeTotal };
   }
 
+  /**
+   * @private
+   * @param {{bonusNumber: boolean, mainNumber: number}} match
+   */
   #calculatePrize(match) {
     Object.values(LOTTO_RANK).forEach((rank, idx) => {
       if (rank.mainNumber === match.mainNumber) {
@@ -28,6 +47,10 @@ export default class LottoResultCalculator {
     });
   }
 
+  /**
+   * @private
+   * @param {{bonusNumber: boolean, mainNumber: number}} match
+   */
   #calculateSecondOrThirdPrize(match) {
     Object.values(LOTTO_RANK).forEach((rank, idx) => {
       if (

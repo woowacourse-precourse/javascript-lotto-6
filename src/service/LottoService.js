@@ -5,16 +5,29 @@ import Lotto from '../Lotto.js';
 import BonusLotto from '../model/BonusLotto.js';
 
 export default class LottoService {
+  /**
+   * @type {LottoGame}
+   */
   #lottoGame;
 
+  /**
+   * @type {Lotto}
+   */
   #lotto;
 
+  /**
+   * @type {BonusLotto}
+   */
   #bonusLotto;
 
   constructor(seedMoney) {
     this.#lottoGame = new LottoGame(seedMoney);
   }
 
+  /**
+   * @public
+   * @returns {{lottoAmount: number, lottoList: string[]}}
+   */
   getLottoList() {
     const { lottoList, lottoAmount } = this.#lottoGame.getLottoes();
 
@@ -30,6 +43,12 @@ export default class LottoService {
     };
   }
 
+  /**
+   * @public
+   * @param {string} mainNumbers
+   * @param {string} bonusNumber
+   * @returns {{lottoResults: {prizeAmount: number[], prizeTotal: number}, lottoAmount: *}}
+   */
   getCompareResults(mainNumbers, bonusNumber) {
     this.#lotto = new Lotto(mainNumbers);
     this.#bonusLotto = new BonusLotto(mainNumbers, bonusNumber);

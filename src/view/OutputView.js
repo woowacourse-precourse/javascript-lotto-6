@@ -5,15 +5,29 @@ import {
   LOTTO_RESULT_FORMANT,
 } from '../constants/LottoMessage.js';
 
+/**
+ * @public
+ * @param {string} error
+ */
 export const printError = (error) => {
   Console.print(error);
 };
 
+/**
+ * @public
+ * @param {string[]} lottoList
+ * @param {number} lottoAmount
+ */
 export const printLottoNumbers = ({ lottoList, lottoAmount }) => {
   Console.print(LOTTO_NOTIFICATION_FORMAT.lottoAmount(lottoAmount));
   lottoList.forEach((lotto) => Console.print(lotto));
 };
 
+/**
+ * @public
+ * @param {number[]} lottoResult
+ * @param {number} profit
+ */
 export const printLottoResults = (lottoResult, profit) => {
   Console.print(LOTTO_NOTIFICATION_MESSAGE.result);
   Object.values(LOTTO_RESULT_FORMANT).forEach((resultFormat, idx, origin) => {

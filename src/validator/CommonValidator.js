@@ -13,7 +13,7 @@ const checkInputEmpty = (input) => {
 };
 
 /**
- * @param {string} input - 검사할 문자열
+ * @param {string} input
  */
 const validateCommon = (input) => {
   const trimmedInput = input.trim();

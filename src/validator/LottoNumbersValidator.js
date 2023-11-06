@@ -3,12 +3,22 @@ import { LOTTO_MAGICNUMBER } from '../constants/LottoOption.js';
 import ValidationError from '../error/ValidationError.js';
 import { DIVIDER } from '../constants/Symbol.js';
 
+/**
+ * @public
+ * @param {number[]} input
+ * @throws {ValidationError}
+ */
 const checkValidDivider = (input) => {
   if (input.length !== LOTTO_MAGICNUMBER.selectAmount) {
     throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidDivider);
   }
 };
 
+/**
+ * @public
+ * @param {number[]} input
+ * @throws {ValidationError}
+ */
 const checkValidNumberRange = (input) => {
   input.forEach((number) => {
     if (
@@ -20,6 +30,11 @@ const checkValidNumberRange = (input) => {
   });
 };
 
+/**
+ * @public
+ * @param {number[]} input
+ * @throws {ValidationError}
+ */
 const checkValidNumber = (input) => {
   input.forEach((number) => {
     if (!Number.isInteger(number)) {
@@ -28,6 +43,11 @@ const checkValidNumber = (input) => {
   });
 };
 
+/**
+ * @public
+ * @param {number[]} input
+ * @throws {ValidationError}
+ */
 const checkDuplicationNumber = (input) => {
   const numberSet = new Set(input);
 
@@ -36,6 +56,10 @@ const checkDuplicationNumber = (input) => {
   }
 };
 
+/**
+ * @public
+ * @param {Object | string} lottoNumbers
+ */
 const validateLottoNumbers = (lottoNumbers) => {
   const splitLottoNumbers =
     typeof lottoNumbers === 'object'
