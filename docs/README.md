@@ -1,0 +1,107 @@
+# javascript-racingcar-6 #
+
+## 작성자
+프론트엔드 6기 참가자 조수민
+
+# 구조
+```
++ src
+  + constants
+    └ constants.js --- constants를 선언한 파일
+	+ controller
+		└ Controller.js	-- 로또의 진행을 담당하는 controller
+	+ model
+		└ Lotto.js	------ 정답 로또 번호 객체
+		└ Statistics.js	-- 결과 통계를 담당하는 객체
+		└ UserLotto.js	-- 유저의 로또를 구매하고 관리하는 객체
+		└ UserLottoNumber.js	--- 실제 유저의 로또 번호를 저장한 객체
+	+ view
+		└ InputView.js	-------- 입력 객체
+		└ OutputView.js	-------- 출력 객체
+  └ App.js  ---------  프로그램 실행 진입점
+	└ index.js  -------- App.play()
+
+```
+
+# 기능 구현 목록
+
+## Lotto.js
+
+### variable
+	#numbers - 로또 번호를 저장하는 배열
+	#bonusNumbers - 보너스 번호
+
+### 주요 기능
+
+__constructor(numbers)__ 
+
+	배열 numbers를 인자로 받아서 this.#numbers 초기화
+
+__initBonusNumber(bonusNumber)__
+	
+	배열 bonusNumbers를 인자로 받아서 this.#bonusNumber 초기화
+___
+
+## Statistics.js
+
+### variable
+	#rateOfReturns - 수익률
+	#statistics - 통계 결과를 저장하는 객체
+
+### 주요 기능
+
+__constructor()__
+
+수익률 this.#rateOfReturns와 결과값 객체 this.#statistics를 초기화
+
+__calculateStatistics(userLotto, lotto)__
+
+	유저의 로또와 정답 로또를 인자로 받아서 통계 결과를 this.#statistics에 저장
+
+---
+
+## UserLotto.js ##
+
+### variable
+	#purchaseAmount - 구매 금액
+	#numberOfLotto - 구매한 로또의 개수
+	#userLottoNumbers - 유저의 로또를 저장하는 배열
+
+### 주요 기능
+
+__constructor(purchaseAmount)__
+
+	구매 금액을 인자로 받아서 this.#purchaseAmount 초기화
+
+__calculateMatchingNumber(winningLotto)__
+
+	정답 로또를 객체를 인자로 받아서 결과에 따라 등수를 객체로 반환
+
+___
+
+## UserLottoNumber.js ##
+
+### variable
+	#lottoNumber - 로또 번호를 저장하는 배열
+
+### 주요 기능
+
+__constructor()__
+
+	generateLottoNumber()를 통해 this.#lottoNumber를 초기화
+
+__generateLottoNumber()__
+
+	pickUniqueNumberInRange()를 통해 중복되지 않는 숫자를 생성
+	1~45 사이의 숫자를 랜덤으로 생성하여 this.#lottoNumber에 저장
+
+__calculateMatchingNumber(winningLotto)__
+
+	정답 로또 객체를 인자로 받아서 결과에 따라 등수를 반환
+
+
+---
+
+
+
+
