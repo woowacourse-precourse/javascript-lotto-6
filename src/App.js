@@ -14,7 +14,11 @@ class App {
   }
 
   async play() {
-    await this.inputMoney();
+    try {
+      await this.inputMoney();
+    } catch (e) {
+      MissionUtils.Console.print(e.message);
+    }
   }
 
   async inputMoney() {
