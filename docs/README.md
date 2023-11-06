@@ -92,7 +92,7 @@
 ## [controller](#controller)
 
 - `input_controller`
-  - [ ] 사용자에게 값을 입력받아 그 값이 유효한지를 판단하고 조건에 맞게 수정하여 리턴한다.
+  - [x] 사용자에게 로또 금액을 입력받아 그 값이 유효한지를 판단하고 로또구매량을 리턴한다.
 - `output_controller`
   - [ ] `view` 전달받은 문자열을 출력한다.
 
