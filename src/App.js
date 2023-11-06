@@ -2,7 +2,7 @@ import {
   readAmountToPurchase,
   readBonusNumber,
   readWinningNumbers,
-} from "./LottoInterface/input.js";
+} from "./lottoInterface/input.js";
 
 class App {
   async play() {
