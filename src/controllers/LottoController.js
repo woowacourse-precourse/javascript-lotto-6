@@ -23,6 +23,16 @@ class LottoController {
 		this.#lottoManager = new LottoManager(purchasedLottoCount);
 		this.#printConsole.showLottoNumbers(this.#lottoManager.getLottosNumbers());
 	}
+
+	async assignLottoWinningNumber() {
+		const { winningNumber, winningBonusNumber } = await this.#userInput.lottoWinningNumber();
+
+		const lottoResults = this.#lottoManager.checkWinningStatus(winningNumber, winningBonusNumber);
+		const lottoCalculateResult = this.#budgetManager.calculateLotteryResults(lottoResults);
+		const totalReturn = this.#budgetManager.calculateTotalReturn();
+
+		this.#printConsole.showWinningStatistics(lottoCalculateResult, totalReturn);
+	}
 }
 
 export default LottoController;
