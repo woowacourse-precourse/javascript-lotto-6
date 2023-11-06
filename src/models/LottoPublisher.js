@@ -1,6 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import NUMBER from '../utils/constants/number.js';
 import Lotto from './Lotto.js';
+import CustomError from '../errors/CustomError.js';
 
 const { game } = NUMBER;
 const { lotto } = game;
@@ -15,7 +16,7 @@ class LottoPublisher {
 
   validate(moneyAmount) {
     if (moneyAmount % 1000 !== 0) {
-      throw new Error('안돼임마');
+      throw new CustomError('안돼임마');
     }
   }
 
