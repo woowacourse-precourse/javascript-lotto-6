@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -21,6 +23,14 @@ class Lotto {
       throw new Error("[ERROR] 중복된 숫자가 존재합니다.")
     }
   }
+
+  /**
+   * 로또의 번호를 출력
+   */
+  print(){
+    Console.print(`[${this.#numbers.join(', ')}]`);
+  }
+  
   /**
    * 현재 로또의 정답과 보너스를 토대로 당첨금을 반환한다.
    

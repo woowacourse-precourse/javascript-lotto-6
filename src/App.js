@@ -1,4 +1,5 @@
 import { MissionUtils,Console } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 
 class App {
   buyLottos=[];
@@ -51,7 +52,7 @@ class App {
    */
   makeNumbers(number){
     for(let i=0;i<number;i++){
-      this.buyLottos.push(this.makeNumber());
+      this.buyLottos.push(new Lotto(this.makeNumber()));
     }
   }
 
@@ -69,7 +70,7 @@ class App {
   printBuyLottos(){
     Console.print(`${this.buyLottos.length}개를 구매했습니다.`);
     this.buyLottos.forEach(lotto => {
-      Console.print(`[${lotto.join(', ')}]`);
+      lotto.print();
     });
   }
 
