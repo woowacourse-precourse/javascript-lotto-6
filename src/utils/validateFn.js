@@ -5,32 +5,32 @@ export const validateNumber = (number) => {
 
   splitNumber.forEach((number) => {
     if (isNaN(number)) {
-      throw new Error(ERROR_MESSAGE.INVALID_INPUT_NUMBER);
+      throw ERROR_MESSAGE.INVALID_INPUT_NUMBER;
     }
   });
 };
 
 export const validateDivisible = (number) => {
-  if (number % 1000 !== 0) {
-    throw new Error(ERROR_MESSAGE.INVALID_NON_DIVISIBLE);
+  if (number % 1000 !== 0 || number === 0) {
+    throw ERROR_MESSAGE.INVALID_NON_DIVISIBLE;
   }
 };
 
 export const validateLength = (numberArr) => {
   if (numberArr.length !== 6) {
-    throw new Error(ERROR_MESSAGE.INVALID_LOTTO_LENGTH);
+    throw ERROR_MESSAGE.INVALID_LOTTO_LENGTH;
   }
 };
 
 export const validateRange = (number) => {
   if (number < 1 || number > 45) {
-    throw new Error(ERROR_MESSAGE.INVALID_LOTTO_RANGE);
+    throw ERROR_MESSAGE.INVALID_LOTTO_RANGE;
   }
 };
 
 export const validateUnique = (numberArr) => {
   if (numberArr.length !== new Set(numberArr).size) {
-    throw new Error(ERROR_MESSAGE.INVALID_LOTTO_UNIQUE);
+    throw ERROR_MESSAGE.INVALID_LOTTO_UNIQUE;
   }
 };
 
@@ -40,6 +40,6 @@ export const validateFindEqual = (numberArr, number) => {
       return element === number;
     })
   ) {
-    throw new Error(ERROR_MESSAGE.INVALID_LOTTO_BONUS);
+    throw ERROR_MESSAGE.INVALID_LOTTO_BONUS;
   }
 };
