@@ -9,4 +9,8 @@ export default class InputService {
   async readAmount() {
     return Console.readLineAsync(MONEY_INPUT_MESSAGE);
   }
+
+  async readWinningNumbers() {
+    return Console.readLineAsync(WINNING_NUMBER_INPUT_MESSAGE);
+  }
 }
