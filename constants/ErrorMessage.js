@@ -1,5 +1,5 @@
 class ErrorMessage {
-  static INVALID_PRICE = '[ERROR] 올바른 금액을 입력해야 합니다.'; // 1000으로 안나눠질때
+  static INVALID_PRICE = '[ERROR] 1000단위의 금액을 입력해야 합니다.'; // 1000으로 안나눠질때
 
   static INVALID_INPUT = '[ERROR] 입력은 숫자여야 합니다.'; // Number가 아닐 시
 
@@ -11,6 +11,6 @@ class ErrorMessage {
 
   static DUPLICATE_BONUS_WIN = '[ERROR] 당첨 번호와 중복되지 않아야 합니다.';
 
-  static ISNOT_ASCENDING = '[ERROR] 번호는 오름차순으로 정렬되어야 합니다.'
+  static ISNOT_ASCENDING = '[ERROR] 번호는 오름차순으로 정렬되어야 합니다.';
 }
 export default ErrorMessage;

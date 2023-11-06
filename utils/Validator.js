@@ -13,6 +13,7 @@ class Validator {
     Validator.isDuplicate(win);
     win.map((num) => {
       Validator.isValidRange(num);
+      Validator.isNumber(num);
     });
   }
 
