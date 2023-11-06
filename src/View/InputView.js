@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../Constants/constants';
+import { MESSAGE } from '../Constants/constants.js';
 
 class InputView {
   // 구매 금액 입력
@@ -7,8 +7,9 @@ class InputView {
     const purchaseAmount = await Console.readLineAsync(
       MESSAGE.INPUT_PURCHASE_AMOUNT,
     );
+    const amount = purchaseAmount % 1000;
     // TODO : validation
-    return purchaseAmount;
+    return amount;
   }
 
   // 당첨 번호 입력
