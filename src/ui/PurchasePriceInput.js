@@ -10,7 +10,7 @@ const purchasePriceInput = async () => {
   if (!validatePriceInput(price))
     throw new Error(ErrorMessages.PRICE_INPUT_ERRORMESSAGE);
   const purchasedLotto = printPurchaseLotto(price / 1000);
-  return purchasedLotto;
+  return { purchasedLotto, price };
 };
 
 export default purchasePriceInput;

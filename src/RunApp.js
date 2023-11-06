@@ -11,6 +11,7 @@ class RunApp {
     this.numbers = [];
     this.bonus = [];
     this.purchase = [];
+    this.price = 0;
   }
 
   async main() {
@@ -18,7 +19,9 @@ class RunApp {
   }
 
   async start() {
-    this.purchase = await purchasePriceInput();
+    const purchaseInput = await purchasePriceInput();
+    this.purchase = purchaseInput.purchasedLotto;
+    this.price = purchaseInput.price;
     await this.getLotto();
     await this.getBonusNumber();
     printWinningStatic(
