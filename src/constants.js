@@ -1,0 +1,7 @@
+export const PRIZE_INFO = [
+    {MATCH_COUNT: 6, BONUS: false, PRIZE: 2000000000},
+    {MATCH_COUNT: 5, BONUS: true, PRIZE: 30000000},
+    {MATCH_COUNT: 5, BONUS: false, PRIZE: 1500000},
+    {MATCH_COUNT: 4, BONUS: false, PRIZE: 50000},
+    {MATCH_COUNT: 3, BONUS: false, PRIZE: 5000},
+]
