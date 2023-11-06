@@ -117,7 +117,9 @@ class LottoGame {
       200000000 * this.#rewardCount['6'];
 
     const myThrowMoney = this.#money;
-    return (myWinningMoney / myThrowMoney) * 100;
+    const myBenefit = (myWinningMoney / myThrowMoney) * 100;
+
+    return myBenefit.toLocaleString('ko-KR', { minimumFractionDigits: 1 });
   }
 }
 
