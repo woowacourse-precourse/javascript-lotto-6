@@ -10,13 +10,13 @@ class LottoController {
   async #inputPurchaseAmount() {
     const purchaseAmount = await InputView.readPurchaseAmount();
 
-    Console.print(purchaseAmount);
     this.#inputWinningNumbers();
   }
 
   async #inputWinningNumbers() {
     const winningsNumbers = await InputView.readWinningNumbers();
-    Console.print(winningsNumbers);
+    
+    Console.print(Validator.invalidSeparator(winningsNumbers));
   }
 }
 
