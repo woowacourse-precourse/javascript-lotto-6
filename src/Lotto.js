@@ -17,7 +17,7 @@ class Lotto {
     }
 
     if (setLottoNumbers.size !== LOTTO_NUMBER_SIZE) {
-      throw new Error(MESSAGE_ERROR.lottoNumberDuplicate);
+      throw new Error(MESSAGE_ERROR.lottoDuplicateNumber);
     }
   }
 
