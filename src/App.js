@@ -11,7 +11,7 @@ import { calcProfitRate } from "./Calc/CalcProfitRate.js";
 import { Console } from "@woowacourse/mission-utils";
 
 import Lotto from "./domain/Lotto.js";
-import LottoMachine from "./LottoMachine.js";
+import LottoMachine from "./domain/LottoMachine.js";
 import Purchase from "./domain/Purchase.js";
 
 class App {
@@ -45,12 +45,9 @@ class App {
 
     // 3. 로또 발행하기
     const lotto_machine = new LottoMachine();
-    this.lotto_list = lotto_machine.printLotto(this.purchase_quantity);
+    this.lotto_list = lotto_machine.generateAllLottos(this.purchase_quantity);
+    lotto_machine.printLottos(this.purchase_quantity, this.lotto_list);
 
-    // 5. 구매 수량 출력하기
-    print(`\n${this.purchase_quantity}개를 구매했습니다.`);
-    // 6. 발행한 로또 모두 출력하기
-    this.lotto_list.map((lotto) => print(`[${lotto.join(", ")}]`));
     // 7. 당첨 번호 입력 안내 문구 출력
     print(`\n${WINNING_NUMBERS_INPUT_REQUEST}`);
     // 8. 당첨 번호 입력받기
