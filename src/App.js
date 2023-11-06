@@ -53,35 +53,37 @@ class App {
     //   }
     // }
 
-    const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
-    let winningNumsList;
-    while (1) {
-      try {
-        const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
-        if (
-          winningNums.includes(',,') 
-          || winningNums[0] === ','
-          || winningNums[winningNums.length-1] === ','
-          || winningNums === null
-          ) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR);
-        }
+    // const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+    // let winningNumsList;
+    const winningNumsList = await this.getWinningNumbers();
 
-        winningNumsList = winningNums.split(',').map(Number);
-        if (winningNumsList.length !== 6 || winningNumsList.length !== new Set(winningNumsList).size) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-        }
+    // while (1) {
+    //   try {
+    //     const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
+    //     if (
+    //       winningNums.includes(',,') 
+    //       || winningNums[0] === ','
+    //       || winningNums[winningNums.length-1] === ','
+    //       || winningNums === null
+    //       ) {
+    //       throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+    //     }
 
-        for (let i = 0; i < winningNumsList.length; i++) {
-          if (!numRangePattern.test(winningNumsList[i])) {
-            throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-          }
-        }
-        break
-      } catch (error) {
-        Console.print(ERROR_MESSAGE.INPUT_ERROR)
-      }
-    }
+    //     winningNumsList = winningNums.split(',').map(Number);
+    //     if (winningNumsList.length !== 6 || winningNumsList.length !== new Set(winningNumsList).size) {
+    //       throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+    //     }
+
+    //     for (let i = 0; i < winningNumsList.length; i++) {
+    //       if (!numRangePattern.test(winningNumsList[i])) {
+    //         throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+    //       }
+    //     }
+    //     break
+    //   } catch (error) {
+    //     Console.print(ERROR_MESSAGE.INPUT_ERROR)
+    //   }
+    // }
 
     let bonus;
     while (1) {
@@ -184,5 +186,42 @@ class App {
     }
     return userRandomListNums;
   };
+
+  async getWinningNumbers() {
+    const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+    let winningNumsList;
+
+    while (1) {
+      try {
+        const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
+        
+        if (
+          winningNums.includes(',,') ||
+          winningNums[0] === ',' ||
+          winningNums[winningNums.length-1] === ',' ||
+          winningNums === null
+          ) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+        }
+
+        winningNumsList = winningNums.split(',').map(Number);
+
+        if (winningNumsList.length !== 6 || winningNumsList.length !== new Set(winningNumsList).size) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+        }
+
+        for (let i = 0; i < winningNumsList.length; i++) {
+          if (!numRangePattern.test(winningNumsList[i])) {
+            throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+          }
+        }
+        return winningNumsList;
+      } catch (error) {
+        Console.print(ERROR_MESSAGE.INPUT_ERROR)
+      }
+    }
+  };
+
+  
 }
 export default App
