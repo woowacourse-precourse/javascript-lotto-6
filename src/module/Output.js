@@ -17,19 +17,11 @@ class Output {
   static printWinningStatistics(matchCount) {
     MissionUtils.Console.print(message.winningStatistics);
     MissionUtils.Console.print(
-      `${message.threeMatches + matchCount.threeMatches}개`,
-    );
-    MissionUtils.Console.print(
-      `${message.fourMatches + matchCount.fourMatches}개`,
-    );
-    MissionUtils.Console.print(
-      `${message.fiveMatches + matchCount.fiveMatches}개`,
-    );
-    MissionUtils.Console.print(
-      `${message.fiveBonusMatches + matchCount.fiveBonusMatches}개`,
-    );
-    MissionUtils.Console.print(
-      `${message.sixMatches + matchCount.sixMatches}개`,
+      `${message.threeMatches + matchCount.threeMatches}개\n` +
+        `${message.fourMatches + matchCount.fourMatches}개\n` +
+        `${message.fiveMatches + matchCount.fiveMatches}개\n` +
+        `${message.fiveBonusMatches + matchCount.fiveBonusMatches}개\n` +
+        `${message.sixMatches + matchCount.sixMatches}개`,
     );
   }
 
