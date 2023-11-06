@@ -17,8 +17,7 @@ class LottoValidate {
     if (isNaN(bonusNumber))
       throw new Error("[ERROR] 입력 형식이 올바르지 않습니다.");
 
-    if (winningNumber.includes(bonusNumber))
-      throw new Error("[ERROR] 보너스 번호가 당첨 번호에 있습니다.");
+      if(winningNumber.includes(bonusNumber)) throw new Error('[ERROR] 보너스 번호가 당첨 번호에 있습니다.')
   }
 }
 
