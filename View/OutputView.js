@@ -17,7 +17,7 @@ const OutputView = {
     });
   },
   
-  async changeNumberToWon(price) {
+  changeNumberToWon(price) {
     const priceString = price.toString();
     let won = '';
     let count = 0;
@@ -35,13 +35,13 @@ const OutputView = {
       if (matchResult[i] === undefined) matchResult[i] = [0, 0];
       const [count, bonusCount] = matchResult[i];
       if (NUMBER.CHECK_MATCH_BONUS_NUMBER.includes(i)) {
-        Console.print(`${i}개 일치 (${this.changeNumberToWon(NUMBER.MATCH_NUMBER_PRICE[i])})원 - ${count-bonusCount}개`)
-        Console.print(`${i}개 일치, 보너스 볼 일치 (${this.changeNumberToWon(NUMBER.MATCH_BONUS_NUMBER_PRICE[i])})원 - ${bonusCount}개`);
+        await Console.print(`${i}개 일치 (${this.changeNumberToWon(NUMBER.MATCH_NUMBER_PRICE[i])}원) - ${count-bonusCount}개`)
+        await Console.print(`${i}개 일치, 보너스 볼 일치 (${this.changeNumberToWon(NUMBER.MATCH_BONUS_NUMBER_PRICE[i])}원) - ${bonusCount}개`);
         continue
       };
-      Console.print(`${i}개 일치 (${this.changeNumberToWon(NUMBER.MATCH_NUMBER_PRICE[i])})원 - ${count}개`)
+      await Console.print(`${i}개 일치 (${this.changeNumberToWon(NUMBER.MATCH_NUMBER_PRICE[i])}원) - ${count}개`)
     };
-    Console.print(`총 수익률은 ${incomeResult}%입니다.`)
+    await Console.print(`총 수익률은 ${incomeResult}%입니다.`)
   },
 };
 
