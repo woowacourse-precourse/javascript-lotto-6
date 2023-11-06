@@ -29,7 +29,15 @@ class Lotto {
   #numberTypeCheck(numbers) {
     numbers.forEach((number) => {
       if (Number.isNaN(number)) {
-        throw new Error("[ERROR] 로또 번호는 정수여야 합니다.");
+        throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
+      }
+    });
+  }
+
+  #numberRangeCheck(numbers) {
+    numbers.forEach((number) => {
+      if (number < 1 || number > 45) {
+        throw new Error('[ERROR] 로또 번호는 1~45 사이여야 합니다.');
       }
     });
   }
