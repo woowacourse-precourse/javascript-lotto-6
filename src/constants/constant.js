@@ -5,3 +5,7 @@ export const LOTTO_RANGE = {
   end: 45,
   range: 6,
 }
+
+export const CONVERTER_VAR = {
+  strToArr: ',',
+}

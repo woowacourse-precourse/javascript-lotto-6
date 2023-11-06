@@ -7,6 +7,12 @@ class InputView {
     const input = await Console.readLineAsync(INPUT_MESSAGE.totalMoney);
     return input;
   }
+
+  async receiveUserLotto(){
+    // '당첨 번호를 입력해 주세요.'
+    const input = await Console.readLineAsync(INPUT_MESSAGE.userLotto);
+    return input;
+  }
 }
 
 export default InputView;

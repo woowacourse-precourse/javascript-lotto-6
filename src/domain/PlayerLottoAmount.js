@@ -13,12 +13,12 @@ class PlayerLottoAmount{
   }
 
   #isNumber(str){
-    if(!REGEX_NUM.test(str)) throw new Error(ERR_MESSAGE.isNotNum);
+    if(!REGEX_NUM.test(str)) throw new Error(ERR_MESSAGE.notNum);
   }
 
   #isDividedThousand(str){
     const check = Number(str) % LOTTO_VAL === 0;
-    if(!check) throw new Error(ERR_MESSAGE.isNotDividedThousand);
+    if(!check) throw new Error(ERR_MESSAGE.notDividedThousand);
   }
 
   validate(str){
