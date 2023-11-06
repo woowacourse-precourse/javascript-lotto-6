@@ -12,18 +12,6 @@ class Validate {
       throw new AppError(LOTTOERROR.errormessage.unit); 
     }
   }
-
-
-validateAmount(input) {
-  if (!LOTTOERROR.regex.number.test(input)) { 
-    throw new AppError(LOTTOERROR.errormessage.amount);
-  }
-  if (input.slice(-3) !== "000") {
-    throw new AppError(LOTTOERROR.errormessage.unit);
-  }
-}
-
-
   validateNumbers(input) {
     const nums = input.split(",");
     if (nums.findIndex((num) => !LOTTOERROR.regex.lottoNumber.test(num)) !== -1) {
