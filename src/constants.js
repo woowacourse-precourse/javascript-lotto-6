@@ -10,6 +10,10 @@ const ERRORS = {
   WINNING_NUMBERS_NOT_BETWEEN_RANGE:
     '[ERROR] 로또 번호는 1~45 사이여야 합니다.',
   WINNING_NUMBERS_DUPLICATED: '[ERROR] 로또 번호는 중복될 수 없습니다.',
+  BONUS_NUMBER_NOT_NUMBER: '[ERROR] 보너스 번호는 숫자여야 합니다.',
+  BONUS_NUMBER_NOT_BETWEEN_RANGE: '[ERROR] 보너스 번호는 1~45 사이여야 합니다.',
+  BONUS_NUMBER_DUPLICATED:
+    '[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.',
 };
 
 const NUMBERS = {
