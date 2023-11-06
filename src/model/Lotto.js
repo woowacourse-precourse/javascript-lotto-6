@@ -1,4 +1,7 @@
+import LottoValidator from '../service/LottoValidator.js';
+
 class Lotto {
+
   #numbers;
 
   constructor(numbers) {
@@ -6,10 +9,13 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    const lottoValidator = new LottoValidator(numbers);
+    lottoValidator.validate();
   }
 
   // TODO: 추가 기능 구현
