@@ -75,7 +75,6 @@ class LottoController {
     const counts = this.#lottos.map((lotto) => {
       return winning.compareLotto(lotto);
     });
-
     this.recordResult(counts);
   }
 
