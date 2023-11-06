@@ -16,6 +16,14 @@ class App {
     for (let i = 0; i < lottoList.length; i++) {
       Console.print(lottoList[i].getLottoNumbers().sort((a, b) => a - b));
     }
+
+    const winningNumber = (
+      await Console.readLineAsync("당첨 번호를 입력해 주세요.")
+    ).split(",");
+
+    const bonusNumber = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요."
+    );
   }
 
   buyLotto(amount) {
