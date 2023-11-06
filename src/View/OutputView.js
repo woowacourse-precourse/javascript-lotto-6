@@ -2,6 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import { RANK_MONEY, RANK_MATCH, OUTPUT_MESSAGE } from "../constants/constants.js";
 
 class OutputView {
+  // 2-1. 구매한 로또 수량을 출력한다.
   static printLottoCnt(lottoCnt) {
     this.printNewLine();
     Console.print(OUTPUT_MESSAGE.printLottoCnt(lottoCnt));

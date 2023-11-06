@@ -38,6 +38,7 @@ class Lotto {
       bonus: false
     };
 
+    // 번호 5개가 일치했다면 보너스 번호 일치 여부를 확인한다.
     if (cnt === 5) {
       matchResult.bonus = this.#numbers.includes(bonusNumber);
     }
