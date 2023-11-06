@@ -9,7 +9,7 @@ export const input = {
 
   getInputLotto() {
     const LottoArray = Console.readLineAsync(GAME_INFO.INPUT_LOTTO);
-    return LottoArray;
+    return LottoArray.split(",");
   },
 
   getInputBonusNumber() {
