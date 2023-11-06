@@ -1,5 +1,4 @@
-import { SETTING } from '../constants';
-import { ERROR_MESSAGE } from '../constants';
+import { SETTING, ERROR_MESSAGE } from '../constants';
 const { 
   not_lotto_cost,
   not_natural_number,
