@@ -23,7 +23,7 @@ class PurchaseLotto {
 
   async alertPurchaseLotto() {
     if (this.inputPrice % LOTTO_NUMBERS.PAY_LOTTO_MONEY !== 0) {
-      return consoleError(ERROR_MESSAGE.UNIT);
+      return ERROR_MESSAGE.UNIT;
     }
     return this.countingLotto(this.lottoCount);
   }
