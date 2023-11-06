@@ -13,21 +13,23 @@ const Validator = {
     return true;
   },
 
-  /**
-   *
-   * @param {array} lottoNumbers
-   */
-
-  validateLottoNumbers(lottoNumbers) {
-    if (new Set(lottoNumbers).size !== 6) throw new Error(ERROR_MESSAGES.invalidLottoNumber);
+  validateLottoNumbers(lottoNumbersArray) {
+    if (new Set(lottoNumbersArray).size !== 6) return false;
     if (
-      lottoNumbers.some(
+      lottoNumbersArray.some(
         (lottoNumber) =>
           lottoNumber > CONSTANTS.maximumNumber ||
           lottoNumber < CONSTANTS.minimumNumber ||
           !Number.isSafeInteger(lottoNumber),
       )
-    )
+    ) {
+      return false;
+    }
+    return true;
+  },
+
+  validateGeneratedLotto(lottoNumbersArray) {
+    if (!this.validateLottoNumbers(lottoNumbersArray))
       throw new Error(ERROR_MESSAGES.invalidLottoNumber);
   },
 };

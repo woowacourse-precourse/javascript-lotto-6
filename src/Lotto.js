@@ -9,7 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validator.validateLottoNumbers(numbers);
+    Validator.validateGeneratedLotto(numbers);
   }
 
   // TODO: 추가 기능 구현
