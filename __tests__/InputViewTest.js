@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import InputView from '../src/InputView.js';
 
 describe('stringToNumber', () => {
@@ -13,5 +14,17 @@ describe('stringToNumber', () => {
     const result = input.stringToNumberArray(inputString);
 
     expect(result).toEqual(expectedOutput);
+  });
+
+  it('보너스 숫자가 숫자형으로 변환되어 저장되는지 확인', async () => {
+    // Mock Console.readLineAsync to return a valid bonus number
+    const mockInput = '7'; // Mock user input
+    Console.readLineAsync = jest.fn().mockResolvedValue(mockInput);
+    const result = await input.inputBonusNumber();
+
+    // Expect the result to be a number
+    expect(typeof result).toBe('number');
+    // Expect the result to be the same as the mock input
+    expect(result).toBe(7);
   });
 });

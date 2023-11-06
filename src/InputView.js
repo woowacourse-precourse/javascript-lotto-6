@@ -8,6 +8,7 @@ class InputView {
   constructor() {
     this.winningNumber = [];
     this.playerMoney = 0;
+    this.bonusNumber = 0;
   }
 
   saveLottoWinningNumber() {
@@ -22,8 +23,14 @@ class InputView {
   }
 
   async inputAmountOfMoney() {
-    const playerInputMoney = await Console.readLineAsync(INPUT_WINNING_NUMBER);
+    const playerInputMoney = await Console.readLineAsync(INPUT_PURCHASING_AMOUNT);
     this.playerMoney = Number(playerInputMoney);
+  }
+
+  async inputBonusNumber() {
+    const playerInputBonus = await Console.readLineAsync(INPUT_BONUST_NUMBER);
+    this.bonusNumber = Number(playerInputBonus);
+    return this.bonusNumber;
   }
 
   stringToNumberArray(inputNumber) {
