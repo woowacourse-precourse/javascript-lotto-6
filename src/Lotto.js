@@ -1,5 +1,4 @@
 import { Console } from "@woowacourse/mission-utils";
-import ValidatePrice from "./ValidatePrice.js";
 import PrintOutput from "./PrintOutput.js";
 
 class Lotto {
@@ -11,25 +10,25 @@ class Lotto {
   }
 
   async start() {
-    await this.getPrice();
+    // await this.getPrice();
     this.sixNum = await this.getSixNum();
     this.bonusNum = await this.getBonusNum();
     await this.print();
   }
 
-  getPrice = async () => {
-    let price;
-    do {
-      try {
-        price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
-        price = ValidatePrice(price);
-      } catch(error) {
-        throw new Error(error.message);
-      }
-    } while(!price);
+  // getPrice = async () => {
+  //   let price;
+  //   do {
+  //     try {
+  //       price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
+  //       price = ValidatePrice(price);
+  //     } catch(error) {
+  //       throw new Error(error.message);
+  //     }
+  //   } while(!price);
 
-    PrintOutput.printLottoNumSet(price);
-  };
+  //   PrintOutput.printLottoNumSet(price);
+  // };
 
   getSixNum = async () => {
     let sixNum;
