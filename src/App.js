@@ -15,7 +15,10 @@ class App {
 
     const generatedLottoNumbers =
       this.lottoManagement.getLottoArray(lottoCount);
-
+    const generatedLottoNumbersArr = generatedLottoNumbers.map((lotto) =>
+      lotto.getNumbers()
+    );
+    console.log(generatedLottoNumbersArr);
     Console.print(`${lottoCount}개를 구매했습니다.`);
 
     generatedLottoNumbers.forEach((lotto) => {
@@ -26,6 +29,7 @@ class App {
       await this.lottoResultChecker.inputWinningLottoNum()
     );
     console.log(this.winningNumbers);
+
     const inputLottoNumErrors = new Lotto(this.winningNumbers);
 
     this.bonusNumber = this.convertToNum(await this.inputBonusNumber());
@@ -33,6 +37,11 @@ class App {
     this.checkValidateInputBonus(this.bonusNumber);
 
     const includedbonusArr = this.countBonuses(generatedLottoNumbers);
+
+    this.matchingCounts = this.lottoResultChecker.compareInputNumAndRandomNum(
+      this.winningNumbers,
+      generatedLottoNumbersArr
+    );
   }
 
   async inputPurchasePrice() {
