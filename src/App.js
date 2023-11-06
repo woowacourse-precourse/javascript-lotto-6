@@ -21,9 +21,8 @@ class App {
       const bonusInput = await receiveBonusNumberUI();
       const bonusNumber = await getBonusNumber(bonusInput, lotto);
 
-      const matchResult = lottoMatcher(purchaseValues.purchasedLotto, winningNumber, bonusNumber);
+      const matchResult = lottoMatcher(purchaseValues.purchasedLotto, lotto, bonusNumber);
       const lottoResult = lottoCompareService(matchResult, purchaseValues.purchaseAmount);
-
       winningStatisticsUI(lottoResult);
     } catch (error) {
       const errorMessage = error.message;
