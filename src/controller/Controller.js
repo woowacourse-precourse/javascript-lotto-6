@@ -1,9 +1,9 @@
-import InputView from './InputView.js';
-import Lottos from './Lottos.js';
-import OutputView from './OutputView.js';
-import BonusLotto from './BonusLotto.js';
-import WinningLotto from './WinningLotto.js';
-import { REWARD } from './constants/constants.js';
+import InputView from '../view/InputView.js';
+import Lottos from '../model/Lottos.js';
+import OutputView from '../view/OutputView.js';
+import BonusLotto from '../model/BonusLotto.js';
+import WinningLotto from '../model/WinningLotto.js';
+import { REWARD } from '../constants/constants.js';
 import { Console } from '@woowacourse/mission-utils';
 
 class Controller {
