@@ -23,17 +23,19 @@ class LottosMatcher {
   }
 
   #updatePrizeCount(matchResult) {
-    this.#prizeCount[this.#getPrizeIndex(matchResult)] += 1;
+    if (this.#canGetPrize(matchResult))
+      this.#prizeCount[this.#getPrizeIndex(matchResult)] += 1;
+  }
+
+  #canGetPrize([matchCount, _]) {
+    return matchCount >= LOTTO.minMatchCount;
   }
 
   #getPrizeIndex([matchCount, isBonus]) {
-    if (this.#isWin(matchCount)) return this.#prizeCount.length - 1;
-    if (this.#isBonusMatch(matchCount, isBonus))
-      return this.#prizeCount.length - 2;
+    if (this.#isWin(matchCount)) return LOTTO.prizeCount - 1;
+    if (this.#isBonusMatch(matchCount, isBonus)) return LOTTO.prizeCount - 2;
     if (this.#isRemainedValidMatch(matchCount))
       return matchCount - LOTTO.minMatchCount;
-
-    return -1; // TODO 오류 처리필요
   }
 
   #isWin(matchCount) {
