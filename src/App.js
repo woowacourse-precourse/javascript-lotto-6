@@ -1,15 +1,15 @@
-import { Console } from "@woowacourse/mission-utils";
 import NumberIssuance from "./services/NumberIssuance.js";
 import LottoGame from "./LottoGame.js";
 import Calculator from "./services/Calculator.js";
 import UserInput from "./io/UserInput.js";
+import UserOutput from "./io/UserOutput.js";
 
 class App {
   /* eslint-disable class-methods-use-this */
   async play() {
     const amount = await UserInput.getAmount();
     const numberIssuance = new NumberIssuance(amount);
-    await App.displayPurchase(
+    await UserOutput.displayPurchase(
       numberIssuance.numberOfTickets,
       numberIssuance.lottoNumbers,
     );
@@ -21,8 +21,8 @@ class App {
       bonus: bonusNumber,
     });
 
-    App.displayStatistics(results.statistics);
-    App.displayRevenue(results.revenue);
+    UserOutput.displayStatistics(results.statistics);
+    UserOutput.displayRevenue(results.revenue);
   }
 
   static generateResult(amount, myLotto, winningLotto) {
@@ -37,23 +37,6 @@ class App {
       statistics: lottoGame.statistics,
       revenue: calculator.revenue,
     };
-  }
-
-  static displayPurchase(numberOfTickets, lottoNumbers) {
-    let str = "\n";
-    str += `${numberOfTickets}개를 구매했습니다. \n`;
-    str += `${lottoNumbers.map((item) => `[${item.join(", ")}]`).join("\n")}\n`;
-    Console.print(str);
-  }
-
-  static displayStatistics(statistics) {
-    const str = `\n당첨 통계\n---${statistics}`;
-    Console.print(str);
-  }
-
-  static displayRevenue(revenue) {
-    const str = `총 수익률은 ${revenue}%입니다.`;
-    Console.print(str);
   }
 }
 
