@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './constants.js';
+import { ERROR_MESSAGE, LOTTO } from './constants.js';
 
 const validate = {
   isInteger(scope, value) {
@@ -18,7 +18,7 @@ const validate = {
   },
 
   isCount(scope, value) {
-    if (value.length !== 6) {
+    if (value.length !== LOTTO.COUNT) {
       throw new Error(
         `${ERROR_MESSAGE.LOGO} ${scope} ${ERROR_MESSAGE.IS_COUNT}`
       );
@@ -26,7 +26,7 @@ const validate = {
   },
 
   isDuplication(scope, value) {
-    if ([...new Set(value)].length !== 6) {
+    if ([...new Set(value)].length !== LOTTO.COUNT) {
       throw new Error(
         `${ERROR_MESSAGE.LOGO} ${scope} ${ERROR_MESSAGE.NO_DUPLICATION}`
       );
@@ -34,7 +34,10 @@ const validate = {
   },
 
   isNumberRange(scope, number) {
-    if (Number(number) > 45 || Number(number) < 1) {
+    if (
+      Number(number) > LOTTO.MAX_NUMBER ||
+      Number(number) < LOTTO.MIN_NUMBER
+    ) {
       throw new Error(
         `${ERROR_MESSAGE.LOGO} ${scope} ${ERROR_MESSAGE.IS_NUMBER_RANGE}`
       );
