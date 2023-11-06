@@ -12,14 +12,20 @@ class App {
 
     const bonus = await View.getBonusNumber(winnerLotto.numbers);
 
-    View.displayWinningStatics(lottoArray, winnerLotto.numbers, bonus.number);
+    const statics = View.displayWinningStatics(
+      lottoArray,
+      winnerLotto.numbers,
+      bonus.number
+    );
+
+    View.displayProfit(statics, purchaseAmount);
   }
 
   async setLottoConfig() {
     const purchaseAmount = await View.getAmount();
 
     if (!Validator.isValidPurchaseAmount(purchaseAmount)) {
-      throw Error(ERORR_MESSAGE.purchaseError);
+      throw new Error(ERORR_MESSAGE.purchaseError);
     }
 
     const lottoArray = setPurchaseLotto(purchaseAmount);

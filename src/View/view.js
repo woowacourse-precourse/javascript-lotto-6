@@ -11,6 +11,7 @@ import {
   MATCH_6,
 } from "../constants/statistics.js";
 import { calculateStatistics } from "../module/statistics.js";
+import { calculateProfit } from "../utils/calculator.js";
 
 export const View = {
   async getAmount() {
@@ -60,5 +61,12 @@ export const View = {
       `5개 일치, 보너스 볼 일치 (30,000,000원) - ${statics[MATCH_5_BONUS]}개`
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${statics[MATCH_6]}개`);
+
+    return statics;
+  },
+
+  displayProfit(statics, purchaseAmount) {
+    const profit = calculateProfit(statics);
+    Console.print(`총 수익률은 ${(profit / purchaseAmount) * 100}%입니다.`);
   },
 };

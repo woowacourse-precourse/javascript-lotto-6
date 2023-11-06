@@ -1,9 +1,9 @@
 export const STATISTICS = Object.freeze({
-  three: " (5,000원)",
-  four: " (50.000원)",
-  five: " (1,500,000원)",
-  five_bonus: ", 보너스 볼 일치 (30,000,000원)",
-  six: " (2,000,000,000원)",
+  three: 5000,
+  four: 50000,
+  five: 1500000,
+  five_bonus: 300000000,
+  six: 2000000000,
 });
 
 export const MATCH_3 = 3;
