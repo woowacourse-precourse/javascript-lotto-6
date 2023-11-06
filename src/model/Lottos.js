@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import InputValidator from '../utils/InputValidator.js';
 import Lotto from './Lotto.js';
 
 class Lottos {
@@ -11,6 +12,7 @@ class Lottos {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
         (a, b) => a - b,
       );
+      InputValidator.validateNumbers(numbers);
       return numbers;
     });
     this.#lottos = this.#lottos.map(lotto => new Lotto(lotto));

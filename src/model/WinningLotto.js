@@ -8,7 +8,7 @@ class WinningLotto {
 
   constructor(winningLottoNumbers, bonusLottoNumber) {
     this.#validateWinningLotto(winningLottoNumbers);
-    this.#validateBonusLotto(bonusLottoNumber);
+    this.#validateBonusLotto(bonusLottoNumber, winningLottoNumbers);
     this.#winningLottoNumbers = winningLottoNumbers;
     this.#bonusLottoNumber = bonusLottoNumber;
   }
@@ -23,14 +23,14 @@ class WinningLotto {
 
   #validateWinningLotto(winningLottoNumbers) {
     InputValidator.validateNumbers(winningLottoNumbers);
-    
+
     winningLottoNumbers.forEach(number => {
       InputValidator.validateNumber(number);
     });
   }
 
-  #validateBonusLotto(bonusLottoNumber) {
-    InputValidator.validateNumber(bonusLottoNumber);
+  #validateBonusLotto(bonusLottoNumber, winningLottoNumbers) {
+    InputValidator.validateBonusNumber(bonusLottoNumber, winningLottoNumbers);
   }
 }
 
