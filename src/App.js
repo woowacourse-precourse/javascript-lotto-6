@@ -36,6 +36,58 @@ class App {
     }
   }
 
+  validateWinningNumbers(input) {
+    if (input === '') {
+      throw new Error('[ERROR] 입력이 없습니다.');
+    }
+
+    if (!input.includes(',')) {
+      throw new Error('[ERROR] 입력이 쉼표로 구분되지 않습니다.');
+    }
+
+    const numbers = input.split(',').map((number) => {
+      return number;
+    });
+
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 입력이 6개가 아닙니다.');
+    }
+
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error('[ERROR] 입력에 중복된 값이 있습니다.');
+    }
+
+    numbers.forEach((number) => {
+      if (Number.isNaN(Number(number))) {
+        throw new Error('[ERROR] 입력이 숫자가 아닙니다.');
+      }
+
+      if (number < 1 || number > 45) {
+        throw new Error('[ERROR] 입력이 1 ~ 45 사이가 아닙니다');
+      }
+    });
+  }
+
+  async getWinningNumbers() {
+    while (true) {
+      try {
+        const input = await Console.readLineAsync(
+          '당첨 번호를 입력해 주세요.\n'
+        );
+
+        this.validateWinningNumbers(input);
+
+        const winningNumbers = input.split(',').map((number) => {
+          return Number(number);
+        });
+
+        return winningNumbers;
+      } catch (err) {
+        Console.print(err.message);
+      }
+    }
+  }
+
   generateRandomLottoNumbers() {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
@@ -67,6 +119,8 @@ class App {
 
     this.printLottoTicketCount(userTickets);
     this.printLottoTicketNumbers(userTickets);
+
+    const winningNumbers = await this.getWinningNumbers();
   }
 }
 
