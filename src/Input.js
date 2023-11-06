@@ -1,6 +1,7 @@
 // Input.js
 import readline from "readline";
 import Lotto from "./Lotto.js";
+import { Random, Console } from "@woowacourse/mission-utils";
 
 class Input {
   static async inputMoney() {
@@ -21,8 +22,12 @@ class Input {
           const count = purchaseAmount / 1000;
           const message = `${count}개를 구매했습니다.`;
           console.log(message);
+
+          for (let i = 0; i < count; i++) {
+            const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+            console.log(`[${lottoNumbers.join(", ")}]`);
+          }
           rl.close();
-          resolve(purchaseAmount);
         }
       });
     });
