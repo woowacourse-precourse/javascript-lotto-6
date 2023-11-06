@@ -8,7 +8,7 @@ class LottoController {
 
   async #inputPurchaseAmountForLotto() {
     const purchaseAmount = await InputView.readPurchaseAmount();
-    Validator.remainderNotZero(purchaseAmount);
+    Validator.invalidNumber(purchaseAmount);
   }
 }
 

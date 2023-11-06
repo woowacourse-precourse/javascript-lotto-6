@@ -6,6 +6,9 @@ const Validator = {
     if (purchaseAmount % CONSTANTS.purchaseAmount.amountDivisor !== 0)
       throw new Error(ERROR.message.remainderNotZero);
   },
+  invalidNumber: purchaseAmount => {
+    if (isNaN(purchaseAmount)) throw new Error(ERROR.message.invalidNumber);
+  },
 };
 
 export default Validator;
