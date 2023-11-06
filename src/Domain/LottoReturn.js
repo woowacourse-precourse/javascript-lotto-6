@@ -4,12 +4,10 @@ import { MessageFormat } from '../utils/messageFormat.js';
 
 class LottoReturn {
   /**
-   * 수익률(%) 계산
-   * @date 2023. 11. 6. - 오후 6:42:35
-   *
-   * @static
-   * @param {*} matchingResult : 당첨 갯수가 몇 개 인지를 저장한 객체
-   * @param {*} totalPurchaseAmount : 총 구매 비용
+   * 수익률(%)을 계산하고 출력합니다.
+   * @param {Object} matchingResult 각 당첨 갯수를 저장한 객체
+   * @param {number} totalPurchaseAmount 총 구매 비용
+   * @returns {void} 반환값 없음
    */
   static calculateReturnRate(matchingResult, totalPurchaseAmount) {
     const totalProfit = totalPurchaseAmount - this.getTotalPrizeAmount(matchingResult);
@@ -18,11 +16,9 @@ class LottoReturn {
   }
 
   /**
-   * 총 당첨 금액 계산
-   *
-   * @static
-   * @param {*} matchingResult : 당첨 갯수가 몇 개 인지를 저장한 객체
-   * @returns {*} total : 총 당첨금
+   * 총 당첨 금액을 계산합니다.
+   * @param {Object} matchingResult 각 당첨 갯수를 저장한 객체
+   * @returns {number} total 총 당첨금
    */
   static getTotalPrizeAmount(matchingResult) {
     /**
@@ -38,6 +34,11 @@ class LottoReturn {
     }, 0);
   }
 
+  /**
+   * 수익률을 출력합니다.
+   * @param {number} totalReturnRate 총 수익률
+   * @returns {void} 반환값 없음
+   */
   static printTotalReturnRate(totalReturnRate) {
     Console.print(MessageFormat.totalReturnRate(totalReturnRate));
   }
