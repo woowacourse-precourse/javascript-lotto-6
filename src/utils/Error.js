@@ -32,3 +32,36 @@ export class PurchaseValueError extends Error {
     return DEFAULT_ERROR_MESSAGE;
   }
 }
+
+export class WinningNumberError extends Error {
+  static TYPE_NOT_AMOUNT_6 = 0;
+  static TYPE_OUT_OF_RANGE = 1;
+  static TYPE_DUPLICATED = 2;
+
+  /**
+   * @param {number} errorType
+   */
+  constructor(errorType = -1) {
+    super(WinningNumberError.#getMessage(errorType));
+  }
+
+  /**
+   *
+   * @param {number} type
+   */
+  static #getMessage(type) {
+    if (type === WinningNumberError.TYPE_NOT_AMOUNT_6) {
+      return `${DEFAULT_ERROR_MESSAGE} 올바르지 않은 숫자 형식입니다.`;
+    }
+
+    if (type === WinningNumberError.TYPE_OUT_OF_RANGE) {
+      return `${DEFAULT_ERROR_MESSAGE} 입력한 금액이 1000원 단위가 아닙니다.`;
+    }
+
+    if (type === WinningNumberError.TYPE_DUPLICATED) {
+      return `${DEFAULT_ERROR_MESSAGE} 최소 1개 이상을 구입하셔야 합니다.`;
+    }
+
+    return DEFAULT_ERROR_MESSAGE;
+  }
+}
