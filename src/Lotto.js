@@ -1,3 +1,6 @@
+import { LOTTO_LENGTH } from "./constant/Constant";
+import errorMessage from "./constant/ErrorMessage";
+
 class Lotto {
   #numbers;
 
@@ -7,8 +10,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTO_LENGTH) {
+      errorMessage.lengthError();
     }
   }
 
