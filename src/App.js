@@ -19,7 +19,9 @@ class App {
       throw new Error("[ERROR] 구매 금액은 1,000원 단위여야 합니다.");
   }
 
-  async play() {}
+  async play() {
+    await this.inputPurchaseAmount();
+  }
 }
 
 export default App;
