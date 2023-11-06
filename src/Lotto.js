@@ -16,24 +16,26 @@ class Lotto {
 
   #validate(numbers) {
     if (!Validation.isLength(numbers, LENGTH)) {
-      throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_LENGTH);
+      throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_LENGTH(LENGTH));
     }
 
     if (!Validation.isUnique(numbers)) {
       throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_UNIQUE);
     }
 
-    numbers.every((number) => {
+    numbers.forEach((number) => {
       if (!Validation.isNumber(number)) {
         throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_NUMBER);
       }
 
       if (!Validation.isPositive(number)) {
+        //console.log(number);
         throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_POSITIVE);
       }
 
-      if (!Validation.isOnRange(number)) {
-        throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_RANGE);
+      if (!Validation.isOnRange(number, MIN, MAX)) {
+        //console.log(number);
+        throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_RANGE(MIN, MAX));
       }
 
       if (!Validation.isInteger(number)) {
@@ -47,7 +49,7 @@ class Lotto {
   }
 
   printNumbers() {
-    return Console.print(this.#numbers.join(","));
+    return Console.print(`[${this.#numbers.join(", ")}]`);
   }
 }
 
