@@ -43,40 +43,62 @@ class LottoController {
   }
 
   async start() {
+    await this.#initializeUser();
+    this.#purchaseLottos();
+    await this.#initializeTargetLotto();
+    this.#calculateAndDisplayResults();
+  }
+
+  async #initializeUser() {
     const userMoneyInput = await this.#inputView.getBuyMoneyInput();
     this.#user = new User(userMoneyInput);
     this.#outPutView.printNewLine();
+  }
 
+  #purchaseLottos() {
     const lottoPrice = this.#lottoShop.getLottoPrice();
-    const maxBuyCount = Math.floor(userMoneyInput / lottoPrice);
+    const maxBuyCount = this.#user.getMoney() / lottoPrice;
 
     this.#lottoShop.sellLottos(this.#user, maxBuyCount);
 
     this.#outPutView.printBuyLottoCount(maxBuyCount);
     this.#outPutView.printLottoNumbers(this.#user.getLottoList());
     this.#outPutView.printNewLine();
+  }
 
+  async #initializeTargetLotto() {
     const { targetNumberList, targetBonusNumber } =
       await this.#inputView.getTargetLottoInfoInput();
 
     this.#targetLotto = new TargetLotto(targetNumberList, targetBonusNumber);
 
     this.#outPutView.printLottoResultInfoMessage();
+  }
 
+  #calculateAndDisplayResults() {
+    const lottoWinningCounts = this.#calculateLottoResultCount();
+    const totalProfit = this.#calculateTotalProfit(lottoWinningCounts);
+    const totalUsedMoney =
+      this.#user.getLottoList().length * this.#lottoShop.getLottoPrice();
+    this.#outPutView.printLottoResults(lottoWinningCounts);
+    this.#outPutView.printLottoReturns(totalProfit, totalUsedMoney);
+  }
+
+  #calculateLottoResultCount() {
     const lottoWinningCounts = [0, 0, 0, 0, 0];
-
-    let totalWinningMoney = 0;
-
     this.#user.getLottoList().forEach((lotto) => {
       const lottoResult = this.#targetLotto.calLottoResult(lotto);
       if (lottoResult !== 0) {
         lottoWinningCounts[lottoResult - 1]++;
-        totalWinningMoney += LOTTO_AWARD[lottoResult].money;
       }
     });
+    return lottoWinningCounts;
+  }
 
-    this.#outPutView.printLottoResults(lottoWinningCounts);
-    this.#outPutView.printLottoReturns(totalWinningMoney, userMoneyInput);
+  #calculateTotalProfit(lottoWinningCounts) {
+    return lottoWinningCounts.reduce((acc, count, index) => {
+      return acc + count * LOTTO_AWARD[index + 1].money;
+    }, 0);
   }
 }
 
