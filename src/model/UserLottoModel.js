@@ -5,7 +5,7 @@ import {
   generateStatistics,
   throwError,
 } from '../utils/index.js';
-import { ERROR_MESSAGE, LOTTO, REGEX } from '../utils/constants.js';
+import { ERROR_MESSAGE, LOTTO } from '../utils/constants.js';
 
 class UserLottoModel {
   /**
@@ -43,14 +43,14 @@ class UserLottoModel {
     this.#isNotAmountUnit(amount);
     this.#isNotEnoughAmount(amount);
     this.#amount = amount;
-    this.#userLottos = this.#generateLotto(amount);
+    this.#userLottos = this.#generateLotto();
   }
 
   setStatistics(matchCountByLottos) {
     const statistics = generateStatistics();
 
     matchCountByLottos.forEach((counts) => {
-      const key = counts.join(REGEX.comma);
+      const key = `${counts[0]},${counts[0] === 5 ? counts[1] : 0}`;
 
       if (key in statistics) {
         statistics[key] += 1;
@@ -60,8 +60,8 @@ class UserLottoModel {
     this.#statistics = Object.values(statistics);
   }
 
-  #generateLotto(amount) {
-    const count = amount / LOTTO.amount_unit;
+  #generateLotto() {
+    const count = this.#amount / LOTTO.amount_unit;
     const userLotto = Array.from(
       { length: count },
       () => new Lotto(generateLotteryNumber()),
