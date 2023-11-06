@@ -12,6 +12,7 @@ class App {
     const lottoTickets = this.getLottoTickets(lottoCount);
 
     OutputView.printLottoTicketCount(lottoCount);
+    OutputView.printLottoTickets(lottoTickets);
   }
 
   async getLottoAmount() {
