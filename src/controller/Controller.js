@@ -4,7 +4,6 @@ import OutputView from '../view/OutputView.js';
 import BonusLotto from '../model/BonusLotto.js';
 import WinningLotto from '../model/WinningLotto.js';
 import { REWARD } from '../constants/constants.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class Controller {
   #inputView;
@@ -27,32 +26,33 @@ class Controller {
   }
 
   async createLottos() {
-    try{
+    try {
       const amount = await this.#inputView.readPurchaseAmount();
       this.#lottos = new Lottos(amount);
     } catch (error) {
-      Console.print(error.message);
+      this.#outputView.printMsg(error.message);
       await this.createLottos();
-      return;
     }
   }
 
   async createWinningLotto() {
-    const winningNumbers = await this.#inputView.readWinningNumber();
-    this.#winningLotto = new WinningLotto(winningNumbers);
-  }
-
-  checkDuplicate(bonusNum) {
-    const winningLotto = this.#winningLotto.getWinningNums();
-    if (winningLotto.includes(bonusNum)) {
-      throw new Error('[ERROR] 기존 6개의 당첨번호와 중복 되면 안됩니다.');
+    try{
+      const winningNumbers = await this.#inputView.readWinningNumber();
+      this.#winningLotto = new WinningLotto(winningNumbers);
+    } catch (error) {
+      this.#outputView.printMsg(error.message);
+      await this.createWinningLotto();
     }
   }
 
   async createBonusLottos() {
-    const bonusNum = await this.#inputView.readBonusNumber();
-    this.checkDuplicate(parseInt(bonusNum));
-    this.#bonusLotto = new BonusLotto(bonusNum);
+    try{
+      const bonusNum = await this.#inputView.readBonusNumber();
+      this.#bonusLotto = new BonusLotto(bonusNum, this.#winningLotto.getWinningNums());
+    } catch (error) {
+      this.#outputView.printMsg(error.message);
+      await this.createBonusLottos();
+    }
   }
 
   async printAllRanking() {
@@ -62,6 +62,7 @@ class Controller {
       winningNumber,
       bonusNumber,
     );
+    this.#outputView.printSpace();
     this.#outputView.printRanking(rankingObj);
 
     this.calculateProfit(rankingObj);

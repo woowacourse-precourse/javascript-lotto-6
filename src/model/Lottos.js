@@ -1,5 +1,6 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import { ERROR, VALUE } from '../constants/constants.js';
 
 class Lottos {
   #lottos;
@@ -13,18 +14,18 @@ class Lottos {
   #validation(input) {
     const purchasePrice = parseInt(input);
     if (isNaN(input)) {
-      throw new Error('[ERROR] 숫자로 입력해주세요');
+      throw new Error(ERROR.invalidNumber);
     }
-    if (input === "") {
-      throw new Error('[ERROR] 1000단위 숫자를 입력해주세요.');
+    if (input === '') {
+      throw new Error(ERROR.invalidNumber);
     }
-    if (purchasePrice % 1000 !== 0){
-      throw new Error('[ERROR] 단위는 1000입니다.');
+    if (purchasePrice % VALUE.lottoUnit !== 0) {
+      throw new Error(ERROR.invalidUnit);
     }
   }
 
   createLottos(input) {
-    let issueNum = parseInt(input) / 1000;
+    let issueNum = parseInt(input) / VALUE.lottoUnit;
 
     while (issueNum) {
       const numbers = this.generateNumbers();
@@ -51,7 +52,11 @@ class Lottos {
   }
 
   generateNumbers() {
-    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const randomNumbers = Random.pickUniqueNumbersInRange(
+      VALUE.minLottoNumber,
+      VALUE.maxLottoNumber,
+      VALUE.lottoNumberCount,
+    );
     return randomNumbers;
   }
 }

@@ -1,18 +1,23 @@
+import { ERROR } from "../constants/constants.js";
+
 class BonusLotto {
   #bonus;
 
-  constructor(input) {
-    this.checkValid(input);
+  constructor(input, winningLottos) {
+    this.checkValid(input, winningLottos);
   }
 
-  checkValid(input) {
+  checkValid(input, winningLottos) {
     const bonusNum = parseInt(input);
     
     if (isNaN(input)) {
-      throw new Error('[ERROR] 숫자를 입력해주세요');
+      throw new Error(ERROR.invalidNumber);
     }
     if (bonusNum < 0 || bonusNum > 45) {
-      throw new Error('[ERROR] 1과 45 중에서 골라주세요.');
+      throw new Error(ERROR.invalidRange);
+    }
+    if (winningLottos.includes(bonusNum)) {
+      throw new Error(ERROR.duplicatedWithWinning);
     }
   }
 
