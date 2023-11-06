@@ -6,6 +6,10 @@ export default class InputView {
     return this.readLine(INFO_MESSAGES.AMOUNT);
   }
 
+  async readNumber() {
+    return this.readLine(INFO_MESSAGES.NUMBER);
+  }
+
   async readLine(message) {
     try {
       return await MissionUtils.Console.readLineAsync(`${message}\n`);
