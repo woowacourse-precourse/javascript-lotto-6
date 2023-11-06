@@ -13,6 +13,9 @@ class App {
     const lottoManager = new LottoManager(amount);
     lottoManager.generateLottos();
     OutputView.printLottoNumbers(lottoManager.getLottos());
+
+    // 기능 ➌ 사용자에게 당첨 번호를 입력받는다.
+    const winNumbers = await InputView.readWinNumbers();
   }
 }
 
