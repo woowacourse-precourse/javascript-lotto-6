@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from '../constants/messages';
+
 class PurchaseAmount {
   #amount;
 
@@ -8,7 +10,7 @@ class PurchaseAmount {
 
   #validatePurchaseAmount(amount) {
     if (amount % 1000 !== 0) {
-      throw new Error('[ERROR] 구입 금액은 1,000원으로 나누어 떨어져야 합니다.');
+      throw new Error(ERROR_MESSAGE.invalidAmount);
     }
   }
 
