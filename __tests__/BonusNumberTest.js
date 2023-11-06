@@ -1,7 +1,7 @@
 import BonusNumber from '../src/models/BonusNumber.js';
 
 describe('보너스 번호 클래스 테스트', () => {
-  const winningNumber = ['1', '2', '3', '4', '5', '6'];
+  const winningNumber = [1, 2, 3, 4, 5, 6];
 
   test('보너스 번호가 정수가 아니면 예외가 발생한다.', () => {
     expect(() => {
