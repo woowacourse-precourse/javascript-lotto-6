@@ -1,8 +1,5 @@
 import BuyLotto from "../src/BuyLotto";
 import { MissionUtils } from "@woowacourse/mission-utils";
-// 로또 하나 구매 시 잘 나오는지,
-// 로또 여러개 구매 시 잘 나오는지,
-// 로또 숫자가 올바른지
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
