@@ -11,6 +11,7 @@ class Lotto {
     }
     this.#validate(numbers);
     this.#numbers = numbers;
+    // this.#numbers = numbers.map(number => Number(number));
   }
 
   #validate(numbers) {
@@ -22,6 +23,12 @@ class Lotto {
     if (numbers.length !== uniqueNumbers.length) {
       throw new Error(ERROR.not_duplicate_numbers);
     }
+
+    numbers.forEach(number => {
+      if (!Number(number) || !Number.isInteger(Number(number)) || Number(number) < START_INCLUSIVE || Number(number) > END_INCLUSIVE) {
+        throw new Error(ERROR.not_a_valid_number);
+      }
+    });
   }
   
   getNumbers() {
