@@ -1,5 +1,5 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-import { ErrorMessage } from './Message';
+import { MissionUtils } from "@woowacourse/mission-utils";
+import { ErrorMessage } from "./Message";
 
 class Lotto {
   #numbers;
@@ -14,11 +14,11 @@ class Lotto {
       throw new Error(ErrorMessage.INVALID_LOTTO_LENGTH);
     }
 
-    if (!numbers.every(num => !/\D/.test(num))) {
+    if (!numbers.every((num) => !/\D/.test(num))) {
       throw new Error(ErrorMessage.INVALID_LOTTO_TYPE);
     }
 
-    if (numbers.every(num => !(Number(num) >= 1) && !(Number(num) <= 45))) {
+    if (numbers.every((num) => !(Number(num) >= 1) && !(Number(num) <= 45))) {
       throw new Error(ErrorMessage.INVALID_LOTTO_NUMBER);
     }
 
