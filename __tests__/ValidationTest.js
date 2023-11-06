@@ -64,6 +64,18 @@ describe('유효성 검사 테스트', () => {
             expect(() => checkWinningNumbers(numbers)).toThrow(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
         });
         
+        test('당첨 번호 중 정수가 아닌 숫자가 있으면 예외가 발생한다.', () => {
+            const numbers = [1, 2, 3, 4, 5, 5.5];
+            expect(() => checkWinningNumbers(numbers)).toThrow(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
+        });
+
+        test('당첨 번호 중 범위를 벗어난 숫자가 있으면 예외가 발생한다.', () => {
+            const numbers = [1, 2, 3, 4, 5, -1];
+            expect(() => checkWinningNumbers(numbers)).toThrow(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
+            const numbersTwoCase = [1, 2, 3, 4, 5, 77];
+            expect(() => checkWinningNumbers(numbersTwoCase)).toThrow(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
+        });
+
         test('당첨 번호의 갯수가 맞지 않으면 예외가 발생한다.', () => {
             const numbers = [1, 2, 3, 4, 5];
             expect(() => checkWinningNumbers(numbers)).toThrow(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
