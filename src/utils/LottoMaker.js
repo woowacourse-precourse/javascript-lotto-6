@@ -149,8 +149,8 @@ class LottoMaker {
     const prizePrice = this.getPrizePrice(score);
     const publishPrice = this.#publishCount * LOTTO_PRICE;
 
-    let divisionResult = publishPrice / prizePrice;
-    if (divisionResult) {
+    let divisionResult = prizePrice / publishPrice;
+    if (!divisionResult) {
       divisionResult = 0;
     }
 
