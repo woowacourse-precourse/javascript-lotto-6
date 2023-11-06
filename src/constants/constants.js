@@ -8,7 +8,8 @@ const INPUT_MESSAGE = {
 const INPUT_ERROR_MESSAGE = {
   PURCHASE_AMOUNT_ERROR: '[ERROR] 입력한 구입 금액이 천 단위가 아닙니다.',
   WINNING_NUMBERS_ERROR: '[ERROR] 입력한 당첨 번호가 1 ~ 45의 숫자가 아닙니다.',
-  MORE_WINNING_NUMBERS_ERROR: '[ERROR] 입력한 당첨 번호가 6개 이상입니다.',
+  MORE_WINNING_NUMBERS_ERROR:
+    '[ERROR] 입력한 당첨 번호가 6개가 넘어서는 안됩니다.',
   BLANK_ERROR: '[ERROR] 입력한 값이 공백입니다.',
   NUMBER_ERROR: '[ERROR] 입력한 값이 숫자가 아닙니다.',
 };
