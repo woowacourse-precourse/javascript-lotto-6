@@ -1,61 +1,81 @@
-import { Console } from '@woowacourse/mission-utils';
+import Lotto from '../domain/Lotto.js';
 import LottoShop from '../domain/LottoShop.js';
+import LottoYieldCalculator from '../domain/LottoYieldCalculator.js';
 import LottosMatcher from '../domain/LottosMatcher.js';
 import Money from '../domain/Money.js';
-import calcTotalIncome from '../utils/calcTotalIncome.js';
-import calcYieldPercent from '../utils/calcYieldPercent.js';
 import Io from '../view/Io.js';
 
 class LottoGame {
-  // TODO: 프로세스 분리
-  static async process() {
-    const moneyRequest = await Io.requestMoney();
-
-    const money = Money.create(moneyRequest);
-    // TODO: count 각자에게서 나누면 두번 일하는거라 리펙토링 필요
-
-    Io.printLottoCount(money.getMoney());
-
-    const lottos = LottoShop.buyLottos(money);
-    Io.printLottos(lottos);
-
-    // const selectedLotto = await this.#test();
-    const selectedLotto = await Io.requestLotto();
-    // TODO: 리펙토링
-    const bonusInput = await Io.requestBonusNumber();
-
-    Io.printResultHeader();
-    const lottoMatcher = new LottosMatcher();
-    const matchResults = lottoMatcher.matchResults(
-      lottos,
-      parseInt(bonusInput, 10),
-      selectedLotto.split(',').map(Number),
+  async process() {
+    const money = await this.#requestMoney();
+    const boughtLottos = this.#buyLottos(money);
+    const winningLotto = await this.#requestWinningLotto();
+    const bonusNumber = await this.#requestBonusNumber(winningLotto);
+    const prizeCount = this.#calcPrizeCount(
+      boughtLottos,
+      winningLotto,
+      bonusNumber,
     );
 
-    Io.printMatchResults(matchResults);
-
-    // Io.printMatchResults(matchResults);
-    // Io.print(matchResults);
-    const totalIncome = calcTotalIncome(matchResults);
-    const yieldPercent = calcYieldPercent(money.getMoney(), totalIncome);
-
-    Io.printYieldPercent(yieldPercent);
+    this.#printLottoResult(prizeCount);
+    this.#printYieldRate(money, prizeCount);
   }
 
-  // static async #test() {
-  //   const selectedLotto = await Io.requestLotto();
-  //   return selectedLotto;
-  // }
+  async #requestMoney() {
+    const moneyRequest = await Io.requestMoney();
+    return Money.create(moneyRequest);
+  }
 
-  // static async #buyLotto() {
+  #buyLottos(money) {
+    const lottos = LottoShop.buyLottos(money);
 
-  // }
+    Io.printLottoCount(lottos.length);
 
-  // static async #requestLotto() {
-  //   return Io.requestLotto();
-  // }
+    Io.printLottos(lottos.map((lotto) => lotto.get()));
+
+    return lottos;
+  }
+
+  async #requestWinningLotto() {
+    const winningLottoRequest = await Io.requestWinningLotto();
+    const winningLotto = new Lotto(winningLottoRequest);
+
+    return winningLotto;
+  }
+
+  async #requestBonusNumber(winningLotto) {
+    const bonusNumberRequest = await Io.requestBonusNumber();
+    const bonusNumber = winningLotto.createBonusNumber(bonusNumberRequest);
+
+    return bonusNumber;
+  }
+
+  #calcPrizeCount(boughtLottos, winningLotto, bonusNumber) {
+    const lottoMatcher = new LottosMatcher();
+    const prizeCount = lottoMatcher.calcPrizeCount(
+      boughtLottos,
+      winningLotto,
+      bonusNumber,
+    );
+
+    return prizeCount;
+  }
+
+  #printLottoResult(prizeCount) {
+    Io.printResultHeader();
+    Io.printPrizeCount(prizeCount);
+  }
+
+  #printYieldRate(money, prizeCount) {
+    const yieldRate = LottoYieldCalculator.getYieldRate(money, prizeCount);
+
+    Io.printYieldRate(yieldRate);
+  }
 }
 
 export default LottoGame;
 
-LottoGame.process();
+// LottoGame.process();
+
+// const a = new LottoGame();
+// a.process();
