@@ -62,6 +62,8 @@ class LottoGame {
     }
 
     #matchAllLottoTicket(winningNumbers, bonusNumber, lottoTickets) {
+            IOUtils.output("\n당첨 통계\n---");
+
             lottoTickets.forEach((lottoTicket) => {
                 const matchedCount = this.#getMatchedCount(winningNumbers);
                 const isMatchedBonus = this.#isMatchedBonus(bonusNumber);
@@ -81,6 +83,14 @@ class LottoGame {
     #isMatchedBonus(bonusNumber, lottoTicket) {
         return lottoTicket.numbers.includes(bonusNumber);
     }
+
+    #calculateProfitRate(purchaseAmount) {
+        return (Object.keys(this.#lottoResultCount)
+            .reduce((acc, key) => {
+                return acc + prizeAmount[key] * this.#lottoResultCount[key];
+            }) / purchaseAmount).toFixed(1);
+    }
+
 
 
 
