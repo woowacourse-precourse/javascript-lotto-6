@@ -122,6 +122,15 @@ class App {
 
   printResults() {
     this.printWinnigList();
+    this.printProfitPercentage();
+  }
+
+  printProfitPercentage() {
+    MissionUtils.Console.print(
+      `${OUTPUT_MESSAGE.totalProfitPercentage} ${
+        this.#profitPercentage
+      }%입니다.`,
+    );
   }
 
   printWinnigList() {
