@@ -4,14 +4,13 @@ import { InputError } from './utils/error.js';
 
 export default class UserInput {
   static async getPurchaseAmount() {
-    while (true) {
-      const input = await Console.readLineAsync(MESSAGE.INPUT_PURCHASE_AMOUNT);
-      try {
-        this.checkPurchaseAmountValidation(input);
-        return Number(input);
-      } catch (exception) {
-        this.printError(exception.message);
-      }
+    const input = await Console.readLineAsync(MESSAGE.INPUT_PURCHASE_AMOUNT);
+    try {
+      this.checkPurchaseAmountValidation(input);
+      return Number(input);
+    } catch (exception) {
+      this.printError(exception.message);
+      return this.getPurchaseAmount();
     }
   }
 
@@ -24,14 +23,13 @@ export default class UserInput {
   }
 
   static async getWinningNumbers() {
-    while (true) {
-      const input = await Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
-      try {
-        this.checkWinningNumbersValidation(input);
-        return input.split(',').map(Number);
-      } catch (exception) {
-        this.printError(exception.message);
-      }
+    const input = await Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
+    try {
+      this.checkWinningNumbersValidation(input);
+      return input.split(',').map(Number);
+    } catch (exception) {
+      this.printError(exception.message);
+      return this.getWinningNumbers();
     }
   }
 
@@ -50,14 +48,13 @@ export default class UserInput {
   }
 
   static async getBonusNumber(winningNumbers) {
-    while (true) {
-      const input = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
-      try {
-        this.checkBonusNumberValidation(winningNumbers, input);
-        return Number(input);
-      } catch (exception) {
-        this.printError(exception.message);
-      }
+    const input = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+    try {
+      this.checkBonusNumberValidation(winningNumbers, input);
+      return Number(input);
+    } catch (exception) {
+      this.printError(exception.message);
+      return this.getBonusNumber(winningNumbers);
     }
   }
 
