@@ -2,6 +2,7 @@ import InputView from "../../View/InputView.js";
 import PurchaseCost from "../PurchaseCost.js";
 import Lotto from "../Lotto.js";
 import BonusLotto from "../BonusLotto.js";
+import OutputView from "../../View/OutputView.js";
 
 class LottoController {
   #lottoCost;
@@ -17,10 +18,16 @@ class LottoController {
   }
 
   async #getDefaultInput() {
-    this.#lottoCost = new PurchaseCost(await InputView.inputPurchaseCost());
+    await this.getPurchaseCost();
     this.#pickLotto = new Lotto(await InputView.inputLotto());
     this.#bonusLotto = new BonusLotto(await InputView.inputBonusLotto(), this.#pickLotto.getLottoNumbers());
   }
+
+  async getPurchaseCost() {
+    this.#lottoCost = new PurchaseCost(await InputView.inputPurchaseCost());
+    OutputView.outputRandomLottoNumbersList(await this.#lottoCost.getRandomLottoNumbersList());
+  }
+
 
   async start() {}
 }

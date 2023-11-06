@@ -27,6 +27,10 @@ class PurchaseCost {
     };
     return purchaseLottoList
   }
+  
+  getRandomLottoNumbersList() {
+    return this.#randomLottoNumbersList;
+  }
 }
 
 export default PurchaseCost;
