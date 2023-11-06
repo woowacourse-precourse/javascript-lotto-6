@@ -1,3 +1,5 @@
+import { BRACKET, DIVIDER } from './constants/Symbol.js';
+
 class Lotto {
   #numbers;
 
@@ -6,7 +8,9 @@ class Lotto {
   }
 
   getLottoNumbers() {
-    return `[${this.#numbers.join(', ')}]`;
+    return `${BRACKET.open}${this.#numbers.join(DIVIDER.spaceComma)}${
+      BRACKET.close
+    }`;
   }
 
   compare(winningNumbers, winningBonusNumber) {}
