@@ -1,4 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 
 function App() {
   this.play = async () => {
@@ -6,6 +7,9 @@ function App() {
     const inputAmountCount = InputAmountValidation(inputAmount);
     const myLotto = MyLotto(inputAmountCount);
     printMyLotto(myLotto);
+    const lottoWinningNumber = await LottoWinningNumber();
+    new Lotto(lottoWinningNumber);
+    console.log(lottoWinningNumber);
   };
   const InputPurchaseAmount = async () => {
     const inputAmount = await Console.readLineAsync(
@@ -36,6 +40,12 @@ function App() {
     Console.print(`\n${LOTTO_COUNT}개를 구매했습니다.`);
     myLotto.forEach((lotto) => Console.print(lotto));
     Console.print("\n");
+  };
+  const LottoWinningNumber = async () => {
+    const lottoWinningNumber = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요.\n"
+    );
+    return lottoWinningNumber.split(",");
   };
 }
 
