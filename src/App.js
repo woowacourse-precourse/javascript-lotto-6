@@ -38,7 +38,8 @@ class App {
       const purchaseLottos = new PurchaseLottos(input);
       return purchaseLottos.getLottoCount();
     } catch (error) {
-      throw error;
+      Console.print(error.message);
+      return await this.inputLottoCount();
     }
   }
 
@@ -63,7 +64,8 @@ class App {
       const lotto = new Lotto(input.split(","));
       return lotto.getWinningNumbers();
     } catch (error) {
-      throw error;
+      Console.print(error.message);
+      return await this.inputWinningNumbers();
     }
   }
 
@@ -73,7 +75,8 @@ class App {
       const bouns = new Bonus(input, this.#userWinningNumbers);
       return bouns.getBonusNumber();
     } catch (error) {
-      throw error;
+      Console.print(error.message);
+      return await this.inputBonusNumber();
     }
   }
 
