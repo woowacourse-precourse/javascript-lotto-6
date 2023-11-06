@@ -1,21 +1,22 @@
+import CustomError from '../../errors/CustomError.js';
 import ERROR from '../constants/error.js';
 import SYMBOL from '../constants/symbol.js';
 
 function validateIsNumber(input) {
   if (Number.isNaN(input)) {
-    throw new Error(ERROR.inputView.notNumber);
+    throw new CustomError(ERROR.inputView.notNumber);
   }
 }
 
 function validateNonNegativeValue(input) {
   if (input < 0) {
-    throw new Error(ERROR.inputView.negativeValue);
+    throw new CustomError(ERROR.inputView.negativeValue);
   }
 }
 
 function validateIsInteger(input) {
   if (!Number.isInteger(input)) {
-    throw new Error(ERROR.inputView.notInteger);
+    throw new CustomError(ERROR.inputView.notInteger);
   }
 }
 
