@@ -8,9 +8,8 @@ class OutputView{
     Console.print(output)
   }
 
-  printPurchase(amounts){
-    const numberOfLotto = amounts / SET_LOTTO.lotto.price
-    Console.print(`${numberOfLotto}${MESSAGE.result.numberOfPurchase}`)
+  printPurchase(number){
+    Console.print(`\n${number}${MESSAGE.result.numberOfPurchase}`)
   }
 
 }

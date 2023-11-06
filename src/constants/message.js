@@ -6,7 +6,7 @@ const input = Object.freeze({
 
 const result = Object.freeze({
   numberOfPurchase: '개를 구매했습니다.',
-  stats: '당첨 통계\n---'
+  stats: '\n당첨 통계\n---'
 })
 
 const win = Object.freeze({

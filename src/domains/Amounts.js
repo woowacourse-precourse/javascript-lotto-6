@@ -36,6 +36,10 @@ class Amounts{
     return this.#amounts
   }
 
+  async getNumOfLotto(amounts){
+    return (amounts / SET_LOTTO.lotto.price)
+  }
+
 }
 
 export default Amounts

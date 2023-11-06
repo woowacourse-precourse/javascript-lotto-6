@@ -5,11 +5,12 @@ import Amounts from "./Amounts.js"
 
 class SetGame{
 
+  #inputView
+  #outputView
+
   #amounts
   #Lotto
   #Bonus
-  #inputView
-  #outputView
 
   constructor(){
     this.#inputView = new InputView();
@@ -69,6 +70,12 @@ class SetGame{
     }
 
     return this.#Bonus
+  }
+
+  async setNumOfLotto(number){
+    const amounts = new Amounts(number)
+    
+    return await amounts.getNumOfLotto(number)
   }
 }
 
