@@ -42,6 +42,7 @@ class App {
     const input = await MissionUtils.Console.readLineAsync(
       INPUT_MESSAGE.purchaseAmount,
     );
+
     try {
       validatePurchase(input);
     } catch (error) {
@@ -49,6 +50,7 @@ class App {
       await this.inputPurchaseAmount();
       return;
     }
+
     this.#purchaseAmount = parseInt(input, 10);
     this.#ticketCount = this.#purchaseAmount / BASE_AMOUNT;
   }
@@ -82,6 +84,7 @@ class App {
     const input = await MissionUtils.Console.readLineAsync(
       INPUT_MESSAGE.winningNumbers,
     );
+
     try {
       validateWinningNumber(input);
     } catch (error) {
@@ -89,6 +92,7 @@ class App {
       await this.inputWinningNumber();
       return;
     }
+
     this.#winningNumbers = input
       .split(",")
       .map((number) => parseInt(number, 10));
@@ -98,6 +102,7 @@ class App {
     const input = await MissionUtils.Console.readLineAsync(
       INPUT_MESSAGE.bonusNumber,
     );
+
     try {
       validateBonusNumber(this.#winningNumbers, input);
     } catch (error) {

@@ -21,7 +21,7 @@ module.exports = {
   },
   rules: {
     "max-depth": ["error", 2],
-    "max-lines-per-function": ["error", { max: 15 }],
+    "max-lines-per-function": ["error", { max: 15, skipBlankLines: true }],
     "linebreak-style": 0,
     "import/prefer-default-export": "off",
     "import/extensions": ["off"],
