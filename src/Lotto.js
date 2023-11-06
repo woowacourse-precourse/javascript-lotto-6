@@ -12,8 +12,10 @@ class Lotto {
         numbers.forEach((number) => {
             validation.isValidNumber(number);
         })
+        numbers.forEach((number) => {
+            validation.isValidRange(number);
+        })
         validation.isValidInputCount(numbers, 6);
-        validation.isValidRange(numbers);
         validation.hasSameNumber(numbers);
     }
 

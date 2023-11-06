@@ -5,11 +5,10 @@ const validation = {
             throw new Error("[ERROR] 겹치는 숫자가 있습니다.");
     },
 
-    isValidRange: (inputArr) => {
-        inputArr.forEach((number) => {
-            if (number < 1 || number > 45)
-                throw new Error("[ERROR]1~45 사이로 입력해주세요.");
-        });
+    isValidRange: (input) => {
+        if (input < 1 || input > 45) {
+            throw new Error("[ERROR] 1~45 사이로 입력해주세요.");
+        }
     },
 
     isValidInputCount: (inputArr, count) => {
@@ -18,8 +17,7 @@ const validation = {
     },
 
     isValidNumber: (input) => {
-        if (isNaN(input)) throw new Error("[ERROR] 숫자를 입력하셔야 합니다.");
-    },
-
+        if (isNaN(input)) throw new Error('[ERROR] 숫자를 입력해 주세요')
+    }
 };
 export default validation;

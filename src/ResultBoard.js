@@ -1,5 +1,5 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
-import {LOTTO_INFO} from "./constants/Constants.js";
+import {LOTTO_INFO} from "./utils/Constants.js";
 
 class ResultBoard {
     constructor(myNumbers) {

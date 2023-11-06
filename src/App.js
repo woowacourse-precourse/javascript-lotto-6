@@ -1,33 +1,26 @@
 import LottoSeller from "./LottoSeller.js";
 import LottoManager from "./LottoManager.js";
+import ResultBoard from "./ResultBoard.js";
 
 class App {
-    constructor() {
-        this.lottoTickets = null;
-    }
+  constructor() {
+    this.lottoTickets = null;
+  }
 
-    async play() {
-        const lottoSeller = new LottoSeller();
-        await lottoSeller.buyLotto();
-        this.lottoTickets = lottoSeller.lottoTickets;
+  async play() {
+    const lottoSeller = new LottoSeller();
+    await lottoSeller.buyLotto();
+    this.lottoTickets = lottoSeller.lottoTickets;
 
-        const lottoManager = new LottoManager(this.lottoTickets)
-        lottoManager.makeLottoAndPrint();
-        const lotto = await lottoManager.runLottoWithNumbers();
-        console.log(lotto.winningNumbers)
+    const lottoManager = new LottoManager(this.lottoTickets);
+    lottoManager.makeLottoAndPrint();
+    const lotto = await lottoManager.runLottoWithNumbers();
+    const resultBoard = new ResultBoard(lottoManager.MyLottoNumbers);
 
-        // // const bonusInput = await inputHandler.getInput(INPUT_MESSAGE.BONUS_NUMBER);
-        // // await validation.isValidBonusNumber(lotto.winningNumbers, bonusInput);
-        // const bonusInput = await InputHandler.getBonusNumber();
-        //
-        // const resultBoard = new ResultBoard(lottoManager.myLottoNumbers);
-        //
-        // resultBoard.decideWinning(lotto.winningNumbers, bonusInput)
-        // resultBoard.printResultTable();
-        //
-        // resultBoard.calculateEarning(this.lottoTickets)
-    }
-
+    resultBoard.decideWinning(lotto.winningNumbers, lottoManager.BonusNumber);
+    resultBoard.printResultTable();
+    resultBoard.calculateEarning(this.lottoTickets);
+  }
 }
 
 const app = new App();
