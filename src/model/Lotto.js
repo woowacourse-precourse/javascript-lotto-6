@@ -7,6 +7,7 @@ class Lotto {
   constructor(numbers) {
     this.#validateLength(numbers);
     this.#validateDuplicate(numbers);
+    this.#validateNumber(numbers);
     this.#validateRange(numbers);
     this.#numbers = numbers;
   }
@@ -37,7 +38,7 @@ class Lotto {
   }
 
   #validateNumber(numbers) {
-    const number = /^[0-9]+$/;
+    const check = /^[0-9]+$/;
 
     for (let number of numbers){
         if (!check.test(number)) {
