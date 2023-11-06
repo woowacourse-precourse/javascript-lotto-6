@@ -29,4 +29,14 @@ class controller {
       this.buyLotto();
     }
   }
+
+  priintUserLottoNumbers() {
+    this.#outputView.print(
+      `${this.#userLotto.getNumberOfPurchase()}개를 구매했습니다.`
+    );
+    this.#userLotto.getUserLottoNumbers().forEach((userLottoNumber) => {
+      const message = userLottoNumber.getLottoNumber().join(`, `);
+      this.#outputView.print(`[${message}]`);
+    });
+  }
 }
