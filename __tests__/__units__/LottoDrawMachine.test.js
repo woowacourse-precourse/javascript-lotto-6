@@ -65,4 +65,44 @@ describe("LottoDrawMachine 유닛 테스트", () => {
       }
     );
   });
+
+  describe("보너스 번호 입력 유효성 테스트", () => {
+    const { NOT_NUMBER, NOT_INTEGER, NOT_ON_RANGE } = MESSAGES.ERROR.LOTTO;
+
+    const validBonusNumbers = [[["7"]]];
+    const inValidBonusNumbersAndErrorMessages = [
+      [["힣"], NOT_NUMBER],
+      [["4.7"], NOT_INTEGER],
+      [["48"], NOT_ON_RANGE(MIN, MAX)],
+      [["-1"], NOT_ON_RANGE(MIN, MAX)],
+    ];
+
+    test.each(validBonusNumbers)("올바른 케이스", async (validBonusNumber) => {
+      // given
+      const logSpy = getLogSpy();
+      const lottoDrawMachine = new LottoDrawMachine();
+      mockQuestions(validBonusNumber);
+
+      // when
+      await lottoDrawMachine.promptBonusNumber(
+        MESSAGES.BONUS_NUMBER.PLACE_HOLDER
+      );
+
+      // then
+      await expect(logSpy).toHaveBeenCalledWith(7);
+    });
+
+    test.each(inValidBonusNumbersAndErrorMessages)(
+      "틀린 케이스",
+      async (inValidBonusNumber, errorMessage) => {
+        // given
+        const lottoDrawMachine = new LottoDrawMachine();
+        mockQuestions(inValidBonusNumber);
+        // then
+        await expect(lottoDrawMachine.promptBonusNumber()).rejects.toThrow(
+          new CustomError(errorMessage)
+        );
+      }
+    );
+  });
 });
