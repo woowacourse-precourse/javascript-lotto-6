@@ -1,10 +1,8 @@
-import CustomError from '../errors/CustomError.js';
+import NUMBER from '../utils/constants/number.js';
 import LottoValidator from '../utils/validators/LottoValidator.js';
 import LottoResultCalculator from './LottoResultCalculator.js';
 
 class LottoService {
-  static TICKET_PRICE = 1000;
-
   #winningNumbers;
 
   #bonusNumber;
@@ -52,7 +50,7 @@ class LottoService {
 
   calculateProfitRate() {
     const totalSpentMoney =
-      this.#lottoTickets.length * LottoService.TICKET_PRICE;
+      this.#lottoTickets.length * NUMBER.game.money.unitAmount;
     const profitRate =
       this.#resultCalculator.calculateProfitRate(totalSpentMoney);
     return profitRate;
