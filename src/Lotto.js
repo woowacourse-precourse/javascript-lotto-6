@@ -62,24 +62,27 @@ class Lotto {
   }
 
   checkWin(bonusNumber, guessNumber) {
-    guessNumber.forEach(each => {
-      const matchNumber = each.filter(num => this.#numbers.includes(+num));
+    guessNumber.forEach(eachNumber => {
+      const matchNumber = eachNumber.filter(num =>
+        this.#numbers.includes(+num),
+      );
 
-      this.checkMatch(matchNumber, bonusNumber);
+      if (matchNumber.length === 5) {
+        this.#checkBonusMatch(bonusNumber, eachNumber);
+        return;
+      }
+      this.checkMatch(matchNumber);
     });
     this.#printResult(guessNumber);
   }
 
-  checkMatch(matchNumber, bonusNumber) {
+  checkMatch(matchNumber) {
     switch (matchNumber.length) {
       case 3:
         this.#increaseWinCount(3, this.prize.FIFTH_PRIZE);
         break;
       case 4:
         this.#increaseWinCount(4, this.prize.FOURTH_PRIZE);
-        break;
-      case 5:
-        this.#checkBonusMatch(bonusNumber);
         break;
       case 6:
         this.#increaseWinCount(6, this.prize.FIRST_PRIZE);
@@ -94,8 +97,8 @@ class Lotto {
     this.winCheck.total += prize;
   }
 
-  #checkBonusMatch(bonusNumber) {
-    if (this.#numbers.includes(+bonusNumber)) {
+  #checkBonusMatch(bonusNumber, eachNumber) {
+    if (eachNumber.includes(+bonusNumber)) {
       this.#increaseWinCount('5+', this.prize.SECOND_PRIZE);
       return;
     }
