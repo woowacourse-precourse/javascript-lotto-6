@@ -10,11 +10,21 @@ class OutputView {
   }
 
   printRanking(rankingObj) {
-    Console.print(RANKING.fifth + `${rankingObj['5등'] ?? 0}개`);
-    Console.print(RANKING.fourth + `${rankingObj['4등'] ?? 0}개`);
-    Console.print(RANKING.third + `${rankingObj['3등'] ?? 0}개`);
-    Console.print(RANKING.second + `${rankingObj['2등'] ?? 0}개`);
-    Console.print(RANKING.first + `${rankingObj['1등'] ?? 0}개`);
+    Console.print(
+      RANKING.fifthPlace + `${rankingObj['5등'] ?? 0}` + MESSAGE.amountUnit,
+    );
+    Console.print(
+      RANKING.fourthPlace + `${rankingObj['4등'] ?? 0}` + MESSAGE.amountUnit,
+    );
+    Console.print(
+      RANKING.thirdPlace + `${rankingObj['3등'] ?? 0}` + MESSAGE.amountUnit,
+    );
+    Console.print(
+      RANKING.secondPlace + `${rankingObj['2등'] ?? 0}` + MESSAGE.amountUnit,
+    );
+    Console.print(
+      RANKING.firstPlace + `${rankingObj['1등'] ?? 0}` + MESSAGE.amountUnit,
+    );
   }
 
   printSpace() {
