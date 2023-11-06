@@ -44,7 +44,6 @@ class LottoResult {
       acc += cur * prize[idx];
       return (this.#lottoPrize = acc);
     }, 0);
-    console.log(this.#lottoPrize);
   }
 
   setBonusNumber(number) {

@@ -1,7 +1,7 @@
 import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 import Lotto from "../model/Lotto.js";
-import { generateRandomNumber } from "../utils/RandomNumber.js";
+import { Console } from "@woowacourse/mission-utils";
 import { priceValidation, bonusNubmerValidation } from "../utils/Validation.js";
 import UserLotto from "../model/UserLotto.js";
 import LottoResult from "../model/LottoResult.js";
@@ -11,7 +11,8 @@ class LottoController {
   #userLotto;
   #lottoResult;
   #lottoPrice;
-  #lottoPage = [];
+  #lottoBonusNumber;
+  #lottoNumber;
 
   async start() {
     try {
@@ -31,24 +32,26 @@ class LottoController {
 
   async #createLotto() {
     try {
-      this.#lottoPrice = await this.#getUserPrice();
-      const count = this.#lottoPrice / 1000;
+      await this.#getUserPrice();
+      let count = this.#lottoPrice / 1000;
       this.#lottoResult = new LottoResult();
       this.#userLotto = new UserLotto(count);
       this.#printLottoBuy(count);
     } catch (error) {
+      Console.print(error.message);
       throw error;
     }
   }
 
   async #createAnswerLotto() {
     try {
-      this.#answerLotto = new Lotto(await this.#getUserLottoNumbers());
-      this.#lottoResult.setBonusNumber(
-        await this.#getUserBonusNumber(this.#answerLotto.getLottoNumber())
-      );
+      await this.#getUserLottoNumbers();
+      this.#answerLotto = new Lotto(this.#lottoNumber);
+      await this.#getUserBonusNumber(this.#lottoNumber);
+      this.#lottoResult.setBonusNumber(this.#lottoBonusNumber);
     } catch (error) {
-      throw error;
+      Console.print(error.message);
+      await this.#createAnswerLotto();
     }
   }
 
@@ -68,9 +71,10 @@ class LottoController {
     try {
       const price = await InputView.getPrice();
       priceValidation(price);
-      return price;
+      this.#lottoPrice = price;
     } catch (error) {
-      throw error;
+      Console.print(error.message);
+      await this.#getUserPrice();
     }
   }
 
@@ -78,18 +82,20 @@ class LottoController {
     try {
       const lottoNumbers = await InputView.getLottoNumbers();
       const lottoNumber = lottoNumbers.split(",");
-      return lottoNumber;
+      this.#lottoNumber = lottoNumber;
     } catch (error) {
-      throw error;
+      Console.print(error.message);
+      await this.#getUserLottoNumbers();
     }
   }
   async #getUserBonusNumber(lottoNumber) {
     try {
       const bonusNumber = await InputView.getBonusNumber();
       bonusNubmerValidation(bonusNumber, lottoNumber);
-      return bonusNumber;
+      this.#lottoBonusNumber = bonusNumber;
     } catch (error) {
-      throw error;
+      Console.print(error.message);
+      await this.#getUserBonusNumber(this.#lottoNumber);
     }
   }
 }
