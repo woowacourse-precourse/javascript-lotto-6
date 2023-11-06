@@ -25,6 +25,11 @@ export default class IOController {
     return NUMBERS.split(',').map((num) => +num);
   }
 
+  async readBonusNumber() {
+    const BONUS = await this.#InputService.readBonusNumber();
+    return +BONUS;
+  }
+
   printTicketCount(tickets) {
     this.#OutputService.printTicketCount(`\n${tickets}` + TICKET_COUNT_MESSAGE);
   }
