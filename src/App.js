@@ -63,7 +63,11 @@ class App {
       bonus.get()
     );
 
-    
+    const profitsRate = parseFloat(
+      (totalProfits / (purchase.getPurchaseCount() * 1000)) * 100
+    ).toFixed(1);
+
+
   }
 }
 
