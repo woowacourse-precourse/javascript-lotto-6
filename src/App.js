@@ -28,6 +28,8 @@ class App {
 
     game.getLottoTickets();
     this.printTickets(game.tickets);
+
+    const winningInfo = await this.getWinningInfo();
   }
 
   async getAmount() {
@@ -38,6 +40,20 @@ class App {
     Console.print(MESSAGES.OUTPUT_BUY_TICKETS(tickets.length));
 
     tickets.forEach((ticket) => Console.print(ticket));
+  }
+
+  async getWinningInfo() {
+    const winningNumbersInput = await Console.readLineAsync(
+      MESSAGES.INPUT_WINNING_NUMBERS
+    );
+    const bonusNumberInput = await Console.readLineAsync(
+      MESSAGES.INPUT_BONUS_NUMBER
+    );
+
+    return {
+      winningNumbers: winningNumbersInput.split(',').map(Number),
+      bonusNumber: Number(bonusNumberInput),
+    };
   }
 }
 
