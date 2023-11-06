@@ -10,39 +10,23 @@ class Lotto {
   }
 
   async start() {
-    // await this.getPrice();
-    this.sixNum = await this.getSixNum();
     this.bonusNum = await this.getBonusNum();
     await this.print();
   }
 
-  // getPrice = async () => {
-  //   let price;
+  // getSixNum = async () => {
+  //   let sixNum;
   //   do {
   //     try {
-  //       price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
-  //       price = ValidatePrice(price);
+  //       sixNum = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+  //       sixNum = this.#validate(sixNum);
   //     } catch(error) {
   //       throw new Error(error.message);
   //     }
-  //   } while(!price);
+  //   } while(!sixNum);
 
-  //   PrintOutput.printLottoNumSet(price);
+  //   return sixNum;
   // };
-
-  getSixNum = async () => {
-    let sixNum;
-    do {
-      try {
-        sixNum = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-        sixNum = this.#validate(sixNum);
-      } catch(error) {
-        throw new Error(error.message);
-      }
-    } while(!sixNum);
-
-    return sixNum;
-  };
 
   getBonusNum = async () => {
     do {

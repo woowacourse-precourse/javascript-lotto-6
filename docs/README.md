@@ -2,19 +2,22 @@
 
 1. 사용자에게 구입 금액 입력받는 기능 (App.js 파일의 getPrice() 함수에 구현함)
 - 구입 금액은 1000원 단위로 나누어 떨어져야 함
-- 예외 상황([ERROR]) (ValidatePrice.js 파일에 구현함)
+- 예외 상황([ERROR]) (ValidatePrice.js 파일의 ValidatePrice() 함수에 구현함)
   - 사용자가 숫자를 입력하지 않은 경우
   - 사용자가 0 이하의 숫자를 입력하는 경우
   - 사용자가 1000원 단위로 나누어 떨어지지 않는 값을 입력하는 경우
+  >> 구현 방법: getPrice() 함수 안에서 ValidatePrice() 함수를 호출함
 
 2. 구입 금액에 맞는 로또 수량 및 번호 출력하는 기능 (PrintOutput.js 파일의 printLottoNumSet() 함수에 구현함)
 - 로또 수량은 (구입 금액) / 1000
 - 로또 번호는 오름차순으로 출력해야 함
 - 로또 번호는 [8, 21, 23, 41, 42, 43]과 같은 형식으로 출력해야 함
-- 예외 상황([ERROR]) (ValidateLottoNumSet.js 파일에 구현함)
+>> 구현 방법: getPrice() 함수 안에서 printLottoNumSet() 함수를 호출함
+- 예외 상황([ERROR]) (ValidateLottoNumSet.js 파일의 ValidateLottoNumSet() 함수에 구현함)
   - 로또 번호 세트가 서로 모두 같은 경우 (거의 불가능하겠지만)
     예) [8, 21, 23, 41, 42, 43]
         [8, 21, 23, 41, 42, 43]
+  >> 구현 방법: printLottoNumSet() 함수 안에서 ValidateLottoNumSet() 함수를 호출함
 
 3. 사용자에게 당첨 번호 입력받는 기능 (App.js 파일의 getSixNum 함수()에 구현함)
 - 당첨 번호는 6개를 입력받아야 함
