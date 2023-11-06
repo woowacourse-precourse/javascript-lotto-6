@@ -10,6 +10,10 @@ export const purchaseResultMessage = (amount) => {
   Console.print(`${amount}개를 구매했습니다.`);
 };
 
+export const randomNumberMessage = (randomNumber) => {
+  Console.print(randomNumber);
+};
+
 export const winningResultMessage = ([first, second, third, fourth, fifth]) => {
   Console.print("당첨통계");
   Console.print("---");
