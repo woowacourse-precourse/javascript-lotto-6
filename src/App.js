@@ -22,7 +22,7 @@ class App {
     const WINNING_NUMBERS = await inputWinningNumbers();
     lineBreak();
 
-    const BONUS_NUMBER = await inputBonusNumber();
+    const BONUS_NUMBER = await inputBonusNumber(WINNING_NUMBERS);
   }
 }
 
