@@ -7,8 +7,8 @@ const Input = (superClass) =>
       return Console.readLineAsync(LOTTO_MESSAGE.requestMoney);
     }
 
-    static requestLotto() {
-      return Console.readLineAsync(LOTTO_MESSAGE.requestLotto);
+    static requestWinningLotto() {
+      return Console.readLineAsync(LOTTO_MESSAGE.requestWinningLotto);
     }
 
     static requestBonusNumber() {
