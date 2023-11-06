@@ -90,26 +90,13 @@ class App {
     - 3등: 5개 번호 일치 / 1,500,000원
     - 4등: 4개 번호 일치 / 50,000원
     - 5등: 3개 번호 일치 / 5,000원*/
-  checkWinning(purchase, winning) {
-    const result = new Array(5).fill(0);
-    const lottos = purchase.getLottos();
-
-    lottos.forEach((lotto) => {
-      const rank = lotto.checkWinning(winning);
-      if (rank !== 0) result[rank - 1]++;
-    });
-
-    return result;
-  }
 
   async play() {
     const myPurchase = await this.getPurchasePrice();
     const myWinning = await this.getWinning();
     const myBonus = await this.getBonus(myWinning);
     myWinning.setBonus(myBonus);
-
-    const result = this.checkWinning(myPurchase, myWinning);
-    console.log(result);
+    myPurchase.checkLottos(myWinning);
   }
 }
 
