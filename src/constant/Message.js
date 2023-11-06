@@ -6,7 +6,7 @@ export const userInputMessage = Object.freeze({
   bonusNumber: () => Console.print("보너스 번호를 입력해주세요."),
 });
 
-export const perchaseResultMessage = (amount) => {
+export const purchaseResultMessage = (amount) => {
   Console.print(`${amount}개를 구매했습니다.`);
 };
 
