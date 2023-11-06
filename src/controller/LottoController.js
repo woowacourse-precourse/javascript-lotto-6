@@ -19,8 +19,8 @@ class LottoController {
     this.countsOfLottos = this.howManyLottos();
     this.makeNewLottos();
     OutputView.printLottos(this.countsOfLottos, this.lottoArray);
-    this.winningNumbers = await InputView.inputNumbers();
-    this.bonusNumber = await InputView.inputBonusNumber();
+    this.winningNumbers = await InputView.repeatInputNumbers();
+    this.bonusNumber = await InputView.repeatInputBonusNumber();
     this.makeStatistics();
     OutputView.printResult();
   }
