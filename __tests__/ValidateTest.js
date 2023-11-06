@@ -12,8 +12,13 @@ describe('유효성 검사 테스트', () => {
     expect(() => validate.winningNumbers(inputNumbers)).toThrowError(ERROR.TYPE_CHECK);
   });
 
-  test.each(['-9', null, undefined])('보너스 번호가 1에서 45사이가 아니라면 예외가 발생한다.', (input) => {
+  test.each([null, undefined, '-9'])('보너스 번호가 유효한 값이 아니면 예외가 발생한다.', (input) => {
     expect(() => validate.bonusNumber(input)).toThrowError(ERROR.TYPE_CHECK);
+  });
+
+  test('보너스 번호가 1에서 45사이가 아니라면 예외가 발생한다.', () => {
+    const input = '46';
+    expect(() => validate.bonusNumber(input)).toThrowError(ERROR.RANGE_CHECK);
   });
 
   test('입력금액이 1000원 단위가 아니라면 예외가 발생한다.', () => {

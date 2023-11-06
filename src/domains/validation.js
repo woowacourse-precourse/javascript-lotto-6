@@ -18,7 +18,7 @@ const validate = {
     if (inputArray.length !== NUMBER.LOTTO_LENGTH) throw new Error(ERROR.INVALID_ARRAY);
 
     if (new Set(inputArray).size !== NUMBER.LOTTO_LENGTH) throw new Error(ERROR.DUPLICATE);
-    if (!inputArray.every((number) => number < NUMBER.LAST && number > NUMBER.DEFAULT)) {
+    if (!inputArray.every((number) => number <= NUMBER.LAST && number > NUMBER.DEFAULT)) {
       throw new Error(ERROR.RANGE_CHECK);
     }
 
