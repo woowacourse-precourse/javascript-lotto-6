@@ -1,3 +1,3 @@
 import GameError from './GameError.js';
 
-export class UserInputErrors extends GameError {}
+export class UserInputError extends GameError {}
