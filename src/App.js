@@ -7,7 +7,6 @@ import MoneyManager from "./MoneyManager.js";
 class App {
   async play() {
     let lottoMoney = await inputMoney();
-    checkMoney(lottoMoney);
 
     let ticketManager = new TicketManager(lottoMoney);
 
@@ -26,14 +25,27 @@ class App {
 }
 
 async function inputMoney() {
-  let moneyString = await Console.readLineAsync('구입금액을 입력해주세요.\n');
-  let money = Number(moneyString);
-  if (Number.isNaN(money)) throw new Error(ERROR.MONEY_IS_NAN);
+  let money = await Console.readLineAsync('구입금액을 입력해주세요.\n');
+  let validity = checkMoney(money);
+  while(!validity) {
+    money = await Console.readLineAsync();
+    validity = checkMoney(money);
+  }
   return money;
 }
 
-function checkMoney(lottoMoney) {
-  if (lottoMoney % TICKET_PRICE != 0) throw new Error(ERROR.MONEY_HAS_REMAINDER);
+function checkMoney(moneyString) {
+  let lottoMoney = Number(moneyString);
+
+  if (Number.isNaN(lottoMoney)) {
+    Console.print(ERROR.MONEY_IS_NAN);
+    return false;
+  } else if (lottoMoney % TICKET_PRICE != 0) {
+    Console.print(ERROR.MONEY_HAS_REMAINDER);
+    return false;
+  }
+
+  return true;
 }
 
 async function inputWinningNumbers() {

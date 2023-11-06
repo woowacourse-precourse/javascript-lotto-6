@@ -95,20 +95,6 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
-
-  test.each([
-    [["a"]],
-    [["1500"]]
-  ])("구입 금액 입력에 대한 예외처리", async (inputs) => {
-    // given
-    mockQuestions(inputs);
-
-    // when
-    const app = new App();
-
-    // then
-    await expect(app.play()).rejects.toThrow("[ERROR]");
-  });
 });
 
 describe("당첨번호 클래스 테스트", () => {
