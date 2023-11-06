@@ -9,11 +9,11 @@ class NumberIssuance {
   constructor(amount) {
     this.lottoNumbers = [];
     this.numberOfTickets = amount / AMOUNT_UNIT;
-    this.#generateNumber(this.numberOfTickets);
+    this.#generateNumber();
   }
 
-  #generateNumber(numberOfTickets) {
-    for (let i = 0; i < numberOfTickets; i += 1) {
+  #generateNumber() {
+    for (let i = 0; i < this.numberOfTickets; i += 1) {
       const numbers = Random.pickUniqueNumbersInRange(
         MIN_RANDOM,
         MAX_RANDOM,
