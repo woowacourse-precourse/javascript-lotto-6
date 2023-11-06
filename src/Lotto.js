@@ -67,32 +67,32 @@ const getBonus = async() => {
   return bonus;
 }
 
-const getRank = async(lotto, bonus) => {
-  for (let i = 0; i < PublishedLotto.numbers.length; i += 1) {
-    const result = lotto.compareNumbers(PublishedLotto.numbers[i]);
-    organizeRank(result);
-    if (result === 5 && PublishedLotto.numbers.includes(bonus)) {
-      PublishedLotto.rank[2] -= 1;
-      PublishedLotto.rank[1] += 1;
-    }
+const organizeRank = (lotto, published, bonus) => {
+  const result = lotto.compareNumbers(published);
+  switch(result) {
+    case 6 :
+      PublishedLottos.rank.first += 1;
+      break;
+    case 5 :
+      if (published.includes(bonus)) {
+        PublishedLottos.rank.second += 1;
+        break;
+      }
+      PublishedLottos.rank.third += 1;
+      break;
+    case 4 : 
+      PublishedLottos.rank.forth += 1;
+      break;
+    case 3 :
+      PublishedLottos.rank.fifth += 1;
+      break;
   }
 }
 
-const organizeRank = (result) => {
-  switch(result) {
-    case 6 :
-      PublishedLotto.rank[0] += 1;
-      break;
-    case 5 : 
-      PublishedLotto.rank[2] += 1;
-      break;
-    case 4 :
-      PublishedLotto.rank[3] += 1;
-      break;
-    case 3 :
-      PublishedLotto.rank[4] += 1;
-      break;
-  }
+const getRank = (lotto, bonus) => {
+  PublishedLottos.forEach((published) => {
+    organizeRank(lotto, published, bonus);
+  });
 }
 
 
