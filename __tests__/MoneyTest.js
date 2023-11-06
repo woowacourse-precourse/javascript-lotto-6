@@ -24,4 +24,29 @@ describe("머니 클래스 테스트", () => {
       new Money(4000);
     }).toBeTruthy();
   });
+
+  test("랭킹 입력 시 알맞은 당첨금을 리턴하는지", () => {
+    //given
+    const rank = 2;
+
+    //when
+    const money = new Money(1000);
+    const winningsMoney = money.winnings(rank);
+
+    //then
+    expect(winningsMoney).toEqual(30000000);
+  });
+
+  test("랭킹 입력 시 배열에서 알맞은 위치의 카운트가 +1 되는지", () => {
+    //given
+    const rank = 2;
+    const rankingCounts = [0, 1, 0, 0, 0];
+
+    //when
+    const money = new Money(1000);
+    money.rankingCountsArray(rank);
+
+    //then
+    expect(money.getRankingCounts).toEqual(rankingCounts);
+  });
 });

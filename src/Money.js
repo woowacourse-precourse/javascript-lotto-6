@@ -1,16 +1,23 @@
 class Money {
   #money;
-  #winningMoney;
+  #winningMoney = 0;
   #rankingCounts = [0, 0, 0, 0, 0];
 
   constructor(money, ranks) {
     this.#validate(money);
     this.#money = money;
-    this.rankingMoney(ranks);
   }
 
   get getMoney() {
     return this.#money;
+  }
+
+  get getWinningMoney() {
+    return this.#winningMoney;
+  }
+
+  get getRankingCounts() {
+    return this.#rankingCounts;
   }
 
   #validate(money) {
@@ -29,25 +36,32 @@ class Money {
   winnings(rank) {
     switch (rank) {
       case 1:
-        this.#winningMoney += 2000000000;
-        this.#rankingCounts[0]++;
-        break;
+        return 2000000000;
       case 2:
-        this.#winningMoney += 30000000;
-        this.#rankingCounts[1]++;
-        break;
+        return 30000000;
       case 3:
-        this.#winningMoney += 1500000;
-        this.#rankingCounts[2]++;
-        break;
+        return 1500000;
       case 4:
-        this.#winningMoney += 50000;
-        this.#rankingCounts[3]++;
-        break;
+        return 50000;
       case 5:
-        this.#winningMoney += 5000;
-        this.#rankingCounts[4]++;
+        return 5000;
+      default:
         break;
+    }
+  }
+
+  rankingCountsArray(rank) {
+    switch (rank) {
+      case 1:
+        return this.#rankingCounts[0]++;
+      case 2:
+        return this.#rankingCounts[1]++;
+      case 3:
+        return this.#rankingCounts[2]++;
+      case 4:
+        return this.#rankingCounts[3]++;
+      case 5:
+        return this.#rankingCounts[4]++;
       default:
         break;
     }
@@ -55,7 +69,8 @@ class Money {
 
   rankingMoney(ranks) {
     ranks.forEach((rank) => {
-      this.winnings(rank);
+      this.#winningMoney += this.winnings(rank);
+      this.rankingCountsArray(rank);
     });
   }
 }

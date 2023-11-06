@@ -41,7 +41,7 @@ class MatchLottoNumber {
       case 3:
         return 5;
       default:
-        return 0;
+        break;
     }
   }
 }
