@@ -7,7 +7,7 @@ describe('로또 구매 리스트 생성 테스트', () => {
     const defaultList = [];
 
     // when
-    const result = await createPurchaseData(testLottoCount, defaultList);
+    const result = createPurchaseData(testLottoCount, defaultList);
     const resultLength = (await result).length;
 
     //then
