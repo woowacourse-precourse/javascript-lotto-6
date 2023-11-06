@@ -15,7 +15,7 @@ class Lotto {
   #validateSize(numbers) {
     if (numbers.length !== LOTTO_SETTINGS.NUMBERS_PER_TICKET) {
       throw new LottoError(
-        `로또 번호는 ${LOTTO_SETTINGS.NUMBER_PER_TICKET}개여야 합니다.`
+        `로또 번호는 ${LOTTO_SETTINGS.NUMBERS_PER_TICKET}개여야 합니다.`
       );
     }
   }
