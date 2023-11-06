@@ -9,10 +9,10 @@ const SYSTEM_MESSAGES = Object.freeze({
 		return `\n${number}개를 구매했습니다.`;
 	},
 	number_of_match(number, price, total) {
-		return `${number}개 일치 ${price} - ${total}개`;
+		return `${number}개 일치 (${price}원) - ${total}개`;
 	},
 	number_of_match_bonusball(number, price, total) {
-		return `${number}개 일치, 보너스 볼 일치 ${price} - ${total}개`;
+		return `${number}개 일치, 보너스 볼 일치 (${price}원) - ${total}개`;
 	},
 	rate_of_return(rate) {
 		return `총 수익률은 ${rate}%입니다.`;

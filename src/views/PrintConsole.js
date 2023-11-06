@@ -25,7 +25,10 @@ class PrintConsole {
 
 	showLottoNumbers(numbers) {
 		this.print(SYSTEM_MESSAGES.number_of_purchase(numbers.length));
-		numbers.forEach((number) => this.print(number));
+		numbers.forEach((number) => {
+			const numberToStr = '[' + number.join(', ') + ']';
+			this.print(numberToStr);
+		});
 	}
 
 	print(message) {
