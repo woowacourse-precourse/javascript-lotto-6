@@ -1,8 +1,8 @@
 export const SETTING = Object.freeze({
   min_lotto_number: 1,
-  input_length: 6,
+  size: 6,
   max_lotto_number: 45,
-  min_cost: 1000,
+  lotto_cost: 1000,
 });
 
 export const MESSAGE = Object.freeze({
@@ -24,12 +24,13 @@ export const MATCH = Object.freeze({
 
 export const PREFIX = Object.freeze({
   error: '[ERROR]',
-})
+});
 
 export const ERROR_MESSAGE = Object.freeze({
   not_number: `${PREFIX.error} 숫자가 아닙니다.`,
   not_natural_number: `${PREFIX.error} 자연수가 아닙니다.`,
-  not_above_min_cost: `${PREFIX.error} ${SETTING.min_cost} 이상의 숫자를 입력하세요.`,
+  not_lotto_cost: `${PREFIX.error} ${SETTING.lotto_cost} 단위의 금액을 입력하세요.`,
   not_six_numbers: `${PREFIX.error} 쉼표를 기준으로 ${SETTING.input_length}개의 숫자를 입력하세요.`,
-  not_range: `${PREFIX.error} ${SETTING.min_lotto_number} 이상 ${SETTING.max_lotto_number} 이하의 숫자를 입력하세요.`
+  not_range: `${PREFIX.error} ${SETTING.min_lotto_number} 이상 ${SETTING.max_lotto_number} 이하의 숫자를 입력하세요.`,
+  not_unique: `${PREFIX.error} 중복된 숫자가 존재합니다.`,
 });
