@@ -60,6 +60,16 @@ class App {
     Console.print(`5개 일치 (1,500,000원) - ${rankCounts[2]}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${rankCounts[1]}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${rankCounts[0]}개`);
+
+    const earning =
+      5000 * rankCounts[4] +
+      50000 * rankCounts[3] +
+      1500000 * rankCounts[2] +
+      30000000 * rankCounts[1] +
+      2000000000 * rankCounts[0];
+    const earningRate = (earning / purchasePrice) * 100;
+
+    Console.print(`총 수익률은 ${earningRate}%입니다.`);
   }
 }
 
