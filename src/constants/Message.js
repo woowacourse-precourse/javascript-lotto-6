@@ -13,4 +13,5 @@ export const MESSAGE_ERROR = Object.freeze({
   lottoNumberSize: `${ERROR_PREFIX} 로또 번호는 6개여야 합니다.`,
   lottoDuplicateNumber: `${ERROR_PREFIX} 로또 번호는 중복될 수 없습니다.`,
   lottoNotInput: `${ERROR_PREFIX} 번호와 쉼표(,)를 이어서 입력해주세요.`,
+  lottoNumberRange: `${ERROR_PREFIX} 로또 번호는 1~45 사이여야 합니다.`,
 });

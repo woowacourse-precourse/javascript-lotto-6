@@ -1,4 +1,4 @@
-import { LOTTO_PRICE } from '../constants/GameSetting.js';
+import { LOTTO_NUMBER_RANGE, LOTTO_PRICE } from '../constants/GameSetting.js';
 import { MESSAGE_ERROR } from '../constants/Message.js';
 
 const isNumber = (input) => {
@@ -26,9 +26,18 @@ const isNumberOrComma = (input) => {
   }
 };
 
+const isLottoRange = (inputArray) => {
+  inputArray.forEach((number) => {
+    if (number < LOTTO_NUMBER_RANGE.start || number > LOTTO_NUMBER_RANGE.end) {
+      throw new Error(MESSAGE_ERROR.lottoNumberRange);
+    }
+  });
+};
+
 export function isValidWinningLotto(input) {
-  //   const inputArray = input.split(',');
-  //   const n = input.length;
+  const inputArray = input.split(',');
+  console.log('inputArray: ', inputArray);
 
   isNumberOrComma(input);
+  isLottoRange(inputArray);
 }
