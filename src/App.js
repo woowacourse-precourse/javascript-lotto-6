@@ -9,7 +9,7 @@ function App() {
     printMyLotto(myLotto);
     const lottoWinningNumber = await LottoWinningNumber();
     new Lotto(lottoWinningNumber);
-    console.log(lottoWinningNumber);
+    const lottoBonusNumber = await LottoBonusNumber();
   };
   const InputPurchaseAmount = async () => {
     const inputAmount = await Console.readLineAsync(
@@ -46,6 +46,13 @@ function App() {
       "당첨 번호를 입력해 주세요.\n"
     );
     return lottoWinningNumber.split(",");
+  };
+  const LottoBonusNumber = async () => {
+    const lottoBonusNumber = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요.\n"
+    );
+
+    return lottoBonusNumber;
   };
 }
 
