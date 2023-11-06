@@ -17,7 +17,7 @@ const isNumberInRange = (value) => value > 0 && value < 46;
 
 const isSixNumbers = (values) => values.length === NUMBER_COUNT;
 
-const isDuplicated = (values) => [...new Set(values)].length !== NUMBER_COUNT;
+const isSetSizeSix = (values) => [...new Set(values)].length !== NUMBER_COUNT;
 
 const isAllNumbers = (values) =>
   values.filter((value) => isNumber(value)).length === NUMBER_COUNT;
@@ -45,7 +45,7 @@ const validateWinningNumber = (winningNumber) => {
   if (!isSixNumbers(numbers)) throw new Error(ERROR_MESSAGE.notSixNumbers);
   if (!isAllNumbers(numbers)) throw new Error(ERROR_MESSAGE.textIncluded);
   if (!isNumbersInRange(numbers)) throw new Error(ERROR_MESSAGE.notInRange);
-  if (isDuplicated(numbers)) throw new Error(ERROR_MESSAGE.duplicated);
+  if (isSetSizeSix(numbers)) throw new Error(ERROR_MESSAGE.duplicated);
 };
 
 const validateBonusNumber = (winningNumbers, bonusNumber) => {
@@ -54,7 +54,7 @@ const validateBonusNumber = (winningNumbers, bonusNumber) => {
   if (!isNumberInRange(parseInt(bonusNumber, 10))) {
     throw new Error(ERROR_MESSAGE.notInRange);
   }
-  if (!isDuplicated([...winningNumbers.concat(bonusNumber)])) {
+  if (!isSetSizeSix([...winningNumbers.concat(bonusNumber)])) {
     throw new Error(ERROR_MESSAGE.duplicated);
   }
 };
