@@ -17,17 +17,17 @@ class MyLotto {
   }
 
   showMyLottoNumbers() {
-    this.#lottoNumbersList.forEach(lottoNumbers =>
-      lottoNumbers.printLottoNumbers(),
-    );
+    this.#lottoNumbersList.forEach(lottoNumbers => lottoNumbers.printLottoNumbers());
   }
 
   findMatching(winningNumbers, bonusNumber) {
     const matchingResult = [];
 
     this.#lottoNumbersList.forEach(numbers => {
-      const count = numbers.filter(num => winningNumbers.includes(num)).length;
-      const bonus = numbers.includes(bonusNumber);
+      const count = numbers
+        .getLottoNumbers()
+        .filter(num => winningNumbers.getLottoNumbers().includes(num)).length;
+      const bonus = numbers.getLottoNumbers().includes(bonusNumber);
       matchingResult.push({ count, bonus });
     });
 
