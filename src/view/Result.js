@@ -21,23 +21,23 @@ class Result {
     }
 
     get fifth() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_THREE} ${REWORD.FIFTH_PLACE.toLocaleString()} - ${this.result[3] ?? 0}개`);
+        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_THREE} (${REWORD.FIFTH_PLACE.toLocaleString()}원) - ${this.result[3] ?? 0}개`);
     }
 
     get fourth() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FOUR} ${REWORD.FOURTH_PLACE.toLocaleString()} - ${this.result[4] ?? 0}개`);
+        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FOUR} (${REWORD.FOURTH_PLACE.toLocaleString()}원) - ${this.result[4] ?? 0}개`);
     }
 
     get third() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE} ${REWORD.THIRD_PLACE.toLocaleString()} - ${this.result[5] ?? 0}개`);
+        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE} (${REWORD.THIRD_PLACE.toLocaleString()}원) - ${this.result[5] ?? 0}개`);
     }
 
     get second() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE_BOUNS} ${REWORD.SECOND_PLACE.toLocaleString()} - ${this.result['bonus'] ?? 0}개`); 
+        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE_BOUNS} (${REWORD.SECOND_PLACE.toLocaleString()}원) - ${this.result['bonus'] ?? 0}개`); 
     }
 
     get first() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_SIX} ${REWORD.FIRST_PLACE.toLocaleString()} - ${this.result[6] ?? 0}개`);
+        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_SIX} (${REWORD.FIRST_PLACE.toLocaleString()}원) - ${this.result[6] ?? 0}개`);
     }
 
     get printRate() {

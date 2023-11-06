@@ -7,32 +7,28 @@ import Bonus from '../controller/Bonus.js';
 import { INPUT_MESSAGE } from '../data/message.js';
 
 class UserInput {
-    constructor() {
-        this.amount = 0;
-        this.numbers = null;
-        this.bonus = null;
-    }
+    constructor() {}
     
-    async RequestAmount() {
-        this.amount = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}\n`);
-        new Amount(this.amount);
+    static async RequestAmount() {
+        const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
+        const amount = new Amount(input);
 
-        return this.amount;
+        return amount;
     }
 
-    async RequestNumbers() {
-        const input = await MissionUtils.Console.readLineAsync(`\n${INPUT_MESSAGE.WINNING_NUMBERS}\n`);
-        this.numbers = input.split(',');
-        new Lotto(this.numbers);
+    static async RequestNumbers() {
+        const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.WINNING_NUMBERS}`);
+        const numbers = input.split(',');
+        new Lotto(numbers);
 
-        return this.numbers;
+        return numbers;
     }
 
-    async RequestBonus(numbers) {
-        this.bonus = await MissionUtils.Console.readLineAsync(`\n${INPUT_MESSAGE.BONUS_NUMBER}\n`);
-        new Bonus(this.bonus, numbers);
+    static async RequestBonus(numbers) {
+        const bonus = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.BONUS_NUMBER}`);
+        new Bonus(bonus, numbers);
 
-        return this.bonus;
+        return bonus;
     }
 }
 

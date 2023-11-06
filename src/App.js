@@ -4,23 +4,21 @@ import Calculate from './model/Calculate.js';
 import Result from './view/Result.js';
 
 class App {
-  constructor() {
-    this.UserInput = new UserInput();
-  }
+  constructor() {}
 
   async play() {
     // 구매 금액
-    const amount = await this.UserInput.RequestAmount();
+    const amount = await UserInput.RequestAmount();
 
     // 로또 발행
     const purchase = new Purchase(amount);
-    const arrays = purchase.public();
+    const arrays = await purchase.public();
 
     // 로또 번호 입력
-    const numbers = await this.UserInput.RequestNumbers();
+    const numbers = await UserInput.RequestNumbers();
 
     // 보너스 번호 입력
-    const bonus = await this.UserInput.RequestBonus(numbers);
+    const bonus = await UserInput.RequestBonus(numbers);
 
     // 계산하기
     const calculate = new Calculate(amount, numbers, arrays, bonus);

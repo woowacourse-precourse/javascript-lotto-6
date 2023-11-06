@@ -1,47 +1,30 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-import { INPUT_MESSAGE } from '../data/message.js';
+import { OUTPUT_MESSAGE } from '../data/message.js';
 
 class Purchase {
-    #amount;
     #count;
 
     constructor(amount) {
-        this.#amount = amount;
-        this.#count = this.#amount / 1000;
+        this.#count = amount / 1000;
         this.lottoArray = [];
+        this.printCount();
     }
 
-    public() {
-        this.countPrint();
+    async printCount() {
+        await MissionUtils.Console.print(`${this.#count}${OUTPUT_MESSAGE.PURCHASE_COUNT}`);
+    }
+
+    async public() {
         for (let i = 0; i < this.#count; i++) {
-            const numbers = this.pick();
-            const sortedNumbers = this.sort(numbers);
-            this.numbersPrint(sortedNumbers)
-            this.push(sortedNumbers);
+            const numbers = await MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+            numbers.sort((a, b) => a - b);
+            
+            await MissionUtils.Console.print(numbers);
+            this.lottoArray.push(numbers);
         }
 
         return this.lottoArray;
-    }
-    
-    countPrint() {
-        MissionUtils.Console.print(`\n${this.#count}${INPUT_MESSAGE.PURCHASE_COUNT}`);
-    }
-
-    numbersPrint(array) {
-        return MissionUtils.Console.print([`${array}`]);
-    }
-
-    pick() {
-        return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    }
-
-    sort(array) {
-        return array.sort((a, b) => a - b);
-    }
-
-    push(array) {
-        return this.lottoArray.push(array);
     }
 }
 

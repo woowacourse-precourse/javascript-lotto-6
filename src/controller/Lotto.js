@@ -5,36 +5,34 @@ class Lotto {
 
   constructor(numbers) {
     this.#numbers = numbers;
-    this.#isCheckProperNumberRange(numbers);
-    this.#isCheckDuplicate(numbers);
-    this.#isCheckProperNumberLength(numbers);
+    Lotto.#isCheckProperNumberRange(numbers);
+    Lotto.#isCheckDuplicate(numbers);
+    Lotto.#isCheckProperNumberLength(numbers);
+
+    // this.#isCheckProperNumberRange(numbers);
+    // this.#isCheckDuplicate(numbers);
+    // this.#isCheckProperNumberLength(numbers);
   };
 
-  #isCheckDuplicate(numbers) {
+  static #isCheckDuplicate(numbers) {
     const filteredNumbers = new Set(numbers);
     if(filteredNumbers.size !== numbers.length) {
-        throw new Error(`${ERROR_MESSAGE.NUMBER_DUPLICATED_ERROR}`);
+      throw new Error(`${ERROR_MESSAGE.NUMBER_DUPLICATED_ERROR}`);
     }
-
-    return this.#numbers;
   }
 
-  #isCheckProperNumberRange(numbers) {
+  static #isCheckProperNumberRange(numbers) {
     for(const num of numbers) {
       if(+num < 1 || +num > 45) {
-        throw new Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
+        throw Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
       }
     }
-
-    return this.#numbers;
   }
 
-  #isCheckProperNumberLength(numbers) {
+  static #isCheckProperNumberLength(numbers) {
     if(numbers.length !== 6) {
-      throw new Error(`${ERROR_MESSAGE.NUMBER_LEGNTH_ERROR}`);
+      throw Error(`${ERROR_MESSAGE.NUMBER_LEGNTH_ERROR}`);
     }
-
-    return this.#numbers;
   }
 }
 
