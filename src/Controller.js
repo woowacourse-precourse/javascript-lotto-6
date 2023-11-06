@@ -2,6 +2,7 @@ import Bonus from './Bonus.js';
 import InputView from './InputView.js';
 import Lotto from './Lotto.js';
 import LottoTicket from './LottoTicket.js';
+import Matcher from './Matcher.js';
 import OutputView from './OutputView.js';
 
 class Controller {
@@ -11,11 +12,14 @@ class Controller {
 
   #bonusNumber;
 
+  #matchStats;
+
   async progress() {
     await this.#handlerErrorAndProceed(this.#getLottoTicketList);
     this.#displayLottoTicket();
     await this.#handlerErrorAndProceed(this.#getWinningNumbers);
     await this.#handlerErrorAndProceed(this.#getBonusNumber);
+    await this.#getMatchStats();
   }
 
   async #handlerErrorAndProceed(method) {
@@ -43,10 +47,15 @@ class Controller {
 
   async #getBonusNumber() {
     const inputBonusNumber = await InputView.readLottoBonusNumber();
-    this.#bonusNumber = new Bonus(
+    this.#bonusNumber = new Bonus(this.#winningNumbers, inputBonusNumber).bonusNumber;
+  }
+
+  async #getMatchStats() {
+    this.#matchStats = new Matcher(
+      this.#lottoTicketList,
       this.#winningNumbers,
-      inputBonusNumber,
-    ).bonusNumber;
+      this.#bonusNumber,
+    ).matchStats;
   }
 }
 
