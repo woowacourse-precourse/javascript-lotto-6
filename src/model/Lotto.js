@@ -1,3 +1,5 @@
+import Output from "../view/Output.js";
+
 class Lotto {
   #numbers;
 
@@ -15,6 +17,10 @@ class Lotto {
 
   #sortLotto(){
     this.#numbers.sort();
+  }
+
+  #printLotto(){
+    Output.outputMessage(this.#numbers);
   }
 }
 
