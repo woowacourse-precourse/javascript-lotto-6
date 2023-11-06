@@ -5,6 +5,7 @@ import { ERROR } from "./const/error";
 class App {
 
   constructor() {
+    this.price = 0;
     this.sameNumbersObject = {
       'three' : 0,
       'four' : 0,
@@ -41,6 +42,7 @@ class App {
     if(checkPrice === NaN) {throw new Error(ERROR.NAN)};
     if(remainder !== 0 ) {throw new Error(ERROR.THOUSAND)};
 
+    this.price = checkPrice;
     return share;
   }
 
@@ -57,8 +59,9 @@ class App {
 
   getWinningLottos() {
     for(let i = 0; i < this.count; i++){
-      const newArray = [...this.arrayNumbers,...this.winning]
-      const set = new Set(newArray)
+      const newArray = [...this.arrayNumbers[i],...this.winning.map(Number)]
+      const setObject = new Set(newArray)
+      const set = Array.from(setObject);
       this.checkSameNumbers(set);
       // const sameNumbers = this.arrayNumbers.filter(newArray);
       // this.checkSameNumbers(sameNumbers)
@@ -69,49 +72,50 @@ class App {
   //   switch (sameNumbers.length) {
   //     case 3:
   //       this.sameNumbersObject['three']++
-  //       break;
+  //       // break;
   //     case 4:
   //       this.sameNumbersObject['four']++
-  //       break;
+  //       // break;
   //     case 5:
   //       this.sameNumbersObject['five']++
-  //       break;
+  //       // break;
   //     case 6:
   //       this.sameNumbersObject['six']++
-  //       break;      
-  //     default:
-  //       return this.sameNumbersObject
+  //       // break;   
   //   }
   //   if(sameNumbers.length === 5 && arrayNumbers.includes(checkBonusNumber)) {
   //     this.sameNumbersObject['bonus']++
   //   }
+  //   console.log(1);
+  //   console.log(this.sameNumbersObject);
   // }
   checkSameNumbers(set) {
     switch (set.length) {
-      case 6:
+      case 9:
         this.sameNumbersObject['three']++
         break;
-      case 4:
+      case 8:
         this.sameNumbersObject['four']++
         break;
-      case 2:
+      case 7:
         this.sameNumbersObject['five']++
         break;
-      case 0:
+      case 6:
         this.sameNumbersObject['six']++
         break;      
-      default:
-        return this.sameNumbersObject
     }
-    if(set.length === 2 && this.arrayNumbers.includes(this.bonus)) {
+    if(set.length === 7 && this.arrayNumbers.includes(this.bonus)) {
       this.sameNumbersObject['bonus']++
     }
+  console.log(1);
+    console.log(this.sameNumbersObject);
+    console.log(set)
   }
 
   printHowMany() {
       MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
       for(let i = 0; i < this.count; i++){
-        MissionUtils.Console.print(this.arrayNumbers[i]);
+        MissionUtils.Console.print(JSON.stringify(this.arrayNumbers[i]));
       }
       // this.arrayNumbers.forEach(element => {
       //   MissionUtils.Console.print(element);
@@ -120,7 +124,7 @@ class App {
 
   async getNumbers(){
     const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
-    this.winning  = winningNumbers.split(",").map(Number);
+    this.winning  = winningNumbers.split(",");
 console.log(winningNumbers)
 
     if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
@@ -151,11 +155,14 @@ console.log(winningNumbers)
 
   
   printWinningStatics() {
-    const sum = 0;
-    for(let win of Object.values(this.sameNumbersObject)){
-      sum += win;
-    }
-    const rate = sum/count * 100;
+    let winningPrice = 
+    this.sameNumbersObject['three'] * 5000 
+    + this.sameNumbersObject['four']* 50000
+    + this.sameNumbersObject['five'] * 1500000
+    + this.sameNumbersObject['bonus'] * 30000000 
+    + this.sameNumbersObject['six'] * 2000000000;
+
+    const rate = winningPrice/this.price * 100;
     
     MissionUtils.Console.print(
     `당첨 통계
