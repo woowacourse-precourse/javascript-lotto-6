@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import MESSAGES from "./constants/Messages.js";
-import { isOnlyNumber, isInRangeNumber } from "./utils/Validation";
+import { isOnlyNumber, isInRangeNumber } from "./utils/Validation.js";
 import { LOTTO } from "./constants/Standard.js";
 
 class UserInput {
@@ -42,7 +42,7 @@ class UserInput {
       const winningNumber = await Console.readLineAsync(
         MESSAGES.GET_WINNING_NUMBER
       );
-      const [isVaild, message, result] = this.isVaildWinningNumber(
+      const [isVaild, message, result] = this.#isVaildWinningNumber(
         winningNumber.split(",")
       );
 
@@ -57,7 +57,7 @@ class UserInput {
     }
   }
 
-  isVaildWinningNumber(splitedNumber) {
+  #isVaildWinningNumber(splitedNumber) {
     const winningNumber = splitedNumber.map((el) => Number(el));
 
     if (!isOnlyNumber(splitedNumber.join(""))) {
@@ -77,7 +77,38 @@ class UserInput {
   }
 
   async getBonusNumber(winningNumber) {
-    //
+    try {
+      const bonusNumber = await Console.readLineAsync(
+        MESSAGES.GET_BONUS_NUMBER
+      );
+      const [isVaild, message, result] = this.#isVaildBonusNumber(
+        winningNumber,
+        bonusNumber
+      );
+
+      if (!isVaild) {
+        Console.print(message);
+        throw new Error(message);
+      }
+
+      return result;
+    } catch (error) {
+      this.getBonusNumber(winningNumber);
+    }
+  }
+
+  #isVaildBonusNumber(winningNumber, bonusNumber) {
+    if (!isOnlyNumber(bonusNumber)) {
+      return [false, MESSAGES.ERROR.PLEASE_ONLY_NUMBER, null];
+    }
+    bonusNumber = Number(bonusNumber);
+    if (!isInRangeNumber([bonusNumber])) {
+      return [false, MESSAGES.ERROR.INVAILD_LOTTO_NUMBER];
+    }
+    if (winningNumber.includes(bonusNumber)) {
+      return [false, MESSAGES.ERROR.DUPLICATE_BONUS_NUMBER];
+    }
+    return [true, "", bonusNumber];
   }
 }
 
