@@ -1,6 +1,9 @@
 "use strict";
+import Lotto from "./Lotto";
 class App {
-    async play() {}
+    async play() {
+        const lotto = new Lotto();
+    }
 }
 
 export default App;

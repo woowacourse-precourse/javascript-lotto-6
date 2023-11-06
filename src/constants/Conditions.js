@@ -4,10 +4,7 @@
 
 const CONDITIONS = {
     //ex)
-    RANGE: {
-        MIN: 1,
-        MAX: 9,
-    },
+    PRICE_OF_LOTTO: 1000,
     NUMBER_LENGTH: 3,
 };
 

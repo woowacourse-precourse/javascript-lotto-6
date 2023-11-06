@@ -1,4 +1,5 @@
 "use strict";
+import Purchase from "./Purchase";
 class Lotto {
     #numbers;
 
@@ -14,6 +15,10 @@ class Lotto {
     }
 
     // TODO: 추가 기능 구현
+    play() {
+        const purchase = new Purchase();
+        purchase.putMoney();
+    }
 }
 
 export default Lotto;
