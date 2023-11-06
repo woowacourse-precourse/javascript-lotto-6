@@ -32,11 +32,17 @@ class View {
 
   printLottoPurchaseResult(lottos) {
     const count = lottos.length;
+    this.printNewLine();
     this.#outputView.print(MessageFormat.lottoPurchaseHeader(count));
     const lottoNumbers = lottos.map(item =>
       MessageFormat.lottoTicket(item.getNumbers()),
     );
     lottoNumbers.forEach(item => this.#outputView.print(item));
+    this.printNewLine();
+  }
+
+  printNewLine() {
+    this.#outputView.print('');
   }
 
   printError(error) {
