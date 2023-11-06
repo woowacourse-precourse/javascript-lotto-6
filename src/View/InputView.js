@@ -1,15 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class InputView {
-  static async readValue(message) {
+  static async readLine(message) {
     const input = await Console.readLineAsync(message);
-    InputView.#validate(input);
-    return input;
+    return InputView.#removeWhiteSpace(input);
   }
 
-  static #validate(input) {
-    // 공백 제거
-    // trim
+  static #removeWhiteSpace(input) {
+    return input.replace(/\s+/g, '');
   }
 }
 

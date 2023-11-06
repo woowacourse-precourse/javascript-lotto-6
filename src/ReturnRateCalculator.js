@@ -1,4 +1,4 @@
-import { LOTTO } from './constant/index';
+import { LOTTO } from './constant/index.js';
 
 class ReturnRateCalculator {
   static getReturnRate(outcome, buyingPrice) {
