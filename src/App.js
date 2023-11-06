@@ -18,10 +18,11 @@ class App {
     const numberOfLottoTickets = Math.floor(purchaseAmount / 1000);
     const lottoTickets = this.generateLottoTickets(numberOfLottoTickets);
 
-    Console.print(`\n${numberOfLottoTickets}개를 구매했습니다.`);
+    Console.print(`${numberOfLottoTickets}개를 구매했습니다.`);
 
     lottoTickets.forEach((ticket, index) => {
-      Console.print(ticket.getNumbers().sort((a, b) => a - b));
+      Console.print('['+ticket.getNumbers().sort((a, b) => a - b).join(', ')+']');
+
     });
 
     const winningNumbers = await this.inputWinningNumbers();
@@ -126,12 +127,12 @@ class App {
           Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개`);
         }
         else if (key>=3) {
-          let prize = 0;
-          if (key === '3') prize = 5000;
-          else if (key === '4') prize = 50000;
-          else if (key === '5') prize = 1500000;
-          else if (key === '5.1') prize = 30000000;
-          else if (key === '6') prize = 2000000000;
+          let prize = '';
+          if (key === '3') prize = '5,000';
+          else if (key === '4') prize = '50,000';
+          else if (key === '5') prize = '1,500,000';
+          else if (key === '5.1') prize = '30,000,000';
+          else if (key === '6') prize = '2,000,000,000';
 
           Console.print(`${key}개 일치 (${prize}원) - ${count}개`);
         }
