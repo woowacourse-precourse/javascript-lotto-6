@@ -7,7 +7,11 @@ class Output {
     MissionUtils.Console.print(
       `\n${purchasedLottoArray.length}개를 구매했습니다.`,
     );
-    purchasedLottoArray.forEach(lotto => MissionUtils.Console.print(lotto));
+    let output = '';
+    purchasedLottoArray.forEach(lotto => {
+      output += `[${lotto.join(', ')}]\n`;
+    });
+    MissionUtils.Console.print(output);
   }
 
   static printWinningStatistics(matchCount) {
