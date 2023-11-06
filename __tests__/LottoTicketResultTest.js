@@ -14,7 +14,7 @@ describe('로또 티켓 결과 테스트', () => {
       bonusNumber
     );
     const result = lottoTicketResult.getLottoTicketResult();
-    const answer = [1, 1, 0, 0, 0];
+    const answer = [0, 0, 0, 1, 1]; // 순서대로 5등 4등 3등 2등 1등
     expect(result).toEqual(answer);
   });
 });

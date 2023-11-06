@@ -2,7 +2,7 @@ class LottoTicketResult {
   #lottoTicketResult;
 
   constructor(lottoTicket, winningNumber, bonusNumber) {
-    this.#lottoTicketResult = [0, 0, 0, 0, 0]; //순서대로 1등 2등 3등 4등 5등
+    this.#lottoTicketResult = [0, 0, 0, 0, 0]; //순서대로 5등 4등 3등 2등 1등
     this.#checkLottoTicketResult(lottoTicket, winningNumber, bonusNumber);
   }
 
@@ -15,18 +15,18 @@ class LottoTicketResult {
         }
       });
       if (sameNumberCount === 3) {
-        this.#lottoTicketResult[4] += 1;
+        this.#lottoTicketResult[0] += 1;
       }
       if (sameNumberCount === 4) {
-        this.#lottoTicketResult[3] += 1;
+        this.#lottoTicketResult[1] += 1;
       }
       if (sameNumberCount === 5) {
         lotto.includes(bonusNumber)
-          ? (this.#lottoTicketResult[1] += 1)
+          ? (this.#lottoTicketResult[3] += 1)
           : (this.#lottoTicketResult[2] += 1);
       }
       if (sameNumberCount === 6) {
-        this.#lottoTicketResult[0] += 1;
+        this.#lottoTicketResult[4] += 1;
       }
     });
   }
