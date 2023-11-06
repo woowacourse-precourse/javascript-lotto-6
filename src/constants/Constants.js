@@ -1,6 +1,7 @@
 const CONSTANTS = {
-  lottoMaximumNumber: 45,
-  lottoMinimumNumber: 1,
+  maxRange: 45,
+  minRange: 1,
+  numberTypeRegex: /\D/,
 };
 
 export default CONSTANTS;
