@@ -16,12 +16,33 @@ class Lotto {
   }
 
   getLottoNumbers() {
-    return this.#numbers;
+    return [...this.#numbers];
   }
 
   // TODO: 추가 기능 구현
-  // TODO: 로또 등수별 확인 메서드
-  // TODO: 로또 번호 확인 가능 메서드
+
+  // createLottoTickets(purchaseAmount) {
+  //   for (let ticketCount = 0; ticketCount < purchaseAmount; ticketCount += 1) {
+  //     this.lottoTickets.push(this.#createLottoTicket());
+  //   }
+  // }
+
+  // #createLottoTicket() {
+  //   const lottoTicket = Random.pickUniqueNumbersInRange(
+  //     CONSTANTS.minRange,
+  //     CONSTANTS.maxRange,
+  //     6,
+  //   ).sort((a, b) => a - b);
+  //   return lottoTicket;
+  // }
+
+  // printLottoTickets() {
+  //   const lottoPurchaseStatus = `${this.lottoTickets.length}${USER_OUTPUT.purchaseCountPrompt}`;
+  //   const ticketLines = this.lottoTickets
+  //     .map(ticket => `[${ticket.join(', ')}]`)
+  //     .join('\n');
+  //   Console.print(`${lottoPurchaseStatus}\n${ticketLines}`);
+  // }
 }
 
 export default Lotto;
