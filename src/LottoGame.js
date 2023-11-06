@@ -22,7 +22,7 @@ class LottoGame {
         this.#count = money / LOTTO_PRICE;
         break;
       } catch (error) {
-        Console.print(error.message);
+        OutputView.printErrorMessage(error.message);
       }
     }
     this.generateRandomNumbers();
