@@ -104,46 +104,46 @@ class App {
     //   }
     // }
 
+    this.checkWinningResults(userRandomListNums, userMoney, winningNumsList, bonus);
+    // // 당첨 확인
+    // let winningThree = 0;
+    // let winningFour = 0;
+    // let winningFive = 0;
+    // let winningBonus = 0;
+    // let winningSix = 0;
 
-    // 당첨 확인
-    let winningThree = 0;
-    let winningFour = 0;
-    let winningFive = 0;
-    let winningBonus = 0;
-    let winningSix = 0;
+    // for (let i = 0; i < userRandomListNums.length; i++) {
+    //   let winningCount = userRandomListNums[i].filter(it => winningNumsList.includes(it)).length
+    //   let isBonus = false;
+    //   if (userRandomListNums[i].includes(bonus)) {
+    //     isBonus = true;
+    //   }
 
-    for (let i = 0; i < userRandomListNums.length; i++) {
-      let winningCount = userRandomListNums[i].filter(it => winningNumsList.includes(it)).length
-      let isBonus = false;
-      if (userRandomListNums[i].includes(bonus)) {
-        isBonus = true;
-      }
-
-      if (isBonus && winningCount == 4) {
-        winningBonus++
-      } else if (winningCount === 3) {
-        winningThree++;
-      } else if (winningCount === 4) {
-        winningFour++;
-      } else if (winningCount === 5) {
-        winningFive++;
-      } else if (winningCount === 6) {
-        winningSix++;
-      }
-    }
-    Console.print(MESSAGE_INPUT(winningThree).RANK_THREE);
-    Console.print(MESSAGE_INPUT(winningFour).RANK_FOUR);
-    Console.print(MESSAGE_INPUT(winningFive).RANK_FIVE);
-    Console.print(MESSAGE_INPUT(winningBonus).RANK_BONUS);
-    Console.print(MESSAGE_INPUT(winningSix).RANK_SIX);
+    //   if (isBonus && winningCount == 4) {
+    //     winningBonus++
+    //   } else if (winningCount === 3) {
+    //     winningThree++;
+    //   } else if (winningCount === 4) {
+    //     winningFour++;
+    //   } else if (winningCount === 5) {
+    //     winningFive++;
+    //   } else if (winningCount === 6) {
+    //     winningSix++;
+    //   }
+    // }
+    // Console.print(MESSAGE_INPUT(winningThree).RANK_THREE);
+    // Console.print(MESSAGE_INPUT(winningFour).RANK_FOUR);
+    // Console.print(MESSAGE_INPUT(winningFive).RANK_FIVE);
+    // Console.print(MESSAGE_INPUT(winningBonus).RANK_BONUS);
+    // Console.print(MESSAGE_INPUT(winningSix).RANK_SIX);
     
-    // 수익률 계산
-    // 깔끔하게 수정하기
-    const sums = 5000 * winningThree + 50000 * winningFour + 1500000 * winningFive
-    + 30000000 * winningBonus + 2000000000 * winningSix
-    const rate = (sums / userMoney*100).toFixed(1);
+    // // 수익률 계산
+    // // 깔끔하게 수정하기
+    // const sums = 5000 * winningThree + 50000 * winningFour + 1500000 * winningFive
+    // + 30000000 * winningBonus + 2000000000 * winningSix
+    // const rate = (sums / userMoney*100).toFixed(1);
 
-    Console.print(MESSAGE_INPUT(rate).RATE);
+    // Console.print(MESSAGE_INPUT(rate).RATE);
   }
 
   async getUserMoney() {
@@ -241,6 +241,49 @@ class App {
     }
   };
 
+  checkWinningResults(userRandomListNums, userMoney, winningNumsList, bonus) {
+    let winningThree = 0;
+    let winningFour = 0;
+    let winningFive = 0;
+    let winningBonus = 0;
+    let winningSix = 0;
+
+    for (let i = 0; i < userRandomListNums.length; i++) {
+      let winningCount = userRandomListNums[i].filter(it => winningNumsList.includes(it)).length
+      let isBonus = false;
+
+      if (userRandomListNums[i].includes(bonus)) {
+        isBonus = true;
+      }
+
+      if (isBonus && winningCount == 4) {
+        winningBonus++
+      } else if (winningCount === 3) {
+        winningThree++;
+      } else if (winningCount === 4) {
+        winningFour++;
+      } else if (winningCount === 5) {
+        winningFive++;
+      } else if (winningCount === 6) {
+        winningSix++;
+      }
+    }
+
+    Console.print(MESSAGE_INPUT(winningThree).RANK_THREE);
+    Console.print(MESSAGE_INPUT(winningFour).RANK_FOUR);
+    Console.print(MESSAGE_INPUT(winningFive).RANK_FIVE);
+    Console.print(MESSAGE_INPUT(winningBonus).RANK_BONUS);
+    Console.print(MESSAGE_INPUT(winningSix).RANK_SIX);
+    
+    // 수익률 계산
+    // 깔끔하게 수정하기
+    const sums = 5000 * winningThree + 50000 * winningFour + 1500000 * winningFive
+    + 30000000 * winningBonus + 2000000000 * winningSix
+
+    const rate = (sums / userMoney*100).toFixed(1);
+
+    Console.print(MESSAGE_INPUT(rate).RATE);
+  }
 
 }
 export default App
