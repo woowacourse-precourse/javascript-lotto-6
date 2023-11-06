@@ -33,4 +33,5 @@ export const ERROR_MESSAGE = Object.freeze({
   not_six_numbers: `${PREFIX.error} 쉼표를 기준으로 ${SETTING.input_length}개의 숫자를 입력하세요.`,
   not_range: `${PREFIX.error} ${SETTING.min_lotto_number} 이상 ${SETTING.max_lotto_number} 이하의 숫자를 입력하세요.`,
   not_unique: `${PREFIX.error} 중복된 숫자가 존재합니다.`,
+  not_unique_bonus: `${PREFIX.error} 이미 존재하는 당첨번호 입니다.`,
 });
