@@ -15,13 +15,19 @@ class LottoController{
         this.inputAndOutput.purchasedLottoOutput(PURCHASE_LOTTO_NUMBER, LOTTO_AMOUNT);
         const WIN_NUMBER = await this.inputAndOutput.inputWinNumber();
         const BONUS_NUMBER = await this.inputAndOutput.inputBonusNumber(WIN_NUMBER);
-        this.drawLotto(PURCHASE_LOTTO_NUMBER,WIN_NUMBER,BONUS_NUMBER);
+        this.drawLotto(PURCHASE_LOTTO_NUMBER,WIN_NUMBER,BONUS_NUMBER,PURCHASE_PRICE);
     }
 
-    async drawLotto(purchaseNum, winNum, bonusNum) {
+    async drawLotto(purchaseNum, winNum, bonusNum, price) {
         const WIN_RESULT = this.lottoPlay.contingWinNumber(purchaseNum, winNum);
         const BONUS_RESULT = this.lottoPlay.countingBonusNumber(purchaseNum, bonusNum);
-        await this.inputAndOutput.gameResultOutput(WIN_RESULT, BONUS_RESULT);
+        const RESULT_COUNT = this.lottoPlay.winningNumber(WIN_RESULT,BONUS_RESULT);
+        this.resultLotto(RESULT_COUNT, price);
+    }
+    async resultLotto(result, price){
+        const PRIZE_MONEY = this.lottoPlay.prizeMoney(result);
+        const RETURN_RATIO = this.lottoPlay.returnRatio(PRIZE_MONEY,price);
+        this.inputAndOutput.gameResultOutput(result, RETURN_RATIO);
     }
 }
 export default LottoController;
