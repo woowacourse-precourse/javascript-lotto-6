@@ -23,11 +23,7 @@ class GameController {
     this.printLottoInfo();
     await this.getWinningNumbers();
     await this.getBonusNumbers();
-    this.#resultCalculator.compareLottos(
-      this.#lottoMachine.lottos,
-      this.#winningLotto,
-    );
-    this.#resultCalculator.getEarningRate(this.#lottoMachine.money);
+    this.calculateResult();
     this.printResult();
   }
 
@@ -82,6 +78,14 @@ class GameController {
         Console.print(error.message);
       }
     }
+  }
+
+  calculateResult() {
+    this.#resultCalculator.compareLottos(
+      this.#lottoMachine.lottos,
+      this.#winningLotto,
+    );
+    this.#resultCalculator.getEarningRate(this.#lottoMachine.money);
   }
 
   printResult() {
