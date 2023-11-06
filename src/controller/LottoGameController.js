@@ -30,6 +30,29 @@ class LottoGameController {
     await this.setWinningNumbers();
     await this.setBonusNumber();
     this.printStats();
+
+    // TODO 리팩토링
+    const winningMatchCounts = this.getWinningNumberMatchCounts();
+    const hasBonusMatches = this.hasBonusNumberMatches();
+    const matchResults = this.generateMatchResults(
+      winningMatchCounts,
+      hasBonusMatches,
+    );
+
+    this.lottoResult.setMatchCount(matchResults);
+  }
+
+  generateMatchResults(winningMatchCounts, hasBonusMatches) {
+    return winningMatchCounts.map((winningCount, i) => {
+      return this.createMatchTemplate(winningCount, hasBonusMatches[i]);
+    });
+  }
+
+  createMatchTemplate(winningMatchCount, hasBonusMatch) {
+    return {
+      count: winningMatchCount,
+      hasBonusNumber: hasBonusMatch,
+    };
   }
 
   async setWinningNumbers() {
@@ -128,6 +151,19 @@ class LottoGameController {
 
   printStats() {
     this.outputView.print(MESSAGE.WINNING_STATS);
+  }
+
+  getWinningNumberMatchCounts() {
+    const winningNumberMatchCounts =
+      this.lottoTickets.getWinningNumberMatchCount([...this.#winningNumbers]);
+    return winningNumberMatchCounts;
+  }
+
+  hasBonusNumberMatches() {
+    const hasBonusMatch = this.lottoTickets.includesBonusNumber(
+      this.#bonusNumber,
+    );
+    return hasBonusMatch;
   }
 }
 
