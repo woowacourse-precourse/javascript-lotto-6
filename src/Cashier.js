@@ -1,7 +1,6 @@
 import { ERROR_MESSAGE, LOTTO_FORM } from './constant';
 import { getLottoRandomNumbers, printMessage, throwError } from './utils';
 import Lotto from './Lotto';
-import User from './User';
 class Cashier {
   #numberOfTickets = 0;
   constructor(user) {
