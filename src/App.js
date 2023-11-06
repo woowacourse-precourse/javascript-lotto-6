@@ -5,16 +5,10 @@ class App {
         const purchaseAmount = await this.inputPurchaseAmount();
         Console.print(purchaseAmount / 1000 + "개를 구매했습니다.");
 
-        const lottoTickets = [];
-        for (let i = 0; i < purchaseAmount / 1000; i++) {
-            const lottoNumbers = this.generateLottoNumbers();
-            const lottoTicket = new Lotto(lottoNumbers);
-            lottoTickets.push(lottoTicket);
-        }
+        const lottoTickets = this.generateLottoTickets(purchaseAmount);
 
-        for (const lottoTicket of lottoTickets) {
-            Console.print(`[${lottoTicket.getNumbers().join(", ")}]`);
-        }
+        this.printLottoTickets(lottoTickets);
+
         const winningNumbers = await this.inputWinningNumbers();
         const bonusNumber = await this.inputBonusNumber();
         this.checkDuplicate(winningNumbers, bonusNumber);
@@ -52,6 +46,19 @@ class App {
         );
     }
 
+    generateLottoTickets(purchaseAmount) {
+        const ticketCount = purchaseAmount / 1000;
+        const lottoTickets = [];
+
+        for (let i = 0; i < ticketCount; i++) {
+            const lottoNumbers = this.generateLottoNumbers();
+            const lottoTicket = new Lotto(lottoNumbers);
+            lottoTickets.push(lottoTicket);
+        }
+
+        return lottoTickets;
+    }
+
     generateLottoNumbers() {
         const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
             1,
@@ -59,6 +66,12 @@ class App {
             6
         );
         return lottoNumbers.sort((a, b) => a - b);
+    }
+
+    printLottoTickets(lottoTickets) {
+        for (const lottoTicket of lottoTickets) {
+            Console.print(`[${lottoTicket.getNumbers().join(", ")}]`);
+        }
     }
 
     async inputWinningNumbers() {
