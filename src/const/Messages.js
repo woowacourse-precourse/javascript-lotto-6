@@ -6,9 +6,9 @@ export const ASK = {
 
 export const PRINT = {
   HOW_MANY_BUY: "개를 구매했습니다.",
-  WINNING_STATISTICS: "당첨 통계",
+  PRIZES_STATISTICS: "당첨 통계",
   DASH_LINE: "---",
-  COUNT: "개\n",
+  COUNT: "개",
   RETURN_RATE: "총 수익률은 ${rate}%입니다.",
 };
 
