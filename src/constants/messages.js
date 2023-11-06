@@ -1,5 +1,13 @@
 export const INPUT_MESSAGE = Object.freeze({
 	purchaseAmount: '구입금액을 입력해 주세요.',
+	RANDOM_MIN_NUMBER: 1,
+	RANDOM_MAX_NUMBER: 45,
+	RANDOM_COUNT: 6,
+	LOTTO_UNITS: 1000,
+});
+
+export const OUTPUT_MESSAGE = Object.freeze({
+	infoLottoNumbers: '개를 구매했습니다.',
 });
 
 export const ERROR_MESSAGE = Object.freeze({

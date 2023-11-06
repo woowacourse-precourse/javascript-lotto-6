@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../constants/messages.js';
 
-export const inputView = {
+const inputView = {
 	readPurchaseAmount() {
 		return this.getUserInput(INPUT_MESSAGE.purchaseAmount);
 	},
@@ -11,3 +11,5 @@ export const inputView = {
 		return result;
 	},
 };
+
+export default inputView;
