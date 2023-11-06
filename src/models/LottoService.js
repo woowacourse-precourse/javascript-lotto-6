@@ -11,6 +11,10 @@ class LottoService {
 
   #resultCalculator = new LottoResultCalculator();
 
+  constructor(resultCalculator) {
+    this.#resultCalculator = resultCalculator;
+  }
+
   setWinningNumbers(numbers) {
     LottoValidator.validateLottoNumbers(numbers);
     this.#winningNumbers = numbers;

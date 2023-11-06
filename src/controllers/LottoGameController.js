@@ -1,13 +1,19 @@
 import View from '../views/View.js';
 import LottoPublisher from '../models/LottoPublisher.js';
 import LottoService from '../models/LottoService.js';
+import LottoResultCalculator from '../models/LottoResultCalculator.js';
 
 class LottoGameController {
   #view = new View();
 
   #lottoPublisher = new LottoPublisher();
 
-  #lottoService = new LottoService();
+  #lottoService;
+
+  constructor() {
+    const resultCalculator = new LottoResultCalculator();
+    this.#lottoService = new LottoService(resultCalculator);
+  }
 
   async executeLottoGame() {
     await this.purchaseLottos();
