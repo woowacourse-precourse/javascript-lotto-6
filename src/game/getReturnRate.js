@@ -6,7 +6,7 @@ function getReturnRate(winningLotteriesCount, price) {
     totalPrice += WINNING_PRICE[i] * winningLotteriesCount[i];
   }
 
-  return Math.round((totalPrice / price) * 100).toFixed(1);
+  return ((totalPrice / price) * 100).toFixed(1);
 }
 
 export default getReturnRate;
