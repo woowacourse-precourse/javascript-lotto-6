@@ -10,6 +10,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== LOTTO_LENGTH) throw ERROR_MESSAGE.TARGET_NUM_SIX;
+    if ([...new Set(numbers)].length !== LOTTO_LENGTH) throw ERROR_MESSAGE.TARGET_NUM_SAME;
   }
 
   getNumbers() {

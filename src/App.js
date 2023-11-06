@@ -28,11 +28,11 @@ class App {
     this.lottoPrice = 0;
     this.lottoTickets = [];
     this.result = {
-      FIRST: 0,
-      SECOND: 0,
-      THIRD: 0,
+      FIFTH: 0,
       FOURTH: 0,
-      FIFTH: 0
+      THIRD: 0,
+      SECOND: 0,
+      FIRST: 0
     };
     this.profits = 0;
   }
@@ -84,6 +84,8 @@ class App {
   }
 
   showLottoNumbers() {
+    Console.print(this.lottoTickets.length + MESSAGE.LOTTO_TICKET);
+
     this.lottoTickets.forEach((lotto) => {
       Console.print(lotto.getNumbers());
     })
@@ -138,7 +140,7 @@ class App {
   }
 
   showLottoResult() {
-    Console.print('당첨 통계 \n ---');
+    Console.print('당첨 통계\n---');
     
     this.lottoTickets.forEach((lotto) => {
       const matchTargetNumber = lotto.getMatchTargetNumber(this.targetNumber.getTargetNumber());
@@ -148,7 +150,7 @@ class App {
     })
 
     for (const KEY in this.result) {
-      Console.print(LOTTO_RESULT[KEY] + ' - ' + this.result[KEY] + '개');
+      Console.print(`${LOTTO_RESULT[KEY]} - ${this.result[KEY]}개`);
       this.profits += LOTTO_MONEY[KEY] * this.result[KEY];
     }
 
@@ -173,7 +175,7 @@ class App {
 
   showRate() {
     const rate = ((this.profits/this.lottoPrice) * 100).toFixed(1);
-    Console.print(`총 수익률은 ${rate}% 입니다.`) 
+    Console.print(`총 수익률은 ${rate}%입니다.`) 
   }
 }
 
