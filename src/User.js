@@ -13,15 +13,12 @@ class User {
   }
 
   #calculateLottoProfitRate(lottoResult) {
-    const filtered = lottoResult.filter(({ matchedNumber }) => matchedNumber > 0);
+    const result = lottoResult
+      .filter(({ matchedNumber }) => matchedNumber > 0)
+      .reduce((total, { prize, matchedNumber }) => total + prize * matchedNumber, 0);
 
-    if (filtered.length === 0) return 0;
-
-    const totalProfit = filtered.reduce((total, { prize, matchedNumber }) => {
-      return (total += prize * matchedNumber);
-    }, 0);
-
-    return (totalProfit / this.#lottoPrice) * 100;
+    if (result === 0) return 0;
+    return (result / Number(this.#lottoPrice)) * 100;
   }
 }
 

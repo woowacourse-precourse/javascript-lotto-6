@@ -43,8 +43,10 @@ const OutputView = {
   },
 
   formatProfitRate(profitRate) {
-    const formatLocaleString = Number(profitRate).toLocaleString();
-    return `총 수익률은 ${Number(formatLocaleString).toFixed(1)}%입니다.`;
+    if (Number.isInteger(profitRate)) {
+      return `총 수익률은 ${profitRate.toLocaleString()}.0%입니다.`;
+    }
+    return `총 수익률은 ${Number(profitRate.toFixed(1)).toLocaleString()}%입니다.`;
   },
 
   print(message) {
