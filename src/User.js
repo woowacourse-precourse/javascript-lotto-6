@@ -13,7 +13,7 @@ class User {
         LottoPurchase.validateMinimumAmount(amount);
 
         const lottoCount = Math.floor(amount / 1000);
-        Console.print(`${lottoCount}개를 구매했습니다.`);
+        Console.print(`\n${lottoCount}개를 구매했습니다.`);
         return lottoCount;
       } catch (error) {
         Console.print(error.message);
