@@ -12,7 +12,7 @@ export default function getRateOfReturn(resultMap, purchaseAmount) {
   const values = [...resultMap.values()];
 
   values.forEach((elements, index) => {
-    if (elements !== 0) profits += LOTTO_DATA.get(keys[index]);
+    if (elements !== 0) profits += LOTTO_DATA.get(keys[index]) * elements;
   });
 
   const rateOfReturn = (profits / purchaseAmount) * 100;
