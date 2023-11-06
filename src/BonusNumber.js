@@ -45,7 +45,7 @@ class BonusNumber {
    * @param {number} value
    */
   #validateNaN(value) {
-    if (value === NaN) {
+    if (isNaN(value)) {
       throw new Error(CONSTANTS.ERRORS.BONUS_NUMBER_NOT_NUMBER);
     }
   }
