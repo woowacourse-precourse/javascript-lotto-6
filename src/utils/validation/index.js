@@ -8,7 +8,7 @@ export class Validation {
   }
 
   static isNumber(target) {
-    return typeof target === "number";
+    return typeof target === "number" && !Number.isNaN(target);
   }
 
   static isPositive(target) {
