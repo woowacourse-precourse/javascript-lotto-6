@@ -14,11 +14,15 @@ const LOTTO_MESSAGE = Object.freeze({
   requestBonusNumber: '보너스 번호를 입력해주세요.\n',
   resultHeader: '당첨 통계',
   resultHeaderLine: '***',
-  resultCount: (matchCount, prize, realMatchCount) =>
-    `${matchCount}개 일치 (${prize}원) - ${realMatchCount}개`,
-  resultBonusCount: (matchCount, prize, realMatchCount) =>
-    `${matchCount}개 일치, 보너스 볼 일치 (${prize}원) - ${realMatchCount}개`,
+  matchNotification: (matchCountBasis, isBonus) =>
+    `${matchCountBasis}개 일치${LOTTO_MESSAGE.bonus(isBonus)} `,
+  bonus: (isBonus) => (isBonus ? ', 보너스 볼 일치' : ''),
+  matchCount: (matchCount) => ` - ${matchCount}개 일치`,
+  prize: (prize) => `(${prize}원)`,
   yield: (yieldPercent) => `총 수익률은 ${yieldPercent}%입니다.\n`,
+  singleLotto: (lotto) =>
+    `${MARK.startMark}${lotto.join(MARK.delimiter)}${MARK.endMark}`,
+  nextLine: '\n',
 });
 
 export default LOTTO_MESSAGE;
