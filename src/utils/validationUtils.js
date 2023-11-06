@@ -9,6 +9,7 @@ function checkNumberRegExp(string) {
 
 function checkRange(number) {
   const { start, end } = VALUE.range;
+
   if (number < start || number > end) {
     throw new Error(MESSAGE.error.rangeLotto);
   }
