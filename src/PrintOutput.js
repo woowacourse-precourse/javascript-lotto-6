@@ -5,7 +5,7 @@ class PrintOutput {
   constructor() {
     this.lottoNumSets = [];
     this.newLottoNumSets = [];
-    this.winningArray = [];
+    this.winningArray = [0, 0, 0, 0, 0];
   }
 
   printLottoNumSet = (price) => {
@@ -28,15 +28,16 @@ class PrintOutput {
     lottoNumSets.forEach(lottoNumSet => {
       const equalNum = lottoNumSet.filter(num => sixNum.includes(num));
       const equalNumCount = equalNum.length;
-      const equalBonusNum = lottoNumSet.filter(num === bonusNum);
-      const equalBonusNumCount = equalBonusNum.length;
+      const equalBonusNumCount = lottoNumSet.includes(bonusNum) ? 1 : 0;
 
       if (equalNumCount === 3) this.winningArray[0]++;
       if (equalNumCount === 4) this.winningArray[1]++;
       if (equalNumCount === 5 && equalBonusNumCount === 0) this.winningArray[2]++;
       if (equalNumCount === 5 && equalBonusNumCount === 1) this.winningArray[3]++;
       if (equalNumCount === 6) this.winningArray[4]++;
-    });    
+    });
+
+    return this.winningArray;
   };
 
   printWinningDetails = (winningArray) => {
@@ -50,7 +51,8 @@ class PrintOutput {
   };
   
   printTotalReturn = () => {
-    // 함수 구현
+    // const totalReturn = 
+    Console.print(`총 수익률은 ${totalReturn}입니다.`);
   };
 }
 
