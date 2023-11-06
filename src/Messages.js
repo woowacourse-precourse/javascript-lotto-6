@@ -1,9 +1,13 @@
 const Messages = {
   PURCHASE_AMOUNT_INPUT: '구입금액을 입력해 주세요.\n',
-  PURCHASE_AMOUNT_ISNAN: '[ERROR] 숫자를 입력해 주세요.',
-  PURCHASE_AMOUNT_NOT_DIVIDED:
-    '[ERROR] 구입금액은 1000원 단위로 입력해 주세요.',
   PURCHASED_TICKET_PRINT: '개를 구매했습니다.',
+  WINNING_NUMBERS_INPUT: '\n당첨 번호를 입력해 주세요.\n',
+  ERROR_ISNAN: '[ERROR] 숫자를 입력해 주세요.',
+  ERROR_PURCHASE_AMOUNT_NOT_DIVIDED:
+    '[ERROR] 구입금액은 1000원 단위로 입력해 주세요.',
+  ERROR_WINNING_NUMBER_NOT_ENOUGH: '[ERROR] 로또 번호는 6개여야 합니다.',
+  ERROR_WINNING_NUMBER_OUT_OF_RANGE:
+    '[ERROR] 1~45 사이의 번호를 입력해 주세요.',
 };
 
 export default Messages;
