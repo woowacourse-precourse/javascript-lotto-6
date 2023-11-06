@@ -48,6 +48,7 @@ export const ERROR_MESSAGE = Object.freeze({
   INVALID_WIN_NUMBER_SIZE: `${ERROR_HEAD} 로또 번호는 ${GAME_RULE.WIN_NUMBERS_SIZE}개로 입력해주세요.`,
   INVALID_WIN_NUMBER_RANGE: `${ERROR_HEAD} 로또 번호는 ${GAME_RULE.MIN_WIN_NUMBER_INCLUSIVE}부터 ${GAME_RULE.MAX_WIN_NUMBER_INCLUSIVE}까지의 숫자여야 합니다.`,
   // non-validation error
+  INPUT_NOT_PROVIDED: `${ERROR_HEAD} 입력이 주어지지 않았습니다. 게임을 종료합니다.`,
   INSTANCE_NOT_INITIALIZED: `${ERROR_HEAD} 게임을 실행하기 이전에 출력을 시도할 수 없어요.`,
   FIELD_ALREADY_INITIALIZED: `${ERROR_HEAD} 이미 추첨이 완료된 복권입니다.`,
   LOTTO_NOT_EXIST: `${ERROR_HEAD} 로또 번호를 설정한 뒤에 보너스 번호를 검증할 수 있어요.`,

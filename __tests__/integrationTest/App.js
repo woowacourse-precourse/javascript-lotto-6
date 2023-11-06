@@ -72,6 +72,20 @@ describe("App.play - 기능", () => {
   });
 });
 
+describe("App.play - 예외", () => {
+  test("입력이 주어지지 않으면 루프에 빠지는 대신 정상적으로 프로그램이 종료되어야 한다.", async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  });
+});
+
 describe("App.printTickets - 예외", () => {
   test("app의 인스턴스의 최초 실행 이전에 출력을 시도하면 에러 문구를 출력해야 한다.", () => {
     // given

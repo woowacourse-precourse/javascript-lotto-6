@@ -2,22 +2,29 @@ import { ERROR_MESSAGE } from "../Constants.js";
 import { ValidationError } from "../Error/ValidationError.js";
 
 class InputValidator {
-  static ticketMoney(response) {
-    InputValidator.#checkInt(response);
+  static ticketMoney(ticketMoney) {
+    InputValidator.#checkInputProvided(ticketMoney);
+    InputValidator.#checkIsInteger(ticketMoney);
   }
 
-  static winNumbers(response) {
-    response.split(",").forEach((e) => {
-      InputValidator.#checkInt(e);
+  static winNumbers(winNumbers) {
+    InputValidator.#checkInputProvided(winNumbers);
+    winNumbers.split(",").forEach((e) => {
+      InputValidator.#checkIsInteger(e);
     });
   }
 
-  static bonusNumber(response) {
-    InputValidator.#checkInt(response);
+  static bonusNumber(bonusNumber) {
+    InputValidator.#checkInputProvided(bonusNumber);
+    InputValidator.#checkIsInteger(bonusNumber);
   }
 
-  static #checkInt(response) {
-    if (parseInt(response).toString() !== response) {
+  static #checkInputProvided(input) {
+    if (input === undefined) throw new Error(ERROR_MESSAGE.INPUT_NOT_PROVIDED);
+  }
+
+  static #checkIsInteger(input) {
+    if (parseInt(input).toString() !== input) {
       throw new ValidationError(ERROR_MESSAGE.NOT_AN_INT);
     }
   }
