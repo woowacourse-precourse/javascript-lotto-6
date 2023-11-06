@@ -10,6 +10,12 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  async start() {
+    await this.getPrice();
+    await this.getSixNum();
+    await this.getBonusNum();
+  }
+
   getPrice = async () => {
     do {
       try {
@@ -82,12 +88,6 @@ class Lotto {
     if (bonusNum >= 1 && bonusNum <= 45 && Number.isInteger(bonusNum) === false)
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
     return bonusNum;
-  }
-
-  async start() {
-    await this.getPrice();
-    await this.getSixNum();
-    await this.getBonusNum();
   }
 }
 
