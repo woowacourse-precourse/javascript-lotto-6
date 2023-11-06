@@ -8,7 +8,7 @@ const mockQuestions = (input) => {
   );
 };
 
-describe("Input test", () => {
+describe("로또 구입 금액 입력 테스트", () => {
   const PASS_CASES = ["1000", "3000", "11000", "222000"];
   test.each(PASS_CASES)("로또 구입 입력 성공", async (input) => {
     mockQuestions(input);
