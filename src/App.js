@@ -38,6 +38,16 @@ class App {
     return lottos;
   }
 
+  updateResult(answer, bonus) {
+    this.#lottos.forEach((lotto) => {
+      const result = new Lotto(lotto);
+      const key = result.compareLotto(answer, bonus);
+      if (key) {
+        this.#results[key] += 1;
+      }
+    });
+  }
+
   calcReturn(purchase) {
     let prize = 0;
     for (const key in this.#results) {
@@ -63,13 +73,7 @@ class App {
     const bonusNumber = await Input.getLottoBonusNumber(answerNumbers);
     Print.printNewLine();
 
-    this.#lottos.forEach((lotto) => {
-      const result = new Lotto(lotto);
-      const key = result.compareLotto(answerNumbers, bonusNumber);
-      if (key) {
-        this.#results[key] += 1;
-      }
-    });
+    this.updateResult(answerNumbers, bonusNumber);
     Print.printResults(this.#results);
 
     const returnRate = this.calcReturn(price);
