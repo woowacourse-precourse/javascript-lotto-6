@@ -5,6 +5,7 @@ import { PRINT_MESSAGE } from "./constants/message.js";
 
 import { Random } from "@woowacourse/mission-utils";
 import {
+  validateBonusNumber,
   validateNumber,
   validateNumbers,
 } from "./validation/number.js";
@@ -42,7 +43,6 @@ class App {
   }
 
   async getNumbers(){
-    // TODO: valid함수명 수정
     const inputNumbers = await getInputValue(PRINT_MESSAGE.NUMBERS, validateNumbers);
     return inputNumbers.split(",").map(Number);
   }
@@ -105,9 +105,8 @@ class App {
     validateNumbers(inputNumbers);
   }
 
-  async getBonusNumber() {
-    // TODO: valid 함수명 수정
-    const bonusNumber = await getInputValue(PRINT_MESSAGE.BONUS_NUMBER, validateNumber);
+  async getBonusNumber(prizeNumbers) {
+    const bonusNumber = await getInputValue(PRINT_MESSAGE.BONUS_NUMBER, (bonusNumber)=>{validateBonusNumber(bonusNumber, prizeNumbers)});
     return +bonusNumber;
   }
 
@@ -126,17 +125,14 @@ class App {
     return +inputMoney;
   }
 
-  //TODO: 보너스 숫자 이전 6 숫자 중복 시 에러
   async play() {
-
     const inputMoney = await this.getInputMoney();
 
-    //로또 생성
     await this.setLottos(inputMoney);
 
     const numbers = await this.getNumbers();
     
-    const bonusNumber = await this.getBonusNumber();
+    const bonusNumber = await this.getBonusNumber(numbers);
 
     const result = this.getResult(numbers, bonusNumber, inputMoney);
     this.printResult(result);

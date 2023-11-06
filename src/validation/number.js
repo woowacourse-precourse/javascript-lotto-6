@@ -1,5 +1,11 @@
 import { ERROR_MESSAGE } from "../constants/error.js";
 
+export const validateBonusNumber = (number, prizeNumbers) => {
+  validateNumber(number);
+
+  if(prizeNumbers.includes(+number)) throw new Error(ERROR_MESSAGE.OVERLAP);
+}
+
 export const validateNumber = (number) => {
   const N = +number;
 
