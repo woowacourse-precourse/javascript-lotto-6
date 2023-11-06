@@ -19,4 +19,8 @@ export default class IOController {
     this.#ValidationController.validateInputMoney(MONEY);
     return +MONEY;
   }
+
+  printTicketCount(tickets) {
+    this.#OutputService.printTicketCount(`\n${tickets}` + TICKET_COUNT_MESSAGE);
+  }
 }
