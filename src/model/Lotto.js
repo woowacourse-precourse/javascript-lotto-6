@@ -1,5 +1,5 @@
-import { WINNINGS } from './lib/constant.js';
-import { ERROR } from './lib/Prompt.js';
+import { WINNINGS } from '../lib/constant.js';
+import { ERROR } from '../lib/Prompt.js';
 
 class Lotto {
   #numbers;

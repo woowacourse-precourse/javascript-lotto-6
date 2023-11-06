@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR, INPUT } from './lib/Prompt.js';
-import { UNIT } from './lib/constant.js';
+import { ERROR, INPUT } from '../lib/Prompt.js';
+import { UNIT } from '../lib/constant.js';
 import View from './View.js';
 import Lotto from './Lotto.js';
 

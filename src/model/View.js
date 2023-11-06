@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { WIN_PROMPT } from './lib/Prompt';
+import { WIN_PROMPT } from '../lib/Prompt.js';
 
 class View {
   async input(prompt) {
