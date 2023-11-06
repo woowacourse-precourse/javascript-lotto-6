@@ -15,23 +15,10 @@ class Lotto {
   static UNIT = 1000;
 
   #validate(numbers) {
-    if (numbers.length !== Lotto.NUMBER_LENTH) {
-      throw new Error(ERROR.lotto.length);
-    }
-
-    numbers.forEach((number) => {
-      if (!(Lotto.NUMBER_MIN <= number && number <= Lotto.NUMBER_MAX)) {
-        throw new Error(ERROR.lotto.numberRange);
-      }
-
-      if (typeof number !== "number" || Number.isNaN(number)) {
-        throw new Error(ERROR.lotto.numeric);
-      }
-    });
-
-    if (new Set(numbers).size !== numbers.length) {
-      throw new Error(ERROR.lotto.duplicate);
-    }
+    this.validLength(numbers);
+    this.validNumberRange(numbers);
+    this.validNumeric(numbers);
+    this.validDuplicates(numbers);
   }
 
   static generateLottoNumber() {
@@ -92,6 +79,34 @@ class Lotto {
 
   getNumbers() {
     return this.#numbers;
+  }
+
+  validLength(numbers) {
+    if (numbers.length !== Lotto.NUMBER_LENTH) {
+      throw new Error(ERROR.lotto.length);
+    }
+  }
+
+  validNumberRange(numbers) {
+    for (const number of numbers) {
+      if (!(Lotto.NUMBER_MIN <= number && number <= Lotto.NUMBER_MAX)) {
+        throw new Error(ERROR.lotto.numberRange);
+      }
+    }
+  }
+
+  validNumeric(numbers) {
+    for (const number of numbers) {
+      if (typeof number !== "number" || Number.isNaN(number)) {
+        throw new Error(ERROR.lotto.numeric);
+      }
+    }
+  }
+
+  validDuplicates(numbers) {
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error(ERROR.lotto.duplicate);
+    }
   }
 }
 
