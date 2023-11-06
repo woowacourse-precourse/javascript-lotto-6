@@ -36,17 +36,21 @@ describe("InputView 객체 테스트", () => {
     });
 
     test("readLottoWinningNumbers메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
+      const winningNumbersInput = "1,2,3,4,5,6";
+      const resolvedPromise = Promise.resolve(winningNumbersInput);
+      Console.readLineAsync.mockReturnValue(resolvedPromise);
       InputView.readLottoWinningNumbers();
       expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.lottoWinningNumbers);
     });
 
     test("readLottoWinningNumbers메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
       const winningNumbersInput = "1,2,3,4,5,6";
+      const winningNumberList = [1, 2, 3, 4, 5, 6];
       const resolvedPromise = Promise.resolve(winningNumbersInput);
       Console.readLineAsync.mockReturnValue(resolvedPromise);
 
       const winningNumbers = await InputView.readLottoWinningNumbers();
-      expect(winningNumbers).toBe(winningNumbersInput);
+      expect(winningNumbers).toEqual(winningNumberList);
     });
   });
 
@@ -62,11 +66,12 @@ describe("InputView 객체 테스트", () => {
 
     test("readBonousNumber메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
       const bonousNumberInput = "7";
+      const NumberedBonousNumber = 7;
       const resolvedPromise = Promise.resolve(bonousNumberInput);
       Console.readLineAsync.mockReturnValue(resolvedPromise);
 
       const bonousNumber = await InputView.readBonousNumber();
-      expect(bonousNumber).toBe(bonousNumberInput);
+      expect(bonousNumber).toBe(NumberedBonousNumber);
     });
   });
 });
