@@ -10,4 +10,8 @@ export class View {
       Console.print(lottoTicket);
     });
   }
+
+  async getLottoWinningNumbes() {
+    return await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+  }
 }

@@ -9,8 +9,12 @@ class App {
   async play() {
     try {
       const lottoAmount = await this.validateLottoAmount();
+
       const lottoTickets = this.getLottoTickets(lottoAmount);
       this.view.printLottoTickets(lottoTickets);
+
+      const lottoWinningNumbers = await this.validateLottoWinningNumbers();
+      Console.print(lottoWinningNumbers);
     } catch (error) {
       throw error;
     }
@@ -23,6 +27,19 @@ class App {
         const model = new Lotto(lottoAmount);
         model.validateLottoAmount();
         return lottoAmount;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
+  async validateLottoWinningNumbers() {
+    while (true) {
+      try {
+        const lottoWinningNumbers = await this.view.getLottoWinningNumbes();
+        const model = new Lotto(lottoWinningNumbers);
+        model.validateLottoWinningNumbers();
+        return lottoWinningNumbers;
       } catch (error) {
         console.error(error);
       }
