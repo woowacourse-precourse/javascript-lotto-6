@@ -1,5 +1,5 @@
-import Lotto from "../model/Lotto";
-import generateLottoNumbers from "./generateLottoNumbers";
+import Lotto from "../model/Lotto.js";
+import generateLottoNumbers from "./generateLottoNumbers.js";
 
 const generateLottos = (neededLotto) => {
     const lottoSet = [];

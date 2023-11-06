@@ -19,7 +19,7 @@ class Lotto {
     this.#numbers.sort();
   }
 
-  #printLotto(){
+  printLotto(){
     Output.outputMessage(this.#numbers);
   }
 }
