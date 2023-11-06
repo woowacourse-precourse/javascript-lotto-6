@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 import Lotto from './Lotto.js';
 import createLottoNumbers from './utils/createLottoNumbers.js';
-import { LOTTO, MATCHING_COUNT, LOTTO_PRIZE } from './constants/lotto.js';
+import { LOTTO, LOTTO_PRIZE } from './constants/lotto.js';
 import Input from './Input.js';
 import Output from './Output.js';
 
@@ -26,7 +26,7 @@ class Game {
     await this.createWinningLotto();
     await this.createBonusNumber();
     const rankCountResult = this.compareLotto(
-      this.getLottos(),
+      this.#lottos,
       this.#winningLotto.getNumbers(),
       this.#bonusNumber,
     );
@@ -63,37 +63,11 @@ class Game {
   compareLotto(purchasedLottos, winningNumbers, bonusNumber) {
     const rankCount = [0, 0, 0, 0, 0];
     purchasedLottos.forEach((lotto) => {
-      const rank = this.getRank(lotto, winningNumbers, bonusNumber);
+      const rank = lotto.getRank(winningNumbers, bonusNumber);
       if (rank !== 0) rankCount[rank - 1] += 1;
     });
 
     return rankCount.reverse();
-  }
-
-  getRank(lottoNumbers, winningNumbers, bonusNumber) {
-    const matchingCount = lottoNumbers.filter((number) =>
-      winningNumbers.includes(number),
-    ).length;
-
-    if (matchingCount === MATCHING_COUNT.first) {
-      return 1;
-    }
-    if (
-      matchingCount === MATCHING_COUNT.second &&
-      lottoNumbers.includes(bonusNumber)
-    ) {
-      return 2;
-    }
-    if (matchingCount === MATCHING_COUNT.third) {
-      return 3;
-    }
-    if (matchingCount === MATCHING_COUNT.fourth) {
-      return 4;
-    }
-    if (matchingCount === MATCHING_COUNT.fifth) {
-      return 5;
-    }
-    return 0;
   }
 
   calculateRate(purchaseAmount, rankCount) {
