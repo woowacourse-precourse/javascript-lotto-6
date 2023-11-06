@@ -1,4 +1,6 @@
-import Validator from '../Controller/modules/Validator.js';
+import ValidationUtils from '../utils/ValidationUtils';
+
+const { checkIsNumber, checkIncludedZero, checkIsDuplicated } = ValidationUtils;
 
 class Lotto {
   #numbers;
@@ -9,7 +11,19 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validator.checkLottoNumberIsValid(numbers);
+    if (numbers.length !== 6) throw new Error('[ERROR]');
+
+    const lottoNumberIsNumber = numbers.filter(
+      (number) => !checkIsNumber(number)
+    );
+
+    if (lottoNumberIsNumber.length !== 0) throw new Error('[ERROR]');
+
+    const lottoNumbersIncludedZero = checkIncludedZero(numbers);
+    if (lottoNumbersIncludedZero) throw new Error('[ERROR]');
+
+    const lottoNumberIsDuplicated = checkIsDuplicated(numbers);
+    if (lottoNumberIsDuplicated) throw new Error('[ERROR]');
   }
 
   getLottoNumbers() {
