@@ -1,4 +1,4 @@
-import { validation } from "./utils/validate.js";
+import { validateBuyPrice } from "./utils/validation.js";
 import { BUY_PRICE_ERROR } from "./constant/ERROR.js";
 
 class BuyPrice {
@@ -12,13 +12,13 @@ class BuyPrice {
   #validate(price) {
     price = Number(price);
 
-    if (validation.isNumber(price)) {
+    if (validateBuyPrice.isNumber(price)) {
       throw new Error(BUY_PRICE_ERROR.isNumber);
     }
-    if (validation.isDivideThousand(price)) {
+    if (validateBuyPrice.isDivideThousand(price)) {
       throw new Error(BUY_PRICE_ERROR.isDivideThousand);
     }
-    if (validation.isBiggerThanThousand(price)) {
+    if (validateBuyPrice.isBiggerThanThousand(price)) {
       throw new Error(BUY_PRICE_ERROR.isBiggerThanThousand);
     }
   }
