@@ -33,6 +33,6 @@ export const validateMoney = (input) => {
   return true;
 };
 
-export const generateRandomNumber = (min, max) => {
-  return Random.pickNumberInRange(min, max);
+export const pickUniqueNumbersInRange = (min, max, count) => {
+  return Random.pickUniqueNumbersInRange(min, max, count);
 };
