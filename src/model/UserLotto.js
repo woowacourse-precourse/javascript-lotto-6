@@ -1,5 +1,5 @@
 import UserLottoNumber from './UserLottoNumber.js';
-import { NUMBER } from '../constants/constants.js'
+import { NUMBER } from '../constants/constants.js';
 
 class UserLotto {
   #purchaseAmount;
@@ -7,12 +7,8 @@ class UserLotto {
   #userLottoNumbers = [];
 
   constructor(purchaseAmount) {
-    try {
-      this.#validate(purchaseAmount);
-      this.#setPurchaseVariable(purchaseAmount);
-    } catch (error) {
-      throw error;
-    }
+    this.#validate(purchaseAmount);
+    this.#setPurchaseVariable(purchaseAmount);
   }
 
   #setPurchaseVariable(purchaseAmount) {

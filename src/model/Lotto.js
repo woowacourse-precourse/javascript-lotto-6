@@ -3,12 +3,8 @@ class Lotto {
   #bonusNumber;
 
   constructor(numbers) {
-    try {
-      this.#validate(numbers);
-      this.#numbers = numbers;
-    } catch (error) {
-      throw error;
-    }
+    this.#validate(numbers);
+    this.#numbers = numbers;
   }
 
   getLottoNumber() {
