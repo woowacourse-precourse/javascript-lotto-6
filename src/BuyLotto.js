@@ -2,6 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 const { Random } = MissionUtils;
 class BuyLotto {
   #lottoCount;
+  #boughtLotto = [];
 
   constructor(lottoCount) {
     this.#validate(lottoCount);
@@ -18,16 +19,20 @@ class BuyLotto {
     return this.#lottoCount;
   }
 
+  get getBoughtLotto() {
+    return this.#boughtLotto;
+  }
+
   buyOneLotto() {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  buyLotto() {
+  buyLottos() {
     const lotto = [];
     for (let i = 0; i < this.getLottoCount; i++) {
       lotto.push(this.buyOneLotto());
     }
-    return lotto;
+    this.#boughtLotto = lotto;
   }
 }
 
