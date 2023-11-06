@@ -9,7 +9,14 @@ class App {
     const count = await inputAmount() / 1000;
     publishLotto(count);
     printLottoNumbers();
-  
+    this.getLotto();
+  }
+
+  getLotto = async() => {
+    const input = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    const inputNumbers = input.split(',').map(Number);
+    const lotto = new Lotto(inputNumbers);
+    return lotto;
   }
 }
 
@@ -57,6 +64,8 @@ const printLottoNumbers = () => {
     Console.print(number);
   })
 }
+
+
 
 const app = new App();
 app.play();
