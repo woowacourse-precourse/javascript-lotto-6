@@ -14,8 +14,6 @@ class Bonus {
     this.checkWords(bonus);
     this.checkRange(Number(bonus));
     this.checkSameNumber(Number(bonus), lotto);
-    // console.log(bonus, lotto);
-    // return this.#number;
   }
 
   checkRange(bonus) {

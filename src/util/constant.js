@@ -18,9 +18,9 @@ export const ERROR = Object.freeze({
 
 export const PRICE = [5000, 50000, 1500000, 30000000, 2000000000];
 
-export const RESULT = Object.freeze({
+export const RESULT = {
   resultMessage: '\n당첨 통계\n---',
   matchCount: countList =>
     `3개 일치 (5,000원) - ${countList[0]}개\n4개 일치 (50,000원) - ${countList[1]}개\n5개 일치 (1,500,000원) - ${countList[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${countList[3]}개\n6개 일치 (2,000,000,000원) - ${countList[4]}개\n`,
   printBenefit: benefit => `총 수익률은 ${benefit}%입니다.`,
-});
+};

@@ -5,7 +5,6 @@ import LottoGenerator from '../model/LottoGenerator.js';
 import Price from '../model/Price.js';
 import Lotto from '../Lotto.js';
 import Bonus from '../model/Bonus.js';
-import { Console } from '@woowacourse/mission-utils';
 
 export default class LottoController {
   #price;
@@ -26,7 +25,7 @@ export default class LottoController {
       new Price(money);
       this.setPriceAndAmount(Number(money));
       OutputView.printLottoAmount(this.#lottoAmount);
-      this.generateLottos();
+      return this.generateLottos();
     } catch (error) {
       OutputView.printError(error);
       this.inputPrice();
@@ -38,24 +37,23 @@ export default class LottoController {
     this.#lottoAmount = this.calculate.countLottoAmounnt(money);
   }
 
-  async generateLottos() {
+  generateLottos() {
     this.#lottoList = LottoGenerator.generateLottoList(this.#lottoAmount);
     OutputView.printLottoList(this.#lottoList);
-    this.inputUserLottoNumber();
+    return this.inputUserLottoNumber();
   }
 
   async inputUserLottoNumber() {
     const userLottoNumber = await InputView.lottoNumberInput();
-    this.#lottoNumberValidate(userLottoNumber);
+    return this.#lottoNumberValidate(userLottoNumber);
   }
 
   #lottoNumberValidate(inputValue) {
     try {
-      // this.#correctNumbers = inputValue.split(',');
       let correctNumbers = inputValue.split(',').map(number => Number(number));
       new Lotto(correctNumbers);
       this.#lotto = correctNumbers;
-      this.inputBonusNumber();
+      return this.inputBonusNumber();
     } catch (error) {
       OutputView.printError(error);
       this.inputUserLottoNumber();
@@ -85,6 +83,6 @@ export default class LottoController {
   }
 
   #printResult() {
-    OutputView.printResult(this.#ranking, this.#benefit);
+    OutputView.printAllResult(this.#ranking, this.#benefit);
   }
 }

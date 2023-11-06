@@ -16,7 +16,7 @@ const OutputView = {
     });
   },
 
-  printResult(rank, benefit) {
+  printAllResult(rank, benefit) {
     Console.print(RESULT.resultMessage);
     Console.print(RESULT.matchCount(rank));
     Console.print(RESULT.printBenefit(benefit));
