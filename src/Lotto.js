@@ -1,3 +1,6 @@
+import Calc from "./lib/Utils/Calc.js";
+import DomainValidator from "./lib/Validator/DomainValidator.js";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,18 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    DomainValidator.winNumbers(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  validateBonusNumber(bonusNumber) {
+    DomainValidator.bonusNumber(this.#numbers, bonusNumber);
+  }
+
+  calcResult(ticketItems, bonusNumber) {
+    const prizeMap = Calc.prizeMap(ticketItems, this.#numbers, bonusNumber);
+    const winRate = Calc.winRate(prizeMap);
+    return { prizeMap, winRate };
+  }
 }
 
 export default Lotto;
