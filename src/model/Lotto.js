@@ -22,6 +22,9 @@ class Lotto {
     }
   }
 
+  getLotto() {
+    return this.#numbers
+  }
 }
 
 export default Lotto;
