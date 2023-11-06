@@ -89,7 +89,7 @@ class App {
     let sum = 0;
     this.resultList.map((result) => (sum += result.price * result.count));
 
-    profitRate = (sum / this.inputPrice) * 100;
+    profitRate = ((sum / this.inputPrice) * 100).toFixed(1);
     Console.print("총 수익률은 " + profitRate + "%입니다.");
   }
 
