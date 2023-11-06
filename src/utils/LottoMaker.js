@@ -103,11 +103,11 @@ class LottoMaker {
 
   calcScore() {
     const score = {
-      '1st': 0,
-      '2nd': 0,
-      '3rd': 0,
-      '4th': 0,
-      '5th': 0,
+      '1ST': 0,
+      '2ND': 0,
+      '3RD': 0,
+      '4TH': 0,
+      '5TH': 0,
     };
     this.#lottos.forEach(lotto => {
       const count = this.getMatchCount(lotto.numbers);
@@ -131,23 +131,18 @@ class LottoMaker {
   }
 
   getPrizePrice(score) {
-    let prizePrice = 0;
-    if (score[STRING_1TH]) {
-      prizePrice += PRICE_1ST * score[STRING_1TH];
-    }
-    if (score[STRING_2ND]) {
-      prizePrice += PRICE_2ND * score[STRING_2ND];
-    }
-    if (score[STRING_3RD]) {
-      prizePrice += PRICE_3RD * score[STRING_3RD];
-    }
-    if (score[STRING_4TH]) {
-      prizePrice += PRICE_4TH * score[STRING_4TH];
-    }
-    if (score[STRING_5TH]) {
-      prizePrice += PRICE_5TH * score[STRING_5TH];
-    }
-    return prizePrice;
+    const prizeArray = [
+      [STRING_1TH, PRICE_1ST],
+      [STRING_2ND, PRICE_2ND],
+      [STRING_3RD, PRICE_3RD],
+      [STRING_4TH, PRICE_4TH],
+      [STRING_5TH, PRICE_5TH],
+    ];
+
+    return prizeArray.reduce(
+      (prev, curr) => prev + curr[1] * score[curr[0]],
+      0,
+    );
   }
 
   calcRate(score) {
