@@ -15,18 +15,24 @@ class View {
     return amount;
   }
 
-  amountValidate(amount) {
-    if (amount % 1000 !== 0) {
-      throw new Error("[ERROR] 구입금액은 1,000원 단위만 가능합니다.");
-    }
-  }
-
   async getLottoWinningNumbers() {
     return await this.readLine("당첨 번호를 입력해 주세요.\n");
   }
 
   async getLottoBonusNumber() {
     return await this.readLine("보너스 번호를 입력해 주세요.\n");
+  }
+
+  amountValidate(amount) {
+    if (amount % 1000 !== 0) {
+      throw new Error("[ERROR] 구입금액은 1,000원 단위만 가능합니다.");
+    }
+  }
+
+  validateNumberRange(number) {
+    if (number < 1 || number > 45) {
+      throw new Error("[ERROR] 로또 번호는 1~45까지만 가능합니다.");
+    }
   }
 
   // Lottos : Lotto 인스턴스 배열
