@@ -24,7 +24,7 @@ class Bonus {
   }
 
   isBonusNumberIncluded(winners, bonus) {
-    return winners.includes(bonus);
+    return winners.includes(Number(bonus));
   }
 }
 
