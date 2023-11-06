@@ -37,12 +37,11 @@ export default class LottoResult {
   }
 
   getFormattedResultString() {
-    const sortOrder = ['3', '4', '5', '5+1', '6'];
+    const sortOrder = [3, 4, 5, '5+1', 6];
     return sortOrder
       .map((match) => {
         const data = this.#result[match];
-        const matchText =
-          GAME_SETTINGS.MATCH_TEXTS[match] || `${match}${GAME_SETTINGS.MATCH_TEXTS.DEFAULT}`;
+        const matchText = GAME_SETTINGS.MATCH_TEXTS[match];
         return `${matchText} (${data.prize.toLocaleString()}원) - ${data.count}개`;
       })
       .join('\n');
