@@ -3,11 +3,13 @@ import Constants from "../constants/Constants.js";
 
 class MyLottos {
     #MY_LOTTO;
-    #COIN
-
+    #COIN;
+    #OUTPUT_STRING;
     constructor(COIN) {
         this.#MY_LOTTO = this.makeLottoArray(COIN);
         this.#COIN = COIN;
+        this.#OUTPUT_STRING = `\n${COIN}개를 구매했습니다.`;
+        this.makeOutputString();
     }
 
     makeLottoArray(LOTTO_NUM) {
@@ -18,12 +20,18 @@ class MyLottos {
         return my_lotto_arr;
     };
 
+    makeOutputString() {
+        this.#MY_LOTTO.forEach(v => {
+            this.#OUTPUT_STRING += `\n[${v.join(', ')}]`
+        });
+    }
+
     getMyLottos() {
         return this.#MY_LOTTO;
     }
 
-    getCoin() {
-        return this.#COIN;
+    getOutputString() {
+        return this.#OUTPUT_STRING;
     }
 }
 

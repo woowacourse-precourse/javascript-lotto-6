@@ -1,13 +1,10 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
 
 const outputView = {
-    PrintMyLotto(NUMBER, LOTTO_ARR) {
-        let StringForOut = `\n${NUMBER}개를 구매했습니다.`;
-        LOTTO_ARR.forEach(v => {
-            StringForOut += `\n[${v.join(', ')}]`
-        });
-        MissionUtils.Console.print(StringForOut);
+    PrintMyLotto(OutputString) {
+        MissionUtils.Console.print(OutputString);
     },
+
     PrintMyScore(RESULT, EARNING) {
         MissionUtils.Console.print(`
 당첨 통계

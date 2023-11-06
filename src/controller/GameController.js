@@ -8,7 +8,7 @@ const gameController = async () => {
     const MONEY = await inputView.INPUT_MONEY();
     const MYLOTTOS = new MyLottos(MONEY);
 
-    outputView.PrintMyLotto(MYLOTTOS.getCoin(), MYLOTTOS.getMyLottos());
+    outputView.PrintMyLotto(MYLOTTOS.getOutputString());
 
     const ANSWER = new Lotto(await inputView.INPUT_ANSWER());
     const BONUS_NUM = await inputView.INPUT_BONUS();
