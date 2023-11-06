@@ -2,9 +2,11 @@ import { Console } from "@woowacourse/mission-utils";
 import LottoValidate from "./LottoValidate.js";
 import GenerateLottoNumbers from "./GenerateLottoNumbers.js";
 import Lotto from "../Lotto.js";
+import IsResult from "./IsResult.js";
+import { LOTTO_MESSAGE } from "./constant.js";
 
 class LottoMain {
-  userLotto;
+  userLotto = []
 
   constructor() {
     this.lottoValidate = new LottoValidate();
@@ -13,6 +15,7 @@ class LottoMain {
   async start() {
     const userCost = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     const money = parseInt(userCost);
+    this.money = money;
     this.lottoValidate.userCostValidate(money);
     this.lottoBuy(money);
   }
@@ -32,7 +35,7 @@ class LottoMain {
 
   async lottoWin() {
     const winningNumber = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
+      LOTTO_MESSAGE.WINNING_NUMBERS
     );
 
     const numbers = winningNumber.split(",").map((number) => {
@@ -48,11 +51,14 @@ class LottoMain {
   async lottoBonus() {
     Console.print("");
     const number = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
+      LOTTO_MESSAGE.BONUS_NUMBERS
     );
     const bonusNumber = parseInt(number);
 
     this.lottoValidate.bonusValidate(bonusNumber, this.winningNumber);
+
+    this.isResult = new IsResult(this.userLotto,this.winningNumber, bonusNumber, this.money);
+    this.isResult.resultTitle()
   }
 }
 
