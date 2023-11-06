@@ -3,6 +3,7 @@ import REGEXP from '../constants/RegExp.js';
 import { BalanceTypeError } from '../error/CustomErrors.js';
 import Lotto from './Lotto.js';
 import SETTINGS from '../constants/Settings.js';
+import Utils from '../utils/Utils.js';
 
 class User {
   #balance;
@@ -31,7 +32,12 @@ class User {
   buyLottos() {
     const amount = Number(this.#balance) / SETTINGS.lottoPrice;
     for (let counter = 0; counter < amount; counter++) {
-      this.#lottos.push(new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)));
+      this.#lottos.push(
+        new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(
+          SETTINGS.minimumLottoRange,
+          SETTINGS.maximumLottoRange,
+          SETTINGS.lottoLength))
+      );
     }
   }
 
@@ -64,7 +70,7 @@ class User {
       + SETTINGS.thirdPrize * this.#prizes['3']
       + SETTINGS.secondPrize * this.#prizes['2']
       + SETTINGS.firstPrize * this.#prizes['1'];
-    const returnRate = (returns / this.#balance * 100).toFixed(SETTINGS.returnRateDecimal);
+    const returnRate = Utils.getReturnRate(returns, this.#balance);
 
     return returnRate;
   }

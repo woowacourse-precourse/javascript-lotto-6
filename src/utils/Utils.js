@@ -1,3 +1,5 @@
+import SETTINGS from '../constants/Settings.js';
+
 class Utils {
   static stringArrayToNumberArray(array) {
     const inputArray = array.split(',');
@@ -19,6 +21,12 @@ class Utils {
     const result = `[${stringArray.join(', ')}]`;
 
     return result;
+  }
+
+  static getReturnRate(returns, balance) {
+    const returnRate = (returns / balance * 100).toFixed(SETTINGS.returnRateDecimal)
+
+    return returnRate
   }
 }
 
