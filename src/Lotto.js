@@ -16,8 +16,25 @@ class Lotto {
     }
   }
 
-  #isWinNumber(winLotto) {
+  getWinNumberCount(lottos, bonusNumber) {
+    let resultCount = [];
 
+    lottos.forEach((lottoNums) => {
+      let count = 0;
+      lottoNums.forEach((el, index) => {
+        if (el === this.#numbers[index]) {
+          count += 1;
+        }
+
+        if (el === bonusNumber) {
+          count += 1;
+        }
+      });
+
+      resultCount.push(count);
+    });
+
+    return resultCount;
   }
 
   static verifyAmount = (money) => {
