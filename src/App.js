@@ -1,10 +1,10 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-import Lotto from './Lotto.js';
+import LottoGame from './LottoGame.js';
 
 class App {
   constructor() {
-    this.lotto = new Lotto([]);
+    this.lotto = new LottoGame();
   }
 
   async play() {
