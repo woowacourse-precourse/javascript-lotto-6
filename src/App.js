@@ -1,25 +1,28 @@
 import { Console } from "@woowacourse/mission-utils";
 import NumberIssuance from "./NumberIssuance.js";
-import ValidateInput from "./ValidateInput.js";
 import LottoGame from "./LottoGame.js";
 import Calculator from "./Calculator.js";
+import UserInput from "./UserInput.js";
 
 class App {
+  /* eslint-disable class-methods-use-this */
   async play() {
-    const amount = await this.getAmount();
+    const amount = await UserInput.getAmount();
     const numberIssuance = new NumberIssuance(amount);
-    const myLotto = numberIssuance.lottoNumbers;
+    await App.displayPurchase(
+      numberIssuance.numberOfTickets,
+      numberIssuance.lottoNumbers,
+    );
 
-    await App.displayPurchase(numberIssuance.numberOfTickets, myLotto);
-
-    const winningNumber = await this.getWinningNumber();
-    const bonusNumber = await this.getBonusNumber(winningNumber);
-
-    const winningLotto = {
+    const winningNumber = await UserInput.getWinningNumber();
+    const bonusNumber = await UserInput.getBonusNumber(winningNumber);
+    App.displayResult(amount, numberIssuance.lottoNumbers, {
       win: winningNumber,
       bonus: bonusNumber,
-    };
+    });
+  }
 
+  static displayResult(amount, myLotto, winningLotto) {
     const lottoGame = new LottoGame(myLotto, winningLotto);
     lottoGame.start();
 
@@ -28,48 +31,6 @@ class App {
 
     const calculator = new Calculator(lottoGame.reward, amount);
     App.displayRevenue(calculator.revenue);
-  }
-
-  async getAmount() {
-    while (true) {
-      try {
-        const input = await Console.readLineAsync("구입금액을 입력해주세요.\n");
-        const amount = Number(input);
-        ValidateInput.validateAmount(amount);
-        return amount;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
-  }
-
-  async getWinningNumber() {
-    while (true) {
-      try {
-        const input =
-          await Console.readLineAsync("당첨 번호를 입력해주세요.\n");
-        const numbers = input.split(",").map((item) => Number(item));
-        ValidateInput.validateWinningNumber(numbers);
-        return numbers;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
-  }
-
-  async getBonusNumber(winningNumber) {
-    while (true) {
-      try {
-        const input = await Console.readLineAsync(
-          "\n보너스 번호를 입력해주세요.\n",
-        );
-        const number = Number(input);
-        ValidateInput.validateBonusNumber(number, winningNumber);
-        return number;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
   }
 
   static displayPurchase(numberOfTickets, lottoNumbers) {
