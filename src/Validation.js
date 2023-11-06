@@ -40,7 +40,7 @@ const Validation = {
   },
 
   isDividedIntoUnitPrice: (cost) => {
-    if (cost % 1000 !== 0 || cost < 1000) {
+    if (cost % 1000 !== 0) {
       throw new Error(
         '[ERROR] 로또 구입 금액은 1,000원 단위로 입력해야 합니다.',
       );
