@@ -1,4 +1,5 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils'
+import { NUMBER } from '../constants/constants.js'
 
 class UserLottoNumber {
   #lottoNumber;
@@ -31,3 +32,5 @@ class UserLottoNumber {
     if (matchingNumbers.length === NUMBER.three) return 'fifth';
   }
 }
+
+export default UserLottoNumber;

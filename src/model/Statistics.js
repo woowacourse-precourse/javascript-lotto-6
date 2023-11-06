@@ -1,3 +1,5 @@
+import { STATISTICS } from '../constants/constants.js';
+
 class Statistics {
   #rateOfReturns;
   #statistics;
@@ -29,3 +31,5 @@ class Statistics {
       totalWinnings / (userLotto.getNumberOfPurchase() * 1000);
   }
 }
+
+export default Statistics

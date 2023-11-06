@@ -1,3 +1,5 @@
+import UserLottoNumber from './UserLottoNumber.js';
+
 class UserLotto {
   #purchaseAmount;
   #numberOfPurchase;
@@ -62,3 +64,5 @@ class UserLotto {
     }
   }
 }
+
+export default UserLotto;
