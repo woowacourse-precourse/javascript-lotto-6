@@ -10,6 +10,7 @@ class App {
     this.gameController.publishLotto();
     await this.gameController.winningLotto();
     await this.gameController.bonusNumber();
+    this.gameController.winningStatistics();
   }
 }
 

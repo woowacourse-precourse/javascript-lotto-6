@@ -1,7 +1,14 @@
 /**
  * 입력, 출력, 에러 등 사용자에게 보여지는 상수 정의
  */
-import { RANDOM_NUMBER } from './numbers.js';
+import {
+  PRICE_1ST,
+  PRICE_2ND,
+  PRICE_3RD,
+  PRICE_4TH,
+  PRICE_5TH,
+  RANDOM_NUMBER,
+} from './numbers.js';
 
 export const INPUT_MESSAGE = Object.freeze({
   price: '구입금액을 입력해 주세요.\n',
@@ -12,6 +19,14 @@ export const INPUT_MESSAGE = Object.freeze({
 export const OUTPUT_MESSAGE = Object.freeze({
   publishCount: count => `${count}개를 구매했습니다.`,
   lotto: lotto => `[${lotto.join(', ')}]`,
+  winningDivisionText: '당첨 통계\n---',
+  prize5th: count => `3개 일치 (${PRICE_5TH.toLocaleString()}원) - ${count}개`,
+  prize4th: count => `4개 일치 (${PRICE_4TH.toLocaleString()}원) - ${count}개`,
+  prize3rd: count => `5개 일치 (${PRICE_3RD.toLocaleString()}원) - ${count}개`,
+  prize2nd: count =>
+    `5개 일치, 보너스 볼 일치 (${PRICE_2ND.toLocaleString()}원) - ${count}개`,
+  prize1st: count => `6개 일치 (${PRICE_1ST.toLocaleString()}원) - ${count}개`,
+  rate: rate => `총 수익률은 ${rate}%입니다.`,
 });
 
 export const ERROR_PRIFIX = '[ERROR] ';

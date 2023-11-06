@@ -33,6 +33,14 @@ class GameController {
     OutputView.printLine();
   }
 
+  winningStatistics() {
+    OutputView.printWinningDivision();
+    const score = this.#lottoMaker.calcScore();
+    OutputView.printScore(score);
+    const rate = this.#lottoMaker.calcRate(score);
+    OutputView.printRate(rate);
+  }
+
   async getLottoPublishCount() {
     const price = await InputView.inputPrice();
     const count = this.#lottoMaker.calcLottoPublishCount(price);
@@ -63,7 +71,7 @@ class GameController {
     const number = await InputView.inputBounusNumber();
     try {
       this.#lottoMaker.validateBonusNumber(Number(number));
-      this.#lottoMaker.bonusNumber = number;
+      this.#lottoMaker.bonusNumber = Number(number);
       return null;
     } catch (e) {
       Console.print(e);
