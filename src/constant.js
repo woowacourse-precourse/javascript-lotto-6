@@ -1,5 +1,11 @@
 export const MIN_PURCHASE_AMOUNT = 1000;
 
+export const LOTTO_PICK = {
+  MIN_NUMBER: 1,
+  MAX_NUMBER: 45,
+  DRAW_UNITS: 6,
+};
+
 export const INPUT_MESSAGE = {
   PURCHASE_AMOUNT : "구입금액을 입력해주세요\n",
   WIN_NUMBER: "당첨 번호를 입력해 주세요.\n",
