@@ -1,6 +1,6 @@
-import { printMessage, readLineAsync } from './utils';
+import { printMessage, readLineAsync } from './utils/message';
 import { MATCH, MESSAGE, PRICE, SETTING } from './constants';
-import LottoShop from './LottoShop';
+import LottoShop from './domain/LottoShop';
 
 class App {
   #lottoShop = new LottoShop();

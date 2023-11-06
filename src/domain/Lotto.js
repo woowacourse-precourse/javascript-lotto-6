@@ -1,4 +1,4 @@
-import { hasSixValues, isUnique } from './utils';
+import { hasSixValues, isUnique } from '../utils/validation';
 class Lotto {
   #numbers;
 

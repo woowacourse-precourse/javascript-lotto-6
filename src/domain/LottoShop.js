@@ -1,17 +1,16 @@
 import Lotto from './Lotto';
-import { PRICE, SETTING } from './constants';
+import { PRICE, SETTING } from '../constants';
+import { generateLottoNumber, calculateNumberMatch, isBonusMatch } from '../utils/calculate';
 import { 
-  generateLottoNumber, 
-  calculateNumberMatch,
-  isDivideMinCost,
-  isBonusMatch,
-  hasSixValues, 
+  isDivideMinCost, 
   isLottoNumberRange, 
   isNaturalNumber, 
   isNumber, 
   isUnique, 
-  isUniqueBonus 
-} from './utils';
+  isUniqueBonus, 
+  hasSixValues 
+} from '../utils/validation';
+
 const { bonus_match, min_match } = SETTING;
 
 class LottoShop {
@@ -63,7 +62,6 @@ class LottoShop {
 
   calculateStat(lottos) {
     const stat = { 3: 0, 4: 0, 5: 0, bonus: 0, 6: 0 };
-  
     lottos.forEach((lotto) => {
       const matchResult = calculateNumberMatch(lotto, this.#prizeNumbers);
       const isMatchedBonus = isBonusMatch(lotto, this.#bonusNumber);
