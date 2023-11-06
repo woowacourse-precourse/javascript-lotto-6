@@ -2,41 +2,38 @@ import Analyzer from '../src/models/Analyzer';
 
 describe('Analyzer 클래스 테스트', () => {
   const winnigResult = [
-    { idx: 0, count: [6, 0], prize: 2000000000 },
-    { idx: 1, count: [5, 1], prize: 30000000 },
-    { idx: 2, count: [5, 0], prize: 150000 },
-    { idx: 3, count: [4, 0], prize: 50000 },
-    { idx: 4, count: [3, 0], prize: 5000 },
-    { idx: 5, count: [2, 0], prize: 0 },
-    { idx: 6, count: [1, 0], prize: 0 },
+    [6, 0],
+    [5, 1],
+    [5, 0],
+    [4, 0],
+    [3, 0],
+    [2, 0],
+    [1, 0],
   ];
+  const prizeMoeny = [2000000000, 30000000, 1500000, 50000, 5000];
+  const totalPrize = prizeMoeny.reduce((sum, cur) => sum + cur, 0);
   const analyzer = new Analyzer();
-  analyzer.getPrize(winnigResult.map((result) => result.count));
+  analyzer.getPrize(winnigResult);
 
-  test.each(winnigResult)('당첨 결과별 상금을 얻는다', (result) => {
-    const lottoStats = analyzer.getPrizeInfo();
-    expect(lottoStats.prizeRank[result.idx]).toBe(result.prize);
+  test('당첨 결과에 따른 상금을 얻는다', () => {
+    const prizeInfo = analyzer.getPrizeInfo();
+    expect(prizeInfo.firstPlace).toBe(1);
+    expect(prizeInfo.secondPlace).toBe(1);
+    expect(prizeInfo.thirdPlace).toBe(1);
+    expect(prizeInfo.fourthPlace).toBe(1);
+    expect(prizeInfo.fifthPlace).toBe(1);
   });
 
   test('총 상금을 계산한다', () => {
     analyzer.calculateTotalPrize();
     const lottoStats = analyzer.getPrizeInfo();
-    const totalPrize = winnigResult.reduce(
-      (sum, result) => sum + result.prize,
-      0,
-    );
-    // console.log(totalPrize);
-    expect(lottoStats.totalPrize).toBe(totalPrize);
+    expect(lottoStats.totalPrizeMoeny).toBe(totalPrize);
   });
 
   test('수익률을 계산한다', () => {
     const money = 10000;
     const prizeYield = analyzer.calculateYield(money);
-    const expectedYield = (
-      (winnigResult.reduce((sum, result) => sum + result.prize, 0) / money) *
-      100
-    ).toFixed(2);
-    // console.log(expectedYield);
+    const expectedYield = ((totalPrize / money) * 100).toFixed(2);
     expect(prizeYield).toBe(expectedYield);
   });
 });
