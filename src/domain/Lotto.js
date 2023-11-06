@@ -34,7 +34,9 @@ class Lotto {
   }
 
   checkBonusMatch(bonusNumber) {
-    return this.#lotto.includes(bonusNumber.get());
+    return this.#lotto.some(
+      (lottoNumber) => lottoNumber.get() === bonusNumber.get(),
+    );
   }
 
   #parseLotto(lotto) {
