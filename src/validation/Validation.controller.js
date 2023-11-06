@@ -17,4 +17,8 @@ export default class ValidationController {
     this.#validationService.isUnique(ticket);
     this.#validationService.isSorted(ticket);
   }
+
+  validateWinningNumbers(ticket) {
+    this.#validationService.hasSixNumbers(ticket);
+  }
 }
