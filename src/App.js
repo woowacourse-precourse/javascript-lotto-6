@@ -4,14 +4,18 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   #orderPrice;
   #orderQuantity;
-  #lottoOrders = [];
-  #winningNumbers = [];
+  #lottoOrder;
+  #winningNumbers;
+  #bonusNumber;
+  #lottoStat;
 
   constructor() {
     this.#orderPrice;
     this.#orderQuantity;
-    this.#lottoOrders = [];
+    this.#lottoOrder = [];
     this.#winningNumbers = [];
+    this.#bonusNumber;
+    this.#lottoStat = [0, 0, 0, 0, 0, 0];
   }
 
   getUserInput = async () => {
@@ -60,7 +64,7 @@ class App {
   printLottoOrder = () => {
     MissionUtils.Console.print(`\n${this.#orderQuantity}개를 구매했습니다.`);
 
-    this.#lottoOrders.forEach((lottoNumbers) => {
+    this.#lottoOrder.forEach((lottoNumbers) => {
       MissionUtils.Console.print(lottoNumbers);
     })
   }
@@ -113,18 +117,35 @@ class App {
     })
   }
 
-  getLottoResult = (lottoOrder) => {
-    let count = 0;
+  calculateLottoRanking = (matchCount, bonusCount) => {
+    if(matchCount == 3) return 5;
+    if(matchCount == 4) return 4;
+    if(matchCount == 5 && bonusCount == 1) return 2;
+    if(matchCount == 5) return 3;
+    if(matchCount == 6) return 1;
 
-    lottoOrder.forEach((lottoNumber) => {
-      if(this.#winningNumbers[lottoNumber]) count++;
-    })
-
-    return count;
+    return 0;
   }
 
+  getLottoRanking = (lottoNumbers) => {
+    let matchCount = 0;
+    let bonusCount = 0;
 
+    lottoNumbers.forEach((lottoNumber) => {
+      if(this.#winningNumbers[lottoNumber]) matchCount++;
+      if(lottoNumber == this.#bonusNumber) bonusCount++;
+    })
 
+    return this.calculateLottoRanking(matchCount, bonusCount);
+  }
+
+  getLottoStat = () => {
+    this.#lottoOrder.forEach((lottoNumbers) => {
+      const rank = this.getLottoRanking(lottoNumbers);
+
+      this.#lottoStat[rank]++;
+    })
+  }
 
   async play() {
     try {
@@ -140,7 +161,7 @@ class App {
       for(let i = 0; i < this.#orderQuantity; i++) {
         const lottoNumbers = this.generateLottoNumbers();
         
-        this.#lottoOrders.push(lottoNumbers);
+        this.#lottoOrder.push(lottoNumbers);
       }
 
       this.printLottoOrder();
@@ -160,9 +181,9 @@ class App {
 
       this.checkBonusNumber(bonusNumber);
       
-      const result = this.getLottoResult(this.#lottoOrders[0]);
+      this.getLottoStat();
 
-      console.log(result);
+      console.log(this.#lottoStat);
 
 
     } catch(err) {
