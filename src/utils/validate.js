@@ -31,3 +31,14 @@ export function checkDuplicate(numbers) {
     throw new Error(EXCEPTION.LOTTO_DUPLICATE);
   }
 }
+
+/**
+ * 보너스 번호와 당첨번호가 중복된지 체크하는 유효성 검사 함수
+ * @param {number[]} numbers
+ * @param {number} bonus
+ */
+export function checkBonusDuplicate(numbers, bonus) {
+  if (numbers.includes(bonus)) {
+    throw new Error(EXCEPTION.BONUS_DUPLICATE);
+  }
+}
