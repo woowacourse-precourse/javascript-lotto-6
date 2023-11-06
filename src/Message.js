@@ -17,3 +17,11 @@ export const ErrorMessage = Object.freeze({
   DUPLICATE_LOTTO_NUMBER: '[ERROR] 중복되지 않는 6개의 숫자로 입력해 주세요.',
   INVALID_LOTTO_LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
 });
+
+export const ResultMessage = Object.freeze({
+  THREE_MATCH_MESSAGE: '3개 일치 (5,000원) - ',
+  FOUR_MATCH_MESSAGE: '4개 일치 (50,000원) - ',
+  FIVE_MATCH_MESSAGE: '5개 일치 (1,500,000원) - ',
+  FIVE_BONUS_MATCH_MESSAGE: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  SIX_MATCH_MESSAGE: '6개 일치 (2,000,000,000원) - ',
+});
