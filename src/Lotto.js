@@ -46,26 +46,36 @@ class Lotto {
   }
 
   static buyLottoTickets(money) {
-    if (money < Lotto.UNIT) {
-      throw new Error(ERROR.purchase.minimunAmount);
-    }
-
-    if (isNaN(money)) {
-      throw new Error(ERROR.purchase.numeric);
-    }
-
-    if (money % Lotto.UNIT !== 0) {
-      throw new Error(ERROR.purchase.amountUnit);
-    }
+    Lotto.validMinimumAmount(money);
+    Lotto.validNumericAmount(money);
+    Lotto.validAmountUnit(money);
 
     const purchaseAmount = money / Lotto.UNIT;
-
     const lottoTickets = [];
+
     for (let i = 0; i < purchaseAmount; i++) {
       lottoTickets.push(Lotto.generateLottoNumber());
     }
 
     return lottoTickets;
+  }
+
+  static validMinimumAmount(money) {
+    if (money < Lotto.UNIT) {
+      throw new Error(ERROR.purchase.minimunAmount);
+    }
+  }
+
+  static validNumericAmount(money) {
+    if (isNaN(money)) {
+      throw new Error(ERROR.purchase.numeric);
+    }
+  }
+
+  static validAmountUnit(money) {
+    if (money % Lotto.UNIT !== 0) {
+      throw new Error(ERROR.purchase.amountUnit);
+    }
   }
 
   static toArray(number) {
