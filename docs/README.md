@@ -128,15 +128,16 @@ a. 예상 필요 메소드
 
 ApplicationTest.js
 LottoTest.js
-+) setBounsTest.js (보너스 숫자 검증)
++) BounsTest.js (보너스 숫자 검증)
 +) setPrizeNumTest.js (당첨 번호 검증)
++) functionTest.js (method 기능 테스트)
 
 npm test를 통한 확인 결과
 
-Test Suites: 4passed, 4 total
-Test: 13passed, 13 total
+Test Suites: 5passed, 5total
+Test: 18passed, 18 total
 Snapshots: 0 total
-Time: 1.423 s, estimated 2 s
+Time: 1.356 s, estimated 2 s
 
 # 2주차 중점적으로 생각한 부분
 
