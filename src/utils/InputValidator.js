@@ -2,10 +2,15 @@ import { ERROR_MESSAGES } from '../constants/ErrorMessages';
 
 export default class InputValidator {
   static validatePurchaseAmount(amount) {
-    if (amount === undefined || amount === null || amount.trim() === '') {
-      throw new Error(ERROR_MESSAGES.EMPTY_AMOUNT);
+    const numericAmount = parseInt(amount, 10);
+
+    if (Number.isNaN(numericAmount)) {
+      throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
     }
-    if (amount % 1000 !== 0) {
+    if (numericAmount <= 0) {
+      throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
+    }
+    if (numericAmount % 1000 !== 0) {
       throw new Error(ERROR_MESSAGES.AMOUNT_NOT_IN_UNITS);
     }
   }
@@ -13,6 +18,7 @@ export default class InputValidator {
   static parseAndValidateNumbers(numbersString) {
     return numbersString.split(',').map((numString) => {
       const number = parseInt(numString.trim(), 10);
+
       if (Number.isNaN(number)) {
         throw new Error(ERROR_MESSAGES.EMPTY_NUMBER);
       }
@@ -36,6 +42,7 @@ export default class InputValidator {
 
   static validateBonusNumber(bonusNumberString, winningNumbersString) {
     const bonusNumber = parseInt(bonusNumberString.trim(), 10);
+
     if (Number.isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
       throw new Error(ERROR_MESSAGES.NUMBER_OUT_OF_RANGE);
     }
