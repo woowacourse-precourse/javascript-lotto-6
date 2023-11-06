@@ -1,7 +1,7 @@
-class LottoDTO {
+class LottoDto {
   static getResponse(lotto) {
     return lotto.map((lottoNumber) => lottoNumber.get());
   }
 }
 
-export default LottoDTO;
+export default LottoDto;
