@@ -1,13 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GAME_MESSAGE } from "../../constants/gameMessage.js";
 import SYMBOLS from "../../constants/symbols.js";
-import BonusInput from "./BonusInput.js";
 import Lotto from "../../controller/Lotto.js";
 
 class WinningInput {
-  constructor() {
-    this.bonusInput = new BonusInput();
-  }
   async userInput() {
     const input = await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`);
     return input.split(SYMBOLS.comma).map((str) => +str);
