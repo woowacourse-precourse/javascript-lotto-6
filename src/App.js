@@ -11,6 +11,9 @@ class App {
       const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       lottoRandomNumbers.push(randomNumber);
     }
+
+    const winningNumbers = await Console.readLineAsync('당첨 번호를 입력해주세요.\n');
+    const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해주세요.\n');
   }
 }
 
