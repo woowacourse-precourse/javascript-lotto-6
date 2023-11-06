@@ -16,18 +16,18 @@ const ValidateController = {
       throw Error(ERROR_MESSAGE.INVALID_RANGE);
   },
 
-  isWinningNumberLength(length) {
-    if (length !== NUMBER.LOTTO_NUMBER_OF_NUMBERS)
+  isWinningNumbersLength(winningNumbers) {
+    if (winningNumbers.length !== NUMBER.LOTTO_NUMBER_OF_NUMBERS)
       throw Error(ERROR_MESSAGE.INVALID_NUMBER_OF_WINNING_NUMBERS);
   },
 
-  isDuplicateWinningNumbers(winngNumberList) {
-    if (winngNumberList.length > new Set(winngNumberList).size)
+  isDuplicateWinningNumbers(winngNumbers) {
+    if (winngNumbers.length > new Set(winngNumbers).size)
       throw Error(ERROR_MESSAGE.INVALID_DUPLICATE_WINNING_NUMBERS);
   },
 
-  isDuplicateBonusNumber(winningNumerList, bonusNumber) {
-    if (winningNumerList.include(bonusNumber))
+  isDuplicateBonusNumber(winningNumers, bonusNumber) {
+    if (winningNumers.include(bonusNumber))
       throw Error(ERROR_MESSAGE.INVALID_DUPLICATE_BONUS_NUMBER);
   },
 };
