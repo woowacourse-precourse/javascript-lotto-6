@@ -27,30 +27,31 @@ class App {
     const randomCount = (userMoney / 1000);
     Console.print(MESSAGE_INPUT(randomCount).COUNT+'\n');
     
-    let userRandomList = []; // 문자열 저장
-    let userRandomListNums = []; // 배열 저장
-    let count = 0;
-    while (1) {
-      let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      randomNums.sort((a, b) => a - b); // 오름차순 정렬
-      let st = String(randomNums)
-      let new_st = ''
-      for (let i=0; i < st.length; i++) {
-        if (st[i] !== ',') {
-          new_st = new_st + st[i]
-        } else {new_st = new_st + st[i] + ' '}
-      }
-      new_st = '[' + new_st + ']'
-      // console.log(new_st)
-      // userRandomList.push(new_st); // 문자열 저장
-      userRandomListNums.push(randomNums); // 숫자 배열 저장
-      Console.print(new_st)
-      count++;
+    const userRandomListNums = this.makeRandomNumbers(randomCount);
+    // let userRandomList = []; // 문자열 저장
+    // let userRandomListNums = []; // 배열 저장
+    // let count = 0;
+    // while (1) {
+    //   let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    //   randomNums.sort((a, b) => a - b); // 오름차순 정렬
+    //   let st = String(randomNums)
+    //   let new_st = ''
+    //   for (let i=0; i < st.length; i++) {
+    //     if (st[i] !== ',') {
+    //       new_st = new_st + st[i]
+    //     } else {new_st = new_st + st[i] + ' '}
+    //   }
+    //   new_st = '[' + new_st + ']'
+    //   // console.log(new_st)
+    //   // userRandomList.push(new_st); // 문자열 저장
+    //   userRandomListNums.push(randomNums); // 숫자 배열 저장
+    //   Console.print(new_st)
+    //   count++;
     
-      if (count === randomCount) {
-        break
-      }
-    }
+    //   if (count === randomCount) {
+    //     break
+    //   }
+    // }
 
     const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
     let winningNumsList;
@@ -159,6 +160,29 @@ class App {
         Console.print(ERROR_MESSAGE.INPUT_USERMONEY_ERROR)
       }
     }
-  }
+  };
+
+  makeRandomNumbers(randomCount) {
+    const userRandomListNums = []; // 배열 저장
+
+    while (userRandomListNums.length < randomCount) {
+      let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      randomNums.sort((a, b) => a - b); // 오름차순 정렬
+      
+      let randomNumsString = String(randomNums);
+      let printedString = '';
+
+      for (let i=0; i < randomNumsString.length; i++) {
+        if (randomNumsString[i] !== ',') {
+          printedString = printedString + randomNumsString[i]
+        } else {printedString = printedString + randomNumsString[i] + ' '}
+      }
+
+      printedString = '[' + printedString + ']'
+      userRandomListNums.push(randomNums); // 숫자 배열 저장
+      Console.print(printedString)
+    }
+    return userRandomListNums;
+  };
 }
 export default App
