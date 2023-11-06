@@ -14,19 +14,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    // const numberStringsArray = [];
+    // 질문: 왜 split 으로 하면 통과가 안됨? 제스트 떄문에 인풋이 스트링으로 안보여서임?
 
-    if (typeof numbers !== "string") {
-      numbers = "[" + numbers.join(", ") + "]";
+    let numbersArray = [];
+    if (typeof numbers === "string") {
+      numbersArray = numbers.split(",").map(Number);
+    } else {
+      numbersArray = numbers;
     }
 
-    // 질문: 왜 split 으로 하면 통과가 안됨? 제스트 떄문에 인풋이 스트링으로 안보여서임?
-    // input type 검사하면      console.log(typeof numbers) string 임.
-    const numberStringsArray = numbers.split(",");
-
-    const numbersArray = numberStringsArray.map((number) => Number(number));
-
     const numbersSet = new Set(numbersArray);
+
     if (numbersArray.length !== numbersSet.size) {
       throw new Error("[ERROR] 로또 번호에서 중복된 숫자를 입력하지 마세요.");
     }
