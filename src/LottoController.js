@@ -28,6 +28,11 @@ class LottoController {
 
   async readMainNumberArray() {
     const mainNumberArray = await InputView.readMainNumber();
+    this.handleMainNumber(mainNumberArray);
+  }
+
+  handleMainNumber(mainNumberArray) {
+    if (!Validator.validateLottoNumbers(mainNumberArray)) return this.readMainNumberArray();
   }
 }
 
