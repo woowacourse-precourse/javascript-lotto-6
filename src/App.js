@@ -28,6 +28,7 @@ class App {
     this.generateWinningNumbers();
     await this.getUserWinningAndBonusNumbers();
     this.getResult();
+    this.getProfit();
     this.printResult();
   }
 
@@ -91,6 +92,17 @@ class App {
     this.#result = result.getResult();
   }
 
+  getProfit() {
+    Object.entries(this.#result).forEach(([count, score]) => {
+      if (score !== 0) {
+        this.#profit = this.profitList[count] * score;
+      }
+    });
+
+    this.#profit =
+      (this.#profit / (this.#lottoCount * NUMBER.DIVISOR)) * NUMBER.PERCENTAGE;
+  }
+
   printResult() {
     const { three, four, five, fiveBonus, six } = this.#result;
 
@@ -100,6 +112,7 @@ class App {
     Console.print(`${RESULT.FIVE} - ${five}개`);
     Console.print(`${RESULT.FIVE_BONUS} - ${fiveBonus}개`);
     Console.print(`${RESULT.SIX} - ${six}개`);
+    Console.print(`총 수익률은 ${this.#profit.toFixed(1)}%입니다.`);
   }
 }
 
