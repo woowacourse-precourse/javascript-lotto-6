@@ -6,6 +6,8 @@ export const ERROR_MSG = {
   DUPLICATE_ERR: '[ERROR] 중복되지 않은 숫자를 입력해주세요.',
 };
 
+export const NUMBER_COUNT = 6;
+
 export const ASK_PRICE = '구매 금액을 입력해주세요.\n';
 
 export const BUY_LOTTO = '개를 구매했습니다.';
