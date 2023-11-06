@@ -3,6 +3,11 @@ import WinningStatistic from './WinningStatistic.js';
 const MESSAGE_WINNING_STATISTICS = '당첨 통계\n---';
 
 class LottoView {
+  static async getUserInput(message) {
+    const userInput = await Console.readLineAsync(message);
+    return userInput;
+  }
+
   static printStatistics(winningStatistics) {
     Console.print(MESSAGE_WINNING_STATISTICS);
     Console.print(
