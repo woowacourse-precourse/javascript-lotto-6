@@ -1,6 +1,8 @@
 import View from "./View.js";
 import Model from "./Model.js";
 
+const MAX_LOTTO_NUMBER_LENGTH = 6;
+
 class App {
   constructor() {
     this.view = new View();
@@ -11,6 +13,26 @@ class App {
       throw new Error("[ERROR] : 숫자로만 입력해주세요!");
     }
   }
+
+  validateDuplicationNumber(Numbers) {
+    const seen = {};
+
+    for (const item of Numbers) {
+      if (seen[item]) {
+        throw new Error("[ERROR] : 중복된 수 없이 입력해주세요");
+      }
+      seen[item] = true;
+    }
+  }
+
+  validateWinningNumber(inputWinningNumber) {
+    for (let i = 0; i < MAX_LOTTO_NUMBER_LENGTH; i++) {
+      if ((inputWinningNumber[i] >= 45) || (inputWinningNumber[i] < 1)) {
+        throw new Error("[ERROR] : 당첨번호는 1~45 사이 수여야 합니다.");
+      }
+    }
+  }
+
   countBuyLottos(cost) {
     if (cost % 1000) {
       this.view.print(`잔돈 ${cost % 1000}원은 반환됩니다!`);
@@ -27,6 +49,8 @@ class App {
 
   async processInputWinningNumber() {
     const winningNumber = await this.view.inputWinningNumber("당첨 번호를 입력해 주세요.\n");
+    this.validateWinningNumber(winningNumber);
+    this.validateDuplicationNumber(winningNumber);
     this.model.setWinningNumber(winningNumber);
   }
 
