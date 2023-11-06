@@ -1,7 +1,7 @@
 /* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { OUTPUT_MESSAGE, RANKS } from "./CONSTANT";
+import { OUTPUT_MESSAGE, RANKS } from "./CONSTANT.js";
 
 const printProfitPercentage = (profitPercentage) => {
   MissionUtils.Console.print(
