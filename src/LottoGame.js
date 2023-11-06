@@ -19,7 +19,7 @@ class LottoGame {
 
   compareLottoResult(winnigNumbers, bonusNumber) {
     const compareLottoMachine = new CompareLottoMachine(winnigNumbers, bonusNumber);
-    const result = this.#user.checkResult(compareLottoMachine);
+    const result = this.#user.compareResult(compareLottoMachine);
 
     return result;
   }
