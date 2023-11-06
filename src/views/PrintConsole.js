@@ -9,11 +9,14 @@ class PrintConsole {
 			const prize = LOTTO_SYSTEM.prize_array[idx].toLocaleString();
 			const userWinningCount = lottoResult.filter((result) => result === idx).length;
 
-			if (winning.hasBonus)
+			if (winning.hasBonus) {
 				this.print(
 					SYSTEM_MESSAGES.number_of_match_bonusball(winningCount, prize, userWinningCount)
 				);
-			else this.print(SYSTEM_MESSAGES.number_of_match(winningCount, prize, userWinningCount));
+				return;
+			}
+
+			this.print(SYSTEM_MESSAGES.number_of_match(winningCount, prize, userWinningCount));
 		});
 	}
 
