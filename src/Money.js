@@ -1,6 +1,5 @@
-import { INPUT, ERROR } from './constants/messages.js';
 import { ZERO, THOUSAND } from './constants/data.js';
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { ERROR } from './constants/messages.js';
 
 class Money {
   #price;
@@ -8,10 +7,6 @@ class Money {
   constructor(price) {
     this.#validate(price);
     this.#price = price;
-  }
-
-  getPrice() {
-    return Number(this.#price);    
   }
 
   #validate(price) {
@@ -22,6 +17,10 @@ class Money {
     if ((Number(price) % THOUSAND) !== ZERO) {
       throw new Error(ERROR.not_a_thousand_unit);
     }
+  }
+
+  getPrice() {
+    return Number(this.#price);    
   }
 }
 
