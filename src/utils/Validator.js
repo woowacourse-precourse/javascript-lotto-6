@@ -12,6 +12,9 @@ const Validator = {
   missingValue: value => {
     if (!value) throw new Error(ERROR.message.missingValue);
   },
+  negativeNumber: purchaseAmount => {
+    if (purchaseAmount < 0) throw new Error(ERROR.message.negativeNumber);
+  },
 };
 
 export default Validator;
