@@ -38,6 +38,17 @@ class LottoResult {
       ...this.#matchCount,
     };
   }
+
+  #calcPrizeMoney() {
+    Object.entries(this.#matchCount).forEach(([key, value]) => {
+      this.#prizeMoney += GAME_REWARD[key] * value;
+    });
+  }
+
+  getPrizeMoney() {
+    this.#calcPrizeMoney();
+    return this.#prizeMoney;
+  }
 }
 
 export default LottoResult;
