@@ -36,23 +36,27 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.\n');
     }
 
+    this.validateNumberCheck(numbers);
+
     const checkNumberSet = new Set(numbers);
     if (numbers.length !== checkNumberSet.size)
-      throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
-
-    this.validateNumberCheck(numbers);
+      throw new Error('[ERROR] 로또 번호를 중복으로 입력할 수 없습니다.\n');
 
     return this.#numbers;
   }
 
   validateNumberCheck(numbers) {
     this.#numbers = numbers.map(num => {
-      if (Number.isNaN(+num) || +num < 1 || +num > 45) {
-        throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
+      if (Number.isNaN(+num) || !Number.isInteger(+num)) {
+        throw new Error(
+          '[ERROR] 로또 번호 입력이 잘못되었습니다. 숫자를 정확히 입력해주세요.\n',
+        );
       }
 
-      if (!Number.isInteger(+num)) {
-        throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
+      if (+num < 1 || +num > 45) {
+        throw new Error(
+          '[ERROR] 로또 번호 입력이 잘못되었습니다. 1과 45 사이의 숫자를 입력해주세요.\n',
+        );
       }
 
       return +num;
