@@ -43,14 +43,14 @@ describe('LottoMachine constructor validation', () => {
 describe('LottoMachine.purchase', () => {
   const randomNumberGenerator = new RandomNumberGenerator();
   const lottoMachine = new LottoMachine(
-    LOTTO.SELLING_PRISE,
+    LOTTO.SELLING_PRICE,
     randomNumberGenerator,
   );
 
   test('(n * 1000)원을 넣었을때 n개의 로또를 반환해야 한다.', () => {
     // given
     const money = 10000;
-    const expectedLottoCount = money / LOTTO.SELLING_PRISE;
+    const expectedLottoCount = money / LOTTO.SELLING_PRICE;
 
     // when
     const lottoList = lottoMachine.purchase(money);

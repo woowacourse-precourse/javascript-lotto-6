@@ -6,17 +6,17 @@ import Lotto from '../Lotto.js';
 import RandomNumberGenerator from '../utils/RandomNumberGenerator';
 
 export default class LottoMachine {
-  #sellingPrise;
+  #sellingPrice;
   #randomNumberGenerator;
 
   constructor(
-    sellingPrice = LOTTO.SELLING_PRISE,
+    sellingPrice = LOTTO.SELLING_PRICE,
     randomNumberGenerator,
     _0 = paramType(sellingPrice, 'number'),
     _1 = paramType(randomNumberGenerator, RandomNumberGenerator),
   ) {
     this.#validateSellingPrice(sellingPrice);
-    this.#sellingPrise = sellingPrice;
+    this.#sellingPrice = sellingPrice;
     this.#randomNumberGenerator = randomNumberGenerator;
   }
 
@@ -29,7 +29,7 @@ export default class LottoMachine {
   }
 
   #calculateCreateLottoCount(money, _ = paramType(money, 'number')) {
-    return money / this.#sellingPrise;
+    return money / this.#sellingPrice;
   }
 
   #createLottoList(purchaseCount, _ = paramType(purchaseCount, 'number')) {
@@ -46,18 +46,18 @@ export default class LottoMachine {
 
   #validateSellingPrice(sellingPrice, _ = paramType(sellingPrice, 'number')) {
     if (Number.isNaN(sellingPrice)) {
-      throw new GameError(ERROR_MESSAGE.INVALID_SELLING_PRISE);
+      throw new GameError(ERROR_MESSAGE.INVALID_SELLING_PRICE);
     }
   }
 
   #validateUserInputMoney(money, _ = paramType(money, 'number')) {
-    if (money < LOTTO.SELLING_PRISE) {
+    if (money < LOTTO.SELLING_PRICE) {
       throw new GameError(
-        ERROR_MESSAGE.RECEIVE_LESS_THAN_MINIMUM_PURCHASE_PRISE,
+        ERROR_MESSAGE.RECEIVE_LESS_THAN_MINIMUM_PURCHASE_PRICE,
       );
     }
     if (!Number.isInteger(this.#calculateCreateLottoCount(money))) {
-      throw new GameError(ERROR_MESSAGE.INVALID_PURCHASE_PRISE_CURRENCY);
+      throw new GameError(ERROR_MESSAGE.INVALID_PURCHASE_PRICE_CURRENCY);
     }
   }
 }
