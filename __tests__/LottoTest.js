@@ -18,6 +18,7 @@ describe("로또 클래스 테스트", () => {
 
     // 아래에 추가 테스트 작성 가능
 
+
     test("결과를 배열 값으로 출력", () => {
         const MY_LOTTOS = [
             [1, 2, 3, 4, 5, 6],
@@ -50,4 +51,13 @@ describe("로또 클래스 테스트", () => {
 
         expect(MY_ANSWER.getEarning()).toStrictEqual(EARNING);
     });
+
+    test("원하는 갯수만큼의 로또 생성", () => {
+        const COIN = 8;
+        const LOTTOS = new MyLottos(COIN);
+
+        expect(LOTTOS.getMyLottos().length).toStrictEqual(COIN);
+    });
+
+
 });
