@@ -34,17 +34,20 @@ class InputAndOutput{
         // const PURCHASE_LOTTO_NUMBER = this.lottoPlay.autoLottoGenerator(amount);
         Console.print(`${amount}${MESSAGE.NUMBER_OF_PURCHASE}`);
         number.forEach(e => {
-           Console.print(e); 
+           Console.print(`[${e.join(', ')}]`);
+        //    Console.print(JSON.stringify(e));
         });
         Console.print('');
     }
-    gameResultOutput(win, bonus){
+    gameResultOutput(result, ratio){
+        const RANK = Object.values(MESSAGE.RANK);
         Console.print(MESSAGE.WIN_STATISTICS);
         Console.print(MESSAGE.DIVIDE_LINE);
-        for(const key in MESSAGE.RANK) {
-            Console.print(`${MESSAGE.RANK[key]}${MESSAGE.UNIT}`);
+        
+        for(let i = 0; i < RANK.length; i++){
+            Console.print(`${RANK[i]}${result[i]}${MESSAGE.UNIT}`);
         }
-        Console.print(`${MESSAGE.TOTAL_RETURN.FRONT}${MESSAGE.TOTAL_RETURN.BACK}`);
+        Console.print(`${MESSAGE.TOTAL_RETURN.FRONT} ${ratio}${MESSAGE.TOTAL_RETURN.BACK}`);
     }
 }
 export default InputAndOutput;
