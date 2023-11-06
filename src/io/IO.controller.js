@@ -23,4 +23,8 @@ export default class IOController {
   printTicketCount(tickets) {
     this.#OutputService.printTicketCount(`\n${tickets}` + TICKET_COUNT_MESSAGE);
   }
+
+  printTickets(tickets) {
+    this.#OutputService.printTickets(tickets);
+  }
 }
