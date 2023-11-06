@@ -47,8 +47,8 @@ describe("method test : compareBonusNumber()" , () => {
     const randomNumbers = [2,4,6,8,12,14];
     const bonusNumber  = 7;
     const lotto = new Lotto(randomNumbers);
-    const equalNumber = lotto.compareBonusNumber(randomNumbers, bonusNumber);
-    expect(equalNumber).toBe(false);
+    const equal = lotto.compareBonusNumber(randomNumbers, bonusNumber);
+    expect(equal).toBe(false);
   });
 });
 
@@ -57,8 +57,8 @@ describe("method test : compareBonusNumber()" , () => {
     const randomNumbers = [2,4,6,8,12,14];
     const bonusNumber  = 8;
     const lotto = new Lotto(randomNumbers);
-    const equalNumber = lotto.compareBonusNumber(randomNumbers, bonusNumber);
-    expect(equalNumber).toBe(true);
+    const equal = lotto.compareBonusNumber(randomNumbers, bonusNumber);
+    expect(equal).toBe(true);
   });
 });
 
