@@ -55,7 +55,7 @@ class NumOfBuy {
   #validateMoneyUnit(inputMoney) {
     const MONEY_UNIT = 1000;
     if (inputMoney % MONEY_UNIT !== 0) {
-      Console.print('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
+      Console.print('[ERROR] 구입금액은 천원 단위로 입력 가능합니다.');
       // throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
       return true;
     }
@@ -64,7 +64,7 @@ class NumOfBuy {
   // 입력값은 0보다 커야 함.
   #checkNotZero(inputMoney) {
     if (inputMoney <= 0) {
-      Console.print('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
+      Console.print('[ERROR] 구입금액은 0보다 커야 합니다.');
       // throw new Error(`[ERROR] 구입금액은 0보다 커야합니다.`);
       return true;
     }
