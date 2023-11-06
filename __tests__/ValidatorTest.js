@@ -10,6 +10,8 @@ const invalidMainNumbers = [
   [1, 2, 3, 4, 5, 6, 7],
 ];
 const validMainNumbers = [[1, 2, 3, 4, 5, 6]];
+const invalidBonusNumbers = [0, -1, 1.1, 46, '7,8', 6];
+const validBonusNumbers = [7];
 
 describe('유효성 검사 기능 테스트', () => {
   test.each([
@@ -23,5 +25,13 @@ describe('유효성 검사 기능 테스트', () => {
     [validMainNumbers, Validator.validateLottoNumbers, true],
   ])('로또 당첨 번호에 대한 유효성 검사 테스트', (mainNumbers, validation, result) => {
     mainNumbers.forEach((mainNumber) => expect(validation(mainNumber)).toEqual(result));
+  });
+  test.each([
+    [invalidBonusNumbers, ...validMainNumbers, Validator.validateBonusNumber, false],
+    [validBonusNumbers, ...validMainNumbers, Validator.validateBonusNumber, true],
+  ])('보너스 번호에 대한 유효성 검사 테스트', (bonusNumbers, mainNumbers, validation, result) => {
+    bonusNumbers.forEach((bonusNumber) =>
+      expect(validation(mainNumbers, bonusNumber)).toEqual(result),
+    );
   });
 });
