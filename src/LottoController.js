@@ -8,6 +8,7 @@ class LottoController {
 
   async play() {
     await this.readPurchaseAmount();
+    await this.readMainNumber();
   }
 
   async readPurchaseAmount() {
@@ -26,13 +27,13 @@ class LottoController {
     OutputView.printLottoString(this.#user);
   }
 
-  async readMainNumberArray() {
+  async readMainNumber() {
     const mainNumberArray = await InputView.readMainNumber();
     this.handleMainNumber(mainNumberArray);
   }
 
   handleMainNumber(mainNumberArray) {
-    if (!Validator.validateLottoNumbers(mainNumberArray)) return this.readMainNumberArray();
+    if (!Validator.validateLottoNumbers(mainNumberArray)) return this.readMainNumber();
   }
 }
 
