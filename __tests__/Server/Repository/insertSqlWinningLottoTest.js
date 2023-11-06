@@ -1,5 +1,6 @@
 import insertSqlWinningLotto from '../../../src/Server/Spring/Annotation/@Repository/insertSqlWinningLotto.js';
-import selectSqlWinningLotto from '../../../src/Server/Spring/Annotation/@Repository/selectSqlWinningLotto.js';
+import database from '../../../src/Server/DB/database.js';
+import CONSTANTS from '../../../src/Util/Constants.js';
 
 describe('insertSqlWinningLotto 테스트', () => {
   test('insertSqlWinningLotto를 실행하면 DB에 winningLotto가 저장되어야 한다.', () => {
@@ -10,6 +11,6 @@ describe('insertSqlWinningLotto 테스트', () => {
     insertSqlWinningLotto(winningLotto);
 
     // then
-    expect(selectSqlWinningLotto()).toEqual(winningLotto);
+    expect(database.get(CONSTANTS.winningLottoColumnName)).toEqual(winningLotto);
   });
 });
