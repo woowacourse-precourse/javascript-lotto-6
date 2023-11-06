@@ -22,11 +22,11 @@ function getMatchCount(lottoNumbers, winningNumbers, bonus) {
     if (winningNumbers.includes(number)) {
       match += MATCH.UNIT;
     }
-
-    if (match === MATCH.FIVE && lottoNumbers.includes(bonus)) {
-      return MATCH.SECOND_REWARD_CONDITION;
-    }
   });
+
+  if (match === MATCH.FIVE && lottoNumbers.includes(bonus)) {
+    return MATCH.SECOND_REWARD_CONDITION;
+  }
 
   return match;
 }
