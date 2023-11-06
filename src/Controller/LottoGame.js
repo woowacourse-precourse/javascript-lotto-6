@@ -6,28 +6,38 @@ import Lottos from "../Lottos.js";
 import Winning from "../WinningNumbers.js";
 
 class LottoGame {
-  async start() {
-    const purchaseAmount = await InputView.requestPurchaseAmount();
-    const numberOfPurchase = purchaseAmount / 1000;
+  lottos = new Lottos();
+  purchaseAmount;
 
-    OutputView.displayNumberOfPurchase(purchaseAmount);
+  async playGame() {
+    await this.buyLotto();
+    await this.inputWinningNumbers();
+  }
 
-    const lottos = new Lottos();
+  async buyLotto() {
+    this.purchaseAmount = await InputView.requestPurchaseAmount();
+    const numberOfPurchase = this.purchaseAmount / 1000;
+
+    OutputView.displayNumberOfPurchase(this.purchaseAmount);
 
     for (let i = 0; i < numberOfPurchase; i++){
       const lotto = new Lotto(this.makeLottoNumbers());
-      lottos.addLotto(lotto.getNumbers());
+      this.lottos.addLotto(lotto.getNumbers());
       OutputView.displayLotto(lotto.getNumbers());
     }
+  }
 
+  async inputWinningNumbers() {
     const winningNumbers = await InputView.requestWinningNumbers();
-
     const bonusNumber = await InputView.requestBonusNumber(winningNumbers);
 
-    const winning = new Winning(winningNumbers, bonusNumber, lottos);
+    const winning = new Winning(winningNumbers, bonusNumber, this.lottos);
     winning.compareLottoNumbers();
+
     OutputView.displayWinningDetails(winning.getRank());
-    const rateOfReturn = winning.calculateRateOfReturn(purchaseAmount);
+
+    const rateOfReturn = winning.calculateRateOfReturn(this.purchaseAmount);
+
     OutputView.displayRateOfReturn(rateOfReturn);
   }
 
