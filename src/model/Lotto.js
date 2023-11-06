@@ -57,7 +57,7 @@ class Lotto {
   }
 
   existBonusNumber(bonusNumber) {
-    if (this.#numbers.some((number) => number === parseInt(bonusNumber, 10))) {
+    if (this.#numbers.includes(parseInt(bonusNumber, 10))) {
       return true;
     }
     return false;

@@ -22,7 +22,7 @@ const winningNumbersCheck = (numbers) => {
 };
 // 중복검사 + 양의 정수 검사
 const invalidInputNumbers = (numbers) => {
-  if (!winningNumbersCheck(numbers) && winningNumbersSameCheck(numbers)) {
+  if (winningNumbersCheck(numbers) && winningNumbersSameCheck(numbers)) {
     return true;
   }
   return false;
