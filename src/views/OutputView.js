@@ -11,7 +11,7 @@ const OutputView = {
 
   printPurchasedLotto(purchasedLotto) {
     const lottos = purchasedLotto.map((lotto) => `[${lotto.join(', ')}]`).join('\n');
-    return Console.print(lottos);
+    return Console.print(`${lottos}\n`);
   },
 };
 
