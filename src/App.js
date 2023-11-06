@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 /* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable class-methods-use-this */
@@ -12,6 +13,7 @@ import {
   validatePurchase,
   validateWinningNumber,
 } from "./utils/validation.js";
+import Lotto from "./Lotto.js";
 
 class App {
   #purchaseAmount;
@@ -41,7 +43,7 @@ class App {
 
   createLottoTickets() {
     for (let i = 0; i < this.#ticketCount; i += 1) {
-      this.#tickets.push(this.createTicket());
+      this.#tickets.push(new Lotto(this.createTicket()));
     }
   }
 
@@ -53,9 +55,9 @@ class App {
     MissionUtils.Console.print(
       this.#ticketCount + OUTPUT_MESSAGE.purchaseResult,
     );
-    MissionUtils.Console.print(OUTPUT_MESSAGE.divide);
+    // MissionUtils.Console.print(OUTPUT_MESSAGE.divide);
     this.#tickets.forEach((ticket) =>
-      MissionUtils.Console.print(ticket.sort((a, b) => a - b)),
+      MissionUtils.Console.print(`[${ticket.numbers.join(", ")}]`),
     );
   }
 
@@ -71,7 +73,9 @@ class App {
     );
     validateWinningNumber(input);
 
-    this.#winningNumbers = input.split(",");
+    this.#winningNumbers = input
+      .split(",")
+      .map((number) => parseInt(number, 10));
   }
 
   async inputBonusNumber() {
@@ -81,7 +85,7 @@ class App {
 
     validateBonusNumber(this.#winningNumbers, input);
 
-    this.#bonusNumber = input;
+    this.#bonusNumber = parseInt(input, 10);
   }
 
   async makeWinningNumber() {
