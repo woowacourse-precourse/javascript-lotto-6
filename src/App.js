@@ -3,27 +3,77 @@ import Input from "./Input";
 import Lotto from "./Lotto";
 
 class App {
-  async play() {
-    const userInput = new Input();
-    userInput.read;
+  constructor() {
+    this.userInput = new Input();
   }
 
-  static getRandomSixNumbers() {
+  async play() {
+    this.userInput.money = await this.handleMoney();
+    this.Lottos = this.getLottoWithMoney(this.userInput.money);
+    this.userInput.lottoNumbers = await this.handleLottoNumbers();
+    this.userInput.bonusNumber = await this.handleBonusNumber();
+
+    const LOTTO_RANKS = this.calculLottoResult({
+      lottos: this.Lottos,
+      winNumbers: this.userInput.lottoNumbers,
+      bonusNumber: this.userInput.bonusNumber,
+    });
+    this.printLottoResult(LOTTO_RANKS);
+    this.printRateOfIncome(LOTTO_RANKS, this.userInput.money);
+  }
+
+  async handleMoney() {
+    let money;
+    try {
+      money = await this.userInput.readMoneyBuyingLotto();
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      money = await this.handleMoney();
+    }
+    return money;
+  }
+
+  async handleLottoNumbers() {
+    let lottoNumbers;
+    try {
+      lottoNumbers = await this.userInput.readLottoNumbers();
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      lottoNumbers = await this.handleLottoNumbers();
+    }
+    return lottoNumbers;
+  }
+
+  async handleBonusNumber() {
+    let bonusNumber;
+    try {
+      bonusNumber = await this.userInput.readBonusNumber();
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      bonusNumber = await this.handleBonusNumber();
+    }
+    return bonusNumber;
+  }
+
+  getRandomSixNumbers() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
       (a, b) => a - b
     );
   }
 
-  static getLottoWithMoney(money) {
+  getLottoWithMoney(money) {
     const LOTTO_PIRCE = 1000;
     const NUMBER_OF_LOTTO = Math.floor(money / LOTTO_PIRCE);
-    return Array.from(
-      { length: NUMBER_OF_LOTTO },
-      () => new Lotto(this.getRandomSixNumbers())
-    );
+    MissionUtils.Console.print(`${NUMBER_OF_LOTTO}개를 구매했습니다.`);
+
+    return Array.from({ length: NUMBER_OF_LOTTO }, () => {
+      const RANDOM_NUMBERS = this.getRandomSixNumbers();
+      MissionUtils.Console.print(`[${RANDOM_NUMBERS.join(", ")}]`);
+      return new Lotto(RANDOM_NUMBERS);
+    });
   }
 
-  static calculLottoResult({ lottos, winNumbers, bonusNumber }) {
+  calculLottoResult({ lottos, winNumbers, bonusNumber }) {
     const LOTTO_RANKS = Array.from({ length: 5 }, () => 0);
     lottos.forEach((lotto) => {
       const RANK = lotto.getLottoResult({ winNumbers, bonusNumber });
@@ -32,7 +82,8 @@ class App {
     return LOTTO_RANKS;
   }
 
-  static printLottoResult(lottoRanks) {
+  printLottoResult(lottoRanks) {
+    MissionUtils.Console.print(`당첨 통계\n---`);
     const PRINT_STRING = `3개 일치 (5,000원) - ${lottoRanks[4]}개
 4개 일치 (50,000원) - ${lottoRanks[3]}개
 5개 일치 (1,500,000원) - ${lottoRanks[2]}개
@@ -41,16 +92,14 @@ class App {
     MissionUtils.Console.print(PRINT_STRING);
   }
 
-  static printRateOfIncome(lottoRanks, amountOfMoney) {
+  printRateOfIncome(lottoRanks, amountOfMoney) {
     const RANK_MONEY = [2000000000, 30000000, 1500000, 50000, 5000];
     let income = 0;
     lottoRanks.forEach((number, rank) => {
       income += number * RANK_MONEY[rank];
     });
     MissionUtils.Console.print(
-      `총 수익률은 ${
-        Math.round((income / amountOfMoney) * 10000) / 100
-      }%입니다.`
+      `총 수익률은 ${Math.round((income / amountOfMoney) * 1000) / 10}%입니다.`
     );
   }
 }
