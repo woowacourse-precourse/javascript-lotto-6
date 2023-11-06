@@ -16,7 +16,7 @@ class LottoGame {
       "6개 일치 (2,000,000,000원)": 0,
       None: 0,
     };
-    this.statistics = "\n당첨 통계\n---";
+    this.statistics = "";
     this.reward = 0;
   }
 
