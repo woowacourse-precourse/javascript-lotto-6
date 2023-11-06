@@ -1,41 +1,43 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import  Lotto  from './Lotto.js';
+import Lotto from './Lotto.js';
 import ERROR from './error.js';
 
 
 class App {
+
+  constructor() {
+    this.userMoneyInput;
+  }
   async play() {
-    this.gameSetting();
-
-  }
-  
-  async gameSetting(){
-    await this.settingUserInput();
+    // 사용자의 입력 받기
+    await this.userInput();
+    console.log(this.userMoneyInput);
   }
 
-  async settingUserInput(){
+  async userInput() {
     let userInput;
     let isValidInput = false;
 
     while (!isValidInput) {
-      userInput = await this.getUserInput();
+      userInput = await this.getUserMoney();
 
       try {
-        this.checkInput(userInput);
+        this.checkUserMoney(userInput);
         isValidInput = true;
       } catch (error) {
-        console.error("1000원 단위로 입력해 주세요");
+        // 에러 메시지 출력 및 다시 입력 받기
+        console.error(error.message);
       }
     }
+    this.userMoneyInput = Number(userInput);
   }
 
-  async getUserInput() {
-    const userInput = await Console.readLineAsync("구입금액을 입력해 주세요");
-    return userInput;
+  async getUserMoney() {
+    return await Console.readLineAsync("구입금액을 입력해 주세요");
   }
 
-  checkInput(userInput){
-    if (userInput % 1000 !== 0){
+  checkUserMoney(userInput) {
+    if (userInput % 1000 !== 0) {
       throw new Error(ERROR.INVALID_INPUT);
     }
   }
