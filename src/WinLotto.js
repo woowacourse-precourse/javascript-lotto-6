@@ -26,10 +26,11 @@ class WinLotto {
         this.winningNumbers.includes(num)
       ).length;
       let bonusMatch = ticket.includes(this.bonusNumber) ? 1 : 0;
-
-      if (matchCount === 5 && bonusMatch === 1) {
+      const distinguishBonusBall = matchCount === 5 && bonusMatch === 1;
+      if (distinguishBonusBall) {
         winningResults.push("5+1");
-      } else {
+      }
+      if (!distinguishBonusBall) {
         winningResults.push(matchCount);
       }
     });
