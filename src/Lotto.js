@@ -1,4 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Lotto {
   #numbers;
@@ -14,31 +14,41 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const numberStringsArray = numbers.split(',');
+    // const numberStringsArray = [];
+
+    if (typeof numbers !== "string") {
+      numbers = "[" + numbers.join(", ") + "]";
+    }
+
+    // 질문: 왜 split 으로 하면 통과가 안됨? 제스트 떄문에 인풋이 스트링으로 안보여서임?
+    // input type 검사하면      console.log(typeof numbers) string 임.
+    const numberStringsArray = numbers.split(",");
+
     const numbersArray = numberStringsArray.map((number) => Number(number));
 
     const numbersSet = new Set(numbersArray);
     if (numbersArray.length !== numbersSet.size) {
-      throw new Error('[ERROR] 로또 번호에서 중복된 숫자를 입력하지 마세요.');
+      throw new Error("[ERROR] 로또 번호에서 중복된 숫자를 입력하지 마세요.");
     }
+
     if (numbersArray.length !== 6) {
-      console.log('lengthproblem');
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
     numbersArray.forEach((number) => {
       if (number < 0 || number > 45 || Number.isInteger(number) === false) {
-        throw new Error('[ERROR] 로또 번호는 0 이상 정수여야합니다.');
+        throw new Error("[ERROR] 로또 번호는 0 이상 정수여야합니다.");
       }
     });
   }
 
   #bonusNumberValidate(bonusNumber) {
     if (
-      bonusNumber < 0 ||
-      bonusNumber > 45 ||
+      Number(bonusNumber) == "NaN" ||
+      Number(bonusNumber) < 0 ||
+      Number(bonusNumber) > 45 ||
       Number.isInteger(Number(bonusNumber)) === false
     ) {
-      throw new Error('[ERROR] 로또 번호는 0 이상 45이하  정수여야합니다.');
+      throw new Error("[ERROR] 로또 번호는 0 이상 45이하  정수여야합니다.");
     }
   }
 
