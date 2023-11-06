@@ -29,13 +29,18 @@ describe("App.js 유닛 테스트", () => {
     const result = await app.buyLotto(COUNT);
     expect(result).toHaveLength(COUNT);
   });
-  test.each(["1,2,3,4,5", "1,2,3,4,5,", "1,2,3,4,5,6,7", "0,1,2,3,4,5,6", "1,2,3,4,5,46", "*,1,2,3,4,5","1,1,2,3,4,5"])(
-    "당첨 번호가 올바르지 않으면 false를 리턴한다.",
-    async (inputs) => {
-      const result = await app.checkWinningNum(inputs);
-      expect(result).toBe(false);
-    }
-  );
+  test.each([
+    "1,2,3,4,5",
+    "1,2,3,4,5,",
+    "1,2,3,4,5,6,7",
+    "0,1,2,3,4,5,6",
+    "1,2,3,4,5,46",
+    "*,1,2,3,4,5",
+    "1,1,2,3,4,5",
+  ])("당첨 번호가 올바르지 않으면 false를 리턴한다.", async (inputs) => {
+    const result = await app.checkWinningNum(inputs);
+    expect(result).toBe(false);
+  });
   test.each(["1,2,3,4,5,6", "40,41,42,43,44,45"])(
     "당첨 번호가 올바르다.",
     async (inputs) => {
@@ -46,15 +51,29 @@ describe("App.js 유닛 테스트", () => {
   test.each(["1,2", "46", "", "0", "1", "*"])(
     "보너스 번호가 올바르지 않으면 false를 리턴한다.",
     async (inputs) => {
-      const result = await app.checkBonusNum([1,2,3,4,5,6],inputs);
+      const result = await app.checkBonusNum([1, 2, 3, 4, 5, 6], inputs);
       expect(result).toBe(false);
     }
   );
-  test.each(["7", "45"])(
-    "당첨 번호가 올바르다.",
-    async (inputs) => {
-      const result = await app.checkBonusNum([1,2,3,4,5,6],inputs);
-      expect(result).toBe(true);
-    }
-  );
+  test.each(["7", "45"])("보너스 번호가 올바르다.", async (inputs) => {
+    const result = await app.checkBonusNum([1, 2, 3, 4, 5, 6], inputs);
+    expect(result).toBe(true);
+  });
+  test("calculateResult 실행 결과가 올바른가", async () => {
+    const lottoList = [
+      new Lotto([1, 2, 3, 8, 9, 10]),
+      new Lotto([1, 2, 3, 4, 7, 8]),
+      new Lotto([1, 2, 3, 4, 5, 9]),
+      new Lotto([1, 2, 3, 4, 5, 7]),
+      new Lotto([1, 2, 3, 4, 5, 6]),
+    ];
+    const result = await app.calculateResult(lottoList, [1, 2, 3, 4, 5, 6], 7);
+    expect(result).toEqual([1,1,1,1,1]);
+  });
+  test("calculateEarningRate 실행 결과가 올바른가", async () => {
+    const result1 = await app.calculateEarningRate(8000,[1,0,0,0,0]);
+    expect(result1).toBe("62.5");
+    const result2 = await app.calculateEarningRate(10000,[1,1,1,1,1]);
+    expect(result2).toBe("20315550.0");
+  });
 });

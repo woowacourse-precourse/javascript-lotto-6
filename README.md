@@ -18,13 +18,16 @@
 - `checkWinningNum()` : 당첨 번호 입력값 검증 함수
 - `readBonusNumber()` : 보너스 번호 입력 함수
 - `checkBonusNum()` : 보너스 번호 입력값 검증 함수
-- 당첨 통계 출력 함수
-- 몇개 일치하는지 카운트 함수
-- 수익률 계산 함수 (소수점 둘째 자리에서 반올림)
+- `calculateResult()` : 당첨 결과 계산 함수
+- `calculateEarningRate()` 수익률 계산 함수 (소수점 둘째 자리에서 반올림)
+- `printResult()` 당첨 통계 출력 함수
+
 ### Lotto.js
 - `#number` : 로또 번호 필드
+
 - `#validate()` : 발행된 로또 번호가 6개인지, 오름차순인지, 중복없는지 검증 함수
-- `returnNumbers()` : 로또 번호 리턴 함수
+- `returnNumbersForPrint()` : 로또 번호 출력 규격에 맞는 string을 리턴하는 함수
+- `countMatching()` : 몇개 일치하는지, 보너스 일치 여부 카운트 함수
 
 #### 실행 결과 예시
 

@@ -44,7 +44,7 @@ class App {
     let lottoList = [];
     for (let i = 0; i < count; i++) {
       const lotto = new Lotto(await this.makeLotto());
-      MissionUtils.Console.print(lotto.returnNumbers()); // 로또번호 출력
+      MissionUtils.Console.print(lotto.returnNumbersForPrint()); // 로또번호 출력
       lottoList.push(lotto);
     }
     return lottoList;
@@ -101,15 +101,67 @@ class App {
         `보너스 번호를 입력해 주세요.`
       );
 
-      if (await this.checkBonusNum(this.winningNumbers, inputtedBonusNum)) return inputtedBonusNum;
+      if (await this.checkBonusNum(this.winningNumbers, inputtedBonusNum))
+        return Number(inputtedBonusNum);
     }
   }
-
+  async calculateResult(lottoList, winningNumbers, bonusNumber) {
+    let result = [0, 0, 0, 0, 0];
+    for (let i = 0; i < lottoList.length; i++) {
+      let tmp = await lottoList[i].countMatching(winningNumbers, bonusNumber);
+      switch (tmp[0]) {
+        case 3:
+          result[0]++;
+          break;
+        case 4:
+          result[1]++;
+          break;
+        case 5:
+          if (!tmp[1]) result[2]++;
+          else result[3]++;
+          break;
+        case 6:
+          result[4]++;
+          break;
+      }
+    }
+    return result;
+  }
+  async calculateEarningRate(money,result) {
+    let earning = 0;
+    earning += 5000*result[0];
+    earning += 50000*result[1];
+    earning += 1500000*result[2];
+    earning += 30000000*result[3];
+    earning += 2000000000*result[4];
+    return ((earning/money)*100).toFixed(1);
+  }
+  async printResult(money, lottoList, winningNumbers, bonusNumber) {
+    MissionUtils.Console.print("당첨 통계\n---");
+    const result = await this.calculateResult(
+      lottoList,
+      winningNumbers,
+      bonusNumber
+    );
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${result[0]}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${result[1]}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${result[2]}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[3]}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${result[4]}개`);
+    const earningRate = await this.calculateEarningRate(money,result);
+    MissionUtils.Console.print(`총 수익률은 ${earningRate}%입니다.`);
+  }
   async play() {
     this.money = await this.readMoney();
     this.lottoList = await this.buyLotto(this.money / 1000);
     this.winningNumbers = await this.readWinningNumbers();
     this.bonusNumber = await this.readBonusNumber();
+    await this.printResult(
+      this.money,
+      this.lottoList,
+      this.winningNumbers,
+      this.bonusNumber
+    );
   }
 }
 
