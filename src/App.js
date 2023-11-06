@@ -5,6 +5,7 @@ import printLotteriesAmount from './output/printLotteriesAmount.js';
 import getLotteries from './lottery/getLotteries.js';
 import printLotteries from './output/printLotteries.js';
 import inputWinningNumbers from './input/inputWinningNumbers.js';
+import inputBonusNumber from './input/inputBonusNumber.js';
 
 class App {
   async play() {
@@ -20,6 +21,8 @@ class App {
 
     const WINNING_NUMBERS = await inputWinningNumbers();
     lineBreak();
+
+    const BONUS_NUMBER = await inputBonusNumber();
   }
 }
 
