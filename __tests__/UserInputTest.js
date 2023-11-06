@@ -20,14 +20,21 @@ const mockQuestions = (inputs) => {
 	});
 };
 
+const getLogSpy = () => {
+	const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+	logSpy.mockClear();
+	return logSpy;
+};
+
 describe('사용자 구입금액 입력 에러처리 테스트', () => {
 	const runErrorTest = async (input, errorMsg) => {
-		mockQuestion(input);
+		const logSpy = getLogSpy();
+		mockQuestions([input, '1000']);
 
 		const userInput = new UserInput();
-		const inputVal = userInput.lottoPurchase();
+		await userInput.lottoPurchase();
 
-		await expect(inputVal).rejects.toThrow(errorMsg);
+		expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(errorMsg));
 	};
 
 	test.each(['a', '10000a', 'l00000', '100O00', '100 000'])(
@@ -77,12 +84,14 @@ describe('사용자 구입금액 입력 정상 동작 테스트', () => {
 
 describe('사용자 당첨 번호 입력 에러처리 테스트', () => {
 	const runErrorTest = async (input, errorMsg) => {
-		mockQuestion(input);
+		const logSpy = getLogSpy();
+
+		mockQuestions([input, '1,2,3,4,5,6']);
 
 		const userInput = new UserInput();
-		const inputVal = userInput.lottoWinningNumber();
+		await userInput.winningNumber();
 
-		await expect(inputVal).rejects.toThrow(errorMsg);
+		expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(errorMsg));
 	};
 
 	test.each(['1,2,3,4,abc,5', '1o,11,12,13,14,15', '1.,2.,3.,4.,5.,6.'])(
@@ -120,14 +129,9 @@ describe('사용자 당첨 번호 입력 정상 동작 테스트', () => {
 		mockQuestions([input, tmpValue]);
 
 		const userInput = new UserInput();
-		const inputVal = userInput.lottoWinningNumber();
+		const inputVal = userInput.winningNumber();
 
-		const expectedObject = {
-			winningNumber: expectedValue,
-			winningBonusNumber: 9,
-		};
-
-		await expect(inputVal).resolves.toEqual(expectedObject);
+		await expect(inputVal).resolves.toEqual(expectedValue);
 	};
 
 	test.each([
@@ -140,12 +144,13 @@ describe('사용자 당첨 번호 입력 정상 동작 테스트', () => {
 
 describe('사용자 보너스 번호 입력 에러처리 테스트', () => {
 	const runErrorTest = async (input, errorMsg) => {
-		mockQuestions(['1,2,3,4,5,6', input]);
+		const logSpy = getLogSpy();
+		mockQuestions([input, '7']);
 
 		const userInput = new UserInput();
-		const inputVal = userInput.lottoWinningNumber();
+		await userInput.winningBonusNumber('1,2,3,4,5,6');
 
-		await expect(inputVal).rejects.toThrow(errorMsg);
+		expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(errorMsg));
 	};
 
 	test.each(['10o', 'a'])('입력값이 숫자가 아닌 경우', async (input) => {
@@ -167,17 +172,12 @@ describe('사용자 보너스 번호 입력 에러처리 테스트', () => {
 describe('사용자 보너스 번호 입력 정상 동작 테스트', () => {
 	const runSuccessTest = async (input, expectedValue) => {
 		const tmpWinningNumber = '2,3,4,5,6,7';
-		mockQuestions([tmpWinningNumber, input]);
+		mockQuestion(input);
 
 		const userInput = new UserInput();
-		const inputVal = userInput.lottoWinningNumber();
+		const inputVal = userInput.winningBonusNumber(tmpWinningNumber);
 
-		const expectedObject = {
-			winningNumber: ['2', '3', '4', '5', '6', '7'],
-			winningBonusNumber: input.trim(),
-		};
-
-		await expect(inputVal).resolves.toEqual(expectedObject);
+		await expect(inputVal).resolves.toEqual(expectedValue);
 	};
 
 	test.each([
