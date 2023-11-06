@@ -1,8 +1,8 @@
 import LottoShop from "../domains/LottoShop.js";
 import TargetLotto from "../domains/TargetLotto.js";
 import User from "../domains/User.js";
-import OutPutView from "../Views/outPutView.js";
-import InputView from "../Views/InputView.js";
+import OutPutView from "../views/outPutView.js";
+import InputView from "../views/InputView.js";
 
 // TODO 상수 분리
 
