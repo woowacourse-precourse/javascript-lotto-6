@@ -19,6 +19,7 @@ describe("Validation 클래스 테스트", () => {
     [1, 2, 3, 4, 5, 5],
     [1, 2, 3, 4, 5, -6],
     [1, 2, 3, 4, 5, 6.5],
+    [1, 2, 3, 4, 5, 0],
   ])("isValidLottoNumber 함수", async (inputs) => {
     await expect(() => Validation.isValidLottoNumber(inputs)).toThrow();
   });
