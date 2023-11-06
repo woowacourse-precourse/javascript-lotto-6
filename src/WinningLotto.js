@@ -17,6 +17,7 @@ class WinningLotto extends Lotto {
     if (number < this.#START || number > this.#END) {
       throw new Error(ERROR.notOneToFortyFive);
     }
+    throw new Error(ERROR.notUniqueBonusNumber);
   }
 }
 

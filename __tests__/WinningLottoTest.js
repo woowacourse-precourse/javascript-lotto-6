@@ -19,6 +19,12 @@ describe('당첨 번호 클래스 테스트', () => {
     }).toThrow(ERROR.notOneToFortyFive);
   });
 
+  test('로또 번호 중에 보너스 번호가 있으면 예외가 발생한다.', () => {
+    expect(() => {
+      new WinningLotto([1, 2, 3, 4, 5, 6], 6);
+    }).toThrow(ERROR.notUniqueBonusNumber);
+  });
+
   test('예외가 발생하지 않는 경우', () => {
     expect(() => {
       new WinningLotto([1, 2, 3, 4, 5, 6], 1);
