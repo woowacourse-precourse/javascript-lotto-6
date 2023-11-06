@@ -10,6 +10,8 @@ class App {
     const rankCount = Array.from(6).fill(0);
     const payment = await this.getPayment();
     const lottoCount = parseInt(payment / this.LOTTO_UNIT);
+    const lottoList = this.getPickedLottoList(lottoCount)
+    this.printPickedLotto(lottoCount, lottoList)
   }
 
   async getPayment() {
@@ -46,6 +48,11 @@ class App {
       pickedLottoList.push(pickedLotto);
     }
     return pickedLottoList;
+  }
+
+  printPickedLotto(lottoCount, lottoList = []){
+    Console.print(`${lottoCount}개를 구매했습니다.`);
+    lottoList.forEach(lotto => Console.print(lotto.getNumber()))
   }
 }
 
