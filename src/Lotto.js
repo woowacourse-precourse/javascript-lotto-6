@@ -13,6 +13,16 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  #validate(numbers){
+    const set = new Set();
+    for(let i = 0; i < numbers.length; i++){
+      if(set.has(numbers[i])){
+        throw new Error("[ERROR] 중복된 값이 있습니다.");
+        return;
+      }
+      set.add(numbers[i]);
+    }
+  }
 }
 
 export default Lotto;
