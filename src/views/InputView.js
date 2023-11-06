@@ -9,6 +9,20 @@ const InputView = {
     const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     return money;
   },
+
+  async readWinningNumber() {
+    const numbers = await Console.readLineAsync(
+      '\n당첨 번호를 입력해 주세요.\n',
+    );
+    return numbers.split(',').map(Number);
+  },
+
+  async readBonusNumber() {
+    const bonus = await Console.readLineAsync(
+      '\n보너스 번호를 입력해 주세요.\n',
+    );
+    return Number(bonus);
+  },
 };
 
 export default InputView;

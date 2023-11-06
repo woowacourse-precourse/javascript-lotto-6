@@ -2,6 +2,8 @@ import { LOTTO } from '../constants/constants.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import Lotto from '../domains/Lotto.js';
+import Winning from '../domains/Winning.js';
+import Profit from '../domains/Profit.js';
 
 class LottoController {
   #money;
@@ -50,7 +52,6 @@ class LottoController {
       const lotto = Lotto.buyLotto();
       this.#lottos.push(lotto);
     });
-
     this.printLottoList();
   }
 
@@ -59,6 +60,15 @@ class LottoController {
     this.#lottos.forEach((lotto) => {
       OutputView.lottoList(lotto);
     });
+    this.inputWinningNumber();
+  }
+
+  /** 당첨, 보너스 번호 입력받는 함수 */
+  async inputWinningNumber() {
+    const numbers = await InputView.readWinningNumber();
+    const bonus = await InputView.readBonusNumber();
+
+    this.countWinningNumber(numbers, bonus);
   }
 }
 
