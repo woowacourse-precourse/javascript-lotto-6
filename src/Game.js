@@ -27,11 +27,8 @@ class Game {
     this.handlePurchase(amount);
   }
 
-  handlePurchase = (amount) => {
+  handlePurchase = async (amount) => {
     this.#quantity = new Purchase(amount).getAmount();
-    // if (isNaN(this.#quantity)) {
-    //   throw new Error('[ERROR] 잘못된 값을 입력하였습니다.');
-    // }
     OutputView.printQuantity(this.#quantity);
     this.#lottos = LottoMaker.generate(this.#quantity);
     OutputView.printLottos(this.#lottos);

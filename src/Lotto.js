@@ -7,8 +7,8 @@ class Lotto {
   }
 
   validate(numbers) {
-    this.validateLength(numbers);
     this.validateType(numbers);
+    this.validateLength(numbers);
     this.validateRange(numbers);
     this.validateDuplicate(numbers);
   }

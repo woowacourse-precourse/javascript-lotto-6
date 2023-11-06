@@ -13,6 +13,7 @@ const OutputView = {
 
   printBenefitRate(rate) {
     MissionUtils.Console.print(`총 수익률은 ${rate}%입니다.`);
+    return;
   },
 };
 
