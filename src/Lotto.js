@@ -1,4 +1,5 @@
 import { message } from './Constants.js';
+
 import validateLottoNumbers from './Validation/validateLottoNumbers.js';
 
 class Lotto {
@@ -6,7 +7,11 @@ class Lotto {
 
   constructor(numbers) {
     this.validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = this.sortNumbers(numbers);
+  }
+
+  get numbersArray() {
+    return this.#numbers;
   }
 
   validate(numbers) {
