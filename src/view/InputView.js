@@ -3,24 +3,36 @@ import { VIEWMESSAGE, CHARACTER } from '../constants/constants.js';
 
 class InputView {
   async readPurchaseAmount() {
-    const purchaseAmount = await Console.readLineAsync(
-      `${CHARACTER.newline}${VIEWMESSAGE.purchaseInput}`
-    );
-    return purchaseAmount;
+    try {
+      const purchaseAmount = await Console.readLineAsync(
+        `${CHARACTER.newline}${VIEWMESSAGE.purchaseInput}`
+      );
+      return purchaseAmount;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   async readLottoNumber() {
-    const winningLottoNumber = await Console.readLineAsync(
-      `${CHARACTER.newline}${VIEWMESSAGE.lottoInput}`
-    );
-    return winningLottoNumber;
+    try {
+      const lottoNumber = await Console.readLineAsync(
+        `${CHARACTER.newline}${VIEWMESSAGE.lottoInput}`
+      );
+      return lottoNumber;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   async readBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(
-      `${CHARACTER.newline}${VIEWMESSAGE.bonusInput}`
-    );
-    return bonusNumber;
+    try {
+      const bonusNumber = await Console.readLineAsync(
+        `${CHARACTER.newline}${VIEWMESSAGE.bonusInput}`
+      );
+      return bonusNumber;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }
 

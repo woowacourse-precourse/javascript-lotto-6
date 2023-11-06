@@ -18,9 +18,9 @@ class Controller {
   }
 
   async buyLotto() {
-    const purchaseAmount = await this.#inputView.readPurchaseAmount();
-
     try {
+      const purchaseAmount = await this.#inputView.readPurchaseAmount();
+
       this.#userLotto = new UserLotto(Number(purchaseAmount));
       this.priintUserLottoNumbers();
       await this.setWinningLottoNumbers();
@@ -41,9 +41,9 @@ class Controller {
   }
 
   async setWinningLottoNumbers() {
-    const lottoNumbers = await this.#inputView.readLottoNumber();
-
     try {
+      const lottoNumbers = await this.#inputView.readLottoNumber();
+
       this.#winningLotto = new Lotto(
         Array.from(lottoNumbers.split(','), Number)
       );
@@ -55,10 +55,15 @@ class Controller {
   }
 
   async #setBonusNumber() {
-    const bonusNumber = await this.#inputView.readBonusNumber();
+    try {
+      const bonusNumber = await this.#inputView.readBonusNumber();
 
-    this.#winningLotto.setBonusNumber(Number(bonusNumber));
-    this.calculateStatistics();
+      this.#winningLotto.setBonusNumber(Number(bonusNumber));
+      this.calculateStatistics();
+    } catch (error) {
+      this.#outputView.print(error.message);
+      this.#setBonusNumber();
+    }
   }
 
   calculateStatistics() {
