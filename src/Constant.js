@@ -9,6 +9,9 @@ const ERROR_MESSAGE = {
   NUMBER: "[ERROR] 숫자만 입력할 수 있습니다",
   MIN_MONEY: "[ERROR] 최소 구입 금액은 1000원입니다.",
   DIVISION: "[ERROR] 1000원 단위의 로또를 구입해주세요.",
+  NOT_SIX: "[ERROR] 로또 번호는 6개여야 합니다.",
+  DUPLICATE: "[ERROR] 로또 번호는 중복되지 않은 숫자로 이루어져야 합니다.",
+  RANGE: "[ERROR] 로또 번호의 범위는 1~45입니다.",
 };
 
 module.exports = { GAME_MESSAGE, ERROR_MESSAGE };

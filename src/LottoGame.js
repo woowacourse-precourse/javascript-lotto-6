@@ -1,6 +1,7 @@
 import { ERROR_MESSAGE } from "./Constant.js";
 
 const { Console, Random } = require("@woowacourse/mission-utils");
+const { Lotto } = require("./Lotto.js");
 
 class LottoGame {
   constructor() {
