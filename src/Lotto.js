@@ -97,29 +97,27 @@ class Lotto {
     }
     return (this.rank = 0);
   }
-  //random[i]의 원소가 drew의 원소와 하나라도 같으면 count++
-  matchCountCheck = (random, drew) => {
-    let count = 0;
 
-    for (let i = 0; i < random.length; i++) {
-      for (let j = 0; j < drew.length; j++) {
-        if (random[i].includes(drew[j])) {
-        count++;
-        }
-      }
-    }
-    return count;
+  matchCountCheck = (random, drew) => {
+    let maxCount = 0;
+    random.forEach((rand) => {
+      const count = drew.filter((d) => rand.includes(d)).length;
+      maxCount = Math.max(maxCount, count);
+    });
+
+    return maxCount;
   };
 
   matchBonusCheck = (random, bonus) => {
     let isBonus = false;
-    const setLottoNumbers = [].concat(...new Set(random.flat()));
-    for (let i = 0; i < setLottoNumbers.length; i++) {
-      if (bonus.includes(setLottoNumbers[i])) {
+    random.forEach((rand) => {
+      const count = bonus.filter((b) => rand.includes(b)).length;
+      if (count === 1) {
         isBonus = true;
       }
-    }
+    });
     return isBonus;
   };
 }
+
 export default Lotto;
