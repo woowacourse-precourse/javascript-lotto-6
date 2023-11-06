@@ -3,26 +3,22 @@ import Lotto from "./Lotto.js";
 
 class App {
   async play() {
-    const budget = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    const lottoCount = buyLotto(budget);
+    let lottoCount = await getUserInput("구입금액을 입력해 주세요.\n", (answer)=>{return buyLotto(Number(answer))});
+    
     let lottoTickets = [];
-
     for (let i=0; i<lottoCount; i++){
       lottoTickets.push(getLottoTicket())
     }
 
-    Console.print("")
-    
-    Console.print(`${lottoCount}개를 구매했습니다.`)
+    Console.print(`\n${lottoCount}개를 구매했습니다.`)
     for (let lottoTicket of lottoTickets){
       Console.print(`[${lottoTicket.join(', ')}]`)
     }
     
-    const winningNumbers = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
-    const lotto = new Lotto(winningNumbers.split(",").map(number=>Number(number)));
+    const lotto = await getUserInput("\n당첨 번호를 입력해 주세요.\n", (winningNumbers) => new Lotto(winningNumbers.split(",").map(number=>Number(number))))
     
-    const bonusNumber = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
-    lotto.addBonusNumber(bonusNumber)
+    await getUserInput("\n보너스 번호를 입력해 주세요.\n",(bonusNumber) => lotto.addBonusNumber(bonusNumber));
+    
 
     let result = {
       "3개 일치 (5,000원)":0, 
@@ -38,15 +34,21 @@ class App {
     }
 
     Console.print("\n당첨 통계")
-    Object.entries(result).forEach((entry)=>{Console.print(`${entry[0]} - ${entry[1]}개`)})
+    let income = 0;
+    Object.entries(result).forEach((entry, index)=>{
+      income += [5000,50000,1500000,30000000,2000000000][index]*entry[1]
+      Console.print(`${entry[0]} - ${entry[1]}개`)
+    })
 
+    
+    Console.print(`\n총 수익률은 ${income/(lottoCount*10)}%입니다.`)
   }
 }
 
 export default App;
 
 const buyLotto = (budget) => {
-  if (budget%1000>0) throw new Error("[Error] 구입금액은 1000단위여야 합니다.");
+  if (budget%1000!==0) throw new Error("[ERROR] 구입금액은 1000단위 숫자여야 합니다.");
   return budget/1000
 }
 
@@ -71,5 +73,16 @@ const recordResult = (result, count) => {
     case 6: 
       result["6개 일치 (2,000,000,000원)"]++;
       break;
+  }
+}
+
+const getUserInput = async (message, callback) => {
+  while (true){
+    try{
+      let answer = await Console.readLineAsync(message);
+      return callback(answer)
+    }catch(e){
+      Console.print(e.message)
+    }
   }
 }
