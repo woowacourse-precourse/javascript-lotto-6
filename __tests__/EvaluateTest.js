@@ -43,3 +43,33 @@ describe("로또 결과 평가", () => {
     expect(lottoEvaluator.matchCounts.FIFTH).toBe(0);
   });
 });
+
+describe("로또 당첨 통계", () => {
+  let lottoEvaluator;
+  const baseNumbers = [1, 2, 3, 4, 5, 6];
+  const bonusNumber = 7;
+  const userTickets = [
+    [1, 2, 3, 4, 5, 6], // 1등
+    [1, 2, 3, 4, 5, 7], // 2등
+    [1, 2, 3, 4, 5, 8], // 3등
+    [1, 2, 3, 4, 8, 9], // 4등
+    [1, 2, 3, 9, 10, 11], // 5등
+    [1, 2, 8, 9, 10, 11], // 꽝
+  ];
+
+  beforeEach(() => {
+    lottoEvaluator = new LottoEvaluator(baseNumbers, bonusNumber);
+  });
+
+  test("로또 티켓들을 평가하여 당첨 통계를 올바르게 반환한다.", () => {
+    const results = lottoEvaluator.evaluateTickets(userTickets);
+    const expectedResults =
+      `3개 일치 (5,000원) - 1개\n` +
+      `4개 일치 (50,000원) - 1개\n` +
+      `5개 일치 (1,500,000원) - 1개\n` +
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - 1개\n` +
+      `6개 일치 (2,000,000,000원) - 1개`;
+
+    expect(results).toBe(expectedResults);
+  });
+});
