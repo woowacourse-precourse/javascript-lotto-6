@@ -10,9 +10,23 @@ async function getInput(text) {  // 사용자로부터 입력받는 함수
   }
 }
 
+async function inputPurchaseTickets(){
+  try {
+    var userInput = await Console.readLineAsync("구입금액을 입력해 주세요.\n");  // 입력 후 반환
+    isPurchaseTicketsValid(userInput);
+    return userInput;
+  } catch (error) { 
+
+  }
+}
+
 function isPurchaseTicketsValid(purchaseTickets) {  // 입력된 구입 금액이 1,000원 단위인지
-  if (purchaseTickets % 1000 != 0) {
-    throw new Error("[ERROR] 입력된 로또 구입 금액이 1,000원 단위가 아닙니다 !!");
+  try{
+    if (purchaseTickets % 1000 != 0) {
+      throw new Error("[ERROR] 입력된 로또 구입 금액이 1,000원 단위가 아닙니다 !!");
+    }
+  } catch(e){
+    Console.print("[ERROR] 입력된 로또 구입 금액이 1,000원 단위가 아닙니다 !!");
   }
 }
 
@@ -49,27 +63,74 @@ function isBonusNumValid(winningNumbers, bonusNumber) {  // 보너스 숫자가 
   }
 }
 
+function checkLottoResult(lottoList, winningNumbers, bonusNumber){  // 로또 숫자를 비교해 당첨 결과 출력
+  var result = [0, 0, 0, 0, 0];  // 각각 1, 2, 3, 4, 5등 개수를 저장할 리스트
+
+  for (var i = 0; i < lottoList.length; i++){
+    var sameNumber = lottoList[i].getNumbers().filter(it => winningNumbers.getNumbers().includes(it));
+    
+    if(sameNumber.length == 6){
+      result[0] ++;
+    }
+    if(sameNumber.length == 5 || lottoList[i].getNumbers().includes(bonusNumber)){
+      result[1] ++;
+    }
+    if(sameNumber.length == 5){
+      result[2] ++;
+    }
+    if(sameNumber.length == 4){
+      result[3] ++;
+    }
+    if(sameNumber.length == 3){
+      result[4] ++;
+    }
+  }
+
+  return result;
+}
+
+function printLottoResult(lottoResult, purchaseTickets){  // 로또 결과와 처음 구입 금액으로 당첨내역 및 수익률 결과출력
+  Console.print("\n당첨 통계");
+  Console.print("---");
+  Console.print("3개 일치 (5,000원) - " + lottoResult[4] + "개");
+  Console.print("4개 일치 (50,000원) - " + lottoResult[3] + "개");
+  Console.print("5개 일치 (1,500,000원) - " + lottoResult[2] + "개");
+  Console.print("5개 일치, 보너스 볼 일치 (30,000,000원) - " + lottoResult[1] + "개");
+  Console.print("6개 일치 (2,000,000,000원) - " + lottoResult[0] + "개");
+  
+  var ROI = (lottoResult[4]*5000 + lottoResult[3]*50000 + lottoResult[2]*1500000 + lottoResult[1]*30000000 + lottoResult[0]*200000000) / purchaseTickets * 100;
+
+  Console.print("총 수익률은 " + ROI.toFixed(1) + "%입니다.");
+}
+
 class App {
   async play() {
 
-    var purchaseTickets = await getInput("구입금액을 입력해 주세요.\n");
-    isPurchaseTicketsValid(purchaseTickets);
+    var purchaseTickets;
+
+    while(isNaN(purchaseTickets)){
+      purchaseTickets = await inputPurchaseTickets();
+    }
 
     var numberOfTickets = purchaseTickets / 1000;
     Console.print("\n" + numberOfTickets + "개를 구매했습니다.");
 
     var lottoList = generateLottoNumbers(numberOfTickets);
     for (var i = 0; i < numberOfTickets; i++){
-      Console.print(lottoList[i].getNumbers());
+      var lottoNum = lottoList[i].getNumbers().join(", ");
+      Console.print("[" + lottoNum + "]");
     }
     
     var winningNumbersList = [];
     var winningNumbersStr = await getInput("\n당첨 번호를 입력해 주세요.\n");
-    winningNumbersList = winningNumbersStr.split(',');
+    winningNumbersList = winningNumbersStr.split(',').map(Number);
     var winningNumbers = new Lotto(winningNumbersList);
     
     var bonusNumber = await getInput("\n보너스 번호를 입력해 주세요.\n");
     isBonusNumValid(winningNumbers, bonusNumber);
+
+    var lottoResult = checkLottoResult(lottoList, winningNumbers, bonusNumber);
+    printLottoResult(lottoResult, purchaseTickets);
   }
 }
 
