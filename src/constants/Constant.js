@@ -25,6 +25,14 @@ export const MESSAGE = Object.freeze({
   winningStatistics: '당첨 통계\n---',
 });
 
+export const RESULT_MESSAGE = Object.freeze([
+  `${RANK.first.match}개 일치`,
+  `${RANK.second.match}개 일치, 보너스 볼 일치`,
+  `${RANK.second.match}개 일치`,
+  `${RANK.third.match}개 일치`,
+  `${RANK.fourth.match}개 일치`,
+]);
+
 export const ERROR = Object.freeze({
   errorPrefix: '[ERROR]',
   isNotNumber: '입력값이 숫자가 아닙니다. 숫자만 입력할 수 있습니다.',
