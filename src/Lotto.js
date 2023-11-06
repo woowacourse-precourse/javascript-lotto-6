@@ -1,4 +1,4 @@
-import { validateWinnigNumber } from './utils.js';
+import { validateBonusNumber, validateWinnigNumber } from './utils.js';
 
 class Lotto {
   #numbers;
@@ -10,6 +10,10 @@ class Lotto {
 
   #validate(numbers) {
     validateWinnigNumber(numbers);
+  }
+
+  validateBonusNumber(bonusNumber) {
+    validateBonusNumber(bonusNumber, this.#numbers);
   }
 }
 
