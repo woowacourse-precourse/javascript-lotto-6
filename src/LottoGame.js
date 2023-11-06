@@ -1,11 +1,14 @@
-import MatchingTable from './MatchingTable.js';
 import {
   COUNT,
   DEFAULT_NUM,
   LOTTO_TICKET_PRICE,
   MATCH_COUNTS,
   PERCENTAGE,
+  RANKING,
 } from './constants/conditions.js';
+import RANKING_PRIZE from './constants/rankingPrize.js';
+
+const IS_BOUNS_INDEX = 1;
 
 export default class LottoGame {
   #autoLottos;
@@ -14,53 +17,67 @@ export default class LottoGame {
 
   #bonus;
 
-  #matchingTable;
-
   constructor(autoLottos, winningLotto, bonus) {
     this.#autoLottos = autoLottos;
     this.#winningLotto = winningLotto;
     this.#bonus = bonus;
-    this.#matchingTable = new MatchingTable();
   }
 
   getWinningResult() {
-    this.#countMatchingNumbers();
-    return this.#matchingTable.getSummaryResult();
+    const matchCountList = this.#countMatchingNumbers();
+    const rankingList = this.#transformRankingList(matchCountList);
+    const rateOfReturn = this.#getRateOfReturn(rankingList);
+    return { rankingList, rateOfReturn };
   }
 
   #countMatchingNumbers() {
+    const matchCountList = [];
     this.#autoLottos.reduce((acc, autoLotto) => {
       let count = DEFAULT_NUM;
       acc.forEach((winningNum) => {
         if (autoLotto.includes(winningNum)) count += COUNT.plus;
       });
-      this.#updateMatchingTable(autoLotto, count);
+      this.#updateMatchCountList(matchCountList, count, autoLotto);
       return acc;
     }, this.#winningLotto);
+    return matchCountList;
   }
 
-  #updateMatchingTable(autoLotto, count) {
+  #updateMatchCountList(matchCountList, count, autoLotto) {
     if (count === MATCH_COUNTS.five) {
-      if (autoLotto.includes(this.#bonus))
-        this.#matchingTable.updateTable(count, true);
-      else this.#matchingTable.updateTable(count, false);
+      matchCountList.push(
+        autoLotto.includes(this.#bonus) ? [count, true] : [count, false],
+      );
     }
-    this.#matchingTable.updateTable(count);
+    matchCountList.push(count);
   }
 
-  getRateOfReturn() {
-    const income = this.#getIncome();
+  #transformRankingList(matchCountList) {
+    const rankingList = [];
+    matchCountList.forEach((count) => {
+      if (Array.isArray(count)) {
+        rankingList.push(
+          count[IS_BOUNS_INDEX] ? RANKING.second : RANKING.third,
+        );
+      }
+      if (count === MATCH_COUNTS.three) rankingList.push(RANKING.fifth);
+      if (count === MATCH_COUNTS.four) rankingList.push(RANKING.fourth);
+      if (count === MATCH_COUNTS.all) rankingList.push(RANKING.first);
+    });
+    return rankingList;
+  }
+
+  #calculateRateOfReturn(income) {
     const inputMoney = this.#autoLottos.length * LOTTO_TICKET_PRICE;
     const rateOfReturn = (income / inputMoney) * PERCENTAGE;
     return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
   }
 
-  #getIncome() {
-    let income = 0;
-    const table = this.#matchingTable.getTable();
-    table.forEach((count, { prize }) => {
-      income += prize * count;
+  #getRateOfReturn(rankingList) {
+    let income = DEFAULT_NUM;
+    rankingList.forEach((ranking) => {
+      income += RANKING_PRIZE[ranking];
     });
-    return income;
+    return this.#calculateRateOfReturn(income);
   }
 }

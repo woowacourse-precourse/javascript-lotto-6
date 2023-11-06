@@ -1,5 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_END, LOTTO_START, RESULT_MESSAGE } from '../constants/output.js';
+import { COUNT, RANKING } from '../constants/conditions.js';
+import MESSAGES_TEMPLATE from '../constants/resultMessagesTemplate.js';
 
 const OutputView = {
   printError(message) {
@@ -14,28 +16,35 @@ const OutputView = {
     });
   },
 
-  printLotteryResultsSummary(winningResult, rateOfReturn) {
-    const template = this.getResultStringTemplate(winningResult);
+  printLotteryResultsSummary(rankingList, rateOfReturn) {
+    const template = this.getResultStringTemplate(rankingList);
     Console.print(RESULT_MESSAGE.title);
-    template.forEach(({ label, count }) => {
-      Console.print(`${label} - ${count}개`);
+    template.forEach(([key, value]) => {
+      Console.print(`${key} - ${value}개`);
     });
 
     Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   },
 
-  getResultStringTemplate(winningResult) {
-    const messages = [
-      RESULT_MESSAGE.threeMatch,
-      RESULT_MESSAGE.fourMatch,
-      RESULT_MESSAGE.fiveMatchNotBonus,
-      RESULT_MESSAGE.fiveMatchAndBonus,
-      RESULT_MESSAGE.allMatch,
-    ];
-    return messages.map((message, i) => ({
-      label: message,
-      count: winningResult[i].count,
-    }));
+  getResultStringTemplate(rankingList) {
+    const messages = { ...MESSAGES_TEMPLATE };
+    this.updateResultMessage(rankingList, messages);
+    return Object.entries(messages);
+  },
+
+  updateResultMessage(rankingList, messages) {
+    rankingList.forEach((ranking) => {
+      if (ranking === RANKING.fifth)
+        messages[RESULT_MESSAGE.threeMatch] += COUNT.plus;
+      if (ranking === RANKING.fourth)
+        messages[RESULT_MESSAGE.fourMatch] += COUNT.plus;
+      if (ranking === RANKING.third)
+        messages[RESULT_MESSAGE.fiveMatchNotBonus] += COUNT.plus;
+      if (ranking === RANKING.second)
+        messages[RESULT_MESSAGE.fiveMatchAndBonus] += COUNT.plus;
+      if (ranking === RANKING.first)
+        messages[RESULT_MESSAGE.allMatch] += COUNT.plus;
+    });
   },
 };
 

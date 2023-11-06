@@ -20,12 +20,12 @@ class App {
 
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
-    const { winningResult, rateOfReturn } = this.#getlotteryResultsSummary(
+    const { rankingList, rateOfReturn } = this.#getWinningResult(
       purchaseLotto,
       this.#winningLotto.getLotto(),
       this.#bonus.getBonus(),
     );
-    OutputView.printLotteryResultsSummary(winningResult, rateOfReturn);
+    OutputView.printLotteryResultsSummary(rankingList, rateOfReturn);
   }
 
   async #getPurchaseLotto() {
@@ -64,12 +64,9 @@ class App {
     }
   }
 
-  #getlotteryResultsSummary(purchaseLotto, winningLotto, bonus) {
+  #getWinningResult(purchaseLotto, winningLotto, bonus) {
     this.#lottoGame = new LottoGame(purchaseLotto, winningLotto, bonus);
-    return {
-      winningResult: this.#lottoGame.getWinningResult(),
-      rateOfReturn: this.#lottoGame.getRateOfReturn(),
-    };
+    return this.#lottoGame.getWinningResult();
   }
 }
 
