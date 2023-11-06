@@ -1,11 +1,12 @@
 class Money {
   #money;
   #winningMoney;
+  #rankingCounts = [0, 0, 0, 0, 0];
 
-  constructor(money, rank) {
+  constructor(money, ranks) {
     this.#validate(money);
     this.#money = money;
-    this.rankingMoney(rank);
+    this.rankingMoney(ranks);
   }
 
   get getMoney() {
@@ -25,26 +26,37 @@ class Money {
     return true;
   }
 
-  rankingMoney(rank) {
+  winnings(rank) {
     switch (rank) {
       case 1:
         this.#winningMoney += 2000000000;
+        this.#rankingCounts[0]++;
         break;
       case 2:
         this.#winningMoney += 30000000;
+        this.#rankingCounts[1]++;
         break;
       case 3:
         this.#winningMoney += 1500000;
+        this.#rankingCounts[2]++;
         break;
       case 4:
         this.#winningMoney += 50000;
+        this.#rankingCounts[3]++;
         break;
       case 5:
         this.#winningMoney += 5000;
+        this.#rankingCounts[4]++;
         break;
       default:
         break;
     }
+  }
+
+  rankingMoney(ranks) {
+    ranks.forEach((rank) => {
+      this.winnings(rank);
+    });
   }
 }
 
