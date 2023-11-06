@@ -7,10 +7,12 @@ class App {
     const LOTTO_ARRAY = await this.getLottoObject(LOTTO_NUM);
     const WIN_NUM = await this.getWinningNum();
     const BONUS_NUM = await this.getBonusNum(WIN_NUM);
+    this.printResult(LOTTO_ARRAY, WIN_NUM, BONUS_NUM);
   }
 
   async getLottoMoney(){
-    const LOTTO_MONEY = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    const MONEY = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    const LOTTO_MONEY = parseInt(MONEY, 10);
     if(LOTTO_MONEY % 1000 !== 0){
       throw new Error("[ERROR] 로또 구입 금액은 1000으로 나누어 떨어져야 합니다.");
     }
@@ -44,9 +46,6 @@ class App {
 
     const UNIQUEARR = [...new Set(WINNING_NUM_ARR)];
     if(UNIQUEARR.length !== WINNING_NUM_ARR.length) throw new Error("[ERROR] 당첨 번호는 중복되지 않은 숫자로 입력해야 합니다.");
-
-    MissionUtils.Console.print(WINNING_NUM_ARR);
-
     return WINNING_NUM_ARR;
   }
 
@@ -56,10 +55,29 @@ class App {
 
     if(isNaN(BONUS_NUMBER)) throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if(BONUS_NUMBER < 1 || BONUS_NUMBER > 45) throw new Error("[ERROR] 보너스 번호는 1 ~ 45 사이의 숫자입니다.");
-    if(!WIN_NUM.includes(BONUS_NUMBER))throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복되어서는 안됩니다.");
+    if(WIN_NUM.includes(BONUS_NUMBER))throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복되어서는 안됩니다.");
     
     return BONUS_NUMBER;
   }
+
+  async printResult(LOTTO_ARRAY, WIN_NUM, BONUS_NUM){
+    const WIN = [0, 0, 0, 0, 0, 0]
+    LOTTO_ARRAY.forEach(lotto => {
+      WIN[lotto.compareNumbers(WIN_NUM, BONUS_NUM)]++;
+    });
+
+    const EARN = (WIN[1] * 5000 + WIN[2] * 50000 + WIN[3] * 1500000 + WIN[4] * 30000000 + WIN[5] * 2000000000) * 100 / (LOTTO_ARRAY.length * 1000);
+
+    MissionUtils.Console.print(`\n당첨 통계\n---`);
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${WIN[1]}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${WIN[2]}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${WIN[3]}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${WIN[4]}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${WIN[5]}개`);
+    MissionUtils.Console.print(`총 수익률은 ${EARN}%입니다.`);
+  }
+
+
 }
 
 export default App;
