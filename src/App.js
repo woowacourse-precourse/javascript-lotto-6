@@ -1,10 +1,9 @@
-import { Console } from '@woowacourse/mission-utils';
-import { BUY_LOTTO } from './constants.js';
 import inputPrice from './input/inputPrice.js';
+import lineBreak from './common/lineBreak.js';
 import getAmountOfLottery from './lottery/getAmountOfLottery.js';
+import printLotteriesAmount from './output/printLotteriesAmount.js';
 import getLotteries from './lottery/getLotteries.js';
 import printLotteries from './output/printLotteries.js';
-import lineBreak from './common/lineBreak.js';
 
 class App {
   async play() {
@@ -12,10 +11,11 @@ class App {
     lineBreak();
 
     this.lotteryAmount = getAmountOfLottery(this.price);
-    Console.print(`\n${this.lotteryAmount}${BUY_LOTTO}`);
+    printLotteriesAmount(this.lotteryAmount);
 
     this.lotteries = getLotteries(this.lotteryAmount);
     printLotteries(this.lotteries);
+    lineBreak();
   }
 }
 
