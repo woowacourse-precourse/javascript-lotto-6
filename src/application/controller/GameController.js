@@ -2,6 +2,7 @@ import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import RandomNumberGenerator from '../../RandomNumberGenerator.js';
 import GameMessageGenerator from '../../GameMessageGenerator.js';
+import Lotto from '../../Lotto.js';
 import { NUMBER } from '../../utils/constants.js';
 
 class GameController {
@@ -10,6 +11,7 @@ class GameController {
     this.randomNumberGenerator = new RandomNumberGenerator();
     this.gameMessageGenerator = new GameMessageGenerator();
     this.outputView = new OutputView();
+    this.lotto = null;
   }
 
   async start() {
@@ -22,6 +24,11 @@ class GameController {
     this.outputView.showLottoNumberListOutput(LOTTO_TICKET_NUMBER, LOTTO_NUMBER_LIST_MESSAGE);
     const WINNING_NUMBERS = await this.inputView.getUserInputWinningNumbers();
     const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber();
+
+    LOTTO_NUMBER_ARRAY.forEach((lotto) => {
+      this.lotto = new Lotto(lotto);
+      this.lotto.getResultForEachLotto(BONUS_NUMBER, WINNING_NUMBERS);
+    });
   }
 }
 
