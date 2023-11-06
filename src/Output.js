@@ -75,7 +75,8 @@ class Output {
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${this.#num6}개`);
 
-    this.#winRate = (this.#winMoney / inputMoney) * 100;
+    const rate = (this.#winMoney / inputMoney) * 100;
+    this.#winRate = Math.round(rate * 100) / 100;
     Console.print(`총 수익률은 ${this.#winRate}%입니다.`);
   }
 }
