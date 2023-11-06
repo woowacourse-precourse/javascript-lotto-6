@@ -1,8 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
-import NumberIssuance from "./NumberIssuance.js";
+import NumberIssuance from "./services/NumberIssuance.js";
 import LottoGame from "./LottoGame.js";
-import Calculator from "./Calculator.js";
-import UserInput from "./UserInput.js";
+import Calculator from "./services/Calculator.js";
+import UserInput from "./io/UserInput.js";
 
 class App {
   /* eslint-disable class-methods-use-this */

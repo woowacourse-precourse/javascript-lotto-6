@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import ValidateInput from "./ValidateInput.js";
+import ValidateInput from "../utils/ValidateInput.js";
 
 class UserInput {
   static async getAmount() {
