@@ -1,6 +1,7 @@
 import Lotto from '../src/Lotto';
 import User from '../src/User';
 import { MESSAGE } from '../src/constant';
+import { changeArrayToStringMessage } from '../src/utils';
 import { getLogSpy, mockQuestions } from '../testUtils';
 
 describe('User 클래스 테스트', () => {
@@ -27,8 +28,8 @@ describe('User 클래스 테스트', () => {
 
     const logs = [
       `${lottos.length}${MESSAGE.numberOfTickets}`,
-      JSON.stringify(lottosNumbers[0]),
-      JSON.stringify(lottosNumbers[1]),
+      changeArrayToStringMessage(lottosNumbers[0]),
+      changeArrayToStringMessage(lottosNumbers[1]),
     ];
 
     const logSpy = getLogSpy();
