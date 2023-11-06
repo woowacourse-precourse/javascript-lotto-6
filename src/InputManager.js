@@ -12,6 +12,15 @@ const InputManager = {
     LottoPurchaser.lottoList(price);
     return price;
   },
+
+  async getWinningNumbers() {
+    const winningNumber = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요.\n"
+    );
+    const numberList = winningNumber.split(",").map(Number);
+
+    return numberList;
+  },
 };
 
 export default InputManager;
