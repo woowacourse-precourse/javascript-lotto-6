@@ -6,8 +6,8 @@ const Validator = {
     if (purchaseAmount % CONSTANTS.purchaseAmount.amountDivisor !== 0)
       throw new Error(ERROR.message.remainderNotZero);
   },
-  invalidNumber: purchaseAmount => {
-    if (isNaN(purchaseAmount)) throw new Error(ERROR.message.invalidNumber);
+  invalidNumber: number => {
+    if (isNaN(number)) throw new Error(ERROR.message.invalidNumber);
   },
   missingValue: value => {
     if (!value) throw new Error(ERROR.message.missingValue);
@@ -15,11 +15,11 @@ const Validator = {
   negativeNumber: purchaseAmount => {
     if (purchaseAmount < 0) throw new Error(ERROR.message.negativeNumber);
   },
-  invalidSeparator: winningNumbers => {
-    if (winningNumbers.includes('')) throw new Error(ERROR.message.invalidSeparator);
+  invalidSeparator: numbers => {
+    if (numbers.includes('')) throw new Error(ERROR.message.invalidSeparator);
   },
-  invalidNumbersCount: winningNumbers => {
-    if (winningNumbers.length !== CONSTANTS.number.winningNumbersCount)
+  invalidNumbersCount: numbers => {
+    if (numbers.length !== CONSTANTS.number.winningNumbersCount)
       throw new Error(ERROR.message.invalidNumbersCount);
   },
   invalidRange: numbers => {
