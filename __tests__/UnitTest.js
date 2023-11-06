@@ -26,4 +26,10 @@ describe('기능 테스트', () => {
             '[ERROR]'
         );
     });
+
+    test('보너스 번호가 1개가 아닌 경우 예외가 발생한다.', () => {
+        expect(app.getBonusNumbers([1, 2, 3, 4, 5, 6], '1,2')).rejects.toThrow(
+            '[ERROR]'
+        );
+    });
 });
