@@ -1,4 +1,4 @@
-import { changeStringToMoney } from '../utils';
+import { changeStringToMoney } from '../utils/Money';
 
 const NUMBER_RANGE = Object.freeze({
   min: 1,
