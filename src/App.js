@@ -1,5 +1,9 @@
+import { inputMoney } from './buyLotto.js';
+
 class App {
-  async play() {}
+  async play() {
+    const userLottoList = await inputMoney();
+  }
 }
 
 export default App;
