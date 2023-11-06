@@ -14,6 +14,11 @@ class App {
       throw new Error("[ERROR] 천 원 단위로 입력해 주세요.");
     }
   }
+  async countBuytLotto() {
+    this.lottoEach = await this.buyLotto() / 1000;
+
+    return this.lottoEach;
+  }
 
   async play() {
     
