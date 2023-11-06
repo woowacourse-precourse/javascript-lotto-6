@@ -1,4 +1,7 @@
 import { PRICE_LENGTH } from "../utils/constants.js";
+import { PRIZES } from "../utils/message.js";
+import { WINNING_STATISTICS_PRINT_MESSAGE } from "../utils/message.js";
+import { print } from "../utils/print.js";
 
 class Ranking {
   #rank = Array.from({ length: PRICE_LENGTH }, () => 0);
@@ -17,7 +20,11 @@ class Ranking {
     }
   }
 
-  printRank(lotto_list, winning_number, bonus_number) {
+  formatMessage(rankIndex, count) {
+    return `${PRIZES[rankIndex]} - ${count}개`;
+  }
+
+  returnRank(lotto_list, winning_number, bonus_number) {
     lotto_list.forEach((lotto) => {
       const correct_number = lotto.filter((num) =>
         winning_number.includes(num)
@@ -27,6 +34,16 @@ class Ranking {
     });
 
     return this.#rank;
+  }
+
+  printRank(input) {
+    print(`\n${WINNING_STATISTICS_PRINT_MESSAGE}`);
+    print("---");
+
+    input.reverse().forEach((count, rankIndex) => {
+      const message = this.formatMessage(rankIndex, count);
+      print(message);
+    });
   }
 }
 

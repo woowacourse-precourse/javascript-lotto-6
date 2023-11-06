@@ -8,3 +8,10 @@ export const SECOND_PRIZE = 30000000;
 export const THIRED_PRIZE = 1500000;
 export const FOURTH_PRIZE = 50000;
 export const FIFTH_PRIZE = 5000;
+export const PRIZE_ARR = [
+  FIRST_PRIZE,
+  SECOND_PRIZE,
+  THIRED_PRIZE,
+  FOURTH_PRIZE,
+  FIFTH_PRIZE,
+];

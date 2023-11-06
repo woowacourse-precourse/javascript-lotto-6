@@ -1,14 +1,11 @@
-import { print } from "./utils/print.js";
 import { calcPurchaseQuantity } from "./Calc/calcPurchaseQuantity.js";
-import { calcResult } from "./Calc/CalcResult.js";
-import { printResult } from "./PrintResult.js";
-import { calcProfitRate } from "./Calc/CalcProfitRate.js";
 
 import LottoMachine from "./domain/LottoMachine.js";
 import Purchase from "./domain/Purchase.js";
 import WinningNumber from "./domain/WinningNumber.js";
 import BonusNumber from "./domain/BonusNumber.js";
 import Ranking from "./domain/Ranking.js";
+import Profit from "./domain/Profit.js";
 
 class App {
   purchase_amount;
@@ -57,18 +54,18 @@ class App {
 
     // 6. 발행한 로또 번호와 당첨 번호 비교하기
     const ranking = new Ranking();
-    this.rank_result = ranking.printRank(
+    this.rank_result = ranking.returnRank(
       this.lotto_list,
       this.winning_number,
       this.bonus_number
     );
 
-    // 12. 당첨 내역 출력하기
-    printResult(this.rank_result);
-    // 13. 총 수익률 구하기
-    const profit = calcProfitRate(this.rank_result, this.purchase_amount);
-    // 14. 총 수익률 출력하기
-    print(`총 수익률은 ${profit}%입니다.`);
+    // 7. 당첨 내역 출력하기
+    ranking.printRank(this.rank_result);
+
+    // 8. 총 수익률 출력하기
+    const profit = new Profit();
+    profit.retrunProfit(this.rank_result, this.purchase_amount);
   }
 }
 

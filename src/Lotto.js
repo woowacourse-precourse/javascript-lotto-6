@@ -1,10 +1,10 @@
-import { LOTTO_LENGTH, MIN_NUMBER, MAX_NUMBER } from "../utils/constants.js";
+import { LOTTO_LENGTH, MIN_NUMBER, MAX_NUMBER } from "./utils/constants.js";
 import {
   TYPE_ERROR,
   RANGE_ERROR,
   DUPLICATE_ERROR,
   LOTTO_LENGTH_ERROR,
-} from "../utils/errorMessage.js";
+} from "./utils/errorMessage.js";
 
 class Lotto {
   #numbers;

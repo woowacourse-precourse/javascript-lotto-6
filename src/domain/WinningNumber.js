@@ -1,7 +1,7 @@
 import { print } from "../utils/print.js";
 import { Console } from "@woowacourse/mission-utils";
 import { WINNING_NUMBERS_INPUT_REQUEST } from "../utils/message.js";
-import Lotto from "./Lotto.js";
+import Lotto from "../Lotto.js";
 
 class WinningNumber {
   printMessage() {
