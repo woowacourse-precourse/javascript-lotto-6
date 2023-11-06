@@ -13,11 +13,19 @@ class Lotto {
     }
   }
 
+  // TODO: 추가 기능 구현
   addBonusNumber(number){
     this.#bonusNumber = number;
   }
 
-  // TODO: 추가 기능 구현
+  checkResult(ticket){
+      let count = 0
+      for (let index=0; index<6; index++){
+        if(this.#numbers[index] == ticket[index]) count++;
+        else if(this.#numbers[index] == this.#bonusNumber) count+=0.5;
+      }
+    return count;
+  }
 }
 
 export default Lotto;
