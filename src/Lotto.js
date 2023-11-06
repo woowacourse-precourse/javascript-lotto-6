@@ -7,7 +7,6 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#validateBonusNum(numbers);
     this.#numbers = numbers;
   }
 
@@ -58,7 +57,7 @@ class Lotto {
   };
 
   print = async () => {
-    PrintOutput.calculcalculateWinningDetails(this.sixNum, this.bonusNum);
+    PrintOutput.calculateWinningDetails(this.sixNum, this.bonusNum);
     PrintOutput.printWinningDetails();
     PrintOutput.printTotalReturn();
   }
