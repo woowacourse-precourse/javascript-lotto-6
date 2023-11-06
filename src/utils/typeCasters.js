@@ -1,5 +1,5 @@
 export const stringToArray = (string) => {
-  return string.split(',');
+  return string.split(',').map((item) => Number(item));
 };
 
 export const stringToNumber = (string) => {
