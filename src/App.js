@@ -67,7 +67,14 @@ class App {
       (totalProfits / (purchase.getPurchaseCount() * 1000)) * 100
     ).toFixed(1);
 
-
+    MissionUtils.Console.print(`
+${MESSAGE_WINNING_THREE}${lottoResult[0]}${MESSAGE_COUNT_UNIT}
+${MESSAGE_WINNING_FOUR}${lottoResult[1]}${MESSAGE_COUNT_UNIT}
+${MESSAGE_WINNING_FIVE}${lottoResult[2]}${MESSAGE_COUNT_UNIT}
+${MESSAGE_WINNING_BONUS}${lottoResult[3]}${MESSAGE_COUNT_UNIT}
+${MESSAGE_WINNING_ALL}${lottoResult[4]}${MESSAGE_COUNT_UNIT}
+${MESSAGE_RATE}${parseFloat(profitsRate)}${MESSAGE_RATE_UNIT}
+    `);
   }
 }
 
