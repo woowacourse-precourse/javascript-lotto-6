@@ -6,7 +6,7 @@ class Statistics {
 
   constructor() {
     this.#rateOfReturns = 0;
-    this.#statistics = STATISTICS;
+    this.#statistics = {};
   }
 
   getRateOfReturns() {
@@ -20,16 +20,17 @@ class Statistics {
   calculateStatistics(userLotto, winningLotto) {
     const rankResult = userLotto.calculateMatchingNumber(winningLotto);
 
-    let totalWinnings = 0;
+    this.#statistics = STATISTICS.map((statistic) => ({
+      ...statistic,
+      count: rankResult[statistic.rank],
+    }));
 
-    this.#statistics.forEach((statistic) => {
-      statistic.count = rankResult[statistic.rank];
-      totalWinnings += statistic.winnings * statistic.count;
-    });
-
+    const totalWinnings = this.#statistics.reduce((total, statistic) => {
+      return total + statistic.winnings * statistic.count;
+    }, 0);
     this.#rateOfReturns =
       totalWinnings / (userLotto.getNumberOfPurchase() * 1000);
   }
 }
 
-export default Statistics
+export default Statistics;
