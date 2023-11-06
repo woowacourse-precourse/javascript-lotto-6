@@ -38,7 +38,6 @@ class LottoController {
       this.#userLotto = new UserLotto(count);
       this.#printLottoBuy(count);
     } catch (error) {
-      Console.print(error.message);
       throw error;
     }
   }
