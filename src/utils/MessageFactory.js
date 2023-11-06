@@ -12,6 +12,9 @@ const getErrorMessage = (error) => {
 const throwError = (error) => {
   throw new Error(getErrorMessage(error));
 };
+const changeArrayToStringMessage = (array) => {
+  return `[${array[0]}, ${array[1]}, ${array[2]}, ${array[3]}, ${array[4]}, ${array[5]}]`;
+};
 /**
  *
  * @param {Lotto[]} lottos
@@ -19,7 +22,7 @@ const throwError = (error) => {
 const printPurchasedLottos = (lottos) => {
   printMessage(`${lottos.length}${MESSAGE.numberOfTickets}`);
   lottos.forEach((v) => {
-    printMessage(v.getLottoNumbers().toString());
+    printMessage(changeArrayToStringMessage(v.getLottoNumbers()));
   });
 };
 
@@ -45,6 +48,7 @@ const printRateOfReturn = (number) => {
 };
 
 export {
+  changeArrayToStringMessage,
   getErrorMessage,
   printMessage,
   printPurchasedLottos,

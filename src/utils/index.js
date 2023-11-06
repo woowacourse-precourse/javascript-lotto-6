@@ -6,6 +6,7 @@ import {
 } from './Input';
 
 import {
+  changeArrayToStringMessage,
   getErrorMessage,
   printMessage,
   printPurchasedLottos,
@@ -27,6 +28,7 @@ import { getWinningResult } from './WinningResult';
 import { validateNumberRange, hasNoComma } from './Validate';
 
 export {
+  changeArrayToStringMessage,
   changeStringToMoney,
   getBonusBallNumber,
   getErrorMessage,
