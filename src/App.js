@@ -5,22 +5,25 @@ class App {
   async play() {
     const amount = await this.getAmount();
     const lottoNumbersArray = this.getLottoNumbers(amount);
-    const numbers = await this.getWinningNumbers();
-    const bonusNumber = await this.getBonusNumber(numbers);
+    const winningNumbers = await this.getWinningNumbers();
+    const bonusNumber = await this.getBonusNumber(winningNumbers);
     const intBonusNumber = parseInt(bonusNumber, 10);
-    const results = this.getResult(numbers, lottoNumbersArray, intBonusNumber);
+    
+    const result = this.getResult(winningNumbers, lottoNumbersArray, intBonusNumber, amount);
 
-    const profitRate = this.getProfitRate(amount, results);
-    Console.print(`총 수익률은 ${profitRate}입니다.`);
+    const profitRate = this.getProfitRate(amount, result);
+    this.printResult(result, profitRate);
   }
 
   async getAmount() {
     try {
       const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
       this.validateAmount(amount);
+
       return amount;
     } catch (error) {
       Console.print(error.message);
+
       return this.getAmount();
     }
   }
@@ -33,15 +36,12 @@ class App {
 
   getLottoNumbers(count) {
     const playCount = count / 1000;
-    const allLottoTickets = [];
-  
+    const allLottoTickets = Array.from({length: playCount}, () => this.printRandomLottoNumbers());
+    const lottoInfo = allLottoTickets.map((lotto) => `[${lotto.join(', ')}]`).join('\n');
+
     Console.print(`${playCount}개를 구매했습니다.`);
-    for (let i = 0; i < playCount; i++) {
-      const randomLottoTicket = this.printRandomLottoNumbers();
-      allLottoTickets.push(randomLottoTicket);
-      Console.print(`[${randomLottoTicket.join(', ')}]`);
-    }
-  
+    Console.print(lottoInfo);
+
     return allLottoTickets;
   }
 
@@ -55,9 +55,11 @@ class App {
     try {
       const inputString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
       const numbers = inputString.split(',').map(Number);
+
       return new Lotto(numbers);
     } catch (error) {
       Console.print(error.message);
+
       return this.getWinningNumbers();
     }
   }
@@ -66,9 +68,11 @@ class App {
     try {
       const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
       this.validateBonusNumber(numbers, bonusNumber);
+
       return bonusNumber;
     } catch (error) {
       Console.print(error.message);
+
       return this.getBonusNumber(numbers);
     }
   }
@@ -98,8 +102,19 @@ class App {
       if (matchResult == 'zero') continue;
       results[matchResult]++;
     }
-    numbers.printResult(results);
+
     return results;
+  }
+
+  printResult(results, profitRate) {
+    Console.print('당첨 통계');
+    Console.print('---');
+    Console.print(`3개 일치 (5,000원) - ${results.three}개`);
+    Console.print(`4개 일치 (50,000원) - ${results.four}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${results.five}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${results.bonus}개`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${results.all}개`);
+    Console.print(`총 수익률은 ${profitRate}입니다.`);
   }
 
   getProfitRate(amount, results) {
@@ -114,7 +129,7 @@ class App {
       return sum + results[key] * prizePerResult[key];
     }, 0);
     const profitRate = (totalPrize / amount) * 100;
-    const roundedProfitRate = profitRate.toFixed(2).replace(/\.?0+$/, '');
+    const roundedProfitRate = profitRate.toFixed(1);
   
     return `${roundedProfitRate}%`;
   }
