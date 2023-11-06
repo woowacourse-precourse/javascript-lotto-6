@@ -2,32 +2,32 @@ import { Console } from "@woowacourse/mission-utils";
 import InputError from "../errors/InputError.js";
 
 class UserInput {
-  static validateAmount(input) {
-    InputError.checkEmpty(input);
-    InputError.checkNonNumeric(input);
+  static validateAmount(inputNumber) {
+    InputError.checkEmpty(inputNumber);
+    InputError.checkNonNumeric(inputNumber);
 
-    const inputToNumber = parseInt(input, 10);
+    const parsedInput = parseInt(inputNumber, 10);
 
-    InputError.checkNagativeNumber(inputToNumber);
-    InputError.checkInvalidAmount(inputToNumber);
+    InputError.checkNagativeNumber(parsedInput);
+    InputError.checkInvalidAmount(parsedInput);
 
-    return inputToNumber;
+    return parsedInput;
   }
 
-  static validateEmptyLottoNumbers(input) {
-    InputError.checkEmpty(input);
+  static validateEmptyLottoNumbers(inputNumberList) {
+    InputError.checkEmpty(inputNumberList);
   }
 
-  static validateBonusNumber(input) {
-    InputError.checkEmpty(input);
-    InputError.checkNonNumeric(input);
+  static validateBonusNumber(inputNumber) {
+    InputError.checkEmpty(inputNumber);
+    InputError.checkNonNumeric(inputNumber);
 
-    const inputToNumber = parseInt(input, 10);
+    const parsedInput = parseInt(inputNumber, 10);
 
-    InputError.checkNagativeNumber(inputToNumber);
-    InputError.checkOutOfRangeNumber(inputToNumber);
+    InputError.checkNagativeNumber(parsedInput);
+    InputError.checkOutOfRangeNumber(parsedInput);
 
-    return inputToNumber;
+    return parsedInput;
   }
 
   static async getPurchaseAmount() {
@@ -35,9 +35,9 @@ class UserInput {
       "구입금액을 입력해 주세요.\n"
     );
 
-    const amount = this.validateAmount(lottoAmount);
+    const validatedAmount = this.validateAmount(lottoAmount);
 
-    return amount;
+    return validatedAmount;
   }
 
   static async getLottoNumbers() {
@@ -55,9 +55,9 @@ class UserInput {
       "보너스 번호를 입력해 주세요.\n"
     );
 
-    const validateNumber = this.validateBonusNumber(bonusNumber);
+    const validatedBonusNumber = this.validateBonusNumber(bonusNumber);
 
-    return validateNumber;
+    return validatedBonusNumber;
   }
 }
 
