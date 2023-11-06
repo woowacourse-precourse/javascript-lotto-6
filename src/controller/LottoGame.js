@@ -1,6 +1,5 @@
 import InputView from '../view/InputView.js';
-import Validator from '../validator/Validator.js';
-import { CONSTANT, RANK, SYMBOL } from '../constants/Constant.js';
+import { SYMBOL } from '../constants/Constant.js';
 import LottoBundle from '../model/LottoBundle.js';
 import OutputView from '../view/OutputView.js';
 import Lotto from '../model/Lotto.js';
@@ -8,8 +7,6 @@ import BonusNumber from '../model/BonusNumber.js';
 
 class LottoGame {
   #lottoBundle;
-
-  #winningNumbers;
 
   async startGame() {
     this.#lottoBundle = await this.#getLottoBundle();
@@ -19,10 +16,9 @@ class LottoGame {
     const winningLotto = await this.#getWinningLotto();
     const bonusNumber = await this.#getBonusNumber();
 
-    const totalRanks = this.#lottoBundle.getTotalRank(winningLotto, bonusNumber);
-
-    const reward = this.#getReward(totalRanks);
-    const profitRate = this.#getProfitRate(reward, lottoCount);
+    this.#lottoBundle.calculateTotalRank(winningLotto, bonusNumber.getNumber());
+    const totalRanks = this.#lottoBundle.getTotalRank();
+    const profitRate = this.#lottoBundle.getProfitRate();
     OutputView.printGameResult(totalRanks, profitRate);
   }
 
@@ -65,20 +61,6 @@ class LottoGame {
 
       return this.#getBonusNumber();
     }
-  }
-
-  getProfitRate(lottoCount, totalRank) {
-    const profit = this.getProfit(totalRank);
-    OutputView.printMessage(profit);
-
-  #getProfitRate(reward, lottoCount) {
-    return ((reward / (lottoCount * CONSTANT.amountUnit)) * 100).toFixed(1);
-  }
-
-  getProfit(totalRank) {
-    const rewards = Object.values(RANK).map((rank) => rank.reward);
-
-    return totalRank.reduce((sum, rankCount, index) => sum + rankCount * rewards[index], 0);
   }
 }
 

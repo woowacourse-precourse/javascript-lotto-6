@@ -46,14 +46,28 @@ class LottoBundle {
     return this.#lottoList.map((lotto) => lotto.getNumbers());
   }
 
-  getTotalRank(winningLotto, bonusNumber) {
+  getTotalRank() {
+    return this.#totalRank;
+  }
+
+  calculateTotalRank(winningLotto, bonusNumber) {
     this.#lottoList.forEach((lotto) => {
       const rank = lotto.getRank(winningLotto, bonusNumber);
       const rankIndex = Object.keys(RANK).indexOf(rank);
       if (rankIndex !== -1) this.#totalRank[rankIndex] += 1;
     });
+  }
 
-    return this.#totalRank;
+  getProfitRate() {
+    const profit = this.getProfit();
+
+    return ((profit / (this.#lottoCount * CONSTANT.amountUnit)) * 100).toFixed(1);
+  }
+
+  getProfit() {
+    const rewards = Object.values(RANK).map((rank) => rank.reward);
+
+    return this.#totalRank.reduce((sum, rankCount, index) => sum + rankCount * rewards[index], 0);
   }
 }
 
