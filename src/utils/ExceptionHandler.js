@@ -14,73 +14,95 @@ class ExceptionHandler {
       this.throwAppError(ERROR.message.invalidPurchase);
     }
 
-    const parsedAmount = amount;
-    if (parsedAmount % LOTTO.unit.value) {
+    if (amount % LOTTO.unit.value) {
       this.throwAppError(ERROR.message.invalidUnit);
     }
 
-    return parsedAmount;
+    return amount;
   }
 
   static validateWinningNumbers(winningNumbers) {
-    // 3.1 winningNumbers
-    const splitedWinningNumbers = winningNumbers.split(LOTTO.string.comma);
-    const winningNumbersSet = new Set(splitedWinningNumbers.map(Number));
-    const hasWhiteSpace = LOTTO.regexPatterns.whitespace.test(splitedWinningNumbers);
+    const splitedWinningNumbers = this.getSplitedWinningNumbers(winningNumbers);
+    const winningNumbersSet = this.getWinningNumbersSet(splitedWinningNumbers);
 
-    // 3.1.1 (예외) 6개 이하
-    if (splitedWinningNumbers.length !== LOTTO.number.limit) {
-      throw new AppError(ERROR.message.invalidNumberLimit);
-    }
-
-    // 3.1.2 (예외) 빈 문자열
-    if (hasWhiteSpace) {
-      throw new AppError(ERROR.message.invalidInput);
-    }
-
-    // 3.1.3 (예외) 중복인 경우
-    if (winningNumbersSet.size !== LOTTO.number.limit) {
-      throw new AppError(ERROR.message.duplicateNumber);
-    }
-
-    // 3.1.4 (예외) 1~45 사이
-
-    if (![...winningNumbersSet].every(isValidNumber)) {
-      throw new AppError(ERROR.message.invalidNumberRange);
-    }
-
-    // // 3.1.5 (예외) ,, 이 중복으로 들어간 경우 : 1,2,,3,4,5 -> 0으로 처리함
-    if (winningNumbersSet.has(LOTTO.number.zero)) {
-      throw new AppError(ERROR.message.noZero);
-    }
+    this.checkNumberLimit(splitedWinningNumbers);
+    this.checkWhiteSpace(splitedWinningNumbers);
+    this.checkDuplicateNumber(winningNumbersSet);
+    this.checkNumberRange(winningNumbersSet);
+    this.checkZero(winningNumbersSet);
 
     return winningNumbers;
   }
 
+  static getSplitedWinningNumbers(winningNumbers) {
+    return winningNumbers.split(LOTTO.string.comma);
+  }
+
+  static getWinningNumbersSet(splitedWinningNumbers) {
+    return new Set(splitedWinningNumbers.map(Number));
+  }
+
+  static checkNumberLimit(splitedWinningNumbers) {
+    if (splitedWinningNumbers.length !== LOTTO.number.limit) {
+      throw new AppError(ERROR.message.invalidNumberLimit);
+    }
+  }
+
+  static checkWhiteSpace(splitedWinningNumbers) {
+    if (LOTTO.regexPatterns.whitespace.test(splitedWinningNumbers)) {
+      throw new AppError(ERROR.message.invalidInput);
+    }
+  }
+
+  static checkDuplicateNumber(winningNumbersSet) {
+    if (winningNumbersSet.size !== LOTTO.number.limit) {
+      throw new AppError(ERROR.message.duplicateNumber);
+    }
+  }
+
+  static checkNumberRange(winningNumbersSet) {
+    if (![...winningNumbersSet].every(isValidNumber)) {
+      throw new AppError(ERROR.message.invalidNumberRange);
+    }
+  }
+
+  static checkZero(winningNumbersSet) {
+    if (winningNumbersSet.has(LOTTO.number.zero)) {
+      throw new AppError(ERROR.message.noZero);
+    }
+  }
+
   static validateBonusNumber(inputbonusNumber, winningNumbers) {
-    const splitedWinningNumbers = winningNumbers.split(LOTTO.string.comma);
-    const winningNumbersSet = new Set(splitedWinningNumbers.map(Number));
+    const splitedWinningNumbers = this.getSplitedWinningNumbers(winningNumbers);
+    const winningNumbersSet = this.getWinningNumbersSet(splitedWinningNumbers);
     const bonusNumber = Number(inputbonusNumber);
 
-    // comma, ' ' 를 포함하는 경우
+    this.checkInvalidInput(inputbonusNumber);
+    this.checkInvalidNumber(bonusNumber);
+    this.checkDuplicateBonusNumber(bonusNumber, winningNumbersSet);
+
+    return bonusNumber;
+  }
+
+  static checkInvalidInput(inputbonusNumber) {
     if (
       inputbonusNumber.includes(LOTTO.string.comma) ||
       inputbonusNumber.includes(LOTTO.string.space)
     ) {
       throw new AppError(ERROR.message.invalidInput);
     }
+  }
 
-    // 숫자가 아니거나 범위를 벗어나는지 확인
+  static checkInvalidNumber(bonusNumber) {
     if (!isValidNumber(bonusNumber)) {
-      throw new Error(ERROR.message.invalidNumberRange);
+      throw new AppError(ERROR.message.invalidNumberRange);
     }
+  }
 
-    // 3.2.2 보너스 번호와 당첨 번호 중복
+  static checkDuplicateBonusNumber(bonusNumber, winningNumbersSet) {
     if (winningNumbersSet.has(bonusNumber)) {
       throw new AppError(ERROR.message.duplicateBonusNumber);
     }
-
-    return bonusNumber;
   }
 }
 
