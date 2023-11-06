@@ -18,8 +18,6 @@ describe("결과 계산 테스트", () => {
     // then
     expect(result).toEqual({
       prizeCounts: {
-        1: 0,
-        2: 0,
         3: 1,
         4: 0,
         5: 0,
@@ -45,8 +43,6 @@ describe("결과 계산 테스트", () => {
     // then
     expect(result).toEqual({
       prizeCounts: {
-        1: 0,
-        2: 0,
         3: 0,
         4: 1,
         5: 0,
@@ -72,8 +68,6 @@ describe("결과 계산 테스트", () => {
     // then
     expect(result).toEqual({
       prizeCounts: {
-        1: 0,
-        2: 0,
         3: 0,
         4: 0,
         5: 1,
@@ -99,8 +93,6 @@ describe("결과 계산 테스트", () => {
     // then
     expect(result).toEqual({
       prizeCounts: {
-        1: 0,
-        2: 0,
         3: 0,
         4: 0,
         5: 0,
@@ -126,8 +118,6 @@ describe("결과 계산 테스트", () => {
     // then
     expect(result).toEqual({
       prizeCounts: {
-        1: 0,
-        2: 0,
         3: 0,
         4: 0,
         5: 0,
@@ -153,8 +143,6 @@ describe("결과 계산 테스트", () => {
     // then
     expect(result).toEqual({
       prizeCounts: {
-        1: 0,
-        2: 0,
         3: 1,
         4: 1,
         5: 0,
@@ -180,8 +168,6 @@ describe("결과 계산 테스트", () => {
     // then
     expect(result).toEqual({
       prizeCounts: {
-        1: 0,
-        2: 0,
         3: 1,
         4: 1,
         5: 0,
