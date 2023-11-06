@@ -16,6 +16,11 @@ class Lotto {
         throw new Error("[ERROR] 입력 형식이 올바르지 않습니다.");
     });
 
+    numbers.forEach((number) => {
+      if (number < 1 || number > 45)
+        throw new Error("[ERROR] 로또 번호는 1 ~ 45 사이의 숫자여야 합니다.");
+    });
+
     const setNumber = new Set(numbers);
 
     if (setNumber.size !== numbers.length)
