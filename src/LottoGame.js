@@ -20,6 +20,7 @@ class LottoGame {
       try {
         validateMoney(money);
         this.#count = money / LOTTO_PRICE;
+        OutputView.printLottoPricePurchased(money);
         break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
