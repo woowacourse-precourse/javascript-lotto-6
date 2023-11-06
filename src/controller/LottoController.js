@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lottos from '../model/Lottos.js';
 import WinningLotto from '../model/WinningLotto.js';
+import InputValidator from '../utils/InputValidator.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 
@@ -19,10 +20,16 @@ class LottoController {
   }
 
   async inputMoney() {
-    const money = await InputView.printPurchaseAmount();
-    const getLottoCount = this.calculateLottoCount(money);
-    this.#lottos = new Lottos(getLottoCount);
-    this.showLottos();
+    try {
+      const money = await InputView.printPurchaseAmount();
+      InputValidator.validatePurchaseMoney(money);
+      const getLottoCount = this.calculateLottoCount(money);
+      this.#lottos = new Lottos(getLottoCount);
+      this.showLottos();
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputMoney();
+    }
   }
 
   calculateLottoCount(money) {
@@ -50,20 +57,30 @@ class LottoController {
   }
 
   async inputWinningLottoNumbers() {
-    const winningLottoNumbers = await InputView.printWinningLottoNumbers();
-    Console.print('');
-
-    this.#winningLottos = winningLottoNumbers.split(',').map(Number);
+    try {
+      const winningLottoNumbers = await InputView.printWinningLottoNumbers();
+      Console.print('');
+      this.#winningLottos = winningLottoNumbers.split(',').map(Number);
+      InputValidator.validateNumbers(this.#winningLottos);
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputWinningLottoNumbers();
+    }
   }
 
   async inputBonusLottoNumber() {
-    const winningBonusNumber = await InputView.printWinningBonusNumber();
-    Console.print('');
-
-    this.#winningLottos = new WinningLotto(
-      this.#winningLottos,
-      Number(winningBonusNumber),
-    );
+    try {
+      const winningBonusNumber = await InputView.printWinningBonusNumber();
+      InputValidator.validateNumber(winningBonusNumber);
+      Console.print('');
+      this.#winningLottos = new WinningLotto(
+        this.#winningLottos,
+        Number(winningBonusNumber),
+      );
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputBonusLottoNumber();
+    }
   }
 
   calculateMatchingNumbers() {
