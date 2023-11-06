@@ -18,7 +18,7 @@ const InputView = {
 
   async readBonousNumber() {
     const bonousNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonousNumber);
-    return Number(bonousNumber);
+    return Array.from(bonousNumber, Number);
   },
 };
 
