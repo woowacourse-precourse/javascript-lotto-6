@@ -1,12 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const errorHandler = async (callback, validator, arg) => {
+const errorHandler = async (callback, validator, winningNumbers) => {
   while (true) {
     const input = await callback();
     let isValid = null;
 
-    if (arg) isValid = await checkValidate({ bonusNumber: input, winningNumbers: arg }, validator);
-    if (!arg) isValid = await checkValidate(input, validator);
+    if (winningNumbers) {
+      isValid = await checkValidate({ bonusNumber: input, winningNumbers }, validator);
+    }
+    if (!winningNumbers) isValid = await checkValidate(input, validator);
     if (!isValid) continue;
 
     return input;

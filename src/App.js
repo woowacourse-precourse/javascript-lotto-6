@@ -24,31 +24,31 @@ class App {
   }
 
   async #generateLottoProcess() {
-    const lottoPrice = await this.#checkLottoPrice();
+    const lottoPrice = await this.#validateLottoPrice();
     const lottos = this.#lottoGame.purchace(lottoPrice);
     OutputView.printTotalLottos(lottos);
   }
 
-  async #checkLottoPrice() {
+  async #validateLottoPrice() {
     return await errorHandler(InputView.getLottoPrice, lottoPriceValidator.checkLottoPrice);
   }
 
   async #lottoResultProcess() {
-    const winningNumbers = await this.#checkWinningNumbers();
-    const bonusNumber = await this.#checkBonusNumber(winningNumbers);
+    const winningNumbers = await this.#validateWinningNumbers();
+    const bonusNumber = await this.#validateBonusNumber(winningNumbers);
 
     const result = this.#lottoGame.compareLottoResult(winningNumbers, bonusNumber);
     OutputView.printResult(result);
   }
 
-  async #checkWinningNumbers() {
+  async #validateWinningNumbers() {
     return await errorHandler(
       InputView.getWinnigNumbers,
       winnigNumberValidator.checkWinningNumbers
     );
   }
 
-  async #checkBonusNumber(winningNumbers) {
+  async #validateBonusNumber(winningNumbers) {
     return await errorHandler(
       InputView.getBonusNumber,
       bonusNumberValidator.checkBonusNumber,

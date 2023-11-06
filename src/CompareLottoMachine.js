@@ -32,11 +32,11 @@ class CompareLottoMachine {
   }
 
   #formatMatchedNumbers(filterdMatchedNumbers) {
-    const dataBase = [5000, 50000, 1500000, 30000000, 2000000000];
-    const matchCriteria = [3, 4, 5, 5, 6];
-    const result = dataBase.map((prize, index) => ({
+    const prizeList = [5000, 50000, 1500000, 30000000, 2000000000];
+    const matchCriteriaList = [3, 4, 5, 5, 6];
+    const result = prizeList.map((prize, index) => ({
       prize,
-      matchCriteria: matchCriteria[index],
+      matchCriteria: matchCriteriaList[index],
       matchedNumber: filterdMatchedNumbers[index],
     }));
 
