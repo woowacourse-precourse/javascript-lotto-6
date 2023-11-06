@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import LottoMaker from '../utils/LottoMaker.js';
 import InputView from '../views/InputView.js';
+import OutputView from '../views/OutputView.js';
 
 class GameController {
   #lottoMaker;
@@ -11,7 +12,8 @@ class GameController {
 
   async startGame() {
     const publishCount = await this.getLottoPublishCount();
-    console.log(publishCount);
+    OutputView.printLine();
+    OutputView.printPublishCount(publishCount);
   }
 
   async getLottoPublishCount() {

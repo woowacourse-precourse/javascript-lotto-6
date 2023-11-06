@@ -8,6 +8,10 @@ export const INPUT_MESSAGE = Object.freeze({
   bonusNumber: '보너스 번호를 입력해 주세요.\n',
 });
 
+export const OUTPUT_MESSAGE = Object.freeze({
+  publishCount: count => `${count}개를 구매했습니다.`,
+});
+
 export const ERROR_PRIFIX = '[ERROR] ';
 export const ERROR_MESSAGE = Object.freeze({
   notDividedPrice: '로또 가격(1,000원) 단위로 입력해주세요.',
