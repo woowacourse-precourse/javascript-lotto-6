@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
 import Lotto from './Lotto.js';
+import WinningLotto from './WinningLotto.js';
 import createLottoNumbers from './utils/createLottoNumbers.js';
 import { LOTTO, LOTTO_PRIZE } from './constants/lotto.js';
 import Input from './Input.js';
@@ -9,12 +10,10 @@ import Output from './Output.js';
 class LottoGame {
   #lottos;
   #winningLotto;
-  #bonusNumber;
 
   constructor() {
     this.#lottos = [];
     this.#winningLotto = null;
-    this.#bonusNumber = null;
     this.input = new Input();
     this.output = new Output();
   }
@@ -24,11 +23,10 @@ class LottoGame {
     this.purchaseLotto(purchaseAmount);
     this.output.printPurchaseLottos(this.getLottos());
     await this.createWinningLotto();
-    await this.createBonusNumber();
     const rankCountResult = this.compareLotto(
       this.#lottos,
       this.#winningLotto.getNumbers(),
-      this.#bonusNumber,
+      this.#winningLotto.getBonusNumber(),
     );
     const returnRate = this.calculateRate(purchaseAmount, rankCountResult);
     this.output.printStatistics(rankCountResult, returnRate);
@@ -37,18 +35,13 @@ class LottoGame {
   async createWinningLotto() {
     try {
       const winningNumbers = await this.input.getWinningNumbers();
-      this.#winningLotto = new Lotto(winningNumbers);
+      const bonusNumber = await this.input.getBonusNumber();
+
+      this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     } catch (error) {
       Console.print(error.message);
       await this.createWinningLotto();
     }
-  }
-
-  async createBonusNumber() {
-    const bonusNumber = await this.input.getBonusNumber(
-      this.#winningLotto.getNumbers(),
-    );
-    this.#bonusNumber = bonusNumber;
   }
 
   purchaseLotto(amount) {
