@@ -1,3 +1,4 @@
+import MessageFormat from '../utils/MessageFormat.js';
 import MESSAGE from '../utils/constants/string.js';
 import SYMBOL from '../utils/constants/symbol.js';
 import InputView from './InputView.js';
@@ -27,6 +28,15 @@ class View {
       MESSAGE.read.bonusNumber,
     );
     return Number(bonusNumberInput);
+  }
+
+  printLottoPurchaseResult(lottos) {
+    const count = lottos.length;
+    this.#outputView.print(MessageFormat.lottoPurchaseHeader(count));
+    const lottoNumbers = lottos.map(item =>
+      MessageFormat.lottoTicket(item.getNumbers()),
+    );
+    lottoNumbers.forEach(item => this.#outputView.print(item));
   }
 
   printError(error) {
