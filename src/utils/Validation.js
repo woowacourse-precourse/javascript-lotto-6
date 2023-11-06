@@ -33,6 +33,9 @@ export const checkWinningNumbers = (numbers) => {
     if (numbers.some(isNaN)) {
         throw new Error(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
     }
+    if (numbers.some(number => !Number.isInteger(number))) {
+        throw new Error(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
+    }
     if (numbers.length !== LOTTO_NUMBER_COUNT) {
         throw new Error(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
     }
