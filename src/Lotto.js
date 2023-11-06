@@ -41,6 +41,9 @@ class Lotto {
     if (cntCorrect === 3) {
       this.result = "3개 일치 (5,000원)";
     }
+    if (cntCorrect < 3) {
+      this.result = "None";
+    }
   }
   /* 
    TODO: Lotto에서 당첨결과 확인 로직 구현, 
