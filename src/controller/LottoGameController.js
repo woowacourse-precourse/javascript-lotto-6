@@ -1,12 +1,15 @@
 import { LOTTO_PRICE } from '../constants/GameSetting.js';
-import { inputBuyAmount } from '../view/View.js';
+import { getRandomNumber } from '../utils/RandomNumber.js';
+import { inputBuyAmount, printBuyLotto } from '../view/View.js';
 
 export default class LottoGameController {
   #buyLottoAmount;
   #buyLottoCnt;
+  #LottoArray = [];
 
   async play() {
     await this.buyAmount();
+    this.countLotto();
     this.buyLotto();
 
     console.log('구입금액: ', this.getBuyLottoAmount());
@@ -17,8 +20,21 @@ export default class LottoGameController {
     this.#buyLottoAmount = await inputBuyAmount();
   }
 
-  buyLotto() {
+  countLotto() {
     this.#buyLottoCnt = this.#buyLottoAmount / LOTTO_PRICE;
+  }
+
+  buyLotto() {
+    printBuyLotto(this.#buyLottoCnt);
+
+    for (let i = 0; i < this.#buyLottoCnt; i++) {
+      this.#LottoArray.push(this.makeLotto());
+    }
+  }
+
+  makeLotto() {
+    const a = getRandomNumber();
+    console.log('pick:', a);
   }
 
   getBuyLottoAmount() {

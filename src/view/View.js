@@ -12,3 +12,7 @@ export async function inputBuyAmount() {
     return inputBuyAmount();
   }
 }
+
+export function printBuyLotto(buyLottoCnt) {
+  Console.print(`\n${buyLottoCnt}${MESSAGE_NOTIFICATION.buyLotto}`);
+}
