@@ -67,6 +67,7 @@ describe("로또 보너스 번호 입력 테스트", () => {
 
     await app.inputWinningNumbers();
     await app.inputBonusNumber();
+
     // then
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
@@ -83,6 +84,7 @@ describe("로또 보너스 번호 입력 테스트", () => {
 
     await app.inputWinningNumbers();
     await app.inputBonusNumber();
+
     // then
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
