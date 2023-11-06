@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { MAX_NUMBER, MIN_NUMBER, LOTTO_LENGTH, MULTIPLE, ZERO } from '../constants/contant.js';
+import { MAX_NUMBER, MIN_NUMBER, LOTTO_LENGTH, MULTIPLE, ZERO } from '../constants/constant.js';
 import MoneyValidation from '../validation/MoneyValidation.js';
 import makeAsendingOrder from '../util/makeAsendingOrder.js';
 

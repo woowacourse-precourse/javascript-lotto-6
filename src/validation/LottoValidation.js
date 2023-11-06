@@ -1,6 +1,6 @@
 import ValidationError from '../error/ValidationError.js';
 import { SELECT_NUMBER_ERROR } from '../constants/error.js';
-import { MAX_NUMBER, MIN_NUMBER, LOTTO_LENGTH } from '../constants/contant.js';
+import { MAX_NUMBER, MIN_NUMBER, LOTTO_LENGTH } from '../constants/constant.js';
 
 class LottoValidation {
   /**

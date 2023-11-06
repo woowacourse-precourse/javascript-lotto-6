@@ -1,6 +1,6 @@
 import ValidationError from '../error/ValidationError.js';
 import { PURCHASE_AMOUNT_ERROR } from '../constants/error.js';
-import { MULTIPLE } from '../constants/contant.js';
+import { MULTIPLE } from '../constants/constant.js';
 
 class MoneyValidation {
   /**

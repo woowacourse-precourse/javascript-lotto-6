@@ -1,6 +1,6 @@
 import { BONUS_NUMBER_ERROR } from '../constants/error.js';
 import ValidationError from '../error/ValidationError.js';
-import { MAX_NUMBER, MIN_NUMBER } from '../constants/contant.js';
+import { MAX_NUMBER, MIN_NUMBER } from '../constants/constant.js';
 
 class BonusValidation {
   /**
