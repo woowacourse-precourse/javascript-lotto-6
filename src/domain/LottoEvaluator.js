@@ -5,11 +5,11 @@ class LottoEvaluator {
     this.baseNumbers = baseNumbers;
     this.bonusNumber = bonusNumber;
     this.matchCounts = {
-      FIRST: 0,
-      SECOND: 0,
-      THIRD: 0,
-      FOURTH: 0,
       FIFTH: 0,
+      FOURTH: 0,
+      THIRD: 0,
+      SECOND: 0,
+      FIRST: 0,
     };
   }
 
