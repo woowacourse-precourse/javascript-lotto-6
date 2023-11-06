@@ -17,7 +17,7 @@ class Lotto {
     return this.#numbers;
   }
 
-  match(winningNumber, bonusNumber) {
+  #match(winningNumber, bonusNumber) {
     let count = 0;
     let isMatchedBonus = false;
 
@@ -30,6 +30,23 @@ class Lotto {
     });
 
     return [count, isMatchedBonus];
+  }
+
+  getRank(winningNumber, bonusNumber) {
+    const [count, isMatchedBonus] = this.#match(winningNumber, bonusNumber);
+    if (count === 6) {
+      return 1;
+    }
+    if (count === 5) {
+      return isMatchedBonus ? 2 : 3;
+    }
+    if (count === 4) {
+      return 4;
+    }
+    if (count === 3) {
+      return 5;
+    }
+    return 0;
   }
 }
 
