@@ -61,12 +61,15 @@ class LottoValidator {
       lottoNumbers,
       "[ERROR] 로또 번호는 중복되지 않아야 합니다."
     );
-    ValidationUtils.validateInRange(
-      lottoNumbers,
-      1,
-      45,
-      "[ERROR] 로또는 1~45 사이의 숫자로 구성되어야 합니다"
-    );
+    lottoNumbers.forEach((number) => {
+      ValidationUtils.validateIsNumber(number, "[ERROR] 숫자를 입력해 주세요");
+      ValidationUtils.validateInRange(
+        number,
+        1,
+        45,
+        "[ERROR] 로또는 1~45 사이의 숫자로 구성되어야 합니다"
+      );
+    });
   }
 
   static validateTargetLottoDomain(lottoNumbers, bonusNumber) {
@@ -86,6 +89,18 @@ class LottoValidator {
       bonusNumber,
       "[ERROR] 보너스 번호는 당첨 번호에 포함될 수 없습니다."
     );
+    lottoNumbers.forEach((number) => {
+      ValidationUtils.validateIsNumber(
+        number,
+        "[ERROR] 당첨 로또는 정수로 구성되어야 합니다"
+      );
+      ValidationUtils.validateInRange(
+        number,
+        1,
+        45,
+        "[ERROR] 당첨 로또는 1~45 사이의 숫자로 구성되어야 합니다"
+      );
+    });
   }
 }
 
