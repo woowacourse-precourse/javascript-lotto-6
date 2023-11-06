@@ -13,6 +13,8 @@ class LottoGameController {
 
   async start() {
     await this.setMoneyAmountFromInput();
+    const tickets = this.#lottoPublisher.publishLottos();
+    this.#view.printLottoPurchaseResult(tickets);
     await this.setWinningNumbersFromInput();
     await this.setBonusNumbersFromInput();
   }
@@ -30,10 +32,6 @@ class LottoGameController {
     await this.#retryOnFailure(async () => {
       const moneyAmount = await this.#view.readMoneyAmount();
       this.#lottoPublisher.setMoneyAmount(moneyAmount);
-      const tickets = this.#lottoPublisher
-        .publishLottos()
-        .map(item => item.getNumbers());
-      Console.print(tickets);
     });
   }
 
