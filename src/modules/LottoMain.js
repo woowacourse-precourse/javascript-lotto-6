@@ -66,11 +66,23 @@ class LottoMain {
     try {
       this.lottoValidate.bonusValidate(bonusNumber, this.winningNumber);
       this.isResult = new IsResult(this.userLotto,this.winningNumber, bonusNumber, this.money);
-      this.isResult.resultTitle()
+      this.resultTitle();
     } catch(e) {
       Console.print(e.message)
       return this.lottoBonus();
     }
+  }
+
+  resultTitle() {
+    Console.print(LOTTO_MESSAGE.RESULT_VIEW);
+    this.isResult.winningResult();
+  }
+
+  resultView(result, prize, lottoCost) {
+    for(let key in result) {
+      Console.print(`${result[key].match} (${(result[key].price).toLocaleString()}원) - ${result[key].count}개`)
+    }
+    Console.print(`총 수익률은 ${((prize / lottoCost) * 100).toFixed(1)}%입니다.`)
   }
 }
 
