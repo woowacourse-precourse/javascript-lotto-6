@@ -9,12 +9,16 @@ const InputView = {
 
   async readLottoWinningNumbers() {
     const lottoWinningNumbers = await Console.readLineAsync(INPUT_MESSAGE.lottoWinningNumbers);
-    return lottoWinningNumbers;
+    return lottoWinningNumbers.split(",").reduce((numbers, number) => {
+      const trimmedNumber = number.trim();
+      if (trimmedNumber !== "") numbers.push(Number(trimmedNumber));
+      return numbers;
+    }, []);
   },
 
   async readBonousNumber() {
     const bonousNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonousNumber);
-    return bonousNumber;
+    return Number(bonousNumber);
   },
 };
 
