@@ -30,7 +30,10 @@ class LottoGameController {
     await this.#retryOnFailure(async () => {
       const moneyAmount = await this.#view.readMoneyAmount();
       this.#lottoPublisher.setMoneyAmount(moneyAmount);
-      Console.print('잘 됐음');
+      const tickets = this.#lottoPublisher
+        .publishLottos()
+        .map(item => item.getNumbers());
+      Console.print(tickets);
     });
   }
 
