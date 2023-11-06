@@ -47,6 +47,15 @@ class LottoResultChecker {
       }
     }
   }
+  calculateTotalProfit() {
+    const totalProfit =
+      5000 * this.threeMatches +
+      10000 * this.fourMatches +
+      1500000 * this.fiveMatches +
+      30000000 * this.fiveAndBonusMatches +
+      2000000000 * this.sixMatches;
+    return totalProfit;
+  }
 }
 
 export default LottoResultChecker;
