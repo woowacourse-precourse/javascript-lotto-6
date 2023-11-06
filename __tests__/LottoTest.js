@@ -82,3 +82,15 @@ describe("method test : getLottoResult()" , () => {
     expect(ResultArray).toEqual([0,0,0,1,0]);
   });
 });
+
+describe("method test : checkBonusNumber()" , () => {
+  test('만약 5개가 일치하고 BonusNumber이 일치하지 않으면 false를 반환하나 ?', () => {
+    const testArray = [1,2,3,4,5,6];
+    const lotto = new Lotto(testArray);
+    const randomNumbers = [2,4,6,8,12,14];
+    const bonusNumber  = 7;
+    const equalNumber = 5;
+    const bonusResult = lotto.checkBonusNumber(randomNumbers, equalNumber, bonusNumber);
+    expect(bonusResult).toBe(false);
+  });
+});
