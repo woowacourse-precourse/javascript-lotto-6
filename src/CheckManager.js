@@ -1,56 +1,83 @@
-import {Console, MissionUtils} from "@woowacourse/mission-utils";
-import {LOTTO_NUMBER} from "./constants/policy.js";
+import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { LOTTO_NUMBER, REWORD } from './constants/policy.js';
 
 class CheckManager {
-    #ranks
+  #ranks;
 
-    constructor(luckyNumber, bonusNumber, tryCount) {
-        this.#ranks = this.#checkRanks(luckyNumber, bonusNumber, this.#publishLottos(tryCount))
-    }
+  constructor(luckyNumber, bonusNumber, tryCount) {
+    this.#ranks = this.#checkRanks(
+      luckyNumber,
+      bonusNumber,
+      this.#publishLottos(tryCount),
+    );
+  }
 
-    #publishLottos(count) {
-        return new Array(count).fill('').map(v => {
-            const publishLotto = MissionUtils.Random.pickUniqueNumbersInRange(LOTTO_NUMBER.startNumber, LOTTO_NUMBER.endNumber, LOTTO_NUMBER.lottoLength);
-            Console.print(publishLotto.sort((a, b) => a - b).toString())
-            return publishLotto
-        });
-    }
+  #publishLottos(count) {
+    return new Array(count).fill('').map((v) => {
+      const publishLotto = MissionUtils.Random.pickUniqueNumbersInRange(
+        LOTTO_NUMBER.startNumber,
+        LOTTO_NUMBER.endNumber,
+        LOTTO_NUMBER.lottoLength,
+      );
+      Console.print(publishLotto.sort((a, b) => a - b).toString());
+      return publishLotto;
+    });
+  }
 
-    #checkRanks(luckyNumber, bonusNumber, randomPublishLottos) {
-        return randomPublishLottos.map(randomPublishLotto => {
-            const differentCount = this.#checkLuckyNumber(luckyNumber, randomPublishLotto)
-            const isBonus = this.#checkBonus(bonusNumber, randomPublishLottos)
-            switch (differentCount) {
-                case 0:
-                    return 1
-                case 1:
-                    if (isBonus) {
-                        return 2
-                    }
-                    return 3
-                default:
-                    return differentCount + 2
-            }
-        })
-    }
+  #checkRanks(luckyNumber, bonusNumber, randomPublishLottos) {
+    return randomPublishLottos.map((randomPublishLotto) => {
+      const differentCount = this.#checkLuckyNumber(
+        luckyNumber,
+        randomPublishLotto,
+      );
+      const isBonus = this.#checkBonus(bonusNumber, randomPublishLottos);
+      switch (differentCount) {
+        case 0:
+          return 1;
+        case 1:
+          if (isBonus) {
+            return 2;
+          }
+          return 3;
+        default:
+          return differentCount + 2;
+      }
+    });
+  }
 
-    #checkLuckyNumber(luckyNumber, randomPublishLotto) {
-        let differentCount = 6;
-        randomPublishLotto.forEach((number) => {
-            if (luckyNumber.includes(number)) {
-                differentCount--;
-            }
-        });
-        return differentCount;
-    }
+  #checkLuckyNumber(luckyNumber, randomPublishLotto) {
+    let differentCount = 6;
+    randomPublishLotto.forEach((number) => {
+      if (luckyNumber.includes(number)) {
+        differentCount--;
+      }
+    });
+    return differentCount;
+  }
 
-    #checkBonus(bonusNumber, randomPublishLotto) {
-        return randomPublishLotto.includes(bonusNumber);
-    }
+  #checkBonus(bonusNumber, randomPublishLotto) {
+    return randomPublishLotto.includes(bonusNumber);
+  }
 
-    getRanks(){
-        return this.#ranks
-    }
+  static getTotalReword(rank) {
+    let totalReword = 0;
+    rank.forEach((v) => {
+      if (v >= 1 && v < 6) {
+        totalReword += REWORD[`${v}th`];
+      }
+    });
+    return totalReword;
+  }
+
+  static getRevenue(gameCount, totalReword) {
+    const cost = gameCount * TRY_COST;
+    const revenue = totalReword / cost;
+    return Math.floor(revenue * 1000) / 10;
+  }
+
+  getRanks() {
+    return this.#ranks;
+  }
 }
 
-export default CheckManager
+export default CheckManager;
