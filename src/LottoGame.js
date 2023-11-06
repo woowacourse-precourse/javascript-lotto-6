@@ -1,15 +1,17 @@
 import { ERROR_MESSAGE } from "./Constant.js";
 
-const { Console } = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 class LottoGame {
   constructor() {
     this.lottoCount = null;
+    this.lottoList = [];
   }
 
   setLotteCount(money) {
     this.validateMoney(money);
     this.lottoCount = money / 1000;
+    this.publishedLotto(this.lottoCount);
   }
 
   validateMoney(money) {
@@ -22,6 +24,19 @@ class LottoGame {
 
   printLotteCount() {
     Console.print(`${this.lottoCount}개를 구매했습니다.`);
+  }
+
+  publishedLotto(lottoCount) {
+    for (let n = 0; n < lottoCount; n++) {
+      const newLotto = new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6));
+      this.lottoList.push(newLotto);
+    }
+  }
+
+  printLottoList() {
+    this.lottoList.forEach((lotto) => {
+      lotto.printNumberList();
+    });
   }
 }
 

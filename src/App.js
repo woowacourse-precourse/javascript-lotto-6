@@ -1,11 +1,11 @@
 import { GAME_MESSAGE } from "./Constant.js";
 
 const { Console } = require("@woowacourse/mission-utils");
-const validate = require("./LottoGame.js");
+const LottoGame = require("./LottoGame.js");
 
 class App {
   constructor() {
-    this.validate = new validate();
+    this.game = new LottoGame();
   }
 
   async play() {
@@ -14,7 +14,9 @@ class App {
 
   inputMoney() {
     Console.readLineAsync(GAME_MESSAGE.BUY_AMOUNT, (money) => {
-      this.validate.setLottoCount(money);
+      this.game.setLottoCount(money);
+      this.game.printLottoCount();
+      this.game.printLottoList();
     });
   }
 }
