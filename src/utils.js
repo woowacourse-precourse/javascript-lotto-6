@@ -36,3 +36,25 @@ export const validateMoney = (input) => {
 export const pickUniqueNumbersInRange = (min, max, count) => {
   return Random.pickUniqueNumbersInRange(min, max, count);
 };
+
+export const validateWinnigNumber = (input) => {
+  if (input.length !== 6) {
+    throw new Error(ERROR_MESSAGES.INVALID_LENGTH);
+  }
+
+  const numbers = input.map(Number);
+
+  if (numbers.some(isNaN)) {
+    throw new Error(ERROR_MESSAGES.NON_NUMERIC);
+  }
+
+  if (numbers.some((num) => num < 1 || num > 45)) {
+    throw new Error(ERROR_MESSAGES.OUT_OF_RANGE);
+  }
+
+  if (new Set(numbers).size !== 6) {
+    throw new Error(ERROR_MESSAGES.DUPLICATE);
+  }
+
+  return true;
+};
