@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "../src/Lotto.js";
 
 class App {
   purchaseAmount = 0;
@@ -29,13 +30,17 @@ class App {
 
   purchaseLotto() {
     let lottoAmount = this.purchaseAmount / 1000;
+    MissionUtils.Console.print(`${lottoAmount}개를 구매했습니다.`);
     for (let i = 1; i <= lottoAmount; i++) {
       const lottoNumbers = App.generateLottoNumbers();
+      const lotto = new Lotto(lottoNumbers);
+      this.lottos.push(lotto);
     }
   }
 
   async play() {
     await this.inputPurchaseAmount();
+    this.purchaseLotto();
   }
 }
 
