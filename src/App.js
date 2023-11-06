@@ -141,23 +141,18 @@ class App {
     return (100 + ((profit - input) / input) * 100).toFixed(2);
   }
 
-  async play() {
-    const inputMoney = await this.askMoney();
-    this.moneyTypeCheck(inputMoney);
-
+  printLottosInfo(inputMoney) {
     MissionUtils.Console.print(
       this.gethowManyLotto(inputMoney) + PRINT.RESULT_BUY
     );
     this.createLottos();
     this.printAllLottos();
+  }
 
-    const winNumber = await this.askWinNumber();
-    const winBonus = await this.askBonus(winNumber);
-
+  printLottosResult(inputMoney, winNumber, winBonus) {
     this.allLottos.forEach((lotto) => {
       this.userResult.push(lotto.getCorrectNumber(winNumber, winBonus));
     });
-    MissionUtils.Console.print(this.userResult);
 
     this.getWinResult(this.userResult, winBonus);
     this.printWinResult(this.winResult);
@@ -165,6 +160,18 @@ class App {
     MissionUtils.Console.print(
       `총 수익률은 ${this.getProfit(inputMoney)}% 입니다.`
     );
+  }
+
+  async play() {
+    const inputMoney = await this.askMoney();
+    this.moneyTypeCheck(inputMoney);
+
+    this.printLottosInfo(inputMoney);
+
+    const winNumber = await this.askWinNumber();
+    const winBonus = await this.askBonus(winNumber);
+
+    this.printLottosResult(inputMoney, winNumber, winBonus);
   }
 }
 
