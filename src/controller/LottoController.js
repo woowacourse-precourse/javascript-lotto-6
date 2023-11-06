@@ -84,6 +84,35 @@ class LottoController {
 
     this.winningStatistic(counts);
   }
+
+  /**
+   * 일치하는 개수로 당첨 통계 계산하는 함수
+   * @param {string[]} counts
+   */
+  winningStatistic(counts) {
+    const profit = new Profit(counts);
+    this.printStatistic(profit.getHistory());
+    this.printProfit(profit.calculate(this.#money));
+  }
+
+  /**
+   * 당첨 통계 출력하는 함수
+   * @param {number[]} counts
+   */
+  printStatistic(counts) {
+    OutputView.winning();
+    counts.forEach((count, idx) => {
+      OutputView.statistic(count, idx);
+    });
+  }
+
+  /**
+   * 수익률 출력하는 함수
+   * @param {number} percent
+   */
+  printProfit(percent) {
+    OutputView.profit(percent);
+  }
 }
 
 export default LottoController;
