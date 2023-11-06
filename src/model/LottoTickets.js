@@ -9,13 +9,13 @@ class LottoTickets {
     return [...this.#lottoTickets];
   }
 
-  getMatchWinningNumbersCount(winningNumbers) {
+  getWinningNumberMatchCount(winningNumbers) {
     return this.#lottoTickets.map((lottoInstance) => {
       return lottoInstance.getMatchWinningNumbers(winningNumbers).length;
     });
   }
 
-  compareBonusNumber(bonusNumber) {
+  includesBonusNumber(bonusNumber) {
     return this.#lottoTickets.map((lottoInstance) => {
       return lottoInstance.isMatchBonusNumber(bonusNumber);
     });
