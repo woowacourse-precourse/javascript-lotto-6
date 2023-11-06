@@ -56,25 +56,28 @@ class UserLotto {
   }
 
   #rangeCheck(purchaseAmount) {
-    if (purchaseAmount < 0) {
-      throw new Error(ERRORMESSAGE.purchaseRange1);
-    }
+    if (purchaseAmount > Number.MAX_SAFE_INTEGER)
+      throw new Error(ERRORMESSAGE.purchaseToBig);
 
-    if (purchaseAmount > 2000000000) {
+    if (purchaseAmount < Number.MIN_SAFE_INTEGER)
+      throw new Error(ERRORMESSAGE.purchaseToSmall);
+
+    // eslint-disable-next-line prettier/prettier
+    if (purchaseAmount < 0) 
+      throw new Error(ERRORMESSAGE.purchaseRange1);
+
+    if (purchaseAmount > 4000000000)
       throw new Error(ERRORMESSAGE.purchaseRange2);
-    }
   }
 
   #typeCheck(purchaseAmount) {
-    if (Number.isNaN(purchaseAmount)) {
+    if (Number.isNaN(purchaseAmount))
       throw new Error(ERRORMESSAGE.purchaseInput);
-    }
   }
 
   #divisionCheck(purchaseAmount) {
-    if (purchaseAmount % 1000 !== 0) {
+    if (purchaseAmount % 1000 !== 0)
       throw new Error(ERRORMESSAGE.purchaseAmount);
-    }
   }
 }
 
