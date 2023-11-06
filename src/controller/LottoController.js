@@ -16,8 +16,15 @@ class LottoController {
   }
 
   async start() {
+    // 구매금액 입력
     await this.inputMoney();
+    // 로또 생성 후 출력
     this.printLottoCount();
+    // 당첨, 보너스 번호 입력
+    const numbers = await InputView.readWinningNumber();
+    const bonus = await InputView.readBonusNumber();
+    // 당첨 내역 체크해서 결과 출력
+    this.winningResult(numbers, bonus);
   }
 
   /** 구입금액 입력 함수 */
@@ -56,6 +63,46 @@ class LottoController {
     this.#lottos.forEach((lotto) => {
       OutputView.lottoList(lotto);
     });
+  }
+
+  /**
+   * 당첨 내역 출력 함수
+   * @param {number[]} numbers
+   * @param {number} bonus
+   */
+  winningResult(numbers, bonus) {
+    const winning = new Winning(numbers, bonus);
+    const counts = this.#lottos.map((lotto) => {
+      return winning.compareLotto(lotto);
+    });
+
+    this.recordResult(counts);
+  }
+
+  /**
+   * 일치하는 개수로 당첨 내역을 기록하는 함수
+   * @param {string[]} counts
+   */
+  recordResult(counts) {
+    const profit = new Profit(counts);
+    this.printResult(profit.getHistory());
+    this.printProfit(profit.calculate(this.#money));
+  }
+
+  /**
+   * 당첨 통계 출력하는 함수
+   * @param {number[]} counts
+   */
+  printResult(counts) {
+    OutputView.result(counts);
+  }
+
+  /**
+   * 수익률 출력하는 함수
+   * @param {number} percent
+   */
+  printProfit(percent) {
+    OutputView.profit(percent);
   }
 }
 
