@@ -1,9 +1,22 @@
 import { Console } from '@woowacourse/mission-utils';
+import {
+  MATCH_3_PRIZE,
+  MATCH_4_PRIZE,
+  MATCH_5_BONUS_PRIZE,
+  MATCH_5_PRIZE,
+  MATCH_6_PRIZE,
+  PURCHASE_MESSAGE_SUFFIX,
+  QUANTITY_SUFFIX,
+  RATE_OF_RETURN_MESSAGE_PREFIX,
+  RATE_OF_RETURN_MESSAGE_SUFFIX,
+  WINNING_STATISTICS_SEPARATOR,
+  WINNING_STATISTICS_TITLE
+} from '../Constants/Message.js';
 
 class OutputView {  
   static displayNumberOfPurchase(purchaseAmount) {
     const numberOfPurchase = purchaseAmount / 1000;
-    Console.print(`\n${numberOfPurchase}개를 구매했습니다.`);
+    Console.print(`\n${numberOfPurchase}${PURCHASE_MESSAGE_SUFFIX}`);
   }
 
   static displayLotto(lotto) {
@@ -11,17 +24,17 @@ class OutputView {
   }
 
   static displayWinningDetails(rank) {
-    Console.print('당첨 통계');
-    Console.print('---');
-    Console.print(`3개 일치 (5,000원) - ${rank[4]}개`);
-    Console.print(`4개 일치 (50,000원) - ${rank[3]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${rank[2]}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${rank[1]}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${rank[0]}개`);
+    Console.print(WINNING_STATISTICS_TITLE);
+    Console.print(WINNING_STATISTICS_SEPARATOR);
+    Console.print(`${MATCH_3_PRIZE}${rank[4]}${QUANTITY_SUFFIX}`);
+    Console.print(`${MATCH_4_PRIZE}${rank[3]}${QUANTITY_SUFFIX}`);
+    Console.print(`${MATCH_5_PRIZE}${rank[2]}${QUANTITY_SUFFIX}`);
+    Console.print(`${MATCH_5_BONUS_PRIZE}${rank[1]}${QUANTITY_SUFFIX}`);
+    Console.print(`${MATCH_6_PRIZE}${rank[0]}${QUANTITY_SUFFIX}`);
   }
 
   static displayRateOfReturn(rateOfReturn) {
-    Console.print(`총 수익률은 ${parseFloat(rateOfReturn.toFixed(1)).toLocaleString()}%입니다.`);
+    Console.print(`${RATE_OF_RETURN_MESSAGE_PREFIX}${parseFloat(rateOfReturn.toFixed(1)).toLocaleString()}${RATE_OF_RETURN_MESSAGE_SUFFIX}`);
   }
 }
 

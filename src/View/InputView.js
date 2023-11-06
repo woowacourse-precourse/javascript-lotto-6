@@ -4,12 +4,17 @@ import {
   PURCHASE_AMOUNT_ERROR_MESSAGE,
   WINNING_NUMBERS_ERROR_MESSAGE
 } from '../Constants/Error.js';
+import {
+  ENTER_BONUS_NUMBER_PROMPT,
+  ENTER_PURCHASE_AMOUNT_PROMPT,
+  ENTER_WINNING_NUMBERS_PROMPT
+} from '../Constants/Message.js';
 
 class InputView {
   static async requestPurchaseAmount() {
     while (true) {
       try {
-        const purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+        const purchaseAmount = await Console.readLineAsync(ENTER_PURCHASE_AMOUNT_PROMPT);
         this.validatePurchaseAmount(purchaseAmount);
         return Number(purchaseAmount);
       }
@@ -34,7 +39,7 @@ class InputView {
   static async requestWinningNumbers() {
     while (true) {
       try {
-        const winningNumbers = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+        const winningNumbers = await Console.readLineAsync(ENTER_WINNING_NUMBERS_PROMPT);
         this.validateWinningNumbers(winningNumbers.split(','));
         return winningNumbers.split(',').map(Number);
       }
@@ -64,7 +69,7 @@ class InputView {
   static async requestBonusNumber(winningNumbers) {
     while (true) {
       try {
-        const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+        const bonusNumber = await Console.readLineAsync(ENTER_BONUS_NUMBER_PROMPT);
         this.validateBonusNumber(bonusNumber, winningNumbers)
         return Number(bonusNumber);
       }
