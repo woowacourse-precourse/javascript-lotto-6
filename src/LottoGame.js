@@ -2,7 +2,6 @@ import CombinationMachine from './CombinationMachine.js';
 import LottoMachine from './LottoMachine.js';
 import LottoSeller from './LottoSeller.js';
 import User from './User.js';
-import { generator } from './util/generator.js';
 
 class LottoGame {
   #user;
@@ -14,7 +13,7 @@ class LottoGame {
   }
 
   setUpGameProcess() {
-    const lottoMacine = new LottoMachine(generator);
+    const lottoMacine = new LottoMachine();
     this.#lottoSeller = new LottoSeller(lottoMacine);
   }
 
