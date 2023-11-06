@@ -27,17 +27,18 @@ class Lotto {
 
   // TODO: 추가 기능 구현
   checkLotto(winningNumbers, bonusNumber) {
-    winningNumbers.forEach(
-      (number) => this.#numbers.includes(number) && this.#numOfCorrect++
-    );
+    this.#numOfCorrect = 0;
+    this.#isBonus = false;
+
+    winningNumbers.forEach((number) => {
+      if (this.#numbers.includes(number)) this.#numOfCorrect++;
+    });
     if (this.#numbers.includes(bonusNumber)) this.#isBonus = true;
+
     return this;
   }
 
-  getRank(winningNumbers, bonusNumber) {
-    this.#initCheck();
-    this.checkLotto(winningNumbers, bonusNumber);
-
+  getRank() {
     switch (this.#numOfCorrect) {
       case 6:
         return '1등';
@@ -52,11 +53,6 @@ class Lotto {
       default:
         return null;
     }
-  }
-
-  #initCheck() {
-    this.#isBonus = false;
-    this.#numOfCorrect = 0;
   }
 
   static #printLottoNumber(numbers) {

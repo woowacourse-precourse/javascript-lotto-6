@@ -34,8 +34,8 @@ class Player {
 
   checkLottos(winningNumbers, bonusNumber) {
     this.#lottos.forEach((lotto) => {
-      const rank = lotto.getRank(winningNumbers, bonusNumber);
-      if (rank) this.#scoreCard[rank]++;
+      const rank = lotto.checkLotto(winningNumbers, bonusNumber).getRank();
+      if (rank) this.#scoreCard[rank] += 1;
     });
   }
 
