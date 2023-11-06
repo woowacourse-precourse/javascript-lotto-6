@@ -3,6 +3,7 @@ import setLottos from "./util/setLottos.js";
 import setPrizeNumber from "./util/setPrizeNumber.js";
 import setBonusNumber from "./util/setBonusNumber.js";
 import calculateResult from "./util/calculateResult.js";
+import printResult from "./util/printResult.js";
 
 class App {
   async play() {
@@ -20,6 +21,8 @@ class App {
       prizeNumberArr,
       bonusNumber
     );
+
+    printResult(prizeResult);
   }
 }
 
