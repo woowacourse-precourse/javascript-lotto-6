@@ -3,11 +3,13 @@ import MESSAGE from "../constants/message.js";
 import CONDITION from "../constants/condition.js";
 
 class Purchase {
+  #price;
+
   // 로또 구입 금액 입력
   async inputPrice() {
-    const price = await inputs.inputPrice();
-    this.#validate(price);
-    return Number(price);
+    this.#price = await inputs.inputPrice();
+    this.#validate(this.#price);
+    return Number(this.#price);
   }
 
   #validate(price) {
