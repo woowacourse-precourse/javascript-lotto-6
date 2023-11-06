@@ -7,8 +7,8 @@ class Lotto {
     this.#validateDraw(numbers);
     this.#validateBonus(numbers);
     this.#drawNumbers = numbers;
-    this.rank = 0;
     this.statCount = [0, 0, 0, 0, 0];
+    this.rank = 0;
   }
 
   getRandomNumbers() {
@@ -78,7 +78,7 @@ class Lotto {
     return set.size !== numbers.length;
   };
 
-  resultOfLotto(random, drew, bonus) {
+  resultOfDraw(random, drew, bonus) {
     let result = this.matchCountCheck(random, drew);
     let isBonus = this.matchBonusCheck(random, bonus);
     if (result === 3) {
@@ -121,37 +121,35 @@ class Lotto {
   };
 
   lottoDrawResult(rank) {
-    let statCount = this.statCount;
+    let profit = 0;
     if (rank === 5) {
-      statCount[0] = 1;
-
-      return;
+      this.statCount[0] = 1;
+      profit = 5000;
+      return profit;
     }
     if (rank === 4) {
-      statCount[1] = 1;
-
-      return;
+      this.statCount[1] = 1;
+      profit = 50000;
+      return profit;
     }
     if (rank === 3) {
-      statCount[2] = 1;
-
-      return;
+      this.statCount[2] = 1;
+      profit = 1500000;
+      return profit;
     }
     if (rank === 2) {
-      statCount[3] = 1;
-
-      return;
+      this.statCount[3] = 1;
+      profit = 30000000;
+      return profit;
     }
     if (rank === 1) {
-      statCount[4] = 1;
-
-      return;
+      this.statCount[4] = 1;
+      profit = 2000000000;
+      return profit;
     }
-
-    return statCount;
   }
 
-  lottoDrawProfit(count) {
+  lottoDrawPrinter(count) {
     const statCount = this.statCount;
     Console.print(
       `\n당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n4개 일치 (50,000원) - ${statCount[1]}개\n5개 일치 (1,500,000원) - ${statCount[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n6개 일치 (2,000,000,000원) - ${statCount[4]}개\n`
