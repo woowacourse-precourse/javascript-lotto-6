@@ -29,18 +29,19 @@ class Lotto {
       if (this.#numbers.includes(number)) correctTarget += 1;
     }
     if (this.#numbers.includes(bonusNumber)) correctBonus += 1;
-    this.correctTarget = correctTarget;
-    this.correctBonus = correctBonus;
+    this.#correctTarget = correctTarget;
+    this.#correctBonus = correctBonus;
   }
-
+  
   judgeResult() {
-    if (this.correctTarget === 6) return 1;
-    if (this.correctTarget === 5 && this.correctBonus) return 2;
-    if (this.correctTarget === 5 && !this.correctBonus) return 3;
-    if (this.correctTarget === 4) return 4;
-    if (this.correctTarget === 3) return 5;
+    if (this.#correctTarget === 6) return 1;
+    if (this.#correctTarget === 5 && this.#correctBonus) return 2;
+    if (this.#correctTarget === 5 && !this.#correctBonus) return 3;
+    if (this.#correctTarget === 4) return 4;
+    if (this.#correctTarget === 3) return 5;
     return 0;
   }
+  
 }
 
 export default Lotto;

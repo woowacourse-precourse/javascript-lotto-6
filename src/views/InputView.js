@@ -6,10 +6,19 @@ import BonusNumberValidator from "../validate/BonusNumberValidator";
 
 export default class InputView {
   static async getPurchasePrice() {
-    Console.print(GUIDE_MESSAGE.insertMoney);
-    const purchasePrice = await Console.readLineAsync("");
-    PurchasePriceValidator.validatePurchasePrice(purchasePrice);
-    return purchasePrice;
+    try {
+      Console.print(GUIDE_MESSAGE.insertMoney);
+      const purchasePrice = await Console.readLineAsync("");
+      PurchasePriceValidator.validatePurchasePrice(purchasePrice);
+      return purchasePrice;
+    } catch (error) {
+      if (error.message.startsWith('[ERROR]')) {
+        Console.print(error.message); 
+        return this.getPurchasePrice(); 
+      } else {
+        throw error;  
+      }
+    }
   }
 
   static async getWinningNumbers() {

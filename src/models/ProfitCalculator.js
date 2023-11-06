@@ -13,6 +13,6 @@ export default class ProfitCalculator {
   }
 
   static calculateROI(totalPrize, purchasePrice) {
-    return totalPrize / purchasePrice - 1;
+    return (totalPrize / purchasePrice) * 100;
   }
 }

@@ -5,11 +5,11 @@ export default class PurchasePriceValidator {
     if (Number.isNaN(Number(price))) {
       throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGE.notNumber);
     }
-    if (price < 1000) {
+    if (Number(price) < 1000) {
       throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGE.underThousand);
     }
-    if (price % 1000) {
+    if (Number(price) % 1000) {
       throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGE.wrongFormat);
     }
   }
-}
+}  

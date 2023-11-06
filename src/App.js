@@ -22,6 +22,8 @@ class App {
 
     const totalPrize = ProfitCalculator.calculateTotalPrize(result);
     const roi = ProfitCalculator.calculateROI(totalPrize, purchasePrice);
+
+    OutputView.printResult(roi, result);
   }
 }
 
