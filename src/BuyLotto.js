@@ -5,16 +5,9 @@ class BuyLotto {
   #boughtLotto = [];
 
   constructor(lottoCount) {
-    this.#validate(lottoCount);
     this.#lottoCount = lottoCount;
   }
 
-  #validate(lottoCount) {
-    if (Number.isNaN(Number(lottoCount))) {
-      throw new Error("[ERROR] 입력값은 숫자여야 합니다.");
-    }
-    return true;
-  }
   get getLottoCount() {
     return this.#lottoCount;
   }
@@ -24,7 +17,8 @@ class BuyLotto {
   }
 
   buyOneLotto() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return numbers;
   }
 
   buyLottos() {
@@ -35,5 +29,8 @@ class BuyLotto {
     this.#boughtLotto = lotto;
   }
 }
+// const buyLotto = new BuyLotto(1);
+// buyLotto.buyLottos();
+// console.log(buyLotto.getBoughtLotto);
 
 export default BuyLotto;
