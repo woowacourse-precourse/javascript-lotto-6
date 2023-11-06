@@ -1,5 +1,5 @@
 import Lotto from '../Lotto.js';
-import { NUMBER } from '../constants.js';
+import { NUMBER, number } from '../constants.js';
 import { Random } from '@woowacourse/mission-utils';
 
 class LottoMachine {
@@ -34,29 +34,29 @@ class LottoMachine {
     return result;
   }
 
-  static read(resultObject, bonusNumber, rank) {
-    const rankObject = rank;
+  static read(resultObject, bonusNumber) {
+    const rank = Array.from({ length: NUMBER.LOTTO_LENGTH }, () => NUMBER.DEFAULT);
 
     resultObject.forEach((result) => {
       switch (result.matchCount) {
         case NUMBER.LOTTO_LENGTH:
-          rankObject.first += NUMBER.ADD;
+          rank[number.first] += NUMBER.ADD;
           break;
         case NUMBER.SECOND_THIRD:
-          if (result.notMatchNumber === bonusNumber) rankObject.second += NUMBER.ADD;
-          else rankObject.third += NUMBER.ADD;
+          if (result.notMatchNumber === bonusNumber) rank[number.second] += NUMBER.ADD;
+          else rank[number.third] += NUMBER.ADD;
           break;
         case NUMBER.FOURTH:
-          rankObject.fourth += NUMBER.ADD;
+          rank[number.fourth] += NUMBER.ADD;
           break;
         case NUMBER.FIFTH:
-          rankObject.fifth += NUMBER.ADD;
+          rank[number.fifth] += NUMBER.ADD;
           break;
         default:
       }
     });
 
-    return rankObject;
+    return rank;
   }
 }
 

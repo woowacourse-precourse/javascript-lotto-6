@@ -25,13 +25,7 @@ class App {
     this.#lottos = [];
     this.#winningNumbers = [];
     this.#bonusNumber = NUMBER.DEFAULT;
-    this.#prizeResult = {
-      first: NUMBER.DEFAULT,
-      second: NUMBER.DEFAULT,
-      third: NUMBER.DEFAULT,
-      fourth: NUMBER.DEFAULT,
-      fifth: NUMBER.DEFAULT,
-    };
+    this.#prizeResult = [];
     this.#profit = NUMBER.DEFAULT;
   }
 
@@ -63,7 +57,7 @@ class App {
 
   makeResult() {
     const result = this.getResult(this.#lottos, this.#winningNumbers);
-    this.#prizeResult = LottoMachine.read(result, this.#bonusNumber, this.#prizeResult);
+    this.#prizeResult = LottoMachine.read(result, this.#bonusNumber);
     this.#profit = calculate.profitFrom(this.#prizeResult, this.#money);
   }
 

@@ -11,9 +11,8 @@ class Notice {
 
   static finalProfit(profit, prizeResult) {
     prompt.out('\n당첨 통계\n---');
-    const prizeCount = Object.values(prizeResult).reverse();
     totalReward.forEach((rank, index) => {
-      prompt.out(`${rank}${prizeCount[index]}개`);
+      prompt.out(`${rank}${prizeResult[index]}개`);
     });
     prompt.out(`총 수익률은 ${profit}%입니다.`);
   }

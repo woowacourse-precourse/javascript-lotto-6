@@ -20,6 +20,14 @@ const NUMBER = {
   ADD: 1,
 };
 
+const number = {
+  first: 4,
+  second: 3,
+  third: 2,
+  fourth: 1,
+  fifth: 0,
+};
+
 const totalReward = [
   `${NUMBER.FIFTH}개 일치 (${REWARD.FIFTH.toLocaleString()}원) - `,
   `${NUMBER.FOURTH}개 일치 (${REWARD.FOURTH.toLocaleString()}원) - `,
@@ -56,4 +64,5 @@ export {
   pattern,
   ERROR,
   REQUEST,
+  number,
 };
