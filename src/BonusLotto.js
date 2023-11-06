@@ -17,6 +17,14 @@ class BonusLotto {
       throw new Error("[ERROR] 당첨 번호에 포함된 번호를 뽑을 수 없습니다.");
     };
   }
+
+  getLottoMatchBonusCount(lottoNumbersList) {
+    const lottoMathBonusCountList = [];
+    lottoNumbersList.forEach(lotttoNumbers => {
+      lottoMathBonusCountList.push(lotttoNumbers.includes(Number(this.#number)));
+    });
+    return lottoMathBonusCountList;
+  }
 }
 
 export default BonusLotto;

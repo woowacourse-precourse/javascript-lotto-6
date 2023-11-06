@@ -14,7 +14,12 @@ class LottoController {
   
   async #initialize() {
     await this.#getDefaultInput();
-    this.start();
+    this.printLottoNumbersMatchCount();
+  }
+
+  async printLottoNumbersMatchCount() {
+    console.log(await this.getLottoMatchResult());
+
   }
 
   async #getDefaultInput() {
@@ -28,8 +33,11 @@ class LottoController {
     OutputView.outputRandomLottoNumbersList(await this.#lottoCost.getRandomLottoNumbersList());
   }
 
-
-  async start() {}
+  async getLottoMatchResult() {
+    const matchCount = await this.#pickLotto.getLottoMathCount(await this.#lottoCost.getRandomLottoNumbersList());
+    const mathBonusCount = await this.#bonusLotto.getLottoMatchBonusCount(await this.#lottoCost.getRandomLottoNumbersList());
+    return matchCount.map((count, index) => [count, mathBonusCount[index]]);
+  }
 }
 
 export default LottoController;

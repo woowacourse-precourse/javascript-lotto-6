@@ -36,6 +36,18 @@ class Lotto {
   getLottoNumbers() {
     return this.#numbers;
   }
+
+  getLottoMathCount(lottoNumbersList) {
+    const lottoMatchCountList = [];
+    lottoNumbersList.forEach(lottoNumbers => {
+      lottoMatchCountList.push(this.#checkLottoNumberMatch(lottoNumbers));
+    });
+    return lottoMatchCountList; 
+  }
+  
+  #checkLottoNumberMatch(lottoNumbers) {
+    return this.#numbers.filter(number => lottoNumbers.includes(Number(number))).length;
+  }
 }
 
 export default Lotto;
