@@ -24,6 +24,15 @@ class View {
   async readBonusNumber() {
     return await this.#inputView.inputLine(MESSAGE.BONUS_NUMBER);
   }
+
+  printPurchaseLotto(purchaseLotto) {
+    this.#outputView.printLine(
+      `\n${purchaseLotto.length}${MESSAGE.LOTTO_AMOUNT}`,
+    );
+    this.#outputView.printLine(
+      purchaseLotto.map((lotto) => lotto.getNumbersToString()).join('\n'),
+    );
+  }
 }
 
 export default View;
