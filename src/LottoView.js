@@ -29,10 +29,11 @@ class LottoView {
   }
 
   static printLottoBundle(lottoBundle) {
-    Console.print(`${lottoBundle.length}개를 구매했습니다.`);
+    Console.print(`\n${lottoBundle.length}개를 구매했습니다.`);
     lottoBundle.forEach((lotto) => {
       Console.print(`[${lotto.join(', ')}]`);
     });
+    Console.print('');
   }
 }
 export default LottoView;
