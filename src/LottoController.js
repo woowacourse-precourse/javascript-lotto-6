@@ -25,6 +25,10 @@ class LottoController {
     OutputView.printQuantity(purchaseAmount);
     OutputView.printLottoString(this.#user);
   }
+
+  async readMainNumberArray() {
+    const mainNumberArray = await InputView.readMainNumber();
+  }
 }
 
 export default LottoController;
