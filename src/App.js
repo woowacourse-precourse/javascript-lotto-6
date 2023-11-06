@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { isValidLottoAmountInput } from './Utils/validation.js';
 import { pickRandomLottoNumbers } from './utils/random.js';
 import InputView from './view/inputView.js';
+import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
 
 class App {
@@ -9,6 +10,8 @@ class App {
     const lottoAmount = await this.getLottoAmount();
     const lottoCount = this.getLottoCount(lottoAmount);
     const lottoTickets = this.getLottoTickets(lottoCount);
+
+    OutputView.printLottoTicketCount(lottoCount);
   }
 
   async getLottoAmount() {
