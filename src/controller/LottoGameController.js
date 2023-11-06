@@ -9,16 +9,15 @@ class LottoGameController {
   #moneyInstance;
   #winningNumbers;
   #bonusNumber;
-  #matchCount = {
-    three: 0,
-    four: 0,
-    five: 0,
-    six: 0,
-    bonus: 0,
-  };
-  #prizeMoney = 0;
 
-  constructor({ lottoTickets, randomNumberGeneration, inputView, outputView }) {
+  constructor({
+    lottoResult,
+    lottoTickets,
+    randomNumberGeneration,
+    inputView,
+    outputView,
+  }) {
+    this.lottoResult = lottoResult;
     this.lottoTickets = lottoTickets;
     this.randomNumberGeneration = randomNumberGeneration;
     this.inputView = inputView;
@@ -30,6 +29,7 @@ class LottoGameController {
     this.printMyLottoNumbers();
     await this.setWinningNumbers();
     await this.setBonusNumber();
+    this.printStats();
   }
 
   async setWinningNumbers() {
@@ -84,12 +84,12 @@ class LottoGameController {
     while (true) {
       try {
         await this.setMoney();
+        this.printPurchaseCount();
         break;
       } catch (error) {
         this.outputView.print(error);
       }
     }
-    this.printPurchaseCount();
   }
 
   async getPurchaseAmount() {
@@ -124,6 +124,10 @@ class LottoGameController {
     InputValidator.validateBonusNumber(bonusNumber);
     InputValidator.validateLottoNumbers(bonusNumber, [...this.#winningNumbers]);
     return Number(bonusNumber);
+  }
+
+  printStats() {
+    this.outputView.print(MESSAGE.WINNING_STATS);
   }
 }
 
