@@ -17,14 +17,14 @@ const LOTTO_SYSTEM = Object.freeze({
 	maximum_number: 45,
 	lotto_numbers: 6,
 
-	winning_array: [fifth_winning, fourth_winning, third_winning, second_winning, first_winning],
+	winning_array: [first_winning, second_winning, third_winning, fourth_winning, fifth_winning],
 
 	prize_array: [
-		fifth_place_prize,
-		fourth_place_prize,
-		third_place_prize,
-		second_place_prize,
 		first_place_prize,
+		second_place_prize,
+		third_place_prize,
+		fourth_place_prize,
+		fifth_place_prize,
 	],
 });
 

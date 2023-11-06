@@ -4,10 +4,12 @@ import LOTTO_SYSTEM from '../constants/LottoSystem.js';
 
 class PrintConsole {
 	#showLottoResults(lottoResult) {
-		LOTTO_SYSTEM.winning_array.forEach((winning, idx) => {
+		const prizeLength = LOTTO_SYSTEM.winning_array.length - 1;
+
+		LOTTO_SYSTEM.winning_array.reverse().forEach((winning, idx) => {
 			const winningCount = winning.count;
-			const prize = LOTTO_SYSTEM.prize_array[idx].toLocaleString();
-			const userWinningCount = lottoResult.filter((result) => result === idx).length;
+			const prize = LOTTO_SYSTEM.prize_array[prizeLength - idx].toLocaleString();
+			const userWinningCount = lottoResult.filter((result) => result === prizeLength - idx).length;
 
 			if (winning.hasBonus) {
 				this.print(
