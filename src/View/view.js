@@ -3,6 +3,14 @@ import Bonus from "../Bonus.js";
 import Lotto from "../Lotto.js";
 import { LOTTO } from "../constants/lotto.js";
 import { INPUT_MESSAGE, OUTPUT_MESSAGE } from "../constants/message.js";
+import {
+  MATCH_3,
+  MATCH_4,
+  MATCH_5,
+  MATCH_5_BONUS,
+  MATCH_6,
+} from "../constants/statistics.js";
+import { calculateStatistics } from "../module/statistics.js";
 
 export const View = {
   async getAmount() {
@@ -32,12 +40,25 @@ export const View = {
     return bonus;
   },
 
-  async showPurchaseLotto(purchaseAmount, lottoArray) {
+  async displayPurchaseLotto(purchaseAmount, lottoArray) {
     Console.print(
       OUTPUT_MESSAGE.purchaseConfirmation(purchaseAmount / LOTTO.price)
     );
     lottoArray.forEach((lotto) => {
       Console.print(lotto);
     });
+  },
+
+  displayWinningStatics(lottoArray, winnerLotto, bonus) {
+    Console.print(OUTPUT_MESSAGE.winningStatics);
+
+    const statics = calculateStatistics(lottoArray, winnerLotto, bonus);
+    Console.print(`3개 일치 (5,000원) - ${statics[MATCH_3]}개`);
+    Console.print(`4개 일치 (50,000원) - ${statics[MATCH_4]}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${statics[MATCH_5]}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${statics[MATCH_5_BONUS]}개`
+    );
+    Console.print(`6개 일치 (2,000,000,000원) - ${statics[MATCH_6]}개`);
   },
 };

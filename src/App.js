@@ -6,12 +6,13 @@ import { Validator } from "./utils/validator.js";
 class App {
   async play() {
     const { purchaseAmount, lottoArray } = await this.setLottoConfig();
-    View.showPurchaseLotto(purchaseAmount, lottoArray);
+    View.displayPurchaseLotto(purchaseAmount, lottoArray);
 
     const winnerLotto = await View.getWinnerNumber();
-    console.log(winnerLotto.numbers);
+
     const bonus = await View.getBonusNumber(winnerLotto.numbers);
-    console.log(bonus.number);
+
+    View.displayWinningStatics(lottoArray, winnerLotto.numbers, bonus.number);
   }
 
   async setLottoConfig() {

@@ -6,6 +6,7 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
   purchaseConfirmation: (lottoCount) => `\n${lottoCount}개를 구매했습니다.`,
+  winningStatics: "\n당첨 통계\n---",
 });
 
 export const ERORR_MESSAGE = Object.freeze({
