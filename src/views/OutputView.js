@@ -26,6 +26,10 @@ const OutputView = {
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${lottoResult[0]}개`);
   },
+
+  printReturnRate(returnRate) {
+    Console.print(`총 수익률은 ${returnRate}%입니다.`);
+  },
 };
 
 export default OutputView;
