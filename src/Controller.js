@@ -4,8 +4,11 @@ import Lotto from './Lotto.js';
 import LottoTicket from './LottoTicket.js';
 import Matcher from './Matcher.js';
 import OutputView from './OutputView.js';
+import ReturnCalculator from './ReturnCalculator.js';
 
 class Controller {
+  #purchaseAmount;
+
   #lottoTicketList;
 
   #winningNumbers;
@@ -14,12 +17,15 @@ class Controller {
 
   #matchStatus;
 
+  #rateOfReturn;
+
   async progress() {
     await this.#handlerErrorAndProceed(this.#getLottoTicketList);
     this.#displayLottoTicket();
     await this.#handlerErrorAndProceed(this.#getWinningNumbers);
     await this.#handlerErrorAndProceed(this.#getBonusNumber);
     await this.#getMatchStatus();
+    await this.#getRateOfReturn();
   }
 
   async #handlerErrorAndProceed(method) {
@@ -34,6 +40,7 @@ class Controller {
   async #getLottoTicketList() {
     const inputLottoPurchaseAmount = await InputView.readLottoPurchaseAmount();
     this.#lottoTicketList = new LottoTicket(inputLottoPurchaseAmount).lottoList;
+    this.#purchaseAmount = Number(inputLottoPurchaseAmount);
   }
 
   #displayLottoTicket() {
@@ -56,6 +63,10 @@ class Controller {
       this.#winningNumbers,
       this.#bonusNumber,
     ).matchStatus;
+  }
+
+  async #getRateOfReturn() {
+    this.#rateOfReturn = new ReturnCalculator(this.#purchaseAmount, this.#matchStatus).rateOfReturn;
   }
 }
 
