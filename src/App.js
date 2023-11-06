@@ -11,7 +11,7 @@ import { calcResult } from "./Calc/CalcResult.js";
 import { printResult } from "./PrintResult.js";
 import { calcProfitRate } from "./Calc/CalcProfitRate.js";
 import { Console } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
+import Lotto from "./domain/Lotto.js";
 import LottoMachine from "./LottoMachine.js";
 
 class App {
