@@ -1,4 +1,5 @@
 import InputView from "../view/InputView.js";
+import InputValidator from "../utils/validator.js";
 
 class LottoGameController {
   constructor() {}
@@ -7,8 +8,11 @@ class LottoGameController {
     this.readPurchaseAmount();
   }
 
-  readPurchaseAmount() {
-    InputView.PurchaseAmount(this.printPurchaseAmount);
+  async readPurchaseAmount() {
+    await InputView.purchaseAmount((input) => {
+      InputValidator.validatePurchaseAmount(input);
+      printPurchaseAmount(input);
+    });
   }
 
   printPurchaseAmount(amount) {
