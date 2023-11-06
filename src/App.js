@@ -26,7 +26,7 @@ class App {
     LottoConsole.printResult(scoreCard);
 
     const prize = player.getPrize();
-    Console.print(`총 수익률은 ${((prize / budget) * 100).toFixed(1)}%입니다.`);
+    LottoConsole.printRateOfReturn(prize, budget);
   }
 }
 

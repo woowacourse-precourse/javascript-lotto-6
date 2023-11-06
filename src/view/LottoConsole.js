@@ -56,6 +56,10 @@ class LottoConsole {
     Console.print(`6개 일치 (2,000,000,000원) - ${winningTable['1등']}개`);
   }
 
+  static printRateOfReturn(prize, budget) {
+    Console.print(`총 수익률은 ${((prize / budget) * 100).toFixed(1)}%입니다.`);
+  }
+
   static printEmptyLine() {
     Console.print('');
   }
