@@ -5,9 +5,9 @@ import { sortAscending } from './utils/sort.js';
 
 export class Computer {
   #lottos;
-  constructor(money) {
-    const count = money / 1000;
-    this.makeLottos(count);
+  #count;
+  constructor(count) {
+    this.#count = count;
   }
 
   getLottos() {
@@ -18,11 +18,16 @@ export class Computer {
     return generateRandomNumbers(1, 45, 6);
   }
 
-  makeLottos(count) {
-    this.#lottos = Array.from({ length: count }).map(() => {
+  makeLottos() {
+    this.#lottos = Array.from({ length: this.#count }).map(() => {
       const sortedRandomNumbers = sortAscending(this.getRandomNumbers());
 
       return new Lotto(sortedRandomNumbers);
     });
+  }
+
+  printLottos() {
+    Print(`${this.#count}개를 구매했습니다.`);
+    this.#lottos.forEach((lotto) => Print(lotto.getNumbers()));
   }
 }
