@@ -1,32 +1,30 @@
 import { LOTTO_RULES } from '../../constants/lottoGame.js';
 import AppError from '../../error/AppError/AppError.module.js';
-import {
-  BONUS_NUMBER_VALIDATION_TYPES,
-  validateBonusNumber,
-} from './bonusNumberValidation.module.js';
+import bonusNumberValidation from './bonusNumberValidation.module.js';
 
 describe('validateBonusNumber 테스트', () => {
   const startValidation =
     ({ bonusNumber, winningLottoNumber }) =>
     () =>
-      validateBonusNumber({ bonusNumber, winningLottoNumber });
+      bonusNumberValidation.check({ bonusNumber, winningLottoNumber });
 
   describe('예외 테스트', () => {
     test.each([
       {
         bonusNumber: LOTTO_RULES.minNumber - 1,
         winningLottoNumber: [2, 3, 4, 5, 6, 7],
-        expectedErrorMessage: BONUS_NUMBER_VALIDATION_TYPES.bonusNumberRange.errorMessage,
+        expectedErrorMessage: bonusNumberValidation.validationTypes.bonusNumberRange.errorMessage,
       },
       {
         bonusNumber: LOTTO_RULES.maxNumber + 1,
         winningLottoNumber: [1, 2, 3, 4, 5, 6],
-        expectedErrorMessage: BONUS_NUMBER_VALIDATION_TYPES.bonusNumberRange.errorMessage,
+        expectedErrorMessage: bonusNumberValidation.validationTypes.bonusNumberRange.errorMessage,
       },
       {
         bonusNumber: 5,
         winningLottoNumber: [1, 2, 3, 4, 5, 6],
-        expectedErrorMessage: BONUS_NUMBER_VALIDATION_TYPES.duplicateBonusNumber.errorMessage,
+        expectedErrorMessage:
+          bonusNumberValidation.validationTypes.duplicateBonusNumber.errorMessage,
       },
     ])(
       '보너스 번호가 "$bonusNumber", 로또 번호가 "$winningLottoNumber"일 때 "$expectedErrorMessage" 메시지와 함께 에러가 발생해야 한다.',

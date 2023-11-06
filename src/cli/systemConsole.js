@@ -13,7 +13,7 @@ const systemConsole = Object.freeze({
    */
   async read(query) {
     const inputValue = await Console.readLineAsync(query);
-    commonValidation.validateCommon(inputValue);
+    commonValidation.check(inputValue);
     return inputValue;
   },
 });

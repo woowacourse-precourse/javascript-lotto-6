@@ -1,14 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import {
-  validatePurchasedLottoAmount,
-  validateLottoNumber,
-  validateBonusNumber,
-} from '../../validations/index.js';
-
 import { SYMBOLS } from '../../constants/symbols.js';
 
-import winningInfoGeneration from '../../domain/confirmWinningResult/winningInfoGeneration/winningInfoGeneration.module.js';
+import { winningInfoGeneration } from '../../domain/index.js';
+
+import {
+  purchasedLottoAmountValidation,
+  lottoNumberValidation,
+  bonusNumberValidation,
+} from '../../validations/index.js';
 
 import systemConsole from '../systemConsole.js';
 
@@ -29,7 +29,7 @@ const lottoGameConsole = Object.freeze({
      */
     async readPurchasedLottoAmount() {
       const purchasedLottoAmount = await systemConsole.read(this.messages.purchasedLottoAmount);
-      validatePurchasedLottoAmount(Number(purchasedLottoAmount));
+      purchasedLottoAmountValidation.check(Number(purchasedLottoAmount));
       return purchasedLottoAmount;
     },
 
@@ -40,7 +40,7 @@ const lottoGameConsole = Object.freeze({
       const winningLottoNumber = (await systemConsole.read(this.messages.winningLottoNumber))
         .split(SYMBOLS.comma)
         .map(Number);
-      validateLottoNumber(winningLottoNumber);
+      lottoNumberValidation.check(winningLottoNumber);
       return winningLottoNumber;
     },
 
@@ -50,7 +50,7 @@ const lottoGameConsole = Object.freeze({
      */
     async readBonusNumber(winningLottoNumber) {
       const bonusNumber = Number(await systemConsole.read(this.messages.bonusNumber));
-      validateBonusNumber({ winningLottoNumber, bonusNumber });
+      bonusNumberValidation.check({ winningLottoNumber, bonusNumber });
       return bonusNumber;
     },
   }),

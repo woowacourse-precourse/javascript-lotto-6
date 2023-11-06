@@ -30,7 +30,7 @@ const commonValidation = Object.freeze({
    * @throws {AppError} 유효성을 만족하지 않을 경우 에러 발생
    * @returns {void}
    */
-  validateCommon(inputValue) {
+  check(inputValue) {
     Object.values(this.validationTypes).forEach(({ errorMessage, isValid }) => {
       if (!isValid(inputValue)) throw new AppError(errorMessage);
     });

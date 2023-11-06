@@ -2,7 +2,7 @@ import AppError from '../../error/AppError/AppError.module';
 import commonValidation from './commonValidation.module';
 
 describe('validateCommon 테스트', () => {
-  const startValidation = (inputValue) => () => commonValidation.validateCommon(inputValue);
+  const startValidation = (inputValue) => () => commonValidation.check(inputValue);
   describe('예외 테스트', () => {
     test.each([
       {
