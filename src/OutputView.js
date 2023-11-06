@@ -12,6 +12,10 @@ const OutputView = {
       Console.print(lottoNumbers);
     }
   },
+
+  printErrorMessage(message) {
+    Console.print(`${message}\n`);
+  },
 };
 
 export default OutputView;
