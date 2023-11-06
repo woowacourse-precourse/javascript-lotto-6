@@ -86,10 +86,36 @@ describe("클래스 테스트", () => {
         expect(app.getBonusNumber(winningNumber)).rejects.toThrowError('[ERROR] 중복된 값이 있습니다.');
     });
 
-    test('보너스 번호가 1~45까지의 정수가 아닐경우 예외가 발생한다.', () => {
+    test('보너스 번호가 1~45까지의 숫자가 아닐경우 예외가 발생한다.', () => {
         //given
         const winningNumber = new Lotto([1, 2, 3, 4, 5, 6]);
         const input = 54;
+
+        //when
+        const playerInputMock = jest.fn(() => input);
+        const app = new App(playerInputMock);
+
+        //then
+        expect(app.getBonusNumber(winningNumber)).rejects.toThrowError('[ERROR] 보너스 번호는 1부터 45 사이의 한개의 정수여야 합니다.');
+    });
+
+    test('보너스 번호가 한개가 아닐경우 발생한다.', () => {
+        //given
+        const winningNumber = new Lotto([1, 2, 3, 4, 5, 6]);
+        const input = '2,5';
+
+        //when
+        const playerInputMock = jest.fn(() => input);
+        const app = new App(playerInputMock);
+
+        //then
+        expect(app.getBonusNumber(winningNumber)).rejects.toThrowError('[ERROR] 보너스 번호는 1부터 45 사이의 한개의 정수여야 합니다.');
+    });
+
+    test('보너스 번호가 정수가 아닐경우 예외가 발생한다.', () => {
+        //given
+        const winningNumber = new Lotto([1, 2, 3, 4, 5, 6]);
+        const input = 2.5;
 
         //when
         const playerInputMock = jest.fn(() => input);
