@@ -5,8 +5,16 @@ export default class View {
     async inputNumber(inputGuide) {
         const inputData = await Console.readLineAsync(inputGuide);
         return Number(inputData)
+    async inputWinningNumber(inputGuide) {
+        let inputData = await Console.readLineAsync(inputGuide);
+        inputData = inputData.split(",");
+        inputData.forEach((element, index) => {
+            inputData[index] = Number(element);
+        });
+        return inputData;
     }
+
     print(message) {
-        Console.print(message)
+        Console.print(message);
     }
 }

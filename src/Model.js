@@ -1,32 +1,31 @@
 export default class Model {
     constructor() {
-        this.buyLottoCost = 0;
-        this.lottoDataObject = new Object();
-        this.lotto = new Array();
-
+        this.buyLottoNumber = 0;
+        this.lottoDataObject = new Array();
+        this.winningNumber = new Array();
     }
 
-    setBuyLottoCost(cost) {
-        this.buyLottoCost = cost;
+    getBuyLottoNumber() {
+        return this.buyLottoNumber;
     }
 
-    setLottoDataObject(keyName, value) {
-        this.lottoDataObject[keyName] = value;
-    }
-
-    setLottoNumber(lottoNumbers) {
-        this.lotto.push(lottoNumbers)
-    }
-
-    getLottoObject() {
+    getLottoDataObject() {
         return this.lottoDataObject;
     }
 
-    getBuyLottoCost() {
-        return this.buyLottoCost;
+    getWinningNumber() {
+        return this.winningNumber;
     }
 
-    getLottosNumber() {
-        return this.lottoDataObject.lottos;
+    setBuyLottoNumber(number) {
+        this.buyLottoNumber = number;
+    }
+
+    setLottoDataObject(lottoObject) {
+        this.lottoDataObject.push(lottoObject);
+    }
+
+    setWinningNumber(winningNumber) {
+        this.winningNumber = winningNumber;
     }
 }

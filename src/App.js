@@ -18,12 +18,27 @@ class App {
     }
     return cost / 1000;
   }
+
+  async processInputCost() {
+    const buyLottoCost = await this.view.inputNumber("구입금액을 입력해 주세요.\n");
+    this.validateNumber(buyLottoCost);
+    this.model.setBuyLottoNumber(this.countBuyLottos(buyLottoCost))
+  }
+
+  async processInputWinningNumber() {
+    const winningNumber = await this.view.inputWinningNumber("당첨 번호를 입력해 주세요.\n");
+    this.model.setWinningNumber(winningNumber);
+  }
+
+  printLottoCountAndLottoNumber() {
+    this.view.print(this.model.getBuyLottoNumber() + "개를 구매했습니다.");
+  }
+
   async play() {
     try {
-      const buyLottoCost = await this.view.inputNumber("구입금액을 입력해 주세요.\n");
-      this.validateNumber(buyLottoCost);
-      this.model.setBuyLottoCost(buyLottoCost);
-      this.model.setLottoDataObject("lottoCount", this.countBuyLottos(this.model.getBuyLottoCost()));
+      await this.processInputCost();
+      this.printLottoCountAndLottoNumber();
+      await this.processInputWinningNumber();
     } catch (error) {
       throw new Error(error);
     }
