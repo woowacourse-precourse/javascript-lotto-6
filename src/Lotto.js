@@ -23,7 +23,7 @@ class Lotto {
   }
 
   checkNumRange(e) {
-    if (e <= 0 || 45) throw new Error(ERROR_MESSAGE.NUM_RANGE);
+    if (e <= 0 || 45 < e) throw new Error(ERROR_MESSAGE.NUM_RANGE);
   }
   // TODO: 추가 기능 구현
 }

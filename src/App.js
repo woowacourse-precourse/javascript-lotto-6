@@ -15,8 +15,11 @@ class App {
     let winningNum = await Console.readLineAsync(
       INPUT_MESSAGE.INPUT_WINNINGNUM
     );
+
     winningNum = winningNum.split(',');
     this.Lotto = new Lotto(winningNum);
+
+    let bonusNum = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BONUSNUM);
   }
 }
 
