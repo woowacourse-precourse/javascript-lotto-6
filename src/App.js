@@ -10,11 +10,14 @@ class App {
 
   #LOTTOS_MAX;
 
+  #BONUS_NUMBER;
+
   constructor() {
     this.#USER_PRICE = 0;
     this.#USER_LOTTOS = [];
     this.#WINNING_NUMBERS = [];
     this.#LOTTOS_MAX = 0;
+    this.#BONUS_NUMBER = 0;
   }
 
   async getInputPrice() {
@@ -70,14 +73,41 @@ class App {
 
     winningNumber.forEach((number) => {
       if (Number.isNaN(number) || number < 1 || number > 45) {
-        throw new Error('[ERROR] 당첨 번호는 1 ~ 45 사이의 숫자여야 합니다.');
+        throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
       }
     });
+  }
+
+  async getInputBonusNumber() {
+    const BONUS_NUMBER_INPUT =
+      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+
+    try{
+      this.checkInputBonusNumber(parseInt(BONUS_NUMBER_INPUT, 10));
+      this.#BONUS_NUMBER = parseInt(BONUS_NUMBER_INPUT, 10);
+    } catch(e) {
+      Console.print(e);
+      this.getInputBonusNumber();
+    }
+  }
+
+  checkInputBonusNumber(bonusNumber) {
+    if(bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error('[ERROR] 보너스 번호는 1 ~ 45 사이의 숫자여야 합니다.');
+    } else if(this.#WINNING_NUMBERS.includes(bonusNumber)) {
+      throw new Error('[ERROR] 보너스 번호가 당첨 번호와 중복됩니다.');
+    }
   }
 
   async play() {
     await this.getInputPrice();
     await this.getInputWinningNumber();
+    await this.getInputBonusNumber();
+
+    Console.print(this.#USER_PRICE);
+    Console.print(this.#LOTTOS_MAX);
+    Console.print(this.#WINNING_NUMBERS);
+    Console.print(this.#BONUS_NUMBER);
   }
 }
 
