@@ -94,6 +94,11 @@ class GameUtils {
 
     return PRIZE_MONEY.THIRD;
   }
+
+  static getRateRoundSecondDecimalPlace(prizeSum, tickets) {
+    const persent = (prizeSum / tickets) * 100;
+    return Number(persent.toFixed(1));
+  }
 }
 
 export default GameUtils;

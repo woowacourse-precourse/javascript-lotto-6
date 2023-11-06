@@ -2,6 +2,7 @@ import PurchaseAmount from '../domain/PurchaseAmount.js';
 import LottoTickets from '../collection/LottoTickets.js';
 import WinningNumber from '../domain/WinningNumber.js';
 import BonusNumber from '../domain/BounsNumber.js';
+import LottoWinStatistics from '../domain/LottoWinStatistics.js';
 
 import LottoGameInput from '../view/LottoGameInput.js';
 import LottoGameOutput from '../view/LottoGameOutput.js';
@@ -17,6 +18,8 @@ class LottoGame {
   #winningNumbers;
 
   #bonusNumber;
+
+  #lottoWinStatistics;
 
   start() {
     return this;
@@ -65,6 +68,7 @@ class LottoGame {
   }
 
   compareLottoTicketsWin() {
+    this.#lottoWinStatistics = new LottoWinStatistics();
     const buyingLottoTickets = this.#lottoTickets.getLottoTickets();
 
     buyingLottoTickets.forEach((lotto) => {
@@ -79,6 +83,12 @@ class LottoGame {
 
     const differences = GameUtils.getDifferenceElements(lotto, winningNumber);
     const prize = GameUtils.getPrize(differences, bounsNumber);
+    this.#lottoWinStatistics.pushPrize(prize);
+  }
+
+  calculatePrizeRate() {
+    const purchaseAmount = this.#purchaseAmount.getPurchaseAmount();
+    this.#lottoWinStatistics.calculateRate(purchaseAmount);
   }
 }
 
