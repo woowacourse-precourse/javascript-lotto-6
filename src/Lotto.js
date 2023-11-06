@@ -12,7 +12,7 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  getMatchingNumbersCountWith(winningNumbers) {
+  countMatchingNumbersWith(winningNumbers) {
     const matchingNumbers = this.#numbers.filter((number) =>
       winningNumbers.includes(number),
     );

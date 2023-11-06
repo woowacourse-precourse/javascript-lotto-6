@@ -14,8 +14,8 @@ class WinningLotto {
     this.#bonusNumber = bonusNumber;
   }
 
-  getMatchingNumbersCountWith(numbers) {
-    return numbers.getMatchingNumbersCountWith(this.#numbers);
+  countMatchingNumbersWith(numbers) {
+    return numbers.countMatchingNumbersWith(this.#numbers);
   }
 
   #validate(bonusNumber) {
