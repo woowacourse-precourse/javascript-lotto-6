@@ -13,6 +13,13 @@ class Inputs {
     }
     return numericPrice;
   }
+
+  async inputWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요.\n"
+    );
+    return winningNumbers;
+  }
 }
 
 export default Inputs;
