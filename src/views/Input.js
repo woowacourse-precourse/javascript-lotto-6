@@ -1,7 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
-import { exceptionType, message } from "../constants";
 
-const input = {
+import { error, exceptionType, message } from "../constants";
+import { throwErrorIf } from "../utils";
+
+const inputView = {
   enterPurchaseAmount: async function () {
     const amount = await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
     this.validate(exceptionType.PURCHASE, amount);
@@ -11,12 +13,13 @@ const input = {
 
   enterWinningNumber: async function () {
     const numbers = await Console.readLineAsync(message.ENTER_WINNING_NUMBER);
+    const splited = numbers.split(",");
 
-    numbers.forEach((number) => {
+    splited.forEach((number) => {
       this.validate(exceptionType.LOTTO, number);
     });
 
-    return numbers.map((number) => Number(number));
+    return splited.map((number) => Number(number));
   },
 
   enterBonusNumber: async function () {
@@ -27,7 +30,7 @@ const input = {
   },
 
   validate: function (type, value) {
-    throwErrorIf(value === "", error.IS_EMPTY);
+    throwErrorIf(value.length === 0, error.IS_EMPTY);
 
     const isNotNumber = isNaN(Number(value));
 
@@ -40,4 +43,4 @@ const input = {
   },
 };
 
-export default input;
+export default inputView;
