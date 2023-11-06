@@ -15,6 +15,19 @@ class App {
         Console.print(error.message);
       }
     }
+    const numberOfLottoTickets = Math.floor(purchaseAmount / 1000);
+    const lottoTickets = this.generateLottoTickets(numberOfLottoTickets);
+
+  }
+
+  generateLottoTickets(count) {
+    const lottoTickets = [];
+    for (let i = 0; i < count; i++) {
+      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lottoTicket = new Lotto(numbers);
+      lottoTickets.push(lottoTicket);
+    }
+    return lottoTickets;
   }
 }
 
