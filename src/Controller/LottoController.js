@@ -3,12 +3,14 @@ import PurchaseCost from "../PurchaseCost.js";
 import Lotto from "../Lotto.js";
 import BonusLotto from "../BonusLotto.js";
 import OutputView from "../../View/OutputView.js";
+import { NUMBER } from "../../utils/Constant.js";
 
 class LottoController {
   #lottoCost;
   #pickLotto;
   #bonusLotto;
   #matchResult;
+  #incomeResult;
   constructor() {
     this.#initialize();
   }
@@ -20,8 +22,13 @@ class LottoController {
 
   async printLottoNumbersMatchCount() {
     await this.getLottoMatchResultyData();
-    console.log(this.#matchResult);
+    await this.getIncomeResult();
+    OutputView.outputLottoMatchResult(this.#matchResult, this.#incomeResult);
+  }
 
+  async getIncomeResult() {
+    this.#incomeResult = this.#incomeResult / await this.#lottoCost.getPurchaseCost() * 100 - 100;
+    if (this.#incomeResult < 0) this.#incomeResult += 100;
   }
 
   async #getDefaultInput() {
@@ -38,19 +45,29 @@ class LottoController {
   async getLottoMatchResult() {
     const matchCount = await this.#pickLotto.getLottoMathCount(await this.#lottoCost.getRandomLottoNumbersList());
     const mathBonusCount = await this.#bonusLotto.getLottoMatchBonusCount(await this.#lottoCost.getRandomLottoNumbersList());
-    return matchCount.map((count, index) => [count, mathBonusCount[index]]);
+    return matchCount.map((numberMatchCount, index) => [numberMatchCount, mathBonusCount[index]]);
   }
   
   async getLottoMatchResultyData() {
     this.#matchResult = {};
-    (await this.getLottoMatchResult()).forEach(subData => {
-      const [count, bonusCount] = subData;
-      if (this.#matchResult[count] === undefined) {
-        this.#matchResult[count] = [0, 0];
+    this.#incomeResult = 0;
+    (await this.getLottoMatchResult()).forEach(matchData => {
+      const [numberMatchCount, bonusCount] = matchData;
+      if (this.#matchResult[numberMatchCount] === undefined) {
+        this.#matchResult[numberMatchCount] = [0, 0];
       };
-      this.#matchResult[count][0] += 1
-      if (bonusCount) this.#matchResult[count][1] += 1;
+      this.#matchResult[numberMatchCount][0] += 1
+      if (bonusCount) this.#matchResult[numberMatchCount][1] += 1;
+      this.checkIncomeResult(numberMatchCount, bonusCount);
     });
+  }
+
+  async checkIncomeResult(numberMatchCount, bonusCount) {
+    let price = NUMBER.MATCH_NUMBER_PRICE[numberMatchCount]
+    if (NUMBER.CHECK_MATCH_BONUS_NUMBER[numberMatchCount] && (bonusCount)) {
+      price = NUMBER.MATCH_BONUS_NUMBER_PRICE[numberMatchCount];
+    };
+    if (price !== undefined) this.#incomeResult += price;
   }
 }
 

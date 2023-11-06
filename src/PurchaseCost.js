@@ -28,6 +28,10 @@ class PurchaseCost {
     return purchaseLottoList
   }
   
+  getPurchaseCost() {
+    return this.#cost;
+  }
+
   getRandomLottoNumbersList() {
     return this.#randomLottoNumbersList;
   }

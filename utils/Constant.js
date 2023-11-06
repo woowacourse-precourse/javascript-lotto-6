@@ -1,0 +1,16 @@
+const NUMBER = {
+  MIN_MATCH_NUMBER: 3,
+  MAX_MATCH_NUMBER: 6,
+  CHECK_MATCH_BONUS_NUMBER: [5],
+  MATCH_NUMBER_PRICE: {
+    3: 5000,
+    4: 50000,
+    5: 1500000,
+    6: 2000000000,
+  },
+  MATCH_BONUS_NUMBER_PRICE: {
+    5: 30000000,
+  },
+}
+
+export { NUMBER };
