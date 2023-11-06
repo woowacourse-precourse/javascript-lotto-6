@@ -1,5 +1,6 @@
 import View from "./View.js";
 import Model from "./Model.js";
+import Lotto from "./Lotto.js";
 
 const MAX_LOTTO_NUMBER_LENGTH = 6;
 
@@ -58,9 +59,18 @@ class App {
     this.view.print(this.model.getBuyLottoNumber() + "개를 구매했습니다.");
   }
 
+  makeLotto(count) {
+    for (let i = 0; i < count; i++) {
+      const lottoNumbers = this.view.makeLottoNumber();
+      const lottoObject = new Lotto(lottoNumbers);
+      this.model.setLottoDataObject(lottoObject);
+    }
+  }
+
   async play() {
     try {
       await this.processInputCost();
+      this.makeLotto(this.model.getBuyLottoNumber());
       this.printLottoCountAndLottoNumber();
       await this.processInputWinningNumber();
     } catch (error) {
