@@ -47,5 +47,5 @@ class MoneyCycle {
 
 export default MoneyCycle;
 
-const run = new MoneyCycle();
-run.run();
+//const run = new MoneyCycle();
+//run.run();

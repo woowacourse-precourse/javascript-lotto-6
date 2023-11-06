@@ -11,13 +11,14 @@ class Money {
 
   #validCheck(inputMoney) {
     if (this.#validateMoneyIsNum(inputMoney)) throw new Error('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
-    if (this.#validateMoneyUnit(inputMoney)) throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
     if (this.#checkNotZero(inputMoney)) throw new Error(`[ERROR] 구입금액은 0보다 커야합니다.`);
+    if (this.#validateMoneyUnit(inputMoney)) throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
   }
 
   // 구입금액 유효성 확인
   #validateMoneyIsNum(inputMoney) {
-    if (Number.isNaN(inputMoney)) {
+    const numMoney = Number(inputMoney);
+    if (Number.isNaN(numMoney)) {
       Console.print('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
 
       return true;

@@ -3,13 +3,13 @@ import { Console } from '@woowacourse/mission-utils';
 
 class CalculationOfResult {
   run(numOfBuy, arrayofLotto, winningNum, bonusNum) {
-    const countOfWinning = this.#calculatePrize(arrayofLotto, winningNum, bonusNum);
+    const countOfWinning = this.calculatePrize(arrayofLotto, winningNum, bonusNum);
     const allIncome = this.#calculatePrizemoney(countOfWinning);
     const yeild = this.#calculateYeild(numOfBuy, allIncome);
     this.#printOfResult(countOfWinning, yeild);
   }
 
-  #calculatePrize(arrayofLotto, winningNum, bonusNum) {
+  calculatePrize(arrayofLotto, winningNum, bonusNum) {
     const countOfWinning = [0, 0, 0, 0, 0];
 
     arrayofLotto.forEach((myLotto) => {

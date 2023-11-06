@@ -6,8 +6,6 @@ import Lotto from './Lotto.js';
 class LottoCycle {
   #winningNum; // 로또번호 입력값 배열, 여기가 필드
 
-  #resultWinningNum;
-
   constructor() {
     this.#winningNum = new Input();
   }
@@ -15,11 +13,6 @@ class LottoCycle {
   async run() {
     const winningNum = await this.#validCheck();
     return winningNum;
-  }
-
-  result() {
-    // bonus에 값 전달하기 위한 함수
-    return this.#resultWinningNum;
   }
 
   async #validCheck() {
@@ -39,8 +32,8 @@ class LottoCycle {
         continue;
       }
     }
-    this.#resultWinningNum = newWinning;
-    return this.#resultWinningNum;
+
+    return newWinning;
   }
 }
 

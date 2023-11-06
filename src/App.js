@@ -1,11 +1,10 @@
 /* eslint-disable class-methods-use-this */
 
-import NumOfBuy from './numofbuy.js';
+import MoneyCycle from './moneyCycle.js';
 import MakeLottoNum from './makelottonum.js';
-// import Bonus from './bonus.js';
-import CalculationOfResult from './result_calculate.js';
 import LottoCycle from './LottoCycle.js';
 import BonusCycle from './bonusCycle.js';
+import CalculationOfResult from './result_calculate.js';
 
 class App {
   #numOfBuy;
@@ -19,7 +18,7 @@ class App {
   #yeild;
 
   constructor() {
-    this.#numOfBuy = new NumOfBuy();
+    this.#numOfBuy = new MoneyCycle();
     this.#arrayOfLotto = new MakeLottoNum();
     this.#winningNum = new LottoCycle();
     this.#bounusNum = new BonusCycle();

@@ -1,10 +1,12 @@
-/* eslint-disable no-new */
-// 작동안됨.. 뭐가 문젤까.......
-import App from '../src/App.js';
+/* eslint-disable */
 
-describe('로또 클래스 테스트', () => {
-  test('로또 당첨 결과를 확인한다.', () => {
-    const app = new App();
+import { Console, MissionUtils } from "@woowacourse/mission-utils";
+import CalculationOfResult from "../src/result_calculate.js";
+
+const mockConsolePrint = jest.spyOn(MissionUtils.Console, "print");
+describe("수익률 클래스 테스트", () => {
+  test("수익률 결과를 확인한다.", () => {
+    const numOfBuy = 1;
     const arrayofLotto = [
       [1, 2, 3, 4, 5, 6],
       [1, 2, 3, 4, 5, 6],
@@ -12,12 +14,25 @@ describe('로또 클래스 테스트', () => {
       [2, 3, 4, 5, 6, 7],
       [3, 4, 5, 6, 7, 8],
     ];
-    const inputNumbers = {
-      winning: [1, 2, 3, 4, 5, 6],
-      bonus: 7,
-    };
-    const answer = [2, 2, 0, 1, 0];
-    const qusetion = app.test(arrayofLotto, inputNumbers);
-    expect(qusetion).toBe(answer);
+    const winningNum = [1, 2, 3, 4, 5, 6];
+    const bonusNum = 7;
+    const answer = [
+      "당첨 통계",
+      "---",
+      "3개 일치 (5,000원) - 0개",
+      "4개 일치 (50,000원) - 1개",
+      "5개 일치 (1,500,000원) - 0개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 2개",
+      "6개 일치 (2,000,000,000원) - 2개",
+      "총 수익률은 406005000.0%입니다.",
+    ];
+
+    // const answer = [2, 2, 0, 1, 0];
+    const app = new CalculationOfResult();
+    app.run(numOfBuy, arrayofLotto, winningNum, bonusNum);
+
+    answer.forEach((answer) => {
+      expect(mockConsolePrint).toHaveBeenCalledWith(expect.stringContaining(answer));
+    })
   });
 });
