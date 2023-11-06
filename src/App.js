@@ -1,4 +1,5 @@
 import InputReader from './view/InputReader.js';
+import { validateUserInput } from './utils/ValidateUserInput.js';
 
 class App {
   #inputReader;
@@ -7,7 +8,14 @@ class App {
     this.#inputReader = new InputReader();
   }
   async play() {
-    this.#inputReader.purchasePrice();
+    const purchasePrice = await this.requestPurchasePrice();
+  }
+
+  async requestPurchasePrice() {
+    const purchasePrice = await this.#inputReader.purchasePrice();
+    validateUserInput.purchasePrice(purchasePrice);
+
+    return purchasePrice;
   }
 }
 
