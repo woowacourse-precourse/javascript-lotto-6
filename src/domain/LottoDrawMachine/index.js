@@ -22,6 +22,16 @@ export class LottoDrawMachine {
     OutputView.print(this.#winningNumbers.join(","));
   }
 
+  async promptBonusNumber() {
+    const inputBonusNumberStr = await InputView.readLine(
+      MESSAGES.BONUS_NUMBER.PLACE_HOLDER
+    );
+    const bonusNumber = Number(inputBonusNumberStr);
+    this.#validateBonusNumber(bonusNumber);
+    this.#bonusNumber = bonusNumber;
+    OutputView.print(this.#bonusNumber);
+  }
+
   #formatWinningNumber(str) {
     return str.split(",").map(Number);
   }
@@ -48,6 +58,20 @@ export class LottoDrawMachine {
 
     if (!Validation.isUnique(winningNumbers)) {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_UNIQUE);
+    }
+  }
+
+  #validateBonusNumber(bonusNumber) {
+    if (!Validation.isNumber(bonusNumber)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
+    }
+
+    if (!Validation.isOnRange(bonusNumber, MIN, MAX)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_ON_RANGE(MIN, MAX));
+    }
+
+    if (!Validation.isInteger(bonusNumber)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_INTEGER);
     }
   }
 }
