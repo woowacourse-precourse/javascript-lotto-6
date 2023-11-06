@@ -11,6 +11,8 @@ class LottoComparer {
 
   lottoWinnerPrize;
 
+  LIMIT_COUNT = 3;
+
   constructor(lottos, lottoWinnerPrize) {
     this.lottos = lottos;
     this.lottoWinnerPrize = lottoWinnerPrize;
@@ -22,7 +24,7 @@ class LottoComparer {
       const correctCount = this.countCorrectNumbers(lottoNumbers);
       const hasBonusNumber = this.checkBonusNumber(lottoNumbers);
 
-      if (correctCount < 3) return;
+      if (correctCount < this.LIMIT_COUNT) return;
       this.updatePrize(hasBonusNumber, correctCount);
     });
   }

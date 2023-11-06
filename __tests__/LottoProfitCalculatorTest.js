@@ -14,7 +14,7 @@ describe('LottoProfitCalculator', () => {
     calculator = new LottoProfitCalculator(lottoWinnerPrize, purchasedPrice);
   });
 
-  test('이익률이 올바르게 계산되어야 한다.', () => {
+  test('rate: 이익률이 올바르게 계산되어야 한다.', () => {
     const profitRate = calculator.rate();
 
     const totalProfit = 2 * 5000 + 3 * 50000;
@@ -24,7 +24,7 @@ describe('LottoProfitCalculator', () => {
     expect(profitRate).toBe(expectedProfitRate);
   });
 
-  test('객체의 총 가격의 합을 계산한다.', () => {
+  test('calculateTotalProfit : 객체의 총 가격의 합을 계산한다.', () => {
     const totalProfit = calculator.calculateTotalProfit();
 
     const expectedTotalProfit = 2 * 5000 + 3 * 50000;
