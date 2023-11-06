@@ -2,6 +2,10 @@ export const INPUT_MESSAGE = {
   purchaseAmount: '구입금액을 입력해 주세요.\n',
 };
 
+export const OUTPUT_MESSAGE = {
+  winningNumbers: '당첨 번호를 입력해 주세요.',
+};
+
 export const OUTPUT_MESSAGE_FUNCTION = {
   userLottos(userLottos) {
     return `\n${userLottos.length}개를 구매했습니다.`;

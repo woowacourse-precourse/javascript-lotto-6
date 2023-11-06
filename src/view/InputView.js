@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT_MESSAGE } from '../constants/Messages.js';
+import { INPUT_MESSAGE, OUTPUT_MESSAGE } from '../constants/Messages.js';
 import checkEmptyString from '../utils/validators/index.js';
 
 const InputView = {
@@ -9,6 +9,12 @@ const InputView = {
     checkEmptyString(purchaseAmount);
 
     return purchaseAmount;
+  },
+
+  async readWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(OUTPUT_MESSAGE.winningNumbers);
+
+    return winningNumbers;
   },
 };
 
