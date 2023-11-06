@@ -42,8 +42,15 @@ const PublishedLottos = {
     first : 0,
     second : 0,
     third : 0,
-    forth : 0,
+    fourth : 0,
     fifth : 0
+  },
+  GAIN : {
+    FIRST : 2e9,
+    SECOND : 3e7,
+    THIRD : 15e5,
+    FOURTH : 5e4,
+    FIFTH : 5e3
   }
 }
 
@@ -94,6 +101,7 @@ const getRank = (lotto, bonus) => {
     organizeRank(lotto, published, bonus);
   });
 }
+
 
 
 
