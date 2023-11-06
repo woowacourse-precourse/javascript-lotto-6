@@ -5,9 +5,10 @@ class InputView {
   async inputAmount() {
     const input = await readLineAsync(MESSAGE.input_amount);
 
-    const amount = Number(input);
+    this.#isEmpty(input);
+    this.#isNotNumber(input);
 
-    this.#isNotNumber(amount);
+    const amount = Number(input);
 
     return amount;
   }
@@ -15,29 +16,34 @@ class InputView {
   async inputWinningNumbers() {
     const input = await readLineAsync(MESSAGE.input_winning_numbers);
 
-    const winningNumbers = input
-      .split(REGEX.comma)
-      .map((number) => Number(number));
+    const splittedInput = input.split(REGEX.comma);
 
-    winningNumbers.forEach((number) => {
+    splittedInput.forEach((number) => {
+      this.#isEmpty(number);
       this.#isNotNumber(number);
     });
 
-    return winningNumbers;
+    return splittedInput.map((number) => Number(number));
   }
 
   async inputBonusNumber() {
     const input = await readLineAsync(MESSAGE.input_bonus_number);
 
-    const bonusNumber = Number(input);
+    this.#isEmpty(input);
+    this.#isNotNumber(input);
 
-    this.#isNotNumber(bonusNumber);
+    const bonusNumber = Number(input);
 
     return bonusNumber;
   }
 
+  // 빈값
+  #isEmpty(value) {
+    throwError(ERROR_MESSAGE.empty, value === '');
+  }
+
   #isNotNumber(value) {
-    throwError(ERROR_MESSAGE.not_number, Number.isNaN(value));
+    throwError(ERROR_MESSAGE.not_number, Number.isNaN(Number(value)));
   }
 }
 
