@@ -9,7 +9,7 @@ export function checkIsEmpty(verifyValue) {
 
 export function checkLottoIsEmptyOrZero(verifyValue) {
   verifyValue.forEach((element) => {
-    if (element === 0) {
+    if (element === 0 || element === '') {
       throw new Error(`${LOTTO_ERROR_CODE.valueIsEmptyOrZero}`);
     }
   });
