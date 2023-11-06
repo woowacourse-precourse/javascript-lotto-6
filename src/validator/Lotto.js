@@ -25,18 +25,7 @@ class LottoValidator {
   }
 
   static validateLottoNumbers(numbers) {
-    numbers.forEach(number => this.validateLottoNumber(number));
-  }
-
-  static validateLottoNumber(number) {
-    CommonValidator.validateIsNumber(number);
-    this.validateLottoNumberInRange(number);
-  }
-
-  static validateLottoNumberInRange(number) {
-    if (number < LOTTO.minNumber || number > LOTTO.maxNumber) {
-      throw new InputError(LOTTO_ERROR.number);
-    }
+    numbers.forEach(number => CommonValidator.validate(number));
   }
 }
 
