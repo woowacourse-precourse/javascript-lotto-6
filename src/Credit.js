@@ -12,17 +12,19 @@ class Purchase {
     return cash;
   }
 
-  getAmountOfLotto(credit) {
+  async getAmountOfLotto(credit) {
     this.#amountOfLotto = this.isDividedBy1000(credit);
     return this.#amountOfLotto;
   }
 
-  isDividedBy1000(credit) {
+  async isDividedBy1000(credit) {
+    if (isNaN(credit)) {
+      throw new Error(ERROR.NOT_NUMBER);
+    }
     if (credit % 1000 !== 0) {
       throw new Error(ERROR.NOT_DIVIDED_BY_1000);
-    } else {
-      return Math.floor(credit / 1000);
     }
+    return credit / 1000;
   }
 
   printAmountOfLotto(amount) {
