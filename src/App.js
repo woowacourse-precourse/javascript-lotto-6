@@ -24,26 +24,33 @@ class App {
     return number;
   }
 
-  checkIsValidNumber = (userInputNum) => {
+  checkIsValidPrice = (userInputNum) => {
     if(!Number.isInteger(userInputNum)) throw new Error('[ERROR] : input is not a integer');
     if(userInputNum <= 0) throw new Error('[ERROR] : pirce must greater than 0');
     if(userInputNum % 1000 != 0) throw new Error('[ERROR] : cannot divide price by 1,000');
   }
 
-  checkValidPrice = (userInput) => {
-    
+  generateLottoNumbers = () => {
+    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const sortedLottoNumbers = lottoNumbers.sort((o1, o2) => o1 - o2);
+
+    return sortedLottoNumbers;
   }
 
 
   async play() {
     try {
       MissionUtils.Console.print('구입금액을 입력해 주세요.');
-      
-      const userInput = await this.getUserInput();
 
-      const number = this.stringToNumber(userInput);
+      // const userInput = await this.getUserInput();
 
-      this.checkIsValidNumber(number);
+      // const number = this.stringToNumber(userInput);
+
+      // this.checkIsValidPrice(number);
+
+      const lottoNumbers = this.generateLottoNumbers();
+
+      console.log(lottoNumbers);
 
     } catch(err) {
       return Promise.reject(err);
