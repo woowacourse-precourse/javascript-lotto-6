@@ -19,7 +19,7 @@ const throwError = (error) => {
 const printPurchasedLottos = (lottos) => {
   printMessage(`${lottos.length}${MESSAGE.numberOfTickets}`);
   lottos.forEach((v) => {
-    printMessage(JSON.stringify(v.getLottoNumbers()));
+    printMessage(v.getLottoNumbers().toString());
   });
 };
 
