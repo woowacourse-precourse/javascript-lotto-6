@@ -1,23 +1,27 @@
 import InputView from './View/InputView.js';
 import OutputView from './View/OutputView.js';
+
 import LottoArray from './LottoArray.js';
 import WinningLotto from './WinningLotto.js';
 import Lotto from './Lotto.js';
 import BonusBall from './BonusBall.js';
+
 import Validator from './validator/Validator.js';
 
 class LottoGame {
-  #lottos;
+  #lottoArray;
   #winningLotto;
+  #ranks;
 
   constructor() {
-    this.#lottos = new LottoArray();
+    this.#lottoArray = new LottoArray();
     this.#winningLotto;
   }
 
   async play() {
     await this.buyLottos();
     await this.createWinningLotto();
+    this.showWinningResult();
   }
 
   async buyLottos() {
@@ -30,8 +34,8 @@ class LottoGame {
       await this.buyLottos();
     }
 
-    this.#lottos.set(money);
-    OutputView.printLottos(this.#lottos.get());
+    this.#lottoArray.set(money);
+    OutputView.printLottos(this.#lottoArray.get());
   }
 
   validate(money) {
@@ -41,8 +45,8 @@ class LottoGame {
 
   async createWinningLotto() {
     const lotto = await this.pickWinningLotto();
-    const bonus = await this.pickBonusBall(lotto);
-    this.setWinningLotto(lotto, bonus);
+    const bonusBall = await this.pickBonusBall(lotto);
+    this.setWinningLotto(lotto, bonusBall);
   }
 
   async pickWinningLotto() {
@@ -67,8 +71,12 @@ class LottoGame {
     }
   }
 
-  setWinningLotto(lotto, bonus) {
-    this.#winningLotto = new WinningLotto(lotto, bonus);
+  setWinningLotto(lotto, bonusBall) {
+    this.#winningLotto = new WinningLotto(lotto, bonusBall);
+  }
+
+  showWinningResult() {
+    this.#lottoArray.checkWinning(this.#winningLotto);
   }
 }
 

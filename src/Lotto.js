@@ -14,7 +14,6 @@ class Lotto {
     Validator.duplication(numbers);
   }
 
-  // TODO: 추가 기능 구현
   getNumbers() {
     return this.#numbers;
   }
@@ -25,6 +24,18 @@ class Lotto {
 
   includes(number) {
     return this.#numbers.includes(number);
+  }
+
+  countSameNumber(numbers) {
+    const sameNumbers = numbers.filter((number) =>
+      this.#numbers.includes(number)
+    );
+
+    return sameNumbers.length;
+  }
+
+  compareWith(lotto) {
+    return lotto.countSameNumber(this.#numbers);
   }
 }
 

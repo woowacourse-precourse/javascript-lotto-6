@@ -17,6 +17,10 @@ class BonusBall {
       );
     }
   }
+
+  includedIn(lotto) {
+    return lotto.includes(this.#number);
+  }
 }
 
 export default BonusBall;

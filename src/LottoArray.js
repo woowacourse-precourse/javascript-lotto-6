@@ -23,6 +23,12 @@ class LottoArray {
     const lotto = new Lotto(RandomNumbers.create());
     this.#lottoArray.push(lotto);
   }
+
+  checkWinning(winningLotto) {
+    this.#lottoArray.forEach((lotto) => {
+      const [count, hasBonus] = winningLotto.countSameNumber(lotto);
+    });
+  }
 }
 
 export default LottoArray;
