@@ -25,23 +25,26 @@ class Lotto {
     return this.#numbers;
   }
 
-  checkMatchNumbers(winningNumbers) {
+  #checkMatchNumbers(winningNumbers) {
     return this.#numbers.filter(number => winningNumbers.includes(number))
       .length;
   }
 
-  hasBonusNumber(bonusNumber) {
+  #hasBonusNumber(bonusNumber) {
     return this.#numbers.includes(bonusNumber);
   }
 
   checkPrize(winningNumbers, bonusNumber) {
-    const matchCount = this.checkMatchNumbers(winningNumbers);
-    if (matchCount === 6) return PRIZE.first.name;
-    if (this.hasBonusNumber(bonusNumber) && matchCount === 5)
+    const matchCount = this.#checkMatchNumbers(winningNumbers);
+    if (matchCount === PRIZE.first.matchCount) return PRIZE.first.name;
+    if (
+      this.#hasBonusNumber(bonusNumber) &&
+      matchCount === PRIZE.second.matchCount
+    )
       return PRIZE.second.name;
-    if (matchCount === 5) return PRIZE.third.name;
-    if (matchCount === 4) return PRIZE.fourth.name;
-    if (matchCount === 3) return PRIZE.fifth.name;
+    if (matchCount === PRIZE.third.matchCount) return PRIZE.third.name;
+    if (matchCount === PRIZE.fourth.matchCount) return PRIZE.fourth.name;
+    if (matchCount === PRIZE.fifth.matchCount) return PRIZE.fifth.name;
   }
 }
 
