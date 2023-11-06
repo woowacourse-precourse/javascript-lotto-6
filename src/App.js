@@ -71,8 +71,8 @@ class App {
     const {answerNumber, bonusNumber} = answer.getFullNumber();
 
     // 결과 계산
+    print(MESSAGE.WINNING_STATICS);
 
-    
   }
 
 }
