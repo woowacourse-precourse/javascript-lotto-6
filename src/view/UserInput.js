@@ -11,7 +11,8 @@ class UserInput {
     
     static async RequestAmount() {
         const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
-        const amount = new Amount(input);
+        const amount = await Amount.changeIntoInt(input);
+        console.log("amount: ", amount);
 
         return amount;
     }

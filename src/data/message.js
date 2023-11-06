@@ -16,7 +16,7 @@ const OUTPUT_MESSAGE = {
 }
 
 const ERROR_MESSAGE = {
-    AMOUT_NUMBER_ERROR: '[ERROR] 숫자를 입력해야 합니다.',
+    AMOUT_NUMBER_ERROR: '[ERROR] 숫자가 잘못된 형식입니다.',
     AMOUT_THOUSAND_ERROR: '[ERROR] 1,000원 단위로 구매가 가능합니다.',
     AMOUT_RANGE_ERROR: '[ERROR] 1,000원 ~ 20,000 사이로만 구매가 가능합니다.',
     NUMBER_DUPLICATED_ERROR: '[ERROR] 번호가 중복이 되면 안됩니다.',

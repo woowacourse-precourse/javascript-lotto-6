@@ -1,35 +1,36 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 import { ERROR_MESSAGE } from '../data/message.js';
 
 class Amount {
-    constructor(amount) {
-        this.amount = amount;
-        Amount.#isCheckNumber(amount);
-        Amount.#isCheckThousand(amount);
-        Amount.#isCheckProperRange(amount);
+    constructor() {}
+
+    static async changeIntoInt(input) {
+        let amount = await Amount.#validateRepeat(input);
+
+        return Number(amount);
     }
 
-    static #isCheckNumber(amount) {
-        if(isNaN(amount)) {
-            throw new Error('[ERROR] 숫자를 입력해야합니다.');
+    static async #validateRepeat(input) {
+        let amount = input;
+        let isCorrect = false;
+
+        while(!isCorrect) {
+            try {
+                await Amount.#validateCorrectFormat(amount);
+                isCorrect = true;
+            } catch(error) {
+                amount = await MissionUtils.Console.readLineAsync(`${ERROR_MESSAGE.AMOUT_NUMBER_ERROR}`);
+            }
         }
 
         return amount;
     }
 
-    static #isCheckThousand(amount) {
-        if(+amount % 1000 !== 0) {
-            throw new Error(`${ERROR_MESSAGE.AMOUT_THOUSAND_ERROR}`);
+    static async #validateCorrectFormat(amount) {
+        if(isNaN(+amount) || +amount % 1000 !== 0 || +amount < 1000 || +amount > 20000) {
+            throw 'error';
         }
-
-        return amount;
-    }
-
-    static #isCheckProperRange(amount) {
-        if(+amount < 1000 || +amount > 20000) {
-            throw new Error(`${ERROR_MESSAGE.AMOUT_RANGE_ERROR}`);
-        }
-
-        return amount;
     }
 }
 
