@@ -11,4 +11,10 @@ const GAME_NUMBER = {
   MONEY_UNIT: 1000,
 };
 
-export { ERROR, MESSAGE, GAME_NUMBER };
+const LOTTO_NUMBER = {
+  MIN: 1,
+  MAX: 45,
+  COUNT: 6,
+};
+
+export { ERROR, MESSAGE, GAME_NUMBER, LOTTO_NUMBER };
