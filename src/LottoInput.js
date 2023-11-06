@@ -19,7 +19,7 @@ export async function lottoWinningNumbers() {
     const winningNumbersInput = await MissionUtils.Console.readLineAsync(`\n${MESSAGES.LOTTO_WINNING_INPUT}\n`);
     const winningNumbers = checkLottoWinningNumbers(winningNumbersInput);
 
-    return winningNumbers;
+    return winningNumbers.map((number) => parseInt(number, 10));
 }
 
 export function checkLottoWinningNumbers(winningNumbers) {
@@ -32,10 +32,9 @@ export function checkLottoWinningNumbers(winningNumbers) {
 }
 
 
-export async function lottoBonusNumber(winningInputNumbers) {
-    const winninNumbers = winningInputNumbers.map((number) => parseInt(number, 10));
+export async function lottoBonusNumber(winningNumbers) {
     const bonusNumberInput = await MissionUtils.Console.readLineAsync(`\n${MESSAGES.LOTTO_BONUS_INPUT}\n`);
-    const bonusNumber = checkLottoBonusNumber(winninNumbers, bonusNumberInput);
+    const bonusNumber = checkLottoBonusNumber(winningNumbers, bonusNumberInput);
 
     return bonusNumber;
 }
