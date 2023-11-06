@@ -75,7 +75,7 @@ describe("클래스 테스트", () => {
 
     test('보너스 번호와 입력한 로또 번호가 중복일시 예외가 발생한다.', () => {
         //given
-        const number = new Lotto([1, 2, 3, 4, 5, 6]);
+        const winningNumber = new Lotto([1, 2, 3, 4, 5, 6]);
         const input = 6;
 
         //when
@@ -83,12 +83,12 @@ describe("클래스 테스트", () => {
         const app = new App(playerInputMock);
 
         //then
-        expect(app.getBonusNumber(number)).rejects.toThrowError('[ERROR] 중복된 값이 있습니다.');
+        expect(app.getBonusNumber(winningNumber)).rejects.toThrowError('[ERROR] 중복된 값이 있습니다.');
     });
 
     test('보너스 번호가 1~45까지의 정수가 아닐경우 예외가 발생한다.', () => {
         //given
-        const number = new Lotto([1, 2, 3, 4, 5, 6]);
+        const winningNumber = new Lotto([1, 2, 3, 4, 5, 6]);
         const input = 54;
 
         //when
@@ -96,12 +96,12 @@ describe("클래스 테스트", () => {
         const app = new App(playerInputMock);
 
         //then
-        expect(app.getBonusNumber(number)).rejects.toThrowError('[ERROR] 보너스 번호는 1부터 45 사이의 한개의 정수여야 합니다.');
+        expect(app.getBonusNumber(winningNumber)).rejects.toThrowError('[ERROR] 보너스 번호는 1부터 45 사이의 한개의 정수여야 합니다.');
     });
 
     test('로또 당첨 결과 확인', () => {
         //given
-        const number = new Lotto([1, 2, 3, 4, 5, 6]);
+        const winningNumber = new Lotto([1, 2, 3, 4, 5, 6]);
         const lottoNumbersArray = ([
             [1, 2, 3, 8, 9, 10],
             [1, 2, 3, 8, 9, 10],
@@ -111,7 +111,7 @@ describe("클래스 테스트", () => {
 
         //when
         const app = new App();
-        const result = app.getResult(number, lottoNumbersArray, intBonusNumber);
+        const result = app.getResult(winningNumber, lottoNumbersArray, intBonusNumber);
 
         // then
         expect(result).toEqual({"all": 0, "bonus": 0, "five": 0, "four": 1, "three": 2});
