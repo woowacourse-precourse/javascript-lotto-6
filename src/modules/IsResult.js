@@ -10,15 +10,13 @@ class IsResult {
   }
 
   resultTitle() {
-    Console.print("");
     Console.print(LOTTO_MESSAGE.RESULT_VIEW);
-    Console.print("---");
     this.winningResult()
   }
 
   resultView(result, prize) {
     for(let key in result) {
-      Console.print(`${result[key].match} (${(result[key].price).toLocaleString()})원 - ${result[key].count}개`)
+      Console.print(`${result[key].match} (${(result[key].price).toLocaleString()}원) - ${result[key].count}개`)
     }
     Console.print(`총 수익률은 ${((prize / this.userCost) * 100).toFixed(1)}%입니다.`)
   }
