@@ -6,11 +6,13 @@ import { outputView } from "../views/outputView.js";
 class LottoCount {
   #money;
   #count;
+  #lottoArray;
 
   static FRONT_BRACKET = '[';
   static BACK_BRACKET = ']';
 
   constructor(money){
+    this.#lottoArray = [];
     this.#money = money;
     this.validate();
     this.printAllLottoNumbers();
@@ -59,7 +61,16 @@ class LottoCount {
 
   printSixLottoNumber() {
     const sixNumbersArray = generateSixRandomNumber();
+    this.#lottoArray.push(sixNumbersArray);
     outputView.print(LottoCount.FRONT_BRACKET + sixNumbersArray.join(', ') + LottoCount.BACK_BRACKET);
+  }
+
+  getLottoArray() {
+    return this.#lottoArray;
+  }
+
+  getMoney() {
+    return this.#money;
   }
 }
 

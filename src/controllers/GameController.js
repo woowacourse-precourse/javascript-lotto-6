@@ -10,10 +10,16 @@ class GameController {
   #lottoCount;
   #winnings;
   #bonus;
+  #winningsCount;
 
-  async play(){
+  static WINNING_NUMBER_LIST = ["3개 일치", "4개 일치", "5개 일치", "5개 일치, 보너스 볼 일치", "6개 일치"];
+  static WINNING_AMOUNT_LIST = ["5,000", "50,000", "1,500,000", "30,000,000", "2,000,000,000"];
+  static initialWinningsCount = [0, 0, 0, 0, 0];
+
+  async play() {
     await this.buyLotto();
     await this.getLottoNumbers();
+    this.printResult();
   }
 
   async buyLotto() {
@@ -38,9 +44,51 @@ class GameController {
     this.#bonus = new Bonus(number);
 
     if (this.#winnings.getWinningNumbers().includes(this.#bonus.getBonusNumber())) {
-        throw new Error(ERROR_MESSAGE.exists_duplication);
+      throw new Error(ERROR_MESSAGE.exists_duplication);
     }
     outputView.lineBreak();
+  }
+
+  printResult() {
+    outputView.print(LOTTO_MESSAGE.print_start_result);
+    this.calculateWinnings();
+    this.#winningsCount.map((item, idx) => this.printWinningList(item, idx));
+    this.printRateOfReturn();
+  }
+
+  calculateWinnings() {
+    this.#winningsCount = GameController.initialWinningsCount;
+    const LottoArray = this.#lottoCount.getLottoArray();
+    const winnings = this.#winnings.getWinningNumbers();
+
+    for (const item of LottoArray){
+      this.calculateEachwinnings(item, winnings);
+    }
+  }
+
+  calculateEachwinnings(item, winnings) {
+    const commonNumbers = item.filter(value => winnings.includes(String(value)));
+    let totals = commonNumbers.length;
+    if (totals === 6) {
+      this.#winningsCount[4] += 1;
+    } else {
+      totals += Number(item.includes(Number(this.#bonus.getBonusNumber())));
+      if (totals >=3){
+        this.#winningsCount[totals-3] += 1;
+      }
+    }
+  }
+
+  printWinningList(count, index) {
+    return outputView.print(LOTTO_MESSAGE.print_winnings(GameController.WINNING_NUMBER_LIST[index], GameController.WINNING_AMOUNT_LIST[index], count));
+  }
+
+  printRateOfReturn() {
+    let totalReturn = 0;
+    this.#winningsCount.map((item, idx) => {
+        totalReturn += item * parseInt(GameController.WINNING_AMOUNT_LIST[idx].replace(/,/g, ''), 10)
+    })
+    outputView.print(LOTTO_MESSAGE.print_return_rate(totalReturn*100/this.#lottoCount.getMoney()))
   }
 }
 
