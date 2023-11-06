@@ -30,13 +30,13 @@ class User {
     return result;
   }
 
-  async selectNumbers() {
+  async selectLottery() {
     const lotteryNumber = await Read.input(MESSAGE.QUESTION_PRIZE_NUMBER);
 
     return this.#divideEachNumber(lotteryNumber);
   }
 
-  async selectBonusNumber() {
+  async selectBonus() {
     const bonusNumber = await Read.input(MESSAGE.QUESTION_BONUS_NUMBER);
 
     return bonusNumber;

@@ -37,11 +37,10 @@ class CheckNumber {
 
   static calculateMargin(matchData) {
     const numberRegex = /\(([^)]+)\)/;
-    const removeUdefined = matchData.filter((el) => el);
 
     let totalAmount = 0;
 
-    removeUdefined.forEach((el) => {
+    matchData.forEach((el) => {
       const amountString = el.match(numberRegex)[1];
       const amount = amountString.replace(/[^0-9]/g, '');
 

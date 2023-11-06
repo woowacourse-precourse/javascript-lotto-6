@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import CheckNumber from './Domain/NumberCheck.js';
 import Result from './Domain/Result.js';
 import User from './Domain/User.js';
@@ -22,10 +21,12 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-  async getResult(randomNum) {
-    const bonus = await new User().selectBonusNumber();
+  async compareWith(randomNum) {
+    const bonus = await new User().selectBonus();
+
     const userNum = { user: this.#numbers, bonus };
 
+    // 같은 수 체크
     const matchedNumber = new CheckNumber({ randomNum, userNum }).sameCount();
 
     const matchResult = CheckNumber.sameResult(matchedNumber);
