@@ -10,8 +10,9 @@ class App {
     const rankCount = Array.from(6).fill(0);
     const payment = await this.getPayment();
     const lottoCount = parseInt(payment / this.LOTTO_UNIT);
-    const lottoList = this.getPickedLottoList(lottoCount)
-    this.printPickedLotto(lottoCount, lottoList)
+    const lottoList = this.getPickedLottoList(lottoCount);
+    this.printPickedLotto(lottoCount, lottoList);
+    const winningNumbers = await  this.getWinningNumber();
   }
 
   async getPayment() {
@@ -50,9 +51,29 @@ class App {
     return pickedLottoList;
   }
 
-  printPickedLotto(lottoCount, lottoList = []){
-    Console.print(`${lottoCount}개를 구매했습니다.`);
-    lottoList.forEach(lotto => Console.print(lotto.getNumber()))
+  printPickedLotto(lottoCount, lottoList = []) {
+    Console.print(`\n${lottoCount}개를 구매했습니다.`);
+    lottoList.forEach((lotto) => Console.print(lotto.getNumber()));
+  }
+
+  async getWinningNumber() {
+    const numbers = await Console.readLineAsync(
+        "\n당첨 번호를 입력해 주세요.\n"
+    ).split(",");
+    const winningNumber = [];
+    numbers.forEach((number) => {
+      if (!/\d/g.test(number)) {
+        throw new Error("[ERROR] 로또 번호는 숫자로 입력해야 합니다.");
+      } else if (+number < 1 || +number > 45) {
+        throw new Error(
+            "[ERROR] 로또 번호는 1~45 사이의 숫자를 입력해야 합니다."
+        );
+      } else if (winningNumber.includes(+number)) {
+        throw new Error("[ERROR] 중복된 숫자는 입력할 수 없습니다.");
+      }
+      winningNumber.push(+number);
+    });
+    return new Lotto(winningNumber);
   }
 }
 
