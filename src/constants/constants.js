@@ -1,4 +1,5 @@
 const STATMESSAGE = Object.freeze({
+  start: '당첨통계\n---',
   fifth: '3개 일치 (5,000원) - ',
   fourth: '4개 일치 (50,000원) - ',
   third: '5개 일치 (1,500,000원) - ',
@@ -7,7 +8,7 @@ const STATMESSAGE = Object.freeze({
 });
 
 const VIEWMESSAGE = Object.freeze({
-  purchseInput: '구입 금액을 입력해주세요.\n',
+  purchaseInput: '구입 금액을 입력해주세요.\n',
   lottoInput: '당첨 번호를 입력해주세요.\n',
   bonusInput: '보너스 번호를 입력해주세요.\n',
 });
@@ -25,6 +26,7 @@ const CHARACTER = Object.freeze({
   returnSuffix: '%입니다.',
   purchaseSuffix: '개를 구매했습니다.',
   countSuffix: '개',
+  newline: '\n',
 });
 
 const NUMBER = Object.freeze({

@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { CHARACTER } from '../constants/constants.js'
+import { CHARACTER, STATMESSAGE } from '../constants/constants.js';
 
 class OutputView {
   print(message) {
@@ -7,7 +7,13 @@ class OutputView {
   }
 
   printNumberOfPurchase(numberOfPurchase) {
-    Console.print(`${numberOfPurchase}${CHARACTER.purchaseSuffix}`);
+    Console.print(
+      `${CHARACTER.newline}${numberOfPurchase}${CHARACTER.purchaseSuffix}`
+    );
+  }
+
+  printStatPrefix() {
+    Console.print(`${CHARACTER.newline}${STATMESSAGE.start}`);
   }
 
   printStatistic(statistic) {
@@ -18,7 +24,7 @@ class OutputView {
 
   printRateOfReturns(rateOfReturns) {
     Console.print(
-      `${CHARACTER.returnPreffix}${rateOfReturns}${CHARACTER.returnSuffix}`
+      `${CHARACTER.newline}${CHARACTER.returnPreffix}${rateOfReturns}${CHARACTER.returnSuffix}`
     );
   }
 }

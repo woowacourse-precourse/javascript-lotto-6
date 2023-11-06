@@ -68,6 +68,7 @@ class controller {
   }
 
   printStatistics() {
+    this.#outputView.printStatPrefix();
     this.#statistics.getStatistics().forEach((statistic) => {
       this.#outputView.printStatistic(statistic);
     });
