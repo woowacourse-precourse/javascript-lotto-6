@@ -2,14 +2,16 @@ import { ERROR_MESSAGES } from '../constants/ErrorMessages';
 
 export default class InputValidator {
   static validatePurchaseAmount(amount) {
+    if (!/^\d+$/.test(amount)) {
+      throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
+    }
+
     const numericAmount = parseInt(amount, 10);
 
-    if (Number.isNaN(numericAmount)) {
-      throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
-    }
     if (numericAmount <= 0) {
       throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
     }
+
     if (numericAmount % 1000 !== 0) {
       throw new Error(ERROR_MESSAGES.AMOUNT_NOT_IN_UNITS);
     }
