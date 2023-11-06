@@ -1,8 +1,8 @@
 const message = {
   tryPurchaseLotto: '구입금액을 입력해 주세요.\n',
-  winningNumbers: '당첨 번호를 입력해 주세요.\n',
-  bonusNumber: '보너스 번호를 입력해 주세요.\n',
-  winningStatistics: '당첨 통계\n---',
+  winningNumbers: '\n당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
+  winningStatistics: '\n당첨 통계\n---',
   threeMatches: '3개 일치 (5,000원) - ',
   fourMatches: '4개 일치 (50,000원) - ',
   fiveMatches: '5개 일치 (1,500,000원) - ',
