@@ -10,23 +10,25 @@ class App {
   }
 
   async inputPay() {
-    do {
+    let isValid = false;
+
+    while (!isValid) {
       try {
         const input = await Console.readLineAsync(
           "구입금액을 입력해 주세요. \n"
         );
         if (isNaN(+input)) {
-          Console.print("[ERROR] 금액은 숫자로 입력해 주세요.");
-          this.inputPay();
-        } else if (+input % 1000 !== 0) {
-          Console.print("[ERROR] 로또 구입은 1000원 단위만 가능합니다.");
-          this.inputPay();
+          throw new Error("[ERROR] 금액은 숫자로 입력해 주세요.");
+        }
+        if (+input % 1000 !== 0) {
+          throw new Error("[ERROR] 로또 구입은 1000원 단위만 가능합니다.");
         }
         this.pay = +input / 1000;
+        isValid = true;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
-    } while (this.pay === 0);
+    }
   }
 
   async makeLotto() {
