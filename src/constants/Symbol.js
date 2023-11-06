@@ -1,3 +1,8 @@
+export const SYMBOL = Object.freeze({
+  space: ' ',
+  empty: '',
+});
+
 export const DIVIDER = Object.freeze({
   comma: ',',
   spaceComma: ', ',
