@@ -31,6 +31,8 @@ class App {
 
   #totalProfit;
 
+  #profitPercentage;
+
   constructor() {
     this.#tickets = [];
     this.#result = [...RANKS.map((rank) => ({ ...rank, count: 0 }))];
@@ -125,6 +127,10 @@ class App {
         }개`,
       );
     });
+  }
+
+  calcTotalProfitPercentage() {
+    this.#profitPercentage = (this.#totalProfit / this.#purchaseAmount) * 100;
   }
 
   getResult() {
