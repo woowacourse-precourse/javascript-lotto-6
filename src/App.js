@@ -43,6 +43,7 @@ class App {
       generatedLottoNumbersArr
     );
     this.lottoResultChecker.countMatchingNumbers(this.matchingCounts);
+    this.totalProfit = this.lottoResultChecker.calculateTotalProfit();
   }
 
   async inputPurchasePrice() {
