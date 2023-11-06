@@ -7,23 +7,27 @@ const OutputView = Object.freeze({
   },
 
   lottoQuantity(quantity) {
-    OutputView.print(MESSAGES.printLottoQuantity(quantity));
+    Console.print(MESSAGES.printLottoQuantity(quantity));
   },
 
   userLotto(lottos) {
-    OutputView.print(MESSAGES.printLottos(lottos));
+    Console.print(MESSAGES.printLottos(lottos));
   },
 
   winningStatistics() {
-    OutputView.print(MESSAGES.printWinningStatistics);
+    Console.print(MESSAGES.printWinningStatistics);
   },
 
   rewards(rewards) {
-    rewards.forEach((reward) => OutputView.print(MESSAGES.printReward(reward)));
+    rewards.forEach((reward) => Console.print(MESSAGES.printReward(reward)));
+  },
+
+  earningRate(earningRate) {
+    Console.print(MESSAGES.printEarningRate(earningRate));
   },
 
   error(error) {
-    OutputView.print(error);
+    Console.print(error);
   },
 });
 

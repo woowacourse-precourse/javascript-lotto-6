@@ -3,8 +3,8 @@ import MESSAGES from '../constants/messages.js';
 
 const InputView = Object.freeze({
   async readLine(query) {
-    const answer = await Console.readLineAsync(query);
-    return answer;
+    const inputValue = await Console.readLineAsync(query);
+    return inputValue;
   },
 
   async readPurchaseMoney() {
