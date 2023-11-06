@@ -47,6 +47,10 @@ class CheckManager {
     #checkBonus(bonusNumber, randomPublishLotto) {
         return randomPublishLotto.includes(bonusNumber);
     }
+
+    getRanks(){
+        return this.#ranks
+    }
 }
 
 export default CheckManager
