@@ -16,17 +16,21 @@ describe('Request', () => {
   });
 
   test('유효한 값 리턴', async () => {
+    // given
     prompt.in.mockResolvedValue('8000');
     validate.money.mockResolvedValue(true);
 
+    // when
     const result = await Request.money();
 
+    // then
     expect(result).toBe(8000);
     expect(prompt.in).toHaveBeenCalledWith(REQUEST.MONEY);
     expect(validate.money).toHaveBeenCalledWith('8000');
   });
 
   test('에러 처리 테스트', async () => {
+    // given
     prompt.in
       .mockResolvedValueOnce('팔천원')
       .mockResolvedValueOnce('8000');
@@ -36,8 +40,10 @@ describe('Request', () => {
     });
     validate.money.mockImplementationOnce(true);
 
+    // when
     const result = await Request.money();
 
+    // then
     expect(result).toBe(8000);
     expect(prompt.in).toHaveBeenCalledWith(REQUEST.MONEY);
     expect(validate.money).toHaveBeenCalledWith('팔천원');
