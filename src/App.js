@@ -7,6 +7,7 @@ import {
   BASE_AMOUNT,
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
+  RANKS,
 } from "./utils/CONSTANT.js";
 import {
   validateBonusNumber,
@@ -26,8 +27,13 @@ class App {
 
   #bonusNumber;
 
+  #result;
+
+  #totalProfit;
+
   constructor() {
     this.#tickets = [];
+    this.#result = [...RANKS.map((rank) => ({ ...rank, count: 0 }))];
   }
 
   async inputPurchaseAmount() {
@@ -37,8 +43,8 @@ class App {
 
     validatePurchase(input);
 
-    this.#purchaseAmount = input;
-    this.#ticketCount = parseInt(input, 10) / BASE_AMOUNT;
+    this.#purchaseAmount = parseInt(input, 10);
+    this.#ticketCount = this.#purchaseAmount / BASE_AMOUNT;
   }
 
   createLottoTickets() {
@@ -93,9 +99,29 @@ class App {
     await this.inputBonusNumber();
   }
 
+  matchLotteryResults() {
+    const initValue = 0;
+
+    this.#totalProfit = this.#tickets.reduce((acc, ticket) => {
+      const result = ticket.match(this.#winningNumbers, this.#bonusNumber);
+      if (result !== undefined) {
+        this.#result = this.#result.map((rank) =>
+          rank.rank === result.rank ? { ...rank, count: rank.count + 1 } : rank,
+        );
+        return acc + result.prize;
+      }
+      return acc;
+    }, initValue);
+  }
+
+  getResult() {
+    this.matchLotteryResults();
+  }
+
   async play() {
     await this.startPurchase();
     await this.makeWinningNumber();
+    this.getResult();
   }
 }
 
