@@ -43,7 +43,7 @@ class App {
       return;
     }
 
-    this.#purchaseAmount = parseInt(input, 10);
+    this.#purchaseAmount = Number(input);
   }
 
   createLottoTickets(ticketCount) {
@@ -76,9 +76,7 @@ class App {
       return;
     }
 
-    this.#winningNumbers = input
-      .split(",")
-      .map((number) => parseInt(number, 10));
+    this.#winningNumbers = input.split(",").map((number) => Number(number));
   }
 
   async inputBonusNumber() {
@@ -94,7 +92,7 @@ class App {
       return;
     }
 
-    this.#bonusNumber = parseInt(input, 10);
+    this.#bonusNumber = Number(input);
   }
 
   async makeWinningNumber() {

@@ -23,7 +23,7 @@ const isAllNumbers = (values) =>
   values.filter((value) => isNumber(value)).length === NUMBER_COUNT;
 
 const isNumbersInRange = (values) =>
-  values.filter((value) => isNumberInRange(parseInt(value, 10))).length ===
+  values.filter((value) => isNumberInRange(Number(value))).length ===
   NUMBER_COUNT;
 
 const validatePurchase = (purchaseAmount) => {
@@ -51,7 +51,7 @@ const validateWinningNumber = (winningNumber) => {
 const validateBonusNumber = (winningNumbers, bonusNumber) => {
   if (isEmpty(bonusNumber)) throw new Error(ERROR_MESSAGE.empty);
   if (!isNumber(bonusNumber)) throw new Error(ERROR_MESSAGE.textIncluded);
-  if (!isNumberInRange(parseInt(bonusNumber, 10))) {
+  if (!isNumberInRange(Number(bonusNumber))) {
     throw new Error(ERROR_MESSAGE.notInRange);
   }
   if (isSetSizeSix([...winningNumbers.concat(Number(bonusNumber))])) {
