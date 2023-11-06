@@ -35,7 +35,7 @@ class LottoMatcher {
     const matchedCount = matchedNumbers.length;
     if (matchedCount === NUMBER.SIX) {
       this.#updateFirstPrize(result);
-    } else if (matchedCount === NUMBER.FIVE && matchedNumbers.includes(this.bonusNumber)) {
+    } else if (matchedCount === NUMBER.FIVE && this.#includesBonusNumber(ticket, this.bonusNumber)) {
       this.#updateSecondPrize(result);
     } else if (matchedCount === NUMBER.FIVE) {
       this.#updateThirdPrize(result);
@@ -50,9 +50,13 @@ class LottoMatcher {
     return ticket.filter((number) => winningNumbers.includes(number));
   }
 
+  #includesBonusNumber(ticket, bonusNumber) {
+    return ticket.includes(bonusNumber);
+  }
+
   #updateFirstPrize(result) {
     result[GAME_PRIZES.FIRST_PRIZE]++;
-    result.totalEarnings += PRIZE_AMOUNTS.FIRST_PRIZE;
+    result.totalEarnings += PRIZE_AMOUNTS.FIRST_PRIZE_AMOUNT;
   }
 
   #updateSecondPrize(result) {
