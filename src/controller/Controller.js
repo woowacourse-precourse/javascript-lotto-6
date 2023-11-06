@@ -5,7 +5,6 @@ import Lotto from '../model/Lotto.js';
 import OutputView from '../view/OutputView.js';
 import InputView from '../view/InputView.js';
 
-import chageStringtoArray from '../util/chageStringtoArray.js';
 import calculateMatch from '../util/calculateMatch.js';
 import calculateTotal from '../util/calculateTotal.js';
 import calcultePercent from '../util/calcultePercent.js';
@@ -38,18 +37,18 @@ class Controller {
 
   async #initMoney() {
     const input = await InputView.writePurchaseAmount();
-    this.#money = new Money(Number(input));
+    this.#money = new Money(input);
     OutputView.printPurchacingLotto(this.#money.getCount(), this.#money.getLottoList());
   }
 
   async #initlotto() {
     const input = await InputView.writeWinningNumbers();
-    this.#lotto = new Lotto(chageStringtoArray(input));
+    this.#lotto = new Lotto(input);
   }
 
   async #initBonus() {
     const input = await InputView.writeBonunsNumber();
-    this.#bonus = new BonusNumber(Number(input), this.#lotto.getLotto());
+    this.#bonus = new BonusNumber(input, this.#lotto.getLotto());
   }
 
   /**

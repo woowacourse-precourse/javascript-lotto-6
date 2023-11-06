@@ -13,9 +13,10 @@ class Money {
   #match = { three: ZERO, four: ZERO, five: ZERO, fiveAndBonus: ZERO, six: ZERO };
 
   constructor(money) {
-    this.#validate(money);
-    this.#money = money;
-    this.#count = money / MULTIPLE;
+    const changeTypeMoneyToNumber = Number(money);
+    this.#validate(changeTypeMoneyToNumber);
+    this.#money = changeTypeMoneyToNumber;
+    this.#count = this.#money / MULTIPLE;
     this.#setLottoList();
   }
 
@@ -58,6 +59,10 @@ class Money {
     return this.#count;
   }
 
+  /**
+   *
+   * @returns {{ three: number, four: number, five: number, fiveAndBonus: number, six: number }} money/MULTIPLE
+   */
   getMatch() {
     return this.#match;
   }

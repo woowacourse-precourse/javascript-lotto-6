@@ -1,5 +1,5 @@
-import calculateMatch from '../src/util/calculateMatch.js';
-import checkMatch from '../src/util/checkMatch.js';
+import calculateMatch from '../../src/util/calculateMatch.js';
+import checkMatch from '../../src/util/checkMatch.js';
 
 const MATCH = { three: 0, four: 0, five: 0, fiveAndBonus: 0, six: 0 };
 

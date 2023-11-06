@@ -3,9 +3,15 @@ import BonusValidation from '../validation/BonusValidation.js';
 class BonusNumber {
   #bonusNumber;
 
+  /**
+   *
+   * @param {string} bonusNumber
+   * @param {number []} lottos
+   */
   constructor(bonusNumber, lottos) {
-    this.#validate(bonusNumber, lottos);
-    this.#bonusNumber = bonusNumber;
+    const bonus = Number(bonusNumber);
+    this.#validate(bonus, lottos);
+    this.#bonusNumber = bonus;
   }
 
   #validate(bonusNumber, lottos) {
@@ -18,7 +24,7 @@ class BonusNumber {
    * @returns {number} bonunNumber
    */
   getBonusNumber() {
-    return this.getBonusNumber;
+    return this.#bonusNumber;
   }
 }
 

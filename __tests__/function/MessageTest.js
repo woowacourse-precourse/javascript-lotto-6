@@ -1,4 +1,4 @@
-import { MESSAGE_OBJECT } from '../src/constants/message.js';
+import { MESSAGE_OBJECT } from '../../src/constants/message.js';
 
 describe('메시지를 생성하는 메서드가 정상적으로 메시지를 생성하는지 확인합니다.', () => {
   test('당첨 통계를 정상적으로 생성하는지 확인합니다.', () => {

@@ -1,6 +1,6 @@
-import calculateTotal from '../src/util/calculateTotal.js';
-import calcultePercent from '../src/util/calcultePercent.js';
-import { MATCH_NUMBER } from '../src/constants/constant.js';
+import calculateTotal from '../../src/util/calculateTotal.js';
+import calcultePercent from '../../src/util/calcultePercent.js';
+import { MATCH_NUMBER } from '../../src/constants/constant.js';
 
 describe('수익률을 정상적으로 계산하는지 테스트 합니다.', () => {
   // given

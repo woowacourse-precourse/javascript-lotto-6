@@ -1,12 +1,16 @@
 import LottoValidation from '../validation/LottoValidation.js';
+
 import makeAsendingOrder from '../util/makeAsendingOrder.js';
+import chageStringtoArray from '../util/chageStringtoArray.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = makeAsendingOrder(numbers);
+    const numbersArr = chageStringtoArray(numbers);
+
+    this.#validate(numbersArr);
+    this.#numbers = makeAsendingOrder(numbersArr);
   }
 
   #validate(numbers) {

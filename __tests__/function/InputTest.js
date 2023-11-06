@@ -1,4 +1,4 @@
-import chageStringtoArray from '../src/util/chageStringtoArray.js';
+import chageStringtoArray from '../../src/util/chageStringtoArray.js';
 
 describe('쉼표를 구분으로 하여 입력된 값이 배열로 변환되는지 확인하기', () => {
   test('쉼표를 기준으로 해서 NaN과 숫자를 정확히 구분하는지 확인', () => {
