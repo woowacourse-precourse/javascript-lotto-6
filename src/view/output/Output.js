@@ -14,8 +14,8 @@ const Output = (superClass) =>
       Console.print(LOTTO_MESSAGE.resultHeaderLine);
     }
 
-    static printLottoCount(money) {
-      Console.print(LOTTO_MESSAGE.lottoCount(money / LOTTO.price));
+    static printLottoCount(count) {
+      Console.print(LOTTO_MESSAGE.lottoCount(count));
     }
 
     static printLottos(lottos) {
@@ -34,15 +34,15 @@ const Output = (superClass) =>
       Console.print(message.join('\n'));
     }
 
-    static printYieldPercent(yieldPercent) {
-      Console.print(LOTTO_MESSAGE.yield(yieldPercent));
+    static printYieldRate(yieldRate) {
+      Console.print(LOTTO_MESSAGE.yield(yieldRate));
     }
 
-    static printMatchResults(matchResult) {
+    static printPrizeCount(prizeCount) {
       const message = [];
 
-      matchResult.forEach((matchCount, i) => {
-        if (i < matchResult.length - 2) {
+      prizeCount.forEach((matchCount, i) => {
+        if (i < prizeCount.length - 2) {
           message.push(
             LOTTO_MESSAGE.resultCount(
               LOTTO.minMatchCount + i,
@@ -50,7 +50,7 @@ const Output = (superClass) =>
               matchCount,
             ),
           );
-        } else if (i === matchResult.length - 2) {
+        } else if (i === prizeCount.length - 2) {
           message.push(
             LOTTO_MESSAGE.resultBonusCount(
               LOTTO.count - 1,
@@ -58,7 +58,7 @@ const Output = (superClass) =>
               matchCount,
             ),
           );
-        } else if (i === matchResult.length - 1) {
+        } else if (i === prizeCount.length - 1) {
           message.push(
             LOTTO_MESSAGE.resultCount(
               LOTTO.count,
