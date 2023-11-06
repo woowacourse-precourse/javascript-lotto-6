@@ -16,21 +16,27 @@ class App {
 
     const winningNumber = await UserInput.getWinningNumber();
     const bonusNumber = await UserInput.getBonusNumber(winningNumber);
-    App.displayResult(amount, numberIssuance.lottoNumbers, {
+    const results = App.generateResult(amount, numberIssuance.lottoNumbers, {
       win: winningNumber,
       bonus: bonusNumber,
     });
+
+    App.displayStatistics(results.statistics);
+    App.displayRevenue(results.revenue);
   }
 
-  static displayResult(amount, myLotto, winningLotto) {
+  static generateResult(amount, myLotto, winningLotto) {
     const lottoGame = new LottoGame(myLotto, winningLotto);
+    const calculator = new Calculator();
+
     lottoGame.start();
-
     lottoGame.generateStatistics();
-    App.displayStatistics(lottoGame.statistics);
+    calculator.calculateRevenue(lottoGame.reward, amount);
 
-    const calculator = new Calculator(lottoGame.reward, amount);
-    App.displayRevenue(calculator.revenue);
+    return {
+      statistics: lottoGame.statistics,
+      revenue: calculator.revenue,
+    };
   }
 
   static displayPurchase(numberOfTickets, lottoNumbers) {

@@ -1,14 +1,12 @@
 const PERCENTAGE_FACTOR = 100;
 
 class Calculator {
-  constructor(reward, amount) {
-    this.reward = reward;
-    this.amount = amount;
-    this.revenue = this.calculateRevenue();
+  constructor() {
+    this.revenue = 0;
   }
 
-  calculateRevenue() {
-    return (this.reward / this.amount) * PERCENTAGE_FACTOR;
+  calculateRevenue(reward, amount) {
+    this.revenue = (reward / amount) * PERCENTAGE_FACTOR;
   }
 }
 
