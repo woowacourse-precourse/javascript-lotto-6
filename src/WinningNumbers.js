@@ -17,7 +17,8 @@ class Winning {
       if (winningType === 3) this.#rank[4] += 1;
       if (winningType === 4) this.#rank[3] += 1;
       if (winningType === 5) {
-        if (lotto.includes(this.#bonusNumber)) this.#rank[1] += 1;
+        if (lotto.includes(this.#bonusNumber))
+          return this.#rank[1] += 1;
         this.#rank[2] += 1;
       }
       if (winningType === 6) this.#rank[0] += 1;
