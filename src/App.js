@@ -29,10 +29,13 @@ class App {
   }
 
   createLotto() {
-    const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
-
-    lotto.sort((a, b) => a - b);
-    return lotto;
+    const lottos = [];
+    for (let i = 0; i < this.#count; i++) {
+      const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+      lotto.sort((a, b) => a - b);
+      lottos.push(lotto);
+    }
+    return lottos;
   }
 
   calcReturn(purchase) {
@@ -50,11 +53,8 @@ class App {
     this.#count = this.countLotto(price);
     Print.printPurchase(this.#count);
 
-    for (let i = 0; i < this.#count; i++) {
-      const lotto = this.createLotto();
-      this.#lottos.push(lotto);
-      Print.printArray(lotto);
-    }
+    this.#lottos = this.createLotto();
+    this.#lottos.forEach((lotto) => Print.printArray(lotto));
     Print.printNewLine();
 
     const answerNumbers = await Input.getLottoNumber();
@@ -70,7 +70,6 @@ class App {
         this.#results[key] += 1;
       }
     });
-
     Print.printResults(this.#results);
 
     const returnRate = this.calcReturn(price);
