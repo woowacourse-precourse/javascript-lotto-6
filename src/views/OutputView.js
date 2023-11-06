@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { EXCEPTION } from '../constants/constants.js';
+import { EXCEPTION, OUTPUT } from '../constants/constants.js';
 
 const WINNING_MESSAGE = [
   '3개 일치 (5,000원) - ',
@@ -20,8 +20,8 @@ const OutputView = {
     Console.print(`[${lotto.join(', ')}]`);
   },
   result(counts) {
-    Console.print('\n당첨 통계');
-    Console.print('---');
+    Console.print(OUTPUT.WINNING_RESULT);
+    Console.print(OUTPUT.BAR);
     counts.forEach((count, idx) => {
       Console.print(`${WINNING_MESSAGE[idx]}${count}개`);
     });

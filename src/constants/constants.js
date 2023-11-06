@@ -29,3 +29,14 @@ export const MATCHING = Object.freeze({
   BONUS: '5+1',
   SIX: '6',
 });
+
+export const OUTPUT = Object.freeze({
+  WINNING_RESULT: '\n당첨 통계',
+  BAR: '---',
+});
+
+export const INPUT = Object.freeze({
+  MONEY: '구입금액을 입력해 주세요.\n',
+  WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBERS: '\n보너스 번호를 입력해 주세요.\n',
+});
