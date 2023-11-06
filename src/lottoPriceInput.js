@@ -1,8 +1,6 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
-const lottoPriceInput = async (answer) => {
+export default async function lottoPriceInput(answer) {
   const price = await MissionUtils.Console.readLineAsync(answer);
   return price;
-};
-
-export default lottoPriceInput;
+}

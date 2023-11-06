@@ -1,7 +1,6 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
-const bonusNumber = async (answer) => {
+export default async function bonusNumber(answer) {
   const bonusNumber = MissionUtils.Console.readLineAsync(answer);
   return bonusNumber;
-};
-export default bonusNumber;
+}
