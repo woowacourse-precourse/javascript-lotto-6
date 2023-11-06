@@ -15,27 +15,16 @@ export default class ValidationController {
     this.#validationService = new ValidationService();
   }
 
-  // num: string
   validateInputMoney(num) {
-    if (!this.#validationService.isNumber(num)) {
-      throw new Error(ERROR_MESSAGES.isNaN);
-    }
-    if (!this.#validationService.isDividedBy1000(num)) {
-      throw new Error(ERROR_MESSAGES.notDivided);
-    }
+    this.#validationService.isNumber(num);
+    this.#validationService.isDividedBy1000(num);
   }
 
   validatePurchasedTickets(tickets) {
     tickets.forEach((ticket) => {
-      if (!this.#validationService.isInRange(ticket)) {
-        throw new Error(ERROR_MESSAGES.overRange);
-      }
-      if (!this.#validationService.hasSixNumbers(ticket)) {
-        throw new Error(ERROR_MESSAGES.countError);
-      }
-      if (!this.#validationService.isUnique(ticket)) {
-        throw new Error(ERROR_MESSAGES.notUnique);
-      }
+      this.#validationService.isInRange(ticket);
+      this.#validationService.hasSixNumbers(ticket);
+      this.#validationService.isUnique(ticket);
     });
   }
 }

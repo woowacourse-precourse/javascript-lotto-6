@@ -2,36 +2,53 @@ const MIN = 1;
 const MAX = 45;
 const FULL_NUMBER_LENGTH = 6;
 
+const ERROR_MESSAGES = {
+  isNaN: '[ERROR] 입력한 금액이 숫자가 아닙니다.',
+  notDivided: '[ERROR] 1000 단위의 금액을 입력하세요.',
+  overRange: '[ERROR] 숫자는 1부터 45사이여야 합니다.',
+  countError: '[ERROR] 티켓의 번호는 개수가 6개로 이루어져야 합니다.',
+  notUnique: '[ERROR] 티켓의 번호는 중복되면 안됩니다.',
+};
+
 export default class ValidationService {
   isNumber(num) {
-    return !Number.isNaN(+num);
+    if (!Number.isNaN(+num)) {
+      throw new Error(ERROR_MESSAGES.isNaN);
+    }
   }
 
   isDividedBy1000(num) {
-    return num > 0 && +num % 1000 === 0;
+    const canBeDivided = +num > 0 && +num % 1000 === 0;
+    if (!canBeDivided) {
+      throw new Error(ERROR_MESSAGES.notDivided);
+    }
   }
 
   isInRange(ticket) {
-    return (
+    const inRange =
       ticket.length ===
       ticket.filter((num) => {
         return num >= MIN && num <= MAX;
-      })
-    );
+      });
+
+    if (!inRange) {
+      throw new Error(ERROR_MESSAGES.overRange);
+    }
   }
 
   hasSixNumbers(ticket) {
-    return ticket.length === FULL_NUMBER_LENGTH;
+    if (ticket.length !== FULL_NUMBER_LENGTH) {
+      throw new Error(ERROR_MESSAGES.countError);
+    }
   }
 
   isUnique(ticket) {
     const uniqueArray = [];
     ticket.forEach((num) => {
       if (uniqueArray.includes(num)) {
-        return false;
+        throw new Error(ERROR_MESSAGES.notUnique);
       }
       uniqueArray.push(num);
     });
-    return true;
   }
 }
