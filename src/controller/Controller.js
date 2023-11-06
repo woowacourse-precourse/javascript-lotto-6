@@ -16,15 +16,13 @@ class Controller {
 
   async start() {
     await this.#withRetry(() => this.#createUserLotto());
-    await this.#withRetry(() => this.#createWinningLottoNumbers());
-    await this.#withRetry(() => this.#createBonusNumber());
   }
 
   async #createUserLotto() {
     const money = await this.#readPurchaseMoney();
     const lottos = this.#service.lottoPurchase.buyLottos(money);
-
     this.#printLottos(lottos);
+    await this.#withRetry(() => this.#createWinningLottoNumbers(lottos));
   }
 
   async #readPurchaseMoney() {
@@ -40,9 +38,10 @@ class Controller {
     this.#view.output.userLotto(lottos);
   }
 
-  async #createWinningLottoNumbers() {
+  async #createWinningLottoNumbers(lottos) {
     const winningLottoNumbers = await this.#readWinningLottoNumbers();
     this.#service.lottoRewards.createWinningLotto(winningLottoNumbers);
+    await this.#withRetry(() => this.#createBonusNumber(lottos));
   }
 
   async #readWinningLottoNumbers() {
@@ -50,14 +49,22 @@ class Controller {
     return Array.from(winningLottoNumbers.split(SYSTEM.lottoNumberSeparator), Number);
   }
 
-  async #createBonusNumber() {
+  async #createBonusNumber(lottos) {
     const bonusNumber = await this.#readBonusNumber();
     this.#service.lottoRewards.createBonus(bonusNumber);
+    const rewards = this.#service.lottoRewards.getRewards(lottos);
+
+    this.#printLottoResult(rewards);
   }
 
   async #readBonusNumber() {
     const bonusNumber = await this.#view.input.readBonusNumber();
     return Number(bonusNumber);
+  }
+
+  #printLottoResult(rewards) {
+    this.#view.output.winningStatistics();
+    this.#view.output.rewards(rewards);
   }
 
   async #withRetry(action) {

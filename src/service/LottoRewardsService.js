@@ -35,12 +35,13 @@ class LottoRewardsService {
 
   /**
    * 현재 우승 로또를 기반으로 결과를 반환합니다.
+   * @param {Lotto[]} lottos
    * @returns {LottoReward[]}
    */
-  getRewards() {
+  getRewards(lottos) {
     const winningLotto = WinningLotto.of(this.#lotto, this.#bonus);
     const rewards = LottoRewards.of(winningLotto);
-    const result = rewards.getLottosResult();
+    const result = rewards.getLottosResult(lottos);
 
     return result;
   }
