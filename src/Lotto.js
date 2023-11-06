@@ -1,5 +1,4 @@
-import { Random } from "@woowacourse/mission-utils";
-import { LOTTO, ERROR_MESSAGE } from "./Constant.js";
+import { ERROR_MESSAGE } from "./utils/Constant.js";
 
 class Lotto {
 	#numbers;
@@ -13,21 +12,6 @@ class Lotto {
 		if (numbers.length !== 6) {
 			throw new Error(ERROR_MESSAGE.numbersMustBeSix);
 		}
-	}
-
-	generateLotto() {
-		const lotto = [];
-		while (computer.length < LOTTO.count) {
-			const number = Random.pickNumberInRange(
-				LOTTO.minRange,
-				LOTTO.maxRange,
-				LOTTO.count
-			);
-			if (!lotto.includes(number)) {
-				lotto.push(number);
-			}
-		}
-		return lotto;
 	}
 }
 

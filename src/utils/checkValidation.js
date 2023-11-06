@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE } from "./Constant.js";
+import { LOTTO, ERROR_MESSAGE } from "./Constant.js";
 
 const isVaildAmount = (amount) => {
 	const amountVal = Number(amount);
@@ -7,7 +7,7 @@ const isVaildAmount = (amount) => {
 	try {
 		if (Number.isNaN(amountVal))
 			throw new Error(ERROR_MESSAGE.invalidInputNumber);
-		if (!Math.floor(amountVal / 1000))
+		if (!Math.floor(amountVal / LOTTO.cost))
 			throw new Error(ERROR_MESSAGE.invalidInputAmount);
 	} catch (error) {
 		Console.print(error);

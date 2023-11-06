@@ -6,7 +6,7 @@ const InputPrintout = {
 	inputAmount: async () => {
 		const amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
 		if (!isVaildAmount(amount)) await InputPrintout.inputAmount();
-		return amount;
+		return Number(amount);
 	},
 	//당첨번호
 	//보너스번호
