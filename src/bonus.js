@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
 import Input from './input.js';
 

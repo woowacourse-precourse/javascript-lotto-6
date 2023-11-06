@@ -37,6 +37,3 @@ class LottoCycle {
 }
 
 export default LottoCycle;
-
-// const run = new LottoCycle();
-// run.run();
