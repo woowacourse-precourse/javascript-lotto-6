@@ -5,17 +5,17 @@ describe('로또 구매자 클래스 테스트', () => {
   describe('ERROR.Falsy', () => {
     test('로또 구입 금액이 빈 값이면 예외가 발생한다.', () => {
       expect(() => {
-        new LottoPurchaser('');
+        new LottoPurchaser(Number(''));
       }).toThrow(ERROR.falsy);
     });
     test('로또 구입 금액이 0이면 예외가 발생한다', () => {
       expect(() => {
-        new LottoPurchaser(0);
+        new LottoPurchaser(Number(0));
       }).toThrow(ERROR.falsy);
     });
     test('로또 구입 금액이 숫자가 아니면 예외가 발생한다', () => {
       expect(() => {
-        new LottoPurchaser('천원');
+        new LottoPurchaser(Number('천원'));
       }).toThrow(ERROR.falsy);
     });
   });
