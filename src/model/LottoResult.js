@@ -32,6 +32,12 @@ class LottoResult {
     };
     return keyMap[String(winningNumberCount)] || null;
   }
+
+  getMatchCount() {
+    return {
+      ...this.#matchCount,
+    };
+  }
 }
 
 export default LottoResult;
