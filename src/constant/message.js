@@ -6,6 +6,7 @@ export const ERROR_MESSAGE = Object.freeze({
   INVALID_LOTTO_BONUS:
     '[ERROR] 보너스 번호는 로또 번호와 중복되지 않아야 합니다.',
   INVALID_LOTTO_RANGE: '[ERROR] 로또 번호는 1~45 사이여야 합니다.',
+  INVALID_EMPTY_INPUT: '[ERROR] 입력 값을 넣어주세요.',
 });
 
 export const INPUT_MESSAGE = Object.freeze({
