@@ -1,4 +1,4 @@
-import LottoGame from '../model/LottoGame';
+import LottoGame from '../model/LottoGame.js';
 
 export default class Controller {
   #LottoGame;
