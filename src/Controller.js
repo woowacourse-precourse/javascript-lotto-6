@@ -27,6 +27,7 @@ class Controller {
     await this.#getMatchStatus();
     await this.#getRateOfReturn();
     this.#displayWinningStat();
+    this.#displayRateOfReturn();
   }
 
   async #handlerErrorAndProceed(method) {
@@ -72,6 +73,10 @@ class Controller {
 
   #displayWinningStat() {
     OutputView.printWinningStat(this.#matchStatus);
+  }
+
+  #displayRateOfReturn() {
+    OutputView.printRateOfReturn(this.#rateOfReturn);
   }
 }
 
