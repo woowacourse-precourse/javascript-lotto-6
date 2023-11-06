@@ -95,7 +95,27 @@ class App {
     MissionUtils.Console.print('\n당첨 통계');
     MissionUtils.Console.print('---');
     
-    // 수익률 계산
+    const prizeLevels = {
+      1: '6개 일치',
+      2: '5개 일치, 보너스 볼 일치',
+      3: '5개 일치',
+      4: '4개 일치',
+      5: '3개 일치',
+    };
+
+    for (let i = 5; i >= 1; i--) {
+      const prizeCount = winnings[i].count;
+      const prizeAmount = winnings[i].prize.toLocaleString();
+      MissionUtils.Console.print(`${prizeLevels[i]} (${prizeAmount}원) - ${prizeCount}개`);
+    }
+
+    const totalPrize = [...Array(6).keys()].slice(1, 6).reduce((total, i) => {
+      return total + winnings[i].count * winnings[i].prize;
+    }, 0);
+
+    const totalCost = 1000 * numberOfTickets;
+    const profitPercentage = 100 - ((totalCost - totalPrize) / totalCost) * 100;
+    MissionUtils.Console.print(`총 수익률은 ${profitPercentage.toFixed(1)}%입니다.`);
   }
 }
 
