@@ -40,9 +40,8 @@ class Lotto {
       return PRIZE.four;
     } else if (number === 3) {
       return PRIZE.three;
-    } else {
-      return 0;
     }
+    return 0;
   }
 }
 
