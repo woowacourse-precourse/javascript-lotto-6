@@ -1,6 +1,7 @@
 import { View } from './LottoView.js';
 import Lotto from './Lotto.js';
 import { Console, Random } from '@woowacourse/mission-utils';
+const DECICMAL_NUMBER = 10;
 
 class App {
   constructor() {
@@ -14,7 +15,13 @@ class App {
       this.view.printLottoTickets(lottoTickets);
 
       const lottoWinningNumbers = await this.validateLottoWinningNumbers();
-      Console.print(lottoWinningNumbers);
+
+      const lottoWinningNumberArray =
+        this.getLottoWinningNumberArray(lottoWinningNumbers);
+
+      const bonusNumber = await this.validateLottoBonusNumber(
+        lottoWinningNumberArray
+      );
     } catch (error) {
       throw error;
     }
@@ -26,7 +33,8 @@ class App {
         const lottoAmount = await this.view.getLottoPerchaseAmount();
         const model = new Lotto(lottoAmount);
         model.validateLottoAmount();
-        return lottoAmount;
+
+        return parseInt(lottoAmount, DECICMAL_NUMBER);
       } catch (error) {
         console.error(error);
       }
@@ -36,10 +44,25 @@ class App {
   async validateLottoWinningNumbers() {
     while (true) {
       try {
-        const lottoWinningNumbers = await this.view.getLottoWinningNumbes();
+        const lottoWinningNumbers = await this.view.getLottoWinningNumbers();
         const model = new Lotto(lottoWinningNumbers);
         model.validateLottoWinningNumbers();
+
         return lottoWinningNumbers;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
+  async validateLottoBonusNumber(lottoWinningNumberArray) {
+    while (true) {
+      try {
+        const lottoBonusNumber = await this.view.getBonusLottoNumber();
+        const model = new Lotto(lottoBonusNumber);
+        model.validateLottoBonusNumber(lottoWinningNumberArray);
+
+        return parseInt(lottoBonusNumber, DECICMAL_NUMBER);
       } catch (error) {
         console.error(error);
       }
@@ -49,6 +72,11 @@ class App {
   getLottoTickets(numbers) {
     const model = new Lotto(numbers);
     return model.generateLottoTicketsArray();
+  }
+
+  getLottoWinningNumberArray(lottoWinningNumbers) {
+    const model = new Lotto(lottoWinningNumbers);
+    return model.getLottoWinningNumberArray();
   }
 }
 

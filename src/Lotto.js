@@ -13,8 +13,12 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  #convertPrivateNumbersToNumber() {
+    return parseInt(this.#numbers, DECICMAL_NUMBER);
+  }
+
   #lottoCount() {
-    return parseInt(this.#numbers, DECICMAL_NUMBER) / LOTTO_PRICE;
+    return this.#convertPrivateNumbersToNumber() / LOTTO_PRICE;
   }
 
   validateLottoAmount() {
@@ -59,6 +63,19 @@ class Lotto {
   #validateDuplicateWinningNumbers(winningNumbersArray) {
     if (winningNumbersArray.length !== new Set(winningNumbersArray).size) {
       throw new Error(ErrorMessage.invalidDuplicateWinningNumbers());
+    }
+  }
+
+  getLottoWinningNumberArray() {
+    return this.#numbers
+      .split(',')
+      .map((number) => parseInt(number, DECICMAL_NUMBER));
+  }
+
+  validateLottoBonusNumber(lottoWinningNumberArray) {
+    const bonusNumber = this.#convertPrivateNumbersToNumber();
+    if (lottoWinningNumberArray.includes(bonusNumber)) {
+      throw new Error(ErrorMessage.invalidDuplicateBonusNumber());
     }
   }
 

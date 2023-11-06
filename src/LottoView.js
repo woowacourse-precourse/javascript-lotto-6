@@ -11,7 +11,11 @@ export class View {
     });
   }
 
-  async getLottoWinningNumbes() {
+  async getLottoWinningNumbers() {
     return await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+  }
+
+  async getBonusLottoNumber() {
+    return await Console.readLineAsync('보너스 번호를 입력해 주세요.');
   }
 }

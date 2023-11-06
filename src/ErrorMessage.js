@@ -14,4 +14,7 @@ export class ErrorMessage {
   static invalidLottoNumberSeparator() {
     return '[ERROR] 로또 번호는 쉼표(,)로 구분해야 합니다.';
   }
+  static invalidDuplicateBonusNumber() {
+    return '[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.';
+  }
 }
