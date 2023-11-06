@@ -27,6 +27,10 @@ const LottoValidator = {
     if (number % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.invalidAmount);
     }
+
+    if (number < 0) {
+      throw new Error(ERROR_MESSAGE.invalidNumberic);
+    }
   },
 
   validBonusNumber(number, isContainning) {
