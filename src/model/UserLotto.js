@@ -1,5 +1,5 @@
 import UserLottoNumber from './UserLottoNumber.js';
-import { NUMBER } from '../constants/constants.js';
+import { NUMBER, ERRORMESSAGE } from '../constants/constants.js';
 
 class UserLotto {
   #numberOfPurchase;
@@ -51,23 +51,23 @@ class UserLotto {
 
   #rangeCheck(purchaseAmount) {
     if (purchaseAmount < 0) {
-      throw new Error('[ERROR] 구입 금액은 0보다 작을 수 없습니다.');
+      throw new Error(ERRORMESSAGE.purchaseRange1);
     }
 
     if (purchaseAmount > 2000000000) {
-      throw new Error('[ERROR] 구입 금액은 20억(당첨금액) 이하이어야 합니다.');
+      throw new Error(ERRORMESSAGE.purchaseRange2);
     }
   }
 
   #typeCheck(purchaseAmount) {
     if (Number.isNaN(purchaseAmount)) {
-      throw new Error('[ERROR] 구입 금액은 숫자여야 합니다.');
+      throw new Error(ERRORMESSAGE.purchaseInput);
     }
   }
 
   #divisionCheck(purchaseAmount) {
     if (purchaseAmount % 1000 !== 0) {
-      throw new Error('[ERROR] 구입 금액은 1000원 단위여야 합니다.');
+      throw new Error(ERRORMESSAGE.purchaseAmount);
     }
   }
 }

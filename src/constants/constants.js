@@ -23,6 +23,8 @@ const ERRORMESSAGE = Object.freeze({
   lottoLength: '[ERROR] 로또 번호는 6개여야 합니다.',
   lottoType: '[ERROR] 로또 번호는 정수여야 합니다.',
   bonusType: '[ERROR] 보너스 번호는 정수여야 합니다.',
+  purchaseRange1: '[ERROR] 구입 금액은 0보다 작을 수 없습니다.',
+  purchaseRange2: '[ERROR] 구입 금액은 20억(당첨금액) 이하이어야 합니다.',
 });
 
 const STATISTICS = Object.freeze([
