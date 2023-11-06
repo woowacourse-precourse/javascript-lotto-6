@@ -1,12 +1,12 @@
 const SYSTEM_MESSAGES = Object.freeze({
 	input_purchase_amount: '구입금액을 입력해 주세요.\n',
 	input_winning_numbers: '당첨 번호를 입력해 주세요.\n',
-	input_bonus_number: '보너스 번호를 입력해 주세요.\n',
+	input_bonus_number: '\n보너스 번호를 입력해 주세요.\n',
 
-	winning_statistics: '당첨 통계\n---\n',
+	winning_statistics: '\n당첨 통계\n---',
 
 	number_of_purchase(number) {
-		return `${number}개를 구매했습니다.\n`;
+		return `\n${number}개를 구매했습니다.`;
 	},
 	number_of_match(number, price, total) {
 		return `${number}개 일치 ${price} - ${total}개`;
