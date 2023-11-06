@@ -1,4 +1,4 @@
-import Validator from './Validate.js';
+import Validator from './Validator.js';
 
 class Validatable extends Validator {
   /**
