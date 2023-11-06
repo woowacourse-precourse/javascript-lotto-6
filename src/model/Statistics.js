@@ -29,8 +29,15 @@ class Statistics {
       return total + statistic.winnings * statistic.count;
     }, 0);
 
-    this.#rateOfReturns =
-      totalWinnings / (userLotto.getNumberOfPurchase() * 1000);
+    this.#rateOfReturns = this.roundRateOfReturns(
+      totalWinnings,
+      userLotto.getPurchaseAmount()
+    );
+  }
+
+  roundRateOfReturns(totalWinnings, purchaseAmount) {
+    const rateOfReturns = (totalWinnings / purchaseAmount).toFixed(1);
+    return rateOfReturns;
   }
 }
 
