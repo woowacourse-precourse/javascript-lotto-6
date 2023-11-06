@@ -12,13 +12,12 @@ export default class GameController {
   }
   async start() {
     // 로또 구매 금액을 입력받음
-    this.view.printGameMessage(GameText.GET_BUYING_MONEY);
-    const buyingMoney = await this.getUserInput();
-    MissionUtils.Console.print(`사용자 입력 금액 ${buyingMoney}`);
-    this.util.buyingMoneyValidator(buyingMoney);
+    await this.getBuyingMoney();
+
+    !this.util.VALID_MONEY && (await this.getBuyingMoney());
 
     // 로또 번호를 생성하고 출력
-    this.model.lottoCount(buyingMoney);
+    this.model.lottoCount(this.model.BUYING_MONEY);
     this.model.generateLotto(this.model.LOTTO_COUNT);
     this.view.printLottos(this.model.LOTTOS, this.model.LOTTO_COUNT);
 
@@ -46,5 +45,12 @@ export default class GameController {
   async getUserInput() {
     const userInput = await MissionUtils.Console.readLineAsync();
     return userInput;
+  }
+
+  async getBuyingMoney() {
+    this.view.printGameMessage(GameText.GET_BUYING_MONEY);
+    this.model.BUYING_MONEY = await this.getUserInput();
+    MissionUtils.Console.print(`사용자 입력 금액 ${this.model.BUYING_MONEY}`);
+    this.util.buyingMoneyValidator(this.model.BUYING_MONEY);
   }
 }

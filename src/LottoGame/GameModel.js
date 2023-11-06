@@ -5,6 +5,7 @@ import GameUtil from './GameUtil';
 
 export default class GameModel {
   constructor() {
+    this.BUYING_MONEY = 0;
     this.LOTTO_COUNT = 0;
     this.LOTTOS = [];
     this.WINNING_NUMBER = [];

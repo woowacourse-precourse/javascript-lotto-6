@@ -2,15 +2,23 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { ErrorMessage } from '../Message';
 
 export default class GameUtil {
+  constructor() {
+    this.VALID_MONEY = true;
+  }
   buyingMoneyValidator(buyingMoney) {
     if (buyingMoney % 1000 !== 0) {
       MissionUtils.Console.print(ErrorMessage.INVALID_BUYING_MONEY);
       // throw new Error(ErrorMessage.INVALID_BUYING_MONEY);
+      this.VALID_MONEY = false;
+      return;
     }
     if (/\D/.test(buyingMoney)) {
       MissionUtils.Console.print(ErrorMessage.INVALID_MONEY_TYPE);
       // throw new Error(ErrorMessage.INVALID_MONEY_TYPE);
+      this.VALID_MONEY = false;
+      return;
     }
+    this.VALID_MONEY = true;
   }
 
   bonusNumberValidatro(bonusNumber, duplicateCheckArray) {
