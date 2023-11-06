@@ -3,14 +3,18 @@ import LottoMachine from '../LottoMachine.js';
 import InputView from '../View/InputView.js';
 import OutputView from '../View/OutputView.js';
 import WinningLotto from '../WinningLotto.js';
+import ResultCalculator from '../ResultCalculator.js';
 
 class GameController {
   #lottoMachine;
 
   #winningLotto;
 
+  #resultCalculator;
+
   constructor() {
     this.#lottoMachine = new LottoMachine();
+    this.#resultCalculator = new ResultCalculator();
   }
 
   async play() {
@@ -19,6 +23,10 @@ class GameController {
     this.printLottoInfo();
     await this.getWinningNumbers();
     await this.getBonusNumbers();
+    this.#resultCalculator.compareLottos(
+      this.#lottoMachine.lottos,
+      this.#winningLotto,
+    );
   }
 
   async getMoney() {

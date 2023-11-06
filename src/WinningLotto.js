@@ -6,6 +6,10 @@ import CustomError from './errors/CustomError.js';
 class WinningLotto extends Lotto {
   #bonusNumber;
 
+  get bonusNumber() {
+    return this.#bonusNumber;
+  }
+
   set bonusNumber(number) {
     this.#validateBonusNumber(number);
     this.#bonusNumber = number;
