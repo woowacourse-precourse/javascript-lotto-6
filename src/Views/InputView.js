@@ -7,8 +7,8 @@ const InputView = {
     return Number(await Console.readLineAsync(MESSAGES.purchaseAmountQuery));
   },
   async readMainNumber() {
-    const lottoNumberString = await Console.readLineAsync(MESSAGES.winningNumberQuery);
-    return lottoNumberString.split(CONSTANTS.numberDelimiter);
+    const lottoNumberString = await Console.readLineAsync(MESSAGES.mainNumberQuery);
+    return lottoNumberString.split(CONSTANTS.numberDelimiter).map(Number);
   },
 };
 
