@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { GAMEMSG_INPUT_MONEY, GAMEMSG_INPUT_WINNING_LOTTO, GAMEMSG_INPUT_BONUS_NUMBER } from "../constants/GameMessage";
+import { GAMEMSG_INPUT_MONEY, GAMEMSG_INPUT_WINNING_LOTTO, GAMEMSG_INPUT_BONUS_NUMBER } from "../constants/GameMessage.js";
 
 class Input{
     constructor () {}
