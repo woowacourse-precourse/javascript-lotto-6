@@ -5,6 +5,7 @@ import ERROR_MESSAGE from "./Errors.js";
 class View {
   static #INPUT_MONEY = "구입금액을 입력해 주세요.\n";
   static #COUNT_LOTTO_QUERY = "개를 구매했습니다.";
+  static WIN_STATISTICS_HEADER = "당첨 통계\n---";
 
   static async askInputMoney() {
     let answer;
