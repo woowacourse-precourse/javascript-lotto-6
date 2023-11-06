@@ -3,13 +3,23 @@ import {
   validateBonusNumber,
   validateWinningNumbers,
   validateMoney
-} from '../utils/Validation';
+} from '../utils/Validation.js';
 
 const { Console } = MissionUtils;
 class InputView {
   static async inputMoney() {
-    const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    validateMoney(parseInt(money, 10));
+    let money = null;
+    let valid = false;
+    while (!valid) {
+      try {
+        money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+        validateMoney(money);
+        valid = true;
+      } catch (error) {
+        Console.print(error.message);
+        valid = false;
+      }
+    }
     return money;
   }
 
@@ -17,15 +27,46 @@ class InputView {
     const winningNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     Console.print('\n');
-    validateWinningNumbers(parseInt(winningNumbers, 10));
-    return winningNumbers.split(',');
+    const winningNumbersArray = winningNumbers.split(',');
+    return winningNumbersArray;
+  }
+
+  static async repeatInputNumbers() {
+    let numbers = null;
+    let valid = false;
+    while (!valid) {
+      try {
+        numbers = await this.inputNumbers();
+        validateWinningNumbers(numbers);
+        valid = true;
+      } catch (error) {
+        Console.print(error.message);
+        valid = false;
+      }
+    }
+    return numbers;
   }
 
   static async inputBonusNumber() {
     const bonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     Console.print('\n');
-    validateBonusNumber(parseInt(bonusNumber, 10));
+    return bonusNumber;
+  }
+
+  static async repeatInputBonusNumber() {
+    let bonusNumber = null;
+    let valid = false;
+    while (!valid) {
+      try {
+        bonusNumber = await this.inputBonusNumber();
+        validateBonusNumber(bonusNumber);
+        valid = true;
+      } catch (error) {
+        Console.print(error.message);
+        valid = false;
+      }
+    }
     return bonusNumber;
   }
 }
