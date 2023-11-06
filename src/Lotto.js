@@ -5,7 +5,8 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    const formattedNumbers = this.#formatLottoNumbers(numbers);
+    this.#numbers = formattedNumbers;
   }
 
   #validate(numbers) {
@@ -14,6 +15,10 @@ class Lotto {
 
   getNumbers() {
     return this.#numbers;
+  }
+
+  #formatLottoNumbers(numbers) {
+    return numbers.sort((a, b) => a - b);
   }
 }
 
