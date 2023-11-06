@@ -19,6 +19,11 @@ class Lotto {
     return this.#bonusNumber;
   }
 
+  setBonusNumber(bonusNumber) {
+    this.#bonusValidate(bonusNumber);
+    this.#bonusNumber = bonusNumber;
+  }
+
   #validate(numbers) {
     this.#numberTypeCheck(numbers);
     this.#numberLengthCheck(numbers);
