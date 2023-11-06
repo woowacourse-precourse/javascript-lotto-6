@@ -7,6 +7,7 @@ class App {
 
   async play() {
     await this.#purchaseLottos();
+    await this.#getLottoMatchResult();
   }
 
   async #purchaseLottos() {
@@ -38,6 +39,13 @@ class App {
   #getPurchasedLottoNumbers() {
     const purchasedLottoNumbers = this.#lottoStore.getLottoNumbers();
     return purchasedLottoNumbers;
+  }
+
+  async #getLottoMatchResult() {
+    const lottoWinningNumbers = await this.#getLottoWinningNumbers();
+    const bonousNumber = await this.#getBonousNumber();
+    const lottoMatchResult = this.#lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
+    OutputView.printMatchResult(lottoMatchResult);
   }
 
   async #getLottoWinningNumbers() {
