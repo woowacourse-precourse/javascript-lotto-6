@@ -11,7 +11,8 @@ class LottoGameController {
 
   async startGame() {
     await this.readPurchaseAmount();
-    this.setLottoTicketNumbers();
+    await this.setLottoTicketNumbers();
+    this.showLottoTicketNumbers();
   }
 
   async readPurchaseAmount() {
@@ -25,7 +26,7 @@ class LottoGameController {
       InputValidator.purchaseAmount(input);
       this.showLottoTicketCount(input);
     } catch (error) {
-      console.log(error);
+      OutputView.printErrorMessage(error);
       this.readPurchaseAmount();
     }
   }
@@ -39,6 +40,13 @@ class LottoGameController {
     for (let i = 0; i < this.#purchaseAmount; i++) {
       const numbers = lottoNumberGenerator.generate();
       this.#lotto[i] = new Lotto(numbers);
+    }
+  }
+
+  showLottoTicketNumbers() {
+    for (let i = 0; i < this.#purchaseAmount; i++) {
+      const numbers = this.#lotto[i].getTicketNumbers();
+      OutputView.printLottoTicketNumber(numbers);
     }
   }
 }
