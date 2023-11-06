@@ -16,6 +16,14 @@ class UserLotto {
     }
   }
 
+  getNumberOfPurchase() {
+    return this.#numberOfPurchase;
+  }
+
+  getUserLottoNumbers() {
+    return this.#userLottoNumbers;
+  }
+
   #validate(purchaseAmount) {
     this.#typeCheck(purchaseAmount);
     this.#divisionCheck(purchaseAmount);
