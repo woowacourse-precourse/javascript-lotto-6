@@ -124,4 +124,12 @@ describe('로또 테스트', () => {
   test('보너스 번호가 1보다 작거나 45보다 큰 경우, 예외 테스트', async () => {
     await runBonusNumberException(46);
   });
+
+  test('보너스 번호가 숫자가 아닐 경우, 예외 테스트', async () => {
+    await runBonusNumberException('string');
+  });
+
+  test('보너스 번호가 당첨 번호와 중복되는 경우, 예외 테스트', async () => {
+    await runBonusNumberException(1);
+  });
 });
