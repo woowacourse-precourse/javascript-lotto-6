@@ -10,52 +10,46 @@ class InputView {
     this.bonusNum = 0;
   }
 
-  async getPrice() {
+  async getInput(promptMessage, validationFunction) {
     let validInput = false;
+    let userInput;
+
     while (!validInput) {
-      this.price = await Console.readLineAsync(PromptMessage.ENTER_PRICE);
+      userInput = await Console.readLineAsync(promptMessage);
       try {
-        Validator.validatePrice(this.price);
-        validInput = true;
+        validInput = validationFunction(userInput);
       } catch (error) {
-        Console.print('[ERROR] 올바른 금액을 입력하십시오\n');
+        Console.print(`${error.message}\n`);
       }
     }
+    return userInput;
+  }
+
+  async getPrice() {
+    this.price = await this.getInput(PromptMessage.ENTER_PRICE, (input) => {
+      Validator.validatePrice(input);
+      return true;
+    });
   }
 
   async getWinNum() {
-    let validInput = false;
-    while (!validInput) {
-      const winNum = await Console.readLineAsync(PromptMessage.ENTER_WIN_NUM);
-      this.winNum = winNum.split(',').map((e) => parseInt(e.trim(), 10));
-      try {
-        Validator.validateWinNum(this.winNum);
-        validInput = true;
-      } catch (error) {
-        Console.print('[ERROR] 올바른 당첨 번호를 입력하십시오\n');
-      }
-    }
+    this.winNum = await this.getInput(PromptMessage.ENTER_WIN_NUM, (input) => {
+      const winNum = input.split(',').map((e) => parseInt(e.trim(), 10));
+      Validator.validateWinNum(winNum);
+      return true;
+    });
   }
 
-  // async getBonusNum() {
-  //   const bonusNum = await Console.readLineAsync(PromptMessage.ENTER_BONUS_NUM);
-  //   this.bonusNum = parseInt(bonusNum, 10);
-  // }
-
   async getBonusNum() {
-    let validInput = false;
-    while (!validInput) {
-      const bonusNum = await Console.readLineAsync(
-        PromptMessage.ENTER_BONUS_NUM,
-      );
-      this.bonusNum = parseInt(bonusNum, 10);
-      try {
-        Validator.validateBonusNum(this.bonusNum, this.winNum);
-        validInput = true;
-      } catch (error) {
-        Console.print('[ERROR] 올바른 보너스 번호를 입력하십시오\n');
-      }
-    }
+    this.bonusNum = await this.getInput(
+      PromptMessage.ENTER_BONUS_NUM,
+      (input) => {
+        const { winNum } = this;
+        const bonusNum = parseInt(input, 10);
+        Validator.validateBonusNum(bonusNum, winNum);
+        return true;
+      },
+    );
   }
 }
 
