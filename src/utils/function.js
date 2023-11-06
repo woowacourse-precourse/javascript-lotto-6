@@ -18,4 +18,8 @@ function isPositiveInteger(target) {
   );
 }
 
-export default isPositiveInteger;
+function roundToOneDecimalPlace(number) {
+  return (Math.round(number * 10) / 10).toFixed(1);
+}
+
+export { isPositiveInteger, roundToOneDecimalPlace };

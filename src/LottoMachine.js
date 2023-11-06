@@ -3,7 +3,7 @@ import Lotto from './Lotto.js';
 import ERROR from './constants/error.js';
 import LOTTO from './constants/lotto.js';
 import CustomError from './errors/CustomError.js';
-import isPositiveInteger from './utils/function.js';
+import { isPositiveInteger } from './utils/function.js';
 
 class LottoMachine {
   #money;
