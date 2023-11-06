@@ -32,4 +32,22 @@ describe('기능 테스트', () => {
             '[ERROR]'
         );
     });
+
+    test('로또의 등수를 반환한다.', () => {
+        expect(
+            app.getLottoRank([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], 7)
+        ).toBe(1);
+        expect(
+            app.getLottoRank([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 7], 6)
+        ).toBe(2);
+        expect(
+            app.getLottoRank([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 8], 45)
+        ).toBe(3);
+        expect(
+            app.getLottoRank([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 8, 9], 45)
+        ).toBe(4);
+        expect(
+            app.getLottoRank([1, 2, 3, 4, 5, 6], [1, 2, 3, 8, 9, 10], 45)
+        ).toBe(5);
+    });
 });
