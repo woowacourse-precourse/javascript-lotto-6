@@ -11,11 +11,11 @@ class App {
 
   async buyLottos(){
     const user = new User();
-    const paymentAmount = await user.pay();
-    const cashier = new Cashier(paymentAmount);
+    const cashier = new Cashier(user);
+    const paymentAmount = await cashier.getPayment();
+    cashier.getNumberOfTickets(paymentAmount);
     const userLottos = cashier.issueLottos();
     user.getLottos(userLottos);
-
     return {paymentAmount:paymentAmount, userLottos:userLottos}
   }
 
