@@ -30,7 +30,13 @@ class App {
     Console.print(
       `5개 일치, 보너스 볼 일치 (30,000,000)원 - ${lottoGame.seccond}개`,
     );
-    Console.print(`6개 일치 (2,000,000,000)원 - ${lottoGame.fifth}개`);
+    Console.print(`6개 일치 (2,000,000,000)원 - ${lottoGame.first}개`);
+    Console.print(
+      `총 수익률은 ${lottoGame.calculateProfitability(
+        lottoGame.price,
+        lottoGame.lottoPrize,
+      )}개`,
+    );
   }
 }
 

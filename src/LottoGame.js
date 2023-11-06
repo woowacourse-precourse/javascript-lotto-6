@@ -30,9 +30,10 @@ class LottoGame {
   }
 
   calculateLottoResult() {
-    const resultArray = this.lottos.map(lotto =>
-      lotto.findMatchingNumbers(this.winningNumbers),
-    );
+    const resultArray = this.lottos.map(lotto => {
+      console.log(lotto.findMatchingNumbers(this.winningNumbers));
+      return lotto.findMatchingNumbers(this.winningNumbers);
+    });
 
     console.log(`리턴된 ${resultArray}`);
 
@@ -62,6 +63,24 @@ class LottoGame {
     } else {
       this.third += 1;
     }
+  }
+
+  calculateLottoPrize() {
+    const prize =
+      this.fifth * 5000 +
+      this.fourth * 50000 +
+      this.third * 1500000 +
+      this.seccond * 30000000 +
+      this.first * 2000000000;
+    console.log('전체수익');
+    console.log(prize);
+    return prize;
+  }
+
+  calculateProfitability(price, prize) {
+    const profit = prize - price;
+    const ROI = (profit / price) * 100;
+    return ROI;
   }
 }
 
