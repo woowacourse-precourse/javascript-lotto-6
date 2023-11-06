@@ -1,6 +1,9 @@
 import { LOTTO, LOTTO_RANK } from '../constants/lotto.js';
+import { utils } from './utils/utils.js';
+import Lotto from './Lotto.js';
 
 class LottoService {
+  #lottos = [];
   #winningNumbers;
   #bonusNumber;
 
@@ -34,8 +37,41 @@ class LottoService {
       case 6:
         return LOTTO_RANK.first;
       default:
-        return LOTTO_RANK.none;
+        return;
     }
+  }
+
+  purchaseLotto(money) {
+    const sheetCount = money / LOTTO.unitPrice;
+    let currentSheet = 1;
+
+    while (currentSheet <= sheetCount) {
+      const numbers = this.#createLottoNumbers();
+      const lotto = new Lotto(numbers);
+
+      this.#lottos.push(lotto);
+
+      currentSheet += 1;
+    }
+  }
+
+  #createLottoNumbers() {
+    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return utils.ascendingNumbers(lottoNumbers);
+  }
+
+  getLottoReturns(purchasePrice, winningPrice) {
+    console.log(winningPrice);
+    console.log(winningPrice / purchasePrice);
+    return ((winningPrice / purchasePrice) * LOTTO.percentage).toFixed(2);
+  }
+
+  getLottos() {
+    return this.#lottos;
+  }
+
+  getLottosCount() {
+    return this.#lottos.length;
   }
 }
 
