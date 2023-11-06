@@ -19,35 +19,24 @@ class Lotto {
   }
 
   checkResult({ win, bonus }) {
-    let cntCorrect = 0;
-    let checkBonus = false;
-    this.#numbers.forEach((number) => {
-      if (win.includes(number)) {
-        cntCorrect += 1;
-      }
-      if (number === bonus) checkBonus = true;
-    });
+    const cntCorrect = this.#numbers.filter((number) =>
+      win.includes(number),
+    ).length;
+    const checkBonus = this.#numbers.includes(bonus);
+    this.result = this.#determineResult(cntCorrect, checkBonus);
+  }
 
-    if (cntCorrect === 6) {
-      this.result = "6개 일치 (2,000,000,000원)";
-    }
+  #determineResult(cntCorrect, checkBonus) {
+    const prizeMap = {
+      6: "6개 일치 (2,000,000,000원)",
+      5: checkBonus
+        ? "5개 일치, 보너스 볼 일치 (30,000,000원)"
+        : "5개 일치 (1,500,000원)",
+      4: "4개 일치 (50,000원)",
+      3: "3개 일치 (5,000원)",
+    };
 
-    if (cntCorrect === 5) {
-      if (checkBonus) {
-        this.result = "5개 일치, 보너스 볼 일치 (30,000,000원)";
-      } else {
-        this.result = "5개 일치 (1,500,000원)";
-      }
-    }
-    if (cntCorrect === 4) {
-      this.result = "4개 일치 (50,000원)";
-    }
-    if (cntCorrect === 3) {
-      this.result = "3개 일치 (5,000원)";
-    }
-    if (cntCorrect < 3) {
-      this.result = "None";
-    }
+    return prizeMap[cntCorrect] || "None";
   }
 }
 
