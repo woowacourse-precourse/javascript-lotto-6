@@ -1,8 +1,15 @@
 import { Random, Console } from '@woowacourse/mission-utils';
+import Input from './Input.js';
 import Lotto from './Lotto.js';
 import Validation from './Validation.js';
 
 class App {
+  #input;
+
+  constructor() {
+    this.#input = new Input();
+  }
+
   validateUserPurchaseMoney(input) {
     Validation.validateInputEmpty(input);
 
@@ -16,11 +23,10 @@ class App {
   async getUserPurchaseMoney() {
     while (true) {
       try {
-        const input = await Console.readLineAsync(
-          '구입 금액을 입력해 주세요.\n'
-        );
-        this.validateUserPurchaseMoney(input.trim());
-        return Number(input);
+        const userMoney = await this.#input.userMoney();
+        this.validateUserPurchaseMoney(userMoney);
+
+        return Number(userMoney);
       } catch (err) {
         Console.print(err.message);
       }
@@ -47,17 +53,17 @@ class App {
   async getWinningNumbers() {
     while (true) {
       try {
-        const input = await Console.readLineAsync(
-          '당첨 번호를 입력해 주세요.\n'
-        );
+        const winningNumbers = await this.#input.winningNumbers();
 
-        this.validateWinningNumbers(input);
+        this.validateWinningNumbers(winningNumbers);
 
-        const winningNumbers = input.split(',').map((number) => {
-          return Number(number);
-        });
+        const winningNumbersArray = winningNumbers
+          .split(',')
+          .map((winningNumber) => {
+            return Number(winningNumber);
+          });
 
-        return winningNumbers;
+        return winningNumbersArray;
       } catch (err) {
         Console.print(err.message);
       }
@@ -77,9 +83,7 @@ class App {
   async getBonusNumber(winningNumbers) {
     while (true) {
       try {
-        const bonusNumber = await Console.readLineAsync(
-          '보너스 번호를 입력해 주세요.\n'
-        );
+        const bonusNumber = await this.#input.bonusNumbers();
 
         this.validateBonusNumber(winningNumbers, bonusNumber);
 

@@ -1,4 +1,4 @@
-import { INPUT_ERROR } from './constants/Messages';
+import { INPUT_ERROR } from './constants/Messages.js';
 
 class Validation {
   static validateInputEmpty(input) {
