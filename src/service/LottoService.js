@@ -1,36 +1,39 @@
-import Lotto from '../Lotto.js';
-import { LOTTO_MAGICNUMBER, LOTTO_PRICE } from '../constants/LottoOption.js';
-import getRandomNumbersByAscending from '../utils/generateRandomNumber.js';
+import { BRACKET, DIVIDER } from '../constants/Symbol.js';
+import LottoGame from '../model/LottoGame.js';
+import LottoResultCalculator from '../model/LottoResultCalculator.js';
 
 export default class LottoService {
-  #seedMoney;
-
-  #lottoList;
+  #lottoGame;
 
   constructor(seedMoney) {
-    this.#seedMoney = seedMoney;
-    this.#buyLottoes();
+    this.#lottoGame = new LottoGame(seedMoney);
   }
 
-  #buyLottoes() {
-    const amount = this.#seedMoney / LOTTO_PRICE;
+  getLottoList() {
+    const { lottoList, lottoAmount } = this.#lottoGame.getLottoes();
 
-    this.#lottoList = Array.from({ length: amount }, () => {
-      const randomNumbers = getRandomNumbersByAscending(
-        LOTTO_MAGICNUMBER.minValue,
-        LOTTO_MAGICNUMBER.maxValue,
-        LOTTO_MAGICNUMBER.selectAmount
-      );
-      return new Lotto(randomNumbers);
-    });
-  }
-
-  getLottoes() {
     return {
-      lottoList: Array.from(this.#lottoList, (lotto) =>
-        lotto.getLottoNumbers()
+      lottoList: Array.from(
+        lottoList,
+        (lotto) =>
+          `${BRACKET.open}${lotto.getLottoNumbers().join(DIVIDER.spaceComma)}${
+            BRACKET.close
+          }`
       ),
-      lottoAmount: this.#seedMoney / LOTTO_PRICE,
+      lottoAmount,
+    };
+  }
+
+  getCompareResults(winningNumbers, winningBonusNumber) {
+    const { lottoList, lottoAmount } = this.#lottoGame.getLottoes();
+    const lottoResultCalculator = new LottoResultCalculator(
+      winningNumbers,
+      winningBonusNumber
+    );
+
+    return {
+      lottoResults: lottoResultCalculator.calculateResults(lottoList),
+      lottoAmount,
     };
   }
 }
