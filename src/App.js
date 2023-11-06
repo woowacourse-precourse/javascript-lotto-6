@@ -17,7 +17,7 @@ class App {
   async payLottoCost() {
     try {
       const cost = await readLineAsync(MESSAGE.input_cost);
-      isDivideMinCost(cost);
+      this.#lottoShop.income = Number(cost);
       return cost;
     } catch (error) {
       printMessage(error.message);
