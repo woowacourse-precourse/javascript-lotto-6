@@ -10,7 +10,7 @@ class View {
   printPurchaseResult(num, lottoArr) {
     this.lineBreak();
     Console.print(`${num}개를 구매했습니다.`);
-    lottoArr.forEach(lotto => Console.print(`"[${lotto.join(', ')}]"`));
+    lottoArr.forEach(lotto => Console.print(`[${lotto.join(', ')}]`));
   }
 
   printLottoResult(cntArr, rate) {

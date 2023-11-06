@@ -9,7 +9,7 @@ class Lotto {
     this.#numbers = numbers;
   }
   #validate(numbers) {
-    this.#validatePattern(numbers);
+    this.#validatePattern(numbers.join(','));
     this.#validateLength(numbers);
     this.#validateRange(numbers);
     this.#validateDuplicate(numbers);
