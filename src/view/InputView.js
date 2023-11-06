@@ -37,7 +37,6 @@ class InputView {
     return bonusNumber;
   }
 
-  // 빈값
   #isEmpty(value) {
     throwError(ERROR_MESSAGE.empty, value === '');
   }
