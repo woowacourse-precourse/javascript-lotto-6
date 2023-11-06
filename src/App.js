@@ -1,16 +1,22 @@
-import { Console , Random} from "@woowacourse/mission-utils";
+import { Console , Random } from "@woowacourse/mission-utils";
 import { 
   USER_INPUT,
   MESSAGE,
   ERROR_MESSAGE,
   PRICE_UNIT,
-  PRICE_ZERO
+  PRICE_ZERO,
+  DELIMITER,
+  LOTTO_LENGTH,
+  MIN_NUMBER,
+  MAX_NUMBER
 } from "./constants.js";
 import Lotto from "./Lotto.js";
+import TargetNumber from "./TargetNumber.js";
 
 class App {
   lottoPrice;
   lottiTickets;
+  targetNumber;
 
   constructor() {
     this.lottoPrice = 0;
@@ -24,6 +30,12 @@ class App {
 
     this.setLottoNumbers();
     this.showLottoNumbers();
+
+    while(!this.targetNumber){
+      await this.getTargetNumber();
+    }
+
+    Console.print( this.targetNumber.getWinNumber());
   }
 
   async getLottoPrice() {
@@ -59,7 +71,31 @@ class App {
   }
 
   getLottoNumber() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH);
+  }
+
+  async getTargetNumber() {
+    const input = await Console.readLineAsync(USER_INPUT.TARGET_NUMBER);
+    const targetNumber = input.split(DELIMITER).map((number) => Number(number));
+
+    try{
+      this.checkTargetNumberValidity(targetNumber);
+      this.targetNumber = new TargetNumber(targetNumber);
+    }catch (error){
+      Console.print(error);
+    }
+  }
+
+  checkTargetNumberValidity(targetNumber) {
+    if (targetNumber.length !== LOTTO_LENGTH) throw ERROR_MESSAGE.TARGET_NUM_SIX;
+
+    if ([...new Set(targetNumber)].length !== LOTTO_LENGTH) throw ERROR_MESSAGE.TARGET_NUM_SAME;
+
+    targetNumber.forEach((number) => {
+      if (number < MIN_NUMBER || number > MAX_NUMBER) throw ERROR_MESSAGE.TARGET_NUM_MIN_MAX;
+
+      if (isNaN(number)) throw ERROR_MESSAGE.TARGET_NUM_STRING;
+    })
   }
 }
 
