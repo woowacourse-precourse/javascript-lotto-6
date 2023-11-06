@@ -6,6 +6,11 @@ import LottoResultChecker from "./LottoResultChecker.js";
 const lottoPrice = 1000;
 class App {
   constructor() {
+    this.threeMatches = 0;
+    this.fourMatches = 0;
+    this.fiveMatches = 0;
+    this.fiveAndBonusMatches = 0;
+    this.sixMatches = 0;
     this.lottoManagement = new LottoManagement();
     this.lottoResultChecker = new LottoResultChecker();
   }
@@ -45,6 +50,7 @@ class App {
     this.lottoResultChecker.countMatchingNumbers(this.matchingCounts);
     this.totalProfit = this.calculateTotalProfit();
     this.profitRate = this.calculateProfitRate();
+    this.printResult();
   }
 
   async inputPurchasePrice() {
@@ -95,6 +101,17 @@ class App {
   }
   calculateProfitRate() {
     return (this.totalProfit / this.purchasePrice) * 100;
+  }
+  printResult() {
+    Console.print("당첨 통계\n---");
+    Console.print(`3개 일치 (5,000원) - ${this.threeMatches}개`);
+    Console.print(`4개 일치 (10,000원) - ${this.fourMatches}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${this.fiveMatches}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.fiveAndBonusMatches}개`
+    );
+    Console.print(`6개 일치 (2,000,000,000원) - ${this.sixMatches}개`);
+    Console.print(`총 수익률은 ${this.totalProfit}%입니다.`);
   }
 }
 export default App;
