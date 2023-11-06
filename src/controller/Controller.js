@@ -32,7 +32,9 @@ class controller {
   }
 
   priintUserLottoNumbers() {
-    this.#outputView.printNumberOfPurchase(this.#userLotto.getNumberOfPurchase());
+    this.#outputView.printNumberOfPurchase(
+      this.#userLotto.getNumberOfPurchase()
+    );
     this.#userLotto.getUserLottoNumbers().forEach((userLottoNumber) => {
       const lottoNumberForPrint = userLottoNumber.getLottoNumber().join(`, `);
       this.#outputView.print(`[${lottoNumberForPrint}]`);
@@ -67,18 +69,10 @@ class controller {
 
   printStatistics() {
     this.#statistics.getStatistics().forEach((statistic) => {
-      this.#outputView.print(
-        `${STATMESSAGE[statistic.rank]}${statistic.count}${
-          CHARACTER.countSuffix
-        }`
-      );
+      this.#outputView.printStatistic(statistic);
     });
 
-    this.#outputView.print(
-      `${CHARACTER.returnPreffix}${this.#statistics.getRateOfReturns()}${
-        CHARACTER.returnSuffix
-      }`
-    );
+    this.#outputView.printRateOfReturns(this.#statistics.getRateOfReturns());
   }
 }
 
