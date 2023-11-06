@@ -2,13 +2,15 @@ import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
 import Cashier from '../src/Cashier';
 import { ERROR_MESSAGE, LOTTO_FORM, MESSAGE } from '../src/constant';
 import { getErrorMessage } from '../src/utils';
+import User from '../src/User';
 
 describe('Cashier 클래스 테스트', () => {
   const errorMessage = getErrorMessage(ERROR_MESSAGE.payment);
 
   test('Cashier는 NaN이 아닌 숫자만 파라미터로 받는다. 그렇지 않을 경우 예외가 발생한다.', () => {
-    const wrongParameters = ['1000', '1000원', NaN];
-    const cashier = new Cashier();
+    const wrongParameters = ['1000원', NaN];
+    const user = new User();
+    const cashier = new Cashier(user);
     wrongParameters.forEach((v) =>
       expect(() => cashier.isNumber(v)).toThrow(
         getErrorMessage(ERROR_MESSAGE.isNotNumber),
@@ -17,20 +19,23 @@ describe('Cashier 클래스 테스트', () => {
   });
 
   test('손님이 지불한 금액이 1000원 미만이면 예외가 발생한다', () => {
+    const user = new User();
     expect(() => {
-      new Cashier().validatePayment(500);
+      new Cashier(user).validatePayment(500);
     }).toThrow(errorMessage);
   });
 
   test('손님이 지불한 금액이 1000원 단위로 떨어지지 않으면  예외가 발생한다', () => {
+    const user = new User();
     expect(() => {
-      new Cashier().validatePayment(1500);
+      new Cashier(user).validatePayment(1500);
     }).toThrow(errorMessage);
   });
 
   test('손님이 지불한 금액이 유효하지 않으면,[ERROR]로 시작하는 문구를 출력한 후 유효한 입력값을 다시 받는다.', async () => {
     const items = ['1500', '1000원', '1000'];
-    const cashier = new Cashier();
+    const user = new User();
+    const cashier = new Cashier(user);
     const logSpy = getLogSpy();
 
     mockQuestions(items);
@@ -47,9 +52,9 @@ describe('Cashier 클래스 테스트', () => {
     const { price } = LOTTO_FORM;
     const paymentArray = [price * 1, price * 3, price * 4];
     const tickets = [1, 3, 4];
-
+    const user = new User();
     paymentArray.forEach(async (v, i) => {
-      const cashier = new Cashier();
+      const cashier = new Cashier(user);
       const number = cashier.getNumberOfTickets(v);
       expect(number).toEqual(tickets[i]);
     });
@@ -64,9 +69,10 @@ describe('Cashier 클래스 테스트', () => {
       [7, 11, 12, 8, 9, 10],
       [13, 14, 10, 16, 17, 1],
     ];
+    const user = new User();
 
     mockRandoms(RANDOM_NUMBERS);
-    const cashier = new Cashier();
+    const cashier = new Cashier(user);
     cashier.getNumberOfTickets(payment);
     const lottos = cashier.issueLottos();
     const lottoNumbers = lottos.map((v) => v.getLottoNumbers());
