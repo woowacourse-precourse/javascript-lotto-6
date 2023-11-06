@@ -14,14 +14,14 @@ export const randomNumberMessage = (randomNumber) => {
   Console.print(randomNumber);
 };
 
-export const winningResultMessage = ([first, second, third, fourth, fifth]) => {
+export const winningResultMessage = (winningResult) => {
   Console.print("당첨통계");
   Console.print("---");
-  Console.print(`3개 일치 (5,000원) - ${fifth}개`);
-  Console.print(`4개 일치 (5,000원) - ${fourth}개`);
-  Console.print(`5개 일치 (5,000원) - ${third}개`);
-  Console.print(`5개 일치, 보너스 볼 일치 (5,000원) - ${second}개`);
-  Console.print(`6개 일치 (5,000원) - ${first}개`);
+  Console.print(`3개 일치 (5,000원) - ${winningResult.fifth}개`);
+  Console.print(`4개 일치 (5,000원) - ${winningResult.fourth}개`);
+  Console.print(`5개 일치 (5,000원) - ${winningResult.third}개`);
+  Console.print(`5개 일치, 보너스 볼 일치 (5,000원) - ${winningResult.second}개`);
+  Console.print(`6개 일치 (5,000원) - ${winningResult.first}개`);
 };
 
 export const returnRateMessage = (rate) => {
