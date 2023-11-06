@@ -54,7 +54,7 @@ class App {
         (a, b) => a - b
       );
       this.#winningNumberList.push(winningNumbers);
-      Console.print(winningNumbers);
+      Console.print(`[${winningNumbers.join(", ")}]`);
     }
   }
 
@@ -115,7 +115,11 @@ class App {
     Console.print(`${RESULT.FIVE} - ${five}개`);
     Console.print(`${RESULT.FIVE_BONUS} - ${fiveBonus}개`);
     Console.print(`${RESULT.SIX} - ${six}개`);
-    Console.print(`총 수익률은 ${this.#profit.toFixed(1)}%입니다.`);
+    Console.print(
+      `총 수익률은 ${this.#profit
+        .toFixed(1)
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%입니다.`
+    );
   }
 }
 
