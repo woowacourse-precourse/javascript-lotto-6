@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { ERROR } from './ErrorText.js';
 
 export default class input  {
   static async inputPurchaseAmount() {
@@ -7,7 +8,7 @@ export default class input  {
         try {
             purchaseAmount = parseInt(await Console.readLineAsync("구입금액을 입력해 주세요.\n"));
             if (this.isInvalidPurchaseAmount(purchaseAmount)) {
-            throw new Error("[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다.");
+            throw new Error(ERROR.PURCHASE_AMOUNT);
         }
         break;
       } catch (error) {
@@ -43,14 +44,14 @@ export default class input  {
   
   static validateWinningNumbers(winningNumbersMap) {
     if (!this.validateNumbers(winningNumbersMap)) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+      throw new Error(ERROR.LOTTO_NUMBER);
     }
     if (winningNumbersMap.length !== 6) {
-      throw new Error("[ERROR] 당첨 번호는 6개여야 합니다.");
+      throw new Error(ERROR.LENGTH);
     }
     const uniqueNumbers = [...new Set(winningNumbersMap)]; // 중복 제거
     if (uniqueNumbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
+      throw new Error(ERROR.DUPLICATION);
     }
   }
   
@@ -76,7 +77,7 @@ export default class input  {
   
   static validateBonusNumber(bonusNumber) {
     if (!this.validateNumber(bonusNumber)) {
-      throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+      throw new Error(ERROR.BONUS_NUMBER);
     }
   }
   

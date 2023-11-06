@@ -1,3 +1,5 @@
+import { ERROR } from './ErrorText.js';
+
 export default class Lotto {
   #numbers;
 
@@ -8,11 +10,11 @@ export default class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR.LENGTH);
     }
     const uniqueNumbers = [...new Set(numbers)]; // 중복 제거
     if (uniqueNumbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
+      throw new Error(ERROR.DUPLICATION);
     }
   }
 
