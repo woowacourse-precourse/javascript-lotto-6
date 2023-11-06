@@ -31,14 +31,19 @@ class Lotto {
     OutputView.printLottoNumbers(this.#numbers);
   }
 
-  calculateMatchCount(luckyNumbers, bonusNumber) {
+  match(luckyNumbers, bonusNumber) {
     const cnt = this.#numbers.filter((number) => luckyNumbers.includes(number)).length;
-    const bonus = this.#numbers.includes(bonusNumber);
-
     const matchResult = {
       cnt,
-      bonus
+      bonus: false
     };
+
+    const isPossibleSecondRank = cnt === 5;
+
+    // 번호 5개가 일치했다면 보너스 번호 일치 여부를 확인한다.
+    if (isPossibleSecondRank) {
+      matchResult.bonus = this.#numbers.includes(bonusNumber);
+    }
 
     return matchResult;
   }

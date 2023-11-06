@@ -1,37 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
-
-const Match = {
-  'fifth': {
-    cnt: 0,
-    prize: 5000,
-    match: ["3개"]
-  },
-  'fourth': {
-    cnt: 0,
-    prize: 50000,
-    match: ["4개"]
-  },
-  'third': {
-    cnt: 0,
-    prize: 1500000,
-    match: ["5개"]
-  },
-  'second': {
-    cnt: 0,
-    prize: 30000000,
-    match: ["5개", "보너스 볼"]
-  },
-  'first': {
-    cnt: 0,
-    prize: 2000000000,
-    match: ["6개"]
-  },
-};
+import { RANK_MONEY, RANK_MATCH, OUTPUT_MESSAGE } from "../constants/constants.js";
 
 class OutputView {
+  // 2-1. 구매한 로또 수량을 출력한다.
   static printLottoCnt(lottoCnt) {
     this.printNewLine();
-    Console.print(`${lottoCnt}개를 구매했습니다.`);
+    Console.print(OUTPUT_MESSAGE.printLottoCnt(lottoCnt));
   }
 
   static printNewLine() {
@@ -45,44 +19,33 @@ class OutputView {
   // 4. 당첨 내역을 출력한다
   static printLottoResult(result, money) {
     this.printNewLine();
-    Console.print('당첨 통계');
-    Console.print('---');
+    Console.print(OUTPUT_MESSAGE.printLottoResult);
     // 4-1. 당첨 통계를 출력한다
     Object.keys(result).forEach((key) => {
-      Match[key].cnt = result[key];
-      this.printEachResult(Match[key]);
+      const [rank, cnt] = [key, result[key]];
+      this.printRankResult(rank, cnt);
     });
     this.calculateTotalPrize(result, money);
   }
 
-  static printEachResult(match) {
-    let result = '';
-    const { cnt, prize, match: matchCnt } = match;
-    
-    for (let i = 0; i < matchCnt.length; i += 1) {
-      result += `${matchCnt[i]} 일치`;
-      if (i !== matchCnt.length - 1) {
-        result += ', ';
-      }
-    }
-
-    result += ` (${prize.toLocaleString()}원) - ${cnt}개`;
-    Console.print(result);
+  static printRankResult(rank, cnt) {
+    const prize = RANK_MONEY[rank];
+    const match = RANK_MATCH[rank].map((item) => OUTPUT_MESSAGE.printRankMatch(item)).join(', ');
+    Console.print(OUTPUT_MESSAGE.printRankResult(match, prize, cnt));
   }
 
   static calculateTotalPrize(result, money) {
     const totalPrize = Object.keys(result).reduce((acc, key) => {
-      const { cnt, prize } = Match[key];
+      const [cnt, prize] = [result[key], RANK_MONEY[key]];
       return acc + (cnt * prize);
     }, 0);
-    this.calculateProfitRate(totalPrize, money);
+    this.printProfit(totalPrize, money);
   }
 
   // 4-2. 수익률을 출력한다.
-  static calculateProfitRate(totalPrize, money) {
-    let profit = totalPrize / money;
-    profit *= 100;
-    Console.print(`총 수익률은 ${profit.toFixed(1)}%입니다.`);
+  static printProfit(totalPrize, money) {
+    const profit = totalPrize / money * 100;
+    Console.print(OUTPUT_MESSAGE.printProfit(profit));
   }
 }
 
