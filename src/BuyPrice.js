@@ -18,8 +18,8 @@ class BuyPrice {
     if (validation.isDivideThousand(price)) {
       throw new Error(BUY_PRICE_ERROR.isDivideThousand);
     }
-    if (validation.isSmallerThanThousand(price)) {
-      throw new Error(BUY_PRICE_ERROR.isSmallerThanThousand);
+    if (validation.isBiggerThanThousand(price)) {
+      throw new Error(BUY_PRICE_ERROR.isBiggerThanThousand);
     }
   }
 
