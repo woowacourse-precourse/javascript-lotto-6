@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { FIVE_AND_BONUS, FIVE_NO_BONUS } from '../src/constant';
+import Lotto from '../src/Lotto';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
