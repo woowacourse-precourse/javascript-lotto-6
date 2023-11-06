@@ -49,6 +49,8 @@ class LottoCount {
     for (let i=0; i<this.#count; i+=1){
         this.printSixLottoNumber();
     }
+
+    outputView.lineBreak();
   }
 
   calculateLottoCounts() {
