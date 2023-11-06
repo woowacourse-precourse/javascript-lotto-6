@@ -6,12 +6,12 @@ class Money {
 
   constructor(price) {
     this.#validate(price);
-    this.#price = price;
+    this.#price = Number(price);
   }
 
   #validate(price) {
-    if (!Number(price) || Number(price) <= ZERO || !Number.isInteger(Number(price))) {
-      throw new Error(ERROR.not_a_valid_number);
+    if (!Number(price) || !Number.isInteger(Number(price)) || Number(price) <= ZERO) {
+      throw new Error(ERROR.not_a_valid_price);
     }
 
     if ((Number(price) % THOUSAND) !== ZERO) {
@@ -20,7 +20,7 @@ class Money {
   }
 
   getPrice() {
-    return Number(this.#price);    
+    return this.#price;
   }
 }
 
