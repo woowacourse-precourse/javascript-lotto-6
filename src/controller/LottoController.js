@@ -5,6 +5,7 @@ import PurchaseAmount from '../models/PurchaseAmount.js';
 import WinningNumber from '../models/WinnigNumber.js';
 import BonusNumber from '../models/BonusNumber.js';
 import LottoTicketResult from '../models/LottoTicketResult.js';
+import ReturnRate from '../models/ReturnRate.js';
 
 class LottoController {
   #lottoCount;
@@ -28,6 +29,7 @@ class LottoController {
       this.#bonusNumber
     );
     this.outputView.printLottoResult(lottoTicketResult);
+    const returnRate = this.setReturnRate(this.#lottoCount, lottoTicketResult);
   }
 
   async setLottoCount() {
@@ -95,6 +97,11 @@ class LottoController {
       bonusNumber
     );
     return lottoTicketResult.getLottoTicketResult();
+  }
+
+  setReturnRate(lottoCount, lottoTicketResult) {
+    const returnRate = new ReturnRate(lottoCount, lottoTicketResult);
+    return returnRate.getReturnRate();
   }
 }
 
