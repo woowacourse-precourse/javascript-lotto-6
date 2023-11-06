@@ -1,5 +1,4 @@
-import CustomError from '../errors/CustomError.js';
-import { ERROR_MESSAGES } from '../constants/messages.js';
+import validateLottoNumbers from '../validations/validateLottoNumbers.js';
 
 class Lotto {
   #numbers;
@@ -10,10 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) throw new CustomError(ERROR_MESSAGES.lottoNumberLength);
-
-    const duplicateFlag = [...new Set(numbers)].length !== numbers.length;
-    if (duplicateFlag) throw new CustomError(ERROR_MESSAGES.lottoNumberDuplicate);
+    validateLottoNumbers(numbers);
   }
 
   get numbers() {
