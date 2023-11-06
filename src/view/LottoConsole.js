@@ -1,6 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import { isNumber, isThousands } from '../utils/validation.js';
-import { parseNumber } from '../utils/index.js';
+import {
+  isNumber,
+  isThousands,
+  validateArrayLength,
+} from '../utils/validation.js';
+import { parseNumber, parseNumbers } from '../utils/index.js';
 
 class LottoConsole {
   static async getPurchaseAmount() {
@@ -13,6 +17,21 @@ class LottoConsole {
     isThousands(purchaseAmount);
 
     return purchaseAmount;
+  }
+
+  static async getLottoNumbers() {
+    const input = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    LottoConsole.#validateEmtpyInput(input);
+    this.printEmptyLine();
+
+    const numbers = parseNumbers(input);
+    validateArrayLength(numbers);
+
+    return numbers;
+  }
+
+  static printEmptyLine() {
+    Console.print('');
   }
 
   static #validateEmtpyInput(input) {

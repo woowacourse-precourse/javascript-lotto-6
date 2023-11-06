@@ -1,5 +1,11 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { isNumber } from './validation.js';
+import { validateNumber, isNumber } from './validation.js';
+
+export function parseNumbers(string) {
+  const lottoNumbers = string.split(',').map(Number);
+  lottoNumbers.forEach(validateNumber);
+  return lottoNumbers;
+}
 
 export function parseNumber(string) {
   const parsedNumber = Number(string);
