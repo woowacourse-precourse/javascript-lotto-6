@@ -1,5 +1,5 @@
 export const ERROR_MESSAGES = {
-  INVALID_AMOUNT: '유효하지 않은 금액입니다. 금액은 1000원 이상의 양수여야 합니다.',
+  INVALID_AMOUNT: '[ERROR] 유효하지 않은 금액입니다. 금액은 1000원 이상의 양수여야 합니다.',
   AMOUNT_NOT_IN_UNITS: '[ERROR] 구입 금액은 1000원 단위로 입력해야 합니다.',
   EMPTY_NUMBER: '[ERROR] 모든 당첨 번호를 쉼표(,)로 구분하여 입력해야 합니다.',
   NOT_SIX_NUMBERS: '[ERROR] 당첨 번호는 쉼표(,)로 구분된 6개의 숫자여야 합니다.',
