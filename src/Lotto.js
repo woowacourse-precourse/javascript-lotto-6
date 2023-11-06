@@ -1,12 +1,10 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 class Lotto {
   #numbers;
-  #bonusNumber;
 
   constructor(numbers, bonusNumber) {
     this.#validate(numbers);
     this.#numbers = numbers;
-    this.#bonusNumber = bonusNumber;
   }
 
   #validate(numbers) {
@@ -22,19 +20,19 @@ class Lotto {
     while (uniqueNumbers.size < 6) {
       uniqueNumbers.add(Random.pickNumberInRange(1, 45));
     }
-
-    const remainingNumbers = Array.from({ length: 45 }, (_, index) => index + 1).filter(number => !uniqueNumbers.has(number));
-    const bonusNumber = remainingNumbers[Math.floor(Math.random() * remainingNumbers.length)];
-
-    return { numbers: Array.from(uniqueNumbers), bonusNumber };
+    return Array.from(uniqueNumbers);
   }
 
   getNumbers() {
     return [...this.#numbers];
   }
 
-  getBonusNumber() {
-    return [this.#bonusNumber];
+  static generateBonusNumber(numbers) {
+    const remainingNumbers = Array.from({ length: 45 }, (_, index) => index + 1).filter(number => !numbers.includes(number));
+    const randomIndex = Math.floor(Math.random() * remainingNumbers.length);
+    const bonusNumber = remainingNumbers[randomIndex];
+
+    return [bonusNumber];
   }
 }
 
