@@ -17,9 +17,7 @@ class LottoGame {
 
   async play() {
     await this.buyLottos();
-    const lotto = await this.pickWinningLotto();
-    const bonusBall = await this.pickBonusBall(lotto);
-    this.setWinningLotto(lotto, bonusBall);
+    await this.createWinningLotto();
   }
 
   async buyLottos() {
@@ -41,6 +39,12 @@ class LottoGame {
     Validator.unit(money);
   }
 
+  async createWinningLotto() {
+    const lotto = await this.pickWinningLotto();
+    const bonus = await this.pickBonusBall(lotto);
+    this.setWinningLotto(lotto, bonus);
+  }
+
   async pickWinningLotto() {
     const numbers = await InputView.readWinningLotto();
 
@@ -48,7 +52,7 @@ class LottoGame {
       return new Lotto(numbers);
     } catch (error) {
       OutputView.print(error.message);
-      await this.pickWinningLotto();
+      return await this.pickWinningLotto();
     }
   }
 
@@ -59,7 +63,7 @@ class LottoGame {
       return new BonusBall(number, lotto);
     } catch (error) {
       OutputView.print(error.message);
-      await this.pickBonusBall(lotto);
+      return await this.pickBonusBall(lotto);
     }
   }
 
