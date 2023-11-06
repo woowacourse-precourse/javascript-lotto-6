@@ -11,27 +11,7 @@ class App {
   }
 
   displayErrorMessage(message) {
-    throw new Error(message);
-  }
-
-  getMoney() {
-    const money =
-      MissionUtils.Console.readLineAsync("구입 금액을 입력해주세요. \n");
-
-    return money;
-  }
-
-  async repeatValid() {
-    let price;
-
-    while (true) {
-      price = await this.getMoney();
-      const validatedPrice = this.validatePrice(price);
-
-      if (validatedPrice) {
-        return validatedPrice;
-      }
-    }
+    throw new Error(`\n${message}`);
   }
 
   getBonusNumber() {
@@ -48,22 +28,77 @@ class App {
     return winningNumber;
   }
 
-  validatePrice(price) {
+  getMoney() {
+    const money =
+      MissionUtils.Console.readLineAsync("구입 금액을 입력해주세요. \n");
+    return money;
+  }
+
+  getLottoQuantity(money) {
+    const quantity = money / 1000;
+    return quantity;
+  }
+
+  async checkPrice() {
+    let price;
+    while (true) {
+      const validatedPrice = await this.checkPriceLoop(price);
+      if (validatedPrice) return validatedPrice;
+    }
+  }
+
+  async checkPriceLoop(price) {
+    try {
+      price = await this.getMoney();
+      const validatedPrice = this.priceConditionalSentence(price);
+      return validatedPrice;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+  }
+
+  priceConditionalSentence(price) {
     if (price % 1000 !== 0) {
       this.displayErrorMessage(this.error.INVALID_PRICE);
+      return null;
     }
 
     if (isNaN(price)) {
       this.displayErrorMessage(this.error.INCORRECT_TYPE);
+      return null;
     }
 
     return +price;
   }
 
-  getLottoQuantity(money) {
-    const quantity = money / 1000;
+  async checkCommaSeparated(numbers) {
+    let winningNumber;
 
-    return quantity;
+    while (true) {
+      const result = await this.checkNumberLoop(winningNumber, numbers);
+      if (result) return result.split(",");
+    }
+  }
+
+  checkCommaLoop(string) {
+    for (let s of string) {
+      if (isNaN(s) && s !== ",") {
+        this.displayErrorMessage(this.error.INVALID_STRING);
+        return null;
+      }
+    }
+
+    return string;
+  }
+
+  async checkNumberLoop(winningNumber, numbers) {
+    try {
+      const result = this.checkCommaLoop(numbers);
+      return result;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      winningNumber = await this.getWinningNumber();
+    }
   }
 
   setLotto(quantity) {
@@ -76,17 +111,9 @@ class App {
     }
   }
 
-  isCommaSeparated(numbers) {
-    const parts = numbers.split(",");
-
-    if (parts.length < 2) throw new Error(this.error.INVALID_STRING);
-
-    return parts;
-  }
-
   async setWinnigAndBonusNumber() {
     const winningNumber = await this.getWinningNumber();
-    const winningNumberArray = await this.isCommaSeparated(winningNumber);
+    const winningNumberArray = await this.checkCommaSeparated(winningNumber);
     const bonusNumber = await this.getBonusNumber();
     const userLotto = new Lotto(winningNumberArray);
 
@@ -95,11 +122,11 @@ class App {
   }
 
   async play() {
-    const money = await this.repeatValid();
-    const quantity = await this.getLottoQuantity(money);
+    const money = await this.checkPrice();
+    const quantity = this.getLottoQuantity(money);
     this.setLotto(quantity);
 
-    await this.setWinnigAndBonusNumber();
+    this.setWinnigAndBonusNumber();
   }
 }
 
