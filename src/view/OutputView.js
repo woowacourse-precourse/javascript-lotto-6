@@ -13,7 +13,7 @@ const OutputView = {
    * @param {number[]} userLottos
    */
   printLottos(userLottos) {
-    this.print(OUTPUT_MESSAGE_FUNCTION.userLottos(userLottos.length));
+    this.print(OUTPUT_MESSAGE_FUNCTION.userLottos(userLottos));
     userLottos.forEach((userLotto) => {
       this.print(userLotto);
     });
