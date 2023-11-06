@@ -57,6 +57,22 @@ class App {
     })
   }
 
+  splitStringByComma = (userInputWinningNumbers) => {
+    const stringPieces = userInputWinningNumbers.split(',');
+
+    return stringPieces;
+  }
+
+  parseWinningNumbers = (WinningNumbers) => {
+    const parsedString = WinningNumbers.split(',');
+
+    const parsedWinnigNumbers = parsedString.map((string) => {
+      return this.stringToNumber(string);
+    })
+
+    return parsedWinnigNumbers;
+  }
+
 
 
 
@@ -80,6 +96,16 @@ class App {
       }
 
       this.printLottoOrder();
+
+      MissionUtils.Console.print('당첨 번호를 입려해 주세요.');
+
+      const winningNumbers = await this.getUserInput();
+
+      const parsedWinnigNumbers = this.parseWinningNumbers(winningNumbers)
+
+      console.log(parsedWinnigNumbers);
+
+      
 
 
     } catch(err) {
