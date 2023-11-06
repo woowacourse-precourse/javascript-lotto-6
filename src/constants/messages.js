@@ -17,6 +17,9 @@ export const ERROR_MESSAGES = Object.freeze({
   INVALID_AMOUNT: '[ERROR] 구입 금액이 올바르지 않습니다.',
   DUPLICATE_NUMBER: '[ERROR] 중복 번호가 포함되어 있습니다.',
   ONE_BONUS_NUMBER_ALLOWED: '[ERROR] 보너스 번호는 하나만 입력 가능합니다.',
+  PURCHASE_AMOUNT_THOUSANDS_ONLY: '[ERROR] 천원 단위로 입력해주세요.',
+  BONUS_NUMBER_DUPLICATE:
+    '[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.',
 });
 
 export const NUMBER_REGEX = /^[0-9]+$/;
