@@ -20,7 +20,7 @@ class Generator {
     const countNumbers = userNumbers.fillter((number) =>
       lottoNumbers.includes(number)
     );
-    const count = countNumbers.length();
+    const count = countNumbers.length() < 3 ? null : countNumbers.length();
 
     return count;
   }
@@ -40,7 +40,7 @@ class Generator {
       case 6:
         return 2000000000;
       default:
-        return null;
+        return 0;
     }
   }
 }
