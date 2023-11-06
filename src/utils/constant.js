@@ -6,6 +6,11 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
   QUANTITY: '개를 구매했습니다.',
+  PROFIT_HEAD: '총 수익률은 ',
+  PROFIT_TAIL: '입니다.',
+  END_MESSAGE: '당첨 통계\n---',
+  RESULT_HEAD: '개 일치',
+  RESULT_BONUS: '보너스 볼 일치',
 });
 
 export const VALIDATION_RULE = Object.freeze({
@@ -36,4 +41,13 @@ export const ERROR_MESSAGE = Object.freeze({
   INVALID_RANGE: `${ERROR_HEAD} 번호는 1 ~ 45 사이의 숫자여야 합니다.`,
   INVALID_CHAR: `${ERROR_HEAD} 쉼표 이외의 특수문자 입력은 불가합니다.`,
   INVALID_BONUS_LENGTH: `${ERROR_HEAD} 보너스 번호는 1개여야 합니다.`,
+});
+
+export const RANK = Object.freeze({
+  FIRST: { COUNT: 6, BONUS: false, PRIZE: 2000000000 },
+  SECOND: { COUNT: 5, BONUS: true, PRIZE: 30000000 },
+  THIRD: { COUNT: 5, BONUS: false, PRIZE: 1500000 },
+  FOURTH: { COUNT: 4, BONUS: false, PRIZE: 50000 },
+  FIFTH: { COUNT: 3, BONUS: false, PRIZE: 5_000 },
+  MISS: { COUNT: 0, BONUS: false, PRIZE: 0 },
 });

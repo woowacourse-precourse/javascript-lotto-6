@@ -4,15 +4,25 @@ import { Lottos } from '../domain/Lottos';
 import { RandomNumber } from '../domain/RandomNumber';
 import { Validator } from '../utils/validator';
 import { WinningNumber } from '../domain/WinningNumber';
+import { Convert } from '../utils/calc';
 
 export class GameManager {
   #money_amount;
 
   async startGame() {
     try {
-      await this.initQuantity_PickLotto();
+      const PurchasedLotto = await this.initQuantity_PickLotto();
       const WinningLotto = await this.initWinnigLotto_plusBonus();
-      WinningLotto.checkprint();
+      const [PrizeResult, LottoResult] =
+        PurchasedLotto.getRanking(WinningLotto);
+
+      const converted_Result = Convert.Convert_ResultMessage(LottoResult);
+      const convertedProfit = Convert.Convert_Profit(
+        PrizeResult,
+        this.#money_amount,
+      );
+      Handle_Output.Ending_Output(converted_Result);
+      Handle_Output.Profit_OutPut(convertedProfit);
     } catch (error) {
       Handle_Output.Error_Output(error);
     }
@@ -35,6 +45,7 @@ export class GameManager {
 
     Handle_Output.Quantitiy_Output(quantitiy);
     Handle_Output.Lotto_Output(lottos.join_ConvertedString());
+    return lottos;
   }
 
   async initMoney() {

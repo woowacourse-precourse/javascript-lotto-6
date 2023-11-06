@@ -13,4 +13,15 @@ export const Handle_Output = {
   Lotto_Output: (lottotikets) => {
     Console.print(lottotikets);
   },
+
+  Profit_OutPut: (profit) => {
+    Console.print(
+      OUTPUT_MESSAGE.PROFIT_HEAD + profit + '%' + OUTPUT_MESSAGE.PROFIT_TAIL,
+    );
+  },
+
+  Ending_Output: (result) => {
+    Console.print(OUTPUT_MESSAGE.END_MESSAGE);
+    Console.print(result);
+  },
 };

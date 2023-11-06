@@ -21,5 +21,18 @@ export class Lotto {
     return this.#numbers.join(', ');
   };
 
+  matchCounter = (anotherlotto) => {
+    let count = 0;
+    this.#numbers.map((number) => {
+      if (anotherlotto.includes(number)) {
+        count += 1;
+      }
+    });
+    return count;
+  };
+
+  matchBonus = (number) => {
+    return this.#numbers.includes(number);
+  };
   // TODO: 추가 기능 구현
 }

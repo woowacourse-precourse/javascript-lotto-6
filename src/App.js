@@ -5,7 +5,7 @@ class App {
   async play() {
     try {
       const gamemanager = new GameManager();
-      gamemanager.startGame();
+      await gamemanager.startGame();
     } catch (error) {
       Console.print(error);
     }

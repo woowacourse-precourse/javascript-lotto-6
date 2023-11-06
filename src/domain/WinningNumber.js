@@ -1,13 +1,18 @@
-import { Lotto } from './Lotto';
+import { getRankingBymatch } from '../utils/calc';
 
-export class WinningNumber extends Lotto {
+export class WinningNumber {
+  #winning;
   #bonus;
   constructor(winninglotto, bonus) {
-    super(winninglotto);
+    this.#winning = winninglotto;
     this.#bonus = bonus;
   }
 
-  checkprint() {
-    console.log(this.#bonus);
-  }
+  CompareByone = (lotto) => {
+    const bonus = parseInt(this.#bonus);
+    return getRankingBymatch(
+      lotto.matchCounter(this.#winning),
+      lotto.matchBonus(bonus),
+    );
+  };
 }
