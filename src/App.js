@@ -152,6 +152,16 @@ class App {
     })
   }
 
+  printLottoStat = () => {
+    MissionUtils.Console.print(`\n당첨 통계\n---`);
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${this.#lottoStat[5]}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${this.#lottoStat[4]}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${this.#lottoStat[3]}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#lottoStat[2]}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${this.#lottoStat[1]}개`);
+    MissionUtils.Console.print(`총 수익률은 ${this.#rateOfEarn * 100}%입니다.`);
+  }
+
   setPrizeMoney = () => {
     let prizeMoney = 0;
 
@@ -195,7 +205,7 @@ class App {
       this.setLottoOrder();
       this.printLottoOrder();
 
-      MissionUtils.Console.print('당첨 번호를 입려해 주세요.');
+      MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
 
       const userInputWinningNumbers = await this.getUserInput();
       const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
@@ -203,7 +213,7 @@ class App {
       this.checkWinngNumbers(parsedWinnigNumbers);
       this.setWinningNumbers(parsedWinnigNumbers);
 
-      MissionUtils.Console.print('보너스 번호를 입력해 주세요.');
+      MissionUtils.Console.print('\n보너스 번호를 입력해 주세요.');
 
       const userInputBonusNumber = await this.getUserInput();
       const bonusNumber = this.stringToNumber(userInputBonusNumber);
@@ -214,8 +224,7 @@ class App {
       this.setPrizeMoney();
       this.getRateOfEarn();
 
-      console.log(this.#rateOfEarn);
-
+      this.printLottoStat();
     } catch(err) {
       return Promise.reject(err);
     }
