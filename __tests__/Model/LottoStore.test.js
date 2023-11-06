@@ -11,7 +11,7 @@ const mockLottos = [
   [1, 2, 3, 4, 7, 10],
 ];
 
-const matchResultIndex = 0;
+let matchResultIndex = 0;
 const mockMatchResult = [
   {
     lottoWinningNumbersMatchCount: 6,
@@ -38,7 +38,7 @@ Lotto.mockImplementation(() => {
   };
 });
 
-let lottoStore, purchaseQuantity;
+let lottoStore;
 describe("LottoStore 클래스 테스트", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -76,7 +76,7 @@ describe("LottoStore 클래스 테스트", () => {
       thirdPlace: 0,
       fourthPlace: 1,
       fifthPlace: 0,
-      returnRate: 507512.5,
+      returnRate: 50751250,
     };
     const matchResult = lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
     expect(matchResult).toEqual(expectedMatchResult);
