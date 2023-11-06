@@ -18,7 +18,6 @@ class CompareLottoMachine {
 
   #filterMatchedNumbers(matchedLottos) {
     const result = Array.from({ length: 5 }).fill(0);
-
     matchedLottos.forEach(([matchedCount, hasBonus]) => {
       if (matchedCount < 3) return;
       if (matchedCount === 3) result[0] += 1;
