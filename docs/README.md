@@ -39,12 +39,12 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 1. 사용자(User)가 로또포스기(LottoPos)에서 로또(Lotto)를 구입한다.
 2. 사용자(User)가 당첨번호(winningLotto)를 입력한다.
 3. 사용자(User)가 보너스번호(BonusLotto)를 입력한다.
-4. 사용자는 로또 결과(LottoResult)를 로또포스기(LottoPos)에서 볼 수 있다.
+4. 사용자는 로또서버(Server)에서 반환받은 로또 결과(LottoResult)를 로또포스기(LottoPos)에서 볼 수 있다.
 
-Domain => `사용자(User)`, `로또(Lotto)`, `당첨번호(winningLotto)`, `보너스번호(Bonuslotto)`, `로또 결과(LottoResult)`
-UI => `로또포스기(LottoPos)`
+**Domain** => `사용자(User)`, `로또(Lotto)`, `당첨번호(winningLotto)`, `보너스번호(Bonuslotto)`, `로또 결과(LottoResult)` <br>
+**UI** => `로또포스기(LottoPos)` (제외한다.)
 
-### 사용자(User)
+### 사용자(User) 테스트
 - [x] : UserController에서 User객체를 생성한다.
 - [x] : User 객체의 구입 금액은 전달받은 금액이여야 한다.
   - [x] : 공백이면 에러를 출력하는지 테스트해야 한다.
@@ -55,6 +55,13 @@ UI => `로또포스기(LottoPos)`
 - [x] : User 객체에서 사용자가 구입한 로또의 길이는 구입한 로또 갯수여야 한다.
 - [x] : User 객체에서 구입한 로또번호는 1이상 45이하여야 한다.
 - [x] : User 객체에서 구입한 로또번호는 유니크해야 한다.
+<br>
+
+### 로또(Lotto) 테스트
+- [x] : 로또의 길이는 6이아니면 에러가 발생해야 한다.
+- [x] : 로또가 모두 숫자가 아니면 에러가 발생해야 한다.
+- [x] : 로또번호는 1이상 45이하여야 한다.
+- [x] : 로또번호는 유니크해야 한다.
 
 
 
