@@ -2,6 +2,7 @@ export const MESSAGE = Object.freeze({
   INPUT_MONEY: '구입금액을 입력해 주세요.',
   INPUT_WINNING_NUMBERS:
     '당첨 번호를 입력해 주세요. 번호는 쉼표(,)를 기준으로 구분해주세요',
+  INPUT_BONUS_NUMBER: '보너스 번호 하나를 입력해주세요.',
   FINISH_DRAW_LOTTOS: '개를 구매했습니다.',
 });
 

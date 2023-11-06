@@ -31,6 +31,19 @@ const LottoUi = {
     }
   },
 
+  async inputBonusNumber() {
+    try {
+      const bonusNumber = Number(
+        await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER)
+      );
+
+      return bonusNumber;
+    } catch (err) {
+      Console.print(err.message);
+      this.inputBonusNumber();
+    }
+  },
+
   alertFinishdrawLottos(numberOfLottos) {
     Console.print(`${numberOfLottos}${MESSAGE.FINISH_DRAW_LOTTOS}`);
   },
@@ -70,6 +83,12 @@ const LottoUi = {
       throw new Error(ERROR_MESSAGE.NOT_INPUT_6);
     } else if (this.checkBounds(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
+    }
+  },
+
+  validateBonusNumber(bonusNumber) {
+    if (Number.isNaN(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
     }
   },
 };
