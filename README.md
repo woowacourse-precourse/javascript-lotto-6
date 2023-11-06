@@ -7,20 +7,24 @@
 ### App.js
 - `money` : 로또 구입 금액을 저장하는 int 필드
 - `lottoList` : 구입한 로또들을 저장하는 Lotto객체 리스트 필드
+- `winningNumbers` : 당첨 번호를 저장하는 int 리스트 필드
+- `bonusNumber` : 보너스 번호를 저장하는 int 필드
+
 - `readMoney()` : 로또 구입 금액 입력 함수 
 - `checkMoney()` : 로또 구입 금액 입력값 검증 함수 (1000원 1장) 
-- `buyLotto()` : 몇 장 구매했는지 출력하고, lottoList를 리턴하는 함수
+- `buyLotto()` : 몇 장 구매했는지, 각 로또의 번호 출력하고, lottoList를 리턴하는 함수
 - `makeLotto()` : 로또 번호 발행 함수 (1~45 중복x 6개, 오름차순)
-- 당첨 번호 입력 함수
-- 당첨 번호 입력값 검증 함수
-- 보너스 번호 입력 함수
-- 보너스 번호 입력값 검증 함수
+- `readWinningNumbers()` : 당첨 번호 입력 함수
+- `checkWinningNum()` : 당첨 번호 입력값 검증 함수
+- `readBonusNumber()` : 보너스 번호 입력 함수
+- `checkBonusNum()` : 보너스 번호 입력값 검증 함수
+- 당첨 통계 출력 함수
+- 몇개 일치하는지 카운트 함수
 - 수익률 계산 함수 (소수점 둘째 자리에서 반올림)
 ### Lotto.js
 - `#number` : 로또 번호 필드
 - `#validate()` : 발행된 로또 번호가 6개인지, 오름차순인지, 중복없는지 검증 함수
 - `returnNumbers()` : 로또 번호 리턴 함수
-- 몇개 일치하는지 카운트 함수
 
 #### 실행 결과 예시
 

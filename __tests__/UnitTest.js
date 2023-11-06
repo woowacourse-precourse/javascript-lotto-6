@@ -29,4 +29,32 @@ describe("App.js 유닛 테스트", () => {
     const result = await app.buyLotto(COUNT);
     expect(result).toHaveLength(COUNT);
   });
+  test.each(["1,2,3,4,5", "1,2,3,4,5,", "1,2,3,4,5,6,7", "0,1,2,3,4,5,6", "1,2,3,4,5,46", "*,1,2,3,4,5","1,1,2,3,4,5"])(
+    "당첨 번호가 올바르지 않으면 false를 리턴한다.",
+    async (inputs) => {
+      const result = await app.checkWinningNum(inputs);
+      expect(result).toBe(false);
+    }
+  );
+  test.each(["1,2,3,4,5,6", "40,41,42,43,44,45"])(
+    "당첨 번호가 올바르다.",
+    async (inputs) => {
+      const result = await app.checkWinningNum(inputs);
+      expect(result).toBe(true);
+    }
+  );
+  test.each(["1,2", "46", "", "0", "1", "*"])(
+    "보너스 번호가 올바르지 않으면 false를 리턴한다.",
+    async (inputs) => {
+      const result = await app.checkBonusNum([1,2,3,4,5,6],inputs);
+      expect(result).toBe(false);
+    }
+  );
+  test.each(["7", "45"])(
+    "당첨 번호가 올바르다.",
+    async (inputs) => {
+      const result = await app.checkBonusNum([1,2,3,4,5,6],inputs);
+      expect(result).toBe(true);
+    }
+  );
 });
