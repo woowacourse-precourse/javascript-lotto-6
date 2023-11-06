@@ -31,7 +31,7 @@ describe("로또 클래스 테스트", () => {
   
 });
 
-describe("Class Lotto - method test" , () => {
+describe("method test : countEqualNumbers()" , () => {
   test('두 배열을 인수로 보냈을 때 같은 요소의 개수를 구할 수 있는가 ?', () => {
     const testArray = [1,2,3,4,5,6];
     const lotto = new Lotto(testArray);
@@ -39,5 +39,25 @@ describe("Class Lotto - method test" , () => {
     const userLottoNumbers = [2,6,4,13,42,1];
     const equalNumber = lotto.countEqualNumbers(randomNumbers, userLottoNumbers);
     expect(equalNumber).toBe(3);
+  });
+});
+
+describe("method test : compareBonusNumber()" , () => {
+  test('로또 번호와 보너스 번호가 같은지 비교할 수 있는가 ?', () => {
+    const randomNumbers = [2,4,6,8,12,14];
+    const bonusNumber  = 7;
+    const lotto = new Lotto(randomNumbers);
+    const equalNumber = lotto.compareBonusNumber(randomNumbers, bonusNumber);
+    expect(equalNumber).toBe(false);
+  });
+});
+
+describe("method test : compareBonusNumber()" , () => {
+  test('로또 번호와 보너스 번호가 같은지 비교할 수 있는가 ?', () => {
+    const randomNumbers = [2,4,6,8,12,14];
+    const bonusNumber  = 8;
+    const lotto = new Lotto(randomNumbers);
+    const equalNumber = lotto.compareBonusNumber(randomNumbers, bonusNumber);
+    expect(equalNumber).toBe(true);
   });
 });
