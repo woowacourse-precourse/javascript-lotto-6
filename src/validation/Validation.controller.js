@@ -1,4 +1,4 @@
-import ValidationService from './Validation.service';
+import ValidationService from './Validation.service.js';
 
 const ERROR_MESSAGES = {
   isNaN: '[ERROR] 입력한 금액이 숫자가 아닙니다.',

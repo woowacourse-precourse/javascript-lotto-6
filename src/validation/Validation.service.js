@@ -13,7 +13,7 @@ const ERROR_MESSAGES = {
 
 export default class ValidationService {
   isNumber(num) {
-    if (!Number.isNaN(+num)) {
+    if (Number.isNaN(+num)) {
       throw new Error(ERROR_MESSAGES.isNaN);
     }
   }
