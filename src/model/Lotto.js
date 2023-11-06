@@ -42,6 +42,10 @@ export default class Lotto {
     return [...numbers].sort((a, b) => a - b);
   }
 
+  includesBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
+
   matchNumbers(winningNumbers) {
     return this.#numbers.filter((number) => winningNumbers.includes(number)).length;
   }
