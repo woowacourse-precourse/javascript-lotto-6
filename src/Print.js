@@ -2,6 +2,9 @@ import { Console } from '@woowacourse/mission-utils';
 import PRIZE from './constants/Prize.js';
 
 const Print = {
+  printPurchase(count) {
+    Console.print(`${count}개를 구매했습니다.`);
+  },
   printResults(results) {
     Console.print('당첨 통계\n---');
     Console.print(

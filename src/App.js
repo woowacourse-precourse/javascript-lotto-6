@@ -48,7 +48,7 @@ class App {
     Print.printNewLine();
 
     this.#count = this.countLotto(price);
-    Console.print(`${this.#count}개를 구매했습니다.`);
+    Print.printPurchase(this.#count);
 
     for (let i = 0; i < this.#count; i++) {
       const lotto = this.createLotto();
