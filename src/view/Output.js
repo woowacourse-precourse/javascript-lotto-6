@@ -24,7 +24,7 @@ class Output {
   }
 
   printRate(profit) {
-    this.print(GUIDE_MESSAGE.winningStatistics.replace('*', profit * 100))
+    this.print(GUIDE_MESSAGE.winningStatistics.replace('*', (profit * 100).toFixed(1)))
   }
 
   printDivider() {
