@@ -1,4 +1,7 @@
+import Lotto from '../Lotto.js';
+import { LOTTO } from '../constants/System.js';
 import LottoModel from '../model/index.js';
+import Converter from '../utils/Converter.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 
@@ -42,7 +45,7 @@ class LottoController {
     try {
       const winningNumbers = await InputView.readWinningNumbers();
 
-      return winningNumbers;
+      return Lotto.of(Converter.split(winningNumbers, LOTTO.delimiter));
     } catch (error) {
       OutputView.print(error.message);
 
