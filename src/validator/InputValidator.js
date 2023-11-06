@@ -10,10 +10,6 @@ class InputValidator {
     return Number.isNaN(input);
   }
 
-  static checkLength(length, arr) {
-    if (arr.length !== length) throw new InputError();
-  }
-
   static isDuplicated(arr) {
     const set = new Set(arr);
 
@@ -29,6 +25,10 @@ class InputValidator {
   static isNotInRange([start, end], num) {
     return start > num || end < num;
   }
+
+  // static checkLength(length, arr) {
+  //   return arr.length !== length;
+  // }
 }
 
 export default InputValidator;
