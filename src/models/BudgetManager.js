@@ -21,11 +21,11 @@ class BudgetManager {
 
 		lottoResults.forEach((result) => {
 			LOTTO_SYSTEM.winning_array.forEach((winning, idx) => {
-				if (winning.count === result.winningCount) {
-					if (winning.hasBonus && !result.bonusNumberHit) return;
-					totalMatchedNumbers.push(idx);
-					this.#currentAmount += LOTTO_SYSTEM.prize_array[idx];
-				}
+				if (winning.count !== result.winningCount) return;
+				if (winning.hasBonus && !result.bonusNumberHit) return;
+
+				totalMatchedNumbers.push(idx);
+				this.#currentAmount += LOTTO_SYSTEM.prize_array[idx];
 			});
 		});
 
