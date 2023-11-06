@@ -1,6 +1,7 @@
 import InputView from "../view/InputView.js";
 import InputValidator from "../utils/validator.js";
 import Lotto from "../Lotto.js";
+import OutputView from "../view/OutputView.js";
 class LottoGameController {
   #lotto;
   #purchaseAmount;
@@ -9,10 +10,6 @@ class LottoGameController {
 
   startGame() {
     this.readPurchaseAmount();
-  }
-
-  getNumberOfLottoTickets(input) {
-    this.#purchaseAmount = +input % 1000;
   }
 
   async readPurchaseAmount() {
@@ -24,11 +21,16 @@ class LottoGameController {
   async handleError(input) {
     try {
       InputValidator.purchaseAmount(input);
-      this.getNumberOfLottoTickets(input);
+      this.showLottoTicketCount(input);
     } catch (error) {
       console.log(error);
       this.readPurchaseAmount();
     }
+  }
+
+  showLottoTicketCount(input) {
+    this.#purchaseAmount = +input / 1000;
+    OutputView.printLottoTicketCount(this.#purchaseAmount);
   }
 }
 
