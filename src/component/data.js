@@ -15,11 +15,28 @@ export const TEXT = Object.freeze({
   OVERLAP_ERROR: '[ERROR] 번호는 중복되지 않아야 합니다.',
   STRING_ERROR: '[ERROR] 번호는 숫자로 작성해야 합니다.',
   OUTPUT_NUMBER: '개를 구매했습니다.',
-  OUTPUT_PRIZE: '당첨 통계',
-  OUTPUT_1ST: '6개 일치 (2,000,000,000원) - 개',
-  OUTPUT_2ST: '5개 일치, 보너스 볼 일치 (30,000,000원) - 개',
-  OUTPUT_3ST: '5개 일치 (1,500,000원) - 개',
-  OUTPUT_4ST: '4개 일치 (50,000원) - 개',
-  OUTPUT_5ST: '3개 일치 (5,000원) - 개',
-  OUTPUT_RESULT: '총 수익률은 %입니다.',
+  OUTPUT_PRIZE: '당첨 통계\n---',
+  OUTPUT_RESULT: '총 수익률은 ',
+  OUTPUT_ITEM: '개',
 });
+export const OUTPUT_RANK = Object.freeze({
+  OUTPUT_1ST: '6개 일치 (2,000,000,000원) - ',
+  OUTPUT_2ND: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  OUTPUT_3RD: '5개 일치 (1,500,000원) - ',
+  OUTPUT_4TH: '4개 일치 (50,000원) - ',
+  OUTPUT_5TH: '3개 일치 (5,000원) - ',
+});
+const prize = {
+  '1등': 2000000000,
+  '2등': 3000000,
+  '3등': 1500000,
+  '4등': 50000,
+  '5등': 5000,
+};
+const rank = {
+  '1등': 0,
+  '2등': 0,
+  '3등': 0,
+  '4등': 0,
+  '5등': 0,
+};
