@@ -19,7 +19,7 @@ class BuyPrice {
     }
 
     if (validation.isNumber(price)) {
-      throw new Error(BUY_PRICE_ERROR.isNaN);
+      throw new Error(BUY_PRICE_ERROR.isNumber);
     }
   }
 
