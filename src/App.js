@@ -1,13 +1,14 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import Lotto from "./Lotto.js";
+import Input from './UserInput.js';
+import Controller from './LottoController.js';
 class App {
   async play() {
-    const numbers = Lotto.createRandomNumbers();
-    const bonusNumber = Lotto.generateBonusNumber(numbers);
-    const lotto = new Lotto(numbers, bonusNumber);
-    const lottoNumber = lotto.getNumbers();
-    Console.print(`로또 번호: ${lottoNumber}`);
-    Console.print(`보너스 번호: ${bonusNumber}`);
+    const lottoGame = new Controller();
+    lottoGame.gameStart();
+    const input = new Input();
+    await input.userPurchase();
+    await input.userNumber();
+    await input.userBonusNumber();
   }
 }
 
