@@ -43,12 +43,21 @@ class App {
   }
 
   async inputWinning() {
-    const input = await Console.readLineAsync(
-      "\n 당첨 번호를 입력해 주세요. \n"
-    );
-    const winning = input.split(",").map((elem) => +elem);
-    const lotto = new Lotto(winning);
-    this.winning = winning;
+    let isValid = false;
+
+    while (!isValid) {
+      try {
+        const input = await Console.readLineAsync(
+          "\n 당첨 번호를 입력해 주세요. \n"
+        );
+        const winning = input.split(",").map((elem) => +elem);
+        const lotto = new Lotto(winning);
+        this.winning = winning;
+        isValid = true;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 
   async inputBonus() {
