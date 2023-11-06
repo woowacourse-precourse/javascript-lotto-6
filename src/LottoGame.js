@@ -6,10 +6,12 @@ import OutputView from './OutputView.js';
 class LottoGame {
   #count;
   #lottos;
+  #winningNumbers;
 
   constructor() {
     this.#count = 0;
     this.#lottos = [];
+    this.#winningNumbers = [];
   }
 
   async setupInputMoney() {
@@ -45,6 +47,20 @@ class LottoGame {
       NUMBER_RANGE.COUNT
     );
     return randomNumbers.sort((a, b) => a - b);
+  }
+
+  async setupInputWinningNumbers() {
+    while (true) {
+      const userInput = await InputView.inputCommon(
+        `\n${GAME_MESSAGES.ENTER_WINNING_NUMBERS}`
+      );
+      try {
+        this.#winningNumbers = new Lotto(userInput);
+        break;
+      } catch (error) {
+        OutputView.printErrorMessage(error.message);
+      }
+    }
   }
 }
 
