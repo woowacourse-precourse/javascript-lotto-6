@@ -7,7 +7,7 @@ class Matcher {
     [6, 2000000000],
   ]);
 
-  #matchStatsCount = new Map([
+  #matchStatusCount = new Map([
     [5000, 0],
     [50000, 0],
     [1500000, 0],
@@ -27,13 +27,13 @@ class Matcher {
         isBonusMatch && matchedNumberCount === 5 ? '5+bonus' : matchedNumberCount;
       if (this.#prizeTable.has(keyOfPrizeTable)) {
         const prize = this.#prizeTable.get(keyOfPrizeTable);
-        this.#matchStatsCount.set(prize, this.#matchStatsCount.get(prize) + 1);
+        this.#matchStatusCount.set(prize, this.#matchStatusCount.get(prize) + 1);
       }
     });
   }
 
-  get matchStats() {
-    return this.#matchStatsCount;
+  get matchStatus() {
+    return this.#matchStatusCount;
   }
 }
 
