@@ -6,11 +6,11 @@ class LottoStore {
   #lottos = [];
 
   #LottoMatchResult = {
-    firstPlace: 0,
-    secondPlace: 0,
-    thirdPlace: 0,
-    fourthPlace: 0,
     fifthPlace: 0,
+    fourthPlace: 0,
+    thirdPlace: 0,
+    secondPlace: 0,
+    firstPlace: 0,
     returnRate: 0,
   };
 
@@ -58,11 +58,11 @@ class LottoStore {
   }
 
   #compareMatchResult({ lottoWinningNumbersMatchCount, bonousNumberMatchCount }) {
-    if (lottoWinningNumbersMatchCount === 6) this.#LottoMatchResult.firstPlace++;
-    if (lottoWinningNumbersMatchCount === 5 && bonousNumberMatchCount === 1) this.#LottoMatchResult.secondPlace++;
-    if (lottoWinningNumbersMatchCount === 5 && bonousNumberMatchCount === 0) this.#LottoMatchResult.thirdPlace++;
-    if (lottoWinningNumbersMatchCount === 4) this.#LottoMatchResult.fourthPlace++;
     if (lottoWinningNumbersMatchCount === 3) this.#LottoMatchResult.fifthPlace++;
+    if (lottoWinningNumbersMatchCount === 4) this.#LottoMatchResult.fourthPlace++;
+    if (lottoWinningNumbersMatchCount === 5 && bonousNumberMatchCount === 0) this.#LottoMatchResult.thirdPlace++;
+    if (lottoWinningNumbersMatchCount === 5 && bonousNumberMatchCount === 1) this.#LottoMatchResult.secondPlace++;
+    if (lottoWinningNumbersMatchCount === 6) this.#LottoMatchResult.firstPlace++;
   }
 
   #calculateReturnRate() {

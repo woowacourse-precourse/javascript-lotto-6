@@ -71,11 +71,11 @@ describe("LottoStore 클래스 테스트", () => {
     const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
     const bonousNumber = [7];
     const expectedMatchResult = {
-      firstPlace: 1,
-      secondPlace: 1,
-      thirdPlace: 0,
-      fourthPlace: 1,
       fifthPlace: 0,
+      fourthPlace: 1,
+      thirdPlace: 0,
+      secondPlace: 1,
+      firstPlace: 1,
       returnRate: 50751250,
     };
     const matchResult = lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
