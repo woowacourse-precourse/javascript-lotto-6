@@ -45,12 +45,25 @@ function validateExistingNumber(number, numbers) {
   }
 }
 
-export {
-  validateNumberType,
-  validateUnit,
-  validateLottoLength,
-  validateLottoRange,
-  validateDuplicateNumber,
-  validateMinimumAmount,
-  validateExistingNumber,
-};
+function validateLotto(numbers) {
+  validateLottoLength(numbers);
+  numbers.forEach((number) => {
+    validateNumberType(number);
+    validateLottoRange(number);
+  });
+  validateDuplicateNumber(numbers);
+}
+
+function validatePurchaseAmount(amount) {
+  validateNumberType(amount);
+  validateMinimumAmount(amount);
+  validateUnit(amount);
+}
+
+function validateBonusNumber(number, winningNumbers) {
+  validateNumberType(number);
+  validateLottoRange(Number(number));
+  validateExistingNumber(Number(number), winningNumbers);
+}
+
+export { validateBonusNumber, validatePurchaseAmount, validateLotto };
