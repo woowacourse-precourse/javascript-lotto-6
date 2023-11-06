@@ -8,14 +8,25 @@ class LottoGame {
   constructor(myLotto, winningLotto) {
     this.lottos = myLotto.map((numbers) => new Lotto(numbers));
     this.winningLotto = winningLotto;
-    this.statistics = [];
+    this.results = {
+      "3개 일치": 0,
+      "4개 일치": 0,
+      "5개 일치": 0,
+      "5개 일치, 보너스 볼 일치": 0,
+      "6개 일치": 0,
+    };
+    this.statistics = "";
   }
 
   start() {
     this.lottos.forEach((lotto) => {
       lotto.checkResult(this.winningLotto);
-      this.statistics.push(lotto.result);
+      this.results[lotto.result] += 1;
     });
+  }
+
+  generateStatistics() {
+    // Todo results 객체를 foreach하여 statistics 변수에 가공한 당첨 통계 출력 문자 저장
   }
 }
 

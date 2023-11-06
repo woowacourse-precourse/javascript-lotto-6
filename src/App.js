@@ -22,7 +22,7 @@ class App {
     const lottoGame = new LottoGame(myLotto, winningLotto);
 
     lottoGame.start();
-    Console.print(lottoGame.statistics.join("\n"));
+    Console.print(lottoGame.statistics);
   }
 
   async getAmount() {
