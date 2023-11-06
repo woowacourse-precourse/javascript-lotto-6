@@ -165,8 +165,8 @@ npm test
 **예시**
 
 ```javascript
-const app = new App();
-app.play();
+const app = new App()
+app.play()
 ```
 
 - `package.json`을 변경할 수 없고 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않는다. 순수 Vanilla JS로만 구현한다.
@@ -200,7 +200,7 @@ app.play();
 #### 사용 예시
 
 ```javascript
-MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)
 ```
 
 ### Lotto 클래스
@@ -211,16 +211,16 @@ MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
 
 ```javascript
 class Lotto {
-  #numbers;
+  #numbers
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#validate(numbers)
+    this.#numbers = numbers
   }
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.')
     }
   }
 
