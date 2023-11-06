@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { COST_PROMPT } from '../constants/prompt.js';
+import PROMPT from '../constants/prompt.js';
 
 class Input {
   /**
@@ -7,7 +7,7 @@ class Input {
    * @returns {Promise<number>} 구입금액
    */
   static async getCost() {
-    const cost = await Input.readIntegerAsync(COST_PROMPT);
+    const cost = await Input.readIntegerAsync(PROMPT.BUY_COST);
 
     if (cost % 1000 !== 0) {
       throw new Error('[ERROR] 1000원 단위로 입력해주세요.');
