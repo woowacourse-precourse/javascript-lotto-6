@@ -49,6 +49,10 @@ class LottoResult {
     this.#calcPrizeMoney();
     return this.#prizeMoney;
   }
+
+  getProfit(userMoney, prizeMoney) {
+    return calcProfit(userMoney, prizeMoney);
+  }
 }
 
 export default LottoResult;
