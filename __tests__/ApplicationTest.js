@@ -24,23 +24,23 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-// const runException = async (input) => {
-//   // given
-//   const logSpy = getLogSpy();
+const runException = async (input) => {
+  // given
+  const logSpy = getLogSpy();
 
-//   const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
-//   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
+  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
-//   mockRandoms([RANDOM_NUMBERS_TO_END]);
-//   mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+  mockRandoms([RANDOM_NUMBERS_TO_END]);
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
 
-//   // when
-//   const app = new App();
-//   await app.play();
+  // when
+  const app = new App();
+  await app.play();
 
-//   // then
-//   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-// }
+  // then
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+}
 
 describe("로또 테스트", () => {
   beforeEach(() => {
@@ -78,12 +78,12 @@ describe("로또 테스트", () => {
       "[7, 11, 30, 40, 42, 43]",
       "[2, 13, 22, 32, 38, 45]",
       "[1, 3, 5, 14, 22, 45]",
-      // "3개 일치 (5,000원) - 1개",
-      // "4개 일치 (50,000원) - 0개",
-      // "5개 일치 (1,500,000원) - 0개",
-      // "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
-      // "6개 일치 (2,000,000,000원) - 0개",
-      // "총 수익률은 62.5%입니다.",
+      "3개 일치 (5,000원) - 1개",
+      "4개 일치 (50,000원) - 0개",
+      "5개 일치 (1,500,000원) - 0개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+      "6개 일치 (2,000,000,000원) - 0개",
+      "총 수익률은 62.5%입니다.",
     ];
 
     logs.forEach((log) => {
@@ -91,8 +91,8 @@ describe("로또 테스트", () => {
     });
   });
 
-  // test("예외 테스트", async () => {
-  //   await runException("1000j");
-  // });
+  test("예외 테스트", async () => {
+    await runException("1000j");
+  });
 });
 

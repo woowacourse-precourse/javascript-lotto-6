@@ -10,7 +10,7 @@ import LottoAnswer from "./model/LottoAnswer";
 const { Random } = MissionUtils;
 
 const printProgressNumber = async (progressNumber) => {
-  print(`${progressNumber}${MESSAGE.TOTAL_PURCHASE}`);
+  print(`\n${progressNumber}${MESSAGE.TOTAL_PURCHASE}`);
 }
 
 // Lotto class
@@ -43,8 +43,10 @@ class App {
       money = new Money(inputMoney);
     } catch(error) {
       print(error.message);
+      const inputMoney = await readLineAsync(MESSAGE.INPUT_AMOUNT); // 구입금액을 입력해 주세요.
+      money = new Money(inputMoney);
     }
-
+    console.log(money);
     //---------------
     const progressNumber = money.getMoney() / 1000;
     await printProgressNumber(progressNumber); // 게임 횟수 출력
@@ -65,13 +67,12 @@ class App {
     } catch(error) {
       print(error.message);
     }
-
+    // 정답과 보너스 번호
     const {answerNumber, bonusNumber} = answer.getFullNumber();
-    console.log(answerNumber, bonusNumber);
-
-
 
     // 결과 계산
+
+    
   }
 
 }

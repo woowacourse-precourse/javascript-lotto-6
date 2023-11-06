@@ -41,9 +41,7 @@ class Lotto {
   #validatePositiveNumber(numbers) {
     const check = /^[0-9]+$/;
     for (let number of numbers){
-        if (!check.test(number)) {
-          throw new Error("[ERROR] 양수만 입력하세요"); // // 나중에 에러 메시지로 빼기
-      }
+        if (!check.test(number)) throw new Error("[ERROR] 양수만 입력하세요"); // // 나중에 에러 메시지로 빼기
     }
   }
 
