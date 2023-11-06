@@ -5,12 +5,8 @@ import LOTTO_SETTINGS from "../config/gameSetting.js";
 class DrawnLotto extends Lotto {
   #bonusNumber;
 
-  constructor(numbers, bonusNumber) {
+  constructor(numbers) {
     super(numbers);
-    const convertedBonumNumber = Number(bonusNumber);
-    this.#validatePlusNumber(convertedBonumNumber);
-    this.#validateRangeOfPlusNumber(convertedBonumNumber);
-    this.#bonusNumber = convertedBonumNumber;
   }
 
   getBonusNumber() {
@@ -18,9 +14,10 @@ class DrawnLotto extends Lotto {
   }
 
   getFullNumbers() {
-    const numbers = this.getNumbers();
+    const drawnLottoNumbers = this.getNumbers();
     const bonusNumber = this.getBonusNumber();
-    return { numbers, bonusNumber };
+
+    return { drawnLottoNumbers, bonusNumber };
   }
 
   #validatePlusNumber(bonusNumber) {
@@ -36,6 +33,18 @@ class DrawnLotto extends Lotto {
       throw new LottoError(
         `로또 번호는 ${LOTTO_SETTINGS.NUMBER_RANGE.MIN}이상 ${LOTTO_SETTINGS.NUMBER_RANGE.MAX}이하여야 합니다.`
       );
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = this.#validateBonusNumber(bonusNumber);
+  }
+
+  // TODO: bonus넘버 1개이상 입력시 에러 추가할것
+  #validateBonusNumber(bonusNumber) {
+    const convertedBonumNumber = Number(bonusNumber);
+    this.#validatePlusNumber(convertedBonumNumber);
+    this.#validateRangeOfPlusNumber(convertedBonumNumber);
+    return convertedBonumNumber;
   }
 }
 
