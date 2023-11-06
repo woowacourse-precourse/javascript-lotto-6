@@ -6,7 +6,7 @@ class InputView {
       try {
         const purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
         this.validatePurchaseAmount(purchaseAmount);
-        return purchaseAmount;
+        return Number(purchaseAmount);
       }
       catch (error) {
         Console.print(error);
@@ -30,7 +30,7 @@ class InputView {
     while (true) {
       try {
         const winningNumbers = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-        this.validateWinningNumbers(winningNumbers);
+        this.validateWinningNumbers(winningNumbers.split(','));
         return winningNumbers.split(',').map(Number);
       }
       catch (error) {
@@ -40,23 +40,18 @@ class InputView {
   }
 
   static validateWinningNumbers(winningNumbers) {
-    const numbers = winningNumbers.split(',');
-    const areAllNumbers = numbers.every(number => !isNaN(number));
+    const areAllNumbers = winningNumbers.every(number => !isNaN(number));
     if (!areAllNumbers) {
       throw '[ERROR] 당첨 번호는 숫자여야 합니다.';
     }
-
-    const isValidRangeofNumbers = numbers.map(Number).filter((number) => number >= 1 && number <= 45);
-    if (isValidRangeofNumbers.length !== numbers.length) {
+    if (!winningNumbers.every((number) => number >= 1 && number <= 45)) {
       throw '[ERROR] 당첨 번호는 1부터 45 범위 내이어야 합니다.';
     }
-
-    if (numbers.length !== 6) {
+    if (winningNumbers.length !== 6) {
       throw '[ERROR] 당첨 번호는 6개여야 합니다.';
     }
-
-    const set = new Set(numbers);
-    if (numbers.length !== set.size) {
+    const set = new Set(winningNumbers);
+    if (winningNumbers.length !== set.size) {
       throw '[ERROR] 중복된 숫자를 입력하면 안됩니다.';
     }
   }
