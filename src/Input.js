@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import getUserInput from './utils/getUserInput.js';
 import { INPUT_MESSAGE } from './constants/messages.js';
 import {
   validatePurchaseAmount,
@@ -10,7 +9,9 @@ import {
 class Input {
   async getPurchaseAmount() {
     try {
-      const purchaseAmount = await getUserInput(INPUT_MESSAGE.purchaseAmount);
+      const purchaseAmount = await Console.readLineAsync(
+        INPUT_MESSAGE.purchaseAmount,
+      );
       validatePurchaseAmount(purchaseAmount);
 
       return Number(purchaseAmount);
@@ -21,13 +22,18 @@ class Input {
   }
 
   async getWinningNumbers() {
-    const winningNumbers = await getUserInput(INPUT_MESSAGE.winningNumber);
+    const winningNumbers = await Console.readLineAsync(
+      INPUT_MESSAGE.winningNumber,
+    );
+
     return winningNumbers.split(',').map((number) => Number(number.trim()));
   }
 
   async getBonusNumber(winningNumbers) {
     try {
-      const bonusNumber = await getUserInput(INPUT_MESSAGE.bonusNumber);
+      const bonusNumber = await Console.readLineAsync(
+        INPUT_MESSAGE.bonusNumber,
+      );
       validateBonusNumber(bonusNumber, winningNumbers);
 
       return Number(bonusNumber);
