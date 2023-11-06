@@ -7,8 +7,6 @@ class App {
     const purchaseAmount = await this.getPurchaseAmount();
     const tickets = this.createTickets(purchaseAmount);
 
-    return MissionUtils.Console.print(tickets);
-
     this.printTickets(tickets);
 
     const winningNumbers = await this.getWinningNumbers();
@@ -29,6 +27,7 @@ class App {
 
   async getBonusNumber(winningNumbers) {
     const input = await MissionUtils.Console.readLineAsync(inputPrompts.BONUS_NUMBER);
+    this.validateBonusNumber(winningNumbers, Number(input));
     const bonusNumber = Number(input);
     return bonusNumber;
   }
@@ -62,6 +61,15 @@ class App {
   validateAmount(amount) {
     const remainder = amount % 1000;
     if (remainder) throw new Error(errorMessages.PURCHASE_AMOUNT);
+  }
+
+  validateBonusNumber(winningNumbers, bonusNumber) {
+    const numbers = winningNumbers.getLottoNumbers();
+    const string = bonusNumber.toString();
+    if (Number.isNaN(bonusNumber)) throw new Error(errorMessages.NAN);
+    if (bonusNumber < RANGE_MIN || bonusNumber > RANGE_MAX) throw new Error(errorMessages.RANGE);
+    if (numbers.includes(bonusNumber)) throw new Error(errorMessages.DUPLICATES);
+    if (string.includes('.')) throw new Error(errorMessages.DECIMALS);
   }
 }
 
