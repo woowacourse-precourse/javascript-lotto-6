@@ -1,5 +1,5 @@
-import CustomError from './errors/CustomError.js';
-import { ERROR_MESSAGES } from './constants/messages.js';
+import CustomError from '../errors/CustomError.js';
+import { ERROR_MESSAGES } from '../constants/messages.js';
 
 class Lotto {
   #numbers;
