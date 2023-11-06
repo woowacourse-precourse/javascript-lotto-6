@@ -15,12 +15,12 @@ class User {
   async buyLotto() {
     let input = null;
     while (input === null) {
-      input = await this.getInput();
+      input = await this.#getInput();
     }
     this.money = input;
   }
 
-  async getInput() {
+  async #getInput() {
     try {
       const input = await Console.readLineAsync(MESSAGES.INPUT_LOTTO_PURCHASE);
       this.#validate(input);

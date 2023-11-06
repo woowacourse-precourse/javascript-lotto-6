@@ -44,8 +44,8 @@ function isNumberInRange(input) {
   }
 }
 
-function isElementInArr({ element, arr }) {
-  if (arr.includes(element)) {
+function isElementInArray({ element, array }) {
+  if (array.includes(element)) {
     throw new Error(ERRORS.BONUS_NUMBER_DUPLICATE);
   }
 }
@@ -58,5 +58,5 @@ export {
   hasDuplicate,
   isInteger,
   isNumberInRange,
-  isElementInArr,
+  isElementInArray,
 };

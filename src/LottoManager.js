@@ -34,19 +34,9 @@ class LottoManager {
     });
   }
 
-  async setWinningNumber() {
-    const input = await Console.readLineAsync(MESSAGES.INPUT_WINNING_NUMBERS);
-    this.luckyNumbers.setWinningNumbers(input);
-  }
-
-  async setBonusNumber() {
-    const input = await Console.readLineAsync(MESSAGES.INPUT_BONNUS_NUMBER);
-    this.luckyNumbers.setBonusNumber(input);
-  }
-
   async setWinningNumbersAndBonus() {
-    await this.setWinningNumber();
-    await this.setBonusNumber();
+    await this.luckyNumbers.setWinningNumbers();
+    await this.luckyNumbers.setBonusNumber();
   }
 
   checkTotalResult() {

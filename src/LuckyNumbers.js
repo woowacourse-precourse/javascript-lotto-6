@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+import { MESSAGES } from "./libs/message.js";
 import {
   isArrLengthSix,
   hasDuplicate,
@@ -5,24 +7,38 @@ import {
   isInputEmpty,
   isInputNumeric,
   isInteger,
-  isElementInArr,
+  isElementInArray,
 } from "./libs/validate.js";
 
 class LuckyNumbers {
   #winning;
   #bonus;
 
-  setWinningNumbers(input) {
-    const inputArr = input.split(",").map((element) => element.trim());
-    this.#validateWinning(inputArr);
-    this.#winning = inputArr.map(Number);
+  async setWinningNumbers() {
+    let input = null;
+    while (input === null) {
+      input = await this.#getWinningInput();
+    }
+    this.#winning = input.map(Number);
   }
 
-  #validateWinning(arr) {
-    isArrLengthSix(arr);
-    hasDuplicate(arr);
+  async #getWinningInput() {
+    try {
+      const input = await Console.readLineAsync(MESSAGES.INPUT_WINNING_NUMBERS);
+      const inputArray = input.split(",").map((element) => element.trim());
+      this.#validateWinning(inputArray);
+      return inputArray;
+    } catch (error) {
+      Console.print(error.message);
+      return null;
+    }
+  }
 
-    arr.forEach((element) => {
+  #validateWinning(array) {
+    isArrLengthSix(array);
+    hasDuplicate(array);
+
+    array.forEach((element) => {
       isInputEmpty(element);
       isInputNumeric(element);
       isInteger(element);
@@ -30,9 +46,23 @@ class LuckyNumbers {
     });
   }
 
-  setBonusNumber(input) {
-    this.#validateBonus(input);
-    this.#bonus = Number(input);
+  async setBonusNumber() {
+    let input = null;
+    while (input === null) {
+      input = await this.#getBonusInput();
+    }
+    this.#bonus = input;
+  }
+
+  async #getBonusInput() {
+    try {
+      const input = await Console.readLineAsync(MESSAGES.INPUT_BONNUS_NUMBER);
+      this.#validateBonus(input);
+      return Number(input);
+    } catch (error) {
+      Console.print(error.message);
+      return null;
+    }
   }
 
   #validateBonus(input) {
@@ -40,7 +70,7 @@ class LuckyNumbers {
     isInputNumeric(input);
     isInteger(input);
     isNumberInRange(input);
-    isElementInArr({ element: Number(input), arr: this.#winning });
+    isElementInArray({ element: Number(input), array: this.#winning });
   }
 
   get winning() {
