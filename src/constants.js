@@ -43,6 +43,7 @@ const ERROR = {
   INVALID_ARRAY: `${pattern.prefix} ${NUMBER.SIX}개의 숫자를 쉼표(,)로 구분하여 입력해주세요.`,
   DUPLICATE: `${pattern.prefix} 서로 다른 숫자를 입력해주세요.`,
   RANGE_CHECK: `${pattern.prefix} ${NUMBER.ONE}에서 ${NUMBER.LAST}사이에 숫자를 입력해주세요.`,
+  LENGTH_CHECK: `${pattern.prefix} 로또 번호는 ${NUMBER.SIX}개여야 합니다.`,
 };
 
 export {
