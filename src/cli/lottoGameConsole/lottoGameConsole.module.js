@@ -10,7 +10,7 @@ import {
   bonusNumberValidation,
 } from '../../validations/index.js';
 
-import systemConsole from '../systemConsole.js';
+import systemConsole from '../systemConsole.module.js';
 
 /**
  * @module

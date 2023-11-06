@@ -1,3 +1,3 @@
-import Lotto from './domain/lotto.js';
+import Lotto from './domain/lotto.module.js';
 
 export default Lotto;

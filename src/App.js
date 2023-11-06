@@ -1,4 +1,4 @@
-import lottoGame from './interactions/lottoGame.js';
+import lottoGame from './interactions/lottoGame.module.js';
 
 class App {
   #lottoGame = lottoGame;
