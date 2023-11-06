@@ -1,12 +1,13 @@
-import { ERROR_MESSAGE } from "./Constant.js";
-
+const { ERROR_MESSAGE } = require("./Constant.js");
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { Lotto } = require("./Lotto.js");
+const validation = require("./Validation.js");
 
 class LottoGame {
   constructor() {
     this.lottoCount = null;
     this.lottoList = [];
+    this.winningNumList = null;
   }
 
   setLotteCount(money) {
@@ -38,6 +39,16 @@ class LottoGame {
     this.lottoList.forEach((lotto) => {
       lotto.printNumberList();
     });
+  }
+
+  setWinningNums(nums) {
+    numbers = numbers.split(",").map((item) => Number(item));
+    this.validateWinningNums(nums);
+    this.winningNumList = numbers;
+  }
+
+  validateWinningNums(nums) {
+    validation.checkNumberList(nums);
   }
 }
 

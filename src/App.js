@@ -21,7 +21,9 @@ class App {
   }
 
   inputWinningNums() {
-    Console.readLineAsync(GAME_MESSAGE.WINNING_NUM, (winningNums) => {});
+    Console.readLineAsync(GAME_MESSAGE.WINNING_NUM, (winningNums) => {
+      this.game.setWinningNums(winningNums);
+    });
   }
 }
 
