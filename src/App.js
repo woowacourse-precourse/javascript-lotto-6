@@ -64,11 +64,11 @@ class App {
 
     updateResults(matchCount, hasBonus) {
         if (matchCount === MATCH.FIVE && hasBonus) {
-            this.results[MATCH.FIVE_BONUS]++;
+            this.results[MATCH.FIVE_BONUS] += 1;
             return;
         }
         if (this.results.hasOwnProperty(matchCount)) {
-            this.results[matchCount]++;
+            this.results[matchCount] += 1;
         }
     }
 
