@@ -1,6 +1,6 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import { checkValue } from './libs/checkValue';
-import { LOTTO_NUMBER } from './libs/constants';
+import { LOTTO_NUMBER, PLACE } from './libs/constants';
 import { throwError } from './libs/throwError';
 
 class Lotto {
@@ -31,6 +31,26 @@ class Lotto {
   printNumbers() {
     this.ascendingNumbers();
     Console.print(`[${this.#numbers.join(', ')}]`);
+  }
+
+  //등수 계산
+  calculateRank(winningNumbers, bonusNumber) {
+    let count = 0;
+
+    this.#numbers.forEach(number => {
+      if (winningNumbers.include(number)) {
+        count += 1;
+      }
+      if (count === 6) {
+        return PLACE.FIRST;
+      }
+
+      if (count === 5 && this.#numbers.include(bonusNumber)) {
+        return PLACE.SECOND;
+      }
+
+      return 8 - count;
+    });
   }
 }
 
