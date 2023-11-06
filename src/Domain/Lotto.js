@@ -12,14 +12,24 @@ class Lotto {
   }
 
   #validate(numbers) {
+    this.#checkNumberLimit(numbers);
+    this.#checkNumberRange(numbers);
+    this.#checkDuplicateNumber(numbers);
+  }
+
+  #checkNumberLimit(numbers) {
     if (numbers.length !== LOTTO.number.limit) {
       throw new AppError(ERROR.message.invalidNumberLimit);
     }
+  }
 
+  #checkNumberRange(numbers) {
     if (!numbers.every(isValidNumber)) {
       throw new AppError(ERROR.message.invalidNumberRange);
     }
+  }
 
+  #checkDuplicateNumber(numbers) {
     if (new Set(numbers).size !== LOTTO.number.limit) {
       throw new AppError(ERROR.message.duplicateNumber);
     }
