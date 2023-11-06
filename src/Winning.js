@@ -10,8 +10,8 @@ class Winning {
   #bonus;
 
   constructor(winning, bonus) {
-    this.#winning = winning;
     this.#validateWinning(winning);
+    this.#winning = winning.map(Number);
     this.#bonus = bonus;
   }
 

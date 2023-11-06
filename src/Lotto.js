@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { checkInputArrayDuplication } from "./Validation";
 
 class Lotto {
   #numbers;
@@ -16,11 +17,12 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    checkInputArrayDuplication(numbers);
   }
 
   // TODO: 추가 기능 구현
   print() {
-    MissionUtils.Console.print(`[${this.#numbers.join(", ")}]`);
+    return `[${this.#numbers.join(", ")}]`;
   }
 
   /**
@@ -33,10 +35,9 @@ class Lotto {
     const bonusNumber = winning.getBonus();
 
     let count = 0;
-    this.#numbers.forEach((number, index) => {
-      if (number === winningNumbers[index]) count++;
+    this.#numbers.map(Number).forEach((number) => {
+      if (winningNumbers.includes(number)) count++;
     });
-
     if (count === 3) return 5;
     if (count === 4) return 4;
     if (count === 5 && winningNumbers.includes(bonusNumber)) return 3;

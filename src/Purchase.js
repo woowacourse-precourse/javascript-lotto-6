@@ -27,15 +27,17 @@ class Purchase {
 
   buyLottos(numberOfLotto) {
     const tmpLottos = [];
-    MissionUtils.Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
+    let str = "";
+    str += `\n${numberOfLotto}개를 구매했습니다.\n`;
     for (let i = 0; i < numberOfLotto; i++) {
       const randoms = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       const lotto = new Lotto(randoms);
       tmpLottos.push(lotto);
-      lotto.print();
+      str += `${lotto.print()}\n`;
     }
-    MissionUtils.Console.print("\n");
-    this.#lottos = tmpLottos;
+    str += "\n";
+    MissionUtils.Console.print(str);
+    this.#lottos = tmpLottos.sort((a, b) => a - b);
   }
 
   checkLottos(winning) {
@@ -53,14 +55,8 @@ class Purchase {
       30000000 * result[1] +
       30000000 * result[0];
 
-    MissionUtils.Console.print("\n당첨 통계\n---");
-    MissionUtils.Console.print(`3개 일치 (5,000원) - ${result[4]}개`);
-    MissionUtils.Console.print(`4개 일치 (50,000원) - ${result[3]}개`);
-    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${result[2]}개`);
-    MissionUtils.Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[1]}개`
-    );
-    MissionUtils.Console.print(`6개 일치 (30,000,000원) - ${result[0]}개`);
+    let str = `\n당첨 통계\n---\n3개 일치 (5,000원) - ${result[4]}개\n4개 일치 (50,000원) - ${result[3]}개\n5개 일치 (1,500,000원) - ${result[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[1]}개\n6개 일치 (2,000,000,000원) - ${result[0]}개`;
+    MissionUtils.Console.print(str);
     MissionUtils.Console.print(
       `총 수익률은 ${((profit / this.#purchasePrice) * 100).toFixed(1)}%입니다.`
     );

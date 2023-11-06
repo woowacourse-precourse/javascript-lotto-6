@@ -17,12 +17,18 @@ class App {
    * @returns Purchase 객체
    */
   async getPurchasePrice() {
-    const input = await MissionUtils.Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
-    const purchase = new Purchase(input);
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync(
+          "구입금액을 입력해 주세요.\n"
+        );
+        const purchase = new Purchase(input);
 
-    return purchase;
+        return purchase;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   /**
@@ -34,12 +40,18 @@ class App {
    * @returns Winning 객체 
    */
   async getWinning() {
-    const input = await MissionUtils.Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
-    );
-    const winning = new Winning(input.split(","));
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync(
+          "당첨 번호를 입력해 주세요.\n"
+        );
+        const winning = new Winning(input.split(","));
 
-    return winning;
+        return winning;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   /**
@@ -49,24 +61,30 @@ class App {
    * - 보너스 번호는 1~45사이의 숫자여야 한다.
    */
   async getBonus(winning) {
-    const input = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
-    );
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync(
+          "보너스 번호를 입력해 주세요.\n"
+        );
 
-    //예외처리
-    //1. 보너스 번호는 숫자여야 한다.
-    checkInputTypeIsNumber(input);
-    //2. 보너스 번호는 1개여야 한다.
-    checkInputArrayLength1(input.split(","));
-    //3. 보너스 번호는 당첨번호와 중복되지 않아야 한다.
-    const tmpNumbers = winning.getWinning();
-    checkInputArrayDuplication([...tmpNumbers, input]);
-    //4. 보너스 번호는 1~45사이의 숫자여야 한다.
-    checkInputArrayRange(new Array(input).map(Number));
+        //예외처리
+        //1. 보너스 번호는 숫자여야 한다.
+        checkInputTypeIsNumber(input);
+        //2. 보너스 번호는 1개여야 한다.
+        checkInputArrayLength1(input.split(","));
+        //3. 보너스 번호는 당첨번호와 중복되지 않아야 한다.
+        const tmpNumbers = winning.getWinning();
+        checkInputArrayDuplication([...tmpNumbers, input]);
+        //4. 보너스 번호는 1~45사이의 숫자여야 한다.
+        checkInputArrayRange(new Array(parseInt(input)));
 
-    winning.setBonus(input);
+        winning.setBonus(parseInt(input));
 
-    return winning;
+        return winning;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   //
