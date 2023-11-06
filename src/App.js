@@ -36,7 +36,11 @@ class App {
         pickNumbers.push(number);
       }
     }
-    return new Lotto(pickNumbers);
+    return new Lotto(pickNumbers.sort((a, b) => a - b));
+  }
+
+  getPickedLotto(lottoCount){
+
   }
 
 
