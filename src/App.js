@@ -1,4 +1,5 @@
 import Lotto from './Lotto.js';
+import Statistics from './Statistics.js';
 
 class App {
   async play() {
@@ -9,7 +10,7 @@ class App {
       [1, 2, 6, 7, 8, 9],
     ];
     const result = lotto.printResult(user, 7);
-    console.log(result);
+    Statistics.printRateOfReturn(8000, result);
   }
 }
 
