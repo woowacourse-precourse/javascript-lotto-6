@@ -26,6 +26,18 @@ class LottoMachine {
         return purchaseAmount / 1000;
     }
 
+    generateLottoTickets(lottoCount) {
+        const lottoTickets = [];
+        for (let i = 0; i < lottoCount; i++) {
+            lottoTickets.push(this.generateLottoTicket());
+        }
+        return lottoTickets;
+    }
+
+    generateLottoTicket() {
+
+    }
+
 
 }
 
