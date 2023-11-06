@@ -1,19 +1,12 @@
 import { LOTTO_RULE, MESSAGES } from "../../src/constants";
 import { getLogSpy, mockQuestions } from "../../src/utils";
-import { LottoDrawMachine } from "../../src/domain/";
+import { Lotto, LottoDrawMachine } from "../../src/domain/";
 import { CustomError } from "../../src/exception";
 
 const { LENGTH, RANGE } = LOTTO_RULE;
 const { MIN, MAX } = RANGE;
 
 describe("LottoDrawMachine 유닛 테스트", () => {
-  const winningNumber = [1, 2, 3, 4, 5, 6];
-  const bonusNumber = 7;
-
-  beforeEach(() => {
-    const lottoDrawMachine = new LottoDrawMachine();
-  });
-
   test("로또 인스턴스 생성", () => {
     const lotto = new LottoDrawMachine();
     expect(lotto).toBeInstanceOf(LottoDrawMachine);
@@ -103,6 +96,54 @@ describe("LottoDrawMachine 유닛 테스트", () => {
           new CustomError(errorMessage)
         );
       }
+    );
+  });
+
+  test("당첨 통계 출력 테스트", async () => {
+    // given
+    const {
+      PREFIX,
+      1: one,
+      2: two,
+      3: three,
+      4: four,
+      5: five,
+      SUFFIX,
+    } = MESSAGES.WINNING_STATISTICS;
+    const lottos = [
+      [11, 23, 31, 14, 35, 46],
+      [14, 25, 34, 43, 18, 49],
+      [1, 2, 3, 8, 9, 10],
+    ];
+    const winningNumber = "1,2,3,4,5,6";
+    const bonusNumber = "7";
+
+    const logSpy = getLogSpy();
+    const lottoDrawMachine = new LottoDrawMachine();
+    mockQuestions([winningNumber, bonusNumber]);
+
+    // when
+    await lottoDrawMachine.promptWinningNumber(
+      MESSAGES.WINNING_NUMBER.PLACE_HOLDER
+    );
+
+    await lottoDrawMachine.promptBonusNumber(
+      MESSAGES.BONUS_NUMBER.PLACE_HOLDER
+    );
+
+    lottoDrawMachine.printResult(lottos);
+
+    // then
+    await expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        PREFIX,
+        five(1),
+        four(0),
+        three(0),
+        two(0),
+        one(0),
+        SUFFIX(66.6)
+      )
     );
   });
 });
