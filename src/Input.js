@@ -13,7 +13,7 @@ class Input {
 
   inputMoney() {
     if (!InputValidator.validMoney(this.#money)) {
-      throw new Error("금액 오류"); // 다시 입력받아야 함
+      throw new Error("[ERROR] 금액 오류"); // 다시 입력받아야 함
     } else {
       return Math.floor(this.#money / 1000);
     }
@@ -21,7 +21,7 @@ class Input {
 
   inputWin() {
     if (!InputValidator.validWinningNumber(this.#money)) {
-      throw new Error("번호 오류");
+      throw new Error("[ERROR]번호 오류");
     } else {
       this.#winningLotto = this.#money.split(",");
       this.#winningLotto = this.#winningLotto.map(Number);
@@ -32,7 +32,7 @@ class Input {
 
   inputBonus() {
     if (!InputValidator.validBonusNumber(this.#money)) {
-      throw new Error("번호 오류");
+      throw new Error("[ERROR]번호 오류");
     } else {
       return this.#money;
     }

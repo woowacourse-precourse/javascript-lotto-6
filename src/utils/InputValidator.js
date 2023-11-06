@@ -2,6 +2,7 @@ import { Console, Random } from "@woowacourse/mission-utils";
 
 export const InputValidator = {
   validMoney(money) {
+    if (!money) return false;
     if (money % 1000 !== 0) return false;
     if (isNaN(money)) return false;
     return true;

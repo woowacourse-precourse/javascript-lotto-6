@@ -4,6 +4,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#validate2(numbers);
+    this.#validate3(numbers);
     this.#numbers = numbers;
   }
 
@@ -22,6 +23,12 @@ class Lotto {
     }
   }
   //중복 체크도 해야 함
+  #validate3(numbers) {
+    numbers = Array.from(new Set(numbers));
+    if (numbers.length !== 6) {
+      throw new Error("[ERROR] 중복된 번호가 있습니다.");
+    }
+  }
 }
 
 export default Lotto;

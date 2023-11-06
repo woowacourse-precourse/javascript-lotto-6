@@ -4,6 +4,7 @@ import { InputValidator } from "./utils/InputValidator.js";
 import Output from "./Output.js";
 import Input from "./Input.js";
 import Compare from "./Compare.js";
+import { PrintLotto } from "./Constant.js";
 
 class App {
   #inputMoney = 0;
@@ -14,45 +15,66 @@ class App {
   #compareResult = [];
 
   async play() {
-    this.inputAmount();
+    await this.inputAmount();
   }
 
   async inputAmount() {
     Console.print("구입금액을 입력해 주세요.");
     this.#inputMoney = await Console.readLineAsync("");
 
-    const input = new Input(this.#inputMoney);
+    try {
+      const input = new Input(this.#inputMoney);
+      this.#trialNum = input.inputMoney();
+      Console.print(`${this.#trialNum}개를 구매했습니다.`);
+      this.RandomNums();
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputAmount();
+      return;
+    }
+  }
 
-    this.#trialNum = input.inputMoney();
-
-    this.RandomNums();
+  async RandomNums() {
+    for (let i = 0; i < this.#trialNum; i++) {
+      const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+      this.#totalLotto.push(lotto);
+    }
+    for (let lotto of this.#totalLotto) {
+      const sortedLotto = lotto.sort((a, b) => a - b);
+      Console.print(`[${sortedLotto.join(", ")}]`);
+    }
+    this.inputWinning();
   }
 
   async inputWinning() {
     Console.print("당첨 번호를 입력해 주세요.");
     const input = await Console.readLineAsync("");
 
-    const inputWinnNum = new Input(input);
+    try {
+      const inputWinnNum = new Input(input);
+      this.#winningLotto = inputWinnNum.inputWin();
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputWinning();
+      return;
+    }
+    this.inputBonusNum();
+  }
 
-    this.#winningLotto = inputWinnNum.inputWin();
-
+  async inputBonusNum() {
     Console.print("보너스 번호를 입력해 주세요.");
     const bonus = await Console.readLineAsync("");
 
-    const inputBonus = new Input(bonus);
-    this.#bonus = inputBonus.inputBonus();
+    try {
+      const inputBonus = new Input(bonus);
+      this.#bonus = inputBonus.inputBonus();
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputBonusNum();
+      return;
+    }
 
     this.compare();
-  }
-
-  RandomNums() {
-    for (let i = 0; i < this.#trialNum; i++) {
-      let lotto = new Output();
-      const newLotto = lotto.createLotto();
-      Console.print(newLotto);
-      this.#totalLotto.push(newLotto);
-    }
-    this.inputWinning();
   }
 
   compare() {
