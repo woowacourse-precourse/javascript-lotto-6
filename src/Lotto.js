@@ -1,7 +1,7 @@
-import { Console } from "@woowacourse/mission-utils";
-import { Validation } from "./Validation.js";
-import { LOTTO_RULE, GAME_MESSAGES } from "./Constants.js";
-import { CustomError } from "./CustomError.js";
+import { Console } from '@woowacourse/mission-utils';
+import { Validation } from './Validation.js';
+import { LOTTO_RULE, INPUT_MESSAGES, ERROR_MESSAGES } from './Constants.js';
+import { CustomError } from './CustomError.js';
 
 const LENGTH = LOTTO_RULE.LENGTH;
 const { MIN, MAX } = LOTTO_RULE.RANGE;
@@ -16,40 +16,36 @@ class Lotto {
 
   #validate(numbers) {
     if (!Validation.isLength(numbers, LENGTH)) {
-      throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_LENGTH(LENGTH));
+      throw new CustomError(ERROR_MESSAGES.LOTTO.NO_LENGTH(LENGTH));
     }
 
     if (!Validation.isUnique(numbers)) {
-      throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_UNIQUE);
+      throw new CustomError(ERROR_MESSAGES.LOTTO.NO_UNIQUE);
     }
 
     numbers.forEach((number) => {
       if (!Validation.isNumber(number)) {
-        throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_NUMBER);
+        throw new CustomError(ERROR_MESSAGES.LOTTO.NO_NUMBER);
       }
 
       if (!Validation.isPositive(number)) {
         //console.log(number);
-        throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_POSITIVE);
+        throw new CustomError(ERROR_MESSAGES.LOTTO.NO_POSITIVE);
       }
 
       if (!Validation.isOnRange(number, MIN, MAX)) {
         //console.log(number);
-        throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_RANGE(MIN, MAX));
+        throw new CustomError(ERROR_MESSAGES.LOTTO.NO_RANGE(MIN, MAX));
       }
 
       if (!Validation.isInteger(number)) {
-        throw new CustomError(GAME_MESSAGES.ERROR.LOTTO.NO_INTEGER);
+        throw new CustomError(ERROR_MESSAGES.LOTTO.NO_INTEGER);
       }
     });
   }
 
   getNumbers() {
     return this.#numbers;
-  }
-
-  printNumbers() {
-    return Console.print(`[${this.#numbers.join(", ")}]`);
   }
 }
 

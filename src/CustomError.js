@@ -1,7 +1,7 @@
-import { GAME_MESSAGES } from "./Constants.js";
+import { ERROR_MESSAGES } from './Constants.js';
 
 export class CustomError extends Error {
-  static #prefix = GAME_MESSAGES.ERROR.PREFIX;
+  static #prefix = ERROR_MESSAGES.PREFIX;
 
   constructor(errorMessage) {
     super(`${CustomError.#prefix} ${errorMessage}`);
