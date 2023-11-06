@@ -10,7 +10,7 @@ class Input {
 
       if (isNaN(purchaseAmount) || purchaseAmount % 1000 !== 0) {
         Console.print("[ERROR] 구입금액은 1,000원 단위로 입력해야 합니다.");
-        return;
+        process.exit(1);
       } else {
         const count = purchaseAmount / 1000;
         const message = `${count}개를 구매했습니다.`;
@@ -22,7 +22,8 @@ class Input {
         }
       }
     } catch (error) {
-      Console.print(`오류: ${error.message}`);
+      Console.print(`${error.message}`);
+      process.exit(1);
     }
   }
 
@@ -36,7 +37,8 @@ class Input {
         .map((number) => parseInt(number, 10));
       const lotto = new Lotto(lottoNumbers);
     } catch (error) {
-      Console.print(`오류: ${error.message}`);
+      Console.print(`${error.message}`);
+      process.exit(1);
     }
   }
 
@@ -48,7 +50,8 @@ class Input {
       const bonusNumber = parseInt(numberString, 10);
       Lotto.validateBonusNumber([bonusNumber]); // 배열로 감싸야 함
     } catch (error) {
-      Console.print(`오류: ${error.message}`);
+      Console.print(`${error.message}`);
+      process.exit(1);
     }
   }
 }
