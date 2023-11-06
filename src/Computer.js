@@ -1,16 +1,23 @@
-import { Random } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import { MIN_PURCHASE_AMOUNT } from "./constant.js";
 
 class Computer {
-  makeLottoList(purchaseAmount){
-    let purchaseCount = 0;
-    let lottoList = [];
+  printPurchaseCount(purchaseAmount){
+    this.purchaseCount = Math.floor(purchaseAmount / MIN_PURCHASE_AMOUNT);
+    const message = String(this.purchaseCount).concat("개를 구매했습니다.");
+    Console.print(message);
+  }
 
-    while (purchaseCount < Math.floor(purchaseAmount / MIN_PURCHASE_AMOUNT)) {
+  makeLottoList(){
+    let currentPurchaseCount = 0;
+    let lottoList = [];
+    
+    while (currentPurchaseCount < this.purchaseCount) {
       lottoList.push(Computer.buyLotto());
-      purchaseCount += 1
+      currentPurchaseCount += 1;
     }
+    
     return lottoList;
   }
 
