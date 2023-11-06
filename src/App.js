@@ -10,17 +10,28 @@ class App {
   #winningRate;
 
   async buyLotto() {
-    const money = await InputView.getUserPurchaseAmout();
-    this.#lottos = Lotto.buyLottoTickets(money);
-    OutputView.printPurchaseAmout(this.#lottos.length);
-    this.#lottos.forEach((lotto) => MissionUtils.Console.print(lotto.toPrintableString()));
+    try {
+      const money = await InputView.getUserPurchaseAmout();
+
+      this.#lottos = Lotto.buyLottoTickets(money);
+      OutputView.printPurchaseAmout(this.#lottos.length);
+      this.#lottos.forEach((lotto) => MissionUtils.Console.print(lotto.toPrintableString()));
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.buyLotto();
+    }
   }
 
   async getWinningNumber() {
-    const winningNumbers = await InputView.getWinningNumbers();
-    const bonusNumber = await InputView.getBonusNumbers();
-    const lotto = Lotto.toArray(winningNumbers);
-    this.#winningRate = new WinningRate(lotto, bonusNumber);
+    try {
+      const winningNumbers = await InputView.getWinningNumbers();
+      const bonusNumber = await InputView.getBonusNumbers();
+      const lotto = Lotto.toArray(winningNumbers);
+      this.#winningRate = new WinningRate(lotto, bonusNumber);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.getWinningNumber();
+    }
   }
 
   result() {
@@ -32,9 +43,13 @@ class App {
   }
 
   async play() {
-    await this.buyLotto();
-    await this.getWinningNumber();
-    this.result();
+    try {
+      await this.buyLotto();
+      await this.getWinningNumber();
+      this.result();
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
   }
 }
 
