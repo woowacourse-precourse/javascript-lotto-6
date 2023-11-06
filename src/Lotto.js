@@ -26,6 +26,12 @@ class Lotto {
   ascendingNumbers() {
     this.#numbers.sort((a, b) => a - b);
   }
+
+  //[8, 21, 23, 41, 42, 43] 형식으로 출력
+  printNumbers() {
+    this.ascendingNumbers();
+    Console.print(`[${this.#numbers.join(', ')}]`);
+  }
 }
 
 export default Lotto;
