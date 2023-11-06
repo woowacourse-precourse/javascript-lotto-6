@@ -39,4 +39,73 @@ describe("App 클래스 테스트", () => {
       errorMessages.ERROR_INPUT_DIVIDED_BY_1000
     );
   });
+
+  /**  /**2. 당첨번호를 입력받는다.
+  - 당첨번호는 숫자여야 한다.
+  - 당첨번호는 6개여야 한다.
+  - 당첨번호는 중복되지 않아야 한다.
+- 각 당첨번호는 1~45사이의 숫자여야 한다. */
+  test("당첨금액은 숫자여야 한다.", () => {
+    //given
+    const app = new App();
+
+    //when
+    const mockReadLineAsync = jest.fn().mockResolvedValue("당,1,2,3,4,5");
+    jest
+      .spyOn(MissionUtils.Console, "readLineAsync")
+      .mockImplementation(mockReadLineAsync);
+
+    //then
+    expect(app.getWinning()).rejects.toThrowError(
+      "[ERROR] 당첨번호는 숫자여야 합니다."
+    );
+  });
+
+  test("당첨금액은 6개여야 한다.", () => {
+    //given
+    const app = new App();
+
+    //when
+    const mockReadLineAsync = jest.fn().mockResolvedValue("1,2,3,4,5");
+    jest
+      .spyOn(MissionUtils.Console, "readLineAsync")
+      .mockImplementation(mockReadLineAsync);
+
+    //then
+    expect(app.getWinning()).rejects.toThrowError(
+      "[ERROR] 당첨번호는 6개여야 합니다."
+    );
+  });
+
+  test("당첨번호는 중복되지 않아야 한다.", () => {
+    //given
+    const app = new App();
+
+    //when
+    const mockReadLineAsync = jest.fn().mockResolvedValue("1,2,3,4,5,5");
+    jest
+      .spyOn(MissionUtils.Console, "readLineAsync")
+      .mockImplementation(mockReadLineAsync);
+
+    //then
+    expect(app.getWinning()).rejects.toThrowError(
+      "[ERROR] 당첨번호는 중복되지 않아야 합니다."
+    );
+  });
+
+  test("각 당첨번호는 1~45사이의 숫자여야 한다.", () => {
+    //given
+    const app = new App();
+
+    //when
+    const mockReadLineAsync = jest.fn().mockResolvedValue("1,2,3,4,5,55");
+    jest
+      .spyOn(MissionUtils.Console, "readLineAsync")
+      .mockImplementation(mockReadLineAsync);
+
+    //then
+    expect(app.getWinning()).rejects.toThrowError(
+      "[ERROR] 각 당첨번호는 1~45사이의 숫자여야 합니다."
+    );
+  });
 });
