@@ -55,7 +55,8 @@ class App {
 
     // const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
     // let winningNumsList;
-    const winningNumsList = await this.getWinningNumbers();
+    const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+    const winningNumsList = await this.getWinningNumbers(numRangePattern);
 
     // while (1) {
     //   try {
@@ -85,22 +86,23 @@ class App {
     //   }
     // }
 
-    let bonus;
-    while (1) {
-      try {
-        const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
-        if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-        }
-        if (!numRangePattern.test(inputBonus)) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-        }
-        bonus = Number(inputBonus);
-        break
-      } catch (error) {
-        Console.print(ERROR_MESSAGE.INPUT_ERROR)
-      }
-    }
+    const bonus = await this.getBonus(winningNumsList, numRangePattern);
+    // let bonus;
+    // while (1) {
+    //   try {
+    //     const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+    //     if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
+    //       throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+    //     }
+    //     if (!numRangePattern.test(inputBonus)) {
+    //       throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+    //     }
+    //     bonus = Number(inputBonus);
+    //     break
+    //   } catch (error) {
+    //     Console.print(ERROR_MESSAGE.INPUT_ERROR)
+    //   }
+    // }
 
 
     // 당첨 확인
@@ -187,8 +189,7 @@ class App {
     return userRandomListNums;
   };
 
-  async getWinningNumbers() {
-    const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+  async getWinningNumbers(numRangePattern) {
     let winningNumsList;
 
     while (1) {
@@ -222,6 +223,24 @@ class App {
     }
   };
 
-  
+  async getBonus(winningNumsList, numRangePattern) {
+    while (1) {
+      try {
+        const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+        console.log(winningNumsList)
+        if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+        }
+        if (!numRangePattern.test(inputBonus)) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+        }
+        return Number(inputBonus);
+      } catch (error) {
+        Console.print(ERROR_MESSAGE.INPUT_ERROR)
+      }
+    }
+  };
+
+
 }
 export default App
