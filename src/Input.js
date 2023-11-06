@@ -1,13 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Input {
-  static async readMoneyBuyingLotto() {
+  async readMoneyBuyingLotto() {
     const INPUT = await MissionUtils.Console.readLineAsync();
     this.validLottoMoney(INPUT);
     return INPUT;
   }
 
-  static validLottoMoney(input) {
+  validLottoMoney(input) {
     const INPUT_NUMBER = Number(input);
     if (Number.isNaN(INPUT_NUMBER))
       throw new Error("[ERROR] 숫자만 입력해주세요.");
@@ -16,14 +16,14 @@ class Input {
       throw new Error("[ERROR] 1,000원 단위로 입력해주세요.");
   }
 
-  static async readLottoNumbers() {
+  async readLottoNumbers() {
     const INPUT = await MissionUtils.Console.readLineAsync();
     const NUMBERS = INPUT.split(",").map(Number);
     this.validLottoNumbers(NUMBERS);
     return INPUT;
   }
 
-  static validLottoNumbers(numbers) {
+  validLottoNumbers(numbers) {
     if (numbers.length !== 6)
       throw new Error("[ERROR] 숫자는 6개를 입력해주세요.");
     if (new Set(numbers).size !== numbers.length)

@@ -8,27 +8,36 @@ const mockQuestions = (input) => {
   );
 };
 
+// eslint-disable-next-line
 describe("로또 구입 금액 입력 테스트", () => {
+  let inputClass;
+  beforeEach(() => {
+    inputClass = new Input();
+  });
   const PASS_CASES = ["1000", "3000", "11000", "222000"];
   test.each(PASS_CASES)("로또 구입 입력 성공", async (input) => {
     mockQuestions(input);
-    const answer = await Input.readMoneyBuyingLotto();
+    const answer = await inputClass.readMoneyBuyingLotto();
     expect(answer).toEqual(input);
   });
 
   const FAIL_CASES = ["1000j", "100", "1230", "q98 re", "1 000"];
   test.each(FAIL_CASES)("로또 구입 입력 실패", async (input) => {
     mockQuestions(input);
-    await expect(Input.readMoneyBuyingLotto()).rejects.toThrow("[ERROR]");
+    await expect(inputClass.readMoneyBuyingLotto()).rejects.toThrow("[ERROR]");
   });
 });
 
 // eslint-disable-next-line
 describe("당첨 번호 입력 테스트", () => {
+  let inputClass;
+  beforeEach(() => {
+    inputClass = new Input();
+  });
   const PASS_CASES = ["7,11,21,34,42,45", "1,3,9,21,33,34", "4,5,6,7,8,41"];
   test.each(PASS_CASES)("당첨 번호 성공", async (input) => {
     mockQuestions(input);
-    const answer = await Input.readLottoNumbers();
+    const answer = await inputClass.readLottoNumbers();
     expect(answer).toStrictEqual(input);
   });
 
@@ -40,7 +49,7 @@ describe("당첨 번호 입력 테스트", () => {
   ];
   test.each(FAIL_CASES)("당첨 번호 실패", async (input) => {
     mockQuestions(input);
-    await expect(Input.readLottoNumbers()).rejects.toThrow("[ERROR]");
+    await expect(inputClass.readLottoNumbers()).rejects.toThrow("[ERROR]");
   });
 });
 

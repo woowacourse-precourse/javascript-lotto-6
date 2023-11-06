@@ -1,8 +1,12 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Input from "./Input";
 import Lotto from "./Lotto";
 
 class App {
-  async play() {}
+  async play() {
+    const userInput = new Input();
+    userInput.read;
+  }
 
   static getRandomSixNumbers() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
