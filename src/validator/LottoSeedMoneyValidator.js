@@ -3,7 +3,7 @@ import { LOTTO_PRICE } from '../constants/LottoOption.js';
 import ValidationError from '../error/ValidationError.js';
 import validateCommon from './CommonValidator.js';
 
-const checkValidChracter = (input) => {
+const checkValidCharacter = (input) => {
   if (Number.isNaN(Number(input))) {
     throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidCharacter);
   }
@@ -29,7 +29,7 @@ const checkValidInteger = (input) => {
 
 const validateLottoSeedMoney = (seedMoney) => {
   validateCommon(seedMoney);
-  checkValidChracter(seedMoney);
+  checkValidCharacter(seedMoney);
   checkValidSeedMoney(seedMoney);
   checkValidNumber(seedMoney);
   checkValidInteger(seedMoney);
