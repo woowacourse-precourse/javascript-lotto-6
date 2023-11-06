@@ -13,6 +13,10 @@ class OutputView {
   printLottoResult(matchLottoCount) {
     this.print(formatGamePrizes(matchLottoCount));
   }
+
+  printTotalProfit(profit = '0.0%') {
+    this.print(`총 수익률은 ${profit}입니다.`);
+  }
 }
 
 export default OutputView;
