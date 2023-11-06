@@ -1,5 +1,6 @@
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
+import { LOTTO } from "../utils/Constant.js";
 import { validatePriceInput, validateWinLottoInput } from "../utils/vaildateInput.js";
 
 class Model {
@@ -9,11 +10,11 @@ class Model {
   constructor() {
     this.#lotties = [];
     this.#prizeCategories = {
-      equal3: { count: 0, price: "5,000" },
-      equal4: { count: 0, price: "50,000" },
-      equal5: { count: 0, price: "1,500,000" },
-      equal5WithBonus: { count: 0, price: "30,000,000" },
-      equal6: { count: 0, price: "2,000,000,000" },
+      equal3: { count: 0, price: LOTTO.fifthPrice },
+      equal4: { count: 0, price: LOTTO.fourthPrice },
+      equal5: { count: 0, price: LOTTO.thirdPrice },
+      equal5WithBonus: { count: 0, price: LOTTO.secondPrice },
+      equal6: { count: 0, price: LOTTO.firstPrice },
     };
   }
 
@@ -29,7 +30,7 @@ class Model {
     const price = validatePriceInput(priceInput);
 
     while (this.#lotties.length < price) {
-      const lottoRandomNum = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+      const lottoRandomNum = Random.pickUniqueNumbersInRange(LOTTO.startNum, LOTTO.endNum, LOTTO.length).sort((a, b) => a - b);
       const lotto = new Lotto(lottoRandomNum);
       this.#lotties.push(lotto);
     }
@@ -44,7 +45,7 @@ class Model {
       equalToWinLotties.push(equalToWinLotto);
     });
 
-    equalToWinLotties = equalToWinLotties.filter((winLotto) => winLotto.length > 2);
+    equalToWinLotties = equalToWinLotties.filter((winLotto) => winLotto.length >= LOTTO.minimumWinLength);
     this.makePrizeCategory(equalToWinLotties, winBonusInput);
   }
 
@@ -60,12 +61,12 @@ class Model {
 
   makePrizeCategory(equalToWinLotties, winBonusInput) {
     equalToWinLotties.forEach((winLotto) => {
-      this.#prizeCategories[`equal${winLotto.length === 6 && winLotto.includes(Number(winBonusInput)) ? "5WithBonus" : winLotto.length}`].count += 1;
+      this.#prizeCategories[`equal${winLotto.length === LOTTO.length && winLotto.includes(Number(winBonusInput)) ? "5WithBonus" : winLotto.length}`].count += 1;
     });
   }
 
   calculateProfit() {
-    const purchasePrice = this.#lotties.length * 1000;
+    const purchasePrice = this.#lotties.length * LOTTO.price;
     let total = 0;
 
     for (const prize of Object.values(this.#prizeCategories)) {

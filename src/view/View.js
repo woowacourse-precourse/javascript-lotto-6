@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { LOTTO } from "../utils/Constant.js";
 
 class View {
   readLine(message) {
@@ -16,8 +17,9 @@ class View {
       Console.print(`[${lotto.lottoNumbers.join(", ")}]`);
     });
   }
+
   printLottoPrize(prizeCategories) {
-    Console.print("\n당첨 통계\n---");
+    Console.print(LOTTO.prizeStatic);
 
     for (const [key, prize] of Object.entries(prizeCategories)) {
       const prizeGrade = key.replace(/[^0-9]/g, "");

@@ -1,3 +1,5 @@
+import { LOTTO } from "./Constant.js";
+
 const validation = {
   inputType: (input) => {
     if (isNaN(input)) {
@@ -13,7 +15,7 @@ const validation = {
     }
   },
   lottoNumberRange: (input) => {
-    if (Number(input) < 1 || Number(input) > 45) {
+    if (Number(input) < LOTTO.startNum || Number(input) > LOTTO.endNum) {
       throw new Error("[ERROR] 숫자는 1부터 45 사이 입니다.");
     }
   },
@@ -36,7 +38,7 @@ const validation = {
   },
 
   price: (priceInput) => {
-    if (Number(priceInput) % 1000) {
+    if (Number(priceInput) % LOTTO.price) {
       throw new Error("[ERROR] 로또 가격은 하나당 1000원 입니다.");
     }
   },
@@ -47,7 +49,7 @@ function validatePriceInput(priceInput) {
   validation.priceRange(priceInput);
   validation.price(priceInput);
 
-  const price = Number(priceInput) / 1000;
+  const price = Number(priceInput) / LOTTO.price;
 
   return price;
 }
