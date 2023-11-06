@@ -1,7 +1,7 @@
 import { LOTTO } from "./constants.js";
 
 export const ERROR_MESSAGE = {
-  notDivideBy1000: `[ERROR] 로또 구입 금액은 ${LOTTO.price}원 단위여야 합니다.`,
+  notDivideByLottoPrice: `[ERROR] 로또 구입 금액은 ${LOTTO.price}원 단위여야 합니다.`,
   notNumber: {
     money: "[ERROR] 로또 구입 금액은 숫자여야 합니다.",
     number: "[ERROR] 로또 번호는 숫자여야 합니다."

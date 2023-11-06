@@ -8,7 +8,7 @@ class InputValidator {
   // 구입 금액에 대해 검증한다.
   static validateMoney(value) {
     if (!this.isNumber(value, 'money')) return false;
-    if (!this.isDivideByUnit(value)) return false;
+    if (!this.isDivideByLottoPrice(value)) return false;
 
     return Number(value);
   }
@@ -51,10 +51,10 @@ class InputValidator {
   }
 
   // 1,000원 단위로 나누어 떨어지지 않는 경우 예외 처리한다.
-  static isDivideByUnit(value) {
-    const isDivideByUnit = value % LOTTO.price === 0;
-    if (!isDivideByUnit) {
-      Console.print(ERROR_MESSAGE.notDivideBy1000);
+  static isDivideByLottoPrice(value) {
+    const isDivideByLottoPrice = value % LOTTO.price === 0;
+    if (!isDivideByLottoPrice) {
+      Console.print(ERROR_MESSAGE.notDivideByLottoPrice);
       return false;
     }
     return true;
