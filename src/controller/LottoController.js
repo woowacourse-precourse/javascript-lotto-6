@@ -8,6 +8,10 @@ class LottoController {
   #user;
   #winningLotto;
 
+  constructor() {
+    this.#winningLotto = new WinningLotto();
+  }
+
   async run() {
     await this.#setUser();
     this.#user.buyLottos();
@@ -17,7 +21,7 @@ class LottoController {
     await this.#setWinningLottoNumbers();
     await this.#setWinningLottoBonus();
     this.#user.setPrizes(this.#winningLotto);
-
+    
     this.#getResult();
   }
 
@@ -44,7 +48,7 @@ class LottoController {
     while (true) {
       const numbers = await View.getInputByQuestion(MESSAGES.inputWinningNumbers);
       try {
-        this.#winningLotto = new WinningLotto(numbers);
+        this.#winningLotto.setNumbers(numbers);
         break;
       } catch (e) {
         View.printOutput(e.message);
@@ -67,7 +71,7 @@ class LottoController {
   #getResult() {
     const prizes = this.#user.getPrizes();
     const returnRate = this.#user.getReturnRate();
-
+    
     View.printOutput(MESSAGES.outputResultTitle);
     View.printOutput(`${MESSAGES.outputFifthPrize}${prizes['5']}${MESSAGES.suffixAmount}`);
     View.printOutput(`${MESSAGES.outputFourthPrize}${prizes['4']}${MESSAGES.suffixAmount}`);

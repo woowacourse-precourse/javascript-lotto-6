@@ -1,19 +1,42 @@
 import REGEXP from '../constants/RegExp.js';
 import SETTINGS from '../constants/Settings.js';
-import Lotto from './Lotto.js';
 import Utils from '../utils/Utils.js';
 import {
+  LottoRangeError,
+  LottoTypeError,
+  LottoLengthError,
+  LottoDuplicatedError,
   BonusTypeError,
   BonusRangeError,
   BonusIncludedError
 } from '../error/CustomErrors.js';
 
-class WinningLotto extends Lotto {
+class WinningLotto {
+  #numbers;
   #bonus;
 
-  constructor(numbers) {
-    const numbersArray = Utils.stringToNumberArray(numbers);
-    super(numbersArray);
+  setNumbers(numbers) {
+    const numberArray = Utils.stringArrayToNumberArray(numbers);
+    this.#validateNumbers(numberArray);
+    numberArray.sort((a, b) => a - b);
+    this.#numbers = numberArray;
+  }
+
+  #validateNumbers(numbers) {
+    if (numbers.length !== SETTINGS.lottoLength) {
+      throw new LottoLengthError(numbers);
+    }
+    numbers.forEach(number => {
+      if (!REGEXP.eachNumber.test(number)) {
+        throw new LottoTypeError(numbers);
+      }
+      if (Number(number) < SETTINGS.minimumLottoRange || Number(number) > SETTINGS.maximumLottoRange) {
+        throw new LottoRangeError(numbers);
+      }
+    });
+    if (new Set([...numbers]).size !== numbers.length) {
+      throw new LottoDuplicatedError(numbers);
+    }
   }
 
   setBonus(bonus) {
@@ -28,9 +51,13 @@ class WinningLotto extends Lotto {
     if (Number(bonus) < SETTINGS.minimumLottoRange || Number(bonus) > SETTINGS.maximumLottoRange) {
       throw new BonusRangeError(bonus);
     }
-    if (this._numbers.includes(Number(bonus))) {
+    if (this.#numbers.includes(Number(bonus))) {
       throw new BonusIncludedError(bonus);
     }
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 
   getBonus() {
