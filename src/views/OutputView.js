@@ -12,7 +12,7 @@ const OutputView = {
 
   printLottos(lottos) {
     lottos.forEach(lotto => {
-      Console.print(OUTPUT_MESSAGE.lotto(lotto));
+      Console.print(OUTPUT_MESSAGE.lotto(lotto.numbers));
     });
   },
 };

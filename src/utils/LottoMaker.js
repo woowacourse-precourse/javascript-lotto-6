@@ -1,6 +1,7 @@
 import { DRAW_NUMBERS, LOTTO_PRICE } from '../constants/numbers.js';
 import { ERROR_MESSAGE } from '../constants/messages.js';
 import InputValidator from './InputValidator.js';
+import Lotto from '../Lotto.js';
 import NumberGenerator from './NumberGenerator.js';
 import ValidationError from './ValidationError.js';
 
@@ -27,21 +28,22 @@ class LottoMaker {
     }
   }
 
-  createLotto() {
-    const lotto = [];
+  createNumbers() {
+    const numbers = [];
 
-    while (lotto.length !== DRAW_NUMBERS) {
+    while (numbers.length !== DRAW_NUMBERS) {
       const randomNumber = NumberGenerator.createRandomNumber();
-      if (!lotto.includes(randomNumber)) {
-        lotto.push(randomNumber);
+      if (!numbers.includes(randomNumber)) {
+        numbers.push(randomNumber);
       }
     }
-    return lotto.sort((a, b) => a - b);
+    return numbers.sort((a, b) => a - b);
   }
 
   publishedLottos(publishCount) {
     for (let count = 0; count < publishCount; count += 1) {
-      const lotto = this.createLotto();
+      const numbers = this.createNumbers();
+      const lotto = new Lotto(numbers);
       this.#lottos.push(lotto);
     }
   }
