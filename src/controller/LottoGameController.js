@@ -40,6 +40,13 @@ class LottoGameController {
     );
 
     this.lottoResult.setMatchCount(matchResults);
+    const userMoney = this.#moneyInstance.getMoney();
+    const prizeMoney = this.lottoResult.getPrizeMoney();
+
+    const profit = this.lottoResult.getProfit(userMoney, prizeMoney);
+
+    this.outputView.printLottoResult(this.lottoResult.getMatchCount());
+    this.outputView.printTotalProfit(profit);
   }
 
   generateMatchResults(winningMatchCounts, hasBonusMatches) {
