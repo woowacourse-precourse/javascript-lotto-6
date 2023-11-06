@@ -10,6 +10,10 @@ const InputView = {
     const lottoNumberString = await Console.readLineAsync(MESSAGES.mainNumberQuery);
     return lottoNumberString.split(CONSTANTS.numberDelimiter).map(Number);
   },
+  async readBonusNumber() {
+    const bonusNumberString = await Console.readLineAsync(MESSAGES.bonusNumberQuery);
+    return Number(bonusNumberString);
+  },
 };
 
 export default InputView;
