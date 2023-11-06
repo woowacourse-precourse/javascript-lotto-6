@@ -8,10 +8,10 @@ class App {
   }
 
   async play() {
-    this.userInput.money = await this.handleMoney();
+    await this.userInput.handleMoney();
     this.Lottos = this.getLottoWithMoney(this.userInput.money);
-    this.userInput.lottoNumbers = await this.handleLottoNumbers();
-    this.userInput.bonusNumber = await this.handleBonusNumber();
+    await this.userInput.handleLottoNumbers();
+    await this.userInput.handleBonusNumber();
 
     const LOTTO_RANKS = this.calculLottoResult({
       lottos: this.Lottos,
@@ -20,39 +20,6 @@ class App {
     });
     this.printLottoResult(LOTTO_RANKS);
     this.printRateOfIncome(LOTTO_RANKS, this.userInput.money);
-  }
-
-  async handleMoney() {
-    let money;
-    try {
-      money = await this.userInput.readMoneyBuyingLotto();
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      money = await this.handleMoney();
-    }
-    return money;
-  }
-
-  async handleLottoNumbers() {
-    let lottoNumbers;
-    try {
-      lottoNumbers = await this.userInput.readLottoNumbers();
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      lottoNumbers = await this.handleLottoNumbers();
-    }
-    return lottoNumbers;
-  }
-
-  async handleBonusNumber() {
-    let bonusNumber;
-    try {
-      bonusNumber = await this.userInput.readBonusNumber();
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      bonusNumber = await this.handleBonusNumber();
-    }
-    return bonusNumber;
   }
 
   getRandomSixNumbers() {
