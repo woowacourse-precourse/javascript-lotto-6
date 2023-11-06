@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import { View } from "./View/view.js";
 import { ERROR_MESSAGE } from "./constants/message.js";
 import { setPurchaseLotto } from "./module/setting.js";
@@ -22,14 +23,20 @@ class App {
   }
 
   async setLottoConfig() {
-    const purchaseAmount = await View.getAmount();
+    while (true) {
+      try {
+        const purchaseAmount = await View.getAmount();
 
-    if (!Validator.isValidPurchaseAmount(purchaseAmount)) {
-      throw new Error(ERROR_MESSAGE.purchaseError);
+        if (!Validator.isValidPurchaseAmount(purchaseAmount)) {
+          throw new Error(ERROR_MESSAGE.purchaseError);
+        }
+
+        const lottoArray = setPurchaseLotto(purchaseAmount);
+        return { purchaseAmount, lottoArray };
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
-
-    const lottoArray = setPurchaseLotto(purchaseAmount);
-    return { purchaseAmount, lottoArray };
   }
 }
 
