@@ -16,7 +16,7 @@ const STATISTICS = Object.freeze([
 
 const CHARACTER = Object.freeze({
   returnpreffix: '총 수익률은 ',
-  returnsuffix: '% 입니다.',
+  returnsuffix: '%입니다.',
   purchasesuffix: '개를 구매했습니다.',
   countsuffix: '개',
 });

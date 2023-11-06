@@ -33,7 +33,7 @@ class controller {
 
   priintUserLottoNumbers() {
     this.#outputView.print(
-      `${this.#userLotto.getNumberOfPurchase()}개를 구매했습니다.`
+      `${this.#userLotto.getNumberOfPurchase()}${CHARACTER.purchasesuffix}`
     );
     this.#userLotto.getUserLottoNumbers().forEach((userLottoNumber) => {
       const message = userLottoNumber.getLottoNumber().join(`, `);
