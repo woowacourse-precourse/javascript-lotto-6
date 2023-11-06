@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import { InputValue } from './InputValue.js';
 import Lotto from './Lotto.js';
 import { BuyLotto } from './BuyLotto.js';
@@ -11,7 +12,7 @@ class App {
 	async play() {
 		try {
 			const inputValue = new InputValue();
-			const printValue = new PrintValue(lottoQuantity, lottoList, winningList, roi);
+			const printValue = new PrintValue();
 
 			// 로또 구입 금액 입력
 			const buyLotto = await inputValue.buyLotto();
@@ -24,7 +25,7 @@ class App {
 			const lottoList = LottoIssuance(lottoQuantity);
 
 			// 발행 로또 출력
-			printValue.lottoIssuedQuantity();
+			printValue.lottoIssuedQuantity(lottoQuantity, lottoList);
 
 			// 당첨 로또 번호 입력
 			const winningNumber = await inputValue.winningNumber();
@@ -39,11 +40,11 @@ class App {
 
 			// 수익률
 			const roi = ReturnOnInvestment(buyLotto, winningList);
-			// const roi = ReturnOnInvestment(8000, [1, 0, 0, 0, 0]);
-			// const roi = ReturnOnInvestment(1000, [0, 0, 0, 0, 1]);
-			console.log(roi);
+
+			// 당첨 통계
+			printValue.winningResult(winningList, roi);
 		} catch (error) {
-			console.log(error.message);
+			Console.print(error.message);
 		}
 	}
 }
