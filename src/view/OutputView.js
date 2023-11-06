@@ -13,11 +13,11 @@ class OutputView {
   /**
    * 구매 결과 출력 뷰
    * @param {Number} purchaseNumber 구매 갯수
-   * @param {Array} randomNumberArray 랜덤 생성된 로또 번호
+   * @param {Array} randomNumbers 랜덤 생성된 로또 번호
    */
-  purchaseResultView(purchaseNumber, randomNumberArray) {
+  purchaseResultView(purchaseNumber, randomNumbers) {
     purchaseResultMessage(purchaseNumber);
-    randomNumberArray.forEach((randomNumber) => {
+    randomNumbers.forEach((randomNumber) => {
       randomNumberMessage(randomNumber);
     });
     lineBreakMessage();
@@ -25,11 +25,11 @@ class OutputView {
 
   /**
    * 당첨 결과 출력 뷰
-   * @param {Array} winningResultArray 당첨 결과 배열
+   * @param {Object} winningResult 당첨 결과 객체
    * @param {Number} rate 수익률
    */
-  winningResultView(winningResultArray, rate) {
-    winningResultMessage(winningResultArray);
+  winningResultView(winningResult, rate) {
+    winningResultMessage(winningResult);
     returnRateMessage(rate);
   }
 }
