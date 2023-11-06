@@ -13,6 +13,10 @@ const InputView = {
   async readLottoAnswer() {
     return await this.readInput(INPUT_QUERY.lottoAnswer);
   },
+
+  async readBonusNumber() {
+    return await this.readInput(INPUT_QUERY.bonusNumber);
+  },
 };
 
 export { InputView };

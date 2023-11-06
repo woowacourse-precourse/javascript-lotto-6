@@ -3,6 +3,7 @@ import { InputView } from "../view/InputView.js";
 import { lottoSeller } from "../domain/LottoSeller.js";
 import Lotto from "../Lotto.js";
 import { lottoNumbersParser } from "../utils/lottoNumbersParser.js";
+import LottoAnswer from "../domain/LottoAnswer.js";
 
 class LottoController {
   async init() {
@@ -13,6 +14,9 @@ class LottoController {
     const lottoAnswerInput = await InputView.readLottoAnswer();
     const parsedLottoAnwerInput = lottoNumbersParser.parse(lottoAnswerInput);
     const lottoAnwer = new Lotto(parsedLottoAnwerInput);
+
+    const bonusNumber = await InputView.readBonusNumber();
+    const answer = new LottoAnswer(lottoAnwer, bonusNumber);
   }
 }
 
