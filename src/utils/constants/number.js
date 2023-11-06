@@ -44,7 +44,6 @@ const game = Object.freeze({
 const statistics = Object.freeze({
   winningCriteria,
   prizes,
-  roundingPrecision: 2,
 });
 
 const NUMBER = Object.freeze({
