@@ -16,11 +16,7 @@ class Lotto {
       throw new Error(ERRORMESSAGE.LOTTO_NUMBER_LENGTH);
     }
 
-    if (!Validation.isSafeInteger(numbers)) throw new Error(LOTTO_NUMBER_INTEGER);
-
-    if (!Validation.isInRange(numbers)) throw new Error(LOTTO_NUMBER_RANGE);
-
-    if (!Validation.isDuplicate(numbers)) throw new Error(DUPLICATED_NUMBER);
+    Validation.validate(numbers);
   }
 
   getNumber() {

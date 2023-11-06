@@ -36,6 +36,29 @@ class Validation {
 	 * @returns 
 	 */
 	isDuplicate = (numbers) => new Set(numbers).size == numbers.length;
+
+	validationList = [
+		{
+			func: this.isSafeInteger,
+			message: LOTTO_NUMBER_INTEGER,
+		},
+		{
+			func: this.isInRange,
+			message: LOTTO_NUMBER_RANGE,
+		},
+		{
+			func: this.isDuplicate,
+			message: DUPLICATED_NUMBER,
+		},
+	];
+
+	validate(numbers) {
+		const invalidReason = this.validationList.find(factor => !factor.func(numbers));
+
+		if (invalidReason !== undefined) throw new Error(invalidReason.message);
+
+		return true;
+	}
 }
 
 export default Validation;
