@@ -1,13 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
 import { PRINT_INPUT } from "./Constant.js";
-import { isVaildAmount } from "./checkValidation.js";
 
 const InputValuePrintout = {
 	inputAmount: async () => {
 		const amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
-		if (!isVaildAmount(amount)) await InputValuePrintout.inputAmount();
+		// 유효성 검사 추가
 		return amount;
 	},
 };
-
 export default InputValuePrintout;
