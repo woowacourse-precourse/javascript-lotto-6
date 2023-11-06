@@ -19,6 +19,7 @@ describe("로또 판매 클래스 테스트", () => {
       expect.stringContaining(`2개를 구매했습니다.`),
     );
   });
+
   test("로또 금액이 1000원 단위가 아니면 경고문구가 나오고 다시 입력한다.", async () => {
     //given
     const logSpy = getLogSpy();

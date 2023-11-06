@@ -32,20 +32,20 @@ class LottoManager {
   }
 
   async runLottoWithNumbers() {
-    await this.setWinningNumbers();
+    await this.#setWinningNumbers();
     const lotto = new Lotto(this.winningNumbers);
-    await this.setBonusNumber();
+    await this.#setBonusNumber();
     return lotto;
   }
 
-  async setWinningNumbers() {
+  async #setWinningNumbers() {
     const input = await MissionUtils.Console.readLineAsync(
       MESSAGE.INPUT.WINNING_NUMBERS,
     );
-    this.winningNumbers = input.split(",").map((item) => parseInt(item));
+    this.winningNumbers = await input.split(",").map((item) => parseInt(item));
   }
 
-  async setBonusNumber() {
+  async #setBonusNumber() {
     const input = await MissionUtils.Console.readLineAsync(
       MESSAGE.INPUT.BONUS_NUMBER,
     );
