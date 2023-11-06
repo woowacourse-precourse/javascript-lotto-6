@@ -1,6 +1,7 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { ERROR } from './Constant.js'
-import Lotto from './Lotto.js'
+import { ERROR } from './Constant.js';
+import Lotto from './Lotto.js';
+import WinningNumbers from './WinningNumbers.js';
 
 class App {
   async play() {

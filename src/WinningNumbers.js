@@ -15,12 +15,13 @@ class WinningNumbers{
   }
 
   #validateNumbers(numbers) {
-    if (numbers.length !== 6) {
+    const numberArray = Object.values(numbers);
+    if (numberArray.length !== 6) {
       throw new Error(ERROR.WINNING_NUMBER_NOT_SIX);
     }
 
-    const numberSet = new Set(numbers);
-    if (numbers.length !== numberSet.length) {
+    const numberSet = new Set(numberArray);
+    if (numbers.length !== numberSet.size) {
       throw new Error(ERROR.WINNING_NUMBER_IS_REDUNDANT);
     }
   }
