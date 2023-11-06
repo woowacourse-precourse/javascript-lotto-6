@@ -28,9 +28,14 @@ describe('입력 예외 상황 테스트', () => {
   });
   test('쉼표 구분을 잘못 기입했을 경우', () => {
     const received = ',1,2,3,4,5';
-
     expect(() => {
       Validator.invalidSeparator(received);
     }).toThrow(ERROR.message.invalidSeparator);
+  });
+  test('당첨 번호가 6개가 아닌 경우', () => {
+    const received = '1,2,3,4,5';
+    expect(() => {
+      Validator.invalidNumbersCount(received);
+    }).toThrow(ERROR.message.invalidNumbersCount);
   });
 });
