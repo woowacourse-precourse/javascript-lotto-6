@@ -1,26 +1,13 @@
 import { LOTTO_RANK } from '../constants/LottoOption.js';
-import { DIVIDER } from '../constants/Symbol.js';
 
 export default class LottoResultCalculator {
   #prizeTable = [0, 0, 0, 0, 0];
 
   #prizeTotal = 0;
 
-  #winningNumbers;
-
-  #winningBonusNumber;
-
-  constructor(winningNumbers, winningBonusNumber) {
-    this.#winningNumbers = winningNumbers.split(DIVIDER.comma).map(Number);
-    this.#winningBonusNumber = Number(winningBonusNumber);
-  }
-
-  calculateResults(lottoNumbers) {
+  calculateResults(lottoNumbers, winningNumbers, winningBonusNumber) {
     lottoNumbers.forEach((lotto) => {
-      const match = lotto.compare(
-        this.#winningNumbers,
-        this.#winningBonusNumber
-      );
+      const match = lotto.compare(winningNumbers, winningBonusNumber);
 
       if (match.mainNumber === LOTTO_RANK.second.mainNumber) {
         return this.#calculateSecondOrThirdPrize(match);
