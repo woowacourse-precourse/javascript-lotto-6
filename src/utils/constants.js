@@ -8,6 +8,14 @@ export const OUTPUT_MESSAGE = Object.freeze({
   lottoTicketNumber: '개를 구매했습니다.',
 });
 
+export const PRIZES = Object.freeze({
+  3: '3개 일치 (5000원)',
+  4: '4개 일치 (50,000원)',
+  5: '5개 일치 (1,500,000원)',
+  '5+1': '5개 일치, 보너스 볼 일치 (30,000,000원)',
+  6: '6개 일치 (2,000,000,000원)',
+});
+
 export const ERROR_MESSAGE = Object.freeze({
   isNotNumber: '[ERROR] 숫자를 입력해 주세요.',
   inValidMoneyAmount: '[ERROR] 구매금액은 1000원 단위로 입력해야 합니다.',
@@ -38,4 +46,6 @@ export const OTHERS = Object.freeze({
   commaWithSpace: ', ',
   lineBreak: '\n',
   bonusNumber: 'bonus',
+  dash: '-',
+  numKorean: '개',
 });

@@ -6,6 +6,8 @@ class OutputView {
     Console.print(`${OTHERS.lineBreak}${ticketNumber}${OUTPUT_MESSAGE.lottoTicketNumber}`);
     Console.print(lottoNumberListmessage);
   }
+
+  showGameResultOutput() {}
 }
 
 export default OutputView;

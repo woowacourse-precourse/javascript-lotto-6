@@ -15,8 +15,8 @@ class GameController {
 
   async start() {
     // 스타일 수정필요
-    const LOTTO_TICKET_NUMBER =
-      (await this.inputView.getUserInputPurchaseMoney()) / NUMBER.purchaseMoneyDivisor;
+    const PURCHASE_MONEY = await this.inputView.getUserInputPurchaseMoney();
+    const LOTTO_TICKET_NUMBER = PURCHASE_MONEY / NUMBER.purchaseMoneyDivisor;
     const LOTTO_NUMBER_ARRAY = this.randomNumberGenerator.getRandomNumberArray(LOTTO_TICKET_NUMBER);
     const LOTTO_NUMBER_LIST_MESSAGE =
       this.gameMessageGenerator.getLottoNumberListMessage(LOTTO_NUMBER_ARRAY);
@@ -25,8 +25,8 @@ class GameController {
     const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber(WINNING_NUMBERS);
     const GAME_CALCULATOR = new GameCalculator(LOTTO_NUMBER_ARRAY, WINNING_NUMBERS, BONUS_NUMBER);
     const OBJ_FOR_RESULT = GAME_CALCULATOR.calculate();
-
-    const GAME_RESULT_MASSAGE = this.gameMessageGenerator.getResultMessageForEachCorrect;
+    const GAME_RESULT_MASSAGE =
+      this.gameMessageGenerator.getResultMessageForEachCorrect(OBJ_FOR_RESULT);
   }
 }
 

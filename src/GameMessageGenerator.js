@@ -1,4 +1,4 @@
-import { OTHERS } from './utils/constants.js';
+import { OTHERS, PRIZES } from './utils/constants.js';
 
 class GameMessageGenerator {
   getLottoNumberListMessage(lottoNumberArray) {
@@ -10,7 +10,19 @@ class GameMessageGenerator {
     return LOTTO_NUMBER_LIST_MESSAGE;
   }
 
-  getResultMessage(gameResult) {}
+  getResultMessage(gameResultObj) {
+    let resultMessage = OTHERS.emptyString;
+
+    Object.keys(gameResultObj).forEach((key, index) => {
+      if (index === Object.keys(gameResultObj).length - 1) {
+        resultMessage += `${PRIZES[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}`;
+      } else {
+        resultMessage += `${PRIZES[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}${OTHERS.lineBreak}`;
+      }
+    });
+
+    return resultMessage;
+  }
 }
 
 export default GameMessageGenerator;
