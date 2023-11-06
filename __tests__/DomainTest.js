@@ -112,4 +112,16 @@ describe('핵심 로직 테스트', () => {
     // then
     expect(arr).toEqual([1, 0, 2, 2, 1]);
   });
+
+  test('calculateReturnRate() - 총 당첨금을 계산 후 수익률을 계산한다.', () => {
+    // given
+    const arr = [1, 0, 0, 0, 0];
+    const price = 8000;
+
+    // when
+    const controller = new LottoController();
+
+    // then
+    expect(controller.calculateReturnRate(arr, price)).toEqual('62.5');
+  });
 });
