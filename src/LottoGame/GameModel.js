@@ -9,6 +9,14 @@ export default class GameModel {
     this.LOTTOS = [];
     this.WINNING_NUMBER = [];
     this.BONUS_NUMBER = 0;
+    this.RESULT = {
+      SIX_MATCH: 0, // 6개 일치
+      FIVE_BONUS_MATCH: 0, // 5개 + 보너스 번호 일치
+      FIVE_MATCH: 0, // 5개 일치
+      FOUR_MATCH: 0, // 4개 일치
+      THREE_MATCH: 0, // 3개 일치
+      PROFIT_RATE: 0,
+    };
     this.util = new GameUtil();
   }
 
@@ -35,5 +43,38 @@ export default class GameModel {
     const duplicateCheckArray = [bonusNumber, ...this.WINNING_NUMBER];
     this.util.bonusNumberValidatro(bonusNumber, duplicateCheckArray);
     this.BONUS_NUMBER = Number(bonusNumber);
+  }
+
+  calculateResult() {
+    for (const lotto of this.LOTTOS) {
+      const matchingNumbers = this.util.countMatchingNumbers(
+        lotto.getLottoNumber(),
+        this.WINNING_NUMBER,
+      );
+      const isBonusNumberMatched = this.util.isBonusNumberMatched(
+        lotto.getLottoNumber(),
+        this.BONUS_NUMBER,
+        matchingNumbers,
+      );
+      this.updateResult(matchingNumbers, isBonusNumberMatched);
+    }
+  }
+
+  updateResult(matchingNumbers, isBonusNumberMatched) {
+    if (matchingNumbers === 6) {
+      this.RESULT['SIX_MATCH'] += 1;
+    }
+    if (matchingNumbers === 5 && isBonusNumberMatched) {
+      this.RESULT['FIVE_BONUS_MATCH'] += 1;
+    }
+    if (matchingNumbers === 5) {
+      this.RESULT['FIVE_MATCH'] += 1;
+    }
+    if (matchingNumbers === 4) {
+      this.RESULT['FOUR_MATCH'] += 1;
+    }
+    if (matchingNumbers === 3) {
+      this.RESULT['THREE_MATCH'] += 1;
+    }
   }
 }

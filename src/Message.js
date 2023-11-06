@@ -2,6 +2,7 @@ export const GameText = Object.freeze({
   GET_BUYING_MONEY: '구입금액을 입력해 주세요.',
   GET_WINNING_NUMBER: '당첨 번호를 입력해 주세요.',
   GET_BOUNS_NUMBER: '보너스 번호를 입력해 주세요.',
+  GAME_RESULT: '당첨 통계 \n ---',
 });
 
 export const ErrorMessage = Object.freeze({

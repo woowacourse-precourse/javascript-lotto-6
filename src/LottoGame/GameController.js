@@ -33,6 +33,9 @@ export default class GameController {
     const bonusNumber = await this.getUserInput();
     this.model.generateBonusNumber(bonusNumber);
     this.view.printWinningNumber(this.model.BONUS_NUMBER);
+
+    // 당첨 결과 생성
+    this.model.calculateResult();
   }
 
   async getUserInput() {
