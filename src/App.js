@@ -1,7 +1,11 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import LottoList from './LottoList.js';
 import Validation from './validation.js';
-import { readLineLottoCount, consoleError } from './utils.js';
+import {
+  readLineLottoCount,
+  readLineBonusCount,
+  consoleError,
+} from './utils.js';
 
 class App {
   #lottoApp;
@@ -14,7 +18,8 @@ class App {
     const isLottoGenerated = await this.initializeAndPurchaseLotto();
     if (isLottoGenerated) {
       await this.printLottoList();
-      await this.userInputNumbers();
+      const inputNumbers = await this.userInputNumbers();
+      await this.userInputBonusNumber(inputNumbers);
     }
   }
 
@@ -40,10 +45,12 @@ class App {
   }
 
   async userInputNumbers() {
+    const inputNumbers = await this.getUserInput();
+    console.log(inputNumbers);
+
     try {
-      const inputNumbers = await this.getUserInput();
-      this.validateInputNumbers(inputNumbers);
-      console.log(inputNumbers);
+      Validation.validateUserInputNumbers(inputNumbers);
+
       return inputNumbers;
     } catch (error) {
       consoleError(error);
@@ -51,16 +58,23 @@ class App {
     }
   }
 
-  async getUserInput() {
-    const input = await readLineLottoCount();
-    return input.split(',').map((num) => parseInt(num.trim()));
+  async userInputBonusNumber(inputNumbers) {
+    const inputBonusNumber = await readLineBonusCount();
+    const bonusNumber = Number(inputBonusNumber);
+
+    try {
+      Validation.validateBonusNumbers(bonusNumber, inputNumbers);
+      console.log(bonusNumber);
+      return bonusNumber;
+    } catch (error) {
+      consoleError(error);
+      return this.userInputBonusNumber(inputNumbers);
+    }
   }
 
-  validateInputNumbers(inputNumbers) {
-    Validation.isNumber(inputNumbers);
-    Validation.numberCountLength(inputNumbers);
-    Validation.dupliCatedNum(inputNumbers);
-    Validation.numberRange(inputNumbers);
+  async getUserInput() {
+    const input = await readLineLottoCount();
+    return input.split(',').map((num) => Number(num.trim()));
   }
 }
 
