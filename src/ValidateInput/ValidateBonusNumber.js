@@ -1,9 +1,5 @@
-import {
-  TYPE_ERROR,
-  RANGE_ERROR,
-  MIN_NUMBER,
-  MAX_NUMBER,
-} from "../utils/constants.js";
+import { MIN_NUMBER, MAX_NUMBER } from "../utils/constants.js";
+import { TYPE_ERROR, RANGE_ERROR } from "../utils/errorMessage.js";
 
 export const validateBonusNumber = (input) => {
   if (isNaN(+input)) {

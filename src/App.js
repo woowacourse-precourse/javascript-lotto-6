@@ -1,18 +1,18 @@
 import { print } from "./utils/print.js";
 import { calcPurchaseQuantity } from "./Calc/CalcPurchaseQuantity.js";
 import {
-  PURCHASE_AMOUNT_INPUT_REQUEST,
   WINNING_NUMBERS_INPUT_REQUEST,
   BONUS_NUMBER_INPUT_REQUEST,
 } from "./utils/message.js";
-import { getValidPurchaseAmount } from "./ValidateInput/ValidatePurchaseAmount.js";
 import { getValidBonusNumber } from "./GetValidBonusNumber.js";
 import { calcResult } from "./Calc/CalcResult.js";
 import { printResult } from "./PrintResult.js";
 import { calcProfitRate } from "./Calc/CalcProfitRate.js";
 import { Console } from "@woowacourse/mission-utils";
+
 import Lotto from "./domain/Lotto.js";
 import LottoMachine from "./LottoMachine.js";
+import Purchase from "./domain/Purchase.js";
 
 class App {
   purchase_amount;
@@ -36,12 +36,14 @@ class App {
   }
 
   async play() {
-    print(PURCHASE_AMOUNT_INPUT_REQUEST);
-    // 2. 구입 금액 입력받기
-    this.purchase_amount = await getValidPurchaseAmount();
-    // 3. 구매 수량 구하기
+    // 구매 금액 받기
+    const purchase = new Purchase();
+    this.purchase_amount = await purchase.purchase();
+
+    // 구매 수량 구하기
     this.purchase_quantity = calcPurchaseQuantity(this.purchase_amount);
-    // 4. 로또 발행하기
+
+    // 로또 발행하기
     const LOTTO_MACHINE = new LottoMachine();
     this.lotto_list = LOTTO_MACHINE.returnLotto(this.purchase_quantity);
     // 5. 구매 수량 출력하기
@@ -76,7 +78,7 @@ class App {
   }
 }
 
-// const app = new App();
-// await app.play();
+const app = new App();
+app.play();
 
 export default App;

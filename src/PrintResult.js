@@ -1,5 +1,5 @@
-import { WINNING_STATISTICS_PRINT_MESSAGE } from "./utils/constants.js";
-import { printMessage } from "./utils/print.js";
+import { WINNING_STATISTICS_PRINT_MESSAGE } from "./utils/message.js";
+import { print } from "./utils/print.js";
 
 function form(idx, n) {
   if (idx === 0) {
@@ -16,9 +16,9 @@ function form(idx, n) {
 }
 
 export const printResult = (input) => {
-  printMessage(`\n${WINNING_STATISTICS_PRINT_MESSAGE}`);
-  printMessage("---");
+  print(`\n${WINNING_STATISTICS_PRINT_MESSAGE}`);
+  print("---");
 
   let reversed = input.reverse();
-  reversed.map((i, el) => printMessage(form(el, i)));
+  reversed.map((i, el) => print(form(el, i)));
 };
