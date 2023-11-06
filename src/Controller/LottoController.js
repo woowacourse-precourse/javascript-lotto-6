@@ -8,6 +8,7 @@ class LottoController {
   #lottoCost;
   #pickLotto;
   #bonusLotto;
+  #matchResult;
   constructor() {
     this.#initialize();
   }
@@ -18,7 +19,8 @@ class LottoController {
   }
 
   async printLottoNumbersMatchCount() {
-    console.log(await this.getLottoMatchResult());
+    await this.getLottoMatchResultyData();
+    console.log(this.#matchResult);
 
   }
 
@@ -37,6 +39,18 @@ class LottoController {
     const matchCount = await this.#pickLotto.getLottoMathCount(await this.#lottoCost.getRandomLottoNumbersList());
     const mathBonusCount = await this.#bonusLotto.getLottoMatchBonusCount(await this.#lottoCost.getRandomLottoNumbersList());
     return matchCount.map((count, index) => [count, mathBonusCount[index]]);
+  }
+  
+  async getLottoMatchResultyData() {
+    this.#matchResult = {};
+    (await this.getLottoMatchResult()).forEach(subData => {
+      const [count, bonusCount] = subData;
+      if (this.#matchResult[count] === undefined) {
+        this.#matchResult[count] = [0, 0];
+      };
+      this.#matchResult[count][0] += 1
+      if (bonusCount) this.#matchResult[count][1] += 1;
+    });
   }
 }
 
