@@ -30,6 +30,10 @@ const Validator = {
     if (!this.validateLottoNumbers(lottoNumbersArray))
       throw new Error(ERROR_MESSAGES.invalidLottoNumber);
   },
+
+  validateBonusNumber(mainNumber, bonusNumber) {
+    return !(checkNumberInRange(bonusNumber) || mainNumber.includes(bonusNumber));
+  },
 };
 
 export default Validator;
