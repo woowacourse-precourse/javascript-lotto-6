@@ -51,7 +51,7 @@ class LottoComparer {
 
   countCorrectNumbers(lottoNumbers) {
     const correctNumbers = lottoNumbers.filter(number =>
-      this.WinningNumbers.includes(number),
+      this.WinningNumbers.getNumbers().includes(number),
     );
 
     return correctNumbers.length;

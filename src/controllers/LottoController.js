@@ -6,11 +6,7 @@ import LottoStore from '../models/LottoStore.js';
 import LottoComparer from '../models/LottoComparer.js';
 import LottoWinnerPrize from '../models/LottoWinnerPrize.js';
 import LottoProfitCalculator from '../models/LottoProfitCalculator.js';
-import {
-  validateNumber,
-  validateLength,
-  validateDuplicate,
-} from '../utils/validationValue.js';
+import Lotto from '../models/Lotto.js';
 
 const { bonusNumber, winningNumber, purchasePrice } = PROPMT_MESSAGE;
 const { purchaseInvalidAmount } = ERROR_MESSAGE;
@@ -113,7 +109,7 @@ class LottoController {
     const winningNumbers = await this.propmtWinningNumber();
     const bonusNumbers = await this.propmtBonusNumber();
 
-    this.lottoComparer.WinningNumbers = winningNumbers.split(',').map(Number);
+    this.lottoComparer.WinningNumbers = new Lotto(winningNumbers);
     this.lottoComparer.bonusNumber = Number(bonusNumbers);
   }
 
@@ -121,7 +117,6 @@ class LottoController {
     const { readLineAsync } = InputView;
     const bonusNumbers = await readLineAsync(bonusNumber);
 
-    validateNumber(bonusNumbers);
     return bonusNumbers;
   }
 
@@ -130,18 +125,7 @@ class LottoController {
     const winningNumbers = await readLineAsync(winningNumber);
     const numbersArray = winningNumbers.split(',').map(Number);
 
-    this.validateWinningNumbers(numbersArray);
-    return winningNumbers;
-  }
-
-  validateWinningNumbers(numbers) {
-    validateLength(numbers);
-
-    numbers.forEach(number => {
-      validateNumber(number);
-    });
-
-    validateDuplicate(numbers);
+    return numbersArray;
   }
 
   compareLottoNumbers() {
