@@ -16,6 +16,17 @@ class Lotto {
     return this.#numbers;
   }
 
+  hasNumber(number) {
+    return this.#numbers.includes(number);
+  }
+
+  getMatchTargetNumber(targetNumber) {
+    return targetNumber.filter((number) => this.hasNumber(number)).length;
+  }
+
+  getMatchBonusNumber(bonusNumber) {
+    return this.hasNumber(bonusNumber);
+  }
 }
 
 export default Lotto;

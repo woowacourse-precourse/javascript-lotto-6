@@ -8,7 +8,9 @@ import {
   DELIMITER,
   LOTTO_LENGTH,
   MIN_NUMBER,
-  MAX_NUMBER
+  MAX_NUMBER,
+  LOTTO_MONEY,
+  LOTTO_RESULT
 } from "./constants.js";
 import Lotto from "./Lotto.js";
 import TargetNumber from "./TargetNumber.js";
@@ -16,13 +18,21 @@ import BonusNumber from "./BonusNumber.js";
 
 class App {
   lottoPrice;
-  lottiTickets;
+  lottoTickets;
   targetNumber;
   bonusNumber;
+  result;
 
   constructor() {
     this.lottoPrice = 0;
-    this.lottiTickets = [];
+    this.lottoTickets = [];
+    this.result = {
+      FIRST: 0,
+      SECOND: 0,
+      THIRD: 0,
+      FOURTH: 0,
+      FIFTH: 0
+    };
   }
 
   async play() {
@@ -40,6 +50,8 @@ class App {
     while(!this.bonusNumber){
       await this.getBonusNumber();
     }
+
+    this.showLottoResult();
   }
 
   async getLottoPrice() {
@@ -64,12 +76,12 @@ class App {
     const lottoTicketLen = this.lottoPrice / PRICE_UNIT;
 
     for(let i = 0; i < lottoTicketLen; i++){
-      this.lottiTickets.push(new Lotto(this.getLottoNumber()));
+      this.lottoTickets.push(new Lotto(this.getLottoNumber()));
     }
   }
 
   showLottoNumbers() {
-    this.lottiTickets.forEach((lotto) => {
+    this.lottoTickets.forEach((lotto) => {
       Console.print(lotto.getNumbers());
     })
   }
@@ -120,6 +132,39 @@ class App {
     if (isNaN(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_STRING;
     
     if (this.targetNumber.hasNumber(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_DUPLICATE;
+  }
+
+  showLottoResult() {
+    Console.print('당첨 통계 \n ---');
+    
+    this.lottoTickets.forEach((lotto) => {
+      const matchTargetNumber = lotto.getMatchTargetNumber(this.targetNumber.getTargetNumber());
+      const matchBonusNumber = lotto.getMatchBonusNumber(this.bonusNumber.getBonusNumber());
+     
+      this.updateResult(matchTargetNumber , matchBonusNumber)
+    })
+
+    for (const KEY in this.result) {
+      Console.print(LOTTO_RESULT[KEY] + ' - ' + this.result[KEY] + '개');
+    }
+
+  }
+
+  updateResult(matchTargetNumber , matchBonusNumber) {
+    switch(matchTargetNumber){
+      case 6:
+        this.result.FIRST += 1;
+        break;
+      case 5:
+        matchBonusNumber ? this.result.SECOND += 1 : this.result.THIRD += 1;
+        break;
+      case 4:
+        this.result.FOURTH += 1;
+        break;
+      case 3:
+        this.result.FIFTH += 1;
+        break;
+    }
   }
 }
 
