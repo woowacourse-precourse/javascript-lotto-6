@@ -5,7 +5,7 @@ import { SETTING } from "../constants/Settings.js";
 class OutputView {
   static async printLottoPaperCount(number) {
     try {
-      Console.print(`\n${number}${CONSOLE_MESSAGE.outputLottoNumber}`);
+      Console.print(format(CONSOLE_MESSAGE.outputLottoNumber, number));
     } catch (error) {
       throw error;
     }
