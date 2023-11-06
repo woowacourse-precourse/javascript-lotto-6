@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
-import { LOTTO_RANK_INFO, CHECK_RANK } from "./constants/Ranking.js";
+import { LOTTO_RANK_INFO, CHECK_RANK, RANK } from "./constants/Ranking.js";
 
 class App {
   purchaseAmount = 0;
@@ -97,18 +97,28 @@ class App {
       this.lottoResult[ranking] += 1;
     });
   }
+  printLottoRanking(rank) {
+    let result = "";
+    result += `${LOTTO_RANK_INFO[rank].numbers[0]}개 일치`;
+    if (rank == 2) result += ", 보너스 볼 일치";
+    result += ` (${LOTTO_RANK_INFO[rank].prize.toLocaleString()}원)`;
+    result += ` - ${this.lottoResult[rank]}개`;
+    MissionUtils.Console.print(result);
+  }
 
   printLottoResult() {
+    let totalPrize = 0;
     MissionUtils.Console.print("당첨 통계");
     MissionUtils.Console.print("---");
     for (let i = 5; i >= 1; i--) {
-      let result = "";
-      result += `${LOTTO_RANK_INFO[i].numbers[0]}개 일치`;
-      if (i == 2) result += ", 보너스 볼 일치";
-      result += ` (${LOTTO_RANK_INFO[i].prize.toLocaleString()}원)`;
-      result += ` - ${this.lottoResult[i]}개`;
-      MissionUtils.Console.print(result);
+      this.printLottoRanking(i);
+      totalPrize += this.lottoResult[i] * LOTTO_RANK_INFO[i].prize;
     }
+    MissionUtils.Console.print(
+      `총 수익률은 ${
+        (totalPrize / this.purchaseAmount).toFixed(4) * 100
+      }%입니다.`
+    );
   }
 
   async play() {
