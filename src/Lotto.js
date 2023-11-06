@@ -1,3 +1,9 @@
+import {
+  validateLottoNumbersCountMismatch,
+  validateLottoNumbersNotAllNumbers,
+  validateLottoNumbersOutOfRange,
+} from "./LottoValidation";
+
 class Lotto {
   #numbers;
 
@@ -5,14 +11,15 @@ class Lotto {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
-
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    validateLottoNumbersCountMismatch(numbers);
+    validateLottoNumbersNotAllNumbers(numbers);
+    validateLottoNumbersOutOfRange(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  getLotto() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
