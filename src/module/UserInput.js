@@ -1,12 +1,12 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { message } from '../Consts';
+import { message } from '../Consts.js';
 
 class UserInput {
   static async purchasedLotto() {
     const purchasedLotto = await MissionUtils.Console.readLineAsync(
       message.tryPurchaseLotto,
     );
-    return purchasedLotto;
+    return Number(purchasedLotto);
   }
 
   static async winningNumbers() {
