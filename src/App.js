@@ -1,41 +1,19 @@
-import { Console } from "@woowacourse/mission-utils";
 import UserInput from "./utils/UserInput.js";
 import LottoGame from "./lottoGame/LottoGame.js";
 
 class App {
   async play() {
-    let lottoAmount;
-    while (true) {
-      try {
-        lottoAmount = await UserInput.getPurchaseAmount();
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+    const lottoAmount = await UserInput.getUserInput(
+      UserInput.getPurchaseAmount
+    );
 
     const lottoGame = new LottoGame();
     lottoGame.generateLotto(lottoAmount);
 
-    let lottoNumbers;
-    while (true) {
-      try {
-        lottoNumbers = await UserInput.getLottoNumbers();
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
-
-    let bonusNumber;
-    while (true) {
-      try {
-        bonusNumber = await UserInput.getBonusNumber();
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+    const lottoNumbers = await UserInput.getUserInput(
+      UserInput.getLottoNumbers
+    );
+    const bonusNumber = await UserInput.getUserInput(UserInput.getBonusNumber);
 
     lottoGame.setWinningNumbers(lottoNumbers, bonusNumber);
     lottoGame.calculateWinner();
