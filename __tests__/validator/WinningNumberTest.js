@@ -1,88 +1,111 @@
 import winnigNumberValidator from '../../src/validator/winningNumberValidator';
 
 describe('당첨 번호 테스트', () => {
-  describe('쉼표(,)를 기준으로 6개가 아닌경우 테스트', () => {
-    test('당첨 번호를 쉼표를 기준으로 6개인 경우 테스트', () => {
+  describe('winnigNumberValidator.numberOfLottoLitmit 당첨번호 개수 제한 테스트', () => {
+    test.each([
+      [
+        ['1', '2', '3', '4', '5', '6'],
+        ['30', '31', '43', '42', '9', '5'],
+      ],
+    ])('당첨번호 6개 올바르게 나오는지 테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,6');
+        winnigNumberValidator.numberOfLottoLitmit(input);
       }).not.toThrow();
     });
 
-    test('당첨 번호를 나누는 기준이 없는 경우 테스트', () => {
+    test.each([
+      [
+        [],
+        ['2'],
+        ['1', '6'],
+        ['1', '2', '3'],
+        ['1', '2', '3', '5'],
+        ['1', '2', '3', '40', '42'],
+        ['1', '2', '3', '40', '42', '43', '44'],
+        ['1', '2', '3', '40', '42', '43', '44', '45'],
+      ],
+    ])('당첨번호 6개가 아닌 경우 테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('123456');
-      }).toThrow();
-    });
-
-    test('당첨 번호를 나누는 기준이 공백(" ")인 경우 테스트', () => {
-      expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1 2 3 4 5 6');
-      }).toThrow();
-    });
-
-    test('당첨 번호를 쉼표를 기준으로 다 나누지 않은 경우 테스트', () => {
-      expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,56');
+        winnigNumberValidator.numberOfLottoLitmit(input);
       }).toThrow();
     });
   });
 
-  describe('쉼표(,)를 기준으로 각 값들이 숫자가 아닌경우 테스트', () => {
-    test('올바른 6개의 숫자가 들어온 경우', () => {
+  describe('winnigNumberValidator.checkNumberType 당첨번호 모두 숫자 형태 테스트', () => {
+    test.each([
+      [
+        ['1', '2', '3', '4', '5', '6'],
+        ['30', '31', '43', '42', '9', '5'],
+      ],
+    ])('당첨번호 6개 모두 올바른 숫자 형태인 경우 테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,6');
+        winnigNumberValidator.checkNumberType(input);
       }).not.toThrow();
     });
 
-    test('각 값들 중 문자가 포함된 경우', () => {
+    test.each([
+      [
+        ['1', '2', '3', '4', '5', '6 '],
+        ['1', '5', '12', '24', '35', ' 5'],
+        ['1', '5', '12', '24', '35', ''],
+        ['1', '5', '12', '24', '35', '36번'],
+        ['1', '5', '12', '24', '35', '+45'],
+        ['1', '5', '12', '24', '35', '-42'],
+      ],
+    ])('당첨번호 6개가 중 숫자형태가 아닌 경우 테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,십,6');
-      }).toThrow();
-    });
-
-    test('각 값들 중 공백이 포함된 경우', () => {
-      expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,5 ,6');
-      }).toThrow();
-    });
-
-    test('각 값들 중 음수가 포함된 경우', () => {
-      expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,-5,6');
+        winnigNumberValidator.checkNumberType(input);
       }).toThrow();
     });
   });
 
-  describe('쉼표(,)를 기준으로 각 값들에 대한 범위 테스트', () => {
-    test('6개의 숫자 모두 올바른 범위인 경우', () => {
+  describe('winnigNumberValidator.checkLottoNumberRange 당첨번호 범위 테스트', () => {
+    const MIN = 1;
+    const MAX = 45;
+
+    test.each([
+      [
+        ['1', '2', '3', '4', '5', '6'],
+        ['30', '31', '43', '42', '9', '5'],
+      ],
+    ])('당첨번호 6개 모두 범위안에 있는 경우테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,6');
+        winnigNumberValidator.checkLottoNumberRange(input);
       }).not.toThrow();
     });
 
-    test('범위밖인 0이 포함된 경우', () => {
+    test.each([
+      [
+        ['1', '2', '3', '4', '5', `${MAX + 1}`],
+        ['1', '5', '12', '24', '35', `${MIN - 1}`],
+      ],
+    ])('당첨번호 6개가 중 범위 밖의 숫자가 있는 경우 테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('0,2,3,4,5,6');
-      }).toThrow();
-    });
-
-    test('범위밖인 46이 포함된 경우', () => {
-      expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,46');
+        winnigNumberValidator.checkLottoNumberRange(input);
       }).toThrow();
     });
   });
 
-  describe('쉼표(,)를 기준으로 각 값들에 대한 중복 테스트', () => {
-    test('6개의 숫자 모두 중복이 되지 않는 경우', () => {
+  describe('winnigNumberValidator.checkDuplicate 당첨번호 중복 테스트', () => {
+    test.each([
+      [
+        ['2', '3', '4', '5', '6', '7'],
+        ['30', '31', '43', '42', '9', '5'],
+      ],
+    ])('당첨번호 6개 모두 범위안에 있는 경우테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,3,4,5,6');
+        winnigNumberValidator.checkDuplicate(input);
       }).not.toThrow();
     });
 
-    test('중복된 경우', () => {
+    test.each([
+      [
+        ['1', '2', '3', '4', '5', '5'],
+        ['1', '5', '12', '24', '35', '1'],
+      ],
+    ])('당첨번호 6개가 중 범위 밖의 숫자가 있는 경우 테스트', (input) => {
       expect(() => {
-        winnigNumberValidator.checkWinningNumbers('1,2,2,3,4,5');
+        winnigNumberValidator.checkDuplicate(input);
       }).toThrow();
     });
   });
