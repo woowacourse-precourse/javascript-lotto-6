@@ -44,8 +44,19 @@ class UserLotto {
   }
 
   #validate(purchaseAmount) {
+    this.#rangeCheck(purchaseAmount);
     this.#typeCheck(purchaseAmount);
     this.#divisionCheck(purchaseAmount);
+  }
+
+  #rangeCheck(purchaseAmount) {
+    if (purchaseAmount < 0) {
+      throw new Error('[ERROR] 구입 금액은 0보다 작을 수 없습니다.');
+    }
+
+    if (purchaseAmount > 2000000000) {
+      throw new Error('[ERROR] 구입 금액은 20억(당첨금액) 이하이어야 합니다.');
+    }
   }
 
   #typeCheck(purchaseAmount) {
