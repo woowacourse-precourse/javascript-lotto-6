@@ -12,103 +12,122 @@ const mockQuestions = (inputs) => {
   });
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const runExceptionForGetPrice = async (input, message) => {
+  const logSpy = getLogSpy();
+  const INPUT_NUMBERS_TO_END = ["1000"];
+
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+
+  const user = new UserInput();
+  await user.getPrice();
+
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+};
+
+const runExceptionForGetWinningNumber = async (input, message) => {
+  const logSpy = getLogSpy();
+  const INPUT_NUMBERS_TO_END = ["1,2,3,4,5,6"];
+
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+
+  const user = new UserInput();
+  await user.getWinningNumber();
+
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+};
+
+const runExceptionForGetBonusNumber = async (input, message) => {
+  const logSpy = getLogSpy();
+  const INPUT_NUMBERS_TO_END = ["7"];
+
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+
+  const user = new UserInput();
+  const winningNumber = [1, 2, 3, 4, 5, 6];
+  await user.getBonusNumber(winningNumber);
+
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+};
+
 describe("사용자 입력 관련 예외 테스트", () => {
   test.each([[["천원"]], [["1111"]]])(
     "구입 금액에 숫자가 아닌 입력 또는 1000단위가 아닌 숫자가 들어올 경우 예외가 발생한다.",
     async (input) => {
-      const user = new UserInput();
-
-      mockQuestions(input);
-
-      await expect(user.getPrice()).rejects.toThrow(
-        MESSAGES.ERROR.INVALID_PRICE
-      );
+      await runExceptionForGetPrice(input, MESSAGES.ERROR.INVALID_PRICE);
     }
   );
 
   test("구입 금액이 10만원을 넘을 경우 예외가 발생한다.", async () => {
-    const user = new UserInput();
     const input = ["200000"];
 
-    mockQuestions(input);
-
-    await expect(user.getPrice()).rejects.toThrow(MESSAGES.ERROR.EXCEED_PRICE);
+    await runExceptionForGetPrice(input, MESSAGES.ERROR.EXCEED_PRICE);
   });
 
   test("당첨 번호에 숫자가 아닌 입력이 들어오면 예외가 발생한다.", async () => {
-    const user = new UserInput();
     const input = ["1,2,abc"];
 
-    mockQuestions(input);
-
-    await expect(user.getWinningNumber()).rejects.toThrow(
+    await runExceptionForGetWinningNumber(
+      input,
       MESSAGES.ERROR.PLEASE_ONLY_NUMBER
     );
   });
 
   test("당첨 번호가 6개가 아닌 경우 예외가 발생한다.", async () => {
-    const user = new UserInput();
     const input = ["1,2,3,4,5"];
 
-    mockQuestions(input);
-
-    await expect(user.getWinningNumber()).rejects.toThrow(
+    await runExceptionForGetWinningNumber(
+      input,
       MESSAGES.ERROR.INVAILD_LOTTO_LENGTH
     );
   });
 
   test("당첨 번호의 범위가 1~45가 아닌 경우 예외가 발생한다", async () => {
-    const user = new UserInput();
     const input = ["1,2,3,4,0,9"];
 
-    mockQuestions(input);
-
-    await expect(user.getWinningNumber()).rejects.toThrow(
+    await runExceptionForGetWinningNumber(
+      input,
       MESSAGES.ERROR.INVAILD_LOTTO_NUMBER
     );
   });
 
   test("당첨 번호에 중복된 번호가 있을 경우 예외가 발생한다", async () => {
-    const user = new UserInput();
     const input = ["1,2,3,3,4,5"];
 
-    mockQuestions(input);
-
-    await expect(user.getWinningNumber()).rejects.toThrow(
+    await runExceptionForGetWinningNumber(
+      input,
       MESSAGES.ERROR.DUPLICATE_LOTTO_NUMBER
     );
   });
 
   test("보너스 번호에 숫자가 아닌 입력이 들어오면 예외가 발생한다.", async () => {
-    const user = new UserInput();
     const input = ["bonus"];
 
-    mockQuestions(input);
-
-    await expect(user.getBonusNumber()).rejects.toThrow(
+    await runExceptionForGetBonusNumber(
+      input,
       MESSAGES.ERROR.PLEASE_ONLY_NUMBER
     );
   });
 
   test("보너스 번호의 범위가 1~45가 아닌 경우 예외가 발생한다", async () => {
-    const user = new UserInput();
     const input = ["88"];
 
-    mockQuestions(input);
-
-    await expect(user.getBonusNumber()).rejects.toThrow(
+    await runExceptionForGetBonusNumber(
+      input,
       MESSAGES.ERROR.INVAILD_LOTTO_NUMBER
     );
   });
 
   test("보너스 번호가 당첨 번호와 중복된 번호일 경우 예외가 발생한다", async () => {
-    const user = new UserInput();
     const input = ["7"];
-    const winningNumber = [1, 2, 3, 4, 5, 7];
 
-    mockQuestions(input);
-
-    await expect(user.getBonusNumber(winningNumber)).rejects.toThrow(
+    await runExceptionForGetBonusNumber(
+      input,
       MESSAGES.ERROR.DUPLICATE_BONUS_NUMBER
     );
   });
