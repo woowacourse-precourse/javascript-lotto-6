@@ -76,4 +76,22 @@ describe("숫자 입력 테스트", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
+
+
+  test("숫자가 아닌 문자열 이 입력될 경우 예외가 발생한다.", async () => {
+    Console.readLineAsync
+    .mockResolvedValueOnce('숫자가 아닙니다')
+    .mockResolvedValueOnce('1000');
+
+    try {
+      await Input.readInteger("숫자 입력");  
+    }
+    catch(e){
+      checkErrorInstance(e);
+
+      expect(Input.readInteger).toHaveBeenCalled();
+    }
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  });
 });
