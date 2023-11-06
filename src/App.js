@@ -8,6 +8,7 @@ import inputWinningNumbers from './input/inputWinningNumbers.js';
 import inputBonusNumber from './input/inputBonusNumber.js';
 import countSameNumbers from './game/countSameNumbers.js';
 import countWinningLotteries from './game/countWinningLotteries.js';
+import getReturnRate from './game/getReturnRate.js';
 
 class App {
   async play() {
@@ -30,7 +31,7 @@ class App {
 
     const SAME_NUMBER_LIST = countSameNumbers(LOTTERIES, WINNING_NUMBERS);
     const WINNING_LOTTERY_LIST = countWinningLotteries(SAME_NUMBER_LIST);
-    console.log(WINNING_LOTTERY_LIST);
+    const RETURN_RATE = getReturnRate(WINNING_LOTTERY_LIST, PRICE);
   }
 }
 
