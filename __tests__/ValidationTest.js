@@ -80,3 +80,35 @@ describe('당첨 번호 입력 유효성 테스트', () => {
     }).toThrow('[ERROR] 입력이 1 ~ 45 사이가 아닙니다');
   });
 });
+
+describe('보너스 번호 입력 유효성 테스트', () => {
+  const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+  test('입력된 값이 없을 때, 예외가 발생한다.', () => {
+    const input = '';
+    expect(() => {
+      new App().validateBonusNumber(winningNumbers, input);
+    }).toThrow('[ERROR] 입력이 없습니다.');
+  });
+
+  test('입력된 값이 숫자가 아닐 때, 예외가 발생한다.', () => {
+    const input = 'ㄱ';
+    expect(() => {
+      new App().validateBonusNumber(winningNumbers, input);
+    }).toThrow('[ERROR] 입력이 숫자가 아닙니다.');
+  });
+
+  test('입력된 값이 1 ~ 45 사이가 아닐 때, 예외가 발생한다.', () => {
+    const input = '46';
+    expect(() => {
+      new App().validateBonusNumber(winningNumbers, input);
+    }).toThrow('[ERROR] 입력이 1 ~ 45 사이가 아닙니다');
+  });
+
+  test('입력된 값이 당첨 번호와 중복일 때, 예외가 발생한다.', () => {
+    const input = '1';
+    expect(() => {
+      new App().validateBonusNumber(winningNumbers, input);
+    }).toThrow('[ERROR] 입력이 당첨 번호와 중복되는 값입니다.');
+  });
+});
