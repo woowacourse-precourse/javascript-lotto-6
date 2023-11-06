@@ -11,12 +11,17 @@ class App {
       lottoTickets.push(getLottoTicket())
     }
 
-
-    const winningNumbers = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
+    Console.print("")
+    
+    Console.print(`${lottoCount}개를 구매했습니다.`)
+    for (let lottoTicket of lottoTickets){
+      Console.print(lottoTicket)
+    }
+    
+    const winningNumbers = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
     const lotto = new Lotto(winningNumbers.split(","));
     
-
-    const bonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
+    const bonusNumber = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
     lotto.addBonusNumber(bonusNumber)
 
     let result = {
@@ -31,6 +36,9 @@ class App {
       const count = lotto.checkResult(ticket);
       recordResult(result, count);
     }
+
+    Console.print("\n당첨 통계")
+    Object.entries(result).forEach((entry)=>{Console.print(`${entry[0]} - ${entry[1]}개`)})
 
   }
 }
