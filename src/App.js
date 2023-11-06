@@ -32,6 +32,11 @@ class App {
       this.game.setBonusNum(bonusNum)
     );
   }
+
+  inputWinningStats() {
+    Console.print(GAME_MESSAGE.STATIC);
+    this.game.setWinningStats();
+  }
 }
 
 export default App;
