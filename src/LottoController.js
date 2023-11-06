@@ -21,6 +21,7 @@ class LottoController {
   validateBudget(input) {
     BudgetValidator.isNum(input);
     BudgetValidator.minIsUnitPrice(input);
+    BudgetValidator.divisibleByUnitPrice(input);
   }
 }
 

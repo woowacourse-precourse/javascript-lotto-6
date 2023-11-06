@@ -12,6 +12,11 @@ const BudgetValidator = {
       throw new Error(ErrorMsg.Budget.MIN_IS_UNIT_PRICE);
     }
   },
+  divisibleByUnitPrice(input) {
+    if (Number(input) % Constant.UNIT_PRICE !== 0) {
+      throw new Error(ErrorMsg.Budget.DIVISBLE_BY_UNIT_PRICE);
+    }
+  },
 };
 
 export default BudgetValidator;

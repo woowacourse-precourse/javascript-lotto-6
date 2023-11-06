@@ -9,11 +9,19 @@ describe("구입 금액 입력 테스트", () => {
     }).toThrow(ErrorMsg.Budget.MUST_BE_NUM);
   });
 
-  const input = ["33", "999"];
-  test.each(input)("구입금액이 1000미만일 경우 예외가 발생한다", (input) => {
+  test.each(["33", "999"])(
+    "구입금액이 1000미만일 경우 예외가 발생한다",
+    (input) => {
+      expect(() => {
+        BudgetValidator.minIsUnitPrice(input);
+      }).toThrow(ErrorMsg.Budget.MIN_IS_UNIT_PRICE);
+    }
+  );
+
+  test("구매금액이 1000단위가 아닌 경우 예외가 발생한다", () => {
     expect(() => {
-      BudgetValidator.minIsUnitPrice(input);
-    }).toThrow(ErrorMsg.Budget.MIN_IS_UNIT_PRICE);
+      BudgetValidator.divisibleByUnitPrice("2009");
+    }).toThrow(ErrorMsg.Budget.DIVISBLE_BY_UNIT_PRICE);
   });
 });
 
