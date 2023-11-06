@@ -18,9 +18,6 @@ describe("LottoStoreTest", () => {
     mockReadLineAsync.mockReset();
     Validator.validateBonusNumber.mockReset();
     Validator.validateWinningNumbers.mockReset();
-    Validator.validateBonusNumber.mockImplementation(() => {
-      throw new Error(ERROR_MESSAGE.invalidTicketNumbers);
-    });
   });
 
   test("당첨 번호는 ,를 기준으로 나눈다", async () => {
@@ -33,13 +30,25 @@ describe("LottoStoreTest", () => {
     );
   });
 
-  test("보너스 번호는 1~45사이 정수를 입력하지 않으면 예외가 발생한다", async () => {
-    mockReadLineAsync.mockResolvedValue("49");
-    await expect(LottoStore.askBonusNum()).rejects.toThrow(
+  test("당첨 번호는 1~45사이 정수들을 입력하지 않으면 예외가 발생한다", async () => {
+    mockReadLineAsync.mockResolvedValue("1,2,3,4,5,52");
+    Validator.validateWinningNumbers.mockImplementation(() => {
+      throw new Error(ERROR_MESSAGE.invalidTicketNumbers);
+    });
+    await expect(LottoStore.askWinningNum()).rejects.toThrow(
       ERROR_MESSAGE.invalidTicketNumbers
     );
     expect(mockReadLineAsync).toHaveBeenCalledTimes(1);
   });
 
-  test("");
+  test("보너스 번호는 1~45사이 정수를 입력하지 않으면 예외가 발생한다", async () => {
+    mockReadLineAsync.mockResolvedValue("49");
+    Validator.validateBonusNumber.mockImplementation(() => {
+      throw new Error(ERROR_MESSAGE.invalidTicketNumbers);
+    });
+    await expect(LottoStore.askBonusNum()).rejects.toThrow(
+      ERROR_MESSAGE.invalidTicketNumbers
+    );
+    expect(mockReadLineAsync).toHaveBeenCalledTimes(1);
+  });
 });
