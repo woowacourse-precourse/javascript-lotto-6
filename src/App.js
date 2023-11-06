@@ -7,12 +7,22 @@ class App {
   }
   async play() {
     try {
-      const lottoAmount = await this.view.getLottoPerchaseAmount();
-      let model = new Lotto(lottoAmount);
-
-      model.validateLottoAmount();
+      const lottoAmount = await this.validateLottoAmount();
     } catch (error) {
       throw error;
+    }
+  }
+
+  async validateLottoAmount() {
+    while (true) {
+      try {
+        const lottoAmount = await this.view.getLottoPerchaseAmount();
+        const model = new Lotto(lottoAmount);
+        model.validateLottoAmount();
+        return lottoAmount;
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }
