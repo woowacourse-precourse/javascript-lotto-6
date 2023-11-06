@@ -1,7 +1,11 @@
 import { RANGE_MIN, RANGE_MAX, keys, errorMessages } from './constants.js'
 
-export const validatePurchase = (amount) => {
+export const validatePurchase = (input) => {
+    const amount = Number(input);
     const remainder = amount % 1000;
+
+    if (Number.isNaN(amount)) throw new Error(errorMessages.NAN);
+    if (amount < 0) throw new Error(errorMessages.NEGATIVE_AMOUNT);
     if (remainder) throw new Error(errorMessages.PURCHASE_AMOUNT);
 };
 
@@ -26,7 +30,7 @@ export const createScorekeeper = () => {
     for (let i = 0; i < keyList.length; i += 1) {
         scores[keyList[i]] = 0;
     }
-    
+
     return scores;
 };
 
