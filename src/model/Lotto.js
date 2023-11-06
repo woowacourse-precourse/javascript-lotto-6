@@ -4,6 +4,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.#sortLotto();
   }
 
   #validate(numbers) {
@@ -12,7 +13,9 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  #sortLotto(){
+    this.#numbers.sort();
+  }
 }
 
 export default Lotto;
