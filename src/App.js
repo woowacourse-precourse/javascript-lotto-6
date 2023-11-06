@@ -6,6 +6,7 @@ import ProfitCalculator from "./models/ProfitCalculator.js";
 
 class App {
   async play() {
+    OutputView.printInsertMoneyMessage();
     const purchasePrice = await InputView.getPurchasePrice();
     
     const lottoCount = parseInt(purchasePrice / 1000);
@@ -14,7 +15,10 @@ class App {
     const lottos = GenerateLottoNumbers.getLottos(lottoCount);
     OutputView.printLottos(lottos);
 
+    OutputView.printInsertWinningNumbersMessage();
     const winningNumbers = await InputView.getWinningNumbers(); 
+
+    OutputView.printInsertBonusNumberMessage();
     const bonusNumber = await InputView.getBonusNumber(winningNumbers);
 
     const game = new LottoResultCalculator(lottos);
@@ -24,7 +28,8 @@ class App {
     const roi = ProfitCalculator.calculateROI(totalPrize, purchasePrice);
 
     OutputView.printResult(roi, result);
-  }
+}
+
 }
 
 export default App;

@@ -1,7 +1,18 @@
 import { Console } from "@woowacourse/mission-utils";
-import { GUIDE_MESSAGE,  WINNING_RESULT_DETAILS } from "../constants/Message";
+import { GUIDE_MESSAGE, WINNING_RESULT_DETAILS } from "../constants/Message";
 
 export default class OutputView {
+  static printInsertMoneyMessage() {
+    Console.print(GUIDE_MESSAGE.insertMoney);
+  }
+
+  static printInsertWinningNumbersMessage() {
+    Console.print(GUIDE_MESSAGE.insertWinningNumbers);
+  }
+
+  static printInsertBonusNumberMessage() {
+    Console.print(GUIDE_MESSAGE.insertBonusNumber);
+  }
   static printLottoCount(lottoCount) {
     Console.print(`${lottoCount}${GUIDE_MESSAGE.totalTickets}`);
   }
@@ -10,6 +21,14 @@ export default class OutputView {
     for (let lotto of lottos) {
       const numbers = lotto.getNumbers();
       Console.print(`[${numbers.join(", ")}]`);
+    }
+  }
+
+  static printError(error) {
+    if (error.message.startsWith('[ERROR]')) {
+        Console.print(error.message); 
+    } else {
+        throw error;  
     }
   }
 
@@ -23,10 +42,13 @@ export default class OutputView {
     Console.print(`${WINNING_RESULT_DETAILS.SECOND}${result[2]}개`);
     Console.print(`${WINNING_RESULT_DETAILS.FIRST}${result[1]}개`);
     Console.print(
-      GUIDE_MESSAGE.totalReturn.replace('*', roi.toLocaleString("ko-KR", {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
-      }))
+      GUIDE_MESSAGE.totalReturn.replace(
+        "*",
+        roi.toLocaleString("ko-KR", {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1,
+        }),
+      ),
     );
   }
 }
