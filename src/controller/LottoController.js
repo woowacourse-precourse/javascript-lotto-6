@@ -4,6 +4,7 @@ import OutputView from '../views/OutputView.js';
 import Lotto from '../domains/Lotto.js';
 import Winning from '../domains/Winning.js';
 import Profit from '../domains/Profit.js';
+import { checkMoneyValidate } from '../utils/validate.js';
 
 class LottoController {
   #money;
@@ -15,30 +16,25 @@ class LottoController {
   }
 
   async start() {
+    await this.inputMoney();
+    this.printLottoCount();
+  }
+
+  /** 구입금액 입력 함수 */
+  async inputMoney() {
     const money = await InputView.readMoney();
-    this.validateMoney(money);
-  }
-
-  /**
-   * 구입금액에 대한 유효성 검사
-   * @param {string} money
-   */
-  async validateMoney(money) {
-    if (Number(money) % LOTTO.PRICE !== 0) {
-      OutputView.moneyError();
-      await this.start();
-      return;
+    try {
+      checkMoneyValidate(money);
+      this.#money = Number(money);
+    } catch (error) {
+      OutputView.moneyError(error);
+      await this.inputMoney();
     }
-    this.#money = Number(money);
-    this.printLottoCount(money);
   }
 
-  /**
-   * 구매개수를 출력하는 함수
-   * @param {string} money
-   */
-  printLottoCount(money) {
-    const count = Number(money) / LOTTO.PRICE;
+  /** 구매개수 출력 함수 */
+  printLottoCount() {
+    const count = this.#money / LOTTO.PRICE;
     OutputView.lottoCount(count);
     this.createLotto(count);
   }
@@ -53,62 +49,6 @@ class LottoController {
       this.#lottos.push(lotto);
     });
     this.printLottoList();
-  }
-
-  /** 로또 출력 함수 */
-  printLottoList() {
-    this.#lottos.forEach((lotto) => {
-      OutputView.lottoList(lotto);
-    });
-    this.inputWinningNumber();
-  }
-
-  /** 당첨, 보너스 번호 입력받는 함수 */
-  async inputWinningNumber() {
-    const numbers = await InputView.readWinningNumber();
-    const bonus = await InputView.readBonusNumber();
-
-    this.countWinningNumber(numbers, bonus);
-  }
-
-  /**
-   * 당첨번호와 로또번호 비교하는 함수
-   * @param {number[]} numbers
-   * @param {number} bonus
-   */
-  countWinningNumber(numbers, bonus) {
-    const winning = new Winning(numbers, bonus);
-    const counts = this.#lottos.map((lotto) => {
-      return winning.compareLotto(lotto);
-    });
-
-    this.winningStatistic(counts);
-  }
-
-  /**
-   * 일치하는 개수로 당첨 통계 계산하는 함수
-   * @param {string[]} counts
-   */
-  winningStatistic(counts) {
-    const profit = new Profit(counts);
-    this.printStatistic(profit.getHistory());
-    this.printProfit(profit.calculate(this.#money));
-  }
-
-  /**
-   * 당첨 통계 출력하는 함수
-   * @param {number[]} counts
-   */
-  printStatistic(counts) {
-    OutputView.statistic(counts);
-  }
-
-  /**
-   * 수익률 출력하는 함수
-   * @param {number} percent
-   */
-  printProfit(percent) {
-    OutputView.profit(percent);
   }
 }
 

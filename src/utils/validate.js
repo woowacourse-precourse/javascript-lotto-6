@@ -1,4 +1,4 @@
-import { EXCEPTION } from '../constants/constants.js';
+import { EXCEPTION, LOTTO } from '../constants/constants.js';
 
 /**
  * 로또 번호가 6개인 체크하는 유효성 검사 함수
@@ -40,5 +40,11 @@ export function checkDuplicate(numbers) {
 export function checkBonusDuplicate(numbers, bonus) {
   if (numbers.includes(bonus)) {
     throw new Error(EXCEPTION.BONUS_DUPLICATE);
+  }
+}
+
+export function checkMoneyValidate(money) {
+  if (Number(money) % LOTTO.PRICE !== 0) {
+    throw new Error(EXCEPTION.MONEY_DIVIDE_ERROR);
   }
 }
