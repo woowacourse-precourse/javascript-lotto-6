@@ -1,3 +1,4 @@
+import { Random } from '@woowacourse/mission-utils';
 import {
   DRAW_NUMBERS,
   LOTTO_PRICE,
@@ -6,6 +7,7 @@ import {
   PRICE_3RD,
   PRICE_4TH,
   PRICE_5TH,
+  RANDOM_NUMBER,
 } from '../constants/numbers.js';
 import { ERROR_MESSAGE } from '../constants/messages.js';
 import {
@@ -17,7 +19,6 @@ import {
 } from '../constants/strings.js';
 import InputValidator from './InputValidator.js';
 import Lotto from '../Lotto.js';
-import NumberGenerator from './NumberGenerator.js';
 import ValidationError from './ValidationError.js';
 
 class LottoMaker {
@@ -53,14 +54,12 @@ class LottoMaker {
   }
 
   getSortedNumbers() {
-    const numbers = [];
+    const numbers = Random.pickUniqueNumbersInRange(
+      RANDOM_NUMBER.from,
+      RANDOM_NUMBER.to,
+      DRAW_NUMBERS,
+    );
 
-    while (numbers.length !== DRAW_NUMBERS) {
-      const randomNumber = NumberGenerator.createRandomNumber();
-      if (!numbers.includes(randomNumber)) {
-        numbers.push(randomNumber);
-      }
-    }
     return numbers.sort((a, b) => a - b);
   }
 
