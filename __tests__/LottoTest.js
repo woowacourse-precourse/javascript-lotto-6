@@ -62,4 +62,19 @@ describe("로또 클래스 테스트", () => {
     lottoGame.saveCompareResult(input, lottoBoard);
     expect(lottoBoard.fiveAndBonusSame).toEqual(1);
   });
+
+  test("로또 당첨 금액 계산", () => {
+    let totalReward = 0;
+    const lottoGame = new Lotto([1, 2, 3, 4, 5, 6]);
+    const lottoBoard = {
+      threeSame: 1,
+      fourSame: 2,
+      fiveSame: 0,
+      fiveAndBonusSame: 0,
+      sixSame: 0,
+    };
+
+    totalReward += lottoGame.calculateReward(lottoBoard);
+    expect(totalReward).toEqual(105000);
+  });
 });
