@@ -1,5 +1,3 @@
-import InputError from '../error/InputError.js';
-
 // 각 인풋의 유효성 검사는 이 클래스의 메서드 조합으로 한다.
 class InputValidator {
   static isArrayHaveNan(arr) {
@@ -26,6 +24,9 @@ class InputValidator {
     return start > num || end < num;
   }
 
+  static isNegativeNumber(num) {
+    return num < 0;
+  }
   // static checkLength(length, arr) {
   //   return arr.length !== length;
   // }
