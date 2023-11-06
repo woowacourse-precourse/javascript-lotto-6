@@ -1,7 +1,7 @@
 import ERROR_MESSAGE from '../constants/ErrorMessage';
 import NUMBER from '../constants/Number';
 
-const ValidateContoller = {
+const ValidateController = {
   isNumber(number) {
     if (Number.isNaN(number)) throw Error(ERROR_MESSAGE.INVALID_NUMBER);
   },
@@ -32,4 +32,4 @@ const ValidateContoller = {
   },
 };
 
-export default ValidateContoller;
+export default ValidateController;
