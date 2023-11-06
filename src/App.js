@@ -13,8 +13,9 @@ class App {
   async inputNumber() {
     await MissionUtils.Console.print("\n" + INPUT_NUMBER_MESSAGE);
     const input = await MissionUtils.Console.readLineAsync("");
-    const numbers = input.split(",");
-    const lotto = new Lotto(numbers);
+    const NUMBERS = input.split(",");
+
+    return NUMBERS;
   }
 
   async inputBonus() {
@@ -22,6 +23,8 @@ class App {
     const BONUS = Number(await MissionUtils.Console.readLineAsync(""));
 
     this.validateBonus(BONUS);
+
+    return BONUS;
   }
 
   async validateBonus(BONUS) {
@@ -30,11 +33,16 @@ class App {
     }
   }
 
+  async bonusMatching(BONUS) {}
+
   async play() {
     const user = new User();
     await user.play();
-    await this.inputNumber();
-    await this.inputBonus();
+    const NUMBERS = await this.inputNumber();
+    const lotto = new Lotto(NUMBERS);
+    const CORRECT = lotto.getNumbers();
+    const BONUS = await this.inputBonus();
+    const MATCH_NUMBER = user.matching(CORRECT, BONUS);
   }
 }
 

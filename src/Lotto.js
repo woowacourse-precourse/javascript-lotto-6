@@ -33,7 +33,9 @@ class Lotto {
   }
 
   getNumbers() {
-    return this.#numbers.sort((a, b) => a - b);
+    return this.#numbers.map(function (number) {
+      return (number = Number(number));
+    });
   }
 
   // TODO: 추가 기능 구현
