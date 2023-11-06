@@ -2,7 +2,7 @@ import Money from "../domain/Money.js";
 import { InputView } from "../view/InputView.js";
 import { lottoSeller } from "../domain/LottoSeller.js";
 import Lotto from "../Lotto.js";
-import { lottoNumbersParser } from "../utils/lottoNumbersParser.js";
+import { lottoNumbersParser } from "../domain/lottoNumbersParser.js";
 import LottoAnswer from "../domain/LottoAnswer.js";
 
 class LottoController {
