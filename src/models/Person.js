@@ -9,13 +9,13 @@ class Person {
   }
 
   #validate(money) {
-    if (Number.isNaN(money) || money[0] === '0') {
-      throw new Error('[Error] 구매 금액은 양의 정수 입니다.');
+    if (isNaN(money) || money[0] === '0') {
+      throw new Error('[ERROR] 구매 금액은 양의 정수 입니다.');
     }
   }
 
   purchasedLottoNumber() {
-    return this.#money % 1000;
+    return Math.floor(this.#money / 1000);
   }
 
   purchasedLottoInformation(lottoArray) {
@@ -27,7 +27,7 @@ class Person {
   }
 
   getMoney() {
-    return (this.#money % 1000) * 1000;
+    return Math.floor(this.#money / 1000) * 1000;
   }
 }
 
