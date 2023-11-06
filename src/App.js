@@ -1,18 +1,14 @@
 import { print } from "./utils/print.js";
 import { calcPurchaseQuantity } from "./Calc/calcPurchaseQuantity.js";
-import {
-  WINNING_NUMBERS_INPUT_REQUEST,
-  BONUS_NUMBER_INPUT_REQUEST,
-} from "./utils/message.js";
+import { BONUS_NUMBER_INPUT_REQUEST } from "./utils/message.js";
 import { getValidBonusNumber } from "./GetValidBonusNumber.js";
 import { calcResult } from "./Calc/CalcResult.js";
 import { printResult } from "./PrintResult.js";
 import { calcProfitRate } from "./Calc/CalcProfitRate.js";
-import { Console } from "@woowacourse/mission-utils";
 
-import Lotto from "./domain/Lotto.js";
 import LottoMachine from "./domain/LottoMachine.js";
 import Purchase from "./domain/Purchase.js";
+import WinningNumber from "./domain/WinningNumber.js";
 
 class App {
   purchase_amount;
@@ -36,7 +32,7 @@ class App {
   }
 
   async play() {
-    // 1. 구매 금액 받기
+    // 1. 구매 금액 입력 받기
     const purchase = new Purchase();
     this.purchase_amount = await purchase.purchase();
 
@@ -48,25 +44,22 @@ class App {
     this.lotto_list = lotto_machine.generateAllLottos(this.purchase_quantity);
     lotto_machine.printLottos(this.purchase_quantity, this.lotto_list);
 
-    // 7. 당첨 번호 입력 안내 문구 출력
-    print(`\n${WINNING_NUMBERS_INPUT_REQUEST}`);
-    // 8. 당첨 번호 입력받기
-    const input = await Console.readLineAsync("");
-    const numbers = input.split(",");
-    const LOTTO = new Lotto(numbers);
+    // 4. 당첨 번호 입력받기
+    const winning_number = new WinningNumber();
+    this.winning_number = await winning_number.returnWinningNumber();
 
-    let number = LOTTO.returnNumbers(numbers);
-    this.winning_number = number.map(Number);
-    // 9. 보너스 번호 입력 안내 문구 출력
+    // 5. 보너스 번호 입력 안내 문구 출력
     print(`\n${BONUS_NUMBER_INPUT_REQUEST}`);
     // 10. 보너스 번호 입력받기
     this.bonus_number = await getValidBonusNumber();
+
     // 11. 발행한 로또 번호와 당첨 번호 비교하기
     const result = calcResult(
       this.lotto_list,
       this.winning_number,
       this.bonus_number
     );
+
     // 12. 당첨 내역 출력하기
     printResult(result);
     // 13. 총 수익률 구하기
