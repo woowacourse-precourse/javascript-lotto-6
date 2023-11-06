@@ -1,7 +1,7 @@
 import ERROR_MESSAGE from '../constants/ErrorMessage';
 import NUMBER from '../constants/Number';
 
-const ValidateController = {
+const Validate = {
   isNumber(number) {
     if (Number.isNaN(number)) throw Error(ERROR_MESSAGE.INVALID_NUMBER);
   },
@@ -29,6 +29,26 @@ const ValidateController = {
   isDuplicateBonusNumber(winningNumers, bonusNumber) {
     if (winningNumers.include(bonusNumber))
       throw Error(ERROR_MESSAGE.INVALID_DUPLICATE_BONUS_NUMBER);
+  },
+};
+
+const ValidateController = {
+  validatePurchaseLottoAmount(amount) {
+    Validate.isNumber(amount);
+    Validate.isPurchaseUnit(amount);
+  },
+
+  validateWinningNumbers(numbers) {
+    numbers.map(number => Validate.isNumberInRange(number));
+    Validate.isWinningNumbersLength(numbers);
+    Validate.isDuplicateWinningNumbers(numbers);
+    numbers.map(number => Validate.isNumberInRange(number));
+  },
+
+  validateBonusNumber(number) {
+    Validate.isNumber(number);
+    Validate.isNumberInRange(number);
+    Validate.isDuplicateBonusNumber(number);
   },
 };
 
