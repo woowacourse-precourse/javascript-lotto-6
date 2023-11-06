@@ -6,20 +6,22 @@ import { Winning } from "./Winning.js";
 
 class App {
   async play() {
-    const lottoCounts = await inputMoney();
-    lottoCountPrinter(lottoCounts);
-    lottoPrinter(lottoCounts);
-    const winningNumbers = await inputWinningNumber();
-    MissionUtils.Console.print("");
-    const bonusNumber = await inputBonusNumber(winningNumbers);
-    MissionUtils.Console.print("");
-    lottosReader(lottoNumbers, winningNumbers, bonusNumber, lottoCounts);
-    console.log(bonusNumber);
-    console.log(lottoNumbers);
-    console.log(winningNumbers);
-    console.log(winningResults);
-    lottoResultsPrinter(winningDetails.winning);
-    //lottoResultPrinter([5,0], 2)
+    try {
+      const lottoCounts = await inputMoney();
+      lottoCountPrinter(lottoCounts);
+      lottoPrinter(lottoCounts);
+      const winningNumbers = await inputWinningNumber();
+      //MissionUtils.Console.print("");
+      const bonusNumber = await inputBonusNumber(winningNumbers);
+      //MissionUtils.Console.print("");
+      lottosReader(lottoNumbers, winningNumbers, bonusNumber, lottoCounts);
+      lottoResultsCounter(winningResults, lottoCounts);
+      lottoResultsPrinter(winningDetails.winning);
+      MissionUtils.Console.print("");
+      totalRate(lottoCounts*1000, winningDetails.totalPrize);
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 }
 
@@ -28,7 +30,7 @@ export default App;
 const PURCASE_COMMENT = "구입금액을 입력해 주세요."
 const WINNING_NUMBER_COMMENT = "당첨 번호를 입력해 주세요.";
 const BONUS_NUMBER_COMMENT = "보너스 번호를 입력해 주세요.";
-//const LOTTO_PRICE = 1000;
+
 const winningDetails = {
   same : [3, 4, 5, 5, 6],
   sameAndBounus : [3, 4, [5,0], [5,1], 6],
@@ -114,7 +116,7 @@ export function lottoReader(lotto, winning, bonus) {
   if (sameBonus === false) {
     return [sameNumbers.length, 0];
   }
-  return [sameNumbers.length, sameBonus.length];
+  return [sameNumbers.length, 1];
 }
 
 export function lottoResultsPrinter(results) {
@@ -144,6 +146,7 @@ function lottoResultCounter(result) {
   for (let i = 3; i < 7; i++) {
     if (result[0] === i && i !== 5) {
       winningDetails.winning[i-3] += 1;
+      winningDetails.totalPrize += winningDetails.prize[i-3];
     }
   }
   if (result[0] === 5) {
@@ -154,8 +157,9 @@ function lottoResultCounter(result) {
 function lottoResultBonusCounter(result) {
   if (result[1] === 0) {
     winningDetails.winning[2] += 1;
+    winningDetails.totalPrize += winningDetails.prize[2];
   }
-  winningDetails.winning[3] += 1;
+  winningDetails.totalPrize += winningDetails.prize[3];
 }
 
 function formatCurrency(number) {
