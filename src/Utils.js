@@ -12,7 +12,7 @@ class Utils {
   }
 
   static getRandomNumbers() {
-    const randomNumbers = Random.pickUniqueNumbersInRange(1, 49, 6);
+    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     return randomNumbers;
   }
 
