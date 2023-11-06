@@ -7,15 +7,19 @@ import BonusNumber from '../model/BonusNumber.js';
 class LottoGame {
   #lottoBundle;
 
+  #winningLotto;
+
+  #bonusNumber;
+
   async startGame() {
     this.#lottoBundle = await this.#getLottoBundle();
     this.#lottoBundle.buyLottos();
     OutputView.printLottoNumbers(this.#lottoBundle.getLottoList());
 
-    const winningLotto = await this.#getWinningLotto();
-    const bonusNumber = await this.#getBonusNumber();
+    this.#winningLotto = await this.#getWinningLotto();
+    this.#bonusNumber = await this.#getBonusNumber();
 
-    this.#lottoBundle.calculateTotalRank(winningLotto, bonusNumber.getNumber());
+    this.#lottoBundle.calculateTotalRank(this.#winningLotto, this.#bonusNumber.getNumber());
     OutputView.printGameResult(this.#lottoBundle.getTotalRank(), this.#lottoBundle.getProfitRate());
   }
 
@@ -51,8 +55,7 @@ class LottoGame {
   async #getBonusNumber() {
     try {
       const bonusNumber = await InputView.readBonusNumber();
-
-      return new BonusNumber(bonusNumber);
+      return new BonusNumber(bonusNumber, this.#winningLotto.getNumbers());
     } catch (error) {
       OutputView.printMessage(error.message);
 
