@@ -9,15 +9,12 @@ class App {
   #bonusNumber;
   #lottoStat;
   #prizeMoney;
+  #rateOfEarn;
 
   constructor() {
-    this.#orderPrice;
-    this.#orderQuantity;
     this.#lottoOrder = [];
     this.#winningNumbers = [];
-    this.#bonusNumber;
     this.#lottoStat = [0, 0, 0, 0, 0, 0];
-    this.prizeMoney;
   }
 
   getUserInput = async () => {
@@ -161,6 +158,12 @@ class App {
     this.#prizeMoney = prizeMoney;
   }
 
+  getRateOfEarn = () => {
+    const rateOfEarn = this.#prizeMoney / this.#orderPrice;
+
+    this.#rateOfEarn = rateOfEarn.toFixed(1);
+  }
+
   async play() {
     try {
       MissionUtils.Console.print('구입금액을 입력해 주세요.');
@@ -196,9 +199,10 @@ class App {
       this.checkBonusNumber(bonusNumber);
       
       this.getLottoStat();
+      this.setPrizeMoney();
+      this.getRateOfEarn();
 
-      console.log(this.#lottoStat);
-
+      console.log(this.#rateOfEarn);
 
     } catch(err) {
       return Promise.reject(err);
