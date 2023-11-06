@@ -10,12 +10,13 @@ class Lotto {
   }
   
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    const numberArray = Object.values(numbers);
+    if (numberArray.length !== 6) {
       throw new Error(ERROR.LOTTO_NUMBER_NOT_SIX);
     }
-
-    const numberSet = new Set(numbers);
-    if (numbers.length !== numberSet.length) {
+    
+    const numberSet = new Set(numberArray);
+    if (numberArray.length !== numberSet.size) {
       throw new Error(ERROR.LOTTO_NUMBER_IS_REDUNDANT);
     }
   }
