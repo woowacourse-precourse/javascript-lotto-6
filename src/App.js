@@ -1,11 +1,11 @@
-import { LottoGame } from './controller/LottoGame';
+import { GameManager } from './controller/GameManager';
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async play() {
     try {
-      const lottogame = new LottoGame();
-      lottogame.startGame();
+      const gamemanager = new GameManager();
+      gamemanager.startGame();
     } catch (error) {
       Console.print(error);
     }

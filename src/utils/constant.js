@@ -2,6 +2,10 @@ export const INPUT_MESSAGE = Object.freeze({
   MONEY_AMOUNT: '구입 금액을 입력해주세요.',
 });
 
+export const OUTPUT_MESSAGE = Object.freeze({
+  QUANTITY: '개를 구매했습니다.',
+});
+
 export const VALIDATION_RULE = Object.freeze({
   LOTTO_LENGTH: 6,
 });

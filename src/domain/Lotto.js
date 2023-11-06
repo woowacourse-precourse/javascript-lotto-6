@@ -1,6 +1,6 @@
 import { VALIDATION_RULE, ERROR_MESSAGE } from '../utils/constant';
 
-class Lotto {
+export class Lotto {
   #numbers;
   /* 배열로 초기화, 초기화 할때 validate */
   constructor(numbers) {
@@ -14,7 +14,9 @@ class Lotto {
     }
   };
 
+  convert_toString = () => {
+    return this.#numbers.join(', ');
+  };
+
   // TODO: 추가 기능 구현
 }
-
-export default Lotto;
