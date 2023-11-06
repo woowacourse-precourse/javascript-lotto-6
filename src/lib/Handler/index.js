@@ -1,6 +1,7 @@
 // domain
 import Lotto from "../../Lotto.js";
-import Tickets from "../Domain/Tickets.js";
+import LottoBundle from "../Domain/LottoBundle.js";
+import ReferenceLotto from "../Domain/ReferenceLotto.js";
 // view
 import InputView from "../View/InputView.js";
 import OutputView from "../View/OutputView.js";
@@ -10,34 +11,34 @@ import { ERROR_MESSAGE } from "../Constants.js";
 import { ValidationError } from "../Error/ValidationError.js";
 
 export class Handler {
-  static async tickets() {
+  static async lottoBundle() {
     try {
       const response = await InputView.ticketMoney();
-      const tickets = new Tickets(response);
-      return tickets;
+      const lottoBundle = new LottoBundle(response);
+      return lottoBundle;
     } catch (err) {
-      return Handler.#handleError(err, () => Handler.tickets());
+      return Handler.#handleError(err, () => Handler.lottoBundle());
     }
   }
 
-  static async lotto() {
+  static async winningLotto() {
     try {
       const response = await InputView.winNumbers();
       const lotto = new Lotto(response);
       return lotto;
     } catch (err) {
-      return Handler.#handleError(err, () => Handler.lotto());
+      return Handler.#handleError(err, () => Handler.winningLotto());
     }
   }
 
-  static async bonusNumber(lotto) {
+  static async referenceLotto(lotto) {
     try {
-      const response = await InputView.bonusNumber();
       if (!lotto) throw new Error(ERROR_MESSAGE.LOTTO_NOT_EXIST);
-      lotto.validateBonusNumber(response);
-      return response;
+      const response = await InputView.bonusNumber();
+      const referenceLotto = new ReferenceLotto(lotto, response);
+      return referenceLotto;
     } catch (err) {
-      return Handler.#handleError(err, () => Handler.bonusNumber(lotto));
+      return Handler.#handleError(err, () => Handler.referenceLotto(lotto));
     }
   }
 

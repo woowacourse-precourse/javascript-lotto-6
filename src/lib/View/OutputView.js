@@ -2,12 +2,12 @@ import { Console } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGE, GAME_RULE } from "../Constants.js";
 
 class OutputView {
-  static tickets({ ticketItems }) {
+  static lottoBundle({ purchaseHistory }) {
     Console.print(
       [
         "",
-        `${ticketItems.length}개를 구매했습니다.`,
-        ...ticketItems.map((ticket) => `[${ticket.join(", ")}]`),
+        `${purchaseHistory.length}개를 구매했습니다.`,
+        ...purchaseHistory.map((numbers) => `[${numbers.join(", ")}]`),
         "",
       ].join("\n"),
     );
