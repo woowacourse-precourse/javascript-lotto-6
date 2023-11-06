@@ -1,6 +1,6 @@
-import { mockRandoms } from '../testUtils';
+import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
 import Cashier from '../src/Cashier';
-import { ERROR_MESSAGE, LOTTO_FORM } from '../src/constant';
+import { ERROR_MESSAGE, LOTTO_FORM, MESSAGE } from '../src/constant';
 import { getErrorMessage } from '../src/utils';
 
 describe('Cashier 클래스 테스트', () => {
@@ -8,8 +8,9 @@ describe('Cashier 클래스 테스트', () => {
 
   test('Cashier는 NaN이 아닌 숫자만 파라미터로 받는다. 그렇지 않을 경우 예외가 발생한다.', () => {
     const wrongParameters = ['1000', '1000원', NaN];
+    const cashier = new Cashier();
     wrongParameters.forEach((v) =>
-      expect(() => new Cashier(v)).toThrow(
+      expect(() => cashier.isNumber(v)).toThrow(
         getErrorMessage(ERROR_MESSAGE.isNotNumber),
       ),
     );
@@ -17,14 +18,29 @@ describe('Cashier 클래스 테스트', () => {
 
   test('손님이 지불한 금액이 1000원 미만이면 예외가 발생한다', () => {
     expect(() => {
-      new Cashier(500);
+      new Cashier().validatePayment(500);
     }).toThrow(errorMessage);
   });
 
   test('손님이 지불한 금액이 1000원 단위로 떨어지지 않으면  예외가 발생한다', () => {
     expect(() => {
-      new Cashier(1500);
+      new Cashier().validatePayment(1500);
     }).toThrow(errorMessage);
+  });
+
+  test('손님이 지불한 금액이 유효하지 않으면,[ERROR]로 시작하는 문구를 출력한 후 유효한 입력값을 다시 받는다.', async () => {
+    const items = ['1500', '1000원', '1000'];
+    const cashier = new Cashier();
+    const logSpy = getLogSpy();
+
+    mockQuestions(items);
+    await cashier.getPayment();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(MESSAGE.paymentQuery),
+    );
   });
 
   test('로또를  손님이 지불한 만큼의 수량대로 발행한다.: 발행한 로또 수량 테스트', () => {
@@ -32,14 +48,14 @@ describe('Cashier 클래스 테스트', () => {
     const paymentArray = [price * 1, price * 3, price * 4];
     const tickets = [1, 3, 4];
 
-    paymentArray.forEach((v, i) => {
-      const cashier = new Cashier(v);
+    paymentArray.forEach(async (v, i) => {
+      const cashier = new Cashier();
       const number = cashier.getNumberOfTickets(v);
       expect(number).toEqual(tickets[i]);
     });
   });
 
-  test('로또를  손님이 지불한 만큼의 수량대로 발행한다.: 로또 발행', () => {
+  test('로또를  손님이 지불한 만큼의 수량대로 발행한다.: 로또 발행', async () => {
     const { price } = LOTTO_FORM;
     const payment = price * 3;
 
@@ -50,13 +66,15 @@ describe('Cashier 클래스 테스트', () => {
     ];
 
     mockRandoms(RANDOM_NUMBERS);
-
-    const cashier = new Cashier(payment);
+    const cashier = new Cashier();
+    cashier.getNumberOfTickets(payment);
     const lottos = cashier.issueLottos();
     const lottoNumbers = lottos.map((v) => v.getLottoNumbers());
 
     lottoNumbers.forEach((v, i) => {
-      expect(v.join(',')).toBe(RANDOM_NUMBERS[i].sort().join(','));
+      expect(v.join(',')).toBe(
+        RANDOM_NUMBERS[i].sort((a, b) => a - b).join(','),
+      );
     });
   });
 });
