@@ -4,6 +4,7 @@ import ValidateLottoNumSet from "./ValidateLottoNumSet";
 class PrintOutput {
   constructor() {
     this.lottoNumSets = [];
+    this.newLottoNumSets = [];
   }
 
   printLottoNumSet = (price) => {
@@ -16,8 +17,19 @@ class PrintOutput {
       this.lottoNumSets.push(lottoNumbers);
     }
 
-    ValidateLottoNumSet(this.lottoNumSets);
+    this.newLottoNumSets = ValidateLottoNumSet(this.lottoNumSets);
+    this.newLottoNumSets.forEach(lottoNumSet => {
+      Console.print(`[${lottoNumSet.join(", ")}]`);
+    });
+  }
 
-    forEach()
+  printWinningDetails = () => {
+    // 함수 구현
+  }
+  
+  printTotalReturn = () => {
+    // 함수 구현
   }
 }
+
+export default PrintOutput;
