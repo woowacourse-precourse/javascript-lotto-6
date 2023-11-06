@@ -6,9 +6,9 @@ const OutputView = {
     Console.print(`${lottoCount}${MESSAGE_PRINT.LOTTO_COUNT}`);
   },
 
-  printMyLottoNumber(lottoNumber) {
+  printMyLottoNumbers(lottoNumbers) {
     Console.print(
-      `${MESSAGE_PRINT.LOTTO_NUMBER_HEAD}${lottoNumber}${MESSAGE_PRINT.LOTTO_NUMBER_TAIL}`,
+      `${MESSAGE_PRINT.LOTTO_NUMBER_HEAD}${lottoNumbers}${MESSAGE_PRINT.LOTTO_NUMBER_TAIL}`,
     );
   },
 
