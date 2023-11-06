@@ -2,9 +2,13 @@ import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, RANK } from '../constants/Constant.js';
 
 const OutputView = {
-  printLottoNumbers(count, message) {
-    Console.print(`\n${count}${MESSAGE.buyLotto}`);
-    Console.print(message);
+  printLottoNumbers(lottoList) {
+    const lottoMessage = lottoList
+      .map((lotto) => `[${lotto.map((number) => number.toString()).join(', ')}]`)
+      .join('\n');
+
+    Console.print(`\n${lottoList.length}${MESSAGE.buyLotto}`);
+    Console.print(lottoMessage);
   },
 
   printMessage(message) {

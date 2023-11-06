@@ -20,8 +20,10 @@ class Lotto {
     return numbers.sort((first, second) => first - second);
   }
 
-  getNumberString() {
-    return `[${this.#numbers.join(', ')}]`;
+  getNumbers() {
+    return this.#numbers;
+  }
+
   findRank(winningLotto, bonusNumber) {
     const matchingCount = this.getMatchingCount(winningLotto, bonusNumber);
     return Object.keys(RANK).filter((prize) => RANK[prize].match === matchingCount);

@@ -36,8 +36,12 @@ class LottoBundle {
     );
   }
 
-  getTotalLottoNumberString() {
-    return this.#lottoList.map((lotto) => lotto.getNumberString()).join('\n');
+  getLottoCount() {
+    return this.#lottoCount;
+  }
+
+  getLottoList() {
+    return this.#lottoList.map((lotto) => lotto.getNumbers());
   }
 
   getTotalRank(winningLotto, bonusNumber) {
