@@ -1,4 +1,4 @@
-import Validator from '../src/model/Validator.js';
+import Price from '../src/model/Price.js';
 import InputView from '../src/view/InputView.js';
 import { Console } from '@woowacourse/mission-utils';
 import { ERROR } from '../src/util/constant.js';
@@ -9,7 +9,7 @@ describe('로또 금액 유효성 테스트', () => {
 
     moneyInput.forEach(money => {
       expect(() => {
-        Validator.moneyCheck(money);
+        new Price(money);
       }).toThrow(ERROR.emptyValue);
     });
   });
@@ -19,7 +19,7 @@ describe('로또 금액 유효성 테스트', () => {
 
     moneyInput.forEach(money => {
       expect(() => {
-        Validator.moneyCheck(money);
+        new Price(money);
       }).toThrow(ERROR.notNumberic);
     });
   });
@@ -29,7 +29,7 @@ describe('로또 금액 유효성 테스트', () => {
 
     moneyInput.forEach(money => {
       expect(() => {
-        Validator.moneyCheck(money);
+        new Price(money);
       }).toThrow(ERROR.notDivisibleMoney);
     });
   });
@@ -38,7 +38,7 @@ describe('로또 금액 유효성 테스트', () => {
     const moneyInput = '0';
 
     expect(() => {
-      Validator.moneyCheck(moneyInput);
+      new Price(moneyInput);
     }).toThrow(ERROR.underThousandMoney);
   });
 });

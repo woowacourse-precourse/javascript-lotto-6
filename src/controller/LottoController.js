@@ -1,8 +1,8 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import Validator from '../model/Validator.js';
 import Calculate from '../model/Calculate.js';
 import LottoGenerator from '../model/LottoGenerator.js';
+import Price from '../model/Price.js';
 import Lotto from '../Lotto.js';
 import Bonus from '../model/Bonus.js';
 import { Console } from '@woowacourse/mission-utils';
@@ -21,23 +21,14 @@ export default class LottoController {
     this.calculate = new Calculate();
   }
 
-  async start() {
-    await this.initializeLottoAmount();
-  }
-
-  async initializeLottoAmount() {
+  async inputPrice() {
     const moneyInput = await InputView.moneyInput();
-    this.#validate(moneyInput, Validator.moneyCheck);
-  }
-
-  // 가격유효성 검사로 가는 함수
-  #validate(inputValue, checkingFunction) {
     try {
-      checkingFunction(inputValue);
-      this.generateLottos(inputValue);
+      new Price(moneyInput);
+      this.generateLottos(moneyInput);
     } catch (error) {
       OutputView.printError(error);
-      this.initializeLottoAmount();
+      this.inputPrice();
     }
   }
 
