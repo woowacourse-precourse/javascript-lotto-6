@@ -54,16 +54,20 @@ class LottoGame {
   };
 
   getBonusNumber = async () => {
-    const bonus = await MissionUtils.Console.readLineAsync(
+    let bonus = await MissionUtils.Console.readLineAsync(
       Messages.BONUS_NUMBER_INPUT
     );
+    console.log(typeof bonus);
     if (isNaN(bonus)) {
       throw new Error(Messages.ERROR_ISNAN);
     }
     if (bonus < 1 || bonus > 45) {
       throw new Error(Messages.ERROR_NUMBER_OUT_OF_RANGE);
     }
-    this.#bonus_number = bonus;
+    if (this.#winning_numbers.includes(parseInt(bonus))) {
+      throw new Error(Messages.ERROR_BONUS_NUMBER_DUPLICATED);
+    }
+    this.#bonus_number = parseInt(bonus);
   };
 
   calculateWinningStats = () => {
@@ -77,7 +81,7 @@ class LottoGame {
       }
       if (winningCount === 5) {
         if (ticket.includes(this.#bonus_number)) {
-          stats[3]++;
+          stats[4]++;
         }
       }
       stats[winningCount - 3]++;
@@ -87,12 +91,12 @@ class LottoGame {
 
   calculateProfit = (stats) => {
     let profit = 0;
-    const rewards = [5000, 50000, 1500000, 30000000, 2000000000];
+    const rewards = [5000, 50000, 1500000, 2000000000, 30000000];
     for (let i = 0; i < stats.length; i++) {
       profit += stats[i] * rewards[i];
     }
     profit = (profit / (this.#purchase_amount * 1000)) * 100;
-    profit = parseFloat(profit.toFixed(2));
+    profit = parseFloat(profit).toFixed(1);
     return profit;
   };
 
@@ -104,9 +108,9 @@ class LottoGame {
     MissionUtils.Console.print(`4개 일치 (50,000원) - ${stats[1]}개`);
     MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${stats[2]}개`);
     MissionUtils.Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${stats[3]}개`
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${stats[4]}개`
     );
-    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${stats[4]}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${stats[3]}개`);
     MissionUtils.Console.print(`총 수익률은 ${profit}%입니다.`);
   };
 
