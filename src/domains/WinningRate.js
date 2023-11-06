@@ -19,6 +19,10 @@ class WinningRate {
     if (typeof bonusNumber !== "number" || Number.isNaN(bonusNumber)) {
       throw new Error(ERROR.bonus.numeric);
     }
+
+    if (!(1 <= bonusNumber && bonusNumber <= 45)) {
+      throw new Error(ERROR.lotto.numberRange);
+    }
   }
 
   countMatchLottoNumber(lotto) {
