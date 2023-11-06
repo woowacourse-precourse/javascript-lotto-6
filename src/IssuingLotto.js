@@ -15,8 +15,25 @@ class IssuingLotto {
     Validation.isDividedIntoUnitPrice(cost);
   }
 
+  #issueLotto(cost) {
+    const usersLotto = [];
+    const lottoCount = Utils.calculateLottoCount(cost);
+
+    for (let issueCount = 0; issueCount < lottoCount; issueCount += 1) {
+      const numbers = Utils.getRandomNumbers();
+      usersLotto.push(new Lotto(numbers));
+    }
+
+    return usersLotto;
+  }
+
   getCost() {
     return this.#cost;
+  }
+
+  getLotto() {
+    const issuedLotto = this.#issueLotto();
+    return issuedLotto;
   }
 }
 
