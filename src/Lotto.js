@@ -22,7 +22,7 @@ class Lotto {
     for(let i=0;i<numbers.length;i++) {
       if(!REX.test(numbers[i])) {
         console.log(numbers[i])
-        throw new Error("[ERROR]");
+        throw new Error("[ERROR] 숫자를 입력해주세요.");
       return;
       }
     }
