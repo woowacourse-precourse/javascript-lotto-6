@@ -31,11 +31,23 @@ class App {
         const purchaseAmount = await Console.readLineAsync(
             "구입금액을 입력해 주세요.\n"
         );
-        if (purchaseAmount % 1000 !== 0 || purchaseAmount < 1000) {
+
+        if (purchaseAmount % 1000 !== 0) {
             throw new Error(
-                "[ERROR] 구입금액은 1000원 이상이어야 하며, 1000원 단위로 입력해야 합니다."
+                "[ERROR] 구입금액은 1000원 단위로 입력해야 합니다."
             );
         }
+
+        if (purchaseAmount < 1000) {
+            throw new Error("[ERROR] 구입금액은 1000원 이상이어야 합니다.");
+        }
+
+        if (purchaseAmount > 1000000) {
+            throw new Error(
+                "[ERROR] 구입금액은 1,000,000원 이하이어야 합니다."
+            );
+        }
+
         return purchaseAmount;
     }
 
