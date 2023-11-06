@@ -1,4 +1,4 @@
-import { Lotto } from './Lotto';
+import Lotto from './Lotto';
 import { GameResult } from './GameResult';
 
 export class Lottos {
