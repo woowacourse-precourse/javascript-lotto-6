@@ -4,8 +4,9 @@ import { LottoMachineUI } from './LottoMachineUI.js';
 class LottoMachine {
   constructor(numberOfLotto) {
     this.numberOfLotto = numberOfLotto;
-    this.lottoList = Array.from(Array(this.numberOfLotto), () => new Array(6));
-
+    this.lottoList = Array.from({ length: this.numberOfLotto }, () =>
+      Array.from({ length: 6 })
+    );
     this.lottomachineUI = new LottoMachineUI();
   }
 
