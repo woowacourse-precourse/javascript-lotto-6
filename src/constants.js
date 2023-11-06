@@ -23,8 +23,8 @@ const LOTTO_PRIZE_MONEY = {
 const INPUT_MESSAGE = {
   PURCHASE_MESSAGE: '구입금액을 입력해 주세요.\n',
   PURCHASED_MESSAGE: (n) => `\n${n}개를 구매했습니다.`,
-  LOTTO_NUMBER: '당첨 번호를 입력해 주세요.\n',
-  BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
+  LOTTO_NUMBER: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 };
 
 const ERROR_MESSAGE = {
@@ -33,6 +33,7 @@ const ERROR_MESSAGE = {
   COUNT: `\n[ERROR] ${LOTTO_NUMBERS.NUMBER_SIZE}개의 숫자를 입력해 주세요.`,
   DUPLICATED: `\n[ERROR] 중복된 숫자는 입력할 수 없습니다.`,
   UNIT: `\n[ERROR] ${LOTTO_NUMBERS.PAY_LOTTO_MONEY}원 단위로 입력해 주세요.`,
+  GAME: `\n[ERROR] 게임을 이용하는데 오류가 생겼습니다..`,
 };
 
 const WINNER_MESSAGE = {
