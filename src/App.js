@@ -177,7 +177,7 @@ class App {
   getRateOfEarn = () => {
     const rateOfEarn = this.#prizeMoney / this.#orderPrice;
 
-    this.#rateOfEarn = rateOfEarn.toFixed(1);
+    this.#rateOfEarn = rateOfEarn.toFixed(3);
   }
 
   setLottoOrder = () => {
