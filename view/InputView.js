@@ -37,26 +37,26 @@ class InputView {
     }
   }
 
-  async getBonusNum() {
-    const bonusNum = await Console.readLineAsync(PromptMessage.ENTER_BONUS_NUM);
-    this.bonusNum = parseInt(bonusNum, 10);
-  }
+  // async getBonusNum() {
+  //   const bonusNum = await Console.readLineAsync(PromptMessage.ENTER_BONUS_NUM);
+  //   this.bonusNum = parseInt(bonusNum, 10);
+  // }
 
-  //   async getBonusNum() {
-  //     let validInput = false;
-  //     while (!validInput) {
-  //       const bonusNum = await Console.readLineAsync(
-  //         PromptMessage.ENTER_BONUS_NUM,
-  //       );
-  //       this.bonusNum = parseInt(bonusNum, 10);
-  //       try {
-  //         Validator.validateBonusNum(this.bonusNum);
-  //         validInput = true;
-  //       } catch (error) {
-  //         Console.print('[ERROR] 올바른 당첨 번호를 입력하십시오\n');
-  //       }
-  //     }
-  //   }
+  async getBonusNum() {
+    let validInput = false;
+    while (!validInput) {
+      const bonusNum = await Console.readLineAsync(
+        PromptMessage.ENTER_BONUS_NUM,
+      );
+      this.bonusNum = parseInt(bonusNum, 10);
+      try {
+        Validator.validateBonusNum(this.bonusNum, this.winNum);
+        validInput = true;
+      } catch (error) {
+        Console.print('[ERROR] 올바른 보너스 번호를 입력하십시오\n');
+      }
+    }
+  }
 }
 
 export default InputView;
