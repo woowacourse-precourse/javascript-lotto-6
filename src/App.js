@@ -16,14 +16,13 @@ class App {
 
 async function inputMoney() {
   let moneyString = await Console.readLineAsync('구입금액을 입력해주세요.\n');
-  Console.print(moneyString);
   let money = Number(moneyString);
-  Console.print(Number.isNaN(money));
-  if (Number.isNaN(moneyString)) throw new Error(ERROR.MONEY_IS_NAN);
+  if (Number.isNaN(money)) throw new Error(ERROR.MONEY_IS_NAN);
   return money;
 }
 
 function checkMoney(lottoMoney) {
+  Console.print(lottoMoney);
   if (lottoMoney % 1000 != 0) throw new Error(ERROR.MONEY_HAS_REMAINDER);
 }
 
@@ -63,7 +62,7 @@ async function inputNumbers() {
   let numbers = [];
 
   numberStrings.forEach((numberString) => {
-    let number = parseInt(numberString);
+    let number = Number(numberString);
     if (Number.isNaN(number)) throw new Error(ERROR.WINNING_NUMBER_IS_NAN);
     numbers.push(number);
   });
@@ -73,7 +72,8 @@ async function inputNumbers() {
 
 async function inputBonusNumber() {
   let bonusString = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-  let bonus = parseInt(bonusString);
+  let bonus = Number(bonusString);
+  if (Number.isNaN(bonus)) throw new Error(ERROR.BONUS_NUMBER_IS_NAN);
   return bonus;
 }
 
