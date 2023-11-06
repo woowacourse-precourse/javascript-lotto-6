@@ -1,7 +1,6 @@
 # 금액을 Money라는 객체에 담아서 표현하는 이유
 
-그냥 number타입으로 쓰면 안될까?
--------------------------------
+## 그냥 number타입으로 쓰면 안될까?
 
 ```js
 const money = new Money(1000);
@@ -34,19 +33,19 @@ subtrack을 호출해서 돈을 차감할 수 있다
 잔액이 부족한데 빼는 상황은 예외 발생! (아래처럼)
 
 ```js
-const money = new Money(1000)
-money.subtrack(10000000) // ERROR!
+const money = new Money(1000);
+money.subtrack(10000000); // ERROR!
 ```
 
 돈같이 중요한 요소를 다울 때 문제가 생기면 골치아파진다
 그래서 항상 조심해야하므로 객체로 만들어서 사용하는 것!!
 
 ```js
-add(amount)
+add(amount);
 {
-    if (amount < 0) {
-        throw new Error('돈은 0 또는 양수여야해요');
-    }
+  if (amount < 0) {
+    throw new Error("돈은 0 또는 양수여야해요");
+  }
 }
 ```
 
