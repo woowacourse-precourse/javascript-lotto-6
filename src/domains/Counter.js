@@ -20,7 +20,7 @@ class Counter {
     return lottoNumbers;
   }
 
-  get giveLotto() {
+  giveLotto() {
     const lottoBox = [];
     Array.from({ length: this.#lottoTicketNumber }, () => {
       const lotto = this.#generateLotto();

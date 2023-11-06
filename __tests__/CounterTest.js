@@ -25,7 +25,7 @@ describe('카운터 클래스 테스트', () => {
     ];
 
     // Act
-    const myLottos = new Counter(inputAmount).giveLotto;
+    const myLottos = new Counter(inputAmount).giveLotto();
 
     // Assert
     expect(myLottos).toEqual(output);

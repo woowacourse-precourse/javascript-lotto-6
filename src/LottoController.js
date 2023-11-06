@@ -1,8 +1,8 @@
-import LottoComparison from './domains/LottoComparison.js';
 import Counter from './domains/Counter.js';
+import LottoComparison from './domains/LottoComparison.js';
 import WinningLottoMachine from './domains/WinningLottoMachine.js';
-import printLottoNumbers from './print/printLottoNumbers.js';
 import getInputAmount from './input/getInputAmount.js';
+import printLottoNumbers from './print/printLottoNumbers.js';
 
 class LottoController {
   #myLotto;
@@ -16,7 +16,7 @@ class LottoController {
   async #buyLotto() {
     const inputAmount = await getInputAmount();
     const counter = new Counter(inputAmount);
-    this.#myLotto = counter.giveLotto;
+    this.#myLotto = counter.giveLotto();
   }
   async #printLotto(lottoCount, lotto) {
     printLottoNumbers(lottoCount, lotto);
