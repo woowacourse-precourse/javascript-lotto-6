@@ -4,6 +4,8 @@ export const LOTTO_MAGICNUMBER = Object.freeze({
   selectAmount: 6,
 });
 
+export const LOTTO_PRICE = 1000;
+
 export const LOTTO_PRIZEVALUE = Object.freeze({
   first: 2_000_000_000,
   second: 30_000_000,
