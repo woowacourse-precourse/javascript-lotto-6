@@ -22,8 +22,9 @@ class Game {
     this.bonusNumber;
   }
 
-  purchase() {
-    InputView.purchaseLotto(this.handlePurchase);
+  async purchase() {
+    const amount = await InputView.purchaseLotto();
+    this.handlePurchase(amount);
   }
 
   handlePurchase = (amount) => {
@@ -37,8 +38,9 @@ class Game {
     this.askWinningNumbers();
   };
 
-  askWinningNumbers() {
-    InputView.readWinningNumbers(this.handleWinningNumbers);
+  async askWinningNumbers() {
+    this.winningNumbers = await InputView.readWinningNumbers();
+    this.handleWinningNumbers(this.winningNumbers);
   }
 
   handleWinningNumbers = (numbers) => {
@@ -49,8 +51,9 @@ class Game {
     this.askBonusNumber();
   };
 
-  askBonusNumber() {
-    InputView.readBonusNumbers(this.handleBonusNumber);
+  async askBonusNumber() {
+    this.bonusNumber = await InputView.readBonusNumbers();
+    this.handleBonusNumber(this.bonusNumber);
   }
 
   handleBonusNumber = (number) => {

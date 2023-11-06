@@ -1,16 +1,19 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const InputView = {
-  purchaseLotto(callback) {
-    MissionUtils.Console.readLine('구입금액을 입력해 주세요.\n', callback);
+  purchaseLotto() {
+    const amount = MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    return amount;
   },
 
-  readWinningNumbers(callback) {
-    MissionUtils.Console.readLine('당첨 번호를 입력해 주세요.\n', callback);
+  readWinningNumbers() {
+    const winningNumbers = MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    return winningNumbers;
   },
 
-  readBonusNumbers(callback) {
-    MissionUtils.Console.readLine('보너스 번호를 입력해 주세요.\n', callback);
+  readBonusNumbers() {
+    const bonusNumber = MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    return bonusNumber;
   },
 };
 
