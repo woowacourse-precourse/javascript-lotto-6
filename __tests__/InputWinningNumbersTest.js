@@ -11,6 +11,12 @@ const mockQuestions = (inputs) => {
   });
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
 describe("로또 당첨 번호 입력 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
@@ -34,49 +40,65 @@ describe("로또 당첨 번호 입력 테스트", () => {
 
   test("숫자가 아닌 입력이 있을 경우 에러 발생", async () => {
     // given
-    const INPUT_WINNING_NUMBERS = ["1,2,3,4,oh,6"];
+    const logSpy = getLogSpy();
+
+    const INPUT_WINNING_NUMBERS = ["1,2,3,4,oh,6", "1,2,3,4,5,6"];
     mockQuestions(INPUT_WINNING_NUMBERS);
 
     // when
     const app = new App();
 
+    await app.inputWinningNumbers();
+
     // then
-    await expect(app.inputWinningNumbers()).rejects.toThrow("[ERROR]");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
 
   test("입력된 숫자가 6개가 아닐 경우 에러 발생", async () => {
     // given
-    const INPUT_WINNING_NUMBERS = ["1,2,3,4,6"];
+    const logSpy = getLogSpy();
+
+    const INPUT_WINNING_NUMBERS = ["1,2,3,4,6", "1,2,3,4,5,6"];
     mockQuestions(INPUT_WINNING_NUMBERS);
 
     // when
     const app = new App();
 
+    await app.inputWinningNumbers();
+
     // then
-    await expect(app.inputWinningNumbers()).rejects.toThrow("[ERROR]");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
 
   test("입력된 숫자가 1에서 45사이가 아닐 경우 에러 발생", async () => {
     // given
-    const INPUT_WINNING_NUMBERS = ["1,2,3,4,123,6"];
+    const logSpy = getLogSpy();
+
+    const INPUT_WINNING_NUMBERS = ["1,2,3,4,123,6", "1,2,3,4,5,6"];
     mockQuestions(INPUT_WINNING_NUMBERS);
 
     // when
     const app = new App();
 
+    await app.inputWinningNumbers();
+
     // then
-    await expect(app.inputWinningNumbers()).rejects.toThrow("[ERROR]");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
 
   test("입력된 숫자중 중복된 숫자가 있을 경우", async () => {
     // given
-    const INPUT_WINNING_NUMBERS = ["1,2,3,4,3,6"];
+    const logSpy = getLogSpy();
+
+    const INPUT_WINNING_NUMBERS = ["1,2,3,4,3,6", "1,2,3,4,5,6"];
     mockQuestions(INPUT_WINNING_NUMBERS);
 
     // when
     const app = new App();
 
+    await app.inputWinningNumbers();
+
     // then
-    await expect(app.inputWinningNumbers()).rejects.toThrow("[ERROR]");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
 });
