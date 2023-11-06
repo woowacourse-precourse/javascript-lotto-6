@@ -3,6 +3,7 @@ import Lotto from './Lotto.js';
 import ERROR from './constants/error.js';
 import LOTTO from './constants/lotto.js';
 import CustomError from './errors/CustomError.js';
+import isPositiveInteger from './utils/function.js';
 
 class LottoMachine {
   #numberOfLottos;
@@ -28,6 +29,10 @@ class LottoMachine {
   }
 
   #validateMoney(money) {
+    if (!isPositiveInteger(money)) {
+      throw new CustomError(ERROR.input.invalidMoney);
+    }
+
     if (money % LOTTO.price) {
       throw new CustomError(ERROR.lotto.notDivisibleMoney);
     }
