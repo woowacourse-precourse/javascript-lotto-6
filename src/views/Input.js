@@ -1,23 +1,37 @@
 import { Console } from '@woowacourse/mission-utils';
-import { Messages } from '../constants/Messages';
+import { Messages } from '../constants/Messages.js';
+import InputValidator from '../validators/InputValidator.js';
 
 class Input {
-  static readPurchaseAmout() {
-    const purchaseAmount = Console.readLineAsync(Messages.READ_PURCHASE_AMOUNT);
+  static async readPurchaseAmout() {
+    const purchaseAmount = await Console.readLineAsync(
+      Messages.READ_PURCHASE_AMOUNT
+    );
 
-    return purchaseAmount;
+    const validatedPurchaseAmout =
+      InputValidator.purchaseAmountValidator(purchaseAmount);
+
+    return validatedPurchaseAmout;
   }
 
-  static readLottoNumber() {
-    const lottoNumber = Console.readLineAsync(Messages.READ_LOTTO_NUMBER);
+  static async readLottoNumber() {
+    const lottoNumbers = await Console.readLineAsync(
+      Messages.READ_LOTTO_NUMBER
+    );
 
-    return lottoNumber;
+    const validatedLottoNumbers =
+      InputValidator.lottoNumberValidator(lottoNumbers);
+
+    return validatedLottoNumbers;
   }
 
-  static readBonusNumber() {
-    const bonusNumber = Console.readLineAsync(Messages.READ_BONUS_NUMBER);
+  static async readBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(Messages.READ_BONUS_NUMBER);
 
-    return bonusNumber;
+    const validatedBonusNumber =
+      InputValidator.bonusNumberValidator(bonusNumber);
+
+    return validatedBonusNumber;
   }
 }
 
