@@ -8,8 +8,8 @@ class LottoSimulator {
 
   constructor() {
     this.#lottos = [];
-    this.#ranks = [];
-    this.#prizeMoneys = [200000000, 30000000, 1500000, 50000, 5000];
+    this.#ranks = Array(5).fill(0);
+    this.#prizeMoneys = [5000, 50000, 1500000, 3000000, 2000000];
   }
 
   issueLotto(quantity) {
@@ -41,14 +41,12 @@ class LottoSimulator {
     return result;
   }
   
-  rank(winningNumber, bonusNumber) {
-    if (winningNumber === 6) return 0;
-    if (winningNumber === 5 && bonusNumber) return 1;
+  #rank(winningNumber, bonusNumber) {
+    if (winningNumber === 6) return 4;
+    if (winningNumber === 5 && bonusNumber) return 3;
     if (winningNumber === 5) return 2;
-    if (winningNumber === 4) return 3;
-    if (winningNumber === 3) return 4;
-
-    return false;
+    if (winningNumber === 4) return 1;
+    if (winningNumber === 3) return 0;
   }
 
   drawingLotto(winningNumber, bonusNumber) {
@@ -56,14 +54,18 @@ class LottoSimulator {
     const bonusNumbers = this.compareBonusNumber(bonusNumber);
 
     winnings.map((winning, ticket) => {
-      const rank = this.rank(winning, bonusNumbers[ticket]);
-      if (rank) this.#ranks.push(rank);
+      const rank = this.#rank(winning, bonusNumbers[ticket]);
+      if (rank !== undefined) {
+        this.#ranks[rank] += 1;
+      }
     })
   }
 
   totalPrizeMoney() {
     let money = 0;
-    this.#ranks.map((rank) => money += this.#prizeMoneys[rank]);
+    this.#ranks.map((rank, index) => {
+      if(rank) money += (this.#prizeMoneys[index] * rank);
+    });
 
     return money;
   }
@@ -74,6 +76,10 @@ class LottoSimulator {
 
   getLottos() {
     return this.#lottos;
+  }
+
+  getRanks() {
+    return this.#ranks;
   }
 }
 
