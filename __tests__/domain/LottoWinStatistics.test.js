@@ -11,7 +11,7 @@ describe('수익통계 클래스 테스트', () => {
     lottoWinStatistics.pushPrize(PRIZE_MONEY.FOURTH);
     lottoWinStatistics.pushPrize(PRIZE_MONEY.FIFTH);
     
-    const answer = 51833.3;
+    const answer = "51833.3";
 
     // when
     lottoWinStatistics.calculateRate(PURCHASE_UNIT * 3);
@@ -30,7 +30,7 @@ describe('수익통계 클래스 테스트', () => {
     lottoWinStatistics.pushPrize(PRIZE_MONEY.NOTHING);
     lottoWinStatistics.pushPrize(PRIZE_MONEY.FIFTH);
 
-    const answer = 100.0;
+    const answer = "100.0";
 
     // when
     lottoWinStatistics.calculateRate(PURCHASE_UNIT * 5);
