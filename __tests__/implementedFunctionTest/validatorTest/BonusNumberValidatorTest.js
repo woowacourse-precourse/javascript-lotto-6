@@ -1,4 +1,3 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import BonusNumberValidator from '../../../src/validator/BonusNumberValidator.js';
 import errorMessage from '../../../src/constants/errorMessage';
 
