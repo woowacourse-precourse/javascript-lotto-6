@@ -23,6 +23,11 @@ export const NUMBER = Object.freeze({
   purchaseMoneyDivisor: 1000,
   zero: 0,
   lotto: 6,
+  three: '3',
+  four: '4',
+  five: '5',
+  fiveBonus: '5+1',
+  six: '6',
 });
 
 export const OTHERS = Object.freeze({
@@ -31,4 +36,5 @@ export const OTHERS = Object.freeze({
   comma: ',',
   commaWithSpace: ', ',
   lineBreak: '\n',
+  bonusNumber: 'bonus',
 });

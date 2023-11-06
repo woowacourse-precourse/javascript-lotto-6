@@ -9,6 +9,8 @@ class GameMessageGenerator {
 
     return LOTTO_NUMBER_LIST_MESSAGE;
   }
+
+  getResultMessage(gameResult) {}
 }
 
 export default GameMessageGenerator;

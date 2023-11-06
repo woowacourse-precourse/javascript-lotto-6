@@ -1,4 +1,4 @@
-import GameCalculator from './GameCalculator.js';
+import LottoCalculator from './LottoCalculator.js';
 
 class Lotto {
   #numbers;
@@ -21,7 +21,8 @@ class Lotto {
   }
 
   getResultForEachLotto(bonusNumber, winningNumber) {
-    const GAME_CALCULATOR = new GameCalculator(this.lottoNumbers, bonusNumber, winningNumber);
+    const LOTTO_CALCULATOR = new LottoCalculator(this.lottoNumbers, bonusNumber, winningNumber);
+    return LOTTO_CALCULATOR.calculate();
   }
 }
 
