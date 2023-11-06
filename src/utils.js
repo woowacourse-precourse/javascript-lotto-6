@@ -58,3 +58,19 @@ export const validateWinnigNumber = (input) => {
 
   return true;
 };
+
+export const validateBonusNumber = (input, winningNumbers) => {
+  const bonusNumber = parseInt(input);
+
+  if (isNaN(input)) {
+    throw new Error(ERROR_MESSAGES.NON_NUMERIC);
+  }
+
+  if (bonusNumber < 1 || bonusNumber > 45) {
+    throw new Error(ERROR_MESSAGES.OUT_OF_RANGE);
+  }
+
+  if (input.some((num) => winningNumbers.includes(num))) {
+    throw new Error(ERROR_MESSAGES.DUPLICATE_BONUS);
+  }
+};
