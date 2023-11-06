@@ -4,6 +4,7 @@ import OutputView from './OutputView.js';
 import BonusLotto from './BonusLotto.js';
 import WinningLotto from './WinningLotto.js';
 import { REWARD } from './constants/constants.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class Controller {
   #inputView;
@@ -26,8 +27,14 @@ class Controller {
   }
 
   async createLottos() {
-    const amount = await this.#inputView.readPurchaseAmount();
-    this.#lottos = new Lottos(amount);
+    try{
+      const amount = await this.#inputView.readPurchaseAmount();
+      this.#lottos = new Lottos(amount);
+    } catch (error) {
+      Console.print(error.message);
+      await this.createLottos();
+      return;
+    }
   }
 
   async createWinningLotto() {

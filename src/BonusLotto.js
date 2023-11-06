@@ -7,8 +7,8 @@ class BonusLotto {
 
   checkValid(input) {
     const bonusNum = parseInt(input);
-
-    if (isNaN(bonusNum)) {
+    
+    if (isNaN(input)) {
       throw new Error('[ERROR] 숫자를 입력해주세요');
     }
     if (bonusNum < 0 || bonusNum > 45) {
