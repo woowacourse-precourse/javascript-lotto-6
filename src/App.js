@@ -50,11 +50,12 @@ class App {
     const randomNumbers = [];
     for (let i = 0; i < count; i++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      numbers.sort((a, b) => a - b);
-      randomNumbers.push(numbers);
-      Console.print(`[${numbers.join(', ')}]`);
+      if (!randomNumbers.includes(numbers)) {
+        numbers.sort((a, b) => a - b);
+        randomNumbers.push(numbers);
+      }
+      Console.print(`[${numbers.join(', ')}]\n`);
     }
-    Console.print('');
     return randomNumbers;
   }
 
@@ -70,13 +71,12 @@ class App {
       if (new Set(lottonumber).size !== expectedCount) {
         throw new Error('[ERROR] 중복된 번호를 입력하셨습니다.');
       }
-      Console.print('');
       return lottonumber;
     });
   }
 
   async getBonusNumber(lottonumber) {
-    return this.retryValid('보너스 번호를 입력해주세요.\n', (input) => {
+    return this.retryValid('\n보너스 번호를 입력해주세요.\n', (input) => {
       const bonusNumber = Number(input);
       if (isNaN(bonusNumber)) {
         throw new Error('[ERROR] 숫자만 입력 가능합니다.');
@@ -96,19 +96,22 @@ class App {
 
     randomNumbers.forEach(userNumbers => {
       const userMatchCount = userNumbers.filter(num => lottonumber.includes(num)).length;
-
       if (userMatchCount === 3) {
         matches[0]++;
-      } else if (userMatchCount === 4) {
+      }
+      if (userMatchCount === 4) {
         matches[1]++;
-      } else if (userMatchCount === 5) {
+      }
+      if (userMatchCount === 5) {
         if (userNumbers.includes(bonumNumber)) {
-          matches[3]++;
-        } else {
-          matches[2]++;
+          matches[3];
         }
-      } else if (userMatchCount === 6) {
-        matches[4]++;
+        else {
+          matches[2];
+        }
+      }
+      if (userMatchCount === 6) {
+        matches[5]++;
       }
     });
     return matches;
@@ -123,10 +126,10 @@ class App {
     Console.print(`5개 일치 (1,500,000원) - ${matchFive}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${matchFiveBonus}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${matchSix}개`);
-
-    const profitPercentage = ((totalPrize) / money) * 100;
+    const profitPercentage = (totalPrize / money) * 100;
     Console.print(`총 수익률은 ${profitPercentage.toFixed(1)}%입니다.`);
   }
+
 }
 
 export default App;
