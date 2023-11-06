@@ -1,4 +1,4 @@
-import WinningLotto from '../src/WinningLotto.js';
+import WinningLotto from '../src/model/WinningLotto.js';
 
 describe('당첨 번호 테스트', () => {
   test('숫자가 아닌 값이 있다면 에러처리', () => {

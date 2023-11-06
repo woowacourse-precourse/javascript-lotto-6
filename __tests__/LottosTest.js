@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import Lottos from "../src/Lottos.js";
+import Lottos from "../src/model/Lottos";
 
 describe("로또 클래스 테스트", () => {
   

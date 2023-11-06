@@ -1,4 +1,4 @@
-import Lottos from "../src/Lottos";
+import Lottos from "../src/model/Lottos";
 import { Console } from "@woowacourse/mission-utils";
 
 describe("input 테스트", () => {

@@ -1,4 +1,4 @@
-import BonusLotto from "../src/BonusLotto.js";
+import BonusLotto from "../src/model/BonusLotto.js";
 
 describe("보너스 번호 테스트", () => {
   test("보너스 번호 입력 형식이 단일한 숫자가 아니라면 예외 발생", () => {
