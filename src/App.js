@@ -5,6 +5,7 @@ import { MESSAGE } from "./constant/MESSAGE";
 import { LOTTO_SETTINGS } from "./constant/LOTTO_SETTINGS";
 import Lotto from "./model/Lotto";
 import Money from "./model/Money";
+import LottoAnswer from "./model/LottoAnswer";
 
 const { Random } = MissionUtils;
 
@@ -18,8 +19,8 @@ const totalLotto = []; // 전체 로또 번호 보관
 // 발행한 로또 수량 및 번호를 출력한다.
 const drawLottoNumber = async () => {
   const lotto = Random.pickUniqueNumbersInRange(LOTTO_SETTINGS.LOTTO_MIN_NUMBER, LOTTO_SETTINGS.LOTTO_MAX_NUMBER, LOTTO_SETTINGS.LOTTO_LENGTH);
-  lotto.sort((a,b) => a-b);
-  totalLotto.push(lotto);
+  const lottoNumber = new Lotto(lotto).getLottoNumber();
+  totalLotto.push(lottoNumber);
 };
 
 // 발행한 로또 출력
@@ -43,7 +44,8 @@ class App {
     } catch(error) {
       print(error.message);
     }
-    
+
+    //---------------
     const progressNumber = money.getMoney() / 1000;
     await printProgressNumber(progressNumber); // 게임 횟수 출력
     // 번호 출력
@@ -53,6 +55,21 @@ class App {
     printLotto(totalLotto); // 발행한 로또 출력
 
     // 번호 입력 받기
+    let answer;
+    try{
+      const inputAnswerNumber = await readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
+      answer = new LottoAnswer(inputAnswerNumber);
+
+      const inputBonusNumber = await readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+      answer.setBonusNumber(inputBonusNumber);
+    } catch(error) {
+      print(error.message);
+    }
+
+    const {answerNumber, bonusNumber} = answer.getFullNumber();
+    console.log(answerNumber, bonusNumber);
+
+
 
     // 결과 계산
   }

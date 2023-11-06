@@ -5,11 +5,12 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validateLength(numbers);
-    this.#validateDuplicate(numbers);
-    this.#validateNumber(numbers);
-    this.#validateRange(numbers);
-    this.#numbers = numbers;
+    const sortedNumber = this.#sortNumbers(numbers);
+    this.#numbers = this.#validateNumbers(sortedNumber);
+  }
+
+  #sortNumbers(numbers) {
+    return numbers.sort((prevNumber, nextNumber) => prevNumber - nextNumber);
   }
 
   #validateLength(numbers) {
@@ -20,7 +21,7 @@ class Lotto {
 
   #validateDuplicate(numbers) {
     const setNumbers = new Set(numbers);
-    if (setNumbers.length !== numbers.length) {
+    if (setNumbers.size !== numbers.length) {
       throw new Error(ERROR_MESSAGE.LOTTO_DUPLICATE_ERROR);
     }
   }
@@ -33,22 +34,30 @@ class Lotto {
     );
 
     if (!isSatisfyRange) {
-      throw new Error("[ERROR] 범위에러") // 나중에 에러 메시지로 빼기
+      throw new Error("[ERROR] 범위에러"); // 나중에 에러 메시지로 빼기
     }
   }
 
-  #validateNumber(numbers) {
+  #validatePositiveNumber(numbers) {
     const check = /^[0-9]+$/;
-
     for (let number of numbers){
         if (!check.test(number)) {
-          throw new Error("[ERROR] 양수만 입력하세요") // // 나중에 에러 메시지로 빼기
+          throw new Error("[ERROR] 양수만 입력하세요"); // // 나중에 에러 메시지로 빼기
       }
     }
   }
 
-  getLotto() {
-    return this.#numbers
+  #validateNumbers(numbers) {
+    const checkNumber = numbers;
+    this.#validateLength(checkNumber);
+    this.#validateDuplicate(checkNumber);
+    this.#validatePositiveNumber(checkNumber);
+    this.#validateRange(checkNumber);
+    return checkNumber;
+  }
+
+  getLottoNumber() {
+    return this.#numbers;
   }
 }
 
