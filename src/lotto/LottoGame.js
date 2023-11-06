@@ -42,39 +42,47 @@ class LottoGame {
     }
     return RANDOM_NUMBERS;
   }
- 
 
   getWinningStatus(winningNumbers, bonusNumber) {
     const MATHING_COUNTS = [];
     for (let index = 0; index < this.#lottos.length; index++) {
       MATHING_COUNTS.push(this.#lottos[index].getMatchingCount(winningNumbers));
     }
-    const MATHING_COUNT_OBJ = this.matchingCountsWithObj(MATHING_COUNTS,bonusNumber);
-    const WINNING_STATUS = GameUtils.processMatchingNumbersToResult(MATHING_COUNT_OBJ);
+    const MATHING_COUNT_OBJ = this.matchingCountsWithObj(
+      MATHING_COUNTS,
+      bonusNumber
+    );
+    const WINNING_STATUS =
+      GameUtils.processMatchingNumbersToResult(MATHING_COUNT_OBJ);
     return WINNING_STATUS;
   }
 
   checkBonusNumberMatch(index, bonusNumber) {
     const LOTTO_NUMBERS = this.#lottos[index].getNumbers();
     if (LOTTO_NUMBERS.includes(Number(bonusNumber))) {
-        return 'bonus';
+      return "bonus";
     }
-    return '5';
+    return "5";
   }
-  matchingCountsWithObj(matchingCounts,bonusNumber) {
-    const WINNING_STATUS = {};
-    for (let index=0; index<matchingCounts.length; index++) {
-      let mathingCount = matchingCounts[index];
-      if (mathingCount===5) {
-        mathingCount = this.checkBonusNumberMatch(index,bonusNumber)
-      }
-      if (!WINNING_STATUS[mathingCount]) {
-        WINNING_STATUS[mathingCount] = 1;
-        continue;
-      }
-      WINNING_STATUS[mathingCount] += 1;
+  addOrUpdatePropertyInObj(obj, matchingCount) {
+    let newObj = { ...obj };
+    if (!obj[matchingCount]) {
+      newObj[matchingCount] = 1;
+      return newObj;
     }
-    return WINNING_STATUS;
+    newObj[matchingCount] += 1;
+    return newObj;
+  }
+  matchingCountsWithObj(matchingCounts, bonusNumber) {
+    let matchingCountsObj = {};
+    for (let index = 0; index < matchingCounts.length; index++) {
+      let matchingCount = matchingCounts[index];
+      if (matchingCount === 5) {
+        matchingCount = this.checkBonusNumberMatch(index, bonusNumber);
+      }
+      matchingCountsObj = this.addOrUpdatePropertyInObj(matchingCountsObj, matchingCount);
+    }
+    return matchingCountsObj;
   }
 }
 export default LottoGame;
