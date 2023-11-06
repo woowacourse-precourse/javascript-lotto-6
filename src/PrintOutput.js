@@ -1,5 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import ValidateLottoNumSet from "./ValidateLottoNumSet";
+import ValidateLottoNumSet from "./ValidateLottoNumSet.js";
 
 class PrintOutput {
   constructor() {

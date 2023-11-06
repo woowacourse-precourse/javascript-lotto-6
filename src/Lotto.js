@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import ValidatePrice from "./ValidatePrice";
-import PrintOutput from "./PrintOutput";
+import ValidatePrice from "./ValidatePrice.js";
+import PrintOutput from "./PrintOutput.js";
 
 class Lotto {
   #numbers;
@@ -69,7 +69,7 @@ class Lotto {
   };
 
   #validate(numbers) {
-    if (!numbers.isArray())
+    if (!Array.isArray(numbers))
       throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
     if (numbers.some(num => Number.isNaN(num)))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
@@ -85,7 +85,7 @@ class Lotto {
   }
 
   #validateBonusNum(numbers, bonusNum) {
-    if (bonusNum.isArray())
+    if (Array.isArray(bonusNum))
       throw new Error("[ERROR] 숫자는 1개만 입력해야 합니다.");
     if (Number.isNaN(bonusNum))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
