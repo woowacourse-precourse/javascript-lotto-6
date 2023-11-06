@@ -9,7 +9,7 @@ import { LOTTO } from '../constants/constants.js';
 class Lotto {
   #numbers;
 
-  /** @param {number[]} numbers  */
+  /** @param {number[]} numbers 로또 번호 */
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
