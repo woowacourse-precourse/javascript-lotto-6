@@ -28,6 +28,24 @@ class LottoGame {
         })
     };
 
+    async inputBonusNumber() {
+        const bonusNumber = await IOUtils.input("보너스 번호를 입력해 주세요.\n");
+        this.#validateBonusNumber(bonusNumber);
+        return bonusNumber;
+    }
+
+    #validateBonusNumber(number) {
+        const bonusNumber = Number(number);
+
+        if (isNaN(bonusNumber)) {
+            throw new Error("보너스 번호는 숫자여야 합니다.");
+        }
+
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new Error("보너스 번호는 1과 45 사이여야 합니다.");
+        }
+    }
+
 
 
 }
