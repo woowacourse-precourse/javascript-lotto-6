@@ -14,8 +14,9 @@ describe('당첨 로또 클래스 테스트', () => {
     );
 
     test('보너스 번호와 당첨 로또 번호에 중복된 숫자가 있으면 예외가 발생한다.', () => {
+      const duplicatedNumber = 1;
       expect(() => {
-        winningLotto.bonusNumber = 1;
+        winningLotto.bonusNumber = duplicatedNumber;
       }).toThrow('[ERROR]');
     });
   });
