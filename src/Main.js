@@ -21,7 +21,8 @@ class Main {
     const evaluator = new LottoEvaluatorUI(
       lottoList,
       winningNumbers,
-      bonusNumber
+      bonusNumber,
+      numberOfLotto
     );
     await evaluator.printStatistics();
   };
