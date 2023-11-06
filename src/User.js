@@ -13,6 +13,11 @@ class User {
       Console.print(lottoNumbers.sort((a, b) => a - b));
     });
   }
+
+  async inputLottoWinningNumber() {
+    const winningNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    return winningNumber;
+  }
 }
 
 export default User;

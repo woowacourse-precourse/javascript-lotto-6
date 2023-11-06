@@ -24,6 +24,7 @@ class App {
     const theNumberOfLotto = await user.inputLottoPurchaseAmount();
     const lottos = this.issueLotto(theNumberOfLotto);
     user.printLottoNumbers(lottos);
+    const lottoWinningNumber = await user.inputLottoWinningNumber();
   }
 }
 
