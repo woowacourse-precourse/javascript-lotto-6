@@ -35,7 +35,8 @@ class Lotto {
 
   printNumbers() {
     this.#numbers.sort((a, b) => a - b);
-    Console.print(this.#numbers);
+    const formattedNumbers = this.#numbers.map((num) => `${num}`).join(", ");
+    Console.print(`[${formattedNumbers}]`);
   }
 
   get numbers() {

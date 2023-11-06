@@ -13,9 +13,22 @@ class User {
   }
 
   async buyLotto() {
-    const input = await Console.readLineAsync(MESSAGES.INPUT_LOTTO_PURCHASE);
-    this.#validate(input);
-    this.money = parseInt(input);
+    let input = null;
+    while (input === null) {
+      input = await this.getInput();
+    }
+    this.money = input;
+  }
+
+  async getInput() {
+    try {
+      const input = await Console.readLineAsync(MESSAGES.INPUT_LOTTO_PURCHASE);
+      this.#validate(input);
+      return Number(input);
+    } catch (error) {
+      Console.print(error.message);
+      return null;
+    }
   }
 
   #validate(input) {
