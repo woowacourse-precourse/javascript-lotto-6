@@ -12,6 +12,10 @@ export default class Lotto {
     }
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   // TODO: 추가 기능 구현
 }
 

@@ -18,6 +18,12 @@ class App {
     const numberOfLottoTickets = Math.floor(purchaseAmount / 1000);
     const lottoTickets = this.generateLottoTickets(numberOfLottoTickets);
 
+    Console.print(`${numberOfLottoTickets}개를 구매했습니다.`);
+
+    lottoTickets.forEach((ticket, index) => {
+      Console.print(ticket.getNumbers().sort((a, b) => a - b));
+    });
+
   }
 
   generateLottoTickets(count) {
