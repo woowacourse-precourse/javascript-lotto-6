@@ -43,7 +43,7 @@ class View {
     return await LottoStore.askBonusNum();
   }
 
-  static printRewardStatistics(calculateEarningResults) {
+  static calculateRewardStatistics(calculateEarningResults) {
     const statisticsOrder = [3, 4, 5, "5+1", 6];
     const statisticsQuery = {
       3: "3개 일치 (5,000원) - ",
@@ -74,7 +74,7 @@ class View {
 
   static async printTotalReward(result, inputMoney) {
     MissionUtils.Console.print(this.WIN_STATISTICS_HEADER);
-    View.printRewardStatistics(result);
+    View.calculateRewardStatistics(result);
     const returnPrint = View.calculateReturn(result, inputMoney);
     MissionUtils.Console.print(`총 수익률은 ${returnPrint}입니다.`);
   }
