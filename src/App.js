@@ -10,17 +10,6 @@ class App {
 
   async play() {
     await this.inputMoney();
-    //lottoCountPrinter(lottoCounts);
-    //lottoPrinter(lottoCounts);
-    //const winningNumbers = await inputWinningNumber();
-    //MissionUtils.Console.print("");
-    //const bonusNumber = await inputBonusNumber(winningNumbers);
-    //MissionUtils.Console.print("");
-    //lottosReader(lottoNumbers, winningNumbers, bonusNumber, lottoCounts);
-    //lottoResultsCounter(winningResults, lottoCounts);
-    //lottoResultsPrinter(winningDetails.winning);
-    //MissionUtils.Console.print("");
-    //totalRate(lottoCounts*1000, winningDetails.totalPrize);
   }
 
   async inputMoney() {
@@ -33,7 +22,6 @@ class App {
     winningDetails.counts = lottoCounts;
 
     this.counter.lottoCountPrinter(lottoCounts);
-    //this.counter.publish(lottoCounts);
     this.counter.lottosPrinter();
   }
 }
