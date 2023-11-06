@@ -21,9 +21,10 @@ export default class IOController {
   }
 
   async readWinningNumbers() {
-    const NUMBERS = await this.#InputService.readWinningNumbers();
+    const INPUT = await this.#InputService.readWinningNumbers();
+    const NUMBERS = INPUT.split(',').map((num) => +num);
     this.#ValidationController.validateWinningNumbers(NUMBERS);
-    return NUMBERS.split(',').map((num) => +num);
+    return NUMBERS;
   }
 
   async readBonusNumber() {

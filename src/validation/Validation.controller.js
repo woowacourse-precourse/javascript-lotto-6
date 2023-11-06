@@ -20,5 +20,6 @@ export default class ValidationController {
 
   validateWinningNumbers(ticket) {
     this.#validationService.hasSixNumbers(ticket);
+    this.#validationService.isInRange(ticket);
   }
 }
