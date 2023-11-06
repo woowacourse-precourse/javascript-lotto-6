@@ -12,6 +12,12 @@ export const INPUT = {
   bonus: `\n보너스 번호를 입력해 주세요.\n`,
 };
 
+export const PROMPT = {
+  purchase: num => `\n${num}개를 구매했습니다.`,
+  returnRate: rate => `총 수익률은 ${rate}%입니다.`,
+  result: '\n당첨 통계',
+};
+
 export const WIN_PROMPT = [
   '3개 일치 (5,000원) -',
   '4개 일치 (50,000원) -',

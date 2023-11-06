@@ -34,9 +34,8 @@ class Lotto {
     if (NUMBER_TO_SET.size !== numbers.length) throw new Error(ERROR.duplicate); // 당첨 번호 : 중복 검사
   }
 
-  // TODO: 추가 기능 구현
   // getter
-  get winNumber() {
+  get getWinNumber() {
     return this.#numbers;
   }
 
@@ -57,7 +56,6 @@ class Lotto {
    * Input : lot 메서드 결과
    * output : 등수별 개수
    */
-
   lotCount(results) {
     let withoutBonus = [0, 0, 0, 0];
     let bonus = 0;
@@ -76,12 +74,9 @@ class Lotto {
    * input : lotCount 결과, 구입금액
    * output : 수익률
    */
-
   calculateReturnRate(cntArr, money) {
     const WIN_ARR = cntArr.map((item, idx) => item * WINNINGS[idx]);
-
     const TOTAL = WIN_ARR.reduce((acc, curr) => acc + curr, 0);
-
     return Math.round((TOTAL / money) * 10000) / 100;
   }
 }

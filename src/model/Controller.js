@@ -15,17 +15,23 @@ class Controller {
     this.lottoArrays;
   }
 
-  async run() {
+  async inputPurchase() {
     const MONEY = await this.View.input(INPUT.purchase);
     this.purchaseLotto(Number(MONEY));
     this.View.printPurchaseResult(this.buyNum, this.lottoArrays);
+  }
 
+  async inputWinNumber() {
     const WIN_NUMS = (await this.View.input(INPUT.win)).trim();
     this.setWinNumber(WIN_NUMS);
+  }
 
+  async inputBonus() {
     const BONUS = await this.View.input(INPUT.bonus);
     this.setBonusNum(Number(BONUS));
+  }
 
+  async run() {
     const LOT_RESULT = this.evaluate(this.lottoArrays, this.bonus);
     const LOT_CNT = this.Lotto.lotCount(LOT_RESULT);
     const RETURN_RATE = this.Lotto.calculateReturnRate(LOT_CNT, this.money);
@@ -34,7 +40,6 @@ class Controller {
 
   purchaseLotto(money) {
     this.validatePay(money);
-
     this.money = money;
     this.buyNum = money / UNIT;
     this.generateRandomLottoArrays();
@@ -49,7 +54,6 @@ class Controller {
   generateRandomLottoArrays() {
     const singleRandomArray = () => Random.pickUniqueNumbersInRange(1, 45, 6);
     const UNSORTED = Array.from({ length: this.buyNum }, singleRandomArray);
-
     this.lottoArrays = UNSORTED.map(arr => arr.sort((a, b) => a - b));
   }
 
@@ -59,7 +63,7 @@ class Controller {
   }
 
   setBonusNum(bonus) {
-    this.validateBonus(this.Lotto.winNumber, bonus);
+    this.validateBonus(this.Lotto.getWinNumber, bonus);
     this.bonus = bonus;
   }
 
