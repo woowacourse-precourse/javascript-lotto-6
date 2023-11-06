@@ -1,7 +1,5 @@
 import { LOTTO } from '../constants/lottoGame.js';
 
-const isPositiveInteger = (input) => input > 0 && Number.isInteger(input);
-
 const inRange = (input) =>
   input >= LOTTO.MIN_NUMBER && input <= LOTTO.MAX_NUMBER;
 
@@ -12,9 +10,9 @@ const Validator = {
     }
   },
 
-  numberType(input) {
-    if (!isPositiveInteger(input)) {
-      throw new Error('[ERROR] 구매 금액은 0원보다 커야 합니다.');
+  availability(input) {
+    if (input < LOTTO.PRICE) {
+      throw new Error('[ERROR] 구매 금액은 1,000원 이상이어야 합니다.');
     }
   },
 

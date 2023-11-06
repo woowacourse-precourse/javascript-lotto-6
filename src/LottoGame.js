@@ -37,7 +37,7 @@ class LottoGame {
   }
 
   validate(money) {
-    Validator.numberType(money);
+    Validator.availability(money);
     Validator.unit(money);
   }
 
