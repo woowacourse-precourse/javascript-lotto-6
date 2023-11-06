@@ -6,7 +6,7 @@ import { LOTTO, LOTTO_PRIZE } from './constants/lotto.js';
 import Input from './Input.js';
 import Output from './Output.js';
 
-class Game {
+class LottoGame {
   #lottos;
   #winningLotto;
   #bonusNumber;
@@ -86,4 +86,4 @@ class Game {
   }
 }
 
-export default Game;
+export default LottoGame;

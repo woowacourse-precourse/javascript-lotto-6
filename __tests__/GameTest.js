@@ -1,12 +1,13 @@
 import { Random } from '@woowacourse/mission-utils';
 
-import Game from '../src/Game.js';
+import LottoGame from '../src/LottoGame.js';
+import Lotto from '../src/Lotto.js';
 import { validatePurchaseAmount } from '../src/utils/validate.js';
 import { ERROR_MESSAGE } from '../src/constants/messages.js';
 
-describe('Game 클래스 테스트', () => {
+describe('LottoGame 클래스 테스트', () => {
   test('구입 금액에 해당하는 만큼 로또를 발행한다.', () => {
-    const game = new Game();
+    const game = new LottoGame();
     game.purchaseLotto(2000);
     const lottos = game.getLottos();
 
@@ -17,7 +18,7 @@ describe('Game 클래스 테스트', () => {
     Random.pickUniqueNumbersInRange = jest.fn();
     Random.pickUniqueNumbersInRange.mockReturnValue([35, 1, 4, 25, 44, 12]);
 
-    const game = new Game();
+    const game = new LottoGame();
     game.purchaseLotto(1000);
     const lottos = game.getLottos();
 
@@ -27,12 +28,12 @@ describe('Game 클래스 테스트', () => {
   describe('구매한 로또와 당첨 번호를 비교한다.', () => {
     test('당첨된 로또와 비교해 각 등수에 몇 개가 당첨되었는지 확인할 수 있는 결과를 반환한다.', () => {
       const PURCHASED_LOTTO = [
-        [1, 2, 3, 4, 5, 6],
-        [1, 2, 3, 10, 20, 7],
+        new Lotto([1, 2, 3, 4, 5, 6]),
+        new Lotto([1, 2, 3, 10, 20, 7]),
       ];
       const WINNING_LOTTO = [1, 2, 3, 10, 20, 35];
       const BONUS_NUMBER = 7;
-      const game = new Game();
+      const game = new LottoGame();
       const result = game.compareLotto(
         PURCHASED_LOTTO,
         WINNING_LOTTO,
@@ -56,7 +57,7 @@ describe('Game 클래스 테스트', () => {
     ])(
       '당첨 수익률을 계산한다.',
       ({ result, purchaseAmount, expectedRate }) => {
-        const game = new Game();
+        const game = new LottoGame();
         const rate = game.calculateRate(purchaseAmount, result);
 
         expect(rate).toBe(expectedRate);
