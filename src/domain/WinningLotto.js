@@ -4,6 +4,10 @@ import LottoNumber from './LottoNumber.js';
 import ApplicationError from '../exceptions/ApplicationError.js';
 
 class WinningLotto {
+  /**
+   * 우승 로또의 에러메세지입니다.
+   * @readonly
+   */
   static ERROR_MESSAGES = Object.freeze({
     invalidLottoArg: 'lotto에 Lotto를 입력해주세요!',
     invalidBonusArg: 'bonus에 LottoNumber를 입력해주세요!',
@@ -25,8 +29,8 @@ class WinningLotto {
 
   /**
    * 결과를 결정할 우승 로또와 보너스 번호입니다.
-   * @param {Lotto} lotto
-   * @param {LottoNumber} bonus
+   * @param {Lotto} lotto 우승 로또의 로또입니다.
+   * @param {LottoNumber} bonus 우승 로또의 보너스 번호입니다.
    */
   constructor(lotto, bonus) {
     this.#validate(lotto, bonus);
@@ -35,9 +39,9 @@ class WinningLotto {
   }
 
   /**
-   * @param {Lotto} lotto
-   * @param {LottoNumber} bonus
-   * @returns {WinningLotto}
+   * @param {Lotto} lotto 우승 로또의 로또입니다.
+   * @param {LottoNumber} bonus 우승 로또의 보너스 번호입니다.
+   * @returns {WinningLotto} 우승 로또입니다.
    */
   static of(lotto, bonus) {
     return new WinningLotto(lotto, bonus);
@@ -58,8 +62,8 @@ class WinningLotto {
 
   /**
    * `lotto`와 우승 로또가 몇 개의 숫자가 같은지와 보너스 소유 여부를 확인한다.
-   * @param {Lotto} lotto
-   * @returns {import('./LottoReward.js').RewardRequirement}
+   * @param {Lotto} lotto 비교할 로또입니다.
+   * @returns {import('./LottoReward.js').RewardRequirement} 로또의 결과입니다.
    */
   grade(lotto) {
     this.#validateGrade(lotto);

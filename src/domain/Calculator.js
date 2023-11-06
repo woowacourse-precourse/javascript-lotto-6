@@ -5,13 +5,17 @@ import { invalidInstanceElement } from '../utils/validator.js';
 import ApplicationError from '../exceptions/ApplicationError.js';
 
 class Calculator {
+  /**
+   * 계산기 관련 오류메세지입니다.
+   * @readonly
+   */
   static ERROR_MESSAGES = Object.freeze({
     invalidIncome: 'earningRate의 income에 숫자를 입력해주세요!',
     invalidRewards: 'earningRate의 rewards에 LottoReward가 아닌 값이 존재합니다!',
   });
 
   /**
-   * @returns {Calculator}
+   * @returns {Calculator} 계산기입니다.
    */
   static of() {
     return new Calculator();
@@ -19,9 +23,9 @@ class Calculator {
 
   /**
    * LottoRewards의 수익률을 계산합니다.
-   * @param {number} income
-   * @param {LottoReward[]} rewards
-   * @returns {number}
+   * @param {number} income 지출입니다.
+   * @param {LottoReward[]} rewards 로또 결과 배열입니다.
+   * @returns {number} 로또 결과의 수익률입니다.
    */
   earningRate(income, rewards) {
     this.#validateEarningRate(income, rewards);

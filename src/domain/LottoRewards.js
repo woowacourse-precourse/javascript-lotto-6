@@ -7,6 +7,10 @@ import { invalidInstanceElement } from '../utils/validator.js';
 import ApplicationError from '../exceptions/ApplicationError.js';
 
 class LottoRewards {
+  /**
+   * 로또 경품 목록의 에러메세지입니다.
+   * @readonly
+   */
   static ERROR_MESSAGES = Object.freeze({
     notLottoArray: 'lottos에 배열을 입력해주세요!',
     notLottoInstance: 'lottos에 Lotto가 아닌 인스턴스가 있습니다!',
@@ -36,16 +40,15 @@ class LottoRewards {
   #winningLotto;
 
   /**
-   * @param {WinningLotto} winningLotto
+   * @param {WinningLotto} winningLotto 비교할 우승 로또입니다.
    */
   constructor(winningLotto) {
     this.#winningLotto = winningLotto;
   }
 
   /**
-   *
-   * @param {WinningLotto} winningLotto
-   * @returns {LottoRewards}
+   * @param {WinningLotto} winningLotto 비교할 우승 로또입니다.
+   * @returns {LottoRewards} 로또 경품 목록입니다.
    */
   static of(winningLotto) {
     return new LottoRewards(winningLotto);
@@ -53,8 +56,8 @@ class LottoRewards {
 
   /**
    * 입력한 로또들의 경품 결과를 반환합니다.
-   * @param {Lotto[]} lottos
-   * @returns {LottoReward[]}
+   * @param {Lotto[]} lottos 비교할 로또 목록입니다.
+   * @returns {LottoReward[]} 로또 경품 목록입니다.
    */
   getLottosResult(lottos) {
     this.#validateLottos(lottos);
@@ -73,7 +76,7 @@ class LottoRewards {
 
   /**
    * 로또에 대한 경품을 확인합니다.
-   * @param {Lotto} lotto
+   * @param {Lotto} lotto 비교할 로또입니다.
    */
   #compareLotto(lotto) {
     const rewardResult = this.#winningLotto.grade(lotto);

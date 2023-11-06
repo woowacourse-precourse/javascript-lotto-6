@@ -1,8 +1,8 @@
 /**
  * 모든 키값이 동일한지 체크합니다.
- * @param {object} obj
- * @param {object} otherObj
- * @returns {boolean}
+ * @param {object} obj 비교할 객체입니다.
+ * @param {object} otherObj 비교 대상이 될 객체입니다.
+ * @returns {boolean} 객체 키값의 동일 여부입니다.
  */
 export const isSameKeyList = (obj, otherObj) => {
   const firstKeys = Object.keys(obj);
@@ -15,9 +15,9 @@ const isObjectOrNull = (value) => typeof value !== 'object' || value === null;
 
 /**
  * 모든 키와 값이 동일한지 체크합니다.
- * @param {object} obj
- * @param {object} otherObj
- * @returns {boolean}
+ * @param {object} obj 비교할 객체입니다.
+ * @param {object} otherObj 비교 대상이 될 객체입니다.
+ * @returns {boolean} 객체의 동일 여부입니다.
  */
 export const isEqualObject = (obj, otherObj) => {
   if (obj === otherObj) return true;

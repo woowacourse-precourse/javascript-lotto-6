@@ -5,10 +5,25 @@ import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
 import ApplicationError from '../exceptions/ApplicationError.js';
 
 class LottoNumber {
+  /**
+   * 로또의 최소 숫자입니다.
+   * @type {number}
+   * @readonly
+   */
   static MIN_NUMBER = 1;
 
+  /**
+   * 로또의 최대 숫자입니다.
+   * @type {number}
+   * @readonly
+   */
   static MAX_NUMBER = 45;
 
+  /**
+   * 로또 숫자의 에러메세지입니다.
+   * @type {number}
+   * @readonly
+   */
   static ERROR_MESSAGES = Object.freeze({
     notNumber: ERROR_MESSAGE_GENERATOR.notNumber('로또 숫자'),
     notInteger: ERROR_MESSAGE_GENERATOR.notInteger('로또 숫자'),
@@ -18,6 +33,11 @@ class LottoNumber {
     }),
   });
 
+  /**
+   * 미리 생성해놓은 로또 숫자 인스턴스 목록입니다.
+   * @type {number}
+   * @readonly
+   */
   static #numbers = Object.fromEntries(
     Array.from({ length: LottoNumber.MAX_NUMBER - LottoNumber.MIN_NUMBER + 1 }, (_, i) => [
       i + LottoNumber.MIN_NUMBER,
@@ -58,8 +78,8 @@ class LottoNumber {
 
   /**
    * 입력받은 LottoNumber가 같은 인스턴스인지 비교합니다.
-   * @param {LottoNumber} number
-   * @returns {boolean}
+   * @param {LottoNumber} number 비교할 로또 번호입니다.
+   * @returns {boolean} 로또 번호의 동일 여부입니다.
    */
   equal(number) {
     return this === number;
