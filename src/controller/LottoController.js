@@ -27,7 +27,7 @@ export default class LottoController {
 
   async #readLottoNumbers() {
     const lottoNumbers = await readLottoMainNumbers();
-    const lottoBonusNumber = await readLottoBonusNumber();
+    const lottoBonusNumber = await readLottoBonusNumber(lottoNumbers);
 
     this.#compare(lottoNumbers, lottoBonusNumber);
   }
