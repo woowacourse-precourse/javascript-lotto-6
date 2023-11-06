@@ -11,6 +11,8 @@ class App {
 
     const winningNumbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
+
+    const results = this.getMatches(tickets, winningNumbers, bonusNumber);
   }
   
   async getPurchaseAmount() {
@@ -70,6 +72,46 @@ class App {
     if (numbers.includes(bonusNumber)) throw new Error(errorMessages.DUPLICATES);
     if (string.includes('.')) throw new Error(errorMessages.DECIMALS);
   }
+
+  getMatches(tickets, winningTicket, bonusNumber) {
+    const numbers = winningTicket.getLottoNumbers();
+    const scores = this.createScorekeeper();
+
+    for (let i = 0; i < tickets.length; i += 1) {
+      let count = 0;
+      tickets[i].forEach((number) => {
+        if (numbers.includes(number)) count += 1;
+      });
+      const scoreKey = this.getScoreKey(count, tickets[i], bonusNumber);
+      if (scoreKey) scores[scoreKey] += 1;
+    }
+
+    return scores;
+  }
+
+  createScorekeeper() {
+    const scores = {
+      three: 0,
+      four: 0,
+      five: 0,
+      fivePlusBonus: 0,
+      six: 0
+    };
+    return scores;
+  }
+
+  getScoreKey(count, ticket, bonusNumber) {
+    let key = null;
+
+    if (count === 3) key = 'three';
+    if (count === 4) key = 'four';
+    if (count === 5 && !ticket.includes(bonusNumber)) key = 'five';
+    if (count === 5 && ticket.includes(bonusNumber)) key = 'fivePlusBonus';
+    if (count === 6) key = 'six';
+
+    return key;
+  }
+
 }
 
 export default App;
