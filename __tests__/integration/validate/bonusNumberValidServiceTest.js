@@ -1,5 +1,5 @@
-import bonusNumberValidService from '../../src/service/validate/bonusNumberValidService';
-import { BONUS_ERROR_CODE, LOTTO_ERROR_CODE, PURCHASE_ERROR_CODE } from '../../src/util/error/errorCode';
+import bonusNumberValidService from '../../../src/service/validate/bonusNumberValidService';
+import { BONUS_ERROR_CODE, LOTTO_ERROR_CODE, PURCHASE_ERROR_CODE } from '../../../src/util/error/errorCode';
 
 describe('보너스 번호 입력에 대한 유효성 테스트', () => {
   const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];

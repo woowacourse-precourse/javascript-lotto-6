@@ -1,5 +1,5 @@
-import purchaseValidService from '../../src/service/validate/purchaseValidService';
-import { PURCHASE_ERROR_CODE } from '../../src/util/error/errorCode';
+import purchaseValidService from '../../../src/service/validate/purchaseValidService';
+import { PURCHASE_ERROR_CODE } from '../../../src/util/error/errorCode';
 
 describe('로또 구입 금액 입력에 대한 유효성 테스트', () => {
   test('1000으로 나누어 떨어지지 않는 값에 대한 에러 테스트', async () => {
