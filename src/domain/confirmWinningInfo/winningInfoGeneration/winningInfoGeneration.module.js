@@ -52,10 +52,10 @@ const createRankDistributionTable = ({ lottoMatchingResult, rankInfo }) => {
 };
 
 /**
- * @module winningInfo
+ * @module winningInfoGeneration
  * 로또 매칭 결과를 바탕으로 각 등수 별 빈도 수와 총 당첨 금액을 계산하기 위한 모듈
  */
-const winningInfo = Object.freeze({
+const winningInfoGeneration = Object.freeze({
   constants: Object.freeze({
     rankInfo: Object.freeze({
       '1st': Object.freeze({
@@ -110,4 +110,4 @@ const winningInfo = Object.freeze({
   },
 });
 
-export default winningInfo;
+export default winningInfoGeneration;

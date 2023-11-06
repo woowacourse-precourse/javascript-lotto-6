@@ -2,7 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 
 import {
   lottoPurchase,
-  winningInfo,
+  winningInfoGeneration,
   lottoNumberMatching,
   rateOfReturnCalculation,
 } from '../domain/index.js';
@@ -26,7 +26,8 @@ const processWinningResult = ({
   const lottoNumberInfo = { lottoNumbers, winningLottoInfo };
   const lottoMatchingResult = lottoNumberMatching.createLottoMatchingResult(lottoNumberInfo);
 
-  const { rankDistributionTable, prize } = winningInfo.createWinningInfo(lottoMatchingResult);
+  const { rankDistributionTable, prize } =
+    winningInfoGeneration.createWinningInfo(lottoMatchingResult);
 
   const rateOfReturn = rateOfReturnCalculation.calculate({ purchasedLottoAmount, prize });
 

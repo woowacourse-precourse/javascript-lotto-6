@@ -8,7 +8,7 @@ import {
 
 import { SYMBOLS } from '../../constants/symbols.js';
 
-import winningInfo from '../../domain/confirmWinningInfo/winningInfo/winningInfo.module.js';
+import winningInfoGeneration from '../../domain/confirmWinningInfo/winningInfoGeneration/winningInfoGeneration.module.js';
 
 import systemConsole from '../systemConsole.js';
 
@@ -94,7 +94,7 @@ const lottoGameConsole = Object.freeze({
         const ranks = Object.keys(this.prizeDescription).reverse();
 
         const formatPrizeDescription = (rank) => {
-          const { rankInfo } = winningInfo.constants;
+          const { rankInfo } = winningInfoGeneration.constants;
           const description = this.prizeDescription[rank];
           const prizeAmount = rankInfo[rank].prizeAmount.toLocaleString();
           const count = (rankDistributionTable && rankDistributionTable[rank]) ?? 0;
