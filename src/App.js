@@ -127,9 +127,9 @@ class App {
 
   printProfitPercentage() {
     MissionUtils.Console.print(
-      `${OUTPUT_MESSAGE.totalProfitPercentage} ${
-        this.#profitPercentage
-      }%입니다.`,
+      `${OUTPUT_MESSAGE.totalProfitPercentage} ${this.#profitPercentage.toFixed(
+        1,
+      )}%입니다.`,
     );
   }
 
