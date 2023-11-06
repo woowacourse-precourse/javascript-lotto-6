@@ -22,9 +22,9 @@ class Lotto {
 
   checkResult(ticket){
     let count = 0
-    for (let index=0; index<6; index++){
-      if(this.#numbers[index] == ticket[index]) count++;
-      else if(ticket[index] == this.#bonusNumber) count+=0.5;
+    for (let lottoNumber of ticket){
+      if(this.#numbers.includes(lottoNumber)) count++;
+      else if(lottoNumber == this.#bonusNumber) count+=0.5;
     }
     return count;
   }
