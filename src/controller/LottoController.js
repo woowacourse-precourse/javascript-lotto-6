@@ -70,6 +70,20 @@ class LottoController {
 
     this.countWinningNumber(numbers, bonus);
   }
+
+  /**
+   * 당첨번호와 로또번호 비교하는 함수
+   * @param {number[]} numbers
+   * @param {number} bonus
+   */
+  countWinningNumber(numbers, bonus) {
+    const winning = new Winning(numbers, bonus);
+    const counts = this.#lottos.map((lotto) => {
+      return winning.compareLotto(lotto);
+    });
+
+    this.winningStatistic(counts);
+  }
 }
 
 export default LottoController;
