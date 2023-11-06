@@ -25,8 +25,11 @@ class GameController {
     const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber(WINNING_NUMBERS);
     const GAME_CALCULATOR = new GameCalculator(LOTTO_NUMBER_ARRAY, WINNING_NUMBERS, BONUS_NUMBER);
     const OBJ_FOR_RESULT = GAME_CALCULATOR.calculate();
-    const GAME_RESULT_MASSAGE =
-      this.gameMessageGenerator.getResultMessageForEachCorrect(OBJ_FOR_RESULT);
+    const GAME_RESULT_MESSAGE = this.gameMessageGenerator.getResultMessage(
+      OBJ_FOR_RESULT,
+      PURCHASE_MONEY
+    );
+    this.outputView.showGameResultOutput(GAME_RESULT_MESSAGE);
   }
 }
 

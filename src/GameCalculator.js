@@ -6,7 +6,7 @@ class GameCalculator {
     this.lottoNumberArray = lottoNumberArray;
     this.winningNumbers = winningNumbers;
     this.bonusNumber = bonusNumber;
-    this.objForResult = { 3: 0, 4: 0, 5: 0, '5+1': 0, 6: 0 };
+    this.objForResult = { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
     this.lotto = null;
   }
 
@@ -31,11 +31,11 @@ class GameCalculator {
       }
 
       if (RESULT_PER_LOTTO === OTHERS.bonusNumber) {
-        this.objForResult[NUMBER.fiveBonus] += 1;
+        this.objForResult[NUMBER.six] += 1;
       }
 
       if (RESULT_PER_LOTTO === 6) {
-        this.objForResult[NUMBER.six] += 1;
+        this.objForResult[NUMBER.seven] += 1;
       }
     });
 

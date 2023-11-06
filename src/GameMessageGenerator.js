@@ -1,4 +1,4 @@
-import { OTHERS, PRIZES } from './utils/constants.js';
+import { OTHERS, PRIZES_MESSAGE, PRIZES } from './utils/constants.js';
 
 class GameMessageGenerator {
   getLottoNumberListMessage(lottoNumberArray) {
@@ -10,18 +10,22 @@ class GameMessageGenerator {
     return LOTTO_NUMBER_LIST_MESSAGE;
   }
 
-  getResultMessage(gameResultObj) {
+  getResultMessage(gameResultObj, purchaseMoney) {
     let resultMessage = OTHERS.emptyString;
+    let totalPrize = 0;
 
     Object.keys(gameResultObj).forEach((key, index) => {
       if (index === Object.keys(gameResultObj).length - 1) {
-        resultMessage += `${PRIZES[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}`;
+        resultMessage += `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}`;
       } else {
-        resultMessage += `${PRIZES[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}${OTHERS.lineBreak}`;
+        resultMessage += `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}${OTHERS.lineBreak}`;
       }
+      totalPrize += gameResultObj[key] * PRIZES[key];
     });
 
-    return resultMessage;
+    const returnRate = ((totalPrize / purchaseMoney) * 100).toFixed(1);
+
+    return [resultMessage, returnRate];
   }
 }
 
