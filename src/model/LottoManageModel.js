@@ -1,7 +1,7 @@
 import Lotto from '../Lotto.js';
 
 import { throwError } from '../utils/index.js';
-import { MESSAGE } from '../utils/constants.js';
+import { ERROR_MESSAGE } from '../utils/constants.js';
 
 class LottoManageModel {
   /**
@@ -51,7 +51,7 @@ class LottoManageModel {
 
   #isBonusNumberDuplicate(bonusNumber) {
     throwError(
-      MESSAGE.bonus_number_duplicate,
+      ERROR_MESSAGE.bonus_number_duplicate,
       this.getWinningNumbers().includes(bonusNumber),
     );
   }
