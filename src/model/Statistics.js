@@ -10,7 +10,7 @@ class Statistics {
   }
 
   getRateOfReturns() {
-    return (this.#rateOfReturns * 100).toFixed(1);
+    return this.#rateOfReturns;
   }
 
   getStatistics() {
@@ -36,7 +36,7 @@ class Statistics {
   }
 
   roundRateOfReturns(totalWinnings, purchaseAmount) {
-    const rateOfReturns = (totalWinnings / purchaseAmount).toFixed(1);
+    const rateOfReturns = (totalWinnings / purchaseAmount).toFixed(3) * 100;
     return rateOfReturns;
   }
 }
