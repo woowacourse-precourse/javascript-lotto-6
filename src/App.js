@@ -149,6 +149,28 @@ class App {
     userTickets.forEach((userTicket) => userTicket.printLottoNumbers());
   }
 
+  calculateWinningResult(userTickets, winningNumbers, bonusNumber) {
+    const results = userTickets.map((userTicket) => {
+      return userTicket.calculateLottoWinning(winningNumbers, bonusNumber);
+    });
+
+    return results.reduce((acc, current) => {
+      acc[current] = (acc[current] || 0) + 1;
+      return acc;
+    }, {});
+  }
+
+  calculateTotalReturn(results, userMoney) {
+    const total =
+      results['1'] * 2000000000 +
+      results['2'] * 30000000 +
+      results['3'] * 1500000 +
+      results['4'] * 50000 +
+      results['5'] * 5000;
+
+    return (total / userMoney) * 100;
+  }
+
   async play() {
     const userMoney = await this.getUserPurchaseMoney();
     const userTickets = this.purchaseLottoTickets(userMoney);
@@ -158,6 +180,14 @@ class App {
 
     const winningNumbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
+
+    const results = this.calculateWinningResult(
+      userTickets,
+      winningNumbers,
+      bonusNumber
+    );
+
+    const totalReturn = this.calculateTotalReturn(results);
   }
 }
 
