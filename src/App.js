@@ -5,15 +5,19 @@ const LOTTO_PRICE = 1000;
 
 class App {
   #cost;
+  #lottos;
   #winningNum;
   #bonusNum;
-  #lottos;
+  #winningDetail;
+  #rateOfReturn;
 
   constructor() {
     this.#cost = 0;
+    this.#lottos = [];
     this.#winningNum = [];
     this.#bonusNum = 0;
-    this.#lottos = [];
+    this.#winningDetail = [];
+    this.#rateOfReturn = 0;
   }
   // 구입 금액 관련 함수들
   async inputCost() {
@@ -81,6 +85,16 @@ class App {
       if (num === numberInput) throw new Error("[ERROR] 이미 선택된 번호입니다.");
     });
   }
+  // 구입한 로또와 당첨 번호 비교 관련 함수
+  checkLottos() {
+    let matchWinnerNum = 0;
+    let matchBonusNum = 0;
+    this.#lottos.map((lotto) => {
+      matchWinnerNum = lotto.getNumbers().filter((num) => this.#winningNum.getNumbers().includes(num)).length;
+      matchBonusNum = lotto.getNumbers().filter((num) => num === this.#bonusNum).length;
+      this.#winningDetail.push([matchWinnerNum, matchBonusNum]);
+    });
+  }
 
   async play() {
     await this.inputCost();
@@ -88,6 +102,7 @@ class App {
     this.showLottoList();
     await this.inputWinnerNum();
     await this.inputBonusNum();
+    this.checkLottos();
   }
 }
 
