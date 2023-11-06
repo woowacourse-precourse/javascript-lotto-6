@@ -1,12 +1,13 @@
+import { Console } from '@woowacourse/mission-utils';
 import Input from './utils/Input.js';
 
 class User {
-  constructor() {
-    this.cost = 0;
-  }
-
+  // eslint-disable-next-line class-methods-use-this
   async buy() {
-    this.cost = await Input.getCost();
+    const cost = await Input.getCost();
+    const count = cost / 1000;
+
+    Console.print(`\n${count}개를 구매했습니다.`);
   }
 }
 
