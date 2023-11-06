@@ -4,10 +4,10 @@ import InputError from "../errors/InputError.js";
 class UserInput {
   static validateAmount(input) {
     InputError.checkEmptyInputError(input);
+    InputError.checkNumberError(input);
 
     const inputToNumber = parseInt(input, 10);
 
-    InputError.checkNumberError(inputToNumber);
     InputError.checkNagativeNumberError(inputToNumber);
     InputError.checkAmountInputError(inputToNumber);
 
@@ -20,10 +20,10 @@ class UserInput {
 
   static validateBonusNumber(input) {
     InputError.checkEmptyInputError(input);
+    InputError.checkNumberError(input);
 
     const inputToNumber = parseInt(input, 10);
 
-    InputError.checkNumberError(inputToNumber);
     InputError.checkNagativeNumberError(inputToNumber);
     InputError.checkOutOfRangeNumbers(inputToNumber);
 

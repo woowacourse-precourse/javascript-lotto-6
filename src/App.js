@@ -15,7 +15,7 @@ class App {
     }
 
     const lottoGame = new LottoGame();
-    lottoGame.generateLotto(lottoAmount / 1000);
+    lottoGame.generateLotto(lottoAmount);
 
     let lottoNumbers;
     while (true) {
