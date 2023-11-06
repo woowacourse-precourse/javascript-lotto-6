@@ -2,7 +2,7 @@ import { NUMBERS, ERROR_MESSAGE } from '../Constants/Constants.js';
 
 const VALIDATION = {
   isThousands(price) {
-    if (price % 1000 === 0 || price === 0) {
+    if (price % NUMBERS.LOTTO_PRICE === 0 || price === 0) {
       return true;
     }
     return false;

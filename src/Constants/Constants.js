@@ -1,6 +1,6 @@
 const LOTTO_MESSAGE = Object.freeze({
   INPUT_PRICE: '구입금액을 입력해 주세요.\n',
-  BUY_LOTTO: '개를 구매했습니다.',
+  BUY_LOTTO: (lotto) => `\n${lotto}개를 구매했습니다.`,
   INPUT_NUMBERS: '당첨 번호를 입력해 주세요.\n',
   INPUT_BONUS: '보너스 번호를 입력해주세요\n',
   STATISTICS_MESSAGE: '당첨 통계\n---',
@@ -26,5 +26,7 @@ const ERROR_MESSAGE = Object.freeze({
 const NUMBERS = {
   MIN_LOTTO: 1,
   MAX_LOTTO: 45,
+  LOTTO_PRICE: 1000,
+  LOTTO_SELECT_NUM: 6,
 };
 export { LOTTO_MESSAGE, ERROR_MESSAGE, NUMBERS };
