@@ -5,6 +5,10 @@ import {
   LOTTO_RESULT_FORMANT,
 } from '../constants/LottoMessage.js';
 
+export const printError = (error) => {
+  Console.print(error);
+};
+
 export const printLottoNumbers = ({ lottoList, lottoAmount }) => {
   Console.print(LOTTO_NOTIFICATION_FORMAT.lottoAmount(lottoAmount));
   lottoList.forEach((lotto) => Console.print(lotto));
