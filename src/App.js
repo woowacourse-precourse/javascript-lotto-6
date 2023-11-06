@@ -12,12 +12,7 @@ class App {
 
   async setGameConfig() {
     const { lottos, winningNumbers, bonusNumber } = await this.readGameConfig();
-    const rankBoard = Lotto.getRankBoard(lottos, winningNumbers, bonusNumber);
-    this.#view.printRankResult(rankBoard);
-    const initalMoney = lottos.length * PURCHASE_PRICE.divisionUnit;
-    const finalMoney = Lotto.getFinalMoney(rankBoard);
-    const profitAbility = Lotto.getProfitAbility(initalMoney, finalMoney);
-    this.#view.printProfitAbility(profitAbility);
+    this.lottoResult = Lotto.getResult(lottos, winningNumbers, bonusNumber);
   }
 
   async readGameConfig() {

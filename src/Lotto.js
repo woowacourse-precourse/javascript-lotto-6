@@ -3,6 +3,7 @@ import LOTTO_NUMBER from './constants/lottoNumber.js';
 import ERROR from './constants/error.js';
 import MessageFormat from './utils/messageFormat.js';
 import RANK from './constants/rank.js';
+import PURCHASE_PRICE from './constants/purchasePrice.js';
 
 class Lotto {
   #numbers;
@@ -74,6 +75,14 @@ class Lotto {
   static getProfitAbility(initalMoney, finalMoney) {
     const profitAbility = finalMoney / initalMoney;
     return (profitAbility * 100).toFixed(1);
+  }
+
+  static getResult(lottos, winningNumbers, bonusNumber) {
+    const rankBoard = Lotto.getRankBoard(lottos, winningNumbers, bonusNumber);
+    const initalMoney = lottos.length * PURCHASE_PRICE.divisionUnit;
+    const finalMoney = Lotto.getFinalMoney(rankBoard);
+    const profitAbility = Lotto.getProfitAbility(initalMoney, finalMoney);
+    return { rankBoard, profitAbility };
   }
 }
 
