@@ -55,7 +55,7 @@ class LottoManager {
 
     getWinCount() {
         this.setAllwinCount()
-        console.log(this.winCount);
+        return this.winCount;
     }
 }
 

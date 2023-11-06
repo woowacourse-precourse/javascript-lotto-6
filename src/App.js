@@ -23,7 +23,8 @@ class App {
     lottoManager.setBonusNumber(bonusNumber);
 
     // ➎ 당첨 로또 번호와 구매한 로또 번호를 비교한다.
-    lottoManager.getWinCount();
+    const prize = lottoManager.getWinCount();
+    OutputView.printPrize(prize);
   }
 }
 
