@@ -1,7 +1,0 @@
-export const MAGIC_NUMBER = Object.freeze({
-  LOTTO_NUMBER: 6,
-  TICKET_PRICE: 1000,
-  MIN_NUMBER: 1,
-  MAX_NUMBER: 45,
-  LOTTO_NUMBER_COUNT: 6,
-});

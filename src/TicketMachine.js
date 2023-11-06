@@ -1,14 +1,17 @@
 import { Random } from '@woowacourse/mission-utils';
-import { MAGIC_NUMBER } from './constants/magicNumber.js';
+import { MAGIC_NUMBER } from './constants/numbers.js';
+
 import View from './View.js';
-import Validator from './utils/Validator.js';
 
 class TicketMachine {
   #purchaseAmount = 0;
 
   constructor(purchaseAmount) {
-    Validator.checkPurchaseAmount(purchaseAmount);
-    this.#purchaseAmount = purchaseAmount;
+    try {
+      this.#purchaseAmount = purchaseAmount;
+    } catch (error) {
+      this.buyTicketsaAgain();
+    }
   }
 
   getNumberOfGame() {
@@ -21,7 +24,7 @@ class TicketMachine {
       Random.pickUniqueNumbersInRange(
         MAGIC_NUMBER.MIN_NUMBER,
         MAGIC_NUMBER.MAX_NUMBER,
-        MAGIC_NUMBER.LOTTO_NUMBER_COUNT,
+        MAGIC_NUMBER.LOTTO_NUMBER_LENGTH,
       ),
     );
     View.printPurchasedTicketsInfo(purchasedTicktesCount, ticktes);

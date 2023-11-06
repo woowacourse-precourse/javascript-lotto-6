@@ -1,34 +1,56 @@
-import { INFO_MESSAGE } from './constants/messages.js';
-
 import View from './View.js';
 import TicketMachine from './TicketMachine.js';
 import Lotto from './Lotto.js';
+import DrawMachine from './DrawMachine.js';
+import ResultAnnouncer from './ResultAnnouncer.js';
 
 class App {
-  #state = { ticktes: null, numbers: null, bonus: null };
+  #state = {
+    tickets: null,
+    myNumbers: null,
+    bonusNumber: null,
+    rank: {
+      FIFTH_RANK: 0,
+      FOURTH_RANK: 0,
+      THIRD_RANK: 0,
+      SECOND_RANK: 0,
+      FIRST_RANK: 0,
+    },
+    profitRate: null,
+  };
 
-  buyTickets(purchaseAmount) {
-    this.ticketMachine = new TicketMachine(purchaseAmount);
-    this.#state.ticktes = this.ticketMachine.getNumberOfGame();
+  constructor() {
+    this.view = new View();
   }
 
-  async setlottoNumbers(lottoNumbers) {
-    const lottoNumbersArray = lottoNumbers.split(',').map(Number);
+  async #buyTickets() {
+    const purchaseAmount = await this.view.getPurchaseAmount();
+    this.ticketMachine = new TicketMachine(purchaseAmount);
+    this.#state.tickets = this.ticketMachine.getNumberOfGame();
+  }
+
+  async #setlottoNumbers() {
+    const lottoNumbersArray = await this.view.getLottoNumber();
     this.lotto = new Lotto(lottoNumbersArray);
-    this.#state.numbers = lottoNumbersArray;
-    this.#state.bonus = await Lotto.getBonusNumber(lottoNumbersArray);
+    this.#state.myNumbers = lottoNumbersArray;
+    this.#state.bonusNumber = await this.view.getBonusNumber(lottoNumbersArray);
+  }
+
+  #getWinStats() {
+    this.drawMachine = new DrawMachine(this.#state);
+    this.#state.rank = this.drawMachine.calculateWinningStats();
+  }
+
+  #announceResult() {
+    this.resultAnnouncer = new ResultAnnouncer(this.#state);
+    this.resultAnnouncer.anounceProfit();
   }
 
   async play() {
-    const purchaseAmount = await View.getUserInput(
-      INFO_MESSAGE.PURCHASE_AMOUNT_ASK_MESSAGE,
-    );
-    this.buyTickets(purchaseAmount);
-
-    const lottoNumbers = await View.getUserInput(
-      INFO_MESSAGE.LOTTO_NUMBERS_ASK_MESSAGE,
-    );
-    await this.setlottoNumbers(lottoNumbers);
+    await this.#buyTickets();
+    await this.#setlottoNumbers();
+    this.#getWinStats();
+    this.#announceResult();
   }
 }
 

@@ -1,12 +1,18 @@
+import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE } from '../constants/messages.js';
-import { MAGIC_NUMBER } from '../constants/magicNumber.js';
+import { MAGIC_NUMBER } from '../constants/numbers.js';
 
 class Validator {
-  static #validate(condition, errorMsg) {
-    if (!condition) {
-      throw new Error(errorMsg);
+  static #validate(condition, errorMessage) {
+    try {
+      if (!condition) {
+        throw errorMessage;
+      }
+      return true;
+    } catch (err) {
+      Console.print(err);
+      throw new Error(err);
     }
-    return true;
   }
 
   static checkPurchaseAmount(money) {
