@@ -20,7 +20,8 @@ class Lotto {
   }
 
   printLotto(){
-    Output.outputMessage(this.#numbers);
+    const formatedMessage = this.#numbers.join(', ');
+    Output.outputMessage(`[${formatedMessage}]`);
   }
 }
 
