@@ -10,7 +10,8 @@ class App {
     const buyLotto = new BuyLotto(LOTTO_PRICE, DAILY_LIMIT_PRICE, NUMBER_CHECK);
 
     const purchaseAmount = await buyLotto.inputPurchaseAmount();
-    await buyLotto.validateInputPurchaseAmount(purchaseAmount);
+    buyLotto.validateInputPurchaseAmount(purchaseAmount);
+    buyLotto.printLottoNumbers(purchaseAmount);
   }
 }
 
