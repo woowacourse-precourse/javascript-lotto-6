@@ -3,7 +3,7 @@ import { Console } from '@woowacourse/mission-utils';
 const printEachLotto = (lotto) => {
   let str = ``;
 
-  lotto.numbers.forEach((number, idx, arr) => {
+  lotto.forEach((number, idx, arr) => {
     if (idx === 0) {
       str += `[${number}, `;
       return;

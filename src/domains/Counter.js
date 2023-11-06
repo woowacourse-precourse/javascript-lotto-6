@@ -24,7 +24,7 @@ class Counter {
     const lottoBox = [];
     Array.from({ length: this.#lottoTicketNumber }, () => {
       const lotto = this.#generateLotto();
-      lottoBox.push(new Lotto(lotto));
+      lottoBox.push(new Lotto(lotto).numbers);
     });
 
     return lottoBox;

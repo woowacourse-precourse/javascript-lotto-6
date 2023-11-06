@@ -1,5 +1,5 @@
-import printLottoResult from '../print/printLottoResult.js';
 import lottoCompare from '../utils/lottoCompare.js';
+import printLottoResult from '../print/printLottoResult.js';
 
 class LottoComparison {
   #myLotto;
@@ -25,7 +25,7 @@ class LottoComparison {
   }
 
   #compare(lottos) {
-    lottos.forEach((lotto) => lottoCompare(lotto.numbers, this.#winningNumbers, this.#bonusNumber, this.#rank));
+    lottos.forEach((lotto) => lottoCompare(lotto, this.#winningNumbers, this.#bonusNumber, this.#rank));
   }
 
   #printResult(rank) {
