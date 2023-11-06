@@ -1,4 +1,6 @@
+import ErrorMessages from "./common/errorMessages.js";
 import printWinningLotto from "./ui/PrintWinningLotto.js";
+import validateWinningLotto from "./util/validateWinningLotto.js";
 
 class Lotto {
   #numbers;
@@ -8,9 +10,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    if (!validateWinningLotto(numbers))
+      throw new Error(`${ErrorMessages.WINNING_LOTTO_ERROR_MESSAGE}`);
   }
 
   async print() {
