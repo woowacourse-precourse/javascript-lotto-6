@@ -1,4 +1,4 @@
-export const Messages = {
+export const MESSAGE = {
     USER: {
         'setMoney': '구입금액을 입력해 주세요.\n',
         'buyLotto': (number) => `${number}개를 구매했습니다.`,
