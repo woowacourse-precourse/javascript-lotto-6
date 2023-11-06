@@ -2,22 +2,22 @@ class MatchLottoNumber {
   #rank = [];
 
   constructor(numbers, bonusNumbers, lottos, lottoCount) {
-    this.#conpareAllLottoNumbers(numbers, bonusNumbers, lottos, lottoCount);
+    this.compareAllLottoNumbers(numbers, bonusNumbers, lottos, lottoCount);
   }
 
   get getRank() {
     return this.#rank;
   }
 
-  #conpareAllLottoNumbers(numbers, bonusNumbers, lottos, lottoCount) {
+  compareAllLottoNumbers(numbers, bonusNumbers, lottos, lottoCount) {
     for (let i = 0; i < lottoCount; i++) {
-      const sameNumberCount = this.#compare(numbers, lottos[i]);
-      const rank = this.#ranking(bonusNumbers, lottos[i], sameNumberCount);
+      const sameNumberCount = this.compare(numbers, lottos[i]);
+      const rank = this.ranking(bonusNumbers, lottos[i], sameNumberCount);
       this.#rank.push(rank);
     }
   }
 
-  #compare(numbers, lotto) {
+  compare(numbers, lotto) {
     let sameNumberCount = 0;
     numbers.forEach((number) => {
       if (lotto.includes(number)) {
@@ -27,7 +27,7 @@ class MatchLottoNumber {
     return sameNumberCount;
   }
 
-  #ranking(bonusNumbers, lotto, sameNumberCount) {
+  ranking(bonusNumbers, lotto, sameNumberCount) {
     switch (sameNumberCount) {
       case 6:
         return 1;
