@@ -1,6 +1,14 @@
+import { LottoGame } from './controller/LottoGame';
+import { Console } from '@woowacourse/mission-utils';
+
 class App {
   async play() {
-    return this;
+    try {
+      const lottogame = new LottoGame();
+      lottogame.startGame();
+    } catch (error) {
+      Console.print(error);
+    }
   }
 }
 
