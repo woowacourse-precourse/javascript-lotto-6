@@ -7,7 +7,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#validateBonusNum(numbers, bonusNum);
+    this.#validateBonusNum(numbers);
     this.#numbers = numbers;
   }
 
