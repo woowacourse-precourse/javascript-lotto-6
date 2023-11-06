@@ -2,14 +2,16 @@ import InputView from "../view/InputView.js";
 import InputValidator from "../utils/validator.js";
 import Lotto from "../Lotto.js";
 import OutputView from "../view/OutputView.js";
+import lottoNumberGenerator from "../utils/RandomNumberGenerator.js";
 class LottoGameController {
-  #lotto;
+  #lotto = [];
   #purchaseAmount;
 
   constructor() {}
 
-  startGame() {
-    this.readPurchaseAmount();
+  async startGame() {
+    await this.readPurchaseAmount();
+    this.setLottoTicketNumbers();
   }
 
   async readPurchaseAmount() {
@@ -31,6 +33,13 @@ class LottoGameController {
   showLottoTicketCount(input) {
     this.#purchaseAmount = +input / 1000;
     OutputView.printLottoTicketCount(this.#purchaseAmount);
+  }
+
+  setLottoTicketNumbers() {
+    for (let i = 0; i < this.#purchaseAmount; i++) {
+      const numbers = lottoNumberGenerator.generate();
+      this.#lotto[i] = new Lotto(numbers);
+    }
   }
 }
 
