@@ -4,10 +4,12 @@ import inputPrice from './input/inputPrice.js';
 import getAmountOfLottery from './lottery/getAmountOfLottery.js';
 import getLotteries from './lottery/getLotteries.js';
 import printLotteries from './output/printLotteries.js';
+import lineBreak from './common/lineBreak.js';
 
 class App {
   async play() {
     this.price = await inputPrice();
+    lineBreak();
 
     this.lotteryAmount = getAmountOfLottery(this.price);
     Console.print(`\n${this.lotteryAmount}${BUY_LOTTO}`);
