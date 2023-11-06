@@ -9,7 +9,7 @@ class OutputView{
   }
 
   printPurchase(number){
-    Console.print(`\n${number}${MESSAGE.result.numberOfPurchase}`)
+    Console.print(`${number}${MESSAGE.result.numberOfPurchase}`)
   }
 
 }

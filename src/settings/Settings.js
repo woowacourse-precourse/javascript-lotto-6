@@ -51,7 +51,7 @@ class SetGame{
       }
     }
 
-    return this.#Lotto;
+    return this.#Lotto.sort((a, b) => a - b);
 
   }
   

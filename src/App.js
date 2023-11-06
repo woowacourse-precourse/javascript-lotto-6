@@ -1,6 +1,8 @@
-import SetGame from "./domains/Settings.js";
+import SetGame from "./settings/Settings.js";
 import OutputView from "./view/OutputView.js";
-import Issue from "./domains/Issue.js";
+import Issue from "./utils/Issue.js";
+import Compare from "./utils/Compare.js";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
 
@@ -13,6 +15,8 @@ class App {
   #bonus
   #numberOfLotto
   #lottos
+  #result
+  #prizes
 
   constructor(){
     this.#setGame = new SetGame();
@@ -22,8 +26,10 @@ class App {
 
   async play() {
     await this.setGame();
-    this.#numberOfLotto = await this.#setGame.setNumOfLotto(this.#amounts)
-    this.#issueLottos(this.#numberOfLotto);
+    this.#numberOfLotto = await this.#setGame.setNumOfLotto(this.#amounts);
+    await this.#issueLottos(this.#numberOfLotto);
+
+    this.result();
   }
 
   async setGame(){
@@ -32,7 +38,7 @@ class App {
     this.#bonus = await this.#setGame.setBonusNumber(this.#lotto);
   }
 
-  #issueLottos(number){
+  async #issueLottos(number){
     this.#output.printPurchase(number);
 
     const lottos = []
@@ -49,6 +55,11 @@ class App {
     this.#lottos = lottos
   }
 
+  async result(){
+    const compare = new Compare(this.#lotto, this.#bonus);
+    this.#result = await compare.compareLotto(this.#lottos);
+    
+  }
   
 
 }
