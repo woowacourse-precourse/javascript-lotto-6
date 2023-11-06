@@ -2,7 +2,14 @@ class Analyzer {
   #prizeInfo;
 
   constructor() {
-    this.#prizeInfo = { prizeRank: [], totalPrize: 0 };
+    this.#prizeInfo = {
+      firstPlace: 0,
+      secondPlace: 0,
+      thirdPlace: 0,
+      fourthPlace: 0,
+      fifthPlace: 0,
+      totalPrizeMoeny: 0,
+    };
   }
 
   getPrizeInfo() {
@@ -10,28 +17,39 @@ class Analyzer {
   }
 
   getPrize(winnigResult) {
-    this.#prizeInfo.prizeRank = [];
     const prizeLookup = {
-      '6,0': 2000000000,
-      '5,1': 30000000,
-      '5,0': 150000,
-      '4,0': 50000,
-      '3,0': 5000,
+      '6,0': 'firstPlace',
+      '5,1': 'secondPlace',
+      '5,0': 'thirdPlace',
+      '4,0': 'fourthPlace',
+      '3,0': 'fifthPlace',
     };
     winnigResult.forEach((matchingResult) => {
       const prize = prizeLookup[matchingResult.join(',')] || 0;
-      this.#prizeInfo.prizeRank.push(prize);
+      if (prize) {
+        this.#prizeInfo[prize] += 1;
+      }
     });
   }
 
   calculateTotalPrize() {
-    this.#prizeInfo.prizeRank.forEach((lottoPrize) => {
-      this.#prizeInfo.totalPrize += lottoPrize;
-    });
+    const prizeLookup = {
+      firstPlace: 2000000000,
+      secondPlace: 30000000,
+      thirdPlace: 1500000,
+      fourthPlace: 50000,
+      fifthPlace: 5000,
+    };
+    for (const rank in this.#prizeInfo) {
+      if (rank !== 'totalPrizeMoeny') {
+        this.#prizeInfo.totalPrizeMoeny +=
+          this.#prizeInfo[rank] * prizeLookup[rank];
+      }
+    }
   }
 
   calculateYield(money) {
-    return ((this.#prizeInfo.totalPrize / money) * 100).toFixed(2);
+    return ((this.#prizeInfo.totalPrizeMoeny / money) * 100).toFixed(2);
   }
 }
 
