@@ -26,7 +26,7 @@ describe("로또 클래스 테스트", () => {
   test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
-    }).toThrow(MESSAGES.ERROR.DUPLICATE_NUMBER);
+    }).toThrow(MESSAGES.ERROR.DUPLICATE_LOTTO_NUMBER);
   });
 
   test("로또 번호와 당첨 번호를 비교하여, 일치하는 숫자의 갯수를 반환한다", () => {
