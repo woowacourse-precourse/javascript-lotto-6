@@ -8,8 +8,9 @@ const InputView = {
     return purchaseAmount;
   },
   readWinningNumbers: async () => {
-    const winningNumbers = await Console.readLineAsync(MESSAGE.read.winningNumbers);
-
+    const input = await Console.readLineAsync(MESSAGE.read.winningNumbers);
+    const winningNumbers = input.split(',').map(item => item.trim());
+    
     return winningNumbers;
   },
 };

@@ -15,9 +15,12 @@ const Validator = {
   negativeNumber: purchaseAmount => {
     if (purchaseAmount < 0) throw new Error(ERROR.message.negativeNumber);
   },
-  invalidSeparator: winningsNumbers => {
-    const res = winningsNumbers.split(',').map(item => item.trim());
-    if (res.includes('')) throw new Error(ERROR.message.invalidSeparator);
+  invalidSeparator: winningNumbers => {
+    if (winningNumbers.includes('')) throw new Error(ERROR.message.invalidSeparator);
+  },
+  invalidNumbersCount: winningNumbers => {
+    if (winningNumbers.length !== CONSTANTS.winningNumbers.count)
+      throw new Error(ERROR.message.invalidNumbersCount);
   },
 };
 
