@@ -17,7 +17,7 @@ function consoleWinner() {
   return MissionUtils.Console.print(WINNER_MESSAGE.WINLOG);
 }
 function consoleError(error) {
-  return error;
+  MissionUtils.Console.print(`${error.message}`);
 }
 
 function winCount(count) {
