@@ -4,18 +4,27 @@ import {
   validateLength,
   validateUnique,
   validateFindEqual,
+  validateEmpty,
 } from '../utils/validateFn.js';
 import { inputBonusNumber, inputWinningNumber } from '../view/inputPrompt.js';
+import { printErrorMessage } from '../view/outputPompt.js';
 
 class WinningLotto {
   #winningNumber;
   #bonusNumber;
 
   async setWinningNumber() {
-    const input = await inputWinningNumber();
-    const winningNumberArr = input.split(',').map((number) => parseInt(number));
-    this.#winningNumberValidate(winningNumberArr);
-    this.#winningNumber = winningNumberArr;
+    try {
+      const input = await inputWinningNumber();
+      const winningNumberArr = input
+        .split(',')
+        .map((number) => parseInt(number));
+      this.#winningNumberValidate(winningNumberArr);
+      this.#winningNumber = winningNumberArr;
+    } catch (error) {
+      printErrorMessage(error);
+      await this.setWinningNumber();
+    }
   }
 
   getWinningNumber() {
@@ -32,9 +41,14 @@ class WinningLotto {
   }
 
   async setBonusNumber() {
-    const input = await inputBonusNumber();
-    this.#bonusNumberValidate(input);
-    this.#bonusNumber = parseInt(input);
+    try {
+      const input = await inputBonusNumber();
+      this.#bonusNumberValidate(input);
+      this.#bonusNumber = parseInt(input);
+    } catch (error) {
+      printErrorMessage(error);
+      await this.setBonusNumber();
+    }
   }
 
   getBonusNumber() {
@@ -42,6 +56,7 @@ class WinningLotto {
   }
 
   #bonusNumberValidate(number) {
+    validateEmpty(number);
     validateNumber(number);
     validateRange(number);
     validateFindEqual(this.#winningNumber, parseInt(number));
