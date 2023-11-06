@@ -6,12 +6,14 @@ class App {
   lottos = [];
   lottosCount;
   winningNumbers;
+  bonusNumber;
 
   async play() {
     await this.start();
     this.getLottos();
     this.printLottos();
     await this.getWinningNumbers();
+    await this.getBonusNumber();
   }
 
   async start() {
@@ -23,6 +25,13 @@ class App {
   async getWinningNumbers() {
     await this.enterWinningNumbers();
     this.validateWinningNumbers();
+    MissionUtils.Console.print('');
+  }
+
+  async getBonusNumber() {
+    await this.enterBonusNumber();
+    this.validateBonusNumber();
+    MissionUtils.Console.print('');
   }
 
   async enterAmount() {
@@ -98,6 +107,24 @@ class App {
     return numbers.some((number) => {
       return numbers.indexOf(number) !== numbers.lastIndexOf(number);
     });
+  }
+
+  async enterBonusNumber() {
+    this.bonusNumber = +(await MissionUtils.Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.\n'
+    ));
+  }
+
+  validateBonusNumber() {
+    if (!/^([1-9]|[1-3][0-9]|4[0-5])$/.test(this.bonusNumber)) {
+      throw new Error(
+        '[ERROR] 보너스 번호는 1부터 45까지의 숫자 형식으로 입력해야 합니다.'
+      );
+    } else if (this.winningNumbers.includes(this.bonusNumber)) {
+      throw new Error(
+        '[ERROR] 보너스 번호는 입력한 당첨 번호와 중복되지 않아야 합니다.'
+      );
+    }
   }
 }
 
