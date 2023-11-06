@@ -33,15 +33,15 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
   purchased: (lotteriesCounts) => `${lotteriesCounts}${count}를 구매했습니다.`,
-  winningResult: '당첨 통계\n---',
-  threeNumbersCorrect: (ballCount) => `3${count} 일치 (5,000원) - ${ballCount}${count}`,
-  fourNumbersCorrect: (ballCount) => `4${count} 일치 (50,000원) - ${ballCount}${count}`,
-  fiveNumbersCorrect: (ballCount) => `5${count} 일치 (1,500,000원) - ${ballCount}${count}`,
-  fiveNumbersAndBonusBallCorrect: (ballCount) => `5${count} 일치, 보너스 볼 일치 (30,000,000원) - ${ballCount}${count}`,
-  sixNumbersCorrect: (ballCount) => `6${count} 일치 (2,000,000,000원) - ${ballCount}${count}`,
-  incomeResult: (purchaseAmount, income) => {
-    const incomePercentage = Number(income / purchaseAmount * 100).toFixed(1);
-
-    return `총 수익률은 ${incomePercentage}%입니다.`;
-  }
+  winningResult: '당첨 통계\n---\n',
+  threeNumbersCorrect: (ballCount) => `3${count} 일치 (5,000원) - ${ballCount}${count}\n`,
+  fourNumbersCorrect: (ballCount) => `4${count} 일치 (50,000원) - ${ballCount}${count}\n`,
+  fiveNumbersCorrect: (ballCount) => `5${count} 일치 (1,500,000원) - ${ballCount}${count}\n`,
+  fiveNumbersAndBonusBallCorrect: (ballCount) => `5${count} 일치, 보너스 볼 일치 (30,000,000원) - ${ballCount}${count}\n`,
+  sixNumbersCorrect: (ballCount) => `6${count} 일치 (2,000,000,000원) - ${ballCount}${count}\n`,
+  incomeResult: (incomePercentage) => `총 수익률은 ${
+    !Number.isInteger(incomePercentage) ?
+      incomePercentage.toFixed(1) :
+      incomePercentage
+    }%입니다.`,
 });

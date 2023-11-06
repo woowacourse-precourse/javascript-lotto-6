@@ -1,6 +1,5 @@
 import { generateLotteries } from "./LottoGenerator.js";
-
-const CURRENY_NUMBER_TO_DIVIDE = 1000;
+import { CURRENCY_NUMBER_TO_DIVIDE } from "../constants/constants.js";
 
 class Lotto {
   #purchaseAmount;
@@ -14,11 +13,15 @@ class Lotto {
   }
 
   calculateNumberOfLotteries() {
-    return this.#purchaseAmount / CURRENY_NUMBER_TO_DIVIDE;
+    return this.#purchaseAmount / CURRENCY_NUMBER_TO_DIVIDE;
   }
 
   getLotteries() {
     return this.#lotteries;
+  }
+
+  getPurchaseAmount() {
+    return this.#purchaseAmount;
   }
 }
 

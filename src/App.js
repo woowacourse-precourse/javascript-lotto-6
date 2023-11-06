@@ -9,7 +9,9 @@ class App {
   #lotto;
   #winningNumbers;
   #bonusNumber;
-  #result;
+  #resultClass;
+  #matchResult;
+  #incomePercentage;
 
   async play() {
     await this.initializePurchaseAmount();
@@ -18,7 +20,8 @@ class App {
     await this.initializeWinningNumbers();
     await this.initializeBonusNumber();
     this.initializeResult();
-    result.checkLotto();
+    OutputView.printResult(this.#matchResult);
+    OutputView.printIncomePercentage(this.#incomePercentage);
   }
 
   async initializePurchaseAmount() {
@@ -44,11 +47,14 @@ class App {
   }
 
   initializeResult() {
-    this.#result = new Result(
+    this.#resultClass = new Result(
       this.#lotto.getLotteries(),
       this.#winningNumbers,
       this.#bonusNumber,
     );
+
+    this.#matchResult = this.#resultClass.checkLotto();
+    this.#incomePercentage = this.#resultClass.calculateIncome() / Number(this.#lotto.getPurchaseAmount()) * 100;
   }
 }
 

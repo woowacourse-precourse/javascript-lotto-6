@@ -14,6 +14,21 @@ const OutputView = {
       this.print(lottery);
     });
   },
+
+  printResult(matchResult) {
+    this.print(
+      OUTPUT_MESSAGE.winningResult +
+      OUTPUT_MESSAGE.threeNumbersCorrect(matchResult.threeNumbersCorrect) +
+      OUTPUT_MESSAGE.fourNumbersCorrect(matchResult.fourNumbersCorrect) +
+      OUTPUT_MESSAGE.fiveNumbersCorrect(matchResult.fiveNumbersCorrect) +
+      OUTPUT_MESSAGE.fiveNumbersAndBonusBallCorrect(matchResult.fiveNumbersAndBonusBallCorrect) +
+      OUTPUT_MESSAGE.sixNumbersCorrect(matchResult.sixNumbersCorrect)
+    );
+  },
+
+  printIncomePercentage(incomePercentage) {
+    this.print(OUTPUT_MESSAGE.incomeResult(incomePercentage));
+  }
 }
 
 export default OutputView;
