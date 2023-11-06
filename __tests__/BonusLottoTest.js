@@ -20,4 +20,9 @@ describe('보너스 번호 테스트', () => {
     const winningNumber = [1, 2, 3, 4, 5, 6];
     expect(() => new BonusLotto('5', winningNumber)).toThrow('[ERROR]');
   });
+
+  test('보너스 번호 공백이면 예외 발생', () => {
+    const fn = jest.fn(() => [1, 2, 3, 4, 5, 6]);
+    expect(() => new BonusLotto('', fn())).toThrow('[ERROR]');
+  });
 });

@@ -13,6 +13,9 @@ class BonusLotto {
     if (isNaN(input)) {
       throw new Error(ERROR.invalidNumber);
     }
+    if (input === '') {
+      throw new Error(ERROR.invalidNumber);
+    }
     if (bonusNum < 0 || bonusNum > 45) {
       throw new Error(ERROR.invalidRange);
     }

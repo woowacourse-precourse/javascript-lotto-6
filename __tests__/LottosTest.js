@@ -28,4 +28,8 @@ describe("로또 클래스 테스트", () => {
       expect(() => new Lottos(amount)).toThrow("[ERROR]");
     })
   });
+
+  test("공백 입력시 에러가 발생한다。", () => {
+    expect(() => new Lottos('')).toThrow("[ERROR]");
+  });
 });
