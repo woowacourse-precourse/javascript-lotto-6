@@ -43,6 +43,10 @@ export function checkBonusDuplicate(numbers, bonus) {
   }
 }
 
+/**
+ * 구입금액 유효성 검사 함수
+ * @param {string} money
+ */
 export function checkMoneyValidate(money) {
   if (Number(money) % LOTTO.PRICE !== 0) {
     throw new Error(EXCEPTION.MONEY_DIVIDE_ERROR);
