@@ -10,8 +10,6 @@ class BuyPrice {
   }
 
   #validate(price) {
-    price = Number(price);
-
     if (validateBuyPrice.isNumber(price)) {
       throw new Error(BUY_PRICE_ERROR.isNumber);
     }
