@@ -14,3 +14,5 @@ class InputView {
     return inputNumber.split(',').map(Number);
   }
 }
+
+export default InputView;
