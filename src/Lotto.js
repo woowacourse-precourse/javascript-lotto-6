@@ -52,13 +52,11 @@ class Lotto {
           '[ERROR] 로또 번호 입력이 잘못되었습니다. 숫자를 정확히 입력해주세요.\n',
         );
       }
-
       if (+num < 1 || +num > 45) {
         throw new Error(
           '[ERROR] 로또 번호 입력이 잘못되었습니다. 1과 45 사이의 숫자를 입력해주세요.\n',
         );
       }
-
       return +num;
     });
   }
@@ -69,43 +67,42 @@ class Lotto {
 
       this.checkMatch(matchNumber, bonusNumber);
     });
-    this.printResult(guessNumber);
+    this.#printResult(guessNumber);
   }
 
   checkMatch(matchNumber, bonusNumber) {
     switch (matchNumber.length) {
       case 3:
-        this.winCheck[3] += 1;
-        this.winCheck.total += this.prize.FIFTH_PRIZE;
+        this.#increaseWinCount(3, this.prize.FIFTH_PRIZE);
         break;
       case 4:
-        this.winCheck[4] += 1;
-        this.winCheck.total += this.prize.FOURTH_PRIZE;
+        this.#increaseWinCount(4, this.prize.FOURTH_PRIZE);
         break;
       case 5:
-        this.checkBonusMatch(+bonusNumber);
+        this.#checkBonusMatch(bonusNumber);
         break;
       case 6:
-        this.winCheck[6] += 1;
-        this.winCheck.total += this.prize.FIRST_PRIZE;
+        this.#increaseWinCount(6, this.prize.FIRST_PRIZE);
         break;
-
       default:
         break;
     }
   }
 
-  checkBonusMatch(bonusNumber) {
-    if (this.#numbers.includes(+bonusNumber)) {
-      this.winCheck['5+'] += 1;
-      this.winCheck.total += this.prize.SECOND_PRIZE;
-      return;
-    }
-    this.winCheck[5] += 1;
-    this.winCheck.total += this.prize.THIRD_PRIZE;
+  #increaseWinCount(count, prize) {
+    this.winCheck[count] += 1;
+    this.winCheck.total += prize;
   }
 
-  printResult(guessNumber) {
+  #checkBonusMatch(bonusNumber) {
+    if (this.#numbers.includes(+bonusNumber)) {
+      this.#increaseWinCount('5+', this.prize.SECOND_PRIZE);
+      return;
+    }
+    this.#increaseWinCount(5, this.prize.THIRD_PRIZE);
+  }
+
+  #printResult(guessNumber) {
     Console.print(`\n당첨 통계\n---\n3개 일치 (5,000원) - ${
       this.winCheck[3]
     }개\n4개 일치 (50,000원) - ${

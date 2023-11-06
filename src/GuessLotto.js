@@ -82,32 +82,31 @@ class GuessLotto {
 
   async buyLotto() {
     try {
-      const lottoPurchaseMoney =
+      const inputMoney =
         await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
-      if (
-        Number.isNaN(+lottoPurchaseMoney) ||
-        lottoPurchaseMoney.trim() === ''
-      ) {
+      if (Number.isNaN(+inputMoney) || inputMoney.trim() === '') {
         throw new Error('[ERROR] 구입 금액이 잘못되었습니다.\n');
       }
-
-      if (+lottoPurchaseMoney > 100000) {
-        throw new Error(
-          '[ERROR] 구입 금액이 잘못되었습니다. 구매 최대 금액은 100,000원입니다.\n',
-        );
-      }
-
-      if (+lottoPurchaseMoney < 1000 || lottoPurchaseMoney % 1000 !== 0) {
-        throw new Error(
-          '[ERROR] 구입 금액이 잘못되었습니다. 1,000원 단위로 입력해주세요.\n',
-        );
-      }
-
-      this.#lottoPieces = lottoPurchaseMoney / 1000;
+      this.#validatePurchaseAmount(+inputMoney);
+      this.#lottoPieces = inputMoney / 1000;
       return this.#lottoPieces;
     } catch (error) {
       Console.print(error.message);
       return this.buyLotto();
+    }
+  }
+
+  #validatePurchaseAmount(amount) {
+    if (amount > 100000) {
+      throw new Error(
+        '[ERROR] 구입 금액이 잘못되었습니다. 구매 최대 금액은 100,000원입니다.\n',
+      );
+    }
+
+    if (amount < 1000 || amount % 1000 !== 0) {
+      throw new Error(
+        '[ERROR] 구입 금액이 잘못되었습니다. 1,000원 단위로 입력해주세요.\n',
+      );
     }
   }
 
