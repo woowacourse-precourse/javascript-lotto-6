@@ -7,10 +7,12 @@ import Io from '../view/Io.js';
 
 class LottoGame {
   async process() {
-    const money = await this.#requestMoney();
+    const money = await this.#catchReturn(this.#requestMoney);
     const boughtLottos = this.#buyLottos(money);
-    const winningLotto = await this.#requestWinningLotto();
-    const bonusNumber = await this.#requestBonusNumber(winningLotto);
+    const winningLotto = await this.#catchReturn(this.#requestWinningLotto);
+    const bonusNumber = await this.#catchReturn(() =>
+      this.#requestBonusNumber(winningLotto),
+    );
     const prizeCount = this.#calcPrizeCount(
       boughtLottos,
       winningLotto,
@@ -22,15 +24,8 @@ class LottoGame {
   }
 
   async #requestMoney() {
-    let money;
-
-    try {
-      const moneyRequest = await Io.requestMoney();
-      money = Money.create(moneyRequest);
-    } catch (e) {
-      Io.printError(e.message);
-      money = this.#requestMoney();
-    }
+    const moneyRequest = await Io.requestMoney();
+    const money = Money.create(moneyRequest);
 
     return money;
   }
@@ -79,6 +74,19 @@ class LottoGame {
     const yieldRate = LottoYieldCalculator.getYieldRate(money, prizeCount);
 
     Io.printYieldRate(yieldRate);
+  }
+
+  async #catchReturn(callback) {
+    let result;
+
+    try {
+      result = await callback();
+    } catch (e) {
+      Io.printError(e.message);
+      result = await this.#catchReturn(callback);
+    }
+
+    return result;
   }
 }
 
