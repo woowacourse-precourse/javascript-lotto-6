@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./const/message";
 import { ERROR } from "./const/error";
+import Lotto from "./Lotto";
 
 
 class App {
@@ -25,7 +26,6 @@ class App {
     await this.getMyLottos();
     this.printHowMany();
     await this.getNumbers();
-    await this.getBonusNumbers();
     this.getWinningLottos();
     this.printWinningStatics();
   }
@@ -40,19 +40,58 @@ class App {
     const remainder = checkPrice % 1000;
     const share = parseInt(checkPrice/1000)
 
-    if(isNaN(checkPrice)) {throw new Error(ERROR.NAN)};
-    if(remainder !== 0 ) {throw new Error(ERROR.THOUSAND)};
+    this.checkNaN(checkPrice);
+    this.checkThousand(remainder);
+    // try {
+    //   if(isNaN(checkPrice)) {
+    //      throw new Error;
+    //   }
+    // } catch (err){
+    //   MissionUtils.Console.print(ERROR.NAN);
+    // };
+    // try {
+    //   if(remainder !== 0 ) {
+    //     throw new Error;
+    //   }
+    // } catch (err){
+    //   MissionUtils.Console.print(ERROR.THOUSAND);
+    // }
+    // if(isNaN(checkPrice)) {throw new Error(ERROR.NAN)};
+    // if(remainder !== 0 ) {throw new Error(ERROR.THOUSAND)};
 
     this.price = checkPrice;
     return share;
   }
 
+  checkNaN(checkPrice){
+    try {
+      if(isNaN(checkPrice)) {
+         throw new Error;
+      }
+    } catch (err){
+      MissionUtils.Console.print(ERROR.NAN);
+
+      // 함수 재실행 안됨
+      this.getMyLottos();
+    };
+  }
+
+  checkThousand(){
+    try {
+      if(remainder !== 0 ) {
+        throw new Error;
+      }
+    } catch (err){
+      MissionUtils.Console.print(ERROR.THOUSAND);
+      // 함수 재실행 안됨
+      this.getMyLottos();
+    }
+  }
+
   async getMyLottos() {
     for(let i = 0; i < this.count; i++){
-      const lottoNumber = await MissionUtils.Random.pickUniqueNumbersInRange(1,45,6);
-      // 지금 lottoNumber가 콘솔로그로 보니 undefined뜸 여기서부터 체크해야 함
-      // console.log(lottoNumber);
-      // const sortNumbers = lottoNumber.sort((a,b) => a-b);
+      const takeNumber = await MissionUtils.Random.pickUniqueNumbersInRange(1,45,6);
+      const lottoNumber = takeNumber.sort((b,a)=>{return b-a})
       this.arrayNumbers.push(lottoNumber);
     }
   }
@@ -66,32 +105,25 @@ class App {
   
   async getNumbers(){
     const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
-    this.winning  = winningNumbers.split(",");
-
-    if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
-    if(this.winning.length !== 6) { throw new Error(ERROR.SIX)};
+    const bonusNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.BONUS_NUMBER);
     
+    this.bonus = Number(bonusNumbers);
+    this.winning = winningNumbers.split(",").map(Number);
+    const numbers = [...this.winning,this.bonus]
+
+    this.checkError(winningNumbers,bonusNumbers,numbers);
+    
+    const checkNumbers = new Lotto(this.winning);    
   } 
 
-  async getBonusNumbers(){
-    const bonusNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.BONUS_NUMBER);
-    this.bonus = this.checkBonusNumbers(bonusNumbers);
-  }
-  
-  checkBonusNumbers(bonusNumbers){
+  checkError(winningNumbers,bonusNumbers,numbers){
+    if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
+    if(this.winning.length !== 6) { throw new Error(ERROR.SIX)};
     if(bonusNumbers.includes(',')) {throw new Error(ERROR.INPUT_COMMA)};
     if(isNaN(bonusNumbers)) {throw new Error(ERROR.NAN)};
-
-    const checkBonusNumber = Number(bonusNumbers);
-    
-    this.checkNumberError(checkBonusNumber);
-    return checkBonusNumber;
-  }
-
-  checkNumberError(numbers){
-    if(!Number.isInteger(numbers)) {throw new Error(ERROR.INTEGER)};
-    if(numbers < 1) {throw new Error(ERROR.ONE)};
-    if(numbers > 45) {throw new Error(ERROR.FORTY_FIVE)};
+    if([...new Set(numbers)].length !== numbers.length){
+      throw new Error(ERROR.BONUS_DUPLICATION);
+    }
   }
 
   getWinningLottos() {
