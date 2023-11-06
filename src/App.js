@@ -7,7 +7,7 @@ class App {
     const inputView = InputView;
     const outputView = OutputView;
     const lottoController = new LottoController(inputView, outputView);
-    lottoController.start();
+    await lottoController.start();
   }
 }
 
