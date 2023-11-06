@@ -90,6 +90,30 @@ class System {
       throw new Error(ERROR_MESSAGE.duplicateLottoNumber);
     }
   }
+
+  calculateLottoStats(lottos, winningNumbers, bonusNumber) {
+    const winningCounts = {
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+    };
+
+    lottos.forEach((lotto) => {
+      const lottoNumbers = lotto.getNumbers();
+      const matchedCount = lotto.getMatchedCount(winningNumbers);
+      const lottoNumbersSet = new Set(lottoNumbers);
+      const hasBonusNumber = lottoNumbersSet.has(bonusNumber);
+
+      if (matchedCount === 6) winningCounts.first += 1;
+      else if (matchedCount === 5 && hasBonusNumber) winningCounts.second += 1;
+      else if (matchedCount === 5) winningCounts.third += 1;
+      else if (matchedCount === 4) winningCounts.fourth += 1;
+      else if (matchedCount === 3) winningCounts.fifth += 1;
+    });
+    return winningCounts;
+  }
 }
 
 export default System;
