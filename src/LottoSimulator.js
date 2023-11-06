@@ -3,11 +3,13 @@ import NumberGenerator from './util/NumberGenerator.js';
 
 class LottoSimulator {
   #lottos
-  #rankMap
+  #ranks
+  #prizeMoneys
 
   constructor() {
     this.#lottos = [];
-    this.#rankMap = Array(5).fill(0);
+    this.#ranks = [];
+    this.#prizeMoneys = [200000000, 30000000, 1500000, 50000, 5000];
   }
 
   issueLotto(quantity) {
@@ -40,26 +42,34 @@ class LottoSimulator {
   }
   
   rank(winningNumber, bonusNumber) {
-    if (winningNumber === 6) return 1;
-    if (winningNumber === 5 && bonusNumber) return 2;
-    if (winningNumber === 5) return 3;
-    if (winningNumber === 4) return 4;
-    if (winningNumber === 3) return 5;
+    if (winningNumber === 6) return 0;
+    if (winningNumber === 5 && bonusNumber) return 1;
+    if (winningNumber === 5) return 2;
+    if (winningNumber === 4) return 3;
+    if (winningNumber === 3) return 4;
 
     return false;
   }
 
   drawingLotto(winningNumber, bonusNumber) {
-    const result = [];
     const winnings = this.compareWinningNumber(winningNumber);
     const bonusNumbers = this.compareBonusNumber(bonusNumber);
 
     winnings.map((winning, ticket) => {
       const rank = this.rank(winning, bonusNumbers[ticket]);
-      if (rank) result.push(rank);
+      if (rank) this.#ranks.push(rank);
     })
+  }
 
-    return result;
+  totalPrizeMoney() {
+    let money = 0;
+    this.#ranks.map((rank) => money += this.#prizeMoneys[rank]);
+
+    return money;
+  }
+
+  calculateEarningsPercent(money, amount) {
+    return ((money / amount) * 100).toFixed(1);
   }
 
   getLottos() {
