@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import { RANGE_MIN, RANGE_MAX, LOTTO_LENGTH, errorMessages } from './constants.js';
 
 class App {
   async play() {
@@ -39,7 +40,7 @@ class App {
     const ticketsPurchased = [];
 
     for (let i = 0; i < ticketCount; i += 1) {
-      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(RANGE_MIN, RANGE_MAX, LOTTO_LENGTH);
       randomNumbers.sort((a, b) => a - b);
       ticketsPurchased.push(randomNumbers);
     }
@@ -60,7 +61,7 @@ class App {
 
   validateAmount(amount) {
     const remainder = amount % 1000;
-    if (remainder) throw new Error('[ERROR] 구매 금액은 1000의 배수여야 합니다.');
+    if (remainder) throw new Error(errorMessages.PURCHASE_AMOUNT);
   }
 }
 

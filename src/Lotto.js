@@ -1,3 +1,5 @@
+import { RANGE_MIN, RANGE_MAX, LOTTO_LENGTH, errorMessages } from './constants.js';
+
 class Lotto {
   #numbers;
 
@@ -7,16 +9,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6)
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== LOTTO_LENGTH)
+      throw new Error(errorMessages.LENGTH);
     if (numbers.includes(NaN))
-      throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.');
+      throw new Error(errorMessages.NAN);
     if (this.#containsDecimals(numbers))
-      throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
+      throw new Error(errorMessages.DECIMALS);
     if (this.#containsDuplicates(numbers))
-      throw new Error('[ERROR] 중복되는 숫자가 있습니다.');
+      throw new Error(errorMessages.DUPLICATES);
     if (this.#isOutOfRange(numbers))
-      throw new Error('[ERROR] 로또 번호는 1에서 45 사이여야 합니다.');
+      throw new Error(errorMessages.RANGE);
   }
 
   // TODO: 추가 기능 구현
@@ -32,8 +34,8 @@ class Lotto {
 
   #containsDecimals(numbers) {
     let containsDecimals = false;
-    numbers.forEach(x => {
-      const string = x.toString();
+    numbers.forEach((number) => {
+      const string = number.toString();
       if (string.includes('.')) containsDecimals = true;
     });
     return containsDecimals;
@@ -41,8 +43,8 @@ class Lotto {
 
   #isOutOfRange(numbers) {
     let isOutOfRange = false;
-    numbers.forEach(x => {
-      if (x < 1 || x > 45) isOutOfRange = true;
+    numbers.forEach((number) => {
+      if (number < RANGE_MIN || number > RANGE_MAX) isOutOfRange = true;
     });
     return isOutOfRange;
   }
