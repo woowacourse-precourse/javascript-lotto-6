@@ -36,7 +36,7 @@ class WinningNumber {
   }
 
   getWinningNumber() {
-    return this.#winningNumber;
+    return this.#winningNumber.map(Number);
   }
 }
 
