@@ -36,11 +36,11 @@ class App {
   }
 
   checkPrice(priceInput) {
-    const checkPrice = parseInt(priceInput);
+    const checkPrice = Number(priceInput);
     const remainder = checkPrice % 1000;
     const share = parseInt(checkPrice/1000)
 
-    if(checkPrice === NaN) {throw new Error(ERROR.NAN)};
+    if(isNaN(checkPrice)) {throw new Error(ERROR.NAN)};
     if(remainder !== 0 ) {throw new Error(ERROR.THOUSAND)};
 
     this.price = checkPrice;
