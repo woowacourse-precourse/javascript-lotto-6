@@ -1,5 +1,6 @@
 /**
- * '일관된 에러 메시지 제공'의 역할을 수행
+ * @module
+ * '일관된 에러 메시지 제공'의 역할을 수행하는 모듈
  */
 class AppError extends Error {
   /**

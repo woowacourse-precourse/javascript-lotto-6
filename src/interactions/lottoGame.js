@@ -12,6 +12,11 @@ import systemErrorHandler from '../error/handlers/systemErrorHandler.js';
 const { readWinningLottoNumber, readBonusNumber, readPurchasedLottoAmount } =
   lottoGameConsole.input;
 
+/**
+ * @param {object} param - 구매된 로또 정보와 당첨 로또 정보가 있는 매개 변수 객체
+ * @param {import('../utils/jsDoc.js').PurchasedLottoInfo} param.purchasedLottoInfo - 구매된 로또 정보(구매 로또 금액, 로또 번호들)
+ * @param {import('../utils/jsDoc.js').WinningLottoInfo} param.winningLottoInfo - 당첨 로또 정보(보너스 번호, 당첨 번호)
+ */
 const processWinningResult = ({
   purchasedLottoInfo: { purchasedLottoAmount, lottoNumbers },
   winningLottoInfo,
@@ -26,6 +31,9 @@ const processWinningResult = ({
   lottoGameConsole.output.printWinningResult({ rankDistributionTable, rateOfReturn });
 };
 
+/**
+ * @returns {Promise<import('../utils/jsDoc.js').WinningLottoInfo>} 당첨 로또 정보의 promise 객체
+ */
 const processInputWinningLottoInfo = async () => {
   const winningLottoNumber = await systemErrorHandler.retryOnErrors(
     readWinningLottoNumber.bind(lottoGameConsole.input),
@@ -38,6 +46,10 @@ const processInputWinningLottoInfo = async () => {
   return { winningLottoNumber, bonusNumber };
 };
 
+/**
+ * @param {number} purchasedLottoAmount - 구매 로또 금액
+ * @returns {number[][]} 구매 가격 만큼의 로또 번호들
+ */
 const processLottoPurchase = (purchasedLottoAmount) => {
   const params = { randomNumberGenerator: Random, purchasedLottoAmount };
   const lottoNumbers = lottoPurchase.buyLottoNumbers(params);
@@ -47,6 +59,9 @@ const processLottoPurchase = (purchasedLottoAmount) => {
   return lottoNumbers;
 };
 
+/**
+ * @returns {Promise<number>} 구매 가격 만큼의 로또 번호들
+ */
 const processInputPurchasedLottoAmount = async () => {
   const purchasedLottoAmount = await systemErrorHandler.retryOnErrors(
     readPurchasedLottoAmount.bind(lottoGameConsole.input),
@@ -55,7 +70,14 @@ const processInputPurchasedLottoAmount = async () => {
   return purchasedLottoAmount;
 };
 
+/**
+ * @module lottoGame
+ * 실제 로또 게임을 진행하기 위한 인터렉션 계층의 모듈 (controller와 비슷한 역할을 수행)
+ */
 const lottoGame = {
+  /**
+   * @returns {Promise<void>}
+   */
   async run() {
     const purchasedLottoAmount = await processInputPurchasedLottoAmount();
 

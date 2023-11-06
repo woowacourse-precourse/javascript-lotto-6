@@ -1,6 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateCommon } from '../validations/commonValidation.js';
 
+/**
+ * @module
+ * '공통 입/출력'의 책임을 가지고 있는 모듈
+ */
 const systemConsole = Object.freeze({
   /**
    * 주어진 query를 통해 유저로부터 입력값을 읽어오는 추상화 메서드

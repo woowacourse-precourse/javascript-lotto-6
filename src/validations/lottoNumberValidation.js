@@ -1,6 +1,9 @@
 import { LOTTO_RULES } from '../constants/lottoGame.js';
 import AppError from '../error/customErrors/AppError.js';
 
+/**
+ * @type {import('../utils/jsDoc.js').LottoNumberValidationTypes}
+ */
 export const LOTTO_NUMBER_VALIDATION_TYPES = {
   lottoNumberRange: {
     isValid(lottoNumbers) {
@@ -27,6 +30,11 @@ export const LOTTO_NUMBER_VALIDATION_TYPES = {
   },
 };
 
+/**
+ * @param {number[]} lottoNumbers - 로또 번호들이 있는 숫자 배열
+ * @throws {AppError} 유효성을 만족하지 않을 경우 에러 발생
+ * @returns {void}
+ */
 export const validateLottoNumber = (lottoNumbers) => {
   Object.values(LOTTO_NUMBER_VALIDATION_TYPES).forEach(({ isValid, errorMessage }) => {
     if (!isValid(lottoNumbers)) {
