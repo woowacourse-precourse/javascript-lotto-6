@@ -1,4 +1,4 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 import Input from './Input.js';
 import Print from './Print.js';
 import Lotto from './Lotto.js';
@@ -53,7 +53,7 @@ class App {
     for (let i = 0; i < this.#count; i++) {
       const lotto = this.createLotto();
       this.#lottos.push(lotto);
-      Console.print(`[${lotto.join(', ')}]`);
+      Print.printArray(lotto);
     }
     Print.printNewLine();
 
@@ -74,7 +74,7 @@ class App {
     Print.printResults(this.#results);
 
     const returnRate = this.calcReturn(price);
-    Console.print(`총 수익률은 ${returnRate}%입니다.`);
+    Print.printReturnRate(returnRate);
   }
 }
 

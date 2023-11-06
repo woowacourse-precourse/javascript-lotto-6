@@ -5,6 +5,9 @@ const Print = {
   printPurchase(count) {
     Console.print(`${count}개를 구매했습니다.`);
   },
+  printArray(array) {
+    Console.print(`[${array.join(', ')}]`);
+  },
   printResults(results) {
     Console.print('당첨 통계\n---');
     Console.print(
@@ -32,6 +35,9 @@ const Print = {
         results[PRIZE.six]
       }개`
     );
+  },
+  printReturnRate(rate) {
+    Console.print(`총 수익률은 ${rate}%입니다.`);
   },
   printNewLine() {
     Console.print('');
