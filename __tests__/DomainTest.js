@@ -36,7 +36,7 @@ const getLogSpy = () => {
 // calculateReturnRate
 // printReturnRate
 describe('핵심 로직 테스트', () => {
-  test('generateAndStoreLotto() - 생성된 로또가 배열에 순차적으로 저장되어야 한다.', () => {
+  test('generateAndStoreLotto() - 생성된 로또가 배열에 순차적으로 저장한다.', () => {
     // given
     const arr = [];
 
@@ -98,5 +98,18 @@ describe('핵심 로직 테스트', () => {
 
     // then
     expect(controller.sameNumCountArr).toEqual([1, 2, 3, 4, 5, 7, 6]);
+  });
+
+  test('getWinCountArr() - n개가 일치하는 로또가 몇 개 있는지 배열에 저장한다.(n = 3, 4, 5, 6, 7(5+보너스))', () => {
+    // given
+    const arr = [];
+
+    // when
+    const controller = new LottoController();
+    controller.sameNumCountArr = [1, 3, 2, 5, 7, 6, 5, 7];
+    controller.getWinCountArr(arr);
+
+    // then
+    expect(arr).toEqual([1, 0, 2, 2, 1]);
   });
 });
