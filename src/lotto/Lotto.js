@@ -18,9 +18,9 @@ class Lotto {
     }
 
     numbers.forEach((number) => {
-      InputError.checkNumberError(number);
-      InputError.checkNagativeNumberError(number);
-      InputError.checkOutOfRangeNumbers(number);
+      InputError.checkNonNumeric(number);
+      InputError.checkNagativeNumber(number);
+      InputError.checkOutOfRangeNumber(number);
     });
   }
 

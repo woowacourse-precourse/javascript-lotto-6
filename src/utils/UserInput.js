@@ -3,29 +3,29 @@ import InputError from "../errors/InputError.js";
 
 class UserInput {
   static validateAmount(input) {
-    InputError.checkEmptyInputError(input);
-    InputError.checkNumberError(input);
+    InputError.checkEmpty(input);
+    InputError.checkNonNumeric(input);
 
     const inputToNumber = parseInt(input, 10);
 
-    InputError.checkNagativeNumberError(inputToNumber);
-    InputError.checkAmountInputError(inputToNumber);
+    InputError.checkNagativeNumber(inputToNumber);
+    InputError.checkInvalidAmount(inputToNumber);
 
     return inputToNumber;
   }
 
   static validateEmptyLottoNumbers(input) {
-    InputError.checkEmptyInputError(input);
+    InputError.checkEmpty(input);
   }
 
   static validateBonusNumber(input) {
-    InputError.checkEmptyInputError(input);
-    InputError.checkNumberError(input);
+    InputError.checkEmpty(input);
+    InputError.checkNonNumeric(input);
 
     const inputToNumber = parseInt(input, 10);
 
-    InputError.checkNagativeNumberError(inputToNumber);
-    InputError.checkOutOfRangeNumbers(inputToNumber);
+    InputError.checkNagativeNumber(inputToNumber);
+    InputError.checkOutOfRangeNumber(inputToNumber);
 
     return inputToNumber;
   }
@@ -45,7 +45,7 @@ class UserInput {
       "당첨 번호를 입력해 주세요.\n"
     );
 
-    InputError.checkEmptyInputError(lottoNumbers);
+    InputError.checkEmpty(lottoNumbers);
 
     return lottoNumbers.split(",").map(Number);
   }
