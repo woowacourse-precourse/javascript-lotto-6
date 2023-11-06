@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 
 export const { Console, Random } = MissionUtils;
 
-export const PRICE_UNIT = 1000;
+export const PRICE_UNIT = 1_000;
 export const PLZ_PURCHASE_AMOUNT = '구매금액을 입력해 주세요.';
 export const PLZ_WINNING_NUMBERS = '당첨 번호를 입력해 주세요.';
 export const PLZ_BONUS_NUMBER = '보너스 번호를 입력해 주세요.';

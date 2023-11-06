@@ -23,7 +23,6 @@ class LottoGame {
     });
     this.#winningLotto = new Lotto(await InputView.readWinningNumbers());
     this.#bonusNumber = await InputView.readBonusNumbers();
-    console.log(this.#bonusNumber);
   }
 
   getRandomNumbers() {

@@ -9,10 +9,10 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
+    this.#typeValidate(numbers);
+    this.#rangeValidate(numbers);
     this.#lengthValidate(numbers);
     this.#repeatValidate(numbers);
-    this.#rangeValidate(numbers);
-    this.#typeValidate(numbers);
     this.#numbers = numbers;
   }
 
@@ -45,8 +45,6 @@ class Lotto {
       }
     });
   }
-
-  // TODO: 추가 기능 구현
 
   get numbers() {
     return this.#numbers;

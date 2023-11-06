@@ -1,5 +1,6 @@
 import {
   Console,
+  ERROR_LOTTO_RANGE,
   ERROR_PURCHASE_AMOUNT_PRICE,
   ERROR_PURCHASE_AMOUNT_STRING,
   ERROR_PURCHASE_AMOUNT_UNIT,
@@ -60,10 +61,18 @@ const InputView = {
     while (true) {
       try {
         const answer = await Console.readLineAsync(PLZ_BONUS_NUMBER);
+        this.rangeCheckValidator(answer);
         return answer;
       } catch (error) {
         Console.print(error.message);
       }
+    }
+  },
+
+  rangeCheckValidator(answer) {
+    const answerNumber = Number(answer);
+    if (answerNumber < 1 || answerNumber > 45) {
+      throw new Error(ERROR_LOTTO_RANGE);
     }
   },
 };
