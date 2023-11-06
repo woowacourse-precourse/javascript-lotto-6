@@ -1,3 +1,4 @@
+import { Console, Random } from "@woowacourse/mission-utils";
 class Lotto {
   #numbers;
 
@@ -6,9 +7,15 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  getValidate() {
+    return this.#validate;
+  }
+
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    } else if (numbers.length !== new Set(numbers).size) {
+      throw new Error("[ERROR] 로또 번호는 중복이 없어야 합니다.");
     }
   }
 
