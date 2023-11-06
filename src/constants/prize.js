@@ -6,4 +6,5 @@ const PRIZE_MONEY = Object.freeze({
   5: 5000,
 });
 
+
 export default PRIZE_MONEY;

@@ -27,18 +27,15 @@ class LottoGame {
     return numbers.filter((number) => this.#numbers.includes(number)).length;
   }
   checkRank(match, rank, bonus) {
-    const {
-      three_match, four_match, five_match, six_match,
-      five_place, four_place, third_place, second_place, first_place,
-    } = NUMBERS;
     const rankObj = {
-      [three_match]: [five_place],
-      [four_match]: [four_place],
-      [five_match]: bonus ? [second_place] : [third_place],
-      [six_match]: [first_place],
+      [NUMBERS.three_match]: [NUMBERS.five_place],
+      [NUMBERS.four_match]: [NUMBERS.four_place],
+      [NUMBERS.five_match]: bonus ? [NUMBERS.second_place] : [NUMBERS.third_place],
+      [NUMBERS.six_match]: [NUMBERS.first_place],
     };
-    if (match in rankObj) {
-      rank[rankObj[match]] += NUMBERS.stack;
+    const matchingRank = rankObj[match];
+    if (matchingRank) {
+      rank[matchingRank] += NUMBERS.stack;
     }
   }
 
@@ -46,7 +43,9 @@ class LottoGame {
     const totalPrize = rank
       .map((count, index) => count * PRIZE_MONEY[index + 1])
       .reduce((a, b) => a + b, NUMBERS.zero);
-    return !totalPrize ? NUMBERS.zero : (
+    return !totalPrize
+      ? NUMBERS.zero
+      : (
           (totalPrize / (this.#userNumbers.length * NUMBERS.purchase_money)) * NUMBERS.percent
         ).toFixed(1);
   }
