@@ -15,17 +15,23 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
-  test("generateNumbers(): 로또 번호 배열이 6개의 숫자로 이루어져 있어야 한다.", () => {
+  test("generateNumbers(): 6개의 숫자로 이루어져 있어야 한다.", () => {
     const lottoNumbers = Lotto.generateNumbers(1);
     expect(lottoNumbers.length).toBe(1);
     expect(lottoNumbers[0].length).toBe(6);
   });
 
-  test("generateNumbers(): 로또 번호 배열의 숫자는 1부터 45 사이의 숫자여야 한다.", () => {
+  test("generateNumbers(): 1부터 45 사이의 숫자여야 한다.", () => {
     const lottoNumbers = Lotto.generateNumbers(1)[0];
     const isAllNumbersInRange = lottoNumbers.every(
       (number) => number >= 1 && number <= 45
     );
     expect(isAllNumbersInRange).toBe(true);
+  });
+
+  test("generateNumbers(): 숫자가 없어야 한다.", () => {
+    const lottoNumbers = Lotto.generateNumbers(1)[0];
+    const uniqueNumbers = new Set(lottoNumbers);
+    expect(uniqueNumbers.size).toBe(6);
   });
 });
