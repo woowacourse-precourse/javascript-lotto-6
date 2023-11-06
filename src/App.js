@@ -30,9 +30,8 @@ class App {
       VERIFIED_WINNING_NUMBER,
       VERIFIED_BOUNUS_NUMBER
     );
-    this.showLottoResult();
-
-    console.log(NUMBER_OF_WINS);
+    const array = this.calculatePrize(NUMBER_OF_WINS);
+    this.showLottoResult(array, INPUT_CASH);
   }
 
   inputCash() {
@@ -52,7 +51,7 @@ class App {
   }
 
   getLottoNumbers(cash) {
-    MissionUtils.Console.print(cash + OUTPUT_MESSAGES.OUTPUT_PURCHASE_QUANTITY);
+    MissionUtils.Console.print(cash + OUTPUT_MESSAGES.PURCHASE_QUANTITY);
     const ARRAY_OF_GAMES = [];
     for (let i = 0; i < cash; i++) {
       const LOTTO_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(
@@ -119,17 +118,61 @@ class App {
       const MATCHING_NUMBER = EACH_LOTTO_GAME.filter((element) =>
         winningNumber.includes(element)
       );
-      NUMBER_OF_WINS.push(MATCHING_NUMBER.length);
       if (
         MATCHING_NUMBER.length === 5 &&
         EACH_LOTTO_GAME.includes(bonusNumber)
       ) {
         bonus++;
+        continue;
+      }
+      if (MATCHING_NUMBER.length >= 3) {
+        NUMBER_OF_WINS.push(MATCHING_NUMBER.length);
       }
     }
     return [NUMBER_OF_WINS, bonus];
   }
 
-  showLottoResult() {}
+  calculatePrize(NUMBER_OF_WINS) {
+    const arr = NUMBER_OF_WINS[0];
+    const bonus = NUMBER_OF_WINS[1];
+    const counts = Array.from({ length: 4 }, () => 0);
+    arr.forEach((num) => {
+      if (num >= 3 && num <= 6) {
+        counts[num - 3]++;
+      }
+    });
+    return [counts, bonus];
+  }
+
+  showLottoResult(array, cash) {
+    const prize =
+      array[0][0] * 5000 +
+      array[0][1] * 50000 +
+      array[0][2] * 1500000 +
+      array[0][3] * 2000000000 +
+      array[1] * 30000000;
+    MissionUtils.Console.print(OUTPUT_MESSAGES.WINNING_STATISTICS);
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_3 + array[0][0] + "개"
+    );
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_4 + array[0][1] + "개"
+    );
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_5 + array[0][2] + "개"
+    );
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_BONUS + array[1] + "개"
+    );
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_6 + array[0][3] + "개"
+    );
+    const RATE_OF_RETURN = ((prize / cash) * 100).toFixed(1);
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.RATE_OF_RETURN + RATE_OF_RETURN + "%입니다."
+    );
+  }
 }
 export default App;
+
+//입력받은 값을 검증하고, 해당 값을 가지고 연산을 수행해서 결과값을 도출하는 것
