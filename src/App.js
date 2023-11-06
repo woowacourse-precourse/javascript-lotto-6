@@ -5,6 +5,7 @@ class App {
   purchaseAmount = 0;
   lottos = [];
   winningNumbers = [];
+  bonusNumber = 0;
 
   async inputPurchaseAmount() {
     const inputPurchaseAmount = await MissionUtils.Console.readLineAsync(
@@ -52,6 +53,19 @@ class App {
       throw new Error("[ERROR] 입력된 당첨 번호는 중복되지 않아야 합니다.");
   }
 
+  validateBonusNumber(bonusNumber) {
+    if (Number.isNaN(bonusNumber))
+      throw new Error("[ERROR] 입력된 보너스 번호는 숫자여야 합니다.");
+    if (bonusNumber > 45 || bonusNumber < 1)
+      throw new Error(
+        "[ERROR] 입력된 보너스 번호는 1부터 45 사이의 숫자여야 합니다."
+      );
+    if (this.winningNumbers.includes(bonusNumber))
+      throw new Error(
+        "[ERROR] 입력된 보너스 번호는 당첨 번호와 중복되지 않아야 합니다."
+      );
+  }
+
   async inputWinningNumbers() {
     const inputWinningNumbers = await MissionUtils.Console.readLineAsync(
       "당첨 번호를 입력해 주세요."
@@ -61,9 +75,19 @@ class App {
     this.winningNumbers = winningNumbers.sort((a, b) => a - b);
   }
 
+  async inputBonusNumber() {
+    const inputBonusNumber = await MissionUtils.Console.readLineAsync(
+      "보너스 번호를 입력해 주세요."
+    );
+    const bonusNumber = Number(inputBonusNumber);
+    this.validateBonusNumber(bonusNumber);
+    this.bonusNumber = bonusNumber;
+  }
+
   async play() {
     await this.inputPurchaseAmount();
     this.purchaseLotto();
+    await this.inputWinningNumbers();
   }
 }
 
