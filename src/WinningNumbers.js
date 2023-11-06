@@ -22,7 +22,7 @@ class WinningNumbers {
    */
   #parse(numbersInput) {
     if (numbersInput.includes(' ')) {
-      throw new Error(CONSTANTS.ERRORS.WINNING_NUMBERS_INCLUDE_BLANK);
+      throw new Error(CONSTANTS.ERRORS.INCLUDE_BLANK);
     }
 
     const parsed = numbersInput.split(',').map(x => Number.parseInt(x, 10));

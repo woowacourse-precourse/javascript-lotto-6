@@ -7,29 +7,52 @@ class PurchaseAmount {
    * @param {string} amountInput
    */
   constructor(amountInput) {
-    const parsed = parseInt(amountInput);
-
-    this.#validateAtImplmentLevel(parsed);
-    this.#validateAtDomainLevel(parsed);
+    const parsed = this.#parse(amountInput);
+    this.#validate(parsed);
 
     this.#amount = parsed;
   }
 
-  /**
-   * @returns {number}
-   */
   getAmount() {
     return this.#amount;
   }
 
   /**
+   * @param {string} amountInput
+   */
+  #parse(amountInput) {
+    if (amountInput.includes(' ')) {
+      throw new Error(CONSTANTS.ERRORS.INCLUDE_BLANK);
+    }
+
+    const parsed = Number.parseInt(amountInput, 10);
+
+    return parsed;
+  }
+
+  /**
    * @param {number} amount
    */
-  #validateAtImplmentLevel(amount) {
+  #validate(amount) {
+    this.#validateNaN(amount);
+    this.#validateSafeInteger(amount);
+    this.#validateNotBelowPrice(amount);
+    this.#validateDivisible(amount);
+  }
+
+  /**
+   * @param {*} amount
+   */
+  #validateNaN(amount) {
     if (amount === NaN) {
       throw new Error(CONSTANTS.ERRORS.PURCHASE_AMOUNT_NOT_NUMBER);
     }
+  }
 
+  /**
+   * @param {number} amount
+   */
+  #validateSafeInteger(amount) {
     if (!Number.isSafeInteger(amount)) {
       throw new Error(CONSTANTS.ERRORS.PURCHASE_AMOUNT_TOO_LARGE);
     }
@@ -38,13 +61,18 @@ class PurchaseAmount {
   /**
    * @param {number} amount
    */
-  #validateAtDomainLevel(amount) {
+  #validateNotBelowPrice(amount) {
     if (amount < CONSTANTS.NUMBERS.LOTTO_PRICE) {
-      throw new Error(CONSTANTS.ERRORS.PURCHASE_AMOUT_BELOW_PRICE);
+      throw new Error(CONSTANTS.ERRORS.PURCHASE_AMOUNT_BELOW_PRICE);
     }
+  }
 
+  /**
+   * @param {number} amount
+   */
+  #validateDivisible(amount) {
     if (amount % CONSTANTS.NUMBERS.LOTTO_PRICE !== 0) {
-      throw new Error(CONSTANTS.ERRORS.PURCHASE_AMOUT_NOT_DIVISIBLE);
+      throw new Error(CONSTANTS.ERRORS.PURCHASE_AMOUNT_NOT_DIVISIBLE);
     }
   }
 }
