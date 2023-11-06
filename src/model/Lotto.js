@@ -31,6 +31,12 @@ class Lotto {
     this.#numberDuplicateCheck(numbers);
   }
 
+  #bonusValidate(bonusNumber) {
+    // this.#numberTypeCheck(bonusNumber);
+    // this.#numberRangeCheck(bonusNumber);
+    // this.#bonusNumberDuplicateCheck(bonusNumber);
+  }
+
   #numberTypeCheck(numbers) {
     numbers.forEach((number) => {
       if (Number.isNaN(number)) {
