@@ -1,27 +1,15 @@
 import { ERROR_MESSAGES } from '../constants/messages.js';
-import { Console } from '@woowacourse/mission-utils';
-
-const THOUSAND = 1000;
+import CONSTANT_VALIDATE_NUMBER from '../constants/validate.js';
+import CustomError from '../errors/CustomError.js';
 
 const validateInputAmount = (inputAmount) => {
-  if (!Number.isInteger(inputAmount)) {
-    Console.print(ERROR_MESSAGES.inputAmount.type);
-    return false;
-  }
+  if (!Number.isInteger(inputAmount)) throw new CustomError(ERROR_MESSAGES.inputAmount.type);
 
-  if (inputAmount < THOUSAND) {
-    Console.print(ERROR_MESSAGES.inputAmount.min);
-    return false;
-  }
-  if (inputAmount > THOUSAND * 100) {
-    Console.print(ERROR_MESSAGES.inputAmount.max);
-    return false;
-  }
+  if (inputAmount < CONSTANT_VALIDATE_NUMBER.thousand) throw new CustomError(ERROR_MESSAGES.inputAmount.min);
 
-  if (inputAmount % THOUSAND != 0) {
-    Console.print(ERROR_MESSAGES.inputAmount.unit);
-    return false;
-  }
+  if (inputAmount > CONSTANT_VALIDATE_NUMBER.hundredThousand) throw new CustomError(ERROR_MESSAGES.inputAmount.max);
+
+  if (inputAmount % CONSTANT_VALIDATE_NUMBER.zero) throw new CustomError(ERROR_MESSAGES.inputAmount.unit);
 
   return true;
 };

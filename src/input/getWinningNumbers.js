@@ -6,8 +6,12 @@ const getWinningNumbers = async () => {
   let flag = false;
   let winningNumbers;
   while (!flag) {
-    winningNumbers = (await Console.readLineAsync(INPUT_MESSAGES.winningNumbers)).split(',').map((number) => Number(number.trim()));
-    flag = validateWinningNumbers(winningNumbers);
+    try {
+      winningNumbers = (await Console.readLineAsync(INPUT_MESSAGES.winningNumbers)).split(',').map((number) => Number(number.trim()));
+      flag = validateWinningNumbers(winningNumbers);
+    } catch (e) {
+      Console.print(e.message);
+    }
   }
   winningNumbers.sort((a, b) => a - b);
 

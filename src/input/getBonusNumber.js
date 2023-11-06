@@ -6,8 +6,12 @@ const getBonusNumber = async (winningNumbers) => {
   let flag = false;
   let bonusNumber;
   while (!flag) {
-    bonusNumber = Number(await Console.readLineAsync(INPUT_MESSAGES.bonusNumber));
-    flag = validateBonusNumber(winningNumbers, bonusNumber);
+    try {
+      bonusNumber = Number(await Console.readLineAsync(INPUT_MESSAGES.bonusNumber));
+      flag = validateBonusNumber(winningNumbers, bonusNumber);
+    } catch (e) {
+      Console.print(e.message);
+    }
   }
 
   return bonusNumber;

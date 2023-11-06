@@ -6,9 +6,14 @@ const getInputAmount = async () => {
   let flag = false;
   let inputAmount;
   while (!flag) {
-    inputAmount = Number(await Console.readLineAsync(INPUT_MESSAGES.inputAmount));
-    flag = validateInputAmount(inputAmount);
+    try {
+      inputAmount = Number(await Console.readLineAsync(INPUT_MESSAGES.inputAmount));
+      flag = validateInputAmount(inputAmount);
+    } catch (e) {
+      Console.print(e.message);
+    }
   }
+
   return inputAmount;
 };
 
