@@ -6,11 +6,12 @@ class App {
     this.error = {
       INVALID_PRICE: "[ERROR] 금액은 1,000원 단위로 입력해주세요.",
       INCORRECT_TYPE: "[ERROR] 숫자만 입력해주세요.",
+      INVALID_STRING: "[ERROR] 당첨 번호는 쉼표(,)로 구분하여 입력해주세요.",
     };
   }
 
   displayErrorMessage(message) {
-    MissionUtils.Console.print(`\n${message}`);
+    throw new Error(message);
   }
 
   getMoney() {
@@ -50,12 +51,10 @@ class App {
   validatePrice(price) {
     if (price % 1000 !== 0) {
       this.displayErrorMessage(this.error.INVALID_PRICE);
-      return null;
     }
 
     if (isNaN(price)) {
       this.displayErrorMessage(this.error.INCORRECT_TYPE);
-      return null;
     }
 
     return +price;
@@ -77,9 +76,17 @@ class App {
     }
   }
 
+  isCommaSeparated(numbers) {
+    const parts = numbers.split(",");
+
+    if (parts.length < 2) throw new Error(this.error.INVALID_STRING);
+
+    return parts;
+  }
+
   async setWinnigAndBonusNumber() {
     const winningNumber = await this.getWinningNumber();
-    const winningNumberArray = await winningNumber.split(",");
+    const winningNumberArray = await this.isCommaSeparated(winningNumber);
     const bonusNumber = await this.getBonusNumber();
     const userLotto = new Lotto(winningNumberArray);
 
