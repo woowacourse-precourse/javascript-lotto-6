@@ -63,6 +63,19 @@ class controller {
 
   calculateStatistics() {
     this.#statistics.calculateStatistics(this.#userLotto, this.#winningLotto);
-    this.printStatistics(this.#statistics.getStatistics());
+    this.printStatistics();
+  }
+
+  printStatistics() {
+    this.#statistics.getStatistics().forEach((statistic) => {
+      this.#outputView.print(
+        `${MESSAGE[statistic.rank]}${statistic.count}${CHARACTER.countsuffix}`
+      );
+    });
+    this.#outputView.print(
+      `총 수익률은 ${this.#statistics.getRateOfReturns()}${
+        CHARACTER.percent
+      }입니다.`
+    );
   }
 }
