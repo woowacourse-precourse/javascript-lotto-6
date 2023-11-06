@@ -6,6 +6,7 @@ class LottoGame {
   #purchase_amount;
   #purchased_tickets;
   #winning_numbers;
+  #bonus_number;
 
   getPurchaseAmount = async () => {
     const input_amount = await MissionUtils.Console.readLineAsync(
@@ -50,12 +51,26 @@ class LottoGame {
     this.#winning_numbers = new Lotto(parsedNumbers);
   };
 
+  getBonusNumber = async () => {
+    const bonus = await MissionUtils.Console.readLineAsync(
+      Messages.BONUS_NUMBER_INPUT
+    );
+    if (isNaN(bonus)) {
+      throw new Error(Messages.ERROR_ISNAN);
+    }
+    if (bonus < 1 || bonus > 45) {
+      throw new Error(Messages.ERROR_NUMBER_OUT_OF_RANGE);
+    }
+    this.#bonus_number = bonus;
+  };
+
   playGame = async () => {
     try {
       await this.getPurchaseAmount();
       this.generateNumbers(this.#purchase_amount);
       this.printPurchasedTickets(this.#purchased_tickets);
       await this.getWinningNumbers();
+      await this.getBonusNumber();
     } catch (error) {
       throw new Error(error);
     }
