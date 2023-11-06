@@ -129,7 +129,7 @@ a. 예상 필요 메소드
 ApplicationTest.js
 LottoTest.js
 +) BounsTest.js (보너스 숫자 검증)
-+) setPrizeNumTest.js (당첨 번호 검증)
++) PrizeNumTest.js (당첨 번호 검증)
 +) functionTest.js (method 기능 테스트)
 
 npm test를 통한 확인 결과
