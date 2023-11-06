@@ -1,8 +1,10 @@
+import { Random } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    // this.#validate(numbers);
     this.#numbers = numbers;
   }
 
@@ -16,7 +18,19 @@ class Lotto {
     }
   }
 
+  async randomLottoGenerate() {
+    let result = [];
+    for (let i = 0; i < 3; i++) {
+      const arr = Random.pickUniqueNumbersInRange(1, 45, 6);
+      result.push(arr);
+    }
+    console.log(result[0]);
+  }
+
   // TODO: 추가 기능 구현
 }
+
+const lotto = new Lotto();
+lotto.randomLottoGenerate();
 
 export default Lotto;
