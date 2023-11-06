@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from "../constant/ERROR_MESSAGE";
+import { NUMBERS } from "../constant/NUMBERS";
 
 class Lotto {
   #numbers;
@@ -6,11 +7,12 @@ class Lotto {
   constructor(numbers) {
     this.#validateLength(numbers);
     this.#validateDuplicate(numbers);
+    this.#validateRange(numbers);
     this.#numbers = numbers;
   }
 
   #validateLength(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== NUMBERS.LOTTO_LENGTH) {
       throw new Error(ERROR_MESSAGE.LOTTO_LENGTH_ERROR);
     }
   }
@@ -19,6 +21,18 @@ class Lotto {
     const setNumbers = new Set(numbers);
     if (setNumbers.length !== numbers.length) {
       throw new Error(ERROR_MESSAGE.LOTTO_DUPLICATE_ERROR);
+    }
+  }
+
+  #validateRange(numbers) {
+    const isSatisfyRange = numbers.every( 
+      (number) =>  
+      NUMBERS.LOTTO_MIN_NUMBER <= number &&
+      number <= NUMBERS.LOTTO_MAX_NUMBER
+    );
+
+    if (!isSatisfyRange) {
+      throw new Error("[ERROR] 범위에러")
     }
   }
 
