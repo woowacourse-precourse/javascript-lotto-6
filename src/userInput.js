@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const input = {
-    async inputPurchaseAmount() {
+export default class input  {
+  static async inputPurchaseAmount() {
         let purchaseAmount;
         while (1) {
         try {
@@ -15,14 +15,14 @@ const input = {
       }
     }
     return purchaseAmount;
-  },
+  }
 
-  isInvalidPurchaseAmount(purchaseAmount) {
+  static isInvalidPurchaseAmount(purchaseAmount) {
     return purchaseAmount % 1000 !== 0 || isNaN(purchaseAmount);
-  },
+  }
 
 
-  async inputWinningNumbers() {
+  static async inputWinningNumbers() {
     let winningNumbers;
     while (true) {
       try {
@@ -34,14 +34,14 @@ const input = {
       }
     }
     return winningNumbers;
-  },
+  }
   
-  async readWinningNumbers() {
+  static async readWinningNumbers() {
     const winningNumbers = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     return winningNumbers.split(',').map(Number);
-  },
+  }
   
-  validateWinningNumbers(winningNumbersMap) {
+  static validateWinningNumbers(winningNumbersMap) {
     if (!this.validateNumbers(winningNumbersMap)) {
       throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
@@ -52,11 +52,11 @@ const input = {
     if (uniqueNumbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
     }
-  },
+  }
   
 
 
-  async inputBonusNumber() {
+  static async inputBonusNumber() {
     let bonusNumber;
     while (true) {
       try {
@@ -68,27 +68,25 @@ const input = {
       }
     }
     return bonusNumber;
-  },
+  }
   
-  async readBonusNumber() {
+  static async readBonusNumber() {
     return parseInt(await Console.readLineAsync("보너스 번호를 입력해 주세요.\n"));
-  },
+  }
   
-  validateBonusNumber(bonusNumber) {
+  static validateBonusNumber(bonusNumber) {
     if (!this.validateNumber(bonusNumber)) {
       throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
-  },
+  }
   
 
 
-  validateNumbers(numbers) {
+  static validateNumbers(numbers) {
     return numbers.every(this.validateNumber);
-  },
+  }
 
-  validateNumber(number) {
+  static validateNumber(number) {
     return number >= 1 && number <= 45;
   }
 }
-
-export default input;
