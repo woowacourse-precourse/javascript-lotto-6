@@ -1,9 +1,13 @@
 import { Random, Console } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
+import ERROR from './error.js';
 
 class App {
 
   constructor() {
-
+    this.winningLotto;
+    this.userMoneyInput;
+    this.userByLottoList = [];
   }
 
   async play() {
@@ -42,7 +46,31 @@ class App {
     }
   }
 
-  
+  userByLotto() {
+    const count = this.userMoneyInput / 1000;
+    return count;
+  }
+
+  totalLottoListUser() {
+    const num = this.userByLotto();
+    let lottoList = [];
+    for (let i = 0; i < num; i++) {
+      lottoList.push(this.generateRandomNumber());
+    }
+    this.userByLottoList = lottoList.filter(list => this.sortNumbers(list));
+  }
+
+  generateRandomNumber() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
+  sortNumbers(inputList) {
+    const sortedList = inputList.sort(function (a, b) {
+      return a - b;
+    });
+    return sortedList;
+  }
+
 }
 
 
