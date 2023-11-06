@@ -1,0 +1,4 @@
+ERROR = {
+}
+
+export default ERROR;
