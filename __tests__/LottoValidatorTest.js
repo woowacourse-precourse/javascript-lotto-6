@@ -45,4 +45,25 @@ describe('로또번호 각 유효성 검증 테스트', () => {
       ERROR_MESSAGE.invalidUniqueBonusNumber
     );
   });
+
+  test('숫자가 아닌 값이 주어지면 예외가 발생한다.', () => {
+    const invalidAmount = 'abc';
+    expect(() => LottoValidator.validPurchaseAmount(invalidAmount)).toThrow(
+      ERROR_MESSAGE.invalidNumberic
+    );
+  });
+
+  test('금액이 1000원 단위가 아니면 예외가 발생한다.', () => {
+    const invalidAmount = 2500;
+    expect(() => LottoValidator.validPurchaseAmount(invalidAmount)).toThrow(
+      ERROR_MESSAGE.invalidAmount
+    );
+  });
+
+  test('금액이 음수일 경우 예외가 발생한다.', () => {
+    const negativeAmount = -5000;
+    expect(() => LottoValidator.validPurchaseAmount(negativeAmount)).toThrow(
+      ERROR_MESSAGE.invalidNumberic
+    );
+  });
 });
