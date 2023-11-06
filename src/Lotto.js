@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
   #bonusNumber;
@@ -19,11 +21,11 @@ class Lotto {
   }
 
   checkResult(ticket){
-      let count = 0
-      for (let index=0; index<6; index++){
-        if(this.#numbers[index] == ticket[index]) count++;
-        else if(this.#numbers[index] == this.#bonusNumber) count+=0.5;
-      }
+    let count = 0
+    for (let index=0; index<6; index++){
+      if(this.#numbers[index] == ticket[index]) count++;
+      else if(ticket[index] == this.#bonusNumber) count+=0.5;
+    }
     return count;
   }
 }
