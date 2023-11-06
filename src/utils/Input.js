@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import CustomError from './CustomError.js';
-import Validatable from './Validatable.js';
+import CustomError from '../customs/CustomError.js';
+import ValidatableString from '../validators/ValidatableString.js';
 import PROMPT from '../constants/prompt.js';
 import ERROR_MESSAGE from '../constants/error.js';
 
@@ -11,7 +11,7 @@ class Input {
    */
   static async getCost() {
     const cost = await Input.readValidatableAsync(PROMPT.BUY_COST);
-
+    console.log(cost.isDivisibleBy(1000));
     if (!cost.isDivisibleBy(1000)) {
       throw new CustomError(ERROR_MESSAGE.NOT_DIVISIBLE_BY_1000);
     }
@@ -24,11 +24,11 @@ class Input {
    *
    * 비어있다면 에러를 던진다.
    * @param {string} message
-   * @returns {Promise<Validatable>}
+   * @returns {Promise<ValidatableString>}
    */
   static async readValidatableAsync(message) {
     const userInput = await Console.readLineAsync(message);
-    const validatable = new Validatable(userInput);
+    const validatable = new ValidatableString(userInput);
 
     if (validatable.isEmpty()) {
       throw new CustomError(ERROR_MESSAGE.EMPTY_STRING);
