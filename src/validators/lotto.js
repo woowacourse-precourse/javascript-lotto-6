@@ -8,7 +8,7 @@ import messageFormatter from "../utils/messageFormatter.js";
  */
 const validateNumbersLength = (numbers, length) => {
   if (numbers.length !== length) {
-    throw new Error(messageFormatter.error.lottoNumbersLength(length));
+    throw new Error(messageFormatter.error.lotto.numbersLength(length));
   }
 };
 
@@ -25,7 +25,7 @@ const validateNumbersRange = (numbers, startInclusive, endInclusive) => {
 
   if (isOverRange) {
     throw new Error(
-      messageFormatter.error.lottoNumbersIsOverRange(
+      messageFormatter.error.lotto.numbersIsOverRange(
         startInclusive,
         endInclusive,
       ),
@@ -42,7 +42,7 @@ const validateNumbersDuplicate = (numbers) => {
 
   if (isDuplicate) {
     throw new Error(
-      messageFormatter.error.default(ERROR.lottoNumbersDuplicate),
+      messageFormatter.error.default(ERROR.lotto.numberDuplicate),
     );
   }
 };

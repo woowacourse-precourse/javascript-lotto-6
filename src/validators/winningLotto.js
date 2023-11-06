@@ -12,7 +12,7 @@ const validateBonusNumberRange = (number, startInclusive, endInclusive) => {
 
   if (isOverRange) {
     throw new Error(
-      messageFormatter.error.lottoNumbersIsOverRange(
+      messageFormatter.error.lotto.numbersIsOverRange(
         startInclusive,
         endInclusive,
       ),
