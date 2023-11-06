@@ -9,7 +9,7 @@ const isInvalidMoneyPrice = (money) => {
 
 const validateMoney = (money) => {
   if (InputValidator.isNan(money)) throw new MoneyError(ERROR.isNan);
-  if (isInvalidMoneyPrice(money)) throw new MoneyError(ERROR.moneyPrice);
+  if (isInvalidMoneyPrice(money)) throw new MoneyError(ERROR.price);
 };
 
 export default validateMoney;
