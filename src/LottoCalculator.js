@@ -14,45 +14,55 @@ class LottoCalculator {
 
     userNumbers.forEach((numbers) => {
       const numberOfMatchingNumbers = this.#countMatchingNumbers(numbers);
-      if (numberOfMatchingNumbers === 6) {
-        statistics["6"]++;
-        statistics.totalPrize += 2_000_000_000;
-        return;
-      }
-
-      if (numberOfMatchingNumbers === 5) {
-        const isBonusNumberMatched = this.#winningNumbers.includes(
-          numbers.find((number) => !this.#winningNumbers.includes(number))
-        );
-        if (isBonusNumberMatched) {
-          statistics["5+bonus"]++;
-          statistics.totalPrize += 30_000_000;
-          return;
-        }
-        statistics["5"]++;
-        statistics.totalPrize += 1_500_000;
-        return;
-      }
-
-      if (numberOfMatchingNumbers === 4) {
-        statistics["4"]++;
-        statistics.totalPrize += 50_000;
-        return;
-      }
-
-      if (numberOfMatchingNumbers === 3) {
-        statistics["3"]++;
-        statistics.totalPrize += 5_000;
-      }
+      this.#updateStatistics(statistics, numberOfMatchingNumbers);
     });
 
+    this.#calculateProfitAndRate(statistics);
+
+    return statistics;
+  }
+
+  #updateStatistics(statistics, numberOfMatchingNumbers) {
+    if (numberOfMatchingNumbers === 6) {
+      return this.#updatePrizeAndCount(statistics, "6", 2_000_000_000);
+    }
+
+    if (numberOfMatchingNumbers === 5) {
+      const isBonusNumberMatched = this.#isBonusNumberMatched(numbers);
+      const prize = isBonusNumberMatched ? 30_000_000 : 1_500_000;
+      return this.#updatePrizeAndCount(
+        statistics,
+        "5" + (isBonusNumberMatched ? "+bonus" : ""),
+        prize
+      );
+    }
+
+    if (numberOfMatchingNumbers === 4) {
+      return this.#updatePrizeAndCount(statistics, "4", 50_000);
+    }
+
+    if (numberOfMatchingNumbers === 3) {
+      return this.#updatePrizeAndCount(statistics, "3", 5_000);
+    }
+  }
+
+  #updatePrizeAndCount(statistics, key, prize) {
+    statistics[key]++;
+    statistics.totalPrize += prize;
+  }
+
+  #isBonusNumberMatched(numbers) {
+    return numbers.includes(
+      this.#winningNumbers.find((number) => !numbers.includes(number))
+    );
+  }
+
+  #calculateProfitAndRate(statistics) {
     const totalSpent = this.#totalSets * 1000;
     const profit = statistics.totalPrize - totalSpent;
     const profitRate = ((profit / totalSpent) * 100 + 100).toFixed(2);
 
     statistics.profitRate = parseFloat(profitRate);
-
-    return statistics;
   }
 
   #countMatchingNumbers(userNumbers) {
