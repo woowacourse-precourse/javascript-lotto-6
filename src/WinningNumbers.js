@@ -1,4 +1,5 @@
 import { ERROR } from './Constant.js'
+import { Console } from "@woowacourse/mission-utils";
 
 class WinningNumbers{
   #numbers;
@@ -17,6 +18,7 @@ class WinningNumbers{
   #validateNumbers(numbers) {
     const numberArray = Object.values(numbers);
     if (numberArray.length !== 6) {
+      Console.print(numbers);
       throw new Error(ERROR.WINNING_NUMBER_NOT_SIX);
     }
 
@@ -30,3 +32,5 @@ class WinningNumbers{
 
   }
 }
+
+export default WinningNumbers;
