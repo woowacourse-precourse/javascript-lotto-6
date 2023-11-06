@@ -5,6 +5,7 @@ class Input {
     this.lottoNumbers = [];
   }
 
+
   async userPurchase() {
     try {
       Console.print('구입금액을 입력해 주세요');
@@ -27,7 +28,9 @@ class Input {
       if (this.lottoNumbers.length !== 6 || this.lottoNumbers.some(isNaN) || this.lottoNumbers.some(num => num < 1 || num > 45)) {
         throw new Error('올바른 로또 번호를 입력해 주세요 (1부터 45까지의 숫자, 쉼표로 구분된 6개 숫자).');
       }
-      return lottoNumbers;
+      this.checkForDuplicates(this.lottoNumbers);
+
+      return this.lottoNumbers;
     } catch (error) {
       throw error;
     }
@@ -41,12 +44,19 @@ class Input {
       if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
         throw new Error('올바른 보너스 번호를 입력해 주세요 (1부터 45까지의 숫자).');
       }
-      if (this.lottoNumbers.includes(bonusNumber)) {
-        throw new Error('로또 번호와 중복된 보너스 번호입니다.');
-      }
-      return input;
+      const allNumbers = [...this.lottoNumbers, bonusNumber];
+      this.checkForDuplicates(allNumbers);
+
+      return bonusNumber;
     } catch (error) {
       throw error;
+    }
+  }
+
+  checkForDuplicates(numbers) {
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== numbers.length) {
+      throw new Error('로또 번호에 중복된 숫자가 있습니다.');
     }
   }
 
