@@ -37,10 +37,15 @@ class Lotto {
     }
 
     const checkNumberSet = new Set(numbers);
-
     if (numbers.length !== checkNumberSet.size)
       throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
 
+    this.validateNumberCheck(numbers);
+
+    return this.#numbers;
+  }
+
+  validateNumberCheck(numbers) {
     this.#numbers = numbers.map(num => {
       if (Number.isNaN(+num) || +num < 1 || +num > 45) {
         throw new Error('[ERROR] 로또 번호 입력이 잘못되었습니다.\n');
@@ -52,8 +57,6 @@ class Lotto {
 
       return +num;
     });
-
-    return this.#numbers;
   }
 
   checkWin(bonusNumber, guessNumber) {
@@ -87,7 +90,10 @@ class Lotto {
           break;
       }
     });
+    this.resultPrint(guessNumber);
+  }
 
+  resultPrint(guessNumber) {
     Console.print(`\n당첨 통계\n---\n3개 일치 (5,000원) - ${
       this.winCheck[3]
     }개\n4개 일치 (50,000원) - ${
