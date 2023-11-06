@@ -25,6 +25,9 @@ class App {
     
     return this.randomNum;
   }
+  printLottoNum() {
+    Console.print(this.randomNum);
+  }
   async play() {
     
   }
