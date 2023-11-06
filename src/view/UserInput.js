@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 import Amount from '../controller/Amount.js';
-import Lotto from '../controller/Lotto.js';
+import Lotto from '../Lotto.js';
 import Bonus from '../controller/Bonus.js';
 
 import { INPUT_MESSAGE } from '../data/message.js';
@@ -21,7 +21,7 @@ class UserInput {
 
         const numbers = input.split(',');
         const lotto = new Lotto(numbers);
-
+        
         return lotto.lottoNumber;
     }
 
