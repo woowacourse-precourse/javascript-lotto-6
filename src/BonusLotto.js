@@ -1,4 +1,3 @@
-import Lotto from "./Lotto.js";
 class BonusLotto {
   #bonusNumbers;
 
