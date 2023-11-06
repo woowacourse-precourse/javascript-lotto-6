@@ -17,7 +17,6 @@ class OutputView {
     lottos.forEach((lotto) => {
       Console.print(lotto);
     });
-    OutputView.printBlank();
   }
 
   /**
@@ -36,7 +35,6 @@ class OutputView {
     keys.forEach((key) => {
       Console.print(MESSAGE_MATCHING[key](match[key]));
     });
-    OutputView.printBlank();
   }
 
   /**
@@ -47,8 +45,12 @@ class OutputView {
     Console.print(makeRateOfReturnMessageFn(rate));
   }
 
-  static printBlank() {
-    Console.print(MESSAGE.BLANK);
+  /**
+   * Error 발생시 Error 메시지 출력
+   * @param {string} error
+   */
+  static printError(error) {
+    Console.print(error);
   }
 }
 

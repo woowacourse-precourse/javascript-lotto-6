@@ -2,10 +2,9 @@ import { NUMERIC_COMMA_EXPRESSION } from './regexp.js';
 
 const MESSAGE = Object.freeze({
   PURCHASING_MESSAGE: '구입 금액을 입력해 주세요.\n',
-  WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-  BONUS_NUMBER: '보너스 번호를 입력해 주세요\n',
-  WINNING_STATISICS: '당첨 통계\n---',
-  BLANK: '',
+  WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER: '\n보너스 번호를 입력해 주세요\n',
+  WINNING_STATISICS: '\n당첨 통계\n---',
   COMMA: ',',
 });
 
@@ -17,7 +16,7 @@ const MESSAGE_MATCHING = Object.freeze({
   six: (number = 0) => `6개 일치 (2,000,000,000원) - ${number}개`,
 });
 
-const makeNumberOfLottoMessageFn = (number = 0) => `${number}개를 구매했습니다.`;
+const makeNumberOfLottoMessageFn = (number = 0) => `\n${number}개를 구매했습니다.`;
 
 const makeRateOfReturnMessageFn = (number = 0) => {
   const numberString = String(number.toFixed(1)).replace(NUMERIC_COMMA_EXPRESSION, MESSAGE.COMMA);

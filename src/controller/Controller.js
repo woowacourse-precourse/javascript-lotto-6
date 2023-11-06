@@ -10,6 +10,8 @@ import calculateTotal from '../util/calculateTotal.js';
 import calcultePercent from '../util/calcultePercent.js';
 import checkMatch from '../util/checkMatch.js';
 
+import { MESSAGE } from '../constants/message.js';
+
 class Controller {
   #lotto;
 
@@ -18,7 +20,9 @@ class Controller {
   #money;
 
   async lottoStart() {
-    await this.#init();
+    await this.#initMoney();
+    await this.#initlotto();
+    await this.#initBonus();
     this.#calculateLotto(
       this.#money.getLottoList(),
       this.#lotto.getLotto(),
@@ -28,27 +32,41 @@ class Controller {
     this.#calculateRate();
   }
 
-  // 입력 값에 따른 초기화 작업 진행
-  async #init() {
-    await this.#initMoney();
-    await this.#initlotto();
-    await this.#initBonus();
-  }
-
   async #initMoney() {
-    const input = await InputView.writePurchaseAmount();
-    this.#money = new Money(input);
-    OutputView.printPurchacingLotto(this.#money.getCount(), this.#money.getLottoList());
+    while (true) {
+      const input = await InputView.writeInput(MESSAGE.PURCHASING_MESSAGE);
+      try {
+        this.#money = new Money(input);
+        OutputView.printPurchacingLotto(this.#money.getCount(), this.#money.getLottoList());
+        break;
+      } catch (e) {
+        OutputView.printError(e.message);
+      }
+    }
   }
 
   async #initlotto() {
-    const input = await InputView.writeWinningNumbers();
-    this.#lotto = new Lotto(input);
+    while (true) {
+      const input = await InputView.writeInput(MESSAGE.WINNING_NUMBERS);
+      try {
+        this.#lotto = new Lotto(input);
+        break;
+      } catch (e) {
+        OutputView.printError(e.message);
+      }
+    }
   }
 
   async #initBonus() {
-    const input = await InputView.writeBonunsNumber();
-    this.#bonus = new BonusNumber(input, this.#lotto.getLotto());
+    while (true) {
+      const input = await InputView.writeInput(MESSAGE.BONUS_NUMBER);
+      try {
+        this.#bonus = new BonusNumber(input, this.#lotto.getLotto());
+        break;
+      } catch (e) {
+        OutputView.printError(e.message);
+      }
+    }
   }
 
   /**
@@ -63,6 +81,7 @@ class Controller {
       const { matchCount, bonusMatch } = calculateMatch(item, lotto, bonus);
       checkMatch(matchCount, bonusMatch, match);
     });
+    OutputView.printWinningStatistics();
     OutputView.printMatching(match);
   }
 
