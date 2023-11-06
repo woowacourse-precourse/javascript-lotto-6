@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import MESSAGE from "../constant/Message.js";
-import VALIDATE from "../validate/Validate.js"
+import VALIDATE from "../validate/Validate.js";
 
 class Input {
   #validate;

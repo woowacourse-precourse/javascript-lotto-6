@@ -1,8 +1,8 @@
-import MESSAGE from "../constant/Message";
+import VARIABLE from "../constant/Variable.js";
 
 class Calculate {
   calculateResult(lottoResult) {
-    const result = { ...MESSAGE.result };
+    const result = { ...VARIABLE.result };
     lottoResult.forEach(({ lottoCount, bonusIncluded }) => {
       if (lottoCount === 3) result.three += 1;
       if (lottoCount === 4) result.four += 1;
@@ -14,8 +14,8 @@ class Calculate {
   }
   
     calculateRate(finalResult, amount) {
-      const finalAmount = Object.keys(MESSAGE.money).reduce(
-        (acc, key) => acc + MESSAGE.money[key] * finalResult[key],
+      const finalAmount = Object.keys(VARIABLE.money).reduce(
+        (acc, key) => acc + VARIABLE.money[key] * finalResult[key],
         0
       );
       return (finalAmount / amount * 100).toFixed(1);

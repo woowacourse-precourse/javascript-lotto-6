@@ -29,7 +29,7 @@ class App {
       this.output.Statistics(finalResult, Rate);
     } catch (error) {
       if (error instanceof AppError) {
-        this.output.print(error.message); // 수정된 부분
+        this.output.print(error.message);
         await this.play();
       } else {
         throw error;

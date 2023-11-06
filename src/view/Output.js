@@ -8,8 +8,8 @@ class Output {
       Console.print(MESSAGE.output.purchaseInformation(lottoInformations));
     }
   
-    Statistics(totalLottoResult, Rate) {
-      Console.print(MESSAGE.output.statistics(totalLottoResult, Rate));
+    Statistics(totalResult, rate) {
+      Console.print(MESSAGE.output.statistics(totalResult, rate));
     
     }
     print(message) {

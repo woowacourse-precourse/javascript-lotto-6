@@ -32,7 +32,7 @@ class Validate {
   }
 
   validateBonusNumber(input, Number) {
-    if (!LOTTOERROR.REGEX.lottoNumber.test(input)) {
+    if (!LOTTOERROR.regex.lottoNumber.test(input)) {
       throw new AppError(
         LOTTOERROR.errormessage.anotherNumber
       );
