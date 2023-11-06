@@ -2,7 +2,7 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import LottoManagement from "./LottoManagement.js";
 import LottoResultChecker from "./LottoResultChecker.js";
-
+const numericPattern = /^\d+$/;
 const lottoPrice = 1000;
 class App {
   constructor() {
@@ -11,6 +11,7 @@ class App {
   }
   async play() {
     this.purchasePrice = await this.inputPurchasePrice();
+    this.checkValidationInputPrice(this.purchasePrice);
     const lottoCount = Number(this.purchasePrice / lottoPrice);
 
     const generatedLottoNumbers =
@@ -56,7 +57,11 @@ class App {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     return +input;
   }
-
+  checkValidationInputPrice() {
+    if (isNaN(this.purchasePrice)) {
+      throw new Error("[ERROR] 숫자만 입력이 가능합니다.");
+    }
+  }
   async inputBonusNumber() {
     return await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
   }
@@ -107,7 +112,7 @@ class App {
   printResult() {
     Console.print("당첨 통계\n---");
     Console.print(`3개 일치 (5,000원) - ${this.matchingCountsResult.three}개`);
-    Console.print(`4개 일치 (10,000원) - ${this.matchingCountsResult.four}개`);
+    Console.print(`4개 일치 (50,000원) - ${this.matchingCountsResult.four}개`);
     Console.print(
       `5개 일치 (1,500,000원) - ${this.matchingCountsResult.five}개`
     );
