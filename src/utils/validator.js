@@ -10,4 +10,7 @@ export const Validator = {
   isNumber(number) {
     return !isNaN(number);
   },
+  isNumberInRange(number) {
+    return number >= LOTTO.min && number <= LOTTO.max;
+  },
 };

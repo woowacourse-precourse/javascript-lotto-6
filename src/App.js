@@ -10,6 +10,8 @@ class App {
 
     const winnerLotto = await View.getWinnerNumber();
     console.log(winnerLotto.numbers);
+    const bonus = await View.getBonusNumber(winnerLotto.numbers);
+    console.log(bonus.number);
   }
 
   async setLottoConfig() {

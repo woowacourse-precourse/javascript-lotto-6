@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import Bonus from "../Bonus.js";
 import Lotto from "../Lotto.js";
 import { LOTTO } from "../constants/lotto.js";
 import { INPUT_MESSAGE, OUTPUT_MESSAGE } from "../constants/message.js";
@@ -19,6 +20,16 @@ export const View = {
     const lotto = new Lotto(winnerNumber);
 
     return lotto;
+  },
+
+  async getBonusNumber(winnerNumbers) {
+    const bonusNumber = await Console.readLineAsync(
+      INPUT_MESSAGE.requestBonusNumber
+    );
+
+    const bonus = new Bonus(winnerNumbers, bonusNumber);
+
+    return bonus;
   },
 
   async showPurchaseLotto(purchaseAmount, lottoArray) {
