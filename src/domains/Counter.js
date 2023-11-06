@@ -1,6 +1,6 @@
+import LOTTO_CONSTANT from '../constants/lotto.js';
 import Lotto from './Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LOTTO_CONSTANT from '../constants/lotto.js';
 
 class Counter {
   #lottoTicketNumber;
@@ -22,11 +22,10 @@ class Counter {
 
   get giveLotto() {
     const lottoBox = [];
-    while (this.#lottoTicketNumber) {
+    Array.from({ length: this.#lottoTicketNumber }, () => {
       const lotto = this.#generateLotto();
       lottoBox.push(new Lotto(lotto));
-      this.#lottoTicketNumber--;
-    }
+    });
 
     return lottoBox;
   }
