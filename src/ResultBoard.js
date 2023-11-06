@@ -14,7 +14,6 @@ class ResultBoard {
             numbers.forEach((number) => {
                 winningNumbers.includes(number) && winNumberCount++;
                 this.hasBonusNumer = parseInt(bonusNumber) === parseInt(number) && true;
-                MissionUtils.Console.print(this.hasBonusNumer)
             })
             this.decideRank(winNumberCount);
         })

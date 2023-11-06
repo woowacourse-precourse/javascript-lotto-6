@@ -1,4 +1,4 @@
-import validation from "./utils/valiidation.js";
+import validation from "./utils/validation.js";
 
 class Lotto {
     #numbers;
@@ -8,16 +8,17 @@ class Lotto {
         this.#validate(numbers);
     }
 
-    #validate(numbersArr) {
-        numbersArr.forEach((number) => {
+    #validate(numbers) {
+        numbers.forEach((number) => {
             validation.isValidNumber(number);
         })
-        validation.isValidInputCount(numbersArr, 6);
-        validation.isValidRange(numbersArr);
-        validation.hasSameNumber(numbersArr);
+        validation.isValidInputCount(numbers, 6);
+        validation.isValidRange(numbers);
+        validation.hasSameNumber(numbers);
     }
 
     get winningNumbers() {
+        this.#numbers = this.#numbers.map((input) => parseInt(input));
         return this.#numbers;
     }
 }
