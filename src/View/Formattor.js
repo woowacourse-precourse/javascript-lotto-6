@@ -1,25 +1,29 @@
-import LottoValidationError from "../Error/LottoValidationError.js";
+import ValidationError from "../Error/ValidationError.js";
 import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
 import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js";
-import RULE_CONSTANT from "../Constant/RuleConstant.js";
 
-const formatParseAmountToNumber = (amount) => {
-  if (typeof amount !== DATATYPE_CONSTANT.STRING)
-    throw new LottoValidationError(`${ERROR_CONSTANT.IS_NOT_STRING}`);
+const formatStringToInteger = (input) => {
+  if (typeof input !== DATATYPE_CONSTANT.STRING) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
+  }
 
-  return (Number(amount));
+  return (Number(input));
 }
 
-const formatParseAmountToCount = (parsedAmount) => {
-  if (typeof parsedAmount !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(parsedAmount))
-    throw new LottoValidationError(`${parsedAmount}${ERROR_CONSTANT.NOT_A_NUMBER}`);
+const getDivisionQuotient = (value1, value2) => {
+  if (typeof value1 !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(value1)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
 
-  const count = parsedAmount / RULE_CONSTANT.LOTTO_TICKET_PRICE;
-  return (count);
+  if (typeof value2 !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(value2)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  const divisionQuotient = value1 / value2;
+  return (divisionQuotient);
 }
 
 export default {
-  formatParseAmountToNumber,
-  formatParseAmountToCount,
-
+  formatStringToInteger,
+  getDivisionQuotient,
 };

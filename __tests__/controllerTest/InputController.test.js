@@ -11,28 +11,28 @@ const mockQuestions = (inputs) => {
 };
 
 
-describe('InputController controllerLottoPurchaseAmount', () => {
-  const factor = '1000';
+describe('InputController controllerLottoPurchase', () => {
+  const input = '1000';
   test('controllerLottoPurchaseAmount은 Function type이다 ', () => {
-    expect(typeof (InputController.controllerLottoPurchaseAmount)).toBe("function");
+    expect(typeof (InputController.controllerLottoPurchase)).toBe("function");
   })
   test(`controllerLottoPurchaseAmount로 객체를 생성합니다. `, async () => {
-    mockQuestions([factor]);
-    const test = await InputController.controllerLottoPurchaseAmount();
+    mockQuestions([input]);
+    const test = await InputController.controllerLottoPurchase();
     expect(typeof (test)).toBe("object");
   })
-  test(`controllerLottoPurchaseAmount로 생성한 객체는 getLottoPurchaseAmount를 메소드로 갖습니다. `, async () => {
-    mockQuestions([factor]);
-    const test = await InputController.controllerLottoPurchaseAmount();
-    expect(test.getLottoPurchaseAmount).toBeInstanceOf(Function);
+  test(`controllerLottoPurchaseAmount로 생성한 객체는 getLottoTicketCount 를 메소드로 갖습니다. `, async () => {
+    mockQuestions([input]);
+    const test = await InputController.controllerLottoPurchase();
+    expect(test.getLottoTicketCount).toBeInstanceOf(Function);
   })
   test(`getLottoPurchaseAmount는 양의 정수를 리턴한다. `, async () => {
-    mockQuestions([factor]);
-    const test_1 = await InputController.controllerLottoPurchaseAmount();
-    expect(test_1.getLottoPurchaseAmount()).toBe(1);
-    const factor_zero = '0';
-    mockQuestions([factor_zero]);
-    const test_2 = await InputController.controllerLottoPurchaseAmount();
-    expect(test_2.getLottoPurchaseAmount()).toBe(0);
+    mockQuestions([input]);
+    const test_1 = await InputController.controllerLottoPurchase();
+    expect(test_1.getLottoTicketCount()).toBe(1);
+    const ZERO = '0';
+    mockQuestions([ZERO]);
+    const test_2 = await InputController.controllerLottoPurchase();
+    expect(test_2.getLottoTicketCount()).toBe(0);
   })
 });

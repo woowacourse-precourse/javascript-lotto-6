@@ -1,22 +1,16 @@
-import { Console } from '@woowacourse/mission-utils'
-import INPUT_CONSTANT from '../Constant/inputConstant';
+import { Console } from '@woowacourse/mission-utils';
+import ValidationError from '../Error/ValidationError.js';
+import ERROR_CONSTANT from '../Constant/ErrorConstant.js';
+import DATATYPE_CONSTANT from '../Constant/DataTypeConstant.js';
 
-const getLottoPurchaseAmount = (async () => {
-  const lottoPurchaseAmount = await Console.readLineAsync(
-    INPUT_CONSTANT.GET_LOTTO_PURCHASE_AMOUNT_MESSAGE
-  );
+const getUserInputAsync = (async (message) => {
+  if (typeof message !== DATATYPE_CONSTANT.STRING) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
+  }
+
+  const lottoPurchaseAmount = await Console.readLineAsync(message);
+
   return (lottoPurchaseAmount);
 })
 
-const getLottoCommonWinningNumbers = (async () => {
-  const lottoCommonWinningNumbers = await Console.readLineAsync(
-    INPUT_CONSTANT.GET_LOTTO_COMMON_WINNING_NUMBERS_MESSAGE
-  );
-
-  return (lottoCommonWinningNumbers);
-})
-
-export default {
-  getLottoPurchaseAmount,
-  getLottoCommonWinningNumbers,
-};
+export default getUserInputAsync;

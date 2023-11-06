@@ -1,6 +1,6 @@
 import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
 
-class LottoValidationError extends Error {
+class ValidationError extends Error {
   static name = 'LottoValidationError';
 
   constructor(message) {
@@ -10,4 +10,4 @@ class LottoValidationError extends Error {
   };
 }
 
-export default LottoValidationError;
+export default ValidationError;
