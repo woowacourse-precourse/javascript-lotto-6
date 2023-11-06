@@ -9,7 +9,7 @@ export default class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTERY.NUM_COUNT) {
+    if (new Set(numbers).size !== LOTTERY.NUM_COUNT) {
       throw new InputError(ERROR.NOT_SIX_NUMBERS);
     }
   }
