@@ -13,4 +13,8 @@ export default class InputService {
   async readWinningNumbers() {
     return Console.readLineAsync(WINNING_NUMBER_INPUT_MESSAGE);
   }
+
+  async readBonusNumber() {
+    return Console.readLineAsync(BONUS_NUMBER_INPUT_MESSAGE);
+  }
 }
