@@ -1,3 +1,7 @@
+import { ERROR_MESSAGE } from './constants/messages.js';
+import InputValidator from './utils/InputValidator.js';
+import ValidationError from './utils/ValidationError.js';
+
 class Lotto {
   #numbers;
 
@@ -7,8 +11,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (!InputValidator.checkMatchLength(numbers.length)) {
+      throw new ValidationError(ERROR_MESSAGE.notMatchedLength);
     }
   }
 

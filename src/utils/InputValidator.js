@@ -1,3 +1,5 @@
+import { DRAW_NUMBERS } from '../constants/numbers.js';
+
 const InputValidator = {
   checkNaN(number) {
     if (Number.isNaN(number)) {
@@ -15,6 +17,13 @@ const InputValidator = {
 
   checkPositiveNumber(number) {
     if (number > 0) {
+      return true;
+    }
+    return false;
+  },
+
+  checkMatchLength(length) {
+    if (length === DRAW_NUMBERS) {
       return true;
     }
     return false;
