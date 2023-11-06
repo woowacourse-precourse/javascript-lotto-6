@@ -10,12 +10,20 @@ class App {
   lottoResult = [0, 0, 0, 0, 0, 0];
 
   async inputPurchaseAmount() {
-    const inputPurchaseAmount = await MissionUtils.Console.readLineAsync(
-      "구입금액을 입력해 주세요."
-    );
-    const purchaseAmount = Number(inputPurchaseAmount);
-    App.validatePurchaseAmount(purchaseAmount);
-    this.purchaseAmount = purchaseAmount;
+    while (true) {
+      try {
+        const inputPurchaseAmount = await MissionUtils.Console.readLineAsync(
+          "구입금액을 입력해 주세요."
+        );
+        console.log(inputPurchaseAmount);
+        const purchaseAmount = Number(inputPurchaseAmount);
+        App.validatePurchaseAmount(purchaseAmount);
+        this.purchaseAmount = purchaseAmount;
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   static validatePurchaseAmount(purchaseAmount) {
@@ -69,21 +77,35 @@ class App {
   }
 
   async inputWinningNumbers() {
-    const inputWinningNumbers = await MissionUtils.Console.readLineAsync(
-      "당첨 번호를 입력해 주세요."
-    );
-    const winningNumbers = inputWinningNumbers.split(",").map(Number);
-    App.validateWinningNumbers(winningNumbers);
-    this.winningNumbers = winningNumbers.sort((a, b) => a - b);
+    while (true) {
+      try {
+        const inputWinningNumbers = await MissionUtils.Console.readLineAsync(
+          "당첨 번호를 입력해 주세요."
+        );
+        const winningNumbers = inputWinningNumbers.split(",").map(Number);
+        App.validateWinningNumbers(winningNumbers);
+        this.winningNumbers = winningNumbers.sort((a, b) => a - b);
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   async inputBonusNumber() {
-    const inputBonusNumber = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해 주세요."
-    );
-    const bonusNumber = Number(inputBonusNumber);
-    this.validateBonusNumber(bonusNumber);
-    this.bonusNumber = bonusNumber;
+    while (true) {
+      try {
+        const inputBonusNumber = await MissionUtils.Console.readLineAsync(
+          "보너스 번호를 입력해 주세요."
+        );
+        const bonusNumber = Number(inputBonusNumber);
+        this.validateBonusNumber(bonusNumber);
+        this.bonusNumber = bonusNumber;
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   checkLotto() {
