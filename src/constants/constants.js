@@ -13,6 +13,18 @@ const VIEWMESSAGE = Object.freeze({
   bonusInput: '보너스 번호를 입력해주세요.\n',
 });
 
+const ERRORMESSAGE = Object.freeze({
+  purchaseInput: '[ERROR] 구입 금액은 숫자여야 합니다.',
+  lottoInput: '[ERROR] 로또 번호는 1~45 사이여야 합니다.',
+  bonusInput: '[ERROR] 보너스 번호는 1~45 사이여야 합니다.',
+  bonusDuplicate: '[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.',
+  lottoDuplicate: '[ERROR] 로또 번호는 중복될 수 없습니다.',
+  purchaseAmount: '[ERROR] 구입 금액은 1000원 단위여야 합니다.',
+  lottoLength: '[ERROR] 로또 번호는 6개여야 합니다.',
+  lottoType: '[ERROR] 로또 번호는 정수여야 합니다.',
+  bonusType: '[ERROR] 보너스 번호는 정수여야 합니다.',
+});
+
 const STATISTICS = Object.freeze([
   { rank: 'fifth', winnings: 5000, count: 0 },
   { rank: 'fourth', winnings: 50000, count: 0 },
@@ -37,4 +49,11 @@ const NUMBER = Object.freeze({
   lottoprice: 1000,
 });
 
-export { STATMESSAGE, STATISTICS, CHARACTER, NUMBER, VIEWMESSAGE };
+export {
+  STATMESSAGE,
+  STATISTICS,
+  CHARACTER,
+  NUMBER,
+  VIEWMESSAGE,
+  ERRORMESSAGE,
+};

@@ -2,7 +2,6 @@ import UserLottoNumber from './UserLottoNumber.js';
 import { NUMBER } from '../constants/constants.js';
 
 class UserLotto {
-  #purchaseAmount;
   #numberOfPurchase;
   #userLottoNumbers = [];
 
@@ -12,7 +11,6 @@ class UserLotto {
   }
 
   #setPurchaseVariable(purchaseAmount) {
-    this.#purchaseAmount = purchaseAmount;
     this.#numberOfPurchase = purchaseAmount / NUMBER.lottoprice;
     this.#userLottoNumbers = Array.from(
       { length: this.#numberOfPurchase },
