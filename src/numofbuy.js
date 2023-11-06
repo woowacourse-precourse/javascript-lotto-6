@@ -29,7 +29,6 @@ class NumOfBuy {
         if (this.#checkNotZero(inputMoney)) throw new Error(`[ERROR] 구입금액은 0보다 커야합니다.`);
         valid = false;
       } catch (error) {
-        Console.print('[ERROR] 올바른 값을 입력해주세요.');
         continue;
       }
     }

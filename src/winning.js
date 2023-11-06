@@ -43,7 +43,6 @@ class Winning {
         if (this.#duplCheckOfWinngNum(newWinning)) throw new Error(`[ERROR] 당첨 번호는 중복될 수 없습니다.`);
         valid = false;
       } catch (error) {
-        Console.print(`[ERROR] 올바른 값을 입력해주세요.`);
         continue;
       }
     }

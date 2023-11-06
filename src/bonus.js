@@ -39,7 +39,6 @@ class Bonus {
 
         valid = false;
       } catch (error) {
-        Console.print('[ERRPR] 올바른 값을 입력해주세요.\n');
         continue;
       }
     }
@@ -53,6 +52,7 @@ class Bonus {
     const NumTypeBonus = Number(bonusNum);
     if (Number.isNaN(NumTypeBonus)) {
       // throw new Error(`보너스 입력값은 숫자여야 합니다.`);
+      Console.print('[ERRPR] 보너스 번호 입력값은 숫자여야 합니다.\n');
       return true;
     }
   }
@@ -64,7 +64,7 @@ class Bonus {
     // Console.print(typeof winningNum);
     if (winningNum.includes(bonusNum)) {
       // throw new Error(`[ERRPR] 보너스 숫자는 중복될 수 없습니다.`);
-
+      Console.print('[ERRPR] 보너스 번호는 중복될 수 없습니다.\n');
       return true;
     }
   }
@@ -78,7 +78,7 @@ class Bonus {
 
     if (inputNum < MIN_NUM || MAX_NUM < inputNum) {
       // throw new Error(`[ERROR] 숫자 범위는 1~45 사이입니다.`);
-
+      Console.print('[ERRPR] 보너스 번호 범위는 1~45 사이입니다.\n');
       return true;
     }
   }
