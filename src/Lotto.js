@@ -2,6 +2,22 @@ import { Random, Console } from '@woowacourse/mission-utils';
 import { NUMBER, TEXT } from './data.js';
 import LottoValidator from './LottoValidator.js';
 
+function matchingLotto(inputNumberList, inputBounsNumber, 정답배열) {
+  const matchingNumber = Array(정답배열.length).fill(0);
+  const matchingBonus = Array(정답배열.length).fill(0);
+  정답배열.forEach((items, index) => {
+    items.forEach((item) => {
+      if (inputNumberList.includes(item)) {
+        matchingNumber[index] += 1;
+      }
+    });
+    if (items.includes(inputBounsNumber)) {
+      matchingBonus[index] += 1;
+    }
+  });
+  return [matchingNumber, matchingBonus];
+}
+
 function lottoRandomNumer() {
   const randomNumbers = [];
   while (randomNumbers.length < NUMBER.LOTTO_LENGTH) {
@@ -17,10 +33,6 @@ function lottoRandomNumer() {
   return randomNumbers;
 }
 
-function winsNumber(lottoINITIAL) {
-  console.log(lottoINITIAL);
-}
-
 function outputNumber(inputAmount) {
   const lottoCount = inputAmount / NUMBER.INITIAL_AMOUNT;
   const lottoINITIAL = Array(lottoCount)
@@ -31,7 +43,7 @@ function outputNumber(inputAmount) {
     });
   Console.print(`${lottoCount}${TEXT.OUTPUT_NUMBER}`);
   lottoINITIAL.forEach((numbers) => Console.print(numbers));
-  // winsNumber(...lottoINITIAL);
+  return lottoINITIAL;
 }
 
 async function lottoNumberGet() {
@@ -42,14 +54,18 @@ async function lottoNumberGet() {
   );
   const lottoValidator = new LottoValidator(inputNumberList, inputBounsNumber);
   lottoValidator.validate();
-  return [...inputNumberList, inputBounsNumber];
+  return [inputNumberList, inputBounsNumber];
 }
 export async function lottoAmountGet() {
   const inputAmount = await Console.readLineAsync(TEXT.INPUT_AMOUNT);
   if (inputAmount % 1000 !== 0) throw new Error(TEXT.AMOUNT_ERROR);
-  outputNumber(inputAmount);
-  const 임시배열 = await lottoNumberGet();
-  winsNumber(임시배열);
+  const 정답배열 = outputNumber(inputAmount);
+  const [inputNumberList, inputBounsNumber] = await lottoNumberGet();
+  const [matchingNumber, matchingBonus] = matchingLotto(
+    inputNumberList,
+    inputBounsNumber,
+    정답배열,
+  );
 }
 
 class Lotto {
