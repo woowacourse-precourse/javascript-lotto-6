@@ -11,11 +11,9 @@ class Lotto {
   }
 
   getPrice = async () => {
-    let price;
-
     do {
       try {
-        price = await Console.readLineAsync("구입 금액을 입력해 주세요.");
+        let price = await Console.readLineAsync("구입 금액을 입력해 주세요.");
         price = ValidatePrice(price);
       } catch(error) {
         throw new Error(error.message);
@@ -23,6 +21,19 @@ class Lotto {
     } while(!price);
 
     return price;
+  };
+
+  getSixNum = async () => {
+    do {
+      try {
+        let sixNumSet = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
+        sixNumSet = this.#validate(sixNumSet);
+      } catch(error) {
+        throw new Error(error.message);
+      }
+    } while(!sixNumSet);
+
+    return sixNumSet;
   };
 
   #hasDuplicates = (numbers) => {
@@ -43,6 +54,7 @@ class Lotto {
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
     if (numbers.some(num => num >= 1 && num <= 45 && Number.isInteger(num)) === false)
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
+    return numbers;
   }
 
   #validateBonusNum(numbers, bonusNum) {
