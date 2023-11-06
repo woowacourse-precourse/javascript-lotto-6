@@ -12,5 +12,6 @@ export const ERROR_MSG = Object.freeze({
   CAN_NOT_DIVIDE: '[ERROR] 1000원 단위로 금액을 입력해주세요',
   INVALID_NUMBERS_LENGTH: '[ERROR] 당첨 번호는 6개의 숫자를 입력해주세요',
   NUMBER_DUPLICATED: '[ERROR] 당첨 번호는 중복 없이 입력해주세요.',
-  INVALID_BONUS_NUMBER: '[ERROR] 보너스 번호는 1개만 입력해주세요'
+  INVALID_BONUS_NUMBER: '[ERROR] 보너스 번호는 1개만 입력해주세요',
+  BONUS_IN_WINNING: '[ERROR] 보너스 번호가 당첨 번호와 중복됩니다.'
 });

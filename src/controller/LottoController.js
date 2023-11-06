@@ -12,15 +12,16 @@ class LottoController {
     this.lottoArray = [];
     this.winningNumbers = [];
     this.bonusNumber = 0;
+    this.inputView = new InputView();
   }
 
   async playLotto() {
-    this.usedMoney = await InputView.inputMoney(); // 정상 입력 시에 통과
+    this.usedMoney = await this.inputView.inputMoney();
     this.countsOfLottos = this.howManyLottos();
     this.makeNewLottos();
     OutputView.printLottos(this.countsOfLottos, this.lottoArray);
-    this.winningNumbers = await InputView.repeatInputNumbers();
-    this.bonusNumber = await InputView.repeatInputBonusNumber();
+    this.winningNumbers = await this.inputView.repeatInputNumbers();
+    this.bonusNumber = await this.inputView.repeatInputBonusNumber();
     this.makeStatistics();
     OutputView.printResult();
   }
@@ -43,6 +44,7 @@ class LottoController {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
+  // 당첨 & 수익률 계산
   makeStatistics() {
     this.lottoArray.forEach((lotto) =>
       lotto.compareNumbers(this.winningNumbers, this.bonusNumber)
@@ -51,7 +53,6 @@ class LottoController {
   }
 
   calculateProfit() {
-    // 돈 계산하고, 수익률 Place객체에 저장
     const profitPercentage = (calculateReward() / this.usedMoney) * 100;
     const rounded = Number(profitPercentage.toFixed(2));
     Place.profit = rounded;

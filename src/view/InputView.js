@@ -4,10 +4,16 @@ import {
   validateWinningNumbers,
   validateMoney
 } from '../utils/Validation.js';
+import { ERROR_MSG } from '../utils/Constants.js';
 
 const { Console } = MissionUtils;
 class InputView {
-  static async inputMoney() {
+  constructor() {
+    this.winningNumbersArray = [];
+    this.bonusNumber = 0;
+  }
+
+  async inputMoney() {
     let money = null;
     let valid = false;
     while (!valid) {
@@ -23,51 +29,55 @@ class InputView {
     return money;
   }
 
-  static async inputNumbers() {
+  async inputNumbers() {
     const winningNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     Console.print('\n');
-    const winningNumbersArray = winningNumbers.split(',');
-    return winningNumbersArray;
+    this.winningNumbersArray = winningNumbers.split(',');
   }
 
-  static async repeatInputNumbers() {
-    let numbers = null;
+  async repeatInputNumbers() {
     let valid = false;
     while (!valid) {
       try {
-        numbers = await this.inputNumbers();
-        validateWinningNumbers(numbers);
+        await this.inputNumbers();
+        validateWinningNumbers(this.winningNumbersArray);
         valid = true;
       } catch (error) {
         Console.print(error.message);
         valid = false;
       }
     }
-    return numbers;
+    return this.winningNumbersArray;
   }
 
-  static async inputBonusNumber() {
-    const bonusNumber =
+  async inputBonusNumber() {
+    this.bonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     Console.print('\n');
-    return bonusNumber;
   }
 
-  static async repeatInputBonusNumber() {
-    let bonusNumber = null;
+  // 보너스 번호가 당첨번호랑 중복되는지 검사
+  checkBonusInWinningNumbers() {
+    if (this.winningNumbersArray.includes(this.bonusNumber)) {
+      throw new Error(ERROR_MSG.BONUS_IN_WINNING);
+    }
+  }
+
+  async repeatInputBonusNumber() {
     let valid = false;
     while (!valid) {
       try {
-        bonusNumber = await this.inputBonusNumber();
-        validateBonusNumber(bonusNumber);
+        await this.inputBonusNumber();
+        validateBonusNumber(this.bonusNumber);
+        this.checkBonusInWinningNumbers();
         valid = true;
       } catch (error) {
         Console.print(error.message);
         valid = false;
       }
     }
-    return bonusNumber;
+    return this.bonusNumber;
   }
 }
 

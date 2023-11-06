@@ -45,13 +45,13 @@ export const validateWinningNumbers = (winningNumbers) => {
     throw new Error(ERROR_MSG.INVALID_NUMBER);
   }
 };
-
+//
 export const validateBonusNumber = (bonusNumber) => {
   const convertedBonusNumber = parseInt(bonusNumber, 10);
-  if (bonusNumber.length !== 1) {
+  if (bonusNumber.length > 2) {
     throw new Error(ERROR_MSG.INVALID_BONUS_NUMBER);
   }
-  if (Number.isNaN(convertedBonusNumber)) {
+  if (!/^\d+$/.test(bonusNumber)) {
     throw new Error(ERROR_MSG.IS_NOT_NUMBER);
   }
   if (convertedBonusNumber <= 0 || !Number.isInteger(convertedBonusNumber)) {
