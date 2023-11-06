@@ -8,9 +8,7 @@ class InputView {
   }
 
   async getUserInputPurchaseMoney() {
-    const USER_INPUT_PURCHASE_MONEY = await Console.readLineAsync(
-      `${INPUT_MESSAGE.purchaseMoney}${OTHERS.lineBreak}`
-    );
+    const USER_INPUT_PURCHASE_MONEY = await Console.readLineAsync(`${INPUT_MESSAGE.purchaseMoney}`);
     this.validator.validateUserInputPurchaseMoney(Number(USER_INPUT_PURCHASE_MONEY));
 
     return Number(USER_INPUT_PURCHASE_MONEY);
@@ -18,7 +16,7 @@ class InputView {
 
   async getUserInputWinningNumbers() {
     const USER_INPUT_WINNING_NUMBERS = await Console.readLineAsync(
-      `${INPUT_MESSAGE.winningNumbers}${OTHERS.lineBreak}`
+      `${INPUT_MESSAGE.winningNumbers}`
     );
     this.validator.validateUserInputWinningNumbers(
       USER_INPUT_WINNING_NUMBERS.split(OTHERS.comma).map(Number)
@@ -28,9 +26,7 @@ class InputView {
   }
 
   async getUserInputBonusNumber(winningNumbers) {
-    const USER_INPUT_BONUS_NUMBER = await Console.readLineAsync(
-      `${OTHERS.lineBreak}${INPUT_MESSAGE.bonusNumber}${OTHERS.lineBreak}`
-    );
+    const USER_INPUT_BONUS_NUMBER = await Console.readLineAsync(`${INPUT_MESSAGE.bonusNumber}`);
     this.validator.validateUserInputBonusNumber(Number(USER_INPUT_BONUS_NUMBER), winningNumbers);
 
     return Number(USER_INPUT_BONUS_NUMBER);

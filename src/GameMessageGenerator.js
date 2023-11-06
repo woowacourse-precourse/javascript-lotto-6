@@ -2,30 +2,29 @@ import { OTHERS, PRIZES_MESSAGE, PRIZES } from './utils/constants.js';
 
 class GameMessageGenerator {
   getLottoNumberListMessage(lottoNumberArray) {
-    let LOTTO_NUMBER_LIST_MESSAGE = OTHERS.emptyString;
+    const LOTTO_NUMBER_LIST_MESSAGE_ARRAY = [];
+
     lottoNumberArray.forEach((lotto) => {
-      LOTTO_NUMBER_LIST_MESSAGE += `[${lotto.join(OTHERS.commaWithSpace)}]\n`;
+      LOTTO_NUMBER_LIST_MESSAGE_ARRAY.push(lotto.join(OTHERS.commaWithSpace));
     });
 
-    return LOTTO_NUMBER_LIST_MESSAGE;
+    return LOTTO_NUMBER_LIST_MESSAGE_ARRAY;
   }
 
   getResultMessage(gameResultObj, purchaseMoney) {
-    let resultMessage = OTHERS.emptyString;
     let totalPrize = 0;
+    const RESULT_MESSAGE_ARRAY = [];
+    Object.keys(gameResultObj).forEach((key) => {
+      RESULT_MESSAGE_ARRAY.push(
+        `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}`
+      );
 
-    Object.keys(gameResultObj).forEach((key, index) => {
-      if (index === Object.keys(gameResultObj).length - 1) {
-        resultMessage += `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}`;
-      } else {
-        resultMessage += `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}${OTHERS.lineBreak}`;
-      }
       totalPrize += gameResultObj[key] * PRIZES[key];
     });
 
     const returnRate = ((totalPrize / purchaseMoney) * 100).toFixed(1);
 
-    return [resultMessage, returnRate];
+    return [RESULT_MESSAGE_ARRAY, returnRate];
   }
 }
 
