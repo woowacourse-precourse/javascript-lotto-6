@@ -49,9 +49,42 @@ class App {
         break
       }
     }
+    while (1) {
+      let winningNumsList;
 
-    const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
-    const winningNumsList = winningNums.split(',').map(Number); // [ 1, 4, 6, 7, 21, 22 ] 
+      try {
+        const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
+        if (
+          winningNums.includes(',,') 
+          || winningNums[0] === ','
+          || winningNums[winningNums.length-1] === ','
+          ) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+        }
+
+        winningNumsList = winningNums.split(',').map(Number); // [ 1, 4, 6, 7, 21, 22 ] 
+        const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+        if (winningNumsList.length !== 6) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+        }
+        for (let i = 0; i < winningNumsList.length; i++) {
+          if (!numRangePattern.test(winningNumsList[i])) {
+            throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+          }
+        }
+        break
+      } catch (error) {
+        Console.print(ERROR_MESSAGE.INPUT_ERROR)
+      }
+    }
+
+    while (1) {
+      try {
+        
+      } catch (error) {
+        Console.print(ERROR_MESSAGE.INPUT_ERROR)
+      }
+    }
 
     const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT); // 1
     const bonus = Number(inputBonus)
