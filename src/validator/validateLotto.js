@@ -1,14 +1,16 @@
 import ERROR from '../constant/Error.js';
 import LOTTO from '../constant/Lotto.js';
-import LottoInputError from '../error/LottoInputError.js';
+import WinningLottoError from '../error/WinningLottoError.js';
 import InputValidator from './InputValidator.js';
 
 const validateLotto = (lotto) => {
-  if (InputValidator.isArrayHaveNan(lotto))
-    throw new LottoInputError(ERROR.isNan);
-  if (lotto.length !== LOTTO.count) throw new LottoInputError(ERROR.count);
-  if (InputValidator.isDuplicated(lotto))
-    throw new LottoInputError(ERROR.duplicated);
+  const lottoArr = lotto.map((lottoNumber) => lottoNumber.get());
+
+  if (InputValidator.isArrayHaveNan(lottoArr))
+    throw new WinningLottoError(ERROR.isNan);
+  if (lotto.length !== LOTTO.count) throw new WinningLottoError(ERROR.count);
+  if (InputValidator.isDuplicated(lottoArr))
+    throw new WinningLottoError(ERROR.duplicated);
 };
 
 export default validateLotto;
