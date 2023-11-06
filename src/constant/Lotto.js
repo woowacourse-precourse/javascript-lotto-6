@@ -15,7 +15,11 @@ const MATCH = {
 
 const PRICE = {
   price: 1000,
-  maxMoney: 9007199254740000,
+};
+
+const MONEY_RANGE = {
+  maxMoney: Number.MAX_SAFE_INTEGER - (Number.MAX_SAFE_INTEGER % PRICE.price), // 정수 최대값 이하 1000원 단위
+  minMoney: PRICE.price,
 };
 
 const DELIMITER = {
@@ -27,6 +31,7 @@ const LOTTO = Object.freeze({
   ...LOTTO_COUNT,
   ...MATCH,
   ...PRICE,
+  ...MONEY_RANGE,
   ...DELIMITER,
 });
 
