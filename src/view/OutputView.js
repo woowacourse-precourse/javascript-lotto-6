@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../util/constant.js';
+import { MESSAGE, RESULT } from '../util/constant.js';
 
 const OutputView = {
   printError(error) {
@@ -14,6 +14,12 @@ const OutputView = {
     lottos.forEach(lotto => {
       Console.print(MESSAGE.lottoList(lotto));
     });
+  },
+
+  printResult(rank, benefit) {
+    Console.print(RESULT.resultMessage);
+    Console.print(RESULT.matchCount(rank));
+    Console.print(RESULT.printBenefit(benefit));
   },
 };
 

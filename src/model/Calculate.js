@@ -14,7 +14,6 @@ class Calculate {
     await lottoList.forEach(eachLotto => {
       this.countMatchNumber(eachLotto, lotto, bonus);
     });
-    // this.benefit = this.calculateBenefit(price);
 
     return this.countMatch;
   }
@@ -48,11 +47,11 @@ class Calculate {
 
   calculateBenefit(countMatch, price) {
     let eachPrice = 0;
-    Console.print(countMatch);
+
     for (let i = 0; i < 5; i++) {
       eachPrice += PRICE[i] * countMatch[i];
     }
-    Console.print(eachPrice);
+
     return ((eachPrice / price) * 100).toFixed(1);
   }
 }

@@ -86,6 +86,10 @@ export default class LottoController {
   async #calculateRank() {
     this.#ranking = await this.calculate.countRanking(this.#lottoList, this.#lotto, this.#bonus);
     this.#benefit = this.calculate.calculateBenefit(this.#ranking, this.#price);
-    Console.print([this.#ranking, this.#benefit]);
+    this.#printResult();
+  }
+
+  #printResult() {
+    OutputView.printResult(this.#ranking, this.#benefit);
   }
 }

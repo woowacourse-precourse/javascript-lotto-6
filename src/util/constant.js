@@ -2,8 +2,8 @@ export const MESSAGE = Object.freeze({
   moneyInput: `구입금액을 입력해 주세요.\n`,
   lottoAmount: amount => `\n${amount}개를 구매했습니다.`,
   lottoList: lotto => `[${lotto.join(', ')}]`,
-  lottoNumberInput: `당첨 번호를 입력해 주세요.\n`,
-  bonusNumberInput: `보너스 번호를 입력해 주세요.\n`,
+  lottoNumberInput: `\n당첨 번호를 입력해 주세요.\n`,
+  bonusNumberInput: `\n보너스 번호를 입력해 주세요.\n`,
 });
 
 export const ERROR = Object.freeze({
@@ -17,3 +17,19 @@ export const ERROR = Object.freeze({
 });
 
 export const PRICE = [5000, 50000, 1500000, 30000000, 2000000000];
+
+export const RESULT = Object.freeze({
+  resultMessage: '\n당첨 통계\n---',
+  matchCount: countList =>
+    `3개 일치 (5,000원) - ${countList[0]}개\n4개 일치 (50,000원) - ${countList[1]}개\n5개 일치 (1,500,000원) - ${countList[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${countList[3]}개\n6개 일치 (2,000,000,000원) - ${countList[4]}개\n`,
+  printBenefit: benefit => `총 수익률은 ${benefit}%입니다.`,
+});
+
+// 당첨 통계
+// ---
+// 3개 일치 (5,000원) - 1개
+// 4개 일치 (50,000원) - 0개
+// 5개 일치 (1,500,000원) - 0개
+// 5개 일치, 보너스 볼 일치 (30,000,000원) - 0개
+// 6개 일치 (2,000,000,000원) - 0개
+// 총 수익률은 62.5%입니다.
