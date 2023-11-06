@@ -26,12 +26,12 @@ class LottoGame {
 
   #purchaseLottos() {
     this.#purchaser.purchase();
-    this.#showNumberOfLottos();
+    this.#showLottoCount();
     this.#showSortedLottos();
   }
 
-  #showNumberOfLottos() {
-    const numberOfLottos = this.#purchaser.getNumbersOfLottos();
+  #showLottoCount() {
+    const numberOfLottos = this.#purchaser.getLottoCount();
     const message = TEMPLATE.numberOfLottos(numberOfLottos);
     View.print(message);
   }

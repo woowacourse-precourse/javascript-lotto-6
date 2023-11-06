@@ -17,7 +17,7 @@ class LottoPurchaser {
     this.#set(lottos);
   }
 
-  getNumbersOfLottos() {
+  getLottoCount() {
     return this.#lottos.length;
   }
 
