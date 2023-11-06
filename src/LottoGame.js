@@ -5,27 +5,25 @@ class LottoGame {
   #ticketCount;
   #lottoTickets;
   #winningNumbers;
+  #bonusNumber
 
   constructor() {
     this.#ticketCount;
     this.#lottoTickets = [];
     this.#winningNumbers = [];
+    this.#bonusNumber = 0;
   }
 
   async start() {
     await this.buyLotto();
     this.setLottoTickets(this.#lottoTickets, this.#ticketCount);
     this.printLottoTickets(this.#lottoTickets, this.#ticketCount);
-    const numbers = await this.inputWinningNumbers();
-    this.setWinningNumbers(numbers);
+    this.#winningNumbers = await this.inputWinningNumbers();
+    this.#bonusNumber = this.inputBonusNumbers(this.#winningNumbers);
   }
 
   setTicketCount(count) {
     this.#ticketCount = count;
-  }
-
-  setWinningNumbers(numbers) {
-    this.#winningNumbers = numbers;
   }
 
   async buyLotto() {
@@ -69,7 +67,7 @@ class LottoGame {
     while (lottoTickets.length < count) {
       const lottoNumbers = this.generateLottoNumbers();
       lottoTickets.push(lottoNumbers);
-      
+
     }
   }
 
@@ -89,7 +87,7 @@ class LottoGame {
 
   #validateWinningNumbers(numbers) {
     const termNumbers = [];
-    if(numbers.length != 6) {
+    if (numbers.length != 6) {
       throw new Error("[ERROR] 입력된 숫자가 6개가 아닙니다.")
     }
     numbers.forEach(number => {
@@ -109,6 +107,29 @@ class LottoGame {
 
       termNumbers.push(number);
     });
+  }
+
+  async inputBonusNumbers(winningNumbers) {
+    const inputNumbers = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    console.log(winningNumbers);
+    this.#validateBonusNumbers(inputNumbers, winningNumbers);
+    return inputNumbers;
+  }
+
+  #validateBonusNumbers(number, winningNumbers) {
+    number = Number(number);
+    if (isNaN(number)) {
+      throw new Error("[ERROR] 숫자가 아닌 입력입니다.")
+    }
+    if (!Number.isInteger(number)) {
+      throw new Error("[ERROR] 정수가 아닌 입력입니다.")
+    }
+    if (number < 1 || number > 45) {
+      throw new Error("[ERROR] 1부터 45 사이의 숫자가 아닌 입력입니다.")
+    }
+    if (winningNumbers.includes(number.toString())) {
+      throw new Error("[ERROR] 당첨 번호와 중복된 숫자가 있습니다.")
+    }
   }
 }
 
