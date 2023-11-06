@@ -1,3 +1,4 @@
+import { ERROR_SCOPE } from '../utils/constants.js';
 import { validate } from '../utils/validate.js';
 
 class WinningNumber {
@@ -5,7 +6,7 @@ class WinningNumber {
 
   constructor(winningNumber) {
     const numbers = this.#splitWinningNumber(winningNumber);
-    this.#validate(numbers);
+    this.#validate(ERROR_SCOPE.WINNIG, numbers);
     this.#winningNumber = numbers;
   }
 
@@ -13,14 +14,14 @@ class WinningNumber {
     return winningNumber.split(',');
   }
 
-  #validate(numbers) {
-    validate.isCount(numbers);
-    validate.isDuplication(numbers);
+  #validate(scope, numbers) {
+    validate.isCount(scope, numbers);
+    validate.isDuplication(scope, numbers);
 
     numbers.forEach((number) => {
-      validate.isInteger(number);
-      validate.startZero(number);
-      validate.isNumberRange(number);
+      validate.isInteger(scope, number);
+      validate.startZero(scope, number);
+      validate.isNumberRange(scope, number);
     });
   }
 

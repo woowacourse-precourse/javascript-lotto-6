@@ -1,3 +1,5 @@
+import { LOTTO } from '../utils/constants.js';
+
 class LottoTicketResult {
   #lottoTicketResult;
 
@@ -8,24 +10,24 @@ class LottoTicketResult {
 
   #checkLottoTicketResult(lottoTicket, winningNumber, bonusNumber) {
     lottoTicket.forEach((lotto) => {
-      let sameNumberCount = 0;
+      let matchNumberCount = 0;
       lotto.forEach((lottoNumber) => {
         if (winningNumber.includes(lottoNumber)) {
-          sameNumberCount += 1;
+          matchNumberCount += 1;
         }
       });
-      if (sameNumberCount === 3) {
+      if (matchNumberCount === LOTTO.FIFTH_PLACE_MATCH) {
         this.#lottoTicketResult[0] += 1;
       }
-      if (sameNumberCount === 4) {
+      if (matchNumberCount === LOTTO.FOURTH_PLACE_MATCH) {
         this.#lottoTicketResult[1] += 1;
       }
-      if (sameNumberCount === 5) {
+      if (matchNumberCount === LOTTO.SECOND_OR_THIRD_PLACE_MATCH) {
         lotto.includes(bonusNumber)
           ? (this.#lottoTicketResult[3] += 1)
           : (this.#lottoTicketResult[2] += 1);
       }
-      if (sameNumberCount === 6) {
+      if (matchNumberCount === LOTTO.FIRST_PLACE_MATCH) {
         this.#lottoTicketResult[4] += 1;
       }
     });

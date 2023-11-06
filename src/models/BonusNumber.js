@@ -1,20 +1,23 @@
+import { ERROR_MESSAGE, ERROR_SCOPE } from '../utils/constants.js';
 import { validate } from '../utils/validate.js';
 
 class BonusNumber {
   #bonusNumber;
 
   constructor(winningNumber, bonusNumber) {
-    this.#validate(winningNumber, bonusNumber);
+    this.#validate(ERROR_SCOPE.BOUNUS, winningNumber, bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
-  #validate(winningNumber, bonusNumber) {
-    validate.isInteger(bonusNumber);
-    validate.startZero(bonusNumber);
-    validate.isNumberRange(bonusNumber);
+  #validate(scope, winningNumber, bonusNumber) {
+    validate.isInteger(scope, bonusNumber);
+    validate.startZero(scope, bonusNumber);
+    validate.isNumberRange(scope, bonusNumber);
 
     if (winningNumber.includes(Number(bonusNumber))) {
-      throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.');
+      throw new Error(
+        `${ERROR_MESSAGE.LOGO} 당첨번호와 ${scope} ${ERROR_MESSAGE.NO_DUPLICATION}`
+      );
     }
   }
 

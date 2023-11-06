@@ -1,3 +1,5 @@
+import { LOTTO } from '../utils/constants.js';
+
 class ReturnRate {
   #returnRate;
 
@@ -7,13 +9,20 @@ class ReturnRate {
 
   #calcaulteLottoRate(lottoCount, lottoTicketResult) {
     const totalWinningMoney = this.#calcaulteWinning(lottoTicketResult);
-    let returnRate = (totalWinningMoney / (lottoCount * 1000)) * 100;
+    let returnRate =
+      (totalWinningMoney / (lottoCount * LOTTO.AMOUNT_UNIT)) * 100;
     returnRate = this.#roundRate(returnRate);
     this.#returnRate = returnRate;
   }
 
   #calcaulteWinning(lottoTicketResult) {
-    const winningMoney = [5000, 50000, 1500000, 30000000, 2000000000]; //순서대로 5등 4등 3등 2등 1등
+    const winningMoney = [
+      LOTTO.FIFTH_PLACE,
+      LOTTO.FOURTH_PLACE,
+      LOTTO.THIRD_PLACE,
+      LOTTO.SECOND_PLACE,
+      LOTTO.FIRST_PLACE,
+    ];
     let totalWinningMoney = 0;
 
     lottoTicketResult.forEach((rankCount, rank) => {
