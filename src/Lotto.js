@@ -12,6 +12,9 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    if (new Set(numbers).size < 6) {
+      throw new Error('[ERROR] 각 로또 번호는 중복이 불가합니다.');
+    }
   }
 
   #initializeResult() {
@@ -24,8 +27,7 @@ class Lotto {
     };
   }
 
-  printResult(issuedTickets, bonus) {
-    const result = this.#getResult(issuedTickets, bonus);
+  printResult(result) {
     Console.print(`3개 일치 (5,000원) - ${result.three}개`);
     Console.print(`4개 일치 (50,000원) - ${result.four}개`);
     Console.print(`5개 일치 (1,500,000원) - ${result.five}개`);
@@ -35,7 +37,7 @@ class Lotto {
     Console.print(`6개 일치 (2,000,000,000원) - ${result.six}개`);
   }
 
-  #getResult(issuedTickets, bonus) {
+  getResult(issuedTickets, bonus) {
     const result = this.#initializeResult();
     issuedTickets.forEach((issuedNumbers) => {
       const totalMatched = this.#countMatchingNumbers(issuedNumbers);
