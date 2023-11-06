@@ -29,4 +29,10 @@ export const MESSAGES = Object.freeze({
     PLACE_HOLDER: "구입금액을 입력해 주세요.",
     RESULT: (count) => `${count}개를 구매했습니다.`,
   },
+  WINNING_NUMBER: {
+    PLACE_HOLDER: "당첨 번호를 입력해 주세요.",
+  },
+  BONUS_NUMBER: {
+    PLACE_HOLDER: "보너스 번호를 입력해 주세요.",
+  },
 });
