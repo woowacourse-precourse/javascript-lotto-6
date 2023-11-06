@@ -15,17 +15,14 @@ export const validateLotto = {
     return numbers.length !== 6;
   },
   isOneToFourtyFive(numbers) {
-    return numbers >= 1 && numbers <= 45;
+    return numbers.some((element) => element < 1 && element > 45);
   },
   isNotDuplicate(numbers) {
     return numbers.some(
       (element) => numbers.indexOf(element) !== numbers.lastIndexOf(element)
     );
   },
-  isNotBlank(numbers) {
-    return numbers.some((element) => element === "");
-  },
-  isNotSpecialSymbol(numbers) {
-    return numbers.some((element) => reg.test(element));
+  isNumber(numbers) {
+    return numbers.some((element) => Number.isNaN(element));
   },
 };
