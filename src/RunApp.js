@@ -7,6 +7,7 @@ import validateBonusNumber from "./util/validateBonusNumber.js";
 class RunApp {
   constructor() {
     this.numbers = [];
+    this.bonus = [];
   }
 
   async main() {
@@ -28,8 +29,9 @@ class RunApp {
     const bonusNumber = await printBonusNumber();
     if (!validateBonusNumber(this.numbers, bonusNumber))
       throw new Error(`${ErrorMessages.BONUS_NUMBER_ERROR_MESSAGE}`);
-    this.numbers.push(bonusNumber);
+    this.bonus.push(bonusNumber);
     console.log(this.numbers);
+    console.log(this.bonus);
   }
 }
 
