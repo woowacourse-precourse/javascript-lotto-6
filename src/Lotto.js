@@ -1,3 +1,4 @@
+import { LOTTO } from "./constants/lotto.js";
 import { ERORR_MESSAGE } from "./constants/message.js";
 import { Validator } from "./utils/validator.js";
 
@@ -11,22 +12,20 @@ class Lotto {
 
   #validate(numbers) {
     const numberArray = numbers.split(",");
+
+    if (!this.isLottoFormat(numberArray)) {
+      throw new Error(ERORR_MESSAGE.formatError);
+    }
     if (!this.isLengthValid(numberArray)) {
       throw new Error(ERORR_MESSAGE.lengthError);
     }
     if (this.isDuplicates(numberArray)) {
       throw new Error(ERORR_MESSAGE.duplicateError);
     }
-    if (!this.isLottoFormat(numberArray)) {
-      throw new Error(ERORR_MESSAGE.formatError);
-    }
   }
 
   isLengthValid(numbers) {
-    return (
-      numbers.length === 6 &&
-      numbers.every((number) => Validator.isNumber(number))
-    );
+    return numbers.length === LOTTO.length;
   }
 
   isDuplicates(numbers) {
@@ -35,7 +34,10 @@ class Lotto {
   }
 
   isLottoFormat(numbers) {
-    return numbers.every((number) => number >= 1 && number <= 45);
+    return numbers.every(
+      (number) =>
+        Validator.isNumberInRange(number) && Validator.isNumber(number)
+    );
   }
 }
 
