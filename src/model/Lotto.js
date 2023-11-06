@@ -1,4 +1,4 @@
-import { Place } from '../utils/Place.js';
+import { Place } from '../utils/Statistics.js';
 
 class Lotto {
   #numbers;
@@ -31,24 +31,24 @@ class Lotto {
   compareNumbers(winningNumbers, bonusNumber) {
     const convertedWinningNumbers = winningNumbers.map((num) =>
       parseInt(num, 10)
-    );
+    ); // 사용자 입력 문자배열 -> 숫자형태로 변환
     this.winningCount = convertedWinningNumbers.filter((number) =>
       this.#numbers.includes(number)
-    ).length;
-    this.addCountPlace(bonusNumber);
+    ).length; // 번호 일치 개수
+    this.calculateRank(bonusNumber);
   }
 
-  addCountPlace(bonusNumber) {
+  calculateRank(bonusNumber) {
     if (this.winningCount === 3) Place['5th'] += 1;
     if (this.winningCount === 4) Place['4th'] += 1;
     if (this.winningCount === 5) Place['3rd'] += 1;
-    if (this.winningCount === 5 && this.checkBonusNumber(bonusNumber)) {
+    if (this.winningCount === 5 && this.existBonusNumber(bonusNumber)) {
       Place['2nd'] += 1;
     }
     if (this.winningCount === 6) Place['1st'] += 1;
   }
 
-  checkBonusNumber(bonusNumber) {
+  existBonusNumber(bonusNumber) {
     if (this.#numbers.some((number) => number === parseInt(bonusNumber, 10))) {
       return true;
     }
