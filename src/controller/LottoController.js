@@ -27,6 +27,7 @@ class LottoController {
       this.#winningNumber,
       this.#bonusNumber
     );
+    this.outputView.printLottoResult(lottoTicketResult);
   }
 
   async setLottoCount() {
