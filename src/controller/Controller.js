@@ -53,4 +53,11 @@ class controller {
       this.setWinningLottoNumbers();
     }
   }
+
+  async #setBonusNumber() {
+    const bonusNumber = await this.#inputView.readBonusNumber();
+
+    this.#winningLotto.setBonusNumber(Number(bonusNumber));
+    this.calculateStatistics();
+  }
 }
