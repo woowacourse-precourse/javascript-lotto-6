@@ -1,4 +1,6 @@
-class Lotto {
+import { InputError } from './utils/error';
+import { ERROR, LOTTERY } from './constants';
+export default class Lotto {
   #numbers;
 
   constructor(numbers) {
@@ -7,12 +9,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTERY.NUM_COUNT) {
+      throw new InputError(ERROR.NOT_SIX_NUMBERS);
     }
   }
-
-  // TODO: 추가 기능 구현
 }
-
-export default Lotto;
