@@ -20,6 +20,7 @@ class App {
     this.Lotto = new Lotto(winningNum);
 
     let bonusNum = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BONUSNUM);
+    this.Lotto.checkNumRange(bonusNum);
   }
 }
 
