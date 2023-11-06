@@ -1,20 +1,21 @@
 // import Validator from './model/Validator.js';
 import { ERROR } from '../util/constant.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class Bonus {
   #number;
 
   constructor(bonus, lotto) {
-    this.#validate(bonus, lotto);
     this.#number = bonus;
-    return this.#number;
+    this.#validate(bonus, lotto);
   }
 
   #validate(bonus, lotto) {
     this.checkWords(bonus);
     this.checkRange(Number(bonus));
     this.checkSameNumber(Number(bonus), lotto);
-    console.log(bonus, lotto);
+    // console.log(bonus, lotto);
+    // return this.#number;
   }
 
   checkRange(bonus) {

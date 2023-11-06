@@ -10,12 +10,13 @@ import { Console } from '@woowacourse/mission-utils';
 export default class LottoController {
   #lottoAmount;
   #lottoList;
-  #correctNumbers;
   #lotto;
   #bonus;
+  #ranking;
 
   constructor() {
     this.generate = new LottoGenerator();
+    this.calculate = new Calculate();
   }
 
   async start() {
@@ -39,7 +40,7 @@ export default class LottoController {
   }
 
   async generateLottos(inputValue) {
-    this.#lottoAmount = Calculate.countLottoAmounnt(inputValue);
+    this.#lottoAmount = this.calculate.countLottoAmounnt(inputValue);
     this.#lottoList = this.generate.startGenerate(this.#lottoAmount);
     OutputView.printLottoList(this.#lottoList);
     this.inputUserLottoNumber();
@@ -53,8 +54,9 @@ export default class LottoController {
   #lottoNumberValidate(inputValue) {
     try {
       // this.#correctNumbers = inputValue.split(',');
-      this.#correctNumbers = inputValue.split(',').map(number => Number(number));
-      this.#lotto = new Lotto(this.#correctNumbers);
+      let correctNumbers = inputValue.split(',').map(number => Number(number));
+      new Lotto(correctNumbers);
+      this.#lotto = correctNumbers;
       this.inputBonusNumber();
     } catch (error) {
       OutputView.printError(error);
@@ -69,10 +71,24 @@ export default class LottoController {
 
   #bonusNumberValidate(bonusNumber) {
     try {
-      this.#bonus = new Bonus(bonusNumber, this.#lotto);
+      new Bonus(bonusNumber, this.#lotto);
+      this.#bonus = bonusNumber;
+      this.#calculateRank();
+      // Console.print('여긴어디인가보너스인가');
+      // Console.print(this.#bonus);
     } catch (error) {
       OutputView.printError(error);
       this.inputBonusNumber();
     }
+  }
+
+  async #calculateRank() {
+    this.#ranking = await this.calculate.countRanking(this.#lottoList, this.#lotto, this.#bonus);
+    this.printRanking();
+  }
+
+  printRanking() {
+    Console.print('여기는 콘트롤');
+    Console.print(this.#ranking);
   }
 }
