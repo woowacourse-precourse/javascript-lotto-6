@@ -1,5 +1,5 @@
 import ERROR from '../src/constants/Error.js';
-import Validator from '../src/Validator.js';
+import { Validator } from '../src/Validator.js';
 import CustomError from '../src/CustomError.js';
 
 describe('입력값 공통 유효성 검사 테스트', () => {
@@ -9,11 +9,11 @@ describe('입력값 공통 유효성 검사 테스트', () => {
     test.each([
       {
         input: '',
-        message: ERROR.COMMON_NOT_INPUT,
+        message: ERROR.COMMON_INPUT,
       },
       {
         input: 'space test',
-        message: ERROR.COMMON_NOT_WHITESPACE,
+        message: ERROR.COMMON_WHITESPACE,
       },
     ])('입력값 "$input"에 대한 테스트', ({ input, message }) => {
       expect(commonValidator(input)).toThrow(new CustomError(message));
