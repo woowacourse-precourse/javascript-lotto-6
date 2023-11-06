@@ -1,10 +1,12 @@
-import { LOTTO_SETTINGS } from "./settings.js";
-
 export default class LottoYieldCalculator {
-  static caculateYieldRate(result, money) {
+  #setting;
+  constructor(setting) {
+    this.#setting = setting;
+  }
+  caculateYieldRate(result, money) {
     const totalPrize = Object.entries(result).reduce(
       (accPrize, [key, matchCount]) => {
-        return accPrize + LOTTO_SETTINGS.WINNINGS[key].prize * matchCount;
+        return accPrize + this.#setting.WINNINGS[key].prize * matchCount;
       },
       0
     );
@@ -12,8 +14,8 @@ export default class LottoYieldCalculator {
     return yieldRate;
   }
 
-  static getResult(lottosNumbers, drawnLottoNumbers, bonusNumber) {
-    const result = Object.keys(LOTTO_SETTINGS.WINNINGS).reduce((acc, prize) => {
+  getResult(lottosNumbers, drawnLottoNumbers, bonusNumber) {
+    const result = Object.keys(this.#setting.WINNINGS).reduce((acc, prize) => {
       acc[prize] = 0;
       return acc;
     }, {});
@@ -29,7 +31,7 @@ export default class LottoYieldCalculator {
     return result;
   }
 
-  static #checkMatchCount(lottonumbers, drawnLottoNumbers, bonusNumber) {
+  #checkMatchCount(lottonumbers, drawnLottoNumbers, bonusNumber) {
     const matchCount = lottonumbers.filter((number) =>
       drawnLottoNumbers.includes(number)
     ).length;
@@ -38,11 +40,11 @@ export default class LottoYieldCalculator {
     return { matchCount, hasBonusNumber };
   }
 
-  static #findPrizeKey(matchCount, isBonusMatched) {
-    for (const [key, { matchNum }] of Object.entries(LOTTO_SETTINGS.WINNINGS)) {
+  #findPrizeKey(matchCount, isBonusMatched) {
+    for (const [key, { matchNum }] of Object.entries(this.#setting.WINNINGS)) {
       if (
         matchCount === matchNum &&
-        (!isBonusMatched || key === LOTTO_SETTINGS.PRIZE_RANKS.SECOND_PRIZE)
+        (!isBonusMatched || key === this.#setting.PRIZE_RANKS.SECOND_PRIZE)
       ) {
         return key;
       }

@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import LOTTO_SETTINGS from "../config/gameSetting.js";
+import { LOTTO_SETTINGS } from "../config/gameSetting.js";
 
 export default class OutputView {
   static printPurchseResults(numOfLottos) {

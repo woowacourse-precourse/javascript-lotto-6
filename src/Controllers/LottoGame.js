@@ -5,6 +5,7 @@ import { Random, Console } from "@woowacourse/mission-utils";
 import OutputView from "../Views/OutputView.js";
 import LottoYieldCalculator from "../service/LottoYieldCalculator.js";
 import DrawnLotto from "../Models/DrawnLotto.js";
+import { LOTTO_SETTINGS } from "../config/gameSetting.js";
 
 export default class LottoGame {
   static async start() {
@@ -52,14 +53,15 @@ export default class LottoGame {
 
     const { drawnLottoNumbers, bonusNumber } = drawnLotto.getFullNumbers();
 
-    const result = LottoYieldCalculator.getResult(
+    const lottoYieldCalculator = new LottoYieldCalculator(LOTTO_SETTINGS);
+    const result = lottoYieldCalculator.getResult(
       lottos,
       drawnLottoNumbers,
       bonusNumber
     );
 
     OutputView.printResultMessage(result);
-    const yieldRate = LottoYieldCalculator.caculateYieldRate(
+    const yieldRate = lottoYieldCalculator.caculateYieldRate(
       result,
       money.getMoney()
     );

@@ -1,5 +1,5 @@
 import LottoError from "../Error/LottoError.js";
-import LOTTO_SETTINGS from "../config/gameSetting.js";
+import { LOTTO_SETTINGS } from "../config/gameSetting.js";
 
 class Lotto {
   #numbers;
