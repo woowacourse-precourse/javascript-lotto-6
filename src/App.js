@@ -10,6 +10,8 @@ class App {
     const cost = await this.payLottoCost();
     const lottos = this.getLotto(cost);
     this.printLotto(lottos);
+    await this.setPrizeNumber();
+    await this.setBonusNumber();
   }
 
   async payLottoCost() {
@@ -34,6 +36,26 @@ class App {
       const formatedLotto = lotto.join(', ');
       printMessage(`[${formatedLotto}]`);
     });
+  }
+
+  async setPrizeNumber() {
+    try {
+      const prize = await readLineAsync(MESSAGE.input_prize);
+      this.#lottoShop.prizeNumber = prize.split(',').map((v) => v.trim());
+    } catch (error) {
+      printMessage(error.message);
+      await this.setPrizeNumber();
+    }
+  }
+
+  async setBonusNumber() {
+    try {
+      const bonus = await readLineAsync(MESSAGE.input_bonus);
+      this.#lottoShop.bonusNumber = bonus.trim();
+    } catch (error) {
+      printMessage(error.message);
+      await this.setBonusNumber();
+    }
   }
 }
 
