@@ -1,4 +1,3 @@
-import { Random } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGES } from "./constants/messages.js";
 import { REWARDS } from "./constants/lottoNumbers.js";
 
@@ -60,6 +59,12 @@ class Lotto {
     reward += lottoBoard.sixSame * REWARDS.FIRST;
 
     return reward;
+  }
+
+  calculateRateOfReturn(totalReward, money) {
+    const temp = (totalReward / money) * 100;
+
+    return (Math.round(temp * 10) / 10).toFixed(1);
   }
 }
 
