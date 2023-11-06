@@ -46,6 +46,20 @@ class App {
       const [intersection, isBonusNumberMatch] = ticket.compareNumbers(winningNumbers, bonusNumber);
       ticket.updateRank(intersection, isBonusNumberMatch);
     });
+
+    const rankCounts = [0, 0, 0, 0, 0];
+
+    ticketArr.forEach((ticket) => {
+      if (ticket.Rank >= 1 && ticket.rank <= 5) {
+        rankCounts[ticket.Rank - 1]++;
+      }
+    });
+
+    Console.print(`3개 일치 (5,000원) - ${rankCounts[4]}개`);
+    Console.print(`4개 일치 (50,000원) - ${rankCounts[3]}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${rankCounts[2]}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${rankCounts[1]}개`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${rankCounts[0]}개`);
   }
 }
 
