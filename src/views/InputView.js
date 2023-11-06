@@ -16,7 +16,12 @@ const InputView = {
 
   async winningNumbers() {
     const inputWinning = await Console.readLineAsync(gameMessage.INPUT.WINNING);
-    Validate.notNull(inputWinning);
+    try {
+      Validate.winningNumbers(inputWinning);
+    } catch (error) {
+      Console.print(error.message);
+      return InputView.winningNumbers();
+    }
     return inputWinning;
   },
 };
