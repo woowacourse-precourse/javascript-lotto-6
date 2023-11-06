@@ -36,7 +36,7 @@ class App {
 
   getLottoNumbers(count) {
     const playCount = count / 1000;
-    const allLottoTickets = Array.from({length: playCount}, () => this.printRandomLottoNumbers());
+    const allLottoTickets = Array.from({length: playCount}, () => this.generateRandomLottoNumbers());
     const lottoInfo = allLottoTickets.map((lotto) => `[${lotto.join(', ')}]`).join('\n');
 
     Console.print(`${playCount}개를 구매했습니다.`);
@@ -45,7 +45,7 @@ class App {
     return allLottoTickets;
   }
 
-  printRandomLottoNumbers() {
+  generateRandomLottoNumbers() {
     const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
     const sortedNumbers = randomNumbers.sort((a, b) => a - b);
     return sortedNumbers;
@@ -89,21 +89,25 @@ class App {
   }
 
   getResult(numbers, lottoNumbersArray, intBonusNumber) {
-    const results = {
+    const initialResults = {
+      zero: 0,
       three: 0,
       four: 0,
       five: 0,
       bonus: 0,
       all: 0,
     };
-    
-    for (const lottoNumbers of lottoNumbersArray) {
-      const matchResult = numbers.matchLotto(lottoNumbers, intBonusNumber);
-      if (matchResult == 'zero') continue;
-      results[matchResult]++;
-    }
-
+  
+    const results = lottoNumbersArray.map((lottoNumbers) => numbers.matchLotto(lottoNumbers, intBonusNumber))
+      .reduce((acc, matchResult) => this.accumulateResult(acc, matchResult), { ...initialResults })
+  
     return results;
+  }
+
+  accumulateResult(acc, matchResult) {
+    acc[matchResult]++;
+
+    return acc;
   }
 
   printResult(results, profitRate) {
@@ -114,24 +118,25 @@ class App {
     Console.print(`5개 일치 (1,500,000원) - ${results.five}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${results.bonus}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${results.all}개`);
-    Console.print(`총 수익률은 ${profitRate}입니다.`);
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
   getProfitRate(amount, results) {
     const prizePerResult = {
+      zero: 0,
       three: 5000,
       four: 50000,
       five: 1500000,
       bonus: 30000000,
       all: 2000000000,
     };
+    Console.print(results);
     const totalPrize = Object.keys(results).reduce((sum, key) => {
       return sum + results[key] * prizePerResult[key];
     }, 0);
     const profitRate = (totalPrize / amount) * 100;
-    const roundedProfitRate = profitRate.toFixed(1);
   
-    return `${roundedProfitRate}%`;
+    return profitRate.toFixed(1);
   }
 }
 
