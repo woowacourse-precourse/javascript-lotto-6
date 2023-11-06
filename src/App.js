@@ -10,8 +10,10 @@ class App {
 
   async play() {
     const purchaseAmount = await this.user.inputPurchaseAmount();
-    this.lottoList = this.computer.makeLottoList(purchaseAmount);
-    const winNumber = await this.user.inputWinNumber();
+    this.computer.printPurchaseCount(purchaseAmount);
+    this.lottoList = this.computer.makeLottoList();
+    const winNumbers = await this.user.inputWinNumbers();
+    const bonusNumber = await this.user.inputBonusNumber(winNumbers);
   }
 }
 

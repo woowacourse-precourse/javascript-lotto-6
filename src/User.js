@@ -16,7 +16,7 @@ class User {
   }
 
   #validateType(value){
-    if (Number.isNaN(value) || !(Number.isInteger(value))){
+    if (Number.isNaN(value) || !(Number.isInteger(value) || value < 0)){
       throw new LottoError(ERROR_MESSAGE.WRONG_TYPE);
     }
   }
@@ -27,24 +27,24 @@ class User {
     }
   }
 
-  async inputWinNumber(){
-    this.winNumber = await Console.readLineAsync(INPUT_MESSAGE.WIN_NUMBER);
-    this.#validateWinNumber(this.winNumber);
-    const formattedList = this.winNumber.split(',').map(item => Number(item));
+  async inputWinNumbers(){
+    this.winNumbers = await Console.readLineAsync(INPUT_MESSAGE.WIN_NUMBER);
+    this.#validateWinNumber(this.winNumbers);
+    const formattedList = this.winNumbers.split(',').map(item => Number(item));
     return formattedList;
   }
 
   #validateWinNumber(){
-    this.#validateComma(this.winNumber);
-    const formattedList = this.winNumber.split(",").map(item => Number(item));
+    this.#validateComma(this.winNumbers);
+    const formattedList = this.winNumbers.split(",").map(item => Number(item));
     formattedList.forEach((element) => this.#validateType(element));
     this.#validateLength(formattedList);
-    this.#validateRange(formattedList);
+    formattedList.forEach((number) => this.#validateRange(number));
     this.#validateOverlap(formattedList);
   }
 
   #validateComma(inputValue){
-    if (inputValue.startsWith(',') || inputValue.endsWith(',')) {
+    if (inputValue.startsWith(",") || inputValue.endsWith(",")) {
       throw new LottoError(ERROR_MESSAGE.WRONG_COMMA);
     }
   }
@@ -55,17 +55,33 @@ class User {
     }
   }
 
-  #validateRange(targetArray){
-    targetArray.forEach((number) => {
-      if (number < LOTTO_PICK.MIN_NUMBER || number > LOTTO_PICK.MAX_NUMBER){
-        throw new LottoError(ERROR_MESSAGE.WRONG_RANGE);
-      }
-    })
+  #validateRange(value){
+    if (value < LOTTO_PICK.MIN_NUMBER || value > LOTTO_PICK.MAX_NUMBER){
+      throw new LottoError(ERROR_MESSAGE.WRONG_RANGE);
+    }
   }
   #validateOverlap(targetArray){
-    const targetArraySet = new Set(targetArray);
-    if (targetArraySet.size !== targetArray.length){
+    const targetArrayDuplicate = new Set(targetArray);
+    if (targetArrayDuplicate.size !== targetArray.length){
       throw new LottoError(ERROR_MESSAGE.OVERLAPPED_VALUE); 
+    }
+  }
+
+  async inputBonusNumber(winNumbers){
+    this.bonusNumber = Number(await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER));
+    this.#validateBonusNumber(this.bonusNumber, winNumbers);
+    return this.bonusNumber;
+  }
+
+  #validateBonusNumber(inputBonus, winNumbers){
+    this.#validateType(inputBonus);
+    this.#validateRange(inputBonus);
+    this.#isInWinNumbers(inputBonus, winNumbers);
+  }
+
+  #isInWinNumbers(inputBonus, winNumbers){
+    if (winNumbers.includes(inputBonus)){
+      throw new LottoError(ERROR_MESSAGE.OVERLAPPED_VALUE);
     }
   }
 }
