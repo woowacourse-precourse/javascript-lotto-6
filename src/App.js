@@ -6,6 +6,7 @@ class App {
     this.pay = 0; // 구입 개수
     this.lottos = []; // 발행한 로또
     this.winning = []; // 당첨 번호
+    this.bonus = 0; // 보너스 번호
   }
 
   async inputPay() {
@@ -48,10 +49,36 @@ class App {
     this.winning = winning;
   }
 
+  async inputBonus() {
+    let isValid = false;
+
+    while (!isValid) {
+      try {
+        const input = await Console.readLineAsync(
+          "\n 보너스 번호를 입력해 주세요. \n"
+        );
+        const bonusNum = +input;
+        if (this.winning.includes(bonusNum)) {
+          throw new Error(
+            "[ERROR] 당첨 번호와 중복되지 않는 숫자를 입력해주세요."
+          );
+        }
+        if (bonusNum < 1 || bonusNum > 45) {
+          throw new Error("[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요.");
+        }
+        this.bonus = bonusNum;
+        isValid = true;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
   async play() {
     await this.inputPay();
     await this.makeLotto();
     await this.inputWinning();
+    await this.inputBonus();
   }
 }
 
