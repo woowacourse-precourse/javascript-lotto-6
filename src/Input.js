@@ -35,6 +35,23 @@ class Input {
         throw new Error("[ERROR] 숫자의 범위는 1~45 이어야 합니다.");
     });
   }
+
+  async readBonusNumber() {
+    const INPUT = await MissionUtils.Console.readLineAsync();
+    this.validBonusNumber(INPUT);
+    return INPUT;
+  }
+
+  validBonusNumber(input) {
+    const BONUS_NUMBER = Number(input);
+    if (Number.isNaN(BONUS_NUMBER))
+      throw new Error("[ERROR] 숫자만 입력해주세요.");
+    if (!input) throw new Error("[ERROR] 공백을 입력하셨습니다.");
+    if (BONUS_NUMBER < 1 || BONUS_NUMBER > 45)
+      throw new Error("[ERROR] 숫자의 범위는 1~45 이어야 합니다.");
+    if (this.lottoNumbers.includes(BONUS_NUMBER))
+      throw new Error("[ERROR] 중복된 숫자를 입력하셨습니다.");
+  }
 }
 
 export default Input;
