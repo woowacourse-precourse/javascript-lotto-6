@@ -9,4 +9,8 @@ class InputView {
     const playerInput = await Console.readLineAsync(INPUT_WINNING_NUMBER);
     return playerInput;
   }
+
+  stringToNumber(inputNumber) {
+    return inputNumber.split(',').map(Number);
+  }
 }
