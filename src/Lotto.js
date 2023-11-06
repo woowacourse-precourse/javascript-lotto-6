@@ -15,6 +15,14 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
+  // 두 로또 객체를 비교하여 일치하는 숫자의 개수를 반환
+  static getMatchCount(win, player) {
+    const matchNumbers = win.getNumbers().filter((number) => {
+      return player.getNumbers().includes(number);
+    });
+    return matchNumbers.length;
+  }
 }
 
 export default Lotto;

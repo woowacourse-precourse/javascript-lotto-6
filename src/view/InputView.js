@@ -17,7 +17,7 @@ class InputView {
         LottoValidator.isInteger(winNumbers);
         LottoValidator.isValidRange(winNumbers);
         LottoValidator.isDuplicated(winNumbers);
-        return winNumbers;
+        return winNumbers.map((num) => parseInt(num));
     }
 
     static async readBonusNumber() {
