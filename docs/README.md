@@ -14,7 +14,8 @@
 &emsp;:heavy_exclamation_mark: 당첨번호는 중복되지 않아야 한다.
 
 :white_check_mark: 사용자는 보너스번호를 한 개 입력할 수 있어야 한다.  
-&emsp;:heavy_exclamation_mark: 보너스번호는 당첨번호와 중복되지 않아야 한다.
+&emsp;:heavy_exclamation_mark: 보너스번호는 당첨번호와 중복되지 않아야 한다.  
+&emsp;:heavy_exclamation_mark: 보너스번호는 1에서 45사이의 정수여야 한다.
 
 :white_check_mark: 로또 구입 금액에 해당하는 만큼 로또번호를 출력한다.  
 &emsp;:white_check_mark: 로또 번호는 구입금액 1,000원 당 한 장이다.  
