@@ -1,4 +1,4 @@
-import ValidationUtils from '../utils/ValidationUtils';
+import ValidationUtils from '../utils/ValidationUtils.js';
 
 const { checkIsNumber, checkIncludedZero, checkIsDuplicated } = ValidationUtils;
 
