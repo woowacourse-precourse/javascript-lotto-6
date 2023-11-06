@@ -1,7 +1,5 @@
 import { print } from "./utils/print.js";
 import { calcPurchaseQuantity } from "./Calc/calcPurchaseQuantity.js";
-import { BONUS_NUMBER_INPUT_REQUEST } from "./utils/message.js";
-import { getValidBonusNumber } from "./GetValidBonusNumber.js";
 import { calcResult } from "./Calc/CalcResult.js";
 import { printResult } from "./PrintResult.js";
 import { calcProfitRate } from "./Calc/CalcProfitRate.js";
@@ -9,6 +7,7 @@ import { calcProfitRate } from "./Calc/CalcProfitRate.js";
 import LottoMachine from "./domain/LottoMachine.js";
 import Purchase from "./domain/Purchase.js";
 import WinningNumber from "./domain/WinningNumber.js";
+import BonusNumber from "./domain/BonusNumber.js";
 
 class App {
   purchase_amount;
@@ -46,12 +45,11 @@ class App {
 
     // 4. 당첨 번호 입력받기
     const winning_number = new WinningNumber();
-    this.winning_number = await winning_number.returnWinningNumber();
+    this.winning_number = await winning_number.getWinningNumber();
 
-    // 5. 보너스 번호 입력 안내 문구 출력
-    print(`\n${BONUS_NUMBER_INPUT_REQUEST}`);
-    // 10. 보너스 번호 입력받기
-    this.bonus_number = await getValidBonusNumber();
+    // 5. 보너스 번호 입력받기
+    const bonus_number = new BonusNumber();
+    this.bonus_number = await bonus_number.getBonusNumber();
 
     // 11. 발행한 로또 번호와 당첨 번호 비교하기
     const result = calcResult(

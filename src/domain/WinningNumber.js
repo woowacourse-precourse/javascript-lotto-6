@@ -8,7 +8,7 @@ class WinningNumber {
     print(`\n${WINNING_NUMBERS_INPUT_REQUEST}`);
   }
 
-  async getWinningNumber() {
+  async returnWinningNumber() {
     const input = await Console.readLineAsync("");
     const numbers = input.split(",");
 
@@ -18,9 +18,9 @@ class WinningNumber {
     return number_list.map(Number);
   }
 
-  async returnWinningNumber() {
+  async getWinningNumber() {
     this.printMessage();
-    const winning_number = await this.getWinningNumber();
+    const winning_number = await this.returnWinningNumber();
     return winning_number;
   }
 }
