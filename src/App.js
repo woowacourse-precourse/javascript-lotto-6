@@ -73,6 +73,16 @@ class App {
     return parsedWinnigNumbers;
   }
 
+  checkWinngNumbers = (parsedWinnigNumbers) => {
+    if(parsedWinnigNumbers.length != 6) throw new Error('[ERROR] : the length of winning numbers is not 6.');
+
+    parsedWinnigNumbers.forEach((winningNumber) => {
+      if(!Number.isInteger(winningNumber)) throw new Error('[ERROR] : winning number must be integer.');
+
+      if(winningNumber < 1 || winningNumber > 45) throw new Error('[ERROR] : winning number must be in range 1~45');
+    })
+  }
+
 
 
 
@@ -103,10 +113,11 @@ class App {
 
       const parsedWinnigNumbers = this.parseWinningNumbers(winningNumbers)
 
-      console.log(parsedWinnigNumbers);
+      this.checkWinngNumbers(parsedWinnigNumbers);
 
-      
+      MissionUtils.Console.print('보너스 번호를 입력해 주세요.');
 
+      const bonusNumber = await this.getUserInput();
 
     } catch(err) {
       return Promise.reject(err);
