@@ -46,14 +46,22 @@ class LottoNumber {
   );
 
   /**
+   * 로또의 숫자입니다.
    * @type {number}
    */
   #number;
 
+  /**
+   * @param {number} number 로또의 숫자입니다.
+   */
   constructor(number) {
     this.#number = number;
   }
 
+  /**
+   * @param {number} number 로또의 숫자입니다.
+   * @returns {LottoNumber} 로또 숫자입니다.
+   */
   static valueOf(number) {
     LottoNumber.#validate(number);
     return LottoNumber.#numbers[number];
@@ -66,12 +74,16 @@ class LottoNumber {
     if (!Number.isInteger(number)) {
       throw new ApplicationError(LottoNumber.ERROR_MESSAGES.notInteger);
     }
-    const [min, max] = [LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER];
+    const { MIN_NUMBER: min, MAX_NUMBER: max } = LottoNumber;
     if (isOutOfRange(number, { min, max })) {
       throw new ApplicationError(LottoNumber.ERROR_MESSAGES.outOfRange);
     }
   }
 
+  /**
+   * 로또의 숫자를 반환합니다.
+   * @returns {number} 로또의 숫자입니다.
+   */
   getNumber() {
     return this.#number;
   }
