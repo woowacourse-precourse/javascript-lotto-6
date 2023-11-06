@@ -26,4 +26,5 @@ export const ERROR_MESSAGE = {
   isSmallNumber: "[ERROR] 1000 이상의 금액만 입력 가능합니다.",
   isOnlySixNum: "[ERROR] 6자리의 숫자만 입력 가능합니다.",
   isIncorrecRage: "[ERROR] 1부터 45까지의 숫자만 입력 가능합니다.",
+  isDuplicatedNumber: "[ERROR] 중복되지 않는 숫자만 입력 가능합니다.",
 };
