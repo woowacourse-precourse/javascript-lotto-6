@@ -8,6 +8,7 @@ const ERROR_MESSAGES = {
   overRange: '[ERROR] 숫자는 1부터 45사이여야 합니다.',
   countError: '[ERROR] 티켓의 번호는 개수가 6개로 이루어져야 합니다.',
   notUnique: '[ERROR] 티켓의 번호는 중복되면 안됩니다.',
+  notSorted: '[ERROR] 티켓의 번호는 오름차순으로 정렬되어야 합니다.',
 };
 
 export default class ValidationService {
@@ -49,6 +50,15 @@ export default class ValidationService {
         throw new Error(ERROR_MESSAGES.notUnique);
       }
       uniqueArray.push(num);
+    });
+  }
+
+  isSorted(ticket) {
+    const sortedTickets = ticket.toSorted((a, b) => a - b);
+    ticket.forEach((num, index) => {
+      if (sortedTickets[index] != num) {
+        throw new Error(ERROR_MESSAGES.notSorted);
+      }
     });
   }
 }

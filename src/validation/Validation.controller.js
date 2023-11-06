@@ -25,6 +25,7 @@ export default class ValidationController {
       this.#validationService.isInRange(ticket);
       this.#validationService.hasSixNumbers(ticket);
       this.#validationService.isUnique(ticket);
+      this.#validationService.isSorted(ticket);
     });
   }
 }
