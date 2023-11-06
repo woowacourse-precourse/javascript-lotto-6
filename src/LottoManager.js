@@ -69,7 +69,7 @@ class LottoManager {
     Console.print(`${MESSAGES.THIRD_RESULT} ${dashboard.rankCount[2]}개`);
     Console.print(`${MESSAGES.SECOND_RESULT} ${dashboard.rankCount[1]}개`);
     Console.print(`${MESSAGES.FIRST_RESULT} ${dashboard.rankCount[0]}개`);
-    Console.print(`총 수익률은 ${earningsRate}%입니다.`);
+    Console.print(`총 수익률은 ${earningsRate}입니다.`);
   }
 }
 

@@ -35,6 +35,6 @@ describe("로또 클래스 테스트", () => {
     lotto.printNumbers();
 
     // then
-    expect(logSpy).toHaveBeenCalledWith([1, 2, 3, 4, 5, 6]);
+    expect(logSpy).toHaveBeenCalledWith("[1, 2, 3, 4, 5, 6]");
   });
 });

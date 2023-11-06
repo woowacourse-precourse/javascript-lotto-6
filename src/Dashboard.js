@@ -47,7 +47,7 @@ class Dashboard {
       return total + count * winningAmounts[index];
     }, 0);
 
-    const earningsRate = ((totalEarnings / investment) * 100).toFixed(1);
+    const earningsRate = ((totalEarnings / investment) * 100).toFixed(1) + "%";
     return earningsRate;
   }
 }

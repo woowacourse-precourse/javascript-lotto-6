@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { formatArrayToString } from "./libs/formatter.js";
 import {
   isArrLengthSix,
   hasDuplicate,
@@ -35,8 +36,8 @@ class Lotto {
 
   printNumbers() {
     this.#numbers.sort((a, b) => a - b);
-    const formattedNumbers = this.#numbers.map((num) => `${num}`).join(", ");
-    Console.print(`[${formattedNumbers}]`);
+    const formattedNumbers = formatArrayToString(this.#numbers);
+    Console.print(formattedNumbers);
   }
 
   get numbers() {

@@ -65,7 +65,7 @@ describe("로또 결과 테스트", () => {
     dashboard.updateDashboard(5);
     const earningsRate = dashboard.calculateEarnings(8000);
 
-    expect(earningsRate).toBe("62.5");
+    expect(earningsRate).toBe("62.5%");
   });
 
   test("수익률 계산 테스트 2", () => {
@@ -76,6 +76,6 @@ describe("로또 결과 테스트", () => {
 
     const earningsRate = dashboard.calculateEarnings(8000);
 
-    expect(earningsRate).toBe("25000750.0");
+    expect(earningsRate).toBe("25000750.0%");
   });
 });
