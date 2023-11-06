@@ -1,3 +1,6 @@
+import Lotto from "./Lotto.js";
+import { MissionUtils, Random } from "@woowacourse/mission-utils";
+
 const LOTTO_PRICE = 1000;
 
 export class Counter {
@@ -7,6 +10,9 @@ export class Counter {
     this.#inputMoneyValidater(money);
     this.#inputMoneyDivideValidater(money);
     this.#money = money;
+    this.counts = money/LOTTO_PRICE
+    this.list = [];
+    this.#publish(this.counts);
   }
 
   #inputMoneyValidater(money) {
@@ -27,5 +33,30 @@ export class Counter {
     let price = LOTTO_PRICE;
     const lottocounts = this.#money/price;
     return lottocounts
+  }
+
+  lottoCountPrinter(counts) {
+    this.count = counts
+    MissionUtils.Console.print("");
+    MissionUtils.Console.print(`${counts}개를 구매했습니다.`);
+  }
+
+  #publish(counts) {
+    for (let num = 0; num < counts; num++) {
+      const newLotto = this.createNewLotto();
+      this.list.push(newLotto);
+    }
+  }
+
+  createNewLotto() {
+    const newNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+
+    return new Lotto(newNumbers);
+  }
+
+  lottosPrinter() {
+    this.list.forEach((lotto) => {
+      lotto.printNumbers();
+    });
   }
 }

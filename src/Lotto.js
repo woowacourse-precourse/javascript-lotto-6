@@ -1,3 +1,5 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -6,7 +8,7 @@ class Lotto {
     this.#validateDuplicate(numbers);
     this.#validateRange(numbers);
     this.#numbers = numbers;
-    return this.#numberSort(this.#numbers);
+    //return this.numberSort(this.#numbers);
   }
 
   #validate(numbers) {
@@ -34,9 +36,15 @@ class Lotto {
     }
   }
 
-  #numberSort(numbers) {
-    numbers.sort((a, b) => a - b);
-    return numbers;
+  numberSort() {
+    this.#numbers.sort((a, b) => a - b);
+    return this.#numbers;
+  }
+
+  printNumbers() {
+    this.numberSort();
+
+    MissionUtils.Console.print(`[${this.#numbers.join(', ')}]`);
   }
 }
 

@@ -1,4 +1,4 @@
-import { numberSort, lottoPrinter } from "../src/App.js";
+import { lottoPrinter } from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const getLogSpy = () => {
