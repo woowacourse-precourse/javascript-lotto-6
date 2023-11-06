@@ -119,12 +119,10 @@ class LottoController {
       '5+': 30000000,
       6: 2000000000,
     };
-
     const prizeAmount = Object.keys(rankCount).reduce(
       (sum, rank) => sum + rankEarnings[rank] * rankCount[rank],
       0,
     );
-
     return prizeAmount;
   }
 
