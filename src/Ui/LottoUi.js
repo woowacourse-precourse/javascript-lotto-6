@@ -19,6 +19,12 @@ const LottoUi = {
     Console.print(`${numberOfLottos}${MESSAGE.FINISH_DRAW_LOTTOS}`);
   },
 
+  printPurchasedLottos(purchasedLottos) {
+    purchasedLottos.forEach((lotto) => {
+      Console.print(lotto);
+    });
+  },
+
   validatePurchaseAmount(purchaseAmount) {
     if (purchaseAmount % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT);
