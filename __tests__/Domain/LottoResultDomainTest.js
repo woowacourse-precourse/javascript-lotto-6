@@ -11,7 +11,7 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
-describe('CompareLottoController 테스트', () => {
+describe('LottoResultDomain 테스트', () => {
   let compareLottoController;
   let user;
   let modelAndView;

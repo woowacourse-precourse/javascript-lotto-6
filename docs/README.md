@@ -30,6 +30,7 @@
 - [Spring MVC 동작 방식과 구성요소] (https://kchs94.tistory.com/201)
 - [스프링 MVC - 구조이해] (https://catsbi.oopy.io/f52511f3-1455-4a01-b8b7-f10875895d5b)
 - [HTTP 통신을 알아보자] (https://www.mobiinside.co.kr/2022/09/08/http/)
+<br>
 
 # 📌 테스트 설계
 ## 도메인 단위
@@ -86,9 +87,17 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 - [x] : handlerMapping에서는 요청한 URL에 맞게 컨트롤러를 반환한다.
 - [x] : handlerAdapter에서 핵심로직을 실행 후 modelAndView 객체가 반환되어야 한다.
 - [x] : viewResolver에서 반환된 view객체는 LottoPosView여야 한다.
-- [] : 만약 처리하는 과정에서 에러가 발생하면 httpResponse의 status는 error가 되어야한다.
-- [] : 정상적으로 처리돠면 httpResponse의 status는 success가 되어야 한다.
+- [x] : 만약 처리하는 과정에서 에러가 발생하면 httpResponse의 status는 error가 되어야한다.
+- [x] : 정상적으로 처리돠면 httpResponse의 status는 success가 되어야 한다.
+<br>
 
+### 로또결과(LottoResult)
+- [x] : modelAndView객체의 프로퍼티 중 view는 LottoPos여야 한다.
+- [x] : modelAndView객체의 프로퍼티 중 data는 compareResult를 가지고 있어야 한다.
+- [x] : modelAndView객체의 프로퍼티 중 data는 profit를 가지고 있어야 한다.
+- [x] : compareResult는 몇 개 맞췄는지에 대한 데이터가 객체형태로 반환되어야 한다.
+- [x] : profit은 수익률이 반환되어야 한다.
+<br>
 
 # 📘 요구사항 정리
 
@@ -136,7 +145,9 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 - [x] : 에러 메시지는 [ERROR]로 시작해야 한다.
 - [x] : 에러 메시지 출력 후 해당 부분을 다시 입력 받는다.
 
-## 클래스 설계
+<br>
+
+# 🔒 클래스 설계
 ### Server(spring)
 #### Annotation/@controller (컨트롤러 싱글턴)
 @controller는 하나의 인스턴스를 보장받아야 한다.
