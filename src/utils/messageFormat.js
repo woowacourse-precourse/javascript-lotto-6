@@ -4,7 +4,7 @@ import { formatNumberWithCommasAndDecimals } from './index.js';
 
 export const MessageFormat = {
   error: (message) => `${ERROR.message.prefix} ${message}`,
-  purchaseConfirm: (number) => `${number}개를 구매했습니다.\n`,
+  purchaseConfirm: (number) => `\n${number}개를 구매했습니다.`,
   resultRow: (key, winCount = 0) => {
     const prizeInfo = LOTTO.lottoPrizesMap.get(key);
     const prize = prizeInfo.prize.toLocaleString();
