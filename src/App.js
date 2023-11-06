@@ -3,21 +3,32 @@ import Lotto from "./Lotto.js";
 import Bonus from "./Bonus.js";
 import Result from "./Result.js";
 import { Console, Random } from "@woowacourse/mission-utils";
-import { USER_PROMPT } from "./utils/constants.js";
+import { USER_PROMPT, RESULT, NUMBER } from "./utils/constants.js";
 
 class App {
   #lottoCount;
   #winningNumberList = [];
   #userWinningNumbers;
   #userBonusNumber;
+  #result;
+  #profit = 0;
 
-  constructor() {}
+  constructor() {
+    this.profitList = {
+      three: 5000,
+      four: 50000,
+      five: 1500000,
+      fiveBonus: 30000000,
+      six: 2000000000,
+    };
+  }
 
   async play() {
     await this.getLottoCount();
     this.generateWinningNumbers();
     await this.getUserWinningAndBonusNumbers();
     this.getResult();
+    this.printResult();
   }
 
   async inputLottoCount() {
@@ -77,7 +88,18 @@ class App {
       this.#userBonusNumber
     );
 
-    Console.print(result.getResult()); // 디버깅
+    this.#result = result.getResult();
+  }
+
+  printResult() {
+    const { three, four, five, fiveBonus, six } = this.#result;
+
+    Console.print(RESULT.STATISTICS);
+    Console.print(`${RESULT.THREE} - ${three}개`);
+    Console.print(`${RESULT.FOUR} - ${four}개`);
+    Console.print(`${RESULT.FIVE} - ${five}개`);
+    Console.print(`${RESULT.FIVE_BONUS} - ${fiveBonus}개`);
+    Console.print(`${RESULT.SIX} - ${six}개`);
   }
 }
 
