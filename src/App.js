@@ -126,6 +126,21 @@ class App {
     MissionUtils.Console.print(PRINT.RESULT_1ST + `${winResult[4]}개`);
   }
 
+  getProfit(input) {
+    const win1 = 2000000000;
+    const win2 = 30000000;
+    const win3 = 1500000;
+    const win4 = 50000;
+    const win5 = 5000;
+    const profit =
+      this.winResult[4] * win1 +
+      this.winResult[3] * win2 +
+      this.winResult[2] * win3 +
+      this.winResult[1] * win4 +
+      this.winResult[0] * win5;
+    return (100 + ((profit - input) / input) * 100).toFixed(2);
+  }
+
   async play() {
     const inputMoney = await this.askMoney();
     this.moneyTypeCheck(inputMoney);
@@ -146,6 +161,10 @@ class App {
 
     this.getWinResult(this.userResult, winBonus);
     this.printWinResult(this.winResult);
+
+    MissionUtils.Console.print(
+      `총 수익률은 ${this.getProfit(inputMoney)}% 입니다.`
+    );
   }
 }
 
