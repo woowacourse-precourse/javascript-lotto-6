@@ -12,14 +12,14 @@ class Calculate {
     });
     return result;
   }
-  
-    calculateRate(finalResult, amount) {
-      const finalAmount = Object.keys(VARIABLE.money).reduce(
-        (acc, key) => acc + VARIABLE.money[key] * finalResult[key],
-        0
-      );
-      return (finalAmount / amount * 100).toFixed(1);
-    }
+
+  calculateRate(finalResult, amount) {
+    const finalAmount = Object.keys(VARIABLE.money).reduce(
+      (acc, key) => acc + VARIABLE.money[key] * finalResult[key],
+      0
+    );
+    return (finalAmount / amount * 100).toFixed(1);
   }
-  
-  export default Calculate;
+}
+
+export default Calculate;
