@@ -1,5 +1,6 @@
 import Lotto from '../Lotto.js';
-import generateRandomNumbers from '../utils/generateRandomNumber.js';
+import { LOTTO_MAGICNUMBER, LOTTO_PRICE } from '../constants/LottoOption.js';
+import getRandomNumbersByAscending from '../utils/generateRandomNumber.js';
 
 export default class LottoService {
   #seedMoney;
@@ -12,15 +13,24 @@ export default class LottoService {
   }
 
   #buyLottoes() {
-    const amount = this.#seedMoney / 1000;
+    const amount = this.#seedMoney / LOTTO_PRICE;
 
     this.#lottoList = Array.from({ length: amount }, () => {
-      const randomNumbers = generateRandomNumbers(1, 45, 6);
+      const randomNumbers = getRandomNumbersByAscending(
+        LOTTO_MAGICNUMBER.minValue,
+        LOTTO_MAGICNUMBER.maxValue,
+        LOTTO_MAGICNUMBER.selectAmount
+      );
       return new Lotto(randomNumbers);
     });
   }
 
   getLottoes() {
-    return Array.from(this.#lottoList, (lotto) => lotto.getLottoNumbers());
+    return {
+      lottoList: Array.from(this.#lottoList, (lotto) =>
+        lotto.getLottoNumbers()
+      ),
+      lottoAmount: this.#seedMoney / LOTTO_PRICE,
+    };
   }
 }
