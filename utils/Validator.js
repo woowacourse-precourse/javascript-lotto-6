@@ -19,9 +19,11 @@ const Validator = {
   },
 
   validateLottoNumbers(lottoNumbersArray) {
-    if (new Set(lottoNumbersArray).size !== 6) return false;
-    if (lottoNumbersArray.some((lottoNumber) => checkNumberInRange(lottoNumber))) {
-      return false;
+    if (
+      new Set(lottoNumbersArray).size !== 6 ||
+      lottoNumbersArray.some((lottoNumber) => checkNumberInRange(lottoNumber))
+    ) {
+      return errorHandle(ERROR_MESSAGES.invalidLottoNumber);
     }
     return true;
   },
