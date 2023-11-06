@@ -5,6 +5,7 @@ class App {
   #orderPrice;
   #orderQuantity;
   #lottoOrder = [];
+  #winningNumbers;
 
   getUserInput = async () => {
     let userInput = '';
@@ -83,6 +84,20 @@ class App {
     })
   }
 
+  setWinningNumbers = (winningNumbers) => {
+    this.#winningNumbers = winningNumbers;
+  }
+
+  checkBonusNumber = (bonusNumber) => {
+    if(!Number.isInteger(bonusNumber)) throw new Error('[ERROR] : bonus number must be integer.');
+
+    if(bonusNumber < 1 || bonusNumber > 45) throw new Error('[ERROR] : bonus number must be in range 1~45');
+
+    this.#winningNumbers.forEach((winningNumber) => {
+      if(winningNumber == bonusNumber) throw new Error('[ERROR] : bonus number can not be duplicated with winning numbers.')
+    })
+  }
+
 
 
 
@@ -109,15 +124,22 @@ class App {
 
       MissionUtils.Console.print('당첨 번호를 입려해 주세요.');
 
-      const winningNumbers = await this.getUserInput();
+      const userInputWinningNumbers = await this.getUserInput();
 
-      const parsedWinnigNumbers = this.parseWinningNumbers(winningNumbers)
+      const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers)
 
       this.checkWinngNumbers(parsedWinnigNumbers);
 
       MissionUtils.Console.print('보너스 번호를 입력해 주세요.');
 
-      const bonusNumber = await this.getUserInput();
+      const userInputBonusNumber = await this.getUserInput();
+
+      const bonusNumber = this.stringToNumber(userInputBonusNumber);
+
+      this.checkBonusNumber(bonusNumber);
+      
+      console.log(bonusNumber);
+
 
     } catch(err) {
       return Promise.reject(err);
