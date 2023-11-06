@@ -9,6 +9,11 @@ class Lotto {
   }
 
   #validate(numbers) {
+    numbers.forEach((number) => {
+      if (!Number.isInteger(number) || number > 45 || number < 1) {
+        throw new Error('[ERROR] 1~45 사이의 정수만 입력 가능합니다.');
+      }
+    });
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
