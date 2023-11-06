@@ -10,7 +10,7 @@ export default class InputReader {
   }
 
   async purchasePrice() {
-    const userInput = await this.#onRead(REQUEST_MESSAGE.PURCHASE_PRISE);
+    const userInput = await this.#onRead(REQUEST_MESSAGE.PURCHASE_PRICE);
     return userInput;
   }
 
@@ -21,7 +21,7 @@ export default class InputReader {
         throw new GameError(ERROR_MESSAGE.INVALID_RESPONSE);
       }
 
-      return response;
+      return response.trim();
     } catch (error) {
       this.#alert(error.message);
       throw error;
