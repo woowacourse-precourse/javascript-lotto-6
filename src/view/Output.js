@@ -6,11 +6,6 @@ class Output {
     MissionUtils.Console.print(message)
   }
 
-  printMoney(money) {
-    this.print(GUIDE_MESSAGE.insertMoney)
-    this.print(money)
-  }
-
   printTickets(tickets) {
    this.print(`${tickets}${GUIDE_MESSAGE.totalTickets}`)
   }
@@ -19,19 +14,9 @@ class Output {
     lottos.forEach(lotto => this.print(`[${lotto.join(', ')}]`))
   }
 
-  printWinningNumbers(numbers) {
-    this.print(GUIDE_MESSAGE.insertWinnerNumbers)
-    this.print(`${numbers.join(',')}`)
-  }
-
-  printBonus(bonusNumber) {
-    this.print(GUIDE_MESSAGE.insertBonusNumber)
-    this.print(bonusNumber)
-  }
-
   printStats(STATS) {
     this.print(GUIDE_MESSAGE.winningStats)
-    this.print(GUIDE_MESSAGE.divider)
+    this.printDivider();
 
     Object.keys(WINNING_RESULT_DETAILS).map((name, idx) => {
       this.print(`${WINNING_RESULT_DETAILS[name]}${STATS[4 - idx]}개`)
@@ -40,6 +25,10 @@ class Output {
 
   printRate(profit) {
     this.print(GUIDE_MESSAGE.winningStatistics.replace('*', profit * 100))
+  }
+
+  printDivider() {
+    this.print(GUIDE_MESSAGE.divider)
   }
 }
 
