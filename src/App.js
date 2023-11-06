@@ -1,4 +1,5 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 class App {
   validateUserPurchaseMoney(input) {
@@ -35,8 +36,26 @@ class App {
     }
   }
 
+  generateRandomLottoNumbers() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
+  generateSingleLottoTicket() {
+    const numbers = this.generateRandomLottoNumbers();
+    return new Lotto(numbers.sort((a, b) => a - b));
+  }
+
+  purchaseLottoTickets(userMoney) {
+    const userTickets = Array.from({ length: userMoney / 1000 }).map(() => {
+      return this.generateSingleLottoTicket();
+    });
+
+    return userTickets;
+  }
+
   async play() {
     const userMoney = await this.getUserPurchaseMoney();
+    const userTickets = this.purchaseLottoTickets(userMoney);
   }
 }
 
