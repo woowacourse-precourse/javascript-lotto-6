@@ -18,12 +18,9 @@ class App {
     const statistics = calculator.calculateStatistics(lottoNumbers);
 
     const view = new LottoView();
-    const purchaseInfo = view.createPurchaseInfoString(
-      numberOfSets,
-      lottoNumbers
-    );
-    const statisticsInfo = view.createStatisticsString(statistics);
-    const result = `${purchaseInfo}\n${statisticsInfo}`;
+    const purchaseData = view.createPurchaseData(numberOfSets, lottoNumbers);
+    const lottoResult = view.createLottoResult(statistics);
+    const result = `${purchaseData}\n${lottoResult}`;
 
     view.displayResult(result);
   }
