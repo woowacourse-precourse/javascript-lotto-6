@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -12,6 +14,9 @@ class Lotto {
     }
   }
 
+  printLottoNumbers() {
+    Console.print(this.#numbers);
+  }
   // TODO: 추가 기능 구현
 }
 
