@@ -16,6 +16,11 @@ class UserLotto {
     }
   }
 
+  #setPurchaseVariable(purchaseAmount) {
+    this.#purchaseAmount = purchaseAmount;
+    this.#numberOfPurchase = purchaseAmount / 1000;
+  }
+
   getNumberOfPurchase() {
     return this.#numberOfPurchase;
   }
