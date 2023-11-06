@@ -8,6 +8,7 @@ import {
 class Winning {
   #winning;
   #bonus;
+
   constructor(winning, bonus) {
     this.#winning = winning;
     this.#validateWinning(winning);

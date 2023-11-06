@@ -16,6 +16,10 @@ class Purchase {
     this.buyLottos(purchasePrice / 1000);
   }
 
+  getLottos() {
+    return this.#lottos;
+  }
+
   #validatePurchasePrice(purchasePrice) {
     checkInputTypeIsNumber(purchasePrice);
     checkInputDividedBy1000(purchasePrice);
