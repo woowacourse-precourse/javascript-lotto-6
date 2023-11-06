@@ -1,6 +1,8 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Input from './Input.js';
+import Print from './Print.js';
 import Lotto from './Lotto.js';
+
 import PRIZE from './constants/Prize.js';
 
 class App {
@@ -31,35 +33,6 @@ class App {
 
     lotto.sort((a, b) => a - b);
     return lotto;
-  }
-
-  printResults() {
-    Console.print('당첨 통계\n---');
-    Console.print(
-      `3개 일치 (${PRIZE.three.toLocaleString('ko-KR')}원) - ${
-        this.#results[PRIZE.three]
-      }개`
-    );
-    Console.print(
-      `4개 일치 (${PRIZE.four.toLocaleString('ko-KR')}원) - ${
-        this.#results[PRIZE.four]
-      }개`
-    );
-    Console.print(
-      `5개 일치 (${PRIZE.five.toLocaleString('ko-KR')}원) - ${
-        this.#results[PRIZE.five]
-      }개`
-    );
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (${PRIZE.fivePlus.toLocaleString(
-        'ko-KR'
-      )}원) - ${this.#results[PRIZE.fivePlus]}개`
-    );
-    Console.print(
-      `6개 일치 (${PRIZE.six.toLocaleString('ko-KR')}원) - ${
-        this.#results[PRIZE.six]
-      }개`
-    );
   }
 
   calcReturn(purchase) {
@@ -98,7 +71,7 @@ class App {
       }
     });
 
-    this.printResults();
+    Print.printResults(this.#results);
 
     const returnRate = this.calcReturn(price);
     Console.print(`총 수익률은 ${returnRate}%입니다.`);
