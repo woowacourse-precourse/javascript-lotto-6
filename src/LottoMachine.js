@@ -5,10 +5,14 @@ class LottoMachine {
   generateLotto(lottoPrice) {
     const lottoQuantity = this.#calculateQuantity(Number(lottoPrice));
     const lottos = Array.from({ length: lottoQuantity }, () => {
-      return new Lotto(this.#generatorRandomNumber()).getAscendingNumber();
+      return this.#generateSingleLotto();
     });
 
     return lottos;
+  }
+
+  #generateSingleLotto() {
+    return new Lotto(this.#generatorRandomNumber()).getAscendingNumber();
   }
 
   #generatorRandomNumber() {
