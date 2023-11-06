@@ -15,13 +15,15 @@ class App {
 }
 
 async function inputMoney() {
-  let money = await Console.readLineAsync('구입금액을 입력해주세요.\n');
-  money = parseInt(money);
+  let moneyString = await Console.readLineAsync('구입금액을 입력해주세요.\n');
+  Console.print(moneyString);
+  let money = Number(moneyString);
+  Console.print(Number.isNaN(money));
+  if (Number.isNaN(moneyString)) throw new Error(ERROR.MONEY_IS_NAN);
   return money;
 }
 
 function checkMoney(lottoMoney) {
-  if (Number.isNaN(lottoMoney)) throw new Error(ERROR.MONEY_IS_NAN);
   if (lottoMoney % 1000 != 0) throw new Error(ERROR.MONEY_HAS_REMAINDER);
 }
 
