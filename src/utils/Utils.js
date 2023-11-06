@@ -1,7 +1,7 @@
 import SETTINGS from '../constants/Settings.js';
 
 class Utils {
-  static stringArrayToNumberArray(array) {
+  static stringToNumberArray(array) {
     const inputArray = array.split(',');
     const numberArray = [];
     inputArray.forEach(string => {

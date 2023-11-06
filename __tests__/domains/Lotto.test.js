@@ -61,11 +61,10 @@ describe('Lotto - getNumbers 메소드 : 로또 번호 반환값 테스트', () 
 });
 
 describe('Lotto - getPrize 메소드 : 로또와 담첨번호 및 보너스 결과 테스트', () => {
-  const winning = new WinningLotto();
   const INPUT_NUMBERS = '1,2,3,4,5,6';
   const INPUT_BONUS = '7';
+  const winning = new WinningLotto(INPUT_NUMBERS);
 
-  winning.setNumbers(INPUT_NUMBERS);
   winning.setBonus(INPUT_BONUS);
 
   test('lotto와 당첨번호가 모두 일치하는 경우 1등("1")을 반환한다.', () => {

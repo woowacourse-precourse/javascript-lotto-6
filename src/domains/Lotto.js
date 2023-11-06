@@ -8,15 +8,15 @@ import {
 } from '../error/CustomErrors.js';
 
 class Lotto {
-  #numbers;
+  _numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this._validate(numbers);
     numbers.sort((a, b) => a - b);
-    this.#numbers = numbers;
+    this._numbers = numbers;
   }
 
-  #validate(numbers) {
+  _validate(numbers) {
     if (numbers.length !== SETTINGS.lottoLength) {
       throw new LottoLengthError(numbers);
     }
@@ -34,12 +34,12 @@ class Lotto {
   }
 
   getNumbers() {
-    return this.#numbers;
+    return this._numbers;
   }
 
   #getMatchWithNumbers(numbers) {
     let counter = 0;
-    this.#numbers.forEach((number) => {
+    this._numbers.forEach((number) => {
       if (numbers.includes(number)) {
         counter += 1;
       }
@@ -49,7 +49,7 @@ class Lotto {
   }
 
   #getMatchWithBonus(bonus) {
-    if (this.#numbers.includes(bonus)) {
+    if (this._numbers.includes(bonus)) {
       return true;
     }
     return false;
