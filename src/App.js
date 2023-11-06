@@ -1,6 +1,5 @@
 import Computer from "./Computer.js";
 import User from "./User.js";
-import { MIN_PURCHASE_AMOUNT } from "./constant.js";
 
 class App {
   constructor(){
@@ -12,6 +11,7 @@ class App {
   async play() {
     const purchaseAmount = await this.user.inputPurchaseAmount();
     this.lottoList = this.computer.makeLottoList(purchaseAmount);
+    const winNumber = await this.user.inputWinNumber();
   }
 }
 

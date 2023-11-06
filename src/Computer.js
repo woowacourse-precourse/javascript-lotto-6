@@ -11,7 +11,6 @@ class Computer {
       lottoList.push(Computer.buyLotto());
       purchaseCount += 1
     }
-
     return lottoList;
   }
 
