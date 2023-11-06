@@ -66,7 +66,7 @@ class App {
 
         winningNumsList = winningNums.split(',').map(Number); // [ 1, 4, 6, 7, 21, 22 ] 
         
-        if (winningNumsList.length !== 6) {
+        if (winningNumsList.length !== 6 || winningNumsList.length !== new Set(winningNumsList)) {
           throw new Error(ERROR_MESSAGE.INPUT_ERROR)
         }
         for (let i = 0; i < winningNumsList.length; i++) {
