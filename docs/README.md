@@ -103,5 +103,48 @@ __calculateMatchingNumber(winningLotto)__
 ---
 
 
+## Controller.js ##
+
+### variable
+	#userLotto - UserLotto class 객체
+	#winningLotto - Lotto class 객체
+	#statistics - Statistics class 객체
+	#inputView - InputView class 객체
+	#outputView - OutputView class 객체
+
+### 주요 기능
+
+__constructor()__
+
+	inputView
+	outputView
+	statisitcs
+	객체를 초기화
+
+__buyLotto()__
+
+	구매 금액을 입력받아서 UserLotto 객체를 만드고 유저 로또 번호를 생성
+
+__printUserLottoNumbers()__
+
+	유저의 로또 번호 생성 결과를 출력
+
+__setWinningLottoNumbers()__
+
+	정답 로또 번호를 입력받아서 Lotto 객체를 생성
+
+
+__setBonusNumber()__
+
+	보너스 번호를 입력받아서 Lotto 객체에 보너스 번호를 저장
+
+__calculateStatistics()__
+
+	유저의 로또와 정답 로또를 비교한 최종 통계 결과를 계산
+
+
+__printStatistics(result)__
+
+	최종 통계 결과를 출력
 
 
