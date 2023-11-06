@@ -1,5 +1,5 @@
 import { Random, Console } from "@woowacourse/mission-utils";
-
+import { ERROR } from "./Message.js";
 class Lotto {
   #drawNumbers;
 
@@ -46,11 +46,14 @@ class Lotto {
     if (!numbers) {
       return;
     }
+    if (this.isNotInRange(numbers)) {
+      throw new Error(ERROR.NOT_IN_RANGE);
+    }
     if (this.isNotSix(numbers)) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR.NOT_SIX);
     }
     if (this.isDuplicate(numbers)) {
-      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
+      throw new Error(ERROR.DUPLICATE);
     }
     return numbers;
   }
@@ -59,11 +62,19 @@ class Lotto {
     if (!bonus) {
       return;
     }
+    if (this.isNotInRange(bonus)) {
+      throw new Error(ERROR.NOT_IN_RANGE);
+    }
+
     if (this.isNotOne(bonus)) {
-      throw new Error("[ERROR] 보너스 번호는 1개여야 합니다.");
+      throw new Error(ERROR.NOT_ONE);
     }
     return bonus;
   }
+
+  isNotInRange = (numbers) => {
+    return numbers.some((number) => number < 1 || number > 45);
+  };
 
   isNotSix = (numbers) => {
     return numbers.length !== 6;
@@ -152,7 +163,7 @@ class Lotto {
   lottoDrawPrinter(count) {
     const statCount = this.statCount;
     Console.print(
-      `\n당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n4개 일치 (50,000원) - ${statCount[1]}개\n5개 일치 (1,500,000원) - ${statCount[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n6개 일치 (2,000,000,000원) - ${statCount[4]}개\n`
+      `\n당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n4개 일치 (50,000원) - ${statCount[1]}개\n5개 일치 (1,500,000원) - ${statCount[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n6개 일치 (2,000,000,000원) - ${statCount[4]}개`
     );
   }
 }
