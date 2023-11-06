@@ -1,4 +1,5 @@
 import LottoGame from '../src/LottoGame';
+import { RANKING } from '../src/constants/conditions';
 
 describe('로또 게임 테스트', () => {
   test.each([
@@ -6,13 +7,13 @@ describe('로또 게임 테스트', () => {
       autoLottos: [[1, 2, 3, 4, 5, 6]],
       winningLotto: [7, 8, 9, 10, 11, 12],
       bonus: 13,
-      expected: new Map([
-        [{ matchCount: 3, ranking: 5, prize: 5000 }, 0],
-        [{ matchCount: 4, ranking: 4, prize: 50000 }, 0],
-        [{ matchCount: 5, isBonusMatch: false, ranking: 3, prize: 1500000 }, 0],
-        [{ matchCount: 5, isBonusMatch: true, ranking: 2, prize: 30000000 }, 0],
-        [{ matchCount: 6, ranking: 1, prize: 2000000000 }, 0],
-      ]),
+      expected: [
+        { ranking: RANKING.fifth, count: 0 },
+        { ranking: RANKING.fourth, count: 0 },
+        { ranking: RANKING.third, count: 0 },
+        { ranking: RANKING.second, count: 0 },
+        { ranking: RANKING.first, count: 0 },
+      ],
     },
     {
       autoLottos: [
@@ -21,13 +22,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [3, 30, 32, 12, 1, 7],
       bonus: 41,
-      expected: new Map([
-        [{ matchCount: 3, ranking: 5, prize: 5000 }, 2],
-        [{ matchCount: 4, ranking: 4, prize: 50000 }, 0],
-        [{ matchCount: 5, isBonusMatch: false, ranking: 3, prize: 1500000 }, 0],
-        [{ matchCount: 5, isBonusMatch: true, ranking: 2, prize: 30000000 }, 0],
-        [{ matchCount: 6, ranking: 1, prize: 2000000000 }, 0],
-      ]),
+      expected: [
+        { ranking: RANKING.fifth, count: 2 },
+        { ranking: RANKING.fourth, count: 0 },
+        { ranking: RANKING.third, count: 0 },
+        { ranking: RANKING.second, count: 0 },
+        { ranking: RANKING.first, count: 0 },
+      ],
     },
     {
       autoLottos: [
@@ -36,13 +37,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [1, 2, 3, 12, 13, 14],
       bonus: 41,
-      expected: new Map([
-        [{ matchCount: 3, ranking: 5, prize: 5000 }, 1],
-        [{ matchCount: 4, ranking: 4, prize: 50000 }, 0],
-        [{ matchCount: 5, isBonusMatch: false, ranking: 3, prize: 1500000 }, 0],
-        [{ matchCount: 5, isBonusMatch: true, ranking: 2, prize: 30000000 }, 0],
-        [{ matchCount: 6, ranking: 1, prize: 2000000000 }, 0],
-      ]),
+      expected: [
+        { ranking: RANKING.fifth, count: 1 },
+        { ranking: RANKING.fourth, count: 0 },
+        { ranking: RANKING.third, count: 0 },
+        { ranking: RANKING.second, count: 0 },
+        { ranking: RANKING.first, count: 0 },
+      ],
     },
   ])(
     '당첨번호와 각각의 로또번호를 비교하여 일치갯수를 저장한다.',
@@ -61,13 +62,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [2, 7, 12, 14, 32, 43],
       bonus: 41,
-      expected: new Map([
-        [{ matchCount: 3, ranking: 5, prize: 5000 }, 0],
-        [{ matchCount: 4, ranking: 4, prize: 50000 }, 0],
-        [{ matchCount: 5, isBonusMatch: false, ranking: 3, prize: 1500000 }, 0],
-        [{ matchCount: 5, isBonusMatch: true, ranking: 2, prize: 30000000 }, 1],
-        [{ matchCount: 6, ranking: 1, prize: 2000000000 }, 0],
-      ]),
+      expected: [
+        { ranking: RANKING.fifth, count: 0 },
+        { ranking: RANKING.fourth, count: 0 },
+        { ranking: RANKING.third, count: 0 },
+        { ranking: RANKING.second, count: 1 },
+        { ranking: RANKING.first, count: 0 },
+      ],
     },
   ])(
     '5개가 일치하고 보너스 번호가 일치합니다.',
@@ -86,13 +87,13 @@ describe('로또 게임 테스트', () => {
       ],
       winningLotto: [2, 7, 12, 14, 32, 43],
       bonus: 39,
-      expected: new Map([
-        [{ matchCount: 3, ranking: 5, prize: 5000 }, 0],
-        [{ matchCount: 4, ranking: 4, prize: 50000 }, 0],
-        [{ matchCount: 5, isBonusMatch: false, ranking: 3, prize: 1500000 }, 1],
-        [{ matchCount: 5, isBonusMatch: true, ranking: 2, prize: 30000000 }, 0],
-        [{ matchCount: 6, ranking: 1, prize: 2000000000 }, 0],
-      ]),
+      expected: [
+        { ranking: RANKING.fifth, count: 0 },
+        { ranking: RANKING.fourth, count: 0 },
+        { ranking: RANKING.third, count: 1 },
+        { ranking: RANKING.second, count: 0 },
+        { ranking: RANKING.first, count: 0 },
+      ],
     },
   ])(
     '5개가 일치하고 보너스 번호가 일치하지 않습니다.',

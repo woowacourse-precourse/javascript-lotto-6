@@ -25,7 +25,7 @@ export default class LottoGame {
 
   getWinningResult() {
     this.#countMatchingNumbers();
-    return this.#matchingTable.getTable();
+    return this.#matchingTable.getSummaryResult();
   }
 
   #countMatchingNumbers() {

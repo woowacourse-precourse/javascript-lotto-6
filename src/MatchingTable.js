@@ -10,10 +10,13 @@ export default class MatchingTable {
         this.#table.set(key, value + COUNT.plus);
       }
     });
-    return this.#table;
   }
 
   getTable() {
     return this.#table;
+  }
+
+  getSummaryResult() {
+    return [...this.#table].map(([{ ranking }, count]) => ({ ranking, count }));
   }
 }

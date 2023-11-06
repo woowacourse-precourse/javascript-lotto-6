@@ -10,13 +10,13 @@ const getLogSpy = () => {
 describe('당첨 통계 출력 테스트', () => {
   test('당첨내역과 수익률을 포함한 당첨 통계를 출력한다.', () => {
     const logSpy = getLogSpy();
-    const winningResult = new Map([
-      [{ matchCount: 3, ranking: 5, prize: 5000 }, 1],
-      [{ matchCount: 4, ranking: 4, prize: 50000 }, 1],
-      [{ matchCount: 5, isBonusMatch: false, ranking: 3, prize: 1500000 }, 0],
-      [{ matchCount: 5, isBonusMatch: true, ranking: 2, prize: 30000000 }, 0],
-      [{ matchCount: 6, ranking: 1, prize: 2000000000 }, 0],
-    ]);
+    const winningResult = [
+      { ranking: 5, count: 1 },
+      { ranking: 4, count: 1 },
+      { ranking: 3, count: 0 },
+      { ranking: 2, count: 0 },
+      { ranking: 1, count: 0 },
+    ];
     const rateOfReturn = 62.5;
     OutputView.printLotteryResultsSummary(winningResult, rateOfReturn);
 

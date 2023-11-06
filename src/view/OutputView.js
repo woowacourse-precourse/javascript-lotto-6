@@ -25,7 +25,6 @@ const OutputView = {
   },
 
   getResultStringTemplate(winningResult) {
-    const matchingCounts = [...winningResult.values()];
     const messages = [
       RESULT_MESSAGE.threeMatch,
       RESULT_MESSAGE.fourMatch,
@@ -35,7 +34,7 @@ const OutputView = {
     ];
     return messages.map((message, i) => ({
       label: message,
-      count: matchingCounts[i],
+      count: winningResult[i].count,
     }));
   },
 };
