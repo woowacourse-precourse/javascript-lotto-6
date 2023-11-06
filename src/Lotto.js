@@ -33,18 +33,21 @@ class Lotto {
     return sortLottoNumber;
   }
 
-  static getRankBoard(lottos, winningNumbers, bonusNumber) {
+  static getRankBoard(lottos, winningNum, bonusNum) {
     const { rankBoard } = RANK;
-
     lottos.forEach((lotto) => {
-      const lottoNum = lotto.getLottoNumbers();
-      const matchingCount = lottoNum.filter((number) => winningNumbers.includes(number)).length;
-      const bonusMatch = lottoNum.includes(bonusNumber);
+      const { matchingCount, bonusMatch } = Lotto.calculateResults(lotto, winningNum, bonusNum);
       const rank = Lotto.calculateRank(matchingCount, bonusMatch);
       if (rank) rankBoard[rank] += 1;
     });
-
     return rankBoard;
+  }
+
+  static calculateResults(lotto, winningNum, bonusNum) {
+    const lottoNum = lotto.getLottoNumbers();
+    const matchingCount = lottoNum.filter((number) => winningNum.includes(number)).length;
+    const bonusMatch = lottoNum.includes(bonusNum);
+    return { matchingCount, bonusMatch };
   }
 
   static calculateRank(matchingCount, bonusMatch) {
