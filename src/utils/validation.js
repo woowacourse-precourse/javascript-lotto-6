@@ -48,4 +48,15 @@ const validateWinningNumber = (winningNumber) => {
   if (isDuplicated(numbers)) throw new Error(ERROR_MESSAGE.duplicated);
 };
 
-export { validatePurchase, validateWinningNumber };
+const validateBonusNumber = (winningNumbers, bonusNumber) => {
+  if (isEmpty(bonusNumber)) throw new Error(ERROR_MESSAGE.empty);
+  if (!isNumber(bonusNumber)) throw new Error(ERROR_MESSAGE.textIncluded);
+  if (!isNumberInRange(parseInt(bonusNumber, 10))) {
+    throw new Error(ERROR_MESSAGE.notInRange);
+  }
+  if (!isDuplicated([...winningNumbers.concat(bonusNumber)])) {
+    throw new Error(ERROR_MESSAGE.duplicated);
+  }
+};
+
+export { validatePurchase, validateWinningNumber, validateBonusNumber };

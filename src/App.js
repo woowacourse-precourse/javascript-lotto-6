@@ -7,7 +7,11 @@ import {
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
 } from "./utils/CONSTANT.js";
-import { validatePurchase, validateWinningNumber } from "./utils/validation.js";
+import {
+  validateBonusNumber,
+  validatePurchase,
+  validateWinningNumber,
+} from "./utils/validation.js";
 
 class App {
   #purchaseAmount;
@@ -72,6 +76,8 @@ class App {
     const input = await MissionUtils.Console.readLineAsync(
       INPUT_MESSAGE.bonusNumber,
     );
+
+    validateBonusNumber(this.#winningNumbers, input);
 
     MissionUtils.Console.print(input);
   }
