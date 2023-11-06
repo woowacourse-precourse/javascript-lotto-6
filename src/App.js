@@ -39,11 +39,14 @@ class App {
     return new Lotto(pickNumbers.sort((a, b) => a - b));
   }
 
-  getPickedLotto(lottoCount){
-
+  getPickedLottoList(lottoCount) {
+    const pickedLottoList = [];
+    for (let i = 0; i < lottoCount; i++) {
+      const pickedLotto = this.pickLotto();
+      pickedLottoList.push(pickedLotto);
+    }
+    return pickedLottoList;
   }
-
-
 }
 
 export default App;
