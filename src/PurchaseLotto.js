@@ -1,4 +1,4 @@
-import { inputLottoNum, consoleError } from './utils.js';
+import { inputLottoNum, parchasedLotto, consoleError } from './utils.js';
 import { LOTTO_NUMBERS, ERROR_MESSAGE, INPUT_MESSAGE } from './constants.js';
 
 class PurchaseLotto {
@@ -29,7 +29,7 @@ class PurchaseLotto {
   }
 
   countingLotto(lottoCount) {
-    return INPUT_MESSAGE.PURCHASED_MESSAGE(lottoCount);
+    return parchasedLotto(lottoCount);
   }
 }
 
