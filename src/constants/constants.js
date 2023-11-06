@@ -12,6 +12,12 @@ const INPUT_ERROR_MESSAGE = {
     '[ERROR] 입력한 당첨 번호가 6개가 넘어서는 안됩니다.',
   BLANK_ERROR: '[ERROR] 입력한 값이 공백입니다.',
   NUMBER_ERROR: '[ERROR] 입력한 값이 숫자가 아닙니다.',
+  DUPLICATE_WINNING_NUMBER:
+    '[ERROR] 입력한 당첨 번호에 중복된 숫자가 존재합니다.',
+};
+
+const SYMBOL = {
+  COMMA: ',',
 };
 
 const RANK_RESULT = {
@@ -31,4 +37,10 @@ const RESULT_MESSAGE = {
   FIFTH_RESULT_MESSAGE: '3개 일치 (5,000원)',
 };
 
-export { INPUT_MESSAGE, INPUT_ERROR_MESSAGE, RANK_RESULT, RESULT_MESSAGE };
+export {
+  INPUT_MESSAGE,
+  INPUT_ERROR_MESSAGE,
+  SYMBOL,
+  RANK_RESULT,
+  RESULT_MESSAGE,
+};

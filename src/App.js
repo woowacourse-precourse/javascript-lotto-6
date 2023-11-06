@@ -1,15 +1,21 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
-import { INPUT_MESSAGE, INPUT_ERROR_MESSAGE } from './constants/constants';
+import {
+  INPUT_MESSAGE,
+  INPUT_ERROR_MESSAGE,
+  SYMBOL,
+} from './constants/constants';
 import Lotto from './Lotto';
 
 class App {
   #lottoCount;
   #lottoList = [];
+  #winningNumbers = [];
 
   async play() {
     await this.#inputPurchaseAmount();
     this.#purchaseLottos();
     this.#printAllLottos();
+    await this.#inputWinningNumbers();
   }
 
   async #inputPurchaseAmount() {
@@ -45,13 +51,41 @@ class App {
         randomNumbers.push(String(number));
       }
     }
-    return randomNumbers;
+    const sortRandomNumbers = randomNumbers.sort((a, b) => a - b);
+    return sortRandomNumbers;
   }
 
   #printAllLottos() {
     Console.print(`${this.#lottoList.length}${INPUT_MESSAGE.PURCHASE_LOTTO}`);
     this.#lottoList.forEach(el => {
       el.print();
+    });
+  }
+
+  async #inputWinningNumbers() {
+    Console.print(INPUT_MESSAGE.WINNING_NUMBERS);
+    const winningNumbers = await Console.readLineAsync('');
+    this.#validateWinningNumbers(winningNumbers);
+  }
+
+  #validateWinningNumbers(winningNumbers) {
+    const splitWinningNumbers = winningNumbers.split(SYMBOL.COMMA);
+
+    if (splitWinningNumbers.length !== 6) {
+      throw new Error(INPUT_ERROR_MESSAGE.WINNING_NUMBERS_ERROR);
+    }
+    splitWinningNumbers.sort((a, b) => a - b);
+    splitWinningNumbers.forEach(num => {
+      const checkValidWinningNumbers = Number(num);
+      if (isNaN(checkValidWinningNumbers)) {
+        throw new Error(INPUT_ERROR_MESSAGE.NUMBER_ERROR);
+      }
+
+      if (this.#winningNumbers.includes(checkValidWinningNumbers)) {
+        throw new Error(INPUT_ERROR_MESSAGE.DUPLICATE_WINNING_NUMBER);
+      }
+
+      this.#winningNumbers.push(splitWinningNumbers);
     });
   }
 }
