@@ -14,17 +14,15 @@ class Rank {
    */
   #getRank(lotto, props) {
     const count = this.#getSameNumberCount(lotto, props.winningNumber);
-    switch (count) {
-      case 3:
-        return 5;
-      case 4:
-        return 4;
-      case 5:
-        if (lotto.includes(props.bonusNumber)) return 2;
-        return 3;
-      case 6:
-        return 1;
-    }
+    const rankMapping = {
+      3: NUMBER.fifthPlace,
+      4: NUMBER.fourthPlace,
+      5: lotto.includes(props.bonusNumber)
+        ? NUMBER.secondPlace
+        : NUMBER.thirdPlace,
+      6: NUMBER.firstPlace,
+    };
+    return rankMapping[count];
   }
 
   getRankStatistic(props) {
