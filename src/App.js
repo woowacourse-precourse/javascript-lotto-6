@@ -5,6 +5,7 @@ class App {
   constructor() {
     this.pay = 0; // 구입 개수
     this.lottos = []; // 발행한 로또
+    this.winning = []; // 당첨 번호
   }
 
   async inputPay() {
@@ -44,6 +45,7 @@ class App {
     );
     const winning = input.split(",").map((elem) => +elem);
     const lotto = new Lotto(winning);
+    this.winning = winning;
   }
 
   async play() {
