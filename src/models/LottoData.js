@@ -3,9 +3,6 @@ import { LOTTO } from '../constants/Constant.js';
 
 class LottoData {
   validatePurchaseAmount(amount) {
-    if (amount === '') {
-      throw new Error(ERROR_MESSAGE.nothing);
-    }
     if (!/^\d+$/.test(amount)) {
       throw new Error(ERROR_MESSAGE.notNumber);
     }
