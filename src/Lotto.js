@@ -17,10 +17,6 @@ class Lotto {
     return parseInt(this.#numbers, DECICMAL_NUMBER) / LOTTO_PRICE;
   }
 
-  #stringToNumber() {
-    return parseInt(this.#numbers, DECICMAL_NUMBER);
-  }
-
   validateLottoAmount() {
     const isValidateLottoAmount = Number.isInteger(this.#lottoCount());
     if (!isValidateLottoAmount) {
@@ -32,19 +28,35 @@ class Lotto {
     if (this.#numbers.split(',').length !== LOTTO_NUMBER_COUNT) {
       throw new Error(ErrorMessage.invalidLottoNumberSeparator);
     }
-    const winningNumbersArray = this.#numbers
+    const winningNumbersArray = this.#parseWinningNumbers();
+    this.#validateWinningNumberCount(winningNumbersArray);
+    this.#validateWinningNumberRange(winningNumbersArray);
+    this.#validateDuplicateWinningNumbers(winningNumbersArray);
+  }
+
+  #parseWinningNumbers() {
+    return this.#numbers
       .split(',')
       .map((value) => parseInt(value))
       .sort((a, b) => a - b);
+  }
+
+  #validateWinningNumberCount(winningNumbersArray) {
     if (winningNumbersArray.length !== LOTTO_NUMBER_COUNT) {
       throw new Error(ErrorMessage.invalidLottoWinningNumberCount());
     }
+  }
+
+  #validateWinningNumberRange(winningNumbersArray) {
     if (
       winningNumbersArray[0] < LOTTO_NUMBER_START ||
       winningNumbersArray.at(-1) > LOTTO_NUMBER_LAST
     ) {
       throw new Error(ErrorMessage.invalidLottoWinningNumberRange());
     }
+  }
+
+  #validateDuplicateWinningNumbers(winningNumbersArray) {
     if (winningNumbersArray.length !== new Set(winningNumbersArray).size) {
       throw new Error(ErrorMessage.invalidDuplicateWinningNumbers());
     }
