@@ -3,6 +3,9 @@ import Lotto from "./Lotto.js";
 import { Random, Console } from "@woowacourse/mission-utils";
 
 class Input {
+  static previousLottoNumbers = []; // 이전에 구매한 로또 번호 저장
+  static previousBonusNumber = 0; // 이전에 구매한 보너스 번호 저장
+
   static async inputMoney() {
     try {
       const money = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -36,6 +39,7 @@ class Input {
         .split(",")
         .map((number) => parseInt(number, 10));
       const lotto = new Lotto(lottoNumbers);
+      Input.previousLottoNumbers.push([...lottoNumbers]); // 복제본을 배열에 추가
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
@@ -48,7 +52,8 @@ class Input {
         "보너스 번호를 입력해 주세요.\n"
       );
       const bonusNumber = parseInt(numberString, 10);
-      Lotto.validateBonusNumber([bonusNumber]); // 배열로 감싸야 함
+      Lotto.validateBonusNumber([bonusNumber]);
+      Input.previousBonusNumber = bonusNumber;
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);

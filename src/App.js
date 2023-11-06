@@ -4,10 +4,11 @@ import Result from "./Result.js";
 
 class App {
   async play() {
-    const purchaseAmount = await Input.inputMoney();
-    const lottoNumbers = await Input.inputNumber();
-    const bonusNumbers = await Input.bonusNumber();
-    Result.Result();
+    await Input.inputMoney();
+    await Input.inputNumber();
+    await Input.bonusNumber();
+
+    Result.showResult();
   }
 }
 
