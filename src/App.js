@@ -87,78 +87,7 @@ const PURCASE_COMMENT = "구입금액을 입력해 주세요."
 const WINNING_NUMBER_COMMENT = "당첨 번호를 입력해 주세요.";
 const BONUS_NUMBER_COMMENT = "보너스 번호를 입력해 주세요.";
 
-const winningDetails = {
-  same : [3, 4, 5, 5, 6],
-  sameAndBounus : [3, 4, [5,0], [5,1], 6],
-  prize : [5000, 50000, 1500000, 30000000, 2000000000],
-  winning : [0,0,0,0,0],
-  totalPrize : 0,
-  counts : 0
-}
-
-var winningResults = [];
-
-var lottoNumbers = [];
-
 export function winningNumberSpliter(input) {
   const winningNumberSplit = input.split(',');
   return winningNumberSplit;
-}
-
-export function lottoPrinter(counts) {
-  for (let i = 0; i < counts; i++) {
-    MissionUtils.Console.print(randomNumberCreater());
-  }
-}
-
-function lottosReader(lotto, winning, bonus, count) {
-  for (let i = 0; i < count; i++) {
-    const result = lottoReader(lotto[i], winning, bonus)
-    winningResults.push(result);
-  }
-}
-
-export function lottoReader(lotto, winning, bonus) {
-  const sameNumbers = winning.filter(number => lotto.includes(number))
-  const sameBonus = lotto.includes(bonus);
-  if (sameBonus === false) {
-    return [sameNumbers.length, 0];
-  }
-  return [sameNumbers.length, 1];
-}
-
-export function lottoResultsPrinter(results) {
-  for (let i = 0; i < results.length; i++) {
-    const prize = winningDetails.prize[i]
-    const currencyPrize = formatCurrency(prize);
-    if (i === 3) {
-      MissionUtils.Console.print(
-        `${winningDetails.same[i]}개 일치, 보너스 볼 일치 (${currencyPrize}원) - ${results[i]}개`
-      );
-    } else {
-      MissionUtils.Console.print(
-        `${winningDetails.same[i]}개 일치 (${currencyPrize}원) - ${results[i]}개`
-      );
-    }
-  }
-  totalRate(winningDetails.counts*1000, winningDetails.totalPrize);
-}
-
-function formatCurrency(number) {
-  return new Intl.NumberFormat("ko-KR", {
-    style: "currency",
-    currency: "KRW",
-  minimumFractionDigits: 0,  // 소수점 이하 자릿수 설정
-  }).format(number).replace(/₩/g, '');
-}
-
-export function totalRate(money, prize) {
-  const roundedRate = calculateRate(money, prize);
-  MissionUtils.Console.print(`총 수익률은 ${roundedRate}%입니다.`);
-}
-
-function calculateRate(money, prize) {
-  const rate = (prize / money) * 100;
-  const roundedRate = rate.toFixed(2);
-  return Number(roundedRate);
 }
