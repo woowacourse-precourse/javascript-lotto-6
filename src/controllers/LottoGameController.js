@@ -3,6 +3,7 @@ import OutputView from '../views/OutputView.js';
 import PurchaseAmount from '../domain/PurchaseAmount.js';
 import LottoGame from '../domain/LottoGame.js';
 import Lotto from '../Lotto.js';
+import LottoValidator from '../domain/LottoValidator.js';
 
 class LottoGameController {
   constructor() {}
@@ -29,11 +30,26 @@ class LottoGameController {
     try {
       const winningNumbers = await InputView.getWinningNumbers();
       const numbers = winningNumbers.split(',').map(Number);
-      const winningLotto = new Lotto(numbers).getSortedLotto();
+      const winningLotto = new Lotto(numbers);
       // console.log(winningLotto.getSortedLotto());
+      this.userBonusNumber(winningLotto);
     } catch ({ message }) {
       OutputView.printStaticMessage(message);
       this.userWinningNumbers();
+    }
+  }
+
+  async userBonusNumber(winningLotto) {
+    try {
+      const bonusNumber = await InputView.getBonusNumber();
+      const isContainning = winningLotto.hasContainBonusNumber(Number(bonusNumber));
+
+      LottoValidator.validBonusNumber(bonusNumber, isContainning);
+
+      // console.log(bonusNumber);
+    } catch ({ message }) {
+      OutputView.printStaticMessage(message);
+      this.userBonusNumber(winningLotto);
     }
   }
 }
