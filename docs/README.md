@@ -17,16 +17,16 @@
     - 랜덤한 로또 번호를 생성하고 반환한다.
 -[X] getLottoNumbersArray()
     - 로또 티켓의 최대 구매 가능 개수만큼 랜덤한 로또 번호 배열을 만들고 반환한다.
--[ ] inputWinningNumbers()
+-[X] inputWinningNumbers()
     - 당첨 번호를 입력 받는다.
     - 번호는 쉼표(,)를 기준으로 구분한다.
--[ ] inputBonusNumber()
+-[X] inputBonusNumber()
     - 보너스 번호를 입력 받는다.
 
 -[X] displayLottoNumbers()
     - 발행한 로또 수량 및 번호를 출력한다.
     - 로또 번호는 오름차순으로 정렬하여 보여준다.
--[ ] printResults()
+-[X] printResults()
     - 당첨 내역을 출력한다.
 -[ ] printTotalEarningsRate()
     - 총 수익률을 출력한다.
