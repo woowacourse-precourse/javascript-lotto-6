@@ -5,12 +5,16 @@ export default class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = numbers.sort((a, b) => a - b);
   }
 
   #validate(numbers) {
     if (new Set(numbers).size !== LOTTERY.NUM_COUNT) {
       throw new InputError(ERROR.NOT_SIX_NUMBERS);
     }
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
