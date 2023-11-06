@@ -31,8 +31,22 @@ class Input {
       const number = await Console.readLineAsync(
         "당첨 번호를 입력해 주세요.\n"
       );
-      const lottoNumbers = number.split(",").map((num) => parseInt(num, 10));
+      const lottoNumbers = number
+        .split(",")
+        .map((number) => parseInt(number, 10));
       const lotto = new Lotto(lottoNumbers);
+    } catch (error) {
+      Console.print(`오류: ${error.message}`);
+    }
+  }
+
+  static async bonusNumber() {
+    try {
+      const numberString = await Console.readLineAsync(
+        "보너스 번호를 입력해 주세요.\n"
+      );
+      const bonusNumber = parseInt(numberString, 10);
+      Lotto.validateBonusNumber([bonusNumber]); // 배열로 감싸야 함
     } catch (error) {
       Console.print(`오류: ${error.message}`);
     }
