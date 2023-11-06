@@ -1,5 +1,5 @@
-import LottoError from "../Error/LottoError";
-import LOTTO_SETTINGS from "../config/gameSetting";
+import LottoError from "../Error/LottoError.js";
+import LOTTO_SETTINGS from "../config/gameSetting.js";
 
 export default class Money {
   #money;
@@ -16,11 +16,14 @@ export default class Money {
   }
 
   #validateIsNumber(money) {
-    if (isNaN(money)) throw new LottoError("숫자를 입력해주세요.");
+    if (isNaN(money)) throw new LottoError(`숫자를 입력해주세요.`);
   }
 
   #validateIsDevided(money) {
-    if (Number(money) <= 0 || Number(money) % 1000 !== 0) {
+    if (
+      Number(money) <= 0 ||
+      Number(money) % LOTTO_SETTINGS.TICKET_PRICE !== 0
+    ) {
       throw new LottoError(
         `금액은 ${LOTTO_SETTINGS.TICKET_PRICE}단위여야합니다.`
       );
