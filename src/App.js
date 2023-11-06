@@ -15,10 +15,10 @@ class App {
     this.Lotto.printLottoNumbers(lottoNumbers);
     const drawNumbers = await this.Lotto.enterDrawNumbers();
     const bonusNumber = await this.Lotto.enterBonusNumber();
-    const resultOfLotto = this.Lotto.resultOfLotto(lottoNumbers, drawNumbers, bonusNumber);
-    const lottoDraw = this.Profit.lottoStats(resultOfLotto);
-    const lottoDrawProfit = this.Profit.lottoStatsPrint(lottoDraw);
-    const profitRate = this.Profit.profitRateAcc(lottoDrawProfit, credit);
+    const rankOfResult = this.Lotto.resultOfDraw(lottoNumbers, drawNumbers, bonusNumber);
+    const resultOfLotto = this.Lotto.lottoDrawResult(rankOfResult);
+    this.Lotto.lottoDrawPrinter(resultOfLotto);
+    const profitRate = this.Profit.profitRateAcc(resultOfLotto, credit);
     this.Profit.profitRatePrinter(profitRate);
   }
 }
