@@ -46,6 +46,7 @@ class LottoController {
   handleBonusNumber(mainNumberArray, bonusNumber) {
     if (!Validator.validateBonusNumber(mainNumberArray, bonusNumber))
       return this.readBonusNumber(mainNumberArray);
+    OutputView.printBlank();
   }
 }
 
