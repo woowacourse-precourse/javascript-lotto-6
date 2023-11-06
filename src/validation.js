@@ -30,6 +30,30 @@ const Validation = {
     }
     return true;
   },
+
+  isUniqueBonusNumber(bonusNumber, inputLottoNumber) {
+    const combine = [bonusNumber, ...inputLottoNumber];
+    const duplicateCheck = new Set(combine);
+
+    return combine.length === duplicateCheck.size;
+  },
+
+  validateUserInputNumbers(inputLottoNumber) {
+    Validation.isNumber(inputLottoNumber);
+    Validation.numberCountLength(inputLottoNumber);
+    Validation.dupliCatedNum(inputLottoNumber);
+    Validation.numberRange(inputLottoNumber);
+  },
+
+  validateBonusNumbers(bonusNumber, inputLottoNumber) {
+    if (isNaN(bonusNumber)) throw new Error(ERROR_MESSAGE.ISNAN);
+    if (!Number.isInteger(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error(ERROR_MESSAGE.RANGE);
+    }
+    if (!this.isUniqueBonusNumber(bonusNumber, inputLottoNumber)) {
+      throw new Error(ERROR_MESSAGE.DUPLICATED);
+    }
+  },
 };
 
 export default Validation;
