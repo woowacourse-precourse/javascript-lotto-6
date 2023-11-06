@@ -1,4 +1,5 @@
 import CustomError from '../errors/CustomError.js';
+import LottoValidator from '../utils/validators/LottoValidator.js';
 import LottoResultCalculator from './LottoResultCalculator.js';
 
 class LottoService {
@@ -13,28 +14,13 @@ class LottoService {
   #resultCalculator = new LottoResultCalculator();
 
   setWinningNumbers(numbers) {
-    this.validateWinningNumbers(numbers);
+    LottoValidator.validateLottoNumbers(numbers);
     this.#winningNumbers = numbers;
   }
 
-  validateWinningNumbers(numbers) {
-    if (numbers.length !== 6) {
-      throw new CustomError('길이오류');
-    }
-    if (new Set(numbers).size !== numbers.length) {
-      throw new CustomError('중복있음');
-    }
-  }
-
   setBonusNumber(number) {
-    this.validateBonusNumber(number);
+    LottoValidator.validateBonusNumber(number, this.#winningNumbers);
     this.#bonusNumber = number;
-  }
-
-  validateBonusNumber(number) {
-    if (this.#winningNumbers.includes(number)) {
-      throw new CustomError('보너스번호가 당첨번호랑 중복임');
-    }
   }
 
   setLottoTickets(tickets) {
