@@ -20,6 +20,11 @@ export default class IOController {
     return +MONEY;
   }
 
+  async readWinningNumbers() {
+    const NUMBERS = await this.#InputService.readWinningNumbers();
+    return NUMBERS.split(',').map((num) => +num);
+  }
+
   printTicketCount(tickets) {
     this.#OutputService.printTicketCount(`\n${tickets}` + TICKET_COUNT_MESSAGE);
   }
