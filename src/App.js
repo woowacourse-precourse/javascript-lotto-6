@@ -57,6 +57,9 @@ class App {
 
   printLottoCountAndLottoNumber() {
     this.view.print(this.model.getBuyLottoNumber() + "개를 구매했습니다.");
+    for (let i = 0; i < this.model.getBuyLottoNumber(); i++) {
+      this.view.print(`[${this.model.getLottoDataObject()[i].getNumbers().join(', ')}]`);
+    }
   }
 
   makeLotto(count) {
