@@ -7,8 +7,8 @@ import { checkPurchaseIsNotInRange } from '../../util/validate/checkIsNotInRange
 export default async function purchaseValidService(input) {
   try {
     checkIsEmpty(input);
-    checkPurchaseIsNotInRange(input);
     checkIsNaN(input);
+    checkPurchaseIsNotInRange(input);
     checkHasNoRemainder(input);
 
     const result = divideInput(input);
