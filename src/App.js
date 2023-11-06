@@ -1,8 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 
 class App {
   constructor() {
-    this.pay = 0; // 구입 금액
+    this.pay = 0; // 구입 개수
   }
 
   async inputPay() {
@@ -16,7 +17,7 @@ class App {
           Console.print("[ERROR] 로또 구입은 1000원 단위만 가능합니다.");
           this.inputPay();
         }
-        this.pay = +input;
+        this.pay = +input / 1000;
       } catch (error) {
         Console.print(error);
       }
@@ -25,6 +26,7 @@ class App {
 
   async play() {
     await this.inputPay();
+    // const lotto = new Lotto()
   }
 }
 
