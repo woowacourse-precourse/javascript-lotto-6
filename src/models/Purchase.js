@@ -2,6 +2,7 @@ import { Random } from "@woowacourse/mission-utils";
 
 import { error, lottoInfo } from "../constants";
 import Lotto from "./Lotto";
+import { throwErrorIf } from "../utils";
 
 const purchase = {
   countMoney: function (money) {
@@ -10,8 +11,7 @@ const purchase = {
   },
 
   validate: function (money) {
-    if (money % lottoInfo.PRICE !== 0)
-      throw new Error(error.NOT_DIVEDED_BY_1000);
+    throwErrorIf(money % lottoInfo.PRICE !== 0, error.NOT_DIVEDED_BY_1000);
   },
 
   getLottos: function (count) {

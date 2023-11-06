@@ -3,14 +3,17 @@ import { exceptionType, message } from "../constants";
 
 const input = {
   enterPurchaseAmount: async function () {
-    return await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
+    const amount = await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
+    this.validate(exceptionType.PURCHASE, amount);
+
+    return Number(amount);
   },
 
   enterWinningNumber: async function () {
     const numbers = await Console.readLineAsync(message.ENTER_WINNING_NUMBER);
 
     numbers.forEach((number) => {
-      this.validate(number);
+      this.validate(exceptionType.LOTTO, number);
     });
 
     return numbers.map((number) => Number(number));
@@ -18,22 +21,21 @@ const input = {
 
   enterBonusNumber: async function () {
     const number = await Console.readLineAsync(message.ENTER_BONUS_NUMBER);
-    this.validate(number);
+    this.validate(exceptionType.LOTTO, number);
 
-    return convertedNumber;
+    return Number(number);
   },
 
   validate: function (type, value) {
-    if (value === "") throw new Error(error.IS_EMPTY);
+    throwErrorIf(value === "", error.IS_EMPTY);
 
-    const number = Number(value);
+    const isNotNumber = isNaN(Number(value));
 
     switch (type) {
       case exceptionType.PURCHASE:
-        if (isNaN(number)) throw new Error(error.NOT_NUMBER);
+        throwErrorIf(isNotNumber, error.NOT_NUMBER);
       case exceptionType.LOTTO:
-        // 숫자가 아닌 문자를 입력함
-        if (isNaN(number)) throw new Error(error.NATURAL_NUMBER_IN_RANGE);
+        throwErrorIf(isNotNumber, error.NATURAL_NUMBER_IN_RANGE);
     }
   },
 };
