@@ -4,6 +4,7 @@ import LottoPlayer from '../model/LottoPlayer.js';
 import Lotto from '../Lotto.js';
 import OutputView from '../view/OutputView.js';
 import { LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
+import { ERROR_MESSAGE } from '../constants/Messages.js';
 
 export default class LottoMachine {
   #purchaseAmount;
@@ -75,7 +76,7 @@ export default class LottoMachine {
 
   async #purchaseAmountValidate(purchaseAmount) {
     if (purchaseAmount % this.#INPUT_UNIT !== 0) {
-      throw new Error('[ERROR] 1,000원 단위만 입력 가능합니다.');
+      throw new Error(ERROR_MESSAGE.unit);
     }
   }
 
@@ -95,11 +96,11 @@ export default class LottoMachine {
       const ONLY_DIGIT_PATTERN = /^\d+$/;
 
       if (!ONLY_DIGIT_PATTERN.test(bonusNumberInput)) {
-        throw new Error('[ERROR] 숫자만 입력해주세요.');
+        throw new Error(ERROR_MESSAGE.notNumber);
       }
 
       if (this.#winningNumbers.getNumbers().includes(Number(bonusNumberInput))) {
-        throw new Error('[ERROR] 당첨 숫자에 포함되지 않은 숫자를 입력하세요.');
+        throw new Error(ERROR_MESSAGE.duplication);
       }
       this.#bonusNumber = Number(bonusNumberInput);
     } catch (e) {
@@ -111,7 +112,6 @@ export default class LottoMachine {
   #findMatchCount() {
     this.#player.getLottoTickets().forEach((lotto) => {
       const isIncludedBonusNumber = lotto.getNumbers().includes(this.#bonusNumber);
-      console.log(lotto.getNumbers(), this.#bonusNumber);
       const correctCount = lotto
         .getNumbers()
         .filter((number) => this.#winningNumbers.getNumbers().includes(number)).length;
@@ -126,11 +126,7 @@ export default class LottoMachine {
     OutputView.printwinningStats();
     const rankCountsObjectEntries = Object.entries(this.#player.getRankCounts()).reverse();
     rankCountsObjectEntries.forEach(([rank, counts]) => {
-      if (rank === '2') {
-        OutputView.printCorrectCountsContainBonusBall(MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
-      } else {
-        OutputView.printCorrectCounts(MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
-      }
+      OutputView.printCorrectCounts(rank, MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
     });
   }
 

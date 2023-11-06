@@ -27,14 +27,14 @@ export default class OutputView {
     return price.toLocaleString(KOREAN_FORMAT);
   }
 
-  static printCorrectCounts(matchCounts, price, correctCounts) {
+  static printCorrectCounts(rank, matchCounts, price, correctCounts) {
     const parsingPrice = OutputView.foramtPrice(price);
-    Console.print(`${matchCounts}개 일치 (${parsingPrice}원) - ${correctCounts}개`);
-  }
+    const MATCH_COUNTS = `${matchCounts}개 일치`;
+    const BONUS_BALL = rank === '2' ? `, 보너스 볼 일치` : '';
+    const PRICE = ` (${parsingPrice}원)`;
+    const CORRECT_COUNTS = ` - ${correctCounts}개`;
 
-  static printCorrectCountsContainBonusBall(matchCounts, price, correctCounts) {
-    const parsingPrice = OutputView.foramtPrice(price);
-    Console.print(`${matchCounts}개 일치, 보너스 볼 일치 (${parsingPrice}원) - ${correctCounts}개`);
+    Console.print(MATCH_COUNTS + BONUS_BALL + PRICE + CORRECT_COUNTS);
   }
 
   static printProfit(profit) {
