@@ -10,15 +10,14 @@ class UserLotto {
     } catch (error) {
       throw error;
     }
-
-    for (let i = 0; i < this.#numberOfPurchase; i++) {
-      this.#userLottoNumbers.push(new UserLottoNumber());
-    }
   }
 
   #setPurchaseVariable(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
     this.#numberOfPurchase = purchaseAmount / 1000;
+    for (let i = 0; i < this.#numberOfPurchase; i++) {
+      this.#userLottoNumbers.push(new UserLottoNumber());
+    }
   }
 
   getNumberOfPurchase() {
