@@ -18,19 +18,24 @@ export default class InputView {
 
   static async getWinningNumbers() {
     try {
-        const winningNumbers = await Console.readLineAsync("");
-        const numbersArray = winningNumbers.split(',').map(num => parseInt(num.trim()));
-        WinningNumbersValidator.validateWinningNumbers(numbersArray);
-        return numbersArray;
+      const winningNumbers = await Console.readLineAsync("");
+      const numbersArray = winningNumbers.split(',').map(num => parseInt(num.trim()));
+      WinningNumbersValidator.validateWinningNumbers(numbersArray);
+      return numbersArray;
     } catch (error) {
-        OutputView.printError(error);
-        return this.getWinningNumbers();
+      OutputView.printError(error);
+      return this.getWinningNumbers();
     }
   }
 
   static async getBonusNumber(winningNumbers) {
-    const bonusNumber = await Console.readLineAsync("");
-    BonusNumberValidator.validateBonusNumber(bonusNumber, winningNumbers);
-    return parseInt(bonusNumber, 10);
+    try {
+      const bonusNumber = await Console.readLineAsync("");
+      BonusNumberValidator.validateBonusNumber(bonusNumber, winningNumbers);
+      return parseInt(bonusNumber, 10);
+    } catch (error) {
+      OutputView.printError(error);
+      return this.getBonusNumber(winningNumbers);
+    }
   }
 }
