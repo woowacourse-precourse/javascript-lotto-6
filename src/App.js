@@ -3,7 +3,7 @@ import OutputPrintout from "./utils/OutputPrintout.js";
 
 class App {
 	async play() {
-		OutputPrintout.printLottoCount(await InputPrintout.inputAmount());
+		OutputPrintout.printLottos(await InputPrintout.inputAmount());
 	}
 }
 

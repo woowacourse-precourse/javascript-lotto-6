@@ -14,7 +14,7 @@ const PRINT_INPUT = Object.freeze({
 });
 
 const PRINT_OUTPUT = Object.freeze({
-	outputLottoCount: "개를 구매했습니다.\n",
+	outputLottoCount: "개를 구매했습니다.",
 });
 
 const ERROR_MESSAGE = Object.freeze({
