@@ -77,7 +77,6 @@ class LotteryPrize {
           break;
       }
     });
-    console.log('prize', prize);
     return { ...prize };
   }
 
