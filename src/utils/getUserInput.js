@@ -12,7 +12,7 @@ export const checkValueIsInteger = (value) => {
   return false;
 }
 
-export const getLottoCntFromInputMoney = async (inputMoney) => {
+export const getLottoCntFromInputMoney = (inputMoney) => {
   if(!checkValueIsNumber(inputMoney)) {
       throw new Error('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
   }
