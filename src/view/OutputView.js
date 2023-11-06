@@ -5,15 +5,17 @@ import { SETTING } from "../constants/Settings.js";
 class OutputView {
   static async printLottoPaperCount(number) {
     try {
-      Console.print(format(CONSOLE_MESSAGE.outputLottoNumber, number));
+      Console.print(format(CONSOLE_MESSAGE.outputLottoCount, number));
     } catch (error) {
       throw error;
     }
   }
 
-  static async printLotto(number) {
+  static async printLotto(numberList) {
     try {
-      Console.print(number);
+      numberList.map((number) => {
+        Console.print("[" + number.join(", ") + "]");
+      });
     } catch (error) {
       throw error;
     }

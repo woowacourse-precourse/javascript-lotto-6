@@ -4,7 +4,8 @@ export const CONSOLE_MESSAGE = Object.freeze({
   inputPrice: "구입금액을 입력해 주세요.\n",
   inputLottoNumbers: "\n당첨번호를 입력해 주세요.\n",
   inputBonusNumber: "\n보너스 번호를 입력해 주세요.\n",
-  outputLottoNumber: "\n{0}개를 구매했습니다.",
+  outputLottoCount: "\n{0}개를 구매했습니다.",
+  outputLottoNumber: `{0}`,
   outputFirst: `6개 일치 (${SETTING.first_prize.toLocaleString(
     "ko-KR"
   )}원) - {0}개`,

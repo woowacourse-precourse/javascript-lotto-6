@@ -9,7 +9,7 @@ describe("로또 결과 테스트", () => {
     const output = [1, 0, 0, 0, 0];
 
     const lotto = new LottoResult();
-    lotto.setRank(userNumbers, answerNumbers, bonusNumber);
+    lotto.setRank(userNumbers, answerNumbers);
 
     expect(lotto.getLottoRank()).toStrictEqual(output);
   });
@@ -17,11 +17,10 @@ describe("로또 결과 테스트", () => {
   test("1등", () => {
     const userNumbers = [1, 2, 3, 4, 5, 6];
     const answerNumbers = [1, 2, 3, 4, 5, 6];
-    const bonusNumber = 7;
     const output = [1, 0, 0, 0, 0];
 
     const lotto = new LottoResult();
-    lotto.setRank(userNumbers, answerNumbers, bonusNumber);
+    lotto.setRank(userNumbers, answerNumbers);
 
     expect(lotto.getLottoRank()).toStrictEqual(output);
   });
@@ -33,7 +32,8 @@ describe("로또 결과 테스트", () => {
     const output = [0, 1, 0, 0, 0];
 
     const lotto = new LottoResult();
-    lotto.setRank(userNumbers, answerNumbers, bonusNumber);
+    lotto.setBonusNumber(bonusNumber);
+    lotto.setRank(userNumbers, answerNumbers);
 
     expect(lotto.getLottoRank()).toStrictEqual(output);
   });
@@ -41,11 +41,10 @@ describe("로또 결과 테스트", () => {
   test("3등", () => {
     const userNumbers = [1, 2, 3, 4, 5, 8];
     const answerNumbers = [1, 2, 3, 4, 5, 6];
-    const bonusNumber = 7;
     const output = [0, 0, 1, 0, 0];
 
     const lotto = new LottoResult();
-    lotto.setRank(userNumbers, answerNumbers, bonusNumber);
+    lotto.setRank(userNumbers, answerNumbers);
 
     expect(lotto.getLottoRank()).toStrictEqual(output);
   });
@@ -53,11 +52,10 @@ describe("로또 결과 테스트", () => {
   test("4등", () => {
     const userNumbers = [1, 2, 3, 4, 7, 8];
     const answerNumbers = [1, 2, 3, 4, 5, 6];
-    const bonusNumber = 7;
     const output = [0, 0, 0, 1, 0];
 
     const lotto = new LottoResult();
-    lotto.setRank(userNumbers, answerNumbers, bonusNumber);
+    lotto.setRank(userNumbers, answerNumbers);
 
     expect(lotto.getLottoRank()).toStrictEqual(output);
   });
@@ -65,11 +63,10 @@ describe("로또 결과 테스트", () => {
   test("5등", () => {
     const userNumbers = [1, 2, 3, 7, 8, 9];
     const answerNumbers = [1, 2, 3, 4, 5, 6];
-    const bonusNumber = 7;
     const output = [0, 0, 0, 0, 1];
 
     const lotto = new LottoResult();
-    lotto.setRank(userNumbers, answerNumbers, bonusNumber);
+    lotto.setRank(userNumbers, answerNumbers);
 
     expect(lotto.getLottoRank()).toStrictEqual(output);
   });

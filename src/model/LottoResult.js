@@ -2,14 +2,16 @@ import { SETTING } from "../constants/Settings.js";
 class LottoResult {
   #lottoRank;
   #lottoPrize;
+  #bonusNumber;
 
   constructor() {
     this.#lottoRank = [0, 0, 0, 0, 0];
     this.#lottoPrize = 0;
+    this.#bonusNumber = 0;
   }
 
-  setRank(userNumbers, answerNumbers, bonusNumber) {
-    const isBonusNumberMatch = userNumbers.includes(Number(bonusNumber));
+  setRank(userNumbers, answerNumbers) {
+    const isBonusNumberMatch = userNumbers.includes(this.#bonusNumber);
 
     userNumbers = userNumbers.map((number) => Number(number));
     answerNumbers = answerNumbers.map((number) => Number(number));
@@ -30,10 +32,6 @@ class LottoResult {
     if (matchCount >= 3) this.#lottoRank[ranking[matchCount] - 1] += 1;
   }
 
-  getLottoRank() {
-    return this.#lottoRank;
-  }
-
   setLottoPrize() {
     const prize = [
       SETTING.first_prize,
@@ -47,6 +45,18 @@ class LottoResult {
       return (this.#lottoPrize = acc);
     }, 0);
     console.log(this.#lottoPrize);
+  }
+
+  setBonusNumber(number) {
+    this.#bonusNumber = number;
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
+
+  getLottoRank() {
+    return this.#lottoRank;
   }
 
   getLottoPrize() {

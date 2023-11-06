@@ -2,16 +2,13 @@ import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 import Lotto from "../model/Lotto.js";
 import { generateRandomNumber } from "../utils/RandomNumber.js";
-import {
-  priceValidation,
-  numberValidation,
-  bonusNubmerValidation,
-} from "../utils/Validation.js";
-import AnswerLotto from "../model/AnswerLotto.js";
+import { priceValidation, bonusNubmerValidation } from "../utils/Validation.js";
+import UserLotto from "../model/UserLotto.js";
 import LottoResult from "../model/LottoResult.js";
 
 class LottoController {
   #answerLotto;
+  #userLotto;
   #lottoResult;
   #lottoPrice;
   #lottoPage = [];
@@ -20,10 +17,8 @@ class LottoController {
     try {
       await this.#createLotto();
       await this.#createAnswerLotto();
-      this.#lottoResult = new LottoResult();
       this.#setLottoResult();
       OutputView.printLottoResult(this.#lottoResult.getLottoRank());
-
       this.#lottoResult.setLottoPrize();
       OutputView.printLottoRate(
         this.#lottoPrice,
@@ -38,8 +33,9 @@ class LottoController {
     try {
       this.#lottoPrice = await this.#getUserPrice();
       const count = this.#lottoPrice / 1000;
-      this.#printLottoCount(count);
-      this.#getLottoList(count);
+      this.#lottoResult = new LottoResult();
+      this.#userLotto = new UserLotto(count);
+      this.#printLottoBuy(count);
     } catch (error) {
       throw error;
     }
@@ -47,35 +43,25 @@ class LottoController {
 
   async #createAnswerLotto() {
     try {
-      const lottoNumber = await this.#getUserLottoNumbers();
-      const bonusNumber = await this.#getUserBonusNumber(lottoNumber);
-
-      this.#answerLotto = new AnswerLotto(lottoNumber, bonusNumber);
+      this.#answerLotto = new Lotto(await this.#getUserLottoNumbers());
+      this.#lottoResult.setBonusNumber(
+        await this.#getUserBonusNumber(this.#answerLotto.getLottoNumber())
+      );
     } catch (error) {
       throw error;
     }
   }
 
   #setLottoResult() {
-    this.#lottoPage.forEach((page) => {
-      this.#lottoResult.setRank(
-        page.getLottoNumber(),
-        this.#answerLotto.getLottoNumber(),
-        this.#answerLotto.getBonusNumber()
-      );
+    const userNumbers = this.#userLotto.getLottoNumber();
+    userNumbers.forEach((userNumber) => {
+      this.#lottoResult.setRank(userNumber, this.#answerLotto.getLottoNumber());
     });
   }
 
-  #printLottoCount(count) {
+  #printLottoBuy(count) {
     OutputView.printLottoPaperCount(count);
-  }
-
-  #getLottoList(count) {
-    Array.from({ length: count }).forEach(() => {
-      let lotto = new Lotto(generateRandomNumber());
-      OutputView.printLotto(lotto.getLottoNumber());
-      this.#lottoPage.push(lotto);
-    });
+    OutputView.printLotto(this.#userLotto.getLottoNumber());
   }
 
   async #getUserPrice() {
@@ -92,7 +78,6 @@ class LottoController {
     try {
       const lottoNumbers = await InputView.getLottoNumbers();
       const lottoNumber = lottoNumbers.split(",");
-      numberValidation(lottoNumber);
       return lottoNumber;
     } catch (error) {
       throw error;
