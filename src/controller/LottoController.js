@@ -4,6 +4,7 @@ import Validator from '../model/Validator.js';
 import Calculate from '../model/Calculate.js';
 import LottoGenerator from '../model/LottoGenerator.js';
 import Lotto from '../Lotto.js';
+import Bonus from '../model/Bonus.js';
 import { Console } from '@woowacourse/mission-utils';
 
 export default class LottoController {
@@ -51,7 +52,8 @@ export default class LottoController {
 
   #lottoNumberValidate(inputValue) {
     try {
-      this.#correctNumbers = inputValue.split(',');
+      // this.#correctNumbers = inputValue.split(',');
+      this.#correctNumbers = inputValue.split(',').map(number => Number(number));
       this.#lotto = new Lotto(this.#correctNumbers);
       this.inputBonusNumber();
     } catch (error) {
@@ -62,16 +64,15 @@ export default class LottoController {
 
   async inputBonusNumber() {
     const bonusNumber = await InputView.bonusNumberInput();
-    Console.print(bonusNumber);
-    // this.#bonusNumberValidate(bonusNumber);
+    this.#bonusNumberValidate(bonusNumber);
   }
 
   #bonusNumberValidate(bonusNumber) {
     try {
-      this.#bonus = new Lotto(this.#correctNumbers);
+      this.#bonus = new Bonus(bonusNumber, this.#lotto);
     } catch (error) {
       OutputView.printError(error);
-      this.inputUserLottoNumber();
+      this.inputBonusNumber();
     }
   }
 }

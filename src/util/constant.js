@@ -10,7 +10,6 @@ export const ERROR = Object.freeze({
   notDivisibleMoney: `[ERROR] 1000단위의 금액을 입력해주세요.\n`,
   emptyValue: `[ERROR] 값을 입력해주세요.\n`,
   notNumberic: `[ERROR] 양의 정수값만 입력해주세요.\n`,
-  // notInteger: `[ERROR] 정수형을 입력해주세요.\n`,
   underThousandMoney: `[ERROR] 1000원 이상을 입력해주세요.\n`,
   notSixNumber: `[ERROR] 6개의 숫자를 쉼표를 통해 구분해 입력해 주세요.\n`,
   rangeOverInput: `[ERROR] 1~45 사이의 수만 입력해주세요.\n`,
