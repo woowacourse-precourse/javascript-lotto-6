@@ -1,5 +1,6 @@
 export const SYSTEM_MESSAGE = {
-  INPUT_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.',
+  INPUT_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
+  PURCHASE_LOTTO_MESSAGE: '개를 구매했습니다.',
 };
 
 export const ERROR_MESSAGE = {

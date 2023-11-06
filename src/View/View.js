@@ -8,6 +8,9 @@ const View = {
     validatePurchaseAmount(purchaseAmount);
     return purchaseAmount;
   },
+  printCountOfLotto(countOfLotto) {
+    Console.print(countOfLotto + SYSTEM_MESSAGE.PURCHASE_LOTTO_MESSAGE);
+  },
 };
 
 export default View;
