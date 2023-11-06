@@ -6,6 +6,12 @@ const OutputView = {
     const totalCounts = price / LOTTO_PRICE;
     Console.print(`\n${totalCounts}개를 구매했습니다.`);
   },
+
+  printLottoNumbers(lottos) {
+    for (const lottoNumbers of lottos) {
+      Console.print(lottoNumbers);
+    }
+  },
 };
 
 export default OutputView;
