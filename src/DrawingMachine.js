@@ -17,8 +17,14 @@ class DrawingMachine {
   }
 
   async drawWinningLotto() {
-    const value = await this.getWinningNumbers();
-    this.setWinningLotto(value);
+    while (!this.#winningLotto) {
+      try {
+        const value = await this.getWinningNumbers();
+        this.setWinningLotto(value);
+      } catch (error) {
+        this.#winningLotto = undefined;
+      }
+    }
   }
 
   async getBonusNumber() {
@@ -30,9 +36,16 @@ class DrawingMachine {
   }
 
   async drawBonusBall() {
-    const number = await this.getBonusNumber();
-    this.setBonusBall(number);
+    while (!this.#bonusBall) {
+      try {
+        const number = await this.getBonusNumber();
+        this.setBonusBall(number);
+      } catch (error) {
+        this.#bonusBall = undefined;
+      }
+    }
   }
+
   getWinningLottoAndBonusBall() {
     return {
       lotto: this.#winningLotto,
