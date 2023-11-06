@@ -19,7 +19,7 @@ class BonusNumber {
       throw new Error('[ERROR] 보너스 번호는 1~45 사이의 수 이여야 합니다.');
     }
 
-    if (winningNumber.includes(bonusNumber)) {
+    if (winningNumber.includes(Number(bonusNumber))) {
       throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.');
     }
   }
