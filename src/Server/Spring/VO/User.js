@@ -20,6 +20,7 @@ class User {
     const purchaseAmount = paramPurchaseAmount.trim();
     if (purchaseAmount === '') throw ERROR_MESSAGE.isBlank;
     if (Number.isNaN(Number(purchaseAmount))) throw ERROR_MESSAGE.isChar;
+    if (Number(purchaseAmount) < CONSTANTS.lottoPrice) throw ERROR_MESSAGE.isAmountSmall;
     if (Number(purchaseAmount) % 1000 !== 0) throw ERROR_MESSAGE.isNotThousandDivide;
   }
 

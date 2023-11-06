@@ -1,8 +1,9 @@
 import UserController from '../../../src/Server/Spring/Annotation/@Controller/UserController.js';
 import User from '../../../src/Server/Spring/VO/User.js';
 import CONSTANTS from '../../../src/Util/Constants.js';
+import { ERROR_MESSAGE } from '../../../src/Util/Message.js';
 
-describe('UserController 테스트', () => {
+describe('User도메인 테스트', () => {
   let userController;
   const purchaseAmount = '8000';
   const purchaseAmounts = ['8000', '10000', '12000'];
@@ -38,8 +39,8 @@ describe('UserController 테스트', () => {
     });
   });
 
-  describe('user 객체 구입금액(purchaseMaount) 테스트', () => {
-    test('user객체의 구입금액(purchaseMaount)는 전달받은 금액이여야 한다.', () => {
+  describe('user 객체 구입금액(purchaseAmount) 테스트', () => {
+    test('user객체의 구입금액(purchaseAmount)는 전달받은 금액이여야 한다.', () => {
       // given
       const expectAnswers = [8000, 10000, 12000];
 
@@ -52,6 +53,46 @@ describe('UserController 테스트', () => {
       // then
       testCaseResult.forEach((result, idx) => {
         expect(result).toBe(expectAnswers[idx]);
+      });
+    });
+
+    test('user객체의 구입금액(purchaseAmount)이 공백이면 에러가 출력된다.', () => {
+      // given
+      const testCase = '';
+
+      // then
+      expect(() => userController.requestMapping(testCase)).toThrow(ERROR_MESSAGE.isBlank);
+    });
+
+    test('user객체의 구입금액(purchaseAmount)이 문자면 에러가 출력된다.', () => {
+      // given
+      const testCases = ['홍', 'a', '!', '1A', '23홍', '2 a'];
+
+      // then
+      testCases.forEach((testCase) => {
+        expect(() => userController.requestMapping(testCase)).toThrow(ERROR_MESSAGE.isChar);
+      });
+    });
+
+    test(`user객체의 구입금액(purchaseAmount)은 ${CONSTANTS.lottoPrice}보다 작을시 에러가 출력된다.`, () => {
+      // given
+      const testCases = ['0', '-1000', '-5000', '800', '200'];
+
+      // then
+      testCases.forEach((testCase) => {
+        expect(() => userController.requestMapping(testCase)).toThrow(ERROR_MESSAGE.isAmountSmall);
+      });
+    });
+
+    test(`user객체의 구입금액(purchaseAmount)은 ${CONSTANTS.lottoPrice}로 나누어 떨어지지 않으면 에러가 출력된다.`, () => {
+      // given
+      const testCases = ['10001', '10010', '10100'];
+
+      // then
+      testCases.forEach((testCase) => {
+        expect(() => userController.requestMapping(testCase)).toThrow(
+          ERROR_MESSAGE.isNotThousandDivide,
+        );
       });
     });
   });
