@@ -13,6 +13,7 @@ import LottoResult from "../model/LottoResult.js";
 class LottoController {
   #answerLotto;
   #lottoResult;
+  #lottoPrice;
   #lottoPage = [];
 
   async start() {
@@ -22,6 +23,12 @@ class LottoController {
       this.#lottoResult = new LottoResult();
       this.#setLottoResult();
       OutputView.printLottoResult(this.#lottoResult.getLottoRank());
+
+      this.#lottoResult.setLottoPrize();
+      OutputView.printLottoRate(
+        this.#lottoPrice,
+        this.#lottoResult.getLottoPrize()
+      );
     } catch (error) {
       throw error;
     }
@@ -29,8 +36,8 @@ class LottoController {
 
   async #createLotto() {
     try {
-      const price = await this.#getUserPrice();
-      const count = price / 1000;
+      this.#lottoPrice = await this.#getUserPrice();
+      const count = this.#lottoPrice / 1000;
       this.#printLottoCount(count);
       this.#getLottoList(count);
     } catch (error) {

@@ -8,6 +8,7 @@ export const CONSOLE_MESSAGE = Object.freeze({
   outputThird: "5개 일치 (1,500,000원) - {0}개",
   outputFourth: "4개 일치 (50,000원) - {0}개",
   outputFifth: "3개 일치 (5,000원) - {0}개",
+  outputRate: "총 수익률은 {0}%입니다.",
 });
 
 export function format(templateMessage, ...args) {

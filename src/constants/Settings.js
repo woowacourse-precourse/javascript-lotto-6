@@ -8,4 +8,9 @@ export const SETTING = Object.freeze({
   fourth_rank: 4,
   fifth_rank: 5,
   no_rank: 0,
+  first_prize: 2000000000,
+  second_prize: 30000000,
+  third_prize: 1500000,
+  fourth_prize: 50000,
+  fifth_prize: 5000,
 });

@@ -36,6 +36,15 @@ class OutputView {
       format(CONSOLE_MESSAGE.outputFirst, list[SETTING.first_rank - 1])
     );
   }
+
+  static printLottoRate(price, totalPrize) {
+    Console.print(
+      format(
+        CONSOLE_MESSAGE.outputRate,
+        ((totalPrize / price) * 100).toFixed(1)
+      )
+    );
+  }
 }
 
 export default OutputView;
