@@ -51,25 +51,41 @@ class System {
 
   async getBonusNumber(lotto) {
     let bonusNumber = 0;
-    let lottoNumbersSet = new Set();
+    const lottoNumbersSet = new Set(lotto.getNumbers());
     while (true) {
-      const inputBonusNumber = await Console.readLineAsync(
-        INPUT_MESSAGE.bonusNumber
-      );
-      bonusNumber = Number(inputBonusNumber);
-      lottoNumbersSet = new Set(lotto.getNumbers());
       try {
-        this.isDuplicateLottoNumber(bonusNumber, lottoNumbersSet);
+        bonusNumber = await this.#fetchValidBonusNumber();
+        this.#isDuplicateLottoNumber(bonusNumber, lottoNumbersSet);
         break;
       } catch (error) {
         Console.print(error.message);
       }
     }
 
-    return [bonusNumber, lottoNumbersSet];
+    return bonusNumber;
   }
 
-  isDuplicateLottoNumber(bonusNumber, lottoNumbersSet) {
+  async #fetchValidBonusNumber() {
+    const inputBonusNumber = await this.#getInputBonusNumber();
+    const bonusNumber = Number(inputBonusNumber);
+    this.#validateBonusNumber(bonusNumber);
+    return bonusNumber;
+  }
+
+  #validateBonusNumber(bonusNumber) {
+    if (Object.is(bonusNumber, NaN)) {
+      throw new Error(ERROR_MESSAGE.invalidMoneyError);
+    }
+  }
+
+  async #getInputBonusNumber() {
+    const inputBonusNumber = await Console.readLineAsync(
+      INPUT_MESSAGE.bonusNumber
+    );
+    return inputBonusNumber;
+  }
+
+  #isDuplicateLottoNumber(bonusNumber, lottoNumbersSet) {
     if (lottoNumbersSet.has(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.duplicateLottoNumber);
     }
