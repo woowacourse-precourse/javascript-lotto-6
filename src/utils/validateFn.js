@@ -1,5 +1,11 @@
 import { ERROR_MESSAGE } from '../constant/message.js';
 
+export const validateEmpty = (input) => {
+  if (!input) {
+    throw ERROR_MESSAGE.INVALID_EMPTY_INPUT;
+  }
+};
+
 export const validateNumber = (number) => {
   const splitNumber = number.toString().split('');
 
