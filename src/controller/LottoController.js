@@ -50,6 +50,13 @@ class LottoController {
     });
     this.printLottoList();
   }
+
+  /** 로또 출력 함수 */
+  printLottoList() {
+    this.#lottos.forEach((lotto) => {
+      OutputView.lottoList(lotto);
+    });
+  }
 }
 
 export default LottoController;
