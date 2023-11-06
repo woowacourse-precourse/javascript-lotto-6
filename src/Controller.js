@@ -12,14 +12,14 @@ class Controller {
 
   #bonusNumber;
 
-  #matchStats;
+  #matchStatus;
 
   async progress() {
     await this.#handlerErrorAndProceed(this.#getLottoTicketList);
     this.#displayLottoTicket();
     await this.#handlerErrorAndProceed(this.#getWinningNumbers);
     await this.#handlerErrorAndProceed(this.#getBonusNumber);
-    await this.#getMatchStats();
+    await this.#getMatchStatus();
   }
 
   async #handlerErrorAndProceed(method) {
@@ -50,12 +50,12 @@ class Controller {
     this.#bonusNumber = new Bonus(this.#winningNumbers, inputBonusNumber).bonusNumber;
   }
 
-  async #getMatchStats() {
-    this.#matchStats = new Matcher(
+  async #getMatchStatus() {
+    this.#matchStatus = new Matcher(
       this.#lottoTicketList,
       this.#winningNumbers,
       this.#bonusNumber,
-    ).matchStats;
+    ).matchStatus;
   }
 }
 
