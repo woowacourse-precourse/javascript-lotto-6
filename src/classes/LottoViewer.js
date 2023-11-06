@@ -3,11 +3,11 @@ import { MESSAGE } from '../constant/lottoConstants';
 
 class LottoViewer {
   static purchasedLottos(lottoTickets) {
-    const ticketsString = lottoTickets
+    const printTickets = lottoTickets
       .map((lotto) => `[${lotto.join(', ')}]`)
       .join('\n');
 
-    Console.print(`${lottoTickets.length}${MESSAGE.PURCHASED}\n${ticketsString}`);
+    Console.print(`${lottoTickets.length}${MESSAGE.PURCHASED}\n${printTickets}`);
   }
 }
 
