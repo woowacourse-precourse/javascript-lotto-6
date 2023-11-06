@@ -26,29 +26,30 @@ class Bonus {
   // }
 
   async validCheck(winning) {
-    let bonus = Number(await this.#bonusNum.getBonusNum());
-
-    // while (!valid) {
-    try {
-      Console.print(bonus);
-      Console.print(typeof bonus);
-      if (this.#isNumCheck(bonus)) throw new Error(`[ERRPR] 보너스 입력값은 숫자여야 합니다.`);
-      if (this.#duplCheckOfBonus(winning, bonus)) throw new Error(`[ERRPR] 보너스 숫자는 중복될 수 없습니다.`);
-      if (this.#validateNumRange(bonus)) throw new Error(`[ERROR] 숫자 범위는 1~45 사이입니다.`);
-
-      // valid = true;
-    } catch (error) {
-      Console.print('[ERRPR] 올바른 값을 입력해주세요.\n');
+    let bonus;
+    let valid = true;
+    while (valid) {
       bonus = Number(await this.#bonusNum.getBonusNum());
+      try {
+        // Console.print(bonus);
+        // Console.print(typeof bonus);
+        if (this.#isNumCheck(bonus)) throw new Error(`[ERRPR] 보너스 입력값은 숫자여야 합니다.`);
+        if (this.#duplCheckOfBonus(winning, bonus)) throw new Error(`[ERRPR] 보너스 숫자는 중복될 수 없습니다.`);
+        if (this.#validateNumRange(bonus)) throw new Error(`[ERROR] 숫자 범위는 1~45 사이입니다.`);
+
+        valid = false;
+      } catch (error) {
+        Console.print('[ERRPR] 올바른 값을 입력해주세요.\n');
+        continue;
+      }
     }
-    // }
 
     return bonus;
   }
 
   #isNumCheck(bonusNum) {
-    Console.print(bonusNum);
-    Console.print(typeof bonusNum);
+    // Console.print(bonusNum);
+    // Console.print(typeof bonusNum);
     const NumTypeBonus = Number(bonusNum);
     if (Number.isNaN(NumTypeBonus)) {
       // throw new Error(`보너스 입력값은 숫자여야 합니다.`);
@@ -57,10 +58,10 @@ class Bonus {
   }
 
   #duplCheckOfBonus(winningNum, bonusNum) {
-    Console.print(bonusNum);
-    Console.print(typeof bonusNum);
-    Console.print(winningNum);
-    Console.print(typeof winningNum);
+    // Console.print(bonusNum);
+    // Console.print(typeof bonusNum);
+    // Console.print(winningNum);
+    // Console.print(typeof winningNum);
     if (winningNum.includes(bonusNum)) {
       // throw new Error(`[ERRPR] 보너스 숫자는 중복될 수 없습니다.`);
 
@@ -70,8 +71,8 @@ class Bonus {
 
   // 정답 숫자 입력 범위 확인, 정답, 보너스 둘 다 사용 가능
   #validateNumRange(inputNum) {
-    Console.print(inputNum);
-    Console.print(typeof inputNum);
+    // Console.print(inputNum);
+    // Console.print(typeof inputNum);
     const MIN_NUM = 1;
     const MAX_NUM = 45;
 
@@ -85,5 +86,5 @@ class Bonus {
 
 export default Bonus;
 
-const run = new Bonus();
-run.run();
+// const run = new Bonus();
+// run.run();
