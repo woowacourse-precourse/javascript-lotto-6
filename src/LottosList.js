@@ -7,15 +7,21 @@ import validatePurchaseAmount from './Validation/validatePurchaseAmount.js';
 
 class LottosList {
   #lottosList = [];
+  #lottoAmount;
 
   constructor(purchaseAmount) {
     this.validate(purchaseAmount);
+    this.calculateLottoAmount(purchaseAmount);
   }
 
   validate(purchaseAmount) {
     if (!validatePurchaseAmount(purchaseAmount)) {
       throw new Error(message.ERROR);
     }
+  }
+
+  calculateLottoAmount(purchaseAmount) {
+    return (this.lottoAmount = purchaseAmount / 1000);
   }
 
   produceNewLotto() {
