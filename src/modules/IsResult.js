@@ -1,5 +1,5 @@
-import { Console } from "@woowacourse/mission-utils";
-import { GAME_PRIZE, CORRECT_MESSAGE, LOTTO_MESSAGE } from "./constant.js";
+import { GAME_PRIZE, CORRECT_MESSAGE } from "./constant.js";
+import LottoMain from "./LottoMain.js";
 
 class IsResult {
   constructor(userLotto,winningNumber,bonusNumber, money) {
@@ -9,16 +9,9 @@ class IsResult {
     this.userCost = money;
   }
 
-  resultTitle() {
-    Console.print(LOTTO_MESSAGE.RESULT_VIEW);
-    this.winningResult()
-  }
-
-  resultView(result, prize) {
-    for(let key in result) {
-      Console.print(`${result[key].match} (${(result[key].price).toLocaleString()}원) - ${result[key].count}개`)
-    }
-    Console.print(`총 수익률은 ${((prize / this.userCost) * 100).toFixed(1)}%입니다.`)
+  lottoResult(result, prize) {
+    this.lottoMain = new LottoMain();
+    this.lottoMain.resultView(result, prize, this.userCost);
   }
 
   winningResult() {
@@ -50,7 +43,7 @@ class IsResult {
   prizeCalculate(result) {
     let prize = 0;
     for(let i = 1; i < 6; i++) prize += GAME_PRIZE[i] * result[6 - i].count
-    this.resultView(result, prize);
+    this.lottoResult(result, prize);
   }
 }
 
