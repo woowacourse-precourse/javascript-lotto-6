@@ -7,6 +7,8 @@ import Compare from './Compare.js';
 class App {
   buyLotto = new BuyLotto();
 
+  expense;
+
   lotteryTicket;
 
   winningNumber;
@@ -15,9 +17,11 @@ class App {
 
   resultLotto;
 
+  lottoRateOfReturn;
+
   async play() {
-    const expense = await Console.readLineAsync(prompt.ASK_AMOUNT);
-    const lotteryTicketCount = this.buyLotto.buyLottoCount(expense);
+    this.expense = await Console.readLineAsync(prompt.ASK_AMOUNT);
+    const lotteryTicketCount = this.buyLotto.buyLottoCount(this.expense);
 
     Console.print(`\n${lotteryTicketCount}${result.PURCHASE}`);
 
@@ -47,6 +51,35 @@ class App {
     );
 
     this.resultLotto = compare.compareLotto();
+
+    Console.print(
+      `${result.WINNING.THREE_MATCHES} ${this.resultLotto.fivePlace.sameCount}${result.COUNT}`,
+    );
+
+    Console.print(
+      `${result.WINNING.FOUR_MATCHES} ${this.resultLotto.fourthPlace.sameCount}${result.COUNT}`,
+    );
+
+    Console.print(
+      `${result.WINNING.FIVE_MATCHES} ${this.resultLotto.thirdPlace.sameCount}${result.COUNT}`,
+    );
+
+    Console.print(
+      `${result.WINNING.FIVE_AND_BONUS_MATCHES} ${this.resultLotto.secondPlace.sameCount}${result.COUNT}`,
+    );
+
+    Console.print(
+      `${result.WINNING.SIX_MATCHES} ${this.resultLotto.firstPlace.sameCount}${result.COUNT}`,
+    );
+
+    this.lottoRateOfReturn = compare.RateOfReturn(
+      this.resultLotto,
+      this.expense,
+    );
+
+    Console.print(
+      `${result.RATE_OF_RETURN} ${this.lottoRateOfReturn}${result.PERCENT}`,
+    );
   }
 
   winningInput(numberInput) {
