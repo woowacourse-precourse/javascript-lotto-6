@@ -27,6 +27,7 @@ class GameController {
       this.#lottoMachine.lottos,
       this.#winningLotto,
     );
+    this.#resultCalculator.getEarningRate(this.#lottoMachine.money);
   }
 
   async getMoney() {

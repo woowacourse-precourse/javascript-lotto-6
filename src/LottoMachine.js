@@ -6,6 +6,8 @@ import CustomError from './errors/CustomError.js';
 import isPositiveInteger from './utils/function.js';
 
 class LottoMachine {
+  #money;
+
   #numberOfLottos;
 
   #lottos;
@@ -13,6 +15,10 @@ class LottoMachine {
   constructor() {
     this.#numberOfLottos = 0;
     this.#lottos = [];
+  }
+
+  get money() {
+    return this.#money;
   }
 
   get numberOfLottos() {
@@ -25,6 +31,7 @@ class LottoMachine {
 
   insertMoney(money) {
     this.#validateMoney(money);
+    this.#money = money;
     this.#numberOfLottos = money / LOTTO.price;
   }
 

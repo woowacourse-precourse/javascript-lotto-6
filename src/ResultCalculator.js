@@ -1,7 +1,10 @@
 import LOTTO from './constants/lotto.js';
+import WINNING_PRICE from './constants/winningPrice.js';
 
 class ResultCalculator {
   #ranking;
+
+  #earningRate;
 
   constructor() {
     this.#ranking = {
@@ -46,6 +49,18 @@ class ResultCalculator {
     const SetLottos = new Set([...lotto.numbers, ...winningLotto.numbers]);
     const numberOfMatchingNumbers = LOTTO.size * 2 - SetLottos.size;
     return numberOfMatchingNumbers;
+  }
+
+  getEarningRate(money) {
+    const sum = this.#getSumOfWinningAmount();
+    this.#earningRate = (sum / money) * 100;
+  }
+
+  #getSumOfWinningAmount() {
+    return Object.entries(this.#ranking).reduce((acc, entry) => {
+      const [rank, cnt] = entry;
+      return acc + cnt * WINNING_PRICE[rank];
+    }, 0);
   }
 }
 
