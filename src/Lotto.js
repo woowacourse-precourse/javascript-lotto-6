@@ -1,18 +1,36 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
+import { SIX, START_INCLUSIVE, END_INCLUSIVE } from './constants/data.js';
+import { ERROR } from './constants/messages.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
+    if (!numbers) {
+      numbers = this.#pickNumbers();
+    }
     this.#validate(numbers);
     this.#numbers = numbers;
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== SIX) {
+      throw new Error(ERROR.not_a_valid_count);
+    }
+
+    const uniqueNumbers = [...new Set(numbers)];
+    if (numbers.length !== uniqueNumbers.length) {
+      throw new Error(ERROR.not_duplicate_numbers);
     }
   }
+  
+  getNumbers() {
+    return this.#numbers;
+  }
 
-  // TODO: 추가 기능 구현
+  #pickNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, SIX);
+  }
 }
 
 export default Lotto;
