@@ -3,7 +3,7 @@ import Lotto from "./Lotto.js";
 class App {
     async play() {
         const purchaseAmount = await this.buyLottoTickets();
-
+        const lottoTicketsQuantity = await this.getMaxPurchasedTickets(purchaseAmount);
     }
 
     async buyLottoTickets() {
@@ -13,8 +13,9 @@ class App {
         return parseInt(userInput);
     }
 
-    async getMaxPurchasedTickets() {
+    async getMaxPurchasedTickets(purchaseAmount) {
         //TODO : 로또 티켓의 최대 구매 가능 개수를 계산하고 반환한다.
+        return purchaseAmount/1000;
     }
 
     async randomizeLottoNumbers() {
