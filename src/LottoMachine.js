@@ -21,6 +21,12 @@ class LottoMachine {
             throw new Error("로또 구입 금액은 1000원 단위여야 합니다.");
         }
     }
+
+    calculateLottoCountFromAmount(purchaseAmount) {
+        return purchaseAmount / 1000;
+    }
+
+
 }
 
 export default LottoMachine;
