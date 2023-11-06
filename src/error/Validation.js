@@ -45,5 +45,3 @@ export const validateBonusNumber = (bonus, luckyNumberArray) => {
     throw new CustomError(LOTTO_ERROR.bonusConflict);
   } 
 };
-
-

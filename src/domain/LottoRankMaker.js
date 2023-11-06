@@ -62,18 +62,3 @@ class LottoRankMaker {
 }
 
 export default LottoRankMaker;
-
-/*
-const ticket = [
-  [45,44,43,42,41,40],
-  [1,2,3,4,5,6],
-  [1,2,3,4,5,6],
-  [5,4,3,11,12,7]
-]
-
-const answer = [5,4,3,11,12,34,7]
-
-const a = new LottoRankMaker(ticket,answer);
-
-console.log(a.getRankArray());*/
-

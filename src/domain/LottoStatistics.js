@@ -57,21 +57,7 @@ class LottoStatistics {
       this.#rankingStatusBoard[LOTTO_RANK.theFirst],
       this.#getProfitRate()
     ];
-    
-    /*
-    const earningRate = getEarningRate(this.#purchaseAmount, this.getFinalAmount());
-
-    return [
-      `3개 일치 (5,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theFifth]}개`,
-      `4개 일치 (50,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theFourth]}개`,
-      `5개 일치 (1,500,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theThird]}개`,
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theSecond]}개`,
-      `6개 일치 (2,000,000,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theFirst]}개`,
-      `총 수익률은 ${earningRate}%입니다.`
-    ];*/
-
   }  
 }
 
 export default LottoStatistics;
-

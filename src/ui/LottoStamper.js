@@ -29,6 +29,3 @@ export const showStatisticsResult = (statisticsArray) => {
 
   statisticsResultArray.forEach((statistic) => Console.print(statistic));
 };
-
-
-
