@@ -26,15 +26,11 @@ export default class ValidationService {
   }
 
   isInRange(ticket) {
-    const inRange =
-      ticket.length ===
-      ticket.filter((num) => {
-        return num >= MIN && num <= MAX;
-      });
-
-    if (!inRange) {
-      throw new Error(ERROR_MESSAGES.overRange);
-    }
+    ticket.forEach((num) => {
+      if (num < MIN || num > MAX) {
+        throw new Error(ERROR_MESSAGES.overRange);
+      }
+    });
   }
 
   hasSixNumbers(ticket) {
@@ -54,7 +50,8 @@ export default class ValidationService {
   }
 
   isSorted(ticket) {
-    const sortedTickets = ticket.toSorted((a, b) => a - b);
+    const sortedTickets = [...ticket];
+    sortedTickets.sort((a, b) => a - b);
     ticket.forEach((num, index) => {
       if (sortedTickets[index] != num) {
         throw new Error(ERROR_MESSAGES.notSorted);
