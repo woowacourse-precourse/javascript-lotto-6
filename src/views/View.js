@@ -17,21 +17,29 @@ class View {
     const moneyAmountInput = await this.#inputView.readInteger(
       MESSAGE.read.moneyAmount,
     );
-    return Number(moneyAmountInput);
+    return this.#parseNumberFromString(moneyAmountInput);
   }
 
   async readWinningNumbers() {
     const winningNumbersInput = await this.#inputView.readMultipleIntegers(
       MESSAGE.read.lottoNumbers,
     );
-    return winningNumbersInput.split(SYMBOL.inputNumberSeparator).map(Number);
+    return this.#parseMultipleNumbersFromString(winningNumbersInput);
   }
 
   async readBonusNumber() {
     const bonusNumberInput = await this.#inputView.readInteger(
       MESSAGE.read.bonusNumber,
     );
-    return Number(bonusNumberInput);
+    return this.#parseNumberFromString(bonusNumberInput);
+  }
+
+  #parseNumberFromString(input) {
+    return Number(input);
+  }
+
+  #parseMultipleNumbersFromString(input) {
+    return input.split(SYMBOL.inputNumberSeparator).map(Number);
   }
 
   printLottoPurchaseResult(lottos) {
