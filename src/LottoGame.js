@@ -10,10 +10,12 @@ class LottoGame {
     this.#purchaseLottos(ticketCount);
     Print.printTickets([...this.#tickets]);
     const winningNumbersArray = await LottoGame.setWinngNumberArray();
-    const bonusNumber = await LottoGame.setBonusNumber([
-      ...winningNumbersArray.getNumbers(),
-    ]);
-    const results = LottoGame.calculateResult(bonusNumber, [...this.#tickets], [...winningNumbersArray.getNumbers()]);
+    const bonusNumber = await LottoGame.setBonusNumber([...winningNumbersArray.getNumbers()]);
+    const results = LottoGame.calculateResult(
+      bonusNumber,
+      [...this.#tickets],
+      [...winningNumbersArray.getNumbers()],
+    );
     LottoGame.printResults(results);
     LottoGame.printEarningRate(ticketCount, results);
   }
@@ -24,7 +26,7 @@ class LottoGame {
       Number(purchaseAmount) % 1000 !== 0 ||
       Number(purchaseAmount) < 1000
     ) {
-      throw '[ERROR] 구입 금액이 잘못 입력되었습니다.';
+      throw new Error('[ERROR] 구입 금액이 잘못 입력되었습니다.');
     }
     return Number(purchaseAmount) / 1000;
   }
@@ -44,7 +46,7 @@ class LottoGame {
         const ticketCount = LottoGame.validatePurchaseAmount(purchaseAmount);
         return ticketCount;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
     }
   }
@@ -54,11 +56,11 @@ class LottoGame {
       try {
         const winningNumbers = await Query.getWinningNumber();
         const winningNumbersArray = new Lotto(
-          LottoGame.winningNumberToWinningNumberArray(winningNumbers)
+          LottoGame.winningNumberToWinningNumberArray(winningNumbers),
         );
         return winningNumbersArray;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
     }
   }
@@ -69,11 +71,11 @@ class LottoGame {
         const bonusNumber = await Query.getBonusNumber();
         const bonusNumberInt = this.validatebonusNumber(
           bonusNumber,
-          winningNumbersArray
+          winningNumbersArray,
         );
         return bonusNumberInt;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
     }
   }
@@ -93,7 +95,7 @@ class LottoGame {
       bonusNumberInt < 1 ||
       bonusNumberInt > 45
     ) {
-      throw '[ERROR] 보너스 숫자가 잘못되었습니다.';
+      throw new Error('[ERROR] 보너스 숫자가 잘못되었습니다.');
     }
     return bonusNumberInt;
   }
@@ -110,28 +112,25 @@ class LottoGame {
     return tickets.reduce(
       (matchCounts, ticket) => {
         const matchCount = ticket.getMatchCount(winningNumbersArray);
-        const rank = LottoGame.getRank(
-          matchCount,
-          ticket.hasNumber(bonusNumber)
-        );
-        if (rank > 0) matchCounts[rank - 1]++;
-        return matchCounts;
+        const rank = LottoGame.getRank(matchCount, ticket.hasNumber(bonusNumber));
+        const newMatchCounts = [...matchCounts];
+        if (rank > 0) newMatchCounts[rank - 1] += 1;
+        return newMatchCounts;
       },
-      [0, 0, 0, 0, 0]
+      [0, 0, 0, 0, 0],
     );
   }
 
   static printResults(results) {
     const prizeMoney = ['5000', '50000', '1500000', '30000000', '2000000000'];
     const matchCount = [3, 4, 5, 5, 6];
-    Console.print('\n당첨 통계\n---');
     results.forEach((result, index) => {
       const bonusText = index === 3 ? ', 보너스 볼 일치' : '';
       Console.print(
         `${matchCount[index]}개 일치${bonusText} (${prizeMoney[index].replace(
           /\B(?=(\d{3})+(?!\d))/g,
-          ','
-        )}원) - ${result}개`
+          ',',
+        )}원) - ${result}개`,
       );
     });
   }
@@ -140,7 +139,7 @@ class LottoGame {
     const prizeMoney = [5000, 50000, 1500000, 30000000, 2000000000];
     const totalEarnings = results.reduce(
       (sum, result, index) => sum + result * prizeMoney[index],
-      0
+      0,
     );
     const earningsRate = (totalEarnings / (ticketCount * 1000)) * 100;
     return earningsRate.toFixed(1); // 소수점 둘째 자리에서 반올림
