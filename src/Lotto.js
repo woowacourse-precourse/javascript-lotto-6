@@ -18,7 +18,17 @@ class Lotto {
     MissionUtils.Console.print("[" + this.#numbers.join(", ") + "]");
   }
 
-  // TODO: 추가 기능 구현
+  compareNumbers(winningNumbers, bonusNumber) {
+    let winningCount = 0;
+    let bonusCount = 0;
+    this.#numbers.forEach((number) => {
+      if (winningNumbers.includes(number)) winningCount += 1;
+    });
+    if (winningCount === 5 && this.#numbers.includes(bonusNumber))
+      bonusCount += 1;
+
+    return { winningCount, bonusCount };
+  }
 }
 
 export default Lotto;

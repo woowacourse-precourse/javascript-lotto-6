@@ -33,7 +33,7 @@ describe("로또 보너스 번호 입력 테스트", () => {
     expect(app.bonusNumber).toEqual(RESULT);
   });
 
-  test("입력된 숫자가 숫자가 아닐 경우", async () => {
+  test("입력된 번호가 숫자가 아닐 경우", async () => {
     // given
     const INPUT_WINNING_NUMBERS = ["1,2,3,4,5,6", "oh"];
     mockQuestions(INPUT_WINNING_NUMBERS);
