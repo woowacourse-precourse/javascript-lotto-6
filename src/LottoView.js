@@ -4,8 +4,8 @@ class LottoView {
   createPurchaseInfoString(numberOfSets, lottoNumbers) {
     const formattedNumbers = lottoNumbers
       .map((numbers) => `[${numbers.join(", ")}]`)
-      .join(" ");
-    return `${numberOfSets}개를 구매했습니다. ${formattedNumbers}`;
+      .join("\n");
+    return `${numberOfSets}개를 구매했습니다. \n${formattedNumbers}`;
   }
 
   createStatisticsString(statistics) {
