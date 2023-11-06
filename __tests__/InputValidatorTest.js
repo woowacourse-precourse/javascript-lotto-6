@@ -14,4 +14,10 @@ describe('입력 예외 상황 테스트', () => {
       Validator.invalidNumber(received);
     }).toThrow(ERROR.message.invalidNumber);
   });
+  test('값을 입력하지 않았을 경우', () => {
+    const received = '';
+    expect(() => {
+      Validator.missingValue(received);
+    }).toThrow(ERROR.message.missingValue);
+  });
 });
