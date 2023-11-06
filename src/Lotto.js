@@ -8,7 +8,10 @@ class Lotto {
     this.#validateNumbersLength(numbers);
     this.#validateNumbersRange(numbers);
     this.#hasNoRepeatNumber(numbers);
-    this.#numbers = numbers.sort();
+    this.#setNumbers(numbers);
+  }
+  #setNumbers(numbers) {
+    this.#numbers = numbers.sort((a, b) => a - b);
   }
   #isNumberArray(numbers) {
     if (!Array.isArray(numbers)) throwError(ERROR_MESSAGE.isNotNumberArray);
