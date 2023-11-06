@@ -6,6 +6,7 @@ import {
   PRICE_UNIT,
   PRICE_ZERO
 } from "./constants.js";
+import Lotto from "./Lotto.js";
 
 class App {
   lottoPrice;
@@ -21,6 +22,7 @@ class App {
       await this.getLottoPrice();
     }
 
+    this.setLottoNumbers();
     this.showLottoNumbers();
   }
 
@@ -42,15 +44,18 @@ class App {
     if(lottoPrice % PRICE_UNIT != PRICE_ZERO) throw ERROR_MESSAGE.PRICE_NOT_REST;
   }
 
-  showLottoNumbers() {
+  setLottoNumbers() {
     const lottoTicketLen = this.lottoPrice / PRICE_UNIT;
-    Console.print(`${lottoTicketLen + MESSAGE.LOTTO_TICKET}`)
 
     for(let i = 0; i < lottoTicketLen; i++){
-      const lottoTicket = this.getLottoNumber();
-      Console.print(lottoTicket);
-      this.lottiTickets.push(lottoTicket);
+      this.lottiTickets.push(new Lotto(this.getLottoNumber()));
     }
+  }
+
+  showLottoNumbers() {
+    this.lottiTickets.forEach((lotto) => {
+      Console.print(lotto.getNumbers());
+    })
   }
 
   getLottoNumber() {
