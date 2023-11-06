@@ -1,4 +1,4 @@
-import Lotto from '../src/Lotto.js';
+import Lotto from '../model/Lotto.js';
 import InputView from '../view/InputView.js';
 import Label from '../constants/Label.js';
 
