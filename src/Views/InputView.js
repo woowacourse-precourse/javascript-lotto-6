@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import MESSAGES from "./messages";
+import MESSAGES from "./messages.js";
 
 export default class InputView {
   static async promptToBuyLottos() {
