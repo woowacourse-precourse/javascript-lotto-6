@@ -43,7 +43,7 @@ class LottoRewardsService {
     const rewards = LottoRewards.of(winningLotto);
     const result = rewards.getLottosResult(lottos);
 
-    return result;
+    return result.reverse();
   }
 
   /**
