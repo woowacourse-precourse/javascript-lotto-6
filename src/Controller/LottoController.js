@@ -23,8 +23,15 @@ class LottoController {
   }
   
   async getPurchaseCost() {
-    this.#userLottoCost = new PurchaseCost(await InputView.inputPurchaseCost());
-    await this.printPurChaseResult();
+    while (true) {
+      try {
+        this.#userLottoCost = new PurchaseCost(await InputView.inputPurchaseCost());
+        await this.printPurChaseResult();
+        break
+      } catch (error) {
+        OutputView.printErrorMessage(error.message);
+      };
+    };
   }
   
   async printPurChaseResult() {
@@ -33,11 +40,25 @@ class LottoController {
   }
 
   async getUserPickLottoNumbers() {
-    this.#userPickLottoNumbers = new Lotto(await InputView.inputLotto());
+    while (true) {
+      try {
+        this.#userPickLottoNumbers = new Lotto((await InputView.inputLotto()).split(","));
+        break
+      } catch (error) {
+        OutputView.printErrorMessage(error.message);
+      };
+    };
   }
 
   async getUserPickBonusLottoNumber() {
-    this.#userPickBonusLottoNumber = new BonusLotto(await InputView.inputBonusLotto(), this.#userPickLottoNumbers.getLottoNumbers());
+    while (true) {
+      try {
+        this.#userPickBonusLottoNumber = new BonusLotto(await InputView.inputBonusLotto(), this.#userPickLottoNumbers.getLottoNumbers());
+        break
+      } catch (error) {
+        OutputView.printErrorMessage(error.message);
+      };
+    };
   }
 
   async printLottoNumbersMatchCount() {

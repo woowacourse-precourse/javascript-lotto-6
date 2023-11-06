@@ -2,7 +2,6 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    numbers = numbers.split(',');
     this.#validate(numbers);
     this.#numbers = numbers;
   }

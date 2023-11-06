@@ -43,6 +43,10 @@ const OutputView = {
     };
     await Console.print(`총 수익률은 ${incomeResult}%입니다.`)
   },
+
+  async printErrorMessage(errorMessage) {
+    Console.print(errorMessage);
+  }
 };
 
 export default OutputView;
