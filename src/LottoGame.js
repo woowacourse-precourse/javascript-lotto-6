@@ -88,12 +88,15 @@ class LottoGame {
         return (Object.keys(this.#lottoResultCount)
             .reduce((acc, key) => {
                 return acc + prizeAmount[key] * this.#lottoResultCount[key];
-            }) / purchaseAmount).toFixed(1);
+            }) * 100 / purchaseAmount).toFixed(1);
     }
 
-
-
-
+    #printResult(purchaseAmount) {
+        Object.keys(this.#lottoResultCount).forEach((key) => {
+            IOUtils.output(`${key} (${prizeAmount[key].toLocaleString('ko-KR')}원) - ${this.#lottoResultCount[key]}개`);
+        })
+        IOUtils.output(`총 수익률은 ${this.#calculateProfitRate(purchaseAmount)}%입니다.`);
+    }
 }
 
 export default LottoGame;
