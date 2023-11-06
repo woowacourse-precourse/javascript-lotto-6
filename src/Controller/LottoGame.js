@@ -1,29 +1,34 @@
-import { Console, Random } from "@woowacourse/mission-utils";
+import { Random } from "@woowacourse/mission-utils";
 import InputView from "../View/InputView.js";
 import OutputView from "../View/OutputView.js";
 import Lotto from "../Lotto.js";
+import Lottos from "../Lottos.js";
+import Winning from "../WinningNumbers.js";
 
 class LottoGame {
-  #numberOfPurchase = 0;
-  #winningNumbers;
-  #bonusNumber;
-
   async start() {
     const purchaseAmount = await InputView.requestPurchaseAmount();
-    this.#numberOfPurchase = purchaseAmount / 1000;
+    const numberOfPurchase = purchaseAmount / 1000;
 
-    OutputView.displayNumberOfPurchase(this.#numberOfPurchase);
+    OutputView.displayNumberOfPurchase(purchaseAmount);
 
-    for (let i = 0; i < this.#numberOfPurchase; i++){
+    const lottos = new Lottos();
+
+    for (let i = 0; i < numberOfPurchase; i++){
       const lotto = new Lotto(this.makeLottoNumbers());
+      lottos.addLotto(lotto.getNumbers());
       OutputView.displayLotto(lotto.getNumbers());
     }
 
     const winningNumbers = await InputView.requestWinningNumbers();
-    this.#winningNumbers = winningNumbers.split(',').map(Number);
 
-    const bonusNumber = await InputView.requestBonusNumber();
-    this.#bonusNumber = bonusNumber;
+    const bonusNumber = await InputView.requestBonusNumber(winningNumbers);
+
+    const winning = new Winning(winningNumbers, bonusNumber, lottos);
+    winning.compareLottoNumbers();
+    OutputView.displayWinningDetails(winning.getRank());
+    const rateOfReturn = winning.calculateRateOfReturn(purchaseAmount);
+    OutputView.displayRateOfReturn(rateOfReturn);
   }
 
   makeLottoNumbers() {
