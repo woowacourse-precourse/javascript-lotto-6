@@ -1,5 +1,5 @@
-import { Console, Random } from "@woowacourse/mission-utils";
-import { ERROR } from './Constant.js';
+import { Console } from "@woowacourse/mission-utils";
+import { ERROR, TICKET_PRICE } from './Constant.js';
 import WinningNumbers from './WinningNumbers.js';
 import TicketManager from "./TicketManager.js";
 import MoneyManager from "./MoneyManager.js";
@@ -19,6 +19,8 @@ class App {
     tickets.forEach((ticket) => {
       const {matchingNumbers, bonus} = winningNumbers.checkYourLotto(ticket);
     })
+
+    moneyManager.calculateStatistics();
   }
 }
 
@@ -30,7 +32,7 @@ async function inputMoney() {
 }
 
 function checkMoney(lottoMoney) {
-  if (lottoMoney % 1000 != 0) throw new Error(ERROR.MONEY_HAS_REMAINDER);
+  if (lottoMoney % TICKET_PRICE != 0) throw new Error(ERROR.MONEY_HAS_REMAINDER);
 }
 
 async function inputWinningNumbers() {
