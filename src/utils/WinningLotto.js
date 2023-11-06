@@ -1,13 +1,15 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE } from "../Constants.js";
+import { CONSOLE_MESSAGE } from "../Constants.js";
+import Lotto from "../Lotto.js";
 class WinningLotto {
   async getWinningLotto() {
     const mainLotto = await Console.readLineAsync(
-      MESSAGE.WINNING_LOTTO_INPUT + "\n"
+      CONSOLE_MESSAGE.WINNING_LOTTO_INPUT + "\n"
     );
-    const mainLottoArr = mainLotto.split(",").map(Number);
+    const mainLottoArr = await mainLotto.split(",").map(Number);
+    //new Lotto(mainLottoArr);
     const bonusLotto = await Console.readLineAsync(
-      MESSAGE.BONUS_LOTTO_INPUT + "\n"
+      CONSOLE_MESSAGE.BONUS_LOTTO_INPUT + "\n"
     );
     return [mainLottoArr, Number(bonusLotto)];
   }

@@ -1,4 +1,4 @@
-export const MESSAGE = {
+export const CONSOLE_MESSAGE = {
   PURCHASE_AMOUNT_INPUT: "구입금액을 입력해 주세요.",
   PURCHASE_AMOUNT: "개를 구매했습니다.",
   WINNING_LOTTO_INPUT: "당첨 번호를 입력해 주세요.",
@@ -9,4 +9,10 @@ export const MESSAGE = {
   THIRD_PLACE: "5개 일치 (1,500,000원) - ",
   SECOND_PLACE: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
   FIRST_PLACE: "6개 일치 (2,000,000,000원) - ",
+};
+
+export const ERROR_MESSAGE = {
+  NOT_DIVISIBLE_BY_1000: "[ERROR] 1000원 단위로 입력해야 합니다.",
+  DUPLICATE_NUMBER: "[ERROR] 당첨번호에 중복된 값이 있습니다.",
+  NOT_NUMBER_6: "[ERROR] 로또 번호는 6개여야 합니다.",
 };

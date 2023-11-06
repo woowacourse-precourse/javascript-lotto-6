@@ -1,4 +1,3 @@
-import { MESSAGE } from "./Constants.js";
 import Utility from "./utils/utility.js";
 import { Console } from "@woowacourse/mission-utils";
 class App {

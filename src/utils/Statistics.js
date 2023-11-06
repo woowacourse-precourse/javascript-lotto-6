@@ -1,4 +1,4 @@
-import { MESSAGE } from "../Constants.js";
+import { CONSOLE_MESSAGE } from "../Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class Statistics {
@@ -29,12 +29,12 @@ class Statistics {
           break;
       }
     });
-    console.log(MESSAGE.STATISTICS_TITLE + "\n---");
-    Console.print(`${MESSAGE.FIFTH_PLACE}${fifth}개`);
-    Console.print(`${MESSAGE.FOURTH_PLACE}${fourth}개`);
-    Console.print(`${MESSAGE.THIRD_PLACE}${third}개`);
-    Console.print(`${MESSAGE.SECOND_PLACE}${second}개`);
-    Console.print(`${MESSAGE.FIRST_PLACE}${first}개`);
+    console.log(CONSOLE_MESSAGE.STATISTICS_TITLE + "\n---");
+    Console.print(`${CONSOLE_MESSAGE.FIFTH_PLACE}${fifth}개`);
+    Console.print(`${CONSOLE_MESSAGE.FOURTH_PLACE}${fourth}개`);
+    Console.print(`${CONSOLE_MESSAGE.THIRD_PLACE}${third}개`);
+    Console.print(`${CONSOLE_MESSAGE.SECOND_PLACE}${second}개`);
+    Console.print(`${CONSOLE_MESSAGE.FIRST_PLACE}${first}개`);
 
     return [fifth, fourth, third, second, first];
   }

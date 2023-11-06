@@ -1,12 +1,24 @@
 import { Random, Console } from "@woowacourse/mission-utils";
-import { MESSAGE } from "../Constants.js";
+import { CONSOLE_MESSAGE, ERROR_MESSAGE } from "../Constants.js";
+import { validatePurchaseAmount } from "./Validator.js";
 class LottoPurchased {
   async getPurchaseQuantity() {
-    const purchaseAmount = await Console.readLineAsync(
-      MESSAGE.PURCHASE_AMOUNT_INPUT + "\n"
-    );
+    let purchaseAmount;
+    while (true) {
+      try {
+        purchaseAmount = await Console.readLineAsync(
+          CONSOLE_MESSAGE.PURCHASE_AMOUNT_INPUT + "\n"
+        );
+
+        validatePurchaseAmount(purchaseAmount);
+        break;
+      } catch (error) {
+        Console.print(ERROR_MESSAGE.NOT_DIVISIBLE_BY_1000);
+      }
+    }
+
     const purchaseQuantity = purchaseAmount / 1000;
-    Console.print(purchaseQuantity + MESSAGE.PURCHASE_AMOUNT);
+    Console.print(purchaseQuantity + CONSOLE_MESSAGE.PURCHASE_AMOUNT);
     return purchaseQuantity;
   }
 
