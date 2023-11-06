@@ -36,6 +36,7 @@ export default class GameController {
 
     // 당첨 결과 생성
     this.model.calculateResult();
+    this.model.calculateProfitRate();
   }
 
   async getUserInput() {

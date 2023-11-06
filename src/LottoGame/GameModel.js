@@ -77,4 +77,27 @@ export default class GameModel {
       this.RESULT['THREE_MATCH'] += 1;
     }
   }
+
+  calculateProfitRate() {
+    let totalProfit = 0;
+    if (this.RESULT['SIX_MATCH'] !== 0) {
+      totalProfit += 2000000000 * Number(this.RESULT['SIX_MATCH']);
+    }
+    if (this.RESULT['FIVE_BONUS_MATCH'] !== 0) {
+      totalProfit += 30000000 * Number(this.RESULT['FIVE_BONUS_MATCH']);
+    }
+    if (this.RESULT['FIVE_MATCH'] !== 0) {
+      totalProfit += 1500000 * Number(this.RESULT['FIVE_MATCH']);
+    }
+    if (this.RESULT['FOUR_MATCH'] !== 0) {
+      totalProfit += 50000 * Number(this.RESULT['FOUR_MATCH']);
+    }
+    if (this.RESULT['THREE_MATCH'] !== 0) {
+      totalProfit += 5000 * Number(this.RESULT['THREE_MATCH']);
+    }
+    this.RESULT['PROFIT_RATE'] = (
+      (totalProfit / (this.LOTTO_COUNT * 1000)) *
+      100
+    ).toFixed(1);
+  }
 }
