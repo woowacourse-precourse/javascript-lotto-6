@@ -14,4 +14,18 @@ class Statistics {
   getStatistics() {
     return this.#statistics;
   }
+
+  calculateStatistics(userLotto, winningLotto) {
+    const rankResult = userLotto.calculateMatchingNumber(winningLotto);
+
+    let totalWinnings = 0;
+
+    this.#statistics.forEach((statistic) => {
+      statistic.count = rankResult[statistic.rank];
+      totalWinnings += statistic.winnings * statistic.count;
+    });
+
+    this.#rateOfReturns =
+      totalWinnings / (userLotto.getNumberOfPurchase() * 1000);
+  }
 }
