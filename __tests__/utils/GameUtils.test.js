@@ -1,4 +1,5 @@
 import LOTTO_NUMBER from "../../src/constants/LottoNumber.js";
+import PRIZE_MONEY from "../../src/constants/PrizeMoney.js";
 import GameUtils from "../../src/utils/GameUtils.js";
 
 describe('게임 유틸 테스트', () => {
@@ -35,5 +36,85 @@ describe('게임 유틸 테스트', () => {
 
     // then
     expect(randomNumber).toEqual(answer);
+  });
+
+  test('내 티켓과 로또 번호가 3개 동일하면 5000원을 수령합니다.', () => {
+    // given
+    const myLottoNumber = [1,2,3,4,5,6];
+    const winningNumber = [4,5,6,7,8,9];
+    const bonusNumber = 10;
+
+    const answer = PRIZE_MONEY.FIFTH;
+
+    // when
+    const differences = GameUtils.getDifferenceElements(myLottoNumber, winningNumber);
+    const prize = GameUtils.getPrize(differences, bonusNumber);
+
+    // then
+    expect(prize).toEqual(answer);
+  });
+
+  test('내 티켓과 로또 번호가 4개 동일하면 50000원을 수령합니다.', () => {
+    // given
+    const myLottoNumber = [1,2,3,4,5,6];
+    const winningNumber = [1,2,3,4,8,9];
+    const bonusNumber = 10;
+
+    const answer = PRIZE_MONEY.FOURTH;
+
+    // when
+    const differences = GameUtils.getDifferenceElements(myLottoNumber, winningNumber);
+    const prize = GameUtils.getPrize(differences, bonusNumber);
+
+    // then
+    expect(prize).toEqual(answer);
+  });
+
+  test('내 티켓과 로또 번호가 5개 동일하고 보너스 번호는 다른 경우 1500000원을 수령합니다.', () => {
+    // given
+    const myLottoNumber = [1,2,3,4,5,6];
+    const winningNumber = [1,2,3,4,5,7];
+    const bonusNumber = 10;
+
+    const answer = PRIZE_MONEY.THIRD;
+
+    // when
+    const differences = GameUtils.getDifferenceElements(myLottoNumber, winningNumber);
+    const prize = GameUtils.getPrize(differences, bonusNumber);
+
+    // then
+    expect(prize).toEqual(answer);
+  });
+
+  test('내 티켓과 로또 번호가 5개 동일하고 보너스 번호를 맞춘 경우 30000000원을 수령합니다.', () => {
+    // given
+    const myLottoNumber = [1,2,3,4,5,6];
+    const winningNumber = [1,2,3,4,5,7];
+    const bonusNumber = 6;
+
+    const answer = PRIZE_MONEY.SECOND;
+
+    // when
+    const differences = GameUtils.getDifferenceElements(myLottoNumber, winningNumber);
+    const prize = GameUtils.getPrize(differences, bonusNumber);
+
+    // then
+    expect(prize).toEqual(answer);
+  });
+
+  test('내 티켓과 로또 번호가 모두 동일한 경우 2000000000원을 수령합니다.', () => {
+    // given
+    const myLottoNumber = [1,2,3,4,5,6];
+    const winningNumber = [1,2,3,4,5,6];
+    const bonusNumber = 7;
+
+    const answer = PRIZE_MONEY.FIRST;
+
+    // when
+    const differences = GameUtils.getDifferenceElements(myLottoNumber, winningNumber);
+    const prize = GameUtils.getPrize(differences, bonusNumber);
+
+    // then
+    expect(prize).toEqual(answer);
   });
 });
