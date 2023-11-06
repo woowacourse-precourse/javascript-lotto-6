@@ -36,8 +36,12 @@ class Statistics {
   }
 
   roundRateOfReturns(totalWinnings, purchaseAmount) {
-    const rateOfReturns = ((totalWinnings / purchaseAmount) * 100).toFixed(1);
-    return rateOfReturns;
+    const rateOfReturns = Number(
+      ((totalWinnings / purchaseAmount) * 100).toFixed(1)
+    );
+    if (Number.isInteger(rateOfReturns))
+      return `${rateOfReturns.toLocaleString('en-US')}.0`;
+    return rateOfReturns.toLocaleString('en-US');
   }
 }
 
