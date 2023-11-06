@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-
+import LottoValidator from "../LottoValidator.js";
 class InputView {
   async getBuyMoneyInput() {
     let isValidInput = false;
@@ -11,7 +11,7 @@ class InputView {
           "구입금액을 입력해 주세요.\n"
         );
         userMoneyNumber = Number(userMoneyInput);
-        this.#validateMoneyInput(userMoneyNumber);
+        LottoValidator.validateMoneyInput(userMoneyNumber);
         isValidInput = true;
       } catch (error) {
         Console.print(error.message);
@@ -38,7 +38,7 @@ class InputView {
           "당첨 번호를 입력해 주세요.\n"
         );
         targetNumberList = targetLottoInput.split(",").map(Number);
-        this.#validateLottoNumberInput(targetNumberList);
+        LottoValidator.validateLottoNumbersInput(targetNumberList);
         isValidInput = true;
       } catch (error) {
         Console.print(error.message);
@@ -56,58 +56,13 @@ class InputView {
           "보너스 번호를 입력해 주세요\n"
         );
         targetBonusNumber = Number(targetBonusInput);
-        this.#validateLottoBonusNumberInput(
-          targetNumberList,
-          targetBonusNumber
-        );
+        LottoValidator.validateBonusNumber(targetNumberList, targetBonusNumber);
         isValidInput = true;
       } catch (error) {
         Console.print(error.message);
       }
     }
     return targetBonusNumber;
-  }
-
-  #validateMoneyInput(userMoneyInput) {
-    if (!userMoneyInput) {
-      throw new Error("[ERROR] 금액을 입력해 주세요");
-    }
-
-    if (Number.isNaN(userMoneyInput)) {
-      throw new Error("[ERROR] 숫자를 입력해 주세요");
-    }
-
-    if (userMoneyInput % 1000 !== 0) {
-      throw new Error("[ERROR] 금액은 1000원 단위로 입력해 주세요");
-    }
-  }
-
-  #validateLottoNumberInput(lottoNumber) {
-    if (lottoNumber.some((number) => Number.isNaN(number))) {
-      throw new Error("[ERROR] 숫자를 입력해 주세요");
-    }
-
-    if (lottoNumber.some((number) => number < 1 || number > 45)) {
-      throw new Error("[ERROR] 1~45 사이의 숫자를 입력해 주세요");
-    }
-
-    if (lottoNumber.length !== 6) {
-      throw new Error("[ERROR] 당첨 로또 번호는 6개여야 합니다.");
-    }
-
-    if (new Set(lottoNumber).size !== 6) {
-      throw new Error("[ERROR] 당첨 로또 번호는 중복되지 않아야 합니다.");
-    }
-  }
-
-  #validateLottoBonusNumberInput(lottoNumber, bonusNumber) {
-    if (Number.isNaN(bonusNumber)) {
-      throw new Error("[ERROR] 숫자를 입력해 주세요");
-    }
-
-    if (lottoNumber.includes(bonusNumber)) {
-      throw new Error("[ERROR] 보너스 번호는 당첨 번호에 포함될 수 없습니다.");
-    }
   }
 }
 

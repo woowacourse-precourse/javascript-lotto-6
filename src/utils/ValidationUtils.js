@@ -1,25 +1,43 @@
 class ValidationUtils {
-  static validateIsNumber(input) {
+  static validateIsNumber(input, message) {
     if (Number.isNaN(input)) {
-      throw new Error("[ERROR] 숫자를 입력해 주세요");
+      throw new Error(message);
     }
   }
 
-  static validateNotNull(input) {
+  static validateNotNull(input, message) {
     if (!input) {
-      throw new Error("[ERROR] 값을 입력해 주세요");
+      throw new Error(message);
     }
   }
 
-  static validateLength(input, length) {
+  static validateLength(input, length, message) {
     if (input.length !== length) {
-      throw new Error(`[ERROR] ${length}자리의 값을 입력해 주세요`);
+      throw new Error(message);
     }
   }
 
-  static validateNotDuplicate(input) {
+  static validateNotDuplicate(input, message) {
     if (new Set(input).size !== input.length) {
-      throw new Error("[ERROR] 중복되지 않은 값을 입력해 주세요");
+      throw new Error(message);
+    }
+  }
+
+  static validateInRange(input, min, max, message) {
+    if (input < min || input > max) {
+      throw new Error(message);
+    }
+  }
+
+  static validateIsMultipleOf(input, multiple, message) {
+    if (input % multiple !== 0) {
+      throw new Error(message);
+    }
+  }
+
+  static validateIsNotIncluded(input, element, message) {
+    if (input.includes(element)) {
+      throw new Error(message);
     }
   }
 }
