@@ -3,7 +3,7 @@ import {
   LOTTO_NUMBER_COUNT,
   MAX_LOTTO_NUMBER,
   MIN_LOTTO_NUMBER,
-} from "./constants/standard";
+} from "./constants/standard.js";
 
 class Issuance {
   #issuanceCount;
@@ -22,17 +22,25 @@ class Issuance {
     );
   }
 
-  async getIssuanceNumbers() {
+  async #issueNumbers() {
     for (let i = 0; i < this.#issuanceCount; i += 1) {
-      this.#issuanceNumbers.push(await this.#issueRandomNumber());
+      let randomNumbers = await this.#issueRandomNumber();
+      randomNumbers.sort((a, b) => a - b);
+      this.#issuanceNumbers.push(await randomNumbers);
     }
-    return this.#issuanceNumbers;
   }
 
-  printIssuanceNumbers() {
+  async printIssuanceNumbers(parchaseNumber) {
+    await this.#issueNumbers();
+
+    MissionUtils.Console.print(`\n${parchaseNumber}개를 구매했습니다.`);
     this.#issuanceNumbers.forEach((issuanceNumber) => {
-      MissionUtils.Console.print(issuanceNumber);
+      MissionUtils.Console.print("[" + issuanceNumber.join(", ") + "]");
     });
+  }
+
+  get() {
+    return this.#issuanceNumbers;
   }
 }
 
