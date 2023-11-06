@@ -60,11 +60,17 @@ class App {
     return sortedLottoNumbers;
   }
 
+  lottoNumbersToString = (lottoNumbers) => {
+    const string = `[${lottoNumbers[0]}, ${lottoNumbers[1]}, ${lottoNumbers[2]}, ${lottoNumbers[3]}, ${lottoNumbers[4]}, ${lottoNumbers[5]}]`;
+
+    return string;
+  }
+
   printLottoOrder = () => {
     MissionUtils.Console.print(`\n${this.#orderQuantity}개를 구매했습니다.`);
 
     this.#lottoOrder.forEach((lottoNumbers) => {
-      MissionUtils.Console.print(lottoNumbers);
+      MissionUtils.Console.print(this.lottoNumbersToString(lottoNumbers));
     })
   }
 
@@ -164,6 +170,18 @@ class App {
     this.#rateOfEarn = rateOfEarn.toFixed(1);
   }
 
+  setLottoOrder = () => {
+    let count = 0;
+
+    while(count < this.#orderQuantity) {
+      const lottoNumbers = this.generateLottoNumbers();
+        
+      this.#lottoOrder.push(lottoNumbers);
+
+      count++;
+    }
+  }
+
   async play() {
     try {
       MissionUtils.Console.print('구입금액을 입력해 주세요.');
@@ -174,13 +192,7 @@ class App {
       this.checkIsValidPrice(userInputPrice);
       this.setOrderPrice(userInputPrice);
       this.setOrderQuantity(userInputPrice);
-
-      for(let i = 0; i < this.#orderQuantity; i++) {
-        const lottoNumbers = this.generateLottoNumbers();
-        
-        this.#lottoOrder.push(lottoNumbers);
-      }
-
+      this.setLottoOrder();
       this.printLottoOrder();
 
       MissionUtils.Console.print('당첨 번호를 입려해 주세요.');
