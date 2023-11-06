@@ -6,10 +6,16 @@ class App {
     const lottoAmount = await Console.readLineAsync(
       "구입금액을 입력해 주세요."
     );
+
     if (lottoAmount % 1000 !== 0)
       throw new Error("[ERROR] 구입 금액은 1,000원 단위입니다.");
 
-    const lottos = this.buyLotto(lottoAmount);
+    const lottoList = this.buyLotto(lottoAmount);
+
+    Console.print(`${lottoList.length}개를 구매했습니다`);
+    for (let i = 0; i < lottoList.length; i++) {
+      Console.print(lottoList[i].getLottoNumbers().sort((a, b) => a - b));
+    }
   }
 
   buyLotto(amount) {
