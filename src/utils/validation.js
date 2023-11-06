@@ -2,6 +2,12 @@ export function isNumber(number) {
   if (Number.isNaN(number)) throw new Error('[ERROR] 숫자를 입력해주세요.');
 }
 
+export function validateNumberBetweenRange(number) {
+  if (number < 1) throw new Error('[ERROR] 로또 숫자는 1과 45사이어야 합니다.');
+  if (number > 45)
+    throw new Error('[ERROR] 로또 숫자는 1과 45사이어야 합니다.');
+}
+
 export function validateNumber(number) {
   isNumber(number);
   validateNumberBetweenRange(number);
