@@ -100,10 +100,7 @@ class LottoController {
    * @param {number[]} counts
    */
   printStatistic(counts) {
-    OutputView.winning();
-    counts.forEach((count, idx) => {
-      OutputView.statistic(count, idx);
-    });
+    OutputView.statistic(counts);
   }
 
   /**
