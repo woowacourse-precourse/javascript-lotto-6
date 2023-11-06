@@ -13,16 +13,7 @@ class LottoGameController {
   }
 
   async #takePurchaseMoneyStage() {
-    let purchaseMoney;
-    while (true) {
-      try {
-        purchaseMoney = await InputView.readPurchaseMoney();
-        Validator.validateMoney(purchaseMoney);
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+    const purchaseMoney = await InputView.readPurchaseMoney();
     return this.#issueTicketStage(purchaseMoney);
   }
 
@@ -34,35 +25,24 @@ class LottoGameController {
 
   async #takeWinningNumberStage() {
     let winningNumbers;
+    let winningLotto;
     while (true) {
       try {
         winningNumbers = await InputView.readWinningNumbers();
         Validator.validateNumberForm(winningNumbers);
-        this.winningLotto = new Lotto(winningNumbers.split(',').map(Number));
+        winningLotto = new Lotto(winningNumbers.split(',').map(Number));
         break;
       } catch (error) {
         Console.print(error.message);
       }
     }
-    return this.#takeBonusNumberStage();
+    return this.#takeBonusNumberStage(winningLotto);
   }
 
-  async #takeBonusNumberStage() {
-    let bonusNumber;
-    while (true) {
-      try {
-        bonusNumber = await InputView.readBonusNumber();
-        Validator.validateBouns(
-          this.winningLotto.getWinningNumbers(),
-          bonusNumber,
-        );
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+  async #takeBonusNumberStage(winningLotto) {
+    const bonusNumber = await InputView.readBonusNumber(winningLotto);
     return this.#checkPrizeStage(
-      this.winningLotto.getWinningNumbers(),
+      winningLotto.getWinningNumbers(),
       Number(bonusNumber),
     );
   }

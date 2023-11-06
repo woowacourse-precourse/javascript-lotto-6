@@ -1,13 +1,22 @@
 import { Console } from '@woowacourse/mission-utils';
-import Validator from '../utils/Validator.js';
 import { INPUT_MESSAGE } from '../constants/constants.js';
+import Validator from '../utils/Validator.js';
 
 const InputView = {
   async readPurchaseMoney() {
-    const purchaseMoney = await Console.readLineAsync(
-      INPUT_MESSAGE.purchaseMoney,
-    );
-    const trimmedMoney = purchaseMoney.trim();
+    let trimmedMoney;
+    while (true) {
+      try {
+        const purchaseMoney = await Console.readLineAsync(
+          INPUT_MESSAGE.purchaseMoney,
+        );
+        trimmedMoney = purchaseMoney.trim();
+        Validator.validateMoney(trimmedMoney);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
     return trimmedMoney;
   },
 
@@ -18,9 +27,20 @@ const InputView = {
     return winningNumbers;
   },
 
-  async readBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
-    const trimmedBonus = bonusNumber.trim();
+  async readBonusNumber(winningLotto) {
+    let trimmedBonus;
+    while (true) {
+      try {
+        const bonusNumber = await Console.readLineAsync(
+          INPUT_MESSAGE.bonusNumber,
+        );
+        trimmedBonus = bonusNumber.trim();
+        Validator.validateBouns(winningLotto.getWinningNumbers(), trimmedBonus);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
     return trimmedBonus;
   },
 };
