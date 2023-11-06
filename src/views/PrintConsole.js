@@ -3,7 +3,7 @@ import SYSTEM_MESSAGES from '../constants/SystemMessages.js';
 import LOTTO_SYSTEM from '../constants/LottoSystem.js';
 
 class PrintConsole {
-	#showLottoResults(lottoResult, totalReturn) {
+	#showLottoResults(lottoResult) {
 		LOTTO_SYSTEM.winning_array.forEach((winning, idx) => {
 			const winningCount = winning.count;
 			const prize = LOTTO_SYSTEM.prize_array[idx].toLocaleString();
@@ -19,7 +19,7 @@ class PrintConsole {
 
 	showWinningStatistics(lottoResult, totalReturn) {
 		this.print(SYSTEM_MESSAGES.winning_statistics);
-		this.#showLottoResults(lottoResult, totalReturn);
+		this.#showLottoResults(lottoResult);
 		this.print(SYSTEM_MESSAGES.rate_of_return(totalReturn));
 	}
 
