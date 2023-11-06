@@ -22,9 +22,7 @@ class InputView {
    */
   async inputWinningNumber() {
     userInputMessage.winningNumber();
-    const winningNumber = await Console.readLineAsync().then((input) =>
-      input.split(",")
-    );
+    const winningNumber = await Console.readLineAsync().then((input) => input.split(","));
     lineBreakMessage();
     return winningNumber;
   }
