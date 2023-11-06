@@ -14,37 +14,33 @@ class LottoController {
   #statistics;
 
   async lottoStart() {
-    this.setMyLotto();
-    this.setWinningLotto();
+    await this.setMyLotto();
+    await this.setWinningLotto();
     this.setMyLottoResult();
   }
 
-  setMyLotto() {
-    const purchaseLottoAmount = InputController.loopGetInput(
+  async setMyLotto() {
+    const purchaseLottoAmount = await InputController.loopGetInput(
       InputView.getPurchaseLottoAmount(),
     );
-    const lottoCount = this.#calculateLottoCount(purchaseLottoAmount);
+    const lottoCount = await this.#calculateLottoCount(purchaseLottoAmount);
     this.#showLottoCount(lottoCount);
 
     this.#myLotto = new MyLotto(purchaseLottoAmount, lottoCount);
     this.#myLotto.showMyLottoNumbers();
   }
 
-  #calculateLottoCount({ lottoAmount }) {
+  async #calculateLottoCount(lottoAmount) {
     return parseInt(lottoAmount / NUMBER.PURCHASE_AMOUNT_UNIT, 10);
   }
 
-  #showLottoCount({ lottoCount }) {
+  #showLottoCount(lottoCount) {
     OutputView.printLottoCount(lottoCount);
   }
 
-  setWinningLotto() {
-    const winningNumbers = InputController.loopGetInput(
-      InputView.getWinningNumbers(),
-    );
-    const bonusNumber = InputController.loopGetInput(
-      InputView.getBonusNumber(),
-    );
+  async setWinningLotto() {
+    const winningNumbers = await InputController.loopGetInput(InputView.getWinningNumbers());
+    const bonusNumber = await InputController.loopGetInput(InputView.getBonusNumber());
 
     this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
   }
@@ -52,14 +48,11 @@ class LottoController {
   setMyLottoResult() {
     const winningNumbers = this.#winningLotto.getWinningNumbers();
     const bonusNumber = this.#winningLotto.getBonusNumber();
-    const matchingResult = this.#myLotto.findMatching(
-      winningNumbers,
-      bonusNumber,
-    );
+    const matchingResult = this.#myLotto.findMatching(winningNumbers, bonusNumber);
 
     this.#statistics = new LottoStatistics(matchingResult);
     this.#statistics.showLottoStatistics();
-    this.#statistics.showRateOfReturn(this.#myLotto.getPurchaseLottoAmount());
+    this.#statistics.showRateOfReturn(this.#myLotto.getPurchaseAmount());
   }
 }
 

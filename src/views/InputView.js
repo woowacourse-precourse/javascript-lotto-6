@@ -4,11 +4,9 @@ import InputController from '../controllers/InputController';
 import ValidateController from '../controllers/ValidateController';
 
 const InputView = {
-  getPurchaseLottoAmount() {
+  async getPurchaseLottoAmount() {
     try {
-      const inputAmountString = Console.readLineAsync(
-        MESSAGE_GET.PURCHASE_AMOUNT,
-      );
+      const inputAmountString = await Console.readLineAsync(MESSAGE_GET.PURCHASE_AMOUNT);
       const inputAmount = InputController.convertNumber(inputAmountString);
       ValidateController.validatePurchaseLottoAmount(inputAmount);
       return inputAmount;
@@ -18,11 +16,9 @@ const InputView = {
     }
   },
 
-  getWinningNumbers() {
+  async getWinningNumbers() {
     try {
-      const inputNumbersString = Console.readLineAsync(
-        MESSAGE_GET.WINNING_NUMBER,
-      );
+      const inputNumbersString = await Console.readLineAsync(MESSAGE_GET.WINNING_NUMBER);
       const inputNumbers = InputController.converList(inputNumbersString);
       ValidateController.validateWinningNumbers(inputNumbers);
       return inputNumbers;
@@ -32,9 +28,9 @@ const InputView = {
     }
   },
 
-  getBonusNumber() {
+  async getBonusNumber() {
     try {
-      const inputNumberString = Console.readLineAsync(MESSAGE_GET.BONUS_NUMBER);
+      const inputNumberString = await Console.readLineAsync(MESSAGE_GET.BONUS_NUMBER);
       const inputNumber = InputController.convertNumber(inputNumberString);
       return inputNumber;
     } catch (error) {
