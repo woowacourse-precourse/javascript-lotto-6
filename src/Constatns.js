@@ -5,21 +5,31 @@ export const MIN_LOTTO_NUMBER = 1;
 export const LOTTO_PRICE = 1000;
 export const MIN_LOTTO_PRICE = 1000;
 
+export const RANKS = {
+  MAX_RANK_LENGTH: 5,
+  RANK_FIRST: 1,
+  RANK_SECOND: 2,
+  RANK_THIRD: 3,
+  RANK_FOURTH: 4,
+  RANK_FIFTH: 5,
+};
+
 export const GAME_MESSAGES = {
   ENTER_TICKET_MONEY: "구입금액을 입력해 주세요.\n",
   PURCHASE_TICKET_COUNT: "개를 구매했습니다.",
   WIN_LOTTO: "당첨 번호를 입력해 주세요.\n",
   BOUNS_LOTTO: "보너스 번호를 입력해 주세요.\n",
-  WINNING_STATISTICS: "당첨 통계\n",
+  WINNING_STATISTICS: "당첨 통계",
   NEW_LINE: "---",
   WINNING_RESULT: [
-    "6개 일치 (2,000,000,000원)",
-    "5개 일치, 보너스 볼 일치 (30,000,000원)",
-    "5개 일치 (1,500,000원)",
-    "4개 일치 (50,000원)",
-    "3개 일치 (5,000원)",
+    "3개 일치 (5,000원) -",
+    "4개 일치 (50,000원) -",
+    "5개 일치, 보너스 볼 일치 (30,000,000원) -",
+    "5개 일치 (1,500,000원) -",
+    "6개 일치 (2,000,000,000원) -",
   ],
   TOTAL_PROFITABILITY: "총 수익률은 %s입니다.",
+  COUNT: "개",
 };
 
 export const ERROR_MESSAGES = {

@@ -10,15 +10,19 @@ class App {
     this.money = 0;
     this.lotto = 0;
     this.winLotto = 0;
+    this.bonusLotto = 0;
     this.lottos = [];
+    this.lottoRanks = [];
+    this.profit = 0;
   }
+
   async play() {
     await this.getTicket();
   }
 
   async getTicket() {
-    this.ticket = new Ticket();
     this.money = await Console.readLineAsync(GAME_MESSAGES.ENTER_TICKET_MONEY);
+    this.ticket = new Ticket();
     const ticketAmount = this.ticket.purchase(this.money);
     this.getLottos(ticketAmount);
   }
@@ -30,6 +34,36 @@ class App {
 
   async makeWinLotto() {
     this.winLotto = await Console.readLineAsync(GAME_MESSAGES.WIN_LOTTO);
+    this.winLotto = this.winLotto.split(",").map(Number);
+    Console.print("");
+    this.makeBonusLotto();
+  }
+
+  async makeBonusLotto() {
+    this.bonusLotto = await Console.readLineAsync(GAME_MESSAGES.BOUNS_LOTTO);
+    Console.print("");
+    this.winLottoCount();
+  }
+
+  async winLottoCount() {
+    this.lotto = new Lotto(this.winLotto);
+    this.lottoRanks = await this.lotto.getLottoRanks(this.lottos, this.bonusLotto);
+    this.printWinResult(this.lottoRanks);
+  }
+
+  async printWinResult(lottoRanks) {
+    Console.print(GAME_MESSAGES.WINNING_STATISTICS);
+    Console.print(GAME_MESSAGES.NEW_LINE);
+    GAME_MESSAGES.WINNING_RESULT.forEach((winMessage, idx) => {
+      Console.print(winMessage + " " + lottoRanks[idx] + GAME_MESSAGES.COUNT);
+    });
+    Console.print("");
+    this.printprofitResult();
+  }
+
+  async printprofitResult() {
+    this.profit;
+    Console.print(GAME_MESSAGES.TOTAL_PROFITABILITY);
   }
 }
 
