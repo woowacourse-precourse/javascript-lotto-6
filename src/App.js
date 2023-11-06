@@ -22,11 +22,34 @@ class App {
     return lottos;
   }
 
+  async #readWinningNumbers() {
+    const winningNumbersInput = await Console.readLineAsync(
+      '당첨 번호를 입력해 주세요.\n'
+    );
+
+    const winningNumbers = winningNumbersInput.split(',');
+    return winningNumbers;
+  }
+
+  async #readBonusNumber() {
+    const bonusNumberInput = await Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.\n'
+    );
+
+    const bonusNumber = Number(bonusNumberInput);
+    return bonusNumber;
+  }
+
   async play() {
     const purchaseAmount = await Console.readLineAsync(
       '로또 구입 금액을 입력해 주세요.\n'
     );
     const lottos = this.#generatRandomLottos(Number(purchaseAmount));
+    const winningNumbers = await this.#readWinningNumbers();
+    const bonusNumber = await this.#readBonusNumber();
+
+    Console.print(winningNumbers);
+    Console.print(bonusNumber);
   }
 }
 
