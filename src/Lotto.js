@@ -102,6 +102,15 @@ const getRank = (lotto, bonus) => {
   });
 }
 
+const calculateRate = () => {
+  let gain = 0;
+  for (let i = 0; i < 5; i += 1) {
+    gain += (PublishedLottos.rank[i] * PublishedLottos.GAIN[i]);
+  }
+  const rate = gain / (PublishedLottos.numbers.length * 1e3);
+  return Math.round((rate * 10) / 10);
+}
+
 
 
 
