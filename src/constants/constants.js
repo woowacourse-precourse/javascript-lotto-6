@@ -14,6 +14,8 @@ const INPUT_ERROR_MESSAGE = {
   NUMBER_ERROR: '[ERROR] 입력한 값이 숫자가 아닙니다.',
   DUPLICATE_WINNING_NUMBER:
     '[ERROR] 입력한 당첨 번호에 중복된 숫자가 존재합니다.',
+  DUPLICATE_BONUS_NUMBER:
+    '[ERROR] 입력한 당첨 번호에 중복된 숫자가 존재합니다.',
 };
 
 const SYMBOL = {

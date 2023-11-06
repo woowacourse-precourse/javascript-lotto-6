@@ -10,12 +10,14 @@ class App {
   #lottoCount;
   #lottoList = [];
   #winningNumbers = [];
+  #bonusNumber;
 
   async play() {
     await this.#inputPurchaseAmount();
     this.#purchaseLottos();
     this.#printAllLottos();
     await this.#inputWinningNumbers();
+    await this.#inputBonusNumber();
   }
 
   async #inputPurchaseAmount() {
@@ -87,6 +89,22 @@ class App {
 
       this.#winningNumbers.push(splitWinningNumbers);
     });
+  }
+  async #inputBonusNumber() {
+    Console.print(INPUT_MESSAGE.BONUS_NUMBER);
+    const bonusNumber = await Console.readLineAsync('');
+    this.#validateBonusNumber(bonusNumber);
+  }
+
+  #validateBonusNumber(bonusNumber) {
+    const checkValidateNumber = Number(bonusNumber);
+    if (isNaN(checkValidateNumber)) {
+      throw new Error(INPUT_ERROR_MESSAGE.NUMBER_ERROR);
+    }
+    if (this.#winningNumbers.includes(checkValidateNumber)) {
+      throw new Error(INPUT_ERROR_MESSAGE.DUPLICATE_BONUS_NUMBER);
+    }
+    this.#bonusNumber = checkValidateNumber;
   }
 }
 
