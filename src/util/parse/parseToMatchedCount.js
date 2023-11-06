@@ -1,16 +1,17 @@
 export default function parseToMatchedCount(purchase, winningNumber, bonusNumber) {
-  const match = new Set([...purchase, ...winningNumber]);
-  const matchedNumbers = match.size - winningNumber.length;
-  const isSecond = match.size === 7 && match.has(bonusNumber);
-  const isThird = match.size === 7 && !match.has(bonusNumber);
+  const combinedArray = [...purchase, ...winningNumber];
+  const match = new Set(combinedArray);
+  let matchedNumbers = match.size - winningNumber.length;
 
-  if (isSecond) {
+  if (matchedNumbers === 0) {
+    return 0;
+  }
+
+  if (matchedNumbers === 1 && match.has(bonusNumber)) {
     return 1;
   }
 
-  if (isThird) {
-    return 2;
-  }
+  matchedNumbers += 1;
 
   return matchedNumbers;
 }
