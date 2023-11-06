@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import { RANGE_MIN, RANGE_MAX, LOTTO_LENGTH, errorMessages } from './constants.js';
+import { RANGE_MIN, RANGE_MAX, LOTTO_LENGTH, inputPrompts, errorMessages } from './constants.js';
 
 class App {
   async play() {
@@ -16,19 +16,19 @@ class App {
   }
   
   async getPurchaseAmount() {
-    const input = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    const input = await MissionUtils.Console.readLineAsync(inputPrompts.PURCHASE);
     return input;
   }
 
   async getWinningNumbers() {
-    const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const input = await MissionUtils.Console.readLineAsync(inputPrompts.WINNING_NUMBERS);
     const numbers = input.split(',').map((x) => Number(x));
     const lotto = new Lotto(numbers);
     return lotto;
   }
 
   async getBonusNumber(winningNumbers) {
-    const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const input = await MissionUtils.Console.readLineAsync(inputPrompts.BONUS_NUMBER);
     const bonusNumber = Number(input);
     return bonusNumber;
   }
