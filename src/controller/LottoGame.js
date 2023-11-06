@@ -9,6 +9,7 @@ import LottoGameOutput from '../view/LottoGameOutput.js';
 import LottoGameError from '../view/LottoGameError.js';
 
 import GameUtils from '../utils/GameUtils.js';
+import PRIZE_MONEY from '../constants/PrizeMoney.js';
 
 class LottoGame {
   #purchaseAmount;
@@ -89,6 +90,54 @@ class LottoGame {
   calculatePrizeRate() {
     const purchaseAmount = this.#purchaseAmount.getPurchaseAmount();
     this.#lottoWinStatistics.calculateRate(purchaseAmount);
+  }
+
+  showLottoWinStatistics() {
+    LottoGameOutput.showLottoStatistics();
+
+    this.#showFifthPrize();
+    this.#showFourthPrize();
+    this.#showThirdPrize();
+    this.#showSecondPrize();
+    this.#showFirstPrize();
+
+    const returnRate = this.#lottoWinStatistics.getPrizeRate();
+    LottoGameOutput.showReturnRate(returnRate);
+  }
+
+  #showFifthPrize() {
+    const fifthCount = this.#lottoWinStatistics.getSpecificRankCount(
+      PRIZE_MONEY.FIFTH,
+    );
+    LottoGameOutput.showFifthStatistics(fifthCount);
+  }
+
+  #showFourthPrize() {
+    const fourthCount = this.#lottoWinStatistics.getSpecificRankCount(
+      PRIZE_MONEY.FOURTH,
+    );
+    LottoGameOutput.showFourthStatistics(fourthCount);
+  }
+
+  #showThirdPrize() {
+    const thirdCount = this.#lottoWinStatistics.getSpecificRankCount(
+      PRIZE_MONEY.THIRD,
+    );
+    LottoGameOutput.showThirdStatistics(thirdCount);
+  }
+
+  #showSecondPrize() {
+    const secondCount = this.#lottoWinStatistics.getSpecificRankCount(
+      PRIZE_MONEY.SECOND,
+    );
+    LottoGameOutput.showSecondStatistics(secondCount);
+  }
+
+  #showFirstPrize() {
+    const firstCount = this.#lottoWinStatistics.getSpecificRankCount(
+      PRIZE_MONEY.FIRST,
+    );
+    LottoGameOutput.showFirstStatistics(firstCount);
   }
 }
 

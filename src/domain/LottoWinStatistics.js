@@ -22,6 +22,14 @@ class LottoWinStatistics {
     );
   }
 
+  getSpecificRankCount(prize) {
+    const specificRanks = this.#prizeByTickets.filter(
+      (curPrize) => curPrize === prize,
+    );
+
+    return specificRanks.length;
+  }
+
   getPrizeRate() {
     return this.#prizeRate;
   }

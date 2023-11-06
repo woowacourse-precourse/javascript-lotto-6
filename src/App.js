@@ -15,6 +15,7 @@ class App {
     await this.#lottoGame.inputBonusNumber();
     this.#lottoGame.compareLottoTicketsWin();
     this.#lottoGame.calculatePrizeRate();
+    this.#lottoGame.showLottoWinStatistics();
   }
 }
 
