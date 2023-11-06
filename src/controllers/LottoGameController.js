@@ -16,11 +16,11 @@ class LottoGameController {
   }
 
   async executeLottoGame() {
-    await this.purchaseLottos();
-    await this.getAndSetWinningNumbers();
-    await this.getAndSetBonusNumber();
-    const { results, profitRate } = this.executeLottoMatch();
-    this.displayLottoResult(results, profitRate);
+    await this.#purchaseLottos();
+    await this.#getAndSetWinningNumbers();
+    await this.#getAndSetBonusNumber();
+    const { results, profitRate } = this.#executeLottoMatch();
+    this.#displayLottoResult(results, profitRate);
   }
 
   async #retryOnFailure(func) {
@@ -32,14 +32,14 @@ class LottoGameController {
     }
   }
 
-  async getAndSetMoneyAmount() {
+  async #getAndSetMoneyAmount() {
     await this.#retryOnFailure(async () => {
       const moneyAmount = await this.#view.readMoneyAmount();
       this.#lottoPublisher.setMoneyAmount(moneyAmount);
     });
   }
 
-  async getAndSetWinningNumbers() {
+  async #getAndSetWinningNumbers() {
     await this.#retryOnFailure(async () => {
       const winningNumbers = await this.#view.readWinningNumbers();
       this.#lottoService.setWinningNumbers(winningNumbers);
@@ -47,7 +47,7 @@ class LottoGameController {
     });
   }
 
-  async getAndSetBonusNumber() {
+  async #getAndSetBonusNumber() {
     await this.#retryOnFailure(async () => {
       const bonusNumber = await this.#view.readBonusNumber();
       this.#lottoService.setBonusNumber(bonusNumber);
@@ -55,20 +55,20 @@ class LottoGameController {
     });
   }
 
-  async purchaseLottos() {
-    await this.getAndSetMoneyAmount();
+  async #purchaseLottos() {
+    await this.#getAndSetMoneyAmount();
     const tickets = this.#lottoPublisher.publishLottos();
     this.#lottoService.setLottoTickets(tickets);
     this.#view.printLottoPurchaseResult(tickets);
   }
 
-  executeLottoMatch() {
+  #executeLottoMatch() {
     const results = this.#lottoService.calculateResults();
     const profitRate = this.#lottoService.calculateProfitRate();
     return { results, profitRate };
   }
 
-  displayLottoResult(results, profitRate) {
+  #displayLottoResult(results, profitRate) {
     this.#view.printLottoStats(results);
     this.#view.printProfitRate(profitRate);
   }
