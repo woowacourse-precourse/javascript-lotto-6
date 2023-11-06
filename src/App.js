@@ -7,6 +7,13 @@ class App {
   LottoList = [];
   prizeNumber = [];
   bonusNumber = 0;
+  resultList = [
+    { rank: 1, count: 0, price: 2000000000 },
+    { rank: 2, count: 0, price: 30000000 },
+    { rank: 3, count: 0, price: 1500000 },
+    { rank: 4, count: 0, price: 50000 },
+    { rank: 5, count: 0, price: 5000 },
+  ];
 
   async start() {
     const price = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -45,9 +52,12 @@ class App {
   }
 
   printWinningDetail() {
-    const correctList = [];
     this.LottoList.map((lotto) => {
-      correctList.push(new Lotto(lotto).getMatchedCount(this.prizeNumber));
+      new Lotto(lotto).getWinningList(
+        this.prizeNumber,
+        this.resultList,
+        this.bonusNumber
+      );
     });
   }
 
