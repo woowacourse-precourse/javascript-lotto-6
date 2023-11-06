@@ -5,17 +5,17 @@ import LOTTOERROR from "../constant/LottoError.js"
 class Validate {
 
   validateAmount(input) {
-    if (!LOTTERROR.regex.number.test(input)) { // 수정된 부분
-      throw new AppError(LOTTOERROR.errormessage.amount);
+    if (!LOTTOERROR.regex.number.test(input)) { 
+      throw new AppError(LOTTOERROR.errormessage.amount); 
     }
     if (input.slice(-3) !== "000") {
-      throw new AppError(LOTTOERROR.errormessage.unit);
+      throw new AppError(LOTTOERROR.errormessage.unit); 
     }
   }
 
 
 validateAmount(input) {
-  if (!LOTTOERROR.regex.number.test(input)) { // 수정된 부분
+  if (!LOTTOERROR.regex.number.test(input)) { 
     throw new AppError(LOTTOERROR.errormessage.amount);
   }
   if (input.slice(-3) !== "000") {

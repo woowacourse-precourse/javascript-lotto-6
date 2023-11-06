@@ -25,17 +25,17 @@ class Lotto {
   }
 
   checkNumber(Number, bonusNumber) {
-    let lottoCount = 0; // 수정된 부분
+    let lottoCount = 0; 
     for (const num of this.#numbers) {
       if (Number.includes(num)) {
-        lottoCount++; // 수정된 부분
+        lottoCount++; 
       }
     }
-    const bonusIncluded = this.#numbers.includes(bonusNumber); // 수정된 부분
+    const bonusIncluded = this.#numbers.includes(bonusNumber);
   
     return {
-      lottoCount: lottoCount, // 수정된 부분
-      bonusIncluded: bonusIncluded, // 수정된 부분
+      lottoCount: lottoCount,
+      bonusIncluded: bonusIncluded, 
     };
   }
   

@@ -3,7 +3,7 @@ import OUTPUT from './view/Output.js';
 import COMPUTER from './Computer.js';
 import AppError from './constant/AppError.js';
 import CALCULATE from './calculate/Calculate.js';
-import { AppError, ERROR_TYPE } from './constant/AppError.js'; // 수정된 부분
+
 
 
 class App {
@@ -27,9 +27,10 @@ class App {
       const finalResult = this.calculate.calculateResult(lottoResult);
       const Rate = this.calculate.calculateRate(finalResult, amount);
       this.output.Statistics(finalResult, Rate);
-    }catch (error) {
-      if (error instanceof AppError && error.type === ERROR_TYPE.inputError) {
-        this.input.print(error.message);
+    } catch (error) {
+      if (error instanceof AppError) {
+        this.output.print(error.message); // 수정된 부분
+        await this.play();
       } else {
         throw error;
       }
