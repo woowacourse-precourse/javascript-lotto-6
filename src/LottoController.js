@@ -34,6 +34,7 @@ class LottoController {
 
   handleMainNumber(mainNumberArray) {
     if (!Validator.validateLottoNumbers(mainNumberArray)) return this.readMainNumber();
+    OutputView.printBlank();
   }
 }
 
