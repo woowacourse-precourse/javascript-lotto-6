@@ -20,9 +20,15 @@ class Lotto {
     if (numbersSet.size !== numbers.length) {
       throw new Error('[ERROR] 로또 번호는 서로다른 숫자여야 합니다.');
     }
+
+    if (!numbers.every((number) => Number.isInteger(number))) {
+      throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
+    }
   }
 
-  // TODO: 추가 기능 구현
+  getWinningNumber() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
