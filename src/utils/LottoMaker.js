@@ -19,7 +19,7 @@ class LottoMaker {
     return price / LOTTO_PRICE;
   }
 
-  validatePublishCount(count) {
+  validateLottoPublishCount(count) {
     if (InputValidator.checkNaN(count)) {
       throw new ValidationError(ERROR_MESSAGE.isNaN);
     }
@@ -31,7 +31,7 @@ class LottoMaker {
     }
   }
 
-  createNumbers() {
+  getSortedNumbers() {
     const numbers = [];
 
     while (numbers.length !== DRAW_NUMBERS) {
@@ -43,9 +43,9 @@ class LottoMaker {
     return numbers.sort((a, b) => a - b);
   }
 
-  publishedLottos(publishCount) {
+  publishLottos(publishCount) {
     for (let count = 0; count < publishCount; count += 1) {
-      const numbers = this.createNumbers();
+      const numbers = this.getSortedNumbers();
       const lotto = new Lotto(numbers);
       this.#lottos.push(lotto);
     }

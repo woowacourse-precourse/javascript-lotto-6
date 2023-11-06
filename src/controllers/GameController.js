@@ -15,7 +15,7 @@ class GameController {
     OutputView.printLine();
     OutputView.printPublishCount(publishCount);
 
-    this.#lottoMaker.publishedLottos(publishCount);
+    this.#lottoMaker.publishLottos(publishCount);
     OutputView.printLottos(this.#lottoMaker.lottos);
     OutputView.printLine();
 
@@ -26,7 +26,7 @@ class GameController {
     const price = await InputView.inputPrice();
     const count = this.#lottoMaker.calcLottoPublishCount(price);
     try {
-      this.#lottoMaker.validatePublishCount(count);
+      this.#lottoMaker.validateLottoPublishCount(count);
       return count;
     } catch (e) {
       Console.print(e.toString());
