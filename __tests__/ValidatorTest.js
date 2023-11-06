@@ -12,4 +12,9 @@ describe('유저 입력 유효성 검사', () => {
   test.each([[999], [-200], [30]])('로또 구매 금액이 최소 금액보다 작을경우 테스트', (input) => {
     expect(() => Validator.validateMinPrice(input)).toThrow();
   });
+
+  test.each([[-12], [0], [46]])('로또 번호가 지정된 범위인지 테스트', (input) => {
+    expect(() => Validator.validateInRange(input)).toThrow();
+  });
+    
 });
