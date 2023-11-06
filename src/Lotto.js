@@ -35,12 +35,23 @@ class Lotto {
     return numbers;
   }
 
+  isDuplicateNumber(bonusNumber) {
+    const hasNumber = this.winningNumber.some(
+      (number) => number === bonusNumber
+    );
+
+    if (hasNumber)
+      throw new Error("[ERROR] 보너스 번호는 로또 번호와 중복될 수 없습니다.");
+
+    return bonusNumber;
+  }
+
   setWinningNumber() {
     this.winningNumber = this.#validate(this.#numbers);
   }
 
   setBonusNumber(bonusNumber) {
-    this.bonusNumber = bonusNumber;
+    this.bonusNumber = this.isDuplicateNumber(bonusNumber);
   }
 
   getSortedNumbers() {
