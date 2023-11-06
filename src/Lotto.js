@@ -1,3 +1,6 @@
+import { Console } from "@woowacourse/mission-utils";
+import ValidatePrice from "./ValidatePrice";
+
 class Lotto {
   #numbers;
 
@@ -7,7 +10,22 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  hasDuplicates = (numbers) => {
+  getPrice = async () => {
+    let price;
+
+    do {
+      try {
+        price = await Console.readLineAsync("구입 금액을 입력해 주세요.");
+        price = ValidatePrice(price);
+      } catch(error) {
+        throw new Error(error.message);
+      }
+    } while(!price);
+
+    return price;
+  };
+
+  #hasDuplicates = (numbers) => {
     const uniqueNumbers = [...new Set(numbers)];
     return numbers.length !== uniqueNumbers.length;
   };
@@ -19,7 +37,7 @@ class Lotto {
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    if (hasDuplicates(numbers))
+    if (this.#hasDuplicates(numbers))
       throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
     if (numbers.some(num => num <= 0 || num >= 46))
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
@@ -39,8 +57,6 @@ class Lotto {
     if (bonusNum >= 1 && bonusNum <= 45 && Number.isInteger(bonusNum) === false)
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
   }
-
-  // TODO: 추가 기능 구현
 
   async start() {
     await this.getPrice();

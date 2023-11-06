@@ -1,4 +1,4 @@
-const ValidationPrice = (price) => {
+const ValidatePrice = (price) => {
   const priceToNumber = parseInt(price);
   
   if(Number.isNaN(priceToNumber))
@@ -8,7 +8,7 @@ const ValidationPrice = (price) => {
   if(priceToNumber % 1000 != 0)
     throw new Error("[ERROR] 1000원 단위로 나누어 떨어지는 숫자를 입력해 주세요.");
   
-  return true;
+  return priceToNumber;
 };
 
-export default ValidationPrice;
+export default ValidatePrice;
