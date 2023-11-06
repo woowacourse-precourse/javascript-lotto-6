@@ -24,7 +24,7 @@ class Lotto {
         if (!numbers.every(number => typeof number === TYPE_NUMBER)) {
             throw new Error(`${ERROR.HEAD} ${ERROR.NOT_NUMBER_LOTTO_MESSAGE}`);
         }
-        const isOutOfRange = numbers.some(number => number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER);
+        const isOutOfRange = numbers.some(number => number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER || !Number.isInteger(number));
         if (isOutOfRange) {
             throw new Error(`${ERROR.HEAD} ${ERROR.INVALID_LOTTO_NUMBER_RANGE}`);
         }
