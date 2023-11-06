@@ -1,12 +1,13 @@
 import { Console, Random } from "@woowacourse/mission-utils";
+// import { matchNumber, printPercentage } from "./resultCalculator";
 
 class App {
   async play() {
     const money = await this.validMoney();
-
+    
     let lottos = money / 1000;
     Console.print(`\n${lottos}개를 구매했습니다.`);
-
+    
     const randomNumbers = this.setRandomNumber(lottos);
     const lottonumber = await this.getLottoNumber('\n당첨 번호를 입력해 주세요.\n', 6);
     const bonumNumber = await this.getBonusNumber(lottonumber);
@@ -45,6 +46,7 @@ class App {
       }
     }
   }
+
   setRandomNumber(count) {
     const randomNumbers = [];
     for (let i = 0; i < count; i++) {
@@ -90,7 +92,7 @@ class App {
 
   matchNumber(randomNumbers, lottonumber, bonumNumber) {
     const matches = new Array(5).fill(0);
-
+  
     randomNumbers.forEach(userNumbers => {
       const userMatchCount = userNumbers.filter(num => lottonumber.includes(num)).length;
       if (userMatchCount === 3) {
@@ -102,22 +104,21 @@ class App {
       if (userMatchCount === 5) {
         if (userNumbers.includes(bonumNumber)) {
           matches[3];
-        }
-        else {
+        } else {
           matches[2];
         }
       }
       if (userMatchCount === 6) {
-        matches[5]++;
+        matches[4]++;
       }
     });
     return matches;
   }
-
+  
   printPercentage(matchThree, matchFour, matchFive, matchFiveBonus, matchSix, money) {
     const prizes = [5000, 50000, 1500000, 30000000, 2000000000];
     const totalPrize = matchThree * prizes[0] + matchFour * prizes[1] + matchFive * prizes[2] + matchFiveBonus * prizes[3] + matchSix * prizes[4];
-
+  
     Console.print(`3개 일치 (5,000원) - ${matchThree}개`);
     Console.print(`4개 일치 (50,000원) - ${matchFour}개`);
     Console.print(`5개 일치 (1,500,000원) - ${matchFive}개`);
@@ -126,7 +127,6 @@ class App {
     const profitPercentage = (totalPrize / money) * 100;
     Console.print(`총 수익률은 ${profitPercentage.toFixed(1)}%입니다.`);
   }
-
 }
 
 export default App;
