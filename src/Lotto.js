@@ -1,6 +1,4 @@
-import { BRACKET, DIVIDER } from './constants/Symbol.js';
-
-class Lotto {
+export default class Lotto {
   #numbers;
 
   constructor(numbers) {
@@ -8,12 +6,24 @@ class Lotto {
   }
 
   getLottoNumbers() {
-    return `${BRACKET.open}${this.#numbers.join(DIVIDER.spaceComma)}${
-      BRACKET.close
-    }`;
+    return this.#numbers;
   }
 
-  compare(winningNumbers, winningBonusNumber) {}
-}
+  compare(winningNumbers, winningBonusNumber) {
+    const compareResult = {
+      mainNumber: 0,
+      bonusNumber: false,
+    };
 
-export default Lotto;
+    this.#numbers.forEach((number) => {
+      if (winningNumbers.includes(number)) {
+        compareResult.mainNumber += 1;
+      }
+      if (number === winningBonusNumber) {
+        compareResult.bonusNumber = true;
+      }
+    });
+
+    return compareResult;
+  }
+}
