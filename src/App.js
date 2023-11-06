@@ -12,12 +12,6 @@ class App {
 
   #arrayOfLotto;
 
-  #input;
-
-  #inputWinning;
-
-  #inputBonus;
-
   #winningNum;
 
   #bounusNum;
