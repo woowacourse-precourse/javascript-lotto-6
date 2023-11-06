@@ -1,5 +1,5 @@
-import { Random } from '@woowacourse/mission-utils'
-import { NUMBER } from '../constants/constants.js'
+import { Random } from '@woowacourse/mission-utils';
+import { NUMBER } from '../constants/constants.js';
 
 class UserLottoNumber {
   #lottoNumber;

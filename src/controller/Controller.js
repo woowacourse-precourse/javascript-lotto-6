@@ -1,11 +1,10 @@
-import Lotto from '../model/lotto.js';
+import Lotto from '../model/Lotto.js';
 import UserLotto from '../model/UserLotto.js';
-import Statistics from '../model/statistics.js';
+import Statistics from '../model/Statistics.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import { STATMESSAGE, CHARACTER } from '../constants/constants.js';
 
-class controller {
+class Controller {
   #inputView;
   #outputView;
   #userLotto;
@@ -77,4 +76,4 @@ class controller {
   }
 }
 
-export default controller;
+export default Controller;
