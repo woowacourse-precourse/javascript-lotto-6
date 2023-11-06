@@ -11,6 +11,7 @@ import {
 } from "./utils/validation.js";
 import Lotto from "./Lotto.js";
 import { printPurchaseResults, printResults } from "./utils/consoleOutput.js";
+import { getTotalProfit } from "./utils/loterry.js";
 
 class App {
   #purchaseAmount;
@@ -101,16 +102,10 @@ class App {
   }
 
   matchLotteryResults() {
-    const initValue = 0;
-
-    this.#totalProfit = this.#tickets.reduce((acc, ticket) => {
-      const result = ticket.match(this.#winningNumbers, this.#bonusNumber);
-      if (result !== undefined) {
-        this.#result = this.#result.concat(result.rank);
-        return acc + result.prize;
-      }
-      return acc;
-    }, initValue);
+    this.#result = this.#tickets.map((ticket) =>
+      ticket.match(this.#winningNumbers, this.#bonusNumber),
+    );
+    this.#totalProfit = getTotalProfit(this.#result);
   }
 
   calcTotalProfitPercentage() {
