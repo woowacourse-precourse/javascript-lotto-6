@@ -54,6 +54,26 @@ class Inputs {
     );
     return bonusNumber;
   }
+
+  validBonusNumber(bonusNumber, winningNumbers) {
+    const numericBonusNumber = Number(bonusNumber);
+    if (
+      isNaN(numericBonusNumber) ||
+      !Number.isInteger(numericBonusNumber) ||
+      !numericBonusNumber ||
+      numericBonusNumber <= 0 ||
+      numericBonusNumber > 45
+    ) {
+      throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 정수여야 합니다.");
+    }
+
+    if (winningNumbers.includes(numericBonusNumber)) {
+      throw new Error(
+        "[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다."
+      );
+    }
+    return numericPrice;
+  }
 }
 
 export default Inputs;
