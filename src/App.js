@@ -13,11 +13,15 @@ class App {
   }
 
   inputMoney() {
-    Console.readLineAsync(GAME_MESSAGE.BUY_AMOUNT, (money) => {
+    Console.readLineAsync(GAME_MESSAGE.MONEY, (money) => {
       this.game.setLottoCount(money);
       this.game.printLottoCount();
       this.game.printLottoList();
     });
+  }
+
+  inputWinningNums() {
+    Console.readLineAsync(GAME_MESSAGE.WINNING_NUM, (winningNums) => {});
   }
 }
 
