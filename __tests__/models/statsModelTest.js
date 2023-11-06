@@ -1,4 +1,4 @@
-import statsModel from '../../src/models/statsModel';
+import statsModel from '../../src/models/statsModel.js';
 
 describe('수익 금액 계산', () => {
   const numbers = [13, 14, 17, 38, 42, 45];

@@ -1,4 +1,4 @@
-import randomModel from '../../src/models/randomModel';
+import randomModel from '../../src/models/randomModel.js';
 
 const mockOneOfRandom = (numbers) => {
   randomModel.getOneOfRandom = jest.fn();
