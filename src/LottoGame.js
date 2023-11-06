@@ -1,25 +1,18 @@
 import CombinationMachine from './CombinationMachine.js';
-import LottoMachine from './LottoMachine.js';
-import LottoSeller from './LottoSeller.js';
 import User from './User.js';
 
 class LottoGame {
   #user;
-  #lottoSeller;
+  #lottoMachine;
 
-  constructor() {
+  constructor(lottoMachine) {
     this.#user = null;
-    this.#lottoSeller = null;
-  }
-
-  setUpGameProcess() {
-    const lottoMacine = new LottoMachine();
-    this.#lottoSeller = new LottoSeller(lottoMacine);
+    this.#lottoMachine = lottoMachine;
   }
 
   purchace(lottoPrice) {
-    this.#user = new User(lottoPrice);
-    const lottos = this.#user.getLottos(this.#lottoSeller);
+    const lottos = this.#lottoMachine.generateLotto(lottoPrice);
+    this.#user = new User(lottoPrice, lottos);
 
     return lottos;
   }

@@ -2,19 +2,13 @@ class User {
   #lottoPrice;
   #lottos;
 
-  constructor(lottoPrice) {
+  constructor(lottoPrice, lottos) {
     this.#lottoPrice = lottoPrice;
-    this.#lottos = [];
-  }
-
-  getLottos(lottoSeller) {
-    this.#lottos = lottoSeller.sellLotto(this.#lottoPrice);
-    return [...this.#lottos];
+    this.#lottos = lottos;
   }
 
   checkResult(combinationMachine) {
-    const lottos = this.#lottos;
-    const lottoResult = combinationMachine.compareLottoNumbers(lottos);
+    const lottoResult = combinationMachine.compareLottoNumbers(this.#lottos);
 
     return [lottoResult, this.#calculateRateOfReturn(lottoResult).toFixed(1)];
   }
