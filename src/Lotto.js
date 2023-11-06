@@ -17,6 +17,17 @@ class Lotto {
   get myNumbers() {
     return this.#numbers;
   }
+
+  sortLottoNumbers() {
+    const sortedLottos = [];
+
+    this.#numbers.forEach(lotto => {
+      const lottoNumbers = lotto.myNumbers;
+      sortedLottos.push(lottoNumbers.sort((a, b) => a - b));
+    });
+
+    return sortedLottos;
+  }
 }
 
 export default Lotto;

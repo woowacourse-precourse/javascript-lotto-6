@@ -10,7 +10,7 @@ class User {
     Console.print(`\n${lottos.length}개를 구매했습니다.`);
     lottos.forEach(lotto => {
       const lottoNumbers = lotto.myNumbers;
-      Console.print(lottoNumbers.sort((a, b) => a - b));
+      Console.print(lottoNumbers);
     });
   }
 
