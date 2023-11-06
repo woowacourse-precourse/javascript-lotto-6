@@ -6,7 +6,7 @@ export const MESSAGES = {
   WINNING_STASTISTICS: "당첨 통계",
   THREE_COINCIDE: "3개 일치 (5,000원) - ",
   FOUR_COINCIDE: "4개 일치 (50,000원) - ",
-  FIVE_COINCIDE: "5개 일치 (1,5000,000원) - ",
+  FIVE_COINCIDE: "5개 일치 (1,500,000원) - ",
   FIVE_AND_BONUS_COINCIDE: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
   ALL_COINCIDE: "6개 일치 (2,000,000,000원) - ",
 };
