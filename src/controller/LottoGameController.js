@@ -1,7 +1,6 @@
 class LottoGame {
-  constructor(createModel, purchase, input, output) {
+  constructor(createModel, input, output) {
     this.CreateModel = createModel;
-    this.Purchase = purchase;
     this.Input = input;
     this.Output = output;
   }
@@ -20,7 +19,12 @@ class LottoGame {
 
   // 로또 구매 금액 저장
   setLottoPurchaseAmount(purchaseAmount) {
-    return this.CreateModel.createPurchaseModel(Number(purchaseAmount));
+    try {
+      return this.CreateModel.createPurchaseModel(Number(purchaseAmount));
+    } catch ({ message }) {
+      this.Output.printResult(message);
+      this.getLottoPurchaseAmount();
+    }
   }
 }
 
