@@ -1,80 +1,64 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import {
   MESSAGE_BONUS_NUMBER,
+  MESSAGE_COUNT_UNIT,
   MESSAGE_PURCHASING_AMOUNT,
-  MESSAGE_PURCHASING_NUMBER,
+  MESSAGE_RATE,
+  MESSAGE_RATE_UNIT,
+  MESSAGE_WINNING_ALL,
+  MESSAGE_WINNING_BONUS,
+  MESSAGE_WINNING_FIVE,
+  MESSAGE_WINNING_FOUR,
   MESSAGE_WINNING_NUMBER,
-} from "./constants/message";
-import Purchase from "./Purchase";
-import Issuance from "./Issuance";
-import Lotto from "./Lotto";
-import Bonus from "./Bonus";
+  MESSAGE_WINNING_THREE,
+} from "./constants/message.js";
+import Purchase from "./Purchase.js";
+import Issuance from "./Issuance.js";
+import Lotto from "./Lotto.js";
+import Bonus from "./Bonus.js";
 
 class App {
   async play() {
-    const purchasingAmount = await MissionUtils.Console.readLineAsync(
-      MESSAGE_PURCHASING_AMOUNT
-    );
-    const checkedAmount = new Purchase(purchasingAmount);
-    MissionUtils.Console.print(
-      checkedAmount.getPurchaseCount + MESSAGE_PURCHASING_NUMBER
-    );
+    let purchase = null;
+    let lotto = null;
+    let bonus = null;
 
-    const issuance = new Issuance(checkedAmount.getPurchaseCount);
-    issuance.printIssuanceNumbers();
-
-    const winningNumber = MissionUtils.Console.readLineAsync(
-      MESSAGE_WINNING_NUMBER
-    );
-    const lotto = new Lotto(winningNumber);
-
-    const bonus = await MissionUtils.Console.readLineAsync(
-      MESSAGE_BONUS_NUMBER
-    );
-    const bonusNumber = new Bonus(bonus, lotto.get());
-
-    const comparedResult = lotto.compareResult(
-      issuance,
-      bonusNumber.get()
-    );
-    
-    const lottoResult = [0, 0, 0, 0, 0, 0]; // 일치 개수 : [3개, 4개, 5개, 5개 + 보너스. 6개]
-    const totalProfits = 0;
-    comparedResult.forEach((result) => {
-      
-      switch (result) {
-        case 3: {
-          lottoResult[0] += 1;
-          totalProfits += 5000;
-          break;
-        }
-        case 4: {
-          lottoResult[1] += 1;
-          totalProfits += 50000;
-          break;
-        }
-        case 5: {
-          lottoResult[2] += 1;
-          totalProfits += 1500000;
-          break;
-        }
-        case 5.5: {
-          lottoResult[3] += 1;
-          totalProfits += 30000000;
-          break;
-        }
-        case 6: {
-          lottoResult[4] += 1;
-          totalProfits += 2000000000;
-          break;
-        }
-        default:{
-          break;
-        }
-          
+    while (!purchase) {
+      try {
+        purchase = new Purchase(
+          await MissionUtils.Console.readLineAsync(MESSAGE_PURCHASING_AMOUNT)
+        );
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
       }
-    })
+    }
 
+    const issuance = new Issuance(purchase.getPurchaseCount());
+    await issuance.printIssuanceNumbers(purchase.getPurchaseCount());
+
+    while (!lotto) {
+      try {
+        const winningNumber = await MissionUtils.Console.readLineAsync(
+          MESSAGE_WINNING_NUMBER
+        );
+        lotto = new Lotto(winningNumber.split(","));
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
+
+    while (!bonus) {
+      try {
+        bonus = new Bonus(
+          await MissionUtils.Console.readLineAsync(MESSAGE_BONUS_NUMBER),
+          lotto.get()
+        );
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
+
+    
   }
 }
 
