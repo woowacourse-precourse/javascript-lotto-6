@@ -16,4 +16,17 @@ class controller {
     this.#outputView = new OutputView();
     this.#statistics = new Statistics();
   }
+
+  async buyLotto() {
+    const purchaseAmount = await this.#inputView.readPurchaseAmount();
+
+    try {
+      this.#userLotto = new UserLotto(Number(purchaseAmount));
+      this.priintUserLottoNumbers();
+      await this.setWinningLottoNumbers();
+    } catch (error) {
+      this.#outputView.print(error.message);
+      this.buyLotto();
+    }
+  }
 }
