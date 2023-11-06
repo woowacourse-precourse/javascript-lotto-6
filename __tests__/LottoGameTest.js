@@ -2,8 +2,6 @@ import { Random } from '@woowacourse/mission-utils';
 
 import LottoGame from '../src/LottoGame.js';
 import Lotto from '../src/Lotto.js';
-import { validatePurchaseAmount } from '../src/utils/validate.js';
-import { ERROR_MESSAGE } from '../src/constants/messages.js';
 
 describe('LottoGame 클래스 테스트', () => {
   test('구입 금액에 해당하는 만큼 로또를 발행한다.', () => {
@@ -63,25 +61,5 @@ describe('LottoGame 클래스 테스트', () => {
         expect(rate).toBe(expectedRate);
       },
     );
-  });
-});
-
-describe('구입 금액 검증 테스트', () => {
-  test('로또 구입 금액이 1,000으로 나누어 떨어지지 않으면 예외가 발생한다.', () => {
-    expect(() => {
-      validatePurchaseAmount('1001');
-    }).toThrow(ERROR_MESSAGE.invalidUnit);
-  });
-
-  test('구입 금액에 숫자가 아닌 값이 입력되면 예외가 발생한다.', () => {
-    expect(() => {
-      validatePurchaseAmount('a');
-    }).toThrow(ERROR_MESSAGE.invalidType);
-  });
-
-  test('구입 금액이 1,000원 미만이면 예외가 발생한다.', () => {
-    expect(() => {
-      validatePurchaseAmount('0');
-    }).toThrow(ERROR_MESSAGE.invalidAmount);
   });
 });
