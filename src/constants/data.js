@@ -1,7 +1,7 @@
 const ZERO = 0;
 const SIX = 6;
 const THOUSAND = 1000;
-const MIN = 1;
-const MAX = 45;
+const START_INCLUSIVE = 1;
+const END_INCLUSIVE = 45;
 
-export { ZERO, SIX, THOUSAND, MIN, MAX };
+export { ZERO, SIX, THOUSAND, START_INCLUSIVE, END_INCLUSIVE };

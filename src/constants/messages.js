@@ -7,6 +7,8 @@ const INPUT = Object.freeze({
 const ERROR = Object.freeze({
   not_a_valid_number: '[ERROR] 로또 구입금액은 자연수만 입력이 가능합니다.',
   not_a_thousand_unit: '[ERROR] 로또 구입금액은 1,000원 단위로 입력이 가능합니다.',
+  not_a_valid_count: '[ERROR] 로또 번호는 6개여야 합니다.',
+  not_duplicate_numbers: '[ERROR] 로또 번호에 중복된 숫자는 불가능합니다.',
 });
 
 const OUTPUT = Object.freeze({
