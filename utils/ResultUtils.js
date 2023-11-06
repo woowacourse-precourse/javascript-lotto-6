@@ -20,6 +20,7 @@ const ResultUtils = {
       case 6:
         return 'six';
     }
+    return 'zero';
   },
 
   addProfit(matchNumber) {
