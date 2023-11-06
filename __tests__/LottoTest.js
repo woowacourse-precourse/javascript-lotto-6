@@ -15,4 +15,14 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("로또 번호 출력 규격에 맞는 string 리턴.", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(lotto.returnNumbersForPrint()).toBe("[1, 2, 3, 4, 5, 6]");
+  });
+  test("로또 번호 일치 개수, 보너스번호 일치 여부 리턴.", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const winningNumbers = [1, 2, 3, 4, 5, 7];
+    const bonusNumber = 6;
+    expect(lotto.countMatching(winningNumbers, bonusNumber)).toEqual([5, true]);
+  });
 });

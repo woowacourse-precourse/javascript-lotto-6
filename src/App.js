@@ -127,14 +127,14 @@ class App {
     }
     return result;
   }
-  async calculateEarningRate(money,result) {
+  async calculateEarningRate(money, result) {
     let earning = 0;
-    earning += 5000*result[0];
-    earning += 50000*result[1];
-    earning += 1500000*result[2];
-    earning += 30000000*result[3];
-    earning += 2000000000*result[4];
-    return ((earning/money)*100).toFixed(1);
+    earning += 5000 * result[0];
+    earning += 50000 * result[1];
+    earning += 1500000 * result[2];
+    earning += 30000000 * result[3];
+    earning += 2000000000 * result[4];
+    return ((earning / money) * 100).toFixed(1);
   }
   async printResult(money, lottoList, winningNumbers, bonusNumber) {
     MissionUtils.Console.print("당첨 통계\n---");
@@ -146,9 +146,11 @@ class App {
     MissionUtils.Console.print(`3개 일치 (5,000원) - ${result[0]}개`);
     MissionUtils.Console.print(`4개 일치 (50,000원) - ${result[1]}개`);
     MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${result[2]}개`);
-    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[3]}개`);
+    MissionUtils.Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[3]}개`
+    );
     MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${result[4]}개`);
-    const earningRate = await this.calculateEarningRate(money,result);
+    const earningRate = await this.calculateEarningRate(money, result);
     MissionUtils.Console.print(`총 수익률은 ${earningRate}%입니다.`);
   }
   async play() {

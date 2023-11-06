@@ -68,12 +68,12 @@ describe("App.js 유닛 테스트", () => {
       new Lotto([1, 2, 3, 4, 5, 6]),
     ];
     const result = await app.calculateResult(lottoList, [1, 2, 3, 4, 5, 6], 7);
-    expect(result).toEqual([1,1,1,1,1]);
+    expect(result).toEqual([1, 1, 1, 1, 1]);
   });
   test("calculateEarningRate 실행 결과가 올바른가", async () => {
-    const result1 = await app.calculateEarningRate(8000,[1,0,0,0,0]);
+    const result1 = await app.calculateEarningRate(8000, [1, 0, 0, 0, 0]);
     expect(result1).toBe("62.5");
-    const result2 = await app.calculateEarningRate(10000,[1,1,1,1,1]);
+    const result2 = await app.calculateEarningRate(10000, [1, 1, 1, 1, 1]);
     expect(result2).toBe("20315550.0");
   });
 });

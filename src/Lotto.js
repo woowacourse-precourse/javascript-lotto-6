@@ -19,11 +19,11 @@ class Lotto {
 
   // TODO: 추가 기능 구현
   returnNumbersForPrint() {
-    let result=""
+    let result = "";
     for (let i = 0; i < this.#numbers.length; i++) {
-      result += this.#numbers[i] + ", "
+      result += this.#numbers[i] + ", ";
     }
-    return "[" + result.slice(0,-2) + "]";
+    return "[" + result.slice(0, -2) + "]";
   }
   countMatching(winningNumbers, bonusNumber) {
     let count = 0;
