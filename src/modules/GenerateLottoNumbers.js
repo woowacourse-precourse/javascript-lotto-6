@@ -2,7 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class GenerateLottoNumbers {
   makeNumber() {
-    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a,b) => a -b);
     return numbers;
   }
 
