@@ -1,15 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class Game {
-	#winningNumbers;
+	#matchNumbers;
 	#bonusNumber;
-	#winningStatics;
+	#MatchingStatics;
 
 	constructor() {}
 
-	getWinningNumbers() {}
+	getMatchNumbers() {}
 	getBonusNumber() {}
-	getWinningStatics() {}
+	getMatchingStatics() {}
 }
 
-export default Lotto;
+export default Game;

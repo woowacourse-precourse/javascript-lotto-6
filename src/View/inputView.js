@@ -6,8 +6,12 @@ const inputView = {
 		return this.getUserInput(INPUT_MESSAGE.purchaseAmount);
 	},
 
+	readMatchNumbers() {
+		return this.getUserInput(INPUT_MESSAGE.matchNumbers);
+	},
+
 	async getUserInput(message) {
-		const result = Number(await Console.readLineAsync(`${message}\n`));
+		const result = await Console.readLineAsync(`${message}\n`);
 		return result;
 	},
 };

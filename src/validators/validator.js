@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE } from '../constants/messages.js';
+import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/messages.js';
 
 export const validator = {
 	purchaseAmountValidator(amount) {
@@ -9,6 +9,21 @@ export const validator = {
 			this.isUnproperUnits(amount);
 			this.isTooLittleAmount(amount);
 			this.isTooMuchAmount(amount);
+			return true;
+		} catch (error) {
+			Console.print(error.message);
+		}
+	},
+	matchNumberValidator(numbers) {
+		try {
+			numbers.forEach((number) => {
+				this.isNull(number);
+				this.isOutOfRange(number);
+				this.isNotInteger(Number(number));
+			});
+
+			this.isUnvalidCount(numbers);
+			this.isDuplicateNumber(numbers);
 			return true;
 		} catch (error) {
 			Console.print(error.message);
@@ -37,6 +52,22 @@ export const validator = {
 	isTooMuchAmount(input) {
 		if (input > 2000000000) {
 			throw new Error(`${ERROR_MESSAGE.commonMessage} : ${ERROR_MESSAGE.isTooMuchAmount}`);
+		}
+	},
+	isOutOfRange(input) {
+		if (input < 1 || input > 45) {
+			throw new Error(`${ERROR_MESSAGE.commonMessage} : ${ERROR_MESSAGE.isOutOfRange}`);
+		}
+	},
+	isUnvalidCount(input) {
+		if (input.length !== INPUT_MESSAGE.RANDOM_COUNT) {
+			throw new Error(`${ERROR_MESSAGE.isUnvalidCount}`);
+		}
+	},
+	isDuplicateNumber(input) {
+		const numbers = new Set(input);
+		if (input.length != numbers.size) {
+			throw new Error(`${ERROR_MESSAGE.isDuplicateNumber}`);
 		}
 	},
 };
