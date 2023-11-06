@@ -1,12 +1,29 @@
-import { TYPE_ERROR, UNIT_ERROR, MIN_INPUT_ERROR } from "../constants.js";
+import {
+  TYPE_ERROR,
+  UNIT_ERROR,
+  MIN_INPUT_ERROR,
+  PURCHASE_AMOUNT_UNIT,
+} from "../constants.js";
+import { Console } from "@woowacourse/mission-utils";
 
-export const validatePurchaseAmount = (input) => {
-  if (isNaN(+input)) {
+export const getValidPurchaseAmount = async () => {
+  while (true) {
+    try {
+      const input = await Console.readLineAsync("");
+      validatePurchaseAmount(input);
+      return +input;
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+};
+
+const validatePurchaseAmount = (input) => {
+  if (!Number(input)) {
     throw new Error(TYPE_ERROR);
   } else if (+input === 0) {
     throw new Error(MIN_INPUT_ERROR);
-  } else if (+input % 1000 !== 0) {
+  } else if (+input % PURCHASE_AMOUNT_UNIT !== 0) {
     throw new Error(UNIT_ERROR);
   }
-  return true;
 };
