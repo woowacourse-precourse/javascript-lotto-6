@@ -1,4 +1,4 @@
-class CombinationMachine {
+class CompareLottoMachine {
   #winningNumber;
   #bonusNumber;
 
@@ -60,4 +60,4 @@ class CombinationMachine {
   }
 }
 
-export default CombinationMachine;
+export default CompareLottoMachine;

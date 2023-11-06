@@ -1,5 +1,5 @@
-import CombinationMachine from './CombinationMachine.js';
 import User from './User.js';
+import CompareLottoMachine from './CompareLottoMachine.js';
 
 class LottoGame {
   #user;
@@ -18,8 +18,8 @@ class LottoGame {
   }
 
   compareLottoResult(winnigNumbers, bonusNumber) {
-    const combinationMachine = new CombinationMachine(winnigNumbers, bonusNumber);
-    const result = this.#user.checkResult(combinationMachine);
+    const compareLottoMachine = new CompareLottoMachine(winnigNumbers, bonusNumber);
+    const result = this.#user.checkResult(compareLottoMachine);
 
     return result;
   }

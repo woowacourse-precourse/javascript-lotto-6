@@ -7,8 +7,8 @@ class User {
     this.#lottos = lottos;
   }
 
-  checkResult(combinationMachine) {
-    const lottoResult = combinationMachine.compareLottoNumbers(this.#lottos);
+  checkResult(compareMachine) {
+    const lottoResult = compareMachine.compareLottoNumbers(this.#lottos);
 
     return [lottoResult, this.#calculateRateOfReturn(lottoResult).toFixed(1)];
   }
