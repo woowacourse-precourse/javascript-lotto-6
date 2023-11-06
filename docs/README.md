@@ -158,9 +158,4 @@ ___
 
 ## OutputView.js ##
 
-  Console.print()를 활용해 출력을 담당하는 클래스
-
-
-
-
-
+  템플릿 문자열 처리와 Console.log()를 활용해 출력을 담당하는 클래스
