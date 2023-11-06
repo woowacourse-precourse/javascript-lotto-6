@@ -1,6 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
 import InputError from "../errors/InputError.js";
-import Lotto from "../lotto/Lotto.js";
 
 class UserInput {
   static validateAmount(input) {
@@ -48,7 +47,7 @@ class UserInput {
 
     InputError.checkEmptyInputError(lottoNumbers);
 
-    new Lotto(lottoNumbers.split(",").map(Number));
+    return lottoNumbers.split(",").map(Number);
   }
 
   static async getBonusNumber() {

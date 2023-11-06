@@ -36,6 +36,9 @@ class App {
         Console.print(error.message);
       }
     }
+
+    lottoGame.setWinningNumbers(lottoNumbers, bonusNumber);
+    lottoGame.calculateWinner();
   }
 }
 
