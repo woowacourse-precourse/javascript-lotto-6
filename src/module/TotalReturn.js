@@ -1,4 +1,4 @@
-import { money } from '../Consts';
+import { money } from '../Consts.js';
 
 const totalReturn = (purchasedLotto, matchCount) => {
   const totalWinning =
