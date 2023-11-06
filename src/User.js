@@ -1,5 +1,5 @@
-import { Console } from '@woowacourse/mission-utils';
 import Input from './utils/Input.js';
+import Message from './utils/Message.js';
 
 class User {
   // eslint-disable-next-line class-methods-use-this
@@ -7,7 +7,7 @@ class User {
     const cost = await Input.getCost();
     const count = cost / 1000;
 
-    Console.print(`\n${count}개를 구매했습니다.`);
+    Message.youBought(count);
   }
 }
 
