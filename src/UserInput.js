@@ -49,6 +49,25 @@ export default class UserInput {
     if (new Set(arr).size !== LOTTERY.NUM_COUNT) throw new InputError(ERROR.NOT_SIX_NUMBERS);
   }
 
+  static async getBonusNumber(winningNumbers) {
+    while (true) {
+      const input = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+      try {
+        this.checkBonusNumberValidation(winningNumbers, input);
+        return Number(input);
+      } catch (exception) {
+        this.printError(exception.message);
+      }
+    }
+  }
+
+  static checkBonusNumberValidation(winningNumbers, input) {
+    if (input.length === 0) throw new InputError(ERROR.BLANK_INPUT);
+    const num = Number(input);
+    if (Number.isNaN(num)) throw new InputError(ERROR.NOT_A_NUMBER);
+    if (winningNumbers.includes(num)) throw new InputError(ERROR.ALREADY_SELECTED);
+  }
+
   static printError(error) {
     Console.print(error);
   }

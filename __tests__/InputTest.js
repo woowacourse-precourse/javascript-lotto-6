@@ -63,4 +63,26 @@ describe('유저 입력 테스트', () => {
       expect(() => UserInput.checkWinningNumbersValidation('1,2,3,4,5,6')).not.toThrow('[ERROR]');
     });
   });
+
+  describe('보너스 번호 입력 테스트', () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+
+    test('빈 값을 입력할 경우 예외를 발생시킨다.', () => {
+      expect(() => UserInput.checkBonusNumberValidation(winningNumbers, '')).toThrow('[ERROR]');
+    });
+
+    test.each(['abc', 'ㄱㄴㄷ'])('숫자가 아닌 값을 입력할 경우 예외를 발생시킨다.', (input) => {
+      expect(() => UserInput.checkBonusNumberValidation(winningNumbers, input)).toThrow('[ERROR]');
+    });
+
+    test('당첨 번호에 존재하는 번호를 입력할 경우 예외를 발생시킨다.', () => {
+      expect(() => UserInput.checkBonusNumberValidation(winningNumbers, '6')).toThrow('[ERROR]');
+    });
+
+    test('값을 올바르게 입력할 경우 예외를 발생시키지 않는다.', () => {
+      expect(() => UserInput.checkBonusNumberValidation(winningNumbers, '7')).not.toThrow(
+        '[ERROR]',
+      );
+    });
+  });
 });
