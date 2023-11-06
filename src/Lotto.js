@@ -1,4 +1,10 @@
-import { ERROR } from "./utils/Define";
+import {
+    ERROR,
+    LOTTO_NUMBER_COUNT,
+    MIN_LOTTO_NUMBER,
+    MAX_LOTTO_NUMBER,
+    TYPE_NUMBER,
+} from "./utils/Define";
 
 class Lotto {
     #numbers;
@@ -9,11 +15,18 @@ class Lotto {
     }
 
     #validate(numbers) {
-        if (numbers.length !== 6) {
+        if (numbers.length !== LOTTO_NUMBER_COUNT) {
             throw new Error(`${ERROR.HEAD} ${ERROR.NOT_INPUT_SIX_NUMBER}`);
         }
-        if (new Set(numbers).size !== 6) {
+        if (new Set(numbers).size !== LOTTO_NUMBER_COUNT) {
             throw new Error(`${ERROR.HEAD} ${ERROR.DUPLICATE_LOTTO_NUMBER}`);
+        }
+        if (!numbers.every(number => typeof number === TYPE_NUMBER)) {
+            throw new Error(`${ERROR.HEAD} ${ERROR.NOT_NUMBER_LOTTO_MESSAGE}`);
+        }
+        const isOutOfRange = numbers.some(number => number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER);
+        if (isOutOfRange) {
+            throw new Error(`${ERROR.HEAD} ${ERROR.INVALID_LOTTO_NUMBER_RANGE}`);
         }
     }
 
