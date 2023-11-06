@@ -22,23 +22,32 @@ class App {
       lotto.print();
     });
 
-    const winningNumbers = this.lottoResultChecker.convertToArr(
+    this.winningNumbers = this.lottoResultChecker.convertToArr(
       await this.lottoResultChecker.inputWinningLottoNum()
     );
-    const bonusNumber = this.convertToNum(await this.inputBonusNumber());
-    this.checkValidateInputBonus(bonusNumber);
+    console.log(this.winningNumbers);
+    const inputLottoNumErrors = new Lotto(this.winningNumbers);
+
+    this.bonusNumber = this.convertToNum(await this.inputBonusNumber());
+
+    this.checkValidateInputBonus(this.bonusNumber);
+
+    const includedbonusArr = this.countBonuses(generatedLottoNumbers);
   }
 
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     return +input;
   }
+
   async inputBonusNumber() {
     return await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
   }
+
   convertToNum(bonus) {
     return Number(bonus);
   }
+
   checkValidateInputBonus(bonus) {
     if (isNaN(Number(bonus)) || bonus < 1 || bonus > 45) {
       throw new Error(
@@ -48,9 +57,20 @@ class App {
     if (bonus % 1 !== 0) {
       throw new Error("[ERROR] 자연수만 입력이 가능합니다.");
     }
-    if (this.inputLottoNumArr.includes(bonus)) {
+    if (this.winningNumbers.includes(bonus)) {
       throw new Error("[ERROR] 입력한 당첨 번호 외 숫자를 입력해 주세요.");
     }
+  }
+  countBonuses(randomArrs) {
+    const bonusArray = Array.from({ length: randomArrs.length }, () => 0);
+
+    for (let i = 0; i < randomArrs.length; i++) {
+      if (randomArrs[i].getNumbers().includes(this.bonusNumber)) {
+        bonusArray[i] += 1;
+      }
+    }
+
+    return bonusArray;
   }
 }
 export default App;
