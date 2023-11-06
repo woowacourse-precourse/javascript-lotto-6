@@ -64,3 +64,143 @@ class Lotto {
 
 export default Lotto;
 ```
+
+## 2 유효성 확인 위치 변경
+
+이번 미션에는 `Lotto` 클래스를 사용해야된다는 조건이 추가 되었습니다.
+
+```js
+class Lotto {
+  #numbers;
+
+  constructor(numbers) {
+    this.#validate(numbers);
+    this.#numbers = numbers;
+  }
+
+  #validate(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+  }
+
+  // TODO: 추가 기능 구현
+}
+```
+
+이 코드를 보면 유효성 검사가 포함되어있고 필드도 더 이상 추가되지 않았습니다. 물론 `validate`를 삭제하지 말라는 조건은 없었지만 최대한 활용하고 싶었습니다.  
+따라서 기존 view에서 하던 유효성 검사를 간단한 빈문자열 검사만 `view`에서 하고 나머지를 모두 model에서 하기로 마음먹었습니다. 유효성 검사를 어디서할지는 토론에서도 주제로나올만큼 분분합니다.  
+저는 `view`가 올바른 값을 가져오는 것 까지가 `view`의 책임이라 생각하고 올바르지 않은 값을 `controller` or `model`로 가지고 갈 필요가 없다고 생각하지만 무조건 `view`에서 해야한다는 고정관념은 없기 때문에 이번에는 `model`에서 유효성 검사를 하기로 하였습니다. `view`가 아니면 데이터를 가지고 있는 `model`에서 항상 무결성을 유지하는 게 가장 좋다고 생각했습니다.([Reference](https://stackoverflow.com/questions/5305854/best-place-for-validation-in-model-view-controller-model))
+
+> 이전 미션 코드
+> InputView.js
+
+```js
+const InputView = {
+  /**
+   * @param {string} vehicle
+   * @returns {string}
+   */
+  async readRacingVehicleName(vehicle) {
+    const racingVehicleName = await Console.readLineAsync(INPUT_MESSAGE_FUNCTION.name(vehicle));
+    Validators.checkRacingVehicleName(racingVehicleName);
+    return racingVehicleName;
+  },
+  ...
+}
+```
+
+> 이번 미션 코드
+> InputView.js
+
+```js
+import { Console } from '@woowacourse/mission-utils';
+import InputMessage from '../message/Input.js';
+import { validateEmptyString } from '../utils/validators/index.js';
+
+const InputView = {
+  async readPurchaseAmount() {
+    const purchaseAmount = await Console.readLineAsync(InputMessage.PurchaseAmount);
+
+    validateEmptyString(purchaseAmount);
+
+    return purchaseAmount;
+  },
+  ...
+}
+```
+
+> Lotto.js (1차 구현)
+
+```js
+class Lotto {
+  #numbers;
+
+  constructor(numbers) {
+    this.#validate(numbers);
+    this.#numbers = numbers.map(Number);
+  }
+
+  #validate(numbers) {
+    if (!numbers.every(isNumber)) throw new Error('[ERROR] 숫자이외의 문자가 존재합니다.');
+    if (isDuplication(numbers)) throw new Error('[ERROR] 중복되는 숫자가 존재합니다.');
+    if (!numbers.every((number) => isNumberInValidScope(number))) {
+      throw new Error('[ERROR] 숫자 1~45 만 입력이 가능합니다.');
+    }
+
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+  }
+  ....
+}
+```
+
+## 3. 한 번에 한 가지 일만 하도록
+
+> RacingController
+
+```js
+#raceAndPrintProgress(racingCount) {
+    OutputView.printProgress();
+    for (let count = 1; count <= racingCount; count += 1) {
+      this.#racingModel.race();
+      OutputView.printRacingResult(this.#racingModel.getData());
+    }
+  }
+```
+
+이 코드는 저번미션 최악의 코드 1위입니다.  
+이 메서드는 결과물을 출력도하고 레이싱을 진행하기도 합니다.  
+즉 결과를 계산 메서드와 출력하는 메서드는 따로 분리가 되어야 하는데 그렇게 하지 못 했습니다.
+
+```js
+  getResult(winning, bonus) {
+    return this.#userLottos.map((userLotto) =>
+      winning.calculateResult(userLotto, bonus.getBonusNumber()),
+    );
+  }
+```
+
+해서 이번에는 결과물을 계산하는 메서드와 출력하는 메서드를 따로 분리하여 하나의 메서드가 한 가지일만 하도록 하였습니다.
+
+## 4. 최상위 추상층은 최대한 흐름을 이해하기 쉽게
+
+> LottoController.js (1차))
+
+```js
+  async startGame() {
+    const userLottos = await this.#purchaseLotto();
+
+    OutputView.printUserLottos(userLottos);
+
+    const { winningNumbers, bonusNumber } = await this.#drawLottery();
+    const winningResult = this.#lottoModel.getResult(winningNumbers, bonusNumber);
+
+    OutputView.printResult(this.#lottoModel.calculateResult(winningResult));
+  }
+```
+
+최상위 추상층이기 때문에 이 부분만 보고 로또 게임의 전체 흐름을 알수 있도록 코드를 작성하였습니다.  
+현재 1차구현이기 때문에 아직 메서드 명이랑 변수명이 확정되지 않아 미흡하지만 winningResult는 불필요한 로컬변수인 것 같아서 2차 구현에서는 이 부분을 제거한다면 조금 더 좋을 것 같습니다.  
+따라서 `model`에 `winningNumbers`와 `bonusNumber`을 전달해주면 바로 결과값이 나오도록 구현해야할 것 같습니다.
