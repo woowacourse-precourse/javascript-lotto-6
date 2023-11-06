@@ -5,8 +5,12 @@ import { randomNum } from './utils.js';
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
-    this.#numbers = numbers;
+  constructor(lottoNumbers) {
+    this.#numbers = lottoNumbers;
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 
