@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { RANKS, ERROR_MESSAGES } from "./Constatns.js";
+import { RANKS, GAME_MESSAGES } from "./Constatns.js";
 
 class Lotto {
   #numbers;
@@ -18,10 +18,18 @@ class Lotto {
     if (uniqueNumbers.size !== 6) {
       throw new Error("[ERROR] 중복된 번호가 있습니다.");
     }
+
+    numbers.forEach((number) => {
+      if (number < 1 || number > 45) {
+        throw new Error("[ERROR] 로또 번호는 1부터 45 사이여야 합니다.");
+      }
+    });
   }
 
-  makeWinLotto(numbers) {
-    Console.print(numbers);
+  validateBonusNumber(bonusLotto, winLotto) {
+    if (winLotto.includes(Number(bonusLotto))) {
+      throw new Error("[ERROR] 중복된 번호가 있습니다.");
+    }
   }
 
   lottoRanksCount(lottos, bonusLotto) {
@@ -41,7 +49,7 @@ class Lotto {
   getLottoRanks(lottos, bonusLotto) {
     let ranksCounts = [0, 0, 0, 0, 0];
     lottos.forEach((lotto) => {
-      let rank = this.lottoRanksCount(lotto, bonusLotto);
+      const rank = this.lottoRanksCount(lotto, bonusLotto);
       if (rank) ranksCounts[RANKS.MAX_RANK_LENGTH - rank]++;
     });
     return ranksCounts;
@@ -54,6 +62,12 @@ class Lotto {
     });
     profit = (profit * 100) / money;
     return profit;
+  }
+
+  printWinStatics(lottoRanks) {
+    GAME_MESSAGES.WINNING_RESULT.forEach((winMessage, idx) => {
+      Console.print(winMessage.replace("%s", lottoRanks[idx]));
+    });
   }
 }
 

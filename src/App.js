@@ -17,51 +17,57 @@ class App {
   }
 
   async play() {
-    await this.getTicket();
+    const ticketAmount = await this.getTicket();
+    await this.getLottos(ticketAmount);
+    await this.makeWinLotto();
+    await this.makeBonusLotto();
+    await this.winLottoCount();
+    await this.printWinResult(this.lottoRanks);
   }
 
   async getTicket() {
-    this.money = await Console.readLineAsync(GAME_MESSAGES.ENTER_TICKET_MONEY);
     this.ticket = new Ticket();
-    const ticketAmount = this.ticket.purchase(this.money);
-    this.getLottos(ticketAmount);
+    this.money = await this.ticket.getMoney();
+    return this.ticket.purchase(this.money);
   }
 
   async getLottos(ticketAmount) {
-    this.lottos = Controller.getLottos(ticketAmount);
-    this.makeWinLotto();
+    this.lottos = await Controller.getLottosList(ticketAmount);
   }
 
   async makeWinLotto() {
-    this.winLotto = await Console.readLineAsync(GAME_MESSAGES.WIN_LOTTO);
-    this.winLotto = this.winLotto.split(",").map(Number);
-    Console.print("");
-    this.makeBonusLotto();
+    while (true) {
+      try {
+        this.winLotto = await Console.readLineAsync(GAME_MESSAGES.WIN_LOTTO);
+        this.winLotto = this.winLotto.split(",").map(Number);
+        break;
+      } catch (e) {
+        Console.print(e);
+      }
+    }
+    this.lotto = new Lotto(this.winLotto);
   }
 
   async makeBonusLotto() {
-    this.bonusLotto = await Console.readLineAsync(GAME_MESSAGES.BOUNS_LOTTO);
-    Console.print("");
-    this.winLottoCount();
+    while (true) {
+      try {
+        this.bonusLotto = await Console.readLineAsync(GAME_MESSAGES.BOUNS_LOTTO);
+        this.lotto.validateBonusNumber(this.bonusLotto, this.winLotto);
+        break;
+      } catch (e) {
+        Console.print(e);
+      }
+    }
   }
 
   async winLottoCount() {
-    this.lotto = new Lotto(this.winLotto);
     this.lottoRanks = await this.lotto.getLottoRanks(this.lottos, this.bonusLotto);
-    this.printWinResult(this.lottoRanks);
   }
 
   async printWinResult(lottoRanks) {
     Console.print(GAME_MESSAGES.WINNING_STATISTICS);
     Console.print(GAME_MESSAGES.NEW_LINE);
-    GAME_MESSAGES.WINNING_RESULT.forEach((winMessage, idx) => {
-      Console.print(winMessage + " " + lottoRanks[idx] + GAME_MESSAGES.COUNT);
-    });
-    Console.print("");
-    this.printprofitResult();
-  }
-
-  async printprofitResult() {
+    this.lotto.printWinStatics(lottoRanks);
     this.profit = await this.lotto.getProfit(this.money, this.lottoRanks);
     Console.print(GAME_MESSAGES.TOTAL_PROFITABILITY.replace("%s", this.profit.toFixed(1)));
   }

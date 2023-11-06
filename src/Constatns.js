@@ -18,19 +18,18 @@ export const RANKS = {
 export const GAME_MESSAGES = {
   ENTER_TICKET_MONEY: "구입금액을 입력해 주세요.\n",
   PURCHASE_TICKET_COUNT: "개를 구매했습니다.",
-  WIN_LOTTO: "당첨 번호를 입력해 주세요.\n",
-  BOUNS_LOTTO: "보너스 번호를 입력해 주세요.\n",
-  WINNING_STATISTICS: "당첨 통계",
+  WIN_LOTTO: "\n당첨 번호를 입력해 주세요.\n",
+  BOUNS_LOTTO: "\n보너스 번호를 입력해 주세요.\n",
+  WINNING_STATISTICS: "\n당첨 통계",
   NEW_LINE: "---",
   WINNING_RESULT: [
-    "3개 일치 (5,000원) -",
-    "4개 일치 (50,000원) -",
-    "5개 일치, 보너스 볼 일치 (30,000,000원) -",
-    "5개 일치 (1,500,000원) -",
-    "6개 일치 (2,000,000,000원) -",
+    "3개 일치 (5,000원) - %s개",
+    "4개 일치 (50,000원) - %s개",
+    "5개 일치, 보너스 볼 일치 (30,000,000원) - %s개",
+    "5개 일치 (1,500,000원) - %s개",
+    "6개 일치 (2,000,000,000원) - %s개",
   ],
   TOTAL_PROFITABILITY: "총 수익률은 %s%입니다.",
-  COUNT: "개",
 };
 
 export const ERROR_MESSAGES = {
