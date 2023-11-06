@@ -20,4 +20,10 @@ describe('기능 테스트', () => {
             '[ERROR]'
         );
     });
+
+    test('보너스 번호가 1부터 45사이의 숫자가 아니면 예외가 발생한다.', () => {
+        expect(app.getBonusNumbers([1, 2, 3, 4, 5, 6], '46')).rejects.toThrow(
+            '[ERROR]'
+        );
+    });
 });
