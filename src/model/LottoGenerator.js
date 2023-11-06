@@ -1,33 +1,23 @@
-import OutputView from '../view/OutputView.js';
 import { Random } from '@woowacourse/mission-utils';
-import { Console } from '@woowacourse/mission-utils';
 
-class LottoGenerator {
-  #lottoAmount;
+const LottoGenerator = {
+  generateLottoList: amount => {
+    let lottoList = new Array(amount);
 
-  startGenerate(amount) {
-    this.#lottoAmount = amount;
-    OutputView.printLottoAmount(this.#lottoAmount);
-    return this.generateEachLotto();
-  }
-
-  generateEachLotto() {
-    let numbers = new Array(this.#lottoAmount);
-
-    Array.from({ length: this.#lottoAmount }, () => {
-      numbers.push(this.randomNumberGenerator());
+    Array.from({ length: amount }, () => {
+      lottoList.push(randomNumberGenerator());
     });
 
-    return numbers;
-  }
+    return lottoList;
+  },
+};
 
-  randomNumberGenerator() {
-    return this.sort(Random.pickUniqueNumbersInRange(1, 45, 6));
-  }
+const randomNumberGenerator = () => {
+  return sort(Random.pickUniqueNumbersInRange(1, 45, 6));
+};
 
-  sort(randomNumbers) {
-    return randomNumbers.sort((a, b) => a - b);
-  }
-}
+const sort = eachLottoList => {
+  return eachLottoList.sort((a, b) => a - b);
+};
 
 export default LottoGenerator;
