@@ -8,6 +8,10 @@ class InputView {
   printError(errorMessage) {
     Console.print(`[ERROR] ${errorMessage}`);
   }
+
+  printNumLottoTickets(numLottoTickets) {
+    Console.print(`\n${numLottoTickets}개를 구매했습니다.`);
+  }
 }
 
 export default InputView;
