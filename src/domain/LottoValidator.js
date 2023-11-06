@@ -16,6 +16,19 @@ const LottoValidator = {
     }
   },
 
+  validPurchaseAmount(number) {
+    const numberRegExp = /^\d+$/;
+    const numberic = numberRegExp.test(number) && !Number.isNaN(number);
+
+    if (!numberic) {
+      throw new Error(ERROR_MESSAGE.invalidNumberic);
+    }
+
+    if (number % 1000 !== 0) {
+      throw new Error(ERROR_MESSAGE.invalidAmount);
+    }
+  },
+
   validBonusNumber(number, isContainning) {
     const numberRegExp = /^\d+$/;
     const numberic = numberRegExp.test(number) && !Number.isNaN(number);
