@@ -1,48 +1,38 @@
-import { Console } from '@woowacourse/mission-utils';
 import priceModel from './models/priceModel.js';
-import PriceValidation from './Validations/PriceValidation.js';
-import inputs from './View/inputs.js';
-import outputs from './View/outputs.js';
+import validationUtils from './utils/validationUtils.js';
+import VALUE from './constants/value.js';
+import MESSAGE from './constants/message.js';
 
 class Price {
   #price;
 
   #number;
 
-  constructor() {
-    this.#price = 0;
-    this.#number = 0;
+  constructor(price) {
+    this.#price = price;
+    this.#validate();
   }
 
-  async #validate() {
-    try {
-      const priceAnswer = await inputs.enterPrice();
-      const validation = new PriceValidation(priceAnswer);
+  #validate() {
+    validationUtils.checkNumber(this.#price);
 
-      validation.finishValidation();
+    this.#check1000Units();
 
-      return priceAnswer;
-    } catch (error) {
-      Console.print(error.message);
-      return this.#validate();
+    this.#setNumber();
+  }
+
+  #check1000Units() {
+    if (this.#price % VALUE.unit.price > 0) {
+      throw new Error(MESSAGE.error.priceUnit);
     }
   }
 
-  #setPriceAndNumber(answer) {
-    this.#price = Number(answer);
+  #setNumber() {
     this.#number = priceModel.calculateNumberOfLotto(this.#price);
   }
 
-  async controlPrice() {
-    const answer = await this.#validate();
-
-    this.#setPriceAndNumber(answer);
-
-    outputs.printNumberOfLotto(this.#number);
-  }
-
   getPriceAndNumber() {
-    return [this.#price, this.#number];
+    return { price: this.#price, number: this.#number };
   }
 }
 

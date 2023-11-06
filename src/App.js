@@ -1,92 +1,26 @@
+import { Console } from '@woowacourse/mission-utils';
 import Price from './Price.js';
-import Random from './Random.js';
-import Lotto from './Lotto.js';
-import Bonus from './Bonus.js';
-import Stats from './Stats.js';
-import Rate from './Rate.js';
+import inputs from './View/inputs.js';
+import outputs from './View/outputs.js';
 
 class App {
-  #price;
-
-  #number;
-
-  #random;
-
-  #lotto;
-
-  #bonus;
-
-  #revenues;
-
-  constructor() {
-    this.#price = 0;
-    this.#number = 0;
-    this.#random = [];
-    this.#bonus = 0;
-    this.#revenues = [];
-  }
-
   async play() {
-    await this.#executePrice();
-
-    this.#executeRandom();
-
-    await this.#executeLotto();
-
-    await this.#executeBonus();
-
-    this.#executeStats();
-
-    this.#executeRate();
+    const { price, number } = await this.#executePrice();
   }
 
   async #executePrice() {
-    const priceObject = new Price();
+    try {
+      const priceAnswer = await inputs.enterPrice();
+      const priceObject = new Price(Number(priceAnswer));
+      const { number } = priceObject.getPriceAndNumber();
 
-    await priceObject.controlPrice();
+      outputs.printNumberOfLotto(number);
 
-    const [price, number] = priceObject.getPriceAndNumber();
-
-    this.#price = price;
-    this.#number = number;
-  }
-
-  #executeRandom() {
-    const randomObject = new Random();
-
-    randomObject.controlRandom(this.#number);
-
-    this.#random = randomObject.getRandom();
-  }
-
-  async #executeLotto() {
-    const lottoObject = new Lotto();
-
-    await lottoObject.controlLotto();
-
-    this.#lotto = lottoObject.getLotto();
-  }
-
-  async #executeBonus() {
-    const bonusObject = new Bonus();
-
-    await bonusObject.controlBonus(this.#lotto);
-
-    this.#bonus = bonusObject.getBonus();
-  }
-
-  #executeStats() {
-    const statsObject = new Stats();
-
-    statsObject.controlCount(this.#random, this.#lotto, this.#bonus);
-
-    this.#revenues = statsObject.getRevenues();
-  }
-
-  #executeRate() {
-    const rateObject = new Rate();
-
-    rateObject.controlRate(this.#revenues, this.#price);
+      return { ...priceObject.getPriceAndNumber() };
+    } catch (error) {
+      Console.print(error.message);
+      return this.#executePrice();
+    }
   }
 }
 
