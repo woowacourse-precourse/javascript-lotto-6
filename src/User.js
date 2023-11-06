@@ -9,19 +9,19 @@ class User {
 
   compareResult(compareMachine) {
     const lottoResult = compareMachine.compareLottoNumbers(this.#lottos);
-
-    return [lottoResult, this.#calculateRateOfReturn(lottoResult).toFixed(1)];
+    return [lottoResult, this.#calculateLottoProfitRate(lottoResult)];
   }
 
-  #calculateRateOfReturn(lottoResult) {
-    const filtered = Object.entries(lottoResult).filter(([_, matchedLength]) => matchedLength > 0);
+  #calculateLottoProfitRate(lottoResult) {
+    const filtered = lottoResult.filter(({ matchedNumber }) => matchedNumber > 0);
+
     if (filtered.length === 0) return 0;
 
-    const sum = filtered.reduce((total, [prize, matchedLength]) => {
-      return (total += Number(prize) * matchedLength);
+    const totalProfit = filtered.reduce((total, { prize, matchedNumber }) => {
+      return (total += prize * matchedNumber);
     }, 0);
 
-    return (sum / this.#lottoPrice) * 100;
+    return (totalProfit / this.#lottoPrice) * 100;
   }
 }
 

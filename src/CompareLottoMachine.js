@@ -1,44 +1,44 @@
 class CompareLottoMachine {
-  #winningNumber;
+  #winningNumbers;
   #bonusNumber;
 
   constructor(winningNumbers, bonusNumber) {
-    this.#winningNumber = this.#splitedNumbers(winningNumbers);
+    this.#winningNumbers = this.#splitedNumbers(winningNumbers);
     this.#bonusNumber = Number(bonusNumber);
   }
 
   compareLottoNumbers(lottos) {
     const matchedLottos = lottos.map((lotto) => {
-      return [this.#countCommonNumbers(lotto), this.#checkBonusNumber(lotto)];
+      return [this.#countMatchedNumbers(lotto), this.#isBonusNumber(lotto)];
     });
 
-    const filterd = this.#filterNumbers(matchedLottos);
-    const formatted = this.#formatted(filterd);
-    return formatted;
+    const result = this.#formatMatchedNumbers(this.#filterMatchedNumbers(matchedLottos));
+    return result;
   }
 
-  #filterNumbers(matchedLottos) {
+  #filterMatchedNumbers(matchedLottos) {
     const result = Array.from({ length: 5 }).fill(0);
 
-    matchedLottos.forEach(([matchedLength, hasBonus]) => {
-      if (matchedLength < 3) return;
-      if (matchedLength === 3) result[0] += 1;
-      if (matchedLength === 4) result[1] += 1;
-      if (matchedLength === 5 && !hasBonus) result[2] += 1;
-      if (matchedLength === 5 && hasBonus) result[3] += 1;
-      if (matchedLength === 6) result[4] += 1;
+    matchedLottos.forEach(([matchedCount, hasBonus]) => {
+      if (matchedCount < 3) return;
+      if (matchedCount === 3) result[0] += 1;
+      if (matchedCount === 4) result[1] += 1;
+      if (matchedCount === 5 && !hasBonus) result[2] += 1;
+      if (matchedCount === 5 && hasBonus) result[3] += 1;
+      if (matchedCount === 6) result[4] += 1;
     });
 
     return result;
   }
 
-  #formatted(filterd) {
+  #formatMatchedNumbers(filterdMatchedNumbers) {
     const dataBase = [5000, 50000, 1500000, 30000000, 2000000000];
-
-    const result = dataBase.reduce((format, prize, index) => {
-      format[prize] = filterd[index];
-      return format;
-    }, {});
+    const matchCriteria = [3, 4, 5, 5, 6];
+    const result = dataBase.map((prize, index) => ({
+      prize,
+      matchCriteria: matchCriteria[index],
+      matchedNumber: filterdMatchedNumbers[index],
+    }));
 
     return result;
   }
@@ -47,15 +47,15 @@ class CompareLottoMachine {
     return numbers.split(',').map((number) => Number(number));
   }
 
-  #countCommonNumbers(lotto) {
-    const result = this.#winningNumber.reduce((acc, number) => {
-      return lotto.includes(number) ? acc + 1 : acc;
+  #countMatchedNumbers(lotto) {
+    const result = this.#winningNumbers.reduce((totalMatchedCount, winningNumber) => {
+      return lotto.includes(winningNumber) ? totalMatchedCount + 1 : totalMatchedCount;
     }, 0);
 
     return result;
   }
 
-  #checkBonusNumber(lotto) {
+  #isBonusNumber(lotto) {
     return lotto.includes(this.#bonusNumber);
   }
 }

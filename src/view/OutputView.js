@@ -21,20 +21,30 @@ const OutputView = {
   },
 
   printResult(result) {
-    const prize = Object.keys(result[0]).map((price) => Number(price).toLocaleString());
-    const matchedLength = Object.values(result[0]);
-    const rateOfReturn = result[1];
+    const [statistics, profitRate] = result;
+    const prizeMessages = OutputView.formatPrizeMessages(statistics);
+    const profitRateMessage = OutputView.formatProfitRate(profitRate);
 
-    OutputView.print(
-      `\n당첨 통계
----
-3개 일치 (${prize[0]}원) - ${matchedLength[0]}개
-4개 일치 (${prize[1]}원) - ${matchedLength[1]}개
-5개 일치 (${prize[2]}원) - ${matchedLength[2]}개
-5개 일치, 보너스 볼 일치 (${prize[3]}원) - ${matchedLength[3]}개
-6개 일치 (${prize[4]}원) - ${matchedLength[4]}개
-총 수익률은 ${rateOfReturn}%입니다.`
-    );
+    OutputView.print(`\n당첨 통계\n---`);
+    OutputView.print(prizeMessages);
+    OutputView.print(profitRateMessage);
+  },
+
+  formatPrizeMessages(statistics) {
+    return statistics
+      .map((singleStatistics, idx) => {
+        const { matchCriteria, prize, matchedNumber } = singleStatistics;
+        if (idx === 3) {
+          return `${matchCriteria}개 일치, 보너스 볼 일치 (${prize.toLocaleString()}원) - ${matchedNumber}개`;
+        }
+        return `${matchCriteria}개 일치 (${prize.toLocaleString()}원) - ${matchedNumber}개`;
+      })
+      .join('\n');
+  },
+
+  formatProfitRate(profitRate) {
+    const formatLocaleString = Number(profitRate).toLocaleString();
+    return `총 수익률은 ${Number(formatLocaleString).toFixed(1)}%입니다.`;
   },
 
   print(message) {
