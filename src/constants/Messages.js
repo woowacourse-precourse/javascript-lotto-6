@@ -4,4 +4,5 @@ export const INPUT_MESSAGE = {
 
 export const ERROR_MESSAGE = {
   prefix: '[ERROR]',
+  emptyString: '빈문자열은 입력하실 수 없습니다.',
 };
