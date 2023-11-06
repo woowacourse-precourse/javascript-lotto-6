@@ -1,4 +1,4 @@
-import { ERORR_MESSAGE } from "./constants/message.js";
+import { ERROR_MESSAGE } from "./constants/message.js";
 import { Validator } from "./utils/validator.js";
 
 class Bonus {
@@ -11,15 +11,15 @@ class Bonus {
 
   #validate(winnerNumbers, number) {
     if (!Validator.isNumber(number)) {
-      throw new Error(ERORR_MESSAGE.bonusNumberError);
+      throw new Error(ERROR_MESSAGE.bonusNumberError);
     }
 
     if (!Validator.isNumberInRange(number)) {
-      throw new Error(ERORR_MESSAGE.bonusFormatError);
+      throw new Error(ERROR_MESSAGE.bonusFormatError);
     }
 
     if (this.isBonusNumberIncluded(winnerNumbers, number)) {
-      throw new Error(ERORR_MESSAGE.bonusIncludesWinnerError);
+      throw new Error(ERROR_MESSAGE.bonusIncludesWinnerError);
     }
   }
 

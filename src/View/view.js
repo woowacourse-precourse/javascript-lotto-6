@@ -26,6 +26,8 @@ export const View = {
       INPUT_MESSAGE.requestWinnerNumber
     );
 
+    Console.print(winnerNumber);
+
     const lotto = new Lotto(winnerNumber);
 
     return lotto;

@@ -1,5 +1,5 @@
 import { View } from "./View/view.js";
-import { ERORR_MESSAGE } from "./constants/message.js";
+import { ERROR_MESSAGE } from "./constants/message.js";
 import { setPurchaseLotto } from "./module/setting.js";
 import { Validator } from "./utils/validator.js";
 
@@ -25,7 +25,7 @@ class App {
     const purchaseAmount = await View.getAmount();
 
     if (!Validator.isValidPurchaseAmount(purchaseAmount)) {
-      throw new Error(ERORR_MESSAGE.purchaseError);
+      throw new Error(ERROR_MESSAGE.purchaseError);
     }
 
     const lottoArray = setPurchaseLotto(purchaseAmount);

@@ -1,26 +1,28 @@
+import { Console } from "@woowacourse/mission-utils";
 import { LOTTO } from "./constants/lotto.js";
-import { ERORR_MESSAGE } from "./constants/message.js";
+import { ERROR_MESSAGE } from "./constants/message.js";
 import { Validator } from "./utils/validator.js";
 
 class Lotto {
   numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.numbers = numbers.split(",").map(Number);
+    this.#validate(numbers.toString());
+    this.numbers = numbers;
   }
 
   #validate(numbers) {
-    const numberArray = numbers.split(",");
+    const numberArray = numbers.split(",").map(Number);
+    Console.print(numberArray);
 
     if (!this.isLottoFormat(numberArray)) {
-      throw new Error(ERORR_MESSAGE.formatError);
+      throw new Error(ERROR_MESSAGE.formatError);
     }
     if (!this.isLengthValid(numberArray)) {
-      throw new Error(ERORR_MESSAGE.lengthError);
+      throw new Error(ERROR_MESSAGE.lengthError);
     }
     if (this.isDuplicates(numberArray)) {
-      throw new Error(ERORR_MESSAGE.duplicateError);
+      throw new Error(ERROR_MESSAGE.duplicateError);
     }
   }
 
