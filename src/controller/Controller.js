@@ -60,4 +60,9 @@ class controller {
     this.#winningLotto.setBonusNumber(Number(bonusNumber));
     this.calculateStatistics();
   }
+
+  calculateStatistics() {
+    this.#statistics.calculateStatistics(this.#userLotto, this.#winningLotto);
+    this.printStatistics(this.#statistics.getStatistics());
+  }
 }
