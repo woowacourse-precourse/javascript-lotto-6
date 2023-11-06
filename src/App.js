@@ -16,9 +16,8 @@ class App {
   }
 
   getLottoList(count) {
-    let selectedNumber = [];
     for (let i = 0; i < count; i++) {
-      selectedNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const selectedNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       const lotto = new Lotto(selectedNumber);
       const sortedList = lotto.sortLottoList();
 
@@ -45,6 +44,13 @@ class App {
     this.bonusNumber = Number(bonus);
   }
 
+  printWinningDetail() {
+    const correctList = [];
+    this.LottoList.map((lotto) => {
+      correctList.push(new Lotto(lotto).getMatchedCount(this.prizeNumber));
+    });
+  }
+
   async play() {
     const lottoCount = await this.start();
     Console.print(lottoCount + "개를 구매했습니다.");
@@ -53,6 +59,8 @@ class App {
 
     await this.inputPrizeNumber();
     await this.inputBonusNumber();
+
+    this.printWinningDetail();
   }
 }
 

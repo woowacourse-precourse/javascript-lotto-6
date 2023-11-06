@@ -19,6 +19,10 @@ class Lotto {
   sortLottoList() {
     return this.#numbers.sort((x, y) => x - y);
   }
+
+  getMatchedCount(prizeList) {
+    return this.#numbers.filter((number) => prizeList.includes(number)).length;
+  }
 }
 
 export default Lotto;
