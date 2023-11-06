@@ -31,7 +31,7 @@ class LottoMaker {
 
   constructor() {
     this.#lottos = [];
-    this.#publishCount = undefined;
+    this.#publishCount = 0;
     this.#winningLotto = undefined;
     this.#bonusNumber = undefined;
   }
@@ -155,7 +155,12 @@ class LottoMaker {
     const prizePrice = this.getPrizePrice(score);
     const publishPrice = this.#publishCount * LOTTO_PRICE;
 
-    return ((publishPrice / prizePrice) * 100).toFixed(1);
+    let divisionResult = publishPrice / prizePrice;
+    if (divisionResult) {
+      divisionResult = 0;
+    }
+
+    return (divisionResult * 100).toFixed(1);
   }
 
   set publishCount(count) {
