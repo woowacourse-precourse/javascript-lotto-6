@@ -40,6 +40,18 @@ class Validator {
 
     return true;
   }
+
+  validateUserInputBonusNumber(userInputBonusNumber) {
+    if (Number.isNaN(userInputBonusNumber)) {
+      throw new Error(ERROR_MESSAGE.isNotAnumber);
+    }
+
+    if (userInputBonusNumber < 0 || userInputBonusNumber > 45) {
+      throw new Error(ERROR_MESSAGE.isNotInRange);
+    }
+
+    return true;
+  }
 }
 
 export default Validator;

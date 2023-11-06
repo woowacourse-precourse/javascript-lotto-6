@@ -21,6 +21,10 @@ class GameController {
       this.gameMessageGenerator.getLottoNumberListMessage(LOTTO_NUMBER_ARRAY);
     this.outputView.showLottoNumberListOutput(LOTTO_TICKET_NUMBER, LOTTO_NUMBER_LIST_MESSAGE);
     const WINNING_NUMBERS = await this.inputView.getUserInputWinningNumbers();
+    const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber();
+
+    console.log(WINNING_NUMBERS);
+    console.log(BONUS_NUMBER);
   }
 }
 
