@@ -14,6 +14,11 @@ class Lotto {
     if (numberArray.length !== 6) {
       throw new Error(ERROR.LOTTO_NUMBER_NOT_SIX);
     }
+
+    numberArray.forEach((number) => {
+      number = Number(number);
+      if(number < 1 || number > 45) throw new Error(ERROR.LOTTO_NUMBER_NOT_IN_VALID_RANGE);
+    });
     
     const numberSet = new Set(numberArray);
     if (numberArray.length !== numberSet.size) {
