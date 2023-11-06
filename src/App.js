@@ -11,7 +11,8 @@ class App {
 
     // 기능 ➋ 구매 장수만큼 랜덤한 로또 번호를 생성한다.
     const lottoManager = new LottoManager(amount);
-    lottoManager.generateLotto();
+    lottoManager.generateLottos();
+    OutputView.printLottoNumbers(lottoManager.getLottos());
   }
 }
 
