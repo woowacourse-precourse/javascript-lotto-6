@@ -8,6 +8,8 @@ class LottoBundle {
 
   #lottoList = [];
 
+  #totalRank = [0, 0, 0, 0, 0];
+
   constructor(amount) {
     this.#validateAmount(amount);
     this.#lottoCount = Number(amount) / CONSTANT.amountUnit;
@@ -36,7 +38,7 @@ class LottoBundle {
     );
   }
 
-  getLottoCount() {
+  getCount() {
     return this.#lottoCount;
   }
 
@@ -45,23 +47,13 @@ class LottoBundle {
   }
 
   getTotalRank(winningLotto, bonusNumber) {
-    const rank = [0, 0, 0, 0, 0];
-
     this.#lottoList.forEach((lotto) => {
-      const matchingCount = lotto.getMatchingCount(winningLotto, bonusNumber);
-      if (matchingCount >= RANK.fourth.match) {
-        rank[this.getRankIndex(matchingCount)] += 1;
-      }
+      const rank = lotto.getRank(winningLotto, bonusNumber);
+      const rankIndex = Object.keys(RANK).indexOf(rank);
+      if (rankIndex !== -1) this.#totalRank[rankIndex] += 1;
     });
 
-    return rank;
-  }
-
-  getRankIndex(matchingCount) {
-    return Object.values(RANK).reduce(
-      (rankIndex, rankItem) => (rankItem.match === matchingCount ? rankItem.index : rankIndex),
-      0,
-    );
+    return this.#totalRank;
   }
 }
 

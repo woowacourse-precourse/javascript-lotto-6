@@ -24,9 +24,13 @@ class Lotto {
     return this.#numbers;
   }
 
-  findRank(winningLotto, bonusNumber) {
+  getRank(winningLotto, bonusNumber) {
     const matchingCount = this.getMatchingCount(winningLotto, bonusNumber);
-    return Object.keys(RANK).filter((prize) => RANK[prize].match === matchingCount);
+
+    if (matchingCount < RANK.fourth.match) return null;
+    return Object.keys(RANK)
+      .filter((prize) => RANK[prize].match === matchingCount)
+      .pop();
   }
 
   getMatchingCount(winningLotto, bonusNumber) {
@@ -43,7 +47,7 @@ class Lotto {
   }
 
   #hasBonusNumber(bonusNumber) {
-    return !!this.#numbers.includes(bonusNumber);
+    return this.#numbers.includes(bonusNumber);
   }
 }
 

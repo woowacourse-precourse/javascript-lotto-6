@@ -15,7 +15,7 @@ export const LOTTO_NUMBER = Object.freeze({
 
 export const RANK = Object.freeze({
   first: { match: 6, reward: 2000000000 },
-  bonus: { match: 0, reward: 30000000 },
+  bonus: { match: -1, reward: 30000000 },
   second: { match: 5, reward: 1500000 },
   third: { match: 4, reward: 50000 },
   fourth: { match: 3, reward: 5000 },
@@ -26,7 +26,7 @@ export const MESSAGE = Object.freeze({
   buyLotto: '개를 구매했습니다.',
   enterWinning: '당첨 번호를 입력해 주세요.\n',
   enterBonus: '보너스 번호를 입력해 주세요\n',
-  winningStatistics: '당첨 통계\n---\n',
+  winningStatistics: '당첨 통계\n---',
 });
 
 export const ERROR = Object.freeze({

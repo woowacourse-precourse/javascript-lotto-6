@@ -67,12 +67,18 @@ class LottoGame {
     }
   }
 
-  #getReward(totalRank) {
-    return totalRank.reduce((sum, count, index) => sum + RANK.reward[index] * count, 0);
-  }
+  getProfitRate(lottoCount, totalRank) {
+    const profit = this.getProfit(totalRank);
+    OutputView.printMessage(profit);
 
   #getProfitRate(reward, lottoCount) {
     return ((reward / (lottoCount * CONSTANT.amountUnit)) * 100).toFixed(1);
+  }
+
+  getProfit(totalRank) {
+    const rewards = Object.values(RANK).map((rank) => rank.reward);
+
+    return totalRank.reduce((sum, rankCount, index) => sum + rankCount * rewards[index], 0);
   }
 }
 
