@@ -49,5 +49,21 @@ export default class LottoGame {
         Console.print(error.message);
       }
     }
+
+    const { drawnLottoNumbers, bonusNumber } = drawnLotto.getFullNumbers();
+
+    const result = LottoYieldCalculator.getResult(
+      lottos,
+      drawnLottoNumbers,
+      bonusNumber
+    );
+
+    OutputView.printResultMessage(result);
+    const yieldRate = LottoYieldCalculator.caculateYieldRate(
+      result,
+      money.getMoney()
+    );
+
+    OutputView.printYieldRate(yieldRate);
   }
 }
