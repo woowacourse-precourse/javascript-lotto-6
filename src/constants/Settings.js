@@ -1,4 +1,4 @@
-export const SETTINGS = Object.freeze({
+const SETTINGS = Object.freeze({
   lottoPrice : 1000,
   minimumLottoRange : 1,
   maximumLottoRange : 45,
@@ -9,4 +9,8 @@ export const SETTINGS = Object.freeze({
   thirdPrize : 1500000,
   secondPrize : 30000000,
   firstPrize : 2000000000,
-})
+
+  returnRateDecimal : 1,
+});
+
+export default SETTINGS;

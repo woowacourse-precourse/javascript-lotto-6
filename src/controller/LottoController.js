@@ -5,8 +5,8 @@ import WinningLotto from '../domains/WinningLotto.js';
 import View from '../utils/View.js';
 
 class LottoController {
-  #user
-  #winningLotto
+  #user;
+  #winningLotto;
 
   constructor() {
     this.#winningLotto = new WinningLotto();
@@ -15,10 +15,13 @@ class LottoController {
   async run() {
     await this.#setUser();
     this.#user.buyLottos();
+
     this.#getUserLottos();
+
     await this.#setWinningLottoNumbers();
     await this.#setWinningLottoBonus();
     this.#user.setPrizes(this.#winningLotto);
+    
     this.#getResult();
   }
 
@@ -27,7 +30,7 @@ class LottoController {
       const balance = await View.getInputByQuestion(MESSAGES.inputBalance);
       try {
         this.#user = new User(balance);
-        break
+        break;
       } catch (e) {
         View.printOutput(e.message);
       }
@@ -35,7 +38,7 @@ class LottoController {
   }
 
   #getUserLottos() {
-    View.printOutput(`\n${this.#user.getLottos().length}${MESSAGES.outputLottoAmount}`)
+    View.printOutput(`\n${this.#user.getLottos().length}${MESSAGES.outputLottoAmount}`);
     this.#user.getLottos().forEach(lotto => {
       View.printOutput(Utils.numberArrayToString(lotto));
     });
@@ -46,7 +49,7 @@ class LottoController {
       const numbers = await View.getInputByQuestion(MESSAGES.inputWinningNumbers);
       try {
         this.#winningLotto.setNumbers(numbers);
-        break
+        break;
       } catch (e) {
         View.printOutput(e.message);
       }
@@ -58,7 +61,7 @@ class LottoController {
       const bonus = await View.getInputByQuestion(MESSAGES.inputBonusNumber);
       try {
         this.#winningLotto.setBonus(bonus);
-        break
+        break;
       } catch (e) {
         View.printOutput(e.message);
       }
@@ -68,6 +71,7 @@ class LottoController {
   #getResult() {
     const prizes = this.#user.getPrizes();
     const returnRate = this.#user.getReturnRate();
+    
     View.printOutput(MESSAGES.outputResultTitle);
     View.printOutput(`${MESSAGES.outputFifthPrize}${prizes['5']}${MESSAGES.suffixAmount}`);
     View.printOutput(`${MESSAGES.outputFourthPrize}${prizes['4']}${MESSAGES.suffixAmount}`);

@@ -1,14 +1,22 @@
 import REGEXP from '../constants/RegExp.js';
-import { SETTINGS } from '../constants/Settings.js';
-import { LottoRangeError, LottoTypeError, LottoLengthError, LottoDuplicatedError, BonusTypeError, BonusRangeError, BonusIncludedError } from '../error/CustomErrors.js';
+import SETTINGS from '../constants/Settings.js';
 import Utils from '../utils/Utils.js';
+import {
+  LottoRangeError,
+  LottoTypeError,
+  LottoLengthError,
+  LottoDuplicatedError,
+  BonusTypeError,
+  BonusRangeError,
+  BonusIncludedError
+} from '../error/CustomErrors.js';
 
 class WinningLotto {
   #numbers;
   #bonus;
 
   setNumbers(numbers) {
-    const numberArray = Utils.stringArrayToNumberArray(numbers)
+    const numberArray = Utils.stringArrayToNumberArray(numbers);
     this.#validateNumbers(numberArray);
     numberArray.sort((a, b) => a - b);
     this.#numbers = numberArray;

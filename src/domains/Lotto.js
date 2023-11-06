@@ -1,6 +1,11 @@
 import REGEXP from '../constants/RegExp.js';
-import { SETTINGS } from '../constants/Settings.js';
-import { LottoLengthError, LottoRangeError, LottoTypeError, LottoDuplicatedError } from '../error/CustomErrors.js';
+import SETTINGS from '../constants/Settings.js';
+import {
+  LottoLengthError,
+  LottoRangeError,
+  LottoTypeError,
+  LottoDuplicatedError
+} from '../error/CustomErrors.js';
 
 class Lotto {
   #numbers;

@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import REGEXP from '../constants/RegExp.js';
 import { BalanceTypeError } from '../error/CustomErrors.js';
 import Lotto from './Lotto.js';
-import { SETTINGS } from '../constants/Settings.js';
+import SETTINGS from '../constants/Settings.js';
 
 class User {
   #balance;
@@ -64,7 +64,7 @@ class User {
       + SETTINGS.thirdPrize * this.#prizes['3']
       + SETTINGS.secondPrize * this.#prizes['2']
       + SETTINGS.firstPrize * this.#prizes['1'];
-    const returnRate = (returns / this.#balance * 100).toFixed(1);
+    const returnRate = (returns / this.#balance * 100).toFixed(SETTINGS.returnRateDecimal);
 
     return returnRate;
   }

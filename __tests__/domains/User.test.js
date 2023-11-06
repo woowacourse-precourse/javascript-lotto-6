@@ -80,6 +80,4 @@ describe('User - setPrizes, getPrizes, getReturnRate 메소드 : 로또 당첨 �
 
     expect(result).toEqual(RESULT_RETURNRATE);
   });
-  // 2031555000 / 6000 * 100
-  // 2031560000 / 6000 * 100
 });

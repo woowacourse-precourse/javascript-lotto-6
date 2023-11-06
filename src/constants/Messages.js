@@ -1,4 +1,4 @@
-import { SETTINGS } from './Settings.js';
+import SETTINGS from './Settings.js';
 
 const MESSAGES = Object.freeze({
   inputBalance : '\n구입금액을 입력해 주세요.\n',
