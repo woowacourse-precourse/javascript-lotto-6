@@ -29,6 +29,12 @@ class Validate {
     }
   }
 
+  static isNumberNotInNumbers(number, numbers, errorMessage) {
+    if (numbers.includes(number)) {
+      Validate.throwError(errorMessage);
+    }
+  }
+
   static throwError(errorMessage) {
     throw new Error(`[ERROR] ${errorMessage}`);
   }

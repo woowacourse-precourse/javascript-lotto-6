@@ -45,24 +45,31 @@ describe('class Winning test', () => {
     expect(() => {
       winning.setWinningNumbers([1, 2, 3, 4, 5, 6]);
       winning.setBonusNumber(5.5);
-    }).toThrow('[ERROR');
+    }).toThrow('[ERROR]');
 
     expect(() => {
       winning.setWinningNumbers([1, 2, 3, 4, 5, 6]);
       winning.setBonusNumber('10');
-    }).toThrow('[ERROR');
+    }).toThrow('[ERROR]');
   });
 
   test('보너스 번호는 1이상 45이하 정수가 아니면 예외가 발생한다.', () => {
     expect(() => {
       winning.setWinningNumbers([1, 2, 3, 4, 5, 6]);
       winning.setBonusNumber(0);
-    }).toThrow('[ERROR');
+    }).toThrow('[ERROR]');
 
     expect(() => {
       winning.setWinningNumbers([1, 2, 3, 4, 5, 6]);
       winning.setBonusNumber(46);
-    }).toThrow('[ERROR');
+    }).toThrow('[ERROR]');
+  });
+
+  test('보너스 번호는 당첨 번호와 겹치면 예외가 발생한다.', () => {
+    expect(() => {
+      winning.setWinningNumbers([1, 2, 3, 4, 5, 6]);
+      winning.setBonusNumber(1);
+    }).toThrow('[ERROR]');
   });
 
   test('당첨 번호와 보너스 번호를 로또 번호와 비교해 결과를 반환한다.', () => {

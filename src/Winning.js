@@ -15,7 +15,7 @@ class Winning {
   }
 
   setBonusNumber(bonusNumber) {
-    Winning.#validateBonusNumber(bonusNumber);
+    Winning.#validateBonusNumber(this.#winningNumbers, bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
@@ -49,10 +49,11 @@ class Winning {
     Validate.isInRange(winningNumbers, inRange);
   }
 
-  static #validateBonusNumber(bonusNumber) {
-    const { integer, inRange } = WINNING_BONUS_ERROR_MESSAGE;
+  static #validateBonusNumber(winningNumbers, bonusNumber) {
+    const { integer, inRange, notInNumberSet } = WINNING_BONUS_ERROR_MESSAGE;
     Validate.isInteger([bonusNumber], integer);
     Validate.isInRange([bonusNumber], inRange);
+    Validate.isNumberNotInNumbers(bonusNumber, winningNumbers, notInNumberSet);
   }
 }
 
