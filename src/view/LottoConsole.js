@@ -30,6 +30,16 @@ class LottoConsole {
     return numbers;
   }
 
+  static async getBonusNumber() {
+    const input = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    LottoConsole.#validateEmtpyInput(input);
+    this.printEmptyLine();
+
+    const bonusNumber = parseNumber(input);
+
+    return bonusNumber;
+  }
+
   static printEmptyLine() {
     Console.print('');
   }
