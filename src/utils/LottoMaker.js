@@ -8,8 +8,11 @@ import ValidationError from './ValidationError.js';
 class LottoMaker {
   #lottos;
 
+  #winningLotto;
+
   constructor() {
     this.#lottos = [];
+    this.#winningLotto = undefined;
   }
 
   calcLottoPublishCount(price) {
@@ -46,6 +49,14 @@ class LottoMaker {
       const lotto = new Lotto(numbers);
       this.#lottos.push(lotto);
     }
+  }
+
+  set winningLotto(numbers) {
+    this.#winningLotto = new Lotto(numbers);
+  }
+
+  get winningLotto() {
+    return this.#winningLotto;
   }
 
   get lottos() {

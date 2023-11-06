@@ -17,6 +17,9 @@ class GameController {
 
     this.#lottoMaker.publishedLottos(publishCount);
     OutputView.printLottos(this.#lottoMaker.lottos);
+    OutputView.printLine();
+
+    await this.setWinningLotto();
   }
 
   async getLottoPublishCount() {
@@ -28,6 +31,20 @@ class GameController {
     } catch (e) {
       Console.print(e.toString());
       return this.getLottoPublishCount();
+    }
+  }
+
+  async setWinningLotto() {
+    const numbers = await InputView.inputWinningNumbers();
+    const convertNumbersArray = numbers
+      .split(',')
+      .map(number => Number(number));
+    try {
+      this.#lottoMaker.winningLotto = convertNumbersArray;
+      return null;
+    } catch (e) {
+      Console.print(e.toString());
+      return this.setWinningLotto();
     }
   }
 }
