@@ -1,5 +1,6 @@
 import { Random } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGES } from "./constants/messages.js";
+import { REWARDS } from "./constants/lottoNumbers.js";
 
 class Lotto {
   #numbers;
@@ -47,6 +48,18 @@ class Lotto {
     } else if (sameCnt === 6) {
       lottoBoard.sixSame += 1;
     }
+  }
+
+  calculateReward(lottoBoard) {
+    let reward = 0;
+
+    reward += lottoBoard.threeSame * REWARDS.FIFTH;
+    reward += lottoBoard.fourSame * REWARDS.FOURTH;
+    reward += lottoBoard.fiveSame * REWARDS.THIRD;
+    reward += lottoBoard.fiveAndBonusSame * REWARDS.SECOND;
+    reward += lottoBoard.sixSame * REWARDS.FIRST;
+
+    return reward;
   }
 }
 
