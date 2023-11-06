@@ -42,3 +42,22 @@
 - 당첨 내역 출력
   - 3개 ~ 6개 일치가 각각 몇 회 발생했는지 출력
   - 총 수익률(소수점 둘째자리 반올림) 출력
+
+---
+
+## 📝기능별 분리 구조
+
+📦src  
+┣ 📂controller  
+┃ ┗ 📜LottoController.js  
+┣ 📂model  
+┃ ┗ 📜Lotto.js  
+┣ 📂utils  
+┃ ┣ 📜Constants.js // 에러메시지 & 당첨금액 상수 객체  
+┃ ┣ 📜Statistics.js // 등수 누적기록 & 당첨금 계산 객체  
+┃ ┗ 📜Validation.js // 모든 사용자 입력 값 유효검사 클래스  
+┣ 📂view  
+┃ ┣ 📜InputView.js  
+┃ ┗ 📜OutputView.js  
+┣ 📜App.js  
+┗ 📜index.js
