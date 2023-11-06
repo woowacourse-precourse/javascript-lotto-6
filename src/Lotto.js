@@ -27,10 +27,18 @@ class Lotto {
   }
 
   checkSameNumber(winningNumbers, bonusNumber) {
-    // 로또 번호는 외부에서 접근할 수 없는 필드, 내부에서 비교해야 함!
-    // 당첨 번호와 현재 로또 번호 비교하기
-    // 일치하는 숫자가 3개 이상이면 유의미
-    // 보너스 번호는 5개가 일치하는 경우에만 사용됨
+    const correct =
+      this.#numbers.length +
+      winningNumbers.length -
+      new Set([...this.#numbers, ...winningNumbers]).size;
+
+    if (correct === 5) {
+      if (this.#numbers.includes(bonusNumber)) {
+        return 5.5;
+      }
+    }
+
+    return correct;
   }
 }
 
