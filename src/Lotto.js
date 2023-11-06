@@ -1,9 +1,4 @@
-import {
-  validateDuplicateNumber,
-  validateLottoLength,
-  validateLottoRange,
-  validateNumberType,
-} from './utils/validate.js';
+import { validateLotto } from './utils/validate.js';
 
 class Lotto {
   #numbers;
@@ -14,12 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    validateLottoLength(numbers);
-    numbers.forEach((number) => {
-      validateNumberType(number);
-      validateLottoRange(number);
-    });
-    validateDuplicateNumber(numbers);
+    validateLotto(numbers);
   }
 
   getNumbers() {

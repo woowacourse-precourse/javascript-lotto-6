@@ -60,10 +60,10 @@ function validatePurchaseAmount(amount) {
   validateUnit(amount);
 }
 
-function validateBonusNumber(number, winningNumbers) {
-  validateNumberType(number);
-  validateLottoRange(Number(number));
-  validateExistingNumber(Number(number), winningNumbers);
+function validateBonusNumber(value, winningNumbers) {
+  validateNumberType(value);
+  validateLottoRange(Number(value));
+  validateExistingNumber(Number(value), winningNumbers);
 }
 
 export { validateBonusNumber, validatePurchaseAmount, validateLotto };
