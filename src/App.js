@@ -1,6 +1,11 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { INPUT_NUMBER_MESSAGE } from "./Constants.js";
-import { INPUT_BONUS_MESSAGE } from "./Constants.js";
+import {
+  MIN,
+  MAX,
+  INPUT_NUMBER_MESSAGE,
+  INPUT_BONUS_MESSAGE,
+  INPUT_RANGE_ERROR_MESSAGE,
+} from "./Constants.js";
 import User from "./User.js";
 import Lotto from "./Lotto.js";
 
@@ -14,9 +19,15 @@ class App {
 
   async inputBonus() {
     await MissionUtils.Console.print("\n" + INPUT_BONUS_MESSAGE);
-    const bonus = Number(await MissionUtils.Console.readLineAsync(""));
+    const BONUS = Number(await MissionUtils.Console.readLineAsync(""));
 
-    return bonus;
+    this.validateBonus(BONUS);
+  }
+
+  async validateBonus(BONUS) {
+    if (BONUS > MAX || BONUS < MIN || BONUS !== parseInt(BONUS)) {
+      throw new Error(INPUT_RANGE_ERROR_MESSAGE);
+    }
   }
 
   async play() {

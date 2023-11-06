@@ -1,3 +1,12 @@
+import {
+  MIN,
+  MAX,
+  PICK_NUMBER,
+  INPUT_RANGE_ERROR_MESSAGE,
+  INPUT_NUMBER_ERROR_MESSAGE,
+  INPUT_DUPLICATE_ERROR_MESSAGE,
+} from "./Constants.js";
+
 class Lotto {
   #numbers;
 
@@ -7,9 +16,24 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== PICK_NUMBER) {
+      throw new Error(INPUT_NUMBER_ERROR_MESSAGE);
     }
+
+    numbers.forEach((number) => {
+      if (number > MAX || number < MIN || Number(number) !== parseInt(number)) {
+        throw new Error(INPUT_RANGE_ERROR_MESSAGE);
+      }
+    });
+
+    const set = new Set(numbers);
+    if (numbers.length !== set.size) {
+      throw new Error(INPUT_DUPLICATE_ERROR_MESSAGE);
+    }
+  }
+
+  getNumbers() {
+    return this.#numbers.sort((a, b) => a - b);
   }
 
   // TODO: 추가 기능 구현
