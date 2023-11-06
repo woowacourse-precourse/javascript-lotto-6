@@ -15,8 +15,6 @@ import { printPurchaseResults, printResults } from "./utils/consoleOutput.js";
 class App {
   #purchaseAmount;
 
-  #ticketCount;
-
   #tickets;
 
   #winningNumbers;
@@ -46,11 +44,10 @@ class App {
     }
 
     this.#purchaseAmount = parseInt(input, 10);
-    this.#ticketCount = this.#purchaseAmount / BASE_AMOUNT;
   }
 
-  createLottoTickets() {
-    for (let i = 0; i < this.#ticketCount; i += 1) {
+  createLottoTickets(ticketCount) {
+    for (let i = 0; i < ticketCount; i += 1) {
       this.#tickets.push(new Lotto(this.createTicket()));
     }
   }
@@ -61,8 +58,9 @@ class App {
 
   async startPurchase() {
     await this.inputPurchaseAmount();
-    this.createLottoTickets();
-    printPurchaseResults(this.#ticketCount, this.#tickets);
+    const ticketCount = this.#purchaseAmount / BASE_AMOUNT;
+    this.createLottoTickets(ticketCount);
+    printPurchaseResults(ticketCount, this.#tickets);
   }
 
   async inputWinningNumber() {
