@@ -1,4 +1,5 @@
 import { Random, Console } from '@woowacourse/mission-utils';
+import Lotto from './Lotto';
 
 class App {
 	static async inputMoney() {
@@ -31,6 +32,20 @@ class App {
 		userNumbers.forEach((e) => Console.print(`[${e.join(', ')}]`));
 		Console.print('');
 		return userNumbers;
+	}
+
+	static async inputWinningNumbers() {
+		const lotto = await this.getValidWinningNumbers();
+		Console.print('');
+		return lotto;
+	}
+
+	static async getValidWinningNumbers() {
+		Console.print('당첨 번호를 입력해주세요.');
+		const input = await Console.readLineAsync('');
+		const numbers = input.split(',').map(Number);
+		const lotto = new Lotto(numbers);
+		return lotto;
 	}
 
 	// async play() {}
