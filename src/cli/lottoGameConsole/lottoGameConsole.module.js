@@ -1,15 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
 
 // TODO: 추후에 하나로 묶기
-import { validatePurchasedLottoAmount } from '../validations/purchasedLottoAmountValidation.js';
-import { validateLottoNumber } from '../validations/lottoNumberValidation.js';
-import { validateBonusNumber } from '../validations/bonusNumberValidation.js';
+import { validatePurchasedLottoAmount } from '../../validations/purchasedLottoAmountValidation/purchasedLottoAmountValidation.module.js';
+import { validateLottoNumber } from '../../validations/lottoNumberValidation/lottoNumberValidation.module.js';
+import { validateBonusNumber } from '../../validations/bonusNumberValidation/bonusNumberValidation.module.js';
 
-import { SYMBOLS } from '../constants/symbols.js';
+import { SYMBOLS } from '../../constants/symbols.js';
 
-import winningInfo from '../domain/confirmWinningInfo/winningInfo.js';
+import winningInfo from '../../domain/confirmWinningInfo/winningInfo/winningInfo.module.js';
 
-import systemConsole from './systemConsole.js';
+import systemConsole from '../systemConsole.js';
 
 /**
  * @module
@@ -86,7 +86,7 @@ const lottoGameConsole = Object.freeze({
       },
 
       /**
-       * @param {import('../utils/jsDoc.js').RankDistributionTable} rankDistributionTable - 각 등수 별 분포 수가 담긴 객체 반환 (모든 프로퍼티가 존재하는 것은 아님)
+       * @param {import('../../utils/jsDoc.js').RankDistributionTable} rankDistributionTable - 각 등수 별 분포 수가 담긴 객체 반환 (모든 프로퍼티가 존재하는 것은 아님)
        * @returns {string} 포맷팅 된 메시지
        */
       rankDistributionTable(rankDistributionTable) {
@@ -122,7 +122,7 @@ const lottoGameConsole = Object.freeze({
     },
 
     /**
-     * @param {{ rankDistributionTable : import('../utils/jsDoc.js').RankDistributionTable, rateOfReturn : string }} params - 각 등수 별 분포 수 테이블과 수익률이 담긴 객체
+     * @param {{ rankDistributionTable : import('../../utils/jsDoc.js').RankDistributionTable, rateOfReturn : string }} params - 각 등수 별 분포 수 테이블과 수익률이 담긴 객체
      */
     printWinningResult({ rankDistributionTable, rateOfReturn }) {
       Console.print(this.messages.title);

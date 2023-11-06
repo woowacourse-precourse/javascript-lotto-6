@@ -1,4 +1,4 @@
-import lottoNumberMatching from '../../../src/domain/confirmWinningInfo/lottoNumberMatching';
+import lottoNumberMatching from './lottoNumberMatching.module';
 
 describe('로또 번호 매칭 테스트', () => {
   test.each([

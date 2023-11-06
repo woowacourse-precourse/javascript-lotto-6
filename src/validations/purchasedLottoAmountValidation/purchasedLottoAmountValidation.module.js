@@ -1,8 +1,8 @@
-import lottoPurchase from '../domain/lottoPurchase.js';
-import AppError from '../error/customErrors/AppError.js';
+import lottoPurchase from '../../domain/lottoPurchase/lottoPurchase.module.js';
+import AppError from '../../error/AppError/AppError.module.js';
 
 /**
- * @type {import('../utils/jsDoc.js').PurchasedLottoAmountValidationTypes}
+ * @type {import('../../utils/jsDoc.js').PurchasedLottoAmountValidationTypes}
  */
 export const PURCHASED_LOTTO_AMOUNT_VALIDATION_TYPES = Object.freeze({
   amountRange: Object.freeze({

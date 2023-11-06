@@ -1,4 +1,4 @@
-import { ascendingNumbers, countBy, intersection } from '../../src/utils/array.js';
+import { ascendingNumbers, countBy, intersection } from './array.module.js';
 
 describe('Array 함수형 모듈 테스트', () => {
   describe('ascendingNumbers 테스트', () => {

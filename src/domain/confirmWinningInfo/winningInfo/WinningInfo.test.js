@@ -1,4 +1,4 @@
-import winningInfo from '../../../src/domain/confirmWinningInfo/winningInfo.js';
+import winningInfo from './winningInfo.module.js';
 
 const PRIZES = {
   '1st': winningInfo.constants.rankInfo['1st'].prizeAmount,

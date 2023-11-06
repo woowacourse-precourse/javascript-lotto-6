@@ -1,4 +1,4 @@
-import rateOfReturnCalculation from '../../../src/domain/confirmWinningInfo/rateOfReturnCalculation';
+import rateOfReturnCalculation from './rateOfReturnCalculation.module';
 
 describe('수익률 계산 테스트', () => {
   test.each([

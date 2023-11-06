@@ -1,9 +1,9 @@
-import lottoPurchase from '../../src/domain/lottoPurchase.js';
-import AppError from '../../src/error/customErrors/AppError.js';
+import lottoPurchase from '../../domain/lottoPurchase/lottoPurchase.module.js';
+import AppError from '../../error/AppError/AppError.module.js';
 import {
   PURCHASED_LOTTO_AMOUNT_VALIDATION_TYPES,
   validatePurchasedLottoAmount,
-} from '../../src/validations/purchasedLottoAmountValidation.js';
+} from './purchasedLottoAmountValidation.module.js';
 
 describe('validatePurchasedLottoAmount 테스트', () => {
   const startValidation = (inputValue) => () => validatePurchasedLottoAmount(inputValue);

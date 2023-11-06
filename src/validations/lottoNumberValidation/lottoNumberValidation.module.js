@@ -1,8 +1,8 @@
-import { LOTTO_RULES } from '../constants/lottoGame.js';
-import AppError from '../error/customErrors/AppError.js';
+import { LOTTO_RULES } from '../../constants/lottoGame.js';
+import AppError from '../../error/AppError/AppError.module.js';
 
 /**
- * @type {import('../utils/jsDoc.js').LottoNumberValidationTypes}
+ * @type {import('../../utils/jsDoc.js').LottoNumberValidationTypes}
  */
 export const LOTTO_NUMBER_VALIDATION_TYPES = {
   lottoNumberRange: {

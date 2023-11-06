@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import systemErrorHandler from '../../src/error/handlers/systemErrorHandler';
+import systemErrorHandler from './systemErrorHandler.module';
 
 jest.mock('@woowacourse/mission-utils', () => ({
   Console: {

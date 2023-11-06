@@ -1,13 +1,13 @@
 import { Random } from '@woowacourse/mission-utils';
 
-import lottoPurchase from '../domain/lottoPurchase.js';
-import winningInfo from '../domain/confirmWinningInfo/winningInfo.js';
-import lottoNumberMatching from '../domain/confirmWinningInfo/lottoNumberMatching.js';
-import rateOfReturnCalculation from '../domain/confirmWinningInfo/rateOfReturnCalculation.js';
+import lottoPurchase from '../domain/lottoPurchase/lottoPurchase.module.js';
+import winningInfo from '../domain/confirmWinningInfo/winningInfo/winningInfo.module.js';
+import lottoNumberMatching from '../domain/confirmWinningInfo/lottoNumberMatching/lottoNumberMatching.module.js';
+import rateOfReturnCalculation from '../domain/confirmWinningInfo/rateOfReturnCalculation/rateOfReturnCalculation.module.js';
 
-import lottoGameConsole from '../cli/lottoGameConsole.js';
+import lottoGameConsole from '../cli/lottoGameConsole/lottoGameConsole.module.js';
 
-import systemErrorHandler from '../error/handlers/systemErrorHandler.js';
+import systemErrorHandler from '../error/systemErrorHandler/systemErrorHandler.module.js';
 
 const { readWinningLottoNumber, readBonusNumber, readPurchasedLottoAmount } =
   lottoGameConsole.input;

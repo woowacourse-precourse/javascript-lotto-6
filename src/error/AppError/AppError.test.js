@@ -1,4 +1,4 @@
-import AppError from '../../src/error/customErrors/AppError.js';
+import AppError from './AppError.module.js';
 
 describe('AppError 테스트', () => {
   const throwAppError = () => {

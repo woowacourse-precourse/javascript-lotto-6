@@ -1,5 +1,5 @@
-import { ascendingNumbers } from '../utils/array.js';
-import { validateLottoNumber } from '../validations/lottoNumberValidation.js';
+import { ascendingNumbers } from '../utils/array/array.module.js';
+import { validateLottoNumber } from '../validations/lottoNumberValidation/lottoNumberValidation.module.js';
 
 class Lotto {
   #numbers;

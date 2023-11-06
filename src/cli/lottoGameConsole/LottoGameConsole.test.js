@@ -1,4 +1,4 @@
-import lottoGameConsole from '../../src/cli/lottoGameConsole';
+import lottoGameConsole from './lottoGameConsole.module';
 
 describe('lottoGameConsole 테스트', () => {
   describe('output 테스트', () => {

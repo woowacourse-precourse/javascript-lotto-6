@@ -1,4 +1,4 @@
-import lottoPurchase from '../../src/domain/lottoPurchase';
+import lottoPurchase from './lottoPurchase.module';
 
 const randomNumberGenerator = {
   pickUniqueNumbersInRange() {

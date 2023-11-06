@@ -1,5 +1,5 @@
-import { LOTTO_RULES } from '../constants/lottoGame.js';
-import Lotto from './lotto.js';
+import { LOTTO_RULES } from '../../constants/lottoGame.js';
+import Lotto from '../lotto.js';
 
 /**
  * @param {object} randomNumberGenerator - 랜덤 숫자 생성기
@@ -31,7 +31,7 @@ const lottoPurchase = Object.freeze({
   }),
 
   /**
-   * @param {import('../utils/jsDoc.js').BuyLottoNumbersParams} params - 구매 로또 금액과 랜덤 숫자 생성기가 있는 매개변수
+   * @param {import('../../utils/jsDoc.js').BuyLottoNumbersParams} params - 구매 로또 금액과 랜덤 숫자 생성기가 있는 매개변수
    * @returns {number[]} 구매한 금액 만큼의 로또 번호 배열
    */
   buyLottoNumbers({ randomNumberGenerator, purchasedLottoAmount }) {

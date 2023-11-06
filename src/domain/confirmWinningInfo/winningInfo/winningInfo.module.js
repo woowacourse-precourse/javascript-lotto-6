@@ -1,9 +1,9 @@
-import { countBy } from '../../utils/array.js';
-import { isEmptyObject } from '../../utils/object.js';
+import { countBy } from '../../../utils/array/array.module.js';
+import { isEmptyObject } from '../../../utils/object/object.module.js';
 
 /**
- * @param {import('../../utils/jsDoc.js').PrizeTable} prizeInfo - 등수 별 당첨 금액이 있는 hash table (jsDoc.js 참고)
- * @param {import('../../utils/jsDoc.js').RankDistributionTable} rankDistributionTable - 각 등수 별 분포 수가 담긴 객체 반환 (모든 프로퍼티가 존재하는 것은 아님)
+ * @param {import('../../../utils/jsDoc.js').PrizeTable} prizeInfo - 등수 별 당첨 금액이 있는 hash table (jsDoc.js 참고)
+ * @param {import('../../../utils/jsDoc.js').RankDistributionTable} rankDistributionTable - 각 등수 별 분포 수가 담긴 객체 반환 (모든 프로퍼티가 존재하는 것은 아님)
  * @returns {number} 총 당첨 금액
  */
 const calculatePrize = (prizeInfo, rankDistributionTable) =>
@@ -13,8 +13,8 @@ const calculatePrize = (prizeInfo, rankDistributionTable) =>
   );
 
 /**
- * @param {import('../../utils/jsDoc.js').RankInfo} rankInfo - 등수 정보를 담고 있는 객체
- * @returns {import('../../utils/jsDoc.js').PrizeTable} 등수 별 당첨 금액이 있는 hash table (jsDoc.js 참고)
+ * @param {import('../../../utils/jsDoc.js').RankInfo} rankInfo - 등수 정보를 담고 있는 객체
+ * @returns {import('../../../utils/jsDoc.js').PrizeTable} 등수 별 당첨 금액이 있는 hash table (jsDoc.js 참고)
  */
 const createPrizeInfo = (rankInfo) =>
   Object.values(rankInfo).reduce(
@@ -25,8 +25,8 @@ const createPrizeInfo = (rankInfo) =>
 /**
  * @param {object} param - createPrizeRank 매개 변수 정보를 담은 객체
  * @param {{ matchCount: number, hasBonusNumber: boolean }} param.lottoMatchingInfo - 로또 매칭 정보 객체
- * @param {import('../../utils/jsDoc.js').RankInfo} param.rankInfo - 등수 정보를 담고 있는 객체
- * @returns {import('../../utils/jsDoc.js').LottoRank | null} 매칭된 등수 또는 null
+ * @param {import('../../../utils/jsDoc.js').RankInfo} param.rankInfo - 등수 정보를 담고 있는 객체
+ * @returns {import('../../../utils/jsDoc.js').LottoRank | null} 매칭된 등수 또는 null
  */
 const createPrizeRank = ({ lottoMatchingInfo: { matchCount, hasBonusNumber }, rankInfo }) => {
   const rankCategories = Object.values(rankInfo);
@@ -40,8 +40,8 @@ const createPrizeRank = ({ lottoMatchingInfo: { matchCount, hasBonusNumber }, ra
 };
 
 /**
- * @param {{lottoMatchingResult : import('../../utils/jsDoc.js').LottoMatchingResult, rankInfo: import('../../utils/jsDoc.js').RankInfo}} params - createRankDistributionTable의 매개 변수
- * @returns {import('../../utils/jsDoc.js').RankDistributionTable} - 각 등수 별 분포 수가 담긴 객체 반환 (모든 프로퍼티가 존재하는 것은 아님)
+ * @param {{lottoMatchingResult : import('../../../utils/jsDoc.js').LottoMatchingResult, rankInfo: import('../../../utils/jsDoc.js').RankInfo}} params - createRankDistributionTable의 매개 변수
+ * @returns {import('../../../utils/jsDoc.js').RankDistributionTable} - 각 등수 별 분포 수가 담긴 객체 반환 (모든 프로퍼티가 존재하는 것은 아님)
  */
 const createRankDistributionTable = ({ lottoMatchingResult, rankInfo }) => {
   const matchedPrizeRanks = lottoMatchingResult.map((lottoMatchingInfo) =>
@@ -92,8 +92,8 @@ const winningInfo = Object.freeze({
   }),
 
   /**
-   * @param {import('../../utils/jsDoc.js').LottoMatchingResult} lottoMatchingResult - 로또 매칭 결과 (정답 갯수, 보너스 번호 정답 여부)
-   * @returns {import('../../utils/jsDoc.js').WinningInfo} 당첨 정보 (등수 분포 객체, 총 당첨 금액)
+   * @param {import('../../../utils/jsDoc.js').LottoMatchingResult} lottoMatchingResult - 로또 매칭 결과 (정답 갯수, 보너스 번호 정답 여부)
+   * @returns {import('../../../utils/jsDoc.js').WinningInfo} 당첨 정보 (등수 분포 객체, 총 당첨 금액)
    */
   createWinningInfo(lottoMatchingResult) {
     const rankDistributionTable = createRankDistributionTable({

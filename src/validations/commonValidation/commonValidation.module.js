@@ -1,8 +1,8 @@
-import AppError from '../error/customErrors/AppError.js';
-import { SYMBOLS } from '../constants/symbols.js';
+import AppError from '../../error/AppError/AppError.module.js';
+import { SYMBOLS } from '../../constants/symbols.js';
 
 /**
- * @type {import('../utils/jsDoc.js').CommonValidationTypes}
+ * @type {import('../../utils/jsDoc.js').CommonValidationTypes}
  */
 export const COMMON_VALIDATION_TYPES = Object.freeze({
   emptyValues: Object.freeze({

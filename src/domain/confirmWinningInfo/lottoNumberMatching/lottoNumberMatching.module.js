@@ -1,4 +1,4 @@
-import { intersection } from '../../utils/array.js';
+import { intersection } from '../../../utils/array/array.module.js';
 
 /**
  * @param {number[]} lottoNumber - 로또 번호
@@ -21,8 +21,8 @@ const calculateMatchingLottoNumbers = (lottoNumber, winningLottoNumber) =>
  */
 const lottoNumberMatching = {
   /**
-   * @param {import('../../utils/jsDoc.js').LottoNumberInfo} lottoNumberInfo - 구매한 로또 번호들, 보너스 번호, 당첨 번호가 있는 객체
-   * @returns {import('../../utils/jsDoc.js').LottoMatchingResult} 구매한 로또 만큼의 매칭 결과 (정답 갯수, 보너스 번호 정답 여부)
+   * @param {import('../../../utils/jsDoc.js').LottoNumberInfo} lottoNumberInfo - 구매한 로또 번호들, 보너스 번호, 당첨 번호가 있는 객체
+   * @returns {import('../../../utils/jsDoc.js').LottoMatchingResult} 구매한 로또 만큼의 매칭 결과 (정답 갯수, 보너스 번호 정답 여부)
    */
   createLottoMatchingResult({
     lottoNumbers,

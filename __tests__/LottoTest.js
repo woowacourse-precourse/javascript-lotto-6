@@ -1,5 +1,5 @@
 import Lotto from '../src/Lotto.js';
-import { ascendingNumbers } from '../src/utils/array.js';
+import { ascendingNumbers } from '../src/utils/array/array.module.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {

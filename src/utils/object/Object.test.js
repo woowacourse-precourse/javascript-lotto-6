@@ -1,4 +1,4 @@
-import { isEmptyObject } from '../../src/utils/object';
+import { isEmptyObject } from './object.module';
 
 describe('Object 모듈 테스트', () => {
   describe('isEmptyObject 유틸리티 함수 테스트', () => {

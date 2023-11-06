@@ -1,9 +1,9 @@
-import { LOTTO_RULES } from '../../src/constants/lottoGame.js';
-import AppError from '../../src/error/customErrors/AppError.js';
+import { LOTTO_RULES } from '../../constants/lottoGame.js';
+import AppError from '../../error/AppError/AppError.module.js';
 import {
   LOTTO_NUMBER_VALIDATION_TYPES,
   validateLottoNumber,
-} from '../../src/validations/lottoNumberValidation';
+} from './lottoNumberValidation.module.js';
 
 describe('validateLottoNumber 테스트', () => {
   const startValidation = (lottoNumbers) => () => validateLottoNumber(lottoNumbers);

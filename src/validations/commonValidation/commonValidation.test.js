@@ -1,5 +1,5 @@
-import AppError from '../../src/error/customErrors/AppError.js';
-import { COMMON_VALIDATION_TYPES, validateCommon } from '../../src/validations/commonValidation.js';
+import AppError from '../../error/AppError/AppError.module';
+import { COMMON_VALIDATION_TYPES, validateCommon } from './commonValidation.module';
 
 describe('validateCommon 테스트', () => {
   const startValidation = (inputValue) => () => validateCommon(inputValue);

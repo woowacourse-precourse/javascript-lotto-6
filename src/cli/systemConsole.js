@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { validateCommon } from '../validations/commonValidation.js';
+import { validateCommon } from '../validations/commonValidation/commonValidation.module.js';
 
 /**
  * @module
