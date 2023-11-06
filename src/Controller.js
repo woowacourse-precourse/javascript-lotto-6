@@ -26,6 +26,7 @@ class Controller {
     await this.#handlerErrorAndProceed(this.#getBonusNumber);
     await this.#getMatchStatus();
     await this.#getRateOfReturn();
+    this.#displayWinningStat();
   }
 
   async #handlerErrorAndProceed(method) {
@@ -67,6 +68,10 @@ class Controller {
 
   async #getRateOfReturn() {
     this.#rateOfReturn = new ReturnCalculator(this.#purchaseAmount, this.#matchStatus).rateOfReturn;
+  }
+
+  #displayWinningStat() {
+    OutputView.printWinningStat(this.#matchStatus);
   }
 }
 
