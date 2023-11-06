@@ -24,7 +24,6 @@ class App {
   static generateLottoNumbers() {
     const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
     const sortedLottoNumbers = lottoNumbers.sort((a, b) => a - b);
-    MissionUtils.Console.print("[" + sortedLottoNumbers.join(", ") + "]");
     return sortedLottoNumbers;
   }
 
@@ -34,6 +33,7 @@ class App {
     for (let i = 1; i <= lottoAmount; i++) {
       const lottoNumbers = App.generateLottoNumbers();
       const lotto = new Lotto(lottoNumbers);
+      lotto.printLottoNumbers();
       this.lottos.push(lotto);
     }
   }
