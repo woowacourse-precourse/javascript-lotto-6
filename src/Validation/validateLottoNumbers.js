@@ -1,7 +1,9 @@
 import { num } from '../Constants';
 
 function validateLottoNumbers(numbers) {
-  const isBetween1And45 = numbers.every((item) => item >= 1 && item <= 45);
+  const isWithinRange = numbers.every(
+    (item) => item >= num.LOTTO_LOWER_LIMIT && item <= num.LOTTO_UPPER_LIMIT
+  );
 
   if (isBetween1And45) {
     return true;
