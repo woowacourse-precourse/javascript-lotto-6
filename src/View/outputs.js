@@ -3,7 +3,7 @@ import MESSAGE from '../constants/message.js';
 
 const outputs = {
   printNumberOfLotto(number) {
-    Console.print(`${number}${MESSAGE.output.numberOfLotto}\n`);
+    Console.print(`\n${number}${MESSAGE.output.numberOfLotto}`);
   },
 
   printRandoms(random) {
