@@ -1,14 +1,14 @@
-import { Console } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
+import Validator from '../utils/Validator.js';
 
 class LottoController {
   async startLotto() {
-    this.#inputPurchaseAmountForLotto();
+    await this.#inputPurchaseAmountForLotto();
   }
 
   async #inputPurchaseAmountForLotto() {
     const purchaseAmount = await InputView.readPurchaseAmount();
-    Console.print(purchaseAmount);
+    Validator.remainderNotZero(purchaseAmount);
   }
 }
 
