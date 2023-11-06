@@ -3,7 +3,7 @@ import { PRINT_MESSAGE } from '../constants/message.js';
 import { LOTTO_RESULT } from '../constants/lotto.js';
 import { utils } from '../utils/utils.js';
 
-class LottoPrint {
+class OutputView {
   static printLottosCount(count) {
     Console.print(`${count}개를 구매했습니다.`);
   }
@@ -39,4 +39,4 @@ class LottoPrint {
   }
 }
 
-export default LottoPrint;
+export default OutputView;
