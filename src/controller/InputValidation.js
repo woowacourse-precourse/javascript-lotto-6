@@ -1,18 +1,21 @@
- export default InputValidation = (input) => {
+import { INPUT_ERROR_MESSAGE } from "../constants/ErrorMessages.js";
+import { LengthError } from "../error/InputErrors.js";
+
+   const InputValidation = {
     
-    this.input = input;
-
-    InputValidation.prototype.isNumber = () => {
-       return Number.isNaN(this.input) ? false : true
+    isNumber : function(input) {
+      const isNotNumber =  isNaN(input)
+      if (isNotNumber) throw new TypeError(INPUT_ERROR_MESSAGE.lottoPriceFormat);
+    },
+    isNotNumberArray: function(input) {
+      const isNotLengthSix = input.length !== 6;
+      const isNotNumberArray = input.every((element) => typeof element === 'number');
+    
+      if (isNotLengthSix) throw new LengthError(INPUT_ERROR_MESSAGE.winningNumberLength);
+      if (isNotNumberArray) throw new TypeError(INPUT_ERROR_MESSAGE.winningNumberFormat);
     }
+  }
 
-    InputValidation.prototype.isNumberArray = () => {
-        const isNotLengthSix = input.length !== 6
-        const isNotNumberArray = input.every((element)=>typeof element === 'number')
+  
+  export default InputValidation;
 
-        if (isNotLengthSix) return false
-        if (isNotNumberArray) return false
-
-        return true
-    }
-}
