@@ -1,4 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
+import IOUtils from "./IOUtils.js";
 
 class GameUtils {
 
@@ -10,7 +11,7 @@ class GameUtils {
         try{
             return await func();
         } catch(error) {
-            console.error(error.message);
+            IOUtils.output(error.message);
             return await this.asyncRetryUntilValidInput(func);
         }
     }
