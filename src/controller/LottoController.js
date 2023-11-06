@@ -1,14 +1,22 @@
 import InputView from '../view/InputView.js';
+import { Console } from '@woowacourse/mission-utils';
 import Validator from '../utils/Validator.js';
 
 class LottoController {
   async startLotto() {
-    await this.#inputPurchaseAmountForLotto();
+    await this.#inputPurchaseAmount();
   }
 
-  async #inputPurchaseAmountForLotto() {
+  async #inputPurchaseAmount() {
     const purchaseAmount = await InputView.readPurchaseAmount();
-    Validator.negativeNumber(purchaseAmount);
+
+    Console.print(purchaseAmount);
+    this.#inputWinningNumbers();
+  }
+
+  async #inputWinningNumbers() {
+    const winningsNumbers = await InputView.readWinningNumbers();
+    Console.print(winningsNumbers);
   }
 }
 
