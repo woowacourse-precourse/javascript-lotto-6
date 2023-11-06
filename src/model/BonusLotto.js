@@ -1,4 +1,4 @@
-import { ERROR } from "../constants/constants.js";
+import { ERROR, SIGN, VALUE } from "../constants/constants.js";
 
 class BonusLotto {
   #bonus;
@@ -13,10 +13,10 @@ class BonusLotto {
     if (isNaN(input)) {
       throw new Error(ERROR.invalidNumber);
     }
-    if (input === '') {
+    if (input === SIGN.blank) {
       throw new Error(ERROR.invalidNumber);
     }
-    if (bonusNum < 0 || bonusNum > 45) {
+    if (bonusNum < VALUE.minLottoNumber || bonusNum > VALUE.maxLottoNumber) {
       throw new Error(ERROR.invalidRange);
     }
     if (winningLottos.includes(bonusNum)) {

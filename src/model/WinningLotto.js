@@ -1,10 +1,10 @@
-import { ERROR } from '../constants/constants.js';
+import { ERROR, SIGN, VALUE } from '../constants/constants.js';
 
 class WinningLotto {
   #winningLotto;
 
   constructor(input) {
-    const numbers = input.split(',').map(Number);
+    const numbers = input.split(SIGN.cuttingUnit).map(Number);
     this.#validate(numbers);
     this.#winningLotto = numbers;
   }
@@ -13,10 +13,10 @@ class WinningLotto {
     if (numbers.some((num) => isNaN(num) || num === 0)) {
       throw new Error(ERROR.invalidNumber);
     }
-    if (numbers.some((num) => num < 0 || num > 45)) {
+    if (numbers.some((num) => num < VALUE.minLottoNumber || num > VALUE.maxLottoNumber)) {
       throw new Error(ERROR.invalidRange);
     }
-    if (numbers.length !== 6) {
+    if (numbers.length !== VALUE.lottoNumberCount) {
       throw new Error(ERROR.invalidLength);
     }
   }

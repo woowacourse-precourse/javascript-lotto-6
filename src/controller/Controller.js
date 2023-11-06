@@ -3,7 +3,7 @@ import Lottos from '../model/Lottos.js';
 import OutputView from '../view/OutputView.js';
 import BonusLotto from '../model/BonusLotto.js';
 import WinningLotto from '../model/WinningLotto.js';
-import { REWARD } from '../constants/constants.js';
+import { REWARD, VALUE } from '../constants/constants.js';
 
 class Controller {
   #inputView;
@@ -70,7 +70,7 @@ class Controller {
 
   calculateProfit(rankingObj) {
     let profit = 0;
-    const cost = this.#lottos.getLottos().length * 1000;
+    const cost = this.#lottos.getLottos().length * VALUE.lottoUnit;
 
     Object.entries(rankingObj).forEach(([ranking, count]) => {
       profit += REWARD[ranking] * (count ?? 0);

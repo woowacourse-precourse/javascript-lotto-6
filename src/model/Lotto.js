@@ -1,4 +1,4 @@
-import { ERROR } from '../constants/constants.js';
+import { ERROR, VALUE } from '../constants/constants.js';
 
 class Lotto {
   #numbers;
@@ -9,13 +9,13 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== VALUE.lottoNumberCount) {
       throw new Error(ERROR.invalidLength);
     }
     if (numbers.length !== new Set(numbers).size) {
       throw new Error(ERROR.duplicatedNumber);
     }
-    if (numbers.some((num) => num > 45 || num < 0)) {
+    if (numbers.some((num) => num > VALUE.maxLottoNumber || num < VALUE.minLottoNumber)) {
       throw new Error(ERROR.invalidLength);
     }
   }

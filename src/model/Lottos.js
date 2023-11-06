@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import { ERROR, VALUE } from '../constants/constants.js';
+import { ERROR, SIGN, VALUE } from '../constants/constants.js';
 
 class Lottos {
   #lottos;
@@ -16,7 +16,7 @@ class Lottos {
     if (isNaN(input)) {
       throw new Error(ERROR.invalidNumber);
     }
-    if (input === '') {
+    if (input === SIGN.blank) {
       throw new Error(ERROR.invalidNumber);
     }
     if (purchasePrice % VALUE.lottoUnit !== 0) {
