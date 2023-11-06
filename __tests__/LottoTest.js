@@ -1,11 +1,19 @@
 import Lotto from "../src/Lotto.js";
 import BudgetValidator from "../src/utils/BudgetValidator.js";
+import ErrorMsg from "../src/utils/ErrorMsg.js";
 
 describe("구입 금액 입력 테스트", () => {
   test("구입금액에 숫자가 아닌 것이 입력된 경우 예외가 발생한다", () => {
     expect(() => {
       BudgetValidator.isNum("123f");
-    }).toThrow("[ERROR] 구입 금액은 숫자를 입력해주세요");
+    }).toThrow(ErrorMsg.Budget.MUST_BE_NUM);
+  });
+
+  const input = ["33", "999"];
+  test.each(input)("구입금액이 1000미만일 경우 예외가 발생한다", (input) => {
+    expect(() => {
+      BudgetValidator.minIsUnitPrice(input);
+    }).toThrow(ErrorMsg.Budget.MIN_IS_UNIT_PRICE);
   });
 });
 
