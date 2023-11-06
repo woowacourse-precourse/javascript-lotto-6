@@ -17,8 +17,8 @@ class LottoGameController {
 
   async executeLottoGame() {
     await this.purchaseLottos();
-    await this.setWinningNumbersFromInput();
-    await this.setBonusNumbersFromInput();
+    await this.getAndSetWinningNumbers();
+    await this.getAndSetBonusNumber();
     const { results, profitRate } = this.executeLottoMatch();
     this.displayLottoResult(results, profitRate);
   }
@@ -32,14 +32,14 @@ class LottoGameController {
     }
   }
 
-  async setMoneyAmountFromInput() {
+  async getAndSetMoneyAmount() {
     await this.#retryOnFailure(async () => {
       const moneyAmount = await this.#view.readMoneyAmount();
       this.#lottoPublisher.setMoneyAmount(moneyAmount);
     });
   }
 
-  async setWinningNumbersFromInput() {
+  async getAndSetWinningNumbers() {
     await this.#retryOnFailure(async () => {
       const winningNumbers = await this.#view.readWinningNumbers();
       this.#lottoService.setWinningNumbers(winningNumbers);
@@ -47,7 +47,7 @@ class LottoGameController {
     });
   }
 
-  async setBonusNumbersFromInput() {
+  async getAndSetBonusNumber() {
     await this.#retryOnFailure(async () => {
       const bonusNumber = await this.#view.readBonusNumber();
       this.#lottoService.setBonusNumber(bonusNumber);
@@ -56,7 +56,7 @@ class LottoGameController {
   }
 
   async purchaseLottos() {
-    await this.setMoneyAmountFromInput();
+    await this.getAndSetMoneyAmount();
     const tickets = this.#lottoPublisher.publishLottos();
     this.#lottoService.setLottoTickets(tickets);
     this.#view.printLottoPurchaseResult(tickets);
