@@ -7,7 +7,6 @@ import {
   BASE_AMOUNT,
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
-  RANKS,
 } from "./utils/CONSTANT.js";
 import {
   validateBonusNumber,
@@ -15,6 +14,7 @@ import {
   validateWinningNumber,
 } from "./utils/validation.js";
 import Lotto from "./Lotto.js";
+import { printResults } from "./utils/consoleOutput.js";
 
 class App {
   #purchaseAmount;
@@ -33,7 +33,7 @@ class App {
 
   constructor() {
     this.#tickets = [];
-    this.#result = [...RANKS.map((rank) => ({ ...rank, count: 0 }))];
+    this.#result = [];
   }
 
   async inputPurchaseAmount() {
@@ -123,9 +123,7 @@ class App {
     this.#totalProfit = this.#tickets.reduce((acc, ticket) => {
       const result = ticket.match(this.#winningNumbers, this.#bonusNumber);
       if (result !== undefined) {
-        this.#result = this.#result.map((rank) =>
-          rank.rank === result.rank ? { ...rank, count: rank.count + 1 } : rank,
-        );
+        this.#result = this.#result.concat(result.rank);
         return acc + result.prize;
       }
       return acc;
@@ -136,36 +134,10 @@ class App {
     return (this.#totalProfit / this.#purchaseAmount) * 100;
   }
 
-  printResults(profitPercentage) {
-    this.printWinnigList();
-    this.printProfitPercentage(profitPercentage);
-  }
-
-  printProfitPercentage(profitPercentage) {
-    MissionUtils.Console.print(
-      `${OUTPUT_MESSAGE.totalProfitPercentage} ${profitPercentage.toFixed(
-        1,
-      )}%입니다.`,
-    );
-  }
-
-  printWinnigList() {
-    this.#result.forEach((rank) => {
-      const mathing = rank.bonus
-        ? OUTPUT_MESSAGE.matchCount + OUTPUT_MESSAGE.matchBonus
-        : OUTPUT_MESSAGE.matchCount;
-      MissionUtils.Console.print(
-        `${rank.matchCount}${mathing} (${rank.prize.toLocaleString()}원) - ${
-          rank.count
-        }개`,
-      );
-    });
-  }
-
   getResult() {
     this.matchLotteryResults();
     const profitPercentage = this.calcTotalProfitPercentage();
-    this.printResults(profitPercentage);
+    printResults(this.#result, profitPercentage);
   }
 
   async play() {
