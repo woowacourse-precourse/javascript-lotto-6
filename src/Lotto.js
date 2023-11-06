@@ -14,8 +14,12 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  numbersValueResult() {
+    return this.#numbers;
+  }
+
   #sortNumbers(numbers) {
-    this.numbers.sort((a, b) => a - b);
+    this.#numbers.sort((a, b) => a - b);
   }
 }
 

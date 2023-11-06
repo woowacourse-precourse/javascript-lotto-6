@@ -1,15 +1,16 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../../Lotto.js';
 
-class lottoStore {
+class LottoStore {
   static buyLotto(userMoney, target) {
     for (let i = 0; i < userMoney / 1000; i++) {
-      const getLotto = new Lotto(
+      const GET_LOTTO = new Lotto(
         MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)
       );
-      target.push(getLotto);
+      const GET_LOTTO_RESULT = GET_LOTTO.numbersValueResult();
+      target.push(GET_LOTTO_RESULT);
     }
   }
 }
 
-export default GenerateNumbers;
+export default LottoStore;

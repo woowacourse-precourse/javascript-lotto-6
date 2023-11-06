@@ -5,7 +5,6 @@ class UserInput {
     const MONEY = await MissionUtils.Console.readLineAsync(
       '구입 금액을 입력해 주세요 : '
     );
-    MissionUtils.Console.print(MONEY);
     return MONEY;
   };
 
