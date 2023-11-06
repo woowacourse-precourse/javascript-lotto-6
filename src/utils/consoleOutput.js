@@ -16,7 +16,9 @@ const printWinnigList = (result) => {
       ? OUTPUT_MESSAGE.matchCount + OUTPUT_MESSAGE.matchBonus
       : OUTPUT_MESSAGE.matchCount;
     MissionUtils.Console.print(
-      `${count}${mathing} (${rank.prize.toLocaleString()}원) - ${rank.count}개`,
+      `${
+        rank.matchCount
+      }${mathing} (${rank.prize.toLocaleString()}원) - ${count}개`,
     );
   });
 };
