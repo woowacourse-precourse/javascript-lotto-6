@@ -11,8 +11,6 @@ class LottoGameController {
 
   async startGame() {
     await this.readPurchaseAmount();
-    await this.setLottoTicketNumbers();
-    this.showLottoTicketNumbers();
   }
 
   async readPurchaseAmount() {
@@ -25,6 +23,8 @@ class LottoGameController {
     try {
       InputValidator.purchaseAmount(input);
       this.showLottoTicketCount(input);
+      this.setLottoTicketNumbers();
+      this.showLottoTicketNumbers();
     } catch (error) {
       OutputView.printErrorMessage(error);
       this.readPurchaseAmount();
