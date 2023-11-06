@@ -1,7 +1,7 @@
 const MESSAGE = Object.freeze({
-  START: '구입금액을 입력해 주세요.',
-  WINNING_INPUT: '당첨 번호를 입력해 주세요.',
-  BONUS_INPUT: '보너스 번호를 입력해 주세요.',
+  START: '구입금액을 입력해 주세요.\n',
+  WINNING_INPUT: '당첨 번호를 입력해 주세요.\n',
+  BONUS_INPUT: '보너스 번호를 입력해 주세요.\n',
   CALC: '당첨 통계\n---',
 });
 
