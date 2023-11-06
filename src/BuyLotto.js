@@ -29,14 +29,14 @@ class BuyLotto {
     }
   }
 
-  async printLottoNumbers(purchaseAmout) {
+  async getLottoNumbers(purchaseAmout) {
     const lottoQuantity = purchaseAmout / 1000;
 
     MissionUtils.Console.print(`\n${lottoQuantity}개를 구매했습니다.`);
 
     for (let i = 0; i < lottoQuantity; i++) {
       const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      randomNumber.sort((a, b) => a - b); // 숫자로 정렬
+      randomNumber.sort((a, b) => a - b);
 
       MissionUtils.Console.print(`[${randomNumber.join(', ')}]`);
     }
