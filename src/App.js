@@ -10,6 +10,7 @@ class App {
     let tickets = issueTickets(lottoMoney);
     printTicketInformation(tickets);
     let winningNumbers = await inputWinningNumbers();
+    await inputBonusNumber(winningNumbers);
   }
 }
 
@@ -47,8 +48,21 @@ function printTicketInformation(tickets) {
 }
 
 async function inputWinningNumbers() {
-  let numberString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+  let numberString = await inputNumbers();
   let winningNumbers = new WinningNumbers(numberString);
+  let bonusString = await inputBonusNumber();
+  winningNumbers.addBonusNumber(bonusString);
   return winningNumbers;
 }
+
+async function inputNumbers() {
+  let numberString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+  return numberString;
+}
+
+async function inputBonusNumber() {
+  let bonusString = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+  return bonusString;
+}
+
 export default App;
