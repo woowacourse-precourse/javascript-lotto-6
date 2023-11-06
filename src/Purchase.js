@@ -30,6 +30,7 @@ class Purchase {
       tmpLottos.push(lotto);
       lotto.print();
     }
+    MissionUtils.Console.print("\n");
     this.#lottos = tmpLottos;
   }
 }
