@@ -1,24 +1,20 @@
 import View from './View/View.js';
 import Validator from './utils/Validator.js';
-import MessageFormat from './utils/messageFormat.js';
-import OutputView from './View/OutputView.js';
 import PURCHASE_PRICE from './constants/purchasePrice.js';
 import Lotto from './Lotto.js';
 
 class App {
   #view = new View();
 
-  #outputView = OutputView;
-
   async play() {
     await this.setGameConfig();
   }
 
   async setGameConfig() {
-    const { lotteryTickets, winningNumbers, bonusNumber } = await this.readGameConfig();
-    const rankBoard = Lotto.getRankBoard(lotteryTickets, winningNumbers, bonusNumber);
+    const { lottos, winningNumbers, bonusNumber } = await this.readGameConfig();
+    const rankBoard = Lotto.getRankBoard(lottos, winningNumbers, bonusNumber);
     this.#view.printRankResult(rankBoard);
-    const initalMoney = lotteryTickets.length * PURCHASE_PRICE.divisionUnit;
+    const initalMoney = lottos.length * PURCHASE_PRICE.divisionUnit;
     const finalMoney = Lotto.getFinalMoney(rankBoard);
     const profitAbility = Lotto.getProfitAbility(initalMoney, finalMoney);
     this.#view.printProfitAbility(profitAbility);
@@ -27,10 +23,10 @@ class App {
   async readGameConfig() {
     const purchaseCount = await this.getPurchaseCount();
     this.#view.printPurchaseCount(purchaseCount);
-    const lotteryTickets = this.getLottos(purchaseCount);
+    const lottos = this.getLottos(purchaseCount);
     const winningNumbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
-    return { lotteryTickets, winningNumbers, bonusNumber };
+    return { lottos, winningNumbers, bonusNumber };
   }
 
   async getPurchaseCount() {
@@ -41,7 +37,7 @@ class App {
         const purchaseCount = purchasePrice / PURCHASE_PRICE.divisionUnit;
         return purchaseCount;
       } catch (error) {
-        this.#outputView.print(MessageFormat.error(error.message));
+        this.#view.printError(error);
       }
     }
   }
@@ -64,7 +60,7 @@ class App {
         Validator.validateWinningNumber(winningNumbers);
         return winningNumbers.map(Number);
       } catch (error) {
-        this.#outputView.print(MessageFormat.error(error.message));
+        this.#view.printError(error);
       }
     }
   }
@@ -76,7 +72,7 @@ class App {
         Validator.validateBonusNumber(bonusNumber, winningNumbers);
         return bonusNumber;
       } catch (error) {
-        this.#outputView.print(MessageFormat.error(error.message));
+        this.#view.printError(error);
       }
     }
   }

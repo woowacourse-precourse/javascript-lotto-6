@@ -21,6 +21,10 @@ export default class View {
     return winningNumbers;
   }
 
+  printError(error) {
+    this.#outputView.print(MessageFormat.error(error.message));
+  }
+
   async readBonusNumber() {
     const userInput = await this.#inputView.readLineAsync(BONUS_NUMBER);
     return Number(userInput);
