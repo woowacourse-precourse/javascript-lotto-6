@@ -1,6 +1,10 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import { INPUT_MSG } from "./constants/InputMessage.js";
-import { validatePurchaseFormat } from "./validation/validation.js";
+import {
+  validateInputResults,
+  validatePurchaseFormat,
+  validateResultsLength,
+} from "./validation/validation.js";
 
 class Lotto {
   // #numbers;
@@ -32,7 +36,8 @@ class PurchaseLottery {
     ticketsAmount = Math.floor(ticketsAmount / 1000);
 
     const lottoNumbers = new LotteryNumbers();
-    lottoNumbers.generateNumbers(ticketsAmount);
+    await lottoNumbers.generateNumbers(ticketsAmount);
+    await lottoNumbers.inputLotteryResults();
   }
 }
 
@@ -44,8 +49,15 @@ class LotteryNumbers {
     }
   }
 
-  async LotteryResuls() {
-    //
+  async inputLotteryResults() {
+    const results = await Console.readLineAsync(INPUT_MSG.results);
+    const resultsArray = results.split(",").map(Number);
+    validateResultsLength(resultsArray);
+
+    resultsArray.map((num) => {
+      validateInputResults(num, resultsArray);
+    });
+    Console.print(resultsArray);
   }
 }
 
