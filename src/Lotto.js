@@ -12,6 +12,13 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  getMatchingNumbersCountWith(winningNumbers) {
+    const matchingNumbers = this.#numbers.filter((number) =>
+      winningNumbers.includes(number),
+    );
+    return matchingNumbers.length;
+  }
+
   getSortedLotto() {
     return this.#numbers.sort((a, b) => a - b);
   }

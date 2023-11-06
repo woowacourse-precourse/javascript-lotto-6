@@ -26,6 +26,14 @@ class LottoPurchaser {
     return array;
   }
 
+  check(winningLotto) {
+    this.#lottos.forEach((lotto) => {
+      const matchingNumbersCount =
+        winningLotto.getMatchingNumbersCountWith(lotto);
+      console.log(matchingNumbersCount);
+    });
+  }
+
   #set(lottos) {
     this.#lottos = lottos;
   }

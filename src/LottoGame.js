@@ -11,6 +11,7 @@ class LottoGame {
     await this.#start();
     this.#purchaseLottos();
     await this.#createWinningLotto();
+    this.#purchaser.check(this.#winningLotto);
   }
 
   async #start() {
@@ -19,7 +20,7 @@ class LottoGame {
       this.#purchaser = new LottoPurchaser(purchaseAmount);
     } catch (error) {
       View.print(error.message);
-      await this.start();
+      await this.#start();
     }
   }
 

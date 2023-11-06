@@ -14,6 +14,10 @@ class WinningLotto {
     this.#bonusNumber = bonusNumber;
   }
 
+  getMatchingNumbersCountWith(numbers) {
+    return numbers.getMatchingNumbersCountWith(this.#numbers);
+  }
+
   #validate(bonusNumber) {
     if (bonusNumber < this.#START || bonusNumber > this.#END) {
       throw new Error(ERROR.notOneToFortyFive);
