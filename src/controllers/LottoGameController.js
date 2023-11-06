@@ -23,7 +23,7 @@ class LottoGameController {
       OutputView.printPurchasedLotto(purchasedLotto);
       this.userWinningNumbers();
     } catch ({ message }) {
-      OutputView.printStaticMessage(message);
+      OutputView.printErrorMessage(message);
       this.start();
     }
   }
@@ -33,10 +33,9 @@ class LottoGameController {
       const winningNumbers = await InputView.getWinningNumbers();
       const numbers = winningNumbers.split(',').map(Number);
       const winningLotto = new Lotto(numbers);
-      // console.log(winningLotto.getSortedLotto());
       this.userBonusNumber(winningLotto);
     } catch ({ message }) {
-      OutputView.printStaticMessage(message);
+      OutputView.printErrorMessage(message);
       this.userWinningNumbers();
     }
   }
@@ -48,7 +47,6 @@ class LottoGameController {
 
       LottoValidator.validBonusNumber(bonusNumber, isContainning);
 
-      // console.log(bonusNumber, winningLotto);
       const comparisonResults = this.lottoGame.getLottoComparisonResults(
         winningLotto.getSortedLotto(),
         Number(bonusNumber)
@@ -57,8 +55,11 @@ class LottoGameController {
       const winsStatistics = this.lottoGame.getStatistics(comparisonResults);
 
       OutputView.printWinsStatistics(winsStatistics);
+
+      const totalPrizeAmount = this.lottoGame.calcTotalPrizeAmount(winsStatistics);
+      OutputView.printProfitRatio(this.lottoGame.getProfitRatio(totalPrizeAmount));
     } catch ({ message }) {
-      OutputView.printStaticMessage(message);
+      OutputView.printErrorMessage(message);
       this.userBonusNumber(winningLotto);
     }
   }

@@ -1,8 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
-  printStaticMessage(messages) {
-    return Console.print(messages);
+  printErrorMessage(error) {
+    return Console.print(error);
   },
 
   printPurchaseAmount(amount) {
@@ -28,6 +28,10 @@ const OutputView = {
     prizeLevels.forEach((level) => {
       Console.print(`${level.label} - ${winsStatistics[level.prizeKey]}개`);
     });
+  },
+
+  printProfitRatio(profitRatio) {
+    Console.print(`총 수익률은 ${profitRatio}%입니다.`);
   },
 };
 
