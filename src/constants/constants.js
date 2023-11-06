@@ -10,3 +10,20 @@ export const LOTTO = Object.freeze({
   END: 45,
   LENGTH: 6,
 });
+
+export const MONEY = Object.freeze({
+  THREE: 5_000,
+  FOUR: 50_000,
+  FIVE: 1_500_000,
+  BONUS: 30_000_000,
+  SIX: 2_000_000_000,
+  DEFAULT_COUNT: 0,
+});
+
+export const MATCHING = Object.freeze({
+  THREE: '3',
+  FOUR: '4',
+  FIVE: '5',
+  BONUS: '5+1',
+  SIX: '6',
+});
