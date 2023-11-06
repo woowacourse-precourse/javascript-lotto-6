@@ -1,12 +1,22 @@
 import { Random } from '@woowacourse/mission-utils';
-import { num } from './Constants.js';
+import { message, num } from './Constants.js';
 
 import Lotto from './Lotto.js';
+
+import validatePurchaseAmount from './Validation/validatePurchaseAmount.js';
 
 class LottosList {
   #lottosList = [];
 
-  constructor(purchaseAmount) {}
+  constructor(purchaseAmount) {
+    this.validate(purchaseAmount);
+  }
+
+  validate(purchaseAmount) {
+    if (!validatePurchaseAmount(purchaseAmount)) {
+      throw new Error(message.ERROR);
+    }
+  }
 
   produceNewLotto() {
     const numbers = Random.pickUniqueNumbersInRange(
