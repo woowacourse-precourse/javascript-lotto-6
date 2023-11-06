@@ -1,6 +1,6 @@
 import LottoManageModel from '../model/LottoManageModel.js';
 import UserLottoModel from '../model/UserLottoModel.js';
-import { LOTTO_RANK_PAYABLE, REGEX } from '../utils/constants.js';
+import { LOTTO_RANK_PAYABLE } from '../utils/constants.js';
 import { printMessage } from '../utils/index.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
@@ -76,9 +76,7 @@ class LottoController {
       0,
     );
 
-    const rateOfReturn = parseFloat((profit / amount) * 100)
-      .toFixed(1)
-      .replace(REGEX.three_digits_comma, REGEX.comma);
+    const rateOfReturn = parseFloat((profit / amount) * 100);
 
     this.#outputView.printRateOfReturn(rateOfReturn);
   }

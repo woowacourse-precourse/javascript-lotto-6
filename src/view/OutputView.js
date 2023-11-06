@@ -27,7 +27,11 @@ class OutputView {
   }
 
   printRateOfReturn(rateOfReturn) {
-    printMessage(`총 수익률은 ${rateOfReturn}%입니다.`);
+    const result = rateOfReturn
+      .toFixed(1)
+      .replace(REGEX.three_digits_comma, REGEX.comma);
+
+    printMessage(`총 수익률은 ${result}%입니다.`);
   }
 }
 
