@@ -31,5 +31,13 @@ describe('함수 기능 단위 테스트', () => {
 				expect(Console.readLineAsync).toHaveBeenCalledTimes(2);
 			});
 		});
+		describe('issueLottery', () => {
+			test.each([3000, 8000])(
+				'(돈 / 1000)개만큼 6개의 숫자가 담긴 로또 번호들이 처음 생각한 개수만큼 출력되었는지 확인',
+				(input) => {
+					expect(App.issueLottery(input).length).toEqual(+(input / 1000));
+				},
+			);
+		});
 	});
 });
