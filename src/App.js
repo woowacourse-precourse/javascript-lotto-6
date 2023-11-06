@@ -7,6 +7,7 @@ class App {
     this.lottos = []; // 발행한 로또
     this.winning = []; // 당첨 번호
     this.bonus = 0; // 보너스 번호
+    this.result = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }; // 결과
   }
 
   async inputPay() {
@@ -85,11 +86,47 @@ class App {
     }
   }
 
+  async calWinning() {
+    this.lottos.forEach((l) => {
+      let basic = 0; // 일반 볼 정답 개수
+      let bonus = 0; // 보너스 볼 정답 개수
+
+      l.forEach((ball) => {
+        // 일반 볼 비교
+        if (this.winning.includes(ball)) {
+          basic++;
+        }
+        // 보너스 볼 비교
+        if (this.bonus === ball) {
+          bonus++;
+        }
+      });
+
+      // 등 수 계산
+      if (basic === 6 && bonus === 0) {
+        this.result[1]++;
+      }
+      if (basic === 5 && bonus === 1) {
+        this.result[2]++;
+      }
+      if (basic + bonus === 5) {
+        this.result[3]++;
+      }
+      if (basic + bonus === 4) {
+        this.result[4]++;
+      }
+      if (basic + bonus === 3) {
+        this.result[5]++;
+      }
+    });
+  }
+
   async play() {
     await this.inputPay();
     await this.makeLotto();
     await this.inputWinning();
     await this.inputBonus();
+    await this.calWinning();
   }
 }
 
