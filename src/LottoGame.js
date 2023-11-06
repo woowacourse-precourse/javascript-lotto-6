@@ -1,5 +1,7 @@
 import { ERROR_MESSAGE } from "./Constant.js";
 
+const { Console } = require("@woowacourse/mission-utils");
+
 class LottoGame {
   constructor() {
     this.lottoCount = null;
@@ -7,6 +9,7 @@ class LottoGame {
 
   setLotteCount(money) {
     this.validateMoney(money);
+    this.lottoCount = money / 1000;
   }
 
   validateMoney(money) {
@@ -15,6 +18,10 @@ class LottoGame {
     if (money < 1000) throw new Error(ERROR_MESSAGE.MIN_MONEY);
 
     if (money % 1000 !== 0) throw new Error(ERROR_MESSAGE.DIVISION);
+  }
+
+  printLotteCount() {
+    Console.print(`${this.lottoCount}개를 구매했습니다.`);
   }
 }
 
