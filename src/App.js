@@ -21,6 +21,12 @@ class App {
 
   async buyLotto(inputView, outputView) {
     this.#coin = await inputView.inputCash();
+    const boughtLottos = [];
+    console.log(`\n${this.#coin}개를 구매했습니다.`);
+    for (let i = 0; i < this.#coin; i++) {
+      boughtLottos.push(Lotto.random());
+      console.log(boughtLottos[i].getNumbers());
+    }
     // console.log('로또 구매하는 로직');
   }
 
