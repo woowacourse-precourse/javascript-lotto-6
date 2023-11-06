@@ -13,6 +13,10 @@ class WinningNumbers {
     this.#values = parsed;
   }
 
+  getValues() {
+    return this.#values;
+  }
+
   /**
    * @param {string} numbersInput
    */
