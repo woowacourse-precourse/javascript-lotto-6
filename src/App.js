@@ -150,14 +150,18 @@ class App {
   }
 
   calculateWinningResult(userTickets, winningNumbers, bonusNumber) {
-    const results = userTickets.map((userTicket) => {
-      return userTicket.calculateLottoWinning(winningNumbers, bonusNumber);
+    const results = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+    userTickets.forEach((userTicket) => {
+      const rank = userTicket.calculateLottoWinning(
+        winningNumbers,
+        bonusNumber
+      );
+
+      results[rank] += 1;
     });
 
-    return results.reduce((acc, current) => {
-      acc[current] = (acc[current] || 0) + 1;
-      return acc;
-    }, {});
+    return results;
   }
 
   calculateTotalReturn(results, userMoney) {
