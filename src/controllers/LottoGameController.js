@@ -39,7 +39,7 @@ class LottoGameController {
     await this.#retryOnFailure(async () => {
       const winningNumbers = await this.#view.readWinningNumbers();
       this.#lottoService.setWinningNumbers(winningNumbers);
-      Console.print(this.#lottoService.getWinningNumbers());
+      this.#view.printNewLine();
     });
   }
 
@@ -47,7 +47,7 @@ class LottoGameController {
     await this.#retryOnFailure(async () => {
       const bonusNumber = await this.#view.readBonusNumber();
       this.#lottoService.setBonusNumber(bonusNumber);
-      Console.print(this.#lottoService.getBonusNumber());
+      this.#view.printNewLine();
     });
   }
 }
