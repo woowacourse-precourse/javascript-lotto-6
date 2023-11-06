@@ -1,5 +1,5 @@
 import { LOTTO_RULES } from '../../constants/lottoGame.js';
-import AppError from '../../error/AppError/AppError.module.js';
+import { startValidation } from '../utils/startValidation.js';
 
 /**
  * @module lottoNumberValidation
@@ -37,15 +37,11 @@ const lottoNumberValidation = Object.freeze({
 
   /**
    * @param {number[]} lottoNumbers - 로또 번호들이 있는 숫자 배열
-   * @throws {AppError} 유효성을 만족하지 않을 경우 에러 발생
+   * @throws {import('../../error/AppError/AppError.module.js').default} 유효성을 만족하지 않을 경우 에러 발생
    * @returns {void}
    */
   check(lottoNumbers) {
-    Object.values(this.validationTypes).forEach(({ isValid, errorMessage }) => {
-      if (!isValid(lottoNumbers)) {
-        throw new AppError(errorMessage);
-      }
-    });
+    startValidation(this.validationTypes, lottoNumbers);
   },
 });
 

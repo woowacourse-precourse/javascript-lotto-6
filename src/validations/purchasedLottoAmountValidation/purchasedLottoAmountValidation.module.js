@@ -1,5 +1,5 @@
 import lottoPurchase from '../../domain/lottoPurchase/lottoPurchase.module.js';
-import AppError from '../../error/AppError/AppError.module.js';
+import { startValidation } from '../utils/startValidation.js';
 
 /**
  * @module purchasedLottoAmountValidation
@@ -28,13 +28,11 @@ const purchasedLottoAmountValidation = Object.freeze({
 
   /**
    * @param {number} purchasedLottoAmount - 로또 구매 금액
-   * @throws {AppError} 유효성을 만족하지 않을 경우 에러 발생
+   * @throws {import('../../error/AppError/AppError.module.js').default} 유효성을 만족하지 않을 경우 에러 발생
    * @returns {void}
    */
   check(purchasedLottoAmount) {
-    Object.values(this.validationTypes).forEach(({ errorMessage, isValid }) => {
-      if (!isValid(purchasedLottoAmount)) throw new AppError(errorMessage);
-    });
+    startValidation(this.validationTypes, purchasedLottoAmount);
   },
 });
 

@@ -1,5 +1,5 @@
 import { LOTTO_RULES } from '../../constants/lottoGame.js';
-import AppError from '../../error/AppError/AppError.module.js';
+import { startValidation } from '../utils/startValidation.js';
 
 /**
  * @module bonusNumberValidation
@@ -27,15 +27,11 @@ const bonusNumberValidation = Object.freeze({
 
   /**
    * @param {import('../../utils/jsDoc.js').WinningLottoInfo} winningLottoInfo - 보너스 번호와 당첨 번호가 있는 객체
-   * @throws {AppError} 유효성을 만족하지 않을 경우 에러 발생
+   * @throws {import('../../error/AppError/AppError.module.js').default} 유효성을 만족하지 않을 경우 에러 발생
    * @returns {void}
    */
   check(winningLottoInfo) {
-    Object.values(this.validationTypes).forEach(({ errorMessage, isValid }) => {
-      if (!isValid(winningLottoInfo)) {
-        throw new AppError(errorMessage);
-      }
-    });
+    startValidation(this.validationTypes, winningLottoInfo);
   },
 });
 

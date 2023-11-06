@@ -1,5 +1,5 @@
-import AppError from '../../error/AppError/AppError.module.js';
 import { SYMBOLS } from '../../constants/symbols.js';
+import { startValidation } from '../utils/startValidation.js';
 
 /**
  * @module commonValidation
@@ -27,13 +27,11 @@ const commonValidation = Object.freeze({
 
   /**
    * @param {string} inputValue - 사용자의 입력 값
-   * @throws {AppError} 유효성을 만족하지 않을 경우 에러 발생
+   * @throws {import('../../error/AppError/AppError.module.js').default} 유효성을 만족하지 않을 경우 에러 발생
    * @returns {void}
    */
   check(inputValue) {
-    Object.values(this.validationTypes).forEach(({ errorMessage, isValid }) => {
-      if (!isValid(inputValue)) throw new AppError(errorMessage);
-    });
+    startValidation(this.validationTypes, inputValue);
   },
 });
 
