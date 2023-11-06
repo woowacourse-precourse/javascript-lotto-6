@@ -51,7 +51,7 @@ describe('로또 클래스 테스트', () => {
 
     test('번호가 5개 일치(보너스 번호 일치)할 때 당첨 통계가 정확히 계산되어야 한다.', () => {
       const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-      lotto.checkWin(6, [[1, 2, 3, 4, 5, 7]]);
+      lotto.checkWin(7, [[1, 2, 3, 4, 5, 7]]);
       expect(lotto.winCheck['5+']).toBe(1);
       expect(lotto.winCheck.total).toBe(30000000);
     });
