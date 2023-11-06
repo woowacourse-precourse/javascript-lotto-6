@@ -13,14 +13,12 @@ class Game {
     const ticketNumber = this.amount / 1000;
 
     for (let i = 0; i < ticketNumber; i++) {
-      const randomNumbers = await Random.pickUniqueNumbersInRange(
-        1,
-        45,
-        6
-      ).sort((a, b) => a - b);
+      const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+        (a, b) => a - b
+      );
       const ticket = new Lotto(randomNumbers);
 
-      this.tickets.push(ticket);
+      this.tickets.push(ticket.printNumbers());
     }
   }
 }
