@@ -1,9 +1,19 @@
-class WinningNumbers extends Lotto {
+class WinningNumbers{
+    #numbers;
     #bonus;
 
     constructor(numbers, bonus) {
-        _validate(numbers);
-        this._numbers = numbers;
+        this.#validateNumbers(numbers);
+        this.#validateBonusNumbers(bonus);
+        this.#numbers = numbers;
         this.#bonus = bonus;
+    }
+
+    #validateNumbers(numbers) {
+
+    }
+
+    #validateBonusNumbers(bonus) {
+        
     }
 }
