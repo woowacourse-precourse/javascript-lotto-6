@@ -1,13 +1,25 @@
 import { CONSTANT } from "./Constant.js";
-import { Random } from "@woowacourse/mission-utils";
+import { Random, Console } from "@woowacourse/mission-utils";
 
 class Controller {
-    // 사용자 인풋
+    //사용자 인풋
     static async userInput() {
-        const TMP = await Console.readLineAsync();
+        const TMP = await Console.readLineAsync("");
         if (!isNaN(TMP)) return Number(TMP);
         else return TMP;
     }
+    // static async userInputMoney() {
+    //     const TMP = await Console.readLineAsync(CONSTANT.MONEY_INPUT_ASK);
+    //     return Number(TMP);
+    // }
+    // static async userInputLottoNum() {
+    //     const TMP = await Console.readLineAsync(CONSTANT.LOTTO_NUM_INPUT_ASK);
+    //     return TMP;
+    // }
+    // static async userInputBonusNum() {
+    //     const TMP = await Console.readLineAsync(CONSTANT.BONUS_NUM_INPUT_ASK);
+    //     return Number(TMP);
+    // }
 
     // 가격을 로또 갯수로 반환
     static priceToAmount(price) {
@@ -45,13 +57,17 @@ class Controller {
         return Random.pickUniqueNumbersInRange(1, 45, 6);
     }
 
+    static isAllowedLottoNum(element) {
+        return !(isNaN(element) || !(element >= 1 && element <= 45));
+    }
+
     // 수익률 계산
-    static rateOfReturnCal(userPurchasePrice, lottoResult) {
+    static rateOfReturnCal(money, lottoResult) {
         let price = 0;
         Object.entries(lottoResult).forEach((element) => {
-            price += CONSTANT.WINNER_PRICE[element[0]] * element[1];
+            price += CONSTANT.WINNER_PRICE.get(element[0]) * element[1];
         });
-        return (price / userPurchasePrice).toFixed(1);
+        return ((price * 100) / money).toFixed(1);
     }
 }
 

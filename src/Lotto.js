@@ -1,4 +1,5 @@
 import { CONSTANT } from "./Constant.js";
+import Controller from "./Controller.js";
 
 class Lotto {
     #numbers;
@@ -15,9 +16,12 @@ class Lotto {
             throw new Error(CONSTANT.ERROR_LOTTO_NUM_INPUT);
         }
         numbers.forEach((element) => {
-            if (isNaN(element) || !(element >= 1 && element <= 45))
+            if (!Controller.isAllowedLottoNum(element))
                 throw new Error(CONSTANT.ERROR_LOTTO_NUM_INPUT);
         });
+        const SET = new Set(numbers);
+        if (numbers.length != SET.size)
+            throw new Error(CONSTANT.ERROR_LOTTO_NUM_INPUT);
     }
 
     // TODO: 추가 기능 구현

@@ -1,5 +1,6 @@
 export const Data = {
-    userPurchasePrice: 0,
+    money: 0,
+    amount: 0,
     userLottoArray: [],
     winningLotto: null,
     bonusNum: 0,
