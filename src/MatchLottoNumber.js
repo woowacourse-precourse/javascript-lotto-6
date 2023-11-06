@@ -1,28 +1,34 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-
 class MatchLottoNumber {
-  #sameNumberCount = 0;
-  #rank;
+  #rank = [];
 
-  constructor(numbers, bonusNumbers, lotto) {
-    this.#compare(numbers, bonusNumbers, lotto);
+  constructor(numbers, bonusNumbers, lottos, lottoCount) {
+    this.#conpareAllLottoNumbers(numbers, bonusNumbers, lottos, lottoCount);
   }
 
   get getRank() {
     return this.#rank;
   }
 
-  #compare(numbers, bonusNumbers, lotto) {
-    numbers.forEach((number) => {
-      if (lotto.includes(number)) {
-        this.#sameNumberCount++;
-      }
-    });
-    this.#rank = this.#ranking(bonusNumbers, lotto);
+  #conpareAllLottoNumbers(numbers, bonusNumbers, lottos, lottoCount) {
+    for (let i = 0; i < lottoCount; i++) {
+      const sameNumberCount = this.#compare(numbers, lottos[i]);
+      const rank = this.#ranking(bonusNumbers, lottos[i], sameNumberCount);
+      this.#rank.push(rank);
+    }
   }
 
-  #ranking(bonusNumbers, lotto) {
-    switch (this.#sameNumberCount) {
+  #compare(numbers, lotto) {
+    let sameNumberCount = 0;
+    numbers.forEach((number) => {
+      if (lotto.includes(number)) {
+        sameNumberCount++;
+      }
+    });
+    return sameNumberCount;
+  }
+
+  #ranking(bonusNumbers, lotto, sameNumberCount) {
+    switch (sameNumberCount) {
       case 6:
         return 1;
       case 5:
@@ -39,12 +45,5 @@ class MatchLottoNumber {
     }
   }
 }
-
-const matchLottoNumber = new MatchLottoNumber(
-  [1, 2, 3, 4, 5, 6],
-  7,
-  [1, 2, 3, 4, 5, 7]
-);
-console.log(matchLottoNumber.getRank);
 
 export default MatchLottoNumber;
