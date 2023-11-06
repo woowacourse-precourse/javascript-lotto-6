@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import createNumbers from "../../src/controller/CreateNumbers.js";
+import createNumbers from "../../src/controller/createNumbers.js";
 
 const mockRandomNumbers = [
   [8, 21, 23, 41, 42, 43],

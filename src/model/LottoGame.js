@@ -16,38 +16,36 @@ class LottoGame {
   lottoLogic() {
     const rank = NUMBERS.rank;
     this.#userNumbers.forEach((value) => {
-      const match = value.filter((number) =>
-        this.#numbers.includes(number)
-      ).length;
-      this.checkRank(match, rank, value.includes(this.#bonusNumber));
+      const match = this.countMatch(value);
+      const bounsMatch = value.includes(this.#bonusNumber);
+      this.checkRank(match, rank, bounsMatch);
     });
     const profit = this.profitability(rank);
     resultOutput(rank, profit);
   }
-  checkRank(match, rank, bonus) {
-    switch (match) {
-      case 3:
-        rank[4] += NUMBERS.stack;
-        break;
-      case 4:
-        rank[3] += NUMBERS.stack;
-        break;
-      case 5:
-        bonus ? (rank[1] += NUMBERS.stack) : (rank[2] += NUMBERS.stack);
-        break;
-      case 6:
-        rank[0] += NUMBERS.stack;
-        break;
-    }
+  countMatch(numbers) {
+    return numbers.filter((number) => this.#numbers.includes(number)).length;
   }
+  checkRank(match, rank, bonus) {
+    const rankObj = {
+      3: 4,
+      4: 3,
+      5: bonus ? 1 : 2,
+      6: 0,
+    };
+    rank[rankObj[match]] += NUMBERS.stack;
+  }
+
   profitability(rank) {
     const totalPrize = rank
       .map((count, index) => count * PRIZE_MONEY[index + 1])
       .reduce((a, b) => a + b, NUMBERS.zero);
-    const userMoney = this.#userNumbers.length * NUMBERS.purchase_money;
-    return totalPrize === NUMBERS.zero
+    return !totalPrize
       ? NUMBERS.zero
-      : ((totalPrize / userMoney) * NUMBERS.percent).toFixed(1);
+      : (
+          (totalPrize / (this.#userNumbers.length * NUMBERS.purchase_money)) *
+          NUMBERS.percent
+        ).toFixed(1);
   }
 }
 
