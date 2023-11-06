@@ -18,11 +18,11 @@ class Lotto {
     }
   }
 
-  async randomLottoGenerate() {
+  randomLottoGenerate() {
     let result = [];
     for (let i = 0; i < 3; i++) {
       const arr = Random.pickUniqueNumbersInRange(1, 45, 6);
-      result.push(arr);
+      result.push(arr.sort((a, b) => a - b));
     }
     console.log(result[0]);
   }
