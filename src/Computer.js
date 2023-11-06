@@ -1,5 +1,7 @@
 import Lotto from './Lotto.js';
+import { Print } from './interface/Output.js';
 import { generateRandomNumbers } from './utils/generateRandomNumbers.js';
+import { sortAscending } from './utils/sort.js';
 
 export class Computer {
   #lottos;
@@ -17,6 +19,10 @@ export class Computer {
   }
 
   makeLottos(count) {
-    this.#lottos = Array.from({ length: count }).map(() => new Lotto(this.getRandomNumbers()));
+    this.#lottos = Array.from({ length: count }).map(() => {
+      const sortedRandomNumbers = sortAscending(this.getRandomNumbers());
+
+      return new Lotto(sortedRandomNumbers);
+    });
   }
 }
