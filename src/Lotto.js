@@ -32,17 +32,17 @@ class Lotto {
     };
   }
 
-  printResult(result) {
-    Console.print(`3개 일치 (5,000원) - ${result.three}개`);
-    Console.print(`4개 일치 (50,000원) - ${result.four}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${result.five}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.bonusFive}개`,
-    );
-    Console.print(`6개 일치 (2,000,000,000원) - ${result.six}개`);
+  printResult(issuedTickets, bonus) {
+    const result = this.#getResult(issuedTickets, bonus);
+    Console.print(`3개 일치 (5,000원) - ${result.three}개
+4개 일치 (50,000원) - ${result.four}개
+5개 일치 (1,500,000원) - ${result.five}개
+5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.bonusFive}개
+6개 일치 (2,000,000,000원) - ${result.six}개`);
+    return result;
   }
 
-  getResult(issuedTickets, bonus) {
+  #getResult(issuedTickets, bonus) {
     const result = this.#initializeResult();
     issuedTickets.forEach((issuedNumbers) => {
       const totalMatched = this.#countMatchingNumbers(issuedNumbers);

@@ -8,8 +8,7 @@ class App {
       [1, 2, 3, 4, 5, 7],
       [1, 2, 6, 7, 8, 9],
     ];
-    const result = lotto.getResult(user, 7);
-    lotto.printResult(result);
+    const result = lotto.printResult(user, 7);
   }
 }
 
