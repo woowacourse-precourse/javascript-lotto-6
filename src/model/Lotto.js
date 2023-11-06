@@ -1,5 +1,6 @@
 class Lotto {
   #numbers;
+  #bonusNumber;
 
   constructor(numbers) {
     try {
@@ -12,6 +13,10 @@ class Lotto {
 
   getLottoNumber() {
     return this.#numbers;
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
   }
 
   #validate(numbers) {
