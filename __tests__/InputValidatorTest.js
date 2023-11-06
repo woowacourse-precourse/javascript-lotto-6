@@ -38,4 +38,10 @@ describe('입력 예외 상황 테스트', () => {
       Validator.invalidNumbersCount(received);
     }).toThrow(ERROR.message.invalidNumbersCount);
   });
+  test('1~45의 값이 아닌 경우', () => {
+    const received = ['0', '2', '3', '4', '5', '46'];
+    expect(() => {
+      Validator.invalidRange(received);
+    }).toThrow(ERROR.message.invalidRange);
+  });
 });
