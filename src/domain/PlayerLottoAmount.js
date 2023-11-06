@@ -18,7 +18,7 @@ class PlayerLottoAmount{
 
   #isDividedThousand(str){
     const check = Number(str) % LOTTO_VAL === 0;
-    if(!check) throw new Error(ERR_MESSAGE.isNotDivedThousand);
+    if(!check) throw new Error(ERR_MESSAGE.isNotDividedThousand);
   }
 
   validate(str){
@@ -37,6 +37,14 @@ class PlayerLottoAmount{
   setVariables(str){
     this.#setLottoAmount(str);
     this.#setTotalMoney(str);
+  }
+
+  getLottoAmount(){
+    return this.#lottoAmount;
+  }
+
+  getTotalMoney(){
+    return this.#totalMoney;
   }
 }
 
