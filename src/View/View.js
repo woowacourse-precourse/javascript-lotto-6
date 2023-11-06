@@ -18,7 +18,7 @@ export default class View {
   async readWinningNumber() {
     const userInput = await this.#inputView.readLineAsync(WINNING_NUMBER);
     const winningNumbers = userInput.split(',');
-    return winningNumbers;
+    return winningNumbers.map(Number);
   }
 
   printError(error) {

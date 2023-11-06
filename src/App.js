@@ -55,7 +55,7 @@ class App {
       try {
         const winningNumbers = await this.#view.readWinningNumber();
         Validator.validateWinningNumber(winningNumbers);
-        return winningNumbers.map(Number);
+        return winningNumbers;
       } catch (error) {
         this.#view.printError(error);
       }
