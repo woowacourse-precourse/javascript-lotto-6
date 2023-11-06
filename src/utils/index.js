@@ -23,6 +23,8 @@ import {
   getRandomNumbers,
 } from './RandomNumbers';
 
+import { sortNumbers } from './Sort';
+
 import { getWinningResult } from './WinningResult';
 
 import { validateNumberRange, hasNoComma } from './Validate';
@@ -44,6 +46,7 @@ export {
   printPurchasedLottos,
   printRateOfReturn,
   printWinningResult,
+  sortNumbers,
   throwError,
   validateNumberRange,
 };
