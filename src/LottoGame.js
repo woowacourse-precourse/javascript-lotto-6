@@ -2,16 +2,19 @@ import InputView from './InputView.js';
 import { GAME_MESSAGES, LOTTO_PRICE, NUMBER_RANGE } from './constants.js';
 import { pickUniqueNumbersInRange, validateMoney } from './utils.js';
 import OutputView from './OutputView.js';
+import Lotto from './Lotto.js';
 
 class LottoGame {
   #count;
   #lottos;
   #winningNumbers;
+  #bonusNumbers;
 
   constructor() {
     this.#count = 0;
     this.#lottos = [];
     this.#winningNumbers = [];
+    this.#bonusNumbers = null;
   }
 
   async setupInputMoney() {
@@ -56,6 +59,22 @@ class LottoGame {
       );
       try {
         this.#winningNumbers = new Lotto(userInput);
+        break;
+      } catch (error) {
+        OutputView.printErrorMessage(error.message);
+      }
+    }
+    this.setupInputBonusNumbers();
+  }
+
+  async setupInputBonusNumbers() {
+    while (true) {
+      const userInput = await InputView.inputCommon(
+        `\n${GAME_MESSAGES.ENTER_BONUS_NUMBER}`
+      );
+      try {
+        this.#winningNumbers.validateBonusNumber(userInput);
+        this.#bonusNumbers = userInput;
         break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
