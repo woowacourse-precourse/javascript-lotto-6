@@ -1,3 +1,5 @@
-export const throwErrorIf = function (condition, message) {
+function throwErrorIf(condition, message) {
   if (condition) throw Error(message);
-};
+}
+
+export { throwErrorIf };
