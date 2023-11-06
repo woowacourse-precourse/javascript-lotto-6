@@ -12,10 +12,29 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    if ([...new Set(numbers)].length !== numbers.length) {
+      throw new Error('[ERROR] 중복 숫자가 있습니다.');
+    }
+    numbers.forEach((number) => {
+      const isNumber = Number(number);
+      const numberError = new CommonError();
+      numberError.numberError(isNumber);
+    });
   }
 
   get numbers() {
     return this.#numbers;
+  }
+}
+
+class CommonError {
+  numberError(isNumber) {
+    if (isNaN(isNumber)) {
+      throw new Error('[ERROR] 숫자가 아닙니다.');
+    }
+    if (isNumber < 1 || isNumber > 45) {
+      throw new Error('[ERROR] 1~45 숫자가 아닙니다.');
+    }
   }
 }
 
@@ -71,6 +90,8 @@ class CashCount {
 class LottoGame {
   constructor() {
     this.playerLottos = [];
+    this.bonusNumber = 0;
+    this.winningNumbers = [];
   }
 
   async buyLottos() {
@@ -78,9 +99,29 @@ class LottoGame {
     const lottoMachine = new LottoMachine();
     this.playerLottos = await lottoMachine.buyLottos(Number(cash));
   }
+  async winLottos() {
+    const winningNumbers = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요');
+    this.winningNumbers = new Lotto(winningNumbers.split(',')).numbers;
+  }
+  async isBonusNumber() {
+    const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요');
+    this.#bonusNumberValidate(bonusNumber.split(','));
+    this.bonusNumber = Number(bonusNumber);
+  }
 
-  start() {
+  #bonusNumberValidate(number) {
+    if (number.length !== 1) {
+      throw new Error('[ERROR] 하나의 입력이 아닙니다.');
+    }
+    const isNumber = Number(number[0]);
+    const numberError = new CommonError();
+    numberError.numberError(isNumber);
+  }
+
+  async start() {
     this.buyLottos();
+    this.winLottos();
+    this.isBonusNumber();
   }
 }
 
