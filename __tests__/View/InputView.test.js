@@ -15,7 +15,7 @@ describe("InputView 객체 테스트", () => {
       // when
       InputView.readLottoPurchaseAmount();
       // tehn
-      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.LOTTO_PURCHASE_AMOUNT);
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.lottoPurchaseAmount);
     });
 
     test("readLottoPurchaseAmount 메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
@@ -37,7 +37,7 @@ describe("InputView 객체 테스트", () => {
 
     test("readLottoWinningNumbers메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
       InputView.readLottoWinningNumbers();
-      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.LOTTO_WINNING_NUMBERS);
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.lottoWinningNumbers);
     });
 
     test("readLottoWinningNumbers메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
@@ -57,7 +57,7 @@ describe("InputView 객체 테스트", () => {
 
     test("readBonousNumber메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
       InputView.readBonousNumber();
-      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.LOTTO_BONOUS_NUMBER);
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.lottoBonousNumber);
     });
 
     test("readBonousNumber메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
