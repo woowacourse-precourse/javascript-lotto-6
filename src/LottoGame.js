@@ -3,6 +3,7 @@ import OutputView from './View/OutputView.js';
 
 import LottoArray from './LottoArray.js';
 import WinningLotto from './WinningLotto.js';
+import Rank from './Rank.js';
 import Lotto from './Lotto.js';
 import BonusBall from './BonusBall.js';
 
@@ -16,12 +17,13 @@ class LottoGame {
   constructor() {
     this.#lottoArray = new LottoArray();
     this.#winningLotto;
+    this.#ranks = new Rank();
   }
 
   async play() {
     await this.buyLottos();
     await this.createWinningLotto();
-    this.showWinningResult();
+    this.createWinningResult();
   }
 
   async buyLottos() {
@@ -75,8 +77,8 @@ class LottoGame {
     this.#winningLotto = new WinningLotto(lotto, bonusBall);
   }
 
-  showWinningResult() {
-    this.#lottoArray.checkWinning(this.#winningLotto);
+  createWinningResult() {
+    this.#lottoArray.checkWinning(this.#winningLotto, this.#ranks);
   }
 }
 

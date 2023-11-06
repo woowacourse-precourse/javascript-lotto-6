@@ -24,9 +24,10 @@ class LottoArray {
     this.#lottoArray.push(lotto);
   }
 
-  checkWinning(winningLotto) {
+  checkWinning(winningLotto, rank) {
     this.#lottoArray.forEach((lotto) => {
       const [count, hasBonus] = winningLotto.countSameNumber(lotto);
+      rank.choose(count, hasBonus);
     });
   }
 }
