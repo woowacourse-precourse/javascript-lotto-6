@@ -61,3 +61,13 @@ describe("method test : compareBonusNumber()" , () => {
     expect(equalNumber).toBe(true);
   });
 });
+
+describe("method test : checkRange()" , () => {
+  test('1~45 사이가 아닌 숫자들만 뽑은 배열의 length를 구할 수 있는가 ?', () => {
+    const testArray = [1,2,3,4,5,6];
+    const randomNumbers = [1,67,4,58,42,35];
+    const lotto = new Lotto(testArray);
+    const length = lotto.checkRange(randomNumbers);
+    expect(length).toBe(2);
+  });
+});
