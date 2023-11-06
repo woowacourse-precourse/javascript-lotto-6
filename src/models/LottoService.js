@@ -28,26 +28,11 @@ class LottoService {
     this.#lottoTickets = tickets;
   }
 
-  getWinningNumbers() {
-    return this.#winningNumbers;
-  }
-
-  getBonusNumber() {
-    return this.#bonusNumber;
-  }
-
-  getLottoTickets() {
-    return this.#lottoTickets;
-  }
-
   calculateResults() {
-    const tickets = this.getLottoTickets();
-    const winningNumbers = this.getWinningNumbers();
-    const bonusNumber = this.getBonusNumber();
     return this.#resultCalculator.calculateResults(
-      tickets,
-      winningNumbers,
-      bonusNumber,
+      this.#lottoTickets,
+      this.#winningNumbers,
+      this.#bonusNumber,
     );
   }
 
