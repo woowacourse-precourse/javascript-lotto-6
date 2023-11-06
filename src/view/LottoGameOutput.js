@@ -11,7 +11,7 @@ class LottoGameOutput {
     const eachLotto = lottoTickets.map((lotto) => lotto.getLottoNumbers());
 
     eachLotto.forEach((numbers) => {
-      ConsoleOutput.output(numbers);
+      ConsoleOutput.output(`[${numbers.join(', ')}]`);
     });
   }
 
