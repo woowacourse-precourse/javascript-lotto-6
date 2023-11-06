@@ -4,7 +4,7 @@ class ScoreMyLottos {
     #MY_LOTTO;
     #ANSWER;
     #BONUS;
-    #RESULT = [0, 0, 0, 0, 0];
+    #RESULT = [...Constants.SCORE_BOARD];
     #EARNING;
 
     constructor(Lottos, Answer, Bonus) {
@@ -35,12 +35,10 @@ class ScoreMyLottos {
         return 0;
     }
     countEarning() {
-        let earning = (Constants.PRICE_FIRST * this.#RESULT[0])
-            + (Constants.PRICE_SECOND * this.#RESULT[1])
-            + (Constants.PRICE_THIRD * this.#RESULT[2])
-            + (Constants.PRICE_FORTH * this.#RESULT[3])
-            + (Constants.PRICE_FIFTH * this.#RESULT[4]);
-        this.#EARNING = (earning / (this.#MY_LOTTO.length * Constants.LOTTO_PRICE) * 100).toFixed(Constants.EARNING_RADIX_POINT);
+        const EARNING = this.#RESULT.reduce((acc, VALUE, INDEX) => {
+           return acc + (Constants.PRICE_BOARD[INDEX] * VALUE);
+        },0);
+        this.#EARNING = (EARNING / (this.#MY_LOTTO.length * Constants.LOTTO_PRICE) * 100).toFixed(Constants.EARNING_RADIX_POINT);
     }
 
     getResult() {
