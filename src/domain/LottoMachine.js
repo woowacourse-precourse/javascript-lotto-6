@@ -1,9 +1,13 @@
 import { Random } from '@woowacourse/mission-utils';
+
 import Lotto from '../Lotto.js';
 import LottoNumber from './LottoNumber.js';
+
 import { sortAscending } from '../utils/sort.js';
-import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
 import { isIndivisible } from '../utils/validator.js';
+
+import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
+
 import ApplicationError from '../exceptions/ApplicationError.js';
 
 class LottoMachine {

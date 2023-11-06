@@ -1,6 +1,7 @@
 import Lotto from '../Lotto.js';
-import ApplicationError from '../exceptions/ApplicationError.js';
 import LottoNumber from './LottoNumber.js';
+
+import ApplicationError from '../exceptions/ApplicationError.js';
 
 class WinningLotto {
   static ERROR_MESSAGES = Object.freeze({

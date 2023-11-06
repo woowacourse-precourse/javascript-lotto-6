@@ -1,6 +1,8 @@
-import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
-import ApplicationError from '../exceptions/ApplicationError.js';
 import { isSameKeyList } from '../utils/object.js';
+
+import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
+
+import ApplicationError from '../exceptions/ApplicationError.js';
 
 /**
  * @typedef {object} RewardRequirement

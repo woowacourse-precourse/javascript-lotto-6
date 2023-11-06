@@ -1,8 +1,10 @@
 import Lotto from '../Lotto.js';
-import ApplicationError from '../exceptions/ApplicationError.js';
-import { invalidInstanceElement } from '../utils/validator.js';
-import LottoReward from './LottoReward.js';
 import WinningLotto from './WinningLotto.js';
+import LottoReward from './LottoReward.js';
+
+import { invalidInstanceElement } from '../utils/validator.js';
+
+import ApplicationError from '../exceptions/ApplicationError.js';
 
 class LottoRewards {
   static ERROR_MESSAGES = Object.freeze({

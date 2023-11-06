@@ -1,4 +1,5 @@
 import { LottoReward } from '../../../src/domain/index.js';
+
 import DUMMY_INPUTS from '../../constants/dummy.js';
 
 describe('LottoReward 예외 테스트', () => {

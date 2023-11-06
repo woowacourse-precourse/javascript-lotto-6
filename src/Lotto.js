@@ -1,7 +1,10 @@
-import ERROR_MESSAGE_GENERATOR from './constants/error.js';
 import LottoNumber from './domain/LottoNumber.js';
-import ApplicationError from './exceptions/ApplicationError.js';
+
 import { isDuplicated } from './utils/validator.js';
+
+import ERROR_MESSAGE_GENERATOR from './constants/error.js';
+
+import ApplicationError from './exceptions/ApplicationError.js';
 
 class Lotto {
   /**

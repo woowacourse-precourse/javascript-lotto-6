@@ -1,7 +1,9 @@
-import SYSTEM from '../constants/system.js';
-import { Lotto } from '../domain/index.js';
 import { LottoPurchaseService, LottoRewardsService } from '../service/index.js';
+import { Lotto } from '../domain/index.js';
+
 import { InputView, OutputView } from '../view/index.js';
+
+import SYSTEM from '../constants/system.js';
 
 class Controller {
   #view = {

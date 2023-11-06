@@ -1,6 +1,8 @@
-import ApplicationError from '../exceptions/ApplicationError.js';
-import { invalidInstanceElement } from '../utils/validator.js';
 import LottoReward from './LottoReward.js';
+
+import { invalidInstanceElement } from '../utils/validator.js';
+
+import ApplicationError from '../exceptions/ApplicationError.js';
 
 class Calculator {
   static ERROR_MESSAGES = Object.freeze({
@@ -24,7 +26,7 @@ class Calculator {
   earningRate(income, rewards) {
     this.#validateEarningRate(income, rewards);
     const totalPrize = rewards.reduce((total, reward) => total + reward.getTotalPrize(), 0);
-    return Math.round((totalPrize / income) * 1000) / 10;
+    return (totalPrize / income) * 100;
   }
 
   #validateEarningRate(income, rewards) {

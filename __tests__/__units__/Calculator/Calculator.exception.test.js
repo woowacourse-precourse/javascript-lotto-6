@@ -5,6 +5,7 @@ import {
   LottoRewards,
   WinningLotto,
 } from '../../../src/domain/index.js';
+
 import DUMMY_INPUTS from '../../constants/dummy.js';
 
 describe('Calculator 예외 테스트', () => {

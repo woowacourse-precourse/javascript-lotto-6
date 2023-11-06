@@ -1,6 +1,8 @@
-import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
-import ApplicationError from '../exceptions/ApplicationError.js';
 import { isOutOfRange } from '../utils/validator.js';
+
+import ERROR_MESSAGE_GENERATOR from '../constants/error.js';
+
+import ApplicationError from '../exceptions/ApplicationError.js';
 
 class LottoNumber {
   static MIN_NUMBER = 1;
