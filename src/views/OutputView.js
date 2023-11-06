@@ -11,7 +11,7 @@ const OutputView = {
 
   printLotto(lottoTicket) {
     lottoTicket.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(', ')}]`);
     });
   },
 
