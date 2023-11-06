@@ -45,7 +45,7 @@ export const View = {
       OUTPUT_MESSAGE.purchaseConfirmation(purchaseAmount / LOTTO.price)
     );
     lottoArray.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(", ")}]`);
     });
   },
 
