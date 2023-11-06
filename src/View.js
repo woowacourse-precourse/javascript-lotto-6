@@ -1,16 +1,29 @@
 import { Console } from '@woowacourse/mission-utils';
+import { WIN_PROMPT } from './lib/Prompt';
 
 class View {
-  async inputPay() {
-    const input = await Console.readLineAsync(`구입금액을 입력해 주세요.\n`);
-    // 천원단위가 아니면 오류
+  async input(prompt) {
+    const input = await Console.readLineAsync(prompt);
+    return input;
   }
 
-  async inputWinNumbers() {}
+  printPurchaseResult(num, lottoArr) {
+    this.lineBreak();
+    Console.print(`${num}개를 구매했습니다.`);
+    lottoArr.forEach(lotto => Console.print(`"[${lotto.join(', ')}]"`));
+  }
 
-  async inputBonusNumber() {}
+  printLottoResult(cntArr, rate) {
+    this.lineBreak();
+    Console.print('당첨 통계');
+    Console.print('---');
+    cntArr.forEach((cnt, idx) => Console.print(`${WIN_PROMPT[idx]} ${cnt}개`));
+    Console.print(`총 수익률은 ${rate}%입니다.`);
+  }
 
-  as;
+  lineBreak() {
+    Console.print('');
+  }
 }
 
 export default View;

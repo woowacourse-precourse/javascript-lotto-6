@@ -2,8 +2,8 @@ import Controller from './Controller.js';
 
 class App {
   async play() {
-    const test = new Controller();
-    test.init();
+    const app = new Controller();
+    await app.run();
   }
 }
 
