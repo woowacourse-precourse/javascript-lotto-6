@@ -8,7 +8,6 @@ export default class LottoPlayer {
   #rankCounts;
 
   #winningAmount;
-
   constructor(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
     this.#lottoTickets = [];

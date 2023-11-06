@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
 import LottoPlayer from '../model/LottoPlayer.js';
 import Lotto from '../Lotto.js';
@@ -6,25 +6,24 @@ import OutputView from '../view/OutputView.js';
 import { LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
 
 export default class LottoMachine {
+  #purchaseAmount;
   #player;
-
   #winningNumbers;
-
   #bonusNumber;
-
   #MINIMUM_WINNING_COUNT;
-
   #INPUT_UNIT;
 
   constructor() {
+    this.#purchaseAmount = 0;
     this.#MINIMUM_WINNING_COUNT = 3;
     this.#INPUT_UNIT = 1000;
   }
 
   async run() {
-    await this.#makeLottos();
+    await this.#getPurchaseAmount();
+    this.#makeLottos(this.#purchaseAmount);
     OutputView.printLottoTickets(this.#player.getLottoTickets());
-    this.#winningNumbers = await this.#getWinningNumbers();
+    await this.#getWinningNumbers();
     OutputView.printNewLine();
     this.#bonusNumber = await this.#getBonusNumber();
     OutputView.printNewLine();
@@ -51,15 +50,8 @@ export default class LottoMachine {
     return sortLottoNumbers;
   }
 
-  async #makeLottos() {
-    const purchaseAmount = await this.#getPurchaseAmount();
+  #makeLottos(purchaseAmount) {
     const lottoTicketCount = purchaseAmount / this.#INPUT_UNIT;
-
-    // 추후 예외 처리 분리 예정
-    if (purchaseAmount % this.#INPUT_UNIT !== 0) {
-      throw new Error('[ERROR] 1,000원 단위의 금액을 입력하세요.');
-    }
-
     this.#player = new LottoPlayer(purchaseAmount);
 
     for (let i = 1; i <= lottoTicketCount; i += 1) {
@@ -70,18 +62,50 @@ export default class LottoMachine {
   }
 
   async #getPurchaseAmount() {
-    const purchaseAmountInput = await InputView.readPurchaseAmount();
-    return Number(purchaseAmountInput);
+    try {
+      const purchaseAmountInput = await InputView.readPurchaseAmount();
+      const parsePurchaseAmount = Number(purchaseAmountInput);
+      await this.#purchaseAmountValidate(parsePurchaseAmount);
+      this.#purchaseAmount = purchaseAmountInput;
+    } catch (e) {
+      Console.print(e.message);
+      await this.#getPurchaseAmount();
+    }
+  }
+
+  async #purchaseAmountValidate(purchaseAmount) {
+    if (purchaseAmount % this.#INPUT_UNIT !== 0) {
+      throw new Error('[ERROR] 1,000원 단위만 입력 가능합니다.');
+    }
   }
 
   async #getWinningNumbers() {
-    const winningNumbersInput = await InputView.readWinningNumbers();
-    return new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
+    try {
+      const winningNumbersInput = await InputView.readWinningNumbers();
+      this.#winningNumbers = new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
+    } catch (e) {
+      Console.print(e.message);
+      await this.#getWinningNumbers();
+    }
   }
 
   async #getBonusNumber() {
-    const bonusNumberInput = await InputView.readBonusNumber();
-    return Number(bonusNumberInput);
+    try {
+      const bonusNumberInput = await InputView.readBonusNumber();
+      const ONLY_DIGIT_PATTERN = /^\d+$/;
+
+      if (!ONLY_DIGIT_PATTERN.test(bonusNumberInput)) {
+        throw new Error('[ERROR] 숫자만 입력해주세요.');
+      }
+
+      if (this.#winningNumbers.getNumbers().includes(Number(bonusNumberInput))) {
+        throw new Error('[ERROR] 당첨 숫자에 포함되지 않은 숫자를 입력하세요.');
+      }
+      this.#bonusNumber = Number(bonusNumberInput);
+    } catch (e) {
+      Console.print(e.message);
+      await this.#getBonusNumber();
+    }
   }
 
   #findMatchCount() {
