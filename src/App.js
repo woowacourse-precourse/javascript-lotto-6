@@ -31,12 +31,8 @@ class App {
       Console.print(lottoElement);
     });
 
-    Console.print('\n');
-
     const numberInput = await Console.readLineAsync(prompt.ASK_NUMBER);
     this.winningInput(numberInput);
-
-    Console.print('\n');
 
     const bonusInput = await Console.readLineAsync(prompt.ASK_BONUS_NUMBER);
     this.bonusNumberInput(bonusInput);
