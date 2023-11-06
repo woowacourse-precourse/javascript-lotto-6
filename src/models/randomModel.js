@@ -27,11 +27,7 @@ const randomModel = {
   },
 
   getStringOfRandom(random) {
-    const stringOfRandom = [];
-
-    for (let i = 0; i < random.length; i += 1) {
-      stringOfRandom.push(`[${random[i].join(', ')}]\n`);
-    }
+    const stringOfRandom = random.map((numbers) => `[${numbers.join(', ')}]\n`);
 
     return stringOfRandom;
   },
