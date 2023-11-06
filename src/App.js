@@ -42,12 +42,12 @@ class App {
   async checkPrice() {
     let price;
     while (true) {
-      const validatedPrice = await this.checkPriceLoop(price);
+      const validatedPrice = await this.tryCatchPrice(price);
       if (validatedPrice) return validatedPrice;
     }
   }
 
-  async checkPriceLoop(price) {
+  async tryCatchPrice(price) {
     try {
       price = await this.getMoney();
       const validatedPrice = this.priceConditionalSentence(price);
@@ -75,7 +75,7 @@ class App {
     let winningNumber;
 
     while (true) {
-      const result = await this.checkNumberLoop(winningNumber, numbers);
+      const result = await this.tryCatchNumber(winningNumber, numbers);
       if (result) return result.split(",");
     }
   }
@@ -91,7 +91,7 @@ class App {
     return string;
   }
 
-  async checkNumberLoop(winningNumber, numbers) {
+  async tryCatchNumber(winningNumber, numbers) {
     try {
       const result = this.checkCommaLoop(numbers);
       return result;
@@ -114,10 +114,10 @@ class App {
   async setWinnigAndBonusNumber() {
     const winningNumber = await this.getWinningNumber();
     const winningNumberArray = await this.checkCommaSeparated(winningNumber);
-    const bonusNumber = await this.getBonusNumber();
     const userLotto = new Lotto(winningNumberArray);
-
     userLotto.setWinningNumber();
+
+    const bonusNumber = await this.getBonusNumber();
     userLotto.setBonusNumber(bonusNumber);
   }
 
