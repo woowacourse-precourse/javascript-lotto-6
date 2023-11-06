@@ -22,9 +22,9 @@ class Lotto {
     return { lottoWinningNumbersMatchCount, bonousNumberMatchCount };
   }
 
-  #calculateMatchCount(matchNumbers) {
+  #calculateMatchCount(numbers) {
     let matchCount = 0;
-    matchNumbers.forEach((number) => {
+    numbers.forEach((number) => {
       if (this.#numbers.includes(number)) matchCount++;
     });
     return matchCount;
