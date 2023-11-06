@@ -10,6 +10,10 @@ class Money {
     this.#price = price;
   }
 
+  getPrice() {
+    return Number(this.#price);    
+  }
+
   #validate(price) {
     if (!Number(price) || Number(price) <= ZERO || !Number.isInteger(Number(price))) {
       throw new Error(ERROR.not_a_valid_number);
