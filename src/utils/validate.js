@@ -2,10 +2,10 @@ export const validation = {
   isDivideThousand(price) {
     return price % 1000 !== 0;
   },
-  isZero(price) {
-    return price === 0;
+  isSmallerThanThousand(price) {
+    return price < 1000;
   },
   isNumber(price) {
-    return isNaN(price);
+    return Number.isNaN(price);
   },
 };

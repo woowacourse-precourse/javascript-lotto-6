@@ -10,16 +10,16 @@ class BuyPrice {
   }
 
   #validate(price) {
-    if (validation.isDivideThousand(price)) {
-      throw new Error(BUY_PRICE_ERROR.isDivideThousand);
-    }
-
-    if (validation.isZero(price)) {
-      throw new Error(BUY_PRICE_ERROR.isZero);
-    }
+    price = Number(price);
 
     if (validation.isNumber(price)) {
       throw new Error(BUY_PRICE_ERROR.isNumber);
+    }
+    if (validation.isDivideThousand(price)) {
+      throw new Error(BUY_PRICE_ERROR.isDivideThousand);
+    }
+    if (validation.isSmallerThanThousand(price)) {
+      throw new Error(BUY_PRICE_ERROR.isSmallerThanThousand);
     }
   }
 
