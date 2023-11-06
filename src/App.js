@@ -1,5 +1,4 @@
-import { calcPurchaseQuantity } from "./Calc/calcPurchaseQuantity.js";
-
+import { calcPurchaseQuantity } from "./utils/calcPurchaseQuantity.js";
 import LottoMachine from "./domain/LottoMachine.js";
 import Purchase from "./domain/Purchase.js";
 import WinningNumber from "./domain/WinningNumber.js";
@@ -8,27 +7,13 @@ import Ranking from "./domain/Ranking.js";
 import Profit from "./domain/Profit.js";
 
 class App {
-  purchase_amount;
-  purchase_quantity;
-  lotto_list;
-  winning_number;
-  bonus_number;
-  rank_result;
-
-  constructor(
-    purchase_amount,
-    purchase_quantity,
-    lotto_list,
-    winning_number,
-    bonus_number,
-    rank_result
-  ) {
-    this.purchase_amount = purchase_amount;
-    this.purchase_quantity = purchase_quantity;
-    this.lotto_list = lotto_list;
-    this.winning_number = winning_number;
-    this.bonus_number = bonus_number;
-    this.rank_result = rank_result;
+  constructor() {
+    this.purchase_amount = null;
+    this.purchase_quantity = null;
+    this.lotto_list = [];
+    this.winning_number = [];
+    this.bonus_number = null;
+    this.rank_result = null;
   }
 
   async play() {
@@ -68,8 +53,5 @@ class App {
     profit.retrunProfit(this.rank_result, this.purchase_amount);
   }
 }
-
-// const app = new App();
-// app.play();
 
 export default App;
