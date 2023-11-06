@@ -33,7 +33,7 @@ class LottoEvaluatorUI {
   printEarnings = (earningMoney, investMoney) => {
     const total = ((earningMoney / investMoney) * 100).toFixed(2);
     const formattedTotal = parseFloat(total).toString();
-    Console.print(`${Message.PRINT_RATE}${formattedTotal}입니다.`);
+    Console.print(`${Message.PRINT_RATE}${formattedTotal}%입니다.`);
   };
 }
 export { LottoEvaluatorUI };

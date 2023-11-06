@@ -6,13 +6,13 @@ import { LottoEvaluatorUI } from './LottoEvaluatorUI.js';
 
 class Main {
   constructor() {
-    this.lottoStroreUI = new LottoStoreUI();
+    this.lottoStoreUI = new LottoStoreUI();
     this.lottoInput = new LottoInput();
     this.bonusInput = new BonusInput();
   }
 
   start = async () => {
-    const numberOfLotto = await this.lottoStroreUI.printPurchasAmount();
+    const numberOfLotto = await this.lottoStoreUI.printPurchasAmount();
     const lottoMachine = new LottoMachine(numberOfLotto);
     const lottoList = await lottoMachine.createLottoNumber();
     const winningNumbers = await this.lottoInput.printWinningNumber();
