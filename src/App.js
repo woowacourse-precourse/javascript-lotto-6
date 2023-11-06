@@ -22,6 +22,7 @@ class App {
   targetNumber;
   bonusNumber;
   result;
+  profits;
 
   constructor() {
     this.lottoPrice = 0;
@@ -33,6 +34,7 @@ class App {
       FOURTH: 0,
       FIFTH: 0
     };
+    this.profits = 0;
   }
 
   async play() {
@@ -52,6 +54,7 @@ class App {
     }
 
     this.showLottoResult();
+    this.showRate();
   }
 
   async getLottoPrice() {
@@ -146,6 +149,7 @@ class App {
 
     for (const KEY in this.result) {
       Console.print(LOTTO_RESULT[KEY] + ' - ' + this.result[KEY] + '개');
+      this.profits += LOTTO_MONEY[KEY] * this.result[KEY];
     }
 
   }
@@ -165,6 +169,11 @@ class App {
         this.result.FIFTH += 1;
         break;
     }
+  }
+
+  showRate() {
+    const rate = ((this.profits/this.lottoPrice) * 100).toFixed(1);
+    Console.print(`총 수익률은 ${rate}% 입니다.`) 
   }
 }
 
