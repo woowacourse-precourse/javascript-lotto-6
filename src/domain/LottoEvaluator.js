@@ -34,13 +34,11 @@ class LottoEvaluator {
   }
 
   getResults() {
-    return (
-      `${PRIZE.FIFTH} ${this.matchCounts.FIFTH}${PRINT.COUNT}` +
-      `${PRIZE.FOURTH} ${this.matchCounts.FOURTH}${PRINT.COUNT}` +
-      `${PRIZE.THIRD} ${this.matchCounts.THIRD}${PRINT.COUNT}` +
-      `${PRIZE.SECOND} ${this.matchCounts.SECOND}${PRINT.COUNT}` +
-      `${PRIZE.FIRST} ${this.matchCounts.FIRST}${PRINT.COUNT}`
-    );
+    const prizeKeys = Object.keys(this.matchCounts);
+    const resultsArray = prizeKeys.map((prizeKey) => {
+      return `${PRIZE[prizeKey]} ${this.matchCounts[prizeKey]}${PRINT.COUNT}`;
+    });
+    return resultsArray.join("\n");
   }
 
   evaluateTickets(userTickets) {
