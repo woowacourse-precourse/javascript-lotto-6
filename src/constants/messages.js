@@ -7,15 +7,9 @@ const RESULT_ARRAY = [
 ];
 
 const ERROR = {
-    AMOUNT_NUMBER: "[ERROR] 로또 금액은 숫자만 입력해야 합니다.",
-    AMOUNT_UNIT: "[ERROR] 로또 금액은 천원 단위로 입력해야 합니다.",
-    LOTTO_LENGTH: "[ERROR] 당첨 번호는 6개를 입력해야 합니다.",
-    LOTTO_RANGE: "[ERROR] 당첨 번호는 1~45 사이의 번호만 입력해야 합니다.",
-    LOTTO_DIVISION: "[ERROR] 당첨 번호 사이에 쉼표만 입력해야 합니다.",
-    LOTTO_DUPILICATE: "[ERROR] 당첨 번호는 중복되지 않아야 합니다.",
-    BONUS_RANGE: "[ERROR] 보너스 번호는 1~45 사이의 번호만 입력해야 합니다.", 
-    BONUS_DUPLICATE: "[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.",
-    BONUS_INCLUDE: "[ERROR] 보너스 번호에 문자가 포함되지 않아야 합니다.",
+    PURCHASE: "[ERROR] 로또 금액은 천원 단위로 숫자만 입력해야 합니다.",
+    LOTTO: "[ERROR] 당첨 번호는 중복없이 1~45 사이의 6개의 숫자를 쉼표로 구분하여 입력해야 합니다.",
+    BONUS: "[ERROR] 보너스 번호는 1~45 사이의 당첨 번호와 중복되지 않는 번호 1개를 입력해야 합니다.", 
 };
 
 const INPUT = {
@@ -25,9 +19,9 @@ const INPUT = {
 };
 
 const OUTPUT = {
-    PURCHASE: (quantity) => `${quantity}개를 구매했습니다.`,
+    PURCHASE: (quantity) => `${quantity}개를 구매했습니다.\n`,
     RESULT_TITLE: "당첨 통계\n---\n",
-    RETURN: (returns) => `총 수익률은 ${returns}%입니다.`,
+    RETURN: (returns) => `총 수익률은 ${returns}%입니다.\n`,
     LINE: "\n",
 };
 

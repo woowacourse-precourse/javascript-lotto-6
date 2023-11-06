@@ -1,10 +1,6 @@
-import { ERROR } from "../constants/messages";
-import { AMOUNT } from "../constants/values";
+import { ERROR } from "./constants/messages";
+import { AMOUNT } from "./constants/values";
 import { Console } from "@woowacourse/mission-utils";
-
-function getPurchaseAmount(amount) {
-    return parseInt(amount / AMOUNT.UNIT);
-}
 
 class Purchase { //예외처리 및 값 저장
     #amount;
@@ -13,10 +9,15 @@ class Purchase { //예외처리 및 값 저장
         this.#amount = amount;
     }
 
+    validate(amount) {
+        this.validateNumber();
+        this.validateAmount();
+    }
+
     validateNumber() {
         const isNumber = isNaN(this.#amount);
         try {
-            if (isNumber) throw new Error(ERROR.AMOUNT_NUMBER);
+            if (isNumber) throw new Error(ERROR.PURCHASE);
         }
         catch (error) {
             Console.print(error.message);
@@ -27,13 +28,17 @@ class Purchase { //예외처리 및 값 저장
     validateAmount() {
         const isRightAmount = this.#amount % AMOUNT.UNIT !== 0;
         try {
-            if (isRightAmount) throw new Error(ERROR.AMOUNT_UNIT);
+            if (isRightAmount) throw new Error(ERROR.PURCHASE);
         }
         catch (error) {
             Console.print(error.message);
         }
         return isRightAmount;
     }
+
+    getQuantity() {
+        return parseInt(this.#amount / AMOUNT.UNIT);
+    }
 }
 
-export { getPurchaseAmount, Purchase };
+export default Purchase;

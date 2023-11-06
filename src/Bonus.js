@@ -1,4 +1,4 @@
-import { ERROR } from "../constants/messages";
+import { ERROR } from "./constants/messages";
 import { Console } from "@woowacourse/mission-utils";
 
 
@@ -6,8 +6,14 @@ class Bonus { //예외처리 및 값 저장
     #bonus;
     
     constructor(numbers ,bonus) {
-        this.numbers = numbers;
         this.#bonus = bonus;
+        this.validate(numbers, bonus);
+    }
+
+    validate(numbers, bonus) {
+        this.validateRange();
+        this.validateDuplicate();
+        this.validateNumber();
     }
 
     validateRange() {
