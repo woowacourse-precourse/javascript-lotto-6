@@ -2,9 +2,10 @@
 
 import NumOfBuy from './numofbuy.js';
 import MakeLottoNum from './makelottonum.js';
-import Bonus from './bonus.js';
+// import Bonus from './bonus.js';
 import CalculationOfResult from './result_calculate.js';
 import LottoCycle from './LottoCycle.js';
+import BonusCycle from './bonusCycle.js';
 
 class App {
   #numOfBuy;
@@ -21,7 +22,7 @@ class App {
     this.#numOfBuy = new NumOfBuy();
     this.#arrayOfLotto = new MakeLottoNum();
     this.#winningNum = new LottoCycle();
-    this.#bounusNum = new Bonus();
+    this.#bounusNum = new BonusCycle();
     this.#yeild = new CalculationOfResult();
   }
 

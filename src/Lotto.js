@@ -1,5 +1,6 @@
+/* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 
 class Lotto {
   #numbers; // 로또번호 입력값 배열, 여기가 필드

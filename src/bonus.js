@@ -1,36 +1,30 @@
 /* eslint-disable class-methods-use-this */
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
-import Input from './input.js';
+import { Console } from '@woowacourse/mission-utils';
+import LottoCycle from './LottoCycle.js';
 
 class Bonus {
   #bonusNum;
 
-  constructor() {
-    this.#bonusNum = new Input();
+  #winningNum;
+
+  constructor(winning, bonus) {
+    // 매개변수 보너스 넘버 받음
+    this.#validCheck(winning, bonus);
+    this.#bonusNum = bonus;
+    this.#winningNum = winning;
+    // this.#winningNum = new LottoCycle();
   }
 
-  async run(winningNum) {
-    const bonusNum = await this.validCheck(winningNum);
-    return bonusNum;
-  }
+  // async run(winningNum) {
+  //  const bonusNum = await this.validCheck(winningNum);
+  //  return bonusNum;
+  // }
 
-  async validCheck(winning) {
-    let bonus;
-    let valid = true;
-    while (valid) {
-      bonus = Number(await this.#bonusNum.getBonusNum());
-      try {
-        if (this.#isNumCheck(bonus)) throw new Error(`[ERRPR] 보너스 입력값은 숫자여야 합니다.`);
-        if (this.#duplCheckOfBonus(winning, bonus)) throw new Error(`[ERRPR] 보너스 숫자는 중복될 수 없습니다.`);
-        if (this.#validateNumRange(bonus)) throw new Error(`[ERROR] 숫자 범위는 1~45 사이입니다.`);
-
-        valid = false;
-      } catch (error) {
-        continue;
-      }
-    }
-
-    return bonus;
+  #validCheck(winning, bonus) {
+    // const winning = this.#winningNum.result();
+    if (this.#isNumCheck(bonus)) throw new Error(`[ERRPR] 보너스 입력값은 숫자여야 합니다.`);
+    if (this.#duplCheckOfBonus(winning, bonus)) throw new Error(`[ERRPR] 보너스 숫자는 중복될 수 없습니다.`);
+    if (this.#validateNumRange(bonus)) throw new Error(`[ERROR] 숫자 범위는 1~45 사이입니다.`);
   }
 
   #isNumCheck(bonusNum) {
@@ -61,3 +55,5 @@ class Bonus {
 }
 
 export default Bonus;
+// const run = new Bonus();
+// run.validCheck();
