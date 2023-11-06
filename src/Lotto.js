@@ -45,8 +45,11 @@ class Lotto {
     if (!numbers) {
       return;
     }
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] : 로또 번호는 6개여야 합니다.");
+    if (this.isNotSix(numbers)) {
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+    if (this.isDuplicate(numbers)) {
+      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
     }
     return numbers;
   }
@@ -55,11 +58,24 @@ class Lotto {
     if (!bonus) {
       return;
     }
-    if (bonus.length !== 1) {
+    if (this.isNotOne(bonus)) {
       throw new Error("[ERROR] 보너스 번호는 1개여야 합니다.");
     }
     return bonus;
   }
+
+  isNotSix = (numbers) => {
+    return numbers.length !== 6;
+  };
+
+  isNotOne = (bonus) => {
+    return bonus.length !== 1;
+  };
+
+  isDuplicate = (numbers) => {
+    const set = new Set(numbers);
+    return set.size !== numbers.length;
+  };
 
   resultOfLotto(random, drew, bonus) {
     let result = this.matchCountCheck(random, drew);
