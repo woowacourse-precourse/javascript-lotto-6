@@ -41,6 +41,13 @@ class Lotto {
       }
     });
   }
+
+  #numberDuplicateCheck(numbers) {
+    const duplicateChecker = new Set(numbers);
+    if (duplicateChecker.size !== 6) {
+      throw new Error('[ERROR] 로또 번호에 중복된 숫자가 있습니다.');
+    }
+  }
 }
 
 export default Lotto;
