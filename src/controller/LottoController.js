@@ -8,10 +8,6 @@ class LottoController {
   #user;
   #winningLotto;
 
-  constructor() {
-    // this.#winningLotto = new WinningLotto();
-  }
-
   async run() {
     await this.#setUser();
     this.#user.buyLottos();

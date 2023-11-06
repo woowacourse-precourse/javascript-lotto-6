@@ -1,12 +1,12 @@
 import REGEXP from '../constants/RegExp.js';
 import SETTINGS from '../constants/Settings.js';
 import Lotto from './Lotto.js';
+import Utils from '../utils/Utils.js';
 import {
   BonusTypeError,
   BonusRangeError,
   BonusIncludedError
 } from '../error/CustomErrors.js';
-import Utils from '../utils/Utils.js';
 
 class WinningLotto extends Lotto {
   #bonus;
@@ -14,15 +14,14 @@ class WinningLotto extends Lotto {
   constructor(numbers) {
     const numbersArray = Utils.stringToNumberArray(numbers);
     super(numbersArray);
-    this.#bonus = 0;
   }
 
   setBonus(bonus) {
-    this.#validateBonus(bonus);
+    this.#validate(bonus);
     this.#bonus = Number(bonus);
   }
 
-  #validateBonus(bonus) {
+  #validate(bonus) {
     if (!REGEXP.eachNumber.test(bonus)) {
       throw new BonusTypeError(bonus);
     }
