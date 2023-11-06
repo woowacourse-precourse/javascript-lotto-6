@@ -12,8 +12,8 @@ class Lotto {
     }
   }
 
-  toStirng() {
-    return `[ ${this.#numbers.join(', ')} ]`;
+  toString() {
+    return `[${this.#numbers.join(', ')}]`;
   }
 }
 

@@ -4,7 +4,7 @@ class App {
   #controller;
 
   async play() {
-    this.controller = new Controller();
+    this.#controller = new Controller();
     this.#controller.run();
   }
 }

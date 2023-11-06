@@ -9,12 +9,6 @@ export default class LottoGame {
     this.#view = new View();
   }
 
-  async getMoney() {
-    const money = await this.#view.getMoneyInput();
-
-    return money;
-  }
-
   moneyToAttempts(money) {
     return money / 1000;
   }
