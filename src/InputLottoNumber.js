@@ -27,7 +27,7 @@ class InputLottoNumber extends CompareLotto {
       GAME_MESSAGE.inputBonusNumber,
     );
 
-    this.bonusNumber = bonusNumber;
+    this.bonusNumber = Number(bonusNumber);
 
     super.compareLottoNumber();
   }
