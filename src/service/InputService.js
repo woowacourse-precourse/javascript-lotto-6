@@ -1,22 +1,40 @@
 import validation from '../util/validation/index.js';
-import inputView from '../view/inputView.js';
 import { Console } from '@woowacourse/mission-utils';
 class InputService {
-  constructor(inputType) {
-    this.inputType = inputType;
-  }
+  constructor() {}
 
-  async setInputValue() {
+  static async setPurchaseMoney(query) {
     while (true) {
       try {
-        const inputValue = await inputView.purchase();
-        //TODO [test] this.inputType이 제대로인지
-        validation[this.inputType](inputValue);
-        return inputValue;
+        const purchaseMoney = await Console.readLineAsync(query);
+        validation.purchaseMoneyInput(purchaseMoney);
+        return purchaseMoney;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
-      break;
+    }
+  }
+
+  static async setWinningNumber(query) {
+    while (true) {
+      try {
+        const winningNumber = await Console.readLineAsync(query);
+        validation.winningNumberInput(winningNumber);
+        return winningNumber;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+  static async setBonusNumber(query, winningNumber) {
+    while (true) {
+      try {
+        const bonusNumber = await Console.readLineAsync(query);
+        validation.bonusNumberInput(bonusNumber, winningNumber);
+        return bonusNumber;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
   }
 }
