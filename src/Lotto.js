@@ -28,7 +28,16 @@ class Lotto {
   }
 
   #validateBonusNum(numbers, bonusNum) {
-    // 작성
+    if (bonusNum.isArray())
+      throw new Error("[ERROR] 숫자는 1개만 입력해야 합니다.");
+    if (Number.isNaN(bonusNum))
+      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
+    if (numbers.includes(bonusNum))
+      throw new Error("[ERROR] 6개의 당첨 번호 이외의 숫자를 입력해야 합니다.");
+    if (bonusNum <= 0 || bonusNum >= 46)
+      throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
+    if (bonusNum >= 1 && bonusNum <= 45 && Number.isInteger(bonusNum) === false)
+      throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
   }
 
   // TODO: 추가 기능 구현
