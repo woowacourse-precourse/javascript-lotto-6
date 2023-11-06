@@ -13,10 +13,10 @@ const MESSAGES = Object.freeze({
   outputThirdPrize : `5개 일치 (${SETTINGS.thirdPrize.toLocaleString('ko-KR')}원) - `,
   outputSecondPrize : `5개 일치, 보너스 볼 일치 (${SETTINGS.secondPrize.toLocaleString('ko-KR')}원) - `,
   outputFirstPrize : `6개 일치 (${SETTINGS.firstPrize.toLocaleString('ko-KR')}원) - `,
-  outputReturnRate: `수익률은 `,
+  outputReturnRate: `총 수익률은 `,
 
   suffixAmount : '개',
-  suffixReturnRate : '% 입니다.',
+  suffixReturnRate : '%입니다.',
 });
 
 export default MESSAGES;

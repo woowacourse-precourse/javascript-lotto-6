@@ -52,14 +52,14 @@ class Lotto {
 
   getPrize(numbers, bonus) {
     switch (this.#getMatchWithNumbers(numbers)) {
-      case 3: return 5;
-      case 4: return 4;
+      case 3: return '5';
+      case 4: return '4';
       case 5:
         if (this.#getMatchWithBonus(bonus) === false) {
-          return 3;
+          return '3';
         }
-        return 2;
-      case 6: return 1;
+        return '2';
+      case 6: return '1';
     }
   }
 }

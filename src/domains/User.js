@@ -14,11 +14,11 @@ class User {
     this.#balance = balance;
     this.#lottos = [];
     this.#prizes = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
+      '1': 0,
+      '2': 0,
+      '3': 0,
+      '4': 0,
+      '5': 0,
     }
   }
 
@@ -48,7 +48,7 @@ class User {
     this.#lottos.forEach((lotto) => {
       const prize = lotto.getPrize(winningLotto.getNumbers(), winningLotto.getBonus());
       if (this.#prizes[prize] !== undefined) {
-        this.#prizes[prize] += 1
+        this.#prizes[prize] += 1;
       };
     });
   }
@@ -59,12 +59,12 @@ class User {
 
   getReturnRate() {
     const returns =
-      SETTINGS.fifthPrize * this.#prizes[5]
-      + SETTINGS.foutrh * this.#prizes[4]
-      + SETTINGS.thirdPrize * this.#prizes[3]
-      + SETTINGS.secondPrize * this.#prizes[2]
-      + SETTINGS.firstPrize * this.#prizes[1]
-    const returnRate = returns / this.#balance * 100
+      SETTINGS.fifthPrize * this.#prizes['5']
+      + SETTINGS.fourthPrize * this.#prizes['4']
+      + SETTINGS.thirdPrize * this.#prizes['3']
+      + SETTINGS.secondPrize * this.#prizes['2']
+      + SETTINGS.firstPrize * this.#prizes['1'];
+    const returnRate = (returns / this.#balance * 100).toFixed(1);
 
     return returnRate;
   }

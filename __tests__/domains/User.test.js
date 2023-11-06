@@ -36,7 +36,7 @@ describe('User - buyLottos 메소드 : 로또 구입 수량 테스트', () => {
   });
 });
 
-describe('User - setPrizes, getPrizes 메소드 : 로또 당첨 등수 반환 테스트', () => {
+describe('User - setPrizes, getPrizes, getReturnRate 메소드 : 로또 당첨 결과 관련 반환 테스트', () => {
   const winning = new WinningLotto();
   const INPUT_BALANCE = '6000';
   const INPUT_NUMBERS = '1,2,3,4,5,6';
@@ -46,11 +46,11 @@ describe('User - setPrizes, getPrizes 메소드 : 로또 당첨 등수 반환 �
   winning.setBonus(INPUT_BONUS);
 
   const RESULT_PRIZES = {
-    1: 1,
-    2: 1,
-    3: 1,
-    4: 1,
-    5: 1,
+    '1': 1,
+    '2': 1,
+    '3': 1,
+    '4': 1,
+    '5': 2,
   };
   const RANDOMS = [
     [1, 2, 3, 4, 5, 6],
@@ -58,21 +58,28 @@ describe('User - setPrizes, getPrizes 메소드 : 로또 당첨 등수 반환 �
     [1, 2, 3, 4, 5, 10],
     [1, 2, 3, 4, 10, 15],
     [1, 2, 3, 10, 15, 20],
+    [4, 5, 6, 10, 15, 20],
     [10, 15, 20, 25, 30, 35],
   ];
+  const RESULT_RETURNRATE = '33859333.3';
+
+  const user = new User(INPUT_BALANCE);
 
   test('User의 당첨 등수를 올바르게 반환해야 한다.', () => {
     mockRandoms(RANDOMS);
 
-    const user = new User(INPUT_BALANCE);
     user.buyLottos();
     user.setPrizes(winning);
     const result = user.getPrizes();
 
     expect(result).toEqual(RESULT_PRIZES);
   });
-});
 
-describe('User getReturnRate 메소드 : 수익률 반환 테스트', () => {
-  
-})
+  test('User의 수익률을 올바르게 반환해야 한다.', () => {
+    const result = user.getReturnRate();
+
+    expect(result).toEqual(RESULT_RETURNRATE);
+  });
+  // 2031555000 / 6000 * 100
+  // 2031560000 / 6000 * 100
+});
