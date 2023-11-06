@@ -1,6 +1,6 @@
 # javascript-racingcar-6 #
 
-## 작성자
+### 작성자
 프론트엔드 6기 참가자 조수민
 
 # 구조
@@ -8,18 +8,18 @@
 + src
   + constants
     └ constants.js --- constants를 선언한 파일
-	+ controller
-		└ Controller.js	-- 로또의 진행을 담당하는 controller
-	+ model
-		└ Lotto.js	------ 정답 로또 번호 객체
-		└ Statistics.js	-- 결과 통계를 담당하는 객체
-		└ UserLotto.js	-- 유저의 로또를 구매하고 관리하는 객체
-		└ UserLottoNumber.js	--- 실제 유저의 로또 번호를 저장한 객체
-	+ view
-		└ InputView.js	-------- 입력 객체
-		└ OutputView.js	-------- 출력 객체
-  └ App.js  ---------  프로그램 실행 진입점
-	└ index.js  -------- App.play()
+  + controller
+    └ Controller.js	-- model과 view를 컨트롤 하는 controller
+  + model
+    └ Lotto.js ------------- 정답 로또 번호 객체
+    └ Statistics.js -------- 결과 통계를 담당하는 객체
+    └ UserLotto.js --------- 유저의 로또를 구매하고 관리하는 객체
+    └ UserLottoNumber.js --- 실제 유저의 로또 번호를 저장한 객체
+  + view
+    └ InputView.js ---- 입력 객체
+    └ OutputView.js	--- 출력 객체
+└ App.js --- 프로그램 실행 진입점
+└ index.js -- App.play()
 
 ```
 
@@ -52,7 +52,7 @@ ___
 
 __constructor()__
 
-수익률 this.#rateOfReturns와 결과값 객체 this.#statistics를 초기화
+	수익률 this.#rateOfReturns와 결과값 객체 this.#statistics를 초기화
 
 __calculateStatistics(userLotto, lotto)__
 
