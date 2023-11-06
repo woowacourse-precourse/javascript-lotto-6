@@ -28,6 +28,9 @@ class Game {
 
   handlePurchase = (amount) => {
     this.#quantity = new Purchase(amount).getAmount();
+    // if (isNaN(this.#quantity)) {
+    //   throw new Error('[ERROR] 잘못된 값을 입력하였습니다.');
+    // }
     OutputView.printQuantity(this.#quantity);
     this.#lottos = LottoMaker.generate(this.#quantity);
     OutputView.printLottos(this.#lottos);
@@ -61,15 +64,27 @@ class Game {
     const count = new Count(this.#lottos, this.winningNumbers, this.bonusNumber);
 
     this.setResult(count);
+    this.getBenefit(count.totalReward);
   }
 
   setResult(count) {
-    MissionUtils.Console.print(`${OUTPUT.LINE}${OUTPUT.RESULT_TITLE}`);
+    MissionUtils.Console.print(OUTPUT.RESULT_TITLE);
 
     Object.values(count.matchList).forEach((match, index) => {
       const result = new Result(match, count.matchMessageList[index], count.rewardList[index]);
       count.totalReward += result.totalReward;
     });
+  }
+
+  getBenefit(totalReward) {
+    const benefit = ((totalReward / this.#quantity) * 100) / 1000;
+    const benefitRate = Math.round(benefit * 10) / 10;
+
+    this.setBenefit(benefitRate);
+  }
+
+  setBenefit(rate) {
+    OutputView.printBenefitRate(rate);
   }
 }
 
