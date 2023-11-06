@@ -27,7 +27,7 @@ class Lotto {
     if (winningCount === 5 && this.#numbers.includes(bonusNumber))
       bonusCount += 1;
 
-    return { winningCount, bonusCount };
+    return [winningCount >= 3 ? winningCount : 0, bonusCount];
   }
 }
 

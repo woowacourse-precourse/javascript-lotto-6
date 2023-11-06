@@ -1,11 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
+import { CHECK_RANK } from "./constants/Ranking.js";
 
 class App {
   purchaseAmount = 0;
   lottos = [];
   winningNumbers = [];
   bonusNumber = 0;
+  lottoResult = [0, 0, 0, 0, 0, 0];
 
   async inputPurchaseAmount() {
     const inputPurchaseAmount = await MissionUtils.Console.readLineAsync(
@@ -84,10 +86,24 @@ class App {
     this.bonusNumber = bonusNumber;
   }
 
+  checkLotto() {
+    this.lottos.forEach((lotto) => {
+      const compareResult = lotto.compareNumbers(
+        this.winningNumbers,
+        this.bonusNumber
+      );
+
+      const ranking = CHECK_RANK[compareResult];
+      this.lottoResult[ranking] += 1;
+    });
+  }
+
   async play() {
     await this.inputPurchaseAmount();
     this.purchaseLotto();
     await this.inputWinningNumbers();
+    await this.inputBonusNumber();
+    this.checkLotto();
   }
 }
 
