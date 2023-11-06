@@ -9,7 +9,7 @@ class App {
     // 금액을 입력 받아 로또 구매
     const amount = await Inoutput.buyLotto();
     const lottoList = functions.buyLottoByAmount(amount);
-    
+   const winningNumbers = await Inoutput.getWinningNumber();
     
   }
 }
