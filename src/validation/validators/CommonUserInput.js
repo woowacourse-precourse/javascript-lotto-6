@@ -34,6 +34,7 @@ export const CommonUserInput = {
         return input === 0;
       },
       isIncludedSpace(input) {
+        console.log('isIncludedSDpace', input);
         return Number.isNaN(input);
       },
     },

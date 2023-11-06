@@ -15,6 +15,13 @@ export class User {
   }
 
   async #setMoney(money) {
-    this.#money = money;
+    try {
+      Validator.Money.validate(money);
+
+      this.#money = money;
+    } catch (e) {
+      Console.print(e);
+      await this.inputMoney();
+    }
   }
 }
