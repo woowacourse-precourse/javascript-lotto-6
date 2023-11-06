@@ -9,6 +9,12 @@ const OutputView = {
   printLine() {
     return Console.print('');
   },
+
+  printLottos(lottos) {
+    lottos.forEach(lotto => {
+      Console.print(OUTPUT_MESSAGE.lotto(lotto));
+    });
+  },
 };
 
 export default OutputView;

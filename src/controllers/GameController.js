@@ -14,6 +14,9 @@ class GameController {
     const publishCount = await this.getLottoPublishCount();
     OutputView.printLine();
     OutputView.printPublishCount(publishCount);
+
+    this.#lottoMaker.publishedLottos(publishCount);
+    OutputView.printLottos(this.#lottoMaker.lottos);
   }
 
   async getLottoPublishCount() {

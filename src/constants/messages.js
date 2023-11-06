@@ -10,6 +10,7 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
   publishCount: count => `${count}개를 구매했습니다.`,
+  lotto: lotto => `[${lotto.join(', ')}]`,
 });
 
 export const ERROR_PRIFIX = '[ERROR] ';
