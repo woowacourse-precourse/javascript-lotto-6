@@ -27,5 +27,12 @@ class LottoView {
     );
     Console.print(`총 수익률은 ${winningStatistics.getEaringRate()}%입니다.`);
   }
+
+  static printLottoBundle(lottoBundle) {
+    Console.print(`${lottoBundle.length}개를 구매했습니다.`);
+    lottoBundle.forEach((lotto) => {
+      Console.print(`[${lotto.join(', ')}]`);
+    });
+  }
 }
 export default LottoView;
