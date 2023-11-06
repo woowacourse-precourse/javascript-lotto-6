@@ -41,25 +41,37 @@ class LottoGame {
     }
     return RANDOM_NUMBERS;
   }
+ 
 
-  getWinningStatus(winningNumbers) {
+  getWinningStatus(winningNumbers, bonusNumber) {
     const MATHING_COUNTS = [];
-    for (let i = 0; i < this.#lottos.length; i++) {
-      MATHING_COUNTS.push(this.#lottos[i].getMatchingCount(winningNumbers));
+    for (let index = 0; index < this.#lottos.length; index++) {
+      MATHING_COUNTS.push(this.#lottos[index].getMatchingCount(winningNumbers));
     }
-    const WINNING_STATUS = this.countArrElements(MATHING_COUNTS);
+    const WINNING_STATUS = this.calculateWinnigStatus(MATHING_COUNTS,bonusNumber);
     return WINNING_STATUS;
   }
 
-  countArrElements(arr) {
-    const ELEMENT_COUNTS = {};
-    for (const ELEMENT of arr) {
-      if (!ELEMENT_COUNTS[ELEMENT]) {
-        ELEMENT_COUNTS[ELEMENT] = 0;
-      }
-      ELEMENT_COUNTS[ELEMENT] += 1;
+  checkBonusNumberMatch(index, bonusNumber) {
+    const LOTTO_NUMBERS = this.#lottos[index].getNumbers();
+    if (LOTTO_NUMBERS.includes(Number(bonusNumber))) {
+        return 'bonus';
     }
-    return ELEMENT_COUNTS;
+    return '5';
+  }
+  calculateWinnigStatus(matchingCounts,bonusNumber) {
+    const WINNING_STATUS = {};
+    for (let index=0; index<matchingCounts.length; index++) {
+      let mathingCount = matchingCounts[index];
+      if (mathingCount===5) {
+        mathingCount = this.checkBonusNumberMatch(index,bonusNumber)
+      }
+      if (!WINNING_STATUS[mathingCount]) {
+        WINNING_STATUS[mathingCount] = 0;
+      }
+      WINNING_STATUS[mathingCount] += 1;
+    }
+    return WINNING_STATUS;
   }
 }
 export default LottoGame;

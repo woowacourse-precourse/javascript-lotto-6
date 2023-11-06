@@ -14,5 +14,9 @@ class InputUi {
     );
     return WINNING_NUMBER;
   }
+  async askBonusNumber() {
+    const BONUS_NUMBER = await MissionUtils.Console.readLineAsync('보너스 번호를 입력하세요.');
+    return BONUS_NUMBER;
+  }
 }
 export default InputUi;
