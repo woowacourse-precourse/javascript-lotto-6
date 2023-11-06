@@ -1,5 +1,5 @@
 import CombinationMachine from './CombinationMachine.js';
-import Computer from './Computer.js';
+import LottoMachine from './LottoMachine.js';
 import LottoSeller from './LottoSeller.js';
 import User from './User.js';
 import { generator } from './util/generator.js';
@@ -14,8 +14,8 @@ class LottoGame {
   }
 
   setUpGameProcess() {
-    const computer = new Computer(generator);
-    this.#lottoSeller = new LottoSeller(computer);
+    const lottoMacine = new LottoMachine(generator);
+    this.#lottoSeller = new LottoSeller(lottoMacine);
   }
 
   purchace(lottoPrice) {

@@ -1,12 +1,12 @@
 class LottoSeller {
-  #computer;
+  lottoMacine;
 
-  constructor(computer) {
-    this.#computer = computer;
+  constructor(lottoMacine) {
+    this.lottoMacine = lottoMacine;
   }
 
   sellLotto(lottoPrice) {
-    const lottos = this.#computer.generateLotto(lottoPrice);
+    const lottos = this.lottoMacine.generateLotto(lottoPrice);
     return lottos;
   }
 }

@@ -1,6 +1,6 @@
 import Lotto from './Lotto.js';
 
-class Computer {
+class LottoMachine {
   #generator;
 
   constructor(generator) {
@@ -21,4 +21,4 @@ class Computer {
   }
 }
 
-export default Computer;
+export default LottoMachine;
