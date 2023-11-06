@@ -6,7 +6,11 @@ const OutputView = Object.freeze({
     Console.print(message);
   },
 
-  userLottos(lotto) {
+  lottoQuantity(quantity) {
+    Console.print(MESSAGES.printLottoQuantity(quantity));
+  },
+
+  userLotto(lotto) {
     Console.print(MESSAGES.printLotto(lotto));
   },
 

@@ -2,6 +2,13 @@ import { Lotto } from '../domain/index.js';
 
 const MESSAGES = Object.freeze({
   /**
+   * @param {number} quantity
+   * @returns {string}
+   */
+  printLottoQuantity(quantity) {
+    return `\n${quantity}개를 구매했습니다.`;
+  },
+  /**
    * @param {Lotto} lotto
    * @returns {string}
    */

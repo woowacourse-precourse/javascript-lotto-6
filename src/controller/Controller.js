@@ -30,10 +30,11 @@ class Controller {
   }
 
   /**
-   * @param {Lotto} lottos
+   * @param {Lotto[]} lottos
    */
   #printLottos(lottos) {
-    lottos.forEach((lotto) => this.#view.output.userLottos(lotto));
+    this.#view.output.lottoQuantity(lottos.length);
+    lottos.forEach((lotto) => this.#view.output.userLotto(lotto));
   }
 
   async #withRetry(action) {
