@@ -6,13 +6,18 @@ const OutputView = {
   printMessage(message) {
     Console.print(message);
   },
-  printQuantity(purchaseAmount) {
+  printBlank() {
     Console.print(MESSAGES.blank);
+  },
+
+  printQuantity(purchaseAmount) {
+    this.printBlank();
     Console.print(purchaseAmount / CONSTANTS.eachLottoPrice + MESSAGES.purchaseResult);
   },
+
   printLottoString(user) {
     user.getLottoStringArray().forEach((lottoString) => Console.print(lottoString));
-    Console.print(MESSAGES.blank);
+    this.printBlank();
   },
 };
 
