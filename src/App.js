@@ -6,6 +6,7 @@ import getLotteries from './lottery/getLotteries.js';
 import printLotteries from './output/printLotteries.js';
 import inputWinningNumbers from './input/inputWinningNumbers.js';
 import inputBonusNumber from './input/inputBonusNumber.js';
+import countSameNumbers from './game/countSameNumbers.js';
 
 class App {
   async play() {
@@ -23,6 +24,10 @@ class App {
     lineBreak();
 
     const BONUS_NUMBER = await inputBonusNumber(WINNING_NUMBERS);
+    WINNING_NUMBERS.push(BONUS_NUMBER);
+    lineBreak();
+
+    const SAME_NUMBER_LIST = countSameNumbers(LOTTERIES, WINNING_NUMBERS);
   }
 }
 
