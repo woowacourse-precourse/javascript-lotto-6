@@ -71,3 +71,14 @@ describe("method test : checkRange()" , () => {
     expect(length).toBe(2);
   });
 });
+
+describe("method test : getLottoResult()" , () => {
+  test('로또 결과를 배열에 오류 없이 담을 수 있을까 ?', () => {
+    const testArray = [1,2,3,4,5,6];
+    const equalNumber = 5;
+    const bonusResult = true;
+    const lotto = new Lotto(testArray);
+    const ResultArray = lotto.getLottoResult(equalNumber, bonusResult);
+    expect(ResultArray).toEqual([0,0,0,1,0]);
+  });
+});
