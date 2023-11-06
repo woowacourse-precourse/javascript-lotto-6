@@ -19,7 +19,7 @@ const OutputView = {
   lottoList(lotto) {
     Console.print(`[${lotto.join(', ')}]`);
   },
-  statistic(counts) {
+  result(counts) {
     Console.print('\n당첨 통계');
     Console.print('---');
     counts.forEach((count, idx) => {
