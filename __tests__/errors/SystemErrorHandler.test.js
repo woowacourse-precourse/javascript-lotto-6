@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Console } from '@woowacourse/mission-utils';
 import systemErrorHandler from '../../src/error/handlers/systemErrorHandler';
 

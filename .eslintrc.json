@@ -4,12 +4,22 @@
     "node": true,
     "jest": true
   },
-  "extends": ["airbnb-base", "prettier", "plugin:jsdoc/recommended"],
+  "extends": ["airbnb-base", "prettier", "plugin:jsdoc/recommended", "plugin:jest/recommended"],
+  "overrides": [
+    {
+      "files": ["*.test.js", "ApplicationTest.js", "LottoTest.js"],
+      "rules": {
+        "max-lines-per-function": ["off"]
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "rules": {
+    "class-methods-use-this": ["off"],
+    "import/prefer-default-export": ["off"],
     "no-new": ["off"],
     "import/extensions": ["off"],
     // 들여쓰기 깊이 제한

@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-
 import lottoNumberMatching from '../../../src/domain/confirmWinningInfo/lottoNumberMatching';
 
 describe('로또 번호 매칭 테스트', () => {

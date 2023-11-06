@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import AppError from '../../src/error/customErrors/AppError.js';
 import { COMMON_VALIDATION_TYPES, validateCommon } from '../../src/validations/commonValidation.js';
 

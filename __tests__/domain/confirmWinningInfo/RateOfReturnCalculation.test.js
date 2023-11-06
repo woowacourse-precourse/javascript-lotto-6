@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-
 import rateOfReturnCalculation from '../../../src/domain/confirmWinningInfo/rateOfReturnCalculation';
 
 describe('수익률 계산 테스트', () => {

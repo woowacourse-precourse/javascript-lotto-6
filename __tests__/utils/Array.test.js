@@ -1,8 +1,7 @@
 import { ascendingNumbers, countBy, intersection } from '../../src/utils/array.js';
 
-/* eslint-disable max-lines-per-function */
 describe('Array 함수형 모듈 테스트', () => {
-  describe('ascendingNumbers 함수 테스트', () => {
+  describe('ascendingNumbers 테스트', () => {
     test('주어진 숫자 배열을 오름차순으로 정렬한다.', () => {
       // given
       const input = [4, 2, 7, 1, 9];

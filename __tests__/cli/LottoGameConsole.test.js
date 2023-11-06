@@ -1,8 +1,7 @@
 import lottoGameConsole from '../../src/cli/lottoGameConsole';
 
-/* eslint-disable max-lines-per-function */
 describe('lottoGameConsole 테스트', () => {
-  describe('output 테스트 ', () => {
+  describe('output 테스트', () => {
     describe('purchasedLottoNumbers 메서드 테스트', () => {
       test.each([{ input: 1, output: '\n1개를 구매했습니다.' }])(
         '로또 $input개 구매 시, 메시지는 "$output" 이어야 한다.',

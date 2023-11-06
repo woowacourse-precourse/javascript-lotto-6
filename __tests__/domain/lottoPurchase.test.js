@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-
 import lottoPurchase from '../../src/domain/lottoPurchase';
 
 const randomNumberGenerator = {

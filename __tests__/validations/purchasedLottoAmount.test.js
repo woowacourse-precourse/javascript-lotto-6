@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import lottoPurchase from '../../src/domain/lottoPurchase.js';
 import AppError from '../../src/error/customErrors/AppError.js';
 import {
@@ -30,7 +29,7 @@ describe('validatePurchasedLottoAmount 테스트', () => {
     ])(
       '구매 로또 금액이 $input원 일 때 "$expectedErrorMessage" 메시지와 함께 에러가 발생해야 한다.',
       ({ input, expectedErrorMessage }) => {
-        // TODO: given - when - then 추가
+        // given - when - then
         expect(startValidation(input)).toThrow(new AppError(expectedErrorMessage));
       },
     );
@@ -48,7 +47,7 @@ describe('validatePurchasedLottoAmount 테스트', () => {
         input: lottoPurchase.constants.unit,
       },
     ])('구매 로또 금액이 $input원 일 때 에러가 발생하지 않는다.', ({ input }) => {
-      // TODO: given - when - then 추가
+      // given - when - then
       expect(startValidation(input)).not.toThrow();
     });
   });

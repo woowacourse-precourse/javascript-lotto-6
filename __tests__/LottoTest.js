@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import Lotto from '../src/Lotto.js';
 import { ascendingNumbers } from '../src/utils/array.js';
 

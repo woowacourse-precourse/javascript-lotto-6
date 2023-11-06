@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import winningInfo from '../../../src/domain/confirmWinningInfo/winningInfo.js';
 
 const PRIZES = {
@@ -9,7 +8,7 @@ const PRIZES = {
   '5th': winningInfo.constants.rankInfo['5th'].prizeAmount,
 };
 
-describe('당첨 정보 테스트', () => {
+describe('당첨 정보 생성 테스트', () => {
   test.each([
     {
       input: [

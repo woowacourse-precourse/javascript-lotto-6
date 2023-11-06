@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-
 import { LOTTO_RULES } from '../../src/constants/lottoGame.js';
 import AppError from '../../src/error/customErrors/AppError.js';
 import {
