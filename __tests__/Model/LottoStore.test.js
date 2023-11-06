@@ -6,12 +6,35 @@ jest.mock("../../src/Lotto");
 let lottoIndex = 0;
 const mockLottos = [
   [1, 2, 3, 4, 5, 6],
-  [7, 8, 9, 10, 11, 12],
-  [13, 14, 15, 16, 17, 18],
+  [1, 2, 3, 4, 5, 7],
+  [1, 2, 7, 8, 9, 10],
+  [1, 2, 3, 4, 7, 10],
 ];
+
+const matchResultIndex = 0;
+const mockMatchResult = [
+  {
+    lottoWinningNumbersMatchCount: 6,
+    bonousNumberMatchCount: 0,
+  },
+  {
+    lottoWinningNumbersMatchCount: 5,
+    bonousNumberMatchCount: 1,
+  },
+  {
+    lottoWinningNumbersMatchCount: 2,
+    bonousNumberMatchCount: 1,
+  },
+  {
+    lottoWinningNumbersMatchCount: 4,
+    bonousNumberMatchCount: 1,
+  },
+];
+
 Lotto.mockImplementation(() => {
   return {
     getNumbers: jest.fn(() => mockLottos[lottoIndex++]),
+    matchNumbers: jest.fn(() => mockMatchResult[matchResultIndex++]),
   };
 });
 
@@ -38,5 +61,24 @@ describe("LottoStore 클래스 테스트", () => {
   test("getLottoNumbers 메서드가 구매한 로또들의 번호를 반환해야 한다.", () => {
     const lottoNumbers = lottoStore.getLottoNumbers();
     expect(lottoNumbers).toEqual(mockLottos);
+  });
+
+  test("getLottoMatchResult 메서드가 존재해야 한다.", () => {
+    expect(typeof lottoStore.getLottoMatchResult).toBe("function");
+  });
+
+  test("getLottoMatchResult 메서드를 호출하면 당첨 번호와 비교해여 생성된 matchResult를 반환해야 한다.", () => {
+    const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonousNumber = [7];
+    const expectedMatchResult = {
+      firstPlace: 1,
+      secondPlace: 1,
+      thirdPlace: 0,
+      fourthPlace: 1,
+      fifthPlace: 0,
+      returnRate: 507512.5,
+    };
+    const matchResult = lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
+    expect(matchResult).toEqual(expectedMatchResult);
   });
 });
