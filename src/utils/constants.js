@@ -13,6 +13,7 @@ const ERROR_MESSAGE = Object.freeze({
   winning_numbers_duplicate: '당첨 번호는 중복되지 않아야 합니다.',
   bonus_number_duplicate: '보너스 번호는 당첨 번호와 중복되지 않아야 합니다.',
   amount_division: '로또 구입 금액은 1000원 단위로 나누어 떨어져야 합니다.',
+  winning_numbers_not_set: '당첨 번호가 설정되어 있지 않습니다.',
   not_number: '숫자를 입력해 주세요.',
   empty: '빈 값은 입력할 수 없습니다.',
 });
