@@ -28,6 +28,23 @@ class UserLotto {
     return this.#userLottoNumbers;
   }
 
+  calculateMatchingNumber(winningLotto) {
+    const ranking = {
+      fifth: 0,
+      fourth: 0,
+      third: 0,
+      second: 0,
+      first: 0,
+    };
+
+    this.#userLottoNumbers.forEach((userLottoNumber) => {
+      const rank = userLottoNumber.calculateMatchingNumber(winningLotto);
+      ranking[rank] += 1;
+    });
+
+    return ranking;
+  }
+
   #validate(purchaseAmount) {
     this.#typeCheck(purchaseAmount);
     this.#divisionCheck(purchaseAmount);
