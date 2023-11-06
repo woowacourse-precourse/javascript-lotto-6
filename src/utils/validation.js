@@ -7,6 +7,7 @@ const {
   not_range,
   not_six_numbers,
   not_unique,
+  not_unique_bonus,
 } = ERROR_MESSAGE;
 
 export const isNumber = (num) => {
@@ -44,5 +45,11 @@ export const isUnique = (arr) => {
   const set = new Set(arr);
   if (set.size !== arr.length) {
     throw new Error(not_unique);
+  }
+}
+
+export const isUniqueBonus = (arr, num) => {
+  if (arr.includes(num)) {
+    throw new Error(not_unique_bonus);
   }
 }
