@@ -10,6 +10,7 @@ import { validatePurchaseAmount } from "./ValidateInput/ValidatePurchaseAmount.j
 import { validateWinningNumber } from "./ValidateInput/ValidateWinningNumber.js";
 import { validateBonusNumber } from "./ValidateInput/ValidateBonusNumber.js";
 import { calcResult } from "./CalcResult.js";
+import { printResult } from "./PrintResult.js";
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
@@ -65,6 +66,8 @@ class App {
       this.#winning_number,
       this.#bonus_number
     );
+    // 12. 당첨 내역 출력하기
+    printResult(result);
   }
 }
 
