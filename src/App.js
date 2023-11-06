@@ -3,7 +3,8 @@ import * as Util from "./Util";
 import { Lotto } from "./Lotto.js";
 
 class App {
-  numbersArray;
+  randomNumbers;
+  lottoArray;
   purchaseAmount;
   basedAmount;
   winningNumbers;
@@ -11,11 +12,13 @@ class App {
 
   constructor() {
     this.basedAmount = 1000;
+    this.randomNumbers = new Array(6);
+    this.lottoArray = new Array();
   }
 
   async play() {
     this.enterPurchaseAmount();
-    this.createRandomLottoNumbers();
+    this.createLottoArray();
     this.printRandomLottoNumbers();
     this.enterWinningNumbers();
   }
@@ -26,13 +29,12 @@ class App {
     this.purchaseAmount = userPrice / this.basedAmount;
   }
 
-  createRandomLottoNumbers() {
-    this.numbersArray = Util.create2DArray(this.purchaseAmount,6);
-
+  createLottoArray() {
     for (let i = 0 ; i < this.purchaseAmount ; i += 1) {
       for (let j = 0 ; j < 6 ; j += 1) {
-        this.numbersArray[i][j] = Random.pickNumberInRange(1, 45);
+        this.randomNumbers[j] = Random.pickNumberInRange(1, 45);
       }
+      this.lottoArray.push(new Lotto(this.randomNumbers));
     }
   }
 
@@ -52,7 +54,7 @@ class App {
     Util.validateLottoNumbers(this.winningNumbers, this.winningBonusNumber);
   }
 
-  
+
 }
 
 export default App;
