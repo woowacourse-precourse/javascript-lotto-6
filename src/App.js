@@ -1,25 +1,16 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import Validation from './Validation.js';
 
 class App {
   validateUserPurchaseMoney(input) {
-    if (input === '') {
-      throw new Error('[ERROR] 입력이 없습니다.');
-    }
+    Validation.validateInputEmpty(input);
 
     const number = Number(input);
 
-    if (Number.isNaN(number)) {
-      throw new Error('[ERROR] 입력이 숫자가 아닙니다.');
-    }
-
-    if (number <= 0) {
-      throw new Error('[ERROR] 입력이 0 이하입니다');
-    }
-
-    if (number % 1000 !== 0) {
-      throw new Error('[ERROR] 입력이 1,000원 단위가 아닙니다.');
-    }
+    Validation.validateInputNumber(number);
+    Validation.validateInputZeroOrLess(number);
+    Validation.validateInputThousands(number);
   }
 
   async getUserPurchaseMoney() {
@@ -37,34 +28,19 @@ class App {
   }
 
   validateWinningNumbers(input) {
-    if (input === '') {
-      throw new Error('[ERROR] 입력이 없습니다.');
-    }
-
-    if (!input.includes(',')) {
-      throw new Error('[ERROR] 입력이 쉼표로 구분되지 않습니다.');
-    }
+    Validation.validateInputEmpty(input);
+    Validation.validateInputHasCommas(input);
 
     const numbers = input.split(',').map((number) => {
-      return number;
+      return Number(number);
     });
 
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 입력이 6개가 아닙니다.');
-    }
-
-    if (new Set(numbers).size !== numbers.length) {
-      throw new Error('[ERROR] 입력에 중복된 값이 있습니다.');
-    }
+    Validation.validateInputDuplicate(numbers);
+    Validation.validateInputLength(numbers, 6);
 
     numbers.forEach((number) => {
-      if (Number.isNaN(Number(number))) {
-        throw new Error('[ERROR] 입력이 숫자가 아닙니다.');
-      }
-
-      if (number < 1 || number > 45) {
-        throw new Error('[ERROR] 입력이 1 ~ 45 사이가 아닙니다');
-      }
+      Validation.validateInputNumber(number);
+      Validation.validateInputOutOfLottoRange(number);
     });
   }
 
@@ -89,23 +65,13 @@ class App {
   }
 
   validateBonusNumber(winningNumbers, input) {
-    if (input === '') {
-      throw new Error('[ERROR] 입력이 없습니다.');
-    }
+    Validation.validateInputEmpty(input);
 
     const number = Number(input);
 
-    if (Number.isNaN(number)) {
-      throw new Error('[ERROR] 입력이 숫자가 아닙니다.');
-    }
-
-    if (number < 1 || number > 45) {
-      throw new Error('[ERROR] 입력이 1 ~ 45 사이가 아닙니다.');
-    }
-
-    if (winningNumbers.includes(number)) {
-      throw new Error('[ERROR] 입력이 당첨 번호와 중복되는 값입니다.');
-    }
+    Validation.validateInputNumber(number);
+    Validation.validateInputOutOfLottoRange(number);
+    Validation.validateInputDuplicateWinningNumbers(number, winningNumbers);
   }
 
   async getBonusNumber(winningNumbers) {
