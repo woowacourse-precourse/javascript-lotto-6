@@ -30,5 +30,8 @@ const Print = {
       }개`
     );
   },
+  printNewLine() {
+    Console.print('');
+  },
 };
 export default Print;

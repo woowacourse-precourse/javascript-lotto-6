@@ -45,7 +45,7 @@ class App {
 
   async play() {
     const price = await Input.getLottoPrice();
-    Console.print('');
+    Print.printNewLine();
 
     this.#count = this.countLotto(price);
     Console.print(`${this.#count}개를 구매했습니다.`);
@@ -55,13 +55,13 @@ class App {
       this.#lottos.push(lotto);
       Console.print(`[${lotto.join(', ')}]`);
     }
-    Console.print('');
+    Print.printNewLine();
 
     const answerNumbers = await Input.getLottoNumber();
-    Console.print('');
+    Print.printNewLine();
 
     const bonusNumber = await Input.getLottoBonusNumber(answerNumbers);
-    Console.print('');
+    Print.printNewLine();
 
     this.#lottos.forEach((lotto) => {
       const result = new Lotto(lotto);
