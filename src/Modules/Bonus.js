@@ -4,24 +4,43 @@ import { Console } from "@woowacourse/mission-utils";
 
 class Bonus { //예외처리 및 값 저장
     #bonus;
-    pass;
     
-    constructor(bonus) {
+    constructor(numbers ,bonus) {
+        this.numbers = numbers;
         this.#bonus = bonus;
-        this.#validate();
     }
 
-    #validate() {
+    validateRange() {
+        const isRightRange = this.#bonus < 1 || this.#bonus > 45;
         try {
-            this.pass = true;
-            if (this.#bonus < 1 || this.#bonus > 45) throw new Error(BONUS_RANGE);
-            if (numbers.split(',').map(Number).includes(this.#bonus)) throw new Error(BONUS_DUPLICATE);
-            if (isNaN(this.#bonus)) throw new Error(BONUS_INCLUDE);
+            if (isRightRange) throw new Error(ERROR.BONUS_RANGE);
         }
-        catch {
-            this.pass = false;
+        catch (error) {
             Console.print(error.message);
         }
+        return isRightRange;
+    }
+
+    validateDuplicate() {
+        const isDuplicate = this.numbers.includes(this.#bonus);
+        try {
+            if (isDuplicate) throw new Error(ERROR.BONUS_DUPLICATE);
+        }
+        catch (error) {
+            Console.print(error.message);
+        }
+        return isDuplicate;
+    }
+
+    validateNumber() {
+        const isNumber = isNaN(this.#bonus);
+        try {
+            if (isNumber) throw new Error(ERROR.BONUS_INCLUDE);
+        }
+        catch (error) {
+            Console.print(error.message);
+        }
+        return isNumber;
     }
 }
 

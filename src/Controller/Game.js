@@ -2,7 +2,7 @@ import { InputView } from '../View/InputView';
 import { OutputView } from '../View/OutputView';
 import { integrateWinLottery } from '../Modules/Result';
 import { Purchase, getPurchaseAmount } from '../Modules/Purchase';
-import { Lotto } from '../Modules/Lotto';
+import { Lotto } from '../Lotto';
 import { Bonus } from '../Modules/Bonus';
 
 

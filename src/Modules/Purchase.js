@@ -8,23 +8,31 @@ function getPurchaseAmount(amount) {
 
 class Purchase { //예외처리 및 값 저장
     #amount;
-    pass;
 
     constructor(amount) {
         this.#amount = amount;
-        this.#validate();
     }
 
-    #validate() {
+    validateNumber() {
+        const isNumber = isNaN(this.#amount);
         try {
-            this.pass = true;
-            if (isNaN(this.#amount)) throw new Error(ERROR.AMOUNT_NUMBER);
-            if (this.#amount % AMOUNT.UNIT !== 0) throw new Error(ERROR.AMOUNT_UNIT);
+            if (isNumber) throw new Error(ERROR.AMOUNT_NUMBER);
         }
         catch (error) {
-            this.pass = false;
             Console.print(error.message);
-        } 
+        }
+        return isNumber;
+    }
+
+    validateAmount() {
+        const isRightAmount = this.#amount % AMOUNT.UNIT !== 0;
+        try {
+            if (isRightAmount) throw new Error(ERROR.AMOUNT_UNIT);
+        }
+        catch (error) {
+            Console.print(error.message);
+        }
+        return isRightAmount;
     }
 }
 
