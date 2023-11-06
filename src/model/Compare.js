@@ -1,3 +1,5 @@
+import { PROFIT } from '../constants/index.js';
+
 export default class Compare {
   #winningNumber;
   #bonusNumber;
@@ -7,50 +9,50 @@ export default class Compare {
     this.#bonusNumber = bonusNumber;
   }
 
-  getMachedThreeNumber(boughtLottos) {
-    let mached = 0;
+  getMatchedThreeNumber(boughtLottos) {
+    let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
       const lottoNumbers = Lotto.getNumbers();
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 3) mached += 1;
+      if (matchedNumbers.length === 3) Matched += 1;
     });
 
-    return mached;
+    return Matched;
   }
 
-  getMachedFourNumber(boughtLottos) {
-    let mached = 0;
+  getMatchedFourNumber(boughtLottos) {
+    let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
       const lottoNumbers = Lotto.getNumbers();
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 4) mached += 1;
+      if (matchedNumbers.length === 4) Matched += 1;
     });
 
-    return mached;
+    return Matched;
   }
 
-  getMachedFiveNumber(boughtLottos) {
-    let mached = 0;
+  getMatchedFiveNumber(boughtLottos) {
+    let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
       const lottoNumbers = Lotto.getNumbers();
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 5) mached += 1;
+      if (matchedNumbers.length === 5) Matched += 1;
     });
 
-    return mached;
+    return Matched;
   }
 
-  getMachedBonusNumber(boughtLottos) {
-    let mached = 0;
+  getMatchedBonusNumber(boughtLottos) {
+    let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
       const lottoNumbers = Lotto.getNumbers();
@@ -61,35 +63,44 @@ export default class Compare {
         matchedNumbers.length === 5 &&
         lottoNumbers.includes(this.#bonusNumber)
       ) {
-        mached += 1;
+        Matched += 1;
       }
     });
 
-    return mached;
+    return Matched;
   }
 
-  getMachedSixNumber(boughtLottos) {
-    let mached = 0;
+  getMatchedSixNumber(boughtLottos) {
+    let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
       const lottoNumbers = Lotto.getNumbers();
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 6) mached += 1;
+      if (matchedNumbers.length === 6) Matched += 1;
     });
 
-    return mached;
+    return Matched;
   }
 
   getMatchedAllNumber(boughtLottos) {
-    const result = [];
+    const results = [];
 
-    result.push(this.getMachedThreeNumber(boughtLottos));
-    result.push(this.getMachedFourNumber(boughtLottos));
-    result.push(this.getMachedFiveNumber(boughtLottos));
-    result.push(this.getMachedSixNumber(boughtLottos));
-    result.push(this.getMachedBonusNumber(boughtLottos));
-    return result;
+    results.push(this.getMatchedThreeNumber(boughtLottos));
+    results.push(this.getMatchedFourNumber(boughtLottos));
+    results.push(this.getMatchedFiveNumber(boughtLottos));
+    results.push(this.getMatchedBonusNumber(boughtLottos));
+    results.push(this.getMatchedSixNumber(boughtLottos));
+    return results;
+  }
+
+  getProfit(boughtLottos, coin) {
+    let totalProfit = 0;
+    const result = this.getMatchedAllNumber(boughtLottos);
+    result.forEach((count, index) => {
+      totalProfit += count * PROFIT[index];
+    });
+    return ((totalProfit / (coin * 1000)) * 100).toFixed(1);
   }
 }

@@ -17,7 +17,7 @@ class App {
     this.#initialize();
     await this.buyLotto(this.#inputView, this.#outputView);
     await this.getWinningNumber(this.#inputView);
-    this.getWinningResult();
+    this.getWinningResult(this.#outputView);
   }
 
   #initialize() {
@@ -43,14 +43,27 @@ class App {
   }
 
   // console.log('당첨결과 출력');
-  getWinningResult() {
+  getWinningResult(outputView) {
     this.#compare = new Compare(this.#winningNumber, this.#bonusNumber);
-    const result = this.#compare.getMatchedAllNumber(this.#boughtLottos);
-    console.log('\n당첨 통계\n---\n');
-    console.log(result);
-  }
+    outputView.winningResult();
+    outputView.matchedThreeNumber(
+      this.#compare.getMatchedThreeNumber(this.#boughtLottos)
+    );
+    outputView.matchedFourNumber(
+      this.#compare.getMatchedFourNumber(this.#boughtLottos)
+    );
+    outputView.matchedFiveNumber(
+      this.#compare.getMatchedFiveNumber(this.#boughtLottos)
+    );
+    outputView.matchedBonusNumber(
+      this.#compare.getMatchedBonusNumber(this.#boughtLottos)
+    );
+    outputView.matchedSixNumber(
+      this.#compare.getMatchedSixNumber(this.#boughtLottos)
+    );
 
-  printWinningResult() {}
+    outputView.profit(this.#compare.getProfit(this.#boughtLottos, this.#coin));
+  }
 }
 
 export default App;
