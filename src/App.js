@@ -5,12 +5,15 @@ import OutputView from './view/outputView.js';
 class App {
   #inputView;
   #outputView;
-  #coin;
+  #coin = 0;
+  #boughtLottos = [];
+  #winningNumber;
+  #bonusNumber = 0;
 
   async play() {
     this.#initialize();
-    this.buyLotto(this.#inputView, this.#outputView);
-    this.getWinningNumber();
+    await this.buyLotto(this.#inputView, this.#outputView);
+    await this.getWinningNumber(this.#inputView);
     this.printWinningResult();
   }
 
@@ -19,19 +22,21 @@ class App {
     this.#outputView = new OutputView();
   }
 
+  // console.log('로또 구매하는 로직');
   async buyLotto(inputView, outputView) {
-    this.#coin = await inputView.inputCash();
-    const boughtLottos = [];
+    this.#coin = await inputView.coin();
     console.log(`\n${this.#coin}개를 구매했습니다.`);
+
     for (let i = 0; i < this.#coin; i++) {
-      boughtLottos.push(Lotto.random());
-      console.log(boughtLottos[i].getNumbers());
+      this.#boughtLottos.push(Lotto.random());
+      console.log(this.#boughtLottos[i].getNumbers());
     }
-    // console.log('로또 구매하는 로직');
   }
 
-  async getWinningNumber() {
-    // console.log('당첨번호 입력로직');
+  // console.log('당첨번호 입력로직');
+  async getWinningNumber(inputView) {
+    this.#winningNumber = new Lotto(await inputView.winningNumber());
+    this.#bonusNumber = await inputView.bonus(this.#winningNumber.getNumbers());
   }
 
   printWinningResult() {
