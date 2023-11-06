@@ -1,4 +1,4 @@
-import { Random, Console } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import { checkValue } from './libs/checkValue';
 import { LOTTO_NUMBER, PLACE } from './libs/constants';
 import { throwError } from './libs/throwError';
