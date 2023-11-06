@@ -14,6 +14,8 @@ const InputView = {
   async readWinningNumbers() {
     const winningNumbers = await Console.readLineAsync(OUTPUT_MESSAGE.winningNumbers);
 
+    checkEmptyString(winningNumbers);
+
     return winningNumbers;
   },
 };

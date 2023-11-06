@@ -33,9 +33,23 @@ class LottoController {
   }
 
   async #drawLotto() {
-    const winningNumbers = await InputView.readWinningNumbers();
+    const winningNumbers = await this.#getWinningNumbers();
 
     return { winningNumbers };
+  }
+
+  async #getWinningNumbers() {
+    try {
+      const winningNumbers = await InputView.readWinningNumbers();
+
+      return winningNumbers;
+    } catch (error) {
+      OutputView.print(error.message);
+
+      const winningNumbers = this.#getWinningNumbers();
+
+      return winningNumbers;
+    }
   }
 }
 
