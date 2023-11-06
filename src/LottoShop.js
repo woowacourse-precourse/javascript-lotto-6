@@ -1,6 +1,10 @@
 import Lotto from './Lotto';
+import { PRICE, SETTING } from './constants';
 import { 
   generateLottoNumber, 
+  calculateNumberMatch,
+  isDivideMinCost,
+  isBonusMatch,
   hasSixValues, 
   isLottoNumberRange, 
   isNaturalNumber, 
@@ -8,10 +12,17 @@ import {
   isUnique, 
   isUniqueBonus 
 } from './utils';
+const { bonus_match, min_match } = SETTING;
 
 class LottoShop {
+  #income;
   #prizeNumbers;
   #bonusNumber;
+
+  set income(income) {
+    isDivideMinCost(income);
+    this.#income = income;
+  }
 
   set prizeNumber(prize) {
     hasSixValues(prize);
@@ -49,6 +60,44 @@ class LottoShop {
     };
     return lottos;
   }
+
+  calculateStat(lottos) {
+    const stat = { 3: 0, 4: 0, 5: 0, bonus: 0, 6: 0 };
+  
+    lottos.forEach((lotto) => {
+      const matchResult = calculateNumberMatch(lotto, this.#prizeNumbers);
+      const isMatchedBonus = isBonusMatch(lotto, this.#bonusNumber);
+  
+      if (isMatchedBonus && matchResult === bonus_match) {
+        stat.bonus += 1;
+        return;
+      }
+  
+      if (!isMatchedBonus && matchResult >= min_match) {
+        stat[matchResult] += 1;
+      }
+    });
+    return stat;
+  }
+
+  calculateTotalReturn(lottos) {
+    let amount = 0;
+    lottos.forEach((lotto) => {
+      const matchResult = calculateNumberMatch(lotto, this.#prizeNumbers);
+      const isMatchedBonus = isBonusMatch(lotto, this.#bonusNumber);
+      
+      if (isMatchedBonus && matchResult === bonus_match) {
+        amount += PRICE.bonus;
+        return;
+      }
+
+      if (!isMatchedBonus && matchResult >= min_match) {
+        amount += PRICE[matchResult];
+      }
+    });
+    return ((amount / this.#income) * 100).toFixed(1);
+  }
 }
+
 
 export default LottoShop;
