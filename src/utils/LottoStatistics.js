@@ -20,10 +20,12 @@ class LottoStatistics {
   calculateLottoRank(count, array, bonusNumber) {
     if (count === MATCHED_COUNT.firstPlace) {
       this.rankingCounts[4] += 1;
+      return;
     }
 
     if (count === MATCHED_COUNT.secondPlace && array.includes(bonusNumber)) {
       this.rankingCounts[3] += 1;
+      return;
     }
 
     if (
