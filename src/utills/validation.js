@@ -9,8 +9,8 @@ class Validation {
 	 */
 	async purchaseAmountInputValidation(amount) {
 		let isThousand = true;
-
 		amount % 1000 != 0 ? isThousand = false : isThousand = true;
+
 		return isThousand;
 	}
 }
