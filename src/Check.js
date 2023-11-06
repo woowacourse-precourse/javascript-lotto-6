@@ -3,6 +3,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 class Check {
   countArray = [0, 0, 0, 0, 0];
   totalEarned = 0;
+  earnRatio;
   checkCount(checkLotto) {
     switch (checkLotto.win) {
       case 3:
@@ -47,12 +48,16 @@ class Check {
     const SIX_CORRECT = `6개 일치 (2,000,000,000원) - ${count}개`;
     return SIX_CORRECT;
   }
-  earnRate(countArray) {
+  earnTotal(countArray) {
     const PRICE_MONEY = [5000, 50000, 1500000, 30000000, 2000000000];
     countArray.forEach((count, index) => {
       this.totalEarned += count * PRICE_MONEY[index];
     });
   }
+  calculateEarnRatio(payedMoney) {
+    this.earnRatio = ((this.totalEarned / payedMoney) * 100).toFixed(1);
+  }
+
   printCount(countArray) {
     const WINNING_MSG = '\n당첨 통계\n---';
     MissionUtils.Console.print(WINNING_MSG);
