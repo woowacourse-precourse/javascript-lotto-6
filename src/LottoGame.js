@@ -1,10 +1,25 @@
 import IOUtils from "./IOUtils.js";
+import {lottoPrize, prizeAmount} from "./LottoConstant.js";
 
 class LottoGame {
+    #lottoResultCount;
+
+    constructor() {
+        this.#lottoResultCount = this.#initializeResultCount();
+    }
+
+    #initializeResultCount() {
+        const lottoResultCount = {};
+        Object.keys(prizeAmount).forEach((key) => {
+            lottoResultCount[key] = 0;
+        })
+        return lottoResultCount;
+    }
+
     async inputWinningNumbers() {
         const winningNumbers = await IOUtils.input("당첨 번호를 입력해 주세요.");
         this.#validateWinningNumbers(winningNumbers);
-        return winningNumbers;
+        return new Set(winningNumbers.split(",").map(Number));
     }
 
     #validateWinningNumbers(winningNumbers) {
@@ -44,6 +59,27 @@ class LottoGame {
         if (bonusNumber < 1 || bonusNumber > 45) {
             throw new Error("보너스 번호는 1과 45 사이여야 합니다.");
         }
+    }
+
+    #matchAllLottoTicket(winningNumbers, bonusNumber, lottoTickets) {
+            lottoTickets.forEach((lottoTicket) => {
+                const matchedCount = this.#getMatchedCount(winningNumbers);
+                const isMatchedBonus = this.#isMatchedBonus(bonusNumber);
+
+                if (matchedCount === 5) {
+                    return this.#lottoResultCount[lottoPrize[5](isMatchedBonus)] += 1;
+                }
+
+                this.#lottoResultCount[lottoPrize[matchedCount]] += 1;
+        })
+    }
+
+    #getMatchedCount(winningNumbers, lottoTicket) {
+        return lottoTicket.numbers.filter((number) => winningNumbers.has(number)).length;
+    }
+
+    #isMatchedBonus(bonusNumber, lottoTicket) {
+        return lottoTicket.numbers.includes(bonusNumber);
     }
 
 
