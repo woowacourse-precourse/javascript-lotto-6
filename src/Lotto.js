@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import { LOTTO_NUMBER, ERROR_MESSAGE } from "./Constant.js";
+import { LOTTO, ERROR_MESSAGE } from "./Constant.js";
 
 class Lotto {
 	#numbers;
@@ -17,11 +17,11 @@ class Lotto {
 
 	generateLotto() {
 		const lotto = [];
-		while (computer.length < LOTTO_NUMBER.numbers) {
+		while (computer.length < LOTTO.count) {
 			const number = Random.pickNumberInRange(
-				LOTTO_NUMBER.minRange,
-				LOTTO_NUMBER.maxRange,
-				LOTTO_NUMBER.numbers
+				LOTTO.minRange,
+				LOTTO.maxRange,
+				LOTTO.count
 			);
 			if (!lotto.includes(number)) {
 				lotto.push(number);

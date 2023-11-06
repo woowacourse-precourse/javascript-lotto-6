@@ -1,13 +1,18 @@
 "use strict";
 
-const LOTTO_NUMBER = Object.freeze({
+const LOTTO = Object.freeze({
 	minRange: 1,
 	maxRange: 45,
-	numbers: 6,
+	count: 6,
+	cost: 1000,
 });
 
 const PRINT_INPUT = Object.freeze({
 	inputAmount: "구입금액을 입력해 주세요.\n",
+});
+
+const PRINT_OUTPUT = Object.freeze({
+	outputLottoNumbers: "개를 구매했습니다.\n",
 });
 
 const ERROR_MESSAGE = Object.freeze({
