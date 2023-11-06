@@ -49,7 +49,7 @@ class App {
     const lottoTickets = [];
     for (let i = 0; i < numberOfTickets; i++) {
       const ticketNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      const sortedTicketNumbers = ticketNumbers.sort((a, b) => a - b); // 숫자를 오름차순으로 정렬
+      const sortedTicketNumbers = ticketNumbers.sort((a, b) => a - b);
       const lottoTicket = new Lotto(sortedTicketNumbers);
       lottoTickets.push(lottoTicket);
     }
@@ -62,6 +62,32 @@ class App {
 
   checkLottoTickets(lottoTickets, winningNumbers, bonusNumber) {
     // 로또 번호 확인
+    const winnings = {
+      1: { count: 0, prize: 2000000000 },
+      2: { count: 0, prize: 30000000 },
+      3: { count: 0, prize: 1500000 },
+      4: { count: 0, prize: 50000 },
+      5: { count: 0, prize: 5000 },
+    };
+  
+    for (const ticket of lottoTickets) {
+      const ticketNumbers = ticket.getNumbers();
+      const intersection = ticketNumbers.filter(number => winningNumbers.includes(number));
+  
+      if (intersection.length === 6) {
+        winnings[1].count++;
+      } else if (intersection.length === 5 && ticketNumbers.includes(bonusNumber)) {
+        winnings[2].count++;
+      } else if (intersection.length === 5) {
+        winnings[3].count++;
+      } else if (intersection.length === 4) {
+        winnings[4].count++;
+      } else if (intersection.length === 3) {
+        winnings[5].count++;
+      }
+    }
+  
+    return winnings;
   }  
   
   displayWinnings(winnings, numberOfTickets) {
