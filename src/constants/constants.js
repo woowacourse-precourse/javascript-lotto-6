@@ -1,9 +1,15 @@
-const MESSAGE = Object.freeze({
+const STATMESSAGE = Object.freeze({
   fifth: '3개 일치 (5,000원) - ',
   fourth: '4개 일치 (50,000원) - ',
   third: '5개 일치 (1,500,000원) - ',
   second: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
   first: '6개 일치 (2,000,000,000원) - ',
+});
+
+const VIEWMESSAGE = Object.freeze({
+  purchseInput: '구입 금액을 입력해주세요.\n',
+  lottoInput: '당첨 번호를 입력해주세요.\n',
+  bonusInput: '보너스 번호를 입력해주세요.\n',
 });
 
 const STATISTICS = Object.freeze([
@@ -15,10 +21,10 @@ const STATISTICS = Object.freeze([
 ]);
 
 const CHARACTER = Object.freeze({
-  returnpreffix: '총 수익률은 ',
-  returnsuffix: '%입니다.',
-  purchasesuffix: '개를 구매했습니다.',
-  countsuffix: '개',
+  returnPreffix: '총 수익률은 ',
+  returnSuffix: '%입니다.',
+  purchaseSuffix: '개를 구매했습니다.',
+  countSuffix: '개',
 });
 
 const NUMBER = Object.freeze({
@@ -29,4 +35,4 @@ const NUMBER = Object.freeze({
   lottoprice: 1000,
 });
 
-export { MESSAGE, STATISTICS, CHARACTER, NUMBER };
+export { STATMESSAGE, STATISTICS, CHARACTER, NUMBER, VIEWMESSAGE };

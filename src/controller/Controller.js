@@ -3,7 +3,7 @@ import UserLotto from '../model/UserLotto.js';
 import Statistics from '../model/statistics.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import { MESSAGE, CHARACTER } from '../constants/constants.js';
+import { STATMESSAGE, CHARACTER } from '../constants/constants.js';
 
 class controller {
   #inputView;
@@ -33,7 +33,7 @@ class controller {
 
   priintUserLottoNumbers() {
     this.#outputView.print(
-      `${this.#userLotto.getNumberOfPurchase()}${CHARACTER.purchasesuffix}`
+      `${this.#userLotto.getNumberOfPurchase()}${CHARACTER.purchaseSuffix}`
     );
     this.#userLotto.getUserLottoNumbers().forEach((userLottoNumber) => {
       const message = userLottoNumber.getLottoNumber().join(`, `);
@@ -70,12 +70,16 @@ class controller {
   printStatistics() {
     this.#statistics.getStatistics().forEach((statistic) => {
       this.#outputView.print(
-        `${MESSAGE[statistic.rank]}${statistic.count}${CHARACTER.countsuffix}`
+        `${STATMESSAGE[statistic.rank]}${statistic.count}${
+          CHARACTER.countSuffix
+        }`
       );
     });
+
     this.#outputView.print(
-      `${CHARACTER.returnpreffix}${this.#statistics.getRateOfReturns()}${
-        CHARACTER.returnsuffix}`
+      `${CHARACTER.returnPreffix}${this.#statistics.getRateOfReturns()}${
+        CHARACTER.returnSuffix
+      }`
     );
   }
 }
