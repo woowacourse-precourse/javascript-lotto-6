@@ -13,7 +13,7 @@ const InputView = Object.freeze({
   },
 
   async readWinningNumbers() {
-    const answer = await InputView.readLine(MESSAGES.readPurchaseMoney);
+    const answer = await InputView.readLine(MESSAGES.readWinningNumbers);
     return answer;
   },
 });

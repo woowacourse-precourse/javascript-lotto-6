@@ -1,3 +1,4 @@
+import SYSTEM from '../constants/system.js';
 import { Lotto } from '../domain/index.js';
 import { LottoPurchaseService, LottoRewardsService } from '../service/index.js';
 import { InputView, OutputView } from '../view/index.js';
@@ -15,6 +16,7 @@ class Controller {
 
   async start() {
     await this.#withRetry(() => this.#createUserLotto());
+    await this.#withRetry(() => this.#createWinningLottoNumbers());
   }
 
   async #createUserLotto() {
@@ -34,7 +36,17 @@ class Controller {
    */
   #printLottos(lottos) {
     this.#view.output.lottoQuantity(lottos.length);
-    lottos.forEach((lotto) => this.#view.output.userLotto(lotto));
+    this.#view.output.userLotto(lottos);
+  }
+
+  async #createWinningLottoNumbers() {
+    const winningLottoNumbers = await this.#readWinningLottoNumbers();
+    this.#service.lottoRewards.createWinningLotto(winningLottoNumbers);
+  }
+
+  async #readWinningLottoNumbers() {
+    const winningLottoNumbers = await this.#view.input.readWinningNumbers();
+    return Array.from(winningLottoNumbers.split(SYSTEM.lottoNumberSeparator), Number);
   }
 
   async #withRetry(action) {

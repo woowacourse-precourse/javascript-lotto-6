@@ -10,12 +10,8 @@ const OutputView = Object.freeze({
     Console.print(MESSAGES.printLottoQuantity(quantity));
   },
 
-  userLotto(lotto) {
-    Console.print(MESSAGES.printLotto(lotto));
-  },
-
-  lineBreak() {
-    OutputView.print('\n');
+  userLotto(lottos) {
+    Console.print(MESSAGES.printLottos(lottos));
   },
 
   error(error) {
