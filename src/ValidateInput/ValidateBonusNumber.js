@@ -11,5 +11,4 @@ export const validateBonusNumber = (input) => {
   } else if (input < MIN_NUMBER || input > MAX_NUMBER) {
     throw new Error(RANGE_ERROR);
   }
-  return true;
 };

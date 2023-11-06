@@ -1,19 +1,18 @@
 import { printMessage } from "./PrintMessages.js";
-import { getInput } from "./GetInput.js";
-import { calcPurchaseQuantity } from "./calcPurchaseQuantity.js";
+import { calcPurchaseQuantity } from "./Calc/CalcPurchaseQuantity.js";
 import {
   PURCHASE_AMOUNT_INPUT_REQUEST,
   WINNING_NUMBERS_INPUT_REQUEST,
   BONUS_NUMBER_INPUT_REQUEST,
 } from "./constants.js";
 import { getValidPurchaseAmount } from "./ValidateInput/ValidatePurchaseAmount.js";
-import { validateWinningNumber } from "./ValidateInput/ValidateWinningNumber.js";
-import { validateBonusNumber } from "./ValidateInput/ValidateBonusNumber.js";
-import { calcResult } from "./CalcResult.js";
+import { getValidBonusNumber } from "./GetValidBonusNumber.js";
+import { calcResult } from "./Calc/CalcResult.js";
 import { printResult } from "./PrintResult.js";
-import { calcProfitRate } from "./CalcProfitRate.js";
+import { calcProfitRate } from "./Calc/CalcProfitRate.js";
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import LottoMachine from "./LottoMachine.js";
 
 class App {
   purchase_amount;
@@ -43,24 +42,25 @@ class App {
     // 3. 구매 수량 구하기
     this.purchase_quantity = calcPurchaseQuantity(this.purchase_amount);
     // 4. 로또 발행하기
-    const LOTTO = new Lotto();
-    this.lotto_list = LOTTO.returnLotto(this.purchase_quantity);
+    const LOTTO_MACHINE = new LottoMachine();
+    this.lotto_list = LOTTO_MACHINE.returnLotto(this.purchase_quantity);
     // 5. 구매 수량 출력하기
-    printMessage("\n");
-    printMessage(`${this.purchase_quantity}개를 구매했습니다.`);
+    printMessage(`\n${this.purchase_quantity}개를 구매했습니다.`);
     // 6. 발행한 로또 모두 출력하기
-    this.lotto_list.map((lotto) => printMessage(lotto));
+    this.lotto_list.map((lotto) => printMessage(`[${lotto.join(", ")}]`));
     // 7. 당첨 번호 입력 안내 문구 출력
-    printMessage("\n");
-    printMessage(WINNING_NUMBERS_INPUT_REQUEST);
+    printMessage(`\n${WINNING_NUMBERS_INPUT_REQUEST}`);
     // 8. 당첨 번호 입력받기
-    let number = await getInput(validateWinningNumber);
-    this.winning_number = number.split(",").map(Number);
+    const input = await Console.readLineAsync("");
+    const numbers = input.split(",");
+    const LOTTO = new Lotto(numbers);
+
+    let number = LOTTO.returnNumbers(numbers);
+    this.winning_number = number.map(Number);
     // 9. 보너스 번호 입력 안내 문구 출력
-    printMessage("\n");
-    printMessage(BONUS_NUMBER_INPUT_REQUEST);
+    printMessage(`\n${BONUS_NUMBER_INPUT_REQUEST}`);
     // 10. 보너스 번호 입력받기
-    this.bonus_number = await getInput(validateBonusNumber);
+    this.bonus_number = await getValidBonusNumber();
     // 11. 발행한 로또 번호와 당첨 번호 비교하기
     const result = calcResult(
       this.lotto_list,

@@ -16,8 +16,7 @@ function form(idx, n) {
 }
 
 export const printResult = (input) => {
-  printMessage("\n");
-  printMessage(WINNING_STATISTICS_PRINT_MESSAGE);
+  printMessage(`\n${WINNING_STATISTICS_PRINT_MESSAGE}`);
   printMessage("---");
 
   let reversed = input.reverse();

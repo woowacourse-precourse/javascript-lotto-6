@@ -1,33 +1,59 @@
-import { Random } from "@woowacourse/mission-utils";
-import { MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH } from "./constants.js";
+import { Console } from "@woowacourse/mission-utils";
+import {
+  TYPE_ERROR,
+  RANGE_ERROR,
+  DUPLICATE_ERROR,
+  LOTTO_LENGTH_ERROR,
+  LOTTO_LENGTH,
+  MIN_NUMBER,
+  MAX_NUMBER,
+} from "./constants.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
+    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  #lottoGenerator() {
-    const LOTTO = [];
-    while (LOTTO.length < LOTTO_LENGTH) {
-      const RANDOM_NUMBER = Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
-      if (!LOTTO.includes(RANDOM_NUMBER)) LOTTO.push(RANDOM_NUMBER);
+  #validateNumberLength(numbers) {
+    if (numbers.length !== LOTTO_LENGTH) {
+      throw new Error(LOTTO_LENGTH_ERROR);
     }
-    return LOTTO.sort((a, b) => a - b);
   }
 
-  returnLotto(input) {
-    const LOTTO_LIST = [];
-    let count = 0;
+  #validateIsNumber(numbers) {
+    numbers.forEach((number) => {
+      if (isNaN(+number)) {
+        throw new Error(TYPE_ERROR);
+      }
+    });
+  }
 
-    while (count < input) {
-      const LOTTO = this.#lottoGenerator();
-      LOTTO_LIST.push(LOTTO);
-      count++;
+  #validateNumberRange(numbers) {
+    numbers.forEach((number) => {
+      if (number < MIN_NUMBER || number > MAX_NUMBER) {
+        throw new Error(RANGE_ERROR);
+      }
+    });
+  }
+
+  #validateNumberDuplicate(numbers) {
+    if (numbers.length !== new Set(numbers).size) {
+      throw new Error(DUPLICATE_ERROR);
     }
+  }
 
-    return LOTTO_LIST;
+  #validate(numbers) {
+    this.#validateNumberLength(numbers);
+    this.#validateNumberRange(numbers);
+    this.#validateNumberDuplicate(numbers);
+    this.#validateIsNumber(numbers);
+  }
+
+  returnNumbers() {
+    return this.#numbers;
   }
 }
 
