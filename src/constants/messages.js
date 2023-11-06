@@ -17,6 +17,7 @@ const MESSAGES = Object.freeze({
   },
   readPurchaseMoney: '구입금액을 입력해 주세요.\n',
   readWinningNumbers: '당첨 번호를 입력해 주세요.\n',
+  readBonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export default MESSAGES;

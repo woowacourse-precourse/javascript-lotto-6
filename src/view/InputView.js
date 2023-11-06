@@ -16,6 +16,11 @@ const InputView = Object.freeze({
     const answer = await InputView.readLine(MESSAGES.readWinningNumbers);
     return answer;
   },
+
+  async readBonusNumber() {
+    const answer = await InputView.readLine(MESSAGES.readBonusNumber);
+    return answer;
+  },
 });
 
 export default InputView;
