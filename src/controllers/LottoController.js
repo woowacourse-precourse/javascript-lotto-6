@@ -44,7 +44,7 @@ class LottoController {
 
     makeRandomLotto() {
         //로또 생성
-        const lotto = new Lotto();
+        const lotto = new GetLotto();
         this.lottos = lotto.generateLottoNumbers(this.lottoCount);
         this.printRandomLotto();
     }
