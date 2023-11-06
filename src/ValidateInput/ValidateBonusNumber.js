@@ -3,7 +3,7 @@ import {
   RANGE_ERROR,
   MIN_NUMBER,
   MAX_NUMBER,
-} from "../constants.js";
+} from "../utils/constants.js";
 
 export const validateBonusNumber = (input) => {
   if (isNaN(+input)) {

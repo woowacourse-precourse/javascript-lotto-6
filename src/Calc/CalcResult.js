@@ -1,4 +1,4 @@
-import { PRICE_LENGTH } from "../constants.js";
+import { PRICE_LENGTH } from "../utils/constants.js";
 
 export const calcResult = (lotto_list, winning_number, bonus_number) => {
   let result = Array.from({ length: PRICE_LENGTH }, () => 0);

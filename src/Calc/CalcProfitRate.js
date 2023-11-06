@@ -4,7 +4,7 @@ import {
   THIRED_PRIZE,
   FOURTH_PRIZE,
   FIFTH_PRIZE,
-} from "../constants.js";
+} from "../utils/constants.js";
 
 export const calcProfitRate = (result, purchase_amount) => {
   let total_profit = 0;

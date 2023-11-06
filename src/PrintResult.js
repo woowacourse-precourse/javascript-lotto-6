@@ -1,5 +1,5 @@
-import { WINNING_STATISTICS_PRINT_MESSAGE } from "./constants.js";
-import { printMessage } from "./PrintMessages.js";
+import { WINNING_STATISTICS_PRINT_MESSAGE } from "./utils/constants.js";
+import { printMessage } from "./utils/print.js";
 
 function form(idx, n) {
   if (idx === 0) {

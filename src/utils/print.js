@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
 
-export const printMessage = (message) => {
+export const print = (message) => {
   Console.print(message);
 };

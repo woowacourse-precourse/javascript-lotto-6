@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import {
   TYPE_ERROR,
   RANGE_ERROR,
@@ -7,7 +6,7 @@ import {
   LOTTO_LENGTH,
   MIN_NUMBER,
   MAX_NUMBER,
-} from "./constants.js";
+} from "./utils/constants.js";
 
 class Lotto {
   #numbers;

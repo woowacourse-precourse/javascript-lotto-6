@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import { MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH } from "./constants.js";
+import { MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH } from "./utils/constants.js";
 
 class LottoMachine {
   #lottoGenerator() {

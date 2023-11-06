@@ -3,7 +3,7 @@ import {
   UNIT_ERROR,
   MIN_INPUT_ERROR,
   PURCHASE_AMOUNT_UNIT,
-} from "../constants.js";
+} from "../utils/constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 export const getValidPurchaseAmount = async () => {

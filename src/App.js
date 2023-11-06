@@ -1,10 +1,10 @@
-import { printMessage } from "./PrintMessages.js";
+import { print } from "./utils/print.js";
 import { calcPurchaseQuantity } from "./Calc/CalcPurchaseQuantity.js";
 import {
   PURCHASE_AMOUNT_INPUT_REQUEST,
   WINNING_NUMBERS_INPUT_REQUEST,
   BONUS_NUMBER_INPUT_REQUEST,
-} from "./constants.js";
+} from "./utils/message.js";
 import { getValidPurchaseAmount } from "./ValidateInput/ValidatePurchaseAmount.js";
 import { getValidBonusNumber } from "./GetValidBonusNumber.js";
 import { calcResult } from "./Calc/CalcResult.js";
@@ -36,7 +36,7 @@ class App {
   }
 
   async play() {
-    printMessage(PURCHASE_AMOUNT_INPUT_REQUEST);
+    print(PURCHASE_AMOUNT_INPUT_REQUEST);
     // 2. 구입 금액 입력받기
     this.purchase_amount = await getValidPurchaseAmount();
     // 3. 구매 수량 구하기
@@ -45,11 +45,11 @@ class App {
     const LOTTO_MACHINE = new LottoMachine();
     this.lotto_list = LOTTO_MACHINE.returnLotto(this.purchase_quantity);
     // 5. 구매 수량 출력하기
-    printMessage(`\n${this.purchase_quantity}개를 구매했습니다.`);
+    print(`\n${this.purchase_quantity}개를 구매했습니다.`);
     // 6. 발행한 로또 모두 출력하기
-    this.lotto_list.map((lotto) => printMessage(`[${lotto.join(", ")}]`));
+    this.lotto_list.map((lotto) => print(`[${lotto.join(", ")}]`));
     // 7. 당첨 번호 입력 안내 문구 출력
-    printMessage(`\n${WINNING_NUMBERS_INPUT_REQUEST}`);
+    print(`\n${WINNING_NUMBERS_INPUT_REQUEST}`);
     // 8. 당첨 번호 입력받기
     const input = await Console.readLineAsync("");
     const numbers = input.split(",");
@@ -58,7 +58,7 @@ class App {
     let number = LOTTO.returnNumbers(numbers);
     this.winning_number = number.map(Number);
     // 9. 보너스 번호 입력 안내 문구 출력
-    printMessage(`\n${BONUS_NUMBER_INPUT_REQUEST}`);
+    print(`\n${BONUS_NUMBER_INPUT_REQUEST}`);
     // 10. 보너스 번호 입력받기
     this.bonus_number = await getValidBonusNumber();
     // 11. 발행한 로또 번호와 당첨 번호 비교하기
@@ -72,7 +72,7 @@ class App {
     // 13. 총 수익률 구하기
     const profit = calcProfitRate(result, this.purchase_amount);
     // 14. 총 수익률 출력하기
-    printMessage(`총 수익률은 ${profit}%입니다.`);
+    print(`총 수익률은 ${profit}%입니다.`);
   }
 }
 
