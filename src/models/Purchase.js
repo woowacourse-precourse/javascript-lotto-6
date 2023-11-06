@@ -1,30 +1,39 @@
 import { Random } from "@woowacourse/mission-utils";
 
-import { lottoInfo } from "../constants";
+import { error, lottoInfo } from "../constants";
 import Lotto from "./Lotto";
 
 const purchase = {
   countMoney: function (money) {
-    if (money % lottoInfo.PRICE !== 0) {
-      // 예외 처리
-    }
-    return money / lottoInfo.PRICE;
+    validate(money);
+    return parseInt(money / lottoInfo.PRICE);
   },
 
-  getLottos: function (number) {
+  validate: function (money) {
+    if (money % lottoInfo.PRICE !== 0)
+      throw new Error(error.NOT_DIVEDED_BY_1000);
+  },
+
+  getLottos: function (count) {
     let lottos = [];
 
-    for (let i = 0; i < number; i++) {
-      const numbers = Random.pickUniqueNumbersInRange(
-        lottoInfo.START_INCLUSIVE,
-        lottoInfo.END_INCLUSIVE,
-        lottoInfo.COUNT
-      );
-      const sorted = this.sortInAscendingOrder(numbers);
-      lottos.push(new Lotto(sorted));
+    for (let i = 0; i < count; i++) {
+      const numbers = this.pickLottoNumbers();
+      lottos.push(new Lotto(numbers));
     }
 
     return lottos;
+  },
+
+  pickLottoNumbers: function () {
+    const numbers = Random.pickUniqueNumbersInRange(
+      lottoInfo.START_INCLUSIVE,
+      lottoInfo.END_INCLUSIVE,
+      lottoInfo.COUNT
+    );
+    const sorted = this.sortInAscendingOrder(numbers);
+
+    return sorted;
   },
 
   sortInAscendingOrder: function (arr) {
