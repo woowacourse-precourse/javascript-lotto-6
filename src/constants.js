@@ -17,6 +17,9 @@ export const ERROR_MESSAGE = Object.freeze({
   TARGET_NUM_MIN_MAX: '[ERROR] 당첨 번호는 1에서 45사이의 정수여야 합니다.',
   TARGET_NUM_STRING: '[ERROR] 당첨 번호는 문자가 아닌 숫자를 입력해야 합니다.',
   TARGET_NUM_SAME: '[ERROR] 당첨 번호는 중복되지 않아야 합니다.',
+  BONUS_NUM_MIN_MAX: '[ERROR] 보너스 번호는 1에서 45사이의 정수여야 합니다.',
+  BONUS_NUM_STRING: '[ERROR] 보너스 번호는 숫자여야 합니다.',
+  BONUS_NUM_DUPLICATE: '[ERROR] 보너스 번호는 당첨번호와 중복되지 않아야 합니다.'
 })
 
 export const PRICE_UNIT = 1000;

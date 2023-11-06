@@ -12,11 +12,13 @@ import {
 } from "./constants.js";
 import Lotto from "./Lotto.js";
 import TargetNumber from "./TargetNumber.js";
+import BonusNumber from "./BonusNumber.js";
 
 class App {
   lottoPrice;
   lottiTickets;
   targetNumber;
+  bonusNumber;
 
   constructor() {
     this.lottoPrice = 0;
@@ -35,7 +37,9 @@ class App {
       await this.getTargetNumber();
     }
 
-    Console.print( this.targetNumber.getWinNumber());
+    while(!this.bonusNumber){
+      await this.getBonusNumber();
+    }
   }
 
   async getLottoPrice() {
@@ -96,6 +100,26 @@ class App {
 
       if (isNaN(number)) throw ERROR_MESSAGE.TARGET_NUM_STRING;
     })
+  }
+
+  async getBonusNumber() {
+    const input = await Console.readLineAsync(USER_INPUT.BONUS_NUMBER);
+    const bonusNumber = Number(input);
+
+    try{
+      this.checkBonusNumber(bonusNumber);
+      this.bonusNumber = new BonusNumber(bonusNumber);
+    }catch (error){
+      Console.print(error);
+    }
+  }
+
+  checkBonusNumber(bonusNumber) {
+    if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) throw ERROR_MESSAGE.BONUS_NUM_MIN_MAX;
+    
+    if (isNaN(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_STRING;
+    
+    if (this.targetNumber.hasNumber(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_DUPLICATE;
   }
 }
 

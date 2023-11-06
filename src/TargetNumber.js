@@ -5,8 +5,12 @@ class TargetNumber {
     this.#targetNumber = numbers;
   }
 
-  getWinNumber() {
+  getTargetNumber() {
     return this.#targetNumber;
+  }
+
+  hasNumber(number) {
+    return this.#targetNumber.includes(number);
   }
 }
 
