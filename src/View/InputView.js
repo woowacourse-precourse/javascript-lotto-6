@@ -5,7 +5,7 @@ import COMMON from '../constants/common.js';
 class InputView {
   static async inputMoney() {
     const money = await Console.readLineAsync(MESSAGE.input.money);
-    return money;
+    return Number(money);
   }
 
   static async inputWinningNumbers() {
