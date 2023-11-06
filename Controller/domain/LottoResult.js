@@ -61,7 +61,7 @@ const LottoResult = {
 
     profitPercent = (totalProfit / (purchaseAmount * 1000)) * 100;
 
-    return profitPercent;
+    return profitPercent.toFixed(1);
   },
 };
 
