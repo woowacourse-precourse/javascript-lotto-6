@@ -63,7 +63,7 @@ class View {
     });
   }
 
-  static printReturn(calculateEarningResults, inputMoney) {
+  static calculateReturn(calculateEarningResults, inputMoney) {
     const totalReturn = calculateEarningResults.totalEarnings;
     const isValidCount = calculateEarningResults.countResults;
     if (isValidCount) {

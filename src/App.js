@@ -22,7 +22,7 @@ class App {
 
     MissionUtils.Console.print(View.WIN_STATISTICS_HEADER);
     View.printRewardStatistics(result);
-    const returnPrint = View.printReturn(result, inputMoney);
+    const returnPrint = View.calculateReturn(result, inputMoney);
     MissionUtils.Console.print(`총 수익률은 ${returnPrint}입니다.`);
   }
 }
