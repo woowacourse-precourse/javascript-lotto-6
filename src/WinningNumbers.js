@@ -1,3 +1,5 @@
+import { ERROR } from './Constant.js'
+
 class WinningNumbers{
     #numbers;
     #bonus;
@@ -13,7 +15,9 @@ class WinningNumbers{
     }
 
     #validateNumbers(numbers) {
-
+        if (Number.isNaN(numbers)) {
+            throw new Error(ERROR.WINNING_NUMBER_IS_NAN);
+        }
     }
 
     #validateBonusNumber(bonus) {
