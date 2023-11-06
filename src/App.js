@@ -5,17 +5,24 @@ class App {
   amount;
   lottos = [];
   lottosCount;
+  winningNumbers;
 
   async play() {
     await this.start();
     this.getLottos();
     this.printLottos();
+    await this.getWinningNumbers();
   }
 
   async start() {
     await this.enterAmount();
     this.validateAmount();
     MissionUtils.Console.print('');
+  }
+
+  async getWinningNumbers() {
+    await this.enterWinningNumbers();
+    this.validateWinningNumbers();
   }
 
   async enterAmount() {
@@ -58,6 +65,39 @@ class App {
       i++;
     }
     MissionUtils.Console.print('');
+  }
+
+  async enterWinningNumbers() {
+    const numbers = await MissionUtils.Console.readLineAsync(
+      '당첨 번호를 입력해 주세요.\n'
+    );
+    this.winningNumbers = numbers.split(',').map(Number);
+  }
+
+  validateWinningNumbers() {
+    if (!this.checkNumbersRange(this.winningNumbers)) {
+      throw new Error(
+        '[ERROR] 당첨 번호는 1부터 45까지의 숫자형태로 입력해야 합니다. '
+      );
+    } else if (this.winningNumbers.length !== 6) {
+      throw new Error(
+        '[ERROR] 당첨 번호는 쉼표로 구분해 6자리로 입력해야 합니다.'
+      );
+    } else if (this.isDuplicateNumbers(this.winningNumbers)) {
+      throw new Error(
+        '[ERROR] 당첨 번호는 중복되지 않는 숫자 6개로 입력해야 합니다.'
+      );
+    }
+  }
+
+  checkNumbersRange(numbers) {
+    return numbers.every((item) => /^([1-9]|[1-3][0-9]|4[0-5])$/.test(item));
+  }
+
+  isDuplicateNumbers(numbers) {
+    return numbers.some((number) => {
+      return numbers.indexOf(number) !== numbers.lastIndexOf(number);
+    });
   }
 }
 
