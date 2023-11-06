@@ -9,6 +9,7 @@ class App {
 
     let tickets = issueTickets(lottoMoney);
     printTicketInformation(tickets);
+    let winningNumbers = await inputWinningNumbers();
   }
 }
 
@@ -45,4 +46,9 @@ function printTicketInformation(tickets) {
   });
 }
 
+async function inputWinningNumbers() {
+  let numberString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+  let winningNumbers = new WinningNumbers(numberString);
+  return winningNumbers;
+}
 export default App;
