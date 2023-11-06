@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { SCOREBOARD } from "./Constant.js";
 
 class LottoView {
   createPurchaseInfoString(numberOfSets, lottoNumbers) {
@@ -16,21 +17,19 @@ class LottoView {
     Object.entries(statistics).forEach(([key, value]) => {
       switch (key) {
         case "3":
-          statisticsStrings.push(`3개 일치 (5,000원) - ${value}개`);
+          statisticsStrings.push(`${SCOREBOARD.MATCH_3} - ${value}개`);
           break;
         case "4":
-          statisticsStrings.push(`4개 일치 (50,000원) - ${value}개`);
+          statisticsStrings.push(`${SCOREBOARD.MATCH_4} - ${value}개`);
           break;
         case "5":
-          statisticsStrings.push(`5개 일치 (1,500,000원) - ${value}개`);
+          statisticsStrings.push(`${SCOREBOARD.MATCH_5} - ${value}개`);
           break;
         case "5+bonus":
-          statisticsStrings.push(
-            `5개 일치, 보너스 볼 일치 (30,000,000원) - ${value}개`
-          );
+          statisticsStrings.push(`${SCOREBOARD.MATCH_5_BONUS} - ${value}개`);
           break;
         case "6":
-          statisticsStrings.push(`6개 일치 (2,000,000,000원) - ${value}개`);
+          statisticsStrings.push(`${SCOREBOARD.MATCH_6} - ${value}개`);
           break;
         case "totalPrize":
           break;

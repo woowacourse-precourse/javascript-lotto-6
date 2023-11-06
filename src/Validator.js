@@ -1,7 +1,9 @@
+import { ERRORS } from "./Constant.js";
+
 const Validator = {
   validateAmount(amount) {
     if (amount <= 0 || amount % 1000 !== 0) {
-      throw new Error("[ERROR] 올바른 구입 금액을 입력하세요");
+      throw new Error(ERRORS.INPUT_LOTTO_AMOUNT_INVALID);
     }
   },
 
@@ -10,11 +12,11 @@ const Validator = {
       numbers.length !== 6 ||
       !numbers.every((number) => !isNaN(number) && number >= 1 && number <= 45)
     ) {
-      throw new Error("[ERROR] 올바른 로또 번호를 입력하세요.");
+      throw new Error(ERRORS.INPUT_LOTTO_INVALID);
     }
 
     if (new Set(numbers).size !== 6) {
-      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
+      throw new Error(ERRORS.INPUT_LOTTO_DUPLICATED);
     }
   },
 
@@ -25,7 +27,7 @@ const Validator = {
       bonusNumber > 45 ||
       lottoNumbersArray.includes(bonusNumber)
     ) {
-      throw new Error("[ERROR] 올바른 보너스 번호를 입력하세요.");
+      throw new Error(ERRORS.INPUT_LOTTO_BONUS_INVALID);
     }
   },
 };

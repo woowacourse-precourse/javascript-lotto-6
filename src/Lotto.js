@@ -1,4 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
+import { ERRORS } from "./Constant.js";
 
 class Lotto {
   #numbers;
@@ -10,12 +11,12 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERRORS.INPUT_LOTTO_NOT_ENOUGH);
     }
 
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== 6) {
-      throw new Error("[ERROR] 중복된 로또 번호가 있습니다.");
+      throw new Error(ERRORS.INPUT_LOTTO_DUPLICATED);
     }
   }
 
