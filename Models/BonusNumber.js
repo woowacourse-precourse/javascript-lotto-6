@@ -1,4 +1,4 @@
-import ValidationUtils from '../utils/ValidationUtils';
+import ValidationUtils from '../utils/ValidationUtils.js';
 
 const { checkIsInRange, checkIsNumber } = ValidationUtils;
 
@@ -20,7 +20,7 @@ class BonusNumber {
   }
 
   getBonusNumber() {
-    return this.#number;
+    return Number(this.#number);
   }
 }
 
