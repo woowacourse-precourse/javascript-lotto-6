@@ -46,11 +46,11 @@ describe("로또 클래스 테스트", () => {
     test("matchNumbers 메서드를 호출하면 전달받은 번호와 몇 개가 일치하는지 반환하다.", () => {
       const mockLottoWinningNumbers = {
         lottoWinningNumbers: [2, 3, 4, 5, 6, 7],
-        bonousNumber: 1,
+        bonousNumber: [1],
       };
       const mockMatchResult = {
-        lottoWinningNumbers: 5,
-        bonousNumber: 1,
+        lottoWinningNumbersMatchCount: 5,
+        bonousNumberMatchCount: 1,
       };
       const matchResult = lotto.matchNumbers(mockLottoWinningNumbers);
       expect(matchResult).toEqual(mockMatchResult);
