@@ -47,8 +47,10 @@ class LottoGame {
     let parsedNumbers = numbers
       .split(',')
       .map((number) => number.trim())
-      .filter((number) => number !== '');
-    this.#winning_numbers = new Lotto(parsedNumbers);
+      .filter((number) => number !== '')
+      .map((number) => parseInt(number));
+    const winning_lotto = new Lotto(parsedNumbers);
+    this.#winning_numbers = winning_lotto.getNumbers();
   };
 
   getBonusNumber = async () => {
@@ -64,6 +66,50 @@ class LottoGame {
     this.#bonus_number = bonus;
   };
 
+  calculateWinningStats = () => {
+    let stats = [0, 0, 0, 0, 0];
+    for (let ticket of this.#purchased_tickets) {
+      let winningCount = 0;
+      for (let number of ticket) {
+        if (this.#winning_numbers.includes(number)) {
+          winningCount++;
+        }
+      }
+      if (winningCount === 5) {
+        if (ticket.includes(this.#bonus_number)) {
+          stats[3]++;
+        }
+      }
+      stats[winningCount - 3]++;
+    }
+    return stats;
+  };
+
+  calculateProfit = (stats) => {
+    let profit = 0;
+    const rewards = [5000, 50000, 1500000, 30000000, 2000000000];
+    for (let i = 0; i < stats.length; i++) {
+      profit += stats[i] * rewards[i];
+    }
+    profit = (profit / (this.#purchase_amount * 1000)) * 100;
+    profit = parseFloat(profit.toFixed(2));
+    return profit;
+  };
+
+  printWinningStats = () => {
+    const stats = this.calculateWinningStats();
+    const profit = this.calculateProfit(stats);
+    MissionUtils.Console.print(Messages.WINNING_STATISTICS_PRINT);
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${stats[0]}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${stats[1]}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${stats[2]}개`);
+    MissionUtils.Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${stats[3]}개`
+    );
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${stats[4]}개`);
+    MissionUtils.Console.print(`총 수익률은 ${profit}%입니다.`);
+  };
+
   playGame = async () => {
     try {
       await this.getPurchaseAmount();
@@ -71,6 +117,7 @@ class LottoGame {
       this.printPurchasedTickets(this.#purchased_tickets);
       await this.getWinningNumbers();
       await this.getBonusNumber();
+      this.printWinningStats();
     } catch (error) {
       throw new Error(error);
     }
