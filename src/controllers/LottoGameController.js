@@ -14,9 +14,12 @@ class LottoGameController {
   async start() {
     await this.setMoneyAmountFromInput();
     const tickets = this.#lottoPublisher.publishLottos();
+    this.#lottoService.setLottoTickets(tickets);
     this.#view.printLottoPurchaseResult(tickets);
     await this.setWinningNumbersFromInput();
     await this.setBonusNumbersFromInput();
+    const { results, profitRate } = this.executeLottoMatch();
+    this.displayLottoResult(results, profitRate);
   }
 
   async #retryOnFailure(func) {
@@ -49,6 +52,17 @@ class LottoGameController {
       this.#lottoService.setBonusNumber(bonusNumber);
       this.#view.printNewLine();
     });
+  }
+
+  executeLottoMatch() {
+    const results = this.#lottoService.calculateResults();
+    const profitRate = this.#lottoService.calculateProfitRate();
+    return { results, profitRate };
+  }
+
+  displayLottoResult(results, profitRate) {
+    this.#view.printLottoStats(results);
+    this.#view.printProfitRate(profitRate);
   }
 }
 
