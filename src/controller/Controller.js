@@ -39,4 +39,18 @@ class controller {
       this.#outputView.print(`[${message}]`);
     });
   }
+
+  async setWinningLottoNumbers() {
+    const lottoNumbers = await this.#inputView.readLottoNumber();
+
+    try {
+      this.#winningLotto = new Lotto(
+        Array.from(lottoNumbers.split(','), Number)
+      );
+      await this.#setBonusNumber();
+    } catch (error) {
+      this.#outputView.print(error.message);
+      this.setWinningLottoNumbers();
+    }
+  }
 }
