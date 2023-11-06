@@ -15,7 +15,7 @@ class App {
 
   //플레이
   async play() {
-    await this.buyLottos();
+    this.buyLottos();
   }
 
   //로또 구매 및 로또 장 수
