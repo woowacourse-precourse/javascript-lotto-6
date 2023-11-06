@@ -1,3 +1,6 @@
+import ErrorMessage from "../constants/ErrorMessage.js";
+import Constants from "../constants/Constants.js";
+
 class Lotto {
   #numbers;
 
@@ -7,16 +10,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== Constants.LOTTO_LENGTH) {
+      throw new Error(ErrorMessage.LENGTH);
     }
     const SET_NUM = new Set([...numbers]);
-    if (SET_NUM.size !== numbers.length) {
-      throw new Error("[ERROR] 중복된 값을 입력하지 마세요");
+    if (SET_NUM.size !== Constants.LOTTO_LENGTH) {
+      throw new Error(ErrorMessage.DUPLICATE);
     }
     numbers.forEach(v => {
-      if (isNaN(v)) throw new Error("[ERROR] 숫자만 입력");
-      if (v < 1 && v>45) throw new Error("[ERROR] 1부터 45까지만 가능");
+      if (isNaN(v)) throw new Error(ErrorMessage.ONLY_NUMBER);
+      if (v < Constants.LOTTO_START && v>Constants.LOTTO_END) throw new Error(ErrorMessage.OUT_RANGE);
     });
   }
 

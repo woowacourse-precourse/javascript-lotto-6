@@ -1,3 +1,5 @@
+import Constants from "../constants/Constants.js";
+
 class ScoreMyLottos {
     #MY_LOTTO;
     #ANSWER;
@@ -33,12 +35,12 @@ class ScoreMyLottos {
         return 0;
     }
     countEarning() {
-        let earning = (2000000000 * this.#RESULT[0])
-            + (30000000 * this.#RESULT[1])
-            + (1500000 * this.#RESULT[2])
-            + (50000 * this.#RESULT[3])
-            + (5000 * this.#RESULT[4]);
-        this.#EARNING = (earning / (this.#MY_LOTTO.length * 1000) * 100).toFixed(1);
+        let earning = (Constants.PRICE_FIRST * this.#RESULT[0])
+            + (Constants.PRICE_SECOND * this.#RESULT[1])
+            + (Constants.PRICE_THIRD * this.#RESULT[2])
+            + (Constants.PRICE_FORTH * this.#RESULT[3])
+            + (Constants.PRICE_FIFTH * this.#RESULT[4]);
+        this.#EARNING = (earning / (this.#MY_LOTTO.length * Constants.LOTTO_PRICE) * 100).toFixed(Constants.EARNING_RADIX_POINT);
     }
 
     getResult() {

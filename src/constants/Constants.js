@@ -1,0 +1,14 @@
+const Constants = {
+    LOTTO_START: 1,
+    LOTTO_END: 45,
+    LOTTO_LENGTH: 6,
+    LOTTO_PRICE: 1000,
+    PRICE_FIRST: 2000000000,
+    PRICE_SECOND: 30000000,
+    PRICE_THIRD: 1500000,
+    PRICE_FORTH: 50000,
+    PRICE_FIFTH: 5000,
+    EARNING_RADIX_POINT: 1,
+
+};
+export default Constants;

@@ -1,25 +1,28 @@
+import ErrorMessage from "../constants/ErrorMessage.js";
+import Constants from "../constants/Constants.js";
+
 const validator = {
     moneyValidator(MONEY) {
         const MONEY_ARR = MONEY.split("");
         MONEY_ARR.forEach(v => {
-            if (isNaN(v)) throw new Error("[ERROR] 문자열입력 금지");
+            if (isNaN(v)) throw new Error(ErrorMessage.ONLY_NUMBER);
         })
-        if (parseInt(MONEY) % 1000 !== 0) throw new Error("[ERROR] 천원 단위만");
+        if (parseInt(MONEY) % Constants.LOTTO_PRICE !== 0) throw new Error(ErrorMessage.THOUSAND);
     },
     bonusValidator(BONUS) {
         const BONUS_ARR = BONUS.split("");
-        if (BONUS*1 !== parseInt(BONUS)) throw new Error("[ERROR] 정수만 입력");
+        if (BONUS*1 !== parseInt(BONUS)) throw new Error(ErrorMessage.ONLY_INTEGER);
         BONUS_ARR.forEach(v => {
-            if (isNaN(v)) throw new Error("[ERROR] 한개의 숫자만 입력");
+            if (isNaN(v)) throw new Error(ErrorMessage.BONUS_ONE_NUM);
         })
-        if (parseInt(BONUS) <1 || parseInt(BONUS)  > 45) throw new Error("[ERROR] 1이상 45이하만");
+        if (parseInt(BONUS) <Constants.LOTTO_START || parseInt(BONUS)  > Constants.LOTTO_END) throw new Error(ErrorMessage.OUT_RANGE);
     },
     inputValidator(ANSWER) {
         const INPUT_ARR = ANSWER.split(",");
         INPUT_ARR.forEach(v => {
-            if (isNaN(v)) throw new Error("[ERROR] 숫자만 입력");
-            if (v*1 !== parseInt(v)) throw new Error("[ERROR] 정수만 입력");
-            if (parseInt(v) <1 || parseInt(v)  > 45) throw new Error("[ERROR] 1이상 45이하만");
+            if (isNaN(v)) throw new Error(ErrorMessage.ONLY_NUMBER);
+            if (v*1 !== parseInt(v)) throw new Error(ErrorMessage.ONLY_INTEGER);
+            if (parseInt(v) <Constants.LOTTO_START || parseInt(v)  > Constants.LOTTO_END) throw new Error(ErrorMessage.OUT_RANGE);
         });
     },
 };

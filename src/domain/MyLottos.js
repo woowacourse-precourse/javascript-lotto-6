@@ -1,4 +1,5 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
+import Constants from "../constants/Constants.js";
 
 class MyLottos {
     #MY_LOTTO;
@@ -12,7 +13,7 @@ class MyLottos {
     makeLottoArray(LOTTO_NUM) {
         let my_lotto_arr = [];
         while (my_lotto_arr.length !== LOTTO_NUM) {
-            my_lotto_arr.push(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
+            my_lotto_arr.push(MissionUtils.Random.pickUniqueNumbersInRange(Constants.LOTTO_START, Constants.LOTTO_END, Constants.LOTTO_LENGTH).sort((a, b) => a - b));
         }
         return my_lotto_arr;
     };
