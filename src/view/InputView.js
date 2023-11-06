@@ -1,27 +1,31 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import {
+  validateBonusNumber,
+  validateWinningNumbers,
+  validateMoney
+} from '../utils/Validation';
 
 const { Console } = MissionUtils;
 class InputView {
   static async inputMoney() {
     const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    // 금액 입력 예외 처리
+    validateMoney(money);
     return money;
   }
 
   static async inputNumbers() {
-    const winningnumbers =
+    const winningNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     Console.print('\n');
-    // 당첨 번호 입력 예외처리
-    return winningnumbers.split(',');
+    validateWinningNumbers(winningNumbers);
+    return winningNumbers.split(',');
   }
 
   static async inputBonusNumber() {
     const bonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     Console.print('\n');
-
-    // 보너스 번호 입력 예외 처리
+    validateBonusNumber(bonusNumber);
     return bonusNumber;
   }
 }
