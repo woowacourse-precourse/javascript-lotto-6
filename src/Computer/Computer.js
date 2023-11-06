@@ -1,21 +1,24 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { PurchaseLotto } from "./PurchaseLotto";
+import { PurChaseLotto } from "../PurchaseLotto.js";
 
 export class Computer {
-constructor(n) {
-this.numbers = Array.from({ length: n }, () => this.getRandomNum());
-}
-
-getRandomNum() {
-    const number = [];
-    while (number.length < 6) {
-        const randomNum = MissionUtils.Random.pickNumberInRange(1, 45);
-        if (!number.includes(randomNum)) {
-            number.push(randomNum);
-        }
-    }
-    console.log(number);
-    return number;
+    purchaseLotto = new PurChaseLotto();
     
-}
+
+    constructor(PurChaseLotto) {
+    this.numbers = Array.from({ length: PurChaseLotto }, () => this.getRandomNum());
+    }
+    
+    getRandomNum() {
+        const number = [];
+       
+        while (number.length < 6) {
+            const randomNum = MissionUtils.Random.pickNumberInRange(1, 45);
+            if (!number.includes(randomNum)) {
+                number.push(randomNum);
+            }
+        }
+        
+        return number;    
+    }
 }
