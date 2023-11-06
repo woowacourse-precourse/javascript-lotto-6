@@ -17,11 +17,16 @@ const PRICE = {
   price: 1000,
 };
 
+const DELIMITER = {
+  delimiter: ',',
+};
+
 const LOTTO = Object.freeze({
   ...LOTTO_NUMBER,
   ...LOTTO_COUNT,
   ...MATCH,
   ...PRICE,
+  ...DELIMITER,
 });
 
 export default LOTTO;
