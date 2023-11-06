@@ -38,7 +38,7 @@ class Store {
 
   #calculateLottoAmount() {
     const lottoAmount = this.#money / 1000;
-    return lottoAmunt;
+    return lottoAmount;
   }
 
   issueLotto() {
