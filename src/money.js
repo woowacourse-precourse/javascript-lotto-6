@@ -1,39 +1,18 @@
-/* eslint-disable */
+/* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-import Input from './input.js';
 
 // 로또구입
-class NumOfBuy {
+class Money {
   #money;
 
-  constructor() {
-    this.#money = new Input();
+  constructor(money) {
+    this.#validCheck(money);
   }
 
-  async run() {
-    const inputMoney = await this.validCheck();
-    const numOfBuy = this.#claculateNumOfBuy(inputMoney);
-
-    return numOfBuy; // 숫자형
-  }
-
-  async validCheck() {
-    let inputMoney;
-    let valid = true;
-
-    while (valid) {
-      inputMoney = await this.#money.inputMoney();
-
-      try {
-        if (this.#validateMoneyIsNum(inputMoney)) throw new Error('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
-        if (this.#validateMoneyUnit(inputMoney)) throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
-        if (this.#checkNotZero(inputMoney)) throw new Error(`[ERROR] 구입금액은 0보다 커야합니다.`);
-        valid = false;
-      } catch (error) {
-        continue;
-      }
-    }
-    return inputMoney;
+  #validCheck(inputMoney) {
+    if (this.#validateMoneyIsNum(inputMoney)) throw new Error('[ERROR] 구입금액은 숫자만 입력 가능합니다.');
+    if (this.#validateMoneyUnit(inputMoney)) throw new Error(`[ERROR] 구입금액은 천원 단위로 입력 가능합니다.`);
+    if (this.#checkNotZero(inputMoney)) throw new Error(`[ERROR] 구입금액은 0보다 커야합니다.`);
   }
 
   // 구입금액 유효성 확인
@@ -74,4 +53,4 @@ class NumOfBuy {
   }
 }
 
-export default NumOfBuy;
+export default Money;
