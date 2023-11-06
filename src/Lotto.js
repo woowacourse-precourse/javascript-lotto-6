@@ -1,4 +1,7 @@
 import { Random, Console } from '@woowacourse/mission-utils';
+import { checkValue } from './libs/checkValue';
+import { LOTTO_NUMBER } from './libs/constants';
+import { throwError } from './libs/throwError';
 
 class Lotto {
   #numbers;
@@ -9,12 +12,20 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    // if (numbers.length !== 6) {
+    //   throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    // }
+    const { errorMessage } = checkValue.numbers(numbers, LOTTO_NUMBER);
+
+    if (errorMessage) {
+      throwError(errorMessage);
     }
   }
 
-  // TODO: 추가 기능 구현
+  //오름차순 정렬
+  ascendingNumbers() {
+    this.#numbers.sort((a, b) => a - b);
+  }
 }
 
 export default Lotto;

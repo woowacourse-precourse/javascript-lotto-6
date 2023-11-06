@@ -7,6 +7,7 @@ import {
 } from './constants';
 
 export const checkValue = {
+  //구매금액
   purchaseAmount(purchaseAmount) {
     if (isNaN(purchaseAmount))
       return { errorMessage: createErrorMessage.type(PURCHASE_AMOUNT) };
@@ -16,9 +17,10 @@ export const checkValue = {
       return { errorMessage: ERROR_MESSAGE.UNIT_AMOUNT };
 
     //모두 통과하면 넘어가기
-    return { errorMsg: undefined };
+    return { errorMessage: undefined };
   },
 
+  //로또번호
   numbers(numbers, name) {
     if (!isNumberType(numbers))
       return { errorMessage: createErrorMessage.type(name) };
@@ -31,9 +33,10 @@ export const checkValue = {
       return { errorMessage: createErrorMessage.range(name) };
 
     //모두 통과하면 넘어가기
-    return { errorMsg: undefined };
+    return { errorMessage: undefined };
   },
 
+  //보너스번호
   bonusNumber(number, winningNumbers) {
     if (isNaN(number))
       return { errorMessage: createErrorMessage.type(BONUS_NUMBER) };
@@ -43,7 +46,7 @@ export const checkValue = {
       return { errorMessage: createErrorMessage.range(BONUS_NUMBER) };
 
     //모두 통과하면 넘어가기
-    return { errorMsg: undefined };
+    return { errorMessage: undefined };
   },
 };
 
