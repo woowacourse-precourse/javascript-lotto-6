@@ -13,6 +13,10 @@ function readLineLottoCount() {
   return MissionUtils.Console.readLineAsync(INPUT_MESSAGE.LOTTO_NUMBER);
 }
 
+function readLineBonusCount() {
+  return MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
+}
+
 function consoleWinner() {
   return MissionUtils.Console.print(WINNER_MESSAGE.WINLOG);
 }
@@ -40,6 +44,7 @@ export {
   inputLottoNum,
   parchasedLotto,
   readLineLottoCount,
+  readLineBonusCount,
   consoleWinner,
   consoleError,
   winCount,
