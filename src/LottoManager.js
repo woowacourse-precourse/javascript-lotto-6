@@ -27,20 +27,17 @@ class LottoManager {
         if (this.count === 0) {
             this.myLottoNumbers = [sortedNumbers]
         } else {
-            this.myLottoNumbers = [this.myLottoNumbers, sortedNumbers];
+            this.myLottoNumbers = [...this.myLottoNumbers, sortedNumbers];
         }
-        MissionUtils.Console.print(sortedNumbers);
+        const sorted = sortedNumbers.join(', ');
+        MissionUtils.Console.print("[" + sorted + "]");
     }
 
     async getBonusNumber(winningNumbers) {
         const bonusNumber =
             await inputHandler.getInput(INPUT_MESSAGE.BONUS_NUMBER);
-        validation.isValidBonusNumber(winningNumbers, bonusNumber)
-        this.bonusNumber = bonusNumber;
-    }
-
-    get MyLottoNumbers() {
-        return this.myLottoNumbers;
+        await validation.isValidBonusNumber(winningNumbers, bonusNumber)
+        return parseInt(bonusNumber);
     }
 }
 

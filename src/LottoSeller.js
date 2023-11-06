@@ -18,12 +18,11 @@ class LottoSeller {
     }
 
     #printTicketsNumber() {
-        MissionUtils.Console.print(`\n${this.lottoTickets}개를 구매했습니다.`);
+        MissionUtils.Console.print(`${this.lottoTickets}개를 구매했습니다.`);
     }
 
 
     #validate(money) {
-        console.log(money);
         if (money % LOTTO_INFO.LOTTO_PRICE !== 0 || isNaN(money))
             throw new Error("[ERROR] 유효한 숫자가 아닙니다.");
     }

@@ -4,15 +4,21 @@ import LottoSeller from "./LottoSeller.js";
 import LottoManager from "./LottoManager.js";
 import Lotto from "./Lotto.js";
 import ResultBoard from "./ResultBoard.js";
+import validation from "./utils/valiidation.js";
+import valiidation from "./utils/valiidation.js";
 
 class App {
-
-
     async play() {
         const lottoManager = new LottoManager();
-        const moneyInput =
-            await inputHandler.getInput(INPUT_MESSAGE.MONEY);
-
+        let moneyInput;
+        //돈 잘못 입력시 다시 인풋
+        while (true) {
+            moneyInput =
+                await inputHandler.getInput(INPUT_MESSAGE.MONEY);
+            if (valiidation.isValidMoney(moneyInput) !== 'retry')
+                break;
+        }
+        validation.isValidNumber(moneyInput)
         const lottoSeller = await new LottoSeller(parseInt(moneyInput));
         await lottoSeller.buyLotto();
         const lottoTickets = lottoSeller.lottoTicketsNumber;
@@ -23,15 +29,16 @@ class App {
 
         const lotto = new Lotto(numbersInput.split(','));
 
-
         const winningNumbers =
             numbersInput.split(',').map((input) => parseInt(input))
-        
-        await lottoManager.getBonusNumber(winningNumbers);
 
+
+        const bonusInput = await inputHandler.getInput(INPUT_MESSAGE.BONUS_NUMBER);
+        await valiidation.isValidBonusNumber(winningNumbers, parseInt(bonusInput));
 
         const resultBoard = new ResultBoard(lottoManager.myLottoNumbers);
-        resultBoard.decideWinning(lotto.winningNumbers, lottoManager.bonusNumber)
+
+        resultBoard.decideWinning(winningNumbers, bonusInput)
         resultBoard.printResultTable();
 
         resultBoard.calculateEarning(lottoSeller.lottoTickets)
