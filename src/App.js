@@ -62,8 +62,8 @@ class App {
   }
 
   async printprofitResult() {
-    this.profit;
-    Console.print(GAME_MESSAGES.TOTAL_PROFITABILITY);
+    this.profit = await this.lotto.getProfit(this.money, this.lottoRanks);
+    Console.print(GAME_MESSAGES.TOTAL_PROFITABILITY.replace("%s", this.profit.toFixed(1)));
   }
 }
 

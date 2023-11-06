@@ -42,7 +42,14 @@ class Lotto {
     return ranksCounts;
   }
 
-  getReturnOnInvestment;
+  getProfit(money, lottoRanks) {
+    let profit = 0;
+    lottoRanks.forEach((rankCount, idx) => {
+      profit += rankCount * RANKS.RANK_PRICE[idx];
+    });
+    profit /= money;
+    return profit;
+  }
 }
 
 export default Lotto;

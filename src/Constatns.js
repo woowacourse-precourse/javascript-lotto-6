@@ -12,6 +12,7 @@ export const RANKS = {
   RANK_THIRD: 3,
   RANK_FOURTH: 4,
   RANK_FIFTH: 5,
+  RANK_PRICE: [5000, 50000, 30000000, 1500000, 2000000000],
 };
 
 export const GAME_MESSAGES = {
@@ -28,7 +29,7 @@ export const GAME_MESSAGES = {
     "5개 일치 (1,500,000원) -",
     "6개 일치 (2,000,000,000원) -",
   ],
-  TOTAL_PROFITABILITY: "총 수익률은 %s입니다.",
+  TOTAL_PROFITABILITY: "총 수익률은 %s%입니다.",
   COUNT: "개",
 };
 
