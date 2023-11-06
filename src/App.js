@@ -3,11 +3,24 @@ import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE } from "./constants/constant.js";
 
 class App {
   async play() {
-    // 보유 금액 입력
-    const inputMoney = await Console.readLineAsync(MESSAGE.START);
-    const userMoney = Number(inputMoney)
-    if (isNaN(userMoney)) {
-      throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
+    let userMoney;
+
+    while (1) {
+      try {
+        // 보유 금액 입력
+        const inputMoney = await Console.readLineAsync(MESSAGE.START);
+        
+        if (isNaN(inputMoney) || inputMoney === null) {
+          throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
+        }
+        userMoney = Number(inputMoney)
+        if (userMoney % 1000 > 0 || userMoney <= 0) {
+          throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
+        }
+        break
+      } catch (error) {
+        Console.print(ERROR_MESSAGE.INPUT_USERMONEY_ERROR)
+      }
     }
     const randomCount = (userMoney / 1000);
     Console.print(MESSAGE_INPUT(randomCount).COUNT+'\n');
