@@ -1,5 +1,6 @@
 const MIN = 1;
 const MAX = 45;
+const FULL_NUMBER_LENGTH = 6;
 
 export default class ValidationService {
   isNumber(num) {
@@ -17,5 +18,9 @@ export default class ValidationService {
         return num >= MIN && num <= MAX;
       })
     );
+  }
+
+  hasSixNumbers(ticket) {
+    return ticket.length === FULL_NUMBER_LENGTH;
   }
 }
