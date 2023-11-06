@@ -11,11 +11,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO.LENGTH) {
-      throw new Error(MESSAGES.ERROR.INVAILD_LOTTO_LENGTH);
-    }
     if (!isOnlyNumber(numbers.join(""))) {
       throw new Error(MESSAGES.ERROR.PLEASE_ONLY_NUMBER);
+    }
+    if (numbers.length !== LOTTO.LENGTH) {
+      throw new Error(MESSAGES.ERROR.INVAILD_LOTTO_LENGTH);
     }
     if (!isInRangeNumber(numbers)) {
       throw new Error(MESSAGES.ERROR.INVAILD_LOTTO_NUMBER);

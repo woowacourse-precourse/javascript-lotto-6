@@ -2,6 +2,9 @@ import { LOTTO } from "../constants/Standard.js";
 
 function isOnlyNumber(string) {
   // 입력: 문자열, 출력: boolean
+  if (string.length === 0) {
+    return true;
+  }
   return /^[0-9]+$/.test(string);
 }
 
