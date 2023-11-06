@@ -25,6 +25,14 @@ class LottoController {
     await this.#purchaseLottos(price);
   }
 
+  async #purchaseLottos(input) {
+    this.#count = new Money(input);
+    this.#lottos = new Lottos(this.#count.getAmount());
+    OutputView.printPurchaseAmount(this.#count.getAmount());
+    OutputView.printLottos(this.#lottos.getLottos());
+    await this.#inputWinningNumber();
+  }
+
   async #inputWinningNumber() {
     const winningNumber = await InputView.readWinningNumber();
     this.#winningNumber = new WinningNumber(winningNumber);
@@ -38,14 +46,6 @@ class LottoController {
     this.#bonusNumber = new BonusNumber(bonusNumber);
     this.#winningStatistic = new Rank(this.#lottos.getLottos());
     this.#displayResult();
-  }
-
-  async #purchaseLottos(input) {
-    this.#count = new Money(input);
-    this.#lottos = new Lottos(this.#count.getAmount());
-    OutputView.printPurchaseAmount(this.#count.getAmount());
-    OutputView.printLottos(this.#lottos.getLottos());
-    await this.#inputWinningNumber();
   }
 
   #displayResult() {
