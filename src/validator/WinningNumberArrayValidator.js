@@ -3,8 +3,8 @@ import errorMessage from '../constants/errorMessage.js';
 
 class WinningNumberArrayValidator {
 	validateNotNumber(winningNumberArray) {
-		winningNumberArray.forEach((winningNumber) => {
-			if (Number.isNaN(winningNumber)) {
+		winningNumberArray.forEach(winningNumber => {
+			if (Number.isNaN(Number(winningNumber))) {
 				throw new Error(errorMessage.NOT_NUMBER);
 			}
 		});
@@ -24,8 +24,24 @@ class WinningNumberArrayValidator {
 
 	validateNumberRange(winningNumberArray) {
 		winningNumberArray.forEach(winningNumber => {
-			if (winningNumber < lottoNumber.firstNumber || winningNumber > lottoNumber.lastNumber) {
+			if (Number(winningNumber) < lottoNumber.firstNumber || Number(winningNumber) > lottoNumber.lastNumber) {
 				throw new Error(errorMessage.OUT_OF_RANGE);
+			}
+		});
+	}
+
+	validateNaturalNumber(winningNumberArray) {
+		winningNumberArray.forEach(winningNumber => {
+			if (!Number.isInteger(Number(winningNumber))) {
+				throw new Error(errorMessage.NOT_NATURAL_NUMBER);
+			}
+		});
+	}
+	
+	validateUnusualCase(winningNumberArray) {
+		winningNumberArray.forEach(winningNumber => {
+			if (winningNumber !== Number(winningNumber).toString()) {
+				throw new Error(errorMessage.UNUSUAL_INPUT);
 			}
 		});
 	}
@@ -36,6 +52,8 @@ class WinningNumberArrayValidator {
 		winningNumberArrayValidator.validateArrayLength(winningNumberArray);
 		winningNumberArrayValidator.validateDuplicatedNumber(winningNumberArray);
 		winningNumberArrayValidator.validateNumberRange(winningNumberArray);
+		winningNumberArrayValidator.validateNaturalNumber(winningNumberArray);
+		winningNumberArrayValidator.validateUnusualCase(winningNumberArray);
 	}
 }
 
