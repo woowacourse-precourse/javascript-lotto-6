@@ -34,10 +34,17 @@ const isLottoRange = (inputArray) => {
   });
 };
 
+const isLottoDuplicate = (inputArray) => {
+  const set = new Set(inputArray);
+  if (set.size !== inputArray.length) {
+    throw new Error(MESSAGE_ERROR.lottoDuplicateNumber);
+  }
+};
+
 export function isValidWinningLotto(input) {
   const inputArray = input.split(',');
-  console.log('inputArray: ', inputArray);
 
   isNumberOrComma(input);
   isLottoRange(inputArray);
+  isLottoDuplicate(inputArray);
 }
