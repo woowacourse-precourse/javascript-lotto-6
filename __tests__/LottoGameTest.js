@@ -8,7 +8,7 @@ import { ERROR_MESSAGE } from '../src/constants/messages.js';
 describe('LottoGame 클래스 테스트', () => {
   test('구입 금액에 해당하는 만큼 로또를 발행한다.', () => {
     const game = new LottoGame();
-    game.purchaseLotto(2000);
+    game.createLotto(2000);
     const lottos = game.getLottos();
 
     expect(lottos.length).toBe(2);
@@ -19,7 +19,7 @@ describe('LottoGame 클래스 테스트', () => {
     Random.pickUniqueNumbersInRange.mockReturnValue([35, 1, 4, 25, 44, 12]);
 
     const game = new LottoGame();
-    game.purchaseLotto(1000);
+    game.createLotto(1000);
     const lottos = game.getLottos();
 
     expect(lottos).toEqual([[1, 4, 12, 25, 35, 44]]);

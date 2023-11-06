@@ -10,8 +10,10 @@ import Output from './Output.js';
 class LottoGame {
   #lottos;
   #winningLotto;
+  #purchaseAmount;
 
   constructor() {
+    this.#purchaseAmount = 0;
     this.#lottos = [];
     this.#winningLotto = null;
     this.input = new Input();
@@ -19,17 +21,34 @@ class LottoGame {
   }
 
   async start() {
-    const purchaseAmount = await this.input.getPurchaseAmount();
-    this.purchaseLotto(purchaseAmount);
-    this.output.printPurchaseLottos(this.getLottos());
+    await this.purchaseLotto();
     await this.createWinningLotto();
     const rankCountResult = this.compareLotto(
       this.#lottos,
       this.#winningLotto.getNumbers(),
       this.#winningLotto.getBonusNumber(),
     );
-    const returnRate = this.calculateRate(purchaseAmount, rankCountResult);
+    const returnRate = this.calculateRate(
+      this.#purchaseAmount,
+      rankCountResult,
+    );
     this.output.printStatistics(rankCountResult, returnRate);
+  }
+
+  async purchaseLotto() {
+    const purchaseAmount = await this.input.getPurchaseAmount();
+    this.#purchaseAmount = purchaseAmount;
+    this.createLotto(purchaseAmount);
+    this.output.printPurchaseLottos(this.getLottos());
+  }
+
+  createLotto(amount) {
+    const lottoCount = amount / LOTTO.price;
+
+    for (let i = 0; i < lottoCount; i++) {
+      const lottoNumbers = createLottoNumbers();
+      this.#lottos.push(new Lotto(lottoNumbers));
+    }
   }
 
   async createWinningLotto() {
@@ -41,15 +60,6 @@ class LottoGame {
     } catch (error) {
       Console.print(error.message);
       await this.createWinningLotto();
-    }
-  }
-
-  purchaseLotto(amount) {
-    const lottoCount = amount / LOTTO.price;
-
-    for (let i = 0; i < lottoCount; i++) {
-      const lottoNumbers = createLottoNumbers();
-      this.#lottos.push(new Lotto(lottoNumbers));
     }
   }
 
