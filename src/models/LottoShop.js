@@ -12,11 +12,11 @@ class LottoShop {
 
   constructor(winningNumber, bonusNumber) {
     this.#validateWinningNumber(winningNumber);
-    this.#validateBonusNumber(bonusNumber);
     this.#winningNumber = winningNumber
       .split(',')
       .sort((x, y) => x - y)
       .map((string) => Number(string));
+    this.#validateBonusNumber(bonusNumber);
     this.#bonusNumber = Number(bonusNumber);
     this.#result = [0, 0, 0, 0, 0];
   }
@@ -41,7 +41,8 @@ class LottoShop {
       bonusNumber.length !== 1 ||
       Number.isNaN(bonusNumber) ||
       Number(bonusNumber) < LOTTO.MIN_NUMBER ||
-      Number(bonusNumber) > LOTTO.MAX_NUMBER
+      Number(bonusNumber) > LOTTO.MAX_NUMBER ||
+      this.#winningNumber.includes(Number(bonusNumber))
     ) {
       throw new Error('[ERROR] 보너스번호가 잘못된 형식입니다.');
     }
