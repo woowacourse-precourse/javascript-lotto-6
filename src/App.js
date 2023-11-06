@@ -23,7 +23,14 @@ class App {
   inputWinningNums() {
     Console.readLineAsync(GAME_MESSAGE.WINNING_NUM, (winningNums) => {
       this.game.setWinningNums(winningNums);
+      this.inputBonusNum();
     });
+  }
+
+  inputBonusNum() {
+    Console.readLineAsync(GAME_MESSAGE.BONUS_NUM, (bonusNum) =>
+      this.game.setBonusNum(bonusNum)
+    );
   }
 }
 

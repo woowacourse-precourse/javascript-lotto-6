@@ -50,6 +50,17 @@ class LottoGame {
   validateWinningNums(nums) {
     validation.checkNumberList(nums);
   }
+
+  setBonusNum(num) {
+    num = Number(num);
+    this.validateBonusNum(num);
+
+    this.bonusNum = num;
+  }
+
+  validateBonusNum(num) {
+    validation.checkBonusNum(num, this.winningNumList);
+  }
 }
 
 module.exports = LottoGame;
