@@ -1,19 +1,24 @@
-import PurchaseAmount from '../PurchaseAmount.js';
+import LottoModel from '../model/index.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 
 class LottoController {
+  #model;
+
+  constructor() {
+    this.#model = new LottoModel();
+  }
+
   async startGame() {
-    const purchaseAmount = await this.#purchaseLotto();
+    const userLottos = await this.#purchaseLotto();
   }
 
   async #purchaseLotto() {
     try {
       const purchaseAmount = await InputView.readPurchaseAmount();
+      const userLottos = this.#model.generateLotto(purchaseAmount);
 
-      PurchaseAmount.of(purchaseAmount);
-
-      return purchaseAmount;
+      return userLottos;
     } catch (error) {
       OutputView.print(error.message);
 

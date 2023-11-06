@@ -29,6 +29,10 @@ class PurchaseAmount {
   static of(input) {
     return new PurchaseAmount(input);
   }
+
+  getLottoCount() {
+    return this.#purchaseAmount / PURCHASE_AMOUNT.divisor;
+  }
 }
 
 export default PurchaseAmount;
