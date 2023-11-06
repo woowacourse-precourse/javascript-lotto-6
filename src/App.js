@@ -7,14 +7,6 @@ const WINNING_COUNT = Array(5).fill(0);
 
 class App {
   async play() {
-    try {
-      await this.startGame();
-    } catch (error) {
-      throw new Error("[ERROR]");
-    }
-  }
-  
-  async startGame(){
     const purchaseAmount = await this.getPurchaseCount();
     const purchaseCount = parseInt(purchaseAmount)/1000;
     const purchaseLotto = this.printPurchaseLotto(purchaseCount);
@@ -29,15 +21,6 @@ class App {
 
   async getPurchaseCount(){
     const purchaseAmount = await GetInputValue.getPurchaseAmount();
-    if(purchaseAmount === ''){
-      throw new Error(ERROR_MESSAGE.NO_INPUT);
-    }
-    else if(isNaN(purchaseAmount)){
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-    }
-    else if(parseInt(purchaseAmount)%1000!==0){
-      throw new Error(ERROR_MESSAGE.WRONG_UNIT_OF_MONEY);
-    }
     return purchaseAmount;
   }
 
