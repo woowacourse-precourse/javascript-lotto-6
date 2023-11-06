@@ -37,7 +37,7 @@ class App {
     const winningNumbers = await this.#checkWinningNumbers();
     const bonusNumber = await this.#checkBonusNumber(winningNumbers);
 
-    const result = this.#lottoGame.resultOfWinningDetails(winningNumbers, bonusNumber);
+    const result = this.#lottoGame.compareLottoResult(winningNumbers, bonusNumber);
     OutputView.printResult(result);
   }
 

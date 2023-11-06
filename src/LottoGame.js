@@ -17,7 +17,7 @@ class LottoGame {
     return lottos;
   }
 
-  resultOfWinningDetails(winnigNumbers, bonusNumber) {
+  compareLottoResult(winnigNumbers, bonusNumber) {
     const combinationMachine = new CombinationMachine(winnigNumbers, bonusNumber);
     const result = this.#user.checkResult(combinationMachine);
 
