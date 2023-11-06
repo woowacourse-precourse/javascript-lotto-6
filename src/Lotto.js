@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { RANKS } from "./Constatns.js";
+import { RANKS, ERROR_MESSAGES } from "./Constatns.js";
 
 class Lotto {
   #numbers;
@@ -12,6 +12,11 @@ class Lotto {
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== 6) {
+      throw new Error("[ERROR] 중복된 번호가 있습니다.");
     }
   }
 
@@ -47,7 +52,7 @@ class Lotto {
     lottoRanks.forEach((rankCount, idx) => {
       profit += rankCount * RANKS.RANK_PRICE[idx];
     });
-    profit /= money;
+    profit = (profit * 100) / money;
     return profit;
   }
 }
