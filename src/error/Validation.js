@@ -37,10 +37,9 @@ export const validateBonusNumber = (bonus, luckyNumberArray) => {
     throw new CustomError(LOTTO_ERROR.form);
   }
 
-  if (
-    Number(bonus) > LOTTO_RULE.maxNumber
-    || Number(bonus) < LOTTO_RULE.minNumber
-  ) throw new Error(LOTTO_ERROR.luckyRange);
+  if (Number(bonus) > LOTTO_RULE.maxNumber || Number(bonus) < LOTTO_RULE.minNumber) {
+    throw new Error(LOTTO_ERROR.luckyRange);
+  }
 
   if (luckyNumberArray.includes(Number(bonus))) {
     throw new CustomError(LOTTO_ERROR.bonusConflict);

@@ -1,7 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { LOTTO_PLAY } from "../constants/Messeage.js";
 import { validatePurchaseAmount, validateBonusNumber, validateLuckyNumbers } from "../error/Validation.js";
-
 import { showLottoTicket, showStatisticsResult } from "./LottoStamper.js";
 import LotteryMachine from "../domain/LotteryMachine.js";
 import LottoReader from "../domain/LottoReader.js";

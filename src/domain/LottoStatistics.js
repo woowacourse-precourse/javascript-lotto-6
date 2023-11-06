@@ -35,7 +35,7 @@ class LottoStatistics {
     })
   }
 
-  getFinalAmount() {
+  #getFinalAmount() {
     const finalAmount = this.#prizeArray.reduce((acc,cur,index) => {
       return acc + (cur * this.#rankingStatusBoard[index + 1]);
     }, 0);
@@ -43,9 +43,24 @@ class LottoStatistics {
     return finalAmount;
   }
 
+  #getProfitRate() {
+    return getEarningRate(this.#purchaseAmount, this.#getFinalAmount());
+  }
+
   getResult() {
-    const earningRate = getEarningRate(this.#purchaseAmount, this.getFinalAmount());
     
+    return [
+      this.#rankingStatusBoard[LOTTO_RANK.theFifth],
+      this.#rankingStatusBoard[LOTTO_RANK.theFourth],
+      this.#rankingStatusBoard[LOTTO_RANK.theThird],
+      this.#rankingStatusBoard[LOTTO_RANK.theSecond],
+      this.#rankingStatusBoard[LOTTO_RANK.theFirst],
+      this.#getProfitRate()
+    ];
+    
+    /*
+    const earningRate = getEarningRate(this.#purchaseAmount, this.getFinalAmount());
+
     return [
       `3개 일치 (5,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theFifth]}개`,
       `4개 일치 (50,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theFourth]}개`,
@@ -53,8 +68,10 @@ class LottoStatistics {
       `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theSecond]}개`,
       `6개 일치 (2,000,000,000원) - ${this.#rankingStatusBoard[LOTTO_RANK.theFirst]}개`,
       `총 수익률은 ${earningRate}%입니다.`
-    ];
+    ];*/
+
   }  
 }
 
 export default LottoStatistics;
+
