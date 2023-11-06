@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { PRIZE, TICKET_PRICE } from './Constant.js'
+import { PRIZE, PRIZE_STRING, TICKET_PRICE } from './Constant.js'
 
 class MoneyManager {
   #first = 0;
@@ -34,7 +34,18 @@ class MoneyManager {
     let totalTickets = this.#fail + this.#fourth + this.#third + this.#second + this.#bonus + this.#first;
     let investment = totalTickets * TICKET_PRICE;
     let earned = this.calculateMoneyEarned();
-    this.#rateOfInterest = ((earned / investment) * 100).toFixed(2);
+    this.#rateOfInterest = ((earned / investment) * 100).toFixed(1);
+  }
+
+  printStatistics() {
+    Console.print('당첨 통계\n');
+    Console.print('---\n');
+    Console.print(`3개 일치 (${PRIZE_STRING.FOURTH}) - ${this.#fourth}개\n`);
+    Console.print(`4개 일치 (${PRIZE_STRING.THIRD}) - ${this.#third}개\n`);
+    Console.print(`5개 일치 (${PRIZE_STRING.SECOND}) - ${this.#second}개\n`);
+    Console.print(`5개 일치, 보너스 볼 일치 (${PRIZE_STRING.BONUS}) - ${this.#bonus}개\n`);
+    Console.print(`6개 일치 (${PRIZE_STRING.FIRST}) - ${this.#first}개\n`);
+    Console.print(`총 수익률은 ${this.#rateOfInterest}%입니다.\n`);
   }
 }
 

@@ -10,7 +10,6 @@ class App {
     checkMoney(lottoMoney);
 
     let ticketManager = new TicketManager(lottoMoney);
-    ticketManager.printTicketInformation();
 
     let winningNumbers = await inputWinningNumbers();
 
@@ -18,9 +17,11 @@ class App {
     let tickets = ticketManager.getTickets();
     tickets.forEach((ticket) => {
       const {matchingNumbers, bonus} = winningNumbers.checkYourLotto(ticket);
+      moneyManager.addTicket(matchingNumbers, bonus);
     })
 
     moneyManager.calculateStatistics();
+    moneyManager.printStatistics();
   }
 }
 

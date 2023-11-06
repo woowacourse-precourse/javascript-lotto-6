@@ -23,4 +23,12 @@ export const PRIZE = {
   FIRST: 2000000000,
 }
 
+export const PRIZE_STRING = {
+  FOURTH: '5,000원',
+  THIRD: '50,000원',
+  SECOND: '1,500,000원',
+  BONUS: '30,000,000원',
+  FIRST: '2,000,000,000원',
+}
+
 export const TICKET_PRICE = 1000;
