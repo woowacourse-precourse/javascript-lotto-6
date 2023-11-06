@@ -24,7 +24,7 @@ class Validator {
   isRange(input) {
     return (
       Utils.splitInput(input).find(
-        (element) => Number(element) < 1 || Number > 45
+        (element) => Number(element) < 1 || Number(element) > 45
       ) === undefined
     );
   }
