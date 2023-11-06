@@ -1,6 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 import LottoPurchase from '../validates/lottoPurchase.js';
 import { MESSAGES } from '../constants/messages.js';
+import {
+  checkWinningNumbers,
+  checkBonusNumber,
+} from '../validates/winningNumber.js';
 
 class User {
   async calculateLottoCount() {
@@ -20,6 +24,42 @@ class User {
       } catch (error) {
         Console.print(error.message);
       }
+    }
+  }
+
+  async getWinningNumbers() {
+    try {
+      const winningNumbersInput = await Console.readLineAsync(
+        MESSAGES.input.winningNumbers,
+      );
+
+      const winningNumbers = winningNumbersInput
+        .split(',')
+        .map((num) => parseInt(num));
+
+      checkWinningNumbers(winningNumbers);
+
+      return winningNumbers;
+    } catch (error) {
+      Console.print(error.message);
+      return this.getWinningNumbers();
+    }
+  }
+
+  async getBonusNumber() {
+    try {
+      const bonusNumberInput = await Console.readLineAsync(
+        MESSAGES.input.bonusNumber,
+      );
+
+      const bonusNumber = parseInt(bonusNumberInput);
+
+      checkBonusNumber(bonusNumber);
+
+      return bonusNumber;
+    } catch (error) {
+      Console.print(error.message);
+      return this.getBonusNumber();
     }
   }
 }

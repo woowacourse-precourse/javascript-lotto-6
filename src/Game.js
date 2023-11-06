@@ -15,6 +15,9 @@ class Game {
       const lottoNumbers = lotto.getNumbers();
       Console.print(`[${lottoNumbers.join(', ')}]`);
     }
+
+    const winningNumbers = await user.getWinningNumbers();
+    const bonusNumber = await user.getBonusNumber();
   }
 }
 
