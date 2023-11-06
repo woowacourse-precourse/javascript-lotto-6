@@ -1,29 +1,15 @@
+import { validateLottoNumbers } from './validator/index.js';
+import { DIVIDER } from './constants/Symbol.js';
+
 export default class Lotto {
   #numbers;
 
-  constructor(numbers) {
-    this.#numbers = numbers;
+  constructor(mainNumbers) {
+    validateLottoNumbers(mainNumbers);
+    this.#numbers = mainNumbers.split(DIVIDER.comma).map(Number);
   }
 
   getLottoNumbers() {
     return this.#numbers;
-  }
-
-  compare(winningNumbers, winningBonusNumber) {
-    const compareResult = {
-      mainNumber: 0,
-      bonusNumber: false,
-    };
-
-    this.#numbers.forEach((number) => {
-      if (winningNumbers.includes(number)) {
-        compareResult.mainNumber += 1;
-      }
-      if (number === winningBonusNumber) {
-        compareResult.bonusNumber = true;
-      }
-    });
-
-    return compareResult;
   }
 }
