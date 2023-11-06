@@ -8,12 +8,12 @@ const COUNT_RANDOM = 6;
 class NumberIssuance {
   constructor(amount) {
     this.lottoNumbers = [];
-    this.EA = amount / AMOUNT_UNIT;
-    this.#generateNumber(this.EA);
+    this.numberOfTickets = amount / AMOUNT_UNIT;
+    this.#generateNumber(this.numberOfTickets);
   }
 
-  #generateNumber(EA) {
-    for (let i = 0; i < EA; i += 1) {
+  #generateNumber(numberOfTickets) {
+    for (let i = 0; i < numberOfTickets; i += 1) {
       const numbers = Random.pickUniqueNumbersInRange(
         MIN_RANDOM,
         MAX_RANDOM,

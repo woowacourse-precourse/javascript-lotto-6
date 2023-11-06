@@ -10,7 +10,7 @@ class App {
     const numberIssuance = new NumberIssuance(amount);
     const myLotto = numberIssuance.lottoNumbers;
 
-    await App.displayPurchase(numberIssuance.EA, myLotto);
+    await App.displayPurchase(numberIssuance.numberOfTickets, myLotto);
 
     const winningNumber = await this.getWinningNumber();
     const bonusNumber = await this.getBonusNumber(winningNumber);
@@ -72,9 +72,9 @@ class App {
     }
   }
 
-  static displayPurchase(EA, lottoNumbers) {
+  static displayPurchase(numberOfTickets, lottoNumbers) {
     let str = "\n";
-    str += `${EA}개를 구매했습니다. \n`;
+    str += `${numberOfTickets}개를 구매했습니다. \n`;
     str += `${lottoNumbers.map((item) => `[${item.join(", ")}]`).join("\n")}\n`;
     Console.print(str);
   }
