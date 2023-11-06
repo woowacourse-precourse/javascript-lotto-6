@@ -14,12 +14,11 @@ export const LOTTO_NUMBER = Object.freeze({
 });
 
 export const RANK = Object.freeze({
-  reward: [2000000000, 30000000, 1500000, 50000, 5000],
-  first: { match: 6, index: 0 },
-  bonus: { match: 0, index: 1 },
-  second: { match: 5, index: 2 },
-  third: { match: 4, index: 3 },
-  fourth: { match: 3, index: 4 },
+  first: { match: 6, reward: 2000000000 },
+  bonus: { match: 0, reward: 30000000 },
+  second: { match: 5, reward: 1500000 },
+  third: { match: 4, reward: 50000 },
+  fourth: { match: 3, reward: 5000 },
 });
 
 export const MESSAGE = Object.freeze({

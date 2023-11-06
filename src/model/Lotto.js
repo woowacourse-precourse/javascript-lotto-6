@@ -6,7 +6,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = this.#sortNumbers(numbers.map((number) => Number(number)));
+    this.#numbers = this.#sortNumbers(numbers.map(Number));
   }
 
   #validate(numbers) {
@@ -22,6 +22,9 @@ class Lotto {
 
   getNumberString() {
     return `[${this.#numbers.join(', ')}]`;
+  findRank(winningLotto, bonusNumber) {
+    const matchingCount = this.getMatchingCount(winningLotto, bonusNumber);
+    return Object.keys(RANK).filter((prize) => RANK[prize].match === matchingCount);
   }
 
   getMatchingCount(winningLotto, bonusNumber) {
