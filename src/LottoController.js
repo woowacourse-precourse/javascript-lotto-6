@@ -29,6 +29,7 @@ class LottoController {
   
   async lottoResult() {
     this.outputUi.printWinnigStatus(this.winningStatus);
+    this.outputUi.printRateOfReturn(this.lottoGame.calculateRateOfReturn(this.winningStatus));
   }
 }
 export default LottoController;

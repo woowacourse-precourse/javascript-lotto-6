@@ -1,12 +1,15 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import GameUtils from "./GameUtils.js";
+import { WINNIG_PROFITS } from "../Constants.js";
 class LottoGame {
   #lottos;
   #purchaseNumber;
+  #purchaseAmount;
   constructor(purchaseAmount) {
     this.#validate(purchaseAmount);
     this.#lottos = [];
+    this.#purchaseAmount = purchaseAmount;
     this.#purchaseNumber = purchaseAmount / 1000;
     this.#issueLotto();
   }
@@ -83,6 +86,14 @@ class LottoGame {
       matchingCountsObj = this.addOrUpdatePropertyInObj(matchingCountsObj, matchingCount);
     }
     return matchingCountsObj;
+  }
+  calculateRateOfReturn(winnigStatus) {
+    let sumProfit = 0
+    for (let winningNumber in winnigStatus) {
+        sumProfit += WINNIG_PROFITS[winningNumber] * winnigStatus[winningNumber];
+    }
+    const RATE_OF_RETURN = ((sumProfit/this.#purchaseAmount)*100).toFixed(1);
+    return RATE_OF_RETURN;
   }
 }
 export default LottoGame;

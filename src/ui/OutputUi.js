@@ -23,5 +23,9 @@ class OutputUi {
         MissionUtils.Console.print(GameUtils.winningStatusForUser(MATHING_COUNT,winnigStatus));
     }
   }
+
+  printRateOfReturn(rateOfReturn) {
+    MissionUtils.Console.print(`총 수익률은 ${rateOfReturn}%입니다.`)
+  }
 }
 export default OutputUi;
