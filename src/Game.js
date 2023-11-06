@@ -4,18 +4,19 @@ import OutputView from './OutputView.js';
 import LottoMaker from './LottoMaker.js';
 import Lotto from './Lotto.js';
 import Bonus from './Bonus.js';
+import Count from './Count.js';
 
 class Game {
   #quantity;
   #lottos;
   winningNumbers;
-  BonusNumber;
+  bonusNumber;
 
   constructor() {
     this.#quantity;
     this.#lottos;
     this.winningNumbers;
-    this.BonusNumber;
+    this.bonusNumber;
   }
 
   purchase() {
@@ -48,8 +49,15 @@ class Game {
 
   handleBonusNumber = (number) => {
     const BONUS_NUMBER = parseInt(number, 10);
-    this.BonusNumber = new Bonus(BONUS_NUMBER, this.winningNumbers).getBonusNumber();
+    this.bonusNumber = new Bonus(BONUS_NUMBER, this.winningNumbers).getBonusNumber();
+
+    this.getReward();
   };
+
+  getReward() {
+    const count = new Count(this.#lottos, this.winningNumbers, this.bonusNumber);
+    console.log(count);
+  }
 }
 
 export default Game;
