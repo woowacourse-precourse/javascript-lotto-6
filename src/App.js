@@ -55,8 +55,16 @@ async function inputWinningNumbers() {
 }
 
 async function inputNumbers() {
-  let numberString = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-  let numbers = parseInt(numberString);
+  let numberInput = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+  let numberStrings = numberInput.split(',');
+  let numbers = [];
+
+  numberStrings.forEach((numberString) => {
+    let number = parseInt(numberString);
+    if (Number.isNaN(number)) throw new Error(ERROR.WINNING_NUMBER_IS_NAN);
+    numbers.push(number);
+  });
+
   return numbers;
 }
 

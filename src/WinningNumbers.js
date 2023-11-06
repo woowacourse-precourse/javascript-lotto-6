@@ -1,26 +1,26 @@
 import { ERROR } from './Constant.js'
 
 class WinningNumbers{
-    #numbers;
-    #bonus;
+  #numbers;
+  #bonus;
 
-    constructor(numbers) {
-        this.#validateNumbers(numbers);
-        this.#numbers = numbers;
+  constructor(numbers) {
+    this.#validateNumbers(numbers);
+    this.#numbers = numbers;
+  }
+
+  addBonusNumber(bonus) {
+    this.#validateBonusNumber(bonus);
+    this.#bonus = bonus;
+  }
+
+  #validateNumbers(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error(ERROR.WINNING_NUMBER_NOT_SIX);
     }
+  }
 
-    addBonusNumber(bonus) {
-        this.#validateBonusNumber(bonus);
-        this.#bonus = bonus;
-    }
+  #validateBonusNumber(bonus) {
 
-    #validateNumbers(numbers) {
-        if (Number.isNaN(numbers)) {
-            throw new Error(ERROR.WINNING_NUMBER_IS_NAN);
-        }
-    }
-
-    #validateBonusNumber(bonus) {
-
-    }
+  }
 }
