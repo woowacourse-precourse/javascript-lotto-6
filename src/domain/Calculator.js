@@ -15,6 +15,12 @@ class Calculator {
   });
 
   /**
+   * 반올림될 소숫점 자릿수입니다.
+   * @readonly
+   */
+  static DIGIT = 1;
+
+  /**
    * @returns {Calculator} 계산기입니다.
    */
   static of() {
@@ -30,7 +36,11 @@ class Calculator {
   earningRate(income, rewards) {
     this.#validateEarningRate(income, rewards);
     const totalPrize = rewards.reduce((total, reward) => total + reward.getTotalPrize(), 0);
-    return (totalPrize / income) * 100;
+    const earningRate = (totalPrize / income) * 100;
+
+    return Number.isInteger(earningRate)
+      ? earningRate
+      : Number(earningRate.toFixed(Calculator.DIGIT));
   }
 
   #validateEarningRate(income, rewards) {
