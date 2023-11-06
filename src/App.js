@@ -49,21 +49,23 @@ class App {
         break
       }
     }
-    while (1) {
-      let winningNumsList;
 
+    const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+    let winningNumsList;
+    while (1) {
       try {
         const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
         if (
           winningNums.includes(',,') 
           || winningNums[0] === ','
           || winningNums[winningNums.length-1] === ','
+          || winningNums === null
           ) {
           throw new Error(ERROR_MESSAGE.INPUT_ERROR);
         }
 
         winningNumsList = winningNums.split(',').map(Number); // [ 1, 4, 6, 7, 21, 22 ] 
-        const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+        
         if (winningNumsList.length !== 6) {
           throw new Error(ERROR_MESSAGE.INPUT_ERROR)
         }
@@ -78,16 +80,23 @@ class App {
       }
     }
 
+    let bonus;
     while (1) {
       try {
-        
+        const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+        if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+        }
+        if (!numRangePattern.test(inputBonus)) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+        }
+        bonus = Number(inputBonus);
+        break
       } catch (error) {
         Console.print(ERROR_MESSAGE.INPUT_ERROR)
       }
     }
 
-    const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT); // 1
-    const bonus = Number(inputBonus)
 
     // 당첨 확인
     let winningThree = 0;
