@@ -57,7 +57,10 @@ class Check {
   calculateEarnRatio(payedMoney) {
     this.earnRatio = ((this.totalEarned / payedMoney) * 100).toFixed(1);
   }
-
+  printEarnRatio() {
+    const EARN_RATIO = `총 수익률은 ${this.earnRatio}%입니다.`;
+    MissionUtils.Console.print(EARN_RATIO);
+  }
   printCount(countArray) {
     const WINNING_MSG = '\n당첨 통계\n---';
     MissionUtils.Console.print(WINNING_MSG);
