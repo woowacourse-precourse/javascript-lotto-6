@@ -9,13 +9,13 @@ const lottoPriceValidator = {
     }
   },
 
-  limitPrice(price) {
+  maximumLimitPrice(price) {
     if (Number(price) > 2000000000) {
       throw new Error('로또 금액이 너무 큽니다.');
     }
   },
 
-  minimumPrice(price) {
+  minimumLimitPrice(price) {
     if (Number(price) < 1000) {
       throw new Error('로또 금액은 1,000원 이상부터 구매가 가능합니다.');
     }
@@ -23,8 +23,8 @@ const lottoPriceValidator = {
 
   checkLottoPrice(price) {
     lottoPriceValidator.currencyAmount(price);
-    lottoPriceValidator.limitPrice(price);
-    lottoPriceValidator.minimumPrice(price);
+    lottoPriceValidator.maximumLimitPrice(price);
+    lottoPriceValidator.minimumLimitPrice(price);
     commonValidator.checkNumberType(LOTTO_PRICE_PRIFIX_MESSAGE, price);
   },
 };
