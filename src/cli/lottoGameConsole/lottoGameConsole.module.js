@@ -8,7 +8,7 @@ import {
 
 import { SYMBOLS } from '../../constants/symbols.js';
 
-import winningInfoGeneration from '../../domain/confirmWinningInfo/winningInfoGeneration/winningInfoGeneration.module.js';
+import winningInfoGeneration from '../../domain/confirmWinningResult/winningInfoGeneration/winningInfoGeneration.module.js';
 
 import systemConsole from '../systemConsole.js';
 

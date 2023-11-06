@@ -1,5 +1,5 @@
 // directory
-export * from './confirmWinningInfo/index.js';
+export * from './confirmWinningResult/index.js';
 
 // file
 export { default as lottoPurchase } from './lottoPurchase/lottoPurchase.module.js';
