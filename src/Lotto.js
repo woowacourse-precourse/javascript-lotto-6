@@ -48,22 +48,18 @@ class Lotto {
   }
 
   static calculateRank(matchingNumbers, bonusMatch) {
-    if (matchingNumbers === 6) {
-      return 1;
+    switch (matchingNumbers) {
+      case 6:
+        return 1;
+      case 5:
+        return bonusMatch ? 2 : 3;
+      case 4:
+        return 4;
+      case 3:
+        return 5;
+      default:
+        return 0;
     }
-    if (matchingNumbers === 5 && bonusMatch) {
-      return 2;
-    }
-    if (matchingNumbers === 5) {
-      return 3;
-    }
-    if (matchingNumbers === 4) {
-      return 4;
-    }
-    if (matchingNumbers === 3) {
-      return 5;
-    }
-    return 0;
   }
 
   static getFinalMoney(rankBoard) {
