@@ -1,3 +1,6 @@
+import { Random, Console } from '@woowacourse/mission-utils';
+import { stat } from 'fs';
+
 class Lotto {
   #numbers;
 
@@ -13,6 +16,18 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  generateRandomNumber(){
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
+  sortNumbers(inputList){
+    const sortedList = inputList.sort(function(a,b){
+      return a - b;
+    });
+    return sortedList;
+  }
+
+  
 }
 
 export default Lotto;
