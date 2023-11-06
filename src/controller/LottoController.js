@@ -2,6 +2,7 @@ import LottoShop from "../domains/LottoShop.js";
 import TargetLotto from "../domains/TargetLotto.js";
 import User from "../domains/User.js";
 import OutPutView from "../Views/outPutView.js";
+import InputView from "../Views/InputView.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class LottoController {
@@ -9,25 +10,22 @@ class LottoController {
   #targetLotto;
   #user;
   #outPutView;
+  #inputView;
 
   constructor() {
     this.#lottoShop = new LottoShop();
     this.#outPutView = new OutPutView();
+    this.#inputView = new InputView();
   }
 
   async start() {
-    const userMoneyInput = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
-    // TODO 1000원 단위예외 체크
-
+    const userMoneyInput = await this.#inputView.getBuyMoneyInput();
     this.#user = new User(userMoneyInput);
 
     const lottoPrice = this.#lottoShop.getLottoPrice();
     const maxBuyCount = Math.floor(userMoneyInput / lottoPrice);
 
     this.#lottoShop.sellLottos(this.#user, maxBuyCount);
-
     this.#outPutView.printBuyLottoCount(maxBuyCount);
 
     const userBuyLottoList = this.#user.getLottoList();
@@ -35,26 +33,12 @@ class LottoController {
     userBuyLottoList.forEach((lotto) =>
       this.#outPutView.printLottoNumber(lotto)
     );
-
     this.#outPutView.printNewLine();
 
-    const targetLottoInput = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
-    );
-    // TODO 예외체크
-    this.#outPutView.printNewLine();
+    const { targetNumberList, targetBonusNumber } =
+      await this.#inputView.getTargetLottoInfoInput();
 
-    const targetNumberList = targetLottoInput.split(",").map(Number);
-
-    const targetBonusInput = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요\n"
-    );
-    this.#outPutView.printNewLine();
-
-    this.#targetLotto = new TargetLotto(
-      targetNumberList,
-      Number(targetBonusInput)
-    );
+    this.#targetLotto = new TargetLotto(targetNumberList, targetBonusNumber);
 
     this.#outPutView.printLottoResultInfoMessage();
 
