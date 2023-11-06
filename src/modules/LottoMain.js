@@ -16,19 +16,23 @@ class LottoMain {
     const userCost = await Console.readLineAsync( LOTTO_MESSAGE.BUY_LOTTO );
     const money = parseInt(userCost);
     this.money = money;
-    this.lottoValidate.userCostValidate(money);
-    this.lottoBuy(money);
+    try {
+      this.lottoValidate.userCostValidate(money)
+      this.lottoBuy(money);
+    }
+    catch(e) {
+      Console.print(e.message)
+      return this.start()
+    }
   }
 
   lottoBuy(money) {
     this.generateLotto = new GenerateLottoNumbers();
     const [lottoCount, lottoArr] = this.generateLotto.lottoNumberInfo(money);
-    Console.print("");
-    Console.print(`${lottoCount}개를 구매했습니다.`);
+    Console.print(`\n${lottoCount}개를 구매했습니다.`);
     lottoArr.map((lotto) => {
       Console.print(`[${lotto.join(", ")}]`);
     });
-    Console.print("");
     this.userLotto = lottoArr;
     this.lottoWin();
   }
@@ -39,26 +43,34 @@ class LottoMain {
     );
 
     const numbers = winningNumber.split(",").map((number) => {
-      this.lottoValidate.winnerValidate(number);
       return parseInt(number);
     });
 
-    new Lotto(numbers);
-    this.winningNumber = numbers;
-    this.lottoBonus();
+    try {
+      new Lotto(numbers);
+      this.winningNumber = numbers;
+      this.lottoBonus();
+    }
+    catch(e) {
+      Console.print(e.message)
+      return this.lottoWin()
+    }
   }
 
   async lottoBonus() {
-    Console.print("");
     const number = await Console.readLineAsync(
       LOTTO_MESSAGE.BONUS_NUMBERS
     );
     const bonusNumber = parseInt(number);
 
-    this.lottoValidate.bonusValidate(bonusNumber, this.winningNumber);
-
-    this.isResult = new IsResult(this.userLotto,this.winningNumber, bonusNumber, this.money);
-    this.isResult.resultTitle()
+    try {
+      this.lottoValidate.bonusValidate(bonusNumber, this.winningNumber);
+      this.isResult = new IsResult(this.userLotto,this.winningNumber, bonusNumber, this.money);
+      this.isResult.resultTitle()
+    } catch(e) {
+      Console.print(e.message)
+      return this.lottoBonus();
+    }
   }
 }
 
