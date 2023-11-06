@@ -142,7 +142,7 @@ describe("LottoDrawMachine 유닛 테스트", () => {
         three(0),
         two(0),
         one(0),
-        SUFFIX(66.6)
+        SUFFIX(166.7)
       )
     );
   });
