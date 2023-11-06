@@ -1,8 +1,8 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { INPUT, LINE_BREAK, OUTPUT } from './constants/messages.js';
 import { THOUSAND } from './constants/data.js';
-import Money from './Money.js';
+import { INPUT, LINE_BREAK, OUTPUT } from './constants/messages.js';
 import Lotto from './Lotto.js';
+import Money from './Money.js';
 
 class App {
   async play() {
@@ -13,7 +13,6 @@ class App {
     try {
       const price = await MissionUtils.Console.readLineAsync(`${INPUT.price}${LINE_BREAK}`);
       const money = new Money(price);
-
       return this.outputCount(money);
     } catch (error) {
       console.error(`${error.message}`);
@@ -24,21 +23,29 @@ class App {
 
   outputCount(money) {
     const count = money.getPrice() / THOUSAND;
-    MissionUtils.Console.print(`${LINE_BREAK}${count}${OUTPUT.count}${LINE_BREAK}`);
+    MissionUtils.Console.print(`${LINE_BREAK}${count}${OUTPUT.count}`);
 
-    // return this.makeLottos(count);
+    return this.makeLottos(count);
   }
 
-  // async makeLottos(count) {
-  //   const allLottos = [];
+  makeLottos(count) {
+    const lottos = [];
 
-  //   while (count > 0) {
-  //     const lotto = new Lotto();
-  //     allLottos.push(lotto);
+    while (count > 0) {
+      const lotto = new Lotto();
+      lottos.push(lotto.getNumbers());
 
-  //     count = count - 1;
-  //   }
-  // }
+      count = count - 1;
+    }
+
+    return this.outputLottos(lottos);
+  }
+
+  outputLottos(lottos) {
+    lottos.forEach(lotto => {
+      MissionUtils.Console.print(lotto.sort((num1, num2) => num1 - num2));
+    });
+  }
 }
 
 const app = new App();
