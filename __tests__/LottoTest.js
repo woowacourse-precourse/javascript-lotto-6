@@ -1,4 +1,13 @@
 import Lotto from "../src/Lotto.js";
+import BudgetValidator from "../src/utils/BudgetValidator.js";
+
+describe("구입 금액 입력 테스트", () => {
+  test("구입금액에 숫자가 아닌 것이 입력된 경우 예외가 발생한다", () => {
+    expect(() => {
+      BudgetValidator.isNum("123f");
+    }).toThrow("[ERROR] 구입 금액은 숫자를 입력해주세요");
+  });
+});
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -13,6 +22,4 @@ describe("로또 클래스 테스트", () => {
       new Lotto([1, 2, 3, 4, 5, 5]);
     }).toThrow("[ERROR]");
   });
-
-  // 아래에 추가 테스트 작성 가능
 });

@@ -1,10 +1,25 @@
 import { Console } from "@woowacourse/mission-utils";
-import Message from "./utils/Message.js";
+import InfoMsg from "./utils/InfoMsg.js";
+import BudgetValidator from "./utils/BudgetValidator.js";
 
 class LottoController {
-  constructor() {}
-  async askBudget() {
-    const input = await Console.readLineAsync(Message.ASK_BUDGET);
+  constructor() {
+    this.lottoNumArr = [];
+  }
+
+  async askBudget(input) {
+    try {
+      const input = await Console.readLineAsync(InfoMsg.ASK_BUDGET);
+      this.validateBudget(input);
+    } catch (err) {
+      Console.print(err);
+      this.askBudget();
+    }
+    return input;
+  }
+
+  validateBudget(input) {
+    BudgetValidator.isNum(input);
   }
 }
 
