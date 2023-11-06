@@ -3,11 +3,13 @@ import OutputView from "./View/OutputView.js";
 import Lotto from "./Model/Lotto.js";
 import Validator from "./Validator.js";
 import { COMMA } from "./constants/constants.js";
+import Result from "./Model/Result.js";
 
 class App {
   #lotto;
   #winningNumbers;
   #bonusNumber;
+  #result;
 
   async play() {
     await this.initializePurchaseAmount();
@@ -15,6 +17,8 @@ class App {
 
     await this.initializeWinningNumbers();
     await this.initializeBonusNumber();
+    this.initializeResult();
+    result.checkLotto();
   }
 
   async initializePurchaseAmount() {
@@ -37,6 +41,14 @@ class App {
     Validator.validateBonusNumber(bonusNumber, this.#winningNumbers);
 
     this.#bonusNumber = bonusNumber;
+  }
+
+  initializeResult() {
+    this.#result = new Result(
+      this.#lotto.getLotteries(),
+      this.#winningNumbers,
+      this.#bonusNumber,
+    );
   }
 }
 

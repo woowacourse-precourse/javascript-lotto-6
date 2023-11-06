@@ -5,7 +5,7 @@ const CURRENY_NUMBER_TO_DIVIDE = 1000;
 class Lotto {
   #purchaseAmount;
   #numberOfLotteries;
-  #lotteries = [];
+  #lotteries;
 
   constructor(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
