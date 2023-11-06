@@ -34,7 +34,7 @@ class OutputView {
   printPrice(profit, cost) {
     Console.print(
       MESSAGE.profitHeader +
-        `${Math.round((profit / cost) * 100 * 100) / 100}` +
+        ((profit / cost) * 100).toFixed(1) +
         MESSAGE.profitFooter,
     );
   }

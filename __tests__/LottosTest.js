@@ -1,4 +1,3 @@
-import { Random } from "@woowacourse/mission-utils";
 import Lottos from "../src/model/Lottos";
 
 describe("로또 클래스 테스트", () => {
@@ -21,5 +20,12 @@ describe("로또 클래스 테스트", () => {
     expect(lottos.getLottos()[0].getNumbers()).toEqual(orderedNumbers);
     
     jest.restoreAllMocks();
+  });
+
+  test("구입 금액의 단위는 1000단위다.", () => {
+    const amounts = ['2500','3600'];
+    amounts.forEach((amount) => {
+      expect(() => new Lottos(amount)).toThrow("[ERROR]");
+    })
   });
 });
