@@ -14,10 +14,16 @@ else를 지양한다.
   단위 테스트 작성이 익숙하지 않다면 __tests__/LottoTest.js를 참고하여 학습한 후 테스트를 구현한다.
 */
 
+//TODO: 에러 메세지 상수화 후 분리하기
+//TODO: GPT 리펙토링 한거 확인하기
+//TODO: 각 에러 시 재입력하게 변경
+//TODO: 로또 클래스 및 메서드 분리
+//TODO: 테스트 케이스 작성하기
+//TODO: 프로그래밍 요구 사항에 맞는지 확인
 class App {
   async play() {
     const INPUT_CASH = await this.inputCash();
-    const ARRAY_OF_GAMES = this.getLottoNumbers(this.validateCash(INPUT_CASH));
+    const ARRAY_OF_GAMES = this.getLottoNumbers(INPUT_CASH);
     const WINNING_NUMBER = await this.inputWinningNumber();
     const VERIFIED_WINNING_NUMBER = this.validateWinningNumber(WINNING_NUMBER);
     const BOUNUS_NUMBER = Number(await this.inputBonusNumber());
@@ -34,26 +40,36 @@ class App {
     this.showLottoResult(array, INPUT_CASH);
   }
 
-  inputCash() {
-    const INPUT_CASH = MissionUtils.Console.readLineAsync(
-      INPUT_MESSAGES.INPUT_CASH_MESSAGE
-    );
-    return INPUT_CASH;
+  async inputCash() {
+    let cash;
+    while (true) {
+      cash = await MissionUtils.Console.readLineAsync(
+        INPUT_MESSAGES.INPUT_CASH_MESSAGE
+      );
+      try {
+        cash = this.validateCash(cash); // 입력값을 검증
+        return cash; // 유효한 입력이 들어온 경우 반환하고 반복 종료
+      } catch (error) {
+        MissionUtils.Console.print(error.message); // 에러 메시지 출력
+        // 예외 발생시 다시 입력을 받도록 반복
+      }
+    }
   }
 
-  validateCash(CASH) {
-    const CHANGE = +CASH % 1000;
-    if (CHANGE === 0) {
-      const NUMBER_OF_GAMES = CASH / 1000;
-      return NUMBER_OF_GAMES;
+  validateCash(cash) {
+    if (+cash % 1000 === 0) {
+      return cash;
     }
     throw new Error("[ERROR] 구입금액은 1000 단위 정수로 입력이 가능합니다.");
   }
 
   getLottoNumbers(cash) {
-    MissionUtils.Console.print(cash + OUTPUT_MESSAGES.PURCHASE_QUANTITY);
+    const numberOfGames = cash / 1000;
+    MissionUtils.Console.print(
+      numberOfGames + OUTPUT_MESSAGES.PURCHASE_QUANTITY
+    );
     const ARRAY_OF_GAMES = [];
-    for (let i = 0; i < cash; i++) {
+    for (let i = 0; i < numberOfGames; i++) {
       const LOTTO_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(
         1,
         45,
@@ -62,10 +78,10 @@ class App {
       const SORTED_LOTTO_NUMBER = LOTTO_NUMBER.sort((a, b) => {
         return a - b;
       });
-      console.log(SORTED_LOTTO_NUMBER);
+      MissionUtils.Console.print("[" + SORTED_LOTTO_NUMBER.join(", ") + "]");
       ARRAY_OF_GAMES.push(SORTED_LOTTO_NUMBER);
     }
-    console.log("");
+    MissionUtils.Console.print("");
     return ARRAY_OF_GAMES;
   }
 
