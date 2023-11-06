@@ -6,7 +6,7 @@ const gameMessage = Object.freeze({
   },
 
   OUTPUT: {
-    QUANTITY: (quantity) => `${quantity}개를 구매했습니다.`,
+    QUANTITY: (quantity) => `\n${quantity}개를 구매했습니다.`,
     RESULT_TEXT: '당첨 통계\n---',
     RESULT: (match, reward, quantity) =>
       `${match} (${reward}원) - ${quantity}개`,
