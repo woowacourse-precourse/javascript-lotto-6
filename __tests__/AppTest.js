@@ -67,7 +67,7 @@ describe("클래스 테스트", () => {
 
         //when
         const app = new App();
-        const result = app.printRandomLottoNumbers();
+        const result = app.generateRandomLottoNumbers();
 
         //then
         expect(result).toEqual([1, 2, 5, 6, 7, 43]);
@@ -139,8 +139,8 @@ describe("클래스 테스트", () => {
         const app = new App();
         const result = app.getResult(winningNumber, lottoNumbersArray, intBonusNumber);
 
-        // then
-        expect(result).toEqual({"all": 0, "bonus": 0, "five": 0, "four": 1, "three": 2});
+        // thenr
+        expect(result).toEqual({"all": 0, "bonus": 0, "five": 0, "four": 1, "three": 2 ,"zero": 0});
     });
 
     test('로또 당첨 수익률 계산', () => {
@@ -153,6 +153,6 @@ describe("클래스 테스트", () => {
         const result = app.getProfitRate(amount, lottoResult);
 
         // then
-        expect(result).toEqual('62.5%');
+        expect(result).toEqual('62.5');
     });
 });
