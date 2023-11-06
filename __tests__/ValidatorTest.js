@@ -16,5 +16,10 @@ describe('유저 입력 유효성 검사', () => {
   test.each([[-12], [0], [46]])('로또 번호가 지정된 범위인지 테스트', (input) => {
     expect(() => Validator.validateInRange(input)).toThrow();
   });
+
+  test('로또 번호가 유니크한지 테스트', () => {
+    expect(() => Validator.validateUnique([1, 2, 3, 4, 5, 6])).not.toThrow();
+    expect(() => Validator.validateUnique([22, 34, 45, 16, 22, 7])).toThrow();
+  });
     
 });
