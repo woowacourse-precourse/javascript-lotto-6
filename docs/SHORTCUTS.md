@@ -3,6 +3,7 @@
 `CMD + ,` : 설정
 
 `CMD + 1` : Navigator로 포커스 이동
+
 `CMD + N` : Navigator에 포커스 맞춰진 상태에서 파일 생성
 
 `Opt + Cmd + v`: 변수 추출(앞에 const 변수명 = 붙여줌)
