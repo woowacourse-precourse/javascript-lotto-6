@@ -147,4 +147,20 @@ __printStatistics(result)__
 
 	최종 통계 결과를 출력
 
+___
+
+
+## InputView.js ##
+
+	Console.readLineAsync()를 활용해 입력을 담당하는 클래스
+
+___
+
+## OutputView.js ##
+
+	Console.print()를 활용해 출력을 담당하는 클래스
+
+
+
+
 
