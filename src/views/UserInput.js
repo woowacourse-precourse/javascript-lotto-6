@@ -11,21 +11,31 @@ class UserInput {
 		return trimmedInput;
 	}
 
-	async winningNumber(question = SYSTEM_MESSAGES.input_winning_numbers) {
+	async #winningNumber(question = SYSTEM_MESSAGES.input_winning_numbers) {
 		const userInput = await Console.readLineAsync(question);
 		const splittedInput = userInput.split(',').map((input) => input.trim());
-
-		validators.checkLottoNumbers(splittedInput);
 
 		return splittedInput;
 	}
 
-	async winningBonusNumber(question = SYSTEM_MESSAGES.input_bonus_number) {
+	async #winningBonusNumber(question = SYSTEM_MESSAGES.input_bonus_number) {
 		const userInput = await Console.readLineAsync(question);
+
+		if (typeof userInput === 'number') return userInput;
+
 		const trimmedInput = userInput.trim();
-		validators.checkWinningBonusNumber(trimmedInput);
 
 		return trimmedInput;
+	}
+
+	async lottoWinningNumber() {
+		const winningNumber = await this.#winningNumber();
+		validators.checkLottoNumbers(winningNumber);
+
+		const winningBonusNumber = await this.#winningBonusNumber();
+		validators.checkWinningBonusNumber(winningNumber, winningBonusNumber);
+
+		return { winningNumber, winningBonusNumber };
 	}
 }
 
