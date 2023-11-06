@@ -20,13 +20,13 @@ export const validateBonusNumber = (lotto, bonus) => {
 };
 
 export const createScorekeeper = () => {
-    const scores = {
-      three: 0,
-      four: 0,
-      five: 0,
-      fivePlusBonus: 0,
-      six: 0
-    };
+    const scores = {};
+    const keyList = Object.values(keys);
+
+    for (let i = 0; i < keyList.length; i += 1) {
+        scores[keyList[i]] = 0;
+    }
+    
     return scores;
 };
 

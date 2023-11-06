@@ -21,7 +21,8 @@ class App {
   
   async getPurchaseAmount() {
     const input = await Console.readLineAsync(inputPrompts.PURCHASE);
-    return input;
+    validatePurchase(input);
+    return Number(input);
   }
 
   async getWinningNumbers() {
@@ -38,8 +39,6 @@ class App {
   }
 
   createTickets(amount) {
-    validatePurchase(amount);
-
     const ticketCount = amount / 1000;
     const ticketsPurchased = [];
 
@@ -81,10 +80,11 @@ class App {
 
   calculateProfit(purchaseAmount, matches) {
     let totalPrice = 0;
-    let keys = Object.keys(matches);
-    keys = keys.filter((key) => matches[key] !== 0);
-    for (let i = 0; i < keys.length; i += 1) {
-      const price = getEarnings(keys[i]) * matches[keys[i]];
+    const keyList = Object.values(keys);
+    const matchingKeys = keyList.filter((key) => matches[key] !== 0);
+
+    for (let i = 0; i < matchingKeys.length; i += 1) {
+      const price = getEarnings(matchingKeys[i]) * matches[matchingKeys[i]];
       totalPrice += price;
     }
     
