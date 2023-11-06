@@ -39,5 +39,15 @@ export default class LottoGame {
         Console.print(error.message);
       }
     }
+
+    while (true) {
+      try {
+        const inputbonusNumber = await InputView.promptForBonusNumber();
+        drawnLotto.setBonusNumber(inputbonusNumber);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
