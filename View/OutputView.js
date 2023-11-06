@@ -7,17 +7,17 @@ const MESSAGE = {
 };
 
 const OutputView = {
-  outputPurchaseLottoCount(lottoCount) {
+  async outputPurchaseLottoCount(lottoCount) {
     Console.print(`${lottoCount}개를 구매했습니다.`);
   },
 
-  outputRandomLottoNumbersList(RandomLottoNumbersList) {
+  async outputRandomLottoNumbersList(RandomLottoNumbersList) {
     RandomLottoNumbersList.forEach(lottoList => {
       Console.print(`[${lottoList.join(', ')}]`);
     });
   },
   
-  changeNumberToWon(price) {
+  async changeNumberToWon(price) {
     const priceString = price.toString();
     let won = '';
     let count = 0;
@@ -29,7 +29,7 @@ const OutputView = {
     return won;
   },
 
-  outputLottoMatchResult(matchResult, incomeResult) {
+  async outputLottoMatchResult(matchResult, incomeResult) {
     console.log(MESSAGE.OUTPUT_LOTTO_MATCH_RESULT_STATISTIC);
     for (let i = NUMBER.MIN_MATCH_NUMBER; i <= NUMBER.MAX_MATCH_NUMBER; i++) {
       if (matchResult[i] === undefined) matchResult[i] = [0, 0];
