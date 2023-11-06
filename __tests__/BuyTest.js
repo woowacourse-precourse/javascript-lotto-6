@@ -1,6 +1,15 @@
 /* eslint-disable max-lines-per-function */
 import { MissionUtils } from '@woowacourse/mission-utils';
-import App from '../src/App.js';
+import InputView from '../src/views/InputView.js';
+import OutputView from '../src/views/OutputView.js';
+import LottoUtill from '../src/utils/LottoUtill.js';
+import LottoController from '../src/controllers/LottoController.js';
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -12,73 +21,78 @@ const mockQuestions = (inputs) => {
   });
 };
 
-const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
-};
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
-const runException = async (input) => {
-  // given
+const buyNumberException = async (input) => {
+  const INPUT_NUMBERS_TO_END = ['8000', '1,2,3,4,5,6', '7'];
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-  const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6,7', '1,2,3,4,5,6', '7'];
+  const LottoCon = new LottoController();
+  await LottoCon.inputPurchaseMoney();
 
-  mockRandoms([RANDOM_NUMBERS_TO_END]);
-  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
-
-  // when
-  const app = new App();
-  await app.play();
-  // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
 };
 
 describe('로또 구입 테스트', () => {
-  beforeEach(() => {
-    jest.restoreAllMocks();
-  });
+  test('로또 구입 테스트', async () => {
+    mockQuestions(['1000']);
 
-  test('10장 구입 테스트', async () => {
-    // given
     const logSpy = getLogSpy();
-    const randoms = [];
-    for (let idx = 0; idx < 10; idx += 1) {
-      randoms.push(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
-    }
+    const Input = new InputView();
+    const Output = new OutputView();
 
-    mockRandoms(randoms);
-    mockQuestions(['10000', '2,5,7,11,16,45', '10']);
+    const money = await Input.purchaseMoney();
+    const amount = await new LottoUtill(money);
 
-    // when
-    const app = new App();
-    await app.play();
-
-    // then
-    const logs = ['10개를 구매했습니다.'];
+    Output.userCanBuy(amount.howManyToBuy());
+    const logs = ['1개를 구매했습니다.'];
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
 
-  test('2800원 입력 후 , 5000원 입력', async () => {
-    await runException('2800');
+  test('로또 구입 테스트', async () => {
+    mockQuestions(['5000']);
+
+    const logSpy = getLogSpy();
+    const Input = new InputView();
+    const Output = new OutputView();
+    const money = await Input.purchaseMoney();
+    const amount = await new LottoUtill(money);
+
+    Output.userCanBuy(amount.howManyToBuy());
+    const logs = ['5개를 구매했습니다.'];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
   });
 
-  test('문자 입력 후, 5000원 입력', async () => {
-    await runException('12abc');
+  test('로또 구입 예외 테스트', async () => {
+    await buyNumberException('1500');
   });
 
-  test('0원, 5000원 입력', async () => {
-    await runException('0');
+  test('로또 번호 예외 테스트', async () => {
+    const FIRST = ['1000', '1,1,1,1,1,1'];
+    const INPUT_NUMBERS_TO_END = ['1,2,3,4,5,6', '7'];
+    mockQuestions([...FIRST, ...INPUT_NUMBERS_TO_END]);
+    const logSpy = getLogSpy();
+
+    const LottoCon = new LottoController();
+    await LottoCon.inputPurchaseMoney();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
+
+  test('보너스 번호 예외 테스트', async () => {
+    const FIRST = ['1000', '1,2,3,4,5,6', '-1'];
+    const INPUT_NUMBERS_TO_END = ['7'];
+    mockQuestions([...FIRST, ...INPUT_NUMBERS_TO_END]);
+    const logSpy = getLogSpy();
+
+    const LottoCon = new LottoController();
+    await LottoCon.inputPurchaseMoney();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
   });
 });

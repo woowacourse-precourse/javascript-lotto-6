@@ -1,4 +1,4 @@
-import { LottoRate } from '../constants/constant.js';
+import { LottoRate } from '../constants/Constant.js';
 
 class LottoUtill {
   #calcNumber;

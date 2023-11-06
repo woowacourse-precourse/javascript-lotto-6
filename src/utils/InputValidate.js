@@ -1,5 +1,5 @@
 import { ERROR_MSG } from '../constants/LottoMsg.js';
-import { lottoVal } from '../constants/constant.js';
+import { lottoVal } from '../constants/Constant.js';
 import InputError from './InputError.js';
 
 class InputValidate {

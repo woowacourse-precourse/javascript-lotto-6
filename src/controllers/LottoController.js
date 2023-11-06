@@ -1,4 +1,4 @@
-import { CONSTANTS } from '../constants/constant.js';
+import { CONSTANTS } from '../constants/Constant.js';
 import LottoData from '../models/LottoData.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
