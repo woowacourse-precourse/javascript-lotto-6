@@ -1,4 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
+import {
+  BONUS_NUMBER_ERROR_MESSAGE,
+  PURCHASE_AMOUNT_ERROR_MESSAGE,
+  WINNING_NUMBERS_ERROR_MESSAGE
+} from '../Constants/Error.js';
 
 class InputView {
   static async requestPurchaseAmount() {
@@ -16,13 +21,13 @@ class InputView {
 
   static validatePurchaseAmount(purchaseAmount) {
     if (isNaN(purchaseAmount)) {
-      throw '[ERROR] 구입금액은 숫자로 입력해야 합니다.';
+      throw PURCHASE_AMOUNT_ERROR_MESSAGE.notNumber;
     }
     if (purchaseAmount <= 0) {
-      throw '[ERROR] 구입금액은 양수여야 합니다.';
+      throw PURCHASE_AMOUNT_ERROR_MESSAGE.nonPositive;
     }
     if (purchaseAmount % 1000 !== 0) {
-      throw '[ERROR] 구입금액은 1000원으로 나누어 떨어져야 합니다.';
+      throw PURCHASE_AMOUNT_ERROR_MESSAGE.notDivisibleBy1000;
     }
   }
 
@@ -42,17 +47,17 @@ class InputView {
   static validateWinningNumbers(winningNumbers) {
     const areAllNumbers = winningNumbers.every(number => !isNaN(number));
     if (!areAllNumbers) {
-      throw '[ERROR] 당첨 번호는 숫자여야 합니다.';
+      throw WINNING_NUMBERS_ERROR_MESSAGE.notNumber;
     }
     if (!winningNumbers.every((number) => number >= 1 && number <= 45)) {
-      throw '[ERROR] 당첨 번호는 1부터 45 범위 내이어야 합니다.';
+      throw WINNING_NUMBERS_ERROR_MESSAGE.notInRange;
     }
     if (winningNumbers.length !== 6) {
-      throw '[ERROR] 당첨 번호는 6개여야 합니다.';
+      throw WINNING_NUMBERS_ERROR_MESSAGE.notSixNumbers;
     }
     const set = new Set(winningNumbers);
     if (winningNumbers.length !== set.size) {
-      throw '[ERROR] 중복된 숫자를 입력하면 안됩니다.';
+      throw WINNING_NUMBERS_ERROR_MESSAGE.hasDuplicates;
     }
   }
 
@@ -71,13 +76,13 @@ class InputView {
 
   static validateBonusNumber(bonusNumber, winningNumbers) {
     if (bonusNumber < 1 || bonusNumber > 45) {
-      throw '[ERROR] 보너스 번호는 1부터 45 범위 내이어야 합니다.';
+      throw BONUS_NUMBER_ERROR_MESSAGE.notInRange
     }
     if (winningNumbers.includes(Number(bonusNumber))) {
-      throw '[ERROR] 당첨 번호와 중복된 숫자를 입력하면 안됩니다.'
+      throw BONUS_NUMBER_ERROR_MESSAGE.hasDuplicates;
     }
     if (isNaN(bonusNumber)) {
-      throw '[ERROR] 당첨 번호는 숫자여야 합니다.';
+      throw BONUS_NUMBER_ERROR_MESSAGE.notNumber;
     }
   }
 }
