@@ -18,3 +18,17 @@ export function isValidBuyAmount(input) {
   isNumber(input);
   isDividedByThousand(input);
 }
+
+const isNumberOrComma = (input) => {
+  const regExp = /^[0-9]+(,[0-9]+)*$/;
+  if (!regExp.test(input)) {
+    throw new Error(MESSAGE_ERROR.lottoNotInput);
+  }
+};
+
+export function isValidWinningLotto(input) {
+  //   const inputArray = input.split(',');
+  //   const n = input.length;
+
+  isNumberOrComma(input);
+}
