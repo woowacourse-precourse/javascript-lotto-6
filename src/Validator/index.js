@@ -45,6 +45,15 @@ class Validator {
   static validateBonusNumber(number) {
     this.#validateRangeOfNumbers(number);
   }
+
+  static validateLottoNumbers(numbers) {
+    if (
+      numbers.length !== NUMBER.lottoCount ||
+      new Set(numbers).size !== NUMBER.lottoCount
+    ) {
+      throw new ValidationError(ERROR.invalidLottoNumbers);
+    }
+  }
 }
 
 export default Validator;
