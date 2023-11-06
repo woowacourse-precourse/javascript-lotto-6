@@ -15,13 +15,24 @@ class Input {
 		Output.purchaseInputMessage();
 
 		const purchaseAmount = await Console.readLineAsync();
-		const isThousand = Validation.purchaseAmountInputValidation(purchaseAmount);
+		const isThousand = Validation.isPurchaseAmountInputValidation(purchaseAmount);
 
 		if (!isThousand) throw new Error(ERRORMESSAGE.PURCHASE_AMOUNT_UNIT);
 
 		return purchaseAmount;
 	}
 
+	async bonusNumberInput() {
+		Output.bonusNumberPrint();
+
+		const bonusNumber = await Console.readLineAsync();
+
+		if (!Validation.isSafeInteger(bonusNumber)) throw new Error(ERRORMESSAGE.LOTTO_NUMBER_INTEGER);
+
+		if (bonusNumber.length !== 1) throw new Error(ERRORMESSAGE.BONUS_NUMBER_LENGTH);
+
+		return bonusNumber;
+	}
 }
 
 export default Input;

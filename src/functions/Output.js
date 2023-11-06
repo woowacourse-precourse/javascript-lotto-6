@@ -10,5 +10,15 @@ const Output = {
 	lottoAmountMessage(num) {
 		Console.print(`${num}${MESSAGE.LOTTO_AMOUNT_MESSAGE}`);
 	},
+
+	lottoNumbersPrint(numbers) {
+		numbers.forEach(innerArr => {
+			Console.print(`[${innerArr.join(',')}]`);
+		});
+	},
+
+	bonusNumberPrint() {
+		Console.print(MESSAGE.BONUS_NUMBER_MESSAGE);
+	}
 }
 export default Output;
