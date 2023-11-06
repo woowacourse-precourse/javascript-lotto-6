@@ -1,18 +1,20 @@
 import View from '../View/View.js';
 import Lotto from '../src/Lotto.js';
-import Validator from './modules/Validator.js';
 import createRandomNumbers from '../utils/RandomNumber.js';
 import BonusNumber from '../Models/BonusNumber.js';
-import LottoResult from './modules/LottoResult.js';
+import LottoResult from './domain/LottoResult.js';
 import { Console } from '@woowacourse/mission-utils';
+import PurchaseMoney from '../Models/PurchaseMoney.js';
 
 class LottoGame {
   #view = new View();
 
   async insertMoney() {
     try {
-      const insertedMoney = await this.#view.inputPurchaseMoney();
-      Validator.checkInsertedMoneyIsValid(insertedMoney);
+      const insertedMoneyUserInput = await this.#view.inputPurchaseMoney();
+      const insertedMoney = new PurchaseMoney(
+        insertedMoneyUserInput
+      ).getInsertedMoney();
       this.#view.printNewLine();
 
       return insertedMoney;
