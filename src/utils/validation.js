@@ -20,7 +20,7 @@ export const isNaturalNumber = (num) => {
   }
 }
 
-export const isAboveMinNumber = (num) => {
+export const isAboveMinCost = (num) => {
   if (Number(num) < SETTING.min_cost) {
     throw new Error(not_above_min_cost);
   }
