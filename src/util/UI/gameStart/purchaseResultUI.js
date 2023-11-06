@@ -6,7 +6,7 @@ export default async function purchaseResaultUI(count, purchaseData) {
   let resultText = `\n${guidanceText}\n`;
 
   purchaseData.forEach((element) => {
-    const purchaseString = `[${element.join(', ')}]`;
+    const purchaseString = `[${element.join(', ')}]\n`;
     resultText += purchaseString;
   });
   consolePrint(resultText);
