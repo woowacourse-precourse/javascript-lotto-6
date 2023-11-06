@@ -9,22 +9,23 @@ class LottoController {
   #winningLottoMachine;
   async run() {
     await this.#buyLotto();
-    await this.#getWinningNumber();
+    await this.#printLotto(this.#myLotto.length, this.#myLotto);
+    await this.#getWinningNumbers();
     await this.#compare();
   }
   async #buyLotto() {
     const inputAmount = await getInputAmount();
-    const counter = new Counter(Number(inputAmount));
+    const counter = new Counter(inputAmount);
     this.#myLotto = counter.giveLotto;
-
-    await printLottoNumbers(this.#myLotto.length, this.#myLotto);
   }
-  async #getWinningNumber() {
+  async #printLotto(lottoCount, lotto) {
+    printLottoNumbers(lottoCount, lotto);
+  }
+  async #getWinningNumbers() {
     this.#winningLottoMachine = await WinningLottoMachine.machineStart();
   }
   async #compare() {
-    const compare = new LottoComparison(this.#myLotto, this.#winningLottoMachine);
-    compare.run();
+    new LottoComparison(this.#myLotto, this.#winningLottoMachine).run();
   }
 }
 
