@@ -42,6 +42,13 @@ class App {
 
     return lottoTickets;
   }
+
+  getLottoNumbers() {
+    const lottoNumbers = pickRandomLottoNumbers();
+    const lotto = new Lotto(lottoNumbers);
+
+    return lotto;
+  }
 }
 
 export default App;
