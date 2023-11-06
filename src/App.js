@@ -10,7 +10,8 @@ import {
   MIN_NUMBER,
   MAX_NUMBER,
   LOTTO_MONEY,
-  LOTTO_RESULT
+  LOTTO_RESULT,
+  DELIMITER_SPACE
 } from "./constants.js";
 import Lotto from "./Lotto.js";
 import TargetNumber from "./TargetNumber.js";
@@ -87,7 +88,7 @@ class App {
     Console.print(this.lottoTickets.length + MESSAGE.LOTTO_TICKET);
 
     this.lottoTickets.forEach((lotto) => {
-      Console.print(lotto.getNumbers());
+      Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
     })
   }
 

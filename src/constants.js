@@ -41,6 +41,7 @@ export const LOTTO_RESULT = Object.freeze({
 export const PRICE_UNIT = 1000;
 export const PRICE_ZERO = 0;
 export const DELIMITER = ',';
+export const DELIMITER_SPACE = ', ';
 export const LOTTO_LENGTH = 6;
 export const MIN_NUMBER = 1;
 export const MAX_NUMBER = 45;
