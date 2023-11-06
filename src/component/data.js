@@ -3,6 +3,7 @@ export const NUMBER = Object.freeze({
   MAX_LOTTO_NUMBER: 45,
   LOTTO_LENGTH: 6,
   INITIAL_AMOUNT: 1000,
+  INIT_VALUE: 0,
 });
 
 export const TEXT = Object.freeze({

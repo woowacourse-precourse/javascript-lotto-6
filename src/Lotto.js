@@ -1,11 +1,11 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import { NUMBER, TEXT, OUTPUT_RANK } from './component/data.js';
+import { NUMBER, TEXT } from './component/data.js';
 import LottoValidator from './component/LottoValidator.js';
 import PrizeValidator from './component/PrizeValidator.js';
 
 function matchingLotto(inputNumberList, inputBounsNumber, lottoNumber) {
-  const matchingNumber = Array(lottoNumber.length).fill(0);
-  const matchingBonus = Array(lottoNumber.length).fill(0);
+  const matchingNumber = Array(lottoNumber.length).fill(NUMBER.INIT_VALUE);
+  const matchingBonus = Array(lottoNumber.length).fill(NUMBER.INIT_VALUE);
   lottoNumber.forEach((items, index) => {
     items.forEach((item) => {
       if (inputNumberList.includes(item)) {
@@ -57,48 +57,11 @@ async function lottoNumberGet() {
   lottoValidator.validate();
   return [inputNumberList, inputBounsNumber];
 }
-// eslint-disable-next-line max-lines-per-function
-function prizeValidator(matchingNumber, matchingBonus, inputAmount) {
-  const prize = {
-    '1등': 2000000000,
-    '2등': 3000000,
-    '3등': 1500000,
-    '4등': 50000,
-    '5등': 5000,
-  };
-  const rank = {
-    '1등': 0,
-    '2등': 0,
-    '3등': 0,
-    '4등': 0,
-    '5등': 0,
-  };
-  let result = 0;
-  matchingNumber.forEach((number, index) => {
-    if (number === 3) rank['5등'] += 1;
-    if (number === 4) rank['4등'] += 1;
-    if (number === 5) {
-      if (number === 5 && matchingBonus[index] === 1) {
-        rank['2등'] += 1;
-      } else {
-        rank['3등'] += 1;
-      }
-    }
-    if (number === 6) rank['1등'] += 1;
-  });
-  Console.print(TEXT.OUTPUT_PRIZE);
-  Object.values(rank).forEach((value, index) => {
-    Console.print(Object.values(OUTPUT_RANK)[index] + value + TEXT.OUTPUT_ITEM);
-  });
-  Object.values(rank).forEach((value, index) => {
-    result += value * Object.values(prize)[index];
-  });
-  const earnRatio = `${((result / inputAmount) * 100).toFixed(1)}%`;
-  console.log(`${TEXT.OUTPUT_RESULT}${earnRatio}입니다.`);
-}
+
 export async function lottoAmountGet() {
   const inputAmount = await Console.readLineAsync(TEXT.INPUT_AMOUNT);
-  if (inputAmount % 1000 !== 0) throw new Error(TEXT.AMOUNT_ERROR);
+  if (inputAmount % NUMBER.INITIAL_AMOUNT !== NUMBER.INIT_VALUE)
+    throw new Error(TEXT.AMOUNT_ERROR);
   const lottoNumber = outputNumber(inputAmount);
   const [inputNumberList, inputBounsNumber] = await lottoNumberGet();
   const [matchingNumber, matchingBonus] = matchingLotto(
