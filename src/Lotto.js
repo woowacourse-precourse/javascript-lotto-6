@@ -14,6 +14,12 @@ class Lotto {
     if (!InputValidator.checkMatchLength(numbers.length)) {
       throw new ValidationError(ERROR_MESSAGE.notMatchedLength);
     }
+    if (!InputValidator.checkDuplicateNumber(numbers)) {
+      throw new ValidationError(ERROR_MESSAGE.duplicateNumber);
+    }
+    if (!InputValidator.checkIncludeNumbers(numbers)) {
+      throw new ValidationError(ERROR_MESSAGE.invalidNumber);
+    }
   }
 
   // TODO: 추가 기능 구현

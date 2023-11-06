@@ -1,4 +1,4 @@
-import { DRAW_NUMBERS } from '../constants/numbers.js';
+import { DRAW_NUMBERS, RANDOM_NUMBER } from '../constants/numbers.js';
 
 const InputValidator = {
   checkNaN(number) {
@@ -24,6 +24,30 @@ const InputValidator = {
 
   checkMatchLength(length) {
     if (length === DRAW_NUMBERS) {
+      return true;
+    }
+    return false;
+  },
+
+  checkIncludeNumber(number) {
+    if (number >= RANDOM_NUMBER.from && number <= RANDOM_NUMBER.to) {
+      return true;
+    }
+    return false;
+  },
+
+  checkIncludeNumbers(numbers) {
+    for (let index = 0; index < numbers.length; index += 1) {
+      const number = numbers[index];
+      if (!this.checkIncludeNumber(number)) {
+        return false;
+      }
+    }
+    return true;
+  },
+
+  checkDuplicateNumber(numbers) {
+    if (new Set(numbers).size === numbers.length) {
       return true;
     }
     return false;
