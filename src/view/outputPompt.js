@@ -1,6 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../constant/message.js';
 
+export const printErrorMessage = (errorMessage) => {
+  Console.print(errorMessage);
+};
+
 export const printBuyLottery = (amount) => {
   Console.print(OUTPUT_MESSAGE.OUTPUT_BUY_LOTTERY(amount));
 };
