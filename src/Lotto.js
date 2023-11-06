@@ -19,7 +19,7 @@ class Lotto {
     }
     for (let number of numbers) {
       if (number < 1 || number > 45) {
-        throw new Error(Messages.ERROR_WINNING_NUMBER_OUT_OF_RANGE);
+        throw new Error(Messages.ERROR_NUMBER_OUT_OF_RANGE);
       }
     }
   }
