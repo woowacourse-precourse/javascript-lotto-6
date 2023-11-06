@@ -16,6 +16,9 @@ class App {
 
     // 기능 ➌ 사용자에게 당첨 번호를 입력받는다.
     const winNumbers = await InputView.readWinNumbers();
+
+    // 기능 ➍ 사용자에게 보너스 번호를 입력받는다.
+    const bonusNumber = await InputView.readBonusNumber();
   }
 }
 

@@ -19,6 +19,13 @@ class InputView {
         LottoValidator.isDuplicated(winNumbers);
         return winNumbers;
     }
+
+    static async readBonusNumber() {
+        const bonusNumber = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+        MoneyValidator.isPositiveInt(bonusNumber);
+        LottoValidator.isValidRange2(bonusNumber);
+        return bonusNumber;
+    }
 }
 
 export default InputView;

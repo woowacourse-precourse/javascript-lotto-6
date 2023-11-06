@@ -12,6 +12,11 @@ class LottoValidator {
         });
     }
 
+    static isValidRange2 (number) {
+        if (number < 1 || number > 45)
+                throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+
     static isValidRange (numbers) {
         numbers.forEach((number) => {
             if (number < 1 || number > 45)
