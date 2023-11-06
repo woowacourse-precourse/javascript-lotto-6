@@ -1,4 +1,5 @@
 import MESSAGES from "./constants/messages";
+import SETTINGS from "./constants/settings";
 
 class Lotto {
   #numbers;
@@ -10,11 +11,16 @@ class Lotto {
 
   #validate(numbers) {
     const numbersSet = new Set(numbers);
-    if (numbersSet.size !== 6) {
+    const { count, minimum, maximum } = SETTINGS.targetNumber;
+
+    if (numbersSet.size !== count) {
       throw new Error(MESSAGES.error.invalidTargetNumbersLength);
     }
     if (numbers.some((number) => typeof number !== "number")) {
       throw new Error(MESSAGES.error.notNumber);
+    }
+    if (numbers.some((number) => number > maximum || number < minimum)) {
+      throw new Error(MESSAGES.error.invalidRange);
     }
   }
 
