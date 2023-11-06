@@ -23,4 +23,15 @@ export default class ValidationService {
   hasSixNumbers(ticket) {
     return ticket.length === FULL_NUMBER_LENGTH;
   }
+
+  isUnique(ticket) {
+    const uniqueArray = [];
+    ticket.forEach((num) => {
+      if (uniqueArray.includes(num)) {
+        return false;
+      }
+      uniqueArray.push(num);
+    });
+    return true;
+  }
 }
