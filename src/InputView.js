@@ -5,12 +5,28 @@ const INPUT_WINNING_NUMBER = '당첨 번호를 입력해 주세요.\n';
 const INPUT_BONUST_NUMBER = '보너스 번호를 입력해 주세요.';
 
 class InputView {
-  async inputWinningNumber() {
-    const playerInput = await Console.readLineAsync(INPUT_WINNING_NUMBER);
-    return playerInput;
+  constructor() {
+    this.winningNumber = [];
+    this.playerMoney = 0;
   }
 
-  stringToNumber(inputNumber) {
+  saveLottoWinningNumber() {
+    const input = this.inputWinningNumber();
+    this.winningNumber = this.stringToNumberArray(input);
+    return this.winningNumber;
+  }
+
+  async inputWinningNumber() {
+    const playerWinningNumber = await Console.readLineAsync(INPUT_WINNING_NUMBER);
+    return playerWinningNumber;
+  }
+
+  async inputAmountOfMoney() {
+    const playerInputMoney = await Console.readLineAsync(INPUT_WINNING_NUMBER);
+    this.playerMoney = Number(playerInputMoney);
+  }
+
+  stringToNumberArray(inputNumber) {
     return inputNumber.split(',').map(Number);
   }
 }

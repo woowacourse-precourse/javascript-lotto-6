@@ -10,7 +10,7 @@ describe('stringToNumber', () => {
     const inputString = '1,2,3,4,5';
     const expectedOutput = [1, 2, 3, 4, 5];
 
-    const result = input.stringToNumber(inputString);
+    const result = input.stringToNumberArray(inputString);
 
     expect(result).toEqual(expectedOutput);
   });
