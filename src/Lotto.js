@@ -1,3 +1,5 @@
+import { Random } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -13,6 +15,10 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+
+  static generateLottoNumbers() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
 }
 
 export default Lotto;
