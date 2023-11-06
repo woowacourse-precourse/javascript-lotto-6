@@ -4,13 +4,17 @@ const INPUT = {
   BONUS_NUMBER: "보너스 번호를 입력해 주세요.",
 };
 
+const SIGNAL = {
+  SEPERATOR: ",",
+};
+
 const OUTPUT = {
   PURCHASE_COUNT: (count) => `${count}개를 구매했습니다.`,
   LOTTO_NUMBER: (lotto) => `[${lotto.join(", ")}]`,
   RESULT_HEADER: "당첨 통계\n___",
   RESULT: (result) => {
     const { rank, count, prize } = result;
-    return `${rank}(${prize}원)- ${count}개`;
+    return `${rank}(${prize.toLocaleString()}원)- ${count}개`;
   },
   PROFIT: (profit) => `총 수익률은 ${profit}%입니다.`,
 };
@@ -27,5 +31,5 @@ const ERROR = {
   NOT_NUMBER: "[ERROR] 숫자만 입력 가능합니다.",
 };
 
-Object.freeze(INPUT, OUTPUT, ERROR);
-export default { INPUT, OUTPUT, ERROR };
+Object.freeze(INPUT, SIGNAL, OUTPUT, ERROR);
+export default { INPUT, SIGNAL, OUTPUT, ERROR };
