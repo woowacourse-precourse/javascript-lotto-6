@@ -27,7 +27,7 @@ const messageGenerator = {
     return `${purchasedLottoNumbers.length}${OUTPUT_MESSAGE.purchaseResult}`;
   },
   lottoNumbers(purchasedLottoNumbers) {
-    return purchasedLottoNumbers.map((row) => `[${row.join(", ")}]`).join("\n");
+    return purchasedLottoNumbers.map((row) => `[${row.sort((a, b) => a - b).join(", ")}]`).join("\n");
   },
   matchResultString() {
     return OUTPUT_MESSAGE.matchResult;
