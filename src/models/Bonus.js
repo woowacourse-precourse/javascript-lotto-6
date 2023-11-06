@@ -4,7 +4,7 @@ class Bonus {
   #number;
 
   constructor(number){
-    this.#validate();
+    this.#validate(number);
     this.#number = number;
   }
 
@@ -14,7 +14,7 @@ class Bonus {
   }
 
   #validateNumber(number) {
-    if (!isNaN(number)) {
+    if (isNaN(number)) {
       throw new Error(ERROR_MESSAGE.not_number);
     }
   }
