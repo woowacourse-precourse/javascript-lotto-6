@@ -2,6 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import NumberIssuance from "./NumberIssuance.js";
 import ValidateInput from "./ValidateInput.js";
 import LottoGame from "./LottoGame.js";
+import Calculator from "./Calculator.js";
 
 class App {
   async play() {
@@ -23,7 +24,11 @@ class App {
 
     lottoGame.start();
     lottoGame.generateStatistics();
+
+    const calculator = new Calculator(lottoGame.reward, amount);
     Console.print(lottoGame.statistics);
+
+    Console.print(`총 수익률은 ${calculator.revenue}%입니다.`);
   }
 
   async getAmount() {

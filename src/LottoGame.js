@@ -16,7 +16,8 @@ class LottoGame {
       "6개 일치 (2,000,000,000원)": 0,
       None: 0,
     };
-    this.statistics = "\n당첨 통계\n---\n";
+    this.statistics = "\n당첨 통계\n---";
+    this.reward = 0;
   }
 
   start() {
@@ -28,7 +29,15 @@ class LottoGame {
 
   generateStatistics() {
     Object.entries(this.results).forEach(([key, value]) => {
-      if (key !== "None") this.statistics += `${key} - ${value}개\n`;
+      if (key !== "None") this.statistics += `\n${key} - ${value}개`;
+
+      if (key === "3개 일치 (5,000원)") this.reward += 5000 * value;
+      if (key === "4개 일치 (50,000원)") this.reward += 50000 * value;
+      if (key === "5개 일치 (1,500,000원)") this.reward += 1500000 * value;
+      if (key === "5개 일치, 보너스 볼 일치 (30,000,000원)")
+        this.reward += 30000000 * value;
+      if (key === "6개 일치 (2,000,000,000원)")
+        this.reward += 200000000 * value;
     });
   }
 }
