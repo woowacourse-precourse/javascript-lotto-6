@@ -22,7 +22,7 @@ class App {
     let purchase = null;
     let lotto = null;
     let bonus = null;
-
+    
     while (!purchase) {
       try {
         purchase = new Purchase(
@@ -57,6 +57,11 @@ class App {
         MissionUtils.Console.print(error.message);
       }
     }
+
+    const { lottoResult, totalProfits } = await lotto.result(
+      issuance.get(),
+      bonus.get()
+    );
 
     
   }
