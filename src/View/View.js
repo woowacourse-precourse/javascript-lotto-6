@@ -39,11 +39,7 @@ export default class View {
     this.#outputView.print(stringTicket);
   }
 
-  printRankResult(rankBoard) {
-    this.#outputView.print(MessageFormat.rankResult(rankBoard));
-  }
-
-  printProfitAbility(profitAbility) {
-    this.#outputView.print(MessageFormat.profitAbilityResult(profitAbility));
+  printGameResult(result) {
+    this.#outputView.print(MessageFormat.gameResult(result));
   }
 }

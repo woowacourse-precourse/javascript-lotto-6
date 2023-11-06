@@ -8,6 +8,8 @@ class App {
 
   async play() {
     await this.setGameConfig();
+
+    this.#view.printGameResult(this.lottoResult);
   }
 
   async setGameConfig() {
