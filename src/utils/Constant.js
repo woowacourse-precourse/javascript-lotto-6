@@ -1,5 +1,7 @@
 "use strict";
 
+const NEWLINE = "\n";
+
 const LOTTO = Object.freeze({
 	minRange: 1,
 	maxRange: 45,
@@ -12,7 +14,7 @@ const PRINT_INPUT = Object.freeze({
 });
 
 const PRINT_OUTPUT = Object.freeze({
-	outputLottoNumbers: "개를 구매했습니다.\n",
+	outputLottoCount: "개를 구매했습니다.\n",
 });
 
 const ERROR_MESSAGE = Object.freeze({
@@ -21,4 +23,4 @@ const ERROR_MESSAGE = Object.freeze({
 	invalidInputAmount: "[ERROR] 1000원 이상 입력해주세요",
 });
 
-export { LOTTO_NUMBER, PRINT_INPUT, ERROR_MESSAGE };
+export { LOTTO, PRINT_INPUT, PRINT_OUTPUT, ERROR_MESSAGE, NEWLINE };

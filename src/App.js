@@ -1,9 +1,9 @@
 import InputPrintout from "./utils/InputPrintout.js";
+import OutputPrintout from "./utils/OutputPrintout.js";
 
 class App {
 	async play() {
-		const a = await InputPrintout.inputAmount();
-		console.log(a + "음?");
+		OutputPrintout.printLottoCount(await InputPrintout.inputAmount());
 	}
 }
 
