@@ -15,8 +15,8 @@ export default function getRateOfReturn(resultMap, purchaseAmount) {
     if (elements !== 0) profits += LOTTO_DATA.get(keys[index]);
   });
 
-  const rateOfReturn = ((profits - purchaseAmount) / purchaseAmount) * 100;
-  const roundedRate = Math.round(rateOfReturn * 100) / 100;
-  const result = roundedRate.toFixed(1);
+  const rateOfReturn = (profits / purchaseAmount) * 100;
+
+  const result = rateOfReturn.toFixed(1);
   return result;
 }
