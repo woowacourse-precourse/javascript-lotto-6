@@ -10,7 +10,7 @@ class LottoService {
   }
 
   compareLottoNumbers(numbers) {
-    const compareLotto = this.#winningNumbers.filter((number, index) => numbers[index] === number);
+    const compareLotto = numbers.filter((number) => this.#winningNumbers.includes(number));
     return {
       isWinning: compareLotto.length >= LOTTO.minMatchCount,
       matchCount: compareLotto.length,
