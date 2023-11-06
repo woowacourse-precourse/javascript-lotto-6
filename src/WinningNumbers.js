@@ -33,7 +33,8 @@ class WinningNumbers{
   }
 
   #validateBonusNumber(bonus) {
-    
+    bonus = Number(bonus);
+    if(bonus < 1 || bonus > 45) throw new Error(ERROR.BONUS_NUMBER_NOT_IN_VALID_RANGE);
   }
 }
 
