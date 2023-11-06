@@ -1,11 +1,21 @@
 export const RANGE_MIN = 1;
 export const RANGE_MAX = 45;
 export const LOTTO_LENGTH = 6;
+
+export const keys = {
+    THREE: 'three',
+    FOUR: 'four',
+    FIVE: 'five',
+    FIVE_BONUS: 'fivePlusBonus',
+    SIX: 'six'
+}
+
 export const inputPrompts = {
     PURCHASE: '구입금액을 입력해 주세요.\n',
-    WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-    BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n'
+    WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+    BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n'
 };
+
 export const errorMessages = {
     LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
     NAN: '[ERROR] 로또 번호는 숫자여야 합니다.',

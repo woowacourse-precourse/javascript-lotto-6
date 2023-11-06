@@ -21,7 +21,6 @@ class Lotto {
       throw new Error(errorMessages.RANGE);
   }
 
-  // TODO: 추가 기능 구현
   getLottoNumbers() {
     return this.#numbers;
   }
@@ -34,18 +33,22 @@ class Lotto {
 
   #containsDecimals(numbers) {
     let containsDecimals = false;
+
     numbers.forEach((number) => {
-      const string = number.toString();
-      if (string.includes('.')) containsDecimals = true;
+      const numberString = number.toString();
+      if (numberString.includes('.')) containsDecimals = true;
     });
+
     return containsDecimals;
   }
 
   #isOutOfRange(numbers) {
     let isOutOfRange = false;
+
     numbers.forEach((number) => {
       if (number < RANGE_MIN || number > RANGE_MAX) isOutOfRange = true;
     });
+
     return isOutOfRange;
   }
 }
