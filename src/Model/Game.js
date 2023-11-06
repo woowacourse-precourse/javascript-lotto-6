@@ -39,9 +39,11 @@ class Game {
   }
 
   calculateRank(cnt, bonus = false) {
-    if (bonus) {
+    const isPossibleSecondRank = cnt === 5;
+    if (isPossibleSecondRank) {
       return LOTTO_RANK[cnt][bonus];
     }
+    
     return LOTTO_RANK[cnt];
   }
 }

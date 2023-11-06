@@ -54,7 +54,7 @@ class GameController {
   // 3. 로또 번호를 입력 받는다.
   async getLottoNumbers() {
     const luckyNumbers = await this.getLuckyNumbers();
-    const bonusNumber = await this.getBonumsNumber(luckyNumbers);
+    const bonusNumber = await this.getBonusNumber(luckyNumbers);
 
     return { luckyNumbers, bonusNumber };
   }
@@ -69,10 +69,10 @@ class GameController {
   }
 
   // 3-2. 보너스 번호를 입력 받는다.
-  async getBonumsNumber(luckyNumbers) {
+  async getBonusNumber(luckyNumbers) {
     const bonusNumber = InputValidator.validateBonusNumber(await InputView.getBonusNumber(), luckyNumbers);
     if (!bonusNumber) {
-      return this.getBonumsNumber(luckyNumbers);
+      return this.getBonusNumber(luckyNumbers);
     }
     return bonusNumber;
   }

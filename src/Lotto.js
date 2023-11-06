@@ -5,6 +5,7 @@
 import { ERROR_MESSAGE } from "./constants/error.js";
 
 import OutputView from "./View/OutputView.js";
+import InputValidator from "./Validator/inputValidator.js";
 import LottoValidator from "./Validator/lottoValidator.js";
 
 class Lotto {
@@ -23,6 +24,9 @@ class Lotto {
     }
     if (!LottoValidator.isRepeat(numbers)) {
       throw new Error(ERROR_MESSAGE.isRepeat);
+    }
+    if (!InputValidator.validateArray(numbers, LottoValidator.isValidLottoNumber)) {
+      throw new Error(ERROR_MESSAGE.notValidLotto);
     }
   }
 
