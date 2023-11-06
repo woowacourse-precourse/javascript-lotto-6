@@ -1,3 +1,5 @@
+import LottoValidator from "../LottoValidator";
+
 class TargetLottie {
   #numbers;
   #bonusNumber;
@@ -9,17 +11,7 @@ class TargetLottie {
   }
 
   #validate(numbers, bonusNumber) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 당첨 로또 번호는 6개여야 합니다.");
-    }
-
-    if (new Set(numbers).size !== 6) {
-      throw new Error("[ERROR] 당첨 로또 번호는 중복되지 않아야 합니다.");
-    }
-
-    if (numbers.includes(bonusNumber)) {
-      throw new Error("[ERROR] 보너스 번호는 당첨 번호에 포함될 수 없습니다.");
-    }
+    LottoValidator.validateTargetLottoDomain(numbers, bonusNumber);
   }
 
   calLottoResult(lottto) {
