@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import GameUtils from "./GameUtils.js";
 class LottoGame {
   #lottos;
   #purchaseNumber;
@@ -48,7 +49,8 @@ class LottoGame {
     for (let index = 0; index < this.#lottos.length; index++) {
       MATHING_COUNTS.push(this.#lottos[index].getMatchingCount(winningNumbers));
     }
-    const WINNING_STATUS = this.calculateWinnigStatus(MATHING_COUNTS,bonusNumber);
+    const MATHING_COUNT_OBJ = this.matchingCountsWithObj(MATHING_COUNTS,bonusNumber);
+    const WINNING_STATUS = GameUtils.removeItemsWithNumericKeysLessThanThree(MATHING_COUNT_OBJ);
     return WINNING_STATUS;
   }
 
@@ -59,7 +61,7 @@ class LottoGame {
     }
     return '5';
   }
-  calculateWinnigStatus(matchingCounts,bonusNumber) {
+  matchingCountsWithObj(matchingCounts,bonusNumber) {
     const WINNING_STATUS = {};
     for (let index=0; index<matchingCounts.length; index++) {
       let mathingCount = matchingCounts[index];
@@ -67,7 +69,8 @@ class LottoGame {
         mathingCount = this.checkBonusNumberMatch(index,bonusNumber)
       }
       if (!WINNING_STATUS[mathingCount]) {
-        WINNING_STATUS[mathingCount] = 0;
+        WINNING_STATUS[mathingCount] = 1;
+        continue;
       }
       WINNING_STATUS[mathingCount] += 1;
     }
