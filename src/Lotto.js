@@ -26,7 +26,9 @@ class Lotto {
     });
     return winCount;
   }
-  
+  compareBonusNumber(bonusNumber) {
+    return this.#numbers.includes(Number(bonusNumber));
+  }
 
   // TODO: 추가 기능 구현
 }
