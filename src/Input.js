@@ -2,9 +2,10 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Input {
   async readMoneyBuyingLotto() {
-    const INPUT = await MissionUtils.Console.readLineAsync();
+    const INPUT =
+      await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
     this.validLottoMoney(INPUT);
-    return INPUT;
+    return Number(INPUT);
   }
 
   validLottoMoney(input) {
@@ -17,10 +18,11 @@ class Input {
   }
 
   async readLottoNumbers() {
-    const INPUT = await MissionUtils.Console.readLineAsync();
+    const INPUT =
+      await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     const NUMBERS = INPUT.split(",").map(Number);
     this.validLottoNumbers(NUMBERS);
-    return INPUT;
+    return NUMBERS;
   }
 
   validLottoNumbers(numbers) {
@@ -37,9 +39,12 @@ class Input {
   }
 
   async readBonusNumber() {
-    const INPUT = await MissionUtils.Console.readLineAsync();
+    const INPUT =
+      await MissionUtils.Console.readLineAsync(
+        "보너스 번호를 입력해 주세요.\n"
+      );
     this.validBonusNumber(INPUT);
-    return INPUT;
+    return Number(INPUT);
   }
 
   validBonusNumber(input) {
