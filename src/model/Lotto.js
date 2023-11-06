@@ -49,10 +49,10 @@ class Lotto {
   calculateRank(bonusNumber) {
     if (this.winningCount === 3) Place['5th'] += 1;
     if (this.winningCount === 4) Place['4th'] += 1;
-    if (this.winningCount === 5) Place['3rd'] += 1;
-    if (this.winningCount === 5 && this.existBonusNumber(bonusNumber)) {
+    if (this.winningCount === 5 && !this.existBonusNumber(bonusNumber))
+      Place['3rd'] += 1;
+    if (this.winningCount === 5 && this.existBonusNumber(bonusNumber))
       Place['2nd'] += 1;
-    }
     if (this.winningCount === 6) Place['1st'] += 1;
   }
 
