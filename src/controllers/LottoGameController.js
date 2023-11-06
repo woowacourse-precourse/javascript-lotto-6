@@ -1,5 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
-
 import View from '../views/View.js';
 import LottoPublisher from '../models/LottoPublisher.js';
 import LottoService from '../models/LottoService.js';
