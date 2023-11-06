@@ -33,12 +33,13 @@ class App {
   }
 
   async makeLotto() {
-    Console.print(`\n ${this.pay}개를 구매했습니다.`);
+    Console.print(`${this.pay}개를 구매했습니다.`);
     for (let i = 0; i < this.pay; i++) {
       const lotto = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
         (a, b) => a - b
       );
-      Console.print(lotto);
+      const formattedLotto = `[${lotto.join(", ")}]`;
+      Console.print(formattedLotto);
       this.lottos.push(lotto);
     }
   }
