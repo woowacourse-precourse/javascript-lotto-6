@@ -17,7 +17,7 @@ class Lotto {
     let matchCount = 0;
     let isBonusMatched = false;
 
-    this.numbers.forEach((number) => {
+    this.#numbers.forEach((number) => {
       if (winningNumbers.includes(number)) {
         matchCount += 1;
       } else if (number === bonusNumber) {
@@ -26,6 +26,10 @@ class Lotto {
     });
 
     return { matchCount, isBonusMatched };
+  }
+
+  printNumbers() {
+    return this.#numbers;
   }
 }
 
