@@ -53,11 +53,13 @@ const Validator = {
     this.validateMinPrice(input);
     this.validateDivisible(input);
   },
+
   validateBonusNumberString(number) {
-    if (Number.isNaN(number)) {
+    if (Number.isNaN(Number(number))) {
       throw new Error(errorMessage.INVALID_STRING_BONUS_NUMBER);
     }
   },
+
   validateNumberInWinningNumbers(number, winningNumbers) {
     if (winningNumbers.includes(number)) {
       throw new Error(errorMessage.WINNING_NUMBER_IN_BONUS_NUMBER);

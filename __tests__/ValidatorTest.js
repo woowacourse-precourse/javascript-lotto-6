@@ -28,4 +28,8 @@ describe('유저 입력 유효성 검사', () => {
   ])('지정한 길이를 검사하는 함수 테스트', (input, length) => {
     expect(() => Validator.validateLength(input, length)).not.toThrow();
   });
+
+  test.each([['good'], ['ㅁ']])('보너스 번호 숫자인지 확인', (input) => {
+    expect(() => Validator.validateBonusNumberString(input)).toThrow();
+  });
 });
