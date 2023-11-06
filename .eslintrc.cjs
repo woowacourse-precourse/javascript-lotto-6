@@ -19,5 +19,14 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  rules: { 'class-methods-use-this': 0, 'no-new': 0, 'import/extensions': 0 },
+  rules: {
+    'class-methods-use-this': 1,
+    'no-new': 1,
+    'import/extensions': 1,
+    'no-restricted-globals': 1,
+    'no-useless-constructor': 1,
+    'no-empty-function': 1,
+    'no-await-in-loop': 1,
+    'no-constant-condition': 1,
+  },
 };
