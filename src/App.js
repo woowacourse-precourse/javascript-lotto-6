@@ -1,13 +1,16 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import Input from './Input.js';
+import Output from './Output.js';
 import Lotto from './Lotto.js';
 import Validation from './Validation.js';
 
 class App {
   #input;
+  #output;
 
   constructor() {
     this.#input = new Input();
+    this.#output = new Output();
   }
 
   validateUserPurchaseMoney(input) {
@@ -28,7 +31,7 @@ class App {
 
         return Number(userMoney);
       } catch (err) {
-        Console.print(err.message);
+        this.#output.error(err.message);
       }
     }
   }
@@ -65,7 +68,7 @@ class App {
 
         return winningNumbersArray;
       } catch (err) {
-        Console.print(err.message);
+        this.#output.error(err.message);
       }
     }
   }
@@ -89,7 +92,7 @@ class App {
 
         return bonusNumber;
       } catch (err) {
-        Console.print(err.message);
+        this.#output.error(err.message);
       }
     }
   }
@@ -109,14 +112,6 @@ class App {
     });
 
     return userTickets;
-  }
-
-  printLottoTicketCount(userTickets) {
-    Console.print(`${userTickets.length}개를 구매했습니다.`);
-  }
-
-  printLottoTicketNumbers(userTickets) {
-    userTickets.forEach((userTicket) => userTicket.printLottoNumbers());
   }
 
   calculateWinningResult(userTickets, winningNumbers, bonusNumber) {
@@ -145,29 +140,12 @@ class App {
     return (total / userMoney) * 100;
   }
 
-  printWinningResult(results) {
-    Console.print('당첨 통계');
-    Console.print('---');
-    Console.print(`3개 일치 (5,000원) - ${results['5']}개`);
-    Console.print(`4개 일치 (50,000원) - ${results['4']}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${results['3']}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${results['2']}개`
-    );
-    Console.print(`6개 일치 (2,000,000,000원) - ${results['1']}개`);
-  }
-
-  printTotalReturn(totalReturn) {
-    Console.print(totalReturn);
-    Console.print(`총 수익률은 ${Math.round(totalReturn * 100) / 100}%입니다.`);
-  }
-
   async play() {
     const userMoney = await this.getUserPurchaseMoney();
     const userTickets = this.purchaseLottoTickets(userMoney);
 
-    this.printLottoTicketCount(userTickets);
-    this.printLottoTicketNumbers(userTickets);
+    this.#output.lottoTicketCount(userTickets);
+    this.#output.lottoTicketNumbers(userTickets);
 
     const winningNumbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
@@ -180,8 +158,8 @@ class App {
 
     const totalReturn = this.calculateTotalReturn(results, userMoney);
 
-    this.printWinningResult(results);
-    this.printTotalReturn(totalReturn);
+    this.#output.winningResult(results);
+    this.#output.totalReturnResult(totalReturn);
   }
 }
 
