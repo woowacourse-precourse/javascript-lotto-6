@@ -77,7 +77,7 @@ class App {
     };
   }
 
-  checkThousand(){
+  checkThousand(remainder){
     try {
       if(remainder !== 0 ) {
         throw new Error;
@@ -132,27 +132,24 @@ class App {
       const newArray = [...this.arrayNumbers[i],...this.winning.map(Number)]
       const setObject = new Set(newArray)
       const set = Array.from(setObject);
-      this.checkSameNumbers(set);
-    }
-  }
 
-  checkSameNumbers(set) {
-    switch (set.length) {
-      case 9:
-        this.sameNumbersObject['three']++
-        break;
-      case 8:
-        this.sameNumbersObject['four']++
-        break;
-      case 7:
-        this.sameNumbersObject['five']++
-        break;
-      case 6:
-        this.sameNumbersObject['six']++
-        break;      
-    }
-    if(set.length === 7 && this.arrayNumbers.includes(this.bonus)) {
-      this.sameNumbersObject['bonus']++
+      switch (set.length) {
+        case 9:
+          this.sameNumbersObject['three']++
+          break;
+        case 8:
+          this.sameNumbersObject['four']++
+          break;
+        case 7:
+          this.sameNumbersObject['five']++
+          break;
+        case 6:
+          this.sameNumbersObject['six']++
+          break;      
+      }
+      if(set.length === 7 && this.arrayNumbers[i].includes(this.bonus)) {
+        this.sameNumbersObject['bonus']++
+      }
     }
   }
   
@@ -164,7 +161,8 @@ class App {
     + this.sameNumbersObject['bonus'] * 30000000 
     + this.sameNumbersObject['six'] * 2000000000;
 
-    const rate = winningPrice/this.price * 100;
+    const rate = winningPrice/this.price;
+    const percent = rate.toFixed(4) * 100;
     
     MissionUtils.Console.print(
     `당첨 통계
@@ -174,7 +172,7 @@ class App {
     5개 일치 (1,500,000원) - ${this.sameNumbersObject['five']}개
     5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.sameNumbersObject['bonus']}개
     6개 일치 (2,000,000,000원) - ${this.sameNumbersObject['six']}개
-    총 수익률은 ${rate}%입니다.`)
+    총 수익률은 ${percent}%입니다.`)
   }
   
 }
