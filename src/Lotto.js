@@ -47,7 +47,7 @@ class Lotto {
     });
 
     if (cnt === 6) return RANKS.RANK_FIRST;
-    if (cnt === 5 && lottos.includes(bonusLotto)) return RANKS.RANK_SECOND;
+    if (cnt === 5 && lottos.includes(Number(bonusLotto))) return RANKS.RANK_SECOND;
     if (cnt === 5) return RANKS.RANK_THIRD;
     if (cnt === 4) return RANKS.RANK_FOURTH;
     if (cnt === 3) return RANKS.RANK_FIFTH;
