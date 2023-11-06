@@ -1,13 +1,18 @@
 import { INPUT_ERROR_MESSAGE } from "../constants/ErrorMessages.js";
-import { LengthError } from "../error/InputErrors.js";
+import { bonusError, LengthError, PriceError } from "../error/InputErrors.js";
 
    const InputValidation = {
-    
-    isNumber : function(input) {
+
+    isPrice : function(input) {
       const isNotNumber =  isNaN(input)
-      if (isNotNumber) throw new TypeError(INPUT_ERROR_MESSAGE.lottoPriceFormat);
+      const isNotCorrectPrice = input % 1000 !== 0
+      if (isNotNumber || isNotCorrectPrice) throw new PriceError(INPUT_ERROR_MESSAGE.lottoPriceFormat);
     },
-    isNotNumberArray: function(input) {
+    isBonus : function(input) {
+      const isNotNumber =  isNaN(input)
+      if (isNotNumber) throw new bonusError(INPUT_ERROR_MESSAGE.bonusNumberFormat);
+    },
+    isWinningArray: function(input) {
       const isNotLengthSix = input.length !== 6;
       const isNotNumberArray = input.every((element) => typeof element === 'number');
     
