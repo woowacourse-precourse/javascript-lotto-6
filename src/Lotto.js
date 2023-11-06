@@ -26,8 +26,8 @@ class Lotto {
     }
   }
 
-  getWinningNumber() {
-    return this.#numbers;
+  checkSameNumber(parsedBonusNumber) {
+    return this.#numbers.includes(parsedBonusNumber);
   }
 }
 

@@ -7,7 +7,7 @@ export async function inputWinningNumber() {
     const userInputNumber = await Console.readLineAsync(MESSAGE.enterWinningNumber);
     const numbers = userInputNumber.split(',').map(Number);
     const lotto = new Lotto(numbers);
-    return lotto.getWinningNumber();
+    return lotto;
   } catch (error) {
     Console.print(error.message);
     return inputWinningNumber();
