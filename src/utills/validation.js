@@ -7,12 +7,35 @@ class Validation {
 	 * @param amount 
 	 * @returns isThousand
 	 */
-	async purchaseAmountInputValidation(amount) {
-		let isThousand = true;
+	isPurchaseAmountInputValidation(amount) {
+		let isThousand = false;
 		amount % 1000 != 0 ? isThousand = false : isThousand = true;
 
 		return isThousand;
 	}
+
+	/**
+	 * 만들어진 로또 번호가 숫자인지 확인하는 함수.
+	 * @param numbers
+	 * @returns isSafeInteger
+	 */
+	isSafeInteger = (numbers) => numbers.every(number => Number.isSafeInteger(number));
+
+	/**
+	 * 만들어진 로또 번호가 1에서 45 안에 포함되는지 확인하는 함수.
+	 * @param numbers
+	 * @returns isInRange
+	 */
+	isInRange = (numbers) => numbers.every(
+		(number) => 1 <= number && number <= 45,
+	);
+
+	/**
+	 * 만들어진 로또 번호가 중복되는지 확인하는 함수.
+	 * @param numbers
+	 * @returns 
+	 */
+	isDuplicate = (numbers) => new Set(numbers).size == numbers.length;
 }
 
 export default Validation;
