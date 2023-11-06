@@ -6,36 +6,166 @@
     <title>Document</title>
 </head>
 <body>
+
+  테스트코드: 에러 나오는 테스트와 시도를 나눠서 테스트 하기
+  에러 나오는 테스트:
+  ㅡ 시도에 0을 넣을 때 1이상 넣으라고 하기,
+  ㅡ 자동차 이름에 , 안 넣고 5자 이상일 때 5자 이하라고하기
+  
+  시도:
+  ㅡ 5번 시도하고 이름이 pobi,woosup,dragon,woni,jun 일 때 
+  각 시도의 숫자가 [1,4,3,4,5], [5,7,2,7,2],[9,5,2,7,3],[1,9,3,7,5],[8,7,6,5,4]이라면
+  제대로 출력되는지 확인
+  pobi : ---
+  woosup : -----
+  dragon : -
+  woni : -----
+  jun : ---
+최종우승자: woosup, woni 
+이렇게 나오는지
+
+  ㅡ 시도가 5번일때 그 시도가 잘되고 있는지 추적(spyOn)
+  ㅡ 이름이 입력받을 때 그 입력이 잘되고 있는지 추적
+  ㅡ 3번째 시도에서 pobi,woosup,woni만 -가 추가되었는지 확인
+
     <script>
-    sameNumbersObject = {
+      // -------------------자동차 경주-----------------
+//   const myProgress = ['','','',''];
+//   let arrayCarName=['woosup','pobi','eefqwf','werer'];
+//   let objectCarName={'woosup':1,'pobi':8,'eefqwf':4,'werer':7};
+// const count = Array(arrayCarName.length).fill('');  
+// for(let i = 0; i<arrayCarName.length; i++){
+//    if(Object.values(objectCarName)[i]>=5){
+//       count[i]++
+//       myProgress[i] = myProgress[i] + '-';
+//     } 
+//     console.log(count);
+//     console.log(`${arrayCarName[i]} : ${myProgress[i]}\n`);
+//     console.log(`${arrayCarName[i]} : ${count[i]}\n`);
+//     console.log(arrayCarName.join(", "));
+//     console.log(Object.values(objectCarName)[i])
+//   }
+
+// var randNum =  Math.floor(Math.random() * 10) + 1
+
+
+// function test(attemptNumber){
+//   const myProgress = ['','','',''];
+//   let arrayCarName=['woosup','pobi','eefqwf','werer'];
+//   let objectCarName={'woosup':1,'pobi':8,'eefqwf':4,'werer':7}
+//   let randNum =  Math.floor(Math.random() * 10) + 1
+//   const count = Array(arrayCarName.length).fill('');  
+//   let arrayWinner =[];
+//   arrayCarName.forEach((a) => {
+//     objectCarName[a] = 0;
+//   });
+// for(let j = 0; j<attemptNumber;j++){
+//   for(let i = 0; i<arrayCarName.length; i++){
+//     objectCarName[arrayCarName[i]] = Math.floor(Math.random() * 10) + 1;
+//    if(Object.values(objectCarName)[i]>=4){
+//       count[i]++;
+//       myProgress[i] = myProgress[i]+'-'
+//     } 
+//     console.log(`${arrayCarName[i]} : ${myProgress[i]}`);
+//   }
+//   console.log(objectCarName);
+//   console.log(count);
+// }
+//   arrayCarName.forEach((element,index) => {
+//     const maxNumber = Math.max(...count)
+//     if(maxNumber === count[index]){
+//       arrayWinner.push(element);
+//     }
+//   })
+//   const textWinner = arrayWinner.join(", ");
+//   console.log(`최종우승자 : ${textWinner}`);
+// }
+
+// -------------------로또------------------
+const number =[[8, 21, 23, 41, 42, 43],
+      [3, 5, 11, 16, 32, 38],
+      [7, 11, 16, 35, 36, 44],
+      [1, 8, 11, 31, 41, 42],
+      [13, 14, 16, 38, 42, 45],
+      [7, 11, 30, 40, 42, 43],
+      [2, 13, 22, 32, 38, 45],
+      [1, 3, 5, 14, 22, 45],
+      [3, 5, 7, 22, 35, 45]];
+
+const winningNumber = [3,5,22,24,35,45];
+const bonus = 7;
+const sameNumbersObject = {
       'three' : 0,
       'four' : 0,
       'five' : 0,
-      'six' : 0
+      'six' : 0,
+      'bonus' : 0
     }
-    sameNumbersObject['three']++
-  const arrayNumbers = [];
-  
-    count = 8;
-    for(let i = 0; i<count; i++){
-      const newArray = [];
-      for(let j = 0; j<6; j++){
-        const aNumber = Math.floor(Math.random() * 10 + 1);
-        newArray.push(aNumber)
-      }
-      arrayNumbers.push(newArray);
+function test() {
+  for(let i = 0; i < 9; i++){
+    const a = number[i];
+      const newArray = [...a,...winningNumber];
+      const setObject = new Set(newArray);
+      const set = Array.from(setObject);
+      console.log(1);
+      console.log(set)
+  switch (set.length) {
+    case 9:
+      sameNumbersObject['three']++
+      break;
+    case 8:
+      sameNumbersObject['four']++
+      break;
+    case 7:
+      sameNumbersObject['five']++
+      break;
+    case 6:
+      sameNumbersObject['six']++
+      break;   
     }
-    function a(){
-    const ee = Number('1000j')
-    const remainder = ee % 1000;
-console.log(remainder);
-if(isNaN(ee)){
-  console.log(Number(ee))
-
+  if(set.length === 7 && number[i].includes(bonus)) {
+    sameNumbersObject['bonus']++
+  }
 }
-if(remainder !== 0 ) {console.log('[ERROR]')};
+    let winningPrice = 
+    sameNumbersObject['three'] * 5000 
+    + sameNumbersObject['four']* 50000
+    + sameNumbersObject['five'] * 1500000
+    + sameNumbersObject['bonus'] * 30000000 
+    + sameNumbersObject['six'] * 2000000000;
 
-    }
+    const rate = winningPrice/9000 * 100;
+    const percent = rate.toFixed(4) * 100;
+    console.log((
+    `당첨 통계
+    ---
+    3개 일치 (5,000원) - ${sameNumbersObject['three']}개
+    4개 일치 (50,000원) - ${sameNumbersObject['four']}개
+    5개 일치 (1,500,000원) - ${sameNumbersObject['five']}개
+    5개 일치, 보너스 볼 일치 (30,000,000원) - ${sameNumbersObject['bonus']}개
+    6개 일치 (2,000,000,000원) - ${sameNumbersObject['six']}개
+    총 수익률은 ${percent}%입니다.`))
+
+  }
+
+
+  //   function test(set) {
+  //   switch (set) {
+  //     case 3:
+  //       sameNumbersObject['three']++
+  //       break;
+  //     case 4:
+  //       sameNumbersObject['four']++
+  //       break;
+  //     case 5:
+  //       sameNumbersObject['five']++
+  //       break;
+  //     case 6:
+  //       sameNumbersObject['six']++
+  //       break;      
+  //   }
+  //   console.log(sameNumbersObject);
+  // }
     </script>
 </body>
 </html>
