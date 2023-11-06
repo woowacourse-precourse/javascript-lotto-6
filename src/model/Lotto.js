@@ -31,7 +31,7 @@ class Lotto {
 
   #checkSameNumber(numbers) {
     const set = new Set(numbers);
-    if (set.size() !== numbers.length) {
+    if (set.size !== numbers.length) {
       throw new Error('[ERROR] 로또 번호가 중복됩니다.');
     }
   }

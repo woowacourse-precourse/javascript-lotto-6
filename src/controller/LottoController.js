@@ -51,7 +51,7 @@ class LottoController {
   }
 
   calculateProfit() {
-    // 돈 계산하고, 수익률 Place에 저장
+    // 돈 계산하고, 수익률 Place객체에 저장
     const profitPercentage = (calculateReward() / this.usedMoney) * 100;
     const rounded = Number(profitPercentage.toFixed(2));
     Place.profit = rounded;
