@@ -11,7 +11,10 @@ class App {
         this.displayLottoNumbers(maxTickets, lottos);
 
         const winningNumbers = await this.inputWinningNumbers();
+        const bonusNumber = await this.inputBonusNumber();
         MissionUtils.Console.print(winningNumbers);
+        MissionUtils.Console.print(bonusNumber);
+
     }
 
     async buyLottoTickets() {
@@ -56,19 +59,20 @@ class App {
 
     async inputWinningNumbers() {
         //TODO : 당첨 번호를 입력 받는다.
-        let userInput = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+        let userInput = await MissionUtils.Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
         return userInput.split(',');
     }
 
     async inputBonusNumber() {
         //TODO : 보너스 번호를 입력 받는다.
+        let userInput = await MissionUtils.Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+        return userInput;
     }
 
     displayLottoNumbers(maxTickets, lottos) {
         //TODO : 발행한 로또 수량 및 번호를 출력한다.
         MissionUtils.Console.print("\n" + maxTickets + "개를 구매했습니다.");
-        const lottoNumbersToDisplay = lottos.map(lotto => lotto.displayNumbers());
-        MissionUtils.Console.print("");
+        lottos.map(lotto => lotto.displayNumbers());
     }
 
     async printResults() {
