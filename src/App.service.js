@@ -10,13 +10,21 @@ export default class AppService {
     this.#IOController = new IOController();
   }
 
-  async play() {
+  async setting() {
     const NUMBER_OF_TICKETS = await this.#getNumberOfTickets();
-    const purchased = this.#buyTickets(NUMBER_OF_TICKETS);
-    purchased.forEach((ticket) => {
-      ticket = new Lotto(ticket);
-    });
+    const PURCHASED_TICKETS = this.#buyTickets(NUMBER_OF_TICKETS);
     const WINNING_LOTTO_NUMBERS = await this.#getWinningNumbers();
+    this.#printHitStatistics(PURCHASED_TICKETS, WINNING_LOTTO_NUMBERS);
+  }
+
+  #printHitStatistics(purchased, { winningNumbers, bonusNumber }) {
+    this.#IOController.printStatIntro();
+    const hits = purchased.reduce((acc, ticket) => {
+      const RANK = ticket.findRank({ winningNumbers, bonusNumber });
+      acc[RANK] += 1;
+      return acc;
+    }, new Array(6).fill(0));
+    this.#IOController.printHitStatistics(hits);
   }
 
   async #getNumberOfTickets() {
@@ -24,13 +32,14 @@ export default class AppService {
     return Math.floor(MONEY / TICKET_PRICE);
   }
 
-  #buyTickets(tickets) {
-    this.#IOController.printTicketCount(tickets);
+  #buyTickets(count) {
+    this.#IOController.printTicketCount(count);
     const purchased = [];
-    for (let i = 0; i < tickets; ++i) {
-      purchased.push(this.pickNumbers());
+    for (let i = 0; i < count; ++i) {
+      const NUMBERS = this.pickNumbers();
+      purchased.push(new Lotto(NUMBERS));
+      this.#IOController.printTicket(NUMBERS);
     }
-    this.#IOController.printTickets(purchased);
     return purchased;
   }
 

@@ -8,7 +8,7 @@ class App {
   }
 
   async play() {
-    await this.#AppService.play();
+    await this.#AppService.setting();
   }
 }
 

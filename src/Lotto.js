@@ -15,6 +15,20 @@ class Lotto {
     const validationController = new ValidationController();
     validationController.validatePurchasedTicket(numbers);
   }
+
+  findRank({ winningNumbers, bonusNumber }) {
+    const RANK = [0, 0, 0, 5, 4, 3, 1];
+    let count = 0;
+    this.#numbers.forEach((num) => {
+      if (winningNumbers.includes(num)) {
+        count += 1;
+      }
+    });
+    if (count === 5 && this.#numbers.includes(bonusNumber)) {
+      return 2;
+    }
+    return RANK[count];
+  }
 }
 
 export default Lotto;
