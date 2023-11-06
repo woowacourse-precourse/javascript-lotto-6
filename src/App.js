@@ -1,8 +1,10 @@
-import Lotto, { lottoAmountGet } from './Lotto.js';
+import Lotto from './Lotto.js';
+import GetLotto from './component/GetLotto.js';
 
 class App {
   async play() {
-    lottoAmountGet();
+    const start = new GetLotto();
+    start.lotto();
   }
 }
 
