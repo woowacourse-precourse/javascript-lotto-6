@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import PRINT_WINNERS from "./PrintWinners.js";
 
 class LottoView {
   async askPayment() {
@@ -11,29 +12,34 @@ class LottoView {
   }
 
   async askWinningNumbers() {
-    const input = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.");
+    const input = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
     return input.split(",").map(Number);
   }
 
   async askBonusNumber() {
-    const input = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.");
+    const input = await Console.readLineAsync(
+      "\n보너스 번호를 입력해 주세요.\n"
+    );
     return Number(input);
   }
-  showResults(prizeCounts) {
-    Console.print("\n당첨 통계\n---");
-    const prizeMapping = {
-      3: { count: prizeCounts[3] || 0, prize: 5000 },
-      4: { count: prizeCounts[4] || 0, prize: 50000 },
-      5: { count: prizeCounts[5] || 0, prize: 1500000 },
-      "5+1": { count: prizeCounts["5+1"] || 0, prize: 30000000 },
-      6: { count: prizeCounts[6] || 0, prize: 2000000000 },
-    };
 
-    // 결과 출력
-    Object.entries(prizeMapping).forEach(([matchCount, { count, prize }]) => {
-      console.log(
-        `${matchCount}개 일치 (${prize.toLocaleString()}원) - ${count}개`
-      );
+  showResults(countWinners) {
+    console.log("\n당첨 통계\n---");
+    // 당첨 결과를 순서대로 출력하기 위한 키 배열
+    const prizeOrder = [
+      "MATCH_3",
+      "MATCH_4",
+      "MATCH_5",
+      "MATCH_5_BONUS",
+      "MATCH_6",
+    ];
+
+    prizeOrder.forEach((key) => {
+      const { count, prize, text } = PRINT_WINNERS[key];
+      // countWinners 객체에서 해당 키에 해당하는 당첨 개수를 가져옵니다.
+      const winnerCount =
+        countWinners[key.replace("MATCH_", "").replace("_", "+")] || 0;
+      console.log(`${text} (${prize.toLocaleString()}원) - ${winnerCount}개`);
     });
   }
 }
