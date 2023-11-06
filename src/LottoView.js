@@ -19,13 +19,20 @@ class LottoView {
     const input = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.");
     return Number(input);
   }
-  showResults(results) {
+  showResults(prizeCounts) {
     Console.print("\n당첨 통계\n---");
-    results.forEach((result) => {
-      Console.print(
-        `${result.count}개 일치${result.bonus ? ", 보너스 볼 일치" : ""}  ${
-          result.lottoNumbers
-        }`
+    const prizeMapping = {
+      3: { count: prizeCounts[3] || 0, prize: 5000 },
+      4: { count: prizeCounts[4] || 0, prize: 50000 },
+      5: { count: prizeCounts[5] || 0, prize: 1500000 },
+      "5+1": { count: prizeCounts["5+1"] || 0, prize: 30000000 },
+      6: { count: prizeCounts[6] || 0, prize: 2000000000 },
+    };
+
+    // 결과 출력
+    Object.entries(prizeMapping).forEach(([matchCount, { count, prize }]) => {
+      console.log(
+        `${matchCount}개 일치 (${prize.toLocaleString()}원) - ${count}개`
       );
     });
   }
