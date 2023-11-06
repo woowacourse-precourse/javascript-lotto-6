@@ -7,7 +7,7 @@ class InputView {
     const purchaseAmount = await Console.readLineAsync(
       MESSAGE.INPUT_PURCHASE_AMOUNT,
     );
-    const amount = purchaseAmount % 1000;
+    const amount = purchaseAmount / 1000;
     // TODO : validation
     return amount;
   }

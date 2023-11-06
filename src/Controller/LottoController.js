@@ -25,8 +25,9 @@ class LottoController {
 
   createLottoList() {
     for (let i = 0; i < this.AMOUNT; i++) {
-      const lotto = new Lotto();
-      this.lottoList.push(lotto);
+      const lotto = new Lotto(this.lottoNumbers);
+      const ranNum = lotto.generateLottoNumbers();
+      this.lottoList.push(ranNum);
     }
   }
 }
