@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from "../constant/ERROR_MESSAGE";
-import { NUMBERS } from "../constant/LOTTO_SETTINGS";
+import { LOTTO_SETTINGS } from "../constant/LOTTO_SETTINGS";
 
 class Lotto {
   #numbers;
@@ -13,7 +13,7 @@ class Lotto {
   }
 
   #validateLength(numbers) {
-    if (numbers.length !== NUMBERS.LOTTO_LENGTH) {
+    if (numbers.length !== LOTTO_SETTINGS.LOTTO_LENGTH) {
       throw new Error(ERROR_MESSAGE.LOTTO_LENGTH_ERROR);
     }
   }
@@ -28,8 +28,8 @@ class Lotto {
   #validateRange(numbers) {
     const isSatisfyRange = numbers.every( 
       (number) =>  
-      NUMBERS.LOTTO_MIN_NUMBER <= number &&
-      number <= NUMBERS.LOTTO_MAX_NUMBER
+      LOTTO_SETTINGS.LOTTO_MIN_NUMBER <= number &&
+      number <= LOTTO_SETTINGS.LOTTO_MAX_NUMBER
     );
 
     if (!isSatisfyRange) {
