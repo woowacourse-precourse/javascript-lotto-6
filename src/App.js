@@ -1,27 +1,66 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-
 import LottoList from './LottoList.js';
+import Validation from './validation.js';
+import { readLineLottoCount, consoleError } from './utils.js';
 
 class App {
+  #lottoApp;
+
   constructor() {
-    this.lotto = new LottoList();
+    this.#lottoApp = new LottoList();
   }
 
   async play() {
-    await this.lotto.purchaseLotto.initialize();
-    // 구매한 로또 개수를 출력합니다.
-    const purchaseResult = await this.lotto.purchaseLotto.alertPurchaseLotto();
+    const isLottoGenerated = await this.initializeAndPurchaseLotto();
+    if (isLottoGenerated) {
+      await this.printLottoList();
+      await this.userInputNumbers();
+    }
+  }
+
+  async initializeAndPurchaseLotto() {
+    await this.#lottoApp.purchaseLotto.initialize();
+    const purchaseResult =
+      await this.#lottoApp.purchaseLotto.alertPurchaseLotto();
 
     if (
       typeof purchaseResult === 'string' &&
       purchaseResult.includes('[ERROR]')
     ) {
       MissionUtils.Console.print(purchaseResult);
-      return;
+      return false;
     }
 
-    const lottoList = await this.lotto.viewLottoList();
+    return true;
+  }
+
+  async printLottoList() {
+    const lottoList = await this.#lottoApp.viewLottoList();
     MissionUtils.Console.print(lottoList);
+  }
+
+  async userInputNumbers() {
+    try {
+      const inputNumbers = await this.getUserInput();
+      this.validateInputNumbers(inputNumbers);
+      console.log(inputNumbers);
+      return inputNumbers;
+    } catch (error) {
+      consoleError(error);
+      return this.userInputNumbers();
+    }
+  }
+
+  async getUserInput() {
+    const input = await readLineLottoCount();
+    return input.split(',').map((num) => parseInt(num.trim()));
+  }
+
+  validateInputNumbers(inputNumbers) {
+    Validation.isNumber(inputNumbers);
+    Validation.numberCountLength(inputNumbers);
+    Validation.dupliCatedNum(inputNumbers);
+    Validation.numberRange(inputNumbers);
   }
 }
 
