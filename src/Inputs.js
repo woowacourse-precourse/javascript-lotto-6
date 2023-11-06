@@ -20,6 +20,33 @@ class Inputs {
     );
     return winningNumbers;
   }
+
+  validWinningNumbers(numbers) {
+    const winningNumbers = numbers.split(",").map(Number);
+    if (winningNumbers.length !== 6) {
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+
+    const setNumbers = new Set(winningNumbers);
+    if (setNumbers.size !== 6) {
+      throw new Error("[ERROR] 중복된 숫자를 가질 수 없습니다.");
+    }
+
+    if (winningNumbers.some((num) => typeof num !== "number" || isNaN(num))) {
+      throw new Error(
+        "[ERROR] 로또 번호에 숫자가 아닌 문자나 공백이 포함되어 있습니다."
+      );
+    }
+
+    if (
+      winningNumbers.some(
+        (num) => !Number.isInteger(num) || num <= 0 || num > 45
+      )
+    ) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 정수여야 합니다.");
+    }
+    return winningNumbers;
+  }
 }
 
 export default Inputs;
