@@ -21,19 +21,24 @@ class App {
     View.outputUserLottosList(list, count);
   }
 
-  async getWinningNumberAndBonus(){
+  async getWinningNumber(){
     let numbers = await View.inputSixWinningNumbers();
-    const bonusNumber = await View.inputBonusNumber();
     numbers = numbers.split(',');
     this.winningLotto = new Lotto(numbers);
-    this.bonus = new Bonus(bonusNumber);
+    
+  }
+
+  async getBonusNumber(){
+    const bonusNumber = await View.inputBonusNumber();
+    this.bonus = new Bonus(bonusNumber, this.winningLotto.getNumbers());
   }
 
   async play() {
     await this.getPrice();
     this.userLotto.createLottos();
     this.showLottos();
-    this.getWinningNumberAndBonus();
+    await this.getWinningNumber();
+    this.getBonusNumber();
   }
 }
 
