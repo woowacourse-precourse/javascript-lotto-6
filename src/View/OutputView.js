@@ -21,7 +21,7 @@ class OutputView {
   }
 
   static displayRateOfReturn(rateOfReturn) {
-    Console.print(`총 수익률은 ${rateOfReturn.toLocaleString()}%입니다.`);
+    Console.print(`총 수익률은 ${parseFloat(rateOfReturn.toFixed(1)).toLocaleString()}%입니다.`);
   }
 }
 
