@@ -15,8 +15,12 @@ describe("App Unit Test", () => {
     [3000, 3],
     [10000, 10],
   ];
+  let app;
+  beforeEach(() => {
+    app = new App();
+  });
   test.each(CASES)("금액 만큼 로또 생성", (money, expectedNumber) => {
-    const LOTTOS = App.getLottoWithMoney(money);
+    const LOTTOS = app.getLottoWithMoney(money);
     expect(LOTTOS.length).toBe(expectedNumber);
     LOTTOS.forEach((lotto) => {
       expect(lotto instanceof Lotto).toBeTruthy();
@@ -45,7 +49,7 @@ describe("App Unit Test", () => {
   test.each(CAL_TEST)(
     "당첨 내역 계산",
     (lottos, winNumbers, bonusNumber, expectedRsult) => {
-      const lottoRanks = App.calculLottoResult({
+      const lottoRanks = app.calculLottoResult({
         lottos,
         winNumbers,
         bonusNumber,
@@ -56,7 +60,7 @@ describe("App Unit Test", () => {
 
   test("당첨 내역 출력", () => {
     const logSpy = getLogSpy();
-    App.printLottoResult([1, 1, 1, 1, 1]);
+    app.printLottoResult([1, 1, 1, 1, 1]);
     const answers = [
       "3개 일치 (5,000원) - 1개",
       "4개 일치 (50,000원) - 1개",
@@ -71,7 +75,7 @@ describe("App Unit Test", () => {
 
   test("수익률 출력", () => {
     const logSpy = getLogSpy();
-    App.printRateOfIncome([0, 0, 0, 0, 1], 8000);
+    app.printRateOfIncome([0, 0, 0, 0, 1], 8000);
     const answer = "총 수익률은 62.5%입니다.";
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(answer));
   });
