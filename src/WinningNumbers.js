@@ -18,9 +18,13 @@ class WinningNumbers{
   #validateNumbers(numbers) {
     const numberArray = Object.values(numbers);
     if (numberArray.length !== 6) {
-      Console.print(numbers);
       throw new Error(ERROR.WINNING_NUMBER_NOT_SIX);
     }
+
+    numberArray.forEach((number) => {
+      number = Number(number);
+      if(number < 1 || number > 45) throw new Error(ERROR.WINNING_NUMBER_NOT_IN_VALID_RANGE);
+    });
 
     const numberSet = new Set(numberArray);
     if (numbers.length !== numberSet.size) {
@@ -29,7 +33,7 @@ class WinningNumbers{
   }
 
   #validateBonusNumber(bonus) {
-
+    
   }
 }
 
