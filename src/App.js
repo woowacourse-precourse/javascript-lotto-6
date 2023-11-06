@@ -33,6 +33,20 @@ class App {
     }
   }
 
+  getBonusNumber() {
+    const bonusNumber = MissionUtils.Console.readLineAsync(
+      "\n보너스 번호를 입력해 주세요.\n"
+    );
+    return bonusNumber;
+  }
+
+  getWinningNumber() {
+    const winningNumber = MissionUtils.Console.readLineAsync(
+      "\n당첨 번호를 입력해 주세요.\n"
+    );
+    return winningNumber;
+  }
+
   validatePrice(price) {
     if (price % 1000 !== 0) {
       this.displayErrorMessage(this.error.INVALID_PRICE);
@@ -47,7 +61,7 @@ class App {
     return +price;
   }
 
-  async getLottoQuantity(money) {
+  getLottoQuantity(money) {
     const quantity = money / 1000;
 
     return quantity;
@@ -63,16 +77,22 @@ class App {
     }
   }
 
-  setBonusNumber() {
-    const winningNumber = this.getWinningNumber();
+  async setWinnigAndBonusNumber() {
+    const winningNumber = await this.getWinningNumber();
+    const winningNumberArray = await winningNumber.split(",");
+    const bonusNumber = await this.getBonusNumber();
+    const userLotto = new Lotto(winningNumberArray);
 
-    new Lotto(winningNumber).setWinnigNumber();
+    userLotto.setWinningNumber();
+    userLotto.setBonusNumber(bonusNumber);
   }
 
   async play() {
     const money = await this.repeatValid();
     const quantity = await this.getLottoQuantity(money);
     this.setLotto(quantity);
+
+    await this.setWinnigAndBonusNumber();
   }
 }
 

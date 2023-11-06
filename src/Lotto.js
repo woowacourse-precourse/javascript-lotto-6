@@ -21,7 +21,12 @@ class Lotto {
   }
 
   setWinningNumber() {
-    this.#validate(this.#numbers);
+    MissionUtils.Console.print(this.#numbers);
+    this.winningNumber = this.#validate(this.#numbers);
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.bonusNumber = bonusNumber;
   }
 
   getSortedNumbers() {
