@@ -1,6 +1,6 @@
 const lottoModel = {
   convertToNumber(answer) {
-    const numbers = answer.map((string) => Number(string));
+    const numbers = answer.split(',').map((string) => Number(string));
 
     return numbers;
   },
