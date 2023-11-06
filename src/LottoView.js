@@ -10,38 +10,28 @@ class LottoView {
   }
 
   createLottoResult(statistics) {
-    const lottoResult = [];
-    lottoResult.push("당첨 통계");
-    lottoResult.push("---");
-
-    Object.entries(statistics).forEach(([key, value]) => {
-      switch (key) {
-        case "3":
-          lottoResult.push(`${SCOREBOARD.MATCH_3} - ${value}개`);
-          break;
-        case "4":
-          lottoResult.push(`${SCOREBOARD.MATCH_4} - ${value}개`);
-          break;
-        case "5":
-          lottoResult.push(`${SCOREBOARD.MATCH_5} - ${value}개`);
-          break;
-        case "5+bonus":
-          lottoResult.push(`${SCOREBOARD.MATCH_5_BONUS} - ${value}개`);
-          break;
-        case "6":
-          lottoResult.push(`${SCOREBOARD.MATCH_6} - ${value}개`);
-          break;
-        case "totalPrize":
-          break;
-        case "profitRate":
-          lottoResult.push(`총 수익률은 ${value}%입니다.`);
-          break;
-        default:
-          lottoResult.push(`${key}개 일치 - ${value}개`);
-          break;
-      }
-    });
-
+    const lottoResult = [
+      "당첨 통계",
+      "---",
+      ...Object.entries(statistics)
+        .filter(([key]) => key !== "totalPrize")
+        .map(([key, value]) => {
+          switch (key) {
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+              return `${SCOREBOARD[`MATCH_${key}`]} - ${value}개`;
+            case "5+bonus":
+              return `${SCOREBOARD.MATCH_5_BONUS} - ${value}개`;
+            // return `${SCOREBOARD.MATCH_6} - ${value}개`;
+            case "profitRate":
+              return `총 수익률은 ${value}%입니다.`;
+            default:
+              return `${key}개 일치 - ${value}개`;
+          }
+        }),
+    ];
     return lottoResult.join("\n");
   }
 
