@@ -15,6 +15,7 @@ const MATCH = {
 
 const PRICE = {
   price: 1000,
+  maxMoney: 9007199254740000,
 };
 
 const DELIMITER = {
