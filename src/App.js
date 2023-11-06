@@ -5,6 +5,8 @@ import { OutputView } from './views/OutputView.js';
 import Money from './domains/Money.js';
 import Lotto from './Lotto.js';
 import WinningLotto from './domains/WinningLotto.js';
+import Reward from './domains/Reward.js';
+import { REWARD_MESSAGES } from './constants/rewardMessage.js';
 
 class App {
   /**
@@ -26,22 +28,23 @@ class App {
   #winningLottoNumbers;
 
   /**
-   * @type { string } 보너스 번호
-   */
-
-  #bonusNumber;
-
-  /**
    * @type { WinningLotto } 최종적인 당첨 번호
    */
 
   #totalWinningLotto;
 
+  /**
+   * @type { string[] } 통계 결과
+   */
+
+  #statisticsResult;
+
   async play() {
     await asyncFnHandlerWithError(this.getLottoAmount, this);
     this.printLottos();
     await asyncFnHandlerWithError(this.getWinningNumbers, this);
-    await asyncFnHandlerWithError(this.getTotalWinningLotto, this);
+    await asyncFnHandlerWithError(this.getTotalWinningNumbers, this);
+    this.printRewards();
   }
 
   async getLottoAmount() {
@@ -63,10 +66,20 @@ class App {
     OutputView.divideLine();
   }
 
-  async getTotalWinningLotto() {
-    this.#bonusNumber = await InputView.readLine(LOTTO_MESSAGES.input_bonus_number);
-    this.#totalWinningLotto = new WinningLotto(this.#winningLottoNumbers, this.#bonusNumber);
+  async getTotalWinningNumbers() {
+    const inputBonusNumber = await InputView.readLine(LOTTO_MESSAGES.input_bonus_number);
+    this.#totalWinningLotto = new WinningLotto(
+      this.#winningLottoNumbers.getNumbers(),
+      inputBonusNumber,
+    );
     OutputView.divideLine();
+  }
+
+  printRewards() {
+    OutputView.printLine(REWARD_MESSAGES.winning_statistics_start);
+    const reward = new Reward(this.#totalWinningLotto);
+    this.#statisticsResult = reward.calculateReward(this.#lottos);
+    this.#statisticsResult.forEach((result) => OutputView.printLine(result));
   }
 }
 
