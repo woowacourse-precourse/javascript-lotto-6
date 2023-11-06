@@ -41,6 +41,10 @@ class Lotto {
     }
   }
 
+  getNumber(){
+    return this.#numbers;
+  }
+
   /**
    * 현재 로또의 정답과 보너스를 토대로 당첨금을 반환한다.
    
