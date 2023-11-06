@@ -25,7 +25,7 @@ export default class LottoMachine {
     OutputView.printLottoTickets(this.#player.getLottoTickets());
     await this.#getWinningNumbers();
     OutputView.printNewLine();
-    this.#bonusNumber = await this.#getBonusNumber();
+    await this.#getBonusNumber();
     OutputView.printNewLine();
     this.#findMatchCount();
     this.#calculateWinningStats();
@@ -111,6 +111,7 @@ export default class LottoMachine {
   #findMatchCount() {
     this.#player.getLottoTickets().forEach((lotto) => {
       const isIncludedBonusNumber = lotto.getNumbers().includes(this.#bonusNumber);
+      console.log(lotto.getNumbers(), this.#bonusNumber);
       const correctCount = lotto
         .getNumbers()
         .filter((number) => this.#winningNumbers.getNumbers().includes(number)).length;
