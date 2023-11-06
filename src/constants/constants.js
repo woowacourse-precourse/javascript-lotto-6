@@ -3,6 +3,7 @@ const INPUT_MESSAGE = {
   WINNING_NUMBERS: '당첨 번호를 입력해 주세요.',
   BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
   PURCHASE_LOTTO: '개를 구매했습니다.',
+  WINNING_MESSAGE: '당첨 통계',
 };
 
 const INPUT_ERROR_MESSAGE = {
@@ -15,11 +16,12 @@ const INPUT_ERROR_MESSAGE = {
   DUPLICATE_WINNING_NUMBER:
     '[ERROR] 입력한 당첨 번호에 중복된 숫자가 존재합니다.',
   DUPLICATE_BONUS_NUMBER:
-    '[ERROR] 입력한 당첨 번호에 중복된 숫자가 존재합니다.',
+    '[ERROR] 입력한 보너스 번호가 당첨 번호에 존재합니다.',
 };
 
 const SYMBOL = {
   COMMA: ',',
+  DIVIDER: '---',
 };
 
 const RANK_RESULT = {

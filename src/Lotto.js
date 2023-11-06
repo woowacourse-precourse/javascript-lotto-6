@@ -9,6 +9,7 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  // TODO: 추가 기능 구현
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error(INPUT_ERROR_MESSAGE.MORE_WINNING_NUMBERS_ERROR);
@@ -16,10 +17,8 @@ class Lotto {
   }
 
   print() {
-    Console.print(this.#numbers);
+    Console.print(`[${this.#numbers.join(', ')}]`);
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

@@ -11,13 +11,23 @@ class App {
   #lottoList = [];
   #winningNumbers = [];
   #bonusNumber;
+  #purchaseAmount;
 
   async play() {
-    await this.#inputPurchaseAmount();
-    this.#purchaseLottos();
-    this.#printAllLottos();
-    await this.#inputWinningNumbers();
-    await this.#inputBonusNumber();
+    try {
+      await this.#inputPurchaseAmount();
+      Console.print('');
+      this.#purchaseLottos();
+      this.#printAllLottos();
+      Console.print('');
+      await this.#inputWinningNumbers();
+      Console.print('');
+      await this.#inputBonusNumber();
+      Console.print('');
+    } catch (err) {
+      Console.print(err.message);
+      await this.play();
+    }
   }
 
   async #inputPurchaseAmount() {
