@@ -25,7 +25,7 @@ class BonusNumber {
   }
 
   getBonusNumber() {
-    return this.#bonusNumber;
+    return Number(this.#bonusNumber);
   }
 }
 
