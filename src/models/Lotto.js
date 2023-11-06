@@ -13,15 +13,19 @@ class Lotto {
       throw new Error(error.NUMBER_IS_NOT_SIX);
     }
 
-    numbers.forEach((number) => {
-      const parsed = parseInt(number);
-      if (isNaN(parsed) || (parsed >= 1 && parsed <= 45))
-        throw new Error(error.NATURAL_NUMBER_IN_RANGE);
-    });
-
     if (numbers.length !== new Set(numbers).length) {
       throw new Error(error.DUPLICATE);
     }
+
+    numbers.forEach((number) => {
+      // 범위를 벗어남
+      if (number < 1 || number > 45)
+        throw new Error(error.NATURAL_NUMBER_IN_RANGE);
+
+      // 정수(자연수)가 아님
+      if (!Number.isInteger(number))
+        throw new Error(error.NATURAL_NUMBER_IN_RANGE);
+    });
   }
 
   getNumbers() {
