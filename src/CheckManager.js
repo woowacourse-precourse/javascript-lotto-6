@@ -1,5 +1,5 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-import { LOTTO_NUMBER, REWORD } from './constants/policy.js';
+import { LOTTO_NUMBER, REWORD, TRY_COST } from './constants/policy.js';
 
 class CheckManager {
   #ranks;
@@ -69,10 +69,8 @@ class CheckManager {
     return totalReword;
   }
 
-  static getRevenue(gameCount, totalReword) {
-    const cost = gameCount * TRY_COST;
-    const revenue = totalReword / cost;
-    return Math.floor(revenue * 1000) / 10;
+  static getRevenue(tryCount, totalReword) {
+    return Math.floor((totalReword / tryCount) * TRY_COST * 1000) / 10;
   }
 
   getRanks() {
