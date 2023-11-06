@@ -1,5 +1,6 @@
 import CONSTANTS from '../constants/constants.js';
 import ERROR from '../constants/error.js';
+import { Console } from '@woowacourse/mission-utils';
 
 const Validator = {
   remainderNotZero: purchaseAmount => {
@@ -21,6 +22,15 @@ const Validator = {
   invalidNumbersCount: winningNumbers => {
     if (winningNumbers.length !== CONSTANTS.winningNumbers.count)
       throw new Error(ERROR.message.invalidNumbersCount);
+  },
+  invalidRange: numbers => {
+    numbers.forEach(number => {
+      if (
+        Number(number) < CONSTANTS.winningNumbers.min ||
+        Number(number) > CONSTANTS.winningNumbers.max
+      )
+        throw new Error(ERROR.message.invalidRange);
+    });
   },
 };
 

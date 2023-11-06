@@ -16,7 +16,7 @@ class LottoController {
   async #inputWinningNumbers() {
     const winningNumbers = await InputView.readWinningNumbers();
     
-    Console.print(Validator.invalidNumbersCount(winningNumbers));
+    Console.print(Validator.invalidRange(winningNumbers));
   }
 }
 
