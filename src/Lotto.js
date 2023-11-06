@@ -36,6 +36,19 @@ class Lotto {
     return sixNumSet;
   };
 
+  getBonusNum = async () => {
+    do {
+      try {
+        let bonusNum = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
+        bonusNum = this.#validateBonusNum(bonusNum);
+      } catch(error) {
+        throw new Error(error.message);
+      }
+    } while(!bonusNum);
+
+    return bonusNum;
+  };
+
   #hasDuplicates = (numbers) => {
     const uniqueNumbers = [...new Set(numbers)];
     return numbers.length !== uniqueNumbers.length;
@@ -68,6 +81,7 @@ class Lotto {
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
     if (bonusNum >= 1 && bonusNum <= 45 && Number.isInteger(bonusNum) === false)
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
+    return bonusNum;
   }
 
   async start() {
