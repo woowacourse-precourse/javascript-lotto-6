@@ -46,7 +46,18 @@ class App {
 
   generateLottoTickets(numberOfTickets) {
     // 로또 티켓 생성
-
+    const lottoTickets = [];
+    for (let i = 0; i < numberOfTickets; i++) {
+      const ticketNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const sortedTicketNumbers = ticketNumbers.sort((a, b) => a - b); // 숫자를 오름차순으로 정렬
+      const lottoTicket = new Lotto(sortedTicketNumbers);
+      lottoTickets.push(lottoTicket);
+    }
+    // 로또 티켓 출력
+    lottoTickets.forEach((ticket) => {
+      MissionUtils.Console.print(`[${ticket.getNumbers().join(', ')}]`);
+    });
+    return lottoTickets;
   }  
 
   checkLottoTickets(lottoTickets, winningNumbers, bonusNumber) {
