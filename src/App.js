@@ -20,14 +20,16 @@ class App {
     for (let i = 0; i < count; i++) {
       selectedNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       const lotto = new Lotto(selectedNumber);
+      const sortedList = lotto.sortLottoList();
 
-      this.LottoList.push(lotto.sortLottoList());
-      this.printLottoList();
+      this.LottoList.push(sortedList);
+      this.printLottoList(sortedList);
     }
   }
 
-  printLottoList() {
-    this.LottoList.map((lotto) => Console.print(lotto));
+  printLottoList(list) {
+    const numberList = list.join(", ");
+    Console.print("[" + numberList + "]");
   }
 
   async inputPrizeNumber() {
