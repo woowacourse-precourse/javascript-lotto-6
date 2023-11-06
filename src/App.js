@@ -1,5 +1,6 @@
 import InputView from './InputView.js';
 import Inputs from './Inputs.js';
+import Lotto from './Lotto.js';
 
 class App {
   #inputs;
@@ -7,6 +8,10 @@ class App {
   #purchaseAmount;
 
   #numLottoTickets;
+
+  #winningNumbers;
+
+  #lottoNumbers;
 
   constructor() {
     this.#inputs = new Inputs();
@@ -19,11 +24,20 @@ class App {
     this.#purchaseAmount = await this.#inputs.returnPurchaseAmount();
     this.#numLottoTickets = this.getNumberOfLottoTickets(this.#purchaseAmount);
     this.inputView.printNumLottoTickets(this.#numLottoTickets);
-    // this.#winningNumbers = await this.#inputs.returnWinningNumbers();
+    this.generateLottoTickets();
+    this.#winningNumbers = await this.#inputs.returnWinningNumbers();
   }
 
   getNumberOfLottoTickets(purchaseAmount) {
     return Math.floor(purchaseAmount / 1000);
+  }
+
+  generateLottoTickets() {
+    this.#lottoNumbers = Array.from({ length: this.#numLottoTickets }, () => {
+      const lotto = new Lotto();
+      this.inputView.printGetNumbers(lotto.getNumbers());
+      return lotto.getNumbers();
+    });
   }
 }
 

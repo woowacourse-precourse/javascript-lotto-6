@@ -12,6 +12,10 @@ class InputView {
   printNumLottoTickets(numLottoTickets) {
     Console.print(`\n${numLottoTickets}개를 구매했습니다.`);
   }
+
+  printGetNumbers(numbers) {
+    Console.print(numbers);
+  }
 }
 
 export default InputView;
