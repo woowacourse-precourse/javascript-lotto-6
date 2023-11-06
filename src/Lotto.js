@@ -33,13 +33,10 @@ class Lotto {
         resultList.filter((data) => data.rank === 4 && data.count++);
         break;
       case 5:
-        if (this.validateIncludeBonus(prizeList, bonus)) {
-          resultList.filter((data) => data.rank === 2 && data.count++);
-          break;
-        } else {
-          resultList.filter((data) => data.rank === 3 && data.count++);
-          break;
-        }
+        this.validateIncludeBonus(prizeList, bonus)
+          ? resultList.filter((data) => data.rank === 2 && data.count++)
+          : resultList.filter((data) => data.rank === 3 && data.count++);
+        break;
       case 6:
         resultList.filter((data) => data.rank === 1 && data.count++);
         break;

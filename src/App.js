@@ -4,6 +4,7 @@ import Lotto from "./Lotto.js";
 
 const validate = new Validate();
 class App {
+  inputPrice = 0;
   LottoList = [];
   prizeNumber = [];
   bonusNumber = 0;
@@ -31,10 +32,12 @@ class App {
   ];
 
   async start() {
-    const price = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    validate.priceValidate(price);
+    this.inputPrice = await Console.readLineAsync(
+      "구입금액을 입력해 주세요.\n"
+    );
+    validate.priceValidate(this.inputPrice);
 
-    return price / 1000;
+    return this.inputPrice / 1000;
   }
 
   getLottoList(count) {
@@ -81,6 +84,15 @@ class App {
     );
   }
 
+  getProfitRate() {
+    let profitRate = 0;
+    let sum = 0;
+    this.resultList.map((result) => (sum += result.price * result.count));
+
+    profitRate = (sum / this.inputPrice) * 100;
+    Console.print("총 수익률은 " + profitRate + "%입니다.");
+  }
+
   async play() {
     const lottoCount = await this.start();
     Console.print(lottoCount + "개를 구매했습니다.");
@@ -91,6 +103,7 @@ class App {
     await this.inputBonusNumber();
 
     this.printWinningDetail();
+    this.getProfitRate();
   }
 }
 
