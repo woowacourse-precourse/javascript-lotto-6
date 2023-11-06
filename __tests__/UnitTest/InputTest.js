@@ -18,7 +18,7 @@ describe("로또 구입 금액 입력 테스트", () => {
   test.each(PASS_CASES)("로또 구입 입력 성공", async (input) => {
     mockQuestions(input);
     const answer = await inputClass.readMoneyBuyingLotto();
-    expect(answer).toEqual(input);
+    expect(answer).toEqual(Number(input));
   });
 
   const FAIL_CASES = ["1000j", "100", "1230", "q98 re", "1 000"];
@@ -38,7 +38,7 @@ describe("당첨 번호 입력 테스트", () => {
   test.each(PASS_CASES)("당첨 번호 성공", async (input) => {
     mockQuestions(input);
     const answer = await inputClass.readLottoNumbers();
-    expect(answer).toStrictEqual(input);
+    expect(answer).toStrictEqual(input.split(",").map(Number));
   });
 
   const FAIL_CASES = [
@@ -64,7 +64,7 @@ describe("보너스 번호 입력 테스트", () => {
   test.each(PASS_CASES)("보너스 번호 입력 성공", async (input) => {
     mockQuestions(input);
     const answer = await inputClass.readBonusNumber();
-    expect(answer).toStrictEqual(input);
+    expect(answer).toStrictEqual(Number(input));
   });
 
   const FAIL_CASES = ["0", "q", "46", "", "16"];
