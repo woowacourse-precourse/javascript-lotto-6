@@ -1,10 +1,14 @@
-import { Random } from '@woowacourse/mission-utils'
+import { Random } from '@woowacourse/mission-utils';
 
 class UserLottoNumber {
   #lottoNumber;
 
   constructor() {
     this.#lottoNumber = this.#generateLottoNumber();
+  }
+
+  getLottoNumber() {
+    return this.#lottoNumber;
   }
 
   #generateLottoNumber() {
