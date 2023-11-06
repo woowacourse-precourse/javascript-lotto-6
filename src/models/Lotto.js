@@ -42,6 +42,10 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.not_in_range);
     }
   }
+
+  getWinningNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
