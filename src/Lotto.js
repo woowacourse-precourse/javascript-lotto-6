@@ -81,14 +81,15 @@ class Lotto {
     }
     return (this.rank = 0);
   }
-
+  //random[i]의 원소가 drew의 원소와 하나라도 같으면 count++
   matchCountCheck = (random, drew) => {
     let count = 0;
-    const setLottoNumbers = [].concat(...new Set(random.flat()));
-    console.log(setLottoNumbers);
-    for (let i = 0; i < setLottoNumbers.length; i++) {
-      if (drew.includes(setLottoNumbers[i])) {
+
+    for (let i = 0; i < random.length; i++) {
+      for (let j = 0; j < drew.length; j++) {
+        if (random[i].includes(drew[j])) {
         count++;
+        }
       }
     }
     return count;
