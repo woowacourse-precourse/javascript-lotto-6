@@ -10,6 +10,12 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    if (numbers.length !== new Set(numbers).size) {
+      throw new Error('[ERROR] 중복이 없는 숫자여야 합니다.');
+    }
+    if (numbers.some((num) => num > 45 || num < 0)) {
+      throw new Error('[ERROR] 숫자는 1부터 45중 하나여야 합니다.')
+    }
   }
 
   getNumbers() {

@@ -14,6 +14,9 @@ class WinningLotto {
     if (numbers.some((num) => num < 0 || num > 45)) {
       throw new Error('[ERROR] 숫자는 1부터 45중 하나여야 합니다.');
     }
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 당첨번호는 6자리여야 합니다.');
+    }
   }
 
   getWinningNums() {
