@@ -6,15 +6,15 @@ const InputView = {
     return Number(await Console.readLineAsync(INPUT_MESSAGE.PURCHASE_AMOUNT));
   },
 
-  async readWinningNumbers() {
-    const winningNumbers = await Console.readLineAsync(
+  async readWinningLotto() {
+    const winningLotto = await Console.readLineAsync(
       INPUT_MESSAGE.WINNING_NUMBERS
     );
 
-    return winningNumbers.split(',').map(Number);
+    return winningLotto.split(',').map(Number);
   },
 
-  async readBonusNumber() {
+  async readBonusBall() {
     return Number(await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER));
   },
 };

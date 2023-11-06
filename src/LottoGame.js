@@ -2,6 +2,8 @@ import InputView from './View/InputView.js';
 import OutputView from './View/OutputView.js';
 import LottoArray from './LottoArray.js';
 import WinningLotto from './WinningLotto.js';
+import Lotto from './Lotto.js';
+import BonusBall from './BonusBall.js';
 import Validator from './validator/Validator.js';
 
 class LottoGame {
@@ -15,8 +17,9 @@ class LottoGame {
 
   async play() {
     await this.buyLottos();
-    await this.issueWinningLotto();
-    await this.issueBonusNumber();
+    const lotto = await this.pickWinningLotto();
+    const bonusBall = await this.pickBonusBall(lotto);
+    this.setWinningLotto(lotto, bonusBall);
   }
 
   async buyLottos() {
@@ -29,7 +32,7 @@ class LottoGame {
       await this.buyLottos();
     }
 
-    this.issueLottos(money);
+    this.#lottos.set(money);
     OutputView.printLottos(this.#lottos.get());
   }
 
@@ -38,31 +41,30 @@ class LottoGame {
     Validator.unit(money);
   }
 
-  issueLottos(money) {
-    this.#lottos.set(money);
-  }
-
-  async issueWinningLotto() {
-    const numbers = await InputView.readWinningNumbers();
+  async pickWinningLotto() {
+    const numbers = await InputView.readWinningLotto();
 
     try {
-      this.#winningLotto = new WinningLotto(numbers);
+      return new Lotto(numbers);
     } catch (error) {
       OutputView.print(error.message);
-      await this.issueWinningLotto();
+      await this.pickWinningLotto();
     }
   }
 
-  async issueBonusNumber() {
-    const number = await InputView.readBonusNumber();
-    const winningNumbers = this.#winningLotto.getNumbers();
+  async pickBonusBall(lotto) {
+    const number = await InputView.readBonusBall();
 
     try {
-      this.#winningLotto.setBonusNumber(number, winningNumbers);
+      return new BonusBall(number, lotto);
     } catch (error) {
       OutputView.print(error.message);
-      await this.issueBonusNumber();
+      await this.pickBonusBall(lotto);
     }
+  }
+
+  setWinningLotto(lotto, bonus) {
+    this.#winningLotto = new WinningLotto(lotto, bonus);
   }
 }
 

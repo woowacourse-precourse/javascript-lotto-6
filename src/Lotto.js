@@ -22,6 +22,10 @@ class Lotto {
   #sort(numbers) {
     return numbers.sort((a, b) => a - b);
   }
+
+  includes(number) {
+    return this.#numbers.includes(number);
+  }
 }
 
 export default Lotto;
