@@ -2,21 +2,21 @@ import { Console, Random } from "@woowacourse/mission-utils";
 
 class App {
   async play() {
-      const money = await this.validMoney();
+    const money = await this.validMoney();
 
-      let lottos = money / 1000;
-      Console.print(`\n${lottos}개를 구매했습니다.`);
+    let lottos = money / 1000;
+    Console.print(`\n${lottos}개를 구매했습니다.`);
 
-      const randomNumbers = this.setRandomNumber(lottos);
-      const lottonumber = await this.getLottoNumber('당첨 번호를 입력해 주세요.\n', 6);
-      const bonumNumber = await this.getBonusNumber(lottonumber);
+    const randomNumbers = this.setRandomNumber(lottos);
+    const lottonumber = await this.getLottoNumber('\n당첨 번호를 입력해 주세요.\n', 6);
+    const bonumNumber = await this.getBonusNumber(lottonumber);
 
-      Console.print('\n당첨 통계');
-      Console.print('---');
+    Console.print('\n당첨 통계');
+    Console.print('---');
 
-      const [matchThree, matchFour, matchFive, matchFiveBonus, matchSix] = this.matchNumber(randomNumbers, lottonumber, bonumNumber);
+    const [matchThree, matchFour, matchFive, matchFiveBonus, matchSix] = this.matchNumber(randomNumbers, lottonumber, bonumNumber);
 
-      this.printPercentage(matchThree, matchFour, matchFive, matchFiveBonus, matchSix, money);
+    this.printPercentage(matchThree, matchFour, matchFive, matchFiveBonus, matchSix, money);
   }
 
   async validMoney() {
@@ -40,25 +40,22 @@ class App {
       try {
         const input = await Console.readLineAsync(prompt);
         return validator(input);
-      }catch (e) {
+      } catch (e) {
         Console.print(e.message);
       }
     }
   }
-
   setRandomNumber(count) {
     const randomNumbers = [];
     for (let i = 0; i < count; i++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      if (!randomNumbers.includes(numbers)) {
-        numbers.sort((a, b) => a - b);
-        randomNumbers.push(numbers);
-      }
-      Console.print(`[${numbers.join(', ')}]\n`);
+      numbers.sort((a, b) => a - b);
+      randomNumbers.push(numbers);
+      Console.print(`[${numbers.join(', ')}]`);
     }
     return randomNumbers;
   }
-
+  
   async getLottoNumber(prompt, expectedCount) {
     return this.retryValid(prompt, (input) => {
       const lottonumber = input.split(',').map(Number);
