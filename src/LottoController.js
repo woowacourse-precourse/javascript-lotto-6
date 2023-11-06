@@ -26,5 +26,9 @@ class LottoController {
     const WINNING_NUMBER = GameUtils.splitComma(WINNING_NUMBER_INPUT);
     this.winningStatus = this.lottoGame.getWinningStatus(WINNING_NUMBER, BONUS_NUMBER);
   }
+  
+  async lottoResult() {
+    this.outputUi.printWinnigStatus(this.winningStatus);
+  }
 }
 export default LottoController;

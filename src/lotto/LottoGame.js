@@ -50,7 +50,7 @@ class LottoGame {
       MATHING_COUNTS.push(this.#lottos[index].getMatchingCount(winningNumbers));
     }
     const MATHING_COUNT_OBJ = this.matchingCountsWithObj(MATHING_COUNTS,bonusNumber);
-    const WINNING_STATUS = GameUtils.removeItemsWithNumericKeysLessThanThree(MATHING_COUNT_OBJ);
+    const WINNING_STATUS = GameUtils.processMatchingNumbersToResult(MATHING_COUNT_OBJ);
     return WINNING_STATUS;
   }
 
