@@ -19,9 +19,9 @@ class LottoCompany {
 	}
 
 	async #getWinningNumberArrayFromUser() {
-		const winningNumberArray = await InputView.inputWinningNumbersAsync();
+		const winningNumberArray = (await InputView.inputWinningNumbersAsync()).split(',');
 		WinningNumberArrayValidator.validate(winningNumberArray);
-		return winningNumberArray.split(',').map(Number);
+		return winningNumberArray.map(Number);
 	}
 
 	async #getBonusNumberFromUser() {
