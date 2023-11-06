@@ -6,6 +6,9 @@ export const LOTTO = {
   unitPrice: 1000,
   minMatchCount: 3,
   thirdMathCount: 5,
+};
+
+export const LOTTO_RESULT = {
   first: {
     prize: 2000000000,
     matchCount: 6,
@@ -35,5 +38,5 @@ export const LOTTO_RANK = {
   third: 'third',
   fourth: 'fourth',
   fifth: 'fifth',
-  none: '꽝',
+  none: 'none',
 };

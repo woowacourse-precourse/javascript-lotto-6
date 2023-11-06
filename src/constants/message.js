@@ -5,6 +5,11 @@ export const INPUT_MESSAGE = {
   lottoBonusNumber: '보너스 번호를 입력해 주세요.\n',
 };
 
+export const PRINT_MESSAGE = {
+  prizesDescription: '당첨 통계',
+  divide: '---',
+};
+
 const ERROR_PREFIX = '[ERROR]';
 export const ERROR_MESSAGE = {
   validate: ERROR_PREFIX,
