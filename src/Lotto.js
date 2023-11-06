@@ -1,8 +1,8 @@
-import { Random, Console } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 class Lotto {
   #numbers;
 
-  constructor(numbers, bonusNumber) {
+  constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
@@ -23,7 +23,7 @@ class Lotto {
     return Array.from(uniqueNumbers);
   }
 
-  getNumbers() {
+  lottoNumbers() {
     return [...this.#numbers];
   }
 
