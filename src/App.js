@@ -14,6 +14,12 @@ class App {
     return winningNumbersArray;
   }
 
+  async generateBonusNumber() {
+    const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+
+    return Number(bonusNumber);
+  }
+
   async play() {
     const buyLotto = new BuyLotto(LOTTO_PRICE, DAILY_LIMIT_PRICE, NUMBER_CHECK);
     const purchaseAmount = await buyLotto.inputPurchaseAmount();
@@ -21,6 +27,7 @@ class App {
     buyLotto.getLottoNumbers(purchaseAmount);
 
     const winningNumbers = await this.generateWinningNumbers();
+    const bonusNumber = await this.generateBonusNumber();
   }
 }
 
