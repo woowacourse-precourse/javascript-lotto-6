@@ -1,4 +1,4 @@
-import { ERROR } from "../constants/constants.js";
+import { ERROR } from '../constants/constants.js';
 
 class Lotto {
   #numbers;
@@ -29,12 +29,15 @@ class Lotto {
       winningNumbers.includes(num),
     ).length;
     const bonus = this.#numbers.includes(bonusNumbers);
-    
+
     return [winning + bonus, bonus];
   }
 
   determineRanking(winningNumbers, bonusNumbers) {
-    const [allCount, bonus] = this.getNumbersCount(winningNumbers, bonusNumbers);
+    const [allCount, bonus] = this.getNumbersCount(
+      winningNumbers,
+      bonusNumbers,
+    );
 
     if (allCount === 3) return '5등';
     if (allCount === 4) return '4등';

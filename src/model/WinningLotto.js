@@ -1,4 +1,4 @@
-import { ERROR } from "../constants/constants.js";
+import { ERROR } from '../constants/constants.js';
 
 class WinningLotto {
   #winningLotto;
@@ -10,7 +10,7 @@ class WinningLotto {
   }
 
   checkValid(numbers) {
-    if (numbers.some((num) => isNaN(num))) {
+    if (numbers.some((num) => isNaN(num) || num === 0)) {
       throw new Error(ERROR.invalidNumber);
     }
     if (numbers.some((num) => num < 0 || num > 45)) {
