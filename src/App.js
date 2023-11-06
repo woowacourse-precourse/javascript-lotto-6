@@ -1,9 +1,9 @@
-import InputValuePrintout from "./utils/InputValuePrintout.js";
+import InputPrintout from "./utils/InputPrintout.js";
 
 class App {
 	async play() {
-		const a = await InputValuePrintout.inputAmount();
-		console.log(a);
+		const a = await InputPrintout.inputAmount();
+		console.log(a + "음?");
 	}
 }
 
