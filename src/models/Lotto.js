@@ -18,16 +18,11 @@ class Lotto {
   }
 
   #pickRandomNumbers() {
-    const randomNumbers = [];
-    while (randomNumbers.length < NUMBER.LOTTO_NUMBER_OF_NUMBERS) {
-      const number = Random.pickNumberInRange(
-        NUMBER.MIN_IN_RANGE,
-        NUMBER.MAX_IN_RANGE,
-      );
-      if (!randomNumbers.includes(number)) {
-        randomNumbers.push(number);
-      }
-    }
+    const randomNumbers = Random.pickUniqueNumbersInRange(
+      NUMBER.MIN_IN_RANGE,
+      NUMBER.MAX_IN_RANGE,
+      NUMBER.LOTTO_NUMBER_OF_NUMBERS,
+    );
 
     return randomNumbers;
   }
@@ -38,6 +33,10 @@ class Lotto {
 
   printLottoNumbers() {
     return OutputView.printLottoNumbers(this.#numbers.join(', '));
+  }
+
+  getLottoNumbers() {
+    return this.#numbers;
   }
 }
 
