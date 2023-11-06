@@ -3,6 +3,7 @@ import Price from './Price.js';
 import Random from './Random.js';
 import Lotto from './Lotto.js';
 import Bonus from './Bonus.js';
+import Stats from './Stats.js';
 import lottoModel from './models/lottoModel.js';
 import inputs from './View/inputs.js';
 import outputs from './View/outputs.js';
@@ -13,6 +14,7 @@ class App {
     const random = this.#executeRandom(number);
     const lotto = await this.#executeLotto();
     const bonus = await this.#executeBonus(lotto);
+    const revenues = this.#executeStats(random, lotto, bonus);
   }
 
   async #executePrice() {
@@ -62,6 +64,16 @@ class App {
       Console.print(error.message);
       return this.#executeBonus(lotto);
     }
+  }
+
+  #executeStats(random, lotto, bonus) {
+    const statsObject = new Stats(random, lotto, bonus);
+    const { revenues, stats } = statsObject.getRevenuesAndStats();
+
+    outputs.printStatsTitle();
+    outputs.printStats(stats);
+
+    return revenues;
   }
 }
 
