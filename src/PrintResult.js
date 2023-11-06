@@ -19,6 +19,7 @@ export const printResult = (input) => {
   printMessage("\n");
   printMessage(WINNING_STATISTICS_PRINT_MESSAGE);
   printMessage("---");
-  input = input.reverse();
-  input.map((i, el) => printMessage(form(el, i)));
+
+  let reversed = input.reverse();
+  reversed.map((i, el) => printMessage(form(el, i)));
 };

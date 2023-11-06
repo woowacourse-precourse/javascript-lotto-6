@@ -11,6 +11,7 @@ import { validateWinningNumber } from "./ValidateInput/ValidateWinningNumber.js"
 import { validateBonusNumber } from "./ValidateInput/ValidateBonusNumber.js";
 import { calcResult } from "./CalcResult.js";
 import { printResult } from "./PrintResult.js";
+import { calcProfitRate } from "./CalcProfitRate.js";
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
@@ -54,7 +55,8 @@ class App {
     printMessage("\n");
     printMessage(WINNING_NUMBERS_INPUT_REQUEST);
     // 8. 당첨 번호 입력받기
-    this.#winning_number = await getInput(validateWinningNumber);
+    let number = await getInput(validateWinningNumber);
+    this.#winning_number = number.split(",").map(Number);
     // 9. 보너스 번호 입력 안내 문구 출력
     printMessage("\n");
     printMessage(BONUS_NUMBER_INPUT_REQUEST);
@@ -68,6 +70,10 @@ class App {
     );
     // 12. 당첨 내역 출력하기
     printResult(result);
+    // 13. 총 수익률 구하기
+    const profit = calcProfitRate(result, this.#purchase_amount);
+    // 14. 총 수익률 출력하기
+    printMessage(`총 수익률은 ${profit}%입니다.`);
   }
 }
 
