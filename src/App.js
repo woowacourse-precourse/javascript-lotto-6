@@ -6,24 +6,19 @@ import LottoResultChecker from "./LottoResultChecker.js";
 const lottoPrice = 1000;
 class App {
   constructor() {
-    this.threeMatches = 0;
-    this.fourMatches = 0;
-    this.fiveMatches = 0;
-    this.fiveAndBonusMatches = 0;
-    this.sixMatches = 0;
     this.lottoManagement = new LottoManagement();
     this.lottoResultChecker = new LottoResultChecker();
   }
   async play() {
-    const purchasePrice = await this.inputPurchasePrice();
-    const lottoCount = Number(purchasePrice / lottoPrice);
+    this.purchasePrice = await this.inputPurchasePrice();
+    const lottoCount = Number(this.purchasePrice / lottoPrice);
 
     const generatedLottoNumbers =
       this.lottoManagement.getLottoArray(lottoCount);
     const generatedLottoNumbersArr = generatedLottoNumbers.map((lotto) =>
       lotto.getNumbers()
     );
-    console.log(generatedLottoNumbersArr);
+
     Console.print(`${lottoCount}개를 구매했습니다.`);
 
     generatedLottoNumbers.forEach((lotto) => {
@@ -33,7 +28,6 @@ class App {
     this.winningNumbers = this.lottoResultChecker.convertToArr(
       await this.lottoResultChecker.inputWinningLottoNum()
     );
-    console.log(this.winningNumbers);
 
     const inputLottoNumErrors = new Lotto(this.winningNumbers);
 
@@ -47,9 +41,14 @@ class App {
       this.winningNumbers,
       generatedLottoNumbersArr
     );
-    this.lottoResultChecker.countMatchingNumbers(this.matchingCounts);
+    this.matchingCountsResult = this.lottoResultChecker.getMatchingCounts(
+      this.matchingCounts,
+      this.bonusNumber,
+      generatedLottoNumbersArr
+    );
     this.totalProfit = this.calculateTotalProfit();
     this.profitRate = this.calculateProfitRate();
+    this.roundedProfitRate = this.roundProfitRate(this.profitRate);
     this.printResult();
   }
 
@@ -92,26 +91,33 @@ class App {
   }
   calculateTotalProfit() {
     const totalProfit =
-      5000 * this.threeMatches +
-      10000 * this.fourMatches +
-      1500000 * this.fiveMatches +
-      30000000 * this.fiveAndBonusMatches +
-      2000000000 * this.sixMatches;
+      5000 * this.matchingCountsResult.three +
+      10000 * this.matchingCountsResult.four +
+      1500000 * this.matchingCountsResult.five +
+      30000000 * this.matchingCountsResult.fiveAndBonus +
+      2000000000 * this.matchingCountsResult.six;
     return totalProfit;
+  }
+  roundProfitRate(profitRate) {
+    return profitRate.toFixed(1);
   }
   calculateProfitRate() {
     return (this.totalProfit / this.purchasePrice) * 100;
   }
   printResult() {
     Console.print("당첨 통계\n---");
-    Console.print(`3개 일치 (5,000원) - ${this.threeMatches}개`);
-    Console.print(`4개 일치 (10,000원) - ${this.fourMatches}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${this.fiveMatches}개`);
+    Console.print(`3개 일치 (5,000원) - ${this.matchingCountsResult.three}개`);
+    Console.print(`4개 일치 (10,000원) - ${this.matchingCountsResult.four}개`);
     Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.fiveAndBonusMatches}개`
+      `5개 일치 (1,500,000원) - ${this.matchingCountsResult.five}개`
     );
-    Console.print(`6개 일치 (2,000,000,000원) - ${this.sixMatches}개`);
-    Console.print(`총 수익률은 ${this.totalProfit}%입니다.`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.matchingCountsResult.fiveAndBonus}개`
+    );
+    Console.print(
+      `6개 일치 (2,000,000,000원) - ${this.matchingCountsResult.six}개`
+    );
+    Console.print(`총 수익률은 ${this.roundedProfitRate}%입니다.`);
   }
 }
 export default App;
