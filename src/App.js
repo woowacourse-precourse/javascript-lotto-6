@@ -41,6 +41,11 @@ class App {
     }
     const winningNumbers = await getLottoNumbers();
     const bonusNumber = await getBounusNumber();
+
+    ticketArr.forEach((ticket) => {
+      const [intersection, isBonusNumberMatch] = ticket.compareNumbers(winningNumbers, bonusNumber);
+      ticket.updateRank(intersection, isBonusNumberMatch);
+    });
   }
 }
 
