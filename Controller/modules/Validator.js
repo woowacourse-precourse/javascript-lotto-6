@@ -10,11 +10,12 @@ const {
 
 const Validator = {
   checkInsertedMoneyIsValid(money) {
-    const moneyIsInThousands = checkCanDevideByThousand(money);
-    if (!moneyIsInThousands) throw new Error('[ERROR]');
-
     const moneyIsNumber = checkIsNumber(money);
-    if (!moneyIsNumber) throw new Error('[ERROR]');
+    if (!moneyIsNumber) throw new Error('[ERROR] 숫자를 입력해주세요.');
+
+    const moneyIsInThousands = checkCanDevideByThousand(money);
+    if (!moneyIsInThousands)
+      throw new Error('[ERROR] 천원단위로 입력해주세요.');
 
     return true;
   },
@@ -39,10 +40,11 @@ const Validator = {
 
   checkBonusNumberIsValid(bonusNumber) {
     const bonusNumberIsNumber = checkIsNumber(bonusNumber);
-    if (!bonusNumberIsNumber) throw new Error('[ERROR]');
+    if (!bonusNumberIsNumber) throw new Error('[ERROR] 숫자를 입력해주세요.');
 
     const bonusNumberIsInRange = checkIsInRange(bonusNumber, 45, 1);
-    if (!bonusNumberIsInRange) throw new Error('[ERROR]');
+    if (!bonusNumberIsInRange)
+      throw new Error('[ERROR]1 ~ 45 범위의 숫자를 입력해 주세요.');
 
     return true;
   },
