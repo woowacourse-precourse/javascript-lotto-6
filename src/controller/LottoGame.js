@@ -1,10 +1,15 @@
 import Lotto from '../model/Lotto.js';
 import LottoList from '../model/LottoList.js';
 import { inputMoney } from '../view/inputPrompt.js';
-import { validateDivisible, validateNumber } from '../utils/validateFn.js';
+import {
+  validateDivisible,
+  validateNumber,
+  validateEmpty,
+} from '../utils/validateFn.js';
 import {
   printBeforeResult,
   printBuyLottery,
+  printErrorMessage,
   printMyBenefit,
   printWinningStatus,
 } from '../view/outputPompt.js';
@@ -30,10 +35,20 @@ class LottoGame {
   }
 
   async #setMoney() {
-    const input = await inputMoney();
+    try {
+      let input = await inputMoney();
+      this.#validateMoney(input);
+      this.#money = parseInt(input);
+    } catch (error) {
+      printErrorMessage(error);
+      await this.#setMoney();
+    }
+  }
+
+  #validateMoney(input) {
+    validateEmpty(input);
     validateNumber(input);
     validateDivisible(input);
-    this.#money = parseInt(input);
   }
 
   #setMyLottoList() {
