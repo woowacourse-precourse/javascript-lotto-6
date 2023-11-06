@@ -8,11 +8,26 @@ class App {
   prizeNumber = [];
   bonusNumber = 0;
   resultList = [
-    { rank: 1, count: 0, price: 2000000000 },
-    { rank: 2, count: 0, price: 30000000 },
-    { rank: 3, count: 0, price: 1500000 },
-    { rank: 4, count: 0, price: 50000 },
-    { rank: 5, count: 0, price: 5000 },
+    { rank: 5, count: 0, price: 5000, describe: "3개 일치 (5,000원) - " },
+    { rank: 4, count: 0, price: 50000, describe: "4개 일치 (50,000원) - " },
+    {
+      rank: 3,
+      count: 0,
+      price: 1500000,
+      describe: "5개 일치 (1,500,000원) - ",
+    },
+    {
+      rank: 2,
+      count: 0,
+      price: 30000000,
+      describe: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+    },
+    {
+      rank: 1,
+      count: 0,
+      price: 2000000000,
+      describe: "6개 일치 (2,000,000,000원) - ",
+    },
   ];
 
   async start() {
@@ -59,6 +74,11 @@ class App {
         this.bonusNumber
       );
     });
+
+    Console.print("당첨 통계\n---");
+    this.resultList.map((result) =>
+      Console.print(result.describe + result.count + "개")
+    );
   }
 
   async play() {
