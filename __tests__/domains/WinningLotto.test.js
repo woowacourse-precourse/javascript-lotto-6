@@ -93,7 +93,7 @@ describe('WinningLotto - getNumbers, getBonus 메소드 : 당첨 번호 및 보�
   test('설정한 보너스 번호와 반환한 보너스가 같아야 한다.', () => {
     const result = winning.getBonus();
 
-    expect(result).toEqual(7);
+    expect(result).toEqual(RESULT_BONUS);
   });
 });
 

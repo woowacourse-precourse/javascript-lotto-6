@@ -1,6 +1,11 @@
 import Lotto from '../../src/domains/Lotto.js';
 import WinningLotto from '../../src/domains/WinningLotto.js';
-import { LottoDuplicatedError, LottoLengthError, LottoRangeError, LottoTypeError } from '../../src/error/CustomErrors.js';
+import {
+  LottoDuplicatedError,
+  LottoLengthError,
+  LottoRangeError,
+  LottoTypeError
+} from '../../src/error/CustomErrors.js';
 
 describe('Lotto - constructor 메소드 : 생성 lotto 번호 유효성 검사 테스트', () => {
   test.each([
