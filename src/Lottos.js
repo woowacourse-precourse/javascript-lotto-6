@@ -26,7 +26,7 @@ class Lottos {
 
   printCreatedLottos() {
     this.createdLottos.map((e) => {
-      Console.print(e);
+      Console.print(`[${e.join(', ')}]`);
     });
   }
 }

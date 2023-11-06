@@ -11,7 +11,6 @@ class Lotto {
 
   #validate(numbers) {
     const duplicate = new Set(numbers);
-    const regexr = /[^0-45]/g;
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.RANDOM_NUM_SIX);
     }
