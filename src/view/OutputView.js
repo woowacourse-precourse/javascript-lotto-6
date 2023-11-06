@@ -7,7 +7,7 @@ const OutputView = {
   printLottoTicketCount(count) {
     Console.print(`\n${count}개를 구매했습니다.`);
   },
-  printLottoTicketNumber(numbers) {
+  printLottoNumbers(numbers) {
     Console.print("[" + numbers.join(", ") + "]");
   },
 };

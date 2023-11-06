@@ -6,47 +6,53 @@ import lottoNumberGenerator from "../utils/RandomNumberGenerator.js";
 class LottoGameController {
   #lotto = [];
   #purchaseAmount;
+  #lottoTicket;
 
   constructor() {}
 
   async startGame() {
     await this.readPurchaseAmount();
+    await this.handleError(this.#purchaseAmount);
+    this.showLottoTicketCount();
+    this.setLottoNumbers();
+    this.showLottoNumbers();
   }
 
   async readPurchaseAmount() {
-    await InputView.purchaseAmount((input) => {
-      this.handleError(input);
-    });
+    this.#purchaseAmount = await InputView.purchaseAmount();
   }
 
-  async handleError(input) {
+  async handleError(amount) {
     try {
-      InputValidator.purchaseAmount(input);
-      this.showLottoTicketCount(input);
-      this.setLottoTicketNumbers();
-      this.showLottoTicketNumbers();
+      InputValidator.purchaseAmount(amount);
+      this.#purchaseAmount = amount;
+      this.setLottoTicketCount(amount);
     } catch (error) {
       OutputView.printErrorMessage(error);
-      this.readPurchaseAmount();
+      await this.readPurchaseAmount();
+      await this.handleError(this.#purchaseAmount);
     }
   }
 
-  showLottoTicketCount(input) {
-    this.#purchaseAmount = +input / 1000;
-    OutputView.printLottoTicketCount(this.#purchaseAmount);
+  setLottoTicketCount(input) {
+    this.#lottoTicket = +input / 1000;
   }
 
-  setLottoTicketNumbers() {
-    for (let i = 0; i < this.#purchaseAmount; i++) {
+  showLottoTicketCount() {
+    OutputView.printLottoTicketCount(this.#lottoTicket);
+  }
+
+  setLottoNumbers() {
+    for (let i = 0; i < this.#lottoTicket; i++) {
       const numbers = lottoNumberGenerator.generate();
       this.#lotto[i] = new Lotto(numbers);
     }
   }
 
-  showLottoTicketNumbers() {
-    for (let i = 0; i < this.#purchaseAmount; i++) {
+  showLottoNumbers() {
+    for (let i = 0; i < this.#lottoTicket; i++) {
       const numbers = this.#lotto[i].getTicketNumbers();
-      OutputView.printLottoTicketNumber(numbers);
+      OutputView.printLottoNumbers(numbers);
     }
   }
 }
