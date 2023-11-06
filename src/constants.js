@@ -1,8 +1,19 @@
 export const SETTING = Object.freeze({
   min_lotto_number: 1,
+  min_match: 3,
+  bonus_match: 5,
   size: 6,
   max_lotto_number: 45,
   lotto_cost: 1000,
+  bonus: 'bonus',
+});
+
+export const PRICE = Object.freeze({
+  3: 5000,
+  4: 50000,
+  5: 1500000,
+  bonus: 30000000,
+  6: 2000000000,
 });
 
 export const MESSAGE = Object.freeze({
@@ -11,15 +22,13 @@ export const MESSAGE = Object.freeze({
   input_prize: '당첨 번호를 입력해 주세요.',
   input_bonus: '보너스 번호를 입력해 주세요.',
   prize_stats: '당첨 통계',
-  total_return: (num) => `총 수익률은 ${num}입니다.`,
+  line: '---',
+  total_return: (num) => `총 수익률은 ${num}%입니다.`,
 });
 
 export const MATCH = Object.freeze({
-  three_match: (match) => `3개 일치 (5,000원) - ${match}개`,
-  four_match: (match) => `4개 일치 (50,000원) - ${match}개`,
-  five_match: (match) => `5개 일치 (1,500,000원) - ${match}개`,
-  five_bonus_match: (match) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${match}개`,
-  six_match: (match) => `6개 일치 (2,000,000,000원) - ${match}개`,
+  normal_match: (count, price, match) => `${count}개 일치 (${price}원) - ${match}개`,
+  bonus_match: (price, match) => `5개 일치, 보너스 볼 일치 (${price}원) - ${match}개`,
 });
 
 export const PREFIX = Object.freeze({
