@@ -8,21 +8,7 @@ class App {
     const numbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(numbers);
     const intBonusNumber = parseInt(bonusNumber, 10);
-
-    const results = {
-      three: 0,
-      four: 0,
-      five: 0,
-      bonus: 0,
-      all: 0,
-    };
-    
-    for (const lottoNumbers of lottoNumbersArray) {
-      const matchResult = numbers.matchLotto(lottoNumbers, intBonusNumber);
-      if (matchResult == 'zero') continue;
-      results[matchResult]++;
-    }
-    numbers.printResult(results);
+    const results = this.getResult(numbers, lottoNumbersArray, intBonusNumber);
 
     const profitRate = this.getProfitRate(amount, results);
     Console.print(`총 수익률은 ${profitRate}입니다.`);
@@ -96,6 +82,24 @@ class App {
     if (lottoNumbers.isBonusNumberDuplicate(parsedBonusNumber)) {
       throw new Error('[ERROR] 중복된 값이 있습니다.');
     }
+  }
+
+  getResult(numbers, lottoNumbersArray, intBonusNumber) {
+    const results = {
+      three: 0,
+      four: 0,
+      five: 0,
+      bonus: 0,
+      all: 0,
+    };
+    
+    for (const lottoNumbers of lottoNumbersArray) {
+      const matchResult = numbers.matchLotto(lottoNumbers, intBonusNumber);
+      if (matchResult == 'zero') continue;
+      results[matchResult]++;
+    }
+    numbers.printResult(results);
+    return results;
   }
 
   getProfitRate(amount, results) {
