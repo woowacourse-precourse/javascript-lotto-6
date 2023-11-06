@@ -12,7 +12,6 @@ const BUY_LOTTO = {
 
 const REQUEST_WINNING_LOTTO = {
   requestWinningLotto: '당첨 번호를 입력해주세요.\n',
-  requestLottoDelimiter: ',', // TODO: 그냥 구분자와 혼동되므로 수정 필요
 };
 
 const REQUEST_BONUS_NUMBER = {
