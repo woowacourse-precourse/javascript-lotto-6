@@ -1,5 +1,6 @@
 import { View } from './LottoView.js';
 import Lotto from './Lotto.js';
+import { Console, Random } from '@woowacourse/mission-utils';
 
 class App {
   constructor() {
@@ -8,6 +9,8 @@ class App {
   async play() {
     try {
       const lottoAmount = await this.validateLottoAmount();
+      const lottoTickets = this.getLottoTickets(lottoAmount);
+      this.view.printLottoTickets(lottoTickets);
     } catch (error) {
       throw error;
     }
@@ -24,6 +27,11 @@ class App {
         console.error(error);
       }
     }
+  }
+
+  getLottoTickets(numbers) {
+    const model = new Lotto(numbers);
+    return model.generateLottoTicketsArray();
   }
 }
 
