@@ -8,8 +8,6 @@ import OutputView from './view/OutputView.js';
 import { LOTTO_TICKET_PRICE } from './constants/conditions.js';
 
 class App {
-  #purchaseLotto;
-
   #winningLotto;
 
   #bonus;
@@ -18,13 +16,12 @@ class App {
 
   async play() {
     const { purchaseLotto, purchaseAmount } = await this.#getPurchaseLotto();
-    this.#purchaseLotto = purchaseLotto;
-    OutputView.printAutoLotto(this.#purchaseLotto, purchaseAmount);
+    OutputView.printAutoLotto(purchaseLotto, purchaseAmount);
 
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
     const { winningResult, rateOfReturn } = this.#getlotteryResultsSummary(
-      this.#purchaseLotto,
+      purchaseLotto,
       this.#winningLotto.getLotto(),
       this.#bonus.getBonus(),
     );
@@ -47,9 +44,6 @@ class App {
     }
   }
 
-  /* 
-  🐛FIX: DI로 구현할 것
-  */
   async #generateWinningLotto() {
     try {
       const answer = await InputView.getWinningLotto();
@@ -60,9 +54,6 @@ class App {
     }
   }
 
-  /* 
-  🐛FIX: DI로 구현할 것
-  */
   async #generateBonus() {
     try {
       const answer = await InputView.getBonus();
