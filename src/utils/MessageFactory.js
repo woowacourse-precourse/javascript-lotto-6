@@ -27,14 +27,14 @@ const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
 
-const makeStaticMessage = (...arg) => {
+const makeStatisticMessage = (arg) => {
   const { rank, number } = arg;
   return `${RANK_MESSAGE[rank]} - ${number}${STATISTICS_MESSAGE.correctUnit}`;
 };
 // result :{rank: ,number: }[]
 const printWinningResult = (result) => {
   result.forEach((v) => {
-    const message = makeStaticMessage(v);
+    const message = makeStatisticMessage(v);
     printMessage(message);
   });
 };

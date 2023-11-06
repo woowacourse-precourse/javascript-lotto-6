@@ -20,7 +20,7 @@ const STATISTICS_MESSAGE = Object.freeze({
 
 const RANK_MESSAGE = Object.freeze({
   three: `3개 일치 (${WINNINGS.three}원)`,
-  four: `3개 일치 (${WINNINGS.four}원)`,
+  four: `4개 일치 (${WINNINGS.four}원)`,
   fiveNoBonus: `5개 일치 (${WINNINGS.fiveNoBonus}원)`,
   fiveAndBonus: `5개 일치, 보너스 볼 일치 (${WINNINGS.fiveAndBonus}원)`,
   six: `6개 일치 (${WINNINGS.six}원)`,
