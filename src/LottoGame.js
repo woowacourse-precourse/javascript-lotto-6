@@ -1,19 +1,21 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Messages from './Messages.js';
+import Lotto from './Lotto.js';
 
 class LottoGame {
   #purchase_amount;
   #purchased_tickets;
+  #winning_numbers;
 
   getPurchaseAmount = async () => {
     const input_amount = await MissionUtils.Console.readLineAsync(
       Messages.PURCHASE_AMOUNT_INPUT
     );
     if (isNaN(input_amount)) {
-      throw new Error(Messages.PURCHASE_AMOUNT_ISNAN);
+      throw new Error(Messages.ERROR_ISNAN);
     }
     if (input_amount % 1000 !== 0) {
-      throw new Error(Messages.PURCHASE_AMOUNT_NOT_DIVIDED);
+      throw new Error(Messages.ERROR_PURCHASE_AMOUNT_NOT_DIVIDED);
     }
     this.#purchase_amount = parseInt(input_amount) / 1000;
   };
@@ -37,11 +39,23 @@ class LottoGame {
     }
   };
 
+  getWinningNumbers = async () => {
+    let numbers = await MissionUtils.Console.readLineAsync(
+      Messages.WINNING_NUMBERS_INPUT
+    );
+    let parsedNumbers = numbers
+      .split(',')
+      .map((number) => number.trim())
+      .filter((number) => number !== '');
+    this.#winning_numbers = new Lotto(parsedNumbers);
+  };
+
   playGame = async () => {
     try {
       await this.getPurchaseAmount();
       this.generateNumbers(this.#purchase_amount);
       this.printPurchasedTickets(this.#purchased_tickets);
+      await this.getWinningNumbers();
     } catch (error) {
       throw new Error(error);
     }
