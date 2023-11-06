@@ -1,13 +1,7 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 
 class LottoResultChecker {
-  constructor() {
-    this.threeMatches = 0;
-    this.fourMatches = 0;
-    this.fiveMatches = 0;
-    this.fiveAndBonusMatches = 0;
-    this.sixMatches = 0;
-  }
+  constructor() {}
   convertToArr(inputNum) {
     return inputNum.split(",").map((element) => parseInt(element));
   }
@@ -28,33 +22,34 @@ class LottoResultChecker {
     return counts;
   }
 
-  countMatchingNumbers(counts) {
-    for (const count of counts) {
+  getMatchingCounts(counts, bonus, randomArrs) {
+    const matchingCounts = {
+      three: 0,
+      four: 0,
+      five: 0,
+      fiveAndBonus: 0,
+      six: 0,
+    };
+    for (let i = 0; i < counts.length; i++) {
+      const count = counts[i];
+      const randomArr = randomArrs[i];
       if (count === 3) {
-        this.threeMatches += 1;
+        matchingCounts.three += 1;
       }
       if (count === 4) {
-        this.fourMatches += 1;
+        matchingCounts.four += 1;
       }
-      if (count === 5) {
-        this.fiveMatches += 1;
+      if (count === 5 && !randomArr.includes(bonus)) {
+        matchingCounts.five += 1;
       }
-      if (count === 5 && count.includes(this.bonus)) {
-        this.fiveAndBonusMatches += 1;
+      if (count === 5 && randomArr.includes(bonus)) {
+        matchingCounts.fiveAndBonus += 1;
       }
       if (count === 6) {
-        this.sixMatches += 1;
+        matchingCounts.six += 1;
       }
     }
-  }
-  calculateTotalProfit() {
-    const totalProfit =
-      5000 * this.threeMatches +
-      10000 * this.fourMatches +
-      1500000 * this.fiveMatches +
-      30000000 * this.fiveAndBonusMatches +
-      2000000000 * this.sixMatches;
-    return totalProfit;
+    return matchingCounts;
   }
 }
 
