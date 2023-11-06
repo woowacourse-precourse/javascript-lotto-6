@@ -114,8 +114,22 @@ class App {
     }, initValue);
   }
 
+  printResults() {
+    this.#result.forEach((rank) => {
+      const mathing = rank.bonus
+        ? OUTPUT_MESSAGE.matchCount + OUTPUT_MESSAGE.matchBonus
+        : OUTPUT_MESSAGE.matchCount;
+      MissionUtils.Console.print(
+        `${rank.matchCount}${mathing} (${rank.prize.toLocaleString()}원) - ${
+          rank.count
+        }개`,
+      );
+    });
+  }
+
   getResult() {
     this.matchLotteryResults();
+    this.printResults();
   }
 
   async play() {

@@ -10,7 +10,7 @@ const OUTPUT_MESSAGE = {
   divide: "---",
   matchCount: "개 일치",
   matchBonus: ", 보너스 볼 일치",
-  totalProfitPercentage: "총 수익률은 ",
+  totalProfitPercentage: "총 수익률은",
 };
 
 const ERROR_MESSAGE = {
@@ -24,22 +24,10 @@ const ERROR_MESSAGE = {
 
 const RANKS = [
   {
-    rank: "first",
-    matchCount: 6,
+    rank: "fifth",
+    matchCount: 3,
     bonus: false,
-    prize: 2000000000,
-  },
-  {
-    rank: "second",
-    matchCount: 5,
-    bonus: true,
-    prize: 30000000,
-  },
-  {
-    rank: "third",
-    matchCount: 5,
-    bonus: false,
-    prize: 1500000,
+    prize: 5000,
   },
   {
     rank: "fourth",
@@ -48,10 +36,22 @@ const RANKS = [
     prize: 50000,
   },
   {
-    rank: "fifth",
-    matchCount: 3,
+    rank: "third",
+    matchCount: 5,
     bonus: false,
-    prize: 5000,
+    prize: 1500000,
+  },
+  {
+    rank: "second",
+    matchCount: 5,
+    bonus: true,
+    prize: 30000000,
+  },
+  {
+    rank: "first",
+    matchCount: 6,
+    bonus: false,
+    prize: 2000000000,
   },
 ];
 
