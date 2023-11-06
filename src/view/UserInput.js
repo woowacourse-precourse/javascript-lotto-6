@@ -12,17 +12,17 @@ class UserInput {
     static async RequestAmount() {
         const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
         const amount = await Amount.changeIntoInt(input);
-        console.log("amount: ", amount);
 
         return amount;
     }
 
     static async RequestNumbers() {
         const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.WINNING_NUMBERS}`);
-        const numbers = input.split(',');
-        new Lotto(numbers);
 
-        return numbers;
+        const numbers = input.split(',');
+        const lotto = new Lotto(numbers);
+
+        return lotto.lottoNumber;
     }
 
     static async RequestBonus(numbers) {
