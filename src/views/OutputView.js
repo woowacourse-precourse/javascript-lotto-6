@@ -1,5 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
-import { EXCEPTION, WINNING_MESSAGE } from '../constants/constants.js';
+import { EXCEPTION } from '../constants/constants.js';
+
+const WINNING_MESSAGE = [
+  '3개 일치 (5,000원) - ',
+  '4개 일치 (50,000원) - ',
+  '5개 일치 (1,500,000원) - ',
+  '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  '6개 일치 (2,000,000,000원) - ',
+];
 
 const OutputView = {
   lottoCount(count) {
@@ -11,12 +19,12 @@ const OutputView = {
   lottoList(lotto) {
     Console.print(`[${lotto.join(', ')}]`);
   },
-  winning() {
+  statistic(counts) {
     Console.print('\n당첨 통계');
     Console.print('---');
-  },
-  statistic(count, idx) {
-    Console.print(`${WINNING_MESSAGE[idx]}${count}개`);
+    counts.forEach((count, idx) => {
+      Console.print(`${WINNING_MESSAGE[idx]}${count}개`);
+    });
   },
   profit(percent) {
     Console.print(`총 수익률은 ${percent}%입니다.`);
