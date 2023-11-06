@@ -50,6 +50,20 @@ class Lotto {
     return `[${this.#numbers.join(', ')}]`;
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
+  /**
+   *
+   * @param { string } inputString
+   */
+
+  static fromInputString(inputString) {
+    const winningNumbers = inputString.split(',').map((str) => parseInt(str.trim(), 10));
+    return new Lotto(winningNumbers);
+  }
+
   validate() {
     this.validateType();
     this.validateLength();
