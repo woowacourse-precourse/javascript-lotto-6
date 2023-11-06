@@ -31,4 +31,11 @@ export default class InputValidator {
       throw new Error(ERROR_MESSAGES.PURCHASE_AMOUNT_THOUSANDS_ONLY);
     }
   }
+
+  static validateBonusNumber(bonus, numbers) {
+    this.validateNumber(bonus);
+    if (numbers.includes(bonus)) {
+      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_DUPLICATE);
+    }
+  }
 }
