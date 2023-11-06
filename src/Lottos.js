@@ -1,11 +1,15 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import { checkValue } from './libs/checkValue';
-import { LOTTO, LOTTO_NUMBER } from './libs/constants';
+import { AMOUNT, LOTTO } from './libs/constants';
 import Lotto from './Lotto';
 
 class Lottos {
   constructor(purchaseAmount) {
     this.validate(purchaseAmount);
+    //몇장 구매인지 계산
+    this.count = purchaseAmount / AMOUNT.UNIT;
+    //여러장 발행해야해서
+    this.list = [];
   }
 
   validate(purchaseAmount) {
@@ -25,5 +29,13 @@ class Lottos {
     );
 
     return new Lotto(lottoNumbers);
+  }
+
+  //로또 구매 장수만큼 로또번호 생성
+  publishLotto() {
+    for (let num = 0; num < this.count; num++) {
+      const newLotto = this.generateLotto();
+      this.list.push(newLotto);
+    }
   }
 }
