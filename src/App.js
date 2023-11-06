@@ -5,15 +5,19 @@ class App {
   LOTTO_UNIT = 1000;
   LOTTO_REWARD = [0, 2000000, 30000, 1500, 50, 5];
   LOTTO_LENGTH = 6;
+  LOTTO_RULES = ["", "6개 일치", "5개 일치, 보너스 볼 일치", "5개 일치", "4개 일치", "3개 일치"]
 
   async play() {
-    const rankCount = Array.from(6).fill(0);
     const payment = await this.getPayment();
     const lottoCount = parseInt(payment / this.LOTTO_UNIT);
     const lottoList = this.getPickedLottoList(lottoCount);
     this.printPickedLotto(lottoCount, lottoList);
     const winningNumbers = await this.getWinningNumber();
     const bonusNumber = await this.getBonusNumber();
+    const rankCount = this.getRankCount(winningNumbers, bonusNumber, lottoList);
+    const rateOfReturn = this.calculateRateOfReturn(payment, rankCount)
+
+    this.showResult(rankCount, rateOfReturn)
   }
 
   async getPayment() {
@@ -62,7 +66,7 @@ class App {
         "\n당첨 번호를 입력해 주세요.\n"
     ).split(",");
     const winningNumber = this.validateWinningNumber(numbers);
-    return new Lotto(winningNumber);
+    return new Lotto(winningNumber.sort((a, b) => a - b));
   }
 
   validateWinningNumber(numbers) {
@@ -93,6 +97,32 @@ class App {
       );
     }
     return +bonusNumber;
+  }
+
+  getRankCount(winningNumbers, bonusNumber, lottoList) {
+    let rankCount = Array.from(6).fill(0);
+    lottoList.forEach((lotto, idx) => {
+      const rank = lotto.getRank(winningNumbers, bonusNumber);
+      rankCount[rank] += 1;
+    });
+
+    return rankCount;
+  }
+  calculateRateOfReturn(payment, rankCount) {
+    const profit = rankCount.reduce((total, count, idx) => total + count * this.LOTTO_UNIT * this.LOTTO_REWARD[idx],0)
+    const rateOfReturn = (payment / profit) * 100
+    return rateOfReturn.toFixed(1)
+  }
+
+  showResult(rankCount, rateOfReturn) {
+    Console.print(`\n당첨 통계\n---`);
+    for (let i = 6; i > -1; i--) {
+      const rule = this.LOTTO_RULES[i]
+      const reward = this.LOTTO_REWARD[i] * this.LOTTO_UNIT
+      const count = rankCount[i]
+      Console.print(`${rule} (${reward.toLocaleString('ko-KR')}원) - ${count}개`);
+    }
+    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   }
 }
 
