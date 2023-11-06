@@ -5,23 +5,24 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["airbnb", "plugin:prettier/recommended"],
+  extends: ['airbnb', 'plugin:prettier/recommended'],
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: "script",
+        sourceType: 'script',
       },
     },
   ],
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaVersion: 'latest',
   },
   rules: {
-    "prettier/prettier": ["error", { endOfLine: "auto" }],
-    "max-depth": ["error", 2],
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'max-depth': ['error', 2],
+    'max-lines-per-function': ['error', 10],
   },
 };
