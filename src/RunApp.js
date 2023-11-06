@@ -1,6 +1,8 @@
 import Lotto from "./Lotto.js";
 import ErrorMessages from "./common/errorMessages.js";
+import calculateWinningLottosCount from "./controller/result/calculateWinningLottosCount.js";
 import printBonusNumber from "./ui/PrintBonusNumber.js";
+import printWinningStatic from "./ui/PrintWinningStatic.js";
 import purchasePriceInput from "./ui/purchasePriceInput.js";
 import validateBonusNumber from "./util/validateBonusNumber.js";
 
@@ -8,6 +10,7 @@ class RunApp {
   constructor() {
     this.numbers = [];
     this.bonus = [];
+    this.purchase = [];
   }
 
   async main() {
@@ -15,7 +18,7 @@ class RunApp {
   }
 
   async start() {
-    await purchasePriceInput();
+    this.purchase = await purchasePriceInput();
     await this.getLotto();
     await this.getBonusNumber();
   }
@@ -30,8 +33,6 @@ class RunApp {
     if (!validateBonusNumber(this.numbers, bonusNumber))
       throw new Error(`${ErrorMessages.BONUS_NUMBER_ERROR_MESSAGE}`);
     this.bonus.push(bonusNumber);
-    console.log(this.numbers);
-    console.log(this.bonus);
   }
 }
 

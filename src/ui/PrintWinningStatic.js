@@ -10,6 +10,4 @@ const printWinningStatic = (count) => {
   });
 };
 
-printWinningStatic([1, 0, 0, 0, 0]);
-
 export default printWinningStatic;

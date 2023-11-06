@@ -9,7 +9,8 @@ const purchasePriceInput = async () => {
   let price = await Console.readLineAsync(Messages.PURCHASE_INPUT_MESSAGE);
   if (!validatePriceInput(price))
     throw new Error(ErrorMessages.PRICE_INPUT_ERRORMESSAGE);
-  printPurchaseLotto(price / 1000);
+  const purchasedLotto = printPurchaseLotto(price / 1000);
+  return purchasedLotto;
 };
 
 export default purchasePriceInput;
