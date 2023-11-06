@@ -87,7 +87,7 @@ function App() {
   };
   const BonusCheck = (lotto, lottoBonusNumber) => {
     if (lotto.includes(lottoBonusNumber)) {
-      return 7;
+      return 5.5;
     }
     return 5;
   };
@@ -97,21 +97,53 @@ function App() {
       3: 0,
       4: 0,
       5: 0,
-      7: 0,
+      5.5: 0,
       6: 0,
+    };
+    const WINNING_AMOUNT = {
+      3: "5,000",
+      4: "50,000",
+      5: "1,500,000",
+      5.5: "30,000,000",
+      6: "2,000,000,000",
     };
     resultLotto.forEach((result) => {
       if (result >= 3) {
         WinningAmountResult[result]++;
       }
     });
-    Console.print(`3개 일치 (5,000원) - ${WinningAmountResult[3]}개`);
-    Console.print(`4개 일치 (50,000원) - ${WinningAmountResult[4]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${WinningAmountResult[5]}개`);
+    printCheckLotto(WinningAmountResult, WINNING_AMOUNT);
+    printRateOfReturn(WinningAmountResult, inputAmount);
+  };
+  const printRateOfReturn = (WinningAmountResult, inputAmount) => {
+    const LottoAmount = {
+      3: 5000,
+      4: 50000,
+      5: 1500000,
+      5.5: 30000000,
+      6: 2000000000,
+    };
+    let resultAmount = 0;
+
+    for (let key in WinningAmountResult) {
+      resultAmount += WinningAmountResult[key] * LottoAmount[key];
+    }
+
     Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${WinningAmountResult[7]}개`
+      `총 수익률은 ${(
+        Math.round((resultAmount / inputAmount) * 10000) / 100
+      ).toFixed(1)}%입니다.`
     );
-    Console.print(`6개 일치 (2,000,000,000원) - ${WinningAmountResult[6]}개`);
+  };
+  const printCheckLotto = (WinningAmountResult, WINNING_AMOUNT) => {
+    const obj = Object.keys(WinningAmountResult).sort((a, b) => a - b);
+    for (let key of obj) {
+      Console.print(
+        `${key === "5.5" ? "5" : key}개 일치${
+          key === "5.5" ? ", 보너스 볼 일치 " : " "
+        }${WINNING_AMOUNT[key]} - ${WinningAmountResult[key]}개`
+      );
+    }
   };
 }
 
