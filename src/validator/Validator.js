@@ -2,12 +2,6 @@ import { CONSTANT, ERROR, LOTTO_NUMBER } from '../constants/Constant.js';
 import ValidationError from '../ValidationError.js';
 
 const Validator = {
-  validateAmount(amount) {
-    this.checkIsNotNumber(amount);
-    this.checkIsNotPositive(amount);
-    this.checkIsNotInUnit(amount);
-  },
-
   checkIsNotNumber(userInput) {
     if (this.isNotNumber(userInput)) {
       throw new ValidationError(ERROR.isNotNumber);

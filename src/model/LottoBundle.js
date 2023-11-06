@@ -1,12 +1,26 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO_NUMBER, RANK } from '../constants/Constant.js';
+import { CONSTANT, LOTTO_NUMBER, RANK } from '../constants/Constant.js';
 import Lotto from './Lotto.js';
+import Validator from '../validator/Validator.js';
 
 class LottoBundle {
+  #lottoCount;
+
   #lottoList = [];
 
-  buyLottos(count) {
-    for (let i = 0; i < count; i += 1) {
+  constructor(amount) {
+    this.#validateAmount(amount);
+    this.#lottoCount = Number(amount) / CONSTANT.amountUnit;
+  }
+
+  #validateAmount(amount) {
+    Validator.checkIsNotNumber(amount);
+    Validator.checkIsNotPositive(amount);
+    Validator.checkIsNotInUnit(amount);
+  }
+
+  buyLottos() {
+    for (let i = 0; i < this.#lottoCount; i += 1) {
       const newLottoNumbers = this.#makeLottoNumbers();
       const newLotto = new Lotto(newLottoNumbers);
 
