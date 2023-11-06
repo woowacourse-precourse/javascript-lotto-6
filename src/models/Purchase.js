@@ -6,7 +6,7 @@ import { throwErrorIf } from "../utils";
 
 const purchase = {
   countMoney: function (money) {
-    validate(money);
+    this.validate(money);
     return parseInt(money / lottoInfo.PRICE);
   },
 
@@ -31,13 +31,8 @@ const purchase = {
       lottoInfo.END_INCLUSIVE,
       lottoInfo.COUNT
     );
-    const sorted = this.sortInAscendingOrder(numbers);
 
-    return sorted;
-  },
-
-  sortInAscendingOrder: function (arr) {
-    arr.sort((a, b) => a - b);
+    return numbers;
   },
 };
 

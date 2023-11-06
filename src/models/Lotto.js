@@ -6,7 +6,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = this.sortInAscendingOrder(numbers);
   }
 
   #validate(numbers) {
@@ -23,6 +23,10 @@ class Lotto {
 
   getNumbers() {
     return this.#numbers;
+  }
+
+  sortInAscendingOrder(arr) {
+    return arr.sort((a, b) => a - b);
   }
 }
 
