@@ -1,4 +1,5 @@
 import UserLottoNumber from './UserLottoNumber.js';
+import { NUMBER } from '../constants/constants.js'
 
 class UserLotto {
   #purchaseAmount;
@@ -16,7 +17,7 @@ class UserLotto {
 
   #setPurchaseVariable(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
-    this.#numberOfPurchase = purchaseAmount / 1000;
+    this.#numberOfPurchase = purchaseAmount / NUMBER.lottoprice;
     for (let i = 0; i < this.#numberOfPurchase; i++) {
       this.#userLottoNumbers.push(new UserLottoNumber());
     }

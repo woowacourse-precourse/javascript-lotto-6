@@ -26,6 +26,7 @@ const NUMBER = Object.freeze({
   four: 4,
   five: 5,
   six: 6,
+  lottoprice: 1000,
 });
 
 export { MESSAGE, STATISTICS, CHARACTER, NUMBER };

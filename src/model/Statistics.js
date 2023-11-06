@@ -28,6 +28,7 @@ class Statistics {
     const totalWinnings = this.#statistics.reduce((total, statistic) => {
       return total + statistic.winnings * statistic.count;
     }, 0);
+
     this.#rateOfReturns =
       totalWinnings / (userLotto.getNumberOfPurchase() * 1000);
   }
