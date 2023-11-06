@@ -3,7 +3,7 @@ import {
   checkInputArrayLength6,
   checkInputArrayDuplication,
   checkInputArrayRange,
-} from "./Validation";
+} from "./Validation.js";
 
 class Winning {
   #winning;
@@ -12,6 +12,14 @@ class Winning {
     this.#winning = winning;
     this.#validateWinning(winning);
     this.#bonus = bonus;
+  }
+
+  getWinning() {
+    return this.#winning;
+  }
+
+  getBonus() {
+    return this.#bonus;
   }
 
   setBonus(bonus) {

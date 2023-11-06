@@ -10,6 +10,11 @@ export function checkInputDividedBy1000(input) {
     throw new Error(errorMessages.ERROR_INPUT_DIVIDED_BY_1000);
 }
 
+export function checkInputArrayLength1(arr) {
+  if (arr.length !== 1)
+    throw new Error(errorMessages.ERROR_INPUT_ARRAY_LENGTH_1);
+}
+
 export function checkInputArrayLength6(arr) {
   if (arr.length !== 6)
     throw new Error(errorMessages.ERROR_INPUT_ARRAY_LENGTH_6);
