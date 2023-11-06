@@ -31,8 +31,6 @@ class App {
 
   #totalProfit;
 
-  #profitPercentage;
-
   constructor() {
     this.#tickets = [];
     this.#result = [...RANKS.map((rank) => ({ ...rank, count: 0 }))];
@@ -135,17 +133,17 @@ class App {
   }
 
   calcTotalProfitPercentage() {
-    this.#profitPercentage = (this.#totalProfit / this.#purchaseAmount) * 100;
+    return (this.#totalProfit / this.#purchaseAmount) * 100;
   }
 
-  printResults() {
+  printResults(profitPercentage) {
     this.printWinnigList();
-    this.printProfitPercentage();
+    this.printProfitPercentage(profitPercentage);
   }
 
-  printProfitPercentage() {
+  printProfitPercentage(profitPercentage) {
     MissionUtils.Console.print(
-      `${OUTPUT_MESSAGE.totalProfitPercentage} ${this.#profitPercentage.toFixed(
+      `${OUTPUT_MESSAGE.totalProfitPercentage} ${profitPercentage.toFixed(
         1,
       )}%입니다.`,
     );
@@ -166,8 +164,8 @@ class App {
 
   getResult() {
     this.matchLotteryResults();
-    this.calcTotalProfitPercentage();
-    this.printResults();
+    const profitPercentage = this.calcTotalProfitPercentage();
+    this.printResults(profitPercentage);
   }
 
   async play() {
