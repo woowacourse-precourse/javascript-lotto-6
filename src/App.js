@@ -4,8 +4,15 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   #orderPrice;
   #orderQuantity;
-  #lottoOrder = [];
+  #lottoOrders = [];
   #winningNumbers = [];
+
+  constructor() {
+    this.#orderPrice;
+    this.#orderQuantity;
+    this.#lottoOrders = [];
+    this.#winningNumbers = [];
+  }
 
   getUserInput = async () => {
     let userInput = '';
@@ -53,7 +60,7 @@ class App {
   printLottoOrder = () => {
     MissionUtils.Console.print(`\n${this.#orderQuantity}개를 구매했습니다.`);
 
-    this.#lottoOrder.forEach((lottoNumbers) => {
+    this.#lottoOrders.forEach((lottoNumbers) => {
       MissionUtils.Console.print(lottoNumbers);
     })
   }
@@ -88,6 +95,7 @@ class App {
     let count = 0;
     while(count <= 45) {
       this.#winningNumbers.push(false);
+      count++;
     }
 
     winningNumbers.forEach((winningNumber) => {
@@ -105,10 +113,14 @@ class App {
     })
   }
 
-  getLottoResult = () => {
-    this.#lottoOrder.forEach((lottoNumbers) => {
+  getLottoResult = (lottoOrder) => {
+    let count = 0;
 
+    lottoOrder.forEach((lottoNumber) => {
+      if(this.#winningNumbers[lottoNumber]) count++;
     })
+
+    return count;
   }
 
 
@@ -128,7 +140,7 @@ class App {
       for(let i = 0; i < this.#orderQuantity; i++) {
         const lottoNumbers = this.generateLottoNumbers();
         
-        this.#lottoOrder.push(lottoNumbers);
+        this.#lottoOrders.push(lottoNumbers);
       }
 
       this.printLottoOrder();
@@ -136,7 +148,7 @@ class App {
       MissionUtils.Console.print('당첨 번호를 입려해 주세요.');
 
       const userInputWinningNumbers = await this.getUserInput();
-      const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers)
+      const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
 
       this.checkWinngNumbers(parsedWinnigNumbers);
       this.setWinningNumbers(parsedWinnigNumbers);
@@ -148,6 +160,9 @@ class App {
 
       this.checkBonusNumber(bonusNumber);
       
+      const result = this.getLottoResult(this.#lottoOrders[0]);
+
+      console.log(result);
 
 
     } catch(err) {
