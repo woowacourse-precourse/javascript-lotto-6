@@ -1,4 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
 
 class App {
 	static async inputMoney() {
@@ -20,6 +20,17 @@ class App {
 			return this.getValidMoney();
 		}
 		return money;
+	}
+
+	static issueLottery(money = 0) {
+		const ea = +(money / 1000);
+		Console.print(`${ea}개를 구매했습니다.`);
+		const userNumbers = Array(ea)
+			.fill()
+			.map(() => Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
+		userNumbers.forEach((e) => Console.print(`[${e.join(', ')}]`));
+		Console.print('');
+		return userNumbers;
 	}
 
 	// async play() {}
