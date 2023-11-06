@@ -1,16 +1,22 @@
 import { input } from "./input.js";
 import BuyPrice from "./BuyPrice.js";
+import Lotto from "./Lotto.js";
 
 class App {
-  price = 0;
+  buyPrice = 0;
+  lotto = [];
 
   constructor() {
-    this.price = 0;
+    this.buyPrice = 0;
+    this.lotto = [];
   }
 
   async play() {
-    this.price = await input.getInputBuyPrice();
-    const buyPrice = await new BuyPrice(this.price);
+    const price = await input.getInputBuyPrice();
+    this.buyPrice = new BuyPrice(price);
+
+    const lottoArray = await input.getInputLotto();
+    this.lotto = new Lotto(lottoArray);
   }
 }
 
