@@ -1,10 +1,28 @@
+import Lotto from "./Lotto.js";
+
 class App {
     async play() {
+        const purchaseAmount = await this.buyLottoTickets();
 
     }
 
     async buyLottoTickets() {
         //TODO : 로또 구입 금액을 입력 받는다.
+        let userInput = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+
+        return parseInt(userInput);
+    }
+
+    async getMaxPurchasedTickets() {
+        //TODO : 로또 티켓의 최대 구매 가능 개수를 계산하고 반환한다.
+    }
+
+    async randomizeLottoNumbers() {
+        //TODO : 랜덤한 로또 번호를 생성하고 반환한다.
+    }
+
+    async getLottoNumbersArray() {
+        //TODO : 로또 티켓의 최대 구매 가능 개수만큼 랜덤한 로또 번호 배열을 만들고 반환한다.
     }
 
     async inputWinningNumbers() {
