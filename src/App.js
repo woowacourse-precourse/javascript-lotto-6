@@ -1,13 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import Game from './Game';
+import Game from './Game.js';
 
 export const MESSAGES = {
   INPUT_AMOUNT: '구입금액을 입력해 주세요.\n',
   INPUT_WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
   INPUT_BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 
-  OUTPUT_BUY_TICKETS: (num) => `${num}개를 구매했습니다.`,
+  OUTPUT_BUY_TICKETS: (num) => `\n${num}개를 구매했습니다.`,
   OUTPUT_RESULT: (winningInfo, totalReturn) => `
   당첨 통계
   ---
@@ -22,10 +22,22 @@ export const MESSAGES = {
 class App {
   async play() {
     const amount = await this.getAmount();
+    const ticketNumber = amount / 1000;
+
+    const game = new Game(amount);
+
+    game.getLottoTickets();
+    this.printTickets(game.tickets);
   }
 
   async getAmount() {
     return await Console.readLineAsync(MESSAGES.INPUT_AMOUNT);
+  }
+
+  printTickets(tickets) {
+    Console.print(MESSAGES.OUTPUT_BUY_TICKETS(tickets.length));
+
+    tickets.forEach((ticket) => Console.print(ticket));
   }
 }
 
