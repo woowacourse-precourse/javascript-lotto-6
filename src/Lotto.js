@@ -11,6 +11,13 @@ class Lotto {
 	get numbers() {
 		return this.#numbers;
 	}
+
+	compareWithWinningNumbers(winningNumber, winningBonusNumber) {
+		const winningCount = winningNumber.filter((number) => this.#numbers.includes(number)).length;
+		const bonusNumberHit = this.#numbers.includes(winningBonusNumber);
+
+		return { winningCount, bonusNumberHit };
+	}
 }
 
 export default Lotto;
