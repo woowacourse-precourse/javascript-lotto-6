@@ -30,7 +30,7 @@ class WinningLotto {
    */
 
   constructor(winningNumbers, bonusNumber) {
-    this.#winningNumbers = winningNumbers.getNumbers();
+    this.#winningNumbers = winningNumbers;
     this.#bonusNumber = Number(bonusNumber);
     this.validateBonusNumber();
   }
