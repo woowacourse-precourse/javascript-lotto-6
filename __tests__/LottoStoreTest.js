@@ -51,6 +51,14 @@ describe("LottoStoreTest", () => {
     );
   });
 
+  test("보너스 번호는 1~45사이 정수를 입력되어진다", async () => {
+    mockReadLineAsync.mockResolvedValue("11");
+    Validator.validateBonusNumber.mockImplementation((num) => num);
+    const bonusNum = await LottoStore.askBonusNum();
+    expect(Validator.validateBonusNumber).toHaveBeenCalledWith("11");
+    expect(bonusNum).toBe("11");
+  });
+
   test("보너스 번호는 1~45사이 정수를 입력하지 않으면 예외가 발생한다", async () => {
     mockReadLineAsync.mockResolvedValue("49");
     Validator.validateBonusNumber.mockImplementation(() => {

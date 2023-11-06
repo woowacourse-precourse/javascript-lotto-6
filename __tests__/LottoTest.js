@@ -14,7 +14,7 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test("로또는 1000원 단위로 구매되어진다..", () => {
+  test("로또는 1000원 단위로 구매되어진다.", () => {
     expect(Lotto.countingLottos(1000)).toBe(1);
   });
 });
