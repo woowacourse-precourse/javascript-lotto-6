@@ -1,4 +1,4 @@
-export const message = {
+const message = {
   ENTER_PURCHASE_AMOUNT: "구입금액을 입력해 주세요.\n",
   ENTER_WINNING_NUMBER: "당첨 번호를 입력해 주세요.\n",
   ENTER_BONUS_NUMBER: "보너스 번호를 입력해 주세요.\n",
@@ -14,7 +14,7 @@ export const message = {
 
 const ERROR = "[ERROR]";
 
-export const error = {
+const error = {
   IS_EMPTY: `${ERROR} 입력된 값이 없습니다.`,
   NOT_NUMBER: `${ERROR} 숫자로 입력해주세요.`,
   NOT_DIVEDED_BY_1000: `${ERROR} 로또는 1000원 단위로 구매할 수 있습니다.`,
@@ -23,14 +23,16 @@ export const error = {
   DUPLICATE: `${ERROR} 당첨 번호는 중복되지 않아야 합니다.`,
 };
 
-export const lottoInfo = {
+const lottoInfo = {
   PRICE: 1000,
   START_INCLUSIVE: 1,
   END_INCLUSIVE: 45,
   COUNT: 6,
 };
 
-export const exceptionType = {
+const exceptionType = {
   PURCHASE: "purchase",
   LOTTO: "lotto",
 };
+
+export { message, error, lottoInfo, exceptionType };
