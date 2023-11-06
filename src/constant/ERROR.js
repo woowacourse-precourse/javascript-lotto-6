@@ -9,6 +9,5 @@ export const LOTTO_ERROR = {
   isOneToFourtyFive: "[ERROR]: 로또 번호는 1부터 45까지 입력 가능합니다.",
   isNotDuplicate: "[ERROR] 로또 번호는 서로 중복될 수 없습니다.",
   isNotBlank: "[ERROR] 입력을 쉼표로 마치면 안됩니다.",
-  isNotSpecialSymbol:
-    "[ERROR] 입력에 쉼표를 제외한 특수문자는 포함할 수 없습니다.",
+  isNumber: "[ERROR] 로또 번호는 숫자만 입력하셔야 합니다.",
 };
