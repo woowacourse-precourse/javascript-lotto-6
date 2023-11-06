@@ -18,4 +18,18 @@ export class Output {
 
     Console.print(result);
   }
+
+  printFinalResult(lottoBoard) {
+    Console.print("");
+    Console.print(`${MESSAGES.WINNING_STASTISTICS}`);
+    Console.print("---");
+    Console.print(`${MESSAGES.THREE_COINCIDE}${lottoBoard.threeSame}개`);
+    Console.print(`${MESSAGES.FOUR_COINCIDE}${lottoBoard.fourSame}개`);
+    Console.print(`${MESSAGES.FIVE_COINCIDE}${lottoBoard.fiveSame}개`);
+    Console.print(
+      `${MESSAGES.FIVE_AND_BONUS_COINCIDE}${lottoBoard.fiveAndBonusSame}개`
+    );
+    Console.print(`${MESSAGES.ALL_COINCIDE}${lottoBoard.sixSame}개`);
+    Console.print(`총 수익률은 ${lottoBoard.rateOfReturn}%입니다.`);
+  }
 }
