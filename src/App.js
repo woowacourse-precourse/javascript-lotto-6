@@ -2,111 +2,72 @@ import { Console } from '@woowacourse/mission-utils';
 import ExceptionHandler from './utils/ExceptionHandler.js';
 import LOTTO from './constants/lotto.js';
 import Lotto from './Domain/Lotto.js';
-import LottoNumberCreation from './Domain/LottoNumberCreation.js';
+import LottoChecker from './Domain/LottoChecker.js';
+import LottoPurchaseInput from './Domain/LottoPurchaseInput.js';
+import LottoReturn from './Domain/LottoReturn.js';
 import MESSAGE from './constants/message.js';
-import { MessageFormat } from './utils/messageFormat.js';
-import { calcaulateTicketCountFromAmount } from './utils/index.js';
 
 class App {
-  #lotto;
-  #winningNumbers;
-  #bonusNumber;
-
-  constructor() {
-    this.validatedAmount = 0;
-  }
-
+  /**
+   * 로또 게임을 실행합니다.
+   */
   async play() {
-    try {
-      const purchaseAmount = await this.inputWithRetry(this.inputUserPurchaseAmount.bind(this));
-      const lottoTickets = this.purchaseLotto(purchaseAmount);
+    const lottoPurchaseInput = new LottoPurchaseInput();
+    const purchaseAmount = await this.inputWithRetry(
+      lottoPurchaseInput.inputPurchaseAmount.bind(lottoPurchaseInput),
+    );
 
-      this.#winningNumbers = await this.inputWithRetry(this.inputUserWinningNumbers.bind(this));
-      this.#bonusNumber = await this.inputWithRetry(this.inputUserBonusNumber.bind(this));
+    const lottoTickets = lottoPurchaseInput.purchaseLotto(purchaseAmount);
 
-      this.#lotto = new Lotto(this.#winningNumbers.split(LOTTO.string.comma).map(Number));
-      this.#lotto.compareWinningAndLotto(this.#bonusNumber, lottoTickets);
-      this.#lotto.printTotalResult();
+    const winningNumbers = await this.inputWithRetry(this.inputUserWinningNumbers.bind(this));
+    const bonusNumber = await this.inputWithRetry(
+      this.inputUserBonusNumber.bind(this),
+      winningNumbers,
+    );
 
-      this.resultReturnRate();
-    } catch (error) {
-      Console.print(`${error.stack} ${error.message}`);
-    }
+    this.checkLottoAndPrizeResult(winningNumbers, bonusNumber, lottoTickets, purchaseAmount);
   }
 
-  async inputWithRetry(inputMethod) {
+  /**
+   * 입력을 받고 검증합니다. 검증에 실패하면 다시 입력을 받습니다.
+   * @param {Function} inputMethod 입력을 받는 메서드
+   * @param {Array} winningNumbers 당첨 번호
+   * @returns {Promise<string>} 검증된 입력 값
+   */
+  async inputWithRetry(inputMethod, winningNumbers) {
     while (true) {
       try {
-        return await inputMethod();
+        return await inputMethod(winningNumbers);
       } catch (error) {
         Console.print(`${error.message}`);
       }
     }
   }
 
-  /**
-   * 1. (입력) 로또 구입 금액 입력
-   */
-  async inputUserPurchaseAmount() {
-    const amount = await Console.readLineAsync(MESSAGE.input.PurchaseAmount);
-    this.validatedAmount = ExceptionHandler.validateAmount(amount);
-    return calcaulateTicketCountFromAmount(this.validatedAmount);
-  }
-
-  // utils로 빼는 것이 좋겠..다?
-  // calculateTicketCountFromAmount(validatedAmount) {
-  //   return validatedAmount / LOTTO.unit.unit;
-  // }
-
-  /**
-   * 2. (출력) 로또 구매
-   * - 입력한 금액에 따른 구매 갯수와 구매한 로또 번호 출력.
-   */
-  purchaseLotto(ticketCount) {
-    this.printPurchaseConfirm(ticketCount);
-    return this.purchaseLottoTickets(ticketCount);
-  }
-
-  printPurchaseConfirm(ticketCount) {
-    /**
-     * 2.1. 입력한 금액에 따른 구매 갯수
-     */
-    Console.print(MessageFormat.purchaseConfirm(ticketCount));
-  }
-
-  purchaseLottoTickets(ticketCount) {
-    /**
-     * 2.2 (출력) 구매 갯수만큼 로또 번호 출력
-     */
-    const lottoTickets = LottoNumberCreation.generateLottoTickets(ticketCount);
-    lottoTickets.forEach((ticket) => this.printLottoTickets(ticket));
-
-    return lottoTickets;
-  }
-
-  printLottoTickets(ticket) {
-    Console.print(`[${ticket.join(', ')}]`);
-  }
-
-  /**
-   * 3. (입력)
-   * -  당첨 번호 6개와 보너스 번호 입력 받기
-   */
   async inputUserWinningNumbers() {
     const inputWinningNumbers = await Console.readLineAsync(MESSAGE.input.WinningNumbers);
     return ExceptionHandler.validateWinningNumbers(inputWinningNumbers);
   }
 
-  async inputUserBonusNumber() {
+  async inputUserBonusNumber(winningNumbers) {
     const inputBonusNumber = await Console.readLineAsync(MESSAGE.input.BonusNumbers);
-    return ExceptionHandler.validateBonusNumber(inputBonusNumber, this.#winningNumbers);
+    return ExceptionHandler.validateBonusNumber(inputBonusNumber, winningNumbers);
   }
 
   /**
-   * 4. 수익률
+   * 로또 번호를 확인하고 결과를 출력합니다.
+   * @param {string} winningNumbers 당첨 번호
+   * @param {string} bonusNumber 보너스 번호
+   * @param {Array} lottoTickets 로또 티켓들
+   * @param {number} purchaseAmount 구매 금액
    */
-  resultReturnRate() {
-    this.#lotto.calculateReturnRate(this.validatedAmount);
+  checkLottoAndPrizeResult(winningNumbers, bonusNumber, lottoTickets, purchaseAmount) {
+    const lotto = new Lotto(winningNumbers.split(LOTTO.string.comma).map(Number));
+    const lottoChecker = new LottoChecker(lotto);
+    const lottoCheckerResult = lottoChecker.compareWinningAndLotto(bonusNumber, lottoTickets);
+    lottoChecker.printTotalResult(lottoCheckerResult);
+
+    LottoReturn.calculateReturnRate(lottoCheckerResult, purchaseAmount);
   }
 }
 
