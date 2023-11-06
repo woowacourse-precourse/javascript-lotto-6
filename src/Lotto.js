@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -26,16 +28,21 @@ class Lotto {
     switch (countMatch) {
       case 3:
         resultList.filter((data) => data.rank === 5 && data.count++);
+        break;
       case 4:
         resultList.filter((data) => data.rank === 4 && data.count++);
+        break;
       case 5:
-        if (validateIncludeBonus(prizeList, bonus)) {
-          resultList.filter((data) => data.rank === 3 && data.count++);
-        } else {
+        if (this.validateIncludeBonus(prizeList, bonus)) {
           resultList.filter((data) => data.rank === 2 && data.count++);
+          break;
+        } else {
+          resultList.filter((data) => data.rank === 3 && data.count++);
+          break;
         }
       case 6:
         resultList.filter((data) => data.rank === 1 && data.count++);
+        break;
     }
   }
 
@@ -44,7 +51,13 @@ class Lotto {
   }
 
   validateIncludeBonus(prizeList, bonus) {
-    return true;
+    let filterList = [];
+    this.getMatchedCount(prizeList) &&
+      (filterList = this.#numbers.filter(
+        (number) => !prizeList.includes(number)
+      ));
+
+    return filterList.includes(bonus);
   }
 }
 
