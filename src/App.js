@@ -8,6 +8,7 @@ class App {
   #winningNumbers;
   #bonusNumber;
   #lottoStat;
+  #prizeMoney;
 
   constructor() {
     this.#orderPrice;
@@ -16,6 +17,7 @@ class App {
     this.#winningNumbers = [];
     this.#bonusNumber;
     this.#lottoStat = [0, 0, 0, 0, 0, 0];
+    this.prizeMoney;
   }
 
   getUserInput = async () => {
@@ -145,6 +147,18 @@ class App {
 
       this.#lottoStat[rank]++;
     })
+  }
+
+  setPrizeMoney = () => {
+    let prizeMoney = 0;
+
+    prizeMoney += 5000 * this.#lottoStat[5];
+    prizeMoney += 50000 * this.#lottoStat[4];
+    prizeMoney += 1500000 * this.#lottoStat[3];
+    prizeMoney += 30000000 * this.#lottoStat[2];
+    prizeMoney += 2000000000 * this.#lottoStat[1];
+
+    this.#prizeMoney = prizeMoney;
   }
 
   async play() {
