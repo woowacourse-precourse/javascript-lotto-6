@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { ERROR, INPUT } from "./Message.js";
 
 class Purchase {
   #amountOfLotto;
@@ -7,7 +8,7 @@ class Purchase {
   }
 
   getCredit() {
-    const cash = Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    const cash = Console.readLineAsync(INPUT.CREDIT);
     return cash;
   }
 
@@ -18,7 +19,7 @@ class Purchase {
 
   isDividedBy1000(credit) {
     if (credit % 1000 !== 0) {
-      throw new Error("[ERROR] : 1000원 단위로 입력해주세요.");
+      throw new Error(ERROR.NOT_DIVIDED_BY_1000);
     } else {
       return Math.floor(credit / 1000);
     }

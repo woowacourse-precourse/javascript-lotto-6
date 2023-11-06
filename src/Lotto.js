@@ -1,5 +1,5 @@
 import { Random, Console } from "@woowacourse/mission-utils";
-import { ERROR } from "./Message.js";
+import { ERROR, INPUT, RESULT } from "./Message.js";
 class Lotto {
   #drawNumbers;
 
@@ -31,13 +31,13 @@ class Lotto {
   }
 
   async enterDrawNumbers(num) {
-    const input = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
+    const input = await Console.readLineAsync(INPUT.DRAW);
     const number = input.split(",");
     return this.#validateDraw(number).map(Number);
   }
 
   async enterBonusNumber(num) {
-    const input = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+    const input = await Console.readLineAsync(INPUT.BONUS);
     const number = input.split(",");
     return this.#validateBonus(number).map(Number);
   }
@@ -163,7 +163,7 @@ class Lotto {
   lottoDrawPrinter(count) {
     const statCount = this.statCount;
     Console.print(
-      `\n당첨 통계\n---\n3개 일치 (5000원) - ${statCount[0]}개\n4개 일치 (50,000원) - ${statCount[1]}개\n5개 일치 (1,500,000원) - ${statCount[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${statCount[3]}개\n6개 일치 (2,000,000,000원) - ${statCount[4]}개`
+      `${RESULT.START}${RESULT.RANK5}${statCount[0]}개\n${RESULT.RANK4}${statCount[1]}개\n${RESULT.RANK3}${statCount[2]}개\n${RESULT.RANK2}${statCount[3]}개\n${RESULT.RANK1}${statCount[4]}개\n`
     );
   }
 }

@@ -5,3 +5,18 @@ export const ERROR = {
   DUPLICATE: "[ERROR] 로또 번호는 중복될 수 없습니다.",
   NOT_DIVIDED_BY_1000: "[ERROR] : 1000원 단위로 입력해주세요.",
 };
+
+export const INPUT = {
+  CREDIT: "구입금액을 입력해 주세요.\n",
+  DRAW: "\n당첨 번호를 입력해 주세요.\n",
+  BONUS: "\n보너스 번호를 입력해 주세요.\n",
+};
+
+export const RESULT = {
+  START: "\n당첨통계\n---\n",
+  RANK5: "3개 일치 (5000원) - ",
+  RANK4: "4개 일치 (50000원) - ",
+  RANK3: "5개 일치 (1500000원) - ",
+  RANK2: "5개 일치, 보너스 볼 일치 (30000000원) - ",
+  RANK1: "6개 일치 (2000000000원) - ",
+};
