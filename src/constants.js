@@ -15,3 +15,4 @@ export const PURCHASE_AMOUNT_UNIT = 1000;
 export const MIN_NUMBER = 1;
 export const MAX_NUMBER = 45;
 export const LOTTO_LENGTH = 6;
+export const PRICE_LENGTH = 5;
