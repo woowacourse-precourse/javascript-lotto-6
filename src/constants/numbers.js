@@ -1,6 +1,6 @@
 const NUMBERS = {
-  perchaseUnit: 1000,
-  maxPerchaseAmount: 20000,
+  purchaseUnit: 1000,
+  maxPurchaseAmount: 20000,
   minLottoNumber: 1,
   maxLottoNumber: 45,
   lottoNumberLength: 6,

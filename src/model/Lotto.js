@@ -1,16 +1,15 @@
-import { printErrorMessage } from './utils/printMessage.js';
-import MESSAGES from './constants/messages.js';
-import NUMBERS from './constants/numbers.js';
+import { printErrorMessage } from '../utils/printMessage.js';
+import MESSAGES from '../constants/messages.js';
+import NUMBERS from '../constants/numbers.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
+  static validate(numbers) {
     if (numbers.length !== NUMBERS.lottoNumberLength) {
       printErrorMessage(MESSAGES.errorHeader, MESSAGES.invalidLength);
     }

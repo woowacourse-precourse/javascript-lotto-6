@@ -1,13 +1,17 @@
-import MESSAGES from './constants/messages.js';
-import { printMessage } from './utils/printMessage.js';
-import isValidPerchaseAmount from './utils/validator.js';
+import MESSAGES from '../constants/messages.js';
+import { printMessage } from '../utils/printMessage.js';
 
 class WinningResult {
-  constructor(purchaseAmount, bonusNumber, userNumbers, winningNumberList) {
+  constructor(
+    purchaseAmount,
+    userLottoNumbers,
+    userBonusNumber,
+    winningNumbers,
+  ) {
     this.purchaseAmount = purchaseAmount;
-    this.bonusNumber = bonusNumber;
-    this.userNumbers = userNumbers;
-    this.winningNumberList = winningNumberList;
+    this.userNumbers = userLottoNumbers;
+    this.bonusNumber = userBonusNumber;
+    this.winningNumberList = winningNumbers;
     this.calculateWinning();
   }
 
@@ -70,7 +74,6 @@ class WinningResult {
 
     winningResult.forEach((result, index) => {
       if (result !== 0) {
-        console.log(result, prize[index]);
         totalPrize += result * prize[index];
       }
       printMessage(`${messages[index]}${result}개`);
@@ -80,11 +83,11 @@ class WinningResult {
   }
 
   calcualteProfit(purchaseAmount, totalPrize) {
-    let profit = (totalPrize / purchaseAmount) * 100;
+    const profit = (totalPrize / purchaseAmount) * 100;
     if (profit % 0.01) {
-      profit = profit.toFixed(2);
+      profit.toFixed(2);
     }
-    printMessage(`${MESSAGES.profitRate}${profit}% 입니다.`);
+    printMessage(`${MESSAGES.profitRate}${profit}%입니다.`);
   }
 }
 

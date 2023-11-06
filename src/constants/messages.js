@@ -1,10 +1,10 @@
 import NUMBERS from './numbers.js';
 
 const MESSAGES = {
-  purchaseAmount: `최대 ${NUMBERS.maxPerchaseAmount}원까지 ${NUMBERS.perchaseUnit}원 단위로 구입금액을 입력해주세요.\n`,
+  purchaseAmount: `최대 ${NUMBERS.maxPurchaseAmount}원까지 ${NUMBERS.purchaseUnit}원 단위로 구입금액을 입력해주세요.\n`,
   errorHeader: '[ERROR]: ',
-  nonThousandUnitMessage: `${NUMBERS.perchaseUnit}원 단위로 입력해주세요.`,
-  inputLimitMessage: `${NUMBERS.maxPerchaseAmount}원이 넘지 않게 입력해주세요.`,
+  nonThousandUnitMessage: `${NUMBERS.purchaseUnit}원 단위로 입력해주세요.`,
+  inputLimitMessage: `${NUMBERS.maxPurchaseAmount}원이 넘지 않게 입력해주세요.`,
   emptyPurchaseAmountInput: '금액을 입력해주세요.',
   purchaseQuantity: '개를 구매했습니다.',
   userLottoNumberInput: `\n${NUMBERS.minLottoNumber}~${NUMBERS.maxLottoNumber}사이의 당첨 번호 ${NUMBERS.lottoNumberLength}개를 입력해 주세요.\n`,
