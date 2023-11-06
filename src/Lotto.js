@@ -17,9 +17,9 @@ class Lotto {
     DomainValidator.bonusNumber(this.#numbers, bonusNumber);
   }
 
-  calcPrize(other, bonus) {
+  calcPrize(other) {
     const match = this.#calcMatch(other);
-    const bonusFlag = this.#numbers.includes(bonus);
+    const bonusFlag = this.#numbers.includes(other.bonus);
     const prize = MATCH_TO_PRIZE[match][bonusFlag];
     return prize;
   }

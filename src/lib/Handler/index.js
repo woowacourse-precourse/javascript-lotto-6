@@ -21,22 +21,21 @@ export class Handler {
     }
   }
 
-  static async winningLotto() {
+  static async referenceLotto() {
     try {
       const response = await InputView.winNumbers();
-      const lotto = new Lotto(response);
-      return lotto;
+      const referenceLotto = new ReferenceLotto(response);
+      return referenceLotto;
     } catch (err) {
       return Handler.#handleError(err, () => Handler.winningLotto());
     }
   }
 
-  static async referenceLotto(lotto) {
+  static async bonusNumber(referenceLotto) {
     try {
-      if (!lotto) throw new Error(ERROR_MESSAGE.LOTTO_NOT_EXIST);
+      if (!referenceLotto) throw new Error(ERROR_MESSAGE.LOTTO_NOT_EXIST);
       const response = await InputView.bonusNumber();
-      const referenceLotto = new ReferenceLotto(lotto, response);
-      return referenceLotto;
+      referenceLotto.bonus = response;
     } catch (err) {
       return Handler.#handleError(err, () => Handler.referenceLotto(lotto));
     }

@@ -14,8 +14,8 @@ class App {
     try {
       this.#lottoBundle = await Handler.lottoBundle();
       this.printLottoBundle();
-      const lotto = await Handler.winningLotto();
-      const referenceLotto = await Handler.referenceLotto(lotto);
+      const referenceLotto = await Handler.referenceLotto();
+      await Handler.bonusNumber(referenceLotto);
 
       this.#result = referenceLotto.calcResult(this.#lottoBundle.items);
       this.printResult();
