@@ -1,4 +1,3 @@
-import { error } from 'console';
 import isValidCost from '../src/modules/isValidCost';
 import isValidWinnerNumber from '../src/modules/isValidWinnerNumber';
 
