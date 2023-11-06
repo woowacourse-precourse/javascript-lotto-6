@@ -16,6 +16,7 @@ export const ERROR_MSG = {
 }
 
 export const WINNING_RESULT = {
+  RESULT_MSG: '\n당첨 통계\n---',
   THREE_HIT: '3개 일치 (5,000원)',
   FOUR_HIT: '4개 일치 (50,000원)',
   FIVE_HIT: '5개 일치 (1,500,000원)',

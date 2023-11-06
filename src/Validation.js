@@ -1,4 +1,4 @@
-import { ERROR_MSG } from "./constants";
+import { ERROR_MSG } from "./constants.js";
 
 class Validation {
   static isNumber(value, errorMsg) {

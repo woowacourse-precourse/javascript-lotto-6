@@ -2,6 +2,7 @@ import { Random } from "@woowacourse/mission-utils";
 import IO from "./IO.js";
 import Validation from "./Validation.js";
 import Lotto from "./Lotto.js";
+import { ERROR_MSG, NORMAR_MSG, WINNING_MONEY, WINNING_RESULT } from "./constants.js";
 
 class LottoGame {
   #lottos;
@@ -15,8 +16,8 @@ class LottoGame {
   }
 
   async start() {
-    const amountStr = await IO.receiveUserInput('구입금액을 입력해 주세요.\n');
-    Validation.isNumber(amountStr, '[ERROR] 구입 금액은 0으로 시작하지 않는 숫자 형식입니다.');
+    const amountStr = await IO.receiveUserInput(NORMAR_MSG.AMOUNT_INPUT);
+    Validation.isNumber(amountStr, ERROR_MSG.AMOUNT_FORMAT_ERROR);
 
     const amount = Number(amountStr);
     Validation.isDivisible(amount);
@@ -30,16 +31,16 @@ class LottoGame {
       IO.printMsg(tempLotto.formatNumbers());
     }
 
-    const winningStr = await IO.receiveUserInput('\n당첨 번호를 입력해 주세요.\n');
+    const winningStr = await IO.receiveUserInput(NORMAR_MSG.WINNING_INPUT);
     const winningArr = winningStr.split(',');
     Validation.isValidLen(winningArr);
     Validation.isDuplicate(winningArr);
-    winningArr.forEach(el => Validation.isNumber(el, '[ERROR] 당첨 번호는 \,으로 구분되는 6개의 숫자 형식입니다.'));
+    winningArr.forEach(el => Validation.isNumber(el, ERROR_MSG.WINNING_FORMAT_ERROR));
     winningArr.forEach(el => Validation.isValidLottoNum(el));
     this.#winnings = winningArr.map(el => {return Number(el)});
 
-    const bonusStr = await IO.receiveUserInput('\n보너스 번호를 입력해 주세요.\n');
-    Validation.isNumber(bonusStr, '[ERROR] 보너스 번호는 하나의 숫자 형식입니다.');
+    const bonusStr = await IO.receiveUserInput(NORMAR_MSG.BONUS_INPUT);
+    Validation.isNumber(bonusStr, ERROR_MSG.BONUS_FORMAT_ERROR);
     
     this.#bonus = Number(bonusStr);
     Validation.isValidLottoNum(this.#bonus);
@@ -47,12 +48,12 @@ class LottoGame {
 
     const resultObj = this.checkMatching();
 
-    IO.printMsg('\n당첨 통계\n---');
-    IO.printMsg(`3개 일치 (5,000원) - ${resultObj.threeMatches}개`);
-    IO.printMsg(`4개 일치 (50,000원) - ${resultObj.fourMatches}개`);
-    IO.printMsg(`5개 일치 (1,500,000원) - ${resultObj.fiveMatches}개`);
-    IO.printMsg(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${resultObj.fiveMatchesAndBonus}개`);
-    IO.printMsg(`6개 일치 (2,000,000,000원) - ${resultObj.sixMatches}개`);
+    IO.printMsg(WINNING_RESULT.RESULT_MSG);
+    IO.printMsg(`${WINNING_RESULT.THREE_HIT} - ${resultObj.threeMatches}개`);
+    IO.printMsg(`${WINNING_RESULT.FOUR_HIT} - ${resultObj.fourMatches}개`);
+    IO.printMsg(`${WINNING_RESULT.FIVE_HIT} - ${resultObj.fiveMatches}개`);
+    IO.printMsg(`${WINNING_RESULT.FIVE_HIT_AND_BONUS} - ${resultObj.fiveMatchesAndBonus}개`);
+    IO.printMsg(`${WINNING_RESULT.SIX_HIT} - ${resultObj.sixMatches}개`);
 
     const profitRate = this.calculateProfitRate(amount, resultObj);
     IO.printMsg(`총 수익률은 ${profitRate}%입니다.`);
@@ -118,13 +119,12 @@ class LottoGame {
   }
 
   calculateProfitRate(amount, resObj) {
-    // 가격들 상수 처리
     let total = 0;
-    total += resObj.threeMatches * 5000;
-    total += resObj.fourMatches * 50000;
-    total += resObj.fiveMatches * 1500000;
-    total += resObj.fiveMatchesAndBonus * 30000000;
-    total += resObj.sixMatches * 2000000000;
+    total += resObj.threeMatches * WINNING_MONEY.THREE_HIT_MONEY;
+    total += resObj.fourMatches * WINNING_MONEY.FOUR_HIT_MONEY;
+    total += resObj.fiveMatches * WINNING_MONEY.FIVE_HIT_MONEY;
+    total += resObj.fiveMatchesAndBonus * WINNING_MONEY.FIVE_HIT_AND_BONUS_MONEY;
+    total += resObj.sixMatches * WINNING_MONEY.SIX_HIT_MONEY;
     
     return ((total / amount) * 100).toFixed(1);
   }
