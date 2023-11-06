@@ -22,6 +22,7 @@ class App {
     const lottoGame = new LottoGame(myLotto, winningLotto);
 
     lottoGame.start();
+    lottoGame.generateStatistics();
     Console.print(lottoGame.statistics);
   }
 
