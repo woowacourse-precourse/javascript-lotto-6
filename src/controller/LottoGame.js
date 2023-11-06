@@ -22,8 +22,17 @@ class LottoGame {
   }
 
   async #requestMoney() {
-    const moneyRequest = await Io.requestMoney();
-    return Money.create(moneyRequest);
+    let money;
+
+    try {
+      const moneyRequest = await Io.requestMoney();
+      money = Money.create(moneyRequest);
+    } catch (e) {
+      Io.printError(e.message);
+      money = this.#requestMoney();
+    }
+
+    return money;
   }
 
   #buyLottos(money) {
