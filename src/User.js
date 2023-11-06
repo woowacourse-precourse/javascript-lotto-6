@@ -21,7 +21,7 @@ export class User {
 
       this.#money = money;
     } catch (e) {
-      Console.print(e);
+      Console.print(`${e.name} ${e.message} `);
       return await this.inputMoney();
     }
   }
