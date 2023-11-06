@@ -27,12 +27,12 @@ const checkValidInteger = (input) => {
   }
 };
 
-const validateLottoSeedMoney = (input) => {
-  validateCommon(input);
-  checkValidChracter(input);
-  checkValidSeedMoney(input);
-  checkValidNumber(input);
-  checkValidInteger(input);
+const validateLottoSeedMoney = (seedMoney) => {
+  validateCommon(seedMoney);
+  checkValidChracter(seedMoney);
+  checkValidSeedMoney(seedMoney);
+  checkValidNumber(seedMoney);
+  checkValidInteger(seedMoney);
 };
 
 export default validateLottoSeedMoney;

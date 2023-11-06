@@ -1,8 +1,7 @@
 import { LOTTO_ERROR_MESSAGE } from '../constants/LottoMessage.js';
 import { LOTTO_MAGICNUMBER } from '../constants/LottoOption.js';
-import { DIVIDER } from '../constants/Symbol.js';
 import ValidationError from '../error/ValidationError.js';
-import validateCommon from './CommonValidator.js';
+import { DIVIDER } from '../constants/Symbol.js';
 
 const checkValidDivider = (input) => {
   if (input.length !== LOTTO_MAGICNUMBER.selectAmount) {
@@ -37,14 +36,16 @@ const checkDuplicationNumber = (input) => {
   }
 };
 
-const validateLottoNumbers = (input) => {
-  const splitInput = input.split(DIVIDER.comma).map(Number);
+const validateLottoNumbers = (lottoNumbers) => {
+  const splitLottoNumbers =
+    typeof lottoNumbers === 'object'
+      ? lottoNumbers
+      : lottoNumbers.split(DIVIDER.comma).map(Number);
 
-  validateCommon(input);
-  checkValidDivider(splitInput);
-  checkValidNumber(splitInput);
-  checkValidNumberRange(splitInput);
-  checkDuplicationNumber(splitInput);
+  checkValidDivider(splitLottoNumbers);
+  checkValidNumber(splitLottoNumbers);
+  checkValidNumberRange(splitLottoNumbers);
+  checkDuplicationNumber(splitLottoNumbers);
 };
 
 export default validateLottoNumbers;

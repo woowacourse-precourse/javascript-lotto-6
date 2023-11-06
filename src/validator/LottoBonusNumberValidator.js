@@ -24,10 +24,10 @@ const checkDuplicationNumber = (input, lottoNumbers) => {
   }
 };
 
-const validateLottoBonusNumber = (input, lottoNumbers) => {
-  const number = Number(input);
+const validateLottoBonusNumber = (lottoNumbers, lottoBonusNumber) => {
+  const number = Number(lottoBonusNumber);
 
-  validateCommon(input);
+  validateCommon(lottoBonusNumber);
   checkValidNumber(number);
   checkValidRange(number);
   checkDuplicationNumber(number, lottoNumbers);
