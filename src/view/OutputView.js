@@ -2,13 +2,13 @@ import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
   printTotalLottos(lottos) {
-    OutputView.printPurchaceTitle(lottos.length);
+    OutputView.printLottoPurchaceQuantity(lottos.length);
     OutputView.printLottos(lottos);
   },
 
-  printPurchaceTitle(quantity) {
-    if (Number.isNaN(quantity)) return;
-    OutputView.print(`\n${quantity}개를 구매했습니다.`);
+  printLottoPurchaceQuantity(lottoQuantity) {
+    if (Number.isNaN(lottoQuantity)) return;
+    OutputView.print(`\n${lottoQuantity}개를 구매했습니다.`);
   },
 
   printLottos(lottos) {
