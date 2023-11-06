@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, ERROR_MESSAGE } from '../constants/message';
-import COMMON_VALUE from '../constants/\bcommonValue';
 
 const LottoUi = {
   async inputPurchaseAmount() {
@@ -15,6 +14,23 @@ const LottoUi = {
     }
   },
 
+  async inputWinningNumbers() {
+    try {
+      const winningNumbers = await Console.readLineAsync(
+        MESSAGE.INPUT_WINNING_NUMBERS
+      )
+        .split(',')
+        .map((number) => Number(number));
+
+      this.validateWinningNumbers(winningNumbers);
+
+      return winningNumbers;
+    } catch (err) {
+      Console.print(err.message);
+      this.inputWinningNumbers();
+    }
+  },
+
   alertFinishdrawLottos(numberOfLottos) {
     Console.print(`${numberOfLottos}${MESSAGE.FINISH_DRAW_LOTTOS}`);
   },
@@ -25,9 +41,35 @@ const LottoUi = {
     });
   },
 
+  checkSameNumber(winningNumbers) {
+    return [...new Set(winningNumbers)].length < 6 ? true : false;
+  },
+
+  checkBounds(winningNumbers) {
+    winningNumbers.forEach((number) => {
+      if (number < 1 || number > 45) {
+        return false;
+      }
+    });
+
+    return true;
+  },
+
   validatePurchaseAmount(purchaseAmount) {
     if (purchaseAmount % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT);
+    }
+  },
+
+  validateWinningNumbers(winningNumbers) {
+    if (winningNumbers.includes(NaN)) {
+      throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
+    } else if (this.checkSameNumber(winningNumbers)) {
+      throw new Error(ERROR_MESSAGE.INPUT_SAME_NUMB);
+    } else if (winningNumbers.length <= 6) {
+      throw new Error(ERROR_MESSAGE.NOT_INPUT_6);
+    } else if (this.checkBounds(winningNumbers)) {
+      throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
     }
   },
 };
