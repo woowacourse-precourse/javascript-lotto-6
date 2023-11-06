@@ -20,6 +20,11 @@ class App {
     return this.lottoEach;
   }
 
+  randomPickNum() {
+    this.randomNum = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+    
+    return this.randomNum;
+  }
   async play() {
     
   }
