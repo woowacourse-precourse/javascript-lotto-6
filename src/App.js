@@ -3,30 +3,52 @@ import Lotto from "./Lotto.js";
 
 class App {
   buyLottos=[];
+  winLotto;
 
   async play() {
     await this.buy();
-
+    await this.winLottoInput();
     await this.bonusInput();
     this.result();
   }
 
   async buy(){
     let money;
-
     while(true){
-      money = await Console.readLineAsync('구입금액을 입력해 주세요.');
-      if(this.isNum(money)){
-        break;
+      try{
+        money = await this.buyInput();
+      }catch(e){
+        Console.print(e.message)
+        continue;
       }
+      if(money!==undefined) break;
     }
-
-
-    if(Number(money)%1000!==0) return new Error("[ERROR] 1000 단위에 맞춰주세요.");
-
     this.makeNumbers(Number(money)/1000);
     this.printBuyLottos();
   }
+
+  async buyInput(){
+    let money = await Console.readLineAsync('구입금액을 입력해 주세요.');
+    this.isNum(money)
+    if(Number(money)%1000!==0) throw new Error("[ERROR] 1000 단위에 맞춰주세요.");
+    return money;
+  }
+
+  async winLottoInput(){
+    while(true){
+      try{
+        const winNumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+        let lotto = this.string2number(winNumbers);
+        if(lotto.length===0) continue;
+        this.winLotto = new Lotto(lotto);
+      }catch(e){
+        Console.print(e.message);
+        continue;
+      }
+      break;
+    }
+  }
+
   async bonusInput(){
     const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.');
 
@@ -40,12 +62,21 @@ class App {
   isNum(number){
     const re = new RegExp("^[0-9]+$");
     if(!re.test(number)){
-      Console.print("[ERROR] 숫자 형식을 맞춰주세요.");
-      return false;
+      throw new Error("[ERROR] 숫자를 입력해주세요.");
     }
     return true;
   }
 
+  string2number(input){
+    let numbers = input.split(",");
+    let result = [];
+    for(let i=0;i<numbers.length;i++){
+      this.isNum(numbers[i]);
+      this.isLottoNumber(Number(numbers[i]));
+      result.push(Number(numbers[i]));
+    }
+    return result;
+  }
   /**
    * number만큼 로또번호를 생성
    * @param {*} number 
@@ -54,6 +85,10 @@ class App {
     for(let i=0;i<number;i++){
       this.buyLottos.push(new Lotto(this.makeNumber()));
     }
+  }
+
+  isLottoNumber(number){
+    if(Number(number)<1||45<Number(number)) throw new Error("[ERROR] 1-45사이의 숫자를 입력해주세요.")
   }
 
   /**

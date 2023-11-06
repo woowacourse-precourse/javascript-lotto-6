@@ -85,6 +85,33 @@ describe("로또 테스트", () => {
     });
   });
 
+  test("로또 숫자 잘못입력 예외 확인", async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    mockRandoms([
+      [8, 21, 23, 41, 42, 43],
+    ]);
+    mockQuestions(["1,2,3,4,5,a","1,2,3,4,5,5","1,2,3,4,5,94","1,2,3,4","1,2,3,4,5,6,7","1,2,3,4,5,6"]);
+
+    // when
+    const app = new App();
+    await app.winLottoInput();
+
+    // then
+    const logs = [
+      "[ERROR] 숫자를 입력해주세요.",
+      "[ERROR] 중복된 숫자가 존재합니다.",
+      "[ERROR] 1-45사이의 숫자를 입력해주세요.",
+      "[ERROR] 로또 번호는 6개여야 합니다.",
+      "[ERROR] 로또 번호는 6개여야 합니다."
+    ];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
   test("기능 테스트", async () => {
     // given
     const logSpy = getLogSpy();
