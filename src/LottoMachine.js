@@ -11,7 +11,7 @@ class LottoMachine {
     return RANDOM_NUMBER.sort((a, b) => a - b);
   }
 
-  returnLotto(input) {
+  printLotto(input) {
     const LOTTO_LIST = [];
     let count = 0;
 

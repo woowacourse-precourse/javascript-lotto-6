@@ -1,5 +1,5 @@
 import { print } from "./utils/print.js";
-import { calcPurchaseQuantity } from "./Calc/CalcPurchaseQuantity.js";
+import { calcPurchaseQuantity } from "./Calc/calcPurchaseQuantity.js";
 import {
   WINNING_NUMBERS_INPUT_REQUEST,
   BONUS_NUMBER_INPUT_REQUEST,
@@ -36,16 +36,17 @@ class App {
   }
 
   async play() {
-    // 구매 금액 받기
+    // 1. 구매 금액 받기
     const purchase = new Purchase();
     this.purchase_amount = await purchase.purchase();
 
-    // 구매 수량 구하기
+    // 2. 구매 수량 구하기
     this.purchase_quantity = calcPurchaseQuantity(this.purchase_amount);
 
-    // 로또 발행하기
-    const LOTTO_MACHINE = new LottoMachine();
-    this.lotto_list = LOTTO_MACHINE.returnLotto(this.purchase_quantity);
+    // 3. 로또 발행하기
+    const lotto_machine = new LottoMachine();
+    this.lotto_list = lotto_machine.printLotto(this.purchase_quantity);
+
     // 5. 구매 수량 출력하기
     print(`\n${this.purchase_quantity}개를 구매했습니다.`);
     // 6. 발행한 로또 모두 출력하기
