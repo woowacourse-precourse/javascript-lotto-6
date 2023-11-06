@@ -1,5 +1,4 @@
 import { ERROR } from './Constant.js'
-import { Console } from "@woowacourse/mission-utils";
 
 class WinningNumbers{
   #numbers;
@@ -35,6 +34,23 @@ class WinningNumbers{
   #validateBonusNumber(bonus) {
     bonus = Number(bonus);
     if(bonus < 1 || bonus > 45) throw new Error(ERROR.BONUS_NUMBER_NOT_IN_VALID_RANGE);
+  }
+
+  checkYourLotto(yourLottoNumbers) {
+    const yourLottoArray = Object.values(yourLottoNumbers);
+    const winningLottoArray = Object.values(this.#numbers);
+    let matchingNumbers = 0;
+    let bonus = false;
+    
+    yourLottoArray.forEach((number) => {
+      if (winningLottoArray.includes(number)) matchingNumbers += 1;
+      if (number == this.#bonus) bonus = true; 
+    });
+
+    return {
+      matchingNumbers,
+      bonus,
+    }
   }
 }
 

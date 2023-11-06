@@ -2,14 +2,16 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import { ERROR } from './Constant.js';
 import Lotto from './Lotto.js';
 import WinningNumbers from './WinningNumbers.js';
+import TicketManager from "./TicketManager.js";
 
 class App {
   async play() {
     let lottoMoney = await inputMoney();
     checkMoney(lottoMoney);
 
-    let tickets = issueTickets(lottoMoney);
-    printTicketInformation(tickets);
+    let ticketManager = new TicketManager(lottoMoney);
+    ticketManager.printTicketInformation(tickets);
+
     let winningNumbers = await inputWinningNumbers();
   }
 }
@@ -22,30 +24,7 @@ async function inputMoney() {
 }
 
 function checkMoney(lottoMoney) {
-  Console.print(lottoMoney);
   if (lottoMoney % 1000 != 0) throw new Error(ERROR.MONEY_HAS_REMAINDER);
-}
-
-function issueTickets(lottoMoney) {
-  let ticketsToIssue = lottoMoney / 1000;
-  let tickets = [];
-
-  for (let i = 0; i < ticketsToIssue; i++) {
-    let ticketNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-    let ticket = new Lotto(ticketNumbers);
-    ticket.sortNumbers();
-    tickets.push(ticket);
-  }
-
-  return tickets;
-}
-
-function printTicketInformation(tickets) {
-  let ticketsIssued = tickets.length;
-  Console.print(`${ticketsIssued}개를 구매했습니다.`);
-  tickets.forEach((ticket) => {
-    ticket.printNumbers();
-  });
 }
 
 async function inputWinningNumbers() {
