@@ -21,5 +21,11 @@ describe('유저 입력 유효성 검사', () => {
     expect(() => Validator.validateUnique([1, 2, 3, 4, 5, 6])).not.toThrow();
     expect(() => Validator.validateUnique([22, 34, 45, 16, 22, 7])).toThrow();
   });
-    
+
+  test.each([
+    [[1, 2, 3], 3],
+    [[1, 2, 3, 4, 5, 6], 6],
+  ])('지정한 길이를 검사하는 함수 테스트', (input, length) => {
+    expect(() => Validator.validateLength(input, length)).not.toThrow();
+  });
 });
