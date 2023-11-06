@@ -57,7 +57,7 @@ describe("App 클래스 테스트", () => {
 
     //then
     expect(app.getWinning()).rejects.toThrowError(
-      "[ERROR] 당첨번호는 숫자여야 합니다."
+      errorMessages.ERROR_INPUT_TYPE_IS_NUMBER
     );
   });
 
@@ -73,7 +73,7 @@ describe("App 클래스 테스트", () => {
 
     //then
     expect(app.getWinning()).rejects.toThrowError(
-      "[ERROR] 당첨번호는 6개여야 합니다."
+      errorMessages.ERROR_INPUT_ARRAY_LENGTH_6
     );
   });
 
@@ -89,7 +89,7 @@ describe("App 클래스 테스트", () => {
 
     //then
     expect(app.getWinning()).rejects.toThrowError(
-      "[ERROR] 당첨번호는 중복되지 않아야 합니다."
+      errorMessages.ERROR_INPUT_ARRAY_DUPLICATIOM
     );
   });
 
@@ -105,7 +105,7 @@ describe("App 클래스 테스트", () => {
 
     //then
     expect(app.getWinning()).rejects.toThrowError(
-      "[ERROR] 각 당첨번호는 1~45사이의 숫자여야 합니다."
+      errorMessages.ERROR_INPUT_ARRAY_RANGE
     );
   });
 });
