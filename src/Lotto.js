@@ -1,45 +1,43 @@
-// import Validator from './model/Validator.js';
 import { ERROR } from './util/constant.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
-    return this.#numbers;
+    this.#validate();
   }
 
-  #validate(numbers) {
-    this.notNumberElement(numbers);
-    this.notSixNumber(numbers);
-    this.notRangeNumber(numbers);
-    this.sameNumber(numbers);
+  #validate() {
+    this.notNumberElement();
+    this.notSixNumber();
+    this.notRangeNumber();
+    this.sameNumber();
   }
 
   // 쉼표 외의 문자가 들어간 경우
-  notNumberElement(numbers) {
-    numbers.forEach(number => {
+  notNumberElement() {
+    this.#numbers.forEach(number => {
       return this.notNumber(number);
     });
   }
 
-  notNumber(inputValue) {
-    if (/[^0-9]/g.test(inputValue)) {
+  notNumber(number) {
+    if (/[^0-9]/g.test(number)) {
       throw ERROR.notNumberic;
     }
   }
 
   // 6개가 아닌 경우
-  notSixNumber(numbers) {
-    if (numbers.length !== 6) {
+  notSixNumber() {
+    if (this.#numbers.length !== 6) {
       throw ERROR.notSixNumber;
     }
   }
 
   // 1~45사이의 정수가 아닌 경우
-  notRangeNumber(numbers) {
-    numbers.forEach(number => {
+  notRangeNumber() {
+    this.#numbers.forEach(number => {
       return this.numberListRangeCheck(number);
     });
   }
@@ -51,15 +49,13 @@ class Lotto {
   }
 
   // 중복되는 숫자가 있는 경우
-  sameNumber(numbers) {
-    const deleteSameNumber = new Set(numbers).size;
+  sameNumber() {
+    const deleteSameNumber = new Set(this.#numbers).size;
 
-    if (numbers.length !== deleteSameNumber) {
+    if (this.#numbers.length !== deleteSameNumber) {
       throw ERROR.sameNumber;
     }
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

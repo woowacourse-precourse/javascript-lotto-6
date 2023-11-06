@@ -1,35 +1,35 @@
-// import Validator from './model/Validator.js';
 import { ERROR } from '../util/constant.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class Bonus {
-  #number;
+  #bonus;
+  #lotto;
 
   constructor(bonus, lotto) {
-    this.#number = bonus;
-    this.#validate(bonus, lotto);
+    this.#bonus = bonus;
+    this.#lotto = lotto;
+    this.#validate();
   }
 
-  #validate(bonus, lotto) {
-    this.checkWords(bonus);
-    this.checkRange(Number(bonus));
-    this.checkSameNumber(Number(bonus), lotto);
+  #validate() {
+    this.checkWords();
+    this.checkRange();
+    this.checkSameNumber();
   }
 
-  checkRange(bonus) {
-    if (bonus < 1 || bonus > 45) {
+  checkRange() {
+    if (this.#bonus < 1 || this.#bonus > 45) {
       throw ERROR.rangeOverInput;
     }
   }
 
-  checkSameNumber(bonus, lotto) {
-    if (lotto.includes(bonus)) {
+  checkSameNumber() {
+    if (this.#lotto.includes(this.#bonus)) {
       throw ERROR.sameNumber;
     }
   }
 
-  checkWords(bonus) {
-    if (/[\D]/g.test(bonus)) {
+  checkWords() {
+    if (/[\D]/g.test(this.#bonus)) {
       throw ERROR.notNumberic;
     }
   }

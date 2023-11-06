@@ -1,10 +1,10 @@
 import { ERROR } from '../util/constant.js';
 
 class Price {
-  #number;
+  #money;
 
   constructor(money) {
-    this.#number = money;
+    this.#money = money;
     this.#validate();
   }
 
@@ -16,25 +16,25 @@ class Price {
   }
 
   notInputValue() {
-    if (this.#number.trim().length === 0) {
+    if (this.#money.trim().length === 0) {
       throw ERROR.emptyValue;
     }
   }
 
   checkWords() {
-    if (/[\D]/g.test(this.#number)) {
+    if (/[\D]/g.test(this.#money)) {
       throw ERROR.notNumberic;
     }
   }
 
   moneyRangeOver() {
-    if (Number(this.#number) < 1000) {
+    if (Number(this.#money) < 1000) {
       throw ERROR.underThousandMoney;
     }
   }
 
   notDivisibleByThousand() {
-    if (Number(this.#number) % 1000 !== 0) {
+    if (Number(this.#money) % 1000 !== 0) {
       throw ERROR.notDivisibleMoney;
     }
   }

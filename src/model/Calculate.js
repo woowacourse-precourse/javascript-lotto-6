@@ -1,35 +1,32 @@
-import { Console } from '@woowacourse/mission-utils';
 import { PRICE } from '../util/constant.js';
 
 class Calculate {
-  // 로또 개수 카운트
   countLottoAmounnt(money) {
     return parseInt(Number(money) / 1000);
   }
 
-  //랭킹 카운트,수익률 계산
-  async countRanking(lottoList, lotto, bonus) {
+  async countTotalRanking(lottoList, lotto, bonus) {
     this.countMatch = [0, 0, 0, 0, 0];
 
     await lottoList.forEach(eachLotto => {
-      this.countMatchNumber(eachLotto, lotto, bonus);
+      this.#countEachLotto(eachLotto, lotto, bonus);
     });
 
     return this.countMatch;
   }
 
-  async countMatchNumber(eachLotto, lotto, bonus) {
+  async #countEachLotto(eachLotto, lotto, bonus) {
     let matchLength = await eachLotto.filter(eachLottoNumber => lotto.includes(eachLottoNumber)).length;
-    this.countCorrect(matchLength, eachLotto, bonus);
+    this.#rankCount(matchLength, eachLotto, bonus);
   }
 
-  countCorrect(matchLength, eachLotto, bonus) {
+  #rankCount(matchLength, eachLotto, bonus) {
     switch (matchLength) {
       case 6:
         this.countMatch[4] += 1;
         break;
       case 5:
-        this.countMatch[this.chechBonusAndFive(eachLotto, bonus)] += 1;
+        this.countMatch[this.#chechBonusAndFive(eachLotto, bonus)] += 1;
         break;
       case 4:
         this.countMatch[1] += 1;
@@ -40,17 +37,17 @@ class Calculate {
     }
   }
 
-  chechBonusAndFive(eachLotto, bonus) {
+  #chechBonusAndFive(eachLotto, bonus) {
     if (eachLotto.includes(bonus)) return 3;
     return 2;
   }
 
-  calculateBenefit(countMatch, price) {
+  calculateBenefit(rank, price) {
     let eachPrice = 0;
 
-    for (let i = 0; i < 5; i++) {
-      eachPrice += PRICE[i] * countMatch[i];
-    }
+    Array.from({ length: 5 }, (v, rankIdx) => {
+      eachPrice += PRICE[rankIdx] * rank[rankIdx];
+    });
 
     return ((eachPrice / price) * 100).toFixed(1);
   }

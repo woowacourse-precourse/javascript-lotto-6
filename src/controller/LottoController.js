@@ -10,9 +10,9 @@ export default class LottoController {
   #price;
   #lottoAmount;
   #lottoList;
-  #lotto;
+  #userLotto;
   #bonus;
-  #ranking;
+  #rank;
   #benefit;
 
   constructor() {
@@ -21,6 +21,10 @@ export default class LottoController {
 
   async inputPrice() {
     const money = await InputView.moneyInput();
+    return this.checkPrice(money);
+  }
+
+  checkPrice(money) {
     try {
       new Price(money);
       this.setPriceAndAmount(Number(money));
@@ -40,49 +44,49 @@ export default class LottoController {
   generateLottos() {
     this.#lottoList = LottoGenerator.generateLottoList(this.#lottoAmount);
     OutputView.printLottoList(this.#lottoList);
-    return this.inputUserLottoNumber();
+    return this.inputUserNumber();
   }
 
-  async inputUserLottoNumber() {
-    const userLottoNumber = await InputView.lottoNumberInput();
-    return this.#lottoNumberValidate(userLottoNumber);
+  async inputUserNumber() {
+    const userInputNumber = await InputView.lottoNumberInput();
+    return this.#checkUserLottoNumber(userInputNumber);
   }
 
-  #lottoNumberValidate(inputValue) {
+  #checkUserLottoNumber(userInputNumber) {
     try {
-      let correctNumbers = inputValue.split(',').map(number => Number(number));
-      new Lotto(correctNumbers);
-      this.#lotto = correctNumbers;
+      let userLottoNumber = userInputNumber.split(',').map(number => Number(number));
+      new Lotto(userLottoNumber);
+      this.#userLotto = userLottoNumber;
       return this.inputBonusNumber();
     } catch (error) {
       OutputView.printError(error);
-      this.inputUserLottoNumber();
+      this.inputUserNumber();
     }
   }
 
   async inputBonusNumber() {
     const bonusNumber = await InputView.bonusNumberInput();
-    this.#bonusNumberValidate(bonusNumber);
+    this.#checkBonusNumber(bonusNumber);
   }
 
-  #bonusNumberValidate(bonusNumber) {
+  #checkBonusNumber(bonusNumber) {
     try {
-      new Bonus(bonusNumber, this.#lotto);
+      new Bonus(bonusNumber, this.#userLotto);
       this.#bonus = bonusNumber;
-      this.#calculateRank();
+      this.#calculateResult();
     } catch (error) {
       OutputView.printError(error);
       this.inputBonusNumber();
     }
   }
 
-  async #calculateRank() {
-    this.#ranking = await this.calculate.countRanking(this.#lottoList, this.#lotto, this.#bonus);
-    this.#benefit = this.calculate.calculateBenefit(this.#ranking, this.#price);
+  async #calculateResult() {
+    this.#rank = await this.calculate.countTotalRanking(this.#lottoList, this.#userLotto, this.#bonus);
+    this.#benefit = this.calculate.calculateBenefit(this.#rank, this.#price);
     this.#printResult();
   }
 
   #printResult() {
-    OutputView.printAllResult(this.#ranking, this.#benefit);
+    OutputView.printAllResult(this.#rank, this.#benefit);
   }
 }
