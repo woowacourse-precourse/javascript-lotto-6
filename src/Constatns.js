@@ -1,4 +1,3 @@
-export const NUMBER_REGEX = /^\d+$/;
 export const MAX_LOTTO_LENGTH = 6;
 export const MAX_LOTTO_NUMBER = 45;
 export const MIN_LOTTO_NUMBER = 1;
@@ -37,7 +36,7 @@ export const ERROR_MESSAGES = {
   NOT_NUMBER: "[ERROR] 반드시 숫자만 입력해야 합니다.",
   PURCHASE_MONEY_INVALID: "[ERROR] 로또 구매 금액은 1000원 이상이어야 합니다.",
   PURCHASE_MONEY_NOT_DIVISIBLE: "[ERROR] 로또 구매 금액은 1000원 단위어야 합니다.",
-  LOTTO_SIZE_INVALID: "[ERROR] 로또 번호는 6개여야 합니다.",
-  DUPLICATION_LOTTO_NUMBER: "[ERROR] 중복된 숫자가 포함되어 있습니다.",
-  BONUS_NUMBER_INVALID: "[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다",
+  LOTTO_RANGE_OVER: "[ERROR] 로또 번호는 6개여야 합니다.",
+  DUPLICATION_NUMBER: "[ERROR] 중복된 번호가 있습니다.",
+  NUMBER_RANGE_OVER: "[ERROR] 번호는 1부터 45 사이의 숫자여야 합니다",
 };

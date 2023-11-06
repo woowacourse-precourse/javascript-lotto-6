@@ -2,23 +2,24 @@ import { Console } from "@woowacourse/mission-utils";
 import { GAME_MESSAGES } from "./Constatns.js";
 import Ticket from "./ticket.js";
 import Lotto from "./Lotto.js";
-import Controller from "./Controller.js";
+import getLottos from "./getLottos.js";
 
 class App {
   constructor() {
-    this.ticket = 0;
-    this.money = 0;
-    this.lotto = 0;
-    this.winLotto = 0;
-    this.bonusLotto = 0;
-    this.lottos = [];
-    this.lottoRanks = [];
-    this.profit = 0;
+    this.ticket;
+    this.ticketAmount;
+    this.money;
+    this.lotto;
+    this.winLotto;
+    this.bonusLotto;
+    this.lottos;
+    this.lottoRanks;
+    this.profit;
   }
 
   async play() {
-    const ticketAmount = await this.getTicket();
-    await this.getLottos(ticketAmount);
+    await this.getTicket();
+    await this.getLottos(this.ticketAmount);
     await this.makeWinLotto();
     await this.makeBonusLotto();
     await this.winLottoCount();
@@ -28,11 +29,11 @@ class App {
   async getTicket() {
     this.ticket = new Ticket();
     this.money = await this.ticket.getMoney();
-    return this.ticket.purchase(this.money);
+    this.ticketAmount = this.ticket.purchase(this.money);
   }
 
   async getLottos(ticketAmount) {
-    this.lottos = await Controller.getLottosList(ticketAmount);
+    this.lottos = getLottos.getLottosList(ticketAmount);
   }
 
   async makeWinLotto() {
@@ -40,12 +41,12 @@ class App {
       try {
         this.winLotto = await Console.readLineAsync(GAME_MESSAGES.WIN_LOTTO);
         this.winLotto = this.winLotto.split(",").map(Number);
+        this.lotto = new Lotto(this.winLotto);
         break;
       } catch (e) {
         Console.print(e);
       }
     }
-    this.lotto = new Lotto(this.winLotto);
   }
 
   async makeBonusLotto() {
@@ -61,14 +62,12 @@ class App {
   }
 
   async winLottoCount() {
-    this.lottoRanks = await this.lotto.getLottoRanks(this.lottos, this.bonusLotto);
+    this.lottoRanks = this.lotto.getLottoRanks(this.lottos, this.bonusLotto);
   }
 
   async printWinResult(lottoRanks) {
-    Console.print(GAME_MESSAGES.WINNING_STATISTICS);
-    Console.print(GAME_MESSAGES.NEW_LINE);
     this.lotto.printWinStatics(lottoRanks);
-    this.profit = await this.lotto.getProfit(this.money, this.lottoRanks);
+    this.profit = this.lotto.getProfit(this.money, this.lottoRanks);
     Console.print(GAME_MESSAGES.TOTAL_PROFITABILITY.replace("%s", this.profit.toFixed(1)));
   }
 }

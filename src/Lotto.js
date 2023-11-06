@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { RANKS, GAME_MESSAGES } from "./Constatns.js";
+import { RANKS, GAME_MESSAGES, ERROR_MESSAGES } from "./Constatns.js";
 
 class Lotto {
   #numbers;
@@ -11,24 +11,32 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw ERROR_MESSAGES.LOTTO_RANGE_OVER;
     }
 
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== 6) {
-      throw new Error("[ERROR] 중복된 번호가 있습니다.");
+      throw ERROR_MESSAGES.DUPLICATION_NUMBER;
     }
 
     numbers.forEach((number) => {
       if (number < 1 || number > 45) {
-        throw new Error("[ERROR] 로또 번호는 1부터 45 사이여야 합니다.");
+        throw ERROR_MESSAGES.NUMBER_RANGE_OVER;
       }
     });
   }
 
   validateBonusNumber(bonusLotto, winLotto) {
+    if (!bonusLotto) {
+      throw ERROR_MESSAGES.EMPTY_INPUT;
+    }
+
     if (winLotto.includes(Number(bonusLotto))) {
-      throw new Error("[ERROR] 중복된 번호가 있습니다.");
+      throw ERROR_MESSAGES.DUPLICATION_NUMBER;
+    }
+
+    if (bonusLotto < 1 || bonusLotto > 45) {
+      throw ERROR_MESSAGES.NUMBER_RANGE_OVER;
     }
   }
 
@@ -65,6 +73,8 @@ class Lotto {
   }
 
   printWinStatics(lottoRanks) {
+    Console.print(GAME_MESSAGES.WINNING_STATISTICS);
+    Console.print(GAME_MESSAGES.NEW_LINE);
     GAME_MESSAGES.WINNING_RESULT.forEach((winMessage, idx) => {
       Console.print(winMessage.replace("%s", lottoRanks[idx]));
     });

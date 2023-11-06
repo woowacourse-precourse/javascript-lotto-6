@@ -3,8 +3,8 @@ import { GAME_MESSAGES, ERROR_MESSAGES, MIN_LOTTO_PRICE, LOTTO_PRICE } from "./C
 
 class Ticket {
   constructor() {
-    this.money = 0;
-    this.ticket = 0;
+    this.money;
+    this.ticket;
   }
 
   validateTicketMoney(money) {
