@@ -30,6 +30,10 @@ const Output = (superClass) =>
       Console.print(LOTTO_MESSAGE.yield(yieldRate));
     }
 
+    static printError(errorMessage) {
+      Console.print(errorMessage);
+    }
+
     static printPrizeCount(prizeCount) {
       const messages = prizeCount.map((matchCount, i) =>
         OutputClass.#prizeCountMessage(matchCount, i),
