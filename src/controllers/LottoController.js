@@ -52,7 +52,9 @@ class LottoController {
   }
 
   async #inputBonusNumber() {
-    this.LOTTO_DATA.getBonusNumber(await this.INPUT_VIEW.bonusNumber());
+    this.LOTTO_DATA.getBonusNumber(
+      await this.INPUT_VIEW.bonusNumber(this.LOTTO_DATA.winNumber),
+    );
     if (this.LOTTO_DATA.bonusNumber === CONSTANTS.IS_ERROR) {
       return this.#inputBonusNumber();
     }

@@ -72,8 +72,20 @@ describe('로또 구입 테스트', () => {
     await buyNumberException('1500');
   });
 
-  test('로또 번호 예외 테스트', async () => {
+  test('로또 번호(중복) 예외 테스트', async () => {
     const FIRST = ['1000', '1,1,1,1,1,1'];
+    const INPUT_NUMBERS_TO_END = ['1,2,3,4,5,6', '7'];
+    mockQuestions([...FIRST, ...INPUT_NUMBERS_TO_END]);
+    const logSpy = getLogSpy();
+
+    const LottoCon = new LottoController();
+    await LottoCon.inputPurchaseMoney();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
+
+  test('로또 번호(문자 포함) 예외 테스트', async () => {
+    const FIRST = ['1000', '1,2,a,3,4,5'];
     const INPUT_NUMBERS_TO_END = ['1,2,3,4,5,6', '7'];
     mockQuestions([...FIRST, ...INPUT_NUMBERS_TO_END]);
     const logSpy = getLogSpy();
@@ -86,6 +98,18 @@ describe('로또 구입 테스트', () => {
 
   test('보너스 번호 예외 테스트', async () => {
     const FIRST = ['1000', '1,2,3,4,5,6', '-1'];
+    const INPUT_NUMBERS_TO_END = ['7'];
+    mockQuestions([...FIRST, ...INPUT_NUMBERS_TO_END]);
+    const logSpy = getLogSpy();
+
+    const LottoCon = new LottoController();
+    await LottoCon.inputPurchaseMoney();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
+
+  test('당첨번호, 보너스번호 중복 예외 테스트', async () => {
+    const FIRST = ['1000', '1,2,3,4,5,6', '6'];
     const INPUT_NUMBERS_TO_END = ['7'];
     mockQuestions([...FIRST, ...INPUT_NUMBERS_TO_END]);
     const logSpy = getLogSpy();

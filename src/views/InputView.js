@@ -25,10 +25,10 @@ class InputView {
     return winNumber.split(',').map((number) => Number(number));
   }
 
-  async bonusNumber() {
+  async bonusNumber(winNumber) {
     try {
       const bonusNumber = await Console.readLineAsync(INPUT_MSG.BONUS_NUMBER);
-      await this.INPUT_VAL.bonusNumber(bonusNumber);
+      await this.INPUT_VAL.bonusNumber(bonusNumber, winNumber);
       return Number(bonusNumber);
     } catch (error) {
       this.OUTPUT_VIEW.printError(error.message);

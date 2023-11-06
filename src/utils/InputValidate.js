@@ -83,10 +83,11 @@ class InputValidate {
     }
   }
 
-  async bonusNumber(bonus) {
+  async bonusNumber(bonus, winNumber) {
     this.#bonusSafeNumber(bonus);
     this.#numberString(bonus);
     this.#bonsuNumberRange(bonus);
+    this.#winNumberIncludes(bonus, winNumber);
   }
 
   #bonusSafeNumber(bonus) {
@@ -98,6 +99,12 @@ class InputValidate {
   #bonsuNumberRange(bonus) {
     if (Number(bonus) <= lottoVal.min || Number(bonus) > lottoVal.max) {
       throw new InputError(ERROR_MSG.BONUS_NUMBER_RANGE_ERROR);
+    }
+  }
+
+  #winNumberIncludes(bonus, winNumber) {
+    if (winNumber.includes(Number(bonus))) {
+      throw new InputError(ERROR_MSG.WIN_NUMBER_INCLUDES_ERROR);
     }
   }
 }

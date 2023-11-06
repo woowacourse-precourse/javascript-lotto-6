@@ -30,4 +30,6 @@ export const ERROR_MSG = {
   BONUS_NUMBER_NOT_NUMBER: '[ERROR] 보너스 번호는 숫자로 입력해주세요.',
   BONUS_NUMBER_RANGE_ERROR:
     '[ERROR] 보너스 번호는 1 부터 45의 값으로 입력해주세요.',
+  WIN_NUMBER_INCLUDES_ERROR:
+    '[ERROR] 당첨 번호와 보너스 번호가 중복되었습니다.',
 };
