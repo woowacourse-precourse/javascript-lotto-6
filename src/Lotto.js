@@ -12,7 +12,7 @@ class Lotto {
     const NUMBER_OF_NUMBERS = 6;
 
     if (numbers.length != NUMBER_OF_NUMBERS) {
-      throw new Error(ERROR_MESSAGES.NUMBER_OF_NUMBERS);
+      throw new Error(ERROR_MESSAGES.COUNT_OF_NUMBERS);
     } else if (this.#hasDuplicateNumber(numbers, NUMBER_OF_NUMBERS)) {
       throw new Error(ERROR_MESSAGES.DUPLICATE_NUMBERS);
     }
