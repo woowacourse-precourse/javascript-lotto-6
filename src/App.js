@@ -8,6 +8,7 @@ class App {
     this.winningLotto;
     this.userMoneyInput;
     this.userByLottoList = [];
+    
   }
 
   async play() {
@@ -15,7 +16,11 @@ class App {
     await this.userInput();
     console.log(this.userMoneyInput);
 
+    // 유저에게 로또 번호 제공
     this.totalLottoListUser();
+
+    // 유저가 당첨번호 입력
+    await this.settingLottoResult();
   }
 
   async userInput() {
@@ -41,7 +46,7 @@ class App {
   }
 
   checkUserMoney(userInput) {
-    if (userInput % 1000 !== 0) {
+    if ((userInput % 1000 !== 0) || (userInput !== 0)) {
       throw new Error(ERROR.INVALID_INPUT);
     }
   }
@@ -69,6 +74,12 @@ class App {
       return a - b;
     });
     return sortedList;
+  }
+
+  async settingLottoResult(){
+    const result = await Console.readLineAsync("당첨 번호를 입력해 주세요");
+    this.winningLotto = result.split(',').map(Number);
+    console.log(this.winningLotto)
   }
 
 }
