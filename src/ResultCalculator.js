@@ -21,6 +21,10 @@ class ResultCalculator {
     return this.#ranking;
   }
 
+  get earningRate() {
+    return this.#earningRate;
+  }
+
   compareLottos(lottos, winningLotto) {
     lottos.forEach((lotto) => {
       const cntMatching = this.#countMatchingNumbers(lotto, winningLotto);

@@ -28,6 +28,7 @@ class GameController {
       this.#winningLotto,
     );
     this.#resultCalculator.getEarningRate(this.#lottoMachine.money);
+    this.printResult();
   }
 
   async getMoney() {
@@ -81,6 +82,10 @@ class GameController {
         Console.print(error.message);
       }
     }
+  }
+
+  printResult() {
+    OutputView.printEarningRate(this.#resultCalculator.earningRate);
   }
 }
 
