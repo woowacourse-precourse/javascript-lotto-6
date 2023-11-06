@@ -12,11 +12,9 @@ class LottoGame {
   #winningNumbers;
 
   async startGame() {
-    const lottoCount = await this.#getLottoCount();
-
-    this.#lottoBundle = new LottoBundle();
-    this.#lottoBundle.buyLottos(lottoCount);
-    OutputView.printLottoNumbers(lottoCount, this.#lottoBundle.getTotalLottoNumberString());
+    this.#lottoBundle = await this.#getLottoBundle();
+    this.#lottoBundle.buyLottos();
+    OutputView.printLottoNumbers(this.#lottoBundle.getLottoList());
 
     const winningLotto = await this.#getWinningLotto();
     const bonusNumber = await this.#getBonusNumber();
@@ -28,16 +26,15 @@ class LottoGame {
     OutputView.printGameResult(totalRanks, profitRate);
   }
 
-  async #getLottoCount() {
+  async #getLottoBundle() {
     try {
       const amount = await InputView.readAmount();
-      Validator.validateAmount(amount);
 
-      return amount / CONSTANT.amountUnit;
+      return new LottoBundle(amount);
     } catch (error) {
       OutputView.printMessage(error.message);
 
-      return this.#getLottoCount();
+      return this.#getLottoBundle();
     }
   }
 
