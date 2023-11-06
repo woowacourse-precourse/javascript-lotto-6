@@ -20,4 +20,10 @@ describe('입력 예외 상황 테스트', () => {
       Validator.missingValue(received);
     }).toThrow(ERROR.message.missingValue);
   });
+  test('음수값을 입력했을 경우', () => {
+    const received = -15000;
+    expect(() => {
+      Validator.negativeNumber(received);
+    }).toThrow(ERROR.message.negativeNumber);
+  });
 });
