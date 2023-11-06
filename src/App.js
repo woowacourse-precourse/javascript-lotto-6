@@ -4,7 +4,7 @@ import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE } from "./constants/constant.js";
 class App {
   async play() {
     // 보유 금액 입력
-    const userMoney = await Console.readLineAsync(MESSAGE.START);
+    const userMoney = await Number(Console.readLineAsync(MESSAGE.START));
 
     // 보유 금액 유효성 검사
     if (userMoney % 1000 > 0 || String(userMoney)[0] === '0' || userMoney <= 0) {
@@ -27,7 +27,7 @@ class App {
     while (1) {
       const randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
 
-      if (!Array.isArray(randomNums)) {
+      if (!Array.isArray(randomNums) || randomNums.length !== new Set(randomNums).size) {
         throw new Error(ERROR_MESSAGE.RANDOM_ERROR);
       }
       randomNums.sort((a, b) => a - b); // 오름차순 정렬
