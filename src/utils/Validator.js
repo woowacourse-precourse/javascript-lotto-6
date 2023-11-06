@@ -1,5 +1,5 @@
 const InputValidator = {
-  validatePurchaseAmount(input) {
+  purchaseAmount(input) {
     if (isNaN(input) || input.trim() === "") {
       throw new Error("[ERROR] 입력한 값이 숫자가 아닙니다.");
     }
