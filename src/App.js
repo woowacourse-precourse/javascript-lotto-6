@@ -20,7 +20,10 @@ class App {
     this.totalLottoListUser();
 
     // 유저가 당첨번호 입력
-    await this.settingLottoResult();
+    await this.settingLottoNumber();
+    await this.settingLottoBonusNumber();
+
+    
   }
 
   async userInput() {
@@ -46,13 +49,14 @@ class App {
   }
 
   checkUserMoney(userInput) {
-    if ((userInput % 1000 !== 0) || (userInput !== 0)) {
+    if ((userInput % 1000 !== 0) || (userInput === 0)) {
       throw new Error(ERROR.INVALID_INPUT);
     }
   }
 
   userByLotto() {
     const count = this.userMoneyInput / 1000;
+    Console.print(`${count}개를 구매했습니다.`);
     return count;
   }
 
@@ -60,9 +64,10 @@ class App {
     const num = this.userByLotto();
     let lottoList = [];
     for (let i = 0; i < num; i++) {
-      lottoList.push(this.generateRandomNumber());
+      lottoList.push(this.sortNumbers(this.generateRandomNumber()));
+      Console.print(this.sortNumbers(this.generateRandomNumber()));
     }
-    this.userByLottoList = lottoList.filter(list => this.sortNumbers(list));
+    this.userByLottoList = lottoList;
   }
 
   generateRandomNumber() {
@@ -76,12 +81,20 @@ class App {
     return sortedList;
   }
 
-  async settingLottoResult(){
+  async settingLottoNumber(){
     const result = await Console.readLineAsync("당첨 번호를 입력해 주세요");
     this.winningLotto = result.split(',').map(Number);
-    console.log(this.winningLotto)
+    Console.print(result);
   }
 
+  async settingLottoBonusNumber() {
+    const result = await Console.readLineAsync("보너스 번호를 입력해 주세요");
+    this.winningLotto.push(Number(result));
+    Console.print(result);
+  }
+
+
+  
 }
 
 
