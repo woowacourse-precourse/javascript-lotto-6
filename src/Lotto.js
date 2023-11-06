@@ -1,4 +1,5 @@
-import { ERROR_MESSAGE } from '../constant/Messages.js';
+import { Console } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constant/Messages.js';
 
 class Lotto {
   #numbers;
@@ -6,6 +7,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.bonusNum;
   }
 
   #validate(numbers) {
@@ -25,7 +27,15 @@ class Lotto {
   checkNumRange(e) {
     if (e <= 0 || 45 < e) throw new Error(ERROR_MESSAGE.NUM_RANGE);
   }
+
+  async inputBonusNum() {
+    this.bonusNum = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BONUSNUM);
+    this.checkNumRange(this.bonusNum);
+    Console.print(this.bonusNum);
+  }
   // TODO: 추가 기능 구현
+
+  compare;
 }
 
 export default Lotto;
