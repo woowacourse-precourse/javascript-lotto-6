@@ -8,17 +8,17 @@ import inputWinningNumbers from './input/inputWinningNumbers.js';
 
 class App {
   async play() {
-    this.price = await inputPrice();
+    const PRICE = await inputPrice();
     lineBreak();
 
-    this.lotteryAmount = getAmountOfLottery(this.price);
-    printLotteriesAmount(this.lotteryAmount);
+    const LOTTERY_AMOUNT = getAmountOfLottery(PRICE);
+    printLotteriesAmount(LOTTERY_AMOUNT);
 
-    this.lotteries = getLotteries(this.lotteryAmount);
-    printLotteries(this.lotteries);
+    const LOTTERIES = getLotteries(LOTTERY_AMOUNT);
+    printLotteries(LOTTERIES);
     lineBreak();
 
-    this.winningNumbers = await inputWinningNumbers();
+    const WINNING_NUMBERS = await inputWinningNumbers();
     lineBreak();
   }
 }
