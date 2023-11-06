@@ -6,17 +6,16 @@ class BonusInput {
   async userInput() {
     return await Console.readLineAsync(`${GAME_MESSAGE.bonus_number}`);
   }
+
   async number(winningNumbers) {
-    let valid, number;
-    do {
+    let number;
+    while (true) {
       number = await this.userInput();
-      try {
-        valid = bonusIsValid(number, winningNumbers);
-      } catch (error) {
-        Console.print(error.message);
-        valid = false;
+      if (bonusIsValid(number, winningNumbers)) {
+        break;
       }
-    } while (!valid);
+      Console.print(GAME_MESSAGE.invalid_bonus);
+    }
     return number;
   }
 }
