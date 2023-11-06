@@ -13,7 +13,7 @@ class LottoMain {
   }
 
   async start() {
-    const userCost = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    const userCost = await Console.readLineAsync( LOTTO_MESSAGE.BUY_LOTTO );
     const money = parseInt(userCost);
     this.money = money;
     this.lottoValidate.userCostValidate(money);
