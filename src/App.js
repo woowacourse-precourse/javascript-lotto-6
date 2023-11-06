@@ -1,4 +1,4 @@
-import { LottoGame } from "./LottoGame";
+import { LottoGame } from './LottoGame.js';
 
 class App {
   lottoGame = new LottoGame();
