@@ -13,12 +13,8 @@ class App {
     const lottoArray = lottoNumberArray.map(lottoNumber => new Lotto(lottoNumber)) // 순회하면서 Lotto 생성
     const winningNumber = await new UserInput().getLottoNumber() // 당첨 번호 입력 받기
     const bonusNumber = await new UserInput().getBonusNumber()// 보너스 번호 입력 받기
-    // 당첨 통계
-
-
-    // const userInputLotto = await new UserInput().getLottoNumber();
-    
-
+    const result = lottoArray.map(lotto => lotto.checkIsWinLottery(winningNumber, bonusNumber))// 당첨 확인
+    // 당첨 통계 및 출력
   }
 }
 
