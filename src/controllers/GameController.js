@@ -20,6 +20,10 @@ class GameController {
     OutputView.printLine();
 
     await this.setWinningLotto();
+    OutputView.printLine();
+
+    await this.setBounusNumber();
+    OutputView.printLine();
   }
 
   async getLottoPublishCount() {
@@ -45,6 +49,18 @@ class GameController {
     } catch (e) {
       Console.print(e.toString());
       return this.setWinningLotto();
+    }
+  }
+
+  async setBounusNumber() {
+    const number = await InputView.inputBounusNumber();
+    try {
+      this.#lottoMaker.validateBonusNumber(Number(number));
+      this.#lottoMaker.bonusNumber = number;
+      return null;
+    } catch (e) {
+      Console.print(e.toString());
+      return this.setBounusNumber();
     }
   }
 }

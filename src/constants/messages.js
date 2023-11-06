@@ -22,4 +22,6 @@ export const ERROR_MESSAGE = Object.freeze({
   notMatchedLength: '로또 번호는 6개여야 합니다.',
   invalidNumber: `로또 번호는 ${RANDOM_NUMBER.from}부터 ${RANDOM_NUMBER.to} 사이의 숫자여야 합니다.`,
   duplicateNumber: '중복된 숫자는 입력할 수 없습니다.',
+  duplicateBonusNumber:
+    '이미 존재하는 숫자는 보너스 번호로 입력할 수 없습니다.',
 });

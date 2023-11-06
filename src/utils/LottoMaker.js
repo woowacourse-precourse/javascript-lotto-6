@@ -10,9 +10,12 @@ class LottoMaker {
 
   #winningLotto;
 
+  #bonusNumber;
+
   constructor() {
     this.#lottos = [];
     this.#winningLotto = undefined;
+    this.#bonusNumber = undefined;
   }
 
   calcLottoPublishCount(price) {
@@ -51,12 +54,32 @@ class LottoMaker {
     }
   }
 
+  validateBonusNumber(number) {
+    if (!InputValidator.checkIncludeNumber(number)) {
+      throw new ValidationError(ERROR_MESSAGE.invalidNumber);
+    }
+    if (this.#winningLotto.numbers.includes(number)) {
+      throw new ValidationError(ERROR_MESSAGE.duplicateBonusNumber);
+    }
+    if (InputValidator.checkNaN(number)) {
+      throw new ValidationError(ERROR_MESSAGE.isNaN);
+    }
+  }
+
   set winningLotto(numbers) {
     this.#winningLotto = new Lotto(numbers);
   }
 
   get winningLotto() {
     return this.#winningLotto;
+  }
+
+  set bonusNumber(number) {
+    this.#bonusNumber = number;
+  }
+
+  get bonusNumber() {
+    return this.#bonusNumber;
   }
 
   get lottos() {
