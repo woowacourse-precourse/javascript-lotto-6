@@ -10,6 +10,7 @@ class App {
     const amount = await Inoutput.buyLotto();
     const lottoList = functions.buyLottoByAmount(amount);
    const winningNumbers = await Inoutput.getWinningNumber();
+   const bounsNumber = await Inoutput.getBounsNumber(winningNumbers);
     
   }
 }

@@ -3,6 +3,7 @@ const SPLIT=","
 const AMOUNT_MESSAGE = "구입금액을 입력해 주세요: ";
 const WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요.";
 const ERROR_MESSAGE = "[ERROR] 올바른 당첨 번호를 입력하세여";
+const BOUNS_NUMBER = "보너스 번호를 입력해 주세요.";
 class Inoutput {
   static async buyLotto() {
     const LottoCount = await Console.readLineAsync(AMOUNT_MESSAGE);
@@ -22,6 +23,16 @@ class Inoutput {
     console.log(`당첨번호 ${winningNumbers.join(', ')}`);
     return winningNumbers;
   }
+
+ static async getBounsNumber(winningNumbers){
+  const bounsNumberInput = await Console.readLineAsync(BOUNS_NUMBER + "\n");
+  const bounsNumber = parseInt(bounsNumberInput,10);
+  if(isInvalidWinningNumber(bounsNumber)||winningNumbers.includes(bounsNumber)){
+    throw new Error(ERROR_MESSAGE);
+  }
+  console.log(`보너스 번호 : ${bounsNumber}`);
+  return bounsNumber;
+ }
 
 }
 function isInvalidWinningNumber(number) {
