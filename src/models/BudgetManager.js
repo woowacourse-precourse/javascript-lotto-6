@@ -31,6 +31,11 @@ class BudgetManager {
 
 		return totalMatchedNumbers;
 	}
+
+	calculateTotalReturn() {
+		const totalReturn = Math.round((this.#currentAmount / this.#initalAmount) * 10000) / 100;
+		return totalReturn;
+	}
 }
 
 export default BudgetManager;
