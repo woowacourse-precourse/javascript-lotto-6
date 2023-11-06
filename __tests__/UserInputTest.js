@@ -56,7 +56,11 @@ const runExceptionForGetBonusNumber = async (input, message) => {
 };
 
 describe("사용자 입력 관련 예외 테스트", () => {
-  test.each([[["천원"]], [["1111"]]])(
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test.each([["천원"], ["1111"]])(
     "구입 금액에 숫자가 아닌 입력 또는 1000단위가 아닌 숫자가 들어올 경우 예외가 발생한다.",
     async (input) => {
       await runExceptionForGetPrice(input, MESSAGES.ERROR.INVALID_PRICE);
@@ -64,13 +68,13 @@ describe("사용자 입력 관련 예외 테스트", () => {
   );
 
   test("구입 금액이 10만원을 넘을 경우 예외가 발생한다.", async () => {
-    const input = ["200000"];
+    const input = "200000";
 
     await runExceptionForGetPrice(input, MESSAGES.ERROR.EXCEED_PRICE);
   });
 
   test("당첨 번호에 숫자가 아닌 입력이 들어오면 예외가 발생한다.", async () => {
-    const input = ["1,2,abc"];
+    const input = "1,2,abc";
 
     await runExceptionForGetWinningNumber(
       input,
@@ -79,7 +83,7 @@ describe("사용자 입력 관련 예외 테스트", () => {
   });
 
   test("당첨 번호가 6개가 아닌 경우 예외가 발생한다.", async () => {
-    const input = ["1,2,3,4,5"];
+    const input = "1,2,3,4,5";
 
     await runExceptionForGetWinningNumber(
       input,
@@ -88,7 +92,7 @@ describe("사용자 입력 관련 예외 테스트", () => {
   });
 
   test("당첨 번호의 범위가 1~45가 아닌 경우 예외가 발생한다", async () => {
-    const input = ["1,2,3,4,0,9"];
+    const input = "1,2,3,4,0,9";
 
     await runExceptionForGetWinningNumber(
       input,
@@ -97,7 +101,7 @@ describe("사용자 입력 관련 예외 테스트", () => {
   });
 
   test("당첨 번호에 중복된 번호가 있을 경우 예외가 발생한다", async () => {
-    const input = ["1,2,3,3,4,5"];
+    const input = "1,2,3,3,4,5";
 
     await runExceptionForGetWinningNumber(
       input,
@@ -106,7 +110,7 @@ describe("사용자 입력 관련 예외 테스트", () => {
   });
 
   test("보너스 번호에 숫자가 아닌 입력이 들어오면 예외가 발생한다.", async () => {
-    const input = ["bonus"];
+    const input = "bonus";
 
     await runExceptionForGetBonusNumber(
       input,
@@ -115,7 +119,7 @@ describe("사용자 입력 관련 예외 테스트", () => {
   });
 
   test("보너스 번호의 범위가 1~45가 아닌 경우 예외가 발생한다", async () => {
-    const input = ["88"];
+    const input = "88";
 
     await runExceptionForGetBonusNumber(
       input,
@@ -124,7 +128,7 @@ describe("사용자 입력 관련 예외 테스트", () => {
   });
 
   test("보너스 번호가 당첨 번호와 중복된 번호일 경우 예외가 발생한다", async () => {
-    const input = ["7"];
+    const input = "6";
 
     await runExceptionForGetBonusNumber(
       input,
@@ -159,6 +163,6 @@ describe("사용자 입력 관련 정상 동작 테스트", () => {
 
     mockQuestions(input);
 
-    await expect(user.getWinningNumber(winningNumber)).resolves.toBe(7);
+    await expect(user.getBonusNumber(winningNumber)).resolves.toBe(7);
   });
 });
