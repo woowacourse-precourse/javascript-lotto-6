@@ -1,4 +1,6 @@
 class Lotto {
+  // # prefix를 변경할 수 없다.
+  // 필드를 추가할 수 없다.
   #numbers;
 
   constructor(numbers) {
