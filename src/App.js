@@ -28,27 +28,28 @@ class App {
     }
 
     async inputPurchaseAmount() {
-        const purchaseAmount = await Console.readLineAsync(
-            "구입금액을 입력해 주세요.\n"
+        while (true) {
+            try {
+                const purchaseAmount = await Console.readLineAsync(
+                    "구입금액을 입력해 주세요.\n"
+                );
+                if (!this.isValidAmount(purchaseAmount)) {
+                    throw new Error("[ERROR] 유효한 구입금액을 입력해주세요.");
+                }
+                return purchaseAmount;
+            } catch (error) {
+                Console.print(error.message);
+            }
+        }
+    }
+
+    isValidAmount(amount) {
+        return (
+            !isNaN(amount) &&
+            amount >= 1000 &&
+            amount <= 1000000 &&
+            amount % 1000 === 0
         );
-
-        if (purchaseAmount % 1000 !== 0) {
-            throw new Error(
-                "[ERROR] 구입금액은 1000원 단위로 입력해야 합니다."
-            );
-        }
-
-        if (purchaseAmount < 1000) {
-            throw new Error("[ERROR] 구입금액은 1000원 이상이어야 합니다.");
-        }
-
-        if (purchaseAmount > 1000000) {
-            throw new Error(
-                "[ERROR] 구입금액은 1,000,000원 이하이어야 합니다."
-            );
-        }
-
-        return purchaseAmount;
     }
 
     generateLottoNumbers() {
@@ -61,22 +62,43 @@ class App {
     }
 
     async inputWinningNumbers() {
-        const winningNumbers = await Console.readLineAsync(
-            "당첨 번호를 입력해 주세요.\n"
-        ).then((winningNumbers) => winningNumbers.split(",").map(Number));
-        const lottoTicket = new Lotto(winningNumbers);
-
-        return winningNumbers;
+        while (true) {
+            try {
+                const winningNumbers = await Console.readLineAsync(
+                    "당첨 번호를 입력해 주세요.\n"
+                ).then((winningNumbers) =>
+                    winningNumbers.split(",").map(Number)
+                );
+                if (!new Lotto(winningNumbers)) {
+                    throw new Error("[ERROR] 유효한 당첨 번호를 입력해주세요.");
+                }
+                return winningNumbers;
+            } catch (error) {
+                Console.print(error.message);
+            }
+        }
     }
 
     async inputBonusNumber() {
-        const bonusNumber = await Console.readLineAsync(
-            "보너스 번호를 입력해 주세요.\n"
-        );
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new Error("[ERROR] 보너스 번호는 1~45 사이여야 합니다.");
+        while (true) {
+            try {
+                const bonusNumber = await Console.readLineAsync(
+                    "보너스 번호를 입력해 주세요.\n"
+                );
+                if (!this.isValidBonusNumber(bonusNumber)) {
+                    throw new Error(
+                        "[ERROR] 유효한 보너스 번호를 입력해주세요."
+                    );
+                }
+                return bonusNumber;
+            } catch (error) {
+                Console.print(error.message);
+            }
         }
-        return bonusNumber;
+    }
+
+    isValidBonusNumber(bonusNumber) {
+        return !isNaN(bonusNumber) && bonusNumber >= 1 && bonusNumber <= 45;
     }
 
     checkDuplicate(winningNumbers, bonusNumber) {
