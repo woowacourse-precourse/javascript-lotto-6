@@ -4,6 +4,7 @@ import Lotto from "../src/Lotto.js";
 class App {
   purchaseAmount = 0;
   lottos = [];
+  winningNumbers = [];
 
   async inputPurchaseAmount() {
     const inputPurchaseAmount = await MissionUtils.Console.readLineAsync(
@@ -36,6 +37,28 @@ class App {
       lotto.printLottoNumbers();
       this.lottos.push(lotto);
     }
+  }
+
+  static validateWinningNumbers(winningNumbers) {
+    if (winningNumbers.some((number) => Number.isNaN(number)))
+      throw new Error("[ERROR] 입력된 당첨 번호는 숫자여야 합니다.");
+    if (winningNumbers.length !== 6)
+      throw new Error("[ERROR] 입력된 당첨 번호는 6개여야 합니다.");
+    if (winningNumbers.some((number) => number > 45 || number < 1))
+      throw new Error(
+        "[ERROR] 입력된 당첨 번호는 1부터 45 사이의 숫자여야 합니다."
+      );
+    if ([...new Set(winningNumbers)].length !== 6)
+      throw new Error("[ERROR] 입력된 당첨 번호는 중복되지 않아야 합니다.");
+  }
+
+  async inputWinningNumbers() {
+    const inputWinningNumbers = await MissionUtils.Console.readLineAsync(
+      "당첨 번호를 입력해 주세요."
+    );
+    const winningNumbers = inputWinningNumbers.split(",").map(Number);
+    App.validateWinningNumbers(winningNumbers);
+    this.winningNumbers = winningNumbers.sort((a, b) => a - b);
   }
 
   async play() {
