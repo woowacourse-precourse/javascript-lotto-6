@@ -1,5 +1,5 @@
 export const MESSAGE = {
-  PRICE_INPUT: "구입금액을 입력해 주세요.",
+  PRICE_INPUT: "구입금액을 입력해 주세요.\n",
   BOUGHT_LOTTOS: "개를 구매했습니다.",
   LOTTO_INPUT: "당첨 번호를 입력해 주세요.",
   BONUS_INPUT: "보너스 번호를 입력해 주세요.",
@@ -15,6 +15,8 @@ export const MESSAGE = {
 };
 
 export const SEPARATOR = ",";
+export const UNIT = 1000;
+export const PRICE_TYPE = "number";
 
 export const MATCH = {
   THREE: 5000,
