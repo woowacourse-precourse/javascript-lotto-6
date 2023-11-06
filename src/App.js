@@ -63,6 +63,9 @@ class App {
     }
 
     updateResults(matchCount, hasBonus) {
+        if (matchCount < 3) {
+            return;
+        }
         if (matchCount === MATCH.FIVE && hasBonus) {
             this.results[MATCH.FIVE_BONUS] += 1;
             return;
