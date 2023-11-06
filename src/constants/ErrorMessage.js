@@ -6,6 +6,7 @@ const ErrorMessage = {
     LENGTH: "[ERROR] 로또 번호는 6개여야 합니다.",
     DUPLICATE: "[ERROR] 중복된 값을 입력하지 마세요",
     BONUS_ONE_NUM: "[ERROR] 한개의 숫자만 입력",
+    LAST_MESSAGE: "[ERROR] 올바른 값을 입력해주세요"
 
 };
 export default ErrorMessage;
