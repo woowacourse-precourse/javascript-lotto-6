@@ -6,22 +6,18 @@ import { Winning } from "./Winning.js";
 
 class App {
   async play() {
-    try {
-      const lottoCounts = await inputMoney();
-      lottoCountPrinter(lottoCounts);
-      lottoPrinter(lottoCounts);
-      const winningNumbers = await inputWinningNumber();
-      //MissionUtils.Console.print("");
-      const bonusNumber = await inputBonusNumber(winningNumbers);
-      //MissionUtils.Console.print("");
-      lottosReader(lottoNumbers, winningNumbers, bonusNumber, lottoCounts);
-      lottoResultsCounter(winningResults, lottoCounts);
-      lottoResultsPrinter(winningDetails.winning);
-      MissionUtils.Console.print("");
-      totalRate(lottoCounts*1000, winningDetails.totalPrize);
-    } catch (e) {
-      throw new Error(e);
-    }
+    const lottoCounts = await inputMoney();
+    lottoCountPrinter(lottoCounts);
+    lottoPrinter(lottoCounts);
+    const winningNumbers = await inputWinningNumber();
+    MissionUtils.Console.print("");
+    const bonusNumber = await inputBonusNumber(winningNumbers);
+    MissionUtils.Console.print("");
+    lottosReader(lottoNumbers, winningNumbers, bonusNumber, lottoCounts);
+    lottoResultsCounter(winningResults, lottoCounts);
+    lottoResultsPrinter(winningDetails.winning);
+    MissionUtils.Console.print("");
+    totalRate(lottoCounts*1000, winningDetails.totalPrize);
   }
 }
 
@@ -80,7 +76,7 @@ export function winningNumberSpliter(input) {
   return winningNumberSplit;
 }
 
-function lottoPrinter(counts) {
+export function lottoPrinter(counts) {
   for (let i = 0; i < counts; i++) {
     MissionUtils.Console.print(randomNumberCreater());
   }

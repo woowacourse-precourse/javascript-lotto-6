@@ -19,4 +19,20 @@ describe("로또 클래스 테스트", () => {
       new Lotto([1, 2, 3, 4, 5, 47]);
     }).toThrow("[ERROR]");
   });
+
+  test("올바른 로또 번호를 발행한다.", () => {
+
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6])
+
+    expect(lotto).toEqual([1, 2, 3, 4, 5, 6]);
+  });
+
+  test("구매한 로또 번호를 오름차순으로 출력한다.", () => {
+    const INPUT = [21, 8, 23, 42, 43, 41];
+    const OUTPUT = [8, 21, 23, 41, 42, 43];
+  
+    const result = new Lotto(INPUT);
+  
+    expect(result).toEqual(OUTPUT);
+  });
 });

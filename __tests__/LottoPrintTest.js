@@ -1,10 +1,51 @@
-import { numberSort } from "../src/App.js";
+import { numberSort, lottoPrinter } from "../src/App.js";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
-test("구매한 로또 번호를 오름차순으로 출력한다.", () => {
-  const INPUT = [21, 8, 23, 42, 43, 41];
-  const OUTPUT = [8, 21, 23, 41, 42, 43];
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
 
-  const result = numberSort(INPUT);
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
 
-  expect(result).toEqual(OUTPUT);
-});
+test("구매한 로또를 모두 출력한다.", async () => {
+  //given
+  const logSpy = getLogSpy();
+  const COUNT = 8;
+
+  //when
+  lottoPrinter(COUNT);
+
+  //then
+  mockRandoms([
+    [8, 21, 23, 41, 42, 43],
+    [3, 5, 11, 16, 32, 38],
+    [7, 11, 16, 35, 36, 44],
+    [1, 8, 11, 31, 41, 42],
+    [13, 14, 16, 38, 42, 45],
+    [7, 11, 30, 40, 42, 43],
+    [2, 13, 22, 32, 38, 45],
+    [1, 3, 5, 14, 22, 45],
+  ]);
+
+  const logs = [
+    "[8, 21, 23, 41, 42, 43]",
+    "[3, 5, 11, 16, 32, 38]",
+    "[7, 11, 16, 35, 36, 44]",
+    "[1, 8, 11, 31, 41, 42]",
+    "[13, 14, 16, 38, 42, 45]",
+    "[7, 11, 30, 40, 42, 43]",
+    "[2, 13, 22, 32, 38, 45]",
+    "[1, 3, 5, 14, 22, 45]",
+  ];
+
+  logs.forEach((log) => {
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+  });
+})
