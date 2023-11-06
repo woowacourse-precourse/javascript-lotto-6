@@ -22,7 +22,7 @@ class Lotto {
     }
     return lottoNumbers;
   }
-
+  //key = index, value = 숫자
   printLottoNumbers(lottoNumbers) {
     for (let i = 0; i < lottoNumbers.length; i++) {
       Console.print(lottoNumbers[i]);
