@@ -5,7 +5,7 @@ import Player from './model/Player.js';
 
 class App {
   async play() {
-    const budget = await LottoConsole.getPurchaseAmount();
+    const budget = await LottoConsole.getBudget();
     const player = new Player(budget);
 
     // 로또 구매

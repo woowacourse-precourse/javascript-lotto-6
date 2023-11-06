@@ -7,16 +7,16 @@ import {
 import { parseNumber, parseNumbers } from '../utils/index.js';
 
 class LottoConsole {
-  static async getPurchaseAmount() {
+  static async getBudget() {
     const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     LottoConsole.#validateEmtpyInput(input);
     this.printEmptyLine();
 
-    const purchaseAmount = parseNumber(input);
-    isNumber(purchaseAmount);
-    isThousands(purchaseAmount);
+    const budget = parseNumber(input);
+    isNumber(budget);
+    isThousands(budget);
 
-    return purchaseAmount;
+    return budget;
   }
 
   static async getLottoNumbers() {
