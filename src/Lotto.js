@@ -1,18 +1,34 @@
+import { Random } from "@woowacourse/mission-utils";
+import { LOTTO_NUMBER, ERROR_MESSAGE } from "./Constant.js";
+
 class Lotto {
-  #numbers;
+	#numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
+	constructor(numbers) {
+		this.#validate(numbers);
+		this.#numbers = numbers;
+	}
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-  }
+	#validate(numbers) {
+		if (numbers.length !== 6) {
+			throw new Error(ERROR_MESSAGE.numbersMustBeSix);
+		}
+	}
 
-  // TODO: 추가 기능 구현
+	generateLotto() {
+		const lotto = [];
+		while (computer.length < LOTTO_NUMBER.numbers) {
+			const number = Random.pickNumberInRange(
+				LOTTO_NUMBER.minRange,
+				LOTTO_NUMBER.maxRange,
+				LOTTO_NUMBER.numbers
+			);
+			if (!lotto.includes(number)) {
+				lotto.push(number);
+			}
+		}
+		return lotto;
+	}
 }
 
 export default Lotto;
