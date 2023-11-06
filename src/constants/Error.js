@@ -1,7 +1,9 @@
 const ERROR = Object.freeze({
   PREFIX: '[ERROR] ',
 
-  PAYMENT_NOT_INPUT: '결제 금액을 입력하지 않았습니다.',
+  COMMON_NOT_INPUT: '아무것도 입력하지 않았습니다.',
+  COMMON_NOT_WHITESPACE: '입력값에 공백이 있으면 안됩니다.',
+
   PAYMENT_NOT_THOUSAND: '결제 금액은 1000원 단위로 입력해주셔야 합니다.',
   PAYMENT_NOT_NUMBER: '결제 금액은 숫자만 입력해주셔야 합니다.',
 
@@ -12,7 +14,6 @@ const ERROR = Object.freeze({
   WINNING_NOT_INPUT:
     '당첨 번호는 6개의 숫자를 입력해주셔야 합니다. 번호의 구분은 쉼표(,)로 해주세요.',
 
-  BONUS_NOT_INPUT: '보너스 번호를 입력하지 않았습니다.',
   BONUS_NOT_NUMBER: "보너스 번호는 '숫자'만 입력해주셔야 합니다.",
   BONUS_NOT_RANGE: "보너스 번호는 1부터 45까지의 '숫자'만 입력해주셔야 합니다.",
   BONUS_DUPLICATE:

@@ -10,4 +10,3 @@ class LottoGame {
 }
 
 export default LottoGame;
-성;
