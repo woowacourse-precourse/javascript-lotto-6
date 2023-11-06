@@ -7,8 +7,8 @@ export class BuyLotto {
 	}
 
 	#validate(money) {
-		this.#validateIsNumber(money);
 		this.#validateZero(money);
+		this.#validateIsNumber(money);
 		this.#validateDivideThousand(money);
 	}
 

@@ -9,43 +9,69 @@ import CheckWinning from './CheckWinning.js';
 import ReturnOnInvestment from './ReturnOnInvestment.js';
 
 class App {
+	buyLotto;
+	winning;
+	bonus;
+	lotto;
+
+	constructor() {
+		this.inputValue = new InputValue();
+		this.printValue = new PrintValue();
+	}
+
 	async play() {
+		await this.inputBuyMoney();
+		this.outputLottoTicket();
+		await this.inputWinningNumber();
+		await this.inputBonusNumber();
+		this.outputResult();
+	}
+
+	// 로또 구입 금액 입력
+	async inputBuyMoney() {
 		try {
-			const inputValue = new InputValue();
-			const printValue = new PrintValue();
-
-			// 로또 구입 금액 입력
-			const buyLotto = await inputValue.buyLotto();
-			new BuyLotto(buyLotto);
-
-			// 로또 구입 수량
-			const lottoQuantity = buyLotto / 1000;
-
-			// 로또 수량만큼 발행
-			const lottoList = LottoIssuance(lottoQuantity);
-
-			// 발행 로또 출력
-			printValue.lottoIssuedQuantity(lottoQuantity, lottoList);
-
-			// 당첨 로또 번호 입력
-			const winningNumber = await inputValue.winningNumber();
-			new Lotto(winningNumber);
-
-			// 보너스 로또 번호 입력
-			const bonusNumber = await inputValue.bonusNumber();
-			new BonusLotto(bonusNumber, winningNumber);
-
-			//  당첨된 로또 리스트
-			const winningList = CheckWinning(winningNumber, bonusNumber, lottoList);
-
-			// 수익률
-			const roi = ReturnOnInvestment(buyLotto, winningList);
-
-			// 당첨 통계
-			printValue.winningResult(winningList, roi);
+			this.buyLotto = await this.inputValue.buyLotto();
+			new BuyLotto(this.buyLotto);
 		} catch (error) {
 			Console.print(error.message);
+			await this.inputBuyMoney();
 		}
+	}
+
+	// 발행 로또 출력
+	outputLottoTicket() {
+		const lottoQuantity = this.buyLotto / 1000;
+		this.lotto = LottoIssuance(lottoQuantity);
+		this.printValue.lottoIssuedQuantity(lottoQuantity, this.lotto);
+	}
+
+	// 당첨 로또 번호 입력
+	async inputWinningNumber() {
+		try {
+			this.winning = await this.inputValue.winningNumber();
+			new Lotto(this.winning);
+		} catch (error) {
+			Console.print(error.message);
+			await this.inputWinningNumber();
+		}
+	}
+
+	// 보너스 로또 번호 입력
+	async inputBonusNumber() {
+		try {
+			this.bonus = await this.inputValue.bonusNumber();
+			new BonusLotto(this.bonus, this.winning);
+		} catch (error) {
+			Console.print(error.message);
+			await this.inputBonusNumber();
+		}
+	}
+
+	// 당첨 내역 출력
+	outputResult() {
+		const winningList = CheckWinning(this.winning, this.bonus, this.lotto);
+		const roi = ReturnOnInvestment(this.buyLotto, winningList);
+		this.printValue.winningResult(winningList, roi);
 	}
 }
 
