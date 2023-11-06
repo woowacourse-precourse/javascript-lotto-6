@@ -8,7 +8,8 @@ class App {
 	}
 
 	async play() {
-		this.#lottoController.purchasingLottos();
+		await this.#lottoController.purchasingLottos();
+		await this.#lottoController.assignLottoWinningNumber();
 	}
 }
 
