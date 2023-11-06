@@ -15,9 +15,9 @@ class IssuingLotto {
     Validation.isDividedIntoUnitPrice(cost);
   }
 
-  #issueLotto(cost) {
+  #issueLotto() {
     const usersLotto = [];
-    const lottoCount = Utils.calculateLottoCount(cost);
+    const lottoCount = Utils.calculateLottoCount(this.#cost);
 
     for (let issueCount = 0; issueCount < lottoCount; issueCount += 1) {
       const numbers = Utils.getRandomNumbers();
@@ -25,10 +25,6 @@ class IssuingLotto {
     }
 
     return usersLotto;
-  }
-
-  getCost() {
-    return this.#cost;
   }
 
   getLotto() {
