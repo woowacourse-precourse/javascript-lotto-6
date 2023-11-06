@@ -11,6 +11,7 @@ export const MESSAGE = Object.freeze({
   input_prize: '당첨 번호를 입력해 주세요.',
   input_bonus: '보너스 번호를 입력해 주세요.',
   prize_stats: '당첨 통계',
+  total_return: (num) => `총 수익률은 ${num}입니다.`,
 });
 
 export const MATCH = Object.freeze({
@@ -19,8 +20,7 @@ export const MATCH = Object.freeze({
   five_match: (match) => `5개 일치 (1,500,000원) - ${match}개`,
   five_bonus_match: (match) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${match}개`,
   six_match: (match) => `6개 일치 (2,000,000,000원) - ${match}개`,
-  total_return: (num) => `총 수익률은 ${num}입니다.`,
-})
+});
 
 export const ERROR_MESSAGE = Object.freeze({
   prefix: '[Error]',
