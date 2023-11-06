@@ -17,14 +17,7 @@ const mockRandoms = (numbers) => {
 test("구매한 로또를 모두 출력한다.", async () => {
   //given
   const logSpy = getLogSpy();
-  //mockQuestions(["8000"]);
-  //const COUNT = 8;
-  const money = "8000";
 
-  //when
-  //lottoPrinter(COUNT);
-
-  //then
   mockRandoms([
     [8, 21, 23, 41, 42, 43],
     [3, 5, 11, 16, 32, 38],
@@ -36,9 +29,13 @@ test("구매한 로또를 모두 출력한다.", async () => {
     [1, 3, 5, 14, 22, 45],
   ]);
 
+  const money = "8000";
+
+  //when
   const counter = new Counter(money);
   counter.lottosPrinter();
 
+  //then
   const logs = [
     "[8, 21, 23, 41, 42, 43]",
     "[3, 5, 11, 16, 32, 38]",
