@@ -17,7 +17,4 @@ class UserInput {
   }
 }
 
-const userInput = new UserInput();
-userInput.getLottoPurchaseAmount();
-
 export default UserInput;
