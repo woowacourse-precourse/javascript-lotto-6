@@ -2,7 +2,6 @@ const LOTTO = Object.freeze({
   MIN_NUMBER: 1,
   MAX_NUMBER: 45,
   LENGTH: 6,
-  BONUS_NUMBER_LENGTH: 1,
   PRICE: 1000,
   MAX_PRICE: 100000,
 });

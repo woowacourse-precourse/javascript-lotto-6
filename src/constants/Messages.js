@@ -20,7 +20,6 @@ const MESSAGES = Object.freeze({
     PLEASE_ONLY_NUMBER: "[ERROR] 숫자만 입력 가능합니다.",
     INVAILD_LOTTO_NUMBER: `[ERROR] 번호는 ${LOTTO.MIN_NUMBER}~${LOTTO.MAX_NUMBER} 사이로 입력해주세요.`,
     INVAILD_LOTTO_LENGTH: `[ERROR] 로또 번호는 ${LOTTO.LENGTH}개여야 합니다.`,
-    INVAILD_BONUS_LENGTH: `[ERROR] 보너스 번호는 ${LOTTO.BONUS_NUMBER_LENGTH}개여야 합니다.`,
     DUPLICATE_LOTTO_NUMBER: "[ERROR] 로또 번호가 중복되지 않게 입력해주세요.",
     DUPLICATE_BONUS_NUMBER:
       "[ERROR] 보너스 번호가 로또 번호와 중복되지 않게 입력해주세요.",
