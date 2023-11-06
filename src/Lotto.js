@@ -20,7 +20,7 @@ class Lotto {
         throw new Error(ERROR_MSG.input);
       }
 
-      // results 숫자 검사
+      // results 범위 검사
       if (number < 1 || number > 45) {
         throw new Error(ERROR_MSG.input);
       }
