@@ -8,4 +8,10 @@ export default class ValidateController {
       throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
     }
   }
+
+  validateBonusNumber(num) {
+    if (1 > num || 45 < num) {
+      throw new Error(ERROR_MESSAGES.OUT_OF_RANGE);
+    }
+  }
 }

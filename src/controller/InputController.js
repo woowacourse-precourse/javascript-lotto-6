@@ -7,9 +7,10 @@ export default class InputController {
   validateController = new ValidateController();
   #amount = 0;
   #winningNumbers = [];
+  #bonusNumber = 0;
 
   async inputStart() {
-    await this.getAmount();
+    await this.getBonusNumber();
   }
 
   async getAmount() {
@@ -17,9 +18,14 @@ export default class InputController {
     this.validateController.validateAmount(this.#amount);
   }
 
-  async getWinningNumber() {
-    const numberString = await this.inputView.readNumber();
+  async getWinningNumbers() {
+    const numberString = await this.inputView.readWinningNumbers();
     this.#winningNumbers = numberString.split(',');
     const lotto = new Lotto(this.#winningNumbers);
+  }
+
+  async getBonusNumber() {
+    this.#bonusNumber = await this.inputView.readBonusNumber();
+    this.validateController.validateBonusNumber(this.#bonusNumber);
   }
 }
