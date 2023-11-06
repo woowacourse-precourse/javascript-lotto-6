@@ -1,18 +1,19 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PlayLotto, LottoResult } from './game/PlayLotto.js';
+import { Lotto, LottoResult } from './Lotto.js';
 import { Inputs } from './ui/Input.js';
-import { Lotto } from './Lotto.js';
+import CONSTANT from './constants/constant.js';
 
 class App {
   async play() {
     try {
-      const amount = await Inputs.getAmount(`구입금액을 입력해 주세요.`);
-      const lotto = new PlayLotto(amount);
+      const amount = await Inputs.getAmount(CONSTANT.inputs.amount);
+      const lotto = new Lotto(amount);
       const myLottos = await lotto.makeLottos();
-      const winningNumber =
-        await Inputs.getWinningNumber(`당첨 번호를 입력해 주세요.`);
+      const winningNumber = await Inputs.getWinningNumber(
+        CONSTANT.inputs.winningNumber
+      );
       const bonusNumber = await Inputs.getBonusNumber(
-        `보너스 번호를 입력해 주세요.`,
+        CONSTANT.inputs.bonusNumber,
         winningNumber
       );
 
@@ -22,7 +23,6 @@ class App {
         bonusNumber,
         myLottos
       );
-      const isFitLotto = await lottoResult.isFit();
 
       await lottoResult.printResult();
     } catch (e) {

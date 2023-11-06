@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { validators } from '../utils/Validator';
+import { validators } from '../utils/Validator.js';
 
 export const Inputs = {
   async getAmount(message) {
@@ -23,7 +23,6 @@ export const Inputs = {
 
   async getBonusNumber(message, winningNumber) {
     const userInput = parseInt(await Console.readLineAsync(`${message}\n`), 10);
-    // 당첨번호와 중복된 번호 있는지 검사.
     validators.validateBonusNum(userInput, winningNumber);
     Console.print('');
 
