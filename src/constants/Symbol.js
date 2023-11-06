@@ -4,6 +4,6 @@ export const DIVIDER = Object.freeze({
 });
 
 export const BRACKET = Object.freeze({
-  open: '{',
-  close: '}',
+  open: '[',
+  close: ']',
 });
