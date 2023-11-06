@@ -12,7 +12,7 @@ class Purchase {
 
   #validate(price) {
     // 숫자가 아닌 경우
-    if (!Number.isInteger(price)) {
+    if (isNaN(price)) {
       throw new Error(MESSAGE.error.notNumber);
     }
     // 구입 금액이 1,000원으로 나누어 떨어지지 않는 경우
