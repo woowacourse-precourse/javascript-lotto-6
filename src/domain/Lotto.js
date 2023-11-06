@@ -30,7 +30,7 @@ export class Lotto {
     }
 
     /**
-     *
+     *기
      * @param {number[]} numbers
      */
     #validate(numbers) {
@@ -44,7 +44,7 @@ export class Lotto {
     }
 
     /**
-     * @description - 추첨 기계로 로또 한 개 추첨하기
+     * @description - 추첨 기계에 의해 로또 한 개 추첨하기,
      */
     drawBy(lottoMachine) {
 

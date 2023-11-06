@@ -30,11 +30,16 @@ export class InputConverter {
      *
      * 사용자가 입력한 당첨 번호를 리스트로 가져옴
      *
-     * '1,2,3,4,5,6' -> ['1','2','3','4','5','6']
      */
 
     convertToWinningNumbers(input) {
-        return this.winningNumbers = input.split(',');
+        // '1,2,3,4,5,6' -> ['1','2','3','4','5','6']
+        const winningNum = this.winningNumbers = input.split(',')
+        // ['1','2','3','4','5','6'] => [1,2,3,4,5,6]
+        return winningNum.map(Number)
+
+        //한번에 '1,2,3,4,5,6' -> [1,2,3,4,5,6]
+
 
     }
 

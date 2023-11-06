@@ -9,9 +9,7 @@ export class LottosDto {
     /**
      *
      * @param {LottoDto[]} manyLottoDto
-     * @description manyLottoDto는 [ LottoDto, LottoDto, LottoDto ...]
-     *
-     * 구조
+     * @description manyLottoDto는 [ LottoDto, LottoDto, LottoDto ...] 구조
      *
      * Lotto
      */

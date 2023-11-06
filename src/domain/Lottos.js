@@ -5,7 +5,7 @@ export class Lottos {
     /**
      * @type {Lotto[]}
      */
-    #manylottos
+    #manylotto
 
     /**
      *
@@ -14,15 +14,7 @@ export class Lottos {
      */
 
     constructor(boughtLottos) {
-        this.#manylottos = boughtLottos
-    }
-
-    /**
-     * @description - 추첨 기계로 로또 전부 추첨하기
-     * @param lottoMachine
-     */
-    drawAllBy(lottoMachine) {
-
+        this.#manylotto = boughtLottos
     }
 
     /**
@@ -30,16 +22,25 @@ export class Lottos {
      * @return {LottosDto}
      * @description [LottosDto를 만들어주는 함수]
      *
-     * manyLottos는 [Lotto, Lotto, Lotto ...]의 형태이다
+     * manyLotto는 [Lotto, Lotto, Lotto ...]의 형태이다
      * 그것을 [LottoDto, LottoDto, LottoDto ...]로 만들기! :manyLottoDto
      * Lotto에 돌려서 만든 manyLottosDto를 LottosDto로 보내준다
-     *
      */
 
     makeLottosDto() {
-        const manyLottoDto = this.#manylottos.map((lotto) => lotto.makeLottoDto())
+        const manyLottoDto = this.#manylotto.map((lotto) => lotto.makeLottoDto())
         return new LottosDto(manyLottoDto)
     }
 
+    /**
+     * @description - 추첨 기계로 로또 전부 추첨하는 메소드
+     * @param lottoMachine
+     */
+    drawAllBy(lottoMachine) {
+        //하나씩 돌면서 추첨보내기
+        this.#manylotto.forEach((lotto) => {
+            lotto.drawBy(lottoMachine)
+        })
+    }
 
 }

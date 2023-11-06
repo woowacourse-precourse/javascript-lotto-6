@@ -42,8 +42,7 @@ export class LottoSeller {
     /**
      * @param {Money} money
      * @return {Lottos}
-     * @description 전달받은 lottoAmount 수만큼 로또 구매
-     *
+     * @description
      * 돈 차감하고 로또까지 만들어준다 -> 추상화가 된 것!
      *
      * lottos로 갈 것이다
@@ -67,7 +66,7 @@ export class LottoSeller {
      *
      * @param {Money} money
      * @return {Lotto}
-     * @description 로또 1장 구매 = money rorcp soqnfmf Wnr qkRnf tn dlTdma
+     * @description 로또 1장 구매 = money 객체 내부를 쭉 바꿀 수 읶음
      */
     #buy(money) {
         //로또 금액만큼 잔액 차감
