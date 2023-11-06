@@ -1,6 +1,6 @@
 const NOT_RANKED = 0;
 
-export const LOTTO_RANK = {
+export const LOTTO_RANK_INFO = {
   1: { prize: 2000000000, numbers: [6, 0] },
   2: { prize: 30000000, numbers: [5, 1] },
   3: { prize: 1500000, numbers: [5, 0] },

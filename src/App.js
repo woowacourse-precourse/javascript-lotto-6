@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
-import { CHECK_RANK } from "./constants/Ranking.js";
+import { LOTTO_RANK_INFO, CHECK_RANK } from "./constants/Ranking.js";
 
 class App {
   purchaseAmount = 0;
@@ -98,12 +98,26 @@ class App {
     });
   }
 
+  printLottoResult() {
+    MissionUtils.Console.print("당첨 통계");
+    MissionUtils.Console.print("---");
+    for (let i = 5; i >= 1; i--) {
+      let result = "";
+      result += `${LOTTO_RANK_INFO[i].numbers[0]}개 일치`;
+      if (i == 2) result += ", 보너스 볼 일치";
+      result += ` (${LOTTO_RANK_INFO[i].prize.toLocaleString()}원)`;
+      result += ` - ${this.lottoResult[i]}개`;
+      MissionUtils.Console.print(result);
+    }
+  }
+
   async play() {
     await this.inputPurchaseAmount();
     this.purchaseLotto();
     await this.inputWinningNumbers();
     await this.inputBonusNumber();
     this.checkLotto();
+    this.printLottoResult();
   }
 }
 
