@@ -15,11 +15,11 @@ class App {
     
     Console.print(`${lottoCount}개를 구매했습니다.`)
     for (let lottoTicket of lottoTickets){
-      Console.print(lottoTicket)
+      Console.print(`[${lottoTicket.join(', ')}]`)
     }
     
     const winningNumbers = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
-    const lotto = new Lotto(winningNumbers.split(","));
+    const lotto = new Lotto(winningNumbers.split(",").map(number=>Number(number)));
     
     const bonusNumber = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
     lotto.addBonusNumber(bonusNumber)
