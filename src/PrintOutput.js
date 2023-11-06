@@ -50,9 +50,13 @@ class PrintOutput {
     Console.print(`6개 일치 (2,000,000,000원) - ${winningArray[4]}개`);
   };
   
-  printTotalReturn = () => {
-    // const totalReturn = 
-    Console.print(`총 수익률은 ${totalReturn}입니다.`);
+  printTotalReturn = (winningArray, purchasePrice) => {
+    const priceLevel = [5000, 50000, 1500000, 30000000, 2000000000];
+    const winningPrice = winningArray.reduce((total, count, index) => total + count * priceLevel[index], 0);
+    const totalReturn = (winningPrice / purchasePrice) * 100;
+    const totalReturnNumber = parseFloat(totalReturn.toFixed(2));
+    
+    Console.print(`총 수익률은 ${totalReturnNumber}입니다.`);
   };
 }
 
