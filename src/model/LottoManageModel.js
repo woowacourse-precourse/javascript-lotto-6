@@ -1,7 +1,7 @@
 import Lotto from '../Lotto.js';
 
 import { throwError } from '../utils/index.js';
-import { ERROR_MESSAGE } from '../utils/constants.js';
+import { ERROR_MESSAGE, LOTTO } from '../utils/constants.js';
 
 class LottoManageModel {
   /**
@@ -30,6 +30,7 @@ class LottoManageModel {
 
   setBonusNumber(bonusNumber) {
     this.#isBonusNumberDuplicate(bonusNumber);
+    this.#isBonusNumberRange(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
@@ -53,6 +54,13 @@ class LottoManageModel {
     throwError(
       ERROR_MESSAGE.bonus_number_duplicate,
       this.getWinningNumbers().includes(bonusNumber),
+    );
+  }
+
+  #isBonusNumberRange(bonusNumber) {
+    throwError(
+      ERROR_MESSAGE.numbers_range,
+      bonusNumber < LOTTO.min_number || bonusNumber > LOTTO.max_number,
     );
   }
 }
