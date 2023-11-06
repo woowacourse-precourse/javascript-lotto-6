@@ -77,4 +77,21 @@ describe("로또 클래스 테스트", () => {
     totalReward += lottoGame.calculateReward(lottoBoard);
     expect(totalReward).toEqual(105000);
   });
+
+  test("수익률 구하기", () => {
+    const totalRewards = [50000, 1550000, 3000000];
+    const moneys = [5000, 8000, 7000];
+    const outputs = ["1000.0", "19375.0", "42857.1"];
+
+    const lottoGame = new Lotto([1, 2, 3, 4, 5, 6]);
+
+    outputs.forEach((output) => {
+      const reward = totalRewards.shift();
+      const money = moneys.shift();
+
+      const result = lottoGame.calculateRateOfReturn(reward, money);
+      console.log(result);
+      expect(result).toEqual(output);
+    });
+  });
 });
