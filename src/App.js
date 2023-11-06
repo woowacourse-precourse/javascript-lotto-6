@@ -16,14 +16,14 @@ import {
 
 class App {
   #cash;
-  #lottoEntries;
+  #lottoList;
   #winningNumbers;
   #bonus;
   #totalRewards;
   #matchCounter;
 
   constructor() {
-    this.#lottoEntries = new Map();
+    this.#lottoList = [];
     this.#totalRewards = TOTAL_REWARD.INITIAL_REWARD;
     this.#matchCounter = {
       [MATCH.FIRST_REWARD_CONDITION]: MATCH.INITIAL_COUNT,
@@ -54,18 +54,14 @@ class App {
   }
 
   #fillLottoNumbers(lottoCount) {
-    while (this.#lottoEntries.size < lottoCount) {
+    while (this.#lottoList.length < lottoCount) {
       const randomNumbers = generateRandomNumbers(LOTTO.COUNT_OF_NUMBERS);
-      const id = randomNumbers.join(UTILITY.EMPTY);
-
-      if (!this.#lottoEntries.has(id)) {
-        this.#lottoEntries.set(id, new Lotto(randomNumbers));
-      }
+      this.#lottoList.push(new Lotto(randomNumbers));
     }
   }
 
   #printLottoNumbers() {
-    [...this.#lottoEntries.values()].forEach((lotto) => {
+    this.#lottoList.forEach((lotto) => {
       Console.print(
         JSON.stringify(lotto.getLottoNumbers()).replace(
           /,/g,
@@ -128,7 +124,7 @@ class App {
   }
 
   #setMatchCounter() {
-    [...this.#lottoEntries.values()].forEach((lotto) => {
+    this.#lottoList.forEach((lotto) => {
       const match = getMatchCount(
         lotto.getLottoNumbers(),
         this.#winningNumbers,
