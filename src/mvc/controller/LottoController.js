@@ -23,22 +23,38 @@ class LottoController {
   }
 
   async play() {
+    await this.#purchaseLottos();
+    this.#printPurchasedLottos();
+
+    this.#setLottoBoard();
+    const lottoResult = this.#model.getLottoResult();
+
+    this.#printLottoResult();
+
+    this.#outputView.printLottoReturnRatio(
+      this.#getLottoReturnRatio(lottoResult, purchasePrice / LOTTO_PRICE)
+    );
+  }
+
+  async #purchaseLottos() {
     const purchasePrice = await this.#inputPurchasePrice();
     this.#model.purchaseLottos(purchasePrice / LOTTO_PRICE);
+  }
+
+  async #printPurchasedLottos() {
     this.#outputView.printPurchasedLotto(this.#model.getPurchasedLottoArray());
     this.#outputView.printLineBreak();
+  }
 
+  async #setLottoBoard() {
     const winningNumbersArray = await this.#inputWinningNumbers();
     const bonusNumber = await this.#inputBonusNumber(winningNumbersArray);
     this.#model.makeLottoBoard(winningNumbersArray, bonusNumber);
-    const lottoResult = this.#model.getLottoResult();
+  }
 
+  async #printLottoResult() {
     this.#outputView.printLineBreak();
     this.#outputView.printLottoResult(lottoResult);
-
-    this.#outputView.printLottoReturnRatio(
-      this.getLottoReturnRatio(lottoResult, purchasePrice / LOTTO_PRICE)
-    );
   }
 
   async #inputPurchasePrice() {
@@ -77,7 +93,7 @@ class LottoController {
     }
   }
 
-  getLottoReturnRatio(resultArray, numberOfLotto) {
+  #getLottoReturnRatio(resultArray, numberOfLotto) {
     return (
       (((resultArray[6] + resultArray[7]) * FIFTH_PLACE_WINNINGS +
         (resultArray[8] + resultArray[9]) * FOURTH_PLACE_WINNINGS +
