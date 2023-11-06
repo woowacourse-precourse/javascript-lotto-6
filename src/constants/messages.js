@@ -11,6 +11,6 @@ export const INPUT_MESSAGE = Object.freeze({
 export const ERROR_PRIFIX = '[ERROR] ';
 export const ERROR_MESSAGE = Object.freeze({
   notDividedPrice: '로또 가격(1,000원) 단위로 입력해주세요.',
-  negativePrice: '가격은 음수가 될 수 없습니다.',
+  negativePrice: '가격은 양수로 입력해주세요.',
   isNaN: '숫자를 입력해주세요.',
 });
