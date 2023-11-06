@@ -94,10 +94,10 @@ class Lotto {
           break;
       }
     });
-    this.resultPrint(guessNumber);
+    this.printResult(guessNumber);
   }
 
-  resultPrint(guessNumber) {
+  printResult(guessNumber) {
     Console.print(`\n당첨 통계\n---\n3개 일치 (5,000원) - ${
       this.winCheck[3]
     }개\n4개 일치 (50,000원) - ${
