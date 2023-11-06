@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-import WinningLottoController from '../../../src/Server/Spring/Annotation/@Controller/WinningLottoController.js';
-import selectSqlWinningLotto from '../../../src/Server/Spring/Annotation/@Repository/selectSqlWinningLotto.js';
-import CONSTANTS from '../../../src/Util/Constants.js';
-import { ERROR_MESSAGE } from '../../../src/Util/Message.js';
+import WinningLottoController from '../../src/Server/Spring/Annotation/@Controller/WinningLottoController.js';
+import selectSqlWinningLotto from '../../src/Server/Spring/Annotation/@Repository/selectSqlWinningLotto.js';
+import CONSTANTS from '../../src/Util/Constants.js';
+import { ERROR_MESSAGE } from '../../src/Util/Message.js';
 
 describe('WinningLottoController 테스트', () => {
   let winningLottoController;

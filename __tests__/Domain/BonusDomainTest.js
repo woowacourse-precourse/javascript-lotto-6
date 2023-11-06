@@ -1,8 +1,8 @@
-import BonusController from '../../../src/Server/Spring/Annotation/@Controller/BonusController.js';
-import insertSqlWinningLotto from '../../../src/Server/Spring/Annotation/@Repository/insertSqlWinningLotto.js';
-import selectSqlBonusLotto from '../../../src/Server/Spring/Annotation/@Repository/selectSqlBonusLotto.js';
-import { ERROR_MESSAGE } from '../../../src/Util/Message.js';
-import CONSTANTS from '../../../src/Util/Constants.js';
+import BonusController from '../../src/Server/Spring/Annotation/@Controller/BonusController.js';
+import insertSqlWinningLotto from '../../src/Server/Spring/Annotation/@Repository/insertSqlWinningLotto.js';
+import selectSqlBonusLotto from '../../src/Server/Spring/Annotation/@Repository/selectSqlBonusLotto.js';
+import { ERROR_MESSAGE } from '../../src/Util/Message.js';
+import CONSTANTS from '../../src/Util/Constants.js';
 
 describe('BonusController 테스트', () => {
   let bonusController;

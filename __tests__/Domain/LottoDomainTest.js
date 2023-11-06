@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import Lotto from '../../../src/Lotto.js';
-import CONSTANTS from '../../../src/Util/Constants.js';
-import { ERROR_MESSAGE } from '../../../src/Util/Message';
+import Lotto from '../../src/Lotto.js';
+import CONSTANTS from '../../src/Util/Constants.js';
+import { ERROR_MESSAGE } from '../../src/Util/Message';
 
 describe('Lotto 도메인 테스트', () => {
   const {lottoMin} = CONSTANTS;

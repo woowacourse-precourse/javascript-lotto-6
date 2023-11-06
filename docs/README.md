@@ -80,6 +80,15 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 - [x] : 보너스번호(BonusLotto)는 1이상 45이하여야 한다.
 - [x] : 보너스번호(BonusLotto)가 문자면 에러가 발생한다.
 - [x] : 보너스번호(BonusLotto)가 공백이면 에러가 발생한다.
+<br>
+
+### 로또서버(LottoServer)
+- [x] : handlerMapping에서는 요청한 URL에 맞게 컨트롤러를 반환한다.
+- [x] : handlerAdapter에서 핵심로직을 실행 후 modelAndView 객체가 반환되어야 한다.
+- [x] : viewResolver에서 반환된 view객체는 LottoPosView여야 한다.
+- [] : 만약 처리하는 과정에서 에러가 발생하면 httpResponse의 status는 error가 되어야한다.
+- [] : 정상적으로 처리돠면 httpResponse의 status는 success가 되어야 한다.
+
 
 # 📘 요구사항 정리
 

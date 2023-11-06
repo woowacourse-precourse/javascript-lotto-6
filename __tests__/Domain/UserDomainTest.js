@@ -1,7 +1,7 @@
-import UserController from '../../../src/Server/Spring/Annotation/@Controller/UserController.js';
-import User from '../../../src/Server/Spring/VO/User.js';
-import CONSTANTS from '../../../src/Util/Constants.js';
-import { ERROR_MESSAGE } from '../../../src/Util/Message.js';
+import UserController from '../../src/Server/Spring/Annotation/@Controller/UserController.js';
+import User from '../../src/Server/Spring/VO/User.js';
+import CONSTANTS from '../../src/Util/Constants.js';
+import { ERROR_MESSAGE } from '../../src/Util/Message.js';
 
 describe('User도메인 테스트', () => {
   let userController;

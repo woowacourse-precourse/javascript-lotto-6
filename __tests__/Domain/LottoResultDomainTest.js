@@ -1,8 +1,8 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import CompareLottoController from '../../../src/Server/Spring/Annotation/@Controller/CompareLottoController.js';
-import insertSqlWinningLotto from '../../../src/Server/Spring/Annotation/@Repository/insertSqlWinningLotto.js';
-import User from '../../../src/Server/Spring/VO/User.js';
-import generateLottoNumber from '../../../src/Server/Spring/Annotation/@Service/generateLottoNumber.js';
+import CompareLottoController from '../../src/Server/Spring/Annotation/@Controller/CompareLottoController.js';
+import insertSqlWinningLotto from '../../src/Server/Spring/Annotation/@Repository/insertSqlWinningLotto.js';
+import User from '../../src/Server/Spring/VO/User.js';
+import generateLottoNumber from '../../src/Server/Spring/Annotation/@Service/generateLottoNumber.js';
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
