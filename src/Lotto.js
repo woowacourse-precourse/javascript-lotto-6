@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { model } from "./Model.js";
 
 class Lotto {
   #numbers;
@@ -8,6 +9,7 @@ class Lotto {
     this.#validateDuplicate(numbers);
     this.#validateRange(numbers);
     this.#numbers = numbers;
+    model.lottoNumbers.push(numbers);
   }
 
   #validate(numbers) {

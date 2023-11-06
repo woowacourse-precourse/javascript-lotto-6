@@ -2,10 +2,15 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { Counter } from "./Counter.js";
 import { Bonus } from "./Bonus.js";
 import { Winning } from "./Winning.js";
+import { model } from "./Model.js";
+import { Results } from "./Results.js";
 
 class App {
   constructor() {
     this.counter = null;
+    this.winning = null;
+    this.bonus = null;
+    this.results = null;
   }
 
   async play() {
@@ -17,12 +22,58 @@ class App {
     MissionUtils.Console.print(comment);
 
     const totalMoney = await MissionUtils.Console.readLineAsync('');
-    this.counter = new Counter(totalMoney);
+    this.callCounter(totalMoney);
+
+    this.inputWinningNumber();
+  }
+
+  callCounter(money) {
+    this.counter = new Counter(money);
     const lottoCounts = this.counter.lottoCounter();
-    winningDetails.counts = lottoCounts;
+    model.counts = lottoCounts;
 
     this.counter.lottoCountPrinter(lottoCounts);
     this.counter.lottosPrinter();
+  }
+
+  async inputWinningNumber() {
+    this.winningNumberComment();
+
+    const winningNumber = await MissionUtils.Console.readLineAsync('');
+    const winningSplitNumber = winningNumberSpliter(winningNumber);
+    this.winning = new Winning(winningSplitNumber);
+    const winning = this.winning.winningNumbers();
+    model.winningNumber = winning;
+
+    this.inputBonusNumber(winning, model.counts);
+  }
+
+  async inputBonusNumber(winning, counts) {
+    this.bonusNumberComment();
+
+    const bonusNumber = await MissionUtils.Console.readLineAsync('');
+    this.bonus = new Bonus(bonusNumber, winning);
+    const bonus = this.bonus.bonusNumber();
+    model.bonus = bonus;
+
+    this.callResults(winning, bonus, counts)
+  }
+
+  callResults(winning, bonus, counts) {
+    MissionUtils.Console.print("");
+    this.results = new Results(model.lottoNumbers, winning, bonus, counts)
+  }
+
+  winningNumberComment() {
+    let comment = WINNING_NUMBER_COMMENT;
+    MissionUtils.Console.print("");
+    MissionUtils.Console.print(comment);
+  }
+
+  bonusNumberComment() {
+    let comment = BONUS_NUMBER_COMMENT;
+    MissionUtils.Console.print("");
+    MissionUtils.Console.print(comment);
   }
 }
 
@@ -45,44 +96,6 @@ var winningResults = [];
 
 var lottoNumbers = [];
 
-async function inputMoney() {
-  let comment = PURCASE_COMMENT;
-  MissionUtils.Console.print(comment);
-  const totalMoney = await MissionUtils.Console.readLineAsync('');
-  const counter = new Counter(totalMoney);
-  const lottoCounts = counter.lottoCounter();
-  return lottoCountPrinter(lottoCounts);
-}
-
-async function inputWinningNumber() {
-  let comment = WINNING_NUMBER_COMMENT;
-  MissionUtils.Console.print("");
-  MissionUtils.Console.print(comment);
-  const winningNumber = await MissionUtils.Console.readLineAsync('');
-  const winningSplitNumber = winningNumberSpliter(winningNumber);
-  const winning = new Winning(winningSplitNumber);
-  return winning.winningNumbers();
-}
-
-async function inputBonusNumber(winningNumbers, counts) {
-  let comment = BONUS_NUMBER_COMMENT;
-  MissionUtils.Console.print(comment);
-  const bonusNumber = await MissionUtils.Console.readLineAsync('');
-  const bonus = new Bonus(bonusNumber,winningNumbers);
-  const validateBonusNumber = bonus.bonusNumber();
-  return lottosReader(lottoNumbers, winningNumbers, validateBonusNumber, counts)
-}
-
-async function lottoCountPrinter(counts) {
-  MissionUtils.Console.print("");
-  MissionUtils.Console.print(`${counts}개를 구매했습니다.`);
-  winningDetails.counts = counts;
-  lottoPrinter(counts);
-  const winningNumbers = await inputWinningNumber();
-  MissionUtils.Console.print("");
-  return await inputBonusNumber(winningNumbers, counts);
-}
-
 export function winningNumberSpliter(input) {
   const winningNumberSplit = input.split(',');
   return winningNumberSplit;
@@ -94,23 +107,11 @@ export function lottoPrinter(counts) {
   }
 }
 
-function randomNumberCreater() {
-  const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-  return lottoCreater(randomNumber);
-}
-
-function lottoCreater(numbers) {
-  const lotto = new Lotto(numbers);
-  lottoNumbers.push(lotto);
-  return lotto;
-}
-
 function lottosReader(lotto, winning, bonus, count) {
   for (let i = 0; i < count; i++) {
     const result = lottoReader(lotto[i], winning, bonus)
     winningResults.push(result);
   }
-  lottoResultsCounter(winningResults, count)
 }
 
 export function lottoReader(lotto, winning, bonus) {
@@ -137,35 +138,6 @@ export function lottoResultsPrinter(results) {
     }
   }
   totalRate(winningDetails.counts*1000, winningDetails.totalPrize);
-}
-
-
-function lottoResultsCounter(results, counts) {
-  for (let i = 0; i < counts; i++) {
-    lottoResultCounter(results[i]);
-  }
-  lottoResultsPrinter(winningDetails.winning);
-  MissionUtils.Console.print("");
-}
-
-function lottoResultCounter(result) {
-  for (let i = 3; i < 7; i++) {
-    if (result[0] === i && i !== 5) {
-      winningDetails.winning[i-3] += 1;
-      winningDetails.totalPrize += winningDetails.prize[i-3];
-    }
-  }
-  if (result[0] === 5) {
-    lottoResultBonusCounter(result);
-  }
-}
-
-function lottoResultBonusCounter(result) {
-  if (result[1] === 0) {
-    winningDetails.winning[2] += 1;
-    winningDetails.totalPrize += winningDetails.prize[2];
-  }
-  winningDetails.totalPrize += winningDetails.prize[3];
 }
 
 function formatCurrency(number) {

@@ -1,4 +1,5 @@
 import Lotto from "./Lotto.js";
+import { model } from "./Model.js";
 import { MissionUtils, Random } from "@woowacourse/mission-utils";
 
 const LOTTO_PRICE = 1000;
@@ -13,6 +14,8 @@ export class Counter {
     this.counts = money/LOTTO_PRICE
     this.list = [];
     this.#publish(this.counts);
+    //model.lottoNumbers = this.list;
+    //console.log(this.list);
   }
 
   #inputMoneyValidater(money) {
@@ -32,6 +35,7 @@ export class Counter {
   lottoCounter() {
     let price = LOTTO_PRICE;
     const lottocounts = this.#money/price;
+    model.totalMoney = lottocounts * price;
     return lottocounts
   }
 
@@ -45,7 +49,9 @@ export class Counter {
     for (let num = 0; num < counts; num++) {
       const newLotto = this.createNewLotto();
       this.list.push(newLotto);
+      //model.lottoNumbers.push(newLotto)
     }
+    //model.lottoNumbers = this.list;
   }
 
   createNewLotto() {
