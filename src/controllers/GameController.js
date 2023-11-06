@@ -10,18 +10,25 @@ class GameController {
     this.#lottoMaker = new LottoMaker();
   }
 
-  async startGame() {
+  async lottoPublishCount() {
     const publishCount = await this.getLottoPublishCount();
+    this.#lottoMaker.publishCount = publishCount;
     OutputView.printLine();
     OutputView.printPublishCount(publishCount);
+  }
 
-    this.#lottoMaker.publishLottos(publishCount);
+  publishLotto() {
+    this.#lottoMaker.publishLottos(this.#lottoMaker.publishCount);
     OutputView.printLottos(this.#lottoMaker.lottos);
     OutputView.printLine();
+  }
 
+  async winningLotto() {
     await this.setWinningLotto();
     OutputView.printLine();
+  }
 
+  async bonusNumber() {
     await this.setBounusNumber();
     OutputView.printLine();
   }

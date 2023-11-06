@@ -6,7 +6,10 @@ class App {
   }
 
   async play() {
-    await this.gameController.startGame();
+    await this.gameController.lottoPublishCount();
+    this.gameController.publishLotto();
+    await this.gameController.winningLotto();
+    await this.gameController.bonusNumber();
   }
 }
 

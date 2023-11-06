@@ -8,12 +8,15 @@ import ValidationError from './ValidationError.js';
 class LottoMaker {
   #lottos;
 
+  #publishCount;
+
   #winningLotto;
 
   #bonusNumber;
 
   constructor() {
     this.#lottos = [];
+    this.#publishCount = undefined;
     this.#winningLotto = undefined;
     this.#bonusNumber = undefined;
   }
@@ -64,6 +67,14 @@ class LottoMaker {
     if (InputValidator.checkNaN(number)) {
       throw new ValidationError(ERROR_MESSAGE.isNaN);
     }
+  }
+
+  set publishCount(count) {
+    this.#publishCount = count;
+  }
+
+  get publishCount() {
+    return this.#publishCount;
   }
 
   set winningLotto(numbers) {
