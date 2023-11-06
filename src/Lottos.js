@@ -38,4 +38,9 @@ class Lottos {
       this.list.push(newLotto);
     }
   }
+
+  //구매한 로또 수량 출력
+  printTicketCount() {
+    Console.print(`${this.count}개를 구매했습니다.`);
+  }
 }
