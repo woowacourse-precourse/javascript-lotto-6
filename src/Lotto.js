@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-
+import { ERROR } from './Constant.js'
 
 class Lotto {
   #numbers;
@@ -11,7 +11,12 @@ class Lotto {
   
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR.LOTTO_NUMBER_NOT_SIX);
+    }
+
+    const numberSet = new Set(numbers);
+    if (numbers.length !== numberSet.length) {
+      throw new Error(ERROR.LOTTO_NUMBER_IS_REDUNDANT);
     }
   }
 
