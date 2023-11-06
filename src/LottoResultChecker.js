@@ -7,7 +7,7 @@ class LottoResultChecker {
   }
 
   async inputWinningLottoNum() {
-    return await Console.readLineAsync("당첨 번호를 입력해주세요.\n");
+    return await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
   }
   compareInputNumAndRandomNum(inputArr, randomArrs) {
     const counts = [];
