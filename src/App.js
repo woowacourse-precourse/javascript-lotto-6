@@ -37,7 +37,7 @@ class App {
     const bonus_number = new BonusNumber();
     this.bonus_number = await bonus_number.getBonusNumber();
 
-    // 6. 발행한 로또 번호와 당첨 번호 비교하기
+    // 6. 로또 번호와 당첨 번호 비교하기
     const ranking = new Ranking();
     this.rank_result = ranking.returnRank(
       this.lotto_list,
@@ -45,10 +45,8 @@ class App {
       this.bonus_number
     );
 
-    // 7. 당첨 내역 출력하기
+    // 7. 당첨 통계 출력하기
     ranking.printRank(this.rank_result);
-
-    // 8. 총 수익률 출력하기
     const profit = new Profit();
     profit.retrunProfit(this.rank_result, this.purchase_amount);
   }
