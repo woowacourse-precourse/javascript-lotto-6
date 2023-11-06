@@ -30,16 +30,14 @@ export const checkPurchaseAmount = (amount) => {
 };
 
 export const checkWinningNumbers = (numbers) => {
-    if (numbers.some(isNaN)) {
-        throw new Error(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
-    }
-    if (numbers.some(number => !Number.isInteger(number))) {
-        throw new Error(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
-    }
-    if (numbers.length !== LOTTO_NUMBER_COUNT) {
-        throw new Error(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
-    }
-    if (new Set(numbers).size !== LOTTO_NUMBER_COUNT) {
+    const hasInvalidNumber = numbers.some((number) =>
+        isNaN(number) ||
+        !Number.isInteger(number) ||
+        number < MIN_LOTTO_NUMBER ||
+        number > MAX_LOTTO_NUMBER
+    );
+
+    if (hasInvalidNumber || numbers.length !== LOTTO_NUMBER_COUNT || new Set(numbers).size !== LOTTO_NUMBER_COUNT) {
         throw new Error(ERROR.INVALID_WINNING_NUMBERS_MESSAGE);
     }
 };
