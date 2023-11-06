@@ -2,13 +2,15 @@ import { Random } from '@woowacourse/mission-utils';
 import VALUE from '../constants/value.js';
 
 const randomModel = {
+  sortRandom(oneOfRandom) {
+    return oneOfRandom.sort((a, b) => a - b);
+  },
+
   getOneOfRandom() {
     const { start, end, count } = VALUE.range;
     const oneOfRandom = Random.pickUniqueNumbersInRange(start, end, count);
 
-    oneOfRandom.sort((a, b) => a - b);
-
-    return [...oneOfRandom];
+    return oneOfRandom;
   },
 
   getRandom(number) {
@@ -16,10 +18,12 @@ const randomModel = {
 
     for (let i = 1; i <= number; i += 1) {
       const oneOfRandom = this.getOneOfRandom();
-      random.push(oneOfRandom);
+      const sortedOneOfRandom = this.sortRandom([...oneOfRandom]);
+
+      random.push(sortedOneOfRandom);
     }
 
-    return [...random];
+    return random;
   },
 
   getStringOfRandom(random) {
