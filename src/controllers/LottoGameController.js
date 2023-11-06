@@ -6,7 +6,9 @@ import Lotto from '../Lotto.js';
 import LottoValidator from '../domain/LottoValidator.js';
 
 class LottoGameController {
-  constructor() {}
+  constructor() {
+    this.lottoGame = [];
+  }
 
   async start() {
     try {
@@ -15,8 +17,8 @@ class LottoGameController {
 
       OutputView.printPurchaseAmount(amount);
 
-      const lottoGame = new LottoGame(amount);
-      const purchasedLotto = lottoGame.getPurchasedLotto();
+      this.lottoGame = new LottoGame(amount);
+      const purchasedLotto = this.lottoGame.getPurchasedLotto();
 
       OutputView.printPurchasedLotto(purchasedLotto);
       this.userWinningNumbers();
@@ -46,7 +48,15 @@ class LottoGameController {
 
       LottoValidator.validBonusNumber(bonusNumber, isContainning);
 
-      // console.log(bonusNumber);
+      // console.log(bonusNumber, winningLotto);
+      const comparisonResults = this.lottoGame.getLottoComparisonResults(
+        winningLotto.getSortedLotto(),
+        Number(bonusNumber)
+      );
+
+      const winsStatistics = this.lottoGame.getStatistics(comparisonResults);
+
+      OutputView.printWinsStatistics(winsStatistics);
     } catch ({ message }) {
       OutputView.printStaticMessage(message);
       this.userBonusNumber(winningLotto);
