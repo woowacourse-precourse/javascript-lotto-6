@@ -2,6 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./const/message";
 import { ERROR } from "./const/error";
 
+
 class App {
 
   constructor() {
@@ -55,77 +56,17 @@ class App {
       this.arrayNumbers.push(lottoNumber);
     }
   }
-  
-
-  getWinningLottos() {
-    for(let i = 0; i < this.count; i++){
-      const newArray = [...this.arrayNumbers[i],...this.winning.map(Number)]
-      const setObject = new Set(newArray)
-      const set = Array.from(setObject);
-      this.checkSameNumbers(set);
-      // const sameNumbers = this.arrayNumbers.filter(newArray);
-      // this.checkSameNumbers(sameNumbers)
-    }
-  }
-
-  // checkSameNumbers(sameNumbers) {
-  //   switch (sameNumbers.length) {
-  //     case 3:
-  //       this.sameNumbersObject['three']++
-  //       // break;
-  //     case 4:
-  //       this.sameNumbersObject['four']++
-  //       // break;
-  //     case 5:
-  //       this.sameNumbersObject['five']++
-  //       // break;
-  //     case 6:
-  //       this.sameNumbersObject['six']++
-  //       // break;   
-  //   }
-  //   if(sameNumbers.length === 5 && arrayNumbers.includes(checkBonusNumber)) {
-  //     this.sameNumbersObject['bonus']++
-  //   }
-  //   console.log(1);
-  //   console.log(this.sameNumbersObject);
-  // }
-  checkSameNumbers(set) {
-    switch (set.length) {
-      case 9:
-        this.sameNumbersObject['three']++
-        break;
-      case 8:
-        this.sameNumbersObject['four']++
-        break;
-      case 7:
-        this.sameNumbersObject['five']++
-        break;
-      case 6:
-        this.sameNumbersObject['six']++
-        break;      
-    }
-    if(set.length === 7 && this.arrayNumbers.includes(this.bonus)) {
-      this.sameNumbersObject['bonus']++
-    }
-  console.log(1);
-    console.log(this.sameNumbersObject);
-    console.log(set)
-  }
 
   printHowMany() {
-      MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
-      for(let i = 0; i < this.count; i++){
-        MissionUtils.Console.print(JSON.stringify(this.arrayNumbers[i]));
-      }
-      // this.arrayNumbers.forEach(element => {
-      //   MissionUtils.Console.print(element);
-      // })
+    MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
+    for(let i = 0; i < this.count; i++){
+      MissionUtils.Console.print(JSON.stringify(this.arrayNumbers[i]));
+    }
   }
-
+  
   async getNumbers(){
     const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
     this.winning  = winningNumbers.split(",");
-console.log(winningNumbers)
 
     if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
     if(this.winning.length !== 6) { throw new Error(ERROR.SIX)};
@@ -153,6 +94,34 @@ console.log(winningNumbers)
     if(numbers > 45) {throw new Error(ERROR.FORTY_FIVE)};
   }
 
+  getWinningLottos() {
+    for(let i = 0; i < this.count; i++){
+      const newArray = [...this.arrayNumbers[i],...this.winning.map(Number)]
+      const setObject = new Set(newArray)
+      const set = Array.from(setObject);
+      this.checkSameNumbers(set);
+    }
+  }
+
+  checkSameNumbers(set) {
+    switch (set.length) {
+      case 9:
+        this.sameNumbersObject['three']++
+        break;
+      case 8:
+        this.sameNumbersObject['four']++
+        break;
+      case 7:
+        this.sameNumbersObject['five']++
+        break;
+      case 6:
+        this.sameNumbersObject['six']++
+        break;      
+    }
+    if(set.length === 7 && this.arrayNumbers.includes(this.bonus)) {
+      this.sameNumbersObject['bonus']++
+    }
+  }
   
   printWinningStatics() {
     let winningPrice = 
