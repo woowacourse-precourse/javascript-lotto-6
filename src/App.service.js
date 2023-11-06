@@ -12,7 +12,11 @@ export default class AppService {
 
   async play() {
     const NUMBER_OF_TICKETS = await this.#getNumberOfTickets();
-    const PURCHASED = this.#buyTickets(NUMBER_OF_TICKETS);
+    const purchased = this.#buyTickets(NUMBER_OF_TICKETS);
+    purchased.forEach((ticket) => {
+      ticket = new Lotto(ticket);
+    });
+    const WINNING_LOTTO_NUMBERS = await this.#getWinningNumbers();
   }
 
   async #getNumberOfTickets() {
@@ -32,5 +36,15 @@ export default class AppService {
 
   pickNumbers() {
     return Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+  }
+
+  async #getWinningNumbers() {
+    const result = {
+      winningNumbers: null,
+      bonusNumber: null,
+    };
+    result.winningNumbers = await this.#IOController.readWinningNumbers();
+    result.bonusNumber = await this.#IOController.readBonusNumber();
+    return result;
   }
 }
