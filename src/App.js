@@ -10,7 +10,7 @@ class App {
     publishLotto(count);
     printLottoNumbers();
     const lotto = await this.getLotto();
-    const bonus = await getBonus();
+    const bonus = Number(await getBonus());
     getRank(lotto, bonus);
 
   }
