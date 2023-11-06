@@ -16,6 +16,8 @@ class App {
 
   #tickets;
 
+  #winningNumbers;
+
   constructor() {
     this.#tickets = [];
   }
@@ -62,10 +64,21 @@ class App {
       INPUT_MESSAGE.winningNumbers,
     );
     validateWinningNumber(input);
+
+    this.#winningNumbers = input.split(",");
+  }
+
+  async inputBonusNumber() {
+    const input = await MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGE.bonusNumber,
+    );
+
+    MissionUtils.Console.print(input);
   }
 
   async makeWinningNumber() {
     await this.inputWinningNumber();
+    await this.inputBonusNumber();
   }
 
   async play() {
