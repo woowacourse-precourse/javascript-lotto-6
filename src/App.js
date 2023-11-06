@@ -22,6 +22,8 @@ class App {
 
   #winningNumbers;
 
+  #bonusNumber;
+
   constructor() {
     this.#tickets = [];
   }
@@ -79,7 +81,7 @@ class App {
 
     validateBonusNumber(this.#winningNumbers, input);
 
-    MissionUtils.Console.print(input);
+    this.#bonusNumber = input;
   }
 
   async makeWinningNumber() {
