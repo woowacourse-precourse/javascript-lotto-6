@@ -52,8 +52,7 @@ class App {
     MissionUtils.Console.print(`\n${count}개를 구매했습니다.`);
 
     for (let i = 0; i < count; i += 1) {
-      const numbers = tickets[i].getLottoNumbers();
-      const text = numbers.join(', ');
+      const text = tickets[i].join(', ');
       MissionUtils.Console.print(`[${text}]`);
     }
   }
