@@ -1,4 +1,3 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
 import View from "./View.js";
 import Lotto from "./Lotto.js";
 import LottoTickets from "./LottoTickets.js";
