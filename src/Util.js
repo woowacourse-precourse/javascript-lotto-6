@@ -4,6 +4,22 @@ export function validatePurchasePrice(price,basedAmount) {
     }
 };
 
+export function validateLottoNumbers(numbers,bonusNumber) {
+    if (numbers.length != 6) {
+        throw new Error("[ERROR] 당첨 번호는 6개여야 합니다.")
+    }
+
+    numbers.forEach(number => {
+        if (number < 1 && number > 45) {
+            throw new Error("[ERROR] 당첨 번호는 1~45 사이의 번호여야 합니다.")
+        }
+    })
+
+    if (bonusNumber < 1 && bonusNumber > 45) {
+        throw new Error("[ERROR] 보너스 당첨 번호는 1~45 사이의 번호여야 합니다.")
+    }
+}
+
 export function create2DArray(rows, columns) {
     let arr = Array.from(Array(rows), () => new Array(columns));
     return arr;
