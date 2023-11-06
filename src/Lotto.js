@@ -12,6 +12,10 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    const set = new Set(numbers);
+    if (numbers.length !== set.size) {
+      throw new Error("[ERROR] 로또 번호중 중복된 값이 존재합니다.\n");
+    }
   }
 
   checkResult({ win, bonus }) {
@@ -45,11 +49,6 @@ class Lotto {
       this.result = "None";
     }
   }
-  /* 
-   TODO: Lotto에서 당첨결과 확인 로직 구현, 
-   LottoGame에서는 Lotto객체들로 당첨결과 객체를 생성하고
-   당첨결과 출력문자 가공, 수익률 계산 등을 처리
-  */
 }
 
 export default Lotto;
