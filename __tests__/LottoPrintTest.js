@@ -1,5 +1,15 @@
-import { lottoPrinter } from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { Counter } from "../src/Counter.js";
+
+const mockQuestions = (inputs) => {
+  MissionUtils.Console.readLineAsync = jest.fn();
+
+  MissionUtils.Console.readLineAsync.mockImplementation(() => {
+    const input = inputs.shift();
+
+    return Promise.resolve(input);
+  });
+};
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -17,10 +27,12 @@ const mockRandoms = (numbers) => {
 test("구매한 로또를 모두 출력한다.", async () => {
   //given
   const logSpy = getLogSpy();
-  const COUNT = 8;
+  //mockQuestions(["8000"]);
+  //const COUNT = 8;
+  const money = "8000";
 
   //when
-  lottoPrinter(COUNT);
+  //lottoPrinter(COUNT);
 
   //then
   mockRandoms([
@@ -33,6 +45,9 @@ test("구매한 로또를 모두 출력한다.", async () => {
     [2, 13, 22, 32, 38, 45],
     [1, 3, 5, 14, 22, 45],
   ]);
+
+  const counter = new Counter(money);
+  counter.lottosPrinter();
 
   const logs = [
     "[8, 21, 23, 41, 42, 43]",
