@@ -37,4 +37,8 @@ export default class RandomNumber {
     }
     return randomNumber;
   }
+
+  getRandomNumber() {
+    return this.#randomNumber;
+  }
 }

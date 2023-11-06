@@ -17,8 +17,8 @@ export async function createLottoNumber() {
   return lotto;
 }
 
-export async function createBonusNumber() {
+export async function createBonusNumber(lottoNumber) {
   const bonusNumber = await inputMethod(uiConstants.BOUNS_NUMBER_MESSAGE);
-  const bonusObject = new BonusNumber(bonusNumber);
+  const bonusObject = new BonusNumber(Number(bonusNumber), lottoNumber);
   return bonusObject;
 }

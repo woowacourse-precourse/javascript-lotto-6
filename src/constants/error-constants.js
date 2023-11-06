@@ -8,5 +8,7 @@ const errorConstants = {
   WRONG_LENGTH: '[ERROR] 당첨번호는 6자리 입니다.',
   WRONG_INPUT:
     '[ERROR] 잘못된 형태입니다. \n 숫자 + ,(콤마) 형태로 입력해야 합니다. or 6자리를 입력해야 합니다.',
+  NOT_SAME_LOTTO_NUMBER:
+    '[ERROR] 당첨 번호와 보너스 번호는 중복될 수 없습니다.',
 };
 export default errorConstants;

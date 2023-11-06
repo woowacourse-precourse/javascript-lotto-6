@@ -42,4 +42,69 @@ export default class Lotto {
   getLottoNumber() {
     return this.#numbers;
   }
+
+  checkWinningCnt(randomNumbers, bonus) {
+    const winningCnt = this.#createArr(randomNumbers.length);
+    // 내가 산 로또에서 몇개 당첨됐는지 찾는 메서드
+    this.#numbers.forEach((number) => {
+      randomNumbers.forEach((randomNumber, idx) => {
+        if (randomNumber.includes(number))
+          winningCnt[idx] += magicNumber.START_RANGE;
+      });
+    });
+    const winningIdx = this.#findIndex(winningCnt); // 다섯개 숫자 당첨된 배열 index찾기
+    const bonusCnt = this.#checkIncludeBonus(winningIdx, randomNumbers, bonus);
+    return [winningCnt, bonusCnt];
+  }
+
+  // 숫자가 다섯개 당첨됐을 때만, 등록되는 bonus객체 구하는 메서드
+  #checkIncludeBonus(winningIdxArr, randomNumbers, bonus) {
+    const bonusCnt = this.#createArr(randomNumbers.length);
+    winningIdxArr.forEach((winningIdx) => {
+      if (randomNumbers[winningIdx].includes(bonus))
+        bonusCnt[winningIdx] += magicNumber.START_RANGE;
+    });
+    return bonusCnt;
+  }
+
+  // 다섯개의 숫자 당첨된 index 찾기.
+  #findIndex(arr) {
+    let idx = magicNumber.MINUS_ONE;
+    const idxArr = [];
+    while (arr.includes(magicNumber.FIVE, idx + magicNumber.START_RANGE)) {
+      idx = arr.indexOf(magicNumber.FIVE, idx + magicNumber.START_RANGE);
+      idxArr.push(idx);
+    }
+    return idxArr;
+  }
+
+  #createArr(arrLen) {
+    const arr = [];
+    for (
+      let idx = magicNumber.ZERO;
+      idx < arrLen;
+      idx += magicNumber.START_RANGE
+    ) {
+      arr[idx] = magicNumber.ZERO;
+    }
+    return arr;
+  }
+
+  // 로또 당첨 개수와 보너스 숫자 당첨 배열을 가지고 당첨금액을 위한 배열구하는 메서드
+  createMoneyArr(winningCnt, bonusCnt) {
+    const moneyArr = this.#createArr(magicNumber.EIGHT);
+    winningCnt.forEach((cnt, idx) => {
+      if (cnt >= magicNumber.THREE) {
+        moneyArr[cnt] += magicNumber.START_RANGE;
+        if (cnt === magicNumber.FIVE && bonusCnt[idx]) {
+          moneyArr[magicNumber.EIGHT + magicNumber.MINUS_ONE] +=
+            magicNumber.START_RANGE;
+          moneyArr[cnt] = magicNumber.ZERO;
+        }
+      }
+    });
+    return moneyArr;
+  }
+
+  //
 }
