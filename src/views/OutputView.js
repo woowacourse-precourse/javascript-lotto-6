@@ -2,8 +2,8 @@ import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE_PRINT } from '../constants/Mesaage';
 
 const OutputView = {
-  printLottoAmount(lottoAmount) {
-    Console.print(`${lottoAmount}${MESSAGE_PRINT.LOTTO_AMOUNT}`);
+  printLottoCount(lottoCount) {
+    Console.print(`${lottoCount}${MESSAGE_PRINT.LOTTO_COUNT}`);
   },
 
   printMyLottoNumber(lottoNumber) {

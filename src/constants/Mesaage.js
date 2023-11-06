@@ -7,7 +7,7 @@ export const MESSAGE_GET = Object.freeze({
 });
 
 export const MESSAGE_PRINT = Object.freeze({
-  LOTTO_AMOUNT: '개를 구매했습니다. \n',
+  LOTTO_COUNT: '개를 구매했습니다. \n',
   STATISTICS: '당첨 통계 \n--- \n',
   COUNT_UNIT: '개 \n',
   LOTTO_NUMBER_HEAD: '[',
