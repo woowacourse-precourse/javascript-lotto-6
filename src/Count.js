@@ -7,9 +7,15 @@ class Count {
     this.#lottos = lottos;
     this.#winningNumbers = winningNumbers;
     this.#bonusNumbers = bonusNumbers;
-    this.quantityList = { THREE: 0, FOUR: 0, FIVE: 0, FIVE_BONUS: 0, SIX: 0 };
-    this.numberList = ['3개 일치', '4개 일치', '5개 일치', '5개 일치, 보너스 불 일치', '6개 일치'];
-    this.rewardList = ['5등', '4등', '3등', '2등', '1등'];
+    this.matchList = { THREE: 0, FOUR: 0, FIVE: 0, FIVE_BONUS: 0, SIX: 0 };
+    this.matchMessageList = [
+      '3개 일치',
+      '4개 일치',
+      '5개 일치',
+      '5개 일치, 보너스 불 일치',
+      '6개 일치',
+    ];
+    this.rewardList = [5000, 50000, 1500000, 30000000, 2000000000];
     this.totalReward = 0;
     this.compare();
   }
@@ -39,13 +45,13 @@ class Count {
   }
 
   countTotal(count) {
-    if (count.winning === 3) this.quantityList.THREE += 1;
-    if (count.winning === 4) this.quantityList.FOUR += 1;
+    if (count.winning === 3) this.matchList.THREE += 1;
+    if (count.winning === 4) this.matchList.FOUR += 1;
     if (count.winning === 5) {
-      if (count.bonus === 1) this.quantityList.FIVE_BONUS += 1;
-      else this.quantityList.FIVE += 1;
+      if (count.bonus === 1) this.matchList.FIVE_BONUS += 1;
+      else this.matchList.FIVE += 1;
     }
-    if (count.winning === 6) this.quantityList.SIX += 1;
+    if (count.winning === 6) this.matchList.SIX += 1;
   }
 }
 

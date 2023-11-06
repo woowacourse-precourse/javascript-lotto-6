@@ -5,6 +5,9 @@ import LottoMaker from './LottoMaker.js';
 import Lotto from './Lotto.js';
 import Bonus from './Bonus.js';
 import Count from './Count.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
+import Result from './Result.js';
+import { OUTPUT } from './constants/messages.js';
 
 class Game {
   #quantity;
@@ -56,7 +59,17 @@ class Game {
 
   getReward() {
     const count = new Count(this.#lottos, this.winningNumbers, this.bonusNumber);
-    console.log(count);
+
+    this.setResult(count);
+  }
+
+  setResult(count) {
+    MissionUtils.Console.print(`${OUTPUT.LINE}${OUTPUT.RESULT_TITLE}`);
+
+    Object.values(count.matchList).forEach((match, index) => {
+      const result = new Result(match, count.matchMessageList[index], count.rewardList[index]);
+      count.totalReward += result.totalReward;
+    });
   }
 }
 
