@@ -4,14 +4,17 @@ import { validateBonusNumber } from './utils/validate.js';
 class WinningLotto extends Lotto {
   #bonusNumber;
 
-  constructor(numbers, bonusNumber) {
+  constructor(numbers) {
     super(numbers);
-    validateBonusNumber(bonusNumber, numbers);
-    this.#bonusNumber = bonusNumber;
+    this.#bonusNumber = null;
   }
 
   getBonusNumber() {
     return this.#bonusNumber;
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = bonusNumber;
   }
 }
 

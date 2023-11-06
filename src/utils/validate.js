@@ -67,11 +67,12 @@ function validatePurchaseAmount(amount) {
   validateUnit(amount);
 }
 
-function validateBonusNumber(number, winningNumbers) {
-  validateNumberType(number);
-  validateInteger(number);
-  validateLottoRange(number);
-  validateExistingNumber(number, winningNumbers);
+function validateBonusNumber(value, winningNumbers) {
+  validateNumberType(value);
+  const bonusNumber = Number(value);
+  validateInteger(bonusNumber);
+  validateLottoRange(bonusNumber);
+  validateExistingNumber(bonusNumber, winningNumbers);
 }
 
 export { validateBonusNumber, validatePurchaseAmount, validateLotto };

@@ -54,9 +54,12 @@ class LottoGame {
   async createWinningLotto() {
     try {
       const winningNumbers = await this.input.getWinningNumbers();
-      const bonusNumber = await this.input.getBonusNumber();
+      this.#winningLotto = new WinningLotto(winningNumbers);
 
-      this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+      const bonusNumber = await this.input.getBonusNumber(
+        this.#winningLotto.getNumbers(),
+      );
+      this.#winningLotto.setBonusNumber(bonusNumber);
     } catch (error) {
       Console.print(error.message);
       await this.createWinningLotto();
