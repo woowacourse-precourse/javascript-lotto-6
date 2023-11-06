@@ -2,13 +2,7 @@ const BUY_LOTTO = "구맥 금액을 입력해주세요.";
 
 const LOTTO_COUNT = (count) => `${count}개를 구매했습니다.`;
 
-const PRINT_PURCHASE_LOTTO = (lottoContainer) => {
-  let str = "";
-  lottoContainer.forEach((v) =>{
-    str += `[${v.get().join(", ")}]\n`
-  });
-  return str;
-};
+const PRINT_PURCHASE_LOTTO = (lotto) => `[${lotto.join(", ")}]\n`;
 
 const INPUT_WINNING_NUMBER = "당첨 번호를 입력해주세요";
 
