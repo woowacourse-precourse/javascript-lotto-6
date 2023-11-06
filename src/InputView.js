@@ -16,6 +16,10 @@ class InputView {
   printGetNumbers(numbers) {
     Console.print(numbers);
   }
+
+  printMessage(message) {
+    Console.print(message);
+  }
 }
 
 export default InputView;

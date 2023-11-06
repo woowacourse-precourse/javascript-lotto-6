@@ -1,6 +1,7 @@
 import InputView from './InputView.js';
 import Inputs from './Inputs.js';
 import Lotto from './Lotto.js';
+import { OUTPUT_MESSAGE } from './constants.js';
 
 class App {
   #inputs;
@@ -9,13 +10,15 @@ class App {
 
   #numLottoTickets;
 
+  #inputView;
+
   #winningNumbers;
 
   #lottoNumbers;
 
   constructor() {
     this.#inputs = new Inputs();
-    this.inputView = new InputView();
+    this.#inputView = new InputView();
     this.#purchaseAmount = 0;
     this.#numLottoTickets = 0;
   }
@@ -23,9 +26,10 @@ class App {
   async play() {
     this.#purchaseAmount = await this.#inputs.returnPurchaseAmount();
     this.#numLottoTickets = this.getNumberOfLottoTickets(this.#purchaseAmount);
-    this.inputView.printNumLottoTickets(this.#numLottoTickets);
+    this.#inputView.printNumLottoTickets(this.#numLottoTickets);
     this.generateLottoTickets();
     this.#winningNumbers = await this.#inputs.returnWinningNumbers();
+    this.#inputView.printMessage(OUTPUT_MESSAGE.statisticsMessage);
   }
 
   getNumberOfLottoTickets(purchaseAmount) {
@@ -35,7 +39,7 @@ class App {
   generateLottoTickets() {
     this.#lottoNumbers = Array.from({ length: this.#numLottoTickets }, () => {
       const lotto = new Lotto();
-      this.inputView.printGetNumbers(lotto.getNumbers());
+      this.#inputView.printGetNumbers(lotto.getNumbers());
       return lotto.getNumbers();
     });
   }
