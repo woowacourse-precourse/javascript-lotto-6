@@ -1,5 +1,5 @@
-import { LOTTO_LENGTH } from "./constant/Constant";
-import errorMessage from "./constant/ErrorMessage";
+import { LOTTO_LENGTH } from "../constant/Constant";
+import errorMessage from "../constant/ErrorMessage";
 
 class Lotto {
   #numbers;
