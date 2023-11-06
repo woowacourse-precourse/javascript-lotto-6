@@ -2,6 +2,11 @@ import CONSTANTS from './Constants.js';
 import ERROR_MESSAGES from './ErrorMessages.js';
 import errorHandle from './errorHandle.js';
 
+const checkNumberInRange = (number) =>
+  number > CONSTANTS.maximumNumber ||
+  number < CONSTANTS.minimumNumber ||
+  !Number.isSafeInteger(number);
+
 const Validator = {
   validatePurchaseAmount(purchaseAmount) {
     if (
@@ -15,14 +20,7 @@ const Validator = {
 
   validateLottoNumbers(lottoNumbersArray) {
     if (new Set(lottoNumbersArray).size !== 6) return false;
-    if (
-      lottoNumbersArray.some(
-        (lottoNumber) =>
-          lottoNumber > CONSTANTS.maximumNumber ||
-          lottoNumber < CONSTANTS.minimumNumber ||
-          !Number.isSafeInteger(lottoNumber),
-      )
-    ) {
+    if (lottoNumbersArray.some((lottoNumber) => checkNumberInRange(lottoNumber))) {
       return false;
     }
     return true;
