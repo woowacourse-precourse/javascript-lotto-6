@@ -2,7 +2,8 @@ import { Console } from '@woowacourse/mission-utils';
 
 export class InputValue {
 	async buyLotto() {
-		return await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+		const inputNumber = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+		return Number(inputNumber);
 	}
 
 	async winningNumber() {

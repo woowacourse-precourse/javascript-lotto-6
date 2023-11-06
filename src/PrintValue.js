@@ -1,5 +1,4 @@
 import { Console } from '@woowacourse/mission-utils';
-import LottoIssuance from './LottoIssuance.js';
 
 export class PrintValue {
 	winningResult(winningList, roi) {
