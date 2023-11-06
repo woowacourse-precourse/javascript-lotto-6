@@ -31,12 +31,14 @@ class OutPutView {
     Console.print(`${count}개를 구매했습니다.`);
   }
 
-  printLottoNumber(lotto) {
-    Console.print(`[${lotto.getNumbers().join(", ")}]`);
+  printLottoNumbers(lottoList) {
+    lottoList.forEach((lotto) =>
+      Console.print(`[${lotto.getNumbers().join(", ")}]`)
+    );
   }
 
   printNewLine() {
-    Console.print("\n");
+    Console.print("");
   }
 
   printLottoResultInfoMessage() {
