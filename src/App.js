@@ -5,10 +5,7 @@ class App {
   async play() {
     const lottoGame = new Controller();
     lottoGame.gameStart();
-    const input = new Input();
-    await input.userPurchase();
-    await input.userNumber();
-    await input.userBonusNumber();
+    lottoGame.userInput();
   }
 }
 
