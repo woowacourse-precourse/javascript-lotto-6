@@ -47,7 +47,7 @@ class App {
   async #generateWinningLotto() {
     try {
       const answer = await InputView.getWinningLotto();
-      return new Lotto(answer.split(',').map((lottoNum) => lottoNum));
+      return new Lotto(answer.split(','));
     } catch (error) {
       OutputView.printError(error.message);
       return this.#generateWinningLotto();

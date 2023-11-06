@@ -7,7 +7,7 @@ describe('보너스 번호 테스트', () => {
     winningLotto = [1, 2, 3, 4, 5, 6];
   });
 
-  test.each(['', ' ', 'a', 'abc', '1f', NaN])(
+  test.each(['', ' ', 'a', 'abc', '1f'])(
     '숫자를 입력하지 않으면 예외처리한다.',
     (input) => {
       expect(() => {

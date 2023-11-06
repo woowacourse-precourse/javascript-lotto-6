@@ -7,10 +7,11 @@ import ERROR_MESSAGE from '../constants/error.js';
 const InputValidator = {
   isNumber(input) {
     const isNumber = /^\d+$/;
+    const removeSpace = /\s/g;
     if (Array.isArray(input)) {
-      return input.every((num) => isNumber.test(num));
+      return input.every((num) => isNumber.test(num.replace(removeSpace, '')));
     }
-    return isNumber.test(input);
+    return isNumber.test(input.replace(removeSpace, ''));
   },
 
   isDuplicatedNumber(input) {
