@@ -21,4 +21,8 @@ export default class Lotto {
   getWinningNumbersMatchCount(winningNumbers) {
     return this.#numbers.filter((num) => winningNumbers.includes(num)).length;
   }
+
+  hasBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
 }

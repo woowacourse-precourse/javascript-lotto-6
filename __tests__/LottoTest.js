@@ -22,8 +22,7 @@ describe('로또 클래스 테스트', () => {
 
   describe('로또 일치하는 숫자', () => {
     const winningNumbers = [1, 2, 3, 4, 5, 6];
-
-    const cases = [
+    let cases = [
       { input: [7, 8, 9, 10, 11, 12], expected: 0 },
       { input: [1, 8, 9, 10, 11, 12], expected: 1 },
       { input: [1, 2, 9, 10, 11, 12], expected: 2 },
@@ -38,6 +37,33 @@ describe('로또 클래스 테스트', () => {
       ({ input, expected }) => {
         const lotto = new Lotto(input);
         expect(lotto.getWinningNumbersMatchCount(winningNumbers)).toBe(expected);
+      },
+    );
+
+    const bonusNumber = 10;
+
+    cases = [
+      [[7, 8, 9, 10, 11, 12]],
+      [[1, 8, 9, 10, 11, 12]],
+      [[1, 2, 9, 10, 11, 12]],
+      [[1, 2, 3, 10, 11, 12]],
+    ];
+
+    test.each(cases)(
+      '로또 보너스 번호가 $cases이고 로또 번호가 $bonusNumber이면, true를 반환한다.',
+      (input) => {
+        const lotto = new Lotto(input);
+        expect(lotto.hasBonusNumber(bonusNumber)).toBeTruthy();
+      },
+    );
+
+    cases = [[[1, 2, 3, 4, 11, 12]], [[1, 2, 3, 4, 5, 12]], [[1, 2, 3, 4, 5, 6]]];
+
+    test.each(cases)(
+      '로또 보너스 번호가 $cases이고 로또 번호가 $bonusNumber이면, false를 반환한다.',
+      (input) => {
+        const lotto = new Lotto(input);
+        expect(lotto.hasBonusNumber(bonusNumber)).toBeFalsy();
       },
     );
   });
