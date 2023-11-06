@@ -1,5 +1,4 @@
 import Bonus from '../src/model/Bonus.js';
-import Calculate from '../src/model/Calculate.js';
 import { ERROR } from '../src/util/constant.js';
 
 describe('보너스 클래스 테스트', () => {

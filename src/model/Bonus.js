@@ -23,7 +23,7 @@ class Bonus {
   }
 
   checkSameNumber() {
-    if (this.#lotto.includes(this.#bonus)) {
+    if (this.#lotto.includes(Number(this.#bonus))) {
       throw ERROR.sameNumber;
     }
   }
