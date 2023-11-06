@@ -5,11 +5,11 @@ class WinningLotto {
 
   constructor(input) {
     const numbers = input.split(',').map(Number);
-    this.checkValid(numbers);
+    this.#validate(numbers);
     this.#winningLotto = numbers;
   }
 
-  checkValid(numbers) {
+  #validate(numbers) {
     if (numbers.some((num) => isNaN(num) || num === 0)) {
       throw new Error(ERROR.invalidNumber);
     }

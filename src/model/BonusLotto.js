@@ -4,10 +4,10 @@ class BonusLotto {
   #bonus;
 
   constructor(input, winningLottos) {
-    this.checkValid(input, winningLottos);
+    this.#validate(input, winningLottos);
   }
 
-  checkValid(input, winningLottos) {
+  #validate(input, winningLottos) {
     const bonusNum = parseInt(input);
     
     if (isNaN(input)) {

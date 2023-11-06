@@ -7,11 +7,11 @@ class Lottos {
 
   constructor(input) {
     this.#lottos = [];
-    this.#validation(input);
+    this.#validate(input);
     this.createLottos(input);
   }
 
-  #validation(input) {
+  #validate(input) {
     const purchasePrice = parseInt(input);
     if (isNaN(input)) {
       throw new Error(ERROR.invalidNumber);
