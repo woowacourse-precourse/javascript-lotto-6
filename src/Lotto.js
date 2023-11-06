@@ -92,6 +92,9 @@ class Lotto {
   resultOfDraw(random, drew, bonus) {
     let result = this.matchCountCheck(random, drew);
     let isBonus = this.matchBonusCheck(random, bonus);
+    if (result < 3) {
+      throw new Error(ERROR.BAD_RESULT);
+    }
     if (result === 3) {
       return (this.rank = 5);
     }
@@ -107,7 +110,6 @@ class Lotto {
     if (result === 6) {
       return (this.rank = 1);
     }
-    return (this.rank = 0);
   }
 
   matchCountCheck = (random, drew) => {
