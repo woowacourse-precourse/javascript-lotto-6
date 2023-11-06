@@ -1,4 +1,4 @@
-import LottoResult from '../../Controller/modules/LottoResult.js';
+import LottoResult from '../../Controller/domain/LottoResult.js';
 
 describe('당첨 결과 확인 테스트.', () => {
   const winNumber = [1, 2, 3, 4, 5, 6];
