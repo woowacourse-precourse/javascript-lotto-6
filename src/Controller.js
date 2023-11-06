@@ -13,6 +13,8 @@ const Controller = {
     lottos.forEach((lotto, index) => {
       Console.print(`[${lotto.join(", ")}]`);
     });
+    Console.print("");
+    return lottos;
   },
 };
 

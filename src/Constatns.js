@@ -8,9 +8,9 @@ export const MIN_LOTTO_PRICE = 1000;
 export const GAME_MESSAGES = {
   ENTER_TICKET_MONEY: "구입금액을 입력해 주세요.\n",
   PURCHASE_TICKET_COUNT: "개를 구매했습니다.",
-  WIN_LOTTO: "당첨 번호를 입력해 주세요.",
-  BOUNS_LOTTO: "보너스 번호를 입력해 주세요.",
-  WINNING_STATISTICS: "당첨 통계",
+  WIN_LOTTO: "당첨 번호를 입력해 주세요.\n",
+  BOUNS_LOTTO: "보너스 번호를 입력해 주세요.\n",
+  WINNING_STATISTICS: "당첨 통계\n",
   NEW_LINE: "---",
   WINNING_RESULT: [
     "6개 일치 (2,000,000,000원)",
