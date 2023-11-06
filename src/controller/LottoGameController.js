@@ -6,8 +6,8 @@ import { inputBuyAmount, inputWinningLotto, printBuyLotto, printLottoArray } fro
 export default class LottoGameController {
   #buyLottoAmount;
   #buyLottoCnt;
-  #lottoArray = [];
-  #winningLotto;
+  #createdLottoNumbers = [];
+  #winningLottoNumbers;
 
   async play() {
     await this.buyAmount();
@@ -33,9 +33,9 @@ export default class LottoGameController {
     printBuyLotto(this.#buyLottoCnt);
 
     for (let i = 0; i < this.#buyLottoCnt; i++) {
-      this.#lottoArray.push(this.makeLotto());
+      this.#createdLottoNumbers.push(this.makeLotto());
     }
-    printLottoArray(this.#lottoArray);
+    printLottoArray(this.#createdLottoNumbers);
   }
 
   makeLotto() {
@@ -43,10 +43,8 @@ export default class LottoGameController {
     return lotto.getNumbers();
   }
 
-  // TODO: 로또 번호 입력받기
   async inputLotto() {
-    const a = await inputWinningLotto();
-    console.log('로또 번호: ', a);
+    this.#winningLottoNumbers = await inputWinningLotto();
   }
 
   getBuyLottoAmount() {
@@ -57,7 +55,7 @@ export default class LottoGameController {
     return this.#buyLottoCnt;
   }
 
-  getLottoArray() {
-    return this.#lottoArray;
+  getCreatedLottoNumbers() {
+    return this.#createdLottoNumbers;
   }
 }

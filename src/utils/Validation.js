@@ -1,5 +1,5 @@
-import { LOTTO_NUMBER_RANGE, LOTTO_PRICE } from '../constants/GameSetting.js';
 import { MESSAGE_ERROR } from '../constants/Message.js';
+import { LOTTO_NUMBER_RANGE, LOTTO_NUMBER_SIZE, LOTTO_PRICE } from '../constants/GameSetting.js';
 
 const isNumber = (input) => {
   const regExp = /^[0-9]+$/;
@@ -41,10 +41,17 @@ const isLottoDuplicate = (inputArray) => {
   }
 };
 
+const isLottoSize = (inputArray) => {
+  if (inputArray.length !== LOTTO_NUMBER_SIZE) {
+    throw new Error(MESSAGE_ERROR.lottoNumberSize);
+  }
+};
+
 export function isValidWinningLotto(input) {
   const inputArray = input.split(',');
 
   isNumberOrComma(input);
   isLottoRange(inputArray);
   isLottoDuplicate(inputArray);
+  isLottoSize(inputArray);
 }

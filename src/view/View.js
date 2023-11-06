@@ -17,7 +17,7 @@ export async function inputWinningLotto() {
   try {
     const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.winningLotto);
     isValidWinningLotto(inputValue);
-    return inputValue;
+    return inputValue.split(',').map((number) => Number(number));
   } catch (err) {
     Console.print(err);
     return inputWinningLotto();
