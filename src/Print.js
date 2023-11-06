@@ -8,7 +8,7 @@ const print = {
   } 
 }
 
-function printArray(array) {
+export function printArray(array) {
   printMessage(`[${array.join(', ')}]`);
 }
 

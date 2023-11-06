@@ -1,3 +1,5 @@
+import { printArray } from "./Print";
+
 class Lotto {
   #numbers;
 
@@ -23,6 +25,9 @@ class Lotto {
     const matchNumber = this.countMatchNumber(numbers) === 5;
     (matchNumber === 5) && (isBonusCorrect = this.checkIsBonusCorrect(bonusNumber));
     return [matchNumber, isBonusCorrect]
+  }
+  printOwnNumber() {
+    printArray(this.#numbers)
   }
 }
 
