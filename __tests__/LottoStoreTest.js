@@ -23,7 +23,7 @@ describe("LottoStoreTest", () => {
     });
   });
 
-  test("당첨 번호는 1~45사이 정수를 중복없이 입력하지 않으면 예외가 발생한다", async () => {
+  test("당첨 번호는 ,를 기준으로 나눈다", async () => {
     mockReadLineAsync.mockResolvedValue("1,2,3,4,5,6");
     const winningNums = await LottoStore.askWinningNum();
     expect(mockReadLineAsync).toHaveBeenCalledTimes(1);
@@ -40,4 +40,6 @@ describe("LottoStoreTest", () => {
     );
     expect(mockReadLineAsync).toHaveBeenCalledTimes(1);
   });
+
+  test("");
 });
