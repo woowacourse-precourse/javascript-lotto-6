@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import Lotto from '../model/Lotto.js';
-import { Place, calculateReward } from '../utils/Place.js';
+import { Place, calculateReward } from '../utils/Statistics.js';
 
 const { Random } = MissionUtils;
 class LottoController {
@@ -34,7 +34,7 @@ class LottoController {
     for (let i = 0; i < this.countsOfLottos; i += 1) {
       const lottoNumbers = this.pickRandomNumbers();
       const sortedlottoNumbers = lottoNumbers.sort((a, b) => a - b);
-      const lotto = new Lotto(sortedlottoNumbers);
+      const lotto = new Lotto([...sortedlottoNumbers]);
       this.lottoArray.push(lotto);
     }
   }

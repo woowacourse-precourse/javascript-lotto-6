@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { Place } from '../utils/Place.js';
+import { Place } from '../utils/Statistics.js';
 
 const { Console } = MissionUtils;
 

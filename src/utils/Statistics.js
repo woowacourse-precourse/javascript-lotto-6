@@ -1,4 +1,4 @@
-import REWARD from './Constants.js';
+import { REWARD } from './Constants.js';
 
 export const Place = {
   '1st': 0,
