@@ -38,10 +38,18 @@ class App {
     }
   }
 
+  async inputWinning() {
+    const input = await Console.readLineAsync(
+      "\n 당첨 번호를 입력해 주세요. \n"
+    );
+    const winning = input.split(",").map((elem) => +elem);
+    const lotto = new Lotto(winning);
+  }
+
   async play() {
     await this.inputPay();
     await this.makeLotto();
-    // const lotto = new Lotto()
+    await this.inputWinning();
   }
 }
 
