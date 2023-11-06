@@ -43,3 +43,24 @@ describe("당첨 번호 입력 테스트", () => {
     await expect(Input.readLottoNumbers()).rejects.toThrow("[ERROR]");
   });
 });
+
+// eslint-disable-next-line
+describe("보너스 번호 입력 테스트", () => {
+  let inputClass;
+  beforeEach(() => {
+    inputClass = new Input();
+    inputClass.lottoNumbers = [2, 11, 16, 25, 29, 41];
+  });
+  const PASS_CASES = ["1", "17", "45"];
+  test.each(PASS_CASES)("보너스 번호 입력 성공", async (input) => {
+    mockQuestions(input);
+    const answer = await inputClass.readBonusNumber();
+    expect(answer).toStrictEqual(input);
+  });
+
+  const FAIL_CASES = ["0", "q", "46", "", "16"];
+  test.each(FAIL_CASES)("보너스 번호 입력 실패", async (input) => {
+    mockQuestions(input);
+    await expect(inputClass.readBonusNumber()).rejects.toThrow("[ERROR]");
+  });
+});
