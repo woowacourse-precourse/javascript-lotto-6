@@ -14,8 +14,6 @@ export class Counter {
     this.counts = money/LOTTO_PRICE
     this.list = [];
     this.#publish(this.counts);
-    //model.lottoNumbers = this.list;
-    //console.log(this.list);
   }
 
   #inputMoneyValidater(money) {
