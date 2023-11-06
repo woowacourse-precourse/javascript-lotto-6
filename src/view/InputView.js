@@ -9,7 +9,7 @@ const { Console } = MissionUtils;
 class InputView {
   static async inputMoney() {
     const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    validateMoney(money);
+    validateMoney(parseInt(money, 10));
     return money;
   }
 
@@ -17,7 +17,7 @@ class InputView {
     const winningNumbers =
       await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     Console.print('\n');
-    validateWinningNumbers(winningNumbers);
+    validateWinningNumbers(parseInt(winningNumbers, 10));
     return winningNumbers.split(',');
   }
 
@@ -25,7 +25,7 @@ class InputView {
     const bonusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     Console.print('\n');
-    validateBonusNumber(bonusNumber);
+    validateBonusNumber(parseInt(bonusNumber, 10));
     return bonusNumber;
   }
 }
