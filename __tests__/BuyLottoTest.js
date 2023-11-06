@@ -1,67 +1,64 @@
-// import User from "../src/User.js";
-// import LottoManager from "../src/LottoManager.js";
-// import { Console } from "@woowacourse/mission-utils";
-// import { ERRORS } from "../src/libs/message.js";
+import User from "../src/User.js";
+import LottoManager from "../src/LottoManager.js";
+import { Console } from "@woowacourse/mission-utils";
 
-// const mockQuestions = (inputs) => {
-//   Console.readLineAsync = jest.fn();
+const mockQuestions = (inputs) => {
+  Console.readLineAsync = jest.fn();
 
-//   Console.readLineAsync.mockImplementation(() => {
-//     const input = inputs.shift();
+  Console.readLineAsync.mockImplementation(() => {
+    const input = inputs.shift();
 
-//     return Promise.resolve(input);
-//   });
-// };
+    return Promise.resolve(input);
+  });
+};
 
-// describe("구입 금액 입력 테스트", () => {
-//   test("공백 입력", async () => {
-//     // given
-//     mockQuestions([]);
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
 
-//     // when
-//     const user = new User();
+const runException = async (input) => {
+  // given
+  const logSpy = getLogSpy();
+  const INPUT_NUMBERS_TO_END = ["1000"];
 
-//     // then
-//     await expect(user.buyLotto()).rejects.toThrow(ERRORS.EMPTY_INPUT);
-//   });
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
 
-//   test("문자열 입력", async () => {
-//     // given
-//     mockQuestions(["hi"]);
+  // when
+  const user = new User();
+  await user.buyLotto();
 
-//     // when
-//     const user = new User();
+  // then
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+};
 
-//     // then
-//     await expect(user.buyLotto()).rejects.toThrow(ERRORS.NOT_NUMBER);
-//   });
+describe("구입 금액 입력 테스트", () => {
+  test("공백 입력", async () => {
+    await runException("");
+  });
 
-//   test("구입 금액이 1000원 단위가 아닌 경우", async () => {
-//     // given
-//     mockQuestions(["1500"]);
+  test("문자열 입력", async () => {
+    await runException("hi");
+  });
 
-//     // when
-//     const user = new User();
+  test("구입 금액이 1000원 단위가 아닌 경우", async () => {
+    await runException("1500");
+  });
 
-//     // then
-//     await expect(user.buyLotto()).rejects.toThrow(
-//       ERRORS.INVALID_PURCHASE_AMOUNT
-//     );
-//   });
+  test("로또 구입 개수 테스트", async () => {
+    // given
+    mockQuestions(["8000"]);
 
-//   test("로또 개수 테스트", async () => {
-//     // given
-//     mockQuestions(["8000"]);
+    // when
+    const user = new User();
+    const lottoManager = new LottoManager();
+    lottoManager.setUser(user);
 
-//     // when
-//     const user = new User();
-//     const lottoManager = new LottoManager();
-//     lottoManager.setUser(user);
+    await user.buyLotto();
+    lottoManager.calculateLottoCount();
 
-//     await user.buyLotto();
-//     lottoManager.calculateLottoCount();
-
-//     // then
-//     expect(lottoManager.lottoCount).toBe(8);
-//   });
-// });
+    // then
+    expect(lottoManager.lottoCount).toBe(8);
+  });
+});

@@ -47,6 +47,8 @@ class LuckyNumbers {
   }
 
   async setBonusNumber() {
+    if (!this.#winning) return;
+
     let input = null;
     while (input === null) {
       input = await this.#getBonusInput();

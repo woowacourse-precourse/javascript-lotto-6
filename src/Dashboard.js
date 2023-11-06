@@ -1,5 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
-
 class Dashboard {
   #winning;
   #bonus;
