@@ -23,6 +23,21 @@ class Lotto {
         const sortedNumbers = Lotto.sortNumbers(this.#numbers);
         MissionUtils.Console.print(`[${sortedNumbers.join(', ')}]`);
     }
+
+    winningNumbersCount(winningNumbers) {
+        let count = 0;
+
+        for (const number of this.#numbers) {
+            if (winningNumbers.includes(number)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+    bonusMatch(bonusNumber){
+        return this.#numbers.includes(bonusNumber);
+    }
 }
 
 export default Lotto;

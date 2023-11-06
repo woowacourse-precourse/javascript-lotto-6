@@ -12,8 +12,8 @@ class App {
 
         const winningNumbers = await this.inputWinningNumbers();
         const bonusNumber = await this.inputBonusNumber();
-        MissionUtils.Console.print(winningNumbers);
-        MissionUtils.Console.print(bonusNumber);
+        const results = this.calculateResults(lottos, winningNumbers, bonusNumber);
+        this.printResults(results);
 
     }
 
@@ -60,7 +60,8 @@ class App {
     async inputWinningNumbers() {
         //TODO : 당첨 번호를 입력 받는다.
         let userInput = await MissionUtils.Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
-        return userInput.split(',');
+        const winningNumbers = userInput.split(',').map(Number);
+        return winningNumbers;
     }
 
     async inputBonusNumber() {
@@ -75,11 +76,45 @@ class App {
         lottos.map(lotto => lotto.displayNumbers());
     }
 
-    async printResults() {
+    printResults(countResults) {
         //TODO : 당첨 내역을 출력한다.
+        MissionUtils.Console.print("\n당첨 통계\n---");
+        MissionUtils.Console.print("3개 일치 (5,000원) - " + countResults[3] + "개");
+        MissionUtils.Console.print("4개 일치 (50,000원) - " + countResults[4] + "개");
+        MissionUtils.Console.print("5개 일치 (1,500,000원) - " + countResults[5] + "개");
+        MissionUtils.Console.print("5개 일치, 보너스 볼 일치 (30,000,000원) - " + countResults[5.1] + "개");
+        MissionUtils.Console.print("6개 일치 (2,000,000,000원) - " + countResults[6] + "개");
+    }
+    calculateResults(lottos, winningNumbers, bonusNumber) {
+        const results = lottos.map(lotto => this.calculateSingleLottoResult(lotto, winningNumbers, bonusNumber));
+
+        return this.countResults(results);
     }
 
-    async printTotalEarningsRate() {
+    calculateSingleLottoResult(lotto, winningNumbers, bonusNumber) {
+        const matchCount = lotto.winningNumbersCount(winningNumbers);
+        const hasBonusMatch = lotto.bonusMatch(bonusNumber);
+
+        if (matchCount === 5 && hasBonusMatch) {
+            return 5.1;
+        } else if (matchCount >= 3) {
+            return matchCount;
+        } else {
+            return 0;
+        }
+    }
+
+    countResults(results) {
+        const countResults = { 3: 0, 4: 0, 5: 0, 5.1: 0, 6: 0 };
+
+        for (const result of results) {
+            countResults[result] += 1;
+        }
+
+        return countResults;
+    }
+
+    printTotalEarningsRate() {
         //TODO : 총 수익률을 출력한다.
     }
 
