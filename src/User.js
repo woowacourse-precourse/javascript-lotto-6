@@ -18,12 +18,7 @@ class User {
     return this.count;
   }
 
-  getMoney() {
-    return this.money;
-  }
-
   setUserMoney(money) {
-    this.#validation(money);
     this.money = money;
     this.count = money / TRY_COST;
     Console.print(MESSAGE.USER.buyLotto(this.count));
@@ -31,7 +26,9 @@ class User {
 
   static async readUserMoney() {
     try {
-      return Number(await Console.readLineAsync(MESSAGE.USER.setMoney));
+      const money = Number(await Console.readLineAsync(MESSAGE.USER.setMoney));
+      this.#validation(money);
+      return money;
     } catch (err) {
       Console.print(err.message);
       await User.readUserMoney();
