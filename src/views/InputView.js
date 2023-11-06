@@ -17,10 +17,15 @@ export default class InputView {
   }
 
   static async getWinningNumbers() {
-    const winningNumbers = await Console.readLineAsync("");
-    const numbersArray = winningNumbers.split(',').map(num => parseInt(num.trim()));
-    WinningNumbersValidator.validateWinningNumbers(numbersArray);
-    return numbersArray;
+    try {
+        const winningNumbers = await Console.readLineAsync("");
+        const numbersArray = winningNumbers.split(',').map(num => parseInt(num.trim()));
+        WinningNumbersValidator.validateWinningNumbers(numbersArray);
+        return numbersArray;
+    } catch (error) {
+        OutputView.printError(error);
+        return this.getWinningNumbers();
+    }
   }
 
   static async getBonusNumber(winningNumbers) {
