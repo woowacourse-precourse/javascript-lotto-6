@@ -12,7 +12,7 @@ describe('구입 금액 클래스 테스트', () => {
   test('구입 금액에 공백이 포함 된 경우 예외가 발생한다.', () => {
     expect(() => {
       new Money('1000 23');
-    }).toThrow(new MoneyError(ERROR_MESSAGES.not_a_number));
+    }).toThrow(new MoneyError(ERROR_MESSAGES.money_not_a_number));
   });
 
   test('입력 받은 금액이 숫자가 아닌 경우 예외가 발생한다.', () => {
