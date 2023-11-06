@@ -1,21 +1,37 @@
 import LottoMacine from '../src/LottoMachine';
+import lottoRandomNumberGenerator from '../src/util/lottoRandomNumberGenerator.js';
 
-describe('lottoMacine 클래스 테스트', () => {
-  test('금액에 맞게 로또 개수를 계산하는 테스트 -> 3000 입력시', () => {
+describe('lottoMachine.generateLotto 테스트', () => {
+  test.each([
+    ['3000', 3],
+    ['12000', 12],
+    ['5000', 5],
+    ['152000', 152],
+  ])('금액에 맞게 로또 개수를 계산하는 테스트', (input, expected) => {
+    //given
     const lottoMacine = new LottoMacine();
 
-    expect(lottoMacine.generateLotto('3000')).toHaveLength(3);
+    // when
+    const result = lottoMacine.generateLotto(input);
+
+    // then
+    expect(result).toHaveLength(expected);
   });
 
-  test('금액에 맞게 로또 개수를 계산하는 테스트 -> 12000 입력시', () => {
-    const lottoMacine = new LottoMacine();
+  test('randomNumber의 번호 개수, 최소값 및 최대값 테스트', () => {
+    // given
+    const MIN = 1;
+    const MAX = 45;
+    const COUNT = 6;
 
-    expect(lottoMacine.generateLotto('12000')).toHaveLength(12);
-  });
+    // when
+    const randomNumber = lottoRandomNumberGenerator.generate();
 
-  test('로또 개수와 번호가 올바르게 나오는지 테스트 2000 입력시', () => {
-    const lottoMacine = new LottoMacine();
-
-    expect(lottoMacine.generateLotto('2000')).toHaveLength(2);
+    // then
+    expect(randomNumber).toHaveLength(COUNT);
+    randomNumber.forEach(
+      (number) =>
+        expect(number).toBeGreaterThanOrEqual(MIN) && expect(number).toBeLessThanOrEqual(MAX)
+    );
   });
 });
