@@ -15,7 +15,7 @@ export const message = {
 const ERROR = "[ERROR]";
 
 export const error = {
-  NO_VALUE: `${ERROR} 입력된 값이 없습니다.`,
+  IS_EMPTY: `${ERROR} 입력된 값이 없습니다.`,
   NOT_NUMBER: `${ERROR} 숫자로 입력해주세요.`,
   NOT_DIVEDED_BY_1000: `${ERROR} 로또는 1000원 단위로 구매할 수 있습니다.`,
   NUMBER_IS_NOT_SIX: `${ERROR} 로또 번호는 6개여야 합니다.`,
@@ -28,4 +28,9 @@ export const lottoInfo = {
   START_INCLUSIVE: 1,
   END_INCLUSIVE: 45,
   COUNT: 6,
+};
+
+export const exceptionType = {
+  PURCHASE: "purchase",
+  LOTTO: "lotto",
 };

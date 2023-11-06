@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { message } from "../constants";
+import { exceptionType, message } from "../constants";
 
 const input = {
   enterPurchaseAmount: async function () {
@@ -23,10 +23,18 @@ const input = {
     return convertedNumber;
   },
 
-  validate: function (str) {
-    // 숫자가 아닌 문자를 입력함
-    const number = Number(str);
-    if (isNaN(number)) throw new Error(error.NATURAL_NUMBER_IN_RANGE);
+  validate: function (type, value) {
+    if (value === "") throw new Error(error.IS_EMPTY);
+
+    const number = Number(value);
+
+    switch (type) {
+      case exceptionType.PURCHASE:
+        if (isNaN(number)) throw new Error(error.NOT_NUMBER);
+      case exceptionType.LOTTO:
+        // 숫자가 아닌 문자를 입력함
+        if (isNaN(number)) throw new Error(error.NATURAL_NUMBER_IN_RANGE);
+    }
   },
 };
 
