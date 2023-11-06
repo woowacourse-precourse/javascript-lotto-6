@@ -18,5 +18,14 @@ export default class LottoGame {
         Console.print(error.message);
       }
     }
+
+    const lottos = [];
+    Array.from({ length: money.getMoney() / 1000 }, () => {
+      lottos.push(
+        new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)).getNumbers()
+      );
+    });
+    OutputView.printPurchseResults(money.getMoney() / 1000);
+    OutputView.printLottos(lottos);
   }
 }
