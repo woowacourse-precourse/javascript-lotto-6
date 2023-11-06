@@ -20,13 +20,13 @@ export const checkValue = {
     return { errorMessage: undefined };
   },
 
-  //로또번호
+  //로또, 당첨 번호
   numbers(numbers, name) {
     if (!isNumberType(numbers))
       return { errorMessage: createErrorMessage.type(name) };
     if (
       numbers.length !== LOTTO.NUMBERS_COUNT ||
-      [...new Set(number)].length !== LOTTO.NUMBERS_COUNT
+      [...new Set(numbers)].length !== LOTTO.NUMBERS_COUNT
     )
       return { errorMessage: createErrorMessage.length(name) };
     if (!isCorrectRange)
