@@ -2,13 +2,13 @@ import CustomError from './CustomError.js';
 import ERROR from './constants/Error.js';
 
 const {
-  COMMON_NOT_INPUT,
-  COMMON_NOT_WHITESPACE,
-  PAYMENT_NOT_THOUSAND,
-  PAYMENT_NOT_NUMBER,
-  WINNING_NOT_RANGE,
-  WINNING_NOT_NUMBER,
-  WINNING_NOT_LENGTH,
+  COMMON_INPUT,
+  COMMON_WHITESPACE,
+  PAYMENT_THOUSAND,
+  PAYMENT_NUMBER,
+  WINNING_RANGE,
+  WINNING_NUMBER,
+  WINNING_LENGTH,
 } = ERROR;
 
 function throwError(message, condition) {
@@ -18,7 +18,7 @@ function throwError(message, condition) {
   throw new CustomError(message);
 }
 
-const Validator = {
+const conditions = {
   isNotEmpty(value) {
     return value !== '';
   },
@@ -36,28 +36,39 @@ const Validator = {
     return value >= 1 && value <= 45;
   },
   isCorrectLength(arr) {
+    return arr.length === 6;
+  },
+  isDuplicate(arr) {
     return new Set(arr).size === 6;
   },
+};
 
+const Validator = {
   validateCommonInput(value) {
-    const conditions = [
-      { message: COMMON_NOT_INPUT, condition: this.isNotEmpty(value) },
+    const inputConditions = [
+      { message: COMMON_INPUT, condition: conditions.isNotEmpty(value) },
       {
-        message: COMMON_NOT_WHITESPACE,
-        condition: this.hasNoWhitespace(value),
+        message: COMMON_WHITESPACE,
+        condition: conditions.hasNoWhitespace(value),
       },
     ];
-    conditions.forEach(({ message, condition }) => {
+    inputConditions.forEach(({ message, condition }) => {
       throwError(message, condition);
     });
   },
 
   validatePurchaseAmount(value) {
-    const conditions = [
-      { message: PAYMENT_NOT_NUMBER, condition: this.isPositiveInteger(value) },
-      { message: PAYMENT_NOT_THOUSAND, condition: this.isThousandUnits(value) },
+    const inputConditions = [
+      {
+        message: PAYMENT_NUMBER,
+        condition: conditions.isPositiveInteger(value),
+      },
+      {
+        message: PAYMENT_THOUSAND,
+        condition: conditions.isThousandUnits(value),
+      },
     ];
-    conditions.forEach(({ message, condition }) => {
+    inputConditions.forEach(({ message, condition }) => {
       throwError(message, condition);
     });
   },
@@ -65,12 +76,12 @@ const Validator = {
   validateWinningNumber(value) {
     const winningNumberArray = value.split(',');
 
-    throwError(WINNING_NOT_LENGTH, this.isCorrectLength(winningNumberArray));
+    throwError(WINNING_LENGTH, conditions.isCorrectLength(winningNumberArray));
     winningNumberArray.forEach((number) => {
-      throwError(WINNING_NOT_NUMBER, this.isPositiveInteger(number));
-      throwError(WINNING_NOT_RANGE, this.isInRange(number));
+      throwError(WINNING_NUMBER, conditions.isPositiveInteger(number));
+      throwError(WINNING_RANGE, conditions.isInRange(number));
     });
   },
 };
 
-export { throwError, Validator };
+export { throwError, conditions, Validator };
