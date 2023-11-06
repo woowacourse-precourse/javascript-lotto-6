@@ -30,4 +30,5 @@ export const OTHERS = Object.freeze({
   emptyString: '',
   comma: ',',
   commaWithSpace: ', ',
+  lineBreak: '\n',
 });

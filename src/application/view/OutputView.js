@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT_MESSAGE } from '../../utils/constants.js';
+import { OUTPUT_MESSAGE, OTHERS } from '../../utils/constants.js';
 
 class OutputView {
   showLottoNumberListOutput(ticketNumber, lottoNumberListmessage) {
-    Console.print(`${ticketNumber}${OUTPUT_MESSAGE.lottoTicketNumber}`);
+    Console.print(`${OTHERS.lineBreak}${ticketNumber}${OUTPUT_MESSAGE.lottoTicketNumber}`);
     Console.print(lottoNumberListmessage);
   }
 }

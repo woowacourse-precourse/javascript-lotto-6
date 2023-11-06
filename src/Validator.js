@@ -6,7 +6,7 @@ class Validator {
       throw new Error(ERROR_MESSAGE.isNotNumber);
     }
 
-    if (userInputPurcaseMoney < 0) {
+    if (userInputPurcaseMoney <= 0) {
       throw new Error(ERROR_MESSAGE.negativeNumber);
     }
 
@@ -46,7 +46,7 @@ class Validator {
       throw new Error(ERROR_MESSAGE.isNotAnumber);
     }
 
-    if (userInputBonusNumber < 0 || userInputBonusNumber > 45) {
+    if (userInputBonusNumber <= 0 || userInputBonusNumber > 45) {
       throw new Error(ERROR_MESSAGE.isNotInRange);
     }
 
