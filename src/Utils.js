@@ -24,8 +24,7 @@ class Utils {
   }
 
   static calculateLottoCount(lottoCost) {
-    const lottoCostToNumber = Number(lottoCost);
-    return lottoCostToNumber / LOTTO.price;
+    return lottoCost / LOTTO.price;
   }
 }
 
