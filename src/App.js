@@ -1,13 +1,33 @@
 /* eslint-disable default-case */
 import Lotto from './Lotto.js';
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 
 class App {
 
 
   async play() {
-    inputAmount();
+    const count = await inputAmount() / 1000;
+    publishLotto(count);
+    console.log(PublishedLottoes.numbers);
   
+  }
+}
+
+const PublishedLottoes = {
+  numbers : [],
+  rank : {
+    first : 0,
+    second : 0,
+    third : 0,
+    fourth : 0,
+    fifth : 0
+  },
+  GAIN : {
+    FIRST : 2e9,
+    SECOND : 3e7,
+    THIRD : 15e5,
+    FOURTH : 5e4,
+    FIFTH : 5e3
   }
 }
 
@@ -21,6 +41,14 @@ const inputAmount = async() => {
     return inputAmount();
   }
   return input;
+}
+
+const publishLotto = (count) => {
+  for (let i = 0; i < count; i += 1) {
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    numbers.sort((a, b) => a - b);
+    PublishedLottoes.numbers.push(numbers);
+  }
 }
 
 const app = new App();
