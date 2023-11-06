@@ -13,6 +13,7 @@ class App {
     const bonusNumber = await this.getBonusNumber(winningNumbers);
 
     const results = this.getMatches(tickets, winningNumbers, bonusNumber);
+    const profit = this.calculateProfit(purchaseAmount, results);
   }
   
   async getPurchaseAmount() {
@@ -112,6 +113,26 @@ class App {
     return key;
   }
 
+  calculateProfit(purchaseAmount, matches) {
+    let totalPrice = 0;
+    let keys = Object.keys(matches);
+    keys = keys.filter((key) => matches[key] !== 0);
+    for (let i = 0; i < keys.length; i += 1) {
+      const price = this.getEarnings(keys[i]) * matches[keys[i]];
+      totalPrice += price;
+    }
+    
+    const percentageProfit = (totalPrice / purchaseAmount) * 100;
+    return percentageProfit.toFixed(1);
+  }
+
+  getEarnings(key) {
+    if (key === 'three') return 5000;
+    if (key === 'four') return 50000;
+    if (key === 'five') return 1500000;
+    if (key === 'fivePlusBonus') return 30000000;
+    if (key === 'six') return 2000000000;
+  }
 }
 
 export default App;
