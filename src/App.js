@@ -23,8 +23,6 @@ class App {
     const rankCount = this.getRankCount(winningNumbers, bonusNumber, lottoList);
     const rateOfReturn = this.calculateRateOfReturn(payment, rankCount);
 
-
-
     this.showResult(rankCount, rateOfReturn);
   }
 
@@ -62,7 +60,9 @@ class App {
 
   printPickedLotto(lottoCount, lottoList = []) {
     Console.print(`\n${lottoCount}개를 구매했습니다.`);
-    lottoList.forEach((lotto) => Console.print(`[${lotto.getNumber()?.join(", ")}]`));
+    lottoList.forEach((lotto) =>
+        Console.print(`[${lotto.getNumber()?.join(", ")}]`)
+    );
   }
 
   async getWinningNumber() {
