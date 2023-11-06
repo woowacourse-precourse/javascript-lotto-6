@@ -1,10 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 
 class Store {
   #money;
+  #lottoList;
 
   constructor() {
     this.#money = 0;
+    this.#lottoList = [];
   }
 
   static async inputMoney() {
@@ -31,6 +34,11 @@ class Store {
         Console.print(error);
       }
     }
+  }
+
+  #calculateLottoAmount() {
+    const lottoAmount = this.#money % 1000;
+    return lottoAmount;
   }
 }
 
