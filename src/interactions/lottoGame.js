@@ -1,9 +1,11 @@
 import { Random } from '@woowacourse/mission-utils';
 
-import lottoPurchase from '../domain/lottoPurchase/lottoPurchase.module.js';
-import winningInfo from '../domain/confirmWinningInfo/winningInfo/winningInfo.module.js';
-import lottoNumberMatching from '../domain/confirmWinningInfo/lottoNumberMatching/lottoNumberMatching.module.js';
-import rateOfReturnCalculation from '../domain/confirmWinningInfo/rateOfReturnCalculation/rateOfReturnCalculation.module.js';
+import {
+  lottoPurchase,
+  winningInfo,
+  lottoNumberMatching,
+  rateOfReturnCalculation,
+} from '../domain/index.js';
 
 import lottoGameConsole from '../cli/lottoGameConsole/lottoGameConsole.module.js';
 

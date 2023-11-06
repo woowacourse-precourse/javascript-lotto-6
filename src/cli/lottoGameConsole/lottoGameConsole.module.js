@@ -1,9 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 
-// TODO: 추후에 하나로 묶기
-import { validatePurchasedLottoAmount } from '../../validations/purchasedLottoAmountValidation/purchasedLottoAmountValidation.module.js';
-import { validateLottoNumber } from '../../validations/lottoNumberValidation/lottoNumberValidation.module.js';
-import { validateBonusNumber } from '../../validations/bonusNumberValidation/bonusNumberValidation.module.js';
+import {
+  validatePurchasedLottoAmount,
+  validateLottoNumber,
+  validateBonusNumber,
+} from '../../validations/index.js';
 
 import { SYMBOLS } from '../../constants/symbols.js';
 
