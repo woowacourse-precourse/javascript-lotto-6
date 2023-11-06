@@ -2,21 +2,21 @@ import { Console } from '@woowacourse/mission-utils';
 
 class View {
   async getPurchaseMoney() {
-    const purchaseMoney = await Console.readLinsAsync(
+    const purchaseMoney = await Console.readLineAsync(
       '구입금액을 입력해 주세요.\n'
     );
     return purchaseMoney;
   }
 
-  async getWinNumber() {
-    const winNumber = await Console.readLinsAsync(
+  async getLottoNumber() {
+    const winNumber = await Console.readLineAsync(
       '당첨 번호를 입력해 주세요.\n'
     );
-    return winNumber;
+    return winNumber.split(',').map((number) => Number(number));
   }
 
   async getBonusNumber() {
-    const bonusNumber = await Console.readLinsAsync(
+    const bonusNumber = await Console.readLineAsync(
       '보너스 번호를 입력해 주세요.\n'
     );
     return bonusNumber;
@@ -26,8 +26,8 @@ class View {
     Console.print(`${amount}개를 구매했습니다.\n`);
   }
 
-  printLottoNumbers(numbers) {
-    numbers.forEach((number) => Console.print(`${number}\n`));
+  printPurchasedNumbers(numbers) {
+    numbers.forEach((number) => Console.print(`[${number.join(', ')}]`));
   }
 
   printWinResult(profit, resultBoard) {
@@ -39,6 +39,10 @@ class View {
     5개 일치, 보너스 볼 일치 (30,000,000원) - ${resultBoard.fiveBonus}개
     6개 일치 (2,000,000,000원) - ${resultBoard.six}개\n`);
     Console.print(`총 수익률은 ${profit}%입니다.`);
+  }
+
+  printNewLine() {
+    Console.print('');
   }
 }
 
