@@ -25,11 +25,11 @@ class IsResult {
 
   winningResult() {
     const result = {
-      1: {match: CORRECT_MESSAGE.FIRST, price: GAME_PRIZE[1], count: 0},
-      2: {match: CORRECT_MESSAGE.SECOND, price: GAME_PRIZE[2], count: 0},
+      1: {match: CORRECT_MESSAGE.FIFTH, price: GAME_PRIZE[5], count: 0},
+      2: {match: CORRECT_MESSAGE.FOURTH, price: GAME_PRIZE[4], count: 0},
       3: {match: CORRECT_MESSAGE.THIRD, price: GAME_PRIZE[3], count: 0},
-      4: {match: CORRECT_MESSAGE.FOURTH, price: GAME_PRIZE[4], count: 0},
-      5: {match: CORRECT_MESSAGE.FIFTH, price: GAME_PRIZE[5], count: 0},
+      4: {match: CORRECT_MESSAGE.SECOND, price: GAME_PRIZE[2], count: 0},
+      5: {match: CORRECT_MESSAGE.FIRST, price: GAME_PRIZE[1], count: 0},
     }
     this.prizeProcess(result)
   }
@@ -40,10 +40,10 @@ class IsResult {
       userLotto.forEach((lotto) => {
         if(this.winningNumber.includes(lotto)) count++;
       })
-      if(count == 3) result[5].count++;
-      if(count == 4) result[4].count++;
-      if(count == 5) userLotto.includes(this.bonusNumber) ? result[2].count++ : result[3].count++;
-      if(count == 6) result[1].count++;
+      if(count == 3) result[1].count++;
+      if(count == 4) result[2].count++;
+      if(count == 5) userLotto.includes(this.bonusNumber) ? result[4].count++ : result[3].count++;
+      if(count == 6) result[5].count++;
       count = 0;
     })
     this.prizeCalculate(result)
@@ -51,7 +51,7 @@ class IsResult {
 
   prizeCalculate(result) {
     let prize = 0;
-    for(let i = 1; i < 6; i++) prize += GAME_PRIZE[i] * result[i].count
+    for(let i = 1; i < 6; i++) prize += GAME_PRIZE[i] * result[6 - i].count
     this.resultView(result, prize);
   }
 }
