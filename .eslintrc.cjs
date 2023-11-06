@@ -35,6 +35,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'no-empty-function': 'off',
     'jsdoc/no-undefined-types': 'off',
+    'jest/expect-expect': 'off',
 
     // 우테코 요구사항
     'max-depth': ['error', 2],
