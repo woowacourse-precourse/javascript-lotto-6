@@ -1,4 +1,5 @@
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
+/* eslint-disable class-methods-use-this */
+import { Console } from '@woowacourse/mission-utils';
 
 class CalculationOfResult {
   run(numOfBuy, arrayofLotto, winningNum, bonusNum) {
@@ -16,14 +17,8 @@ class CalculationOfResult {
       const ranks = matchArray.length;
       const bonusMatch = myLotto.includes(bonusNum);
       if (ranks === 6) countOfWinning[0] += 1; // 1st
-      if (ranks === 5 && bonusMatch) {
-        // 2nd
-        countOfWinning[1] += 1;
-      }
-      if (ranks === 5 && !bonusMatch) {
-        // 3rd
-        countOfWinning[2] += 1;
-      }
+      if (ranks === 5 && bonusMatch) countOfWinning[1] += 1; // 2nd
+      if (ranks === 5 && !bonusMatch) countOfWinning[2] += 1; // 3rd
       if (ranks === 4) countOfWinning[3] += 1; // 4th
       if (ranks === 3) countOfWinning[4] += 1; // 5th
     });
@@ -57,7 +52,6 @@ class CalculationOfResult {
   }
 
   #printOfResult(countOfWinning, yeild) {
-    // Console.print('\n');
     Console.print(`당첨 통계
 ---
 3개 일치 (5,000원) - ${countOfWinning[4]}개
@@ -70,6 +64,3 @@ class CalculationOfResult {
 }
 
 export default CalculationOfResult;
-
-// const run = new CalculationOfResult();
-// run.run();

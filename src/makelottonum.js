@@ -1,13 +1,7 @@
+/* eslint-disable class-methods-use-this */
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
-// import NumOfBuy from './numofbuy.js';
 
 class MakeLottoNum {
-  // #numOfBuy;
-
-  // constructor() {
-  //  this.#numOfBuy = new NumOfBuy();
-  // }
-
   // 랜덤 로또 번호 생성 함수 (반복되어야 함)
   #makeLottoNum() {
     const myLottoNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -32,6 +26,3 @@ class MakeLottoNum {
 }
 
 export default MakeLottoNum;
-
-// const run = new MakeLottoNum();
-// run.makeArrayOfLottoNum();
