@@ -30,6 +30,7 @@ class LottoController {
     );
     this.outputView.printLottoResult(lottoTicketResult);
     const returnRate = this.setReturnRate(this.#lottoCount, lottoTicketResult);
+    this.outputView.printReturnRate(returnRate);
   }
 
   async setLottoCount() {
