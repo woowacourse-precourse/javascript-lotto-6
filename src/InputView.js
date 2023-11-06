@@ -1,6 +1,7 @@
 import {
   Console,
   ERROR_LOTTO_RANGE,
+  ERROR_LOTTO_TYPE,
   ERROR_PURCHASE_AMOUNT_PRICE,
   ERROR_PURCHASE_AMOUNT_STRING,
   ERROR_PURCHASE_AMOUNT_UNIT,
@@ -58,14 +59,13 @@ const InputView = {
   },
 
   async readBonusNumbers() {
-    while (true) {
-      try {
-        const answer = await Console.readLineAsync(PLZ_BONUS_NUMBER);
-        this.rangeCheckValidator(answer);
-        return answer;
-      } catch (error) {
-        Console.print(error.message);
-      }
+    try {
+      const answer = await Console.readLineAsync(PLZ_BONUS_NUMBER);
+      this.typeCheckValidator(answer);
+      this.rangeCheckValidator(answer);
+      return answer;
+    } catch (error) {
+      Console.print(error.message);
     }
   },
 
@@ -73,6 +73,13 @@ const InputView = {
     const answerNumber = Number(answer);
     if (answerNumber < 1 || answerNumber > 45) {
       throw new Error(ERROR_LOTTO_RANGE);
+    }
+  },
+
+  typeCheckValidator(answer) {
+    const answerNumber = Number(answer);
+    if (isNaN(answerNumber)) {
+      throw new Error(ERROR_LOTTO_TYPE);
     }
   },
 };

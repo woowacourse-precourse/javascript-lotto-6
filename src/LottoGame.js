@@ -1,4 +1,4 @@
-import { PRICE_UNIT, Random, ERROR_LOTTO_TYPE } from './Constant';
+import { PRICE_UNIT, Random, ERROR_LOTTO_TYPE, ERROR_LOTTO_REPEAT } from './Constant';
 import InputView from './InputView';
 import Lotto from './Lotto';
 import OutputView from './OutputView';
@@ -23,6 +23,10 @@ class LottoGame {
     });
     this.#winningLotto = new Lotto(await InputView.readWinningNumbers());
     this.#bonusNumber = await InputView.readBonusNumbers();
+
+    if (this.#winningLotto.numbers.includes(this.#bonusNumber)) {
+      throw new Error(ERROR_LOTTO_REPEAT);
+    }
   }
 
   getRandomNumbers() {
