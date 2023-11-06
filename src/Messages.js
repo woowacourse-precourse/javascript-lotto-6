@@ -10,6 +10,8 @@ const Messages = {
     '[ERROR] 구입금액은 1000원 단위로 입력해 주세요.',
   ERROR_WINNING_NUMBER_NOT_ENOUGH: '[ERROR] 로또 번호는 6개여야 합니다.',
   ERROR_NUMBER_OUT_OF_RANGE: '[ERROR] 1~45 사이의 번호를 입력해 주세요.',
+  ERROR_BONUS_NUMBER_DUPLICATED:
+    '[ERROR] 당첨 번호에 없는 숫자를 입력해 주세요.',
 };
 
 export default Messages;
