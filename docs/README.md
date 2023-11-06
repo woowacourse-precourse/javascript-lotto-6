@@ -41,7 +41,7 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 3. 사용자(User)가 보너스번호(BonusLotto)를 입력한다.
 4. 사용자는 로또서버(Server)에서 반환받은 로또 결과(LottoResult)를 로또포스기(LottoPos)에서 볼 수 있다.
 
-**Domain** => `사용자(User)`, `로또(Lotto)`, `당첨번호(winningLotto)`, `보너스번호(Bonuslotto)`, `로또 결과(LottoResult)` <br>
+**Domain** => `사용자(User)`, `로또(Lotto)`, `당첨번호(winningLotto)`, `보너스번호(Bonuslotto)`, `로또서버(Server)`, `로또 결과(LottoResult)` <br>
 **UI** => `로또포스기(LottoPos)` (제외한다.)
 
 ### 사용자(User) 테스트
@@ -71,8 +71,15 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 - [x] : 로또가 모두 숫자가 아니면 에러가 발생해야 한다.
 - [x] : 로또의 길이는 6이아니면 에러가 발생해야 한다.
 - [x] : 로또번호는 유니크해야 한다.
+<br>
 
-
+### 보너스번호(BonusLotto) 테스트
+- [x] : BonusLottoController에서 보너스번호(BonusLotto) 객체를 생성한다.
+- [x] : 정상적인 값을 입력했을 때에는 DB에 보너스번호(BonusLotto)가 저장되어야 한다.
+- [x] : 보너스번호(BonusLotto)가 당첨번호(winningLotto) 안에 있는 로또 번호일 시 에러가 발생해야 한다.
+- [x] : 보너스번호(BonusLotto)는 1이상 45이하여야 한다.
+- [x] : 보너스번호(BonusLotto)가 문자면 에러가 발생한다.
+- [x] : 보너스번호(BonusLotto)가 공백이면 에러가 발생한다.
 
 # 📘 요구사항 정리
 

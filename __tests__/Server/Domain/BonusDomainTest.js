@@ -76,7 +76,7 @@ describe('BonusController 테스트', () => {
       });
     });
 
-    test(`보너스 번호가 공백`, () => {
+    test(`보너스 번호가 공백이면 에러 발생`, () => {
       // given
       const testCases = [''];
 
