@@ -7,17 +7,10 @@ class LottoGame {
   #purchaseNumber;
   #purchaseAmount;
   constructor(purchaseAmount) {
-    this.#validate(purchaseAmount);
     this.#lottos = [];
     this.#purchaseAmount = purchaseAmount;
     this.#purchaseNumber = purchaseAmount / 1000;
     this.#issueLotto();
-  }
-
-  #validate(purchaseAmount) {
-    if (purchaseAmount % 1000 !== 0) {
-      throw new Error("[ERROR]");
-    }
   }
 
   #issueLotto() {
