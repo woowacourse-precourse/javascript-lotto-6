@@ -1,4 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 
 class App {
   async play() {
@@ -18,7 +18,18 @@ class App {
       throw new Exception('[ERROR] 구입금액은 1,000원 단위여야 합니다.');
     }
 
-    const purchaseAmount = parseInt(purchaseAmountInput, 10);
+    const numberOfLottoPurchased = parseInt(purchaseAmountInput) / 1000;
+    Console.print(`\n${numberOfLottoPurchased}개를 구매했습니다.`);
+
+    const userLottoNumbers = [];
+    for (let i = 0; i < numberOfLottoPurchased; i++) {
+      const eachLottoTicket = Random.pickUniqueNumbersInRange(1, 45, 6);
+      userLottoNumbers.push(eachLottoTicket.sort((a, b) => a - b));
+    }
+
+    for (let i = 0; i < numberOfLottoPurchased; i++) {
+      Console.print(userLottoNumbers[i]);
+    }
   }
 }
 
