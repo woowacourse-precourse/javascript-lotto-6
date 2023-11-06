@@ -1,14 +1,22 @@
-const ValidateLottoNumSet = (lottoNumSet) => {
-  const firstLottoNumSet = lottoNumSet[0];
-  const isAllEqual = (numSet1, numSet2) => numSet1.every((num) => numSet2.includes(num));
+import { Random } from "@woowacourse/mission-utils";
 
-  lottoNumSet.forEach((anotherLottoNumSet, index) => {
-    if(index === 0)
-      return;
-    if(isAllEqual(firstLottoNumSet, anotherLottoNumSet))
-      return false;
-      // anotherLottoNumSet 다시 생성
+const ValidateLottoNumSet = (lottoNumSets) => {
+  const firstLottoNumSet = lottoNumSets[0];
+  const isAllEqual = (numSet1, numSet2) => numSet1.every((num) => numSet2.includes(num));
+  const uniqueLottoNumSets = [firstLottoNumSet];
+
+  lottoNumSets.slice(1).forEach(anotherLottoNumSet => {
+    if(isAllEqual(firstLottoNumSet, anotherLottoNumSet)) {
+      let newLottoNumSet = [];
+      do {
+        newLottoNumSet = Random.pickUniqueNumbersInRange(1, 45, 6);
+      } while(lottoNumSets.some(numSet => isAllEqual(numSet, newLottoNumSet)));
+      uniqueLottoNumSets.push(newLottoNumSet);
+    }
+    uniqueLottoNumSets.push(anotherLottoNumSet);
   });
+  
+  return uniqueLottoNumSets;
 };
 
 export default ValidateLottoNumSet;
