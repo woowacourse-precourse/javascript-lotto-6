@@ -3,7 +3,7 @@ class Profit {
   constructor() {}
 
   profitRateAcc(profit, cost) {
-    const profitRate = (profit / cost) * 100;
+    const profitRate = parseFloat(((profit / cost) * 100).toFixed(2));
     return profitRate;
   }
 
