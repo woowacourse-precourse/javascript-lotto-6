@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from "../constant/ERROR_MESSAGE";
-import { NUMBERS } from "../constant/NUMBERS";
+import { NUMBERS } from "../constant/LOTTO_SETTINGS";
 
 class Lotto {
   #numbers;
@@ -32,7 +32,17 @@ class Lotto {
     );
 
     if (!isSatisfyRange) {
-      throw new Error("[ERROR] 범위에러")
+      throw new Error("[ERROR] 범위에러") // 나중에 에러 메시지로 빼기
+    }
+  }
+
+  #validateNumber(numbers) {
+    const number = /^[0-9]+$/;
+
+    for (let number of numbers){
+        if (!check.test(number)) {
+          throw new Error("[ERROR] 양수만 입력하세요") // // 나중에 에러 메시지로 빼기
+      }
     }
   }
 

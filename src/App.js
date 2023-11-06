@@ -2,7 +2,7 @@ import { print } from "./view/print";
 import { readLineAsync } from "./view/readLineAsync";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./constant/MESSAGE";
-import { NUMBERS } from "./constant/NUMBERS";
+import { NUMBERS } from "./constant/LOTTO_SETTINGS";
 import Lotto from "./model/Lotto";
 
 const { Random } = MissionUtils;
@@ -26,6 +26,7 @@ const printProgressNumber = async (progressNumber) => {
 }
 
 
+// Lotto class
 // ----------- 로또 발행
 const totalLotto = []; // 전체 로또 번호 보관
 // 발행한 로또 수량 및 번호를 출력한다.
@@ -45,6 +46,10 @@ const printLotto = (totalLotto) => {
   print(lotto);
 }
 
+// Answer class
+// ----- 당첨 번호 입력 기능
+// 보너스 번호 입력 받기
+
 class App {
 
   async play() {
@@ -53,7 +58,9 @@ class App {
     for (let i=0; i < progressNumber; i++) {
       await drawLottoNumber();
     }
-    printLotto(totalLotto)
+    printLotto(totalLotto); // 발행한 로또 출력
+
+    const myInput = await inputAnswer();
   }
 
 }

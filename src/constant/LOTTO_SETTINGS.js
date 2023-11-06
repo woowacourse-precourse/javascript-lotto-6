@@ -1,4 +1,4 @@
-export const NUMBERS = Object.freeze({
+export const LOTTO_SETTINGS = Object.freeze({
 	LOTTO_MIN_NUMBER: 1,
 	LOTTO_MAX_NUMBER: 45,
 	LOTTO_LENGTH: 6,
