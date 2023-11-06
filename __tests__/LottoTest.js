@@ -60,7 +60,8 @@ describe('로또 클래스 테스트', () => {
 
 describe('로또 계산 테스트', () => {
   test('로또 수량 계산', () => {
-    const mock = jest.fn(money => Calculate.countLottoAmounnt(money));
+    const calculate = new Calculate();
+    const mock = jest.fn(money => calculate.countLottoAmounnt(money));
     const moneyInput = ['1000', '5000', '9000'];
     const amount = [1, 5, 9];
 
