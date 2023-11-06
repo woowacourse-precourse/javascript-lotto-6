@@ -25,6 +25,7 @@ class RunApp {
     await this.getLotto();
     await this.getBonusNumber();
     printWinningStatic(
+      this.price,
       calculateWinningLottosCount(this.purchase, this.numbers, this.bonus)
     );
   }
