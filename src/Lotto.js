@@ -10,6 +10,18 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    
+    if(numbers.every(el => isNaN(el)) !== undefined){
+      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+    }
+
+    if (numbers.length > new Set(numbers).size) {
+      throw new Error("[ERROR] 로또 번호는 중복이 아닌 6개여야 합니다.");
+    }
+
+    if(numbers.every(el => el>45 || el<1) !== undefined){
+      throw new Error("[ERROR] 로또 번호는 1~45범위여야 합니다.");
+    }
   }
 
   // TODO: 추가 기능 구현
