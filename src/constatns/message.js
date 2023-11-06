@@ -4,6 +4,11 @@ export const INPUT_MESSAGE = Object.freeze({
   BONUS_NUM: "보너스 번호를 입력해 주세요.",
 });
 
+export const OUTPUT_MESSAGE = Object.freeze({
+  ATTEMPT: "개를 구매했습니다.",
+
+});
+
 export const ERROR_MESSAGE = Object.freeze({
   AMOUNT: "[ERROR] 잘못된 금액입니다.\n",
   NUM: "ERROR] 잘못된 번호입니다.\n",
