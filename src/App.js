@@ -9,7 +9,10 @@ class App {
     const count = await inputAmount() / 1000;
     publishLotto(count);
     printLottoNumbers();
-    this.getLotto();
+    const lotto = await this.getLotto();
+    const bonus = await getBonus();
+    getRank(lotto, bonus);
+
   }
 
   getLotto = async() => {
@@ -65,7 +68,41 @@ const printLottoNumbers = () => {
   })
 }
 
+const getBonus = async() => {
+  const bonus = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+  return bonus;
+}
 
+const organizeRank = (lotto, published, bonus) => {
+  const result = lotto.compareNumbers(published);
+  switch(result) {
+    case 6 :
+      PublishedLottoes.rank.first += 1;
+      break;
+    case 5 :
+      if (published.includes(bonus)) {
+        PublishedLottoes.rank.second += 1;
+        break;
+      }
+      PublishedLottoes.rank.third += 1;
+      break;
+    case 4 : 
+      PublishedLottoes.rank.forth += 1;
+      break;
+    case 3 :
+      PublishedLottoes.rank.fifth += 1;
+      break;
+  }
+}
+
+const getRank = (lotto, bonus) => {
+  PublishedLottoes.numbers.forEach((number) => {
+    organizeRank(lotto, number, bonus);
+    console.log(number.includes(bonus));
+  });
+  console.log(bonus);
+  console.log(PublishedLottoes.rank);
+}
 
 const app = new App();
 app.play();

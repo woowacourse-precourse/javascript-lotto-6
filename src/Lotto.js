@@ -25,38 +25,7 @@ class Lotto {
   }
 }
 
-  const getBonus = async() => {
-    const bonus = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-    return bonus;
-  }
   
-  const organizeRank = (lotto, published, bonus) => {
-    const result = lotto.compareNumbers(published);
-    switch(result) {
-      case 6 :
-        this.PublishedLottoes.rank.first += 1;
-        break;
-      case 5 :
-        if (published.includes(bonus)) {
-          this.PublishedLottoes.rank.second += 1;
-          break;
-        }
-        this.PublishedLottoes.rank.third += 1;
-        break;
-      case 4 : 
-        this.PublishedLottoes.rank.forth += 1;
-        break;
-      case 3 :
-        this.PublishedLottoes.rank.fifth += 1;
-        break;
-    }
-  }
-  
-const getRank = (lotto, bonus) => {
-    this.PublishedLottoes.forEach((published) => {
-      organizeRank(lotto, published, bonus);
-    });
-  }
   
 const calculateRate = () => {
     let gain = 0;
