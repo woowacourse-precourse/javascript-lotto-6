@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
 
-function getLottery(amount) {
+function getLotteries(amount) {
   const LOTTERY_LIST = [];
   for (let i = 0; i < amount; i += 1) {
     const RANDOM_NUMBERS = Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -13,4 +13,4 @@ function getLottery(amount) {
   return LOTTERY_LIST;
 }
 
-export default getLottery;
+export default getLotteries;
