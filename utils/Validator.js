@@ -32,7 +32,10 @@ const Validator = {
   },
 
   validateBonusNumber(mainNumber, bonusNumber) {
-    return !(checkNumberInRange(bonusNumber) || mainNumber.includes(bonusNumber));
+    if (checkNumberInRange(bonusNumber) || mainNumber.includes(bonusNumber)) {
+      return errorHandle(ERROR_MESSAGES.invalidLottoNumber);
+    }
+    return true;
   },
 };
 
