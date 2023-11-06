@@ -8,7 +8,7 @@ const mockInput = (input) => {
   Console.readLineAsync.mockImplementation(() => Promise.resolve(input));
 };
 
-describe('Input', () => {
+describe('Input클래스 테스트', () => {
   beforeEach(() => {
     Console.readLineAsync = jest.fn();
   });
@@ -30,7 +30,7 @@ describe('Input', () => {
       expect(Console.readLineAsync).toHaveBeenCalledWith(expectedMessage);
     });
 
-    test('입력받은 값이 정수가 아니라면 에러를 던진다.', async () => {
+    test('입력받은 값이 정수가 아니라면 예외가 발생한다.', async () => {
       // given
       Console.readLineAsync.mockResolvedValue('1.1');
 
@@ -41,7 +41,7 @@ describe('Input', () => {
       await expect(result).rejects.toThrow('[ERROR]');
     });
 
-    test('입력받은 값이 1000원 단위가 아니라면 에러를 던진다.', async () => {
+    test('입력받은 값이 1000원 단위가 아니라면 예외가 발생한다.', async () => {
       // given
       Console.readLineAsync.mockResolvedValue('1001');
 
@@ -54,7 +54,18 @@ describe('Input', () => {
   });
 
   describe('readValidatableAsync', () => {
-    test('입력받은 값이 비어있다면 에러를 던진다.', async () => {
+    test('입력받은 값이 비어있지 않다면 Validatable 객체를 반환한다.', async () => {
+      // given
+      mockInput('test');
+
+      // when
+      const result = await Input.readValidatableAsync('test');
+
+      // then
+      expect(result).toBeInstanceOf(Validatable);
+    });
+
+    test('입력받은 값이 비어있다면 예외가 발생한다.', async () => {
       // given
       mockInput('');
 
@@ -64,16 +75,5 @@ describe('Input', () => {
       // then
       await expect(result).rejects.toThrow('[ERROR]');
     });
-  });
-
-  test('입력받은 값이 비어있지 않다면 Validatable 객체를 반환한다.', async () => {
-    // given
-    mockInput('test');
-
-    // when
-    const result = await Input.readValidatableAsync('test');
-
-    // then
-    expect(result).toBeInstanceOf(Validatable);
   });
 });
