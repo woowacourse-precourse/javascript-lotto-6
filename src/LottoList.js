@@ -1,3 +1,4 @@
+import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import BuyLotto from './BuyLotto.js';
 import { LOTTO_RULE, INPUT_MESSAGES, ERROR_MESSAGES } from './Constants.js';
@@ -27,16 +28,17 @@ class LottoList {
 
     for (let i = 0; i < count; i++) {
       let lottoNumbers = Random.pickUniqueNumbersInRange(MIN, MAX, LENGTH);
+      lottoNumbers = lottoNumbers.sort((a, b) => a - b); //오름차순
       this.makeLotto(lottoNumbers);
     }
 
     return this.#lottos.map((lotto) => lotto.getNumbers());
   }
 
-  async printLottoList() {
+  async makeLottoList() {
     const lottoList = await this.generateLotto();
 
-    return lottoList.map((el) => `[${el.join(', ')}]`.join('\n'));
+    return lottoList.map((el) => `[${el.join(', ')}]`).join('\n');
   }
 }
 export default LottoList;
