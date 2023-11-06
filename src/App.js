@@ -46,6 +46,13 @@ class App {
     }
   }
 
+  async #generateLottoNumbers() {
+    const lottoCount = this.#cash / CASH.UNIT;
+    Console.print(OUTPUT.BUY_LOTTO(lottoCount));
+    this.#fillLottoNumbers(lottoCount);
+    this.#printLottoNumbers();
+  }
+
   #fillLottoNumbers(lottoCount) {
     while (this.#lottoEntries.size < lottoCount) {
       const randomNumbers = generateRandomNumbers(LOTTO.COUNT_OF_NUMBERS);
@@ -55,13 +62,6 @@ class App {
         this.#lottoEntries.set(id, new Lotto(randomNumbers));
       }
     }
-  }
-
-  async #generateLottoNumbers() {
-    const lottoCount = this.#cash / CASH.UNIT;
-    Console.print(OUTPUT.BUY_LOTTO(lottoCount));
-    this.#fillLottoNumbers(lottoCount);
-    this.#printLottoNumbers();
   }
 
   #printLottoNumbers() {
@@ -110,6 +110,23 @@ class App {
     }
   }
 
+  #printResult() {
+    this.#setMatchCounter();
+    this.#setTotalRewards();
+    Console.print(OUTPUT.RESULT);
+
+    [...rewardMessageMap.entries()].forEach((entry) => {
+      const [key, message] = entry;
+      Console.print(`${message}${this.#matchCounter[key]}개`);
+    });
+
+    const profit = (
+      (this.#totalRewards * UTILITY.PERCENT) /
+      this.#cash
+    ).toFixed(UTILITY.FIXED_DIGITS);
+    Console.print(OUTPUT.PROFIT(profit));
+  }
+
   #setMatchCounter() {
     [...this.#lottoEntries.values()].forEach((lotto) => {
       const match = getMatchCount(
@@ -127,23 +144,6 @@ class App {
       const [count, reward] = entry;
       this.#totalRewards += reward * this.#matchCounter[count];
     });
-  }
-
-  #printResult() {
-    this.#setMatchCounter();
-    this.#setTotalRewards();
-    Console.print(OUTPUT.RESULT);
-
-    [...rewardMessageMap.entries()].forEach((entry) => {
-      const [key, message] = entry;
-      Console.print(`${message}${this.#matchCounter[key]}개`);
-    });
-
-    const profit = (
-      (this.#totalRewards * UTILITY.PERCENT) /
-      this.#cash
-    ).toFixed(UTILITY.FIXED_DIGITS);
-    Console.print(OUTPUT.PROFIT(profit));
   }
 
   async play() {
