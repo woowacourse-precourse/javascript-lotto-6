@@ -36,7 +36,6 @@ const string = Object.freeze({
 });
 
 const regexPatterns = Object.freeze({
-  numericPattern: /^(?:[1-9]\d{3,}|[1-9]\d{0,2}(,\d{3})+)$/,
   whitespace: /\s/,
 });
 

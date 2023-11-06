@@ -1,4 +1,3 @@
-import ERROR from '../constants/error.js';
 import { MessageFormat } from '../utils/messageFormat.js';
 
 class AppError extends Error {

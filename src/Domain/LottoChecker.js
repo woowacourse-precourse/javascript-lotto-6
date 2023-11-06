@@ -26,7 +26,6 @@ class LottoChecker {
 
     const { winningMin, bonus } = LOTTO.number;
     const { count: bonusCount, key: bonusKey } = bonus;
-
     const result = {
       3: 0,
       4: 0,

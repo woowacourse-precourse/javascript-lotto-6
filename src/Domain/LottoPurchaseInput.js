@@ -3,7 +3,7 @@ import ExceptionHandler from '../utils/ExceptionHandler.js';
 import LottoTicketGenerator from './LottoTicketGenerator.js';
 import MESSAGE from '../constants/message.js';
 import { MessageFormat } from '../utils/messageFormat.js';
-import { calcaulateTicketCountFromAmount } from '../utils/index.js';
+import { calculateTicketCountFromAmount } from '../utils/index.js';
 
 class LottoPurchaseInput {
   /**
@@ -12,7 +12,7 @@ class LottoPurchaseInput {
    */
   async inputPurchaseAmount() {
     const amount = await Console.readLineAsync(MESSAGE.input.PurchaseAmount);
-    const validatedAmount = ExceptionHandler.validateAmount(amount);
+    const validatedAmount = ExceptionHandler.validatePurchaseAmount(amount);
     return validatedAmount;
   }
 
@@ -22,7 +22,7 @@ class LottoPurchaseInput {
    * @returns {Array} 구매한 로또 티켓들
    */
   purchaseLotto(purchaseAmount) {
-    const ticketCount = calcaulateTicketCountFromAmount(purchaseAmount);
+    const ticketCount = calculateTicketCountFromAmount(purchaseAmount);
     this.printPurchaseConfirm(ticketCount);
     return this.purchaseLottoTickets(ticketCount);
   }

@@ -32,6 +32,6 @@ export const isValidNumber = (num) => {
 /**
  * 1000원 단위로 나눔
  */
-export const calcaulateTicketCountFromAmount = (validateAmount) => {
+export const calculateTicketCountFromAmount = (validateAmount) => {
   return validateAmount / LOTTO.unit.value;
 };

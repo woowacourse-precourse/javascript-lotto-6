@@ -10,7 +10,8 @@ const message = Object.freeze({
   /**
    * 구매 가격 입력
    */
-  invalidUnit: '1,000원 단위로 입력해주세요.',
+  underThousand: '1000원 이상의 금액을 입력해주세요.',
+  invalidUnit: '1000원 단위로 입력해주세요.',
   invalidPurchase: '구매 가격에 문자열이 포함되어 있습니다. 숫자만 입력해주세요.',
 
   /**
