@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import NUMBER from '../utils/constants/number.js';
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 import CustomError from '../errors/CustomError.js';
 
 const { game } = NUMBER;
