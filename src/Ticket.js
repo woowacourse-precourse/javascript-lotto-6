@@ -1,9 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
-import { GAME_MESSAGES } from "./Constatns.js";
+import { GAME_MESSAGES, ERROR_MESSAGES, MIN_LOTTO_PRICE, LOTTO_PRICE } from "./Constatns.js";
 
 class Ticket {
-  constructor(ticket) {
-    this.ticket = null;
+  constructor() {
+    this.money = 0;
+    this.ticket = 0;
   }
 
   validateTicketMoney(money) {
@@ -16,18 +17,20 @@ class Ticket {
     }
 
     if (money < MIN_LOTTO_PRICE) {
-      throw new Error(ERROR_MESSAGES.NOT_NUMBER);
+      throw new Error(ERROR_MESSAGES.PURCHASE_MONEY_INVALID);
     }
 
     if (money % LOTTO_PRICE) {
-      throw new Error(ERROR_MESSAGES.NOT_);
+      throw new Error(ERROR_MESSAGES.PURCHASE_MONEY_NOT_DIVISIBLE);
     }
   }
 
-  purchase() {
-    Console.readLine(GAME_MESSAGES.ENTER_TICKET_MONEY, (money) => {
-      validateTicketMoney(money);
-    });
+  purchase(money) {
+    this.validateTicketMoney(money);
+    this.ticket = money / LOTTO_PRICE;
+    Console.print("");
+    Console.print(this.ticket + GAME_MESSAGES.PURCHASE_TICKET_COUNT);
+    return this.ticket;
   }
 }
 
