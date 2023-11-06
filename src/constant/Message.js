@@ -8,11 +8,8 @@ const MESSAGE = {
   output: {
     purchaseInformation: (lottoInformations) => {
       const count = lottoInformations.length;
-      const formattedLottoInfos = lottoInformations
-        .map((info) => `[${info.join(", ")}]`)
-        .join("\n");
-      return `${count}개를 구매했습니다.
-${formattedLottoInfos}`;
+      const formattedLottoInfos = lottoInformations.map((info) => `[${info.join(", ")}]`).join("\n");
+      return `${count}개를 구매했습니다.\n${formattedLottoInfos}`;
     },
     statistics: (totalResult, rate) => `당첨 통계
 ---
