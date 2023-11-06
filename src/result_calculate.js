@@ -10,15 +10,17 @@ class CalculationOfResult {
 
   #calculatePrize(arrayofLotto, winningNum, bonusNum) {
     const countOfWinning = [0, 0, 0, 0, 0];
+
     arrayofLotto.forEach((myLotto) => {
       const matchArray = myLotto.filter((value) => winningNum.includes(value));
       const ranks = matchArray.length;
+      const bonusMatch = myLotto.includes(bonusNum);
       if (ranks === 6) countOfWinning[0] += 1; // 1st
-      if (ranks === 5 && winningNum.includes(bonusNum)) {
+      if (ranks === 5 && bonusMatch) {
         // 2nd
         countOfWinning[1] += 1;
       }
-      if (ranks === 5 && !winningNum.includes(bonusNum)) {
+      if (ranks === 5 && !bonusMatch) {
         // 3rd
         countOfWinning[2] += 1;
       }

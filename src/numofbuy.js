@@ -68,6 +68,7 @@ class NumOfBuy {
       // throw new Error(`[ERROR] 구입금액은 0보다 커야합니다.`);
       return true;
     }
+    0;
   }
 
   // 로또 구입 갯수 계산
