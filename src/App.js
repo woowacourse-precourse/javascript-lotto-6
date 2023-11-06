@@ -6,20 +6,22 @@ import {LottoGenerator} from "./domain/LottoGenerator.js";
 import {OutputView} from "./view/OutputView.js";
 import {LottoSeller} from "./domain/LottoSeller.js";
 
-export class App {
+class App {
+  async play() {
+    const lottoGenerator = LottoGenerator.random();
+    const inputValidator = new InputValidator();
+    const inputConverter = new InputConverter();
+    const inputView = new InputView(inputValidator, inputConverter);
+    const outputView = new OutputView();
+    const lottoSeller = new LottoSeller(lottoGenerator);
+    const lottoController = new LottoController(
+      inputView,
+      outputView,
+      lottoSeller
+    );
 
-
-    async play() {
-        const lottoGenerator = LottoGenerator.random()
-        const inputValidator = new InputValidator()
-        const inputConverter = new InputConverter();
-        const inputView = new InputView(inputValidator, inputConverter)
-        const outputView = new OutputView();
-        const lottoSeller = new LottoSeller(lottoGenerator);
-        const lottoController = new LottoController(inputView, outputView, lottoSeller)
-
-        await lottoController.start()
-    }
+    await lottoController.start();
+  }
 }
 
-
+export default App;
