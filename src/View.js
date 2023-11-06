@@ -2,7 +2,23 @@ import { Console } from "@woowacourse/mission-utils";
 
 class View {
   async getLottoPurchaseAmount() {
-    return await this.readLine("구입금액을 입력해 주세요.\n");
+    let amount;
+    while (true) {
+      try {
+        amount = await this.readLine("구입금액을 입력해 주세요.\n");
+        this.amountValidate(amount);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return amount;
+  }
+
+  amountValidate(amount) {
+    if (amount % 1000 !== 0) {
+      throw new Error("[ERROR] 구입금액은 1,000원 단위만 가능합니다.");
+    }
   }
 
   async getLottoWinningNumbers() {
@@ -14,7 +30,8 @@ class View {
   }
 
   // Lottos : Lotto 인스턴스 배열
-  async getLottos(Lottos) {
+  getLottos(Lottos) {
+    Console.print(`${Lottos.length}개를 구매했습니다.`);
     Lottos.map((Lotto) => {
       Lotto.print();
     });
