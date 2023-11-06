@@ -15,7 +15,7 @@
     - 랜덤한 값 반환
 -[X] generateRandomNumbers()
     - 랜덤한 로또 번호를 생성하고 반환한다.
--[ ] getLottoNumbersArray()
+-[X] getLottoNumbersArray()
     - 로또 티켓의 최대 구매 가능 개수만큼 랜덤한 로또 번호 배열을 만들고 반환한다.
 -[ ] inputWinningNumbers()
     - 당첨 번호를 입력 받는다.
@@ -23,7 +23,7 @@
 -[ ] inputBonusNumber()
     - 보너스 번호를 입력 받는다.
 
--[ ] displayLottoNumbers()
+-[X] displayLottoNumbers()
     - 발행한 로또 수량 및 번호를 출력한다.
     - 로또 번호는 오름차순으로 정렬하여 보여준다.
 -[ ] printResults()
