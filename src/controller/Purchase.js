@@ -8,19 +8,19 @@ class Purchase {
     constructor(amount) {
         this.#count = amount / 1000;
         this.lottoArray = [];
-        this.printCount();
     }
 
-    async printCount() {
-        await MissionUtils.Console.print(`${this.#count}${OUTPUT_MESSAGE.PURCHASE_COUNT}`);
+    printCount() {
+        MissionUtils.Console.print(`${this.#count}${OUTPUT_MESSAGE.PURCHASE_COUNT}`);
     }
 
     async public() {
+        this.printCount();
         for (let i = 0; i < this.#count; i++) {
             const numbers = await MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
             numbers.sort((a, b) => a - b);
             
-            await MissionUtils.Console.print(numbers);
+            MissionUtils.Console.print(`[${numbers.join(', ')}]`);
             this.lottoArray.push(numbers);
         }
 

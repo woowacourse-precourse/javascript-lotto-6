@@ -1,4 +1,4 @@
-import UserInput from './view/userInput.js';
+import UserInput from './view/UserInput.js';
 import Purchase from './controller/Purchase.js';
 import Calculate from './model/Calculate.js';
 import Result from './view/Result.js';
