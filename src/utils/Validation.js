@@ -14,19 +14,22 @@ const isNumber = (purchaseAmount) => {
     return true;
 }
 
-const isNumberLengthValid = (number) => {
-    const numberArray = number.toString().split(",");
-    const NumberSet = new Set(numberArray);
-    numberArray.forEach((number)=>{
-        if(isNumberInRange(number)){
-            NumberSet.add(number);
-        }
-    });
-    return NumberSet.size === NUMBER.SIX;
+const isNumberLengthValid = (numbers) => {
+    const numberArray = numbers.toString().split(",");
+    const uniqueNumbers = [...new Set(numberArray)];
+    if (uniqueNumbers.length !== NUMBER.SIX) {
+        return false;
+    }
+    return true;
 }
+
+const isNumbersInRange = (numbers) => {
+    return numbers.every(number => isNumberInRange(number));
+}
+
 
 const isNumberInRange = (number) => {
     return number >= NUMBER.ONE && number <= NUMBER.FORTY_FIVE;
 }
 
-export { isDivisibleByThousand, isNumber, isNumberInRange, isNumberLengthValid };
+export { isDivisibleByThousand, isNumber, isNumberInRange, isNumberLengthValid, isNumbersInRange };
