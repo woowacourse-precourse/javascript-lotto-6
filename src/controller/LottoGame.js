@@ -1,5 +1,4 @@
 import InputView from '../view/InputView.js';
-import { SYMBOL } from '../constants/Constant.js';
 import LottoBundle from '../model/LottoBundle.js';
 import OutputView from '../view/OutputView.js';
 import Lotto from '../model/Lotto.js';
@@ -46,7 +45,7 @@ class LottoGame {
   }
 
   #getSplitWinningNumbers(winningNumbers) {
-    return winningNumbers.split(SYMBOL.comma).map((number) => number.trim());
+    return winningNumbers.split(',').map((number) => number.trim());
   }
 
   async #getBonusNumber() {

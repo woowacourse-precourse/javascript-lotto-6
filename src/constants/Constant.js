@@ -3,10 +3,6 @@ export const CONSTANT = Object.freeze({
   amountUnit: 1000,
 });
 
-export const SYMBOL = Object.freeze({
-  comma: ',',
-});
-
 export const LOTTO_NUMBER = Object.freeze({
   minNum: 1,
   maxNum: 45,
@@ -14,10 +10,10 @@ export const LOTTO_NUMBER = Object.freeze({
 });
 
 export const RANK = Object.freeze({
-  first: { match: 6, reward: 2000000000 },
-  bonus: { match: -1, reward: 30000000 },
-  second: { match: 5, reward: 1500000 },
-  third: { match: 4, reward: 50000 },
+  first: { match: 6, reward: 2_000_000_000 },
+  bonus: { match: -1, reward: 30_000_000 },
+  second: { match: 5, reward: 1_500_000 },
+  third: { match: 4, reward: 50_000 },
   fourth: { match: 3, reward: 5000 },
 });
 
