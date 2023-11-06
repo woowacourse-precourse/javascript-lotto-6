@@ -26,104 +26,255 @@ node index.js
 ## 프로젝트 구조
 
 ```shell
+__tests__
+├── ApplicationTest.js
+├── LottoTest.js
+├── integration
+│   ├── getBonusNumberTest.js
+│   ├── getLottoNumberTest.js
+│   ├── getPurchaseTest.js
+│   ├── lottoCompareServiceTest.js
+│   └── validate
+│       ├── bonusNumberValidServiceTest.js
+│       └── purchaseValidServiceTest.js
+└── unit
+    ├── createPurchaseDataTest.js
+    ├── lottoMatcherTest.js
+    └── validTest.js
+docs
+└── README.md
+src
+├── App.js
+├── Lotto.js
+├── index.js
+├── service
+│   ├── getBonusNumber.js
+│   ├── getLottoNumber.js
+│   ├── getPurchase.js
+│   ├── lottoCompareService.js
+│   └── validate
+│       ├── bonusNumberValidService.js
+│       └── purchaseValidService.js
+└── util
+    ├── UI
+    │   ├── gameResult
+    │   │   └── winningStatisticsUI.js
+    │   └── gameStart
+    │       ├── purchaseAmountUI.js
+    │       ├── purchaseResultUI.js
+    │       ├── receiveBonusNumberUI.js
+    │       └── receiveWinningLottoUI.js
+    ├── error
+    │   └── errorCode.js
+    ├── libararyFeatures
+    │   └── MissionUtilHandler.js
+    ├── matcher
+    │   └── lottoMatcher.js
+    ├── parse
+    │   ├── ascendingSortList.js
+    │   ├── divideInput.js
+    │   ├── parseToMap.js
+    │   ├── parseToMatchedCount.js
+    │   ├── parseToNumberArray.js
+    │   └── splitInput.js
+    ├── purchase
+    │   └── createPurchaseData.js
+    ├── validate
+    │   ├── checkHasDuplicate.js
+    │   ├── checkHasNoRemainder.js
+    │   ├── checkIsEmpty.js
+    │   ├── checkIsInWinningNumber.js
+    │   ├── checkIsNaN.js
+    │   ├── checkIsNotInRange.js
+    │   └── checkisInteger.js
+    └── yield
+        └── getRateOfReturn.js
 
 ```
 
 ## 기능
 
-### input handler
-
-입력: 금액
-조건:  
-1000으로 나눴을때 0이 아닐 경우 예외처리
-
-입력: 당첨 번호
-조건:  
-중복된 숫자가 입력되었을 경우 예외처리
-숫자가 아닌 값이 입력되었을 경우 예외처리
-
-입력: 보너스 번호
-조건: 
-당첨 번호와 동일
-
-### data generator
-
-금액을 1000으로 나눠서 다온 값 만큼의 길이를 가지는 배열을 생성
-
-생성된 단일 배열의 길이는 6
-생성된 배열 내에 중복값이 없도록 생성
-
-## matcher
-
-생성된 배열의 값을 입력된 당첨 번호와 대조
-
-### library feature
-
-'MissionUtils' 라이브러리의 기능을 반환하는 handler
-
-기능:  
-
-1. Console.print()
-2. Console.readLineAsync()
-3. pickUniqueNumbersInRange()
-
-
-### validate
-
-- checkHasDuplicate()
-
-> 생성된 배열의 중복값을 판단  
-> 중복값이 존재할 경우 ERROR_CODE.isDuplicated 로 예외처리
-
-- checkIsNaN()
-
-> 입력값이 숫자인지 판단
-> 숫자가 아닌 경우 ERROR_CODE.valueIsNaN 로 예외처리
-
-- checkHasNoRemainder()
-
-> 입력값이 1000으로 나누어 떨어지는지 판단  
-> 나누어 떨어지지 않을 경우 ERROR_CODE.hasRemainder 로 예외처리
-
-- checkIsEmpty()
-
-> 입력값이 빈값인지 판단  
-> 빈값인 경우 ERROR_CODE.valueIsEmpty 로 예외처리
-
-- checkIsTooSmall()
-
-> 입력값 < 1000인지 판별
-> 작은 값이 입력되었을 경우 ERROR_CODE.valueIsTooSmall 로 예외처리
-
-### parse
-
-divideInput.js
-
-- 유효한 입력값을 1000으로 나눈 값을 반환
-
-### error
-
-errorCode.js  
-
- - 예상되는 에러의 메시지를 Object로 관리
-
-> purchaseAmount: '[ERROR] 입력을 받는 중에 예상치 못한 에러가 발생 했습니다.',
-> createPurchaseData: '[ERROR] 로또를 구매하는 도중에 예상치 못한 에러가 발생 했습니다.',
-> isDuplicated: '[ERROR] 로또 번호에 중복된 숫자가 존재합니다',
-> hasRemainder: '[ERROR] 구입 금액이 1000으로 나누어 떨어지지 않습니다.',
-> valueIsNaN: '[ERROR] 입력값이 유효하지 않습니다.',
-> valueIsEmpty: '[ERROR] 입력값에 빈값이 존재합니다.',
-> valueIsTooSmall: '[ERROR] 로또를 구매할 수 없습니다.', 
+---
 
 ### service
 
-purchaseValidService.js
+기능: 모듈화된 기능들의 실행
 
-- 구매금액의 valid 검사기능의 통합 서비스
+- getBonusNumber.js
+- getLottoNumber.js
+- getPurchase.js
+- lottoCompareService.js
+
+- bonusNumberValidService.js
+- purchaseValidService.js
+
+---
+
+### UI
+
+기능: input, 결과를 출력
+
+ 사용자의 입력을 반환
+
+ > - purchaseAmounUI.js
+ > - receiveWinnigLottoUI.js 
+ > - receiveBonusNumberUI.js
+
+ 결과를 출력
+
+ > - purchaseResultUI.js
+ > - winningStatisticsUI.js
+
+---
+
+### error
+
+> 기능: 예외처리의 에러 메시지
+
+- errorCode.js
+
+```javascript
+export const PURCHASE_ERROR_CODE = {
+  purchaseAmount: '[ERROR] 입력을 받는 중에 예상치 못한 에러가 발생 했습니다.',
+  isDuplicated: '[ERROR] 로또 번호에 중복된 숫자가 존재합니다',
+  hasRemainder: '[ERROR] 구입 금액이 1000으로 나누어 떨어지지 않습니다.',
+  valueIsNaN: '[ERROR] 입력값이 유효하지 않습니다.',
+  valueIsEmpty: '[ERROR] 입력값에 빈값이 존재합니다.',
+  valueIsTooSmall: '[ERROR] 로또를 구매할 수 없습니다.',
+};
+
+export const LOTTO_ERROR_CODE = {
+  failToCreateLotto: '[ERROR] 로또 번호를 생상하는 도중에 예상치 못한 에러가 발생 했습니다.',
+  valueIsEmptyOrZero: '[ERROR] 로또 번호에 빈값 또는 0이 존재 합니다.',
+  valueIsOutOfRange: '[ERROR] 로또 번호는 1 ~ 45 까지의 숫자로 이루어져야 합니다.',
+  valueIsNotInteger: '[ERROR] 로또 번호는 정수로만 이루어져야 합니다.',
+};
+
+export const BONUS_ERROR_CODE = {
+  valueMatchesLotto: '[ERROR] 보너스 번호가 로또번호 중 하나 입니다.',
+};
+```
+
+---
+
+### libaray features
+
+- MissionUtilsHandler.js  
+
+> 기능: MissionUtils 라이브러리의 기능을 반환
+
+---
+
+### matcher
+
+- lottoMatcher.js
+
+> 기능: 구매내역을 당첨번호와 비교하여 당첨 등수를 반환
+
+---
+
+### parse
+
+- ascendingSortList.js
+
+> 기능: 배열을 오름차순으로 정렬하여 반환
+
+- divideInput.js
+
+> 기능: 구매액을 1000으로 나눈 값을 반환
+
+- parseToMap.js
+
+> 기능: 등수에 해당하는 구매내역의 갯수를 Map으로 count 하여 반환
+
+- parseToMatchedCount.js
+
+> 기능: 구매내역을 당첨 등수로 변환하여 반환
+
+- parseToNumberArray.js
+
+> 기능: 입력 받은 당첨 번호를 number 형태의 element로 변환하여 반환
+
+- splitInput.js
+
+> 기능: 입력 받은 당첨 번호 문자열을 배열로 변환하여 반환
+
+---
+
+### purchase
+
+- createPurchaseData.js
+
+> 기능:  
+> 입력받은 구매액을 기준으로 구매 내역을 생성하여 반환  
+> 생성된 구매 내역이 전부 생성될 때까지 재귀
+
+---
+
+### validate
+
+- checkHasDuplicate.js
+
+> 기능:  
+> 입력 받은 당첨 번호에 중복된 숫자가 존재할 경우 예외 처리
+
+- checkHasNoRemainder.js
+
+> 기능:  
+> 입력 받은 구매액이 1000으로 나누어 떨어지지 않을 경우 예외 처리
+
+- checkIsEmpty.js
+
+> 기능:  
+> 입력받은 구매액, 당첨 번호가 빈값이 존재할 경우 예외 처리
+
+- checkIsInteger.js
+
+> 기능:  
+> 입력받은 구매액, 당첨 번호가 정수가 아닐 경우 예외 처리
+
+- checkIsInWinningNumber.js
+
+> 기능:  
+> 입력받은 보너스 번호가 당첨 번호에 포함된 숫자일 경우 예외 처리
+
+- checkIsNaN.js
+
+> 기능:  
+> 입력받은 구매액, 당첨번호, 보너스 번호가 숫자가 아닐 경우 예외 처리
+
+- checkIsNotInRange.js
+
+> 기능:  
+> 입력받은 당첨번호, 보너스 번호가 1 ~ 45 사이의 값이 아닐 경우 예외 처리
+
+---
+
+### yeild
+
+- getRateOfReturn.js
+
+> 기능:
+> count 된 구매내역의 당첨 등수로 수익률을 반환
+
+---
 
 ### test
 
+- unit
+    - createPurchaseDataTest.js
+    - lottoMatcherTest.js
+    - validTest.js
 
+- integration
+    - getBounusNumberTest.js
+    - getLottoNumberTest.js
+    - getPurchaseTest.js
+    - lottoCompareServiceTest.js
+    - bonusNumberValidServiceTest.js
+    - purchaseValidServiceTest.js
+
+---
 
 ## Commit Convertion
 
