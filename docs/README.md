@@ -6,12 +6,14 @@
     - 게임을 시작함
 -[X] Lotto.js
     - 로또 객체 생성
--[ ] buyLottoTickets()
+-[X] buyLottoTickets()
     - 로또 구입 금액을 입력 받는다.
     - 구입 금액은 1,000원 단위로 입력 받으며 1,000원으로 나누어 떨어지지 않는 경우 예외 처리한다.
--[ ] getMaxPurchasedTickets()
+-[X] getMaxPurchasedTickets()
     - 로또 티켓의 최대 구매 가능 개수를 계산하고 반환한다.
--[ ] randomizeLottoNumbers()
+-[X] randomInt()
+    - 랜덤한 값 반환
+-[X] generateRandomNumbers()
     - 랜덤한 로또 번호를 생성하고 반환한다.
 -[ ] getLottoNumbersArray()
     - 로또 티켓의 최대 구매 가능 개수만큼 랜덤한 로또 번호 배열을 만들고 반환한다.

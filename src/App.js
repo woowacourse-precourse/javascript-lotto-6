@@ -1,9 +1,12 @@
+import {MissionUtils} from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 class App {
     async play() {
         const purchaseAmount = await this.buyLottoTickets();
-        const lottoTicketsQuantity = await this.getMaxPurchasedTickets(purchaseAmount);
+        const lottoNumbersArray =this.getLottoNumbersArray(purchaseAmount);
+        const lottos = lottoNumbersArray.map(numbers => new Lotto(numbers));
+        MissionUtils.Console.print(lottos);
     }
 
     async buyLottoTickets() {
@@ -13,17 +16,37 @@ class App {
         return parseInt(userInput);
     }
 
-    async getMaxPurchasedTickets(purchaseAmount) {
+   getMaxPurchasedTickets(purchaseAmount) {
         //TODO : 로또 티켓의 최대 구매 가능 개수를 계산하고 반환한다.
-        return purchaseAmount/1000;
+        return Math.floor(purchaseAmount / 1000);
     }
 
-    async randomizeLottoNumbers() {
+    randomNumber() {
+        //TODO : 랜덤한 값을 반환
+        return MissionUtils.Random.pickNumberInRange(1, 45);
+    }
+    generateRandomNumbers() {
         //TODO : 랜덤한 로또 번호를 생성하고 반환한다.
+        const lottoNumbers = new Set();
+
+        while (lottoNumbers.size < 6) {
+            const number = this.randomNumber(); // 랜덤한 숫자 생성
+            lottoNumbers.add(number);
+        }
+
+        return Array.from(lottoNumbers);
     }
 
-    async getLottoNumbersArray() {
+    getLottoNumbersArray(purchaseAmount) {
         //TODO : 로또 티켓의 최대 구매 가능 개수만큼 랜덤한 로또 번호 배열을 만들고 반환한다.
+        const lottoNumbersArray = [];
+        const maxTickets = this.getMaxPurchasedTickets(purchaseAmount);
+
+        for (let i = 0; i < maxTickets; i++)  {
+            const lottoNumbers = this.generateRandomNumbers();
+            lottoNumbersArray.push(lottoNumbers);
+        }
+        return lottoNumbersArray;
     }
 
     async inputWinningNumbers() {
