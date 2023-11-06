@@ -7,16 +7,21 @@ class Functions {
     return Array.from(randomNumbers);
   }
  
-
-  buyLottoByAmount(amount) {
+  validateAmount(amount){
     if (amount % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE);
     }
+  }
+  printNumberLottos(amount){
+ const numberOfLottos = amount / 1000;
+ Console.print(`${numberOfLottos}` + BUY_MESSAGE);
+  }
 
+  buyLottoByAmount(amount) {
+    this.validateAmount(amount);
+    this.printNumberLottos(amount);
     const lottoList = [];
-    const numberOfLottos = amount / 1000;
-    Console.print(`${numberOfLottos}`+BUY_MESSAGE);
-    for (let i = 0; i < numberOfLottos; i++) {
+    for (let i = 0; i < amount/1000; i++) {
       const random = this.lottoRandomNumber();
       random.sort((a,b)=> a-b);
       lottoList.push(random);
