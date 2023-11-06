@@ -1,6 +1,5 @@
 import NUMBER from '../utils/constants/number.js';
 import LottoValidator from '../utils/validators/LottoValidator.js';
-import LottoResultCalculator from './LottoResultCalculator.js';
 
 class LottoService {
   #winningNumbers;
@@ -9,7 +8,7 @@ class LottoService {
 
   #lottoTickets;
 
-  #resultCalculator = new LottoResultCalculator();
+  #resultCalculator;
 
   constructor(resultCalculator) {
     this.#resultCalculator = resultCalculator;
