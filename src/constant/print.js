@@ -1,6 +1,6 @@
 const PRINT = {
   ASK_BUY: "구입금액을 입력해 주세요.\n",
-  RESULT_BUY: "개를 구입했습니다.\n",
+  RESULT_BUY: "개를 구입했습니다.",
   ASK_WIN_NUMBER: "당첨 번호를 입력해 주세요.\n",
   ASK_BONUS_NUMBER: "보너스 번호를 입력해 주세요.\n",
   RESULT_WIN: "당첨 통계\n---",
