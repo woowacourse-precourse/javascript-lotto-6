@@ -15,7 +15,6 @@ class Lotto {
     this.#numbers = numbers.map(Number);
   }
 
-  // TODO: 추가 기능 구현
   printLottos(){
     print(`[${this.#numbers.join(', ')}]`);
   }
