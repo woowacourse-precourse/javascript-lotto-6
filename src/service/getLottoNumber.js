@@ -8,10 +8,8 @@ export default async function getLottoNumber(winningNumber) {
     const isolatedInput = splitInput(winningNumber);
     const parsedLotto = parseToNumberArray(isolatedInput);
     const winningNumbers = ascendingSortList(parsedLotto);
-
     const validLotto = new Lotto(winningNumbers);
     const lotto = validLotto.getNumbers();
-
     return lotto;
   } catch (error) {
     throw new Error(error.message);
