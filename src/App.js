@@ -8,7 +8,9 @@ const NUMBER_CHECK = /^[0-9]+$/;
 class App {
   async play() {
     const buyLotto = new BuyLotto(LOTTO_PRICE, DAILY_LIMIT_PRICE, NUMBER_CHECK);
+
     const purchaseAmount = await buyLotto.inputPurchaseAmount();
+    await buyLotto.validateInputPurchaseAmount(purchaseAmount);
   }
 }
 
