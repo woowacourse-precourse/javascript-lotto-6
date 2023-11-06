@@ -1,7 +1,7 @@
 import App from '../src/App';
 import BonusBall from '../src/BonusBall';
 import Lotto from '../src/Lotto';
-import { FIVE_AND_BONUS, FIVE_NO_BONUS } from '../src/constant';
+import { ERROR_MESSAGE, FIVE_AND_BONUS, FIVE_NO_BONUS } from '../src/constant';
 import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
 
 describe('App 클래스 테스트', () => {
@@ -77,6 +77,7 @@ describe('App 클래스 테스트', () => {
       expect(v.number).toEqual(EXPECTED_WINNING_RESULT[i].number);
     });
   });
+
   test('당첨 통계 출력', () => {
     const WINNING_RESULT = [
       { rank: 'three', number: 1 },
@@ -99,6 +100,36 @@ describe('App 클래스 테스트', () => {
 
     const app = new App();
     app.printResult(WINNING_RESULT, RATE_OF_RETURN);
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
+  test('입력값이 유효하지 않을 경우, [ERROR]로 시작하는 예외문을 출력하고 다시 입력값을 받는다.', async () => {
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS = [1, 2, 3, 4, 5, 6];
+    const INPUT_VALUES = [
+      '1000원',
+      '1000',
+      '1,2,3,4,5,60',
+      '1,2,3,4,5,6',
+      '6',
+      '7',
+    ];
+
+    mockRandoms([RANDOM_NUMBERS]);
+    mockQuestions(INPUT_VALUES);
+
+    const app = new App();
+    await app.play();
+
+    const logs = [
+      ERROR_MESSAGE.isNotNumber,
+      ERROR_MESSAGE.range,
+      ERROR_MESSAGE.duplicateBonusBall,
+    ];
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
