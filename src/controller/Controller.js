@@ -13,12 +13,9 @@ class Controller {
     const getPrice = await InputController.getPriceControl();
     const generator = new Generator(getPrice);
     const lottoNumbers = generator.generateLottoNumbers();
-    print('');
     ComputerOutput.printLottoTicketCount(lottoNumbers.length);
     ComputerOutput.printLottoNumbers(lottoNumbers);
-    print('');
     const getWinningNumbers = await InputController.getWinningNumbersControl();
-    print('');
     const getBonusNumber =
       await InputController.getBonusNumberControl(getWinningNumbers);
     const rankCounts = this.lottoStatistics.resultLottoRank(
@@ -26,7 +23,6 @@ class Controller {
       getWinningNumbers,
       getBonusNumber,
     );
-    print('');
     const profitability =
       this.lottoStatistics.calculateProfitPercentage(getPrice);
     ComputerOutput.printWinningStats(rankCounts, profitability);

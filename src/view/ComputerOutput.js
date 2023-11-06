@@ -3,7 +3,7 @@ import { RESULT_MESSAGE } from '../constants/messages.js';
 
 class ComputerOutput {
   static printLottoTicketCount(lottoTicketCount) {
-    print(`${lottoTicketCount}개를 구매했습니다.`);
+    print(`\n${lottoTicketCount}개를 구매했습니다.`);
   }
 
   static printLottoNumbers(lottoNumbers) {
@@ -16,6 +16,7 @@ class ComputerOutput {
   }
 
   static printWinningStats(rankCounts, profitPercentage) {
+    print('');
     print('당첨통계');
     print('---');
     RESULT_MESSAGE.forEach((message, i) => {

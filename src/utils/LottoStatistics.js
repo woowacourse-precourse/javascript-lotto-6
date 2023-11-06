@@ -18,20 +18,19 @@ class LottoStatistics {
   }
 
   calculateLottoRank(count, array, bonusNumber) {
-    if (count === MATCHED_COUNT.fifthPlace) {
-      this.rankingCounts[0] += 1;
-    }
-
-    if (count === MATCHED_COUNT.fourthPlace) {
-      this.rankingCounts[1] += 1;
-    }
-
-    if (count === MATCHED_COUNT.secondAndThirdPlace) {
-      this.rankingCounts[array.includes(bonusNumber) ? 3 : 2] += 1;
-    }
-
     if (count === MATCHED_COUNT.firstPlace) {
       this.rankingCounts[4] += 1;
+    }
+
+    if (count === MATCHED_COUNT.secondPlace && array.includes(bonusNumber)) {
+      this.rankingCounts[3] += 1;
+    }
+
+    if (
+      count <= MATCHED_COUNT.thirdPlace &&
+      count >= MATCHED_COUNT.fifthPlace
+    ) {
+      this.rankingCounts[count - 3] += 1;
     }
   }
 

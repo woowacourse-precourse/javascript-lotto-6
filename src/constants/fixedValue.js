@@ -9,7 +9,8 @@ export const LIMITS = {
 export const MATCHED_COUNT = {
   fifthPlace: 3,
   fourthPlace: 4,
-  secondAndThirdPlace: 5,
+  thirdPlace: 5,
+  secondPlace: 5,
   firstPlace: 6,
 };
 
