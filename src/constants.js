@@ -22,11 +22,14 @@ export const MATCH = Object.freeze({
   six_match: (match) => `6개 일치 (2,000,000,000원) - ${match}개`,
 });
 
+export const PREFIX = Object.freeze({
+  error: '[ERROR]',
+})
+
 export const ERROR_MESSAGE = Object.freeze({
-  prefix: '[Error]',
-  not_number: `${prefix} 숫자가 아닙니다.`,
-  not_natural_number: `${prefix} 자연수가 아닙니다.`,
-  not_above_min_cost: `${prefix} ${SETTING.min_cost} 이상의 숫자를 입력하세요.`,
-  not_six_numbers: `${prefix} 쉼표를 기준으로 ${SETTING.input_length}개의 숫자를 입력하세요.`,
-  not_range: `${prefix} ${SETTING.min_lotto_number} 이상 ${SETTING.max_lotto_number} 이하의 숫자를 입력하세요.`
+  not_number: `${PREFIX.error} 숫자가 아닙니다.`,
+  not_natural_number: `${PREFIX.error} 자연수가 아닙니다.`,
+  not_above_min_cost: `${PREFIX.error} ${SETTING.min_cost} 이상의 숫자를 입력하세요.`,
+  not_six_numbers: `${PREFIX.error} 쉼표를 기준으로 ${SETTING.input_length}개의 숫자를 입력하세요.`,
+  not_range: `${PREFIX.error} ${SETTING.min_lotto_number} 이상 ${SETTING.max_lotto_number} 이하의 숫자를 입력하세요.`
 });
