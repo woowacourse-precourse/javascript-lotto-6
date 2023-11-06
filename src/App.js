@@ -1,16 +1,12 @@
-import {
-  readAmountToPurchase,
-  readBonusNumber,
-  readWinningNumbers,
-} from "./lottoInterface/input.js";
+import LottoInterface from "./LottoInterface/index.js";
 
 class App {
   async play() {
-    const answer1 = await readAmountToPurchase();
+    const lottoInterface = new LottoInterface();
 
-    const answer2 = await readWinningNumbers();
-
-    const answer3 = await readBonusNumber();
+    const answer1 = await lottoInterface.readAmountToPurchase();
+    const answer2 = await lottoInterface.readWinningNumbers();
+    const answer3 = await lottoInterface.readBonusNumber();
   }
 }
 
