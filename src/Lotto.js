@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import { INPUT_ERROR_MESSAGE } from './constants/constants';
 
 class Lotto {

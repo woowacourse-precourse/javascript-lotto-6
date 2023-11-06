@@ -1,8 +1,8 @@
 const INPUT_MESSAGE = {
-  PURCHASING_AMOUNT: '구입금액을 입력해 주세요.\n',
-  WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-  BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
-  PURCHASE_LOTTO: '개를 구매했습니다.\n',
+  PURCHASING_AMOUNT: '구입금액을 입력해 주세요.',
+  WINNING_NUMBERS: '당첨 번호를 입력해 주세요.',
+  BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
+  PURCHASE_LOTTO: '개를 구매했습니다.',
 };
 
 const INPUT_ERROR_MESSAGE = {

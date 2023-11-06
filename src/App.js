@@ -9,6 +9,7 @@ class App {
   async play() {
     await this.#inputPurchaseAmount();
     this.#purchaseLottos();
+    this.#printAllLottos();
   }
 
   async #inputPurchaseAmount() {
@@ -45,6 +46,13 @@ class App {
       }
     }
     return randomNumbers;
+  }
+
+  #printAllLottos() {
+    Console.print(`${this.#lottoList.length}${INPUT_MESSAGE.PURCHASE_LOTTO}`);
+    this.#lottoList.forEach(el => {
+      el.print();
+    });
   }
 }
 
