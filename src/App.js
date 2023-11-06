@@ -9,8 +9,17 @@ class App {
     this.userLotto = new UserLotto(amount/1000);
   }
 
+  showLottos(){
+    const list = this.userLotto.getList();
+    const count = this.userLotto.getCount();
+    View.outputUserLottosList(list, count);
+
+  }
+
   async play() {
-    this.getPrice();
+    await this.getPrice();
+    this.userLotto.createLottos();
+    this.showLottos();
   }
 }
 
