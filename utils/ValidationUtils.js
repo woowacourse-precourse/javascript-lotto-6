@@ -4,7 +4,7 @@ const ValidationUtils = {
   },
 
   checkIsNumber(number) {
-    const check = /^[0-9]$/;
+    const check = /^[0-9]+$/;
     return check.test(number);
   },
   checkIncludedZero(numbers) {
