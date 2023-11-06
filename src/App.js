@@ -2,35 +2,56 @@ import Lotto from "./Lotto.js";
 import { Console, Random } from "@woowacourse/mission-utils";
 import { validatePurchaseFormat } from "./validation/validation.js";
 import { INPUT_MSG } from "./constants/InputMessage.js";
-import PurchaseLottery from "./PurchaseLottery.js";
+
 class App {
+  constructor() {
+    this.ticketsAmount = 0;
+    this.count = 0;
+    this.generatedLottoNums = [];
+    this.inputedLottoNums = [];
+  }
   async play() {
     await this.purchaseTicket();
+    await this.generateNumbers();
     await this.inputLotteryResults();
+    this.matchingNumbers(this.generatedLottoNums, this.inputedLottoNums);
   }
 
   async purchaseTicket() {
-    let ticketsAmount = await Console.readLineAsync(INPUT_MSG.amount);
+    const ticketsAmount = await Console.readLineAsync(INPUT_MSG.amount);
     validatePurchaseFormat(ticketsAmount);
-    ticketsAmount = Math.floor(ticketsAmount / 1000);
 
-    await this.generateNumbers(ticketsAmount);
+    this.ticketsAmount = Math.floor(ticketsAmount / 1000);
+    await Console.print(`${this.ticketsAmount}개를 구매했습니다.`);
   }
-  async generateNumbers(ticketQuantity) {
-    for (let i = 0; i < ticketQuantity; i++) {
+  async generateNumbers() {
+    for (let i = 0; i < this.ticketsAmount; i++) {
       const lottoNums = await Random.pickUniqueNumbersInRange(1, 45, 6);
+      const stringifyNums = `[${lottoNums.join(", ")}]`;
       if (lottoNums.length > 6) {
         throw new Error("[ERROR]");
       }
-      Console.print(lottoNums);
+      this.generatedLottoNums.push(lottoNums);
+      await Console.print(stringifyNums);
     }
-    await Console.print(`${ticketQuantity}개를 구매했습니다.`);
   }
   async inputLotteryResults() {
     const results = await Console.readLineAsync(INPUT_MSG.results);
     const resultsArray = results.split(",").map(Number);
-    new Lotto(resultsArray);
+    const validateNums = new Lotto(resultsArray);
+    this.inputedLottoNums.push(resultsArray);
     Console.print(resultsArray);
+  }
+
+  matchingNumbers(generated, inputed) {
+    for (let i = 0; i < generated.length; i++) {
+      for (let j = 0; j < inputed.length; j++) {
+        if (generated[i] === inputed[j]) {
+          this.count += 1;
+          Console.print(this.count);
+        }
+      }
+    }
   }
 }
 
