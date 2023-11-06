@@ -6,13 +6,13 @@ const LOTTO_PRICE = 1000;
 class App {
   #cost;
   #winningNum;
-  #extraNum;
+  #bonusNum;
   #lottos;
 
   constructor() {
     this.#cost = 0;
     this.#winningNum = [];
-    this.#extraNum = 0;
+    this.#bonusNum = 0;
     this.#lottos = [];
   }
   // 구입 금액 관련 함수들
@@ -38,7 +38,6 @@ class App {
   }
   showLottoList() {
     MissionUtils.Console.print(`${this.#cost / LOTTO_PRICE}개를 구매했습니다.`);
-
     this.#lottos.map((lotto) => {
       MissionUtils.Console.print(lotto.getNumbers());
     });
@@ -47,19 +46,25 @@ class App {
   async inputWinnerNum() {
     const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     this.#winningNum = new Lotto(input.split(",").map(Number));
-    MissionUtils.Console.print(this.#winningNum.getNumbers());
   }
   // 보너스 번호 관련 함수들
-  async inputExtraNum() {
+  async inputBonusNum() {
     const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    this.extraNumValid(input);
-    this.#extraNum = input;
+    this.bonusNumValid(input);
+    this.checkInOrigin(input);
+    this.#bonusNum = input;
   }
-  extraNumValid(input) {
+  bonusNumValid(input) {
     const numberInput = Number(input);
-    if (!(Number.isInteger(numberInput) && input > 0)) {
+    if (!(Number.isInteger(numberInput) && input > 0 && input < 46)) {
       throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
     }
+  }
+  checkInOrigin(input) {
+    const numberInput = Number(input);
+    this.#winningNum.getNumbers().map((num) => {
+      if (num === numberInput) throw new Error("[ERROR] 이미 당첨된 번호입니다.");
+    });
   }
 
   async play() {
@@ -67,7 +72,7 @@ class App {
     this.lottoGenerater();
     this.showLottoList();
     await this.inputWinnerNum();
-    await this.inputExtraNum();
+    await this.inputBonusNum();
   }
 }
 
