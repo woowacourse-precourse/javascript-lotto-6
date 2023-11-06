@@ -32,12 +32,10 @@ class controller {
   }
 
   priintUserLottoNumbers() {
-    this.#outputView.print(
-      `${this.#userLotto.getNumberOfPurchase()}${CHARACTER.purchaseSuffix}`
-    );
+    this.#outputView.printNumberOfPurchase(this.#userLotto.getNumberOfPurchase());
     this.#userLotto.getUserLottoNumbers().forEach((userLottoNumber) => {
-      const message = userLottoNumber.getLottoNumber().join(`, `);
-      this.#outputView.print(`[${message}]`);
+      const lottoNumberForPrint = userLottoNumber.getLottoNumber().join(`, `);
+      this.#outputView.print(`[${lottoNumberForPrint}]`);
     });
   }
 
