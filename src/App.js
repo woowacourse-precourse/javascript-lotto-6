@@ -1,7 +1,8 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import GameError from './LottoError.js';
+import LottoError from './LottoError.js';
 import Lotto from './Lotto.js';
 import { LOTTO_PRIZE } from './constants.js';
+import { NUMBERS_REGEX } from './constants.js';
 
 class App {
   #generatRandomLottos(purchaseAmount) {
@@ -27,7 +28,17 @@ class App {
       '당첨 번호를 입력해 주세요.\n'
     );
 
-    const winningNumbers = winningNumbersInput.split(',');
+    let winningNumbers = winningNumbersInput.split(',');
+
+    winningNumbers = winningNumbers.map((number) => {
+      if (number.length == 0 || !NUMBERS_REGEX.test(number)) {
+        throw new LottoError('당첨번호의 입력이 잘못되었습니다.');
+      }
+      if (Number(number) < 1 || Number(number) > 45)
+        throw new LottoError('로또 번호는 1~45입니다.');
+      return Number(number);
+    });
+
     return winningNumbers;
   }
 
@@ -35,8 +46,13 @@ class App {
     const bonusNumberInput = await Console.readLineAsync(
       '보너스 번호를 입력해 주세요.\n'
     );
+    if (!NUMBERS_REGEX.test(bonusNumberInput))
+      throw new LottoError('숫자만 입력해야합니다.');
 
     const bonusNumber = Number(bonusNumberInput);
+    if (bonusNumber < 1 || bonusNumber > 45)
+      throw new LottoError('로또 번호는 1~45입니다.');
+
     return bonusNumber;
   }
 
