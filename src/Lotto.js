@@ -13,6 +13,9 @@ class Lotto {
     Validator.isValidDigit(numbers);
     Validator.isDuplicate(numbers);
     Validator.isAscending(numbers);
+    numbers.map((num) => {
+      Validator.isValidRange(num);
+    });
   }
 
   getNumbers() {
