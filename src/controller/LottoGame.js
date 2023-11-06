@@ -1,11 +1,13 @@
 import PurchaseAmount from '../domain/PurchaseAmount.js';
-import LottoGameInput from '../view/LottoGameInput.js';
-import LottoGameOutput from '../view/LottoGameOutput.js';
-import GameUtils from '../utils/GameUtils.js';
 import LottoTickets from '../collection/LottoTickets.js';
 import WinningNumber from '../domain/WinningNumber.js';
-import LottoGameError from '../view/LottoGameError.js';
 import BonusNumber from '../domain/BounsNumber.js';
+
+import LottoGameInput from '../view/LottoGameInput.js';
+import LottoGameOutput from '../view/LottoGameOutput.js';
+import LottoGameError from '../view/LottoGameError.js';
+
+import GameUtils from '../utils/GameUtils.js';
 
 class LottoGame {
   #purchaseAmount;
@@ -60,6 +62,23 @@ class LottoGame {
       LottoGameError.printInputBonusNumberError(error);
       await this.inputBonusNumber();
     }
+  }
+
+  compareLottoTicketsWin() {
+    const buyingLottoTickets = this.#lottoTickets.getLottoTickets();
+
+    buyingLottoTickets.forEach((lotto) => {
+      const lottoNumbers = lotto.getLottoNumbers();
+      this.#compareOneTicket(lottoNumbers);
+    });
+  }
+
+  #compareOneTicket(lotto) {
+    const winningNumber = this.#winningNumbers.getWinningNumbers();
+    const bounsNumber = this.#bonusNumber.getBonusNumber();
+
+    const differences = GameUtils.getDifferenceElements(lotto, winningNumber);
+    const prize = GameUtils.getPrize(differences, bounsNumber);
   }
 }
 

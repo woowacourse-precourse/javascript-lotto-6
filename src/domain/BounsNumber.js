@@ -35,6 +35,10 @@ class BonusNumber {
       throw new DuplicateNumberError(ERROR_MESSAGE.DUPLICATE_BONUS_NUMBER);
     }
   }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
 }
 
 export default BonusNumber;

@@ -13,6 +13,7 @@ class App {
     this.#lottoGame.issueLottoTickets();
     await this.#lottoGame.inputWinningNumbers();
     await this.#lottoGame.inputBonusNumber();
+    this.#lottoGame.compareLottoTicketsWin();
   }
 }
 
