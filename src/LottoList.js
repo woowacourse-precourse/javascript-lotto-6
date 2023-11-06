@@ -1,6 +1,5 @@
 import Lotto from './Lotto.js';
 import { PurchaseLotto } from './PurchaseLotto.js';
-import { LOTTO_NUMBERS } from './constants.js';
 import { randomNum } from './utils.js';
 
 class LottoList {
@@ -23,14 +22,14 @@ class LottoList {
   }
 
   async createLotto() {
-    const count = await this.lottoCount(); // 비동기로 로또 개수를 가져온다
-    const numbers = new Set();
-
+    const count = await this.lottoCount();
     for (let i = 0; i < count; i++) {
-      const number = randomNum();
-      numbers.add(number.sort((numA, numB) => numA - numB));
+      let lottoNumbers = randomNum(); // 로또 번호를 생성하는 함수 호출
+      lottoNumbers = lottoNumbers.sort((numA, numB) => numA - numB);
+      this.makeLotto(lottoNumbers); // 수정된 부분
     }
-    return [...numbers];
+    // Set을 사용하지 않고, 바로 #lottos 배열에 저장
+    return this.#lottos.map((lotto) => lotto.getNumbers()); // Lotto 객체의 번호를 반환
   }
 
   async viewLottoList() {
