@@ -1,7 +1,7 @@
 import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
 import Cashier from '../src/Cashier';
 import { ERROR_MESSAGE, LOTTO_FORM, MESSAGE } from '../src/constant';
-import { getErrorMessage } from '../src/utils';
+import { getErrorMessage, sortNumbers } from '../src/utils';
 import User from '../src/User';
 
 describe('Cashier 클래스 테스트', () => {
@@ -78,9 +78,7 @@ describe('Cashier 클래스 테스트', () => {
     const lottoNumbers = lottos.map((v) => v.getLottoNumbers());
 
     lottoNumbers.forEach((v, i) => {
-      expect(v.join(',')).toBe(
-        RANDOM_NUMBERS[i].sort((a, b) => a - b).join(','),
-      );
+      expect(v.join(',')).toBe(sortNumbers(RANDOM_NUMBERS[i]).join(','));
     });
   });
 });

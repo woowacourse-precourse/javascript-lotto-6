@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE, LOTTO_FORM } from './constant';
-import { throwError, validateNumberRange } from './utils';
+import { sortNumbers, throwError, validateNumberRange } from './utils';
 class Lotto {
   #numbers; // number[]
 
@@ -11,7 +11,7 @@ class Lotto {
     this.#setNumbers(numbers);
   }
   #setNumbers(numbers) {
-    this.#numbers = numbers.sort((a, b) => a - b);
+    this.#numbers = sortNumbers(numbers);
   }
   #isNumberArray(numbers) {
     if (!Array.isArray(numbers)) throwError(ERROR_MESSAGE.isNotNumberArray);

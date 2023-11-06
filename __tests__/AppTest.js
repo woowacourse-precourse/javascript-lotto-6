@@ -2,6 +2,7 @@ import App from '../src/App';
 import BonusBall from '../src/BonusBall';
 import Lotto from '../src/Lotto';
 import { ERROR_MESSAGE, FIVE_AND_BONUS, FIVE_NO_BONUS } from '../src/constant';
+import { sortNumbers } from '../src/utils';
 import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
 
 describe('App 클래스 테스트', () => {
@@ -20,7 +21,7 @@ describe('App 클래스 테스트', () => {
 
     userLottos.forEach((v, i) => {
       expect(v.getLottoNumbers().join(',')).toBe(
-        RANDOM_NUMBERS[i].sort((a, b) => a - b).join(','),
+        sortNumbers(RANDOM_NUMBERS[i]).join(','),
       );
     });
   });
@@ -35,9 +36,7 @@ describe('App 클래스 테스트', () => {
     const { winningLotto, bonusBall } = await app.drawWinningLottoAndBonus();
 
     expect(winningLotto.getLottoNumbers().join(',')).toBe(
-      WINNING_NUMBERS.split(',')
-        .sort((a, b) => a - b)
-        .join(','),
+      sortNumbers(WINNING_NUMBERS.split(',')).join(','),
     );
 
     expect(bonusBall.getNumber()).toEqual(Number(BONUS_NUMBER));

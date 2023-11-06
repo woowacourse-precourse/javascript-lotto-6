@@ -1,10 +1,12 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { BONUS_BALL_FORM, LOTTO_FORM } from '../constant';
+import { sortNumbers } from './Sort';
 
 const getRandomNumbers = (range, length) => {
-  return Array.from(
+  const numbers = Array.from(
     MissionUtils.Random.pickUniqueNumbersInRange(range.min, range.max, length),
-  ).sort();
+  );
+  return sortNumbers(numbers);
 };
 
 const getLottoRandomNumbers = () => {
