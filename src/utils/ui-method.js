@@ -6,5 +6,5 @@ export async function inputMethod(inputConst) {
 }
 
 export function printMethod(printConst) {
-  const print = MissionUtils.Console.print(printConst);
+  MissionUtils.Console.print(printConst);
 }

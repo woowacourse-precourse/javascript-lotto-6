@@ -1,4 +1,9 @@
-import { errorConstants, magicNumber } from '../constants/index.js';
+import {
+  errorConstants,
+  magicNumber,
+  uiConstants,
+} from '../constants/index.js';
+import { printMethod } from '../utils/index.js';
 
 export default class Lotto {
   #numbers;
@@ -106,5 +111,25 @@ export default class Lotto {
     return moneyArr;
   }
 
-  //
+  // 로또 당첨 개수에 따른 출력
+  printWinningMoney(moneyArr) {
+    const printArr = [
+      [uiConstants.THREE_WINNING, magicNumber.THREE],
+      [uiConstants.FOUR_WINNING, magicNumber.FOUR],
+      [uiConstants.FIVE_WINNING, magicNumber.FIVE],
+      [uiConstants.FIVE_BONUS_WINNING, magicNumber.SEVEN],
+      [uiConstants.SIX_WINNING, magicNumber.SIX],
+    ];
+    this.#printresult(printArr, moneyArr);
+  }
+
+  #printresult(printArr, moneyArr) {
+    printArr.forEach((arr) => {
+      printMethod(
+        arr[magicNumber.ZERO] +
+          moneyArr[arr[magicNumber.ONE]] +
+          uiConstants.CNT,
+      );
+    });
+  }
 }
