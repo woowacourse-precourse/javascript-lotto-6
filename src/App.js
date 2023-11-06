@@ -22,7 +22,8 @@ class App {
   async play() {
     const user = new User();
     const theNumberOfLotto = await user.inputLottoPurchaseAmount();
-    this.issueLotto(theNumberOfLotto);
+    const lottos = this.issueLotto(theNumberOfLotto);
+    user.printLottoNumbers(lottos);
   }
 }
 

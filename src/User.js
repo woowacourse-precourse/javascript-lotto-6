@@ -5,6 +5,14 @@ class User {
     const purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     return parseInt(purchaseAmount) / 1000;
   }
+
+  printLottoNumbers(lottos) {
+    Console.print(`\n${lottos.length}개를 구매했습니다.`);
+    lottos.forEach(lotto => {
+      const lottoNumbers = lotto.myNumbers;
+      Console.print(lottoNumbers.sort((a, b) => a - b));
+    });
+  }
 }
 
 export default User;
