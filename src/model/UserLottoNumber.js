@@ -30,6 +30,7 @@ class UserLottoNumber {
     if (matchingNumbers.length === NUMBER.five) return 'third';
     if (matchingNumbers.length === NUMBER.four) return 'fourth';
     if (matchingNumbers.length === NUMBER.three) return 'fifth';
+    return 'none';
   }
 }
 
