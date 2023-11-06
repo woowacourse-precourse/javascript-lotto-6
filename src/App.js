@@ -43,7 +43,8 @@ class App {
       generatedLottoNumbersArr
     );
     this.lottoResultChecker.countMatchingNumbers(this.matchingCounts);
-    this.totalProfit = this.lottoResultChecker.calculateTotalProfit();
+    this.totalProfit = this.calculateTotalProfit();
+    this.profitRate = this.calculateProfitRate();
   }
 
   async inputPurchasePrice() {
@@ -82,6 +83,18 @@ class App {
     }
 
     return bonusArray;
+  }
+  calculateTotalProfit() {
+    const totalProfit =
+      5000 * this.threeMatches +
+      10000 * this.fourMatches +
+      1500000 * this.fiveMatches +
+      30000000 * this.fiveAndBonusMatches +
+      2000000000 * this.sixMatches;
+    return totalProfit;
+  }
+  calculateProfitRate() {
+    return (this.totalProfit / this.purchasePrice) * 100;
   }
 }
 export default App;
