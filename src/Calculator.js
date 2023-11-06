@@ -19,9 +19,10 @@ class Calculator {
   }
 
   getRateOfReturn(winningResult, paymentAmount) {
-    const winnings = this.calculateWinnings(winningResult);
+    const winnings = this.getTotalWinnings(winningResult);
 
     const rateOfReturn = this.calculateRateOfReturn(paymentAmount, winnings);
+
     return rateOfReturn;
   }
 }
