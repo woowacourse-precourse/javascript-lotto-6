@@ -1,36 +1,26 @@
-import { Console } from '@woowacourse/mission-utils';
-import BonusValidation from './Validations/BonusValidation.js';
-import inputs from './View/inputs.js';
+import validationUtils from './utils/validationUtils.js';
+import MESSAGE from './constants/message.js';
 
 class Bonus {
   #bonus;
 
-  constructor() {
-    this.#bonus = 0;
+  constructor(number, lotto) {
+    this.#bonus = number;
+    this.#validate(lotto);
   }
 
-  async #validate(lotto) {
-    try {
-      const bonusAnswer = await inputs.enterBonus();
-      const validation = new BonusValidation(bonusAnswer);
+  #validate(lotto) {
+    validationUtils.checkNumber(this.#bonus);
 
-      validation.finishValidation(lotto);
+    validationUtils.checkRange(this.#bonus);
 
-      return bonusAnswer;
-    } catch (error) {
-      Console.print(error.message);
-      return this.#validate(lotto);
+    this.#checkDuplicateNumber(lotto);
+  }
+
+  #checkDuplicateNumber(lotto) {
+    if (lotto.includes(this.#bonus)) {
+      throw new Error(MESSAGE.error.duplicateNumber);
     }
-  }
-
-  #setBonus(answer) {
-    this.#bonus = Number(answer);
-  }
-
-  async controlBonus(lotto) {
-    const answer = await this.#validate(lotto);
-
-    this.#setBonus(answer);
   }
 
   getBonus() {

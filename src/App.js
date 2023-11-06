@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import Price from './Price.js';
 import Random from './Random.js';
 import Lotto from './Lotto.js';
+import Bonus from './Bonus.js';
 import lottoModel from './models/lottoModel.js';
 import inputs from './View/inputs.js';
 import outputs from './View/outputs.js';
@@ -11,6 +12,7 @@ class App {
     const { price, number } = await this.#executePrice();
     const random = this.#executeRandom(number);
     const lotto = await this.#executeLotto();
+    const bonus = await this.#executeBonus(lotto);
   }
 
   async #executePrice() {
@@ -47,6 +49,18 @@ class App {
     } catch (error) {
       Console.print(error.message);
       return this.#executeLotto();
+    }
+  }
+
+  async #executeBonus(lotto) {
+    try {
+      const bonusAnswer = await inputs.enterBonus();
+      const bonusObject = new Bonus(Number(bonusAnswer), lotto);
+
+      return bonusObject.getBonus();
+    } catch (error) {
+      Console.print(error.message);
+      return this.#executeBonus(lotto);
     }
   }
 }
