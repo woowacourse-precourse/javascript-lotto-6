@@ -2,12 +2,12 @@ import {
   MAX_BONUS_COUNT,
   MAX_LOTTO_NUMBER,
   MIN_LOTTO_NUMBER,
-} from "./constants/standard";
+} from "./constants/standard.js";
 import {
   ERROR_NUMBER_DUPLICATION_WITH_WINNING,
   ERROR_NUMBER_RANGE,
   ERROR_NUMBER_TYPE,
-} from "./constants/validate";
+} from "./constants/validate.js";
 
 class Bonus {
   #number;
@@ -34,7 +34,7 @@ class Bonus {
     }
   }
   #validateDuplicationWithWinningNumber(number, winningNumber) {
-    if (winningNumber.include(number)) {
+    if (winningNumber.includes(number)) {
       this.#occurError(ERROR_NUMBER_DUPLICATION_WITH_WINNING);
     }
   }
@@ -45,7 +45,7 @@ class Bonus {
   }
 
   get() {
-    this.#number;
+    return this.#number;
   }
 }
 
