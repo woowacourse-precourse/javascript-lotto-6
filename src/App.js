@@ -17,9 +17,14 @@ class App {
   }
   // 구입 금액 관련 함수들
   async inputCost() {
-    const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    this.costValid(input);
-    this.#cost = input;
+    try {
+      const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+      this.costValid(input);
+      this.#cost = input;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.inputCost();
+    }
   }
   costValid(input) {
     const numberInput = Number(input);
@@ -44,15 +49,25 @@ class App {
   }
   // 당첨 번호 관련 함수들
   async inputWinnerNum() {
-    const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    this.#winningNum = new Lotto(input.split(",").map(Number));
+    try {
+      const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+      this.#winningNum = new Lotto(input.split(",").map(Number));
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.inputWinnerNum();
+    }
   }
   // 보너스 번호 관련 함수들
   async inputBonusNum() {
-    const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    this.bonusNumValid(input);
-    this.checkInOrigin(input);
-    this.#bonusNum = input;
+    try {
+      const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+      this.bonusNumValid(input);
+      this.checkInOrigin(input);
+      this.#bonusNum = input;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.inputBonusNum();
+    }
   }
   bonusNumValid(input) {
     const numberInput = Number(input);
@@ -63,7 +78,7 @@ class App {
   checkInOrigin(input) {
     const numberInput = Number(input);
     this.#winningNum.getNumbers().map((num) => {
-      if (num === numberInput) throw new Error("[ERROR] 이미 당첨된 번호입니다.");
+      if (num === numberInput) throw new Error("[ERROR] 이미 선택된 번호입니다.");
     });
   }
 
