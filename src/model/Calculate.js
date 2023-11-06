@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { PRICE } from '../util/constant.js';
 
 class Calculate {
   // 로또 개수 카운트
@@ -6,13 +7,15 @@ class Calculate {
     return parseInt(Number(money) / 1000);
   }
 
-  //랭킹 카운트
+  //랭킹 카운트,수익률 계산
   async countRanking(lottoList, lotto, bonus) {
     this.countMatch = [0, 0, 0, 0, 0];
 
     await lottoList.forEach(eachLotto => {
       this.countMatchNumber(eachLotto, lotto, bonus);
     });
+    // this.benefit = this.calculateBenefit(price);
+
     return this.countMatch;
   }
 
@@ -41,6 +44,16 @@ class Calculate {
   chechBonusAndFive(eachLotto, bonus) {
     if (eachLotto.includes(bonus)) return 3;
     return 2;
+  }
+
+  calculateBenefit(countMatch, price) {
+    let eachPrice = 0;
+    Console.print(countMatch);
+    for (let i = 0; i < 5; i++) {
+      eachPrice += PRICE[i] * countMatch[i];
+    }
+    Console.print(eachPrice);
+    return ((eachPrice / price) * 100).toFixed(1);
   }
 }
 

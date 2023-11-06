@@ -8,11 +8,13 @@ import Bonus from '../model/Bonus.js';
 import { Console } from '@woowacourse/mission-utils';
 
 export default class LottoController {
+  #price;
   #lottoAmount;
   #lottoList;
   #lotto;
   #bonus;
   #ranking;
+  #benefit;
 
   constructor() {
     this.generate = new LottoGenerator();
@@ -40,6 +42,7 @@ export default class LottoController {
   }
 
   async generateLottos(inputValue) {
+    this.#price = inputValue;
     this.#lottoAmount = this.calculate.countLottoAmounnt(inputValue);
     this.#lottoList = this.generate.startGenerate(this.#lottoAmount);
     OutputView.printLottoList(this.#lottoList);
@@ -74,8 +77,6 @@ export default class LottoController {
       new Bonus(bonusNumber, this.#lotto);
       this.#bonus = bonusNumber;
       this.#calculateRank();
-      // Console.print('여긴어디인가보너스인가');
-      // Console.print(this.#bonus);
     } catch (error) {
       OutputView.printError(error);
       this.inputBonusNumber();
@@ -84,11 +85,7 @@ export default class LottoController {
 
   async #calculateRank() {
     this.#ranking = await this.calculate.countRanking(this.#lottoList, this.#lotto, this.#bonus);
-    this.printRanking();
-  }
-
-  printRanking() {
-    Console.print('여기는 콘트롤');
-    Console.print(this.#ranking);
+    this.#benefit = this.calculate.calculateBenefit(this.#ranking, this.#price);
+    Console.print([this.#ranking, this.#benefit]);
   }
 }

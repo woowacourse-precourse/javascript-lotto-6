@@ -15,3 +15,5 @@ export const ERROR = Object.freeze({
   rangeOverInput: `[ERROR] 1~45 사이의 수만 입력해주세요.\n`,
   sameNumber: `[ERROR] 중복하지 않는 수를 입력해주세요.\n`,
 });
+
+export const PRICE = [5000, 50000, 1500000, 30000000, 2000000000];
