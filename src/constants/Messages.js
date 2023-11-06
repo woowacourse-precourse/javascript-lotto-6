@@ -1,5 +1,5 @@
 export const INPUT_MESSAGE = {
-  purchaseAmount: '구입금액을 입력해 주세요\n',
+  purchaseAmount: '구입금액을 입력해 주세요.\n',
 };
 
 export const OUTPUT_MESSAGE_FUNCTION = {
