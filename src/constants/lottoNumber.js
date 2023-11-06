@@ -8,4 +8,6 @@ const LOTTO_NUMBER = {
   count: COUNT,
 };
 
+Object.freeze(LOTTO_NUMBER);
+
 export default LOTTO_NUMBER;
