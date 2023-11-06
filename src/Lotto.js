@@ -30,7 +30,17 @@ class Lotto {
   print(){
     Console.print(`[${this.#numbers.join(', ')}]`);
   }
-  
+
+  /**
+   * 이 로또에 해당 번호가 존재여부 확인
+   * @param {*} number 
+   */
+  have(number){
+    if(this.#numbers.includes(number)){
+      throw new Error("[ERROR] 중복된 숫자가 존재합니다.")
+    }
+  }
+
   /**
    * 현재 로또의 정답과 보너스를 토대로 당첨금을 반환한다.
    

@@ -1,4 +1,5 @@
 import App from "../src/App.js";
+import Lotto from "../src/Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
@@ -105,6 +106,29 @@ describe("로또 테스트", () => {
       "[ERROR] 1-45사이의 숫자를 입력해주세요.",
       "[ERROR] 로또 번호는 6개여야 합니다.",
       "[ERROR] 로또 번호는 6개여야 합니다."
+    ];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
+  test("보너스번호 예외 확인", async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    mockQuestions(["1","a","133","7"]);
+
+    // when
+    const app = new App();
+    app.winLotto = new Lotto([1,2,3,4,5,6]);
+    await app.bonusInput();
+
+    // then
+    const logs = [
+      "[ERROR] 중복된 숫자가 존재합니다.",
+      "[ERROR] 숫자를 입력해주세요.",
+      "[ERROR] 1-45사이의 숫자를 입력해주세요.",
     ];
 
     logs.forEach((log) => {

@@ -4,6 +4,7 @@ import Lotto from "./Lotto.js";
 class App {
   buyLottos=[];
   winLotto;
+  bonusNumber;
 
   async play() {
     await this.buy();
@@ -50,8 +51,19 @@ class App {
   }
 
   async bonusInput(){
-    const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.');
-
+    while(true){
+      try{
+        const number = await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+        this.isNum(number)
+        this.isLottoNumber(Number(number));
+        this.winLotto.have(Number(number));
+        this.bonusNumber = Number(number);
+      }catch(e){
+        Console.print(e.message);
+        continue;
+      }
+      break;
+    }
   }
 
   /**
@@ -87,6 +99,11 @@ class App {
     }
   }
 
+  /**
+   * 로또 번호인지 확인
+   * 1~45사이의 숫자
+   * @param {*} number 
+   */
   isLottoNumber(number){
     if(Number(number)<1||45<Number(number)) throw new Error("[ERROR] 1-45사이의 숫자를 입력해주세요.")
   }
