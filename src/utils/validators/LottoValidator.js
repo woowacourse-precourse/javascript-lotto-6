@@ -2,18 +2,22 @@ import CustomError from '../../errors/CustomError';
 import ERROR from '../constants/error';
 import NUMBER from '../constants/number';
 
-function checkSingleLottoNumberRange(number) {
-  if (
-    number > NUMBER.game.lotto.maxNumber ||
-    number < NUMBER.game.lotto.minNumber
-  ) {
-    throw new CustomError(ERROR.lottoNumber.notInRange);
+function checkNumberInRange(number, min, max, error) {
+  if (number > max || number < min) {
+    throw new CustomError(error);
   }
 }
 
 const LottoNumbersValidator = {
   range: numbers => {
-    numbers.forEach(item => checkSingleLottoNumberRange(item));
+    numbers.forEach(item =>
+      checkNumberInRange(
+        item,
+        NUMBER.game.lotto.minNumber,
+        NUMBER.game.lotto.maxNumber,
+        ERROR.lottoNumber.notInRange,
+      ),
+    );
   },
   length: numbers => {
     if (numbers.length !== NUMBER.game.lotto.length) {
@@ -29,16 +33,18 @@ const LottoNumbersValidator = {
 
 const BonusNumberValidator = {
   range: number => {
-    if (
-      number > NUMBER.game.bonus.maxNumber ||
-      number < NUMBER.game.bonus.minNumber
-    ) {
-      throw new CustomError(ERROR.bonusNumber.notInRange);
-    }
+    checkNumberInRange(
+      number,
+      NUMBER.game.bonus.minNumber,
+      NUMBER.game.bonus.maxNumber,
+      ERROR.bonusNumber.notInRange,
+    );
   },
   duplicatedWithWinningNumbers: (number, winningNumbers) => {
     if (winningNumbers.includes(number)) {
-      throw new CustomError(ERROR.bonusNumber.isDuplicatedWithLottoNumbers);
+      throw new CustomError(
+        ERROR.bonusNumber.isDuplicatedWithLottoNumbers(number),
+      );
     }
   },
 };
