@@ -11,7 +11,7 @@ class LottoGameController {
 
   #lottoService = new LottoService();
 
-  async start() {
+  async executeLottoGame() {
     await this.setMoneyAmountFromInput();
     const tickets = this.#lottoPublisher.publishLottos();
     this.#lottoService.setLottoTickets(tickets);
