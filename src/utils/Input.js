@@ -1,10 +1,12 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { MESSAGE } from '../constant';
-import { hasNoComma, throwError } from '.';
+import { hasNoComma, printMessage, throwError } from '.';
 
 const readInput = async (query) => {
   try {
+    printMessage(query);
     const value = await MissionUtils.Console.readLineAsync(query);
+    printMessage(value);
     return value.replaceAll(' ', '');
   } catch (error) {
     throwError(error);

@@ -10,7 +10,9 @@ const getErrorMessage = (error) => {
   return `${ERROR_MESSAGE.header}${error}`;
 };
 const throwError = (error) => {
-  throw new Error(getErrorMessage(error));
+  const message = getErrorMessage(error);
+  printMessage(message);
+  throw new Error(message);
 };
 const changeArrayToStringMessage = (array) => {
   return `[${array[0]}, ${array[1]}, ${array[2]}, ${array[3]}, ${array[4]}, ${array[5]}]`;
