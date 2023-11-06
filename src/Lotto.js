@@ -38,17 +38,17 @@ class Lotto {
 
     lottos.forEach((lotto) => {
       const lottoNum = lotto.getLottoNumbers();
-      const matchingNumbers = lottoNum.filter((number) => winningNumbers.includes(number)).length;
+      const matchingCount = lottoNum.filter((number) => winningNumbers.includes(number)).length;
       const bonusMatch = lottoNum.includes(bonusNumber);
-      const rank = Lotto.calculateRank(matchingNumbers, bonusMatch);
+      const rank = Lotto.calculateRank(matchingCount, bonusMatch);
       if (rank) rankBoard[rank] += 1;
     });
 
     return rankBoard;
   }
 
-  static calculateRank(matchingNumbers, bonusMatch) {
-    switch (matchingNumbers) {
+  static calculateRank(matchingCount, bonusMatch) {
+    switch (matchingCount) {
       case 6:
         return 1;
       case 5:
