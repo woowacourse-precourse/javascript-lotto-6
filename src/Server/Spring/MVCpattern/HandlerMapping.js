@@ -7,6 +7,7 @@ import UserController from '../Annotation/@Controller/UserController.js';
 import WinningLottoController from '../Annotation/@Controller/WinningLottoController.js';
 import BonusController from '../Annotation/@Controller/BonusController.js';
 import CompareLottoController from '../Annotation/@Controller/CompareLottoController.js';
+import { ERROR_MESSAGE } from '../../../Util/Message.js';
 
 class HandlerMapping {
   #userController;
@@ -33,7 +34,7 @@ class HandlerMapping {
     if (url === RESTFULAPI.setWinningNumber) return this.#winningLottoController;
     if (url === RESTFULAPI.setBonusNumber) return this.#bonusController;
     if (url === RESTFULAPI.compareLottoNumber) return this.#compareLottoController;
-    return 0;
+    throw ERROR_MESSAGE.isNotUrl;
   }
 }
 

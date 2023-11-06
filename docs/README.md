@@ -101,7 +101,7 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 
 # 📘 요구사항 정리
 
-## 입/출력 요구사항 🐱‍🐉
+## 기능 요구 사항 🐱‍🐉
 
 ### 입력 
 
@@ -141,9 +141,16 @@ UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 �
 - [x] : 당첨통계를 출력한다.
   - [x] : 수익률은 소수점 둘째 자리에서 반올림한다.
 
-## Error Handling 🚀
+### Error Handling 🚀
 - [x] : 에러 메시지는 [ERROR]로 시작해야 한다.
 - [x] : 에러 메시지 출력 후 해당 부분을 다시 입력 받는다.
+
+## 추가 요구사항 🐱‍🐉
+- [x] : 함수의 길이가 15라인을 넘어가지 않도록 한다.
+  - [x] : 함수는 한가지 일만 잘 하도록 구현한다.
+- [x] : else를 지양한다.
+- [x] : 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 제외한다.
+
 
 <br>
 

@@ -26,6 +26,7 @@ const ERROR_MESSAGE = Object.freeze({
   isDuplicate: '[ERROR] 로또번호는 중복되면 안됩니다.',
   isNotLength: `[ERROR] 로또 번호는 ${CONSTANTS.lottoCount}개여야 합니다.`,
   isAmountSmall: `[ERROR] ${CONSTANTS.lottoPrice}보다 같거나 커야 합니다.`,
+  isNotUrl: `[ERROR] 잘못된 Url입니다.`,
 });
 
 export { INPUT_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE };

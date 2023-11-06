@@ -7,7 +7,6 @@ import LottoPosView from './LottoPosView.js';
 
 class ViewResolver {
   getView() {
-    // if (viewName === CONSTANTS.LottoPos) 생략
     return new LottoPosView();
   }
 }

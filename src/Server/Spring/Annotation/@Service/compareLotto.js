@@ -32,8 +32,10 @@ const convertListToDict = (lottoCompareResult) => {
   const result = {};
 
   lottoCompareResult.forEach((count) => {
-    if (result[count]) result[count] += 1;
-    else result[count] = 1;
+    if (result[count]) {
+      return (result[count] += 1);
+    }
+    return (result[count] = 1);
   });
   return result;
 };
