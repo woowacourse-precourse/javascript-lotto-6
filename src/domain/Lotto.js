@@ -1,4 +1,5 @@
 import { VALIDATION_RULE, ERROR_MESSAGE } from '../utils/constant';
+import { Validator } from '../utils/validator';
 
 export class Lotto {
   #numbers;
@@ -12,6 +13,8 @@ export class Lotto {
     if (numbers.length !== VALIDATION_RULE.LOTTO_LENGTH) {
       throw ERROR_MESSAGE.INVALID_COUNT;
     }
+    Validator.Has_sixLength(numbers);
+    Validator.Is_Duplicate(numbers);
   };
 
   convert_toString = () => {
