@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { OUTPUT_MESSAGE_FUNCTION } from '../constants/Messages.js';
 
 const OutputView = {
   /**
@@ -12,7 +13,7 @@ const OutputView = {
    * @param {number[]} userLottos
    */
   printLottos(userLottos) {
-    this.print(`\n${userLottos.length}개를 구매했습니다.`);
+    this.print(OUTPUT_MESSAGE_FUNCTION.userLottos(userLottos.length));
     userLottos.forEach((userLotto) => {
       this.print(userLotto);
     });
