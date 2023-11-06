@@ -31,6 +31,7 @@ const STATISTICS_MESSAGE = {
 const ERROR_PREFIX = '[ERROR]';
 const ERROR_MESSAGE = {
   invalidType: `${ERROR_PREFIX} 숫자만 입력 가능합니다.`,
+  invalidInteger: `${ERROR_PREFIX} 정수만 입력 가능합니다.`,
   invalidLottoRange: `${ERROR_PREFIX} 로또 번호는 ${LOTTO.range.start}부터 ${LOTTO.range.end} 사이의 숫자여야 합니다.`,
   invalidLottoLength: `${ERROR_PREFIX} 로또 번호는 ${LOTTO.length}개여야 합니다.`,
   duplicateLottoNumber: `${ERROR_PREFIX} 로또 번호는 중복될 수 없습니다.`,

@@ -7,6 +7,12 @@ function validateNumberType(value) {
   }
 }
 
+function validateInteger(value) {
+  if (!Number.isInteger(value)) {
+    throw new Error(ERROR_MESSAGE.invalidInteger);
+  }
+}
+
 function validateUnit(value) {
   if (value % LOTTO.price !== 0) {
     throw new Error(ERROR_MESSAGE.invalidUnit);
@@ -50,6 +56,7 @@ function validateLotto(numbers) {
   numbers.forEach((number) => {
     validateNumberType(number);
     validateLottoRange(number);
+    validateInteger(number);
   });
   validateDuplicateNumber(numbers);
 }
@@ -62,8 +69,10 @@ function validatePurchaseAmount(amount) {
 
 function validateBonusNumber(value, winningNumbers) {
   validateNumberType(value);
-  validateLottoRange(Number(value));
-  validateExistingNumber(Number(value), winningNumbers);
+  const bonusNumber = Number(value);
+  validateInteger(bonusNumber);
+  validateLottoRange(bonusNumber);
+  validateExistingNumber(bonusNumber, winningNumbers);
 }
 
 export { validateBonusNumber, validatePurchaseAmount, validateLotto };
