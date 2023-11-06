@@ -9,6 +9,13 @@ import {
   ENTER_PURCHASE_AMOUNT_PROMPT,
   ENTER_WINNING_NUMBERS_PROMPT
 } from '../Constants/Message.js';
+import {
+  ZERO,
+  COMMA,
+  LOTTO_NUMBERS_COUNT,
+  LOTTO_TICKET_PRICE,
+  RANGE_OF_LOTTO_NUMBER,
+} from '../Constants/Constant.js';
 
 class InputView {
   static async requestPurchaseAmount() {
@@ -28,10 +35,10 @@ class InputView {
     if (isNaN(purchaseAmount)) {
       throw PURCHASE_AMOUNT_ERROR_MESSAGE.notNumber;
     }
-    if (purchaseAmount <= 0) {
+    if (purchaseAmount <= ZERO) {
       throw PURCHASE_AMOUNT_ERROR_MESSAGE.nonPositive;
     }
-    if (purchaseAmount % 1000 !== 0) {
+    if (purchaseAmount % LOTTO_TICKET_PRICE !== ZERO) {
       throw PURCHASE_AMOUNT_ERROR_MESSAGE.notDivisibleBy1000;
     }
   }
@@ -40,8 +47,8 @@ class InputView {
     while (true) {
       try {
         const winningNumbers = await Console.readLineAsync(ENTER_WINNING_NUMBERS_PROMPT);
-        this.validateWinningNumbers(winningNumbers.split(','));
-        return winningNumbers.split(',').map(Number);
+        this.validateWinningNumbers(winningNumbers.split(COMMA));
+        return winningNumbers.split(COMMA).map(Number);
       }
       catch (error) {
         Console.print(error);
@@ -54,10 +61,10 @@ class InputView {
     if (!areAllNumbers) {
       throw WINNING_NUMBERS_ERROR_MESSAGE.notNumber;
     }
-    if (!winningNumbers.every((number) => number >= 1 && number <= 45)) {
+    if (!winningNumbers.every((number) => number >= RANGE_OF_LOTTO_NUMBER.min && number <= RANGE_OF_LOTTO_NUMBER.max)) {
       throw WINNING_NUMBERS_ERROR_MESSAGE.notInRange;
     }
-    if (winningNumbers.length !== 6) {
+    if (winningNumbers.length !== LOTTO_NUMBERS_COUNT) {
       throw WINNING_NUMBERS_ERROR_MESSAGE.notSixNumbers;
     }
     const set = new Set(winningNumbers);
@@ -80,7 +87,7 @@ class InputView {
   }
 
   static validateBonusNumber(bonusNumber, winningNumbers) {
-    if (bonusNumber < 1 || bonusNumber > 45) {
+    if (bonusNumber < RANGE_OF_LOTTO_NUMBER.min || bonusNumber > RANGE_OF_LOTTO_NUMBER.max) {
       throw BONUS_NUMBER_ERROR_MESSAGE.notInRange
     }
     if (winningNumbers.includes(Number(bonusNumber))) {

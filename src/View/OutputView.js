@@ -12,15 +12,16 @@ import {
   WINNING_STATISTICS_SEPARATOR,
   WINNING_STATISTICS_TITLE
 } from '../Constants/Message.js';
+import { COMMA_WITH_SPACE, DECIMAL_PRECISION_ONE, LOTTO_TICKET_PRICE } from '../Constants/Constant.js';
 
 class OutputView {  
   static displayNumberOfPurchase(purchaseAmount) {
-    const numberOfPurchase = purchaseAmount / 1000;
+    const numberOfPurchase = purchaseAmount / LOTTO_TICKET_PRICE;
     Console.print(`\n${numberOfPurchase}${PURCHASE_MESSAGE_SUFFIX}`);
   }
 
   static displayLotto(lotto) {
-    Console.print(`[${lotto.join(', ')}]`);
+    Console.print(`[${lotto.join(COMMA_WITH_SPACE)}]`);
   }
 
   static displayWinningDetails(rank) {
@@ -34,7 +35,7 @@ class OutputView {
   }
 
   static displayRateOfReturn(rateOfReturn) {
-    Console.print(`${RATE_OF_RETURN_MESSAGE_PREFIX}${parseFloat(rateOfReturn.toFixed(1)).toLocaleString()}${RATE_OF_RETURN_MESSAGE_SUFFIX}`);
+    Console.print(`${RATE_OF_RETURN_MESSAGE_PREFIX}${parseFloat(rateOfReturn.toFixed(DECIMAL_PRECISION_ONE)).toLocaleString()}${RATE_OF_RETURN_MESSAGE_SUFFIX}`);
   }
 }
 

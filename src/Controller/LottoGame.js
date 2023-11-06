@@ -4,6 +4,11 @@ import OutputView from "../View/OutputView.js";
 import Lotto from "../Lotto.js";
 import Lottos from "../Lottos.js";
 import Winning from "../Winning.js";
+import {
+  LOTTO_TICKET_PRICE,
+  RANGE_OF_LOTTO_NUMBER,
+  LOTTO_NUMBERS_COUNT
+} from "../Constants/Constant.js";
 
 class LottoGame {
   lottos = new Lottos();
@@ -16,7 +21,7 @@ class LottoGame {
 
   async buyLotto() {
     this.purchaseAmount = await InputView.requestPurchaseAmount();
-    const numberOfPurchase = this.purchaseAmount / 1000;
+    const numberOfPurchase = this.purchaseAmount / LOTTO_TICKET_PRICE;
 
     OutputView.displayNumberOfPurchase(this.purchaseAmount);
 
@@ -42,7 +47,7 @@ class LottoGame {
   }
 
   makeLottoNumbers() {
-    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const numbers = Random.pickUniqueNumbersInRange(RANGE_OF_LOTTO_NUMBER.min, RANGE_OF_LOTTO_NUMBER.max, LOTTO_NUMBERS_COUNT);
     return numbers;
   }
 }

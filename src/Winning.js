@@ -1,9 +1,19 @@
+import {
+  ZERO,
+  ONE,
+  RANK,
+  PRIZE,
+  CORRECT_COUNT,
+  FIVE_ZEROS_ARRAY,
+  PERCENTAGE_MULTIPLIER
+} from "./Constants/Constant.js";
+
 class Winning {
   #winningNumbers;
   #bonusNumber;
   #lottos;
-  #rank = [0, 0, 0, 0, 0];
-  #rateOfReturn = 0;
+  #rank = FIVE_ZEROS_ARRAY
+  #rateOfReturn = ZERO;
   
   constructor(winningNumbers, bonusNumber, lottos) {
     this.#winningNumbers = winningNumbers;
@@ -14,21 +24,21 @@ class Winning {
   compareLottoNumbers() {
     this.#lottos.forEach((lotto) => {
       const winningType = lotto.filter(number => this.#winningNumbers.includes(number)).length;
-      if (winningType === 3) this.#rank[4] += 1;
-      if (winningType === 4) this.#rank[3] += 1;
-      if (winningType === 5 && !lotto.includes(this.#bonusNumber)) this.#rank[2] += 1;
-      if (winningType === 5 && lotto.includes(this.#bonusNumber)) this.#rank[1] += 1;
-      if (winningType === 6) this.#rank[0] += 1;
+      if (winningType === CORRECT_COUNT.three) this.#rank[RANK.fifth] += ONE;
+      if (winningType === CORRECT_COUNT.four) this.#rank[RANK.fourth] += ONE;
+      if (winningType === CORRECT_COUNT.five && !lotto.includes(this.#bonusNumber)) this.#rank[RANK.third] += ONE;
+      if (winningType === CORRECT_COUNT.five && lotto.includes(this.#bonusNumber)) this.#rank[RANK.second] += ONE;
+      if (winningType === CORRECT_COUNT.six) this.#rank[RANK.first] += ONE;
     })
   }
 
   calculateRateOfReturn(purchaseAmount) {
-    const money = [2000000000, 30000000, 1500000, 50000, 5000];
-    let result = 0;
+    const money = [PRIZE.first, PRIZE.second, PRIZE.third, PRIZE.fourth, PRIZE.fifth];
+    let result = ZERO;
     this.#rank.forEach((count, index) => {
       result += money[index] * count;
     })
-    this.#rateOfReturn = result / purchaseAmount * 100;
+    this.#rateOfReturn = result / purchaseAmount * PERCENTAGE_MULTIPLIER;
     return this.#rateOfReturn;
   }
 
