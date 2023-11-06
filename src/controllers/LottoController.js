@@ -1,5 +1,7 @@
 import { Random, Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE } from '../constans/errorMessages'
+import { inputPriceValidator } from '../validate/inputPriceValidator'
+import { inputNumbersValidator } from '../validate/inputNumbersValidator'
+import { inputBonusValidator } from '../validate/inputBonusValidator'
 import { CONSOLE_MESSAGE } from '../constans/consoleMessages'
 
 class LottoController {
@@ -14,15 +16,8 @@ class LottoController {
 
     async lottoPrice() {
         const priceInput = await Console.readLineAsync(CONSOLE_MESSAGE.inputLottoPrice);
-        if (this.inputPriceValidity(priceInput)) {
-            throw new Error(ERROR_MESSAGE.notUnit);
-        }
+        inputPriceValidator(priceInput);
         return priceInput;
-    }
-
-    inputPriceValidity(priceInput) {
-        const unitError = priceInput % 1000;
-        return unitError !== 0;
     }
 
     lottoTickets(lottoPrice) {
@@ -49,35 +44,22 @@ class LottoController {
     async lottoMainNumbers() {
         const lottoMainNumberInput = await Console.readLineAsync(CONSOLE_MESSAGE.inputLottoMainNumber);
         const lottoNumbers = lottoMainNumberInput.split(',').map(Number);
-        if (!this.inputNumbersValidity(lottoMainNumberInput)) {
-            throw new Error("[ERROR] 당첨 번호가 잘못된 형식입니다.");
-        }
+        inputNumbersValidator(lottoMainNumberInput);
         return lottoNumbers;
-    }
-
-    inputNumbersValidity(lottoNumbers) {
-        const Numbers = lottoNumbers.split(',').map(Number);
-        const uniqueNumbers = Array.from(new Set(Numbers));
-        const lengthError = Numbers.length !== 6;
-        const rangeError = Numbers.some(number => number < 1 || number > 45);
-        const overlapError = uniqueNumbers.length !== 6;
-        return (!lengthError && !rangeError && !overlapError);
     }
 
     async lottoBonusNumber(lottoMainNumbers) {
         const lottoBonusNumberInput = await Console.readLineAsync(CONSOLE_MESSAGE.inputLottoBonusNumber);
         const bonusNumber = parseInt(lottoBonusNumberInput);
-        if (!this.inputBonusValidity(lottoMainNumbers, bonusNumber)) {
-            throw new Error("[ERROR] 보너스 번호가 잘못된 형식입니다.");
-        }
+        inputBonusValidator(lottoMainNumbers, lottoBonusNumberInput);
         return bonusNumber;
     }
 
-    inputBonusValidity(lottoMainNumbers, bonusNumber) {
-        const rangeError = bonusNumber < 1 || bonusNumber > 45;
-        const overlapError = lottoMainNumbers.includes(bonusNumber);
-        return (!rangeError && !overlapError);
-    }
+    // inputBonusValidator(lottoMainNumbers, bonusNumber) {
+    //     const rangeError = bonusNumber < 1 || bonusNumber > 45;
+    //     const overlapError = lottoMainNumbers.includes(bonusNumber);
+    //     return (rangeError && overlapError);
+    // }
 
     calculationResult(lottoTickets, lottoMainNumbers, bonusNumber) {
         const results = [
