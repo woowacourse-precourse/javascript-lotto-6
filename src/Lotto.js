@@ -34,6 +34,31 @@ class Lotto {
     return this;
   }
 
+  getRank(winningNumbers, bonusNumber) {
+    this.#initCheck();
+    this.checkLotto(winningNumbers, bonusNumber);
+
+    switch (this.#numOfCorrect) {
+      case 6:
+        return '1등';
+      case 5 && this.#isBonus === true:
+        return '2등';
+      case 5 && this.#isBonus === false:
+        return '3등';
+      case 4:
+        return '4등';
+      case 3:
+        return '5등';
+      default:
+        return null;
+    }
+  }
+
+  #initCheck() {
+    this.#isBonus = false;
+    this.#numOfCorrect = 0;
+  }
+
   static #printLottoNumber(numbers) {
     Console.print(`[${numbers.join(', ')}]`);
   }
