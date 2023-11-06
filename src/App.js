@@ -1,10 +1,13 @@
 import Lotto from './model/Lotto.js';
+import Compare from './model/Compare.js';
 import InputView from './view/inputView.js';
 import OutputView from './view/outputView.js';
 
 class App {
   #inputView;
   #outputView;
+  #compare;
+
   #coin = 0;
   #boughtLottos = [];
   #winningNumber;
@@ -14,7 +17,7 @@ class App {
     this.#initialize();
     await this.buyLotto(this.#inputView, this.#outputView);
     await this.getWinningNumber(this.#inputView);
-    this.printWinningResult();
+    this.getWinningResult();
   }
 
   #initialize() {
@@ -23,7 +26,7 @@ class App {
   }
 
   // console.log('로또 구매하는 로직');
-  async buyLotto(inputView, outputView) {
+  async buyLotto(inputView) {
     this.#coin = await inputView.coin();
     console.log(`\n${this.#coin}개를 구매했습니다.`);
 
@@ -39,9 +42,15 @@ class App {
     this.#bonusNumber = await inputView.bonus(this.#winningNumber.getNumbers());
   }
 
-  printWinningResult() {
-    // console.log('당첨결과 출력');
+  // console.log('당첨결과 출력');
+  getWinningResult() {
+    this.#compare = new Compare(this.#winningNumber, this.#bonusNumber);
+    const result = this.#compare.getMatchedAllNumber(this.#boughtLottos);
+    console.log('\n당첨 통계\n---\n');
+    console.log(result);
   }
+
+  printWinningResult() {}
 }
 
 export default App;
