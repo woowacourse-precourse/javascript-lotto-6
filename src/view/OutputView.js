@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import profitRateCalculator from '../util/profitRateCalculator.js';
 
 const OutputView = {
   printTotalLottos(lottos) {
@@ -43,10 +44,8 @@ const OutputView = {
   },
 
   formatProfitRate(profitRate) {
-    if (Number.isInteger(profitRate)) {
-      return `총 수익률은 ${profitRate.toLocaleString()}.0%입니다.`;
-    }
-    return `총 수익률은 ${Number(profitRate.toFixed(1)).toLocaleString()}%입니다.`;
+    const calculatedProfitRate = profitRateCalculator(profitRate);
+    return `총 수익률은 ${calculatedProfitRate}%입니다.`;
   },
 
   print(message) {
