@@ -11,7 +11,7 @@ class Lotto {
 
   #validate(numbers) {
     throwErrorIf(numbers.length !== 6, error.NUMBER_IS_NOT_SIX);
-    throwErrorIf(numbers.length !== new Set(numbers).length, error.DUPLICATE);
+    throwErrorIf(numbers.length !== new Set(numbers).size, error.DUPLICATE);
 
     numbers.forEach((number) => {
       // 범위를 벗어남
