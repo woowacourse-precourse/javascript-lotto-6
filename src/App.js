@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { getLottoCntFromInputMoney } from './utils/getUserInput.js';
+import LottoList from './repository/LottoList.js';
 
 class App {
   async play() {
@@ -7,6 +8,8 @@ class App {
       '구입금액을 입력해 주세요.\n'
     );
     const lottoCnt = getLottoCntFromInputMoney(inputMoney);
+
+    const lottoList = new LottoList(lottoCnt);
   }
 }
 
