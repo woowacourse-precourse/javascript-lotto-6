@@ -139,7 +139,7 @@ class App {
       this.result[4] * 50000 +
       this.result[5] * 5000;
     const buy = this.pay * 1000;
-    const earningRatio = Number(((earning - buy) / buy) * 100).toFixed(1);
+    const earningRatio = Number((earning / buy) * 100).toFixed(1);
     Console.print("총 수익률은 " + earningRatio + "%입니다.\n");
   }
 
