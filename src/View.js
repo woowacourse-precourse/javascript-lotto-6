@@ -71,6 +71,13 @@ class View {
       return `${Number(rateOfReturn.toFixed(2))}%`;
     }
   }
+
+  static async printTotalReward(result, inputMoney) {
+    MissionUtils.Console.print(this.WIN_STATISTICS_HEADER);
+    View.printRewardStatistics(result);
+    const returnPrint = View.calculateReturn(result, inputMoney);
+    MissionUtils.Console.print(`총 수익률은 ${returnPrint}입니다.`);
+  }
 }
 
 export default View;

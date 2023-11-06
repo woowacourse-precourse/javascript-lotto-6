@@ -20,10 +20,7 @@ class App {
     });
     const result = await WinLotto.calculateEarnings(this.lottoTickets);
 
-    MissionUtils.Console.print(View.WIN_STATISTICS_HEADER);
-    View.printRewardStatistics(result);
-    const returnPrint = View.calculateReturn(result, inputMoney);
-    MissionUtils.Console.print(`총 수익률은 ${returnPrint}입니다.`);
+    await View.printTotalReward(result, inputMoney);
   }
 }
 
