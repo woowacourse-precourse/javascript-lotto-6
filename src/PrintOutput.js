@@ -10,7 +10,7 @@ class PrintOutput {
 
   printLottoNumSet = (price) => {
     const quantity = price / 1000;
-    Console.print(`${quantity}개를 구매했습니다.`);
+    Console.print(`\n${quantity}개를 구매했습니다.`);
 
     for(let i = 0; i < quantity; i++) {
       const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -19,8 +19,9 @@ class PrintOutput {
     }
 
     this.newLottoNumSets = ValidateLottoNumSet(this.lottoNumSets);
-    this.newLottoNumSets.forEach(lottoNumSet => {
-      Console.print(`[${lottoNumSet.join(", ")}]`);
+    this.newLottoNumSets.forEach((lottoNumSet, index) => {
+      const comma = index === this.newLottoNumSets.length - 1 ? "" : ", ";
+      Console.print(`[${lottoNumSet.join(", ")}]${comma}`);
     });
   };
 

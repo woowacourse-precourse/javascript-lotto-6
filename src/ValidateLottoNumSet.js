@@ -2,7 +2,7 @@ import { Random } from "@woowacourse/mission-utils";
 
 const ValidateLottoNumSet = (lottoNumSets) => {
   const firstLottoNumSet = lottoNumSets[0];
-  const isAllEqual = (numSet1, numSet2) => numSet1.every((num) => numSet2.includes(num));
+  const isAllEqual = (numSet1, numSet2) => numSet1.every(num => numSet2.includes(num));
   const uniqueLottoNumSets = [firstLottoNumSet];
 
   lottoNumSets.slice(1).forEach(anotherLottoNumSet => {
@@ -15,7 +15,7 @@ const ValidateLottoNumSet = (lottoNumSets) => {
     }
     uniqueLottoNumSets.push(anotherLottoNumSet);
   });
-  
+
   return uniqueLottoNumSets;
 };
 

@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import ValidatePrice from "./ValidatePrice";
+import PrintOutput from "./PrintOutput";
 
 class Lotto {
   #numbers;
@@ -12,40 +13,41 @@ class Lotto {
 
   async start() {
     await this.getPrice();
-    await this.getSixNum();
-    await this.getBonusNum();
+    this.sixNum = await this.getSixNum();
+    this.bonusNum = await this.getBonusNum();
+    await this.print();
   }
 
   getPrice = async () => {
     do {
       try {
-        let price = await Console.readLineAsync("구입 금액을 입력해 주세요.");
+        let price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
         price = ValidatePrice(price);
       } catch(error) {
         throw new Error(error.message);
       }
     } while(!price);
 
-    return price;
+    PrintOutput.printLottoNumSet(price);
   };
 
   getSixNum = async () => {
     do {
       try {
-        let sixNumSet = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
-        sixNumSet = this.#validate(sixNumSet);
+        let sixNum = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+        sixNum = this.#validate(sixNum);
       } catch(error) {
         throw new Error(error.message);
       }
-    } while(!sixNumSet);
+    } while(!sixNum);
 
-    return sixNumSet;
+    return sixNum;
   };
 
   getBonusNum = async () => {
     do {
       try {
-        let bonusNum = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
+        let bonusNum = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
         bonusNum = this.#validateBonusNum(bonusNum);
       } catch(error) {
         throw new Error(error.message);
@@ -55,6 +57,12 @@ class Lotto {
     return bonusNum;
   };
 
+  print = async () => {
+    PrintOutput.calculcalculateWinningDetails(this.sixNum, this.bonusNum);
+    PrintOutput.printWinningDetails();
+    PrintOutput.printTotalReturn();
+  }
+
   #hasDuplicates = (numbers) => {
     const uniqueNumbers = [...new Set(numbers)];
     return numbers.length !== uniqueNumbers.length;
@@ -63,7 +71,7 @@ class Lotto {
   #validate(numbers) {
     if (!numbers.isArray())
       throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
-    if (numbers.every(num => Number.isNaN(num)))
+    if (numbers.some(num => Number.isNaN(num)))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
