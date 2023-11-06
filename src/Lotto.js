@@ -11,7 +11,7 @@ class Lotto {
   // }
 
   async play() {
-    const playLotto = new PurchaseLotto();
+    const playLotto = new PurchaseLottery();
     await playLotto.purchaseTicket();
   }
 
@@ -24,11 +24,28 @@ class Lotto {
   // TODO: 추가 기능 구현
 }
 
-class PurchaseLotto {
+class PurchaseLottery {
   async purchaseTicket() {
     let ticketsAmount = await Console.readLineAsync(INPUT_MSG.amount);
-    const validation = validatePurchaseFormat(ticketsAmount);
-    return validation;
+    validatePurchaseFormat(ticketsAmount);
+
+    ticketsAmount = Math.floor(ticketsAmount / 1000);
+
+    const lottoNumbers = new LotteryNumbers();
+    lottoNumbers.generateNumbers(ticketsAmount);
+  }
+}
+
+class LotteryNumbers {
+  async generateNumbers(ticketQuantity) {
+    for (let i = 0; i < ticketQuantity; i++) {
+      const lottoNums = await Random.pickUniqueNumbersInRange(1, 45, 6);
+      Console.print(lottoNums);
+    }
+  }
+
+  async LotteryResuls() {
+    //
   }
 }
 
