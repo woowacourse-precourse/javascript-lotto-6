@@ -5,10 +5,33 @@ import CONSTANT from './constants/constant.js';
 class Lotto {
   #numbers;
 
-  // numbers는 사용자가 입력한 구입 금액이다.
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+  }
+  #validate(numbers) {
+    const isDuplicated = new Set(numbers).size !== numbers.length;
+
+    if (numbers.length !== 6) {
+      throw new Error(CONSTANT.error.invalidWinningNumLength);
+    }
+
+    if (isDuplicated) {
+      throw new Error(CONSTANT.error.duplicate);
+    }
+  }
+
+  get winningNum() {
+    return this.#numbers;
+  }
+}
+
+class MakeLotto extends Lotto {
+  #amount;
+  constructor(number, amount) {
+    super(number);
+    this.#validate(amount);
+    this.#amount = amount;
   }
 
   #validate(amount) {
@@ -19,10 +42,6 @@ class Lotto {
     if (amount % CONSTANT.game.unit !== 0) {
       Console.print(CONSTANT.error.invalidAmountUnit);
     }
-  }
-
-  get amount() {
-    return this.#numbers;
   }
 
   #makeLottoArray(quantity) {
@@ -39,8 +58,8 @@ class Lotto {
   }
 
   async makeLottos() {
-    Console.print(`${this.#numbers / CONSTANT.game.unit}개를 구매했습니다.`);
-    const quantity = this.#numbers / CONSTANT.game.unit;
+    Console.print(`${this.#amount / CONSTANT.game.unit}개를 구매했습니다.`);
+    const quantity = this.#amount / CONSTANT.game.unit;
     const myLottos = this.#makeLottoArray(quantity);
     Console.print('');
     return myLottos;
@@ -48,29 +67,19 @@ class Lotto {
 }
 
 class LottoResult extends Lotto {
-  #winningNum;
   #bonusNum;
+  #amount;
   #myLottos;
 
-  constructor(numbers, winningNum, bonusNum, myLottos) {
+  constructor(numbers, bonusNum, amount, myLottos) {
     super(numbers);
-    this.#validate(numbers, winningNum, bonusNum, myLottos);
-    this.#winningNum = winningNum;
+    this.#validate(numbers, bonusNum, amount, myLottos);
     this.#bonusNum = bonusNum;
+    this.#amount = amount;
     this.#myLottos = myLottos;
   }
 
-  #validate(numbers, winningNum, bonusNum, myLottos) {
-    const isDuplicated = new Set(winningNum).size !== winningNum.length;
-
-    if (isDuplicated) {
-      throw new Error(CONSTANT.error.duplicate);
-    }
-
-    if (winningNum.length !== 6) {
-      throw new Error(CONSTANT.error.invalidWinningNumLength);
-    }
-  }
+  #validate(numbers, bonusNum, amount, myLottos) {}
 
   #initializeMatchesObj() {
     return {
@@ -85,7 +94,7 @@ class LottoResult extends Lotto {
   #countMatchingNumbers(currentLotto) {
     let count = 0;
     currentLotto.forEach((number) => {
-      if (this.#winningNum.includes(number)) {
+      if (this.winningNum.includes(number)) {
         count += 1;
       }
     });
@@ -111,10 +120,10 @@ class LottoResult extends Lotto {
 
   async #isMatch() {
     const matchesObj = this.#initializeMatchesObj();
-    for (const currentLotto of this.#myLottos) {
+    this.#myLottos.forEach((currentLotto) => {
       const count = this.#countMatchingNumbers(currentLotto);
       this.#updateMatchesObj(matchesObj, count, currentLotto);
-    }
+    });
     return matchesObj;
   }
 
@@ -140,7 +149,7 @@ class LottoResult extends Lotto {
     };
     const revenue = this.#calcRevenue(matchResult, matcheAmountObj);
 
-    return revenue / (this.amount / 100);
+    return revenue / (this.#amount / 100);
   }
 
   async printResult() {
@@ -149,4 +158,4 @@ class LottoResult extends Lotto {
   }
 }
 
-export { Lotto, LottoResult };
+export { Lotto, LottoResult, MakeLotto };

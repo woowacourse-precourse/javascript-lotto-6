@@ -9,6 +9,7 @@ const outputs = Object.freeze({
 });
 
 const game = Object.freeze({
+  lottoNumbersTemp: [1, 2, 3, 4, 5, 6],
   lottoMin: 1,
   lottoMax: 45,
   lottoLength: 6,
