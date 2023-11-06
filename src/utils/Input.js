@@ -1,5 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
+import CustomError from './CustomError.js';
+import Validatable from './Validatable.js';
 import PROMPT from '../constants/prompt.js';
+import ERROR_MESSAGE from '../constants/error.js';
 
 class Input {
   /**
@@ -7,38 +10,31 @@ class Input {
    * @returns {Promise<number>} 구입금액
    */
   static async getCost() {
-    const cost = await Input.readIntegerAsync(PROMPT.BUY_COST);
+    const cost = await Input.readValidatableAsync(PROMPT.BUY_COST);
 
-    if (cost % 1000 !== 0) {
-      throw new Error('[ERROR] 1000원 단위로 입력해주세요.');
-    }
-
-    if (cost < 1000) {
-      throw new Error('[ERROR] 1000원 이상의 금액을 입력해주세요.');
+    if (!cost.isDivisibleBy(1000)) {
+      throw new CustomError(ERROR_MESSAGE.NOT_DIVISIBLE_BY_1000);
     }
 
     return cost;
   }
 
   /**
-   * 정수를 입력받아 number로 반환하는 메서드
-   * @param {string} message - 사용자에게 출력할 메시지
-   * @returns {Promise<number>} 정수
+   * 문자열을 읽어서 검증 가능한 객체로 반환하는 메서드
+   *
+   * 비어있다면 에러를 던진다.
+   * @param {string} message
+   * @returns {Promise<Validatable>}
    */
-  static async readIntegerAsync(message) {
+  static async readValidatableAsync(message) {
     const userInput = await Console.readLineAsync(message);
-    if (userInput.trim().length === 0) {
-      throw new Error('[ERROR] 입력값이 없습니다.');
+    const validatable = new Validatable(userInput);
+
+    if (validatable.isEmpty()) {
+      throw new CustomError(ERROR_MESSAGE.EMPTY_STRING);
     }
 
-    return new Promise((resolve, reject) => {
-      const numberInput = Number(userInput);
-
-      if (!Number.isSafeInteger(numberInput)) {
-        reject(new Error('[ERROR] 정수를 입력해주세요.'));
-      }
-      resolve(numberInput);
-    });
+    return validatable;
   }
 }
 

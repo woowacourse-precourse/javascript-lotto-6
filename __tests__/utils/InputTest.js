@@ -1,14 +1,11 @@
 import Input from '../../src/utils/Input';
 import { Console } from '@woowacourse/mission-utils';
+import Validatable from '../../src/utils/Validatable';
 
-const mockInputs = (inputs) => {
+const mockInput = (input) => {
   Console.readLineAsync = jest.fn();
 
-  Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-
-    return Promise.resolve(input);
-  });
+  Console.readLineAsync.mockImplementation(() => Promise.resolve(input));
 };
 
 describe('Input', () => {
@@ -56,40 +53,27 @@ describe('Input', () => {
     });
   });
 
-  describe('readIntegerAsync', () => {
-    test('사용자에게 메시지를 출력한다.', () => {
+  describe('readValidatableAsync', () => {
+    test('입력받은 값이 비어있다면 에러를 던진다.', async () => {
       // given
-      const expectedMessage = '메시지';
-      Console.readLineAsync.mockResolvedValue('1');
+      mockInput('');
 
       // when
-      Input.readIntegerAsync(expectedMessage);
-
-      // then
-      expect(Console.readLineAsync).toHaveBeenCalledWith(expectedMessage);
-    });
-
-    test('입력받은 값이 없거나 공백뿐이라면 에러를 던진다.', async () => {
-      // given
-      const inputs = ['', ' ', '  '];
-
-      // when
-      mockInputs(inputs);
-      const result = Input.readIntegerAsync();
-
-      // then
-      expect(result).rejects.toThrow('[ERROR]');
-    });
-
-    test('입력받은 값이 정수가 아니라면 에러를 던진다.', async () => {
-      // given
-      Console.readLineAsync.mockResolvedValue('1.1');
-
-      // when
-      const result = Input.readIntegerAsync();
+      const result = Input.readValidatableAsync('test');
 
       // then
       await expect(result).rejects.toThrow('[ERROR]');
     });
+  });
+
+  test('입력받은 값이 비어있지 않다면 Validatable 객체를 반환한다.', async () => {
+    // given
+    mockInput('test');
+
+    // when
+    const result = await Input.readValidatableAsync('test');
+
+    // then
+    expect(result).toBeInstanceOf(Validatable);
   });
 });
