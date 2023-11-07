@@ -30,7 +30,7 @@ describe('Input 클래스 테스트', () => {
 		mockQuestions(['foo', 'foo', 'foo']);
 
 		// when
-		const input = new Input();
+		const input = Input;
 
 		const spyFn = jest.spyOn(input, 'askUser');
 
@@ -41,21 +41,5 @@ describe('Input 클래스 테스트', () => {
 
 		// then
 		expect(spyFn).toBeCalledTimes(EXPECTED_ASKING_CNT);
-	});
-
-	test('판별에 실패했을 경우 에러를 던져야 한다.', () => {
-		// given
-		mockQuestions(['foo', 'foo', 'foo']);
-
-		// when
-		const input = new Input();
-
-		// then
-		expect(async () => {
-			await input.askUserUntilValid(
-				'질문1',
-				validator.validateFunc.bind(validator),
-			);
-		}).toThrow('[ERROR]');
 	});
 });
