@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { FIVE } from "./Constants.js";
 
 class Match {
   constructor(number) {
@@ -7,7 +7,7 @@ class Match {
     this.bonus = false;
   }
 
-  async matching(CORRECT, numbers, BONUS) {
+  matching(CORRECT, numbers, BONUS) {
     numbers.forEach((number) => {
       if (CORRECT.includes(number)) {
         this.match++;
@@ -15,10 +15,13 @@ class Match {
     });
 
     this.bonusMatching(numbers, BONUS);
+    const RESULT = [this.match, this.bonus];
+
+    return RESULT;
   }
 
   bonusMatching(numbers, BONUS) {
-    if (this.match === 5 && numbers.includes(BONUS)) {
+    if (this.match === FIVE && numbers.includes(BONUS)) {
       this.bonus = true;
     }
   }

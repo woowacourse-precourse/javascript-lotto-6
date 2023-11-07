@@ -5,7 +5,10 @@ import {
   INPUT_NUMBER_MESSAGE,
   INPUT_BONUS_MESSAGE,
   INPUT_RANGE_ERROR_MESSAGE,
+  MONEY_ARRAY,
+  NUM_ARRAY,
 } from "./Constants.js";
+
 import User from "./User.js";
 import Lotto from "./Lotto.js";
 
@@ -33,7 +36,28 @@ class App {
     }
   }
 
-  async bonusMatching(BONUS) {}
+  async printStats(STATS) {
+    const STATS_ARRAY = [
+      STATS.MATCH_THREE,
+      STATS.MATCH_FOUR,
+      STATS.MATCH_FIVE,
+      STATS.MATCH_BONUS,
+      STATS.MATCH_ALL,
+    ];
+
+    MissionUtils.Console.print("");
+
+    for (let i = 0; i < 5; i++) {
+      await MissionUtils.Console.print(
+        NUM_ARRAY[i] +
+          "개 일치 " +
+          MONEY_ARRAY[i] +
+          " - " +
+          STATS_ARRAY[i] +
+          "개"
+      );
+    }
+  }
 
   async play() {
     const user = new User();
@@ -42,7 +66,8 @@ class App {
     const lotto = new Lotto(NUMBERS);
     const CORRECT = lotto.getNumbers();
     const BONUS = await this.inputBonus();
-    const MATCH_NUMBER = user.matching(CORRECT, BONUS);
+    const STATS = user.matching(CORRECT, BONUS);
+    await this.printStats(STATS);
   }
 }
 
