@@ -5,8 +5,15 @@ class PrintOutput {
   constructor() {
     this.lottoNumSets = [];
     this.newLottoNumSets = [];
+    // this.winningArray = [0, 0, 0, 0, 0];
   }
 
+  async print(validNumbers, validBonusNum, lottoNumSets, validPrice) {
+    const winningArray = await this.calculateWinningDetails(validNumbers, validBonusNum, lottoNumSets);
+    await this.printWinningDetails(winningArray);
+    await this.printTotalReturn(winningArray, validPrice);
+  }
+  
   printLottoNumSet = async (price) => {
     const quantity = price / 1000;
     Console.print(`\n${quantity}개를 구매했습니다.`);
@@ -21,6 +28,8 @@ class PrintOutput {
     this.newLottoNumSets.forEach(lottoNumSet => {
       Console.print(`[${lottoNumSet.join(", ")}]`);
     });
+
+    return this.newLottoNumSets;
   };
 
   calculateWinningDetails = async (sixNum, bonusNum, lottoNumSets) => {
@@ -57,7 +66,7 @@ class PrintOutput {
     const totalReturn = (winningPrice / purchasePrice) * 100;
     const totalReturnNumber = parseFloat(totalReturn.toFixed(2));
     
-    Console.print(`총 수익률은 ${totalReturnNumber}입니다.`);
+    Console.print(`총 수익률은 ${totalReturnNumber}%입니다.`);
   };
 }
 

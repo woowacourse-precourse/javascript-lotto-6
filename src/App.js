@@ -7,10 +7,10 @@ class App {
   async play() {
     const validPrice = await this.getPrice();
     const printOutput = new PrintOutput();
-    await printOutput.printLottoNumSet(validPrice);
+    const lottoNumSets = await printOutput.printLottoNumSet(validPrice);
     const numbers = await this.getSixNum();
     const lotto = new Lotto(numbers);
-    await lotto.start(validPrice);
+    await lotto.start(validPrice, lottoNumSets);
   }
 
   getPrice = async () => {

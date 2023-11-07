@@ -9,19 +9,19 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  async start(validPrice) { 
-    let validNumbers = 0;  
-    validNumbers = this.#validate(this.#numbers); 
-    while(validNumbers === 0) {
+  async start(validPrice, lottoNumSets) { 
+    let validNumbers = this.#validate(this.#numbers); 
+    while(validNumbers === null) {
       let sixNum = await Console.readLineAsync("당첨 번호를 다시 입력해 주세요.\n");
       validNumbers = this.#validate(sixNum);
     }
-    const validBonusNum = await this.getBonusNum();
+    let validBonusNum = await this.getBonusNum();
 
     const printOutput = new PrintOutput();
-    const winningArray = await printOutput.calculateWinningDetails(validNumbers, validBonusNum, printOutput.lottoNumSets);
-    await printOutput.printWinningDetails(winningArray);
-    await printOutput.printTotalReturn(winningArray, validPrice);
+    await printOutput.print(validNumbers, validBonusNum, lottoNumSets, validPrice);
+    // const winningArray = await printOutput.calculateWinningDetails(validNumbers, validBonusNum, lottoNumSets);
+    // await printOutput.printWinningDetails(winningArray);
+    // await printOutput.printTotalReturn(winningArray, validPrice);
   }
 
   hasDuplicates = (numbers) => {
