@@ -1,16 +1,16 @@
-import { ERROR } from '../constant/constant.js';
+import { ERROR, LOTTO } from '../constant/constant.js';
 
 class Validate {
   static isEmpty(value) {
     return value === '';
   }
 
-  static isThousands(value) {
-    return value % 1000 === 0;
+  static isMultipleOfPrice(value) {
+    return value % LOTTO.price === 0;
   }
 
   static checkLottoBudget(lottoBudget) {
-    if (!this.isThousands(lottoBudget) || this.isEmpty(lottoBudget)) {
+    if (!this.isMultipleOfPrice(lottoBudget) || this.isEmpty(lottoBudget)) {
       throw new Error(ERROR.budget);
     }
   }

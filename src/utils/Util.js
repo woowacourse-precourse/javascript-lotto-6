@@ -17,7 +17,7 @@ class Util {
     return string.split(',').map((value) => Number(value.trim()));
   }
 
-  static parseWinLotto(string) {
+  static parseStringToSortedArray(string) {
     const array = Util.splitStringToNumberArray(string);
     const sortedArray = Util.sortAscendingArray(array);
 
@@ -26,6 +26,14 @@ class Util {
 
   static arrayToStringArray(array) {
     return `[${array.join(', ')}]`;
+  }
+
+  static rateOfReturn(total, budget) {
+    return ((total / budget) * 100).toFixed(1);
+  }
+
+  static numberToKoreanWon(number) {
+    return `${number.toLocaleString('ko-KR')}원`;
   }
 }
 

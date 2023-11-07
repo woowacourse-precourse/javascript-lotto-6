@@ -4,7 +4,6 @@ import Util from '../utils/Util.js';
 
 class Buyer {
   #budget;
-
   #lottoList;
 
   constructor(budget) {
@@ -15,7 +14,7 @@ class Buyer {
   }
 
   #validate(budget) {
-    if (budget % 1000 !== 0) {
+    if (budget % LOTTO.price !== 0) {
       throw new Error(ERROR.budget);
     }
   }

@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE, RateOfReturn } from '../constant/constant.js';
+import { MESSAGE } from '../constant/constant.js';
 import Util from '../utils/Util.js';
 
 class Output {
@@ -18,8 +18,13 @@ class Output {
     });
   }
 
+  static printResultHeader(){
+    Output.print('당첨 통계');
+    Output.print('---');
+  }
+
   static printRateOrReturn(number) {
-    Output.print(RateOfReturn(number));
+    Output.print(MESSAGE.rateOfReturn(number));
   }
 }
 export default Output;

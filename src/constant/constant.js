@@ -9,6 +9,11 @@ export const LOTTO = Object.freeze({
   minRange: 1,
   maxRange: 45,
   length: 6,
+  firstPrize: 2000000000,
+  secondPrize: 30000000,
+  thirdPrize: 1500000,
+  fourthPrize: 50000,
+  fifthPrize: 5000,
 });
 
 export const ERROR_PREFIX = '[ERROR]';
@@ -24,10 +29,9 @@ export const ERROR = Object.freeze({
 
 export const MESSAGE = Object.freeze({
   purchase: (count) => `\n${count}개를 구매했습니다.`,
+  rateOfReturn: (number) => `총 수익률은 ${number}%입니다.`,
 });
 
 export const REGEX = Object.freeze({
   isNumber: /^\d+$/,
 });
-
-export const RateOfReturn = (number) => `총 수익률은 ${number}%입니다.`;

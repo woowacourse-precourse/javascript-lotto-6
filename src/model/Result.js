@@ -1,32 +1,45 @@
+import { LOTTO } from '../constant/constant.js';
+import { PRIZE_MESSAGE } from '../constant/mesaageFormat.js';
+
 class Result {
   #prizeCount;
 
-  #results;
+  #resultMessages;
+
+  #totalPrize;
 
   constructor(userLottos, winLotto, bonusLotto) {
     this.userLottos = userLottos;
     this.winLotto = winLotto;
     this.bonusLotto = bonusLotto;
-    this.#prizeCount = {
+    this.#prizeCount = this.#initializePrizeCount();
+    this.#setResults();
+  }
+
+  #initializePrizeCount() {
+    return {
       firstPrize: 0,
       secondPrize: 0,
       thirdPrize: 0,
       fourthPrize: 0,
       fifthPrize: 0,
     };
-    this.#setResults();
-  }
-
-  getResults() {
-    return this.#results;
   }
 
   getTotalPrize() {
-    const { firstPrize, secondPrize, thirdPrize, fourthPrize, fifthPrize } = this.#prizeCount;
+    return this.#totalPrize;
+  }
 
+  #setTotalPrize() {
+    const { firstPrize, secondPrize, thirdPrize, fourthPrize, fifthPrize } = this.#prizeCount;
     const totalPrize =
-      firstPrize * 2000000000 + secondPrize * 30000000 + thirdPrize * 1500000 + fourthPrize * 50000 + fifthPrize * 5000;
-    return totalPrize;
+      firstPrize * LOTTO.firstPrize +
+      secondPrize * LOTTO.secondPrize +
+      thirdPrize * LOTTO.thirdPrize +
+      fourthPrize * LOTTO.fourthPrize +
+      fifthPrize * LOTTO.fifthPrize;
+
+    this.#totalPrize = totalPrize;
   }
 
   #setResults() {
@@ -34,22 +47,25 @@ class Result {
       const { matchedCount, hasBonusNumber } = this.#calculateMatchResult(userLotto);
       this.#calculatePrize(matchedCount, hasBonusNumber);
     });
-    this.#results = this.#calculateResult();
+    this.#setResultMessages();
+    this.#setTotalPrize();
   }
 
-  #calculateResult = () => {
-    const { firstPrize, secondPrize, thirdPrize, fourthPrize, fifthPrize } = this.#prizeCount;
+  getResultMessages() {
+    return this.#resultMessages;
+  }
 
-    const resultLines = [
-      `3개 일치 (5,000원) - ${fifthPrize}개`,
-      `4개 일치 (50,000원) - ${fourthPrize}개`,
-      `5개 일치 (1,500,000원) - ${thirdPrize}개`,
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${secondPrize}개`,
-      `6개 일치 (2,000,000,000원) - ${firstPrize}개`,
+  #setResultMessages() {
+    const prizeInfo = [
+      { count: this.#prizeCount.fifthPrize, message: PRIZE_MESSAGE.fifth },
+      { count: this.#prizeCount.fourthPrize, message: PRIZE_MESSAGE.fourth },
+      { count: this.#prizeCount.thirdPrize, message: PRIZE_MESSAGE.third },
+      { count: this.#prizeCount.secondPrize, message: PRIZE_MESSAGE.second },
+      { count: this.#prizeCount.firstPrize, message: PRIZE_MESSAGE.first },
     ];
 
-    return resultLines;
-  };
+    this.#resultMessages = prizeInfo.map(({ count, message }) => `${message} - ${count}개`);
+  }
 
   #calculateMatchResult(userLotto) {
     const matchedNumbers = userLotto.filter((number) => this.winLotto.includes(number));

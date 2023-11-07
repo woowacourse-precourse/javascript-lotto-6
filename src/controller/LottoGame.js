@@ -13,36 +13,17 @@ class LottoGame {
   #result;
 
   async start() {
-    await this.setBuyer();
-    this.printPurchaseInfo();
-    await this.setWinLotto();
-    await this.setBonusLotto();
-    this.getResult();
-    this.printResult();
-    this.printRateOfReturn();
+    await this.#setBuyer();
+    this.#printPurchaseInfo();
+    await this.#setWinLotto();
+    await this.#setBonusLotto();
+    this.#setResult();
+    this.#printResult();
+    this.#printRateOfReturn();
   }
 
-  getResult() {
-    this.#result = new Result(this.#buyer.getLottoList(), this.#winLotto.getLotto(), this.#winLotto.getBonusLotto());
-  }
-
-  printResult() {
-    Output.print('당첨 통계');
-    Output.print('---');
-    this.#result.getResults().forEach((each) => {
-      Output.print(`${each}`);
-    });
-  }
-
-  printRateOfReturn() {
-    const rate = ((this.#result.getTotalPrize() / this.#buyer.getBudget()) * 100).toFixed(1);
-    Output.printRateOrReturn(rate);
-  }
-
-  async setBuyer() {
-    // eslint-disable-next-line no-constant-condition
+  async #setBuyer() {
     while (true) {
-      // eslint-disable-next-line no-await-in-loop
       const lottoBudget = await Input.getLottoBudget();
       try {
         this.#buyer = new Buyer(lottoBudget);
@@ -53,12 +34,15 @@ class LottoGame {
     }
   }
 
-  async setWinLotto() {
-    // eslint-disable-next-line no-constant-condition
+  #printPurchaseInfo() {
+    Output.printPurchaseCount(this.#buyer.getPurchaseCount());
+    Output.printPurchasedLottoList(this.#buyer.getLottoList());
+  }
+
+  async #setWinLotto() {
     while (true) {
-      // eslint-disable-next-line no-await-in-loop
       const winLotto = await Input.getWinLotto();
-      const parsedWinLotto = Util.parseWinLotto(winLotto);
+      const parsedWinLotto = Util.parseStringToSortedArray(winLotto);
       try {
         this.#winLotto = new WinLotto(parsedWinLotto);
         break;
@@ -68,10 +52,8 @@ class LottoGame {
     }
   }
 
-  async setBonusLotto() {
-    // eslint-disable-next-line no-constant-condition
+  async #setBonusLotto() {
     while (true) {
-      // eslint-disable-next-line no-await-in-loop
       const bonusLotto = await Input.getBonusLotto();
       try {
         this.#winLotto.setBonusLotto(Number(bonusLotto));
@@ -82,9 +64,20 @@ class LottoGame {
     }
   }
 
-  printPurchaseInfo() {
-    Output.printPurchaseCount(this.#buyer.getPurchaseCount());
-    Output.printPurchasedLottoList(this.#buyer.getLottoList());
+  #setResult() {
+    this.#result = new Result(this.#buyer.getLottoList(), this.#winLotto.getLotto(), this.#winLotto.getBonusLotto());
+  }
+
+  #printResult() {
+    Output.printResultHeader();
+    this.#result.getResultMessages().forEach((each) => {
+      Output.print(`${each}`);
+    });
+  }
+
+  #printRateOfReturn() {
+    const rate = Util.rateOfReturn(this.#result.getTotalPrize(), this.#buyer.getBudget());
+    Output.printRateOrReturn(rate);
   }
 }
 
