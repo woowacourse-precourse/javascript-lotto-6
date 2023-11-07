@@ -1,4 +1,4 @@
-import { WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
+import { RANK_RULES } from '../constants/Rules.js';
 
 export default class LottoPlayer {
   #purchaseAmount;
@@ -8,6 +8,7 @@ export default class LottoPlayer {
   #rankCounts;
 
   #winningAmount;
+
   constructor(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
     this.#lottoTickets = [];
@@ -41,28 +42,29 @@ export default class LottoPlayer {
     switch (correctNumberCounts) {
       case 3:
         this.#rankCounts[5] += 1;
-        this.#winningAmount += WINNING_RANK_TO_PRIZE[5];
         break;
       case 4:
         this.#rankCounts[4] += 1;
-        this.#winningAmount += WINNING_RANK_TO_PRIZE[4];
         break;
       case 5:
         if (!isIncludedBonusNumber) {
           this.#rankCounts[3] += 1;
-          this.#winningAmount += WINNING_RANK_TO_PRIZE[3];
         } else {
           this.#rankCounts[2] += 1;
-          this.#winningAmount += WINNING_RANK_TO_PRIZE[2];
         }
         break;
       default:
         this.#rankCounts[1] += 1;
-        this.#winningAmount += WINNING_RANK_TO_PRIZE[1];
     }
   }
 
   getRankCounts() {
     return this.#rankCounts;
+  }
+
+  calculateWinningAmount() {
+    Object.entries(this.#rankCounts).forEach(([rank, count]) => {
+      this.#winningAmount += RANK_RULES[rank].prize * count;
+    });
   }
 }

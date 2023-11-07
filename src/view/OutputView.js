@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../constants/Messages.js';
-import { MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
+import { RANK_RULES } from '../constants/Rules.js';
 
 export default class OutputView {
   static printNewLine() {
@@ -31,8 +31,8 @@ export default class OutputView {
   }
 
   static printCorrectCounts(rank, correctCounts) {
-    const parsingPrice = OutputView.foramtPrice(WINNING_RANK_TO_PRIZE[rank]);
-    const MATCH_COUNTS = `${MATCHES_TO_RANK[rank]}개 일치`;
+    const parsingPrice = OutputView.foramtPrice(RANK_RULES[rank].prize);
+    const MATCH_COUNTS = `${RANK_RULES[rank].matches}개 일치`;
     const BONUS_BALL = rank === '2' ? `, 보너스 볼 일치` : '';
     const PRICE = ` (${parsingPrice}원)`;
     const CORRECT_COUNTS = ` - ${correctCounts}개`;

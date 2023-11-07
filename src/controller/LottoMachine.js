@@ -138,6 +138,8 @@ export default class LottoMachine {
     rankCountsObjectEntries.forEach(([rank, counts]) => {
       OutputView.printCorrectCounts(rank, counts);
     });
+
+    this.#player.calculateWinningAmount();
   }
 
   #calculateProfit() {

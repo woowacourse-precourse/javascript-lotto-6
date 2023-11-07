@@ -9,20 +9,27 @@ const LOTTO_MACHINE_RULES = {
   inputUnit: 1000,
 };
 
-const MATCHES_TO_RANK = {
-  5: 3,
-  4: 4,
-  3: 5,
-  2: 5,
-  1: 6,
+const RANK_RULES = {
+  1: {
+    matches: 6,
+    prize: 2_000_000_000,
+  },
+  2: {
+    matches: 5,
+    prize: 30_000_000,
+  },
+  3: {
+    matches: 5,
+    prize: 1_500_000,
+  },
+  4: {
+    matches: 4,
+    prize: 50_000,
+  },
+  5: {
+    matches: 3,
+    prize: 5_000,
+  },
 };
 
-const WINNING_RANK_TO_PRIZE = {
-  1: 2_000_000_000,
-  2: 30_000_000,
-  3: 1_500_000,
-  4: 50_000,
-  5: 5_000,
-};
-
-export { LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE, LOTTO_MACHINE_RULES };
+export { LOTTO_RULES, LOTTO_MACHINE_RULES, RANK_RULES };
