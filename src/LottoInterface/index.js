@@ -5,7 +5,7 @@ import {
   validateAmountToPurchase,
   validateBonusNumber,
   validateWinningNumbers,
-} from "../validators/input.js";
+} from "../validators/lottoInterface.js";
 
 class LottoInterface {
   async readAmountToPurchase() {

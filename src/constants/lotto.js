@@ -5,6 +5,7 @@ const range = Object.freeze({
 
 const LOTTO = Object.freeze({
   length: 6,
+  price: 1000,
   range,
 });
 
