@@ -11,6 +11,8 @@ class App {
     OutputHandler.printPurchaseComplete(ticketCount);
 
     const tickets = await machine.getTickets(ticketCount);
+
+    const checker = new LottoChecker();
   }
 }
 
