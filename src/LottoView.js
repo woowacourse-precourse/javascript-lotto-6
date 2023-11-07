@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import PRINT_WINNERS from "./PrintWinners.js";
+import COUNT_WINNERS from "./CountWinners.js";
 
 class LottoView {
   async askPayment() {
@@ -28,10 +28,14 @@ class LottoView {
     const winnerOrder = [3, 4, 5, "5+1", 6];
 
     winnerOrder.forEach((key) => {
-      const { count, prize, text } = PRINT_WINNERS[key];
+      const { count, prize, text } = COUNT_WINNERS[key];
       const winnerCount = countWinners[key];
       Console.print(`${text} (${prize.toLocaleString()}원) - ${winnerCount}개`);
     });
+  }
+
+  showProfitRate(profitRate) {
+    Console.print(`\n총 수익률은 ${profitRate}%입니다.`);
   }
 }
 
