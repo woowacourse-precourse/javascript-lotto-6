@@ -9,6 +9,12 @@ class OutputView {
     lottoTickets.forEach((lottoTicket) => {
       Console.print(lottoTicket.getNumbers());
     });
+
+    OutputView.printBlankLine();
+  }
+
+  static printBlankLine() {
+    Console.print('');
   }
 }
 
