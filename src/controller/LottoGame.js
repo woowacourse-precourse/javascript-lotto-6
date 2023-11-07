@@ -1,8 +1,8 @@
-import Lotto from "./Lotto.js";
-import { LottoService } from "./model/LottoService.js";
-import { InputView } from "./views/InputView.js";
-import { OutputView } from "./views/OutputView.js";
-import { Validator } from "./utils/Validator.js";
+import Lotto from "../Lotto.js";
+import { LottoService } from "../model/LottoService.js";
+import { InputView } from "../views/InputView.js";
+import { OutputView } from "../views/OutputView.js";
+import { Validator } from "../utils/Validator.js";
 import { Random } from "@woowacourse/mission-utils";
 
 class LottoGame {
