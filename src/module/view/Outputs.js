@@ -11,12 +11,12 @@ class Outputs {
     six: '6개 일치 (2,000,000,000원) - ',
   };
 
-  constructor(lottoList, score) {
-    this.#lottoList = lottoList;
-    this.#score = score;
+  printBlankLine() {
+    MissionUtils.Console.print('');
   }
 
-  printLottoList() {
+  printLottoList(lottoList) {
+    this.#lottoList = lottoList;
     const leng = this.#lottoList.length;
 
     MissionUtils.Console.print(`${leng}개를 구매했습니다.`);
@@ -24,11 +24,17 @@ class Outputs {
     for (let i = 0; i < leng; i += 1) {
       MissionUtils.Console.print(this.#lottoList[i].numbers.sort((a, b) => a - b));
     }
+
+    MissionUtils.Console.print('');
   }
 
-  printScore() {
+  printScore(score) {
+    this.#score = score;
+
     MissionUtils.Console.print('당첨 통계\n---');
+
     const data = ['three', 'four', 'five', 'bonus', 'six'];
+
     for (let i = 0; i < 5; i += 1) {
       MissionUtils.Console.print(`${this.#message[data[i]]}${this.#score[data[i]]}개`);
     }
