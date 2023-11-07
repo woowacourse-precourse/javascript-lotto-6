@@ -1,4 +1,4 @@
-import InputValidator from '../src/controller/InputValidator';
+import InputValidator from '../src/model/InputValidator';
 
 describe('InputValidator', () => {
   it('should validate number type', () => {
