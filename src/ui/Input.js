@@ -32,16 +32,16 @@ export async function getWinningLottoNumbers() {
   }
 }
 
-export async function getBonusNumber() {
+export async function getBonusNumber(winningLotto) {
   try {
     const bonusNumberInput = await Console.readLineAsync(
       USER_INPUT.bonusNumberInputPrompt,
     );
-    Validation.isBonusNumberValidated(bonusNumberInput);
+    Validation.isBonusNumberValidated(bonusNumberInput, winningLotto);
     const bonusNumber = Number(bonusNumberInput);
     return bonusNumber;
   } catch (error) {
     Console.print(error.message);
-    return getBonusNumber();
+    return getBonusNumber(winningLotto);
   }
 }
