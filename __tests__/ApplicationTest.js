@@ -24,23 +24,6 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const runException = async (input) => {
-  // given
-  const logSpy = getLogSpy();
-
-  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-  const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
-
-  mockRandoms([RANDOM_NUMBERS_TO_END]);
-  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
-
-  // when
-  const app = new App();
-
-  // then
-  await expect(app.play()).rejects.toThrow("[ERROR]");
-};
-
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
@@ -173,7 +156,77 @@ describe("로또 테스트", () => {
     });
   });
 
-  test("예외 테스트", async () => {
-    await runException("1000j");
+  const runMoneyException = async (input) => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  };
+
+  const runChoiceException = async (input) => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS = ["1000", input, "1,2,3,4,5,6", "7"];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  };
+
+  const runBonusException = async (input) => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS = ["1000", "1,2,3,4,5,6", input, "7"];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS_TO_END);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  };
+
+  describe("예외 테스트", () => {
+    test.each([["1000j", "1500"]])("금액 입력 테스트", async (input) => {
+      await runMoneyException(input);
+    });
+
+    test.each([["1,2,3,4,5", "1,2,3,4,5,66", "1,2,3,사,오,6"]])(
+      "당첨 번호 입력 테스트",
+      async (input) => {
+        await runChoiceException(input);
+      }
+    );
+
+    test.each([["1", "0", "사", "1jd"]])(
+      "당첨 번호 입력 테스트",
+      async (input) => {
+        await runChoiceException(input);
+      }
+    );
   });
 });
