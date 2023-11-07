@@ -35,6 +35,6 @@ describe('로또 컴퓨터 클래스 테스트', () => {
     const lottos = numbers.map((elem) => new Lotto(elem));
     computer.setPrizeResult(lottos);
 
-    expect(computer.getProfitRatio()).toEqual(62.5);
+    expect(computer.getProfitRatio()).toEqual('62.5%');
   });
 });
