@@ -30,6 +30,10 @@ class Controller{
     outView.printLottoArray(this.lottoArray, this.count);
     await this.inputWinning();
     await this.inputBonus();
+    LottoCompute.lottoCompute(this.winning,this.lottoArray,this.bonus,this.count,this.matchDict);
+    outView.printMatch(this.matchDict);
+    this.profit = LottoCompute.profitCompute(this.matchDict,this.count);
+    outView.printProfit(this.profit);
 
   }
   
