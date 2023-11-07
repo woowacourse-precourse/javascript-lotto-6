@@ -1,13 +1,5 @@
 import Validation from './Validation.js';
-import {
-  LOTTO_NUMBER,
-  FIRST_PRIZE,
-  SECOND_PRIZE,
-  THIRD_PRIZE,
-  FOURTH_PRIZE,
-  FIFTH_PRIZE,
-  NO_PRIZE,
-} from './constants/Condition.js';
+import { LOTTO_NUMBER, PRIZE } from './constants/Condition.js';
 
 class Lotto {
   #numbers;
@@ -32,15 +24,15 @@ class Lotto {
 
   compareMatchNumberWithPrize(matchNumberCount, bonusNumber) {
     const resultMap = {
-      [FIRST_PRIZE.match]: FIRST_PRIZE.rank,
-      [SECOND_PRIZE.match]: this.#numbers.includes(bonusNumber)
-        ? SECOND_PRIZE.rank
-        : THIRD_PRIZE.rank,
-      [FOURTH_PRIZE.match]: FOURTH_PRIZE.rank,
-      [FIFTH_PRIZE.match]: FIFTH_PRIZE.rank,
+      [PRIZE.FIRST_PRIZE.match]: PRIZE.FIRST_PRIZE.rank,
+      [PRIZE.SECOND_PRIZE.match]: this.#numbers.includes(bonusNumber)
+        ? PRIZE.SECOND_PRIZE.rank
+        : PRIZE.THIRD_PRIZE.rank,
+      [PRIZE.FOURTH_PRIZE.match]: PRIZE.FOURTH_PRIZE.rank,
+      [PRIZE.FIFTH_PRIZE.match]: PRIZE.FIFTH_PRIZE.rank,
     };
 
-    return resultMap[matchNumberCount] || NO_PRIZE.rank;
+    return resultMap[matchNumberCount] || PRIZE.NO_PRIZE.rank;
   }
 
   calculateLottoResult(winningNumbers, bonusNumber) {

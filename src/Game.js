@@ -1,16 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Validation from './Validation.js';
-import {
-  LOTTO_PURCHASE_UNIT,
-  LOTTO_NUMBER,
-  FIRST_PRIZE,
-  SECOND_PRIZE,
-  THIRD_PRIZE,
-  FOURTH_PRIZE,
-  FIFTH_PRIZE,
-  NO_PRIZE,
-} from './constants/Condition.js';
+import { LOTTO_PURCHASE_UNIT, LOTTO_NUMBER, PRIZE, TOTAL_RETURN } from './constants/Condition.js';
 
 class Game {
   #winningNumbers;
@@ -78,12 +69,12 @@ class Game {
 
   calculateTotalWinningResults(tickets) {
     const results = {
-      [NO_PRIZE.rank]: 0,
-      [FIRST_PRIZE.rank]: 0,
-      [SECOND_PRIZE.rank]: 0,
-      [THIRD_PRIZE.rank]: 0,
-      [FOURTH_PRIZE.rank]: 0,
-      [FIFTH_PRIZE.rank]: 0,
+      [PRIZE.NO_PRIZE.rank]: 0,
+      [PRIZE.FIRST_PRIZE.rank]: 0,
+      [PRIZE.SECOND_PRIZE.rank]: 0,
+      [PRIZE.THIRD_PRIZE.rank]: 0,
+      [PRIZE.FOURTH_PRIZE.rank]: 0,
+      [PRIZE.FIFTH_PRIZE.rank]: 0,
     };
 
     tickets.forEach((ticket) => {
@@ -96,13 +87,13 @@ class Game {
 
   calculateTotalReturn(money, results) {
     const total =
-      results[FIRST_PRIZE.rank] * FIRST_PRIZE.reward +
-      results[SECOND_PRIZE.rank] * SECOND_PRIZE.reward +
-      results[THIRD_PRIZE.rank] * THIRD_PRIZE.reward +
-      results[FOURTH_PRIZE.rank] * FOURTH_PRIZE.reward +
-      results[FIFTH_PRIZE.rank] * FIFTH_PRIZE.reward;
+      results[PRIZE.FIRST_PRIZE.rank] * PRIZE.FIRST_PRIZE.reward +
+      results[PRIZE.SECOND_PRIZE.rank] * PRIZE.SECOND_PRIZE.reward +
+      results[PRIZE.THIRD_PRIZE.rank] * PRIZE.THIRD_PRIZE.reward +
+      results[PRIZE.FOURTH_PRIZE.rank] * PRIZE.FOURTH_PRIZE.reward +
+      results[PRIZE.FIFTH_PRIZE.rank] * PRIZE.FIFTH_PRIZE.reward;
 
-    return Math.round((total / money) * 10000) / 100;
+    return Math.round((total / money) * TOTAL_RETURN.multiplier) / TOTAL_RETURN.divider;
   }
 
   calculateGameResults(tickets, money) {
