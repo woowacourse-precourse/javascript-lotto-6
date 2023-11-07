@@ -11,6 +11,7 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+
     Validator.checkDifferentNumbers(numbers);
     Validator.checkNumberRange(numbers);
     Validator.checkInteger(numbers);
@@ -23,7 +24,7 @@ class Lotto {
   }
 
   numberComparison(lottoNumber, bonusNumber) {
-    const result = lottoNumber.reduce((count, number) => {
+    const countResult = lottoNumber.reduce((count, number) => {
       if (this.#numbers.includes(number)) {
         count += 1;
       }
@@ -31,15 +32,15 @@ class Lotto {
       return count;
     }, 0);
 
-    return this.resultnumberComparison(result, lottoNumber, bonusNumber);
+    return this.resultnumberComparison(countResult, lottoNumber, bonusNumber);
   }
 
-  resultnumberComparison(result, lottoNumber, bonusNumber) {
-    if (result === 6) return 'six';
-    if (result === 5 && lottoNumber.includes(bonusNumber)) return 'fiveAndBonus';
-    if (result === 5) return 'five';
-    if (result === 4) return 'four';
-    if (result === 3) return 'three';
+  resultnumberComparison(countResult, lottoNumber, bonusNumber) {
+    if (countResult === 6) return 'six';
+    if (countResult === 5 && lottoNumber.includes(bonusNumber)) return 'fiveAndBonus';
+    if (countResult === 5) return 'five';
+    if (countResult === 4) return 'four';
+    if (countResult === 3) return 'three';
 
     return;
   }
