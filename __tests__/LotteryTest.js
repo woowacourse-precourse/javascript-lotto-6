@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { getRank } from "../src/utils/loterry.js";
+import { getRank, getTotalProfit } from "../src/utils/loterry.js";
 
 describe("loterry 모듈 테스트", () => {
   test("당첨 순위 테스트 - 5위", () => {
@@ -38,5 +38,16 @@ describe("loterry 모듈 테스트", () => {
     const matchingBonus = false;
     const result = getRank(matchingCount, matchingBonus);
     expect(result).toEqual(null);
+  });
+
+  test("총 수입금 테스트 - 당첨", () => {
+    const resultRanks = ["fifth", "fifth", "third"];
+    const result = getTotalProfit(resultRanks);
+    expect(result).toEqual(1510000);
+  });
+  test("총 수입금 테스트 - 미당첨", () => {
+    const resultRanks = [];
+    const result = getTotalProfit(resultRanks);
+    expect(result).toEqual(0);
   });
 });
