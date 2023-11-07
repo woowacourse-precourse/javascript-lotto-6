@@ -37,7 +37,7 @@ export default class Validator {
     }
   }
 
-  static validateLottoNumbers(numbers) {
+  static validateLotteryNumbers(numbers) {
     if (!this.#isRequiredCount(numbers)) {
       const message = MESSAGE_FORMAT.error('로또 번호는 6개여야 합니다.');
       throw new Error(message);

@@ -22,14 +22,14 @@ export default class LottoGame {
     const lottoList = [];
 
     for (let i = 0; i < numberOfLotto; i++) {
-      const numbers = this.#createRandomLottoNumbers();
-      const lotto = new Lotto(numbers);
+      const lotteryNumbers = this.#createRandomLotteryNumbers();
+      const lotto = new Lotto(lotteryNumbers);
       lottoList.push(lotto);
     }
     return lottoList;
   }
 
-  #createRandomLottoNumbers() {
+  #createRandomLotteryNumbers() {
     const { minNumber, maxNumber, requiredCount } = LOTTO_ROLE;
     const numbers = Random.pickUniqueNumbersInRange(minNumber, maxNumber, requiredCount);
     const sortedNumbers = numbers.sort((a, b) => a - b);
