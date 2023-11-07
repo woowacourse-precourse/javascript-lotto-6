@@ -61,6 +61,7 @@ class App {
     model.bonus = bonus;
 
     this.callResults(winning, bonus, counts)
+    process.exitCode = 0;
   }
 
   callResults(winning, bonus, counts) {
