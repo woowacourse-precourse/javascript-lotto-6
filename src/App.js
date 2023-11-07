@@ -4,25 +4,19 @@ import InputView from './view/inputView.js';
 import OutputView from './view/outputView.js';
 
 class App {
-  #inputView;
-  #outputView;
+  #inputView = new InputView();
+  #outputView = new OutputView();
   #compare;
 
   #coin = 0;
   #boughtLottos = [];
-  #winningNumber;
+  #winningNumber = [];
   #bonusNumber = 0;
 
   async play() {
-    this.#initialize();
     await this.buyLottos(this.#inputView, this.#outputView);
     await this.getWinningNumber(this.#inputView);
     this.getWinningResult(this.#outputView);
-  }
-
-  #initialize() {
-    this.#inputView = new InputView();
-    this.#outputView = new OutputView();
   }
 
   async buyLottos(inputView, outputView) {
