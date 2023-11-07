@@ -8,48 +8,44 @@ import LottoTicketResult from '../models/LottoTicketResult.js';
 import ReturnRate from '../models/ReturnRate.js';
 
 class LottoController {
-  #lottoCount;
-  #winningNumber;
-  #bonusNumber;
   constructor(inputView, outputView) {
     this.inputView = inputView;
     this.outputView = outputView;
   }
 
   async start() {
-    await this.setLottoCount();
-    const lottoTicket = this.setLottoTicket();
-    this.outputView.printLottoCount(this.#lottoCount);
+    const lottoCount = await this.#setLottoCount();
+    const lottoTicket = this.#setLottoTicket(lottoCount);
+    this.outputView.printLottoCount(lottoCount);
     this.outputView.printLotto(lottoTicket);
-    await this.setWinningNumber();
-    await this.setBonusNumber();
-    const lottoTicketResult = this.setLottoTicketResult(
+    const winningNumber = await this.#setWinningNumber();
+    const bonusNumber = await this.#setBonusNumber(winningNumber);
+    const lottoTicketResult = this.#setLottoTicketResult(
       lottoTicket,
-      this.#winningNumber,
-      this.#bonusNumber
+      winningNumber,
+      bonusNumber
     );
     this.outputView.printLottoResult(lottoTicketResult);
-    const returnRate = this.setReturnRate(this.#lottoCount, lottoTicketResult);
+    const returnRate = this.#setReturnRate(lottoCount, lottoTicketResult);
     this.outputView.printReturnRate(returnRate);
   }
 
-  async setLottoCount() {
+  async #setLottoCount() {
     while (true) {
       let purchaseAmountInput;
       try {
         purchaseAmountInput = await this.inputView.getPurchaseAmount();
         const purchaseAmount = new PurchaseAmount(purchaseAmountInput);
-        this.#lottoCount = purchaseAmount.getLottoCount();
-        break;
+        return purchaseAmount.getLottoCount();
       } catch (error) {
         this.outputView.printError(error.message);
       }
     }
   }
 
-  setLottoTicket() {
+  #setLottoTicket(lottoCount) {
     const lottoTicket = new LottoTicket();
-    while (lottoTicket.getLottoTicketLength() !== this.#lottoCount) {
+    while (lottoTicket.getLottoTicketLength() !== lottoCount) {
       try {
         const lotto = new Lotto(LottoGenerator.generator());
         lottoTicket.addLottoToLottoTicket(lotto.getLotto());
@@ -60,38 +56,33 @@ class LottoController {
     return lottoTicket.getLottoTicket();
   }
 
-  async setWinningNumber() {
+  async #setWinningNumber() {
     while (true) {
       let winningNumberInput;
       try {
         winningNumberInput = await this.inputView.getWinningNumber();
         const winningNumber = new WinningNumber(winningNumberInput);
-        this.#winningNumber = winningNumber.getWinningNumber();
-        break;
+        return winningNumber.getWinningNumber();
       } catch (error) {
         this.outputView.printError(error.message);
       }
     }
   }
 
-  async setBonusNumber() {
+  async #setBonusNumber(winningNumber) {
     while (true) {
       let bonusNumberInput;
       try {
         bonusNumberInput = await this.inputView.getBonusNumber();
-        const bonusNumber = new BonusNumber(
-          this.#winningNumber,
-          bonusNumberInput
-        );
-        this.#bonusNumber = bonusNumber.getBonusNumber();
-        break;
+        const bonusNumber = new BonusNumber(winningNumber, bonusNumberInput);
+        return bonusNumber.getBonusNumber();
       } catch (error) {
         this.outputView.printError(error.message);
       }
     }
   }
 
-  setLottoTicketResult(lottoTicket, winningNumber, bonusNumber) {
+  #setLottoTicketResult(lottoTicket, winningNumber, bonusNumber) {
     const lottoTicketResult = new LottoTicketResult(
       lottoTicket,
       winningNumber,
@@ -100,7 +91,7 @@ class LottoController {
     return lottoTicketResult.getLottoTicketResult();
   }
 
-  setReturnRate(lottoCount, lottoTicketResult) {
+  #setReturnRate(lottoCount, lottoTicketResult) {
     const returnRate = new ReturnRate(lottoCount, lottoTicketResult);
     return returnRate.getReturnRate();
   }
