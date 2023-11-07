@@ -7,7 +7,7 @@ class LottosGenerator {
   #lottos = [];
 
   constructor(money) {
-    this.#createLottos(this.getTotalIssueCount(money));
+    this.#createLottos(this.#getTotalIssueCount(money));
   }
 
   #createLottos(totalIssueCount) {
@@ -33,12 +33,12 @@ class LottosGenerator {
     return utils.ascendingNumbers(lottoNumbers);
   }
 
-  getTotalIssueCount(money) {
+  #getTotalIssueCount(money) {
     return money / LOTTO.unitPrice;
   }
 
   getLottos() {
-    return this.#lottos;
+    return this.#lottos.map((lotto) => lotto.getNumbers());
   }
 }
 

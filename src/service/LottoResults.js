@@ -30,23 +30,25 @@ class LottoResults {
   #getLottosRanks() {
     return this.#lottoResults.map((result) => {
       const { includesCount, isSecond } = result;
+
       return this.#getRank(includesCount, isSecond);
     });
   }
 
   #getRank(includesCount, isSecond) {
     const { fifth, fourth, second, first } = LOTTO_RESULT;
+    const [firstRank, secondRank, thirdRank, fourthRank, fifthRank] = Object.keys(LOTTO_RESULT);
 
     switch (includesCount) {
       case fifth.includesCount:
-        return LOTTO_RANK.fifth;
+        return fifthRank;
       case fourth.includesCount:
-        return LOTTO_RANK.fourth;
+        return fourthRank;
       case second.includesCount:
-        if (isSecond) return LOTTO_RANK.second;
-        return LOTTO_RANK.third;
+        if (isSecond) return secondRank;
+        return thirdRank;
       case first.includesCount:
-        return LOTTO_RANK.first;
+        return firstRank;
       default:
         return;
     }
@@ -55,9 +57,7 @@ class LottoResults {
   #getTotalPrize() {
     const ranks = Object.keys(LOTTO_RESULT);
 
-    return ranks.reduce((acc, cur) => {
-      return acc + this.#lottoRanks[cur] * LOTTO_RESULT[cur].prize;
-    }, 0);
+    return ranks.reduce((acc, cur) => acc + this.#lottoRanks[cur] * LOTTO_RESULT[cur].prize, 0);
   }
 
   getLottoReturns(purchasePrice) {
