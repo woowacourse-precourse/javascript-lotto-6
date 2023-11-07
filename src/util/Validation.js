@@ -1,4 +1,4 @@
-import { ERROR } from "./env/Message.js";
+import { ERROR } from "../env/Message.js";
 
 export default function Validation() {
   this.DuplicationBonusNumber = (numbers, value) => {

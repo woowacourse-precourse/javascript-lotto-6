@@ -2,7 +2,7 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import { Message, ERROR } from "./env/Message.js";
 import { WINNING_AMOUNT } from "./env/Constant.js";
-import Validation from "./Validation.js";
+import Validation from "./util/Validation.js";
 function App() {
   const validation = new Validation();
 
@@ -106,6 +106,7 @@ function App() {
     });
     printWinningResult(resultLotto, inputAmount);
   };
+
   const lottoCheck = (lotto, lottoWinningNumber, lottoBonusNumber) => {
     const lottoCheck = lotto.filter((value) =>
       lottoWinningNumber.includes(value)
@@ -132,7 +133,6 @@ function App() {
       5.5: 0,
       6: 0,
     };
-
     resultLotto.forEach((result) => {
       if (result >= 3) {
         WinningAmountResult[result]++;
@@ -141,6 +141,7 @@ function App() {
     printCheckLotto(WinningAmountResult, WINNING_AMOUNT);
     printRateOfReturn(WinningAmountResult, inputAmount);
   };
+
   const printRateOfReturn = (WinningAmountResult, inputAmount) => {
     const LottoAmount = {
       3: 5000,
@@ -161,6 +162,7 @@ function App() {
       ).toFixed(1)}%입니다.`
     );
   };
+
   const printCheckLotto = (WinningAmountResult, WINNING_AMOUNT) => {
     const obj = Object.keys(WinningAmountResult).sort((a, b) => a - b);
     for (let key of obj) {
