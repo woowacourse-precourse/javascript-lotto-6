@@ -5,7 +5,7 @@ export const INPUT_MESSAGE = Object.freeze({
 });
 
 export const OUTPUT_MESSAGE = Object.freeze({
-  lottoTicketNumber: '개를 구매했습니다.',
+  lottoTryCount: '개를 구매했습니다.',
   returnRate1: '총 수익률은',
   returnRate2: '입니다.',
   result: '\n당첨 통계\n---',

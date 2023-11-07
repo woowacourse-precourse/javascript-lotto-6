@@ -2,9 +2,9 @@ import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE, OTHERS } from '../../utils/constants.js';
 
 class OutputView {
-  showLottoNumberListOutput(ticketNumber, lottoNumberListmessage) {
-    Console.print(`${ticketNumber}${OUTPUT_MESSAGE.lottoTicketNumber}`);
-    lottoNumberListmessage.forEach((lotto) => Console.print(`[${lotto}]`));
+  showPurchaseLottosOutput(lottoTryCount, purchaseLottosMessages) {
+    Console.print(`${lottoTryCount}${OUTPUT_MESSAGE.lottoTryCount}`);
+    purchaseLottosMessages.forEach((lottoMessage) => Console.print(`[${lottoMessage}]`));
   }
 
   showGameResultOutput(gameResultMessage) {
