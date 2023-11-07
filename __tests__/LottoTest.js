@@ -25,6 +25,26 @@ describe("로또 클래스 테스트", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6.3])
     }).toThrow("[ERROR]")
-  })
+  });
+
+  test("로또 번호가 1에서 45 사이가 아니면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 60])
+    }).toThrow("[ERROR]")
+  });
+
+  const lotto = new Lotto([1, 2, 3, 4, 5, 6])
+
+  test("보너스 번호가 1개가 아니면 예외가 발생한다.", () => {
+    expect(() => {
+      lotto.getBonus([7, 8])
+    }).toThrow("[ERROR]")
+  });
+
+  test("보너스 번호가 로또 번호와 중복되면 예외가 발생한다.", () => {
+    expect(() => {
+      lotto.getBonus(6)
+    }).toThrow("[ERROR]")
+  });
 
 });
