@@ -7,6 +7,13 @@ export const INPUT_MESSAGE = Object.freeze({
 export const PRINT_MESSAGE = Object.freeze({
   lottoCount: '개를 구매했습니다.',
   jackpot: '\n당첨 통계\n---',
+  prize: [
+    '3개 일치 (5,000원) - ',
+    '4개 일치 (50,000원) - ',
+    '5개 일치 (1,500,000원) - ',
+    '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+    '6개 일치 (2,000,000,000원) - ',
+  ],
 });
 
 export const ERROR_MESSAGE = Object.freeze({
@@ -37,11 +44,11 @@ export const CONFIG = Object.freeze({
     minNumber: 1,
     maxNumber: 45,
   },
-  prize: {
-    '1등': 2_000_000_000,
-    '2등': 30_000_000,
-    '3등': 1_500_000,
-    '4등': 50_000,
-    '5등': 5_000,
+  prize: [5_000, 50_000, 1_500_000, 30_000_000, 2_000_000_000],
+  rank: {
+    '1등, 2등': 6,
+    '3등': 5,
+    '4등': 4,
+    '5등': 3,
   },
 });

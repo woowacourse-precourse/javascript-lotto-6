@@ -6,13 +6,7 @@ import WinningBonus from './WinningBonus';
 
 class LottoGame {
   #tickets = [];
-  #results = {
-    '3개 일치 (5,000원)': 0,
-    '4개 일치 (50,000원)': 0,
-    '5개 일치 (1,500,000원)': 0,
-    '5개 일치, 보너스 볼 일치 (30,000,000원)': 0,
-    '6개 일치 (2,000,000,000원)': 0,
-  };
+  #results = new Array(5).fill(0);
 
   async run() {
     await this.#inputPrice();
@@ -28,7 +22,7 @@ class LottoGame {
     for (let i = 0; i < price / 1000; i += 1) {
       const lottoNumber = this.#generateRandomLottoNumbers();
       const lotto = new Lotto(lottoNumber);
-      Console.print(lotto.getLottoNumbers());
+      Console.print(`[${lotto.getLottoNumbers().join(', ')}]`);
 
       this.#tickets.push(lotto.getLottoNumbers());
     }
@@ -50,24 +44,19 @@ class LottoGame {
     });
 
     Console.print(PRINT_MESSAGE.jackpot);
-
-    for (const [prize, count] of Object.entries(this.#results)) {
-      if (prize !== 'undefined') {
-        console.log(`${prize} - ${count}개`);
-      }
+    for (let i = 0; i < this.#results.length; i++) {
+      Console.print(`${PRINT_MESSAGE.prize[i]}${this.#results[i]}개`);
     }
 
     this.#calculateTotal();
   }
 
   #calculateTotal() {
-    const totalPrize =
-      this.#results['3개 일치 (5,000원)'] * CONFIG.prize['5등'] +
-      this.#results['4개 일치 (50,000원)'] * CONFIG.prize['4등'] +
-      this.#results['5개 일치 (1,500,000원)'] * CONFIG.prize['3등'] +
-      this.#results['5개 일치, 보너스 볼 일치 (30,000,000원)'] *
-        CONFIG.prize['2등'] +
-      this.#results['6개 일치 (2,000,000,000원)'] * CONFIG.prize['1등'];
+    const totalPrize = this.#results.reduce(
+      (acc, cur, i) => acc + cur * CONFIG.prize[i],
+      0,
+    );
+
     const totalInvestment = this.#tickets.length * CONFIG.price;
     const profitPercentage = ((totalPrize / totalInvestment) * 100).toFixed(1);
 
@@ -79,15 +68,12 @@ class LottoGame {
       winningNumber.includes(num),
     ).length;
 
-    if (matchingNumbers === 6) {
-      if (ticket.includes(bonusNumber)) {
-        return '5개 일치, 보너스 볼 일치 (30,000,000원)';
-      }
-      return '6개 일치 (2,000,000,000원)';
+    if (matchingNumbers === CONFIG.rank['1등, 2등']) {
+      return ticket.includes(bonusNumber) ? 3 : 4;
     }
-    if (matchingNumbers === 5) return '5개 일치 (1,500,000원)';
-    if (matchingNumbers === 4) return '4개 일치 (50,000원)';
-    if (matchingNumbers === 3) return '3개 일치 (5,000원)';
+    if (matchingNumbers === CONFIG.rank['3등']) return 2;
+    if (matchingNumbers === CONFIG.rank['4등']) return 1;
+    if (matchingNumbers === CONFIG.rank['5등']) return 0;
   }
 
   #generateRandomLottoNumbers() {
