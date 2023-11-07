@@ -1,5 +1,6 @@
 import Input from './utils/inputOutput/input.js';
-import { lottoPurchaseCount } from './utils/lottoNumber/number.js';
+import { lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
+
 
 
 class StartGame {
@@ -7,12 +8,16 @@ class StartGame {
 
   #purchaseAmount;
 
+  #purchasedLottos = [];
+
   constructor() { }
 
   async runGame() {
     this.#inputMoney = await this.getValidatedPurchaseInput();
 
     this.#purchaseAmount = lottoPurchaseCount(this.#inputMoney);
+
+    this.purchaseLottos();
   }
 
   async getValidatedPurchaseInput() {
@@ -25,6 +30,15 @@ class StartGame {
       Output.print(error.message);
 
       return this.getValidatedPurchaseInput();
+    }
+  }
+
+  purchaseLottos() {
+    for (let count = 0; count < this.#purchaseAmount; count += 1) {
+      const randomLottoNumber = randomLottoNumbers();
+      const sortedLottoNumber = sortLottoNumbers(randomLottoNumber);
+
+      this.#purchasedLottos.push(sortedLottoNumber);
     }
   }
 }
