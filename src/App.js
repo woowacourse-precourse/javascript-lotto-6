@@ -152,7 +152,7 @@ class App {
 
   matchNumberCount(lotto, winningNumbers) {
     const matchingNumbers = winningNumbers.filter((number) =>
-      lotto.includes(number),
+      lotto.includes(Number(number)),
     );
     return matchingNumbers.length;
   }
