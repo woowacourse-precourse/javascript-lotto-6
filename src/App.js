@@ -51,8 +51,10 @@ class App {
       await this.targetNumber.setTargetNumber();
     }
 
-    while(!this.bonusNumber){
-      await this.getBonusNumber();
+    this.bonusNumber = new BonusNumber(this.targetNumber.getTargetNumber());
+    
+    while(this.bonusNumber.getBonusNumber() === 0){
+      await this.bonusNumber.setBonusNumber();
     }
 
     this.showLottoResult();
@@ -95,26 +97,6 @@ class App {
 
   getLottoNumber() {
     return Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH);
-  }
-
-  async getBonusNumber() {
-    const input = await Console.readLineAsync(USER_INPUT.BONUS_NUMBER);
-    const bonusNumber = Number(input);
-
-    try{
-      this.checkBonusNumber(bonusNumber);
-      this.bonusNumber = new BonusNumber(bonusNumber);
-    }catch (error){
-      Console.print(error);
-    }
-  }
-
-  checkBonusNumber(bonusNumber) {
-    if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) throw ERROR_MESSAGE.BONUS_NUM_MIN_MAX;
-    
-    if (isNaN(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_STRING;
-    
-    if (this.targetNumber.hasNumber(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_DUPLICATE;
   }
 
   showLottoResult() {
