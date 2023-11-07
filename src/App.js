@@ -1,4 +1,3 @@
-import { MissionUtils, Console } from '@woowacourse/mission-utils';
 import {
   INPUT_MESSAGE,
   INPUT_ERROR_MESSAGE,
@@ -6,130 +5,96 @@ import {
   RESULT_MESSAGE,
 } from './constants/constants';
 import Lotto from './Lotto';
+import { Console } from '@woowacourse/mission-utils';
+import {
+  validatePurchasingAmount,
+  validateWinningNumbers,
+  validateBonusNumber,
+} from './Validation';
+import { getRandomNumbers } from './Utils';
 
 class App {
-  #lottoCount;
-  #lottoList = [];
-  #winningNumbers = [];
-  #bonusNumber;
-  #purchaseAmount;
+  lottoCount;
+  lottoList = [];
+  winningNumbers = [];
+  bonusNumber;
+  purchaseAmount;
 
   async play() {
     try {
-      await this.#inputPurchaseAmount();
-      this.#purchaseLottos();
-      this.#printAllLottos();
-      await this.#inputWinningNumbers();
-      await this.#inputBonusNumber();
-      this.#calculateResult();
+      await this.inputPurchaseAmount();
+      this.purchaseLottos();
+      this.printAllLottos();
+      await this.inputWinningNumbers();
+      await this.inputBonusNumber();
+      this.calculateResult();
     } catch (err) {
       Console.print(err.message);
       await this.play();
     }
   }
 
-  async #inputPurchaseAmount() {
+  async inputPurchaseAmount() {
     Console.print(INPUT_MESSAGE.PURCHASING_AMOUNT);
     const purchasingAmount = await Console.readLineAsync('');
-    this.#validatePurchasingAmount(purchasingAmount);
-  }
-
-  #validatePurchasingAmount(amount) {
-    const checkValidNumber = Number(amount);
-
-    if (isNaN(checkValidNumber)) {
-      throw new Error(INPUT_ERROR_MESSAGE.NUMBER_ERROR);
-    }
-    if (checkValidNumber % 1000 !== 0) {
-      throw new Error(INPUT_ERROR_MESSAGE.PURCHASE_AMOUNT_ERROR);
-    }
-    this.#purchaseAmount = checkValidNumber;
-    this.#lottoCount = checkValidNumber / 1000;
-  }
-
-  #purchaseLottos() {
-    for (let i = 0; i < this.#lottoCount; i++) {
-      const randomNumbers = this.#getRandomNumbers();
-      this.#lottoList.push(new Lotto(randomNumbers));
-    }
-  }
-
-  #getRandomNumbers() {
-    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      45,
-      6,
+    this.purchaseAmount = validatePurchasingAmount(
+      purchasingAmount,
+      INPUT_ERROR_MESSAGE,
     );
-    return randomNumbers.sort((a, b) => a - b);
+    this.lottoCount = this.purchaseAmount / 1000;
   }
 
-  #printAllLottos() {
-    Console.print(`${this.#lottoList.length}${INPUT_MESSAGE.PURCHASE_LOTTO}`);
-    this.#lottoList.forEach(el => {
+  purchaseLottos() {
+    for (let i = 0; i < this.lottoCount; i++) {
+      const randomNumbers = getRandomNumbers();
+      this.lottoList.push(new Lotto(randomNumbers));
+    }
+  }
+
+  printAllLottos() {
+    Console.print(`${this.lottoList.length}${INPUT_MESSAGE.PURCHASE_LOTTO}`);
+    this.lottoList.forEach(el => {
       el.print();
     });
   }
 
-  async #inputWinningNumbers() {
+  async inputWinningNumbers() {
     Console.print(INPUT_MESSAGE.WINNING_NUMBERS);
     const winningNumbers = await Console.readLineAsync('');
-    await this.#validateWinningNumbers(winningNumbers);
+    this.winningNumbers = validateWinningNumbers(
+      winningNumbers,
+      SYMBOL,
+      INPUT_ERROR_MESSAGE,
+    );
   }
 
-  async #validateWinningNumbers(winningNumbers) {
-    const splitWinningNumbers = winningNumbers.split(SYMBOL.COMMA);
-
-    if (splitWinningNumbers.length !== 6) {
-      throw new Error(INPUT_ERROR_MESSAGE.WINNING_NUMBERS_ERROR);
-    }
-    splitWinningNumbers.sort((a, b) => a - b);
-    splitWinningNumbers.forEach(num => {
-      const checkValidWinningNumbers = Number(num);
-      if (isNaN(checkValidWinningNumbers)) {
-        throw new Error(INPUT_ERROR_MESSAGE.NUMBER_ERROR);
-      }
-
-      if (this.#winningNumbers.includes(checkValidWinningNumbers)) {
-        throw new Error(INPUT_ERROR_MESSAGE.DUPLICATE_WINNING_NUMBER);
-      }
-
-      this.#winningNumbers.push(checkValidWinningNumbers);
-    });
-  }
-  async #inputBonusNumber() {
+  async inputBonusNumber() {
     Console.print(INPUT_MESSAGE.BONUS_NUMBER);
     const bonusNumber = await Console.readLineAsync('');
-    this.#validateBonusNumber(bonusNumber);
+    this.bonusNumber = validateBonusNumber(
+      bonusNumber,
+      this.winningNumbers,
+      INPUT_ERROR_MESSAGE,
+    );
   }
 
-  #validateBonusNumber(bonusNumber) {
-    const checkValidateNumber = Number(bonusNumber);
-    if (isNaN(checkValidateNumber)) {
-      throw new Error(INPUT_ERROR_MESSAGE.NUMBER_ERROR);
-    }
-    if (this.#winningNumbers.includes(checkValidateNumber)) {
-      throw new Error(INPUT_ERROR_MESSAGE.DUPLICATE_BONUS_NUMBER);
-    }
-    this.#bonusNumber = checkValidateNumber;
-  }
-
-  #calculateResult() {
+  calculateResult() {
     Console.print(INPUT_MESSAGE.WINNING_MESSAGE);
     Console.print(SYMBOL.DIVIDER);
-    this.#calculateMatchedNumber();
+    this.calculateMatchedNumber();
   }
 
-  #calculateMatchedNumber() {
+  calculateMatchedNumber() {
     let threeSame = 0;
     let fourSame = 0;
     let fiveSame = 0;
     let fiveSameAndBonusMatch = 0;
     let sixSame = 0;
 
-    this.#lottoList.forEach(lottoNumbers => {
+    this.lottoList.forEach(lottoNumbers => {
       const matchedCount = lottoNumbers.returnSameCount(
-        this.#winningNumbers,
-        this.#bonusNumber,
+        this.winningNumbers,
+        this.bonusNumber,
       );
 
       switch (matchedCount) {
@@ -157,7 +122,7 @@ class App {
       `${RESULT_MESSAGE.SECOND_RESULT_MESSAGE} - ${fiveSameAndBonusMatch}개`,
     );
     Console.print(`${RESULT_MESSAGE.FIRST_RESULT_MESSAGE} - ${sixSame}개`);
-    this.#calculateRevenueRate({
+    this.calculateRevenueRate({
       threeSame,
       fourSame,
       fiveSame,
@@ -166,7 +131,7 @@ class App {
     });
   }
 
-  #calculateRevenueRate({
+  calculateRevenueRate({
     threeSame,
     fourSame,
     fiveSame,
@@ -179,7 +144,7 @@ class App {
       fiveSame * 1500000 +
       fiveSameAndBonusMatch * 30000000 +
       sixSame * 2000000000;
-    const revenueRate = Number((totalRevenue / this.#purchaseAmount) * 100);
+    const revenueRate = Number((totalRevenue / this.purchaseAmount) * 100);
 
     Console.print(`총 수익률은 ${revenueRate}%입니다.`);
   }
