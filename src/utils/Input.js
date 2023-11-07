@@ -32,7 +32,7 @@ class Input {
   static async readCommaSeparatedIntegerAsync(message) {
     const userInput = await this.readNonEmptyAsync(message);
 
-    if (!StringValidator.isCommaSeparatedNumbers(userInput)) {
+    if (!StringValidator.isCommaSeparatedNumbers(userInput.replace(/\s/g, ''))) {
       throw new CustomError(ERROR_MESSAGE.NOT_COMMA_SEPARATED_NUMBERS);
     }
 
