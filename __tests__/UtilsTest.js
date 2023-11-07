@@ -6,7 +6,7 @@ import {
   printPurchasedAmount,
   printProfit,
   printRankingList,
-} from '../src/util/Utils';
+} from '../src/Utils';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -117,6 +117,7 @@ describe('print 테스트', () => {
       '6개 일치 (2,000,000,000원) - 0개',
       '총 수익률은 916.7%입니다.',
     ];
+
     printRankingList(rankingList);
 
     logs.forEach((log) => {

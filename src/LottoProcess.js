@@ -1,12 +1,12 @@
 import { Random } from '@woowacourse/mission-utils';
-import { GAME_RULE_NUMBER, RANKING } from '../constant/Constants.js';
+import { GAME_RULE_NUMBER, RANKING } from './Constants.js';
 import {
   getInputBonusNumber,
   getInputPurchasingMoney,
   getInputWinningNumbers,
   printPurchasedAmount,
   printRankingList,
-} from '../util/Utils.js';
+} from './Utils.js';
 import Lotto from './Lotto.js';
 
 class LottoGame {

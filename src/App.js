@@ -1,4 +1,4 @@
-import LottoGame from './domain/LottoGame.js';
+import LottoGame from './LottoProcess.js';
 
 class App {
   async play() {

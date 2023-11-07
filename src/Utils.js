@@ -4,13 +4,13 @@ import {
   GAME_WINNER,
   INPUT_MESSAGES,
   PRINT_MESSAGES,
-} from '../constant/Constants.js';
+} from './Constants.js';
 import {
   checkPurchasingMoney,
   checkBonusNumber,
   checkWinningNumbers,
 } from './Validation.js';
-import Lotto from '../domain/Lotto.js';
+import Lotto from './Lotto.js';
 
 async function getInputPurchasingMoney() {
   let userInput;
