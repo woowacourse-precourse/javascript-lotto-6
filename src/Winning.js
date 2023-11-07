@@ -1,3 +1,5 @@
+import { model } from "./Model.js";
+
 export class Winning {
   #numbers
 
@@ -7,6 +9,8 @@ export class Winning {
     this.#winnningNumberDuplicateValidater(numbers);
     this.#winnningNumberRangeValidater(numbers);
     this.#numbers = numbers;
+
+    this.#convertToNumberArray(numbers);
   };
 
   #validate(numbers) {
@@ -48,12 +52,8 @@ export class Winning {
     }
   }
 
-  winningNumbers() {
-    return this.#convertToNumberArray(this.#numbers)
-  }
-
   #convertToNumberArray(stringArray) {
     const numberArray = stringArray.map((str) => parseInt(str, 10));
-    return numberArray;
+    model.winningNumber = numberArray;
   }
 }

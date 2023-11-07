@@ -22,8 +22,7 @@ class App {
   }
 
   async inputMoney() {
-    let comment = PURCASE_COMMENT;
-    MissionUtils.Console.print(comment);
+    this.inputNumberComment();
 
     const totalMoney = await MissionUtils.Console.readLineAsync('');
     this.callCounter(totalMoney);
@@ -43,10 +42,8 @@ class App {
     const winningNumber = await MissionUtils.Console.readLineAsync('');
     const winningSplitNumber = winningNumberSpliter(winningNumber);
     this.winning = new Winning(winningSplitNumber);
-    const winning = this.winning.winningNumbers();
-    model.winningNumber = winning;
 
-    this.inputBonusNumber(winning, model.counts);
+    this.inputBonusNumber(model.winningNumber, model.counts);
   }
 
   async inputBonusNumber(winning, counts) {
@@ -63,6 +60,11 @@ class App {
 
   callResults(winning, bonus, counts) {
     this.results = new Results(model.lottoNumbers, winning, bonus, counts)
+  }
+
+  inputNumberComment() {
+    let comment = PURCASE_COMMENT;
+    MissionUtils.Console.print(comment);
   }
 
   winningNumberComment() {
