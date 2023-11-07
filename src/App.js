@@ -8,12 +8,6 @@ class App {
 
   async play() {
     await this.PlayLottery.getLotteryResult();
-
-    // Console.print(
-    //   `총 수익률은 ${parseFloat(
-    //     ((getMoneyAmount / payAmount) * 100).toFixed(2)
-    //   )}%입니다.`
-    // );
   }
 }
 

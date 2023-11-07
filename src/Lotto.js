@@ -1,5 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
 import CheckNumber from './Domain/NumberCheck.js';
-import Result from './Domain/Result.js';
 import User from './Domain/User.js';
 import Print from './View/Output.js';
 
@@ -12,6 +12,7 @@ class Lotto {
   }
 
   #validate(numbers) {
+    console.log(numbers);
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
@@ -26,14 +27,19 @@ class Lotto {
 
     const userNum = { user: this.#numbers, bonus };
 
-    // 같은 수 체크
-    const matchedNumber = new CheckNumber({ randomNum, userNum }).sameCount();
+    this.checkNumberMatching({ randomNum, userNum });
+  }
 
-    const matchResult = CheckNumber.sameResult(matchedNumber);
-    Print.repeatResult(Result.objToString(matchResult));
+  checkNumberMatching(numbers) {
+    const { randomNum, userNum } = numbers;
+    const check = new CheckNumber({ randomNum, userNum });
+
+    const matchResult = check.sameResult(check.sameCount());
+    Print.repeatResult(matchResult);
 
     // 수익률 계산
-    CheckNumber.calculateMargin(matchedNumber);
+    const margin = check.getMargin(check.totalAmount(matchResult));
+    Console.print(`총 수익률은 ${margin}%입니다.`);
   }
 }
 

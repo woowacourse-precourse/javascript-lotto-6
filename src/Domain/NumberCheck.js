@@ -25,29 +25,42 @@ class CheckNumber {
     return matchedNumber;
   }
 
-  static sameResult(matchResult) {
+  sameResult(matchResult) {
     const matched = { ...MATCHED.NUMBER_RESULT };
 
     matchResult.forEach((sameCount) => {
       if (sameCount) matched[sameCount] += 1;
     });
 
-    return matched;
+    const result = Object.keys(matched).map((el) => `${el} - ${matched[el]}개`);
+
+    return result;
   }
 
-  static calculateMargin(matchData) {
+  getMargin(total) {
+    const { randomNum } = this.#numbers;
+
+    const paid = randomNum.length * 1000;
+    const result = parseFloat(((total / paid) * 100).toFixed(2));
+
+    return result;
+  }
+
+  totalAmount(matchData) {
     const numberRegex = /\(([^)]+)\)/;
 
-    let totalAmount = 0;
+    let total = 0;
 
-    matchData.forEach((el) => {
-      const amountString = el.match(numberRegex)[1];
-      const amount = amountString.replace(/[^0-9]/g, '');
+    matchData.forEach((result) => {
+      const [moneyInfo, countInfo] = result.split(' - ');
 
-      totalAmount += Number(amount);
+      const money = moneyInfo.match(/(\d+,\d+)/)[0].replace(/,/g, '');
+      const count = parseInt(countInfo, 10);
+
+      total += money * count;
     });
 
-    console.log(`총 수익금 ${totalAmount}`);
+    return total;
   }
 }
 

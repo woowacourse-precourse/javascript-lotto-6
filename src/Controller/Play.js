@@ -1,6 +1,7 @@
 import Create from './Create.js';
 import User from '../Domain/User.js';
 import Lotto from '../Lotto.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class PlayLottery {
   constructor() {
@@ -9,15 +10,16 @@ class PlayLottery {
   }
 
   async getLotteryResult() {
-    await this.compareUserWith(await this.create.RandomLottery());
+    try {
+      await this.compareUserWith(await this.create.RandomLottery());
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   async compareUserWith(randoms) {
-    await this.lotto(await this.user.selectLottery()).compareWith(randoms);
-  }
-
-  lotto(userNum) {
-    return new Lotto(userNum);
+    const lottoInstance = new Lotto(await this.user.selectLottery());
+    await lottoInstance.compareWith(randoms);
   }
 }
 
