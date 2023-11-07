@@ -1,6 +1,6 @@
 import { LOTTO_RESULT } from '../constants/lotto.js';
 
-class LottoService {
+class LottoCompare {
   #winningNumbers;
   #bonusNumber;
 
@@ -14,14 +14,10 @@ class LottoService {
   }
 
   #hasBonusNumber(numbers) {
-    return numbers.find((number) => this.#bonusNumber === String(number));
+    return numbers.includes(this.#bonusNumber);
   }
 
-  #isSecond(numbers) {
-    return !!this.#hasBonusNumber(numbers);
-  }
-
-  createLottoResult(lottos) {
+  getLottoCompare(lottos) {
     const { fifth, fourth, second, first } = LOTTO_RESULT;
     const [firstRank, secondRank, thirdRank, fourthRank, fifthRank] = Object.keys(LOTTO_RESULT);
 
@@ -33,7 +29,7 @@ class LottoService {
       if (fourth.includesCount === includesCount) return fourthRank;
 
       if (second.includesCount === includesCount) {
-        const isSecond = this.#isSecond(lotto);
+        const isSecond = this.#hasBonusNumber(lotto);
 
         if (isSecond) return secondRank;
 
@@ -45,4 +41,4 @@ class LottoService {
   }
 }
 
-export default LottoService;
+export default LottoCompare;

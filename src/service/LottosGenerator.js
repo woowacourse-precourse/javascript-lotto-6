@@ -1,5 +1,4 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { utils } from '../utils/utils.js';
 import { LOTTO } from '../constants/lotto.js';
 import Lotto from '../Lotto.js';
 
@@ -7,14 +6,14 @@ class LottosGenerator {
   #lottos = [];
 
   constructor(money) {
-    this.#createLottos(this.#getTotalIssueCount(money));
+    this.#generateLottos(this.#getTotalIssueCount(money));
   }
 
-  #createLottos(totalIssueCount) {
+  #generateLottos(totalIssueCount) {
     let currentIssueCount = 1;
 
     while (currentIssueCount <= totalIssueCount) {
-      const numbers = this.#createLottoNumbers();
+      const numbers = this.#generateLottoNumbers();
       const lotto = new Lotto(numbers);
 
       this.#lottos.push(lotto);
@@ -23,14 +22,14 @@ class LottosGenerator {
     }
   }
 
-  #createLottoNumbers() {
+  #generateLottoNumbers() {
     const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
       LOTTO.minNumber,
       LOTTO.maxNumber,
       LOTTO.length,
     );
-    // TODO: 오름차순 정렬을 어디서 해야할까?
-    return utils.ascendingNumbers(lottoNumbers);
+
+    return lottoNumbers;
   }
 
   #getTotalIssueCount(money) {
