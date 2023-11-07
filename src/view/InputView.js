@@ -1,9 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 import MESSAGE from '../constants/message.js';
+import Validator from '../utils/Validator.js';
 
 const InputView = {
   readPurchaseAmount: async () => {
     const purchaseAmount = await Console.readLineAsync(MESSAGE.read.purchaseAmount);
+
+    Validator.validatePurchaseAmount(purchaseAmount);
 
     return purchaseAmount;
   },
