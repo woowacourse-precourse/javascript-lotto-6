@@ -13,32 +13,33 @@ class App {
 
   async play() {
     const money = await this.Cash.toSpend();
-    const lotto = await this.getLotto(money);
-    const prize = await this.getPrize();
-    const result = await this.compare(lotto, prize);
-    await this.printResult(result);
+    const lotto = await App.getLotto(money);
+    const prize = await App.getPrize();
+    const result = await App.compare(lotto, prize);
+    await App.printResult(result);
     const profit = await Calculator.profit(result);
-    const rate = await Calculator.print(money, profit);
+    await Calculator.print(money, profit);
   }
 
-  getLotto(input) {
-    const printer = new Printer(input);
+  static getLotto(money) {
+    const printer = new Printer(money);
     const lottoArray = printer.getTicket();
     return lottoArray;
   }
 
-  async getPrize() {
+  static async getPrize() {
     const prize = new Prize();
     await prize.init();
 
-    const line = prize.show().line;
-    const bonus = prize.show().bonus;
+    const { line, bonus } = prize.get();
     return { line, bonus };
   }
 
-  compare(lotto, prize) {
+  static compare(lotto, prize) {
+    // 5.1(Second Prize) = 5 wins + bonus
     const result = { 3: 0, 4: 0, 5: 0, 5.1: 0, 6: 0 };
 
+    // lotto === Array, prize === Object
     let index = 0;
     while (index < lotto.length) {
       const wins = Matching.between(lotto[index], prize);
@@ -50,16 +51,19 @@ class App {
     return result;
   }
 
-  printResult(object) {
-    for (let key in object) {
-      const value = object[key];
-      if (key < 5.1) {
-        IO.print(`${Constants.wins[key]}${value}개`);
-      } else {
-        IO.print(`${Constants.wins[5.1]}${object[5.1]}개`);
-        IO.print(`${Constants.wins[6]}${object[6]}개`);
-        return;
-      }
+  static printResult(result) {
+    // result === Object
+    const objArray = Object.entries(result);
+    objArray.sort();
+
+    IO.print("당첨 통계");
+    IO.print("---------");
+    let index = 0;
+    while (index < objArray.length) {
+      const key = objArray[index][0];
+      const value = objArray[index][1];
+      IO.print(`${Constants.wins[key]}${value}개`);
+      index += 1;
     }
   }
 }

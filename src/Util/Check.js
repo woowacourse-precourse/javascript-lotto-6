@@ -21,14 +21,14 @@ export default class Check {
       this.isInRange(number);
       set.add(number);
     });
-    this.hasNaN(baseArray);
+    Check.hasNaN(baseArray);
     this.isValidSet(set);
   }
 
   bonus(baseArray, number) {
     this.isInRange(number);
-    this.isDuplicate(baseArray, number);
-    if (Number.isNaN(number)) this.hasNaN([number]);
+    Check.isDuplicate(baseArray, number);
+    if (Number.isNaN(number)) Check.hasNaN([number]);
   }
 
   isValidSet(set) {
@@ -49,11 +49,11 @@ export default class Check {
       throw new Error(Constants.error.outOfRange);
   }
 
-  isDuplicate(array, number) {
+  static isDuplicate(array, number) {
     if (array.includes(number)) throw new Error(Constants.error.duplicate);
   }
 
-  hasNaN(array) {
+  static hasNaN(array) {
     if (array.includes(NaN)) throw new Error(Constants.error.nan);
   }
 }
