@@ -13,7 +13,10 @@ class App {
 
 			const myLottoTicketsArray = this.getMyLottoTickets(lottoAmount);
 
-			this.view.printLottoTickets(myLottoTicketsArray);
+			const myLottoTicketMessage =
+				this.getMyLottoTicketMessage(myLottoTicketsArray);
+
+			this.view.printLottoTickets(myLottoTicketMessage);
 
 			const lottoWinningNumberArray = await this.validateLottoWinningNumbers();
 
@@ -31,7 +34,7 @@ class App {
 				bonusNumber
 			);
 
-			const winningStatisticsMessage = this.getWinningStatistics(
+			const winningStatisticsMessage = this.getWinningStatisticsMessage(
 				matchingNumbersArray,
 				matchingBonusNumberArray
 			);
@@ -118,7 +121,17 @@ class App {
 		return model.getTotalPrize(matchingBonusNumberArray);
 	}
 
-	getWinningStatistics(matchingNumbersArray, matchingBonusNumberArray) {
+	getMyLottoTicketMessage(myLottoTicketsArray) {
+		const lottoAmount = myLottoTicketsArray.length;
+		let message = myLottoTicketsArray
+			.map((lottoTicket) => {
+				return JSON.stringify(lottoTicket);
+			})
+			.join('\n');
+		return `총 ${lottoAmount}개를 구매했습니다.\n${message}`;
+	}
+
+	getWinningStatisticsMessage(matchingNumbersArray, matchingBonusNumberArray) {
 		return WINNING_RULES.map((rule) => {
 			let count = matchingNumbersArray.reduce((acc, cur, i) => {
 				if (rule.bonus) {
