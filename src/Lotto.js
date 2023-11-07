@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { checkInputArrayDuplication } from "./Validation";
+import { errorMessages } from "./Message";
 
 class Lotto {
   #numbers;
@@ -15,7 +16,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(errorMessages.ERROR_INPUT_ARRAY_LENGTH_6);
     }
     checkInputArrayDuplication(numbers);
   }

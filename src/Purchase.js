@@ -28,7 +28,7 @@ class Purchase {
   buyLottos(numberOfLotto) {
     const tmpLottos = [];
     let str = "";
-    str += `\n${numberOfLotto}개를 구매했습니다.\n`;
+    str += `\n${numberOfLotto}${messages.BUY_LOTTOS}`;
     for (let i = 0; i < numberOfLotto; i++) {
       const randoms = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       const lotto = new Lotto(randoms);
