@@ -8,7 +8,7 @@ class Result {
     Console.print(`보너스 번호: ${userBonusNumber}`);
     Console.print(`로또번호: ${lottoNumbers}`);
 
-    const matchedNumbers = []; // 일치하는 번호를 저장하는 배열 초기화
+    const matchedNumbers = [...new Set(userLottoNumbers)]; // 중복을 제거한 일치하는 번호를 저장하는 배열
 
     for (const userNumber of userLottoNumbers) {
       for (const lottoNumberSet of lottoNumbers) {
@@ -28,24 +28,38 @@ class Result {
     const numberOfMatches = matchedNumbers.length;
     const winnings = [0, 0, 5000, 50000, 1500000, 30000000, 2000000000];
 
-    Console.print(`3개 일치 (5,000원) - ${numberOfMatches === 3 ? 1 : 0}개`);
-    Console.print(`4개 일치 (50,000원) - ${numberOfMatches === 4 ? 1 : 0}개`);
-    Console.print(
-      `5개 일치 (1,500,000원) - ${
-        numberOfMatches === 5 && !isBonusMatch ? 1 : 0
-      }개`
-    );
+    // 각각의 로또 티켓이 일치하는 개수를 세어야 합니다.
+    const ticketMatches = lottoNumbers.map((ticket) => {
+      let ticketMatch = 0;
+      for (const userNumber of userLottoNumbers) {
+        if (ticket.includes(userNumber)) {
+          ticketMatch++;
+        }
+      }
+      return ticketMatch;
+    });
 
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${
-        numberOfMatches === 5 && isBonusMatch ? 1 : 0
-      }개`
-    );
-    Console.print(
-      `6개 일치 (2,000,000,000원) - ${numberOfMatches === 6 ? 1 : 0}개`
-    );
+    // 각각의 로또 티켓에서 3개, 4개, 5개, 5개+보너스, 6개 일치한 개수를 계산
+    const counts = [0, 0, 0, 0, 0];
+    for (const matchCount of ticketMatches) {
+      if (matchCount === 3) {
+        counts[0]++;
+      } else if (matchCount === 4) {
+        counts[1]++;
+      } else if (matchCount === 5) {
+        counts[2]++;
+      } else if (matchCount === 5 && isBonusMatch) {
+        counts[3]++;
+      } else if (matchCount === 6) {
+        counts[4]++;
+      }
+    }
 
-
+    Console.print(`3개 일치 (5,000원) - ${counts[0]}개`);
+    Console.print(`4개 일치 (50,000원) - ${counts[1]}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${counts[2]}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${counts[3]}개`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${counts[4]}개`);
   }
 }
 
