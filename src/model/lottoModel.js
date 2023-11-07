@@ -1,1 +1,7 @@
-export default class lottoModel {}
+export default class lottoModel {
+  #purchaseAmount;
+  #purchaseCount;
+  #lottoArray;
+  #winningNumber;
+  #bonusNumber;
+}
