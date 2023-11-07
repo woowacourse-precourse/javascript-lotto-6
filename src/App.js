@@ -1,4 +1,4 @@
-import OutputHandler from './OutputHandler';
+import LottoPrinter from './LottoPrinter';
 import User from './User';
 import LottoMachine from './LottoMachine';
 import LottoChecker from './LottoChecker';
@@ -9,7 +9,7 @@ class App {
     const machine = new LottoMachine(ticketCount);
 
     const ticketCount = await user.purchaseLotto();
-    OutputHandler.printPurchaseComplete(ticketCount);
+    LottoPrinter.printPurchaseComplete(ticketCount);
 
     const tickets = await machine.getTickets(ticketCount);
     const winningNumbers = await user.enterWinningNumbers();

@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
-import OutputHandler from './OutputHandler';
+import LottoPrinter from './LottoPrinter';
 
 class LottoMachine {
   constructor() {
@@ -17,7 +17,7 @@ class LottoMachine {
     for (let i = 0; i < ticketCount; i++) {
       const ticket = await this.issueTicket();
       const ticketNumbers = `[${ticket.join(', ')}]`;
-      OutputHandler.printTicketNumbers(ticketNumbers);
+      LottoPrinter.printTicketNumbers(ticketNumbers);
       this.tickets.push(ticket);
     }
 
