@@ -1,3 +1,5 @@
+import Constants from "./ValidateConstants.js";
+
 class Lotto {
   #numbers;
 
@@ -10,20 +12,20 @@ class Lotto {
   /* eslint-disable class-methods-use-this */
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(Constants.LOTTO_ERROR_MESSAGES.INVALID_NUMBER_COUNT);
     }
 
     const set = new Set(numbers);
     if (numbers.length !== set.size) {
-      throw new Error("[ERROR] 로또 번호중 중복된 값이 존재합니다.\n");
+      throw new Error(Constants.LOTTO_ERROR_MESSAGES.DUPLICATE_VALUES);
     }
 
     if (numbers.some((number) => isNaN(Number(number)) || number % 1 !== 0)) {
-      throw new Error("[ERROR] 로또 번호는 자연수여야 합니다.");
+      throw new Error(Constants.LOTTO_ERROR_MESSAGES.NOT_AN_INTEGER);
     }
 
     if (numbers.some((number) => number < 1 || number > 45)) {
-      throw new Error("[ERROR] 로또 번호는 1과 45사이의 값이어야 합니다.");
+      throw new Error(Constants.LOTTO_ERROR_MESSAGES.OUT_OF_RANGE);
     }
   }
 
