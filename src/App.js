@@ -13,9 +13,13 @@ const LOTTO_PRIZE = new Map([
 
 class App {
   #winning;
+
   #bonusNumber;
+
   #payment;
+
   #totalPrize;
+
   #rankedLotto;
 
   constructor() {
