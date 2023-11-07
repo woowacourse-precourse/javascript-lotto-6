@@ -19,8 +19,11 @@ const PRINT_OUTPUT = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-	numbersMustBeSix: "[ERROR] 로또 번호는 6개여야 합니다.",
-	invalidInputNumber: "[ERROR] 숫자로 입력해주세요.",
+	invalidNumbersCount: "[ERROR] 로또 번호는 6개여야 합니다.",
+	duplication: "[ERROR] 중복되지 않은 숫자를 입력해주세요",
+	invalidNumberRange:
+		"[ERROR] 로또 번호의 숫자 범위는 1~45입니다. 범위 내의 숫자를 입력해주세요",
+	invalidInputNumber: "[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해주세요.",
 	invalidInputAmount: "[ERROR] 1000원 이상 입력해주세요",
 });
 
