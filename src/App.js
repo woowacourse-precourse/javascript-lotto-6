@@ -1,12 +1,20 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import Rank from './Rank.js';
+import {
+  validateAmount,
+  validateWinningNumbers,
+  validateBonusNumber,
+} from './utils/validate.js';
+import { RANK_INFO } from './constants.js';
 
 class App {
   amount;
   lottos = [];
   lottosCount;
-  winningNumbers;
+  winningNumbers = [];
   bonusNumber;
+  ranks = [];
 
   async play() {
     await this.start();
@@ -14,24 +22,8 @@ class App {
     this.printLottos();
     await this.getWinningNumbers();
     await this.getBonusNumber();
-  }
-
-  async start() {
-    await this.enterAmount();
-    this.validateAmount();
-    MissionUtils.Console.print('');
-  }
-
-  async getWinningNumbers() {
-    await this.enterWinningNumbers();
-    this.validateWinningNumbers();
-    MissionUtils.Console.print('');
-  }
-
-  async getBonusNumber() {
-    await this.enterBonusNumber();
-    this.validateBonusNumber();
-    MissionUtils.Console.print('');
+    this.getLottoRanking();
+    this.printLottoRanking();
   }
 
   async enterAmount() {
@@ -40,13 +32,23 @@ class App {
     );
   }
 
-  validateAmount() {
-    if (/\D/.test(this.amount)) {
-      throw new Error('[ERROR] 로또 구입 금액은 숫자형태로만 입력해야 합니다.');
-    } else if (this.amount < 1000) {
-      throw new Error('[ERROR] 로또 구입은 1000원부터 가능합니다.');
-    } else if (this.amount % 1000 !== 0) {
-      throw new Error('[ERROR] 로또 구입은 1000원 단위로 가능합니다.');
+  getLottoASCNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+      (a, b) => a - b
+    );
+  }
+
+  async start() {
+    while (!this.amount) {
+      try {
+        await this.enterAmount();
+        validateAmount(this.amount);
+      } catch (error) {
+        this.amount = 0;
+        MissionUtils.Console.print(error.message);
+      } finally {
+        MissionUtils.Console.print('');
+      }
     }
   }
 
@@ -55,23 +57,17 @@ class App {
     let i = 0;
     while (i < this.lottosCount) {
       const lotto = new Lotto(this.getLottoASCNumbers());
-      this.lottos.push(lotto.numbers);
-      i++;
+      this.lottos.push(lotto);
+      i += 1;
     }
-  }
-
-  getLottoASCNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-      (a, b) => a - b
-    );
   }
 
   printLottos() {
     MissionUtils.Console.print(`${this.lottosCount}개를 구매했습니다.`);
     let i = 0;
     while (i < this.lottosCount) {
-      MissionUtils.Console.print(this.lottos[i]);
-      i++;
+      MissionUtils.Console.print('[' + this.lottos[i].numbers.join(', ') + ']');
+      i += 1;
     }
     MissionUtils.Console.print('');
   }
@@ -83,30 +79,18 @@ class App {
     this.winningNumbers = numbers.split(',').map(Number);
   }
 
-  validateWinningNumbers() {
-    if (!this.checkNumbersRange(this.winningNumbers)) {
-      throw new Error(
-        '[ERROR] 당첨 번호는 1부터 45까지의 숫자형태로 입력해야 합니다. '
-      );
-    } else if (this.winningNumbers.length !== 6) {
-      throw new Error(
-        '[ERROR] 당첨 번호는 쉼표로 구분해 6자리로 입력해야 합니다.'
-      );
-    } else if (this.isDuplicateNumbers(this.winningNumbers)) {
-      throw new Error(
-        '[ERROR] 당첨 번호는 중복되지 않는 숫자 6개로 입력해야 합니다.'
-      );
+  async getWinningNumbers() {
+    while (!this.winningNumbers.length) {
+      try {
+        await this.enterWinningNumbers();
+        validateWinningNumbers(this.winningNumbers);
+      } catch (error) {
+        this.winningNumbers = [];
+        MissionUtils.Console.print(error.message);
+      } finally {
+        MissionUtils.Console.print('');
+      }
     }
-  }
-
-  checkNumbersRange(numbers) {
-    return numbers.every((item) => /^([1-9]|[1-3][0-9]|4[0-5])$/.test(item));
-  }
-
-  isDuplicateNumbers(numbers) {
-    return numbers.some((number) => {
-      return numbers.indexOf(number) !== numbers.lastIndexOf(number);
-    });
   }
 
   async enterBonusNumber() {
@@ -115,15 +99,43 @@ class App {
     ));
   }
 
-  validateBonusNumber() {
-    if (!/^([1-9]|[1-3][0-9]|4[0-5])$/.test(this.bonusNumber)) {
-      throw new Error(
-        '[ERROR] 보너스 번호는 1부터 45까지의 숫자 형식으로 입력해야 합니다.'
+  async getBonusNumber() {
+    while (!this.bonusNumber) {
+      try {
+        await this.enterBonusNumber();
+        validateBonusNumber(this.winningNumbers, this.bonusNumber);
+      } catch (error) {
+        this.bonusNumber = 0;
+        MissionUtils.Console.print(error.message);
+      } finally {
+        MissionUtils.Console.print('');
+      }
+    }
+  }
+
+  setRanks() {
+    let i = 0;
+    while (i < 5) {
+      const rank = new Rank(
+        RANK_INFO[i].ranking,
+        RANK_INFO[i].matchNumbers,
+        RANK_INFO[i].winnings
       );
-    } else if (this.winningNumbers.includes(this.bonusNumber)) {
-      throw new Error(
-        '[ERROR] 보너스 번호는 입력한 당첨 번호와 중복되지 않아야 합니다.'
+      this.ranks.push(rank);
+      i += 1;
+    }
+  }
+
+  getLottoRanking() {
+    this.setRanks();
+    let i = 0;
+    while (i < this.lottosCount) {
+      const ranking = this.lottos[i].getRanking(
+        this.winningNumbers,
+        this.bonusNumber
       );
+      this.ranks.map((rank) => rank.ranking === ranking && rank.count++);
+      i += 1;
     }
   }
 }
