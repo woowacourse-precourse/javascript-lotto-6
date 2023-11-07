@@ -3,6 +3,8 @@ import { Console } from '@woowacourse/mission-utils';
 import { lottoprint } from './output/Lottoprint.js';
 import Lotto from './Lotto.js';
 import { bonus } from './input/Bonus.js';
+import { winningnum } from './Game/WinningNum.js';
+import { winningprint } from './Output/WinningPrint.js';
 
 class App {
   // prettier-ignore
@@ -13,6 +15,8 @@ class App {
     const lottonum = new Lotto([1,2,3,4,5,6]);
     await lottonum.lottoplay();
     const bonusnum = await bonus(lottonum);
+    const output = winningnum(arrary, bonusnum);
+    winningprint(output);
   }
 }
 
