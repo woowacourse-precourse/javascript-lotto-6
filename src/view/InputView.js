@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/message.js';
 import { validation } from '../utils/validation.js';
-import ValidateError from '../error/ValidateError.js';
 import { COMMON } from '../constants/common.js';
 import { LOTTO } from '../constants/lotto.js';
+import ValidateError from '../error/ValidateError.js';
 
 class InputView {
   async getLottoPurchasePrice() {
@@ -90,12 +90,14 @@ class InputView {
     }
   }
 
-  async getLottoBonusNumber() {
+  async getLottoBonusNumber(winningNumbers) {
     while (true) {
       try {
-        const lottoBonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
+        const lottoBonusNumber = Number(
+          await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber),
+        );
 
-        this.#validateNumber(Number(lottoBonusNumber));
+        this.#validateNumber(lottoBonusNumber, winningNumbers);
 
         return lottoBonusNumber;
       } catch (error) {
@@ -104,7 +106,7 @@ class InputView {
     }
   }
 
-  #validateNumber(number) {
+  #validateNumber(number, winningNumbers) {
     if (validation.isEmpty(number)) {
       throw new ValidateError(ERROR_MESSAGE.empty);
     }
@@ -113,12 +115,11 @@ class InputView {
       throw new ValidateError(ERROR_MESSAGE.lottoNumberRangee);
     }
 
-    // TODO: 보너스번호가 당첨번호에 포함되는지 체크하기
-    // const isWinningNumbersIncludeBonusNumber = this.#winningNumbers.includes(number);
+    const isWinningNumbersIncludeBonusNumber = winningNumbers.includes(number);
 
-    // if (isWinningNumbersIncludeBonusNumber) {
-    //   throw new ValidateError(ERROR_MESSAGE.bonusNumberIncludeWinningNumber);
-    // }
+    if (isWinningNumbersIncludeBonusNumber) {
+      throw new ValidateError(ERROR_MESSAGE.bonusNumberIncludeWinningNumber);
+    }
   }
 }
 
