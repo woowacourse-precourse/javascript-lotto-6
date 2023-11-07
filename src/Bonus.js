@@ -12,7 +12,7 @@ class Bonus {
   #validate(lotto) {
     validationUtils.checkNumber(this.#bonus);
 
-    validationUtils.checkRange(this.#bonus);
+    validationUtils.checkRange(this.#bonus, MESSAGE.error.rangeBonus);
 
     this.#checkDuplicateNumber(lotto);
   }
