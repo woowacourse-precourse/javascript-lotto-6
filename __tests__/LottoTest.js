@@ -15,6 +15,15 @@ describe("로또 클래스 테스트", () => {
   });
 
   test("로또 번호와 당첨 번호를 입력하면 올바른 결과를 출력한다.", () => {
-    new Lotto([1, 2, 3, 4, 5, 6]);
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+    lotto.checkResult({ win: [1, 2, 9, 10, 11, 12], bonus: 7 });
+    expect(lotto.result).toBe("None");
+
+    lotto.checkResult({ win: [1, 2, 3, 4, 5, 7], bonus: 6 });
+    expect(lotto.result).toBe("5개 일치, 보너스 볼 일치 (30,000,000원)");
+
+    lotto.checkResult({ win: [1, 2, 3, 4, 5, 6], bonus: 7 });
+    expect(lotto.result).toBe("6개 일치 (2,000,000,000원)");
   });
 });
