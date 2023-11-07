@@ -25,8 +25,8 @@ const INIT = {
 
 const ERROR_MESSAGES = {
   error: '[ERROR]',
-  isNumeric: '숫자만 입력해 주세요',
-  thousandsInput: '1000단위로 입력해주세요',
+  isNumeric: '양의 정수로 입력해 주세요',
+  priceUnit: '1000단위로 입력해주세요',
 };
 
 const REGEX = {
