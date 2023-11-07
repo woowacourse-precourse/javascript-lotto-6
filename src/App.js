@@ -1,6 +1,7 @@
 class App {
   async play() {
-    const COUNT = await getPurchaseAmount();
+    const COUNT = await this.getPurchaseAmount();
+
   }
 
   // 사용자로부터 구입금액을 입력 받는 메서드
@@ -8,7 +9,13 @@ class App {
     const INPUTPRICE = parseInt(Console.readLineAsync("구입금액을 입력해 주세요."));
     if(INPUTPRICE % 1000 !== 0)
       throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.")
-    return INPUTPRICE / 1000;
+    const COUNT = INPUTPRICE/1000;
+    this.printLottoCounts(COUNT);
+    return COUNT;
+  }
+
+  printLottoCounts(COUNT) {
+    Console.print(`${COUNT}개를 구매했습니다.`)
   }
 
   // createUniqueRandomNums
