@@ -11,25 +11,28 @@ class App {
       const userMoney = await MissionUtils.Console.readLineAsync(
         "구입금액을 입력해 주세요."
       );
-      await this.checkUserMoneyPossible(userMoney);
+      try {
+        await this.checkUserMoneyPossible(userMoney);
 
-      const countTicket = this.countLottoTicket(userMoney);
-      const lottoNumbers = await Lotto.showUsersLottoNumbers(countTicket);
-      const winNum = await this.getLuckyNumber();
-      const bonusNumber = await this.getBonusNumber();
-      this.checkBonusNumber(bonusNumber, winNum);
-      const winningStats = this.calculateWinningStats(
-        lottoNumbers,
-        winNum,
-        bonusNumber
-      );
-      MissionUtils.Console.print(
-        this.printWinningStats(winningStats, countTicket)
-      );
-      this.gameStatus = false;
+        const countTicket = this.countLottoTicket(userMoney);
+        const lottoNumbers = await Lotto.showUsersLottoNumbers(countTicket);
+        const winNum = await this.getLuckyNumber();
+        const bonusNumber = await this.getBonusNumber();
+        this.checkBonusNumber(bonusNumber, winNum);
+        const winningStats = this.calculateWinningStats(
+          lottoNumbers,
+          winNum,
+          bonusNumber
+        );
+        MissionUtils.Console.print(
+          this.printWinningStats(winningStats, countTicket)
+        );
+        this.gameStatus = false;
+      } catch (error) {
+        MissionUtils.Console.print(`[ERROR]`);
+      }
     }
   }
-
   async checkUserMoneyPossible(userMoney) {
     if (isNaN(userMoney) || userMoney % 1000 !== 0 || userMoney < 1000) {
       throw new Error("[ERROR] 1000단위의 숫자를 입력해주세요");
