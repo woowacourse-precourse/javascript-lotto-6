@@ -17,11 +17,3 @@ export const getBonusNumber = async (winNumber) => {
 
   return Number(userInput);
 };
-
-// A 키보드로부터 숫자 하나를 입력 받는다.
-
-// B 입력 받은 숫자를 한자리인지 검증한다.
-
-// srp
-
-// 사용자로부터 보너스 번호 하나를 입력 받는다.
