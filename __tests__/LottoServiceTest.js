@@ -38,7 +38,7 @@ describe('로또 생성 테스트', () => {
     '구입 금액이 $input이라면, 로또 개수는 $expected 개가 되어야 한다.',
     ({ input, expected }) => {
       // when
-      const lottoCount = lottoService.sellLotto(input).length;
+      const lottoCount = lottoService.sellLotto(input)[0].length;
       // then
       expect(lottoCount).toEqual(expected);
     },
