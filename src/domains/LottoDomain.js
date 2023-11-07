@@ -4,16 +4,12 @@ import { Random } from '@woowacourse/mission-utils';
 
 class LottoMachine {
   static make(lottoCount) {
-    const lottoArray = [];
-
-    Array.from({ length: lottoCount }).forEach(() => {
+    return Array.from({ length: lottoCount }).map(() => {
       const lottoNumbers = this.makeNumbers(NUMBER.START, NUMBER.LAST, NUMBER.LOTTO_LENGTH);
       lottoNumbers.sort((a, b) => a - b);
       const lotto = new Lotto(lottoNumbers);
-      lottoArray.push(lotto);
+      return lotto;
     });
-
-    return lottoArray;
   }
 
   static makeNumbers(start, end, length) {
@@ -26,7 +22,7 @@ class LottoMachine {
       notMatchNumber: NUMBER.DEFAULT,
     };
 
-    lotto.getNumbers().filter((num) => {
+    lotto.getNumbers().forEach((num) => {
       if (winningNumbers.includes(num)) result.matchCount += NUMBER.ADD;
       else result.notMatchNumber = num;
     });
