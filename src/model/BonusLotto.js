@@ -7,6 +7,11 @@ export default class BonusLotto {
    */
   #bonusNumber;
 
+  /**
+   * @constructor
+   * @param {number[]} lottoNumbers
+   * @param {string} bonusLottoNumber
+   */
   constructor(lottoNumbers, bonusLottoNumber) {
     validateLottoBonusNumber(lottoNumbers, bonusLottoNumber);
     this.#bonusNumber = Number(bonusLottoNumber);

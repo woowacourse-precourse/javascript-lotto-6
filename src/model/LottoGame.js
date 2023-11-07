@@ -16,9 +16,13 @@ export default class LottoGame {
    */
   #lottoList;
 
+  /**
+   * @constructor
+   * @param {string} seedMoney
+   */
   constructor(seedMoney) {
     validateLottoSeedMoney(seedMoney);
-    this.#seedMoney = seedMoney;
+    this.#seedMoney = Number(seedMoney);
     this.#buyLottoes();
   }
 
