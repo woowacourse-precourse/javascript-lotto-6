@@ -40,3 +40,59 @@
 ### 예외 처리
 
 - 사용자가 잘못된 값을 입력할 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 해당 부분부터 재시작한다.
+
+## 🌊 플로우차트
+
+```mermaid
+graph TD;
+    A[시작]-->B[구매 금액 입력]
+    B--유효X-->C[예외 처리]
+    C-->B
+    B--유효O-->D[로또 생성]
+    D-->E[당첨 번호 입력]
+    E--유효X-->F[예외 처리]
+    F-->E
+    E--유효O-->G[보너스 번호 입력]
+    G--유효X-->H[예외 처리]
+    H-->G
+    G--유효O-->I[당첨 번호 비교]
+    I-->J[당첨 결과 출력]
+```
+
+## 🗂️ 폴더 구조
+
+```
+📦src
+ ┣ 📂constants
+ ┃ ┣ 📜LottoMessage.js
+ ┃ ┣ 📜LottoOption.js
+ ┃ ┗ 📜Symbol.js
+ ┣ 📂controller
+ ┃ ┗ 📜LottoController.js
+ ┣ 📂docs
+ ┃ ┗ 📜README.md
+ ┣ 📂error
+ ┃ ┣ 📜DefaultError.js
+ ┃ ┗ 📜ValidationError.js
+ ┣ 📂model
+ ┃ ┣ 📜BonusLotto.js
+ ┃ ┣ 📜LottoGame.js
+ ┃ ┣ 📜LottoResultCalculator.js
+ ┃ ┗ 📜PlayerLotto.js
+ ┣ 📂service
+ ┃ ┗ 📜LottoService.js
+ ┣ 📂utils
+ ┃ ┗ 📜generateRandomNumber.js
+ ┣ 📂validator
+ ┃ ┣ 📜CommonValidator.js
+ ┃ ┣ 📜index.js
+ ┃ ┣ 📜LottoBonusNumberValidator.js
+ ┃ ┣ 📜LottoNumbersValidator.js
+ ┃ ┗ 📜LottoSeedMoneyValidator.js
+ ┣ 📂view
+ ┃ ┣ 📜InputView.js
+ ┃ ┗ 📜OutputView.js
+ ┣ 📜App.js
+ ┣ 📜index.js
+ ┗ 📜Lotto.js
+```
