@@ -18,6 +18,8 @@
 
 ```
 
+사용한 파일 : `/App.js`, `Input/MoneyInput.js`, `Input/BuyCount.js`, `Exception/CheckBuy.js`
+
 ## 기능2.
 
 ### 로또 발행
@@ -26,7 +28,7 @@
 
 **\- 배열 갯수** : 구매 갯수만큼 배열 생성
 
-**\- 배열 정렬** : `6`개 요소를 `오름차순`으로 정렬
+**\- 배열 정렬** : `6`개 요소를 `오름차순`으로 정렬(Random에서 정의)
 
 ```JavaScript
 
