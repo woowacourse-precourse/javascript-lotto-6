@@ -31,12 +31,14 @@ class LottoPrinter {
     Console.print(messages.statics.seperator);
   }
 
-  static printResult(rank, count, isGuessBonus) {
+  static printResult(matchCount, ticketCount) {
     isGuessBonus
       ? Console.print(
-          `${count}개 일치, 보너스 볼 일치 (${prize[rank]}원) - ${count}개`,
+          `${matchCount}개 일치, 보너스 볼 일치 (${prize[matchCount]}원) - ${ticketCount}개`,
         )
-      : Console.print(`${count}개 일치 (${prize[rank]}원) - ${count}개`);
+      : Console.print(
+          `${matchCount}개 일치 (${prize[matchCount]}원) - ${ticketCount}개`,
+        );
   }
 
   static printReturnRate(returnRate) {
