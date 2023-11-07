@@ -80,15 +80,15 @@
 
 ### 메서드 & 변수
 
-[ ] 구매금액 입력
+[ x ] 구매금액 입력 - inputAmount()
 
-[ ] 구매금액 유효성 검사
+[ x ] 구매금액 유효성 검사 - InputValidator.ValidPurchaseAmount(inputPrice)
 
-[ ] 유효한 구매금액을 저장하고
+[ x ] 유효한 구매금액을 숫자로 저장하고 - LottoModel.purchaseAmount
 
-[ ] 구매갯수를 구해서 저장 (구매금액/금액단위)
+[ x ] 구매갯수를 구해서 저장 (구매금액/금액단위) LottoModel.purchasecount
 
-[ ] 구매갯수 출력
+[ x ] 구매갯수 출력
 
 [ ] 구매갯수만큼 랜덤 번호 생성
 
