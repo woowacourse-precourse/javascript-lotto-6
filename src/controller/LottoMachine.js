@@ -3,7 +3,7 @@ import InputView from '../view/InputView.js';
 import LottoPlayer from '../model/LottoPlayer.js';
 import Lotto from '../Lotto.js';
 import OutputView from '../view/OutputView.js';
-import { LOTTO_MACHINE_RULES, LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
+import { LOTTO_MACHINE_RULES, LOTTO_RULES } from '../constants/Rules.js';
 import { ERROR_MESSAGE } from '../constants/Messages.js';
 
 export default class LottoMachine {
@@ -136,7 +136,7 @@ export default class LottoMachine {
 
     OutputView.printwinningStats();
     rankCountsObjectEntries.forEach(([rank, counts]) => {
-      OutputView.printCorrectCounts(rank, MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
+      OutputView.printCorrectCounts(rank, counts);
     });
   }
 
