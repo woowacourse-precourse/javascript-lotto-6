@@ -26,3 +26,5 @@ class LottoValidator {
     return AMOUNT;
   }
 }
+
+export default LottoValidator;
