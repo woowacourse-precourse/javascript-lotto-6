@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-import ValidatePrice from "./ValidatePrice.js";
+import validatePrice from "./validatePrice.js";
 import PrintOutput from "./PrintOutput.js";
 
 class App {
@@ -12,6 +12,7 @@ class App {
         const numbers = await this.getSixNum();
         const lotto = new Lotto(numbers);
         await lotto.start();
+        validNumbers = true;
       } catch(error) {
         throw new Error(error.message);
       }
@@ -23,7 +24,7 @@ class App {
     do {
       try {
         price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
-        price = ValidatePrice(price);
+        price = validatePrice(price);
       } catch(error) {
         throw new Error(error.message);
       }

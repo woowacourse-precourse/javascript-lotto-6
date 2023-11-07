@@ -1,4 +1,4 @@
-const ValidatePrice = (price) => {
+const validatePrice = (price) => {
   const priceToNumber = parseInt(price);
   
   if(Number.isNaN(priceToNumber))
@@ -11,4 +11,4 @@ const ValidatePrice = (price) => {
   return priceToNumber;
 };
 
-export default ValidatePrice;
+export default validatePrice;

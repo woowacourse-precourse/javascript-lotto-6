@@ -1,5 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import ValidateLottoNumSet from "./ValidateLottoNumSet.js";
+import validateLottoNumSet from "./validateLottoNumSet.js";
 
 class PrintOutput {
   constructor() {
@@ -18,7 +18,7 @@ class PrintOutput {
       this.lottoNumSets.push(lottoNumbers);
     }
 
-    this.newLottoNumSets = ValidateLottoNumSet(this.lottoNumSets);
+    this.newLottoNumSets = validateLottoNumSet(this.lottoNumSets);
     this.newLottoNumSets.forEach((lottoNumSet, index) => {
       const comma = index === this.newLottoNumSets.length - 1 ? "" : ", ";
       Console.print(`[${lottoNumSet.join(", ")}]${comma}`);

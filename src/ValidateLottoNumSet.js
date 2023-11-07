@@ -1,6 +1,6 @@
 import { Random } from "@woowacourse/mission-utils";
 
-const ValidateLottoNumSet = (lottoNumSets) => {
+const validateLottoNumSet = (lottoNumSets) => {
   const firstLottoNumSet = lottoNumSets[0];
   const isAllEqual = (numSet1, numSet2) => numSet1.every(num => numSet2.includes(num));
   const uniqueLottoNumSets = [firstLottoNumSet];
@@ -19,4 +19,4 @@ const ValidateLottoNumSet = (lottoNumSets) => {
   return uniqueLottoNumSets;
 };
 
-export default ValidateLottoNumSet;
+export default validateLottoNumSet;
