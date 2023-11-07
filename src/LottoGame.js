@@ -7,11 +7,17 @@ import OutputView from './view/OutputView.js';
 class LottoGame {
   #purchaseAmount;
   #lottoList;
+  #winningNumbers;
 
   async play() {
     await this.inputPurchaseAmount();
     OutputView.printNewLine();
+
     this.purchaseLotto();
+    OutputView.printNewLine();
+
+    await this.inputWinningNumbers();
+    OutputView.printNewLine();
   }
 
   async inputPurchaseAmount() {
@@ -36,6 +42,10 @@ class LottoGame {
       LOTTO_INFO.lottoNumber.max,
       LOTTO_INFO.lottoNumber.count,
     );
+  }
+
+  async inputWinningNumbers() {
+    this.#winningNumbers = await InputView.readWinningNumbers();
   }
 }
 
