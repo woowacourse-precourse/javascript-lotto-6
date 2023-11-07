@@ -55,3 +55,13 @@ export function isValidWinningLotto(input) {
   isLottoDuplicate(inputArray);
   isLottoSize(inputArray);
 }
+
+export function isValidBounsNumber(input, winningLottoNumbers) {
+  if (winningLottoNumbers.includes(Number(input))) {
+    throw new Error(MESSAGE_ERROR.bounsNumber);
+  }
+  if (input < LOTTO_NUMBER_RANGE.start || input > LOTTO_NUMBER_RANGE.end) {
+    throw new Error(MESSAGE_ERROR.bounsOnlyNumber);
+  }
+  isNumber(input);
+}

@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE_NOTIFICATION } from '../constants/Message.js';
-import { isValidBuyAmount, isValidWinningLotto } from '../utils/Validation.js';
+import { isValidBounsNumber, isValidBuyAmount, isValidWinningLotto } from '../utils/Validation.js';
 
 export async function inputBuyAmount() {
   try {
@@ -21,6 +21,17 @@ export async function inputWinningLotto() {
   } catch (err) {
     Console.print(err);
     return inputWinningLotto();
+  }
+}
+
+export async function inputBounsNumber(winningLottoNumbers) {
+  try {
+    const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.bonusNumber);
+    isValidBounsNumber(inputValue, winningLottoNumbers);
+    return inputValue;
+  } catch (err) {
+    Console.print(err);
+    return inputBounsNumber(winningLottoNumbers);
   }
 }
 
