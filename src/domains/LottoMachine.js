@@ -33,10 +33,10 @@ export default class LottoMachine {
   }
 
   #createLottoList(purchaseCount, _ = paramType(purchaseCount, 'number')) {
-    const lottoNumbers = this.#randomNumberGenerator.numbers();
-    const lottoList = Array.from({ length: purchaseCount }, () =>
-      this.#createLotto(lottoNumbers),
-    );
+    const lottoList = Array.from({ length: purchaseCount }, () => {
+      const lottoNumbers = this.#randomNumberGenerator.numbers();
+      return this.#createLotto(lottoNumbers);
+    });
     return lottoList;
   }
 
