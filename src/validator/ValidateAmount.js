@@ -1,9 +1,10 @@
-import { checkString, checkNaturalNumber } from "./ValidateInputNumber.js";
+import ValidateInputNumber from "./ValidateInputNumber.js";
 import { ERROR_MESSAGE } from "../constant/Error.js";
-const LOTTO_PRICE = 1000;
+import { LOTTO_PRICE } from "../constant/LottoInfo.js";
+
 export function validateAmount(amount) {
-  checkString(amount);
-  checkNaturalNumber(amount);
+  ValidateInputNumber.checkString(amount);
+  ValidateInputNumber.checkNaturalNumber(amount);
   checkDivisibleThousand(amount);
 }
 

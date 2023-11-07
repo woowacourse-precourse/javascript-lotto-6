@@ -1,6 +1,6 @@
 export const INPUT_MESSAGE = {
   amount: "구입금액을 입력해주세요.\n",
-  answerLotto: "당첨 번호를 입력해 주세요.\n",
+  winningLotto: "당첨 번호를 입력해 주세요.\n",
   bonusLotto: "보너스 번호를 입력해 주세요.\n",
 };
 
