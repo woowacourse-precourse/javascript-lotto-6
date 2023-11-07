@@ -67,7 +67,7 @@ class WinningCalculator {
   calculateMatchNumbers(numbers, targetNumbers) {
     const integratedNumbers = numbers.concat(targetNumbers);
     const nonDuplicated = new Set(integratedNumbers);
-    const matchedCount = integratedNumbers.length - nonDuplicated.size();
+    const matchedCount = integratedNumbers.length - nonDuplicated.size;
 
     return matchedCount;
   }
