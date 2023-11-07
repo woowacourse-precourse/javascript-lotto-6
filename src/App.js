@@ -8,27 +8,43 @@ import Lotto from './repository/Lotto.js';
 import BounsNumber from './repository/BonusNumber.js';
 
 class App {
+  #lottoList;
+  #winningLottoNumbers;
+  #bonusNumber;
   async play() {
     const inputMoney = await MissionUtils.Console.readLineAsync(
       '구입금액을 입력해 주세요.\n'
     );
     const lottoCnt = getLottoCntFromInputMoney(inputMoney);
 
-    const lottoList = new LottoList(lottoCnt);
+    this.#lottoList = new LottoList(lottoCnt).getLottoList();
 
     const winningNumberStr = await MissionUtils.Console.readLineAsync(
       '\n당첨 번호를 입력해 주세요.\n'
     );
     const winningNumberArr = getWinningNumberArray(winningNumberStr);
 
-    const winningLottoNumbers = new Lotto(winningNumberArr).getLotto();
+    this.#winningLottoNumbers = new Lotto(winningNumberArr).getLotto();
 
     const inputBonusNumber = await MissionUtils.Console.readLineAsync(
       '\n보너스 번호를 입력해 주세요.\n'
     );
-    const bonusNumber = new BounsNumber(inputBonusNumber);
+    this.#bonusNumber = new BounsNumber(inputBonusNumber);
+    this.winningStat();
   }
-  stat() {}
+  winningStat() {
+    let stat = [];
+    this.#lottoList.forEach((lotto) => {
+      let hit = lotto.filter((n) =>
+        this.#winningLottoNumbers.includes(n)
+      ).length;
+
+      stat.push({
+        hit,
+        bonus: lotto.includes(this.#bonusNumber),
+      });
+    });
+  }
 }
 
 export default App;
