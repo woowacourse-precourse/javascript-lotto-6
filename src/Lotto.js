@@ -1,53 +1,46 @@
 import { Console } from "@woowacourse/mission-utils";
-import {
-  checkLength,
-  checkDuplicates,
-  checkLottoNumber,
-} from "./validators/lottoNumberValidator.js";
-import {
-  checkBonusNumber,
-  checkBonusDuplicates,
-} from "./validators/bonusNumberValidator.js";
-import { errorMessage } from "./constants/messages.js";
 import { lottoCount } from "./constants/constants.js";
+import { errorMessage } from "./constants/messages.js";
+
+import Validator from "./validators/Validator.js";
 
 class Lotto {
   #numbers;
-  bonus;
+  bonus
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
-
+  
   #validate(numbers) {
-    if (checkLength(numbers)) {
+    if (Validator.checkLength(numbers)) {
       throw new Error(errorMessage.INVALID_LENGTH);
     }
-    if (checkLottoNumber(numbers)) {
+    if (Validator.checkLottoNumber(numbers)) {
       throw new Error(errorMessage.INVALID_RANGE);
     }
-    if (checkDuplicates(numbers)) {
+    if (Validator.checkDuplicates(numbers)) {
       throw new Error(errorMessage.HAS_DUPLICATES);
-    }
-  }
-
-  getBonus(number) {
-    this.validateBonus(number);
-    this.bonus = number;
-  }
-
-  validateBonus(number) {
-    if (checkBonusNumber(number)) {
-      throw new Error(errorMessage.INVALID_RANGE);
-    }
-    if (checkBonusDuplicates(this.#numbers, number)) {
-      throw new Error(errorMessage.BONUS_DUPLICATES);
     }
   }
 
   printLottoNumbers() {
     Console.print(`[${this.#numbers.join(", ")}]`);
+  }
+
+  getBonus(number) {
+    this.#validateBonus(number);
+    this.bonus = number;
+  }
+  
+  #validateBonus(number) {
+    if (Validator.checkBonusNumber(number)) {
+      throw new Error(errorMessage.INVALID_RANGE);
+    }
+    if (Validator.checkBonusDuplicates(this.#numbers, number)) {
+      throw new Error(errorMessage.BONUS_DUPLICATES);
+    }
   }
 
   compareLotto(winningLotto) {
@@ -63,5 +56,6 @@ class Lotto {
     return compareCount.length;
   }
 }
+
 
 export default Lotto;
