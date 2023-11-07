@@ -14,10 +14,10 @@ describe('수익통계 클래스 테스트', () => {
     const answer = "51833.3";
 
     // when
-    lottoWinStatistics.calculateRate(PURCHASE_UNIT * 3);
+    lottoWinStatistics.calculateReturnRate(PURCHASE_UNIT * 3);
 
     // then
-    expect(lottoWinStatistics.getPrizeRate()).toEqual(answer);
+    expect(lottoWinStatistics.getReturnRate()).toEqual(answer);
   });
 
   test('5개의 티켓으로 5등을 한 번 하면 수익률은 100.0%입니다.', () => {
@@ -33,9 +33,9 @@ describe('수익통계 클래스 테스트', () => {
     const answer = "100.0";
 
     // when
-    lottoWinStatistics.calculateRate(PURCHASE_UNIT * 5);
+    lottoWinStatistics.calculateReturnRate(PURCHASE_UNIT * 5);
 
     // then
-    expect(lottoWinStatistics.getPrizeRate()).toEqual(answer);
+    expect(lottoWinStatistics.getReturnRate()).toEqual(answer);
   });
 });

@@ -87,9 +87,9 @@ class LottoGame {
     this.#lottoWinStatistics.pushPrize(prize);
   }
 
-  calculatePrizeRate() {
+  calculateReturnRate() {
     const purchaseAmount = this.#purchaseAmount.getPurchaseAmount();
-    this.#lottoWinStatistics.calculateRate(purchaseAmount);
+    this.#lottoWinStatistics.calculateReturnRate(purchaseAmount);
   }
 
   showLottoWinStatistics() {
@@ -101,40 +101,40 @@ class LottoGame {
     this.#showSecondPrize();
     this.#showFirstPrize();
 
-    const returnRate = this.#lottoWinStatistics.getPrizeRate();
+    const returnRate = this.#lottoWinStatistics.getReturnRate();
     LottoGameOutput.showReturnRate(returnRate);
   }
 
   #showFifthPrize() {
-    const fifthCount = this.#lottoWinStatistics.getSpecificRankCount(
+    const fifthCount = this.#lottoWinStatistics.getSpecificPrizeCount(
       PRIZE_MONEY.FIFTH,
     );
     LottoGameOutput.showFifthStatistics(fifthCount);
   }
 
   #showFourthPrize() {
-    const fourthCount = this.#lottoWinStatistics.getSpecificRankCount(
+    const fourthCount = this.#lottoWinStatistics.getSpecificPrizeCount(
       PRIZE_MONEY.FOURTH,
     );
     LottoGameOutput.showFourthStatistics(fourthCount);
   }
 
   #showThirdPrize() {
-    const thirdCount = this.#lottoWinStatistics.getSpecificRankCount(
+    const thirdCount = this.#lottoWinStatistics.getSpecificPrizeCount(
       PRIZE_MONEY.THIRD,
     );
     LottoGameOutput.showThirdStatistics(thirdCount);
   }
 
   #showSecondPrize() {
-    const secondCount = this.#lottoWinStatistics.getSpecificRankCount(
+    const secondCount = this.#lottoWinStatistics.getSpecificPrizeCount(
       PRIZE_MONEY.SECOND,
     );
     LottoGameOutput.showSecondStatistics(secondCount);
   }
 
   #showFirstPrize() {
-    const firstCount = this.#lottoWinStatistics.getSpecificRankCount(
+    const firstCount = this.#lottoWinStatistics.getSpecificPrizeCount(
       PRIZE_MONEY.FIRST,
     );
     LottoGameOutput.showFirstStatistics(firstCount);

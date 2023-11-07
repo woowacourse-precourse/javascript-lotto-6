@@ -42,7 +42,7 @@ class GameUtils {
   }
 
   static getPrize(differences, bonusNumber) {
-    const rankNotConsiderBonus = this.getRankWithoutBonus(differences);
+    const rankNotConsiderBonus = this.getPrizeWithoutBonus(differences);
 
     if (rankNotConsiderBonus !== undefined) {
       return rankNotConsiderBonus;
@@ -51,7 +51,7 @@ class GameUtils {
     return this.checkSecondOrThird(differences.pop(), bonusNumber);
   }
 
-  static getRankWithoutBonus(differences) {
+  static getPrizeWithoutBonus(differences) {
     return this.isNothing(differences.length);
   }
 
@@ -95,7 +95,7 @@ class GameUtils {
     return PRIZE_MONEY.THIRD;
   }
 
-  static getRateRoundSecondDecimalPlace(prizeSum, tickets) {
+  static getReturnRateRoundSecondDecimalPlace(prizeSum, tickets) {
     const persent = (prizeSum / tickets) * 100;
     return persent.toFixed(1);
   }

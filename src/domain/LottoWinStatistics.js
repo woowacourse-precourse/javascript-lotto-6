@@ -3,7 +3,7 @@ import GameUtils from '../utils/GameUtils.js';
 class LottoWinStatistics {
   #prizeByTickets;
 
-  #prizeRate;
+  #returnRate;
 
   constructor() {
     this.#prizeByTickets = [];
@@ -13,25 +13,25 @@ class LottoWinStatistics {
     this.#prizeByTickets.push(prize);
   }
 
-  calculateRate(purchaseAmount) {
+  calculateReturnRate(purchaseAmount) {
     const prizeSum = this.#prizeByTickets.reduce((acc, cur) => acc + cur, 0);
 
-    this.#prizeRate = GameUtils.getRateRoundSecondDecimalPlace(
+    this.#returnRate = GameUtils.getReturnRateRoundSecondDecimalPlace(
       prizeSum,
       purchaseAmount,
     );
   }
 
-  getSpecificRankCount(prize) {
-    const specificRanks = this.#prizeByTickets.filter(
+  getSpecificPrizeCount(prize) {
+    const specificPrizes = this.#prizeByTickets.filter(
       (curPrize) => curPrize === prize,
     );
 
-    return specificRanks.length;
+    return specificPrizes.length;
   }
 
-  getPrizeRate() {
-    return this.#prizeRate;
+  getReturnRate() {
+    return this.#returnRate;
   }
 }
 
