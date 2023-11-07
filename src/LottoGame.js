@@ -9,9 +9,9 @@ const PRIZE_MONEY = {
 };
 
 class LottoGame {
-  constructor(myLotto, winningLotto) {
+  constructor(myLotto) {
     this.lottos = myLotto.map((numbers) => new Lotto(numbers));
-    this.winningLotto = winningLotto;
+
     this.results = {
       "3개 일치 (5,000원)": 0,
       "4개 일치 (50,000원)": 0,
@@ -23,9 +23,9 @@ class LottoGame {
     this.reward = 0;
   }
 
-  start() {
+  start(winningLotto) {
     this.lottos.forEach((lotto) => {
-      lotto.checkResult(this.winningLotto);
+      lotto.checkResult(winningLotto);
       this.results[lotto.result] += 1;
     });
   }

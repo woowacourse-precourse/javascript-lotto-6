@@ -26,10 +26,10 @@ class App {
   }
 
   static generateResult(amount, myLotto, winningLotto) {
-    const lottoGame = new LottoGame(myLotto, winningLotto);
+    const lottoGame = new LottoGame(myLotto);
     const calculator = new Calculator();
 
-    lottoGame.start();
+    lottoGame.start(winningLotto);
     lottoGame.generateStatistics();
     calculator.calculateRevenue(lottoGame.reward, amount);
 
