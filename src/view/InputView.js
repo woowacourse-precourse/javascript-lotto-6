@@ -12,6 +12,7 @@ const InputView = {
       return purchaseAmount;
     } catch (error) {
       MissionUtils.Console.print(error.message);
+      return await this.getUserPurchaseAmout();
     }
   },
 

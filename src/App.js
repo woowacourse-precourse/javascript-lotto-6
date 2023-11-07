@@ -10,16 +10,10 @@ class App {
   #winningRate;
 
   async buyLotto() {
-    try {
-      const money = await InputView.getUserPurchaseAmout();
-
-      this.#lottos = Lotto.buyLottoTickets(money);
-      OutputView.printPurchaseAmout(this.#lottos.length);
-      this.#lottos.forEach((lotto) => MissionUtils.Console.print(lotto.toPrintableString()));
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      await this.buyLotto();
-    }
+    const money = await InputView.getUserPurchaseAmout();
+    this.#lottos = Lotto.buyLottoTickets(money);
+    OutputView.printPurchaseAmout(this.#lottos.length);
+    this.#lottos.forEach((lotto) => MissionUtils.Console.print(lotto.toPrintableString()));
   }
 
   async getWinningNumber() {
@@ -43,13 +37,9 @@ class App {
   }
 
   async play() {
-    try {
-      await this.buyLotto();
-      await this.getWinningNumber();
-      this.result();
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-    }
+    await this.buyLotto();
+    await this.getWinningNumber();
+    this.result();
   }
 }
 
