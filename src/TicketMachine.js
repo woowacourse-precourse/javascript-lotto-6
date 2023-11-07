@@ -15,8 +15,9 @@ class TicketMachine {
   }
 
   getNumberOfGame() {
-    this.purchasedTicktesCount = Number(this.#purchaseAmount) / 1000;
-    return TicketMachine.getTickets(this.purchasedTicktesCount);
+    const purchasedTicktesCount = Number(this.#purchaseAmount) / 1000;
+    View.printPurchasedTicketNumber(purchasedTicktesCount);
+    return TicketMachine.getTickets(purchasedTicktesCount);
   }
 
   static getTickets(purchasedTicktesCount) {
@@ -27,7 +28,7 @@ class TicketMachine {
         MAGIC_NUMBER.LOTTO_NUMBER_LENGTH,
       ),
     );
-    View.printPurchasedTicketsInfo(purchasedTicktesCount, ticktes);
+    View.printPurchasedTicketsInfo(ticktes);
     return ticktes;
   }
 }

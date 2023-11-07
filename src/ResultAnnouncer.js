@@ -15,7 +15,7 @@ class ResultAnnouncer {
     this.sumPrizeMoney();
     this.calculateProfit();
     View.printWinningResult(this.rank);
-    View.printProfitRate(this.profitRate);
+    return View.printProfitRate(this.profitRate);
   }
 
   sumPrizeMoney() {
@@ -28,6 +28,7 @@ class ResultAnnouncer {
     this.profitRate = ((this.sum / (this.tickets.length * 1000)) * 100).toFixed(
       1,
     );
+    return null;
   }
 }
 

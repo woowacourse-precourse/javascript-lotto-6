@@ -16,6 +16,7 @@ class View {
       const purchaseAmount = await View.getUserInput(
         INFO_MESSAGE.PURCHASE_AMOUNT_ASK_MESSAGE,
       );
+
       Validator.checkPurchaseAmount(purchaseAmount);
       return purchaseAmount;
     } catch (error) {
@@ -51,12 +52,13 @@ class View {
     }
   }
 
-  static printPurchasedTicketsInfo(purchasedTicktesCount, ticktes) {
-    Console.print(
-      `\n${purchasedTicktesCount}${INFO_MESSAGE.PURCHASED_TICKETS_COUNT_MESSAGE}`,
-    );
+  static printPurchasedTicketNumber(purchasedTicktesCount) {
+    return Console.print(`\n${purchasedTicktesCount}개를 구매했습니다.`);
+  }
+
+  static printPurchasedTicketsInfo(ticktes) {
     return ticktes.forEach(ticket => {
-      Console.print(ticket.sort((a, b) => a - b));
+      Console.print(`[${ticket.sort((a, b) => a - b).join(', ')}]`);
     });
   }
 

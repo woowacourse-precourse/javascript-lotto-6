@@ -43,7 +43,7 @@ class App {
 
   #announceResult() {
     this.resultAnnouncer = new ResultAnnouncer(this.#state);
-    this.resultAnnouncer.anounceProfit();
+    return this.resultAnnouncer.anounceProfit();
   }
 
   async play() {
