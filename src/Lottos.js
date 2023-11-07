@@ -58,7 +58,13 @@ class Lottos {
     this.lists.forEach(list => {
       lottoRanks.push(list.calculateRank(winningNumbers, bonusNumber));
     });
+    //5등까지만 반환되도록
     return lottoRanks.filter(rank => rank <= PLACE.LAST);
+  }
+
+  //당첨 티켓의 개수 계산
+  winningTicketCount(lottoRanks, idx) {
+    return lottoRanks.filter(rank => rank === 5 - idx).length;
   }
 }
 
