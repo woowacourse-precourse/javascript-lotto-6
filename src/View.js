@@ -20,7 +20,6 @@ class View {
       Validator.checkPurchaseAmount(purchaseAmount);
       return purchaseAmount;
     } catch (error) {
-      // View.printMessage(error);
       return this.getPurchaseAmount();
     }
   }
@@ -34,7 +33,6 @@ class View {
       Validator.checkLottoNumbers(lottoNumbersArray);
       return lottoNumbersArray;
     } catch (error) {
-      // View.printMessage(error);
       return this.getLottoNumber();
     }
   }
@@ -47,7 +45,6 @@ class View {
       Validator.checkBonusNumber(bonusNumber, lottoNumbersArray);
       return bonusNumber;
     } catch (error) {
-      // View.printMessage(error);
       return this.getBonusNumber(lottoNumbersArray);
     }
   }
