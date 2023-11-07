@@ -3,7 +3,7 @@ const MESSAGE = Object.freeze({
     price: "구입금액을 입력해 주세요.\n",
   },
   output: {
-    amountOfLotto: "개를 구매했습니다.",
+    amount: "개를 구매했습니다.",
   },
   error: {
     notNumber: "[ERROR] 구입금액은 숫자로 입력해 주세요.",
