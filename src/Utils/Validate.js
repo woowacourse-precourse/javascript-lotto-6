@@ -10,26 +10,26 @@ class Validate {
   // 1~45 범위 내의 자연수와 쉼표인지 확인
   checkNaturalNumAndComma(input) {
     const regex = /^[1-9,]+$/;
-    for (let i = 0; i < input.lenght; i++) {
+    for (let i = 0; i < input.length; i++) {
       if (!regex.test(input[i])) return true;
     }
     return false;
   }
 
   checkNumRange1to45(input) {
-    if (input.lenght > 45 || input.lenght < 1) return true;
+    if (input.length > 45 || input.length < 1) return true;
     return false;
   }
 
   // 숫자 중복 확인
   checkDuplicateNum(input) {
-    if (input.lenght !== new Set(input).size) return true;
+    if (input.length !== new Set(input).size) return true;
     return false;
   }
 
   // 6개의 숫자를 입력했는지 확인
   checkInput6Num(input) {
-    if (input.lenght !== 6) return true;
+    if (input.length !== 6) return true;
     return false;
   }
 }
