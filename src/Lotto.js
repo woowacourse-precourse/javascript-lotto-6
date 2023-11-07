@@ -21,6 +21,9 @@ class Lotto {
             throw new Error("[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.");
         }
     }
+    printLottoNumber() {
+        return this.#numbers;
+    }
 }
 
 export default Lotto;
