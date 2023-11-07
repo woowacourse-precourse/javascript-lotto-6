@@ -5,28 +5,32 @@ const NUMBER_NAME = {
   bonus: '보너스',
 };
 
+const BONUS_OPTIONS = {
+  matchCount: 5,
+};
+
 const MATCH_RANKING = new Map([
-  [5, 3],
-  [4, 4],
-  [3, 5],
-  [2, NUMBER_NAME.bonus],
-  [1, 6],
+  [3, '5등'],
+  [4, '4등'],
+  [5, '3등'],
+  [NUMBER_NAME.bonus, '2등'],
+  [6, '1등'],
 ]);
 
 const RANKING = new Map([
-  [5, `3개 일치`],
-  [4, `4개 일치`],
-  [3, `5개 일치`],
-  [2, `5개 일치, 보너스 볼 일치`],
-  [1, `6개 일치`],
+  ['5등', `3개 일치`],
+  ['4등', `4개 일치`],
+  ['3등', `5개 일치`],
+  ['2등', `5개 일치, 보너스 볼 일치`],
+  ['1등', `6개 일치`],
 ]);
 
 const WINNING_PRIZE = new Map([
-  [5, 5000],
-  [4, 50000],
-  [3, 1500000],
-  [2, 30000000],
-  [1, 2000000000],
+  ['5등', 5000],
+  ['4등', 50000],
+  ['3등', 1500000],
+  ['2등', 30000000],
+  ['1등', 2000000000],
 ]);
 
 const PRINT_STRING = {
@@ -71,13 +75,17 @@ class WinningCalculator {
     return targetNumbers.includes(bonusNumber);
   }
 
+  // 끝
   #compileWinner(matchCount) {
-    this.winnerList.set(matchCount, 1 + (this.winnerList.get(matchCount) ?? 0));
+    const rank = MATCH_RANKING.get(matchCount);
+    this.winnerList.set(rank, 1 + (this.winnerList.get(rank) ?? 0));
   }
 
   #compileBonusWinner(matchCount, isWinningBonus) {
-    if (matchCount === 5 && isWinningBonus === true) {
-      this.winnerList.set(matchCount, this.winnerList.get(matchCount) - 1);
+    const rank = MATCH_RANKING.get(matchCount);
+
+    if (matchCount === BONUS_OPTIONS.matchCount && isWinningBonus) {
+      this.winnerList.set(rank, this.winnerList.get(rank) - 1);
       this.winnerList.set(
         NUMBER_NAME.bonus,
         1 + (this.winnerList.get(NUMBER_NAME.bonus) ?? 0),
@@ -91,7 +99,7 @@ class WinningCalculator {
     RANKING.forEach((standard, rank) => {
       const prize = WINNING_PRIZE.get(rank);
       const matchCount = MATCH_RANKING.get(rank);
-      const matchNumber = this.winnerList.get(matchCount);
+      const matchNumber = this.winnerList.get(matchCount) ?? 0;
 
       Utils.informUser(
         `${standard} (${prize.toLocaleString()}${
