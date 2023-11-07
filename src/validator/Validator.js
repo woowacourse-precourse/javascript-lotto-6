@@ -2,26 +2,26 @@ import { CONSTANT, ERROR, LOTTO_NUMBER } from '../constants/Constant.js';
 import ValidationError from '../ValidationError.js';
 
 const Validator = {
-  checkIsNotNumber(userInput) {
-    if (this.isNotNumber(userInput)) {
+  checkIsNotNumber(input) {
+    if (this.isNotNumber(input)) {
       throw new ValidationError(ERROR.isNotNumber);
     }
   },
 
-  checkIsNotInUnit(userInput) {
-    if (Number(userInput) % CONSTANT.amountUnit !== 0) {
+  checkIsNotInUnit(input) {
+    if (Number(input) % CONSTANT.amountUnit !== 0) {
       throw new ValidationError(ERROR.isNotInAmountUnit);
     }
   },
 
-  checkIsNotPositive(userInput) {
-    if (Number(userInput) <= 0) {
+  checkIsNotPositive(input) {
+    if (Number(input) <= 0) {
       throw new ValidationError(ERROR.isNotPositive);
     }
   },
 
-  checkIsInvalidCount(userInput) {
-    if (userInput.length !== LOTTO_NUMBER.count) {
+  checkIsInvalidCount(input) {
+    if (input.length !== LOTTO_NUMBER.count) {
       throw new ValidationError(ERROR.isInvalidCount);
     }
   },
@@ -32,6 +32,12 @@ const Validator = {
         throw new ValidationError(ERROR.hasNonNumericElements);
       }
     });
+  },
+
+  checkIsOutOfRange(input) {
+    if (this.isOutOfRange(input)) {
+      throw new ValidationError(ERROR.isOutOfRange);
+    }
   },
 
   checkHasOutOfRange(inputs) {
@@ -45,12 +51,6 @@ const Validator = {
   checkHasDuplicate(inputs) {
     if (inputs.length !== new Set(inputs).size) {
       throw new ValidationError(ERROR.hasDuplicate);
-    }
-  },
-
-  checkIsOutOfRange(input) {
-    if (this.isOutOfRange(input)) {
-      throw new ValidationError(ERROR.isOutOfRange);
     }
   },
 
