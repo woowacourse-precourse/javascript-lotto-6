@@ -15,6 +15,7 @@ class App {
     const lottoCount = money / LOTTO_PRICE;
     const lottos = this.buyLotto(lottoCount);
     this.printLotto(lottos, lottoCount);
+    const winningNumbers = await this.getWinningNumber();
   }
 
   // 1. 로또 구입금액 입력받기
@@ -68,6 +69,22 @@ class App {
       const formattedLotto = `[${lotto.join(', ')}]`; // 배열을 문자열로 변환, 공백 추가
       Console.print(formattedLotto);
     });
+  }
+
+  // 4. 당첨 번호를 입력받기
+  async getWinningNumber() {
+    while (true) {
+      try {
+        const numbers = await Console.readLineAsync(
+          REQUEST_MESSAGE.PUT_WINNING_NUMBER,
+        );
+        const winningNumbers = numbers.split(',');
+        const lotto = new Lotto(winningNumbers);
+        return winningNumbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
 
