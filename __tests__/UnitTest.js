@@ -25,6 +25,12 @@ describe('기능 테스트', () => {
         }).toThrow('[ERROR]');
     });
 
+    test('당첨 번호에 숫자가 아닌 다른 문자가 있으면 예외가 발생한다.', () => {
+        expect(() => {
+            app.getWinNumbers('1,2,3,4,5,a');
+        }).toThrow('[ERROR]');
+    });
+
     test('당첨 번호에 중복이 있으면 예외가 발생한다.', () => {
         expect(app.getWinNumbers('1,2,3,4,5,5')).rejects.toThrow('[ERROR]');
     });
