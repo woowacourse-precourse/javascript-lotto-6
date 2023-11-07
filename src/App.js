@@ -14,7 +14,7 @@ class App {
       await this.checkUserMoneyPossible(userMoney);
 
       const countTicket = this.countLottoTicket(userMoney);
-      const lottoNumbers = await this.showUsersLottoNumbers(countTicket);
+      const lottoNumbers = await Lotto.showUsersLottoNumbers(countTicket);
       const winNum = await this.getLuckyNumber();
       const bonusNumber = await this.getBonusNumber();
       this.checkBonusNumber(bonusNumber, winNum);
@@ -41,36 +41,12 @@ class App {
     MissionUtils.Console.print(`${countTicket}개를 구매했습니다.`);
     return countTicket;
   }
-  async showUsersLottoNumbers(countTicket) {
-    const lottoNumbers = [];
-    for (let i = 0; i < countTicket; i++) {
-      const lotto = Lotto.generateRandomLotto();
-      lottoNumbers.push(lotto);
-    }
-    const allLottoNumbers = lottoNumbers
-      .map((lotto) => `[${lotto.join(", ")}]`)
-      .join("\n");
-    await MissionUtils.Console.print(allLottoNumbers);
-    return lottoNumbers;
-  }
 
   async getLuckyNumber() {
     const luckyNumber = await MissionUtils.Console.readLineAsync(
       `당첨 번호를 입력해 주세요.`
     );
-    const winNum = this.checkLuckyNumber(luckyNumber);
-    return winNum;
-  }
-
-  checkLuckyNumber(luckyNumber) {
-    const winNum = luckyNumber.split(",").map(Number);
-    if (winNum.length !== 6 || winNum.some((num) => num < 1 || num > 45)) {
-      throw new Error("[ERROR] 올바른 당첨 번호를 입력해주세요.");
-    }
-    if (winNum.some((num, index) => winNum.indexOf(num) !== index)) {
-      throw new Error("[ERROR]");
-    }
-
+    const winNum = Lotto.checkLuckyNumber(luckyNumber);
     return winNum;
   }
 
@@ -94,6 +70,7 @@ class App {
       throw new Error("[ERROR] 보너스 번호와 당첨 번호 중복");
     }
   }
+
   calculateWinningStats(lottoNumbers, winNum, bonusNumber) {
     const winConditions = {
       6: { count: 0, amount: 2000000000 },
@@ -145,6 +122,7 @@ class App {
       }
     }
   }
+
   printWinningStats(winningStats, countTicket) {
     const statsSummary = [];
     statsSummary.push("당첨 통계\n---");
