@@ -32,11 +32,17 @@ class App {
     const ticketCount = amount / 1000;
 
     for (let i = 0; i < ticketCount; i++) {
-      const ticket = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      let ticket = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      ticket = this.sortTicketNumbers(ticket);
       tickets.push(ticket);
     }
 
     return tickets;
+  }
+
+  // 로또 번호 오름차순으로 정렬
+  sortTicketNumbers(numbers) {
+    return numbers.sort((a, b) => a - b);
   }
 }
 
