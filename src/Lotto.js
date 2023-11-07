@@ -1,4 +1,5 @@
 import Validator from '../utils/Validator.js';
+import CONSTANTS from '../utils/Constants.js';
 
 class Lotto {
   #numbers;
@@ -15,6 +16,10 @@ class Lotto {
   // TODO: 추가 기능 구현
   getNumbers() {
     return this.#numbers;
+  }
+
+  raffleMainNumber(mainNumbers) {
+    return CONSTANTS.mainNumberCount * 2 - new Set([...this.#numbers, mainNumbers]).size;
   }
 }
 
