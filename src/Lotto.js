@@ -26,8 +26,31 @@ class Lotto {
     }
   }
 
-  checkSameNumber(parsedBonusNumber) {
-    return this.#numbers.includes(parsedBonusNumber);
+  checkSameNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
+
+  numberComparison(lottoNumber, bonusNumber) {
+    const result = lottoNumber.reduce((count, curr) => {
+      if (this.#numbers.includes(curr)) {
+        count += 1;
+      }
+
+      return count;
+    }, 0);
+
+    return this.resultnumberComparison(result, lottoNumber, bonusNumber);
+  }
+
+  resultnumberComparison(result, lottoNumber, bonusNumber) {
+    console.log(lottoNumber);
+    if (result === 6) return 'six';
+    if (result === 5 && lottoNumber.includes(bonusNumber)) return 'fiveAndBonus';
+    if (result === 5) return 'five';
+    if (result === 4) return 'four';
+    if (result === 3) return 'three';
+
+    return;
   }
 }
 
