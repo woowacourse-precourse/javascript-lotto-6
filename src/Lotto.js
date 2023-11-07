@@ -1,8 +1,7 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-import { checkLength, checkDuplicates, checkLottoNumber } from "./validations/lottoNumberValidation";
-import { checkBonusNumber, checkBonusDuplicates } from "./validations/bonusNumberValidation";
-import { errorMessage } from "./constants/messages";
+import { Console } from "@woowacourse/mission-utils";
 import { lottoCount } from "./constants/constants";
+import { errorMessage } from "./constants/messages";
+import Validation from "./validations/Validation";
 
 class Lotto {
   #numbers;
@@ -11,40 +10,40 @@ class Lotto {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
-
+  
   #validate(numbers) {
-    if (checkLength(numbers)) {
+    if (Validation.checkLength(numbers)) {
       throw new Error(errorMessage.INVALID_LENGTH);
     }
-    if (checkLottoNumber(numbers)) {
+    if (Validation.checkLottoNumber(numbers)) {
       throw new Error(errorMessage.INVALID_RANGE);
     }
-    if (checkDuplicates(numbers)) {
+    if (Validation.checkDuplicates(numbers)) {
       throw new Error(errorMessage.HAS_DUPLICATES);
     }
   }
 
-  getBonus(number) {
-    this.validateBonus(number);
-    this.bonus = number;
+  printLottoNumbers() {
+    Console.print(`[${this.#numbers.join(", ")}]`);
   }
 
-  validateBonus(number) {
-    if (checkBonusNumber(number)) {
+  getBonus(number) {
+    this.#validateBonus(number);
+    this.bonus = number;
+  }
+  
+  #validateBonus(number) {
+    if (Validation.checkBonusNumber(number)) {
       throw new Error(errorMessage.INVALID_RANGE);
     }
-    if (checkBonusDuplicates(this.#numbers, number)) {
+    if (Validation.checkBonusDuplicates(this.#numbers, number)) {
       throw new Error(errorMessage.BONUS_DUPLICATES);
     }
   }
 
-  printLottoNumbers() {
-    MissionUtils.Console.print(`[${this.#numbers.join(', ')}]`);
-  }
-
   compareLotto(winningLotto) {
-    const compareCount = this.#numbers.filter(number =>
-      winningLotto.#numbers.includes(number),
+    const compareCount = this.#numbers.filter((number) =>
+      winningLotto.#numbers.includes(number)
     );
     if (
       compareCount.length === lottoCount.THIRD &&
@@ -55,5 +54,6 @@ class Lotto {
     return compareCount.length;
   }
 }
+
 
 export default Lotto;
