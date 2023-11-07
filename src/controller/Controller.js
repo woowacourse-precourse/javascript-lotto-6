@@ -29,6 +29,8 @@ class Controller{
     LottoGenerator.makeLotto(this.lottoArray, this.count);
     outView.printLottoArray(this.lottoArray, this.count);
     await this.inputWinning();
+    await this.inputBonus();
+
   }
   
 
@@ -63,6 +65,20 @@ class Controller{
     }
   }
 
+  async inputBonus(){
+    while(true){
+      try{
+        const USERINPUT = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해주세요.");
+        ErrorCheck.checkBonus(USERINPUT,winning);
+        this.bonus = Number(USERINPUT);
+        break;
+      }
+      catch(e){
+        ErrorMessage.bonusErrorPrint();
+        return ;
+      }
+    }
+  }  
 }
 
 
