@@ -2,7 +2,6 @@ import messageFormatter from "../utils/messageFormatter.js";
 import { validateNumbersDuplicate } from "./lotto.js";
 
 /**
- *
  * @param {number} number
  * @param {number} startInclusive
  * @param {number} endInclusive

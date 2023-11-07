@@ -2,7 +2,6 @@ import ERROR from "../constants/error.js";
 import messageFormatter from "../utils/messageFormatter.js";
 
 /**
- *
  * @param {number[]} numbers
  * @param {number} length
  */
@@ -13,7 +12,6 @@ const validateNumbersLength = (numbers, length) => {
 };
 
 /**
- *
  * @param {number[]} numbers
  * @param {number} startInclusive
  * @param {number} endInclusive
@@ -34,7 +32,6 @@ const validateNumbersRange = (numbers, startInclusive, endInclusive) => {
 };
 
 /**
- *
  * @param {number[]} numbers
  */
 const validateNumbersDuplicate = (numbers) => {

@@ -9,7 +9,6 @@ class Lotto {
   #numbers;
 
   /**
-   *
    * @param {number[]} numbers
    */
   constructor(numbers) {
@@ -22,7 +21,6 @@ class Lotto {
   }
 
   /**
-   *
    * @param {number[]} numbers
    */
   #validate(numbers) {

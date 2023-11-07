@@ -6,7 +6,6 @@ import {
 import messageFormatter from "../utils/messageFormatter.js";
 
 /**
- *
  * @param {string} answer
  */
 export const validateAmountToPurchase = (answer) => {
@@ -16,7 +15,6 @@ export const validateAmountToPurchase = (answer) => {
 };
 
 /**
- *
  * @param {string} answer
  */
 export const validateWinningNumbers = (answer) => {
@@ -28,7 +26,6 @@ export const validateWinningNumbers = (answer) => {
 };
 
 /**
- *
  * @param {string} answer
  */
 export const validateBonusNumber = (answer) => {

@@ -9,7 +9,6 @@ class WinningLotto extends Lotto {
   #bonusNumber;
 
   /**
-   *
    * @param {number[]} numbers
    * @param {number} bonusNumber
    */
@@ -25,7 +24,6 @@ class WinningLotto extends Lotto {
   }
 
   /**
-   *
    * @param {number} bonusNumber
    */
   #validateBonusNumber(bonusNumber) {

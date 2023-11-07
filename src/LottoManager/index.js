@@ -44,6 +44,15 @@ class LottoManager {
   }
 
   /**
+   * @description 당첨 로또 생성
+   * @param {number[]} numbers
+   * @param {number} bonusNumber
+   */
+  generateWinningLotto(numbers, bonusNumber) {
+    this.#winningLotto = new WinningLotto(numbers, bonusNumber);
+  }
+
+  /**
    * @description 로또 발급
    * @param {number} amountToPurchase
    * @returns {Lotto[]}
@@ -51,19 +60,12 @@ class LottoManager {
   issueLottoes(amountToPurchase) {
     validateNoRemaining(amountToPurchase, LOTTO.price);
 
+    this.#lottoes = [];
+
     const numberOfLottoTickets = parseInt(amountToPurchase / LOTTO.price, 10);
     this.#generateLottoes(numberOfLottoTickets);
 
     return [...this.#lottoes];
-  }
-
-  /**
-   * @description 당첨 로또 생성
-   * @param {number[]} numbers
-   * @param {number} bonusNumber
-   */
-  generateWinningLotto(numbers, bonusNumber) {
-    this.#winningLotto = new WinningLotto(numbers, bonusNumber);
   }
 
   /**
@@ -75,6 +77,28 @@ class LottoManager {
     this.#lottoes.forEach((lotto) => {
       this.#drawLotto(lotto);
     });
+  }
+
+  /**
+   *
+   * @param {number} numberOfLottoTickets
+   */
+  #generateLottoes(numberOfLottoTickets) {
+    while (this.#lottoes.length < numberOfLottoTickets) {
+      const numbers = this.#generateLottoNumbers();
+      this.#lottoes.push(new Lotto(numbers));
+    }
+  }
+
+  /**
+   * @returns {number[]}
+   */
+  #generateLottoNumbers() {
+    return Random.pickUniqueNumbersInRange(
+      LOTTO.range.startInclusive,
+      LOTTO.range.endInclusive,
+      LOTTO.length,
+    ).sort((a, b) => a - b);
   }
 
   /**
@@ -118,23 +142,6 @@ class LottoManager {
     const bonusNumber = winningLotto.getBonusNumber();
 
     return lottoNumbers.includes(bonusNumber);
-  }
-
-  #generateLottoes(numberOfLottoTickets) {
-    this.#lottoes = [];
-
-    while (this.#lottoes.length < numberOfLottoTickets) {
-      const numbers = this.#generateLottoNumbers();
-      this.#lottoes.push(new Lotto(numbers));
-    }
-  }
-
-  #generateLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(
-      LOTTO.range.startInclusive,
-      LOTTO.range.endInclusive,
-      LOTTO.length,
-    ).sort((a, b) => a - b);
   }
 }
 
