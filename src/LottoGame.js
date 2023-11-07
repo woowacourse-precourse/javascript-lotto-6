@@ -2,9 +2,12 @@ import { CONFIG } from '../constants/constants';
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 import Player from './Player';
+import WinningBonus from './WinningBonus';
 
 class LottoGame {
   #tickets = [];
+  #winningNumber;
+  #bonusNumber;
   async run() {
     await this.inputPrice();
   }
@@ -20,6 +23,13 @@ class LottoGame {
       const lotto = new Lotto(lottoNumber);
       this.#tickets.push(lotto.getLottoNumbers());
     }
+    this.inputWinningBonus();
+  }
+
+  async inputWinningBonus() {
+    const winningBonus = new WinningBonus();
+    this.#winningNumber = await winningBonus.readWinning();
+    this.#bonusNumber = await winningBonus.readBonus();
   }
 
   #generateRandomLottoNumbers() {
