@@ -1,6 +1,6 @@
 import Input from "./Input";
 import Lotto from "./Lotto";
-import { pickUniqueRandomNumbers, printOutput } from "./utils";
+import { LOTTO_CONSTANT, pickUniqueRandomNumbers, printOutput } from "./utils";
 
 class App {
   #RANK_INFO = {
@@ -10,6 +10,8 @@ class App {
     4: { STRING: "4개 일치 (50,000원)", PRICE: 50000 },
     5: { STRING: "3개 일치 (5,000원)", PRICE: 5000 },
   };
+
+  #NUMBER_OF_RANK = 5;
 
   constructor() {
     this.userInput = new Input();
@@ -27,12 +29,11 @@ class App {
   }
 
   getRandomSixNumbers() {
-    const MIN_NUMBER = 1;
-    const MAX_NUMBER = 45;
-    const COUNT = 6;
-    return pickUniqueRandomNumbers(MIN_NUMBER, MAX_NUMBER, COUNT).sort(
-      (a, b) => a - b
-    );
+    return pickUniqueRandomNumbers(
+      LOTTO_CONSTANT.MIN_LOTTO_NUMBER,
+      LOTTO_CONSTANT.MAX_LOTTO_NUMBER,
+      LOTTO_CONSTANT.LOTTO_LENGTH
+    ).sort((a, b) => a - b);
   }
 
   getLottoWithMoney() {
@@ -57,14 +58,16 @@ class App {
   }
 
   calculLottoResult() {
-    const RANKS_NUMBER = 5;
-    const lottoRanks = Array.from({ length: RANKS_NUMBER + 1 }, () => 0);
+    const lottoRanks = Array.from(
+      { length: LOTTO_CONSTANT.RANK_NUMBER + 1 },
+      () => 0
+    );
     this.lottos.forEach((lotto) => {
       const RANK = lotto.getLottoResult({
         winNumbers: this.userInput.lottoNumbers,
         bonusNumber: this.userInput.bonusNumber,
       });
-      if (RANK <= RANKS_NUMBER) lottoRanks[RANK] += 1;
+      if (RANK <= this.#NUMBER_OF_RANK) lottoRanks[RANK] += 1;
     });
 
     return lottoRanks;
@@ -73,7 +76,7 @@ class App {
   printLottoResult(lottoRanks) {
     printOutput(`\n당첨 통계\n---`);
 
-    for (let rank = 5; rank > 0; rank -= 1) {
+    for (let rank = this.#NUMBER_OF_RANK; rank > 0; rank -= 1) {
       const COUNT = lottoRanks[rank];
       const STRING = `${this.#RANK_INFO[rank].STRING} - ${COUNT}개`;
       printOutput(STRING);

@@ -11,3 +11,12 @@ export function printOutput(output) {
 export function pickUniqueRandomNumbers(min, max, count) {
   return MissionUtils.Random.pickUniqueNumbersInRange(min, max, count);
 }
+
+export const LOTTO_CONSTANT = {
+  MIN_LOTTO_NUMBER: 1,
+  MAX_LOTTO_NUMBER: 45,
+  LOTTO_LENGTH: 6,
+  RANK_NUMBER: 5,
+};
+
+Object.freeze(LOTTO_CONSTANT);
