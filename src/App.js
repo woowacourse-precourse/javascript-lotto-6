@@ -40,6 +40,7 @@ class App {
   async play() {
     const userPriceInput = await this.getUserPrice();
     const lottoAmount = Price.calculateLottoAmount(userPriceInput);
+    Console.print(' ');
     const lottos = this.generateLottos(lottoAmount);
     this.printPurchasedLottos(lottos);
   }
