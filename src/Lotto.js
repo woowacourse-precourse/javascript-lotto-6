@@ -1,12 +1,13 @@
-import { LOTTO } from './constants/lotto';
-import { ERROR_MESSAGE } from './constants/message';
+import { LOTTO } from './constants/lotto.js';
+import { ERROR_MESSAGE } from './constants/message.js';
+import { utils } from './utils/utils.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = utils.ascendingNumbers(numbers);
   }
 
   #validate(numbers) {
@@ -19,7 +20,6 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
   getNumbers() {
     return this.#numbers;
   }
