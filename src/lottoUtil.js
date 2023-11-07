@@ -117,3 +117,20 @@ export function lottoRank(answerCnt, hasBonusNumber) {
     if (answerCnt === 6) return 1;
     return -1;
 }
+
+/**
+ * @param {number[]} ranks
+ * @returns {Map<number, number>}
+ */
+export function getRankMap(ranks) {
+    /** @type {Map<number, number>} */
+    const resultMap = new Map([
+        [5, 0],
+        [4, 0],
+        [3, 0],
+        [2, 0],
+        [1, 0],
+    ]);
+    ranks.filter(rank => resultMap.has(rank)).forEach(rank => resultMap.set(rank, resultMap.get(rank) + 1));
+    return resultMap;
+}
