@@ -1,6 +1,6 @@
 import { LOTTO, ERROR } from '../common/constants.js';
 import { throwError } from '../common/utils.js';
-import { isCommaSeparated, isLengthEqualTo, containUniqueNumbers } from '../common/validator.js';
+import { isCommaSeparated, isLengthEqualTo, containUniqueNumbersInString } from '../common/validator.js';
 
 class InputValidator {
   constructor(input) {
@@ -26,7 +26,7 @@ class InputValidator {
   };
 
   #validateUnique() {
-    if (!containUniqueNumbers(this.input)) {
+    if (!containUniqueNumbersInString(this.input)) {
       throwError(ERROR.winning_duplicate);
     }
   };

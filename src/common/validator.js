@@ -17,13 +17,19 @@ const isLengthEqualTo = (input, length) => {
 };
 
 // 문자열이 고유한 숫자들로 이루어져 있는지 확인하는 메서드
-const containUniqueNumbers = (input) => {
+const containUniqueNumbersInString = (input) => {
   const number = input.split(UTILS.comma).map(name => name.trim());
   return number.length === new Set(number).size;
 };
 
+// 배열이 고유한 숫자들로 이루어져 있는지 확인하는 메서드
+const containUniqueNumbersInArray = (array) => array.length === new Set(array).size;
+
 // 문자열 안에 특정 요소가 포함(중복)되어 있는지 확인하는 메서드
 const isElementInString = (string, element) => string.includes(element);
+
+// 배열 안에 특정 요소가 포함(중복)되어 있는지 확인하는 메서드
+const isElementInArray = (array, element) => array.includes(element);
 
 // 양의 정수인지 확인하는 메서드 (음수, 소수, 공백, 특수문자, 문자열, 0으로 시작하는 숫자 불가)
 const isNumeric = (input) => UTILS.positive_integer.test(input);
@@ -35,8 +41,10 @@ export {
   isDivisibleByUnit,
   isCommaSeparated,
   isLengthEqualTo,
-  containUniqueNumbers,
+  containUniqueNumbersInString,
+  containUniqueNumbersInArray,
   isElementInString,
+  isElementInArray,
   isNumeric,
   isInRange,
 };

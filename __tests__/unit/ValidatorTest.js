@@ -2,7 +2,7 @@
 import {
   isDivisibleByUnit,
   isLengthEqualTo,
-  containUniqueNumbers,
+  containUniqueNumbersInString,
   isCommaSeparated,
   isElementInString,
   isNumeric,
@@ -37,8 +37,8 @@ describe('당첨 번호 테스트', () => {
     const uniqueWinningNumber = '1,12,33,4,25,45';
     const duplicateWinningNumber = '1,2,3,4,4,6';
   
-    expect(containUniqueNumbers(uniqueWinningNumber)).toBe(true);
-    expect(containUniqueNumbers(duplicateWinningNumber)).toBe(false);
+    expect(containUniqueNumbersInString(uniqueWinningNumber)).toBe(true);
+    expect(containUniqueNumbersInString(duplicateWinningNumber)).toBe(false);
   });
 
   test('당첨 번호가 쉼표로 구분되었는지 여부', () => {
