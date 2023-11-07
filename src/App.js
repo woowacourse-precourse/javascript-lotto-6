@@ -2,8 +2,7 @@ import SetGame from "./settings/Settings.js";
 import OutputView from "./view/OutputView.js";
 import Issue from "./utils/Issue.js";
 import Compare from "./utils/Compare.js";
-import stats from "./utils/stats.js";
-import Stats from "./utils/stats.js";
+import Stats from "./utils/Stats.js";
 import MESSAGE from "./constants/message.js";
 
 class App {
@@ -61,7 +60,7 @@ class App {
   async result(){
     const compare = new Compare(this.#lotto, this.#bonus);
     this.#result = await compare.compareLotto(this.#lottos);
-    
+
     await this.printStats();
   }
 
