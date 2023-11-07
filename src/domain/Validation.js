@@ -51,13 +51,17 @@ class Validation {
     this.validateLottoNumberRange(numbers);
   }
 
-  static isBonusNumberValidated(bonusNumber) {
+  static isBonusNumberValidated(bonusNumber, winningLotto) {
     if (Number.isNaN(Number(bonusNumber))) {
       throw new CustomError(ERROR_MESSAGES.invalidBonusNumberType);
     }
 
     if (bonusNumber > CONSTANTS.maxRange || bonusNumber < CONSTANTS.minRange) {
       throw new CustomError(ERROR_MESSAGES.invalidBonusNumberRange);
+    }
+
+    if (winningLotto.includes(Number(bonusNumber))) {
+      throw new CustomError(ERROR_MESSAGES.invalidBonusNumberDuplicate);
     }
   }
 }
