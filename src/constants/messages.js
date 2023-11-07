@@ -7,10 +7,6 @@ const messages = {
     winning: '당첨 번호를 입력해 주세요.',
     bonus: '보너스 번호를 입력해 주세요.',
   },
-  lotto: {
-    instructions: 'Please enter your lotto numbers:',
-    success: 'Your lotto numbers have been saved!',
-  },
   statics: {
     headline: '당첨 통계',
     fifth: '3개 일치 (5,000원) - ',
