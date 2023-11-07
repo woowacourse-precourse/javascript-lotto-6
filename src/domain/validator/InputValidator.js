@@ -2,8 +2,6 @@ import ErrorMessage from '../errors/ErrorMessage.js';
 import ERROR from '../../constants/error.js';
 import NUMBER from '../../constants/number.js';
 
-function validateNoIncludeBlank() {}
-
 function validateLottoBonusDuplication() {}
 
 class InputValidator {
@@ -36,14 +34,14 @@ class InputValidator {
     }
   }
 
-  validateNoDuplication(input) {
-    if (input.length !== new Set(input).size) {
+  validateNoDuplication(inputs) {
+    if (inputs.length !== new Set(inputs).size) {
       throw new ErrorMessage(ERROR.lotto.duplication);
     }
   }
 
-  validateDrawCases(input) {
-    if (input.length !== NUMBER.drawCount) {
+  validateDrawCases(inputs) {
+    if (inputs.length !== NUMBER.drawCount) {
       throw new ErrorMessage(ERROR.lotto.drawCount);
     }
   }
