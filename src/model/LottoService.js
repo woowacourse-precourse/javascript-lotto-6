@@ -11,6 +11,7 @@ export const LottoService = {
     const rankingCount = Array(6).fill(0);
     return lottos.reduce((acc, lotto) => {
       const ranking = lotto.winningLotto(winningNumber, bonusNumber);
+      if (!ranking) return acc;
       acc[ranking - 1] += 1;
       return acc;
     }, rankingCount);
