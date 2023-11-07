@@ -1,6 +1,6 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto";
-import isValidRange from "./utils/validateRange";
+import { isValidRangeArr, isValidRange } from "./utils/validateRange";
 class App {
     async play() {
         Console.print("구입금액을 입력해 주세요.");
@@ -76,12 +76,29 @@ class App {
         if (inputArr.length !== 6) {
             throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
         }
-      
-        if (!isValidRange(inputArr)) {
+
+        if (!isValidRangeArr(inputArr)) {
             throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
         }
     }
-    
+
+    async getBonusNumber() {
+        const bonusNumber = await Console.readLineAsync()
+            .then((value) => {
+                this.isValidBonusNumber(value);
+                return value;
+            })
+            .catch((err) => {
+                return this.getBonusNumber();
+            });
+        return bonusNumber;
+    }
+
+    isValidBonusNumber(input) {
+        if (!isValidRange(input)) {
+            throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+        }
+    }
 }
 
 export default App;
