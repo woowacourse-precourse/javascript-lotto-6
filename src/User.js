@@ -1,6 +1,5 @@
-import InputHandler from './InputHandler';
-import messages from './constants/messages';
 import { Console } from '@woowacourse/mission-utils';
+import messages from './constants/messages';
 
 class User {
   async purchaseLotto() {

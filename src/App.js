@@ -1,7 +1,6 @@
 import OutputHandler from './OutputHandler';
 import User from './User';
 import LottoMachine from './LottoMachine';
-import InputHandler from './InputHandler';
 import LottoChecker from './LottoChecker';
 
 class App {
