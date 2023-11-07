@@ -6,8 +6,6 @@ import PrizeService from './services/PrizeService.js';
 class App {
   #controller;
 
-  #view;
-
   constructor() {
     this.#controller = new LottoGameController({
       view: new View(),
