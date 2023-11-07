@@ -13,7 +13,9 @@ class App {
       const [moneyForLotto, purchasedLotto] =
         await this.lottoGameManager.purchaseLotto();
       const winningBalls = await this.lottoGameManager.setWinningNumbers();
-      const bonusBall = await this.lottoGameManager.setBonusNumber();
+      const bonusBall = await this.lottoGameManager.setBonusNumber(
+        winningBalls
+      );
 
       const [rankCounts, winningPrizeSum] =
         this.lottoGameManager.checkIsWinning(

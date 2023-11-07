@@ -51,9 +51,9 @@ class LottoGameManager {
     }
   }
 
-  async setBonusNumber() {
+  async setBonusNumber(winningBalls) {
     try {
-      const bonusBall = await this.validateManager.getBonusBall();
+      const bonusBall = await this.validateManager.getBonusBall(winningBalls);
       const bonusBallToNumber = stringToNumber(bonusBall);
       return bonusBallToNumber;
     } catch (error) {
