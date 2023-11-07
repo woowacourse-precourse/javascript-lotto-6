@@ -33,18 +33,8 @@ class LottoMachine {
     return Math.floor(purchaseAmount / 1000);
   }
 
-  #getLottoNumber() {
-    return Random.pickNumberInRange(1, 45);
-  }
-
   #generateLottoNumbers() {
-    const lottoNumbers = new Set();
-
-    while (lottoNumbers.size < 6) {
-      lottoNumbers.add(this.#getLottoNumber());
-    }
-
-    return [...lottoNumbers];
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   #generateLotto() {
