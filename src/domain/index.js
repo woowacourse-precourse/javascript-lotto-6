@@ -1,3 +1,3 @@
 export * from "./Lotto";
-export * from "./LottoDrawMachine";
+export * from "./Calculator";
 export * from "./LottoSeller";
