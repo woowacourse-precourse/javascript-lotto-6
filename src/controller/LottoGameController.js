@@ -24,9 +24,8 @@ class LottoGameController {
 
   async start() {
     await this.buyLottos();
-    this.printMyLottoNumbers();
-    await this.setWinningNumbers();
-    await this.setBonusNumber();
+    this.printMyLottos();
+    await this.setLottoNumbers();
     this.printStats();
 
     // TODO 리팩토링
@@ -45,6 +44,11 @@ class LottoGameController {
 
     this.outputView.printLottoResult(this.lottoResult.getMatchCount());
     this.outputView.printTotalProfit(profit);
+  }
+
+  async setLottoNumbers() {
+    await this.setWinningNumbers();
+    await this.setBonusNumber();
   }
 
   generateMatchResults(winningMatchCounts, hasBonusMatches) {
@@ -82,7 +86,7 @@ class LottoGameController {
     }
   }
 
-  printMyLottoNumbers() {
+  printMyLottos() {
     const loopCount = this.#moneyInstance.getPurchaseCount();
     Array.from({ length: loopCount }).forEach(() => {
       const lotto = this.createLottoInstance();
