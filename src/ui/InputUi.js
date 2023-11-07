@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Validation from '../validation/Validation.js';
-import UiUtils from './UiUtils.js';
+import Utils from '../Utils.js';
 import { INPUT_MESSAGE } from '../Constants.js';
 class InputUi {
   constructor() {}
@@ -17,7 +17,7 @@ class InputUi {
   async askWinningNumber() {
     try {
     const WINNING_NUMBER_INPUT = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.winningNumbers);
-    const WINNING_NUMBER = UiUtils.splitComma(WINNING_NUMBER_INPUT);
+    const WINNING_NUMBER = Utils.splitComma(WINNING_NUMBER_INPUT);
     Validation.validateLottoNumbers(WINNING_NUMBER);
     return WINNING_NUMBER;
     } catch (error) {

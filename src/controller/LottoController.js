@@ -1,7 +1,8 @@
-import UiUtils from '../ui/UiUtils.js';
+import Utils from '../Utils.js';
 import LottoGame from '../domain/LottoGame.js';
 import OutputUi from '../ui/OutputUi.js';
 import InputUi from '../ui/inputUi.js';
+
 class LottoController {
   constructor() {
     this.lottoGame = null;
@@ -13,7 +14,7 @@ class LottoController {
   async sellLotto() {
     const PURCHASE_AMOUNT = await this.inputUi.askpurchaseAmount();
     this.lottoGame = new LottoGame(PURCHASE_AMOUNT);
-    const SORTED_LOTTO_NUMBERS = UiUtils.sortLottoNumbers(this.lottoGame.getLottoNumbers());
+    const SORTED_LOTTO_NUMBERS = Utils.sortLottoNumbers(this.lottoGame.getLottoNumbers());
     this.outputUi.printPurchasedLottos(SORTED_LOTTO_NUMBERS);
   }
 

@@ -1,14 +1,11 @@
 import { WINNIG_PROFITS, LOTTO_LENGTH } from "../Constants.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Utils from "../Utils.js";
 
 class GameUtils {
   constructor(lottos) {
     this.lottos = lottos;
   }
-  generateRandomNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, LOTTO_LENGTH);
-  }
-
   matchingCountsWithArr(winningNumbers) {
     const MATCHING_COUNTS = [];
     for (let index = 0; index < this.lottos.length; index++) {
@@ -25,7 +22,7 @@ class GameUtils {
         const BONUS_LOTTO = this.lottos[index].getNumbers();
         matchingCount = this.checkBonusNumberMatch(BONUS_LOTTO, bonusNumber);
       }
-      matchingCountsObj = this.addOrUpdatePropertyInObj(
+      matchingCountsObj = Utils.addOrUpdatePropertyInObj(
         matchingCountsObj,
         matchingCount
       );
@@ -33,40 +30,11 @@ class GameUtils {
     return matchingCountsObj;
   }
 
-  addOrUpdatePropertyInObj(obj, matchingCount) {
-    let newObj = { ...obj };
-    if (!obj[matchingCount]) {
-      newObj[matchingCount] = 1;
-      return newObj;
-    }
-    newObj[matchingCount] += 1;
-    return newObj;
-  }
-
-  removeItemsWithNumericKeysLessThanThree(obj) {
-    const OBJ = { ...obj };
-    for (const KEY in OBJ) {
-      if (typeof Number(KEY) === "number" && KEY < 3) {
-        delete OBJ[KEY];
-      }
-    }
-    return OBJ;
-  }
-  addMissingElements(obj) {
-    const OBJ = { ...obj };
-    for (const WINNING_NUMBER in WINNIG_PROFITS) {
-      const key = WINNING_NUMBER.toString();
-      if (!(key in OBJ)) {
-        OBJ[key] = 0;
-      }
-    }
-    return OBJ;
-  }
-
+  
   processMatchingNumbersToResult(obj) {
     let result = { ...obj };
-    result = this.removeItemsWithNumericKeysLessThanThree(result);
-    result = this.addMissingElements(result);
+    result = Utils.removeItemsWithNumericKeysLessThanThree(result);
+    result = Utils.addMissingElements(result);
     return result;
   }
 

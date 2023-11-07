@@ -25,7 +25,14 @@ export const OUTPUT_MESSAGE = {
     },
     rateOfReturn(rateOfReturn) {
         return `총 수익률은 ${rateOfReturn}%입니다.`;
-    }
+    },
+    winningStatus(matchingCount, winnigStatus) {
+        const WINNIG_PROFIT = WINNIG_PROFITS[matchingCount].toLocaleString();
+        if (matchingCount === "bonus") {
+          return `5개 일치, 보너스 볼 일치 (${WINNIG_PROFIT}원) - ${winnigStatus[matchingCount]}개`;
+        }
+        return `${matchingCount}개 일치 (${WINNIG_PROFIT}원) - ${winnigStatus[matchingCount]}개`;
+      }
 }
 
 export const ERROR_MESSAGE = {

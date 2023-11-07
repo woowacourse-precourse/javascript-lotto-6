@@ -2,6 +2,7 @@ import Lotto from './Lotto.js';
 import GameUtils from './GameUtils.js';
 import { LOTTO_PRICE, WINNIG_PROFITS } from '../Constants.js';
 import Validation from '../validation/Validation.js';
+import Utils from '../Utils.js';
 class LottoGame {
   #lottos;
   #purchaseNumber;
@@ -17,9 +18,8 @@ class LottoGame {
   }
 
   #issueLotto() {
-    const gameUtils = new GameUtils();
     for (let i = 0; i < this.#purchaseNumber; i++) {
-      const LOTTO = new Lotto(gameUtils.generateRandomNumbers());
+      const LOTTO = new Lotto(Utils.generateRandomNumbers());
       this.#lottos.push(LOTTO);
     }
   }
