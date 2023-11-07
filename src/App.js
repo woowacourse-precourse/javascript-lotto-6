@@ -16,10 +16,21 @@ class App {
       lottoArray.push(lotto2);
     }
     lottoArray.forEach((lotto) => {
-      Console.print(lotto.getNumbers());
+      const lottoNumbers = lotto.getNumbers()
+      Console.print(`[${lottoNumbers}]`);
     })
 
+    const answerLotto = await Console.readLineAsync("\n당첨 번호를 입력해주세요.\n");
+
+    const bonusLotto = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+
+    const lottoResult = lottoArray.map((lotto) => {
+      return lotto.judgingLotto(answerLotto);
+    })
+
+    Console.print(lottoResult);
     
+
 
 
 

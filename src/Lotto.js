@@ -14,7 +14,26 @@ class Lotto {
 
   // TODO: 
   getNumbers() {
-    return this.#numbers;
+    return this.#numbers.join(", ");
+  }
+
+  judgingLotto(answerLotto) { 
+    const result = [];
+    this.#numbers.forEach((number) => {
+      if (answerLotto.includes(number)) {
+        result.push(1);
+      }
+      else {
+        result.push(0);
+      }
+    })
+    return result;
+  }
+  
+  judgingBonus(bonusLotto) {
+    if (bonusLotto.includes(number)) {
+      return 1;
+    }
   }
 }
 
