@@ -53,6 +53,10 @@ class View {
     this.#outputView.printLine(RESULT_RANK_6 + COUNT(matchResult.match6));
     this.#outputView.printLine(RATE_OF_RETURN(rateOfReturn));
   }
+
+  printErrorMessage(error) {
+    this.#outputView.printLine(error.message);
+  }
 }
 
 export default View;
