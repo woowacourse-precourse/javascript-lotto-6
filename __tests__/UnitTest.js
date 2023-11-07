@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import App from '../src/App.js';
+import Lotto from '../src/Lotto.js';
 import {
   validateAmount,
   validateBonusNumber,
@@ -109,5 +110,42 @@ describe('로또 보너스 번호 테스트', () => {
     expect(() => validateBonusNumber(winningNumbers, bonusNumber)).toThrow(
       '[ERROR]'
     );
+  });
+});
+
+describe('발행한 로또 당첨 등수 판별 테스트', () => {
+  test('로또 당첨 정보 확인', () => {
+    const app = new App();
+    app.lottos = [
+      new Lotto([1, 2, 3, 4, 5, 6]),
+      new Lotto([1, 2, 3, 4, 5, 15]),
+    ];
+    app.lottosCount = 2;
+    app.winningNumbers = [1, 2, 3, 4, 5, 6];
+    app.bonusNumber = 15;
+
+    app.getLottoRanking();
+
+    expect(app.ranks[0].count).toBe(0);
+    expect(app.ranks[1].count).toBe(0);
+    expect(app.ranks[2].count).toBe(0);
+    expect(app.ranks[3].count).toBe(1);
+    expect(app.ranks[4].count).toBe(1);
+  });
+});
+
+describe('수익률 테스트', () => {
+  test('수익률 확인', () => {
+    const app = new App();
+    app.amount = 10000;
+    app.ranks = [
+      { winnings: 2000000000, count: 0 },
+      { winnings: 30000000, count: 0 },
+      { winnings: 1500000, count: 0 },
+      { winnings: 50000, count: 1 },
+      { winnings: 5000, count: 2 },
+    ];
+    const result = app.getEarningsRate();
+    expect(result).toBe('600.0%');
   });
 });
