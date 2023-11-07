@@ -21,4 +21,13 @@ describe("로또 클래스 테스트", () => {
 
     expect(result).toEqual([1, 2, 3, 4, 5, 6]);
   });
+
+  test("로또 당첨 번호와 일치 갯수 구하기", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const prizeList = [1, 2, 3, 4, 5, 6];
+
+    const result = lotto.getMatchedCount(prizeList);
+
+    expect(result).toEqual(6);
+  });
 });
