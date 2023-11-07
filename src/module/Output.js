@@ -25,9 +25,9 @@ class Output {
     );
   }
 
-  static printTotalReturn(purchasedLotto, matchCount) {
+  static printTotalReturn(purchasedLottoAmount, matchCount) {
     MissionUtils.Console.print(
-      `총 수익률은 ${totalReturn(purchasedLotto, matchCount)}%입니다.`,
+      `총 수익률은 ${totalReturn(purchasedLottoAmount, matchCount)}%입니다.`,
     );
   }
 }

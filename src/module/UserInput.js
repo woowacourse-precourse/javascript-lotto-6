@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { message } from '../Consts.js';
 
 class UserInput {
-  static async purchasedLotto() {
+  static async purchasedLottoAmount() {
     const purchasedLotto = await MissionUtils.Console.readLineAsync(
       message.tryPurchaseLotto,
     );

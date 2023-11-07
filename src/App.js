@@ -8,16 +8,16 @@ import Match from './module/Match.js';
 
 class App {
   constructor() {
-    this.purchasedLotto = 0;
+    this.purchasedLottoAmount = 0;
     this.lottoArray = [];
     this.winningNumbers = '';
     this.bonus = '';
   }
 
   async userSpendMoney() {
-    this.purchasedLotto = await UserInput.purchasedLotto();
-    const validatePurchase = new ValidatePurchase(this.purchasedLotto);
-    this.lottoArray = purchasedLottoArray(this.purchasedLotto);
+    this.purchasedLottoAmount = await UserInput.purchasedLottoAmount();
+    const validatePurchase = new ValidatePurchase(this.purchasedLottoAmount);
+    this.lottoArray = purchasedLottoArray(this.purchasedLottoAmount);
     Output.printUserLottos(this.lottoArray);
   }
 
@@ -40,7 +40,7 @@ class App {
 
   printRateOfReturn() {
     Output.printTotalReturn(
-      this.purchasedLotto,
+      this.purchasedLottoAmount,
       new Match(
         this.lottoArray,
         this.winningNumbers,
