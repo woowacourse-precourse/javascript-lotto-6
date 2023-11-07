@@ -20,10 +20,12 @@ class LottoMachine {
     if (!Validation.isProperPurchaseAmount(price)) {
       throw new Error(ERROR_MESSAGE.purchase_amount);
     }
+
     const purchaseNumber = price / LOTTO_PRICE;
     while (lottoBundle.length < purchaseNumber) {
       lottoBundle.push(new Lotto(this.#makeLottoNumber()));
     }
+
     return [...lottoBundle];
   }
 
@@ -45,6 +47,7 @@ class LottoMachine {
     if (!Validation.isProperWinningNumbers(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.winning_number);
     }
+
     this.#winningNumbers = winningNumbers.split(',').map(Number);
   }
 
@@ -55,9 +58,11 @@ class LottoMachine {
     if (!Validation.hasProperRange(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.bonus_number);
     }
+
     if (Validation.isDuplicateBonusNumber(this.#winningNumbers, bonusNumber)) {
       throw new Error(ERROR_MESSAGE.bonus_duplicate);
     }
+
     this.#bonusNumber = Number(bonusNumber);
   }
 

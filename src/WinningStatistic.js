@@ -25,18 +25,23 @@ class WinningStatistic {
   getFirstPrize() {
     return this.#firstPrize;
   }
+
   getSecondPrize() {
     return this.#secondePrize;
   }
+
   getThirdPrize() {
     return this.#thirdPrize;
   }
+
   getFourthPrize() {
     return this.#fourthPrize;
   }
+
   getFifthPrize() {
     return this.#fifthPrize;
   }
+
   getEaringRate() {
     return this.#earningRate;
   }

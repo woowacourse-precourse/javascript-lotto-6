@@ -43,12 +43,15 @@ class Validation {
     if (winningNumbers.length === 0) {
       return false;
     }
+
     if (winningNumbers.length !== 6) {
       return false;
     }
+
     if (!Validation.hasProperRange(winningNumbers)) {
       return false;
     }
+
     if (Validation.hasDuplication(winningNumbers)) {
       return false;
     }

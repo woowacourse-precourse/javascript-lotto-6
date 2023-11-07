@@ -63,6 +63,7 @@ class LotteryPrize {
           break;
       }
     });
+
     return { ...prize };
   }
 
@@ -74,6 +75,7 @@ class LotteryPrize {
         if (this.#isBonusNumberMatch(lottoNumbers, bonusNumber)) {
           return LOTTO_RANK.second;
         }
+
         return LOTTO_RANK.third;
       case LOTTO_MATCH.fourth:
         return LOTTO_RANK.fourth;
@@ -89,6 +91,7 @@ class LotteryPrize {
       if (winningNumbers.includes(lottoNumber)) {
         return matchCount + 1;
       }
+
       return matchCount;
     }, 0);
   }
