@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import { LOTTO } from "./constants/lotto.js";
 import { ERROR_MESSAGE } from "./constants/message.js";
 import { Validator } from "./utils/validator.js";
@@ -13,7 +12,6 @@ class Lotto {
 
   #validate(numbers) {
     const numberArray = numbers.split(",").map(Number);
-    Console.print(numberArray);
 
     if (!this.isLottoFormat(numberArray)) {
       throw new Error(ERROR_MESSAGE.formatError);
