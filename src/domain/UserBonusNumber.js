@@ -1,4 +1,3 @@
-import { readUserInput } from "../UI/inputView.js";
 import { ERROR } from "../const/Messages.js";
 
 class UserBonusNumber {
@@ -6,10 +5,14 @@ class UserBonusNumber {
     this.bonusNumber = null;
   }
 
-  async getBonusNumber() {
-    const input = await readUserInput();
-    this.setBonusNumbers(input);
+  getBonusNumber() {
     return this.bonusNumber;
+  }
+
+  setBonusNumber(input) {
+    const number = parseInt(input.trim(), 10);
+    this.#validate(number);
+    this.bonusNumber = number;
   }
 
   #validate(number) {
@@ -20,13 +23,6 @@ class UserBonusNumber {
     if (number < 1 || number > 45) {
       throw new Error(ERROR.NUMBER_RANGE);
     }
-  }
-
-  setBonusNumbers(input) {
-    const trimmedInput = input.trim();
-    const parsedNumber = parseInt(trimmedInput, 10);
-    this.#validate(parsedNumber);
-    this.bonusNumber = parsedNumber;
   }
 }
 
