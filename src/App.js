@@ -3,6 +3,7 @@ import { Output } from "./Output.js";
 import PurchasePrice from "./PurchasePrice.js";
 import Lotto from "./Lotto.js";
 import BonusNumber from "./BonusNumber.js";
+import Game from "./Game.js";
 
 class App {
   purchasePrice = 0;
@@ -48,6 +49,12 @@ class App {
 
   async play() {
     await this.getPurchasePrice();
+
+    await Output.showPurchaseSize(this.purchasePrice);
+    const arr = await this.game.drawLotto(this.purchasePrice);
+    await Output.drawLotto(arr);
+    await Output.showEnter();
+
     await this.getLottoNumbers();
     await this.getBonusNumber();
   }
