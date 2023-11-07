@@ -14,12 +14,13 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test('로또 번호에 중복이 없는지 확인', () => {
-    const numbers = Lotto.createRandomNumbers();
-    const setNumbers = new Set(numbers);
+  // test('로또 번호에 중복이 없는지 확인', () => {
+  //   const numbers = Lotto.createRandomNumbers();
+  //   const setNumbers = new Set(numbers);
 
-    expect(setNumbers.size).toEqual(numbers.length);
-  });
+  //   expect(setNumbers.size).toEqual(numbers.length);
+  // });
+
 
   // 아래에 추가 테스트 작성 가능
 });

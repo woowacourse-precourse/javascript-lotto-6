@@ -5,7 +5,6 @@ import OutPut from './ComputerOutput.js';
 class App {
   async play() {
     const lottoGame = new Controller();
-    // lottoGame.checkNumber();
     lottoGame.gameStart();
   }
 }
