@@ -108,7 +108,7 @@ class LottoGame {
         const winningNumbers = inputNumbers.split(',');;
         const winningTicket = new Lotto(winningNumbers);
         const sortedWinningTicket = winningTicket.getSortNumbers();
-        this.#validateWinningNumbers(sortedWinningTicket);
+        //this.#validateWinningNumbers(sortedWinningTicket);
         return sortedWinningTicket;
       } catch (error) {
         Console.print(error.message);
@@ -160,7 +160,7 @@ class LottoGame {
     if (number < 1 || number > 45) {
       throw new Error("[ERROR] 1부터 45 사이의 숫자가 아닌 입력입니다.")
     }
-    if (winningNumbers.includes(number.toString())) {
+    if (winningNumbers.includes(number)) {
       throw new Error("[ERROR] 당첨 번호와 중복된 숫자가 있습니다.")
     }
   }
