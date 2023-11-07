@@ -17,6 +17,6 @@ export default class RateOfReturn {
   #calculateRateOfReturn(income, purchaseAmount) {
     const inputMoney = purchaseAmount * LOTTO_TICKET_PRICE;
     const rateOfReturn = (income / inputMoney) * PERCENTAGE;
-    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
+    return rateOfReturn.toFixed(1);
   }
 }
