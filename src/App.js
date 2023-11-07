@@ -93,7 +93,7 @@ class App {
   checkWinngNumbers = (parsedWinnigNumbers) => {
     if(parsedWinnigNumbers.length != 6) throw new Error('[ERROR] : the length of winning numbers is not 6.');
 
-    parsedWinnigNumbers.forEach((winningNumber) => {
+    parsedWinnigNumbers.forEach((winningNumber, index) => {
       if(!Number.isInteger(winningNumber)) throw new Error('[ERROR] : winning number must be integer.');
 
       if(winningNumber < 1 || winningNumber > 45) throw new Error('[ERROR] : winning number must be in range 1~45');
@@ -211,6 +211,24 @@ class App {
     return userInputPrice;
   }
 
+  getUserInputWinningNumbers = async () => {
+    let parsedWinnigNumbers;
+
+    try {
+      MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
+
+      const userInputWinningNumbers = await this.getUserInput();
+      parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
+
+      this.checkWinngNumbers(parsedWinnigNumbers);
+    } catch(err) {
+      MissionUtils.Console.print(err.message);
+      this.getUserInputWinningNumbers();
+    }
+
+    this.setWinningNumbers(parsedWinnigNumbers);
+  }
+
   async play() {
 
     const userInputPrice = await this.getUserInputPrice();
@@ -221,14 +239,16 @@ class App {
     this.setLottoOrder();
     this.printLottoOrder();
 
+    this.getUserInputWinningNumbers();
+
     try {
-      MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
+      // MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
 
-      const userInputWinningNumbers = await this.getUserInput();
-      const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
+      // const userInputWinningNumbers = await this.getUserInput();
+      // const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
 
-      this.checkWinngNumbers(parsedWinnigNumbers);
-      this.setWinningNumbers(parsedWinnigNumbers);
+      // this.checkWinngNumbers(parsedWinnigNumbers);
+      // this.setWinningNumbers(parsedWinnigNumbers);
 
       MissionUtils.Console.print('\n보너스 번호를 입력해 주세요.');
 
