@@ -5,6 +5,7 @@ import { LottoPrice } from "../utils/LottoPrice.js";
 import { formatLottoNumber } from "../utils/formatLottoNumber.js";
 import { Print } from "../constants/constant.js";
 import { RandomLottoGenerator } from "../utils/RandomLottoGenerator.js";
+import Lotto from "../models/Lotto.js";
 
 export const GameController = {
   async getLottoTiket() {
@@ -51,5 +52,13 @@ export const GameController = {
       OutputView.print(error.message);
       return this.getBonusNumber(LOTTERY_NUMBERS);
     }
+  },
+
+  lottoResults(TIKET, LOTTO_LIST, lottery_Number, bonus_Number) {
+    const LOTTO_GAME = new Lotto();
+    LOTTO_LIST.forEach((LOTTO) => {
+      LOTTO_GAME.matchLottoNumbers(LOTTO, lottery_Number, bonus_Number);
+    });
+    LOTTO_GAME.printTotalPrize(TIKET);
   },
 };
