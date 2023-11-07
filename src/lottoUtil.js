@@ -162,3 +162,31 @@ export function printLottoNumbers(lottos) {
     });
     MissionUtils.Console.print('');
 }
+
+/**
+ * @param {5 | 4 | 3 | 2 | 1} rank
+ * @param {Map<number, number>} rankMap
+ */
+function getRankStatisticsMsg(rank, rankMap) {
+    return [
+        RANK_DESCRIPTION[rank],
+        `(${LOTTO_REWARD[rank].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}원)`,
+        '-',
+        `${rankMap
+            .get(rank)
+            .toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}개`,
+    ].join(' ');
+}
+
+/**
+ * @param {Map<number, number>} rankMap
+ */
+function printRankStatistics(rankMap) {
+    const targetRanks = [5, 4, 3, 2, 1];
+    targetRanks
+        .map(rank => getRankStatisticsMsg(rank, rankMap))
+        .forEach(msg => {
+            MissionUtils.Console.print(msg);
+        });
+}
