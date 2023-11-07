@@ -1,6 +1,7 @@
 import Lotto from './Lotto.js';
 import User from './User.js';
 import { Console } from '@woowacourse/mission-utils';
+import { MESSAGES } from '../constants/messages.js';
 
 class Game {
   #user;
@@ -67,24 +68,26 @@ class Game {
   }
 
   printWinningResult(stats) {
-    Console.print('당첨 통계');
-    Console.print('---');
+    Console.print(MESSAGES.game.resultTitle);
+    Console.print(MESSAGES.game.separator);
 
-    const prizeKeys = [3, 4, 5, 'five_b', 6];
+    const prizeKeys = MESSAGES.templates.prizeKeys;
 
     prizeKeys.forEach((key) => {
       const prize = stats[key].prize;
       const count = stats[key].count;
       const message = count === 0 ? `0개` : `${count}개`;
       const matchMessage =
-        key === 'five_b' ? '5개 일치, 보너스 볼 일치' : `${key}개 일치`;
+        key === 'five_b'
+          ? MESSAGES.winning.matchFiveAndBonus
+          : `${key}` + MESSAGES.winning.matchN;
       Console.print(`${matchMessage} (${prize}) - ${message}`);
     });
 
     const totalPrize = this.calculateTotalPrize(stats);
     if (totalPrize === 0) {
-      Console.print('총 수익률은 0%입니다.');
-      Console.print('\n당첨되지 않았습니다. 다음 기회에 참여해주세요.');
+      Console.print(MESSAGES.game.zeroRevenueRate);
+      Console.print(MESSAGES.game.noWinnning);
     } else {
       const revenueRate = (
         (totalPrize / (this.#lottoCount * 1000)) *
