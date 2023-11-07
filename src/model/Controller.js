@@ -17,6 +17,7 @@ class Controller {
 
   async inputPurchase() {
     const MONEY = await this.View.input(INPUT.purchase);
+    if (String(MONEY).includes('.')) throw new Error(ERROR.invalidValue);
     this.purchaseLotto(Number(MONEY));
     this.View.printPurchaseResult(this.buyNum, this.lottoArrays);
   }

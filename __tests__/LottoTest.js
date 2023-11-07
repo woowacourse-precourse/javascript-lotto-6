@@ -30,6 +30,9 @@ describe('로또 클래스 테스트', () => {
     expect(() => {
       new Lotto([-1, 1, 2, 3, 4, 5]);
     }).toThrow('[ERROR]');
+    expect(() => {
+      new Lotto([5, 1, 2, 3, 4, 60]);
+    }).toThrow('[ERROR]');
   });
 
   // 아래에 추가 테스트 작성 가능
