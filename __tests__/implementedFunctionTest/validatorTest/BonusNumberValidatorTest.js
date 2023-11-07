@@ -1,5 +1,5 @@
-import BonusNumberValidator from '../../src/validator/BonusNumberValidator.js';
-import errorMessage from '../../src/constants/errorMessage.js';
+import BonusNumberValidator from '../../../src/validator/BonusNumberValidator.js';
+import errorMessage from '../../../src/constants/errorMessage.js';
 
 describe('BonusNumberValidator 테스트', () => {
 	test('숫자가 아닌 문자열이 입력되었을 때 에러', () => {

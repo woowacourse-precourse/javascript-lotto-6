@@ -1,5 +1,5 @@
-import PurchaseAmountValidator from '../../src/validator/PurchaseAmountValidator.js';
-import errorMessage from '../../src/constants/errorMessage.js';
+import PurchaseAmountValidator from '../../../src/validator/PurchaseAmountValidator.js';
+import errorMessage from '../../../src/constants/errorMessage.js';
 
 describe('PurchaseAmountValidator 테스트', () => {
 	test('1000단위의 수가 들어오지 않았을 때 에러', () => {

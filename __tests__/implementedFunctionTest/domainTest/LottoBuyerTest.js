@@ -1,5 +1,5 @@
+import LottoBuyer from '../../../src/LottoBuyer.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoBuyer from '../../src/LottoBuyer.js';
 
 const mockRandoms = (numbers) => {
 	MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();

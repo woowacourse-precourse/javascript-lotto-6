@@ -1,5 +1,5 @@
-import CheckLotto from '../../src/util/CheckLotto.js';
-import { shuffleArray } from '../../src/util/Shuffle.js';
+import CheckLotto from '../../../../src/util/CheckLotto.js';
+import { shuffleArray } from '../../../../src/util/Shuffle.js';
 
 describe('CheckLotto#util 테스트', () => {
 	test('getCorrectCount 테스트', () => {
