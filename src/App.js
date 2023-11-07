@@ -1,6 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lottos from './Lottos.js'
 import Winning from "./WinningNumber.js";
+import Bonus from './BonusNumber.js'
+
 
 class App {
   async play() {
@@ -31,9 +33,17 @@ class App {
     } catch(e) {
       MissionUtils.Console.print(e.message)
       await this.userInputLottoNumber();
-    }
+      return;
+    } await this.bonusNumberInput()
+  }
+
+  async bonusNumberInput() {
+      const inputBonusNumber = await MissionUtils.Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+      let beNumberedInputBonunsNumber = Number(inputBonusNumber)
+      this.bonus = new Bonus(beNumberedInputBonunsNumber)
+      console.log(this.bonus)
+  } 
     
   }
-}
 
 export default App;
