@@ -1,4 +1,5 @@
 import STRING_LIST from "../test_list/StringList";
+import ARRAY_LIST from "../test_list/ArrayList";
 import Formattor from "../../src/View/Formattor";
 import ValidationError from "../../src/Error/ValidationError";
 import ERROR_CONSTANT from "../../src/Constant/ErrorConstant";
@@ -96,6 +97,29 @@ describe('Formattor splitStringToArray', () => {
   test(`splitStringToArray 기능 검사, 입력받은 inputString를 delimiter 기준으로 split한 배열을 리턴한다. `, () => {
     testCases.forEach (({inputString, delimiter, expected}) => {
       expect(Formattor.splitStringToArray(inputString, delimiter)).toStrictEqual(expected);
+    });
+  });
+});
+
+describe('Formattor formatStringArrayToNumberArray', () => {
+  test('FormatParseAmountToNumber Function type이다 ', () => {
+    expect(typeof (Formattor.formatStringArrayToNumberArray)).toBe('function');
+  })
+  test('formatStringArrayToNumberArray 인자 유효성 검사, 인자의 타입이 배열이 아니면 에러를 리턴한다. ', () => {
+    ARRAY_LIST.errorArrayTestCases.forEach((input) => {
+      expect(() => {
+        Formattor.formatStringArrayToNumberArray(input)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY));
+    });
+  });
+  const testCases = [
+    {input: ['1','2','3'] , expected: [1, 2, 3]},
+    {input: ['1','23','4'], expected: [1, 23, 4]},
+  ];
+
+  test(`formatStringArrayToNumberArray 기능 검사, 인자로 받은 문자열 배열의 원소를 정수로 하는 배열을 생성하여 리턴한다. `, () => {
+    testCases.forEach (({input, expected}) => {
+      expect(Formattor.formatStringArrayToNumberArray(input)).toStrictEqual(expected);
     });
   });
 });

@@ -35,8 +35,18 @@ const splitStringToArray = (inputString, delimiter) => {
   return (inputString.split(delimiter));
 }
 
+const formatStringArrayToNumberArray = (inputArrayString) => {
+  if (!Array.isArray(inputArrayString)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+
+  const arrayNumber = inputArrayString.map((item) => formatStringToInteger(item));
+  return (arrayNumber);
+}
+
 export default {
   formatStringToInteger,
   getDivisionQuotient,
   splitStringToArray,
+  formatStringArrayToNumberArray,
 };
