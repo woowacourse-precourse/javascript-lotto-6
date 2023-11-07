@@ -5,7 +5,7 @@ import UserBaseNumbers from "./domain/UserBaseNumbers.js";
 import LottoEvaluator from "./domain/LottoEvaluator.js";
 import { runLotteryMachine } from "./domain/RunLotteryMachine.js";
 import { ask } from "./UI/inputView.js";
-import { print, prize, counts } from "./UI/outputView.js";
+import { print } from "./UI/outputView.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
@@ -19,7 +19,8 @@ class App {
   async play() {
     try {
       await this.setLotto();
-      this.createLotto();
+      const userTickets = this.createLotto();
+      this.evaluateLotto(userTickets);
     } catch (error) {
       Console.print(error.message);
       return Promise.reject(error);
@@ -53,6 +54,15 @@ class App {
       userTickets.push(myLotto.getNumbers());
     }
     return userTickets;
+  }
+
+  evaluateLotto(userTickets) {
+    print.prizeStatistics();
+    print.dashLine();
+
+    this.lottoEvaluator = new LottoEvaluator(this.base.getBaseNumbers(), this.bonus.getBonusNumber());
+    const results = this.lottoEvaluator.evaluateTickets(userTickets);
+    print.prizeResults(results);
   }
 }
 
