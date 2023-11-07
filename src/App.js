@@ -53,14 +53,25 @@ class App {
     }
   }
 
+  calculateRankByMatched(matched, matchedBonus) {
+    if (matched === 6) {
+      return 1;
+    }
+    if (matched === 5) {
+      return matchedBonus ? 2 : 3;
+    }
+    if (matched === 4) {
+      return 4;
+    }
+    if (matched === 3) {
+      return 5;
+    }
+  }
+
   setRank(matched, matchedBonus) {
     if (matched < 3) return;
 
-    let rank = 8 - matched;
-    if (rank === 3 && matchedBonus) {
-      rank = 2;
-    }
-
+    const rank = this.calculateRankByMatched(matched, matchedBonus);
     this.#rankedLotto.set(rank, this.#rankedLotto.get(rank) + 1);
     this.#totalPrize += LOTTO_PRIZE.get(rank);
   }
