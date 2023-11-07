@@ -1,10 +1,9 @@
-import CONSTANTS from './constants/Constants.js';
 import view from './utils/view.js';
 
 class App {
   constructor() {
-    this.purchaseAmount = CONSTANTS.DEFAULT_VALUE;
-    this.winningNumbers = [];
+    this.purchaseAmount = null;
+    this.winningNumbers = null;
   }
 
   async setLottoGameConfig() {
