@@ -7,7 +7,7 @@ const ErrorHandlerAndRetry = async (handler, retry) => {
   try {
     return await handler();
   } catch (err) {
-    OutputView.err({ message: err.message });
+    OutputView.printError({ message: err.message });
     if (err) return await retry();
     throw err;
   }

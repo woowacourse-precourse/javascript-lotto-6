@@ -3,6 +3,12 @@ import { INPUT_MESSAGE } from '../Utils/constants';
 import InputValidator from '../Validator/inputValidator';
 
 class InputView {
+  static async getInputWithValidate(userInput, validate) {
+    const input = await userInput();
+    validate(input);
+    return input;
+  }
+
   static async purchaseAmount() {
     const amount = await InputView.getInputWithValidate(
       async () => Console.readLineAsync(INPUT_MESSAGE.PURCHASE_AMOUNT),
@@ -16,7 +22,7 @@ class InputView {
       async () => Console.readLineAsync(INPUT_MESSAGE.WINNING_NUMBERS),
       InputValidator.winningNumbers,
     );
-    return numbers.split(',').map(number => Number(number));
+    return numbers.split(',').map((number) => Number(number));
   }
 
   static async bonusNumber() {
@@ -25,12 +31,6 @@ class InputView {
       InputValidator.bonusNumber,
     );
     return Number(bonusNumber);
-  }
-
-  static async getInputWithValidate(userInput, validate) {
-    const input = await userInput();
-    validate(input);
-    return input;
   }
 }
 

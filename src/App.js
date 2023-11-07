@@ -15,26 +15,26 @@ class App {
       this.printResult();
     } catch (err) {
       if (err) throw err;
-      OutputView.err({ message: err.message });
+      OutputView.printError({ message: err.message });
     }
   }
 
   printLotto() {
     try {
-      OutputView.lottoGenerator({
+      OutputView.printPurchasedList({
         purchasedList: this.#lottoGenerator.purchasedList,
       });
     } catch (err) {
-      OutputView.err({ message: err.message });
+      OutputView.printError({ message: err.message });
     }
   }
 
   printResult() {
     try {
       const { prizeResultMap, earningRate } = this.#result;
-      OutputView.result({ prizeResultMap, earningRate });
+      OutputView.printResult({ prizeResultMap, earningRate });
     } catch (err) {
-      OutputView.err({ message: err.message });
+      OutputView.printError({ message: err.message });
     }
   }
 }
