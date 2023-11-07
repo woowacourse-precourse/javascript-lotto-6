@@ -1,94 +1,103 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-import { createLotto, getNumbersOfLotto } from './LottoUtils.js';
-
-const lottoInstance = createLotto([1, 2, 3, 4, 5, 6]);
-
-const numbers = getNumbersOfLotto(lottoInstance);
-console.log(numbers);
-
-function getLottoNumbers(lotto) {
-  return lotto._numbers;
-}
 
 class App {
   constructor() {
-    this.amount = 0;
+    this.lottos = [];
+    this.lottoNumbers = [];
+    this.prizeMoney = 0;
+    this.purchaseAmount = 0;
+    this.matchedCount = { 3: 0, 4: 0, 5: 0, '5B': 0, 6: 0 };
   }
 
   async play() {
-    this.amount = await this.#getAmount();
-    MissionUtils.Console.print (`${this.amount}`);
-    this.#generateLottos();
-    const lottoNumbers = new Lotto (this.#randomNumbers());
-    const bonusNumber = this.#bonusNumber(lottoNumbers.getNumbers());
+    try {
+      this.purchaseAmount = await this.#requestPurchaseAmount();
+      this.#generateLottos();
+      const winningNumbers = await this.#requestWinningNumbers();
+      this.#calculatePrize(winningNumbers);
+      this.#printResult();
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
   }
-  
-  async #getAmount() {
-    let isValid = false;
-    let amount = 0;
 
-    while (!isValid) {
-      MissionUtils.Console.print("구입금액을 입력해 주세요.");
-      amount = await MissionUtils.Console.readLineAsync();
-      isValid = this.#validateAmount(amount);
-      if (isValid) {
-        MissionUtils.Console.print (`${this.amount}`);
+  async #requestPurchaseAmount() {
+    const input = await MissionUtils.Console.readLineAsync();
+    const amount = parseInt(input, 10);
+
+    if (isNaN(amount) || amount < 1000 || amount % 1000 !== 0) {
+      throw new Error ("[ERROR] 구입 금액은 1,000 단위의 정수여야 합니다.");
+    }
+    return amount;
+  }
+
+  #generateLottos() {
+    const count = this.purchaseAmount / 1000;
+    for (let i = 0; i < count; i++) {
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      this.lottos.push(new Lotto(numbers));
+      this.lottoNumbers.push(numbers);
+    }
+    MissionUtils.Console.print(`${count}개를 구매했습니다.`);
+    this.lottoNumbers.forEach(numbers =>
+      MissionUtils.Console.print(`[${numbers.join(', ')}]`)
+    );
+  }
+
+  async #requestWinningNumbers() {
+    const input = await MissionUtils.Console.readLineAsync();
+    const numbers = input.split(',').map(s => parseInt(s.trim(), 10));
+
+    try {
+      const lotto = new Lotto(numbers);
+      return lotto.numbers;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return this.#requestWinningNumbers();
+    }
+  }
+
+  #calculatePrize(winningNumbers) {
+    const bonusNumber = winningNumbers.pop()
+
+    this.lottos.forEach(lotto => {
+      const matchedCount = lotto.numbers.filter(number => winningNumbers.includes(number)).length;
+      const hasBonus = lotto.numbers.includes(bonusNumber);
+      this.prizeMoney += this.#calculateIndividualPrize(matchedCount, hasBonus);
+
+      if (matchedCount >= 3) {
+        const matchKey = matchedCount === 5 && hasBonus ? '5B' : matchedCount;
+        this.matchedCount[matchKey]++;
       }
-    }
-
-    return Number(amount);
+    });
   }
 
-  #validateAmount (amount) {
-    if (isNaN(amount) || amount <= 0) {
-      MissionUtils.Console.print("[ERROR] 유효한 금액을 입력해주세요.");
-      return false;
+  #calculateIndividualPrize(matchedCount, hasBonus) {
+    switch (matchedCount) {
+      case 3: return 5000;
+      case 4: return 50000;
+      case 5: return hasBonus ? 30000000 : 1500000;
+      case 6: return 2000000000;
+      default: return 0;
     }
-    return true;
   }
 
-  #generateLottos () {
-    const lottoCount = Math.floor(this.amount / 1000);
-    const lottos = [];
+  #printResult() {
+    const profit = this.prizeMoney
+    const rateOfReturn = ((profit / this.purchaseAmount) * 100)
+    const resultString = `
+    3개 일치 (5,000원) - ${this.matchedCount[3]}개
+    4개 일치 (50,000원) - ${this.matchedCount[4]}개
+    5개 일치 (1,500,000원) - ${this.matchedCount[5]}개
+    5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.matchedCount['5B']}개
+    6개 일치 (2,000,000,000원) - ${this.matchedCount[6]}개
+    총 수익률은 ${rateOfReturn}%입니다.
+    `;
 
-    for (let i=0; i < lottoCount; i++) {
-      lottos.push (createLotto(this.#randomNumbers()));
-    }
-
-    lottos.forEach (lotto => MissionUtils.Console.print(getNumbersOfLotto(lotto)));
-
-    MissionUtils.Console.print(`${numberOfLottos}개를 구매했습니다.`);
+    MissionUtils.Console.print(resultString);
   }
-  
-    #randomNumbers() {
-      const numbers = [];
-      while (numbers.length < 6) {
-        numbers.push (this.#uniqueNumber(numbers));
-      }
-      return numbers.sort ((a, b) => a - b);
-    }
-
-    #isNumberUnique (number, numberHistory) {
-      return !numberHistory.includes(number);
-    }
-
-    #uniqueNumber (numberHistory) {
-      let number;
-      do {
-        number = MissionUtils.Random.pickNumberInRange(1, 45);
-      } while (!this.#isNumberUnique(number, numberHistory));
-
-      return number;
-    }
-
-    #bonusNumber(excludedNumber) {
-      let number;
-      do {
-        number = MissionUtils.Random.pickNumberInRange(1, 45);
-      } while (excludedNumber.includes(number));
-      return number;
-    }
 }
+
 
 export default App;
