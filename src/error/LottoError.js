@@ -7,6 +7,7 @@ class LottoError extends Error {
     range:
       '[ERROR] 로또 번호 입력이 잘못되었습니다. 1과 45 사이의 숫자를 입력해주세요.\n',
     bonus: '[ERROR] 보너스 번호 입력이 잘못되었습니다.',
+    notMoney: '[ERROR] 구입 금액이 잘못되었습니다.\n',
     moneyMax:
       '[ERROR] 구입 금액이 잘못되었습니다. 구매 최대 금액은 100,000원입니다.\n',
     moneyAmount:
