@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const STATISTICS_INTRO = '\n당첨 통계\n---';
-
+const TICKET_COUNT_MESSAGE = '개를 구매했습니다.';
 const STATISTICS_HIT_RESULT = [
   '',
   '6개 일치 (2,000,000,000원) - ',
@@ -11,14 +11,17 @@ const STATISTICS_HIT_RESULT = [
   '3개 일치 (5,000원) - ',
 ];
 
+function getRateOfReturn(percent) {
+  return `총 수익률은 ${percent}%입니다.`;
+}
+
 export default class OutPutService {
-  printTicketCount(message) {
-    Console.print(message);
+  printTicketCount(tickets) {
+    Console.print(`\n${tickets}` + TICKET_COUNT_MESSAGE);
   }
 
   printTickets(ticket) {
-    const OUTPUT = '[' + ticket.join(', ') + ']';
-    Console.print(OUTPUT);
+    Console.print('[' + ticket.join(', ') + ']');
   }
 
   printStatIntro() {
@@ -27,8 +30,11 @@ export default class OutPutService {
 
   printHitStatistics(hits) {
     for (let i = 5; i >= 1; --i) {
-      const OUTPUT = STATISTICS_HIT_RESULT[i] + `${hits[i]}개`;
-      Console.print(OUTPUT);
+      Console.print(STATISTICS_HIT_RESULT[i] + `${hits[i]}개`);
     }
+  }
+
+  printRateOfReturn(rate) {
+    Console.print(getRateOfReturn(rate));
   }
 }

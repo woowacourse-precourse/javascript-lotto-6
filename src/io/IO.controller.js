@@ -1,4 +1,3 @@
-import { TICKET_COUNT_MESSAGE } from '../constants.js';
 import InputService from './Input.service.js';
 import OutPutService from './Output.service.js';
 import ValidationController from '../validation/Validation.controller.js';
@@ -35,7 +34,7 @@ export default class IOController {
   }
 
   printTicketCount(tickets) {
-    this.#OutputService.printTicketCount(`\n${tickets}` + TICKET_COUNT_MESSAGE);
+    this.#OutputService.printTicketCount(tickets);
   }
 
   printTicket(ticket) {
@@ -48,5 +47,9 @@ export default class IOController {
 
   printHitStatistics(hits) {
     this.#OutputService.printHitStatistics(hits);
+  }
+
+  printRateOfReturn(rate) {
+    this.#OutputService.printRateOfReturn(rate);
   }
 }
