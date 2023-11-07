@@ -13,6 +13,14 @@ const OutputView = {
     }
   },
 
+  printResult(result) {
+    Console.print('\n당첨 통계\n---');
+    for (const key in result) {
+      const { prize, count } = result[key];
+      Console.print(`${key} (${prize.toLocaleString()}원) - ${count}개`);
+    }
+  },
+
   printErrorMessage(message) {
     Console.print(`${message}\n`);
   },
