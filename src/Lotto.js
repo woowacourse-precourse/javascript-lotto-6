@@ -9,6 +9,11 @@ class Lotto {
     return lottoNumbers;
   }
 
+  static createLottos(inputAmount) {
+    const lottoCount = inputAmount / LOTTO.PRICE;
+    return Array.from({ length: lottoCount }, () => new Lotto(Lotto.generateLottoNumbers()));
+  }
+
   #numbers;
 
   constructor(numbers) {
