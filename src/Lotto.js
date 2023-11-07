@@ -13,6 +13,10 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  get info() {
+    return `[${this.#numbers.join(', ')}]`;
+  }
+
   getWinningInfo(winningNumbers, bonusNumber) {
     let matchCount = 0;
     let isBonusMatched = false;
@@ -26,10 +30,6 @@ class Lotto {
     });
 
     return { matchCount, isBonusMatched };
-  }
-
-  printNumbers() {
-    return this.#numbers;
   }
 }
 
