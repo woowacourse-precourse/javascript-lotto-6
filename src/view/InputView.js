@@ -34,10 +34,16 @@ const InputView = {
     }
   },
 
-  async readBonusNum() {
-    try {
-      return await Console.readLineAsync(MESSAGE_ASK.bonusNum);
-    } catch (error) {}
+  async readBonusNum(winningNums) {
+    while (true) {
+      try {
+        const bonusNum = await Console.readLineAsync(MESSAGE_ASK.bonusNum);
+        InputValidator.validateBonusNum(bonusNum, winningNums);
+        return bonusNum;
+      } catch (error) {
+        OutputView.printErrorMessage(error);
+      }
+    }
   },
 };
 

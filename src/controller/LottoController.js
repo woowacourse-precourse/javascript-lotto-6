@@ -3,7 +3,7 @@ import OutputView from "../view/OutputView.js";
 import Lotto from "../domain/Lotto.js";
 import RandomNumGenerator from "../utils/calc/RandomNumGenerator.js";
 import Sort from "../utils/calc/Sort.js";
-import { SEPARATOR, STATIC_NUMBER, RANK } from "../static/Static.js";
+import { RANK } from "../static/Static.js";
 import Calculator from "../utils/calc/Calculator.js";
 class LottoController {
   #lottoList = [];
@@ -74,7 +74,7 @@ class LottoController {
   }
 
   async setBonusNum() {
-    const bonusNum = await InputView.readBonusNum();
+    const bonusNum = await InputView.readBonusNum(this.#winningNums);
     this.#bonusNum = Number(bonusNum);
   }
 

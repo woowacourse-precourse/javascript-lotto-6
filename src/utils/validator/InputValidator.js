@@ -4,6 +4,8 @@ import {
   MESSAGE_ERROR,
 } from "../../static/Static.js";
 
+const regExLottoNum = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
+
 const InputValidator = {
   validatePurchasePrice(price) {
     if (!price) {
@@ -38,6 +40,18 @@ const InputValidator = {
     }
 
     return numArr;
+  },
+
+  validateBonusNum(bonusNum, winningNums) {
+    if (!bonusNum) {
+      throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.blank}`);
+    }
+    if (!regExLottoNum.test(bonusNum)) {
+      throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.invalidNum}`);
+    }
+    if (winningNums.includes(Number(bonusNum))) {
+      throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.inWinningNums}`);
+    }
   },
 };
 
