@@ -2,6 +2,16 @@ class App {
 	async play() {
 		const PURCHASE_AMOUNT =
 			await Console.readLineAsync('구입금액을 입력해 주세요.');
+		const PURCHASE_COUNT = Number(PURCHASE_AMOUNT) / 1000;
+		const LOTTERY_TICKET_LIST = [];
+
+		for (let i = 0; i < PURCHASE_COUNT; i += 1) {
+			const LOTTERY_TICKET = Random.pickUniqueNumbersInRange(1, 45, 6);
+			LOTTERY_TICKET.sort((a, b) => a - b);
+			LOTTERY_TICKET_LIST.push(LOTTERY_TICKET);
+		}
+
+		Console.print(LOTTERY_TICKET_LIST);
 
 		const WINNING_NUMBERS =
 			await Console.readLineAsync('당첨 번호를 입력해 주세요.');
