@@ -4,10 +4,10 @@ class LottoValidate{
 
     inputPurchaseAmountValidate = (purchaseAmount) => {
         if(purchaseAmount % 1000 !== 0){
-            throw Error(`${ERROR_MESSAGE.INPUT_PURCHASE_AMOUNT_ERROR}`);
+            throw new Error(`${ERROR_MESSAGE.INPUT_PURCHASE_AMOUNT_ERROR}`);
         }
         if(purchaseAmount.trim() === '' || purchaseAmount === undefined){
-            throw Error(`${ERROR_MESSAGE.INPUT_BLANK_ERROR}`);
+            throw new Error(`${ERROR_MESSAGE.INPUT_BLANK_ERROR}`);
         }
     }
 

@@ -9,10 +9,17 @@ class UserView{
     }
 
     async userInputPurchaseAmount(){
-        const AMOUNT = await Console.readLineAsync(MESSAGE.MSG_PURCHASE_AMOUNT);
-        this.lottoValidate.inputPurchaseAmountValidate(AMOUNT)
-        this.userOutputLottoCount(PURCHASE_AMOUNT);
-        return AMOUNT;
+        try{
+            const AMOUNT = await Console.readLineAsync(MESSAGE.MSG_PURCHASE_AMOUNT);
+            console.log(MESSAGE.MSG_PURCHASE_AMOUNT);
+            console.log(AMOUNT);
+            this.lottoValidate.inputPurchaseAmountValidate(AMOUNT)
+            this.userOutputLottoCount(AMOUNT);
+            return AMOUNT;
+        }catch(error){
+            Console.print(error.message);
+            await this.userInputPurchaseAmount();
+        }
     }
 
     async userInputWinningNumbers(){
