@@ -64,13 +64,9 @@ class LottoPrizeManager {
   }
 
   calculateAllLottoRank(lottoArray) {
-    const rankResult = {
-      FIRST: 0,
-      SECOND: 0,
-      THIRD: 0,
-      FOURTH: 0,
-      FIFTH: 0,
-    };
+    const rankResult = Object.fromEntries(
+      Object.keys(PRIZE.RANK).map((rank) => [rank, 0])
+    );
 
     lottoArray.forEach((lotto) => {
       const prizeRank = this.#getPrizeRank(lotto);
