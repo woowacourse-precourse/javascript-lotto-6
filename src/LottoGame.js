@@ -40,7 +40,7 @@ class LottoGame {
 
   async playLotteryGame() {
     try {
-      const amount = await this.#input.Price();
+      const amount = await this.#input.Price;
       const lotteries = this.#computer.sell(amount);
       this.#output.PurchaseInformation(lotteries.map((Lotto) => Lotto.getInformation()));
 
