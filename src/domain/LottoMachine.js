@@ -12,14 +12,11 @@ import WinningLotto from './WinningLotto.js'
 import { getMatchCount, hasLottoNumber } from '../utils/lotto.js'
 
 class LottoMachine {
-  /**
-   * @type {Lotto[]}
-   */
+  /** @type {Lotto[]} */
   #lottos
-  /**
-   * @type {WinningLotto}
-   */
+  /** @type {WinningLotto} */
   #winningLotto
+  /** @type {{ winningCount: number }[]} */
 
   constructor() {
     this.#lottos = []

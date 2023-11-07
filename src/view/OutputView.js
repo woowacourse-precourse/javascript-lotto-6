@@ -1,21 +1,33 @@
 import { Console } from '@woowacourse/mission-utils'
 import { RANKS } from '../constants/lotto.js'
 
+/**
+ * @typedef {import('../domain/Lotto').default} Lotto
+ */
+
+/**
+ * @typedef {Object} rank
+ * @property {number} index
+ * @property {number} matchCount
+ * @property {boolean} isBonusMatch
+ * @property {number} winning_price
+ */
+
 const OutputView = {
+  /** @param {Lotto[]} lottoList */
   printPurchaseLottoList: (lottoList) => {
     Console.print(`${lottoList.length}개를 구매했습니다.`)
     lottoList.forEach((lotto) => OutputView.printLotto(lotto))
   },
 
+  /** @param {Lotto} lotto */
   printLotto: (lotto) => {
-    const sortedLotto = [...lotto].sort((a, b) => a - b)
-    Console.print('[' + sortedLotto.join(', ') + ']')
+    const lottoNumbers = lotto.getLotto()
+    const sortedLottoNumbers = [...lottoNumbers].sort((a, b) => a - b)
+    Console.print('[' + sortedLottoNumbers.join(', ') + ']')
   },
 
-  /**
-   *
-   * @param {{ winningCount: string }[]} winningStatistics
-   */
+  /** @param {{ winningCount: string }[]} winningStatistics */
   printWinningStatistics: (winningStatistics) => {
     Console.print('당첨 통계')
     Console.print('---')
@@ -24,36 +36,40 @@ const OutputView = {
       const winningCount = winningStatistics[rank.index].winningCount
       OutputView.printRank(rank, winningCount)
     })
-
-    Console.print('---')
   },
 
-  /**
-   *
-   * @param {number} profitRate
-   */
+  /** @param {number} profitRate */
   printProfitRate: (profitRate) => {
     const profitRateString = profitRate.toLocaleString('ko-KR', {
       style: 'percent',
       minimumFractionDigits: 1,
     })
 
-    Console.print(profitRateString)
+    Console.print(`총 수익률은 ${profitRateString}입니다.`)
   },
 
   /**
    *
-   * @param {{ match: number, isBonus: boolean, winning_price: number }} rank
+   * @param {rank} rank
    * @param {number} winningCount
    */
   printRank: (rank, winningCount) => {
-    const { match, winning_price } = rank
+    const { matchCount, winning_price } = rank
 
-    const matchString = `${match}개 일치${rank.isBonus ? ', 보너스 볼 일치' : ''}`
+    const matchString = `${matchCount}개 일치${rank.isBonusMatch ? ', 보너스 볼 일치' : ''}`
     const winningPriceString = `${winning_price.toLocaleString('ko-KR')}원`
     const winningCountString = `${winningCount}개`
 
-    Console.print(`${matchString} (${winningPriceString}) - ${winningCountString}개`)
+    Console.print(`${matchString} (${winningPriceString}) - ${winningCountString}`)
+  },
+
+  /** @param {Error} error */
+  printError: (error) => {
+    Console.print(error.message)
+  },
+
+  printEmptyLine: () => {
+    Console.print('')
   },
 }
 
