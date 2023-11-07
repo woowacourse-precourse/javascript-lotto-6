@@ -1,9 +1,16 @@
 import Lotto from "../Lotto";
 import WinningLotto from "../WinningLotto";
+import { WINNING_RESULT_DEFAULT } from "../constants";
 
 class LottoModel {
   #number_of_lotto; // 로또의 갯수
   #lottos; // 구입한 로또 배열
+  #winning_lotto; // 당첨 로또
+  #winning_result; // 등수별 당첨 횟수
+
+  constructor() {
+    this.#winning_result = new Object(WINNING_RESULT_DEFAULT);
+  }
 
   /**
    * 현재 저장된 로또의 갯수를 리턴하는 메소드
@@ -35,6 +42,33 @@ class LottoModel {
    */
   set_lottos(lottos) {
     this.#lottos = lottos;
+  }
+
+  /**
+   * 당첨 로또를 리턴하는 메소드
+   * @returns {WinningLotto}
+   */
+  get_winning_lotto() {
+    return this.#winning_lotto;
+  }
+
+  /**
+   * 당첨 로또를 설정하는 메소드
+   * @param {WinningLotto}
+   */
+  set_winning_lotto(lotto) {
+    this.#winning_lotto = lotto;
+  }
+
+  set_winning_result(winning_result) {
+    this.#winning_result = winning_result;
+  }
+
+  /**
+   * 당첨 내역을 리턴하는 메소드
+   */
+  get_winning_result() {
+    return this.#winning_result;
   }
 }
 
