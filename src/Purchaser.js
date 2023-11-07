@@ -3,6 +3,10 @@ import Helper from './_shared/helper.js';
 class Purchaser {
   #lottos;
 
+  get lottos() {
+    return this.#lottos;
+  }
+
   constructor() {
     this.#lottos = [];
   }

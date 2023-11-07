@@ -5,18 +5,21 @@ import Purchase from './Purchase.js';
 import Purchaser from './Purchaser.js';
 import Lotto from './Lotto.js';
 import Bonus from './Bonus.js';
+import Statistics from './Statistics.js';
 
 class App {
   #purchase;
   #purchaser;
   #lotto;
   #bonus;
+  #statistics;
 
   async play() {
     await this.#requestPurchase();
     this.#respondPurchaseResult();
     await this.#requestWinningNumbers();
     await this.#requestBonusNumber();
+    this.#respondWinningStatistics();
   }
 
   async #requestPurchase() {
@@ -46,7 +49,8 @@ class App {
   async #requestWinningNumbers() {
     try {
       const value = await Util.readLineAsyncConsole(`${RequestMessage.WinningNumbers}\n`);
-      const numbers = value.split(',').map(v => Number(v.trim()));
+      const numbers = value.split(',')
+        .map(v => Number(v.trim()));
 
       Util.printConsole('');
       this.#lotto = new Lotto(numbers);
@@ -68,6 +72,23 @@ class App {
       Util.printConsole(`${e.message}`);
       await this.#requestBonusNumber();
     }
+  }
+
+  #respondWinningStatistics() {
+    const winningNumbers = this.#lotto.numbers;
+    const bonusNumber = this.#bonus.number;
+    const { lottos } = this.#purchaser;
+
+    this.#statistics = new Statistics(winningNumbers, bonusNumber, lottos);
+    this.#statistics.stat.forEach(stat => {
+      const message = this.#getStatisticsMessage(stat);
+      Util.printConsole(message);
+    });
+  }
+
+  #getStatisticsMessage(stat) {
+    const prize = Util.numberWithCommas(stat.prize);
+    return `${stat.numberOfMatches}개 일치${stat.allowBonus ? ', 보너스 볼 일치' : ''} (${prize}원) - ${stat.count}개`;
   }
 }
 
