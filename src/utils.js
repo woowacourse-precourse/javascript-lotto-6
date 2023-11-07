@@ -7,3 +7,7 @@ export function readInput(input) {
 export function printOutput(output) {
   return MissionUtils.Console.print(output);
 }
+
+export function pickUniqueRandomNumbers(min, max, count) {
+  return MissionUtils.Random.pickUniqueNumbersInRange(min, max, count);
+}
