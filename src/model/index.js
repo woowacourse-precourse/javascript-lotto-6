@@ -1,4 +1,5 @@
 import PurchaseAmount from '../PurchaseAmount.js';
+import { LOTTO } from '../constants/System.js';
 import LottoGenerator from './LottoGenerator.js';
 
 class LottoModel {
@@ -40,13 +41,15 @@ class LottoModel {
   }
 
   #calculateRateOfReturn(result) {
-    let rateOfReturn = 0;
+    let totalPrizeMoney = 0;
 
     result.forEach((count, rank) => {
-      rateOfReturn += LottoModel.LOTTO_PRIZE[rank] * count;
+      totalPrizeMoney += LottoModel.LOTTO_PRIZE[rank] * count;
     });
 
-    return (rateOfReturn / (this.#userLottos.length * 1000)) * 100;
+    const rateOfReturn = (totalPrizeMoney / (this.#userLottos.length * 1000)) * 100;
+
+    return rateOfReturn;
   }
 }
 
