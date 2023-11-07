@@ -53,7 +53,7 @@ class App {
   showLottoList() {
     MissionUtils.Console.print(`${this.#cost / LOTTO_PRICE}개를 구매했습니다.`);
     this.#lottos.map((lotto) => {
-      MissionUtils.Console.print(lotto.getNumbers());
+      MissionUtils.Console.print(`[${lotto.getNumbers().join(", ")}]`);
     });
   }
   // 당첨 번호 관련 함수들
@@ -110,11 +110,11 @@ class App {
   //당첨 내역 출력 관련 함수
   showWinningDetail() {
     MissionUtils.Console.print("당첨 통계\n---");
-    MissionUtils.Console.print(`3개 일치 (${FIFTH})원 - ${this.#winningDetail[0]}개`);
-    MissionUtils.Console.print(`4개 일치 (${FOURTH})원 - ${this.#winningDetail[1]}개`);
-    MissionUtils.Console.print(`5개 일치 (${THIRD})원 - ${this.#winningDetail[2]}개`);
-    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (${SECOND})원 - ${this.#winningDetail[3]}개`);
-    MissionUtils.Console.print(`6개 일치 (${FIRST})원 - ${this.#winningDetail[4]}개`);
+    MissionUtils.Console.print(`3개 일치 (${FIFTH.toLocaleString("en-US")}원) - ${this.#winningDetail[0]}개`);
+    MissionUtils.Console.print(`4개 일치 (${FOURTH.toLocaleString("en-US")}원) - ${this.#winningDetail[1]}개`);
+    MissionUtils.Console.print(`5개 일치 (${THIRD.toLocaleString("en-US")}원) - ${this.#winningDetail[2]}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (${SECOND.toLocaleString("en-US")}원) - ${this.#winningDetail[3]}개`);
+    MissionUtils.Console.print(`6개 일치 (${FIRST.toLocaleString("en-US")}원) - ${this.#winningDetail[4]}개`);
   }
   calculateRateOfReturn() {
     this.#rateOfReturn =
@@ -127,7 +127,7 @@ class App {
       100;
   }
   printRateOfReturn() {
-    MissionUtils.Console.print(`총 수익률은 ${parseFloat(this.#rateOfReturn.toFixed(1))}%입니다.`);
+    MissionUtils.Console.print(`총 수익률은 ${parseFloat(this.#rateOfReturn.toFixed(1)).toLocaleString("en-US")}%입니다.`);
   }
 
   async play() {
