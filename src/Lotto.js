@@ -14,6 +14,12 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error(INPUT_ERROR_MESSAGE.MORE_WINNING_NUMBERS_ERROR);
     }
+
+    // 중복된 숫자 확인 추가
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== 6) {
+      throw new Error(INPUT_ERROR_MESSAGE.DUPLICATE_WINNING_NUMBER);
+    }
   }
 
   print() {

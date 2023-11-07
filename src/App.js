@@ -3,6 +3,7 @@ import {
   INPUT_MESSAGE,
   INPUT_ERROR_MESSAGE,
   SYMBOL,
+  RESULT_MESSAGE,
 } from './constants/constants';
 import Lotto from './Lotto';
 
@@ -16,14 +17,11 @@ class App {
   async play() {
     try {
       await this.#inputPurchaseAmount();
-      Console.print('');
       this.#purchaseLottos();
       this.#printAllLottos();
-      Console.print('');
       await this.#inputWinningNumbers();
-      Console.print('');
       await this.#inputBonusNumber();
-      Console.print('');
+      this.#calculateWinningStatistics();
     } catch (err) {
       Console.print(err.message);
       await this.play();
@@ -45,6 +43,7 @@ class App {
     if (checkValidNumber % 1000 !== 0) {
       throw new Error(INPUT_ERROR_MESSAGE.PURCHASE_AMOUNT_ERROR);
     }
+    this.#purchaseAmount = checkValidNumber;
     this.#lottoCount = checkValidNumber / 1000;
   }
 
@@ -56,15 +55,12 @@ class App {
   }
 
   #getRandomNumbers() {
-    const randomNumbers = [];
-    while (randomNumbers.length < 6) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 45);
-      if (!randomNumbers.includes(String(number))) {
-        randomNumbers.push(String(number));
-      }
-    }
-    const sortRandomNumbers = randomNumbers.sort((a, b) => a - b);
-    return sortRandomNumbers;
+    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      45,
+      6,
+    );
+    return randomNumbers.sort((a, b) => a - b);
   }
 
   #printAllLottos() {
@@ -77,10 +73,10 @@ class App {
   async #inputWinningNumbers() {
     Console.print(INPUT_MESSAGE.WINNING_NUMBERS);
     const winningNumbers = await Console.readLineAsync('');
-    this.#validateWinningNumbers(winningNumbers);
+    await this.#validateWinningNumbers(winningNumbers);
   }
 
-  #validateWinningNumbers(winningNumbers) {
+  async #validateWinningNumbers(winningNumbers) {
     const splitWinningNumbers = winningNumbers.split(SYMBOL.COMMA);
 
     if (splitWinningNumbers.length !== 6) {
@@ -97,7 +93,7 @@ class App {
         throw new Error(INPUT_ERROR_MESSAGE.DUPLICATE_WINNING_NUMBER);
       }
 
-      this.#winningNumbers.push(splitWinningNumbers);
+      this.#winningNumbers.push(checkValidWinningNumbers);
     });
   }
   async #inputBonusNumber() {
@@ -115,6 +111,11 @@ class App {
       throw new Error(INPUT_ERROR_MESSAGE.DUPLICATE_BONUS_NUMBER);
     }
     this.#bonusNumber = checkValidateNumber;
+  }
+
+  #calculateWinningStatistics() {
+    Console.print(INPUT_MESSAGE.WINNING_MESSAGE);
+    Console.print(SYMBOL.DIVIDER);
   }
 }
 
