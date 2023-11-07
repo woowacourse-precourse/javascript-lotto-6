@@ -13,7 +13,7 @@ export default class LottoMachine {
 
   async run() {
     this.#player = new LottoPlayer(await this.#getPurchaseAmount());
-    this.#makeLottos(this.#player.getPurchaseAmount());
+    this.#makeLottoNumbers(this.#player.getPurchaseAmount());
     OutputView.printLottoTickets(this.#player.getLottoTickets());
     this.#winningNumbers = await this.#getWinningNumbers();
     OutputView.printNewLine();
@@ -32,17 +32,16 @@ export default class LottoMachine {
       LOTTO_RULES.pickCount,
     );
 
-    const sortNumbers = this.#sortLottoNumbers(pickRandomUniqueNumbers);
+    const sortNumbers = this.#getAscendingOrderedNumbers(pickRandomUniqueNumbers);
 
     return new Lotto(sortNumbers);
   }
 
-  #sortLottoNumbers(lottoNumbers) {
-    const sortLottoNumbers = lottoNumbers.sort((number1, number2) => number1 - number2);
-    return sortLottoNumbers;
+  #getAscendingOrderedNumbers(numbers) {
+    return numbers.sort((number1, number2) => number1 - number2);
   }
 
-  #makeLottos(purchaseAmount) {
+  #makeLottoNumbers(purchaseAmount) {
     const lottoTicketCount = purchaseAmount / LOTTO_MACHINE_RULES.inputUnit;
 
     for (let i = 1; i <= lottoTicketCount; i += 1) {
