@@ -7,18 +7,31 @@ const WINNING_COUNT = Array(5).fill(0);
 
 class App {
   async play() {
+    try {
+      this.startGame();
+    } catch (error) {
+      throw new Error("[ERROR]");
+    }
+  }
+
+  async startGame(){
     const purchaseAmount = await this.getPurchaseCount();
     const purchaseCount = parseInt(purchaseAmount)/1000;
     const purchaseLotto = this.printPurchaseLotto(purchaseCount);
+    
     const winningNumbers = await GetInputValue.getWinningNumbers();
     const bonusNumber = await GetInputValue.getBonusNumber();
+
+    if(winningNumbers.includes(bonusNumber)){
+      throw new Error(ERROR_MESSAGE.ALREADY_EXIST);
+    }
+
     this.getWinningStatistics(purchaseLotto, winningNumbers, bonusNumber);
     this.printWinningStatistics();
     const winningMoney = this.getWinningMoney();
     const rateOfReturn = this.getRateOfReturn(purchaseAmount, winningMoney);
     this.printRateOfReturn(rateOfReturn);
   }
-
   async getPurchaseCount(){
     const purchaseAmount = await GetInputValue.getPurchaseAmount();
     return purchaseAmount;

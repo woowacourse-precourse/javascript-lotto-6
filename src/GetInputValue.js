@@ -1,16 +1,16 @@
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "./constants/gameConstant";
 import { ERROR_MESSAGE } from "./constants/errorMessage";
+import Lotto from "./Lotto";
 
 class GetInputValue{
     static async getPurchaseAmount(){
         const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.INPUT_PURCHASE_AMOUNT);
-        const checkPurchaseAmount = purchaseAmount.split('');
         if(purchaseAmount === ''){
             throw new Error(ERROR_MESSAGE.NO_INPUT);
         }
-        if(Number.isNaN(purchaseAmount)){
-            throw new Error('[ERROR]');
+        if(isNaN(purchaseAmount)){
+            throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
         }
         if(parseInt(purchaseAmount)%1000!==0){
             throw new Error(ERROR_MESSAGE.WRONG_UNIT_OF_MONEY);
@@ -22,18 +22,10 @@ class GetInputValue{
         const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.INPUT_WINNING_NUMBERS);
         const checkWinningNumbers = winningNumbers.split(',');
         checkWinningNumbers.sort();
-        if(checkWinningNumbers.length !== 6){
-            throw new Error(ERROR_MESSAGE.NO_WINNING_NUMBERS);
+        for(let i=0; i<checkWinningNumbers.length; i++){
+            checkWinningNumbers[i] = parseInt(checkWinningNumbers[i]);
         }
-        if(new Set(checkWinningNumbers).size !== checkWinningNumbers.length){
-            throw new Error(ERROR_MESSAGE.INPUT_DUPLICATION);
-        }
-        for(let i=0; i<6; i++){
-            if(parseInt(checkWinningNumbers[i])>45 || parseInt(checkWinningNumbers[i])<1){
-                throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
-            }
-            checkWinningNumbers[i]=parseInt(checkWinningNumbers[i]);
-        }
+        new Lotto(checkWinningNumbers);
         return checkWinningNumbers;
     }
 
@@ -42,13 +34,9 @@ class GetInputValue{
         if(bonusNumber === ''){
             throw new Error(ERROR_MESSAGE.NO_INPUT);
         }
-        if(Number.isNaN(parseInt(bonusNumber))){
+        if(isNaN(bonusNumber)){
             throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
         }
-        if(parseInt(bonusNumber)>45 || parseInt(bonusNumber)<1){
-            throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
-        }
-        return bonusNumber;
     }
 }
 
