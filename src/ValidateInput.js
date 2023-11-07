@@ -32,7 +32,7 @@ export const Validator = {
     if (input.some(isOutRange)) throw ERROR_MESSAGE.RANGE_INVALID;
   },
   invalidBonusNumber(input, winningNumber) {
-    if (Number(input) in winningNumber)
+    if (winningNumber.includes(Number(input)))
       throw ERROR_MESSAGE.BONUS_NUMBER_INVALID;
   },
   invalidNumberRange(input) {

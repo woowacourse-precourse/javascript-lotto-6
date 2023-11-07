@@ -17,3 +17,11 @@ export const generateLottos = (lottoCount) => {
 
   return lottos;
 };
+
+export const returnRateCalculate = (result, payment) => {
+  let winnnings = 0;
+  for (const rank in result) {
+    winnnings += result[rank].matched * result[rank].prize;
+  }
+  return ((winnnings / payment) * 100).toFixed(1);
+};

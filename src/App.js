@@ -17,6 +17,13 @@ class App {
 
   constructor() {
     this.lottos = [];
+    this.result = {
+      fifth: { count: 3, prize: 5000, matched: 0 },
+      fourth: { count: 4, prize: 50000, matched: 0 },
+      third: { count: 5, bonus: false, prize: 1500000, matched: 0 },
+      second: { count: 5, bonus: true, prize: 30000000, matched: 0 },
+      first: { count: 6, prize: 2000000000, matched: 0 },
+    };
   }
 
   async play() {
@@ -25,6 +32,7 @@ class App {
     await this.readWinningNumber();
     await this.readBonusNumber();
     this.lottoDrawing();
+    this.lottoStatistics();
   }
 
   async readPayment() {
@@ -80,9 +88,29 @@ class App {
 
   lottoDrawing() {
     this.lottos.forEach((lotto) => {
-      lottoMatched = lotto.draw(this.#winningNumber);
-      bonusMatched = lotto.bonusDraw(this.#bonusNumber);
+      const lottoMatched = lotto.draw(this.#winningNumber);
+      const bonusMatched = lotto.bonusDraw(this.#bonusNumber);
+
+      for (const rank in this.result) {
+        if (rank === "third" || rank === "second") {
+          if (
+            this.result[rank].count === lottoMatched &&
+            this.result[rank].bonus === bonusMatched
+          ) {
+            this.result[rank].matched++;
+          }
+        } else {
+          if (this.result[rank].count === lottoMatched) {
+            this.result[rank].matched++;
+          }
+        }
+      }
     });
+  }
+
+  lottoStatistics() {
+    Output.writeLottoStatics(this.result);
+    Output.writeReturnRate(this.result, this.#payment);
   }
 }
 
