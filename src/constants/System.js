@@ -8,4 +8,5 @@ export const LOTTO = {
   numberRangeStart: 1,
   numberRangeEnd: 45,
   numberCount: 6,
+  price: 1000,
 };

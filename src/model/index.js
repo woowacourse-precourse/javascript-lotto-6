@@ -47,7 +47,7 @@ class LottoModel {
       totalPrizeMoney += LottoModel.LOTTO_PRIZE[rank] * count;
     });
 
-    const rateOfReturn = (totalPrizeMoney / (this.#userLottos.length * 1000)) * 100;
+    const rateOfReturn = (totalPrizeMoney / (this.#userLottos.length * LOTTO.price)) * 100;
 
     return rateOfReturn;
   }
