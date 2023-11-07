@@ -37,9 +37,16 @@ class Lotto {
   }
 
   #validate(numbers) {
+    this.#validateFalsy(numbers);
     this.#validateLength(numbers);
     this.#validateLottoNumbers(numbers);
     this.#validateDuplicate(numbers);
+  }
+
+  #validateFalsy(numbers) {
+    if (!numbers) {
+      throw CustomError.lotto(ERROR.message.lotto.falsy);
+    }
   }
 
   #validateLength(numbers) {

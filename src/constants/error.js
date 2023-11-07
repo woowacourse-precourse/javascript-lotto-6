@@ -8,6 +8,7 @@ const lotto = Object.freeze({
   notUnique: '로또 번호는 중복되지 않아야 합니다.',
   notInRange: '로또 번호는 1부터 45 사이의 숫자여야 합니다.',
   invalidUnit: '1000원 단위로 입력해주세요.',
+  falsy: '로또 번호를 입력해주세요.',
 });
 
 const message = Object.freeze({
