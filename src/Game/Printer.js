@@ -1,6 +1,6 @@
-import Constants from "../Util/Constants.js";
 import IO from "../Util/IOHandler.js";
 import Generator from "./Generator.js";
+import Constants from "../Util/Constants.js";
 
 export default class Printer {
   #ticket;
@@ -10,7 +10,6 @@ export default class Printer {
   };
 
   constructor(number) {
-    this.Generator = new Generator();
     this.amount = this.getAmount(number);
     this.pack();
     this.print();
@@ -27,8 +26,8 @@ export default class Printer {
 
     let index = 0;
     while (index < this.amount) {
-      const random = this.Generator.random();
-      const lotto = this.Generator.lotto(random);
+      const random = Generator.random();
+      const lotto = Generator.lotto(random);
       this.#ticket.push(lotto);
       index += 1;
     }
@@ -38,9 +37,10 @@ export default class Printer {
     let index = 0;
     while (index < this.amount) {
       const unpackedLotto = this.#ticket[index];
-      IO.print(`[${unpackedLotto.show().join(", ")}]`);
+      IO.print(`[${unpackedLotto.get().join(", ")}]`);
       index += 1;
     }
+    IO.print("");
   }
 
   getTicket() {
