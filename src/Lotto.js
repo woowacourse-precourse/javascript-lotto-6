@@ -1,3 +1,5 @@
+import { Random, Console } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -18,10 +20,17 @@ class Lotto {
 function lottoNumbersGenerator(amount) {
   const randomNumbers = [];
   for (let i = 0; i < amount; i++) {
-    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    randomNumbers.push(numbers.sort());
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    randomNumbers.push(numbers);
   }
   return randomNumbers;
+}
+
+function printBuyingLottoNumbers(numberList) {
+  Console.print(`${numberList.length}개를 구매했습니다.`);
+  for (let i = 0; i < numberList.length; i++) {
+    Console.print(numberList[i].sort((a, b) => a - b));
+  }
 }
 
 export default Lotto;
