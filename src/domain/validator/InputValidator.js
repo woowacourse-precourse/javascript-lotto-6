@@ -1,9 +1,6 @@
 import ErrorMessage from '../errors/ErrorMessage.js';
 import ERROR from '../../constants/error.js';
-
-function validatePriceUnit(input) {}
-
-function validateNaturalNumber() {}
+import NUMBER from '../../constants/number.js';
 
 function validateNoDuplication() {}
 
@@ -21,14 +18,25 @@ class InputValidator {
   }
 
   validatePositiveNumber(input) {
-    if (Number(input) < 0) {
+    if (input < 0) {
       throw new ErrorMessage(ERROR.number.negativeNumber);
     }
   }
 
   validateInteger(input) {
-    if (!Number.isInteger(Number(input))) {
+    if (!Number.isInteger(input)) {
       throw new ErrorMessage(ERROR.number.notInterger);
+    }
+  }
+  validateNaturalNumber(input) {
+    this.validateNumber(input);
+    this.validatePositiveNumber(input);
+    this.validateInteger(input);
+  }
+
+  validateUnitCost(input) {
+    if (input % NUMBER.unitCost != 0) {
+      throw new ErrorMessage(ERROR.cost.unmatchedUnit);
     }
   }
 }
