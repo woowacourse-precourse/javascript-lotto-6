@@ -68,7 +68,7 @@ const checkDuplicationNumber = (input) => {
 
 /**
  * @public
- * @param {Object | string} lottoNumbers
+ * @param {number[] | string} lottoNumbers
  */
 const validateLottoNumbers = (lottoNumbers) => {
   const splitLottoNumbers =
