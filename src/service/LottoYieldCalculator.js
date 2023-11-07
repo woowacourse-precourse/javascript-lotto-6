@@ -1,24 +1,30 @@
 export default class LottoYieldCalculator {
-  #setting;
+  setting;
   constructor(setting) {
-    this.#setting = setting;
+    this.setting = setting;
   }
   caculateYieldRate(result, money) {
-    const totalPrize = Object.entries(result).reduce(
-      (accPrize, [key, matchCount]) => {
-        return accPrize + this.#setting.WINNINGS[key].prize * matchCount;
-      },
-      0
-    );
+    const totalPrize = this.#getTotalPrize(result);
     const yieldRate = Number(((totalPrize / money) * 100).toFixed(2));
     return yieldRate;
   }
 
+  #getTotalPrize(result) {
+    const totalPrize = Object.entries(result).reduce(
+      (accPrize, [key, matchCount]) => {
+        return accPrize + this.#calculatePrizeForRank(key, matchCount);
+      },
+      0
+    );
+    return totalPrize;
+  }
+
+  #calculatePrizeForRank(rank, count) {
+    return this.setting.WINNINGS[rank].prize * count;
+  }
+
   getResult(lottosNumbers, drawnLottoNumbers, bonusNumber) {
-    const result = Object.keys(this.#setting.WINNINGS).reduce((acc, prize) => {
-      acc[prize] = 0;
-      return acc;
-    }, {});
+    const result = this.#initializeResultObject();
     lottosNumbers.forEach((lottoNumbers) => {
       const { matchCount, hasBonusNumber } = this.#checkMatchCount(
         lottoNumbers,
@@ -28,6 +34,14 @@ export default class LottoYieldCalculator {
       const prize = this.#findPrizeKey(matchCount, hasBonusNumber);
       if (prize) result[prize] += 1;
     });
+    return result;
+  }
+
+  #initializeResultObject() {
+    const result = Object.keys(this.setting.WINNINGS).reduce((acc, prize) => {
+      acc[prize] = 0;
+      return acc;
+    }, {});
     return result;
   }
 
@@ -41,10 +55,10 @@ export default class LottoYieldCalculator {
   }
 
   #findPrizeKey(matchCount, isBonusMatched) {
-    for (const [key, { matchNum }] of Object.entries(this.#setting.WINNINGS)) {
+    for (const [key, { matchNum }] of Object.entries(this.setting.WINNINGS)) {
       if (
         matchCount === matchNum &&
-        (!isBonusMatched || key === this.#setting.PRIZE_RANKS.SECOND_PRIZE)
+        (!isBonusMatched || key === this.setting.PRIZE_RANKS.SECOND_PRIZE)
       ) {
         return key;
       }
