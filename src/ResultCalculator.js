@@ -1,5 +1,5 @@
 import LOTTO from './constants/lotto.js';
-import WINNING_PRICE from './constants/winningPrice.js';
+import WINNING_INFO from './constants/winningInfo.js';
 import { roundToOneDecimalPlace } from './utils/function.js';
 
 class ResultCalculator {
@@ -65,7 +65,7 @@ class ResultCalculator {
   #getSumOfWinningAmount() {
     return Object.entries(this.#cntRank).reduce((acc, entry) => {
       const [rank, cnt] = entry;
-      return acc + cnt * WINNING_PRICE[rank];
+      return acc + cnt * WINNING_INFO[rank].prizeMoney;
     }, 0);
   }
 }
