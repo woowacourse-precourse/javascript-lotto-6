@@ -23,6 +23,9 @@ class Lotto {
       if(+num < 1 || +num > 45) {
         throw new Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
       }
+      if(isNaN(num)) {
+        throw new Error(`${ERROR_MESSAGE.NUMBER_RANGE_ERROR}`);
+      }
     }
   }
 }
