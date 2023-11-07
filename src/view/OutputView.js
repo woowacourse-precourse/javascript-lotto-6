@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT_MESSAGE_FUNCTION } from '../constants/Messages.js';
+import { OUTPUT_MESSAGE, OUTPUT_MESSAGE_FUNCTION } from '../constants/Messages.js';
 
 const OutputView = {
   /**
@@ -15,8 +15,16 @@ const OutputView = {
   printLottos(userLottos) {
     this.print(OUTPUT_MESSAGE_FUNCTION.userLottos(userLottos));
     userLottos.forEach((userLotto) => {
-      this.print(userLotto);
+      this.print(`[${userLotto.join(', ')}]`);
     });
+  },
+
+  printStatistics({ ranks, rateOfReturn }) {
+    this.print(OUTPUT_MESSAGE.statisticsMessage);
+    OUTPUT_MESSAGE.statistics.forEach((message, index) =>
+      this.print(`${message}${ranks.get(`${5 - index}등`) ?? 0}개`),
+    );
+    this.print(OUTPUT_MESSAGE_FUNCTION.statistics(rateOfReturn));
   },
 };
 
