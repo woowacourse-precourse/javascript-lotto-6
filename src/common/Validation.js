@@ -42,3 +42,34 @@ export const winningNumberErrorCase = (error) => {
       Console.print(`${ERROR_MESSAGE.WINNING_NUMBER}`);
   }
 };
+
+// 11. 보너스 번호 유효성 검사
+export const validateBonus = (input, winningNumbers) => {
+  let bonus = input.split(",").map((el) => Number(el));
+
+  if (bonus.length !== 1) {
+    throw new Error(`${ERROR_MESSAGE.BONUS_NUMBER}`);
+  }
+  // 당첨 번호와 중복되는지
+  if (winningNumbers.includes(Number(input))) {
+    throw new Error(`${ERROR_MESSAGE.BONUS_NUMBER_DUBLE_CHECK}`);
+  }
+
+  checkValidRange(bonus, ERROR_MESSAGE.BONUS_NUMBER);
+
+  return bonus;
+};
+
+// 11-1 보너스번호 에러상황에 따른 메세지
+export const bonusNumberErrorCase = (error) => {
+  switch (error) {
+    case `${ERROR_MESSAGE.BONUS_NUMBER}`:
+      Console.print(`${ERROR_MESSAGE.BONUS_NUMBER}`);
+      break;
+    case `${ERROR_MESSAGE.BONUS_NUMBER_DUBLE_CHECK}`:
+      Console.print(`${ERROR_MESSAGE.BONUS_NUMBER_DUBLE_CHECK}`);
+      break;
+    default:
+      Console.print("[ERROR]");
+  }
+};
