@@ -2,7 +2,7 @@ import LottoShop from "../domains/LottoShop.js";
 import TargetLotto from "../domains/TargetLotto.js";
 import User from "../domains/User.js";
 import CalculatorLottoResult from "../domains/CalculatorLottoResult.js";
-import OutPutView from "../views/outPutView.js";
+import OutPutView from "../views/OutPutView.js";
 import InputView from "../views/InputView.js";
 
 class LottoController {
