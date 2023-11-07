@@ -12,69 +12,66 @@ class LottoGame {
   #prize;
 
   async gameStart() {
-    await this.getPurchaseAmount();
-    const count = await this.getLottoCount();
-    await this.getRandomLottoList(count);
+    this.#purchaseAmount = await InputView.readPurchaseAmount();
+    const count = this.getLottoCount();
+    this.#lottoList = await this.getRandomLottoList(count);
 
     this.printLottoListInfo();
 
-    await this.getWinningLotto();
-    await this.getBonusNumber();
+    this.#winningLotto = await this.getWinningLotto();
+    this.#bonusNumber = await this.getBonusNumber();
 
+    this.initResult();
     await this.checkResult();
     this.#prize = await this.calculateRevenuRate();
     this.printResult();
   }
 
-  async getPurchaseAmount() {
-    this.#purchaseAmount = await InputView.readPurchaseAmount();
-  }
-
-  async getLottoCount() {
-    const lottoCount = await (this.#purchaseAmount / PRICE_UNIT);
+  getLottoCount() {
+    const lottoCount = Math.floor(this.#purchaseAmount / PRICE_UNIT);
     return lottoCount;
   }
 
   async getRandomLottoList(count) {
-    this.#lottoList = [];
-
+    const lottoList = [];
     for (let i = 0; i < count; i++) {
       const randomNumbers = await this.getRandomNumbers();
-      this.#lottoList.push(new Lotto(randomNumbers));
+      lottoList.push(new Lotto(randomNumbers));
     }
+    return lottoList;
   }
 
   async getRandomNumbers() {
     const randomNumbers = await Random.pickUniqueNumbersInRange(1, 45, 6);
-    const sortedList = await this.sortRandomNumbers(randomNumbers);
-    return sortedList;
-  }
-
-  async sortRandomNumbers(numbers) {
-    const sortedList = await numbers.sort((a, b) => a - b);
+    const sortedList = randomNumbers.sort((a, b) => a - b);
     return sortedList;
   }
 
   printLottoListInfo() {
     OutputView.printLottoCount(this.#lottoList);
-    this.#lottoList.map(lotto => {
+    this.#lottoList.forEach(lotto => {
       OutputView.printLotto(lotto.numbers);
     });
   }
 
   async getWinningLotto() {
     const inputWinningLotto = await InputView.readWinningNumbers();
-    this.#winningLotto = new Lotto(inputWinningLotto);
+    return new Lotto(inputWinningLotto);
   }
 
   async getBonusNumber() {
     try {
-      this.#bonusNumber = await InputView.readBonusNumbers();
-      if (this.#winningLotto.numbers.includes(this.#bonusNumber)) {
-        throw new Error(ERROR_LOTTO_REPEAT);
-      }
+      const bonusNumber = await InputView.readBonusNumbers();
+      this.repeatCheckValidator(bonusNumber);
+      return bonusNumber;
     } catch (error) {
       Console.print(error.message);
+    }
+  }
+
+  repeatCheckValidator(bonusNumber) {
+    if (this.#winningLotto.numbers.includes(bonusNumber)) {
+      throw new Error(ERROR_LOTTO_REPEAT);
     }
   }
 
@@ -89,21 +86,20 @@ class LottoGame {
   }
 
   async checkResult() {
-    await this.initResult();
-    await this.#lottoList.forEach(async ticket => {
-      const matchingNumbers = await this.getMatchingNumbers(ticket);
-      await this.countLotto(matchingNumbers);
-    });
+    for (const ticket of this.#lottoList) {
+      const matchingNumbers = this.getMatchingNumbers(ticket);
+      this.countLotto(matchingNumbers, ticket);
+    }
   }
 
-  async getMatchingNumbers(ticket) {
-    const matchingNumbers = await ticket.numbers.filter(number =>
+  getMatchingNumbers(ticket) {
+    const matchingNumbers = ticket.numbers.filter(number =>
       this.#winningLotto.numbers.includes(number),
     );
     return matchingNumbers;
   }
 
-  countLotto(matchingNumbers) {
+  countLotto(matchingNumbers, ticket) {
     if (matchingNumbers.length === 6) {
       this.#result[5].count++;
     } else if (matchingNumbers.length === 5 && ticket.numbers.includes(this.#bonusNumber)) {
@@ -123,14 +119,14 @@ class LottoGame {
   }
 
   async calculateRevenuRate() {
-    const sumPrize = await this.getSumPrize();
-    const ratePrize = (await (sumPrize / this.#purchaseAmount)) * 100;
+    const sumPrize = this.getSumPrize();
+    const ratePrize = (sumPrize / this.#purchaseAmount) * 100;
     return ratePrize.toFixed(1);
   }
 
-  async getSumPrize() {
+  getSumPrize() {
     let prize = 0;
-    await Object.keys(this.#result).map(rank => {
+    Object.keys(this.#result).forEach(rank => {
       prize += this.#result[rank].count * this.#result[rank].prize;
     });
     return prize;

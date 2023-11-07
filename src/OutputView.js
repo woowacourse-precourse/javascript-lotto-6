@@ -12,9 +12,9 @@ const OutputView = {
   printResultStastics(result) {
     Console.print(PRINT_WINNING_STATISTIC);
     Console.print('---');
-    Object.keys(result).map(rank => {
+    for (const rank in result) {
       this.getResultState(result, rank);
-    });
+    }
   },
 
   getResultState(result, rank) {

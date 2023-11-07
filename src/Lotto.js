@@ -30,20 +30,19 @@ class Lotto {
   }
 
   #rangeValidate(numbers) {
-    numbers.map(number => {
+    for (const number of numbers) {
       if (number < 1 || number > 45) {
         throw new Error(ERROR_LOTTO_RANGE);
       }
-    });
+    }
   }
 
   #typeValidate(numbers) {
-    numbers.map(number => {
-      const numberType = Number(number);
-      if (isNaN(numberType)) {
+    for (const number of numbers) {
+      if (isNaN(number) || typeof number !== 'number') {
         throw new Error(ERROR_LOTTO_TYPE);
       }
-    });
+    }
   }
 
   get numbers() {
