@@ -4,6 +4,7 @@ import {
   MAX_LOTTO_NUMBER,
   MIN_LOTTO_NUMBER,
 } from "./constants/standard.js";
+import { MESSAGE_PURCHASING_NUMBER } from "./constants/message.js";
 
 class Issuance {
   #issuanceCount;
@@ -33,7 +34,7 @@ class Issuance {
   async printIssuanceNumbers(parchaseNumber) {
     await this.#issueNumbers();
 
-    MissionUtils.Console.print(`\n${parchaseNumber}개를 구매했습니다.`);
+    MissionUtils.Console.print(`${parchaseNumber}${MESSAGE_PURCHASING_NUMBER}`);
     this.#issuanceNumbers.forEach((issuanceNumber) => {
       MissionUtils.Console.print("[" + issuanceNumber.join(", ") + "]");
     });

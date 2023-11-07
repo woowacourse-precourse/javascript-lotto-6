@@ -16,13 +16,18 @@ import Purchase from "./Purchase.js";
 import Issuance from "./Issuance.js";
 import Lotto from "./Lotto.js";
 import Bonus from "./Bonus.js";
+import {
+  MIN_AMOUNT,
+  PERCENTAGE,
+  WINNING_DIVISION,
+} from "./constants/standard.js";
 
 class App {
   async play() {
     let purchase = null;
     let lotto = null;
     let bonus = null;
-    
+
     while (!purchase) {
       try {
         purchase = new Purchase(
@@ -41,7 +46,7 @@ class App {
         const winningNumber = await MissionUtils.Console.readLineAsync(
           MESSAGE_WINNING_NUMBER
         );
-        lotto = new Lotto(winningNumber.split(","));
+        lotto = new Lotto(winningNumber.split(WINNING_DIVISION));
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
@@ -64,7 +69,7 @@ class App {
     );
 
     const profitsRate = parseFloat(
-      (totalProfits / (purchase.getPurchaseCount() * 1000)) * 100
+      (totalProfits / (purchase.getPurchaseCount() * MIN_AMOUNT)) * PERCENTAGE
     ).toFixed(1);
 
     MissionUtils.Console.print(`
