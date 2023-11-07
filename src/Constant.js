@@ -12,7 +12,7 @@ export const CONSTANT = Object.freeze({
         ["b5", 30000000],
         ["6", 2000000000],
     ]),
-    ERROR_PURCHASE_INPUT:
+    ERROR_MONEY_INPUT:
         "[ERROR] 구입 금액이 1000원으로 나누어 떨어지지 않습니다.",
     ERROR_LOTTO_NUM_INPUT: "[ERROR] 1~45의 숫자가 아닙니다.",
     ERROR_LOTTO_NUM_INPUT: "[ERROR] 1~45의 숫자 6개를 입력해야합니다.",
