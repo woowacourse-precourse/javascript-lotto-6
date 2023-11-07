@@ -123,6 +123,8 @@ class App {
   }
 
   async printResult() {
+    const earningRatio = this.calEarningRatio();
+
     Console.print("\n 당첨 통계 \n --- ");
     Console.print("3개 일치 (5,000원) - " + this.result[5] + "개");
     Console.print("4개 일치 (50,000원) - " + this.result[4] + "개");
@@ -131,7 +133,10 @@ class App {
       "5개 일치, 보너스 볼 일치 (30,000,000원) - " + this.result[2] + "개"
     );
     Console.print("6개 일치 (2,000,000,000원) - " + this.result[1] + "개");
+    Console.print("총 수익률은 " + earningRatio + "%입니다.\n");
+  }
 
+  calEarningRatio() {
     const earning =
       this.result[1] * 2000000000 +
       this.result[2] * 30000000 +
@@ -139,8 +144,7 @@ class App {
       this.result[4] * 50000 +
       this.result[5] * 5000;
     const buy = this.pay * 1000;
-    const earningRatio = Number((earning / buy) * 100).toFixed(1);
-    Console.print("총 수익률은 " + earningRatio + "%입니다.\n");
+    return Number((earning / buy) * 100).toFixed(1);
   }
 
   async play() {
