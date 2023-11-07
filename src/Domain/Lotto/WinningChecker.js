@@ -1,11 +1,11 @@
+import CONSTANTS from '../../Lib/constans';
 import { Console } from '@woowacourse/mission-utils';
-import LOTTO from '../constants/lotto.js';
-import MESSAGE from '../constants/message.js';
-import { MessageFormat } from '../utils/messageFormat.js';
+import MESSAGE from '../../Lib/message.js';
+import { MessageFormat } from '../../Lib/messageFormat.js';
 
-class LottoChecker {
-  constructor(lotto) {
-    this.lotto = lotto;
+class WinningChecker {
+  constructor(winningNumbers) {
+    this.winningNumbers = winningNumbers;
   }
 
   /**
@@ -24,7 +24,7 @@ class LottoChecker {
   compareWinningAndLotto(bonusNumber, lottoList) {
     this.printResultHeader();
 
-    const { winningMin, bonus } = LOTTO.number;
+    const { winningMin, bonus } = CONSTANTS.number;
     const { count: bonusCount, key: bonusKey } = bonus;
     const result = {
       3: 0,
@@ -35,7 +35,7 @@ class LottoChecker {
     };
 
     lottoList.forEach((lotto) => {
-      const matchedNumbers = this.lotto.numbers.map(Number).filter((num) => lotto.includes(num));
+      const matchedNumbers = this.winningNumbers.map(Number).filter((num) => lotto.includes(num));
       const matchedNumbersKey = matchedNumbers.length;
       const hasBonusNumber = lotto.includes(Number(bonusNumber));
 
@@ -53,9 +53,9 @@ class LottoChecker {
    * @param {Object} result 당첨 통계 결과
    */
   printTotalResult(result) {
-    Array.from(LOTTO.lottoPrizesMap.keys()).forEach((key) => {
+    Array.from(CONSTANTS.lottoPrizesMap.keys()).forEach((key) => {
       Console.print(MessageFormat.resultRow(key, result[key]));
     });
   }
 }
-export default LottoChecker;
+export default WinningChecker;

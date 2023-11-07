@@ -1,7 +1,7 @@
 import AppError from '../errors/error.js';
-import ERROR from '../constants/error.js';
-import LOTTO from '../constants/lotto.js';
-import { isValidNumber } from './index.js';
+import CONSTANTS from './constans.js';
+import ERROR from './error.js';
+import { isValidNumber } from './utils.js';
 
 class ExceptionHandler {
   /**
@@ -38,7 +38,7 @@ class ExceptionHandler {
   }
 
   static checkIfDivisibleBy1000(numericAmount) {
-    if (numericAmount % LOTTO.unit.value) {
+    if (numericAmount % CONSTANTS.unit.value) {
       throw new AppError(ERROR.message.invalidUnit);
     }
   }
@@ -70,7 +70,7 @@ class ExceptionHandler {
   }
 
   static getSplitedWinningNumbers(winningNumbers) {
-    return winningNumbers.split(LOTTO.string.comma);
+    return winningNumbers.split(CONSTANTS.string.comma);
   }
 
   static getWinningNumbersSet(splitedWinningNumbers) {
@@ -78,13 +78,13 @@ class ExceptionHandler {
   }
 
   static checkNumberLimit(splitedWinningNumbers) {
-    if (splitedWinningNumbers.length !== LOTTO.number.limit) {
+    if (splitedWinningNumbers.length !== CONSTANTS.number.limit) {
       throw new AppError(ERROR.message.invalidNumberLimit);
     }
   }
 
   static checkWhiteSpace(splitedWinningNumbers) {
-    if (LOTTO.regexPatterns.whitespace.test(splitedWinningNumbers)) {
+    if (CONSTANTS.regexPatterns.whitespace.test(splitedWinningNumbers)) {
       throw new AppError(ERROR.message.invalidInput);
     }
   }
@@ -102,7 +102,7 @@ class ExceptionHandler {
   }
 
   static checkDuplicateNumber(winningNumbersSet) {
-    if (winningNumbersSet.size !== LOTTO.number.limit) {
+    if (winningNumbersSet.size !== CONSTANTS.number.limit) {
       throw new AppError(ERROR.message.duplicateNumber);
     }
   }
@@ -141,8 +141,8 @@ class ExceptionHandler {
 
   static checkInvalidInput(inputbonusNumber) {
     if (
-      inputbonusNumber.includes(LOTTO.string.comma) ||
-      inputbonusNumber.includes(LOTTO.string.space)
+      inputbonusNumber.includes(CONSTANTS.string.comma) ||
+      inputbonusNumber.includes(CONSTANTS.string.space)
     ) {
       throw new AppError(ERROR.message.invalidInput);
     }

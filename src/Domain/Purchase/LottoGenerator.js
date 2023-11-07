@@ -1,16 +1,16 @@
-import LOTTO from '../constants/lotto.js';
+import CONSTANTS from '../../Lib/constans.js';
 import { Random } from '@woowacourse/mission-utils';
 
-class LottoTicketGenerator {
+class LottoGenerator {
   /**
    * 랜덤한 로또 티켓 번호를 생성하고 반환합니다.
    * @returns {Array} 랜덤한 로또 티켓 번호
    */
-  static generateRandomLottoTicket() {
+  generateRandomLottoTicket() {
     return Random.pickUniqueNumbersInRange(
-      LOTTO.number.min,
-      LOTTO.number.max,
-      LOTTO.number.limit,
+      CONSTANTS.number.min,
+      CONSTANTS.number.max,
+      CONSTANTS.number.limit,
     ).sort((a, b) => a - b);
   }
 
@@ -19,9 +19,9 @@ class LottoTicketGenerator {
    * @param {number} ticketCount 생성할 로또 티켓의 수
    * @returns {Array} 생성된 로또 티켓들
    */
-  static generateLottoTickets(ticketCount) {
+  generateLottoTickets(ticketCount) {
     return Array.from({ length: ticketCount }, () => this.generateRandomLottoTicket());
   }
 }
 
-export default LottoTicketGenerator;
+export default LottoGenerator;

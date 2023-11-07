@@ -1,4 +1,4 @@
-import { deepFreeze } from '../utils/index.js';
+import { deepFreeze } from './utils.js';
 
 const lottoPrizesMap = deepFreeze(
   new Map([
@@ -39,7 +39,7 @@ const regexPatterns = Object.freeze({
   whitespace: /\s/,
 });
 
-const LOTTO = Object.freeze({
+const CONSTANTS = Object.freeze({
   lottoPrizesMap,
   unit,
   number,
@@ -48,4 +48,4 @@ const LOTTO = Object.freeze({
   regexPatterns,
 });
 
-export default LOTTO;
+export default CONSTANTS;

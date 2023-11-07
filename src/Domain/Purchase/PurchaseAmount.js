@@ -1,19 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import ExceptionHandler from '../utils/ExceptionHandler.js';
-import LottoTicketGenerator from './LottoTicketGenerator.js';
-import MESSAGE from '../constants/message.js';
-import { MessageFormat } from '../utils/messageFormat.js';
-import { calculateTicketCountFromAmount } from '../utils/index.js';
+import { MessageFormat } from '../../Lib/messageFormat.js';
+import { calculateTicketCountFromAmount } from './utils.js';
 
-class LottoPurchaseInput {
-  /**
-   * 입력받은 로또 구입 금액을 검증하고 반환합니다.
-   * @returns {number} 검증된 로또 구입 금액
-   */
-  async inputPurchaseAmount() {
-    const amount = await Console.readLineAsync(MESSAGE.input.PurchaseAmount);
-    const validatedAmount = ExceptionHandler.validatePurchaseAmount(amount);
-    return validatedAmount;
+class PurchaseAmount {
+  constructor(lottoTickets) {
+    this.lottoTickets = lottoTickets;
   }
 
   /**
@@ -24,6 +15,7 @@ class LottoPurchaseInput {
   purchaseLotto(purchaseAmount) {
     const ticketCount = calculateTicketCountFromAmount(purchaseAmount);
     this.printPurchaseConfirm(ticketCount);
+
     return this.purchaseLottoTickets(ticketCount);
   }
 
@@ -41,18 +33,18 @@ class LottoPurchaseInput {
    * @returns {Array} 구매한 로또 티켓들
    */
   purchaseLottoTickets(ticketCount) {
-    const lottoTickets = LottoTicketGenerator.generateLottoTickets(ticketCount);
-    lottoTickets.forEach((ticket) => this.printLottoTickets(ticket));
+    const lottoTickets = this.lottoTickets.generateLottoTickets(ticketCount);
+    this.printLottoTickets(lottoTickets);
 
     return lottoTickets;
   }
 
-  /**
-   * Array 형태의 로또 티켓의 번호를 문자열로 조합하여 출력합니다.
-   * @param {Array} ticket 로또 티켓
-   */
-  printLottoTickets(ticket) {
+  printLottoTickets(lottoTickets) {
+    lottoTickets.forEach((ticket) => this.printLottoTicket(ticket));
+  }
+
+  printLottoTicket(ticket) {
     Console.print(`[${ticket.join(', ')}]`);
   }
 }
-export default LottoPurchaseInput;
+export default PurchaseAmount;

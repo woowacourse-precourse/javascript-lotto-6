@@ -1,7 +1,7 @@
-import AppError from '../errors/error.js';
-import ERROR from '../constants/error.js';
-import LOTTO from '../constants/lotto.js';
-import { isValidNumber } from '../utils/index.js';
+import AppError from '../../errors/error.js';
+import CONSTANTS from '../../Lib/constans.js';
+import ERROR from '../../Lib/error.js';
+import { isValidNumber } from '../../Lib/utils.js';
 
 class Lotto {
   #numbers;
@@ -18,7 +18,7 @@ class Lotto {
   }
 
   #checkNumberLimit(numbers) {
-    if (numbers.length !== LOTTO.number.limit) {
+    if (numbers.length !== CONSTANTS.number.limit) {
       throw new AppError(ERROR.message.invalidNumberLimit);
     }
   }
@@ -30,7 +30,7 @@ class Lotto {
   }
 
   #checkDuplicateNumber(numbers) {
-    if (new Set(numbers).size !== LOTTO.number.limit) {
+    if (new Set(numbers).size !== CONSTANTS.number.limit) {
       throw new AppError(ERROR.message.duplicateNumber);
     }
   }

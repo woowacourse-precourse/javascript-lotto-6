@@ -1,4 +1,4 @@
-import { MessageFormat } from '../utils/messageFormat.js';
+import { MessageFormat } from '../Lib/messageFormat.js';
 
 class AppError extends Error {
   constructor(message) {
