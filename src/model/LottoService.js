@@ -1,6 +1,5 @@
-import { Random } from "@woowacourse/mission-utils";
 import { REWARD } from '../utils/Constant.js';
-import { Validator } from "../utils/Validator.js";
+import { Validator } from '../utils/Validator.js';
 
 export const LottoService = {
   purchase(price) {
