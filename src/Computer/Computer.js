@@ -1,17 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 export class Computer {
-    
     getRandomNum() {
-        const number = [];
-       
-        while (number.length < 6) {
-            const randomNum = MissionUtils.Random.pickNumberInRange(1, 45);
-            if (!number.includes(randomNum)) {
-                number.push(randomNum);
-            }
-        }
-        
-        return number;    
+        const randomNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+        return randomNum;    
     }
 }
