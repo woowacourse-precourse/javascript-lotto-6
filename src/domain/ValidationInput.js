@@ -1,14 +1,14 @@
 import { ERROR } from '../constants/Error';
-import { MagicNumber } from '../constants/MagicNumber';
+import { MAGIC_NUMBER } from '../constants/MagicNumber';
 
 export function validAmount(amount) {
   if (!Number(amount)) {
     throw new Error(ERROR.amountNumber);
   }
-  if (amount < MagicNumber.lottoPriceMin) {
+  if (amount < MAGIC_NUMBER.lottoPriceMin) {
     throw new Error(ERROR.amountRange);
   }
-  if (amount % MagicNumber.lottoPriceMin !== 0) {
+  if (amount % MAGIC_NUMBER.lottoPriceMin !== 0) {
     throw new Error(ERROR.amountUnit);
   }
 }
@@ -18,8 +18,8 @@ export function validBonusNumber(bonusNumber) {
     throw new Error(ERROR.bonusNumber);
   }
   if (
-    bonusNumber < MagicNumber.lottoNumberMin ||
-    bonusNumber > MagicNumber.lottoNumberMax
+    bonusNumber < MAGIC_NUMBER.lottoNumberMin ||
+    bonusNumber > MAGIC_NUMBER.lottoNumberMax
   ) {
     throw new Error(ERROR.bonusRange);
   }

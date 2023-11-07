@@ -1,14 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import { validAmount, validBonusNumber } from './ValidationInput.js';
+import { MESSAGE } from '../constants/Message.js';
 
 export class Input {
   async getAmount() {
     while (true) {
       try {
-        const amount = await Console.readLineAsync(
-          '구입금액을 입력해 주세요.\n'
-        );
+        const amount = await Console.readLineAsync(MESSAGE.inputAmount);
         validAmount(amount);
         return amount;
       } catch (error) {
@@ -19,7 +18,7 @@ export class Input {
 
   async getWinningNumber() {
     const winningNumberInput = await Console.readLineAsync(
-      '\n당첨 번호를 입력해 주세요.\n'
+      MESSAGE.inputWinningNumber
     );
     const winningNumbers = winningNumberInput
       .split(',')
@@ -34,9 +33,7 @@ export class Input {
   }
 
   async getBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n'
-    );
+    const bonusNumber = await Console.readLineAsync(MESSAGE.inputBonusNumber);
     validBonusNumber(bonusNumber);
     return Number(bonusNumber);
   }

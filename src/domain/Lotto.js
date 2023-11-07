@@ -1,5 +1,5 @@
 import { ERROR } from '../constants/Error';
-import { MagicNumber } from '../constants/MagicNumber';
+import { MAGIC_NUMBER } from '../constants/MagicNumber';
 
 class Lotto {
   #numbers;
@@ -16,7 +16,7 @@ class Lotto {
   }
 
   #validateNumberCount(numbers) {
-    if (numbers.length !== MagicNumber.lottoNumberCount) {
+    if (numbers.length !== MAGIC_NUMBER.lottoNumberCount) {
       throw new Error(ERROR.numberCount);
     }
   }
@@ -24,8 +24,8 @@ class Lotto {
   #validateNumberRange(numbers) {
     numbers.forEach((number) => {
       if (
-        number < MagicNumber.lottoNumberMin ||
-        number > MagicNumber.lottoNumberMax
+        number < MAGIC_NUMBER.lottoNumberMin ||
+        number > MAGIC_NUMBER.lottoNumberMax
       ) {
         throw new Error(ERROR.numberRange);
       }
@@ -34,7 +34,7 @@ class Lotto {
 
   #validateNumberDuplicate(numbers) {
     const numberSet = new Set(numbers);
-    if (numberSet.size !== MagicNumber.lottoNumberCount) {
+    if (numberSet.size !== MAGIC_NUMBER.lottoNumberCount) {
       throw new Error(ERROR.numberDuplicate);
     }
   }

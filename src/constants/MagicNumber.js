@@ -1,4 +1,4 @@
-export const MagicNumber = Object.freeze({
+export const MAGIC_NUMBER = Object.freeze({
   lottoNumberCount: 6,
   lottoNumberMin: 1,
   lottoNumberMax: 45,

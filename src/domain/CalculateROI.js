@@ -1,12 +1,12 @@
-import { MagicNumber } from '../constants/MagicNumber';
+import { MAGIC_NUMBER } from '../constants/MagicNumber';
 
 export default function ROI(amount, winningNumber) {
   const prize = [
-    MagicNumber.prizeFifth,
-    MagicNumber.prizeFourth,
-    MagicNumber.prizeThird,
-    MagicNumber.prizeSecond,
-    MagicNumber.prizeFirst,
+    MAGIC_NUMBER.prizeFifth,
+    MAGIC_NUMBER.prizeFourth,
+    MAGIC_NUMBER.prizeThird,
+    MAGIC_NUMBER.prizeSecond,
+    MAGIC_NUMBER.prizeFirst,
   ];
   const profit = winningNumber.reduce((acc, value, idx) => {
     return acc + prize[idx] * value;
