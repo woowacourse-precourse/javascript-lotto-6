@@ -1,3 +1,5 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -12,7 +14,14 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  static makeLotto(){
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+    return new Lotto(numbers);
+  }
+
+  getLotto(){
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
