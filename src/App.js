@@ -32,6 +32,20 @@ class App {
     );
   }
 
+  getRank(lottosClasses) {
+    const rank = {};
+    rank.first = lottosClasses.filter((element) => element.COUNT === 6).length;
+    rank.second = lottosClasses.filter(
+      (element) => element.COUNT === 5 && element.BONUS
+    ).length;
+    rank.third = lottosClasses.filter(
+      (element) => element.COUNT === 5 && !element.BONUS
+    ).length;
+    rank.fourth = lottosClasses.filter((element) => element.COUNT === 4).length;
+    rank.fifth = lottosClasses.filter((element) => element.COUNT === 3).length;
+    return rank;
+  }
+
   async play() {
   }
 }
