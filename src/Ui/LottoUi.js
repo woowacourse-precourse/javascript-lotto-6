@@ -1,12 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE, ERROR_MESSAGE } from '../constants/message';
-import COMMON_VALUE from '../constants/\bcommonValue';
+import { MESSAGE } from '../constants/message';
+import Validate from './Validate';
 
 const LottoUi = {
   async inputPurchaseAmount() {
     try {
       const purchaseAmount = await Console.readLineAsync(MESSAGE.INPUT_MONEY);
-      this.validatePurchaseAmount(Number(purchaseAmount));
+      Validate.PurchaseAmount(Number(purchaseAmount));
 
       return Number(purchaseAmount);
     } catch (err) {
@@ -19,7 +19,7 @@ const LottoUi = {
     try {
       const input = await Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
       const winningNumbers = input.split(',').map((number) => Number(number));
-      this.validateWinningNumbers(winningNumbers);
+      Validate.WinningNumbers(winningNumbers);
 
       return winningNumbers;
     } catch (err) {
@@ -33,7 +33,7 @@ const LottoUi = {
       const bonusNumber = Number(
         await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER)
       );
-      this.validateBonusNumber(bonusNumber);
+      Validate.BonusNumber(bonusNumber);
 
       return bonusNumber;
     } catch (err) {
@@ -61,49 +61,6 @@ const LottoUi = {
     purchasedLottos.forEach((lotto) => {
       Console.print(`[${lotto.join(', ')}]`);
     });
-  },
-
-  checkSameNumber(winningNumbers) {
-    return [...new Set(winningNumbers)].length < 6 ? true : false;
-  },
-
-  checkBounds(winningNumbers) {
-    winningNumbers.forEach((number) => {
-      if (number < COMMON_VALUE.MIN || number > COMMON_VALUE.MAX) {
-        return false;
-      }
-    });
-
-    return true;
-  },
-
-  validatePurchaseAmount(purchaseAmount) {
-    if (purchaseAmount % 1000 !== 0) {
-      throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT);
-    }
-  },
-
-  validateWinningNumbers(winningNumbers) {
-    if (winningNumbers.includes(NaN)) {
-      throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
-    } else if (this.checkSameNumber(winningNumbers)) {
-      throw new Error(ERROR_MESSAGE.INPUT_SAME_NUMB);
-    } else if (winningNumbers.length < 6) {
-      throw new Error(ERROR_MESSAGE.NOT_INPUT_6);
-    } else if (!this.checkBounds(winningNumbers)) {
-      throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
-    }
-  },
-
-  validateBonusNumber(bonusNumber) {
-    if (Number.isNaN(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
-    } else if (
-      bonusNumber < COMMON_VALUE.MIN ||
-      COMMON_VALUE.MAX < bonusNumber
-    ) {
-      throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
-    }
   },
 };
 
