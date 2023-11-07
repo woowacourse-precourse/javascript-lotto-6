@@ -14,14 +14,19 @@ class Output {
     Console.print(message);
   }
 
-  lottoTicketCount(tickets) {
+  lottoTicketsCount(tickets) {
     Console.print(OUTPUT.ticket_count(tickets.length));
   }
 
-  lottoTicketNumbers(tickets) {
+  lottoTicketsNumbers(tickets) {
     tickets.forEach((ticket) =>
       Console.print(OUTPUT.ticket_number(ticket.getNumbers().join(`${LOTTO_NUMBER.seperator} `)))
     );
+  }
+
+  lottoTickets(tickets) {
+    this.lottoTicketsCount(tickets);
+    this.lottoTicketsNumbers(tickets);
   }
 
   winningResult(results) {
@@ -37,6 +42,13 @@ class Output {
 
   totalReturnResult(totalReturn) {
     Console.print(OUTPUT.total_return(Math.round(totalReturn * 100) / 100));
+  }
+
+  gameResult(result) {
+    const { results, totalReturn } = result;
+
+    this.winningResult(results);
+    this.totalReturnResult(totalReturn);
   }
 }
 

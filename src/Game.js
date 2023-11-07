@@ -94,7 +94,7 @@ class Game {
     return results;
   }
 
-  calculateTotalReturn(results, money) {
+  calculateTotalReturn(money, results) {
     const total =
       results[FIRST_PRIZE.rank] * FIRST_PRIZE.reward +
       results[SECOND_PRIZE.rank] * SECOND_PRIZE.reward +
@@ -102,7 +102,14 @@ class Game {
       results[FOURTH_PRIZE.rank] * FOURTH_PRIZE.reward +
       results[FIFTH_PRIZE.rank] * FIFTH_PRIZE.reward;
 
-    return (total / money) * 100;
+    return Math.round((total / money) * 10000) / 100;
+  }
+
+  calculateGameResults(tickets, money) {
+    const results = this.calculateTotalWinningResults(tickets);
+    const totalReturn = this.calculateTotalReturn(money, results);
+
+    return { results: results, totalReturn, totalReturn };
   }
 }
 
