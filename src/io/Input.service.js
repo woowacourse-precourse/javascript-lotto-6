@@ -1,9 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
-import {
-  BONUS_NUMBER_INPUT_MESSAGE,
-  MONEY_INPUT_MESSAGE,
-  WINNING_NUMBER_INPUT_MESSAGE,
-} from '../constants.js';
+
+const BONUS_NUMBER_INPUT_MESSAGE = '\n보너스 번호를 입력해 주세요.\n';
+const MONEY_INPUT_MESSAGE = '구입금액을 입력해 주세요.\n';
+const WINNING_NUMBER_INPUT_MESSAGE = '\n당첨 번호를 입력해 주세요.\n';
 
 export default class InputService {
   async readAmount() {

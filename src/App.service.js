@@ -1,7 +1,8 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import IOController from './io/IO.controller.js';
-import { TICKET_PRICE } from './constants.js';
+
+const TICKET_PRICE = 1000;
 
 export default class AppService {
   #IOController;
