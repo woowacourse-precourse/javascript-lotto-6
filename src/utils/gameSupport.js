@@ -42,3 +42,7 @@ export const userLottoInputBonusNumber = async (winningNumberArray) => {
   }
 };
 
+export const getPurchasedLottoCounts = (amount) => {
+  return amount / 1000;
+};
+
