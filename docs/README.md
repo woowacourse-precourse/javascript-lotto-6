@@ -9,8 +9,8 @@
 - [x] 로또 번호에서 당첨 번호와 일치하는 숫자의 개수를 계산한다. - `LottoResultCalculator.#countSameNumber(lottoTicket)`
 - [x] 로또 번호에 보너스 번호가 있는지 확인한다. - `LottoResultCalculator#hasBonusNumber(lottoTicket)`
 
-- [ ] 수익률을 계산한다. - `LottoReturnRateCalculator.calculateReturnRate()`
-- [ ] 총 수익을 계산한다. - `LottoReturnRateCalculator.#calculateTotalProfit()`
+- [x] 수익률을 계산한다. - `LottoReturnRateCalculator.calculateReturnRate()`
+- [x] 총 수익을 계산한다. - `LottoReturnRateCalculator.#calculateTotalProfit()`
 
 <br />
 
