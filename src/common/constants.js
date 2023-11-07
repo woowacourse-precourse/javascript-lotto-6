@@ -23,7 +23,7 @@ export const LOTTO = Object.freeze({
 
 export const MESSAGE = Object.freeze({
   ENTER_PURCHASE_AMOUNT: "구입금액을 입력해 주세요.\n",
-  ENTER_WINNING_NUMBER: "당첨 번호를 입력해 주세요.",
+  ENTER_WINNING_NUMBER: "\n당첨 번호를 입력해 주세요.\n",
   ENTER_BONUS_NUMBER: "보너스 번호를 입력해 주세요.",
   WINNING_STATISTICS: "당첨 통계",
   UNDERLINE: "---",

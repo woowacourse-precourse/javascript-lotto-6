@@ -4,3 +4,8 @@ export const purchaseAmountInput = async () => {
   const input = await readLineAsync(MESSAGE.ENTER_PURCHASE_AMOUNT);
   return input;
 };
+
+export const winningNumberInput = async () => {
+  const input = await readLineAsync(MESSAGE.ENTER_WINNING_NUMBER);
+  return input;
+};
