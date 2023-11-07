@@ -44,6 +44,18 @@ class App {
         if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45 || winningNumbers.includes(bonusNumber) ) {
             throw new Error("[ERROR] 잘못된 보너스 번호입니다.");}
         return [winningNumbers, bonusNumber];}
+
+    #calculateResults(lottos, winningNumbers, bonusNumber) {
+        lottos.forEach((lotto) => {
+            const matchCount = lotto.numbers.filter((num) =>winningNumbers.includes(num)).length;
+            if (matchCount === 6) {this.#winningCounts[0]++;} else if (
+                matchCount === 5 &&lotto.numbers.includes(bonusNumber)) {
+                this.#winningCounts[1]++;} 
+                else if (matchCount === 5) {this.#winningCounts[2]++;} 
+                else if (matchCount === 4) {this.#winningCounts[3]++;}
+                else if (matchCount === 3) {this.#winningCounts[4]++;}
+        });
+    }
 }
 
 export default App;
