@@ -9,13 +9,12 @@ class LottoController {
   }
 
   async startGame() {
-    const lottos = await this.#purchaseLottos;
-    this.#view.returnPurchaseLottos(lottos);
+    const [lottos, quantitiy] = await this.#purchaseLottos;
+    this.#view.returnPurchaseLottos(lottos, quantitiy);
   }
 
   async #purchaseLottos() {
     const purchaseAmount = await this.#view.getPurchaseAmount();
-
     return this.#lottoService.sellLottos(purchaseAmount);
   }
 }

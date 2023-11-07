@@ -7,7 +7,7 @@ class LottoService {
   sellLotto(purchaseAmount) {
     this.validatePurchaseAmount(purchaseAmount);
     const quantitiy = Math.floor(purchaseAmount / LOTTO.price);
-    return this.#generateLotto(quantitiy);
+    return [this.#generateLotto(quantitiy), quantitiy];
   }
 
   validatePurchaseAmount(purchaseAmount) {

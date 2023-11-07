@@ -1,6 +1,6 @@
 const CONSOLE_MESSAGE = Object.freeze({
   requestBuying: '구입금액을 입력해 주세요.\n',
-  returnBuying: '8개를 구매했습니다.\n',
+  returnBuying: (quantitiy) => `${quantitiy}개를 구매했습니다.\n`,
   requestLottoNumbers: '당첨 번호를 입력해 주세요.\n',
   requestBonusNumber: '보너스 번호를 입력해 주세요.\n',
   returnWinning: '당첨 통계\n---\n',
