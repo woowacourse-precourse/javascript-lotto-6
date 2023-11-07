@@ -23,7 +23,7 @@
 
   - Random.pickUniqueNumbersInRange() 사용
 
-- [ ] 발행된 로또 출력
+- [x] 발행된 로또 출력
 
   - 오름차순 정렬
 
