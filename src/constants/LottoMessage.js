@@ -41,7 +41,7 @@ export const LOTTO_ERROR_MESSAGE = Object.freeze({
   notAValidSeedMoney: `금액은 ${LOTTO_PRICE}단위만 가능합니다. 다시 입력해주세요`,
   notAValidNumber: '소수는 입력할 수 없습니다. 다시 입력해주세요',
   notAValidInteger: '음수는 입력할 수 없습니다. 다시 입력해주세요',
-  notAValidDivider: `구분자는 ${DIVIDER.comma}단위로 ${LOTTO_MAGICNUMBER.selectAmount}개 입력해야합니다. 다시 입력해주세요`,
+  notAValidInputLength: `'번호를 ${DIVIDER.comma}'를 구분자로 하여 ${LOTTO_MAGICNUMBER.selectAmount}개 입력해야합니다. 다시 입력해주세요`,
   notAValidNumberRange: `로또 번호는 ${LOTTO_MAGICNUMBER.minValue} ~ ${LOTTO_MAGICNUMBER.maxValue} 사이의 값을 입력해야합니다. 다시 입력해주세요`,
   notAValidLottoNumber: `로또 번호는 중복될 수 없습니다. 다시 입력해주세요`,
 });
