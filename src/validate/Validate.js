@@ -103,17 +103,17 @@ class Validate {
 
   /**
    *
-   * @param {number} bonusNumber
    * @param {number[]} numbers
+   * @param {number} bonusNumber
    * @throws {ValidationError} 보너스 번호는 1~45 사이의 숫자만 가능합니다.
    * @throws {ValidationError} 보너스 번호는 로또 번호와 중복될 수 없습니다.
    */
-  static validBonusNumber(bonusNumber, numbers) {
+  static validBonusNumber(numbers, bonusNumber) {
     if (!Validate.isLottoNumber(bonusNumber)) {
       throw new ValidationError('보너스 번호는 1~45 사이의 숫자만 가능합니다.')
     }
 
-    if (!Validate.isDuplicateLottoNumbers(numbers.concat(bonusNumber))) {
+    if (Validate.isDuplicateLottoNumbers(numbers.concat(bonusNumber))) {
       throw new ValidationError('보너스 번호는 로또 번호와 중복될 수 없습니다.')
     }
   }
