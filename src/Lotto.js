@@ -9,12 +9,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const numberSet = new Set(numbers);
-
+    if (numbers.length < 1) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOTHING);
+    }
+    if (numbers.every((num) => isNaN(num))) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOT_A_NUMBER);
+    }
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOT_SIX);
     }
-    if (numberSet.size !== 6) {
+    if (new Set(numbers).size !== 6) {
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.SAME_NUMBER);
     }
   }

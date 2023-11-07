@@ -5,8 +5,14 @@ const ERROR_MESSAGE = {
     WRONG_UNIT: '[ERROR] 금액을 1000원 단위로 입력하세요.',
   },
   LOTTO_NUMBERS: {
+    NOTHING: '[ERROR] 로또 번호를 입력하세요.',
     NOT_SIX: '[ERROR] 로또 번호는 6개여야 합니다.',
+    NOT_A_NUMBER: '[ERROR] 로또 번호는 숫자만 입력하세요.',
     SAME_NUMBER: '[ERROR] 로또 번호는 중복되지 않아야 합니다.',
+  },
+  BONUS_NUMBER: {
+    NOTHING: '[ERROR] 보너스 번호를 입력하세요.',
+    NOT_A_NUMBER: '[ERROR] 보너스 번호는 숫자만 입력하세요.',
   },
 };
 

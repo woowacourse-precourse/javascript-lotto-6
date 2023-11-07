@@ -47,17 +47,38 @@ async function getLottoNumbers() {
   return lottoNumbersArr;
 }
 
-async function getBounusNumber() {
-  const bonusNumber = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
-  return bonusNumber;
-}
-
 async function getValidLottoNumber() {
   while (true) {
     try {
       const numbers = await getLottoNumbers();
       const lotto = new Lotto(numbers);
       return lotto.Numbers;
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+}
+
+async function getBounusNumber() {
+  const bonusNumber = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
+  return bonusNumber;
+}
+
+function validateBonusNumber(bonusnumber) {
+  if (bonusnumber.length < 1) {
+    throw new Error(ERROR_MESSAGE.BONUS_NUMBER.NOTHING);
+  }
+  if (isNaN(bonusnumber)) {
+    throw new Error(ERROR_MESSAGE.BONUS_NUMBER.NOT_A_NUMBER);
+  }
+}
+
+async function getValidBonusNumber() {
+  while (true) {
+    try {
+      const bonusNumber = await getBounusNumber();
+      validateBonusNumber(bonusNumber);
+      return bonusNumber;
     } catch (error) {
       Console.print(error.message);
     }
@@ -78,7 +99,7 @@ class App {
       ticketArr.push(ticket);
     }
     const winningNumbers = await getValidLottoNumber();
-    const bonusNumber = await getBounusNumber();
+    const bonusNumber = await getValidBonusNumber();
 
     ticketArr.forEach((ticket) => {
       const [intersection, isBonusNumberMatch] = ticket.compareNumbers(winningNumbers, bonusNumber);
