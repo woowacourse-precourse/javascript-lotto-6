@@ -15,4 +15,14 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+
+  test("로또를 발행할 수 있어어 한다.", () => {
+    expect(new Lotto([1, 2, 3, 4, 5, 6])).toBeInstanceOf(Lotto);
+  });
+
+  test("로또 번호를 가져올 수 있어야 한다.", () => {
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto(numbers);
+    expect(lotto.getLottoNumbers()).toEqual(numbers);
+  });
 });
