@@ -71,6 +71,43 @@ class App {
 
     return LOTTO_TICKETS;
   }
+  CHECK_LOTTO_TICKETS(LOTTO_TICKETS, WINNING_NUMBERS, BONUS_NUMBER) {
+    const WINNING = {
+      1: { count: 0, prize: 2000000000 },
+      2: { count: 0, prize: 30000000 },
+      3: { count: 0, prize: 1500000 },
+      4: { count: 0, prize: 50000 },
+      5: { count: 0, prize: 5000 },
+    };
+
+    for (const ticket of LOTTO_TICKETS) {
+      const TICKET_NUMBER = ticket.getNumbers();
+      const MATCHING_NUMBERS = TICKET_NUMBER.filter((number) =>
+        WINNING_NUMBERS.includes(number)
+      );
+
+      switch (MATCHING_NUMBERS.length) {
+        case 6:
+          WINNING[1].count++;
+          break;
+        case 5:
+          if (TICKET_NUMBER.includes(BONUS_NUMBER)) {
+            WINNING[2].count++;
+          } else {
+            WINNING[3].count++;
+          }
+          break;
+        case 4:
+          WINNING[4].count++;
+          break;
+        case 3:
+          WINNING[5].count++;
+          break;
+      }
+    }
+
+    return WINNING;
+  }
 }
 
 export default App;
