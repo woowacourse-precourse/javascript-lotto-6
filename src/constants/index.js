@@ -7,6 +7,8 @@ export const FOUR = 4;
 export const FIVE = 5;
 export const SIX = 6;
 
+export const KRW_UNIT = 1000;
+
 export const THREE_PROFIT = 5000;
 export const FOUR_PROFIT = 50000;
 export const FIVE_PROFIT = 1500000;
