@@ -8,8 +8,13 @@ import { generateLottoNum } from "./utils/generateRandomNum.js";
 class App {
   async play() {
     const amount = await inputAmount();
-    isValidAmount(amount);
-    MissionUtils.Console.print('');
+
+    try{
+      isValidAmount(amount)
+    }catch(err){
+      MissionUtils.Console.print(err.message);
+      return;
+    }
 
     const count = amount/1000;
     printLottoCount(count);
