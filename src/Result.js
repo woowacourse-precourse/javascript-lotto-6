@@ -36,8 +36,10 @@ class Result {
     Console.print(`5개 일치 (1,500,000원) - ${this.five}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.fiveAndBonus}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${this.six}개`);
-    this.printRateOfReturn();
+    const resultOfReturn = this.printRateOfReturn();
+    Console.print(resultOfReturn);
   }
+
   printRateOfReturn() {
     const profit =
       this.six * 200000000 +
@@ -46,7 +48,9 @@ class Result {
       this.four * 50000 +
       this.three * 5000;
     const rateOfReturn = (profit / this.amount) * 100;
-    Console.print(`총 수익률은${rateOfReturn.toFixed(2)}입니다.`);
+    const resultOfReturn = `총 수익률은 ${rateOfReturn.toFixed(2).replace(/\.?0+$/, '')}%입니다.`;
+
+    return resultOfReturn;
   }
 }
 
