@@ -18,9 +18,9 @@ class LottoGameController {
   #lottoNumbers = [];
 
   constructor() {
-    this.inputs = new Inputs();
     this.inputView = new InputView();
     this.outputView = new OutputView();
+    this.inputs = new Inputs(this.inputView, this.outputView);
     this.calculateStats = new CalculateStats();
   }
 
