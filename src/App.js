@@ -14,6 +14,13 @@ class App {
     this.bonus = '';
   }
 
+  async play() {
+    await this.userSpendMoney();
+    await this.lottoNumbers();
+    this.printStatistics();
+    this.printRateOfReturn();
+  }
+
   async userSpendMoney() {
     this.purchasedLottoAmount = await UserInput.purchasedLottoAmount();
     const validatePurchase = new ValidatePurchase(this.purchasedLottoAmount);
@@ -47,13 +54,6 @@ class App {
         this.bonus,
       ).getMatchCount(),
     );
-  }
-
-  async play() {
-    await this.userSpendMoney();
-    await this.lottoNumbers();
-    this.printStatistics();
-    this.printRateOfReturn();
   }
 }
 
