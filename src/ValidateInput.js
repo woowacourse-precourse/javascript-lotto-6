@@ -7,11 +7,11 @@ const Validator = {
     if (input % LOTTO.COST !== 0) throw ERROR_MESSAGE.PAYMENT_INVALID;
   },
   invalidNumberType(input) {
-    if (input.some(isInvalidType)) throw ERROR_MESSAGE.NUMBER_FORM;
+    if (isInvalidType(input)) throw ERROR_MESSAGE.NUMBER_FORM;
     if (Number.isNaN(Number(input))) throw ERROR_MESSAGE.NUMBER_FORM;
   },
   blank(input) {
-    if (input.some(isBlank)) throw ERROR_MESSAGE.blank;
+    if (isBlank(input)) throw ERROR_MESSAGE.blank;
   },
 };
 
