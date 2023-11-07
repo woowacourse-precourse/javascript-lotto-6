@@ -94,6 +94,13 @@ class App {
     Console.print("5개 일치, 보너스 볼 일치 (30,000,000원) - " + this.statistics[4] + '개');
     Console.print("6개 일치 (2,000,000,000원) - " + this.statistics[3] + '개');
   }
+  rateOfReturn() {
+    const total = this.statistics[0] * 5000 + this.statistics[1] * 50_000 + this.statistics[2] * 1_500_000
+    + this.statistics[4] * 30_000_000 + this.statistics[3] * 2_000_000_000;
+    const rate = Math.round((total / (this.lottoEach * 10)) * 10) / 10;
+
+    Console.print("총 수익률은 " + rate + "%입니다.");
+  }
   }
   
 }
