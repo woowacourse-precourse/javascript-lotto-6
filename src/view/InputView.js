@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../utils/constants';
-import InputValidator from '../Validator/InputValidator';
+import InputValidator from '../validator/InputValidator';
 
 const getInputWithValidate = async (userInput, validate) => {
   const input = await userInput();

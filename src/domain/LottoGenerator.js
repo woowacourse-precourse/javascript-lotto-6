@@ -17,12 +17,12 @@ class LottoGenerator {
 
   #generateLotto(purcaseAmount) {
     this.purchasedList = [];
-    this.items = [];
+    this.lottos = [];
     const amount = parseInt(purcaseAmount / LOTTO_INFO.PRICE);
 
     Array.from({ length: amount }).forEach(() => {
       const numbers = getRandomNumber();
-      this.items.push(new Lotto(numbers));
+      this.lottos.push(new Lotto(numbers));
       this.purchasedList.push(numbers);
     });
   }
