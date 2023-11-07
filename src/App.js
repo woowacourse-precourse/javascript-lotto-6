@@ -17,7 +17,7 @@ class App {
 
     const winningNumbers = await enterWinningNumbers();
 
-    const bonusNumber = await enterBonusNumber();
+    const bonusNumber = await enterBonusNumber(winningNumbers);
   }
 }
 
