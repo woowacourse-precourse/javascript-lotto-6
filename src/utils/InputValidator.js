@@ -1,4 +1,5 @@
 import { ERROR_MESSAGES } from '../constants/ErrorMessages';
+import { GAME_SETTINGS } from '../constants/gameSettings';
 
 export default class InputValidator {
   static validatePurchaseAmount(amount) {
@@ -9,10 +10,10 @@ export default class InputValidator {
     const numericAmount = parseInt(amount, 10);
 
     if (numericAmount <= 0) {
-      throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
+      throw new Error(ERROR_MESSAGES.AMOUNT_NOT_IN_UNITS);
     }
 
-    if (numericAmount % 1000 !== 0) {
+    if (numericAmount % GAME_SETTINGS.TICKET_PRICE !== 0) {
       throw new Error(ERROR_MESSAGES.AMOUNT_NOT_IN_UNITS);
     }
   }
@@ -24,7 +25,7 @@ export default class InputValidator {
       if (Number.isNaN(number)) {
         throw new Error(ERROR_MESSAGES.EMPTY_NUMBER);
       }
-      if (number < 1 || number > 45) {
+      if (number < GAME_SETTINGS.MIN_LOTTO_NUMBER || number > GAME_SETTINGS.MAX_LOTTO_NUMBER) {
         throw new Error(ERROR_MESSAGES.NUMBER_OUT_OF_RANGE);
       }
       return number;
@@ -34,10 +35,10 @@ export default class InputValidator {
   static validateWinningNumbers(winningNumbersString) {
     const winningNumbers = InputValidator.parseAndValidateNumbers(winningNumbersString);
 
-    if (winningNumbers.length !== 6) {
+    if (winningNumbers.length !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
       throw new Error(ERROR_MESSAGES.NOT_SIX_NUMBERS);
     }
-    if (new Set(winningNumbers).size !== 6) {
+    if (new Set(winningNumbers).size !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
       throw new Error(ERROR_MESSAGES.DUPLICATE_NUMBER);
     }
   }
@@ -45,7 +46,11 @@ export default class InputValidator {
   static validateBonusNumber(bonusNumberString, winningNumbersString) {
     const bonusNumber = parseInt(bonusNumberString.trim(), 10);
 
-    if (Number.isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
+    if (
+      Number.isNaN(bonusNumber) ||
+      bonusNumber < GAME_SETTINGS.MIN_LOTTO_NUMBER ||
+      bonusNumber > GAME_SETTINGS.MAX_LOTTO_NUMBER
+    ) {
       throw new Error(ERROR_MESSAGES.NUMBER_OUT_OF_RANGE);
     }
 
