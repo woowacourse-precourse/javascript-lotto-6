@@ -1,12 +1,5 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-import User from '../src/User';
-
-const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
-};
+import User from '../src/model/User';
+import Lotto from '../src/model/Lotto';
 
 describe('User 클래스 테스트', () => {
   test('구입 금액이 1000원 단위가 아니면 예외가 발상핸다.', () => {
@@ -21,7 +14,7 @@ describe('User 클래스 테스트', () => {
 
   test('구입 금액이 1000원 단위로 로또를 구매하고 저장한다.', () => {
     const user = new User(8000);
-    const RANDOM_NUMBERS_TO_END = [
+    const LOTTOS_NUMBERS = [
       [1, 2, 3, 4, 5, 6],
       [10, 5, 40, 2, 11, 4],
       [11, 12, 13, 14, 15, 16],
@@ -31,15 +24,18 @@ describe('User 클래스 테스트', () => {
       [27, 19, 23, 42, 41, 4],
       [2, 12, 42, 44, 32, 20],
     ];
-    mockRandoms(RANDOM_NUMBERS_TO_END);
 
-    user.purchaseLottos();
+    const LOTTOS = LOTTOS_NUMBERS.reduce((acc, cur) => {
+      return [...acc, new Lotto(cur)];
+    }, []);
+
+    user.setLottos(LOTTOS);
     const userLottos = user.getLottos();
 
     expect(userLottos.length).toBe(8);
 
     userLottos.forEach((lotto, index) => {
-      expect(lotto.getNumbers()).toEqual(RANDOM_NUMBERS_TO_END[index]);
+      expect(lotto.getNumbers()).toEqual(LOTTOS_NUMBERS[index]);
     });
   });
 });

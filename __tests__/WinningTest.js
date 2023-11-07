@@ -1,5 +1,5 @@
-import Winning from '../src/Winning';
-import Lotto from '../src/Lotto';
+import Winning from '../src/model/Winning';
+import Lotto from '../src/model/Lotto';
 
 describe('class Winning test', () => {
   let winning;
@@ -89,7 +89,7 @@ describe('class Winning test', () => {
     winning.setBonusNumber(BONUS_NUMUBER);
 
     lottos.forEach((lotto, index) => {
-      const { matchCount, matchBonus } = winning.match(lotto);
+      const { matchCount, matchBonus } = winning.matchLottoNumbers(lotto.getNumbers());
       const answer = MATCH[index];
 
       expect(matchCount).toBe(answer.matchCount);

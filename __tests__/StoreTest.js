@@ -1,4 +1,4 @@
-import Store from '../src/Store';
+import Store from '../src/model/Store';
 import { MATCH_STRINGS, MATCH_WINNING_AMOUNTS } from '../src/constants/match';
 
 describe('Store 테스트', () => {

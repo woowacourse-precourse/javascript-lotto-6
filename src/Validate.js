@@ -1,41 +1,55 @@
 class Validate {
-  static isSixNumbers(numbers, errorMessage) {
-    if (numbers.length !== 6) {
-      Validate.throwError(errorMessage);
-    }
+  #numbers;
+
+  constructor(numbers) {
+    this.#numbers = numbers;
   }
 
-  static isDuplicate(numbers, errorMessage) {
-    if (new Set([...numbers]).size !== numbers.length) {
-      Validate.throwError(errorMessage);
+  isSixNumbers(errorMessage) {
+    if (this.#numbers.length !== 6) {
+      Validate.#throwError(errorMessage);
     }
+    return this;
   }
 
-  static isInteger(numbers, errorMessage) {
-    if (!numbers.every((number) => Number.isInteger(number))) {
-      Validate.throwError(errorMessage);
+  isDuplicate(errorMessage) {
+    if (new Set([...this.#numbers]).size !== this.#numbers.length) {
+      Validate.#throwError(errorMessage);
     }
+    return this;
   }
 
-  static isInRange(numbers, errorMessage) {
-    if (!numbers.every((number) => number >= 1 && number <= 45)) {
-      Validate.throwError(errorMessage);
+  isInteger(errorMessage) {
+    if (!this.#numbers.every((number) => Number.isInteger(number))) {
+      Validate.#throwError(errorMessage);
     }
+    return this;
   }
 
-  static isMultipleThousand(numbers, errorMessage) {
-    if (!numbers.every((number) => number % 1000 === 0)) {
-      Validate.throwError(errorMessage);
+  isInRange(errorMessage) {
+    if (!this.#numbers.every((number) => number >= 1 && number <= 45)) {
+      Validate.#throwError(errorMessage);
     }
+    return this;
   }
 
-  static isNumberNotInNumbers(number, numbers, errorMessage) {
-    if (numbers.includes(number)) {
-      Validate.throwError(errorMessage);
+  isMultipleThousand(errorMessage) {
+    if (!this.#numbers.every((number) => number % 1000 === 0)) {
+      Validate.#throwError(errorMessage);
     }
+    return this;
   }
 
-  static throwError(errorMessage) {
+  isNumberNotInNumbers(tagetNumbers, errorMessage) {
+    this.#numbers.forEach((number) => {
+      if (tagetNumbers.includes(number)) {
+        Validate.#throwError(errorMessage);
+      }
+    });
+    return this;
+  }
+
+  static #throwError(errorMessage) {
     throw new Error(`[ERROR] ${errorMessage}`);
   }
 }

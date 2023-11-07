@@ -1,25 +1,56 @@
-import Print from '../Print.js';
-import Store from '../Store.js';
+import print from '../utils/print.js';
+import PRINT_PHRASE from '../constants/print.js';
 
 class OutputView {
-  static outputLottoNumbers(user) {
-    user.purchaseLottos();
-    const lottos = user.getLottos();
-    Print.printNPurchasePhrase(lottos.length).printLottosNumbers(lottos).print();
+  static outputLottosNumbers(lottos) {
+    OutputView.#printNPurchasePhrase(lottos.length).#printLottosNumbers(lottos);
+    print();
   }
 
-  static outputResults(user, winning) {
-    const store = OutputView.#match(user, winning);
-    Print.printWinningStatistics(store.getMatchResults()).printTotalReturn(store.getTotalReturn());
+  static outputResults(store) {
+    OutputView.#printWinningStatistics(store.getMatchResults()).#printTotalReturn(
+      store.getTotalReturn(),
+    );
   }
 
-  static #match(user, winning) {
-    const store = new Store(user.getpurchaseAmount());
+  static #printNPurchasePhrase(n) {
+    print(`${n}${PRINT_PHRASE.purchasePhrase}`);
+    return this;
+  }
 
-    user.getLottos().forEach((lotto) => {
-      store.storeMatchResult(winning.match(lotto));
+  static #printLottosNumbers(lottos) {
+    lottos.forEach((lotto) => {
+      print(`[${OutputView.#sortLottoNumbers(lotto)}]`);
     });
-    return store;
+
+    return this;
+  }
+
+  static #sortLottoNumbers(lotto) {
+    return [...lotto.getNumbers()].sort((a, b) => a - b).join(', ');
+  }
+
+  static #printWinningStatistics(matchResults) {
+    const { winningStatisticsPhase, contour } = PRINT_PHRASE;
+    print(winningStatisticsPhase);
+    print(contour);
+
+    matchResults.forEach(({ matchString, money, count }) => {
+      print(`${matchString} (${OutputView.#formatCurrency(money)}) - ${count}개`);
+    });
+
+    return this;
+  }
+
+  static #formatCurrency(money) {
+    return `${money.toLocaleString('en-US')}원`;
+  }
+
+  static #printTotalReturn(totalReturn) {
+    const { totalReturnStartPhrase, totalReturnEndPhrase } = PRINT_PHRASE;
+    print(`${totalReturnStartPhrase} ${totalReturn}${totalReturnEndPhrase}`);
+
+    return this;
   }
 }
 
