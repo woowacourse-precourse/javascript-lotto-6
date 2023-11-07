@@ -4,6 +4,9 @@ import Message from './utils/Message.js';
 import { LOTTO_RANGE, LOTTO_COUNT, LOTTO_PRICE } from './constants/number.js';
 import Input from './utils/Input.js';
 import PROMPT from './constants/prompt.js';
+import NumberValidator from './validators/NumberValidator.js';
+import CustomError from './customs/CustomError.js';
+import ERROR_MESSAGE from './constants/error.js';
 
 /**
  * @classdesc 복권 발급처
@@ -48,6 +51,9 @@ class DongHang {
     this.#winningNumbers.mainNumbers = new Lotto(mainNumbers);
 
     const bonusNumber = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
+    if (!NumberValidator.isInRange(bonusNumber, LOTTO_RANGE)) {
+      throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
+    }
 
     this.#winningNumbers.bonusNumber = bonusNumber;
   }
