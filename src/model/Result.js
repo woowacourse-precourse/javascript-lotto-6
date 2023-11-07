@@ -1,5 +1,6 @@
 import { print } from "../view/print";
 import { MESSAGE } from "../constant/MESSAGE";
+import { LOTTO_SETTINGS } from "../constant/LOTTO_SETTINGS";
 
 export default class Result {
   #winPrice;
@@ -53,8 +54,7 @@ export default class Result {
 
   // 돈 계산
   async addPrice() {
-    const price = [5000, 50000, 1500000, 30000000, 2000000000];
-
+    const price = [LOTTO_SETTINGS.FIFTH_PRIZE, LOTTO_SETTINGS.FOURTH_PRIZE, LOTTO_SETTINGS.THIRD_PRIZE, LOTTO_SETTINGS.SECOND_PRIZE, LOTTO_SETTINGS.FIRST_PRIZE];
     this.#winPrice = this.#ranking.reduce((accumulator, currentValue, index) => accumulator + currentValue * price[index], 0);
   }
 

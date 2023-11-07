@@ -20,6 +20,8 @@ export const inputAnswer = async () => {
 		answer.setBonusNumber(inputBonusNumber);
 	} catch(error) {
 		print(error.message);
+		const inputBonusNumber = await readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+		answer.setBonusNumber(inputBonusNumber);
 	}
 
 	// 정답과 보너스 번호
