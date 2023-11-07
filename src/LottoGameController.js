@@ -33,7 +33,7 @@ class LottoGameController {
     await this.initPurchase();
     this.initLottoTickets();
     await this.initWinningNumbers();
-    this.outputView.printMessage(OUTPUT_MESSAGE.statisticsMessage);
+    this.outputView.printGetNumbersOrMessage(OUTPUT_MESSAGE.statisticsMessage);
   }
 
   async initPurchase() {
@@ -65,7 +65,7 @@ class LottoGameController {
       const lotto = new Lotto();
       const lottoNumbers = lotto.getNumbers();
       const formattedLottoNumbers = `[${lottoNumbers.join(', ')}]`;
-      this.outputView.printGetNumbers(formattedLottoNumbers);
+      this.outputView.printGetNumbersOrMessage(formattedLottoNumbers);
       return lottoNumbers;
     });
   }

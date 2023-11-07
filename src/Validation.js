@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './constants.js';
+import { ERROR_MESSAGE, LOTTO_NUMBER } from './constants.js';
 
 class Validation {
   static validatePurchaseAmount(purchaseAmount) {
@@ -43,7 +43,7 @@ class Validation {
   }
 
   static isInRange(value) {
-    return value >= 1 && value <= 45;
+    return value >= LOTTO_NUMBER.inRangeFrom && value <= LOTTO_NUMBER.inRangeTo;
   }
 }
 

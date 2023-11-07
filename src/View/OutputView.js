@@ -1,20 +1,17 @@
 import { Console } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE } from '../constants';
 
 class OutputView {
   printError(errorMessage) {
-    Console.print(`[ERROR] ${errorMessage}`);
+    Console.print(`${ERROR_MESSAGE.errorText} ${errorMessage}`);
   }
 
   printNumLottoTickets(numLottoTickets) {
     Console.print(`\n${numLottoTickets}개를 구매했습니다.`);
   }
 
-  printGetNumbers(numbers) {
-    Console.print(numbers);
-  }
-
-  printMessage(message) {
-    Console.print(message);
+  printGetNumbersOrMessage(numberOrMessage) {
+    Console.print(numberOrMessage);
   }
 
   printWinningStats(stats) {
