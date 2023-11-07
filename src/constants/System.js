@@ -9,4 +9,12 @@ export const LOTTO = {
   numberRangeEnd: 45,
   numberCount: 6,
   price: 1000,
+  rank: {
+    6: '1등',
+    bonus: '2등',
+    5: '3등',
+    4: '4등',
+    3: '5등',
+    undefined: '꽝',
+  },
 };

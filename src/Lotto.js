@@ -15,15 +15,6 @@ class Lotto {
    */
   #numbers;
 
-  static RANK = {
-    6: '1등',
-    bonus: '2등',
-    5: '3등',
-    4: '4등',
-    3: '5등',
-    undefined: '꽝',
-  };
-
   /**
    * @param {string} numbers
    */
@@ -59,9 +50,9 @@ class Lotto {
   compareWinningNumbers(userLotto, bonus) {
     const count = this.#calculateCount(userLotto);
 
-    if (Lotto.#isSecond(count, bonus, userLotto)) return Lotto.RANK.bonus;
+    if (Lotto.#isSecond(count, bonus, userLotto)) return LOTTO.rank.bonus;
 
-    return Lotto.RANK[count] ?? Lotto.RANK.undefined;
+    return LOTTO.rank[count] ?? LOTTO.rank.undefined;
   }
 
   #calculateCount(userLotto) {
