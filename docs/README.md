@@ -61,25 +61,25 @@
 
 ### **Model**
 
-### `private field`
+#### `private field`
 
 - `#lotties`: 랜덤으로 부여된 로또들이 담긴 배열
 
-- `#prizeCategories`: 당첨 통계 분류에 기반한 객체
+- `#prizeCategories`: 당첨 조건에 따라 분류한 객체
 
 #### `method`
 
-- `getLotties`: privatelotties 배열을 반환하는 메서드
+- `getLotties`: lotties 배열을 반환하는 메서드
 
 - `getPrizeCategories`: prizeCategories 객체를 반환하는 메서드
 
-- `makeLotto`: 구매금액에 따른 로또를 만들어주는 메서드
+- `makeLotto`: 구매 금액에 따른 로또를 만들어주는 메서드
 
-- `compareWinLotto`: 우승번호와 구매한 로또번호를 비교해주는 메서드
+- `compareWinLotto`: 우승번호와 구매한 로또번호를 비교해 주는 메서드
 
-- `checkEqualWinNum`: 구매한 로또 번호 중에서 당첨 번호와 같은 번호를 반환해주는 메서드
+- `checkEqualWinNum`: 구매한 로또번호 중에서 당첨번호와 같은 번호를 반환해주는 메서드
 
-- `makePrizeCategory`: 당첨 조건에 해당하는 로또 개수를 `prizeCategories`에 분류해주는 메서드
+- `makePrizeCategory`: 당첨 조건에 해당하는 로또 개수를 `prizeCategories`에 반영하는 메서드
 
 - `calculateProfit`: 수익률을 계산해주는 메서드
 
@@ -111,7 +111,7 @@
 
 #### `method`
 
-- `initHandler`: 로또 게임 시작전 초기 설정을 해주는 메서드
+- `initHandler`: 로또 게임 시작전 초기 설정 메서드
 
 - `startLottoHandler`: 로또 게임을 시작하는 메서드
 
