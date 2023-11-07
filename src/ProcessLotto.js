@@ -48,7 +48,8 @@ class ProcessLotto {
       const lottoNum =
         await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
 
-      this.#winningNumber = lottoNum.split(',');
+      this.setWinningNumber(lottoNum.split(','));
+
       const lotto = new Lotto(this.#winningNumber);
 
       return this.#winningNumber;
@@ -60,8 +61,8 @@ class ProcessLotto {
 
   async inputBonusNumber() {
     try {
-      this.#winningBonus = await Console.readLineAsync(
-        '\n보너스 번호를 입력해 주세요.\n',
+      this.setWinningBonus(
+        await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n'),
       );
       this.validateBonusNumber(this.#winningBonus);
       return this.#winningBonus;
@@ -72,11 +73,12 @@ class ProcessLotto {
   }
 
   validateBonusNumber(number) {
-    if (Number.isNaN(+number) || +number < 1 || +number > 45) {
+    const intBonus = parseInt(number, 10);
+    if (Number.isNaN(intBonus) || intBonus < 1 || intBonus > 45) {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
 
-    if (this.#winningNumber.includes(number) || !Number.isInteger(+number)) {
+    if (this.#winningNumber.includes(number) || !Number.isInteger(intBonus)) {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
   }
@@ -89,7 +91,7 @@ class ProcessLotto {
         throw new LottoError(LottoError.ERROR_MSG.notMoney);
       }
       this.#validatePurchaseAmount(intMoney);
-      this.#lottoPieces = intMoney / 1000;
+      this.setLottoPieces(intMoney / 1000);
       return this.#lottoPieces;
     } catch (error) {
       Console.print(error.message);
