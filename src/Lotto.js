@@ -34,7 +34,32 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  /**
+   *
+   * @param {Object} winnningNumbers
+   * @param {number[]} winnningNumbers.mainNumbers
+   * @param {number} winnningNumbers.bonusNumber
+   */
+  check({ mainNumbers, bonusNumber }) {
+    const matchingMain = this.#countMatchingNumbers(mainNumbers);
+    const isBonusNumberMatched = this.#countMatchingNumbers([bonusNumber]) === 1;
+
+    return { matchingMain, isBonusNumberMatched };
+  }
+
+  /**
+   * @param {number[]} numbers
+   * @returns {number} 일치하는 숫자의 개수
+   */
+  #countMatchingNumbers(numbers) {
+    let count = 0;
+
+    numbers.forEach((number) => {
+      if (this.#numbers.indexOf(number) > -1) count += 1;
+    });
+
+    return count;
+  }
 }
 
 export default Lotto;

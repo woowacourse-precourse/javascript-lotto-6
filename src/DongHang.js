@@ -10,12 +10,12 @@ import ERROR_MESSAGE from './constants/error.js';
 
 /**
  * @classdesc 복권 발급처
+ * 복권 발급처는 복권을 발급, 당첨 번호를 입력받는 기능을 가진다.
  */
 class DongHang {
-  #winningNumbers = Object.seal({
-    mainNumbers: [],
-    bonusNumber: 0,
-  });
+  mainNumbers = [];
+
+  bonusNumber = 0;
 
   /**
    * 발급
@@ -48,17 +48,26 @@ class DongHang {
    */
   async inputWinningNumbers() {
     const mainNumbers = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
-    this.#winningNumbers.mainNumbers = new Lotto(mainNumbers);
+    this.mainNumbers = mainNumbers.sort((a, b) => a - b);
 
     const bonusNumber = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
-
     if (!NumberValidator.isInRange(bonusNumber, LOTTO_RANGE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
     }
     if (mainNumbers.includes(bonusNumber)) {
       throw new CustomError(ERROR_MESSAGE.DUPLICATED_NUMBER);
     }
-    this.#winningNumbers.bonusNumber = bonusNumber;
+    this.bonusNumber = bonusNumber;
+  }
+
+  /**
+   * @returns {{ mainNumbers: number[], bonusNumber: number }}}
+   */
+  getWinningNumbers() {
+    return {
+      mainNumbers: this.mainNumbers,
+      bonusNumber: this.bonusNumber,
+    };
   }
 }
 

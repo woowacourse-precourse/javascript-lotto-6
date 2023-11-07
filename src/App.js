@@ -8,6 +8,10 @@ class App {
 
     await this.user.buy();
     await this.donHang.inputWinningNumbers();
+
+    const winningNumbers = this.donHang.getWinningNumbers();
+    this.user.checkAll(winningNumbers);
+    this.user.printStatistics();
   }
 }
 
