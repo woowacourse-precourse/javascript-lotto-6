@@ -2,6 +2,18 @@ import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Utils from './Utils.js';
 
+const NUMBERS_OPTIONS = {
+  first: 1,
+  last: 45,
+  length: 6,
+};
+
+const INFORM_TEMPLATE = {
+  purchase: '개를 구매했습니다.',
+  numberSeperator: ', ',
+  lottoSeperator: '\n',
+};
+
 class IssuingLotto {
   #count;
 
@@ -13,7 +25,11 @@ class IssuingLotto {
   }
 
   #getRandomNumbers() {
-    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const randomNumbers = Random.pickUniqueNumbersInRange(
+      NUMBERS_OPTIONS.first,
+      NUMBERS_OPTIONS.last,
+      NUMBERS_OPTIONS.length,
+    );
     return randomNumbers;
   }
 
@@ -34,10 +50,12 @@ class IssuingLotto {
   }
 
   informIssuedLotto() {
-    const lottoList = this.#issuedLotto.map((lotto) => `[${lotto.join(', ')}]`);
+    const lottoList = this.#issuedLotto.map(
+      (lotto) => `[${lotto.join(INFORM_TEMPLATE.numberSeperator)}]`,
+    );
 
-    Utils.informUser(`${this.#count}개를 구매했습니다.`);
-    Utils.informUser(`${lottoList.join('\n')}`);
+    Utils.informUser(`${this.#count}${INFORM_TEMPLATE.purchase}`);
+    Utils.informUser(`${lottoList.join(INFORM_TEMPLATE.lottoSeperator)}`);
   }
 
   getIssuedLotto() {
