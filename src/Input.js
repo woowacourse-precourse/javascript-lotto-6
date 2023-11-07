@@ -8,6 +8,15 @@ class Input {
 
     return purchaseAmount;
   }
+
+  async askLotteryNumbers() {
+    const lotteryNumbers = await Console.readLineAsync(
+      '당첨 번호를 입력해 주세요.'
+    );
+    console.log(lotteryNumbers.split(','));
+
+    return lotteryNumbers.split(',');
+  }
 }
 
 export default Input;
