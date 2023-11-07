@@ -15,24 +15,11 @@ class GameCalculator {
       this.lotto = new Lotto(lotto);
       const RESULT_PER_LOTTO = this.lotto.getResultPerLotto(this.bonusNumber, this.winningNumbers);
 
-      if (RESULT_PER_LOTTO === 3) {
-        this.winngingResult[NUMBER.three] += 1;
-      }
-
-      if (RESULT_PER_LOTTO === 4) {
-        this.winngingResult[NUMBER.four] += 1;
-      }
-
-      if (RESULT_PER_LOTTO === 5) {
-        this.winngingResult[NUMBER.five] += 1;
-      }
-
-      if (RESULT_PER_LOTTO === OTHERS.bonusNumber) {
+      if(RESULT_PER_LOTTO >= 3 && RESULT_PER_LOTTO <= 6) {
+        const RESULT_KEY = (RESULT_PER_LOTTO === 6) ? NUMBER.seven : String(RESULT_PER_LOTTO);
+        this.winngingResult[RESULT_KEY] += 1
+      } else if(RESULT_PER_LOTTO === OTHERS.bonusNumber) {
         this.winngingResult[NUMBER.six] += 1;
-      }
-
-      if (RESULT_PER_LOTTO === 6) {
-        this.winngingResult[NUMBER.seven] += 1;
       }
     });
 

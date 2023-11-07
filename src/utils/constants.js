@@ -41,9 +41,6 @@ export const ERROR_MESSAGE = Object.freeze({
 
 export const NUMBER = Object.freeze({
   purchaseMoneyDivisor: 1000,
-  three: '3',
-  four: '4',
-  five: '5',
   six: '6',
   seven: '7',
 });
