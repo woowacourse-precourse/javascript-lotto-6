@@ -19,6 +19,7 @@ class App {
       await validatePurchaseAmountInput(this.purchaseAmountInput);
     } catch (e) {
       await this.outputManager.printPurchaseAmountInputErrorMessage(e.message);
+      await this.getPurchaseAmount();
     }
     return Number(this.purchaseAmountInput);
   }
