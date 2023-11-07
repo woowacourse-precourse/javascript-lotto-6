@@ -7,7 +7,8 @@ class Game {
   async play() {
     try {
       const priceInput = await User.readInput(MESSAGE.enterPrice);
-      Console.print(Validation.price(priceInput));
+      const numberOfLotto = Validation.price(priceInput) / 1000;
+      Console.print(numberOfLotto);
     } catch (e) {
       Console.print(e);
       throw e;
