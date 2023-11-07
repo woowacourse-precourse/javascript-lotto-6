@@ -10,6 +10,18 @@ const InputValidator = {
       throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.purchasePrice}`);
     }
   },
+
+  validateWinningNums(nums) {
+    if (!nums) {
+      throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.blank}`);
+    }
+    const numsSet = new Set(nums);
+    if (numsSet.size != STATIC_NUMBER.LottoNumLen) {
+      throw new Error(
+        `${MESSAGE_ERROR.header} ${MESSAGE_ERROR.duplicatedWinningNums}`
+      );
+    }
+  },
 };
 
 export default InputValidator;

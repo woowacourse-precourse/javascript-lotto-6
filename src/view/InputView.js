@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import Calculator from "../utils/calc/Calculator.js";
-import { MESSAGE_ASK } from "../static/Static.js";
+import { MESSAGE_ASK, SEPARATOR } from "../static/Static.js";
 import InputValidator from "../utils/validator/InputValidator.js";
 import OutputView from "./OutputView.js";
 
@@ -15,15 +15,24 @@ const InputView = {
         const purchaseQuantity = Calculator.calcPurchaseQuantity(purchasePrice);
         return purchaseQuantity;
       } catch (error) {
-        OutputView.printPurchasePriceError(error);
+        OutputView.printErrorMessage(error);
       }
     }
   },
 
   async readWinningNums() {
-    try {
-      return await Console.readLineAsync(MESSAGE_ASK.winningNums);
-    } catch (error) {}
+    while (true) {
+      try {
+        const winningNums = await Console.readLineAsync(
+          MESSAGE_ASK.winningNums
+        );
+        const winningNumsArr = winningNums.split(SEPARATOR.comma);
+        InputValidator.validateWinningNums(winningNumsArr);
+        return winningNumsArr;
+      } catch (error) {
+        OutputView.printErrorMessage(error);
+      }
+    }
   },
 
   async readBonusNum() {
