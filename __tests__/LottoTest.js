@@ -42,12 +42,11 @@ describe("프린터 테스트", () => {
 
     // when
     const printer = new Printer(1000);
+    const lotto = printer.getTicket()[0];
     printer.pack();
     printer.print();
 
     // then
-    expect(logSpy).toHaveBeenCalledWith(
-      `[${printer.getTicket()[0].get().join(", ")}]`
-    );
+    expect(logSpy).toHaveBeenCalledWith(`[${lotto.get().join(", ")}]`);
   });
 });
