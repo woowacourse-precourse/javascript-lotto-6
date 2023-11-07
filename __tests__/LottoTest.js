@@ -67,4 +67,32 @@ describe('로또 클래스 테스트', () => {
       },
     );
   });
+
+  describe('로또 결과 반환', () => {
+    let cases = [
+      { matchCnt: 0, hasBonus: false, label: '0개 일치', winnings: 0 },
+      { matchCnt: 1, hasBonus: false, label: '1개 일치', winnings: 0 },
+      { matchCnt: 2, hasBonus: false, label: '2개 일치', winnings: 0 },
+      { matchCnt: 3, hasBonus: false, label: '3개 일치', winnings: 5000 },
+      { matchCnt: 4, hasBonus: false, label: '4개 일치', winnings: 50000 },
+      { matchCnt: 5, hasBonus: false, label: '5개 일치', winnings: 1500000 },
+      { matchCnt: 6, hasBonus: false, label: '6개 일치', winnings: 2000000000 },
+      { matchCnt: 0, hasBonus: true, label: '0개 일치', winnings: 0 },
+      { matchCnt: 1, hasBonus: true, label: '1개 일치', winnings: 0 },
+      { matchCnt: 2, hasBonus: true, label: '2개 일치', winnings: 0 },
+      { matchCnt: 3, hasBonus: true, label: '3개 일치', winnings: 5000 },
+      { matchCnt: 4, hasBonus: true, label: '4개 일치', winnings: 50000 },
+      { matchCnt: 5, hasBonus: true, label: '5개 일치, 보너스 볼 일치', winnings: 30000000 },
+    ];
+
+    test.each(cases)(
+      "로또 번호가 $matchCnt개 일치하고 보너스번호 유무가 $hasBonus이면, label은 '$label'이고, 상금은 $winnings이다.",
+      (input) => {
+        expect(Lotto.getLottoWinnings(input.matchCnt, input.hasBonus)).toEqual({
+          label: input.label,
+          winnings: input.winnings,
+        });
+      },
+    );
+  });
 });
