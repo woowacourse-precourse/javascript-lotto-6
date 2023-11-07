@@ -18,17 +18,15 @@ describe('로또 컴퓨터 클래스 테스트', () => {
   test('생성된 로또들의 번호와 당첨 번호, 보너스 번호를 비교한 결과를 최종 산출에 반영한다.', () => {
     const computer = new Computer(winnnersNumbers, bonusNumber);
     const lottos = numbers.map((elem) => new Lotto(elem));
+    computer.setPrizeResult(lottos);
 
-    expect(computer.getPrizeResult(lottos)).toEqual([
-      { mathNumber: 0, isMatchBonus: false },
-      { mathNumber: 2, isMatchBonus: false },
-      { mathNumber: 0, isMatchBonus: true },
-      { mathNumber: 1, isMatchBonus: false },
-      { mathNumber: 0, isMatchBonus: false },
-      { mathNumber: 0, isMatchBonus: true },
-      { mathNumber: 1, isMatchBonus: false },
-      { mathNumber: 3, isMatchBonus: false },
-    ]);
+    expect(computer.getPrizeResult()).toEqual({
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 1,
+    });
   });
 
   test('최종 산출된 등수의 결과를 바탕으로 수익률을 계산한다.', () => {});
