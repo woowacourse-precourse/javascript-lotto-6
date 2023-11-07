@@ -4,18 +4,28 @@ import ValidationError from '../error/ValidationError.js';
 import { DIVIDER } from '../constants/Symbol.js';
 
 /**
- * @public
  * @param {number[]} input
  * @throws {ValidationError}
  */
-const checkValidDivider = (input) => {
+const checkValidCharacter = (input) => {
+  input.forEach((number) => {
+    if (Number.isNaN(number)) {
+      throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidCharacter);
+    }
+  });
+};
+
+/**
+ * @param {number[]} input
+ * @throws {ValidationError}
+ */
+const checkValidInputLength = (input) => {
   if (input.length !== LOTTO_MAGICNUMBER.selectAmount) {
-    throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidDivider);
+    throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidInputLength);
   }
 };
 
 /**
- * @public
  * @param {number[]} input
  * @throws {ValidationError}
  */
@@ -66,7 +76,8 @@ const validateLottoNumbers = (lottoNumbers) => {
       ? lottoNumbers
       : lottoNumbers.split(DIVIDER.comma).map(Number);
 
-  checkValidDivider(splitLottoNumbers);
+  checkValidCharacter(splitLottoNumbers);
+  checkValidInputLength(splitLottoNumbers);
   checkValidNumber(splitLottoNumbers);
   checkValidNumberRange(splitLottoNumbers);
   checkDuplicationNumber(splitLottoNumbers);
