@@ -1,27 +1,27 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import { GAME_PRIZES, NUMBER, PRIZE_AMOUNTS } from "../utils/Constans";
-import { GAME_MESSAGES } from "../utils/Messages";
+import { Console } from '@woowacourse/mission-utils';
+import { GAME_PRIZES, NUMBER, PRIZE_AMOUNTS } from '../utils/Constans';
+import { GAME_MESSAGES } from '../utils/Messages';
 
 class OutputView {
   static printQuantity(ticketPrice) {
-    MissionUtils.Console.print(
+    Console.print(
       `${ticketPrice / PRIZE_AMOUNTS.TICKET_PRICE_AMOUNT}개를 구매했습니다.`
     );
   }
 
   static printLottoTickets(tickets) {
     const formattedTickets = tickets
-      .map((ticket) => `[${ticket.join(", ")}]`)
-      .join("\n");
-    MissionUtils.Console.print(formattedTickets);
+      .map((ticket) => `[${ticket.join(', ')}]`)
+      .join('\n');
+    Console.print(formattedTickets);
   }
 
   static printResultTitle() {
-    MissionUtils.Console.print(GAME_MESSAGES.RESULT_TITLE);
+    Console.print(GAME_MESSAGES.RESULT_TITLE);
   }
 
   static printSeparator() {
-    MissionUtils.Console.print(GAME_MESSAGES.SEPARATOR);
+    Console.print(GAME_MESSAGES.SEPARATOR);
   }
 
   static formatResults(result) {
@@ -43,13 +43,13 @@ class OutputView {
     formattedResults.push(
       `6개 일치 (2,000,000,000원) - ${result[GAME_PRIZES.FIRST_PRIZE]}개`
     );
-    MissionUtils.Console.print(formattedResults.join("\n"));
+    Console.print(formattedResults.join("\n"));
   }
 
   static calculateProfitRate(result) {
     const profitRate =
       (result.totalEarnings / result.totalSpent) * NUMBER.ONE_HUNDRED;
-    MissionUtils.Console.print(
+    Console.print(
       `총 수익률은 ${profitRate.toFixed(NUMBER.ONE)}%입니다.`
     );
   }

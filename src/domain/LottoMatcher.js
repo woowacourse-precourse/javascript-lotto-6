@@ -1,4 +1,4 @@
-import { GAME_PRIZES, NUMBER, PRIZE_AMOUNTS } from "../utils/Constans";
+import { GAME_PRIZES, NUMBER, PRIZE_AMOUNTS } from '../utils/Constans';
 
 class LottoMatcher {
   constructor(tickets, winningNumbers, bonusNumber, ticketPrice) {

@@ -1,5 +1,5 @@
-import { ERROR_MESSAGES } from "../utils/Messages.js";
-import { isNumberLengthValid, isNumbersInRange } from "../utils/Validation.js";
+import { ERROR_MESSAGES } from '../utils/Messages.js';
+import { isNumberLengthValid, isNumbersInRange } from '../utils/Validation.js';
 
 class Lotto {
   #numbers;

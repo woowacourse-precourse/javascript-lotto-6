@@ -1,5 +1,4 @@
 import UserLottoModel from '../src/domain/UserLottoModel';
-import Lotto from '../src/domain/Lotto';
 
 describe('UserLottoModel 클래스 테스트', () => {
   let userLottoModel;

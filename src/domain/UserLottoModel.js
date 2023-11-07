@@ -1,6 +1,6 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import { NUMBER, PRIZE_AMOUNTS } from "../utils/Constans";
-import Lotto from "./Lotto";
+import { Random } from '@woowacourse/mission-utils';
+import { NUMBER, PRIZE_AMOUNTS } from '../utils/Constans';
+import Lotto from './Lotto';
 
 class UserLottoModel {
   #lottoTickets;
@@ -22,7 +22,7 @@ class UserLottoModel {
   }
 
   #generateRandomNumber(){
-    return MissionUtils.Random.pickUniqueNumbersInRange(NUMBER.ONE, NUMBER.FORTY_FIVE, NUMBER.SIX)
+    return Random.pickUniqueNumbersInRange(NUMBER.ONE, NUMBER.FORTY_FIVE, NUMBER.SIX)
   }
 
   getLottoTickets() {

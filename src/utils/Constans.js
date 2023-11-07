@@ -1,9 +1,9 @@
 const GAME_PRIZES = Object.freeze({
-  FIRST_PRIZE: "1등",
-  SECOND_PRIZE: "2등",
-  THIRD_PRIZE: "3등",
-  FOURTH_PRIZE: "4등",
-  FIFTH_PRIZE: "5등",
+  FIRST_PRIZE: '1등',
+  SECOND_PRIZE: '2등',
+  THIRD_PRIZE: '3등',
+  FOURTH_PRIZE: '4등',
+  FIFTH_PRIZE: '5등',
 });
 
 const NUMBER = Object.freeze({

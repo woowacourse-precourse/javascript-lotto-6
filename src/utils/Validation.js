@@ -1,26 +1,17 @@
-import { NUMBER } from "./Constans";
+import { NUMBER } from './Constans';
 
 const isDivisibleByThousand = (purchaseAmount) => {
-    if (purchaseAmount % 1000 !== 0) {
-        return false;
-    }
-    return true;
+    return purchaseAmount % 1000 === 0;
 }
 
 const isNumber = (purchaseAmount) => {
-    if (isNaN(Number(purchaseAmount))) {
-        return false;
-    }
-    return true;
+    return !isNaN(Number(purchaseAmount));
 }
 
 const isNumberLengthValid = (numbers) => {
-    const numberArray = numbers.toString().split(",");
+    const numberArray = numbers.toString().split(',');
     const uniqueNumbers = [...new Set(numberArray)];
-    if (uniqueNumbers.length !== NUMBER.SIX) {
-        return false;
-    }
-    return true;
+    return uniqueNumbers.length === NUMBER.SIX;
 }
 
 const isNumbersInRange = (numbers) => {

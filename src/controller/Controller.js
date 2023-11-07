@@ -1,9 +1,8 @@
-import InputView from "../view/InputView";
-import OutputView from "../view/OutputView";
-import UserLottoModel from "../domain/UserLottoModel";
-import LottoMatcher from "../domain/LottoMatcher";
-
-import { Console } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
+import InputView from '../view/InputView';
+import OutputView from '../view/OutputView';
+import UserLottoModel from '../domain/UserLottoModel';
+import LottoMatcher from '../domain/LottoMatcher';
 
 class LottoController {
   #userLottoModel;
@@ -11,6 +10,7 @@ class LottoController {
   constructor() {
     this.#userLottoModel = new UserLottoModel();
   }
+  
   async playGame() {
     try {
         // 금액 입력

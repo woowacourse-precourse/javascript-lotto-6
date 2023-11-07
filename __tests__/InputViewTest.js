@@ -1,5 +1,5 @@
 import InputView from '../src/view/InputView';
-import MissionUtils from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 
 jest.mock('@woowacourse/mission-utils', () => ({
   Console: {
@@ -13,7 +13,7 @@ describe('InputView 클래스 테스트', () => {
   });
 
   test('유효하지 않은 로또 금액을 입력 시 에러', async () => {
-    MissionUtils.Console.readLineAsync.mockResolvedValue('abc');
+    Console.readLineAsync.mockResolvedValue('abc');
     try {
       await InputView.getLottoNumbers();
     } catch (error) {
@@ -22,7 +22,7 @@ describe('InputView 클래스 테스트', () => {
   });
 
   test('유효하지 않은 당첨 번호를 입력 시 에러', async () => {
-    MissionUtils.Console.readLineAsync.mockResolvedValue('1,2,3,4');
+    Console.readLineAsync.mockResolvedValue('1,2,3,4');
     try {
       await InputView.getWinningNumbers();
     } catch (error) {
@@ -31,7 +31,7 @@ describe('InputView 클래스 테스트', () => {
   });
 
   test('유효하지 않은 보너스 번호를 입력 시 에러', async () => {
-    MissionUtils.Console.readLineAsync.mockResolvedValue('50');
+    Console.readLineAsync.mockResolvedValue('50');
     try {
       await InputView.getBonusNumbers();
     } catch (error) {
