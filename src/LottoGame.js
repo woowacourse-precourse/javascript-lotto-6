@@ -22,10 +22,12 @@ class LottoGame {
     const lottoCount = this.#purchaseAmount / LOTTO_INFO.purchase.unit;
     OutputView.printPurchaseLottoCount(lottoCount);
 
-    this.#lottoList = Array.from(
-      { length: lottoCount },
-      () => new Lotto(LottoGame.getRandomLottoNumbers()),
-    );
+    this.#lottoList = Array.from({ length: lottoCount }, () => {
+      const randomLottoNumbers = LottoGame.getRandomLottoNumbers();
+      OutputView.printLottoNumbers(randomLottoNumbers);
+
+      return new Lotto(randomLottoNumbers);
+    });
   }
 
   static getRandomLottoNumbers() {

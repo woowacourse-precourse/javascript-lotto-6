@@ -9,6 +9,12 @@ class OutputView {
   static async printPurchaseLottoCount(count) {
     Console.print(count + OUTPUT_MESSAGE.purchaseLottoCount);
   }
+
+  static async printLottoNumbers(numbers) {
+    const sortedNumbers = numbers.sort((a, b) => a - b);
+
+    Console.print(sortedNumbers);
+  }
 }
 
 export default OutputView;
