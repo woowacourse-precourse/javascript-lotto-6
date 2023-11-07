@@ -5,6 +5,10 @@ class LottoGameError {
     ConsoleOutput.output(error.message);
   }
 
+  static tooMuchTicketsError(error) {
+    ConsoleOutput.output(error.message);
+  }
+
   static printInputWinningNumberError(error) {
     ConsoleOutput.output(error.message);
   }
