@@ -1,5 +1,5 @@
 import { bonusNumberHandler, lottoCalculatorHandler, lottoGeneratorHandler } from "./handlers";
-import OutputView from "./OutputView";
+import OutputView from "./View/OutputView";
 
 class App {
   #lottoGenerator;

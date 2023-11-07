@@ -1,7 +1,7 @@
 import LottoGenerator from './LottoGenerator';
 import LottoCalculator from './LottoCalculator';
-import InputView from './InputView';
-import OutputView from './OutputView';
+import InputView from './View/InputView';
+import OutputView from './View/OutputView';
 
 const ErrorHandlerAndRetry = async (handler, retry) => {
   try {
