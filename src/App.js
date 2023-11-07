@@ -63,5 +63,25 @@ class App {
     }
     return bonusNumber;
   }
+  // TODO: 당첨 결과 계산
+  #checkResults(winningNumbers, bonusNumber) {
+    const result = { '3': 0, '4': 0, '5': 0, '5+1': 0, '6': 0 };
+    this.#lottos.forEach(lotto => {
+      const matches = lotto.numbers.filter(number => winningNumbers.includes(number)).length;
+      if (matches === 6) {
+        result['6']++;
+      } else if (matches === 5 && lotto.numbers.includes(bonusNumber)) {
+        result['5+1']++;
+      } else if (matches === 5) {
+        result['5']++;
+      } else if (matches === 4) {
+        result['4']++;
+      } else if (matches === 3) {
+        result['3']++;
+      }
+    });
+    return result;
+  }
+  
 }
 export default App;
