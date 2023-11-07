@@ -7,16 +7,19 @@ const rateModel = {
 
   getPercent(total, price) {
     const percent = (total / price) * 100;
+
     return percent;
   },
 
   getRoundedValue(percent) {
     const roundedValue = percent.toFixed(1);
+
     return roundedValue;
   },
 
   getMonetaryValue(roundedValue) {
     const monetaryValue = roundedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
     return monetaryValue;
   },
 
