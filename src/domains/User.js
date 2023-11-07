@@ -1,10 +1,12 @@
 class User {
   #money;
+  #usedMoney;
   #lottoList;
 
   constructor(money) {
     this.#validate(money);
     this.#money = money;
+    this.#usedMoney = 0;
     this.#lottoList = [];
   }
 
@@ -17,10 +19,15 @@ class User {
   buyLotto(lotto, lottoPrice) {
     this.#lottoList.push(lotto);
     this.#money -= lottoPrice;
+    this.#usedMoney += lottoPrice;
   }
 
   getMoney() {
     return this.#money;
+  }
+
+  getUsedMoney() {
+    return this.#usedMoney;
   }
 
   getLottoList() {

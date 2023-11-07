@@ -61,8 +61,8 @@ class LottoController {
     const totalProfit =
       calCulatorLottoResult.getTotalProfit(lottoWinningCounts);
 
-    const totalUsedMoney =
-      this.#user.getLottoList().length * this.#lottoShop.getLottoPrice();
+    const totalUsedMoney = this.#user.getUsedMoney();
+
     this.#outPutView.printLottoResults(lottoWinningCounts);
     this.#outPutView.printLottoReturns(totalProfit, totalUsedMoney);
   }
