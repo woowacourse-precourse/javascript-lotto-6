@@ -39,4 +39,18 @@ describe("당첨 번호 클래스 테스트", () => {
         WinningLotto.validate_bonus(winningNumbers, bonusNumber);
     }).toThrow("[ERROR]");
   });
+
+  test('주어진 로또 번호와 당첨 번호 및 보너스 번호를 비교하여 올바른 결과를 반환한다.', () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const winningLotto = new WinningLotto(winningNumbers);
+    const lottoList = [[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12], [1, 2, 3, 7, 8, 9],[1, 2, 3, 4, 5, 7]];
+    const bonusNumber = 7;
+  
+    const result = winningLotto.checkMatch(lottoList, bonusNumber);
+    expect(result.get('6')).toBe(1);
+    expect(result.get('5+')).toBe(1);
+    expect(result.get('5')).toBe(0);
+    expect(result.get('4')).toBe(0);
+    expect(result.get('3')).toBe(1);
+  });
 });
