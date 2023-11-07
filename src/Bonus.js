@@ -19,7 +19,7 @@ class Bonus {
 
   #checkDuplicateNumber(lotto) {
     if (lotto.includes(this.#bonus)) {
-      throw new Error(MESSAGE.error.duplicateNumber);
+      throw new Error(MESSAGE.error.duplicateBonusNumber);
     }
   }
 
