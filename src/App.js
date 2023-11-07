@@ -23,10 +23,10 @@ class App {
 
       const matchResult = lottoMatcher(purchaseValues.purchasedLotto, lotto, bonusNumber);
       const lottoResult = lottoCompareService(matchResult, purchaseValues.purchaseAmount);
+
       winningStatisticsUI(lottoResult);
     } catch (error) {
-      const errorMessage = error.message;
-      consolePrint(errorMessage);
+      consolePrint(error.message);
     }
   }
 }
