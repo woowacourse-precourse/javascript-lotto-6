@@ -26,7 +26,7 @@ class Lotto {
         throw new Error('[ERROR] 1부터 45 사이의 숫자를 입력해주세요.');
       }
 
-      if (numbers.includes(number)) {
+      if (numbers.indexOf(number) !== numbers.lastIndexOf(number)) {
         throw new Error('[ERROR] 중복된 숫자가 있는지 확인해주세요.');
       }
     });
