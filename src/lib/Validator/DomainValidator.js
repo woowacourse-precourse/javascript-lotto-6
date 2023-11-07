@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE, GAME_RULE } from "../Constants.js";
-import { ValidationError } from "../Error/ValidationError.js";
+import { ValidationError } from "../Error/index.js";
 
 class DomainValidator {
   static lottoMoney(money) {

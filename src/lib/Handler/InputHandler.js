@@ -1,22 +1,23 @@
 // domain
 import LottoBundle from "../Domain/LottoBundle.js";
 import ReferenceLotto from "../Domain/ReferenceLotto.js";
+// handler
+import OutputHandler from "./OutputHandler.js";
 // view
 import InputView from "../View/InputView.js";
-import OutputView from "../View/OutputView.js";
 // constants
 import { ERROR_MESSAGE } from "../Constants.js";
-// type
 import { ValidationError } from "../Error/ValidationError.js";
 
-export class Handler {
+export class InputHandler {
   static async lottoBundle() {
     try {
       const response = await InputView.lottoMoney();
       const lottoBundle = new LottoBundle(response);
       return lottoBundle;
     } catch (err) {
-      return Handler.#handleError(err, () => Handler.lottoBundle());
+      const retryFunction = () => InputHandler.lottoBundle();
+      return InputHandler.#handleError(err, retryFunction);
     }
   }
 
@@ -26,26 +27,27 @@ export class Handler {
       const referenceLotto = new ReferenceLotto(response);
       return referenceLotto;
     } catch (err) {
-      return Handler.#handleError(err, () => Handler.referenceLotto());
+      const retryFunction = () => InputHandler.referenceLotto();
+      return InputHandler.#handleError(err, retryFunction);
     }
   }
 
-  static async bonusNumber(referenceLotto) {
+  static async injectBonus(referenceLotto) {
     try {
       if (!referenceLotto) throw new Error(ERROR_MESSAGE.LOTTO_NOT_EXIST);
       const response = await InputView.bonusNumber();
       referenceLotto.bonus = response;
     } catch (err) {
-      const retryFunction = () => Handler.bonusNumber(referenceLotto);
-      return Handler.#handleError(err, retryFunction);
+      const retryFunction = () => InputHandler.injectBonus(referenceLotto);
+      return InputHandler.#handleError(err, retryFunction);
     }
   }
 
   static async #handleError(err, retryFunction) {
-    OutputView.err({ message: err.message });
-    if (err instanceof ValidationError) return await retryFunction();
-    throw err;
+    if (!(err instanceof ValidationError)) throw err;
+    OutputHandler.error(err);
+    return await retryFunction();
   }
 }
 
-export default Handler;
+export default InputHandler;

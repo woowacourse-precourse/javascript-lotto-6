@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from "../Constants.js";
-import { ValidationError } from "../Error/ValidationError.js";
+import { ValidationError } from "../Error/index.js";
 
 class InputValidator {
   static lottoMoney(money) {
