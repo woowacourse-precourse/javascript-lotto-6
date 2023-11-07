@@ -1,11 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
 import OutputView from './View/OutputView.js';
-import IssuedLotto from './IssuedLotto.js';
-import Lotto from './Lotto.js';
-import Bonus from './Bonus.js';
-import Computer from './Computer.js';
-import Validate from './Validate.js';
+import IssuedLotto from './model/IssuedLotto.js';
+import Lotto from './model/Lotto.js';
+import Bonus from './model/Bonus.js';
+import Computer from './computer/Computer.js';
+import Validate from './utils/Validate.js';
 
 class App {
   amount;
