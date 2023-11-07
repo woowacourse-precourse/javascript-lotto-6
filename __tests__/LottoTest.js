@@ -68,30 +68,42 @@ describe('로또 클래스 테스트', () => {
     );
   });
 
-  describe('로또 결과 반환', () => {
+  const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+  const mockGetkWinningNumbersMatchCount = (number) => {
+    lotto.getWinningNumbersMatchCount = jest.fn();
+    lotto.getWinningNumbersMatchCount.mockReturnValueOnce(number);
+  };
+
+  const mockHasBonusNumber = (number) => {
+    lotto.hasBonusNumber = jest.fn();
+    lotto.hasBonusNumber.mockReturnValueOnce(number);
+  };
+
+  describe('로또 등수 반환', () => {
     let cases = [
-      { matchCnt: 0, hasBonus: false, label: '0개 일치', winnings: 0 },
-      { matchCnt: 1, hasBonus: false, label: '1개 일치', winnings: 0 },
-      { matchCnt: 2, hasBonus: false, label: '2개 일치', winnings: 0 },
-      { matchCnt: 3, hasBonus: false, label: '3개 일치', winnings: 5000 },
-      { matchCnt: 4, hasBonus: false, label: '4개 일치', winnings: 50000 },
-      { matchCnt: 5, hasBonus: false, label: '5개 일치', winnings: 1500000 },
-      { matchCnt: 6, hasBonus: false, label: '6개 일치', winnings: 2000000000 },
-      { matchCnt: 0, hasBonus: true, label: '0개 일치', winnings: 0 },
-      { matchCnt: 1, hasBonus: true, label: '1개 일치', winnings: 0 },
-      { matchCnt: 2, hasBonus: true, label: '2개 일치', winnings: 0 },
-      { matchCnt: 3, hasBonus: true, label: '3개 일치', winnings: 5000 },
-      { matchCnt: 4, hasBonus: true, label: '4개 일치', winnings: 50000 },
-      { matchCnt: 5, hasBonus: true, label: '5개 일치, 보너스 볼 일치', winnings: 30000000 },
+      { matchCnt: 0, hasBonus: false, place: 0 },
+      { matchCnt: 1, hasBonus: false, place: 0 },
+      { matchCnt: 2, hasBonus: false, place: 0 },
+      { matchCnt: 3, hasBonus: false, place: 5 },
+      { matchCnt: 4, hasBonus: false, place: 4 },
+      { matchCnt: 5, hasBonus: false, place: 3 },
+      { matchCnt: 6, hasBonus: false, place: 1 },
+      { matchCnt: 0, hasBonus: true, place: 0 },
+      { matchCnt: 1, hasBonus: true, place: 0 },
+      { matchCnt: 2, hasBonus: true, place: 0 },
+      { matchCnt: 3, hasBonus: true, place: 5 },
+      { matchCnt: 4, hasBonus: true, place: 4 },
+      { matchCnt: 5, hasBonus: true, place: 2 },
     ];
 
     test.each(cases)(
-      "로또 번호가 $matchCnt개 일치하고 보너스번호 유무가 $hasBonus이면, label은 '$label'이고, 상금은 $winnings이다.",
+      '로또 번호가 $matchCnt개 일치하고 보너스번호 유무가 $hasBonus이면, 등수는 $place이다.',
       (input) => {
-        expect(Lotto.getLottoWinnings(input.matchCnt, input.hasBonus)).toEqual({
-          label: input.label,
-          winnings: input.winnings,
-        });
+        mockGetkWinningNumbersMatchCount(input.matchCnt);
+        mockHasBonusNumber(input.hasBonus);
+
+        expect(lotto.getWinningPlace([1, 2, 3, 4, 5, 6], 7)).toBe(input.place);
       },
     );
   });
