@@ -1,4 +1,4 @@
-import { MATCH_TO_PRIZE, PRIZE_CHECK } from "./utils/constants";
+import { PRIZE_CHECK } from "./utils/constants";
 import LottoValidator from "./Validator/LottoValidator";
 
 class Lotto {
@@ -23,11 +23,6 @@ class Lotto {
     const prizeResult = PRIZE_CHECK[result.length][hasBonus];
     return prizeResult;
   }
-
-  calculateResult() {
-    
-  }
-
 }
 
 export default Lotto;
