@@ -29,7 +29,7 @@ class CalculateWinners {
         winningNumbers
       );
       const haveBonus =
-        numberEqual === 5 ? lottos.numbers.includes(bonusNumber) : false;
+        numberEqual === 5 && lotto.numbers.includes(bonusNumber);
       this.increaseWinners(numberEqual, haveBonus);
     });
 

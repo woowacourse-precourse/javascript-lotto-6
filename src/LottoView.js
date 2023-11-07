@@ -25,20 +25,11 @@ class LottoView {
 
   showResults(countWinners) {
     console.log("\n당첨 통계\n---");
-    // 당첨 결과를 순서대로 출력하기 위한 키 배열
-    const prizeOrder = [
-      "MATCH_3",
-      "MATCH_4",
-      "MATCH_5",
-      "MATCH_5_BONUS",
-      "MATCH_6",
-    ];
+    const winnerOrder = [3, 4, 5, "5+1", 6];
 
-    prizeOrder.forEach((key) => {
+    winnerOrder.forEach((key) => {
       const { count, prize, text } = PRINT_WINNERS[key];
-      // countWinners 객체에서 해당 키에 해당하는 당첨 개수를 가져옵니다.
-      const winnerCount =
-        countWinners[key.replace("MATCH_", "").replace("_", "+")] || 0;
+      const winnerCount = countWinners[key];
       console.log(`${text} (${prize.toLocaleString()}원) - ${winnerCount}개`);
     });
   }
