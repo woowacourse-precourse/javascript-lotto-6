@@ -1,6 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import { checkValue } from './libs/checkValue';
-import { AMOUNT, LOTTO, PLACE } from './libs/constants';
+import { AMOUNT, LOTTO, PLACE, WINNING_DETAIL } from './libs/constants';
 import Lotto from './Lotto';
 
 class Lottos {
@@ -65,6 +65,22 @@ class Lottos {
   //당첨 티켓의 개수 계산
   winningTicketCount(lottoRanks, idx) {
     return lottoRanks.filter(rank => rank === 5 - idx).length;
+  }
+
+  //당첨내역 출력
+  printWinningDetails(lottoRanks) {
+    const winningDetails = [
+      WINNING_DETAIL.FIFTH,
+      WINNING_DETAIL.FOURTH,
+      WINNING_DETAIL.THIRD,
+      WINNING_DETAIL.SECOND,
+      WINNING_DETAIL.FIRST,
+    ];
+    winningDetails.forEach((winningDetail, idx) => {
+      const winningCount = this.winningTicketCoun(lottoRanks, idx);
+
+      Console.print(`${winningDetail} - ${winningCount}개`);
+    });
   }
 }
 
