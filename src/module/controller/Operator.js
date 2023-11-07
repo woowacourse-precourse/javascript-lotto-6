@@ -3,22 +3,19 @@ import WinNumber from "../model/WinNumber.js";
 import WinnerDecider from "../model/WinnerDecider.js";
 
 class Operator {
-  #LG
-  #WN
-  #WD
-  #lottoList
-  #score
+  #LG;
+  #WN;
+  #WD;
+  #lottoList;
+  #score;
 
   doLottoGenerator(count) {
     this.#LG = new LottoGenerator(count);
     this.#lottoList = this.#LG.lottoList;
   }
 
-  doWinNumber(numbers, bonus) {
+  doWinnerDecider(numbers, bonus) {
     this.#WN = new WinNumber(numbers, bonus);
-  }
-
-  doWinnerDecider(WN, LG) {
     this.#WD = new WinnerDecider(this.#WN, this.#LG);
     this.#score = this.#WD.score;
   }
