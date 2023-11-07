@@ -1,4 +1,4 @@
-import PurchaseAmountValidator from '../../src/Validator/purchaseAmountValidator.js';
+import PurchaseAmountValidator from '../../src/validator/PurchaseAmountValidator.js';
 import errorMessage from '../../src/constants/errorMessage.js';
 
 describe('PurchaseAmountValidator 테스트', () => {
