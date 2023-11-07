@@ -51,6 +51,11 @@ class Game {
     this.lottos = lottos;
   }
 
+  printLottos() {
+    Console.print(`${this.lottos.length}개를 구매했습니다.`);
+    this.lottos.forEach(lotto=>{lotto.printLotto()});
+  }
+
   async getChoiceNumbers() {
     const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\ n");
     this.choice = new Lotto(input.split(","));
