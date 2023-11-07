@@ -42,11 +42,11 @@ class App {
     Console.print(`6개 일치 (2,000,000,000원) - ${results[4]}개`);
 
     let i = 0;
-    const earningsRate = (results.reduce((acc, curr) => {
-      return acc + (curr * amount[i]);
+    const earnings = (results.reduce((acc, curr) => {
+      return acc + (curr * amount[i++]);
     }, 0));
 
-    Console.print(`총 수익률은 ${(earningsRate / purchaseAmount * 100).toFixed(1)}%입니다.`);
+    Console.print(`총 수익률은 ${(earnings / purchaseAmount * 100).toFixed(1)}%입니다.`);
   }
 }
 
