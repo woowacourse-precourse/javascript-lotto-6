@@ -3,4 +3,5 @@ export const CONSOLE_MESSAGE = {
     inputLottoMainNumber: '\n당첨 번호를 입력해 주세요. \n',
     inputLottoBonusNumber: '\n보너스 번호를 입력해 주세요. \n',
     inputPrintResult: '\n당첨 통계\n---',
+    outputTotalMessage:'개를 구매했습니다.'
 };

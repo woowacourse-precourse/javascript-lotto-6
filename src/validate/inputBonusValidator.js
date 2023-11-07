@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../constans/errorMessages'
+import { ERROR_MESSAGE } from '../constans/errorMessages.js'
 
 export const inputBonusValidator = (lottoMainNumbers, lottoBonusNumberInput) => {
   const bonusNumber = parseInt(lottoBonusNumberInput);

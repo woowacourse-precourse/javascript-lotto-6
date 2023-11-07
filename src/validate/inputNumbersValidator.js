@@ -1,7 +1,7 @@
-import { ERROR_MESSAGE } from '../constans/errorMessages'
+import { ERROR_MESSAGE } from '../constans/errorMessages.js'
 
 export const inputNumbersValidator = (lottoNumbers) => {
-  const Numbers = lottoNumbers.split(',').map(Number);
+  const Numbers = lottoNumbers.map(Number);
   const uniqueNumbers = Array.from(new Set(Numbers));
   const lengthError = Numbers.length !== 6;
   const rangeError = Numbers.some(number => number < 1 || number > 45);
