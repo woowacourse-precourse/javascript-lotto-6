@@ -26,15 +26,15 @@ class LottoMachine {
   static async askWinningNumbers() {
     let winningNumbers;
 
-    // while (true) {
-    //   try {
-    winningNumbers = await LottoMachine.getWinningNumbers();
-    LottoMachine.validateNumbersArray(winningNumbers);
-    //   break;
-    // } catch (error) {
-    // MissionUtils.Console.print(error.message);
-    // }
-    // }
+    while (true) {
+      try {
+        winningNumbers = await LottoMachine.getWinningNumbers();
+        LottoMachine.validateNumbersArray(winningNumbers);
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
     return winningNumbers;
   }
 
@@ -69,15 +69,16 @@ class LottoMachine {
   static async askBonusNumber() {
     let bonusNumber;
 
-    // while (true) {
-    //   try {
-    bonusNumber = await LottoMachine.getBonusNumber();
-    LottoMachine.validateNumber(bonusNumber);
-    //   break;
-    // } catch (error) {
-    // MissionUtils.Console.print(error.message);
-    //   }
-    // }
+    while (true) {
+      try {
+        bonusNumber = await LottoMachine.getBonusNumber();
+        LottoMachine.validateNumber(bonusNumber);
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
+
     return bonusNumber;
   }
 

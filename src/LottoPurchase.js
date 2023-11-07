@@ -22,15 +22,16 @@ class LottoPurchase {
   static async purchaseLottoAmount() {
     let purchaseAmount;
 
-    // while (true) {
-    //   try {
-    purchaseAmount = await LottoPurchase.getLottoAmount();
-    LottoPurchase.validateAmount(purchaseAmount);
-    // break;
-    //   } catch (error) {
-    //     MissionUtils.Console.print(error.message);
-    //   }
-    // }
+    while (true) {
+      try {
+        purchaseAmount = await LottoPurchase.getLottoAmount();
+        LottoPurchase.validateAmount(purchaseAmount);
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
+
     return purchaseAmount;
   }
 }
