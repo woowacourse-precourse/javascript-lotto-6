@@ -16,8 +16,20 @@ class LottoGame {
   }
 
   async start() {
-    const amountStr = await IO.receiveUserInput(NORMAR_MSG.AMOUNT_INPUT);
-    Validation.isNumber(amountStr, ERROR_MSG.AMOUNT_FORMAT_ERROR);
+    // const amountStr = await IO.receiveUserInput(NORMAR_MSG.AMOUNT_INPUT);
+    // Validation.isNumber(amountStr, ERROR_MSG.AMOUNT_FORMAT_ERROR);
+    let amountStr = '';
+
+    let flag = false;
+    do {
+      try {
+        amountStr = await IO.receiveUserInput(NORMAR_MSG.AMOUNT_INPUT);
+        Validation.isNumber(amountStr, ERROR_MSG.AMOUNT_FORMAT_ERROR);
+        flag = true;
+      } catch(e) {
+        IO.printMsg(e.message);
+      }
+    } while(!flag);
 
     const amount = Number(amountStr);
     Validation.isDivisible(amount);
