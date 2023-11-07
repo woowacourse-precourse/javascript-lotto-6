@@ -20,15 +20,19 @@ class Lotto {
     return this.#numbers;
   }
 
+  getNumbersString() {
+    const trimedNumbers = `[${this.#numbers.join(', ')}]`;
+    return trimedNumbers;
+  }
+
   static random() {
-    const randomNumbers = [];
-    while (randomNumbers.length < SIZE) {
-      const pickedNumber = Random.pickNumberInRange(START_NUMBER, END_NUMBER);
-      if (!randomNumbers.includes(pickedNumber)) {
-        randomNumbers[randomNumbers.length] = pickedNumber;
-      }
-    }
-    return new Lotto(randomNumbers);
+    const pickedNumber = Random.pickUniqueNumbersInRange(
+      START_NUMBER,
+      END_NUMBER,
+      SIZE
+    );
+
+    return new Lotto(pickedNumber);
   }
 }
 
