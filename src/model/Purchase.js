@@ -22,3 +22,5 @@ class Purchase {
     return PURCHASE_COUNT;
   }
 }
+
+export default Purchase;
