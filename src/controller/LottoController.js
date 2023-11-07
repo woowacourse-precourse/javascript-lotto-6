@@ -1,5 +1,5 @@
 import InputAndOutput from "../../view/InputAndOutput.js";
-import LottoPlay from "../Lottoplay.js";
+import LottoPlay from "../LottoPlay.js";
 
 class LottoController{
     
