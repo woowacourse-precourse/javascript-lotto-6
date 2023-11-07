@@ -7,8 +7,8 @@ import Bonus from './BonusNumber.js'
 class App {
   constructor() {
     this.lottos = null;
-    this.winningNumbers = null;
-    this.bonusNumber = null;
+    this.winning = null;
+    this.bonus = null;
   }
   
   async play() {
@@ -35,7 +35,6 @@ class App {
       let userLottoNumber = inputLottoNumber.split(',');
       let newUserLottoNumber = userLottoNumber.map(Number)
       this.winning = new Winning(newUserLottoNumber)
-      console.log(this.winning.value)
     } catch(e) {
       MissionUtils.Console.print(e.message)
       await this.userInputLottoNumber();
