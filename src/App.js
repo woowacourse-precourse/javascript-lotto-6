@@ -61,8 +61,8 @@ class App {
     })
   }
 
-  parseWinningNumbers = (WinningNumbers) => {
-    const parsedString = WinningNumbers.split(',');
+  parseWinningNumbers = (userInputWinningNumbers) => {
+    const parsedString = userInputWinningNumbers.split(',');
 
     const parsedWinnigNumbers = parsedString.map((string) => {
       return this.stringToNumber(string);
