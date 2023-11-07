@@ -109,6 +109,18 @@ class App {
     }
   }
     
+  // TODO: 당첨 금액 계산
+  #getPrizeMoney(rank) {
+    const prizeMoney = {
+      '3': 5000,
+      '4': 50000,
+      '5': 1500000,
+      '5+1': 30000000,
+      '6': 2000000000
+    };
+    return prizeMoney[rank];
+  }
+    
 
 }
 export default App;
