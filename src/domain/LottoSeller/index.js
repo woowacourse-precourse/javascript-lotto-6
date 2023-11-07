@@ -67,7 +67,7 @@ export class LottoSeller {
       const lottoNumber = this.#generateLottoNumber();
       const lotto = new Lotto(lottoNumber);
       lotto.printNumbers();
-      lottos.push(lotto);
+      lottos.push(lotto.getNumbers());
     }
     return lottos;
   }
