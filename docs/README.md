@@ -284,4 +284,5 @@ const obj = {
 ## 📚 7. 사용된 라이브러리
 
 ![Static Badge](https://img.shields.io/badge/Library-%40woowacourse%2Fmission-utils%2C?color=%2300BFB2)
+<br>
 [woowacourse-projects/javascript-mission-utils: Utility library for mission (github.com)](https://github.com/woowacourse-projects/javascript-mission-utils)
