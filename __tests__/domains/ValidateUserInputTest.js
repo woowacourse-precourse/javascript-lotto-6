@@ -6,9 +6,10 @@ import { ERROR_MESSAGE } from '../../src/constants/message';
 import {
   ValidateWinningNumbersUserInput,
   ValidatePurchasePriceUserInput,
+  ValidateBonusNumberUserInput,
 } from '../../src/utils/ValidateUserInput';
 
-describe('ValidatePurchasePriceUserInput test', () => {
+describe('class ValidatePurchasePriceUserInput test', () => {
   test.each(['"1000a"', '사딸라'])(
     '숫자가 아닌 값이 들어왔을때 숫자가 아니라는 메세지와 함께 예외가 발생해야 한다.',
     (purchasePrice) => {
@@ -74,6 +75,20 @@ describe('ValidatePurchasePriceUserInput test', () => {
     expect(ERROR_MESSAGE.USER_INPUT.HAVE_SPACING).toBeDefined();
   });
 
+  test('구매 금액입력의 시작이 0으로 시작했을때 메세지와 함께 예외가 발생해야 한다.', () => {
+    // given
+    const purchasePrice = '01000';
+
+    // when
+    // then
+    expect(() => {
+      new ValidatePurchasePriceUserInput(purchasePrice);
+    }).toThrow(ERROR_MESSAGE.USER_INPUT.PURCHASE_PRICE.HAVE_START_NUMBER_ZERO);
+    expect(
+      ERROR_MESSAGE.USER_INPUT.PURCHASE_PRICE.HAVE_START_NUMBER_ZERO,
+    ).toBeDefined();
+  });
+
   test('구매가능 금액을 초과했을때 1일구매 가능 금액 알림 메세지와 함께 예외가 발생해야 한다.', () => {
     // given
     const purchasePrice = String(
@@ -91,7 +106,7 @@ describe('ValidatePurchasePriceUserInput test', () => {
   });
 });
 
-describe('ValidateWinningNumbersUserInput test', () => {
+describe('class ValidateWinningNumbersUserInput test', () => {
   test(`당첨숫자가 (,)로 구분했을때 ${LOTTO.NUMBER_COUNT}자리가 아니면 메세지와 함께 예외가 발생한다.`, () => {
     // given
     const winningNumbers = '1,2,3,4,5';
@@ -156,6 +171,18 @@ describe('ValidateWinningNumbersUserInput test', () => {
     expect(ERROR_MESSAGE.USER_INPUT.EXIST_NEGATIVE_SIGN).toBeDefined();
   });
 
+  test('당첨 숫자에 0으로 시작하는 숫자가 있을때 메세지와 함께 예외가 발생한다.', () => {
+    // given
+    const winningNumbers = '1,2,3,4,5,06';
+
+    // when
+    // then
+    expect(() => {
+      new ValidateWinningNumbersUserInput(winningNumbers);
+    }).toThrow(ERROR_MESSAGE.USER_INPUT.HAVE_START_NUMBER_ZERO);
+    expect(ERROR_MESSAGE.USER_INPUT.HAVE_START_NUMBER_ZERO).toBeDefined();
+  });
+
   test('당첨 숫자에 소수점을 가진 숫자가 있을때 메세지와 함께 예외가 발생한다.', () => {
     // given
     const winningNumbers = '1,2,3,4,5,6.5';
@@ -197,4 +224,113 @@ describe('ValidateWinningNumbersUserInput test', () => {
   });
 });
 
-console.log(Number(''));
+describe('class ValidateBonusNumberUserInput test', () => {
+  const winngingNumbers = '1,2,3,4,5,6';
+
+  test.each([`${LOTTO.NUMBER_RANGE.MAX + 1}`, `${LOTTO.NUMBER_RANGE.MIN - 1}`])(
+    `보너스 숫자가 ${LOTTO.NUMBER_RANGE.MIN}~${LOTTO.NUMBER_RANGE.MAX}범위 밖의 숫자일때 메세지와 함께 예외가 발생해야 한다.`,
+    (overRangeBonusNumber) => {
+      // given
+      const bonusNumber = overRangeBonusNumber;
+
+      // when
+      // then
+      expect(() => {
+        new ValidateBonusNumberUserInput(bonusNumber, winngingNumbers);
+      }).toThrow(ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.EXIST_OVER_RANGE);
+      expect(
+        ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.EXIST_OVER_RANGE,
+      ).toBeDefined();
+    },
+  );
+
+  test.each(['1', '3', '5'])(
+    '보너스 숫자가 당첨숫자와 중복됐을때 메세지와 함께 예외가 발생해야 한다.',
+    (duplicateBonusNumber) => {
+      // given
+      const bonusNumber = duplicateBonusNumber;
+      // when
+      // then
+      expect(() => {
+        new ValidateBonusNumberUserInput(bonusNumber, winngingNumbers);
+      }).toThrow(
+        ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.DUPLICATED_WINNING_NUMBERS,
+      );
+      expect(
+        ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.DUPLICATED_WINNING_NUMBERS,
+      ).toBeDefined();
+    },
+  );
+
+  test('보너스 숫자 사이에 공백이 들어있을때 메세지와 함께 예외가 발생해야 한다.', () => {
+    // given
+    const bonusNumber = '1 0';
+
+    // when
+    // then
+    expect(() => {
+      new ValidateBonusNumberUserInput(bonusNumber, winngingNumbers);
+    }).toThrow(ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.HAVE_SPACING);
+    expect(ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.HAVE_SPACING).toBeDefined();
+  });
+
+  test('보너스 숫자가 음수인 경우 메세지와 함께 예외가 발생해야 한다.', () => {
+    // given
+    const bonusNumber = '-1';
+
+    // when
+    // then
+    expect(() => {
+      new ValidateBonusNumberUserInput(bonusNumber, winngingNumbers);
+    }).toThrow(ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.EXIST_NEGATIVE_SIGN);
+    expect(
+      ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.EXIST_NEGATIVE_SIGN,
+    ).toBeDefined();
+  });
+
+  test('보너스 숫자의 시작이 0으로 시작될때 메세지와 함께 예외가 발생해야 한다.', () => {
+    // given
+    const bonusNumber = '01';
+
+    // when
+    // then
+    expect(() => {
+      new ValidateBonusNumberUserInput(bonusNumber, winngingNumbers);
+    }).toThrow(ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.HAVE_START_NUMBER_ZERO);
+    expect(
+      ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.HAVE_START_NUMBER_ZERO,
+    ).toBeDefined();
+  });
+
+  test('보너스 숫자가 소수점을 가진 숫자일때 메세지와 함께 예외가 발생해야 한다.', () => {
+    // given
+    const bonusNumber = '1.5';
+
+    // when
+    // then
+    expect(() => {
+      new ValidateBonusNumberUserInput(bonusNumber, winngingNumbers);
+    }).toThrow(ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.HAVE_DECIMAL_NUMBER);
+    expect(
+      ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER.HAVE_DECIMAL_NUMBER,
+    ).toBeDefined();
+  });
+
+  test('보너스 숫자에 number 이외의 문자가 포함됐을때 메세지와 함께 예외가 발생해야 한다.', () => {
+    // given
+    const bonusNumber = `+${LOTTO.NUMBER_RANGE.MIN}`;
+
+    // when
+    // then
+    expect(() => {
+      new ValidateBonusNumberUserInput(bonusNumber, winngingNumbers);
+    }).toThrow(
+      ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER
+        .HAVE_INVALID_INPUT_WITHOUT_NUMBER_TYPE,
+    );
+    expect(
+      ERROR_MESSAGE.USER_INPUT.BONUS_NUMBER
+        .HAVE_INVALID_INPUT_WITHOUT_NUMBER_TYPE,
+    ).toBeDefined();
+  });
+});
