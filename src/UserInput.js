@@ -16,7 +16,7 @@ class UserInput {
 
       return result;
     } catch (error) {
-      this.getPrice();
+      return this.getPrice();
     }
   }
 
@@ -53,7 +53,7 @@ class UserInput {
 
       return result;
     } catch (error) {
-      this.getWinningNumber();
+      return this.getWinningNumber();
     }
   }
 
@@ -93,7 +93,7 @@ class UserInput {
 
       return result;
     } catch (error) {
-      this.getBonusNumber(winningNumber);
+      return this.getBonusNumber(winningNumber);
     }
   }
 
