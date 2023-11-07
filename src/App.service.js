@@ -25,6 +25,17 @@ export default class AppService {
       return acc;
     }, new Array(6).fill(0));
     this.#IOController.printHitStatistics(hits);
+    this.#printRateOfReturn(hits, purchased.length * TICKET_PRICE);
+  }
+
+  #printRateOfReturn(hits, paid) {
+    const PRICES = [0, 2000000000, 30000000, 1500000, 50000, 5000];
+    const TOTAL = hits.reduce((acc, count, index) => {
+      acc += count * PRICES[index];
+      return acc;
+    }, 0);
+    const RATE = ((TOTAL / paid) * 100).toFixed(1);
+    this.#IOController.printRateOfReturn(RATE);
   }
 
   async #getNumberOfTickets() {
