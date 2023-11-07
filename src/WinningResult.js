@@ -9,10 +9,12 @@ class WinningResult {
     };
   }
 
+  // 등수별 당첨 개수 카운트
   updatePrize(rank) {
     this.prizes[rank].count++;
   }
 
+  // 총 상금 계산
   getTotalPrize() {
     let totalPrize = 0;
     for (let rank in this.prizes) {
@@ -21,6 +23,7 @@ class WinningResult {
     return totalPrize;
   }
 
+  // 등수별 당첨 개수 반환
   getPrizeCount(rank) {
     return this.prizes[rank].count;
   }

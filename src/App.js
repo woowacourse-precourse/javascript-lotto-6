@@ -9,7 +9,6 @@ class App {
       const TICKETS = this.generateLottoTickets(PURCHASE_AMOUNT);
       this.printTickets(TICKETS);
 
-      // 당첨 번호 입력 받기
       const WINNING_LOTTO = await this.inputWinningNumbers();
       const BONUS_NUMBER = await this.inputBonusNumber(WINNING_LOTTO);
 
@@ -81,10 +80,9 @@ class App {
 
         winningLotto = new Lotto(WINNING_NUMBERS);
 
-        break; // 입력값이 모든 조건을 만족하면 무한루프를 빠져나감
+        break;
       } catch (error) {
         MissionUtils.Console.print(error.message);
-        // 에러가 발생하면 다시 무한루프의 처음으로 돌아감
       }
     }
 
