@@ -40,3 +40,17 @@ export const inputWinning = async () => {
     }
   }
 };
+
+// 10. 보너스 번호 사용자에게 입력받기
+export const inputBonusNumber = async (winningNumbers) => {
+  while (true) {
+    try {
+      let input = await Console.readLineAsync(`${INPUT_MESSAGE.BONUS_NUMBER}`);
+      let validBonus = validateBonus(input, winningNumbers);
+
+      if (validBonus) return validBonus;
+    } catch (error) {
+      bonusNumberErrorCase(error.message);
+    }
+  }
+};

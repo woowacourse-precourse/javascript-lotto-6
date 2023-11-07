@@ -13,6 +13,7 @@ class App {
 
     printLottos(lottos);
     const winningNumbers = await inputWinning();
+    const bonusNumber = await inputBonusNumber(winningNumbers);
   }
 }
 
