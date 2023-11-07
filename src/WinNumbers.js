@@ -8,7 +8,6 @@ class WinNumbers {
         return inputNumbers;
       }
     
-    
     getBonus = async(numbers) => {
       const bonus = Number(await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n'));
       const validate = new Validate();
@@ -20,6 +19,6 @@ class WinNumbers {
       }
       return bonus;
     }
-  
   }
+  
     export default WinNumbers;
