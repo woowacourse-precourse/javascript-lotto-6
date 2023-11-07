@@ -23,6 +23,9 @@ const OutputView = {
     Console.print(MESSAGES.raffleStatistic);
     MESSAGES.printRaffleStatistic(statistic).forEach((eachLine) => Console.print(eachLine));
   },
+  printEarningRate(earningRate) {
+    Console.print(MESSAGES.printEarningRate(earningRate));
+  },
 };
 
 export default OutputView;

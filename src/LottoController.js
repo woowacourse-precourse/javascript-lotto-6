@@ -57,6 +57,7 @@ class LottoController {
 
   printStatistic() {
     OutputView.printStatistic(this.#user.printStatistic());
+    OutputView.printEarningRate(this.#user.calculateEarningRate());
   }
 }
 
