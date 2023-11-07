@@ -15,10 +15,13 @@ class LottoData {
   }
 
   getUserMoney(userMoney) {
+    console.log(userMoney);
     this.userMoney = userMoney;
   }
 
   getWinNumber(winNumber) {
+    console.log('################################');
+    console.log(winNumber);
     this.winNumber = winNumber.sort((a, b) => a - b);
   }
 

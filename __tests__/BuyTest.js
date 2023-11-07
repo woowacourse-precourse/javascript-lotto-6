@@ -15,13 +15,13 @@ const mockQuestions = (inputs) => {
   });
 };
 
-const buyNumberException = async (input) => {
-  const INPUT_NUMBERS_TO_END = ['8000', '1,2,3,4,5,6', '7'];
-  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+// const buyNumberException = async (input) => {
+//   const INPUT_NUMBERS_TO_END = ['8000', '1,2,3,4,5,6', '7'];
+//   mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
 
-  const LottoCon = new LottoController();
-  await LottoCon.inputPurchaseMoney();
-};
+//   const LottoCon = new LottoController();
+//   await LottoCon.inputPurchaseMoney();
+// };
 
 describe('로또 구입 테스트', () => {
   test('로또 구입 테스트', async () => {

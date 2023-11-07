@@ -5,28 +5,28 @@ import InputValidate from './utils/InputValidate.js';
 class Lotto {
   #numbers;
 
-  // constructor(numbers) {
-  //   this.#numbers = numbers;
-  // }
-
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  // static async createLottoInstance(numbers) {
-  //   const inputValidate = new InputValidate();
-  //   await inputValidate.lottoNumber(numbers);
-  //   return new Lotto(numbers);
+  // constructor(numbers) {
+  //   this.#validate(numbers);
+  //   this.#numbers = numbers;
   // }
+
+  static async createLottoInstance(numbers) {
+    const inputValidate = new InputValidate();
+    await inputValidate.lottoNumber(numbers);
+    return new Lotto(numbers);
+  }
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
 
     if (new Set(numbers).size !== 6) {
-      throw new Error("[ERROR] 로또 번호가 중복되었습니다.");
+      throw new Error('[ERROR] 로또 번호가 중복되었습니다.');
     }
   }
 
