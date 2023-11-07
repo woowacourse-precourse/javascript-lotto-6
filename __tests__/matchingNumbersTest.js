@@ -1,5 +1,5 @@
-import matchingNumbers from '../src/matchingNumbers';
-import LOTTO_RESULTS from '../src/LOTTO_RESULTS';
+import matchingNumbers from '../src/matchingNumbers.js';
+import LOTTO_RESULTS from '../src/LOTTO_RESULTS.js';
 
 describe('매칭 갯수 테스트', () => {
   let lottoResultsCopy;

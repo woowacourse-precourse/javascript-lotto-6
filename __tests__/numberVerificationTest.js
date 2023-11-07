@@ -1,4 +1,4 @@
-import numberVerification from '../src/NumberVerification';
+import numberVerification from '../src/NumberVerification.js';
 
 describe('입력 숫자에 대한 유효성 검사 테스트', () => {
   it('입력한 숫자가 6자리가 아닐시', () => {

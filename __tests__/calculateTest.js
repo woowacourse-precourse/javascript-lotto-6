@@ -1,5 +1,5 @@
-import calculate from '../src/calculate';
-import matchingNumbers from '../src/matchingNumbers';
+import calculate from '../src/calculate.js';
+import matchingNumbers from '../src/matchingNumbers.js';
 
 jest.mock('../src/matchingNumbers');
 

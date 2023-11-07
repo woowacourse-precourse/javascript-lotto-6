@@ -1,4 +1,4 @@
-import verificationBounsNumber from '../src/verificationBonusNumber';
+import verificationBounsNumber from '../src/verificationBonusNumber.js';
 
 describe('보너스 숫자 입력 유효성 검사', () => {
   it('입력한 숫자가 2개 이상 입력 되었을시', () => {

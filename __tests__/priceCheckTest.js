@@ -1,4 +1,4 @@
-import priceCheck from '../src/priceCheck';
+import priceCheck from '../src/priceCheck.js';
 
 describe('금액 입력 예외 테스트 ', () => {
   it('금액이 1000단위일시', () => {
