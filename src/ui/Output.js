@@ -41,3 +41,18 @@ const createProfitString = profitRate => {
   const profitRateString = `\n${USER_OUTPUT.totalProfitRatePrefix}${profitRate}${USER_OUTPUT.totalProfitRateSuffix}`;
   return profitRateString;
 };
+
+const printLottoTotalResult = (lottoResult, profitRate) => {
+  const lottoResultString = createLottoResultString(lottoResult);
+  const profitRateString = createProfitString(profitRate);
+
+  Console.print(lottoResultString + profitRateString);
+};
+
+export {
+  printLottoTickets,
+  analyzeProfitRate,
+  createLottoResultString,
+  createProfitString,
+  printLottoTotalResult,
+};
