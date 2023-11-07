@@ -1,5 +1,5 @@
 import { MIN_AMOUNT } from "./constants/standard.js";
-import { ERROR_AMOUNT_RANGE, ERROR_AMOUNT_TYPE } from "./constants/validate.js";
+import { ERROR_AMOUNT_RANGE, ERROR_AMOUNT_REST, ERROR_AMOUNT_TYPE } from "./constants/validate.js";
 
 class Purchase {
   #userAmount;
@@ -21,7 +21,7 @@ class Purchase {
       this.#occurError(ERROR_AMOUNT_RANGE);
     }
     if (amount % MIN_AMOUNT != 0) {
-      this.#occurError("[ERROR] 1000원 단위의 값을 지불하셔야 합니다.")
+      this.#occurError(ERROR_AMOUNT_REST)
     }
   }
   #validateAmountType(amount) {
@@ -31,7 +31,7 @@ class Purchase {
   }
 
   getPurchaseCount() {
-    return this.#userAmount / 1000;
+    return this.#userAmount / MIN_AMOUNT;
   }
 }
 
