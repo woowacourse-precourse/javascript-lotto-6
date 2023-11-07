@@ -43,6 +43,10 @@ class View {
     this.#printProfitRate(profitRate);
   }
 
+  printError(error) {
+    this.#outputView.print(error.message);
+  }
+
   #printProfitRate(profitRate) {
     const message = MessageFormat.profitRate(profitRate);
 

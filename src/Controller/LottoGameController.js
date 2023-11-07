@@ -11,9 +11,21 @@ class LottoGameController {
     this.#prizeService = prizeService;
   }
 
+  async #retryOnError(callback) {
+    try {
+      return await callback();
+    } catch (error) {
+      this.#view.printError(error);
+
+      return this.#retryOnError(callback);
+    }
+  }
+
   async startGame() {
-    const lottos = await this.#getLotto();
-    const winningLotto = await this.#createWinningLotto();
+    const lottos = await this.#retryOnError(() => this.#getLotto());
+    const winningLotto = await this.#retryOnError(() =>
+      this.#createWinningLotto(),
+    );
 
     const prizes = this.#getLottoPrize({ lottos, winningLotto });
     const profitRate = this.#getProfitRate({ prizes, lottos });
