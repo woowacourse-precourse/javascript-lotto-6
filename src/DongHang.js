@@ -45,9 +45,9 @@ class DongHang {
    */
   async inputWinningNumbers() {
     const mainNumbers = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
-    const bonusNumber = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
-
     this.#winningNumbers.mainNumbers = new Lotto(mainNumbers);
+
+    const bonusNumber = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
     this.#winningNumbers.bonusNumber = bonusNumber;
   }
 }
