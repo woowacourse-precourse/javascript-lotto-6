@@ -17,4 +17,9 @@ export const InputView = {
     const NUMBER_LIST = await readLineAndPrintBlank(Print.select_Number);
     return NUMBER_LIST.split(",").map(Number);
   },
+
+  async getBonusNumber() {
+    const BONUS_NUMBER = await readLineAndPrintBlank(Print.select_Bonus);
+    return Number(BONUS_NUMBER);
+  },
 };
