@@ -29,3 +29,7 @@ export const isAvailableBonusNumber = (winningNumberArray, bonusNumber) => {
     throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
 };
 
+export const changeStringToNumbers = (winningNumbersStringArray) => {
+  return winningNumbersStringArray.map((value) => isNumber(value));
+};
+
