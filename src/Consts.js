@@ -24,12 +24,12 @@ const errorMessage = {
   winningNumbersNotNumber: '[ERROR] 로또 번호는 숫자여야 합니다.',
   winningNumbersRange: '[ERROR] 로또 번호는 1에서 45 사이의 숫자여야 합니다.',
   winningNumbersCount: '[ERROR] 로또 번호는 6개여야 합니다.',
-  duplicatedWinningNumbers: '[Error] 로또 번호는 중복되지 않아야 합니다.',
-  bonusNumberNotNumber: '[Error] 보너스 번호는 숫자여야 합니다.',
-  bonusNumberRange: '[Error] 보너스 번호는 1에서 45 사이의 숫자여야 합니다.',
+  duplicatedWinningNumbers: '[ERROR] 로또 번호는 중복되지 않아야 합니다.',
+  bonusNumberNotNumber: '[ERROR] 보너스 번호는 숫자여야 합니다.',
+  bonusNumberRange: '[ERROR] 보너스 번호는 1에서 45 사이의 숫자여야 합니다.',
   duplicatedBonusNumber:
-    '[Error] 보너스 번호는 로또 번호와 중복되지 않아야 합니다.',
-  whiteSpace: '[Error] 입력에 빈 공간이 있으면 안됩니다.',
+    '[ERROR] 보너스 번호는 로또 번호와 중복되지 않아야 합니다.',
+  whiteSpace: '[ERROR] 입력에 빈 공간이 있으면 안됩니다.',
 };
 
 export { message, money, errorMessage };
