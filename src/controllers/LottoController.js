@@ -16,6 +16,7 @@ class LottoController {
     await this.inputWinningNumber();
     await this.inputBonusNumber();
     this.compareLottos();
+    this.profitRate();
   }
 
   async inputPurchaseAmount() {
@@ -79,6 +80,10 @@ class LottoController {
       }
     });
     this.lottoData.setLottoStats(lottoStats);
+  }
+
+  profitRate() {
+    this.outputView.printProfit(this.lottoData.getProfit());
   }
 }
 

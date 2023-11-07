@@ -15,6 +15,10 @@ class OutputView {
     Console.print(OUTPUT_MESSAGE.stats(lottoStats));
   }
 
+  printProfit(profitRate) {
+    Console.print(OUTPUT_MESSAGE.profit(profitRate));
+  }
+
   printError(message) {
     Console.print(message);
   }

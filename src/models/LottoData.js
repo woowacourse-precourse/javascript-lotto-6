@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE } from '../constants/Message.js';
-import { SETTING } from '../constants/Constant.js';
+import { SETTING, RATE } from '../constants/Constant.js';
 
 class LottoData {
   constructor(amount) {
@@ -8,6 +8,7 @@ class LottoData {
     this.count = amount / SETTING.unit;
     this.lottos = [];
     this.lottoStats = {};
+    this.winningAmount = 0;
     this.#validatePurchaseAmount(amount);
   }
 
@@ -42,6 +43,17 @@ class LottoData {
 
   getLottoStats() {
     return this.lottoStats;
+  }
+
+  getProfit() {
+    return this.calculateProfit();
+  }
+
+  calculateProfit() {
+    Object.keys(this.lottoStats).forEach((key) => {
+      this.winningAmount += this.lottoStats[key] * RATE[key];
+    });
+    return ((this.winningAmount / this.amount) * 100).toFixed(1);
   }
 }
 
