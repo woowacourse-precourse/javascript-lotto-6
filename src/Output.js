@@ -1,5 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT } from './constants/Messages';
+import {
+  LOTTO_NUMBER_SEPERATOR,
+  FIRST_PRIZE,
+  SECOND_PRIZE,
+  THIRD_PRIZE,
+  FOURTH_PRIZE,
+  FIFTH_PRIZE,
+} from './constants/Condition';
 
 class Output {
   error(message) {
@@ -12,7 +20,11 @@ class Output {
 
   lottoTicketNumbers(tickets) {
     tickets.forEach((ticket) =>
-      Console.print(OUTPUT.ticket_number(ticket.getNumber().join(', ')))
+      Console.print(
+        OUTPUT.ticket_number(
+          ticket.getNumber().join(`${LOTTO_NUMBER_SEPERATOR} `)
+        )
+      )
     );
   }
 
@@ -20,11 +32,11 @@ class Output {
     Console.print(OUTPUT.statistics);
     Console.print(OUTPUT.divider);
 
-    Console.print(OUTPUT.fifth_prize(results['5']));
-    Console.print(OUTPUT.fourth_prize(results['4']));
-    Console.print(OUTPUT.third_prize(results['3']));
-    Console.print(OUTPUT.second_prize(results['2']));
-    Console.print(OUTPUT.fifth_prize(results['1']));
+    Console.print(OUTPUT.fifth_prize(results[FIFTH_PRIZE.rank]));
+    Console.print(OUTPUT.fourth_prize(results[FOURTH_PRIZE.rank]));
+    Console.print(OUTPUT.third_prize(results[THIRD_PRIZE.rank]));
+    Console.print(OUTPUT.second_prize(results[SECOND_PRIZE.rank]));
+    Console.print(OUTPUT.fifth_prize(results[FIRST_PRIZE.rank]));
   }
 
   totalReturnResult(totalReturn) {

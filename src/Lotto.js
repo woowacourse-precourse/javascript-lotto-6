@@ -1,5 +1,14 @@
-import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_ERROR } from './constants/Messages.js';
+import {
+  LOTTO_NUMBER,
+  FIRST_PRIZE,
+  SECOND_PRIZE,
+  THIRD_PRIZE,
+  FOURTH_PRIZE,
+  FIFTH_PRIZE,
+  NO_PRIZE,
+  LOTTO_NUMBER_TOTAL,
+} from './constants/Condition.js';
 
 class Lotto {
   #numbers;
@@ -10,7 +19,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_NUMBER.length) {
       throw new Error(LOTTO_ERROR.length);
     }
   }
@@ -21,20 +30,18 @@ class Lotto {
 
   calculateLottoResult(winningNumbers, bonusNumber) {
     const matchNumberCount =
-      12 - new Set([...this.#numbers, ...winningNumbers]).size;
+      LOTTO_NUMBER_TOTAL - new Set([...this.#numbers, ...winningNumbers]).size;
 
-    switch (matchNumberCount) {
-      case 6:
-        return '1';
-      case 5:
-        return this.#numbers.includes(bonusNumber) ? '2' : '3';
-      case 4:
-        return '4';
-      case 3:
-        return '5';
-      default:
-        return '0';
-    }
+    const resultMap = {
+      [FIRST_PRIZE.match]: FIRST_PRIZE.rank,
+      [SECOND_PRIZE.match]: this.#numbers.includes(bonusNumber)
+        ? SECOND_PRIZE.rank
+        : THIRD_PRIZE.rank,
+      [FOURTH_PRIZE.match]: FOURTH_PRIZE.rank,
+      [FIFTH_PRIZE.match]: FIFTH_PRIZE.rank,
+    };
+
+    return resultMap[matchNumberCount] || NO_PRIZE.rank;
   }
 }
 

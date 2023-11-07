@@ -1,6 +1,16 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Validation from './Validation.js';
+import {
+  LOTTO_PURCHASE_UNIT,
+  LOTTO_NUMBER,
+  FIRST_PRIZE,
+  SECOND_PRIZE,
+  THIRD_PRIZE,
+  FOURTH_PRIZE,
+  FIFTH_PRIZE,
+  NO_PRIZE,
+} from './constants/Condition.js';
 
 class Game {
   #winningNumbers;
@@ -12,7 +22,7 @@ class Game {
   }
 
   #parseWinningNumbers(winningNumbers) {
-    return winningNumbers.split(',').map((number) => {
+    return winningNumbers.split(LOTTO_NUMBER.seperator).map((number) => {
       return Number(number);
     });
   }
@@ -23,7 +33,7 @@ class Game {
     const parsedWinningNumbers = this.#parseWinningNumbers(winningNumbers);
 
     Validation.validateInputDuplicate(parsedWinningNumbers);
-    Validation.validateInputLength(parsedWinningNumbers, 6);
+    Validation.validateInputLength(parsedWinningNumbers, LOTTO_NUMBER.length);
 
     parsedWinningNumbers.forEach((number) => {
       Validation.validateInputNumber(number);
@@ -51,7 +61,11 @@ class Game {
   }
 
   createLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(
+      LOTTO_NUMBER.min,
+      LOTTO_NUMBER.max,
+      LOTTO_NUMBER.length
+    );
   }
 
   createSingleLottoTicket() {
@@ -60,7 +74,7 @@ class Game {
   }
 
   purchaseLottoTickets() {
-    const ticketCount = user.getMoney() / 1000;
+    const ticketCount = user.getMoney() / LOTTO_PURCHASE_UNIT;
 
     const tickets = Array.from({ length: ticketCount }).map(() => {
       return this.createSingleLottoTicket();
@@ -70,7 +84,14 @@ class Game {
   }
 
   calculateTotalWinningResults(tickets) {
-    const results = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    const results = {
+      [NO_PRIZE.rank]: 0,
+      [FIRST_PRIZE.rank]: 0,
+      [SECOND_PRIZE.rank]: 0,
+      [THIRD_PRIZE.rank]: 0,
+      [FOURTH_PRIZE.rank]: 0,
+      [FIFTH_PRIZE.rank]: 0,
+    };
 
     tickets.forEach((ticket) => {
       const rank = ticket.calculateLottoWinning(
@@ -85,11 +106,11 @@ class Game {
 
   calculateTotalReturn(results, money) {
     const total =
-      results['1'] * 2000000000 +
-      results['2'] * 30000000 +
-      results['3'] * 1500000 +
-      results['4'] * 50000 +
-      results['5'] * 5000;
+      results[FIRST_PRIZE.rank] * FIRST_PRIZE.reward +
+      results[SECOND_PRIZE.rank] * SECOND_PRIZE.reward +
+      results[THIRD_PRIZE.rank] * THIRD_PRIZE.reward +
+      results[FOURTH_PRIZE.rank] * FOURTH_PRIZE.reward +
+      results[FIFTH_PRIZE.rank] * FIFTH_PRIZE.reward;
 
     return (total / money) * 100;
   }

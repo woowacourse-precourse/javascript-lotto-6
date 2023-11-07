@@ -1,4 +1,5 @@
 import { INPUT_ERROR } from './constants/Messages.js';
+import { LOTTO_PURCHASE_UNIT, LOTTO_NUMBER } from './constants/Condition.js';
 
 class Validation {
   static validateInputEmpty(input) {
@@ -20,13 +21,13 @@ class Validation {
   }
 
   static validateInputThousands(input) {
-    if (input % 1000 !== 0) {
+    if (input % LOTTO_PURCHASE_UNIT !== 0) {
       throw new Error(INPUT_ERROR.thousands);
     }
   }
 
   static validateInputHasCommas(input) {
-    if (!input.includes(',')) {
+    if (!input.includes(LOTTO_NUMBER.seperator)) {
       throw new Error(INPUT_ERROR.commas);
     }
   }
@@ -38,7 +39,7 @@ class Validation {
   }
 
   static validateInputOutOfLottoRange(input) {
-    if (input < 1 || input > 45) {
+    if (input < LOTTO_NUMBER.min || input > LOTTO_NUMBER.max) {
       throw new Error(INPUT_ERROR.range);
     }
   }
