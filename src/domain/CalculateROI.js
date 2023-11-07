@@ -3,7 +3,7 @@ export default function ROI(amount, winningNumber) {
   const profit = winningNumber.reduce((acc, value, idx) => {
     return acc + prize[idx] * value;
   }, 0);
-  const roi = parseFloat(((profit / amount) * 100).toFixed(2));
+  const roi = parseFloat(((profit / amount) * 100).toFixed(1));
 
   return roi;
 }
