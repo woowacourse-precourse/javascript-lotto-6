@@ -30,17 +30,18 @@ export class WinningRecord {
     const hasBonusNumber = lotto.hasNumber(this.#bonusNumber);
 
     for (let rank in WINNING_RANK) {
-      if (matchingNumberCount == WINNING_RANK[rank].matchingNumberCount) {
-        if (
-          WINNING_RANK[rank].hasBonusNumber == true &&
-          hasBonusNumber == false
-        ) {
-          continue;
-        }
+      if (this.#isJackpot(matchingNumberCount, hasBonusNumber, rank)) {
         statistics[rank] += 1;
         break;
       }
     }
+  }
+
+  #isJackpot(matchingNumberCount, hasBonusNumber, rank) {
+    return (
+      matchingNumberCount == WINNING_RANK[rank].matchingNumberCount &&
+      !(WINNING_RANK[rank].hasBonusNumber == true && hasBonusNumber == false)
+    );
   }
 
   getRateOfReturn(tickets, statistics) {
