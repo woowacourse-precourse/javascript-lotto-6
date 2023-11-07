@@ -1,4 +1,5 @@
 import { ERROR } from "./const/error";
+import { NUMBERS } from "./const/numbers";
 
 class Lotto {
   #numbers
@@ -9,7 +10,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== NUMBERS.LENGTH) {
       throw new Error("[ERROR] 로또 번호는 6개입니다");
     };
     if([...new Set(numbers)].length !== numbers.length){
@@ -17,7 +18,7 @@ class Lotto {
     }
     numbers.forEach(element => {
       if(!Number.isInteger(element)) {throw new Error(ERROR.INTEGER);}
-      if(element < 1 || element > 45) {throw new Error(ERROR.RANGE)}
+      if(element < NUMBERS.MIN || element > NUMBERS.MAX) {throw new Error(ERROR.RANGE)}
     });
   }
 }

@@ -1,4 +1,5 @@
 import { ERROR } from "./const/error";
+import { NUMBERS } from "./const/numbers";
 
 class checkBonus {
   #numbers
@@ -15,7 +16,7 @@ class checkBonus {
       }
     numbers.forEach(element => {
         if(!Number.isInteger(element)) {throw new Error(ERROR.INTEGER);}
-        if(element < 1 || element > 45) {throw new Error(ERROR.RANGE)}
+        if(element < NUMBERS.MIN || element > NUMBERS.MAX) {throw new Error(ERROR.RANGE)}
     });
   }
 }
