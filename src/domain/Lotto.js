@@ -1,3 +1,6 @@
+import { ERROR } from '../constants/Error';
+import { MagicNumber } from '../constants/MagicNumber';
+
 class Lotto {
   #numbers;
 
@@ -13,23 +16,26 @@ class Lotto {
   }
 
   #validateNumberCount(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== MagicNumber.lottoNumberCount) {
+      throw new Error(ERROR.numberCount);
     }
   }
 
   #validateNumberRange(numbers) {
     numbers.forEach((number) => {
-      if (number < 1 || number > 45) {
-        throw new Error('[ERROR] 로또 번호는 1~45 사이여야 합니다.');
+      if (
+        number < MagicNumber.lottoNumberMin ||
+        number > MagicNumber.lottoNumberMax
+      ) {
+        throw new Error(ERROR.numberRange);
       }
     });
   }
 
   #validateNumberDuplicate(numbers) {
     const numberSet = new Set(numbers);
-    if (numberSet.size !== 6) {
-      throw new Error('[ERROR] 로또 번호는 중복되지 않아야 합니다.');
+    if (numberSet.size !== MagicNumber.lottoNumberCount) {
+      throw new Error(ERROR.numberDuplicate);
     }
   }
 }

@@ -1,20 +1,26 @@
+import { ERROR } from '../constants/Error';
+import { MagicNumber } from '../constants/MagicNumber';
+
 export function validAmount(amount) {
   if (!Number(amount)) {
-    throw new Error('[ERROR] 로또 구입 금액은 숫자여야 합니다.');
+    throw new Error(ERROR.amountNumber);
   }
-  if (amount < 1000) {
-    throw new Error('[ERROR] 로또 구입 금액은 1000원 이상이어야 합니다.');
+  if (amount < MagicNumber.lottoPriceMin) {
+    throw new Error(ERROR.amountRange);
   }
-  if (amount % 1000 !== 0) {
-    throw new Error('[ERROR] 로또 구입 금액은 1000원 단위여야 합니다.');
+  if (amount % MagicNumber.lottoPriceMin !== 0) {
+    throw new Error(ERROR.amountUnit);
   }
 }
 
-export function validBonusNumber(bonusNumber, winningNumber) {
+export function validBonusNumber(bonusNumber) {
   if (!Number(bonusNumber)) {
-    throw new Error('[ERROR] 보너스 번호는 숫자여야 합니다.');
+    throw new Error(ERROR.bonusNumber);
   }
-  if (bonusNumber < 1 || bonusNumber > 45) {
-    throw new Error('[ERROR] 보너스 번호는 1~45 사이여야 합니다.');
+  if (
+    bonusNumber < MagicNumber.lottoNumberMin ||
+    bonusNumber > MagicNumber.lottoNumberMax
+  ) {
+    throw new Error(ERROR.bonusRange);
   }
 }
