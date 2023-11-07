@@ -18,9 +18,16 @@ export function isDuplicate(nums){
 }
 
 // 숫자 범위 체크
-export function isNumberInRange(numbers){
-  if(numbers.every(num => num >= 1 && num <= 45)){
+export function isNumberInRange(nums){
+  if(nums.every(num => num >= 1 && num <= 45)){
     return;
   }
   throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+}
+
+export function isSixLength(nums){
+  if(nums.length === 6){
+    return;
+  }
+  throw new Error("[ERROR] 로또 번호는 6개의 숫자여야 합니다.")
 }

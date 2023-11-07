@@ -1,6 +1,6 @@
 import { inputAmount } from "./input/InputAmount.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { isDuplicate, isNumberInRange, isValidAmount } from "./utils/vaildator.js";
+import { isDuplicate, isNumberInRange, isSixLength, isValidAmount } from "./utils/vaildator.js";
 import { printLottoCount } from "./view/LottoCount.js";
 import Lotto from "./Lotto.js";
 import { printLottoNum } from "./view/LottoNum.js";
@@ -19,11 +19,9 @@ class App {
     const winningNums = await inputWinningNum();
     isDuplicate(winningNums);
     isNumberInRange(winningNums);
+    isSixLength(winningNums);
 
     const bonusNum = await inputBonnusNum();
-
-    
-
   }
 }
 
