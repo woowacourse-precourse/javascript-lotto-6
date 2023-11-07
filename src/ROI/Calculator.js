@@ -10,14 +10,18 @@ export default class Calculator {
   };
 
   static profit(object) {
-    let sum = 0;
-    for (let key in object) {
-      const value = object[key];
-      if (value) {
-        sum += value * this.prizeMoney[key];
+    const objArray = Object.entries(object);
+
+    const profit = objArray.reduce((sum, cur, index) => {
+      const key = objArray[index][0];
+      const value = objArray[index][1];
+      if (value === 0) {
+        return sum;
       }
-    }
-    return sum;
+      return sum + value * this.prizeMoney[key];
+    }, 0);
+
+    return profit;
   }
 
   static print(invest, profit) {
