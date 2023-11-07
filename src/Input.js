@@ -13,7 +13,7 @@ class Input {
   }
 
   async readMoneyBuyingLotto() {
-    const INPUT = await readInput("구입금액을 입력해 주세요.\n");
+    const INPUT = await readInput("\n구입금액을 입력해 주세요.\n");
     this.#validLottoMoney(INPUT);
     return Number(INPUT);
   }
@@ -43,7 +43,7 @@ class Input {
   }
 
   async readLottoNumbers() {
-    const INPUT = await readInput("당첨 번호를 입력해 주세요.\n");
+    const INPUT = await readInput("\n당첨 번호를 입력해 주세요.\n");
     const NUMBERS = INPUT.split(",").map(Number);
     this.#validLottoNumbers(NUMBERS);
     return NUMBERS;
@@ -85,7 +85,7 @@ class Input {
   }
 
   async readBonusNumber() {
-    const INPUT = await readInput("보너스 번호를 입력해 주세요.\n");
+    const INPUT = await readInput("\n보너스 번호를 입력해 주세요.\n");
     this.#validBonusNumber(INPUT);
     return Number(INPUT);
   }

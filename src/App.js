@@ -3,6 +3,14 @@ import Lotto from "./Lotto";
 import { pickUniqueRandomNumbers, printOutput } from "./utils";
 
 class App {
+  #RANK_INFO = {
+    1: { STRING: "6개 일치 (2,000,000,000원)", PRICE: 2000000000 },
+    2: { STRING: "5개 일치, 보너스 볼 일치 (30,000,000원)", PRICE: 30000000 },
+    3: { STRING: "5개 일치 (1,500,000원)", PRICE: 1500000 },
+    4: { STRING: "4개 일치 (50,000원)", PRICE: 50000 },
+    5: { STRING: "3개 일치 (5,000원)", PRICE: 5000 },
+  };
+
   constructor() {
     this.userInput = new Input();
   }
@@ -51,7 +59,6 @@ class App {
   calculLottoResult() {
     const RANKS_NUMBER = 5;
     const lottoRanks = Array.from({ length: RANKS_NUMBER + 1 }, () => 0);
-
     this.lottos.forEach((lotto) => {
       const RANK = lotto.getLottoResult({
         winNumbers: this.userInput.lottoNumbers,
@@ -64,26 +71,21 @@ class App {
   }
 
   printLottoResult(lottoRanks) {
-    printOutput(`당첨 통계\n---`);
-    const RANK_STRINGS = {
-      1: "6개 일치 (2,000,000,000원)",
-      2: "5개 일치, 보너스 볼 일치 (30,000,000원)",
-      3: "5개 일치 (1,500,000원)",
-      4: "4개 일치 (50,000원)",
-      5: "3개 일치 (5,000원)",
-    };
-    lottoRanks.forEach((count, rank) => {
-      const STRING = `${RANK_STRINGS[rank]} - ${count}개`;
-      if (rank !== 0) printOutput(STRING);
-    });
+    printOutput(`\n당첨 통계\n---`);
+
+    for (let rank = 5; rank > 0; rank -= 1) {
+      const COUNT = lottoRanks[rank];
+      const STRING = `${this.#RANK_INFO[rank].STRING} - ${COUNT}개`;
+      printOutput(STRING);
+    }
   }
 
   printRateOfIncome(lottoRanks) {
-    const RANK_MONEY = [null, 2000000000, 30000000, 1500000, 50000, 5000];
     let income = 0;
     lottoRanks.forEach((number, rank) => {
-      if (rank !== 0) income += number * RANK_MONEY[rank];
+      if (rank !== 0) income += number * this.#RANK_INFO[rank].PRICE;
     });
+
     const RATE_INCOME = Math.round((income / this.userInput.money) * 1000) / 10;
     const STRING = `총 수익률은 ${RATE_INCOME}%입니다.`;
     printOutput(STRING);
