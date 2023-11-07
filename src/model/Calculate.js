@@ -11,12 +11,13 @@ class Calculate {
     await lottoList.forEach(eachLotto => {
       this.#countEachLotto(eachLotto, lotto, bonus);
     });
-
     return this.countMatch;
   }
 
   async #countEachLotto(eachLotto, lotto, bonus) {
-    let matchLength = await eachLotto.filter(eachLottoNumber => lotto.includes(eachLottoNumber)).length;
+    let matchLength = await eachLotto.filter(eachLottoNumber =>
+      lotto.includes(eachLottoNumber),
+    ).length;
     this.#rankCount(matchLength, eachLotto, bonus);
   }
 
@@ -26,7 +27,8 @@ class Calculate {
         this.countMatch[4] += NUMBERS.rankCountUp;
         break;
       case 5:
-        this.countMatch[this.#chechBonusAndFive(eachLotto, bonus)] += NUMBERS.rankCountUp;
+        this.countMatch[this.#chechBonusAndFive(eachLotto, bonus)] +=
+          NUMBERS.rankCountUp;
         break;
       case 4:
         this.countMatch[1] += NUMBERS.rankCountUp;

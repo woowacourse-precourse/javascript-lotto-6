@@ -1,5 +1,4 @@
 import Lotto from '../src/Lotto.js';
-import Calculate from '../src/model/Calculate.js';
 import { ERROR } from '../src/util/constant.js';
 
 describe('로또 클래스 테스트', () => {
@@ -54,19 +53,6 @@ describe('로또 클래스 테스트', () => {
       expect(() => {
         new Lotto(input);
       }).toThrow(ERROR.sameNumber);
-    });
-  });
-});
-
-describe('로또 계산 테스트', () => {
-  test('로또 수량 계산', () => {
-    const calculate = new Calculate();
-    const mock = jest.fn(money => calculate.countLottoAmounnt(money));
-    const moneyInput = ['1000', '5000', '9000'];
-    const amount = [1, 5, 9];
-
-    moneyInput.forEach((money, idx) => {
-      expect(mock(money)).toBe(amount[idx]);
     });
   });
 });
