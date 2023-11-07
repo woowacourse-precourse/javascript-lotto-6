@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+
 import Messages from "../common/messages.js";
 import validateWinningLotto from "../util/validateWinningLotto.js";
 import ErrorMessages from "../common/errorMessages.js";

@@ -1,10 +1,12 @@
+import Money from "../../common/rankingMoney.js";
+
 const calculateTotalProfitRate = (price, count) => {
   const totalProfit =
-    (5000 * count[0] +
-      50000 * count[1] +
-      1500000 * count[2] +
-      30000000 * count[3] +
-      2000000000 * count[4]) /
+    (Money.FIFTH_RANK_MONEY * count[0] +
+      Money.FOURH_RANK_MONEY * count[1] +
+      Money.THIRD_RANK_MONEY * count[2] +
+      Money.SECOND_RANK_MONEY * count[3] +
+      Money.FIRST_RANK_MONEY * count[4]) /
     price;
   const profitRate = (totalProfit * 100).toFixed(1);
   return profitRate;
