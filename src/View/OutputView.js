@@ -1,13 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
 import { OUTPUT_MESSAGE } from "../constants/message.js";
 
-const OutputView = {
+class OutputView {
   printPurchaseResult(purchasedLottoNumbers) {
     const purchasedResultString = messageGenerator.purchaseResultString(purchasedLottoNumbers);
     const lottoNumbers = messageGenerator.lottoNumbers(purchasedLottoNumbers);
     const purchasedResultMessage = `\n${purchasedResultString}${lottoNumbers}`;
     Console.print(purchasedResultMessage);
-  },
+  }
 
   printMatchResult(lottoMatchResult) {
     const matchResultString = messageGenerator.matchResultString();
@@ -19,8 +19,8 @@ const OutputView = {
     const returnRateResult = messageGenerator.returnRate(lottoMatchResult.returnRate);
     const matchResultMessage = `\n${matchResultString}${matchResultSeperator}${matchResult}${returnRateResult}`;
     Console.print(matchResultMessage);
-  },
-};
+  }
+}
 
 const messageGenerator = {
   purchaseResultString(purchasedLottoNumbers) {

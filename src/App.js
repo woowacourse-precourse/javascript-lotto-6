@@ -5,6 +5,10 @@ import OutputView from "./View/OutputView.js";
 class App {
   #lottoStore;
 
+  #inputView = new InputView();
+
+  #outputView = new OutputView();
+
   async play() {
     await this.#purchaseLottos();
     await this.#getLottoMatchResult();
@@ -18,7 +22,7 @@ class App {
   }
 
   async #getLottoPurchaseAmount() {
-    const lottoPurchaseAmount = await InputView.readLottoPurchaseAmount();
+    const lottoPurchaseAmount = await this.#inputView.readLottoPurchaseAmount();
     return lottoPurchaseAmount;
   }
 
@@ -33,7 +37,7 @@ class App {
 
   #printPurchasedLottoNumbers() {
     const purchaseResult = this.#getPurchasedLottoNumbers();
-    OutputView.printPurchaseResult(purchaseResult);
+    this.#outputView.printPurchaseResult(purchaseResult);
   }
 
   #getPurchasedLottoNumbers() {
@@ -45,16 +49,16 @@ class App {
     const lottoWinningNumbers = await this.#getLottoWinningNumbers();
     const bonousNumber = await this.#getBonousNumber();
     const lottoMatchResult = this.#lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
-    OutputView.printMatchResult(lottoMatchResult);
+    this.#outputView.printMatchResult(lottoMatchResult);
   }
 
   async #getLottoWinningNumbers() {
-    const lottoWinningNumbers = await InputView.readLottoWinningNumbers();
+    const lottoWinningNumbers = await this.#inputView.readLottoWinningNumbers();
     return lottoWinningNumbers;
   }
 
   async #getBonousNumber() {
-    const bonousNumber = await InputView.readBonousNumber();
+    const bonousNumber = await this.#inputView.readBonousNumber();
     return bonousNumber;
   }
 }
