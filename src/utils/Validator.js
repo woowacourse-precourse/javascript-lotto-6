@@ -68,9 +68,7 @@ const Validator = {
 
   validateWinningNumber(numbers) {
     this.validateRegExp(numbers.join(''), LOTTO_NUMBER.regExp, errorMessage.INVALID_STRING_WINNING_NUMBER);
-    for (let i = 0; i < numbers.length; i += 1) {
-      this.validateInRange(numbers[i]);
-    }
+    numbers.forEach((number) => this.validateInRange(number));
     this.validateUnique(numbers);
     this.validateLength(numbers, LOTTO_NUMBER.count);
   },
