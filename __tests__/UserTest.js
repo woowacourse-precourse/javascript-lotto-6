@@ -38,4 +38,23 @@ describe('User 클래스 테스트', () => {
       expect(lottoNumberString).toEqual(expected[index]),
     );
   });
+
+  test('사용자가 생성한 모든 로또를 추첨했을 때 올바른 결과를 반환하는지 테스트', () => {
+    const mainNumbersArray = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+    const randoms = [
+      [1, 2, 3, 8, 9, 10],
+      [1, 2, 3, 4, 8, 9],
+      [1, 2, 3, 4, 5, 8],
+      [1, 2, 3, 4, 5, 7],
+      [1, 2, 3, 4, 5, 6],
+    ];
+    const expectedResult = [1, 1, 1, 1, 1];
+    mockRandoms([...randoms]);
+
+    const user = new User(5000);
+    user.raffleLottos(mainNumbersArray, bonusNumber);
+
+    expect(user.printStatistic()).toEqual(expectedResult);
+  });
 });
