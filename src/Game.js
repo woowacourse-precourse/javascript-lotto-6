@@ -1,5 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { MESSAGE, UNIT, NEW_LINE, RANGE_START, RANGE_END, BALL_NUMBERS, SPLIT_SEPARATOR, INITIAL_RESULT_VALUE, PERCENT, PRECISION_POINT, RESULT } from './constant/Constant.js';
+import { MESSAGE, UNIT, NEW_LINE, RANGE_START, RANGE_END, BALL_NUMBERS, SPLIT_SEPARATOR, INITIAL_RESULT_VALUE, PERCENT, PRECISION_POINT, RESULT, MATCH } from './constant/Constant.js';
 import Validation from './validation/Validation.js';
 import Lotto from './Lotto.js';
 
