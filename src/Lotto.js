@@ -1,3 +1,6 @@
+import { MATCH_TO_PRIZE } from "./utils/constants";
+import LottoValidator from "./Validator/LottoValidator";
+
 class Lotto {
   #numbers;
 
@@ -7,20 +10,28 @@ class Lotto {
   }
 
   #validate(numbers) {
-    //로또 유효성 검사
+    LottoValidator.validateWinningNumbers(numbers);
   }
 
   validateBonusNumber(bonusNumber) {
-  //로또 - 보너스 유효성 검사
+  LottoValidator.validateBonusNumber(this.#numbers, bonusNumber);
   }
 
-  calculatePrize() {
-   
+  calculatePrize(lottoCalculator) {
+    const result = lottoCalculator.#numbers.filter((number) => this.#numbers.includes(number));
+    const hasBonus = this.#numbers.includes(lottoCalculator.bonus);
+    let prizeResult;
+    if (hasBonus) {
+      prizeResult = PRIZE_CHECK[result.length]["true"];
+    }
+    if (!hasBonus) {
+      prizeResult = PRIZE_CHECK[result.length]["false"];
+    }
   }
 
   calculateResult() {
+    
   }
-
 
 }
 

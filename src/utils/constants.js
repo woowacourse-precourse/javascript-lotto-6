@@ -46,4 +46,20 @@ const ERROR_MESSAGE = Object.freeze({
   UNKNOWN_ERROR: `[ERROR] 알 수 없는 에러가 발생했습니다.`,
 });
 
-export { LOTTO_INFO, INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
+const PRIZE_CHECK = Object.freeze({
+  0: { false: 6, true: 6 },
+  1: { false: 6, true: 6 },
+  2: { false: 6, true: 6 },
+  3: { false: 5, true: 5 },
+  4: { false: 4, true: 4 },
+  5: { false: 3, true: 2 },
+  6: { false: 1, true: 1 },
+});
+
+export {
+  LOTTO_INFO,
+  INPUT_MESSAGE,
+  OUTPUT_MESSAGE,
+  ERROR_MESSAGE,
+  PRIZE_CHECK,
+};
