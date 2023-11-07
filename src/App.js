@@ -30,7 +30,12 @@ class App {
   }
 
   async #validateLottoPrice() {
-    return await errorHandler(InputView.getLottoPrice, lottoPriceValidator.checkLottoPrice);
+    const isValid = await errorHandler(
+      InputView.getLottoPrice,
+      lottoPriceValidator.checkLottoPrice
+    );
+
+    return isValid;
   }
 
   async #lottoResultProcess() {
@@ -42,18 +47,22 @@ class App {
   }
 
   async #validateWinningNumbers() {
-    return await errorHandler(
+    const isValid = await errorHandler(
       InputView.getWinnigNumbers,
       winnigNumberValidator.checkWinningNumbers
     );
+
+    return isValid;
   }
 
   async #validateBonusNumber(winningNumbers) {
-    return await errorHandler(
+    const isValid = await errorHandler(
       InputView.getBonusNumber,
       bonusNumberValidator.checkBonusNumber,
       winningNumbers
     );
+
+    return isValid;
   }
 
   #gameOver() {

@@ -31,15 +31,14 @@ const OutputView = {
   },
 
   formatPrizeMessages(statistics) {
-    return statistics
-      .map((singleStatistics, idx) => {
-        const { matchCriteria, prize, matchedNumber } = singleStatistics;
-        if (idx === 3) {
-          return `${matchCriteria}개 일치, 보너스 볼 일치 (${prize.toLocaleString()}원) - ${matchedNumber}개`;
-        }
-        return `${matchCriteria}개 일치 (${prize.toLocaleString()}원) - ${matchedNumber}개`;
-      })
-      .join('\n');
+    const result = statistics.map(({ matchCriteria, prize, matchedNumber }, idx) => {
+      const formattedPrize = prize.toLocaleString();
+      if (idx !== 3) return `${matchCriteria}개 일치 (${formattedPrize}원) - ${matchedNumber}개`;
+
+      return `${matchCriteria}개 일치, 보너스 볼 일치 (${formattedPrize}원) - ${matchedNumber}개`;
+    });
+
+    return result.join('\n');
   },
 
   formatProfitRate(profitRate) {
