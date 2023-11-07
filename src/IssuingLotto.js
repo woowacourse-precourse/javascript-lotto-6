@@ -39,6 +39,10 @@ class IssuingLotto {
     Utils.informUser(`${this.#count}개를 구매했습니다.`);
     Utils.informUser(`${lottoList.join('\n')}`);
   }
+
+  getIssuedLotto() {
+    return this.#issuedLotto;
+  }
 }
 
 export default IssuingLotto;
