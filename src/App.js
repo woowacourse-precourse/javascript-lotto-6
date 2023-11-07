@@ -2,7 +2,7 @@ import Calculator from "./Calculator";
 import Cashier from "./Cashier";
 import Checker from "./Checker";
 import DrawingMachine from "./DrawingMachine";
-import Statistics from "./Statistic";
+import Printer from "./Printer";
 import User from "./User";
 
 class App {
@@ -48,9 +48,9 @@ class App {
     }
   }
   printResult(winningResult, rateOfReturn){
-    const statistics = new Statistics();
+    const printer = new Printer();
 
-    statistics.print(winningResult, rateOfReturn);
+    printer.print(winningResult, rateOfReturn);
   }
 
   async play() {

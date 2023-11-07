@@ -1,8 +1,8 @@
-import Statistics from '../src/Statistic';
-import { STATISTICS_MESSAGE, WINNINGS_MONEY } from '../src/constant';
+import Printer from '../src/Printer';
+import { STATISTICS_MESSAGE } from '../src/constant';
 import { getLogSpy, makeExpectedWinningResult } from '../testUtils';
 
-describe('Statistics 클래스 테스트', () => {
+describe('Printer 클래스 테스트', () => {
   const WINNING_RESULT = makeExpectedWinningResult(1, 1, 1, 1, 1);
   const RATE_OF_RETURN = 50.52;
 
@@ -19,8 +19,8 @@ describe('Statistics 클래스 테스트', () => {
     ];
     const logSpy = getLogSpy();
 
-    const statistic = new Statistics();
-    statistic.print(WINNING_RESULT, RATE_OF_RETURN);
+    const printer = new Printer();
+    printer.print(WINNING_RESULT, RATE_OF_RETURN);
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));

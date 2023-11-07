@@ -1,7 +1,7 @@
 import { STATISTICS_MESSAGE } from './constant';
 import { printMessage, printWinningResult, printRateOfReturn } from './utils';
 
-class Statistics {
+class Printer {
   print(winningResult, rateOfReturn) {
     printMessage(STATISTICS_MESSAGE.header);
     printMessage(STATISTICS_MESSAGE.division);
@@ -10,4 +10,4 @@ class Statistics {
   }
 }
 
-export default Statistics;
+export default Printer;
