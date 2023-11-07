@@ -2,6 +2,8 @@
 // Lotto에 필드를 추가할 수 없음
 // #prefix, 필드란?
 
+import { ERROR_MESSAGE } from "./constants/constant";
+
 class Lotto {
   #numbers;
 
@@ -14,7 +16,13 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    const numbersSet = new Set(numbers);
+    
+    if (numbersSet.size !== 6) {
+      throw new Error(ERROR_MESSAGE.INVALID_ERROR)
+    }
   }
+
 
   // TODO: 추가 기능 구현
 }
