@@ -13,7 +13,6 @@ class Input {
     const lotteryNumbers = await Console.readLineAsync(
       '당첨 번호를 입력해 주세요.'
     );
-    console.log(lotteryNumbers.split(','));
 
     return lotteryNumbers.split(',');
   }
