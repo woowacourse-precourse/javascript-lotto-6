@@ -48,7 +48,7 @@ class App {
     }
   }
   makeLotto() {
-    return new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
+    return new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
   }
   showLottoList() {
     MissionUtils.Console.print(`${this.#cost / LOTTO_PRICE}개를 구매했습니다.`);
