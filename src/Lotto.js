@@ -35,8 +35,8 @@ class Lotto {
     numbers.forEach((number) => commonValidator.checkNumberType(number));
   }
 
-  getAscendingNumber() {
-    return [...this.#numbers].sort((a, b) => a - b);
+  getSortNumbers(callback) {
+    return [...this.#numbers].sort(callback);
   }
 }
 

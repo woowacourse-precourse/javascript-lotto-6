@@ -14,7 +14,7 @@ class LottoMachine {
 
   #generateSingleLotto() {
     const randomNumbers = this.#generatorRandomNumber();
-    return new Lotto(randomNumbers).getAscendingNumber();
+    return new Lotto(randomNumbers).getSortNumbers((a, b) => a - b);
   }
 
   #generatorRandomNumber() {
