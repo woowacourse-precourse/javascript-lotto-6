@@ -35,7 +35,7 @@ export default class LottoAnswer extends Lotto {
 		this.#validateDuplicateBonusNumber(number);
 		this.#validateOverLength(number);
 
-		return number;
+		return Number(number);
 	}
 
 	setBonusNumber(bonusNumber) {
