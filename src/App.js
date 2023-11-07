@@ -1,4 +1,6 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
+import { calculateRevenueRate, getRandomNumbers } from './util';
+
 import {
   INPUT_MESSAGE,
   INPUT_ERROR_MESSAGE,
@@ -49,18 +51,9 @@ class App {
 
   #purchaseLottos() {
     for (let i = 0; i < this.#lottoCount; i++) {
-      const randomNumbers = this.#getRandomNumbers();
+      const randomNumbers = getRandomNumbers();
       this.#lottoList.push(new Lotto(randomNumbers));
     }
-  }
-
-  #getRandomNumbers() {
-    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      45,
-      6,
-    );
-    return randomNumbers.sort((a, b) => a - b);
   }
 
   #printAllLottos() {
@@ -157,6 +150,31 @@ class App {
       `${RESULT_MESSAGE.SECOND_RESULT_MESSAGE} - ${fiveSameAndBonusMatch}개`,
     );
     Console.print(`${RESULT_MESSAGE.FIRST_RESULT_MESSAGE} - ${sixSame}개`);
+    this.#calculateRevenueRate({
+      threeSame,
+      fourSame,
+      fiveSame,
+      fiveSameAndBonusMatch,
+      sixSame,
+    });
+  }
+
+  #calculateRevenueRate({
+    threeSame,
+    fourSame,
+    fiveSame,
+    fiveSameAndBonusMatch,
+    sixSame,
+  }) {
+    const totalRevenue =
+      threeSame * 5000 +
+      fourSame * 50000 +
+      fiveSame * 1500000 +
+      fiveSameAndBonusMatch * 30000000 +
+      sixSame * 2000000000;
+    const revenueRate = Number((totalRevenue / this.#purchaseAmount) * 100);
+
+    Console.print(`총 수익률은 ${revenueRate}%입니다.`);
   }
 }
 
