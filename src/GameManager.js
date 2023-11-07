@@ -8,6 +8,11 @@ class GameManager {
     randomArray.sort((a, b) => Number(a) - Number(b));
     return randomArray;
   }
+
+  static splitWinNumber(winNumberArray) {
+    const splitNumber = winNumberArray.split(',').map((input) => Number(input));
+    return splitNumber;
+  }
 }
 
 export default GameManager;

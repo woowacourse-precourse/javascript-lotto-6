@@ -9,12 +9,15 @@ class LottoGame {
 
   purchasedTicket = [];
 
+  winNumber;
+
   constructor() {}
 
   async gameStart() {
     await this.getUserMoney();
     this.buyLottoTicket();
     this.printPurchasedTicket();
+    await this.setWinNumber();
   }
 
   async getUserMoney() {
@@ -32,6 +35,13 @@ class LottoGame {
 
   printPurchasedTicket() {
     this.purchasedTicket.forEach((lotto) => lotto.printLotto());
+  }
+
+  async setWinNumber() {
+    const winNumberArray = await Console.readLineAsync(
+      '\n당첨 번호를 입력해 주세요.\n'
+    );
+    this.winNumber = GameManager.splitWinNumber(winNumberArray);
   }
 }
 
