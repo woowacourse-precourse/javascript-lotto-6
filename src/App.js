@@ -1,6 +1,8 @@
 import { Random, Console } from "@woowacourse/mission-utils"
+import Lotto from "./Lotto.js"
 
 class App {
+  
   constructor() {
     this.lottoEach = 0;
     this.lottoAll = new Array();
@@ -101,6 +103,16 @@ class App {
 
     Console.print("총 수익률은 " + rate + "%입니다.");
   }
+
+  async play() {
+    await this.countBuytLotto();
+    this.buyLottoEntire();
+    this.printAllLotto();
+    await this.numberInput();
+    await this.bonusNumInput();
+    this.CompareAll();
+    this.statisticsPrint();
+    this.rateOfReturn();
   }
   
 }
