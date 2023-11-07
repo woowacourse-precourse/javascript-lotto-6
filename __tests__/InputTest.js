@@ -1,6 +1,4 @@
-import { InputGetter } from "../src/InputGetter";
-import { InputConverter } from "../src/InputConverter";
-import { InputValidator } from "../src/InputValidator";
+import { Input } from "../src/Input";
 import { Console } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
@@ -20,10 +18,10 @@ describe("입력 가져오기", () => {
 
     mockQuestions(inputs);
 
-    const inputGetter = new InputGetter();
+    const inputGetter = new Input();
 
     outputs.forEach(async (output) => {
-      const result = await inputGetter.inputMoney();
+      const result = await inputGetter.getMoney();
 
       expect(result).toBe(output);
     });
@@ -35,10 +33,10 @@ describe("입력 가져오기", () => {
 
     mockQuestions(inputs);
 
-    const inputGetter = new InputGetter();
+    const inputGetter = new Input();
 
     outputs.forEach(async (output) => {
-      const result = await inputGetter.inputWinningNumbers();
+      const result = await inputGetter.getWinningNumbers();
 
       expect(result).toBe(output);
     });
@@ -50,10 +48,10 @@ describe("입력 가져오기", () => {
 
     mockQuestions(inputs);
 
-    const inputGetter = new InputGetter();
+    const inputGetter = new Input();
 
     outputs.forEach(async (output) => {
-      const result = await inputGetter.inputBonusNumber();
+      const result = await inputGetter.getBonusNumber();
 
       expect(result).toBe(output);
     });
@@ -65,11 +63,11 @@ describe("입력 변환하기", () => {
     const inputs = ["1000", "3000", "15000"];
     const outputs = [1000, 3000, 15000];
 
-    const inputConverter = new InputConverter();
+    const inputConverter = new Input();
 
     outputs.forEach((output) => {
       const input = inputs.shift();
-      const result = inputConverter.moneyConverter(input);
+      const result = inputConverter.convertToNumber(input);
 
       expect(result).toEqual(output);
     });
@@ -82,11 +80,11 @@ describe("입력 변환하기", () => {
       [11, 23, 45, 22, 12, 38],
     ];
 
-    const inputConverter = new InputConverter();
+    const inputConverter = new Input();
 
     outputs.forEach((output) => {
       const input = inputs.shift();
-      const result = inputConverter.winningNumbersConverter(input);
+      const result = inputConverter.convertToArray(input);
 
       expect(result).toEqual(output);
     });
@@ -96,11 +94,11 @@ describe("입력 변환하기", () => {
     const inputs = ["1", "45", "17", "7"];
     const outputs = [1, 45, 17, 7];
 
-    const inputConverter = new InputConverter();
+    const inputConverter = new Input();
 
     outputs.forEach((output) => {
       const input = inputs.shift();
-      const result = inputConverter.bonusNumberConverter(input);
+      const result = inputConverter.convertToNumber(input);
 
       expect(result).toEqual(output);
     });
@@ -111,11 +109,11 @@ describe("입력 예외 처리", () => {
   test("금액", () => {
     const inputs = ["100", "1001", "-1000", " 1000", ".1000"];
 
-    const inputValidator = new InputValidator();
+    const inputValidator = new Input();
 
     inputs.forEach((input) => {
       expect(() => {
-        inputValidator.moneyValidator(input);
+        inputValidator.validateMoney(input);
       }).toThrow("[ERROR]");
     });
   });
@@ -134,11 +132,11 @@ describe("입력 예외 처리", () => {
       "s,1,2,3,4,5",
     ];
 
-    const inputValidator = new InputValidator();
+    const inputValidator = new Input();
 
     inputs.forEach((input) => {
       expect(() => {
-        inputValidator.winningNumbersValidator(input);
+        inputValidator.validateWinningNumbers(input);
       }).toThrow("[ERROR]");
     });
   });
@@ -147,11 +145,11 @@ describe("입력 예외 처리", () => {
     const numberInputs = ["0", ".", "2", "47"];
     const winningNumbersInput = [1, 2, 3, 4, 5, 6];
 
-    const inputValidator = new InputValidator();
+    const inputValidator = new Input();
 
     numberInputs.forEach((number) => {
       expect(() => {
-        inputValidator.bonusNumberValidator(number, winningNumbersInput);
+        inputValidator.validateBonusNumber(number, winningNumbersInput);
       }).toThrow("[ERROR]");
     });
   });
