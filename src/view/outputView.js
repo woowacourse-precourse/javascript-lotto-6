@@ -1,8 +1,18 @@
 import { Console } from '@woowacourse/mission-utils';
+import {
+  MESSAGE_OUTPUT_COINS,
+  MESSAGE_LOTTO_RESULT,
+  MESSAGE_THREE_MATCHED,
+  MESSAGE_FOUR_MATCHED,
+  MESSAGE_FIVE_MATCHED,
+  MESSAGE_BONUS_MATCHED,
+  MESSAGE_SIX_MATCHED,
+  MESSAGE_PROFIT,
+} from '../constants/message.js';
 
 export default class outputView {
   insertCoins(coins) {
-    Console.print(`\n${coins}개를 구매했습니다.`);
+    Console.print(MESSAGE_OUTPUT_COINS.replace('{result}', coins));
   }
 
   boughtLotto(lotto) {
@@ -10,30 +20,30 @@ export default class outputView {
   }
 
   winningResult() {
-    Console.print(`\n당첨 통계\n---`);
+    Console.print(MESSAGE_LOTTO_RESULT);
   }
 
   matchedThree(result) {
-    Console.print(`3개 일치 (5,000원) - ${result}개`);
+    Console.print(MESSAGE_THREE_MATCHED.replace('{result}', result));
   }
 
   matchedFour(result) {
-    Console.print(`4개 일치 (50,000원) - ${result}개`);
+    Console.print(MESSAGE_FOUR_MATCHED.replace('{result}', result));
   }
 
   matchedFive(result) {
-    Console.print(`5개 일치 (1,500,000원) - ${result}개`);
+    Console.print(MESSAGE_FIVE_MATCHED.replace('{result}', result));
   }
 
   matchedBonus(result) {
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result}개`);
+    Console.print(MESSAGE_BONUS_MATCHED.replace('{result}', result));
   }
 
   matchedSix(result) {
-    Console.print(`6개 일치 (2,000,000,000원) - ${result}개`);
+    Console.print(MESSAGE_SIX_MATCHED.replace('{result}', result));
   }
 
   profit(result) {
-    Console.print(`\n총 수익률은 ${result}%입니다.`);
+    Console.print(MESSAGE_PROFIT.replace('{result}', result));
   }
 }

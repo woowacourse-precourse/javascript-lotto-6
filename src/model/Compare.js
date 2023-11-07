@@ -1,4 +1,11 @@
-import { PROFIT } from '../constants/index.js';
+import {
+  PROFIT,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  KRW_UNIT,
+} from '../constants/constants.js';
 
 export default class Compare {
   #winningNumber;
@@ -17,7 +24,7 @@ export default class Compare {
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 3) Matched += 1;
+      if (matchedNumbers.length === THREE) Matched += 1;
     });
 
     return Matched;
@@ -31,7 +38,7 @@ export default class Compare {
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 4) Matched += 1;
+      if (matchedNumbers.length === FOUR) Matched += 1;
     });
 
     return Matched;
@@ -45,7 +52,7 @@ export default class Compare {
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 5) Matched += 1;
+      if (matchedNumbers.length === FIVE) Matched += 1;
     });
 
     return Matched;
@@ -60,7 +67,7 @@ export default class Compare {
         this.#winningNumber.includes(number)
       );
       if (
-        matchedNumbers.length === 5 &&
+        matchedNumbers.length === FIVE &&
         lottoNumbers.includes(this.#bonusNumber)
       ) {
         Matched += 1;
@@ -78,7 +85,7 @@ export default class Compare {
       const matchedNumbers = lottoNumbers.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === 6) Matched += 1;
+      if (matchedNumbers.length === SIX) Matched += 1;
     });
 
     return Matched;
@@ -101,6 +108,6 @@ export default class Compare {
     result.forEach((count, index) => {
       totalProfit += count * PROFIT[index];
     });
-    return ((totalProfit / (coin * 1000)) * 100).toFixed(1);
+    return ((totalProfit / (coin * KRW_UNIT)) * 100).toFixed(1);
   }
 }

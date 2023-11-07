@@ -3,7 +3,7 @@ import {
   END_NUMBER,
   SIZE,
   KRW_UNIT,
-} from '../constants/index.js';
+} from '../constants/constants.js';
 
 export function isNatural(number) {
   return Number.isInteger(number) && number > 0;
