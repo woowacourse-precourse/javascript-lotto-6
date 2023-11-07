@@ -1,9 +1,9 @@
 /* eslint-disable max-lines-per-function */
 import { MissionUtils } from '@woowacourse/mission-utils';
-import InputView from '../src/views/InputView.js';
-import LottoUtill from '../src/utils/LottoUtill.js';
-import LottoController from '../src/controllers/LottoController.js';
-import InputValidate from '../src/utils/InputValidate.js';
+import InputView from '../../src/views/InputView.js';
+import LottoUtill from '../../src/utils/LottoUtill.js';
+// import LottoController from '../../src/controllers/LottoController.js';
+import InputValidate from '../../src/utils/InputValidate.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();

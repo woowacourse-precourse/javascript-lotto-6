@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import LottoUtill from '../src/utils/LottoUtill.js';
+import LottoUtill from '../../src/utils/LottoUtill.js';
 
 describe('LottoUtill Class 테스트', () => {
   test('당첨 통계 테스트', () => {
