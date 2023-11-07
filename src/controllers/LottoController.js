@@ -7,7 +7,7 @@ class LottoController {
   constructor() {
     this.inputView = new InputView();
     this.outputView = new OutputView();
-    // this.lottoData;
+    this.lottoData = null;
   }
 
   async lottoProcess() {
@@ -57,11 +57,12 @@ class LottoController {
   }
 
   compareLottos() {
-    const lottos = this.lottoData.getLottos();
-    const winningNumber = this.lotto.getWinningNumber();
-    const bonusNumber = this.lotto.getBonusNumber();
-    const lottoStats = this.calculateStats(lottos, winningNumber, bonusNumber);
-    this.outputView.printStats(lottoStats);
+    this.calculateStats(
+      this.lottoData.getLottos(),
+      this.lotto.getWinningNumber(),
+      this.lotto.getBonusNumber(),
+    );
+    this.outputView.printStats(this.lottoData.getLottoStats());
   }
 
   calculateStats(lottos, winningNumber, bonusNumber) {
@@ -77,7 +78,7 @@ class LottoController {
         lottoStats[winningCount] += 1;
       }
     });
-    return lottoStats;
+    this.lottoData.setLottoStats(lottoStats);
   }
 }
 

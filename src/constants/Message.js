@@ -6,7 +6,7 @@ const INPUT_MESSAGE = {
 
 const OUTPUT_MESSAGE = {
   purchase: (count) => `\n${count}개를 구매했습니다.`,
-  result: '당첨 통계',
+  result: '\n당첨 통계',
   stats: (lottoStats) => `3개 일치 (5,000원) - ${lottoStats[3]}개
 4개 일치 (50,000원) - ${lottoStats[4]}개
 5개 일치 (1,500,000원) - ${lottoStats[5]}개

@@ -7,7 +7,7 @@ class LottoData {
     this.amount = amount;
     this.count = amount / SETTING.unit;
     this.lottos = [];
-    // this.lotto = new Lotto();
+    this.lottoStats = {};
     this.#validatePurchaseAmount(amount);
   }
 
@@ -22,8 +22,7 @@ class LottoData {
 
   lottoIssuance() {
     for (let i = 0; i < this.count; i++) {
-      const numbers = this.generateLotto();
-      this.lottos.push(numbers);
+      this.lottos.push(this.generateLotto());
     }
     return { count: this.count, lottos: this.lottos };
   }
@@ -35,6 +34,14 @@ class LottoData {
 
   getLottos() {
     return this.lottos;
+  }
+
+  setLottoStats(stats) {
+    this.lottoStats = stats;
+  }
+
+  getLottoStats() {
+    return this.lottoStats;
   }
 }
 
