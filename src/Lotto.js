@@ -11,6 +11,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers.sort((a, b) => a - b);
+    this.#duplicationValidate(numbers);
   }
 
   #validate(numbers) {
@@ -19,16 +20,27 @@ class Lotto {
     }
   }
 
+  #duplicationValidate(number) {
+    number.forEach((el, index) => {
+      if (el === number[index + 1]) {
+        throw new Error("[ERROR] 중복값은 입력이 불가합니다.");
+      }
+    });
+  }
+
   getWinNumberCount(lottos, bonusNumber) {
     let resultCount = [];
 
     lottos.forEach((lottoNums) => {
       let count = 0;
       let bonusCount = 0;
-      lottoNums.forEach((el, index) => {
-        if (el === this.#numbers[index]) {
-          count += 1;
-        }
+
+      lottoNums.forEach((el) => {
+        this.#numbers.forEach((winNum) => {
+          if (winNum === el) {
+            count += 1;
+          }
+        });
 
         if (el === bonusNumber) {
           count += 1;
@@ -42,9 +54,9 @@ class Lotto {
     return resultCount;
   }
 
-  verifyAmount = (money) => {
+  static verifyAmount(money) {
     if (isNaN(money)) {
-      throw new Error("[ERROR] 유효한 금액이 아닙니다. 다시 입력 해주세요");
+      throw new Error("[ERROR] 유효한 금액이 아닙니다. 다시 입력 해주세요.");
     }
 
     if (money % 1000 !== 0) {
@@ -54,29 +66,23 @@ class Lotto {
     }
 
     return money;
-  };
+  }
 
-   buyLotto(money) {
+  static buyLotto(money, lottoCount) {
     this.verifyAmount(money);
-    const lottoCount = calculateLottoCount(money);
-
-    Console.print(`${lottoCount}개를 구매했습니다.`);
 
     const lottoNumberArr = getLottoNumbers(lottoCount);
 
     return lottoNumberArr;
   }
 
-  async printLottoResult() {
-    const money = await getPayLottoAmount();
-    const lottoNumber = this.buyLotto(money)
-
+  async printLottoResult(money, lottoNumber) {
     this.#validate(this.#numbers);
-    
+
     const bonusCount = await getBonusNumber(this.#numbers);
 
     const winNumber = this.getWinNumberCount(lottoNumber, bonusCount);
-    
+
     printWinningMoney(winNumber, money);
   }
 }
