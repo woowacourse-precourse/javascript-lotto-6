@@ -12,12 +12,19 @@ export default class PurchaseController {
     for (let i = 0; i < quantity; i++) {
       this.lottos.push(new PurchasedLotto(this.issueOneLotto()));
     }
-    // this.printPurchasedLottos();
+    this.printPurchasedLottos();
   }
 
   issueOneLotto() {
     let lotto = [];
     lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
     return lotto;
+  }
+
+  printPurchasedLottos() {
+    this.outputView.printPurchased(this.quantity);
+    this.lottos.forEach((lotto) => {
+      this.outputView.printMessage(`[${lotto.getNumbers()}]`);
+    });
   }
 }
