@@ -28,6 +28,7 @@ class Lotto {
   }
   printOwnNumber() {
     printArray(this.#numbers)
+    return this
   }
 }
 
