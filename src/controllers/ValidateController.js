@@ -2,7 +2,7 @@ import Convert from '../utils/Convert';
 import Validate from '../utils/Validate';
 
 const ValidateController = {
-  async validatePurchaseLottoAmount(amountString) {
+  validatePurchaseLottoAmount(amountString) {
     const amount = Convert.convertToNumber(amountString);
 
     Validate.isNumber(amount);
@@ -11,7 +11,7 @@ const ValidateController = {
     return amount;
   },
 
-  async validateWinningNumbers(numbersString) {
+  validateWinningNumbers(numbersString) {
     const numbers = Convert.convertToList(numbersString);
 
     numbers.map(number => Validate.isNumberInRange(number));
@@ -22,7 +22,7 @@ const ValidateController = {
     return numbers;
   },
 
-  async validateBonusNumber(winningNumbers, numberString) {
+  validateBonusNumber(winningNumbers, numberString) {
     const number = Convert.convertToNumber(numberString);
 
     Validate.isNumber(number);

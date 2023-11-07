@@ -33,7 +33,7 @@ class LottoController {
 
   async #setMyLotto() {
     const purchaseLottoAmount = await this.#getPurchaseLottoAmount();
-    const lottoCount = await this.#calculateLottoCount(purchaseLottoAmount);
+    const lottoCount = this.#calculateLottoCount(purchaseLottoAmount);
     this.#printLottoCount(lottoCount);
 
     this.#myLotto = new MyLotto(lottoCount);
@@ -46,14 +46,14 @@ class LottoController {
     this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
   }
 
-  async #getPurchaseLottoAmount() {
+  #getPurchaseLottoAmount() {
     return this.#getValidInput(
       InputView.getPurchaseLottoAmount,
       ValidateController.validatePurchaseLottoAmount,
     );
   }
 
-  async #calculateLottoCount(lottoAmount) {
+  #calculateLottoCount(lottoAmount) {
     return parseInt(lottoAmount / NUMBER.PURCHASE_AMOUNT_UNIT, 10);
   }
 
@@ -61,14 +61,14 @@ class LottoController {
     OutputView.printLottoCount(lottoCount);
   }
 
-  async #getWinningNumbers() {
+  #getWinningNumbers() {
     return this.#getValidInput(
       InputView.getWinningNumbers,
       ValidateController.validateWinningNumbers,
     );
   }
 
-  async #getBonusNumbers(winningNumbers) {
+  #getBonusNumbers(winningNumbers) {
     return this.#getValidInput(
       () => InputView.getBonusNumber(winningNumbers),
       input => ValidateController.validateBonusNumber(winningNumbers, input),
