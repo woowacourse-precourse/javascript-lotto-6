@@ -29,11 +29,36 @@ class App {
     const inputBonusNumber = await MissionUtils.Console.readLineAsync(
       '\n보너스 번호를 입력해 주세요.\n'
     );
-    this.#bonusNumber = new BounsNumber(inputBonusNumber);
+    this.#bonusNumber = new BounsNumber(inputBonusNumber).getBonusNumber();
     this.winningStat();
   }
   winningStat() {
-    let stat = [];
+    const stat = [];
+    const winningStat = {
+      3: {
+        message: '3개 일치 (5,000원)',
+        count: 0,
+        price: 5000,
+      },
+      4: {
+        message: '4개 일치 (50,000원)',
+        count: 0,
+        price: 50000,
+      },
+      5: {
+        false: { message: '5개 일치 (1,500,000원)', count: 0, price: 1500000 },
+        true: {
+          message: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+          count: 0,
+          price: 30000000,
+        },
+      },
+      6: {
+        message: '6개 일치 (2,000,000,000원)',
+        count: 0,
+        price: 2000000000,
+      },
+    };
     this.#lottoList.forEach((lotto) => {
       let hit = lotto.filter((n) =>
         this.#winningLottoNumbers.includes(n)
@@ -43,6 +68,27 @@ class App {
         hit,
         bonus: lotto.includes(this.#bonusNumber),
       });
+    });
+
+    stat.forEach((item) => {
+      if (winningStat[item.hit]) {
+        item.hit === 5
+          ? winningStat[item.hit][item.bonus].count++
+          : winningStat[item.hit].count++;
+      }
+    });
+
+    Object.values(winningStat).forEach((item) => {
+      if (item.message) {
+        MissionUtils.Console.print(`${item.message} - ${item.count}개`);
+      } else {
+        MissionUtils.Console.print(
+          `${item.false.message} - ${item.false.count}개`
+        );
+        MissionUtils.Console.print(
+          `${item.true.message} - ${item.true.count}개`
+        );
+      }
     });
   }
 }
