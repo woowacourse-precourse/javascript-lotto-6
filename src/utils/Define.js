@@ -11,7 +11,14 @@ const CONSOLE_MESSAGE = Object.freeze({
 
 const ERROR_MESSAGE = Object.freeze({
   invalidAmountError:
-    '[ERROR] 입력한 구입금액이 유효하지 않습니다. 구입금액은 1,000원 단위여야하며 숫자여야합니다.',
+    '[ERROR] 입력한 구입금액이 유효하지 않습니다. 구입금액은 0이상, 1,000원 단위의 숫자여야합니다.',
+  invalidInputNumbers:
+    '[ERROR] 입력이 유효하지 않습니다. 로또 번호는 숫자여야하며, 각 숫자의 구분은 쉼표(,) 입니다.',
+  invalidInputBonusNumber:
+    '[ERROR] 입력이 유효하지 않습니다. 보너스 번호는 숫자여야 합니다.',
+  notUniqueNumbers: '[ERROR] 중복되는 숫자가 있습니다.',
+  notNumberCountSix: '[ERROR] 로또 번호는 6개여야 합니다.',
+  outOfRange: '[ERROR] 숫자가 주어진 범위를 벗어났습니다. 범위는 1~45 입니다.',
 });
 
 const LOTTO = Object.freeze({

@@ -8,6 +8,10 @@ class CustomError extends Error {
   static userInputError(message) {
     return new CustomError(message, Error.name.userInputError);
   }
+
+  static lottoValidateError(message) {
+    return new CustomError(message, Error.name.lottoValidateError);
+  }
 }
 
 export default CustomError;
