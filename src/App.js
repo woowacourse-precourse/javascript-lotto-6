@@ -45,6 +45,15 @@ class App {
       const compareResult = lottoGame.compareLottos(lotto, this.#bonusNumber);
       lottoGame.saveCompareResult(compareResult, this.lottoBoard);
     });
+
+    this.totalReward += lottoGame.calculateReward(
+      this.lottoBoard,
+      this.totalReward
+    );
+    this.lottoBoard.rateOfReturn = lottoGame.calculateRateOfReturn(
+      this.totalReward,
+      this.#money
+    );
   }
 
   makeLotto(money) {
