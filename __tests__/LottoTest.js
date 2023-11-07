@@ -1,6 +1,4 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from '../src/Lotto.js';
-import ERROR from '../src/constants/error.js';
 import generateLotto from '../src/utils/generateLotto.js';
 
 const mockRandoms = numbers => {
