@@ -1,11 +1,11 @@
-import InputView from '../views/InputView.js';
-import OutputView from '../views/OutputView.js';
 import LottoGame from '../domain/LottoGame.js';
 import Lotto from '../Lotto.js';
 import LottoValidator from '../domain/LottoValidator.js';
 
 class LottoGameController {
-  constructor() {
+  constructor(inputView, outputView) {
+    this.inputView = inputView;
+    this.outputView = outputView;
     this.lottoGame = null;
   }
 
@@ -15,8 +15,8 @@ class LottoGameController {
       this.lottoGame = new LottoGame(amount);
 
       const purchasedLotto = this.lottoGame.getPurchasedLotto();
-      OutputView.printPurchaseAmount(amount);
-      OutputView.printPurchasedLotto(purchasedLotto);
+      this.outputView.printPurchaseAmount(amount);
+      this.outputView.printPurchasedLotto(purchasedLotto);
 
       const winningLotto = await this.getValidWinningLotto();
       const bonusNumber = await this.getValidBonusNumber(winningLotto);
@@ -27,41 +27,41 @@ class LottoGameController {
       );
 
       const winsStatistics = this.lottoGame.getStatistics(comparisonResults);
-      OutputView.printWinsStatistics(winsStatistics);
+      this.outputView.printWinsStatistics(winsStatistics);
 
       const totalPrizeAmount = this.lottoGame.calcTotalPrizeAmount(winsStatistics);
-      OutputView.printProfitRatio(this.lottoGame.getProfitRatio(totalPrizeAmount));
+      this.outputView.printProfitRatio(this.lottoGame.getProfitRatio(totalPrizeAmount));
     } catch ({ message }) {
-      OutputView.printErrorMessage(message);
+      this.outputView.printErrorMessage(message);
       await this.start();
     }
   }
 
   async getValidPurchaseAmount() {
-    const inputPurchaseAmount = await InputView.getPurchaseAmount();
+    const inputPurchaseAmount = await this.inputView.getPurchaseAmount();
     LottoValidator.validPurchaseAmount(inputPurchaseAmount);
     return inputPurchaseAmount / 1000;
   }
 
   async getValidWinningLotto() {
     try {
-      const winningNumbers = await InputView.getWinningNumbers();
+      const winningNumbers = await this.inputView.getWinningNumbers();
       const numbers = winningNumbers.split(',').map(Number);
       return new Lotto(numbers);
     } catch ({ message }) {
-      OutputView.printErrorMessage(message);
+      this.outputView.printErrorMessage(message);
       return this.getValidWinningLotto();
     }
   }
 
   async getValidBonusNumber(winningLotto) {
     try {
-      const bonusNumber = await InputView.getBonusNumber();
+      const bonusNumber = await this.inputView.getBonusNumber();
       const isContaining = winningLotto.hasContainBonusNumber(Number(bonusNumber));
       LottoValidator.validBonusNumber(bonusNumber, isContaining);
       return Number(bonusNumber);
     } catch ({ message }) {
-      OutputView.printErrorMessage(message);
+      this.outputView.printErrorMessage(message);
       return this.getValidBonusNumber(winningLotto);
     }
   }
