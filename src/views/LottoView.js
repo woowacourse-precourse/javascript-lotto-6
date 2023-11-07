@@ -22,7 +22,13 @@ class LottoView {
   }
 
   printLottoCounts(lottoCounts) {
-    this.#outputView.print(`${lottoCounts}${MESSAGE.print.printLottoCounts}`);
+    this.#outputView.print(`\n${lottoCounts}${MESSAGE.print.printLottoCounts}`);
+  }
+
+  printLottos(lottos) {
+    lottos.forEach((lotto) => {
+      this.print(lotto);
+    });
   }
 }
 

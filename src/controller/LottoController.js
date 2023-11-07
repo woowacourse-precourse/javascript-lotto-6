@@ -14,11 +14,12 @@ class LottoController {
   async play() {
     await this.#readPurchaseAmount();
     this.#buyLottos();
+    this.#printLottos();
   }
 
   // 스택 오버플로우를 방지하기 위해 재귀 대신 while loop를 사용
   async #readPurchaseAmount() {
-    while (!this.#service.getAccount().getPurchaseAmount()) {
+    while (!this.#service.getPurchaseAmount()) {
       try {
         const purchaseAmount = await this.#view.readPurchaseAmount();
         this.#service.setPurchaseAmount(purchaseAmount);
@@ -32,6 +33,11 @@ class LottoController {
     this.#service.buyLottos();
     const lottoCounts = this.#service.getLottos().length;
     this.#view.printLottoCounts(lottoCounts);
+  }
+
+  #printLottos() {
+    const lottos = this.#service.getLottos();
+    this.#view.printLottos(lottos);
   }
 }
 
