@@ -1,5 +1,5 @@
 import { LOTTO_ERROR } from '../constants/message/error.js';
-import { LOTTO } from '../constants/setting.js';
+import { LOTTO_NUMBER } from '../constants/setting.js';
 import InputError from '../error/InputError.js';
 import CommonValidator from './CommonValidator.js';
 
@@ -11,7 +11,7 @@ class LottoValidator {
   }
 
   static validateCount(numbers) {
-    if (numbers.length !== LOTTO.count) {
+    if (numbers.length !== LOTTO_NUMBER.count) {
       throw new InputError(LOTTO_ERROR.count);
     }
   }

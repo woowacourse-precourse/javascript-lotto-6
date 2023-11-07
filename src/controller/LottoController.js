@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 
-import { LOTTO } from '../constants/setting.js';
+import { LOTTO_PRICE } from '../constants/setting.js';
 import Lotto from '../Lotto.js';
 import OutputView from '../views/OutputView.js';
 
@@ -28,7 +28,7 @@ class LottoController {
   }
 
   purchaseLotto() {
-    const lottoCount = this.#money / LOTTO.price;
+    const lottoCount = this.#money / LOTTO_PRICE;
     OutputView.printPurchaseMessage(lottoCount);
 
     for (let i = 0; i < lottoCount; i += 1) {
@@ -76,14 +76,14 @@ class LottoController {
   }
 
   updateLottoStatistics(matchResult) {
-    if (matchResult.count < LOTTO.match3 && !matchResult.bonus) return;
+    if (matchResult.count < 3 && !matchResult.bonus) return;
 
     const key = this.determineStatisticsKey(matchResult);
     this.updateStatistics(key);
   }
 
   determineStatisticsKey({ count, bonus }) {
-    if (count === LOTTO.match5 && bonus) {
+    if (count === 5 && bonus) {
       return 'match5Bonus';
     }
 

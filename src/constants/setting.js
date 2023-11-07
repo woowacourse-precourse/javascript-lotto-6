@@ -1,11 +1,10 @@
 export const DELIMITER = ',';
 
-export const LOTTO = Object.freeze({
-  minNumber: 1,
-  maxNumber: 45,
+export const REMAIN_MONEY = 0;
+
+export const LOTTO_PRICE = 1000;
+export const LOTTO_NUMBER = Object.freeze({
+  min: 1,
+  max: 45,
   count: 6,
-  price: 1000,
-  noRemainder: 0,
-  match3: 3,
-  match5: 5,
 });
