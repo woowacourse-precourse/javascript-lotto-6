@@ -1,4 +1,4 @@
-import Output from "../view/Output.js";
+import { isValidLottoLength, isMadeWithUniqueNumber } from "../validator/lottoValidate.js";
 
 class Lotto {
   #numbers;
@@ -10,25 +10,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-
-    const dupCheck = new Set(numbers);
-    if(dupCheck.size !== numbers.length) throw new Error("[ERROR] 로또 번호 중복");
-  }
-
-  getNumbers(){
-    return this.#numbers;
+    isValidLottoLength(numbers.length);
+    isMadeWithUniqueNumber(numbers);
   }
 
   #sortLotto(){
     this.#numbers.sort((a,b) => a-b);
   }
-
-  printLotto(){
-    const formatedMessage = this.#numbers.join(', ');
-    Output.outputMessage(`[${formatedMessage}]`);
+  
+  toString(){
+    const addDelimiter = this.#numbers.join(', ');
+    return `[${addDelimiter}]`;
   }
 
   compareToWinningLotto(winningLotto, bonusNumber){

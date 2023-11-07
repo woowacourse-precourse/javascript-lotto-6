@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import { PRIZE_CRITERIA, PRIZE_MONEY } from "../constants/PrizeConstant.js";
 import Output from "../view/Output.js";
 
@@ -20,10 +21,12 @@ class LottoSet {
         }
     }
 
-    printLottoSet(){
-        this.#lottoSet.forEach(lotto => {
-            lotto.printLotto();
-        });
+    toString(){
+        return this.#lottoSet.join('\n');
+    }
+
+    getLottoSet(){
+        return this.#lottoSet;
     }
 
     calculatePrizeResult(winningLotto, bonusNumber){
