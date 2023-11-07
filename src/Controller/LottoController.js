@@ -37,7 +37,7 @@ class LottoController {
     for (let i = 0; i < this.AMOUNT; i++) {
       this.lottoList.push(this.generateLottoNumbers());
     }
-    OutputView.printLottoNumbers(this.lottoList);
+    OutputView.printLottoNumbers(this.AMOUNT, this.lottoList);
   }
 
   calculatePrizes(lottoNumbers, bonusNumber) {
