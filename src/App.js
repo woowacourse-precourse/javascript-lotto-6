@@ -24,6 +24,8 @@ class App {
     const bonusNumber = await Console.readLineAsync(
       "보너스 번호를 입력해 주세요."
     );
+
+    const result = this.getResult(lottoList, winningNumber, bonusNumber);
   }
 
   buyLotto(amount) {
@@ -37,6 +39,38 @@ class App {
     }
 
     return lottoList;
+  }
+
+  getResult(lottoList, winningNumber, bonusNumber) {
+    const result = { n3: 0, n4: 0, n5: 0, n5b: 0, n6: 0 };
+
+    for (let i = 0; i < lottoList.length; i++) {
+      const matchingNumbers = lottoList[i]
+        .getLottoNumbers()
+        .filter((num) => winningNumber.includes(num));
+      const matchingCount = matchingNumbers.length;
+
+      switch (matchingCount) {
+        case 6:
+          result.n6++;
+          return;
+        case 5:
+          result.n5++;
+          if (matchingNumbers.includes(bonusNumber)) {
+            result.n5b++;
+            result.n5--;
+          }
+          break;
+        case 4:
+          result.n4++;
+          break;
+        case 3:
+          result.n3++;
+          break;
+      }
+    }
+
+    return result;
   }
 }
 
