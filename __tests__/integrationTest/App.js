@@ -86,14 +86,14 @@ describe("App.play - 예외", () => {
   });
 });
 
-describe("App.printTickets - 예외", () => {
+describe("App.printLottoBundle - 예외", () => {
   test("app의 인스턴스의 최초 실행 이전에 출력을 시도하면 에러 문구를 출력해야 한다.", () => {
     // given
     const logSpy = getLogSpy();
 
     // when
     const app = new App();
-    app.printTickets();
+    app.printLottoBundle();
 
     // then
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));

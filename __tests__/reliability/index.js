@@ -1,10 +1,10 @@
 import { Random } from "@woowacourse/mission-utils";
-import Tickets from "../../src/lib/Domain/Tickets";
-import Calc from "../../src/lib/Utils/Calc";
+import LottoBundle from "../../src/lib/Domain/LottoBundle";
+import ReferenceLotto from "../../src/lib/Domain/ReferenceLotto";
 
 describe("당첨 결과 분포 편향 확인", () => {
   test("당첨 결과의 분포는 정해진 확률에 따르며 관측된 결과는 신뢰 범위 이내에 존재하여야 한다.", async () => {
-    const numbers = Random.pickUniqueNumbersInRange(1, 45, 7);
+    // given
     const LENGTH = 20000;
     const PERCENTAGES = [
       1 / 8145060,
@@ -16,14 +16,13 @@ describe("당첨 결과 분포 편향 확인", () => {
     ];
     const TARGET_VALUE = 11.07;
     const expectedGroup = PERCENTAGES.map((v) => v * LENGTH);
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 7);
+    const referenceLotto = new ReferenceLotto(numbers.slice(0, 6));
+    referenceLotto.bonus = numbers.at(6);
 
-    const tickets = new Tickets(LENGTH * 1000);
-    const prizeMap = Calc.prizeMap(
-      tickets.items,
-      numbers.slice(0, 6),
-      numbers.slice(6, 7),
-    );
-
+    // when
+    const lottoBundle = new LottoBundle(LENGTH * 1000);
+    const { prizeMap } = referenceLotto.calcResult(lottoBundle.items);
     const testValue = expectedGroup
       .map((expected, i) => {
         const observed = prizeMap.get(i + 1) ?? 0;
@@ -44,9 +43,9 @@ describe("당첨 번호 편향 확인", () => {
     const expected = LENGTH / 45;
 
     // when
-    const tickets = new Tickets(LENGTH * 1000);
-    tickets.items.forEach((ticket) => {
-      ticket.forEach((number) => (observedGroup[number - 1] += 1));
+    const lottoBundle = new LottoBundle(LENGTH * 1000);
+    lottoBundle.purchaseHistory.forEach((history) => {
+      history.forEach((number) => (observedGroup[number - 1] += 1));
     });
     const testValue = observedGroup
       .map((observed) => (observed - expected) ** 2 / expected)
