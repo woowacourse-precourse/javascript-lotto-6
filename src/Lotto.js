@@ -16,7 +16,15 @@ class Lotto {
     return this.#numbers;
   }
 
-  // TODO: 추가 기능 구현
+  getMatchingCountWithWinningNumbers(winningNumbers) {
+    let matchingCountWithWinningNumbers = 0;
+    this.#numbers.forEach((number) => {
+      if (winningNumbers.includes(number)) {
+        matchingCountWithWinningNumbers += 1;
+      }
+    });
+    return matchingCountWithWinningNumbers;
+  }
 }
 
 export default Lotto;
