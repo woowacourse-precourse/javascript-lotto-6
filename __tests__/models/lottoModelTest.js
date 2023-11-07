@@ -27,3 +27,18 @@ describe('입력된 당첨 번호 문자열을 숫자로 이루어진 배열로 
     });
   });
 });
+
+describe('lastIndex 구하기', () => {
+  test('', () => {
+    // given
+    const numbers = [7, 2, 8, 10, 7, 12];
+    const NUMBER = 7;
+    const OUTPUT = 4;
+
+    // when
+    const lastIndex = lottoModel.getLastIndex(numbers, NUMBER);
+
+    // then
+    expect(lastIndex).toBe(OUTPUT);
+  });
+});
