@@ -1,3 +1,4 @@
+import { LOTTO_PRICE } from './Constants.js';
 import InputManager from './UI/InputManager.js';
 import OutputManager from './UI/OutputManager.js';
 import { validatePurchaseAmountInput } from './Validation.js';
@@ -11,6 +12,7 @@ class App {
 
   async play() {
     const purchaseAmount = await this.getPurchaseAmount();
+    const numberOfLottos = this.getNumberOfLottos(purchaseAmount);
   }
 
   async getPurchaseAmount() {
@@ -22,6 +24,10 @@ class App {
       await this.getPurchaseAmount();
     }
     return Number(this.purchaseAmountInput);
+  }
+
+  getNumberOfLottos(purchaseAmount) {
+    return purchaseAmount / LOTTO_PRICE;
   }
 }
 
