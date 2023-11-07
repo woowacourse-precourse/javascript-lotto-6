@@ -1,6 +1,7 @@
 import Lotto from "../Lotto";
 import getRandomNumber from "../utils/getRandomNumber";
 import { LOTTO_INFO } from "../utils/constants";
+import LottoValidator from "../Validator/LottoValidator";
 
 class LottoGenerator {
   constructor(purcaseAmount) {
@@ -9,7 +10,7 @@ class LottoGenerator {
   }
 
   #validate(purcaseAmount) {
-    //로또 유효성 검사
+    LottoValidator.validatePurchaseAmount(purcaseAmount);
   }
 
   #generateLotto(purcaseAmount) {
