@@ -1,0 +1,22 @@
+import ERROR_MESSAGE from "./constant/errorData";
+import LOTTO from "./constant/lottoData";
+import { isBlank, isInvalidType } from "./utils/validation";
+
+const Validator = {
+  paymentInvalid(input) {
+    if (input % LOTTO.COST !== 0) throw ERROR_MESSAGE.PAYMENT_INVALID;
+  },
+  invalidNumberType(input) {
+    if (input.some(isInvalidType)) throw ERROR_MESSAGE.NUMBER_FORM;
+    if (Number.isNaN(Number(input))) throw ERROR_MESSAGE.NUMBER_FORM;
+  },
+  blank(input) {
+    if (input.some(isBlank)) throw ERROR_MESSAGE.blank;
+  },
+};
+
+export const validatePayment = (payment) => {
+  Validator.paymentInvalid(payment);
+  Validator.invalidNumberType(payment);
+  Validator.blank(payment);
+};
