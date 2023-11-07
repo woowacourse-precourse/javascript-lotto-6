@@ -61,12 +61,21 @@ class App {
     // TODO: 보너스 번호 예외처리
     const bonusNumber = parseInt(bonusNumberString);
 
-    Console.print('\n당첨 통계\n---');
+    const winnings = Object.freeze({
+      three: 5000,
+      four: 50000,
+      five: 1500000,
+      fiveBonus: 30000000,
+      six: 2000000000,
+    });
+    let totalWinnings = 0;
     let threeNumbersHitCount = 0;
     let fourNumbersHitCount = 0;
     let fiveNumbersHitCount = 0;
     let fiveNumbersWithBonusHitCount = 0;
     let sixNumbersHitCount = 0;
+
+    Console.print('\n당첨 통계\n---');
 
     for (const numbers of userLottoNumbers) {
       let hitCount = 0;
@@ -82,19 +91,24 @@ class App {
       switch (hitCount) {
         case 3:
           threeNumbersHitCount += 1;
+          totalWinnings += winnings['three'];
           break;
         case 4:
           fourNumbersHitCount += 1;
+          totalWinnings += winnings['four'];
           break;
         case 5:
           if (bonusHit) {
             fiveNumbersWithBonusHitCount += 1;
+            totalWinnings += winnings['fiveBonus'];
           } else {
             fiveNumbersHitCount += 1;
+            totalWinnings += winnings['five'];
           }
           break;
         case 6:
           sixNumbersHitCount += 1;
+          totalWinnings += winnings['six'];
           break;
         default:
           break;
@@ -109,6 +123,12 @@ class App {
       `5개 일치, 보너스 볼 일치 (30,000,000원) - ${fiveNumbersWithBonusHitCount}개`
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${sixNumbersHitCount}개`);
+
+    const rateToReturn = (
+      ((totalWinnings - purchaseAmount) / purchaseAmount) *
+      100
+    ).toFixed(1);
+    Console.print(`총 수익률은 ${rateToReturn}%입니다.`);
   }
 }
 
