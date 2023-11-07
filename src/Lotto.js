@@ -1,12 +1,21 @@
-import LottoNumbers from './LottoNumbers.js';
+import Validator from './validator/Validator.js';
 
-class Lotto extends LottoNumbers {
+class Lotto {
+  #numbers;
+
   constructor(numbers) {
-    super(numbers);
+    this.#validate(numbers);
+    this.#numbers = numbers;
   }
 
   getNumbers() {
-    return super.getNumbers();
+    return [...this.#numbers];
+  }
+
+  #validate(numbers) {
+    Validator.validateLottoNumbersLength(numbers);
+    numbers.forEach(Validator.validateLottoNumberRange);
+    Validator.validateUniqueLottoNumbers(numbers);
   }
 }
 
