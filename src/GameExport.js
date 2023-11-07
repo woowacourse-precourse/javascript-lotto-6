@@ -1,7 +1,7 @@
 import Lotto from './Lotto.js';
 import { PurchaseLotto } from './PurchaseLotto.js';
 import { randomNum } from './utils.js';
-import { GRADING_COUNT, LOTTO_PRIZE_MONEY } from './constants.js';
+import { GRADING_COUNT, LOTTO_NUMBERS, LOTTO_PRIZE_MONEY } from './constants.js';
 
 class GameExport {
   #lottos;
@@ -38,9 +38,7 @@ class GameExport {
   }
 
   getEachCompareResult(inputNumbers, bonusNumber) {
-    return this.#lottos.map((lotto) =>
-      lotto.getCompareResult(inputNumbers, bonusNumber),
-    );
+    return this.#lottos.map((lotto) => lotto.getCompareResult(inputNumbers, bonusNumber));
   }
 
   getStatistics(eachCompareResult) {
@@ -53,24 +51,24 @@ class GameExport {
     };
 
     eachCompareResult.forEach(({ matchCount, hasBonusNumber }) => {
-      if (matchCount === GRADING_COUNT.SIX) statistics.FIRST_PRIZE += 1;
-      if (matchCount === GRADING_COUNT.FIVE && hasBonusNumber)
-        statistics.SECOND_PRIZE += 1;
-      if (matchCount === GRADING_COUNT.FIVE && !hasBonusNumber)
-        statistics.THIRD_PRIZE += 1;
-      if (matchCount === GRADING_COUNT.FOUR) statistics.FOURTH_PRIZE += 1;
-      if (matchCount === GRADING_COUNT.THREE) statistics.FIFTH_PRIZE += 1;
+      if (matchCount === GRADING_COUNT.FIRST_PRIZE) statistics.FIRST_PRIZE += 1;
+      if (matchCount === GRADING_COUNT.SECOND_PRIZE && hasBonusNumber) statistics.SECOND_PRIZE += 1;
+      if (matchCount === GRADING_COUNT.THIRD_PRIZE && !hasBonusNumber) statistics.THIRD_PRIZE += 1;
+      if (matchCount === GRADING_COUNT.FOURTH_PRIZE) statistics.FOURTH_PRIZE += 1;
+      if (matchCount === GRADING_COUNT.FIFTH_PRIZE) statistics.FIFTH_PRIZE += 1;
     });
 
-    console.log(statistics);
     return statistics;
   }
 
   getTotalPrizeMoney(statistics) {
-    return Object.entries(statistics).reduce(
-      (acc, [prize, count]) => acc + LOTTO_PRIZE_MONEY[prize] * count,
-      0,
-    );
+    return Object.entries(statistics).reduce((acc, [prize, count]) => acc + LOTTO_PRIZE_MONEY[prize] * count, 0);
+  }
+
+  getPriceEarningsRatio(totalPrizeMoney) {
+    const purchaseAmount = this.#lottos.length * LOTTO_NUMBERS.PAY_LOTTO_MONEY;
+
+    return (totalPrizeMoney / purchaseAmount) * 100;
   }
 
   getLottos() {
