@@ -6,8 +6,6 @@ async function InputWinningNumbers() {
   const winningNumberStr = await MissionUtils.Console.readLineAsync(
     INPUT_MESSAGE.winningLotto
   );
-  const winningNumber = winningNumberStr.split(",").map(Number);
-  MissionUtils.Console.print(winningNumber);
   return new Lotto(winningNumberStr.split(",").map(Number));
 }
 

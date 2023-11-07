@@ -8,9 +8,8 @@ async function InputBonusNumber() {
       const bonusStr = await MissionUtils.Console.readLineAsync(
         INPUT_MESSAGE.bonusLotto
       );
-      const bonus = Number(bonusStr);
-      validateBonus(bonus);
-      return bonus;
+      validateBonus(bonusStr);
+      return Number(bonusStr);
     } catch (e) {
       MissionUtils.Console.print(e.message);
     }

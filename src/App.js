@@ -6,12 +6,12 @@ import LottoCount from "./LottoCount.js";
 import { printLottoNumbers } from "./print.js";
 class App {
   async play() {
-    const amount = await InputAmount();
+    // const amount = await InputAmount();
     // const count = LottoCount(amount);
     // const lottoNumbers = RandomNumber(count);
     // printLottoNumbers(lottoNumbers);
     // const winningNumbers = await InputWinningNumbers();
-    // const bonus = await InputBonusNumber();
+    const bonus = await InputBonusNumber();
   }
 }
 
