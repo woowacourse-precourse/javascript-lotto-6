@@ -6,7 +6,7 @@ class WinNumberConverter {
   }
 
   #changeStringToNumArr(string) {
-    this.#numbers = string.split(',');
+    this.#numbers = string.split(',').map((e) => Number(e));
   }
 
   get numbers() {
