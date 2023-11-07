@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Player from '../src/model/Player';
+import { PRIZE_TABLE } from '../src/constants/lotto';
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
@@ -91,6 +92,26 @@ describe('로또 플레이어 클래스 테스트', () => {
       expect(
         player.checkLottos(winningNumbers, bonusNumber).getScoreCard()
       ).toEqual(expectedScoreBoard);
+    }
+  );
+
+  test.each([
+    [[1, 2, 3, 4, 5, 6], 7, [[1, 2, 3, 4, 5, 6]], PRIZE_TABLE['1등']],
+    [[1, 2, 3, 4, 5, 6], 8, [[1, 2, 3, 4, 5, 8]], PRIZE_TABLE['2등']],
+    [[1, 2, 3, 4, 5, 6], 9, [[1, 2, 3, 4, 5, 8]], PRIZE_TABLE['3등']],
+    [[1, 2, 3, 4, 5, 6], 15, [[1, 2, 3, 4, 9, 10]], PRIZE_TABLE['4등']],
+  ])(
+    '플레이어는 맞은 로또만큼 당첨금액을 지급받는다.',
+    (winningNumbers, bonusNumber, mockedRandomNumber, prize) => {
+      mockRandoms(mockedRandomNumber);
+
+      const player = new Player(1000);
+      player.buyLottos();
+      expect(player.getNumOfLottos()).toEqual(1);
+
+      expect(
+        player.checkLottos(winningNumbers, bonusNumber).getPrize()
+      ).toEqual(prize);
     }
   );
 });
