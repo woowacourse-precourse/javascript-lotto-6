@@ -20,4 +20,21 @@ describe("로또 클래스 테스트", () => {
       new Lotto([1, 2, 3, 4, 5, 46]);
     }).toThrow("[ERROR]");
   });
+
+  test("compareNumbers 함수 테스트", () => {
+    //given
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+    //when
+    const [result, bonusResult] = lotto.compareNumbers(
+      winningNumbers,
+      bonusNumber
+    );
+    const key = result + bonusResult;
+
+    //then
+    expect(key).toBe("6bonusFalse");
+  });
 });
