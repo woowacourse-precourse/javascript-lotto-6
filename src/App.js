@@ -1,5 +1,5 @@
-import LottoInput from "./LottoInput";
-import LottoOutput from "./LottoOutput";
+import LottoInput from "./Controller/LottoInput";
+import LottoOutput from "./Controller/LottoOutput";
 
 class App {
   constructor() {
@@ -9,7 +9,7 @@ class App {
 
   async play() {
     const money = await this.lottoInput.priceInput();
-    const count = this.lottoOutput.printLottoCnt();
+    const count = this.lottoOutput.lottoCnt();
   }
 }
 
