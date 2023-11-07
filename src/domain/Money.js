@@ -24,6 +24,14 @@ export class Money {
 
   /**
    *
+   * @return {number}
+   */
+  get amount() {
+    return this.#amount;
+  }
+
+  /**
+   *
    * @param {number} amount
    * @description Money 객체의 잔액에 돈 추기
    * @return {void}
@@ -61,8 +69,12 @@ export class Money {
     }
   }
 
-  #validateAmount() {
-    if (this.#amount < 0) {
+  /**
+   *
+   * @return {void}
+   */
+  #validateAmount(sum) {
+    if (sum < 0) {
       throw new Error("[ERROR] 잔액은 0 미만이 될 수 없음");
     }
   }
