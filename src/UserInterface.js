@@ -25,16 +25,28 @@ class UserInterface {
   }
 
   static async getWinningNumbers() {
-    const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
-    if (Validation.validateWinningNumbers(input)) {
-      return input.split(",").map((number) => Number(number));
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
+        if (Validation.validateWinningNumbers(input)) {
+          return input.split(",").map((number) => Number(number));
+        }
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
   }
 
   static async getBonusNumber(winningNumbers) {
-    const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
-    if (Validation.validateBonusNumber(input, winningNumbers)) {
-      return Number(input);
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+        if (Validation.validateBonusNumber(input, winningNumbers)) {
+          return Number(input);
+        }
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
   }
 
