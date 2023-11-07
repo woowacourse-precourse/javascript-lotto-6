@@ -1,4 +1,4 @@
-import { checkValueIsInteger, checkValueIsNumber } from './checkValue';
+import { checkValueIsInteger, checkValueIsNumber } from './checkValue.js';
 
 export const getLottoCntFromInputMoney = (inputMoney) => {
   if (!checkValueIsNumber(inputMoney)) {

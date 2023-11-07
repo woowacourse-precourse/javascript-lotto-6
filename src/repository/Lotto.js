@@ -2,7 +2,7 @@ import { MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER } from '../utils/constants.js';
 import {
   checkValueIsDuplicate,
   checkValueIsNumber,
-} from '../utils/getUserInput.js';
+} from '../utils/checkValue.js';
 
 class Lotto {
   #numbers;

@@ -1,5 +1,5 @@
 import { MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER } from '../utils/constants.js';
-import { checkValueIsNumber } from '../utils/getUserInput.js';
+import { checkValueIsNumber } from '../utils/checkValue.js';
 
 class BounsNumber {
   #bonusNumber;
