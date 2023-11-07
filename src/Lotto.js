@@ -6,25 +6,49 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.numbersArray = [];
   }
 
-  static numbersArray(numbers) {
-    return numbers.split(',').map(Number);
+  static numbers(numbers) {
+    return numbers.split(',');
   }
 
   #validate(numbers) {
-    const numbersArray = Lotto.numbersArray(numbers);
-    if (numbersArray.length !== 6) {
+    this.numbersArray = Lotto.numbers(numbers);
+    this.checkLength();
+    this.checkType();
+    this.checkRange();
+    this.checkDuplicated();
+    this.checkWhiteSpace();
+  }
+
+  checkLength() {
+    if (this.numbersArray.length !== 6) {
       throw new Error(errorMessage.winningNumbersCount);
     }
-    if (numbersArray.some(number => Number.isNaN(Number(number)))) {
+  }
+
+  checkType() {
+    if (this.numbersArray.some(number => Number.isNaN(Number(number)))) {
       throw new Error(errorMessage.winningNumbersNotNumber);
     }
-    if (numbersArray.some(number => number < 1 || number > 45)) {
+  }
+
+  checkRange() {
+    if (this.numbersArray.some(number => Number(number) < 1 || Number(number) > 45)) {
       throw new Error(errorMessage.winningNumbersRange);
     }
-    if (new Set(numbersArray).size !== 6) {
+  }
+
+  checkDuplicated() {
+    if (new Set(this.numbersArray).size !== 6) {
       throw new Error(errorMessage.duplicatedWinningNumbers);
+    }
+  }
+
+  checkWhiteSpace() {
+    if (this.numbersArray.some(number => number.includes(' '))) {
+      throw new Error(errorMessage.whiteSpace);
     }
   }
 }
