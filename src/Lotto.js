@@ -13,15 +13,14 @@ class Lotto {
     const numbersSet = new Set(numbers);
     const { count, minimum, maximum } = SETTINGS.targetNumber;
 
-    if (numbersSet.size !== count) {
+    if (numbersSet.size !== count)
       throw new Error(MESSAGES.error.invalidTargetNumbersLength);
-    }
-    if (numbers.some((number) => !Number.isInteger(Number(number)))) {
+
+    if (numbers.some((number) => !Number.isInteger(Number(number))))
       throw new Error(MESSAGES.error.notNumber);
-    }
-    if (numbers.some((number) => number > maximum || number < minimum)) {
+
+    if (numbers.some((number) => number > maximum || number < minimum))
       throw new Error(MESSAGES.error.invalidRange);
-    }
   }
 
   // TODO: 추가 기능 구현
