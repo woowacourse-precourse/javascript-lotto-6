@@ -6,6 +6,7 @@ class LottoGame {
   #count;
   #lottos;
   #winningNumber;
+  #bonusNumber;
 
   setCount(amount) {
     this.#count = amount / GAME_NUMBER.MONEY_UNIT;
@@ -21,6 +22,10 @@ class LottoGame {
 
   setWinningNumber(numbers) {
     this.#winningNumber = new Lotto(numbers);
+  }
+
+  setBonusNumber(number) {
+    this.#bonusNumber = number;
   }
 
   getLottoCount() {

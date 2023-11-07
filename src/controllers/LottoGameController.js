@@ -46,9 +46,21 @@ class LottoGameController {
       validation.validateInputArray(winningNumber);
       const parsedNumber = winningNumber.split(',').map(Number);
       this.#lottoGame.setWinningNumber(parsedNumber);
+      this.enterBonusNumber(winningNumber);
     } catch (error) {
       Console.print(error.message);
       await this.enterWinningNumbers();
+    }
+  }
+
+  async enterBonusNumber(winningNumber) {
+    try {
+      const bonusNumber = await InputView.readBonusNumber();
+      validation.validateBonusNumber(bonusNumber, winningNumber);
+      this.#lottoGame.setBonusNumber(Number(bonusNumber));
+    } catch (error) {
+      Console.print(error.message);
+      await this.enterBonusNumber(winningNumber);
     }
   }
 }

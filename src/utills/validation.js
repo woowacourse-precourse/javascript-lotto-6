@@ -35,6 +35,13 @@ const validation = {
     const set = new Set(numbers);
     if (set.size !== numbers.length) throw new Error(ERROR.LOTTO_DUPLICATION);
   },
+
+  validateBonusNumber(bonusNumber, winningNumber) {
+    if (winningNumber.includes(bonusNumber))
+      throw new Error(ERROR.LOTTO_DUPLICATION);
+    if (bonusNumber < 1 || bonusNumber > 45)
+      throw new Error(ERROR.INVALID_LOTTO_RANGE);
+  },
 };
 
 export default validation;

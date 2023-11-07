@@ -8,6 +8,9 @@ const InputView = {
   readWinningNumber() {
     return Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBER);
   },
+  readBonusNumber() {
+    return Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+  },
 };
 
 export default InputView;
