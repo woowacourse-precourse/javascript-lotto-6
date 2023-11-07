@@ -17,7 +17,7 @@ class Profit {
 
   /**
    * 당첨 내역 카운트 하는 함수
-   * @param {number[]} compareCounts
+   * @param {number[]} compareCounts 로또당 일치하는 숫자 개수
    */
   #countHistory(compareCounts) {
     compareCounts.forEach((number) => {
