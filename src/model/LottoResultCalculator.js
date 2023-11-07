@@ -15,15 +15,11 @@ export default class LottoResultCalculator {
 
   /**
    * @public
-   * @param {PlayerLotto[]} lottoNumbers
-   * @param {number[]} winningNumbers
-   * @param {number} winningBonusNumber
+   * @param {{mainNumber: number, bonusNumber: boolean}[]} matchList
    * @returns {{prizeAmount: number[], prizeTotal: number}}
    */
-  calculateResults(lottoNumbers, winningNumbers, winningBonusNumber) {
-    lottoNumbers.forEach((lotto) => {
-      const match = lotto.compare(winningNumbers, winningBonusNumber);
-
+  calculateResults(matchList) {
+    matchList.forEach((match) => {
       if (match.mainNumber === LOTTO_RANK.second.mainNumber) {
         return this.#calculateSecondOrThirdPrize(match);
       }
