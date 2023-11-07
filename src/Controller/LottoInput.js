@@ -4,13 +4,25 @@ import { MESSAGE_INPUT } from "../constant/Constant";
 class LottoInput {
   async priceInput() {
     const price = await Console.readLineAsync(MESSAGE_INPUT.PRICE);
-    this.checkValidPrice(Number(price));
+    this.validPrice(Number(price));
     return Number(price);
   }
 
-  checkValidPrice(price) {
+  validPrice(price) {
     if (price % 1000 !== 0)
       throw new Error("[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.");
+  }
+
+  async winningInput() {
+    let winningNum = [];
+    const winNum = await Console.readLineAsync(MESSAGE_INPUT.WINNING_INPUT);
+    winningNum = winNum.split(",");
+    return winningNum;
+  }
+
+  async bonusInput() {
+    const bonusNum = await Console.readLineAsync(MESSAGE_INPUT.BONUS_INPUT);
+    return bonusNum;
   }
 }
 

@@ -1,5 +1,6 @@
 import LottoInput from "./Controller/LottoInput";
 import LottoOutput from "./Controller/LottoOutput";
+import { Random, Console } from "@woowacourse/mission-utils";
 
 class App {
   constructor() {
@@ -9,7 +10,10 @@ class App {
 
   async play() {
     const money = await this.lottoInput.priceInput();
-    const count = this.lottoOutput.lottoCnt();
+    this.lottoOutput.lottoCnt(money);
+
+    const winningNum = await this.lottoInput.winningInput();
+    const bonusNum = await this.lottoInput.bonusInput();
   }
 }
 
