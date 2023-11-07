@@ -14,10 +14,6 @@
 
 **\- 0제외** : 0이 아니여야 함
 
-```JavaScript
-
-```
-
 사용한 파일 : `/App.js`, `Input/MoneyInput.js`, `Input/BuyCount.js`, `Exception/CheckBuy.js`
 
 ## 기능2.
@@ -29,10 +25,6 @@
 **\- 배열 갯수** : 구매 갯수만큼 배열 생성
 
 **\- 배열 정렬** : `6`개 요소를 `오름차순`으로 정렬(Random에서 정의)
-
-```JavaScript
-
-```
 
 사용한 파일 : `/App.js`, `Output/LottoPrint.js`, `Game/Random.js`
 
@@ -58,10 +50,6 @@
 
 **\- 중복** : 당첨 번호랑 중복되면 안됨
 
-```JavaScript
-
-```
-
 사용한 파일 : `/App.js`, `/Lotto.js`, `Input/Bonus.js`, `Exception/CheckBonus.js`, `Game/Jackpot.js`
 
 ## 기능4.
@@ -76,17 +64,23 @@
 - 2등 : 5개 일치 + 보너스 번호 일치
 - 1등 : 6개 일치
 
+  사용한 파일 : `/App.js`, `Game/WinningNum.js`
+
 ## 기능5.
 
 ### 당첨 갯수 저장
 
 **\- 출력 조건** : 등수별 당첨 갯수(딕셔너리 활용)
 
+사용한 파일 : `/App.js`, `Game/WinningRule.js`
+
 ## 기능6.
 
 ### 당첨 결과 출력
 
 **\- 출력 조건** : 당첨 순위와 당첨 갯수를 출력
+
+사용한 파일 : `/App.js`, `Output/WinningPrint.js`
 
 ## 기능7.
 
@@ -97,3 +91,4 @@
 - Math.round : 숫자,반올림할 자리수 (ex-1000,2)
 
 **\- 단위** : %
+사용한 파일 : `/App.js`, `Output/RatePrint.js`
