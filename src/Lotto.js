@@ -13,13 +13,11 @@ class Lotto {
       throw new Error(ERROR.HOW_MANY_SIX);
     }
 
-    const numberSet = new Set(numbers);
-
     if (numbers.some((number) => typeof number !== "number" || isNaN(number))) {
       throw new Error(ERROR.ONLY_NUMBER);
     }
 
-    if (numberSet.size !== numbers.length) {
+    if (new Set(numbers).size !== numbers.length) {
       throw new Error(ERROR.NO_DUPLICATES);
     }
 
@@ -28,12 +26,12 @@ class Lotto {
     }
   }
 
-  ascendingOrder() {
-    this.numbers.sort((a, b) => a - b);
+  getNumbers() {
+    return [...this.#numbers];
   }
 
-  setUserLottoNumbers() {
-    this.numbers.split(",").map((numStr) => parseInt(numStr.trim(), 10));
+  ascendingOrder() {
+    this.#numbers.sort((a, b) => a - b);
   }
 }
 
