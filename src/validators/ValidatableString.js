@@ -9,11 +9,15 @@ class ValidatableString extends Validatable {
    * @override Validatable.isInteger
    */
   isInteger() {
-    if (!this.isString()) {
-      return false;
-    }
+    return this.isString() && INTERGER.test(this.value);
+  }
 
-    return INTERGER.test(this.value);
+  /**
+   * 양의 정수 형태의 문자열인지 검사하는 메서드
+   * @returns {boolean} 양의 정수 형태의 문자열인지 여부
+   */
+  isPositiveInteger() {
+    return this.isInteger() && this.toInteger() > 0;
   }
 
   /**
@@ -31,11 +35,7 @@ class ValidatableString extends Validatable {
    * @returns {boolean} 콤마로 구분된 숫자인지 여부
    */
   isCommaSeparatedNumbers() {
-    if (!this.isString()) {
-      return false;
-    }
-
-    return COMMA_SEPARATED_NUMBERS.test(this.value);
+    return this.isString() && COMMA_SEPARATED_NUMBERS.test(this.value);
   }
 
   /**
