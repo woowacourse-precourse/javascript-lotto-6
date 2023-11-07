@@ -10,6 +10,7 @@ export class Results {
     this.count = count;
     this.lottosReader(lotto, winning, bonus, count);
     this.lottoResultsCounter(model.winningResults);
+    this.lottoResultComment();
     this.lottoResultsPrinter(model.winning);
   }
 
@@ -93,5 +94,11 @@ export class Results {
     MissionUtils.Console.print(
       `${model.same[i]}개 일치 (${prize}원) - ${result}개`
     );
+  }
+
+  lottoResultComment() {
+    MissionUtils.Console.print("");
+    MissionUtils.Console.print("당첨 통계");
+    MissionUtils.Console.print("---");
   }
 }

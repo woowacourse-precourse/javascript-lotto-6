@@ -64,7 +64,6 @@ class App {
   }
 
   callResults(winning, bonus, counts) {
-    MissionUtils.Console.print("");
     this.results = new Results(model.lottoNumbers, winning, bonus, counts)
   }
 
