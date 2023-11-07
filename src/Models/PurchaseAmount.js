@@ -1,13 +1,17 @@
-import LottoError from "../Error/LottoError.js";
-import { LOTTO_SETTINGS } from "../config/gameSetting.js";
+import PurchaseAmountValidator from "../Validator/PurchaseAmountValidator.js";
+import { LottoSettings } from "../config/gameSetting.js";
 
 export default class PurchaseAmount {
   #amount;
 
   constructor(inputAmount) {
+    this.setting = new LottoSettings();
+
     const formattedMoney = this.#removeCommaAndDot(inputAmount);
-    this.#validateIsNumber(formattedMoney);
-    this.#validateIsDevided(formattedMoney);
+
+    const purchaseAmountValidator = new PurchaseAmountValidator();
+    purchaseAmountValidator.validateAmount(formattedMoney);
+
     this.#amount = Number(formattedMoney);
   }
 
@@ -15,26 +19,12 @@ export default class PurchaseAmount {
     return inputAmount.replace(/[,.]/g, "");
   }
 
-  #validateIsNumber(inputAmount) {
-    if (isNaN(inputAmount)) throw new LottoError(`숫자를 입력해주세요.`);
-  }
-
-  #validateIsDevided(inputAmount) {
-    if (
-      Number(inputAmount) <= 0 ||
-      Number(inputAmount) % LOTTO_SETTINGS.TICKET_PRICE !== 0
-    ) {
-      throw new LottoError(
-        `금액은 ${LOTTO_SETTINGS.TICKET_PRICE}단위여야합니다.`
-      );
-    }
-  }
-
   getAmount() {
     return this.#amount;
   }
 
   getNumberOfLottos() {
-    return this.#amount / LOTTO_SETTINGS.TICKET_PRICE;
+    const lottoPrice = this.setting.getLottoPrice();
+    return this.#amount / lottoPrice;
   }
 }

@@ -1,7 +1,8 @@
+import { LottoSettings } from "../config/gameSetting";
+
 export default class DrawnLottoValidator {
-  setting;
-  constructor(setting) {
-    this.setting = setting;
+  constructor() {
+    this.setting = new LottoSettings();
   }
   // TODO: bonus넘버 1개이상 입력시 에러 추가할것
   validateBonusNumber(numbers, bonusNumber) {
@@ -17,12 +18,15 @@ export default class DrawnLottoValidator {
   }
 
   #validateRangeOfPlusNumber(bonusNumber) {
+    const { minOfLottoNumberRange, maxOfLottoNumberRange } =
+      this.setting.getLottoNumberRange();
+
     if (
-      bonusNumber < this.setting.NUMBER_RANGE.MIN ||
-      bonusNumber > this.setting.NUMBER_RANGE.MAX
+      bonusNumber < minOfLottoNumberRange ||
+      bonusNumber > maxOfLottoNumberRange
     )
       throw new LottoError(
-        `로또 번호는 ${this.setting.NUMBER_RANGE.MIN}이상 ${this.setting.NUMBER_RANGE.MAX}이하여야 합니다.`
+        `로또 번호는 ${minOfLottoNumberRange}이상 ${maxOfLottoNumberRange}이하여야 합니다.`
       );
   }
 }

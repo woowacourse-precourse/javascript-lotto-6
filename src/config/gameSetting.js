@@ -1,19 +1,3 @@
-function deepFreeze(object) {
-  Object.keys(object).forEach((name) => {
-    const property = object[name];
-
-    if (
-      property &&
-      typeof property === "object" &&
-      !Object.isFrozen(property)
-    ) {
-      deepFreeze(property);
-    }
-  });
-
-  return Object.freeze(object);
-}
-
 export const LOTTO_SETTINGS = deepFreeze({
   NUMBER_RANGE: { MIN: 1, MAX: 45 },
   NUMBERS_PER_TICKET: 6,
@@ -33,3 +17,54 @@ export const LOTTO_SETTINGS = deepFreeze({
     FIRST_PRIZE: { prize: 2000000000, matchNum: 6 },
   },
 });
+
+export class LottoSettings {
+  settings;
+  constructor() {
+    this.settings = LOTTO_SETTINGS;
+  }
+
+  getPrizeForRank(rank) {
+    return this.settings.WINNINGS[rank]?.prize;
+  }
+
+  getMatchNumberForRank(rank) {
+    return this.settings.WINNINGS[rank]?.matchNum;
+  }
+
+  getSecondPrizeRank() {
+    return this.settings.PRIZE_RANKS.SECOND_PRIZE;
+  }
+
+  getAllPrizeDetails() {
+    return this.settings.WINNINGS;
+  }
+
+  getLottoNumberRange() {
+    return this.settings.NUMBER_RANGE.MIN, this.settings.NUMBER_RANGE.MAX;
+  }
+
+  getNumberPerLotto() {
+    return this.settings.NUMBERS_PER_TICKET;
+  }
+
+  getLottoPrice() {
+    return this.settings.TICKET_PRICE;
+  }
+}
+
+function deepFreeze(object) {
+  Object.keys(object).forEach((name) => {
+    const property = object[name];
+
+    if (
+      property &&
+      typeof property === "object" &&
+      !Object.isFrozen(property)
+    ) {
+      deepFreeze(property);
+    }
+  });
+
+  return Object.freeze(object);
+}

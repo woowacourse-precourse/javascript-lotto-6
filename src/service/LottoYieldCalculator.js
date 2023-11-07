@@ -1,7 +1,8 @@
+import { LottoSettings } from "../config/gameSetting.js";
+
 export default class LottoYieldCalculator {
-  setting;
-  constructor(setting) {
-    this.setting = setting;
+  constructor() {
+    this.setting = new LottoSettings();
   }
   caculateYieldRate(result, money) {
     const totalPrize = this.#getTotalPrize(result);
@@ -19,8 +20,8 @@ export default class LottoYieldCalculator {
     return totalPrize;
   }
 
-  #calculatePrizeForRank(rank, count) {
-    return this.setting.WINNINGS[rank].prize * count;
+  #calculatePrizeForRank(rank, matchCount) {
+    return this.setting.getPrizeForRank(rank) * matchCount;
   }
 
   getResult(lottosNumbers, drawnLottoNumbers, bonusNumber) {
@@ -38,10 +39,13 @@ export default class LottoYieldCalculator {
   }
 
   #initializeResultObject() {
-    const result = Object.keys(this.setting.WINNINGS).reduce((acc, prize) => {
-      acc[prize] = 0;
-      return acc;
-    }, {});
+    const result = Object.keys(this.setting.getAllPrizeDetails()).reduce(
+      (acc, prize) => {
+        acc[prize] = 0;
+        return acc;
+      },
+      {}
+    );
     return result;
   }
 
@@ -55,10 +59,12 @@ export default class LottoYieldCalculator {
   }
 
   #findPrizeKey(matchCount, isBonusMatched) {
-    for (const [key, { matchNum }] of Object.entries(this.setting.WINNINGS)) {
+    for (const [key, { matchNum }] of Object.entries(
+      this.setting.getAllPrizeDetails()
+    )) {
       if (
         matchCount === matchNum &&
-        (!isBonusMatched || key === this.setting.PRIZE_RANKS.SECOND_PRIZE)
+        (!isBonusMatched || key === this.getSecondPrizeRank())
       ) {
         return key;
       }

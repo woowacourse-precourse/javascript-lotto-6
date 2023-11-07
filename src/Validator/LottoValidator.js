@@ -1,6 +1,8 @@
+import { LottoSettings } from "../config/gameSetting.js";
+
 export default class LottoValidator {
-  constructor(setting) {
-    this.setting = setting;
+  constructor() {
+    this.setting = new LottoSettings();
   }
 
   validateNumbers(numbers) {
@@ -10,10 +12,9 @@ export default class LottoValidator {
   }
 
   #validateSize(numbers) {
-    if (numbers.length !== this.setting.NUMBERS_PER_TICKET) {
-      throw new LottoError(
-        `로또 번호는 ${this.setting.NUMBERS_PER_TICKET}개여야 합니다.`
-      );
+    const numberPerLotto = this.setting.getNumberPerLotto();
+    if (numbers.length !== numberPerLotto) {
+      throw new LottoError(`로또 번호는 ${numberPerLotto}개여야 합니다.`);
     }
   }
 
@@ -24,15 +25,16 @@ export default class LottoValidator {
   }
 
   #validateRange(numbers) {
+    const { minOfLottoNumberRange, maxOfLottoNumberRange } =
+      this.setting.getLottoNumberRange();
     const isAnyNumberInvalid = numbers.some(
       (number) =>
-        number < this.setting.NUMBER_RANGE.MIN ||
-        number > this.setting.NUMBER_RANGE.MAX
+        number < minOfLottoNumberRange || number > maxOfLottoNumberRange
     );
 
     if (isAnyNumberInvalid) {
       throw new LottoError(
-        `로또 번호는 ${this.setting.NUMBER_RANGE.MIN}이상 ${this.setting.NUMBER_RANGE.MAX}이하여야 합니다.`
+        `로또 번호는 ${minOfLottoNumberRange}이상 ${maxOfLottoNumberRange}이하여야 합니다.`
       );
     }
   }

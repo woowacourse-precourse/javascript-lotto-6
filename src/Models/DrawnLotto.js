@@ -1,6 +1,5 @@
 import Lotto from "./Lotto.js";
 import DrawnLottoValidator from "../Validator/DrawnLottoValidator.js";
-import { LOTTO_SETTINGS } from "../config/gameSetting.js";
 
 class DrawnLotto extends Lotto {
   #bonusNumber;
@@ -21,7 +20,7 @@ class DrawnLotto extends Lotto {
   }
 
   setBonusNumber(bonusNumber) {
-    const drawnLottoValidator = new DrawnLottoValidator(LOTTO_SETTINGS);
+    const drawnLottoValidator = new DrawnLottoValidator();
     drawnLottoValidator.validateBonusNumber(this.getNumbers(), bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
