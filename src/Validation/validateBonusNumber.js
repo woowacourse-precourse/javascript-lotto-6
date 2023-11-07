@@ -3,7 +3,7 @@ function validateBonusNumber(bonusNumberInput, winningNumbers) {
     return false;
   }
 
-  if (winningNumbers.includes(Number(bonusNumberInput))) {
+  if (winningNumbers.includes(bonusNumberInput)) {
     return false;
   }
 
@@ -11,5 +11,3 @@ function validateBonusNumber(bonusNumberInput, winningNumbers) {
 }
 
 export default validateBonusNumber;
-
-console.log(validateBonusNumber('3', [1, 2, 3, 4, 5, 6]));
