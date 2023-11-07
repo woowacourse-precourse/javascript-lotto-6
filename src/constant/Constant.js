@@ -1,8 +1,8 @@
 export const MESSAGE = {
   PRICE_INPUT: "구입금액을 입력해 주세요.\n",
   BOUGHT_LOTTOS: "개를 구매했습니다.",
-  LOTTO_INPUT: "\n당첨 번호를 입력해 주세요.",
-  BONUS_INPUT: "\n보너스 번호를 입력해 주세요.",
+  LOTTO_INPUT: "\n당첨 번호를 입력해 주세요.\n",
+  BONUS_INPUT: "\n보너스 번호를 입력해 주세요.\n",
   LOTTO_RESULT_PREFIX: "\n당첨 통계\n---",
   LOTTO_RESULT_THREE: "3개 일치 (5,000원) - ",
   LOTTO_RESULT_FOUR: "4개 일치 (50,000원) - ",
