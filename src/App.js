@@ -67,6 +67,16 @@ class App {
   }
 
   async play() {
+    const lottoClasses = await this.intro();
+    const winningNumberClass = await this.WinningLotto();
+    this.getLottosCount(lottoClasses, winningNumberClass);
+    console.log(lottoClasses);
+    const rank = this.getRank(lottoClasses);
+    this.printResult(rank);
+    const total = this.totalPrize(rank);
+    const money = lottoClasses.length*1000;
+    const rate = ((total/money)*100).toFixed(1);
+    Console.print("총 수익률은 " + rate + "%입니다.");
   }
 }
 
