@@ -2,10 +2,13 @@ import { Console } from '@woowacourse/mission-utils';
 import messages from './constants/messages';
 
 class LottoPlayer {
+  constructor() {
+    this.amount = 0;
+  }
   async purchaseLotto() {
     const amount = await Console.readLineAsync(messages.purchase.request);
     this.#validatePurchase(amount);
-
+    this.amount = amount;
     const ticketCount = amount / 1000;
     return ticketCount;
   }

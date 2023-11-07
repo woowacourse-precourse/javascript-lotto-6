@@ -16,7 +16,6 @@ class App {
     const checker = new LottoChecker(tickets, winningNumbers);
     const matches = checker.getMatches();
     LottoPrinter.printMatches(matches);
-    console.log(LottoPrinter.printMatches(matches));
   }
 }
 
