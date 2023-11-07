@@ -16,7 +16,7 @@ class Lotto {
   }
 
   static #printLottoNumber(numbers) {
-    Console.print(`[${numbers.join(', ')}]`);
+    Console.print(`[${numbers.sort((a, b) => a - b).join(', ')}]`);
   }
 
   static #validateNumbers(numbers) {
