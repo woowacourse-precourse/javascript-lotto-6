@@ -8,7 +8,7 @@ const RESULT = Object.freeze({
   RESULT_RANK_3: '3개 일치 (5,000원) - ',
 
   COUNT: (num) => `${num}개`,
-  RATE_OF_RETURN: (num) => `총 수익률은 ${num}% 입니다.`,
+  RATE_OF_RETURN: (num) => `총 수익률은 ${num}%입니다.`,
 });
 
 export default RESULT;
