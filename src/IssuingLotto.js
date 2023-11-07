@@ -12,9 +12,12 @@ class IssuingLotto {
 
   #count;
 
+  #issuedLotto;
+
   constructor(cost) {
     this.#validate(cost);
     this.#cost = cost;
+    this.#issuedLotto = null;
   }
 
   #validate(cost) {
@@ -39,13 +42,13 @@ class IssuingLotto {
     for (let issueCount = 0; issueCount < this.#count; issueCount += 1) {
       const numbers = this.#getRandomNumbers();
       const lotto = new Lotto(numbers);
-
       const lottoNumbers = lotto.getNumbers();
       lottoNumbers.sort((prev, follow) => prev - follow);
 
       usersLotto.push(lottoNumbers);
     }
 
+    this.#issuedLotto = usersLotto;
     return usersLotto;
   }
 
