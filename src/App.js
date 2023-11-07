@@ -54,6 +54,23 @@ class App {
       BONUS_NUMBER: PARSED_BONUS_NUMBER,
     };
   }
+
+  generateLotto(TICKET_COUNT) {
+    const LOTTO_TICKETS = [];
+    for (let i = 0; i < TICKET_COUNT; i++) {
+      const TICKET_NUMBER = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const SORTED_TICKET_NUMBER = TICKET_NUMBER.sort((a, b) => a - b);
+      const LOTTO_TICKET = new Lotto(SORTED_TICKET_NUMBER);
+      LOTTO_TICKETS.push(LOTTO_TICKET);
+    }
+
+    Console.print("\n로또 티켓을 생성했습니다:");
+    LOTTO_TICKETS.forEach((ticket) => {
+      Console.print(`[${ticket.getNumbers().join(", ")}]`);
+    });
+
+    return LOTTO_TICKETS;
+  }
 }
 
 export default App;
