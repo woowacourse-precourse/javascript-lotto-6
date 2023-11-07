@@ -16,6 +16,7 @@ export const ERROR_MESSAGE = {
 
 export const CONSOLE_MESSAGE = {
   PROMPT_USER_PRICE: `로또 구입 금액을 1,000원 단위로 입력해 주세요.\n`,
+  PROMPT_PURCHASED_AMOUNT: `개를 구매했습니다.`,
   PROMPT_USER_LOTTO_NUMBER: `로또 당첨 번호 6개를 쉼표(,)를 기준으로 입력해 주세요. 로또 번호의 숫자 범위는 1~45입니다.\n`,
   PROMPT_USER_BONUS_LOTTO_NUMBER: `보너스 번호 1개를 입력해 주세요.\n`,
 };
