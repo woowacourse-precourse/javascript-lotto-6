@@ -16,13 +16,13 @@ class View {
   }
 
   announceLottery(lotteryResults) {
-    MESSAGES.COMMENT_WINNING_STATS.forEach((message, index) => {
+    return MESSAGES.COMMENT_WINNING_STATS.forEach((message, index) => {
       this.#printConsole(`${message}${lotteryResults[index]}개`);
     });
   }
 
   announceProfit(lotteryResults, purchaseAmmount) {
-    this.#printConsole(
+    return this.#printConsole(
       `${MESSAGES.COMMENT_PROFIT_PERCENTAGE_STATS}${Utils.calculateProfit(
         lotteryResults,
         purchaseAmmount
