@@ -1,4 +1,6 @@
 class App {
+  #lottos;
+
   async play() {}
 }
 
