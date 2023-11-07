@@ -23,6 +23,10 @@ class App {
         winNum,
         bonusNumber
       );
+      MissionUtils.Console.print(
+        this.printWinningStats(winningStats, countTicket)
+      );
+      this.gameStatus = false;
     }
   }
 
@@ -140,6 +144,30 @@ class App {
           break;
       }
     }
+  }
+  printWinningStats(winningStats, countTicket) {
+    const statsSummary = [];
+    statsSummary.push("당첨 통계\n---");
+    statsSummary.push(`3개 일치 (5,000원) - ${winningStats[3].count}개`);
+    statsSummary.push(`4개 일치 (50,000원) - ${winningStats[4].count}개`);
+    statsSummary.push(`5개 일치 (1,500,000원) - ${winningStats[5].count}개`);
+    statsSummary.push(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${winningStats["5+bonus"].count}개`
+    );
+    statsSummary.push(
+      `6개 일치 (2,000,000,000원) - ${winningStats[6].count}개`
+    );
+
+    const totalPrizes = Object.values(winningStats).reduce(
+      (total, prize) => total + prize.amount * prize.count,
+      0
+    );
+    const totalSpent = countTicket * 1000;
+    const profitPercentage =
+      100 + ((totalPrizes - totalSpent) / totalSpent) * 100;
+
+    statsSummary.push(`총 수익률은 ${profitPercentage.toFixed(1)}%입니다.`);
+    return statsSummary.join("\n");
   }
 }
 
