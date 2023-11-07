@@ -80,10 +80,10 @@ class App {
 
   #calculatePrize(winningNumbers) {
     const bonusNumber = winningNumbers.pop();
-    this.#matchNumbers(winningNumbers, bonusNumber);
+    this.matchNumbers(winningNumbers, bonusNumber);
   }
 
-  #matchNumbers(winningNumbers, bonusNumber) {
+  matchNumbers(winningNumbers, bonusNumber) {
     this.lottos.forEach(lotto => {
       const matchedCount = lotto.numbers.filter(number => winningNumbers.includes(number)).length;
       const hasBonus = lotto.numbers.includes(bonusNumber);
