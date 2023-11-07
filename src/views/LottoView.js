@@ -17,8 +17,12 @@ class LottoView {
     return Number(result);
   }
 
-  async print(query) {
+  print(query) {
     this.#outputView.print(query);
+  }
+
+  printLottoCounts(lottoCounts) {
+    this.#outputView.print(`${lottoCounts}${MESSAGE.print.printLottoCounts}`);
   }
 }
 
