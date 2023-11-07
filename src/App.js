@@ -120,6 +120,12 @@ class App {
     };
     return prizeMoney[rank];
   }
+
+  
+  // TODO: 수익률 출력
+  #printProfitRate(profitRate) {
+    MissionUtils.Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  }
     
 
 }
