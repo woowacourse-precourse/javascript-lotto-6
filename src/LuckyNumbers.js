@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES } from "./libs/message.js";
 import {
-  isArrLengthSix,
+  isArrayLengthSix,
   hasDuplicate,
   isNumberInRange,
   isInputEmpty,
@@ -35,7 +35,7 @@ class LuckyNumbers {
   }
 
   #validateWinning(array) {
-    isArrLengthSix(array);
+    isArrayLengthSix(array);
     hasDuplicate(array);
 
     array.forEach((element) => {
@@ -47,8 +47,6 @@ class LuckyNumbers {
   }
 
   async setBonusNumber() {
-    if (!this.#winning) return;
-
     let input = null;
     while (input === null) {
       input = await this.#getBonusInput();

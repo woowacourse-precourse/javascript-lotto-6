@@ -3,12 +3,19 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import { MESSAGES } from "./libs/message.js";
 import LuckyNumbers from "./LuckyNumbers.js";
 import Dashboard from "./Dashboard.js";
+import {
+  LOTTO_LENGTH,
+  LOTTO_MAX_NUMBER,
+  LOTTO_MIN_NUMBER,
+  ONE_THOUSAND,
+} from "./libs/constants.js";
 
 class LottoManager {
   constructor() {
     this.user = null;
     this.lottoCount = 0;
     this.luckyNumbers = new LuckyNumbers();
+    this.dashboard = null;
   }
 
   setUser(user) {
@@ -16,12 +23,16 @@ class LottoManager {
   }
 
   calculateLottoCount() {
-    this.lottoCount = this.user.money / 1000;
+    this.lottoCount = this.user.money / ONE_THOUSAND;
   }
 
   publishLotto() {
     for (let i = 0; i < this.lottoCount; i++) {
-      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const numbers = Random.pickUniqueNumbersInRange(
+        LOTTO_MIN_NUMBER,
+        LOTTO_MAX_NUMBER,
+        LOTTO_LENGTH
+      );
       const lotto = new Lotto(numbers);
       this.user.lottoArr.push(lotto);
     }
@@ -29,6 +40,7 @@ class LottoManager {
 
   printPublishedLotto() {
     Console.print(`\n${this.lottoCount}개를 구매했습니다.`);
+
     this.user.lottoArr.forEach((lotto) => {
       lotto.printNumbers();
     });
@@ -53,12 +65,13 @@ class LottoManager {
     const dashboard = this.dashboard;
     const earningsRate = dashboard.calculateEarnings(this.user.money);
 
-    Console.print("\n당첨 통계\n---");
-    Console.print(`${MESSAGES.FIFTH_RESULT} ${dashboard.rankCount[4]}개`);
-    Console.print(`${MESSAGES.FOURTH_RESULT} ${dashboard.rankCount[3]}개`);
-    Console.print(`${MESSAGES.THIRD_RESULT} ${dashboard.rankCount[2]}개`);
-    Console.print(`${MESSAGES.SECOND_RESULT} ${dashboard.rankCount[1]}개`);
-    Console.print(`${MESSAGES.FIRST_RESULT} ${dashboard.rankCount[0]}개`);
+    Console.print(MESSAGES.TOTAL_RESULS_HEADER);
+    for (let rank = 5; rank >= 1; rank--) {
+      const rankIdx = rank - 1;
+      Console.print(
+        `${MESSAGES.PRIZE_CATEGORIES[rankIdx]} ${dashboard.rankCountArray[rankIdx]}개`
+      );
+    }
     Console.print(`총 수익률은 ${earningsRate}입니다.`);
   }
 }

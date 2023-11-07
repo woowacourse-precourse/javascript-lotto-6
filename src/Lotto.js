@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { formatArrayToString } from "./libs/formatter.js";
 import {
-  isArrLengthSix,
+  isArrayLengthSix,
   hasDuplicate,
   isNumberInRange,
   isInputEmpty,
@@ -17,16 +17,9 @@ class Lotto {
   }
 
   #validate(numbers) {
-    this.#validateArr(numbers);
-    this.#validateElement(numbers);
-  }
-
-  #validateArr(numbers) {
-    isArrLengthSix(numbers);
+    isArrayLengthSix(numbers);
     hasDuplicate(numbers);
-  }
 
-  #validateElement(numbers) {
     numbers.forEach((number) => {
       isInputEmpty(number);
       isInputNumeric(number);
@@ -36,6 +29,7 @@ class Lotto {
 
   printNumbers() {
     this.#numbers.sort((a, b) => a - b);
+
     const formattedNumbers = formatArrayToString(this.#numbers);
     Console.print(formattedNumbers);
   }

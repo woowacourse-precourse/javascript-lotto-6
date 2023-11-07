@@ -72,7 +72,7 @@ describe("로또 결과 테스트", () => {
     dashboard.updateDashboard(5);
     dashboard.updateDashboard(null);
 
-    expect(dashboard.rankCount).toStrictEqual([1, 0, 0, 1, 2]);
+    expect(dashboard.rankCountArray).toStrictEqual([1, 0, 0, 1, 2]);
   });
 
   test("수익률 계산 테스트 1", () => {

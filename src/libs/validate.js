@@ -1,62 +1,57 @@
+import {
+  LOTTO_LENGTH,
+  LOTTO_MAX_NUMBER,
+  LOTTO_MIN_NUMBER,
+  ONE_THOUSAND,
+} from "./constants.js";
 import { ERRORS } from "./message.js";
 
-function isInputEmpty(input) {
+export function isInputEmpty(input) {
   if (!input) {
     throw new Error(ERRORS.EMPTY_INPUT);
   }
 }
 
-function isInputNumeric(input) {
+export function isInputNumeric(input) {
   if (isNaN(input)) {
     throw new Error(ERRORS.NOT_NUMBER);
   }
 }
 
-function isDivisibleByThousand(input) {
-  if (input % 1000 !== 0) {
+export function isDivisibleByThousand(input) {
+  if (input % ONE_THOUSAND !== 0) {
     throw new Error(ERRORS.INVALID_PURCHASE_AMOUNT);
   }
 }
 
-function isArrLengthSix(arr) {
-  if (arr.length !== 6) {
+export function isArrayLengthSix(array) {
+  if (array.length !== LOTTO_LENGTH) {
     throw new Error(ERRORS.INVALID_NUMBERS_LENGTH);
   }
 }
 
-function hasDuplicate(arr) {
-  const arrSet = new Set(arr);
-  if (arr.length !== arrSet.size) {
+export function hasDuplicate(array) {
+  const arraySet = new Set(array);
+  if (array.length !== arraySet.size) {
     throw new Error(ERRORS.CONTAIN_DUPLICATE);
   }
 }
 
-function isInteger(input) {
+export function isInteger(input) {
   if (!Number.isInteger(Number(input))) {
     throw new Error(ERRORS.NOT_INTEGER);
   }
 }
 
-function isNumberInRange(input) {
+export function isNumberInRange(input) {
   const number = parseFloat(input);
-  if (number < 1 || number > 45) {
+  if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
     throw new Error(ERRORS.NUMBER_RANGE_ALERT);
   }
 }
 
-function isElementInArray({ element, array }) {
+export function isElementInArray({ element, array }) {
   if (array.includes(element)) {
     throw new Error(ERRORS.BONUS_NUMBER_DUPLICATE);
   }
 }
-
-export {
-  isInputEmpty,
-  isInputNumeric,
-  isDivisibleByThousand,
-  isArrLengthSix,
-  hasDuplicate,
-  isInteger,
-  isNumberInRange,
-  isElementInArray,
-};

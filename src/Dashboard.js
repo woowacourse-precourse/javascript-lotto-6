@@ -1,9 +1,18 @@
+import {
+  DESCENDING_PRIZE_AMOUNTS,
+  FIFTH,
+  FIRST,
+  FOURTH,
+  SECOND,
+  THIRD,
+} from "./libs/constants.js";
+
 class Dashboard {
   #winning;
   #bonus;
 
   constructor(luckyNumbers) {
-    this.rankCount = Array(5).fill(0);
+    this.rankCountArray = Array(5).fill(0);
 
     this.#winning = luckyNumbers.winning;
     this.#bonus = luckyNumbers.bonus;
@@ -19,29 +28,30 @@ class Dashboard {
   }
 
   assignLottoRank(lotto) {
-    const numbers = lotto.numbers;
-    const matchedNumberCount = this.getMatchedNumberCount(numbers);
+    const lottoNumbers = lotto.numbers;
+    const matchedNumberCount = this.getMatchedNumberCount(lottoNumbers);
 
-    if (matchedNumberCount === 3) return 5;
-    if (matchedNumberCount === 4) return 4;
+    if (matchedNumberCount === 3) return FIFTH;
+    if (matchedNumberCount === 4) return FOURTH;
     if (matchedNumberCount === 5) {
-      return !this.isLottoHasBonus(numbers) ? 3 : 2;
+      return !this.isLottoHasBonus(lottoNumbers) ? THIRD : SECOND;
     }
-    if (matchedNumberCount === 6) return 1;
+    if (matchedNumberCount === 6) return FIRST;
 
     return null;
   }
 
   updateDashboard(rank) {
     if (!rank) return;
+
     const rankIndex = rank - 1;
-    this.rankCount[rankIndex] += 1;
+    this.rankCountArray[rankIndex] += 1;
   }
 
   calculateEarnings(investment) {
-    const winningAmounts = [2000000000, 30000000, 1500000, 50000, 5000];
+    const winningAmounts = DESCENDING_PRIZE_AMOUNTS;
 
-    const totalEarnings = this.rankCount.reduce((total, count, index) => {
+    const totalEarnings = this.rankCountArray.reduce((total, count, index) => {
       return total + count * winningAmounts[index];
     }, 0);
 
