@@ -16,6 +16,11 @@ class Lotto {
     if (checkDup.size !== numbers.length) {
       throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
     }
+    numbers.forEach((number) => {
+      if (number < 1 || number > 45) {
+        throw new Error("[ERROR] 로또 번호는 1~45 사이 숫자로 구성됩니다.");
+      }
+    });
   }
 
   // TODO: 추가 기능 구현
