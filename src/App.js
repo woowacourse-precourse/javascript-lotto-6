@@ -1,16 +1,15 @@
 import { INPUT } from './constant/index.js';
-import BonusNumber from './BonusNumber.js';
 import InputView from './View/InputView.js';
+import Lotto from './Lotto.js';
 import LottoVendingMachine from './LottoVendingMachine.js';
 import LottoWinnerVerifier from './LottoWinnerVerifier.js';
 import OutputView from './View/OutputView.js';
 import ReturnRateCalculator from './ReturnRateCalculator.js';
-import WinningNumbers from './WinningNumbers.js';
-import Lotto from './Lotto.js';
+import Validator from './validator/Validator.js';
 
 class App {
   async play() {
-    const { lottos, buyingPrice } = await App.buyLotto();
+    const { lottos, buyingPrice } = await App.buyLotto().catch();
     OutputView.printBuyingLottos(lottos);
 
     const winningNumbers = await App.drawLottoNumbers();
@@ -26,6 +25,8 @@ class App {
 
     try {
       const buyingPrice = await InputView.readNumber(INPUT.BUYING_PRICE);
+      Validator.validateGreaterThanZero(buyingPrice);
+      Validator.validateValidUnit(buyingPrice);
       const lottos = LottoVendingMachine.buyLottoTickets(buyingPrice);
 
       result = { lottos, buyingPrice };
@@ -51,13 +52,11 @@ class App {
     let result;
 
     try {
-      const winningNumbersInput = await InputView.readNumbers(
-        INPUT.WINNING_NUMBERS
-      );
-
-      result = new WinningNumbers(
-        winningNumbersInput.split(',').map(Number)
-      ).getWinningNumbers();
+      const winningNumbers = await InputView.readNumbers(INPUT.WINNING_NUMBERS);
+      Validator.validateLottoNumbersLength(winningNumbers);
+      winningNumbers.forEach(Validator.validateLottoNumberRange);
+      Validator.validateUniqueLottoNumbers(winningNumbers);
+      result = winningNumbers;
     } catch (e) {
       OutputView.print(e.message);
       result = await App.getWinningNumbers();
@@ -70,12 +69,10 @@ class App {
     let result;
 
     try {
-      const bonusNumberInput = await InputView.readNumber(INPUT.BONUS_NUMBERS);
-
-      result = new BonusNumber(
-        winningNumbers,
-        bonusNumberInput
-      ).getBonusNumber();
+      const bonusNumber = await InputView.readNumber(INPUT.BONUS_NUMBERS);
+      Validator.validateLottoNumberRange(bonusNumber);
+      Validator.validateUniqueBonusNumber(bonusNumber, winningNumbers);
+      result = bonusNumber;
     } catch (e) {
       OutputView.print(e.message);
       result = await App.getBonusNumber([...winningNumbers]);

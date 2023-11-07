@@ -26,7 +26,7 @@ class Validator {
   }
 
   static validateValidUnit(number) {
-    if (value % 1000 !== 0) {
+    if (number % 1000 !== 0) {
       throw new Error('[ERROR] 1,000원 단위로 입력하세요.');
     }
   }

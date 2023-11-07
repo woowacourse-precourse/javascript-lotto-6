@@ -4,20 +4,8 @@ import Lotto from './Lotto.js';
 
 class LottoVendingMachine {
   static buyLottoTickets(buyingPrice) {
-    LottoVendingMachine.#validate(buyingPrice);
-
     const mount = Number(buyingPrice) / LOTTO.PRICE;
     return Array.from({ length: mount }, () => new Lotto(createLottoNumber()));
-  }
-
-  static #validate(buyingPrice) {
-    if (!/^[1-9]\d*$/.test(buyingPrice)) {
-      throw new Error(ERROR.BUYING_PRICE.POSITIVE_INTEGER);
-    }
-
-    if (Number(buyingPrice) % LOTTO.PRICE !== 0) {
-      throw new Error(ERROR.BUYING_PRICE.UNIT);
-    }
   }
 }
 

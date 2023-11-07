@@ -13,7 +13,7 @@ class InputView {
   static async readNumber(message) {
     const input = await InputView.#readLine(message);
     InputView.#validateNumber(input);
-    return input;
+    return Number(input);
   }
 
   static #validateNumber(value) {
@@ -29,7 +29,7 @@ class InputView {
   static async readNumbers(message) {
     const input = await InputView.#readLine(message);
     InputView.#validateNumbers(input);
-    return input;
+    return input.split(',').map(Number);
   }
 
   static #validateNumbers(values) {
