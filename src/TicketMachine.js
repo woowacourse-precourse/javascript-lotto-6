@@ -7,18 +7,17 @@ class TicketMachine {
   #purchaseAmount = 0;
 
   constructor(purchaseAmount) {
-    this.#purchaseAmount = purchaseAmount;
+    this.#purchaseAmount = Number(purchaseAmount);
   }
 
   getNumberOfGame() {
-    const purchasedTicktesCount =
-      Number(this.#purchaseAmount) / MAGIC_NUMBER.TICKET_PRICE;
-    View.printPurchasedTicketNumber(purchasedTicktesCount);
-    return TicketMachine.getTickets(purchasedTicktesCount);
+    const TicktesCount = this.#purchaseAmount / MAGIC_NUMBER.TICKET_PRICE;
+    View.printPurchasedTicketNumber(TicktesCount);
+    return TicketMachine.getTickets(TicktesCount);
   }
 
-  static getTickets(purchasedTicktesCount) {
-    const ticktes = Array.from({ length: purchasedTicktesCount }, () =>
+  static getTickets(TicktesCount) {
+    const ticktes = Array.from({ length: TicktesCount }, () =>
       Random.pickUniqueNumbersInRange(
         MAGIC_NUMBER.MIN_NUMBER,
         MAGIC_NUMBER.MAX_NUMBER,
