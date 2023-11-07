@@ -8,6 +8,7 @@ class LottoTicket {
   addLottoToLottoTicket(lotto) {
     this.#lottoTicket.push(lotto);
   }
+
   getLottoTicketLength() {
     return this.#lottoTicket.length;
   }
