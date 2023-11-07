@@ -2,8 +2,8 @@ import { LOTTO_ROLE } from '../constants/lotto.js';
 import { MESSAGE_FORMAT } from './messageFomat.js';
 
 export default class Validator {
-  static #isNumber(number) {
-    return Number.isInteger(number);
+  static #isPositiveNumber(number) {
+    return Number.isInteger(number) && number >= 0;
   }
 
   static #isValidUnit(number) {
@@ -11,8 +11,8 @@ export default class Validator {
   }
 
   static validatePurchaseAmount(amount) {
-    if (!this.#isNumber(amount)) {
-      const message = MESSAGE_FORMAT.error('구입 금액은 숫자만 입력해 주세요.');
+    if (!this.#isPositiveNumber(amount)) {
+      const message = MESSAGE_FORMAT.error('구입 금액은 0 이상의 숫자로 입력해 주세요.');
       throw new Error(message);
     }
 
