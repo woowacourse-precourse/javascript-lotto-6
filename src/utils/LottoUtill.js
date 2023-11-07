@@ -57,7 +57,7 @@ class LottoUtill {
   getRate() {
     const earnMoney = Object.entries(this.#staticObject)
       .map((status) => this.#earnMoneyCheck(status))
-      .reduce((a, b) => a + b);
+      .reduce((earn, each) => earn + each);
     return utillConst.calcRate(earnMoney, this.#calcNumber);
   }
 
