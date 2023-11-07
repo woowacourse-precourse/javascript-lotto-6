@@ -2,8 +2,14 @@ import Lotto from './Lotto.js';
 import Utils from './Utils.js';
 import Validation from './Validation.js';
 
+const LOTTO = {
+  price: 1000,
+};
+
 class IssuingLotto {
   #cost;
+
+  #count;
 
   constructor(cost) {
     this.#validate(cost);
@@ -15,16 +21,26 @@ class IssuingLotto {
     Validation.isDividedIntoUnitPrice(cost);
   }
 
+  #calculateCount() {
+    const lottoCount = this.#cost / LOTTO.price;
+    this.#count = lottoCount;
+    return this.#count;
+  }
+
   #issueLotto() {
     const usersLotto = [];
-    const lottoCount = Utils.calculateLottoCount(this.#cost);
 
-    for (let issueCount = 0; issueCount < lottoCount; issueCount += 1) {
+    for (let issueCount = 0; issueCount < this.#count; issueCount += 1) {
       const numbers = Utils.getRandomNumbers();
       usersLotto.push(new Lotto(numbers));
     }
 
     return usersLotto;
+  }
+
+  getPurchaseCount() {
+    this.#calculateCount();
+    return this.#count;
   }
 
   getLotto() {
