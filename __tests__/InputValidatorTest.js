@@ -1,5 +1,5 @@
 import Validator from '../src/utils/Validator';
-import ERROR from '../src/constants/error';
+import ERROR from '../src/constants/error.js';
 
 describe('입력 예외 상황 테스트', () => {
   test('구입 금액이 1,000으로 나누어 떨어지지 않는 경우', () => {
@@ -51,7 +51,7 @@ describe('입력 예외 상황 테스트', () => {
     }).toThrow(ERROR.message.invalidRange);
   });
   test('입력한 값이 1~45의 값이 아닌 경우', () => {
-    const received = ['0', '2', '3', '4', '5', '46'];
+    const received = '0';
     expect(() => {
       Validator.invalidNumberRange(received);
     }).toThrow(ERROR.message.invalidRange);

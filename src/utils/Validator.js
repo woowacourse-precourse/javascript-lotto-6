@@ -34,7 +34,7 @@ class Validator {
   }
 
   static invalidNumber(number) {
-    if (isNaN(number)) throw new Error(ERROR.message.invalidNumber);
+    if (!Number(number)) throw new Error(ERROR.message.invalidNumber);
   }
 
   static invalidWinningNumbers(winningNumbers) {
