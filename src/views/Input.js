@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 import { INPUT_MESSAGE } from '../constants/message/io.js';
 import { DELIMITER } from '../constants/setting.js';
-import Converter from '../utils/converter.js';
+import { stringToNumber, stringToNumberArray } from '../utils/converter.js';
 import MoneyValidator from '../validator/Money.js';
 import LottoValidator from '../validator/Lotto.js';
 import OutputView from './Output.js';
@@ -20,7 +20,7 @@ class InputView {
 
   static async readMoney() {
     const inputMoney = await Console.readLineAsync(INPUT_MESSAGE.money);
-    const money = Converter.stringToNumber(inputMoney);
+    const money = stringToNumber(inputMoney);
     MoneyValidator.validate(money);
 
     return money;
@@ -30,10 +30,7 @@ class InputView {
     const inputWinningNumbers = await Console.readLineAsync(
       INPUT_MESSAGE.winningNumbers,
     );
-    const winningNumbers = Converter.stringToNumberArray(
-      inputWinningNumbers,
-      DELIMITER,
-    );
+    const winningNumbers = stringToNumberArray(inputWinningNumbers, DELIMITER);
     LottoValidator.validate(winningNumbers);
 
     return winningNumbers;
@@ -43,7 +40,7 @@ class InputView {
     const inputBonusNumber = await Console.readLineAsync(
       INPUT_MESSAGE.bonusNumber,
     );
-    const bonusNumber = Converter.stringToNumber(inputBonusNumber);
+    const bonusNumber = stringToNumber(inputBonusNumber);
     CommonValidator.validate(bonusNumber);
 
     return bonusNumber;
