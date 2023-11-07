@@ -3,7 +3,7 @@ import { RANK, NUMBER, RANDOM } from './number.js';
 export const SYMBOLS = {
   numberDivider: ',',
   printDivider: ', ',
-  boundary: '---',
+  boundary: '---\n',
   hyphen: '-',
   lineBreak: '\n',
   percent: '%',

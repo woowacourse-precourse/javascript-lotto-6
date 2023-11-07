@@ -1,5 +1,6 @@
+import Formatter from '../Formatter/index.js';
 import ValidationError from './ValidationError/index.js';
-import { NUMBER, ERROR, RANDOM, SYMBOLS } from '../constants/index.js';
+import { NUMBER, ERROR, RANDOM } from '../constants/index.js';
 
 class Validator {
   static #isNotNaturalNumber(value) {
@@ -22,11 +23,18 @@ class Validator {
   }
 
   static #validateRangeOfNumbers(numbers) {
-    numbers
-      .replace(/\s/g, '')
-      .split(SYMBOLS.numberDivider)
-      .filter(Boolean)
-      .forEach((value) => this.#isOutOfRange(value));
+    const formattedNumbers = Formatter.formatInputNumbers(numbers);
+    formattedNumbers.forEach((value) => this.#isOutOfRange(value));
+  }
+
+  static validateDuplication(numbers, number) {
+    if (new Set(numbers).size !== NUMBER.lottoCount) {
+      throw new ValidationError(ERROR.invalidWinningNumbers);
+    }
+
+    if (number && numbers.includes(Number(number))) {
+      throw new ValidationError(ERROR.invalidBonusNumber);
+    }
   }
 
   static validatePurchaseAmount(amount) {
@@ -39,17 +47,21 @@ class Validator {
   }
 
   static validateWinningNumbers(numbers) {
+    const formattedNumbers = Formatter.formatInputNumbers(numbers);
+
     this.#validateRangeOfNumbers(numbers);
+    this.validateDuplication(formattedNumbers);
   }
 
-  static validateBonusNumber(number) {
+  static validateBonusNumber(numbers, number) {
     this.#validateRangeOfNumbers(number);
+    this.validateDuplication(numbers, number);
   }
 
   static validateLottoNumbers(numbers) {
     if (
       numbers.length !== NUMBER.lottoCount ||
-      new Set(numbers).size !== NUMBER.lottoCount
+      this.validateDuplication(numbers)
     ) {
       throw new ValidationError(ERROR.invalidLottoNumbers);
     }
