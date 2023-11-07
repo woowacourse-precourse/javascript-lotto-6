@@ -26,6 +26,7 @@ class LottoGame {
     this.#bonusNumber = await this.inputBonusNumbers(this.#winningTicket);
 
     this.#winningResult = this.checkLottoResult(this.#lottoTickets, this.#winningTicket, this.#bonusNumber);
+    this.printWinningResults(this.#winningResult);
   }
 
   setTicketCount(count) {
@@ -157,16 +158,16 @@ class LottoGame {
   calculateWinningResults(winningResult, matchingCount, checkedBonus) {
     let bonus = checkedBonus ? 0 : 1
     let result = [...winningResult];
-    if(matchingCount === 6){
+    if (matchingCount === 6) {
       result[0] += 1;
     }
-    if(matchingCount === 5){
+    if (matchingCount === 5) {
       result[1 + bonus] += 1
     }
-    if(matchingCount === 4){
+    if (matchingCount === 4) {
       result[3] += 1;
     }
-    if(matchingCount === 3){
+    if (matchingCount === 3) {
       result[4] += 1;
     }
     return result;
@@ -175,6 +176,19 @@ class LottoGame {
   checkBonusResult(bonus, lottoTicket) {
     const bonusNumber = Number(bonus);
     return lottoTicket.includes(bonusNumber);
+  }
+
+  printWinningResults(winningResult) {
+    const prizeMoney = ['5,000', '50,000', '1,500,000', '30,000,000', '2,000,000,000'];
+    const matchCountList = [3, 4, 5, 5, 6];
+    winningResult.reverse();
+    winningResult.forEach((result, index) => {
+      let bonusText = '';
+      if (index === 3) {
+        bonusText = ' 보너스 볼 일치';
+      }
+      Console.print(`${matchCountList[index]}개 일치,${bonusText} (${prizeMoney[index]}원) -${result}개`)
+    });
   }
 
 }
