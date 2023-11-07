@@ -27,12 +27,13 @@ const validator = {
 describe('Input 클래스 테스트', () => {
 	test('판별에 실패했을 경우 다시 질문 받아야 한다.', async () => {
 		// given
-		const spyFn = jest.spyOn(input, 'askUser');
-
 		mockQuestions(['foo', 'foo', 'foo']);
 
 		// when
 		const input = new Input();
+
+		const spyFn = jest.spyOn(input, 'askUser');
+
 		await input.askUserUntilValid(
 			'질문1',
 			validator.validateFunc.bind(validator),
