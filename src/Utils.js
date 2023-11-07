@@ -13,6 +13,10 @@ class Utils {
 
     return convertNumbers;
   }
+
+  static informUser(informations) {
+    Console.print(informations);
+  }
 }
 
 export default Utils;
