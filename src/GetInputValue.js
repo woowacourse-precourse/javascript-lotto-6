@@ -10,7 +10,7 @@ class GetInputValue{
 			Validation.validPurchaseAmount(purchaseAmount);
 			return purchaseAmount;
 		} catch (error) {
-      Console.print(error.message);
+      		Console.print(error.message);
 			return await this.getPurchaseAmount();
 		}
 	}
@@ -27,7 +27,7 @@ class GetInputValue{
 			Validation.validWinningNumber(checkWinningNumbers);
 			return checkWinningNumbers;
 		} catch (error) {
-      Console.print(error.message);
+      		Console.print(error.message);
 			return await this.getWinningNumbers();
 		}
 	}
@@ -38,7 +38,7 @@ class GetInputValue{
 			Validation.validBonusNumber(global, bonusNumber);
 			return bonusNumber;
 		} catch (error) {
-      Console.print(error.message);
+      	Console.print(error.message);
 			return await this.getBonusNumber();
 		}
 	}
