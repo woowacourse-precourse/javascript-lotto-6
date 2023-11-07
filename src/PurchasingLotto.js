@@ -1,14 +1,27 @@
 import Utils from './Utils.js';
-
-const QUESTIONS = {
-  purchaseLottoPrice: '구입금액을 입력해 주세요.',
-};
+import Validation from './Validation.js';
 
 class PurchasingLotto {
-  static async getUserCost() {
-    const userCost = await Utils.ask(QUESTIONS.purchaseLottoPrice);
-    const costStringToNumber = Number(userCost);
-    return costStringToNumber;
+  #cost;
+
+  constructor(cost) {
+    this.#validate(cost);
+    this.#cost = cost;
+  }
+
+  #validate(cost) {
+    Validation.isNumber(cost);
+    Validation.isDividedIntoUnitPrice(cost);
+  }
+
+  #calculateCount() {
+    const lottoCount = this.#cost / LOTTO.price;
+    return lottoCount;
+  }
+
+  getPurchaseCount() {
+    const purchaseCount = this.#calculateCount();
+    return purchaseCount;
   }
 }
 

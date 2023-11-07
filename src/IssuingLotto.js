@@ -1,34 +1,14 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Utils from './Utils.js';
-import Validation from './Validation.js';
-
-const LOTTO = {
-  price: 1000,
-};
 
 class IssuingLotto {
-  #cost;
-
   #count;
 
   #issuedLotto;
 
-  constructor(cost) {
-    this.#validate(cost);
-    this.#cost = cost;
-    this.#issuedLotto = null;
-  }
-
-  #validate(cost) {
-    Validation.isNumber(cost);
-    Validation.isDividedIntoUnitPrice(cost);
-  }
-
-  #calculateCount() {
-    const lottoCount = this.#cost / LOTTO.price;
-    this.#count = lottoCount;
-    return this.#count;
+  constructor(count) {
+    this.#count = count;
   }
 
   #getRandomNumbers() {
@@ -57,11 +37,6 @@ class IssuingLotto {
 
     Utils.informUser(`${this.#count}개를 구매했습니다.`);
     Utils.informUser(`${lottoList.join('\n')}`);
-  }
-
-  getPurchaseCount() {
-    this.#calculateCount();
-    return this.#count;
   }
 
   getLotto() {
