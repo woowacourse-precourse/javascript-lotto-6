@@ -8,6 +8,7 @@ class LottoController {
 
   async play() {
     await this.readUserPayment();
+    await this.readLottoNumber();
   }
 
   async readUserPayment() {
@@ -25,6 +26,18 @@ class LottoController {
     OutputView.printUserLottoQuanitiy(userLottoQuanitiy);
     OutputView.printLottoList(this.#user);
   }
+
+  async readLottoNumber() {
+    const LottoNumber = await InputView.inputLotto();
+    this.readBonusNumber(LottoNumber);
+  }
+
+  async readBonusNumber(LottoNumber) {
+    const bonusNumber = await InputView.inputLottoBonus();
+    await this.handleLotto(LottoNumber, bonusNumber);
+  }
+
+  handleLotto(LottoNumber, bonusNumber) {}
 }
 
 export default LottoController;
