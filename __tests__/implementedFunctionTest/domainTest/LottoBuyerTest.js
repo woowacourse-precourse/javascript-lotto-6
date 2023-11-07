@@ -25,7 +25,7 @@ describe('LottoBuyer 테스트', () => {
 		expect(lottoBuyer.getAllLottoNumberArray().length).toEqual(expectedResult);
 	});
 
-	test('발행한 로또의 결과 테스트', () => {
+	test('발행한 로또의 결과 테스트(1, 2, 3등)', () => {
 		// when
 		mockRandoms([
 			[1, 2, 3, 4, 5, 6],
@@ -47,6 +47,33 @@ describe('LottoBuyer 테스트', () => {
 			thirdPlaceCount: 1,
 			fourthPlaceCount: 0,
 			fifthPlaceCount: 0,
+		};
+
+		expect(lottoBuyer.checkResult(winningNumberArray, bonusNumber)).toEqual(expectedResult);
+	});
+
+	test('발행한 로또의 결과 테스트(4, 5등)', () => {
+		// when
+		mockRandoms([
+			[1, 2, 3, 14, 15, 16],
+			[1, 2, 3, 4, 15, 16],
+			[1, 2, 3, 4, 15, 17],
+			[11, 12, 13, 14, 15, 16]
+		]);
+
+		// given
+		const purchaseAmount = 4000;
+		const lottoBuyer = new LottoBuyer(purchaseAmount);
+		const winningNumberArray = [1, 2, 3, 4, 5, 6];
+		const bonusNumber = 7;
+		
+		// then
+		const expectedResult = {
+			firstPlaceCount: 0,
+			secondPlaceCount: 0,
+			thirdPlaceCount: 0,
+			fourthPlaceCount: 2,
+			fifthPlaceCount: 1,
 		};
 
 		expect(lottoBuyer.checkResult(winningNumberArray, bonusNumber)).toEqual(expectedResult);
