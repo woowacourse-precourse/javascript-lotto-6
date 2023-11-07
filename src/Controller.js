@@ -50,13 +50,21 @@ class Controller {
   }
 
   async #getWinningNumbers() {
-    const inputLottoWinningNumbers = await InputView.readLottoWinningNumbers();
-    this.#winningNumbers = new Lotto(inputLottoWinningNumbers).winningNumbers;
+    this.inputWinningNumbers = await InputView.readLottoWinningNumbers();
+    this.#validateWinningNumbers(this.inputWinningNumbers);
+    this.inputWinningNumbers = this.inputWinningNumbers.split(',').map((number) => Number(number));
+    this.#winningNumbers = new Lotto(this.inputWinningNumbers).winningNumbers;
+  }
+
+  #validateWinningNumbers(inputWinningNumbers) {
+    if (!inputWinningNumbers.includes(',')) {
+      throw new Error('[ERROR] 로또 번호는 콤마로 구분하여 입력하여야 합니다.');
+    }
   }
 
   async #getBonusNumber() {
-    const inputBonusNumber = await InputView.readLottoBonusNumber();
-    this.#bonusNumber = new Bonus(this.#winningNumbers, inputBonusNumber).bonusNumber;
+    this.inputBonusNumber = Number(await InputView.readLottoBonusNumber());
+    this.#bonusNumber = new Bonus(this.#winningNumbers, this.inputBonusNumber).bonusNumber;
   }
 
   async #getMatchStatus() {
