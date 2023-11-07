@@ -10,22 +10,27 @@ class LottoShop {
 
   #result;
 
-  constructor(winningNumber, bonusNumber) {
+  constructor(winningNumber) {
     this.#validateWinningNumber(winningNumber);
     this.#winningNumber = winningNumber
       .split(',')
       .sort((x, y) => x - y)
       .map((string) => Number(string));
+    // this.#validateBonusNumber(bonusNumber);
+    // this.#bonusNumber = Number(bonusNumber);
+    this.#result = [0, 0, 0, 0, 0];
+  }
+
+  setBonusNumber(bonusNumber) {
     this.#validateBonusNumber(bonusNumber);
     this.#bonusNumber = Number(bonusNumber);
-    this.#result = [0, 0, 0, 0, 0];
   }
 
   #validateWinningNumber(winningNumberString) {
     const winningNumberArray = [...new Set(winningNumberString.split(','))];
     if (
       winningNumberArray.length !== 6 ||
-      Number.isNaN(winningNumberArray.join('')) ||
+      isNaN(winningNumberArray.join('')) ||
       !winningNumberArray.every(
         (number) =>
           Number(number) >= LOTTO.MIN_NUMBER &&
@@ -39,7 +44,7 @@ class LottoShop {
   #validateBonusNumber(bonusNumber) {
     if (
       bonusNumber.length !== 1 ||
-      Number.isNaN(bonusNumber) ||
+      isNaN(bonusNumber) ||
       Number(bonusNumber) < LOTTO.MIN_NUMBER ||
       Number(bonusNumber) > LOTTO.MAX_NUMBER ||
       this.#winningNumber.includes(Number(bonusNumber))
