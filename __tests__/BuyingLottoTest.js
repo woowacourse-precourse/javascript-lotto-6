@@ -58,4 +58,25 @@ describe("구매 금액 예외 테스트", () => {
       expect.stringContaining("[ERROR] 구매금액은 숫자만 입력이 가능합니다.")
     );
   });
+
+  test("예외 발생 시 재입력 테스트", async () => {
+    const logSpy = getLogSpy();
+
+    mockRandoms([[1, 2, 3, 4, 5, 6]]);
+    mockQuestions(["예외", "1000", "1,2,3,4,5,6", "7"]);
+
+    const message = [
+      "[ERROR] 구매금액은 숫자만 입력이 가능합니다.",
+      "1개를 구매했습니다.",
+    ];
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    message.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
