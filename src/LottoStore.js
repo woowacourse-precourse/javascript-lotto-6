@@ -11,7 +11,7 @@ class LottoStore {
 
     for (let i = 0; i < number; i++) {
       const lottoNumbers = this.#getRandomNumbers();
-      Console.print(lottoNumbers);
+      Console.print(`[${lottoNumbers.join(", ")}]`);
       lottos.push(new Lotto(lottoNumbers));
     }
 
