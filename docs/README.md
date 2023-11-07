@@ -108,7 +108,7 @@
 
 ### 테스트 커버리지
 
-![테스트 커버리지](https://github.com/rlaclghks123/Learn_About_CSS/assets/55423198/c9ad2aa1-eef7-4e8a-aa6d-ccbf245127c7)
+![테스트 커버리지](https://github.com/rlaclghks123/Learn_About_CSS/assets/55423198/98913401-06fb-4e5b-b90d-5b2d9f5b21be)
 
 ### ApplicationTest
 
@@ -160,3 +160,9 @@
 - [x] 보너스 번호 숫자 형태 테스트
 - [x] 보너스 번호 범위 테스트
 - [x] 보너스 번호가 당첨번호와 중복 되는지 테스트
+
+### DeepFreezeTest
+
+- [x] 1depth 테스트
+- [x] 2depth 테스트
+- [x] 3depth 테스트
