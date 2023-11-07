@@ -10,4 +10,10 @@ export default class InputView {
     const amount = Number(input);
     return amount;
   }
+
+  static async readLotteryNumbers() {
+    const input = await this.read('당첨 번호를 입력해 주세요.\n');
+    const lotteryNumbers = input.split(',').map(Number);
+    return lotteryNumbers;
+  }
 }

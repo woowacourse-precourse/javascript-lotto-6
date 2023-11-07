@@ -9,12 +9,19 @@ export default class LottoGame {
     const purchaseAmount = await this.#requirePurchaseAmount();
     const lottoList = this.#generateLotto(purchaseAmount);
     this.#printLottoList(lottoList);
+    const winningLotteryNumbers = await this.#requireLotteryNumbers();
   }
 
   async #requirePurchaseAmount() {
     const amount = await InputView.readPurchaseAmount();
     Validator.validatePurchaseAmount(amount);
     return amount;
+  }
+
+  async #requireLotteryNumbers() {
+    const lotteryNumbers = await InputView.readLotteryNumbers();
+    Validator.validateLotteryNumbers(lotteryNumbers);
+    return lotteryNumbers;
   }
 
   #generateLotto(purchaseAmount) {
