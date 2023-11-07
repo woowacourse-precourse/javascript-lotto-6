@@ -91,7 +91,7 @@ class App {
     let result = new Output();
     result.calcLottoResult(this.#compareResult);
 
-    const lottoResult = result.printResult();
+    const lottoResult = result.printLottoResult();
 
     Console.print("");
     Console.print("당첨 통계");

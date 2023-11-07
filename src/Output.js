@@ -38,7 +38,7 @@ class Output {
     });
   }
 
-  printResult() {
+  printLottoResult() {
     if (this.#maxNum == 3) {
       this.#num3 = 1;
       this.#winMoney = 5000;
