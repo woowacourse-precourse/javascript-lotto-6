@@ -1,9 +1,8 @@
 import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
 import LottoGenerator from "./LottoGenerator.js";
-import LottoNumberGenerator from "./LottoNumberGenerator.js";
-import { WinningRecord } from './WinningRecord.js';
-
+import { WinningRecord } from "./WinningRecord.js";
+import { LottoTicketValidator } from "./LottoTicketValidator.js";
 
 class App {
   #lottoGenerator = new LottoGenerator();
@@ -15,9 +14,12 @@ class App {
     const winningNumbers = await this.pickWinningNumbers();
     const bonusNumber = await this.pickBonusNumber();
     const winningRecord = new WinningRecord(winningNumbers, bonusNumber);
+
     const winningStatistics = winningRecord.getWinningStatistics(tickets);
     OutputView.printWinningStatistics(winningStatistics);
-    OutputView.printRateOfReturn(winningRecord.getRateOfReturn(tickets, winningStatistics));
+    OutputView.printRateOfReturn(
+      winningRecord.getRateOfReturn(tickets, winningStatistics)
+    );
   }
 
   async purchaseLotto() {
@@ -35,7 +37,7 @@ class App {
       const winningNumbers = this.#parseWinningNumbers(
         await InputView.readWinningNumbers()
       );
-      this.#validateWinningNumbers(winningNumbers);
+      LottoTicketValidator.validateNumbers(winningNumbers);
       return winningNumbers;
     } catch (error) {
       OutputView.printError(error.message);
@@ -47,25 +49,10 @@ class App {
     return winningNumbers.split(",").map(Number);
   }
 
-  #validateWinningNumbers(winningNumbers) {
-    if (!LottoNumberGenerator.isValidNumberQuantity([... new Set(winningNumbers)])) {
-      throw new Error("[ERROR] 중복되지 않은 6개의 숫자로 구성되어야 합니다.");
-    }
-    for (let number of winningNumbers) {
-      this.#validateNumber(number);
-    }
-  }
-
-  #validateNumber(bonusNumber) {
-    if (!LottoNumberGenerator.isValidLottoNumber(bonusNumber)) {
-      throw new Error("[ERROR] 1부터 45 사이의 숫자여야 합니다.");
-    }
-  }
-
   async pickBonusNumber() {
     try {
       const bonusNumber = await InputView.readBonusNumber();
-      this.#validateNumber(bonusNumber);
+      LottoTicketValidator.validateNumber(bonusNumber);
       return bonusNumber;
     } catch (error) {
       OutputView.printError(error.message);

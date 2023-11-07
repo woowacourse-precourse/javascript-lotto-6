@@ -1,18 +1,11 @@
+import { LottoTicketValidator } from "./LottoTicketValidator.js";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    LottoTicketValidator.validateNumbers(numbers);
     this.#numbers = numbers;
-  }
-
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-    if (new Set(numbers).size !== 6) {
-      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
-    }
   }
 
   getNumbers() {
@@ -30,7 +23,7 @@ class Lotto {
   }
 
   hasNumber(other) {
-    if(this.#numbers.includes(Number(other))) {
+    if (this.#numbers.includes(Number(other))) {
       return true;
     }
     return false;

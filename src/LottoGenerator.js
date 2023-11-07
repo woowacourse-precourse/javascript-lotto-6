@@ -16,7 +16,7 @@ class LottoGenerator {
 
   #validatePrice(price) {
     if(price % this.#PRICE_PER_TICKET !== 0) {
-        throw new Error("[ERROR] 로또는 1,000원 단위로만 구입할 수 있습니다.");
+        throw new Error("[ERROR] 로또는 " + this.#PRICE_PER_TICKET + "원 단위로만 구입할 수 있습니다.");
     }
   }
 }

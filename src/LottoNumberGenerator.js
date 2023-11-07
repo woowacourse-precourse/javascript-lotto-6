@@ -10,20 +10,6 @@ class LottoNumberGenerator {
       TICKET_CONFIGURATION.quantity
     );
   }
-
-  static isValidLottoNumber(number) {
-    if(number < TICKET_CONFIGURATION.startRange || number > TICKET_CONFIGURATION.endRange) {
-        return false;
-    }
-    return true;
-  }
-
-  static isValidNumberQuantity(numbers) {
-    if(numbers.length != TICKET_CONFIGURATION.quantity) {
-        return false;
-    }
-    return true;
-  }
 }
 
 export default LottoNumberGenerator;
