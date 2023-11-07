@@ -11,11 +11,6 @@ describe("구매금액 클래스 테스트", () => {
             new Purchase(500);
         }).toThrow("[ERROR]");
     });
-    test("구매금액이 1000000원 초과이면 예외가 발생한다.", () => {
-        expect(() => {
-            new Purchase(1000001);
-        }).toThrow("[ERROR]");
-    });
     test("구매금액이 1000원 단위가 아니면 예외가 발생한다.", () => {
         expect(() => {
             new Purchase(1500);

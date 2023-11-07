@@ -13,9 +13,7 @@ class Purchase {
         if (!this.isOver1000(amount)) {
             throw new Error("[ERROR] 1000원 이상의 금액을 입력해주세요.");
         }
-        if (!this.isUnder1000000(amount)) {
-            throw new Error("[ERROR] 1000000원 이하의 금액을 입력해주세요.");
-        }
+
         if (!this.isMultipleOf1000(amount)) {
             throw new Error("[ERROR] 1000원 단위로 입력해주세요.");
         }
@@ -28,10 +26,6 @@ class Purchase {
 
     isOver1000(amount) {
         return amount >= 1000;
-    }
-
-    isUnder1000000(amount) {
-        return amount <= 1000000;
     }
 
     isMultipleOf1000(amount) {
