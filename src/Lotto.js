@@ -19,10 +19,15 @@ class Lotto {
   // TODO: 추가 기능 구현
   #validLottoNumbers(numbers) {
     numbers.forEach((number) => {
-      if (Number.isNaN(number)) throw new Error("[ERROR] 숫자만 입력해주세요.");
-      if (!number) throw new Error("[ERROR] 공백을 입력하셨습니다.");
-      if (number < 1 || number > 45)
+      if (Number.isNaN(number)) {
+        throw new Error("[ERROR] 숫자만 입력해주세요.");
+      }
+      if (!number) {
+        throw new Error("[ERROR] 공백을 입력하셨습니다.");
+      }
+      if (number < 1 || number > 45) {
         throw new Error("[Error] 숫자의 범위는 1~45 이어야 합니다.");
+      }
     });
   }
 
