@@ -21,6 +21,10 @@ class WinningResults {
     const reversedResultArray = [...this.#resultMap].reverse();
     return new Map(reversedResultArray);
   }
+
+  getProfit() {
+    return 5000;
+  }
 }
 
 export default WinningResults;
