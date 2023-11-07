@@ -1,6 +1,6 @@
 import {
   getLottoCntFromInputMoney,
-  getWinningLottoArray,
+  getWinningNumberArray,
 } from '../src/utils/getUserInput';
 
 describe('구매금액 입력 함수 테스트', () => {
@@ -23,6 +23,6 @@ describe('구매금액 입력 함수 테스트', () => {
 
 describe('당첨번호 입력 함수 테스트', () => {
   test('쉼표를 기준으로 구분하여 올바른 배열을 생성한다.', () => {
-    expect(getWinningLottoArray('1,2,3,4,5,6')).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(getWinningNumberArray('1,2,3,4,5,6')).toEqual([1, 2, 3, 4, 5, 6]);
   });
 });
