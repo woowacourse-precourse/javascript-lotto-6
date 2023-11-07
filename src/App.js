@@ -10,11 +10,13 @@ class App {
   #amount;
   #lottos;
   #winningNum;
+  #bonusNum;
 
   async play() {
     await this.#executePurchaseLotto();
     this.#executePublishLotto();
     await this.#executeWinningNum();
+    await this.#executeBonusNum();
   }
 
   // 로또 구입
@@ -35,7 +37,7 @@ class App {
     outputs.printLottos(this.#lottos);
   }
 
-  // 당첨 번호
+  // 당첨 번호 입력
   async #executeWinningNum() {
     try {
       const winningNum = await inputs.inputWinningNum();
@@ -43,6 +45,20 @@ class App {
     } catch (error) {
       Console.print(error.message);
       return this.#executeWinningNum();
+    }
+  }
+
+  // 보너스 번호 입력
+  async #executeBonusNum() {
+    try {
+      const bonusNum = await inputs.inpustBonusNum();
+      this.#bonusNum = validationUtils.inputBonusNumValidate(
+        bonusNum,
+        this.#winningNum
+      );
+    } catch (error) {
+      Console.print(error.message);
+      return this.#executeBonusNum();
     }
   }
 }
