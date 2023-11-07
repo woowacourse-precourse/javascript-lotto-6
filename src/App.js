@@ -7,11 +7,11 @@ class App {
   constructor() {
     this.computer = new Computer();
     this.createLottoNum = new CreateLottoNum();
-    this.createWinNum = new CreateWinNum();
   }
   
   async play() {
-    await this.createLottoNum.start();
+    const lottoNum = await this.createLottoNum.start();
+    this.createWinNum = new CreateWinNum(lottoNum);
     await this.createWinNum.start();
   }
 }
