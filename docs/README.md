@@ -36,8 +36,9 @@
 
 ```
 관심사 분리를 Domain과 View로 분리하였습니다.
-Domain : 로또 관련 메인 기능
-View : 데이터 입출력 기능
+Domain : 로또 관련 메인 담당 (src 하위 view,errors 폴더를 제외한 나머지)
+View : 데이터 입출력을 담당 폴더
+errors: 예외 처리 함수들을 관리 폴더
 ```
 
 **1. Domain**
@@ -56,3 +57,9 @@ View : 데이터 입출력 기능
 - 2-1. 'AmountInput' : 구입금액 입력 받는 함수
 - 2-2. 'NumberInput' : 당첨 번호 및 보너스 번호 입력 받는 함수
 - 2-3. 'printResult' 당첨 결과 출력하는 함수
+
+**3. errors**
+
+- 3-1. 'amountInputError' : 구입 금액 예외 처리 함수
+- 3-2. 'winningNumbersError' : 당첨 번호 예외 처리 함수
+- 3-3. 'bonusNumberError' : 보너스 번호 예외 처리 함수
