@@ -3,7 +3,9 @@ import ERRORPREFIX from '../constants/errorConstant.js';
 
 export const outputIssueComment = (numberOfLotto) =>
   Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
-
+export const outputLottoNummbers = (lottoList) => {
+  lottoList.forEach((lotto) => lotto.printNumbers());
+};
 const outputMatchingComments = [
   '3개 일치',
   '4개 일치',

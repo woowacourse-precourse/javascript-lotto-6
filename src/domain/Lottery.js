@@ -17,6 +17,7 @@ import {
 // 추후 리팩토링하기
 import {
   outputIssueComment,
+  outputLottoNummbers,
   outputGreetingStatisticComment,
   outputStatisticCommnet,
   outputEarningRateCommnet,
@@ -101,8 +102,8 @@ export default class Lottery {
         new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)),
       );
     }
-    // 발행 출력
-    Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
+
+    outputIssueComment(numberOfLotto);
   }
 
   pay() {
@@ -111,10 +112,7 @@ export default class Lottery {
     // 발행
     this.issue(numberOfLotto);
 
-    // 각각 정렬
-    this.#lottoList.forEach((lotto) => lotto.sortNumbers());
-    // 로또들 출력
-    this.#lottoList.forEach((lotto) => lotto.printNumbers());
+    outputLottoNummbers(this.#lottoList);
   }
 
   matchNumbers() {
