@@ -5,8 +5,9 @@ export const MESSAGE = Object.freeze({
   WINNING_STATISTICS: '당첨 통계',
   DASHES: '---',
   PURCHASE_COUNT: (cnt) => `${cnt}개를 구매했습니다.`,
-  MATCH_NUMBERS_COUNT: (matchCnt, winnings, lottoCnt) =>
-    `${matchCnt}개 일치 (${winnings}원) - ${lottoCnt}개`,
+  MATCH_NUMBERS: (cnt) => `${cnt}개 일치`,
+  MATCH_BONUS_NUMBER: '보너스 볼 일치',
+  MATCH_LOTTO_COUNT: (label, winnings, lottoCnt) => `${label} (${winnings}원) - ${lottoCnt}개`,
   TOTAL_RATE_OF_RETURN: (total) => `총 수익률은 ${total}%입니다.`,
 });
 
@@ -37,15 +38,3 @@ export const LOTTERY = Object.freeze({
   FIFTH_WINNINGS: 5000,
   DEFAULT_WINNINGS: 0,
 });
-
-export const LOTTO_WINNINGS = (matchCnt, hasBonus) => {
-  const result = { label: `${matchCnt}개 일치`, winnings: LOTTERY.DEFAULT_WINNINGS };
-
-  if (matchCnt === LOTTERY.FIFTH_CNT) return { ...result, winnings: LOTTERY.FIFTH_WINNINGS };
-  if (matchCnt === LOTTERY.FOURTH_CNT) return { ...result, winnings: LOTTERY.FOURTH_WINNINGS };
-  if (matchCnt === LOTTERY.THIRD_CNT) return { ...result, winnings: LOTTERY.THIRD_WINNINGS };
-  if (matchCnt === LOTTERY.SECOND_CNT && hasBonus)
-    return { label: result.label + ', 보너스 볼 일치', winnings: LOTTERY.SECOND_WINNINGS };
-  if (matchCnt === LOTTERY.FIRST_CNT) return { ...result, winnings: LOTTERY.FIRST_WINNINGS };
-  return result;
-};
