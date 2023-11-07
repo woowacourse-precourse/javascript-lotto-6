@@ -40,10 +40,19 @@ export default class Computer {
     this.lottos.forEach((lotto) => Console.print(lotto.getNumbers()));
   }
 
+  getLottoResults() {
+    return this.lottos.reduce((result, lotto) => {
+      const newResult = [...result];
+      const place = lotto.getWinningPlace(this.winningNumbers, this.bonusNumber);
+      newResult[place] += 1;
+      return newResult;
+    }, Array(6).fill(0));
+  }
+
   resetLotto() {
     this.winningNumbers = [];
     this.bonusNumber = 0;
     this.lottos = [];
-    this.result = Array(6).fill(0);
+    this.result = [];
   }
 }
