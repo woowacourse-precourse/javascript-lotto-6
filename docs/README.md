@@ -88,15 +88,15 @@
 
 - Lotto
 
-  > 로또번호를 관리하는 담당
+  > 로또번호를 생성, 검사하는 담당
 
-- LottoSimulator
+- LottoManager
 
-  > 로또의 당첨, 수익률 등 중요 계산로직을 담당
+  > 로또 발행, 추첨 등 로또게임의 전체 관리 담당
 
-- CustomError
+- PrizeMoneyManager
 
-  > 예외사항 처리의 기본 틀을 담당
+  > 당첨결과에 따른 상금, 수익률 담당
 
 - Util
 
