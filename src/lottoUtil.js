@@ -46,3 +46,9 @@ export async function inputWinNumber() {
     MissionUtils.Console.print('');
     return winNumberStr.split(',').map(str => Number(str));
 }
+
+export async function inputBonusNumber() {
+    const bonusNumberStr = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    MissionUtils.Console.print('');
+    return Number(bonusNumberStr);
+}
