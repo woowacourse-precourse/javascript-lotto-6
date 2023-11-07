@@ -1,4 +1,4 @@
-import { NUMBER, TEXT } from './component/data.js';
+import { NUMBER, TEXT } from './component/Data.js';
 
 class Lotto {
   #numbers;

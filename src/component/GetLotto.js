@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
-import { NUMBER, TEXT } from './data.js';
+import { NUMBER, TEXT } from './Data.js';
 import MatchingLotto from './MatchingLotto.js';
 import PrizeValidator from './PrizeValidator.js';
 
@@ -11,6 +11,7 @@ class GetLotto {
     this.inputBounsNumber = 0;
     this.inputAmount = 0;
     this.lottoNumber = 0;
+    this.lottoCount = 0;
   }
 
   lottoRandomNumber() {
@@ -23,13 +24,21 @@ class GetLotto {
     return number;
   }
 
-  outputNumber() {
-    const lottoCount = this.inputAmount / NUMBER.INITIAL_AMOUNT;
-    this.lottoNumber = Array.from({ length: lottoCount }, () =>
+  async outputNumber() {
+    MissionUtils.Console.print(`${this.lottoCount}${TEXT.OUTPUT_NUMBER}`);
+    this.lottoNumber.forEach((numbers) =>
+      MissionUtils.Console.print(`[${numbers.join(', ')}]`),
+    );
+    await this.lottoNumberGet();
+    this.matchingCalculator();
+  }
+
+  output() {
+    this.lottoCount = this.inputAmount / NUMBER.INITIAL_AMOUNT;
+    this.lottoNumber = Array.from({ length: this.lottoCount }, () =>
       this.lottoRandomNumber(),
     );
-    MissionUtils.Console.print(`${lottoCount}${TEXT.OUTPUT_NUMBER}`);
-    this.lottoNumber.forEach((numbers) => MissionUtils.Console.print(numbers));
+    this.outputNumber();
   }
 
   async lottoNumberGet() {
@@ -53,15 +62,14 @@ class GetLotto {
       );
       if (this.inputAmount % NUMBER.INITIAL_AMOUNT !== NUMBER.INIT_VALUE)
         throw new Error(TEXT.AMOUNT_ERROR);
-      this.outputNumber();
-      await this.lottoNumberGet();
+      this.output();
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.lottoAmountGet();
     }
   }
 
-  prizeCalculator(matchingNumber, matchingBonus) {
+  PrizeCalculator(matchingNumber, matchingBonus) {
     const validator = new PrizeValidator();
     validator.validate(matchingNumber, matchingBonus, this.inputAmount);
   }
@@ -76,14 +84,8 @@ class GetLotto {
     this.PrizeCalculator(matchingNumber, matchingBonus, this.inputAmount);
   }
 
-  PrizeCalculator(matchingNumber, matchingBonus) {
-    const validator = new PrizeValidator();
-    validator.validate(matchingNumber, matchingBonus, this.inputAmount);
-  }
-
   async lotto() {
     await this.lottoAmountGet();
-    this.matchingCalculator();
   }
 }
 

@@ -1,4 +1,4 @@
-import { NUMBER } from './data.js';
+import { NUMBER } from './Data.js';
 
 class MatchingLotto {
   constructor(inputNumberList, inputBounsNumber, lottoNumber) {
