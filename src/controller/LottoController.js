@@ -1,7 +1,7 @@
 import LottoShop from "../domains/LottoShop.js";
 import TargetLotto from "../domains/TargetLotto.js";
 import User from "../domains/User.js";
-import CalCulatorLottoResult from "../domains/CalCulatorLottoResult.js";
+import CalCulatorLottoResult from "../domains/CalculatorLottoResult.js";
 import OutPutView from "../views/outPutView.js";
 import InputView from "../views/InputView.js";
 
