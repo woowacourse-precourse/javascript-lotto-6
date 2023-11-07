@@ -63,15 +63,31 @@ class App {
   }
 
   async inputPrizeNumber() {
-    const prize = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-
+    let prize = [];
+    while (true) {
+      try {
+        prize = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+        validate.prizeValidate(prize);
+        break;
+      } catch (e) {
+        Console.print(e);
+      }
+    }
     const stringList = prize.split(",");
     this.prizeNumber = stringList.map((data) => Number(data));
   }
 
   async inputBonusNumber() {
-    const bonus = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-
+    let bonus = 0;
+    while (true) {
+      try {
+        bonus = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+        validate.bonusValidate(bonus);
+        break;
+      } catch (e) {
+        Console.print(e);
+      }
+    }
     this.bonusNumber = Number(bonus);
   }
 
