@@ -1,4 +1,4 @@
-import MoneyValidator from '../../src/validator/Money';
+import MoneyValidator from '../../src/validator/MoneyValidator';
 
 describe('Money Validator 클래스 테스트', () => {
   describe('로또 구매 여부 테스트', () => {

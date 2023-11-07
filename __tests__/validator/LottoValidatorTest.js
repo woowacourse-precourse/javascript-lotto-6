@@ -1,4 +1,4 @@
-import LottoValidator from '../../src/validator/Lotto';
+import LottoValidator from '../../src/validator/LottoValidator';
 
 describe('LottoValidator 클래스 예외 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {

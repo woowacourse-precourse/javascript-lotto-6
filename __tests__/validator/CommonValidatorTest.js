@@ -1,4 +1,4 @@
-import CommonValidator from '../../src/validator/Common';
+import CommonValidator from '../../src/validator/CommonValidator';
 
 describe('CommonTest 클래스 예외 테스트', () => {
   describe('문자 입력 테스트', () => {
