@@ -28,11 +28,43 @@ class LottoConsole {
   static async getBonusNumber() {
     const input = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     LottoConsole.#validateEmtpyInput(input);
-    this.printEmptyLine();
+    LottoConsole.printEmptyLine();
 
     const bonusNumber = LottoConsole.#parseNumber(input);
 
     return bonusNumber;
+  }
+
+  static async getBudgetUntilSuccess() {
+    const budget = await this.runFunctionUntilSuccess(LottoConsole.getBudget);
+    return budget;
+  }
+
+  static async getLottoNumbersUntilSuccess() {
+    const lottoNumbers = await this.runFunctionUntilSuccess(
+      LottoConsole.getLottoNumbers
+    );
+    return lottoNumbers;
+  }
+
+  static async getBonusNumberUntilSuccess() {
+    const bonusNumber = await this.runFunctionUntilSuccess(
+      LottoConsole.getBonusNumber
+    );
+    return bonusNumber;
+  }
+
+  static async runFunctionUntilSuccess(func) {
+    let returnedValue;
+    let isValid = false;
+    while (!isValid)
+      try {
+        returnedValue = await func();
+        isValid = true;
+      } catch (error) {
+        Console.print(`${error.message}\n`);
+      }
+    return returnedValue;
   }
 
   static printAmountOfLotto(amount) {

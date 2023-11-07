@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import { Console } from '@woowacourse/mission-utils';
 import LottoConsole from './view/LottoConsole.js';
 import Player from './model/Player.js';
@@ -6,7 +5,7 @@ import Player from './model/Player.js';
 class App {
   async play() {
     try {
-      const budget = await LottoConsole.getBudget();
+      const budget = await LottoConsole.getBudgetUntilSuccess();
       const player = new Player(budget);
 
       // 로또 구매
@@ -17,8 +16,8 @@ class App {
       LottoConsole.printAmountOfLotto(numOfLottos);
 
       // 당첨번호 입력
-      const lottoNumbers = await LottoConsole.getLottoNumbers();
-      const bonusNumber = await LottoConsole.getBonusNumber();
+      const lottoNumbers = await LottoConsole.getLottoNumbersUntilSuccess();
+      const bonusNumber = await LottoConsole.getBonusNumberUntilSuccess();
 
       // 로또 긁기
       player.checkLottos(lottoNumbers, bonusNumber);
