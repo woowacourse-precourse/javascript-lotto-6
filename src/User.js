@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./message.js";
 import { purchaseAmountValidation } from "./validator/purchaseAmountValidation.js";
-import { winningNumberLength } from "./validator/winningNumberValidation.js";
+import { winningNumberLength, duplicate } from "./validator/winningNumberValidation.js";
 import { bonusNumberValidation } from "./validator/bonusNumberValidation.js";
 
 class User {
@@ -14,6 +14,7 @@ class User {
   static async inputWinningNumber() {
     const inputValue = await Console.readLineAsync(MESSAGE.WINNING_NUMBER);
     winningNumberLength(inputValue);
+    duplicate(inputValue);
     return inputValue.split(',');
   }
 
