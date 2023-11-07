@@ -28,3 +28,13 @@
 - [x] 수익률을 정해진 숫자 서식에 맞춘다. 
 
 - [ ] 당첨 번호 입력 예외 처리 되었을 때, 다시 그 위치서부터 입력 요구하는 기능.
+
+## 테스트 구현 목록
+- [ ] Lotto 예외 처리 테스트 추가하기.
+- [ ] Lotto.compareNumbers 테스트.
+- [x] Validate (구입 금액 입력, 보너스 입력) 예외 처리 테스트.
+- [ ] inputAmount.publishedLotto 오름차순 배열 기능 테스트.
+- [ ] OrganizeResults
+  - [ ] organizeRank의 기능 테스트.
+  - [ ] calculateRate의 기능 테스트.
+- [ ] PrintResults.styleRate 기능 테스트.
