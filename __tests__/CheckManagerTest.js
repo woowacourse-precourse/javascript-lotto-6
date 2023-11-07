@@ -14,7 +14,7 @@ const getLogSpy = () => {
     return logSpy;
 };
 
-describe("로또 테스트", () => {
+describe("CheckManager 테스트", () => {
     beforeEach(() => {
         jest.restoreAllMocks();
     })
