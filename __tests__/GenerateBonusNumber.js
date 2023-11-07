@@ -33,4 +33,14 @@ describe("보너스 번호 생성", () => {
     // then
     await expect(app.play()).rejects.toThrow("[ERROR] 숫자만 입력이 가능합니다.");
   });
+
+  test("보너스 번호가 유효 범위의 숫자가 아닌 경우", async () => {
+    mockRandoms([[1, 2, 3, 4, 5, 6]]);
+    mockQuestions(["1000", "1,2,3,4,5,6", "55"]);
+    // when
+    const app = new App();
+
+    // then
+    await expect(app.play()).rejects.toThrow("[ERROR] 1에서 45 사이에 숫자만 입력이 가능합니다.");
+  });
 });
