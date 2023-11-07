@@ -5,10 +5,14 @@ import Util from "./classes/util.js";
 const Console = MissionUtils.Console;
 
 class App {
-  async lottoClassesArray() {
+  async purchaseNumber() {
     const userMoney = await Util.validateUserMoney();
     const purchaseNumber = Util.getPurchaseNumber(userMoney);
     Console.print(purchaseNumber + "개를 구매했습니다.");
+    return purchaseNumber;
+  }
+
+  lottoClassesArray(purchaseNumber) {
     const lottoClasses = Util.getLottoClasses(purchaseNumber);
     lottoClasses.forEach((lottoClass) => lottoClass.printNumber());
     return lottoClasses;
@@ -17,6 +21,7 @@ class App {
   async WinningLotto() {
     const winningNumbers = await WinningLotto.getWinningNumbers();
     const bonusNumber = await WinningLotto.getBonusNumber(winningNumbers);
+
     return new WinningLotto(winningNumbers, bonusNumber);
   }
 
@@ -64,14 +69,15 @@ class App {
   }
 
   async play() {
-    const lottoClasses = await this.lottoClassesArray();
+    const purchaseNumber = await this.purchaseNumber();
+    const lottoClasses = this.lottoClassesArray(purchaseNumber);
     const winningNumberClass = await this.WinningLotto();
     this.getLottosCount(lottoClasses, winningNumberClass);
     const rank = this.getRank(lottoClasses);
     this.printResult(rank);
     const total = this.totalPrize(rank);
-    const money = lottoClasses.length*1000;
-    const rate = ((total/money)*100).toFixed(1);
+    const money = lottoClasses.length * 1000;
+    const rate = ((total / money) * 100).toFixed(1);
     Console.print("총 수익률은 " + rate + "%입니다.");
   }
 }
