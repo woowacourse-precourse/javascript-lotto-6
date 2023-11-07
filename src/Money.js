@@ -3,7 +3,7 @@ class Money {
   #winningMoney = 0;
   #rankingCounts = [0, 0, 0, 0, 0];
 
-  constructor(money, ranks) {
+  constructor(money) {
     this.#validate(money);
     this.#money = money;
   }
@@ -15,7 +15,6 @@ class Money {
   get getWinningMoney() {
     return this.#winningMoney;
   }
-
   get getRankingCounts() {
     return this.#rankingCounts;
   }
@@ -49,7 +48,6 @@ class Money {
         break;
     }
   }
-
   rankingCountsArray(rank) {
     switch (rank) {
       case 1:
@@ -63,12 +61,13 @@ class Money {
       case 5:
         return this.#rankingCounts[4]++;
       default:
-        break;
+        return;
     }
   }
 
   rankingMoney(ranks) {
     ranks.forEach((rank) => {
+      if (Number.isNaN(Number(rank))) return;
       this.#winningMoney += this.winnings(rank);
       this.rankingCountsArray(rank);
     });
