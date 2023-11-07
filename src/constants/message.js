@@ -59,3 +59,7 @@ export const ERROR_MESSAGE = {
     },
   },
 };
+
+export const PRINT_MESSSAGE = {
+  PURCHASE_LOTTO_COUNT_MASSAGE: (count) => `${count}개를 구매했습니다.`,
+};
