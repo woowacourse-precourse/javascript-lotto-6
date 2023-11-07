@@ -3,7 +3,7 @@ import excutionNumber from './excutionNumber.js';
 import results from './results.js';
 import rateOfReturn from './rateOfReturn.js';
 import resultView from './resultView.js';
-import getValidPrice from './priceInput.js';
+import getValidPrice from './getValidPrice.js';
 import numberValid from './numberValid.js';
 import bonusNumberValid from './bonusNumberValid.js';
 

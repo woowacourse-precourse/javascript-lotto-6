@@ -1,5 +1,6 @@
 export default function rateOfReturn(price, result) {
   let value = 0;
+
   for (let key in result) {
     if (key === '3개 일치 (5,000원)') value += result[key] * 5000;
     if (key === '4개 일치 (50,000원)') value += result[key] * 50000;
@@ -8,6 +9,7 @@ export default function rateOfReturn(price, result) {
       value += result[key] * 30000000;
     if (key === '6개 일치 (2,000,000,000원)') value += result[key] * 2000000000;
   }
+
   const rate = (value / price) * 100;
 
   return rate.toFixed(1);
