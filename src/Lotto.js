@@ -32,43 +32,4 @@ class Lotto {
   }
 }
 
-// class PurchaseLottery {
-//   async purchaseTicket() {
-//     let ticketsAmount = await Console.readLineAsync(INPUT_MSG.amount);
-//     validatePurchaseFormat(ticketsAmount);
-//     ticketsAmount = Math.floor(ticketsAmount / 1000);
-//     Console.print(`${ticketsAmount}개를 구매했습니다.`);
-
-//     const lottoNumbers = new LotteryNumbers();
-//     lottoNumbers.generateNumbers(ticketsAmount);
-//     lottoNumbers.inputLotteryResults();
-//   }
-// }
-
-// class LotteryNumbers {
-//   async generateNumbers(ticketQuantity) {
-//     for (let i = 0; i < ticketQuantity; i++) {
-//       const lottoNums = await Random.pickUniqueNumbersInRange(1, 45, 6);
-//       if (lottoNums.length > 6) {
-//         throw new Error("[ERROR]");
-//       }
-//       Console.print(lottoNums);
-//     }
-//   }
-
-//   async inputLotteryResults() {
-//     const results = await Console.readLineAsync(INPUT_MSG.results);
-//     const resultsArray = results.split(",").map(Number);
-//     validateResultsLength(resultsArray);
-
-//     resultsArray.map((num) => {
-//       validateInputResults(num, resultsArray);
-//     });
-//     Console.print(resultsArray);
-//   }
-// }
-
-// const playLotto = new Lotto();
-// playLotto.play();
-
 export default Lotto;
