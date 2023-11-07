@@ -19,7 +19,7 @@ class View {
     let winningNumbers;
     while (true) {
       try {
-        userInput = await this.readLine("당첨 번호를 입력해 주세요.\n");
+        let userInput = await this.readLine("\n당첨 번호를 입력해 주세요.\n");
         winningNumbers = userInput.split(",").map(Number);
         this.validateWinningNumbers(winningNumbers);
         break;
@@ -34,8 +34,8 @@ class View {
     let bonusNumber;
     while (true) {
       try {
-        bonusNumber = await this.readLine("보너스 번호를 입력해 주세요.\n");
-        this.validateNumberRange(userInput);
+        bonusNumber = await this.readLine("\n보너스 번호를 입력해 주세요.\n");
+        this.validateNumberRange(bonusNumber);
         break;
       } catch (error) {
         Console.print(error.message);
@@ -74,8 +74,9 @@ class View {
     user.printLottos();
   }
 
-  getLottoResult(results) {
-    Console.print("당첨 통계");
+  getLottoResult(prize, profitRate) {
+    Console.print("\n당첨 통계");
+    Console.print("---");
     Console.print(`3개 일치 (5,000원) - ${prize.fifth}개`);
     Console.print(`4개 일치 (50,000원) - ${prize.fourth}개`);
     Console.print(`5개 일치 (1,500,000원) - ${prize.third}개`);
@@ -83,9 +84,7 @@ class View {
       `5개 일치, 보너스 볼 일치 (30,000,000원) - ${prize.second}개`
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${prize.first}개`);
-    Console.print(
-      `총 수익률은 ${((allPrize / amount) * 100).toFixed(2)}%입니다.`
-    );
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
   async readLine(query) {

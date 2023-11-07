@@ -1,4 +1,4 @@
-const REWARD = Object.freeze({
+export const REWARD = Object.freeze({
   zero: 0,
   fifth: 5000,
   fourth: 50000,
@@ -7,6 +7,6 @@ const REWARD = Object.freeze({
   first: 2000000000,
 });
 
-module.exports = {
-  REWARD,
-};
+// module.exports = {
+//   REWARD,
+// };

@@ -1,6 +1,4 @@
-import Lotto from "./Lotto";
-import { Random } from "@woowacourse/mission-utils";
-import { REWARD } from "./constant";
+import { REWARD } from "./constant.js";
 class LottoMachine {
   #winningNumbers;
   #bonusNumber;
@@ -10,18 +8,19 @@ class LottoMachine {
     this.#bonusNumber = bonusNumber;
   }
 
+  // rankCounsts 배열을 받는다.
   getProfitRate(results) {
     let amount = results.length * 1000;
     let rewards = results.map((rank) => this.getReward(rank));
     const sumReward = rewards.reduce((acc, current) => acc + current, 0);
-    return ((sumReward / amount) * 100).toFixed(2);
+    return ((sumReward / amount) * 100).toFixed(1);
   }
 
   // Lottos 는 Lotto 인스턴스 배열
   getLottoRanks(Lottos) {
     const results = [];
     Lottos.forEach((Lotto) => {
-      results.push(getLottoRank(Lotto));
+      results.push(this.#getLottoRank(Lotto.getLotto));
     });
     return results;
   }
@@ -45,7 +44,7 @@ class LottoMachine {
     return rankCount;
   }
 
-  getLottoRank(Lotto) {
+  #getLottoRank(Lotto) {
     const result = Lotto.filter((num) =>
       this.#winningNumbers.includes(num)
     ).length;
