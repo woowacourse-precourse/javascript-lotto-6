@@ -5,28 +5,32 @@ import Player from './model/Player.js';
 
 class App {
   async play() {
-    const budget = await LottoConsole.getBudget();
-    const player = new Player(budget);
+    try {
+      const budget = await LottoConsole.getBudget();
+      const player = new Player(budget);
 
-    // 로또 구매
-    player.buyLottos();
+      // 로또 구매
+      player.buyLottos();
 
-    // 구매한 양 출력
-    const numOfLottos = player.getNumOfLottos();
-    LottoConsole.printAmountOfLotto(numOfLottos);
+      // 구매한 양 출력
+      const numOfLottos = player.getNumOfLottos();
+      LottoConsole.printAmountOfLotto(numOfLottos);
 
-    // 당첨번호 입력
-    const lottoNumbers = await LottoConsole.getLottoNumbers();
-    const bonusNumber = await LottoConsole.getBonusNumber();
+      // 당첨번호 입력
+      const lottoNumbers = await LottoConsole.getLottoNumbers();
+      const bonusNumber = await LottoConsole.getBonusNumber();
 
-    // 로또 긁기
-    player.checkLottos(lottoNumbers, bonusNumber);
+      // 로또 긁기
+      player.checkLottos(lottoNumbers, bonusNumber);
 
-    const scoreCard = player.getScoreCard();
-    LottoConsole.printResult(scoreCard);
+      const scoreCard = player.getScoreCard();
+      LottoConsole.printResult(scoreCard);
 
-    const prize = player.getPrize();
-    LottoConsole.printRateOfReturn(prize, budget);
+      const prize = player.getPrize();
+      LottoConsole.printRateOfReturn(prize, budget);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 }
 
