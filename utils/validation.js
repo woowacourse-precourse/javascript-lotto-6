@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import ERROR from '../constants/error.js';
 
 const Validation = {
   isUserMoneyOk(userMoney) {
@@ -13,7 +14,7 @@ const Validation = {
 
   isMinimumOneThousand(userInput) {
     if (userInput < 1000) {
-      Console.print('[ERROR] 최소 1000원 이상 입력해주세요');
+      Console.print(ERROR.minimumOneThousand);
       return false;
     }
     return true;
@@ -21,7 +22,7 @@ const Validation = {
 
   isDivisibleByOneThousand(userInput) {
     if (userInput % 1000 !== 0) {
-      Console.print('[ERROR] 1000원으로 나누어떨어지는 구매금액을 입력해주세요');
+      Console.print(ERROR.divisibleByOneThousand);
       return false;
     }
     return true;
@@ -40,7 +41,7 @@ const Validation = {
 
   isSixDigits(userInput) {
     if (userInput.length !== 6) {
-      Console.print('[ERROR] 숫자는 6자리를 입력해주세요');
+      Console.print(ERROR.sixDigits);
       return false;
     }
     return true;
@@ -50,7 +51,7 @@ const Validation = {
     const uniqueNumbers = new Set(userInput);
 
     if (uniqueNumbers.size !== userInput.length) {
-      Console.print('[ERROR] 중복된 숫자가 있습니다. 다시 입력해주세요');
+      Console.print(ERROR.duplicated);
       return false;
     }
     return true;
@@ -60,7 +61,7 @@ const Validation = {
     const isWithinRange = (number) => number >= 1 && number <= 45;
 
     if (!userInput.every(isWithinRange)) {
-      Console.print('[ERROR] 배열의 모든 숫자는 1에서 45 사이에 있어야 합니다');
+      Console.print(ERROR.withinRange);
       return false;
     }
     return true;
@@ -80,7 +81,7 @@ const Validation = {
     const regex = /^[0-9]+$/;
 
     if (!regex.test(userInput)) {
-      Console.print('[ERROR] 보너스 번호는 자연수여야합니다');
+      Console.print(ERROR.naturalNumber);
       return false;
     }
     return true;

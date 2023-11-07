@@ -1,12 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
 import Validation from '../utils/validation.js';
+import MESSAGE from '../constants/messages.js';
 
 class InputView {
   async readMoney() {
     let userMoney;
 
     do {
-      userMoney = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      userMoney = await Console.readLineAsync(MESSAGE.userMoney);
       userMoney = Number(userMoney);
     } while (!Validation.isUserMoneyOk(userMoney));
 
@@ -16,7 +17,7 @@ class InputView {
   async readWinningLottoNumber() {
     let winningLottoNumber;
     do {
-      const userInput = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+      const userInput = await Console.readLineAsync(MESSAGE.winningNumbers);
       const userInputStrArray = userInput.split(',');
       winningLottoNumber = userInputStrArray.map((strNumber) => parseInt(strNumber, 10));
     } while (!Validation.isWinningLottoNumberOk(winningLottoNumber));
@@ -26,10 +27,9 @@ class InputView {
 
   async readBonusNumber() {
     let bonusNumber;
-    // 유효성 검사 추가
 
     do {
-      bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+      bonusNumber = await Console.readLineAsync(MESSAGE.bonusNumber);
       bonusNumber = Number(bonusNumber);
     } while (!Validation.isBonusNumberOk(bonusNumber));
 

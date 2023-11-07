@@ -1,4 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import ERROR from '../constants/error.js';
 
 class Random {
   getRandomLotto() {
@@ -14,7 +15,7 @@ class Random {
   validation(number) {
     const uniqueSet = new Set(number);
     if (uniqueSet.size !== number.length) {
-      MissionUtils.Console.print('[ERROR] 로또 번호 중 중복된 숫자가 있습니다');
+      MissionUtils.Console.print(ERROR.validateRandom);
       return false;
     }
     return true;
