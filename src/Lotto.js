@@ -22,7 +22,7 @@ class Lotto {
     for (let i = 0; i < ticketCount; i++) {
       this.#publishLottoTicket();
     }
-    console.log('\n' + `${ticketCount}개를 구매했습니다.`);
+    MissionUtils.Console.print('\n' + `${ticketCount}개를 구매했습니다.`);
     this.#printAllTickets();
   }
 
@@ -32,8 +32,8 @@ class Lotto {
   }
 
   async printResult() {
-    console.log('\n당첨 통계');
-    console.log('---');
+    MissionUtils.Console.print('\n당첨 통계');
+    MissionUtils.Console.print('---');
     this.#getResult();
     this.#printPrize();
     this.#printRateOfRevenue();
@@ -63,7 +63,7 @@ class Lotto {
       const condition = WINNING_CONDITION_BY_RANK[i];
       const prize = `(${numberWithCommas(PRIZE_BY_RANK[i])}원)`;
       const count = this.#rankCount[i];
-      console.log(`${condition} ${prize} - ${count}개`);
+      MissionUtils.Console.print(`${condition} ${prize} - ${count}개`);
     }
   }
 
@@ -71,7 +71,7 @@ class Lotto {
     const profit = this.#getProfit();
     const cost = this.#amount;
     const rateOfRevenue = (profit / cost) * 100;
-    console.log(`총 수익률은 ${rateOfRevenue}% 입니다 `);
+    MissionUtils.Console.print(`총 수익률은 ${rateOfRevenue}% 입니다 `);
   }
 
   #getProfit() {
@@ -250,7 +250,7 @@ class LottoTicket {
 
   printNumbers() {
     const numbers = this.#numbers.join(',');
-    console.log(`[${numbers}]`);
+    MissionUtils.Console.print(`[${numbers}]`);
   }
 }
 
