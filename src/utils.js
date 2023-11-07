@@ -1,4 +1,4 @@
-export const isInteger = (value) => {
+export const isPositiveInteger = (value) => {
   const regex = /^[0-9]*$/;
 
   return regex.test(value);

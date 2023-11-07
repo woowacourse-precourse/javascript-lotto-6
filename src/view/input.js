@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { isEmpty, isInteger } from '../utils.js';
+import { isEmpty, isPositiveInteger } from '../utils.js';
 import ERROR from '../error.js';
 
 const MESSAGE = Object.freeze({
@@ -12,7 +12,7 @@ export default class Input {
     try {
       amount = await Input.readTrimmedLineAsync(MESSAGE.AMOUNT_TO_BUY);
       if (isEmpty(amount)) throw new Error(ERROR.IS_EMPTY);
-      if (!isInteger(amount)) throw new Error(ERROR.IS_NOT_INTEGER);
+      if (!isPositiveInteger(amount)) throw new Error(ERROR.IS_NOT_INTEGER);
     } catch (e) {
       Console.print(e.message);
       amount = await Input.amountToBuy();
