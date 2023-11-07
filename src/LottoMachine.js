@@ -59,11 +59,13 @@ class LottoMachine {
   }
 
   #makeLottoNumber() {
-    return Random.pickUniqueNumbersInRange(
+    const lottoNumber = Random.pickUniqueNumbersInRange(
       LOTTO_RANGE_MIN,
       LOTTO_RANGE_MAX,
       LOTTO_MAX_COUNT
     );
+    lottoNumber.sort((a, b) => a - b);
+    return lottoNumber;
   }
 }
 export default LottoMachine;
