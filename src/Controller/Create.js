@@ -8,33 +8,28 @@ class Create {
   #randomNum;
 
   constructor() {
-    this.random = new Computer();
+    this.computer = new Computer();
     this.#randomNum = null;
   }
 
   async RandomLottery() {
-    const lotteries = await this.#createRandom(await this.userPurchaseTimes());
+    await this.#randomNumber(await this.userPurchaseTimes());
+    Print.repeatLottery(this.#randomNum);
 
-    return lotteries;
+    return this.#randomNum;
   }
 
   async userPurchaseTimes() {
     const userInput = await Read.input(MESSAGE.QUESTION_PURCHASE);
     const purchaseTimes = new User(userInput).getNumberofPurchase();
 
+    Print.output(`${purchaseTimes}${MESSAGE.PAID_RESULT}`);
+
     return purchaseTimes;
   }
 
-  #createRandom(times) {
-    this.#randomNum = this.random.getLotteryNumbers(times);
-    this.printPayResult(times);
-
-    return this.#randomNum;
-  }
-
-  async printPayResult(times) {
-    Print.output(`${times}${MESSAGE.PAID_RESULT}`);
-    Print.repeatLottery(this.#randomNum);
+  #randomNumber(times) {
+    this.#randomNum = this.computer.getLotteryNumbers(times);
   }
 }
 
