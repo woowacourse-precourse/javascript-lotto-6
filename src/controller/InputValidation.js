@@ -6,7 +6,7 @@ import { bonusError, LengthError, PriceError } from "../error/InputErrors.js";
     isPrice : function(input) {
       const isNotNumber =  isNaN(input)
       const isNotCorrectPrice = input % 1000 !== 0
-      if (isNotNumber || isNotCorrectPrice)   throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      if (isNotNumber || isNotCorrectPrice)   throw new Error(INPUT_ERROR_MESSAGE.lottoPriceFormat);
 
     },
     isBonus : function(input) {

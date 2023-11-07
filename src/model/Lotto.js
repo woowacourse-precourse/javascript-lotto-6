@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { Price } from "../constants/PriceConstants";
 
 class Lotto {
   #numbers;
@@ -34,24 +35,19 @@ class Lotto {
     if (count == 3) result["5th"]++;
   }
   #calculateProfitRate(result, price) {
-    const totalRate =
-      ((result["1st"] * 2000000000 +
-        result["2nd"] * 30000000 +
-        result["3rd"] * 1500000 +
-        result["4th"] * 50000 +
-        result["5th"] * 5000) /
+    const totalRate = (
+      ((result["1st"] * Price.PRICE_FIFTH +
+        result["2nd"] * Price.PRICE_SECOND +
+        result["3rd"] * Price.PRICE_THIRD +
+        result["4th"] * Price.PRICE_FOURTH +
+        result["5th"] * Price.PRICE_FIFTH) /
         price) *
-      100;
-    return totalRate.toFixed(1);
+      100
+    ).toFixed(1);
+    return totalRate
   }
   checkLotto(purchaseTickets, bonus, price) {
-    const result = {
-      "1st": 0,
-      "2nd": 0,
-      "3rd": 0,
-      "4th": 0,
-      "5th": 0,
-    };
+    const result = { "1st": 0, "2nd": 0, "3rd": 0, "4th": 0, "5th": 0 };
     purchaseTickets.forEach((purchaseTicket) => {
       const { count, getBonus } = this.#correctAnswer(purchaseTicket, bonus);
       this.#checkResult(count, getBonus, result);

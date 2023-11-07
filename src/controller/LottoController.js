@@ -26,11 +26,7 @@ export default class LottoController {
       const { winningNumberArray, bonusNumber } =
         await this.#createWinningNumberArrays();
       this.#lotto = new Lotto(winningNumberArray, bonusNumber);
-      const { result, calculateProfitRate } = this.#lotto.checkLotto(
-        lottoTickets,
-        bonusNumber,
-        lottoPrice
-      );
+      const { result, calculateProfitRate } = this.#lotto.checkLotto(lottoTickets,bonusNumber,lottoPrice);
       return { result, calculateProfitRate };
     } catch (e) {
       Console.print(e.message);
