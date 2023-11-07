@@ -21,10 +21,11 @@ class Money {
     }
   };
   isNaNError = (input) => {
-    if (!Number.isNaN(input)) {
+    if (Number.isNaN(input)) {
       throw new Error('[ERROR] 입력값이 숫자가 아닙니다.');
     }
   };
+
   calLottoCount = async () => {
     this.lottoCount = this.payedMoney / this.LOTTO_PRICE;
   };
