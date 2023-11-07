@@ -18,7 +18,8 @@ class Lotto {
   }
 
   get() {
-    return this.#numbers;
+    const sortedNumbers = this.#numbers.sort((prv, cur) => prv - cur);
+    return sortedNumbers;
   }
 }
 
