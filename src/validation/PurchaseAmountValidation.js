@@ -1,6 +1,4 @@
-const INTEGER_REGEX = /^[-+]?\d+$/
-
-const PurchaseAmount = {
+const PurchaseAmountValidation = {
 
 	/**
 	 * 구입금액에 대하여 유효성검사를 수행한다.
@@ -15,7 +13,7 @@ const PurchaseAmount = {
 
 	/** @throws 문자열을 정수로 치환할 수 없으면 에러를 발생시킨다. */
 	checkIsNumeric(value) {
-		if (!INTEGER_REGEX.test(value)) {
+		if (isNaN(value)) {
 			// TODO: 에러메시지
 			throw new Error('in checkIsNumeric');
 		}
@@ -46,4 +44,4 @@ const PurchaseAmount = {
 	}
 }
 
-export default PurchaseAmount;
+export default PurchaseAmountValidation;
