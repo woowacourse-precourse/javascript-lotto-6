@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { CONSTANT_VALUE, ERROR_MESSAGE } from './constants.js';
 import InputError from './InputError.js';
+import { ERROR_MESSAGE } from './constants.js';
 
 class BuyLotto {
   lottoPrice;

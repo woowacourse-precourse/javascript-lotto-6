@@ -1,5 +1,6 @@
 import { CONSTANT_VALUE, ERROR_MESSAGE } from './constants.js';
 import InputError from './InputError.js';
+import { vaildateNumberRange, vaildateNumberCheck } from './validateFunctions.js';
 
 class Lotto {
   #numbers;
@@ -17,11 +18,8 @@ class Lotto {
     }
 
     for (const number of numbers) {
-      if (number < 1 || number > 45) {
-        throw new InputError(ERROR_MESSAGE.invalidNumberRange);
-      } else if (!CONSTANT_VALUE.numberCheck.test(number)) {
-        throw new InputError(ERROR_MESSAGE.notNumber);
-      }
+      vaildateNumberCheck(number);
+      vaildateNumberRange(number);
     }
   }
 
@@ -31,11 +29,9 @@ class Lotto {
 
     if (numberSet.size !== allNumbers.length) {
       throw new InputError(ERROR_MESSAGE.noDuplicate);
-    } else if (bonusNumber < 1 || bonusNumber > 45) {
-      throw new InputError(ERROR_MESSAGE.invalidNumberRange);
-    } else if (!CONSTANT_VALUE.numberCheck.test(bonusNumber)) {
-      throw new InputError(ERROR_MESSAGE.notNumber);
     }
+    vaildateNumberCheck(bonusNumber);
+    vaildateNumberRange(bonusNumber);
   }
 }
 
