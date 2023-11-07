@@ -4,7 +4,7 @@ import WinningLotto from '../src/WinningLotto.js';
 
 describe('당첨 번호 클래스 테스트', () => {
   describe('로또 번호와 당첨 번호의 일치 숫자 개수가 정확한지 확인하는 테스트', () => {
-    const winningLotto = new WinningLotto(new Lotto([1, 2, 3, 4, 5, 6]));
+    const winningLotto = new WinningLotto(new Lotto([1, 2, 3, 4, 5, 6]), 7);
     const countMatchingWith = (numbers) => {
       return winningLotto.countMatchingWith(new Lotto(numbers));
     };
@@ -25,6 +25,9 @@ describe('당첨 번호 클래스 테스트', () => {
     });
     test('5개 일치하면 5이 나온다.', () => {
       expect(countMatchingWith([1, 2, 3, 4, 5, 12])).toBe(5);
+    });
+    test('5개 일치, 보너스 볼 일치하면 51이 나온다.', () => {
+      expect(countMatchingWith([1, 2, 3, 4, 5, 7])).toBe(51);
     });
     test('6개 일치하면 6이 나온다.', () => {
       expect(countMatchingWith([1, 2, 3, 4, 5, 6])).toBe(6);
