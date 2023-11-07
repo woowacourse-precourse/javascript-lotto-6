@@ -1,4 +1,4 @@
-import Lotto from "../src/modules/Lotto.js";
+import Lotto from "../src/models/Lotto.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호는 오름차순으로 정렬된다.", () => {

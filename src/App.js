@@ -1,13 +1,15 @@
-import draw from "./modules/Draw.js";
-import purchase from "./modules/Purchase.js";
-import reward from "./modules/Reward.js";
+import draw from "./models/Draw.js";
+import purchase from "./models/Purchase.js";
+import reward from "./models/Reward.js";
 import inputView from "./views/Input.js";
 import outputView from "./views/Output.js";
 
 class App {
   async play() {
+    /* 로또 구매 */
     const purchaseAmount = await inputView.enterPurchaseAmount();
     const lottoCount = purchase.countMoney(purchaseAmount);
+
     const lottos = purchase.getLottos(lottoCount);
     const lottoNumbersArr = lottos.map((lotto) => lotto.getNumbers());
     outputView.printPurchasedLottos(lottoNumbersArr);
