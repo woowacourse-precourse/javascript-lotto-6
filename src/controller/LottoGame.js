@@ -10,6 +10,7 @@ export default class LottoGame {
     const lottoList = this.#generateLotto(purchaseAmount);
     this.#printLottoList(lottoList);
     const winningLotteryNumbers = await this.#requireLotteryNumbers();
+    const bonusNumber = await this.#requireBonusNumber();
   }
 
   async #requirePurchaseAmount() {
@@ -22,6 +23,10 @@ export default class LottoGame {
     const lotteryNumbers = await InputView.readLotteryNumbers();
     Validator.validateLotteryNumbers(lotteryNumbers);
     return lotteryNumbers;
+  }
+
+  async #requireBonusNumber() {
+    const bonusNumber = await InputView.readBonusNumber();
   }
 
   #generateLotto(purchaseAmount) {
