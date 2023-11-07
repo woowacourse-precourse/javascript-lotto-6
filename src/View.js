@@ -63,11 +63,8 @@ class View {
   }
 
   // Lottos : Lotto 인스턴스 배열
-  getLottos(Lottos) {
-    Console.print(`${Lottos.length}개를 구매했습니다.`);
-    Lottos.map((Lotto) => {
-      Lotto.print();
-    });
+  getLottos(user) {
+    user.printLottos();
   }
 
   async getLottoResult(당첨결과) {
