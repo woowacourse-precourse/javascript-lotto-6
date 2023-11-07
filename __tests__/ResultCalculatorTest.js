@@ -1,6 +1,7 @@
 import Lotto from '../src/Lotto';
 import ResultCalculator from '../src/ResultCalculator';
 import WinningLotto from '../src/WinningLotto';
+import { roundToOneDecimalPlace } from '../src/utils/function';
 
 describe('당첨 결과 테스트', () => {
   const winningLotto = new WinningLotto([1, 2, 3, 4, 5, 6]);
@@ -34,5 +35,19 @@ describe('당첨 결과 테스트', () => {
 
       expect(output).toBe(1);
     });
+  });
+
+  test('1,000원을 소비해 4등 로또에 당첨되면 수익률은 5000.0%이다.', () => {
+    const lotto = new Lotto([1, 2, 3, 4, 44, 45]);
+    const resultCalculator = new ResultCalculator();
+    const paidMoney = 1000;
+    const earnedMoney = 50000;
+    const expected = roundToOneDecimalPlace((earnedMoney / paidMoney) * 100);
+
+    resultCalculator.compareLottos([lotto], winningLotto);
+    resultCalculator.getEarningRate(paidMoney);
+    const output = resultCalculator.earningRate;
+
+    expect(output).toBe(expected);
   });
 });
