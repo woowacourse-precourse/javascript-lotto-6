@@ -1,9 +1,9 @@
 import LottoGame from "./LottoGame.js";
 
 class App {
-  play() {
+  async play() {
       try {
-          LottoGame.game_start();
+          await LottoGame.game_start();
       }catch (error){
           throw new Error(error);
       }
