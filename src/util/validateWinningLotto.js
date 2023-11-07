@@ -1,5 +1,5 @@
 const validateWinningLotto = (lotto) => {
-  if (lotto.length !== 6) return false;
+  if (lotto?.length !== 6) return false;
 
   const uniqueNumbers = new Set();
 

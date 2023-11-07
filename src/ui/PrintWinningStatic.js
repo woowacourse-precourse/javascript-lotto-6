@@ -7,10 +7,10 @@ import calculateTotalProfitRate from "../controller/result/calculateTotalProfitR
 const printWinningStatic = (price, count) => {
   Console.print(`${Messages.PRINT_WINNING_STATICS_MESSAGE}`);
   winMessages.forEach((msg, i) => {
-    Console.print(`${msg} ${count[i]}개`);
+    Console.print(`${msg}${count[i]}개`);
   });
   Console.print(
-    `총 수익률은 ${calculateTotalProfitRate(price, count)}% 입니다.`
+    `총 수익률은 ${calculateTotalProfitRate(price, count)}%입니다.`
   );
 };
 

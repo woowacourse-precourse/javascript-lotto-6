@@ -5,8 +5,9 @@ import validateWinningLotto from "./util/validateWinningLotto.js";
 class Lotto {
   #numbers;
 
-  constructor() {
-    this.#numbers = [];
+  constructor(numbers) {
+    this.#numbers = numbers;
+    this.#validate(numbers);
   }
 
   async main() {
@@ -14,13 +15,12 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (!validateWinningLotto(numbers))
+    if (numbers !== undefined && !validateWinningLotto(numbers))
       throw new Error(`${ErrorMessages.WINNING_LOTTO_ERROR_MESSAGE}`);
   }
 
   async print() {
     const lottoNumbers = await printWinningLotto();
-    this.#validate(lottoNumbers);
     this.#numbers = lottoNumbers;
     return lottoNumbers;
   }

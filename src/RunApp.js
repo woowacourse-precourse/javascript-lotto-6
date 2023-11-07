@@ -19,15 +19,19 @@ class RunApp {
   }
 
   async start() {
-    const purchaseInput = await purchasePriceInput();
-    this.purchase = purchaseInput.purchasedLotto;
-    this.price = purchaseInput.price;
+    await this.purchasedLotto();
     await this.getLotto();
     await this.getBonusNumber();
     printWinningStatic(
       this.price,
       calculateWinningLottosCount(this.purchase, this.numbers, this.bonus)
     );
+  }
+
+  async purchasedLotto() {
+    const purchaseInput = await purchasePriceInput();
+    this.purchase = purchaseInput.purchasedLotto;
+    this.price = purchaseInput.price;
   }
 
   async getLotto() {
