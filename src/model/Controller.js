@@ -24,7 +24,7 @@ class Controller {
         this.View.printPurchaseResult(this.buyNum, this.lottoArrays);
         return;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
     }
   }
@@ -36,7 +36,7 @@ class Controller {
         this.setWinNumber(WIN_NUMS);
         return;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
     }
   }
@@ -48,7 +48,7 @@ class Controller {
         this.setBonusNum(BONUS);
         return;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
     }
   }
