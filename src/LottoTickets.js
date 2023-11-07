@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants";
+import { GUIDE_MESSAGE, LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants";
 import Validator from "./validator/Validator";
-import Output from "./view/Output";
+import Lotto from "./Lotto";
 
 
 // @NOTE - 로또 발행 및 로또 개수 출력
@@ -10,27 +10,35 @@ class LottoTickets {
   #boughtTickets
 
   constructor(money) {
-    this.#validate(money)
-    this.#money = money
+    this.#money = Number(money)
+    this.#validate()
     this.#boughtTickets = Number(money) / 1000
     this.tickets = []
+    this.error = ''
   }
 
-  #validate(money) {
-    this.validator = new Validator();
-    const ERROR_MESSAGE = this.validator.isMoneyValid(money);
-
-    if (ERROR_MESSAGE) {
-      MissionUtils.Console.print(ERROR_MESSAGE)
-      return;
-    }
+  #validate() {
+    Validator.isMoneyValid(this.#money)
   }
 
   publishTickets() {
-    Array(this.#boughtTickets).fill().map(() => {
+    MissionUtils.Console.print(`${this.#boughtTickets}개를 구매했습니다.`)
+
+    let tickets = this.#boughtTickets
+    while (tickets > 0) {
       const LOTTO = this.generateOneLotto();
-      this.addToTickets(LOTTO)
-    });
+      this.lotto = new Lotto(LOTTO)
+      const VALIDATED_LOTTO = this.lotto.returnOneLotto()
+      this.printLotto(VALIDATED_LOTTO)
+      this.addToTickets(VALIDATED_LOTTO)
+      tickets -= 1
+    }
+
+    return this.tickets
+  }
+
+  printLotto(lotto) {
+    MissionUtils.Console.print(`[${lotto.join(', ')}]`)
   }
 
   generateOneLotto() {
@@ -46,19 +54,8 @@ class LottoTickets {
     this.tickets = LOTTOS
   }
 
-  returnTickets() {
-    return this.tickets
-  }
-
   returnMoney() {
-    this.#money = Number(this.#money);
-
-    if (/^[1-9]\d*$/.test(this.#money)) {
-      this.output = new Output();
-      this.output.print(this.#money)
-      return true
-    }
-    return false
+    return Number(this.#money)
   }
 }
 
