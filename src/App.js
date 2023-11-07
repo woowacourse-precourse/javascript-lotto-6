@@ -138,6 +138,17 @@ class App {
       i += 1;
     }
   }
+
+  getEarningsRate() {
+    let winningAmount = 0;
+    this.ranks.map((rank) => {
+      if (rank.count) {
+        winningAmount += rank.winnings * rank.count;
+      }
+    });
+    const earningsRate = (winningAmount / this.amount) * 100;
+    return earningsRate.toLocaleString('ko-kr', { minimumFractionDigits: 1 });
+  }
 }
 
 export default App;
