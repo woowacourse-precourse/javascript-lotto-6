@@ -29,7 +29,7 @@ class MyLotto {
     return randomNumbers;
   }
 
-  showMyLottoNumbers() {
+  printMyLottoNumbers() {
     this.#lottoNumbersList.forEach(lottoNumbers => lottoNumbers.printLottoNumbers());
   }
 

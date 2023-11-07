@@ -37,7 +37,7 @@ class LottoController {
     this.#printLottoCount(lottoCount);
 
     this.#myLotto = new MyLotto(purchaseLottoAmount, lottoCount);
-    this.#myLotto.showMyLottoNumbers();
+    this.#myLotto.printMyLottoNumbers();
   }
 
   async #setWinningLotto() {
@@ -81,8 +81,8 @@ class LottoController {
     const matchingResult = this.#myLotto.findMatching(winningNumbers, bonusNumber);
 
     this.#statistics = new LottoStatistics(matchingResult);
-    this.#statistics.showLottoStatistics();
-    this.#statistics.showRateOfReturn(this.#myLotto.getPurchaseAmount());
+    this.#statistics.printLottoStatistics();
+    this.#statistics.printRateOfReturn(this.#myLotto.getPurchaseAmount());
   }
 }
 

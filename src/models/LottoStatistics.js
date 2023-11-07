@@ -40,11 +40,11 @@ class LottoStatistics {
     });
   }
 
-  showLottoStatistics() {
+  printLottoStatistics() {
     OutputView.printResultStatistics(this.#lottoStatistics);
   }
 
-  showRateOfReturn(purchaseAmout) {
+  printRateOfReturn(purchaseAmout) {
     const rate = ((this.#winningAmount / purchaseAmout) * 100).toFixed(1);
     OutputView.printTotalRate(rate);
   }
