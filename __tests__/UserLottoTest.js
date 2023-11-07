@@ -1,14 +1,42 @@
 import UserLotto from '../src/model/UserLotto.js';
 import { ERRORMESSAGE } from '../src/constants/constants.js';
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 /* eslint-disable */
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
+
 describe('UserLotto 클래스', () => {
-  test('유효한 구매 금액이 주어지면 아무 예외도 발생하지 않는다.', () => {
-    expect(() => {
-      new UserLotto(3000);
-    }).not.toThrow();
-  });
+	test('맞춘 번호에 따라 적절한 rank를 반환하는지 test', () => {
+		mockRandoms([
+      [1, 2, 3, 4, 5, 6],
+			[1, 2, 3, 4, 5, 7],
+			[1, 2, 3, 4, 5, 45],
+			[1, 2, 3, 4, 44, 45],
+			[1, 2, 3, 43, 44, 45],
+    ]);
+
+		const winningLotto = {
+			lottoNumber: [1, 2, 3, 4, 5, 6],
+			bonusNumber: 7,
+		};
+		
+		const answer = {
+			fifth: 1,
+			fourth: 1,
+			third: 1,
+			second: 1,
+			first: 1,
+		};
+
+		const userLotto = new UserLotto(5000);		
+		expect(userLotto.calculateMatchingNumber(winningLotto)).toEqual(answer);
+	});
 
   test('유효하지 않은 숫자로 구매 금액이 주어지면 예외가 발생.', () => {
     expect(() => {
@@ -46,3 +74,5 @@ describe('UserLotto 클래스', () => {
     }).toThrow(ERRORMESSAGE.purchaseRange2);
   });
 });
+
+
