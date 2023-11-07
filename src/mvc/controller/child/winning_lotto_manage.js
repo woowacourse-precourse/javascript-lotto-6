@@ -1,4 +1,5 @@
 import Lotto from '../../../utils/error/type/Lotto.js';
+import BonusNumError from '../../../utils/error/type/bonus_num_error.js';
 import printError from '../../../utils/error/print_error.js';
 import Question from '../../../utils/input/question.js';
 import userInput from '../../../utils/input/user_input.js';
@@ -30,6 +31,16 @@ class WinningLottoManage {
 
   async #inputBonusNum() {
     this.#bonusNum = await userInput(Question.bonusNum());
+    this.#checkBonusNum();
+  }
+
+  async #checkBonusNum() {
+    try {
+      new BonusNumError(this.#winningNum, this.#bonusNum);
+    } catch (error) {
+      printError(error);
+      await this.#inputBonusNum();
+    }
   }
 }
 
