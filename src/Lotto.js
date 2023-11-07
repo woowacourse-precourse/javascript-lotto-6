@@ -38,14 +38,14 @@ class Lotto {
     let count = 0;
 
     this.#numbers.forEach(number => {
-      if (winningNumbers.include(number)) {
+      if (winningNumbers.includes(number)) {
         count += 1;
       }
       if (count === 6) {
         return PLACE.FIRST;
       }
 
-      if (count === 5 && this.#numbers.include(bonusNumber)) {
+      if (count === 5 && this.#numbers.includes(bonusNumber)) {
         return PLACE.SECOND;
       }
 

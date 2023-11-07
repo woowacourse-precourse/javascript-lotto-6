@@ -11,6 +11,7 @@ class Lottos {
     this.count = purchaseAmount / AMOUNT.UNIT;
     //여러장 발행해야해서
     this.lists = [];
+    this.publishLotto();
   }
 
   validate(purchaseAmount) {
@@ -47,7 +48,6 @@ class Lottos {
 
   //구매한 로또 번호 목록 출력
   printTickets() {
-    Console.print(this.lists);
     this.lists.forEach(list => {
       list.printNumbers();
     });

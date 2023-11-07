@@ -22,13 +22,14 @@ class App {
     this.lottos.printTicketCount();
     this.lottos.printTickets();
 
-    await this.inputWinningNumbers;
+    await this.inputWinningNumbers();
   }
 
   async inputWinningNumbers() {
-    const winningNumbers = await Console.readLineAsync(
+    let winningNumbers = await Console.readLineAsync(
       MESSAGE.INPUT_WINNGING_NUMBERS,
     );
+
     winningNumbers = winningNumbers.split(',').map(number => Number(number));
     this.winningNumbers = new WinningNumbers(winningNumbers);
     // Console.readLineAsync(MESSAGE.INPUT_WINNGING_NUMBERS, winningNumbers => {
@@ -36,20 +37,13 @@ class App {
     //   this.winningNumbers = new WinningNumbers(winningNumbers);
     // });
 
-    await this.inputBounsNumber;
+    await this.inputBounsNumber();
   }
 
   async inputBounsNumber() {
-    const bonusNumber = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+    let bonusNumber = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
     bonusNumber = Number(bonusNumber);
     this.bonusNumber = new BonusNumber(bonusNumber, this.winningNumbers.value);
-    // Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER, bonusNumber => {
-    //   bonusNumber = Number(bonusNumber);
-    //   this.bonusNumber = new BonusNumber(
-    //     bonusNumber,
-    //     this.winningNumbers.value,
-    //   );
-    // });
 
     this.printWinningStats();
   }

@@ -40,7 +40,7 @@ export const checkValue = {
   bonusNumber(number, winningNumbers) {
     if (isNaN(number))
       return { errorMessage: createErrorMessage.type(BONUS_NUMBER) };
-    if (winningNumbers.include(number))
+    if (winningNumbers.includes(number))
       return { errorMessage: ERROR_MESSAGE.DUPLICATE_WINNING_NUMBER };
     if (number < LOTTO.MIN_NUMBER || number > LOTTO.MAX_NUMBER)
       return { errorMessage: createErrorMessage.range(BONUS_NUMBER) };
