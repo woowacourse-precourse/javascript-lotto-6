@@ -37,7 +37,6 @@ export default class LottoController {
 
   /**
    * @public
-   * @returns {Promise<void>}
    */
   async run() {
     try {
@@ -54,7 +53,6 @@ export default class LottoController {
   /**
    * @private
    * @async
-   * @returns {Promise<void>}
    */
   async #printLottoList() {
     const createdLottoList = this.#lottoService.getLottoList();
@@ -66,7 +64,6 @@ export default class LottoController {
   /**
    * @private
    * @asnyc
-   * @returns {Promise<void>}
    */
   async #readLottoNumbers() {
     try {
@@ -83,7 +80,6 @@ export default class LottoController {
   /**
    * @private
    * @async
-   * @returns {Promise<void>}
    */
   async #readLottoBonusNumber() {
     try {
