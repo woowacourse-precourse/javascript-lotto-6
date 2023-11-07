@@ -9,6 +9,9 @@ const throwError = (message) => {
   throw new Error(`${ERROR.header} ${message}`);
 };
 
-const generateRandomNumber = (min, max, count) => Random.pickUniqueNumbersInRange(min, max, count);
+const generateRandomNumber = (min, max, count) => {
+  const randomNumbers = Random.pickUniqueNumbersInRange(min, max, count);
+  return randomNumbers.sort((a, b) => a - b);
+};
 
 export { printMessage, readLineAsync, throwError, generateRandomNumber };
