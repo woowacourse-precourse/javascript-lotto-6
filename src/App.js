@@ -11,7 +11,7 @@ class App {
 		let b = await InputPrintout.inputBonusNum();
 		console.log("보너스", b);
 
-		OutputPrintout.printWinningRanks(a.getNumbers(), b);
+		OutputPrintout.printMathingNumberList(a.getNumbers(), b);
 	}
 }
 

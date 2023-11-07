@@ -18,7 +18,21 @@ const PRINT_INPUT = Object.freeze({
 
 const PRINT_OUTPUT = Object.freeze({
 	outputLottoCount: "개를 구매했습니다.",
-	outputMatchingNum: "\n당첨 통계\n---",
+	outputMatchingNum: "\n당첨 통계\n---\n",
+	three: "3",
+	four: "4",
+	five: "5",
+	fiveBonus: "5+1",
+	six: "6",
+});
+
+const PRINT_MATHINGNUMBER = Object.freeze({
+	three: "3개 일치 (5,000원) - ",
+	four: "4개 일치 (50,000원) - ",
+	five: "5개 일치 (1,500,000원) - ",
+	fiveBonus: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+	six: "6개 일치 (2,000,000,000원) - ",
+	unit: "개",
 });
 
 const ERROR_MESSAGE = Object.freeze({
@@ -30,4 +44,12 @@ const ERROR_MESSAGE = Object.freeze({
 	invalidInputAmount: "[ERROR] 1000원 이상 입력해주세요",
 });
 
-export { LOTTO, PRINT_INPUT, PRINT_OUTPUT, ERROR_MESSAGE, NEWLINE, COMMA };
+export {
+	NEWLINE,
+	COMMA,
+	LOTTO,
+	PRINT_INPUT,
+	PRINT_OUTPUT,
+	PRINT_MATHINGNUMBER,
+	ERROR_MESSAGE,
+};
