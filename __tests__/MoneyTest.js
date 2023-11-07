@@ -23,4 +23,15 @@ describe("Money 클래스 테스트", () => {
       }
     }).toThrow(expectedError);
   });
+
+  test("입력한 값이 0일 경우 예외 처리", () => {
+    const money = new Money();
+    const expectedError = ERROR_MESSAGES.IS_ZERO;
+
+    expect(() => {
+      if (money === 0) {
+        throw new Error(expectedError);
+      }
+    });
+  });
 });
