@@ -51,6 +51,11 @@ describe('로또 구입 테스트', () => {
     expect(() => buyNumberException('1500').toThrow(Error));
   });
 
+  test('로또 구입 예외 테스트', async () => {
+    buyNumberException('10000.5');
+    expect(() => buyNumberException('1500').toThrow(Error));
+  });
+
   test('로또 번호(중복) 예외 테스트', async () => {
     const NUMBER = [1, 1, 1, 1, 1, 1];
     const LottoVal = new InputValidate();
@@ -66,10 +71,33 @@ describe('로또 구입 테스트', () => {
   });
 
   test('보너스 번호 예외 테스트', async () => {
-    const NUMBER = 'a';
+    const BONUS_NUMBER = 'a';
+    const WIN_NUMBER = [1, 2, 3, 4, 5];
     const LottoVal = new InputValidate();
 
-    await expect(LottoVal.bonusNumber(NUMBER)).rejects.toThrow(Error);
+    await expect(
+      LottoVal.bonusNumber(BONUS_NUMBER, WIN_NUMBER),
+    ).rejects.toThrow(Error);
+  });
+
+  test('보너스 번호 범위는 1부터 45 예외 테스트', async () => {
+    const BONUS_NUMBER = 46;
+    const WIN_NUMBER = [1, 2, 3, 4, 5];
+    const LottoVal = new InputValidate();
+
+    await expect(
+      LottoVal.bonusNumber(BONUS_NUMBER, WIN_NUMBER),
+    ).rejects.toThrow(Error);
+  });
+
+  test('보너스 번호 범위는 1부터 45 예외 테스트', async () => {
+    const BONUS_NUMBER = 0;
+    const WIN_NUMBER = [1, 2, 3, 4, 5];
+    const LottoVal = new InputValidate();
+
+    await expect(
+      LottoVal.bonusNumber(BONUS_NUMBER, WIN_NUMBER),
+    ).rejects.toThrow(Error);
   });
 
   test('당첨번호, 보너스번호 중복 예외 테스트', async () => {
