@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+import { isNumber } from '../common/validate.js';
 import { ERROR_MSG } from '../constants.js';
 
 function isThousand(price) {
@@ -6,8 +8,14 @@ function isThousand(price) {
 }
 
 function isValidPrice(price) {
-  if (Number.isNaN(price)) throw new Error(ERROR_MSG.NOT_NUMBER_ERR);
-  if (!isThousand(price)) throw new Error(ERROR_MSG.CURRENCY_UNIT_ERR);
+  if (!isNumber(price)) {
+    Console.print(ERROR_MSG.NOT_NUMBER_ERR);
+    return false;
+  }
+  if (!isThousand(price)) {
+    Console.print(ERROR_MSG.CURRENCY_UNIT_ERR);
+    return false;
+  }
   return true;
 }
 

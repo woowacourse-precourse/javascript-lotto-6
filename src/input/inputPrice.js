@@ -3,14 +3,12 @@ import { ASK_PRICE } from '../constants.js';
 import isValidPrice from './isValidPrice.js';
 
 async function inputPrice() {
-  try {
+  let price = 0;
+  while (!price) {
     const INPUT = await Console.readLineAsync(ASK_PRICE);
-    const PRICE = Number(INPUT);
-    if (!isValidPrice(PRICE)) return 0;
-    return PRICE;
-  } catch (error) {
-    throw new Error(error);
+    if (isValidPrice(Number(INPUT))) price = Number(INPUT);
   }
+  return price;
 }
 
 export default inputPrice;
