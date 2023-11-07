@@ -1,4 +1,9 @@
-import { INPUT_ERROR, NUMBER_CRITERIA, UNIT } from "./Constants.js";
+import {
+  INPUT_ERROR,
+  NUMBER_CRITERIA,
+  NUMBER_RANGE,
+  UNIT,
+} from "../model/Constants.js";
 
 const Validation = {
   checkMoney(money) {
@@ -66,7 +71,7 @@ const Validation = {
   },
 
   checkOutOfRange(number) {
-    if (number < 1 || number > 45) {
+    if (number < NUMBER_RANGE.min || number > NUMBER_RANGE.max) {
       throw new Error(INPUT_ERROR.outOfRange);
     }
   },
