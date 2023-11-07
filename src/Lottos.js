@@ -56,9 +56,10 @@ class Lottos {
   //당첨번호와 보너스번호를 받아와서 각 로또의 등수 계산하고 등수 목록 반환
   calculateRanks(winningNumbers, bonusNumber) {
     let lottoRanks = [];
-    this.lists.forEach(list => {
-      lottoRanks.push(list.calculateRank(winningNumbers, bonusNumber));
+    this.lists.forEach(lotto => {
+      lottoRanks.push(lotto.calculateRank(winningNumbers, bonusNumber));
     });
+    Console.print(lottoRanks);
     //5등까지만 반환되도록
     return lottoRanks.filter(rank => rank <= PLACE.LAST);
   }
@@ -70,6 +71,7 @@ class Lottos {
 
   //당첨내역 출력
   printWinningDetails(lottoRanks) {
+    // Console.print(lottoRanks);
     const winningDetails = [
       WINNING_DETAIL.FIFTH,
       WINNING_DETAIL.FOURTH,

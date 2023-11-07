@@ -32,10 +32,6 @@ class App {
 
     winningNumbers = winningNumbers.split(',').map(number => Number(number));
     this.winningNumbers = new WinningNumbers(winningNumbers);
-    // Console.readLineAsync(MESSAGE.INPUT_WINNGING_NUMBERS, winningNumbers => {
-    //   winningNumbers = winningNumbers.split(',').map(number => Number(number));
-    //   this.winningNumbers = new WinningNumbers(winningNumbers);
-    // });
 
     await this.inputBounsNumber();
   }
@@ -50,6 +46,8 @@ class App {
 
   printWinningStats() {
     Console.print(MESSAGE.WINNING_STATS);
+
+    // Console.print(this.winningNumbers.value, this.bonusNumber.value);
 
     const lottoRanks = this.lottos.calculateRanks(
       this.winningNumbers.value,
