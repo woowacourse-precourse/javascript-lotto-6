@@ -38,12 +38,16 @@ class App {
   }
 
   async bonusNumberInput() {
+    try {
       const inputBonusNumber = await MissionUtils.Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
       let beNumberedInputBonunsNumber = Number(inputBonusNumber)
-      this.bonus = new Bonus(beNumberedInputBonunsNumber)
-      console.log(this.bonus)
-  } 
+      this.bonus = new Bonus(beNumberedInputBonunsNumber,this.winning.value)
+    } catch(e) {
+      MissionUtils.Console.print(e.message)
+      await this.bonusNumberInput()
+      return
+    }
     
   }
-
+}
 export default App;
