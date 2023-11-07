@@ -16,8 +16,6 @@ class Fucntional {
     Print.lottoReturnRatio(
       Get.lottoReturnRatio(lottoResult, lottoArray.length)
     );
-
-    return;
   }
 }
 
