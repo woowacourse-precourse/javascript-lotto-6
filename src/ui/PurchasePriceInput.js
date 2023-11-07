@@ -7,8 +7,10 @@ import printPurchaseLotto from "./PrintPurchaseLottos.js";
 
 const purchasePriceInput = async () => {
   let price = await Console.readLineAsync(Messages.PURCHASE_INPUT_MESSAGE);
-  if (!validatePriceInput(price))
-    throw new Error(ErrorMessages.PRICE_INPUT_ERRORMESSAGE);
+  while (!validatePriceInput(price)) {
+    Console.print(ErrorMessages.PRICE_INPUT_ERROR_MESSAGE);
+    price = await Console.readLineAsync(Messages.PURCHASE_INPUT_MESSAGE);
+  }
   const purchasedLotto = printPurchaseLotto(price / 1000);
   return { purchasedLotto, price };
 };

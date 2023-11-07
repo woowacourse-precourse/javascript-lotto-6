@@ -22,6 +22,7 @@ class Lotto {
   async print() {
     const lottoNumbers = await printWinningLotto();
     this.#numbers = lottoNumbers;
+    this.#validate(lottoNumbers);
     return lottoNumbers;
   }
 }
