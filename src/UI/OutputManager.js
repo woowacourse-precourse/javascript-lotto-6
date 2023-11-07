@@ -1,5 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { NUMBER_OF_PURCHASED_LOTTO_MESSAGE } from '../Constants.js';
+import {
+  GAEM_RESULT_MESSAGE,
+  NUMBER_OF_PURCHASED_LOTTO_MESSAGE,
+  WINNING_DESCRIPTION_BY_COUNT,
+} from '../Constants.js';
 
 class OutputManager {
   async printInputErrorMessage(errorMessage) {
@@ -19,6 +23,22 @@ class OutputManager {
     purchasedLottos.forEach((purchasedLotto) =>
       Console.print(`[${purchasedLotto.getLottoNumbers().join(', ')}]`)
     );
+  }
+
+  printMatchingResult(matchingCounts) {
+    Object.keys(matchingCounts)
+      .map((key) => Number(key))
+      .sort((a, b) => a - b)
+      .forEach((matchingCount) => {
+        Console.print(
+          `${WINNING_DESCRIPTION_BY_COUNT[matchingCount]} - ${matchingCounts[matchingCount]}개`
+        );
+      });
+  }
+
+  printGameResult({ matchingCounts, rateOfReturn }) {
+    Console.print(GAEM_RESULT_MESSAGE);
+    this.printMatchingResult(matchingCounts);
   }
 }
 

@@ -35,8 +35,14 @@ export const BONUS_NUMBER_ERROR_MESSAGES = Object.freeze({
   DUPLICATED_WITH_WINNING_NUMBER: `[ERROR] 당첨 번호와 동일한 보너스 번호가 있습니다.`,
 });
 
+export const GAEM_RESULT_MESSAGE = `당첨 통계\n---`;
+
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>
   `\n${numberOfLottos}개를 구매했습니다.`;
+
+export const convertToOutputNumberFormat = (number) => {
+  return number.toLocaleString('ko-KR');
+};
 
 export const WINNING_PRIZE_BY_COUNT = Object.freeze({
   3: 5000,

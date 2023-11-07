@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import {
   BONUS_NUMBER_WEIGHT,
   LAST_DECIMAL_PLACE_TO_DISPLAY,
@@ -42,7 +41,11 @@ class App {
     this.outputManager.printPurchasedLottosInfo(this.lottos);
     this.winningNumbers = await this.getWinningNumbers();
     this.bonusNumber = await this.getBonusNumber();
-    const { matchingCounts, totalPrize, rateOfReturn } = this.getGameResult();
+    const { matchingCounts, rateOfReturn } = this.getGameResult();
+    this.outputManager.printGameResult({
+      matchingCounts,
+      rateOfReturn,
+    });
   }
 
   async getPurchaseAmount() {
