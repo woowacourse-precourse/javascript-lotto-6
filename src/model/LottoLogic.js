@@ -107,6 +107,18 @@ class LottoLogic {
   async getCount() {
     return await this.#money.getCount();
   }
+
+  async getLotto() {
+    return this.#lotto;
+  }
+
+  async getBonusLotto() {
+    return this.#bonusLotto;
+  }
+
+  async getMoney() {
+    return await this.#money;
+  }
 }
 
 // test done!
