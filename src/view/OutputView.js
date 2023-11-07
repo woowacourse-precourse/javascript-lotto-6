@@ -11,9 +11,14 @@ export default class OutputView {
   }
 
   printWinning(winningCount, Win5andBonus) {
-    console.log(`${winningCount}`);
     MissionUtils.Console.print(
       `${WINNING_MESSAGES.MATCHING_3}${winningCount[3]}${WINNING_MESSAGES.COUNT}\n${WINNING_MESSAGES.MATCHING_4}${winningCount[4]}${WINNING_MESSAGES.COUNT}\n${WINNING_MESSAGES.MATCHING_5}${winningCount[5]}${WINNING_MESSAGES.COUNT}\n${WINNING_MESSAGES.MATCHING_5_BONUS}${Win5andBonus}${WINNING_MESSAGES.COUNT}\n${WINNING_MESSAGES.MATCHING_6}${winningCount[6]}${WINNING_MESSAGES.COUNT}\n`
+    );
+  }
+
+  printProfitRate(rate) {
+    MissionUtils.Console.print(
+      `${WINNING_MESSAGES.PROFIT_RATE_FRONT}${rate}${WINNING_MESSAGES.PROFIT_RATE_BACK}`
     );
   }
 }

@@ -21,6 +21,8 @@ const WINNING_MESSAGES = Object.freeze({
   MATCHING_5_BONUS: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
   MATCHING_6: '6개 일치 (2,000,000,000원) - ',
   COUNT: '개',
+  PROFIT_RATE_FRONT: '총 수익률은 ',
+  PROFIT_RATE_BACK: '%입니다.',
 });
 
 export { INFO_MESSAGES, ERROR_MESSAGES, WINNING_MESSAGES };

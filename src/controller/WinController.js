@@ -7,6 +7,7 @@ export default class WinController {
   #purchasedLottos;
   #WinningCount = [0, 0, 0, 0, 0, 0, 0];
   #Win5andBonus = 0;
+  #profitRate;
   outputView = new OutputView();
 
   constructor(amount, lottoNumbers, bonusNumber, purchasedLottos) {
@@ -20,8 +21,9 @@ export default class WinController {
   checkWinResults() {
     this.calculateWinningDetails();
     this.printWinningDetails();
-    // 수익률
-    // 출력
+
+    this.calculateProfitRate();
+    this.printProfitRate();
   }
 
   calculateWinningDetails() {
@@ -50,8 +52,6 @@ export default class WinController {
     return 0;
   }
 
-  calculateProfitRate() {}
-
   printWinningDetails() {
     this.#purchasedLottos.forEach((pLotto) => {
       if (
@@ -64,5 +64,25 @@ export default class WinController {
       }
     });
     this.outputView.printWinning(this.#WinningCount, this.#Win5andBonus);
+  }
+
+  calculateProfitRate() {
+    this.calculateWinningAmount() / this.#amount;
+    this.#profitRate =
+      Math.round((this.calculateWinningAmount() / this.#amount) * 1000) / 100;
+  }
+
+  calculateWinningAmount() {
+    return (
+      this.#WinningCount[3] * 5000 +
+      this.#WinningCount[4] * 50000 +
+      this.#WinningCount[5] * 1500000 +
+      this.#Win5andBonus * 30000000 +
+      this.#WinningCount[6] * 2000000000
+    );
+  }
+
+  printProfitRate() {
+    this.outputView.printProfitRate(this.#profitRate);
   }
 }
