@@ -7,7 +7,7 @@ const MESSAGES = {
     fifth: "3개 일치 (5,000원)",
   },
   error: {
-    notNumber: "[ERROR] 숫자를 입력해 주세요.",
+    notNumber: "[ERROR] 정수 숫자를 입력해 주세요.",
     invalidPricUnit: "[ERROR] 1,000 단위로 입력해 주세요.",
     invalidTargetNumbersLength: "[ERROR] 6자리 길이로 입력해 주세요.",
     notDuplicateTargetNumbers: "[ERROR] 중복된 숫자 없이 입력해 주세요.",

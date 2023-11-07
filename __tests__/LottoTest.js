@@ -27,4 +27,16 @@ describe("로또 클래스 테스트", () => {
       new Lotto([1, 2, 3, 4, 5, 46]);
     }).toThrow(MESSAGES.error.invalidRange);
   });
+
+  test("로또 번호의 개수가 6개 미만일 경우 예외가 발생한다", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5]);
+    }).toThrow(MESSAGES.error.invalidTargetNumbersLength);
+  });
+
+  test("로또 번호 중 하나라도 정수가 아닌 경우 예외가 발생한다", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 1.1]);
+    }).toThrow(MESSAGES.error.notNumber);
+  });
 });

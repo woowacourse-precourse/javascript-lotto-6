@@ -16,7 +16,7 @@ class Lotto {
     if (numbersSet.size !== count) {
       throw new Error(MESSAGES.error.invalidTargetNumbersLength);
     }
-    if (numbers.some((number) => typeof number !== "number")) {
+    if (numbers.some((number) => !Number.isInteger(Number(number)))) {
       throw new Error(MESSAGES.error.notNumber);
     }
     if (numbers.some((number) => number > maximum || number < minimum)) {
