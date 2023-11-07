@@ -39,6 +39,10 @@ class User {
 
     this.profits += profit;
   }
+
+  setYeild() {
+    this.yeild = ((this.profits / this.purchaseAmout) * 100).toFixed(1);
+  }
 }
 
 export default User;
