@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { validateInputMoney } from "./Validator.js";
 
 class LottoGame {
   #gameCount;
@@ -8,17 +9,15 @@ class LottoGame {
   }
 
   async getUserInputMoney() {
-    const userInputMoney = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
-    if (userInputMoney % 1000 !== 0) {
-      throw new Error(
-        "[ERROR] 로또 구입 가격은 1000원 단위로 입력해야 합니다."
+    try {
+      const userInputMoney = await Console.readLineAsync(
+        "구입금액을 입력해 주세요.\n"
       );
+      validateInputMoney(userInputMoney);
+      this.#gameCount = userInputMoney / 1000;
+    } catch (error) {
+      Console.print(error.message);
     }
-
-    this.#gameCount = userInputMoney / 1000;
-    Console.print(`총 ${this.#gameCount}개를 구매했습니다.\n`);
   }
 }
 
