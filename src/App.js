@@ -1,4 +1,3 @@
-import { parseSync } from '@babel/core';
 import { Random, Console } from '@woowacourse/mission-utils';
 
 class App {
@@ -7,6 +6,8 @@ class App {
     const lottoNumbers = this.generateLottoNumbers(lottoMoney / 1000);  // 갯수에 맞게 랜덤 생성되는 로또
     this.showLottoNumbers(lottoNumbers)  // 랜던 생성된 로또 출력
     const { mainNumbers, bonusNumber } = await this.getMyNumbers();  // 당첨 번호 입력 받기
+    const matchCounts = this.checkResult(lottoNumbers, mainNumbers, bonusNumber);  // 당첨 번호와 보너스 번호 전달, 우승 값 계산
+    this.printResults(matchCounts);  // 우승값 출력
   }
 
   async getLottoMoney() {  // 로또 구매할 금액 입력
@@ -65,7 +66,7 @@ class App {
     }
   }
 
-  checkResult(lottoNumbers, winningNumbers, bonusNumber) {  // 로또 당첨 확인
+  checkResult(lottoNumbers, winningNumbers, bonusNumber) {  // 로또 당첨 비교
     let matchCounts = {
       "3": 0,
       "4": 0,
@@ -116,8 +117,44 @@ class App {
     }
     return matchCounts;
   }
+
+  calculateProfit(matchCounts, lottoMoney, prizeTable) {  // 수익 계산
+    let totalEarnings = 0;
+    for (const prize in matchCounts) {
+      totalEarnings += matchCounts[prize] * prizeTable[prize];
+    }
+    const profit = totalEarnings - lottoMoney;
+    const profitPercentage = (profit / lottoMoney) * 100;
+
+    const positiveProfitPercentage = profitPercentage < 0 ? 100 + profitPercentage : profitPercentage;  // 마이너스 수익일 경우 절댓값
+
+    return {
+      profit: profit,
+      profitPercentage: positiveProfitPercentage
+    };
+  }
+
+  printResults(matchCounts) {  // 결과값 출력
+    Console.print("\n당첨 통계\n---")
+
+    Console.print(`3개 일치 (5,000원) - ${matchCounts["3"]}개`);
+    Console.print(`4개 일치 (50,000원) - ${matchCounts["4"]}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${matchCounts["5"]}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${matchCounts["5_bonus"]}개`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${matchCounts["6"]}개`);
+
+    const prizeTable = {
+      "3": 5000,
+      "4": 50000,
+      "5": 1500000,
+      "5_bonus": 30000000,
+      "6": 2000000000
+    };
+    
+    const result = this.calculateProfit(matchCounts, this.lottoMoney, prizeTable);
+    const profitPercentage = result.profitPercentage >= 0 ? result.profitPercentage.toFixed(1): 0;
+    Console.print(`총 수익률은 ${profitPercentage}%입니다.`);
+  }
 }
-
-
 
 export default App;
