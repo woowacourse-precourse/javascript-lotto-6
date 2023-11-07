@@ -21,7 +21,7 @@ class App {
       .split(",")
       .map((x) => parseInt(x, 10));
     let winning = new Lotto(winningNumberArray);
-    Console.print(lottos,winning)
+    Console.print(lottos, winning);
   }
 
   generateLottoNumber(lottoCount) {
@@ -35,8 +35,15 @@ class App {
         return a - b;
       });
     }
-
+    this.printLottoNumbers(lottos);
     return lottos;
+  }
+
+  printLottoNumbers(lottos) {
+    lottos.map((lotto) => {
+      Console.print(`[${lotto.join(", ")}]`);
+    });
+    Console.print("\n");
   }
 }
 
