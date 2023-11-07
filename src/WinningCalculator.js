@@ -1,19 +1,24 @@
 import Utils from './Utils.js';
 
-const RANKING = new Map([
-  [5, '3개 일치'],
-  [4, '4개 일치'],
-  [3, '5개 일치'],
-  [2, '5개 일치, 보너스 볼 일치'],
-  [1, '6개 일치'],
-]);
+const NUMBER_NAME = {
+  winning: '당첨',
+  bonus: '보너스',
+};
 
 const MATCH_RANKING = new Map([
   [5, 3],
   [4, 4],
   [3, 5],
-  [2, '보너스'],
+  [2, NUMBER_NAME.bonus],
   [1, 6],
+]);
+
+const RANKING = new Map([
+  [5, `3개 일치`],
+  [4, `4개 일치`],
+  [3, `5개 일치`],
+  [2, `5개 일치, 보너스 볼 일치`],
+  [1, `6개 일치`],
 ]);
 
 const WINNING_PRIZE = new Map([
@@ -23,11 +28,6 @@ const WINNING_PRIZE = new Map([
   [2, 30000000],
   [1, 2000000000],
 ]);
-
-const NUMBER_NAME = {
-  winning: '당첨',
-  bonus: '보너스',
-};
 
 const PRINT_STRING = {
   resultHeader: '당첨 통계\n---',
