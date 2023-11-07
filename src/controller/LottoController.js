@@ -1,9 +1,7 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import GameUtils from "./lotto/GameUtils.js";
-import LottoGame from "./lotto/LottoGame.js";
-import OutputUi from "./ui/OutputUi.js";
-import InputUi from "./ui/inputUi.js";
-import Validation from "./validation/Validation.js";
+import GameUtils from '../lotto/GameUtils.js';
+import LottoGame from '../lotto/LottoGame.js';
+import OutputUi from '../ui/OutputUi.js';
+import InputUi from '../ui/inputUi.js';
 class LottoController {
   constructor() {
     this.lottoGame = null;
