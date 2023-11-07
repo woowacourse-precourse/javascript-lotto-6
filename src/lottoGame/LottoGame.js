@@ -27,7 +27,7 @@ class LottoGame {
 
     for (
       let i = 0;
-      i < this.#purchasedAmount / LOTTO_GAME_RULE.lottoAmout;
+      i < this.#purchasedAmount / LOTTO_GAME_RULE.lottoAmount;
       i++
     ) {
       const lottoNumbers = LottoUtils.generateRandomNumber();
@@ -47,7 +47,7 @@ class LottoGame {
 
   printPurchasedLottos() {
     Console.print(
-      `${this.#purchasedAmount / LOTTO_GAME_RULE.lottoAmout}${
+      `${this.#purchasedAmount / LOTTO_GAME_RULE.lottoAmount}${
         COMMAND.purchaseMessage
       }`
     );

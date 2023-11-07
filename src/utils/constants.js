@@ -1,7 +1,5 @@
 export const LOTTO_GAME_RULE = Object.freeze({
-  lottoAmout: 1000,
-  lottoCount: 6,
-  lottoNumber: [1, 45],
+  lottoAmount: 1000,
   prize: [5000, 50000, 1500000, 30000000, 2000000000],
 });
 

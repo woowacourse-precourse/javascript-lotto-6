@@ -1,7 +1,4 @@
-import InputError from "../errors/InputError.js";
 import InputValidate from "../utils/InputValidate.js";
-import { ERRORS } from "../utils/constants.js";
-import { LOTTO_GAME_RULE } from "../utils/constants.js";
 
 class Lotto {
   #numbers;

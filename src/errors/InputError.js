@@ -8,7 +8,7 @@ class InputError {
   }
 
   static checkInvalidAmount(input) {
-    if (input % LOTTO_GAME_RULE.lottoAmout !== 0) {
+    if (input % LOTTO_GAME_RULE.lottoAmount !== 0) {
       throw new Error(`${ERRORS.error} ${ERRORS.invalidAmountError}`);
     }
   }
@@ -26,22 +26,19 @@ class InputError {
   }
 
   static checkOutOfRangeNumber(input) {
-    if (
-      input < LOTTO_GAME_RULE.lottoNumber[0] ||
-      input > LOTTO_GAME_RULE.lottoNumber[1]
-    ) {
+    if (input < 1 || input > 45) {
       throw new Error(`${ERRORS.error} ${ERRORS.outOfRangeNumberError}`);
     }
   }
 
   static checkNumberLength(input) {
-    if (input.length !== LOTTO_GAME_RULE.lottoCount) {
+    if (input.length !== 6) {
       throw new Error(`${ERRORS.error} ${ERRORS.numberLengthError}`);
     }
   }
 
   static checkDuplicateLength(input) {
-    if (new Set(input).size !== LOTTO_GAME_RULE.lottoCount) {
+    if (new Set(input).size !== 6) {
       throw new Error(`${ERRORS.error} ${ERRORS.duplicatedNumberError}`);
     }
   }
