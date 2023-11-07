@@ -19,7 +19,7 @@ describe('수익률 계산', () => {
     // given
     const TOTAL = 5000;
     const PRICE = 9000;
-    const OUTPUT = '55.56';
+    const OUTPUT = '55.6';
 
     // when
     const result = rateModel.getRate(TOTAL, PRICE);
@@ -28,11 +28,11 @@ describe('수익률 계산', () => {
     expect(result).toBe(OUTPUT);
   });
 
-  test('소수점이 없으면 없는 상태의 확률 값이 문자열로 반환된다.', () => {
+  test('소수점이 없으면 .0이 있는 상태의 확률 값이 문자열로 반환된다.', () => {
     // given
     const TOTAL = 5000;
     const PRICE = 10000;
-    const OUTPUT = '50';
+    const OUTPUT = '50.0';
 
     // when
     const result = rateModel.getRate(TOTAL, PRICE);
@@ -45,7 +45,7 @@ describe('수익률 계산', () => {
     // given
     const TOTAL = 1500000;
     const PRICE = 5000;
-    const OUTPUT = '30,000';
+    const OUTPUT = '30,000.0';
 
     // when
     const result = rateModel.getRate(TOTAL, PRICE);
