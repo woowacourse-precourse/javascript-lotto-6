@@ -15,4 +15,10 @@ describe('Number Validation', () => {
       inputValidator.validatePositiveNumber('-1');
     }).toThrow(ErrorMessage);
   });
+
+  test('정수가 아닌 소수를 입력', () => {
+    expect(() => {
+      inputValidator.validateInteger('0.5');
+    }).toThrow(ErrorMessage);
+  });
 });
