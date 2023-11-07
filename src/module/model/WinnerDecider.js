@@ -75,6 +75,10 @@ class WinnerDecider {
         break;
     }
   }
+
+  get score() {
+    return this.#score;
+  }
 }
 
 export default WinnerDecider;
