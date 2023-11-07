@@ -3,6 +3,7 @@ import UserBonusNumber from "./domain/UserBonusNumber.js";
 import UserPayment from "./domain/UserPayment.js";
 import UserBaseNumbers from "./domain/UserBaseNumbers.js";
 import LottoEvaluator from "./domain/LottoEvaluator.js";
+import ReturnRate from "./domain/ReturnRate.js";
 import { runLotteryMachine } from "./domain/RunLotteryMachine.js";
 import { ask } from "./UI/inputView.js";
 import { print } from "./UI/outputView.js";
@@ -21,6 +22,7 @@ class App {
       await this.setLotto();
       const userTickets = this.createLotto();
       this.evaluateLotto(userTickets);
+      this.returnRate();
     } catch (error) {
       Console.print(error.message);
       return Promise.reject(error);
@@ -63,6 +65,15 @@ class App {
     this.lottoEvaluator = new LottoEvaluator(this.base.getBaseNumbers(), this.bonus.getBonusNumber());
     const results = this.lottoEvaluator.evaluateTickets(userTickets);
     print.prizeResults(results);
+  }
+
+  returnRate() {
+    const totalPrize = this.lottoEvaluator.calculatePrize();
+    const totalPayment = this.payment.getUserPayment();
+
+    const returnRateCalculator = new ReturnRate(totalPrize, totalPayment);
+    const returnRateString = returnRateCalculator.getReturnRateString();
+    print.returnRate(returnRateString);
   }
 }
 
