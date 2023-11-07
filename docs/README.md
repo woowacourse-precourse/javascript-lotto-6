@@ -74,6 +74,16 @@
   - 소수점 둘째 자리에서 반올림
 - [x] 게임 종료
 
-### 4️⃣ 테스트 코드
+### 4️⃣ 리팩토링
+
+- [ ] 클래스 분리
+  - [ ] `WinningNums`, `BonusNumber`, `PublishedLotto` 클래스로 각각 분리
+  - `PublishedLotto` : 입력한 금액에 따라 출력된 로또들 관리
+  - `WinningNums` : 당첨 번호 관리
+  - `BonusNumber` : 보너스 번호 관리
+- [ ] 함수 이동 및 분리
+- [ ] else 지양하도록 고민
+
+### 5️⃣ 테스트 코드
 
 <추후 추가 예정>
