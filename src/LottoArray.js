@@ -33,6 +33,10 @@ class LottoArray {
 
   calculateWinnings(rank) {
     const totalWinnings = rank.findTotalWinnings();
+    const winningsRate =
+      (totalWinnings / (this.#lottoArray.length * LOTTO.PRICE)) * 100;
+
+    return winningsRate;
   }
 }
 

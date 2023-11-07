@@ -79,6 +79,7 @@ class LottoGame {
 
   createWinningResult() {
     this.#lottoArray.checkWinning(this.#winningLotto, this.#ranks);
+    const winningsRate = this.#lottoArray.calculateWinnings(this.#ranks);
   }
 }
 
