@@ -9,4 +9,5 @@ export function lottoprint(buyinput) {
       `[${randomarray[i][0]}, ${randomarray[i][1]}, ${randomarray[i][2]}, ${randomarray[i][3]}, ${randomarray[i][4]}, ${randomarray[i][5]}]`,
     );
   }
+  return randomarray;
 }
