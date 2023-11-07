@@ -152,7 +152,7 @@ flowchart TD
 
         [ERROR] 입력이 잘못된 형식입니다.
 
-### 🟢 4-1. 당첨 내역 및 수익율 계산
+### 🔵 4-1. 당첨 내역 및 수익율 계산
 
 - ✏️ 기능 설명
 
@@ -230,7 +230,7 @@ flowchart TD
 <td>11월 7일 (화)</td>
 <td>코드 점검 및 리팩토링</td>
 <td>3 Hours</td>
-<td style="text-align: center">🔴</td>
+<td style="text-align: center">🟡</td>
 <td>-</td>
 </tr>
 <tr>
