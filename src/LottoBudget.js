@@ -11,7 +11,7 @@ class LottoBudget {
         this.LOTTO_PRICE=LOTTO_PRICE;
     }
 
-    isValid(lottoBudget){
+    #isValid(lottoBudget){
         if(lottoBudget < this.MIN_LOTTO_NUM*this.LOTTO_PRICE || lottoBudget > this.MAX_LOTTO_NUM*this.LOTTO_PRICE){
             throw new Error(this.ERROR_MESSEGE);
         }
@@ -26,7 +26,7 @@ class LottoBudget {
 
     async getInput() {
         this.lottoBudget = parseInt(await Console.readLineAsync(this.GET_LOTTO_BUDGET_INPUT));
-        this.isValid(this.lottoBudget);
+        this.#isValid(this.lottoBudget);
     }
 
 }
