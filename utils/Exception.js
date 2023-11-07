@@ -2,6 +2,7 @@ import ErrorMessage from '../constants/ErrorMessage.js';
 
 class Exception {
   static isNumber(input) {
+    // eslint-disable-next-line no-restricted-globals
     if (isNaN(input)) {
       throw new Error(ErrorMessage.INVALID_INPUT);
     }

@@ -1,51 +1,55 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import TotalPrice from '../model/TotalPrice.js';
+import Constants from '../constants/LottoConstants.js';
 
 class LottoController {
   constructor() {
     // view
     this.input = new InputView();
-    // this.output = new OutputView();
 
     // model
     this.totalPrice = new TotalPrice();
 
     this.lottoArr = [];
     this.winCountArr = [];
-    this.sameNumCountArr = [];
+    this.matchNumCountArr = [];
   }
 
   checkWin(price, win, bonus, arr) {
-    for (let i = 0; i < price / 1000; i += 1) {
+    const lottoCount = price / Constants.PRICE_PER_LOTTO;
+    for (let i = 0; i < lottoCount; i += 1) {
       const lotto = arr[i].getLottoNumbers();
-      const sameNumArr = lotto.filter((num) => win.includes(num));
-      if (sameNumArr.length === 5) {
+      const matchNumArr = lotto.filter((num) => win.includes(num));
+      if (matchNumArr.length === Constants.MATCH_FOR_BONUS) {
         this.checkIsBonus(lotto, bonus);
       } else {
-        this.sameNumCountArr.push(sameNumArr.length);
+        this.matchNumCountArr.push(matchNumArr.length);
       }
     }
   }
 
   checkIsBonus(arr, bonus) {
     if (arr.includes(bonus)) {
-      this.sameNumCountArr.push(7);
+      this.matchNumCountArr.push(Constants.BONUS_MATCH);
     } else {
-      this.sameNumCountArr.push(5);
+      this.matchNumCountArr.push(Constants.STANDARD_MATCH);
     }
   }
 
   getWinCountArr(arr) {
-    for (let i = 3; i <= 7; i += 1) {
-      const count = this.sameNumCountArr.reduce(
+    for (let i = Constants.MINIMUM_MATCH; i <= Constants.BONUS_MATCH; i += 1) {
+      const count = this.matchNumCountArr.reduce(
         (cnt, element) => cnt + (element === i),
         0,
       );
       arr.push(count);
     }
     // eslint-disable-next-line no-param-reassign
-    [arr[3], arr[4]] = [arr[4], arr[3]];
+    [arr[Constants.POSITION_SIX_MATCH], arr[Constants.POSITION_BONUS_MATCH]] = [
+      arr[Constants.POSITION_BONUS_MATCH],
+      arr[Constants.POSITION_SIX_MATCH],
+    ];
   }
 
   async startLottery() {

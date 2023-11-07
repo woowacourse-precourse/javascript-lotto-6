@@ -10,12 +10,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Exception.isValidDigit(numbers);
-    Exception.isDuplicate(numbers);
-    Exception.isAscending(numbers);
-    numbers.map((num) => {
-      Exception.isValidRange(num);
-    });
+    this.#numbers = numbers;
+    Exception.isValidDigit(this.#numbers);
+    Exception.isDuplicate(this.#numbers);
+    Exception.isAscending(this.#numbers);
+    this.#numbers.map((num) => Exception.isValidRange(num));
   }
 
   getLottoNumbers() {

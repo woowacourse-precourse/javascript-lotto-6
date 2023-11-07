@@ -62,7 +62,7 @@ describe('LottoController 로직 테스트', () => {
     }
 
     // then
-    expect(controller.sameNumCountArr).toEqual([5, 7, 5]);
+    expect(controller.matchNumCountArr).toEqual([5, 7, 5]);
   });
 
   test('checkWin() - 당첨 번호와 로또 번호 비교 후 일치하는 번호의 갯수를 배열에 저장한다.', () => {
@@ -89,7 +89,7 @@ describe('LottoController 로직 테스트', () => {
     controller.checkWin(price, win, bonus, arr);
 
     // then
-    expect(controller.sameNumCountArr).toEqual([1, 2, 3, 4, 5, 7, 6]);
+    expect(controller.matchNumCountArr).toEqual([1, 2, 3, 4, 5, 7, 6]);
   });
 
   test('getWinCountArr() - n개가 일치하는 로또가 몇 개 있는지 배열에 저장한다.(n = 3, 4, 5, 6, 7(5+보너스))', () => {
@@ -98,7 +98,7 @@ describe('LottoController 로직 테스트', () => {
 
     // when
     const controller = new LottoController();
-    controller.sameNumCountArr = [1, 3, 2, 5, 7, 6, 5, 7];
+    controller.matchNumCountArr = [1, 3, 2, 5, 7, 6, 5, 7];
     controller.getWinCountArr(arr);
 
     // then

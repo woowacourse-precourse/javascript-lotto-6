@@ -10,7 +10,7 @@ class Validator {
   static validateWinNum(win) {
     Exception.isValidDigit(win);
     Exception.isDuplicate(win);
-    win.map((num) => {
+    win.forEach((num) => {
       Exception.isValidRange(num);
       Exception.isNumber(num);
     });
