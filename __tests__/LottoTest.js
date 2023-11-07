@@ -15,7 +15,6 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  // 아래에 추가 테스트 작성 가능
   describe('로또 번호 생성 테스트', () => {
     test('생성한 로또 번호 중복 테스트', () => {
       for (let i = 0; i < 50; i++) {
@@ -38,5 +37,18 @@ describe('로또 클래스 테스트', () => {
   test.each(['1000', '2000', '3000'])('금액에 따른 로또 발행 테스트', (input) => {
     const lottos = Lotto.createLottos(input);
     expect(lottos.length).toBe(input / LOTTO.PRICE);
+  });
+
+  test.each([
+    [''],
+    ['1', '2', '3', '', '4', '5'],
+    ['1000', '2', '3', '4', '5', '6'],
+    ['-1,2,3,4,5,6'],
+    ['1,2,3,4,5,6,7'],
+    ['0', '1', '2', '3', '4', '5'],
+  ])('로또 번호 유효성 검사 테스트', (input) => {
+    expect(() => {
+      new Lotto(input);
+    }).toThrow('[ERROR]');
   });
 });
