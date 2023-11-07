@@ -3,14 +3,14 @@ import OutputView from '../view/OutputView.js';
 import PurchasedLotto from '../model/PurchasedLotto.js';
 
 export default class PurchaseController {
-  lottos = [];
-  quantity = 0;
+  #purchasedLottos = [];
+  #quantity = 0;
   outputView = new OutputView();
 
   issueLottos(quantity) {
-    this.quantity = quantity;
+    this.#quantity = quantity;
     for (let i = 0; i < quantity; i++) {
-      this.lottos.push(new PurchasedLotto(this.issueOneLotto()));
+      this.#purchasedLottos.push(new PurchasedLotto(this.issueOneLotto()));
     }
     this.printPurchasedLottos();
   }
@@ -23,9 +23,13 @@ export default class PurchaseController {
   }
 
   printPurchasedLottos() {
-    this.outputView.printPurchased(this.quantity);
-    this.lottos.forEach((lotto) => {
+    this.outputView.printPurchased(this.#quantity);
+    this.#purchasedLottos.forEach((lotto) => {
       this.outputView.printMessage(`[${lotto.getNumbers()}]`);
     });
+  }
+
+  getPurchasedLottos() {
+    return this.#purchasedLottos;
   }
 }

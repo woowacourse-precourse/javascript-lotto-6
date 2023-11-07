@@ -27,6 +27,10 @@ class Lotto {
     const numberSet = new Set(array);
     return numberSet.size != arrayLength;
   }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

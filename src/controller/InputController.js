@@ -2,6 +2,7 @@ import Lotto from '../Lotto.js';
 import InputView from '../view/InputView.js';
 import PurchaseController from './PurchaseController.js';
 import ValidateController from './ValidateController.js';
+import WinController from './WinController.js';
 
 export default class InputController {
   inputView = new InputView();
@@ -10,9 +11,19 @@ export default class InputController {
   amount = 0;
   winningNumbers = [];
   bonusNumber = 0;
+  lotto = {};
 
   async inputStart() {
     await this.getAmount();
+    await this.getWinningNumbers();
+    await this.getBonusNumber();
+
+    this.winController = new WinController(
+      this.amount,
+      this.lotto.getNumbers(),
+      this.bonusNumber,
+      this.purchaseController.getPurchasedLottos()
+    );
   }
 
   async getAmount() {
@@ -25,7 +36,7 @@ export default class InputController {
   async getWinningNumbers() {
     const numberString = await this.inputView.readWinningNumbers();
     this.winningNumbers = numberString.split(',');
-    const lotto = new Lotto(this.winningNumbers);
+    this.lotto = new Lotto(this.winningNumbers);
   }
 
   async getBonusNumber() {
