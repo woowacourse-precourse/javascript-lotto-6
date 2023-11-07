@@ -11,3 +11,7 @@ export const print = (message) => {
 export const lottoRandomNumber = (min, max, length) => {
   return MissionUtils.Random.pickUniqueNumbersInRange(min, max, length);
 };
+
+export const lottoSort = (arr) => {
+  return arr.sort((a, b) => a - b);
+};

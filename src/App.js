@@ -1,6 +1,6 @@
 import Lotto from "./Lotto.js";
 import { LOTTO, MESSAGE } from "./common/constants.js";
-import { lottoRandomNumber, print } from "./common/utils.js";
+import { lottoRandomNumber, lottoSort, print } from "./common/utils.js";
 import { validatePurchaseInput } from "./common/validation.js";
 import { purchaseAmountInput } from "./view/inputView.js";
 

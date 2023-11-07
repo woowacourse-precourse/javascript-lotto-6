@@ -1,4 +1,4 @@
-import { print } from "./common/utils.js";
+import { lottoSort, print } from "./common/utils.js";
 
 class Lotto {
   #numbers;
@@ -17,6 +17,7 @@ class Lotto {
   // TODO: 추가 기능 구현
 
   printLottos = () => {
+    lottoSort(this.#numbers);
     print(`[${this.#numbers.join(", ")}]`);
   };
 }
