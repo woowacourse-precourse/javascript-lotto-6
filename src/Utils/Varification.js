@@ -1,5 +1,3 @@
-import { LOTTO_CONSTANTS } from '../Constants/LottoContstants.js';
-
 const Varificator = {
 	isNotNumber(value) {
 		return Number.isNaN(value);
@@ -17,12 +15,12 @@ const Varificator = {
 		return this.isNotNumber(value) || this.isDecimal(value) || this.isNotPlus(value);
 	},
 
-	isNotDividableWithStandardCost(string) {
-		return Number(string) % LOTTO_CONSTANTS.standartLottoCost !== 0;
+	isNotDividableWithStandardCost(string, standardCost) {
+		return Number(string) % standardCost !== 0;
 	},
 
-	isNotFitWithLottoLength(numbers) {
-		return numbers.length !== LOTTO_CONSTANTS.lottoNumberCount;
+	isNotFitWithLottoLength(numbers, lottoCount) {
+		return numbers.length !== lottoCount;
 	},
 
 	isDuplicatedNumber(numbers) {
@@ -33,6 +31,10 @@ const Varificator = {
 
 	isNotNumberInRange(number, maxRange, minRange) {
 		return number > maxRange || number < minRange;
+	},
+
+	isNumberInArray(numbers, targetNumber) {
+		return numbers.includes(targetNumber);
 	},
 };
 
