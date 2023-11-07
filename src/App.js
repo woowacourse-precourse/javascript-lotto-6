@@ -30,6 +30,15 @@ class App {
     }
     return parseInt(amount, 10);
   }
-
+  // TODO: 구매한 로또 목록 생성
+  #purchaseLottos(amount) {
+    const lottoCount = amount / 1000;
+    const lottos = [];
+    for (let i = 0; i < lottoCount; i++) {
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      lottos.push(new Lotto(numbers));
+    }
+    return lottos;
+  }
 }
 export default App;
