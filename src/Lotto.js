@@ -1,23 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import { ErrorMessage } from './ErrorMessage.js';
-const LOTTO_PRICE = 1000;
-const LOTTO_NUMBER_COUNT = 6;
-const DECICMAL_NUMBER = 10;
-const LOTTO_NUMBER_START = 1;
-const LOTTO_NUMBER_LAST = 45;
-const winningRules = [
-	{ match: 3, prize: '5,000원', prizeNumber: 5000 },
-	{ match: 4, prize: '50,000원', prizeNumber: 50000 },
-	{ match: 5, prize: '1,500,000원', prizeNumber: 1500000 },
-	{
-		match: 5,
-		bonus: true,
-		prize: '30,000,000원',
-		bonusText: ', 보너스 볼 일치',
-		prizeNumber: 30000000,
-	},
-	{ match: 6, prize: '2,000,000,000원', prizeNumber: 2000000000 },
-];
+import { DECICMAL_NUMBER, WINNING_RULES, LOTTO } from './Constants.js';
 
 class Lotto {
 	#numbers;
@@ -31,7 +14,7 @@ class Lotto {
 	}
 
 	#lottoCount() {
-		return this.#convertPrivateNumbersToNumber() / LOTTO_PRICE;
+		return this.#convertPrivateNumbersToNumber() / LOTTO.PRICE;
 	}
 
 	validateLottoAmount() {
@@ -42,7 +25,7 @@ class Lotto {
 	}
 
 	validateLottoWinningNumbers() {
-		if (this.#numbers.split(',').length !== LOTTO_NUMBER_COUNT) {
+		if (this.#numbers.split(',').length !== LOTTO.NUMBER_COUNT) {
 			throw new Error(ErrorMessage.invalidLottoNumberSeparator);
 		}
 		const winningNumbersArray = this.#parseWinningNumbers();
@@ -59,15 +42,15 @@ class Lotto {
 	}
 
 	#validateWinningNumberCount(winningNumbersArray) {
-		if (winningNumbersArray.length !== LOTTO_NUMBER_COUNT) {
+		if (winningNumbersArray.length !== LOTTO.NUMBER_COUNT) {
 			throw new Error(ErrorMessage.invalidLottoWinningNumberCount());
 		}
 	}
 
 	#validateWinningNumberRange(winningNumbersArray) {
 		if (
-			winningNumbersArray[0] < LOTTO_NUMBER_START ||
-			winningNumbersArray.at(-1) > LOTTO_NUMBER_LAST
+			winningNumbersArray[0] < LOTTO.NUMBER_START ||
+			winningNumbersArray.at(-1) > LOTTO.NUMBER_LAST
 		) {
 			throw new Error(ErrorMessage.invalidLottoWinningNumberRange());
 		}
@@ -94,9 +77,9 @@ class Lotto {
 
 	generateLottoTicket() {
 		const lottoTicket = Random.pickUniqueNumbersInRange(
-			LOTTO_NUMBER_START,
-			LOTTO_NUMBER_LAST,
-			LOTTO_NUMBER_COUNT
+			LOTTO.NUMBER_START,
+			LOTTO.NUMBER_LAST,
+			LOTTO.NUMBER_COUNT
 		);
 		return lottoTicket.sort((a, b) => a - b);
 	}
@@ -130,7 +113,7 @@ class Lotto {
 		let totalPrizeMoney = 0;
 		this.#numbers.forEach((matchingNumber, idx) => {
 			const hasBonus = matchingBonusNumberArray[idx] === 1;
-			const rule = winningRules.findLast(
+			const rule = WINNING_RULES.findLast(
 				(rule) => rule.match === matchingNumber && (!rule.bonus || hasBonus)
 			);
 			if (rule) {

@@ -1,20 +1,7 @@
 import { View } from './LottoView.js';
 import Lotto from './Lotto.js';
 import { Console, Random } from '@woowacourse/mission-utils';
-const DECICMAL_NUMBER = 10;
-const winningRules = [
-	{ match: 3, prize: '5,000원', prizeNumber: 5000 },
-	{ match: 4, prize: '50,000원', prizeNumber: 50000 },
-	{ match: 5, prize: '1,500,000원', prizeNumber: 1500000 },
-	{
-		match: 5,
-		bonus: true,
-		prize: '30,000,000원',
-		bonusText: ', 보너스 볼 일치',
-		prizeNumber: 30000000,
-	},
-	{ match: 6, prize: '2,000,000,000원', prizeNumber: 2000000000 },
-];
+import { DECICMAL_NUMBER, WINNING_RULES } from './Constants.js';
 
 class App {
 	constructor() {
@@ -132,26 +119,24 @@ class App {
 	}
 
 	getWinningStatistics(matchingNumbersArray, matchingBonusNumberArray) {
-		return winningRules
-			.map((rule) => {
-				let count = matchingNumbersArray.reduce((acc, cur, i) => {
-					if (rule.bonus) {
-						return (
-							acc +
-							(cur === rule.match && matchingBonusNumberArray[i] === 1 ? 1 : 0)
-						);
-					} else {
-						return (
-							acc +
-							(cur === rule.match && matchingBonusNumberArray[i] === 0 ? 1 : 0)
-						);
-					}
-				}, 0);
-				return `${rule.match}개 일치${rule.bonusText || ''} (${
-					rule.prize
-				}) - ${count}개`;
-			})
-			.join('\n');
+		return WINNING_RULES.map((rule) => {
+			let count = matchingNumbersArray.reduce((acc, cur, i) => {
+				if (rule.bonus) {
+					return (
+						acc +
+						(cur === rule.match && matchingBonusNumberArray[i] === 1 ? 1 : 0)
+					);
+				} else {
+					return (
+						acc +
+						(cur === rule.match && matchingBonusNumberArray[i] === 0 ? 1 : 0)
+					);
+				}
+			}, 0);
+			return `${rule.match}개 일치${rule.bonusText || ''} (${
+				rule.prize
+			}) - ${count}개`;
+		}).join('\n');
 	}
 }
 
