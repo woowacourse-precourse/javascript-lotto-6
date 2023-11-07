@@ -36,6 +36,58 @@ class Game {
       this.tickets.push(ticket);
     }
   }
+
+  draw({ winningNumbers, bonusNumber }) {
+    this.tickets.forEach((ticket) => {
+      const result = ticket.getWinningInfo(winningNumbers, bonusNumber); // {count, bonus}
+
+      if (result.matchCount >= 3) {
+        this.recordResult(result);
+      }
+    });
+  }
+
+  recordResult(drawResult) {
+    const rank = this.getRank(drawResult);
+    this.drawInfo[rank].count += 1;
+  }
+
+  printTickets() {
+    Console.print(MESSAGES.OUTPUT_BUY_TICKETS(this.amount / 1000));
+    this.tickets.forEach((ticket) => Console.print(ticket.info));
+  }
+
+  getRank(drawResult) {
+    const { matchCount, isBonusMatched } = drawResult;
+
+    switch (matchCount) {
+      case 6:
+        return RANK._1st;
+
+      case 5:
+        if (isBonusMatched) {
+          return RANK._2nd;
+        }
+
+        return RANK._3rd;
+
+      case 4:
+        return RANK._4th;
+
+      case 3:
+        return RANK._5th;
+    }
+  }
+
+  getReturn() {
+    let totalReturn = 0;
+
+    for (const { count, reward } of Object.values(this.drawInfo)) {
+      totalReturn += Number(count * reward);
+    }
+
+    return totalReturn;
+  }
 }
 
 export default Game;
