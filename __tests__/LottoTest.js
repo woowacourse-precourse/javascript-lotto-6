@@ -25,3 +25,28 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR] 로또 번호는 숫자여야 합니다.");
   })
 });
+
+describe("로또 클래스 입력값 테스트", () => {
+  test("구입 금액이 1000원 단위가 아니면 예외가 발생한다.", () => {
+    const invalidAmount = "1500";
+    expect(() => {
+      Lotto.validatePurchaseAmount(invalidAmount);
+    }).toThrow("[ERROR] 로또 구입 금액은 1,000원 단위로 입력해야 합니다.");
+  });
+
+  test("보너스 번호가 1부터 45 사이의 숫자가 아니면 예외가 발생한다.", () => {
+    const invalidBonusNumber = "46";
+    const winningNumbers = [3, 15, 22, 28, 33, 42];
+    expect(() => {
+      Lotto.validateBonusNumber(invalidBonusNumber, winningNumbers);
+    }).toThrow("[ERROR] 보너스번호는 1에서 45 사이의 숫자여야 합니다.");
+  });
+
+  test("보너스 번호가 당첨 번호와 중복되면 예외가 발생한다.", () => {
+    const bonusNumber = "3";
+    const winningNumbers = [3, 15, 22, 28, 33, 42];
+    expect(() => {
+      Lotto.validateBonusNumber(bonusNumber, winningNumbers);
+    }).toThrow("[ERROR] 보너스번호는 당첨 번호와 달라야 합니다.");
+  });
+});
