@@ -1,5 +1,47 @@
 # 미션 - 로또
 
+## 구현 기능
+
+- 구입 금액 입력
+- 로또 수량대로 랜덤 번호 오름차순 출력
+- 당첨 번호 입력
+- 보너스 번호 입력
+- 당첨 통계, 수익률 출력
+
+## MVC 패턴
+
+**Model**
+
+- `Lotto`: 당첨 번호
+- `Bonus`: 보너스 번호
+- `Buy`: 구매 금액, 랜덤 번호
+- `Result`: 결과 출력
+
+**View**
+
+- 입력 메시지
+
+  - `inputAmount`: 구입 금액 메시지 출력 및 입력
+  - `inputLottoNumbers`: 당첨 번호 메시지 출력 및 입력
+  - `inputBonusNumber`: 보너스 번호 메시지 출력 및 입력
+
+- 출력 메시지
+
+  - `printCountMessage`: 구입 개수 출력
+  - `printRandomNumbers`: 로또 수량대로 랜덤 번호 출력
+  - `printLotteryStatistics`: 당첨 통계 출력
+  - `printProfitMargin`: 수익률 출력
+
+**Controller**
+
+- `getPurchaseAmount`: 올바른 구입 금액 입력 시까지 입력 받는 함수
+- `handlePurchaseAmount`: 구입 금액 입력 후처리 함수
+  - 구입 개수 계산
+  - 구입 개수만큼 랜덤 로또 번호 생성
+- `getLottoNumbers`: 올바른 로또 번호 입력 시까지 입력 받는 함수
+- `getBonusNumber`: 올바른 보너스 번호 입력 시까지 입력 받는 함수
+- `countMatchingNumbers`: 랜덤 번호와 로또 번호의 숫자 몇 개가 일치하는지 계산하는 함수
+
 ## 🔍 진행 방식
 
 - 미션은 **기능 요구 사항, 프로그래밍 요구 사항, 과제 진행 요구 사항** 세 가지로 구성되어 있다.
