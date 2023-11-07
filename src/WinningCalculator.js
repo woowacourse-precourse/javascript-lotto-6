@@ -24,6 +24,11 @@ const WINNING_PRIZE = new Map([
   [1, 2000000000],
 ]);
 
+const NUMBER_NAME = {
+  winning: '당첨',
+  bonus: '보너스',
+};
+
 const PRINT_STRING = {
   resultHeader: '당첨 통계\n---',
   prizeUnit: '원',
@@ -42,8 +47,8 @@ class WinningCalculator {
   }
 
   #analyzeWinner() {
-    const winningNumbers = this.#totalWinningNumbers.get('당첨 번호');
-    const bonusNumber = this.#totalWinningNumbers.get('보너스 번호');
+    const winningNumbers = this.#totalWinningNumbers.get(NUMBER_NAME.winning);
+    const bonusNumber = this.#totalWinningNumbers.get(NUMBER_NAME.bonus);
 
     this.#issuedLottoNumbers.forEach((lotto) => {
       const matchCount = this.calculateMatchNumbers(winningNumbers, lotto);
@@ -73,7 +78,10 @@ class WinningCalculator {
   #compileBonusWinner(matchCount, isWinningBonus) {
     if (matchCount === 5 && isWinningBonus === true) {
       this.winnerList.set(matchCount, this.winnerList.get(matchCount) - 1);
-      this.winnerList.set('보너스', 1 + (this.winnerList.get('보너스') ?? 0));
+      this.winnerList.set(
+        NUMBER_NAME.bonus,
+        1 + (this.winnerList.get(NUMBER_NAME.bonus) ?? 0),
+      );
     }
   }
 
