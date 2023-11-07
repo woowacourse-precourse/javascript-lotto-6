@@ -37,14 +37,21 @@ class MyLotto {
     const matchingResult = [];
 
     this.#lottoNumbersList.forEach(numbers => {
-      const count = numbers
-        .getLottoNumbers()
-        .filter(num => winningNumbers.getLottoNumbers().includes(num)).length;
-      const bonus = numbers.getLottoNumbers().includes(bonusNumber);
+      const lottoNumbers = numbers.getLottoNumbers();
+      const count = this.#findMatchingCount(winningNumbers, lottoNumbers);
+      const bonus = this.#findMatchingBonus(bonusNumber, lottoNumbers);
       matchingResult.push({ count, bonus });
     });
 
     return matchingResult;
+  }
+
+  #findMatchingCount(winningNumbers, numbers) {
+    return numbers.filter(num => winningNumbers.getLottoNumbers().includes(num)).length;
+  }
+
+  #findMatchingBonus(bonusNumber, numbers) {
+    return numbers.getLottoNumbers().includes(bonusNumber);
   }
 
   getPurchaseAmount() {
