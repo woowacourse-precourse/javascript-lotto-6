@@ -1,8 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-
-// TODO 상수 별도 분리
-const LOTTO_PRICE = 1000;
+import { LOTTO_CONFIG } from "../constants.js";
 
 class LottoShop {
   #generateLotto() {
@@ -13,12 +11,12 @@ class LottoShop {
   sellLottos(user, count) {
     for (let i = 0; i < count; i++) {
       const lotto = this.#generateLotto();
-      user.buyLotto(lotto, LOTTO_PRICE);
+      user.buyLotto(lotto, LOTTO_CONFIG.price);
     }
   }
 
   getLottoPrice() {
-    return LOTTO_PRICE;
+    return LOTTO_CONFIG.price;
   }
 }
 

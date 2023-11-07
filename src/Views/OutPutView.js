@@ -1,30 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { formatMoney } from "../utils/NumberFormat.js";
-
+import { LOTTO_PRIZE } from "../constants.js";
 // TODO 상수 분리
-
-const LOTTO_AWARD = {
-  1: {
-    money: 2000000000,
-    message: "6개 일치",
-  },
-  2: {
-    money: 30000000,
-    message: "5개 일치, 보너스 볼 일치",
-  },
-  3: {
-    money: 1500000,
-    message: "5개 일치",
-  },
-  4: {
-    money: 50000,
-    message: "4개 일치",
-  },
-  5: {
-    money: 5000,
-    message: "3개 일치",
-  },
-};
 
 class OutPutView {
   printBuyLottoCount(count) {
@@ -47,7 +24,7 @@ class OutPutView {
   }
 
   printLottoResults(lottoWinningCounts) {
-    Object.keys(LOTTO_AWARD)
+    Object.keys(LOTTO_PRIZE)
       .map(Number)
       .sort((a, b) => b - a)
       .forEach((rank) => {
@@ -55,8 +32,8 @@ class OutPutView {
         const count = lottoWinningCounts[rankIndex];
 
         Console.print(
-          `${LOTTO_AWARD[rank].message} (${formatMoney(
-            LOTTO_AWARD[rank].money
+          `${LOTTO_PRIZE[rank].message} (${formatMoney(
+            LOTTO_PRIZE[rank].money
           )}원) - ${count}개`
         );
       });
