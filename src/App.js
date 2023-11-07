@@ -1,9 +1,15 @@
 import { inputAmount } from "./input/InputAmount.js";
-import { MissionUtils } from "@woowacourse/mission-utils";import { validAmount } from "./vaildator/VaildAmount.js";
+import { MissionUtils } from "@woowacourse/mission-utils";
+import { isValidAmount } from "./utils/vaildator.js";
+import { printLottoNum } from "./view/LottoNum.js";
+
 class App {
   async play() {
     const amount = await inputAmount();
-    validAmount(amount)
+    isValidAmount(amount);
+
+    const count = printLottoNum(amount);
+
   }
 }
 
