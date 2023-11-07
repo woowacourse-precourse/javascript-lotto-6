@@ -55,9 +55,9 @@ export default class LottoController {
 
   #checkUserLottoNumber(userInputNumber) {
     try {
-      let userLottoNumber = userInputNumber.split(SPLITWORD).map(number => number);
+      let userLottoNumber = userInputNumber.split(SPLITWORD);
       new Lotto(userLottoNumber);
-      this.#userLotto = userLottoNumber;
+      this.#userLotto = userLottoNumber.map(Number);
       return this.inputBonusNumber();
     } catch (error) {
       OutputView.printError(error);
