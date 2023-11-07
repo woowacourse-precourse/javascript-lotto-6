@@ -9,7 +9,6 @@ const InputManager = {
 
     Validator.validatePrice(price);
     Console.print(" ");
-    LottoPurchaser.lottoList(price);
     return price;
   },
 
@@ -20,6 +19,14 @@ const InputManager = {
     const numberList = winningNumber.split(",").map(Number);
 
     return numberList;
+  },
+
+  async getBonusNumbers() {
+    const bonusNumber = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요.\n"
+    );
+
+    return bonusNumber;
   },
 };
 

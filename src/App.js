@@ -1,14 +1,19 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 import InputManager from "./InputManager.js";
-import Lotto from "./Lotto.js";
+import LottoPurchaser from "./LottoPurchaser.js";
 
 class App {
   async play() {
     const price = await InputManager.inputPrice();
-    const winningNumbers = await InputManager.getWinningNumbers();
+    const generatedLottoNumbers = LottoPurchaser.lottoList(price);
 
-    const lotto = new Lotto(winningNumbers);
+    for (const lottoTicket of generatedLottoNumbers) {
+      Console.print(lottoTicket);
+    }
+
+    const winningNumbers = await InputManager.getWinningNumbers();
+    const bonusNumber = await InputManager.getBonusNumbers();
   }
 }
 
