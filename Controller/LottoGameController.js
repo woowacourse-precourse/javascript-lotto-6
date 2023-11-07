@@ -32,10 +32,8 @@ class LottoGameController {
   }
 
   async makeWinningLotto() {
-    // input받기
     const winningLottoNumber = await this.#inputview.readWinningLottoNumber();
     const bonusNumber = await this.#inputview.readBonusNumber();
-    // const winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
   }
 
   async printGameResult() {
