@@ -1,11 +1,17 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE, INPUT_MESSAGE } from "../constants/message.js";
-import { PURCHASE_AMOUNT_VALIDATOR, LOTTO_NUMBERS_VALILDATOR, COMMON_NUMBER_VALIDATOR, BONUS_NUMBER_VALIDATOR } from "../utils/validation.js";
+import {
+  PURCHASE_AMOUNT_VALIDATOR,
+  LOTTO_NUMBERS_VALILDATOR,
+  COMMON_NUMBER_VALIDATOR,
+  BONUS_NUMBER_VALIDATOR,
+} from "../utils/validation.js";
+import { INPUT_MESSAGE } from "../constants/message.js";
 
 class InputView {
   async readLottoPurchaseAmount() {
     const lottoPurchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.lottoPurchaseAmount);
     this.#validatePurchaseAmount(lottoPurchaseAmount);
+
     return Number(lottoPurchaseAmount);
   }
 
@@ -16,7 +22,9 @@ class InputView {
       if (trimmedNumber !== "") numbers.push(Number(trimmedNumber));
       return numbers;
     }, []);
+
     this.#validateLottoNumbersInput(validatedLottoNumbers);
+
     return validatedLottoNumbers;
   }
 
@@ -24,6 +32,7 @@ class InputView {
     const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
     const validatedBonusNumber = bonusNumber.split(",").map(Number);
     this.#validateBonusNumberInput(validatedBonusNumber, lottoWinningNumbers);
+
     return validatedBonusNumber;
   }
 

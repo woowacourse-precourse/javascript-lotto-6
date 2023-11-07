@@ -19,7 +19,6 @@ class Lotto {
     });
   }
   // TODO: 추가 기능 구현
-
   #validateCommonNumber(numbers) {
     Object.values(COMMON_NUMBER_VALIDATOR).forEach((validator) => {
       validator(numbers);
@@ -33,14 +32,17 @@ class Lotto {
   matchNumbers({ lottoWinningNumbers, bonusNumber }) {
     const lottoWinningNumbersMatchCount = this.#calculateMatchCount(lottoWinningNumbers);
     const bonusNumberMatchCount = this.#calculateMatchCount(bonusNumber);
+
     return { lottoWinningNumbersMatchCount, bonusNumberMatchCount };
   }
 
   #calculateMatchCount(numbers) {
     let matchCount = 0;
+
     numbers.forEach((number) => {
       if (this.#numbers.includes(number)) matchCount++;
     });
+
     return matchCount;
   }
 }

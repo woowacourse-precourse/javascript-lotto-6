@@ -1,5 +1,5 @@
-import Lotto from "../Lotto.js";
 import { Random } from "@woowacourse/mission-utils";
+import Lotto from "../Lotto.js";
 import { LOTTO_WINNING_AMOUNT } from "../constants/lotto.js";
 
 class LottoStore {
@@ -20,14 +20,15 @@ class LottoStore {
   }
 
   #createRandomLottoNumbers(purchaseQuantity) {
-    const randomLottoNumbers = Array.from({ length: purchaseQuantity }, () => this.#pickRandomNumbers());
+    const randomLottoNumbers = Array.from({ length: purchaseQuantity }, () =>
+      this.#pickRandomNumbers()
+    );
 
     return randomLottoNumbers;
   }
 
   #pickRandomNumbers() {
-    const RandomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-    return RandomNumbers;
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   #createLottos(randomLottoNumbers) {
@@ -35,19 +36,22 @@ class LottoStore {
   }
 
   getLottoNumbers() {
-    const lottoNumbers = this.#lottos.map((lotto) => lotto.getNumbers());
-    return lottoNumbers;
+    return this.#lottos.map((lotto) => lotto.getNumbers());
   }
 
   getLottoMatchResult({ lottoWinningNumbers, bonusNumber }) {
     const matchCounts = this.#matchLottoNumbers({ lottoWinningNumbers, bonusNumber });
     this.#calculateMatchResult(matchCounts);
     this.#calculateReturnRate();
+
     return this.#LottoMatchResult;
   }
 
   #matchLottoNumbers({ lottoWinningNumbers, bonusNumber }) {
-    const matchCounts = this.#lottos.map((lotto) => lotto.matchNumbers({ lottoWinningNumbers, bonusNumber }));
+    const matchCounts = this.#lottos.map((lotto) =>
+      lotto.matchNumbers({ lottoWinningNumbers, bonusNumber })
+    );
+
     return matchCounts;
   }
 
@@ -60,8 +64,10 @@ class LottoStore {
   #compareMatchResult({ lottoWinningNumbersMatchCount, bonusNumberMatchCount }) {
     if (lottoWinningNumbersMatchCount === 3) this.#LottoMatchResult.fifthPlace++;
     if (lottoWinningNumbersMatchCount === 4) this.#LottoMatchResult.fourthPlace++;
-    if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 0) this.#LottoMatchResult.thirdPlace++;
-    if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 1) this.#LottoMatchResult.secondPlace++;
+    if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 0)
+      this.#LottoMatchResult.thirdPlace++;
+    if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 1)
+      this.#LottoMatchResult.secondPlace++;
     if (lottoWinningNumbersMatchCount === 6) this.#LottoMatchResult.firstPlace++;
   }
 
@@ -73,12 +79,11 @@ class LottoStore {
   }
 
   #calculateTotalWinningAmount() {
-    const totalWinningAmount = Object.keys(this.#LottoMatchResult)
+    return Object.keys(this.#LottoMatchResult)
       .filter((place) => place !== "returnRate")
       .reduce((acc, place) => {
         return acc + this.#LottoMatchResult[place] * LOTTO_WINNING_AMOUNT[place];
       }, 0);
-    return totalWinningAmount;
   }
 }
 

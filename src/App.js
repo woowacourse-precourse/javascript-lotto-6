@@ -19,21 +19,21 @@ class App {
       const lottoPurchaseAmount = await this.#getLottoPurchaseAmount();
       const lottoPurchaseQuantity = this.#changeAmountToQuantity(lottoPurchaseAmount);
       this.#setUpLottoStore(lottoPurchaseQuantity);
+
       this.#printPurchasedLottoNumbers();
     } catch (error) {
       this.#outputView.printError(error.message);
+
       await this.#purchaseLottos();
     }
   }
 
   async #getLottoPurchaseAmount() {
-    const lottoPurchaseAmount = await this.#inputView.readLottoPurchaseAmount();
-    return lottoPurchaseAmount;
+    return await this.#inputView.readLottoPurchaseAmount();
   }
 
   #changeAmountToQuantity(purchaseAmount) {
-    const purchaseQuantity = purchaseAmount / 1000;
-    return purchaseQuantity;
+    return purchaseAmount / 1000;
   }
 
   #setUpLottoStore(purchaseQuantity) {
@@ -46,33 +46,37 @@ class App {
   }
 
   #getPurchasedLottoNumbers() {
-    const purchasedLottoNumbers = this.#lottoStore.getLottoNumbers();
-    return purchasedLottoNumbers;
+    return this.#lottoStore.getLottoNumbers();
   }
 
   async #getLottoMatchResult() {
     const lottoWinningNumbers = await this.#getLottoWinningNumbers();
     const bonusNumber = await this.#getBonusNumber(lottoWinningNumbers);
-    const lottoMatchResult = this.#lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonusNumber });
+
+    const lottoMatchResult = this.#lottoStore.getLottoMatchResult({
+      lottoWinningNumbers,
+      bonusNumber,
+    });
+
     this.#outputView.printMatchResult(lottoMatchResult);
   }
 
   async #getLottoWinningNumbers() {
     try {
-      const lottoWinningNumbers = await this.#inputView.readLottoWinningNumbers();
-      return lottoWinningNumbers;
+      return await this.#inputView.readLottoWinningNumbers();
     } catch (error) {
       this.#outputView.printError(error.message);
+
       return await this.#getLottoWinningNumbers();
     }
   }
 
   async #getBonusNumber(lottoWinningNumbers) {
     try {
-      const bonusNumber = await this.#inputView.readBonusNumber(lottoWinningNumbers);
-      return bonusNumber;
+      return await this.#inputView.readBonusNumber(lottoWinningNumbers);
     } catch (error) {
       this.#outputView.printError(error.message);
+
       return await this.#getBonusNumber(lottoWinningNumbers);
     }
   }

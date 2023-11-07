@@ -2,13 +2,16 @@ import { Console } from "@woowacourse/mission-utils";
 import OutputView from "../../src/View/OutputView";
 
 Console.print = jest.fn();
+
 let outputView;
+
 describe("OutputView 객체 테스트", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     outputView = new OutputView();
   });
   test("printPurchaseResult 메서드가 존재해야 한다.", () => {
+    // then
     expect(typeof outputView.printPurchaseResult).toBe("function");
   });
 
@@ -19,15 +22,21 @@ describe("OutputView 객체 테스트", () => {
       [3, 5, 11, 16, 32, 38],
     ];
     const purchaseResultMessage = "\n2개를 구매했습니다.\n[8, 21, 23, 41, 42, 43]\n[3, 5, 11, 16, 32, 38]";
+    
+    // when
     outputView.printPurchaseResult(purchaseResult);
+
+    // then
     expect(Console.print).toBeCalledWith(purchaseResultMessage);
   });
 
   test("printMatchResult 메서드가 존재해야 한다.", () => {
+    // then
     expect(typeof outputView.printMatchResult).toBe("function");
   });
 
   test("printMatchResult 메서드를 호출하면 Console.print가 당첨 결과와 함께 호출되야 한다.", () => {
+    // given
     const matchResult = {
       fifthPlace: 0,
       fourthPlace: 1,
@@ -48,7 +57,10 @@ describe("OutputView 객체 테스트", () => {
       "총 수익률은 50751250%입니다.",
     ].join("\n");
 
+    // when
     outputView.printMatchResult(matchResult);
+
+    // then
     expect(Console.print).toBeCalledWith(matchResultMessage);
   });
 });

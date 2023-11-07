@@ -39,6 +39,7 @@ Lotto.mockImplementation(() => {
 });
 
 let lottoStore;
+
 describe("LottoStore 클래스 테스트", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -54,31 +55,45 @@ describe("LottoStore 클래스 테스트", () => {
     expect(Lotto).toBeCalledTimes(mockLottos.length);
   });
 
-  test("getLottoNumbers 메서드가 존재해야 한다.", () => {
-    expect(typeof lottoStore.getLottoNumbers).toBe("function");
+  describe("getLottoNumbers 메서드 테스트", () => {
+    test("getLottoNumbers 메서드가 존재해야 한다.", () => {
+      // then
+      expect(typeof lottoStore.getLottoNumbers).toBe("function");
+    });
+
+    test("getLottoNumbers 메서드가 구매한 로또들의 번호를 반환해야 한다.", () => {
+      // when
+      const lottoNumbers = lottoStore.getLottoNumbers();
+
+      //then
+      expect(lottoNumbers).toEqual(mockLottos);
+    });
   });
 
-  test("getLottoNumbers 메서드가 구매한 로또들의 번호를 반환해야 한다.", () => {
-    const lottoNumbers = lottoStore.getLottoNumbers();
-    expect(lottoNumbers).toEqual(mockLottos);
-  });
+  describe("getLottoMatchResult 메서드 테스트", () => {
+    test("getLottoMatchResult 메서드가 존재해야 한다.", () => {
+      // then
+      expect(typeof lottoStore.getLottoMatchResult).toBe("function");
+    });
 
-  test("getLottoMatchResult 메서드가 존재해야 한다.", () => {
-    expect(typeof lottoStore.getLottoMatchResult).toBe("function");
-  });
+    test("getLottoMatchResult 메서드를 호출하면 당첨 번호와 비교해여 생성된 matchResult를 반환해야 한다.", () => {
+      // given
+      const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+      const bonusNumber = [7];
+      const expectedMatchResult = {
+        fifthPlace: 0,
+        fourthPlace: 1,
+        thirdPlace: 0,
+        secondPlace: 1,
+        firstPlace: 1,
+        returnRate: 50751250,
+      };
 
-  test("getLottoMatchResult 메서드를 호출하면 당첨 번호와 비교해여 생성된 matchResult를 반환해야 한다.", () => {
-    const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
-    const bonusNumber = [7];
-    const expectedMatchResult = {
-      fifthPlace: 0,
-      fourthPlace: 1,
-      thirdPlace: 0,
-      secondPlace: 1,
-      firstPlace: 1,
-      returnRate: 50751250,
-    };
-    const matchResult = lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonusNumber });
-    expect(matchResult).toEqual(expectedMatchResult);
+      // when
+      const matchResult = lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonusNumber });
+
+      //then
+      expect(matchResult).toEqual(expectedMatchResult);
+    });
   });
 });
