@@ -4,16 +4,19 @@ import Util from './_shared/util.js';
 import Purchase from './Purchase.js';
 import Purchaser from './Purchaser.js';
 import Lotto from './Lotto.js';
+import Bonus from './Bonus.js';
 
 class App {
   #purchase;
   #purchaser;
   #lotto;
+  #bonus;
 
   async play() {
     await this.#requestPurchase();
     this.#respondPurchaseResult();
     await this.#requestWinningNumbers();
+    await this.#requestBonusNumber();
   }
 
   async #requestPurchase() {
@@ -50,6 +53,20 @@ class App {
     } catch (e) {
       Util.printConsole(`${e.message}`);
       await this.#requestWinningNumbers();
+    }
+  }
+
+  async #requestBonusNumber() {
+    try {
+      const value = await Util.readLineAsyncConsole(`${RequestMessage.BonusNumber}\n`);
+      const number = Number(value);
+      const winningNumbers = this.#lotto.numbers;
+
+      Util.printConsole('');
+      this.#bonus = new Bonus(winningNumbers, number);
+    } catch (e) {
+      Util.printConsole(`${e.message}`);
+      await this.#requestBonusNumber();
     }
   }
 }

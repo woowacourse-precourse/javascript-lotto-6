@@ -5,6 +5,7 @@ export const PurchaseRule = {
 export const LottoRule = {
   Price: 1000,
   Number: 6,
+  BonusNumber: 1,
   MinNumber: 1,
   MaxNumber: 45,
 };

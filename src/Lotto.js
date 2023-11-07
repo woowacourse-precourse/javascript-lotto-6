@@ -4,6 +4,10 @@ import { LottoRule } from './models/rule.js';
 class Lotto {
   #numbers;
 
+  get numbers() {
+    return this.#numbers;
+  }
+
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
