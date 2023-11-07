@@ -1,18 +1,21 @@
 import Bonus from './Bonus.js';
 import Lotto from './Lotto.js';
-import LottoGame from './LottoGame.js';
 import InputValidator from './utils/InputValidator.js';
 import AutoLottoGenerator from './utils/AutoLottoGenerator.js';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
-import { LOTTO_TICKET_PRICE } from './constants/conditions.js';
+import {
+  COUNT,
+  DEFAULT_NUM,
+  LOTTO_TICKET_PRICE,
+  MATCH_COUNTS,
+} from './constants/conditions.js';
+import WinningResult from './WinningResult.js';
 
 class App {
   #winningLotto;
 
   #bonus;
-
-  #lottoGame;
 
   async play() {
     const { purchaseLotto, purchaseAmount } = await this.#getPurchaseLotto();
@@ -20,12 +23,39 @@ class App {
 
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
-    const { matchingTable, rateOfReturn } = this.#getWinningResult(
-      purchaseLotto,
-      this.#winningLotto.getLotto(),
-      this.#bonus.getBonus(),
-    );
+    const matchCountList = this.#countMatchingNumbers(purchaseLotto);
+    const { matchingTable, rateOfReturn } =
+      this.#getWinningResult(matchCountList);
     OutputView.printLotteryResultsSummary(matchingTable, rateOfReturn);
+  }
+
+  #getWinningResult(matchCountList) {
+    const winningResult = new WinningResult(matchCountList);
+    return winningResult.getResult();
+  }
+
+  #countMatchingNumbers(purchaseLotto) {
+    const matchCountList = [];
+    purchaseLotto.reduce((acc, autoLotto) => {
+      let count = DEFAULT_NUM;
+      acc.forEach((winningNum) => {
+        if (autoLotto.includes(winningNum)) count += COUNT.plus;
+      });
+      this.#updateMatchCountList(matchCountList, count, autoLotto);
+      return acc;
+    }, this.#winningLotto.getLotto());
+    return matchCountList;
+  }
+
+  #updateMatchCountList(matchCountList, count, autoLotto) {
+    if (count === MATCH_COUNTS.five) {
+      matchCountList.push(
+        autoLotto.includes(this.#bonus.getBonus())
+          ? [count, true]
+          : [count, false],
+      );
+    }
+    matchCountList.push(count);
   }
 
   async #getPurchaseLotto() {
@@ -62,11 +92,6 @@ class App {
       OutputView.printError(error.message);
       return this.#generateBonus();
     }
-  }
-
-  #getWinningResult(purchaseLotto, winningLotto, bonus) {
-    this.#lottoGame = new LottoGame(purchaseLotto, winningLotto, bonus);
-    return this.#lottoGame.getWinningResult();
   }
 }
 
