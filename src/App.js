@@ -16,7 +16,6 @@ class App {
 
   async setGameConfig() {
     const { lottos, winningNumbers, bonusNumber } = await this.readGameConfig();
-
     this.game = new LottoGame(lottos, winningNumbers, bonusNumber);
   }
 
@@ -24,6 +23,7 @@ class App {
     const purchaseCount = await this.getPurchaseCount();
     this.#view.printPurchaseCount(purchaseCount);
     const lottos = this.getLottos(purchaseCount);
+    this.#view.printLottos(lottos);
     const winningNumbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
     return { lottos, winningNumbers, bonusNumber };
@@ -47,7 +47,6 @@ class App {
     for (let i = 0; i < purchaseCount; i += 1) {
       const randomLottoNumber = Lotto.getRandomLottoNumber();
       const lotto = new Lotto(randomLottoNumber);
-      this.#view.printLottoTicket(randomLottoNumber);
       lottos.push(lotto);
     }
     return lottos;

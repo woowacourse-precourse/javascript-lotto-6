@@ -34,9 +34,12 @@ export default class View {
     this.#outputView.print(MessageFormat.purchaseCount(purchaseCount));
   }
 
-  printLottoTicket(ticket) {
-    const stringTicket = MessageFormat.stringTicket(ticket);
-    this.#outputView.print(stringTicket);
+  printLottos(lottos) {
+    lottos.forEach((lotto) => {
+      const lottoNumbers = lotto.getLottoNumbers();
+      const stringLotto = MessageFormat.stringTicket(lottoNumbers);
+      this.#outputView.print(stringLotto);
+    });
   }
 
   printGameResult(result) {
