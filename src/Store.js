@@ -31,7 +31,7 @@ class Store {
         this.#money = await Store.inputMoney();
         isMoneyPaid = true;
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
       }
     }
   }
