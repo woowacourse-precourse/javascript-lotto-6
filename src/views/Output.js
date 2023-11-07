@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import { OUTPUT_MESSAGE } from '../constants/message/io.js';
+import { OUTPUT } from '../constants/message/io.js';
 
 class OutputView {
   static printErrorMessage(error) {
@@ -16,7 +16,7 @@ class OutputView {
   }
 
   static printStatisticsHeader() {
-    Console.print(OUTPUT_MESSAGE.statisticsMessage);
+    Console.print(OUTPUT.statisticsMessage);
   }
 
   static printStatistics(statistics) {
@@ -26,7 +26,7 @@ class OutputView {
       const { match, bonus, count, prize } = result;
       Console.print(
         `${match}개 일치${
-          bonus ? `, ${OUTPUT_MESSAGE.bonusMessage}` : ''
+          bonus ? `, ${OUTPUT.bonusMessage}` : ''
         } (${prize.toLocaleString()}원) - ${count}개`,
       );
     });
