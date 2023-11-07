@@ -1,5 +1,6 @@
 import Purchase from "./Purchase";
 import Lotto from "./Lotto";
+import Bonus from "./Bonus";
 
 class CreateModel {
   createPurchaseModel(amount) {
@@ -8,6 +9,10 @@ class CreateModel {
 
   createLottoModel(winngNumbers) {
     return new Lotto(winngNumbers);
+  }
+
+  createBonusModel(bonusNumber) {
+    return new Bonus(bonusNumber);
   }
 }
 

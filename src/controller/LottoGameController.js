@@ -13,7 +13,27 @@ class LottoGame {
   async lottoGamePlay() {
     const purchase = await this.getLottoPurchaseAmount();
     this.generateLottoTicket(purchase);
-    this.getLottoWinningNumbers();
+    await this.getLottoWinningNumbers();
+    await this.getLottoBonusNumber();
+  }
+
+  // 보너스 번호 입력 받기
+  async getLottoBonusNumber() {
+    const bonusNumber = await this.Input.readLottoBonusNumberInput();
+    this.Output.printResult(bonusNumber);
+    const bonusNumberArray = this.stringToNumberArray(bonusNumber);
+    return this.setLottoBonusNumber(bonusNumberArray);
+  }
+
+  // 보너스 번호 저장
+  setLottoBonusNumber(bonusNumber) {
+    try {
+      return this.CreateModel.createBonusModel(bonusNumber);
+    } catch ({ message }) {
+      this.Output.printResult(message);
+      // this.getLottoBonusNumber();
+      return null;
+    }
   }
 
   // 당첨 번호 입력 받기

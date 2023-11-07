@@ -11,9 +11,15 @@ class Input {
   }
 
   async readLottoWinningNumbersInput() {
-    Console.print(GAME_MESSAGES.WinningNumbers);
+    Console.print(GAME_MESSAGES.winningNumbers);
     const winngNumbers = await Console.readLineAsync();
     return winngNumbers;
+  }
+
+  async readLottoBonusNumberInput() {
+    Console.print(GAME_MESSAGES.bounsNumber);
+    const bonusNumber = await Console.readLineAsync();
+    return bonusNumber;
   }
 }
 
