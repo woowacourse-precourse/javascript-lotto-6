@@ -2,15 +2,17 @@ import InfoMsg from "./utils/InfoMsg.js";
 import BudgetValidator from "./utils/BudgetValidator.js";
 import Constant from "./utils/Constant.js";
 import View from "./View/View.js";
+import LottoNumGenerator from "./utils/LottoNumGenerator.js";
 
 class LottoController {
   #budget;
   #lottoCount;
+  #lottoTickets;
 
   constructor() {
     this.#budget = 0;
     this.#lottoCount = 0;
-    this.lottoNumArr = [];
+    this.#lottoTickets = [];
   }
 
   async askBudget() {
@@ -38,6 +40,17 @@ class LottoController {
 
   returnCount() {
     return this.#lottoCount;
+  }
+
+  createLottoTickets() {
+    for (let i = 0; i < this.#lottoCount; i += 1) {
+      const nums = LottoNumGenerator();
+      this.#lottoTickets.push(nums);
+    }
+  }
+
+  showLottoTickets() {
+    this.#lottoTickets.forEach((ticket) => View.output(ticket));
   }
 }
 
