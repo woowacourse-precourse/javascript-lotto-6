@@ -44,6 +44,10 @@ class App {
       let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       randomNums.sort((a, b) => a - b); // 오름차순 정렬
       
+      if (randomNums.length !== new Set(randomNums).size) {
+        throw new Error(ERROR_MESSAGE.INVALID_ERROR);
+      }
+
       let randomNumsString = String(randomNums);
       let printedString = '';
 
@@ -77,9 +81,9 @@ class App {
         }
 
         winningNumsList = winningNums.split(',').map(Number);
-
+        
         if (winningNumsList.length !== 6 || winningNumsList.length !== new Set(winningNumsList).size) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+          throw new Error(ERROR_MESSAGE.INVALID_ERROR)
         }
 
         for (let i = 0; i < winningNumsList.length; i++) {
@@ -98,7 +102,7 @@ class App {
     while (1) {
       try {
         const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
-        console.log(winningNumsList)
+
         if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
           throw new Error(ERROR_MESSAGE.INPUT_ERROR)
         }
