@@ -1,4 +1,4 @@
-import Game from './Model/Game.js';
+import Game from './Game.js';
 
 class App {
   async play() {
