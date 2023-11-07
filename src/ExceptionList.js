@@ -19,5 +19,10 @@ class ExceptionList {
       throw new Error('[ERROR] 복권은 천원단위로만 구매할 수 있습니다.');
     }
   };
+  LengthError = (input)=>{
+    if(input.length!==6){
+      throw new Error('[ERROR] 6개의 숫자를 입력해주세요.');
+    }
+  }
 }
 export default ExceptionList;
