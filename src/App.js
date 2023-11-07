@@ -6,6 +6,7 @@ import {
   PRINT_MESSAGE,
   REQUEST_MESSAGE,
   VALIDATION_ERRORS_MESSAGE,
+  WINNING_MONEY,
   regexNumber,
 } from './Constants.js';
 import Lotto from './Lotto.js';
@@ -23,6 +24,7 @@ class App {
       winningNumbers,
       bonusNumber,
     );
+    const winningProfit = this.calculateProfit(money, winningRank);
   }
 
   // 1. 로또 구입금액 입력받기
@@ -151,6 +153,24 @@ class App {
       lotto.includes(number),
     );
     return matchingNumbers.length;
+  }
+
+  // 7. 수익률 계산
+  calculateProfit(money, winningRank) {
+    const totalPrize = Object.entries(winningRank).reduce(
+      (currentTotal, [key, value]) => {
+        if (value > 0) {
+          const prize = WINNING_MONEY[key.toUpperCase()] * value;
+          return currentTotal + prize;
+        }
+        return currentTotal;
+      },
+      0,
+    );
+
+    const profit = (totalPrize / money) * 100;
+
+    return profit.toFixed(1);
   }
 }
 
