@@ -14,7 +14,7 @@ class User {
       throw new CustomError(ERROR_MESSAGE.NOT_DIVISIBLE_BY_LOTTO_PRICE);
     }
 
-    this.#lottos = DongHang.issue(money);
+    this.#lottos = DongHang.issue(money.value);
   }
 }
 
