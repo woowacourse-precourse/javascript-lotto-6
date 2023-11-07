@@ -67,6 +67,7 @@ class App {
       });
     } catch (e) {
       await this.outputManager.printBonusNumberInputErrorMessage(e.message);
+      await this.getBonusNumber();
     }
     return Number(this.bonusNumberInput);
   }
