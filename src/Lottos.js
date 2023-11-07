@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import CheckMoney from "./Validation/Purchase.js";
 import Lotto from './Lotto.js'
+import { WINNING_MESSAGE,PRIZEAMONUT } from './Const.js'
 
 export default class Lottos {
     constructor(money) {
@@ -47,4 +48,19 @@ export default class Lottos {
     
         return lottoRanks.filter((rank) => rank <= 5);
       }
+
+      printRank(lottoRanks) {
+        const RANK_NUMBER = [5,4,3,2,1]
+        let newLottoRanks = [];
+
+        RANK_NUMBER.forEach((e,index) => {
+            const count = lottoRanks.filter(i => i === e).length
+            const mesage = WINNING_MESSAGE[index]
+            newLottoRanks.push(`${mesage} - ${count}개`)
+        })
+
+        newLottoRanks.forEach((rank) => {
+            MissionUtils.Console.print(rank)
+        });
+    }
 }
