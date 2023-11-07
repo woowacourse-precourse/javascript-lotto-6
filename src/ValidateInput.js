@@ -31,12 +31,18 @@ export const Validator = {
   invalidLottoRange(input) {
     if (input.some(isOutRange)) throw ERROR_MESSAGE.RANGE_INVALID;
   },
+  invalidBonusNumber(input, winningNumber) {
+    if (input in winningNumber) throw ERROR_MESSAGE.BONUS_NUMBER_INVALID;
+  },
+  invalidNumberRange(input) {
+    if (isOutRange(input)) throw ERROR_MESSAGE.RANGE_INVALID;
+  },
 };
 
 export const validatePayment = (payment) => {
-  Validator.paymentInvalid(payment);
-  Validator.invalidNumberType(payment);
   Validator.blank(payment);
+  Validator.invalidNumberType(payment);
+  Validator.paymentInvalid(payment);
 };
 
 export const validateWinningNumber = (winningNumber) => {
@@ -44,4 +50,11 @@ export const validateWinningNumber = (winningNumber) => {
   Validator.invalidNumberCommaType(winningNumber);
   Validator.invalidLottoSize(winningNumber);
   Validator.duplication(winningNumber);
+};
+
+export const validateBonusNumber = (bonusNumber, winningNumber) => {
+  Validator.blank(bonusNumber);
+  Validator.invalidNumberType(bonusNumber);
+  Validator.invalidNumberRange(bonusNumber);
+  Validator.invalidBonusNumber(bonusNumber, winningNumber);
 };
