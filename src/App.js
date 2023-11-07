@@ -14,16 +14,15 @@ class App {
   }
 
   getPrice = async () => {
-    let price;
     let validPrice = 0;
-    do {
+    while(validPrice === 0) {
       try {
-        price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
+        let price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
         validPrice = validatePrice(price);
       } catch(error) {
-        throw new Error(error.message);
+        Console.print(error.message);
       }
-    } while(validPrice === 0);
+    }
     return validPrice;
   };
 

@@ -5,24 +5,37 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+    try {
+      this.#validate(numbers);
+      this.#numbers = numbers;
+    } catch(error) {
+      Console.print(error.message);
+    }
   }
 
   async start(validPrice, lottoNumSets) { 
-    let validNumbers = this.#validate(this.#numbers); 
-    while(validNumbers === null) {
-      let sixNum = await Console.readLineAsync("당첨 번호를 다시 입력해 주세요.\n");
-      validNumbers = this.#validate(sixNum);
-    }
-    let validBonusNum = await this.getBonusNum();
-
+    const validNumbers = await this.checkSixNum();
+    const validBonusNum = await this.getBonusNum(validNumbers);
     const printOutput = new PrintOutput();
     await printOutput.print(validNumbers, validBonusNum, lottoNumSets, validPrice);
-    // const winningArray = await printOutput.calculateWinningDetails(validNumbers, validBonusNum, lottoNumSets);
-    // await printOutput.printWinningDetails(winningArray);
-    // await printOutput.printTotalReturn(winningArray, validPrice);
   }
+
+  checkSixNum = async () => {
+    if(typeof this.#numbers === "string") {
+      const numbersToArray = this.#numbers.split(",").map(str => str.trim()).map(Number);
+      return numbersToArray;
+    }
+    let validNumbers = 0;
+    while(validNumbers === 0 && this.#numbers === undefined) {
+      try {
+        let sixNum = await Console.readLineAsync("당첨 번호를 다시 입력해 주세요.\n");
+        validNumbers = this.#validate(sixNum);
+        return validNumbers;
+      } catch(error) {
+        Console.print(error.message);
+      }
+    }
+  };
 
   hasDuplicates = (numbers) => {
     const uniqueNumbers = [...new Set(numbers)];
@@ -30,50 +43,48 @@ class Lotto {
   };
 
   #validate(numbers) {
-    numbers = numbers.split(",").map(str => str.trim()).map(Number);
-    if (!Array.isArray(numbers))
+    const numbersToArray = numbers.split(",").map(str => str.trim()).map(Number);
+    if (!Array.isArray(numbersToArray))
       throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
-    if (numbers.some(num => Number.isNaN(num)))
+    if (numbersToArray.some(num => Number.isNaN(num)))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-    if (numbers.length !== 6)
+    if (numbersToArray.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    if (this.hasDuplicates(numbers))
+    if (this.hasDuplicates(numbersToArray))
       throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
-    if (numbers.some(num => num <= 0 || num >= 46))
+    if (numbersToArray.some(num => num <= 0 || num >= 46))
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
-    if (numbers.some(num => num >= 1 && num <= 45 && Number.isInteger(num)) === false)
+    if (numbersToArray.some(num => num >= 1 && num <= 45 && !Number.isInteger(num)))
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
-    return numbers;
+    return numbersToArray;
   };
 
-  getBonusNum = async () => {
-    let bonusNum;
+  getBonusNum = async (sixNum) => {
     let validBonusNum = 0;
-    do {
+    while(validBonusNum === 0) {
       try {
-        bonusNum = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
-        validBonusNum = this.validateBonusNum(this.#numbers, bonusNum);
+        let bonusNum = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+        validBonusNum = this.validateBonusNum(sixNum, bonusNum);
       } catch(error) {
-        throw new Error(error.message);
+        Console.print(error.message);
       }
-    } while(validBonusNum === 0);
+    }
     return validBonusNum;
   };
 
   validateBonusNum(sixNum, bonusNum) {
     if (bonusNum.includes(","))
       throw new Error("[ERROR] 숫자는 1개만 입력해야 합니다.");
-    sixNum = sixNum.split(",").map(str => str.trim()).map(Number);
-    bonusNum = parseInt(bonusNum);
-    if (Number.isNaN(bonusNum))
+    const bonusNumToInt = parseFloat(bonusNum);
+    if (Number.isNaN(bonusNumToInt))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-    if (sixNum.includes(bonusNum))
+    if (sixNum.includes(bonusNumToInt))
       throw new Error("[ERROR] 6개의 당첨 번호 이외의 숫자를 입력해야 합니다.");
-    if (bonusNum <= 0 || bonusNum >= 46)
+    if (bonusNumToInt <= 0 || bonusNumToInt >= 46)
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
-    if (bonusNum >= 1 && bonusNum <= 45 && Number.isInteger(bonusNum) === false)
+    if (bonusNumToInt >= 1 && bonusNumToInt <= 45 && !Number.isInteger(bonusNumToInt))
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
-    return bonusNum;
+    return bonusNumToInt;
   };
 }
 

@@ -5,7 +5,6 @@ class PrintOutput {
   constructor() {
     this.lottoNumSets = [];
     this.newLottoNumSets = [];
-    // this.winningArray = [0, 0, 0, 0, 0];
   }
 
   async print(validNumbers, validBonusNum, lottoNumSets, validPrice) {
@@ -64,7 +63,7 @@ class PrintOutput {
     const priceLevel = [5000, 50000, 1500000, 30000000, 2000000000];
     const winningPrice = winningArray.reduce((total, count, index) => total + count * priceLevel[index], 0);
     const totalReturn = (winningPrice / purchasePrice) * 100;
-    const totalReturnNumber = parseFloat(totalReturn.toFixed(2));
+    const totalReturnNumber = parseFloat(totalReturn.toFixed(2)).toFixed(1);
     
     Console.print(`총 수익률은 ${totalReturnNumber}%입니다.`);
   };
