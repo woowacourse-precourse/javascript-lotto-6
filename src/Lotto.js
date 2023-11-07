@@ -1,3 +1,4 @@
+import isValidRange from "./utils/validateRange";
 class Lotto {
     #numbers;
 
@@ -10,8 +11,7 @@ class Lotto {
         if (numbers.length !== 6) {
             throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
         }
-        const invalidLottoNumberArr = numbers.filter((el) => el > 45 || el < 1);
-        if (invalidLottoNumberArr.length !== 0) {
+        if (!isValidRange(numbers)) {
             throw new Error("[ERROR] 로또 번호는 1~45의 숫자여야 합니다.");
         }
         const isLottoNumberUnique = numbers.every(
@@ -21,9 +21,11 @@ class Lotto {
             throw new Error("[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.");
         }
     }
+
     printLottoNumber() {
         return this.#numbers;
     }
+
 }
 
 export default Lotto;
