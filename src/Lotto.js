@@ -41,9 +41,10 @@ class Lotto {
   //당첨번호 입력조건(조건1,조건2,조건3,조건4) 정리
   async lottoplay() {
     try {
-      const lottoinput =
-        await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-      this.numbers = lottoinput.split(',');
+      const lottoinput = await Console.readLineAsync(
+        '\n당첨 번호를 입력해 주세요.\n',
+      );
+      this.numbers = lottoinput.split(',').map((x) => parseInt(x.trim()));
       this.validatefigure(this.numbers);
       this.validateint(this.numbers);
       this.validateduplication(this.numbers);
