@@ -25,6 +25,10 @@ class LottoGenerator {
   }
 
   #validateMoney(money) {
-    if (money % 1000 !== 0) throw new Error('[ERROR] 구입 금액이 1,000원 단위가 아닙니다.');
+    if (money % 1000 !== 0) {
+      throw new Error('[ERROR] 구입 금액이 1,000원 단위가 아닙니다.');
+    };
   }
 }
+
+export default LottoGenerator;
