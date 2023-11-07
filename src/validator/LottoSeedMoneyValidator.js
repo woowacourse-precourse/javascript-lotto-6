@@ -18,7 +18,7 @@ const checkValidCharacter = (input) => {
  * @throws {ValidationError}
  */
 const checkValidSeedMoney = (input) => {
-  if (input % LOTTO_PRICE > 0) {
+  if (input % LOTTO_PRICE > 0 || input === 0) {
     throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidSeedMoney);
   }
 };
