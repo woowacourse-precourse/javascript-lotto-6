@@ -27,7 +27,13 @@ class WinningResults {
     return new Map(reversedResultArray);
   }
 
-  getProfit() {
+  getProfitRate(amount) {
+    const profit = this.#getProfit();
+    const profitRate = (profit / amount) * 100;
+    return profitRate;
+  }
+
+  #getProfit() {
     let profit = 0;
     this.#resultMap.forEach((count, ranking) => {
       profit += PRIZE_MONEY_BY[ranking] * count;

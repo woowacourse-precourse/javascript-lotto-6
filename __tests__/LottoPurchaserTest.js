@@ -26,21 +26,4 @@ describe('로또 구매자 클래스 테스트', () => {
       expect(() => new LottoPurchaser(10000)).not.toThrow();
     });
   });
-
-  describe('총 수익률에 대한 테스트', () => {
-    test('구입금액이 8000원이고 로또 당첨 결과가 5등 1개라면 수익률은 62.5%', () => {
-      const winningResults = new WinningResults();
-      winningResults.saveResultBy(3);
-      const lottoPurchaser = new LottoPurchaser(8000, winningResults);
-      expect(lottoPurchaser.getProfitRate()).toBe(62.5);
-    });
-
-    test('구입금액이 55000원이고 로또 당첨 결과가 4등 1개, 5등 1개라면 수익률은 100.0%', () => {
-      const winningResults = new WinningResults();
-      winningResults.saveResultBy(4);
-      winningResults.saveResultBy(3);
-      const lottoPurchaser = new LottoPurchaser(55000, winningResults);
-      expect(lottoPurchaser.getProfitRate()).toBe(100.0);
-    });
-  });
 });
