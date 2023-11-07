@@ -41,10 +41,19 @@ describe("WinLottoTest", () => {
     expect(winLotto.compareNumbers()).toEqual([5]);
   });
 
+  test("5개의 번호와 보너스 번호가 일치하는 경우 ['5+1']을 반환한다", () => {
+    const winningNumbers = ["1", "2", "3", "4", "5", "25"];
+    const bonusNumber = "33";
+    const ticketNumbers = [["1", "2", "3", "4", "5", "33"]];
+
+    const winLotto = new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
+    expect(winLotto.compareNumbers()).toEqual(["5+1"]);
+  });
+
   test("5개의 번호가 일치하는 경우 [4]을 반환한다", () => {
     const winningNumbers = ["1", "2", "3", "4", "25", "26"];
     const bonusNumber = "35";
-    const ticketNumbers = [["1", "2", "3", "4", "5", "6"]];
+    const ticketNumbers = [["1", "2", "3", "4", "5", "35"]];
 
     const winLotto = new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
     expect(winLotto.compareNumbers()).toEqual([4]);
