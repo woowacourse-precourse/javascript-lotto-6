@@ -1,5 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { MESSAGE, UNIT, NEW_LINE, RANGE_START, RANGE_END, BALL_NUMBERS, SPLIT_SEPARATOR } from './constant/Constant.js';
+import { MESSAGE, UNIT, NEW_LINE, RANGE_START, RANGE_END, BALL_NUMBERS, SPLIT_SEPARATOR, RESULT_MATCHES, INITIAL_RESULT_VALUE, RESULT } from './constant/Constant.js';
 import Validation from './validation/Validation.js';
 import Lotto from './Lotto.js';
 
@@ -8,6 +8,7 @@ class Game {
   #boughtLottos;
   #winningNumbers;
   #bonusNumber;
+  #gameResult;
 
   async play() {
     this.#pricePaid = await this.#setPrice();
@@ -15,6 +16,8 @@ class Game {
     this.printLottos();
     this.#winningNumbers = await this.#setWinningNumbers();
     this.#bonusNumber = await this.#setBonusNumber();
+    this.#gameResult = this.#setGameResult();
+    this.printResult();
   }
 
   async #setPrice() {
@@ -62,11 +65,39 @@ class Game {
     }
   }
 
+  #setGameResult() {
+    const result = {
+      three: INITIAL_RESULT_VALUE,
+      four: INITIAL_RESULT_VALUE,
+      five: INITIAL_RESULT_VALUE,
+      bonus: INITIAL_RESULT_VALUE,
+      six: INITIAL_RESULT_VALUE
+    };
+    this.#boughtLottos.forEach((lotto) => {
+      const draw = lotto.compareTo(this.#winningNumbers, this.#bonusNumber);
+      if (draw === RESULT.THREE) result.three++;
+      if (draw === RESULT.FOUR) result.four++;
+      if (draw === RESULT.FIVE) result.five++;
+      if (draw === RESULT.BONUS) result.bonus++;
+      if (draw === RESULT.SIX) result.six++;
+    })
+    return result;
+  }
+
   printLottos() {
     Console.print(`${NEW_LINE}${this.#boughtLottos.length}${MESSAGE.BOUGHT_LOTTOS}`);
     this.#boughtLottos.forEach((lotto) => {
       lotto.printLotto();
     });
+  }
+
+  printResult() {
+    Console.print(MESSAGE.LOTTO_RESULT_PREFIX);
+    Console.print(`${MESSAGE.LOTTO_RESULT_THREE}${this.#gameResult.three}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
+    Console.print(`${MESSAGE.LOTTO_RESULT_FOUR}${this.#gameResult.four}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
+    Console.print(`${MESSAGE.LOTTO_RESULT_FIVE}${this.#gameResult.five}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
+    Console.print(`${MESSAGE.LOTTO_RESULT_BONUS}${this.#gameResult.bonus}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
+    Console.print(`${MESSAGE.LOTTO_RESULT_SIX}${this.#gameResult.six}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
   }
 
   #validatePrice(price) {
@@ -82,6 +113,10 @@ class Game {
 
   #generateRandomLotto() {
     return new Lotto(Random.pickUniqueNumbersInRange(RANGE_START, RANGE_END, BALL_NUMBERS).sort((a, b) => a - b));
+  }
+
+  #calculateEarningRate() {
+
   }
 };
 

@@ -25,6 +25,17 @@ export const BONUS_TYPE = "number";
 export const RANGE_START = 1;
 export const RANGE_END = 45;
 export const BALL_NUMBERS = 6;
+export const BONUS_MATCHES = 5;
+export const RESULT_MATCHES = 5;
+export const INITIAL_RESULT_VALUE = 0;
+
+export const RESULT = {
+  THREE: 3,
+  FOUR: 4,
+  FIVE: 5,
+  BONUS: 0,
+  SIX: 6
+}
 
 export const MATCH = {
   THREE: 5000,
