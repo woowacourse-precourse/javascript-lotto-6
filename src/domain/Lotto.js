@@ -10,7 +10,7 @@ class Lotto {
   #lotto = [];
 
   constructor(lotto) {
-    const parsedLotto = this.#parseLotto(lotto);
+    const parsedLotto = Parser.parseLotto(lotto);
 
     Lotto.#validate(parsedLotto);
 
@@ -37,13 +37,6 @@ class Lotto {
     return this.#lotto.some(
       (lottoNumber) => lottoNumber.get() === bonusNumber.get(),
     );
-  }
-
-  #parseLotto(lotto) {
-    const lottoArr = Array.isArray(lotto) ? lotto : Parser.parseLotto(lotto);
-    const encapsuleLottoNumber = lottoArr.map((num) => new LottoNumber(num));
-
-    return encapsuleLottoNumber;
   }
 
   get() {
