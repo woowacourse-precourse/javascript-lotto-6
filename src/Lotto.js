@@ -26,7 +26,7 @@ class Lotto {
     return matchingCountWithWinningNumbers;
   }
 
-  getMatchingCountWithWinningNumbers(bonusNumber) {
+  getMatchingCountBonusNumbers(bonusNumber) {
     return this.#numbers.includes(bonusNumber) ? 1 : 0;
   }
 }
