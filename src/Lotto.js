@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import Validator from "./Validator.js";
 
 class Lotto {
@@ -10,6 +11,14 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
+
+  print() {
+    Console.print('[' + this.#numbers.join(', ') + ']');
+  }
+
 }
 
 export default Lotto;

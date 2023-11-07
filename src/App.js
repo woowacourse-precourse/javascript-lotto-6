@@ -21,15 +21,19 @@ class App {
     this.validator.validateInputMoney(inputMoney);
     this.inputMoney = Number(inputMoney);
     this.issueLotto();
+    this.printLottoNum();
   }
 
   issueLotto() {
     const generateRandomNum = new GenerateRandomNum();
     for (let countLotto = 0; countLotto < (this.inputMoney / 1000); countLotto++) {
-      // this.lottos.push(new Lotto(generateRandomNum.generateNum()));
-      this.lottos.push(generateRandomNum.generateNum());
+      this.lottos.push(new Lotto(generateRandomNum.generateNum()));
     }
-    Console.print(this.lottos);
+  }
+
+  printLottoNum() {
+    Console.print(`\n${this.lottos.length}${MESSAGE.PRINT_ISSUE_LOTTOS}`);
+    this.lottos.forEach(lotto => lotto.print());
   }
 }
 
