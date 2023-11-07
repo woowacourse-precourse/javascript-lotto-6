@@ -3,7 +3,7 @@ import LottoData from '../models/LottoData.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import LottoUtill from '../utils/LottoUtill.js';
-import Lotto from '../utils/Lotto.js';
+import Lotto from '../../Lotto.js';
 
 class LottoController {
   constructor() {
