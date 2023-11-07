@@ -32,7 +32,7 @@ export const MESSAGE = Object.freeze({
   THIRD_PLACE: "5개 일치 (1,500,000원) - ",
   FOURTH_PLACE: "4개 일치 (50,000원) - ",
   FIFTH_PLACE: "3개 일치 (5,000원) - ",
-  PURCHASE_QUANTITY: (quantity) => `${quantity}개를 구매했습니다.`,
+  PURCHASE_QUANTITY: (quantity) => `\n${quantity}개를 구매했습니다.`,
   TOTAL_RETURN: (totalReturn) => `총 수익률은 ${totalReturn}%입니다`,
 });
 

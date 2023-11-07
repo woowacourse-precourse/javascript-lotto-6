@@ -1,3 +1,5 @@
+import { print } from "./common/utils.js";
+
 class Lotto {
   #numbers;
 
@@ -13,6 +15,10 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+
+  printLottos = () => {
+    print(`[${this.#numbers.join(", ")}]`);
+  };
 }
 
 export default Lotto;
