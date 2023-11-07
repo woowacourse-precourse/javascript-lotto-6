@@ -28,4 +28,10 @@ describe("로또 클래스 테스트", () => {
     const correctNumbers = oneGame.calculate();
     expect(correctNumbers).toBe(3);
   })
+
+  test("로또 번호가 당첨 번호와 5개가 일치하고, 나머지 한 개의 번호가 보너스 번호와 일치할 시, 이를 문자열 bonus로 반환하여 특수 케이스화 한다.", () => {
+    const oneGame = new LottoCalculator([1, 2, 3, 4, 5, 6], 6, [1, 2, 3, 4, 5, 7]);
+    const gameResult = oneGame.calculate();
+    expect(gameResult).toBe('bonus');
+  })
 });
