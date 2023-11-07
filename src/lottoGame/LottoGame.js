@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import Lotto from "../lotto/Lotto.js";
-import WinningLotto from "../lotto/WinningLotto.js";
+import Lotto from "../Lotto.js";
+import WinningLotto from "../WinningLotto.js";
 import LottoUtils from "./lottoUtils.js";
 import { COMMAND, LOTTO_RANK, LOTTO_GAME_RULE } from "../utils/constants.js";
 
