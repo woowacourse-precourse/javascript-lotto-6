@@ -1,47 +1,42 @@
 import { STATISTICS } from '../constants/constants.js';
 
 class Statistics {
-  #rateOfReturns;
+  #rateOfReturn;
   #statistics;
 
   constructor() {
-    this.#rateOfReturns = 0;
+    this.#rateOfReturn = 0;
     this.#statistics = {};
   }
 
-  getRateOfReturns() {
-    return this.#rateOfReturns;
+  getRateOfReturn() {
+    return this.#rateOfReturn;
   }
 
   getStatistics() {
     return this.#statistics;
   }
 
-  calculateStatistics(userLotto, winningLotto) {
-    const rankResult = userLotto.calculateMatchingNumber(winningLotto);
-
+  calculateStatistics(matchingResult, purchaseAmount) {
     this.#statistics = STATISTICS.map((statistic) => ({
       ...statistic,
-      count: rankResult[statistic.rank],
+      count: matchingResult[statistic.rank],
     }));
 
     const totalWinnings = this.#statistics.reduce((total, statistic) => {
       return total + statistic.winnings * statistic.count;
     }, 0);
 
-    this.#rateOfReturns = this.roundRateOfReturns(
-      totalWinnings,
-      userLotto.getPurchaseAmount()
-    );
+    this.#rateOfReturn = this.roundRateOfReturns(totalWinnings, purchaseAmount);
   }
 
-  roundRateOfReturns(totalWinnings, purchaseAmount) {
-    const rateOfReturns = Number(
+  roundRateOfReturn(totalWinnings, purchaseAmount) {
+    const rateOfReturn = Number(
       ((totalWinnings / purchaseAmount) * 100).toFixed(1)
     );
-    if (Number.isInteger(rateOfReturns))
-      return `${rateOfReturns.toLocaleString('en-US')}.0`;
-    return rateOfReturns.toLocaleString('en-US');
+    if (Number.isInteger(rateOfReturn))
+      return `${rateOfReturn.toLocaleString('en-US')}.0`;
+    return rateOfReturn.toLocaleString('en-US');
   }
 }
 
