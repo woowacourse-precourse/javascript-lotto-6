@@ -1,5 +1,3 @@
-import Check from "./Util/Check.js";
-
 class Lotto {
   #numbers;
 
