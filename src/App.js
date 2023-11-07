@@ -39,7 +39,7 @@ class App {
   printPurchasedLottos(lottos) {
     Console.print(`${lottos.length}${CONSOLE_MESSAGE.PROMPT_PURCHASED_AMOUNT}`);
     for (let lotto of lottos) {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(', ')}]`);
     }
   }
 
@@ -110,16 +110,15 @@ class App {
     Console.print('\n당첨 통계\n---');
 
     const sortedKeys = Object.keys(statistics).sort((a, b) => {
-      if (a === '5+1') return 1;
-      if (b === '5+1') return -1;
-      return Number(a) - Number(b);
+      const order = ['3', '4', '5', '5+1', '6'];
+      return order.indexOf(a) - order.indexOf(b);
     });
 
     sortedKeys.forEach(key => {
       const { count, prize } = statistics[key];
       let message = `${key}개 일치`;
       if (key === '5+1') {
-        message += ', 보너스 볼 일치';
+        message = '5개 일치, 보너스 볼 일치';
       }
       Console.print(`${message} (${prize.toLocaleString()}원) - ${count}개`);
     });
