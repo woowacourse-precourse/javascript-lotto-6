@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { WinNumber } from "../LottoResult/WinNumber.js";
-import { CreateLottoNum } from "./CreateLottoNum.js";
+import Lotto from "../Lotto.js";
+import { BonusNumber } from "../LottoResult/BonusNumber.js";
 
 export class CreateWinNum {
     constructor(lottoNum) {
@@ -10,7 +11,9 @@ export class CreateWinNum {
 
     async start() {
         const winNumbers = await this.winNumber.winnumber();
-        const winResult = this.checkWinning(this.lottoNum, winNumbers); 
+        const bonusNumber = new BonusNumber(winNumbers);
+        const bonusNum = await bonusNumber.bonusNumber();
+        const winResult = this.checkWinning(this.lottoNum, { normal: winNumbers, bonus: bonusNumber });
 
         this.printWinResult(winResult);
     }
@@ -27,3 +30,7 @@ export class CreateWinNum {
         MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${winResult[6]}개`);
     }
 }
+/*
+const lottoGame = new CreateWinNum();
+lottoGame.start();
+*/
