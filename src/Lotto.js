@@ -1,5 +1,5 @@
-import { MATCH_TO_PRIZE } from "./lib/Constants.js";
 import DomainValidator from "./lib/Validator/DomainValidator.js";
+import { MATCH_TO_PRIZE } from "./lib/Constants.js";
 
 class Lotto {
   #numbers;
@@ -17,17 +17,17 @@ class Lotto {
     DomainValidator.bonusNumber(this.#numbers, bonusNumber);
   }
 
-  calcPrize(other) {
-    const match = this.#calcMatch(other);
-    const bonusFlag = this.#numbers.includes(other.bonus);
+  calcPrize(referenceLotto) {
+    const match = this.#calcMatch(referenceLotto);
+    const bonusFlag = this.#numbers.includes(referenceLotto.bonus);
     const prize = MATCH_TO_PRIZE[match][bonusFlag];
     return prize;
   }
 
   // 같은 클래스의 인스턴스들은 프라이빗 필드에 접근할 수 있음
   // 일부 환경에서 적용이 안 될 수 있으니 확인 필요
-  #calcMatch(other) {
-    const result = other.#numbers.filter((number) =>
+  #calcMatch(referenceLotto) {
+    const result = referenceLotto.#numbers.filter((number) =>
       this.#numbers.includes(number),
     );
     return result.length;

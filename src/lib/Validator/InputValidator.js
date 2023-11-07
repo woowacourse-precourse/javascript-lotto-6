@@ -2,9 +2,9 @@ import { ERROR_MESSAGE } from "../Constants.js";
 import { ValidationError } from "../Error/ValidationError.js";
 
 class InputValidator {
-  static ticketMoney(ticketMoney) {
-    InputValidator.#checkInputProvided(ticketMoney);
-    InputValidator.#checkIsInteger(ticketMoney);
+  static lottoMoney(money) {
+    InputValidator.#checkInputProvided(money);
+    InputValidator.#checkIsInteger(money);
   }
 
   static winNumbers(winNumbers) {

@@ -24,11 +24,11 @@ class ReferenceLotto extends Lotto {
     const earnings = Array.from(prizeMap.entries())
       .map(([prize, count]) => PRIZE_TO_REWARD[prize] * count)
       .reduce((a, b) => a + b);
-    const ticketSize = Array.from(prizeMap.entries())
+    const lottoSize = Array.from(prizeMap.entries())
       .map(([_, count]) => count)
       .reduce((a, b) => a + b);
-    const ticketMoney = ticketSize * GAME_RULE.TICKET_PRICE;
-    return (earnings / ticketMoney) * 100;
+    const invested = lottoSize * GAME_RULE.LOTTO_PRICE;
+    return (earnings / invested) * 100;
   }
 
   set bonus(bonus) {

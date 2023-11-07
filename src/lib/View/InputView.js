@@ -3,10 +3,10 @@ import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "../Constants.js";
 
 class InputView {
-  static async ticketMoney() {
+  static async lottoMoney() {
     return InputView.#handleInput(
-      async () => await Console.readLineAsync(INPUT_MESSAGE.TICKET_MONEY),
-      InputValidator.ticketMoney,
+      async () => await Console.readLineAsync(INPUT_MESSAGE.LOTTO_MONEY),
+      InputValidator.lottoMoney,
       Number,
     );
   }

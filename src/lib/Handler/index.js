@@ -1,5 +1,4 @@
 // domain
-import Lotto from "../../Lotto.js";
 import LottoBundle from "../Domain/LottoBundle.js";
 import ReferenceLotto from "../Domain/ReferenceLotto.js";
 // view
@@ -13,7 +12,7 @@ import { ValidationError } from "../Error/ValidationError.js";
 export class Handler {
   static async lottoBundle() {
     try {
-      const response = await InputView.ticketMoney();
+      const response = await InputView.lottoMoney();
       const lottoBundle = new LottoBundle(response);
       return lottoBundle;
     } catch (err) {
@@ -27,7 +26,7 @@ export class Handler {
       const referenceLotto = new ReferenceLotto(response);
       return referenceLotto;
     } catch (err) {
-      return Handler.#handleError(err, () => Handler.winningLotto());
+      return Handler.#handleError(err, () => Handler.referenceLotto());
     }
   }
 
@@ -37,7 +36,8 @@ export class Handler {
       const response = await InputView.bonusNumber();
       referenceLotto.bonus = response;
     } catch (err) {
-      return Handler.#handleError(err, () => Handler.referenceLotto(lotto));
+      const retryFunction = () => Handler.bonusNumber(referenceLotto);
+      return Handler.#handleError(err, retryFunction);
     }
   }
 

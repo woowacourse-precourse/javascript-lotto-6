@@ -17,16 +17,20 @@ class LottoBundle {
     this.#validate(money);
     this.#items = [];
     this.#purchaseHistory = [];
-    const quantity = parseInt(money / GAME_RULE.TICKET_PRICE);
-    Array.from({ length: quantity }).forEach(() => {
+    const quantity = parseInt(money / GAME_RULE.LOTTO_PRICE);
+    this.#purchaseLotto(quantity);
+  }
+
+  #validate(money) {
+    DomainValidator.lottoMoney(money);
+  }
+
+  #purchaseLotto(length) {
+    Array.from({ length }).forEach(() => {
       const numbers = this.#pickLotto();
       this.#items.push(new Lotto(numbers));
       this.#purchaseHistory.push(numbers);
     });
-  }
-
-  #validate(money) {
-    DomainValidator.ticketMoney(money);
   }
 
   #pickLotto() {
@@ -35,8 +39,8 @@ class LottoBundle {
       GAME_RULE.MAX_WIN_NUMBER_INCLUSIVE,
       GAME_RULE.WIN_NUMBERS_SIZE,
     ];
-    const ticket = Random.pickUniqueNumbersInRange(min, max, size);
-    return ticket.sort((a, b) => a - b);
+    const lottoNumbers = Random.pickUniqueNumbersInRange(min, max, size);
+    return lottoNumbers.sort((a, b) => a - b);
   }
 
   get items() {

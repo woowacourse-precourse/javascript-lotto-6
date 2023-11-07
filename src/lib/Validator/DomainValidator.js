@@ -2,7 +2,7 @@ import { ERROR_MESSAGE, GAME_RULE } from "../Constants.js";
 import { ValidationError } from "../Error/ValidationError.js";
 
 class DomainValidator {
-  static ticketMoney(money) {
+  static lottoMoney(money) {
     DomainValidator.#checkMoneyMod(money);
     DomainValidator.#checkMoneyRange(money);
   }
@@ -21,17 +21,17 @@ class DomainValidator {
   }
 
   static #checkMoneyMod(money) {
-    if (money % GAME_RULE.TICKET_PRICE !== 0) {
-      throw new ValidationError(ERROR_MESSAGE.INVALID_TICKET_MOD);
+    if (money % GAME_RULE.LOTTO_PRICE !== 0) {
+      throw new ValidationError(ERROR_MESSAGE.INVALID_MONEY_MOD);
     }
   }
 
   static #checkMoneyRange(money) {
     if (
-      money < GAME_RULE.MIN_TICKET_MONEY_INCLUSIVE ||
-      GAME_RULE.MAX_TICKET_MONEY_INCLUSIVE < money
+      money < GAME_RULE.MIN_LOTTO_MONEY_INCLUSIVE ||
+      GAME_RULE.MAX_LOTTO_MONEY_INCLUSIVE < money
     ) {
-      throw new ValidationError(ERROR_MESSAGE.INVALID_TICKET_RANGE);
+      throw new ValidationError(ERROR_MESSAGE.INVALID_MONEY_RANGE);
     }
   }
 
