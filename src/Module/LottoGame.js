@@ -37,8 +37,8 @@ class LottoGame {
       this.setBonusNum(parseInt(answer, 10));
       this.calculaterResult();
       View.outputResult(this.numberOfEachRanking, this.totalProfitRate);
-      return;
     });
+    return;
   }
 
   setBougthAmount(amount) {
