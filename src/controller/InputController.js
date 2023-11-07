@@ -19,7 +19,7 @@ export default class InputController {
     this.amount = await this.inputView.readAmount();
     this.validateController.validateAmount(this.amount);
 
-    this.purchaseController.issueLottos(this.amount);
+    this.purchaseController.issueLottos(this.amount / 1000);
   }
 
   async getWinningNumbers() {
