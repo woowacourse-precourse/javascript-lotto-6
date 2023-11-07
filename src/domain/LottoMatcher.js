@@ -68,27 +68,27 @@ class LottoMatcher {
   }
 
   #updateFirstPrize(result) {
-    result[GAME_PRIZES.FIRST_PRIZE]++;
+    result[GAME_PRIZES.FIRST_PRIZE]+= 1;
     result.totalEarnings += PRIZE_AMOUNTS.FIRST_PRIZE_AMOUNT;
   }
 
   #updateSecondPrize(result) {
-    result[GAME_PRIZES.SECOND_PRIZE]++;
+    result[GAME_PRIZES.SECOND_PRIZE]+= 1;
     result.totalEarnings += PRIZE_AMOUNTS.SECOND_PRIZE_AMOUNT;
   }
 
   #updateThirdPrize(result) {
-    result[GAME_PRIZES.THIRD_PRIZE]++;
+    result[GAME_PRIZES.THIRD_PRIZE]+= 1;
     result.totalEarnings += PRIZE_AMOUNTS.THIRD_PRIZE_AMOUNT;
   }
 
   #updateFourthPrize(result) {
-    result[GAME_PRIZES.FOURTH_PRIZE]++;
+    result[GAME_PRIZES.FOURTH_PRIZE]+= 1;
     result.totalEarnings += PRIZE_AMOUNTS.FOURTH_PRIZE_AMOUNT;
   }
 
   #updateFifthPrize(result) {
-    result[GAME_PRIZES.FIFTH_PRIZE]++;
+    result[GAME_PRIZES.FIFTH_PRIZE]+= 1;
     result.totalEarnings += PRIZE_AMOUNTS.FIFTH_PRIZE_AMOUNT;
   }
 }
