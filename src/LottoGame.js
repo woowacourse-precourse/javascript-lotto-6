@@ -3,17 +3,15 @@ import Query from './View/Query';
 import Print from './View/Print';
 import { Console, Random } from '@woowacourse/mission-utils';
 class LottoGame {
-  #tickets;
-
   async start() {
-    const ticketCount = await LottoGame.setTicketCount();
-    this.#purchaseLottos(ticketCount);
-    Print.printTickets([...this.#tickets]);
-    const winningNumbersArray = await LottoGame.setWinngNumberArray();
-    const bonusNumber = await LottoGame.setBonusNumber([...winningNumbersArray.getNumbers()]);
+    const ticketCount = await LottoGame.getTicketCount();
+    const tickets = LottoGame.purchaseLottos(ticketCount);
+    Print.printTickets([...tickets]);
+    const winningNumbersArray = await LottoGame.getWinngNumberArray();
+    const bonusNumber = await LottoGame.getBonusNumber([...winningNumbersArray.getNumbers()]);
     const results = LottoGame.calculateResult(
       bonusNumber,
-      [...this.#tickets],
+      [...tickets],
       [...winningNumbersArray.getNumbers()],
     );
     LottoGame.printResults(results);
@@ -31,15 +29,16 @@ class LottoGame {
     return Number(purchaseAmount) / 1000;
   }
 
-  #purchaseLottos(ticketCount = 0) {
-    this.#tickets = [];
-    for (let i = 0; i < ticketCount; i++) {
+  static purchaseLottos(ticketCount = 0) {
+    const tickets = [];
+    for (let i = 0; i < ticketCount; i += 1) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      this.#tickets.push(new Lotto(numbers));
+      tickets.push(new Lotto(numbers));
     }
+    return [...tickets]
   }
 
-  static async setTicketCount() {
+  static async getTicketCount() {
     while (true) {
       try {
         const purchaseAmount = await Query.getPurchaseAmount();
@@ -51,7 +50,7 @@ class LottoGame {
     }
   }
 
-  static async setWinngNumberArray() {
+  static async getWinngNumberArray() {
     while (true) {
       try {
         const winningNumbers = await Query.getWinningNumber();
@@ -65,7 +64,7 @@ class LottoGame {
     }
   }
 
-  static async setBonusNumber(winningNumbersArray = []) {
+  static async getBonusNumber(winningNumbersArray = []) {
     while (true) {
       try {
         const bonusNumber = await Query.getBonusNumber();
@@ -135,7 +134,7 @@ class LottoGame {
     });
   }
 
-  static calculateEarningsRate(ticketCount, results) {
+  static calculateEarningsRate(ticketCount = 0, results = []) {
     const prizeMoney = [5000, 50000, 1500000, 30000000, 2000000000];
     const totalEarnings = results.reduce(
       (sum, result, index) => sum + result * prizeMoney[index],
