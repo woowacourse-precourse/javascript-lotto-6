@@ -1,4 +1,4 @@
-import {MissionUtils} from "@woowacourse/mission-utils";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Lotto {
   #numbers;
@@ -25,6 +25,34 @@ class Lotto {
     if (hasDuplicates) {
       throw new Error("[ERROR] 중복된 숫자는 입력할 수 없습니다.");
     }
+  }
+
+  static validatePurchaseAmount(input) {
+    const sanitizedInput = input.replace(/,/g, '');
+    const amount = parseInt(sanitizedInput, 10);
+    if (isNaN(amount) || amount <= 0 || amount % Lotto.PRICE !== 0) {
+      throw new Error("[ERROR] 로또 구입 금액은 1,000원 단위로 입력해야 합니다.");
+    }
+    return amount;
+  }
+
+  static validateBonusNumber(input) {
+    const bonusNumber = parseInt(input.trim(), 10);
+    if (isNaN(bonusNumber)) {
+      throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+    }
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 보너스번호는 1에서 45 사이의 숫자여야 합니다.");
+    }
+    return bonusNumber;
+  }
+
+  get numbers() {
+    return this.#numbers;
+  }
+
+  static generateRandomNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 }
 
