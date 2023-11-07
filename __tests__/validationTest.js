@@ -25,3 +25,29 @@ describe("구매 금액 입력 유효성 검사 테스트", () => {
     expect(() => Validation.userMoney(input)).toThrow("[ERROR]");
   });
 });
+
+describe("당첨 번호 입력 유효성 검사 테스트", () => {
+  test("당첨 번호가 6자리 아닌 경우 에러를 발생시키는 테스트", () => {
+    const input = "1,2,3,4,5";
+
+    expect(() => Validation.winningNumber(input)).toThrow("[ERROR]");
+  });
+
+  test("당첨 번호가 공백인 경우 에러를 발생시키는 테스트", () => {
+    const input = "";
+
+    expect(() => Validation.winningNumber(input)).toThrow("[ERROR]");
+  });
+
+  test("당첨 번호가 문자인 경우 에러를 발생시키는 테스트", () => {
+    const input = "1,2,3,4,j,5";
+
+    expect(() => Validation.winningNumber(input)).toThrow("[ERROR]");
+  });
+
+  test("당첨 번호가 1~45 내의 숫자가 아닌 경우 에러를 발생시키는 테스트", () => {
+    const input = "1,2,3,4,50,5";
+
+    expect(() => Validation.winningNumber(input)).toThrow("[ERROR]");
+  });
+});
