@@ -20,8 +20,12 @@ class User {
     return Number(INPUT_MONEY);
   }
 
-  validate(money) {
-    if (money % LOTTO_PRICE !== 0 || money < 0) {
+  validate(MONEY) {
+    if (MONEY % LOTTO_PRICE !== 0) {
+      throw new Error(INPUT_MONEY_ERROR_MESSAGE);
+    }
+
+    if (MONEY <= 0) {
       throw new Error(INPUT_MONEY_ERROR_MESSAGE);
     }
   }
@@ -41,7 +45,7 @@ class User {
         PICK_NUMBER
       );
       lotto.sort((a, b) => a - b);
-      MissionUtils.Console.print(lotto);
+      MissionUtils.Console.print("[" + lotto.join("," + " ").toString() + "]");
       const MATCH = new Match(lotto);
       this.users.push(MATCH);
     }

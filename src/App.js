@@ -60,7 +60,7 @@ class App {
     for (let i = 0; i < 5; i++) {
       await MissionUtils.Console.print(
         NUM_ARRAY[i] +
-          "개 일치 " +
+          "개 일치" +
           MONEY_ARRAY[i] +
           " - " +
           STATS_ARRAY[i] +
@@ -78,9 +78,10 @@ class App {
         STATS.MATCH_ALL * ALL_MATCH_MONEY) /
         MONEY) *
       100
-    ).toFixed(2);
+    ).toFixed(1);
 
-    const YIELD_PRINT_MESSAGE = "\n총 수익률은" + YIELD + "%입니다.";
+    const YIELD_PRINT_MESSAGE =
+      "\n총 수익률은 " + YIELD.toString() + "%입니다.";
 
     MissionUtils.Console.print(YIELD_PRINT_MESSAGE);
   }

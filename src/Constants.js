@@ -23,11 +23,11 @@ export const INPUT_DUPLICATE_ERROR_MESSAGE =
   "[ERROR] 중복된 숫자가 포함되어있습니다.";
 
 // 기타
-export const THREE_MATCH_MESSAGE = "(5,000원)";
-export const FOUR_MATCH_MESSAGE = "(50,000원)";
-export const FIVE_MATCH_MESSAGE = "(1500,000원)";
+export const THREE_MATCH_MESSAGE = " (5,000원)";
+export const FOUR_MATCH_MESSAGE = " (50,000원)";
+export const FIVE_MATCH_MESSAGE = " (1,500,000원)";
 export const BONUS_MATCH_MESSAGE = ", 보너스 볼 일치 (30,000,000원)";
-export const ALL_MATCH_MESSAGE = "(2,000,000,000원)";
+export const ALL_MATCH_MESSAGE = " (2,000,000,000원)";
 
 //App.js
 export const INPUT_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
