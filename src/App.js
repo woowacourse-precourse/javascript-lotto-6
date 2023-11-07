@@ -18,6 +18,9 @@ class App {
     const parsedpurchaseAmount = parseInt(inputPurchaseAmount, 10);
 
     this.validateAskPurchaseAmount(parsedpurchaseAmount);
+
+    this.createLottos(parsedpurchaseAmount);
+    this.printLottos();
   }
 
   validateAskPurchaseAmount(purchaseAmount) {
@@ -43,6 +46,12 @@ class App {
     }
 
     return this.myLottoLits;
+  }
+
+  printLottos() {
+    Console.print(`${this.purchaseAmount}개를 구매했습니다.`);
+
+    this.myLottoLits.forEach((lotto) => Console.print(lotto));
   }
 }
 
