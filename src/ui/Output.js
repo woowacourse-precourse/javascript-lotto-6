@@ -22,3 +22,17 @@ const createLottoResultString = lottoResult => {
 
   return resultString;
 };
+
+const analyzeProfitRate = (lottoPurchaseAmount, lottoResult) => {
+  const prizeLists = Object.values(CONSTANTS.prize);
+  const countLists = Object.values(lottoResult);
+  const totalInvestment = lottoPurchaseAmount * 1000;
+
+  const totalPrize = prizeLists.reduce((total, prize, index) => {
+    const count = countLists[index];
+    return total + prize * count;
+  }, 0);
+
+  const profitRate = ((totalPrize / totalInvestment) * 100).toFixed(1);
+  return profitRate;
+};
