@@ -2,7 +2,7 @@ import SYMBOLS from '../constants/symbols.js';
 import Bonus from '../model/Bonus.js';
 import Lotto from '../model/Lotto.js';
 import LottoStore from '../model/LottoStore.js';
-import Stats from '../model/Stats.js';
+import Statistics from '../model/Statistics.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 
@@ -24,6 +24,8 @@ class LottoController {
   #bonus;
 
   #lottoStore;
+
+  #statistics;
 
   constructor() {
     this.#inputView = new InputView();
@@ -90,15 +92,15 @@ class LottoController {
 
   async #analyzeLottos() {
     OutputView.printResult();
-    const statsInstance = new Stats(
+    this.#statistics = new Statistics(
       this.#userLottos,
       this.#winningNumbers,
       this.#bonusNumber,
     );
-    this.#stats = statsInstance.getStats();
+    this.#stats = this.#statistics.getStats();
     OutputView.printStats(this.#stats);
     OutputView.printProfitRate(
-      statsInstance.getProfitRate(this.#purchaseAmount),
+      this.#statistics.getProfitRate(this.#purchaseAmount),
     );
   }
 }

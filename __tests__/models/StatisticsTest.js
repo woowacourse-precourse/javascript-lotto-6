@@ -1,6 +1,6 @@
-import Stats from '../../src/model/Stats.js';
+import Stats from '../../src/model/Statistics.js';
 
-describe('Stats 모델 테스트', () => {
+describe('Statistics 클래스 테스트', () => {
   let userLottos;
   let winningNumbers;
   let bonusNumber;
@@ -14,13 +14,13 @@ describe('Stats 모델 테스트', () => {
     bonusNumber = 7;
   });
 
-  test('인스턴스 테스트', () => {
+  test('Statistics 인스턴스 생성을 테스트한다.', () => {
     const statsInsatance = new Stats(userLottos, winningNumbers, bonusNumber);
 
     expect(statsInsatance).toBeInstanceOf(Stats);
   });
 
-  test('getStats() 메소드 테스트', () => {
+  test('getStats()를 통해 당첨 횟수가 담긴 배열을 얻는다.', () => {
     const stat = new Stats(userLottos, winningNumbers, bonusNumber);
 
     const stats = stat.getStats();
