@@ -8,13 +8,13 @@ class LottoGame {
   #count;
   #lottos;
   #winningNumbers;
-  #bonusNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#count = 0;
     this.#lottos = [];
     this.#winningNumbers = [];
-    this.#bonusNumbers = null;
+    this.#bonusNumber = null;
   }
 
   async setupInputMoney() {
@@ -74,7 +74,7 @@ class LottoGame {
       );
       try {
         this.#winningNumbers.validateBonusNumber(userInput);
-        this.#bonusNumbers = userInput;
+        this.#bonusNumber = userInput;
         break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
