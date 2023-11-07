@@ -17,7 +17,7 @@ class Input {
     }
   }
 
-  async bonusNumbers() {
+  async bonusNumber() {
     try {
       const inputNumbers = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
       return inputNumbers;
