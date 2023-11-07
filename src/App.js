@@ -3,9 +3,24 @@ import Lotto from "./Lotto.js";
 
 class App {
   async play() {
+    const lottoAmount = await this.getLottoAmount();
+    const lottoList = this.buyLotto(lottoAmount);
+    this.printLottolist(lottoList);
+
+    const winningNumber = await this.getWinningNumber();
+    const bonusNumber = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요."
+    );
+
+    const result = this.getResult(lottoList, winningNumber, bonusNumber);
+    this.getStatistics(lottoAmount, result);
+  }
+
+  async getLottoAmount() {
     let lottoAmount = 0;
 
     Console.print("구입금액을 입력해 주세요.");
+
     do {
       try {
         lottoAmount = await Console.readLineAsync();
@@ -21,30 +36,7 @@ class App {
       }
     } while (lottoAmount % 1000 !== 0);
 
-    const lottoList = this.buyLotto(lottoAmount);
-
-    Console.print(`${lottoList.length}개를 구매했습니다.`);
-    for (const lotto of lottoList) {
-      Console.print(
-        `[${lotto
-          .getLottoNumbers()
-          .sort((a, b) => a - b)
-          .join(", ")}]`
-      );
-    }
-
-    const winningNumber = (
-      await Console.readLineAsync("당첨 번호를 입력해 주세요.")
-    )
-      .split(",")
-      .map(Number);
-
-    const bonusNumber = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요."
-    );
-
-    const result = this.getResult(lottoList, winningNumber, bonusNumber);
-    this.getStatistics(lottoAmount, result);
+    return lottoAmount;
   }
 
   buyLotto(amount) {
@@ -60,6 +52,25 @@ class App {
     return lottoList;
   }
 
+  printLottolist(lottoList) {
+    Console.print(`${lottoList.length}개를 구매했습니다.`);
+
+    for (const lotto of lottoList) {
+      Console.print(
+        `[${lotto
+          .getLottoNumbers()
+          .sort((a, b) => a - b)
+          .join(", ")}]`
+      );
+    }
+  }
+
+  async getWinningNumber() {
+    return (await Console.readLineAsync("당첨 번호를 입력해 주세요."))
+      .split(",")
+      .map(Number);
+  }
+
   getResult(lottoList, winningNumber, bonusNumber) {
     const result = { n3: 0, n4: 0, n5: 0, n5b: 0, n6: 0 };
 
@@ -67,29 +78,34 @@ class App {
       const matchingNumbers = lotto
         .getLottoNumbers()
         .filter((num) => winningNumber.includes(num));
-      const matchingCount = matchingNumbers.length;
 
-      switch (matchingCount) {
-        case 6:
-          result.n6++;
-          break;
-        case 5:
-          result.n5++;
-          if (matchingNumbers.includes(bonusNumber)) {
-            result.n5b++;
-            result.n5--;
-          }
-          break;
-        case 4:
-          result.n4++;
-          break;
-        case 3:
-          result.n3++;
-          break;
-      }
+      this.calculateResult(result, matchingNumbers, bonusNumber);
     }
 
     return result;
+  }
+
+  calculateResult(result, matchingNumbers, bonusNumber) {
+    const matchingCount = matchingNumbers.length;
+
+    switch (matchingCount) {
+      case 6:
+        result.n6++;
+        break;
+      case 5:
+        result.n5++;
+        if (matchingNumbers.includes(bonusNumber)) {
+          result.n5b++;
+          result.n5--;
+        }
+        break;
+      case 4:
+        result.n4++;
+        break;
+      case 3:
+        result.n3++;
+        break;
+    }
   }
 
   getStatistics(lottoAmount, result) {
@@ -110,30 +126,36 @@ class App {
       const count = result[key];
       const prize = prizeList[key];
 
-      switch (key) {
-        case "n3":
-        case "n4":
-        case "n5":
-        case "n6":
-          Console.print(
-            `${key.charAt(1)}개 일치 (${prize.toLocaleString()}원) - ${count}개`
-          );
-          totalPrize += count * prize;
-          break;
-        case "n5b":
-          Console.print(
-            `${key.charAt(
-              1
-            )}개 일치, 보너스 볼 일치 (${prize.toLocaleString()}원) - ${count}개`
-          );
-          totalPrize += count * prize;
-          break;
-      }
+      totalPrize = this.calculatePrize(totalPrize, key, count, prize);
     }
 
     const returnRate = (totalPrize / lottoAmount) * 100;
 
     Console.print(`총 수익률은 ${returnRate.toFixed(1)}%입니다.`);
+  }
+
+  calculatePrize(totalPrize, key, count, prize) {
+    switch (key) {
+      case "n3":
+      case "n4":
+      case "n5":
+      case "n6":
+        Console.print(
+          `${key.charAt(1)}개 일치 (${prize.toLocaleString()}원) - ${count}개`
+        );
+        totalPrize += count * prize;
+        break;
+      case "n5b":
+        Console.print(
+          `${key.charAt(
+            1
+          )}개 일치, 보너스 볼 일치 (${prize.toLocaleString()}원) - ${count}개`
+        );
+        totalPrize += count * prize;
+        break;
+    }
+
+    return totalPrize;
   }
 }
 
