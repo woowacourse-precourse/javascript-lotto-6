@@ -8,6 +8,7 @@ const ERROR_NUMBER_TYPE =
 const ERROR_AMOUNT_RANGE =
   "[ERROR] 1000원 이상의 금액을 지불하셔야 로또를 발급받을 수 있습니다.";
 const ERROR_AMOUNT_TYPE = "[ERROR] 금액은 정수형 숫자를 입력해야 합니다.";
+const ERROR_AMOUNT_REST = "[ERROR] 1000원 단위의 값을 지불하셔야 합니다."
 
 const ERROR_NUMBER_DUPLICATION_WITH_WINNING =
   "[ERROR] 당첨 번호에 해당하지 않는 번호를 입력해야 합니다.";
@@ -19,5 +20,6 @@ export {
   ERROR_NUMBER_TYPE,
   ERROR_AMOUNT_RANGE,
   ERROR_AMOUNT_TYPE,
+  ERROR_AMOUNT_REST,
   ERROR_NUMBER_DUPLICATION_WITH_WINNING,
 };
