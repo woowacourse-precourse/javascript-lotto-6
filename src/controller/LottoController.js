@@ -1,9 +1,22 @@
-import { Console } from "@woowacourse/mission-utils";
+import InputView from "../view/InputView";
+import Validator from "../utils/Validator";
 
 class LottoController {
+  #inputView;
+  #validator;
 
-  async gameStart(){
-    Console.print('구입금액을 입력해 주세요.');
+  constructor() {
+    this.#inputView = new InputView();
+    this.#validator = new Validator();
+  }
+
+  async gameStart() {
+    await this.#purchaseLotto();
+  }
+
+  async #purchaseLotto() {
+    const purchaseAmount = await this.#inputView.readPurchaseAmount();
+    this.#validator.validatePurchaseAmount(purchaseAmount);
   }
 }
 
