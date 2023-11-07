@@ -1,11 +1,12 @@
 import getLottoAmount from './service/input/getLottoAmount.js';
 import LottoGenerator from './service/LottoGenerator.js';
-import IssuedLottInfo from './domain/info/IssuedLottoInfo.js';
 import display from './domain/utils/display.js';
+import getWinningNumbers from './service/input/getWinningNumbers.js';
 
 class App {
   #lottoAmount;
   #lottoGenerator;
+  #lotto;
 
   constructor() {
     this.#lottoAmount = null;
@@ -22,6 +23,14 @@ class App {
       count: this.#lottoGenerator.getDrawCount(),
       lottos: this.#lottoGenerator.getLottos(),
     });
+
+    this.#drawWinningNumber();
+  }
+
+  #drawWinningNumber() {
+    const winningNumbers = getWinningNumbers();
+
+    this.#lotto = new Lotto(winningNumbers);
   }
 
   async play() {
