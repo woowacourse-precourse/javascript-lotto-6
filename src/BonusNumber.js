@@ -11,24 +11,11 @@ class BonusNumber {
   }
 
   #validate (bonus, numbers) {
-    this.validator = new Validator();
-    const ERROR_MESSAGE = this.validator.isBonusNumberValid(String(bonus), numbers);
-
-    if (ERROR_MESSAGE) {
-      MissionUtils.Console.print(ERROR_MESSAGE)
-      return;
-    }
+    Validator.isBonusNumberValid(String(bonus), numbers)
   }
 
   returnValue() {
-    this.#bonusNumber = Number(this.#bonusNumber);
-
-    if (/^[1-9]\d*$/.test(this.#bonusNumber)) {
-      this.output = new Output();
-      this.output.print(this.#bonusNumber)
-      return true
-    }
-    return false
+    return Number(this.#bonusNumber)
   }
 }
 
