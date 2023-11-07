@@ -12,4 +12,9 @@ export const InputView = {
     const LOTTO = await readLineAndPrintBlank(Print.start);
     return Number(LOTTO);
   },
+
+  async getLotteryNumberArray() {
+    const NUMBER_LIST = await readLineAndPrintBlank(Print.select_Number);
+    return NUMBER_LIST.split(",").map(Number);
+  },
 };
