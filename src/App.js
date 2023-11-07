@@ -135,16 +135,24 @@ class App {
         isBonus = true;
       }
 
-      if (isBonus && winningCount == 4) {
-        winningBonus++
-      } else if (winningCount === 3) {
-        winningThree++;
-      } else if (winningCount === 4) {
-        winningFour++;
-      } else if (winningCount === 5) {
-        winningFive++;
-      } else if (winningCount === 6) {
-        winningSix++;
+      switch (winningCount) {
+        case 3:
+          winningThree++;
+          break;
+        case 4:
+          if (isBonus) {
+            winningBonus++;
+            break
+          }
+          winningFour++;
+        case 5:
+          winningFive++;
+          break
+        case 6:
+          winningSix++;
+          break
+        default:
+          break
       }
     }
 
