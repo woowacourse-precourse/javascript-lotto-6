@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { isEmpty, isInteger } from '../utils.js';
+import ERROR from '../error.js';
 
 const MESSAGE = Object.freeze({
   AMOUNT_TO_BUY: '구입금액을 입력해 주세요.\n',
@@ -8,16 +9,14 @@ const MESSAGE = Object.freeze({
 export default class Input {
   static async amountToBuy() {
     let amount = '';
-
     try {
       amount = await Input.readTrimmedLineAsync(MESSAGE.AMOUNT_TO_BUY);
-      if (isEmpty(amount)) throw new Error('값을 입력해주세요.');
-      if (!isInteger(amount)) throw new Error('정수를 입력해주세요.');
+      if (isEmpty(amount)) throw new Error(ERROR.IS_EMPTY);
+      if (!isInteger(amount)) throw new Error(ERROR.IS_NOT_INTEGER);
     } catch (e) {
       Console.print(e.message);
-      await Input.amountToBuy();
+      amount = await Input.amountToBuy();
     }
-
     return amount;
   }
   static async winningNumber() {}
