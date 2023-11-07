@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import Input from '../src/Input';
-import { ERROR } from '../src/constant';
+import Input from '../src/view/Input.js';
+import { ERROR } from '../src/constant/constant.js';
 
 describe('Input 클래스 테스트', () => {
   const mockConsoleReadLineAsync = (input) => {
