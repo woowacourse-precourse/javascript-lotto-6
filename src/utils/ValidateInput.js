@@ -24,26 +24,27 @@ class ValidateInput {
       throw new Error("[ERROR] 번호들 중 중복된 값이 존재합니다.\n");
     }
 
+    if (numbers.some((number) => isNaN(number) || number % 1 !== 0)) {
+      throw new Error("[ERROR] 당첨 번호는 자연수로 입력해주세요.\n");
+    }
+
     if (
       numbers.some(
-        (number) =>
-          isNaN(number) ||
-          number < MIN_WINNING_NUMBER ||
-          number > MAX_WINNING_NUMBER,
+        (number) => number < MIN_WINNING_NUMBER || number > MAX_WINNING_NUMBER,
       )
     ) {
       throw new Error(
-        "[ERROR] 당첨 번호는 1부터 45사이의 숫자로 입력해주세요.\n",
+        "[ERROR] 당첨 번호는 1부터 45사이의 값을 입력해주세요.\n",
       );
     }
   }
 
   static validateBonusNumber(number, winningNumber) {
-    if (
-      isNaN(number) ||
-      number < MIN_WINNING_NUMBER ||
-      number > MAX_WINNING_NUMBER
-    ) {
+    if (isNaN(number) || number % 1 !== 0) {
+      throw new Error("[ERROR] 보너스 번호는 자연수로 입력해주세요.\n");
+    }
+
+    if (number < MIN_WINNING_NUMBER || number > MAX_WINNING_NUMBER) {
       throw new Error(
         "[ERROR] 보너스 번호는 1부터 45사이의 숫자로 입력해주세요.\n",
       );
