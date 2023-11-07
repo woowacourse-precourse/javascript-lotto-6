@@ -5,14 +5,14 @@ class Lotto {
   #numbers;
 
   constructor(numbers, bonus) {
-    this.#validate(numbers);
+    this.#validate(numbers, bonus);
     this.#numbers = numbers;
     this.bonus = bonus;
   }
 
-  #validate(numbers) {
+  #validate(numbers, bonus) {
     //ValidatorUtil.lengthValidate(numbers);
-    ValidatorUtil.duplicationValidate(numbers, this.bonus);
+    ValidatorUtil.duplicationValidate(numbers, bonus);
   }
 
   getResult(userNumbers) {
