@@ -25,6 +25,10 @@ class Lotto {
     });
     return matchingCountWithWinningNumbers;
   }
+
+  getMatchingCountWithWinningNumbers(bonusNumber) {
+    return this.#numbers.includes(bonusNumber) ? 1 : 0;
+  }
 }
 
 export default Lotto;
