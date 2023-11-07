@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { lineBreakMessage, userInputMessage } from "../Constant/Message";
+import { lineBreakMessage, userInputMessage } from "../constant/Message";
 
 /**
  * 유저에게 입력받을 때 보이는 뷰

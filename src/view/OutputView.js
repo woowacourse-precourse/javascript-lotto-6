@@ -4,7 +4,7 @@ import {
   randomNumberMessage,
   returnRateMessage,
   winningResultMessage,
-} from "../Constant/Message";
+} from "../constant/Message";
 
 /**
  * 결과를 출력할때 보이는 뷰
