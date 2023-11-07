@@ -51,7 +51,7 @@ describe('List<number> Validation', () => {
 
 describe('Lotto Number Validation', () => {
   const inputValidator = new InputValidator();
-  const blankTestList = '1,2,3, ,5,6'.replace(/ /g, '').split(',');
+  const blankTestList = '1,2,3, ,5,6';
 
   test('공백을 입력하면 예외가 발생한다.', () => {
     expect(() => {

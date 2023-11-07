@@ -53,7 +53,8 @@ class InputValidator {
   }
 
   validateNoIncludeBlank(input) {
-    for (const letter of input) {
+    const letters = input.replace(/ /g, '').split(',');
+    for (const letter of letters) {
       checkBlank(letter);
     }
   }
