@@ -1,4 +1,4 @@
-import { STATISTICS } from "../Utilities/Constant.js";
+import { STATISTICS, PRIZES } from "../Utilities/Constant.js";
 
 class LottoCalculator {
   #winningNumbers;
@@ -14,36 +14,12 @@ class LottoCalculator {
 
     userNumbers.forEach((numbers) => {
       const numberOfMatchingNumbers = this.#countMatchingNumbers(numbers);
-      this.#updateStatistics(statistics, numberOfMatchingNumbers);
+      this.#updateStatistics(statistics, numberOfMatchingNumbers, numbers);
     });
 
     this.#calculateProfitAndRate(statistics);
 
     return statistics;
-  }
-
-  #updateStatistics(statistics, numberOfMatchingNumbers) {
-    if (numberOfMatchingNumbers === 6) {
-      return this.#updatePrizeAndCount(statistics, "6", 2_000_000_000);
-    }
-
-    if (numberOfMatchingNumbers === 5) {
-      const isBonusNumberMatched = this.#isBonusNumberMatched(numbers);
-      const prize = isBonusNumberMatched ? 30_000_000 : 1_500_000;
-      return this.#updatePrizeAndCount(
-        statistics,
-        "5" + (isBonusNumberMatched ? "+bonus" : ""),
-        prize
-      );
-    }
-
-    if (numberOfMatchingNumbers === 4) {
-      return this.#updatePrizeAndCount(statistics, "4", 50_000);
-    }
-
-    if (numberOfMatchingNumbers === 3) {
-      return this.#updatePrizeAndCount(statistics, "3", 5_000);
-    }
   }
 
   #updatePrizeAndCount(statistics, key, prize) {
@@ -55,6 +31,16 @@ class LottoCalculator {
     return numbers.includes(
       this.#winningNumbers.find((number) => !numbers.includes(number))
     );
+  }
+
+  #updateStatistics(statistics, numberOfMatchingNumbers, numbers) {
+    const prizeKey =
+      numberOfMatchingNumbers === 5 && this.#isBonusNumberMatched(numbers)
+        ? "5+bonus"
+        : numberOfMatchingNumbers.toString();
+    const prize = PRIZES[prizeKey] || 0;
+
+    this.#updatePrizeAndCount(statistics, prizeKey, prize);
   }
 
   #calculateProfitAndRate(statistics) {
