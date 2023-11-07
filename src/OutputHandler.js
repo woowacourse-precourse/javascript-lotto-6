@@ -8,10 +8,6 @@ export default class OutputHandler {
         });
     }
 
-    static getBonusNumbers() {
-        MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
-    }
-
     static winningStatistics(statistics) {
         const statisticsMessage = [
             "당첨 통계",
