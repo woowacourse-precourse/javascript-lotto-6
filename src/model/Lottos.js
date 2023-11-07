@@ -15,12 +15,7 @@ class Lottos{
         this.purchaseLottoNumbers = [];
         this.lottoOutputRank = [];
         this.lottoCount = this.amount / Lottos.UNIT_PRICE;
-        this.inputLottoValidate(amount);
         this.lottoNumbers();
-    }
-
-    inputLottoValidate = (amount) => {
-        new LottoValidate().inputPurchaseAmountValidate(amount);
     }
 
     lottoNumbers = () => {    
