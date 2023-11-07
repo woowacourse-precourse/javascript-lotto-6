@@ -21,8 +21,8 @@ describe('로또 당첨 결과 테스트', () => {
     const BONUS_NUMBER = 7;
 
     // when
-    const lottoCompare = new LottosResults(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
-    const result = lottoCompare.getLottoRank(includesCount, hasBonusNumber);
+    const lottosResults = new LottosResults(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
+    const result = lottosResults.getLottoRank(includesCount, hasBonusNumber);
 
     // then
     expect(result).toBe(expected);
@@ -43,8 +43,8 @@ describe('로또 당첨 결과 테스트', () => {
     const LOTTOS_RANKS = ['first', 'second', 'third', 'fourth', 'fifth', undefined];
 
     // when
-    const lottoCompare = new LottosResults(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
-    const result = lottoCompare.getLottosRanks();
+    const lottosResults = new LottosResults(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
+    const result = lottosResults.getLottosRanks();
 
     // then
     expect(result).toStrictEqual(LOTTOS_RANKS);
@@ -65,8 +65,8 @@ describe('로또 당첨 결과 테스트', () => {
     const LOTTOS_RANKS_COUNT = { first: 1, second: 1, third: 1, fourth: 1, fifth: 1 };
 
     // when
-    const lottoCompare = new LottosResults(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
-    const result = lottoCompare.getLottosResultsCount();
+    const lottosResults = new LottosResults(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
+    const result = lottosResults.getLottosResultsCount();
 
     // then
     expect(result).toStrictEqual(LOTTOS_RANKS_COUNT);
