@@ -1,10 +1,37 @@
-ver 1.0
+ver 0.1
 
 ## 참고
 
-## 해당 프로그램은 함수형인 Functional, MVC 패턴을 적용한 MVC 모듈 두 가지 방식으로 play()가 구현되어 있음
+## 해당 프로그램은 함수형인 Functional, MVC 패턴을 적용한 MVC 모듈 두 가지 방식으로 play()를 구현하려 하였음
 
-## 기본 play는 Functional의 play로 지정되어있음
+## 현재는 Functional의 play()만 검증되었음
+
+## coverage
+File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+------------------------|---------|----------|---------|---------|-------------------
+All files               |   85.38 |    97.36 |   83.58 |   85.53 |                   
+ src                    |     100 |      100 |     100 |     100 |                   
+  App.js                |     100 |      100 |     100 |     100 |                   
+  Lotto.js              |     100 |      100 |     100 |     100 |                   
+ src/constants          |     100 |      100 |     100 |     100 |                   
+  CONSTANTS.js          |     100 |      100 |     100 |     100 | 
+  NUMBERS.js            |     100 |      100 |     100 |     100 | 
+  STRINGS.js            |     100 |      100 |     100 |     100 | 
+ src/functinoal         |     100 |      100 |     100 |     100 | 
+  Functional.js         |     100 |      100 |     100 |     100 | 
+ src/functinoal/modules |   98.01 |    96.42 |   97.43 |    98.9 | 
+  ConvertInputTo.js     |     100 |      100 |     100 |     100 | 
+  ErrorCheck.js         |     100 |      100 |     100 |     100 | 
+  Get.js                |     100 |      100 |     100 |     100 | 
+  Is.js                 |   94.11 |    92.85 |     100 |     100 | 7
+  Print.js              |   95.23 |      100 |   91.66 |   95.23 | 75
+ src/mvc/model          |      80 |      100 |   66.66 |   78.57 | 
+  LottoModel.js         |      80 |      100 |   66.66 |   78.57 | 33-37,50
+ src/mvc/model/utils    |   54.54 |      100 |    62.5 |      60 | 
+  Get.js                |   54.54 |      100 |    62.5 |      60 | 37-40,50
+ src/mvc/view           |   21.05 |      100 |   33.33 |   21.05 | 
+  LottoOutputView.js    |   21.05 |      100 |   33.33 |   21.05 | 37-89
+
 
 # App
 
@@ -33,7 +60,7 @@ Functional과 MVC 모두 다음과 같이 게임이 진행됨
 
 - 모듈의 이름에서 모듈의 특징을 유추 가능(ex: Is는 `Boolean`을 반환하는 함수들이 있는 모듈)
 
-- 이와 같은 특징에 따라 모듈을 `import` 할 때, 모듈 하위 함수가 아닌 모듈 자체를 `import` 할 것을 권장
+- 이와 같은 특징에 따라 본 문서에서 제시된 모듈을 `import` 할 때, 모듈 하위 함수가 아닌 모듈 자체를 `import` 할 것을 권장
 
 ```jsx
  import { linebreak } from 'PrintSource';
@@ -43,9 +70,111 @@ Functional과 MVC 모두 다음과 같이 게임이 진행됨
  Print.linebreak();//good
 ```
 
+# Lotto
+
+로또의 정보가 담긴 클래스
+
+```jsx
+const lotto = new Lotto([1,2,3,4,5,6]);
+```
+
+**매개변수**
+
+`numbers`
+
+1~45 범위의 중복되지 않은 정수 6개가 담긴 배열
+
+**예외**
+
+매개변수가 1~45 범위의 중복되지 않은 정수 6개가 담긴 배열이 아니면 예외를 던짐
+
+
 # App
 
 로또 게임의 전반적인 흐름을 관리하는 play()가 있음
+
+play()는 문서 초입부에 제시되어 있음
+
+```jsx
+  const app=new App();
+  await app.play();
+```
+
+## ConvertInputTo
+
+사용자로부터 입력을 받아 특정한 값으로 바꾸어 주는 함수들
+
+사용자로부터 동기적으로 입력을 받아야 하므로 해당 모듈의 모든 함수들 앞에는 async가 붙어있음
+
+### async lottoArray()
+
+- 사용자로부터 입력을 받아 Lotto 들이 담긴 배열을 반환
+- 현재는 구매 금액만 입력받아 구매 금액에 맞는 무작위 Lotto 배열을 반환
+- 로또 구매금액이 1000 단위가 아니면 오류 메시지를 출력 후 다시 입력 받음
+
+```jsx
+const lottoArray = await ConvertInputTo.lottoArray();
+```
+
+### 'async purchasePrice()'
+
+- 로또 구매금액을 입력받아 해당 금액을 `Number` 형으로 반환
+- 로또 구매금액이 1000 단위가 아니면 오류 메시지를 출력 후 다시 입력 받음
+
+```jsx
+const purchasePrice = await purchasePrice();
+```
+
+
+**입출력예시**
+
+```
+구입금액을 입력해 주세요.
+8000
+------
+구입금액을 입력해 주세요.
+9554
+[ERROR] 딱 떨어지는 수가 아닙니다.
+구입금액을 입력해 주세요.
+1.1
+[ERROR] 정수가 아닙니다.
+구입금액을 입력해 주세요.
+1000
+```
+
+### 'async lottoBoard()'
+
+- 로또 당첨번호와 보너스 번호를 입력받아 로또 번호의 상태 ( `MISS` , `BONUS` , `HIT` )가 담겨있는 lottoBoard를 반환
+- 입력 값이 `async winningNumbersArray()` 와 `async bonusNumber` 의 입력 오류에 해당한다면 값을 다시 입력 받음
+
+```jsx
+const lottoBoard = ConverInputTo.lottoBoard();
+```
+
+### 'async winningNumbersArray()'
+
+- `','` 로 구분되는 숫자 6개를 입력받아
+
+```jsx
+'사용 방법'
+```
+
+**매개변수**
+
+`'매개변수'`
+
+'매개변수 설명'
+
+**반환**
+
+'반환 값'
+
+**예외**
+
+'예외 경우'
+
+
+
 
 
 

@@ -3,8 +3,6 @@ import ConvertInputTo from '../../../../src/functinoal/modules/ConvertInputTo';
 
 import CONSTANTS from '../../../../src/constants/CONSTANTS';
 
-const { ERROR_HEADER } = CONSTANTS;
-
 const mockQuestions = inputs => {
   let nowIndex = 0;
   Console.readLineAsync = jest.fn();
@@ -15,7 +13,7 @@ const mockQuestions = inputs => {
   });
 };
 
-describe('winningNumbersArray()', () => {
+describe('lottoNumbersArray', () => {
   test.each([
     [['1,2,3,4,5,6'], [1, 2, 3, 4, 5, 6]],
     [['4,5,6,7,8,9'], [4, 5, 6, 7, 8, 9]],
@@ -24,10 +22,10 @@ describe('winningNumbersArray()', () => {
     mockQuestions(input);
 
     //when
-    const result = await ConvertInputTo.winningNumbersArray();
+    const lottoNumbers = await ConvertInputTo.lottoNumbersArray();
 
     //then
-    expect(result).toEqual(expectedValue);
+    expect(lottoNumbers).toEqual(expectedValue);
   });
 
   test.each([
@@ -64,9 +62,9 @@ describe('winningNumbersArray()', () => {
     mockQuestions(input);
 
     //when
-    const winningNumbers = await ConvertInputTo.winningNumbersArray();
+    const lottoNumbers = await ConvertInputTo.lottoNumbersArray();
 
     //then
-    expect(winningNumbers).toEqual(expectedValue);
+    expect(lottoNumbers).toEqual(expectedValue);
   });
 });

@@ -39,7 +39,7 @@ class ConvertInputTo {
 
   static async lottoBoard() {
     const board = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
-    (await ConvertInputTo.winningNumbersArray()).forEach(
+    (await ConvertInputTo.lottoNumbersArray()).forEach(
       number => (board[number] = HIT_STATE)
     );
 
@@ -49,7 +49,7 @@ class ConvertInputTo {
     return Object.freeze(board);
   }
 
-  static async winningNumbersArray() {
+  static async lottoNumbersArray() {
     while (true) {
       const numbersString = await Console.readLineAsync(
         WINNING_NUMBER_INPUT_MESSAGE
