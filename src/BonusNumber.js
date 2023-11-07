@@ -5,16 +5,21 @@ class BonusNumber {
   #bonusNumber;
 
   constructor(bonusNumber) {
+    this.#validate(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
   #validate(number) {
-    if (validateNumber.isOneToFourtyFive(number)) {
+    if (validateNumber.isNotOneToFourtyFive(number)) {
       throw new Error(BONUS_NUMBER_ERROR.isOneToFourtyFive);
     }
-    if (validateNumber.isNumber(number)) {
+    if (validateNumber.isNotNumber(number)) {
       throw new Error(BONUS_NUMBER_ERROR.isNumber);
     }
+  }
+
+  get bonusNumber() {
+    return this.#bonusNumber;
   }
 }
 
