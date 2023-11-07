@@ -23,16 +23,16 @@ class LottoGameController {
   }
 
   async start() {
-    await this.buyLottos();
-    this.printMyLottos();
+    await this.#buyLottos();
+    this.#printMyLottos();
 
-    await this.setLottoNumbers();
-    this.printStats();
+    await this.#setLottoNumbers();
+    this.#printStats();
   }
 
-  async setLottoNumbers() {
-    await this.setWinningNumbers();
-    await this.setBonusNumber();
+  async #setLottoNumbers() {
+    await this.#setWinningNumbers();
+    await this.#setBonusNumber();
   }
 
   async getUserInputAndSet(setterFn, getterCallback) {
@@ -46,24 +46,24 @@ class LottoGameController {
     }
   }
 
-  async setWinningNumbers() {
+  async #setWinningNumbers() {
     await this.getUserInputAndSet(
       this.lottoResult.setWinningNumbers.bind(this.lottoResult),
-      this.getWinningNumbers.bind(this),
+      this.#getWinningNumbers.bind(this),
     );
   }
 
-  async setBonusNumber() {
+  async #setBonusNumber() {
     await this.getUserInputAndSet(
       this.lottoResult.setBonusNumber.bind(this.lottoResult),
-      this.getBonusNumber.bind(this),
+      this.#getBonusNumber.bind(this),
     );
   }
 
-  printMyLottos() {
+  #printMyLottos() {
     const loopCount = this.money.getPurchaseCount();
     Array.from({ length: loopCount }).forEach((_, i) => {
-      this.addLottoTicketInstance();
+      this.#addLottoTicketInstance();
       const lottoInstance = this.lottoTickets.getLottoTicket(i);
       this.outputView.print(
         formatLottoNumbers(lottoInstance.getLottoNumbers()),
@@ -71,21 +71,21 @@ class LottoGameController {
     });
   }
 
-  createLottoInstance() {
-    return new Lotto(this.generateLottoNumbers().sort((a, b) => a - b));
+  #createLottoInstance() {
+    return new Lotto(this.#generateLottoNumbers().sort((a, b) => a - b));
   }
 
-  addLottoTicketInstance() {
-    const lotto = this.createLottoInstance();
+  #addLottoTicketInstance() {
+    const lotto = this.#createLottoInstance();
     this.lottoTickets.addLotto(lotto);
   }
 
-  async buyLottos() {
+  async #buyLottos() {
     while (true) {
       try {
-        const money = await this.getPurchaseAmount();
+        const money = await this.#getPurchaseAmount();
         this.money.setMoney(money);
-        this.printPurchaseCount();
+        this.#printPurchaseCount();
         break;
       } catch (error) {
         this.outputView.print(error);
@@ -93,22 +93,22 @@ class LottoGameController {
     }
   }
 
-  async getPurchaseAmount() {
+  async #getPurchaseAmount() {
     const money = Number(await this.inputView.getUserInputAsync(MESSAGE.INPUT));
     InputValidator.validateMoney(money);
     return money;
   }
 
-  printPurchaseCount() {
+  #printPurchaseCount() {
     const purchaseCount = this.money.getPurchaseCount();
     this.outputView.print(`\n${purchaseCount}${MESSAGE.BUY}`);
   }
 
-  generateLottoNumbers() {
+  #generateLottoNumbers() {
     return this.randomNumberGeneration.generateLottoNumber();
   }
 
-  async getWinningNumbers() {
+  async #getWinningNumbers() {
     const winningNumbers = await this.inputView.getUserInputAsync(
       MESSAGE.WIN_NUMBER,
     );
@@ -118,7 +118,7 @@ class LottoGameController {
     return winningNumbers.split(GAME_RULE.SEPARATOR).map(Number);
   }
 
-  async getBonusNumber() {
+  async #getBonusNumber() {
     const bonusNumber = await this.inputView.getUserInputAsync(
       MESSAGE.BONUS_NUMBER,
     );
@@ -130,11 +130,11 @@ class LottoGameController {
     return Number(bonusNumber);
   }
 
-  printStats() {
+  #printStats() {
     this.outputView.print(MESSAGE.WINNING_STATS);
 
-    const winningMatchCounts = this.getWinningNumberMatchCounts();
-    const hasBonusMatches = this.hasBonusNumberMatches();
+    const winningMatchCounts = this.#getWinningNumberMatchCounts();
+    const hasBonusMatches = this.#hasBonusNumberMatches();
     const matchResults = formatLottoMatchResults(
       winningMatchCounts,
       hasBonusMatches,
@@ -150,7 +150,7 @@ class LottoGameController {
     this.outputView.printTotalProfit(profit);
   }
 
-  getWinningNumberMatchCounts() {
+  #getWinningNumberMatchCounts() {
     const winningNumberMatchCounts =
       this.lottoTickets.getWinningNumberMatchCount(
         this.lottoResult.getWinningNumbers(),
@@ -158,7 +158,7 @@ class LottoGameController {
     return winningNumberMatchCounts;
   }
 
-  hasBonusNumberMatches() {
+  #hasBonusNumberMatches() {
     const hasBonusMatch = this.lottoTickets.includesBonusNumber(
       this.lottoResult.getBonusNumber(),
     );
