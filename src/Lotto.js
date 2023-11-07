@@ -97,6 +97,15 @@ class Lotto {
     }
     return lottoTicketsArray;
   }
+
+  getMatchingNumbersArray(lottoWinningNumberArray) {
+    return this.#numbers.map((myLottoticket) => {
+      const matchingArray = lottoWinningNumberArray.filter((winningNumber) => {
+        return myLottoticket.includes(winningNumber);
+      });
+      return matchingArray.length;
+    });
+  }
 }
 
 export default Lotto;

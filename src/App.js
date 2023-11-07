@@ -11,15 +11,18 @@ class App {
     try {
       const lottoAmount = await this.validateLottoAmount();
 
-      const lottoTickets = this.getLottoTickets(lottoAmount);
-      this.view.printLottoTickets(lottoTickets);
+      const myLottoTicketsArray = this.getMyLottoTickets(lottoAmount);
 
-      const lottoWinningNumbers = await this.validateLottoWinningNumbers();
+      this.view.printLottoTickets(myLottoTicketsArray);
 
-      const lottoWinningNumberArray =
-        this.getLottoWinningNumberArray(lottoWinningNumbers);
+      const lottoWinningNumberArray = await this.validateLottoWinningNumbers();
 
       const bonusNumber = await this.validateLottoBonusNumber(
+        lottoWinningNumberArray
+      );
+
+      const matchingNumbersArray = this.getMatchingNumbersArray(
+        myLottoTicketsArray,
         lottoWinningNumberArray
       );
     } catch (error) {
@@ -47,8 +50,10 @@ class App {
         const lottoWinningNumbers = await this.view.getLottoWinningNumbers();
         const model = new Lotto(lottoWinningNumbers);
         model.validateLottoWinningNumbers();
+        const lottoWinningNumberArray =
+          this.getLottoWinningNumberArray(lottoWinningNumbers);
 
-        return lottoWinningNumbers;
+        return lottoWinningNumberArray;
       } catch (error) {
         console.error(error);
       }
@@ -69,7 +74,7 @@ class App {
     }
   }
 
-  getLottoTickets(numbers) {
+  getMyLottoTickets(numbers) {
     const model = new Lotto(numbers);
     return model.generateLottoTicketsArray();
   }
@@ -77,6 +82,11 @@ class App {
   getLottoWinningNumberArray(lottoWinningNumbers) {
     const model = new Lotto(lottoWinningNumbers);
     return model.getLottoWinningNumberArray();
+  }
+
+  getMatchingNumbersArray(myLottoTicketsArray, lottoWinningNumberArray) {
+    const model = new Lotto(myLottoTicketsArray);
+    return model.getMatchingNumbersArray(lottoWinningNumberArray);
   }
 }
 
