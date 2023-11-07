@@ -8,3 +8,9 @@ export const isDuplicate = (lottoArray) => {
   if (new Set(lottoArray).size !== SIX_NUMBERS)
     throw new Error(NOT_ALLOWED_DUPLICATED_NUMBERS);
 };
+
+export const isInteger = (numbers) => {
+  if (numbers.some((number) => !Number.isInteger(number)))
+    throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
+};
+
