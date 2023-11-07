@@ -19,3 +19,13 @@ export const validateLottoResult = (number, numbers) => {
     throw new Error(ERROR_MSG.EXISTING_NUM);
   }
 };
+
+export const validateBonusNum = (number, lottoResult) => {
+  if (number < 1 || number > 45) {
+    throw new Error(ERROR_MSG.NUMBER_RANGE);
+  }
+
+  if (lottoResult.includes(number)) {
+    throw new Error(ERROR_MSG.EXISTING_NUM);
+  }
+};

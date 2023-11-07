@@ -19,3 +19,11 @@ export const LOTTO_RULES = Object.freeze({
   LENGTH: 6,
   PRICE: 1000,
 });
+
+export const LOTTO_RESULTS = {
+  num3: 0,
+  num4: 0,
+  num5: 0,
+  num5WithBonus: 0,
+  num6: 0,
+};

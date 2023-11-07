@@ -1,13 +1,52 @@
-//로또 번호와 당첨 번호 비교하는 함수
-export const findMatchingNums = (lottos, lottoResults) => {
-  return lottos.map((lotto) => {
-    const count = lotto.filter((num) => lottoResults.includes(num)).length;
-    // return count;
-    console.log(count);
-  });
-};
-export const calculateProfit = (money) => {
-  const total = money.reduce((acc, cur) => (acc += cur.money * cur.count), 0);
+import { Console } from "@woowacourse/mission-utils";
+import { LOTTO_RESULTS } from "../constants/constants.js";
 
-  return Math.round((total / money) * 100 * 10) / 10;
+export const formatAndDisplayResult = (
+  num3,
+  num4,
+  num5,
+  num5WithBonus,
+  num6
+) => {
+  const result = `
+3개 일치 (5,000원) - ${num3}개
+4개 일치 (50,000원) - ${num4}개
+5개 일치 (1,500,000원) - ${num5}개
+5개 일치, 보너스 볼 일치 (30,000,000원) - ${num5WithBonus}개
+6개 일치 (2,000,000,000원) - ${num6}개
+  `;
+
+  Console.print("당첨 통계\n---\n" + result);
 };
+
+const updateLottoResults = (count, lotto, bonusBall) => {
+  if (count === 3) {
+    LOTTO_RESULTS.num3++;
+  } else if (count === 4) {
+    LOTTO_RESULTS.num4++;
+  } else if (count === 5) {
+    LOTTO_RESULTS.num5++;
+  } else if (count === 5 && lotto.includes(bonusBall)) {
+    LOTTO_RESULTS.num5WithBonus++;
+  } else if (count === 6) {
+    LOTTO_RESULTS.num6++;
+  }
+};
+
+export const findMatchingNums = (lottos, lottoResults, bonusBall) => {
+  lottos.map((lotto) => {
+    const count = lotto.filter((num) => lottoResults.includes(num)).length;
+    updateLottoResults(count, lotto, bonusBall);
+  });
+
+  formatAndDisplayResult(
+    LOTTO_RESULTS.num3,
+    LOTTO_RESULTS.num4,
+    LOTTO_RESULTS.num5,
+    LOTTO_RESULTS.num5WithBonus,
+    LOTTO_RESULTS.num6
+  );
+};
+
+//
+export const calculateProfit = () => {};

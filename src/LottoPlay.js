@@ -2,7 +2,7 @@ import { Random } from "@woowacourse/mission-utils";
 import { ConsoleInput } from "./ConsoleInput.js";
 import { ConsoleOutput } from "./ConsoleOutput.js";
 import Lotto from "./Lotto.js";
-import { validateLottoPrice } from "./utility/validation.js";
+import { validateBonusNum, validateLottoPrice } from "./utility/validation.js";
 import { LOTTO_RULES } from "./constants/constants.js";
 import { findMatchingNums } from "./utility/results.js";
 
@@ -24,8 +24,8 @@ class LottoPlay {
     const bonusNum = await this.inputBonus();
 
     //   로또 번호에 중복된 숫자가 있는지 체크하는 유효성 검사 함수
-    findMatchingNums(this.lottos, this.#result);
-    // console.log(this.lottos);
+    findMatchingNums(this.lottos, this.#result, bonusNum);
+    // generatePrizeText(this.lottos, this.#result);
   }
 
   async inputLottoPrice() {
@@ -59,7 +59,8 @@ class LottoPlay {
   }
 
   async inputBonus() {
-    await ConsoleInput.inputBonusNumber();
+    const bonus = await ConsoleInput.inputBonusNumber();
+    validateBonusNum(bonus, this.#result);
   }
 }
 export default LottoPlay;
