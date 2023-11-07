@@ -15,6 +15,8 @@ class App {
 
       const countTicket = this.countLottoTicket(userMoney);
       const winNum = await this.getLuckyNumber();
+      const bonusNumber = await this.getBonusNumber();
+      this.checkBonusNumber(bonusNumber, winNum);
     }
   }
 
@@ -48,6 +50,27 @@ class App {
     }
 
     return winNum;
+  }
+
+  async getBonusNumber() {
+    const bonusNumber = await MissionUtils.Console.readLineAsync(
+      `보너스 번호를 입력해 주세요.`
+    );
+    return bonusNumber;
+  }
+
+  checkBonusNumber(bonusNumber, winNum) {
+    if (
+      isNaN(bonusNumber) ||
+      bonusNumber < 1 ||
+      bonusNumber > 45 ||
+      !Number.isInteger(Number(bonusNumber))
+    ) {
+      throw new Error("[ERROR] 올바른 보너스 번호를 입력해주세요.");
+    }
+    if (winNum.includes(Number(bonusNumber))) {
+      throw new Error("[ERROR] 보너스 번호와 당첨 번호 중복");
+    }
   }
 }
 
