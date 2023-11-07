@@ -13,35 +13,31 @@ class CheckManager {
   }
 
   #publishLottos(count) {
-    return new Array(count).fill('').map((v) => {
+    const publishLottos = [];
+    for (let i = 0; i < count; i++) {
       const publishLotto = MissionUtils.Random.pickUniqueNumbersInRange(
         LOTTO_NUMBER.startNumber,
         LOTTO_NUMBER.endNumber,
         LOTTO_NUMBER.lottoLength,
       );
-      Console.print(publishLotto.sort((a, b) => a - b).toString());
-      return publishLotto;
-    });
+      Console.print('[' + publishLotto.sort((a, b) => a - b).join(', ') + ']');
+      publishLottos.push(publishLotto);
+    }
+    return publishLottos;
   }
 
   #checkRanks(luckyNumber, bonusNumber, randomPublishLottos) {
     return randomPublishLottos.map((randomPublishLotto) => {
-      const differentCount = this.#checkLuckyNumber(
-        luckyNumber,
-        randomPublishLotto,
-      );
+      const differentCount = this.#checkLuckyNumber(luckyNumber,randomPublishLotto);
       const isBonus = this.#checkBonus(bonusNumber, randomPublishLottos);
-      switch (differentCount) {
-        case 0:
-          return 1;
-        case 1:
-          if (isBonus) {
-            return 2;
-          }
-          return 3;
-        default:
-          return differentCount + 2;
+      if (differentCount == 0) return 1;
+      if (differentCount == 1) {
+        if (isBonus) {
+          return 2;
+        }
+        return 3;
       }
+      return differentCount + 2;
     });
   }
 
