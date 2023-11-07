@@ -1,5 +1,5 @@
-import { GAME_RULE } from '../src/constants/gameRule';
-import RandomNumberStrategy from '../src/model/strategies/RandomNumberStrategy';
+import { GAME_RULE } from '../src/constants/gameRule.js';
+import RandomNumberStrategy from '../src/model/strategies/RandomNumberStrategy.js';
 
 describe('💙 RandomNumberStrategy 클래스를 테스트합니다. ฅ^._.^ฅ', () => {
   const lottoNumberGenerator = new RandomNumberStrategy();
