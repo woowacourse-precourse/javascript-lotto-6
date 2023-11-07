@@ -12,6 +12,11 @@ const inputs = {
     const winningNum = await Console.readLineAsync(MESSAGE.input.winningNum);
     return winningNum;
   },
+  // 보너스 번호 입력
+  async inpustBonusNum() {
+    const bonusNum = await Console.readLineAsync(MESSAGE.input.bonusNum);
+    return bonusNum;
+  },
 };
 
 export default inputs;
