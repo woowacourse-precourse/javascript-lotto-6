@@ -5,6 +5,9 @@ import Purchase from "../model/Purchase";
 import BonusNumber from "../model/BonusNumber";
 import Lotto from "../model/Lotto";
 
+/**
+ * 구현한 모델과 뷰를 이용하여 전체 흐름을 주도하는 클래스
+ */
 class LottoController {
   #inputView;
   #outputView;
@@ -19,6 +22,9 @@ class LottoController {
     this.#outputView = new OutputView();
   }
 
+  /**
+   * 로또 과제 시작 함수
+   */
   async process() {
     await this.#purchaseProcess();
     const purchaseNumber = this.#purchase.purchaseNumber();
@@ -35,6 +41,9 @@ class LottoController {
     this.#outputView.winningResultView(winningResult, rate);
   }
 
+  /**
+   * 구매 과정을 진행하며 Error가 생길 시 출력 후 다시 입력받는 함수
+   */
   async #purchaseProcess() {
     while (true) {
       try {
@@ -47,6 +56,9 @@ class LottoController {
     }
   }
 
+  /**
+   * 당첨 번호 입력을 진행하며 Error가 생길 시 출력 후 다시 입력받는 함수
+   */
   async #winningNumberProcess() {
     while (true) {
       try {
@@ -59,6 +71,9 @@ class LottoController {
     }
   }
 
+  /**
+   * 보너스 번호 입력을 진행하며 Error가 생길 시 출력 후 다시 입력받는 함수
+   */
   async #bonusNumberProcess() {
     while (true) {
       try {
