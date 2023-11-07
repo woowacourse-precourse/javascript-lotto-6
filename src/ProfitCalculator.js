@@ -34,6 +34,32 @@ class ProfitCalculator {
       this.#matchCount[matchNumberToStringMatcher(match)]++;
     });
   }
+
+  #calculateTotalProfit() {
+    let profit = 0;
+
+    for (let match in this.#matchCount) {
+      profit = profit + this.#matchCount[match] * PROFIT[match];
+    }
+
+    profit = (profit / this.#lottos.length) * 100;
+
+    return this.#roundingDecimals(profit);
+  }
+
+  #roundingDecimals(number) {
+    if (Number.isInteger(number)) {
+      return String(number);
+    }
+
+    number = number.toFixed(2);
+
+    if (number[number.length - 1] === "0") {
+      return number.slice(0, number.length - 1);
+    }
+
+    return number;
+  }
 }
 
 export default ProfitCalculator;
