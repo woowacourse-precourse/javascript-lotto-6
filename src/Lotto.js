@@ -38,6 +38,10 @@ class Lotto {
     const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     return numbers;
   }
+
+  static sortNumbers(numbers) {
+    return numbers.sort((a, b) => a - b);
+  }
 }
 
 
