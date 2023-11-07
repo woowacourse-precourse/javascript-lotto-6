@@ -1,10 +1,4 @@
 import { Console } from '@woowacourse/mission-utils';
-import {
-  isNumber,
-  isThousands,
-  validateArrayLength,
-} from '../utils/validation.js';
-import { parseNumber, parseNumbers } from '../utils/index.js';
 
 class LottoConsole {
   static async getBudget() {
@@ -12,9 +6,9 @@ class LottoConsole {
     LottoConsole.#validateEmtpyInput(input);
     this.printEmptyLine();
 
-    const budget = parseNumber(input);
-    isNumber(budget);
-    isThousands(budget);
+    const budget = LottoConsole.#parseNumber(input);
+    LottoConsole.#isNumber(budget);
+    LottoConsole.#validateThousands(budget);
 
     return budget;
   }
@@ -24,8 +18,8 @@ class LottoConsole {
     LottoConsole.#validateEmtpyInput(input);
     this.printEmptyLine();
 
-    const numbers = parseNumbers(input);
-    validateArrayLength(numbers);
+    const numbers = LottoConsole.#parseNumbers(input);
+    LottoConsole.#validateArrayLength(numbers);
 
     return numbers;
   }
@@ -35,7 +29,7 @@ class LottoConsole {
     LottoConsole.#validateEmtpyInput(input);
     this.printEmptyLine();
 
-    const bonusNumber = parseNumber(input);
+    const bonusNumber = LottoConsole.#parseNumber(input);
 
     return bonusNumber;
   }
@@ -64,9 +58,47 @@ class LottoConsole {
     Console.print('');
   }
 
+  static #parseNumber(string) {
+    const parsedNumber = Number(string);
+    LottoConsole.#isNumber(parsedNumber);
+    return parsedNumber;
+  }
+
+  static #parseNumbers(string) {
+    const lottoNumbers = string.split(',').map(Number);
+    lottoNumbers.forEach(LottoConsole.#validateLottoNumber);
+    return lottoNumbers;
+  }
+
   static #validateEmtpyInput(input) {
     if (input.trim().length === 0)
       throw new Error('[ERROR] 입력값이 비어있습니다.');
+  }
+
+  static #isNumber(number) {
+    if (Number.isNaN(number)) throw new Error('[ERROR] 숫자를 입력해주세요.');
+  }
+
+  static #validateNumberBetweenRange(number) {
+    if (number < 1)
+      throw new Error('[ERROR] 로또 숫자는 1과 45사이어야 합니다.');
+    if (number > 45)
+      throw new Error('[ERROR] 로또 숫자는 1과 45사이어야 합니다.');
+  }
+
+  static #validateLottoNumber(number) {
+    LottoConsole.#isNumber(number);
+    LottoConsole.#validateNumberBetweenRange(number);
+  }
+
+  static #validateThousands(number) {
+    if (number % 1000 !== 0)
+      throw new Error('[ERROR] 입력값은 1000원 단위입니다.');
+  }
+
+  static #validateArrayLength(arr) {
+    if (arr.length !== 6)
+      throw new Error('[ERROR] 로또는 6자리 숫자이어야 합니다.');
   }
 }
 
