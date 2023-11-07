@@ -1,18 +1,55 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/index.js';
+
 class Lotto {
-  #numbers;
+  constructor(numbers) {}
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
+  async buy() {}
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-  }
+  async setWinningNumbers() {}
 
-  // TODO: 추가 기능 구현
+  async getResult() {}
+
+  readBuyAmount() {}
+
+  validateIsNumber(input) {}
+
+  validateBuyUnit(input) {}
+
+  validateNumberOfInputs(input) {}
+
+  validateIsInRange(input) {}
+
+  getNumberOfAvailableTickets(amount) {}
+
+  publishLottoTicket() {}
+
+  printAllTickets() {}
+
+  readWinningNumbers() {}
+
+  readWinningBonusNumber() {}
+
+  getResult() {}
+
+  getRank() {}
+
+  printPrize() {}
+
+  printRateOfRevenue() {}
+}
+
+class LottoTicket {
+  numbers = [];
+  constructor() {}
+
+  generateLottoNumbers() {}
+
+  getNumberOfMatchedNumbers() {}
+
+  getIsBonusNumberMatched() {}
+
+  printNumbers() {}
 }
 
 export default Lotto;
