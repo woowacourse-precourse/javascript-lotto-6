@@ -25,9 +25,8 @@ class LottoGameController {
   async start() {
     await this.#buyLottos();
     this.#printMyLottos();
-
     await this.#setLottoNumbers();
-    this.#printStats();
+    this.#printGameResult();
   }
 
   async #setLottoNumbers() {
@@ -35,7 +34,7 @@ class LottoGameController {
     await this.#setBonusNumber();
   }
 
-  async getUserInputAndSet(setterFn, getterCallback) {
+  async #getUserInputAndSet(setterFn, getterCallback) {
     while (true) {
       try {
         setterFn(await getterCallback());
@@ -47,14 +46,14 @@ class LottoGameController {
   }
 
   async #setWinningNumbers() {
-    await this.getUserInputAndSet(
+    await this.#getUserInputAndSet(
       this.lottoResult.setWinningNumbers.bind(this.lottoResult),
       this.#getWinningNumbers.bind(this),
     );
   }
 
   async #setBonusNumber() {
-    await this.getUserInputAndSet(
+    await this.#getUserInputAndSet(
       this.lottoResult.setBonusNumber.bind(this.lottoResult),
       this.#getBonusNumber.bind(this),
     );
@@ -63,7 +62,7 @@ class LottoGameController {
   #printMyLottos() {
     const loopCount = this.money.getPurchaseCount();
     Array.from({ length: loopCount }).forEach((_, i) => {
-      this.#addLottoTicketInstance();
+      this.#addLottoTicket();
       const lottoInstance = this.lottoTickets.getLottoTicket(i);
       this.outputView.print(
         formatLottoNumbers(lottoInstance.getLottoNumbers()),
@@ -75,7 +74,7 @@ class LottoGameController {
     return new Lotto(this.#generateLottoNumbers().sort((a, b) => a - b));
   }
 
-  #addLottoTicketInstance() {
+  #addLottoTicket() {
     const lotto = this.#createLottoInstance();
     this.lottoTickets.addLotto(lotto);
   }
@@ -130,24 +129,28 @@ class LottoGameController {
     return Number(bonusNumber);
   }
 
-  #printStats() {
+  #printGameResult() {
     this.outputView.print(MESSAGE.WINNING_STATS);
+    this.#calcLottoMatchResult();
+    this.outputView.printLottoResult(this.lottoResult.getMatchCount());
+    this.#printProfit();
+  }
 
+  #printProfit() {
+    const userMoney = this.money.getMoney();
+    const prizeMoney = this.lottoResult.getPrizeMoney();
+    const profit = this.lottoResult.getProfit(userMoney, prizeMoney);
+    this.outputView.printTotalProfit(profit);
+  }
+
+  #calcLottoMatchResult() {
     const winningMatchCounts = this.#getWinningNumberMatchCounts();
     const hasBonusMatches = this.#hasBonusNumberMatches();
     const matchResults = formatLottoMatchResults(
       winningMatchCounts,
       hasBonusMatches,
     );
-
     this.lottoResult.setMatchCount(matchResults);
-    const userMoney = this.money.getMoney();
-    const prizeMoney = this.lottoResult.getPrizeMoney();
-
-    const profit = this.lottoResult.getProfit(userMoney, prizeMoney);
-
-    this.outputView.printLottoResult(this.lottoResult.getMatchCount());
-    this.outputView.printTotalProfit(profit);
   }
 
   #getWinningNumberMatchCounts() {
