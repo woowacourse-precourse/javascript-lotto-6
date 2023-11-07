@@ -19,15 +19,15 @@ class Lotto {
     return this.#numbers;
   }
 
-  raffleNumbers(mainNumbers, bonusNumber) {
-    const matchingNumberCount = this.raffleMainNumber(mainNumbers);
+  raffleLotto(mainNumberArray, bonusNumber) {
+    const matchingNumberCount = this.raffleMainNumber(mainNumberArray);
     if (matchingNumberCount === CONSTANTS.bonusNumberConditionCount)
       return this.raffleBonusNumber(bonusNumber);
     return PRIZE[matchingNumberCount];
   }
 
-  raffleMainNumber(mainNumbers) {
-    return CONSTANTS.mainNumberCount * 2 - new Set([...this.#numbers, ...mainNumbers]).size;
+  raffleMainNumber(mainNumberArray) {
+    return CONSTANTS.mainNumberCount * 2 - new Set([...this.#numbers, ...mainNumberArray]).size;
   }
 
   raffleBonusNumber(bonusNumber) {
