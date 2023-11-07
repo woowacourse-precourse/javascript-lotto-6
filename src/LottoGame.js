@@ -1,14 +1,12 @@
+import MatchingTable from './MatchingTable.js';
 import {
   COUNT,
   DEFAULT_NUM,
   LOTTO_TICKET_PRICE,
   MATCH_COUNTS,
   PERCENTAGE,
-  RANKING,
 } from './constants/conditions.js';
 import PRIZE from './constants/rankingPrize.js';
-
-const IS_BOUNS_INDEX = 1;
 
 export default class LottoGame {
   #autoLottos;
@@ -53,24 +51,9 @@ export default class LottoGame {
   }
 
   #transformMatchingTable(matchCountList) {
-    const table = {
-      three: 0,
-      four: 0,
-      fiveNotBonus: 0,
-      fiveAndBonus: 0,
-      all: 0,
-    };
-    matchCountList.forEach((count) => {
-      if (Array.isArray(count)) {
-        count[IS_BOUNS_INDEX]
-          ? (table.fiveAndBonus += 1)
-          : (table.fiveNotBonus += 1);
-      }
-      if (count === MATCH_COUNTS.three) table.three += 1;
-      if (count === MATCH_COUNTS.four) table.four += 1;
-      if (count === MATCH_COUNTS.all) table.all += 1;
-    });
-    return table;
+    const matchingTable = new MatchingTable();
+    matchingTable.updateTable(matchCountList);
+    return matchingTable.getTable();
   }
 
   #calculateRateOfReturn(income) {
@@ -81,8 +64,8 @@ export default class LottoGame {
 
   #getRateOfReturn(matchingTable) {
     let income = DEFAULT_NUM;
-    Object.entries(matchingTable).forEach(([key, value]) => {
-      income += PRIZE[key] * value;
+    Object.entries(matchingTable).forEach(([matchedCount, count]) => {
+      income += PRIZE[matchedCount] * count;
     });
     return this.#calculateRateOfReturn(income);
   }

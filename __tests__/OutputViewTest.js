@@ -10,9 +10,15 @@ const getLogSpy = () => {
 describe('당첨 통계 출력 테스트', () => {
   test('당첨내역과 수익률을 포함한 당첨 통계를 출력한다.', () => {
     const logSpy = getLogSpy();
-    const rankingList = [5, 4];
+    const matchingTable = {
+      three: 1,
+      four: 1,
+      fiveNotBonus: 0,
+      fiveAndBonus: 0,
+      all: 0,
+    };
     const rateOfReturn = 62.5;
-    OutputView.printLotteryResultsSummary(rankingList, rateOfReturn);
+    OutputView.printLotteryResultsSummary(matchingTable, rateOfReturn);
 
     const logs = [
       '3개 일치 (5,000원) - 1개',

@@ -1,6 +1,7 @@
 const DEFAULT_NUM = 0;
 const LOTTO_TICKET_PRICE = 1000;
 const PERCENTAGE = 100;
+const IS_BOUNS_INDEX = 1;
 
 const LOTTO_NUM_RANGE = Object.freeze({
   min: 1,
@@ -45,4 +46,5 @@ export {
   MATCH_COUNTS,
   RANKING,
   PERCENTAGE,
+  IS_BOUNS_INDEX,
 };
