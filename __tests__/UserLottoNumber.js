@@ -1,7 +1,7 @@
+/* eslint-disable */
 import UserLottoNumber from '../src/model/UserLottoNumber.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-/* eslint-disable */
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();

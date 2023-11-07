@@ -1,7 +1,7 @@
+/* eslint-disable */
 import WinningLotto from '../src/model/WinningLotto.js';
 import { ERRORMESSAGE } from '../src/constants/constants.js';
 
-/* eslint-disable */
 
 describe('WinningLotto 클래스', () => {
 	const winningLotto = new WinningLotto([1, 2, 3, 4, 5, 6]);
