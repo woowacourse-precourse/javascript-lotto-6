@@ -1,6 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../src/Lotto.js';
 import Random from '../utils/random.js';
+import LottoMachine from '../Domain/LottoMachine.js';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
@@ -21,8 +22,8 @@ describe('로또 클래스 테스트', () => {
 
     const random = new Random();
     random.validation([6, 2, 3, 4, 5, 6]);
+    random.validation([1, 2, 3, 4, 5, 6]);
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
   });
-  // 아래에 추가 테스트 작성 가능
 });

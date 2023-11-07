@@ -24,11 +24,12 @@ class LottoGameController {
 
   async readMoney() {
     const userMoney = await this.#inputview.readMoney();
-    console.log(userMoney);
     this.#lottoList = this.#lottoMachine.buyLotto(userMoney);
   }
 
-  printLottos() {}
+  printLottos() {
+    this.#outputview.printAllLottos(this.#lottoList);
+  }
 
   makeWinningLotto() {}
 

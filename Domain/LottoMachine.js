@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Random from '../utils/random.js';
 
@@ -16,6 +17,7 @@ class LottoMachine {
     for (let i = 0; i < buyCount; i++) {
       lottoList.push(new Lotto(this.#random.getRandomLotto()));
     }
+    // this.validate(lottoList);
 
     return lottoList;
   }
