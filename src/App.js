@@ -3,6 +3,7 @@ import {
   LOTTO_PRICE,
   LOTTO_NUMBER_RANGE,
   LOTTO_NUMBER_COUNT,
+  PRINT_MESSAGE,
   REQUEST_MESSAGE,
   VALIDATION_ERRORS_MESSAGE,
   regexNumber,
@@ -13,6 +14,7 @@ class App {
     const money = await this.getMoney();
     const lottoCount = money / LOTTO_PRICE;
     const lottos = this.buyLotto(lottoCount);
+    this.printLotto(lottos, lottoCount);
   }
 
   // 1. 로또 구입금액 입력받기
@@ -55,6 +57,17 @@ class App {
     }
 
     return lottos;
+  }
+
+  // 3. 발행한 로또 수량 및 번호를 출력
+  printLotto(lottos, lottoCount) {
+    const message = PRINT_MESSAGE(lottoCount);
+    Console.print(message.lottoQuantity);
+
+    lottos.forEach((lotto) => {
+      const formattedLotto = `[${lotto.join(', ')}]`; // 배열을 문자열로 변환, 공백 추가
+      Console.print(formattedLotto);
+    });
   }
 }
 
