@@ -1,13 +1,14 @@
-import { MissioinUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.genearateNumbers();
     this.#numbers = numbers;
   }
-
+  //유효성검사
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개 여야 합니다.");
@@ -19,16 +20,16 @@ class Lotto {
         throw new Error("[ERROR] 로또 번호는 1과 45 사이여야 합니다.");
       }
     }
-
-    //로또 번호 생성
-    genearateNumbers() {
+  }
+  //로또 번호 생성
+  genearateNumbers() {
     for (let i = 0; i < numOfLottos; i++) {
       const number = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       this.numbers.push(number);
-      MissionUtils.Console.print(`[${number.join(",")}] `);
-    }}
-    //로또 번호 중복 방지
+      MissionUtils.Console.print(`${this.numbers}`);
+    }
   }
+  //로또 번호 중복 방지
 }
 // TODO: 추가 기능 구현
 //보너스 번호 생성
