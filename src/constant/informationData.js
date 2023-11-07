@@ -1,4 +1,4 @@
-export const INFORMATION_MESSAGE = Object.freeze({
+const INFORMATION_MESSAGE = Object.freeze({
   PURCHASE: "개를 구매했습니다.\n",
   WINNING_STATISTICS: "\n당첨 통계\n---\n",
   // -- output에 추가하고 삭제하기 --
