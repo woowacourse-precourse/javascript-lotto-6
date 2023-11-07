@@ -146,4 +146,19 @@ describe('로또 테스트', () => {
     // then
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
   });
+
+  test('예외 테스트 - 당첨 번호에 중복된 숫자가 있는 경우', async () => {
+    const logSpy = getLogSpy();
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,5', '1,2,3,4,5,6', '7'];
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions([...INPUT_NUMBERS_TO_END]);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
 });
