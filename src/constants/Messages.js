@@ -15,4 +15,19 @@ const OUTPUT_MESSAGES = {
   RATE_OF_RETURN: "총 수익률은 ",
 };
 
-export { INPUT_MESSAGES, OUTPUT_MESSAGES };
+const ERROR_MESSAGES = {
+  CASH_NOT_INTEGER_IN_THOUSANDS:
+    "[ERROR] 구입금액은 1000 단위 정수로 입력이 가능합니다.",
+  WINNING_NUMBER_NOT_SIX: "[ERROR] 로또 번호는 6개여야 합니다.",
+  WINNING_NUMBER_OUT_OF_BOUNDS:
+    "[ERROR] 로또 번호는 1 ~ 45 사이의 수여야 합니다.",
+  WINNING_NUMBER_DUPLICATION:
+    "[ERROR] 로또 번호는 중복되지 않는 수여야 합니다.",
+  BONUS_NUMBER_OUT_OF_BOUNDS:
+    "[ERROR] 보너스 번호는 1 ~ 45 사이의 수여야 합니다.",
+  BONUS_NUMBER_DUPLICATION_WITH_WINNING_NUMBER:
+    "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.",
+  BONUS_NUMBER_NOT_INTEGER: "[ERROR] 보너스 번호는 정수형이어야 합니다.",
+};
+
+export { INPUT_MESSAGES, OUTPUT_MESSAGES, ERROR_MESSAGES };
