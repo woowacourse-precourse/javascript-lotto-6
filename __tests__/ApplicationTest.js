@@ -91,7 +91,35 @@ describe("로또 테스트", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("구입 금액은 숫자로만 이루어져 있어야 한다.", async () => {
     await runException("1000j");
+  });
+
+  test("구입 금액은 1000으로 나누어 떨어져야 한다. ", async () => {
+    await runException("1001");
+  });
+
+  test("구입 금액은 숫자로만 이루어져 있어야 한다.", async () => {
+    await runException("1000j");
+  });
+
+  test("구입 금액은 공백일 수 없다. ", async () => {
+    await runException(" ");
+  });
+
+  test("구입 금액은 숫자로만 이루어져 있어야 한다.", async () => {
+    await runException("1000j");
+  });
+
+  test("구입 금액은 로또 한장의 금액보다 작을 수 없다. ", async () => {
+    await runException("0");
+  });
+
+  test("구입 금액은 숫자로만 이루어져 있어야 한다.", async () => {
+    await runException("1000j");
+  });
+
+  test("구입 금액은 10만원을 초과할 수 없다 ", async () => {
+    await runException("101000");
   });
 });
