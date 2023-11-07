@@ -1,6 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 import getWinningStatistics from '../utils/getWinningStatistics.js';
 import MESSAGE from '../constants/message.js';
+import getReturns from '../utils/getReturns.js';
+import getRateOfReturn from '../utils/getRateOfReturn.js';
 
 const OutputView = {
   printLottosString: (count, lottos) => {
@@ -13,6 +15,12 @@ const OutputView = {
 
     Console.print(MESSAGE.result.title);
     winningStatistics.forEach(winningStatistic => Console.print(winningStatistic));
+  },
+
+  printRateOfReturnString: (lottos, purchaseAmount, winningNumbers, bonusNumber) => {
+    const returns = getReturns(lottos, winningNumbers, bonusNumber);
+    const rateOnReturns = getRateOfReturn(purchaseAmount, returns);
+    Console.print(`총 수익률은 ${rateOnReturns}입니다.`);
   },
 };
 

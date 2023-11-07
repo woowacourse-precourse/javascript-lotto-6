@@ -18,6 +18,7 @@ class LottoController {
     const winningNumbers = await this.#inputWinningNumbers();
     const bonusNumber = await this.#inputBonusNumber();
     this.#printWinningStatistics(winningNumbers, bonusNumber);
+    this.#printRateOfReturn(purchaseAmount, winningNumbers, bonusNumber);
   }
 
   async #inputPurchaseAmount() {
@@ -48,6 +49,10 @@ class LottoController {
 
   #printWinningStatistics(winningNumbers, bonusNumber) {
     OutputView.printWinningStatisticsString(this.#lottos, winningNumbers, bonusNumber);
+  }
+
+  #printRateOfReturn(purchaseAmount, winningNumbers, bonusNumber) {
+    OutputView.printRateOfReturnString(this.#lottos, purchaseAmount, winningNumbers, bonusNumber);
   }
 }
 
