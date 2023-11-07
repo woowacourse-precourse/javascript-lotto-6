@@ -103,7 +103,7 @@ class App {
   }
 
   setLotto(quantity) {
-    MissionUtils.Console.print(`${quantity}개를 구매했습니다.`);
+    MissionUtils.Console.print(`\n${quantity}개를 구매했습니다.`);
     let purchasedLottos = [];
 
     for (let i = 0; i < quantity; i += 1) {
@@ -116,7 +116,7 @@ class App {
     return purchasedLottos;
   }
 
-  async setWinnigAndBonusNumber(quantity, purchasedLottos) {
+  async setWinnigAndBonusNumber(quantity, purchasedLottos, money) {
     const winningNumber = await this.getWinningNumber();
     const winningNumberArray = await this.checkCommaSeparated(winningNumber);
     const userLotto = new Lotto(winningNumberArray);
@@ -124,15 +124,27 @@ class App {
 
     const bonusNumber = await this.getBonusNumber();
     userLotto.setBonusNumber(bonusNumber);
-    this.getMatchingStatistics(quantity, purchasedLottos, userLotto);
+    this.getMatchingStatisticsAndRate(
+      quantity,
+      purchasedLottos,
+      userLotto,
+      money
+    );
   }
 
-  getMatchingStatistics(quantity, purchasedLottos, userLotto) {
+  async getMatchingStatisticsAndRate(
+    quantity,
+    purchasedLottos,
+    userLotto,
+    money
+  ) {
     for (let i = 0; i < quantity; i += 1) {
       userLotto.updateMatchingCount(purchasedLottos[i]);
     }
-    const result = userLotto.calculateMatchingStatistics();
+    const result = await userLotto.calculateMatchingStatistics();
     for (let score of result) MissionUtils.Console.print(score);
+
+    await userLotto.calculateMatchingRate(money);
   }
 
   async play() {
@@ -140,7 +152,7 @@ class App {
     const quantity = this.getLottoQuantity(money);
     const purchasedLottos = this.setLotto(quantity);
 
-    await this.setWinnigAndBonusNumber(quantity, purchasedLottos);
+    await this.setWinnigAndBonusNumber(quantity, purchasedLottos, money);
   }
 }
 

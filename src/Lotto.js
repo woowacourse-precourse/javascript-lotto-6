@@ -8,12 +8,13 @@ class Lotto {
     this.#numbers = numbers;
     this.bonusNumber;
     this.winningNumber = [];
+    this.WINNINGS = [5000, 50000, 1500000, 2000000000, 30000000];
     this.TEXT = [
-      "3개 일치 (5,000원)",
-      "4개 일치 (50,000원)",
-      "5개 일치 (1,500,000원)",
-      "6개 일치 (2,000,000,000원)",
-      "5개 일치, 보너스 볼 일치 (30,000,000원)",
+      `3개 일치 (${this.WINNINGS[0].toLocaleString()}원)`,
+      `4개 일치 (${this.WINNINGS[1].toLocaleString()}원)`,
+      `5개 일치 (${this.WINNINGS[2].toLocaleString()}원)`,
+      `6개 일치 (${this.WINNINGS[3].toLocaleString()}원)`,
+      `5개 일치, 보너스 볼 일치 (${this.WINNINGS[4].toLocaleString()}원)`,
     ];
     this.matchingCounts = new Map([
       [3, 0],
@@ -105,6 +106,22 @@ class Lotto {
       result.push(`${this.TEXT[index]} - ${count}개`);
     }
     return result.sort();
+  }
+
+  calculateMatchingRate(purchasePrice) {
+    const totalPrice = [...this.matchingCounts.values()].reduce(
+      (acc, cur, idx) => {
+        return acc + cur * this.WINNINGS[idx];
+      },
+      0
+    );
+
+    const profit = totalPrice - purchasePrice;
+    const profitRate = (profit / purchasePrice) * 100;
+
+    const roundedProfitRate = profitRate.toFixed(1);
+
+    MissionUtils.Console.print(`총 수익률은 ${roundedProfitRate}%입니다.`);
   }
 
   displayNumbers() {
