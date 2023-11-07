@@ -40,9 +40,8 @@ class App {
 		}
 	}
 	async winningNumber() {
-		const input = await Console.readLineAsync(MESSAGE.WINNING);
-		const winningNumber = input.split(',').map(Number);
-		new Lotto(winningNumber);
+		const winningNumber = await Console.readLineAsync(MESSAGE.WINNING);
+		return winningNumber.split(',').map(Number);
 	}
 	async bonusNumber() {
 		const input = await Console.readLineAsync(MESSAGE.BONUS);
@@ -53,8 +52,31 @@ class App {
 			const tickets = await this.buy();
 			const lottoTickets = this.createLotto(tickets);
 			this.lottoPrinter(tickets, lottoTickets);
-			this.winningNumber();
-			const bonusNumber = this.bonusNumber();
+			const winningNumber = await this.winningNumber();
+			const bonusNumber = await this.bonusNumber();
+			let ranks = {
+				first: 0,
+				second: 0,
+				third: 0,
+				fourth: 0,
+				fifth: 0,
+			};
+			const lotto = new Lotto(winningNumber);
+			lottoTickets.forEach((lottoTicket) => {
+				const rank = lotto.match(lottoTicket);
+				if (rank === 3) {
+					ranks.fifth += 1;
+				}
+				if (rank === 4) {
+					ranks.fourth += 1;
+				}
+				if (rank === 5) {
+					lottoTicket.includes(bonusNumber) ? (ranks.second += 1) : (ranks.third += 1);
+				}
+				if (rank === 6) {
+					ranks.first += 1;
+				}
+			});
 		} catch (error) {
 			throw error;
 		}
