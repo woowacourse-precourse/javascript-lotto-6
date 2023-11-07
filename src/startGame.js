@@ -1,6 +1,8 @@
+import Lotto from './Lotto.js';
 import Input from './utils/inputOutput/input.js';
+import Output from './utils/inputOutput/output.js';
+import { parsedNumber, validateNumber, isIncludedBonusNumbers, validatedPrice } from './utils/validation/validation.js';
 import { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
-
 
 
 class StartGame {
@@ -9,6 +11,8 @@ class StartGame {
   #purchaseAmount;
 
   #purchasedLottos = [];
+
+  #bonusNumber;
 
   #winningNumbers;
 
@@ -45,6 +49,8 @@ class StartGame {
   }
   async inputWinningNumbers() {
     this.#winningNumbers = await this.getValidatedWinningNumbersInput(MESSAGE.WINNING_NUMBER);
+
+    this.#bonusNumber = await this.getValidatedBonusNumberInput(MESSAGE.BONUS_NUMBER);
   }
 
   async getValidatedWinningNumbersInput(message) {
@@ -60,6 +66,22 @@ class StartGame {
       Output.print(error.message);
 
       return this.getValidatedWinningNumbersInput(message);
+    }
+  }
+
+  async getValidatedBonusNumberInput(message) {
+    const inputBonusNumber = await Input.readLineAsync(message);
+
+    try {
+      validateNumber(inputBonusNumber);
+      const bonusNumber = parsedNumber(inputBonusNumber);
+      isIncludedBonusNumbers(this.#winningNumbers, bonusNumber);
+
+      return bonusNumber;
+    } catch (error) {
+      Output.print(error.message);
+
+      return this.getValidatedBonusNumberInput(message);
     }
   }
 }
