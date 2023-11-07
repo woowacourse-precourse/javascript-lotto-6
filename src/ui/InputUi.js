@@ -21,7 +21,7 @@ class InputUi {
       '당첨 번호를 입력하세요.\n'
     );
     const WINNING_NUMBER = GameUtils.splitComma(WINNING_NUMBER_INPUT);
-    // Validation.validateLottoNumbers(WINNING_NUMBER);
+    Validation.validateLottoNumbers(WINNING_NUMBER);
     return WINNING_NUMBER;
     } catch (error) {
       MissionUtils.Console.print(error.message);
@@ -33,7 +33,7 @@ class InputUi {
     const BONUS_NUMBER = await MissionUtils.Console.readLineAsync(
       '보너스 번호를 입력하세요.'
     );
-    // Validation.validateBonusNumberInput(BONUS_NUMBER);
+    Validation.validateBonusNumber(BONUS_NUMBER);
     return BONUS_NUMBER;
     } catch(error) {
       MissionUtils.Console.print(error.message);

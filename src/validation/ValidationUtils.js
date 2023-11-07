@@ -24,5 +24,21 @@ class ValidationUtils {
       throw new Error('[ERROR] 구입금액은 1000으로 나누어 떨어져야 합니다.');
     }
   }
+  static inLottoNumberRange(input) {
+    if(input<=0 || input>45) {
+      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }
+  }
+  static isLottoLength(input) {
+    if(input<6) {
+      throw new Error('[ERROR] 로또 번호는 6자리여야 합니다.');
+    }
+  }
+  static isUniqueElements(arr) {
+    const SET = new Set(arr);
+    if(SET.size!==arr.length){
+      throw new Error('[ERROR] 로또번호는 서로 달라야합니다.');
+    }
+  }
 }
 export default ValidationUtils;
