@@ -15,9 +15,7 @@ class Price {
 
   #validate() {
     validationUtils.checkNumber(this.#price);
-
     this.#check1000Units();
-
     this.#setNumber();
   }
 
