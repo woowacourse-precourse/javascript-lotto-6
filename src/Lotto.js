@@ -38,27 +38,7 @@ export default class Lotto {
     return LOTTERY.DEFAULT_PLACE;
   }
 
-  static getLottoWinnings(matchCnt, hasBonus) {
-    const result = {
-      place: LOTTERY.DEFAULT_PLACE,
-      label: `${MESSAGE.MATCH_NUMBERS(matchCnt)}`,
-      winnings: LOTTERY.DEFAULT_WINNINGS,
-    };
-
-    if (matchCnt === LOTTERY.FIFTH_CNT)
-      return { ...result, place: LOTTERY.FIFTH_PLACE, winnings: LOTTERY.FIFTH_WINNINGS };
-    if (matchCnt === LOTTERY.FOURTH_CNT)
-      return { ...result, place: LOTTERY.FOURTH_PLACE, winnings: LOTTERY.FOURTH_WINNINGS };
-    if (matchCnt === LOTTERY.SECOND_CNT && hasBonus === true)
-      return {
-        label: result.label + `, ${MESSAGE.MATCH_BONUS_NUMBER}`,
-        place: LOTTERY.SECOND_PLACE,
-        winnings: LOTTERY.SECOND_WINNINGS,
-      };
-    if (matchCnt === LOTTERY.THIRD_CNT)
-      return { ...result, place: LOTTERY.THIRD_PLACE, winnings: LOTTERY.THIRD_WINNINGS };
-    if (matchCnt === LOTTERY.FIRST_CNT)
-      return { ...result, place: LOTTERY.FIRST_PLACE, winnings: LOTTERY.FIRST_WINNINGS };
-    return result;
+  static getLabelAndWinnings(place) {
+    return LOTTERY.WINNINGS(place);
   }
 }
