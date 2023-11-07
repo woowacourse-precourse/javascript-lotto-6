@@ -2,14 +2,14 @@ import { Console } from '@woowacourse/mission-utils';
 
 export default class OutputView {
   static displayTickets(tickets) {
-    Console.print(`${tickets.length}개를 구매했습니다.\n`);
+    Console.print(`\n${tickets.length}개를 구매했습니다.`);
     tickets.forEach((ticket) => {
       Console.print(`[${ticket.numbers.join(', ')}]`);
     });
   }
 
   static displayResults(resultStrings) {
-    Console.print('당첨 통계\n---');
+    Console.print('\n당첨 통계\n---');
     Console.print(resultStrings);
   }
 
