@@ -1,24 +1,23 @@
-import {Console} from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 import MESSAGES from "./constant/Messages.js";
 import ERRORS from "./constant/Errors.js";
 
 class LottoUI {
-    #Console;
 
-    constructor() {
-        this.#Console = Console;
-    }
-
-    #validate_number(input) {
+    static #validate_number(input) {
         const number = Number(input);
-        return !Number.isNaN(number) ;
+        return !Number.isNaN(number);
     }
-    #validate_amount(input) {
+
+    static #validate_amount(input) {
         const amount = Number(input);
         return !Number.isNaN(amount) && amount % 1000 === 0;
     }
 
-    static print_console(message) { Console.print(message); }
+    static print_console(message) {
+        Console.print(message);
+    }
+
     static input_purchase_amount() {
         return Console.readLineAsync(MESSAGES.INPUT_PURCHASE_AMOUNT)
             .then((answer) => {
@@ -28,6 +27,6 @@ class LottoUI {
             });
     }
 
-
 }
-export  default  LottoUI;
+
+export default LottoUI;

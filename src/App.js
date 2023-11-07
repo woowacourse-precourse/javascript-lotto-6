@@ -2,7 +2,11 @@ import LottoGame from "./LottoGame.js";
 
 class App {
   play() {
-      LottoGame.game_start();
+      try {
+          LottoGame.game_start();
+      }catch (error){
+          throw new Error(error);
+      }
   }
 }
 
