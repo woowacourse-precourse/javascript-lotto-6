@@ -1,10 +1,8 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import BuyLotto from './BuyLotto.js';
-
-const LOTTO_PRICE = 1000;
-const DAILY_LIMIT_PRICE = 100000;
-const NUMBER_CHECK = /^[0-9]+$/;
+import { CONSTANT_VALUE, ERROR_MESSAGE } from './constants.js';
+import InputError from './InputError.js';
 
 class App {
   async generateWinningNumbers() {
@@ -21,7 +19,11 @@ class App {
   }
 
   async play() {
-    const buyLotto = new BuyLotto(LOTTO_PRICE, DAILY_LIMIT_PRICE, NUMBER_CHECK);
+    const buyLotto = new BuyLotto(
+      CONSTANT_VALUE.lottoPrice,
+      CONSTANT_VALUE.dailyLimitPrice,
+      CONSTANT_VALUE.numberCheck,
+    );
     await buyLotto.start();
 
     const winningNumbers = await this.generateWinningNumbers();
