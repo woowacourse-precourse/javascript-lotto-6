@@ -1,4 +1,4 @@
-import { PRINT, PRIZE } from "../const/Messages.js";
+import { PRINT, PRIZE, PRIZE_MONEY } from "../const/Messages.js";
 
 class LottoEvaluator {
   constructor(baseNumbers, bonusNumber) {
@@ -41,9 +41,20 @@ class LottoEvaluator {
     return resultsArray.join("\n");
   }
 
-  evaluateTickets(userTickets) {
-    userTickets.forEach((ticket) => this.evaluateTicket(ticket));
+  evaluateTickets(randomLottos) {
+    randomLottos.forEach((ticket) => this.evaluateTicket(ticket));
     return this.getResults();
+  }
+
+  calculatePrize() {
+    let totalPrize = 0;
+    totalPrize += this.matchCounts.FIFTH * PRIZE_MONEY.FIFTH;
+    totalPrize += this.matchCounts.FOURTH * PRIZE_MONEY.FOURTH;
+    totalPrize += this.matchCounts.THIRD * PRIZE_MONEY.THIRD;
+    totalPrize += this.matchCounts.SECOND * PRIZE_MONEY.SECOND;
+    totalPrize += this.matchCounts.FIRST * PRIZE_MONEY.FIRST;
+
+    return totalPrize;
   }
 }
 
