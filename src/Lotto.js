@@ -1,4 +1,4 @@
-import AppError from '../constants/AppError.js';
+import AppError from '../src/constants/AppError.js';
 
 class Lotto {
   #numbers;
