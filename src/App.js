@@ -170,6 +170,7 @@ class App {
 
   async play() {
     const inputMoney = await this.askMoney();
+    this.moneyTypeCheck(inputMoney);
 
     this.printLottosInfo(inputMoney);
 
