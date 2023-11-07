@@ -1,9 +1,10 @@
 import { Random, Console } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 // 추후 리팩토링하기
 const PAYMENTCOMMENT = '구입금액을 입력해 주세요.\n';
-const WINNINGNUMBERSCOMMENT = '당첨 번호를 입력해 주세요.\n';
-const BONUSNUMBERCOMMENT = '보너스 번호를 입력해 주세요.\n';
+const WINNINGNUMBERSCOMMENT = '\n당첨 번호를 입력해 주세요.\n';
+const BONUSNUMBERCOMMENT = '\n보너스 번호를 입력해 주세요.\n';
 
 export default class Lottery {
   #payMoney;
@@ -12,10 +13,13 @@ export default class Lottery {
 
   #bonusNumer;
 
+  #lottoList;
+
   constructor() {
     this.#payMoney = 0;
     this.#winningNumberList = [];
     this.#bonusNumer = 0;
+    this.#lottoList = [];
   }
 
   commomValidator(inputValue) {
@@ -55,10 +59,26 @@ export default class Lottery {
   }
 
   async readBonusNumber() {
-    this.#bonusNumer = await Console.readLineAsync(BONUSNUMBERCOMMENT);
+    this.#bonusNumer = Number(await Console.readLineAsync(BONUSNUMBERCOMMENT));
+    this.commomValidator(this.#bonusNumer);
+    if (this.#bonusNumer < 1 || this.#bonusNumer > 45)
+      throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
   }
 
   pay() {
     // TODO
+    const numberOfLotto = this.#payMoney / 1000;
+    // 발행
+    for (let i = 0; i < numberOfLotto; i += 1) {
+      this.#lottoList.push(
+        new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)),
+      );
+    }
+    // 발행 출력
+    Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
+    // 각각 정렬
+    this.#lottoList.forEach((lotto) => lotto.sortNumbers());
+    // 로또들 출력
+    this.#lottoList.forEach((lotto) => lotto.printNumbers());
   }
 }
