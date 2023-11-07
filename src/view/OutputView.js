@@ -35,4 +35,4 @@ const OutputView = {
   },
 };
 
-export { OutputView };
+export default OutputView;

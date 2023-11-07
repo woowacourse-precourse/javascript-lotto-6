@@ -1,9 +1,9 @@
 import Lotto from "../Lotto.js";
 import { ERROR_MESSAGE } from "../constants/messages.js";
-import { REGEX } from "../constants/regex.js";
+import REGEX from "../constants/Regex.js";
 import { pickLottoNumbers } from "../utils/lottoNumberPicker.js";
 
-const lottoSeller = {
+const LottoSeller = {
   LOTTO_PRICE: 1000,
   LOTTO_STOCK: 1000,
   LOTTO_LENGTH: 6,
@@ -48,4 +48,4 @@ const lottoSeller = {
   },
 };
 
-export { lottoSeller };
+export default LottoSeller;

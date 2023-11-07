@@ -1,5 +1,5 @@
 import Lotto from "../Lotto.js";
-import { lottoNumbersParser } from "./lottoNumbersParser.js";
+import LottoNumbersParser from "./LottoNumbersParser.js";
 import { validateNumberInRange } from "../utils/validators.js";
 
 class LottoAnswer {
@@ -46,7 +46,7 @@ class LottoAnswer {
   }
 
   static #parseBonusNumber(input) {
-    return lottoNumbersParser.parse(input)[0];
+    return LottoNumbersParser.parse(input)[0];
   }
 
   #validateBonusNumber(number) {

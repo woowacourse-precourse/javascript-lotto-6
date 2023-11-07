@@ -19,4 +19,4 @@ const InputView = {
   },
 };
 
-export { InputView };
+export default InputView;

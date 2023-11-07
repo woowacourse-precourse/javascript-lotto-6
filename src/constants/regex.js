@@ -2,4 +2,4 @@ const REGEX = {
   onlyPositiveInt: /^\d+$/,
 };
 
-export { REGEX };
+export default REGEX;

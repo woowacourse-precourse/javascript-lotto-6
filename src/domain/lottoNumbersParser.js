@@ -1,6 +1,6 @@
-import { REGEX } from "../constants/regex.js";
+import REGEX from "../constants/Regex.js";
 
-const lottoNumbersParser = {
+const LottoNumbersParser = {
   parse(input) {
     const inputArray = this.splitByComma(input).map((value) => value.trim());
     this.validateOnlyPositiveInt(inputArray);
@@ -23,4 +23,4 @@ const lottoNumbersParser = {
   },
 };
 
-export { lottoNumbersParser };
+export default LottoNumbersParser;

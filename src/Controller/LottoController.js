@@ -1,11 +1,11 @@
 import Money from "../domain/Money.js";
-import { InputView } from "../view/InputView.js";
-import { lottoSeller } from "../domain/LottoSeller.js";
+import InputView from "../view/InputView.js";
+import lottoSeller from "../domain/LottoSeller.js";
 import Lotto from "../Lotto.js";
-import { lottoNumbersParser } from "../domain/lottoNumbersParser.js";
+import LottoNumbersParser from "../domain/LottoNumbersParser.js";
 import LottoAnswer from "../domain/LottoAnswer.js";
 import LottoResultChecker from "../domain/LottoResultChecker.js";
-import { OutputView } from "../view/outputView.js";
+import OutputView from "../view/OutputView.js";
 import { repeatUntillComplete } from "../utils/repeatUntillComplete.js";
 
 class LottoController {
@@ -36,7 +36,7 @@ class LottoController {
 
   async getAnswerLottoFromUser() {
     const lottoAnswerInput = await InputView.readLottoAnswer();
-    const parsedLottoAnwerInput = lottoNumbersParser.parse(lottoAnswerInput);
+    const parsedLottoAnwerInput = LottoNumbersParser.parse(lottoAnswerInput);
     const lottoAnwer = new Lotto(parsedLottoAnwerInput);
     return lottoAnwer;
   }
