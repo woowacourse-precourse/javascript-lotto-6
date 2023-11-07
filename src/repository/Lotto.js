@@ -1,3 +1,4 @@
+import { MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER } from '../utils/constants.js';
 import {
   checkValueIsDuplicate,
   checkValueIsNumber,
@@ -33,7 +34,7 @@ class Lotto {
   }
   #validateRange(numbers) {
     numbers.forEach((number) => {
-      if (number < 1 || number > 45) {
+      if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
         throw new Error('[ERROR] 1에서 45 사이의 숫자를 입력해주세요.');
       }
     });

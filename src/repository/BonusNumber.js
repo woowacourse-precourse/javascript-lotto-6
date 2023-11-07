@@ -1,3 +1,4 @@
+import { MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER } from '../utils/constants.js';
 import { checkValueIsNumber } from '../utils/getUserInput.js';
 
 class BounsNumber {
@@ -15,7 +16,7 @@ class BounsNumber {
     }
   }
   #validateRange(bonusNumber) {
-    if (bonusNumber < 1 || bonusNumber > 45) {
+    if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
       throw new Error('[ERROR] 1에서 45 사이의 숫자를 입력해주세요.');
     }
   }
