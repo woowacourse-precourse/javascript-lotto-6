@@ -13,7 +13,7 @@ const LOTTO_PRIZE = new Map([
 
 class App {
   #winning;
-  #bonus;
+  #bonusNumber;
   #payment;
   #totalPrize;
   #rankedLotto;
@@ -38,7 +38,7 @@ class App {
     this.generateLottos(amount);
 
     this.#winning = await Input.winning();
-    this.#bonus = await Input.bonusNumber(this.#winning);
+    this.#bonusNumber = await Input.bonusNumber(this.#winning);
 
     this.calculateResult();
     this.printResult();
@@ -94,7 +94,7 @@ class App {
   calculateResult() {
     this.lottos.forEach((lotto) => {
       const matched = lotto.countMatched(this.#winning);
-      const matchedBonus = lotto.includes(this.#bonus);
+      const matchedBonus = lotto.includes(this.#bonusNumber);
       this.setRankAndPrize(matched, matchedBonus);
     });
   }
