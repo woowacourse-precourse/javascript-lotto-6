@@ -15,6 +15,15 @@ class Lotto {
   validateBonusNumber(bonusNumber) {
     validateBonusNumber(bonusNumber, this.#numbers);
   }
+
+  countMatchedNumbers(lotto) {
+    return this.#numbers.filter((number) => lotto.includes(parseInt(number)))
+      .length;
+  }
+
+  isBonusNumberMatch(lotto, bonusNumber) {
+    return lotto.includes(parseInt(bonusNumber));
+  }
 }
 
 export default Lotto;
