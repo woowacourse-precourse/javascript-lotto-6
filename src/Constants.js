@@ -13,7 +13,7 @@ export const WINNING_NUMBERS = [3,4,5,'bonus',6];
 export const INPUT_MESSAGE = {
     purchaseAmount: '구입 금액을 입력하세요.\n',
     winningNumbers: '당첨 번호를 입력하세요.\n',
-    bonusNumber: '당첨 번호를 입력하세요.\n',
+    bonusNumber: '보너스 번호를 입력하세요.\n',
 }
 export const OUTPUT_MESSAGE = {
     winningStatusGuide: '\n당첨 통계\n---\n',

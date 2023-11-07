@@ -28,7 +28,7 @@ class OutputUi {
   }
 
   printRateOfReturn(rateOfReturn) {
-    MissionUtils.Console.print(OUTPUT_MESSAGE.winningStatusGuide(rateOfReturn));
+    MissionUtils.Console.print(OUTPUT_MESSAGE.rateOfReturn(rateOfReturn));
   }
 }
 export default OutputUi;
