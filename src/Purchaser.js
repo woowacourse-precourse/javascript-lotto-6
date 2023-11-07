@@ -1,11 +1,11 @@
 import Util from './utils/util.js';
 import { LottoRule } from './models/rule.js';
 
-class Manager {
-  #soldLottos;
+class Purchaser {
+  #lottos;
 
   constructor() {
-    this.#soldLottos = [];
+    this.#lottos = [];
   }
 
   generateLotto() {
@@ -16,10 +16,10 @@ class Manager {
     }
 
     const lotto = Util.toAscendingArray(Array.from(numberSet));
-    this.#soldLottos.push(lotto);
+    this.#lottos.push(lotto);
 
     return lotto;
   }
 }
 
-export default Manager;
+export default Purchaser;
