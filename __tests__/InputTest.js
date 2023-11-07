@@ -18,7 +18,7 @@ const validator = {
 	validateFunc() {
 		if (this.runCnt < EXPECTED_ASKING_CNT) {
 			this.runCnt += 1;
-			return false;
+			throw new Error('[Error]');
 		}
 		return true;
 	},

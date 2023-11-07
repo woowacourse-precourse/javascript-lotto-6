@@ -8,13 +8,15 @@ const Input = {
 
 	askUserUntilValid: async (question, validatorCallBack = () => true) => {
 		let reply = await Input.askUser(question);
-		const isReplyValid = validatorCallBack(reply);
-		if (!isReplyValid) {
+		try {
+			validatorCallBack(reply);
+		} catch (err) {
 			reply = await Input.askUserUntilValid(
 				question,
 				validatorCallBack,
 			);
 		}
+
 		return reply;
 	},
 };
