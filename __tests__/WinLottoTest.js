@@ -1,7 +1,9 @@
 import WinLotto from "../src/WinLotto.js";
 import ERROR_MESSAGE from "../src/Errors.js";
+import LottoStore from "../src/LottoStore.js";
 
 describe("WinLottoTest", () => {
+  //생성자 테스트
   test("1~45사이 당첨 번호 6개와 보너스 번호 형식이 주어질 경우 객체를 성공적으로 생성한다", () => {
     const winningNumbers = ["1", "2", "3", "4", "5", "6"];
     const bonusNumber = "7";
@@ -23,6 +25,7 @@ describe("WinLottoTest", () => {
     }).toThrow(ERROR_MESSAGE.duplicateNumbers);
   });
 
+  //compareNumbers() 테스트
   test("모든 번호가 일치하는 경우 [6]을 반환한다", () => {
     const winningNumbers = ["1", "2", "3", "4", "5", "6"];
     const bonusNumber = "7";
@@ -66,5 +69,23 @@ describe("WinLottoTest", () => {
 
     const winLotto = new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
     expect(winLotto.compareNumbers()).toEqual([3]);
+  });
+
+  //calculateEarnings 테스트
+  test("3개의 번호가 일치하는 경우 5000원에 당첨된다", async () => {
+    LottoStore.calculateWinningResults = jest.fn().mockResolvedValue([3]);
+    const ticketNumbers = [["1", "2", "3", "4", "5", "6"]];
+
+    const results = await WinLotto.calculateEarnings(ticketNumbers);
+    expect(results).toEqual({
+      totalEarnings: 5000,
+      countResults: {
+        3: 1,
+        4: 0,
+        5: 0,
+        "5+1": 0,
+        6: 0,
+      },
+    });
   });
 });
