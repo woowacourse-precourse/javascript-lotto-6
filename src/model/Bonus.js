@@ -21,6 +21,18 @@ class Bonus {
       return this.arrayInFiveIndex;
     }
   }
+  IsinBonusNumber(lotto) {
+    let winningBonus = 0;
+    let winningFive = 0;
+    for(let index in this.arrayInFiveIndex) {
+      if(lotto[index].filter(x => x === Number(this.#numbers)).length > 0) {
+        winningBonus+=1;
+        winningFive-=1;
+      }
+      winningFive+=1;
+    }
+    return [winningFive,winningBonus];
+  }
 }
 
 export default Bonus;
