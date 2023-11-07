@@ -1,8 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
-import Cash from './objects/Cash.js';
-import Lotto from './objects/Lotto.js';
+import Cash from './domain/Cash.js';
+import Lotto from './domain/Lotto.js';
 import { generateRandomNumbers, getMatchCount } from './utils.js';
-import Bonus from './objects/Bonus.js';
+import Bonus from './domain/Bonus.js';
 import { ERROR, INQUIRY, OUTPUT } from './messages.js';
 import {
   CASH,
