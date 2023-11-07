@@ -11,6 +11,10 @@ class App {
 
 		const PURCHASE_COUNT = Math.floor(Number(PURCHASE_AMOUNT) / 1000);
 
+		if (PURCHASE_COUNT < 1) {
+			throw new Error('[ERROR] 복권을 살 수 없어요!');
+		}
+
 		const LOTTERY_TICKET_LIST = [];
 
 		for (let i = 0; i < PURCHASE_COUNT; i += 1) {
