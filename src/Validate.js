@@ -1,5 +1,5 @@
 import ERROR_MESSAGE from "./Errors.js";
-import { LOTTO_UNIT } from "./constants/constants.js";
+import { LOTTO_LENGTH, LOTTO_UNIT } from "./constants/constants.js";
 
 class Validator {
   static validateMoneyUnit(inputMoney) {
@@ -21,11 +21,13 @@ class Validator {
   static validateWinningNumbers(inputNumbers) {
     const numbers = inputNumbers.split(",").map(Number);
     const validNumbers = numbers.filter(
-      (number) => number >= 1 && number <= 45
+      (number) =>
+        number >= LOTTO_LENGTH.LOTTO_MIN_NUMBER &&
+        number <= LOTTO_LENGTH.LOTTO_MAX_NUMBER
     );
 
     if (
-      numbers.length !== 6 ||
+      numbers.length !== LOTTO_LENGTH.LOTTO_LENGTH ||
       numbers.some(isNaN) ||
       validNumbers.length !== numbers.length ||
       new Set(numbers).size !== numbers.length
@@ -36,7 +38,9 @@ class Validator {
 
   static validateBonusNumber(inputNumber) {
     const number = parseInt(inputNumber, 10);
-    const isValid = number >= 1 && number <= 45;
+    const isValid =
+      number >= LOTTO_LENGTH.LOTTO_MIN_NUMBER &&
+      number <= LOTTO_LENGTH.LOTTO_MAX_NUMBER;
     if (!isValid) {
       throw new Error(ERROR_MESSAGE.invalidTicketNumbers);
     }
