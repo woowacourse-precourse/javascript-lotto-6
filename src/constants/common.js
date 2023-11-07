@@ -3,6 +3,7 @@ const COMMON = Object.freeze({
   dash: '─',
   dot: '.',
   empty: '',
+  lineBreak: '\n',
   whiteSpace: ' ',
 });
 
