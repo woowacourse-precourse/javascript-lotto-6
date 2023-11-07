@@ -32,12 +32,6 @@ class App {
     );
   }
 
-  getLottoASCNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-      (a, b) => a - b
-    );
-  }
-
   async start() {
     while (!this.amount) {
       try {
@@ -52,11 +46,15 @@ class App {
     }
   }
 
+  getLottoNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
   getLottos() {
     this.lottosCount = this.amount / 1000;
     let i = 0;
     while (i < this.lottosCount) {
-      const lotto = new Lotto(this.getLottoASCNumbers());
+      const lotto = new Lotto(this.getLottoNumbers());
       this.lottos.push(lotto);
       i += 1;
     }
@@ -147,7 +145,9 @@ class App {
       }
     });
     const earningsRate = (winningAmount / this.amount) * 100;
-    return earningsRate.toLocaleString('ko-kr', { minimumFractionDigits: 1 });
+    return (
+      earningsRate.toLocaleString('ko-kr', { minimumFractionDigits: 1 }) + '%'
+    );
   }
 
   printLottoRanking() {
@@ -158,7 +158,7 @@ class App {
       this.ranks[i].printRank();
       i += 1;
     }
-    MissionUtils.Console.print(`총 수익률은 ${this.getEarningsRate()}%입니다.`);
+    MissionUtils.Console.print(`총 수익률은 ${this.getEarningsRate()}입니다.`);
   }
 }
 

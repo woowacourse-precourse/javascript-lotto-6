@@ -7,6 +7,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.sortASCNumbers(numbers);
   }
 
   #validate(numbers) {
@@ -23,6 +24,10 @@ class Lotto {
 
   get numbers() {
     return this.#numbers;
+  }
+
+  sortASCNumbers(numbers) {
+    return numbers.sort((a, b) => a - b);
   }
 
   matchNumbers(winningNumbers) {
