@@ -4,6 +4,7 @@ class App {
   async play() {
     const money = await inputMoney();
     let lottoTicket = printTiceks(money);
+    const lottos = repeatMakeLotto(lottoTicket);
   }
 }
 
@@ -24,6 +25,17 @@ const validateLottoNumber = () => {
     console.error(error.message);
   }
 };
+
+// 6. 로또구매금 만큼 로또생성하기
+const repeatMakeLotto = (tiket) => {
+  let lottos = [];
+  for (let i = 0; i < tiket; i += 1) {
+    let lotto = validateLottoNumber();
+    lottos.push(lotto);
+  }
+  return lottos;
+};
+
 export default App;
 const app = new App();
 app.play();
