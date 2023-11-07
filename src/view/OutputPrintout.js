@@ -15,13 +15,11 @@ const OutputPrintout = {
 	},
 	printWinningRanks: (winningNumber, bonusNumber) => {
 		Console.print(PRINT_OUTPUT.outputMatchingNum);
-		LottoController.setLottoNumList();
+		LottoController.setMatchingNumMap(winningNumber);
 		//리스트 출력
 		// LottoController.lottoList.forEach((v) => {
 		// 	Console.print(v.getNumbers());
 		// });
-
-		// LottoController.setMatchingNumMap(winningNumber);
 	},
 };
 export default OutputPrintout;
