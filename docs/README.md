@@ -63,7 +63,9 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 
     - [x] 로또 구입 금액이 1000원 단위인가? Budget#validateBudgetUnit()
 
-  - [] 구매가능한 로또의 개수를 계산한다. Budget#calcLotteryNumbers()
+  - [x] 구매 가능한 로또의 개수를 계산한다. Budget#calcLotteryNumbers()
+
+  - [x] 구매 가능한 로또의 개수를 확인한다. Budget#getLotteryNumbers()
 
 - [] 로또 게임을 생성한다. Game#run()
 

@@ -3,7 +3,7 @@ class Budget {
 
   constructor(budget) {
     this.#validate(budget);
-    this.#lottery_num = this.calcLotteryNumbers(this.#lottery_num);
+    this.#lottery_num = this.calcLotteryNumbers(budget);
   }
 
   #validate(budget) {
@@ -25,6 +25,14 @@ class Budget {
         "[ERROR] 로또 구입 금액은 1000원 단위로 입력할 수 있습니다.",
       );
     }
+  }
+
+  calcLotteryNumbers(budget) {
+    return budget / 1000;
+  }
+
+  getLotteryNumbers() {
+    return this.#lottery_num;
   }
 }
 
