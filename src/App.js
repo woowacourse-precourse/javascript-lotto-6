@@ -7,6 +7,7 @@ import {
   REQUEST_MESSAGE,
   VALIDATION_ERRORS_MESSAGE,
   WINNING_MONEY,
+  WINNING_LIST,
   regexNumber,
 } from './Constants.js';
 import Lotto from './Lotto.js';
@@ -25,6 +26,7 @@ class App {
       bonusNumber,
     );
     const winningProfit = this.calculateProfit(money, winningRank);
+    this.printResult(winningRank, winningProfit);
   }
 
   // 1. 로또 구입금액 입력받기
@@ -169,8 +171,15 @@ class App {
     );
 
     const profit = (totalPrize / money) * 100;
-
     return profit.toFixed(1);
+  }
+
+  // 8. 당첨 내역 및 수익률 출력
+  printResult(winningRank, winningProfit) {
+    const message = PRINT_MESSAGE(winningProfit);
+
+    Console.print(WINNING_LIST(winningRank));
+    Console.print(message.profitRate);
   }
 }
 
