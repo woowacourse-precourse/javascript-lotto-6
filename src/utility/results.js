@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { LOTTO_RESULTS } from "../constants/constants.js";
 
-export const formatAndDisplayResult = (
+export const formatAndDisplayResult = async (
   num3,
   num4,
   num5,
@@ -33,10 +33,15 @@ const updateLottoResults = (count, lotto, bonusBall) => {
   }
 };
 
-export const findMatchingNums = (lottos, lottoResults, bonusBall) => {
+export const findMatchingNums = (
+  lottos,
+  lottoResults,
+  bonusBall,
+  totalAmountSpent
+) => {
   lottos.map((lotto) => {
     const count = lotto.filter((num) => lottoResults.includes(num)).length;
-    updateLottoResults(count, lotto, bonusBall);
+    updateLottoResults(count, lotto, bonusBall, totalAmountSpent);
   });
 
   formatAndDisplayResult(
@@ -49,4 +54,14 @@ export const findMatchingNums = (lottos, lottoResults, bonusBall) => {
 };
 
 //
-export const calculateProfit = () => {};
+export const calculateProfit = (totalAmountSpent) => {
+  const totalPrizeMoney =
+    LOTTO_RESULTS.num3 * 5000 +
+    LOTTO_RESULTS.num4 * 50000 +
+    LOTTO_RESULTS.num5 * 1500000 +
+    LOTTO_RESULTS.num5WithBonus * 30000000 +
+    LOTTO_RESULTS.num6 * 2000000000;
+
+  const profitRate = totalPrizeMoney / totalAmountSpent;
+  return (profitRate * 100).toFixed(1);
+};
