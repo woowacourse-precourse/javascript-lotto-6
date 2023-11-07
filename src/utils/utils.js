@@ -5,4 +5,8 @@ export const utils = {
   numberFormat: (str) => {
     return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   },
+  roundingSecondDecimalPlace: (num) => {
+    console.log(num);
+    return parseFloat(num.toFixed(2));
+  },
 };

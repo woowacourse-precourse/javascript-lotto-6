@@ -11,24 +11,23 @@ export const LOTTO = {
 export const LOTTO_RESULT = {
   first: {
     prize: 2000000000,
-    matchCount: 6,
+    includesCount: 6,
   },
   second: {
     prize: 30000000,
-    matchCount: 5,
-    matchBonus: true,
+    includesCount: 5,
   },
   third: {
     prize: 1500000,
-    matchCount: 5,
+    includesCount: 5,
   },
   fourth: {
     prize: 50000,
-    matchCount: 4,
+    includesCount: 4,
   },
   fifth: {
     prize: 5000,
-    matchCount: 3,
+    includesCount: 3,
   },
 };
 
