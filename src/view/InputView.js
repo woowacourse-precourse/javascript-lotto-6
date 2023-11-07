@@ -11,4 +11,12 @@ export default class InputView {
     lottoArray.forEach((lottoNumber) => Console.print(lottoNumber));
     Console.print("");
   }
+
+  async getWinningNumber() {
+    return await Console.readLineAsync(MESSAGES.WINNIG_NUMBER);
+  }
+
+  async getBonusNumber() {
+    return await Console.readLineAsync(MESSAGES.BONUS_NUMBER);
+  }
 }
