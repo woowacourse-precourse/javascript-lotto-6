@@ -10,10 +10,7 @@ class App {
     const userMoney = await Util.validateUserMoney();
     const purchaseNumber = Util.getPurchaseNumber(userMoney);
     Console.print(purchaseNumber + "개를 구매했습니다.");
-    const lottoArray = Array(purchaseNumber)
-      .fill()
-      .map(() => Lotto.createNumber());
-    const lottoClasses = lottoArray.map((lotto) => new Lotto(lotto));
+    const lottoClasses = Util.getLottoClasses(purchaseNumber);
     lottoClasses.forEach((lottoClass) => lottoClass.printNumber());
     return lottoClasses;
   }

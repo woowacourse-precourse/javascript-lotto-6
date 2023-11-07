@@ -25,6 +25,15 @@ class Util {
   static getPurchaseNumber(userMoney) {
     return userMoney / 1000;
   }
+
+  static getLottoArray(purchaseNumber) {
+    return Array(purchaseNumber).fill().map(() => Lotto.createNumber());
+  }
+
+  static getLottoClasses(purchaseNumber) {
+    return this.getLottoArray(purchaseNumber).map((lotto) => new Lotto(lotto));
+  }
+
 }
 
 export default Util;
