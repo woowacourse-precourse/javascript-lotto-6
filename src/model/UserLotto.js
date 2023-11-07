@@ -44,8 +44,8 @@ class UserLotto {
   }
 
   #validate(purchaseAmount) {
-    this.#rangeCheck(purchaseAmount);
     this.#typeCheck(purchaseAmount);
+    this.#rangeCheck(purchaseAmount);
     this.#divisionCheck(purchaseAmount);
   }
 
@@ -57,7 +57,7 @@ class UserLotto {
       throw new Error(ERRORMESSAGE.purchaseToSmall);
 
     // eslint-disable-next-line prettier/prettier
-    if (purchaseAmount < 0) throw new Error(ERRORMESSAGE.purchaseRange1);
+    if (purchaseAmount <= 0) throw new Error(ERRORMESSAGE.purchaseRange1);
 
     if (purchaseAmount > 4000000000)
       throw new Error(ERRORMESSAGE.purchaseRange2);
