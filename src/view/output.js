@@ -5,7 +5,7 @@ class Output{
     constructor(){}
 
     static outputError(errorMessage){
-        Console.print(`[ERROR] ${errorMessage}`);
+        Console.print(`${errorMessage}`);
     }
 
     static outputBoughtLottoNumber(boughtLottoNumber){
