@@ -8,7 +8,7 @@ class Calculate {
   #isBonus;
   #count;
 
-  constructor(amount, numbers, arrays, bonus) {
+  constructor(amount, arrays, numbers, bonus) {
     this.#amount = amount;
     this.#numbers = numbers;
     this.#issuedLotto = arrays;
