@@ -5,9 +5,8 @@ const MESSAGE = Object.freeze({
     winningNumber: '당첨 번호를 입력해 주세요.\n',
   }),
   output: Object.freeze({
+    purchased: '개를 구매했습니다.',
     winningResult: '당첨 통계',
-    winningTableHeader: '등수\t당첨개수\t당첨기준 및 당첨금액',
-    divider: '──────────────────────────────────────────────────',
   }),
 });
 

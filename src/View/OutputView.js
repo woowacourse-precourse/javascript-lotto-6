@@ -10,7 +10,7 @@ class OutputView {
   }
 
   static printNumberOfLottos(numberOfLottos) {
-    Console.print(`${numberOfLottos}개 구매했습니다.`);
+    Console.print(`${numberOfLottos}${MESSAGE.output.purchased}`);
   }
 
   static printLottos(lottos) {
@@ -21,27 +21,12 @@ class OutputView {
 
   static printWinningResult(cntRank) {
     Console.print(MESSAGE.output.winningResult);
-    OutputView.#printWinningResultAsTable(cntRank);
-  }
-
-  static #printWinningResultAsTable(cntRank) {
-    OutputView.#printDivider();
-    Console.print(MESSAGE.output.winningTableHeader);
-    OutputView.#printDivider();
-
     Object.entries(WINNING_INFO).forEach(([key, info]) => {
-      const { rank, criteria, prizeMoney } = info;
       const cnt = cntRank[key];
+      const { criteria, prizeMoney } = info;
       const formattedPrizeMoney = formatMoney(prizeMoney);
-      Console.print(
-        `${rank}등\t${cnt}개 당첨\t${criteria} (${formattedPrizeMoney}원)`,
-      );
+      Console.print(`${criteria} (${formattedPrizeMoney}원) - ${cnt}개`);
     });
-    OutputView.#printDivider();
-  }
-
-  static #printDivider() {
-    Console.print(MESSAGE.output.divider);
   }
 
   static printEarningRate(earningRate) {
