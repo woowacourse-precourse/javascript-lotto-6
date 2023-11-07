@@ -1,5 +1,5 @@
 import LottoBuyer from './LottoBuyer.js';
-import PurchaseAmountValidator from './Validator/purchaseAmountValidator.js';
+import PurchaseAmountValidator from './validator/PurchaseAmountValidator.js';
 import CheckLotto from './util/CheckLotto.js';
 import Formatting from './util/Formatting.js';
 import BonusNumberValidator from './validator/BonusNumberValidator.js';
