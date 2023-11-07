@@ -21,13 +21,4 @@ class Lotto {
     return this.#numbers;
   }
 }
-/* 보너스 번호 검증 어떻게?
-function validateWinningNumbers(winningNumbers, bonusNumber) {
-  if (winningNumbers.includes(bonusNumber)) {
-    throw new Error("[ERROR] 보너스 번호가 당첨 번호와 중복됩니다.");
-  }
-  if (bonusNumber < 1 || bonusNumber > 45) {
-    throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
-  }
-}*/
 export default Lotto;
