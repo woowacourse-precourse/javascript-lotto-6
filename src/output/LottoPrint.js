@@ -1,5 +1,10 @@
+import { random } from '../Game/Random.js';
 // 기능2. 로또 발행
-import { Console } from '@woowacourse/mission-utils';
-import { checkbuy } from '../Exception/CheckBuy.js';
 
-export function lottoprint(buyinput) {}
+export function lottoprint(buyinput) {
+  let contents = [];
+  for (let i = 0; i < buyinput; i++) {
+    contents.push(random[i]);
+  }
+  return contents;
+}
