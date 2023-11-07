@@ -83,6 +83,16 @@ class App {
 			Console.print(`5개 일치 (1,500,000원) - ${ranks.third}개`);
 			Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${ranks.second}개`);
 			Console.print(`6개 일치 (2,000,000,000원) - ${ranks.first}개`);
+			Console.print(
+				`총 수익률은 ${
+					(ranks.fifth * 5000 +
+						ranks.fourth * 50000 +
+						ranks.third * 1500000 +
+						ranks.second * 30000000 +
+						ranks.first * 2000000000) /
+					(1000 * tickets).toFixed(1)
+				}%입니다.`
+			);
 		} catch (error) {
 			throw error;
 		}
