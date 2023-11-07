@@ -17,6 +17,7 @@ class Lotto {
   }
 
   userOutputPurchaseLotto() {
+    this.userView.userOutputLottoCount(PURCHASE_AMOUNT);
     new UserView().userOutputPurchaseLottoNumber(this.#numbers);
   }
 
