@@ -6,7 +6,7 @@ const MESSAGE = Object.freeze({
   }),
   output: Object.freeze({
     purchased: '개를 구매했습니다.',
-    winningResult: '당첨 통계',
+    winningResult: '당첨 통계\n---',
   }),
 });
 

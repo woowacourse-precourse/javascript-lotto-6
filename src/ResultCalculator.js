@@ -1,5 +1,5 @@
 import LOTTO from './constants/lotto.js';
-import { WINNING_INFO, RANK } from './constants/winningInfo.js';
+import WINNING_INFO from './constants/winningInfo.js';
 import { roundToOneDecimalPlace } from './utils/function.js';
 
 class ResultCalculator {
@@ -9,11 +9,11 @@ class ResultCalculator {
 
   constructor() {
     this.#cntRank = {
-      [RANK.first]: 0,
-      [RANK.second]: 0,
-      [RANK.third]: 0,
-      [RANK.fourth]: 0,
-      [RANK.fifth]: 0,
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
     };
   }
 
@@ -33,18 +33,17 @@ class ResultCalculator {
   }
 
   #rankLotto(cnt, lotto, winningLotto) {
-    if (cnt < RANK.fifth) {
-      return;
+    if (cnt === 6) {
+      this.#cntRank.first += 1;
+    } else if (cnt === 5 && this.#isBonusMatch(lotto, winningLotto)) {
+      this.#cntRank.second += 1;
+    } else if (cnt === 5) {
+      this.#cntRank.third += 1;
+    } else if (cnt === 4) {
+      this.#cntRank.fourth += 1;
+    } else if (cnt === 3) {
+      this.#cntRank.fifth += 1;
     }
-
-    if (
-      cnt === WINNING_INFO[RANK.second].matchingNumber &&
-      this.#isBonusMatch(lotto, winningLotto)
-    ) {
-      this.#cntRank[RANK.second] += 1;
-      return;
-    }
-    this.#cntRank[cnt] += 1;
   }
 
   #isBonusMatch(lotto, winningLotto) {

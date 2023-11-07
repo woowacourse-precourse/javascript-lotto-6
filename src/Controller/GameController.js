@@ -1,4 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
+import { MissionUtils } from '@woowacourse/mission-utils';
 import LottoMachine from '../LottoMachine.js';
 import InputView from '../View/InputView.js';
 import OutputView from '../View/OutputView.js';
@@ -40,7 +40,7 @@ class GameController {
         this.#lottoMachine.insertMoney(money);
         break;
       } catch (error) {
-        Console.print(error.message);
+        MissionUtils.Console.print(error.message);
       }
     }
   }
@@ -51,7 +51,7 @@ class GameController {
         this.#lottoMachine.createLottos();
         break;
       } catch (error) {
-        Console.print(error.message);
+        MissionUtils.Console.print(error.message);
       }
     }
   }
@@ -68,7 +68,7 @@ class GameController {
         this.#winningLotto = new WinningLotto(winningNumber);
         break;
       } catch (error) {
-        Console.print(error.message);
+        MissionUtils.Console.print(error.message);
       }
     }
   }
@@ -80,7 +80,7 @@ class GameController {
         this.#winningLotto.bonusNumber = bonusNumber;
         break;
       } catch (error) {
-        Console.print(error.message);
+        MissionUtils.Console.print(error.message);
       }
     }
   }

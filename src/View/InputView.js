@@ -1,15 +1,15 @@
-import { Console } from '@woowacourse/mission-utils';
+import { MissionUtils } from '@woowacourse/mission-utils';
 import MESSAGE from '../constants/message.js';
 import COMMON from '../constants/common.js';
 
 class InputView {
   static async inputMoney() {
-    const money = await Console.readLineAsync(MESSAGE.input.money);
+    const money = await MissionUtils.Console.readLineAsync(MESSAGE.input.money);
     return Number(money);
   }
 
   static async inputWinningNumbers() {
-    const winningNumbers = await Console.readLineAsync(
+    const winningNumbers = await MissionUtils.Console.readLineAsync(
       MESSAGE.input.winningNumber,
     );
     return InputView.#parseWinningNumbers(winningNumbers);
@@ -21,7 +21,9 @@ class InputView {
   }
 
   static async inputBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(MESSAGE.input.bonusNumber);
+    const bonusNumber = await MissionUtils.Console.readLineAsync(
+      MESSAGE.input.bonusNumber,
+    );
     return Number(bonusNumber);
   }
 }
