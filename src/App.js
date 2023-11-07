@@ -21,7 +21,7 @@ class App {
       this.#printAllLottos();
       await this.#inputWinningNumbers();
       await this.#inputBonusNumber();
-      this.#calculateWinningStatistics();
+      this.#calculateResult();
     } catch (err) {
       Console.print(err.message);
       await this.play();
@@ -113,7 +113,7 @@ class App {
     this.#bonusNumber = checkValidateNumber;
   }
 
-  #calculateWinningStatistics() {
+  #calculateResult() {
     Console.print(INPUT_MESSAGE.WINNING_MESSAGE);
     Console.print(SYMBOL.DIVIDER);
   }
