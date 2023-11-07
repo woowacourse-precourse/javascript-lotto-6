@@ -15,14 +15,14 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers !== undefined && !validateWinningLotto(numbers))
-      throw new Error(`${ErrorMessages.WINNING_LOTTO_ERROR_MESSAGE}`);
+    while (numbers !== undefined && !validateWinningLotto(numbers)) {
+      throw new Error(ErrorMessages.WINNING_LOTTO_ERROR_MESSAGE);
+    }
   }
 
   async print() {
     const lottoNumbers = await printWinningLotto();
     this.#numbers = lottoNumbers;
-    this.#validate(lottoNumbers);
     return lottoNumbers;
   }
 }

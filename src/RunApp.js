@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 import Lotto from "./Lotto.js";
 import ErrorMessages from "./common/errorMessages.js";
 import calculateWinningLottosCount from "./controller/result/calculateWinningLottosCount.js";
@@ -48,3 +50,8 @@ class RunApp {
 }
 
 export default RunApp;
+
+// while (!validatePriceInput(price)) {
+//   Console.print(ErrorMessages.PRICE_INPUT_ERROR_MESSAGE);
+//   price = await Console.readLineAsync(Messages.PURCHASE_INPUT_MESSAGE);
+// }
