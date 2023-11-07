@@ -38,7 +38,12 @@ class View {
   }
 
   printGameResult(prizes) {
+    this.#printResultTitle();
     this.#printPrizes(prizes);
+  }
+
+  #printResultTitle() {
+    this.#outputView.print(MESSAGE.resultTitle);
   }
 
   #printPrizes(prizes) {
