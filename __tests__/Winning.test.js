@@ -39,4 +39,10 @@ describe("당첨 번호 클래스 테스트", () => {
       new Winning("1,2, , ,5,6");
     }).toThrow(ERROR_CONVENTION);
   });
+
+  test(`배열로 만들었을 때 범위에서 벗어나는 숫자가 있다면 예외를 발생한다.`, () => {
+    expect(() => {
+      new Winning("41,42,43,44,45,46");
+    }).toThrow(ERROR_CONVENTION);
+  });
 });
