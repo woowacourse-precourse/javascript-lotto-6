@@ -48,16 +48,16 @@ describe('당첨 번호에 대한 예외처리', () =>{
 
 describe('보너스 번호에 대한 예외처리', () =>{
   test.each([[0,[2,3,4,5,6,7]],["일",[1,2,3,4,5,6]]])('보너스 번호는 1-45 사이의 숫자여야 한다.',
-   async (input) => {
+   async (input1, input2) => {
     expect(() => {
-      inputValidators.validateBonusNumber(input);
+      inputValidators.validateBonusNumber(input1, input2);
     }).toThrow("[ERROR]");
    });
 
    test.each([[1,[1,2,3,4,5,6]],[12,[1,4,2,6,5,12]]])('보너스 번호는 당첨 번호와 중복되면 안된다.',
-   async (input) => {
+   async (input1, input2) => {
     expect(() => {
-      inputValidators.validateBonusNumber(input);
+      inputValidators.validateBonusNumber(input1, input2);
     }).toThrow("[ERROR]");
    });
 });
