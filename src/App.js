@@ -40,5 +40,11 @@ class App {
     }
     return lottos;
   }
+  
+  // TODO: 구매한 로또 목록 출력
+  #printLottos(lottos) {
+    MissionUtils.Console.print(`${lottos.length}개를 구매했습니다.`);
+    lottos.forEach(lotto => MissionUtils.Console.print(`[${lotto.numbers.join(", ")}]`));
+  }
 }
 export default App;
