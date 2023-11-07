@@ -10,7 +10,13 @@ class Result {
     const winFive = 1500000 * winningInFive[0];
     const winBonus = 30000000* winningInFive[1];
     const winSix = 2000000000 * this.winningSix;
-    const winMoney = winThird + winForth + winFive + winBonus + winSix;
-    return winMoney;
+    this.winMoney = winThird + winForth + winFive + winBonus + winSix;
+    return this.winMoney;
+  }
+  static calculrateRateOfReturn(userPurchaseAmount) {
+    const RateOfReturn = (this.winMoney - userPurchaseAmount) / userPurchaseAmount * 100;
+    return RateOfReturn;
   }
 }
+
+export default Result;
