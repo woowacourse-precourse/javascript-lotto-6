@@ -6,8 +6,8 @@ const InputView = {
     return await Console.readLineAsync(query);
   },
 
-  async readLottoMoney() {
-    return await this.readInput(INPUT_QUERY.lottoMoney);
+  async readMoney() {
+    return await this.readInput(INPUT_QUERY.money);
   },
 
   async readLottoAnswer() {

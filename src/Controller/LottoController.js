@@ -21,8 +21,8 @@ class LottoController {
   }
 
   async readMoneyAndGetLottos() {
-    const lottoMoneyInput = await InputView.readLottoMoney();
-    const money = new Money(lottoMoneyInput);
+    const moneyInput = await InputView.readMoney();
+    const money = new Money(moneyInput);
     const lottos = lottoSeller.getLottos(money.getAmount());
     return lottos;
   }
