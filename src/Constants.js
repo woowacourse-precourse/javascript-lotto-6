@@ -19,6 +19,7 @@ const INPUT_ERROR = Object.freeze({
   blank: `${PREFIX} 공백없이 입력해야 합니다.\n`,
   char: `${PREFIX} 문자를 입력하였습니다.\n`,
   indivisible: `${PREFIX} ${UNIT}원 단위로 입력해야 합니다.\n`,
+  wrong: `${PREFIX} ${NUMBER_CRITERIA}개의 숫자만 입력해야 합니다.\n`,
   empty: `${PREFIX} 숫자 길이가 0 입니다.\n`,
   outOfRange: `${PREFIX} 1 ~ 45 숫자를 입력해야 합니다.\n`,
   duplicate: `${PREFIX} 서로 다른 ${NUMBER_CRITERIA}개의 숫자를 입력해야 합니다.\n`,
