@@ -3,13 +3,17 @@ import lottoAmountSentence from "./utils/LottoAmountSentence.js";
 import lottoAmountCount from "./utils/lottoAmountCount.js";
 import purchaseAmountSave from "./utils/purchaseAmountSave.js";
 import purchaseAmountSentence from "./utils/purchaseAmountSentence.js";
+import winningNumbers from "./utils/winningNumbers.js";
+import winningNumbersSentence from "./utils/winningNumbersSentence.js";
 
 class App {
   async play() {
     purchaseAmountSentence();
     const PURCHASE_AMOUNT = await purchaseAmountSave();
     await lottoAmountSentence(PURCHASE_AMOUNT);
-    purchaseLottosNumber(PURCHASE_AMOUNT);
+    await purchaseLottosNumber(PURCHASE_AMOUNT);
+    winningNumbersSentence();
+    await winningNumbers();
   }
 }
 
