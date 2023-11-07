@@ -26,10 +26,14 @@ class InputView {
     return winningNumbers;
   }
 
-  static async readBonusNumber() {
+  static async readBonusNumber(winningNumbers) {
     const inputBonusNumber = await Console.readLineAsync(INPUT.bonusNumber);
     const bonusNumber = stringToNumber(inputBonusNumber);
     CommonValidator.validate(bonusNumber);
+    LottoValidator.validateBonusNumberInLottoNumbers(
+      winningNumbers,
+      bonusNumber,
+    );
 
     return bonusNumber;
   }
