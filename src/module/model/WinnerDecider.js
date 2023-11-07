@@ -13,9 +13,9 @@ class WinnerDecider {
     six: 0,
   };
 
-  constructor(winNumber, lottoList) {
+  constructor(winNumber, lottoGenerator) {
     this.#winNumber = winNumber;
-    this.#lottoList = lottoList.lottoList;
+    this.#lottoList = lottoGenerator.lottoList;
     this.#decideWinner();
   }
 
