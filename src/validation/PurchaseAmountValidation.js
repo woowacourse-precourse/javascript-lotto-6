@@ -11,9 +11,17 @@ const PurchaseAmountValidation = {
 		this.checkIsDivisibleByPrice(value);
 	},
 
-	/** @throws 문자열을 정수로 치환할 수 없으면 에러를 발생시킨다. */
+	/** @throws 숫자로 치환할 수 없으면 에러를 발생시킨다. */
 	checkIsNumeric(value) {
 		if (isNaN(value)) {
+			// TODO: 에러메시지
+			throw new Error('in checkIsNumeric');
+		}
+	},
+
+	/** @throws 정수가 아니라면 에러를 발생시킨다. */
+	checkIsInteger(value) {
+		if (!Number.isInteger(Number(value))) {
 			// TODO: 에러메시지
 			throw new Error('in checkIsNumeric');
 		}
