@@ -20,14 +20,16 @@ class App {
 
       const winningNumber = await this.guess.inputLottoNumber();
 
-      const lotto = new Lotto(winningNumber);
-
-      const winningBonus = await this.guess.inputBonusNumber();
-
-      lotto.checkWin(winningBonus, this.guess.getGuessNumbers());
+      await this.checkWinning(winningNumber);
     } catch (error) {
       Console.print(error.message);
     }
+  }
+
+  async checkWinning(winningNumber) {
+    const lotto = new Lotto(winningNumber);
+    const winningBonus = await this.guess.inputBonusNumber();
+    lotto.checkWin(winningBonus, this.guess.getGuessNumbers());
   }
 }
 
