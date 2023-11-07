@@ -24,7 +24,7 @@ const ERRORMESSAGE = Object.freeze({
   lottoType: '[ERROR] 로또 번호는 정수여야 합니다.',
   bonusType: '[ERROR] 보너스 번호는 정수여야 합니다.',
   purchaseRange1: '[ERROR] 구입 금액은 0보다 작을 수 없습니다.',
-  purchaseRange2: '[ERROR] 구입 금액은 20억(당첨금액) 이하이어야 합니다.',
+  purchaseRange2: '[ERROR] 구입 금액은 40억(당첨금액의 2배) 이하여야 합니다.',
   purchaseToBig: '[ERROR] 금액이 너무 큽니다.',
   purchaseToSmall: '[ERROR] 금액이 너무 작습니다.',
 });

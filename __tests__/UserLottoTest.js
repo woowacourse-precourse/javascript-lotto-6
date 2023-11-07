@@ -11,7 +11,7 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
-describe('UserLotto 클래스', () => {
+describe('UserLotto 클래스 테스트', () => {
 	test('맞춘 번호에 따라 적절한 rank를 반환하는지 test', () => {
 		mockRandoms([
       [1, 2, 3, 4, 5, 6],

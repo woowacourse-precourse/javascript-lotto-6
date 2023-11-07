@@ -1,8 +1,7 @@
 import Lotto from '../src/model/Lotto.js';
-
 /* eslint-disable */
 
-describe('로또 클래스 테스트', () => {
+describe('Lotto 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6, 7]);
