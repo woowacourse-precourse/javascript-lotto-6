@@ -17,6 +17,12 @@ class LottoController {
     const purchaseAmount = await this.#view.getPurchaseAmount();
     return this.#lottoService.sellLottos(purchaseAmount);
   }
+
+  async #winningLotto() {
+    const winningNumbers = await this.#view.getWinnigNumbers;
+    const bonusNumber = await this.#view.getBonusNumber;
+    return this.#lottoService.getWinnigLotto(winningNumbers, bonusNumber);
+  }
 }
 
 export default LottoController;
