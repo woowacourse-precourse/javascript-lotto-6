@@ -14,6 +14,50 @@ describe('총 수익 금액 구하기', () => {
   });
 });
 
+describe('확률값 계산', () => {
+  test('확률값이 올바르게 계산된다.', () => {
+    // given
+    const TOTAL = 55000;
+    const PRICE = 5000;
+    const OUTPUT = 1100;
+
+    // when
+    const percent = rateModel.getPercent(TOTAL, PRICE);
+
+    // then
+    expect(percent).toBe(OUTPUT);
+  });
+});
+
+describe('소수점 둘째자리에서 반올림', () => {
+  test.each([
+    [6.875, '6.9'],
+    [100.03, '100.0'],
+  ])(
+    '소수점 둘째자리에서 반올림하여 첫째자리까지 문자열로 나타낸다.',
+    (input, output) => {
+      // when
+      const roundedValue = rateModel.getRoundedValue(input);
+
+      // then
+      expect(roundedValue).toBe(output);
+    },
+  );
+});
+
+describe('화폐 단위로 변환', () => {
+  test.each([
+    ['100000.0', '100,000.0'],
+    ['2500000.2', '2,500,000.2'],
+  ])('숫자로 이루어진 문자열이 화폐 단위로 반환 된다.', (input, output) => {
+    // when
+    const monetaryValue = rateModel.getMonetaryValue(input);
+
+    // then
+    expect(monetaryValue).toBe(output);
+  });
+});
+
 describe('수익률 계산', () => {
   test('소수점 둘째 자리에서 반올림한 확률 값을 문자열로 반환한다.', () => {
     // given
