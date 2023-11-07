@@ -1,14 +1,5 @@
 import LOTTO from "../constants/lotto.js";
-
-const mapCountToKey = Object.freeze({
-  [LOTTO.length]: LOTTO.rank.firstPlace,
-  [LOTTO.length - 1]: Object.freeze({
-    [true]: LOTTO.rank.secondPlace,
-    [false]: LOTTO.rank.thirdPlace,
-  }),
-  [LOTTO.length - 2]: LOTTO.rank.fourthPlace,
-  [LOTTO.length - 3]: LOTTO.rank.fifthPlace,
-});
+import mapCountToResultKey from "./mapCountToResultKey.js";
 
 class ResultOfDrawLotto {
   #result;
@@ -20,6 +11,7 @@ class ResultOfDrawLotto {
       [LOTTO.rank.thirdPlace]: 0,
       [LOTTO.rank.fourthPlace]: 0,
       [LOTTO.rank.fifthPlace]: 0,
+      [LOTTO.rank.blank]: 0,
     };
   }
 
@@ -39,9 +31,9 @@ class ResultOfDrawLotto {
     let key;
 
     if (countOfMatchingNumber === LOTTO.length - 1) {
-      key = mapCountToKey[countOfMatchingNumber][isMatchBonus];
+      key = mapCountToResultKey[countOfMatchingNumber][isMatchBonus];
     } else {
-      key = mapCountToKey[countOfMatchingNumber];
+      key = mapCountToResultKey[countOfMatchingNumber];
     }
 
     this.#result[key] += 1;

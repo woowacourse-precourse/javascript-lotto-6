@@ -18,6 +18,8 @@ describe("LottoManager(로또 매니저) 클래스 테스트", () => {
    */
   let lottoManager;
 
+  let cases;
+
   beforeEach(() => {
     lottoManager = new LottoManager();
   });
@@ -53,36 +55,130 @@ describe("LottoManager(로또 매니저) 클래스 테스트", () => {
     });
   });
 
-  test("drawLottoes 메서드를 통해 로또 추첨을 하면, getResultOfDrawLotto 메서드는 추첨 결과를 반환한다.", () => {
-    // given
-    const amountToPurchase = 6000;
-    const numbersOfLottoes = [
-      [2, 6, 8, 9, 10, 12], // 6
-      [2, 6, 8, 9, 10, 11], // 5 + bonus
-      [6, 8, 9, 10, 12, 13], // 5
-      [6, 8, 9, 10, 12, 15], // 5
-      [1, 2, 3, 4, 6, 8], // 4
-      [1, 2, 9, 10, 12, 45], // 3
-    ];
-    const winningNumbers = [2, 6, 8, 9, 10, 12];
-    const bonusNumber = 11;
-    const expectedResultOfDrawLotto = {
-      matchSix: 1,
-      matchFiveAndBonus: 1,
-      matchFive: 2,
-      matchFour: 1,
-      matchThree: 1,
-    };
+  // given
+  cases = [
+    {
+      input: {
+        amountToPurchase: 6000,
+        numbersOfLottoes: [
+          [2, 6, 8, 9, 10, 12], // 6
+          [2, 6, 8, 9, 10, 11], // 5 + bonus
+          [6, 8, 9, 10, 12, 13], // 5
+          [6, 8, 9, 10, 12, 15], // 5
+          [1, 2, 8, 10, 12, 45], // 4
+          [1, 2, 3, 4, 6, 8], // 3
+        ],
+        winningNumbers: [2, 6, 8, 9, 10, 12],
+        bonusNumber: 11,
+      },
+      expected: {
+        matchSix: 1,
+        matchFiveAndBonus: 1,
+        matchFive: 2,
+        matchFour: 1,
+        matchThree: 1,
+        matchTwoOrLess: 0,
+      },
+    },
+    {
+      input: {
+        amountToPurchase: 8000,
+        numbersOfLottoes: [
+          [8, 21, 23, 41, 42, 43],
+          [3, 5, 11, 16, 32, 38],
+          [7, 11, 16, 35, 36, 44],
+          [1, 8, 11, 31, 41, 42],
+          [13, 14, 16, 38, 42, 45],
+          [7, 11, 30, 40, 42, 43],
+          [2, 13, 22, 32, 38, 45],
+          [1, 3, 5, 14, 22, 45],
+        ],
+        winningNumbers: [1, 2, 3, 4, 5, 6],
+        bonusNumber: 7,
+      },
+      expected: {
+        matchSix: 0,
+        matchFiveAndBonus: 0,
+        matchFive: 0,
+        matchFour: 0,
+        matchThree: 1,
+        matchTwoOrLess: 7,
+      },
+    },
+  ];
+  test.each(cases)(
+    "drawLottoes 메서드를 통해 로또 추첨을 하면, getResultOfDrawLotto 메서드는 추첨 결과를 반환한다.",
+    ({ input, expected: expectedResultOfDrawLotto }) => {
+      mockRandoms(input.numbersOfLottoes);
 
-    mockRandoms(numbersOfLottoes);
+      // when
+      lottoManager.issueLottoes(input.amountToPurchase);
+      lottoManager.generateWinningLotto(
+        input.winningNumbers,
+        input.bonusNumber,
+      );
+      lottoManager.drawLottoes();
+      const resultOfDrawLotto = lottoManager.getResultOfDrawLotto();
 
-    // when
-    lottoManager.issueLottoes(amountToPurchase);
-    lottoManager.generateWinningLotto(winningNumbers, bonusNumber);
-    lottoManager.drawLottoes();
-    const resultOfDrawLotto = lottoManager.getResultOfDrawLotto();
+      // then
+      expect(resultOfDrawLotto.getResult()).toEqual(expectedResultOfDrawLotto);
+    },
+  );
 
-    // then
-    expect(resultOfDrawLotto.getResult()).toEqual(expectedResultOfDrawLotto);
-  });
+  // given
+  cases = [
+    {
+      input: {
+        amountToPurchase: 6000,
+        numbersOfLottoes: [
+          [2, 6, 8, 9, 10, 12], // 6
+          [2, 6, 8, 9, 10, 11], // 5 + bonus
+          [6, 8, 9, 10, 12, 13], // 5
+          [6, 8, 9, 10, 12, 15], // 5
+          [1, 2, 8, 10, 12, 45], // 4
+          [1, 2, 3, 4, 6, 8], // 3
+        ],
+        winningNumbers: [2, 6, 8, 9, 10, 12],
+        bonusNumber: 11,
+      },
+      expected: "33884250.0%",
+    },
+    {
+      input: {
+        amountToPurchase: 8000,
+        numbersOfLottoes: [
+          [8, 21, 23, 41, 42, 43],
+          [3, 5, 11, 16, 32, 38],
+          [7, 11, 16, 35, 36, 44],
+          [1, 8, 11, 31, 41, 42],
+          [13, 14, 16, 38, 42, 45],
+          [7, 11, 30, 40, 42, 43],
+          [2, 13, 22, 32, 38, 45],
+          [1, 3, 5, 14, 22, 45],
+        ],
+        winningNumbers: [1, 2, 3, 4, 5, 6],
+        bonusNumber: 7,
+      },
+      expected: "62.5%",
+    },
+  ];
+  test.each(cases)(
+    "calculateRateOfReturn 메서드를 호출하면, 로또 당첨 수익률을 반환한다.",
+    ({ input, expected: expectedRateOfReturn }) => {
+      mockRandoms(input.numbersOfLottoes);
+
+      // when
+      lottoManager.issueLottoes(input.amountToPurchase);
+      lottoManager.generateWinningLotto(
+        input.winningNumbers,
+        input.bonusNumber,
+      );
+      lottoManager.drawLottoes();
+      lottoManager.getResultOfDrawLotto();
+      const rateOfReturn = lottoManager.calculateRateOfReturn();
+
+      // then
+      expect(rateOfReturn).toEqual(expectedRateOfReturn);
+    },
+  );
 });

@@ -8,17 +8,22 @@ import ResultOfDrawLotto from "../ResultOfDrawLotto/index.js";
 
 class LottoManager {
   /**
-   * @type {Lotto[]}
+   * @type {number} 구입 금액
+   */
+  #amountToPurchase;
+
+  /**
+   * @type {Lotto[]} 발급한 로또들
    */
   #lottoes;
 
   /**
-   * @type {WinningLotto}
+   * @type {WinningLotto} 당첨 로또
    */
   #winningLotto;
 
   /**
-   * @type {ResultOfDrawLotto}
+   * @type {ResultOfDrawLotto} 당첨 결과
    */
   #resultOfDrawLotto;
 
@@ -60,6 +65,7 @@ class LottoManager {
   issueLottoes(amountToPurchase) {
     validateNoRemaining(amountToPurchase, LOTTO.price);
 
+    this.#amountToPurchase = amountToPurchase;
     this.#lottoes = [];
 
     const numberOfLottoTickets = parseInt(amountToPurchase / LOTTO.price, 10);
@@ -77,6 +83,25 @@ class LottoManager {
     this.#lottoes.forEach((lotto) => {
       this.#drawLotto(lotto);
     });
+  }
+
+  /**
+   * @description 로또 추첨 결과 수익률 반환
+   * @returns {string}
+   */
+  calculateRateOfReturn() {
+    const result = this.#resultOfDrawLotto.getResult();
+    const keys = Object.keys(result);
+
+    const totalPrizeMoney = keys.reduce(
+      (accumulatedSum, key) =>
+        accumulatedSum + LOTTO.prizeMoney[key] * result[key],
+      0,
+    );
+
+    const rateOfReturn = (totalPrizeMoney / this.#amountToPurchase) * 100;
+
+    return `${rateOfReturn.toFixed(1)}%`;
   }
 
   /**

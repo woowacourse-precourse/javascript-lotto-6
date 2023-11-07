@@ -13,6 +13,16 @@ const rank = Object.freeze({
   thirdPlace: "matchFive",
   fourthPlace: "matchFour",
   fifthPlace: "matchThree",
+  blank: "matchTwoOrLess",
+});
+
+const prizeMoney = Object.freeze({
+  [rank.firstPlace]: 2_000_000_000,
+  [rank.secondPlace]: 30_000_000,
+  [rank.thirdPlace]: 1_500_000,
+  [rank.fourthPlace]: 50_000,
+  [rank.fifthPlace]: 5_000,
+  [rank.blank]: 0,
 });
 
 const LOTTO = Object.freeze({
@@ -20,6 +30,7 @@ const LOTTO = Object.freeze({
   price,
   range,
   rank,
+  prizeMoney,
 });
 
 export default LOTTO;
