@@ -5,7 +5,6 @@ import { Console } from '@woowacourse/mission-utils';
 
 class User {
   constructor() {
-    this.money = 0;
     this.count = 0;
   }
 
@@ -15,23 +14,27 @@ class User {
   }
 
   getCount() {
+    console.log(this.count);
     return this.count;
   }
 
   setUserMoney(money) {
-    this.money = money;
     this.count = money / TRY_COST;
     Console.print(MESSAGE.USER.buyLotto(this.count));
   }
 
-  static async readUserMoney() {
+  async readUserMoney() {
+    return Number(await Console.readLineAsync(MESSAGE.USER.setMoney));
+  }
+
+  async readAndSetUserMoney() {
     try {
-      const money = Number(await Console.readLineAsync(MESSAGE.USER.setMoney));
+      const money = await this.readUserMoney();
       this.#validation(money);
-      return money;
+      this.setUserMoney(money);
     } catch (err) {
       Console.print(err.message);
-      await User.readUserMoney();
+      await this.readAndSetUserMoney();
     }
   }
 }
