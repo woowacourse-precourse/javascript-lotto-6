@@ -8,12 +8,14 @@ class LottoNumber {
     }
 
     #validate(number){
-        if(!isNaN(number)){
+        if(isNaN(number)){
+            console.log(number);
             throw new Error(this.ERROR_MESSEGE_NON_NUMBER);
         }
         if(number < 1 || number > 45){
             throw new Error(this.ERROR_MESSEGE_NOT_IN_RANGE);
         }
+
     }
 }
 export default LottoNumber;
