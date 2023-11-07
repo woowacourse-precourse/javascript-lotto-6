@@ -1,5 +1,4 @@
 import { Console } from "@woowacourse/mission-utils";
-
 import { message } from "../constants";
 
 const outputView = {

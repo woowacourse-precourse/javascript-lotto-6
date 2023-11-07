@@ -12,7 +12,7 @@ const draw = {
     const count = this.getBounusMatches(matches, bounus);
     matches.splice(3, 0, count);
 
-    return result;
+    return matches;
   },
 
   /* 5등, 4등, 3등, 1등 개수의 개수를 반환한다. */
