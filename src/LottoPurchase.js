@@ -41,6 +41,5 @@ class LottoPurchase {
         this.#printLottos(this.GENERATED_LOTTOS);
     }
 }
-const a = new LottoPurchase(5);
-await a.showPurchaseResult();
 
+export default LottoPurchase;
