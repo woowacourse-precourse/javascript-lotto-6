@@ -20,6 +20,8 @@ class Lotto {
       if (numbers[index] >= numbers[index + 1])
         throw new Error(NOT_SORTED_ASCENDING_ORDER);
     }
+    if (numbers.some((number) => !Number.isInteger(number)))
+      throw new Error(NOT_NUMBER_ERROR_MESSAGE);
   }
 
   // TODO: 추가 기능 구현
