@@ -20,10 +20,14 @@ export default class LottoGameController {
     this.#displayResults(lottoResult);
   }
 
+  async #getInput(inputFunction) {
+    return inputFunction();
+  }
+
   async #getValidatedInput(inputFunction, validationFunction) {
     while (true) {
       try {
-        const input = await inputFunction();
+        const input = await this.#getInput(inputFunction);
         validationFunction(input);
         return input;
       } catch (error) {
@@ -55,7 +59,7 @@ export default class LottoGameController {
   async #getBonusNumber(winningNumbers) {
     return this.#getValidatedInput(
       () => InputView.getBonusNumber(winningNumbers),
-      (input) => InputValidator.validateBonusNumber(input, winningNumbers),
+      (bonusNumber) => InputValidator.validateBonusNumber(bonusNumber, winningNumbers),
     );
   }
 
