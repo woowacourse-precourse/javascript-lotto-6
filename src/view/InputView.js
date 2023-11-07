@@ -1,9 +1,12 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import Validator from '../utils/Validator.js';
 
 const InputView = {
   async purchaseLotto() {
-    let amount = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    amount = Number(amount);
+    const amount = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+
+    Validator.inputPurchaseAmount(amount);
+
     return amount;
   },
 

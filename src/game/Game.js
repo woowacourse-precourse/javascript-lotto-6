@@ -22,7 +22,11 @@ class Game {
     this.#bonusNumber;
   }
 
-  async purchase() {
+  async playGame() {
+    await this.#purchase();
+  }
+
+  async #purchase() {
     const amount = await InputView.purchaseLotto();
     await this.#handlePurchase(amount);
   }
