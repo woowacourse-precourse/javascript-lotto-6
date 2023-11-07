@@ -9,5 +9,18 @@ describe('UserLotto 클래스', () => {
       new UserLotto(3000);
     }).not.toThrow();
   });
-	
+
+	test('유효하지 않은 숫자로 구매 금액이 주어지면 예외가 발생.', () => {
+    expect(() => {
+      new UserLotto(NaN);
+    }).toThrow(ERRORMESSAGE.purchaseInput);
+  });
+
+	test('1,000 단위로 나누어지지 않는 구매 금액이 주어지면 예외가 발생.', () => {
+    expect(() => {
+      new UserLotto(2500);
+    }).toThrow(ERRORMESSAGE.purchaseAmount);
+  });
+
+  
 });
