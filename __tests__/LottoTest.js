@@ -1,4 +1,5 @@
 import Lotto from "../src/Lotto.js";
+import RandomNumberGenerator from "../src/domain/RandomNumberGenerator.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -15,4 +16,9 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test.each([1,2,3,4,5])("로또 한 장당 랜덤 넘버로 이루어진 로또가 한 개 발행된다.", (input) => {
+    const randomNumberGenerator = new RandomNumberGenerator();
+    const randomNumbers = randomNumberGenerator.getRandomNumberArray(input);
+    expect(randomNumbers).toHaveLength(input);
+  })
 });
