@@ -21,10 +21,8 @@ class Lotto {
   }
 
   checkSixNum = async () => {
-    if(typeof this.#numbers === "string") {
-      const numbersToArray = this.#numbers.split(",").map(str => str.trim()).map(Number);
-      return numbersToArray;
-    }
+    if(Array.isArray(this.#numbers))
+      return this.#numbers;
     let validNumbers = 0;
     while(validNumbers === 0 && this.#numbers === undefined) {
       try {
@@ -43,20 +41,17 @@ class Lotto {
   };
 
   #validate(numbers) {
-    const numbersToArray = numbers.split(",").map(str => str.trim()).map(Number);
-    if (!Array.isArray(numbersToArray))
-      throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
-    if (numbersToArray.some(num => Number.isNaN(num)))
+    if (numbers.some(num => Number.isNaN(num)))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-    if (numbersToArray.length !== 6)
+    if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    if (this.hasDuplicates(numbersToArray))
+    if (this.hasDuplicates(numbers))
       throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
-    if (numbersToArray.some(num => num <= 0 || num >= 46))
+    if (numbers.some(num => num <= 0 || num >= 46))
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
-    if (numbersToArray.some(num => num >= 1 && num <= 45 && !Number.isInteger(num)))
+    if (numbers.some(num => num >= 1 && num <= 45 && !Number.isInteger(num)))
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
-    return numbersToArray;
+    return numbers;
   };
 
   getBonusNum = async (sixNum) => {
