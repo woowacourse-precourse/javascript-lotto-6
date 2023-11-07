@@ -13,3 +13,15 @@ const RANK_DESCRIPTION = {
     2: '5개 일치, 보너스 볼 일치',
     1: '6개 일치',
 };
+
+/**
+ * @param {number} lottoPay
+ */
+export function validateLottoPay(lottoPay) {
+    if (!(typeof lottoPay === 'number' && lottoPay)) {
+        throw new Error('[ERROR] 숫자만 입력 가능합니다.');
+    }
+    if (lottoPay % 1000 !== 0) {
+        throw new Error('[ERROR] 1000의 배수만 입력 가능합니다.');
+    }
+}
