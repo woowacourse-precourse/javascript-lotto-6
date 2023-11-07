@@ -3,11 +3,11 @@ import { ERROR_MESSAGE } from "./constants/message.js";
 import { Validator } from "./utils/validator.js";
 
 class Lotto {
-  numbers;
+  #numbers;
 
   constructor(numbers) {
     this.#validate(numbers.toString());
-    this.numbers = numbers;
+    this.#numbers = numbers;
   }
 
   #validate(numbers) {

@@ -11,11 +11,11 @@ class App {
 
     const winnerLotto = await View.getWinnerNumber();
 
-    const bonus = await View.getBonusNumber(winnerLotto.numbers);
+    const bonus = await View.getBonusNumber(winnerLotto);
 
     const statics = View.displayWinningStatics(
       lottoArray,
-      winnerLotto.numbers,
+      winnerLotto,
       bonus.number
     );
 

@@ -30,7 +30,11 @@ export const View = {
 
     const lotto = new Lotto(winnerNumber);
 
-    return lotto;
+    if (lotto) {
+      return winnerNumber;
+    } else {
+      return null;
+    }
   },
 
   async getBonusNumber(winnerNumbers) {
