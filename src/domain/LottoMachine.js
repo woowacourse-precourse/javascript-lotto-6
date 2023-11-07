@@ -62,7 +62,7 @@ export class LottoMachine {
   drawAll(boughtLottos) {
     boughtLottos.lottos.forEach((lotto) => {
       const hasBonusNumber = lotto.hasBonusNumber(this.#bonusNumber);
-      const matchingNumberCount = lotto.countIncludingNumbers(
+      const matchingNumberCount = lotto.countMatchingNumbers(
         this.#winningNumbers
       );
       this.#draw(matchingNumberCount, hasBonusNumber);
@@ -113,19 +113,6 @@ export class LottoMachine {
       this.#fifthRank++;
       this.#totalEarning += NUMBER.FIFTH_PRIZE;
     }
-  }
-
-  /**
-   *
-   * @param lotto
-   * @return {number}
-   * @description 겹치는 번호만 필터로 모아서 총 몇개겹치는지 세준다
-   *
-   * ex. 5개 겹치면 5 리턴
-   */
-  #compareMatchingNumber(lotto) {
-    let matchNum = lotto.filter((n) => this.#winningNumbers.includes(n));
-    return matchNum.length;
   }
 
   /**

@@ -49,7 +49,7 @@ class Lotto {
    * @return {number}
    * @description 당첨 번호랑 몇개나 맞는지 계산
    */
-  countIncludingNumbers(winningNumbers) {
+  countMatchingNumbers(winningNumbers) {
     return this.#numbers.filter((n) => winningNumbers.includes(n)).length;
   }
 
