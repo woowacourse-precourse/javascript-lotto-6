@@ -6,8 +6,6 @@ import {
 } from './constants/conditions.js';
 
 export default class WinningResult {
-  #matchCountList;
-
   #matchingTable = {
     three: DEFAULT_NUM,
     four: DEFAULT_NUM,
@@ -17,20 +15,15 @@ export default class WinningResult {
   };
 
   constructor(matchCountList) {
-    this.#matchCountList = matchCountList;
-    this.#updateTable(this.#matchCountList);
-  }
-
-  getResult() {
-    return this.#matchingTable;
+    this.#updateTable(matchCountList);
   }
 
   #updateTable(matchCountList) {
     matchCountList.forEach((count) => {
       if (Array.isArray(count)) {
-        this.#isBonusMatch(count)
-          ? (this.#matchingTable.fiveAndBonus += COUNT.plus)
-          : (this.#matchingTable.fiveNotBonus += COUNT.plus);
+        if (count[IS_BOUNS_INDEX])
+          this.#matchingTable.fiveAndBonus += COUNT.plus;
+        else this.#matchingTable.fiveNotBonus += COUNT.plus;
       }
       if (count === MATCH_COUNTS.three) this.#matchingTable.three += COUNT.plus;
       if (count === MATCH_COUNTS.four) this.#matchingTable.four += COUNT.plus;
@@ -38,7 +31,7 @@ export default class WinningResult {
     });
   }
 
-  #isBonusMatch(count) {
-    return !!count[IS_BOUNS_INDEX];
+  getResult() {
+    return this.#matchingTable;
   }
 }
