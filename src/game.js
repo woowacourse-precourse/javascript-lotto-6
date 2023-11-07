@@ -12,54 +12,53 @@ function lottoNumbersGenerator(amount) {
 function printBuyingLottoNumbers(numberList) {
   Console.print(`${numberList.length}개를 구매했습니다.`);
   for (let i = 0; i < numberList.length; i++) {
-    Console.print(numberList[i].sort((a, b) => a - b));
+    Console.print(`[${numberList[i].sort((a, b) => a - b).join(", ")}]`);
   }
 }
 
 function calculator(buyingNumberList, winningNumbers, bonusNumber) {
-  const result = [0, 0, 0, 0, 0];
+  const result = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
   for (const oneLotto of buyingNumberList) {
-    const intersection = [
-      oneLotto.filter((x) => winningNumbers.getNumbers().includes(x)),
-    ];
+    const intersection = oneLotto.filter((x) =>
+      winningNumbers.getNumbers().includes(x)
+    );
     const bonusMatch = oneLotto.includes(bonusNumber);
 
     if (intersection.length === 6) {
-      result[0]++;
+      result[1]++;
     } else if (intersection.length === 5) {
       if (bonusMatch) {
-        result[1]++;
-      } else {
         result[2]++;
+      } else {
+        result[3]++;
       }
     } else if (intersection.length === 4) {
-      result[3]++;
-    } else if (intersection.length === 3) {
       result[4]++;
+    } else if (intersection.length === 3) {
+      result[5]++;
     }
   }
   return result;
 }
 
 function printResult(result) {
-  Console.print("당첨 통계\n---");
-  Console.print(`3개 일치 (5,000원) - ${result[4]}개`);
-  Console.print(`4개 일치 (50,000원) - ${result[3]}개`);
-  Console.print(`5개 일치 (1,500,000원) - ${result[2]}개`);
-  Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[1]}개`);
-  Console.print(`6개 일치 (2,000,000,000원) - ${result[0]}개`);
+  Console.print(`3개 일치 (5,000원) - ${result[5]}개`);
+  Console.print(`4개 일치 (50,000원) - ${result[4]}개`);
+  Console.print(`5개 일치 (1,500,000원) - ${result[3]}개`);
+  Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[2]}개`);
+  Console.print(`6개 일치 (2,000,000,000원) - ${result[1]}개`);
 }
 
 function profit(price, result) {
   const totalPrize =
-    result[0] * 2000000000 +
-    result[1] * 30000000 +
-    result[2] * 1500000 +
-    result[3] * 50000 +
-    result[4] * 5000;
+    result[1] * 2000000000 +
+    result[2] * 30000000 +
+    result[3] * 1500000 +
+    result[4] * 50000 +
+    result[5] * 5000;
 
-  const profit = ((totalPrize / price) * 100).toFixed(2);
+  const profit = ((totalPrize / price) * 100).toFixed(1);
   Console.print(`총 수익률은 ${profit}%입니다.`);
 }
 
