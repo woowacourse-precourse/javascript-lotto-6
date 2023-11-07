@@ -1,5 +1,5 @@
 import { LOTTO_RULES } from '../constants/lotto.js';
-import generateSortedRandomNumbers from '../utils/generateRandomNumbers.js';
+import generateSortedRandomNumbers from '../utils/generateSortedRandomNumbers.js';
 import purchaseAmountValidator from '../validators/purchaseAmountValidator.js';
 import Lotto from './Lotto.js';
 
