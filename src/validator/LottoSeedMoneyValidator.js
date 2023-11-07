@@ -4,7 +4,6 @@ import ValidationError from '../error/ValidationError.js';
 import validateCommon from './CommonValidator.js';
 
 /**
- * @public
  * @param {number} input
  * @throws {ValidationError}
  */
@@ -15,7 +14,6 @@ const checkValidCharacter = (input) => {
 };
 
 /**
- * @public
  * @param {number} input
  * @throws {ValidationError}
  */
@@ -26,18 +24,6 @@ const checkValidSeedMoney = (input) => {
 };
 
 /**
- * @public
- * @param {number} input
- * @throws {ValidationError}
- */
-const checkValidNumber = (input) => {
-  if (!Number.isInteger(input)) {
-    throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidNumber);
-  }
-};
-
-/**
- * @public
  * @param {number} input
  * @throws {ValidationError}
  */
@@ -48,7 +34,6 @@ const checkValidInteger = (input) => {
 };
 
 /**
- * @public
  * @param {string} seedMoney
  */
 const validateLottoSeedMoney = (seedMoney) => {
@@ -57,7 +42,6 @@ const validateLottoSeedMoney = (seedMoney) => {
   validateCommon(seedMoney);
   checkValidCharacter(number);
   checkValidSeedMoney(number);
-  checkValidNumber(number);
   checkValidInteger(number);
 };
 
