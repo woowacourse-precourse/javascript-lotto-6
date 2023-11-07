@@ -6,7 +6,8 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#validateDuplication(numbers);
-    this.#validate3(numbers);
+    this.#validateOutOfRange(numbers);
+    this.#validateType(numbers);
     this.#numbers = numbers;
   }
 
@@ -23,11 +24,16 @@ class Lotto {
     }
   }
 
-  #validate3(numbers){
+  #validateOutOfRange(numbers){
     for(let i=0; i<6; i++){
       if(parseInt(numbers[i])>45 || parseInt(numbers[i])<1){
           throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
       }
+    }
+  }
+  
+  #validateType(numbers){
+    for(let i=0; i<6; i++){
       if(isNaN(numbers[i])){
         throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
       }
