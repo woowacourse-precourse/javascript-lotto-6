@@ -1,4 +1,4 @@
-import Lotto from '../model/Lotto.js';
+import WinningLotto from '../model/WinningLotto.js';
 import UserLotto from '../model/UserLotto.js';
 import Statistics from '../model/Statistics.js';
 import InputView from '../view/InputView.js';
@@ -44,7 +44,7 @@ class Controller {
     try {
       const lottoNumbers = await this.#inputView.readLottoNumber();
 
-      this.#winningLotto = new Lotto(
+      this.#winningLotto = new WinningLotto(
         Array.from(lottoNumbers.split(','), Number)
       );
       await this.#setBonusNumber();
@@ -67,7 +67,13 @@ class Controller {
   }
 
   calculateStatistics() {
-    this.#statistics.calculateStatistics(this.#userLotto, this.#winningLotto);
+    const matchingResult = this.#userLotto.calculateMatchingNumber(
+      this.#winningLotto.getFullLottoNumber()
+    );
+    this.#statistics.calculateStatistics(
+      matchingResult,
+      this.#userLotto.getNumberOfPurchase()
+    );
     this.printStatistics();
   }
 
