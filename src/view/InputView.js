@@ -1,6 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 import { CONSOLE_MESSAGE } from '../constans/consoleMessages.js'
 import { inputPriceValidator } from '../validate/inputPriceValidator.js'
+import { inputNumbersValidator } from '../validate/inputNumbersValidator.js'
+import { inputBonusValidator } from '../validate/inputBonusValidator.js'
 
 class InputView  {
   async lottoPriceInput() {
@@ -11,21 +13,43 @@ class InputView  {
         inputPriceValidator(priceInput);
         break;
       } catch (error) {
-        console.error(error.message);
+        Console.print(error.message);
       }
     }
     return priceInput;
   }
 
   async lottoMainNumberInput() {
-    const lottoMainNumberInput = await Console.readLineAsync(CONSOLE_MESSAGE.inputLottoMainNumber);
-    return lottoMainNumberInput.split(',').map(Number);
+    let lottoMainNumberInput;
+    while (true) {
+      try {
+        lottoMainNumberInput = await Console.readLineAsync(CONSOLE_MESSAGE.inputLottoMainNumber);
+        lottoMainNumberInput = lottoMainNumberInput.split(',').map(Number); 
+        inputNumbersValidator(lottoMainNumberInput);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return lottoMainNumberInput;
   }
-    
-  async lottoBonusNumberInput() {
-    const lottoBonusNumberInput = await Console.readLineAsync(CONSOLE_MESSAGE.inputLottoBonusNumber);
-    return parseInt(lottoBonusNumberInput);
+
+  async lottoBonusNumberInput(lottoMainNumberInput) {
+    let lottoBonusNumberInput;
+    while (true) {
+      try {
+        lottoBonusNumberInput = await Console.readLineAsync(CONSOLE_MESSAGE.inputLottoBonusNumber);
+        inputBonusValidator(lottoMainNumberInput,lottoBonusNumberInput);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return lottoBonusNumberInput;
   }
+
+
+
 }
 
 export default InputView;
