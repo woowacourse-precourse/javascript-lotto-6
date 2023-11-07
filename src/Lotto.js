@@ -5,7 +5,6 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.genearateNumbers();
     this.#numbers = numbers;
   }
   //유효성검사
@@ -20,36 +19,19 @@ class Lotto {
         throw new Error("[ERROR] 로또 번호는 1과 45 사이여야 합니다.");
       }
     }
-  }
-  //로또 번호 생성
-  genearateNumbers() {
-    for (let i = 0; i < numOfLottos; i++) {
-      const number = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      this.numbers.push(number);
-      MissionUtils.Console.print(`${this.numbers}`);
+    //로또 번호 중복 방지
+    const set = new Set(numbers);
+    if (set.length < 6) {
+      throw new Error("[ERROR] 숫자가 중복됩니다.");
     }
   }
-  //로또 번호 중복 방지
+
+  //getter 함수
+  get numbers() {
+    return this.#numbers;
+  }
 }
+
 // TODO: 추가 기능 구현
-//보너스 번호 생성
-class Bonus {
-  bonus;
 
-  constructor() {
-    this.bonus;
-    this.checkBonus();
-  }
-
-  checkBonus(numbers, pickNumber) {
-    let matchWinningNumber = 0;
-
-    pickNumber.forEach((number) => {
-      if (numbers.includes(number)) {
-        matchWinningNumber++;
-      }
-    });
-  }
-}
-
-export { Lotto, Bonus };
+export default Lotto;
