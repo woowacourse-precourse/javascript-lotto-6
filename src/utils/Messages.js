@@ -3,6 +3,7 @@ const ERROR_MESSAGES = Object.freeze({
   INVALID_LOTTO_NUMBER: '[ERROR] 로또 번호는 6개여야 합니다.',
   INVALID_NUMBER: '[ERROR] 숫자가 아닌 값이 입력되었습니다.',
   INVALID_RANGE: '[ERROR] 1 ~ 45 사이의 값을 입력해주세요.',
+  BONUS_NUMBER_INCLUDED: '[ERROR] 보너스 번호는 로또 번호에 포함될 수 없습니다.',
   DEFAULT_ERROR: '[ERROR] 유효한 값이 아닙니다.',
 });
 

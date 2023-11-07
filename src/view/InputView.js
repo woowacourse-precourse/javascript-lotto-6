@@ -1,4 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import { GAME_MESSAGES, ERROR_MESSAGES } from '../utils/Messages.js';
 import { isDivisibleByThousand, isNumber, isNumberInRange, isNumberLengthValid } from '../utils/Validation.js';
 

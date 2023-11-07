@@ -1,26 +1,36 @@
-import { NUMBER } from './Constans';
+import { NUMBER } from "./Constans";
 
 const isDivisibleByThousand = (purchaseAmount) => {
-    return purchaseAmount % 1000 === 0;
-}
+  return purchaseAmount % 1000 === 0;
+};
 
 const isNumber = (purchaseAmount) => {
-    return !isNaN(Number(purchaseAmount));
-}
+  return !isNaN(Number(purchaseAmount));
+};
 
 const isNumberLengthValid = (numbers) => {
-    const numberArray = numbers.toString().split(',');
-    const uniqueNumbers = [...new Set(numberArray)];
-    return uniqueNumbers.length === NUMBER.SIX;
-}
+  const numberArray = numbers.toString().split(",");
+  const uniqueNumbers = [...new Set(numberArray)];
+  return uniqueNumbers.length === NUMBER.SIX;
+};
 
 const isNumbersInRange = (numbers) => {
-    return numbers.every(number => isNumberInRange(number));
-}
-
+  return numbers.every((number) => isNumberInRange(number));
+};
 
 const isNumberInRange = (number) => {
-    return number >= NUMBER.ONE && number <= NUMBER.FORTY_FIVE;
-}
+  return number >= NUMBER.ONE && number <= NUMBER.FORTY_FIVE;
+};
 
-export { isDivisibleByThousand, isNumber, isNumberInRange, isNumberLengthValid, isNumbersInRange };
+const isBonusNumberIncluded = (winningNumbers, bonusNumber) => {
+  return winningNumbers.includes(bonusNumber);
+};
+
+export {
+  isDivisibleByThousand,
+  isNumber,
+  isNumberInRange,
+  isNumberLengthValid,
+  isNumbersInRange,
+  isBonusNumberIncluded,
+};

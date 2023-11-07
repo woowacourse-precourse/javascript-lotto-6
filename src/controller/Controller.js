@@ -10,38 +10,61 @@ class LottoController {
   constructor() {
     this.#userLottoModel = new UserLottoModel();
   }
-  
+
   async playGame() {
     try {
-        // 금액 입력
-        const ticketPrice = await InputView.getLottoNumbers();
-        OutputView.printQuantity(ticketPrice);
-  
-        // 로또 생성
-        this.#userLottoModel.generateLottoTicket(ticketPrice);
-        const lottoTickets = this.#userLottoModel.getLottoTickets();
-        OutputView.printLottoTickets(lottoTickets);
-        
-        // 당첨 번호 입력
-        const winningNumbers = await InputView.getWinningNumbers();
- 
-        // 보너스 번호 입력
-        const bonusNumbers = await InputView.getBonusNumbers();
-        
-        // 로또 판별
-        const lottoMatcher = new LottoMatcher(lottoTickets, winningNumbers, bonusNumbers, ticketPrice);
-        const result = lottoMatcher.countMatches();
-  
-        OutputView.printResultTitle();
-  
-        OutputView.printSeparator();
-  
-        OutputView.formatResults(result);
-  
-        OutputView.calculateProfitRate(result);
+      const ticketPrice = await this.getTicketPrice();
+      this.printQuantity(ticketPrice);
+
+      this.generateLotto(ticketPrice);
+
+      const winningNumbers = await this.getWinningNumbers();
+      const bonusNumbers = await this.getBonusNumbers();
+
+      this.playLottoGame(winningNumbers, bonusNumbers, ticketPrice);
     } catch (error) {
-        Console.print(error.message);
+      Console.print(error.message);
     }
+  }
+
+  async getTicketPrice() {
+    return InputView.getLottoNumbers();
+  }
+
+  printQuantity(ticketPrice) {
+    OutputView.printQuantity(ticketPrice);
+  }
+
+  generateLotto(ticketPrice) {
+    this.#userLottoModel.generateLottoTicket(ticketPrice);
+    const lottoTickets = this.#userLottoModel.getLottoTickets();
+    OutputView.printLottoTickets(lottoTickets);
+  }
+
+  async getWinningNumbers() {
+    return InputView.getWinningNumbers();
+  }
+
+  async getBonusNumbers() {
+    return InputView.getBonusNumbers();
+  }
+
+  playLottoGame(winningNumbers, bonusNumbers, ticketPrice) {
+    const result = this.#calculateLottoResult(winningNumbers, bonusNumbers, ticketPrice);
+    this.#displayLottoResult(result);
+  }
+
+  #calculateLottoResult(winningNumbers, bonusNumbers, ticketPrice) {
+    const lottoTickets = this.#userLottoModel.getLottoTickets();
+    const lottoMatcher = new LottoMatcher(lottoTickets, winningNumbers, bonusNumbers, ticketPrice);
+    return lottoMatcher.countMatches();
+  }
+
+  #displayLottoResult(result) {
+    OutputView.printResultTitle();
+    OutputView.printSeparator();
+    OutputView.formatResults(result);
+    OutputView.calculateProfitRate(result);
   }
 }
 

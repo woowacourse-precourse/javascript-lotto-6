@@ -1,4 +1,6 @@
 import { GAME_PRIZES, NUMBER, PRIZE_AMOUNTS } from '../utils/Constans';
+import { ERROR_MESSAGES } from '../utils/Messages';
+import { isBonusNumberIncluded } from '../utils/Validation';
 
 class LottoMatcher {
   constructor(tickets, winningNumbers, bonusNumber, ticketPrice) {
@@ -6,6 +8,7 @@ class LottoMatcher {
     this.winningNumbers = winningNumbers;
     this.bonusNumber = bonusNumber;
     this.ticketPrice = ticketPrice;
+    this.#validationBonusNumber(winningNumbers, bonusNumber)
   }
 
   countMatches() {
@@ -16,6 +19,16 @@ class LottoMatcher {
     });
 
     return result;
+  }
+
+  #validationBonusNumber(winningNumbers, bonusNumber) {
+    if(isBonusNumberIncluded(winningNumbers, bonusNumber)){
+      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_INCLUDED);
+    }
+  }
+
+  #includesBonusNumber(ticket, bonusNumber) {
+    return ticket.includes(bonusNumber);
   }
 
   #initializeResult() {
@@ -52,10 +65,6 @@ class LottoMatcher {
 
   #getMatchedNumbers(ticket, winningNumbers) {
     return ticket.filter((number) => winningNumbers.includes(number));
-  }
-
-  #includesBonusNumber(ticket, bonusNumber) {
-    return ticket.includes(bonusNumber);
   }
 
   #updateFirstPrize(result) {
