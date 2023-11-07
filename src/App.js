@@ -2,6 +2,7 @@ import { PICK_NUMBERS, ONE_LOTTO_PRICE } from "./constants/lottoNumbers.js";
 import { MODE } from "./constants/mode.js";
 import { Random, Console } from "@woowacourse/mission-utils";
 import { Input } from "./Input.js";
+import { Output } from "./Output.js";
 
 class App {
   #money;
@@ -21,8 +22,12 @@ class App {
   }
 
   async play() {
+    const output = new Output();
     this.#money = await this.untilValueAvailable(this.#money, MODE.MONEY);
     const lottos = this.makeLotto(this.#money);
+
+    output.printHowManyLotto(this.#money);
+    output.printMyLotto(lottos);
 
     this.#winningNumbers = await this.untilValueAvailable(
       this.#winningNumbers,
