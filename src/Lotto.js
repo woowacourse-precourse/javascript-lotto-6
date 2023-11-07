@@ -20,7 +20,7 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.duplicateNumber);
     }
   }
-  // TODO: 추가 기능 구현
+
   print() {
     Console.print(`[${this.#numbers.join(', ')}]`);
   }
