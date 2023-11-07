@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import InputView from "../../src/view/InputView.js";
 import { INPUT_ERROR } from "../../src/model/Constants.js";
 
