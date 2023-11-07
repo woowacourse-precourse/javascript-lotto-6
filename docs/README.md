@@ -1,8 +1,8 @@
 ## 로또 🎯
 ### 기능 목록
 1. 사용자 입력 
-- [ ] 로또 구입 금액을 입력받기
-- [ ] 당첨번호 및 보너스 번호 입력 받기
+- [x] 로또 구입 금액을 입력받기
+- [x] 당첨번호 및 보너스 번호 입력 받기
 
 2. 당첨 결과로 수익률 계산하기:
 - [ ] 구매한 로또 번호와 당첨 번호 비교하기
@@ -23,6 +23,9 @@
 📦src
  ┣ 📂constant
  ┃ ┗ 📜ErrorMessage.js
+ ┣ 📂controller
+ ┃ ┣ 📜App.js
+ ┃ ┗ 📜UserController.js
  ┣ 📂models
  ┃ ┣ 📜Lotto.js
  ┃ ┣ 📜Reward.js
@@ -30,6 +33,5 @@
  ┣ 📂views
  ┃ ┣ 📜Inputview.js
  ┃ ┗ 📜Outputview.js
- ┣ 📜App.js
  ┣ 📜index.js
  ┗ 📜Lotto.js
