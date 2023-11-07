@@ -1,4 +1,4 @@
-export const COMMON = {
+export const COMMON = Object.freeze({
   zero: 0,
   comma: ',',
-};
+});

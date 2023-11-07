@@ -1,18 +1,17 @@
-export const INPUT_MESSAGE = {
+export const INPUT_MESSAGE = Object.freeze({
   lottoPurchasePrice: '구입금액을 입력해 주세요.\n',
   lottoWnningNumbers: '당첨 번호를 입력해 주세요.\n',
   lottoWinningNumbersDescription: '당첨 번호 : 쉼표(,)로 구분된 1~45 사이 중복되지 않는 6자리 수',
   lottoBonusNumber: '보너스 번호를 입력해 주세요.\n',
-};
+});
 
-export const PRINT_MESSAGE = {
+export const PRINT_MESSAGE = Object.freeze({
   prizesDescription: '당첨 통계',
   divide: '---',
-};
+});
 
 const ERROR_PREFIX = '[ERROR]';
-export const ERROR_MESSAGE = {
-  validate: ERROR_PREFIX,
+export const ERROR_MESSAGE = Object.freeze({
   notNumber: `${ERROR_PREFIX} 숫자만 입력 가능합니다.`,
   empty: `${ERROR_PREFIX} 빈 값은 입력 불가능합니다.`,
   notZero: `${ERROR_PREFIX} 0외에 숫자만 입력 가능합니다.`,
@@ -22,8 +21,8 @@ export const ERROR_MESSAGE = {
   lottoNumberRangee: `${ERROR_PREFIX} 로또 번호는 1부터 45 사이의 숫자여야 합니다.`,
   lottoLength: `${ERROR_PREFIX} 로또 번호는 6개여야 합니다.`,
   bonusNumberIncludeWinningNumber: `${ERROR_PREFIX} 당첨 번호와 중복된 숫자입니다.`,
-};
+});
 
-export const ERROR_TYPE = {
+export const ERROR_TYPE = Object.freeze({
   validate: 'ValidateError',
-};
+});
