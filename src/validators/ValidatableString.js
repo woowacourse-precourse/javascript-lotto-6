@@ -1,7 +1,8 @@
 import Validatable from './Validatable.js';
-import { INTERGER } from '../constants/regexp.js';
+import { COMMA_SEPARATED_NUMBERS, INTERGER } from '../constants/regexp.js';
+import ValidatableArray from './ValidatableArray.js';
 
-class CustomString extends Validatable {
+class ValidatableString extends Validatable {
   /**
    * 정수형태의 문자열인지 검사하는 메서드
    * @returns {boolean} 정수형태의 문자열인지 여부
@@ -26,12 +27,34 @@ class CustomString extends Validatable {
   }
 
   /**
+   * 문자열이 콤마로 구분된 숫자인지 검사하는 메서드
+   * @returns {boolean} 콤마로 구분된 숫자인지 여부
+   */
+  isCommaSeparatedNumbers() {
+    if (!this.isString()) {
+      return false;
+    }
+
+    return COMMA_SEPARATED_NUMBERS.test(this.value);
+  }
+
+  /**
    * 문자열을 정수로 변환하는 메서드
    * @returns {number}
    */
   toInteger() {
     return parseInt(this.value, 10);
   }
+
+  /**
+   * 문자열을 ValidatableArray 변환하는 메서드
+   * @returns {ValidatableArray}
+   */
+  toValidatableArray() {
+    const numbers = this.value.split(',').map((number) => parseInt(number, 10));
+
+    return new ValidatableArray(numbers);
+  }
 }
 
-export default CustomString;
+export default ValidatableString;

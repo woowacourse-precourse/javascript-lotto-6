@@ -1,6 +1,6 @@
 import Validatable from './Validatable.js';
 
-class CustomArray extends Validatable {
+class ValidatableArray extends Validatable {
   /**
    * @param {unknown[]} value
    */
@@ -77,4 +77,4 @@ class CustomArray extends Validatable {
   }
 }
 
-export default CustomArray;
+export default ValidatableArray;
