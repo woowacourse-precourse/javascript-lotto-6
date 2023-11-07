@@ -1,3 +1,13 @@
+import { Console } from "@woowacourse/mission-utils";
+import { formatArrayToString } from "./libs/formatter.js";
+import {
+  isArrayLengthSix,
+  hasDuplicate,
+  isNumberInRange,
+  isInputEmpty,
+  isInputNumeric,
+} from "./libs/validate.js";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +17,26 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    isArrayLengthSix(numbers);
+    hasDuplicate(numbers);
+
+    numbers.forEach((number) => {
+      isInputEmpty(number);
+      isInputNumeric(number);
+      isNumberInRange(number);
+    });
   }
 
-  // TODO: 추가 기능 구현
+  printNumbers() {
+    this.#numbers.sort((a, b) => a - b);
+
+    const formattedNumbers = formatArrayToString(this.#numbers);
+    Console.print(formattedNumbers);
+  }
+
+  get numbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
