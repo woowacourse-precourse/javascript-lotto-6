@@ -4,7 +4,7 @@ export default class ValidateController {
   validateAmount(amount) {
     const REGEX = /[^0-9]/;
 
-    if (REGEX.test(amount) || amount % 1000) {
+    if (REGEX.test(amount) || amount % 1000 || amount == 0) {
       throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
     }
   }
