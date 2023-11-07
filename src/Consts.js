@@ -29,7 +29,7 @@ const errorMessage = {
   bonusNumberRange: '[Error] 보너스 번호는 1에서 45 사이의 숫자여야 합니다.',
   duplicatedBonusNumber:
     '[Error] 보너스 번호는 로또 번호와 중복되지 않아야 합니다.',
-  whiteSpace: '[Error] 번호 입력에 빈 공간이 있으면 안됩니다.',
+  whiteSpace: '[Error] 입력에 빈 공간이 있으면 안됩니다.',
 };
 
 export { message, money, errorMessage };
