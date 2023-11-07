@@ -46,7 +46,6 @@ class Reward {
   }
 
   /**
-   * 입력된 일치하는 번호의 갯수(matchCount)에 따라 상금을 반환
    * @param { number } matchCount
    * @returns { number }
    */
@@ -58,7 +57,6 @@ class Reward {
   }
 
   /**
-   * 통계 객체(statistics)를 업데이트
    * @param { object } statistics
    * @param { string } key
    * @returns { object }
@@ -74,8 +72,6 @@ class Reward {
   }
 
   /**
-   * 일치하는 번호의 갯수(matchCount)와 보너스 번호의 일치 여부를 고려하여, 통계 객체(statistics)와 상금을 업데이트.
-   * 업데이트된 통계 객체와 계산된 상금을 객체로 묶어 반환
    * @param { object } statistics
    * @param { number } matchCount
    * @param { number[] } lotto
@@ -96,8 +92,6 @@ class Reward {
   }
 
   /**
-   * 일치하는 번호의 갯수(matchCount)에 따라 통계 객체(statistics)를 업데이트
-   * 함수 길이 제한을 위해 updateStatisticsAndPrize와 나누었습니다.
    * @param { object } statistics
    * @param { number } matchCount
    * @param { number[] } lotto
@@ -118,7 +112,6 @@ class Reward {
   }
 
   /**
-   * 통계 key에 맞춰서 통계 결과 문자열을 반환해주는 함수
    * @param { string } key
    * @param { object } statistics
    * @returns
@@ -132,7 +125,6 @@ class Reward {
   }
 
   /**
-   * 로또 번호 배열(lotto)을 받아 당첨 번호(#winningNumbers)와 일치하는 갯수를 반환
    * @param { [number, number, number, number, number, number] } lotto
    * @returns { number }
    */
@@ -146,7 +138,6 @@ class Reward {
   }
 
   /**
-   * 여러 로또 번호들(lottos)에 대한 총 상금과 각각의 통계를 계산
    * @param { number[] } lottos
    * @param { object } initialStatistics
    * @returns { object }
@@ -168,7 +159,6 @@ class Reward {
   }
 
   /**
-   * 구매한 로또 번호들(lottos)에 대한 총 상금과 수익률을 계산하여, 그 결과를 문자열 배열로 반환
    * @param { number[] } lottos
    * @returns { string[] }
    */
@@ -186,7 +176,6 @@ class Reward {
   }
 
   /**
-   * ORDER_KEYS에 정의된 순서에 따라 각각의 통계 결과를 문자열로 변환하여 배열로 반환
    * @param { object } updatedStatistics
    * @param { number } rateOfReturn
    * @returns { string[] }
