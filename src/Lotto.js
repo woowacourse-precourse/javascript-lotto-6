@@ -2,22 +2,25 @@ import {
   validateLottoNumbersCountMismatch,
   validateLottoNumbersNotAllNumbers,
   validateLottoNumbersOutOfRange,
-} from "./LottoValidation";
+  validateLottoNumberIsUniq,
+} from "./Validation/LottoValidation.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = numbers.sort((a, b) => a - b);
   }
+
   #validate(numbers) {
     validateLottoNumbersCountMismatch(numbers);
     validateLottoNumbersNotAllNumbers(numbers);
     validateLottoNumbersOutOfRange(numbers);
+    validateLottoNumberIsUniq(numbers);
   }
 
-  getLotto() {
+  getNumbers() {
     return this.#numbers;
   }
 }
