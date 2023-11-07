@@ -85,6 +85,7 @@ class LottoController {
   }
 
   #calculateLottoResultCount() {
+    // TODO 사용자가 구입한 각 로또정보의 당첨 개수를 계산하는 로직을 분리
     const lottoWinningCounts = [0, 0, 0, 0, 0];
     this.#user.getLottoList().forEach((lotto) => {
       const lottoResult = this.#targetLotto.calLottoResult(lotto);
@@ -95,6 +96,8 @@ class LottoController {
     return lottoWinningCounts;
   }
 
+  // TODO 사용자가 구입한 전체 로또의 당첨액을 계산하는 로직을 분리
+  // TODO 사용자가 사용한 전체 금액을 계산하는 로직을 분리
   #calculateTotalProfit(lottoWinningCounts) {
     return lottoWinningCounts.reduce((acc, count, index) => {
       return acc + count * LOTTO_AWARD[index + 1].money;
