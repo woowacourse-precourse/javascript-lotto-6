@@ -25,7 +25,7 @@ class App {
     let result;
 
     try {
-      const buyingPrice = await InputView.readLine(INPUT.BUYING_PRICE);
+      const buyingPrice = await InputView.readNumber(INPUT.BUYING_PRICE);
       const lottos = LottoVendingMachine.buyLottoTickets(buyingPrice);
 
       result = { lottos, buyingPrice };
@@ -51,7 +51,7 @@ class App {
     let result;
 
     try {
-      const winningNumbersInput = await InputView.readLine(
+      const winningNumbersInput = await InputView.readNumbers(
         INPUT.WINNING_NUMBERS
       );
 
@@ -70,7 +70,7 @@ class App {
     let result;
 
     try {
-      const bonusNumberInput = await InputView.readLine(INPUT.BONUS_NUMBERS);
+      const bonusNumberInput = await InputView.readNumber(INPUT.BONUS_NUMBERS);
 
       result = new BonusNumber(
         winningNumbers,
