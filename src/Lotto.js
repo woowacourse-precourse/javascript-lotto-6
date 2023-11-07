@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE, ERROR_MESSAGE_FUNCTION } from './constants/Messages.js';
+import { LOTTO } from './constants/System.js';
 import handleValidationError from './utils/error/index.js';
 import {
   isDuplication,
@@ -44,7 +45,7 @@ class Lotto {
   #validate(numbers) {
     if (!numbers.every(isNumber)) handleValidationError(ERROR_MESSAGE.number);
     if (!numbers.every(isInteger)) handleValidationError(ERROR_MESSAGE.integer);
-    if (numbers.length !== 6) handleValidationError(ERROR_MESSAGE.count);
+    if (numbers.length !== LOTTO.numberCount) handleValidationError(ERROR_MESSAGE.count);
     if (isDuplication(numbers)) handleValidationError(ERROR_MESSAGE.duplication);
     if (!numbers.every((number) => isNumberValidScope(number))) {
       handleValidationError(ERROR_MESSAGE_FUNCTION.validScope());
