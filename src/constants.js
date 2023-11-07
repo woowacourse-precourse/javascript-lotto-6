@@ -1,11 +1,11 @@
-export const LOTTO_CONFIG = {
+export const LOTTO_CONFIG = Object.freeze({
   price: 1000,
   numberLength: 6,
   minNumber: 1,
   maxNumber: 45,
-};
+});
 
-export const LOTTO_PRIZE = {
+export const LOTTO_PRIZE = Object.freeze({
   1: {
     money: 2000000000,
     message: "6개 일치",
@@ -26,4 +26,4 @@ export const LOTTO_PRIZE = {
     money: 5000,
     message: "3개 일치",
   },
-};
+});
