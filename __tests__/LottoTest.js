@@ -17,12 +17,13 @@ describe('로또 클래스 테스트', () => {
   // 아래에 추가 테스트 작성 가능
   test('로또 번호는 오름차순으로 정렬한다.', () => {
     // given
-    const lotto = new Lotto([1, 2, 4, 3, 6, 7]);
+    const LOTTO = new Lotto([1, 2, 4, 3, 6, 7]);
+    const LOTTO_NUMBERS = [1, 2, 3, 4, 6, 7];
 
     // when
-    const result = lotto.getNumbers();
+    const result = LOTTO.getNumbers();
 
     // then
-    expect(result).toStrictEqual([1, 2, 3, 4, 6, 7]);
+    expect(result).toStrictEqual(LOTTO_NUMBERS);
   });
 });
