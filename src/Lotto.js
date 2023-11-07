@@ -15,15 +15,22 @@ class Lotto {
     if(set.size !== numbers.length) {
       throw new Error("[ERROR]");
     }
+    this.rangeException(numbers);
+  }
+
+  rangeException(numbers) {
+    for(let i=0;i<numbers.length;i++) {
+      if(numbers[i] < 1 || numbers[i] > 45) {
+        throw new Error("[ERROR] 1이상 45이하의 값을 입력해주세요.");
+      }
+    }
   }
 
   isNumber(numbers) {
     const REX = /[0-9]/;
     for(let i=0;i<numbers.length;i++) {
       if(!REX.test(numbers[i])) {
-        console.log(numbers[i])
         throw new Error("[ERROR] 숫자를 입력해주세요.");
-      return;
       }
     }
   }

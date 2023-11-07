@@ -14,9 +14,9 @@ class App {
     return this.#price/1000;
   }
 
+
   drawLotto(lottoContainer) {
     let drawResult = "";
-    let arr = [11,1,-1,0,4,10];
     for(let i=0; i<this.#count; i++) {
       const lottoNums = Random.pickUniqueNumbersInRange(1, 45, 6);
       lottoContainer[i] = new Lotto(lottoNums.sort((a,b)=>a-b));
