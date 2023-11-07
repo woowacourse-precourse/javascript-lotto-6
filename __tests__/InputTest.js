@@ -64,6 +64,5 @@ describe("사용자 입력 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith("보너스 번호를 입력해 주세요.");
   });
 
-
 });
   
