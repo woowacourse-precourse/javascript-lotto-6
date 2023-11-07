@@ -13,6 +13,7 @@ class Game {
     this.#pricePaid = await this.#setPrice();
     this.#setLottos();
     this.printLottos();
+    this.#winningNumbers = await this.#setWinningNumbers();
   }
 
   async #setPrice() {
@@ -35,6 +36,18 @@ class Game {
     });
   }
 
+  async #setWinningNumbers() {
+    while (true) {
+      try {
+        const input = await Console.readLineAsync(MESSAGE.LOTTO_INPUT);
+        const lotto = new Lotto(input.split(SPLIT_SEPARATOR).map((number) => Number(number)).sort((a, b) => a - b));
+        return lotto;
+      } catch(e) {
+        Console.print(e);
+      }
+    }
+  }
+
   printLottos() {
     Console.print(`${NEW_LINE}${this.#boughtLottos.length}${MESSAGE.BOUGHT_LOTTOS}`);
     this.#boughtLottos.forEach((lotto) => {
@@ -48,9 +61,8 @@ class Game {
     Validation.isPriceBadUnit(price);
   }
 
-
   #generateRandomLotto() {
-    return new Lotto(Random.pickUniqueNumbersInRange(RANGE_START, RANGE_END, BALL_NUMBERS).sort());
+    return new Lotto(Random.pickUniqueNumbersInRange(RANGE_START, RANGE_END, BALL_NUMBERS).sort((a, b) => a - b));
   }
 };
 

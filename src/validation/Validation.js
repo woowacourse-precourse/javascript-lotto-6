@@ -1,4 +1,4 @@
-import { UNIT, PRICE_TYPE, ERROR } from '../constant/Constant.js';
+import { UNIT, RANGE_START, RANGE_END, BALL_NUMBERS, PRICE_TYPE, ERROR } from '../constant/Constant.js';
 
 class Validation {
   static isPriceBadUnit(price) {
@@ -11,6 +11,19 @@ class Validation {
 
   static isPriceNotNumber(price) {
     if (typeof price !== PRICE_TYPE) throw new Error(ERROR.PRICE_NOT_NUMBER);
+  }
+
+  static isLottoBadFormat(lotto) {
+    if (lotto.length !== BALL_NUMBERS) throw new Error(ERROR.LOTTO_BAD_FORMAT);
+    lotto.forEach((number) => {
+      if (number === NaN) throw new Error(ERROR.LOTTO_BAD_FORMAT);
+    });
+  }
+
+  static isLottoBadRange(lotto) {
+    lotto.forEach((number) => {
+      if (number < RANGE_START || number > RANGE_END) throw new Error(ERROR.LOTTO_BAD_RANGE);
+    })
   }
 }
 
