@@ -18,7 +18,7 @@ class Bonus {
 
         while(!isCorrect) {
             try {
-                await this.validateCorrectFormat(bonus, numbers);
+                this.validateCorrectFormat(bonus, numbers);
                 isCorrect = true;
             } catch(error) {
                 Console.print(`${ERROR_MESSAGE.AMOUT_NUMBER_ERROR}`);
@@ -29,10 +29,12 @@ class Bonus {
         return bonus;
     }
 
-    static async validateCorrectFormat(bonus, numbers) {
-        if(isNaN(bonus) || +bonus < 1 || +bonus > 45 || numbers.includes(bonus)) {
-            throw 'error';
-        }
+    static validateCorrectFormat(bonus, numbers) {
+        if(isNaN(bonus) || +bonus < 1 || +bonus > 45 || numbers.includes(+bonus)) {
+            throw '[ERROR]';
+        } 
+
+        return bonus;
     }
 
 }
