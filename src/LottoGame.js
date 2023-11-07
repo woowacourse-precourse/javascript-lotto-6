@@ -6,12 +6,14 @@ class LottoGame {
   #lottoTickets;
   #winningTicket;
   #bonusNumber
+  #winningResult;
 
   constructor() {
     this.#ticketCount;
     this.#lottoTickets = [];
     this.#winningTicket = [];
     this.#bonusNumber = "";
+    this.#winningResult = [];
   }
 
   async start() {
@@ -20,9 +22,10 @@ class LottoGame {
     this.#lottoTickets = this.sortLottoTickets(this.#lottoTickets);
     this.printLottoTickets(this.#lottoTickets, this.#ticketCount);
     const inputWinningTicket = await this.inputWinningNumbers();
-    console.log(inputWinningTicket);
     this.#winningTicket = inputWinningTicket.map(number => Number(number));
     this.#bonusNumber = await this.inputBonusNumbers(this.#winningTicket);
+
+    this.#winningResult = this.checkLottoResult(this.#lottoTickets, this.#winningTicket, this.#bonusNumber);
   }
 
   setTicketCount(count) {
@@ -138,6 +141,40 @@ class LottoGame {
     if (winningNumbers.includes(number.toString())) {
       throw new Error("[ERROR] 당첨 번호와 중복된 숫자가 있습니다.")
     }
+  }
+
+  checkLottoResult(lottoTickets, winningTicket, bonus) {
+    let winningResult = [0, 0, 0, 0, 0];
+    lottoTickets.forEach(lottoTicket => {
+      const checkedBonus = this.checkBonusResult(bonus, lottoTicket);
+      const matchedNumbers = lottoTicket.filter(number => winningTicket.includes(number))
+      const matchingCount = matchedNumbers.length;
+      winningResult = this.calculateWinningResults(winningResult, matchingCount, checkedBonus);
+    })
+    return winningResult;
+  }
+
+  calculateWinningResults(winningResult, matchingCount, checkedBonus) {
+    let bonus = checkedBonus ? 0 : 1
+    let result = [...winningResult];
+    if(matchingCount === 6){
+      result[0] += 1;
+    }
+    if(matchingCount === 5){
+      result[1 + bonus] += 1
+    }
+    if(matchingCount === 4){
+      result[3] += 1;
+    }
+    if(matchingCount === 3){
+      result[4] += 1;
+    }
+    return result;
+  }
+
+  checkBonusResult(bonus, lottoTicket) {
+    const bonusNumber = Number(bonus);
+    return lottoTicket.includes(bonusNumber);
   }
 
 }
