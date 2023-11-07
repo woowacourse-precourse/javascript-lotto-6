@@ -9,14 +9,19 @@ describe('Lotto 클래스', () => {
     expect(lotto.numbers).toEqual(validNumbers.sort((a, b) => a - b));
   });
 
+  test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
+    const invalidNumbers = [1, 2, 3, 4, 5, 6, 7];
+    expect(() => new Lotto(invalidNumbers)).toThrow(ERROR_MESSAGES.INVALID_NUMBERS);
+  });
+
   test('숫자의 개수가 올바르지 않으면 오류를 발생시켜야 한다.', () => {
     const invalidNumbers = [5, 10, 15];
-    expect(() => new Lotto(invalidNumbers)).toThrow(ERROR_MESSAGES.INVALID_NUMBERS_COUNT);
+    expect(() => new Lotto(invalidNumbers)).toThrow(ERROR_MESSAGES.INVALID_NUMBERS);
   });
 
   test('중복된 숫자가 있으면 오류를 발생시켜야 한다.', () => {
     const duplicateNumbers = [5, 10, 10, 20, 25, 30];
-    expect(() => new Lotto(duplicateNumbers)).toThrow(ERROR_MESSAGES.DUPLICATE_NUMBERS);
+    expect(() => new Lotto(duplicateNumbers)).toThrow(ERROR_MESSAGES.INVALID_NUMBERS);
   });
 
   test('숫자가 유효 범위를 벗어나면 오류를 발생시켜야 한다.', () => {
