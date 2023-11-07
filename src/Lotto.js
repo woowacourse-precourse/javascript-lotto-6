@@ -189,13 +189,16 @@ export class LottoStatistics {
     return (totalPrize / cost) * 100;
   }
 
-  printStatistics() {
-    MissionUtils.Console.print('당첨 통계\n---');
+  getStatistics() {
+    let result = '당첨 통계\n---\n';
     for (const key in this.statistics) {
-      MissionUtils.Console.print(
-        `${key} (${this.statistics[key].prize}원) - ${this.statistics[key].count}개`,
-      );
+      result += `${key} (${this.statistics[key].prize}원) - ${this.statistics[key].count}개\n`;
     }
+    return result;
+  }
+
+  printStatistics() {
+    MissionUtils.Console.print(this.getStatistics());
   }
 }
 
