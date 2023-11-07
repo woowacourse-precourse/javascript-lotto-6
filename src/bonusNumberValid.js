@@ -2,7 +2,6 @@ import verificationBounsNumber from './verificationBonusNumber.js';
 import bonusNumber from './bonusNumber.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 export default async function bonusNumberValid(number) {
-  console.log('1', number);
   let result = null;
   while (result === null) {
     try {
