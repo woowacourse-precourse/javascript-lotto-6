@@ -8,14 +8,14 @@ export class Input {
 
   async getWinningNumber() {
     const winningNumber = await Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.\n'
+      '\n당첨 번호를 입력해 주세요.\n'
     );
     return winningNumber.split(',').map((number) => Number(number));
   }
 
   async getBonusNumber() {
     const bonusNumber = await Console.readLineAsync(
-      '보너스 번호를 입력해 주세요.\n'
+      '\n보너스 번호를 입력해 주세요.\n'
     );
     return Number(bonusNumber);
   }
