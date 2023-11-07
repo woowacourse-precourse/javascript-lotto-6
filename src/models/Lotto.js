@@ -16,7 +16,7 @@ class Lotto {
   }
 
   getLotto() {
-    return [...this.#numbers];
+    return this.#numbers;
   }
 
   #validateSize(numbers) {
