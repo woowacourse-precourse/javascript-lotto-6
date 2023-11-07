@@ -39,10 +39,20 @@ class LottoController {
     this.#totalRevenueRate = (totalRevenueMoney / this.#money) * 100;
   }
 
+  getLottoResult() {
+    const statisticsTable = this.#statistics.getTable();
+    const revenueRate = this.calculateRateOfReturn();
+
+    return { statisticsTable, revenueRate };
+  }
+
   showLottoResult() {
+    const { statisticsTable, revenueRate } = this.getLottoResult();
+    const statistics = Object.entries(statisticsTable);
+
     OutputView.printStatisticsHeader();
-    OutputView.printStatistics(this.#statistics);
-    OutputView.printTotalRevenueRate(this.#totalRevenueRate);
+    OutputView.printStatistics(statistics);
+    OutputView.printRevenueRate(revenueRate);
   }
 }
 

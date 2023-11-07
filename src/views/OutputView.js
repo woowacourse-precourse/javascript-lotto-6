@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
 import { OUTPUT } from '../constants/message/io.js';
+import { MATCH_COUNT, PRIZE, RANK } from '../constants/statistics.js';
 
 class OutputView {
   static printErrorMessage(error) {
@@ -23,20 +24,17 @@ class OutputView {
   }
 
   static printStatistics(statistics) {
-    const resultBoard = Object.values(statistics);
+    statistics.forEach(([rank, count]) => {
+      const matchCount = MATCH_COUNT[rank];
+      const prize = PRIZE[rank].toLocaleString();
+      const bonus = OUTPUT.bonus[rank === RANK.second];
 
-    resultBoard.forEach(result => {
-      const { match, bonus, count, prize } = result;
-      Console.print(
-        `${match}개 일치${
-          OUTPUT.bonus[bonus]
-        } (${prize.toLocaleString()}원) - ${count}개`,
-      );
+      Console.print(`${matchCount}개 일치${bonus} (${prize}원) - ${count}개`);
     });
   }
 
-  static printTotalRevenueRate(totalRevenueRate) {
-    Console.print(`총 수익률은 ${totalRevenueRate}%입니다.`);
+  static printRevenueRate(revenueRate) {
+    Console.print(`총 수익률은 ${revenueRate}%입니다.`);
   }
 }
 

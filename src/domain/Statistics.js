@@ -35,6 +35,14 @@ class Statistics {
 
     return null;
   }
+
+  getRankCount(rank) {
+    return this.#table[rank];
+  }
+
+  getTable() {
+    return this.#table;
+  }
 }
 
 export default Statistics;
