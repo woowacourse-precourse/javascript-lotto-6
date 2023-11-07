@@ -3,7 +3,7 @@ import {
   validateNumbers, 
   validateNumbersLength,
   validateNumbersRange 
-} from "./validations/LottoValidations.js";
+} from "../validations/LottoValidations.js";
 
 class Lotto {
   #numbers;

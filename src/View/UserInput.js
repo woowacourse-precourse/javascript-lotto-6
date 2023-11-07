@@ -1,20 +1,27 @@
 import { Console } from "@woowacourse/mission-utils";
 import { UserInputMessages } from "../constants/UserInputMessages.js";
+import { validateBounusNumber, validateDivide, validateNumbers } from "../validations/InputValidations.js";
+import Lotto from "../Model/Lotto.js";
 
 class UserInput {
     async inputPurchaseAmount() {
-        const purchaseAmout = Console.readLineAsync(UserInputMessages.INPUT_PURCHASE_AMOUNT).map(Number);
-        return purchaseAmout
+        const purchaseAmount = await Console.readLineAsync(UserInputMessages.INPUT_PURCHASE_AMOUNT);
+        validateNumbers(purchaseAmount);
+        validateDivide(purchaseAmount);
+        return Number(purchaseAmount)
     }
 
     async inputWinningNumbers() {
-        const WinningNumbers = Console.readLineAsync(UserInputMessages.INPUT_WINNING_NUMBERS).split(',').map(Number);
-        return WinningNumbers
+        const winningNumbers = await Console.readLineAsync(UserInputMessages.INPUT_WINNING_NUMBERS);
+        const winningLotto = new Lotto(winningNumbers.split(',').map(Number));
+        return winningLotto
     }
 
     async inputBonusNumber() {
-        const BonusNumber = Console.readLineAsync(UserInputMessages.INPUT_BONUSE_NUMBER).map(Number);
-        return BonusNumber
+        const bonusNumber = await Console.readLineAsync(UserInputMessages.INPUT_BONUSE_NUMBER);
+        validateNumbers(bonusNumber);
+        validateBounusNumber(bonusNumber)
+        return Number(bonusNumber)
     }
 }
 
