@@ -1,12 +1,12 @@
 export const INPUT_MESSAGE = {
   inputPurchaseAmount: "구입금액을 입력해 주세요.\n",
-  intputWinningNumbers: "당첨 번호를 입력해 주세요.\n",
-  intputBonusNumber: "보너스 번호를 입력해 주세요.\n",
+  intputWinningNumbers: "\n당첨 번호를 입력해 주세요.\n",
+  intputBonusNumber: "\n보너스 번호를 입력해 주세요.\n",
 };
 
 export const OUTPUT_MESSAGE = {
   printLottoCnt: (cnt) => `\n${cnt}개를 구매했습니다.`,
-  printLottoStatistics: "당첨 통계\n---",
+  printLottoStatistics: "\n당첨 통계\n---",
   printRate: (rate) => `총 수익률은 ${rate}%입니다.`
 };
 
