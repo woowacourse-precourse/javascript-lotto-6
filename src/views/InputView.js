@@ -9,10 +9,13 @@ class InputView {
   async getCostUserInput() {
     try {
       const userInput = await MissionUtils.Console.readLineAsync(LOTTO_INPUT_MESSAGE.inputCost);
-      this.validateIsInvaildUnit(userInput);
 
       if (userInput % 1000 !== 0) {
         throw new Error(ERROR_MESSAGE.isInvaildUnit);
+      }
+
+      if (userInput < 1000) {
+        throw new Error(ERROR_MESSAGE.isSmallCost);
       }
 
       return userInput;
@@ -27,7 +30,6 @@ class InputView {
       const winningNums = await MissionUtils.Console.readLineAsync(
         LOTTO_INPUT_MESSAGE.inputWinnigNum
       ).then((res) => res.split(",").map(Number));
-
       this.lotto = new Lotto(winningNums);
       return winningNums;
     } catch (e) {
@@ -50,8 +52,6 @@ class InputView {
       return this.getBonusNumUserInput();
     }
   }
-
-  validateIsInvaildUnit(userInput) {}
 }
 
 export default InputView;
