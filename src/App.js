@@ -23,6 +23,15 @@ class App {
     return new WinningLotto(winningNumbers, bonusNumber);
   }
 
+  getLottosCount(lottoclasses, winningNumberClass) {
+    lottoclasses.forEach((lottoClass) =>
+      lottoClass.compareNumber(winningNumberClass.number)
+    );
+    lottoclasses.forEach((lottoClass) =>
+      lottoClass.compareBonusNumber(winningNumberClass.bonusNumber)
+    );
+  }
+
   async play() {
   }
 }
