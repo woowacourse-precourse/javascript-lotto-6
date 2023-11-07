@@ -1,6 +1,7 @@
 import Lotto from "../src/Lotto.js";
 import RandomNumberGenerator from "../src/domain/RandomNumberGenerator.js";
 import LottoCalculator from "../src/domain/LottoCalculator.js";
+import GameCalculator from "../src/domain/GameCalculator";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -24,13 +25,18 @@ describe("로또 클래스 테스트", () => {
   })
 
   test("한 장의 로또 번호와 당첨 번호를 비교하여 같은 수를 찾아낼 수 있어야 한다.", () => {
-    const oneGame = new LottoCalculator([1, 2, 3, 4, 5, 6], undefined, [2, 4, 6, 8, 10])
+    const lotto = [1, 2, 3, 4, 5, 6];
+    const winningNumbers = [2, 4, 6, 8, 10];
+    const oneGame = new LottoCalculator(lotto, undefined, winningNumbers);
     const correctNumbers = oneGame.calculate();
     expect(correctNumbers).toBe(3);
   })
 
   test("로또 번호가 당첨 번호와 5개가 일치하고, 나머지 한 개의 번호가 보너스 번호와 일치할 시, 이를 문자열 bonus로 반환하여 특수 케이스화 한다.", () => {
-    const oneGame = new LottoCalculator([1, 2, 3, 4, 5, 6], 6, [1, 2, 3, 4, 5, 7]);
+    const lotto = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 6;
+    const winningNumbers = [1, 2, 3, 4, 5, 7];
+    const oneGame = new LottoCalculator(lotto, bonusNumber, winningNumbers);
     const gameResult = oneGame.calculate();
     expect(gameResult).toBe('bonus');
   })
