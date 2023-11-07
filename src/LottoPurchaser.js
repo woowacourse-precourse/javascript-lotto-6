@@ -1,15 +1,15 @@
 import LottoShop from './LottoShop.js';
 import { ERROR } from './LottoMessage.js';
-import WinningResults from './WinningResults.js';
 
 class LottoPurchaser {
   #purchaseAmount = 0;
   #lottos = [];
-  #winningResults = new WinningResults();
+  #winningResults;
 
-  constructor(purchaseAmount) {
+  constructor(purchaseAmount, winningResults) {
     this.#validate(purchaseAmount);
     this.#purchaseAmount = purchaseAmount;
+    this.#winningResults = winningResults;
   }
 
   purchase() {

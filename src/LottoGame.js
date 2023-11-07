@@ -1,6 +1,7 @@
 import LottoPurchaser from './LottoPurchaser.js';
 import View from './View.js';
 import WinningLotto from './WinningLotto.js';
+import WinningResults from './WinningResults.js';
 
 class LottoGame {
   #lottoPurchaser;
@@ -16,8 +17,10 @@ class LottoGame {
 
   async #createPurchaser() {
     try {
-      const purchaseAmount = await this.#getPurchaseAmount();
-      this.#lottoPurchaser = new LottoPurchaser(purchaseAmount);
+      this.#lottoPurchaser = new LottoPurchaser(
+        await this.#getPurchaseAmount(),
+        new WinningResults(),
+      );
     } catch (error) {
       View.print(error.message);
       await this.#createPurchaser();
