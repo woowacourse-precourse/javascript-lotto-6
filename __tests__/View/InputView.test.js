@@ -6,6 +6,11 @@ import {
   NotNumberError,
   InvalidAmountRangeError,
   InvalidAmountUnitError,
+  InvalidLottoNumberCountError,
+  DuplicatedNumberError,
+  InvalidBonusNumberCountError,
+  InvalidNumberRangeError,
+  NotIntegerError,
 } from "../../src/utils/Error.js";
 
 Console.readLineAsync = jest.fn();
@@ -93,6 +98,19 @@ describe("InputView 객체 테스트", () => {
       const winningNumbers = await inputView.readLottoWinningNumbers();
       expect(winningNumbers).toEqual(winningNumberList);
     });
+    describe("lottoWinningNumbers값에 대한 validation 테스트", () => {
+      test.each([
+        ["6자리 숫자가 들어오지 않으면 InvalidLottoNumberCountError를 throw", "1, 2, 3, 4, 5, 6, 7", InvalidLottoNumberCountError],
+        ["중복된 숫자가 존재하면 DuplicatedNumberError를 throw", "1, 2, 3, 4, 5, 1", DuplicatedNumberError],
+        ["숫자가 아닌 값이 존재하면 NotNumberError를 throw", "1, 2, 3, 4, 5, a", NotNumberError],
+        ["45보다 큰 값이 존재하면 InvalidNumberRangeError를 throw", "1, 2, 3, 4, 5, 46", InvalidNumberRangeError],
+        ["1보다 작은 값이 존재하면 InvalidNumberRangeError를 throw", "1, 2, 3, 4, 5, -7", InvalidNumberRangeError],
+        ["정수가 아닌 값이 존재하면 NotIntegerError를 throw", "1, 2, 3, 4, 5, 6.5", NotIntegerError],
+      ])("lottoWinningNumbers값에 %s", async (description, lottoNumbers, error) => {
+        Console.readLineAsync.mockReturnValue(lottoNumbers);
+        await expect(() => inputView.readLottoWinningNumbers()).rejects.toThrow(error);
+      });
+    });
   });
 
   describe("readBonusNumber 메서드 테스트", () => {
@@ -118,6 +136,21 @@ describe("InputView 객체 테스트", () => {
 
       const bonusNumber = await inputView.readBonusNumber(lottoWinningNumbers);
       expect(bonusNumber).toEqual(NumberedBonusNumber);
+    });
+
+    describe("bonousNumber값에 대한 validation 테스트", () => {
+      test.each([
+        ["1개의 숫자가 입력되지 않으면 InvalidBonusNumberCountError를 throw", "7, 8", InvalidBonusNumberCountError],
+        ["lottoWinningNumbers와 중복된 값이 입력되면 DuplicatedNumberError를 throw", "1", DuplicatedNumberError],
+        ["숫자가 아닌 값이 입력되면 NotNumberError를 throw", "a", NotNumberError],
+        ["45보다 큰 값이 입력되면 InvalidNumberRangeError를 throw", "50", InvalidNumberRangeError],
+        ["1보다 작은 값이 입력되면 InvalidNumberRangeError를 throw", "0", InvalidNumberRangeError],
+        ["정수가 아닌 값이 입력되면 NotIntegerError를 throw", "8.5", NotIntegerError],
+      ])("bonousNumber값에 %s", async (description, bonousNumber, error) => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+        Console.readLineAsync.mockReturnValue(bonousNumber);
+        await expect(() => inputView.readBonusNumber(lottoWinningNumbers)).rejects.toThrow(error);
+      });
     });
   });
 });

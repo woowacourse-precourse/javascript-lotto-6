@@ -32,7 +32,7 @@ class InputView {
 
   async readBonusNumber(lottoWinningNumbers) {
     const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
-    const validatedBonusNumber = Array.from(bonusNumber, Number);
+    const validatedBonusNumber = bonusNumber.split(",").map(Number);
     this.#validateBonusNumber(validatedBonusNumber, lottoWinningNumbers);
     return validatedBonusNumber;
   }
@@ -59,8 +59,7 @@ class InputView {
 
   #validateCommon(numbers) {
     if (numbers.some(isNaN)) throw new NotNumberError(ERROR_MESSAGE.notNumber);
-    if (numbers.some((number) => number < 1 || number > 45))
-      throw new InvalidNumberRangeError(ERROR_MESSAGE.invalidNumberRange);
+    if (numbers.some((number) => number < 1 || number > 45)) throw new InvalidNumberRangeError(ERROR_MESSAGE.invalidNumberRange);
     if (numbers.some((number) => !Number.isInteger(number))) throw new NotIntegerError(ERROR_MESSAGE.notInteger);
   }
 }

@@ -73,12 +73,11 @@ class LottoStore {
   }
 
   #calculateTotalWinningAmount() {
-    const totalWinningAmount =
-      this.#LottoMatchResult.firstPlace * LOTTO_WINNING_AMOUNT.firstPlace +
-      this.#LottoMatchResult.secondPlace * LOTTO_WINNING_AMOUNT.secondPlace +
-      this.#LottoMatchResult.thirdPlace * LOTTO_WINNING_AMOUNT.thirdPlace +
-      this.#LottoMatchResult.fourthPlace * LOTTO_WINNING_AMOUNT.fourthPlace +
-      this.#LottoMatchResult.fifthPlace * LOTTO_WINNING_AMOUNT.fifthPlace;
+    const totalWinningAmount = Object.keys(this.#LottoMatchResult)
+      .filter((place) => place !== "returnRate")
+      .reduce((acc, place) => {
+        return acc + this.#LottoMatchResult[place] * LOTTO_WINNING_AMOUNT[place];
+      }, 0);
     return totalWinningAmount;
   }
 }
