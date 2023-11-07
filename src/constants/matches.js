@@ -23,9 +23,4 @@ const MATCHES = {
   },
 };
 
-MATCHES[CONFIG.bonusMatchKey] = {
-  reward: 30000000,
-  message: `${CONFIG.bonusNumberMatch}개 일치, 보너스 볼 일치 (30,000,000원)`,
-};
-
 export default MATCHES;
