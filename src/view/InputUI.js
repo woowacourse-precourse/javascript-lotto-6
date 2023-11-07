@@ -13,7 +13,7 @@ export const Handle_Input = {
       return money;
     } catch (error) {
       Handle_Output.Error_Output(error);
-      Handle_Input.moneyInput();
+      return await Handle_Input.moneyInput();
     }
   },
 
@@ -28,6 +28,7 @@ export const Handle_Input = {
       return convertedwinning;
     } catch (error) {
       Handle_Output.Error_Output(error);
+      return await Handle_Input.winningInput();
     }
   },
 
@@ -39,6 +40,7 @@ export const Handle_Input = {
       return bonus;
     } catch (error) {
       Handle_Output.Error_Output(error);
+      return await Handle_Input.bonusInput();
     }
   },
 };

@@ -68,6 +68,7 @@ export class GameManager {
     const winning = await Handle_Input.winningInput();
     return winning;
   }
+  
   async initBonus() {
     const bonus = await Handle_Input.bonusInput();
     return bonus;
