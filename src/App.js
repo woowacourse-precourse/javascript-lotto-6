@@ -98,6 +98,16 @@ class App {
     }
     return ((totalWinnings - purchaseAmount) / purchaseAmount * 100).toFixed(2);
   }
+
+  // TODO: 결과 출력
+  #printResults(results) {
+    for (const [key, value] of Object.entries(results)) {
+      if (value > 0) {
+        const prize = this.#getPrizeMoney(key);
+        MissionUtils.Console.print(`${key}개 일치 (${prize.toLocaleString()}원) - ${value}개`);
+      }
+    }
+  }
     
 
 }
