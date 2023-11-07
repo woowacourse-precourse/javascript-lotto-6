@@ -10,6 +10,10 @@ import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
 
 class App {
+  constructor() {
+    this.lottoRankingResult = [];
+  }
+
   async play() {
     const lottoAmount = await this.getLottoAmount();
     const lottoCount = this.getLottoCount(lottoAmount);
@@ -20,6 +24,8 @@ class App {
 
     const lottoWinningNumbers = await this.getWinningNumbers();
     const lottoBonusNumber = await this.getBonusNumber(lottoWinningNumbers);
+
+    this.getRankingResult(lottoTickets, lottoWinningNumbers, lottoBonusNumber);
   }
 
   async getLottoAmount() {
@@ -89,6 +95,15 @@ class App {
     const lotto = new Lotto(lottoNumbers);
 
     return lotto;
+  }
+
+  getRankingResult(tickets, winningNumbers, bonusNumber) {
+    tickets.forEach((ticket) => {
+      const lotto = new Lotto(ticket.getNumbers());
+      const ranking = lotto.getRank(winningNumbers, bonusNumber);
+      this.lottoRankingResult.push(ranking);
+    });
+    return this.lottoRankingResult;
   }
 }
 
