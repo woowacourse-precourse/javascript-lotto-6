@@ -3,8 +3,8 @@ import { STATISTICS_MESSAGE, WINNINGS_MONEY } from '../src/constant';
 import { getLogSpy, makeExpectedWinningResult } from '../testUtils';
 
 describe('Statistics 클래스 테스트', () => {
-  const winningResult = makeExpectedWinningResult(1, 1, 1, 1, 1);
-  const rateOfReturn = 50.52;
+  const WINNING_RESULT = makeExpectedWinningResult(1, 1, 1, 1, 1);
+  const RATE_OF_RETURN = 50.52;
 
   test('당첨 통계 출력', () => {
     const logs = [
@@ -20,7 +20,7 @@ describe('Statistics 클래스 테스트', () => {
     const logSpy = getLogSpy();
 
     const statistic = new Statistics();
-    statistic.print(winningResult, rateOfReturn);
+    statistic.print(WINNING_RESULT, RATE_OF_RETURN);
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));

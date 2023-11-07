@@ -5,12 +5,12 @@ import { FIVE_AND_BONUS, FIVE_NO_BONUS, RANK } from '../src/constant';
 import { makeLottos, makeExpectedWinningResult } from '../testUtils';
 
 describe('Checker 클래스 테스트', () => {
-  const winningNumbers = [1, 2, 3, 4, 5, 6];
-  const bonusNumber = 7;
-  const winningLotto = new Lotto(winningNumbers);
-  const bonusBall = new BonusBall(bonusNumber, winningNumbers);
+  const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
+  const BONUS_NUMBER = 7;
+  const winningLotto = new Lotto(WINNING_NUMBERS);
+  const bonusBall = new BonusBall(BONUS_NUMBER, WINNING_NUMBERS);
 
-  const userLottoTestArray = [
+  const USER_LOTTOS_TEST_ARRAY = [
     {
       userLottosNumbers: [
         [1, 2, 3, 10, 11, 12],
@@ -46,7 +46,7 @@ describe('Checker 클래스 테스트', () => {
   ];
 
   test('당첨 등수 테스트', () => {
-    const userLottosNumbers = [
+    const USER_LOTTOS_NUMBERS_ARRAY = [
       [20, 21, 22, 23, 24, 25],
       [1, 20, 21, 22, 23, 24],
       [1, 2, 20, 21, 22, 23],
@@ -56,31 +56,31 @@ describe('Checker 클래스 테스트', () => {
       [1, 2, 3, 4, 5, 7],
       [1, 2, 3, 4, 5, 6],
     ];
-    const userLottos = makeLottos(userLottosNumbers);
+    const userLottos = makeLottos(USER_LOTTOS_NUMBERS_ARRAY);
     const checker = new Checker(winningLotto, bonusBall, userLottos);
-    const numbers = [0, 1, 2, 3, 4, 5, 5, 6];
+    const NUMBERS = [0, 1, 2, 3, 4, 5, 5, 6];
     const expectedRanks = [undefined, undefined, undefined].concat(RANK);
-    numbers.forEach((v, i) => {
-      const rank = checker.changeToRank(v, v === 5 && i === 6);
+    NUMBERS.forEach((v, i) => {
+      const isBonusTargetRank = v === 5 && i === 6;
+      const rank = checker.changeToRank(v, isBonusTargetRank);
       expect(rank).toEqual(expectedRanks[i]);
     });
   });
 
-  test.each(userLottoTestArray)(
+  test.each(USER_LOTTOS_TEST_ARRAY)(
     '당첨 로또 번호,보너스 번호와 로또 비교',
     ({ userLottosNumbers, rankArray }) => {
       const userLottos = makeLottos(userLottosNumbers);
       const checker = new Checker(winningLotto, bonusBall, userLottos);
 
       userLottos.forEach((v, i) => {
-        const rank = checker.compareLotto(v, winningNumbers, bonusNumber);
-        console.log(winningNumbers, v.getLottoNumbers(), rank, rankArray[i]);
+        const rank = checker.compareLotto(v, WINNING_NUMBERS, BONUS_NUMBER);
         expect(rank).toEqual(rankArray[i]);
       });
     },
   );
 
-  test.each(userLottoTestArray)(
+  test.each(USER_LOTTOS_TEST_ARRAY)(
     '당첨 결과 계산하기',
     ({ userLottosNumbers, expectedWinningResult }) => {
       const userLottos = makeLottos(userLottosNumbers);

@@ -3,16 +3,16 @@ import { WINNINGS_MONEY } from '../src/constant';
 import { makeExpectedWinningResult } from '../testUtils';
 
 describe('Calculator 클래스 테스트', () => {
-  const rankArray = [
+  const RANK_ARRAY = [
     [1, 1, 1, 1, 1],
     [0, 0, 0, 1, 1],
     [0, 0, 0, 0, 0],
   ];
-  const winningResultsArray = rankArray.map((v) =>
+  const WINNING_RESULT_ARRAY = RANK_ARRAY.map((v) =>
     makeExpectedWinningResult(...v),
   );
 
-  const winningsArray = [
+  const WINNINGS_ARRAY = [
     [
       WINNINGS_MONEY.three,
       WINNINGS_MONEY.four,
@@ -26,27 +26,30 @@ describe('Calculator 클래스 테스트', () => {
 
   test('당첨금 계산', () => {
     const calculator = new Calculator();
-    winningResultsArray.forEach((v, i) => {
+    WINNING_RESULT_ARRAY.forEach((v, i) => {
       const winnings = calculator.calculateWinnings(v);
-      const isEqual = winnings.join(',') === winningsArray[i].join(',');
+      const isEqual = winnings.join(',') === WINNINGS_ARRAY[i].join(',');
       expect(isEqual).toBeTruthy();
     });
   });
 
   test('총 당첨금 계산', () => {
     const calculator = new Calculator();
-    winningResultsArray.forEach((v, i) => {
+    WINNING_RESULT_ARRAY.forEach((v, i) => {
       const totalWinnings = calculator.getTotalWinnings(v);
-      const expectedTotalWinnings = winningsArray[i].reduce((a, c) => a + c, 0);
+      const expectedTotalWinnings = WINNINGS_ARRAY[i].reduce(
+        (a, c) => a + c,
+        0,
+      );
       expect(totalWinnings).toEqual(expectedTotalWinnings);
     });
   });
   test('소수점 둘째 자리에서 반올림', () => {
     const calculator = new Calculator();
-    const numbers = [12.2345, 20.136];
-    const results = [12.23, 20.14];
-    numbers.forEach((v, i) => {
-      expect(calculator.round(v)).toEqual(results[i]);
+    const NUMBERS = [12.2345, 20.136];
+    const RESULTS = [12.23, 20.14];
+    NUMBERS.forEach((v, i) => {
+      expect(calculator.round(v)).toEqual(RESULTS[i]);
     });
   });
 
@@ -57,7 +60,7 @@ describe('Calculator 클래스 테스트', () => {
       rateOfReturn: rateOfReturn,
     });
 
-    const items = [
+    const TEST_ITEMS = [
       makeItems(8000, 5000, 62.5),
       makeItems(2000, 0, 0),
       makeItems(10000, 5000, 50),
@@ -65,7 +68,7 @@ describe('Calculator 클래스 테스트', () => {
       makeItems(1000, WINNINGS_MONEY.six, 200000000),
     ];
 
-    items.forEach((v) => {
+    TEST_ITEMS.forEach((v) => {
       const calculator = new Calculator();
       const rateOfReturn = calculator.calculateRateOfReturn(
         v.paymentAmount,

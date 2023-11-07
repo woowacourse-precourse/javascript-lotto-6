@@ -6,36 +6,36 @@ import { getLogSpy, mockQuestions } from '../testUtils';
 
 describe('User 클래스 테스트', () => {
   test('사용자기 입력한 금액을 숫자 형태로 읽어옮', () => {
-    const questions = ['1000', ' 1000 ', '1000원', '$1000', '천원'];
-    const expectedOutput = [1000, 1000, NaN, NaN, NaN];
+    const INPUT_VALUE_ARRAY = ['1000', ' 1000 ', '1000원', '$1000', '천원'];
+    const OUTPUT_ARRAY = [1000, 1000, NaN, NaN, NaN];
 
-    questions.forEach(async (v, i) => {
+    INPUT_VALUE_ARRAY.forEach(async (v, i) => {
       mockQuestions([v]);
 
       const user = new User();
       const money = await user.pay();
 
-      expect(money).toEqual(expectedOutput[i]);
+      expect(money).toEqual(OUTPUT_ARRAY[i]);
     });
   });
 
   test('구매한 로또들을 출력한다.', () => {
-    const lottosNumbers = [
+    const LOTTO_NUMBERS_ARRAY = [
       [1, 2, 3, 4, 5, 6],
       [7, 8, 9, 10, 11, 12],
     ];
-    const lottos = lottosNumbers.map((v) => new Lotto(v));
+    const LOTTOS = LOTTO_NUMBERS_ARRAY.map((v) => new Lotto(v));
 
     const logs = [
-      `${lottos.length}${MESSAGE.numberOfTickets}`,
-      changeArrayToStringMessage(lottosNumbers[0]),
-      changeArrayToStringMessage(lottosNumbers[1]),
+      `${LOTTOS.length}${MESSAGE.numberOfTickets}`,
+      changeArrayToStringMessage(LOTTO_NUMBERS_ARRAY[0]),
+      changeArrayToStringMessage(LOTTO_NUMBERS_ARRAY[1]),
     ];
 
     const logSpy = getLogSpy();
 
     const user = new User();
-    user.getLottos(lottos);
+    user.getLottos(LOTTOS);
 
     //출력
     logs.forEach((log) => {
