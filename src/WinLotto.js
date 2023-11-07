@@ -8,10 +8,10 @@ class WinLotto {
     this.ticketNumbers = ticketNumbers.map((ticket) =>
       ticket.map((num) => parseInt(num, 10))
     );
-    this.validateNumbers(this.winningNumbers, this.bonusNumber);
+    this.validateDuplicate(this.winningNumbers, this.bonusNumber);
   }
 
-  validateNumbers(winningNumbers, bonusNumber) {
+  validateDuplicate(winningNumbers, bonusNumber) {
     const allNumbers = [...winningNumbers, bonusNumber];
     if (new Set(allNumbers).size !== allNumbers.length) {
       throw new Error(ERROR_MESSAGE.duplicateNumbers);
