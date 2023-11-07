@@ -1,19 +1,28 @@
 import { Console } from "@woowacourse/mission-utils";
 import { PRINT_INPUT } from "./Constant.js";
 import { isVaildAmount, isVaildLottoNumbers } from "./checkValidation.js";
+import Lotto from "../Lotto.js";
 
 const InputPrintout = {
 	inputAmount: async () => {
 		let amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
-		if (!isVaildAmount(amount)) {
-			amount = await InputPrintout.inputAmount();
+		while (!isVaildAmount(amount)) {
+			amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
 		}
 		return Number(amount);
 	},
 	inputLottoNumbers: async () => {
 		let numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
-		if (!isVaildLottoNumbers(numbers.split(","))) {
-			numbers = await InputPrintout.inputLottoNumbers();
+		let isInvaildInput = true;
+		while (isInvaildInput) {
+			try {
+				isInvaildInput = false;
+				new Lotto(numbers);
+			} catch (error) {
+				isInvaildInput = true;
+				Console.print(error);
+				numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
+			}
 		}
 		return numbers;
 	},

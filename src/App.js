@@ -6,7 +6,7 @@ class App {
 		OutputPrintout.printLottos(await InputPrintout.inputAmount());
 		let a = await InputPrintout.inputLottoNumbers();
 
-		console.log("밖에 값 ", a.split(","));
+		console.log("밖에 값 ", a);
 	}
 }
 

@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "./utils/Constant.js";
+import { isVaildLottoNumbers } from "./utils/checkValidation.js";
 
 class Lotto {
 	#numbers;
@@ -9,9 +9,7 @@ class Lotto {
 	}
 
 	#validate(numbers) {
-		if (numbers.length !== 6) {
-			throw new Error(ERROR_MESSAGE.numbersMustBeSix);
-		}
+		if (!isVaildLottoNumbers(numbers.split(","))) throw new Error();
 	}
 }
 
