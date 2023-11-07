@@ -66,7 +66,7 @@ class App {
     }
   }
 
-  checkResult(lottoNumbers, winningNumbers, bonusNumber) {
+  checkResult(lottoNumbers, winningNumbers, bonusNumber) {  // 로또 당첨 확인
     let matchCounts = {
         "3": 0,
         "4": 0,
