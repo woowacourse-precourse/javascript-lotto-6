@@ -12,7 +12,7 @@ import {
 } from './utils/validation.js';
 
 class Validator {
-  static async checkPurchaseAmount(input) {
+  static checkPurchaseAmount(input) {
     if (isEmptyString(input)) throw new CustomError(ERROR_MESSAGE.empty);
     if (!isIntegarString(input))
       throw new CustomError(ERROR_MESSAGE.notInteger);
@@ -20,7 +20,7 @@ class Validator {
       throw new CustomError(ERROR_MESSAGE.purchaseUnit);
   }
 
-  static async checkWinningNumbers(input) {
+  static checkWinningNumbers(input) {
     if (isEmptyString(input)) throw new CustomError(ERROR_MESSAGE.empty);
 
     const inputList = input.split(',');
@@ -36,7 +36,7 @@ class Validator {
       throw new CustomError(ERROR_MESSAGE.duplicate);
   }
 
-  static async checkBonusNumbers(input) {
+  static checkBonusNumbers(input) {
     if (isEmptyString(input)) throw new CustomError(ERROR_MESSAGE.empty);
     if (!isIntegarString(input))
       throw new CustomError(ERROR_MESSAGE.notInteger);
