@@ -29,3 +29,5 @@ export const MESSAGE = Object.freeze({
 export const REGEX = Object.freeze({
   isNumber: /^\d+$/,
 });
+
+export const RateOfReturn = (number) => `총 수익률은 ${number}%입니다.`;

@@ -21,6 +21,14 @@ class Result {
     return this.#results;
   }
 
+  getTotalPrize() {
+    const { firstPrize, secondPrize, thirdPrize, fourthPrize, fifthPrize } = this.#prizeCount;
+
+    const totalPrize =
+      firstPrize * 2000000000 + secondPrize * 30000000 + thirdPrize * 1500000 + fourthPrize * 50000 + fifthPrize * 5000;
+    return totalPrize;
+  }
+
   #setResults() {
     this.userLottos.forEach((userLotto) => {
       const { matchedCount, hasBonusNumber } = this.#calculateMatchResult(userLotto);

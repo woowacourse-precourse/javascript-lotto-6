@@ -19,6 +19,7 @@ class LottoGame {
     await this.setBonusLotto();
     this.getResult();
     this.printResult();
+    this.printRateOfReturn();
   }
 
   getResult() {
@@ -29,6 +30,11 @@ class LottoGame {
     this.#result.getResults().forEach((each) => {
       Output.print(`${each}`);
     });
+  }
+
+  printRateOfReturn() {
+    const rate = ((this.#result.getTotalPrize() / this.#buyer.getBudget()) * 100).toFixed(1);
+    Output.printRateOrReturn(rate);
   }
 
   async setBuyer() {

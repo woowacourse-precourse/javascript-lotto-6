@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../constant/constant.js';
+import { MESSAGE, RateOfReturn } from '../constant/constant.js';
 
 class Output {
   static print(message) {
@@ -12,6 +12,10 @@ class Output {
 
   static printPurchasedLottoList(lottoList) {
     lottoList.forEach(Output.print);
+  }
+
+  static printRateOrReturn(number) {
+    Output.print(RateOfReturn(number));
   }
 }
 export default Output;
