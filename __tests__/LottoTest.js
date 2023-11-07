@@ -23,4 +23,14 @@ describe('로또 클래스 테스트', () => {
 
     expect(matchedNumbers).toEqual(resultNumbers);
   });
+
+  test('[getMatchWinningNumbers] 로또 인스턴스가 가진 번호와 당첨 번호에 일치하는 번호가 없으면 빈 배열을 반환한다.', () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const resultNumbers = [];
+
+    const lotto = new Lotto([7, 8, 9, 10, 11, 12]);
+    const matchedNumbers = lotto.getMatchWinningNumbers(winningNumbers);
+
+    expect(matchedNumbers).toEqual(resultNumbers);
+  });
 });
