@@ -28,10 +28,12 @@ class Lotto {
     return this.#numbers;
   }
 
-  calculateLottoResult(winningNumbers, bonusNumber) {
-    const matchNumberCount =
-      LOTTO_NUMBER_TOTAL - new Set([...this.#numbers, ...winningNumbers]).size;
+  calculateMatchNumber(winningNumbers) {
+    return this.#numbers.filter((number) => winningNumbers.includes(number))
+      .length;
+  }
 
+  compareMatchNumberWithPrize(matchNumberCount, bonusNumber) {
     const resultMap = {
       [FIRST_PRIZE.match]: FIRST_PRIZE.rank,
       [SECOND_PRIZE.match]: this.#numbers.includes(bonusNumber)
@@ -42,6 +44,15 @@ class Lotto {
     };
 
     return resultMap[matchNumberCount] || NO_PRIZE.rank;
+  }
+
+  calculateLottoResult(winningNumbers, bonusNumber) {
+    const matchNumberCount = this.calculateMatchNumber(winningNumbers);
+    const result = this.compareMatchNumberWithPrize(
+      matchNumberCount,
+      bonusNumber
+    );
+    return result;
   }
 }
 
