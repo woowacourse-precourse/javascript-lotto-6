@@ -1,5 +1,7 @@
+import MESSAGE from './constants/message.js';
 import OPTION from './constants/option.js';
 import InputError from './error/InputError.js';
+import numbersInRange from './utils/numbersInRange.js';
 
 class Lotto {
   #numbers;
@@ -10,11 +12,16 @@ class Lotto {
   }
 
   #validate(numbers) {
+    if (
+      !numbersInRange(numbers, OPTION.minLottoNumber, OPTION.maxLottoNumber)
+    ) {
+      throw new InputError(MESSAGE.error.lottoNumbersMustBeInRange);
+    }
     if (numbers.length !== OPTION.lottoLength) {
-      throw new InputError(`로또 번호는 ${OPTION.lottoLength}개여야 합니다.`);
+      throw new InputError(MESSAGE.error.lottoNumbersMustBeLottoLength);
     }
     if (numbers.length !== new Set(numbers).size) {
-      throw new InputError('로또 번호는 중복되지 않아야 합니다.');
+      throw new InputError(MESSAGE.error.lottoNumbersMustBeUnique);
     }
   }
 
