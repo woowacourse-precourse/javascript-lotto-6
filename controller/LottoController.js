@@ -1,5 +1,4 @@
 import Lotto from '../model/Lotto.js';
-import Label from '../constants/Label.js';
 
 class LottoController {
   constructor() {
@@ -42,14 +41,6 @@ class LottoController {
     }
     // eslint-disable-next-line no-param-reassign
     [arr[3], arr[4]] = [arr[4], arr[3]];
-  }
-
-  calculateReturnRate(arr, price) {
-    for (let i = 0; i < arr.length; i++) {
-      this.totalPrice += arr[i] * Label.PRICE_AMOUNT[i];
-    }
-    const returnRate = (100 * (this.totalPrice / price)).toFixed(1);
-    return returnRate;
   }
 }
 
