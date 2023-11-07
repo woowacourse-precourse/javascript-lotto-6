@@ -11,7 +11,7 @@ class Operator {
 
   doLottoGenerator(count) {
     this.#LG = new LottoGenerator(count);
-    this.#lottoList = LG.lottoList;
+    this.#lottoList = this.#LG.lottoList;
   }
 
   doWinNumber(numbers, bonus) {
@@ -20,7 +20,7 @@ class Operator {
 
   doWinnerDecider(WN, LG) {
     this.#WD = new WinnerDecider(this.#WN, this.#LG);
-    this.#score = WD.score;
+    this.#score = this.#WD.score;
   }
 
   get lottoList() {
