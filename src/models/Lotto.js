@@ -1,4 +1,3 @@
-import { Console, Random } from "@woowacourse/mission-utils";
 import ErrorMessage from "../constant/ErrorMessage.js";
 
 class Lotto {
@@ -28,5 +27,3 @@ class Lotto {
 }
 
 export default Lotto;
-
-///로또 랜덤 번호 생성하여 처리하는 곳
