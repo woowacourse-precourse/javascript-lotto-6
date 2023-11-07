@@ -1,4 +1,4 @@
-import { INPUT_MSG } from "./constants/constants";
+import { INPUT_MSG } from "./constants/constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 export const ConsoleInput = {

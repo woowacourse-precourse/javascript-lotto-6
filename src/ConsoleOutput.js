@@ -2,14 +2,23 @@ import { Console } from "@woowacourse/mission-utils";
 
 export const ConsoleOutput = {
   lottoPurchasedMessage(count) {
-    Console.print(`\n${count}개를 구매했습니다.`);
+    // let divideCount = count / 1000;
+    const purchaseMsg = Console.print(`\n${count}개를 구매했습니다.`);
+    return purchaseMsg;
   },
 
   lottoNumberList(lotto) {
-    Console.print(`[${lotto.join(", ")}]`);
+    const lottoNums = Console.print(`[${lotto.join(", ")}]`);
+    return lottoNums;
   },
 
   lottoProfit(num) {
-    Console.print(`총 수익률은 ${percent}%입니다.`);
+    const profit = Console.print(`총 수익률은 ${num}%입니다.`);
+    return profit;
+  },
+
+  generatedLotto(num) {
+    const generateNums = Console.print(num);
+    return generateNums;
   },
 };
