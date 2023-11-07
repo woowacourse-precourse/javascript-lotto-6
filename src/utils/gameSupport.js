@@ -46,3 +46,7 @@ export const getPurchasedLottoCounts = (amount) => {
   return amount / 1000;
 };
 
+export const printMessage = (messages) => {
+  MissionUtils.Console.print(messages);
+};
+
