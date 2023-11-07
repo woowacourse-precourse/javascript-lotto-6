@@ -16,7 +16,7 @@ class App {
       throw new Error("[ERROR] 1000원 단위 금액을 입력해야 합니다.");
     }
 
-    // 구매 개수 만큼 당첨 번호 생성 및 출력
+    // 구매 개수 만큼 추첨 번호 생성 및 출력
     const boughtLottoCount = totalCost / 1000;
     const totalLottoNumList = [];
     MissionUtils.Console.print(`${boughtLottoCount}개를 구매했습니다.`);
@@ -29,6 +29,8 @@ class App {
       MissionUtils.Console.print(nowLottoNumList);
       totalLottoNumList.push(nowLottoNumList);
     }
+
+    // 당첨 번호 및 보너스 번호 입력 받기
   }
 }
 
