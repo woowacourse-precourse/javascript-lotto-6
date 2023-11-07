@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../Utils/constants';
-import InputValidator from '../inputValidator';
+import InputValidator from '../Validator/inputValidator';
 
 class InputView {
   static async purchaseAmount() {
@@ -16,7 +16,7 @@ class InputView {
       async () => Console.readLineAsync(INPUT_MESSAGE.WINNING_NUMBERS),
       InputValidator.winningNumbers,
     );
-    return numbers.split(',').map((number) => Number(number));
+    return numbers.split(',').map(number => Number(number));
   }
 
   static async bonusNumber() {

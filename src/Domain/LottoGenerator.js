@@ -1,7 +1,7 @@
 import Lotto from "../Lotto";
 import getRandomNumber from "../Utils/getRandomNumber";
 import { LOTTO_INFO } from "../Utils/constants";
-import LottoValidator from "../lottoValidator";
+import LottoValidator from "../Validator/lottoValidator";
 
 class LottoGenerator {
   #bonus;
