@@ -31,7 +31,17 @@ class View {
   }
 
   async getLottoBonusNumber() {
-    return await this.readLine("보너스 번호를 입력해 주세요.\n");
+    let bonusNumber;
+    while (true) {
+      try {
+        bonusNumber = await this.readLine("보너스 번호를 입력해 주세요.\n");
+        this.validateNumberRange(userInput);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return bonusNumber;
   }
 
   amountValidate(amount) {
