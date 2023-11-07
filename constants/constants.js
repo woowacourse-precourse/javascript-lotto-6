@@ -20,7 +20,6 @@ export const ERROR_MESSAGE = Object.freeze({
     notInt: '[ERROR] 로또 번호는 정수로 입력해주세요.',
     notRange: '[ERROR] 로또 번호는 1부터 45 사이의 숫자로 입력해주세요.',
     notDifferent: '[ERROR] 로또 번호는 중복된 숫자 없이 입력해주세요.',
-    notAscending: '[ERROR] 로또 번호는 오름차순으로 정렬해주세요.',
   },
   bonus: {
     notNumber: '[ERROR] 보너스 번호는 숫자로 입력해주세요.',
