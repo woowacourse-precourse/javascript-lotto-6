@@ -1,5 +1,15 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
+
+const LOTTO_PRIZE = {
+    1: 2000000000,
+    2: 30000000,
+    3: 1500000,
+    4: 50000,
+    5: 5000,
+    6: 0,
+};
+
 class App {
     async play() {}
 
@@ -89,8 +99,31 @@ class App {
             case 3:
                 return 5;
             default:
-                return 0;
+                return 6;
         }
+    }
+
+    getLottoRanks(lottos, winNumbers, bonusNumber) {
+        const ranks = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+
+        lottos.forEach((lotto) => {
+            const rank = this.getLottoRank(
+                lotto.numbers,
+                winNumbers,
+                bonusNumber
+            );
+            ranks[rank]++;
+        });
+
+        return ranks;
+    }
+
+    getLottoRate(pay, lottoRanks) {
+        const totalPrize = Object.keys(lottoRanks).reduce(
+            (acc, rank) => acc + lottoRanks[rank] * LOTTO_PRIZE[rank],
+            0
+        );
+        return Math.round((totalPrize / pay) * 1000) / 10;
     }
 }
 
