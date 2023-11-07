@@ -42,6 +42,12 @@ class Lotto {
   static sortNumbers(numbers) {
     return numbers.sort((a, b) => a - b);
   }
+
+  printNumber() {
+    const sortNumbers = Lotto.sortNumbers(this.#numbers);
+    return Console.print(`[${sortNumbers.join(", ")}]`);
+  }
+
 }
 
 
