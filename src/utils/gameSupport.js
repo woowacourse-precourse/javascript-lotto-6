@@ -10,3 +10,21 @@ export const userLottoInputAmount = async () => {
     }
   }
 };
+
+export const userLottoInputSixNumbers = async () => {
+  while (true) {
+    try {
+      const userInputString = await getUserInput(WINNING_NUMBERS_GUIDE_MESSAGE);
+      hasComma(userInputString);
+      const winningNumbersStringArray = splitNumbers(userInputString);
+      const winningNumbersArray = changeStringToNumbers(
+        winningNumbersStringArray
+      );
+      const lotto = new Lotto(winningNumbersArray.sort((a, b) => a - b));
+      return lotto.getLotto();
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+  }
+};
+
