@@ -16,7 +16,6 @@ class App {
       SECOND_RANK: 0,
       FIRST_RANK: 0,
     },
-    profitRate: null,
   };
 
   constructor() {
@@ -42,7 +41,10 @@ class App {
   }
 
   #announceResult() {
-    this.resultAnnouncer = new ResultAnnouncer(this.#state);
+    this.resultAnnouncer = new ResultAnnouncer({
+      tickets: this.#state.tickets,
+      rank: this.#state.rank,
+    });
     return this.resultAnnouncer.anounceProfit();
   }
 

@@ -2,20 +2,17 @@ import { PRIZE_MONEY } from './constants/numbers.js';
 import View from './View.js';
 
 class ResultAnnouncer {
-  constructor({ tickets, myNumbers, bonusNumber, rank, profitRate }) {
+  constructor({ tickets, rank }) {
     this.tickets = tickets;
-    this.myNumbers = myNumbers;
-    this.bonusNumber = bonusNumber;
     this.rank = rank;
-    this.profitRate = profitRate;
     this.sum = 0;
   }
 
   anounceProfit() {
     this.sumPrizeMoney();
-    this.calculateProfit();
+    const profitRate = this.calculateProfit();
     View.printWinningResult(this.rank);
-    return View.printProfitRate(this.profitRate);
+    return View.printProfitRate(profitRate);
   }
 
   sumPrizeMoney() {
@@ -25,10 +22,7 @@ class ResultAnnouncer {
   }
 
   calculateProfit() {
-    this.profitRate = ((this.sum / (this.tickets.length * 1000)) * 100).toFixed(
-      1,
-    );
-    return null;
+    return ((this.sum / (this.tickets.length * 1000)) * 100).toFixed(1);
   }
 }
 
