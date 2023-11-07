@@ -37,6 +37,10 @@ class UI {
     return Console.readLineAsync(`${message}\n`);
   }
 
+  async #waitAnswer() {
+    return Console.readLineAsync("");
+  }
+
   print(message = "") {
     Console.print(message);
   }
@@ -45,14 +49,19 @@ class UI {
     this.print();
   }
 
-  async askAmountForPurchase() {
-    const input = await this.#ask(TEXT.askAmount);
+  async askAmountForPurchase({ again } = { again: false }) {
+    const input = again
+      ? await this.#waitAnswer()
+      : await this.#ask(TEXT.askAmount);
     this.#validator.validateAmount(input.trim());
     return Number(input);
   }
 
-  async askWinningNumbers() {
-    const input = await this.#ask(TEXT.askWinningNumbers);
+  async askWinningNumbers({ again } = { again: false }) {
+    const input = again
+      ? await this.#waitAnswer()
+      : await this.#ask(TEXT.askWinningNumbers);
+
     const trimmedInput = input
       .trim()
       .split(",")
@@ -62,8 +71,11 @@ class UI {
     return trimmedInput.split(",").map(Number);
   }
 
-  async askBonusLottoNumber(winningNumbers) {
-    const input = await this.#ask(TEXT.askBonusLottoNumber);
+  async askBonusLottoNumber(winningNumbers, { again } = { again: false }) {
+    const input = again
+      ? await this.#waitAnswer()
+      : await this.#ask(TEXT.askBonusLottoNumber);
+
     this.#validator.validateBonusNumber(input.trim(), winningNumbers);
     return Number(input);
   }

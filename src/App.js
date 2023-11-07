@@ -58,26 +58,27 @@ class App {
   }
 
   async #transition(status) {
+    const reenter = this.#status === status;
     this.#status = status;
     this.#ui.linebreak();
-    await this.#transitionEffect();
+    await this.#transitionEffect({ reenter });
   }
 
-  async #transitionEffect() {
+  async #transitionEffect({ reenter } = { reenter: false }) {
     try {
       switch (this.#status) {
         case "purchase": {
-          await this.#purchaseEffect();
+          await this.#purchaseEffect({ reenter });
           await this.#transition("winningNumberSetting");
           break;
         }
         case "winningNumberSetting": {
-          await this.#winningNumberSettingEffect();
+          await this.#winningNumberSettingEffect({ reenter });
           await this.#transition("bonusNumberSetting");
           break;
         }
         case "bonusNumberSetting": {
-          await this.#bonusNumberSettingEffect();
+          await this.#bonusNumberSettingEffect({ reenter });
           await this.#transition("result");
           break;
         }
@@ -92,15 +93,15 @@ class App {
     } catch (error) {
       if (error instanceof AppError && error.type === ERROR_TYPE.inputError) {
         this.#ui.print(error.message);
-        await this.#transitionEffect();
+        await this.#transitionEffect({ reenter: true });
       } else {
         throw error;
       }
     }
   }
 
-  async #purchaseEffect() {
-    const amount = await this.#ui.askAmountForPurchase();
+  async #purchaseEffect({ reenter } = { reenter: false }) {
+    const amount = await this.#ui.askAmountForPurchase({ again: reenter });
     this.#amount = amount;
 
     const lotteries = this.#lottoMachine.sell(this.#amount);
@@ -113,14 +114,15 @@ class App {
     );
   }
 
-  async #winningNumberSettingEffect() {
-    const winningNumbers = await this.#ui.askWinningNumbers();
+  async #winningNumberSettingEffect({ reenter } = { reenter: false }) {
+    const winningNumbers = await this.#ui.askWinningNumbers({ again: reenter });
     this.#winningNumbers = winningNumbers;
   }
 
-  async #bonusNumberSettingEffect() {
+  async #bonusNumberSettingEffect({ reenter } = { reenter: false }) {
     const bonusNumber = await this.#ui.askBonusLottoNumber(
       this.#winningNumbers,
+      { again: reenter },
     );
     const matchResults = this.#lotteries.map((lotto) =>
       lotto.checkWinningNumbers(this.#winningNumbers, bonusNumber),
