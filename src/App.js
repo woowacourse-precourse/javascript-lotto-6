@@ -33,10 +33,7 @@ class App {
 
   callCounter(money) {
     this.counter = new Counter(money);
-    const lottoCounts = this.counter.lottoCounter();
-    model.counts = lottoCounts;
-
-    this.counter.lottoCountPrinter(lottoCounts);
+    this.counter.lottoCountPrinter();
     this.counter.lottosPrinter();
   }
 

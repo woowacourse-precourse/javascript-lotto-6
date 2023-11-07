@@ -10,8 +10,13 @@ export class Counter {
   constructor(money) {
     this.#inputMoneyValidater(money);
     this.#inputMoneyDivideValidater(money);
+
     this.#money = money;
+    model.totalMoney = money;
+
     this.counts = money/LOTTO_PRICE
+    model.counts = this.counts;
+
     this.list = [];
     this.#publish(this.counts);
   }
@@ -30,27 +35,19 @@ export class Counter {
     }
   }
 
-  lottoCounter() {
-    let price = LOTTO_PRICE;
-    const lottocounts = this.#money/price;
-    model.totalMoney = lottocounts * price;
-    return lottocounts
-  }
-
-  lottoCountPrinter(counts) {
-    this.count = counts
+  lottoCountPrinter() {
     MissionUtils.Console.print("");
-    MissionUtils.Console.print(`${counts}개를 구매했습니다.`);
+    MissionUtils.Console.print(`${this.counts}개를 구매했습니다.`);
   }
 
   #publish(counts) {
     for (let num = 0; num < counts; num++) {
-      const newLotto = this.createNewLotto();
+      const newLotto = this.#createNewLotto();
       this.list.push(newLotto);
     }
   }
 
-  createNewLotto() {
+  #createNewLotto() {
     const newNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
 
     return new Lotto(newNumbers);

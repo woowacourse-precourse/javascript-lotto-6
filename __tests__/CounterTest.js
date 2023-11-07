@@ -16,13 +16,15 @@ const mockRandoms = (numbers) => {
 
 describe("구입 금액에 따른 로또 개수 테스트", () => {
   test("구입 금액에 따라 올바른 개수의 로또를 발행한다.", () => {
-    const INPUT = 10000;
-    const OUTPUT = 10;
+    const logSpy = getLogSpy();
 
+    const INPUT = "10000";
     const counter = new Counter(INPUT);
-    const result = counter.lottoCounter();
+    counter.lottoCountPrinter();
 
-    expect(result).toBe(OUTPUT);
+    const log = "10개를 구매했습니다."
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
   });
 
   test("구매한 로또를 모두 출력한다.", async () => {
@@ -75,7 +77,7 @@ describe("구입 금액에 따른 로또 개수 테스트", () => {
   });
 
   test("구입 금액이 로또 금액으로 나눠 떨어지지 않을 경우, 에러가 발생한다.", () => {
-    const INPUT = 5500;
+    const INPUT = "5500";
 
     expect(() => {new Counter(INPUT)}).toThrow("[ERROR]");
   });
