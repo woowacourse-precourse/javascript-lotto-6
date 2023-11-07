@@ -43,7 +43,47 @@ class App {
       throw new Error('[ERROR] 잘못된 번호를 입력하셨습니다.');
     }
 
-    return num;
+    return parseInt(num);
+  }
+
+  winningStats(winning_number, bonus_number, tickets) {
+    const winning_stats = {
+      3: 0,
+      4: 0,
+      5: 0,
+      'bonus': 0,
+      6: 0,
+    };
+
+    tickets.forEach((ticket) => {
+      const match_num = ticket.countMatchNumber(winning_number);
+      const has_bonus_num = ticket.hasBonusNumber(bonus_number);
+
+      //ticket.printNum();
+      //MissionUtils.Console.print(`${match_num}개와 보너스 ${match_bonus_num}`);
+      if(match_num >= 3) {
+        winning_stats[has_bonus_num ? (match_num === 5 ? 'bonus' : match_num) : match_num] += 1;
+      }
+    });
+
+    return winning_stats;
+  }
+
+  printWinningStats(winning_stats) {
+    const prize = new Map([
+      [3, '3개 일치 (5,000원)'],
+      [4, '4개 일치 (50,000원)'],
+      [5, '5개 일치 (1,500,000원)'],
+      ['bonus', '5개 일치, 보너스 볼 일치 (30,000,000원)'],
+      [6, '6개 일치 (2,000,000,000원)']
+    ]);
+    MissionUtils.Console.print('\n당첨 통계');
+    MissionUtils.Console.print('---');
+
+    prize.forEach((value, key) => {
+      MissionUtils.Console.print(`${value} - ${winning_stats[key]}개`);
+    });
+
   }
 
   async play() {
@@ -53,11 +93,13 @@ class App {
 
     const tickets = this.generateRandomLottoNum(NUM_TICKETS);
     tickets.forEach(ticket => {
-      ticket.print_num();
+      ticket.printNum();
     })
     const winning_number = await this.getWinningNum();
     const bonus_number = await this.getBonusNum();
-
+    
+    const winning_stats = this.winningStats(winning_number, bonus_number, tickets);
+    this.printWinningStats(winning_stats);
   }
 }
 

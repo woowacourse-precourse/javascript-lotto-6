@@ -6,7 +6,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
-    this.#sort_num(numbers);
+    this.#sortNum(numbers);
   }
 
   #validate(numbers) {
@@ -23,18 +23,30 @@ class Lotto {
     }
     
   }
-  // TODO: 추가 기능 구현
-  //로또 번호 정렬
-  #sort_num(numbers) {
+
+  #sortNum(numbers) {
     numbers.sort((a, b) => a - b);
   }
-  //로또 번호 출력
-  print_num() {
+
+  printNum() {
     MissionUtils.Console.print(this.#numbers);
   }
-  //로또 번호 일치 여부
 
-  
+  countMatchNumber(winning_number) {
+    const winning_num_set = new Set(winning_number.#numbers);
+    const count = this.#numbers.filter((num) => winning_num_set.has(num));
+
+    return count.length;
+  }
+
+  hasBonusNumber(bonus_number) {
+    this.#numbers.forEach(num => {
+      if(num === bonus_number) return true;
+    });
+
+    return false;
+  }
+
 
 }
 
