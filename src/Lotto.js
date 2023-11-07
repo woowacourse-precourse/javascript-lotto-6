@@ -15,7 +15,8 @@ class Lotto {
     }
   }
   printNumbers() {
-    MissionUtils.Console.print(this.#numbers);
+    let stringNumber=`[${this.#numbers.join(', ')}]`
+    MissionUtils.Console.print(stringNumber);
   }
   compareWinNumbers(winNumber) {
     let winCount=0;
