@@ -4,9 +4,15 @@ import Validation from "./Validation.js";
 
 class UserInterface {
   static async getLottoPrice() {
-    const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_LOTTO_PRICE);
-    if (Validation.validateLottoPrice(input)) {
-      return Number(input);
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync(MESSAGE.INPUT_LOTTO_PRICE);
+        if (Validation.validateLottoPrice(input)) {
+          return Number(input);
+        }
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
   }
 

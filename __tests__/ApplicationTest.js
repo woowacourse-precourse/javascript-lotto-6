@@ -2,7 +2,6 @@ import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import LottoGame from "../src/LottoGame.js";
 import Lotto from "../src/Lotto.js";
-import Validation from "../src/Validation.js";
 import UserInterface from "../src/UserInterface.js";
 
 const mockQuestions = (inputs) => {
