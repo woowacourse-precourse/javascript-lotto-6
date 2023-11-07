@@ -37,12 +37,11 @@ describe('User - buyLottos 메소드 : 로또 구입 수량 테스트', () => {
 });
 
 describe('User - setPrizes, getPrizes, getReturnRate 메소드 : 로또 당첨 결과 관련 반환 테스트', () => {
-  const winning = new WinningLotto();
   const INPUT_BALANCE = '6000';
   const INPUT_NUMBERS = '1,2,3,4,5,6';
   const INPUT_BONUS = '7';
-
-  winning.setNumbers(INPUT_NUMBERS);
+  
+  const winning = new WinningLotto(INPUT_NUMBERS);
   winning.setBonus(INPUT_BONUS);
 
   const RESULT_PRIZES = {

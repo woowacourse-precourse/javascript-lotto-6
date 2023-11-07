@@ -15,7 +15,7 @@ class WinningLotto {
   #numbers;
   #bonus;
 
-  setNumbers(numbers) {
+  constructor(numbers) {
     const numberArray = Utils.stringToNumberArray(numbers);
     this.#validateNumbers(numberArray);
     numberArray.sort((a, b) => a - b);
