@@ -14,15 +14,18 @@ class InputView {
   }
 
   async readWinningLottoNumber() {
-    winningLottoNumber = await Console.readLineAsync('당첨 번호를 입력해 주세요.');
-    // 유효성 검사
+    const userInput = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+
+    const userInputStrArray = userInput.split(',');
+    const winningLottoNumber = userInputStrArray.map((strNumber) => parseInt(strNumber, 10));
+    // 유효성 검사 // 6개
     return winningLottoNumber;
   }
 
   async readBonusNumber() {
-    bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+    const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     // 유효성 검사
-    return bonusNumber;
+    return Number(bonusNumber);
   }
 }
 export default InputView;

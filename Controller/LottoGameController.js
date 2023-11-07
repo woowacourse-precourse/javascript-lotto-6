@@ -31,14 +31,16 @@ class LottoGameController {
     this.#outputview.printAllLottos(this.#lottoList);
   }
 
-  makeWinningLotto() {
+  async makeWinningLotto() {
     // input받기
-    const winningLottoNumber = this.#inputview.readWinningLottoNumber();
-    const bonusNumber = this.#inputview.readBonusNumber();
-    const winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+    const winningLottoNumber = await this.#inputview.readWinningLottoNumber();
+    const bonusNumber = await this.#inputview.readBonusNumber();
+    // const winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
   }
 
-  printGameResult() {}
+  async printGameResult() {
+    await this.makeWinningLotto();
+  }
 }
 
 export default LottoGameController;
