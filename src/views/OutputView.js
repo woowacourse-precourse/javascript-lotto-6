@@ -8,7 +8,7 @@ class OutputView {
   }
 
   static printPurchaseMessage(lottoCount) {
-    Console.print(`${lottoCount}개를 구매했습니다.`);
+    Console.print(`\n${lottoCount}개를 구매했습니다.`);
   }
 
   static printIssuedLottoNumbers(numbers) {
@@ -16,7 +16,7 @@ class OutputView {
   }
 
   static printStatisticsHeader() {
-    Console.print(OUTPUT.statisticsMessage);
+    Console.print(OUTPUT.statistics);
   }
 
   static printStatistics(statistics) {
@@ -26,7 +26,7 @@ class OutputView {
       const { match, bonus, count, prize } = result;
       Console.print(
         `${match}개 일치${
-          bonus ? `, ${OUTPUT.bonusMessage}` : ''
+          OUTPUT.bonus[bonus]
         } (${prize.toLocaleString()}원) - ${count}개`,
       );
     });

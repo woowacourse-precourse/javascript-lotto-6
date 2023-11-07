@@ -5,6 +5,9 @@ export const INPUT = Object.freeze({
 });
 
 export const OUTPUT = Object.freeze({
-  statisticsMessage: '당첨 통계\n---',
-  bonusMessage: '보너스 볼 일치',
+  statistics: '\n당첨 통계\n---',
+  bonus: {
+    true: ', 보너스 볼 일치',
+    false: '',
+  },
 });
