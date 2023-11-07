@@ -53,18 +53,18 @@ class App {
   async play() {
     const user = new User();
 
-    await this.getUserPurchaseMoney(user);
+    await this.setUserMoney(user);
 
-    const tickets = this.#game.purchaseLottoTickets(user);
+    const tickets = this.#game.purchaseLottoTickets(user.getMoney());
     user.setTickets(tickets);
 
     this.#output.lottoTicketCount(user.getTickets());
     this.#output.lottoTicketNumbers(user.getTickets());
 
-    await this.getWinningNumbers();
-    await this.getBonusNumber();
+    await this.setWinningNumbers();
+    await this.setBonusNumber();
 
-    const results = this.#game.calculateWinningResult(user.getTickets());
+    const results = this.#game.calculateTotalWinningResults(user.getTickets());
     const totalReturn = this.#game.calculateTotalReturn(
       results,
       user.getMoney()

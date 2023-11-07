@@ -1,13 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT } from './constants/Messages';
+import { OUTPUT } from './constants/Messages.js';
 import {
-  LOTTO_NUMBER_SEPERATOR,
+  LOTTO_NUMBER,
   FIRST_PRIZE,
   SECOND_PRIZE,
   THIRD_PRIZE,
   FOURTH_PRIZE,
   FIFTH_PRIZE,
-} from './constants/Condition';
+} from './constants/Condition.js';
 
 class Output {
   error(message) {
@@ -22,7 +22,7 @@ class Output {
     tickets.forEach((ticket) =>
       Console.print(
         OUTPUT.ticket_number(
-          ticket.getNumber().join(`${LOTTO_NUMBER_SEPERATOR} `)
+          ticket.getNumbers().join(`${LOTTO_NUMBER.seperator} `)
         )
       )
     );
@@ -36,7 +36,7 @@ class Output {
     Console.print(OUTPUT.fourth_prize(results[FOURTH_PRIZE.rank]));
     Console.print(OUTPUT.third_prize(results[THIRD_PRIZE.rank]));
     Console.print(OUTPUT.second_prize(results[SECOND_PRIZE.rank]));
-    Console.print(OUTPUT.fifth_prize(results[FIRST_PRIZE.rank]));
+    Console.print(OUTPUT.first_prize(results[FIRST_PRIZE.rank]));
   }
 
   totalReturnResult(totalReturn) {

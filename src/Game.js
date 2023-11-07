@@ -73,8 +73,8 @@ class Game {
     return new Lotto(numbers.sort((a, b) => a - b));
   }
 
-  purchaseLottoTickets() {
-    const ticketCount = user.getMoney() / LOTTO_PURCHASE_UNIT;
+  purchaseLottoTickets(money) {
+    const ticketCount = money / LOTTO_PURCHASE_UNIT;
 
     const tickets = Array.from({ length: ticketCount }).map(() => {
       return this.createSingleLottoTicket();
@@ -94,7 +94,7 @@ class Game {
     };
 
     tickets.forEach((ticket) => {
-      const rank = ticket.calculateLottoWinning(
+      const rank = ticket.calculateLottoResult(
         this.#winningNumbers,
         this.#bonusNumber
       );
