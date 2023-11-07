@@ -9,6 +9,8 @@ class Game {
 
   #myLotto = [];
 
+  #winLotto;
+
   static async #getLottoPrice() {
     const priceInput = await User.readInput(MESSAGE.enterPrice);
     return Validation.price(priceInput);
@@ -35,10 +37,20 @@ class Game {
     }
   }
 
+  static async #enterWinNumbers() {
+    const winNumbersInput = await User.readInput(MESSAGE.enterWinNumbers);
+    return Validation.winNumbers(winNumbersInput);
+  }
+
+  async #setWinLotto() {
+    this.#winLotto = new Lotto(await Game.#enterWinNumbers());
+  }
+
   async play() {
     await this.#setLottoAmount();
     this.#setMyLotto();
-    Console.print(this.#myLotto.map((lot) => lot.getNumbers()));
+    await this.#setWinLotto();
+    Console.print(this.#winLotto.getNumbers());
   }
 }
 
