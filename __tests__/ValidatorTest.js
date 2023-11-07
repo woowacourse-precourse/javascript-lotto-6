@@ -24,6 +24,16 @@ describe("Validator 클래스 테스트", () => {
   );
 
   test.each([
+    ["1,2,3,4,5,6,7,8 ", false],
+    ["1,2,3", true],
+  ])(
+    "문자열 내에 숫자와 쉼표만 있다면 true, 아니라면 false 반환 - %s",
+    (string, expectedOutput) => {
+      expect(Validator.isStringOnlyDigitsAndComma(string)).toBe(expectedOutput);
+    }
+  );
+
+  test.each([
     ["1234s5", false],
     ["123456", true],
   ])(
