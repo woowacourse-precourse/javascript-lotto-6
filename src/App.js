@@ -21,11 +21,11 @@ class App {
 
   async play() {
     const inputPurchaseAmount = await input.askPurchaseAmount();
-    const parsedpurchaseAmount = parseInt(inputPurchaseAmount, 10);
+    const parsedPurchaseAmount = parseInt(inputPurchaseAmount, 10);
 
-    this.validateAskPurchaseAmount(parsedpurchaseAmount);
+    this.validateAskPurchaseAmount(parsedPurchaseAmount);
 
-    this.createMyLottoList(parsedpurchaseAmount);
+    this.createMyLottoList(parsedPurchaseAmount);
     this.printMyLottoList();
 
     const lotteryNumbers = await input.askLotteryNumbers();
@@ -42,7 +42,7 @@ class App {
 
     this.printWinningResult(winningResult);
 
-    const lottoROI = this.getLottoROI(parsedpurchaseAmount, winningResult);
+    const lottoROI = this.getLottoROI(parsedPurchaseAmount, winningResult);
     this.printLottoROI(lottoROI);
   }
 
