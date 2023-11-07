@@ -12,6 +12,16 @@ class Validator {
     validators.forEach(validator => validator(purchaseAmount));
   }
 
+  static validateWinningNumbers(winningNumbers) {
+    const validators = [
+      this.invalidSeparator,
+      this.invalidNumbersCount,
+      this.invalidRange,
+      this.invalidNumber,
+    ];
+    validators.forEach(validator => validator(winningNumbers));
+  }
+
   static remainderNotZero(purchaseAmount) {
     if (purchaseAmount % CONSTANTS.purchaseAmount.amountDivisor !== 0)
       throw new Error(ERROR.message.remainderNotZero);
@@ -30,7 +40,8 @@ class Validator {
   }
 
   static invalidSeparator(numbers) {
-    if (numbers.includes('')) throw new Error(ERROR.message.invalidSeparator);
+    if (numbers.includes(''))
+      throw new Error(ERROR.message.invalidSeparator);
   }
 
   static invalidNumbersCount(numbers) {
