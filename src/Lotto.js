@@ -1,4 +1,4 @@
-import { LOTTO_ERROR } from './constants/Messages.js';
+import Validation from './Validation.js';
 import {
   LOTTO_NUMBER,
   FIRST_PRIZE,
@@ -7,7 +7,6 @@ import {
   FOURTH_PRIZE,
   FIFTH_PRIZE,
   NO_PRIZE,
-  LOTTO_NUMBER_TOTAL,
 } from './constants/Condition.js';
 
 class Lotto {
@@ -19,9 +18,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO_NUMBER.length) {
-      throw new Error(LOTTO_ERROR.length);
-    }
+    Validation.validateInputDuplicate(numbers);
+    Validation.validateInputLength(numbers, LOTTO_NUMBER.length);
   }
 
   getNumbers() {
