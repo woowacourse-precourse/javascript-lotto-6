@@ -2,10 +2,10 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import LottoError from './error/LottoError.js';
 
-class GuessLotto {
+class ProcessLotto {
   #winningNumber = [];
 
-  #guessBonus = null;
+  #winningBonus = null;
 
   #lottoPieces = 0;
 
@@ -19,12 +19,12 @@ class GuessLotto {
     this.#winningNumber = numbers;
   }
 
-  getGuessBonus() {
-    return this.#guessBonus;
+  getWinningBonus() {
+    return this.#winningBonus;
   }
 
-  setGuessBonus(bonus) {
-    this.#guessBonus = bonus;
+  setWinningBonus(bonus) {
+    this.#winningBonus = bonus;
   }
 
   getLottoPieces() {
@@ -60,11 +60,11 @@ class GuessLotto {
 
   async inputBonusNumber() {
     try {
-      this.#guessBonus = await Console.readLineAsync(
+      this.#winningBonus = await Console.readLineAsync(
         '\n보너스 번호를 입력해 주세요.\n',
       );
-      this.validateBonusNumber(this.#guessBonus);
-      return this.#guessBonus;
+      this.validateBonusNumber(this.#winningBonus);
+      return this.#winningBonus;
     } catch (error) {
       Console.print(error.message);
       return this.inputBonusNumber();
@@ -116,4 +116,4 @@ class GuessLotto {
   }
 }
 
-export default GuessLotto;
+export default ProcessLotto;
