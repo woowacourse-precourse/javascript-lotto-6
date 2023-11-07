@@ -55,6 +55,7 @@ class InputView {
         return true;
       },
     );
+    this.bonusNum = parseInt(this.bonusNum, 10);
   }
 }
 
