@@ -8,6 +8,7 @@ const outputs = {
 
   printRandoms(random) {
     const output = random.join('');
+
     Console.print(output);
   },
 
@@ -17,11 +18,13 @@ const outputs = {
 
   printStats(stats) {
     const output = stats.join('\n');
+
     Console.print(output);
   },
 
   printRate(rate) {
     const output = `${MESSAGE.output.rate}${rate}${MESSAGE.unit.percent}${MESSAGE.closing}`;
+
     Console.print(output);
   },
 };
