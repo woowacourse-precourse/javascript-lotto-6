@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Lotto {
 	#numbers;
 
@@ -39,6 +41,21 @@ class Lotto {
 			else if (matchNumbersLength === 6) result[2000000000] += 1;
 		});
 		return result;
+	}
+
+	static printResult(investedMoney = 1, result = {}) {
+		Console.print('당첨 통계\n---');
+		Console.print(`3개 일치 (5,000원) - ${result[5000]}개`);
+		Console.print(`4개 일치 (50,000원) - ${result[50000]}개`);
+		Console.print(`5개 일치 (1,500,000원) - ${result[1500000]}개`);
+		Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[30000000]}개`);
+		Console.print(`6개 일치 (2,000,000,000원) - ${result[2000000000]}개`);
+		Console.print(`총 수익률은 ${Lotto.getRevenue(investedMoney, result)}%입니다.`);
+	}
+
+	static getRevenue(money = 1, result = {}) {
+		const sum = Object.entries(result).reduce((a, [reward, amount]) => a + reward * amount, 0);
+		return Math.round((sum / money) * 100 * 10) / 10;
 	}
 }
 
