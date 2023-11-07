@@ -27,6 +27,12 @@ class LottoValidator {
   static validateLottoNumbers(numbers) {
     numbers.forEach(number => CommonValidator.validate(number));
   }
+
+  static validateBonusNumberInLottoNumbers(numbers, bonusNumber) {
+    if (numbers.includes(bonusNumber)) {
+      throw new InputError(LOTTO_ERROR.duplication);
+    }
+  }
 }
 
 export default LottoValidator;
