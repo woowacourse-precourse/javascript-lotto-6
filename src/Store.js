@@ -42,12 +42,23 @@ class Store {
     return lottoAmount;
   }
 
+  #printLottoList() {
+    for (const lotto of this.#lottoList) {
+      lotto.printNumbers();
+    }
+  }
+
   issueLotto() {
     const lottoAmount = this.calculateLottoAmount();
     for (let i = 0; i < lottoAmount; i++) {
       const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      this.#lottoList.push(new Lotto(lottoNumbers));
+      this.#lottoList.push(new Lotto(lottoNumbers.sort((a, b) => a - b)));
     }
+    this.#printLottoList();
+  }
+
+  static async inputWinningNumbers() {
+    const money = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
   }
 }
 
