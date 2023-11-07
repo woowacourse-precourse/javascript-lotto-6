@@ -10,11 +10,9 @@ class App {
     const inputview = new InputView();
     const machine = new Machine();
     const lottoGerner = new LottoGenerator();
+    await inputview.inputAmountOfMoney();
 
-    await inputview.inputAmountOfMoney(); // await를 사용하여 결과를 처리
-    const playerLotto = inputview.playerMoney; // playerMoney를 사용
-    const amountLotto = machine.CalculatorOfLottoAmount(playerLotto);
-    Console.print(`${amountLotto}개를 구매했습니다.`);
+    const amountLotto = machine.CalculatorOfLottoAmount(inputview.playerMoney);
     const purchase = lottoGerner.purchaseLotto(amountLotto);
 
     const inputNumber = await inputview.inputWinningNumber();
@@ -23,7 +21,7 @@ class App {
     const bonusNumber = await inputview.inputBonusNumber();
 
     const results = LottoResultCalculator.calculateResults(purchase, winningNumber, bonusNumber);
-
+    Console.print('당첨 통계\n---');
     for (const resultKey in results) {
       const result = results[resultKey];
       if (resultKey === '총 수익률') {

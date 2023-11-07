@@ -1,5 +1,17 @@
 import { Console } from '@woowacourse/mission-utils';
 
+function calculateProfitRate(totalPrize, totalSpent) {
+  if (totalSpent === 0) {
+    return '0.00%';
+  }
+
+  const baseProfitRate = 100; // 기본 수익률 (100%)
+  const profit = totalPrize - totalSpent;
+  const profitRate = ((profit / totalSpent + 1) * baseProfitRate).toFixed(1);
+
+  return `${profitRate}%`;
+}
+
 class LottoResultCalculator {
   static calculateResults(tickets, winningNumbers, bonusNumber) {
     const results = {
@@ -16,36 +28,23 @@ class LottoResultCalculator {
     }
 
     let totalPrize = 0;
-    let totalMatches = 0;
     for (const result in results) {
       if (result !== '0') {
         const matches = results[result];
         totalPrize += this.getPrizeAmount(result) * matches;
-        totalMatches += matches;
       }
     }
 
     const totalSpent = tickets.length * 1000; // 각 로또 가격은 1,000원
-    const profitRate = this.calculateProfitRate(totalPrize, totalSpent);
+    const profitRate = calculateProfitRate(totalPrize, totalSpent);
 
     results['총 수익률'] = profitRate;
 
     return results;
   }
 
-  static calculateProfitRate(totalPrize, totalSpent) {
-    if (totalSpent === 0) {
-      return '0.00%';
-    }
-
-    const profit = totalPrize - totalSpent;
-    const profitRate = ((profit / totalSpent) * 100).toFixed(2);
-
-    return `${profitRate}%`;
-  }
-
   static getPrizeAmount(result) {
-    const resultValue = result.split(' ')[0];
+    const resultValue = result.split(' ')[0]; // 공백 이전의 문자만 가져옴
     const prizeAmount = {
       '3개': 5000,
       '4개': 50000,
