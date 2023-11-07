@@ -1,3 +1,4 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
 import { lottoChecker } from "../src/LottoChecker.js";
 import { checkLottoAmount, checkLottoBonusNumber } from "../src/LottoInput.js";
@@ -40,13 +41,13 @@ describe("로또 클래스 테스트", () => {
 
   test("당첨 번호와 랜덤 로또 번호 사이의 일치 개수, 보너스 번호의 위치를 반환한다.", () => {
     const randomNumbers = [
+      [4, 8, 20, 28, 40, 44],
       [2, 3, 4, 12, 35, 42],
-      [4, 8, 20, 28, 42, 44],
-      [2, 6, 18, 20, 33, 34]
+      [2, 3, 6, 12, 20, 33]
     ];
-    const winningNumbers = [2, 3, 4, 5, 6, 42];
-    const bonusNumber = 34;
+    const winningNumbers = [2, 3, 4, 12, 35, 40];
+    const bonusNumber = 42;
     expect(lottoChecker(randomNumbers, winningNumbers, bonusNumber))
-      .toEqual({ matchedCounts: [4, 2, 2], matchedBonusPosition: 2 });
+      .toEqual([2, "5+bonus", 3]);
   });
 });
