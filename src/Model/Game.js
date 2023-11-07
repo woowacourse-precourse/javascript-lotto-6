@@ -1,4 +1,4 @@
-import { LOTTO_RANK, RANK } from "../constants/constants.js";
+import { LOTTO, LOTTO_RANK, RANK } from "../constants/constants.js";
 
 class Game {
   constructor(lottos, luckyNumbers, bonusNumber) {
@@ -39,8 +39,7 @@ class Game {
   }
 
   calculateRank(cnt, bonus = false) {
-    const isPossibleSecondRank = cnt === 5;
-    if (isPossibleSecondRank) {
+    if (cnt === LOTTO.possibleSecondRank) {
       return LOTTO_RANK[cnt][bonus];
     }
     

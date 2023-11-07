@@ -3,6 +3,7 @@
  * 2. 필드를 추가할 수 없다.
  */
 import { ERROR_MESSAGE } from "./constants/error.js";
+import { LOTTO } from "./constants/constants.js";
 
 import OutputView from "./View/OutputView.js";
 import InputValidator from "./Validator/inputValidator.js";
@@ -42,10 +43,8 @@ class Lotto {
       bonus: false
     };
 
-    const isPossibleSecondRank = cnt === 5;
-
     // 번호 5개가 일치했다면 보너스 번호 일치 여부를 확인한다.
-    if (isPossibleSecondRank) {
+    if (cnt === LOTTO.possibleSecondRank) {
       matchResult.bonus = this.#numbers.includes(bonusNumber);
     }
 

@@ -16,7 +16,8 @@ export const LOTTO = {
   length: 6,
   min: 1,
   max: 45,
-  price: 1000
+  price: 1000,
+  possibleSecondRank: 5
 };
 
 export const RANK = {
