@@ -20,9 +20,8 @@ class OutputView {
   static printMatchingResult(cntRank) {
     Console.print('당첨 통계:');
     Object.keys(WINNING_INFO).forEach((key) => {
-      Console.print(
-        `${WINNING_INFO[key].criteria} (${WINNING_INFO[key].prizeMoney}) - ${cntRank[key]}개`,
-      );
+      const { criteria, prizeMoney } = WINNING_INFO[key];
+      Console.print(`${criteria} (${prizeMoney}원) - ${cntRank[key]}개`);
     });
   }
 
