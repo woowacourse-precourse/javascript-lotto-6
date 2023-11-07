@@ -11,7 +11,8 @@ const ERROR_MESSAGE = {
     INPUT_WINNING_NUMBERS_ERROR: '[ERROR] 당첨 번호는 1 ~ 45의 숫자여야 합니다.',
     INPUT_MORE_WINNING_NUMBERS_ERROR: '[ERROR] 당첨 번호가 6개여야 합니다.',
     INPUT_BLANK_ERROR: '[ERROR] 값이 공백입니다.',
-    INPUT_NUMBER_ERROR: '[ERROR] 값이 숫자가 아닙니다.'
+    INPUT_NUMBER_ERROR: '[ERROR] 값이 숫자가 아닙니다.',
+    INPUT_NUMBER_DUPLICATION_ERROR: '[ERROR] 값은 중복되어서는 안됩니다.'
 };
 
 export { MESSAGE, ERROR_MESSAGE }

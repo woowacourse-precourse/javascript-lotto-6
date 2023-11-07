@@ -1,16 +1,17 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from '../comm/Message.js';
-import InOutputError from '../validate/InOutputValidate.js';
+import LottoValidate from "../validate/LottoValidate.js";
 
 class UserView{
 
     constructor(){
-        this.inOutputError = new InOutputError();
-        
+        this.lottoValidate = new LottoValidate();
     }
 
     async userInputPurchaseAmount(){
-        return await Console.readLineAsync(MESSAGE.MSG_PURCHASE_AMOUNT);
+        const AMOUNT = await Console.readLineAsync(MESSAGE.MSG_PURCHASE_AMOUNT);
+        this.lottoValidate.inputPurchaseAmountValidate(AMOUNT);
+        return AMOUNT;
     }
 
     async userInputWinningNumbers(){
