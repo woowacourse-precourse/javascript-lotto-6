@@ -51,7 +51,7 @@ class LottoController {
     ];
   }
 
-  async startLottery() {
+  async getInputAndPrintLotto() {
     await this.input.getPrice();
     OutputView.printLotto(this.input.price, this.lottoArr);
     await this.input.getWinNum();

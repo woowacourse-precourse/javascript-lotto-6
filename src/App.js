@@ -6,7 +6,7 @@ class App {
   }
 
   async play() {
-    await this.controller.startLottery();
+    await this.controller.getInputAndPrintLotto();
     this.controller.computeAndPrintWins();
   }
 }
