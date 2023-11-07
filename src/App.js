@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import {
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
@@ -9,7 +8,10 @@ import Lotto from './Lotto.js';
 import InputManager from './UI/InputManager.js';
 import OutputManager from './UI/OutputManager.js';
 import { generateRandomNumbers } from './Utils.js';
-import { validatePurchaseAmountInput } from './Validation.js';
+import {
+  validatePurchaseAmountInput,
+  validateWinnerNumbersInput,
+} from './Validation.js';
 
 class App {
   constructor() {
@@ -43,7 +45,11 @@ class App {
   async getWinningNumbers() {
     this.winningNumbersInput =
       await this.inputManager.enterWinningNumbersInput();
-    Console.print(this.winningNumbersInput);
+    try {
+      await validateWinnerNumbersInput(this.winningNumbersInput);
+    } catch (e) {
+      await this.outputManager.printWinningNumbersInputErrorMessage(e.message);
+    }
   }
 
   getNumberOfLottos(purchaseAmount) {

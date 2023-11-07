@@ -1,4 +1,8 @@
-import { LOTTO_PRICE, PURCHASE_AMOUNT_ERROR_MESSAGES } from './Constants.js';
+import {
+  LOTTO_PRICE,
+  PURCHASE_AMOUNT_ERROR_MESSAGES,
+  WINNING_NUMBERS_ERROR_MESSAGES,
+} from './Constants.js';
 
 export const validatePurchaseAmountInput = async (purchaseAmountInput) => {
   if (!isNumber(purchaseAmountInput)) {
@@ -12,6 +16,14 @@ export const validatePurchaseAmountInput = async (purchaseAmountInput) => {
   }
   if (!isDivisibleByThousand(purchaseAmountInput)) {
     throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGES.NOT_DIVISIBLE_BY_THOUSAND);
+  }
+};
+
+export const validateWinnerNumbersInput = async (winningNumbersInput) => {
+  if (!isValidWinningNumbersLength(winningNumbersInput)) {
+    throw new Error(
+      WINNING_NUMBERS_ERROR_MESSAGES.INVALID_WINNING_NUMBERS_LENGTH
+    );
   }
 };
 
@@ -30,4 +42,8 @@ const isSmallerThanLottoPrice = (input) => {
 
 const isDivisibleByThousand = (input) => {
   return Number(input) % 1000 === 0;
+};
+
+const isValidWinningNumbersLength = (input) => {
+  return input.split(',').length === 6;
 };
