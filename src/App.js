@@ -1,16 +1,20 @@
 import { Console } from "@woowacourse/mission-utils";
 import purchaseService from "./services/purchaseService.js";
 import publishService from "./services/publishService.js";
+import inputs from "./domains/inputs.js";
 import outputs from "./domains/outputs.js";
+import validationUtils from "./utils/validationUtils.js";
 
 class App {
   #price;
   #amount;
   #lottos;
+  #winningNum;
 
   async play() {
     await this.#executePurchaseLotto();
     this.#executePublishLotto();
+    await this.#executeWinningNum();
   }
 
   // 로또 구입
@@ -29,6 +33,17 @@ class App {
     outputs.printAmountOfLotto(this.#amount);
     this.#lottos = publishService.publishLottos(this.#amount);
     outputs.printLottos(this.#lottos);
+  }
+
+  // 당첨 번호
+  async #executeWinningNum() {
+    try {
+      const winningNum = await inputs.inputWinningNum();
+      this.#winningNum = validationUtils.inputWinningNumValidate(winningNum);
+    } catch (error) {
+      Console.print(error.message);
+      return this.#executeWinningNum();
+    }
   }
 }
 
