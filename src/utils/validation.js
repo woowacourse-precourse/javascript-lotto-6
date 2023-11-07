@@ -1,16 +1,19 @@
-export const validateBuyPrice = {
-  isDivideThousand(price) {
-    return price % 1000 !== 0;
+export const validateNumber = {
+  isDivideThousand(number) {
+    return number % 1000 !== 0;
   },
-  isBiggerThanThousand(price) {
-    return price < 1000;
+  isBiggerThanThousand(number) {
+    return number < 1000;
   },
-  isNumber(price) {
-    return Number.isNaN(price);
+  isNumber(number) {
+    return Number.isNaN(number);
+  },
+  isOneToFourtyFive(number) {
+    return number < 1 && number > 45;
   },
 };
 
-export const validateLotto = {
+export const validateArray = {
   isSixSize(numbers) {
     return numbers.length !== 6;
   },
