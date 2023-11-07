@@ -1,23 +1,23 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-
 import Ticket from './Ticket.js';
+import { ERROR_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE } from './Constants.js';
 
 async function getPurchasePrice() {
-  const price = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
+  const price = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.PURCHASE_PRICE);
   const purchasePrice = Number(price);
   return purchasePrice;
 }
 
 function validatePurchasePrice(purchasePrice) {
   if (purchasePrice.length < 1) {
-    throw new Error('[ERROR] 금액을 입력하세요.');
+    throw new Error(ERROR_MESSAGE.PRICE_INPUT.NOTHING);
   }
   if (isNaN(purchasePrice)) {
-    throw new Error('[ERROR] 금액은 숫자만 입력하세요.');
+    throw new Error(ERROR_MESSAGE.PRICE_INPUT.NOT_A_NUMBER);
   }
   if (purchasePrice % 1000 !== 0) {
-    throw new Error('[ERROR] 금액을 1000원 단위로 입력하세요.');
+    throw new Error(ERROR_MESSAGE.PRICE_INPUT.WRONG_UNIT);
   }
 }
 
@@ -38,17 +38,17 @@ function getAmountOfTickets(purchasePrice) {
 }
 
 function showAmountOfTickets(amountOfTickets) {
-  Console.print(`${amountOfTickets}개를 구매했습니다.`);
+  Console.print(OUTPUT_MESSAGE.BUY_TICKET(amountOfTickets));
 }
 
 async function getLottoNumbers() {
-  const lottoNumbers = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
+  const lottoNumbers = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.LOTTO_NUMBERS);
   const lottoNumbersArr = lottoNumbers.split(',').map(Number);
   return lottoNumbersArr;
 }
 
 async function getBounusNumber() {
-  const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.');
+  const bonusNumber = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
   return bonusNumber;
 }
 
@@ -93,11 +93,7 @@ class App {
       }
     });
 
-    Console.print(`3개 일치 (5,000원) - ${rankCounts[4]}개`);
-    Console.print(`4개 일치 (50,000원) - ${rankCounts[3]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${rankCounts[2]}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${rankCounts[1]}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${rankCounts[0]}개`);
+    Console.print(OUTPUT_MESSAGE.RESULT(rankCounts));
 
     const earning =
       5000 * rankCounts[4] +
@@ -107,7 +103,7 @@ class App {
       2000000000 * rankCounts[0];
     const earningRate = Math.round((earning / purchasePrice) * 10000) / 100;
 
-    Console.print(`총 수익률은 ${earningRate}%입니다.`);
+    Console.print(OUTPUT_MESSAGE.EARNING(earningRate));
   }
 }
 
