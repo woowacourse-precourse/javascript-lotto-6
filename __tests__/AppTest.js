@@ -40,4 +40,15 @@ describe("app test", () => {
 
         await expect(app.renderLottoTickets(input)).toBe(result);
     });
+
+    test.each([`1,2,3,4,5,6,7`, `1,2,3`, `1,23456`, `123,456`, `48,1,3,4,5,6`])(
+        "로또 당첨 번호 예외 처리 테스트",
+        async (value) => {
+            const app = new App();
+
+            await expect(() => app.isValidWinningNumber(value)).toThrow(
+                "[ERROR] 숫자가 잘못된 형식입니다."
+            );
+        }
+    );
 });
