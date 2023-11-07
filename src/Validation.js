@@ -1,5 +1,5 @@
 export const numberType = (value) => {
-  if (typeof value === "number") {
+  if (typeof value !== "number") {
     throw new Error("[ERROR] 숫자 형식으로 입력해 주세요.");
   }
 };
@@ -24,7 +24,7 @@ export const numberRange = (value) => {
 
 export const duplicateNum = (numbers) => {
   for (let i = 0; i < numbers.length; i++) {
-    if (numbers.findIndex((v) => v === number[i]) !== i) {
+    if (numbers.findIndex((v) => v === numbers[i]) !== i) {
       throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
     }
   }

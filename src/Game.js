@@ -1,10 +1,14 @@
-import { Random } from "@woowacourse/mission-utils";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 export const publishGameNums = (gameCnt) => {
   const gameNums = [];
 
   for (let i = 0; i < gameCnt; i++) {
-    gameNums.push(Random.pickRandomNumbers(6, 1, 45).sort((a, b) => a - b));
+    gameNums.push(
+      MissionUtils.Random.pickUniqueNumbersInRange(6, 1, 45).sort(
+        (a, b) => a - b
+      )
+    );
   }
 
   return gameNums;

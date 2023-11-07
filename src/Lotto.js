@@ -1,5 +1,5 @@
 import {
-  amountType,
+  numberType,
   duplicateNum,
   numberCounter,
   numberRange,
@@ -15,7 +15,7 @@ class Lotto {
 
   #validate(numbers) {
     numberCounter(numbers);
-    numbers.forEach((v) => amountType(v));
+    numbers.forEach((v) => numberType(v));
     numbers.forEach((v) => numberRange(v));
     duplicateNum(numbers);
   }
@@ -27,7 +27,7 @@ class Lotto {
     if (count === 4) return [4, 50000];
     if (count === 3) return [5, 5000];
 
-    return 0;
+    return [0, 0];
   }
 
   #matchNums(game, bonusNum) {
