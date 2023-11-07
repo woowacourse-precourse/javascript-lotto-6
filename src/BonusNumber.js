@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MIN_NUMBER , MAX_NUMBER } from "./constants.js";
+import { MIN_NUMBER , MAX_NUMBER } from "./constants/constants.js";
 
 class BonusNumber {
   #bonusNumber;

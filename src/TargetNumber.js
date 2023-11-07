@@ -4,7 +4,7 @@ import {
   LOTTO_LENGTH,
   MIN_NUMBER,
   MAX_NUMBER
-} from './constants.js'
+} from './constants/constants.js'
 
 class TargetNumber {
   #targetNumber;

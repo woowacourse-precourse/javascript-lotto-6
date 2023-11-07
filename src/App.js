@@ -9,7 +9,7 @@ import {
   LOTTO_MONEY,
   LOTTO_RESULT,
   DELIMITER_SPACE
-} from "./constants.js";
+} from "./constants/constants.js";
 import Lotto from "./Lotto.js";
 import TargetNumber from "./TargetNumber.js";
 import BonusNumber from "./BonusNumber.js";
