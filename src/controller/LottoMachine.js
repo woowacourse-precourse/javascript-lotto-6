@@ -65,6 +65,7 @@ export default class LottoMachine {
       try {
         const purchaseAmountInput = await InputView.readPurchaseAmount();
         const parsePurchaseAmount = Number(purchaseAmountInput);
+
         await this.#purchaseAmountValidate(parsePurchaseAmount);
 
         return parsePurchaseAmount;
@@ -96,6 +97,7 @@ export default class LottoMachine {
     while (this.#INFINITE) {
       try {
         const bonusNumberInput = await InputView.readBonusNumber();
+
         this.#bonusNumberValidate(bonusNumberInput);
 
         return Number(bonusNumberInput);
@@ -130,8 +132,9 @@ export default class LottoMachine {
   }
 
   #calculateWinningStats() {
-    OutputView.printwinningStats();
     const rankCountsObjectEntries = Object.entries(this.#player.getRankCounts()).reverse();
+
+    OutputView.printwinningStats();
     rankCountsObjectEntries.forEach(([rank, counts]) => {
       OutputView.printCorrectCounts(rank, MATCHES_TO_RANK[rank], WINNING_RANK_TO_PRIZE[rank], counts);
     });
@@ -139,6 +142,7 @@ export default class LottoMachine {
 
   #calculateProfit() {
     const roundProfit = ((this.#player.getWinningAmount() / this.#player.getPurchaseAmount()) * 100).toFixed(1);
+
     OutputView.printProfit(roundProfit);
   }
 }

@@ -11,6 +11,7 @@ export default class OutputView {
     const START_SQUARE_BRACKET = '[';
     const CLOSE_SQUARE_BRACKET = ']';
     const COMMA_AND_SPACE = ', ';
+
     lottoTickets.forEach((lotto) => {
       Console.print(START_SQUARE_BRACKET + lotto.getNumbers().join(COMMA_AND_SPACE) + CLOSE_SQUARE_BRACKET);
     });
@@ -24,6 +25,7 @@ export default class OutputView {
 
   static foramtPrice(price) {
     const KOREAN_FORMAT = 'ko-KR';
+
     return price.toLocaleString(KOREAN_FORMAT);
   }
 
