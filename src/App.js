@@ -24,6 +24,7 @@ class App {
     this.lottoIssuance();
     await this.readWinningNumber();
     await this.readBonusNumber();
+    this.lottoDrawing();
   }
 
   async readPayment() {
@@ -75,6 +76,13 @@ class App {
         Console.print(error);
       }
     }
+  }
+
+  lottoDrawing() {
+    this.lottos.forEach((lotto) => {
+      lottoMatched = lotto.draw(this.#winningNumber);
+      bonusMatched = lotto.bonusDraw(this.#bonusNumber);
+    });
   }
 }
 

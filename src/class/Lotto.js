@@ -18,6 +18,14 @@ class Lotto {
   print() {
     Console.print(`[${this.#numbers.join(", ")}]`);
   }
+
+  draw(winning) {
+    return this.#numbers.filter((number) => winning.includes(number)).length;
+  }
+
+  bonusDraw(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
 }
 
 export default Lotto;
