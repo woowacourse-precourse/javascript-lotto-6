@@ -139,4 +139,21 @@ describe("WinLottoTest", () => {
       },
     });
   });
+
+  test("6개의 번호가 일치하는 경우 2000000000원에 당첨된다", async () => {
+    LottoStore.calculateWinningResults = jest.fn().mockResolvedValue([6]);
+    const ticketNumbers = [["1", "2", "3", "4", "5", "6"]];
+
+    const results = await WinLotto.calculateEarnings(ticketNumbers);
+    expect(results).toEqual({
+      totalEarnings: 2000000000,
+      countResults: {
+        3: 0,
+        4: 0,
+        5: 0,
+        "5+1": 0,
+        6: 1,
+      },
+    });
+  });
 });
