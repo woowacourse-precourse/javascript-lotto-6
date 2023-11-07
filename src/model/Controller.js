@@ -67,7 +67,7 @@ class Controller {
   setBonusNum(bonus) {
     if (String(bonus).includes('.')) throw new Error(ERROR.invalidValue);
     this.validateBonus(this.Lotto.getWinNumber, Number(bonus));
-    this.bonus = bonus;
+    this.bonus = Number(bonus);
   }
 
   validateBonus(winNums, bonus) {

@@ -47,6 +47,10 @@ class Lotto {
   lot(userLotto, bonus) {
     const SAME = this.#numbers.filter(item => userLotto.includes(item)).length;
     const IS_BONUS = userLotto.includes(bonus);
+    console.log(typeof bonus);
+    console.log(userLotto);
+    console.log(SAME);
+    console.log(IS_BONUS);
 
     return [SAME, Number(IS_BONUS)];
   }
