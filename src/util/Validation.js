@@ -80,14 +80,14 @@ const checkWinningNumbers = (inputs) => {
     ERROR_MESSAGES.lottoLength,
   );
   inputs.split(',').forEach((input) => {
-    checkInput(input);
+    /* checkInput(input); */
     checkInputType(input, ERROR_MESSAGES.lottoType);
     checkInputRange(input, ERROR_MESSAGES.lottoRange);
   });
 };
 
 const checkBonusNumber = (inputs, winningNumbers) => {
-  checkInput(inputs);
+  /* checkInput(inputs); */
   checkBonusDuplicated(inputs, winningNumbers);
   checkInputType(inputs, ERROR_MESSAGES.bonusType);
   checkInputRange(inputs, ERROR_MESSAGES.bonusRange);
