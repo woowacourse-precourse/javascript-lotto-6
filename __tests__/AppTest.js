@@ -12,7 +12,7 @@ describe("app test", () => {
         }
     );
 
-    test("로또 자판기 테스트", async () => {
+    test("로또 자판기는 6개의 숫자를 로또 개수만큼 출력해야 합니다.", async () => {
         const input = 3000;
         const result = [
             [1, 2, 3, 4, 5, 6],
