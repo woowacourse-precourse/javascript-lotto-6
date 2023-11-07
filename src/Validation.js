@@ -1,6 +1,13 @@
 import { INPUT_ERROR, NUMBER_CRITERIA, UNIT } from "./Constants.js";
 
 const Validation = {
+  checkMoney(money) {
+    this.checkNull(money);
+    this.checkBlank(money);
+    this.checkChar(money);
+    this.checkIndivisible(money);
+  },
+
   checkNull(number) {
     if (number.length === 0) {
       throw new Error(INPUT_ERROR.null);
