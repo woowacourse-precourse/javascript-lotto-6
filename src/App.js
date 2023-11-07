@@ -6,6 +6,7 @@ import {
   ERROR_MESSAGES,
 } from "./constants/Messages.js";
 import { PRIZE } from "./constants/Prize.js";
+
 /*
 추가된 요구 사항
 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
@@ -37,8 +38,7 @@ class App {
       VERIFIED_WINNING_NUMBER,
       VERIFIED_BOUNUS_NUMBER
     );
-    const array = this.calculatePrize(NUMBER_OF_WINS);
-    //this.showLottoResult(array, INPUT_CASH);
+    this.showLottoResult(NUMBER_OF_WINS, INPUT_CASH);
   }
 
   async inputCash() {
@@ -125,11 +125,13 @@ class App {
       throw new Error(ERROR_MESSAGES.WINNING_NUMBER_NOT_SIX);
     }
   }
+
   validateWinningNumberOutOfBounds(WINNING_NUMBER_ARRAY) {
     if (!WINNING_NUMBER_ARRAY.every((number) => number >= 1 && number <= 45)) {
       throw new Error(ERROR_MESSAGES.WINNING_NUMBER_OUT_OF_BOUNDS);
     }
   }
+
   validateWinningNumberDuplication(WINNING_NUMBER_ARRAY) {
     const UNIQUE_ARRAY = [...new Set(WINNING_NUMBER_ARRAY)];
     if (WINNING_NUMBER_ARRAY.length !== UNIQUE_ARRAY.length) {
@@ -200,7 +202,6 @@ class App {
         bonusNumber
       );
       if (correctCount !== 0) {
-        console.log(correctCount);
         NumberOfWins[correctCount]++;
       }
       if (bonusFlag) {
@@ -210,43 +211,48 @@ class App {
     return NumberOfWins;
   }
 
-  calculatePrize(NUMBER_OF_WINS) {
-    console.log(NUMBER_OF_WINS);
-    //   arr.forEach((num) => {
-    //     if (num >= 3 && num <= 6) {
-    //       counts[num - 3]++;
-    //     }
-    //   });
-    //   return [counts, bonus];
-    // }
+  showLottoResult(NUMBER_OF_WINS, cash) {
+    const PRIZE_VALUE = this.getPrizeValue(NUMBER_OF_WINS);
+    MissionUtils.Console.print(OUTPUT_MESSAGES.WINNING_STATISTICS);
+    this.showEachPrize(NUMBER_OF_WINS);
+    const RATE_OF_RETURN = ((PRIZE_VALUE / cash) * 100).toFixed(1);
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.RATE_OF_RETURN + RATE_OF_RETURN + "%입니다."
+    );
+  }
 
-    // showLottoResult(array, cash) {
-    //   const prize =
-    //     array[0][0] * PRIZE.THREE_MATCHES +
-    //     array[0][1] * PRIZE.FOUR_MATCHES +
-    //     array[0][2] * PRIZE.FIVE_MATCHES +
-    //     array[0][3] * PRIZE.SIX_MATCHES +
-    //     array[1] * PRIZE.BONUS_MATCHES;
-    //   MissionUtils.Console.print(OUTPUT_MESSAGES.WINNING_STATISTICS);
-    //   MissionUtils.Console.print(
-    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_3 + array[0][0] + "개"
-    //   );
-    //   MissionUtils.Console.print(
-    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_4 + array[0][1] + "개"
-    //   );
-    //   MissionUtils.Console.print(
-    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_5 + array[0][2] + "개"
-    //   );
-    //   MissionUtils.Console.print(
-    //     OUTPUT_MESSAGES.CORRECT_COUNT_BONUS + array[1] + "개"
-    //   );
-    //   MissionUtils.Console.print(
-    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_6 + array[0][3] + "개"
-    //   );
-    //   const RATE_OF_RETURN = ((prize / cash) * 100).toFixed(1);
-    //   MissionUtils.Console.print(
-    //     OUTPUT_MESSAGES.RATE_OF_RETURN + RATE_OF_RETURN + "%입니다."
-    //   );
+  getPrizeValue(NUMBER_OF_WINS) {
+    let prizeValue =
+      NUMBER_OF_WINS[3] * PRIZE.THREE_MATCHES +
+      NUMBER_OF_WINS[4] * PRIZE.FOUR_MATCHES +
+      (NUMBER_OF_WINS[5] - NUMBER_OF_WINS["bonus"]) * PRIZE.FIVE_MATCHES +
+      NUMBER_OF_WINS[6] * PRIZE.SIX_MATCHES +
+      NUMBER_OF_WINS["bonus"] * PRIZE.BONUS_MATCHES;
+    return prizeValue;
+  }
+
+  showEachPrize(NUMBER_OF_WINS) {
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_3 + NUMBER_OF_WINS[3] + "개"
+    );
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_4 + NUMBER_OF_WINS[4] + "개"
+    );
+    this.showBonusPrize(NUMBER_OF_WINS);
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_BONUS + NUMBER_OF_WINS["bonus"] + "개"
+    );
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_6 + NUMBER_OF_WINS[6] + "개"
+    );
+  }
+
+  showBonusPrize(NUMBER_OF_WINS) {
+    MissionUtils.Console.print(
+      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_5 +
+        (NUMBER_OF_WINS[5] - NUMBER_OF_WINS["bonus"]) +
+        "개"
+    );
   }
 }
 export default App;
