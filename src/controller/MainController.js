@@ -25,4 +25,7 @@ class MainController {
       }
     }
   }
+  static RandomLotto() {
+    this.lottoNumber = RandomNumber.createRandomLottoNumber(this.lottoCount);
+  }
 }
