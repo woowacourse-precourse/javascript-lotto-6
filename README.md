@@ -71,8 +71,7 @@ npm run test
 ### throw 후 다시 진행하기
 
 이번 과제 미션 중 사용자 입력값에 오류가 있을 경우, throw로 오류를 발생시킨 후에 관련 오류를 출력하고 오류가 일어난 부분을 다시 실행시키는 것이 있습니다.
-
-이를 구현하기 위해 사용한 방법은 반복문과 try catch 조합입니다.
+이를 구현하기 위해 사용한 방법은 반복문과 try catch 조합이다.
 
 ```js
 const getValue = () => {
@@ -96,6 +95,8 @@ try cath는 try문 안의 코드를 실행 시키다가 오류가 발생하면 c
 
 ### 비동기 테스트 코드
 
+단위 테스트를 짜면서 배운 jest의 비동기 테스트 코드를 다음과 같습니다.
+
 ```js
 test('비동기 테스트1', async () => {
   //....
@@ -114,4 +115,12 @@ test('비동기 테스트3', () => {
     await expect(비동기()).resolves.toBe('');
   });
 });
+```
+
+## Prettier와 함수(매서드)길이
+
+Prettier에서 "max-lines-per-function"를 이용해 함수의 최대 길이를 제한 할 수 있습니다.
+
+```
+"max-lines-per-function": ["error", { "max": 15 }]
 ```
