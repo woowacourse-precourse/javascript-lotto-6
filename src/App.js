@@ -1,61 +1,73 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
+import { Lotto, Bonus } from "./Lotto.js";
 
+const number = new Lotto();
+const bonus = new Bonus();
 class App {
+  #numbers;
+  bonus;
+  pickNumber;
+
   constructor() {
-    this.lottos = [];
-    this.prizeMoney = {
+    this.#numbers = [];
+    this.bonus = 0;
+    this.pickNumber = [];
+  }
+
+  async play() {
+    //가격 입력 받음
+    const price = MissionUtils.Console.readlineAsync();
+
+    // 내 로또 번호 입력 받음
+    this.pickNumber = MissionUtils.Console.readlineAsync();
+
+    //로도 껼과 계산
+    const result = this.calResult();
+
+    //결과 출력
+    this.printResult();
+    //입력받은 가격에 대해 로또 생성
+    this.buyLottos();
+
+    //당첨 번호 입력
+    this.enterWinningNum();
+  }
+
+  //로또 구매 및 장수만큼 로또 번호 생성
+  buyLottos(price) {
+    const numOfLottos = Math.floor(price / 1000);
+    MissionUtils.Console.print(`${numOfLottos}개를 구매했습니다.`);
+    
+    }
+  }
+
+  //로또 결과 계산 함수
+  calResult() {
+    const prizeMoney = {
       3: 5000,
       4: 50000,
       5: 1500000,
-      // 5+1: 30000000,
+      "5+1": 30000000,
       6: 2000000000,
     };
   }
 
-  //플레이
-  async play() {
-    this.buyLottos();
+  //결과 출력 함수
+  printResults() {}
+
+  //수익률 계산 함수
+  calProfitRate() {}
+
+  //당첨 번호 입력 함수
+  enterWinningNumber() {
+    MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
+    this.lottos;
+  }
+  //보너스 번호 입력 함수
+  enterBonusNumber() {
+    MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
+    this.bonus;
   }
 
-  //로또 구매 및 로또 장 수
-  buyLottos() {
-    const payment =
-      MissionUtils.Console.readlineAsync("구입금액을 입력해주세요.");
-    const numOfLottos = Math.floor(payment / 1000);
-
-    MissionUtils.Console.print(`${numOfLottos} 장의 로또를 구매하였습니다.`);
-  }
-  //구매한 로또 수 만큼 로또 번호 생성
-  generateLottoNumbers() {
-    const lottoNumbers = [];
-    while (lottoNumbers.length < 6) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 45);
-      if (!lottoNumbers.includes(randomNumber)) {
-        lottoNumbers.push(randomNumber);
-      }
-    }
-    return lottoNumbers;
-  }
-
-  //pickedNumber
-
-  //생성된 로또 번호와 구매한 로또 번호를 비교하여 결과 출력(6개 숫자, 보너스 숫자)
-  compareNumbers() {
-    const lottoNumbers = [1, 2, 3, 4, 5, 6];
-    const picknum1 = [1, 2, 5, 7, 24, 35];
-    let count = 0;
-    lottoNumbers.forEach((element) => {
-      if (picknum1.includes(element)) count++;
-    });
-    console.log("highligh");
-    MissionUtils.Console.print(`${count}개 맞춤`);
-  }
-
-  // //상금 가져가기
-  // // this.prizeMoney(count) {
-  // count : prizeMoney.count //count수에 따른 상금
-  // }
-}
 
 export default App;
