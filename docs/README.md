@@ -86,7 +86,6 @@ classDiagram
     +constructor(purchaseMoney)
     +issueTickets()
     +calculatePrizeResult(winningNumbers, bonusNumber)
-    +getPrize()
     +calculateProfitRate()
   }
 
@@ -104,10 +103,7 @@ classDiagram
   }
 
   class LottoTicket {
-    -tickets
-    +constructor(purchaseMoney)
-    +getTickets()
-    -issueTickets(purchaseMoney)
+    +issueTickets(purchaseMoney)
     -createLotto()
   }
 

@@ -18,12 +18,8 @@ class LottoService {
   }
 
   issueTickets() {
-    this.#tickets = new LottoTicket(this.#purchaseMoney).getTickets();
+    this.#tickets = new LottoTicket().issueTickets(this.#purchaseMoney);
     return this.#tickets;
-  }
-
-  getPrize() {
-    return this.#prize;
   }
 
   calculatePrizeResult(winningNumbers, bonusNumber) {
@@ -32,6 +28,7 @@ class LottoService {
         new Lotto(numbers).checkPrize(winningNumbers, bonusNumber),
       );
     });
+    return this.#prize;
   }
 
   countPrize(prize) {

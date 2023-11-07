@@ -48,13 +48,16 @@ class LottoGameController {
   }
 
   #checkPrizeStage(winningNumbers, bonusNumber) {
-    this.#lottoService.calculatePrizeResult(winningNumbers, bonusNumber);
-    this.#printResultStage();
+    const prize = this.#lottoService.calculatePrizeResult(
+      winningNumbers,
+      bonusNumber,
+    );
+    this.#printResultStage(prize);
   }
 
-  #printResultStage() {
+  #printResultStage(prize) {
     OutputView.printPrizeTitle();
-    OutputView.printPrizeResult(this.#lottoService.getPrize());
+    OutputView.printPrizeResult(prize);
     OutputView.printProfitRate(this.#lottoService.calculateProfitRate());
   }
 }
