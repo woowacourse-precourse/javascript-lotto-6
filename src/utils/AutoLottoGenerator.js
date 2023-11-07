@@ -17,16 +17,15 @@ const AutoLottoGenerator = {
       lottos.push(Random.pickUniqueNumbersInRange(min, max, length));
       count -= minus;
     }
-    if (AutoLottoValidator.validateAutoLotto(lottos)) {
-      return this.sortLotto(lottos);
-    }
+    if (AutoLottoValidator.validateAutoLotto(lottos)) this.sortLotto(lottos);
+
+    return lottos;
   },
 
   sortLotto(lottos) {
     lottos.forEach((lotto) => {
       lotto.sort((a, b) => a - b);
     });
-    return lottos;
   },
 };
 

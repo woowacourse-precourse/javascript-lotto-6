@@ -12,7 +12,7 @@ const mockRandoms = (numbers) => {
 const errorMessage = ERROR_MESSAGE.generateIssue;
 
 describe('자동 로또생성 테스트', () => {
-  test('구매갯수를 입력하면 갯수에 맞게 로또를 자동생성하여 오름차순 정렬합니다', () => {
+  test('구매갯수에 맞게 로또를 자동생성 후, 오름차순 정렬합니다', () => {
     const lottoCount = 2;
     mockRandoms([
       [6, 5, 4, 3, 2, 1],
