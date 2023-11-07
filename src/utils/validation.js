@@ -24,3 +24,8 @@ export const isAvailableNumber = (amount, firstNumber, lastNumber) => {
     throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
 };
 
+export const isAvailableBonusNumber = (winningNumberArray, bonusNumber) => {
+  if (winningNumberArray.includes(bonusNumber))
+    throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
+};
+
