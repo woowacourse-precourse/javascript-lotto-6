@@ -14,7 +14,7 @@ class Random {
   validation(number) {
     const uniqueSet = new Set(number);
     if (uniqueSet.size !== number.length) {
-      MissionUtils.Console.print('[ERROR]');
+      MissionUtils.Console.print('[ERROR]중복된 숫자가 있습니다');
       return false;
     }
     return true;
