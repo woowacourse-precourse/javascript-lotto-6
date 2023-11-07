@@ -2,7 +2,10 @@ import { ERROR_MESSAGE, LOTTO_NUMBER } from './constants.js';
 
 class Validation {
   static validatePurchaseAmount(purchaseAmount) {
-    if (Number(purchaseAmount) % 1000 !== 0 || Number(purchaseAmount) < 1000) {
+    if (
+      Number(purchaseAmount) % LOTTO_NUMBER.minPrice !== 0 ||
+      Number(purchaseAmount) < LOTTO_NUMBER.minPrice
+    ) {
       throw new Error(ERROR_MESSAGE.invalidPusrchaseAmount);
     }
 

@@ -3,7 +3,7 @@ import Inputs from './Inputs.js';
 import Lotto from './Lotto.js';
 import OutputView from './View/OutputView.js';
 import CalculateStats from './CalculateStats.js';
-import { OUTPUT_MESSAGE } from './constants.js';
+import { LOTTO_NUMBER, OUTPUT_MESSAGE } from './constants.js';
 
 class LottoGameController {
   #purchaseAmount = 0;
@@ -57,7 +57,7 @@ class LottoGameController {
   }
 
   getNumberOfLottoTickets(purchaseAmount) {
-    return Math.floor(purchaseAmount / 1000);
+    return Math.floor(purchaseAmount / LOTTO_NUMBER.minPrice);
   }
 
   generateLottoTickets() {
