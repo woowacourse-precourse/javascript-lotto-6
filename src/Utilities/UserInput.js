@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE } from "./Constant.js";
-import Validator from "./Validator.js";
+import { MESSAGE } from "../Utilities/Constant.js";
+import Validator from "../Utilities/Validator.js";
 
 const UserInput = {
   async inputAmount() {

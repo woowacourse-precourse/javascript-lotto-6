@@ -1,4 +1,4 @@
-import Validator from "../src/Validator";
+import Validator from "../src/Utilities/Validator.js";
 
 describe("Validator 모듈 테스트", () => {
   test("validateAmount(): 유효한 구입 금액일 때 예외를 던지지 않는다.", () => {

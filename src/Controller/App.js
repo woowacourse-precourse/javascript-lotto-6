@@ -1,7 +1,7 @@
-import Lotto from "./Lotto.js";
-import LottoCalculator from "./LottoCalculator.js";
-import UserInput from "./UserInput.js";
-import LottoView from "./LottoView.js";
+import Lotto from "../Model/Lotto.js";
+import LottoCalculator from "../Model/LottoCalculator.js";
+import UserInput from "../Utilities/UserInput.js";
+import LottoView from "../View/LottoView.js";
 
 class App {
   async play() {
@@ -20,6 +20,7 @@ class App {
     const view = new LottoView();
     const purchaseData = view.createPurchaseData(numberOfSets, lottoNumbers);
     const lottoResult = view.createLottoResult(statistics);
+
     const result = `${purchaseData}\n${lottoResult}`;
 
     view.displayResult(result);

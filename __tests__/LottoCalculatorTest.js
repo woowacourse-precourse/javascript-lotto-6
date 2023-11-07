@@ -1,4 +1,4 @@
-import LottoCalculator from "../src/LottoCalculator.js";
+import LottoCalculator from "../src/Model/LottoCalculator.js";
 
 describe("LottoCalculator 클래스 테스트", () => {
   test("calculateStatistics(): 6개 일치일 때 적절한 통계를 계산한다.", () => {

@@ -1,4 +1,4 @@
-import { ERRORS } from "./Constant.js";
+import { ERRORS } from "../Utilities/Constant.js";
 
 const Validator = {
   validateAmount(amount) {
