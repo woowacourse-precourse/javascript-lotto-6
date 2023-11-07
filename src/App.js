@@ -7,22 +7,31 @@ class App {
     this.userMoneyInput;
     this.userByLottoList = [];
     this.countWinner = {
-      1:0,
-      2:0,
-      3:0,
-      4:0,
-      5:0,
-      0:0
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      0: 0
     }
   }
 
   async play() {
+    await this.user();
+    await this.lottoMachine();
+  }
+
+  async user(){
     await this.userInput();
     this.totalLottoListUser();
+  }
+
+  async lottoMachine(){
     await this.settingLottoNumber();
     await this.settingLottoBonusNumber();
     this.checkLottoResult();
   }
+
 
   async userInput() {
     while (true) {
@@ -42,7 +51,7 @@ class App {
         this.checkUserMoney(userInput);
         break;
       } catch (error) {
-          Console.print(error.message);
+        Console.print(error.message);
       }
     }
     return userInput;
@@ -68,7 +77,7 @@ class App {
 
     for (let i = 0; i < num; i++) {
       let randomNumbers = this.generateRandomNumber();
-      randomNumbers.sort(function(a,b){
+      randomNumbers.sort(function (a, b) {
         return a - b;
       })
       Console.print(`[${randomNumbers.join(', ')}]`);
@@ -79,7 +88,7 @@ class App {
   }
 
   generateRandomNumber() {
-    const lottoNumber =  Random.pickUniqueNumbersInRange(1, 45, 7);
+    const lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 7);
     return lottoNumber;
   }
   async settingLottoNumber() {
@@ -91,7 +100,7 @@ class App {
 
         if (!isDuplicate && numbers.length === 6) {
           this.winningLotto = numbers;
-          break; 
+          break;
         } else {
           // Console.print(ERROR.INVALID_INPUT_IS_DUPLICATED);
         }
@@ -102,9 +111,9 @@ class App {
   }
 
   async settingLottoBonusNumber() {
-    while (true){
-      try{
-        const result =  await Console.readLineAsync("보너스 번호를 입력해 주세요");
+    while (true) {
+      try {
+        const result = await Console.readLineAsync("보너스 번호를 입력해 주세요");
         const isDuplicate = this.winningLotto.includes(Number(result));
         if (!isDuplicate) {
           this.winningLotto.push(Number(result));
@@ -118,10 +127,10 @@ class App {
     }
   }
 
-  async checkLottoResult(){
+  async checkLottoResult() {
     const mainNumber = this.winningLotto.slice(0, 6);
     const bonusNumber = this.winningLotto.slice(6);
-    
+
     this.userByLottoList.forEach((lotto, index) => {
       let checkNumber = mainNumber.filter(x => lotto.includes(x));
       let countScore = checkNumber.length;
@@ -147,7 +156,7 @@ class App {
     // 아무도 걸리지 않은 등수 값 0 처리 
     for (const score in this.countWinner) {
       if (this.countWinner[score] === 0) {
-        this.countWinner[score] = 0; 
+        this.countWinner[score] = 0;
       }
     }
 
