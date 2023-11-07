@@ -55,6 +55,24 @@ class App {
         });
         return numbers;
     }
+
+    getBonusNumbers(winNumbers, bonusNumber) {
+        bonusNumber = Number(bonusNumber);
+
+        if (winNumbers.includes(bonusNumber)) {
+            throw new Error('[ERROR] 보너스 번호에 당첨 번호가 있습니다.');
+        }
+
+        if (isNaN(bonusNumber)) {
+            throw new Error('[ERROR] 숫자가 아닌 문자가 있습니다.');
+        }
+
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new Error('[ERROR] 보너스 번호는 1부터 45사이여야 합니다.');
+        }
+
+        return bonusNumber;
+    }
 }
 
 export default App;
