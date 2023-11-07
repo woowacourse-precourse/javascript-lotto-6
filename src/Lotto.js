@@ -66,4 +66,16 @@ function printResult(result) {
   Console.print(`6개 일치 (2,000,000,000원) - ${result[0]}개`);
 }
 
+function profit(price, result) {
+  const totalPrize =
+    result[0] * 2000000000 +
+    result[1] * 30000000 +
+    result[2] * 1500000 +
+    result[3] * 50000 +
+    result[4] * 5000;
+
+  const profit = ((totalPrize / price) * 100).toFixed(2);
+  Console.print(`총 수익률은 ${profit}%입니다.`);
+}
+
 export default Lotto;
