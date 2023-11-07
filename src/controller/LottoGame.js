@@ -3,19 +3,32 @@ import Output from '../view/Output.js';
 import Buyer from '../model/Buyer.js';
 import Util from '../utils/Util.js';
 import WinLotto from '../model/WinLotto.js';
+import Result from '../model/Result.js';
 
 class LottoGame {
   #buyer;
 
   #winLotto;
 
-  #bonusLotto;
+  #result;
 
   async start() {
     await this.setBuyer();
     this.printPurchaseInfo();
     await this.setWinLotto();
     await this.setBonusLotto();
+    this.getResult();
+    this.printResult();
+  }
+
+  getResult() {
+    this.#result = new Result(this.#buyer.getLottoList(), this.#winLotto.getLotto(), this.#winLotto.getBonusLotto());
+  }
+
+  printResult() {
+    this.#result.getResults().forEach((each) => {
+      Output.print(`${each}`);
+    });
   }
 
   async setBuyer() {
@@ -54,7 +67,6 @@ class LottoGame {
       const bonusLotto = await Input.getBonusLotto();
       try {
         this.#winLotto.setBonusLotto(Number(bonusLotto));
-        this.#bonusLotto = this.#winLotto.getBonusLotto();
         break;
       } catch (error) {
         Output.print(error.message);
