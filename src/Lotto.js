@@ -1,39 +1,29 @@
-import { ERROR_MESSAGE } from "./constants/message.js";
-import {
-  InvalidLottoNumberCountError,
-  DuplicatedNumberError,
-  NotNumberError,
-  InvalidNumberRangeError,
-  NotIntegerError,
-  InvalidBonusNumberCountError,
-} from "./utils/Error.js";
+import { COMMON_NUMBER_VALIDATOR, LOTTO_NUMBERS_VALILDATOR } from "./utils/validation.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validateLottoNumbers(numbers);
+    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  #validateLottoNumbers(numbers) {
-    if (numbers.length !== 6) throw new InvalidLottoNumberCountError(ERROR_MESSAGE.invalidLottoNumberCount);
-    if (new Set(numbers).size !== numbers.length) throw new DuplicatedNumberError(ERROR_MESSAGE.duplicatedNumber);
-    this.#validateCommon(numbers);
-  }
-  // TODO: 추가 기능 구현
-  #validateBonusNumber(bonusNumber, lottoWinningNumbers) {
-    if (bonusNumber.length !== 1) throw new InvalidBonusNumberCountError(ERROR_MESSAGE.invalidBonusNumberCount);
-    if (new Set(bonusNumber.concat(lottoWinningNumbers)).size === lottoWinningNumbers.length)
-      throw new DuplicatedNumberError(ERROR_MESSAGE.duplicatedNumber);
-    this.#validateCommon(bonusNumber);
+  #validate(numbers) {
+    this.#validateLottoNumbers(numbers);
+    this.#validateCommonNumber(numbers);
   }
 
-  #validateCommon(numbers) {
-    if (numbers.some(isNaN)) throw new NotNumberError(ERROR_MESSAGE.notNumber);
-    if (numbers.some((number) => number < 1 || number > 45))
-      throw new InvalidNumberRangeError(ERROR_MESSAGE.invalidNumberRange);
-    if (numbers.some((number) => !Number.isInteger(number))) throw new NotIntegerError(ERROR_MESSAGE.notInteger);
+  #validateLottoNumbers(numbers) {
+    Object.values(LOTTO_NUMBERS_VALILDATOR).forEach((validator) => {
+      validator(numbers);
+    });
+  }
+  // TODO: 추가 기능 구현
+
+  #validateCommonNumber(numbers) {
+    Object.values(COMMON_NUMBER_VALIDATOR).forEach((validator) => {
+      validator(numbers);
+    });
   }
 
   getNumbers() {
@@ -41,8 +31,6 @@ class Lotto {
   }
 
   matchNumbers({ lottoWinningNumbers, bonusNumber }) {
-    this.#validateLottoNumbers(lottoWinningNumbers);
-    this.#validateBonusNumber(bonusNumber, lottoWinningNumbers);
     const lottoWinningNumbersMatchCount = this.#calculateMatchCount(lottoWinningNumbers);
     const bonusNumberMatchCount = this.#calculateMatchCount(bonusNumber);
     return { lottoWinningNumbersMatchCount, bonusNumberMatchCount };

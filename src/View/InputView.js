@@ -1,16 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGE, INPUT_MESSAGE } from "../constants/message.js";
-import {
-  NoInputError,
-  NotNumberError,
-  InvalidAmountRangeError,
-  InvalidAmountUnitError,
-  InvalidLottoNumberCountError,
-  DuplicatedNumberError,
-  InvalidBonusNumberCountError,
-  InvalidNumberRangeError,
-  NotIntegerError,
-} from "../utils/Error.js";
+import { PURCHASE_AMOUNT_VALIDATOR, LOTTO_NUMBERS_VALILDATOR, COMMON_NUMBER_VALIDATOR, BONUS_NUMBER_VALIDATOR } from "../utils/validation.js";
 
 class InputView {
   async readLottoPurchaseAmount() {
@@ -26,41 +16,49 @@ class InputView {
       if (trimmedNumber !== "") numbers.push(Number(trimmedNumber));
       return numbers;
     }, []);
-    this.#validateLottoNumbers(validatedLottoNumbers);
+    this.#validateLottoNumbersInput(validatedLottoNumbers);
     return validatedLottoNumbers;
   }
 
   async readBonusNumber(lottoWinningNumbers) {
     const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
     const validatedBonusNumber = bonusNumber.split(",").map(Number);
-    this.#validateBonusNumber(validatedBonusNumber, lottoWinningNumbers);
+    this.#validateBonusNumberInput(validatedBonusNumber, lottoWinningNumbers);
     return validatedBonusNumber;
   }
 
   #validatePurchaseAmount(purchaseAmount) {
-    if (purchaseAmount === "") throw new NoInputError(ERROR_MESSAGE.noInput);
-    if (isNaN(purchaseAmount)) throw new NotNumberError(ERROR_MESSAGE.notNumber);
-    if (purchaseAmount < 1000) throw new InvalidAmountRangeError(ERROR_MESSAGE.invalidAmountRange);
-    if (purchaseAmount % 1000 !== 0) throw new InvalidAmountUnitError(ERROR_MESSAGE.invalidAmountUnit);
+    Object.values(PURCHASE_AMOUNT_VALIDATOR).forEach((validator) => {
+      validator(purchaseAmount);
+    });
+  }
+
+  #validateLottoNumbersInput(numbers) {
+    this.#validateLottoNumbers(numbers);
+    this.#validateCommonNumber(numbers);
+  }
+
+  #validateBonusNumberInput(bonusNumber, lottoWinningNumbers) {
+    this.#validateBonusNumber(bonusNumber, lottoWinningNumbers);
+    this.#validateCommonNumber(bonusNumber);
   }
 
   #validateLottoNumbers(numbers) {
-    if (numbers.length !== 6) throw new InvalidLottoNumberCountError(ERROR_MESSAGE.invalidLottoNumberCount);
-    if (new Set(numbers).size !== numbers.length) throw new DuplicatedNumberError(ERROR_MESSAGE.duplicatedNumber);
-    this.#validateCommon(numbers);
+    Object.values(LOTTO_NUMBERS_VALILDATOR).forEach((validator) => {
+      validator(numbers);
+    });
   }
 
   #validateBonusNumber(bonusNumber, lottoWinningNumbers) {
-    if (bonusNumber.length !== 1) throw new InvalidBonusNumberCountError(ERROR_MESSAGE.invalidBonusNumberCount);
-    if (new Set(bonusNumber.concat(lottoWinningNumbers)).size === lottoWinningNumbers.length)
-      throw new DuplicatedNumberError(ERROR_MESSAGE.duplicatedNumber);
-    this.#validateCommon(bonusNumber);
+    Object.values(BONUS_NUMBER_VALIDATOR).forEach((validator) => {
+      validator(bonusNumber, lottoWinningNumbers);
+    });
   }
 
-  #validateCommon(numbers) {
-    if (numbers.some(isNaN)) throw new NotNumberError(ERROR_MESSAGE.notNumber);
-    if (numbers.some((number) => number < 1 || number > 45)) throw new InvalidNumberRangeError(ERROR_MESSAGE.invalidNumberRange);
-    if (numbers.some((number) => !Number.isInteger(number))) throw new NotIntegerError(ERROR_MESSAGE.notInteger);
+  #validateCommonNumber(numbers) {
+    Object.values(COMMON_NUMBER_VALIDATOR).forEach((validator) => {
+      validator(numbers);
+    });
   }
 }
 
