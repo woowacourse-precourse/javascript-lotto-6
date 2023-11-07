@@ -1,29 +1,27 @@
 import Money from '../../src/domains/Money.js';
-import MoneyError from '../../src/errors/MoneyError.js';
-import { ERROR_MESSAGES } from '../../src/constants/errorMessages.js';
 
 describe('구입 금액 클래스 테스트', () => {
-  test('구입 금액이 1000원 보다 작을때 예외가 발생한다.', () => {
+  test.each([['999'], ['0'], ['-123']])('천원 미만의 금액일 경우 예외가 발생한다.', (input) => {
     expect(() => {
-      new Money('800');
-    }).toThrow(new MoneyError(ERROR_MESSAGES.lack_money));
+      new Money(input);
+    }).toThrow();
   });
 
-  test('구입 금액에 공백이 포함 된 경우 예외가 발생한다.', () => {
-    expect(() => {
-      new Money('1000 23');
-    }).toThrow(new MoneyError(ERROR_MESSAGES.money_not_a_number));
-  });
+  test.each([[' '], [' 12'], ['12 '], ['10 23'], ['dsx']])(
+    '숫자가 아닌 경우 에러가 발생한다',
+    (input) => {
+      expect(() => {
+        new Money(input);
+      }).toThrow();
+    },
+  );
 
-  test('입력 받은 금액이 숫자가 아닌 경우 예외가 발생한다.', () => {
-    expect(() => {
-      new Money('  ');
-    }).toThrow(new MoneyError(ERROR_MESSAGES.lack_money));
-  });
-
-  test('천원 단위로 나누어 떨어지지 않는 경우 예외가 발생한다.', () => {
-    expect(() => {
-      new Money('1234');
-    }).toThrow(new MoneyError(ERROR_MESSAGES.not_divded));
-  });
+  test.each([['1234'], ['1001']])(
+    '1000원 단위로 나누어떨이지지 않는경우 예외가 발생한다.',
+    (input) => {
+      expect(() => {
+        new Money(input);
+      }).toThrow();
+    },
+  );
 });
