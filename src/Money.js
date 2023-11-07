@@ -12,8 +12,14 @@ class Money {
   };
   getPayedMoney = async () => {
     this.payedMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    this.noInputError(this.payedMoney);
   };
-  calLottoCount = async() => {
+  noInputError = (input) => {
+    if (input === '') {
+      throw new Error('[ERROR] 입력값이 없습니다.');
+    }
+  };
+  calLottoCount = async () => {
     this.lottoCount = this.payedMoney / this.LOTTO_PRICE;
   };
   printCalLottoCount = () => {
