@@ -1,6 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import { checkValue } from './libs/checkValue';
-import { AMOUNT, LOTTO, PLACE, WINNING_DETAIL } from './libs/constants';
+import { AMOUNT, LOTTO, PLACE, PRIZE, WINNING_DETAIL } from './libs/constants';
 import Lotto from './Lotto';
 
 class Lottos {
@@ -77,10 +77,30 @@ class Lottos {
       WINNING_DETAIL.FIRST,
     ];
     winningDetails.forEach((winningDetail, idx) => {
-      const winningCount = this.winningTicketCoun(lottoRanks, idx);
+      const winningCount = this.winningTicketCount(lottoRanks, idx);
 
       Console.print(`${winningDetail} - ${winningCount}개`);
     });
+  }
+
+  //로또 수익률 계산
+  calculateRate(lottoRanks) {
+    const lottoPrizes = [
+      PRIZE.FIFTH,
+      PRIZE.FOURTH,
+      PRIZE.THIRD,
+      PRIZE.SECOND,
+      PRIZE.FIRST,
+    ];
+    const totalPrize = lottoPrizes.reduce((acc, cur, idx) => {
+      const winningCount = this.winningTicketCount(lottoRanks, idx);
+      return acc + cur * winningCount;
+    }, 0);
+
+    const purchaseAmount = this.count * AMOUNT.UNIT;
+
+    //소수점 반올림
+    return ((totalPrize / purchaseAmount) * 100).toFixed(1);
   }
 }
 
