@@ -2,7 +2,6 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import LottoManagement from "./LottoManagement.js";
 import LottoResultChecker from "./LottoResultChecker.js";
-const numericPattern = /^\d+$/;
 const lottoPrice = 1000;
 class App {
   constructor() {
@@ -10,7 +9,8 @@ class App {
     this.lottoResultChecker = new LottoResultChecker();
   }
   async play() {
-    this.purchasePrice = await this.inputPurchasePrice();
+    this.inputPurchasePrice = await this.inputPurchasePrice();
+    this.purchasePrice = this.convertToNum(this.inputPurchasePrice);
     this.checkValidationInputPrice(this.purchasePrice);
     const lottoCount = Number(this.purchasePrice / lottoPrice);
 
@@ -55,19 +55,29 @@ class App {
 
   async inputPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    return +input;
+    return input;
   }
-  checkValidationInputPrice() {
-    if (isNaN(this.purchasePrice)) {
+
+  checkValidationInputPrice(purchasePrice) {
+    if (isNaN(purchasePrice)) {
       throw new Error("[ERROR] 숫자만 입력이 가능합니다.");
+    }
+    if (purchasePrice % 1000 !== 0 || purchasePrice <= 0) {
+      throw new Error("[ERROR] 1,000원 단위로 입력해 주세요.");
+    }
+    if (purchasePrice % 1 !== 0) {
+      throw new Error("[ERROR] 자연수만 입력이 가능합니다.");
+    }
+    if (purchasePrice.toString() !== this.inputPurchasePrice) {
+      throw new Error("[ERROR] 잘못된 입력 형식입니다.");
     }
   }
   async inputBonusNumber() {
     return await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
   }
 
-  convertToNum(bonus) {
-    return Number(bonus);
+  convertToNum(str) {
+    return Number(str);
   }
 
   checkValidateInputBonus(bonus) {
