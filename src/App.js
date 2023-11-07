@@ -11,6 +11,7 @@ class App {
   async play() {
     const price = await getValidPrice();
     const excution = excutionNumber(price);
+
     resultView(excution, price);
     const number = await numberValid();
     const bonusNumber = await bonusNumberValid(number);
