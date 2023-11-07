@@ -30,17 +30,20 @@ class App {
   }
 
   async setLotto() {
-    const pay = await ask.payment();
-    const baseNums = await ask.baseNumbers();
-    const bonusNum = await ask.bonusNumber();
+    try {
+      const pay = await ask.payment();
+      const baseNums = await ask.baseNumbers();
+      const bonusNum = await ask.bonusNumber();
 
-    this.payment.setUserPayment(pay);
-    this.base.setBaseNumbers(baseNums);
-    this.bonus.setBonusNumber(bonusNum);
+      this.payment.setUserPayment(pay);
+      this.base.setBaseNumbers(baseNums);
+      this.bonus.setBonusNumber(bonusNum);
 
-    Console.print(`지불금액: ${pay}`);
-    Console.print(`기본숫자: ${baseNums}`);
-    Console.print(`보너스숫자: ${bonusNum}`);
+      const lottoNumbers = this.base.getBaseNumbers();
+      new Lotto(lottoNumbers);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   createLotto() {
