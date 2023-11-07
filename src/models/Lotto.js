@@ -34,6 +34,16 @@ class Lotto {
         break;
     }
   }
+
+  printTotalPrize(TIKET) {
+    OutputView.print(Print.end_Game);
+    this.processPrize(this.matchThree, GameSetting.prize_5st, Print.prize_5st);
+    this.processPrize(this.matchFour, GameSetting.prize_4nd, Print.prize_4nd);
+    this.processPrize(this.matchFive, GameSetting.prize_3rd, Print.prize_3rd);
+    this.processPrize(this.matchFiveBonus, GameSetting.prize_2th, Print.prize_2th);
+    this.processPrize(this.matchSix, GameSetting.prize_1th, Print.prize_1th);
+    OutputView.print(Print.totalPrizeFirst + this.profitRate(TIKET) + Print.totalPrizeEnd);
+  }
 }
 
 export default Lotto;
