@@ -21,6 +21,10 @@ class Util {
       }
     }
   }
+
+  static getPurchaseNumber(userMoney) {
+    return userMoney / 1000;
+  }
 }
 
 export default Util;
