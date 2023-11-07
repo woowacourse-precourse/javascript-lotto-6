@@ -1,5 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-// import { matchNumber, printPercentage } from "./resultCalculator";
+import Lotto from "./Lotto.js";
 
 class App {
   async play() {
@@ -9,13 +9,14 @@ class App {
     Console.print(`\n${lottos}개를 구매했습니다.`);
     
     const randomNumbers = this.setRandomNumber(lottos);
-    const lottonumber = await this.getLottoNumber('\n당첨 번호를 입력해 주세요.\n', 6);
-    const bonumNumber = await this.getBonusNumber(lottonumber);
+    const lotto = await this.getLottoNumber('\n당첨 번호를 입력해 주세요.\n');
+    const returnLottoNumber = lotto.getNumber();
+    const bonumNumber = await this.getBonusNumber(returnLottoNumber);
 
     Console.print('\n당첨 통계');
     Console.print('---');
 
-    const [matchThree, matchFour, matchFive, matchFiveBonus, matchSix] = this.matchNumber(randomNumbers, lottonumber, bonumNumber);
+    const [matchThree, matchFour, matchFive, matchFiveBonus, matchSix] = this.matchNumber(randomNumbers, returnLottoNumber, bonumNumber);
 
     this.printPercentage(matchThree, matchFour, matchFive, matchFiveBonus, matchSix, money);
   }
@@ -51,26 +52,19 @@ class App {
     const randomNumbers = [];
     for (let i = 0; i < count; i++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      numbers.sort((a, b) => a - b);
-      randomNumbers.push(numbers);
+      if (!randomNumbers.includes(numbers)) {
+        numbers.sort((a, b) => a - b);
+        randomNumbers.push(numbers);
+      }
       Console.print(`[${numbers.join(', ')}]`);
     }
     return randomNumbers;
   }
   
-  async getLottoNumber(prompt, expectedCount) {
+  async getLottoNumber(prompt) {
     return this.retryValid(prompt, (input) => {
-      const lottonumber = input.split(',').map(Number);
-      if (lottonumber < 1 || lottonumber > 45) {
-        throw new Error('[ERROR] 1 ~ 45까지의 숫자만 입력 가능합니다.');
-      }
-      if (lottonumber.length !== 6) {
-        throw new Error('[ERROR] 6개의 숫자만 입력해주세요');
-      }
-      if (new Set(lottonumber).size !== expectedCount) {
-        throw new Error('[ERROR] 중복된 번호를 입력하셨습니다.');
-      }
-      return lottonumber;
+      const inputNumbers = input.split(',').map(Number);
+      return new Lotto(inputNumbers);
     });
   }
 
