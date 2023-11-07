@@ -9,6 +9,8 @@ class User {
 
   #prize;
 
+  #purchaseAmount;
+
   constructor(purchaseAmount) {
     this.lottos = this.#generateLotto(purchaseAmount);
     this.#prize = {
@@ -18,6 +20,7 @@ class User {
       secondPrize: 0,
       firstPrize: 0,
     };
+    this.#purchaseAmount = purchaseAmount;
   }
 
   #generateLotto(purchaseAmount) {
@@ -59,6 +62,11 @@ class User {
       (acc, [prize, count]) => acc + PRIZE_REWARD[prize] * count,
       0,
     );
+  }
+
+  calculateEarningRate() {
+    const earningRate = (this.calculateReward() / this.#purchaseAmount) * 100;
+    return earningRate.toFixed(1);
   }
 }
 
