@@ -11,6 +11,8 @@ class App {
     const budgetPrice = new InputPrice(budgetInput);
     budgetPrice.validate(budgetInput)
     const numLotto = budgetPrice.calculateLottoCount(budgetInput);
+    Console.print("");
+
     const randomLottoArr = printLotto(numLotto);
 
     const lottoInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
@@ -27,26 +29,19 @@ class App {
 
 // 랜덤 로또 번호 생성
 function makeLotto() {
-  const randomLotto = [];
-  while (randomLotto.length < 6) {
-    const number = Random.pickNumberInRange(1, 45);
-    if (!randomLotto.includes(number)) {
-      randomLotto.push(number);
-    }
-  }
-  // 배열을 오름차순으로 정렬
-  randomLotto.sort((a, b) => a - b)
+  const randomLotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+  randomLotto.sort((a, b) => a - b);
   return randomLotto;
 }
 
 // 랜덤 로또 번호 출력과 저장
 function printLotto(numLotto) {
-  const randomLottoArr = []
-  Console.print("");
   Console.print(String(numLotto) + "개를 구매했습니다.")
+  const randomLottoArr = []
   for (let i = 0; i < numLotto; i++) {
-    Console.print(makeLotto())
-    randomLottoArr.push(makeLotto())
+    const lottoNumbers = makeLotto();
+    Console.print("[" + lottoNumbers.join(", ") + "]");
+    randomLottoArr.push(lottoNumbers);
   }
   Console.print("");
   return randomLottoArr;
