@@ -1,4 +1,20 @@
-import { RESULT } from '../../constants/constants.js';
+import { PRIZE_MONEY, RESULT } from '../../constants/constants.js';
+
+const calculateProfit = winningResults => {
+  let winningPrice = 0;
+
+  Object.keys(winningResults).forEach(rank => {
+    winningPrice += winningResults[rank] * PRIZE_MONEY[rank];
+  });
+
+  return winningPrice;
+};
+
+const calculateProfitRate = (startMoney, winningMoney) => {
+  const rate = ((winningMoney / startMoney) * 100).toFixed(1);
+
+  return Number(rate);
+};
 
 const filterLottoNumbers = (winningNumbers, lottoNumbers) => {
   const filteredNumber = lottoNumbers.filter(number => {
@@ -33,4 +49,4 @@ const countIncludeNumbers = (lottoResults, winningNumbers, bonusNumber, lottoNum
   return updatedLottoResults;
 };
 
-export { countIncludeNumbers };
+export { calculateProfit, calculateProfitRate, countIncludeNumbers };

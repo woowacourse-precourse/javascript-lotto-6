@@ -3,7 +3,8 @@ import Input from './utils/inputOutput/Input.js';
 import Output from './utils/inputOutput/Output.js';
 import { parsedNumber, validateNumber, isIncludedBonusNumbers, validatedPrice } from './utils/validation/validation.js';
 import { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
-
+import { calculateProfit, calculateProfitRate, countIncludeNumbers } from './utils/calculate/calculate.js';
+import { MESSAGE } from './constants/constants.js';
 
 class StartGame {
   #inputMoney;
@@ -16,6 +17,14 @@ class StartGame {
 
   #winningNumbers;
 
+  #lottoResults = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  };
+
   constructor() { }
 
   async runGame() {
@@ -25,6 +34,8 @@ class StartGame {
     Output.print(`${MESSAGE.BLINK}${this.#purchaseAmount}${MESSAGE.NUMBER_OF_LOTTO}`);
 
     this.purchaseLottos();
+
+    await this.inputWinningNumbers();
   }
 
   async getValidatedPurchaseInput() {
@@ -85,6 +96,11 @@ class StartGame {
 
       return this.getValidatedBonusNumberInput(message);
     }
+  }
+
+  printProfits() {
+    this.#lottoResults = countIncludeNumbers(this.#lottoResults, this.#winningNumbers, this.#bonusNumber, this.#purchasedLottos);
+
   }
 }
 
