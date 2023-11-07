@@ -5,7 +5,7 @@ import View from './View.js';
 import Computer from './Computer.js';
 
 class App {
-  #amount;
+  amount;
 
   userLotto;
 
@@ -20,8 +20,8 @@ class App {
   }
 
   async getPrice() {
-    this.#amount = await View.inputAmountOfMoney();
-    this.userLotto = new UserLotto(this.#amount / 1000);
+    this.amount = await View.inputAmountOfMoney();
+    this.userLotto = new UserLotto(this.amount / 1000);
   }
 
   showLottos() {
@@ -49,6 +49,10 @@ class App {
     });
   }
 
+  computeEarningRate() {
+    this.computer.earningRate(this.amount, this.computer.state);
+  }
+
   showComputeResult() {
     View.outputComputeResult(this.computer.state);
   }
@@ -60,6 +64,7 @@ class App {
     await this.getWinningNumber();
     await this.getBonusNumber();
     this.computeConditions();
+    this.computeEarningRate();
     this.showComputeResult();
   }
 }

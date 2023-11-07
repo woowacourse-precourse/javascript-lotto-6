@@ -24,6 +24,17 @@ class Computer {
       this.state.rank1.count += 1;
     }
   }
+
+  earningRate(amount, resultObject) {
+    let sum = 0;
+    const rankList = Object.values(resultObject);
+    for (let i = 0; i < 5; i += 1) {
+      if (rankList[i].count > 0) {
+        sum += rankList[i].count * rankList[i].prize;
+      }
+    }
+    return ((sum / amount) * 100).toFixed(1);
+  }
 }
 
 export default Computer;
