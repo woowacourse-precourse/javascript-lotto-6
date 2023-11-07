@@ -14,6 +14,20 @@ class InputView {
       }
     }
   }
+
+  static async readWinningNumbers() {
+    while (true) {
+      const input = await Console.readLineAsync(INPUT_MESSAGE.winningNumbers);
+      const winningNumbers = input.split(',').map(Number);
+
+      try {
+        Validator.winningNumberValidator(winningNumbers);
+        return winningNumbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
 }
 
 export default InputView;
