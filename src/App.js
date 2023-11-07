@@ -12,6 +12,7 @@ class App {
     const lottos = repeatMakeLotto(lottoTicket);
 
     printLottos(lottos);
+    const winningNumbers = await inputWinning();
   }
 }
 

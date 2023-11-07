@@ -24,3 +24,19 @@ export const inputMoney = async () => {
     }
   }
 };
+
+// 8.당첨번호 사용자에게 입력받기
+export const inputWinning = async () => {
+  while (true) {
+    try {
+      let input = await Console.readLineAsync(
+        `${INPUT_MESSAGE.WINNING_NUMBER}`
+      );
+      // 9. 번호 유효성검사
+      let validWinningnumbers = validateWinningNumber(input);
+      if (validWinningnumbers) return validWinningnumbers;
+    } catch (error) {
+      winningNumberErrorCase(error.message);
+    }
+  }
+};
