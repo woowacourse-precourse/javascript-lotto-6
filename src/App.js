@@ -9,21 +9,22 @@ class App {
 
   async play() {
     try {
-      await this.guess.buyLotto();
-
-      Console.print(`\n${this.guess.getLottoPieces()}개를 구매했습니다.`);
-
-      for (let i = 1; i <= this.guess.getLottoPieces(); i += 1) {
-        Console.print(this.guess.generateLottoNumber());
-      }
-      Console.print('');
-
+      this.buyAndPrintLotto();
       const winningNumber = await this.guess.inputLottoNumber();
-
       await this.checkWinning(winningNumber);
     } catch (error) {
       Console.print(error.message);
     }
+  }
+
+  async buyAndPrintLotto() {
+    await this.guess.buyLotto();
+
+    Console.print(`${this.guess.getLottoPieces()}개를 구매했습니다.`);
+    for (let i = 1; i <= this.guess.getLottoPieces(); i += 1) {
+      Console.print(this.guess.generateLottoNumber());
+    }
+    Console.print('');
   }
 
   async checkWinning(winningNumber) {
