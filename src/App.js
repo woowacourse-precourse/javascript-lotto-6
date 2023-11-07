@@ -1,11 +1,11 @@
-import Controller from './controller/Controller.js';
+import LottoGame from './components/LottoGame.js';
 
 export default class App {
   constructor() {
-    this.controller = new Controller();
+    this.lottoGame = new LottoGame();
   }
 
   async play() {
-    await this.controller.start();
+    await this.lottoGame.start();
   }
 }

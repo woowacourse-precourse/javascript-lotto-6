@@ -1,3 +1,6 @@
+import { Console } from '@woowacourse/mission-utils';
+
+import constant from '../constants/constant.js';
 import errorMessage from '../constants/errorMessage.js';
 
 const Validate = {
@@ -11,6 +14,16 @@ const Validate = {
     this.notNull(inputWinning);
     this.notSpace(inputWinning);
     this.comma(inputWinning);
+    this.sixNumbers(inputWinning);
+    this.notNull(inputWinning);
+    this.outOfRange(inputWinning);
+    this.notDuplicate(inputWinning);
+  },
+
+  bonusNumber(inputBonus) {
+    this.notNull(inputBonus);
+    this.notNull(inputBonus);
+    this.outOfRange(inputBonus);
   },
 
   notNull(inputValue) {
@@ -20,16 +33,32 @@ const Validate = {
   },
 
   onlyNumber(inputValue) {
+    const splitedValue = inputValue.split(',');
     const numberRegExp = /^[0-9]+$/;
-    if (!numberRegExp.test(inputValue)) {
-      throw new Error(errorMessage.ONLY_NUMBER);
-    }
+    splitedValue.forEach((value) => {
+      if (!numberRegExp.test(value)) {
+        throw new Error(errorMessage.ONLY_NUMBER);
+      }
+    });
+  },
+
+  outOfRange(inputValue) {
+    const splitedValue = inputValue.split(',');
+    splitedValue.forEach((value) => {
+      if (
+        !(
+          Number(value) >= constant.MINIMUM && Number(value) <= constant.MAXIMUM
+        )
+      ) {
+        throw new Error(errorMessage.OUT_OF_RANGE);
+      }
+    });
   },
 
   divisible(inputValue) {
     const number = Number(inputValue);
-    if (number === 0 || number % 1000 !== 0) {
-      throw new Error(errorMessage.MONEY.DIVISIBLE);
+    if (number === 0 || number % constant.THOUSAND !== 0) {
+      throw new Error(errorMessage.DIVISIBLE);
     }
   },
 
@@ -37,7 +66,7 @@ const Validate = {
     const splitedValue = inputValue.split(',');
     splitedValue.forEach((value) => {
       if (value.includes(' ')) {
-        throw new Error(errorMessage.WINNING.NOT_SPACE);
+        throw new Error(errorMessage.NOT_SPACE);
       }
     });
   },
@@ -46,9 +75,29 @@ const Validate = {
     const splitedValue = inputValue.split(',');
     splitedValue.forEach((value) => {
       if (value.length === 0) {
-        throw new Error(errorMessage.WINNING.COMMA);
+        throw new Error(errorMessage.COMMA);
       }
     });
+  },
+
+  sixNumbers(inputValue) {
+    const splitedValue = inputValue.split(',');
+    if (splitedValue.length !== constant.COUNT) {
+      throw new Error(errorMessage.SIX_NUMBERS);
+    }
+  },
+
+  notDuplicate(inputValue) {
+    const splitedValue = inputValue.split(',');
+    if (new Set(splitedValue).size !== constant.COUNT) {
+      throw new Error(errorMessage.NOT_DUPLICATE);
+    }
+  },
+
+  notDuplicateBonus(winningNumbers, inputBonus) {
+    if (winningNumbers.includes(Number(inputBonus))) {
+      throw new Error(errorMessage.NOT_DUPLICATE_BONUS);
+    }
   },
 };
 
