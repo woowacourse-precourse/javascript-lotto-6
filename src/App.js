@@ -31,7 +31,7 @@ class App {
       return new Lotto(this.lotto);
     } catch (error) {
       Output.showError(error);
-      return this.inputLottoNumbers();
+      return this.getLottoNumbers();
     }
   }
 
@@ -42,7 +42,7 @@ class App {
       return new BonusNumber(this.bonusNumber);
     } catch (error) {
       Output.showError(error);
-      return this.inputBonusNumber();
+      return this.getBonusNumber();
     }
   }
 
