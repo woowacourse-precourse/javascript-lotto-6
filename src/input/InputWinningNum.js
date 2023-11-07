@@ -9,7 +9,7 @@ export async function inputWinningNum(){
     winningNums.push(num);
   })
 
-  return nums;
+  return winningNums;
 }
 
 // 보너스 번호 입력
