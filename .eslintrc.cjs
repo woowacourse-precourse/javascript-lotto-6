@@ -29,5 +29,7 @@ module.exports = {
     'max-params': ['error', 3],
     // 함수의 길이 제한
     'max-lines-per-function': ['error', { max: 15 }],
+    'import/prefer-default-export': 'off',
+		'import/extensions': ['off'],
   },
 };
