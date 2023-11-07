@@ -66,19 +66,21 @@ errors: 예외 처리 함수들을 관리 폴더
 
 ### 폴더 구조
 
-src
-┣ errors
-┃ ┣ amountInputError.js
-┃ ┣ bonusNumberError.js
-┃ ┗ winningNumbersError.js
-┣ View
-┃ ┣ AmountInput.js
-┃ ┣ numberInput.js
-┃ ┗ printResult.js
-┣ App.js
-┣ calculateLottoNumber.js
-┣ calculateProfit.js
-┣ getStatistics.js
-┣ index.js
-┣ Lotto.js
-┗ makeRandomNumbers.js
+```
+📦src
+ ┣ 📂errors
+ ┃ ┣ 📜amountInputError.js
+ ┃ ┣ 📜bonusNumberError.js
+ ┃ ┗ 📜winningNumbersError.js
+ ┣ 📂View
+ ┃ ┣ 📜AmountInput.js
+ ┃ ┣ 📜numberInput.js
+ ┃ ┗ 📜printResult.js
+ ┣ 📜App.js
+ ┣ 📜calculateLottoNumber.js
+ ┣ 📜calculateProfit.js
+ ┣ 📜getStatistics.js
+ ┣ 📜index.js
+ ┣ 📜Lotto.js
+ ┗ 📜makeRandomNumbers.js
+```
