@@ -1,5 +1,4 @@
-import { getMoney, makeLottos } from "./Game.js";
-import { Console, Random } from "@woowacourse/mission-utils";
+import { getMoney, makeLottos, getUserLottoInput } from "./Game.js";
 
 class App {
   constructor() {
@@ -8,6 +7,7 @@ class App {
   async play() {
     this.money = await getMoney();
     makeLottos(this.money);
+    getUserLottoInput();
   }
 }
 
