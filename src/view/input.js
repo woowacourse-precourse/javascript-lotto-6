@@ -11,6 +11,7 @@ export default class Input {
     let amount = '';
     try {
       amount = await Input.readTrimmedLineAsync(MESSAGE.AMOUNT_TO_BUY);
+
       if (isEmpty(amount)) throw new Error(ERROR.IS_EMPTY);
       if (!isPositiveInteger(amount)) throw new Error(ERROR.IS_NOT_INTEGER);
       if (amount < LOTTO.PRICE) throw new Error(ERROR.IS_LESS_THAN_LOTTO_PRICE);

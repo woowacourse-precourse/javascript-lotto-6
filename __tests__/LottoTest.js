@@ -29,4 +29,9 @@ describe('로또 클래스 테스트', () => {
       expect(numbers.length).toBe(LOTTO.COUNT);
     });
   });
+
+  test.each(['1000', '2000', '3000'])('금액에 따른 로또 발행 테스트', (input) => {
+    const lottos = Lotto.createLottos(input);
+    expect(lottos.length).toBe(input / LOTTO.PRICE);
+  });
 });
