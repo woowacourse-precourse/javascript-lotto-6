@@ -2,22 +2,24 @@ import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "./constants/gameConstant";
 import Validation from "./Validation";
 
-const GetInputValue={
-	async getPurchaseAmount(){
+let global;
+class GetInputValue{
+	static async getPurchaseAmount(){
 		try {
 			const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.INPUT_PURCHASE_AMOUNT);
 			Validation.validPurchaseAmount(purchaseAmount);
 			return purchaseAmount;
 		} catch (error) {
       Console.print(error.message);
+			return await this.getPurchaseAmount();
 		}
-		
-	},
+	}
 
-	async getWinningNumbers(){
+	static async getWinningNumbers(){
 		try {
 			const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.INPUT_WINNING_NUMBERS);
 			const checkWinningNumbers = winningNumbers.split(',');
+			global = checkWinningNumbers;
 			checkWinningNumbers.sort();
 			for(let i=0; i<checkWinningNumbers.length; i++){
 				checkWinningNumbers[i] = Number(checkWinningNumbers[i]);
@@ -26,17 +28,18 @@ const GetInputValue={
 			return checkWinningNumbers;
 		} catch (error) {
       Console.print(error.message);
+			return await this.getWinningNumbers();
 		}
-	},
+	}
 
-	async getBonusNumber(){
+	static async getBonusNumber(){
 		try {
 			const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BONUS_NUMBER);
-			Console.print(bonusNumber);
-			Validation.validBonusNumber(checkWinningNumbers, bonusNumber);
+			Validation.validBonusNumber(global, bonusNumber);
 			return bonusNumber;
 		} catch (error) {
       Console.print(error.message);
+			return await this.getBonusNumber();
 		}
 	}
 }
