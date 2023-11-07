@@ -53,10 +53,16 @@ class App {
 
   /** 랜덤 넘버 생성 */
   getRandomNumber() {
+    const randomNumbers = [];
     // 6개의 랜덤 넘버 생성
-    const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    return randomNumber.sort((a, b) => a - b); // 오름차순 정렬
-    // 겹치지 않도록 검증
+    while (randomNumbers.length < 6) {
+      const randomNumber = MissionUtils.Random.pickUniqueNumberInRange(1, 45);
+      // 겹치지 않도록 검증
+      if (!randomNumbers.includes(randomNumber)) {
+        randomNumbers.push(randomNumber);
+      }
+    }
+    return randomNumbers.sort((a, b) => a - b); // 오름차순 정렬
   }
 
   /** Lotto 클래스로 티켓 생성 */
