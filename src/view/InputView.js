@@ -47,9 +47,6 @@ class InputView  {
     }
     return lottoBonusNumberInput;
   }
-
-
-
 }
 
 export default InputView;

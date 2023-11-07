@@ -1,5 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
-import { CONSOLE_MESSAGE } from '../constans/consoleMessages.js'
 import { randomNumbers } from '../utils/randomNumbers.js'
 import { lottosValues } from '../model/lottosValues.js'
 import InputView from '../view/InputView.js'
@@ -40,35 +38,33 @@ class LottoController {
         lottoTickets.forEach(ticket => {
             const matchingNumbers = ticket.filter(number => lottoMainNumbers.includes(number));
             const matchingCount = matchingNumbers.length;
-            if (matchingCount === 5) {
-                const hasBonusNumber = ticket.includes(lottoBonusNumber);
-                if (hasBonusNumber) {
-                    lottosValues[3].count++;
+            const bonusNumber = ticket.includes(lottoBonusNumber);
+            if (matchingCount === 6) {
+                lottosValues[4].count++; 
+            } else if (matchingCount === 5) {
+                if (bonusNumber) {
+                    lottosValues[3].count++; 
+                } else {
+                    lottosValues[2].count++; 
                 }
-            } else if (matchingCount >= 3) {
-                if (matchingCount === 5) {
-                    lottosValues[2].count++;
-                } else if (matchingCount === 4) {
-                    lottosValues[1].count++;
-                } else if (matchingCount === 3) {
-                    lottosValues[0].count++;
-                }
+            } else if (matchingCount === 4) {
+                lottosValues[1].count++; 
+            } else if (matchingCount === 3) {
+                lottosValues[0].count++; 
             }
         });
         return lottosValues;
     }
-
-    printResult(lottoPrice, lottoTickets, calculationResult) {
-        Console.print(CONSOLE_MESSAGE.inputPrintResult);
-        calculationResult.forEach((result) => {
-            Console.print(`${result.match} (${result.price.toLocaleString()}원) - ${result.count}개`);
-        });
-        const resultPrice = calculationResult.reduce((total, result) => {
-            return total + result.price * result.count;
-        }, 0);
-        const totalPercentage = (100 + ((resultPrice - lottoPrice) / lottoPrice) * 100).toFixed(1);
-        Console.print(`총 수익률은 ${totalPercentage}%입니다.`);
-    }
+    
+  printResult(lottoPrice, lottoTickets, calculationResult) {
+    this.#outputView.printMessageOutput();
+    this.#outputView.resultsOutput(calculationResult);
+    const resultPrice = calculationResult.reduce((total, result) => {
+      return total + result.price * result.count;
+    }, 0);
+    const totalPercentage = (100 + ((resultPrice - lottoPrice) / lottoPrice) * 100).toFixed(1);
+    this.#outputView.totalPercentageOutput(totalPercentage);
+  }
 }
 
 export default LottoController;
