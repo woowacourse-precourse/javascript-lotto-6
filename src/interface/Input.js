@@ -18,9 +18,8 @@ export const Input = {
   async readInteger(inputString) {
     try {
       const userInput = await Console.readLineAsync(inputString);
-      Validator.CommonUserInput.validate(userInput);
 
-      Validator.CommonUserInput.integerValue.validate(stringToNumber(userInput));
+      Validator.IntegerInput.validate(stringToNumber(userInput));
 
       return stringToNumber(userInput);
     } catch (e) {

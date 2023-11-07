@@ -15,6 +15,10 @@ export class User {
     return this.#winningNumbers;
   }
 
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
+
   async inputMoney() {
     const money = await Input.readInteger('구입금액을 입력해 주세요.');
 
@@ -28,7 +32,7 @@ export class User {
   }
 
   async inputBonusNumber() {
-    const number = await Input.readMultipleValues('보너스 번호를 입력해 주세요.');
+    const number = await Input.readInteger('보너스 번호를 입력해 주세요.');
 
     await this.#setBonusNumber(number);
   }
@@ -46,8 +50,6 @@ export class User {
 
   async #setWinningNumbers(numbers) {
     try {
-      Validator.Lotto.validate(numbers);
-
       this.#winningNumbers = numbers;
     } catch (e) {
       Console.print(`${e.name} ${e.message} `);
@@ -57,8 +59,6 @@ export class User {
 
   async #setBonusNumber(number) {
     try {
-      if (this.#winningNumbers.contain(number)) throw new Error('error');
-
       this.#bonusNumber = number;
     } catch (e) {
       Console.print(`${e.name} ${e.message} `);
