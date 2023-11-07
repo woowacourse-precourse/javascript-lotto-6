@@ -11,15 +11,13 @@ const lottoValidators = {
   },
   validateWinningNumLength(winningNum) {
     if (winningNum.length !== 6) {
-      throw new Error(CONSTANT.error.invalidWinningNumLength);
+      throw new Error(CONSTANT.error.invalidumLength);
     }
   },
   validateWinningNumRange(winningNum) {
     winningNum.map((item, idx) => {
       if (item < 1 || item > 45) {
-        throw new Error(
-          '[ERROR] 로또 번호는 1보다 작거나 45보다 크면 안됩니다.'
-        );
+        throw new Error(CONSTANT.error.invalidNumRange);
       }
     });
   },
@@ -27,7 +25,7 @@ const lottoValidators = {
     const checkStyle = /\D/;
     winningNum.map((item, idx) => {
       if (checkStyle.test(item)) {
-        throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
+        throw new Error(CONSTANT.error.invalidNumType);
       }
     });
   },
@@ -37,30 +35,30 @@ const lottoResultValidators = {
   validateBonusNumDuplicate(bonusNum, winningNum) {
     winningNum.map((item, idx) => {
       if (item === parseInt(bonusNum, 10)) {
-        throw new Error('[ERROR] 당첨 번호 중 중복된 번호가 있습니다.');
+        throw new Error(CONSTANT.error.invalidBonusNumDuplicate);
       }
     });
   },
   validateBonusNumRange(bonusNum) {
     console.log(parseInt(bonusNum, 10), typeof parseInt(bonusNum, 10));
     if (parseInt(bonusNum, 10) < 1) {
-      throw new Error('[ERROR] 로또 번호는 1보다 작으면 안됩니다.');
+      throw new Error(CONSTANT.error.invalidNumRange);
     }
     if (parseInt(bonusNum, 10) > 45) {
-      throw new Error('[ERROR] 로또 번호는 45보다 크면 안됩니다.');
+      throw new Error(CONSTANT.error.invalidNumRange);
     }
   },
   validateBonusNumType(bonusNum) {
     const checkStyle = /\D/;
     if (checkStyle.test(bonusNum)) {
-      throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
+      throw new Error(CONSTANT.error.invalidNumType);
     }
   },
   validateBonusNumLength(bonusNum) {
     const bonusNumList = bonusNum.split(',');
 
     if (bonusNumList.length !== 1) {
-      throw new Error('[ERROR] 보너스 번호는 한 숫자만 올 수 있습니다.');
+      throw new Error(CONSTANT.error.invalidBonusNumLength);
     }
     return bonusNum;
   },

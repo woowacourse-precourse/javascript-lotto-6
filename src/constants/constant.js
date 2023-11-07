@@ -22,10 +22,14 @@ const game = Object.freeze({
 });
 
 const error = Object.freeze({
-  invalidAmountType: `[ERROR] 정수만 입력되어야 합니다.`,
+  invalidAmountType: `[ERROR] 금액은 정수만 입력되어야 합니다.`,
   invalidAmountUnit: `[ERROR] 구매 단위가 1000원으로 떨어져야 합니다.`,
+  invalidNumType: `[ERROR] 로또 번호는 정수여야 합니다.`,
+  invalidNumRange: `[ERROR] 로또 번호는 1보다 작거나 45보다 크면 안됩니다.`,
+  invalidumLength: `[ERROR] 로또 번호는 6자리여야 합니다.`,
   duplicate: `[ERROR] 중복 값이 존재합니다.`,
-  invalidWinningNumLength: `[ERROR] 로또 번호는 6개여야 합니다.`,
+  invalidBonusNumDuplicate: `[ERROR] 보너스 번호와 당첨 번호 중 중복된 번호가 있습니다.`,
+  invalidBonusNumLength: `[ERROR] 보너스 번호는 한 숫자만 올 수 있습니다.`,
 });
 const CONSTANT = Object.freeze({ outputs, inputs, game, error });
 
