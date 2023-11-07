@@ -4,6 +4,13 @@ import GetBonusNumber from "./GetBonusNumber.js";
 import Lotto from "./Lotto.js";
 
 const UNIT_OF_PURCHASE = 1000;
+const WINNING_PRICE = [
+  "5,000",
+  "50,000",
+  "1,500,000",
+  "30,000,000",
+  "2,000,000,000",
+];
 
 class App {
   async getPurchaseAmount() {
@@ -73,15 +80,99 @@ class App {
     }
   }
 
+  isHit(lottoNumber, winningNumber, bonusNumber) {
+    let hit = 0;
+    let bonusHit = false;
+
+    winningNumber.split(",").forEach((winningNumber) => {
+      if (lottoNumber.includes(Number(winningNumber))) hit++;
+    });
+
+    if (lottoNumber.includes(Number(bonusNumber))) {
+      bonusHit = true;
+    }
+
+    return { hit, bonusHit };
+  }
+
+  handleWinningResult(hit, bonusHit, winningResult) {
+    if (hit === 3) winningResult[0] += 1;
+    else if (hit === 4) winningResult[1] += 1;
+    else if (hit === 5 && !bonusHit) winningResult[2] += 1;
+    else if (hit === 5 && bonusHit) winningResult[3] += 1;
+    else if (hit === 6) winningResult[4] += 1;
+
+    return winningResult;
+  }
+
+  printWinningStatics(winningResult) {
+    MissionUtils.Console.print("\n당첨 통계\n---");
+    winningResult.forEach((result, index) => {
+      if (index === 3) {
+        MissionUtils.Console.print(
+          `5개 일치, 보너스 볼 일치 (${WINNING_PRICE[index]}원) - ${result}개`,
+        );
+
+        return;
+      }
+
+      MissionUtils.Console.print(
+        `${index === 4 ? index + 2 : index + 3}개 일치 (${
+          WINNING_PRICE[index]
+        }원) - ${result}개`,
+      );
+    });
+  }
+
+  calculateTotalYield(purchaseAmount, winningResult) {
+    let total = 0;
+    winningResult.forEach(
+      (result, index) =>
+        (total += result * Number(WINNING_PRICE[index].replaceAll(",", ""))),
+    );
+
+    const totalYield = (total / Number(purchaseAmount)) * 100;
+
+    MissionUtils.Console.print(`총 수익률은 ${totalYield.toFixed(1)}%입니다.`);
+  }
+
+  checkWinningStatics(
+    purchaseAmount,
+    lottoNumbers,
+    winningNumber,
+    bonusNumber,
+  ) {
+    let winningResult = [0, 0, 0, 0, 0];
+
+    lottoNumbers.forEach((lottoNumber) => {
+      const { hit, bonusHit } = this.isHit(
+        lottoNumber,
+        winningNumber,
+        bonusNumber,
+      );
+
+      winningResult = this.handleWinningResult(hit, bonusHit, winningResult);
+    });
+
+    this.printWinningStatics(winningResult);
+    this.calculateTotalYield(purchaseAmount, winningResult);
+  }
+
   async play() {
     const purchaseAmount = await this.getPurchaseAmount();
     const purchaseNumber = purchaseAmount / UNIT_OF_PURCHASE;
-    const getLottoNumbers = this.getRandomLottoNumbers(purchaseNumber);
+    const lottoNumbers = this.getRandomLottoNumbers(purchaseNumber);
 
-    this.printPurchaseLottos(purchaseNumber, getLottoNumbers);
+    this.printPurchaseLottos(purchaseNumber, lottoNumbers);
 
     const winningNumber = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(winningNumber);
+    this.checkWinningStatics(
+      purchaseAmount,
+      lottoNumbers,
+      winningNumber,
+      bonusNumber,
+    );
   }
 }
 
