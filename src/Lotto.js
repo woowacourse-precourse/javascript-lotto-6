@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Validation from "./classes/validation.js";
 
 const Random = MissionUtils.Random;
 const Console = MissionUtils.Console;
@@ -16,6 +17,10 @@ class Lotto {
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+    const setArray = new Set(numbers);
+    if (setArray.size !== 6) {
+      throw new Error("[ERROR] 로또 번호가 중복되었습니다.");
     }
   }
 
