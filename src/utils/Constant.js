@@ -1,4 +1,4 @@
-const LOTTO = {
+const LOTTO = Object.freeze({
   startNum: 1,
   endNum: 45,
   price: 1000,
@@ -13,6 +13,6 @@ const LOTTO = {
   fifthPrice: "5,000",
   length: 6,
   minimumWinLength: 3,
-};
+});
 
 export { LOTTO };

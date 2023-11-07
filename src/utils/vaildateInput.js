@@ -1,6 +1,6 @@
 import { LOTTO } from "./Constant.js";
 
-const validation = {
+const validation = Object.freeze({
   inputType: (input) => {
     if (isNaN(input)) {
       throw new Error("[ERROR] 숫자를 입력해야합니다.");
@@ -42,7 +42,7 @@ const validation = {
       throw new Error("[ERROR] 로또 가격은 하나당 1000원 입니다.");
     }
   },
-};
+});
 
 function validatePriceInput(priceInput) {
   validation.inputType(priceInput);
