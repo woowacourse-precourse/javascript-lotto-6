@@ -27,7 +27,7 @@ class ValidationUtils {
     }
   }
   static inLottoNumberRange(input) {
-    if(input<=LOTTO_START || input>LOTTO_END) {
+    if(input<LOTTO_START || input>LOTTO_END) {
       throw new Error(ERROR_MESSAGE.notLottoRange);
     }
   }
