@@ -11,7 +11,7 @@ class LottoGame {
     const price = await this.#handleInput(InputView.price, Validator.checkMoney);
     const count = LottoService.purchase(price);
     OutputView.count(count);
-    const lottos = this.make(count);
+    const lottos = this.#make(count);
     const winningNumber = await this.#handleInput(InputView.win, Validator.checkSixNumber);
     const bonusNumber = await this.#handleInput(InputView.bonus, Validator.checkIsNumber);
     this.result(lottos, winningNumber, bonusNumber, price);
@@ -23,7 +23,7 @@ class LottoGame {
     return input;
   }
 
-  make(count) {
+  #make(count) {
     const lottos = Array.from({ length: count }, () => (new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6))));
     lottos.forEach((lotto) => OutputView.makeLottos(lotto.getNumbers()));
     return lottos;
