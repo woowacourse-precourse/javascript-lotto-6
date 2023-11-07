@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { SYSTEM_MESSAGE } from '../Constants/Message.js';
+import { SYSTEM_MESSAGE, resultMessage } from '../Constants/Message.js';
 import { validatePurchaseAmount } from '../Validator/Validate.js';
 
 const View = {
@@ -27,7 +27,9 @@ const View = {
     lottoArray.forEach((lotto) => Console.print(lotto.getNumbers()));
   },
 
-
+  printResult(resultArray, rateOfReturn) {
+    Console.print(resultMessage(resultArray, rateOfReturn.toFixed(2)));
+  },
 };
 
 export default View;
