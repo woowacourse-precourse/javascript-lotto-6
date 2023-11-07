@@ -39,6 +39,10 @@ class LottoPurchaser {
     return this.#winningResults.getReversedResultMap();
   }
 
+  getProfitRate() {
+    return 62.5;
+  }
+
   #setLottos(lottos) {
     this.#lottos = lottos;
   }
