@@ -2,6 +2,8 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Money from "./Money.js";
 import GAME_MESSAGES from "./constants/GameMessages.js";
 import Lotto from "./Lotto.js";
+import ERROR_MESSAGES from "./constants/ErrorMessage.js";
+import LOTTO_MESSAGES from "./constants/LottoMessages.js";
 
 class App {
   async play() {
@@ -21,7 +23,24 @@ class App {
       .split(",")
       .map((x) => parseInt(x, 10));
     let winning = new Lotto(winningNumberArray);
-    Console.print(lottos, winning);
+    this.getBonusNumber(lottos, winning);
+  }
+
+  async getBonusNumber(lottos, winning) {
+    const bonusNumber = await Console.readLineAsync(
+      GAME_MESSAGES.INPUT_BONUS_NUMBER,
+    );
+
+    if (isNaN(bonusNumber)) throw new Error(ERROR_MESSAGES.IS_BONUS_NUMBER);
+    if (winning.getNumber().includes(parseInt(bonusNumber,10)))
+      throw new Error(ERROR_MESSAGES.IS_BONUS_DUPLICATION);
+    if (
+      bonusNumber < LOTTO_MESSAGES.MIN_LOTTO_NUMBER ||
+      bonusNumber > LOTTO_MESSAGES.MAX_LOTTO_NUMBER
+    )
+      throw new Error(ERROR_MESSAGES.IS_BONUS_RANGE);
+    let winningNumber = winning.getNumber();
+    Console.print(`${winningNumber}, ${bonusNumber}, ${lottos}`);
   }
 
   generateLottoNumber(lottoCount) {
