@@ -13,6 +13,7 @@ const LOTTO_INFO = Object.freeze({
     5: 5000,
     6: 0,
   },
+  DECIMAL_POINT: 1,
 });
 
 const INPUT_MESSAGE = Object.freeze({
@@ -21,11 +22,28 @@ const INPUT_MESSAGE = Object.freeze({
   BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 });
 
-const ERROR_MESSAGE = Object.freeze({
-  TYPE_ERROR: `[ERROR] 정수가 아닙니다. 다시 입력해주세요.`,
-  INVALID_AMOUNT_UNIT: `[ERROR] 금액은 ${LOTTO_INFO.PRICE} 단위로 입력해주세요.`,
-  INVALID_AMOUNT_RANGE: `[ERROR] 금액은 ${LOTTO_INFO.MIN_MONEY}부터 ${LOTTO_INFO.MAX_LOTTO_MONEY}까지 입력 가능합니다.`,
-  INVALID_INPUT_FORMAT: `[ERROR] 입력 형태가 맞지 않습니다. 게임을 종료합니다.`,
+const OUTPUT_MESSAGE = Object.freeze({
+  PURCHASE_SUFFIX: `개를 구매했습니다.`,
+  RESULT_HEADER: `당첨 통계`,
+  REUSLT_LINE: `-----------`,
+  RESULT_CHECK: [
+    `3개 일치 (5,000원)`,
+    `4개 일치 (50,000원)`,
+    `5개 일치 (1,500,000원)`,
+    `5개 일치, 보너스 볼 일치 (30,000,000원)`,
+    `6개 일치 (2,000,000,000원)`,
+  ],
 });
 
-export { LOTTO_INFO, INPUT_MESSAGE, ERROR_MESSAGE };
+const ERROR_MESSAGE = Object.freeze({
+  WINNING_NUMBERS_DUPLICATE: `[ERROR] 로또 번호와 보너스 번호는 중복이 없어야 합니다.`,
+  TYPE_ERROR: `[ERROR] 정수가 아닙니다. 다시 입력해주세요.`,
+  INVALID_PURCHASE_UNIT: `[ERROR] 금액은 ${LOTTO_INFO.PRICE} 단위로 입력해주세요.`,
+  INVALID_PURCHASE_RANGE: `[ERROR] 금액은 ${LOTTO_INFO.MIN_MONEY}부터 ${LOTTO_INFO.MAX_LOTTO_MONEY}까지 입력 가능합니다.`,
+  INVALID_WIN_NUMBER_SIZE: `[ERROR] 로또 번호는 ${LOTTO_INFO.LENGTH}개로 입력해주세요.`,
+  INVALID_WIN_NUMBER_RANGE: `[ERROR]로또 번호는 ${LOTTO_INFO.MIN_NUMBER}부터 ${LOTTO_INFO.MAX_NUMBER}까지의 숫자여야 합니다.`,
+  INVALID_INPUT_FORMAT: `[ERROR] 입력 형태가 맞지 않습니다. 게임을 종료합니다.`,
+  UNKNOWN_ERROR: `[ERROR] 알 수 없는 에러가 발생했습니다.`,
+});
+
+export { LOTTO_INFO, INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
