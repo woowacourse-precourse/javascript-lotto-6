@@ -1,3 +1,7 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+const Random = MissionUtils.Random;
+const Console = MissionUtils.Console;
 
 class Lotto {
   #numbers;
@@ -11,6 +15,11 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+  }
+
+  static async userMoney() {
+    const userMoney = await Console.readLineAsync("구입 금액을 입력해주세요.");
+    return userMoney;
   }
 }
 
