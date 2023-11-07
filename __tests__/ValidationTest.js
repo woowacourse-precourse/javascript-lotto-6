@@ -32,3 +32,13 @@ describe('Unit Cost Validation', () => {
     }).toThrow(ErrorMessage);
   });
 });
+
+describe('List<number> Validation', () => {
+  const inputValidator = new InputValidator();
+
+  test('중복된 숫자가 입력되어 있으면 예외가 발생한다.', () => {
+    expect(() => {
+      inputValidator.validateNoDuplication([1, 2, 3, 4, 5, 5]);
+    }).toThrow(ErrorMessage);
+  });
+});

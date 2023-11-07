@@ -2,12 +2,6 @@ import ErrorMessage from '../errors/ErrorMessage.js';
 import ERROR from '../../constants/error.js';
 import NUMBER from '../../constants/number.js';
 
-function validateNoDuplication(input) {
-  if (input.length !== new Set(inpuit).size) {
-    throw new ErrorMessage(ERROR.lotto.duplication);
-  }
-}
-
 function validateNoIncludeBlank() {}
 
 function validateDrawCases() {}
@@ -41,6 +35,12 @@ class InputValidator {
   validateUnitCost(input) {
     if (input % NUMBER.unitCost !== 0) {
       throw new ErrorMessage(ERROR.cost.unmatchedUnit);
+    }
+  }
+
+  validateNoDuplication(input) {
+    if (input.length !== new Set(input).size) {
+      throw new ErrorMessage(ERROR.lotto.duplication);
     }
   }
 }
