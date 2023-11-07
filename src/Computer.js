@@ -4,6 +4,14 @@ const THIRD = 'third';
 const FOURTH = 'fourth';
 const FIFTH = 'fifth';
 
+const prizeMony = {
+  first: 2000000000,
+  second: 30000000,
+  third: 1500000,
+  fourth: 50000,
+  fifth: 5000,
+};
+
 const prizeConditionArr = [
   { key: { mathNumber: 6, isMatchBonus: false }, value: FIRST },
   { key: { mathNumber: 5, isMatchBonus: true }, value: SECOND },
@@ -56,6 +64,17 @@ class Computer {
 
   getPrizeResult() {
     return this.#prizeResult;
+  }
+
+  getProfitRatio() {
+    const places = Object.keys(this.#prizeResult);
+    const totlaProfit = places.reduce((profit, place) => {
+      return profit + prizeMony[place] * this.#prizeResult[place];
+    }, 0);
+    const profitRatio = (totlaProfit / this.#cost) * 100;
+    const ratioString = `${Math.round((profitRatio * 10).toPrecision(15)) / 10}%`;
+
+    return ratioString;
   }
 }
 
