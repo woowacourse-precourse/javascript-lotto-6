@@ -2,27 +2,6 @@ import {MissionUtils} from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import * as Validation from "./Validation.js";
 import * as constants from "./constants.js";
-/*
-  기능 목록
-0. 구입 금액 받고 로또 구입 개수 산출x
-  -금액 유효성 확인x
-1. ~중복되지 않는 6개의 숫자 뽑기
-2. 나머지 숫자 중 1개 뽑기~
-3. 구입 금액 입력 기능x
-4. 구입 금액 만큼 로또 발행 기능x
-5. 당첨 번호와 보너서 번호 입력 기능x
-6. ~발행된 로또 와 당첨, 보너스 번호 비교 기능~
-7. 비교 내용으로 수익률 산출 기능x
-8. 결과 출력 기능x
-9. 에러시 다시 입력 기능
-
-✨ 추가 요구 사항 (항시 체크)
-- 함수는 최대 15라인 이상x
-- else 지양
-  - switch문이 더 깔끔한 경우가 있다. 
-  - 도메인 로직 에 단위 테스트 진행 
-  -depth 주의 
-  */
 
 class App {
   async play() {
@@ -38,7 +17,7 @@ class App {
     const prizeMoney = countPrizeMoney(result);
     const countResult = countTotalWin(result);
 
-    const resultComment = writeResultComment(inputMoney, prizeMoney, countResult);
+    const resultComment = getResultComment(inputMoney, prizeMoney, countResult);
     MissionUtils.Console.print(resultComment);
   }
 }
@@ -57,7 +36,7 @@ const buyLottos = (inputMoney) => {
   return lottoArray;
 };
 
-const writeResultComment = (inputMoney, prizeMoney, countResult) => {
+const getResultComment = (inputMoney, prizeMoney, countResult) => {
   const lottoPrizes = {
     3: constants.FIFTH_PRIZE,
     4: constants.FOURTH_PRIZE,
