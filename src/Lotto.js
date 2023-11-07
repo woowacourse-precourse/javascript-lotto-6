@@ -1,6 +1,5 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import { checkInputArrayDuplication } from "./Validation";
-import { errorMessages } from "./Message";
+import { checkInputArrayDuplication } from "./Validation.js";
+import { errorMessages } from "./Message.js";
 
 class Lotto {
   #numbers;

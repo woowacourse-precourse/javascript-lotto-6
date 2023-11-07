@@ -3,6 +3,7 @@ import {
   checkInputDividedBy1000,
 } from "./Validation.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { messages } from "./Message.js";
 import Lotto from "./Lotto.js";
 
 class Purchase {

@@ -27,6 +27,7 @@ class App {
 
         return purchase;
       } catch (error) {
+        console.log(error);
         MissionUtils.Console.print(error.message);
       }
     }
@@ -44,7 +45,7 @@ class App {
     while (true) {
       try {
         const input = await MissionUtils.Console.readLineAsync(
-          errorMessages.getWinning
+          messages.GET_WINNING
         );
         const winning = new Winning(input.split(","));
 
