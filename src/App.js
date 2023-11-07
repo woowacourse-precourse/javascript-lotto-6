@@ -10,19 +10,20 @@ class App {
   #outputView = new OutputView();
 
   async play() {
-    try {
-      await this.#purchaseLottos();
-      await this.#getLottoMatchResult();
-    } catch (error) {
-      this.#outputView.printError(error.message);
-    }
+    await this.#purchaseLottos();
+    await this.#getLottoMatchResult();
   }
 
   async #purchaseLottos() {
-    const lottoPurchaseAmount = await this.#getLottoPurchaseAmount();
-    const lottoPurchaseQuantity = this.#changeAmountToQuantity(lottoPurchaseAmount);
-    this.#setUpLottoStore(lottoPurchaseQuantity);
-    this.#printPurchasedLottoNumbers();
+    try {
+      const lottoPurchaseAmount = await this.#getLottoPurchaseAmount();
+      const lottoPurchaseQuantity = this.#changeAmountToQuantity(lottoPurchaseAmount);
+      this.#setUpLottoStore(lottoPurchaseQuantity);
+      this.#printPurchasedLottoNumbers();
+    } catch (error) {
+      this.#outputView.printError(error.message);
+      await this.#purchaseLottos();
+    }
   }
 
   async #getLottoPurchaseAmount() {
@@ -51,19 +52,29 @@ class App {
 
   async #getLottoMatchResult() {
     const lottoWinningNumbers = await this.#getLottoWinningNumbers();
-    const bonousNumber = await this.#getBonousNumber();
+    const bonousNumber = await this.#getBonousNumber(lottoWinningNumbers);
     const lottoMatchResult = this.#lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
     this.#outputView.printMatchResult(lottoMatchResult);
   }
 
   async #getLottoWinningNumbers() {
-    const lottoWinningNumbers = await this.#inputView.readLottoWinningNumbers();
-    return lottoWinningNumbers;
+    try {
+      const lottoWinningNumbers = await this.#inputView.readLottoWinningNumbers();
+      return lottoWinningNumbers;
+    } catch (error) {
+      this.#outputView.printError(error.message);
+      return await this.#getLottoMatchResult();
+    }
   }
 
-  async #getBonousNumber() {
-    const bonousNumber = await this.#inputView.readBonousNumber();
-    return bonousNumber;
+  async #getBonousNumber(lottoWinningNumbers) {
+    try {
+      const bonousNumber = await this.#inputView.readBonousNumber(lottoWinningNumbers);
+      return bonousNumber;
+    } catch (error) {
+      this.#outputView.printError(error.message);
+      return await this.#getBonousNumber(lottoWinningNumbers);
+    }
   }
 }
 

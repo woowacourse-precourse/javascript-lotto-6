@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "./constants/message";
+import { ERROR_MESSAGE } from "./constants/message.js";
 import {
   InvalidLottoNumberCountError,
   DuplicatedNumberError,
@@ -6,7 +6,7 @@ import {
   InvalidNumberRangeError,
   NotIntegerError,
   InvalidBonousNumberCountError,
-} from "./utils/Error";
+} from "./utils/Error.js";
 
 class Lotto {
   #numbers;

@@ -101,7 +101,11 @@ describe("InputView 객체 테스트", () => {
     });
 
     test("readBonousNumber메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
-      inputView.readBonousNumber();
+      const bonousNumberInput = "7";
+      const resolvedPromise = Promise.resolve(bonousNumberInput);
+      Console.readLineAsync.mockReturnValue(resolvedPromise);
+      const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+      inputView.readBonousNumber(lottoWinningNumbers);
       expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.lottoBonousNumber);
     });
 
@@ -110,8 +114,9 @@ describe("InputView 객체 테스트", () => {
       const NumberedBonousNumber = [7];
       const resolvedPromise = Promise.resolve(bonousNumberInput);
       Console.readLineAsync.mockReturnValue(resolvedPromise);
+      const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
 
-      const bonousNumber = await inputView.readBonousNumber();
+      const bonousNumber = await inputView.readBonousNumber(lottoWinningNumbers);
       expect(bonousNumber).toEqual(NumberedBonousNumber);
     });
   });
