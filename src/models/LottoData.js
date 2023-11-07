@@ -1,11 +1,11 @@
 import { ERROR_MESSAGE } from '../constants/Message.js';
-import { LOTTO } from '../constants/Constant.js';
+import { SETTING } from '../constants/Constant.js';
 import Lotto from '../Lotto.js';
 
 class LottoData {
   constructor(amount) {
     this.amount = amount;
-    this.count = amount / LOTTO.unit;
+    this.count = amount / SETTING.unit;
     this.lottos = [];
     // this.lotto = new Lotto();
     this.validatePurchaseAmount(amount);
@@ -15,7 +15,7 @@ class LottoData {
     if (!/^\d+$/.test(amount)) {
       throw new Error(ERROR_MESSAGE.notNumber);
     }
-    if (amount === '0' || amount % LOTTO.unit !== 0) {
+    if (amount === '0' || amount % SETTING.unit !== 0) {
       throw new Error(ERROR_MESSAGE.notDivide);
     }
   }
