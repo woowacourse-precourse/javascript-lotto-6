@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
+import Lotto from './Lotto.js';
 
 class LottoShop {
   static issueLottoTickets(buyingPrice) {

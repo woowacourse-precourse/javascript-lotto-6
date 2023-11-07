@@ -11,8 +11,8 @@ class App {
     const { lottos, buyingPrice } = await App.buyLotto();
     OutputView.printBuyingLottos(lottos);
 
-    const winningNumbers = await App.drawLottoNumbers();
-    const outcome = App.getLottoOutcome({ winningNumbers, lottos });
+    const winningNumbers = await App.drawLottoBalls();
+    const outcome = App.checkLottoResult({ winningNumbers, lottos });
     OutputView.lottoOutcome(outcome);
 
     const calculator = new LottoReturnRateCalculator(outcome, buyingPrice);
@@ -36,7 +36,7 @@ class App {
     return result;
   }
 
-  static async drawLottoNumbers() {
+  static async drawLottoBalls() {
     const winningNumbers = await App.getWinningNumbers();
     const bonusNumber = await App.getBonusNumber(winningNumbers);
 
@@ -76,7 +76,7 @@ class App {
     return result;
   }
 
-  static getLottoOutcome({ winningNumbers, lottos }) {
+  static checkLottoResult({ winningNumbers, lottos }) {
     const verifier = new LottoResultCalculator(winningNumbers);
     return verifier.checkLottoResult(lottos);
   }
