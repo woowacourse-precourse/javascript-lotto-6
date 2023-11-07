@@ -2,7 +2,7 @@ class BonusNumber {
   #number;
 
   constructor(number) {
-    this.number = number;
+    this.#number = number;
   }
 
   getBonusNumber() {

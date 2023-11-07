@@ -4,10 +4,12 @@ import OutputView from "../view/OutputView.js";
 import Lottos from "../model/Lottos.js";
 import Lotto from "../model/Lotto.js";
 import BonusNumber from "../model/BonusNumber.js";
+import Rank from "../model/Rank.js";
 class LottoGameController {
   #lottoTickets;
   #winningLotto;
   #bonusNumber;
+  #rank;
 
   constructor() {}
 
@@ -72,11 +74,22 @@ class LottoGameController {
     try {
       InputValidator.bonusNumber(this.#winningLotto.getTicketNumbers(), number);
       this.#bonusNumber = new BonusNumber(number);
+      this.#rank = new Rank(
+        this.#lottoTickets,
+        this.#bonusNumber,
+        this.#winningLotto
+      );
+      this.showLottoWinningStatistics();
     } catch (error) {
       OutputView.printErrorMessage(error);
       const input = await InputView.lottoBonusNumber();
       await this.handleBonusNumberError(input);
     }
+  }
+
+  showLottoWinningStatistics() {
+    const rank = this.#rank.getRank();
+    OutputView.printLottoWinningStatistics(rank);
   }
 }
 
