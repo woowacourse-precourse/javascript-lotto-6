@@ -23,15 +23,48 @@ const INPUT_MESSAGE = {
 };
 
 const OUTPUT_MESSAGE = {
-  BUY_TICKET: (amountOfTickets) => `${amountOfTickets}개를 구매했습니다.`,
-  RESULT: (rankCounts) => `당첨 통계\n
-  ---\n
-  3개 일치 (5,000원) - ${rankCounts[4]}개\n
-  4개 일치 (50,000원) - ${rankCounts[3]}개\n
-  5개 일치 (1,500,000원) - ${rankCounts[2]}개\n
-  5개 일치, 보너스 볼 일치 (30,000,000원) - ${rankCounts[1]}개\n
-  6개 일치 (2,000,000,000원) - ${rankCounts[0]}개`,
-  EARNING: (earningRate) => `총 수익률은 ${earningRate}%입니다.`,
+  BUY_TICKET: (input) => `${input}개를 구매했습니다.`,
+  RESULT: (input) => `당첨 통계
+  ---
+  ${LOTTO.NUMBER_OF_MATCH.RANK_5}개 일치 (${LOTTO.EARNING.RANK_5.toLocaleString()}원) - ${
+    input[4]
+  }개
+  ${LOTTO.NUMBER_OF_MATCH.RANK_4}개 일치 (${LOTTO.EARNING.RANK_4.toLocaleString()}원) - ${
+    input[3]
+  }개
+  ${LOTTO.NUMBER_OF_MATCH.RANK_3}개 일치 (${LOTTO.EARNING.RANK_3.toLocaleString()}원) - ${
+    input[2]
+  }개
+  ${
+    LOTTO.NUMBER_OF_MATCH.RANK_2
+  }개 일치, 보너스 볼 일치 (${LOTTO.EARNING.RANK_2.toLocaleString()}원) - ${input[1]}개
+  ${LOTTO.NUMBER_OF_MATCH.RANK_1}개 일치 (${LOTTO.EARNING.RANK_1.toLocaleString()}원) - ${
+    input[0]
+  }개`,
+  EARNING: (input) => `총 수익률은 ${input}%입니다.`,
 };
 
-export { ERROR_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE };
+const LOTTO = {
+  NUMBER_RANGE: {
+    FROM: 1,
+    TO: 45,
+    PICK: 6,
+  },
+  EARNING: {
+    RANK_5: 5000,
+    RANK_4: 50000,
+    RANK_3: 1500000,
+    RANK_2: 30000000,
+    RANK_1: 2000000000,
+  },
+  PRICE: 1000,
+  NUMBER_OF_MATCH: {
+    RANK_5: 3,
+    RANK_4: 4,
+    RANK_3: 5,
+    RANK_2: 5,
+    RANK_1: 6,
+  },
+};
+
+export { ERROR_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE, LOTTO };

@@ -1,7 +1,7 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Ticket from './Ticket.js';
-import { ERROR_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE } from './Constants.js';
+import { ERROR_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE, LOTTO } from './Constants.js';
 
 async function getPurchasePrice() {
   const price = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.PURCHASE_PRICE);
@@ -16,7 +16,7 @@ function validatePurchasePrice(purchasePrice) {
   if (isNaN(purchasePrice)) {
     throw new Error(ERROR_MESSAGE.PRICE_INPUT.NOT_A_NUMBER);
   }
-  if (purchasePrice % 1000 !== 0) {
+  if (purchasePrice % LOTTO.PRICE !== 0) {
     throw new Error(ERROR_MESSAGE.PRICE_INPUT.WRONG_UNIT);
   }
 }
@@ -34,7 +34,7 @@ async function getValidPurchasePrice() {
 }
 
 function getAmountOfTickets(purchasePrice) {
-  return purchasePrice / 1000;
+  return purchasePrice / LOTTO.PRICE;
 }
 
 function showAmountOfTickets(amountOfTickets) {
@@ -117,11 +117,11 @@ class App {
     Console.print(OUTPUT_MESSAGE.RESULT(rankCounts));
 
     const earning =
-      5000 * rankCounts[4] +
-      50000 * rankCounts[3] +
-      1500000 * rankCounts[2] +
-      30000000 * rankCounts[1] +
-      2000000000 * rankCounts[0];
+      LOTTO.EARNING.RANK_5 * rankCounts[4] +
+      LOTTO.EARNING.RANK_4 * rankCounts[3] +
+      LOTTO.EARNING.RANK_3 * rankCounts[2] +
+      LOTTO.EARNING.RANK_2 * rankCounts[1] +
+      LOTTO.EARNING.RANK_1 * rankCounts[0];
     const earningRate = Math.round((earning / purchasePrice) * 10000) / 100;
 
     Console.print(OUTPUT_MESSAGE.EARNING(earningRate));

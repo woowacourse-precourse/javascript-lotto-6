@@ -1,4 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import { LOTTO } from './Constants.js';
 
 class Ticket {
   constructor() {
@@ -7,7 +8,11 @@ class Ticket {
   }
 
   generateRandomNumbers() {
-    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const randomNumbers = Random.pickUniqueNumbersInRange(
+      LOTTO.NUMBER_RANGE.FROM,
+      LOTTO.NUMBER_RANGE.TO,
+      LOTTO.NUMBER_RANGE.PICK,
+    );
     randomNumbers.sort(function (a, b) {
       return a - b;
     });
@@ -39,19 +44,19 @@ class Ticket {
   }
 
   updateRank(intersection, isBonusNumberMatch) {
-    if (intersection.length === 3) {
+    if (intersection.length === LOTTO.NUMBER_OF_MATCH.RANK_5) {
       this.rank = 5;
     }
-    if (intersection.length === 4) {
+    if (intersection.length === LOTTO.NUMBER_OF_MATCH.RANK_4) {
       this.rank = 4;
     }
-    if (intersection.length === 5) {
+    if (intersection.length === LOTTO.NUMBER_OF_MATCH.RANK_3) {
       this.rank = 3;
     }
-    if (intersection.length === 5 && isBonusNumberMatch === true) {
+    if (intersection.length === LOTTO.NUMBER_OF_MATCH.RANK_2 && isBonusNumberMatch === true) {
       this.rank = 2;
     }
-    if (intersection.length === 6) {
+    if (intersection.length === LOTTO.NUMBER_OF_MATCH.RANK_1) {
       this.rank = 1;
     }
   }
