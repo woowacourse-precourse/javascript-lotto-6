@@ -52,6 +52,14 @@ class WinNumber {
       throw new Error('[ERROR] 보너스 번호는 1 이상 45 이하여야 합니다.');
     }
   }
+
+  get numbers() {
+    return this.#numbers;
+  }
+
+  get bonusNumber() {
+    return this.#bonusNumber;
+  }
 }
 
 export default WinNumber;
