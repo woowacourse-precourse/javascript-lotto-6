@@ -8,7 +8,7 @@ class LottoView {
 
   showLottoNumbers(countOfLotto, lottos) {
     Console.print(`\n${countOfLotto}개를 구매했습니다.`);
-    lottos.forEach((lotto) => Console.print(lotto.numbers));
+    lottos.forEach((lotto) => Console.print(`[${lotto.numbers.join(", ")}]`));
   }
 
   async askWinningNumbers() {
