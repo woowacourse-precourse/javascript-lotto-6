@@ -22,6 +22,7 @@ describe('로또 클래스 테스트', () => {
       }
     });
   });
+
   describe('로또 추첨 결과 테스트', () => {
     const mockLottoResult = {
       first: 0,

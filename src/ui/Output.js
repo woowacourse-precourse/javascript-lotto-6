@@ -9,3 +9,16 @@ const printLottoTickets = lottoTickets => {
     .join('\n');
   Console.print(`\n${lottoPurchaseStatus}\n${ticketLines}`);
 };
+
+const createLottoResultString = lottoResult => {
+  const outputKeys = ['fifth', 'forth', 'third', 'second', 'first'];
+  const outputLists = outputKeys.map(
+    key => `${USER_OUTPUT[key.concat('Prize')]}${lottoResult[key]}개`,
+  );
+
+  const resultString = `${USER_OUTPUT.winningStatistics}${outputLists.join(
+    '\n',
+  )}`;
+
+  return resultString;
+};
