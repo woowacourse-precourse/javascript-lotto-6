@@ -45,11 +45,10 @@ class ArrayValidator {
   /**
    * 배열 내의 모든 요소가 범위 내의 정수인지 검사하는 메서드
    * @param {any[]} value 검사할 배열
-   * @param {number} from 범위의 시작
-   * @param {number} to 범위의 끝
+   * @param {{ from: number, to: number }} {from, to} 범위의 시작과 범위의 끝
    * @returns {boolean} 배열 내의 모든 요소가 범위 내의 정수인지 여부
    */
-  static isInRange(value, from, to) {
+  static isInRange(value, { from, to }) {
     return (
       TypeValidator.isArray(value) && value.every((element) => element >= from && element <= to)
     );

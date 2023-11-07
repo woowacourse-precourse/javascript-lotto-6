@@ -29,7 +29,7 @@ class Lotto {
 
     if (!ArrayValidator.isSortedArray(numbers)) throw new CustomError(ERROR_MESSAGE.NOT_SORTED);
 
-    if (!ArrayValidator.isInRange(numbers, LOTTO_RANGE.from, LOTTO_RANGE.to)) {
+    if (!ArrayValidator.isInRange(numbers, LOTTO_RANGE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
     }
   }
