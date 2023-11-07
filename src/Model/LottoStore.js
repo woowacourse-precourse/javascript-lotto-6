@@ -62,13 +62,16 @@ class LottoStore {
   }
 
   #compareMatchResult({ lottoWinningNumbersMatchCount, bonusNumberMatchCount }) {
-    if (lottoWinningNumbersMatchCount === 3) this.#LottoMatchResult.fifthPlace++;
-    if (lottoWinningNumbersMatchCount === 4) this.#LottoMatchResult.fourthPlace++;
+    if (lottoWinningNumbersMatchCount === 3) 
+      this.#LottoMatchResult.fifthPlace++;
+    if (lottoWinningNumbersMatchCount === 4) 
+      this.#LottoMatchResult.fourthPlace++;
     if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 0)
       this.#LottoMatchResult.thirdPlace++;
     if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 1)
       this.#LottoMatchResult.secondPlace++;
-    if (lottoWinningNumbersMatchCount === 6) this.#LottoMatchResult.firstPlace++;
+    if (lottoWinningNumbersMatchCount === 6) 
+      this.#LottoMatchResult.firstPlace++;
   }
 
   #calculateReturnRate() {

@@ -30,7 +30,7 @@ class InputView {
 
   async readBonusNumber(lottoWinningNumbers) {
     const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
-    const validatedBonusNumber = bonusNumber.split(",").map(Number);
+    const validatedBonusNumber = bonusNumber && bonusNumber.split(",").map(Number);
     this.#validateBonusNumberInput(validatedBonusNumber, lottoWinningNumbers);
 
     return validatedBonusNumber;
