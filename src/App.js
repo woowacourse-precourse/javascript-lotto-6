@@ -150,6 +150,13 @@ class App {
           break;
       }
     });
+    Console.print(`${RESULT_MESSAGE.FIFTH_RESULT_MESSAGE} - ${threeSame}개`);
+    Console.print(`${RESULT_MESSAGE.FOURTH_RESULT_MESSAGE} - ${fourSame}개`);
+    Console.print(`${RESULT_MESSAGE.THIRD_RESULT_MESSAGE} - ${fiveSame}개`);
+    Console.print(
+      `${RESULT_MESSAGE.SECOND_RESULT_MESSAGE} - ${fiveSameAndBonusMatch}개`,
+    );
+    Console.print(`${RESULT_MESSAGE.FIRST_RESULT_MESSAGE} - ${sixSame}개`);
   }
 }
 
