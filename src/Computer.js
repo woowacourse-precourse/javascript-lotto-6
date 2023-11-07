@@ -18,6 +18,14 @@ export default class Computer {
     }
   }
 
+  async getWinningNumbersrFromUserInput() {
+    this.winningNumbers = await UserInput.getWinningNumbers();
+  }
+
+  async getBonusNumberFromUserInput() {
+    this.bonusNumber = await UserInput.getBonusNumber(this.winningNumbers);
+  }
+
   issueLotto() {
     const randNum = Random.pickUniqueNumbersInRange(
       LOTTERY.MIN_NUM,
@@ -34,6 +42,8 @@ export default class Computer {
 
   resetLotto() {
     this.winningNumbers = [];
+    this.bonusNumber = 0;
     this.lottos = [];
+    this.result = Array(6).fill(0);
   }
 }
