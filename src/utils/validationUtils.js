@@ -16,6 +16,13 @@ const validationUtils = {
     return Number(price);
   },
 
+  // 로또 번호 중복 예외 처리
+  checkRepeat(lottoNums) {
+    if (new Set(lottoNums).size !== 6) {
+      throw new Error(MESSAGE.error.repeatNum);
+    }
+  },
+
   // 당첨 번호 예외 처리
   inputWinningNumValidate(winningNum) {
     // 쉼표로 구분하지 않은 경우
@@ -36,9 +43,7 @@ const validationUtils = {
       }
     });
     // 중복되지 않는 숫자가 아닌 경우
-    if (new Set(winningNums).size !== 6) {
-      throw new Error(MESSAGE.error.repeatNum);
-    }
+    this.checkRepeat(winningNums);
     return new Lotto(winningNums);
   },
 

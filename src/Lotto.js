@@ -1,3 +1,5 @@
+import validationUtils from "./utils/validationUtils";
+
 class Lotto {
   #numbers;
 
@@ -10,6 +12,7 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    validationUtils.checkRepeat(numbers);
   }
 
   // TODO: 추가 기능 구현
