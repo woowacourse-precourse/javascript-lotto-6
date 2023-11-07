@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { PRINT_INPUT } from "./Constant.js";
-import { isVaildAmount, isVaildLottoNumbers } from "./checkValidation.js";
+import { isVaildAmount, isVaildBonusNum } from "./checkValidation.js";
 import Lotto from "../Lotto.js";
 
 const InputPrintout = {
@@ -27,6 +27,12 @@ const InputPrintout = {
 		}
 		return lotto;
 	},
-	//보너스번호
+	inputBonusNum: async () => {
+		let bonus = await Console.readLineAsync(PRINT_INPUT.inputBonusNum);
+		while (!isVaildBonusNum(bonus)) {
+			bonus = await Console.readLineAsync(PRINT_INPUT.inputBonusNum);
+		}
+		return Number(bonus);
+	},
 };
 export default InputPrintout;

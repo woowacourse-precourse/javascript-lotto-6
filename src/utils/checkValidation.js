@@ -25,6 +25,17 @@ const isVaildLottoNumbers = (numList) => {
 	return true;
 };
 
+const isVaildBonusNum = (bonus) => {
+	try {
+		throwError(!isValidNumber(bonus), ERROR_MESSAGE.invalidInputNumber);
+		//당첨번호와 중복
+	} catch (error) {
+		Console.print(error);
+		return false;
+	}
+	return true;
+};
+
 const isValidNumber = (value) => {
 	const numType = Number(value);
 	if (numType < 1) return false;
@@ -46,4 +57,4 @@ const throwError = (statement, message) => {
 	if (statement) throw new Error(message);
 };
 
-export { isVaildAmount, isVaildLottoNumbers };
+export { isVaildAmount, isVaildLottoNumbers, isVaildBonusNum };
