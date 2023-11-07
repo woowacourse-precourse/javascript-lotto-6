@@ -3,7 +3,7 @@ import LottoGame from './LottoGame.js';
 class App {
   async play() {
     const lottoGame = new LottoGame();
-    lottoGame.play();
+    await lottoGame.play();
   }
 }
 
