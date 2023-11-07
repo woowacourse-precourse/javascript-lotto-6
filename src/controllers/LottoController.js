@@ -1,15 +1,15 @@
-import Lottos from '../models/Lottos.js';
+import LottoGame from '../models/LottoGame.js';
 import WinningNumber from '../models/WinningNumber.js';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 
 class LottoController {
-  #lottos;
+  #lottogame;
 
   #winnginNumber;
 
   constructor() {
-    this.#lottos = new Lottos();
+    this.#lottogame = new LottoGame();
     this.#winnginNumber = new WinningNumber();
   }
 
@@ -23,9 +23,8 @@ class LottoController {
   async #askPurchase() {
     try {
       const purchase = await InputView.askPurchase();
-      this.#lottos.setPurchase(purchase);
-      this.#lottos.generateLotto();
-      OutputView.printLotto(this.#lottos.getLottos());
+      this.#lottogame.setPurchase(purchase);
+      OutputView.printLotto(this.#lottogame.getLottos());
     } catch (error) {
       OutputView.print(error.message);
       await this.#askPurchase();
@@ -54,7 +53,7 @@ class LottoController {
 
   #printResult() {
     OutputView.winningStatistics(
-      this.#lottos.getWinningResult(
+      this.#lottogame.getWinningResult(
         this.#winnginNumber.getWinningNumber(),
         this.#winnginNumber.getBonusNumber(),
       ),
