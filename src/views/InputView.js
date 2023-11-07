@@ -10,7 +10,7 @@ const InputView = {
 
   async readMultipleIntegers(message) {
     const userInput = await Console.readLineAsync(`${message}\n`);
-    InputViewValidator.isValidMultipleInputs(userInput);
+    InputViewValidator.areValidMultipleInputs(userInput);
     return userInput;
   },
 };

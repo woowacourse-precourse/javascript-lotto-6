@@ -42,45 +42,45 @@ describe('InputViewValidator 테스트', () => {
     });
   });
 
-  describe('isValidMultipleInputs 메서드', () => {
+  describe('areValidMultipleInputs 메서드', () => {
     it('유효한 정수 배열 입력에 대해 오류를 던지지 않아야 한다', () => {
       const input = '1,2,3';
       expect(() =>
-        InputViewValidator.isValidMultipleInputs(input),
+        InputViewValidator.areValidMultipleInputs(input),
       ).not.toThrow();
     });
 
     it('배열 내에 공백이 포함된 경우 CustomError를 던져야 한다', () => {
       const input = '1,2,,3';
-      expect(() => InputViewValidator.isValidMultipleInputs(input)).toThrow(
+      expect(() => InputViewValidator.areValidMultipleInputs(input)).toThrow(
         CustomError,
       );
     });
 
     it('배열 내에 숫자가 아닌 입력이 포함된 경우 CustomError를 던져야 한다', () => {
       const input = '1,2,NaN';
-      expect(() => InputViewValidator.isValidMultipleInputs(input)).toThrow(
+      expect(() => InputViewValidator.areValidMultipleInputs(input)).toThrow(
         CustomError,
       );
     });
 
     it('배열 내에 음수 입력이 포함된 경우 CustomError를 던져야 한다', () => {
       const input = '1,-2,3';
-      expect(() => InputViewValidator.isValidMultipleInputs(input)).toThrow(
+      expect(() => InputViewValidator.areValidMultipleInputs(input)).toThrow(
         CustomError,
       );
     });
 
     it('배열 내에 정수가 아닌 입력이 포함된 경우 CustomError를 던져야 한다', () => {
       const input = '1,2.5,3';
-      expect(() => InputViewValidator.isValidMultipleInputs(input)).toThrow(
+      expect(() => InputViewValidator.areValidMultipleInputs(input)).toThrow(
         CustomError,
       );
     });
 
     it('잘못된 구분자로 입력된 배열에 대해 CustomError를 던져야 한다', () => {
       const input = '1;2,3';
-      expect(() => InputViewValidator.isValidMultipleInputs(input)).toThrow(
+      expect(() => InputViewValidator.areValidMultipleInputs(input)).toThrow(
         CustomError,
       );
     });

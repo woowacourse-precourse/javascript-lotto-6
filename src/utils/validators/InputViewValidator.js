@@ -35,7 +35,7 @@ const InputViewValidator = {
     validateIsInteger(number);
   },
 
-  isValidMultipleInputs(input) {
+  areValidMultipleInputs(input) {
     const inputNumberArray = input.split(SYMBOL.inputNumberSeparator);
     inputNumberArray.forEach(item => this.isValidInput(item));
   },
