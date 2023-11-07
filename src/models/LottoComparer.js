@@ -18,15 +18,20 @@ class LottoComparer {
     this.lottoWinnerPrize = lottoWinnerPrize;
   }
 
-  setComparedLottoNumbers() {
+  processLotto() {
     this.lottos.forEach(lotto => {
-      const lottoNumbers = lotto.getNumbers();
-      const correctCount = this.countCorrectNumbers(lottoNumbers);
-      const hasBonusNumber = this.checkBonusNumber(lottoNumbers);
-
+      const { hasBonusNumber, correctCount } = this.compareLottoNumbers(lotto);
       if (correctCount < this.LIMIT_COUNT) return;
       this.updatePrize(hasBonusNumber, correctCount);
     });
+  }
+
+  compareLottoNumbers(lotto) {
+    const lottoNumbers = lotto.getNumbers();
+    const correctCount = this.countCorrectNumbers(lottoNumbers);
+    const hasBonusNumber = this.checkBonusNumber(lottoNumbers);
+
+    return { correctCount, hasBonusNumber };
   }
 
   updatePrize(hasBonusNumber, correctCount) {

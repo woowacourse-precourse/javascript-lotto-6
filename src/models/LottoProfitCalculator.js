@@ -8,7 +8,7 @@ class LottoProfitCalculator {
     const totalProfit = this.calculateTotalProfit();
 
     if (totalProfit === 0) {
-      return 0;
+      return 0.0;
     }
 
     const profitRate = (totalProfit / this.purchasedPrice) * 100;
