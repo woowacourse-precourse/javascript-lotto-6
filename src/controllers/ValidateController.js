@@ -1,5 +1,7 @@
+import { Console } from '@woowacourse/mission-utils';
 import ERROR_MESSAGE from '../constants/ErrorMessage';
 import NUMBER from '../constants/Number';
+import Convert from '../utils/Convert';
 
 const Validate = {
   isNumber(number) {
@@ -7,8 +9,7 @@ const Validate = {
   },
 
   isPurchaseUnit(amount) {
-    if (amount % NUMBER.PURCHASE_AMOUNT_UNIT > 0)
-      throw Error(ERROR_MESSAGE.INVALID_PURCHASE_UNIT);
+    if (amount % NUMBER.PURCHASE_AMOUNT_UNIT > 0) throw Error(ERROR_MESSAGE.INVALID_PURCHASE_UNIT);
   },
 
   isNumberInRange(number) {
@@ -17,6 +18,7 @@ const Validate = {
   },
 
   isWinningNumbersLength(winningNumbers) {
+    Console.print(winningNumbers.length);
     if (winningNumbers.length !== NUMBER.LOTTO_NUMBER_OF_NUMBERS)
       throw Error(ERROR_MESSAGE.INVALID_NUMBER_OF_WINNING_NUMBERS);
   },
@@ -33,22 +35,34 @@ const Validate = {
 };
 
 const ValidateController = {
-  validatePurchaseLottoAmount(amount) {
+  validatePurchaseLottoAmount(amountString) {
+    const amount = Convert.convertToNumber(amountString);
+
     Validate.isNumber(amount);
     Validate.isPurchaseUnit(amount);
+
+    return amount;
   },
 
-  validateWinningNumbers(numbers) {
+  validateWinningNumbers(numbersString) {
+    const numbers = Convert.convertToList(numbersString);
+
     numbers.map(number => Validate.isNumberInRange(number));
     Validate.isWinningNumbersLength(numbers);
     Validate.isDuplicateWinningNumbers(numbers);
     numbers.map(number => Validate.isNumberInRange(number));
+
+    return numbers;
   },
 
-  validateBonusNumber(number) {
+  validateBonusNumber(numberString) {
+    const number = Convert.convertToNumber(numberString);
+
     Validate.isNumber(number);
     Validate.isNumberInRange(number);
     Validate.isDuplicateBonusNumber(number);
+
+    return number;
   },
 };
 
