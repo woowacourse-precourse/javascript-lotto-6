@@ -1,4 +1,4 @@
-import LOTTO_CONSTANTS from '../src/Constants/LottoContstants';
+import { LOTTO_CONSTANTS } from '../src/Constants/LottoContstants';
 import Varificator from '../src/Utils/Varification';
 
 describe('Varification Test', () => {
@@ -83,6 +83,28 @@ describe('Varification Test', () => {
 
 			// when, then
 			expect(Varificator.isNotFitWithLottoLength(numbers)).toBe(true);
+		});
+	});
+
+	describe('isDuplicatedNumber => 배열 내 중복된 값이 존재하는지 검증하는 로직', () => {
+		test.each([
+			// given
+			[[5, 5]],
+			[[6, 5, 6]],
+			[[10, 10, 1, 2, 3]],
+		])(`%s는 중복값이 존재한다.`, (value) => {
+			// when, then
+			expect(Varificator.isDuplicatedNumber(value)).toBe(true);
+		});
+
+		test.each([
+			// given
+			[[0, 1, 2]],
+			[[1, 2, 3, 4, 5]],
+			[[1]],
+		])(`%s는 중복값이 존재하지 않는다.`, (value) => {
+			// when, then
+			expect(Varificator.isDuplicatedNumber(value)).toBe(false);
 		});
 	});
 
