@@ -44,5 +44,6 @@ module.exports = {
     "prefer-arrow-callback": "off",
     "no-await-in-loop": "off",
     "no-restricted-globals": "off",
+    "no-new": "off",
   },
 };
