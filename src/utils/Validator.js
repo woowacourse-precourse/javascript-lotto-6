@@ -23,7 +23,7 @@ class Validator {
   }
 
   static validateBonusNumber(bonusNumber) {
-    const validators = [this.missingValue, this.invalidNumber, this.invalidRange];
+    const validators = [this.missingValue, this.invalidNumber, this.invalidNumberRange];
 
     validators.forEach(validator => validator(bonusNumber));
   }
@@ -58,6 +58,11 @@ class Validator {
   static invalidNumbersCount(numbers) {
     if (numbers.length !== CONSTANTS.number.count)
       throw new Error(ERROR.message.invalidNumbersCount);
+  }
+
+  static invalidNumberRange(number) {
+    if (Number(number) < CONSTANTS.number.min || Number(number) > CONSTANTS.number.max)
+      throw new Error(ERROR.message.invalidRange);
   }
 
   static invalidRange(numbers) {
