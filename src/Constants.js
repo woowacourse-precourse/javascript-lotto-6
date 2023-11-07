@@ -6,6 +6,7 @@ export const PURCHASE_AMOUNT_ERROR_MESSAGES = Object.freeze({
   NOT_NUMBER: '[ERROR] 구입 금액은 숫자이어야 합니다',
   START_WITH_ZERO: '[ERROR] 구입 금액이 0으로 시작합니다.',
   LESS_THAN_LOTTO_PRICE: '[ERROR] 로또 한장보다 적은 구입 금액입니다.',
+  NOT_DIVISIBLE_BY_THOUSAND: `[ERROR] 1,000원으로 나누어 떨어지지 않는 구입 금액입니다.`,
 });
 
 export const LOTTO_PRICE = 1000;

@@ -10,6 +10,9 @@ export const validatePurchaseAmountInput = async (purchaseAmountInput) => {
   if (isSmallerThanLottoPrice(purchaseAmountInput)) {
     throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGES.LESS_THAN_LOTTO_PRICE);
   }
+  if (!isDivisibleByThousand(purchaseAmountInput)) {
+    throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGES.NOT_DIVISIBLE_BY_THOUSAND);
+  }
 };
 
 const isNumber = (input) => {
@@ -23,4 +26,8 @@ const isStartWithZero = (input) => {
 
 const isSmallerThanLottoPrice = (input) => {
   return LOTTO_PRICE > Number(input);
+};
+
+const isDivisibleByThousand = (input) => {
+  return Number(input) % 1000 === 0;
 };
