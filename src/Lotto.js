@@ -2,9 +2,18 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/index.js';
 
 class Lotto {
+  amount;
+  tickets = [];
   constructor(numbers) {}
 
-  async buy() {}
+  async buy() {
+    this.#readBuyAmount();
+    const ticketCount = this.#getNumberOfAvailableTickets();
+    for (let i = 0; i < ticketCount; i++) {
+      this.#publishLottoTicket();
+    }
+    this.#printAllTickets();
+  }
 
   async setWinningNumbers() {}
 
@@ -14,11 +23,28 @@ class Lotto {
 
   printRateOfRevenue() {}
 
-  #readBuyAmount() {}
+  async #readBuyAmount() {
+    const amountInput = await MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGE.GET_BUY_AMOUNT + '\n',
+    );
+    const amount = this.#convertToNumber(amountInput);
+    this.#validateBuyUnit(amount);
+    this.amount = amount;
+  }
 
-  #validateIsNumber(input) {}
+  #convertToNumber(numberString) {
+    const number = parseInt(numberString);
+    if (!number) {
+      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+    }
+    return number;
+  }
 
-  #validateBuyUnit(input) {}
+  #validateBuyUnit(amount) {
+    if (amount % 1000 > 0) {
+      throw new Error(ERROR_MESSAGE.BUY_AMOUNT_ERROR);
+    }
+  }
 
   #validateNumberOfInputs(input) {}
 
@@ -26,7 +52,11 @@ class Lotto {
 
   #getNumberOfAvailableTickets(amount) {}
 
-  #publishLottoTicket() {}
+  #publishLottoTicket() {
+    const ticket = new LottoTicket();
+    this.tickets.push(ticket);
+    console.log(ticket);
+  }
 
   #printAllTickets() {}
 
