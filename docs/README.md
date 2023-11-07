@@ -10,7 +10,6 @@ src/
 │   ├── statistics.js
 ├── module/
 │   ├── setting.js
-│   ├── statistics.js
 ├── utils/
 │   ├── calculator.js
 │   ├── validator.js

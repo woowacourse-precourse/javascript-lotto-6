@@ -10,8 +10,7 @@ import {
   MATCH_5_BONUS,
   MATCH_6,
 } from "../constants/statistics.js";
-import { calculateStatistics } from "../module/statistics.js";
-import { calculateProfit } from "../utils/calculator.js";
+import { calculateProfit, calculateStatistics } from "../utils/calculator.js";
 
 export const View = {
   async getAmount() {
