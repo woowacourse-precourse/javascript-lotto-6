@@ -1,5 +1,5 @@
 import CustomError from './CustomError.js';
-import ERROR from './constants/Error.js';
+import ERROR from '../constants/Error.js';
 
 const {
   COMMON_INPUT,

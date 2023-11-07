@@ -1,5 +1,5 @@
-import View from './View/View.js';
-import LottoMachine from './LottoMachine.js';
+import View from '../View/View.js';
+import LottoMachine from '../Model/LottoMachine.js';
 
 class LottoGame {
   #view = new View();

@@ -1,5 +1,5 @@
-import LottoMachine from '../src/LottoMachine.js';
-import CustomError from '../src/CustomError.js';
+import LottoMachine from '../src/Model/LottoMachine.js';
+import CustomError from '../src/util/CustomError.js';
 import ERROR from '../src/constants/Error.js';
 
 describe('LottoMachine 클래스 테스트', () => {

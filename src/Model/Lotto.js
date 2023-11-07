@@ -1,4 +1,4 @@
-import { throwError, conditions } from '../Validator.js';
+import { throwError, conditions } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
 
 const { LOTTO_RANGE, LOTTO_LENGTH, LOTTO_DUPLICATE } = ERROR;

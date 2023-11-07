@@ -1,6 +1,6 @@
 import ERROR from '../src/constants/Error.js';
-import { Validator } from '../src/Validator.js';
-import CustomError from '../src/CustomError.js';
+import { Validator } from '../src/util/Validator.js';
+import CustomError from '../src/util/CustomError.js';
 
 describe('입력값 공통 유효성 검사 테스트', () => {
   describe('에러 테스트', () => {

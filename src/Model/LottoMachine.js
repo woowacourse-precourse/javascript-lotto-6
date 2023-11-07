@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Model/Lotto.js';
-import ERROR from './constants/Error.js';
-import { throwError, conditions } from './Validator.js';
+import Lotto from './Lotto.js';
+import ERROR from '../constants/Error.js';
+import { conditions, throwError } from '../util/Validator.js';
 
 const { PAYMENT_NUMBER, PAYMENT_THOUSAND } = ERROR;
 const { isPositiveInteger, isThousandUnits } = conditions;
