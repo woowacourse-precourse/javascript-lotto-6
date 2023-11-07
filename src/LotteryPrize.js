@@ -53,9 +53,9 @@ class LotteryPrize {
       fourthPrize: 0,
       fifthPrize: 0,
     };
-    this.#lottoBundle.forEach((lottoNumbers) => {
+    this.#lottoBundle.forEach((lotto) => {
       const lottoRank = this.#getLottoRank(
-        lottoNumbers,
+        lotto.getNumbers(),
         this.#winningNumbers,
         this.#bonusNumber
       );

@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import WinningStatistic from './WinningStatistic.js';
-const MESSAGE_WINNING_STATISTICS = '당첨 통계\n---';
+const MESSAGE_WINNING_STATISTICS = '\n당첨 통계\n---';
 
 class LottoView {
   static async getUserInput(message) {
@@ -31,9 +31,12 @@ class LottoView {
   static printLottoBundle(lottoBundle) {
     Console.print(`\n${lottoBundle.length}개를 구매했습니다.`);
     lottoBundle.forEach((lotto) => {
-      Console.print(`[${lotto.join(', ')}]`);
+      Console.print(`[${lotto.getNumbers().join(', ')}]`);
     });
-    Console.print('');
+  }
+
+  static printMessage(message) {
+    Console.print(message);
   }
 }
 export default LottoView;
