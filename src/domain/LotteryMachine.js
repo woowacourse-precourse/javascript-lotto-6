@@ -1,13 +1,16 @@
 import { Random } from "@woowacourse/mission-utils";
-import { LOTTO_RULE } from "../constants/BusinessNumber.js";
+import { REGEX, LOTTO_RULE } from "../constants/BusinessNumber.js";
+import { LOTTO_ERROR } from "../constants/Messeage.js";
+import CustomError from "../error/CustomError.js";
 
 class LotteryMachine {
   #lottoTicket;
 
   #issuanceLimit;
-
+  //purchaseAmount : string으로 들어옴
   constructor(purchaseAmount) {
-    this.#issuanceLimit = purchaseAmount / LOTTO_RULE.buyUnit;
+    this.#validatePurchaseAmount(purchaseAmount);
+    this.#issuanceLimit = Number(purchaseAmount) / LOTTO_RULE.buyUnit;
     this.#ticketMaker();
   }
 
@@ -22,6 +25,16 @@ class LotteryMachine {
   
   #ascendingOrder(lottoArray) {
     return lottoArray.sort((a, b) => a - b);
+  }
+
+  #validatePurchaseAmount(amountString) {
+    if (REGEX.number.test(amountString)) throw new CustomError(LOTTO_ERROR.form);
+
+    if (Number(amountString) > LOTTO_RULE.buyMax) throw new CustomError(LOTTO_ERROR.buyLimit);
+  
+    if (Number(amountString) < LOTTO_RULE.buyUnit) throw new CustomError(LOTTO_ERROR.moneyLack);
+  
+    if(Number(amountString) % LOTTO_RULE.buyUnit !== 0) throw new CustomError(LOTTO_ERROR.unitBreak);
   }
   
   getTiket() {

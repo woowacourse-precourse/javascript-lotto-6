@@ -1,26 +1,23 @@
 import { Console } from "@woowacourse/mission-utils";
 import { LOTTO_PLAY } from "../constants/Messeage.js";
-import { validatePurchaseAmount, validateBonusNumber, validateLuckyNumbers } from "../error/Validation.js";
+
 import { showLottoTicket, showStatisticsResult } from "./LottoStamper.js";
 import LotteryMachine from "../domain/LotteryMachine.js";
 import LottoReader from "../domain/LottoReader.js";
+import Lotto from "../Lotto.js";
+import Bonus from "../domain/Bonus.js";
 
 class LottoManager {
-  #purchaseAmount;
+  #lottoTicket;
 
   #luckyNumbers;
 
   #bonusNumber;
 
-  #lottoTicket;
-
   async startLottoSimulator() {
     await this.#getPurchaseAmount();
-    
-    const lotteryMachine = new LotteryMachine(this.#purchaseAmount);
-    this.#lottoTicket = lotteryMachine.getTiket();
     showLottoTicket(this.#lottoTicket);
- 
+    
     await this.#setWinningNumbers();
   }
 
@@ -41,10 +38,9 @@ class LottoManager {
   async #getPurchaseAmount() {
     try {
       const purchaseAmount = await Console.readLineAsync(`${LOTTO_PLAY.inputAmount}\n`);
-      validatePurchaseAmount(purchaseAmount);
+      const lotteryMachine = new LotteryMachine(purchaseAmount);
 
-      this.#purchaseAmount = Number(purchaseAmount);
-      
+      this.#lottoTicket = lotteryMachine.getTiket();
       Console.print('');
     } catch (messeage) {
       Console.print(`${messeage}`);
@@ -55,7 +51,10 @@ class LottoManager {
   async #getLuckyNumbers() {
     try {
       const luckyStrings = await Console.readLineAsync(`${LOTTO_PLAY.inputLucky}\n`);                                        
-      this.#luckyNumbers = validateLuckyNumbers(luckyStrings);
+      const luckNumbers = luckyStrings.split(',').map(Number);
+
+      const lotto = new Lotto(luckNumbers);
+      this.#luckyNumbers = lotto.getLuckyNumbers();
 
       Console.print('');
     } catch (messeage) {
@@ -66,10 +65,10 @@ class LottoManager {
 
   async #getBonusNumber() {
     try {
-      const bonusNumber = await Console.readLineAsync(`${LOTTO_PLAY.inputBonus}\n`);
-      validateBonusNumber(bonusNumber, this.#luckyNumbers);
+      const bonusString = await Console.readLineAsync(`${LOTTO_PLAY.inputBonus}\n`);
 
-      this.#bonusNumber = Number(bonusNumber);
+      const bonus = new Bonus(bonusString, this.#luckyNumbers);
+      this.#bonusNumber = bonus.getBonusNumber();
 
       Console.print('');
     } catch (messeage) {
