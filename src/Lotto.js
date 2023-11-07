@@ -1,5 +1,5 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import { Outputs } from './ui/Output.js';
+import { OUTPUTS } from './ui/Output.js';
 import CONSTANT from './constants/constant.js';
 import VALIDATOR from './utils/Validator.js';
 
@@ -30,12 +30,12 @@ class MakeLotto extends Lotto {
     this.#amount = amount;
   }
 
-  #validate(amount) {
+  #validate(amount = 0) {
     VALIDATOR.makeLottoValidators.validateAmountType(amount);
     VALIDATOR.makeLottoValidators.validateAmountUnit(amount);
   }
 
-  #makeLottoArray(quantity) {
+  #makeLottoArray(quantity = 0) {
     const lottosArr = Array.from({ length: quantity }, () => {
       const lottosNumber = Random.pickUniqueNumbersInRange(
         CONSTANT.game.lottoMin,
@@ -90,7 +90,8 @@ class LottoResult extends Lotto {
     };
   }
 
-  countMatchingNumbers(currentLotto) {
+  // 당첨 번호가 로또 번호와 일치할 때마다 카운트 +=1 한 후 리턴.
+  countMatchingNumbers(currentLotto = []) {
     let count = 0;
     currentLotto.forEach((number) => {
       if (this.winningNum.includes(number)) {
@@ -103,7 +104,8 @@ class LottoResult extends Lotto {
     return count;
   }
 
-  updateMatchesObj(matchesObj, count, currentLotto) {
+  // 로또 번호를 적중한 갯수를 나타내는 Object 제작.
+  updateMatchesObj(matchesObj = {}, count = 0, currentLotto = []) {
     if (count === 3) {
       return (matchesObj.three += 1);
     }
@@ -129,7 +131,7 @@ class LottoResult extends Lotto {
     return matchesObj;
   }
 
-  calcRevenue(matchResult, matcheAmountObj) {
+  calcRevenue(matchResult = {}, matcheAmountObj = {}) {
     let revenue = 0;
     Object.entries(matchResult).forEach(([key, value]) => {
       if (value > 0) {
@@ -155,8 +157,8 @@ class LottoResult extends Lotto {
   }
 
   async printResult() {
-    Outputs.printStatistics(await this.#isMatch());
-    Outputs.printRateOfReturn(await this.#getRateOfReturn());
+    OUTPUTS.printStatistics(await this.#isMatch());
+    OUTPUTS.printRateOfReturn(await this.#getRateOfReturn());
   }
 }
 

@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import CONSTANT from '../constants/constant.js';
 
 // 객체를 받아 값 출력
-export const Outputs = {
+export const OUTPUTS = {
   printStatistics(bills = {}) {
     Console.print(CONSTANT.outputs.statistics);
     Console.print(

@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-export const Inputs = {
+export const INPUTS = {
   async getAmount(message) {
     const userInput = await Console.readLineAsync(`${message}\n`);
     Console.print('');
