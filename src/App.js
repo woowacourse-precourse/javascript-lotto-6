@@ -10,6 +10,8 @@ const LOTTO_PRIZE = {
     6: 0,
 };
 
+const LOTTO_PRICE = 1000;
+
 class App {
     async play() {}
 
@@ -20,15 +22,15 @@ class App {
 
         pay = Number(pay);
 
-        if (pay < 1000) {
+        if (pay < LOTTO_PRICE) {
             throw new Error('[ERROR] 1000원 이상의 금액을 입력해주세요.');
         }
 
-        if (pay % 1000 !== 0) {
+        if (pay % LOTTO_PRICE !== 0) {
             throw new Error('[ERROR] 1000원 단위로 입력해주세요.');
         }
 
-        const count = pay / 1000;
+        const count = pay / LOTTO_PRICE;
         const lottos = [];
 
         for (let i = 0; i < count; i++) {
