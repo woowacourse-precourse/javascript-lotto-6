@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import { LOTTO } from '../constants/System.js';
 
 const LottoGenerator = {
   run(count) {
@@ -6,7 +7,13 @@ const LottoGenerator = {
   },
 
   generate(count) {
-    return Array.from({ length: count }, () => Random.pickUniqueNumbersInRange(1, 45, 6));
+    return Array.from({ length: count }, () =>
+      Random.pickUniqueNumbersInRange(
+        LOTTO.numberRangeStart,
+        LOTTO.numberRangeEnd,
+        LOTTO.numberCount,
+      ),
+    );
   },
 
   sortAscending(lottos) {

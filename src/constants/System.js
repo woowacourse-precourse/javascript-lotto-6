@@ -7,4 +7,5 @@ export const LOTTO = {
   delimiter: ',',
   numberRangeStart: 1,
   numberRangeEnd: 45,
+  numberCount: 6,
 };
