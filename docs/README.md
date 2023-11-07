@@ -12,7 +12,7 @@
 - 로또 수량은 (구입 금액) / 1000
 - 로또 번호는 오름차순으로 출력해야 함
 - 로또 번호는 [8, 21, 23, 41, 42, 43]과 같은 형식으로 출력해야 함
->> 구현 방법: getPrice() 함수 안에서 printLottoNumSet() 함수를 호출함
+>> 구현 방법: play() 함수 안에서 printLottoNumSet() 함수를 호출함
 - 예외 상황([ERROR]) (ValidateLottoNumSet.js 파일의 ValidateLottoNumSet() 함수에 구현함)
   - 로또 번호 세트가 서로 모두 같은 경우 (거의 불가능하겠지만)
     ```

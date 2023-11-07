@@ -21,6 +21,7 @@ class Lotto {
   };
 
   #validate(numbers) {
+    numbers = numbers.split(",").map(Number);
     if (!Array.isArray(numbers))
       throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
     if (numbers.some(num => Number.isNaN(num)))
