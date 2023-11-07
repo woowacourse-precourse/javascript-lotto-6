@@ -21,7 +21,7 @@ class Computer {
   #bonusNumber;
   #prizeResult;
 
-  constructor(winnnersNumbers, bonusNumber) {
+  constructor(winnnersNumbers, bonusNumber, cost) {
     this.#winnerNumbers = winnnersNumbers;
     this.#bonusNumber = bonusNumber;
     this.#prizeResult = {
@@ -31,6 +31,7 @@ class Computer {
       [FOURTH]: 0,
       [FIFTH]: 0,
     };
+    this.#cost = cost;
   }
 
   setPrizeResult(lottos) {
