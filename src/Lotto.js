@@ -8,6 +8,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    numbers.sort((current, next) => current - next);
   }
 
   static NUMBER_LENTH = 6;
@@ -20,12 +21,11 @@ class Lotto {
   }
 
   static generateLottoNumber() {
-    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
       Lotto.NUMBER_MIN,
       Lotto.NUMBER_MAX,
       Lotto.NUMBER_LENTH,
     );
-    const numbers = randomNumbers.sort((current, next) => current - next);
 
     return new Lotto(numbers);
   }
