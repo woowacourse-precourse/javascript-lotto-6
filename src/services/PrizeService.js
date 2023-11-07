@@ -5,6 +5,8 @@ class PrizeService {
 
   static #countUnit = 1;
 
+  static #defaultPrize = {};
+
   getPrize({ lotto, winningLotto }) {
     const { matchCount, matchBonus } = this.#matchLottoNumber({
       lotto,
@@ -21,7 +23,7 @@ class PrizeService {
         (acc[status] || PrizeService.#defaultCount) + PrizeService.#countUnit;
 
       return acc;
-    }, {});
+    }, PrizeService.#defaultPrize);
   }
 
   #matchLottoNumber({ lotto, winningLotto }) {

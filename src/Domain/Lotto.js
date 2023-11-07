@@ -1,17 +1,9 @@
 import ERROR from '../constants/error.js';
+import LOTTO from '../constants/lotto.js';
 import CustomError from '../errors/error.js';
 import Validator from '../utils/Validator.js';
 
 class Lotto {
-  // TODO: static 필드 상수로 분리하기.
-  static minNumber = 1;
-
-  static maxNumber = 45;
-
-  static length = 6;
-
-  static price = 1000;
-
   #numbers;
 
   /**
@@ -35,8 +27,8 @@ class Lotto {
   isLottoNumber(number) {
     return (
       Validator.isPositiveInteger(number) &&
-      number >= Lotto.minNumber &&
-      number <= Lotto.maxNumber
+      number >= LOTTO.minNumber &&
+      number <= LOTTO.maxNumber
     );
   }
 
@@ -51,13 +43,13 @@ class Lotto {
   }
 
   #validateLength(numbers) {
-    if (numbers.length !== Lotto.length) {
+    if (numbers.length !== LOTTO.length) {
       throw CustomError.lotto(ERROR.message.lotto.length);
     }
   }
 
   #validateDuplicate(numbers) {
-    if (new Set(numbers).size !== Lotto.length) {
+    if (new Set(numbers).size !== LOTTO.length) {
       throw CustomError.lotto(ERROR.message.lotto.notUnique);
     }
   }

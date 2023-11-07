@@ -1,9 +1,19 @@
 import PRIZE from '../constants/prize.js';
 
 class Prize {
+  static prizeMap = new Map([
+    [3, PRIZE.marchThree],
+    [4, PRIZE.matchFour],
+    [5, PRIZE.matchFive],
+    ['matchFiveAndBonus', PRIZE.matchFiveAndBonus],
+    [6, PRIZE.matchSix],
+  ]);
+
   static #losePrize = 0;
 
   static #matchFive = 5;
+
+  static #matchFiveAndBonus = 'matchFiveAndBonus';
 
   winningPrize;
 
@@ -25,10 +35,10 @@ class Prize {
 
   static #getPrizeData({ matchCount, matchBonus }) {
     if (matchCount === Prize.#matchFive && matchBonus) {
-      return PRIZE.matchFiveAndBonus;
+      return Prize.prizeMap.get(this.#matchFiveAndBonus);
     }
 
-    return PRIZE[matchCount];
+    return Prize.prizeMap.get(matchCount);
   }
 }
 

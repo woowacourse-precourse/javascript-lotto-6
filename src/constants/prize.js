@@ -34,11 +34,11 @@ const marchThree = Object.freeze({
 });
 
 const PRIZE = Object.freeze({
-  6: matchSix,
+  marchThree,
+  matchFour,
+  matchFive,
   matchFiveAndBonus,
-  5: matchFive,
-  4: matchFour,
-  3: marchThree,
+  matchSix,
 });
 
 export default PRIZE;

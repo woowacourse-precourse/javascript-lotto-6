@@ -1,4 +1,4 @@
-import PRIZE from '../constants/prize.js';
+import Prize from '../Domain/Prize.js';
 
 const MessageFormat = {
   error(message) {
@@ -10,7 +10,7 @@ const MessageFormat = {
   },
 
   totalPrize(prizeCount) {
-    return Object.entries(PRIZE)
+    return Array.from(Prize.prizeMap)
       .map(([key, { message }]) => `${message}${prizeCount[key] || 0}개`)
       .join('\n');
   },
