@@ -1,23 +1,28 @@
-import Lotto from './Lotto.js'
+import Lotto from './Lotto.js';
+import { Console } from "@woowacourse/mission-utils";
 
 class Customer {
   #payment;
-  lottoList = [];
 
   constructor(payment) {
     this.#payment = payment;
-    for (let i = 0; i < this.calculateTotalLottoTickets(); i++) {
-      this.buyLottoTickets();
-    }
-  }
-
-  calculateTotalLottoTickets() {
-    return this.#payment / 1000;
-  }
+    this.cntLottoTicekts = this.#payment / 1000;
+    this.lottoList = [];
+  } 
 
   buyLottoTickets() {
-    const lottoNumbers = new Lotto().getNumbers();
-    this.lottoList.push(lottoNumbers);
+    for (let i = 0; i < this.cntLottoTicekts; i++) {
+      this.lottoList.push(new Lotto());
+    }
+
+    this.printLottoTickets();
+  }
+
+  printLottoTickets() {
+    Console.print(`${this.cntLottoTicekts}개를 구매했습니다.`);
+    this.lottoList.forEach((lotto) => {
+      Console.print(`${lotto.getNumbers()}`);
+    })
   }
 
 }
