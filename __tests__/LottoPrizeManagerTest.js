@@ -86,4 +86,12 @@ describe("LottoPrizeManager 클래스 테스트", () => {
       expect(result).toEqual(defaultResult);
     }
   );
+
+  test("로또의 수익률 계산", () => {
+    const rankResult = { FIRST: 0, SECOND: 0, THIRD: 0, FOURTH: 0, FIFTH: 1 };
+
+    expect(
+      LottoPrizeManager.calculateProfitRate({ rankResult, totalMoney: 8000 })
+    ).toBe("62.5");
+  });
 });
