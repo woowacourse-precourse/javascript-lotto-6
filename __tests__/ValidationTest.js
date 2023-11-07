@@ -46,12 +46,17 @@ describe('유효성 검사 테스트', () => {
             const amount = NaN;
             expect(() => checkPurchaseAmount(amount)).toThrow(ERROR.INVALID_AMOUNT_MESSAGE);
         });
-        
+
         test('구매 금액이 0이면 예외가 발생한다.', () => {
             const amount = 0;
             expect(() => checkPurchaseAmount(amount)).toThrow(ERROR.INVALID_AMOUNT_MESSAGE);
         });
-      
+
+        test('구매 금액이 정수가 아닐 경우 예외가 발생한다.', () => {
+            const amount = 1.1;
+            expect(() => checkPurchaseAmount(amount)).toThrow(ERROR.INVALID_AMOUNT_MESSAGE);
+        });
+
         test('구매 금액이 로또 가격의 배수가 아니면 예외가 발생한다.', () => {
             const amount = 900;
             expect(() => checkPurchaseAmount(amount)).toThrow(ERROR.INVALID_AMOUNT_MESSAGE);
