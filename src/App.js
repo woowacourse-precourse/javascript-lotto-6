@@ -2,6 +2,7 @@ import input from './utils/input.js';
 import print from './utils/print.js';
 import getRandomUniqueNumbers from './utils/getRandomUniqueNumbers.js';
 import Lotto from './Lotto.js';
+import Computer from './Computer.js';
 import isValidCost from './modules/isValidCost.js';
 import isValidWinnerNumber from './modules/isValidWinnerNumber.js';
 import isValidBonusNumber from './modules/isValidBonusNumber.js';
@@ -19,6 +20,23 @@ const inputStep = {
     prompt: '보너스번호를 입력해 주세요\n',
     validate: isValidBonusNumber,
   },
+};
+
+const printStep = ['fifth', 'fourth', 'third', 'second', 'first'];
+const prizeMoney = {
+  first: 2000000000,
+  second: 30000000,
+  third: 1500000,
+  fourth: 50000,
+  fifth: 5000,
+};
+
+const prizeStandard = {
+  first: '6개 일치',
+  second: '5개 일치, 보너스 볼 일치',
+  third: '5개 일치',
+  fourth: '4개 일치',
+  fifth: '3개 일치',
 };
 
 class App {
@@ -63,6 +81,19 @@ class App {
       inputStep.bonusNumber.validate(input, winnerNumbers);
     });
     bonusNumber = Number(bonusNumber);
+
+    print('당첨 통계');
+    print('---');
+
+    const computer = new Computer(winnerNumbers, bonusNumber, cost);
+    computer.setPrizeResult(this.#lottos);
+
+    const reuslt = computer.getPrizeResult();
+    printStep.forEach((elem) => {
+      print(`${prizeStandard[elem]} (${prizeMoney[elem].toLocaleString()}원) - ${reuslt[elem]}개`);
+    });
+
+    print(`총 수익률은 ${computer.getProfitRatio()}입니다.`);
   }
 }
 
