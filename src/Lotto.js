@@ -29,7 +29,7 @@ class Lotto {
       if (number > LOTTO_RULE.maxNumber || number < LOTTO_RULE.minNumber) {
         throw new CustomError(LOTTO_ERROR.luckyRange);
       }      
-    })
+    });
   }
 
   getLuckyNumbers() {

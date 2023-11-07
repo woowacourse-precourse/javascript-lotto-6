@@ -1,11 +1,11 @@
 import { LOTTO_RANK } from "../constants/BusinessNumber.js";
 
 class LottoRankMaker {
-  #lottoTicket = [];
+  #lottoTicket;
 
-  #luckyArray = [];
+  #luckyArray;
 
-  #bonusNumber = 0;
+  #bonusNumber;
 
   #rankArray = [];
 
@@ -21,9 +21,7 @@ class LottoRankMaker {
   }
 
   #countDuplicate(lottoArray, luckyArray) {
-    const count = lottoArray
-    .filter((number) => luckyArray.includes(number))
-    .length;
+    const count = lottoArray.filter((number) => luckyArray.includes(number)).length;
 
     return count;
   }
@@ -35,13 +33,13 @@ class LottoRankMaker {
       if (rank) {
         this.#rankArray.push(this.#rankFilter(lottoArray));
       }   
-    })
+    });
   }
 
   #rankFilter(lottoArray) {
     const luckyCount = this.#countDuplicate(lottoArray, this.#luckyArray);
     const bonusCount = this.#countDuplicate(lottoArray, [this.#bonusNumber]);
-    if (luckyCount < 3) return false;
+    if (luckyCount < 3) return false
 
     if (luckyCount === 6) return LOTTO_RANK.theFirst;
 
