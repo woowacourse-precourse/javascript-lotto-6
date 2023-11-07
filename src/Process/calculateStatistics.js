@@ -30,16 +30,4 @@ function calculateStatistics(lottosList, winningNumbers, bonusNumber) {
   return tally;
 }
 
-console.log(
-  calculateStatistics(
-    [
-      [5, 20, 31, 35, 37, 40],
-      [3, 7, 8, 14, 19, 25],
-      [1, 2, 13, 21, 22, 27],
-    ],
-    [5, 20, 31, 35, 37, 12],
-    8
-  )
-);
-
 export default calculateStatistics;
