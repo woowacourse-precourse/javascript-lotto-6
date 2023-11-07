@@ -1,18 +1,12 @@
 import {
   IGNORE_MATCHING_COUNTS,
   PRIZE_MONEY_BY,
-  RANKING,
   RANKING_BY,
+  RESULTS_INITIAL_ARRAYS,
 } from './LottoInfo.js';
 
 class WinningResults {
-  #resultMap = new Map([
-    [RANKING.first, 0],
-    [RANKING.second, 0],
-    [RANKING.third, 0],
-    [RANKING.fourth, 0],
-    [RANKING.fifth, 0],
-  ]);
+  #resultMap = new Map(RESULTS_INITIAL_ARRAYS);
 
   saveResultBy(matchingCount) {
     if (IGNORE_MATCHING_COUNTS.includes(matchingCount)) return;

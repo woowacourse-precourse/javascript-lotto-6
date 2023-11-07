@@ -50,11 +50,20 @@ const PRIZE_MONEY_BY = {
 };
 Object.freeze(PRIZE_MONEY_BY);
 
+const RESULTS_INITIAL_ARRAYS = [
+  Object.freeze([RANKING.first, 0]),
+  Object.freeze([RANKING.second, 0]),
+  Object.freeze([RANKING.third, 0]),
+  Object.freeze([RANKING.fourth, 0]),
+  Object.freeze([RANKING.fifth, 0]),
+];
+Object.freeze(RESULTS_INITIAL_ARRAYS);
+
 export {
   LOTTO,
   IGNORE_MATCHING_COUNTS,
   MATCHING_COUNT,
-  RANKING,
   RANKING_BY,
   PRIZE_MONEY_BY,
+  RESULTS_INITIAL_ARRAYS,
 };
