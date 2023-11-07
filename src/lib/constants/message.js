@@ -4,6 +4,6 @@ export const GAME_MESSAGE = Object.freeze({
   LOTTO_BONUS_INPUT: "보너스 번호를 입력해 주세요.",
 });
 
-export const RESLT_MESSAGE = Object.freeze({
+export const RESULT_MESSAGE = Object.freeze({
   COUNT: "개를 구매했습니다.",
 });
