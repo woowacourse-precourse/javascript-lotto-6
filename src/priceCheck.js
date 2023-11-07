@@ -6,5 +6,5 @@ export default function priceCheck(price) {
     throw new Error('[ERROR] : 단위는 1000단위로 입력해야합니다.');
   }
 
-  return Number(price) / 1000;
+  return Number(price);
 }
