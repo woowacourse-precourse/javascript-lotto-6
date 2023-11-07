@@ -65,10 +65,7 @@ class App {
     await this.setBonusNumber();
 
     const results = this.#game.calculateTotalWinningResults(user.getTickets());
-    const totalReturn = this.#game.calculateTotalReturn(
-      results,
-      user.getMoney()
-    );
+    const totalReturn = this.#game.calculateTotalReturn(results, user.getMoney());
 
     this.#output.winningResult(results);
     this.#output.totalReturnResult(totalReturn);

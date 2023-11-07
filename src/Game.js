@@ -44,10 +44,7 @@ class Game {
   #validateBonusNumber(bonusNumber) {
     Validation.validateInputNumber(bonusNumber);
     Validation.validateInputOutOfLottoRange(bonusNumber);
-    Validation.validateInputDuplicateWinningNumbers(
-      bonusNumber,
-      this.#winningNumbers
-    );
+    Validation.validateInputDuplicateWinningNumbers(bonusNumber, this.#winningNumbers);
   }
 
   setWinningNumbers(winningNumbers) {
@@ -61,11 +58,7 @@ class Game {
   }
 
   createLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(
-      LOTTO_NUMBER.min,
-      LOTTO_NUMBER.max,
-      LOTTO_NUMBER.length
-    );
+    return Random.pickUniqueNumbersInRange(LOTTO_NUMBER.min, LOTTO_NUMBER.max, LOTTO_NUMBER.length);
   }
 
   createSingleLottoTicket() {
@@ -94,10 +87,7 @@ class Game {
     };
 
     tickets.forEach((ticket) => {
-      const rank = ticket.calculateLottoResult(
-        this.#winningNumbers,
-        this.#bonusNumber
-      );
+      const rank = ticket.calculateLottoResult(this.#winningNumbers, this.#bonusNumber);
       results[rank] += 1;
     });
 

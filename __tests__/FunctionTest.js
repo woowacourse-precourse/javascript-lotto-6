@@ -24,9 +24,7 @@ describe('로또 구입 기능 테스트', () => {
 describe('로또 생성 기능 테스트', () => {
   test('로또는 중복되지 않은 번호로 생성된다.', () => {
     const ticket = new Game().createSingleLottoTicket();
-    expect(
-      new Set(ticket.getNumbers()).size === ticket.getNumbers().length
-    ).toBeTruthy();
+    expect(new Set(ticket.getNumbers()).size === ticket.getNumbers().length).toBeTruthy();
   });
 
   test('로또는 6개의 번호로 생성된다.', () => {
@@ -86,40 +84,28 @@ describe('당첨 내역 계산 기능 테스트', () => {
   });
 
   test('로또가 1등, 2등에 당첨됐을 때', () => {
-    const tickets = [
-      new Lotto([1, 2, 3, 4, 5, 6]),
-      new Lotto([1, 2, 3, 4, 5, 7]),
-    ];
+    const tickets = [new Lotto([1, 2, 3, 4, 5, 6]), new Lotto([1, 2, 3, 4, 5, 7])];
     const results = { 0: 0, 1: 1, 2: 1, 3: 0, 4: 0, 5: 0 };
 
     expect(game.calculateTotalWinningResults(tickets)).toEqual(results);
   });
 
   test('로또가 1등, 3등에 당첨됐을 때', () => {
-    const tickets = [
-      new Lotto([1, 2, 3, 4, 5, 6]),
-      new Lotto([1, 2, 3, 4, 5, 8]),
-    ];
+    const tickets = [new Lotto([1, 2, 3, 4, 5, 6]), new Lotto([1, 2, 3, 4, 5, 8])];
     const results = { 0: 0, 1: 1, 2: 0, 3: 1, 4: 0, 5: 0 };
 
     expect(game.calculateTotalWinningResults(tickets)).toEqual(results);
   });
 
   test('로또가 1등, 4등에 당첨됐을 때', () => {
-    const tickets = [
-      new Lotto([1, 2, 3, 4, 5, 6]),
-      new Lotto([1, 2, 3, 4, 8, 9]),
-    ];
+    const tickets = [new Lotto([1, 2, 3, 4, 5, 6]), new Lotto([1, 2, 3, 4, 8, 9])];
     const results = { 0: 0, 1: 1, 2: 0, 3: 0, 4: 1, 5: 0 };
 
     expect(game.calculateTotalWinningResults(tickets)).toEqual(results);
   });
 
   test('로또가 1등, 5등에 당첨됐을 때', () => {
-    const tickets = [
-      new Lotto([1, 2, 3, 4, 5, 6]),
-      new Lotto([1, 2, 3, 8, 9, 10]),
-    ];
+    const tickets = [new Lotto([1, 2, 3, 4, 5, 6]), new Lotto([1, 2, 3, 8, 9, 10])];
     const results = { 0: 0, 1: 1, 2: 0, 3: 0, 4: 0, 5: 1 };
 
     expect(game.calculateTotalWinningResults(tickets)).toEqual(results);
@@ -168,7 +154,3 @@ describe('총 수익률 계산 기능 테스트', () => {
     expect(game.calculateTotalReturn(results, money)).toEqual(0);
   });
 });
-
-// describe('당첨 내역 출력 기능 테스트');
-
-// describe('총 수익률 출력 기능 테스트');

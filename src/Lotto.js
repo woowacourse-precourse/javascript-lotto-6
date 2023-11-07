@@ -27,8 +27,7 @@ class Lotto {
   }
 
   calculateMatchNumber(winningNumbers) {
-    return this.#numbers.filter((number) => winningNumbers.includes(number))
-      .length;
+    return this.#numbers.filter((number) => winningNumbers.includes(number)).length;
   }
 
   compareMatchNumberWithPrize(matchNumberCount, bonusNumber) {
@@ -46,10 +45,7 @@ class Lotto {
 
   calculateLottoResult(winningNumbers, bonusNumber) {
     const matchNumberCount = this.calculateMatchNumber(winningNumbers);
-    const result = this.compareMatchNumberWithPrize(
-      matchNumberCount,
-      bonusNumber
-    );
+    const result = this.compareMatchNumberWithPrize(matchNumberCount, bonusNumber);
     return result;
   }
 }

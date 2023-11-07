@@ -10,9 +10,7 @@ describe('당첨 번호 유효성 테스트', () => {
 
   test('당첨 번호가 6개가 아닐 때, 예외가 발생한다.', () => {
     const input = '1,2,3,4,5';
-    expect(() => new Game().setWinningNumbers(input)).toThrow(
-      '[ERROR] 입력이 6개가 아닙니다.'
-    );
+    expect(() => new Game().setWinningNumbers(input)).toThrow('[ERROR] 입력이 6개가 아닙니다.');
   });
 
   test('당첨 번호에 중복이 있을 때, 예외가 발생한다.', () => {
@@ -24,9 +22,7 @@ describe('당첨 번호 유효성 테스트', () => {
 
   test('당첨 번호에 숫자가 아닌 값이 있을 때, 예외가 발생한다.', () => {
     const input = 'ㄱ,1,2,3,4,5';
-    expect(() => new Game().setWinningNumbers(input)).toThrow(
-      '[ERROR] 입력이 숫자가 아닙니다.'
-    );
+    expect(() => new Game().setWinningNumbers(input)).toThrow('[ERROR] 입력이 숫자가 아닙니다.');
   });
 
   test('당첨 번호에 1 ~ 45 사이가 아닌 값이 있을 때, 예외가 발생한다.', () => {

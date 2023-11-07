@@ -20,11 +20,7 @@ class Output {
 
   lottoTicketNumbers(tickets) {
     tickets.forEach((ticket) =>
-      Console.print(
-        OUTPUT.ticket_number(
-          ticket.getNumbers().join(`${LOTTO_NUMBER.seperator} `)
-        )
-      )
+      Console.print(OUTPUT.ticket_number(ticket.getNumbers().join(`${LOTTO_NUMBER.seperator} `)))
     );
   }
 
