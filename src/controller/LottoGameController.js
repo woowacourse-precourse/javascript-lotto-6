@@ -38,7 +38,7 @@ class LottoGameController {
     try {
       LottoPurchase.validate(purchaseAmount);
     } catch (error) {
-      printMessage(MESSAGES.errorHeader, error);
+      printMessage(`${error.name}${error.message}`);
       purchaseAmount = await this.purchaseLotto();
     }
     return purchaseAmount;
@@ -50,7 +50,7 @@ class LottoGameController {
     try {
       Lotto.validate(userLottoNumbers);
     } catch (error) {
-      printMessage(MESSAGES.errorHeader, error);
+      printMessage(`${error.name}${error.message}`);
       userLottoNumbers = await this.getUserLottoNumbers();
     }
     return userLottoNumbers;
@@ -61,7 +61,7 @@ class LottoGameController {
     try {
       BonusLottoNumber.validate(userBonusNumber, userLottoNumbers);
     } catch (error) {
-      printMessage(MESSAGES.errorHeader, error);
+      printMessage(`${error.name}${error.message}`);
       userBonusNumber = await this.getUserBonusNumber(userLottoNumbers);
     }
     return userBonusNumber;
@@ -80,22 +80,6 @@ class LottoGameController {
       winningNumbers,
     );
   }
-  // async getUserNumber(){
-  //     const userLottoNumbers = await InputView.
-  //     const validUserLottoNumbse = new Lotto(userLottoNumbers)
-  //     const userBonusLottoNumber = await InputView.
-  //     const validUserBonusLottoNumber = new BonusLottoNumber(userBonusLottoNumber)
-
-  //     this.getLottoWinninnResult(validUserLottoNumbse, validUserBonusLottoNumber)
-  // }
-
-  // getLottoWinninnResult(){
-
-  // }
-
-  // getQuentity(){
-
-  // }
 }
 
 export default LottoGameController;

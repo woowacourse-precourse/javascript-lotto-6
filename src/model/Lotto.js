@@ -11,20 +11,20 @@ class Lotto {
 
   static validate(numbers) {
     if (numbers.length !== NUMBERS.lottoNumberLength) {
-      printErrorMessage(MESSAGES.errorHeader, MESSAGES.invalidLength);
+      printErrorMessage(MESSAGES.invalidLength);
     }
 
     const lottoNumberRange = number =>
       number >= NUMBERS.minLottoNumber && number <= NUMBERS.maxLottoNumber;
 
     if (!numbers.every(lottoNumberRange)) {
-      printErrorMessage(MESSAGES.errorHeader, MESSAGES.invalidRange);
+      printErrorMessage(MESSAGES.invalidRange);
     }
 
     const deleteDuplication = new Set(numbers);
 
     if (numbers.length !== deleteDuplication.size) {
-      printErrorMessage(MESSAGES.errorHeader, MESSAGES.duplicatedNumber);
+      printErrorMessage(MESSAGES.duplicatedNumber);
     }
   }
 }
