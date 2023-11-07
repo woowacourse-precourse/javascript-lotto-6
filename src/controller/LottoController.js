@@ -42,18 +42,31 @@ class LottoController {
 		);
 	}
 
-	// static countBonusNum() {
-	// 	return this.lottoList.map(
-	// 		(lotto) =>
-	// 			lotto.getNumbers().filter((num) => winningNumber.includes(num)).length
-	// 	);
-	// }
+	static countBonusNum(mathingNums, bonusNumber) {
+		const decideBonusNum = (idx) => {
+			console.log(bonusNumber);
+			if (this.lottoNumList[idx].includes(bonusNumber)) return "5+1"; // 하드 코딩
+			return "5"; // 하드코딩
+		};
+		return mathingNums.reduce((prev, curr, idx) => {
+			if (curr === 5) {
+				// 하드코딩
+				prev.push(decideBonusNum(idx));
+				return prev;
+			}
+			prev.push(curr.toString());
+			return prev;
+		}, []);
+	}
 
-	static setMatchingNumMap(winningNumber) {
+	static setMatchingNumMap(winningNumber, bonusNumber) {
 		this.setLottoNumList();
-		const mathingNums = this.countMatchingNum(winningNumber); // 값이 5이면 한번 더 판별
+		const mathingNums = this.countMatchingNum(winningNumber);
 
-		console.log("일치값", mathingNums);
+		console.log("보너스 제외 일치값", mathingNums); // 값이 5이면 한번 더 판별
+		const abc = this.countBonusNum(mathingNums, bonusNumber);
+		console.log("보너스 포함 일치값", abc); // 값이 5이면 한번 더 판별
+
 		// //보너스
 		// mathingNum.forEach((num) => {
 		// 	const key = num.toString();
