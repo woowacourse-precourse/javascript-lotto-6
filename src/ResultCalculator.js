@@ -3,12 +3,12 @@ import WINNING_PRICE from './constants/winningPrice.js';
 import { roundToOneDecimalPlace } from './utils/function.js';
 
 class ResultCalculator {
-  #ranking;
+  #cntRank;
 
   #earningRate;
 
   constructor() {
-    this.#ranking = {
+    this.#cntRank = {
       first: 0, // match 6 numbers
       second: 0, // match 5 numbers + bonus number
       third: 0, // match 5 numbers
@@ -17,8 +17,8 @@ class ResultCalculator {
     };
   }
 
-  get ranking() {
-    return this.#ranking;
+  get cntRank() {
+    return this.#cntRank;
   }
 
   get earningRate() {
@@ -34,15 +34,15 @@ class ResultCalculator {
 
   #rankLotto(cnt, lotto, winningLotto) {
     if (cnt === 6) {
-      this.#ranking.first += 1;
+      this.#cntRank.first += 1;
     } else if (cnt === 5 && this.#isBonusMatch(lotto, winningLotto)) {
-      this.#ranking.second += 1;
+      this.#cntRank.second += 1;
     } else if (cnt === 5) {
-      this.#ranking.third += 1;
+      this.#cntRank.third += 1;
     } else if (cnt === 4) {
-      this.#ranking.fourth += 1;
+      this.#cntRank.fourth += 1;
     } else if (cnt === 3) {
-      this.#ranking.fifth += 1;
+      this.#cntRank.fifth += 1;
     }
   }
 
@@ -63,7 +63,7 @@ class ResultCalculator {
   }
 
   #getSumOfWinningAmount() {
-    return Object.entries(this.#ranking).reduce((acc, entry) => {
+    return Object.entries(this.#cntRank).reduce((acc, entry) => {
       const [rank, cnt] = entry;
       return acc + cnt * WINNING_PRICE[rank];
     }, 0);
