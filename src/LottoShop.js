@@ -1,17 +1,15 @@
 import Lotto from './Lotto.js';
-import { ERROR } from './Message.js';
+import { LOTTO } from './LottoInfo.js';
+import { ERROR } from './LottoMessage.js';
 import LottoNumbersGenerator from './RandomNumbersGenerator.js';
 
 class LottoShop {
-  #LOTTO_PRICE = 1000;
-  #ZERO = 0;
-
   #numbersGenerator = new LottoNumbersGenerator();
 
   sell(amount) {
     this.#validate(amount);
-    const numberOfLottos = amount / this.#LOTTO_PRICE;
-    const lottos = this.#createLottos(numberOfLottos);
+    const lottoCount = amount / LOTTO.price;
+    const lottos = this.#createLottos(lottoCount);
     return lottos;
   }
 
@@ -23,8 +21,8 @@ class LottoShop {
     return lottos;
   }
 
-  #validate(value) {
-    if (value % this.#LOTTO_PRICE !== this.#ZERO) {
+  #validate(amount) {
+    if (amount % LOTTO.price !== 0) {
       throw new Error(ERROR.notBeDividedByThousand);
     }
   }

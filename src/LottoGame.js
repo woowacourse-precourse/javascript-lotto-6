@@ -1,5 +1,4 @@
 import LottoPurchaser from './LottoPurchaser.js';
-import { TEMPLATE } from './Message.js';
 import View from './View.js';
 import WinningLotto from './WinningLotto.js';
 
@@ -8,41 +7,26 @@ class LottoGame {
   #winningLotto;
 
   async play() {
-    await this.#start();
+    await this.#determinePurchaseAmount();
     this.#purchaseLottos();
     await this.#createWinningLotto();
     this.#purchaser.check(this.#winningLotto);
   }
 
-  async #start() {
+  async #determinePurchaseAmount() {
     try {
       const purchaseAmount = await View.askPurchaseAmount();
       this.#purchaser = new LottoPurchaser(purchaseAmount);
     } catch (error) {
       View.print(error.message);
-      await this.#start();
+      await this.#determinePurchaseAmount();
     }
   }
 
   #purchaseLottos() {
     this.#purchaser.purchase();
-    this.#showLottoCount();
-    this.#showSortedLottos();
-  }
-
-  #showLottoCount() {
-    const numberOfLottos = this.#purchaser.getLottoCount();
-    const message = TEMPLATE.numberOfLottos(numberOfLottos);
-    View.print(message);
-  }
-
-  #showSortedLottos() {
-    const sortedLottos = this.#purchaser.getSortedLottos();
-    const message = sortedLottos.reduce(
-      (acc, cur) => acc + TEMPLATE.sortedLotto(cur.join(', ')),
-      '',
-    );
-    View.print(message);
+    View.printLottoCount(this.#purchaser.getLottoCount());
+    View.printSortedLottos(this.#purchaser.getSortedLottos());
   }
 
   async #createWinningLotto() {

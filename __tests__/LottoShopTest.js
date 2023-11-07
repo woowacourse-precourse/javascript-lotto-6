@@ -1,5 +1,5 @@
 import LottoShop from '../src/LottoShop.js';
-import { ERROR } from '../src/Message.js';
+import { ERROR } from '../src/LottoMessage.js';
 
 describe('로또 판매점 클래스 테스트', () => {
   const lottoShop = new LottoShop();

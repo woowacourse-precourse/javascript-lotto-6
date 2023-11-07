@@ -1,5 +1,5 @@
 import LottoPurchaser from '../src/LottoPurchaser.js';
-import { ERROR } from '../src/Message.js';
+import { ERROR } from '../src/LottoMessage.js';
 
 describe('로또 구매자 클래스 테스트', () => {
   describe('ERROR.Falsy', () => {

@@ -1,45 +1,44 @@
-import { ERROR } from './Message.js';
+import { LOTTO, LOTTO_NUMBER } from './LottoInfo.js';
+import { ERROR } from './LottoMessage.js';
 
 class Lotto {
-  #LENGTH = 6;
-  #START = 1;
-  #END = 45;
-
-  #numbers;
+  #numbers = [];
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  countMatchingNumbersWith(winningNumbers) {
-    const matchingNumbers = this.#numbers.filter((number) =>
-      winningNumbers.includes(number),
-    );
-    return matchingNumbers.length;
-  }
-
-  getSortedLotto() {
-    return this.#numbers.sort((a, b) => a - b);
-  }
-
   includes(number) {
     return this.#numbers.includes(number);
   }
 
+  countMatchingWith(winningNumbers) {
+    const matchingCount = this.#numbers.filter((number) =>
+      winningNumbers.includes(number),
+    ).length;
+    return matchingCount;
+  }
+
+  get() {
+    return [...this.#numbers];
+  }
+
   #validate(numbers) {
-    if (numbers.length !== this.#LENGTH) {
+    if (numbers.length !== LOTTO.count) {
       throw new Error(ERROR.notSix);
     }
     if (numbers.length !== new Set(numbers).size) {
       throw new Error(ERROR.notUnique);
     }
-    if (numbers.some((number) => number < this.#START || number > this.#END)) {
+    if (
+      numbers.some(
+        (number) => number < LOTTO_NUMBER.min || number > LOTTO_NUMBER.max,
+      )
+    ) {
       throw new Error(ERROR.notOneToFortyFive);
     }
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

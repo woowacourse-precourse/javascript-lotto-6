@@ -1,11 +1,9 @@
 import LottoShop from './LottoShop.js';
-import { ERROR } from './Message.js';
+import { ERROR } from './LottoMessage.js';
 import WinningResults from './WinningResults.js';
 
 class LottoPurchaser {
-  #ZERO = 0;
-
-  #purchaseAmount;
+  #purchaseAmount = 0;
   #lottos = [];
   #winningResults = new WinningResults();
 
@@ -19,29 +17,31 @@ class LottoPurchaser {
     this.#set(lottos);
   }
 
+  check(winningLotto) {
+    this.#lottos.forEach((lotto) => {
+      const matchingCount = winningLotto.countMatchingWith(lotto);
+      this.#winningResults.saveResultBy(matchingCount);
+    });
+  }
+
   getLottoCount() {
     return this.#lottos.length;
   }
 
   getSortedLottos() {
-    const array = this.#lottos.map((lotto) => lotto.getSortedLotto());
-    return array;
-  }
-
-  check(winningLotto) {
-    this.#lottos.forEach((lotto) => {
-      const matchingNumbersCount = winningLotto.countMatchingNumbersWith(lotto);
-      this.#winningResults.saveResultBy(matchingNumbersCount);
-    });
+    const sortedLottos = this.#lottos.map((lotto) =>
+      lotto.get().sort((a, b) => a - b),
+    );
+    return sortedLottos;
   }
 
   #set(lottos) {
     this.#lottos = lottos;
   }
 
-  #validate(value) {
-    if (value === this.#ZERO) throw new Error(ERROR.falsy);
-    if (Number.isNaN(value)) throw new Error(ERROR.falsy);
+  #validate(amount) {
+    if (amount === 0) throw new Error(ERROR.falsy);
+    if (Number.isNaN(amount)) throw new Error(ERROR.falsy);
   }
 }
 

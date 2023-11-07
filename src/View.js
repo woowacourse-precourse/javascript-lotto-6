@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { QUERY } from './Message.js';
+import { QUERY, TEMPLATE } from './LottoMessage.js';
 
 class View {
   static #DELIMITER = ',';
@@ -20,7 +20,20 @@ class View {
     return Number(answer);
   }
 
-  static async print(message) {
+  static printLottoCount(lottoCount) {
+    const message = TEMPLATE.lottoCount(lottoCount);
+    View.print(message);
+  }
+
+  static printSortedLottos(sortedLottos) {
+    const message = sortedLottos.reduce(
+      (acc, cur) => acc + TEMPLATE.sortedLotto(cur.join(`${this.#DELIMITER} `)),
+      '',
+    );
+    View.print(message);
+  }
+
+  static print(message) {
     Console.print(message);
   }
 }

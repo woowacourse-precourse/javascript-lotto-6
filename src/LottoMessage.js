@@ -16,27 +16,9 @@ const ERROR = {
 Object.freeze(ERROR);
 
 const TEMPLATE = {
-  numberOfLottos: (numberOfLottos) => `\n${numberOfLottos}개를 구매했습니다.`,
+  lottoCount: (lottoCount) => `\n${lottoCount}개를 구매했습니다.`,
   sortedLotto: (sortedLotto) => `[${sortedLotto}]\n`,
 };
 Object.freeze(TEMPLATE);
 
-const RANKING_BY = {
-  6: 1,
-  51: 2,
-  5: 3,
-  4: 4,
-  3: 5,
-};
-Object.freeze(RANKING_BY);
-
-const PRIZE_MONEY = {
-  1: 2000000000,
-  2: 30000000,
-  3: 1500000,
-  4: 50000,
-  5: 5000,
-};
-Object.freeze(PRIZE_MONEY);
-
-export { QUERY, ERROR, TEMPLATE, RANKING_BY, PRIZE_MONEY };
+export { QUERY, ERROR, TEMPLATE };
