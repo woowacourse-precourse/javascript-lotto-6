@@ -19,6 +19,10 @@ const OutputView = {
     user.getLottoStringArray().forEach((lottoString) => Console.print(lottoString));
     this.printBlank();
   },
+  printStatistic(statistic) {
+    Console.print(MESSAGES.raffleStatistic);
+    MESSAGES.printRaffleStatistic(statistic).forEach((eachLine) => Console.print(eachLine));
+  },
 };
 
 export default OutputView;

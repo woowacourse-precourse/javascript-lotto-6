@@ -52,6 +52,11 @@ class LottoController {
 
   raffleLottos(mainNumberArray, bonusNumber) {
     this.#user.raffleLottos(mainNumberArray, bonusNumber);
+    this.printStatistic();
+  }
+
+  printStatistic() {
+    OutputView.printStatistic(this.#user.printStatistic());
   }
 }
 

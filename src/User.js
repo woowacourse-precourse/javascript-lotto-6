@@ -48,6 +48,10 @@ class User {
       this.#prize[prize] += 1;
     });
   }
+
+  printStatistic() {
+    return Object.entries(this.#prize).map((prize) => prize[1]);
+  }
 }
 
 export default User;
