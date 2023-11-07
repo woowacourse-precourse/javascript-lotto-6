@@ -17,13 +17,13 @@ export default class Lotto {
 
   #validateNumbersCount(numbers) {
     if (numbers.length !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
-      throw new Error(ERROR_MESSAGES.INVALID_NUMBERS_COUNT);
+      throw new Error(ERROR_MESSAGES.INVALID_NUMBERS);
     }
   }
 
   #validateUniqueness(numbers) {
     if (new Set(numbers).size !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
-      throw new Error(ERROR_MESSAGES.DUPLICATE_NUMBERS);
+      throw new Error(ERROR_MESSAGES.INVALID_NUMBERS);
     }
   }
 
