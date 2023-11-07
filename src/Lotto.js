@@ -1,4 +1,9 @@
-import { MAX_NUMBER, MIN_NUMBER, MIN_WINNING } from "./constants";
+import {
+  MAX_NUMBER,
+  MIN_NUMBER,
+  MIN_WINNING,
+  WINNING_RANKS,
+} from "./constants";
 
 class Lotto {
   #numbers;
