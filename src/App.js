@@ -1,6 +1,4 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
-import { calculateRevenueRate, getRandomNumbers } from './util';
-
 import {
   INPUT_MESSAGE,
   INPUT_ERROR_MESSAGE,
@@ -51,9 +49,18 @@ class App {
 
   #purchaseLottos() {
     for (let i = 0; i < this.#lottoCount; i++) {
-      const randomNumbers = getRandomNumbers();
+      const randomNumbers = this.#getRandomNumbers();
       this.#lottoList.push(new Lotto(randomNumbers));
     }
+  }
+
+  #getRandomNumbers() {
+    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      45,
+      6,
+    );
+    return randomNumbers.sort((a, b) => a - b);
   }
 
   #printAllLottos() {
