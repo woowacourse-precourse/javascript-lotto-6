@@ -21,6 +21,12 @@ class Controller {
 
     await this.getLottoNumbers();
     await this.getBonusNumber();
+
+    this.#buy.getRandomNumbers().map(async (randomNumbers) => {
+      this.countMatchingNumbers(randomNumbers);
+    });
+    await OutputMessages.printLotteryStatistics(this.#result);
+    await OutputMessages.printProfitMargin(this.#result, this.#buy);
   }
 
   async getPurchaseAmount() {
@@ -67,6 +73,22 @@ class Controller {
         Console.print(e.message);
       }
     }
+  }
+
+  countMatchingNumbers(randomNumbers) {
+    let count = 0;
+    const lottoNumbers = this.#lotto.getLottoNumbers();
+    const bonusNumber = this.#bonus.getBonusNumber();
+
+    randomNumbers.forEach((randomNumber) => {
+      if (lottoNumbers.includes(randomNumber)) {
+        count++;
+      }
+    });
+
+    const matchBonus = randomNumbers.includes(bonusNumber);
+
+    this.#result.setResult(count, matchBonus);
   }
 }
 export default Controller;
