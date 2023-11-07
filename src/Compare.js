@@ -1,13 +1,13 @@
 class Compare {
   sameNumber = {
-    firstPlace: { sameCount: 0, winningMoney: 2000000000 },
-    secondPlace: { sameCount: 0, winningMoney: 30000000 },
-    thirdPlace: { sameCount: 0, winningMoney: 1500000 },
-    fourthPlace: { sameCount: 0, winningMoney: 50000 },
     fivePlace: { sameCount: 0, winningMoney: 5000 },
+    fourthPlace: { sameCount: 0, winningMoney: 50000 },
+    thirdPlace: { sameCount: 0, winningMoney: 1500000 },
+    secondPlace: { sameCount: 0, winningMoney: 30000000 },
+    firstPlace: { sameCount: 0, winningMoney: 2000000000 },
   };
 
-  expense;
+  totalWinningMoney;
 
   constructor(lotto, winningNumber, bonusNumber) {
     this.lotto = lotto;
@@ -15,7 +15,7 @@ class Compare {
     this.bonusNumber = bonusNumber;
   }
 
-  compareLotto() {
+  compareNumber() {
     this.lotto.forEach((lottoElement) => {
       const winningCounting = this.includesWinningNumber(lottoElement);
       const bonusCounting = this.includesBonusNumber(lottoElement);
@@ -67,23 +67,26 @@ class Compare {
   }
 
   RateOfReturn(resultLotto, expense) {
-    this.expense = Number(expense);
+    this.sumWinningMoney(resultLotto);
+
+    const ror = (this.totalWinningMoney / expense) * 100;
+    const refineRor = Number(ror.toFixed(1)).toLocaleString();
+
+    return refineRor;
+  }
+
+  sumWinningMoney(resultLotto) {
     const winningMoneyArray = [];
 
     Object.values(resultLotto).map((values) =>
       winningMoneyArray.push(values.sameCount * values.winningMoney),
     );
 
-    const totalWinningMoney = winningMoneyArray.reduce((arr, n) => {
+    this.totalWinningMoney = winningMoneyArray.reduce((arr, n) => {
       const sum = arr + n;
 
       return sum;
     });
-
-    const ror = (totalWinningMoney / this.expense) * 100;
-    const refineRor = Number(ror.toFixed(1)).toLocaleString();
-
-    return refineRor;
   }
 }
 export default Compare;

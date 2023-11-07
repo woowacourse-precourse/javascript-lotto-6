@@ -50,7 +50,7 @@ const validator = {
 
   isNotBetweenNumber(number) {
     if (number < strings.START_NUMBER || number > strings.END_NUMBER) {
-      throw new Error(error.NUMBER_CORRECT_BETWEEN);
+      throw new Error(error.CORRECT_BETWEEN);
     }
   },
 

@@ -9,8 +9,8 @@ const result = {
   STATISTIC: '\n당첨 통계',
   LINE: '---',
   COUNT: '개',
-  RATE_OF_RETURN: '총 수익률은',
-  PERCENT: '% 입니다.',
+  RATE_OF_RETURN: '총 수익률은 ',
+  PERCENT: '%입니다.',
   WINNING: {
     THREE_MATCHES: '3개 일치 (5,000원) -',
     FOUR_MATCHES: '4개 일치 (50,000원) -',
