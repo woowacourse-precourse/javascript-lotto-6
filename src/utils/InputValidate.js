@@ -30,13 +30,13 @@ class InputValidate {
   }
 
   #moneyThousand(money) {
-    if (Number(money) % 1000 !== 0 || Number(money) === 0) {
+    if (lottoVal.moneyCalc(money) || lottoVal.zeroCheck(money)) {
       throw new InputError(ERROR_MSG.MONEY_IS_THOUSAND);
     }
   }
 
   #moneyNegative(money) {
-    if (Number(money) < 0) {
+    if (Number(money) < lottoVal.min) {
       throw new InputError(ERROR_MSG.MONEY_NEGATIVE_ERROR);
     }
   }

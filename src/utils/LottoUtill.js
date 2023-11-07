@@ -1,4 +1,4 @@
-import { LottoRate } from '../constants/Constant.js';
+import { LottoRate, utillConst } from '../constants/Constant.js';
 
 class LottoUtill {
   #calcNumber;
@@ -20,7 +20,7 @@ class LottoUtill {
   }
 
   howManyToBuy() {
-    return parseInt(this.#calcNumber / 1000, 10);
+    return utillConst.buyCalc(this.#calcNumber);
   }
 
   checkLottoCorrect(userNumber, winNumber, bonusNumber) {
@@ -58,7 +58,7 @@ class LottoUtill {
     const earnMoney = Object.entries(this.#staticObject)
       .map((status) => this.#earnMoneyCheck(status))
       .reduce((a, b) => a + b);
-    return this.#calcRate(earnMoney);
+    return utillConst.calcRate(earnMoney, this.#calcNumber);
   }
 
   #earnMoneyCheck(status) {
@@ -66,10 +66,6 @@ class LottoUtill {
       return LottoRate[status[0]];
     }
     return 0;
-  }
-
-  #calcRate(earnMoney) {
-    return Math.round((earnMoney / this.#calcNumber) * 10000) / 100;
   }
 }
 

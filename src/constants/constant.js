@@ -20,4 +20,12 @@ export const lottoVal = {
   lottoLength: 6,
   max: 45,
   min: 0,
+  moneyCalc: (money) => Number(money) % 1000 !== 0,
+  zeroCheck: (money) => Number(money) === 0,
+};
+
+export const utillConst = {
+  buyCalc: (money) => parseInt(money / 1000, 10),
+  calcRate: (earnMoney, calcNumber) =>
+    Math.round((earnMoney / calcNumber) * 10000) / 100,
 };
