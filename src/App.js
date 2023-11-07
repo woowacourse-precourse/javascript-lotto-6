@@ -35,7 +35,9 @@ class App {
 
     let count = 0;
     while (count < this.purchaseAmount) {
-      this.myLottoLits.push(Random.pickUniqueNumbersInRange(1, 45, 6));
+      this.myLottoLits.push(
+        Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
+      );
 
       count += 1;
     }
