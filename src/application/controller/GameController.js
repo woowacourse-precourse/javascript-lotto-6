@@ -1,8 +1,8 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import RandomNumberGenerator from '../../model/RandomNumberGenerator.js';
-import GameMessageGenerator from '../../model/GameMessageGenerator.js';
-import GameCalculator from '../../model/GameCalculator.js';
+import RandomNumberGenerator from '../../domain/RandomNumberGenerator.js';
+import GameMessageGenerator from '../../GameMessageGenerator.js';
+import GameCalculator from '../../domain/GameCalculator.js';
 import { NUMBER } from '../../utils/constants.js';
 
 class GameController {

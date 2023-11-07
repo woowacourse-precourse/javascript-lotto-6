@@ -1,4 +1,4 @@
-import { OTHERS, PRIZES_MESSAGE, PRIZES } from '../utils/constants.js';
+import { OTHERS, PRIZES_MESSAGE } from './utils/constants.js';
 
 class GameMessageGenerator {
   getPurchaseLottosMessages(purchaseLottos) {
@@ -19,7 +19,7 @@ class GameMessageGenerator {
         `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${winningResult[key]}${OTHERS.numKorean}`
       );
     });
-    
+
     return RESULT_MESSAGE_ARRAY
   }
 }
