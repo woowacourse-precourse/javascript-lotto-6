@@ -1,5 +1,6 @@
 class App {
-  async play() {}
+  async play() {
+    const amount = await userLottoInputAmount();
 }
 
 export default App;
