@@ -22,8 +22,7 @@ const generateLotto = () => {
 const OutputPrintout = {
 	printLottos: (amount) => {
 		const count = countLottos(amount);
-		Console.print(NEWLINE);
-		Console.print(`${count}${PRINT_OUTPUT.outputLottoCount}`);
+		Console.print(`${NEWLINE}${count}${PRINT_OUTPUT.outputLottoCount}`);
 
 		Array.from({ length: count }).forEach(() => {
 			const lottos = generateLotto(); // 나중에 어딘가에 저장

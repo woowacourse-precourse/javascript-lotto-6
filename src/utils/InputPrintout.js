@@ -4,8 +4,10 @@ import { isVaildAmount } from "./checkValidation.js";
 
 const InputPrintout = {
 	inputAmount: async () => {
-		const amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
-		if (!isVaildAmount(amount)) await InputPrintout.inputAmount();
+		let amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
+		if (!isVaildAmount(amount)) {
+			amount = await InputPrintout.inputAmount();
+		}
 		return Number(amount);
 	},
 	//당첨번호
