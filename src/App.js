@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import User from './User.js';
 import Input from './views/Input.js';
@@ -19,8 +20,13 @@ class App {
   }
 
   async userInputController() {
-    const purchaseAmount = await Input.readPurchaseAmout();
-    this.user = new User(purchaseAmount);
+    try {
+      const purchaseAmount = await Input.readPurchaseAmout();
+      this.user = new User(purchaseAmount);
+    } catch (error) {
+      Console.print(error.message);
+      await this.userInputController();
+    }
   }
 
   userNumbersOutputController() {
@@ -32,9 +38,14 @@ class App {
   }
 
   async lottoInputController() {
-    const lottoNumber = await Input.readLottoNumber();
-    const bonusNumber = await Input.readBonusNumber();
-    this.lotto = new Lotto(lottoNumber, bonusNumber);
+    try {
+      const lottoNumber = await Input.readLottoNumber();
+      const bonusNumber = await Input.readBonusNumber();
+      this.lotto = new Lotto(lottoNumber, bonusNumber);
+    } catch (error) {
+      Console.print(error.message);
+      await this.lottoInputController();
+    }
   }
 
   resultController() {
