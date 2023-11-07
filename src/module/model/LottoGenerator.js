@@ -2,7 +2,7 @@ import Lotto from '../../Lotto.js';
 import {MissionUtils} from "@woowacourse/mission-utils";
 
 class LottoGenerator {
-  #lottos = [];
+  #lottoList = [];
 
   constructor(count) {
     this.#generateLottos(count);
@@ -11,10 +11,14 @@ class LottoGenerator {
   #generateLottos(count) {
     let lotto;
 
-    for (let i = 0; i < this.#count; i += 1) {
+    for (let i = 0; i < count; i += 1) {
       lotto = new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
-      this.#lottos.push(lotto);
+      this.#lottoList.push(lotto);
     }
+  }
+
+  get lottoList() {
+    return this.#lottoList;
   }
 }
 
