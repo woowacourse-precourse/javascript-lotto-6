@@ -1,10 +1,10 @@
-import { Console } from '@woowacourse/mission-utils';
-import { prompt, result } from './constants/message.js';
 import BuyLotto from './BuyLotto.js';
 import validator from './Validator.js';
 import Compare from './Compare.js';
 import PlayerInput from './PlayerInput.js';
 import Output from './Output.js';
+import { result } from './constants/message.js';
+import error from './constants/error.js';
 
 class App {
   playerInput = new PlayerInput();
@@ -28,16 +28,14 @@ class App {
   lottoRateOfReturn;
 
   async play() {
-    this.expense = await Console.readLineAsync(prompt.ASK_AMOUNT);
+    await this.inputAmount();
 
     this.makeLotto();
     this.printLotto();
 
-    const numberInput = await Console.readLineAsync(prompt.ASK_NUMBER);
-    this.winningInput(numberInput);
+    await this.inputWinning();
 
-    const bonusInput = await Console.readLineAsync(prompt.ASK_BONUS_NUMBER);
-    this.bonusNumberInput(bonusInput);
+    await this.inputBonus();
 
     this.compareLotto();
     this.winningResultPrint();
@@ -54,10 +52,19 @@ class App {
     );
   }
 
-  makeLotto() {
+  async inputAmount() {
+    this.expense = await this.playerInput.amountInput();
     this.expense = Number(this.expense);
-    validator.validationExpense(this.expense);
 
+    try {
+      validator.validationExpense(this.expense);
+    } catch (e) {
+      this.output.print(`${error.ERROR} ${e.message}`);
+      await this.inputAmount();
+    }
+  }
+
+  makeLotto() {
     const lotteryTicketCount = this.buyLotto.buyLottoCount(this.expense);
 
     this.output.buyLottoPrint(lotteryTicketCount, result.PURCHASE);
@@ -72,20 +79,34 @@ class App {
     });
   }
 
-  winningInput(numberInput) {
-    const inputArray = numberInput.split(',');
-    const numberArray = inputArray.map((inputElement) => Number(inputElement));
+  async inputWinning() {
+    const numberInput = await this.playerInput.winningNumberInput();
+    try {
+      const inputArray = numberInput.split(',');
+      const numberArray = inputArray.map((inputElement) =>
+        Number(inputElement),
+      );
 
-    validator.validationNumber(numberArray);
+      validator.validationNumber(numberArray);
 
-    this.winningNumber = numberArray;
+      this.winningNumber = numberArray;
+    } catch (e) {
+      this.output.print(`${error.ERROR} ${e.message}`);
+      await this.inputWinning();
+    }
   }
 
-  bonusNumberInput(bonusInput) {
+  async inputBonus() {
+    const bonusInput = await this.playerInput.bonusNumberInput();
     const number = Number(bonusInput);
-    validator.validationBonusNumber(this.winningNumber, number);
+    try {
+      validator.validationBonusNumber(this.winningNumber, number);
 
-    this.bonusNumber = number;
+      this.bonusNumber = number;
+    } catch (e) {
+      this.output.print(`${error.ERROR} ${e.message}`);
+      await this.inputBonus();
+    }
   }
 
   compareLotto() {
