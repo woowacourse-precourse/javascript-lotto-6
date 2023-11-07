@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO_NUMBER } from './constants';
+import { ERROR_MESSAGE, LOTTO_NUMBER } from './constants';
 
 class Lotto {
   #numbers;
@@ -15,14 +15,14 @@ class Lotto {
 
   #validateNumbers(numbers) {
     if (numbers.length !== LOTTO_NUMBER.numberCount) {
-      throw new Error('[ERROR]');
+      throw new Error(ERROR_MESSAGE.errorText);
     }
     const uniqueNumbers = new Set(numbers);
     if (
       uniqueNumbers.size !== numbers.length ||
       numbers.some((num) => num < LOTTO_NUMBER.inRangeFrom || num > LOTTO_NUMBER.inRangeTo)
     ) {
-      throw new Error('[ERROR]');
+      throw new Error(ERROR_MESSAGE.errorText);
     }
   }
 
