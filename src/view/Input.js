@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "../constatns/message.js"
-import { validAmountCheck, validWinningNumberCheck } from "../validator.js"
+import { validAmountCheck, validWinningNumberCheck, validBonusNumberCheck } from "../validator.js"
 
 export const getUserAmount = async () => {
   try {
@@ -15,8 +15,18 @@ export const getUserAmount = async () => {
 export const getWinningNumber = async () => {
   try {
     const input = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.WIN_NUM);
-    const winningNumber = await validWinningNumberCheck(input);
-    return winningNumber;
+    const winningNumbersArray = await validWinningNumberCheck(input);
+    return winningNumbersArray;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const getBonusNumber = async () => {
+  try {
+    const input = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUM);
+    await validBonusNumberCheck(input);
+    return input;
   } catch (error) {
     throw error;
   }

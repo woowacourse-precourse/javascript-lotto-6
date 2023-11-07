@@ -1,4 +1,4 @@
-import { getUserAmount, getWinningNumber } from "../view/input.js"
+import { getBonusNumber, getUserAmount, getWinningNumber } from "../view/input.js"
 import { printAttempt, printRandomNumberArray } from "../view/Output.js";
 import { LOTTO_PRICE } from "../constatns/number.js";
 import { getRandomNumber } from "../utils.js";
@@ -10,7 +10,9 @@ class LottoController {
     const randomNumberArray = this.getRandomNumberArray(attempt);
     printAttempt(attempt);
     printRandomNumberArray(randomNumberArray);
-    const winningNumber = getWinningNumber();
+
+    const winningNumber = await getWinningNumber();
+    const bonusNumber = getBonusNumber();
   }
 
   // 로또 번호 저장할 2차원 배열 생성
