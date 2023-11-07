@@ -36,7 +36,7 @@ const checkInputRange = (input, message) => {
 };
 
 const checkBonusDuplicated = (bonusNumber, winningNumbers) => {
-  if (winningNumbers.includes(bonusNumber))
+  if (winningNumbers.split(',').includes(bonusNumber))
     throw new Error(ERROR_MESSAGES.bonusDuplicated);
 };
 
@@ -87,6 +87,7 @@ const checkWinningNumbers = (inputs) => {
 };
 
 const checkBonusNumber = (inputs, winningNumbers) => {
+  checkBonusDuplicated(inputs, winningNumbers);
   checkInput(inputs);
   checkInputType(inputs, ERROR_MESSAGES.bonusType);
   checkInputRange(inputs, ERROR_MESSAGES.bonusRange);
@@ -95,7 +96,6 @@ const checkBonusNumber = (inputs, winningNumbers) => {
     GAME_RULE_NUMBER.bonusNumberLength,
     ERROR_MESSAGES.bonusLength,
   );
-  checkBonusDuplicated(inputs, winningNumbers);
 };
 
 export {

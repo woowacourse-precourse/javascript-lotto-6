@@ -10,7 +10,6 @@ import {
   checkBonusNumber,
   checkWinningNumbers,
 } from './Validation.js';
-import Lotto from '../domain/Lotto.js';
 
 async function getInputPurchasingMoney() {
   let userInput;
@@ -26,18 +25,14 @@ async function getInputPurchasingMoney() {
 
 async function getInputWinningNumbers() {
   let userInput;
-  let lotto;
-  let winningNumber;
   try {
     userInput = await Console.readLineAsync(INPUT_MESSAGES.lottoWinningNumbers);
     checkWinningNumbers(userInput);
-    lotto = new Lotto(userInput.split(','));
-    winningNumber = lotto.getNumbers().toString();
   } catch (error) {
     Console.print(error.message);
     userInput = await getInputWinningNumbers();
   }
-  return winningNumber;
+  return userInput;
 }
 
 async function getInputBonusNumber(winningNumbers) {
