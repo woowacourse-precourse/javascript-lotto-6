@@ -1,7 +1,7 @@
 import LottoShop from "../domains/LottoShop.js";
 import TargetLotto from "../domains/TargetLotto.js";
 import User from "../domains/User.js";
-import CalCulatorLottoResult from "../domains/CalculatorLottoResult.js";
+import CalculatorLottoResult from "../domains/CalculatorLottoResult.js";
 import OutPutView from "../views/outPutView.js";
 import InputView from "../views/InputView.js";
 
@@ -22,7 +22,8 @@ class LottoController {
     await this.#initializeUser();
     this.#purchaseLottos();
     await this.#initializeTargetLotto();
-    this.#calculateAndDisplayResults();
+    const { lottoWinningCounts, profitRate } = this.#calculateLottoResults();
+    this.#disPlayLottoResults(lottoWinningCounts, profitRate);
   }
 
   async #initializeUser() {
@@ -45,26 +46,27 @@ class LottoController {
   async #initializeTargetLotto() {
     const { targetNumberList, targetBonusNumber } =
       await this.#inputView.getTargetLottoInfoInput();
-
     this.#targetLotto = new TargetLotto(targetNumberList, targetBonusNumber);
 
     this.#outPutView.printLottoResultInfoMessage();
   }
 
-  #calculateAndDisplayResults() {
-    const calCulatorLottoResult = new CalCulatorLottoResult(
+  #calculateLottoResults() {
+    const calculatorLottoResult = new CalculatorLottoResult(
       this.#user,
       this.#targetLotto
     );
-
-    const lottoWinningCounts = calCulatorLottoResult.getLottoWinningCount();
+    const lottoWinningCounts = calculatorLottoResult.getLottoWinningCount();
     const totalProfit =
-      calCulatorLottoResult.getTotalProfit(lottoWinningCounts);
+      calculatorLottoResult.getTotalProfit(lottoWinningCounts);
+    const profitRate = calculatorLottoResult.getTotalProfitRate(totalProfit);
 
-    const totalUsedMoney = this.#user.getUsedMoney();
+    return { lottoWinningCounts, profitRate };
+  }
 
+  #disPlayLottoResults(lottoWinningCounts, profitRate) {
     this.#outPutView.printLottoResults(lottoWinningCounts);
-    this.#outPutView.printLottoReturns(totalProfit, totalUsedMoney);
+    this.#outPutView.printLottoReturns(profitRate);
   }
 }
 

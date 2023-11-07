@@ -25,6 +25,11 @@ class CalculatorLottoResult {
       return acc + count * LOTTO_PRIZE[index + 1].money;
     }, 0);
   }
+
+  getTotalProfitRate(totalProfit) {
+    const consumption = this.#user.getUsedMoney();
+    return ((totalProfit / consumption) * 100).toFixed(1);
+  }
 }
 
 export default CalculatorLottoResult;

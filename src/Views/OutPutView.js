@@ -42,8 +42,7 @@ class OutPutView {
       });
   }
 
-  printLottoReturns(profit, consumption) {
-    const totalProfit = ((profit / consumption) * 100).toFixed(1);
+  printLottoReturns(totalProfit) {
     Console.print(OUTPUT_MESSAGE.lottoReturns(totalProfit));
   }
 }
