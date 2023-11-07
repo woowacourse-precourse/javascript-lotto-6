@@ -36,3 +36,8 @@ const analyzeProfitRate = (lottoPurchaseAmount, lottoResult) => {
   const profitRate = ((totalPrize / totalInvestment) * 100).toFixed(1);
   return profitRate;
 };
+
+const createProfitString = profitRate => {
+  const profitRateString = `\n${USER_OUTPUT.totalProfitRatePrefix}${profitRate}${USER_OUTPUT.totalProfitRateSuffix}`;
+  return profitRateString;
+};
