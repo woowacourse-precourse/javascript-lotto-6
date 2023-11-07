@@ -1,12 +1,12 @@
-function isValidLottoAmountInput(amount) {
+const isValidLottoAmountInput = (amount) => {
   if (isNaN(amount) || amount % 1000 !== 0) {
     return false;
   }
 
   return true;
-}
+};
 
-function isValidLottoWinningNumbersInput(winningNumbers) {
+const isValidLottoWinningNumbersInput = (winningNumbers) => {
   if (winningNumbers.length !== 6) {
     throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
   }
@@ -26,6 +26,6 @@ function isValidLottoWinningNumbersInput(winningNumbers) {
   });
 
   return true;
-}
+};
 
 export { isValidLottoAmountInput, isValidLottoWinningNumbersInput };
