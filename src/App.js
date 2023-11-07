@@ -9,11 +9,10 @@ import verificationBounsNumber from './verificationBonusNumber.js';
 import results from './results.js';
 import rateOfReturn from './rateOfReturn.js';
 import resultView from './resultView.js';
-
+import getValidPrice from './priceInput.js';
 class App {
   async play() {
-    const price = await lottoPriceInput('구입금액을 입력해 주세요.');
-    const purchase = priceCheck(price);
+    const purchase = await getValidPrice();
     const excution = excutionNumber(purchase);
     resultView(excution, purchase);
     const playerAnswer = await playerNumber('당첨 번호를 입력해 주세요.');
