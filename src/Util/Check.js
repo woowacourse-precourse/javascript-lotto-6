@@ -10,7 +10,7 @@ export default class Check {
   };
 
   money(amount) {
-    if (amount % this.#conditions.LOTTO_PRICE || isNaN(amount))
+    if (amount % this.#conditions.LOTTO_PRICE || Number.isNaN(amount))
       throw new Error(Constants.error.money);
     return amount;
   }
@@ -28,7 +28,7 @@ export default class Check {
   bonus(baseArray, number) {
     this.isInRange(number);
     this.isDuplicate(baseArray, number);
-    if (isNaN(number)) this.hasNaN([number]);
+    if (Number.isNaN(number)) this.hasNaN([number]);
   }
 
   isValidSet(set) {
