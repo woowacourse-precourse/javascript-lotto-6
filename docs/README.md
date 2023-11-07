@@ -28,7 +28,7 @@
     - 로또 번호는 오름차순으로 정렬하여 보여준다.
 -[X] printResults()
     - 당첨 내역을 출력한다.
--[ ] printTotalEarningsRate()
+-[X] printTotalEarningsRate()
     - 총 수익률을 출력한다.
     - 수익률은 소수점 둘째 자리에서 반올림한다. (ex. 100.0%, 51.5%, 1,000,000.0%)
 -[ ] 예외 상황 처리
