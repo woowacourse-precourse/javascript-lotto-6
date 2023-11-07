@@ -10,7 +10,7 @@ class Calculator {
   }
 
   round(number) {
-    return Math.round(number * 100) / 100;
+    return Math.round(number * 10) / 10;
   }
 
   calculateRateOfReturn(paymentAmount, winnings) {

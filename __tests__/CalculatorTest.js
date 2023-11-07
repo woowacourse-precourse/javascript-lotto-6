@@ -52,8 +52,8 @@ describe('Calculator 클래스 테스트', () => {
   });
   test('소수점 둘째 자리에서 반올림', () => {
     const calculator = new Calculator();
-    const NUMBERS = [12.2345, 20.136];
-    const RESULTS = [12.23, 20.14];
+    const NUMBERS = [12.235, 20.162];
+    const RESULTS = [12.2, 20.2];
     NUMBERS.forEach((v, i) => {
       expect(calculator.round(v)).toEqual(RESULTS[i]);
     });
