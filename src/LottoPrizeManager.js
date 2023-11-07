@@ -6,15 +6,22 @@ class LottoPrizeManager {
   #winningNumberArray;
   #bonusNumber;
 
-  constructor(winningNumberStringArray, bonusNumberString) {
-    this.#validateWinningNumber(winningNumberStringArray);
-    this.#winningNumberArray = winningNumberStringArray.map(Number);
+  constructor(winningNumberString, bonusNumberString) {
+    this.#validateWinningNumber(winningNumberString);
+    this.#winningNumberArray = winningNumberString.split(",").map(Number);
 
     this.#validateBonusNumber(bonusNumberString);
     this.#bonusNumber = Number(bonusNumberString);
   }
 
-  #validateWinningNumber(array) {
+  #validateWinningNumber(string) {
+    const regex = /^[0-9,]+$/;
+    if (!regex.test(string)) {
+      throw new Error(PRIZE.ERROR.WINNING_NUMBER_STRING_TYPE);
+    }
+
+    const array = string.split(",");
+
     if (!Validator.isArrayLengthEqualTo(array, LOTTO.SIZE)) {
       throw new Error(PRIZE.ERROR.WINNING_NUMBER_SIZE);
     }

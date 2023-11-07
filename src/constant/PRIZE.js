@@ -7,6 +7,8 @@ const RANK = {
 };
 
 const ERROR = {
+  WINNING_NUMBER_STRING_TYPE:
+    "[ERROR] 당첨 번호는 공백 없이 숫자와 쉼표로만 입력해주세요",
   WINNING_NUMBER_SIZE: "[ERROR] 당첨 번호는 6개여야 합니다",
   WINING_NUMBER_DUPLICATE: "[ERROR] 당첨 번호는 중복되면 안 됩니다",
   WINING_NUMBER_RANGE_NUMBER:
