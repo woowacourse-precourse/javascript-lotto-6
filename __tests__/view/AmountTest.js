@@ -1,4 +1,4 @@
-import Validator from '../src/utils/Validator.js';
+import Validator from '../../src/utils/Validator.js';
 
 describe('구입 금액 검증 테스트', () => {
   let validator;
