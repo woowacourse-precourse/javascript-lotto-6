@@ -18,7 +18,7 @@ class Lotto {
       throw new Error(ErrorMessage.INVALID_LOTTO_TYPE);
     }
 
-    if (numbers.every((num) => !(Number(num) >= 1) && !(Number(num) <= 45))) {
+    if (!numbers.every((num) => num >= 1 && num <= 45)) {
       throw new Error(ErrorMessage.INVALID_LOTTO_NUMBER);
     }
 
