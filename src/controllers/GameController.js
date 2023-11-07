@@ -71,8 +71,8 @@ class GameController {
     this.printRateOfReturn();
   }
 
-  calculateWinnings() {
-    this.#winningsCount = GameController.initialWinningsCount;
+  async calculateWinnings() {
+    this.#winningsCount = Array.from(GameController.initialWinningsCount);
     const LottoArray = this.#lottoCount.getLottoArray();
     const winnings = this.#winnings.getWinningNumbers();
 
