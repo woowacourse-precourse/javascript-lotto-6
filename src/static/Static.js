@@ -48,6 +48,7 @@ const MESSAGE_ERROR = Object.freeze({
   header: "[ERROR]",
   purchasePrice: "1,000원 단위로 입력해주세요.",
   blank: "빈 입력값입니다.",
+  invalidLength: "로또 당첨 번호는 6개의 숫자여야 합니다.",
   duplicatedWinningNums:
     "로또 당첨 번호는 중복되지 않는 6개의 숫자여야 합니다.",
   invalidNum: "로또 당첨 번호는 1~45의 정수여야 합니다.",
