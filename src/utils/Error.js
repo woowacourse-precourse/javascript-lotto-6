@@ -1,6 +1,8 @@
+import { ERROR_MESSAGE } from "../constants/message.js";
+
 export class CustomError extends Error {
   constructor(message) {
-    super(`${ERROR_MESSAGE.COMMON}${message}`);
+    super(`${ERROR_MESSAGE.common}${message}`);
     this.name = this.constructor.name;
   }
 }

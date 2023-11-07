@@ -5,6 +5,7 @@ import { NoInputError, NotNumberError, InvalidAmountRangeError, InvalidAmountUni
 class InputView {
   async readLottoPurchaseAmount() {
     const lottoPurchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.lottoPurchaseAmount);
+    this.#validatePurchaseAmount(lottoPurchaseAmount);
     return Number(lottoPurchaseAmount);
   }
 
@@ -20,6 +21,13 @@ class InputView {
   async readBonousNumber() {
     const bonousNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonousNumber);
     return Array.from(bonousNumber, Number);
+  }
+
+  #validatePurchaseAmount(purchaseAmount) {
+    if (purchaseAmount === "") throw new NoInputError(ERROR_MESSAGE.noInput);
+    if (isNaN(purchaseAmount)) throw new NotNumberError(ERROR_MESSAGE.notNumber);
+    if (purchaseAmount < 1000) throw new InvalidAmountRangeError(ERROR_MESSAGE.invalidAmountRange);
+    if (purchaseAmount % 1000 !== 0) throw new InvalidAmountUnitError(ERROR_MESSAGE.invalidAmountUnit);
   }
 }
 

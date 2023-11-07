@@ -19,6 +19,7 @@ export const OUTPUT_MESSAGE = Object.freeze({
 });
 
 export const ERROR_MESSAGE = Object.freeze({
+  common: "[ERROR] ",
   noInput: "내용을 입력해 주세요.",
   invalidAmountUnit: "구입금액은 1,000원으로 나누어 떨어져야 합니다.",
   notNumber: "숫자를 입력해야 합니다.",
