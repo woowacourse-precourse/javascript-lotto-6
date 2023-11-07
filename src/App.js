@@ -2,6 +2,7 @@ import View from './View/View.js';
 import Validator from './utils/Validator.js';
 import PURCHASE_PRICE from './constants/purchasePrice.js';
 import Lotto from './Lotto.js';
+import LottoGame from './LottoGame.js';
 
 class App {
   #view = new View();
@@ -9,12 +10,14 @@ class App {
   async play() {
     await this.setGameConfig();
 
-    this.#view.printGameResult(this.lottoResult);
+    this.result = this.game.getResult();
+    this.#view.printGameResult(this.result);
   }
 
   async setGameConfig() {
     const { lottos, winningNumbers, bonusNumber } = await this.readGameConfig();
-    this.lottoResult = Lotto.getResult(lottos, winningNumbers, bonusNumber);
+
+    this.game = new LottoGame(lottos, winningNumbers, bonusNumber);
   }
 
   async readGameConfig() {
