@@ -25,4 +25,27 @@ export const LOTTERY = Object.freeze({
   MAX_NUM: 45,
   NUM_COUNT: 6,
   PRICE: 1000,
+  FIRST_CNT: 6,
+  SECOND_CNT: 5,
+  THIRD_CNT: 5,
+  FOURTH_CNT: 4,
+  FIFTH_CNT: 3,
+  FIRST_WINNINGS: 2000000000,
+  SECOND_WINNINGS: 30000000,
+  THIRD_WINNINGS: 1500000,
+  FOURTH_WINNINGS: 50000,
+  FIFTH_WINNINGS: 5000,
+  DEFAULT_WINNINGS: 0,
 });
+
+export const LOTTO_WINNINGS = (matchCnt, hasBonus) => {
+  const result = { label: `${matchCnt}개 일치`, winnings: LOTTERY.DEFAULT_WINNINGS };
+
+  if (matchCnt === LOTTERY.FIFTH_CNT) return { ...result, winnings: LOTTERY.FIFTH_WINNINGS };
+  if (matchCnt === LOTTERY.FOURTH_CNT) return { ...result, winnings: LOTTERY.FOURTH_WINNINGS };
+  if (matchCnt === LOTTERY.THIRD_CNT) return { ...result, winnings: LOTTERY.THIRD_WINNINGS };
+  if (matchCnt === LOTTERY.SECOND_CNT && hasBonus)
+    return { label: result.label + ', 보너스 볼 일치', winnings: LOTTERY.SECOND_WINNINGS };
+  if (matchCnt === LOTTERY.FIRST_CNT) return { ...result, winnings: LOTTERY.FIRST_WINNINGS };
+  return result;
+};
