@@ -3,7 +3,7 @@ import ERROR_MESSAGE from './constant/ErrorMessage';
 const LOTTO_PRICE = 1000;
 
 class Validate {
-  static validatePayment(input) {
+  static payment(input) {
     const payment = Number(input);
 
     if (Number.isNaN(payment)) {
@@ -14,7 +14,7 @@ class Validate {
     }
   }
 
-  static validateBonusNumber(input, winning) {
+  static bonusNumber(input, winning) {
     const bonus = Number(input);
 
     if (Number.isNaN(bonus)) {

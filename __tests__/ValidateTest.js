@@ -6,7 +6,7 @@ describe('Validate 클래스 테스트', () => {
     'Payment: Number로 변환할 수 없는 값을 입력하면 예외가 발생한다.',
     (input) => {
       expect(() => {
-        Validate.validatePayment(input);
+        Validate.payment(input);
       }).toThrow(ERROR_MESSAGE.nonNumeric);
     },
   );
@@ -15,7 +15,7 @@ describe('Validate 클래스 테스트', () => {
     'Payment: 1,000원으로 나눠떨어지는 양수가 아니면 예외가 발생한다.',
     (input) => {
       expect(() => {
-        Validate.validatePayment(input);
+        Validate.payment(input);
       }).toThrow(ERROR_MESSAGE.invalidAmount);
     },
   );
@@ -26,7 +26,7 @@ describe('Validate 클래스 테스트', () => {
       const winning = [1, 2, 3, 4, 5, 6];
 
       expect(() => {
-        Validate.validateBonusNumber(input, winning);
+        Validate.bonusNumber(input, winning);
       }).toThrow(ERROR_MESSAGE.nonNumeric);
     },
   );
@@ -37,7 +37,7 @@ describe('Validate 클래스 테스트', () => {
       const winning = [1, 2, 3, 4, 5, 6];
 
       expect(() => {
-        Validate.validateBonusNumber(input, winning);
+        Validate.bonusNumber(input, winning);
       }).toThrow(ERROR_MESSAGE.outOfRange);
     },
   );
@@ -47,7 +47,7 @@ describe('Validate 클래스 테스트', () => {
     const winning = [1, 2, 3, 4, 5, 6];
 
     expect(() => {
-      Validate.validateBonusNumber(input, winning);
+      Validate.bonusNumber(input, winning);
     }).toThrow(ERROR_MESSAGE.duplicateWinningNumber);
   });
 });

@@ -8,7 +8,7 @@ class Input {
     while (true) {
       try {
         const payment = await Console.readLineAsync(INPUT_MESSAGE.payment);
-        Validate.validatePayment(payment);
+        Validate.payment(payment);
         return Number(payment);
       } catch (error) {
         Console.print(error.message);
@@ -33,7 +33,7 @@ class Input {
     while (true) {
       try {
         const bonus = await Console.readLineAsync(INPUT_MESSAGE.bonus);
-        Validate.validateBonusNumber(bonus, winning);
+        Validate.bonusNumber(bonus, winning);
         return Number(bonus);
       } catch (error) {
         Console.print(error.message);
