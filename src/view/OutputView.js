@@ -8,7 +8,6 @@ const OutputView = {
   },
 
   printLottoPurchaceQuantity(lottoQuantity) {
-    if (Number.isNaN(lottoQuantity)) return;
     OutputView.print(`\n${lottoQuantity}개를 구매했습니다.`);
   },
 
