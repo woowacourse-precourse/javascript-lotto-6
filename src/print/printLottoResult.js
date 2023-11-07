@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
+import LOTTO_CONSTANT from '../constants/lotto.js';
 import { OUTPUT_MESSAGES } from '../constants/messages.js';
 import PRIZE from '../constants/prize.js';
-import LOTTO_CONSTANT from '../constants/lotto.js';
 
 const RATE = Object.freeze({
   percent: 100,
@@ -13,7 +13,7 @@ const printLottoResult = (lottoTicketNumber, ranks) => {
   const input = lottoTicketNumber * LOTTO_CONSTANT.price;
   const rateOfReturn = +((income / input) * RATE.percent).toFixed(RATE.float);
 
-  Console.print(OUTPUT_MESSAGES.result(ranks));
+  OUTPUT_MESSAGES.result(ranks).forEach((result) => Console.print(result));
   Console.print(OUTPUT_MESSAGES.rate(rateOfReturn));
 };
 
