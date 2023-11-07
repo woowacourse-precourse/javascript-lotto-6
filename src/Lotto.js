@@ -12,29 +12,20 @@ class Lotto {
   }
 
   #validate(numbers) { 
-    this.validator = new Validator();
-    const ERROR_MESSAGE = this.validator.isWinningNumbersValid(String(numbers));
-
-    if (ERROR_MESSAGE) {
-      MissionUtils.Console.print(ERROR_MESSAGE)
-      return;
-    }
-  }
-  
-  returnValue() {
-    this.#numbers = String(this.#numbers).split(',').map(Number)
-
-    if (this.#numbers.length === TOTAL_LOTTO_NUMBERS) {
-      this.output = new Output();
-      this.output.print(this.#numbers)
-      return true
-    }
-    return false
+    Validator.isNumbersValid(String(numbers))
   }
 
-  calculateWinningStats(lottos, bonusNumber) {
+  returnWinningNumbers() {
+    return String(this.#numbers).split(',').map(Number)
+  }
+
+  returnOneLotto() {
+    return this.#numbers
+  }
+
+  calculateWinningStats(lottos, winnings, bonusNumber) {
     const STATS = [0, 0, 0, 0, 0]
-    const WINNING_NUMBERS = this.#numbers.map(Number);
+    const WINNING_NUMBERS = winnings.map(Number);
 
     lottos.forEach((lotto) => {
       const RESULT = WINNING_NUMBERS.filter(el => lotto.includes(el)).length;
