@@ -10,16 +10,16 @@ class LottosList {
   #lottoAmount;
 
   constructor(purchaseAmount) {
-    this.validate(purchaseAmount);
+    // this.validate(purchaseAmount);
     this.calculateLottoAmount(purchaseAmount);
     this.addLottosToList();
   }
 
-  validate(purchaseAmount) {
-    if (!validatePurchaseAmount(purchaseAmount)) {
-      throw new Error(message.ERROR);
-    }
-  }
+  // validate(purchaseAmount) {
+  //   if (!validatePurchaseAmount(purchaseAmount)) {
+  //     throw new Error(message.ERROR);
+  //   }
+  // }
 
   calculateLottoAmount(purchaseAmount) {
     return (this.#lottoAmount = purchaseAmount / 1000);
