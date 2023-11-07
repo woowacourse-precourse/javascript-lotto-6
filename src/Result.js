@@ -38,6 +38,16 @@ class Result {
     Console.print(`6개 일치 (2,000,000,000원) - ${this.six}개`);
     this.printRateOfReturn();
   }
+  printRateOfReturn() {
+    const profit =
+      this.six * 200000000 +
+      this.fiveAndBonus * 30000000 +
+      this.five * 1500000 +
+      this.four * 50000 +
+      this.three * 5000;
+    const rateOfReturn = (profit / this.amount) * 100;
+    Console.print(`총 수익률은${rateOfReturn.toFixed(2)}입니다.`);
+  }
 }
 
 export default Result;
