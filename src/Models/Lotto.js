@@ -1,11 +1,13 @@
 import LottoValidator from "../Validator/LottoValidator.js";
+import { LOTTO_SETTINGS } from "../config/gameSetting.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     const convertedNumbers = numbers.map(Number);
-    LottoValidator.validateNumbers(convertedNumbers);
+    const lottoValidator = new LottoValidator(LOTTO_SETTINGS);
+    lottoValidator.validateNumbers(convertedNumbers);
     this.#numbers = this.#sortNumbers(convertedNumbers);
   }
 
