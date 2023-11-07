@@ -36,7 +36,7 @@ export const BONUS_NUMBER_ERROR_MESSAGES = Object.freeze({
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>
   `\n${numberOfLottos}개를 구매했습니다.`;
 
-export const WINNING_PRIZE_BY_COUNTS = Object.freeze({
+export const WINNING_PRIZE_BY_COUNT = Object.freeze({
   3: 5000,
   4: 50000,
   5: 1500000,
@@ -44,7 +44,7 @@ export const WINNING_PRIZE_BY_COUNTS = Object.freeze({
   6: 2000000000,
 });
 
-export const WINNING_DESCRIPTION_BY_COUNTS = Object.freeze({
+export const WINNING_DESCRIPTION_BY_COUNT = Object.freeze({
   3: `3개 일치 (5,000원)`,
   4: `4개 일치 (50,000원)`,
   5: `5개 일치 (1,500,000원)`,

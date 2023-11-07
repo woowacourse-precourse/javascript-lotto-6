@@ -8,6 +8,7 @@ import {
   MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER,
   MIN_MATCHING_COUNTS_FOR_PRIZE,
   WINNING_NUMBER_WEIGHT,
+  WINNING_PRIZE_BY_COUNT,
 } from './Constants.js';
 import Lotto from './Lotto.js';
 import InputManager from './UI/InputManager.js';
@@ -39,8 +40,8 @@ class App {
     this.outputManager.printPurchasedLottosInfo(this.lottos);
     this.winningNumbers = await this.getWinningNumbers();
     this.bonusNumber = await this.getBonusNumber();
-    this.calculateGameResult();
-    Console.print(this.gameResult);
+    this.getGameResult();
+    const totalPrize = this.getTotalPrize();
   }
 
   async getPurchaseAmount() {
@@ -105,16 +106,25 @@ class App {
     this.lottos.forEach((lotto) => {
       const { matchingCountWithWinningNumbers, matchingCountWithBonusNumber } =
         lotto.getMatchingResultWithWinningNumbers(this.winningNumbers);
-      const winningWeight =
+      const winningCounts =
         matchingCountWithWinningNumbers ===
         MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER
           ? matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT +
             matchingCountWithBonusNumber * BONUS_NUMBER_WEIGHT
           : matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT;
 
-      if (winningWeight < MIN_MATCHING_COUNTS_FOR_PRIZE) return;
-      this.gameResult[winningWeight] += 1;
+      if (winningCounts < MIN_MATCHING_COUNTS_FOR_PRIZE) return;
+      this.gameResult[winningCounts] += 1;
     });
+  }
+
+  getTotalPrize() {
+    let totalPrize = 0;
+    Object.keys(this.gameResult).forEach((winningCount) => {
+      totalPrize +=
+        this.gameResult[winningCount] * WINNING_PRIZE_BY_COUNT[winningCount];
+    });
+    return totalPrize;
   }
 }
 
