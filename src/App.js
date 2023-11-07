@@ -10,7 +10,7 @@ class App {
   }
 
   async play() {
-    
+    this.#gameController.handlePurchaseTickets();
   }
 }
 

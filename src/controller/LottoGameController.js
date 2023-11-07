@@ -11,11 +11,30 @@ class LottoGameController {
 
 	/** 컨트롤러 생성 시 model, view 객체를 생성한다. */
 	constructor() {
-		console.log('컨트롤러 생성');
 		this.#lottoGame = new LottoGame();
 		this.#view = new LottoGameView();
 	}
 
+	/** 티켓의 구입 로직을 담당한다. */
+	async handlePurchaseTickets() {
+		await this.#handleInputPurchaseAmount();
+		this.#handlePublishTickets();
+	}
+
+	/** 구입 금액을 입력 받는 로직을 담당한다. */
+	async #handleInputPurchaseAmount() {
+		let purchaseAmount = await this.#view.inputPurchaseAmount();
+		// TODO: 유효성검사
+		// TODO: 도메인에 전달
+		
+		// TEST:
+		console.log(`구입금액 : ${purchaseAmount}`); 
+	}
+
+	/** 티켓의 발행 로직을 담당한다. */
+	#handlePublishTickets() {
+		// TODO:
+	}
 }
 
 export default LottoGameController;
