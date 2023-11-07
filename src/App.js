@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import {
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
@@ -16,13 +17,16 @@ class App {
     this.outputManager = new OutputManager();
     this.lottos = [];
     this.purchaseAmountInput = '';
+    this.winningNumbersInput = '';
+    this.winningNumbers = [];
   }
 
   async play() {
     const purchaseAmount = await this.getPurchaseAmount();
     const numberOfLottos = this.getNumberOfLottos(purchaseAmount);
-    await this.createLottos(numberOfLottos);
-    await this.outputManager.printPurchasedLottosInfo(this.lottos);
+    this.createLottos(numberOfLottos);
+    this.outputManager.printPurchasedLottosInfo(this.lottos);
+    this.getWinningNumbers();
   }
 
   async getPurchaseAmount() {
@@ -34,6 +38,12 @@ class App {
       await this.getPurchaseAmount();
     }
     return Number(this.purchaseAmountInput);
+  }
+
+  async getWinningNumbers() {
+    this.winningNumbersInput =
+      await this.inputManager.enterWinningNumbersInput();
+    Console.print(this.winningNumbersInput);
   }
 
   getNumberOfLottos(purchaseAmount) {

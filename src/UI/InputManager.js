@@ -8,6 +8,13 @@ class InputManager {
     );
     return purchaseAmountInput;
   }
+
+  async enterWinningNumbersInput() {
+    const winningNumbersInput = await Console.readLineAsync(
+      GUIDE_MESSAGES.ENTER_WINNING_NUMBERS
+    );
+    return winningNumbersInput;
+  }
 }
 
 export default InputManager;
