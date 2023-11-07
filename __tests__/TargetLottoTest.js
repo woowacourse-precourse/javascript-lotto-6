@@ -39,6 +39,26 @@ describe("당첨 로또 클래스 테스트", () => {
     }).toThrow("[ERROR] 당첨 로또 번호는 중복되지 않아야 합니다.");
   });
 
+  test("당첨 로또 정보의 각 숫자가 정수가 아니라면 예외가 발생한다.", () => {
+    // given
+    const wrongLottoNumber = ["a", "b", "c", "d", "e", "f"];
+
+    // when & then
+    expect(() => new TargetLotto(wrongLottoNumber)).toThrow(
+      "[ERROR] 당첨 로또는 정수로 구성되어야 합니다"
+    );
+  });
+
+  test("당첨 로또 정보의 각 숫자가 1~45 사이의 정수가 아니라면 예외가 발생한다.", () => {
+    // given
+    const wrongLottoNumber = [1, 2, 3, 4, 5, 46];
+
+    // when & then
+    expect(() => new TargetLotto(wrongLottoNumber)).toThrow(
+      "[ERROR] 당첨 로또는 1~45 사이의 숫자로 구성되어야 합니다."
+    );
+  });
+
   test("보너스 번호가 당첨 번호에 중복되면 예외가 발생한다.", () => {
     // given
     const lottoNumber = [1, 2, 3, 4, 5, 6];
