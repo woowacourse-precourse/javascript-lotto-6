@@ -1,7 +1,6 @@
-const SETTING = Object.freeze({
+const SETTING = {
   LOTTO_PRICE: 1000,
   LOTTO_NUMBER_COUNT: 6,
-  LOTTO_BONUS_NUMBER_COUNT: 1,
   SEPARATOR: ",",
   LOTTO_NUMBER_RANGE: Object.freeze({ MIN: 1, MAX: 45 }),
   PRIZE_BY_MATCH_COUNT: Object.freeze([
@@ -31,6 +30,6 @@ const SETTING = Object.freeze({
       PRIZE: 2000000000,
     },
   ]).map(Object.freeze),
-});
+};
 
 export default SETTING;
