@@ -5,12 +5,12 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    try {
+    // try {
       this.#validate(numbers);
       this.#numbers = numbers;
-    } catch(error) {
-      Console.print(error.message);
-    }
+    // } catch(error) {
+    //   Console.print(error.message);
+    // }
   }
 
   async start(validPrice, lottoNumSets) { 
