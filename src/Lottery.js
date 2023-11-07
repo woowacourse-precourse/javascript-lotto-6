@@ -78,6 +78,8 @@ export default class Lottery {
       this.commomValidator(this.#bonusNumer);
       if (this.#bonusNumer < 1 || this.#bonusNumer > 45)
         throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
+      if (this.#winningNumberList.includes(this.#bonusNumer))
+        throw Error('당첨 번호와 중복됩니다.');
     }, 'bonusNumber');
   }
 
