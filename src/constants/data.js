@@ -1,7 +1,0 @@
-const ZERO = 0;
-const SIX = 6;
-const THOUSAND = 1000;
-const START_INCLUSIVE = 1;
-const END_INCLUSIVE = 45;
-
-export { ZERO, SIX, THOUSAND, START_INCLUSIVE, END_INCLUSIVE };
