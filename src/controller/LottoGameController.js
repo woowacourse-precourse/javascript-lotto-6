@@ -35,7 +35,7 @@ class LottoGameController {
     await this.setBonusNumber();
   }
 
-  generateMatchResults(winningMatchCounts, hasBonusMatches) {
+  generateLottoMatchResults(winningMatchCounts, hasBonusMatches) {
     return winningMatchCounts.map((winningCount, i) => ({
       count: winningCount,
       hasBonusNumber: hasBonusMatches[i],
@@ -66,19 +66,22 @@ class LottoGameController {
 
   printMyLottos() {
     const loopCount = this.#moneyInstance.getPurchaseCount();
-    Array.from({ length: loopCount }).forEach(() => {
-      const lotto = this.createLottoInstance();
-      this.addLottoTicket(lotto);
-      this.outputView.print(formatLottoNumbers(lotto.getLottoNumbers()));
+    Array.from({ length: loopCount }).forEach((_, i) => {
+      this.setLottoTicketInstance();
+      const lottoInstance = this.lottoTickets.getLottoTicket(i);
+      this.outputView.print(
+        formatLottoNumbers(lottoInstance.getLottoNumbers()),
+      );
     });
-  }
-
-  addLottoTicket(lottoInstance) {
-    this.lottoTickets.addLotto(lottoInstance);
   }
 
   createLottoInstance() {
     return new Lotto(this.generateLottoNumbers().sort((a, b) => a - b));
+  }
+
+  setLottoTicketInstance() {
+    const lotto = this.createLottoInstance();
+    this.lottoTickets.addLotto(lotto);
   }
 
   async createMoneyInstance() {
@@ -144,7 +147,7 @@ class LottoGameController {
 
     const winningMatchCounts = this.getWinningNumberMatchCounts();
     const hasBonusMatches = this.hasBonusNumberMatches();
-    const matchResults = this.generateMatchResults(
+    const matchResults = this.generateLottoMatchResults(
       winningMatchCounts,
       hasBonusMatches,
     );

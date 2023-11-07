@@ -5,6 +5,11 @@ class LottoTickets {
     this.#lottoTickets.push(lottoInstance);
   }
 
+  getLottoTicket(index) {
+    if (index < 0 || index >= this.#lottoTickets.length) return null;
+    return this.#lottoTickets[index];
+  }
+
   getLottoTickets() {
     return [...this.#lottoTickets];
   }
