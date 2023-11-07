@@ -6,11 +6,16 @@ import LottoNumbersGenerator from './RandomNumbersGenerator.js';
 class LottoShop {
   #numbersGenerator = new LottoNumbersGenerator();
 
-  sell(amount) {
+  sellTo(purchaser, amount) {
     this.#validate(amount);
-    const lottoCount = amount / LOTTO.price;
+
+    const lottoCount = this.#calculateLottoCount(amount);
     const lottos = this.#createLottos(lottoCount);
-    return lottos;
+    purchaser.purchase(lottos);
+  }
+
+  #calculateLottoCount(amount) {
+    return amount / LOTTO.price;
   }
 
   #createLottos(number) {
@@ -22,6 +27,12 @@ class LottoShop {
   }
 
   #validate(amount) {
+    if (amount === 0) {
+      throw new Error(ERROR.falsy);
+    }
+    if (Number.isNaN(amount)) {
+      throw new Error(ERROR.falsy);
+    }
     if (amount % LOTTO.price !== 0) {
       throw new Error(ERROR.notBeDividedByThousand);
     }

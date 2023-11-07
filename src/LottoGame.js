@@ -1,43 +1,42 @@
 import Lotto from './Lotto.js';
 import LottoPurchaser from './LottoPurchaser.js';
+import LottoShop from './LottoShop.js';
 import View from './View.js';
 import WinningLotto from './WinningLotto.js';
 import WinningResults from './WinningResults.js';
 
 class LottoGame {
-  #lottoPurchaser;
+  #lottoPurchaser = new LottoPurchaser(new WinningResults());
   #winningLotto;
 
   async play() {
-    await this.#createPurchaser();
-    this.#purchaseLottos();
+    await this.#purchaseLottos();
+
+    View.printLottoCount(this.#lottoPurchaser.getLottoCount());
+    View.printSortedLottos(this.#lottoPurchaser.getSortedLottos());
+
     await this.#createWinningLotto();
     this.#lottoPurchaser.check(this.#winningLotto);
+
     this.#showResults();
     this.#showProfitRate();
   }
 
-  async #createPurchaser() {
+  async #purchaseLottos() {
     try {
-      this.#lottoPurchaser = new LottoPurchaser(
-        await this.#getPurchaseAmount(),
-        new WinningResults(),
+      new LottoShop().sellTo(
+        this.#lottoPurchaser,
+        await this.#askPurchaseAmount(),
       );
     } catch (error) {
       View.print(error.message);
-      await this.#createPurchaser();
+      await this.#purchaseLottos();
     }
   }
 
-  async #getPurchaseAmount() {
+  async #askPurchaseAmount() {
     const purchaseAmount = await View.askPurchaseAmount();
     return purchaseAmount;
-  }
-
-  #purchaseLottos() {
-    this.#lottoPurchaser.purchase();
-    View.printLottoCount(this.#lottoPurchaser.getLottoCount());
-    View.printSortedLottos(this.#lottoPurchaser.getSortedLottos());
   }
 
   async #createWinningLotto() {

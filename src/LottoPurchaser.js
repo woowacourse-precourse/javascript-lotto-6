@@ -1,20 +1,15 @@
-import LottoShop from './LottoShop.js';
-import { ERROR } from './LottoMessage.js';
+import { LOTTO } from './LottoInfo.js';
 
 class LottoPurchaser {
-  #purchaseAmount = 0;
   #lottos = [];
   #winningResults;
 
-  constructor(purchaseAmount, winningResults) {
-    this.#validate(purchaseAmount);
-    this.#purchaseAmount = purchaseAmount;
+  constructor(winningResults) {
     this.#winningResults = winningResults;
   }
 
-  purchase() {
-    const lottos = new LottoShop().sell(this.#purchaseAmount);
-    this.#setLottos(lottos);
+  purchase(lottos) {
+    this.#lottos = lottos;
   }
 
   check(winningLotto) {
@@ -40,16 +35,8 @@ class LottoPurchaser {
   }
 
   getProfitRate() {
-    return this.#winningResults.getProfitRate(this.#purchaseAmount);
-  }
-
-  #setLottos(lottos) {
-    this.#lottos = lottos;
-  }
-
-  #validate(amount) {
-    if (amount === 0) throw new Error(ERROR.falsy);
-    if (Number.isNaN(amount)) throw new Error(ERROR.falsy);
+    const purchaseAmount = this.getLottoCount() * LOTTO.price;
+    return this.#winningResults.getProfitRate(purchaseAmount);
   }
 }
 
