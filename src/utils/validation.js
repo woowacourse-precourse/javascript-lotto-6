@@ -1,0 +1,22 @@
+const pattern = {
+  whitespace: /\s/,
+  specialCharacter: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/,
+  emoticon: /[\uD83C-\uDBFF\uDC00-\uDFFF\uD800-\uDBFF\u2700-\u27BF]/,
+};
+
+export const isBlank = (input) => input.trim() === "";
+
+const containsWhiteSpace = (input) => pattern.whitespace.test(input);
+
+const containsSpecialCharacter = (input) =>
+  pattern.specialCharacter.test(input);
+
+const containsEmoticon = (input) => pattern.emoticon.test(input);
+
+export function isInvalidType(input) {
+  return (
+    containsWhiteSpace(input) ||
+    containsSpecialCharacter(input) ||
+    containsEmoticon(input)
+  );
+}
