@@ -13,6 +13,31 @@ class LottoGame {
   async lottoGamePlay() {
     const purchase = await this.getLottoPurchaseAmount();
     this.generateLottoTicket(purchase);
+    this.getLottoWinningNumbers();
+  }
+
+  // 당첨 번호 입력 받기
+  async getLottoWinningNumbers() {
+    const winngNumbers = await this.Input.readLottoWinningNumbersInput();
+    this.Output.printResult(winngNumbers);
+    const winngNumbersArray = this.stringToNumberArray(winngNumbers);
+    return this.setLottoWinngNumbers(winngNumbersArray);
+  }
+
+  // 당첨 번호 저장
+  setLottoWinngNumbers(winngNumbers) {
+    try {
+      return this.CreateModel.createLottoModel(winngNumbers);
+    } catch ({ message }) {
+      this.Output.printResult(message);
+      // this.getLottoWinningNumbers();
+      return null;
+    }
+  }
+
+  // 문자열 숫자 배열로
+  stringToNumberArray(string) {
+    return string.split(",").map(Number);
   }
 
   // 로또 구매 금액 입력 받기
@@ -29,7 +54,7 @@ class LottoGame {
     } catch ({ message }) {
       this.Output.printResult(message);
       this.getLottoPurchaseAmount();
-      // return null;
+      return null;
     }
   }
 
@@ -37,9 +62,7 @@ class LottoGame {
   generateLottoTicket(purchase) {
     const lottoTicketCount = purchase.getLottoTicketCount();
     this.Output.printResult(lottoTicketCount + GAME_MESSAGES.lottoTicketCount);
-
     this.MyLotto.buyLottoTicket(lottoTicketCount);
-    // Console.print(this.MyLotto.getMyLottoList());
   }
 }
 
