@@ -105,12 +105,11 @@ class App {
       while (this.#USER_LOTTOS.length < this.#LOTTOS_MAX) {
         this.#USER_LOTTOS.push(new Lotto(this.makeEachLotto()).makeLotto());
       }
-    } catch(e) {
+    } catch (e) {
       throw new Error(e);
     }
-    
   }
- 
+
   makeEachLotto() {
     const TMP_LOTTO = [];
 
@@ -120,8 +119,7 @@ class App {
         TMP_LOTTO.push(NUMBER);
       }
     }
-
-    TMP_LOTTO.sort();
+    TMP_LOTTO.sort((a, b) => a - b);
 
     return TMP_LOTTO;
   }
@@ -129,18 +127,31 @@ class App {
   printLottoArray() {
     Console.print(`${this.#LOTTOS_MAX}개를 구매했습니다.`);
     this.#USER_LOTTOS.forEach((lotto) => {
-      Console.print(lotto);
-    })
+      Console.print(this.printEachLotto(lotto));
+    });
+  }
+
+  printEachLotto(lotto) {
+    let tmpString = '[';
+
+    for (let i = 0; i < lotto.length; i += 1) {
+      if (i === lotto.length - 1) {
+        tmpString += `${lotto[i]}]`;
+      } else if (i !== lotto.length - 1) {
+        tmpString += `${lotto[i]}, `;
+      }
+    }
+
+    return tmpString;
   }
 
 
   async play() {
     await this.getInputPrice();
-    
-    await this.getInputWinningNumber();
-    await this.getInputBonusNumber();
     this.makeLottoArray();
     this.printLottoArray();
+    await this.getInputWinningNumber();
+    await this.getInputBonusNumber();
   }
 }
 
