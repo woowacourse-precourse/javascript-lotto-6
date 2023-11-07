@@ -31,5 +31,19 @@ class Lotto {
       }
     });
   }
+
+  validateBonusNumber(bonusNumber) {
+    if (bonusNumber === 0 || Number.isNaN(bonusNumber)) {
+      throw new Error('[ERROR] 입력된 값을 확인해주세요.');
+    }
+
+    if (
+      !Number.isInteger(bonusNumber) ||
+      bonusNumber < MIN_NUMBER ||
+      bonusNumber > MAX_NUMBER
+    ) {
+      throw new Error('[ERROR] 1부터 45 사이의 정수를 입력해주세요.');
+    }
+  }
 }
 export default Lotto;
