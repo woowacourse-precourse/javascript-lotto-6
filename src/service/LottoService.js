@@ -7,8 +7,6 @@ import LottosReturns from './LottosReturns.js';
 class LottoService {
   #input;
   #output;
-  #price;
-  #lottos;
 
   constructor() {
     this.#input = new InputView();
@@ -22,19 +20,22 @@ class LottoService {
 
     this.#output.printLottosCount(lottos.length);
     this.#output.printLottoNumbers(lottos);
-    this.#price = price;
-    this.#lottos = lottos;
+
+    return {
+      lottos: lottos,
+      price: price,
+    };
   }
 
-  async prizeLotto() {
+  async prizeLotto(lottos, price) {
     const winningNumbers = await this.#input.getLottoWinningNumbers();
     const bonusNumber = await this.#input.getLottoBonusNumber(winningNumbers);
-    const lottosResults = new LottosResults(this.#lottos, winningNumbers, bonusNumber);
+    const lottosResults = new LottosResults(lottos, winningNumbers, bonusNumber);
     const lottosResultscount = lottosResults.getLottosResultsCount();
     const lottosReturns = new LottosReturns(lottosResultscount);
 
     this.#output.printLottoResult(lottosResultscount);
-    this.#output.printLottoReturns(lottosReturns.getLottosReturns(this.#price));
+    this.#output.printLottoReturns(lottosReturns.getLottosReturns(price));
   }
 }
 
