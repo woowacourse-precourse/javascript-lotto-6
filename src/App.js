@@ -1,9 +1,11 @@
+import Host from './Host.js';
 import Lotto from './Lotto.js';
 import Statistics from './Statistics.js';
 
 class App {
   async play() {
-    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const winningNumbers = await Host.getWinningNumbers();
+    const lotto = new Lotto(winningNumbers);
     const user = [
       [1, 2, 3, 4, 5, 6],
       [1, 2, 3, 4, 5, 7],
