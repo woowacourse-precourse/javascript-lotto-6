@@ -28,7 +28,7 @@ class Controller {
 
   async inputBonus() {
     const BONUS = await this.View.input(INPUT.bonus);
-    this.setBonusNum(Number(BONUS));
+    this.setBonusNum(BONUS);
   }
 
   async run() {
@@ -58,12 +58,14 @@ class Controller {
   }
 
   setWinNumber(winNums) {
+    if (String(winNums).includes('.')) throw new Error(ERROR.invalidValue);
     const mapToInt = winNums.split(',').map(item => Number(item));
     this.Lotto = new Lotto(mapToInt);
   }
 
   setBonusNum(bonus) {
-    this.validateBonus(this.Lotto.getWinNumber, bonus);
+    if (String(bonus).includes('.')) throw new Error(ERROR.invalidValue);
+    this.validateBonus(this.Lotto.getWinNumber, Number(bonus));
     this.bonus = bonus;
   }
 

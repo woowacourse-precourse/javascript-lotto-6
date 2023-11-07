@@ -64,7 +64,7 @@ class Lotto {
     results.forEach(item => (item[0] === 5 && item[1] ? bonus++ : null));
 
     withoutBonus[2] -= bonus;
-    withoutBonus.splice(2, 0, bonus);
+    withoutBonus.splice(3, 0, bonus);
 
     return withoutBonus;
   }
@@ -77,7 +77,8 @@ class Lotto {
   calculateReturnRate(cntArr, money) {
     const WIN_ARR = cntArr.map((item, idx) => item * WINNINGS[idx]);
     const TOTAL = WIN_ARR.reduce((acc, curr) => acc + curr, 0);
-    return Math.round((TOTAL / money) * 10000) / 100;
+    const returnRate = (TOTAL / money) * 100;
+    return returnRate.toFixed(1); // 소수점 둘째 자리에서 반올림하고 100.0으로 포맷
   }
 }
 
