@@ -36,10 +36,6 @@ class Lotto {
     return Array.from({ length: purchaseAmount }).map(() => Lotto.generateLottoNumber());
   }
 
-  static toArray(number) {
-    return new Lotto(number.split(",").map(Number));
-  }
-
   toPrintableString() {
     return `[${this.#numbers.join(", ")}]`;
   }

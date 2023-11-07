@@ -23,7 +23,7 @@ const InputView = {
         `${MESSAGE.purchase.winningNumber}`,
       );
 
-      return userInputWinningNumbers;
+      return userInputWinningNumbers.split(",").map((number) => Number(number.trim()));
     } catch (e) {
       throw new Error("[ERROR]");
     }

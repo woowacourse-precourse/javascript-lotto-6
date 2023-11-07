@@ -19,7 +19,7 @@ class App {
     try {
       const winningNumbers = await InputView.getWinningNumbers();
       const bonusNumber = await InputView.getBonusNumbers();
-      const lotto = Lotto.toArray(winningNumbers);
+      const lotto = new Lotto(winningNumbers);
       this.#winningRate = new WinningRate(lotto, bonusNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);
