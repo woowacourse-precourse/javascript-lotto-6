@@ -41,6 +41,10 @@ class LottosList {
       this.#lottosList.push(newLotto);
     }
   }
+
+  get lottosList() {
+    return this.#lottosList;
+  }
 }
 
 export default LottosList;
