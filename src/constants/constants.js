@@ -6,6 +6,14 @@ const LOTTO_CONDITION = Object.freeze({
 
 const PRICE_PER_TICKET = Object.freeze(1000);
 
+const RANK = Object.freeze({
+  first: 6,
+  second: 5,
+  third: 5,
+  fourth: 4,
+  fifth: 3,
+});
+
 const PRIZE_KEY = Object.freeze({
   firstPrize: 'firstPrize',
   secondPrize: 'secondPrize',
@@ -30,4 +38,4 @@ const INITIAL_STATISTICS = Object.freeze({
   [PRIZE_KEY.fifthPrize]: 0,
 });
 
-export { LOTTO_CONDITION, PRIZE_AMOUNT, PRICE_PER_TICKET, INITIAL_STATISTICS, PRIZE_KEY };
+export { LOTTO_CONDITION, PRIZE_AMOUNT, PRICE_PER_TICKET, INITIAL_STATISTICS, PRIZE_KEY, RANK };
