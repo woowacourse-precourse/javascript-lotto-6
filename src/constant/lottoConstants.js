@@ -2,7 +2,7 @@ export const MESSAGE = {
   PURCHASED: '개를 구매했습니다.',
 };
 
-export const PROPT_MESSAGE = {
+export const PROMPT_MESSAGE = {
   INPUT_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.',
   INPUT_WINNING_NUMBER: '로또 당첨 번호를 입력해주세요.',
   INPUT_BONUS_NUMBER: '보너스 번호를 입력해주세요',
