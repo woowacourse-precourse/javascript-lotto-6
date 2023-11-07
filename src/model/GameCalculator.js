@@ -6,7 +6,7 @@ class GameCalculator {
     this.purchaseLottos = purchaseLottos;
     this.winningNumbers = winningNumbers;
     this.bonusNumber = bonusNumber;
-    this.winngingResult = { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+    this.winngingResult = OTHERS.initialWinningResult;
     this.lotto = null;
   }
 

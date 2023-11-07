@@ -58,4 +58,5 @@ export const OTHERS = Object.freeze({
   dash: '-',
   numKorean: '개',
   percent: '%',
+  initialWinningResult: { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
 });
