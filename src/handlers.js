@@ -1,7 +1,7 @@
-import LottoGenerator from '../domain/LottoGenerator';
-import LottoCalculator from '../domain/LottoCalculator';
-import InputView from '../view/inputView';
-import OutputView from '../view/OutputView';
+import LottoGenerator from './LottoGenerator';
+import LottoCalculator from './LottoCalculator';
+import InputView from './InputView';
+import OutputView from './OutputView';
 
 const ErrorHandlerAndRetry = async (handler, retry) => {
   try {
@@ -13,20 +13,17 @@ const ErrorHandlerAndRetry = async (handler, retry) => {
   }
 };
 
-const lottoGeneratorHandler = async () =>
-  ErrorHandlerAndRetry(async () => {
+const lottoGeneratorHandler = async () => ErrorHandlerAndRetry(async () => {
     const response = await InputView.purchaseAmount();
     return new LottoGenerator(response);
   }, lottoGeneratorHandler);
 
-const lottoCalculatorHandler = async () =>
-  ErrorHandlerAndRetry(async () => {
+const lottoCalculatorHandler = async () => ErrorHandlerAndRetry(async () => {
     const response = await InputView.winningNumbers();
     return new LottoCalculator(response);
   }, lottoCalculatorHandler);
 
-const bonusNumberHandler = async (lottoCalculator) =>
-  ErrorHandlerAndRetry(
+const bonusNumberHandler = async lottoCalculator => ErrorHandlerAndRetry(
     async () => {
       const response = await InputView.bonusNumber();
       lottoCalculator.bonus = response;

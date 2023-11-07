@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE, LOTTO_INFO, OUTPUT_MESSAGE } from "../utils/constants";
+import { ERROR_MESSAGE, LOTTO_INFO, OUTPUT_MESSAGE } from "./constants";
 
 
 class OutputView {

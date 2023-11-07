@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, LOTTO_INFO } from '../utils/constants';
+import { ERROR_MESSAGE, LOTTO_INFO } from './constants';
 
 const checkLottoRange = number => {
   if (number < LOTTO_INFO.MIN_NUMBER || LOTTO_INFO.MAX_NUMBER < number) {

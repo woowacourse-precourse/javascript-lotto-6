@@ -1,10 +1,10 @@
-import Lotto from '../Lotto';
-import { LOTTO_INFO } from '../utils/constants';
+import Lotto from './Lotto';
+import { LOTTO_INFO } from './constants';
 
 class LottoCalculator extends Lotto {
   calculateResult(lottos) {
     const prizeResultMap = new Map();
-    lottos.forEach(lotto => {
+    lottos.forEach((lotto) => {
       const prize = lotto.calculatePrize(this);
       prizeResultMap.set(prize, (prizeResultMap.get(prize) || 0) + 1);
     });

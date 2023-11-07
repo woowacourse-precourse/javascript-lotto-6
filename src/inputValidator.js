@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../utils/constants';
+import { ERROR_MESSAGE } from './constants';
 
 const checkInputFormat = input => {
   if (input === undefined) throw new Error(ERROR_MESSAGE.INVALID_INPUT_FORMAT);

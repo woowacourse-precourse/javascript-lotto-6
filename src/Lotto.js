@@ -1,5 +1,5 @@
-import { PRIZE_CHECK } from "./utils/constants";
-import LottoValidator from "./Validator/LottoValidator";
+import { PRIZE_CHECK } from "./constants";
+import LottoValidator from "./lottoValidator";
 
 class Lotto {
   #numbers;
