@@ -1,8 +1,6 @@
 import { BRACKET, DIVIDER } from '../constants/Symbol.js';
 import LottoGame from '../model/LottoGame.js';
 import LottoResultCalculator from '../model/LottoResultCalculator.js';
-import Lotto from '../Lotto.js';
-import BonusLotto from '../model/BonusLotto.js';
 
 export default class LottoService {
   /**
@@ -11,15 +9,9 @@ export default class LottoService {
   #lottoGame;
 
   /**
-   * @type {Lotto}
+   * @constructor
+   * @param {string} seedMoney
    */
-  #lotto;
-
-  /**
-   * @type {BonusLotto}
-   */
-  #bonusLotto;
-
   constructor(seedMoney) {
     this.#lottoGame = new LottoGame(seedMoney);
   }
@@ -45,22 +37,22 @@ export default class LottoService {
 
   /**
    * @public
-   * @param {string} mainNumbers
-   * @param {string} bonusNumber
+   * @param {number[]} mainNumbers
+   * @param {number} bonusNumber
    * @returns {{lottoResults: {prizeAmount: number[], prizeTotal: number}, lottoAmount: *}}
    */
   getCompareResults(mainNumbers, bonusNumber) {
-    this.#lotto = new Lotto(mainNumbers);
-    this.#bonusLotto = new BonusLotto(mainNumbers, bonusNumber);
-
     const { lottoList, lottoAmount } = this.#lottoGame.getLottoes();
     const lottoResultCalculator = new LottoResultCalculator();
+    const matchList = lottoList.map((lotto) =>
+      lotto.compare(mainNumbers, bonusNumber)
+    );
 
     return {
       lottoResults: lottoResultCalculator.calculateResults(
-        lottoList,
-        this.#lotto.getLottoNumbers(),
-        this.#bonusLotto.getBonusLottoNumber()
+        matchList,
+        mainNumbers,
+        bonusNumber
       ),
       lottoAmount,
     };
