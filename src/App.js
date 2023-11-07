@@ -3,18 +3,27 @@ import Lotto from "./Lotto.js";
 
 class App {
   async play() {
-    const lottoAmount = await Console.readLineAsync(
-      "구입금액을 입력해 주세요."
-    );
+    let lottoAmount = 0;
+    do {
+      try {
+        lottoAmount = await Console.readLineAsync("구입금액을 입력해 주세요.");
 
-    if (lottoAmount % 1000 !== 0)
-      throw new Error("[ERROR] 구입 금액은 1,000원 단위입니다.");
+        if (isNaN(lottoAmount)) {
+          throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+        }
+        if (lottoAmount % 1000 !== 0) {
+          throw new Error("[ERROR] 구입 금액은 1,000원 단위입니다.");
+        }
+      } catch (error) {
+        Console.print(error.message);
+      }
+    } while (lottoAmount % 1000 !== 0);
 
     const lottoList = this.buyLotto(lottoAmount);
 
     Console.print(`${lottoList.length}개를 구매했습니다.`);
-    for (let i = 0; i < lottoList.length; i++) {
-      Console.print(lottoList[i].getLottoNumbers().sort((a, b) => a - b));
+    for (const lotto of lottoList) {
+      Console.print(lotto.getLottoNumbers().sort((a, b) => a - b));
     }
 
     const winningNumber = (
@@ -28,7 +37,7 @@ class App {
     );
 
     const result = this.getResult(lottoList, winningNumber, bonusNumber);
-    this.getStatistics(lottoAmount, winningNumber, bonusNumber, result);
+    this.getStatistics(lottoAmount, result);
   }
 
   buyLotto(amount) {
@@ -47,8 +56,8 @@ class App {
   getResult(lottoList, winningNumber, bonusNumber) {
     const result = { n3: 0, n4: 0, n5: 0, n5b: 0, n6: 0 };
 
-    for (let i = 0; i < lottoList.length; i++) {
-      const matchingNumbers = lottoList[i]
+    for (const lotto of lottoList) {
+      const matchingNumbers = lotto
         .getLottoNumbers()
         .filter((num) => winningNumber.includes(num));
       const matchingCount = matchingNumbers.length;
@@ -76,7 +85,7 @@ class App {
     return result;
   }
 
-  getStatistics(lottoAmount, winningNumber, bonusNumber, result) {
+  getStatistics(lottoAmount, result) {
     const prizeList = {
       n3: 5000,
       n4: 50000,
