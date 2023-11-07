@@ -95,4 +95,72 @@ describe('Lotto 클래스', () => {
 
     // 기타 다양한 결과 배열과 금액에 대한 테스트 케이스 추가 가능
   });
+  describe('calculateReturnRate 메서드', () => {
+    test('올바른 결과 배열과 금액을 입력했을 때, 올바른 수익률을 계산해야 합니다', () => {
+      // Arrange
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      const cntArr = [0, 1, 0, 0, 0]; // 예상되는 등수별 개수
+      const money = 10000; // 입력 금액
+      const expectedReturnRate = '500.0'; // 예상 수익률
+
+      // Act
+      const result = lotto.calculateReturnRate(cntArr, money);
+
+      // Assert
+      expect(result).toBe(expectedReturnRate);
+    });
+
+    // 기타 다양한 결과 배열과 금액에 대한 테스트 케이스 추가 가능
+  });
+  describe('calculateReturnRate 메서드', () => {
+    test('올바른 결과 배열과 금액을 입력했을 때, 올바른 수익률을 계산해야 합니다', () => {
+      // Arrange
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      const cntArr = [0, 0, 1, 0, 0]; // 예상되는 등수별 개수
+      const money = 10000; // 입력 금액
+      const expectedReturnRate = '15000.0'; // 예상 수익률
+
+      // Act
+      const result = lotto.calculateReturnRate(cntArr, money);
+
+      // Assert
+      expect(result).toBe(expectedReturnRate);
+    });
+
+    // 기타 다양한 결과 배열과 금액에 대한 테스트 케이스 추가 가능
+  });
+  describe('calculateReturnRate 메서드', () => {
+    test('올바른 결과 배열과 금액을 입력했을 때, 올바른 수익률을 계산해야 합니다', () => {
+      // Arrange
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      const cntArr = [0, 0, 0, 1, 0]; // 예상되는 등수별 개수
+      const money = 10000; // 입력 금액
+      const expectedReturnRate = '300000.0'; // 예상 수익률
+
+      // Act
+      const result = lotto.calculateReturnRate(cntArr, money);
+
+      // Assert
+      expect(result).toBe(expectedReturnRate);
+    });
+
+    // 기타 다양한 결과 배열과 금액에 대한 테스트 케이스 추가 가능
+  });
+  describe('calculateReturnRate 메서드', () => {
+    test('올바른 결과 배열과 금액을 입력했을 때, 올바른 수익률을 계산해야 합니다', () => {
+      // Arrange
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      const cntArr = [0, 0, 0, 0, 1]; // 예상되는 등수별 개수
+      const money = 10000; // 입력 금액
+      const expectedReturnRate = '20000000.0'; // 예상 수익률
+
+      // Act
+      const result = lotto.calculateReturnRate(cntArr, money);
+
+      // Assert
+      expect(result).toBe(expectedReturnRate);
+    });
+
+    // 기타 다양한 결과 배열과 금액에 대한 테스트 케이스 추가 가능
+  });
 });
