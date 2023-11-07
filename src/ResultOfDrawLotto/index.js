@@ -1,13 +1,13 @@
 import LOTTO from "../constants/lotto.js";
 
 const mapCountToKey = Object.freeze({
-  [LOTTO.length]: "matchSix",
+  [LOTTO.length]: LOTTO.rank.firstPlace,
   [LOTTO.length - 1]: Object.freeze({
-    [true]: "matchFiveAndBonus",
-    [false]: "matchFive",
+    [true]: LOTTO.rank.secondPlace,
+    [false]: LOTTO.rank.thirdPlace,
   }),
-  [LOTTO.length - 2]: "matchFour",
-  [LOTTO.length - 3]: "matchThree",
+  [LOTTO.length - 2]: LOTTO.rank.fourthPlace,
+  [LOTTO.length - 3]: LOTTO.rank.fifthPlace,
 });
 
 class ResultOfDrawLotto {
@@ -15,11 +15,11 @@ class ResultOfDrawLotto {
 
   constructor() {
     this.#result = {
-      matchSix: 0,
-      matchFiveAndBonus: 0,
-      matchFive: 0,
-      matchFour: 0,
-      matchThree: 0,
+      [LOTTO.rank.firstPlace]: 0,
+      [LOTTO.rank.secondPlace]: 0,
+      [LOTTO.rank.thirdPlace]: 0,
+      [LOTTO.rank.fourthPlace]: 0,
+      [LOTTO.rank.fifthPlace]: 0,
     };
   }
 
@@ -36,13 +36,14 @@ class ResultOfDrawLotto {
    * @param {boolean} isMatchBonus
    */
   increaseResultOfDraw(countOfMatchingNumber, isMatchBonus = false) {
+    let key;
+
     if (countOfMatchingNumber === LOTTO.length - 1) {
-      const key = mapCountToKey[countOfMatchingNumber][isMatchBonus];
-      this.#result[key] += 1;
-      return;
+      key = mapCountToKey[countOfMatchingNumber][isMatchBonus];
+    } else {
+      key = mapCountToKey[countOfMatchingNumber];
     }
 
-    const key = mapCountToKey[countOfMatchingNumber];
     this.#result[key] += 1;
   }
 }
