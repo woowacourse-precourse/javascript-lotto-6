@@ -29,4 +29,19 @@ const PURCHASE_ERROR_MSG = Object.freeze({
   PURCHASE_AMOUNT: `${ERROR}구입 금액은 1,000원 단위로 입력하세요.`,
 });
 
-module.exports = { QUERY, MESSAGE, ERROR, LOTTO_ERROR_MSG, PURCHASE_ERROR_MSG };
+const PRIZE_MONEY = Object.freeze({
+  FIRST: "2,000,000,000",
+  SECOND: "30,000,000",
+  THIRD: "1,500,000",
+  FOURTH: "50,000",
+  FIFTH: "5,000",
+});
+
+module.exports = {
+  QUERY,
+  MESSAGE,
+  ERROR,
+  LOTTO_ERROR_MSG,
+  PURCHASE_ERROR_MSG,
+  PRIZE_MONEY,
+};
