@@ -14,6 +14,15 @@ class Lotto {
    */
   #numbers;
 
+  static RANK = {
+    6: '1등',
+    bonus: '2등',
+    5: '3등',
+    4: '4등',
+    3: '5등',
+    undefined: '꽝',
+  };
+
   /**
    * @param {string} numbers
    */
@@ -44,6 +53,26 @@ class Lotto {
 
   isDuplicatedWinningNumbers(bonusNumber) {
     return this.#numbers.includes(Number(bonusNumber));
+  }
+
+  compareWinningNumbers(userLotto, bonus) {
+    const count = this.#calculateCount(userLotto);
+
+    if (Lotto.#isSecond(count, bonus, userLotto)) return Lotto.RANK.bonus;
+
+    return Lotto.RANK[count] ?? Lotto.RANK.undefined;
+  }
+
+  #calculateCount(userLotto) {
+    return userLotto.reduce((acc, number) => {
+      if (!this.#numbers.includes(number)) return acc;
+
+      return acc + 1;
+    }, 0);
+  }
+
+  static #isSecond(count, bonus, userLotto) {
+    return count === 5 && userLotto.includes(bonus);
   }
 }
 

@@ -26,6 +26,10 @@ class Bonus {
       handleValidationError(ERROR_MESSAGE.winningDuplication);
     }
   }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
 }
 
 export default Bonus;
