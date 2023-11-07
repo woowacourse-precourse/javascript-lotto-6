@@ -1,8 +1,9 @@
-import LOTTO_CONSTANTS from './Constants/LottoContstants.js';
+import { LOTTO_CONSTANTS } from './Constants/LottoContstants.js';
 import InputOutputManager from './Models/InoputOutputManager.js';
 import VarirficationManager from './Models/VarificationManager.js';
 import Computer from './Models/Computer.js';
 import { Console } from '@woowacourse/mission-utils';
+import VarificationManager from './Models/VarificationManager.js';
 
 class App {
 	userLottoSheet;
@@ -46,6 +47,11 @@ class App {
 		);
 
 		this.initialUserLotto(purchasePrice);
+
+		const lottoWinningNumber = await InputOutputManager.getUserInput(
+			'당첨 번호를 입력해 주세요.\n',
+			VarificationManager.checkLottoNumber,
+		);
 	}
 
 	async play() {
