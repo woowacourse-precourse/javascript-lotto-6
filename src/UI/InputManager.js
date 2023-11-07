@@ -15,6 +15,13 @@ class InputManager {
     );
     return winningNumbersInput;
   }
+
+  async enterBonusNumberInput() {
+    const bonusNumberInput = await Console.readLineAsync(
+      GUIDE_MESSAGES.ENTER_BONUS_NUMBER
+    );
+    return bonusNumberInput;
+  }
 }
 
 export default InputManager;

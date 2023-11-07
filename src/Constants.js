@@ -6,6 +6,7 @@ export const LOTTO_NUMBERS_LENGTH = 6;
 export const GUIDE_MESSAGES = Object.freeze({
   ENTER_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
   ENTER_WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  ENTER_BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export const PURCHASE_AMOUNT_ERROR_MESSAGES = Object.freeze({

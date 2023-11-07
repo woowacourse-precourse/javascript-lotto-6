@@ -17,10 +17,12 @@ class App {
   constructor() {
     this.inputManager = new InputManager();
     this.outputManager = new OutputManager();
-    this.lottos = [];
     this.purchaseAmountInput = '';
     this.winningNumbersInput = '';
+    this.bonusNumberInput = '';
+    this.lottos = [];
     this.winningNumbers = [];
+    this.bonusNumber = 0;
   }
 
   async play() {
@@ -29,6 +31,7 @@ class App {
     this.createLottos(numberOfLottos);
     this.outputManager.printPurchasedLottosInfo(this.lottos);
     this.winningNumbers = await this.getWinningNumbers();
+    this.bonusNumber = await this.getBonusNumber();
   }
 
   async getPurchaseAmount() {
@@ -52,6 +55,11 @@ class App {
       await this.getWinningNumbers();
     }
     return this.winningNumbersInput.split(',').map((el) => Number(el));
+  }
+
+  async getBonusNumber() {
+    this.bonusNumberInput = await this.inputManager.enterBonusNumberInput();
+    return Number(this.bonusNumberInput);
   }
 
   getNumberOfLottos(purchaseAmount) {
