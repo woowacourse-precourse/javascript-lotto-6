@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
 
 describe("로또 클래스 테스트", () => {
@@ -49,5 +48,30 @@ describe("로또 클래스 테스트", () => {
     const result = lotto.validateIncludeBonus(prizeList, bonus);
 
     expect(result).toEqual(false);
+  });
+
+  test("당첨 결과 등수 갯수 구하기 테스트", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const prizeList = [1, 2, 3, 4, 5, 6];
+    const resultList = [
+      { rank: 5, count: 0 },
+      { rank: 4, count: 0 },
+      { rank: 3, count: 0 },
+      { rank: 2, count: 0 },
+      { rank: 1, count: 0 },
+    ];
+    const bonus = 8;
+
+    const output = [
+      { rank: 5, count: 0 },
+      { rank: 4, count: 0 },
+      { rank: 3, count: 0 },
+      { rank: 2, count: 0 },
+      { rank: 1, count: 1 },
+    ];
+
+    const result = lotto.getWinningList(prizeList, resultList, bonus);
+
+    expect(result).toEqual(output);
   });
 });

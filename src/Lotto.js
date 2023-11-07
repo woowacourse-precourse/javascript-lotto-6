@@ -1,5 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
-
 class Lotto {
   #numbers;
 
@@ -41,6 +39,7 @@ class Lotto {
         resultList.filter((data) => data.rank === 1 && data.count++);
         break;
     }
+    return resultList;
   }
 
   getMatchedCount(prizeList) {
