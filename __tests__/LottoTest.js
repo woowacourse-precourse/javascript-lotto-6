@@ -3,6 +3,7 @@ import Lotto from "../src/Lotto.js";
 import { lottoChecker } from "../src/LottoChecker.js";
 import { checkLottoAmount, checkLottoBonusNumber } from "../src/LottoInput.js";
 import { lottoMachine } from "../src/LottoMachine.js";
+import { printLottoStatistics } from "../src/LottoOutput.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -49,5 +50,18 @@ describe("로또 클래스 테스트", () => {
     const bonusNumber = 42;
     expect(lottoChecker(randomNumbers, winningNumbers, bonusNumber))
       .toEqual([2, "5+bonus", 3]);
+  });
+
+  test("당첨 통계를 출력한다", () => {
+    MissionUtils.Console.print = jest.fn();
+    printLottoStatistics([2, "5+bonus", 3, "5+bonus", 5]);
+    expect(MissionUtils.Console.print).toHaveBeenCalledWith(
+      [
+        "3개 일치 (5,000원) - 1개",
+        "4개 일치 (50,000원) - 0개",
+        "5개 일치 (1,500,000원) - 1개",
+        "5개 일치, 보너스 볼 일치 (30,000,000원) - 2개",
+        "6개 일치 (2,000,000,000원) - 0개"
+      ]);
   });
 });
