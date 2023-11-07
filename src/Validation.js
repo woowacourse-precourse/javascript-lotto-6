@@ -29,24 +29,13 @@ class Validation {
 
   static validateWinningNumbers(numbers) {
     const winningNumbers = numbers.split(",").map(Number);
-    for (const number of winningNumbers) {
-      if (isNaN(number)) {
-        throw new Error(MESSAGE.ERROR_NOT_NUMBER);
-      }
-    }
+    if (winningNumbers.length !== 6) throw new Error(MESSAGE.ERROR_WINNING_NUMBER);
 
-    if (winningNumbers.length !== 6) {
-      throw new Error(MESSAGE.ERROR_WINNING_NUMBER);
-    }
-
-    if (new Set(winningNumbers).size !== 6) {
-      throw new Error(MESSAGE.ERROR_WINNING_DUPLICATED);
-    }
+    if (new Set(winningNumbers).size !== 6) throw new Error(MESSAGE.ERROR_WINNING_DUPLICATED);
 
     for (const number of winningNumbers) {
-      if (number < 1 || number > 45) {
-        throw new Error(MESSAGE.ERROR_LOTTO_BOUND);
-      }
+      if (isNaN(number)) throw new Error(MESSAGE.ERROR_NOT_NUMBER);
+      if (number < 1 || number > 45) throw new Error(MESSAGE.ERROR_LOTTO_BOUND);
     }
     return true;
   }
