@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+const { Random } = MissionUtils;
 import CONSTANT from "./constant/constants";
 
 class Lotto {
@@ -25,7 +26,7 @@ class Lotto {
   }
 
   static generateRandom() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   checkWinning(winningNumbers, bonusNumber) {
