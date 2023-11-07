@@ -66,6 +66,11 @@ const checkLottoNumbers = (inputs) => {
     GAME_RULE_NUMBER.lottoLength,
     ERROR_MESSAGES.lottoLength,
   );
+  inputs.forEach((input) => {
+    const inputToString = input.toString();
+    checkInputType(inputToString, ERROR_MESSAGES.lottoType);
+    checkInputRange(inputToString, ERROR_MESSAGES.lottoRange);
+  });
 };
 
 const checkWinningNumbers = (inputs) => {
