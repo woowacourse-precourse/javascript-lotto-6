@@ -1,9 +1,10 @@
 import Computer from "../utils/Computer.js";
+import { NUMBER } from "../utils/Constant.js";
 
 const ERROR = {
   UNDEFINED_PURCHASECOST: "[ERROR] 금액을 입력해야 합니다.",
   STRING_IN_PURCHASECOST: "[ERROR] 입력한 값에 문자가 포함되어 있습니다.",
-  NOT_THOUSAND_PURCHASECOST: "[ERROR] 금액은 1000원 단위로 입력되어야 합니다."
+  NOT_THOUSAND_PURCHASECOST: `[ERROR] 금액은 ${NUMBER.UNIT}원 단위로 입력되어야 합니다.`,
 }
 
 class PurchaseCost {
@@ -21,14 +22,14 @@ class PurchaseCost {
       throw new Error(ERROR.UNDEFINED_PURCHASECOST);
     } else if (isNaN(cost)) {
       throw new Error(ERROR.STRING_IN_PURCHASECOST);
-    } else if (cost % 1000) {
+    } else if (cost % NUMBER.UNIT) {
       throw new Error(ERROR.NOT_THOUSAND_PURCHASECOST);
     }
   }
 
   #getRandomLottoNumbersList() {
     const purchaseLottoList = []
-    for (let i = 0; i < parseInt(this.#cost / 1000); i++) {
+    for (let i = 0; i < parseInt(this.#cost / NUMBER.UNIT); i++) {
       purchaseLottoList.push(Computer.getRandomLottoNumbers());
     };
     return purchaseLottoList
