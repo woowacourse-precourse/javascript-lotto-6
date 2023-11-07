@@ -1,7 +1,7 @@
 import { INPUT } from './constant/index.js';
 import InputView from './View/InputView.js';
 import Lotto from './Lotto.js';
-import LottoVendingMachine from './LottoVendingMachine.js';
+import LottoShop from './LottoShop.js';
 import LottoWinnerVerifier from './LottoWinnerVerifier.js';
 import OutputView from './View/OutputView.js';
 import ReturnRateCalculator from './ReturnRateCalculator.js';
@@ -27,7 +27,7 @@ class App {
       const buyingPrice = await InputView.readNumber(INPUT.BUYING_PRICE);
       Validator.validateGreaterThanZero(buyingPrice);
       Validator.validateValidUnit(buyingPrice);
-      const lottos = LottoVendingMachine.buyLottoTickets(buyingPrice);
+      const lottos = LottoShop.issueLottoTickets(buyingPrice);
 
       result = { lottos, buyingPrice };
     } catch (e) {
