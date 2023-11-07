@@ -15,6 +15,7 @@
     "max-depth": ["error", 2],
     "import/extensions": ["warn", "never"],
     "no-undef": ["off"],
-    "no-new": ["off"]
+    "no-new": ["off"],
+    "no-restricted-globals": ["off"]
   }
 }

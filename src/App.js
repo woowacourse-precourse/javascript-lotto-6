@@ -1,9 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
-import MESSAGES from "./constants/index.js";
+import Money from "./Money.js";
 
 class App {
   async play() {
-    Console.print(MESSAGES.INPUT_MONEY)
+    const money = new Money();
+    const userMoney = await money.userMoney();
+    Console.print(userMoney)
   }
 }
 
