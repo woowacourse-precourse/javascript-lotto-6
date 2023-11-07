@@ -24,6 +24,13 @@ class Lotto {
   }
 
   /**
+   * @returns {int[]}
+   */
+  get_numbers() {
+    return this.#numbers;
+  }
+
+  /**
    * 주어진 값이 로또에 존재하는지 확인하는 메소드
    * @param {int} number
    * @returns {boolean} is_include
@@ -33,16 +40,14 @@ class Lotto {
   }
 
   /**
-   * 주어진 로또와 몇 개의 숫자가 일치하는지 리턴하는 메소드
-   * @param {int[]} numbers
-   * @returns {int} winning
+   * 주어진 당첨 로또와 몇 개의 숫자가 일치하는지 리턴하는 메소드
+   * @param {WinningLotto} winning_lotto
+   * @returns {int} winning - 일치하는 번호 갯수
    */
-  get_winning_count(numbers) {
-    const WINNING = numbers.reduce(
-      (accumulator, current) => accumulator + this.is_include(current),
-      0
-    );
-
+  get_winning_count(winning_lotto) {
+    const WINNING = winning_lotto
+      .get_numbers()
+      .reduce((accum, current) => accum + this.is_include(current), 0);
     return WINNING;
   }
 }
