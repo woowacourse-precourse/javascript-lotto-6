@@ -4,16 +4,21 @@ import MATCHES from '../constants/matches.js';
 
 const LOTTO_VIEW = Object.freeze({
   getUserInputTotalBuyPrice() {
-    return Console.readLineAsync(MESSAGES.USER_INPUT_LOTTO_TOTAL_BUY_PRICE);
+    return Console.readLineAsync(MESSAGES.userInputLottoBuyTotalPrice);
   },
   getUserInputCorrectNumber() {
-    return Console.readLineAsync(MESSAGES.USER_INPUT_LOTTO_CORRECT_NUMBER);
+    return Console.readLineAsync(MESSAGES.userInputLottoCorrectNumber);
   },
   getUserInputBonusNumber() {
-    return Console.readLineAsync(MESSAGES.USER_INPUT_LOTTO_BONUS_NUMBER);
+    return Console.readLineAsync(MESSAGES.userInputLottoBonusNumber);
   },
   printBuyMessage(count) {
-    return Console.print(`${count}${MESSAGES.BUY_MESSAGE}`);
+    Console.print(`${count}${MESSAGES.buyMessage}`);
+  },
+  printLottoList(lottoList) {
+    lottoList.forEach((lotto) =>
+      Console.print(`[${lotto.getNumbers().join(', ')}]`)
+    );
   },
   printResult(result) {
     Console.print(MESSAGES.totalWinning);
@@ -21,7 +26,7 @@ const LOTTO_VIEW = Object.freeze({
       Console.print(`${MATCHES[key].message} - ${result[key]}개`);
     });
   },
-  rateOfReturn(roi) {
+  printRateOfReturn(roi) {
     Console.print(`총 수익률은 ${roi}%입니다.`);
   },
 });
