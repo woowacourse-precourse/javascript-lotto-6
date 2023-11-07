@@ -3,11 +3,16 @@ import {
   ERROR_MESSAGE,
   INPUT_MESSAGE,
   LOTTO_VALUE,
+  PRIZE_BY_RANK,
+  WINNING_CONDITION_BY_RANK,
 } from '../constants/index.js';
 
 class Lotto {
   #amount;
   #tickets = [];
+  #winningNumbers = [];
+  #bonusNumber;
+  #rankCount;
 
   constructor(numbers) {}
 
@@ -26,11 +31,66 @@ class Lotto {
     await this.#readWinningBonusNumber();
   }
 
-  async getResult() {}
+  async printResult() {
+    console.log('\n당첨 통계');
+    console.log('---');
+    this.#getResult();
+    this.#printPrize();
+    this.#printRateOfRevenue();
+  }
 
-  printPrize() {}
+  #getResult() {
+    const rankCount = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+    };
+    this.#tickets.forEach(ticket => {
+      const rank = ticket.getRank(this.#winningNumbers, this.#bonusNumber);
 
-  printRateOfRevenue() {}
+      if (rank) {
+        rankCount[rank] = rankCount[rank] + 1;
+      }
+    });
+    this.#rankCount = rankCount;
+  }
+
+  #printPrize() {
+    const NUMBER_OF_RANKS = 5;
+    for (let i = NUMBER_OF_RANKS; i > 0; i--) {
+      const condition = WINNING_CONDITION_BY_RANK[i];
+      const prize = `(${numberWithCommas(PRIZE_BY_RANK[i])}원)`;
+      const count = this.#rankCount[i];
+      console.log(`${condition} ${prize} - ${count}개`);
+    }
+  }
+
+  #printRateOfRevenue() {
+    const profit = this.#getProfit();
+    const cost = this.#amount;
+    const rateOfRevenue = (profit / cost) * 100;
+    console.log(`총 수익률은 ${rateOfRevenue}% 입니다 `);
+  }
+
+  #getProfit() {
+    const revenue = this.#getRevenue();
+    const cost = this.#amount;
+    const profit = revenue - cost;
+    return profit;
+  }
+
+  #getRevenue() {
+    let revenue = 0;
+
+    for (const [rank, numberOfPeople] of Object.entries(this.#rankCount)) {
+      if (numberOfPeople > 0) {
+        revenue += PRIZE_BY_RANK[rank];
+      }
+    }
+    return revenue;
+  }
 
   async #readBuyAmount() {
     const amountInput = await MissionUtils.Console.readLineAsync(
@@ -100,7 +160,7 @@ class Lotto {
       );
     });
 
-    this.winningNumbers = winningNumbers;
+    this.#winningNumbers = winningNumbers;
   }
 
   #validateNumberOfInputs(stringInput, numberOfInputs, delimiter) {
@@ -134,10 +194,10 @@ class Lotto {
       LOTTO_VALUE.END_NUMBER,
     );
 
-    if (this.winningNumbers.includes(bonusNumber)) {
+    if (this.#winningNumbers.includes(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.BONUS_WINNING_NUMBERS_DUPLICATED);
     }
-    this.bonusNumber = bonusNumber;
+    this.#bonusNumber = bonusNumber;
   }
 
   #validateIsNumber(stringValue) {
@@ -146,8 +206,6 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     }
   }
-
-  #getRank() {}
 }
 
 class LottoTicket {
@@ -162,10 +220,42 @@ class LottoTicket {
 
   getIsBonusNumberMatched() {}
 
+  getRank(winningNumbers, bonusNumber) {
+    let winningNumberCount = 0;
+    winningNumbers.forEach(winningNumber => {
+      const isIncluded = this.#numbers.includes(winningNumber);
+      if (isIncluded) {
+        winningNumberCount++;
+      }
+    });
+    const isBonusNumberIncluded = this.#numbers.includes(bonusNumber);
+
+    if (winningNumberCount === 6) {
+      return 1;
+    }
+    if (winningNumberCount === 5 && isBonusNumberIncluded) {
+      return 2;
+    }
+    if (winningNumberCount === 5 && !isBonusNumberIncluded) {
+      return 3;
+    }
+    if (winningNumberCount === 4) {
+      return 4;
+    }
+    if (winningNumberCount === 3) {
+      return 5;
+    }
+    return null;
+  }
+
   printNumbers() {
     const numbers = this.#numbers.join(',');
     console.log(`[${numbers}]`);
   }
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 export default Lotto;

@@ -6,9 +6,7 @@ class App {
     await lotto.buy();
     console.log('\n');
     await lotto.setWinningNumbers();
-    lotto.getResult();
-    lotto.printPrize();
-    lotto.printRateOfRevenue();
+    lotto.printResult();
   }
 }
 

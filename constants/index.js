@@ -20,3 +20,19 @@ export const LOTTO_VALUE = {
   START_NUMBER: 1,
   END_NUMBER: 45,
 };
+
+export const PRIZE_BY_RANK = {
+  1: 2000000000,
+  2: 30000000,
+  3: 1500000,
+  4: 50000,
+  5: 5000,
+};
+
+export const WINNING_CONDITION_BY_RANK = {
+  1: '6개 일치',
+  2: '5개 일치, 보너스 볼 일치',
+  3: '5개 일치',
+  4: '4개 일치',
+  5: '3개 일치',
+};
