@@ -6,9 +6,10 @@ class TotalPrice {
   }
 
   calculateTotalPrice(arr) {
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i += 1) {
       this.totalPrice += arr[i] * LottoConstants.PRICE_AMOUNT[i];
     }
+    return this.totalPrice;
   }
 
   calculateReturnRate(price) {

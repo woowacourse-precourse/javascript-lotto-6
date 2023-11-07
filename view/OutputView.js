@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import InputView from './InputView.js';
 import PromptMessage from '../constants/PromptMessage.js';
 import LottoController from '../controller/LottoController.js';
-import Label from '../constants/Label.js';
+import Label from '../constants/LottoConstants.js';
 
 class OutputView {
   constructor() {

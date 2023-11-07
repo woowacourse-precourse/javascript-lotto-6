@@ -1,6 +1,8 @@
 /* eslint-disable */
 import { MissionUtils } from '@woowacourse/mission-utils';
 import LottoController from '../controller/LottoController';
+import TotalPrice from '../model/TotalPrice';
+
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
@@ -25,7 +27,7 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe('핵심 로직 테스트', () => {
+describe('LottoController 로직 테스트', () => {
   test('generateAndStoreLotto() - 생성된 로또가 배열에 순차적으로 저장한다.', () => {
     // given
     const arr = [];
@@ -101,16 +103,29 @@ describe('핵심 로직 테스트', () => {
     // then
     expect(arr).toEqual([1, 0, 2, 2, 1]);
   });
+});
 
-  test('calculateReturnRate() - 총 당첨금을 계산 후 수익률을 계산한다.', () => {
+describe('TotalPrice model 로직 테스트', () => {
+  test('calculateTotalPrice() - 총 당첨금을 계산한다.', () => {
     // given
-    const arr = [1, 0, 0, 0, 0];
+    const arr = [1, 0, 1, 1, 0];
+
+    // when
+    const totalPrice = new TotalPrice();
+
+    // then
+    expect(totalPrice.calculateTotalPrice(arr)).toEqual(31505000);
+  });
+
+  test('calculateReturnRate() - 총 당첨금을 바탕으로 수익률을 계산한다.', () => {
+    // given
     const price = 8000;
 
     // when
-    const controller = new LottoController();
+    const totalPrice = new TotalPrice();
+    totalPrice.totalPrice = 5000;
 
     // then
-    expect(controller.calculateReturnRate(arr, price)).toEqual('62.5');
+    expect(totalPrice.calculateReturnRate(price)).toEqual('62.5');
   });
 });
