@@ -1,5 +1,6 @@
 import OPTIONS from '../constants/options.js';
 import { INDEX_TABLE, RANK } from '../constants/rank.js';
+import caculateProfitRate from '../utils/calculateProfitRate.js';
 
 class Stats {
   #userLottos;
@@ -48,7 +49,11 @@ class Stats {
   getStats() {
     this.#setStats();
 
-    return this.#stats.reverse();
+    return this.#stats;
+  }
+
+  getProfitRate(purchaseAmount) {
+    return caculateProfitRate(purchaseAmount, this.#stats);
   }
 }
 

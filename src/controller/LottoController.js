@@ -27,7 +27,7 @@ class LottoController {
     await this.#buyLottos();
     await this.#drawWinningNumbers();
     await this.#drawBonusNumber();
-    this.#analyzeLottos();
+    await this.#analyzeLottos();
   }
 
   async #buyLottos() {
@@ -37,7 +37,9 @@ class LottoController {
       this.#userLottos = LottoStoreInstance.getUserLottos();
 
       OutputView.printLottosQuantity(this.#userLottos.length);
-      OutputView.printLottos(this.#userLottos);
+      OutputView.printLottos(
+        this.#userLottos.map(lotto => `[${lotto.join(', ')}]`),
+      );
     } catch (error) {
       OutputView.printError(error);
       await this.#buyLottos();
@@ -69,17 +71,18 @@ class LottoController {
     }
   }
 
-  #analyzeLottos() {
+  async #analyzeLottos() {
     OutputView.printResult();
-
-    const statInstance = new Stats(
+    const statsInstance = new Stats(
       this.#userLottos,
       this.#winningNumbers,
       this.#bonusNumber,
     );
-    this.#stats = statInstance.getStats();
-
+    this.#stats = statsInstance.getStats();
     OutputView.printStats(this.#stats);
+    OutputView.printProfitRate(
+      statsInstance.getProfitRate(this.#purchaseAmount),
+    );
   }
 }
 

@@ -1,9 +1,11 @@
+import WINNINGS from './winnings.js';
+
 export const STATS_MESSAGES = [
-  '3개 일치 (5,000원) -',
-  '4개 일치 (50,000원) -',
-  '5개 일치 (1,500,000원) -',
-  '5개 일치, 보너스 볼 일치 (30,000,000원) -',
-  '6개 일치 (2,000,000,000원) -',
+  `3개 일치 (${WINNINGS.fifth.toLocaleString()}원) -`,
+  `4개 일치 (${WINNINGS.fourth.toLocaleString()}원) -`,
+  `5개 일치 (${WINNINGS.third.toLocaleString()}원) -`,
+  `5개 일치, 보너스 볼 일치 (${WINNINGS.second.toLocaleString()}원) -`,
+  `6개 일치 (${WINNINGS.first.toLocaleString()}원) -`,
 ];
 
 export const INPUT_MESSAGES = Object.freeze({
@@ -17,6 +19,7 @@ export const OUTPUT_MESSAGES = Object.freeze({
   divisionLine: '---',
   lottosQuantity: quantity => `\n${quantity}개를 구매했습니다.`,
   hits: (stat, index) => `${STATS_MESSAGES[index]} ${stat}개`,
+  profitRate: profitRate => `총 수익률은 ${profitRate}%입니다.`,
 });
 
 export const ERROR_MESSAGES = Object.freeze({

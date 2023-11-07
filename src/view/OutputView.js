@@ -2,8 +2,6 @@ import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGES } from '../constants/messages.js';
 
 const OutputView = {
-  print: Console.print,
-
   printError(error) {
     Console.print(error);
     Console.print(`${error}`);
@@ -14,7 +12,7 @@ const OutputView = {
   },
 
   printLottos(lottos) {
-    lottos.forEach(Console.print);
+    lottos.forEach(lotto => Console.print(lotto));
   },
 
   printResult() {
@@ -25,6 +23,10 @@ const OutputView = {
     stats.forEach((stat, index) =>
       Console.print(OUTPUT_MESSAGES.hits(stat, index)),
     );
+  },
+
+  printProfitRate(profitRate) {
+    Console.print(OUTPUT_MESSAGES.profitRate(profitRate));
   },
 };
 
