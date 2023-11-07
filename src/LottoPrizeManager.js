@@ -74,7 +74,8 @@ class LottoPrizeManager {
 
     lottoArray.forEach((lotto) => {
       const prizeRank = this.#getPrizeRank(lotto);
-      rankResult[prizeRank] && rankResult[prizeRank]++;
+      if (!prizeRank) return;
+      rankResult[prizeRank]++;
     });
 
     return rankResult;
