@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
 import Amount from '../model/Amount.js';
-import Lotto from '../Lotto.js';
+import Lotto from '../model/Lotto.js';
 import Bonus from '../model/Bonus.js';
 
 import { INPUT_MESSAGE } from '../data/message.js';
