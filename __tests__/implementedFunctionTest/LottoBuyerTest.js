@@ -1,4 +1,4 @@
-import LottoBuyer from '../../../src/LottoBuyer.js';
+import LottoBuyer from '../../src/LottoBuyer.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const mockRandoms = (numbers) => {
