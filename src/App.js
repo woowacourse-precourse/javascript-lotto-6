@@ -1,7 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lottos from './Lottos.js'
 import Winning from "./WinningNumber.js";
-import Bonus from "./BonusNumber.js";
 
 class App {
   async play() {
@@ -32,10 +31,9 @@ class App {
     } catch(e) {
       MissionUtils.Console.print(e.message)
       await this.userInputLottoNumber();
-      return;
     }
+    
   }
-
 }
 
 export default App;
