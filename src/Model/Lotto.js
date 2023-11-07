@@ -17,7 +17,7 @@ class Lotto {
   // TODO: 추가 기능 구현
 
   // 당첨 통계 계산
-  calculatePrizes(lottoNumbers, bonusNumber) {
+  calculatePrize(lottoNumbers, bonusNumber) {
     const matchCount = this.countMatchNumbers(lottoNumbers);
     const bonus = this.hasBonusNumber(bonusNumber);
 
@@ -46,10 +46,6 @@ class Lotto {
 
   hasBonusNumber(bonusNumber) {
     return this.#numbers.includes(bonusNumber);
-  }
-
-  getNumber() {
-    return this.#numbers;
   }
   // 상금 반환
   getPrizeAmount() {}

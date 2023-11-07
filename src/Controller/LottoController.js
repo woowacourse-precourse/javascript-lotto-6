@@ -9,6 +9,7 @@ class LottoController {
     this.lottoList = [];
     this.lottoNumbers = [];
     this.bonusNumber = 0;
+    this.lotto;
   }
 
   // 게임 시작
@@ -16,31 +17,40 @@ class LottoController {
     const purchaseAmount = await InputView.inputPurchaseAmount();
     this.AMOUNT = purchaseAmount;
 
-    this.createLottoList();
+    this.createLottoNumberList();
 
     const lottoNumber = await InputView.inputLottoNumbers();
     this.lottoNumbers = lottoNumber;
 
+    this.lotto = this.createLotto();
+
     const inputBonusNumber = await InputView.inputBonusNumber();
     this.bonusNumber = inputBonusNumber;
+
+    const prizes = this.calculatePrizes();
+    OutputView.printPrize(prizes);
   }
 
   // 로또 번호 생성
   generateLottoNumbers() {
     const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
     randomNumber.sort((a, b) => a - b);
-    const lotto = new Lotto(randomNumber);
-    return lotto.getNumber();
+    return randomNumber;
   }
 
-  createLottoList() {
+  createLottoNumberList() {
     for (let i = 0; i < this.AMOUNT; i++) {
       this.lottoList.push(this.generateLottoNumbers());
     }
     OutputView.printLottoNumbers(this.AMOUNT, this.lottoList);
   }
 
-  calculatePrizes(lottoNumbers, bonusNumber) {
+  createLotto() {
+    const lotto = new Lotto(this.lottoNumbers);
+    return lotto;
+  }
+
+  calculatePrizes() {
     const results = {
       3: 0,
       4: 0,
@@ -49,8 +59,9 @@ class LottoController {
       6: 0,
     };
 
-    for (const lotto of this.lottoList) {
-      const prize = lotto.calculatePrizes(lottoNumbers, bonusNumber);
+    for (const lottoNumbers of this.lottoList) {
+      const prize = this.lotto.calculatePrize(lottoNumbers, this.bonusNumber);
+      console.log(prize);
       results[prize]++;
     }
     return results;
