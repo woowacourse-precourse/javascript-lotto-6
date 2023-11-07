@@ -1,5 +1,5 @@
-import UserPayment from "../src/domain/UserPayment.js";
-import { Console } from "@woowacourse/mission-utils";
+import UserPayment from "../src/domain/UserPayment";
+import { ERROR } from "../src/const/Messages";
 
 // Result.js 관련 단위 테스트
 describe("수익률 테스트", () => {
@@ -24,17 +24,13 @@ describe("수익률 테스트", () => {
 });
 
 // UserPayment.js 관련 단위 테스트
-jest.mock("@woowacourse/mission-utils", () => ({
-  Console: {
-    readLineAsync: jest.fn(),
-  },
-}));
-
 describe("구입 금액 테스트", () => {
   test("구입 금액이 천 원 단위가 아니면 예외가 발생한다.", async () => {
-    Console.readLineAsync.mockResolvedValue("58744");
-    const pay = new UserPayment();
-    await expect(pay.userPayment()).rejects.toThrow("[ERROR]");
+    const userPayment = new UserPayment();
+    function setUserPaymentInvalid() {
+      userPayment.setUserPayment("58744");
+    }
+    expect(setUserPaymentInvalid).toThrowError(new Error(ERROR.NO_THOUSAND_UNIT));
   });
 
   test("구입한 로또 수량 구하기", () => {
