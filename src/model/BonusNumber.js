@@ -10,7 +10,7 @@ class BonusNumber {
   }
 
   #validate(bonusNumber, numbers) {
-    if (Number.isNaN(bonusNumber)) {
+    if (Number.isNaN(+bonusNumber)) {
       errorMessage.typeError();
     }
     if (+bonusNumber < LOTTO_MIN_NUMBER || +bonusNumber > LOTTO_MAX_NUMBER) {
