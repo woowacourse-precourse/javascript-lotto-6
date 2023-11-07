@@ -18,8 +18,9 @@ const MESSAGE = {
     priceUnit: '[ERROR] 1,000원 단위의 숫자를 입력해주세요.',
     duplicateNumber: '[ERROR] 중복된 숫자가 있습니다.',
     duplicateBonusNumber: '[ERROR] 당첨 번호 이외의 숫자를 입력해주세요.',
-    lottoLength: '[ERROR] 로또 번호는 6개여야 합니다.',
-    rangeLotto: '[ERROR] 1부터 45까지의 숫자들을 입력해주세요.',
+    lottoLength:
+      '[ERROR] 로또 번호는 6개여야 합니다. 쉼표(,)로 구분해서 입력해주세요.',
+    rangeLotto: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
   },
   closing: '입니다.',
 };

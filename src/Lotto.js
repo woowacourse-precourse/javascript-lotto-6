@@ -14,7 +14,7 @@ class Lotto {
     this.#numbers.forEach((number, index) => {
       validationUtils.checkNumber(number);
 
-      validationUtils.checkRange(number);
+      validationUtils.checkRange(number, MESSAGE.error.rangeLotto);
 
       this.#checkDuplicateNumber(number, index);
     });

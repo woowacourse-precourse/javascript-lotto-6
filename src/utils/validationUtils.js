@@ -8,11 +8,11 @@ const validationUtils = {
     }
   },
 
-  checkRange(number) {
+  checkRange(number, message) {
     const { start, end } = VALUE.range;
 
     if (number < start || number > end) {
-      throw new Error(MESSAGE.error.rangeLotto);
+      throw new Error(message);
     }
   },
 };
