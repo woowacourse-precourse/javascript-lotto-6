@@ -10,7 +10,7 @@ class Counter {
   }
 
   #calculateLottoTicketNumber(inputAmount) {
-    this.#lottoTicketNumber = inputAmount / 1000;
+    this.#lottoTicketNumber = inputAmount / LOTTO_CONSTANT.price;
   }
 
   #generateLotto() {

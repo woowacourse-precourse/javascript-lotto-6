@@ -2,11 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import LOTTO_CONSTANT from '../constants/lotto.js';
 import { OUTPUT_MESSAGES } from '../constants/messages.js';
 import PRIZE from '../constants/prize.js';
-
-const RATE = Object.freeze({
-  percent: 100,
-  float: 1,
-});
+import RATE from '../constants/rate.js';
 
 const printLottoResult = (lottoTicketNumber, ranks) => {
   const income = Array.from(ranks).reduce((acc, [_, value], idx) => acc + value * PRIZE[idx], 0);

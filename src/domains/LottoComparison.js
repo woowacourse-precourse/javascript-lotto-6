@@ -1,16 +1,17 @@
 import lottoCompare from '../utils/lottoCompare.js';
 import printLottoResult from '../print/printLottoResult.js';
+import RANK from '../constants/rank.js';
 
 class LottoComparison {
   #myLotto;
   #winningNumbers;
   #bonusNumber;
   #rank = new Map([
-    [3, 0],
-    [4, 0],
-    [5, 0],
-    [5.5, 0],
-    [6, 0],
+    [RANK.fifth, 0],
+    [RANK.fourth, 0],
+    [RANK.third, 0],
+    [RANK.second, 0],
+    [RANK.first, 0],
   ]);
 
   constructor(myLotto, winningLottoMachine) {
