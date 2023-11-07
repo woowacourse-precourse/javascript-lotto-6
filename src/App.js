@@ -1,5 +1,13 @@
+import Store from './domain/Store.js';
+import Customer from './domain/Customer.js';
+
 class App {
-  async play() {}
+  async play() {
+    const customer = new Customer();
+    const store = new Store();
+
+    await customer.buyLottoIn({ store });
+  }
 }
 
 export default App;
