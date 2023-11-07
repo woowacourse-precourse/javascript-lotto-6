@@ -1,6 +1,7 @@
 import NUMBER from './number';
 
 const inputView = Object.freeze({
+  emptyInput: '빈 값을 입력할 수 없습니다.',
   notNumber: '숫자만 입력할 수 있습니다.',
   negativeValue: '음수를 입력할 수 없습니다.',
   notInteger: '정수만 입력할 수 있습니다.',

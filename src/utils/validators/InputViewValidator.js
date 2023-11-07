@@ -2,6 +2,12 @@ import CustomError from '../../errors/CustomError';
 import ERROR from '../constants/error';
 import SYMBOL from '../constants/symbol';
 
+function validateInputLength(input) {
+  if (!input.length) {
+    throw new CustomError(ERROR.inputView.emptyInput);
+  }
+}
+
 function validateIsNumber(input) {
   if (Number.isNaN(input)) {
     throw new CustomError(ERROR.inputView.notNumber);
@@ -21,18 +27,17 @@ function validateIsInteger(input) {
 }
 
 const InputViewValidator = {
-  isIntegerInput(input) {
+  isValidInput(input) {
+    validateInputLength(input);
     const number = Number(input);
     validateIsNumber(number);
     validateNonNegativeValue(number);
     validateIsInteger(number);
   },
 
-  isIntegerArrayInput(input) {
-    const inputNumberArray = input
-      .split(SYMBOL.inputNumberSeparator)
-      .map(Number);
-    inputNumberArray.forEach(item => this.isIntegerInput(item));
+  isValidMultipleInputs(input) {
+    const inputNumberArray = input.split(SYMBOL.inputNumberSeparator);
+    inputNumberArray.forEach(item => this.isValidInput(item));
   },
 };
 

@@ -4,13 +4,13 @@ import InputViewValidator from '../utils/validators/InputViewValidator';
 const InputView = {
   async readInteger(message) {
     const userInput = await Console.readLineAsync(`${message}\n`);
-    InputViewValidator.isIntegerInput(userInput);
+    InputViewValidator.isValidInput(userInput);
     return userInput;
   },
 
   async readMultipleIntegers(message) {
     const userInput = await Console.readLineAsync(`${message}\n`);
-    InputViewValidator.isIntegerArrayInput(userInput);
+    InputViewValidator.isValidMultipleInputs(userInput);
     return userInput;
   },
 };
