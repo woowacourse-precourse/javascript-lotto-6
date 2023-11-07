@@ -3,6 +3,7 @@ const LOTTO_CONSTANT = {
   numberCount: 6,
   minNumber: 1,
   maxNumber: 45,
+  bonusCount: 1,
 };
 
 export default LOTTO_CONSTANT;

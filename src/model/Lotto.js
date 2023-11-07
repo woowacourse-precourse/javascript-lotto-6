@@ -24,6 +24,10 @@ class Lotto {
       throw new Error(ERROR_MESSAGES.lottoNumberOutOfRange);
     }
   }
+
+  getLotto() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

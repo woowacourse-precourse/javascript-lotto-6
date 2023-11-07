@@ -11,8 +11,8 @@ class CreateModel {
     return new Lotto(winngNumbers);
   }
 
-  createBonusModel(bonusNumber) {
-    return new Bonus(bonusNumber);
+  createBonusModel(bonusNumber, lottoWinngNumbers) {
+    return new Bonus(bonusNumber, lottoWinngNumbers);
   }
 }
 

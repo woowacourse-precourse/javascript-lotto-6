@@ -1,16 +1,27 @@
 import { Console } from "@woowacourse/mission-utils";
+import LOTTO_CONSTANT from "../utils/constant";
+import { ERROR_MESSAGES } from "../utils/message";
 
 class Bonus {
   #number;
 
-  constructor(number) {
-    this.#validate(number);
+  constructor(number, lottoWinngNumbers) {
+    this.#validate(number, lottoWinngNumbers);
     this.#number = number;
   }
 
-  #validate(number) {
-    if (number.length !== 1) {
-      throw new Error("[ERROR] 보너스 번호는 1개여야 합니다.");
+  #validate(number, lottoWinngNumbers) {
+    if (number.length !== LOTTO_CONSTANT.bonusCount) {
+      throw new Error(ERROR_MESSAGES.bonusNumberCountOne);
+    }
+    if (number.some((num) => Number.isNaN(num))) {
+      throw new Error(ERROR_MESSAGES.bonusNumberNotNumber);
+    }
+    if (number.some((num) => num < LOTTO_CONSTANT.minNumber || num > LOTTO_CONSTANT.maxNumber)) {
+      throw new Error(ERROR_MESSAGES.bonusNumberOutOfRange);
+    }
+    if (lottoWinngNumbers.getLotto().includes(number[0])) {
+      throw new Error(ERROR_MESSAGES.bonusNumberAlreadyIncluded);
     }
   }
 }

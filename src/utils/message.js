@@ -12,6 +12,10 @@ const ERROR_MESSAGES = {
   duplicateLottoNumbers: "[ERROR] 로또 번호는 중복되지 않은 수여야 합니다.",
   lottoNumberNotNumber: "[ERROR] 로또 번호는 숫자여야 합니다.",
   lottoNumberOutOfRange: "[ERROR] 로또 번호는 1부터 45까지의 수여야 합니다.",
+  bonusNumberCountOne: "[ERROR] 보너스 번호는 1개여야 합니다.",
+  bonusNumberNotNumber: "[ERROR] 보너스 번호는 숫자여야 합니다.",
+  bonusNumberOutOfRange: "[ERROR] 보너스 번호는 1부터 45까지의 수여야 합니다.",
+  bonusNumberAlreadyIncluded: "[ERROR] 보너스 번호가 이미 당첨 번호에 포함되어 있습니다.",
 };
 
 export { GAME_MESSAGES, ERROR_MESSAGES };
