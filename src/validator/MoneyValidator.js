@@ -1,5 +1,5 @@
 import { MONEY_ERROR } from '../constants/message/error.js';
-import { LOTTO_PRICE, REMAIN_MONEY } from '../constants/setting.js';
+import { LOTTO_PRICE, ZERO } from '../constants/setting.js';
 import InputError from '../error/InputError.js';
 import CommonValidator from './CommonValidator.js';
 
@@ -17,7 +17,7 @@ class MoneyValidator {
   }
 
   static validateLottoAmountExactness(money) {
-    if (money % LOTTO_PRICE !== REMAIN_MONEY) {
+    if (money % LOTTO_PRICE !== ZERO) {
       throw new InputError(MONEY_ERROR.amountExactness);
     }
   }
