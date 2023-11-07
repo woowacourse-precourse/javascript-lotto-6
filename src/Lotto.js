@@ -9,7 +9,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    LottoValidator.validLottoNumber(numbers);
+    const lottoValidator = new LottoValidator();
+    lottoValidator.validateLottoNumber(numbers);
   }
 
   /**
