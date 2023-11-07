@@ -78,6 +78,38 @@
    > 1000단위가 넘어가면 ,로 구분지어 포매팅해준다.
    > (ex. 62.5% 20,000.0%)
 
+## 폴더 구조
+
+```markdown
+📂Domain
+┣ 📂InputHanlder
+┃ ┗ InputHanlder.js // 구매 금액, 당첨 번호, 보너스 번호를 입력 받음.
+┃
+┣ 📂Lotto (2. 당첨 번호 검증, 당첨 통계, 출력 단계)
+┃ ┣ Lotto.js (검증: 입력받은 당첨 번호 유효성 검증)
+┃ ┣ WinningChecker.js (통계: '당첨번호+보너스번호' 전달 및 구매번호와 비교하여 결과 통계 리턴)
+┃ ┣ ResultReturn.js (출력: 당첨 통계 출력, 수익률 출력)
+┃ ┗ index.js
+┃
+┗ 📂Purchase (1. 구매단계)
+┃ ┣ PurchaseAmount.js (구매 금액 입력)
+┃ ┣ LottoGenerator.js (금액에 맞춘 로또 번호 생성)
+┃ ┣ index.js
+┃ ┗ utils.js
+┃
+📂Lib
+┣ ExceptionHandler.js
+┣ constans.js
+┣ error.js
+┣ message.js
+┣ messageFormat.js
+┗ utils.js
+📂errors
+┗ error.js
+App.js
+index.js
+```
+
 ## 3주 차 목표
 
 1. 함수 분리, 함수별 테스트
@@ -139,3 +171,14 @@ _`apply(this)`는 `call`과 비교하여 전달받은 매개변수 형태가 다
 : 예외 처리는 코드 실행 중에 발생할 수 있는 예상하지 못한 문제 상황, 즉 예외 상황에 대응하는 방법을 의미합니다. 예외는 일반적으로 프로그램의 정상적인 흐름을 방해하는 상황을 나타냅니다. 이러한 상황에서 프로그램은 예외를 `"던지고(throw)"`, 이를 `"잡아서(catch)"` 적절한 조치를 취해야 합니다.
 
 #### 5. 순서를 보장하려면, 객체보다는 Map을 사용해보자. (Order Guarantee)
+
+객체도 `키` 대신 `인덱스`를 사용하면 순서 보장이 된다!
+
+#### 6. Ojbect.feeze()
+
+depth 1 까지만 얕은 동결된다.
+재귀를 사용하여 deep freeze 한다.
+
+#### 7. 특정 얼리 리턴이나 브레이크 포인트는 웬만하면 함수로 추출한다.
+
+js는 함수의 실행 결과를 변수에 값으로 취급할 수 있기 때문에... (= 일급 객체)
