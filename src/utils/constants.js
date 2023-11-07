@@ -4,6 +4,7 @@ const LOTTO_INFO = Object.freeze({
   PRICE: 1000,
   LENGTH: 6,
   MIN_LOTTO_MONEY: 1000,
+  MAX_LOTTO_MONEY: Number.MAX_SAFE_INTEGER,
   PRIZE: {
     1: 2000000000,
     2: 30000000,
@@ -21,8 +22,10 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  INVALID_INPUT_FORMAT: `[ERROR] 입력 형태가 맞지 않습니다. 게임을 종료합니다.`,
   TYPE_ERROR: `[ERROR] 정수가 아닙니다. 다시 입력해주세요.`,
+  INVALID_AMOUNT_UNIT: `[ERROR] 금액은 ${LOTTO_INFO.PRICE} 단위로 입력해주세요.`,
+  INVALID_AMOUNT_RANGE: `[ERROR] 금액은 ${LOTTO_INFO.MIN_MONEY}부터 ${LOTTO_INFO.MAX_LOTTO_MONEY}까지 입력 가능합니다.`,
+  INVALID_INPUT_FORMAT: `[ERROR] 입력 형태가 맞지 않습니다. 게임을 종료합니다.`,
 });
 
 export { LOTTO_INFO, INPUT_MESSAGE, ERROR_MESSAGE };
