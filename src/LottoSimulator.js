@@ -1,6 +1,3 @@
-import Lotto from './Lotto.js';
-import NumberGenerator from './util/NumberGenerator.js';
-
 class LottoSimulator {
   #lottos
   #ranks
@@ -12,11 +9,8 @@ class LottoSimulator {
     this.#prizeMoneys = [5000, 50000, 1500000, 3000000, 2000000];
   }
 
-  issueLotto(quantity) {
-    Array(quantity).fill().map(() => {
-      const lotto = new Lotto(NumberGenerator.generator(6));
-      this.#lottos.push(lotto.getNumbers());
-    })
+  issueLotto(lottos) {
+    lottos.map((lotto) => this.#lottos.push(lotto));
   }
 
   compareWinningNumber(winningNumber) {

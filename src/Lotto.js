@@ -1,4 +1,4 @@
-import Validator from './util/validator.js';
+import NumberGenerator from './util/NumberGenerator.js';
 
 class Lotto {
   #numbers;
@@ -6,6 +6,10 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+  }
+
+  static generateLottos(ticket) {
+    return Array(ticket).fill().map(() => new Lotto(NumberGenerator.generator(1, 45, 6)).getNumbers());
   }
 
   #validate(numbers) {
@@ -33,8 +37,6 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
