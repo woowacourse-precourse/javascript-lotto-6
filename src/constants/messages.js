@@ -9,7 +9,7 @@ const INPUT_MESSAGE = Object.freeze({
 const OUTPUT_MESSAGE = Object.freeze({
   purchaseAmount: (amount) => `\n${amount}개를 구매했습니다.`,
   winsStatistic: `\n당첨통계\n---`,
-  profitRatio: (profitRatio) => `총 수익률은 ${profitRatio}%입니다.`,
+  totalProfitRatio: (profitRatio) => `총 수익률은 ${profitRatio}%입니다.`,
 });
 
 const PREFIX_ERROR = '[ERROR]';
