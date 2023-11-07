@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import App from "../src/App.js";
+import GameModel from "../src/LottoGame/GameModel.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -61,5 +62,15 @@ describe("당첨 번호 생성", () => {
 
     // then
     await expect(app.play()).rejects.toThrow("[ERROR] 중복되지 않는 6개의 숫자로 입력해 주세요.");
+  });
+
+  test("WINNING_NUMBER 상수 확인", async () => {
+    const mockData = [1, 2, 3, 4, 5, 6];
+    // when
+    const model = new GameModel();
+    await model.generateWinningNumber(mockData);
+
+    // then
+    expect(model.WINNING_NUMBER).toStrictEqual([1, 2, 3, 4, 5, 6]);
   });
 });
