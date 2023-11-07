@@ -151,3 +151,14 @@ export function runCalculate(lottos, winLotto) {
         .map(([answerCnt, hasBonusNumber]) => lottoRank(answerCnt, hasBonusNumber));
     return getRankMap(ranks);
 }
+
+/**
+ * @param {Lotto[]} lottos
+ */
+export function printLottoNumbers(lottos) {
+    MissionUtils.Console.print(`${lottos.length}개를 구매했습니다.`);
+    lottos.forEach(lotto => {
+        MissionUtils.Console.print(`[${lotto.getNumbers().join(', ')}]`);
+    });
+    MissionUtils.Console.print('');
+}
