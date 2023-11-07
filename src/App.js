@@ -147,13 +147,17 @@ class App {
   }
 
   async play() {
-    const userPriceInput = await this.getUserPrice();
-    const lottoAmount = Price.calculateLottoAmount(userPriceInput);
-    const lottos = this.generateLottos(lottoAmount);
-    this.printPurchasedLottos(lottos);
-    const lottoNumbers = await this.getUserLottoNumbers();
-    const bonusNumber = await this.getUserBonusNumber(lottoNumbers);
-    this.checkWinLotto(lottos, lottoNumbers, bonusNumber);
+    try {
+      const userPriceInput = await this.getUserPrice();
+      const lottoAmount = Price.calculateLottoAmount(userPriceInput);
+      const lottos = this.generateLottos(lottoAmount);
+      this.printPurchasedLottos(lottos);
+      const lottoNumbers = await this.getUserLottoNumbers();
+      const bonusNumber = await this.getUserBonusNumber(lottoNumbers);
+      this.checkWinLotto(lottos, lottoNumbers, bonusNumber);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 }
 
