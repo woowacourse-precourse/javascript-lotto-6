@@ -17,4 +17,8 @@ class Purchase {
       throw new Error("[ERROR] 구입 금액은 1,000원부터 입력 가능합니다.");
     }
   }
+  calculatePurchaseCount() {
+    const PURCHASE_COUNT = this.#purchaseAmount / 1000;
+    return PURCHASE_COUNT;
+  }
 }
