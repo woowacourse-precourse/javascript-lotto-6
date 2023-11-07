@@ -47,10 +47,6 @@ class Lotto {
   lot(userLotto, bonus) {
     const SAME = this.#numbers.filter(item => userLotto.includes(item)).length;
     const IS_BONUS = userLotto.includes(bonus);
-    console.log(typeof bonus);
-    console.log(userLotto);
-    console.log(SAME);
-    console.log(IS_BONUS);
 
     return [SAME, Number(IS_BONUS)];
   }
@@ -82,7 +78,7 @@ class Lotto {
     const WIN_ARR = cntArr.map((item, idx) => item * WINNINGS[idx]);
     const TOTAL = WIN_ARR.reduce((acc, curr) => acc + curr, 0);
     const returnRate = (TOTAL / money) * 100;
-    return returnRate.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 소수점 둘째 자리에서 반올림하고 100.0으로 포맷
+    return returnRate.toFixed(1); // 소수점 둘째 자리에서 반올림하고 100.0으로 포맷
   }
 }
 
