@@ -78,6 +78,17 @@ class Lotto {
     } else if (matchedNumbers === 3) {
       results['threeMatches']++;
     }
+
+    this.showWinningStats(results);
+  }
+
+  showWinningStats(results) {
+    MissionUtils.Console.print(`\n당첨 통계\n---`);
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${results['threeMatches']}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${results['fourMatches']}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${results['fiveMatches']}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${results['fiveAndBonusMatches']}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${results['sixMatches']}개 \n---`);
   }
 }
 
