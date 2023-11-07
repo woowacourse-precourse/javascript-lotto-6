@@ -9,6 +9,7 @@ class IssuingLotto {
 
   constructor(count) {
     this.#count = count;
+    this.#issueLotto();
   }
 
   #getRandomNumbers() {
@@ -37,11 +38,6 @@ class IssuingLotto {
 
     Utils.informUser(`${this.#count}개를 구매했습니다.`);
     Utils.informUser(`${lottoList.join('\n')}`);
-  }
-
-  getLotto() {
-    const issuedLotto = this.#issueLotto();
-    return issuedLotto;
   }
 }
 
