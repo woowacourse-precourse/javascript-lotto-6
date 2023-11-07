@@ -17,6 +17,10 @@ class Money {
     buyLottos(){
         return this.#money / LOTTO_PRICE;
     }
+
+    calculateRevenuePercent(revenue){
+        return Math.round(revenue / this.#money * 1000) / 10;
+    }
 }
 
 export default Money;
