@@ -41,7 +41,7 @@ class LottoController {
   }
   
   async printPurChaseResult() {
-    await OutputView.outputPurchaseLottoCount(parseInt(await this.#userLottoCost.getPurchaseCost() / 1000));
+    await OutputView.outputPurchaseLottoCount(parseInt(await this.#userLottoCost.getPurchaseCost() / NUMBER.UNIT));
     await OutputView.outputRandomLottoNumbersList(await this.#userLottoCost.getRandomLottoNumbersList());
   }
 
