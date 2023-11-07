@@ -1,19 +1,17 @@
 import ValidationUtils from "./utils/ValidationUtils.js";
 import { LOTTO_CONFIG } from "./constants.js";
+import { ERROR_MESSAGE } from "./message.js";
 class LottoValidator {
   static validateMoneyInput(userMoneyInput) {
-    ValidationUtils.validateNotNull(
-      userMoneyInput,
-      "[ERROR] 금액을 입력해 주세요"
-    );
+    ValidationUtils.validateNotNull(userMoneyInput, ERROR_MESSAGE.moneyIsNull);
     ValidationUtils.validateIsNumber(
       userMoneyInput,
-      "[ERROR] 숫자를 입력해 주세요"
+      ERROR_MESSAGE.lottoNumberIsNull
     );
     ValidationUtils.validateIsMultipleOf(
       userMoneyInput,
       LOTTO_CONFIG.price,
-      `[ERROR] 금액은 ${LOTTO_CONFIG.price}원 단위로 입력해 주세요`
+      ERROR_MESSAGE.invalidMoneyUnit(LOTTO_CONFIG.price)
     );
   }
 
@@ -21,32 +19,35 @@ class LottoValidator {
     ValidationUtils.validateLength(
       lottoNumbers,
       LOTTO_CONFIG.numberLength,
-      `[ERROR] 당첨 로또 번호는 ${LOTTO_CONFIG.numberLength}개여야 합니다.`
+      ERROR_MESSAGE.invalidTargetLottoNumberLength(LOTTO_CONFIG.numberLength)
     );
     lottoNumbers.forEach((number) => {
-      ValidationUtils.validateIsNumber(number, "[ERROR] 숫자를 입력해 주세요");
+      ValidationUtils.validateIsNumber(number, ERROR_MESSAGE.lottoNumberIsNull);
       ValidationUtils.validateInRange(
         number,
         LOTTO_CONFIG.minNumber,
         LOTTO_CONFIG.maxNumber,
-        `[ERROR] ${LOTTO_CONFIG.minNumber}~${LOTTO_CONFIG.maxNumber} 사이의 숫자를 입력해 주세요`
+        ERROR_MESSAGE.invalidNumberRange(
+          LOTTO_CONFIG.minNumber,
+          LOTTO_CONFIG.maxNumber
+        )
       );
     });
     ValidationUtils.validateNotDuplicate(
       lottoNumbers,
-      "[ERROR] 당첨 로또 번호는 중복되지 않아야 합니다."
+      ERROR_MESSAGE.duplicateTargetLottoNumbers
     );
   }
 
   static validateBonusNumber(lottoNumbers, bonusNumber) {
     ValidationUtils.validateIsNumber(
       bonusNumber,
-      "[ERROR] 숫자를 입력해 주세요"
+      ERROR_MESSAGE.lottoNumberIsNull
     );
     ValidationUtils.validateIsNotIncluded(
       lottoNumbers,
       bonusNumber,
-      "[ERROR] 보너스 번호는 당첨 번호에 포함될 수 없습니다."
+      ERROR_MESSAGE.invalidBonusNumber
     );
   }
 
@@ -54,23 +55,26 @@ class LottoValidator {
     ValidationUtils.validateLength(
       lottoNumbers,
       LOTTO_CONFIG.numberLength,
-      `[ERROR] 로또 번호는 ${LOTTO_CONFIG.numberLength}개여야 합니다.`
+      ERROR_MESSAGE.invalidLottoNumberLength(LOTTO_CONFIG.numberLength)
     );
 
     ValidationUtils.validateNotDuplicate(
       lottoNumbers,
-      "[ERROR] 로또 번호는 중복되지 않아야 합니다."
+      ERROR_MESSAGE.duplicateLottoNumbers
     );
     lottoNumbers.forEach((number) => {
       ValidationUtils.validateIsNumber(
         number,
-        "[ERROR] 로또의 각 번호는 정수여야 합니다."
+        ERROR_MESSAGE.notIntegerLottoNumber
       );
       ValidationUtils.validateInRange(
         number,
         LOTTO_CONFIG.minNumber,
         LOTTO_CONFIG.maxNumber,
-        `[ERROR] 로또는 ${LOTTO_CONFIG.minNumber}~${LOTTO_CONFIG.maxNumber} 사이의 숫자로 구성되어야 합니다.`
+        ERROR_MESSAGE.lottoNumberRange(
+          LOTTO_CONFIG.minNumber,
+          LOTTO_CONFIG.maxNumber
+        )
       );
     });
   }
@@ -79,29 +83,32 @@ class LottoValidator {
     ValidationUtils.validateLength(
       lottoNumbers,
       LOTTO_CONFIG.numberLength,
-      `[ERROR] 당첨 로또 번호는 ${LOTTO_CONFIG.numberLength}개여야 합니다.`
+      ERROR_MESSAGE.invalidTargetLottoNumberLength(LOTTO_CONFIG.numberLength)
     );
 
     ValidationUtils.validateNotDuplicate(
       lottoNumbers,
-      "[ERROR] 당첨 로또 번호는 중복되지 않아야 합니다."
+      ERROR_MESSAGE.duplicateTargetLottoNumbers
     );
 
     ValidationUtils.validateIsNotIncluded(
       lottoNumbers,
       bonusNumber,
-      "[ERROR] 보너스 번호는 당첨 번호에 포함될 수 없습니다."
+      ERROR_MESSAGE.invalidBonusNumber
     );
     lottoNumbers.forEach((number) => {
       ValidationUtils.validateIsNumber(
         number,
-        "[ERROR] 당첨 로또는 정수로 구성되어야 합니다."
+        ERROR_MESSAGE.notIntegerTargetLottoNumber
       );
       ValidationUtils.validateInRange(
         number,
         LOTTO_CONFIG.minNumber,
         LOTTO_CONFIG.maxNumber,
-        `[ERROR] 당첨 로또는 ${LOTTO_CONFIG.minNumber}~${LOTTO_CONFIG.maxNumber} 사이의 숫자로 구성되어야 합니다.`
+        ERROR_MESSAGE.targetLottoNumberRange(
+          LOTTO_CONFIG.minNumber,
+          LOTTO_CONFIG.maxNumber
+        )
       );
     });
   }
