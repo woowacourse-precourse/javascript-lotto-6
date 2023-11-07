@@ -26,4 +26,12 @@ const ERROR_MESSAGE = Object.freeze({
   INVALID_ERROR: '[ERROR] 유효하지 않은 값입니다.',
 })
 
-export { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE };
+const PRIZE = Object.freeze({
+  THREE: 5000,
+  FOUR: 50000,
+  FIVE: 1500000,
+  BONUS: 30000000,
+  SIX: 2000000000,
+})
+
+export { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE, PRIZE };

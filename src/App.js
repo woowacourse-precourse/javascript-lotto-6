@@ -1,9 +1,14 @@
 import { Console, MissionUtils, Random } from "@woowacourse/mission-utils";
-import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE } from "./constants/constant.js";
+import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE, PRIZE } from "./constants/constant.js";
 
 class App {
   constructor() {
     this.userRandomList = [];
+    this.winningThree = 0;
+    this.winningFour = 0;
+    this.winningFive = 0;
+    this.winningBonus = 0;
+    this.winningSix = 0;
   }
 
   async play() {
@@ -12,7 +17,7 @@ class App {
 
     Console.print(MESSAGE_INPUT(userMoney / 1000).COUNT+'\n');
     
-    const userRandomListNums = this.makeRandomNumbers();
+    this.makeRandomNumbers();
 
     const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
     const winningNumsList = await this.getWinningNumbers(numRangePattern);
@@ -121,12 +126,6 @@ class App {
   };
 
   checkWinningResults(userMoney, winningNumsList, bonus) {
-    let winningThree = 0;
-    let winningFour = 0;
-    let winningFive = 0;
-    let winningBonus = 0;
-    let winningSix = 0;
-
     for (let i = 0; i < this.userRandomList.length; i++) {
       let winningCount = this.userRandomList[i].filter(it => winningNumsList.includes(it)).length
       let isBonus = false;
@@ -137,40 +136,45 @@ class App {
 
       switch (winningCount) {
         case 3:
-          winningThree++;
+          this.winningThree++;
           break;
         case 4:
           if (isBonus) {
-            winningBonus++;
+            this.winningBonus++;
             break
           }
-          winningFour++;
+          this.winningFour++;
         case 5:
-          winningFive++;
+          this.winningFive++;
           break
         case 6:
-          winningSix++;
+          this.winningSix++;
           break
         default:
           break
       }
     }
 
-    Console.print(MESSAGE_INPUT(winningThree).RANK_THREE);
-    Console.print(MESSAGE_INPUT(winningFour).RANK_FOUR);
-    Console.print(MESSAGE_INPUT(winningFive).RANK_FIVE);
-    Console.print(MESSAGE_INPUT(winningBonus).RANK_BONUS);
-    Console.print(MESSAGE_INPUT(winningSix).RANK_SIX);
+    Console.print(MESSAGE_INPUT(this.winningThree).RANK_THREE);
+    Console.print(MESSAGE_INPUT(this.winningFour).RANK_FOUR);
+    Console.print(MESSAGE_INPUT(this.winningFive).RANK_FIVE);
+    Console.print(MESSAGE_INPUT(this.winningBonus).RANK_BONUS);
+    Console.print(MESSAGE_INPUT(this.winningSix).RANK_SIX);
     
-    // 수익률 계산
-    // 깔끔하게 수정하기
-    const sums = 5000 * winningThree + 50000 * winningFour + 1500000 * winningFive
-    + 30000000 * winningBonus + 2000000000 * winningSix
-
-    const rate = (sums / userMoney*100).toFixed(1);
-
+    const rate = this.getRate();
     Console.print(MESSAGE_INPUT(rate).RATE);
   }
 
+  getRate() {
+    const sums = PRIZE.THREE * this.winningThree 
+    + PRIZE.FOUR * this.winningFour 
+    + PRIZE.FIVE * this.winningFive
+    + PRIZE.BONUS * this.winningBonus 
+    + PRIZE.SIX * this.winningSix
+
+    this.rate = (sums / this.userMoney*100).toFixed(1);
+    console.log(this.rate)
+    return this.rate
+  }
 }
 export default App
