@@ -1,6 +1,6 @@
 import Money from "../domain/Money.js";
 import InputView from "../view/InputView.js";
-import lottoSeller from "../domain/LottoSeller.js";
+import LottoSeller from "../domain/LottoSeller.js";
 import Lotto from "../Lotto.js";
 import LottoNumbersParser from "../domain/LottoNumbersParser.js";
 import LottoAnswer from "../domain/LottoAnswer.js";
@@ -23,7 +23,7 @@ class LottoController {
   async readMoneyAndGetLottos() {
     const moneyInput = await InputView.readMoney();
     const money = new Money(moneyInput);
-    const lottos = lottoSeller.getLottos(money.getAmount());
+    const lottos = LottoSeller.getLottos(money.getAmount());
     return lottos;
   }
 
