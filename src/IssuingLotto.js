@@ -32,7 +32,9 @@ class IssuingLotto {
 
     for (let issueCount = 0; issueCount < this.#count; issueCount += 1) {
       const numbers = Utils.getRandomNumbers();
-      usersLotto.push(new Lotto(numbers));
+      const lotto = new Lotto(numbers);
+      const lottoNumbers = lotto.getNumbers();
+      usersLotto.push(lottoNumbers);
     }
 
     return usersLotto;
