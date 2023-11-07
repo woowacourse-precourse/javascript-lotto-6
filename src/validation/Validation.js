@@ -1,4 +1,4 @@
-import { UNIT, RANGE_START, RANGE_END, BALL_NUMBERS, PRICE_TYPE, ERROR } from '../constant/Constant.js';
+import { UNIT, RANGE_START, RANGE_END, BALL_NUMBERS, PRICE_TYPE, BONUS_TYPE, ERROR } from '../constant/Constant.js';
 
 class Validation {
   static isPriceBadUnit(price) {
@@ -24,6 +24,14 @@ class Validation {
     lotto.forEach((number) => {
       if (number < RANGE_START || number > RANGE_END) throw new Error(ERROR.LOTTO_BAD_RANGE);
     })
+  }
+
+  static isBonusNotNumber(bonus) {
+    if (typeof bonus !== BONUS_TYPE) throw new Error(ERROR.BONUS_NOT_NUMBER);
+  }
+
+  static isBonusBadRange(bonus) {
+    if (bonus < RANGE_START || bonus > RANGE_END) throw new Error(ERROR.BONUS_BAD_RANGE);
   }
 }
 

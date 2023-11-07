@@ -14,6 +14,7 @@ class Game {
     this.#setLottos();
     this.printLottos();
     this.#winningNumbers = await this.#setWinningNumbers();
+    this.#bonusNumber = await this.#setBonusNumber();
   }
 
   async #setPrice() {
@@ -48,6 +49,19 @@ class Game {
     }
   }
 
+  async #setBonusNumber() {
+    while (true) {
+      try {
+        const input = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+        const bonusNumber = Number(input);
+        this.#validateBonusNumber(bonusNumber);
+        return bonusNumber;
+      } catch(e) {
+        Console.print(e);
+      }
+    }
+  }
+
   printLottos() {
     Console.print(`${NEW_LINE}${this.#boughtLottos.length}${MESSAGE.BOUGHT_LOTTOS}`);
     this.#boughtLottos.forEach((lotto) => {
@@ -59,6 +73,11 @@ class Game {
     Validation.isPriceNull(price);
     Validation.isPriceNotNumber(price);
     Validation.isPriceBadUnit(price);
+  }
+
+  #validateBonusNumber(bonusNumber) {
+    Validation.isBonusNotNumber(bonusNumber);
+    Validation.isBonusBadRange(bonusNumber);
   }
 
   #generateRandomLotto() {
