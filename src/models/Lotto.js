@@ -49,6 +49,13 @@ class Lotto {
     this.totalPrize += matchCount * prizeValue;
     OutputView.print(printState + matchCount + GameSetting.countOfMatches);
   }
+
+  profitRate(TIKET) {
+    if (this.totalPrize) {
+      return ((this.totalPrize / (TIKET * GameSetting.lotto_Price)) * 100).toFixed(1);
+    }
+    return this.totalPrize;
+  }
 }
 
 export default Lotto;
