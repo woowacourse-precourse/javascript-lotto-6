@@ -1,4 +1,5 @@
 import Lotto from "../src/Lotto.js";
+import LottoController from "../src/LottoController.js";
 import BudgetValidator from "../src/utils/BudgetValidator.js";
 import ErrorMsg from "../src/utils/ErrorMsg.js";
 
@@ -22,6 +23,14 @@ describe("구입 금액 입력 테스트", () => {
     expect(() => {
       BudgetValidator.divisibleByUnitPrice("2009");
     }).toThrow(ErrorMsg.Budget.DIVISBLE_BY_UNIT_PRICE);
+  });
+});
+
+describe("구입한 로또 갯수 테스트", () => {
+  test("10000원으로 10개의 로또를 구입할 수 있다", () => {
+    const controller = new LottoController();
+    controller.getLottoCount(10000);
+    expect(controller.returnCount()).toBe(10);
   });
 });
 

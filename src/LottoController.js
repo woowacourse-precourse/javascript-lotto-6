@@ -1,7 +1,7 @@
-import { Console } from "@woowacourse/mission-utils";
 import InfoMsg from "./utils/InfoMsg.js";
 import BudgetValidator from "./utils/BudgetValidator.js";
 import Constant from "./utils/Constant.js";
+import View from "./View/View.js";
 
 class LottoController {
   #budget;
@@ -15,11 +15,12 @@ class LottoController {
 
   async askBudget() {
     try {
-      const input = await Console.readLineAsync(InfoMsg.ASK_BUDGET);
+      const input = await View.input(InfoMsg.ASK_BUDGET);
       this.validateBudget(input);
       this.#budget = input;
+      this.getLottoCount(this.#budget);
     } catch (err) {
-      Console.print(err);
+      View.output(err);
       this.askBudget();
     }
   }
@@ -30,9 +31,13 @@ class LottoController {
     BudgetValidator.divisibleByUnitPrice(input);
   }
 
-  getLottoCount() {
-    this.#lottoCount = this.#budget / Constant.UNIT_PRICE;
-    console.log(this.#lottoCount);
+  getLottoCount(budget) {
+    this.#lottoCount = Number(budget) / Constant.UNIT_PRICE;
+    View.output(`\n${this.#lottoCount}${InfoMsg.SHOW_LOTTO_COUNT}`);
+  }
+
+  returnCount() {
+    return this.#lottoCount;
   }
 }
 

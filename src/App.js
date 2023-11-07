@@ -4,7 +4,6 @@ class App {
   async play() {
     const controller = new LottoController();
     await controller.askBudget();
-    controller.getLottoCount();
   }
 }
 
