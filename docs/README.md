@@ -24,14 +24,22 @@
     [ERROR] 입력된 당첨 번호가 중복이 있는 경우
     [ERROR] 당첨 번호와 보너스 번호가 중복이 있는 경우
 
-5. jest 테스트
-    - 
-
 ## :heavy_plus_sign: 추가한 기능
-
+- 복권 번호, 보너스 번호 중복 검사
 ## :airplane: 테스트 결과
-
+![로또결과](https://github.com/leedbswo107/javascript-lotto-6/leedbswo107/docs/pass1.png)
+![로또결과](https://github.com/leedbswo107/javascript-lotto-6/leedbswo107/docs/pass2.png)
 ## :file_folder: 파일 구조 및 파일명
+:open_file_folder: src 
+    :open_file_folder: common
+        :memo: outputMessage.js
+        :memo: validate.js
+    :open_file_folder: controller
+        :memo: LottoController.js
+    :memo: App.js
+    :memo: index.js
+    :memo: Lotto.js
+    :memo: LottoPlay.js
 
 ## :book: 커밋 컨벤션
 - 자주 사용하는 태그 종류
