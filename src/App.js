@@ -13,7 +13,7 @@ class App {
   async play() {
     try {
       this.purchaseAmount = await this.#requestPurchaseAmount();
-      this.#generateLottos();
+      this.generateLottos();
       const winningNumbers = await this.#requestWinningNumbers();
       this.#calculatePrize(winningNumbers);
       this.#printResult();
@@ -32,13 +32,13 @@ class App {
     return amount;
   }
 
-  #generateLottos() {
+  generateLottos() {
     const count = this.purchaseAmount / 1000;
-    this.#createLottos(count);
+    this.createLottos(count);
     this.#printLottos();
   }
 
-  #createLottos(count) {
+  createLottos(count) {
     for (let i= 0; i<count; i++) {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       this.lottos.push(new Lotto(numbers));
