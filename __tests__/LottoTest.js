@@ -25,4 +25,13 @@ describe("로또 클래스 테스트", () => {
             new Lotto([0, 2, 3, 4, 5, 6]);
         }).toThrow("[ERROR]");
     });
+
+    test("로또 번호를 출력할 수 있어야 한다.", async () => {
+        const input = [1, 2, 3, 4, 5, 6];
+        const result = [1, 2, 3, 4, 5, 6];
+
+        const lotto = new Lotto(input);
+
+        await expect(lotto.printLottoNumber()).toEqual(result);
+    });
 });
