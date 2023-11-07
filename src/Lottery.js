@@ -139,5 +139,16 @@ export default class Lottery {
         `${outputComments[index]} (${prizesString[index]}원) - ${eachCount}개`,
       ),
     );
+    const earningRate = (
+      Math.round(
+        (this.#winningCount
+          .map((eachCount, index) => eachCount * prizes[index])
+          .reduce((acc, cur) => acc + cur, 0) /
+          this.#payMoney) *
+          100 *
+          10,
+      ) / 10
+    ).toFixed(1);
+    Console.print(`총 수익률은 ${earningRate}%입니다.`);
   }
 }
