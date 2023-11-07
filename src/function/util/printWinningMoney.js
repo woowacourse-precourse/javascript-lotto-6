@@ -13,9 +13,8 @@ export const printWinningMoney = (winCounts, lottoAmount) => {
     Console.print(
       countKeyVaule !== "불일치5"
         ? `${countKeyVaule}개 일치 (${moneyTable}) - ${el[countKeyVaule]}개`
-        : `5개 일치, 보너스 불 일치 (${moneyTable}) - ${el[countKeyVaule]}개`
+        : `5개 일치, 보너스 볼 일치 (${moneyTable}) - ${el[countKeyVaule]}개`
     );
-    
   });
 
   const statisticalValue = calculateStatistical(count, lottoAmount);
