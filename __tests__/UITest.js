@@ -1,5 +1,7 @@
-import UI from "../src/UI";
 import { getLogSpy, mockQuestions } from "../test-utils";
+import LottoResult, { MATCHED_RESULT } from "../src/LottoResult";
+import TotalLottoResult from "../src/TotalLottoResult";
+import UI from "../src/UI";
 
 describe("UI 클래스 테스트", () => {
   describe("입력 테스트", () => {
@@ -67,26 +69,28 @@ describe("UI 클래스 테스트", () => {
 
     test("당첨통계를 출력한다", async () => {
       const logSpy = getLogSpy();
-      const TOTAL_LOTTO_RESULT = {
-        three: 2,
-        four: 1,
-        five: 0,
-        fiveBonus: 0,
-        six: 0,
-      };
+
+      const totalResult = new TotalLottoResult(
+        new LottoResult(3, false),
+        new LottoResult(3, false),
+        new LottoResult(4, false),
+      );
       const PROFIT_RATE = "62.5";
+      const result = totalResult.getResult();
 
       const ui = new UI();
-      ui.printStatistics(TOTAL_LOTTO_RESULT, PROFIT_RATE);
+      ui.printStatistics(totalResult, PROFIT_RATE);
 
       const logs = [
         "당첨 통계",
         "---",
-        `3개 일치 (5,000원) - ${TOTAL_LOTTO_RESULT.three}개`,
-        `4개 일치 (50,000원) - ${TOTAL_LOTTO_RESULT.four}개`,
-        `5개 일치 (1,500,000원) - ${TOTAL_LOTTO_RESULT.five}개`,
-        `5개 일치, 보너스 볼 일치 (30,000,000원) - ${TOTAL_LOTTO_RESULT.fiveBonus}개`,
-        `6개 일치 (2,000,000,000원) - ${TOTAL_LOTTO_RESULT.six}개`,
+        `3개 일치 (5,000원) - ${result[MATCHED_RESULT.three]}개`,
+        `4개 일치 (50,000원) - ${result[MATCHED_RESULT.four]}개`,
+        `5개 일치 (1,500,000원) - ${result[MATCHED_RESULT.five]}개`,
+        `5개 일치, 보너스 볼 일치 (30,000,000원) - ${
+          result[MATCHED_RESULT.fiveBonus]
+        }개`,
+        `6개 일치 (2,000,000,000원) - ${result[MATCHED_RESULT.six]}개`,
         `총 수익률은 ${PROFIT_RATE}%입니다.`,
       ];
 

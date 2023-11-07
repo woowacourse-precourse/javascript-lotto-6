@@ -1,4 +1,5 @@
 import Lotto from "../src/Lotto.js";
+import { MATCHED_RESULT } from "../src/LottoResult.js";
 
 describe("로또 클래스 테스트", () => {
   describe("validation 테스트", () => {
@@ -32,7 +33,7 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: [7, 8, 9, 10, 11, 12],
           bonusNumber: 13,
         },
-        { matchedCount: 0, bonusIncluded: false },
+        MATCHED_RESULT.miss,
       ],
       [
         "1개 일치",
@@ -41,7 +42,7 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: [1, 8, 9, 10, 11, 12],
           bonusNumber: 13,
         },
-        { matchedCount: 1, bonusIncluded: false },
+        MATCHED_RESULT.miss,
       ],
       [
         "2개 일치",
@@ -50,7 +51,7 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: [1, 2, 9, 10, 11, 12],
           bonusNumber: 13,
         },
-        { matchedCount: 2, bonusIncluded: false },
+        MATCHED_RESULT.miss,
       ],
       [
         "3개 일치",
@@ -59,7 +60,7 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: [1, 2, 3, 10, 11, 12],
           bonusNumber: 13,
         },
-        { matchedCount: 3, bonusIncluded: false },
+        MATCHED_RESULT.three,
       ],
       [
         "4개 일치",
@@ -68,7 +69,7 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: [1, 2, 3, 4, 11, 12],
           bonusNumber: 13,
         },
-        { matchedCount: 4, bonusIncluded: false },
+        MATCHED_RESULT.four,
       ],
       [
         "5개 일치",
@@ -77,7 +78,7 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: [1, 2, 3, 4, 5, 12],
           bonusNumber: 13,
         },
-        { matchedCount: 5, bonusIncluded: false },
+        MATCHED_RESULT.five,
       ],
       [
         "5개 일치, 보너스 볼 일치",
@@ -86,7 +87,7 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: [1, 2, 3, 4, 5, 14],
           bonusNumber: 6,
         },
-        { matchedCount: 5, bonusIncluded: true },
+        MATCHED_RESULT.fiveBonus,
       ],
       [
         "6개 일치",
@@ -95,14 +96,15 @@ describe("로또 클래스 테스트", () => {
           winningNumbers: LOTTO_NUMBERS,
           bonusNumber: 13,
         },
-        { matchedCount: 6, bonusIncluded: false },
+        MATCHED_RESULT.six,
       ],
     ])("%s", (_, input, result) => {
       const lotto = new Lotto(LOTTO_NUMBERS);
-
-      expect(
-        lotto.checkWinningNumbers(input.winningNumbers, input.bonusNumber),
-      ).toEqual(result);
+      const lottoResult = lotto.checkWinningNumbers(
+        input.winningNumbers,
+        input.bonusNumber,
+      );
+      expect(lottoResult.getResult()).toEqual(result);
     });
   });
 });

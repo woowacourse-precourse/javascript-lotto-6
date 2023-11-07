@@ -1,4 +1,5 @@
 import AppError from "./AppError.js";
+import LottoResult from "./LottoResult.js";
 
 const LOTTO_NUMBER_LENGTH = 6;
 
@@ -35,10 +36,7 @@ class Lotto {
     );
     const bonusIncluded = this.#numbers.includes(bonusNumber);
 
-    return {
-      matchedCount,
-      bonusIncluded,
-    };
+    return new LottoResult(matchedCount, bonusIncluded);
   }
 }
 

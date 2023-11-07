@@ -1,32 +1,7 @@
 import UI from "./UI.js";
 import LottoMachine from "./LottoMachine.js";
 import AppError, { ERROR_TYPE } from "./AppError.js";
-
-const WINNING_RESULT_TO_PRICE = {
-  three: 5000,
-  four: 50000,
-  five: 1500000,
-  fiveBonus: 30000000,
-  six: 2000000000,
-};
-
-const reduceToTotalResult = (matchResults) => {
-  const result = {
-    three: 0,
-    four: 0,
-    five: 0,
-    fiveBonus: 0,
-    six: 0,
-  };
-  matchResults.forEach(({ matchedCount, bonusIncluded }) => {
-    if (matchedCount === 3) result.three += 1;
-    if (matchedCount === 4) result.four += 1;
-    if (matchedCount === 5 && !bonusIncluded) result.five += 1;
-    if (matchedCount === 5 && bonusIncluded) result.fiveBonus += 1;
-    if (matchedCount === 6) result.six += 1;
-  });
-  return result;
-};
+import TotalLottoResult from "./TotalLottoResult.js";
 
 class App {
   #status;
@@ -131,16 +106,13 @@ class App {
   }
 
   async #resultEffect() {
-    const totalResult = reduceToTotalResult(this.#matchResults);
+    const totalResult = new TotalLottoResult(...this.#matchResults);
     const profitRate = this.#calculateProfitRate(totalResult);
     this.#ui.printStatistics(totalResult, profitRate);
   }
 
   #calculateProfitRate(totalResult) {
-    const winningAmount = Object.keys(WINNING_RESULT_TO_PRICE).reduce(
-      (acc, key) => acc + WINNING_RESULT_TO_PRICE[key] * totalResult[key],
-      0,
-    );
+    const winningAmount = totalResult.getWinningAmount();
     return ((winningAmount / this.#amount) * 100).toFixed(1);
   }
 }
