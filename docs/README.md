@@ -31,6 +31,8 @@
 메인 메서드
 ### getPurchaseAmount
 사용자로부터 구입금액을 입력 받는 메서드
+### printLottoCounts
+구입금액으로 몇개의 로또를 구매했는지 출력해주는 메서드
 ### createUniqueRandomNums
 중복되지 않는 랜덤 숫자 6개를 생성해주는 메서드
 ### printLottoNums
