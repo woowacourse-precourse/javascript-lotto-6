@@ -56,6 +56,19 @@ class App {
                 else if (matchCount === 3) {this.#winningCounts[4]++;}
         });
     }
+
+    #printResults(amountSpent) {
+      Console.print("당첨 통계");
+      Console.print("---------");
+      let totalPrize = 0;
+      const prizeMessages = ["6개 일치 (2,000,000,000원) - ","5개 일치, 보너스 볼 일치 (30,000,000원) - ","5개 일치 (1,500,000원) - ","4개 일치 (50,000원) - ","3개 일치 (5,000원) - ",];
+      for (let i = 0; i < this.#winningCounts.length; i++) {
+          Console.print(`${prizeMessages[i]}${this.#winningCounts[i]}개`);
+          totalPrize += this.#prizeMoney[i] * this.#winningCounts[i];
+      }
+      const yieldRate = ((totalPrize / amountSpent) * 100).toFixed(1);
+      Console.print(`총 수익률은 ${yieldRate}%입니다.`);
+  }
 }
 
 export default App;
