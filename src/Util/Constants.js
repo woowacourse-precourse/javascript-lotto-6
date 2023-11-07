@@ -8,6 +8,10 @@ export default class Constants {
     bonus: "보너스 번호를 입력해 주세요.\n",
   };
 
+  static output = {
+    confirmAmount: "개를 구매했습니다.",
+  };
+
   static error = {
     money: "[ERROR] 숫자가 잘못된 형식입니다.",
 

@@ -1,8 +1,10 @@
+import Constants from "../Util/Constants.js";
 import IO from "../Util/IOHandler.js";
 import Generator from "./Generator.js";
 
 export default class Printer {
   #ticket;
+
   #unit = {
     LOTTO_PRICE: 1000,
   };
@@ -16,7 +18,7 @@ export default class Printer {
 
   getAmount(money) {
     const amount = parseInt(money, 10) / this.#unit.LOTTO_PRICE;
-    IO.print(`${amount}개를 구매했습니다.`);
+    IO.print(`${amount}${Constants.output.confirmAmount}`);
     return amount;
   }
 
@@ -35,7 +37,8 @@ export default class Printer {
   print() {
     let index = 0;
     while (index < this.amount) {
-      IO.print(`[${this.#ticket[index].show().join(", ")}]`);
+      const unpackedLotto = this.#ticket[index];
+      IO.print(`[${unpackedLotto.show().join(", ")}]`);
       index += 1;
     }
   }
