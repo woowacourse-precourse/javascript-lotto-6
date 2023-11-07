@@ -41,6 +41,8 @@ class App {
     );
 
     this.printWinningResult(winningResult);
+
+    const lottoROI = this.getLottoROI(parsedpurchaseAmount, winningResult);
   }
 
   validateAskPurchaseAmount(purchaseAmount) {
@@ -94,6 +96,21 @@ class App {
     Console.print(
       `6개 일치 (${FIRST_PRIZE.toLocaleString()}원) - ${first.length}개`
     );
+  }
+
+  getLottoROI(purchaseAmount, winningResult) {
+    const { first, second, third, fourth, fifth } = winningResult;
+
+    const prize =
+      first.length * FIRST_PRIZE +
+      second.length * SECOND_PRIZE +
+      third.length * THIRD_PRIZE +
+      fourth.length * FOURTH_PRIZE +
+      fifth.length * FIFTH_PRIZE;
+
+    const lottoROI = Math.round((prize / purchaseAmount) * 1000) / 10;
+
+    return lottoROI;
   }
 }
 
