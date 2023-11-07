@@ -1,6 +1,6 @@
 import purchase from "../src/models/Purchase";
 
-describe("구매 클래스 테스트", () => {
+describe("구매 객체 테스트", () => {
   test("구매 금액만큼 로또를 구입한다.", () => {
     const count = purchase.countMoney(2000);
     expect(count).toEqual(2);
