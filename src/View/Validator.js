@@ -3,6 +3,8 @@ import ERROR_CONSTANT from "../Constant/ErrorConstant.js"
 import NUMBER_CONSTANT from "../Constant/NumberConstant.js"
 import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js"
 
+const DOT = '.';
+
 const assertNonEmptyString = (input) => {
   if (typeof input !== DATATYPE_CONSTANT.STRING)
     throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
@@ -15,8 +17,11 @@ const assertParsableAsInteger = (input) => {
   if (typeof input !== DATATYPE_CONSTANT.STRING)
     throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
 
+  const inputLength = input.length;
   if (
-    input.length > NUMBER_CONSTANT.ONE && !/^[1-9]*$/.test(input[NUMBER_CONSTANT.ZERO])
+    input.includes(DOT) ||
+    !/^[1-9]*$/.test(input[NUMBER_CONSTANT.ZERO]) ||
+    !/^[0-9]*$/.test(input[inputLength - NUMBER_CONSTANT.ONE])
   ) {
     throw new ValidationError(ERROR_CONSTANT.UNCONVERTIBLE_STRING);
   }
@@ -48,9 +53,44 @@ const assertRemainderNotEqual = (value1, value2, expectedRemainderValue) => {
     throw new ValidationError(ERROR_CONSTANT.REMAINDER_MISMATCH);
 }
 
+const assertArraySizeEqual = (inputArray, expectedSize) => {
+  if (!Array.isArray(inputArray)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+
+  if (typeof expectedSize !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(expectedSize)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  const inputArraySize = inputArray.length;
+  if (inputArraySize !== expectedSize) {
+    throw new ValidationError(ERROR_CONSTANT.ARRAY_SIZE_MISMATCH);
+  }
+}
+
+const assertValueInRange = (value, minValue, maxValue) => {
+  if (typeof value !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(value)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  if (typeof minValue !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(minValue)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  if (typeof maxValue !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(maxValue)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  if (!(value >= minValue && value <= maxValue)) {
+    throw new ValidationError(ERROR_CONSTANT.VALUE_NOT_IN_RANGE);
+  }
+}
+
 export default {
   assertNonEmptyString,
   assertParsableAsInteger,
   assertPositiveNumber,
   assertRemainderNotEqual,
+  assertArraySizeEqual,
+  assertValueInRange,
 };

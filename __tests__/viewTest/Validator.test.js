@@ -1,8 +1,9 @@
-import Validator from "../../src/View/Validator";
-import ERROR_CONSTANT from "../../src/Constant/ErrorConstant";
-import STRING_LIST from "../test_list/StringList";
-import NUMBER_LIST from "../test_list/NumberList";
-import ValidationError from "../../src/Error/ValidationError";
+import Validator from '../../src/View/Validator';
+import ERROR_CONSTANT from '../../src/Constant/ErrorConstant';
+import STRING_LIST from '../test_list/StringList';
+import NUMBER_LIST from '../test_list/NumberList';
+import ARRAY_LIST from '../test_list/ArrayList';
+import ValidationError from '../../src/Error/ValidationError';
 
 describe('Validator assertNonEmptyString', () => {
   test('assertNonEmptyString Function type이다 ', () => {
@@ -39,13 +40,17 @@ describe('Validator assertParsableAsInteger', () => {
     expect(() => Validator.assertParsableAsInteger(input)).not.toThrow();
   })
   test('assertParsableAsInteger 기능 검사, 2자리 문자열의 첫번째가 유효한 숫자(1 ~ 9)가 아니면 throw한다 ', () => {
-    const input1 = "012";
-    const input2 = " 12";
+    const input1 = '012';
+    const input2 = ' 12';
+    const input3 = '1.2';
     expect(() => {
       Validator.assertParsableAsInteger(input1)
     }).toThrow(new ValidationError(ERROR_CONSTANT.UNCONVERTIBLE_STRING));
     expect(() => {
       Validator.assertParsableAsInteger(input2)
+    }).toThrow(new ValidationError(ERROR_CONSTANT.UNCONVERTIBLE_STRING));
+    expect(() => {
+      Validator.assertParsableAsInteger(input3)
     }).toThrow(new ValidationError(ERROR_CONSTANT.UNCONVERTIBLE_STRING));
   })
 })
@@ -109,6 +114,77 @@ describe('Validator assertRemainderNotEqual', () => {
     }).toThrow(new ValidationError(ERROR_CONSTANT.REMAINDER_MISMATCH));
     expect(() => {
       Validator.assertRemainderNotEqual(value1, value2, successExpectedRemainderValue)
+    }).not.toThrow();
+  })
+})
+
+describe('Validator assertArraySizeEqual', () => {
+  test('assertArraySizeEqual Function type이다 ', () => {
+    expect(typeof (Validator.assertArraySizeEqual)).toBe('function');
+  })
+  test('assertArraySizeEqual 인자 유효성 검사, 첫번 쨰 인자의 타입이 배열이 아니면 에러를 리턴한다. ', () => {
+    const expectedSize = 3;
+    ARRAY_LIST.errorArrayTestCases.forEach((inputArray) => {
+      expect(() => {
+        Validator.assertArraySizeEqual(inputArray, expectedSize)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY));
+    });
+  });
+  test('assertArraySizeEqual 인자 유효성 검사, NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
+    const inputArray = ['1','2','3'];
+    NUMBER_LIST.errorNumberTestCases.forEach((expectedSize) => {
+      expect(() => {
+        Validator.assertArraySizeEqual(inputArray, expectedSize)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER));
+    });
+  });
+  test('assertArraySizeEqual 기능 검사, inputArray의 size와 expectedSize가 다르면 에러를 throw한다 ', () => {
+    const inputArray = [1,2,3];
+    const expectedSizeNotEqual = 4;
+    const expectedSizeEqual = 3;
+    expect(() => {
+      Validator.assertArraySizeEqual(inputArray, expectedSizeNotEqual)
+    }).toThrow(new ValidationError(ERROR_CONSTANT.ARRAY_SIZE_MISMATCH));
+    expect(() => {
+      Validator.assertArraySizeEqual(inputArray, expectedSizeEqual)
+    }).not.toThrow();
+  })
+})
+
+const assertValueInRangeTestList = [
+  {value: '1', minValue: 1, maxValue: 1},
+  {value: 1, minValue: '1', maxValue: 1},
+  {value: 1, minValue: 1, maxValue: '1'},
+]
+
+describe('Validator assertValueInRange', () => {
+  test('assertValueInRange Function type이다 ', () => {
+    expect(typeof (Validator.assertValueInRange)).toBe('function');
+  })
+  test('assertValueInRange 인자 유효성 검사, NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
+    assertValueInRangeTestList.forEach((value, minValue, maxValue) => {
+      expect(() => {
+        Validator.assertValueInRange(value, minValue, maxValue)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER));
+    })
+    const value = 1;
+    const minValue = 0;
+    const maxValue = 2;
+    expect(() => {
+      Validator.assertValueInRange(value, minValue, maxValue)
+    }).not.toThrow();
+  })
+  test('assertValueInRange 기능 검사, value가 minValue와 maxValue 사이의 값이 아닐경우 에러를 throw한다. ', () => {
+    const minValue = 0;
+    const maxValue = 9;
+    const valueInRange = 1;
+    const valueNotInRange = 10;
+
+    expect(() => {
+      Validator.assertValueInRange(valueNotInRange, minValue, maxValue)
+    }).toThrow(new ValidationError(ERROR_CONSTANT.VALUE_NOT_IN_RANGE));
+    expect(() => {
+      Validator.assertValueInRange(valueInRange, minValue, maxValue)
     }).not.toThrow();
   })
 })
