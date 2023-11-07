@@ -34,6 +34,7 @@ class Player {
   }
 
   checkLottos(winningNumbers, bonusNumber) {
+    this.#validateHasLottos();
     this.#lottos.forEach((lotto) => {
       const rank = lotto.checkLotto(winningNumbers, bonusNumber).getRank();
       if (rank) this.#scoreCard[rank] += 1;
@@ -62,6 +63,11 @@ class Player {
   static #validateBudget(budget) {
     if (budget % 1000 !== 0 || budget === 0)
       throw new Error('[ERROR] 예산은 1000원 단위이어야 합니다.');
+  }
+
+  #validateHasLottos() {
+    if (this.#lottos.length === 0)
+      throw new Error('[ERROR] 구매한 로또가 없습니다.');
   }
 }
 
