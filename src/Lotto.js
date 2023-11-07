@@ -48,6 +48,11 @@ class Lotto {
     return Console.print(`[${sortNumbers.join(", ")}]`);
   }
 
+  qulificationWinNumber(winningNumber, number) {
+    if (winningNumber.includes(number)) {
+      this.COUNT++;
+    }
+  }
 }
 
 
