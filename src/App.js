@@ -10,22 +10,22 @@ class App {
   }
 
   async getLottoMoney() {  // 로또 구매할 금액 입력
-    while(true){
-      try{
+    while (true) {
+      try {
         const input = await Console.readLineAsync("로또 구입 금액을 입력하세요.\n");
         const lottoMoney = parseInt(input);
-        if(lottoMoney % 1000 != 0) {
+        if (lottoMoney % 1000 != 0) {
           throw new Error("[ERROR] 1,000원 단위로 입력해주세요.")
         }
         this.lottoMoney = lottoMoney;
         return lottoMoney;
-      } catch (error){
+      } catch (error) {
         Console.print(error.message);
       }
     }
   }
 
-  generateLottoNumbers(count){  // 갯수에 맞게 랜덤 생성되는 로또
+  generateLottoNumbers(count) {  // 갯수에 맞게 랜덤 생성되는 로또
     const lottoNumbers = [];
     for (let i = 0; i < count; i++) {
       const numbers = Random.pickUniqueNumbersInRage(1, 45, 6).sort((a, b) => a - b);
@@ -36,14 +36,14 @@ class App {
 
   showLottoNumbers(lottoNumbers) {  // 랜덤 생성된 로또 배열 출력
     Console.print(`${lottoNumbers.length}개를 구매했습니다.`);
-    for(const numbers of lottoNumbers){
+    for (const numbers of lottoNumbers) {
       Console.print(`[${numbers.join(",")}]`);
     }
     Console.print("\n")
   }
 
   async getMyNumbers() {  // 당첨 번호 입력 받기
-    try{
+    try {
       const winningInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
       const winningNumbers = winningInput.split(",").map(num => parseInt(num.trim()));
       if (winningNumbers.length !== 6 || winningNumbers.some(num => num < 1 || num > 45)) {
@@ -63,6 +63,58 @@ class App {
       Console.print(error.message);
       return await this.getMyNumbers();
     }
+  }
+
+  checkResult(lottoNumbers, winningNumbers, bonusNumber) {  // 로또 당첨 확인
+    let matchCounts = {
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "5_bonus": 0,
+      "6": 0
+    };
+
+    for (const lottoNumberSet of lottoNumbers) {
+      let matchCount = 0;
+      let hasBonusNumber = false;
+
+      const matchedNumbers = lottoNumberSet.filter(num => winningNumbers.includes(num));
+      const matchedCount = matchedNumbers.length;
+
+      if (matchCount === 6) {
+        matchCount = 6;
+        hasBonusNumber = lottoNumberSet.includes(bonusNumber);
+      } else if (matchedCount === 5 && lottoNumberSet.includes(bonusNumber)) {
+        matchCount = 5;
+        hasBonusNumber = true;
+      } else if (matchedCount === 5) {
+        matchCount = 5;
+      } else if (matchedCount === 4) {
+        matchCount = 4;
+      } else if (matchedCount === 3) {
+        matchCount = 3;
+      }
+
+      switch (matchCount) {
+        case 6:
+          matchCounts["6"]++;
+          break;
+        case 5:
+          if (hasBonusNumber) {
+            matchCounts["5_bonus"]++;
+          } else {
+            matchCounts["5"]++;
+          }
+          break;
+        case 4:
+          matchCounts["4"]++;
+          break;
+        case 3:
+          matchCounts["3"]++;
+          break;
+      }
+    }
+    return matchCounts;
   }
 }
 
