@@ -46,16 +46,26 @@ class App {
   }
 
   async #requestWinningNumbers() {
-    const input = await MissionUtils.Console.readLineAsync();
-    const numbers = input.split(',').map(s => parseInt(s.trim(), 10));
+    MissionUtils.Console.print("당첨 번호를 입력해 주세요.")
+    let input = await MissionUtils.Console.readLineAsync();
+    let numbers = input.split(',').map(s => parseInt(s.trim(), 10));
 
     try {
       const lotto = new Lotto(numbers);
-      return lotto.numbers;
+      numbers = lotto.numbers;
     } catch (error) {
       MissionUtils.Console.print(error.message);
       return this.#requestWinningNumbers();
     }
+
+    MissionUtils.Console.print(`${numbers.join(', ')}`); // 당첨번호 출력
+
+    MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
+    input = await MissionUtils.Console.readLineAsync();
+    const bonusNumber = parseInt (input.trim(), 10);
+
+    MissionUtils.Console.print(`${bonusNumber}`); // 보너스 번호 출력
+    return [...numbers, bonusNumber];
   }
 
   #calculatePrize(winningNumbers) {
@@ -87,6 +97,8 @@ class App {
     const profit = this.prizeMoney
     const rateOfReturn = ((profit / this.purchaseAmount) * 100)
     const resultString = `
+    당첨 통계
+    ---
     3개 일치 (5,000원) - ${this.matchedCount[3]}개
     4개 일치 (50,000원) - ${this.matchedCount[4]}개
     5개 일치 (1,500,000원) - ${this.matchedCount[5]}개
