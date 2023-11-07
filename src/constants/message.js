@@ -1,3 +1,5 @@
+import { utils } from '../utils/utils';
+
 export const INPUT_MESSAGE = Object.freeze({
   lottoPurchasePrice: '구입금액을 입력해 주세요.\n',
   lottoWnningNumbers: '당첨 번호를 입력해 주세요.\n',
@@ -8,6 +10,13 @@ export const INPUT_MESSAGE = Object.freeze({
 export const PRINT_MESSAGE = Object.freeze({
   prizesDescription: '당첨 통계',
   divide: '---',
+  lottosCount: (count) => `${count}개를 구매했습니다.`,
+  lotto: (lotto) => `[${lotto.join(', ')}]`,
+  bonusNumber: ', 보너스 볼 일치',
+  includesCount: (count) => `${count}개 일치`,
+  prize: (prize) => ` (${utils.numberFormat(prize)}원) - `,
+  resultCount: (count) => `${count}개`,
+  returns: (returns) => `총 수익률은 ${returns}%입니다.`,
 });
 
 const ERROR_PREFIX = '[ERROR]';

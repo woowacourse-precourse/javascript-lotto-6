@@ -1,41 +1,44 @@
 import { Console } from '@woowacourse/mission-utils';
 import { PRINT_MESSAGE } from '../constants/message.js';
 import { LOTTO_RESULT } from '../constants/lotto.js';
-import { utils } from '../utils/utils.js';
+import { COMMON } from '../constants/common.js';
 
 class OutputView {
-  static printLottosCount(count) {
-    Console.print(`${count}개를 구매했습니다.`);
+  printLottosCount(count) {
+    Console.print(PRINT_MESSAGE.lottosCount(count));
   }
 
-  static printLottoNumbers(lottos) {
+  printLottoNumbers(lottos) {
     lottos.forEach((lotto) => {
-      Console.print(`[${lotto.join(', ')}]`);
+      Console.print(PRINT_MESSAGE.lotto(lotto));
     });
   }
 
-  static printLottoResult(count) {
+  getLottoResultDescription(rank) {
+    let isSecond = COMMON.blank;
+
+    if (rank.isSecond) isSecond = PRINT_MESSAGE.bonusNumber;
+
+    return (
+      PRINT_MESSAGE.includesCount(rank.includesCount) + isSecond + PRINT_MESSAGE.prize(rank.prize)
+    );
+  }
+
+  printLottoResult(count) {
     Console.print(PRINT_MESSAGE.prizesDescription);
     Console.print(PRINT_MESSAGE.divide);
 
     const ranksKey = Object.keys(count).reverse();
 
     ranksKey.forEach((key) => {
-      const rank = LOTTO_RESULT[key];
-      let isSecond = '';
-
-      if (rank.isSecond) isSecond = ', 보너스 볼 일치';
-
       Console.print(
-        `${rank.includesCount}개 일치${isSecond} (${utils.numberFormat(rank.prize)}원) - ${
-          count[key]
-        }개`,
+        this.getLottoResultDescription(LOTTO_RESULT[key]) + PRINT_MESSAGE.resultCount(count[key]),
       );
     });
   }
 
-  static printLottoReturns(returns) {
-    Console.print(`총 수익률은 ${returns}%입니다.`);
+  printLottoReturns(returns) {
+    Console.print(PRINT_MESSAGE.returns(returns));
   }
 }
 
