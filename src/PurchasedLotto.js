@@ -1,11 +1,9 @@
-import Input from './Input';
-
 class PurchasedLotto {
   #cash;
 
   constructor(cash) {
-    this.#validate(cash);
     this.#cash = cash;
+    this.#validate(cash);
   }
 
   #validate(cash) {
@@ -18,6 +16,11 @@ class PurchasedLotto {
     if (cash % 1000 !== 0) {
       throw new Error('[ERROR] 1000원 단위로 금액을 입력해주세요.');
     }
+  }
+
+  numOfPurchasedLotto() {
+    const numOfPurchasedLotto = this.#cash / 1000;
+    return numOfPurchasedLotto;
   }
 }
 
