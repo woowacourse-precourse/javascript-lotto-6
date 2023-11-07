@@ -53,7 +53,7 @@ class LottoController {
       winningNumber: this.#winningNumber.getWinningNumber(),
       bonusNumber: this.#bonusNumber.getBonusNumber(),
     });
-    OutputView.printResultStatic(winningStatistic);
+    OutputView.printResultStatistic(winningStatistic);
     this.#revenueRate = this.#count.getRevenueRate(winningStatistic);
     OutputView.printRevenueResult(this.#revenueRate);
     return;

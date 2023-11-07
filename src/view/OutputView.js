@@ -21,7 +21,7 @@ const OutputView = {
   },
 
   // 도메인 생성 후 작업 에정
-  printResultStatic(winningStatic) {
+  printResultStatistic(winningStatic) {
     Console.print(MESSAGE.resultStatic);
     for (let i = 0; i < winningStatic.length; i++) {
       Console.print(
