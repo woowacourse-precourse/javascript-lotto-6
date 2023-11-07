@@ -23,6 +23,10 @@ const OutputView = {
   printTotalRate(totalRate) {
     Console.print(`${MESSAGE_PRINT.TOTAL_RATE_HEAD}${totalRate}${MESSAGE_PRINT.TOTAL_RATE_TAIL}`);
   },
+
+  printErrorMessage(message) {
+    Console.print(message);
+  },
 };
 
 export default OutputView;

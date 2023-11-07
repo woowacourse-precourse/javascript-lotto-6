@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView';
 import NUMBER from '../constants/Number';
 import OutputView from '../views/OutputView';
@@ -27,7 +26,7 @@ class LottoController {
         const inputResult = await validateFunction(input);
         return inputResult;
       } catch (error) {
-        Console.print(error.message);
+        OutputView.printErrorMessage(error.message);
       }
     }
   }
