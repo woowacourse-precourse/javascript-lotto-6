@@ -58,6 +58,11 @@ class App {
     }
   }
 
+  async getUserInput() {
+    const input = await readLineLottoCount();
+    return input.split(',').map((num) => Number(num.trim()));
+  }
+
   async userInputBonusNumber(inputNumbers) {
     const inputBonusNumber = await readLineBonusCount();
     const bonusNumber = Number(inputBonusNumber);
@@ -70,11 +75,6 @@ class App {
       consoleError(error);
       return this.userInputBonusNumber(inputNumbers);
     }
-  }
-
-  async getUserInput() {
-    const input = await readLineLottoCount();
-    return input.split(',').map((num) => Number(num.trim()));
   }
 }
 
