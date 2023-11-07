@@ -1,6 +1,14 @@
 import * as lottoUtil from '../src/lottoUtil.js';
 import Lotto from '../src/Lotto.js';
 import WinLotto from '../src/WinLotto.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
+
+const mockRandoms = numbers => {
+    MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+    numbers.reduce((acc, number) => {
+        return acc.mockReturnValueOnce(number);
+    }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
 
 describe('단위 테스트', () => {
     test('로또 구입 금액이 숫자가 아니라면 예외가 발생한다.', () => {
@@ -109,5 +117,12 @@ describe('단위 테스트', () => {
                 new WinLotto(new Lotto(lottoNumbers), input);
             }).toThrow('[ERROR] 당첨 번호로 사용된 번호는 보너스 번호로 사용할 수 없습니다.');
         });
+    });
+
+    test('무작위 6자리 번호를 발행하는 기능', () => {
+        const prepareRandomNumber = [1, 2, 3, 4, 5, 6];
+        mockRandoms([prepareRandomNumber]);
+
+        expect(lottoUtil.lottoGenerate(1)[0].getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
     });
 });
