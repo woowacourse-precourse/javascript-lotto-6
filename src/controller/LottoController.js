@@ -1,5 +1,6 @@
 import OutputView from '../views/OutputView.js';
 import LottoShop from '../domain/LottoShop.js';
+import { getMatchCount, includeBonusNumber } from '../utils/match.js';
 
 class LottoController {
   #money;
@@ -34,18 +35,10 @@ class LottoController {
 
   matchLotto(lotto, winningNumbers, bonusNumber) {
     const numbers = lotto.getNumbers();
-    let count = 0;
-    const bonus = this.includeBonusNumber(numbers, bonusNumber);
-
-    numbers.forEach(number => {
-      if (winningNumbers.includes(number)) count += 1;
-    });
+    const count = getMatchCount(numbers, winningNumbers);
+    const bonus = includeBonusNumber(numbers, bonusNumber);
 
     return { count, bonus };
-  }
-
-  includeBonusNumber(numbers, bonusNumber) {
-    return numbers.includes(bonusNumber);
   }
 
   updateLottoStatistics(matchResult) {
