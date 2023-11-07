@@ -1,9 +1,14 @@
 import Lotto from '../Lotto.js';
 import randomNumberGenerator from '../utils/randomNumberGenerator.js';
-import { PRIZE_AMOUNT, PRICE_PER_TICKET } from '../constants/constants.js';
+import {
+  PRIZE_AMOUNT,
+  PRICE_PER_TICKET,
+  INITIAL_STATISTICS,
+  PRIZE_KEY,
+} from '../constants/constants.js';
 
 class LottoGame {
-  #purchasedLotto;
+  #purchasedLotto = [];
 
   initializeLotto(amount) {
     this.#purchasedLotto = this.#generateLottoTickets(amount);
@@ -24,28 +29,22 @@ class LottoGame {
     return this.#purchasedLotto.map((lotto) => lotto.getSortedLotto());
   }
 
-  createEmptyStatistics() {
-    return {
-      firstPrize: 0,
-      secondPrize: 0,
-      thirdPrize: 0,
-      fourthPrize: 0,
-      fifthPrize: 0,
-    };
-  }
-
   getStatistics(comparisonResults) {
-    const statistics = this.createEmptyStatistics();
+    const statistics = { ...INITIAL_STATISTICS };
 
     comparisonResults.forEach(({ matchingCount, hasBonusNumber }) => {
-      if (matchingCount === 6) statistics.firstPrize += 1;
-      if (matchingCount === 5 && hasBonusNumber) statistics.secondPrize += 1;
-      if (matchingCount === 5 && !hasBonusNumber) statistics.thirdPrize += 1;
-      if (matchingCount === 4) statistics.fourthPrize += 1;
-      if (matchingCount === 3) statistics.fifthPrize += 1;
+      this.#updateStatistics(statistics, matchingCount, hasBonusNumber);
     });
 
     return statistics;
+  }
+
+  #updateStatistics(statistics, matchingCount, hasBonusNumber) {
+    if (matchingCount === 6) statistics[PRIZE_KEY.firstPrize] += 1;
+    if (matchingCount === 5 && hasBonusNumber) statistics[PRIZE_KEY.secondPrize] += 1;
+    if (matchingCount === 5 && !hasBonusNumber) statistics[PRIZE_KEY.thirdPrize] += 1;
+    if (matchingCount === 4) statistics[PRIZE_KEY.fourthPrize] += 1;
+    if (matchingCount === 3) statistics[PRIZE_KEY.fifthPrize] += 1;
   }
 
   calcTotalPrizeAmount(statistics) {
