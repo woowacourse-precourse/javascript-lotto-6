@@ -16,6 +16,9 @@ class Lotto {
   #validate(numbers) {
     const messages = new Messages();
     const constants = new Constants();
+    if (numbers.some((number) => isNaN(number) || typeof number !== "number")) {
+      throw new Error(messages.getErrorMsg("notNumber"));
+    }
     if (numbers.length !== constants.getLottoNumberCount()) {
       throw new Error(messages.getErrorMsg("notLength"));
     }
@@ -25,9 +28,7 @@ class Lotto {
     if (new Set(numbers).size !== numbers.length) {
       throw new Error(messages.getErrorMsg("overlap"));
     }
-    if (numbers.some((number) => typeof number !== "number")) {
-      throw new Error(messages.getErrorMsg("notNumber"));
-    }
+
     // 보너스 번호와 당첨 번호가 중복되는 경우는 controller에서 처리
   }
 

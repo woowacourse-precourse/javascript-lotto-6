@@ -9,12 +9,12 @@ class LottoLogic {
 
   #lotto; // 당첨번호
   #bonusLotto; // 보너스번호
-  #count; // 구매한 로또 개수
+  #money; // 구매한 로또 금액
 
-  constructor(lotto, bonusLotto, count) {
+  constructor(lotto, bonusLotto, money) {
     this.#lotto = lotto;
     this.#bonusLotto = bonusLotto;
-    this.#count = count;
+    this.#money = money;
   }
 
   async start() {
@@ -26,12 +26,12 @@ class LottoLogic {
       5: 0,
       miss: 0,
     };
-
-    const generatedLottos = await this.#generateLottos(this.#count);
+    const count = await this.#money.getCount();
+    const generatedLottos = await this.#generateLottos(count);
     const lotto = this.#lotto;
     const bonusNum = await this.#bonusLotto.getNumber();
 
-    for (let i = 0; i < this.#count; i++) {
+    for (let i = 0; i < count; i++) {
       await this.#getResult(lotto, generatedLottos, i, result, bonusNum);
     }
 
@@ -97,7 +97,7 @@ class LottoLogic {
 
 // test done!
 // const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-// const bonusLotto = new BonusLotto(7);
+// const bonusLotto = new BonusLotto(7, [1, 2, 3, 4, 5, 6]);
 // const lottoLogic = new LottoLogic(lotto, bonusLotto, 100000);
 // console.log(await lottoLogic.start());
 

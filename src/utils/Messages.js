@@ -8,10 +8,8 @@ class Messages {
   #constants = new Constants();
 
   #inputMsg = {
-    money: `로또 구입 금액을 입력해 주세요(${
-      this.#constants.getLottoPriceUnit
-    }원 단위) : `,
-    amount: "당첨 번호를 입력해 주세요(쉼표로 구분) : ",
+    money: `로또 구입 금액을 입력해 주세요(${this.#constants.getLottoPriceUnit()}원 단위) : `,
+    lotto: "당첨 번호를 입력해 주세요(쉼표로 구분) : ",
     bonus: "보너스 번호를 입력해 주세요 : ",
   };
 
@@ -22,6 +20,7 @@ class Messages {
     notNumber: "[ERROR] 로또 번호는 숫자여야 합니다.",
     notLength: `[ERROR] 로또 번호는 ${this.#constants.getLottoNumberCount()}개여야 합니다.`,
     notNumberMoney: "[ERROR] 로또 구입 금액은 숫자여야 합니다.",
+    negative: "[ERROR] 로또 구입 금액은 음수가 될 수 없습니다.",
   };
 
   #outputMsg = {
@@ -42,6 +41,42 @@ class Messages {
   getOutputMsg(outputMsg) {
     return this.#outputMsg[outputMsg];
   }
+
+  getResultMsg(result) {
+    return (
+      "당첨 통계.\n" +
+      "---\n" +
+      `3개 일치 ( ${this.#constants.getPrize()[3]}원) - ` +
+      result[5] +
+      "개\n" +
+      `4개 일치 ( ${this.#constants.getPrize()[4]}원) - ` +
+      result[4] +
+      "개\n" +
+      `5개 일치 ( ${this.#constants.getPrize()[5]}원) - ` +
+      result[3] +
+      "개\n" +
+      `5개 일치, 보너스 볼 일치( ${this.#constants.getPrize()["b"]}원) - ` +
+      result[2] +
+      "개\n" +
+      `6개 일치 ( ${this.#constants.getPrize()[6]}원) - ` +
+      result[1] +
+      "개\n"
+    );
+  }
+
+  getRateOfReturnMsg(rateOfReturn) {
+    return "총 수익률은 " + rateOfReturn + "% 입니다.";
+  }
 }
+
+// const messages = new Messages();
+// const result = {
+//   1: 1,
+//   2: 2,
+//   3: 3,
+//   4: 4,
+//   5: 5,
+// };
+// console.log(messages.getResultMsg(result));
 
 export default Messages;

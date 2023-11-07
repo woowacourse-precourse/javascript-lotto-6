@@ -1,11 +1,12 @@
 import Messages from "../utils/Messages.js";
 import Constants from "../utils/Constants.js";
+import Lotto from "./Lotto.js";
 
 class BonusLotto {
   #number;
 
-  constructor(number) {
-    this.#validate(number);
+  constructor(number, lottoNumbers) {
+    this.#validate(number, lottoNumbers);
     this.#number = number;
   }
 
@@ -18,16 +19,19 @@ class BonusLotto {
     return this.#number;
   }
 
-  async #validate(bonusNumber) {
+  #validate(bonusNumber, lottoNumbers) {
     const messages = new Messages();
     if (this.#checkArange(bonusNumber)) {
       throw new Error(messages.getErrorMsg("outOfindex"));
     }
 
-    if (typeof bonusNumber !== "number") {
+    if (typeof bonusNumber !== "number" || isNaN(bonusNumber)) {
       throw new Error(messages.getErrorMsg("notNumber"));
     }
-    // 보너스 번호와 당첨 번호가 중복되는 경우는 controller에서 처리
+
+    if (lottoNumbers.includes(bonusNumber)) {
+      throw new Error(messages.getErrorMsg("overlap"));
+    }
   }
 
   #checkArange(number) {
@@ -41,5 +45,8 @@ class BonusLotto {
     return false;
   }
 }
+
+// const bonusLotto = new BonusLotto(7, [1, 2, 3, 4, 5, 6]);
+// console.log(await bonusLotto.getNumber());
 
 export default BonusLotto;
