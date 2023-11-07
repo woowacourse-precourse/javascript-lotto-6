@@ -2,6 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import CONSTANTS from '../utils/Constants.js';
 import MESSAGES from '../utils/Messages.js';
+import { PRIZE_REWARD } from '../utils/Prize.js';
 
 class User {
   lottos;
@@ -51,6 +52,13 @@ class User {
 
   printStatistic() {
     return Object.entries(this.#prize).map((prize) => prize[1]);
+  }
+
+  calculateReward() {
+    return Object.entries(this.#prize).reduce(
+      (acc, [prize, count]) => acc + PRIZE_REWARD[prize] * count,
+      0,
+    );
   }
 }
 
