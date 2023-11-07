@@ -11,6 +11,7 @@ const LOTTO = Object.freeze({
 
 const PRINT_INPUT = Object.freeze({
 	inputAmount: "구입금액을 입력해 주세요.\n",
+	inputNumbers: "\n당첨 번호를 입력해 주세요.\n",
 });
 
 const PRINT_OUTPUT = Object.freeze({

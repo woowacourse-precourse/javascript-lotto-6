@@ -4,6 +4,7 @@ import OutputPrintout from "./utils/OutputPrintout.js";
 class App {
 	async play() {
 		OutputPrintout.printLottos(await InputPrintout.inputAmount());
+		await InputPrintout.inputLottoNumbers();
 	}
 }
 

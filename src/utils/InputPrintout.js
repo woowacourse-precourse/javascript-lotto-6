@@ -10,7 +10,9 @@ const InputPrintout = {
 		}
 		return Number(amount);
 	},
-	//당첨번호
+	inputLottoNumbers: async () => {
+		let numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
+	},
 	//보너스번호
 };
 export default InputPrintout;
