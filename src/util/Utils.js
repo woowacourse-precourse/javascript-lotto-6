@@ -10,7 +10,7 @@ import {
   checkBonusNumber,
   checkWinningNumbers,
 } from './Validation.js';
-import Lotto from '../Lotto.js';
+import Lotto from '../domain/Lotto.js';
 
 async function getInputPurchasingMoney() {
   let userInput;

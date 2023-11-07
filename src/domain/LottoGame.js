@@ -7,7 +7,7 @@ import {
   printPurchasedAmount,
   printRankingList,
 } from '../util/Utils.js';
-import Lotto from '../Lotto.js';
+import Lotto from './Lotto.js';
 
 class LottoGame {
   async lottoProcess() {
