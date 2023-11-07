@@ -51,10 +51,13 @@ class DongHang {
     this.#winningNumbers.mainNumbers = new Lotto(mainNumbers);
 
     const bonusNumber = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
+
     if (!NumberValidator.isInRange(bonusNumber, LOTTO_RANGE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
     }
-
+    if (mainNumbers.includes(bonusNumber)) {
+      throw new CustomError(ERROR_MESSAGE.DUPLICATED_NUMBER);
+    }
     this.#winningNumbers.bonusNumber = bonusNumber;
   }
 }
