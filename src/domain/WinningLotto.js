@@ -18,6 +18,7 @@ class WinningLotto extends Lotto {
       throw CustomError.lottoValidateError(ERROR_MESSAGE.notUniqueNumbers);
     }
   }
+
 }
 
 export default WinningLotto;

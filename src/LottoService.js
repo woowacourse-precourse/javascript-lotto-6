@@ -6,12 +6,12 @@ import WinningLotto from './domain/WinningLotto';
 
 class LottoService {
   sellLotto(purchaseAmount) {
-    this.#validatePurchaseAmount(purchaseAmount);
+    this.validatePurchaseAmount(purchaseAmount);
     const quantitiy = Math.floor(purchaseAmount / LOTTO.price);
     return [this.#generateLotto(quantitiy), quantitiy];
   }
 
-  #validatePurchaseAmount(purchaseAmount) {
+  validatePurchaseAmount(purchaseAmount) {
     if (!/^\d000$/.test(String(purchaseAmount))) {
       throw CustomError.userInputError(ERROR_MESSAGE.invalidAmountError);
     }
@@ -27,7 +27,7 @@ class LottoService {
     const lottoNumbers = new Set();
     while (lottoNumbers.size < quantitiy) {
       const newLottoNumbers = Random.pickUniqueNumbersInRange(
-        LOTTO.numberMim,
+        LOTTO.numberMin,
         LOTTO.numberMax,
         LOTTO.numberCount,
       );

@@ -15,12 +15,8 @@ class Lotto {
     this.#validateNumbersRange(numbers);
   }
 
-  getNumbers() {
-    return this.#numbers;
-  }
-
   #validateDuplicate(numbers) {
-    if (new Set(numbers).size !== Lotto.length) {
+    if (new Set(numbers).size !== LOTTO.numberCount) {
       throw CustomError.lottoValidateError(ERROR_MESSAGE.notUniqueNumbers);
     }
   }
@@ -31,19 +27,25 @@ class Lotto {
     }
   }
 
-  includeNumber(number) {
-    return this.#numbers.includes(number);
-  }
-
   validateOutOfRange(number) {
-    if (number > LOTTO.numberMin || number > LOTTO.numberMax) {
+    if (number < LOTTO.numberMin || number > LOTTO.numberMax) {
       throw CustomError.lottoValidateError(ERROR_MESSAGE.outOfRange);
     }
+    return true;
   }
 
   #validateNumbersRange(numbers) {
     numbers.every(this.validateOutOfRange);
   }
+
+  includeNumber(number) {
+    return this.#numbers.includes(number);
+  }
+
+  getNumbers() {
+    return this.#numbers;
+  }
+
 }
 
 export default Lotto;

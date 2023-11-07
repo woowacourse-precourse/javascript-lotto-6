@@ -24,7 +24,7 @@ const ERROR_MESSAGE = Object.freeze({
 const LOTTO = Object.freeze({
   price: 1000,
   numberMax: 45,
-  numberMim: 1,
+  numberMin: 1,
   numberCount: 6,
 });
 
