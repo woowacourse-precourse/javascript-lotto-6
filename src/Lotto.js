@@ -61,9 +61,10 @@ class Lotto {
 
   checkWin(bonusNumber, guessNumber) {
     guessNumber.forEach(eachNumber => {
-      const matchNumber = eachNumber.filter(num =>
-        this.#numbers.includes(+num),
-      );
+      const matchNumber = eachNumber.filter(num => {
+        const intNum = parseInt(num, 10);
+        return this.#numbers.includes(intNum);
+      });
 
       if (matchNumber.length === 5) {
         this.#checkBonusMatch(bonusNumber, eachNumber);
