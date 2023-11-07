@@ -6,7 +6,7 @@ const PRINT_PURCHASE_LOTTO = (lotto) => `[${lotto.join(", ")}]\n`;
 
 const INPUT_WINNING_NUMBER = "당첨 번호를 입력해주세요";
 
-const WINNING_OUTCOME = (arr) => {
+const WINNING_OUTCOME = (arr, outcomes) => {
   return `3개 일치 (5,000원) - ${arr[0]}개\n
 4개 일치 (50,000원) - ${arr[1]}개\n
 5개 일치 (1,500,000원) - ${arr[2]}개\n
@@ -16,7 +16,12 @@ const WINNING_OUTCOME = (arr) => {
 
 const GENERATE_BONUS_NUM = "보너스 번호를 입력해 주세요.";
 
-const RATIO_OF_RETURN = (ratio) => `총 수익률은 ${ratio}%입니다.`
+const RATIO_OF_RETURN = (result, price, outcomes) =>{
+  let totalOutcome = 0;
+  result.forEach((v, i) => totalOutcome += v * outcomes[i]);
+  const ratio = Math.round((totalOutcome/price * 100) *10)/10;
+  return `총 수익률은 ${ratio}%입니다.`
+} 
 
 export {
   BUY_LOTTO, 

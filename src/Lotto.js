@@ -36,7 +36,7 @@ class Lotto {
   }
 
   showLotto() {
-    return `${this.#numbers.join(",")}\n`;
+    return `${this.#numbers.sort((a,b)=>a-b).join(",")}\n`;
   }
   // TODO: 추가 기능 구현
 

@@ -26,10 +26,7 @@ class App {
   }
 
   printTotalOutcome(result) {
-    let totalOutcome = 0;
-    result.forEach((v, i) => totalOutcome += v * this.#OUTCOMES[i]);
-    const ratio = Math.round((totalOutcome/this.#price * 100) *10)/10;
-    Console.print(RATIO_OF_RETURN(ratio));
+    Console.print(RATIO_OF_RETURN(result, this.#price,  this.#OUTCOMES));
   }
 
   lottoResult(lottoContainer, winningNums, bonusNum) {
