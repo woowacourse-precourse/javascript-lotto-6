@@ -9,7 +9,21 @@ describe('구입금액 입력 예외 테스트', () => {
     }).toThrow('[ERROR] 구입금액을 숫자로 입력해 주세요.');
   });
 
+  test('구입금액이 입력되지 않으면 예외가 발생한다.', () => {
+    const USER_INPUT = '';
+    expect(() => {
+      new ValidatePurchase(USER_INPUT);
+    }).toThrow('[ERROR] 구입금액을 숫자로 입력해 주세요.');
+  });
+
   test('구입금액이 0원이면 예외가 발생한다.', () => {
+    const USER_INPUT = '0';
+    expect(() => {
+      new ValidatePurchase(USER_INPUT);
+    }).toThrow('[ERROR] 1000원 단위로 입력해 주세요.');
+  });
+
+  test('구입금액이 -2000원이면 예외가 발생한다.', () => {
     const USER_INPUT = '0';
     expect(() => {
       new ValidatePurchase(USER_INPUT);

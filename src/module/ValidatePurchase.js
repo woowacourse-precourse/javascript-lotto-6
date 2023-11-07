@@ -9,11 +9,19 @@ class ValidatePurchase {
   }
 
   #validate(userInput) {
+    this.checkEmpty(userInput);
+    this.checkPositive(userInput);
     this.checkType(userInput);
-    this.checkZero(userInput);
     this.checkWhiteSpace(userInput);
     this.checkUnit(userInput);
   }
+
+  checkEmpty(userInput) {
+    if (userInput.trim() === '') {
+      throw new Error(errorMessage.purchaseNotNumber);
+    }
+  }
+
 
   checkType(userInput) {
     if (Number.isNaN(Number(userInput))) {
@@ -21,8 +29,8 @@ class ValidatePurchase {
     }
   }
 
-  checkZero(userInput) {
-    if (userInput === '0') {
+  checkPositive(userInput) {
+    if (Number(userInput) < 1000) {
       throw new Error(errorMessage.purchaseWrongUnit);
     }
   }
