@@ -1,8 +1,8 @@
-import MVC from './mvc/MVC.js';
+import Fucntional from './functinoal/Functional.js';
 
 class App {
   async play() {
-    await MVC.play();
+    await Fucntional.play();
   }
 }
 
