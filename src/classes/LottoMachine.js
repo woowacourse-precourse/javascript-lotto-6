@@ -11,11 +11,11 @@ class LottoMachine {
 
   #validator(purchaseAmount) {
     if (Number.isNaN(Number(purchaseAmount))) {
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
+      throw ERROR_MESSAGE.NOT_A_NUMBER;
     }
 
     if (purchaseAmount % PRICE.LOTTO !== 0) {
-      throw new Error(ERROR_MESSAGE.NOT_DIVISIBLE);
+      throw ERROR_MESSAGE.NOT_DIVISIBLE;
     }
   }
 
