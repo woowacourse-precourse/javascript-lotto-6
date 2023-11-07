@@ -21,6 +21,26 @@ class Lotto {
   getNumbers() {
     return this.#numbers.sort((a, b) => a - b);
   }
+
+  getRank(winningNumbers, bonusNumber) {
+    const matchedCount = this.#numbers.filter((number) =>
+      winningNumbers.includes(number)
+    );
+
+    switch (matchedCount.length) {
+      case 6:
+        return 1;
+      case 5:
+        if (this.#numbers.includes(bonusNumber)) return 2;
+        return 3;
+      case 4:
+        return 4;
+      case 3:
+        return 5;
+      default:
+        return 0;
+    }
+  }
 }
 
 export default Lotto;
