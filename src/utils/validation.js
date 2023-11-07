@@ -28,4 +28,20 @@ const isValidLottoWinningNumbersInput = (winningNumbers) => {
   return true;
 };
 
-export { isValidLottoAmountInput, isValidLottoWinningNumbersInput };
+const isValidLottoBonusNumberInput = (winningNumbers, lottoBonusNumber) => {
+  if (isNaN(lottoBonusNumber)) {
+    throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
+  }
+
+  if (winningNumbers.includes(lottoBonusNumber)) {
+    throw new Error(
+      '[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.'
+    );
+  }
+};
+
+export {
+  isValidLottoAmountInput,
+  isValidLottoWinningNumbersInput,
+  isValidLottoBonusNumberInput,
+};
