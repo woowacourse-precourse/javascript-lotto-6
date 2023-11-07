@@ -1,21 +1,22 @@
 import { Console } from '@woowacourse/mission-utils';
+import { OUTPUT_MESSAGE } from '../constants/messages.js';
 
 class OutputView {
   printErrorMessage(error) {
-    return Console.print(error);
+    Console.print(error);
   }
 
   printPurchaseAmount(amount) {
-    return Console.print(`\n${amount}개를 구매했습니다.`);
+    Console.print(OUTPUT_MESSAGE.purchaseAmount(amount));
   }
 
   printPurchasedLotto(purchasedLotto) {
     const lottos = purchasedLotto.map((lotto) => `[${lotto.join(', ')}]`).join('\n');
-    return Console.print(`${lottos}\n`);
+    Console.print(`${lottos}\n`);
   }
 
   printWinsStatistics(winsStatistics) {
-    Console.print(`\n당첨통계\n---`);
+    Console.print(OUTPUT_MESSAGE.winsStatistic);
 
     const prizeLevels = [
       { label: '3개 일치 (5,000원)', prizeKey: 'fifthPrize' },
@@ -31,7 +32,7 @@ class OutputView {
   }
 
   printProfitRatio(profitRatio) {
-    Console.print(`총 수익률은 ${profitRatio}%입니다.`);
+    Console.print(OUTPUT_MESSAGE.totalProfitRatio(profitRatio));
   }
 }
 
