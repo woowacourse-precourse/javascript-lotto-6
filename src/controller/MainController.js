@@ -58,4 +58,10 @@ class MainController {
       }
     }
   }
+  static getWinningResult() {
+    Result.getWinningResult;
+    Result.calculateWinningMoney(this.winningInFive);
+    Result.calculrateRateOfReturn(this.userPurchaseAmount);
+    Result.printWinningStastics(this.winningInFive);
+  }
 }
