@@ -24,7 +24,7 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-descirbe('LottoPurchase.getLottoPurchase 테스트', () => {
+describe('LottoPurchase.getLottoPurchase 테스트', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -41,7 +41,7 @@ descirbe('LottoPurchase.getLottoPurchase 테스트', () => {
   });
 });
 
-descirbe('LottoPurchase.validateAmount', () => {
+describe('LottoPurchase.validateAmount', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -66,7 +66,7 @@ descirbe('LottoPurchase.validateAmount', () => {
 
   test('올바른 금액이 입력된 경우에는 에러를 발생시키지 않는다.', () => {
     expect(() => {
-      LottoPurchase.validateAmount(NaN);
-    }).not.toThrow('[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.');
+      LottoPurchase.validateAmount(3000);
+    }).not.toThrow();
   });
 });
