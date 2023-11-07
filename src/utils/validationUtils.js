@@ -14,6 +14,34 @@ const validationUtils = {
     }
     return Number(price);
   },
+
+  // 당첨 번호 예외 처리
+  inputWinningNumValidate(winningNum) {
+    // 쉼표로 구분하지 않은 경우
+    if (!winningNum.includes(",")) {
+      throw new Error(MESSAGE.error.notComma);
+    }
+
+    // 쉼표로 구분한 경우
+    const winningNums = winningNum.split(",").map((num) => Number(num.trim()));
+
+    // 6개가 아닌 경우
+    if (winningNums.length !== 6) {
+      throw new Error(MESSAGE.error.notLength);
+    }
+
+    // 범위가 1~45가 아닌 경우
+    winningNums.map((num) => {
+      if (num < 1 && num > 45) {
+        throw new Error(MESSAGE.error.notRange);
+      }
+    });
+
+    // 중복되지 않는 숫자가 아닌 경우
+    if (new Set(winningNums).size !== 6) {
+      throw new Error(MESSAGE.error.repeatNum);
+    }
+  },
 };
 
 export default validationUtils;
