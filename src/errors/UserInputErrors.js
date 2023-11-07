@@ -1,6 +1,6 @@
 import GameError from './GameError.js';
 
 export class UserInputError extends GameError {}
-export class PurchasePriceInputError extends GameError {}
-export class WinningNumbersInputError extends GameError {}
-export class BonusNumberInputError extends GameError {}
+export class PurchasePriceInputError extends UserInputError {}
+export class WinningNumbersInputError extends UserInputError {}
+export class BonusNumberInputError extends UserInputError {}
