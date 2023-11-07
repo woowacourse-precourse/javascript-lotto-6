@@ -37,10 +37,8 @@ class Lotto {
     switch (this.#numOfCorrect) {
       case 6:
         return '1등';
-      case 5 && this.#isWonBonus === true:
-        return '2등';
-      case 5 && this.#isWonBonus === false:
-        return '3등';
+      case 5:
+        return this.#isWonBonus ? '2등' : '3등';
       case 4:
         return '4등';
       case 3:
