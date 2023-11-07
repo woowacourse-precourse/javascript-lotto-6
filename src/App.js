@@ -68,7 +68,7 @@ class App {
     }
   }
 
-  setRank(matched, matchedBonus) {
+  setRankAndPrize(matched, matchedBonus) {
     if (matched < 3) return;
 
     const rank = this.calculateRankByMatched(matched, matchedBonus);
@@ -80,7 +80,7 @@ class App {
     this.lottos.forEach((lotto) => {
       const matched = lotto.countMatched(this.#winning);
       const matchedBonus = lotto.includes(this.#bonus);
-      this.setRank(matched, matchedBonus);
+      this.setRankAndPrize(matched, matchedBonus);
     });
   }
 
