@@ -17,9 +17,15 @@ class Validator {
       this.invalidSeparator,
       this.invalidNumbersCount,
       this.invalidRange,
-      this.invalidNumber,
+      this.invalidWinningNumbers,
     ];
     validators.forEach(validator => validator(winningNumbers));
+  }
+
+  static validateBonusNumber(bonusNumber) {
+    const validators = [this.missingValue, this.invalidNumber, this.invalidRange];
+
+    validators.forEach(validator => validator(bonusNumber));
   }
 
   static remainderNotZero(purchaseAmount) {
@@ -31,6 +37,12 @@ class Validator {
     if (isNaN(number)) throw new Error(ERROR.message.invalidNumber);
   }
 
+  static invalidWinningNumbers(winningNumbers) {
+    winningNumbers.forEach(number => {
+      if (!Number(number)) throw new Error(ERROR.message.invalidNumber);
+    });
+  }
+
   static missingValue(value) {
     if (!value) throw new Error(ERROR.message.missingValue);
   }
@@ -40,8 +52,7 @@ class Validator {
   }
 
   static invalidSeparator(numbers) {
-    if (numbers.includes(''))
-      throw new Error(ERROR.message.invalidSeparator);
+    if (numbers.includes('')) throw new Error(ERROR.message.invalidSeparator);
   }
 
   static invalidNumbersCount(numbers) {
