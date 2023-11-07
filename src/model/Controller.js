@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
 import { ERROR, INPUT } from '../lib/Prompt.js';
 import { UNIT } from '../lib/constant.js';
 import View from './View.js';
@@ -16,20 +16,41 @@ class Controller {
   }
 
   async inputPurchase() {
-    const MONEY = await this.View.input(INPUT.purchase);
-    if (String(MONEY).includes('.')) throw new Error(ERROR.invalidValue);
-    this.purchaseLotto(Number(MONEY));
-    this.View.printPurchaseResult(this.buyNum, this.lottoArrays);
+    while (true) {
+      try {
+        const MONEY = await this.View.input(INPUT.purchase);
+        this.validatePay(MONEY);
+        this.purchaseLotto(Number(MONEY));
+        this.View.printPurchaseResult(this.buyNum, this.lottoArrays);
+        return;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
   }
 
   async inputWinNumber() {
-    const WIN_NUMS = (await this.View.input(INPUT.win)).trim();
-    this.setWinNumber(WIN_NUMS);
+    while (true) {
+      try {
+        const WIN_NUMS = (await this.View.input(INPUT.win)).trim();
+        this.setWinNumber(WIN_NUMS);
+        return;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
   }
 
   async inputBonus() {
-    const BONUS = await this.View.input(INPUT.bonus);
-    this.setBonusNum(BONUS);
+    while (true) {
+      try {
+        const BONUS = await this.View.input(INPUT.bonus);
+        this.setBonusNum(BONUS);
+        return;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
   }
 
   async run() {
@@ -40,13 +61,13 @@ class Controller {
   }
 
   purchaseLotto(money) {
-    this.validatePay(money);
     this.money = money;
     this.buyNum = money / UNIT;
     this.generateRandomLottoArrays();
   }
 
   validatePay(money) {
+    if (String(money).includes('.')) throw new Error(ERROR.invalidValue);
     if (isNaN(money)) throw new Error(ERROR.invalidValue); // 가격 : 숫자 아님
     if (money % UNIT !== 0) throw new Error(ERROR.invalidUnit); // 가격 : UNIT 단위가 아님
     if (money <= 0) throw new Error(ERROR.invalidValue); // 가격 : 0이하
