@@ -1,46 +1,63 @@
 import Input from './Input.js';
-
+import Lotto from './Lotto.js';
+import { Random, Console } from '@woowacourse/mission-utils';
 class LottoGame {
-  #lotteryTicket;
-  #lottoNumbers;
+  #numberOfLotto;
+  #lotteries;
   #winningLottery;
 
   constructor() {
-    this.#lotteryTicket = 0;
-    this.#lottoNumbers = [];
+    this.#numberOfLotto = 0;
+    this.#lotteries = {};
     this.#winningLottery = [];
   }
+  async play() {
+    const { lotteries, winningLottery } = await this.#setConfig();
+    this.#lotteries = lotteries;
+    this.#winningLottery = winningLottery;
+
+    //당첨내역을 계산한다.
+    //수익률을 계산한다.
+    // this.#view.printRaceResult({ winner, raceResult });
+  }
+  async #setConfig() {
+    //구입금액을 입력받아 로또수에 맞는 로또 번호를 출력한다.
+    const purchaseAmount = await Input.getPurchaseAmount();
+    const numberOfLotto = this.#exchangeTicket(purchaseAmount);
+    const lotteries = this.#IssueLottery(numberOfLotto);
+
+    Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
+    lotteries.forEach((lottery) => {
+      // console.log(lottery);
+      Console.print(`${lottery.printLotto()}`);
+    });
+
+    //당첨 번호를 입력한다. (당첨번호 6자리+ 보너스번호)
+    const winningLottery = await Input.getWinningLottery();
+
+    return { lotteries, winningLottery };
+  }
+
   #exchangeTicket(price) {
     const TICKET_PRICE = 1000;
     const ticketCount = price / TICKET_PRICE;
     return ticketCount;
   }
+  #IssueLottery(count) {
+    const set = new Set();
+    const length = 6;
+    const range = { from: 1, to: 45 };
 
-  async #init() {
-    //구입금액을 입력받는다.
-    // 사용자가 구매한 로또 번호와 당첨 번호를 구한다.
+    while (set.size < count) {
+      let lottery = Random.pickUniqueNumbersInRange(
+        range.from,
+        range.to,
+        length
+      );
 
-    //const {lottoNumbers ,winningLottery} = await Input();
-    const purchaseAmount = await Input.getPurchaseAmount();
-
-    //구입 금액에 맞게 로또수를 구한다.
-    this.#lotteryTicket = this.#exchangeTicket(purchaseAmount);
-
-    //로또수에 맞게 로또번호를 구한다.
-    this.#lottoNumbers = Array(this.#lotteryTicket).fill(new Lotto());
-
-    //로또수를 출력한다.
-    //로또수에 맞는 로또 번호를 출력한다.
-
-    //당첨 번호를 입력한다. (당첨번호 6자리+ 보너스번호)
-  }
-
-  async play() {
-    //사용자가 구매한 로또 번호와 당첨 번호를 입력받는다.
-    await this.#init();
-    //당첨내역을 계산한다.
-
-    //수익률을 계산한다.
+      set.add(new Lotto(lottery.sort((a, b) => a - b)));
+    }
+    return Array.from(set);
   }
 }
 export default LottoGame;

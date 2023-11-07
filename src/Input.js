@@ -10,15 +10,29 @@ class Input {
 
   static async getPurchaseAmount() {
     try {
-      const priceText = await new this().readInput(
+      const inputValue = await new this().readInput(
         INPUT_QUERY_MESSAGES.purchaseAmout
       );
 
-      const purchaseAmout = Parser.stringToNumber(priceText);
+      const purchaseAmout = Parser.stringToNumber(inputValue);
       if (Validator.isValidPurchaseAmount(purchaseAmout)) return purchaseAmout;
     } catch (error) {
       console.log(error);
       await this.getPurchaseAmount();
+    }
+  }
+
+  static async getWinningLottery() {
+    try {
+      const inputValue = await new this().readInput(
+        INPUT_QUERY_MESSAGES.winningLottery
+      );
+
+      // const winningLottery = Parser.stringToNumber(inputValue);
+      // if (Validator.isValidPurchaseAmount(purchaseAmout)) return winningLottery;
+    } catch (error) {
+      console.log(error);
+      await this.getWinningLottery();
     }
   }
 }
