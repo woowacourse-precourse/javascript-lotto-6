@@ -8,7 +8,7 @@
 4. [프로그래밍 요구 사항](#프로그래밍-요구-사항)
 5. [라이브러리](#라이브러리)
 6. [기능 구현 목록](#기능-구현-목록)
-
+7. [디렉토리](#디렉토리)
 ---
 
 ### 개요
@@ -108,3 +108,61 @@ npm i @woowacourse/mission-utils
 
 - `당첨 통계`라는 메시지와 함께 로또 번호와 당첨 번호, 보너스 번호가 일치하는 개수 별로 출력한다.
 - 구매한 금액과 당첨 금액을 비교하여 백분율로 수익률을 나타낸다.
+
+---
+
+## 디렉토리
+```
+📦javascript-lotto-6
+ ┣ 📂__tests__
+ ┃ ┣ 📂game
+ ┃ ┃ ┣ 📜.DS_Store
+ ┃ ┃ ┣ 📜CreateNumbersTest.js
+ ┃ ┃ ┣ 📜LottoBonusTest.js
+ ┃ ┃ ┣ 📜LottoGameTest.js
+ ┃ ┃ ┗ 📜userLottoOutputTest.js
+ ┃ ┣ 📂place
+ ┃ ┃ ┣ 📜.DS_Store
+ ┃ ┃ ┣ 📜FirstPlaceTest.js
+ ┃ ┃ ┣ 📜FivePlaceTest.js
+ ┃ ┃ ┣ 📜FourPlaceTest.js
+ ┃ ┃ ┣ 📜SecondPlaceTest.js
+ ┃ ┃ ┗ 📜ThreePlaceTest.js
+ ┃ ┣ 📂valid
+ ┃ ┃ ┣ 📜.DS_Store
+ ┃ ┃ ┣ 📜BonusValidTest.js
+ ┃ ┃ ┣ 📜MoneyValidTest.js
+ ┃ ┃ ┗ 📜WinningValidTest.js
+ ┃ ┣ 📜.DS_Store
+ ┃ ┣ 📜ApplicationTest.js
+ ┃ ┗ 📜LottoTest.js
+ ┣ 📂docs
+ ┃ ┗ 📜README.md
+ ┗ 📂src
+   ┣ 📂constants
+   ┃ ┣ 📜errorMessage.js
+   ┃ ┣ 📜gameMessage.js
+   ┃ ┣ 📜numbers.js
+   ┃ ┣ 📜prize.js
+   ┃ ┗ 📜symbols.js
+   ┣ 📂controller
+   ┃ ┣ 📜Lotto.js
+   ┃ ┗ 📜createNumbers.js
+   ┣ 📂model
+   ┃ ┗ 📜LottoGame.js
+   ┣ 📂utils
+   ┃ ┣ 📜bonusIsValid.js
+   ┃ ┗ 📜moneyIsValid.js
+   ┣ 📂view
+   ┃ ┣ 📂input
+   ┃ ┃ ┣ 📜BonusInput.js
+   ┃ ┃ ┣ 📜MoneyInput.js
+   ┃ ┃ ┗ 📜WinningInput.js
+   ┃ ┣ 📂output
+   ┃ ┃ ┣ 📜resultOutput.js
+   ┃ ┃ ┗ 📜userLottoOutput.js
+   ┃ ┗ 📜.DS_Store
+   ┣ 📜.DS_Store
+   ┣ 📜App.js
+   ┗ 📜index.js
+```
