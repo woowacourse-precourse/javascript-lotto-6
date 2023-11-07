@@ -5,9 +5,9 @@ class BounsNumber {
   #bonusNumber;
 
   constructor(bonusNumber) {
-    this.#bonusNumber = bonusNumber;
+    this.#bonusNumber = Number(bonusNumber);
     this.#validateType(bonusNumber);
-    this.#validateRange(bonusNumber);
+    this.#validateRange(Number(bonusNumber));
   }
 
   #validateType(bonusNumber) {

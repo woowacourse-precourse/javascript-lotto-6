@@ -26,7 +26,7 @@ class App {
     const inputBonusNumber = await MissionUtils.Console.readLineAsync(
       '보너스 번호를 입력해 주세요.\n'
     );
-    const bonusNumber = new BounsNumber(Number(inputBonusNumber));
+    const bonusNumber = new BounsNumber(inputBonusNumber);
   }
 }
 
