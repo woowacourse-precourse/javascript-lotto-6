@@ -13,11 +13,11 @@ class App {
     const purchaseAmount = parseInt(purchaseAmountInput);
 
     if (isNaN(purchaseAmount)) {
-      throw new Exception(ERROR_MESSAGE.NOT_A_NUMBER);
+      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
     }
 
     if (purchaseAmount % CONSTANT_NUMBERS.THOUSAND != 0) {
-      throw new Exception(ERROR_MESSAGE.NOT_DIVISIBLE_BY_THOUSAND);
+      throw new Error(ERROR_MESSAGE.NOT_DIVISIBLE_BY_THOUSAND);
     }
 
     const numberOfLottoPurchased = purchaseAmount / CONSTANT_NUMBERS.THOUSAND;
@@ -51,28 +51,34 @@ class App {
       const integerNumber = parseInt(stringNumber);
 
       if (isNaN(integerNumber)) {
-        throw new Exception(ERROR_MESSAGE.NOT_A_NUMBER);
+        throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
       }
 
       if (integerNumber < 1 || integerNumber > 45) {
-        throw new Exception(ERROR_MESSAGE.BETWEEN_MIN_AND_MAX);
+        throw new Error(ERROR_MESSAGE.BETWEEN_MIN_AND_MAX);
       }
       winningNumbersArray.push(integerNumber);
     }
 
     if (new Set(winningNumbersArray).size !== winningNumbersArray.length) {
-      throw new Exception(ERROR_MESSAGE.DUPLICATED);
+      throw new Error(ERROR_MESSAGE.DUPLICATED);
     }
 
     if (winningNumbersArray.length !== 6) {
-      throw new Exception(ERROR_MESSAGE.SHOULD_BE_SIX);
+      throw new Error(ERROR_MESSAGE.SHOULD_BE_SIX);
     }
 
     const bonusNumberString = await Console.readLineAsync(
       CONSOLE_MESSAGE.TYPE_BONUS_NUMBER
     );
-    // TODO: 보너스 번호 예외처리
+
     const bonusNumber = parseInt(bonusNumberString);
+    if (isNaN(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
+    }
+    if (winningNumbersArray.includes(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.DUPLICATED);
+    }
 
     const winnings = Object.freeze({
       three: CONSTANT_NUMBERS.THREE_PRIZE,
