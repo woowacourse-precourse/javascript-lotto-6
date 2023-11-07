@@ -97,25 +97,30 @@ export default class LottoMachine {
     while (this.#INFINITE) {
       try {
         const bonusNumberInput = await InputView.readBonusNumber();
+        const parseBonusNumber = Number(bonusNumberInput);
 
-        this.#bonusNumberValidate(bonusNumberInput);
+        this.#bonusNumberValidate(parseBonusNumber);
 
-        return Number(bonusNumberInput);
+        return parseBonusNumber;
       } catch (e) {
         Console.print(e.message);
       }
     }
   }
 
-  #bonusNumberValidate(bonusNumberInput) {
+  #bonusNumberValidate(bonusNumber) {
     const ONLY_DIGIT_PATTERN = /^\d+$/;
 
-    if (!ONLY_DIGIT_PATTERN.test(bonusNumberInput)) {
+    if (!ONLY_DIGIT_PATTERN.test(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.notNumber);
     }
 
-    if (this.#winningNumbers.getNumbers().includes(Number(bonusNumberInput))) {
+    if (this.#winningNumbers.getNumbers().includes(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.duplication);
+    }
+
+    if (bonusNumber < LOTTO_RULES.minNumber || bonusNumber > LOTTO_RULES.maxNumber) {
+      throw new Error(ERROR_MESSAGE.lottoNumber.notInRange);
     }
   }
 
