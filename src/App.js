@@ -5,6 +5,7 @@ import InputLotto from "./UI/InputLotto.js";
 import InputBonusNumber from "./UI/InputBonusNumber.js";
 import LottoNumberMatch from "./Domain/LottoNumberMatch.js";
 import PrintResult from "./UI/PrintResult.js";
+import CalculateRateOfReturn from "./Domain/CalculateRateOfReturn.js";
 
 class App {
   async play() {
@@ -15,6 +16,7 @@ class App {
     const INPUT_BONUS_NUMBER = new InputBonusNumber();
     const LOTTO_NUMBER_MATCH = new LottoNumberMatch();
     const PRINT_RESULT = new PrintResult();
+    const CALCULATE_RATE_OF_RETURN = new CalculateRateOfReturn();
 
     const NUMBER_OF_LOTTO = await INPUT_MONEY.inputMoney();
 
@@ -39,6 +41,11 @@ class App {
     );
 
     PRINT_RESULT.print(RANK_MATCH_ARRAY);
+
+    const RATE_OF_RETURN = CALCULATE_RATE_OF_RETURN.calculate(
+      RANK_MATCH_ARRAY,
+      NUMBER_OF_LOTTO
+    );
   }
 }
 

@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+
 class PrintResult {
   print(rankMatchArray) {
     MissionUtils.Console.print("당첨 통계\n");

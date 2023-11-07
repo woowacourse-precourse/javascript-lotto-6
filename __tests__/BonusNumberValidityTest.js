@@ -1,4 +1,4 @@
-import BonusNumberValidity from "../src/Domain/BonusNumberValidity";
+import BonusNumberValidity from "../src/Domain/BonusNumberValidity.js";
 
 describe("보너스 번호 테스트", () => {
   test("숫자를 입력했는지 테스트", () => {
