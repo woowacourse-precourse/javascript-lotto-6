@@ -10,27 +10,36 @@ class LottoTicketResult {
 
   #checkLottoTicketResult(lottoTicket, winningNumber, bonusNumber) {
     lottoTicket.forEach((lotto) => {
-      let matchNumberCount = 0;
-      lotto.forEach((lottoNumber) => {
-        if (winningNumber.includes(lottoNumber)) {
-          matchNumberCount += 1;
-        }
-      });
-      if (matchNumberCount === LOTTO.FIFTH_PLACE_MATCH) {
-        this.#lottoTicketResult[0] += 1;
-      }
-      if (matchNumberCount === LOTTO.FOURTH_PLACE_MATCH) {
-        this.#lottoTicketResult[1] += 1;
-      }
-      if (matchNumberCount === LOTTO.SECOND_OR_THIRD_PLACE_MATCH) {
-        lotto.includes(bonusNumber)
-          ? (this.#lottoTicketResult[3] += 1)
-          : (this.#lottoTicketResult[2] += 1);
-      }
-      if (matchNumberCount === LOTTO.FIRST_PLACE_MATCH) {
-        this.#lottoTicketResult[4] += 1;
+      const matchNumberCount = this.#checkLotto(lotto, winningNumber);
+      this.#setResult(lotto, matchNumberCount, bonusNumber);
+    });
+  }
+
+  #checkLotto(lotto, winningNumber) {
+    let matchNumberCount = 0;
+    lotto.forEach((lottoNumber) => {
+      if (winningNumber.includes(lottoNumber)) {
+        matchNumberCount += 1;
       }
     });
+    return matchNumberCount;
+  }
+
+  #setResult(lotto, matchNumberCount, bonusNumber) {
+    if (
+      matchNumberCount === LOTTO.FIFTH_PLACE_MATCH ||
+      matchNumberCount === LOTTO.FOURTH_PLACE_MATCH
+    ) {
+      this.#lottoTicketResult[matchNumberCount - 3] += 1;
+    }
+    if (matchNumberCount === LOTTO.SECOND_OR_THIRD_PLACE_MATCH) {
+      lotto.includes(bonusNumber)
+        ? (this.#lottoTicketResult[3] += 1)
+        : (this.#lottoTicketResult[2] += 1);
+    }
+    if (matchNumberCount === LOTTO.FIRST_PLACE_MATCH) {
+      this.#lottoTicketResult[4] += 1;
+    }
   }
 
   getLottoTicketResult() {
