@@ -1,4 +1,4 @@
-import createNumbers from "./controller/CreateNumbers.js";
+import createNumbers from "./controller/createNumbers.js";
 import MoneyInput from "./view/input/MoneyInput.js";
 import WinningInput from "./view/input/WinningInput.js";
 import LottoGame from "./model/LottoGame.js";
