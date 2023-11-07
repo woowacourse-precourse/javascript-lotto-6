@@ -61,18 +61,22 @@ class Lotto {
 
   checkWin(bonusNumber, guessNumber) {
     guessNumber.forEach(eachNumber => {
-      const matchNumber = eachNumber.filter(num => {
-        const intNum = parseInt(num, 10);
-        return this.#numbers.includes(intNum);
-      });
-
-      if (matchNumber.length === 5) {
-        this.#checkBonusMatch(bonusNumber, eachNumber);
-        return;
-      }
-      this.checkMatch(matchNumber);
+      this.processEachNumber(bonusNumber, eachNumber);
     });
     this.#printResult(guessNumber);
+  }
+
+  processEachNumber(bonusNumber, eachNumber) {
+    const matchNumber = eachNumber.filter(num => {
+      const intNum = parseInt(num, 10);
+      return this.#numbers.includes(intNum);
+    });
+
+    if (matchNumber.length === 5) {
+      this.#checkBonusMatch(bonusNumber, eachNumber);
+      return;
+    }
+    this.checkMatch(matchNumber);
   }
 
   checkMatch(matchNumber) {
