@@ -23,12 +23,15 @@ class App {
   }
 
   async #requestPurchaseAmount() {
+    MissionUtils.Console.print("구입금액을 입력해 주세요.\n");
     const input = await MissionUtils.Console.readLineAsync();
     const amount = parseInt(input, 10);
 
     if (isNaN(amount) || amount < 1000 || amount % 1000 !== 0) {
       throw new Error ("[ERROR] 구입 금액은 1,000 단위의 정수여야 합니다.");
     }
+    MissionUtils.Console.print(`${amount}`)
+    
     return amount;
   }
 
@@ -63,12 +66,16 @@ class App {
     let input = await MissionUtils.Console.readLineAsync();
 
     if (isBonus) {
-      return parseInt (input.trim(), 10);
-    }
+      const bonusNumber = parseInt(input.trim(), 10);
 
-    let numbers = input.split(',').map (s => parseInt(s.trim(), 10));
-    const lotto = new Lotto(numbers);
-    return lotto.numbers;
+      MissionUtils.Console.print(`${bonusNumber}\n`)
+      return bonusNumber;
+    } else {
+      let numbers = input.split(',').map (s => parseInt(s.trim(), 10));
+      MissionUtils.Console.print(`${numbers.join(',')}\n`)
+      const lotto = new Lotto(numbers);
+      return lotto.numbers;
+    }
   }
 
   #calculatePrize(winningNumbers) {
@@ -103,13 +110,13 @@ class App {
     const profit = this.prizeMoney
     const rateOfReturn = ((profit / this.purchaseAmount) * 100)
     const resultString = `
-    당첨 통계\n
-    ---\n
-    3개 일치 (5,000원) - ${this.matchedCount[3]}개\n
-    4개 일치 (50,000원) - ${this.matchedCount[4]}개\n
-    5개 일치 (1,500,000원) - ${this.matchedCount[5]}개\n
-    5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.matchedCount['5B']}개\n
-    6개 일치 (2,000,000,000원) - ${this.matchedCount[6]}개\n
+    당첨 통계
+    ---
+    3개 일치 (5,000원) - ${this.matchedCount[3]}개
+    4개 일치 (50,000원) - ${this.matchedCount[4]}개
+    5개 일치 (1,500,000원) - ${this.matchedCount[5]}개
+    5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.matchedCount['5B']}개
+    6개 일치 (2,000,000,000원) - ${this.matchedCount[6]}개
     총 수익률은 ${rateOfReturn}%입니다.
     `;
 
