@@ -38,21 +38,12 @@ class App {
 
   printWinningResult(compare, outputView) {
     outputView.winningResult();
-    outputView.matchedThreeNumber(
-      compare.getMatchedThreeNumber(this.#boughtLottos)
-    );
-    outputView.matchedFourNumber(
-      compare.getMatchedFourNumber(this.#boughtLottos)
-    );
-    outputView.matchedFiveNumber(
-      compare.getMatchedFiveNumber(this.#boughtLottos)
-    );
-    outputView.matchedBonusNumber(
-      compare.getMatchedBonusNumber(this.#boughtLottos)
-    );
-    outputView.matchedSixNumber(
-      compare.getMatchedSixNumber(this.#boughtLottos)
-    );
+
+    outputView.matchedThree(compare.getMatchedThree(this.#boughtLottos));
+    outputView.matchedFour(compare.getMatchedFour(this.#boughtLottos));
+    outputView.matchedFive(compare.getMatchedFive(this.#boughtLottos));
+    outputView.matchedBonus(compare.getMatchedBonus(this.#boughtLottos));
+    outputView.matchedSix(compare.getMatchedSix(this.#boughtLottos));
 
     outputView.profit(compare.getProfit(this.#boughtLottos, this.#coin));
   }

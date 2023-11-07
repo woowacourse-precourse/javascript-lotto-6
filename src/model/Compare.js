@@ -9,7 +9,7 @@ export default class Compare {
     this.#bonusNumber = bonusNumber;
   }
 
-  getMatchedThreeNumber(boughtLottos) {
+  getMatchedThree(boughtLottos) {
     let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
@@ -23,7 +23,7 @@ export default class Compare {
     return Matched;
   }
 
-  getMatchedFourNumber(boughtLottos) {
+  getMatchedFour(boughtLottos) {
     let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
@@ -37,7 +37,7 @@ export default class Compare {
     return Matched;
   }
 
-  getMatchedFiveNumber(boughtLottos) {
+  getMatchedFive(boughtLottos) {
     let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
@@ -51,7 +51,7 @@ export default class Compare {
     return Matched;
   }
 
-  getMatchedBonusNumber(boughtLottos) {
+  getMatchedBonus(boughtLottos) {
     let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
@@ -70,7 +70,7 @@ export default class Compare {
     return Matched;
   }
 
-  getMatchedSixNumber(boughtLottos) {
+  getMatchedSix(boughtLottos) {
     let Matched = 0;
 
     boughtLottos.forEach((Lotto) => {
@@ -84,20 +84,20 @@ export default class Compare {
     return Matched;
   }
 
-  getMatchedAllNumber(boughtLottos) {
+  getMatchedAll(boughtLottos) {
     const results = [];
 
-    results.push(this.getMatchedThreeNumber(boughtLottos));
-    results.push(this.getMatchedFourNumber(boughtLottos));
-    results.push(this.getMatchedFiveNumber(boughtLottos));
-    results.push(this.getMatchedBonusNumber(boughtLottos));
-    results.push(this.getMatchedSixNumber(boughtLottos));
+    results.push(this.getMatchedThree(boughtLottos));
+    results.push(this.getMatchedFour(boughtLottos));
+    results.push(this.getMatchedFive(boughtLottos));
+    results.push(this.getMatchedBonus(boughtLottos));
+    results.push(this.getMatchedSix(boughtLottos));
     return results;
   }
 
   getProfit(boughtLottos, coin) {
     let totalProfit = 0;
-    const result = this.getMatchedAllNumber(boughtLottos);
+    const result = this.getMatchedAll(boughtLottos);
     result.forEach((count, index) => {
       totalProfit += count * PROFIT[index];
     });
