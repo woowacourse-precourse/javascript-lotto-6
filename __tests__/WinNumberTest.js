@@ -15,7 +15,7 @@ describe('당첨 번호 클래스 테스트', () => {
 
   test('당첨 번호가 1 이상 45 이하의 정수로 구성되지 않으면 에러가 발생한다.', () => {
     expect(() => {
-      new WinNumber(['a', 47, 'c', 'd', 'e', 'f'], 1);
+      new WinNumber([' a', 47, 'c', 'd', 'e', 'f'], 1);
     }).toThrow('[ERROR]');
   });
 
