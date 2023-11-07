@@ -1,14 +1,11 @@
 import WinningLotto from './WinningLotto.js';
-import { PRIZE } from '../constants/GameSetting.js';
+import { PRIZE, PRIZE_STRUCTURE, SETTING } from '../constants/GameSetting.js';
+
+const { DECIMAL_POINT, KEY_TITLE, MATCH_CONDITION, INCREASE, PERCENT } =
+  SETTING;
 
 class WinningMachine {
-  #prizeStructure = {
-    match3: 0,
-    match4: 0,
-    match5: 0,
-    match5Bonus: 0,
-    match6: 0,
-  };
+  #prizeStructure = PRIZE_STRUCTURE;
 
   #rateOfReturn;
 
@@ -31,9 +28,10 @@ class WinningMachine {
       0,
     );
 
-    this.#rateOfReturn = ((totalPrize / Number(purchaseAmount)) * 100).toFixed(
-      1,
-    );
+    this.#rateOfReturn = (
+      (totalPrize / Number(purchaseAmount)) *
+      PERCENT
+    ).toFixed(DECIMAL_POINT);
   }
 
   #evaluateMatch({ lottoNumber, winningNumber }) {
@@ -42,14 +40,14 @@ class WinningMachine {
   }
 
   #updatePrizeStructure(matchCount, hasBonus) {
-    if (matchCount === 5 && hasBonus) {
-      this.#prizeStructure.match5Bonus += 1;
+    if (matchCount === MATCH_CONDITION && hasBonus) {
+      this.#prizeStructure.match5Bonus += INCREASE;
       return;
     }
 
-    const matchKey = `match${matchCount}`;
+    const matchKey = `${KEY_TITLE}${matchCount}`;
     if (Object.prototype.hasOwnProperty.call(this.#prizeStructure, matchKey)) {
-      this.#prizeStructure[matchKey] += 1;
+      this.#prizeStructure[matchKey] += INCREASE;
     }
   }
 

@@ -2,8 +2,10 @@ import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import { conditions, throwError } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
+import { SETTING } from '../constants/GameSetting.js';
 
 const { PAYMENT_NUMBER, PAYMENT_THOUSAND } = ERROR;
+const { UNIT, RANGE_MIN, RANGE_MAX, MAX_SIZE } = SETTING;
 const { isPositiveInteger, isThousandUnits } = conditions;
 
 class LottoMachine {
@@ -28,11 +30,11 @@ class LottoMachine {
   }
 
   #calculateQuantity(purchaseAmount) {
-    return Math.floor(purchaseAmount / 1000);
+    return Math.floor(purchaseAmount / UNIT);
   }
 
   #generateLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(RANGE_MIN, RANGE_MAX, MAX_SIZE);
   }
 
   #generateLotto() {

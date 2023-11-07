@@ -1,38 +1,31 @@
 import CustomError from './CustomError.js';
 import ERROR from '../constants/Error.js';
+import { SETTING } from '../constants/GameSetting.js';
 
-const {
-  COMMON_INPUT,
-  COMMON_WHITESPACE,
-  PAYMENT_THOUSAND,
-  PAYMENT_NUMBER,
-  WINNING_RANGE,
-  WINNING_NUMBER,
-  WINNING_LENGTH,
-} = ERROR;
+const { EMPTY, UNIT, RANGE_MIN, RANGE_MAX, MAX_SIZE, MIN_VALUE } = SETTING;
 
 const conditions = {
   isNotEmpty(value) {
-    return value !== '';
+    return value !== EMPTY;
   },
   hasNoWhitespace(value) {
     return !/\s/.test(value);
   },
 
   isThousandUnits(value) {
-    return value % 1000 === 0;
+    return value % UNIT === MIN_VALUE;
   },
   isPositiveInteger(value) {
-    return Number.isInteger(Number(value)) && value > 0;
+    return Number.isInteger(Number(value)) && value > MIN_VALUE;
   },
   isInRange(value) {
-    return value >= 1 && value <= 45;
+    return value >= RANGE_MIN && value <= RANGE_MAX;
   },
   isCorrectLength(arr) {
-    return arr.length === 6;
+    return arr.length === MAX_SIZE;
   },
   isDuplicate(arr) {
-    return new Set(arr).size === 6;
+    return new Set(arr).size === MAX_SIZE;
   },
 };
 
@@ -45,9 +38,9 @@ function throwError(message, condition) {
 
 function validateCommonInput(value) {
   const inputConditions = [
-    { message: COMMON_INPUT, condition: conditions.isNotEmpty(value) },
+    { message: ERROR.COMMON_INPUT, condition: conditions.isNotEmpty(value) },
     {
-      message: COMMON_WHITESPACE,
+      message: ERROR.COMMON_WHITESPACE,
       condition: conditions.hasNoWhitespace(value),
     },
   ];

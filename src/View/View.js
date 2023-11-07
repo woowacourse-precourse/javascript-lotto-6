@@ -1,26 +1,9 @@
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import MESSAGE from '../constants/Message.js';
-import RESULT from '../constants/Result.js';
+import { RESULT, RESULT_MESSAGE } from '../constants/Result.js';
 
-const {
-  RESULT_MESSAGE,
-  RESULT_RANK_3,
-  RESULT_RANK_4,
-  RESULT_RANK_5,
-  RESULT_RANK_5_BONUS,
-  RESULT_RANK_6,
-  COUNT,
-  RATE_OF_RETURN,
-} = RESULT;
-
-const resultMessages = {
-  match3: RESULT_RANK_3,
-  match4: RESULT_RANK_4,
-  match5: RESULT_RANK_5,
-  match5Bonus: RESULT_RANK_5_BONUS,
-  match6: RESULT_RANK_6,
-};
+const { RESULT_PREFIX, COUNT, RATE_OF_RETURN } = RESULT;
 
 class View {
   #inputView = InputView;
@@ -64,13 +47,13 @@ class View {
 
   #printStatisticContents(matchResult) {
     Object.entries(matchResult).forEach(([key, count]) => {
-      const message = resultMessages[key];
+      const message = RESULT_MESSAGE[key];
       this.#outputView.printLine(`${message}${COUNT(count)}`);
     });
   }
 
   #printStatisticMessage() {
-    this.#outputView.printLine(RESULT_MESSAGE);
+    this.#outputView.printLine(RESULT_PREFIX);
   }
 
   #printRateOfReturn(rateOfReturn) {
