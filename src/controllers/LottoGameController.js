@@ -22,7 +22,7 @@ class LottoGameController {
       const bonusNumber = await this.getValidBonusNumber(winningLotto);
 
       const comparisonResults = this.lottoGame.getComparisonResults(
-        winningLotto.getSortedLotto(),
+        winningLotto.getSortedNumbers(),
         bonusNumber
       );
 

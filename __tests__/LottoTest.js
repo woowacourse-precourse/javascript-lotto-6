@@ -47,7 +47,7 @@ describe('로또 클래스 테스트', () => {
 
   test('로또 번호가 오름차순으로 재정렬되어 반환되는지 테스트한다.', () => {
     const lotto = new Lotto([6, 5, 4, 3, 2, 1]);
-    const sortedLotto = lotto.getSortedLotto();
+    const sortedLotto = lotto.getSortedNumbers();
 
     expect(sortedLotto).toEqual([1, 2, 3, 4, 5, 6]);
   });

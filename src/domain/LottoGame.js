@@ -25,7 +25,7 @@ class LottoGame {
   }
 
   getPurchasedLotto() {
-    return this.#purchasedLotto.map((lotto) => lotto.getSortedLotto());
+    return this.#purchasedLotto.map((lotto) => lotto.getSortedNumbers());
   }
 
   /**
