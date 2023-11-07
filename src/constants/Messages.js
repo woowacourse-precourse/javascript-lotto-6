@@ -27,6 +27,12 @@ export const OUTPUT_MESSAGE_FUNCTION = {
       maximumFractionDigits: 1,
     })}%입니다.`;
   },
+  statisticsMessage(message, ranks, index) {
+    return `${message}${ranks.get(`${5 - index}등`) ?? 0}개`;
+  },
+  userLottoNumbers(userLotto) {
+    return `[${userLotto.join(', ')}]`;
+  },
 };
 
 export const ERROR_MESSAGE = {
