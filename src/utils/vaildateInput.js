@@ -38,7 +38,7 @@ const validation = Object.freeze({
   },
 
   price: (priceInput) => {
-    if (Number(priceInput) % LOTTO.price) {
+    if (Number(priceInput) % LOTTO.price !== 0) {
       throw new Error("[ERROR] 로또 가격은 하나당 1000원 입니다.");
     }
   },
