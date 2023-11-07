@@ -1,4 +1,4 @@
-import { MAX_NUMBER, MIN_NUMBER } from "./constants";
+import { MAX_NUMBER, MIN_NUMBER, MIN_WINNING } from "./constants";
 
 class Lotto {
   #numbers;
@@ -45,11 +45,27 @@ class Lotto {
    * @param {WinningLotto} winning_lotto
    * @returns {int} winning - 일치하는 번호 갯수
    */
-  get_winning_count(winning_lotto) {
+  #get_winning_count(winning_lotto) {
     const WINNING = winning_lotto
       .get_numbers()
       .reduce((accum, current) => accum + this.is_include(current), 0);
     return WINNING;
+  }
+
+  /**
+   * 전달받은 당첨 로또에 대한 등수를 리턴하는 메소드
+   *
+   * 등수 내에 들지 못한다면 0을 리턴한다.
+   * @param {WinningLotto} winning_lotto
+   * @returns {int} rank
+   */
+  get_winning_rank(winning_lotto) {
+    const IS_BONUS = this.is_include(winning_lotto.get_bonus());
+    const WINNING = IS_BONUS + this.#get_winning_count(winning_lotto);
+    if (WINNING < MIN_WINNING) return 0;
+    // 보너스 번호에 당첨되지 않은 경우 순위를 높인다.
+    if (WINNING === 6) return WINNING_RANKS[WINNING + !IS_BONUS];
+    return WINNING_RANKS[WINNING];
   }
 }
 
