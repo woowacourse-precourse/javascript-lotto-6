@@ -9,13 +9,14 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-    if (new Set(numbers).size !== numbers.length) {
+    if (new Set(numbers).size !== numbers.length)
       throw new Error("[ERROR] 로또 번호는 서로 중복되지 않아야 합니다.");
-    }
+
     numbers.forEach((value) => {
+      if (typeof value !== "number" || !Number.isInteger(value))
+        throw new Error("[ERROR] 잘못된 형식의 숫자입니다.");
       if (value < MIN_NUMBER || value > MAX_NUMBER)
         throw new Error(
           `[ERROR] 로또 번호는 ${MIN_NUMBER} ~ ${MAX_NUMBER} 사이 숫자만 가능합니다.`
