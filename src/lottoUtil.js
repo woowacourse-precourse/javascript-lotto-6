@@ -1,3 +1,5 @@
+import Lotto from './Lotto.js';
+import WinLotto from './WinLotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const LOTTO_REWARD = {
@@ -51,4 +53,26 @@ export async function inputBonusNumber() {
     const bonusNumberStr = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     MissionUtils.Console.print('');
     return Number(bonusNumberStr);
+}
+
+export async function winLottoGenerate() {
+    let lotto;
+    while (true) {
+        try {
+            const winNumbers = await inputWinNumber();
+            lotto = new Lotto(winNumbers);
+            break;
+        } catch (error) {
+            MissionUtils.Console.print(error.message);
+        }
+    }
+    while (true) {
+        try {
+            const bonusNumber = await inputBonusNumber();
+            const winLotto = new WinLotto(lotto, bonusNumber);
+            return winLotto;
+        } catch (error) {
+            MissionUtils.Console.print(error.message);
+        }
+    }
 }
