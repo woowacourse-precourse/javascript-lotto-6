@@ -1,5 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
-import { isValidLottoAmountInput } from './Utils/validation.js';
+import {
+  isValidLottoAmountInput,
+  isValidLottoWinningNumbersInput,
+} from './utils/validation.js';
 import { pickRandomLottoNumbers } from './utils/random.js';
 import InputView from './view/inputView.js';
 import OutputView from './view/OutputView.js';
@@ -13,6 +16,8 @@ class App {
 
     OutputView.printLottoTicketCount(lottoCount);
     OutputView.printLottoTickets(lottoTickets);
+
+    const lottoWinningNumbers = await this.getWinningNumbers();
   }
 
   async getLottoAmount() {
@@ -27,6 +32,21 @@ class App {
         } else {
           return lottoAmount;
         }
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  async getWinningNumbers() {
+    let lottoWinningNumbers;
+
+    while (true) {
+      try {
+        lottoWinningNumbers = await InputView.readLottoWinningNumbers();
+        isValidLottoWinningNumbersInput(lottoWinningNumbers);
+
+        return lottoWinningNumbers;
       } catch (error) {
         Console.print(error.message);
       }
