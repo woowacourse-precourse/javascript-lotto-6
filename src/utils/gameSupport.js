@@ -50,3 +50,9 @@ export const printMessage = (messages) => {
   MissionUtils.Console.print(messages);
 };
 
+export const printPurchasedLottoNumbers = (lottoArray) => {
+  lottoArray.forEach((lotto) => {
+    MissionUtils.Console.print("[" + lotto.join(", ") + "]");
+  });
+};
+
