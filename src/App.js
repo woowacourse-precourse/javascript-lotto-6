@@ -16,7 +16,6 @@ class App {
       bonusNumber: false,
     };
     do {
-      console.log(Object.entries(isInputStepEnd));
       try {
         // TODO
         if (!isInputStepEnd.payMoney) {
@@ -34,11 +33,18 @@ class App {
           isInputStepEnd.bonusNumber = true;
         }
       } catch (e) {
-        Console.print(`${this.#ERRORPREFIX} ${e.message}`);
+        let errorStep = '';
 
         Object.keys(isInputStepEnd).forEach((curStep) => {
-          if (e.message.includes(curStep)) isInputStepEnd[curStep] = false;
+          if (e.message.includes(curStep)) {
+            isInputStepEnd[curStep] = false;
+            errorStep = curStep;
+          }
         });
+
+        Console.print(
+          `\n ${this.#ERRORPREFIX} ${e.message}`.replace(`${errorStep}: `, ''),
+        );
       }
     } while (Object.values(isInputStepEnd).includes(false));
     this.#game.matchNumbers();
