@@ -44,6 +44,11 @@ class Lotto {
     this.processPrize(this.matchSix, GameSetting.prize_1th, Print.prize_1th);
     OutputView.print(Print.totalPrizeFirst + this.profitRate(TIKET) + Print.totalPrizeEnd);
   }
+
+  processPrize(matchCount, prizeValue, printState) {
+    this.totalPrize += matchCount * prizeValue;
+    OutputView.print(printState + matchCount + GameSetting.countOfMatches);
+  }
 }
 
 export default Lotto;
