@@ -1,4 +1,5 @@
 const validateBonusNumber = (lotto, bonus) => {
+  bonus = Number(bonus);
   if (isNaN(bonus)) {
     return false;
   }

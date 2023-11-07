@@ -42,16 +42,9 @@ class RunApp {
   }
 
   async getBonusNumber() {
-    const bonusNumber = await printBonusNumber();
-    if (!validateBonusNumber(this.numbers, bonusNumber))
-      throw new Error(`${ErrorMessages.BONUS_NUMBER_ERROR_MESSAGE}`);
+    const bonusNumber = await printBonusNumber(this.numbers);
     this.bonus.push(bonusNumber);
   }
 }
 
 export default RunApp;
-
-// while (!validatePriceInput(price)) {
-//   Console.print(ErrorMessages.PRICE_INPUT_ERROR_MESSAGE);
-//   price = await Console.readLineAsync(Messages.PURCHASE_INPUT_MESSAGE);
-// }
