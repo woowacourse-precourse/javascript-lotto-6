@@ -36,7 +36,7 @@ const WINNING_PRIZE = new Map([
 const PRINT_STRING = {
   resultHeader: '당첨 통계\n---',
   prizeUnit: '원',
-  matchNumberUnit: '개',
+  matchCountUnit: '개',
 };
 
 class WinningCalculator {
@@ -84,13 +84,11 @@ class WinningCalculator {
 
   #compileBonusWinner(matchCount, isWinningBonus) {
     const rank = MATCH_RANKING.get(matchCount);
+    const bonusRank = MATCH_RANKING.get(NUMBER_NAME.bonus);
 
     if (matchCount === BONUS_OPTIONS.matchCount && isWinningBonus) {
       this.winnerList.set(rank, this.winnerList.get(rank) - 1);
-      this.winnerList.set(
-        NUMBER_NAME.bonus,
-        1 + (this.winnerList.get(NUMBER_NAME.bonus) ?? 0),
-      );
+      this.winnerList.set(bonusRank, 1 + (this.winnerList.get(bonusRank) ?? 0));
     }
   }
 
@@ -99,13 +97,12 @@ class WinningCalculator {
 
     RANKING.forEach((standard, rank) => {
       const prize = WINNING_PRIZE.get(rank);
-      const matchCount = MATCH_RANKING.get(rank);
-      const matchNumber = this.winnerList.get(matchCount) ?? 0;
+      const matchCount = this.winnerList.get(rank) ?? 0;
 
       Utils.informUser(
         `${standard} (${prize.toLocaleString()}${
           PRINT_STRING.prizeUnit
-        }) - ${matchNumber}${PRINT_STRING.matchNumberUnit}`,
+        }) - ${matchCount}${PRINT_STRING.matchCountUnit}`,
       );
     });
   }
