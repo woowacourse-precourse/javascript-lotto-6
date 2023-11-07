@@ -24,8 +24,8 @@ const InputView = {
       );
 
       return userInputWinningNumbers.split(",").map((number) => Number(number.trim()));
-    } catch (e) {
-      throw new Error("[ERROR]");
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
     }
   },
 
@@ -37,8 +37,8 @@ const InputView = {
       const bonusNumber = parseInt(userInputBonumsNumbers, 10);
 
       return bonusNumber;
-    } catch (e) {
-      throw new Error("[ERROR]");
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
     }
   },
 };
