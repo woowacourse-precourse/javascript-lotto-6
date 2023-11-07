@@ -122,6 +122,11 @@ class Lotto {
 		});
 		return totalPrizeMoney;
 	}
+
+	getRateOfReturn(lottoAmount) {
+		const capital = lottoAmount;
+		return (this.#numbers / capital) * 100;
+	}
 }
 
 export default Lotto;

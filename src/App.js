@@ -46,7 +46,9 @@ class App {
 				matchingBonusNumberArray
 			);
 
-			Console.print(totalPrize);
+			const rateOfReturn = this.getRateOfReturn(lottoAmount, totalPrize);
+
+			this.view.printRateOfReturn(rateOfReturn);
 		} catch (error) {
 			throw error;
 		}
@@ -119,6 +121,11 @@ class App {
 	getTotalPrize(matchingNumbersArray, matchingBonusNumberArray) {
 		const model = new Lotto(matchingNumbersArray);
 		return model.getTotalPrize(matchingBonusNumberArray);
+	}
+
+	getRateOfReturn(lottoAmount, totalPrize) {
+		const model = new Lotto(totalPrize);
+		return model.getRateOfReturn(lottoAmount).toFixed(2) + '%';
 	}
 
 	getMyLottoTicketMessage(myLottoTicketsArray) {

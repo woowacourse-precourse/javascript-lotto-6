@@ -19,4 +19,8 @@ export class View {
 	printWinningStatistics(winningStatistics) {
 		Console.print(`당첨 통계\n---\n${winningStatistics}`);
 	}
+
+	printRateOfReturn(rateOfReturn) {
+		Console.print(`총 수익률은 ${rateOfReturn}입니다.`);
+	}
 }
