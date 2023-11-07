@@ -5,7 +5,15 @@ class App {
 		const PURCHASE_AMOUNT =
 			await Console.readLineAsync('구입금액을 입력해 주세요.');
 
-		const PURCHASE_COUNT = Number(PURCHASE_AMOUNT) / 1000;
+		if (isNaN(PURCHASE_AMOUNT)) {
+			throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
+		}
+
+		const PURCHASE_COUNT = Math.floor(Number(PURCHASE_AMOUNT) / 1000);
+
+		if (PURCHASE_COUNT < 1) {
+			throw new Error('[ERROR] 복권을 살 수 없어요!');
+		}
 
 		const LOTTERY_TICKET_LIST = [];
 
@@ -24,6 +32,10 @@ class App {
 			Number(str.trim()),
 		);
 
+		if (WINNING_NUMBERS_List.find((element) => element < 0 || element > 45)) {
+			throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+		}
+
 		const BONUS_NUMBER_INPUT =
 			await Console.readLineAsync('보너스 번호를 입력해 주세요.');
 
@@ -37,6 +49,7 @@ class App {
 
 		for (let list of LOTTERY_TICKET_LIST) {
 			let count = 0;
+
 			for (let item of list) {
 				if (WINNING_NUMBERS.includes(item)) {
 					count++;
