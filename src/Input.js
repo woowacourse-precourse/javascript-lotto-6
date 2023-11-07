@@ -17,6 +17,14 @@ class Input {
 
     return lotteryNumbers.split(',');
   }
+
+  async askLotteryBonusNumber() {
+    const lotteryBonusNumber = await Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.'
+    );
+
+    return lotteryBonusNumber;
+  }
 }
 
 export default Input;
