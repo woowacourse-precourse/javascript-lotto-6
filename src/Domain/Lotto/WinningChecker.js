@@ -9,14 +9,15 @@ class WinningChecker {
   }
 
   /**
-   * 당첨 통계 헤더를 출력합니다.
+   * 당첨 통계 헤더를 출력한다.
    */
   printResultHeader() {
     Console.print(MESSAGE.output.resultHeader);
   }
 
   /**
-   * 당첨 번호를 로또 티켓들과 비교하고, 결과를 반환합니다.
+   * 당첨 번호를 로또 티켓들과 비교하고, 결과를 반환한다.
+   *
    * @param {string} bonusNumber 보너스 번호
    * @param {Array} lottoList 로또 티켓들
    * @returns {Object} 당첨 통계 결과
@@ -49,7 +50,8 @@ class WinningChecker {
   }
 
   /**
-   * 당첨 통계 결과를 출력합니다.
+   * 당첨 통계 결과를 출력한다.
+   *
    * @param {Object} result 당첨 통계 결과
    */
   printTotalResult(result) {

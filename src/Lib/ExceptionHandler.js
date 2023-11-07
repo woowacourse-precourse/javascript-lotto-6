@@ -118,9 +118,7 @@ class ExceptionHandler {
    *
    * @param {string} inputbonusNumber - 사용자가 입력한 보너스 번호
    * @param {string} winningNumbers - 사용자가 입력한 당첨 번호
-   *
    * @returns {number} 모든 검증을 통과하면 원래의 보너스 번호를 숫자로 변환하여 반환
-   *
    * @throws {AppError} 보너스 번호 입력이 다음 검증 중 하나라도 통과하지 못하면 오류를 발생킨다:
    * 1. 입력 값이 숫자가 아니거나, 공백 혹은 쉼표가 입력된 경우
    * 2. 입력 값이 유효한 번호 범위를 벗어난 경우
