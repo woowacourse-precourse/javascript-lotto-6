@@ -1,4 +1,4 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 class Store {
@@ -45,7 +45,7 @@ class Store {
   issueLotto() {
     const lottoAmount = this.calculateLottoAmount();
     for (let i = 0; i < lottoAmount; i++) {
-      const lottoNumbers = Lotto.generateLottoNumbers();
+      const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       this.#lottoList.push(new Lotto(lottoNumbers));
     }
   }
