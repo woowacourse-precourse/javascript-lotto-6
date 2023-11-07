@@ -10,19 +10,15 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO_MESSAGES.MAX_LOTTO_COUNT)
-      throw new Error(ERROR_MESSAGES.IS_LOTTO_COUNT);
+    if (numbers.length !== 6) throw new Error(ERROR_MESSAGES.IS_LOTTO_COUNT);
 
     numbers.forEach((number) => {
       if (isNaN(number)) throw new Error(ERROR_MESSAGES.IS_LOTTO_NUMBER);
-      if (
-        number < LOTTO_MESSAGES.MIN_LOTTO_NUMBER ||
-        number > LOTTO_MESSAGES.MAX_LOTTO_NUMBER
-      )
+      if (number < 1 || number > 45)
         throw new Error(ERROR_MESSAGES.IS_LOTTO_RANGE);
     });
 
-    if (new Set(numbers).size !== MAX_LOTTO_COUNT)
+    if (new Set(numbers).size !== 6)
       throw new Error(ERROR_MESSAGES.IS_DUPLICATION);
   }
 
