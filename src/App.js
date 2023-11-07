@@ -17,6 +17,13 @@ class App {
         }
         return amount;
     }
+
+    #purchaseLottos(count) {
+        return Array.from({ length: count }, () => {
+            const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+            return new Lotto(numbers);
+        });
+    }
 }
 
 export default App;
