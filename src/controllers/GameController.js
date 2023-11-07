@@ -30,4 +30,15 @@ export const GameController = {
     OutputView.printLottoTikets(LOTTO_BOX);
     return LOTTO_BOX;
   },
+
+  async getLottoWinningNumbers() {
+    try {
+      let lottery_Number = await InputView.getLotteryNumberArray();
+      Validator.isLotteryNumber(lottery_Number);
+      return lottery_Number;
+    } catch (error) {
+      OutputView.print(error.message);
+      return this.getLottoWinningNumbers();
+    }
+  },
 };
