@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,15 @@ class Lotto {
   }
 
   #validate(numbers) {
+    // 함수로 구현합시다~
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
   }
 
-  // TODO: 추가 기능 구현
+  print() {
+    Console.print(`[${this.#numbers.join(", ")}]`);
+  }
 }
 
 export default Lotto;
