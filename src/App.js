@@ -37,6 +37,11 @@ class App {
 
     MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
     const bonusNum = await MissionUtils.Console.readLineAsync("");
+
+    //숫자 아닐 시 예외 처리
+    if (isNaN(winnigNum) === true || isNaN(bonusNum) === true) {
+      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
+    }
   }
 }
 
