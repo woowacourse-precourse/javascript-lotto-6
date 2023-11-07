@@ -9,7 +9,8 @@ class App {
     this.lottoResultChecker = new LottoResultChecker();
   }
   async play() {
-    this.inputPurchasePrice = await this.inputPurchasePrice();
+    this.inputPurchasePrice = await this.getPurchasePrice();
+
     this.purchasePrice = this.convertToNum(this.inputPurchasePrice);
     this.checkValidationInputPrice(this.purchasePrice);
     const lottoCount = Number(this.purchasePrice / lottoPrice);
@@ -30,13 +31,13 @@ class App {
       await this.lottoResultChecker.inputWinningLottoNum()
     );
 
-    const inputLottoNumErrors = new Lotto(this.winningNumbers);
+    new Lotto(this.winningNumbers);
 
     this.bonusNumber = this.convertToNum(await this.inputBonusNumber());
 
     this.checkValidateInputBonus(this.bonusNumber);
 
-    const includedbonusArr = this.countBonuses(generatedLottoNumbers);
+    this.includedbonusArr = this.countBonuses(generatedLottoNumbers);
 
     this.matchingCounts = this.lottoResultChecker.compareInputNumAndRandomNum(
       this.winningNumbers,
@@ -44,7 +45,7 @@ class App {
     );
     this.matchingCountsResult = this.lottoResultChecker.getMatchingCounts(
       this.matchingCounts,
-      this.bonusNumber,
+      this.includedbonusArr,
       generatedLottoNumbersArr
     );
     this.totalProfit = this.calculateTotalProfit();
@@ -53,23 +54,19 @@ class App {
     this.printResult();
   }
 
-  async inputPurchasePrice() {
+  async getPurchasePrice() {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     return input;
   }
 
   checkValidationInputPrice(purchasePrice) {
-    if (isNaN(purchasePrice)) {
-      throw new Error("[ERROR] 숫자만 입력이 가능합니다.");
-    }
-    if (purchasePrice % 1000 !== 0 || purchasePrice <= 0) {
-      throw new Error("[ERROR] 1,000원 단위로 입력해 주세요.");
-    }
-    if (purchasePrice % 1 !== 0) {
-      throw new Error("[ERROR] 자연수만 입력이 가능합니다.");
-    }
-    if (purchasePrice.toString() !== this.inputPurchasePrice) {
-      throw new Error("[ERROR] 잘못된 입력 형식입니다.");
+    if (
+      isNaN(purchasePrice) ||
+      purchasePrice % 1000 !== 0 ||
+      purchasePrice <= 0 ||
+      purchasePrice % 1 !== 0
+    ) {
+      throw new Error("[ERROR] 구입금액을 올바르게 입력해 주세요.");
     }
   }
   async inputBonusNumber() {
