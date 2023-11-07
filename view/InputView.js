@@ -5,12 +5,11 @@ import Validator from '../utils/Validator.js';
 class InputView {
   constructor() {
     this.price = 0;
-    this.count = 0;
     this.winNum = [];
     this.bonusNum = 0;
   }
 
-  async getInput(promptMessage, validationFunction) {
+  static async getReInput(promptMessage, validationFunction) {
     let validInput = false;
     let userInput;
 
@@ -26,22 +25,28 @@ class InputView {
   }
 
   async getPrice() {
-    this.price = await this.getInput(PromptMessage.ENTER_PRICE, (input) => {
-      Validator.validatePrice(input);
-      return true;
-    });
+    this.price = await InputView.getReInput(
+      PromptMessage.ENTER_PRICE,
+      (input) => {
+        Validator.validatePrice(input);
+        return true;
+      },
+    );
   }
 
   async getWinNum() {
-    this.winNum = await this.getInput(PromptMessage.ENTER_WIN_NUM, (input) => {
-      const winNum = input.split(',').map((e) => parseInt(e.trim(), 10));
-      Validator.validateWinNum(winNum);
-      return true;
-    });
+    this.winNum = await InputView.getReInput(
+      PromptMessage.ENTER_WIN_NUM,
+      (input) => {
+        const winNum = input.split(',').map((num) => parseInt(num.trim(), 10));
+        Validator.validateWinNum(winNum);
+        return true;
+      },
+    );
   }
 
   async getBonusNum() {
-    this.bonusNum = await this.getInput(
+    this.bonusNum = await InputView.getReInput(
       PromptMessage.ENTER_BONUS_NUM,
       (input) => {
         const { winNum } = this;

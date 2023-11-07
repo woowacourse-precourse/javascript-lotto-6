@@ -2,6 +2,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import LottoController from '../controller/LottoController';
 import TotalPrice from '../model/TotalPrice';
+import Lotto from '../model/Lotto';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -33,13 +34,13 @@ describe('LottoController 로직 테스트', () => {
     const arr = [];
 
     // when
-    LottoController.generateAndStoreLotto(arr);
+    Lotto.generateAndStoreLotto(arr);
 
     // then
     expect(arr).toEqual([{}]);
 
     // when
-    LottoController.generateAndStoreLotto(arr);
+    Lotto.generateAndStoreLotto(arr);
 
     // then
     expect(arr).toEqual([{}, {}]);
@@ -83,7 +84,7 @@ describe('LottoController 로직 테스트', () => {
     // when
     const controller = new LottoController();
     for (let i = 0; i < price / 1000; i++) {
-      LottoController.generateAndStoreLotto(arr);
+      Lotto.generateAndStoreLotto(arr);
     }
     controller.checkWin(price, win, bonus, arr);
 
