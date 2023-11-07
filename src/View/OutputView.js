@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import COMMON from '../constants/common.js';
 import WINNING_INFO from '../constants/winningInfo.js';
+import MESSAGE from '../constants/message.js';
 
 class OutputView {
   static printLineBreak() {
@@ -17,12 +18,29 @@ class OutputView {
     });
   }
 
-  static printMatchingResult(cntRank) {
-    Console.print('당첨 통계:');
+  static printWinningResult(cntRank) {
+    Console.print(MESSAGE.output.winningResult);
+    OutputView.#printWinningResultAsTable(cntRank);
+  }
+
+  static #printWinningResultAsTable(cntRank) {
+    OutputView.#printDivider();
+    Console.print(MESSAGE.output.winningTableHeader);
+    OutputView.#printDivider();
+
     Object.keys(WINNING_INFO).forEach((key) => {
-      const { criteria, prizeMoney } = WINNING_INFO[key];
-      Console.print(`${criteria} (${prizeMoney}원) - ${cntRank[key]}개`);
+      const { rank, criteria, prizeMoney } = WINNING_INFO[key];
+      const prizeMoneyWithComma = prizeMoney.toLocaleString('ko-kr');
+      const cnt = cntRank[key];
+      Console.print(
+        `${rank}등\t${cnt}개 당첨\t${criteria} (${prizeMoneyWithComma}원)`,
+      );
     });
+    OutputView.#printDivider();
+  }
+
+  static #printDivider() {
+    Console.print(COMMON.dash.repeat(50));
   }
 
   static printEarningRate(earningRate) {
