@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { Message } from "../model/Constant.js";
+import { Message } from "../static/Constant.js";
 const OutputView = {
   printErrorMessage(error) {
     Console.print(error);
@@ -7,8 +7,10 @@ const OutputView = {
   printLottoTicketCount(count) {
     Console.print(`\n${count}${Message.LOTTO_TICKET}`);
   },
-  printLottoNumbers(numbers) {
-    Console.print("[" + numbers.join(", ") + "]");
+  printLottoTickets(numbers) {
+    for (let i = 0; i < numbers.length; i++) {
+      Console.print("[" + numbers[i].join(", ") + "]");
+    }
   },
 };
 

@@ -1,4 +1,4 @@
-import { ErrorMessage } from "../model/Constant.js";
+import { ErrorMessage } from "../static/Constant.js";
 
 const InputValidator = {
   purchaseAmount(input) {
@@ -10,6 +10,9 @@ const InputValidator = {
     }
   },
   winningNumber(input) {
+    if (input.length !== 6) {
+      throw new Error(ErrorMessage.LOTTO_LENGTH_ERROR);
+    }
     input.forEach((number) => {
       if (!Number.isInteger(+number) || number.trim() === "") {
         throw new Error(ErrorMessage.USER_NUMBER_ERROR);

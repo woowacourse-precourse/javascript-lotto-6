@@ -12,7 +12,6 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
   getTicketNumbers() {
     return this.#numbers.sort((a, b) => a - b);
   }

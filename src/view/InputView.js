@@ -1,13 +1,15 @@
 import { Console } from "@woowacourse/mission-utils";
-import { Message } from "../model/Constant.js";
+import { Message } from "../static/Constant.js";
 
 const InputView = {
-  async purchaseAmount(callback) {
+  async purchaseAmount() {
     const input = await Console.readLineAsync(Message.LOTTO_PURCHASE_AMOUNT);
     return input;
   },
   async lottoWinningNumber() {
-    const input = await Console.readLineAsync(Message.LOTTO_WINNING_NUMBER);
+    const input = await Console.readLineAsync(
+      Message.LOTTO_WINNING_NUMBER
+    ).then((input) => input.split(","));
     return input;
   },
   async lottoBonusNumber() {
