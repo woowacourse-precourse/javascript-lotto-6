@@ -15,8 +15,7 @@ class LottoPrizeManager {
   }
 
   #validateWinningNumber(string) {
-    const regex = /^[0-9,]+$/;
-    if (!regex.test(string)) {
+    if (!Validator.isStringOnlyDigitsAndComma(string)) {
       throw new Error(PRIZE.ERROR.WINNING_NUMBER_STRING_TYPE);
     }
 
