@@ -72,13 +72,8 @@ class LottoGame {
 
 
   generateLottoNumbers() {
-    let lotto = [];
-    while (lotto.length < 6) {
-      let number = Random.pickNumberInRange(1, 45);
-      if (!lotto.includes(number)) {
-        lotto.push(number);
-      }
-    }
+    let lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+
     const lottoTicket = new Lotto(lotto);
     return lottoTicket;
   }
@@ -90,7 +85,7 @@ class LottoGame {
     }
   }
 
-  sortLottoTickets(lottoTickets, count) {
+  sortLottoTickets(lottoTickets) {
     const sortedLottoTickets = [];
     [...lottoTickets].forEach(lottoTicket => {
       sortedLottoTickets.push(lottoTicket.getSortNumbers());
@@ -100,10 +95,11 @@ class LottoGame {
 
   printLottoTickets(lottoTickets, count) {
     Console.print(`${count}개를 구매했습니다.`);
-    lottoTickets.forEach(element => {
-      Console.print(element);
+    lottoTickets.forEach(lottoTicket => {
+      Console.print(`[${lottoTicket.join(', ')}]`);
     });
   }
+
 
   async inputWinningNumbers() {
     while (true) {
@@ -185,14 +181,11 @@ class LottoGame {
     let result = [...winningResult];
     if (matchingCount === 6) {
       result[0] += 1;
-    }
-    if (matchingCount === 5) {
+    } else if (matchingCount === 5) {
       result[1 + bonus] += 1
-    }
-    if (matchingCount === 4) {
+    } else if (matchingCount === 4) {
       result[3] += 1;
-    }
-    if (matchingCount === 3) {
+    } else if (matchingCount === 3) {
       result[4] += 1;
     }
     return result;
@@ -210,19 +203,19 @@ class LottoGame {
     reversedWinningResult.forEach((result, index) => {
       let bonusText = '';
       if (index === 3) {
-        bonusText = ' 보너스 볼 일치';
+        bonusText = ', 보너스 볼 일치';
       }
-      Console.print(`${matchCountList[index]}개 일치,${bonusText} (${prizeMoney[index]}원) -${result}개`)
+      Console.print(`${matchCountList[index]}개 일치${bonusText} (${prizeMoney[index]}원) - ${result}개`)
     });
   }
+
 
   calculateProfitRate(winningResult, purchaseAmount) {
     const prizeMoney = [2000000000, 30000000, 1500000, 50000, 5000, 0];
 
     const totalWinnings = winningResult.reduce((sum, count, index) => sum + prizeMoney[index] * count, 0);
 
-    const profit = totalWinnings - purchaseAmount;
-    const profitRate = ((profit / purchaseAmount) * 100).toFixed(1);
+    const profitRate = ((totalWinnings / purchaseAmount) * 100).toFixed(1);
 
     return profitRate;
   }
