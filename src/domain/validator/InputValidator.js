@@ -2,7 +2,11 @@ import ErrorMessage from '../errors/ErrorMessage.js';
 import ERROR from '../../constants/error.js';
 import NUMBER from '../../constants/number.js';
 
-function validateNoDuplication() {}
+function validateNoDuplication(input) {
+  if (input.length !== new Set(inpuit).size) {
+    throw new ErrorMessage(ERROR.lotto.duplication);
+  }
+}
 
 function validateNoIncludeBlank() {}
 
