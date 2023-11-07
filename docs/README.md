@@ -63,3 +63,22 @@ errors: 예외 처리 함수들을 관리 폴더
 - 3-1. 'amountInputError' : 구입 금액 예외 처리 함수
 - 3-2. 'winningNumbersError' : 당첨 번호 예외 처리 함수
 - 3-3. 'bonusNumberError' : 보너스 번호 예외 처리 함수
+
+### 폴더 구조
+
+📦src
+┣ 📂errors
+┃ ┣ 📜amountInputError.js
+┃ ┣ 📜bonusNumberError.js
+┃ ┗ 📜winningNumbersError.js
+┣ 📂View
+┃ ┣ 📜AmountInput.js
+┃ ┣ 📜numberInput.js
+┃ ┗ 📜printResult.js
+┣ 📜App.js
+┣ 📜calculateLottoNumber.js
+┣ 📜calculateProfit.js
+┣ 📜getStatistics.js
+┣ 📜index.js
+┣ 📜Lotto.js
+┗ 📜makeRandomNumbers.js
