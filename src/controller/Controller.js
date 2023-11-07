@@ -17,5 +17,7 @@ export default class Controller {
     const lottos = await this.#lottoGame.buyLottos(attempts);
 
     this.#view.printLottos(lottos);
+
+    const win = await this.#view.inputRepeater(this.#view.getWinInput);
   }
 }

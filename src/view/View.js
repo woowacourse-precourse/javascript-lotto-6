@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils'
-import { GET_MONEY } from '../constants/Text.js';
-import { checkMoneyInput } from '../utils/LottoUtils.js';
+import { GET_MONEY, GET_WIN, GET_BONUS } from '../constants/Text.js';
+import { checkMoneyInput, checkWinInput, checkBonusInput } from '../utils/LottoUtils.js';
 
 export default class View {
   constructor() {
@@ -31,6 +31,12 @@ export default class View {
   }
 
   async getWinInput() {
+    const winString = await MissionUtils.Console.readLineAsync(GET_WIN);
+    checkWinInput(winString);
+    const winArray = winString.split(',');
+
+    return winArray;
+  }
   }
 
   printLottos(lottos) {
