@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import Format from './Format.js';
+import { LOTTO_STATISTICS, LOTTO_STATISTICS_TITLE } from '../constants/number.js';
 
 class Message {
   /**
@@ -15,6 +16,14 @@ class Message {
    */
   static array(arr) {
     Console.print(Format.array(arr));
+  }
+
+  static showStatistics(rankCount, profitRate) {
+    Console.print(LOTTO_STATISTICS_TITLE);
+    LOTTO_STATISTICS.forEach((statistics, index) => {
+      Console.print(statistics(rankCount[index]));
+    });
+    Console.print(`총 수익률은 ${Format.rate(profitRate)}입니다.`);
   }
 }
 

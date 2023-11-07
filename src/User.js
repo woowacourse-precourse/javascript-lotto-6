@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import DongHang from './DongHang.js';
 import ERROR_MESSAGE from './constants/error.js';
 import { LOTTO_PRICE } from './constants/number.js';
@@ -6,8 +5,6 @@ import CustomError from './customs/CustomError.js';
 import Input from './utils/Input.js';
 import PROMPT from './constants/prompt.js';
 import NumberValidator from './validators/NumberValidator.js';
-// eslint-disable-next-line no-unused-vars
-import WinningNumbers from './WinningNumbers.js';
 
 /**
  * @classdesc 복권 구매자
@@ -19,20 +16,7 @@ class User {
    */
   #lottos;
 
-  /**
-   * 등수
-   * @type {number[]}
-   * @example [0, 0, 0, 0, 0] // 1등, 2등, 3등, 4등, 5등
-   */
-  #results = [0, 0, 0, 0, 0];
-
-  #statisticsMap = [
-    (count) => `3개 일치 (5,000원) - ${count}개`,
-    (count) => `4개 일치 (50,000원) - ${count}개`,
-    (count) => `5개 일치 (1,500,000원) - ${count}개`,
-    (count) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개`,
-    (count) => `6개 일치 (2,000,000,000원) - ${count}개`,
-  ];
+  #results = [];
 
   /**
    * 로또를 구매하는 메서드
@@ -48,20 +32,20 @@ class User {
   }
 
   /**
+   * 로또를 확인하는 메서드
+   *
+   * 로또 결과 객체 배열을 반환한다.
    * @param {WinningNumbers} winningNumbers
+   * @returns {LottoResult[]}
    */
   checkAll(winningNumbers) {
     this.#lottos.forEach((lotto) => {
       const result = winningNumbers.check(lotto);
-      const rank = result.getRank();
 
-      if (rank > -1) this.#results[rank] += 1;
+      this.#results.push(result);
     });
-  }
 
-  printStatistics() {
-    const stats = this.#statisticsMap.map((formatter, index) => formatter(this.#results[index]));
-    stats.forEach((stat) => Console.print(stat));
+    return this.#results;
   }
 }
 

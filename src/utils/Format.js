@@ -28,12 +28,12 @@ class Format {
   }
 
   /**
-   * 일치 개수 포맷
-   * @param {number} matches
+   * 수익률 포맷
+   * @param {number} rate
    * @returns {string}
    */
-  static lottoMatches(matches) {
-    return `${Format.count(matches)} 일치`;
+  static rate(rate) {
+    return `${rate.toFixed(1)}%`;
   }
 }
 
