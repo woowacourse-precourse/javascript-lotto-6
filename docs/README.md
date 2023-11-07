@@ -376,6 +376,20 @@ test('5등,보너스 당첨 테스트', () => {
 
 
 
+### :heavy_exclamation_mark: **예제 테스트 결과 :** **예기치 못한 오류로 인하여 실행에 실패하였습니다.**
+
+요구 사항 중 
+
+`도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 제외한다.`
+
+에 대한 요구사항을 확인했다. 기존 폴더구조가 domain으로 묶여있지 않아 발생한 에러라고 생각을 하였고,
+
+폴더 위치를 바꿀 수 없는 App.js, Index,js, Lotto.js 외의 파일들을 domain 폴더 안에 묶어줌으로써,
+
+제출을 완료 할 수 있었다.
+
+
+
 ## :rocket: 실행결과
 
 ![RESULT](./RESULT.png)
