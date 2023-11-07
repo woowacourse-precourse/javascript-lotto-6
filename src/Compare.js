@@ -1,24 +1,18 @@
-import { Console, Random } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
-import { InputValidator } from "./utils/InputValidator.js";
-import Output from "./Output.js";
-import Input from "./Input.js";
-
 class Compare {
-  #totalLotto = [];
+  #eachLotto = [];
   #winLotto = [];
   #bonus = 0;
   #sameNum = 0;
   #sameBonus = false;
 
-  constructor(total, win, bonus) {
-    this.#totalLotto = total;
+  constructor(each, win, bonus) {
+    this.#eachLotto = each;
     this.#winLotto = win;
     this.#bonus = bonus;
   }
 
   compareLotto() {
-    this.#totalLotto.forEach((num) => {
+    this.#eachLotto.forEach((num) => {
       this.conpareNum(num);
     });
   }

@@ -1,5 +1,3 @@
-import { Console, Random } from "@woowacourse/mission-utils";
-
 export const InputValidator = {
   validMoney(money) {
     if (!money) return false;
@@ -10,7 +8,6 @@ export const InputValidator = {
   validWinningNumber(num) {
     if (!num) return false;
     if (!num.includes(",")) return false;
-    //if (isNaN(num)) return false;
     return true;
   },
   validBonusNumber(num) {

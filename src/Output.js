@@ -1,8 +1,6 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 
 class Output {
-  #lotto = [];
-  //compareResult = {};
   #maxNum = 0;
   #isBonus = false;
 
@@ -13,21 +11,21 @@ class Output {
   #num6 = 0;
 
   #winMoney = 0;
-  #winRate = 0;
 
-  async createLotto() {
-    this.#lotto = [];
-    while (this.#lotto.length < 6) {
-      const random = Random.pickNumberInRange(1, 45);
-      if (!this.#lotto.includes(random)) {
-        this.#lotto.push(random);
-      }
+  createLotto(trialNum, totalLotto) {
+    for (let i = 0; i < trialNum; i++) {
+      const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+      totalLotto.push(lotto);
     }
-    this.#lotto.sort((a, b) => a - b);
-    return this.#lotto;
+    for (let lotto of totalLotto) {
+      const sortedLotto = lotto.sort((a, b) => a - b);
+      Console.print(`[${sortedLotto.join(", ")}]`);
+    }
+
+    return totalLotto;
   }
 
-  calcLottoResult(compareResult, inputMoney) {
+  calcLottoResult(compareResult) {
     compareResult.forEach((lotto) => {
       if (lotto.sameNum > this.#maxNum) {
         this.#maxNum = lotto.sameNum;
@@ -38,13 +36,9 @@ class Output {
         this.#isBonus = true;
       }
     });
-    Console.print(this.#maxNum);
-    Console.print(this.#isBonus);
-
-    this.printResult(inputMoney);
   }
 
-  printResult(inputMoney) {
+  printResult() {
     if (this.#maxNum == 3) {
       this.#num3 = 1;
       this.#winMoney = 5000;
@@ -65,19 +59,15 @@ class Output {
       this.#num6 = 1;
       this.#winMoney = 2000000000;
     }
-    Console.print("당첨 통계");
-    Console.print("---");
-    Console.print(`3개 일치 (5,000원) - ${this.#num3}개`);
-    Console.print(`4개 일치 (50,000원) - ${this.#num4}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${this.#num5notBouns}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#num5Bouns}개`
-    );
-    Console.print(`6개 일치 (2,000,000,000원) - ${this.#num6}개`);
 
-    const rate = (this.#winMoney / inputMoney) * 100;
-    this.#winRate = Math.round(rate * 100) / 100;
-    Console.print(`총 수익률은 ${this.#winRate}%입니다.`);
+    return {
+      num3: this.#num3,
+      num4: this.#num4,
+      num5notBouns: this.#num5notBouns,
+      num5Bouns: this.#num5Bouns,
+      num6: this.#num6,
+      winMoney: this.#winMoney,
+    };
   }
 }
 

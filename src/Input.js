@@ -1,11 +1,9 @@
-import { Console, Random } from "@woowacourse/mission-utils";
 import { InputValidator } from "./utils/InputValidator.js";
 import Lotto from "./Lotto.js";
 
 class Input {
   #money = 0;
   #winningLotto = [];
-  #bonus = 0;
 
   constructor(money) {
     this.#money = money;
@@ -13,7 +11,7 @@ class Input {
 
   inputMoney() {
     if (!InputValidator.validMoney(this.#money)) {
-      throw new Error("[ERROR] 금액 오류"); // 다시 입력받아야 함
+      throw new Error("[ERROR] 금액 오류입니다. 다시 입력해 주세요.");
     } else {
       return Math.floor(this.#money / 1000);
     }
@@ -21,7 +19,7 @@ class Input {
 
   inputWin() {
     if (!InputValidator.validWinningNumber(this.#money)) {
-      throw new Error("[ERROR]번호 오류");
+      throw new Error("[ERROR] 번호 오류입니다. 다시 입력해 주세요.");
     } else {
       this.#winningLotto = this.#money.split(",");
       this.#winningLotto = this.#winningLotto.map(Number);
@@ -32,7 +30,7 @@ class Input {
 
   inputBonus() {
     if (!InputValidator.validBonusNumber(this.#money)) {
-      throw new Error("[ERROR]번호 오류");
+      throw new Error("[ERROR] 번호 오류입니다. 다시 입력해 주세요.");
     } else {
       return this.#money;
     }
