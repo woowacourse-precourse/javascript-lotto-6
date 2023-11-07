@@ -33,10 +33,13 @@ export class Calculator {
   }
 
   getWinningsResult(lottos) {
-    const lottoWinnings = this.#calculateLottoWinnings(lottos);
+    const lottoWinningsResult = this.#calculateLottoWinnings(lottos);
     const boughtAmount = lottos.length * LOTTO_RULE.PRICE;
-    const totalReturn = this.#calculateTotalReturn(lottoWinnings, boughtAmount);
-    return { lottoWinnings, totalReturn };
+    const totalReturn = this.#calculateTotalReturn(
+      lottoWinningsResult,
+      boughtAmount
+    );
+    return { lottoWinningsResult, totalReturn };
   }
 
   #formatWinningNumber(str) {
