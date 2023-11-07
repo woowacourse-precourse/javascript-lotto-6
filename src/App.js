@@ -13,6 +13,17 @@ const generateLottoNumbers = () => {
   return numbers.sort((a, b) => a - b);
 };
 
+// 5. 로또 번호 생성 후 Lotto 클래스에 전달
+const validateLottoNumber = () => {
+  let lottoNumbers = generateLottoNumbers();
+
+  try {
+    const lotto = new Lotto(lottoNumbers);
+    return lotto.getNumbers();
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 export default App;
 const app = new App();
 app.play();
