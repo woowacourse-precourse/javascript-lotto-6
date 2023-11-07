@@ -9,6 +9,14 @@ describe('InputViewValidator 테스트', () => {
       expect(() => InputViewValidator.isValidInput(input)).not.toThrow();
     });
 
+    it('공백 입력에 대해 CustomError를 던져야 한다', () => {
+      const input = '';
+      expect(() => InputViewValidator.isValidInput(input)).toThrow(CustomError);
+      expect(() => InputViewValidator.isValidInput(input)).toThrow(
+        ERROR.inputView.emptyInput,
+      );
+    });
+
     it('숫자가 아닌 입력에 대해 CustomError를 던져야 한다', () => {
       const input = 'NaN';
       expect(() => InputViewValidator.isValidInput(input)).toThrow(CustomError);
@@ -40,6 +48,13 @@ describe('InputViewValidator 테스트', () => {
       expect(() =>
         InputViewValidator.isValidMultipleInputs(input),
       ).not.toThrow();
+    });
+
+    it('배열 내에 공백이 포함된 경우 CustomError를 던져야 한다', () => {
+      const input = '1,2,,3';
+      expect(() => InputViewValidator.isValidMultipleInputs(input)).toThrow(
+        CustomError,
+      );
     });
 
     it('배열 내에 숫자가 아닌 입력이 포함된 경우 CustomError를 던져야 한다', () => {
