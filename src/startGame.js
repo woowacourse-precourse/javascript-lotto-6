@@ -38,6 +38,8 @@ class StartGame {
     this.purchaseLottos();
 
     await this.inputWinningNumbers();
+
+    this.printProfits()
   }
 
   async getValidatedPurchaseInput() {

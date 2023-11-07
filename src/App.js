@@ -1,5 +1,13 @@
+import StartGame from './startGame.js';
+
 class App {
-  async play() {}
+  constructor() {
+    this.game = new StartGame();
+  }
+
+  async play() {
+    await this.game.runGame();
+  }
 }
 
 export default App;
