@@ -55,7 +55,7 @@ class App {
       this.makeWinningNumberArray(TMP_WINNING_NUMBER);
     } catch (e) {
       Console.print(e);
-      return this.getInputWinningNumber();
+      this.getInputWinningNumber();
     }
   }
 
@@ -107,7 +107,7 @@ class App {
       }
     } catch(e) {
       Console.print(e);
-      return this.makeLottoArray();
+      this.makeLottoArray();
     }
     
   }
