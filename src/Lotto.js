@@ -22,6 +22,38 @@ class Lotto {
   getLotto(){
     return this.#numbers;
   }
+
+  checkLottoWinning(winningNumbers, bonusNumber){
+    let count = 0, bonus = 0;
+    for(let i = 0; i < 6; i++){
+      if(winningNumbers.includes(this.#numbers[i])){
+        count++;
+        continue;
+      }
+      if(this.#numbers[i] === bonusNumber){
+        bonus++;
+      }
+    }
+    return this.getWinningResult(count, bonus);
+  }
+  
+  getWinningResult(count, bonus){
+    if(count === 3){
+      return 0;
+    }
+    if(count === 4){
+      return 1;
+    }
+    if(count === 5 && !bonus){
+      return 2;
+    }
+    if(count === 5 && bonus){
+      return 3;
+    }
+    if(count === 6){
+      return 4;
+    }
+  }
 }
 
 export default Lotto;

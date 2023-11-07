@@ -3,13 +3,13 @@ const MESSAGE = {
   winningNumbers: "\n당첨 번호를 입력해 주세요.\n",
   bonusNumber: "\n보너스 번호를 입력해 주세요.\n",
   numberOfLottos: (number) => `\n${number}개를 구매했습니다.`,
-  result: "\n당첨 통계\n---\n",
-  threeSame: (number) => `3개 일치 (5,000원) - ${number}개\n`,
-  fourSame: (number) => `4개 일치 (50,000원) - ${number}개\n`,
-  fiveSame: (number) => `5개 일치 (1,500,000원) - ${number}개\n`,
-  fiveAndBonusSame : (number) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${number}개\n`,
-  sixSame : (number) => `6개 일치 (2,000,000,000원) - ${number}개\n`,
-  earningRate: (number) => `총 수익률은 ${number}%입니다.\n`
+  result: "\n당첨 통계\n---",
+  threeSame: (number) => `3개 일치 (5,000원) - ${number}개`,
+  fourSame: (number) => `4개 일치 (50,000원) - ${number}개`,
+  fiveSame: (number) => `5개 일치 (1,500,000원) - ${number}개`,
+  fiveAndBonusSame : (number) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${number}개`,
+  sixSame : (number) => `6개 일치 (2,000,000,000원) - ${number}개`,
+  earningRate: (number) => `총 수익률은 ${number}%입니다.`
 };
 
 const ERROR_MESSAGE = {
