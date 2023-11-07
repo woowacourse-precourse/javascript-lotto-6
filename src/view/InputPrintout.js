@@ -32,7 +32,7 @@ const InputPrintout = {
 		while (!isVaildBonusNum(bonus)) {
 			bonus = await Console.readLineAsync(PRINT_INPUT.inputBonusNum);
 		}
-		return Number(bonus);
+		return bonus;
 	},
 };
 export default InputPrintout;
