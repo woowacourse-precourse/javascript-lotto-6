@@ -34,7 +34,6 @@ class LottoList {
     this.#list.forEach((item) => {
       MissionUtils.Console.print(item);
     });
-    MissionUtils.Console.print('\n');
   }
 
   getLottoList() {
