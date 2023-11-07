@@ -8,7 +8,7 @@ class Input {
       this.money = money;
     } catch (error) {
       printOutput(error.message);
-      money = await this.handleMoney();
+      await this.handleMoney();
     }
   }
 
@@ -38,7 +38,7 @@ class Input {
       this.lottoNumbers = lottoNumbers;
     } catch (error) {
       printOutput(error.message);
-      lottoNumbers = await this.handleLottoNumbers();
+      await this.handleLottoNumbers();
     }
   }
 
@@ -57,16 +57,20 @@ class Input {
       throw new Error("[ERROR] 중복된 숫자를 입력하셨습니다.");
     }
     numbers.forEach((number) => {
-      if (Number.isNaN(number)) {
-        throw new Error("[ERROR] 숫자만 입력해주세요.");
-      }
-      if (!number) {
-        throw new Error("[ERROR] 공백을 입력하셨습니다.");
-      }
-      if (number < 1 || number > 45) {
-        throw new Error("[ERROR] 숫자의 범위는 1~45 이어야 합니다.");
-      }
+      this.#validLottoNumber(number);
     });
+  }
+
+  #validLottoNumber(number) {
+    if (Number.isNaN(number)) {
+      throw new Error("[ERROR] 숫자만 입력해주세요.");
+    }
+    if (!number) {
+      throw new Error("[ERROR] 공백을 입력하셨습니다.");
+    }
+    if (number < 1 || number > 45) {
+      throw new Error("[ERROR] 숫자의 범위는 1~45 이어야 합니다.");
+    }
   }
 
   async handleBonusNumber() {
@@ -76,7 +80,7 @@ class Input {
       this.bonusNumber = bonusNumber;
     } catch (error) {
       printOutput(error.message);
-      bonusNumber = await this.handleBonusNumber();
+      await this.handleBonusNumber();
     }
   }
 

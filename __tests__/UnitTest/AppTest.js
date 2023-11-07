@@ -50,11 +50,11 @@ describe("App Unit Test", () => {
   test.each(CAL_TEST)(
     "당첨 내역 계산",
     (lottos, winNumbers, bonusNumber, expectedRsult) => {
-      const lottoRanks = app.calculLottoResult({
-        lottos,
-        winNumbers,
-        bonusNumber,
-      });
+      app.userInput.lottoNumbers = winNumbers;
+      app.userInput.bonusNumber = bonusNumber;
+      app.lottos = lottos;
+
+      const lottoRanks = app.calculLottoResult();
       expect(lottoRanks).toStrictEqual(expectedRsult);
     }
   );

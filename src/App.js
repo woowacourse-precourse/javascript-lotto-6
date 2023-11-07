@@ -9,15 +9,11 @@ class App {
 
   async play() {
     await this.userInput.handleMoney();
-    this.Lottos = this.getLottoWithMoney();
+    this.lottos = this.getLottoWithMoney();
     await this.userInput.handleLottoNumbers();
     await this.userInput.handleBonusNumber();
 
-    const LOTTO_RANKS = this.calculLottoResult({
-      lottos: this.Lottos,
-      winNumbers: this.userInput.lottoNumbers,
-      bonusNumber: this.userInput.bonusNumber,
-    });
+    const LOTTO_RANKS = this.calculLottoResult();
     this.printLottoResult(LOTTO_RANKS);
     this.printRateOfIncome(LOTTO_RANKS);
   }
@@ -52,13 +48,18 @@ class App {
     printOutput(`[${lottoNumbers.join(", ")}]`);
   }
 
-  calculLottoResult({ lottos, winNumbers, bonusNumber }) {
+  calculLottoResult() {
     const RANKS_NUMBER = 5;
     const lottoRanks = Array.from({ length: RANKS_NUMBER + 1 }, () => 0);
-    lottos.forEach((lotto) => {
-      const RANK = lotto.getLottoResult({ winNumbers, bonusNumber });
+
+    this.lottos.forEach((lotto) => {
+      const RANK = lotto.getLottoResult({
+        winNumbers: this.userInput.lottoNumbers,
+        bonusNumber: this.userInput.bonusNumber,
+      });
       if (RANK <= RANKS_NUMBER) lottoRanks[RANK] += 1;
     });
+
     return lottoRanks;
   }
 
