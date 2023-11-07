@@ -7,8 +7,6 @@ import { GAME_RULE } from '../constants/gameRule.js';
 
 class LottoGameController {
   #moneyInstance;
-  #winningNumbers;
-  #bonusNumber;
 
   constructor({
     lottoResult,
@@ -65,7 +63,7 @@ class LottoGameController {
   async setWinningNumbers() {
     while (true) {
       try {
-        this.#winningNumbers = await this.getWinningNumbers();
+        this.lottoResult.setWinningNumbers(await this.getWinningNumbers());
         break;
       } catch (error) {
         this.outputView.print(error);
@@ -76,7 +74,7 @@ class LottoGameController {
   async setBonusNumber() {
     while (true) {
       try {
-        this.#bonusNumber = await this.getBonusNumber();
+        this.lottoResult.setBonusNumber(await this.getBonusNumber());
         break;
       } catch (error) {
         this.outputView.print(error);
@@ -152,7 +150,10 @@ class LottoGameController {
       MESSAGE.BONUS_NUMBER,
     );
     InputValidator.validateBonusNumber(bonusNumber);
-    InputValidator.validateLottoNumbers(bonusNumber, [...this.#winningNumbers]);
+    InputValidator.validateLottoNumbers(
+      bonusNumber,
+      this.lottoResult.getWinningNumbers(),
+    );
     return Number(bonusNumber);
   }
 
@@ -162,13 +163,15 @@ class LottoGameController {
 
   getWinningNumberMatchCounts() {
     const winningNumberMatchCounts =
-      this.lottoTickets.getWinningNumberMatchCount([...this.#winningNumbers]);
+      this.lottoTickets.getWinningNumberMatchCount(
+        this.lottoResult.getWinningNumbers(),
+      );
     return winningNumberMatchCounts;
   }
 
   hasBonusNumberMatches() {
     const hasBonusMatch = this.lottoTickets.includesBonusNumber(
-      this.#bonusNumber,
+      this.lottoResult.getBonusNumber(),
     );
     return hasBonusMatch;
   }

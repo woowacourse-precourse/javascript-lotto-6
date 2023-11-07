@@ -2,6 +2,8 @@ import { GAME_REWARD } from '../constants/gameRule.js';
 import calcProfit from '../utils/calcProfit.js';
 
 class LottoResult {
+  #winningNumbers;
+  #bonusNumber;
   #matchCount = {
     three: 0,
     four: 0,
@@ -10,6 +12,22 @@ class LottoResult {
     bonus: 0,
   };
   #prizeMoney = 0;
+
+  setWinningNumbers(winningNumbers) {
+    this.#winningNumbers = winningNumbers;
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = bonusNumber;
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
+
+  getWinningNumbers() {
+    return [...this.#winningNumbers];
+  }
 
   setMatchCount(matchResults) {
     matchResults.forEach(({ count, hasBonusNumber }) => {
