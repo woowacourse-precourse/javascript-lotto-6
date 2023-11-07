@@ -11,8 +11,14 @@ export class WinNumber {
                 winnum = [];
                 continue;
             }
-            if(winnum.length !== 6 ){
+            else if(winnum.length !== 6 ){
                 MissionUtils.Console.print("[ERROR] 입력 값은 6개의 숫자입니다.");
+                winnum = [];
+                continue;
+            }
+            const deferentNum = new Set(winnum);
+            if(deferentNum.size !== winnum.length){
+                MissionUtils.Console.print("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
                 winnum = [];
             }
         }
