@@ -9,7 +9,11 @@ import BonusNumber from './BonusNumber.js';
 
 class App {
   async play() {
-    const lottos = await this.#buyLottos();
+    const purchaseAmount = await this.#inputPurchaseAmount();
+    const purchaseCount =
+      purchaseAmount.getAmount() / CONSTANTS.NUMBERS.LOTTO_PRICE;
+
+    const lottos = this.#buyLottos(purchaseCount);
 
     const winningNumbers = await this.#inputWinningNumbers();
     const bonusNumber = await this.#inputBonusNumber(
@@ -17,15 +21,15 @@ class App {
     );
 
     const result = this.#calculateResult(lottos, winningNumbers, bonusNumber);
+    const rateOfReturn = this.#calculateRate(result, purchaseAmount);
 
-    this.#printResult(result);
+    this.#printResult(result, rateOfReturn);
   }
 
-  async #buyLottos() {
-    const purchaseAmount = await this.#inputPurchaseAmount();
-    const purchaseCount =
-      purchaseAmount.getAmount() / CONSTANTS.NUMBERS.LOTTO_PRICE;
-
+  /**
+   * @param {number} purchaseCount
+   */
+  #buyLottos(purchaseCount) {
     const lottos = [];
 
     for (let i = 0; i < purchaseCount; i++) {
@@ -34,7 +38,6 @@ class App {
 
     Console.print(`\n${purchaseCount}개를 구매했습니다.`);
     lottos.forEach(lotto => Console.print(lotto.toString()));
-    Console.print('');
 
     return lottos;
   }
@@ -67,25 +70,79 @@ class App {
 
   /**
    * @param {number[]} result
+   * @param {PurchaseAmount} purchaseAmount
    */
-  #printResult(result) {
+  #calculateRate(result, purchaseAmount) {
+    const sum = this.#sumOfRewards(result);
+    const average = sum / purchaseAmount.getAmount();
+
+    return average;
+  }
+
+  /**
+   * @param {number[]} result
+   */
+  #sumOfRewards(result) {
+    const numbers = CONSTANTS.NUMBERS;
+    const rewards = [
+      numbers.FIRST_REWARD,
+      numbers.SECOND_REWARD,
+      numbers.THIRD_REWARD,
+      numbers.FOURTH_REWARD,
+      numbers.FIFTH_REWARD,
+    ];
+
+    let sum = 0;
+
+    for (let i = 1; i < result.length; i++) {
+      sum += rewards[i - 1] * result[i];
+    }
+
+    return sum;
+  }
+
+  /**
+   * @param {number[]} result
+   * @param {number} rateOfReturn
+   */
+  #printResult(result, rateOfReturn) {
     this.#printStatistics(result);
+
+    const rate = (rateOfReturn * 100).toFixed(2);
+
+    Console.print(`총 수익률은 ${Number.parseFloat(rate)}%입니다.`);
   }
 
   /**
    * @param {number[]} result
    */
   #printStatistics(result) {
+    const rewards = this.#getRewardNums().map(n => n.toLocaleString());
+
+    Console.print(CONSTANTS.MESSAGES.STATISTIC_MESSAGE);
+    Console.print(`3개 일치 (${rewards[5]}원) - ${result[5]}개`);
+    Console.print(`4개 일치 (${rewards[4]}원) - ${result[4]}개`);
+    Console.print(`5개 일치 (${rewards[3]}원) - ${result[3]}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${rewards[2]}원) - ${result[2]}개`,
+    );
+    Console.print(`6개 일치 (${rewards[1]}원) - ${result[1]}개`);
+  }
+
+  /**
+   * @returns {number[]}
+   */
+  #getRewardNums() {
     const numbers = CONSTANTS.NUMBERS;
 
-    Console.print('당첨 통계\n---');
-    Console.print(`3개 일치 (${numbers.FIFTH_REWARD}원) - ${result[5]}개`);
-    Console.print(`4개 일치 (${numbers.FOURTH_REWARD}원) - ${result[4]}개`);
-    Console.print(`5개 일치 (${numbers.THIRD_REWARD}) - ${result[3]}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (${numbers.SECOND_REWARD}) - ${result[2]}개`,
-    );
-    Console.print(`6개 일치 (${numbers.FIRST_REWARD}) - ${result[1]}개`);
+    return [
+      0,
+      numbers.FIRST_REWARD,
+      numbers.SECOND_REWARD,
+      numbers.THIRD_REWARD,
+      numbers.FOURTH_REWARD,
+      numbers.FIFTH_REWARD,
+    ];
   }
 
   async #inputPurchaseAmount() {
