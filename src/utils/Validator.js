@@ -36,14 +36,18 @@ const lottoValidators = {
 const lottoResultValidators = {
   validateBonusNumDuplicate(bonusNum, winningNum) {
     winningNum.map((item, idx) => {
-      if (item === bonusNum) {
+      if (item === parseInt(bonusNum, 10)) {
         throw new Error('[ERROR] 당첨 번호 중 중복된 번호가 있습니다.');
       }
     });
   },
   validateBonusNumRange(bonusNum) {
-    if (bonusNum < 1 || bonusNum > 45) {
-      throw new Error('[ERROR] 로또 번호는 1보다 작거나 45보다 크면 안됩니다.');
+    console.log(parseInt(bonusNum, 10), typeof parseInt(bonusNum, 10));
+    if (parseInt(bonusNum, 10) < 1) {
+      throw new Error('[ERROR] 로또 번호는 1보다 작으면 안됩니다.');
+    }
+    if (parseInt(bonusNum, 10) > 45) {
+      throw new Error('[ERROR] 로또 번호는 45보다 크면 안됩니다.');
     }
   },
   validateBonusNumType(bonusNum) {
@@ -53,12 +57,12 @@ const lottoResultValidators = {
     }
   },
   validateBonusNumLength(bonusNum) {
-    console.log(bonusNum);
     const bonusNumList = bonusNum.split(',');
 
     if (bonusNumList.length !== 1) {
       throw new Error('[ERROR] 보너스 번호는 한 숫자만 올 수 있습니다.');
     }
+    return bonusNum;
   },
 };
 
@@ -66,12 +70,13 @@ const makeLottoValidators = {
   validateAmountType(amount) {
     const checkStyle = /\D/;
     if (checkStyle.test(amount)) {
-      Console.print(CONSTANT.error.invalidAmountType);
+      return Console.print(CONSTANT.error.invalidAmountType);
     }
   },
   validateAmountUnit(amount) {
-    if (amount % CONSTANT.game.unit !== 0) {
-      Console.print(CONSTANT.error.invalidAmountUnit);
+    const checkStyle = /\D/;
+    if (!checkStyle.test(amount) && amount % CONSTANT.game.unit !== 0) {
+      return Console.print(CONSTANT.error.invalidAmountUnit);
     }
   },
 };

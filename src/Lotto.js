@@ -90,17 +90,20 @@ class LottoResult extends Lotto {
     };
   }
 
-  #countMatchingNumbers(currentLotto) {
+  countMatchingNumbers(currentLotto) {
     let count = 0;
     currentLotto.forEach((number) => {
       if (this.winningNum.includes(number)) {
+        count += 1;
+      }
+      if (this.#bonusNum === number) {
         count += 1;
       }
     });
     return count;
   }
 
-  #updateMatchesObj(matchesObj, count, currentLotto) {
+  updateMatchesObj(matchesObj, count, currentLotto) {
     if (count === 3) {
       return (matchesObj.three += 1);
     }
@@ -110,7 +113,7 @@ class LottoResult extends Lotto {
     if (count === 5) {
       currentLotto.includes(this.#bonusNum)
         ? (matchesObj.bonus += 1)
-        : (matchesObj.bonus += 1);
+        : (matchesObj.five += 1);
     }
     if (count === 6) {
       return (matchesObj.six += 1);
@@ -120,13 +123,13 @@ class LottoResult extends Lotto {
   async #isMatch() {
     const matchesObj = this.#initializeMatchesObj();
     this.#myLottos.forEach((currentLotto) => {
-      const count = this.#countMatchingNumbers(currentLotto);
-      this.#updateMatchesObj(matchesObj, count, currentLotto);
+      const count = this.countMatchingNumbers(currentLotto);
+      this.updateMatchesObj(matchesObj, count, currentLotto);
     });
     return matchesObj;
   }
 
-  #calcRevenue(matchResult, matcheAmountObj) {
+  calcRevenue(matchResult, matcheAmountObj) {
     let revenue = 0;
     Object.entries(matchResult).forEach(([key, value]) => {
       if (value > 0) {
@@ -146,9 +149,9 @@ class LottoResult extends Lotto {
       bonus: CONSTANT.game.bonusMachesAmount,
       six: CONSTANT.game.sixMachesAmount,
     };
-    const revenue = this.#calcRevenue(matchResult, matcheAmountObj);
-
-    return revenue / (this.#amount / 100);
+    const revenue = this.calcRevenue(matchResult, matcheAmountObj);
+    const rateOfReturn = (revenue / (this.#amount / 100)).toFixed(1);
+    return rateOfReturn;
   }
 
   async printResult() {

@@ -30,6 +30,4 @@ class App {
   }
 }
 
-const aa = new App();
-aa.play();
 export default App;
