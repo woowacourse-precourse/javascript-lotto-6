@@ -33,7 +33,9 @@ class App {
 
   /** 구입 금액 입력값 검증 */
   purchaseValidation(input) {
-
+    if (isNaN(input) || input <= 0 || input % 1000 !== 0) {
+      throw new Error;
+    }
   }
 
   /** 로또 생성 */
