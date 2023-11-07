@@ -14,7 +14,7 @@ class InputValidator {
   };
 
   #validateFormat() {
-    if (!isCommaSeparated(this.input.split(UTILS.comma), LOTTO.winning_length)) {
+    if (!isCommaSeparated(this.input, LOTTO.winning_length)) {
       throwError(ERROR.winning_format);
     }
   };
