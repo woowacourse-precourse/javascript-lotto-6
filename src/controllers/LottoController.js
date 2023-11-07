@@ -1,9 +1,10 @@
+import { Console } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView';
-import InputController from './InputController';
 import NUMBER from '../constants/Number';
 import OutputView from '../views/OutputView';
 import MyLotto from '../models/MyLotto';
 import WinningLotto from '../models/WinningLotto';
+import ValidateController from './ValidateController';
 import LottoStatistics from '../models/LottoStatistics';
 
 class LottoController {
@@ -19,9 +20,22 @@ class LottoController {
     this.setMyLottoResult();
   }
 
+  async #getValidInput(getInputFunction, validateFunction) {
+    while (true) {
+      try {
+        const input = await getInputFunction();
+        const inputResult = await validateFunction(input);
+        return inputResult;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
   async setMyLotto() {
-    const purchaseLottoAmount = await InputController.loopGetInput(
-      InputView.getPurchaseLottoAmount(),
+    const purchaseLottoAmount = await this.#getValidInput(
+      InputView.getPurchaseLottoAmount,
+      ValidateController.validatePurchaseLottoAmount,
     );
     const lottoCount = await this.#calculateLottoCount(purchaseLottoAmount);
     this.#showLottoCount(lottoCount);
@@ -39,9 +53,14 @@ class LottoController {
   }
 
   async setWinningLotto() {
-    const winningNumbers = await InputController.loopGetInput(InputView.getWinningNumbers());
-    const bonusNumber = await InputController.loopGetInput(InputView.getBonusNumber());
-
+    const winningNumbers = await this.#getValidInput(
+      InputView.getWinningNumbers,
+      ValidateController.validateWinningNumbers,
+    );
+    const bonusNumber = await this.#getValidInput(
+      () => InputView.getBonusNumber(winningNumbers),
+      input => ValidateController.validateBonusNumber(winningNumbers, input),
+    );
     this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
   }
 
