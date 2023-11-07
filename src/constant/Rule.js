@@ -15,6 +15,8 @@ const BONUS_BALL_FORM = Object.freeze({
   length: 1,
 });
 
+const DELIMITER = ',';
+
 const WINNINGS = Object.freeze({
   three: '5,000',
   four: '50,000',
@@ -36,12 +38,13 @@ const FIVE_NO_BONUS = 'fiveNoBonus';
 const RANK = ['three', 'four', FIVE_NO_BONUS, FIVE_AND_BONUS, 'six'];
 
 export {
-  NUMBER_RANGE,
-  LOTTO_FORM,
   BONUS_BALL_FORM,
-  WINNINGS,
-  WINNINGS_MONEY,
+  DELIMITER,
   FIVE_AND_BONUS,
   FIVE_NO_BONUS,
+  NUMBER_RANGE,
+  LOTTO_FORM,
   RANK,
+  WINNINGS,
+  WINNINGS_MONEY,
 };

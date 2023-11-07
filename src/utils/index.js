@@ -27,7 +27,7 @@ import { sortNumbers } from './Sort';
 
 import { getWinningResult } from './WinningResult';
 
-import { validateNumberRange, hasNoComma } from './Validate';
+import { validateNumberRange, hasNoDelimiter } from './Validate';
 
 export {
   changeArrayToStringMessage,
@@ -37,7 +37,7 @@ export {
   getLottoRandomNumbers,
   getRandomNumbers,
   getWinningResult,
-  hasNoComma,
+  hasNoDelimiter,
   readBonusNumber,
   readInput,
   readPayment,

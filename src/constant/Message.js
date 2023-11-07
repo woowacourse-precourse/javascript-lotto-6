@@ -1,9 +1,15 @@
-import { BONUS_BALL_FORM, LOTTO_FORM, NUMBER_RANGE, WINNINGS } from './Rule';
+import {
+  BONUS_BALL_FORM,
+  DELIMITER,
+  LOTTO_FORM,
+  NUMBER_RANGE,
+  WINNINGS,
+} from './Rule';
 
 const MESSAGE = Object.freeze({
   paymentQuery: `구입금액을 입력해 주세요.(${LOTTO_FORM.price}원 이상, ${LOTTO_FORM.price}원 단위의 숫자로 입력해주세요. 예시:1000, 2000)`,
   numberOfTickets: '개를 구매했습니다.',
-  winningNumbersQuery: `당첨 번호를 입력해 주세요.(당첨 번호는 ${LOTTO_FORM.range.min}~${LOTTO_FORM.range.max}까지의 숫자 6자리로 이루어지며 ","을 사용해 숫자를 구별해주세요. 예시:1,2,3,4,5,6)`,
+  winningNumbersQuery: `당첨 번호를 입력해 주세요.(당첨 번호는 ${LOTTO_FORM.range.min}~${LOTTO_FORM.range.max}까지의 숫자 ${LOTTO_FORM.length}자리로 이루어지며 "${DELIMITER}"을 사용해 숫자를 구별해주세요. 예시:1,2,3,4,5,6)`,
   bonusBallNumberQuery: `보너스 번호를 입력해 주세요.(보너스 번호는 ${LOTTO_FORM.range.min}~${LOTTO_FORM.range.max}의 숫자 중 이전에 입력한 당첨 번호와 중복되지 않는 하나의 숫자만 가능해요.)`,
 });
 
@@ -31,8 +37,7 @@ const ERROR_MESSAGE = Object.freeze({
   isNotNumberArray: '숫자 배열이 아닙니다.',
   isNotNumber: '잘못된 형식입니다. 숫자를 사용해주세요.',
   range: `사용 가능한 숫자 범위는 ${NUMBER_RANGE.min}부터 ${NUMBER_RANGE.max}까지입니다.`,
-  noReset:
-    '쉼표가 존재하지 않습니다. 숫자 사이에 쉼표를 사용해 숫자를 구별해주세요.',
+  noDelimiter: `"${DELIMITER}"가 존재하지 않습니다. 숫자 사이에 "${DELIMITER}"를 사용해 숫자를 구별해주세요.`,
   sixNumbers: `로또 번호는 ${LOTTO_FORM.length}개여야 합니다.`,
   oneNumber: `보너스 번호는 ${BONUS_BALL_FORM.length}개여야 합니다.`,
   duplicateNumber:

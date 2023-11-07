@@ -1,6 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { MESSAGE } from '../constant';
-import { hasNoComma, printMessage, throwError } from '.';
+import { hasNoDelimiter, printMessage, throwError } from '.';
+import { DELIMITER } from '../constant/Rule';
 
 const readInput = async (query) => {
   try {
@@ -16,8 +17,8 @@ const readInput = async (query) => {
 const readWinningNumbers = async () => {
   try {
     const value = await readInput(MESSAGE.winningNumbersQuery);
-    hasNoComma(value);
-    return value.split(',').map((v) => Number(v));
+    hasNoDelimiter(value);
+    return value.split(DELIMITER).map((v) => Number(v));
   } catch (error) {
     throwError(error);
   }

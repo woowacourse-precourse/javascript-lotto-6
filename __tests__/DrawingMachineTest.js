@@ -1,5 +1,6 @@
 import DrawingMachine from '../src/DrawingMachine';
 import { ERROR_MESSAGE, MESSAGE } from '../src/constant';
+import { DELIMITER } from '../src/constant/Rule';
 import { getErrorMessage, getRandomNumbers } from '../src/utils';
 import { getLogSpy, mockQuestions } from '../testUtils';
 
@@ -22,12 +23,12 @@ describe('DrawingMachine 테스트', () => {
       );
     });
   });
-  test('당첨 번호 입력값 유효성 테스트2 : ","로 숫자를 구분하지 않았을 시 예외 발생', async () => {
+  test(`당첨 번호 입력값 유효성 테스트2 : ${DELIMITER}로 숫자를 구분하지 않았을 시 예외 발생`, async () => {
     const INPUT_VALUE = '123456';
     mockQuestions([INPUT_VALUE]);
     const drawingMachine = new DrawingMachine();
     await expect(drawingMachine.getWinningNumbers()).rejects.toThrow(
-      getErrorMessage(ERROR_MESSAGE.noReset),
+      getErrorMessage(ERROR_MESSAGE.noDelimiter),
     );
   });
   test('유효하지 않은 당첨 번호 입력 시, [ERROR]로 시작하는 오류를 출력하고 다시 당첨 번호 입력값을 받는다.', async () => {

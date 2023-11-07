@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE, NUMBER_RANGE } from '../constant';
+import { DELIMITER } from '../constant/Rule';
 import { throwError } from './MessageFactory';
 /**
  * 번호가 1~45까지의 범위 내의 숫자인지 확인
@@ -9,10 +10,10 @@ const validateNumberRange = (number) => {
   if (number < min || number > max) throwError(ERROR_MESSAGE.range);
 };
 
-const hasNoComma = (string) => {
-  if (!string.includes(',')) {
-    throwError(ERROR_MESSAGE.noReset);
+const hasNoDelimiter = (string) => {
+  if (!string.includes(DELIMITER)) {
+    throwError(ERROR_MESSAGE.noDelimiter);
   }
 };
 
-export { validateNumberRange, hasNoComma };
+export { validateNumberRange, hasNoDelimiter };
