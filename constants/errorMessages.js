@@ -6,4 +6,10 @@ const message = Object.freeze({
   invalidBonusNumber: '[ERROR] 보너스 번호는 숫자여야 합니다.',
 });
 
-export const ERROR_MESSAGES = Object.freeze({ message });
+const lotto = Object.freeze({
+  count: '[ERROR] 로또 번호는 6개여야 합니다.',
+  duplicate: '[ERROR] 로또 번호에 중복된 숫자가 있습니다.',
+  type: '[ERROR] 로또 번호는 숫자로 이루어져야 합니다.',
+});
+
+export const ERROR_MESSAGES = Object.freeze({ message, lotto });
