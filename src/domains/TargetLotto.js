@@ -1,4 +1,4 @@
-import LottoValidator from "../LottoValidator";
+import LottoValidator from "../LottoValidator.js";
 
 class TargetLottie {
   #numbers;

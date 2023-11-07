@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import LottoValidator from "../LottoValidator.js";
+import { INPUT_MESSAGE } from "../message.js";
 class InputView {
   async getBuyMoneyInput() {
     let isValidInput = false;
@@ -8,7 +9,7 @@ class InputView {
     while (!isValidInput) {
       try {
         const userMoneyInput = await Console.readLineAsync(
-          "구입금액을 입력해 주세요.\n"
+          INPUT_MESSAGE.enterPurchaseAmount
         );
         userMoneyNumber = Number(userMoneyInput);
         LottoValidator.validateMoneyInput(userMoneyNumber);
@@ -35,7 +36,7 @@ class InputView {
     while (!isValidInput) {
       try {
         const targetLottoInput = await Console.readLineAsync(
-          "당첨 번호를 입력해 주세요.\n"
+          INPUT_MESSAGE.enterWinningNumbers
         );
         targetNumberList = targetLottoInput.split(",").map(Number);
         LottoValidator.validateLottoNumbersInput(targetNumberList);
@@ -53,7 +54,7 @@ class InputView {
     while (!isValidInput) {
       try {
         const targetBonusInput = await Console.readLineAsync(
-          "보너스 번호를 입력해 주세요\n"
+          INPUT_MESSAGE.enterBonusNumber
         );
         targetBonusNumber = Number(targetBonusInput);
         LottoValidator.validateBonusNumber(targetNumberList, targetBonusNumber);

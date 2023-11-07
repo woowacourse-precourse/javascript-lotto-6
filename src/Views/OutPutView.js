@@ -1,26 +1,26 @@
 import { Console } from "@woowacourse/mission-utils";
 import { formatMoney } from "../utils/NumberFormat.js";
 import { LOTTO_PRIZE } from "../constants.js";
-// TODO 상수 분리
+import { OUTPUT_MESSAGE } from "../message.js";
 
 class OutPutView {
   printBuyLottoCount(count) {
-    Console.print(`${count}개를 구매했습니다.`);
+    Console.print(OUTPUT_MESSAGE.buyLottoCount(count));
   }
 
   printLottoNumbers(lottoList) {
-    lottoList.forEach((lotto) =>
-      Console.print(`[${lotto.getNumbers().join(", ")}]`)
-    );
+    lottoList.forEach((lotto) => {
+      const lottoNumbers = lotto.getNumbers();
+      Console.print(OUTPUT_MESSAGE.lottoNumbers(lottoNumbers));
+    });
   }
 
   printNewLine() {
-    Console.print("");
+    Console.print(OUTPUT_MESSAGE.newLine);
   }
 
   printLottoResultInfoMessage() {
-    Console.print("당첨 통계");
-    Console.print("---");
+    Console.print(OUTPUT_MESSAGE.lottoResultInfo);
   }
 
   printLottoResults(lottoWinningCounts) {
@@ -30,19 +30,21 @@ class OutPutView {
       .forEach((rank) => {
         const rankIndex = rank - 1;
         const count = lottoWinningCounts[rankIndex];
+        const formatedMoney = formatMoney(LOTTO_PRIZE[rank].money);
 
         Console.print(
-          `${LOTTO_PRIZE[rank].message} (${formatMoney(
-            LOTTO_PRIZE[rank].money
-          )}원) - ${count}개`
+          OUTPUT_MESSAGE.lottoResults(
+            LOTTO_PRIZE[rank].message,
+            formatedMoney,
+            count
+          )
         );
       });
   }
 
   printLottoReturns(profit, consumption) {
-    Console.print(
-      `총 수익률은 ${((profit / consumption) * 100).toFixed(1)}%입니다.`
-    );
+    const totalProfit = ((profit / consumption) * 100).toFixed(1);
+    Console.print(OUTPUT_MESSAGE.lottoReturns(totalProfit));
   }
 }
 
