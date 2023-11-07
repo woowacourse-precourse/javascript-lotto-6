@@ -19,13 +19,16 @@ describe('로또 컴퓨터 클래스 테스트', () => {
     const computer = new Computer(winnnersNumbers, bonusNumber);
     const lottos = numbers.map((elem) => new Lotto(elem));
 
-    expect(computer.getPrizeResult(lottos)).toEqual({
-      first: 0,
-      second: 0,
-      third: 0,
-      fourth: 0,
-      fifth: 1,
-    });
+    expect(computer.getPrizeResult(lottos)).toEqual([
+      { mathNumber: 0, isMatchBonus: false },
+      { mathNumber: 2, isMatchBonus: false },
+      { mathNumber: 0, isMatchBonus: true },
+      { mathNumber: 1, isMatchBonus: false },
+      { mathNumber: 0, isMatchBonus: false },
+      { mathNumber: 0, isMatchBonus: true },
+      { mathNumber: 1, isMatchBonus: false },
+      { mathNumber: 3, isMatchBonus: false },
+    ]);
   });
 
   test('최종 산출된 등수의 결과를 바탕으로 수익률을 계산한다.', () => {});
