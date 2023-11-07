@@ -3,7 +3,6 @@ import Lotto from './Lotto.js';
 import { Console, Random } from '@woowacourse/mission-utils';
 
 class App {
-#lotto;
   async play() {
 
     const count = await inputAmount() / 1000;
@@ -15,6 +14,8 @@ class App {
     getRank(lotto, bonus);
     const rate = calculateRate();
     printResults(styleRate(rate));
+
+    return;
   }
 
   getNumbers = async() => {
@@ -54,8 +55,9 @@ const publishLotto = (count) => {
 
 const printLottoNumbers = () => {
   Console.print(`\n${PublishedLottoes.numbers.length}개를 구매했습니다.`);
-  PublishedLottoes.numbers.forEach((number) => {
-    Console.print(number);
+  PublishedLottoes.numbers.forEach((number) => { 
+    let message = `[${number[0]}, ${number[1]}, ${number[2]}, ${number[3]}, ${number[4]}, ${number[5]}]`;
+    Console.print(message);
   })
 }
 
@@ -107,7 +109,7 @@ const calculateRate = () => {
   for (let i = 0; i < 5; i += 1) {
     gain += (PublishedLottoes.rank[i] * PublishedLottoes.GAIN[i]);
   }
-  const rate = gain / (PublishedLottoes.numbers.length * 1e3);
+  const rate = gain / (PublishedLottoes.numbers.length * 1e3) * 100;
   return rate;
 }
 
@@ -127,7 +129,7 @@ const styleRate = (rate) => {
   return rateFormat;
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 export default App;
