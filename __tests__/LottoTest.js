@@ -16,26 +16,34 @@ describe('로또 클래스 테스트', () => {
 
   // 아래에 추가 테스트 작성 가능
   test('숫자가 아닌 값이 있으면 예외가 발생한다.', () => {
+    const numbers = [1, 2, NaN, 4, 5, 6];
+
     expect(() => {
-      new Lotto([1, 2, NaN, 4, 5, 6]);
+      new Lotto(numbers);
     }).toThrow('[ERROR]');
   });
 
-  test('로또 번호 1보다 작은 숫자가 있으면 예외가 발생한다.', () => {
+  test('로또 번호에 1보다 작은 숫자가 있으면 예외가 발생한다.', () => {
+    const numbers = [0, 2, 3, 4, 5, 6];
+
     expect(() => {
-      new Lotto([0, 2, 3, 4, 5, 6]);
+      new Lotto(numbers);
     }).toThrow('[ERROR]');
   });
 
-  test('로또 번호 45보다 큰 숫자가 있으면 예외가 발생한다.', () => {
+  test('로또 번호에 45보다 큰 숫자가 있으면 예외가 발생한다.', () => {
+    const numbers = [1, 2, 3, 4, 45, 46];
+
     expect(() => {
-      new Lotto([1, 2, 3, 4, 45, 46]);
+      new Lotto(numbers);
     }).toThrow('[ERROR]');
   });
 
   test('로또 번호에 예외가 발생하지 않는다.', () => {
+    const numbers = [1, 7, 17, 27, 37, 45];
+
     expect(() => {
-      new Lotto([1, 7, 17, 27, 37, 45]);
+      new Lotto(numbers);
     }).not.toThrow('[ERROR]');
   });
 });
