@@ -9,7 +9,7 @@ class LottoGame {
 
   purchasedTicket = [];
 
-  winNumber;
+  winNumbers;
 
   bonusNumber;
 
@@ -20,7 +20,9 @@ class LottoGame {
     this.buyLottoTicket();
     this.printPurchasedTicket();
     await this.setWinNumber();
+    console.log(this.winNumbers);
     await this.setBonusNumber();
+    this.getRankResult();
   }
 
   async getUserMoney() {
@@ -44,12 +46,22 @@ class LottoGame {
     const winNumberArray = await Console.readLineAsync(
       '\n당첨 번호를 입력해 주세요.\n'
     );
-    this.winNumber = GameManager.splitWinNumber(winNumberArray);
+    this.winNumbers = GameManager.splitWinNumber(winNumberArray);
   }
 
   async setBonusNumber() {
-    this.bonusNumber =
-      await Console.readLineAsync('\n보너스 번호를 입력해주세요\n');
+    const bonus = await Console.readLineAsync('\n보너스 번호를 입력해주세요\n');
+    this.bonusNumber = Number(bonus);
+  }
+
+  getRankResult() {
+    Console.print('\n당첨 통계\n---');
+    const earn = GameManager.checkResult(
+      this.purchasedTicket,
+      this.winNumbers,
+      this.bonusNumber
+    );
+    GameManager.calculateProfit(earn, this.money);
   }
 }
 
