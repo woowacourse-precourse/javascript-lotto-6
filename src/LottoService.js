@@ -21,6 +21,7 @@ class LottoService {
     return lottoNumbers.map((number) => new Lotto(number));
   }
 
+  // 추후 중복을 확인하는 부분을 분리할 수 있을 것 같음
   #generateLottoNumbers(quantitiy) {
     const lottoNumbers = new Set();
     while (lottoNumbers.size < quantitiy) {
@@ -34,13 +35,6 @@ class LottoService {
     }
     return Array.from(lottoNumbers).map(JSON.parse);
   }
-
-  // #checkduplication(lottoNumbers, newLottoNumbers) {
-  //   const duplication = lottoNumbers.some((number) =>
-  //     number.every((val, index) => val === newLottoNumbers[index]),
-  //   );
-  //   return duplication;
-  // }
 }
 
 export default LottoService;
