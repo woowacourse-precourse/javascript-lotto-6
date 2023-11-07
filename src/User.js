@@ -4,7 +4,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 class User {
   async purchaseLotto() {
-    const amount = await InputHandler.inputPurchaseAmount();
+    const amount = await Console.readLineAsync(messages.purchase.request);
     this.#validatePurchase(amount);
 
     const ticketCount = amount / 1000;
@@ -12,13 +12,13 @@ class User {
   }
 
   async enterWinningNumbers() {
-    const winningNumbers = await InputHandler.inputWinningNumbers();
+    const winningNumbers = await Console.readLineAsync(messages.number.winning);
 
     return winningNumbers;
   }
 
   async enterBonusNumber() {
-    const bonusNumber = await InputHandler.inputBonusNumber();
+    const bonusNumber = await Console.readLineAsync(messages.number.bonus);
 
     return bonusNumber;
   }

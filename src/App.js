@@ -13,7 +13,7 @@ class App {
     OutputHandler.printPurchaseComplete(ticketCount);
 
     const tickets = await machine.getTickets(ticketCount);
-    const winningNumbers = await InputHandler.inputWinningNumbers();
+    const winningNumbers = await user.enterWinningNumbers();
 
     const checker = new LottoChecker(tickets, winningNumbers);
     const result = checker.getResult();
