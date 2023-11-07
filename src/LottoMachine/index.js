@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { NUMBER, MESSAGE, RANDOM, SYMBOLS } from '../constants/index.js';
+import { NUMBER, RANDOM } from '../constants/index.js';
 import Lotto from '../Lotto.js';
 import Validator from '../Validator/index.js';
 import Calculator from '../Caculator/index.js';
@@ -58,10 +58,7 @@ class LottoMachine {
     this.#purchaseAmount = purchaseAmount;
     this.#lottos = this.#pickLottos(lottoCount);
 
-    const lottoStrings = this.#lottos
-      .map((lotto) => lotto.formatString())
-      .join(SYMBOLS.lineBreak);
-    return `${SYMBOLS.lineBreak}${lottoCount}${MESSAGE.purchase}${lottoStrings}`;
+    return Formatter.formatLottos(this.#lottos);
   }
 
   makeResult() {

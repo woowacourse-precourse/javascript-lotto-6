@@ -14,6 +14,13 @@ class Formatter {
       .split(SYMBOLS.numberDivider)
       .filter(Boolean);
   }
+
+  static formatLottos(lottos) {
+    const lottoStrings = lottos
+      .map((lotto) => lotto.formatString())
+      .join(SYMBOLS.lineBreak);
+    return `${SYMBOLS.lineBreak}${lottos.length}${MESSAGE.purchase}${lottoStrings}`;
+  }
 }
 
 export default Formatter;
