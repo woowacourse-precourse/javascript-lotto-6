@@ -27,11 +27,17 @@ class OutputHandler {
     Console.print(messages.statics.seperator);
   }
 
-  printStaticsResult(rank, count, isGuessBonus) {
+  printResult(rank, count, isGuessBonus) {
     isGuessBonus
       ? Console.print(
           `${count}개 일치, 보너스 볼 일치 (${prize[rank]}원) - ${count}개`,
         )
       : Console.print(`${count}개 일치 (${prize[rank]}원) - ${count}개`);
   }
+
+  printReturnRate(returnRate) {
+    Console.print(`총 수익률은 ${returnRate}%입니다.`);
+  }
 }
+
+export default OutputHandler;
