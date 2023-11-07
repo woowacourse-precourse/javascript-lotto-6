@@ -71,6 +71,15 @@ class Store {
     }
   }
 
+  #bonusNumberValidate(bonusNumber) {
+    if (isNaN(bonusNumber)) {
+      throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해주세요.");
+    }
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+  }
+
   async inputWinningNumbers() {
     while (true) {
       try {
@@ -80,6 +89,20 @@ class Store {
         const winningNumbers = winningNumbersInput.split(",");
         this.#winningNumbersValidate(winningNumbers);
         return winningNumbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  async inputBonusNumber() {
+    while (true) {
+      try {
+        const bonusNumber = await Console.readLineAsync(
+          "보너스 번호를 입력해 주세요.\n"
+        );
+        this.#bonusNumberValidate(bonusNumber);
+        return bonusNumber;
       } catch (error) {
         Console.print(error.message);
       }
