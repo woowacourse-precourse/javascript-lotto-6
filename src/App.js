@@ -108,6 +108,34 @@ class App {
 
     return WINNING;
   }
+  SHOW_WINNING(WINNING, TICKET_COUNT) {
+    Console.print("\n당첨 통계");
+    Console.print("---");
+
+    const PRIZE_LEVEL = {
+      1: "6개 일치",
+      2: "5개 일치, 보너스 볼 일치",
+      3: "5개 일치",
+      4: "4개 일치",
+      5: "3개 일치",
+    };
+
+    for (let i = 5; i >= 1; i--) {
+      const PRIZE_COUNT = WINNING[i].count;
+      const PRIZE_AMOUNT = WINNING[i].prize.toLocaleString();
+      Console.print(`${PRIZE_LEVEL[i]} (${PRIZE_AMOUNT}원) - ${PRIZE_COUNT}개`);
+    }
+
+    const TOTAL_PRIZE = Object.keys(WINNING)
+      .slice(1, 6)
+      .reduce((total, i) => {
+        return total + WINNING[i].count * WINNING[i].prize;
+      }, 0);
+
+    const TOTAL_COST = 1000 * TICKET_COUNT;
+    const RETURN_RATE = 100 - ((TOTAL_COST - TOTAL_PRIZE) / TOTAL_COST) * 100;
+    Console.print(`총 수익률은 ${RETURN_RATE.toFixed(1)}%입니다.`);
+  }
 }
 
 export default App;
