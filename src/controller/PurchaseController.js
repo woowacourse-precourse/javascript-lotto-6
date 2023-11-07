@@ -16,9 +16,10 @@ export default class PurchaseController {
   }
 
   issueOneLotto() {
-    let lotto = [];
-    lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    return lotto;
+    const lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return lotto.sort(function (a, b) {
+      return a - b;
+    });
   }
 
   printPurchasedLottos() {
