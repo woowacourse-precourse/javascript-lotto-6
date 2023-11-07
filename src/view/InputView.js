@@ -4,28 +4,40 @@ import Validator from '../utils/Validator.js';
 
 const InputView = {
   readPurchaseAmount: async () => {
-    const purchaseAmount = await Console.readLineAsync(MESSAGE.read.purchaseAmount);
-
-    Validator.validatePurchaseAmount(purchaseAmount);
-
-    return purchaseAmount;
+    while (true) {
+      try {
+        const purchaseAmount = await Console.readLineAsync(MESSAGE.read.purchaseAmount);
+        Validator.validatePurchaseAmount(purchaseAmount);
+        return purchaseAmount;
+      } catch ({ message }) {
+        Console.print(message);
+      }
+    }
   },
 
   readWinningNumbers: async () => {
-    const input = await Console.readLineAsync(MESSAGE.read.winningNumbers);
-    const winningNumbers = input.split(',').map(item => Number(item.trim()));
-
-    Validator.validateWinningNumbers(winningNumbers);
-
-    return winningNumbers;
+    while (true) {
+      try {
+        const input = await Console.readLineAsync(MESSAGE.read.winningNumbers);
+        const winningNumbers = input.split(',').map(item => Number(item.trim()));
+        Validator.validateWinningNumbers(winningNumbers);
+        return winningNumbers;
+      } catch ({ message }) {
+        Console.print(message);
+      }
+    }
   },
 
   readbonusNumber: async () => {
-    const bonusNumber = await Console.readLineAsync(MESSAGE.read.bonusNumber);
-
-    Validator.validateBonusNumber(bonusNumber);
-
-    return Number(bonusNumber);
+    while (true) {
+      try {
+        const bonusNumber = await Console.readLineAsync(MESSAGE.read.bonusNumber);
+        Validator.validateBonusNumber(bonusNumber);
+        return Number(bonusNumber);
+      } catch ({ message }) {
+        Console.print(message);
+      }
+    }
   },
 };
 
