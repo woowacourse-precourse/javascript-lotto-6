@@ -28,7 +28,7 @@ class App {
     const numberOfLottos = this.getNumberOfLottos(purchaseAmount);
     this.createLottos(numberOfLottos);
     this.outputManager.printPurchasedLottosInfo(this.lottos);
-    this.getWinningNumbers();
+    this.winningNumbers = await this.getWinningNumbers();
   }
 
   async getPurchaseAmount() {
@@ -49,7 +49,9 @@ class App {
       await validateWinnerNumbersInput(this.winningNumbersInput);
     } catch (e) {
       await this.outputManager.printWinningNumbersInputErrorMessage(e.message);
+      await this.getWinningNumbers();
     }
+    return this.winningNumbersInput.split(',').map((el) => Number(el));
   }
 
   getNumberOfLottos(purchaseAmount) {
