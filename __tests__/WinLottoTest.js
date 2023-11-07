@@ -105,4 +105,21 @@ describe("WinLottoTest", () => {
       },
     });
   });
+
+  test("5개의 번호가 일치하는 경우 1500000원에 당첨된다", async () => {
+    LottoStore.calculateWinningResults = jest.fn().mockResolvedValue([5]);
+    const ticketNumbers = [["1", "2", "3", "4", "5", "6"]];
+
+    const results = await WinLotto.calculateEarnings(ticketNumbers);
+    expect(results).toEqual({
+      totalEarnings: 1500000,
+      countResults: {
+        3: 0,
+        4: 0,
+        5: 1,
+        "5+1": 0,
+        6: 0,
+      },
+    });
+  });
 });
