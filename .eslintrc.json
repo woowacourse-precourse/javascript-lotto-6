@@ -16,6 +16,8 @@
     "import/extensions": ["warn", "never"],
     "no-undef": ["off"],
     "no-new": ["off"],
-    "no-restricted-globals": ["off"]
+    "no-restricted-globals": ["off"],
+    "prefer-const": "off",
+    "arrow-body-style": "off"
   }
 }
