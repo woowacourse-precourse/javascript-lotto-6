@@ -1,8 +1,8 @@
-import LottoGame from '../model/LottoGame.js';
 import View from '../view/View.js'
+import LottoGame from '../model/LottoGame.js';
+import LottoCalculator from '../model/LottoCalculator.js';
 
 export default class Controller {
-  #lottoGame;
   #view;
 
   constructor() {
@@ -10,11 +10,11 @@ export default class Controller {
   }
 
   async run() {
-    this.#lottoGame = new LottoGame();
+    const lottoGame = new LottoGame();
 
     const money = await this.#view.inputRepeater(this.#view.getMoneyInput);
-    const attempts = this.#lottoGame.moneyToAttempts(money);
-    const lottos = await this.#lottoGame.buyLottos(attempts);
+    const attempts = lottoGame.moneyToAttempts(money);
+    const lottos = await lottoGame.buyLottos(attempts);
 
     this.#view.printLottos(lottos);
 

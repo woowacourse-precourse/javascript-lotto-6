@@ -1,12 +1,14 @@
 import Lotto from '../Lotto.js'
 import View from '../view/View.js';
-import { generateNumbers } from '../utils/LottoUtils.js'
+import LottoUtils from './LottoUtils.js'
 
 export default class LottoGame {
-  #view
+  #view;
+  #lottoUtils;
 
   constructor() {
     this.#view = new View();
+    this.#lottoUtils = new LottoUtils();
   }
 
   moneyToAttempts(money) {
@@ -16,7 +18,7 @@ export default class LottoGame {
   async buyLottos(attempts) {
     const lottos = [];
     for (let i = 0; i < attempts; i++) {
-      const randomNumbers = await generateNumbers();
+      const randomNumbers = await this.#lottoUtils.generateNumbers();
       const lotto = new Lotto(randomNumbers);
       lottos.push(lotto);
     }

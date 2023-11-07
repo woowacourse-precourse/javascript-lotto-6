@@ -1,20 +1,23 @@
 import { MissionUtils } from '@woowacourse/mission-utils'
-import { GET_MONEY, GET_WIN, GET_BONUS } from '../constants/Text.js';
-import { checkMoneyInput, checkWinInput, checkBonusInput } from '../utils/LottoUtils.js';
+import { INPUT } from '../constants/INPUT.js';
+import LottoUtils from '../model/LottoUtils.js';
 
 export default class View {
+  #lottoUtils;
+
   constructor() {
+    this.#lottoUtils = new LottoUtils();
   }
 
   print(text) {
     MissionUtils.Console.print(text);
   }
 
-  async inputRepeater(callback) {
+  async inputRepeater(callback, argument = null) {
     let result;
     while (true) {
       try {
-        result = await callback();
+        result = await callback(argument);
         break;
       } catch (error) {
         this.print(error.message);
@@ -24,19 +27,31 @@ export default class View {
   }
 
   async getMoneyInput() {
-    const money = await MissionUtils.Console.readLineAsync(GET_MONEY);
-    checkMoneyInput(money);
+    const lottoUtils = new LottoUtils();
+    const money = await MissionUtils.Console.readLineAsync(INPUT.getMoney);
+    lottoUtils.checkMoneyInput(money);
+    // this.#lottoUtils.checkMoneyInput(money);
 
     return parseInt(money);
   }
 
   async getWinInput() {
-    const winString = await MissionUtils.Console.readLineAsync(GET_WIN);
-    checkWinInput(winString);
+    const lottoUtils = new LottoUtils();
+    const winString = await MissionUtils.Console.readLineAsync(INPUT.getWin);
+    lottoUtils.checkWinInput(winString);
+    // this.#lottoUtils.checkWinInput(winString);
     const winArray = winString.split(',');
 
     return winArray;
   }
+
+  async getBonusInput(win) {
+    const lottoUtils = new LottoUtils();
+    const bonus = await MissionUtils.Console.readLineAsync(INPUT.getBonus);
+    lottoUtils.checkBonusInput(bonus, win);
+    // this.#lottoUtils.checkBonusInput(bonus, win);
+
+    return parseInt(bonus);
   }
 
   printLottos(lottos) {
