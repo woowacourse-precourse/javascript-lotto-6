@@ -29,6 +29,11 @@ describe("정상 입력 테스트", () => {
     expect(amount).toEqual(1000);
   });
 
+  test("입력한 로또번호는 숫자로 전환된다.", async () => {
+    const numbers = await inputView.returnValidNumber("2");
+    expect(numbers).toEqual(2);
+  });
+
   test("로또번호를 입력하면 숫자가 담긴 배열로 반환한다.", async () => {
     const numbers = await inputView.enterWinningNumber();
     expect(numbers).toContain(1, 2, 3);

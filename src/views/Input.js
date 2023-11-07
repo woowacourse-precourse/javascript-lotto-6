@@ -1,64 +1,52 @@
 import { Console } from "@woowacourse/mission-utils";
-import { error, exceptionType, message } from "../constants.js";
+import { error, inputType, message } from "../constants.js";
 import { throwErrorIf } from "../utils/index.js";
 
 const inputView = {
   enterPurchaseAmount: async function () {
-    let input = "";
+    const amount = await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
 
-    while (true) {
-      const amount = await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
-
-      try {
-        this.validate(exceptionType.PURCHASE, amount);
-        input = Number(amount);
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
+    try {
+      this.validate(inputType.PURCHASE, amount);
+    } catch (error) {
+      Console.print(error.message);
+      await this.enterPurchaseAmount();
     }
 
-    return input;
+    return Number(amount);
   },
 
   enterWinningNumber: async function () {
-    let input = "";
+    const numbers = await Console.readLineAsync(message.ENTER_WINNING_NUMBER);
 
-    while (true) {
-      const numbers = await Console.readLineAsync(message.ENTER_WINNING_NUMBER);
-      const splited = numbers.split(",");
+    return await Promise.all(
+      numbers
+        .split(",")
+        .map(async (number) => await this.returnValidNumber(number))
+    );
+  },
 
-      try {
-        input = splited.map((number) => {
-          this.validate(exceptionType.LOTTO, number);
-
-          return Number(number);
-        });
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
+  returnValidNumber: async function (number) {
+    try {
+      this.validate(inputType.LOTTO, number);
+      return Number(number);
+    } catch (error) {
+      Console.print(error.message);
+      await this.enterWinningNumber();
     }
-
-    return input;
   },
 
   enterBonusNumber: async function () {
-    let input = "";
+    const number = await Console.readLineAsync(message.ENTER_BONUS_NUMBER);
 
-    while (true) {
-      const number = await Console.readLineAsync(message.ENTER_BONUS_NUMBER);
-
-      try {
-        this.validate(exceptionType.LOTTO, number);
-        input = Number(number);
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
+    try {
+      this.validate(inputType.LOTTO, number);
+    } catch (error) {
+      Console.print(error.message);
+      await this.enterBonusNumber();
     }
 
-    return input;
+    return Number(number);
   },
 
   validate: function (type, value) {
@@ -67,9 +55,9 @@ const inputView = {
     const isNotNumber = isNaN(Number(value));
 
     switch (type) {
-      case exceptionType.PURCHASE:
+      case inputType.PURCHASE:
         throwErrorIf(isNotNumber, error.NOT_NUMBER);
-      case exceptionType.LOTTO:
+      case inputType.LOTTO:
         throwErrorIf(isNotNumber, error.NATURAL_NUMBER_IN_RANGE);
     }
   },
