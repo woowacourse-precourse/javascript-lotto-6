@@ -7,6 +7,7 @@ import printLottoNumbers from './print/printLottoNumbers.js';
 class LottoController {
   #myLotto;
   #winningLottoMachine;
+
   async run() {
     await this.#buyLotto();
     await this.#printLotto(this.#myLotto.length, this.#myLotto);
