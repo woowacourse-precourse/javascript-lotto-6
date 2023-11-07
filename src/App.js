@@ -8,9 +8,9 @@ class App {
       const guess = new GuessLotto();
       await guess.buyLotto();
 
-      Console.print(`\n${guess.lottoPieces}개를 구매했습니다.`);
+      Console.print(`\n${guess.getLottoPieces()}개를 구매했습니다.`);
 
-      for (let i = 1; i <= guess.lottoPieces; i += 1) {
+      for (let i = 1; i <= guess.getLottoPieces(); i += 1) {
         Console.print(guess.generateLottoNumber());
       }
       Console.print('');
@@ -21,7 +21,7 @@ class App {
 
       const winningBonus = await guess.inputBonusNumber();
 
-      lotto.checkWin(winningBonus, guess.lottoNumbers);
+      lotto.checkWin(winningBonus, guess.getLottoNumbers());
     } catch (error) {
       Console.print(error.message);
     }
