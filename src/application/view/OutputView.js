@@ -7,11 +7,11 @@ class OutputView {
     purchaseLottosMessages.forEach((lottoMessage) => Console.print(`[${lottoMessage}]`));
   }
 
-  showGameResultOutput(winningResultMessage) {
+  showGameResultOutput(winningResult) {
     Console.print(OUTPUT_MESSAGE.result);
-    winningResultMessage[0].forEach((result) => Console.print(result));
+    winningResult[0].forEach((result) => Console.print(result));
     Console.print(
-      `${OUTPUT_MESSAGE.returnRate1} ${winningResultMessage[1]}${OTHERS.percent}${OUTPUT_MESSAGE.returnRate2}`
+      `${OUTPUT_MESSAGE.returnRate1} ${winningResult[1]}${OTHERS.percent}${OUTPUT_MESSAGE.returnRate2}`
     );
   }
 }
