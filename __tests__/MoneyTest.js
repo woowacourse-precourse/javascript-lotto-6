@@ -24,4 +24,10 @@ describe('머니 클래스 테스트', () => {
       new Money('8282');
     }).toThrow('[ERROR]');
   });
+
+  test('구입금액이 올바르면 예외가 발생하지 않는다.', () => {
+    expect(() => {
+      new Money(8000);
+    }).not.toThrow();
+  });
 });
