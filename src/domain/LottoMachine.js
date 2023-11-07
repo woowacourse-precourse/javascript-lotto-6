@@ -83,12 +83,9 @@ export class LottoMachine {
    * @param{boolean} hasBonusNumber
    * @return {void}
    * @description 한장의 로또 추첨!
-   * 1. 수익금 : totalEarning
-   * 2. 각 등수별 로또 개수 : firstRank, ...
-   * 3. 구매금액 lottos.length * Lotto.price(1000원 상수로 설정)
    */
   #draw(matchingNumberCount, hasBonusNumber) {
-    // 1. 총 구매금액 올리기
+    // 1. 총 구매금액 올리기 - 하나 할때마다 1000원씩 더하는 로직
     this.#totalCost += NUMBER.LOTTO_PRICE;
     // 2. 총 수익금액 올리기
     // 3. 등수 올리기 (rank)

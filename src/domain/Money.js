@@ -35,7 +35,7 @@ export class Money {
   /**
    *
    * @param {number} amount
-   * @description Money 객체의 잔액에 돈 추기
+   * @description Money 객체의 잔액에 돈 추가 (테스트 로직을 위해)
    * @return {void}
    */
   add(amount) {
