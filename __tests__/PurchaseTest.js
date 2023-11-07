@@ -1,4 +1,4 @@
-import Purchase from '../src/Purchase.js';
+import Purchase from '../src/domain/Purchase.js';
 
 describe('로또 구매 테스트', () => {
   test('로또 구매 금액을 통해 로또 구매 수량 구하기', () => {

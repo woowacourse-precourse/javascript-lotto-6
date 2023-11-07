@@ -1,4 +1,4 @@
-import LottoMaker from '../src/LottoMaker.js';
+import LottoMaker from '../src/utils/LottoMaker.js';
 
 describe('로또 번호 생성 테스트', () => {
   test('구매 수량만큼의 로또를 생성', async () => {
