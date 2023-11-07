@@ -12,9 +12,9 @@ import Lotto from '../Lotto.js';
 class LottoGame {
   async lottoProcess() {
     this.money = await getInputPurchasingMoney();
+    this.generateUserLottos();
     this.winningNumbers = await getInputWinningNumbers();
     this.bonusNumber = await getInputBonusNumber(this.winningNumbers);
-    this.generateUserLottos();
     this.checkWinning();
   }
 
