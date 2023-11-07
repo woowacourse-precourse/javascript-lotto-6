@@ -15,12 +15,13 @@ const INPUT_VIEW = {
 
   async inputLotto() {
     const LOTTO_NUM = await Console.readLineAsync(LOTTO_MESSAGE.INPUT_NUMBERS);
-    return LOTTO_NUM;
+    const LOTTO_SPLIT = LOTTO_NUM.split(',').map((element) => Number(element)); // 6개짜리 배열 저장
+    return LOTTO_SPLIT;
   },
 
   async inputBonus() {
     const BONUS_NUM = await Console.readLineAsync(LOTTO_MESSAGE.INPUT_BONUS);
-    return BONUS_NUM;
+    return Number(BONUS_NUM);
   },
 };
 
