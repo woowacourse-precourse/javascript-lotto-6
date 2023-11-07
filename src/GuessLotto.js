@@ -1,5 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import LottoError from './error/LottoError.js';
 
 class GuessLotto {
   #guessNumbers = [];
@@ -72,11 +73,11 @@ class GuessLotto {
 
   validateBonusNumber(number) {
     if (Number.isNaN(+number) || +number < 1 || +number > 45) {
-      throw new Error('[ERROR] 보너스 번호 입력이 잘못되었습니다.');
+      throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
 
     if (this.#guessNumbers.includes(number) || !Number.isInteger(+number)) {
-      throw new Error('[ERROR] 보너스 번호 입력이 잘못되었습니다.');
+      throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
   }
 
@@ -98,15 +99,11 @@ class GuessLotto {
 
   #validatePurchaseAmount(amount) {
     if (amount > 100000) {
-      throw new Error(
-        '[ERROR] 구입 금액이 잘못되었습니다. 구매 최대 금액은 100,000원입니다.\n',
-      );
+      throw new LottoError(LottoError.ERROR_MSG.moneyMax);
     }
 
     if (amount < 1000 || amount % 1000 !== 0) {
-      throw new Error(
-        '[ERROR] 구입 금액이 잘못되었습니다. 1,000원 단위로 입력해주세요.\n',
-      );
+      throw new LottoError(LottoError.ERROR_MSG.moneyAmount);
     }
   }
 
