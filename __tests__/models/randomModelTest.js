@@ -38,45 +38,49 @@ describe('오름차순 정렬', () => {
   });
 });
 
-test('오름차순으로 정렬된 배열이 n개 담겨 있는 이차원 배열이 반환된다.', () => {
-  // given
-  const INPUT_NUMBER = 3;
-  const random = [
-    [5, 4, 1, 3, 2, 7],
-    [7, 6, 9, 8, 10, 13],
-    [45, 37, 12, 25, 19, 8],
-  ];
-  const output = [
-    [1, 2, 3, 4, 5, 7],
-    [6, 7, 8, 9, 10, 13],
-    [8, 12, 19, 25, 37, 45],
-  ];
+describe('로또 발행 기능', () => {
+  test('오름차순으로 정렬된 배열이 n개 담겨 있는 이차원 배열이 반환된다.', () => {
+    // given
+    const INPUT_NUMBER = 3;
+    const random = [
+      [5, 4, 1, 3, 2, 7],
+      [7, 6, 9, 8, 10, 13],
+      [45, 37, 12, 25, 19, 8],
+    ];
+    const output = [
+      [1, 2, 3, 4, 5, 7],
+      [6, 7, 8, 9, 10, 13],
+      [8, 12, 19, 25, 37, 45],
+    ];
 
-  mockOneOfRandom([...random]);
+    mockOneOfRandom([...random]);
 
-  // when
-  const result = randomModel.getRandom(INPUT_NUMBER);
+    // when
+    const result = randomModel.getRandom(INPUT_NUMBER);
 
-  // then
-  expect(result).toEqual(output);
+    // then
+    expect(result).toEqual(output);
+  });
 });
 
-test('배열의 원소가 문자열로 변환된다.', () => {
-  // given
-  const input = [
-    [1, 2, 3, 4, 5, 7],
-    [6, 7, 8, 9, 10, 3],
-    [11, 14, 12, 10, 8, 7],
-  ];
-  const output = [
-    `[1, 2, 3, 4, 5, 7]\n`,
-    `[6, 7, 8, 9, 10, 3]\n`,
-    `[11, 14, 12, 10, 8, 7]\n`,
-  ];
+describe('발행된 로또 정보를 문자열로 보여주기', () => {
+  test('배열의 원소가 문자열로 변환된다.', () => {
+    // given
+    const input = [
+      [1, 2, 3, 4, 5, 7],
+      [6, 7, 8, 9, 10, 13],
+      [11, 14, 22, 30, 33, 34],
+    ];
+    const output = [
+      `[1, 2, 3, 4, 5, 7]\n`,
+      `[6, 7, 8, 9, 10, 13]\n`,
+      `[11, 14, 22, 30, 33, 34]\n`,
+    ];
 
-  // when
-  const result = randomModel.getStringOfRandom(input);
+    // when
+    const result = randomModel.getStringOfRandom(input);
 
-  // then
-  expect(result).toEqual(output);
+    // then
+    expect(result).toEqual(output);
+  });
 });
