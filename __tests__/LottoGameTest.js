@@ -1,4 +1,4 @@
-import LottoGame from '../src/domain/LottoGame';
+import LottoGame from '../src/domain/LottoGame.js';
 
 describe('LottoGame', () => {
   let lottoGame;
