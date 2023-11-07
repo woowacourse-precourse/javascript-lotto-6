@@ -22,7 +22,7 @@ class PurchaseCost {
     } else if (isNaN(cost)) {
       throw new Error(ERROR.STRING_IN_PURCHASECOST);
     } else if (cost % 1000) {
-      throw new Error(ERROR.UNDEFINED_PURCHASECOST);
+      throw new Error(ERROR.NOT_THOUSAND_PURCHASECOST);
     }
   }
 
