@@ -15,8 +15,12 @@ class Lotto {
 
   formatString() {
     return `${SYMBOLS.openSquareBracket}${this.#numbers.join(
-      SYMBOLS.numberDivider,
+      SYMBOLS.printDivider,
     )}${SYMBOLS.closeSquareBracket}`;
+  }
+
+  getLotto() {
+    return this.#numbers;
   }
 }
 
