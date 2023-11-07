@@ -34,10 +34,6 @@ class Lotto {
   getLottoNumbers() {
     return this.#numbers;
   }
-
-  displayBoard() {
-    Console.print(this.#numbers);
-  }
 }
 
 export default Lotto;

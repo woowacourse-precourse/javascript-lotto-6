@@ -28,7 +28,8 @@ class LottoGame {
     for (let i = 0; i < price / 1000; i += 1) {
       const lottoNumber = this.#generateRandomLottoNumbers();
       const lotto = new Lotto(lottoNumber);
-      lotto.displayBoard();
+      Console.print(lotto.getLottoNumbers());
+
       this.#tickets.push(lotto.getLottoNumbers());
     }
     this.#inputWinningBonus();
