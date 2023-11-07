@@ -9,14 +9,12 @@ import sortNumberArray from '../domain/utils/sortNumberArray.js';
 class LottoGenerator {
   #lottoAmount;
   #drawCount;
+  #lottos;
 
   constructor(amount) {
     this.#lottoAmount = amount;
     this.#drawCount = 0;
-  }
-
-  #setDrawCount(amount) {
-    this.#drawCount = parseInt(this.#lottoAmount / NUMBER.unitCost);
+    this.#lottos = new Array();
   }
 
   #generateSingleLotto() {
@@ -27,16 +25,25 @@ class LottoGenerator {
     );
   }
 
-  generateLotto() {
+  #setDrawCount(amount) {
+    this.#drawCount = parseInt(this.#lottoAmount / NUMBER.unitCost);
+  }
+
+  generateLottos() {
     this.#setDrawCount();
-    const lottos = new Array();
 
     for (let count = 0; count < this.#drawCount; count++) {
       const singleLotto = this.#generateSingleLotto();
-      lottos.push(sortNumberArray(singleLotto));
+      this.#lottos.push(sortNumberArray(singleLotto));
     }
+  }
 
-    return lottos;
+  getDrawCount() {
+    return this.#drawCount;
+  }
+
+  getLottos() {
+    return this.#lottos;
   }
 }
 
