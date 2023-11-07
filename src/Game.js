@@ -1,5 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { MESSAGE, UNIT, NEW_LINE, RANGE_START, RANGE_END, BALL_NUMBERS, SPLIT_SEPARATOR, RESULT_MATCHES, INITIAL_RESULT_VALUE, RESULT } from './constant/Constant.js';
+import { MESSAGE, UNIT, NEW_LINE, RANGE_START, RANGE_END, BALL_NUMBERS, SPLIT_SEPARATOR, INITIAL_RESULT_VALUE, PERCENT, PRECISION_POINT, RESULT } from './constant/Constant.js';
 import Validation from './validation/Validation.js';
 import Lotto from './Lotto.js';
 
@@ -98,6 +98,7 @@ class Game {
     Console.print(`${MESSAGE.LOTTO_RESULT_FIVE}${this.#gameResult.five}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
     Console.print(`${MESSAGE.LOTTO_RESULT_BONUS}${this.#gameResult.bonus}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
     Console.print(`${MESSAGE.LOTTO_RESULT_SIX}${this.#gameResult.six}${MESSAGE.LOTTO_RESULT_SUFFIX}`);
+    Console.print(`${MESSAGE.EARNING_RATE_PREFIX}${this.#calculateEarningRate()}${MESSAGE.EARNING_RATE_SUFFIX}`);
   }
 
   #validatePrice(price) {
@@ -116,7 +117,12 @@ class Game {
   }
 
   #calculateEarningRate() {
-
+    const wholePrizeAmount = this.#gameResult.three * MATCH.THREE + 
+      this.#gameResult.four * MATCH.FOUR + 
+      this.#gameResult.five * MATCH.FIVE + 
+      this.#gameResult.bonus * MATCH.BONUS + 
+      this.#gameResult.six * MATCH.SIX;
+    return (wholePrizeAmount*PERCENT/this.#pricePaid).toFixed(PRECISION_POINT);
   }
 };
 

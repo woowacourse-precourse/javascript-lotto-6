@@ -28,6 +28,8 @@ export const BALL_NUMBERS = 6;
 export const BONUS_MATCHES = 5;
 export const RESULT_MATCHES = 5;
 export const INITIAL_RESULT_VALUE = 0;
+export const PERCENT = 100;
+export const PRECISION_POINT = 1;
 
 export const RESULT = {
   THREE: 3,
