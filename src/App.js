@@ -5,6 +5,7 @@ import {
   INPUT_NUMBER_MESSAGE,
   INPUT_BONUS_MESSAGE,
   INPUT_RANGE_ERROR_MESSAGE,
+  INCLUDE_BONUS_ERROR_MESSAGE,
   MONEY_ARRAY,
   NUM_ARRAY,
   THREE_MATCH_MONEY,
@@ -26,18 +27,22 @@ class App {
     return NUMBERS;
   }
 
-  async inputBonus() {
+  async inputBonus(NUMBERS) {
     await MissionUtils.Console.print("\n" + INPUT_BONUS_MESSAGE);
     const BONUS = Number(await MissionUtils.Console.readLineAsync(""));
 
-    this.validateBonus(BONUS);
+    this.validateBonus(BONUS, NUMBERS);
 
     return BONUS;
   }
 
-  async validateBonus(BONUS) {
+  async validateBonus(BONUS, NUMBERS) {
     if (BONUS > MAX || BONUS < MIN || BONUS !== parseInt(BONUS)) {
       throw new Error(INPUT_RANGE_ERROR_MESSAGE);
+    }
+
+    if (NUMBERS.includes(BONUS.toString())) {
+      throw new Error(INCLUDE_BONUS_ERROR_MESSAGE);
     }
   }
 
@@ -86,7 +91,7 @@ class App {
     const NUMBERS = await this.inputNumber();
     const lotto = new Lotto(NUMBERS);
     const CORRECT = lotto.getNumbers();
-    const BONUS = await this.inputBonus();
+    const BONUS = await this.inputBonus(NUMBERS);
     const STATS = user.matching(CORRECT, BONUS);
     await this.printStats(STATS);
     this.printYield(STATS, MONEY);

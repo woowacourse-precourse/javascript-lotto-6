@@ -32,6 +32,8 @@ export const ALL_MATCH_MESSAGE = "(2,000,000,000원)";
 //App.js
 export const INPUT_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
 export const INPUT_BONUS_MESSAGE = "보너스 번호를 입력해 주세요.";
+export const INCLUDE_BONUS_ERROR_MESSAGE =
+  "당첨 번호에 보너스 번호가 포함되어 있습니다.";
 export const NUM_ARRAY = [THREE, FOUR, FIVE, FIVE, SIX];
 export const MONEY_ARRAY = [
   THREE_MATCH_MESSAGE,
