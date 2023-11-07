@@ -15,7 +15,8 @@ class App {
 
     const winningNumbers = (await Console.readLineAsync('\n당첨 번호를 입력해주세요.\n')).split(',').map(Number);
     const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해주세요.\n');
-    const results = [0, 0, 0, 0, 0]
+    const results = [0, 0, 0, 0, 0];
+    const amount = [5000, 50000, 1500000, 30000000, 2000000000];
 
     lottoRandomNumbers.forEach(lottoNumber => {
       let count = 0;
@@ -39,6 +40,13 @@ class App {
     Console.print(`5개 일치 (1,500,000원) - ${results[2]}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${results[3]}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${results[4]}개`);
+
+    let i = 0;
+    const earningsRate = (results.reduce((acc, curr) => {
+      return acc + (curr * amount[i]);
+    }, 0));
+
+    Console.print(`총 수익률은 ${(earningsRate / purchaseAmount * 100).toFixed(1)}%입니다.`);
   }
 }
 
