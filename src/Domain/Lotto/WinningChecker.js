@@ -1,4 +1,4 @@
-import CONSTANTS from '../../Lib/constans';
+import CONSTANTS from '../../Lib/constans.js';
 import { Console } from '@woowacourse/mission-utils';
 import MESSAGE from '../../Lib/message.js';
 import { MessageFormat } from '../../Lib/messageFormat.js';
