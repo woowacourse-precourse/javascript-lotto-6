@@ -1,6 +1,6 @@
 import { WINNIG_PROFITS, LOTTO_LENGTH } from "../Constants.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
-import LottoGame from "./LottoGame.js";
+
 class GameUtils {
   constructor(lottos) {
     this.lottos = lottos;

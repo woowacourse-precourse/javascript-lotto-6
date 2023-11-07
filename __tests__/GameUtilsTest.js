@@ -1,5 +1,5 @@
-import GameUtils from '../src/lotto/GameUtils.js';
-import Lotto from '../src/lotto/Lotto.js';
+import GameUtils from '../src/domain/GameUtils.js';
+import Lotto from '../src/domain/Lotto.js';
 
 describe('GameUtils 클래스', () => {
   const mockLottos = [

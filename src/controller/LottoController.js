@@ -1,5 +1,5 @@
 import UiUtils from '../ui/UiUtils.js';
-import LottoGame from '../lotto/LottoGame.js';
+import LottoGame from '../domain/LottoGame.js';
 import OutputUi from '../ui/OutputUi.js';
 import InputUi from '../ui/inputUi.js';
 class LottoController {

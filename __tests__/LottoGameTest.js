@@ -1,4 +1,4 @@
-import LottoGame from '../src/lotto/LottoGame.js';
+import LottoGame from '../src/domain/LottoGame.js';
 import {
   ERROR_MESSAGE,
   LOTTO_PRICE,
