@@ -29,14 +29,14 @@ class LottoGenerator {
 
   generateLotto() {
     this.#setDrawCount();
-    const lotto = new Array();
+    const lottos = new Array();
 
     for (let count = 0; count < this.#drawCount; count++) {
       const singleLotto = this.#generateSingleLotto();
-      lotto.push(sortNumberArray(singleLotto));
+      lottos.push(sortNumberArray(singleLotto));
     }
 
-    return lotto;
+    return lottos;
   }
 }
 
