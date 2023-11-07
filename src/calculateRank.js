@@ -1,4 +1,4 @@
-const getStatistics = (lottoResult, result, bonusResult) => {
+const calculateRank = (lottoResult, result, bonusResult) => {
   const key = result + bonusResult;
   switch (result) {
     case "3":
@@ -21,4 +21,4 @@ const getStatistics = (lottoResult, result, bonusResult) => {
   }
 };
 
-export default getStatistics;
+export default calculateRank;

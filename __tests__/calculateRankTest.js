@@ -1,6 +1,6 @@
-import getStatistics from "../src/getStatistics";
+import calculateRank from "../src/calculateRank";
 
-describe("getStatistics 함수 테스트", () => {
+describe("calculateRank 함수 테스트", () => {
   test("3개가 일치 할 경우", () => {
     //given
     const lottoResult = { 3: 0, 4: 0, 5: 0, "5bonus": 0, 6: 0 };
@@ -8,7 +8,7 @@ describe("getStatistics 함수 테스트", () => {
     const bonusResult = "bonusFalse";
 
     //when
-    getStatistics(lottoResult, result, bonusResult);
+    calculateRank(lottoResult, result, bonusResult);
 
     //then
     expect(lottoResult).toEqual({ 3: 1, 4: 0, 5: 0, "5bonus": 0, 6: 0 });
@@ -20,7 +20,7 @@ describe("getStatistics 함수 테스트", () => {
     const bonusResult = "bonusTrue";
 
     //when
-    getStatistics(lottoResult, result, bonusResult);
+    calculateRank(lottoResult, result, bonusResult);
 
     //then
     expect(lottoResult).toEqual({ 3: 0, 4: 0, 5: 0, "5bonus": 1, 6: 0 });

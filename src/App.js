@@ -3,7 +3,7 @@ import AmountInput from "./View/AmountInput";
 import numberInput from "./View/numberInput";
 import printResult from "./View/printResult";
 import calculateLottoNumber from "./calculateLottoNumber";
-import getStatistics from "./getStatistics";
+import calculateRank from "./calculateRank";
 import calculateProfit from "./calculateProfit";
 import buyLotto from "./buyLotto";
 class App {
@@ -24,7 +24,7 @@ class App {
         winningNumbers,
         bonusNumber
       );
-      getStatistics(lottoResult, result, bonusResult);
+      calculateRank(lottoResult, result, bonusResult);
     });
     // 최종 결과 출력
     const profit = calculateProfit(amount, lottoResult);
