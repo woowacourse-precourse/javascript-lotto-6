@@ -10,7 +10,9 @@ describe('로또 수익율 계산 테스트', () => {
       fiveAndBonus: 0,
       all: 0,
     };
-    const rateOfReturn = new RateOfReturn(purchaseAmount);
-    expect(rateOfReturn.getRateOfReturn(matchingTable)).toBe(200.0);
+    const rateOfReturn = new RateOfReturn();
+    expect(rateOfReturn.getRateOfReturn(matchingTable, purchaseAmount)).toBe(
+      200.0,
+    );
   });
 });

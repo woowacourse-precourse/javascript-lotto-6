@@ -20,7 +20,6 @@ const OutputView = {
     template.forEach(([message, count]) => {
       Console.print(`${message} - ${count}개`);
     });
-
     Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   },
 

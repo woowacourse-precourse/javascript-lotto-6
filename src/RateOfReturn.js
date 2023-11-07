@@ -6,23 +6,17 @@ import {
 import PRIZE from './constants/rankingPrize.js';
 
 export default class RateOfReturn {
-  #purchaseAmount;
-
-  constructor(purchaseAmount) {
-    this.#purchaseAmount = purchaseAmount;
-  }
-
-  #calculateRateOfReturn(income) {
-    const inputMoney = this.#purchaseAmount * LOTTO_TICKET_PRICE;
-    const rateOfReturn = (income / inputMoney) * PERCENTAGE;
-    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
-  }
-
-  getRateOfReturn(matchingTable) {
+  getRateOfReturn(matchingTable, purchaseAmount) {
     let income = DEFAULT_NUM;
     Object.entries(matchingTable).forEach(([matchedCount, count]) => {
       income += PRIZE[matchedCount] * count;
     });
-    return this.#calculateRateOfReturn(income);
+    return this.#calculateRateOfReturn(income, purchaseAmount);
+  }
+
+  #calculateRateOfReturn(income, purchaseAmount) {
+    const inputMoney = purchaseAmount * LOTTO_TICKET_PRICE;
+    const rateOfReturn = (income / inputMoney) * PERCENTAGE;
+    return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
   }
 }

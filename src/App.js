@@ -26,8 +26,9 @@ class App {
     this.#bonus = await this.#generateBonus();
     const matchCountList = this.#countMatchingNumbers(purchaseLotto);
     const matchingTable = new WinningResult(matchCountList).getResult();
-    const rateOfReturn = new RateOfReturn(purchaseAmount).getRateOfReturn(
+    const rateOfReturn = new RateOfReturn().getRateOfReturn(
       matchingTable,
+      purchaseAmount,
     );
     OutputView.printLotteryResultsSummary(matchingTable, rateOfReturn);
   }
