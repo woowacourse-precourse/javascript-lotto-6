@@ -5,7 +5,7 @@ const QUESTIONS = {
 };
 
 class PurchasingLotto {
-  async getUserCost() {
+  static async getUserCost() {
     const userCost = await Utils.ask(QUESTIONS.purchaseLottoPrice);
     const costStringToNumber = Number(userCost);
     return costStringToNumber;
