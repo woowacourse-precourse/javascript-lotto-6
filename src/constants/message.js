@@ -29,5 +29,17 @@ export const ERROR_MESSAGE = {
     IS_NOT_MULTIPLE_SELLING_PRICE: `죄송합니다. 돌려드릴 잔돈이 없어서 ${LOTTO.SELLING_PRICE} 단위로 입력해주세요.`,
     HAVE_SPACING: '구매금액 사이에 공백을 넣지 말아주세요.',
     IS_OVER_PURCHASABLE_PRICE_OF_PER_DAY: `1일 최대 구매 금액은 ${LIMIT_PER_DAY_PURCHASABLE_TOTAL_PRICE}이며 총 ${LIMIT_PER_DAY_PURCHASABLE_COUNT}장 입니다.`,
+    HAVE_NOT_NUMBER_TYPE: '(,)로 분리된 값은 숫자만 입력해주세요.',
+    EXIST_OVER_RANGE_NUMBER: `당첨 숫자의 범위는 ${LOTTO.NUMBER_RANGE.MIN}~${LOTTO.NUMBER_RANGE.MAX} 사이의 숫자만 가능합니다.`,
+    INVALID_WINNING_NUMBERS_COUNT: `당첨 번호는 ${LOTTO.NUMBER_COUNT}개여야 합니다.`,
+    HAVE_INVALID_INPUT_WITHOUT_NUMBER_AND_COMMA:
+      '(,)를 기준으로 양의 정수(과학적 기수법 금지)만 입력해주세요 ex) 1,2,3,4,5,6',
+    HAVE_DUPLICATED_NUMBER: '중복된 되지 않은 숫자만 입력해주세요.',
+    HAVE_NOT_INTEGER_NUMBER:
+      '소수점이 없는 정수만 입력해주세요. ex) 1,2,3,4,5,6',
+    EXIST_NEGATIVE_SIGN:
+      '음수가 들어있습니다. 양의 정수만 입력해주세요. ex) 1,2,3,4,5,6',
+    EXIST_BETWEEN_COMMA_EMPTY_STRING:
+      '콤마 사이에 반드시 숫자를 넣어주세요. ex) 1,2,3,4,5,6',
   },
 };
