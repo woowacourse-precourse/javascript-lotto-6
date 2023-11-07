@@ -11,7 +11,8 @@ const LottoUi = {
       return Number(purchaseAmount);
     } catch (err) {
       Console.print(err.message);
-      this.inputPurchaseAmount();
+
+      return await this.inputPurchaseAmount();
     }
   },
 
@@ -28,7 +29,7 @@ const LottoUi = {
       return winningNumbers;
     } catch (err) {
       Console.print(err.message);
-      this.inputWinningNumbers();
+      return await this.inputWinningNumbers();
     }
   },
 
@@ -42,7 +43,7 @@ const LottoUi = {
       return bonusNumber;
     } catch (err) {
       Console.print(err.message);
-      this.inputBonusNumber();
+      return await this.inputBonusNumber();
     }
   },
 
