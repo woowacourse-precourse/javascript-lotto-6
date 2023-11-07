@@ -1,6 +1,6 @@
 import ERROR_MESSAGE from './constant/ErrorMessage';
 
-const LOTTO_PRICE = 1000;
+const LOTTO_COST = 1000;
 
 class Validate {
   static payment(input) {
@@ -9,7 +9,7 @@ class Validate {
     if (Number.isNaN(payment)) {
       throw new Error(ERROR_MESSAGE.nonNumeric);
     }
-    if (payment <= 0 || !Number.isInteger(payment / LOTTO_PRICE)) {
+    if (payment <= 0 || !Number.isInteger(payment / LOTTO_COST)) {
       throw new Error(ERROR_MESSAGE.invalidAmount);
     }
   }
