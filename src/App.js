@@ -46,7 +46,6 @@ class App {
     return lottos;
   }
 
-
   // 4-1. 당첨 번호 입력 받기
   async getWinningNums(){
     const winningNums = await inputWinningNum();

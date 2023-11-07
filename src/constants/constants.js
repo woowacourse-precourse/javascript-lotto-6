@@ -26,7 +26,6 @@ export const PRIZES = {
   6: 2000000000,
 };
 
-
 Object.freeze(INPUT_MESSAGE);
 Object.freeze(OUTPUT_MESSAGE);
 Object.freeze(PRIZES_MESSAGE);
