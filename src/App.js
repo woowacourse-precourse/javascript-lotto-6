@@ -4,6 +4,7 @@ import numberInput from "./View/numberInput";
 import Lotto from "./Lotto";
 import makeRandomNumbers from "./makeRandomNumbers";
 import calculateLottoNumber from "./calculateLottoNumber";
+import getStatistics from "./getStatistics";
 class App {
   async play() {
     const amount = await AmountInput();
@@ -17,11 +18,13 @@ class App {
       lottoList.push(new Lotto(sortedRandomNumbers));
     }
     const [winningNumbers, bonusNumber] = await numberInput();
+    const lottoResult = { 3: 0, 4: 0, 5: 0, "5bonus": 0, 6: 0 };
     lottoList.forEach((lotto) => {
       const [result, bonusResult] = lotto.compareNumbers(
         winningNumbers,
         bonusNumber
       );
+      getStatistics(lottoResult, result, bonusResult);
     });
   }
 }
