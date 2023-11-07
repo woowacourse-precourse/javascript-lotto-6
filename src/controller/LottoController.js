@@ -19,8 +19,7 @@ class LottoController {
   compareLottos(winningNumbers, bonusNumber) {
     this.#lottos.forEach(lotto => {
       const matchResult = this.matchLotto(lotto, winningNumbers, bonusNumber);
-
-      this.updateLottoStatistics(matchResult);
+      this.#statistics.updateTable(matchResult);
     });
   }
 
@@ -30,31 +29,6 @@ class LottoController {
     const bonus = includeBonusNumber(numbers, bonusNumber);
 
     return { count, bonus };
-  }
-
-  updateLottoStatistics(matchResult) {
-    if (matchResult.count < 3 && !matchResult.bonus) return;
-
-    const key = this.determineStatisticsKey(matchResult);
-    this.updateStatistics(key);
-  }
-
-  determineStatisticsKey({ count, bonus }) {
-    if (count === 5 && bonus) {
-      return 'match5Bonus';
-    }
-
-    if (bonus) {
-      return `match${count + 1}`;
-    }
-
-    return `match${count}`;
-  }
-
-  updateStatistics(key) {
-    if (this.#statistics[key]) {
-      this.#statistics[key].count += 1;
-    }
   }
 
   calculateRateOfReturn() {
