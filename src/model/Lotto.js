@@ -1,5 +1,11 @@
 import { Random } from '@woowacourse/mission-utils';
 import { START_NUMBER, END_NUMBER, SIZE } from '../constants/index.js';
+import {
+  isLengthSix,
+  isNotNaturalAll,
+  isDuplicated,
+  isValidLottoRangeAll,
+} from '../utils/isValidValue.js';
 
 class Lotto {
   #numbers;
@@ -11,9 +17,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
+    if (!isLengthSix(numbers))
+      throw new Error('[ERROR] : 로또 번호는 6개여야 합니다.');
+
+    if (isNotNaturalAll(numbers))
+      throw new Error(`[ERROR] : 1부터 45까지의 자연수를 입력하세요\n`);
+
+    if (isDuplicated(numbers))
+      throw new Error(`[ERROR] : 숫자는 중복될 수 없습니다.\n`);
+
+    if (isValidLottoRangeAll(numbers))
+      throw new Error(`[ERROR] : 1부터 45 사이의 수를 입력하세요\n`);
   }
 
   getNumbers() {
