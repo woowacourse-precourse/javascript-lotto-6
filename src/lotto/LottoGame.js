@@ -1,17 +1,18 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import GameUtils from './GameUtils.js';
-import { WINNIG_PROFITS } from '../Constants.js';
+import { LOTTO_LENGTH, LOTTO_PRICE, WINNIG_PROFITS } from '../Constants.js';
 import Validation from '../validation/Validation.js';
 class LottoGame {
   #lottos;
   #purchaseNumber;
   #purchaseAmount;
+
   constructor(purchaseAmount) {
     this.#lottos = [];
     Validation.validatepurchaseInput(purchaseAmount);
     this.#purchaseAmount = purchaseAmount;
-    this.#purchaseNumber = purchaseAmount / 1000;
+    this.#purchaseNumber = purchaseAmount / LOTTO_PRICE;
     this.#issueLotto();
   }
 
@@ -31,8 +32,7 @@ class LottoGame {
   }
 
   generateRandomNumbers() {
-    const RANDOM_NUMBERS = [];
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, LOTTO_LENGTH);
   }
 
   getWinningStatus(winningNumbers, bonusNumber) {

@@ -1,4 +1,4 @@
-import Validation from "../validation/Validation";
+import Validation from "../validation/Validation.js";
 
 class Lotto {
   #numbers;

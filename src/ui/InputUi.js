@@ -1,13 +1,12 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Validation from '../validation/Validation.js';
 import GameUtils from '../lotto/GameUtils.js';
+import { INPUT_MESSAGE } from '../Constants.js';
 class InputUi {
   constructor() {}
   async askpurchaseAmount() {
     try {
-    const PURCHASE_AMOUNT = await MissionUtils.Console.readLineAsync(
-      '구입 금액을 입력하세요.\n'
-    );
+    const PURCHASE_AMOUNT = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.purchaseAmount);
     Validation.validatepurchaseInput(PURCHASE_AMOUNT);
     return PURCHASE_AMOUNT;
     } catch(error) {
@@ -17,9 +16,7 @@ class InputUi {
   }
   async askWinningNumber() {
     try {
-    const WINNING_NUMBER_INPUT = await MissionUtils.Console.readLineAsync(
-      '당첨 번호를 입력하세요.\n'
-    );
+    const WINNING_NUMBER_INPUT = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.winningNumbers);
     const WINNING_NUMBER = GameUtils.splitComma(WINNING_NUMBER_INPUT);
     Validation.validateLottoNumbers(WINNING_NUMBER);
     return WINNING_NUMBER;
@@ -30,9 +27,7 @@ class InputUi {
   }
   async askBonusNumber() {
     try {
-    const BONUS_NUMBER = await MissionUtils.Console.readLineAsync(
-      '보너스 번호를 입력하세요.'
-    );
+    const BONUS_NUMBER = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
     Validation.validateBonusNumber(BONUS_NUMBER);
     return BONUS_NUMBER;
     } catch(error) {
