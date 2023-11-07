@@ -1,6 +1,6 @@
 import CompareLottoMachine from '../src/CompareLottoMachine.js';
 import User from '../src/User.js';
-import profitRateCalculator from '../src/util/profitRateCalculator.js';
+import roundAndFormatWithComma from '../src/util/roundAndFormatWithComma.js';
 
 describe('compareResult 총 결과 테스트', () => {
   describe('총 결과 테스트', () => {
@@ -167,7 +167,7 @@ describe('compareResult 총 결과 테스트', () => {
       const [_, profitRate] = user.compareResult(compareLottoMachine);
 
       // when
-      const result = profitRateCalculator(profitRate);
+      const result = roundAndFormatWithComma(profitRate, 1);
       // then
       expect(result).toEqual('0.0');
     });
@@ -183,7 +183,7 @@ describe('compareResult 총 결과 테스트', () => {
       const [_, profitRate] = user.compareResult(compareLottoMachine);
 
       // when
-      const result = profitRateCalculator(profitRate);
+      const result = roundAndFormatWithComma(profitRate, 1);
       // then
       expect(result).toEqual('500.0');
     });
@@ -202,7 +202,7 @@ describe('compareResult 총 결과 테스트', () => {
       const [_, profitRate] = user.compareResult(compareLottoMachine);
 
       // when
-      const result = profitRateCalculator(profitRate);
+      const result = roundAndFormatWithComma(profitRate, 1);
       // then
       expect(result).toEqual('2,750.0');
     });
@@ -222,7 +222,7 @@ describe('compareResult 총 결과 테스트', () => {
       const [_, profitRate] = user.compareResult(compareLottoMachine);
 
       // when
-      const result = profitRateCalculator(profitRate);
+      const result = roundAndFormatWithComma(profitRate, 1);
       // then
       expect(result).toEqual('51,833.3');
     });
@@ -243,7 +243,7 @@ describe('compareResult 총 결과 테스트', () => {
       const [_, profitRate] = user.compareResult(compareLottoMachine);
 
       // when
-      const result = profitRateCalculator(profitRate);
+      const result = roundAndFormatWithComma(profitRate, 1);
       // then
       expect(result).toEqual('788,875.0');
     });
@@ -265,7 +265,7 @@ describe('compareResult 총 결과 테스트', () => {
       const [_, profitRate] = user.compareResult(compareLottoMachine);
 
       // when
-      const result = profitRateCalculator(profitRate);
+      const result = roundAndFormatWithComma(profitRate, 1);
 
       // then
       expect(result).toEqual('40,631,100.0');

@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import profitRateCalculator from '../util/profitRateCalculator.js';
+import roundAndFormatWithComma from '../util/roundAndFormatWithComma.js';
 
 const OutputView = {
   printTotalLottos(lottos) {
@@ -44,8 +44,8 @@ const OutputView = {
   },
 
   formatProfitRate(profitRate) {
-    const calculatedProfitRate = profitRateCalculator(profitRate);
-    return `총 수익률은 ${calculatedProfitRate}%입니다.`;
+    const formattedProfitRate = roundAndFormatWithComma(profitRate, 1);
+    return `총 수익률은 ${formattedProfitRate}%입니다.`;
   },
 
   print(message) {
