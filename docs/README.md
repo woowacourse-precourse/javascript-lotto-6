@@ -20,13 +20,13 @@
 
 - [x] 구입 금액 숫자가 아닌 경우
 
-  **2. 로또 번호**
+**2. 로또 번호**
 
 - [x] 로또 번호가 6개가 아닌 경우
 - [x] 로또 번호가 1~45사이가 아닌 경우
 - [x] 로또 번호가 중복되는 경우
 
-  **3. 보너스 번호**
+**3. 보너스 번호**
 
 - [x] 보너스 번호가 숫자가 아닌 경우
 - [x] 보너스 번호가 1~45사이가 아닌 경우
@@ -66,19 +66,19 @@ errors: 예외 처리 함수들을 관리 폴더
 
 ### 폴더 구조
 
-📦src
-┣ 📂errors
-┃ ┣ 📜amountInputError.js
-┃ ┣ 📜bonusNumberError.js
-┃ ┗ 📜winningNumbersError.js
-┣ 📂View
-┃ ┣ 📜AmountInput.js
-┃ ┣ 📜numberInput.js
-┃ ┗ 📜printResult.js
-┣ 📜App.js
-┣ 📜calculateLottoNumber.js
-┣ 📜calculateProfit.js
-┣ 📜getStatistics.js
-┣ 📜index.js
-┣ 📜Lotto.js
-┗ 📜makeRandomNumbers.js
+src
+┣ errors
+┃ ┣ amountInputError.js
+┃ ┣ bonusNumberError.js
+┃ ┗ winningNumbersError.js
+┣ View
+┃ ┣ AmountInput.js
+┃ ┣ numberInput.js
+┃ ┗ printResult.js
+┣ App.js
+┣ calculateLottoNumber.js
+┣ calculateProfit.js
+┣ getStatistics.js
+┣ index.js
+┣ Lotto.js
+┗ makeRandomNumbers.js
