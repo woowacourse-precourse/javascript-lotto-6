@@ -2,8 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_NOTIFICATION_MESSAGE } from '../constants/LottoMessage.js';
 
 /**
- * @public
- * @param message
+ * @param {string} message
  * @returns {string}
  */
 const readLine = (message) => Console.readLineAsync(message);
