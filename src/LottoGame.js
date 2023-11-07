@@ -8,6 +8,7 @@ class LottoGame {
   #purchaseAmount;
   #lottoList;
   #winningNumbers;
+  #bonusNumber;
 
   async play() {
     await this.inputPurchaseAmount();
@@ -17,6 +18,9 @@ class LottoGame {
     OutputView.printNewLine();
 
     await this.inputWinningNumbers();
+    OutputView.printNewLine();
+
+    await this.inputBonusNumber();
     OutputView.printNewLine();
   }
 
@@ -46,6 +50,10 @@ class LottoGame {
 
   async inputWinningNumbers() {
     this.#winningNumbers = await InputView.readWinningNumbers();
+  }
+
+  async inputBonusNumber() {
+    this.#bonusNumber = await InputView.readBonusNumber();
   }
 }
 

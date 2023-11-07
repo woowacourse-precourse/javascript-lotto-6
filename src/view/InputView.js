@@ -13,12 +13,20 @@ class InputView {
   }
 
   static async readWinningNumbers() {
-    const purchaseAmount = await Console.readLineAsync(
+    const winningNumbers = await Console.readLineAsync(
       INPUT_MESSAGE.winningNumbers,
     );
-    Validator.checkWinningNumbers(purchaseAmount);
+    Validator.checkWinningNumbers(winningNumbers);
 
-    return purchaseAmount;
+    return winningNumbers;
+  }
+
+  static async readBonusNumber() {
+    const bonusNumbers = await Console.readLineAsync(
+      INPUT_MESSAGE.bonusNumbers,
+    );
+
+    return bonusNumbers;
   }
 }
 
