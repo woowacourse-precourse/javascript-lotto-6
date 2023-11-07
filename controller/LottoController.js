@@ -30,11 +30,10 @@ class LottoController {
   }
 
   checkIsBonus(arr, bonus) {
-    if (arr.includes(bonus)) {
-      this.matchNumCountArr.push(Constants.BONUS_MATCH);
-    } else {
-      this.matchNumCountArr.push(Constants.STANDARD_MATCH);
-    }
+    const matchCount = arr.includes(bonus)
+      ? Constants.BONUS_MATCH
+      : Constants.STANDARD_MATCH;
+    this.matchNumCountArr.push(matchCount);
   }
 
   getWinCountArr(arr) {
