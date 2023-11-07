@@ -24,13 +24,6 @@ class LottoController {
     };
   }
 
-  showLottos() {
-    this.#lottos.forEach(lotto => {
-      const numbers = lotto.getNumbers();
-      OutputView.printIssuedLottoNumbers(numbers);
-    });
-  }
-
   compareLottos(winningNumbers, bonusNumber) {
     this.#lottos.forEach(lotto => {
       const matchResult = this.matchLotto(lotto, winningNumbers, bonusNumber);

@@ -1,6 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 
 import { LOTTO_NUMBER, LOTTO_PRICE } from '../constants/setting.js';
+import OutputView from '../views/OutputView.js';
 import Lotto from './Lotto.js';
 
 class LottoShop {
@@ -14,6 +15,7 @@ class LottoShop {
       lottos.push(lotto);
     }
 
+    OutputView.printLottos(lottos);
     return lottos;
   }
 
