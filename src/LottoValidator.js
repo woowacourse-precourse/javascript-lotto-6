@@ -62,12 +62,15 @@ class LottoValidator {
       "[ERROR] 로또 번호는 중복되지 않아야 합니다."
     );
     lottoNumbers.forEach((number) => {
-      ValidationUtils.validateIsNumber(number, "[ERROR] 숫자를 입력해 주세요");
+      ValidationUtils.validateIsNumber(
+        number,
+        "[ERROR] 로또의 각 번호는 정수여야 합니다."
+      );
       ValidationUtils.validateInRange(
         number,
         1,
         45,
-        "[ERROR] 로또는 1~45 사이의 숫자로 구성되어야 합니다"
+        "[ERROR] 로또는 1~45 사이의 숫자로 구성되어야 합니다."
       );
     });
   }
@@ -92,13 +95,13 @@ class LottoValidator {
     lottoNumbers.forEach((number) => {
       ValidationUtils.validateIsNumber(
         number,
-        "[ERROR] 당첨 로또는 정수로 구성되어야 합니다"
+        "[ERROR] 당첨 로또는 정수로 구성되어야 합니다."
       );
       ValidationUtils.validateInRange(
         number,
         1,
         45,
-        "[ERROR] 당첨 로또는 1~45 사이의 숫자로 구성되어야 합니다"
+        "[ERROR] 당첨 로또는 1~45 사이의 숫자로 구성되어야 합니다."
       );
     });
   }
