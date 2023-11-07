@@ -30,6 +30,10 @@ class Output {
   printDivider() {
     this.print(GUIDE_MESSAGE.divider)
   }
+
+  printError(message) {
+    MissionUtils.Console.print(`${message}`)
+  }
 }
 
 export default Output;
