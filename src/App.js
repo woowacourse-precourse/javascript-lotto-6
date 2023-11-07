@@ -47,6 +47,32 @@ class App {
     return lottoNumber;
   }
 
+  async getUserBonusNumber(lottoNumber) {
+    Console.print(' ');
+    const bonusNumberInput = await Console.readLineAsync(
+      CONSOLE_MESSAGE.PROMPT_USER_BONUS_LOTTO_NUMBER
+    );
+
+    this.validateBonusNumber(Number(bonusNumberInput), lottoNumber);
+
+    return Number(bonusNumberInput);
+  }
+
+  validateBonusNumber(bonusNumber, lottoNumber) {
+    if (isNaN(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_FORMAT_ERROR);
+    }
+    if (bonusNumber !== parseInt(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_INTEGER_FORMAT_ERROR);
+    }
+    if (lottoNumber.getNumbers().some(num => num === bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_DUPLICATE_ERROR);
+    }
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_RANGE_ERROR);
+    }
+  }
+
   async play() {
     const userPriceInput = await this.getUserPrice();
     const lottoAmount = Price.calculateLottoAmount(userPriceInput);
@@ -54,7 +80,8 @@ class App {
     const lottos = this.generateLottos(lottoAmount);
     this.printPurchasedLottos(lottos);
     Console.print(' ');
-    const n = await this.getUserLottoNumbers();
+    const lottoNumbers = await this.getUserLottoNumbers();
+    const bonusNumber = await this.getUserBonusNumber(lottoNumbers);
   }
 }
 
