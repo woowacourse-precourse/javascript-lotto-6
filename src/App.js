@@ -1,6 +1,7 @@
 import Handler from "./lib/Handler/index.js";
 import OutputView from "./lib/View/OutputView.js";
 import { ERROR_MESSAGE } from "./lib/Constants.js";
+import { ViewError } from "./lib/Error/ViewError.js";
 
 class App {
   // referenceLotto를 저장하면 결과는 계산될 수 있음에도 result를 보관하는 이유가 존재
@@ -20,6 +21,7 @@ class App {
       this.#result = referenceLotto.calcResult(this.#lottoBundle.items);
       this.printResult();
     } catch (err) {
+      if (err instanceof ViewError) throw err;
       OutputView.err({ message: err.message });
     }
   }
@@ -27,7 +29,7 @@ class App {
   printLottoBundle() {
     try {
       if (!this.#lottoBundle) {
-        throw new Error(ERROR_MESSAGE.INSTANCE_NOT_INITIALIZED);
+        throw new ViewError(ERROR_MESSAGE.INSTANCE_NOT_INITIALIZED);
       }
       OutputView.lottoBundle({
         purchaseHistory: this.#lottoBundle.purchaseHistory,
@@ -40,7 +42,7 @@ class App {
   printResult() {
     try {
       if (!this.#result) {
-        throw new Error(ERROR_MESSAGE.INSTANCE_NOT_INITIALIZED);
+        throw new ViewError(ERROR_MESSAGE.INSTANCE_NOT_INITIALIZED);
       }
       const { prizeMap, winRate } = this.#result;
       OutputView.result({ prizeMap, winRate });
