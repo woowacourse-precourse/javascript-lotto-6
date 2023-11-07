@@ -33,31 +33,46 @@ export function makeLottos(count) {
 }
 
 export async function getUserLottoInput() {
-  const userLottoInput = await Console.readLineAsync(
-    "\n당첨 번호를 입력해 주세요.\n"
-  );
-  const userLottoNumbers = userLottoInput.split(",");
-  validateUserLottoInput(userLottoNumbers);
-  const userLottoBonusNum = await Console.readLineAsync(
-    "보너스 번호를 입력해 주세요.\n"
-  );
-  validateUserBonusInput(userLottoBonusNum);
-
+  let userLottoNumbers = [];
+  while (true) {
+    const userLottoInput = await Console.readLineAsync(
+      "\n당첨 번호를 입력해 주세요.\n"
+    );
+    const userLottoNumbers = userLottoInput.split(",");
+    try {
+      validateUserLottoInput(userLottoNumbers);
+      break;
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+  let userLottoBonusNum;
+  while (true) {
+    const userLottoBonusNum = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요.\n"
+    );
+    try {
+      validateUserBonusInput(userLottoBonusNum);
+      break;
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
   return {
     numbers: userLottoNumbers.map(Number),
     bonusNumber: Number(userLottoBonusNum),
   };
 }
+
 export function validateUserLottoInput(numbers) {
-  const parsedNumbers = numbers.map(Number);
-  if (parsedNumbers.length !== 6) {
+  if (numbers.length !== 6) {
     throw new Error("[ERROR] 로또 번호는 6개여야 합니다");
   }
-  if (new Set(parsedNumbers).size !== 6) {
+  if (new Set(numbers).size !== 6) {
     throw new Error("[ERROR] 로또 번호는 중복되지 않아야 합니다");
   }
-  for (let number of parsedNumbers) {
-    if (number < 1 || number > 45) {
+  for (let number of numbers) {
+    if (isNaN(number) || number < 1 || number > 45) {
       throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
   }
