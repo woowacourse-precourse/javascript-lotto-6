@@ -1,7 +1,32 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Model/Lotto.js';
+import ERROR from './constants/Error.js';
+import { throwError, conditions } from './Validator.js';
+
+const { PAYMENT_NUMBER, PAYMENT_THOUSAND } = ERROR;
+const { isPositiveInteger, isThousandUnits } = conditions;
 
 class LottoMachine {
+  #quantity;
+
+  constructor(purchaseAmount) {
+    this.#validate(purchaseAmount);
+    this.#quantity = this.#calculateQuantity(purchaseAmount);
+  }
+
+  #validate(number) {
+    this.#validatePositiveInteger(number);
+    this.#validateThousandUnit(number);
+  }
+
+  #validatePositiveInteger(number) {
+    throwError(PAYMENT_NUMBER, isPositiveInteger(number));
+  }
+
+  #validateThousandUnit(number) {
+    throwError(PAYMENT_THOUSAND, isThousandUnits(number));
+  }
+
   #calculateQuantity(purchaseAmount) {
     return Math.floor(purchaseAmount / 1000);
   }
@@ -23,11 +48,10 @@ class LottoMachine {
     return new Lotto(this.#generateLottoNumbers());
   }
 
-  getLotto(purchaseAmount) {
-    const quantity = this.#calculateQuantity(purchaseAmount);
+  getLotto() {
     const lottoArray = [];
 
-    while (lottoArray.length < quantity) {
+    while (lottoArray.length < this.#quantity) {
       lottoArray.push(this.#generateLotto());
     }
 
