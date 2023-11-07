@@ -15,11 +15,14 @@ export default class Lottery {
 
   #lottoList;
 
+  #winningCount;
+
   constructor() {
     this.#payMoney = 0;
     this.#winningNumberList = [];
     this.#bonusNumer = 0;
     this.#lottoList = [];
+    this.#winningCount = [0, 0, 0, 0, 0]; // 3,4,5,5+보너스,6개 일치
   }
 
   commomValidator(inputValue) {
@@ -80,5 +83,61 @@ export default class Lottery {
     this.#lottoList.forEach((lotto) => lotto.sortNumbers());
     // 로또들 출력
     this.#lottoList.forEach((lotto) => lotto.printNumbers());
+  }
+
+  matchNumbers() {
+    const matchResults = this.#lottoList.map((lotto) =>
+      lotto.checkWinning(this.#winningNumberList, this.#bonusNumer),
+    );
+
+    matchResults.forEach((eachResult) => {
+      if (eachResult.winning - 3 === 3) {
+        this.#winningCount[4] += 1;
+        return;
+      }
+      if (eachResult.winning - 3 === 2) {
+        if (eachResult.bonus) {
+          this.#winningCount[3] += 1;
+          return;
+        }
+        this.#winningCount[2] += 1;
+        return;
+      }
+      if (eachResult.winning - 3 >= 0)
+        this.#winningCount[eachResult.winning - 3] += 1;
+    });
+  }
+
+  printWinnigCount() {
+    const outputComments = [
+      '3개 일치',
+      '4개 일치',
+      '5개 일치',
+      '5개 일치, 보너스 볼 일치',
+      '6개 일치',
+    ];
+    const prizes = [5000, 50000, 1500000, 30000000, 2000000000];
+    const prizesString = prizes.map((eachPrize) => {
+      const resultStringParts = [];
+      for (let i = 3; i >= 1; i -= 1) {
+        const tmp = Math.floor(eachPrize / 1000 ** i);
+        if (tmp >= 1 && tmp < 1000) {
+          resultStringParts.push(tmp);
+        }
+        if (tmp >= 1000) {
+          resultStringParts.push('000');
+        }
+      }
+      resultStringParts.push('000');
+      return resultStringParts.join(',');
+    });
+
+    Console.print('\n당첨 통계');
+    Console.print('---');
+    this.#winningCount.forEach((eachCount, index) =>
+      Console.print(
+        `${outputComments[index]} (${prizesString[index]}원) - ${eachCount}개`,
+      ),
+    );
   }
 }

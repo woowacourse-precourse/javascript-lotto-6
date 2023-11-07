@@ -23,6 +23,17 @@ class Lotto {
     const printableNumbers = this.#numbers.join(', ');
     Console.print(`[${printableNumbers}]`);
   }
+
+  checkWinning(winningNumbers, bonusNumber) {
+    // reduce를 쓰거나 include랑 filter를 쓰든가....
+    // 맞는 개수 리턴하자
+    const winningCount = winningNumbers.reduce(
+      (acc, cur) => (this.#numbers.includes(cur) ? acc + 1 : acc),
+      0,
+    );
+    const hasBonus = this.#numbers.includes(bonusNumber);
+    return { winning: winningCount, bonus: hasBonus };
+  }
 }
 
 export default Lotto;
