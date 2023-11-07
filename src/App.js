@@ -2,6 +2,8 @@ import { inputAmount } from "./input/InputAmount.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { isValidAmount } from "./utils/vaildator.js";
 import { printLottoCount } from "./view/LottoCount.js";
+import Lotto from "./Lotto.js";
+import { printLottoNum } from "./view/LottoNum.js";
 
 class App {
   async play() {
@@ -9,7 +11,7 @@ class App {
     isValidAmount(amount);
 
     const count = printLottoCount(amount);
-
+    const lottos = printLottoNum(count);
   }
 }
 
