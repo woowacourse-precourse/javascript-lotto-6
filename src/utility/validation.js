@@ -2,7 +2,7 @@ import { ConsoleInput } from "../ConsoleInput.js";
 import { ERROR_MSG, LOTTO_RULES } from "../constants/constants.js";
 
 export const validateLottoPrice = (price) => {
-  if (price % LOTTO_RULES.PRICE !== 0 && price < 1000) {
+  if (price % LOTTO_RULES.PRICE !== 0 || price < 1000 || price === "") {
     throw new Error(ERROR_MSG.PRICE);
   }
 };
@@ -21,7 +21,7 @@ export const validateLottoResult = (number, numbers) => {
 };
 
 export const validateBonusNum = (number, lottoResult) => {
-  if (number < 1 || number > 45) {
+  if (number < 1 || number > 45 || number === "") {
     throw new Error(ERROR_MSG.NUMBER_RANGE);
   }
 
