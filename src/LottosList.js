@@ -12,6 +12,7 @@ class LottosList {
   constructor(purchaseAmount) {
     this.validate(purchaseAmount);
     this.calculateLottoAmount(purchaseAmount);
+    this.addLottosToList();
   }
 
   validate(purchaseAmount) {
@@ -21,7 +22,7 @@ class LottosList {
   }
 
   calculateLottoAmount(purchaseAmount) {
-    return (this.lottoAmount = purchaseAmount / 1000);
+    return (this.#lottoAmount = purchaseAmount / 1000);
   }
 
   produceNewLotto() {
@@ -32,6 +33,13 @@ class LottosList {
     );
 
     return new Lotto(numbers);
+  }
+
+  addLottosToList() {
+    for (let i = 0; i < this.#lottoAmount; i++) {
+      const newLotto = this.produceNewLotto().numbersArray;
+      this.#lottosList.push(newLotto);
+    }
   }
 }
 
