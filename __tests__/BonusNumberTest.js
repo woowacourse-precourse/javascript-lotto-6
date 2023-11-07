@@ -3,11 +3,14 @@ import BonusNumber from '../src/models/BonusNumber.js';
 describe('보너스 번호 클래스 테스트', () => {
   const winningNumber = [1, 2, 3, 4, 5, 6];
 
-  test('보너스 번호가 정수가 아니면 예외가 발생한다.', () => {
-    expect(() => {
-      new BonusNumber(winningNumber, '10.5');
-    }).toThrow('특수문자, 영문자, 소수');
-  });
+  test.each(['^', 'six', '6.1'])(
+    '보너스 번호가 정수가 아니면 예외가 발생한다.',
+    (input) => {
+      expect(() => {
+        new BonusNumber(winningNumber, input);
+      }).toThrow('특수문자, 영문자, 소수');
+    }
+  );
 
   test('보너스 번호가 0으로 시작하는 숫자이면 예외가 발생한다.', () => {
     expect(() => {
