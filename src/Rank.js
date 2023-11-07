@@ -27,6 +27,10 @@ class Rank {
       0
     );
   }
+
+  get() {
+    return this.#ranks;
+  }
 }
 
 export default Rank;

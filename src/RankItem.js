@@ -26,6 +26,10 @@ class RankItem {
   getWinnings() {
     return this.#prize * this.#winningAmount;
   }
+
+  get() {
+    return [this.#standard, this.#prize, this.#winningAmount];
+  }
 }
 
 export default RankItem;
