@@ -1,3 +1,12 @@
+import {
+  NOT_NUMBER_ERROR_MESSAGE,
+  NOT_AVAILABLE_NUMBER_ERROR_MESSAGE,
+  NOT_HAS_COMMA_ERROR_MESSAGE,
+  SIX_NUMBERS,
+  NOT_ALLOWED_DUPLICATED_NUMBERS,
+  COMMA,
+  THOUSAND,
+} from "../constants/messages.js";
 
 export const isNumber = (amount) => {
   if (isNaN(amount)) throw new Error(NOT_NUMBER_ERROR_MESSAGE);
