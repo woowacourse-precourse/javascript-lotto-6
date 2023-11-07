@@ -1,5 +1,4 @@
-import { GAME_MESSAGE } from "./Constant.js";
-
+const { GAME_MESSAGE } = require("./Constant.js");
 const { Console } = require("@woowacourse/mission-utils");
 const LottoGame = require("./LottoGame.js");
 
@@ -17,6 +16,7 @@ class App {
       this.game.setLottoCount(money);
       this.game.printLottoCount();
       this.game.printLottoList();
+      this.game.inputWinningNumbers();
     });
   }
 
@@ -28,15 +28,21 @@ class App {
   }
 
   inputBonusNum() {
-    Console.readLineAsync(GAME_MESSAGE.BONUS_NUM, (bonusNum) =>
-      this.game.setBonusNum(bonusNum)
-    );
+    Console.readLineAsync(GAME_MESSAGE.BONUS_NUM, (bonusNumber) => {
+      this.game.setBonusNumber(bonusNumber);
+      this.inputWinningStats();
+    });
   }
 
   inputWinningStats() {
     Console.print(GAME_MESSAGE.STATIC);
     this.game.setWinningStats();
     this.game.printLottoRate();
+    this.gameEnd();
+  }
+
+  gameEnd() {
+    Console.close();
   }
 }
 
