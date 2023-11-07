@@ -36,20 +36,6 @@ class Lotto {
     return numbers;
   };
 
-  // getSixNum = async () => {
-  //   let sixNum;
-  //   do {
-  //     try {
-  //       sixNum = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-  //       sixNum = this.#validate(sixNum);
-  //     } catch(error) {
-  //       throw new Error(error.message);
-  //     }
-  //   } while(!sixNum);
-
-  //   return sixNum;
-  // };
-
   getBonusNum = async () => {
     do {
       try {
@@ -69,12 +55,12 @@ class Lotto {
     PrintOutput.printTotalReturn();
   };
 
-  #validateBonusNum(numbers, bonusNum) {
+  #validateBonusNum(bonusNum) {
     if (Array.isArray(bonusNum))
       throw new Error("[ERROR] 숫자는 1개만 입력해야 합니다.");
     if (Number.isNaN(bonusNum))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-    if (numbers.includes(bonusNum))
+    if (this.#numbers.includes(bonusNum))
       throw new Error("[ERROR] 6개의 당첨 번호 이외의 숫자를 입력해야 합니다.");
     if (bonusNum <= 0 || bonusNum >= 46)
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
