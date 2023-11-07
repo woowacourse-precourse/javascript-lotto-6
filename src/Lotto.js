@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { LOTTO } from './config.js';
+import { isDuplicated } from './utils.js';
 
 class Lotto {
   static generateLottoNumbers() {
@@ -24,6 +25,9 @@ class Lotto {
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+    if (isDuplicated(numbers)) {
+      throw new Error('[ERROR] 로또 번호에 중복된 숫자가 있습니다.');
     }
   }
 
