@@ -1,10 +1,8 @@
-import { inputAmount } from "./input/InputAmount.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { isDuplicate, isNumberInRange, isSixLength, isValidAmount } from "./utils/vaildator.js";
-import { printLottoCount } from "./view/LottoCount.js";
+import { inputAmount, inputBonnusNum, inputWinningNum } from "./view/Input.js";
+import { printLottoCount, printLottoNum } from "./view/Output.js";
 import Lotto from "./Lotto.js";
-import { printLottoNum } from "./view/LottoNum.js";
-import { inputBonnusNum, inputWinningNum } from "./input/InputWinningNum.js";
 
 class App {
   async play() {
