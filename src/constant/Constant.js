@@ -11,7 +11,7 @@ export const MESSAGE = {
   LOTTO_RESULT_SIX: "6개 일치 (2,000,000,000원) - ",
   LOTTO_RESULT_SUFFIX: "개",
   EARNING_RATE_PREFIX: "총 수익률은 ",
-  EARNING_RATE_SUFFIX: "입니다."
+  EARNING_RATE_SUFFIX: "%입니다."
 };
 
 export const SPLIT_SEPARATOR = ",";
