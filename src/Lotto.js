@@ -1,5 +1,6 @@
 import Validator from '../utils/Validator.js';
 import CONSTANTS from '../utils/Constants.js';
+import { PRIZE } from '../utils/Prize.js';
 
 class Lotto {
   #numbers;
@@ -18,8 +19,20 @@ class Lotto {
     return this.#numbers;
   }
 
+  raffleNumbers(mainNumbers, bonusNumber) {
+    const matchingNumberCount = this.raffleMainNumber(mainNumbers);
+    if (matchingNumberCount === CONSTANTS.bonusNumberConditionCount)
+      return this.raffleBonusNumber(bonusNumber);
+    return PRIZE[matchingNumberCount];
+  }
+
   raffleMainNumber(mainNumbers) {
     return CONSTANTS.mainNumberCount * 2 - new Set([...this.#numbers, mainNumbers]).size;
+  }
+
+  raffleBonusNumber(bonusNumber) {
+    if (this.#numbers.includes(bonusNumber)) return PRIZE.secondPrize;
+    return PRIZE.thirdPrize;
   }
 }
 
