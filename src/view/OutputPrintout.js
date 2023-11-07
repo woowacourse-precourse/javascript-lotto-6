@@ -1,11 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
-import { PRINT_OUTPUT, PRINT_MATHINGNUMBER, NEWLINE } from "../utils/Constant.js";
+import { PRINT_OUTPUT, PRINT_MATHINGNUMBER } from "../utils/Constant.js";
 import LottoController from "../controller/LottoController.js";
 
 const OutputPrintout = {
 	printLottos: (amount) => {
 		const count = LottoController.countLottos(amount);
-		Console.print(`${NEWLINE}${count}${PRINT_OUTPUT.outputLottoCount}`);
+		Console.print("");
+		Console.print(`${count}${PRINT_OUTPUT.outputLottoCount}`);
 
 		Array.from({ length: count }).forEach(() => {
 			const lotto = LottoController.generateLotto();

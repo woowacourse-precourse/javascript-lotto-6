@@ -1,6 +1,5 @@
 "use strict";
 
-const NEWLINE = "\n";
 const COMMA = ",";
 
 const LOTTO = Object.freeze({
@@ -53,13 +52,4 @@ const ERROR_MESSAGE = Object.freeze({
 	invalidInputAmount: "[ERROR] 1000원 이상 입력해주세요",
 });
 
-export {
-	NEWLINE,
-	COMMA,
-	LOTTO,
-	PRINT_INPUT,
-	PRINT_OUTPUT,
-	PRINT_MATHINGNUMBER,
-	ERROR_MESSAGE,
-	MONEY,
-};
+export { COMMA, LOTTO, PRINT_INPUT, PRINT_OUTPUT, PRINT_MATHINGNUMBER, ERROR_MESSAGE, MONEY };

@@ -10,7 +10,7 @@ class Lotto {
 	}
 
 	#validate(numbers) {
-		if (!isVaildLottoNumbers(numbers.split(COMMA))) throw new Error();
+		isVaildLottoNumbers(numbers.split(COMMA));
 	}
 
 	getNumbers() {

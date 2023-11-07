@@ -13,19 +13,18 @@ const InputPrintout = {
 	},
 	inputLottoNumbers: async () => {
 		let numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
-		let lotto;
 		let isInvaildInput = true;
 		while (isInvaildInput) {
 			try {
 				isInvaildInput = false;
-				lotto = new Lotto(numbers);
+				new Lotto(numbers);
 			} catch (error) {
 				isInvaildInput = true;
 				Console.print(error);
 				numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
 			}
 		}
-		return lotto;
+		return new Lotto(numbers);
 	},
 	inputBonusNum: async () => {
 		let bonus = await Console.readLineAsync(PRINT_INPUT.inputBonusNum);
