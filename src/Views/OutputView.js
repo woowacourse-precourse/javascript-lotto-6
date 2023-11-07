@@ -3,11 +3,11 @@ import { LOTTO_SETTINGS } from "../config/gameSetting.js";
 
 export default class OutputView {
   static printPurchseResults(numOfLottos) {
-    Console.print(`${numOfLottos}개를 구매했습니다.`);
+    Console.print(`\n${numOfLottos}개를 구매했습니다.`);
   }
 
-  static printResultMessage(result) {
-    let resultMessages = "";
+  static printResultMessage(result, yieldRate) {
+    let resultMessages = `\n당첨 통계\n---\n`;
     for (const [key, { prize, matchNum }] of Object.entries(
       LOTTO_SETTINGS.WINNINGS
     )) {
@@ -18,7 +18,7 @@ export default class OutputView {
         result[key]
       }개\n`;
     }
-
+    resultMessages += `총 수익률은 ${yieldRate}%입니다.`;
     Console.print(resultMessages);
   }
 

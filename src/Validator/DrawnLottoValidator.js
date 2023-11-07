@@ -1,4 +1,5 @@
-import { LottoSettings } from "../config/gameSetting";
+import { LottoSettings } from "../config/gameSetting.js";
+import LottoError from "../Error/LottoError.js";
 
 export default class DrawnLottoValidator {
   constructor() {
@@ -14,7 +15,7 @@ export default class DrawnLottoValidator {
 
   #validateBonusNumberDuplicate(numbers, bonusNumber) {
     if (numbers.includes(bonusNumber))
-      throw new LottoError("중복된 숫자가 있습니다.");
+      throw new LottoError("보너스 번호가 당첨번호와 중복됩니다.");
   }
 
   #validateRangeOfPlusNumber(bonusNumber) {

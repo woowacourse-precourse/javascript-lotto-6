@@ -24,8 +24,9 @@ export default class LottoYieldCalculator {
     return this.setting.getPrizeForRank(rank) * matchCount;
   }
 
-  getResult(lottosNumbers, drawnLottoNumbers, bonusNumber) {
+  getResult(lottosNumbers, drawnLotto) {
     const result = this.#initializeResultObject();
+    const { drawnLottoNumbers, bonusNumber } = drawnLotto.getFullNumbers();
     lottosNumbers.forEach((lottoNumbers) => {
       const { matchCount, hasBonusNumber } = this.#checkMatchCount(
         lottoNumbers,

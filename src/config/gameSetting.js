@@ -41,7 +41,9 @@ export class LottoSettings {
   }
 
   getLottoNumberRange() {
-    return this.settings.NUMBER_RANGE.MIN, this.settings.NUMBER_RANGE.MAX;
+    const minOfLottoNumberRange = this.settings.NUMBER_RANGE.MIN;
+    const maxOfLottoNumberRange = this.settings.NUMBER_RANGE.MAX;
+    return { minOfLottoNumberRange, maxOfLottoNumberRange };
   }
 
   getNumberPerLotto() {

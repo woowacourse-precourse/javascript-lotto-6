@@ -3,30 +3,23 @@ import { OutputView } from "../Views/index.js";
 
 export default class AnnounceResult {
   static announceTotalResult(lottos, drawnLotto, purchaseAmount) {
-    const result = this.#announcePrizeResult(lottos, drawnLotto);
-    this.#announceYieldRate(result, purchaseAmount);
+    const result = this.#calcalateResult(lottos, drawnLotto);
+    const yieldRate = this.#calculateYieldRate(result, purchaseAmount);
+    OutputView.printResultMessage(result, yieldRate);
   }
 
-  static #announcePrizeResult(lottos, drawnLotto) {
+  static #calcalateResult(lottos, drawnLotto) {
     const lottoYieldCalculator = new LottoYieldCalculator();
-    const { drawnLottoNumbers, bonusNumber } = drawnLotto.getFullNumbers();
-
-    const result = lottoYieldCalculator.getResult(
-      lottos,
-      drawnLottoNumbers,
-      bonusNumber
-    );
-    OutputView.printResultMessage(result);
+    const result = lottoYieldCalculator.getResult(lottos, drawnLotto);
     return result;
   }
 
-  static #announceYieldRate(result, purchaseAmount) {
+  static #calculateYieldRate(result, purchaseAmount) {
     const lottoYieldCalculator = new LottoYieldCalculator();
     const yieldRate = lottoYieldCalculator.caculateYieldRate(
       result,
       purchaseAmount.getAmount()
     );
-
-    OutputView.printYieldRate(yieldRate);
+    return yieldRate;
   }
 }

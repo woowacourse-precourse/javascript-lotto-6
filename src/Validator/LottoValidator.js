@@ -1,4 +1,5 @@
 import { LottoSettings } from "../config/gameSetting.js";
+import LottoError from "../Error/LottoError.js";
 
 export default class LottoValidator {
   constructor() {
