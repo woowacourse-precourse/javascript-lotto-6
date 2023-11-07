@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_PRIZE_AMOUNT, MESSAGE } from '../constant/lottoConstants';
+import Formatter from './Formatter';
 
 class LottoViewer {
   static purchasedLottos(lottoTickets) {
@@ -11,8 +12,7 @@ class LottoViewer {
   }
 
   static winningResult(result) {
-    const formatter = new Intl.NumberFormat('ko-KR');
-
+    const formatter = Formatter.numberFormat();
     // 개행 줄의 공백을 없애기 위해 replace 사용
     Console.print(`당첨통계
       ---
@@ -22,6 +22,11 @@ class LottoViewer {
       5개 일치, 보너스 볼 일치 (${formatter.format(LOTTO_PRIZE_AMOUNT.SECOND_PLACE)}원) - ${result.secondPrize}개
       6개 일치 (${formatter.format(LOTTO_PRIZE_AMOUNT.FIRST_PLACE)}원) - ${result.firstPrize}개
     `.replace(/^ +/gm, ''));
+  }
+
+  static lottoProfitRate(profitRate) {
+    const formatter = Formatter.numberFormat();
+    Console.print(`총 수익률은 ${formatter.format(Formatter.convertToTwoDecimalPoints(profitRate))}%입니다.`);
   }
 }
 

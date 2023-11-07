@@ -43,6 +43,7 @@ class App {
     const { winningNumbers, bonusNumber } = this.#lotto.getWinningNumbers();
     const lottoResultChecker = new LottoResultChecker(winningNumbers, bonusNumber, boughtLottos);
     LottoViewer.winningResult(lottoResultChecker.getResult());
+    LottoViewer.lottoProfitRate(lottoResultChecker.getProfitRate());
   }
 }
 
