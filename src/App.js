@@ -6,6 +6,7 @@ class App {
     this.lottoAll = new Array();
     this.number = [];
     this.bonus = 0;
+    this.statistics = new Array(5).fill(0);
   }
 
   async buyLotto() {
@@ -72,6 +73,17 @@ class App {
     }
     
     return input.filter(x => this.number.includes(x)).length;
+  }
+
+  CompareAll() {
+    this.lottoAll.forEach((lotto) => {
+      const cnt = this.Compare(lotto) - 3;
+      if (cnt >= 0) {
+        this.statistics[cnt]++;
+      }
+    });
+
+    return this.statistics;
   }
   }
   
