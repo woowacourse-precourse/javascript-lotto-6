@@ -44,12 +44,19 @@ class App {
 				bonusNumber
 			);
 
-			const winningStatistics = this.getWinningStatistics(
+			const winningStatisticsMessage = this.getWinningStatistics(
 				matchingNumbersArray,
 				matchingBonusNumberArray
 			);
 
-			this.view.printWinningStatistics(winningStatistics);
+			this.view.printWinningStatistics(winningStatisticsMessage);
+
+			const totalPrize = this.getTotalPrize(
+				matchingNumbersArray,
+				matchingBonusNumberArray
+			);
+
+			Console.print(totalPrize);
 		} catch (error) {
 			throw error;
 		}
@@ -117,6 +124,11 @@ class App {
 	getMatchingBonusNumberArray(myLottoTicketsArray, bonusNumber) {
 		const model = new Lotto(myLottoTicketsArray);
 		return model.getMatchingBonusNumberArray(bonusNumber);
+	}
+
+	getTotalPrize(matchingNumbersArray, matchingBonusNumberArray) {
+		const model = new Lotto(matchingNumbersArray);
+		return model.getTotalPrize(matchingBonusNumberArray);
 	}
 
 	getWinningStatistics(matchingNumbersArray, matchingBonusNumberArray) {
