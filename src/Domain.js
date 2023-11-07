@@ -7,7 +7,7 @@ class Domain {
         for(let i = 0; i < COUNT; i++){
             let LOTTONUM = await Random.pickUniqueNumbersInRange(1,45,6);
             LOTTOS.push(LOTTONUM);
-            Console.print(`[${LOTTONUM}]`);
+            Console.print(`[${LOTTONUM[0]+","+" "+LOTTONUM[1]+","+" "+LOTTONUM[2]+","+" "+LOTTONUM[3]+","+" "+LOTTONUM[4]+","+" "+LOTTONUM[5]}]`);
          }
         }
     async ScoreSet (LOTTOS,SCORE,USERCHOOSENUMBER,USERBONUSNUMBER) {

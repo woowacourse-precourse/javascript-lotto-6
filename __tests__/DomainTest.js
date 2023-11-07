@@ -34,15 +34,15 @@ describe("도메인 클래스 테스트", () => {
         const logSpy = getLogSpy();
 
         mockRandoms([
-            [1,5,34,23,22,15],
-            [6,34,24,12,1,4]
+            [1, 5, 34, 23, 22, 15],
+            [6, 34, 24, 12, 1, 4]
         ]);
 
         await domain.GetLottoNumbers(2,[]);
 
         const logs = [
-            "[1,5,34,23,22,15]",
-            "[6,34,24,12,1,4]",
+            "[1, 5, 34, 23, 22, 15]",
+            "[6, 34, 24, 12, 1, 4]",
         ]
         logs.forEach((log) => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log))
