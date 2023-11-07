@@ -2,6 +2,11 @@ import Lotto from './Lotto.js';
 import WinLotto from './WinLotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
+/**
+ * @typedef {import('./Lotto').default} Lotto
+ * @typedef {import('./WinLotto').default} WinLotto
+ */
+
 const LOTTO_REWARD = {
     5: 5_000,
     4: 50_000,
@@ -206,4 +211,15 @@ export function getReturnRate(lottoPay, rankMap) {
  */
 function printReturnRate(lottoPay, rankMap) {
     MissionUtils.Console.print(`총 수익률은 ${getReturnRate(lottoPay, rankMap)}%입니다.`);
+}
+
+/**
+ * @param {number} lottoPay
+ * @param {Map<number, number>} rankMap
+ */
+export function printStatistics(lottoPay, rankMap) {
+    MissionUtils.Console.print('당첨 통계');
+    MissionUtils.Console.print('---');
+    printRankStatistics(rankMap);
+    printReturnRate(lottoPay, rankMap);
 }
