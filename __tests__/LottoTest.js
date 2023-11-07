@@ -58,9 +58,7 @@ describe('로또 클래스 테스트', () => {
 
   test('일치하는 번호의 갯수에 맞는 등수를 리턴하는지 테스트', () => {
     testCases.forEach((testCase, index) => {
-      expect(new Lotto(testCase).raffleNumbers(mainNumbers, bonusNumber)).toBe(
-        expectedResult[index],
-      );
+      expect(new Lotto(testCase).raffleLotto(mainNumbers, bonusNumber)).toBe(expectedResult[index]);
     });
   });
 });
