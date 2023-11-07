@@ -2,8 +2,7 @@ class LottoResultCalculator {
   #winningNumbers;
   #bonusNumber;
 
-  constructor(lottoBalls) {
-    const { winningNumbers, bonusNumber } = lottoBalls.getLottoBalls();
+  constructor({ winningNumbers, bonusNumber }) {
     this.#winningNumbers = winningNumbers;
     this.#bonusNumber = bonusNumber;
   }

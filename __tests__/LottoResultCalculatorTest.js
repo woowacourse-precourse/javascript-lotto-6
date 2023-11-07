@@ -1,5 +1,4 @@
 import Lotto from '../src/Lotto';
-import LottoBalls from '../src/LottoBalls';
 import LottoResultCalculator from '../src/LottoResultCalculator';
 
 describe('LottoResultCalculator 테스트', () => {
@@ -8,8 +7,8 @@ describe('LottoResultCalculator 테스트', () => {
       new Lotto([1, 2, 3, 4, 5, 6]),
       new Lotto([1, 5, 4, 23, 45, 7]),
     ];
+    const lottoBalls = { winningNumbers: [1, 2, 3, 4, 5, 6], bonusNumber: 7 };
 
-    const lottoBalls = new LottoBalls('1,2,3,4,5,6', '7');
     const calculator = new LottoResultCalculator(lottoBalls);
     const result = calculator.checkLottoResult(lottoTickets);
 
