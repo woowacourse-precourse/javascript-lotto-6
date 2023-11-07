@@ -12,14 +12,14 @@ class App {
 
   constructor() {
     this.basedAmount = 1000;
-    this.randomNumbers = new Array(6);
+    this.randomNumbers = Array.from({length: 45}, (_, i) => i + 1);;
     this.lottoArray = new Array();
   }
 
   async play() {
     this.enterPurchaseAmount();
     this.createLottoArray();
-    this.printRandomLottoNumbers();
+    this.printLottoNumbers();
     this.enterWinningNumbers();
   }
 
@@ -31,19 +31,17 @@ class App {
 
   createLottoArray() {
     for (let i = 0 ; i < this.purchaseAmount ; i += 1) {
-      for (let j = 0 ; j < 6 ; j += 1) {
-        this.randomNumbers[j] = Random.pickNumberInRange(1, 45);
-      }
-      this.lottoArray.push(new Lotto(this.randomNumbers));
+      Random.shuffle(this.randomNumbers)
+      this.lottoArray.push(new Lotto(array.slice(0, 6)));
     }
   }
 
-  printRandomLottoNumbers() {
+  printLottoNumbers() {
     Console.print(this.purchaseAmount + "개를 구매했습니다.");
 
-    for (let i = 0 ; i < this.purchaseAmount ; i += 1) {
-      Console.print("[" + this.numbersArray[i] + "]");
-    }
+    this.lottoArray.forEach(lottoClass => {
+      lottoClass.printNumbers();
+    })
 
     Console.print("");
   }
