@@ -1,43 +1,44 @@
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "./constants/gameConstant";
-import { ERROR_MESSAGE } from "./constants/errorMessage";
-import Lotto from "./Lotto";
+import Validation from "./Validation";
 
-class GetInputValue{
-    static async getPurchaseAmount(){
-        const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.INPUT_PURCHASE_AMOUNT);
-        if(purchaseAmount === ''){
-            throw new Error(ERROR_MESSAGE.NO_INPUT);
-        }
-        if(isNaN(purchaseAmount)){
-            throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-        }
-        if(parseInt(purchaseAmount)%1000!==0){
-            throw new Error(ERROR_MESSAGE.WRONG_UNIT_OF_MONEY);
-        }
-        return purchaseAmount;
-    }
+const GetInputValue={
+	async getPurchaseAmount(){
+		try {
+			const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.INPUT_PURCHASE_AMOUNT);
+			Validation.validPurchaseAmount(purchaseAmount);
+			return purchaseAmount;
+		} catch (error) {
+      Console.print(error.message);
+		}
+		
+	},
 
-    static async getWinningNumbers(){
-        const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.INPUT_WINNING_NUMBERS);
-        const checkWinningNumbers = winningNumbers.split(',');
-        checkWinningNumbers.sort();
-        for(let i=0; i<checkWinningNumbers.length; i++){
-            checkWinningNumbers[i] = parseInt(checkWinningNumbers[i]);
-        }
-        new Lotto(checkWinningNumbers);
-        return checkWinningNumbers;
-    }
+	async getWinningNumbers(){
+		try {
+			const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.INPUT_WINNING_NUMBERS);
+			const checkWinningNumbers = winningNumbers.split(',');
+			checkWinningNumbers.sort();
+			for(let i=0; i<checkWinningNumbers.length; i++){
+				checkWinningNumbers[i] = Number(checkWinningNumbers[i]);
+			}
+			Validation.validWinningNumber(checkWinningNumbers);
+			return checkWinningNumbers;
+		} catch (error) {
+      Console.print(error.message);
+		}
+	},
 
-    static async getBonusNumber(){
-        const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BONUS_NUMBER);
-        if(bonusNumber === ''){
-            throw new Error(ERROR_MESSAGE.NO_INPUT);
-        }
-        if(isNaN(bonusNumber)){
-            throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-        }
-    }
+	async getBonusNumber(){
+		try {
+			const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BONUS_NUMBER);
+			Console.print(bonusNumber);
+			Validation.validBonusNumber(checkWinningNumbers, bonusNumber);
+			return bonusNumber;
+		} catch (error) {
+      Console.print(error.message);
+		}
+	}
 }
 
 export default GetInputValue;
