@@ -1,4 +1,4 @@
-import Constants from "./ValidateConstants.js";
+import Constants from "./Constants/ValidateConstants.js";
 
 class Lotto {
   #numbers;

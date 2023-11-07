@@ -1,5 +1,5 @@
 import Lotto from "./Lotto.js";
-import LottoConstants from "./LottoConstants.js";
+import LottoConstants from "./Constants/LottoConstants.js";
 
 class LottoGame {
   constructor(myLotto) {

@@ -1,4 +1,4 @@
-import Constants from "../ValidateConstants.js";
+import Constants from "../Constants/ValidateConstants.js";
 
 class ValidateInput {
   static validateNaturalNumber(number, subject) {
