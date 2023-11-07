@@ -38,6 +38,13 @@ class App {
       this.lottoAll.push(this.randomPickNum());
     }
   }
+  printAllLotto() {
+    Console.print('\n' + this.lottoAll.length + '개를 구매했습니다.');
+
+    this.lottoAll.forEach((lotto) => {
+      Console.print(lotto);
+    });
+  }
     
   }
   }
