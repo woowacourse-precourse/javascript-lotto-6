@@ -3,9 +3,6 @@ import Lotto from "./Lotto.js";
 import { Random, Console } from "@woowacourse/mission-utils";
 
 class Input {
-  static previousLottoNumbers = []; // 이전에 구매한 로또 번호 저장
-  static previousBonusNumber = 0; // 이전에 구매한 보너스 번호 저장
-
   static async inputMoney() {
     try {
       const money = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
@@ -18,11 +15,13 @@ class Input {
         const count = purchaseAmount / 1000;
         const message = `${count}개를 구매했습니다.`;
         Console.print(message);
-
+        const lottoNumbersArray = [];
         for (let i = 0; i < count; i++) {
           const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+          lottoNumbersArray.push(lottoNumbers);
           Console.print(`[${lottoNumbers.join(", ")}]`);
         }
+        return lottoNumbersArray;
       }
     } catch (error) {
       Console.print(`${error.message}`);
@@ -38,8 +37,7 @@ class Input {
       const lottoNumbers = number
         .split(",")
         .map((number) => parseInt(number, 10));
-      const lotto = new Lotto(lottoNumbers);
-      Input.previousLottoNumbers.push([...lottoNumbers]); // 복제본을 배열에 추가
+      return lottoNumbers; // lottoNumbers를 반환
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
@@ -52,13 +50,13 @@ class Input {
         "보너스 번호를 입력해 주세요.\n"
       );
       const bonusNumber = parseInt(numberString, 10);
-      Lotto.validateBonusNumber([bonusNumber]);
-      Input.previousBonusNumber = bonusNumber;
+      return bonusNumber; // bonusNumber를 반환
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
     }
   }
+  
 }
 
 export default Input;

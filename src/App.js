@@ -4,11 +4,15 @@ import Result from "./Result.js";
 
 class App {
   async play() {
-    await Input.inputMoney();
-    await Input.inputNumber();
-    await Input.bonusNumber();
+    try {
+      const lottoNumbersArray = await Input.inputMoney();
+      const userLottoNumbers = await Input.inputNumber();
+      const userBonusNumber = await Input.bonusNumber();
 
-    Result.showResult();
+      await Result.showResult(lottoNumbersArray, userLottoNumbers, userBonusNumber);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 }
 
