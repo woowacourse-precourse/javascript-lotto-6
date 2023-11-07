@@ -1,3 +1,5 @@
+import {ERROR} from "../constants/constants.js";
+
 export class InputValidator {
   /**
    * @param {string} input
@@ -7,7 +9,7 @@ export class InputValidator {
   validateMoneyInput(input) {
     //숫자가 아닌 경우
     if (isNaN(Number(input))) {
-      throw new Error("[ERROR] 구입 금액은 숫자만 가능합니다.");
+      throw new Error(ERROR.MONEY_NUMBER_ONLY_ERROR);
     }
   }
 
@@ -31,7 +33,7 @@ export class InputValidator {
   validateBonusNumberInput(input) {
     //숫자가 아닌 경우
     if (isNaN(Number(input))) {
-      throw new Error("[ERROR] 구입 금액은 숫자만 가능합니다.");
+      throw new Error(ERROR.MONEY_NUMBER_ONLY_ERROR);
     }
   }
 }

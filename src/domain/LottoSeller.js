@@ -1,6 +1,6 @@
 import {LottoGenerator} from "./LottoGenerator.js";
-import Lotto from "./Lotto.js";
 import {Lottos} from "./Lottos.js";
+import {NUMBER} from "../constants/constants.js";
 
 export class LottoSeller {
   /**
@@ -76,7 +76,7 @@ export class LottoSeller {
    */
   #buy(money) {
     //로또 금액만큼 잔액 차감
-    money.subtract(Lotto.PRICE);
+    money.subtract(NUMBER.LOTTO_PRICE);
     //새로운 로또 발행해서 넘기기!
     return this.#lottoGenerator.generate();
   }

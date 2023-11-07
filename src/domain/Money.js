@@ -1,3 +1,5 @@
+import {ERROR} from "../constants/constants.js";
+
 export class Money {
   /**
    * @type {number}
@@ -10,7 +12,7 @@ export class Money {
    * @param {number} amount
    */
   constructor(amount) {
-    this.#validate(amount);
+    this.#validateUnit(amount);
     this.#amount = amount;
   }
 
@@ -62,10 +64,10 @@ export class Money {
    * @return {void}
    */
 
-  #validate(amount) {
+  #validateUnit(amount) {
     //1000원으로 나누어떨어지지 않을 경우
     if (amount % 1000 !== 0) {
-      throw new Error("[ERROR] 구매 금액은 1000원 단위로 입력되어야합니다.");
+      throw new Error(ERROR.MONEY_UNIT_ERROR);
     }
   }
 
@@ -74,8 +76,9 @@ export class Money {
    * @return {void}
    */
   #validateAmount(sum) {
+    // 잔액은 0 미만이 될 수 없음
     if (sum < 0) {
-      throw new Error("[ERROR] 잔액은 0 미만이 될 수 없음");
+      throw new Error(ERROR.UNDER_ZERO_ERROR);
     }
   }
 }

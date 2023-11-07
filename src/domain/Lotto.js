@@ -1,15 +1,7 @@
 import {LottoDto} from "./dto/LottoDto.js";
+import {ERROR} from "../constants/constants.js";
 
 class Lotto {
-  /**
-   * 로또 가격이 인상되더라도 상수로 만들었기 때문에
-   * PRICE 한번만 바꾸면 된다!
-   *
-   * 1000이라는 리터럴 그대로 사용하지 않기~
-   *
-   * @type {number}
-   */
-  static PRICE = 1000;
   /**
    * @type {number[]}
    */
@@ -35,11 +27,11 @@ class Lotto {
    */
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR.LOTTO_LENGTH_ERROR);
     }
     const lottoNums = new Set(numbers);
     if (lottoNums.size !== numbers.length) {
-      throw new Error("[ERROR] 로또 번호는 중복 될 수 없습니다.");
+      throw new Error(ERROR.LOTTO_DUPLICATE_ERROR);
     }
   }
 

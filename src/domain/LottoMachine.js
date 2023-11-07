@@ -1,5 +1,5 @@
 import {DrawResultDto} from "./dto/DrawResultDto.js";
-import Lotto from "./Lotto.js";
+import {NUMBER} from "../constants/constants.js";
 
 /**
  * @description 로또를 추첨해주는 클래스
@@ -89,31 +89,30 @@ export class LottoMachine {
    */
   #draw(matchingNumberCount, hasBonusNumber) {
     // 1. 총 구매금액 올리기
-    this.#totalCost += Lotto.PRICE;
+    this.#totalCost += NUMBER.LOTTO_PRICE;
     // 2. 총 수익금액 올리기
     // 3. 등수 올리기 (rank)
     if (hasBonusNumber && matchingNumberCount === 5) {
       this.#secondRank++;
-      this.#totalEarning += 30_000_000;
+      this.#totalEarning += NUMBER.SECOND_PRIZE;
       return;
     }
     if (matchingNumberCount === 6) {
       this.#firstRank++;
-      this.#totalEarning += 2_000_000_000;
+      this.#totalEarning += NUMBER.FIRST_PRIZE;
     }
     if (matchingNumberCount === 5) {
       this.#thirdRank++;
-      this.#totalEarning += 1_500_000;
+      this.#totalEarning += NUMBER.THIRD_PRIZE;
     }
     if (matchingNumberCount === 4) {
       this.#forthRank++;
-      this.#totalEarning += 50_000;
+      this.#totalEarning += NUMBER.FORTH_PRIZE;
     }
     if (matchingNumberCount === 3) {
       this.#fifthRank++;
-      this.#totalEarning += 5_000;
+      this.#totalEarning += NUMBER.FIFTH_PRIZE;
     }
-    // TODO : 전부 상수화하기!!! 배운거 다 정리(정규표현쓰는 부분 실험한것도 정리)
   }
 
   /**
@@ -135,6 +134,6 @@ export class LottoMachine {
    */
   #calculateEarningRate() {
     const earningRate100 = (this.#totalEarning / this.#totalCost) * 100; // 주의)백분율로 구하기
-    return Number(earningRate100.toFixed(1)); // 소수점 둘째자리에서 반올림
+    return Number(earningRate100.toFixed(NUMBER.TO_FIXED_DIGITS)); // 소수점 둘째자리에서 반올림
   }
 }

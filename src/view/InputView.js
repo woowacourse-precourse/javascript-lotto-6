@@ -1,7 +1,8 @@
-import { Console } from "@woowacourse/mission-utils";
-import { InputValidator } from "./InputValidator.js";
-import { InputConverter } from "./InputConverter.js";
-import { LottoMachine } from "../domain/LottoMachine.js";
+import {Console} from "@woowacourse/mission-utils";
+import {InputValidator} from "./InputValidator.js";
+import {InputConverter} from "./InputConverter.js";
+import {LottoMachine} from "../domain/LottoMachine.js";
+import {MESSAGE} from "../constants/constants.js";
 
 export class InputView {
   /**
@@ -33,7 +34,7 @@ export class InputView {
    * 검증 한 후 `number`로 변환해서 리턴
    */
   async inputMoney() {
-    const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    const input = await Console.readLineAsync(MESSAGE.INPUT_MONEY);
     try {
       this.#inputValidator.validateMoneyInput(input);
       return this.#inputConverter.convertToMoney(input);
@@ -68,7 +69,7 @@ export class InputView {
   async #inputWinningNumbers() {
     try {
       const input = await Console.readLineAsync(
-        "\n당첨 번호를 입력해 주세요.\n"
+        MESSAGE.INPUT_WINNING_NUMBER
       );
       this.#inputValidator.validateWinningNumberInput(input);
       return this.#inputConverter.convertToWinningNumbers(input);
@@ -88,9 +89,7 @@ export class InputView {
    */
   async #inputBonusNumber() {
     try {
-      const input = await Console.readLineAsync(
-        "\n보너스 번호를 입력해 주세요.\n"
-      );
+      const input = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
       this.#inputValidator.validateBonusNumberInput(input);
       return this.#inputConverter.convertToBonusNumber(input);
     } catch (error) {
