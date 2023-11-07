@@ -43,6 +43,7 @@ class App {
     this.printWinningResult(winningResult);
 
     const lottoROI = this.getLottoROI(parsedpurchaseAmount, winningResult);
+    this.printLottoROI(lottoROI);
   }
 
   validateAskPurchaseAmount(purchaseAmount) {
@@ -111,6 +112,10 @@ class App {
     const lottoROI = Math.round((prize / purchaseAmount) * 1000) / 10;
 
     return lottoROI;
+  }
+
+  printLottoROI(lottoROI) {
+    Console.print(`총 수익률은 ${lottoROI}%입니다.`);
   }
 }
 
