@@ -80,7 +80,7 @@ export class Results {
     return new Intl.NumberFormat("ko-KR", {
       style: "currency",
       currency: "KRW",
-    minimumFractionDigits: 0,  // 소수점 이하 자릿수 설정
+    minimumFractionDigits: 0, 
     }).format(number).replace(/₩/g, '');
   }
 

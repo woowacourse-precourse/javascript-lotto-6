@@ -47,9 +47,7 @@ export class Counter {
     for (let num = 0; num < counts; num++) {
       const newLotto = this.createNewLotto();
       this.list.push(newLotto);
-      //model.lottoNumbers.push(newLotto)
     }
-    //model.lottoNumbers = this.list;
   }
 
   createNewLotto() {
