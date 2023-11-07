@@ -47,6 +47,50 @@ class Data {
     this.#lottoCnt = INITIALIZE_NUM;
     this.#lottoWin = INITIALIZE_OBJECT;
   }
+
+  get moneyInput() {
+    return this.#moneyInput;
+  }
+
+  set moneyInput(value) {
+    this.#moneyInput = value;
+  }
+
+  get lottoBonus() {
+    return this.#lottoBonus;
+  }
+
+  set lottoBonus(value) {
+    this.#lottoBonus = value;
+  }
+
+  get lottoBuy() {
+    return this.#lottoBuy;
+  }
+
+  set lottoBuy(value) {
+    this.#lottoBuy = value;
+  }
+
+  addLottoBuy(value) {
+    this.#lottoBuy = [...this.#lottoBuy, value];
+  }
+
+  get lottoCnt() {
+    return this.#lottoCnt;
+  }
+
+  set lottoCnt(value) {
+    this.#lottoCnt = value;
+  }
+
+  get lottoWin() {
+    return this.#lottoWin;
+  }
+
+  set lottoWin(value) {
+    this.#lottoWin = value;
+  }
 }
 
 export {
