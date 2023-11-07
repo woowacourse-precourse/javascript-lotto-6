@@ -48,6 +48,7 @@ class DongHang {
     this.#winningNumbers.mainNumbers = new Lotto(mainNumbers);
 
     const bonusNumber = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
+
     this.#winningNumbers.bonusNumber = bonusNumber;
   }
 }

@@ -15,6 +15,10 @@ class NumberValidator {
 
     return TypeValidator.isNumber(value) && value % divisor === 0;
   }
+
+  static isInRange(value, { from, to }) {
+    return TypeValidator.isNumber(value) && value >= from && value <= to;
+  }
 }
 
 export default NumberValidator;
