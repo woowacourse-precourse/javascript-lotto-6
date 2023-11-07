@@ -4,7 +4,7 @@ import { NUMBER } from "../utils/Constant.js";
 const ERROR = {
   UNDEFINED_PURCHASECOST: "[ERROR] 금액을 입력해야 합니다.",
   STRING_IN_PURCHASECOST: "[ERROR] 입력한 값에 문자가 포함되어 있습니다.",
-  NOT_THOUSAND_PURCHASECOST: `[ERROR] 금액은 ${NUMBER.UNIT}원 단위로 입력되어야 합니다.`,
+  NOT_UNIT_PURCHASECOST: `[ERROR] 금액은 ${NUMBER.UNIT}원 단위로 입력되어야 합니다.`,
 }
 
 class PurchaseCost {
@@ -23,7 +23,7 @@ class PurchaseCost {
     } else if (isNaN(cost)) {
       throw new Error(ERROR.STRING_IN_PURCHASECOST);
     } else if (cost % NUMBER.UNIT) {
-      throw new Error(ERROR.NOT_THOUSAND_PURCHASECOST);
+      throw new Error(ERROR.NOT_UNIT_PURCHASECOST);
     }
   }
 
