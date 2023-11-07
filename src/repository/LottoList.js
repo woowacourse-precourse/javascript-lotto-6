@@ -27,13 +27,14 @@ class LottoList {
   }
 
   #printLottoCnt(lottoCnt) {
-    MissionUtils.Console.print(`${lottoCnt}개를 구매했습니다.`);
+    MissionUtils.Console.print(`\n${lottoCnt}개를 구매했습니다.`);
   }
 
   #printLottoList() {
     this.#list.forEach((item) => {
       MissionUtils.Console.print(item);
     });
+    MissionUtils.Console.print('\n');
   }
 
   getLottoList() {

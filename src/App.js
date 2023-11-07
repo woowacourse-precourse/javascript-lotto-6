@@ -1,9 +1,10 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import {
   getLottoCntFromInputMoney,
-  getWinningLottoArray,
+  getWinningNumberArray,
 } from './utils/getUserInput.js';
 import LottoList from './repository/LottoList.js';
+import Lotto from './repository/Lotto.js';
 
 class App {
   async play() {
@@ -17,7 +18,9 @@ class App {
     const winningNumberStr = await MissionUtils.Console.readLineAsync(
       '당첨 번호를 입력해 주세요.\n'
     );
-    const winningLottoArr = getWinningLottoArray(winningNumberStr);
+    const winningNumberArr = getWinningNumberArray(winningNumberStr);
+
+    const winningLottoNumbers = new Lotto(winningNumberArr).getLotto();
   }
 }
 

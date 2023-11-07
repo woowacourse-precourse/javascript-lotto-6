@@ -1,5 +1,3 @@
-import Lotto from '../repository/Lotto.js';
-
 export const checkValueIsNumber = (value) => {
   if (isNaN(Number(value))) {
     return false;
@@ -37,11 +35,10 @@ export const getLottoCntFromInputMoney = (inputMoney) => {
   return lottoCnt;
 };
 
-export const getWinningLottoArray = (inputWinningStr) => {
+export const getWinningNumberArray = (inputWinningStr) => {
   const winningNumberArr = inputWinningStr.split(',').map((item) => {
     return Number(item);
   });
-  const winningLottoNumbers = new Lotto(winningNumberArr).getLotto();
 
-  return winningLottoNumbers;
+  return winningNumberArr;
 };
