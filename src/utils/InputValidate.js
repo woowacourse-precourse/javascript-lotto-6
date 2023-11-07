@@ -1,14 +1,16 @@
 import InputError from "../errors/InputError.js";
 
 class InputValidate {
-  static validateAmount(inputNumber) {
-    InputError.checkEmpty(inputNumber);
-    InputError.checkNonNumeric(inputNumber);
+  static validateInput(input, isBonusNumber = false) {
+    InputError.checkEmpty(input);
+    InputError.checkNonNumeric(input);
 
-    const parsedInput = parseInt(inputNumber, 10);
+    const parsedInput = parseInt(input, 10);
 
     InputError.checkNagativeNumber(parsedInput);
-    InputError.checkInvalidAmount(parsedInput);
+    isBonusNumber
+      ? InputError.checkOutOfRangeNumber(parsedInput)
+      : InputError.checkInvalidAmount(parsedInput);
 
     return parsedInput;
   }
@@ -17,16 +19,12 @@ class InputValidate {
     InputError.checkEmpty(inputNumberList);
   }
 
+  static validateAmount(inputNumber) {
+    return this.validateInput(inputNumber);
+  }
+
   static validateBonusNumber(inputNumber) {
-    InputError.checkEmpty(inputNumber);
-    InputError.checkNonNumeric(inputNumber);
-
-    const parsedInput = parseInt(inputNumber, 10);
-
-    InputError.checkNagativeNumber(parsedInput);
-    InputError.checkOutOfRangeNumber(parsedInput);
-
-    return parsedInput;
+    return this.validateInput(inputNumber, true);
   }
 }
 
