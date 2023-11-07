@@ -5,7 +5,7 @@ import {
   OUTPUT_MESSAGES,
   ERROR_MESSAGES,
 } from "./constants/Messages.js";
-
+import { PRIZE } from "./constants/Prize.js";
 /*
 추가된 요구 사항
 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
@@ -25,19 +25,20 @@ else를 지양한다.
 class App {
   async play() {
     const INPUT_CASH = await this.validateCash();
-    const ARRAY_OF_GAMES = this.showLottoNumbers(INPUT_CASH);
+    const ARRAY_OF_GAMES = this.pushLottoNumbers(
+      this.showGameNumbers(INPUT_CASH)
+    );
     const VERIFIED_WINNING_NUMBER = await this.validateWinningNumber();
     const VERIFIED_BOUNUS_NUMBER = await this.validateBonusNumber(
       VERIFIED_WINNING_NUMBER
     );
-
     const NUMBER_OF_WINS = this.compareLottoNumber(
       ARRAY_OF_GAMES,
       VERIFIED_WINNING_NUMBER,
       VERIFIED_BOUNUS_NUMBER
     );
     const array = this.calculatePrize(NUMBER_OF_WINS);
-    this.showLottoResult(array, INPUT_CASH);
+    //this.showLottoResult(array, INPUT_CASH);
   }
 
   async inputCash() {
@@ -64,38 +65,33 @@ class App {
       return cash;
     }
     throw new Error(ERROR_MESSAGES.CASH_NOT_INTEGER_IN_THOUSANDS);
+    //if(돈을 입력하지 않은 경우)
   }
 
-  showLottoNumbers(INPUT_CASH) {
-    const NUMBER_OF_GAMES = INPUT_CASH / 1000;
-    MissionUtils.Console.print(
-      NUMBER_OF_GAMES + OUTPUT_MESSAGES.PURCHASE_QUANTITY
-    );
-    const ARRAY_OF_GAMES = this.getLottoNUmbers(NUMBER_OF_GAMES);
-    return ARRAY_OF_GAMES;
+  createLottoNumber() {
+    return new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
   }
 
-  getLottoNUmbers(NUMBER_OF_GAMES) {
+  pushLottoNumbers(NUMBER_OF_GAMES) {
     const ARRAY_OF_GAMES = [];
     for (let i = 0; i < NUMBER_OF_GAMES; i++) {
-      const LOTTO_NUMBER = this.getRandomSixNumber();
-      const SORTED_LOTTO_NUMBER = this.getSortedLottoNumber(LOTTO_NUMBER);
-      MissionUtils.Console.print(`[${SORTED_LOTTO_NUMBER.join(", ")}]`);
-      ARRAY_OF_GAMES.push(SORTED_LOTTO_NUMBER);
+      const EACH_LOTTO_NUMBER = this.createLottoNumber();
+      EACH_LOTTO_NUMBER.printLottoNumber();
+      ARRAY_OF_GAMES.push(EACH_LOTTO_NUMBER);
     }
     return ARRAY_OF_GAMES;
   }
 
-  getRandomSixNumber() {
-    const LOTTO_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    return LOTTO_NUMBER;
+  outputLottoNumbers(SORTED_LOTTO_NUMBER) {
+    MissionUtils.Console.print(`[${SORTED_LOTTO_NUMBER.join(", ")}]`);
   }
 
-  getSortedLottoNumber(LOTTO_NUMBER) {
-    const SORTED_LOTTO_NUMBER = LOTTO_NUMBER.sort((a, b) => {
-      return a - b;
-    });
-    return SORTED_LOTTO_NUMBER;
+  showGameNumbers(INPUT_CASH) {
+    const NUMBER_OF_GAMES = INPUT_CASH / 1000;
+    MissionUtils.Console.print(
+      NUMBER_OF_GAMES + OUTPUT_MESSAGES.PURCHASE_QUANTITY
+    );
+    return NUMBER_OF_GAMES;
   }
 
   inputWinningNumber() {
@@ -197,66 +193,60 @@ class App {
   }
 
   compareLottoNumber(lottoNumber, winningNumber, bonusNumber) {
-    const NUMBER_OF_WINS = [];
-    let bonus = 0;
+    let NumberOfWins = { 3: 0, 4: 0, 5: 0, 6: 0, bonus: 0 };
     for (let i = 0; i < lottoNumber.length; i++) {
-      const EACH_LOTTO_GAME = lottoNumber[i];
-      const MATCHING_NUMBER = EACH_LOTTO_GAME.filter((element) =>
-        winningNumber.includes(element)
+      let { correctCount, bonusFlag } = lottoNumber[i].compareLottoNumber(
+        winningNumber,
+        bonusNumber
       );
-      if (
-        MATCHING_NUMBER.length === 5 &&
-        EACH_LOTTO_GAME.includes(bonusNumber)
-      ) {
-        bonus++;
-        continue;
+      if (correctCount !== 0) {
+        console.log(correctCount);
+        NumberOfWins[correctCount]++;
       }
-      if (MATCHING_NUMBER.length >= 3) {
-        NUMBER_OF_WINS.push(MATCHING_NUMBER.length);
+      if (bonusFlag) {
+        NumberOfWins["bonus"]++;
       }
     }
-    return [NUMBER_OF_WINS, bonus];
+    return NumberOfWins;
   }
 
   calculatePrize(NUMBER_OF_WINS) {
-    const arr = NUMBER_OF_WINS[0];
-    const bonus = NUMBER_OF_WINS[1];
-    const counts = Array.from({ length: 4 }, () => 0);
-    arr.forEach((num) => {
-      if (num >= 3 && num <= 6) {
-        counts[num - 3]++;
-      }
-    });
-    return [counts, bonus];
-  }
+    console.log(NUMBER_OF_WINS);
+    //   arr.forEach((num) => {
+    //     if (num >= 3 && num <= 6) {
+    //       counts[num - 3]++;
+    //     }
+    //   });
+    //   return [counts, bonus];
+    // }
 
-  showLottoResult(array, cash) {
-    const prize =
-      array[0][0] * 5000 +
-      array[0][1] * 50000 +
-      array[0][2] * 1500000 +
-      array[0][3] * 2000000000 +
-      array[1] * 30000000;
-    MissionUtils.Console.print(OUTPUT_MESSAGES.WINNING_STATISTICS);
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_3 + array[0][0] + "개"
-    );
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_4 + array[0][1] + "개"
-    );
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_5 + array[0][2] + "개"
-    );
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_BONUS + array[1] + "개"
-    );
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_6 + array[0][3] + "개"
-    );
-    const RATE_OF_RETURN = ((prize / cash) * 100).toFixed(1);
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.RATE_OF_RETURN + RATE_OF_RETURN + "%입니다."
-    );
+    // showLottoResult(array, cash) {
+    //   const prize =
+    //     array[0][0] * PRIZE.THREE_MATCHES +
+    //     array[0][1] * PRIZE.FOUR_MATCHES +
+    //     array[0][2] * PRIZE.FIVE_MATCHES +
+    //     array[0][3] * PRIZE.SIX_MATCHES +
+    //     array[1] * PRIZE.BONUS_MATCHES;
+    //   MissionUtils.Console.print(OUTPUT_MESSAGES.WINNING_STATISTICS);
+    //   MissionUtils.Console.print(
+    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_3 + array[0][0] + "개"
+    //   );
+    //   MissionUtils.Console.print(
+    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_4 + array[0][1] + "개"
+    //   );
+    //   MissionUtils.Console.print(
+    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_5 + array[0][2] + "개"
+    //   );
+    //   MissionUtils.Console.print(
+    //     OUTPUT_MESSAGES.CORRECT_COUNT_BONUS + array[1] + "개"
+    //   );
+    //   MissionUtils.Console.print(
+    //     OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_6 + array[0][3] + "개"
+    //   );
+    //   const RATE_OF_RETURN = ((prize / cash) * 100).toFixed(1);
+    //   MissionUtils.Console.print(
+    //     OUTPUT_MESSAGES.RATE_OF_RETURN + RATE_OF_RETURN + "%입니다."
+    //   );
   }
 }
 export default App;
