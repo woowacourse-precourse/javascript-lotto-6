@@ -8,38 +8,40 @@ class User {
     this.#amount = amount;
   }
 
-  #parseAsNumber(string) {
-    return Number(string);
-  }
-
-  getNumberofPurchase() {
-    return this.#parseAsNumber(this.#amount) / 1000;
-  }
-
-  #divideEachNumber(input) {
-    const divideNum = input.split(',');
-
-    const result = divideNum.map((el) => this.#convertStringtoNumber(el));
-
-    return result;
-  }
-
-  #convertStringtoNumber(string) {
-    const result = Number(string);
-
-    return result;
-  }
-
   async selectLottery() {
-    const lotteryNumber = await Read.input(MESSAGE.QUESTION_PRIZE_NUMBER);
+    const userLottery = this.#convertToNumber(await this.getLotteryInput());
 
-    return this.#divideEachNumber(lotteryNumber);
+    return userLottery;
+  }
+
+  #convertToNumber(array) {
+    const result = array.map((el) => Number(el));
+
+    return result;
+  }
+
+  async getLotteryInput() {
+    const lotteryInput = await Read.input(MESSAGE.QUESTION_PRIZE_NUMBER);
+
+    return this.#divdeEach(lotteryInput);
+  }
+
+  #divdeEach(input) {
+    return input.split(',');
   }
 
   async selectBonus() {
     const bonusNumber = await Read.input(MESSAGE.QUESTION_BONUS_NUMBER);
 
     return bonusNumber;
+  }
+
+  getNumberofPurchase() {
+    return this.#parseAsNumber(this.#amount) / 1000;
+  }
+
+  #parseAsNumber(string) {
+    return Number(string);
   }
 }
 

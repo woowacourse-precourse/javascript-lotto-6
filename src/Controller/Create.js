@@ -14,13 +14,17 @@ class Create {
 
   async RandomLottery() {
     try {
-      await this.#randomNumber(await this.userPurchaseTimes());
+      await this.#getRandomNumber(await this.userPurchaseTimes());
       Print.repeatLottery(this.#randomNum);
     } catch (error) {
       throw new Error(error.message);
     }
 
     return this.#randomNum;
+  }
+
+  #getRandomNumber(times) {
+    this.#randomNum = this.computer.getLotteryNumbers(times);
   }
 
   async userPurchaseTimes() {
@@ -35,10 +39,6 @@ class Create {
     Print.output(`${purchaseTimes}${MESSAGE.RESULT_PAID}`);
 
     return purchaseTimes;
-  }
-
-  #randomNumber(times) {
-    this.#randomNum = this.computer.getLotteryNumbers(times);
   }
 }
 

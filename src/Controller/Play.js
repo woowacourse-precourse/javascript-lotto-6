@@ -1,7 +1,7 @@
 import Create from './Create.js';
 import User from '../Domain/User.js';
 import Lotto from '../Lotto.js';
-import { Console } from '@woowacourse/mission-utils';
+import Print from '../View/Output.js';
 
 class PlayLottery {
   constructor() {
@@ -13,7 +13,7 @@ class PlayLottery {
     try {
       await this.compareUserWith(await this.create.RandomLottery());
     } catch (error) {
-      Console.print(error.message);
+      Print.output(error.message);
     }
   }
 
