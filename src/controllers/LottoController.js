@@ -17,8 +17,8 @@ class LottoController {
   async inputPurchaseAmount() {
     const amount = await this.inputView.purchaseAmount();
     try {
-      // this.lottoData.validatePurchaseAmount(amount);
       this.lottoData = new LottoData(amount);
+      return this.lottoData;
     } catch (error) {
       this.outputView.printError(error.message);
       return this.inputPurchaseAmount();

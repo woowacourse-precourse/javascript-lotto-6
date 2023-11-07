@@ -8,20 +8,16 @@ class LottoData {
     this.count = amount / SETTING.unit;
     this.lottos = [];
     // this.lotto = new Lotto();
-    this.validatePurchaseAmount(amount);
+    this.#validatePurchaseAmount(amount);
   }
 
-  validatePurchaseAmount(amount) {
+  #validatePurchaseAmount(amount) {
     if (!/^\d+$/.test(amount)) {
       throw new Error(ERROR_MESSAGE.notNumber);
     }
     if (amount === '0' || amount % SETTING.unit !== 0) {
       throw new Error(ERROR_MESSAGE.notDivide);
     }
-  }
-
-  getCount() {
-    return this.count;
   }
 
   getLottos() {
