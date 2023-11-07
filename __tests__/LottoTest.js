@@ -1,5 +1,6 @@
 import Lotto from '../src/Lotto.js';
 import { LOTTO } from '../src/config.js';
+import WinningLotto from '../src/WinningLotto.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -49,6 +50,21 @@ describe('로또 클래스 테스트', () => {
   ])('로또 번호 유효성 검사 테스트', (input) => {
     expect(() => {
       new Lotto(input);
+    }).toThrow('[ERROR]');
+  });
+});
+
+describe('당첨 로또 클래스 테스트', () => {
+  test.each([
+    [''],
+    ['1', '2', '3', '', '4', '5'],
+    ['1000', '2', '3', '4', '5', '6'],
+    ['-1,2,3,4,5,6'],
+    ['1,2,3,4,5,6,7'],
+    ['0', '1', '2', '3', '4', '5'],
+  ])('로또 번호 유효성 검사 테스트', (input) => {
+    expect(() => {
+      new WinningLotto(input);
     }).toThrow('[ERROR]');
   });
 });
