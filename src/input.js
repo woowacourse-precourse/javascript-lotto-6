@@ -1,24 +1,27 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GAME_INFO } from "./constant/GAME_INFO.js";
 
-export const input = {
-  async getInputPurchasePrice() {
+export const Input = {
+  async inputPurchasePrice() {
     const purchasePrice = await Console.readLineAsync(
       GAME_INFO.INPUT_PURCHASE_PRICE
     );
-    return await Number(purchasePrice);
+
+    return await +purchasePrice;
   },
 
-  async getInputLotto() {
+  async inputLotto() {
     let lottoArray = await Console.readLineAsync(GAME_INFO.INPUT_LOTTO);
     lottoArray = await lottoArray.toString().split(",").map(Number);
+
     return lottoArray;
   },
 
-  async getInputBonusNumber() {
+  async inputBonusNumber() {
     const bonusNumber = await Console.readLineAsync(
       GAME_INFO.INPUT_BONUS_NUMBER
     );
-    return await Number(bonusNumber);
+
+    return await +bonusNumber;
   },
 };
