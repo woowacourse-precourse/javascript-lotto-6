@@ -26,6 +26,20 @@ class Lotto {
 	getNumbers() {
 		return this.#numbers;
 	}
+
+	getResult(issuedLotteries = [], bonusNumber = 0) {
+		const numbersSet = new Set(this.#numbers);
+		const REWARDS = [5000, 50000, 1500000, 30000000, 2000000000];
+		const result = Object.fromEntries(REWARDS.map((e) => [e, 0]));
+		issuedLotteries.forEach((issuedLotteryNumbers) => {
+			const matchNumbersLength = issuedLotteryNumbers.filter((e) => numbersSet.has(e)).length;
+			if (matchNumbersLength === 3) result[5000] += 1;
+			else if (matchNumbersLength === 4) result[50000] += 1;
+			else if (matchNumbersLength === 5) result[!numbersSet.has(bonusNumber) ? 1500000 : 30000000] += 1;
+			else if (matchNumbersLength === 6) result[2000000000] += 1;
+		});
+		return result;
+	}
 }
 
 export default Lotto;
