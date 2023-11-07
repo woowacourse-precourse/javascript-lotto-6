@@ -8,4 +8,4 @@ export const getEarningRate = (firstAmount, finalAmount) => {
   }
 
   return earningRate.toFixed(1).toString().replace(REGEX.numberSplit,",");
-}
+};

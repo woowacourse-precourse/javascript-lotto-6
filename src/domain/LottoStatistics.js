@@ -1,7 +1,6 @@
 import { LOTTO_RANK, LOTTO_STASTICS } from "../constants/BusinessNumber.js";
 import { getEarningRate } from "../util/EarningRate.js";
 
-
 class LottoStatistics {
   #rankingStatusBoard = {
     [LOTTO_RANK.theFirst] : 0,
@@ -19,9 +18,9 @@ class LottoStatistics {
     LOTTO_STASTICS.fifthPrize
   ];
 
-  #rankArray = [];
+  #rankArray;
 
-  #purchaseAmount = 0;
+  #purchaseAmount;
 
   constructor(rankArray, purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
@@ -43,19 +42,14 @@ class LottoStatistics {
     return finalAmount;
   }
 
-  #getProfitRate() {
-    return getEarningRate(this.#purchaseAmount, this.#getFinalAmount());
-  }
-
-  getResult() {
-    
+  getResult() { 
     return [
       this.#rankingStatusBoard[LOTTO_RANK.theFifth],
       this.#rankingStatusBoard[LOTTO_RANK.theFourth],
       this.#rankingStatusBoard[LOTTO_RANK.theThird],
       this.#rankingStatusBoard[LOTTO_RANK.theSecond],
       this.#rankingStatusBoard[LOTTO_RANK.theFirst],
-      this.#getProfitRate()
+      getEarningRate(this.#purchaseAmount, this.#getFinalAmount())
     ];
   }  
 }

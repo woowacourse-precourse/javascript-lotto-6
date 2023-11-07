@@ -2,9 +2,8 @@ import { LOTTO_RULE } from "../constants/BusinessNumber.js";
 import LottoRankMaker from "./LottoRankMaker.js";
 import LottoStatistics from "./LottoStatistics.js";
 
-
 class LottoReader extends LottoRankMaker {
-  #purchaseAmount = 0;
+  #purchaseAmount;
 
   constructor(lottoTicket, luckyBonusArray) {
     super(lottoTicket,luckyBonusArray); 
@@ -12,9 +11,7 @@ class LottoReader extends LottoRankMaker {
   }
 
   start() {
-    const rankArray = this.getRankArray();
-
-    const statistics = new LottoStatistics(rankArray, this.#purchaseAmount);
+    const statistics = new LottoStatistics(this.getRankArray(), this.#purchaseAmount);
 
     return statistics.getResult();
   }

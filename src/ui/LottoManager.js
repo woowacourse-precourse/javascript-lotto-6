@@ -6,13 +6,13 @@ import LotteryMachine from "../domain/LotteryMachine.js";
 import LottoReader from "../domain/LottoReader.js";
 
 class LottoManager {
-  #purchaseAmount = 0;
+  #purchaseAmount;
 
-  #luckyNumbers = [];
+  #luckyNumbers;
 
-  #bonusNumber = 0;
+  #bonusNumber;
 
-  #lottoTicket = [];
+  #lottoTicket;
 
   async startLottoSimulator() {
     await this.#getPurchaseAmount();
