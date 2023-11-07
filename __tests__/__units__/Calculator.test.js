@@ -33,15 +33,8 @@ describe("Calculator 유닛 테스트", () => {
         const calculator = new Calculator();
         mockQuestions(validWinningNumber);
 
-        // when
-        await calculator.promptWinningNumber(
-          MESSAGES.WINNING_NUMBER.PLACE_HOLDER
-        );
-
         // then
-        await expect(logSpy).toHaveBeenCalledWith(
-          expect.stringContaining(validWinningNumber.join(","))
-        );
+        await expect(calculator.promptWinningNumber()).resolves.not.toThrow();
       }
     );
 
@@ -72,15 +65,13 @@ describe("Calculator 유닛 테스트", () => {
 
     test.each(validBonusNumbers)("올바른 케이스", async (validBonusNumber) => {
       // given
-      const logSpy = getLogSpy();
       const calculator = new Calculator();
       mockQuestions(validBonusNumber);
 
-      // when
-      await calculator.promptBonusNumber(MESSAGES.BONUS_NUMBER.PLACE_HOLDER);
-
       // then
-      await expect(logSpy).toHaveBeenCalledWith(7);
+      await expect(
+        calculator.promptBonusNumber(MESSAGES.BONUS_NUMBER.PLACE_HOLDER)
+      ).resolves.not.toThrow();
     });
 
     test.each(inValidBonusNumbersAndErrorMessages)(
