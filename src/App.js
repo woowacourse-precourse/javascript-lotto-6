@@ -66,7 +66,13 @@ class App {
     }
   }
   async play() {
+  Compare(input) {
+    if (input.includes(this.bonus) && input.filter(x => this.number.includes(x)).length == 5) {
+      return 7;
+    }
     
+    return input.filter(x => this.number.includes(x)).length;
+  }
   }
   
 }
