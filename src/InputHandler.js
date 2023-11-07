@@ -17,7 +17,6 @@ export default class InputHandler {
         while (true) {
             const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
             const numberStrings = input.split(',').map(n => n.trim());
-
             try {
                 const numbers = numberStrings.map(n => parseInt(n, 10));
                 new Lotto(numbers);
@@ -30,7 +29,7 @@ export default class InputHandler {
 
     static async getBonusNumbers(winningNumbers) {
         while (true) {
-            const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+            const input = await MissionUtils.Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
             try {
                 return Lotto.validateBonusNumber(input, winningNumbers);
             } catch (error) {

@@ -2,14 +2,16 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 export default class OutputHandler {
     static numberOfLottoPurchase(lottos) {
-        MissionUtils.Console.print(`${lottos.length}개를 구매했습니다.`);
+        MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
         lottos.forEach(lotto => {
             MissionUtils.Console.print(`[${lotto.numbers.join(', ')}]`);
         });
+        MissionUtils.Console.print("");
     }
 
     static winningStatistics(statistics) {
         const statisticsMessage = [
+            "",
             "당첨 통계",
             "---",
             `3개 일치 (5,000원) - ${statistics.three}개`,
