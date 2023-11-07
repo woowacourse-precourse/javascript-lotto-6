@@ -11,12 +11,18 @@ class Money {
     this.printCalLottoCount();
   };
   getPayedMoney = async () => {
-    this.payedMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    let exception=new ExceptionList();
-    exception.noInputError(this.payedMoney);
-    exception.isNaNError(this.payedMoney);
-    exception.isZeroError(this.payedMoney);
-    exception.notThousandError(this.payedMoney);
+    try {
+      this.payedMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      let exception = new ExceptionList();
+      exception.noInputError(this.payedMoney);
+      exception.isNaNError(this.payedMoney);
+      exception.isZeroError(this.payedMoney);
+      exception.notThousandError(this.payedMoney);
+      
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.getPayedMoney(); 
+    }
   };
   calLottoCount = async () => {
     this.lottoCount = this.payedMoney / this.LOTTO_PRICE;
