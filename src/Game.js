@@ -37,7 +37,8 @@ class Game {
 
   async play() {
     await this.#setLottoAmount();
-    Console.print(Game.#pickLottoNumbers());
+    this.#setMyLotto();
+    Console.print(this.#myLotto.map((lot) => lot.getNumbers()));
   }
 }
 
