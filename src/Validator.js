@@ -1,16 +1,16 @@
-import { OTHERS, NUMBER, ERROR_MESSAGE } from './utils/constants.js';
+import { NUMBER, ERROR_MESSAGE } from './utils/constants.js';
 
 class Validator {
-  validateUserInputPurchaseMoney(userInputPurcaseMoney) {
-    if (Number.isNaN(userInputPurcaseMoney)) {
+  validateUserInputPurchaseMoney(userInputPurchaseMoney) {
+    if (Number.isNaN(userInputPurchaseMoney)) {
       throw new Error(ERROR_MESSAGE.isNotNumber);
     }
 
-    if (userInputPurcaseMoney <= 0) {
+    if (userInputPurchaseMoney <= 0) {
       throw new Error(ERROR_MESSAGE.negativeNumber);
     }
 
-    if (userInputPurcaseMoney % NUMBER.purchaseMoneyDivisor !== NUMBER.zero) {
+    if (userInputPurchaseMoney % NUMBER.purchaseMoneyDivisor !== 0) {
       throw new Error(ERROR_MESSAGE.inValidMoneyAmount);
     }
 
