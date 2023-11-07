@@ -9,7 +9,6 @@ const LOTTO_PRIZE = {
     5: 5000,
     6: 0,
 };
-
 const LOTTO_PRICE = 1000;
 
 class App {
@@ -77,7 +76,6 @@ class App {
 
         const count = pay / LOTTO_PRICE;
         const lottos = [];
-        // MissionUtils.Console.print('');
         MissionUtils.Console.print(`${count}개를 구매했습니다.`);
 
         for (let i = 0; i < count; i++) {
