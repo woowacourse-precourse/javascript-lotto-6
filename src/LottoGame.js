@@ -3,6 +3,7 @@ import { GAME_MESSAGES, LOTTO_PRICE, NUMBER_RANGE } from './constants.js';
 import { pickUniqueNumbersInRange, validateMoney } from './utils.js';
 import OutputView from './OutputView.js';
 import Lotto from './Lotto.js';
+import LottoResult from './LottoResult.js';
 
 class LottoGame {
   #count;
@@ -80,6 +81,19 @@ class LottoGame {
         OutputView.printErrorMessage(error.message);
       }
     }
+    this.calculateResult();
+  }
+
+  async calculateResult() {
+    const lottoResult = new LottoResult(
+      this.#lottos,
+      this.#winningNumbers,
+      this.#bonusNumber
+    );
+    OutputView.printResult(lottoResult.getResult());
+    const totalSpent = this.#count * LOTTO_PRICE;
+    const profitRate = lottoResult.calculateProfitRate(totalSpent);
+    OutputView.printProfitRate(profitRate);
   }
 }
 
