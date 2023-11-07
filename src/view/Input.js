@@ -12,7 +12,7 @@ export async function inputWinningNum(){
   const nums = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
   
   nums.split(',').map(num => {
-    winningNums.push(num);
+    winningNums.push(Number(num));
   })
 
   return winningNums;
@@ -21,5 +21,5 @@ export async function inputWinningNum(){
 // 보너스 번호 입력
 export async function inputBonnusNum(){
   const bonus = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-  return bonus;
+  return Number(bonus);
 }
