@@ -3,6 +3,7 @@ const purchaseAmount = Object.freeze({
 });
 
 const number = Object.freeze({
+  zero: 0,
   count: 6,
   min: 1,
   max: 45,
