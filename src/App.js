@@ -4,6 +4,7 @@ import PrintPurchasedLottoResult from "./UI/PrintPurchasedLottoResult.js";
 import InputLotto from "./UI/InputLotto.js";
 import InputBonusNumber from "./UI/InputBonusNumber.js";
 import LottoNumberMatch from "./Domain/LottoNumberMatch.js";
+import PrintResult from "./UI/PrintResult.js";
 
 class App {
   async play() {
@@ -13,7 +14,8 @@ class App {
     const INPUT_LOTTO = new InputLotto();
     const INPUT_BONUS_NUMBER = new InputBonusNumber();
     const LOTTO_NUMBER_MATCH = new LottoNumberMatch();
-    
+    const PRINT_RESULT = new PrintResult();
+
     const NUMBER_OF_LOTTO = await INPUT_MONEY.inputMoney();
 
     PRINT_NUMBER_OF_LOTTO.printNumberOfLotto(NUMBER_OF_LOTTO);
@@ -35,6 +37,8 @@ class App {
       LOTTO_NUMBER_ARRAY,
       BONUS_NUMBER
     );
+
+    PRINT_RESULT.print(RANK_MATCH_ARRAY);
   }
 }
 
