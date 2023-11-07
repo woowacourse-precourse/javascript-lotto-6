@@ -5,8 +5,8 @@ export const MESSAGE = Object.freeze({
   WINNING_STATISTICS: '당첨 통계',
   DASHES: '---',
   PURCHASE_COUNT: (cnt) => `${cnt}개를 구매했습니다.`,
-  SAME_NUMBERS_COUNT: (numCnt, winnings, lottoCnt) =>
-    `${numCnt}개 일치 (${winnings}원) - ${lottoCnt}개`,
+  MATCH_NUMBERS_COUNT: (matchCnt, winnings, lottoCnt) =>
+    `${matchCnt}개 일치 (${winnings}원) - ${lottoCnt}개`,
   TOTAL_RATE_OF_RETURN: (total) => `총 수익률은 ${total}%입니다.`,
 });
 
