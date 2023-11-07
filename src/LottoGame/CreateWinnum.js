@@ -19,8 +19,27 @@ export class CreateWinNum {
     }
 
     checkWinning(lottoNum, winNumbers) {
-        
-    }
+        let winResult = {
+          3: 0,
+          4: 0,
+          5: 0,
+          '5+bonus': 0,
+          6: 0,
+        };
+      
+        lottoNum.forEach(lotto => {
+          const matchCount = lotto.match(winNumbers.normal);
+          if (matchCount < 3) return;
+      
+          if (matchCount === 5 && lotto.getNumbers().includes(winNumbers.bonus)) {
+            winResult['5+bonus']++;
+          } else {
+            winResult[matchCount]++;
+          }
+        });
+      
+        return winResult;
+      }
 
     printWinResult(winResult) {
         MissionUtils.Console.print(`3개 일치 (5,000원) - ${winResult[3]}개`);
