@@ -1,4 +1,8 @@
-import { MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER } from '../utils/constants.js';
+import {
+  LOTTO_LENGTH,
+  MAX_LOTTO_NUMBER,
+  MIN_LOTTO_NUMBER,
+} from '../utils/constants.js';
 import {
   checkValueIsDuplicate,
   checkValueIsNumber,
@@ -16,7 +20,7 @@ class Lotto {
   }
 
   #validateLength(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_LENGTH) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
   }
