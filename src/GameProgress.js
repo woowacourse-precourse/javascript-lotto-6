@@ -51,9 +51,15 @@ class GameProgress{
   }
 
   static getRateOfReturn(purchaseAmount, winningMoney){
-		Console.print(typeof purchaseAmount);
-		Console.print(typeof winningMoney);
-    return (winningMoney/purchaseAmount)*100;
+    const rateOfReturnDecimalPointOne = ((winningMoney/purchaseAmount)*100).toFixed(1);
+    const rateOfReturn = this.cutPlaceValue(rateOfReturnDecimalPointOne);
+    return rateOfReturn;
+  }
+
+  static cutPlaceValue(rateOfReturn){
+    const divide = rateOfReturn.split('.');
+    const first = divide[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return `${first}.${divide[1]}`;
   }
 
   static printRateOfReturn(rateOfReturn){
