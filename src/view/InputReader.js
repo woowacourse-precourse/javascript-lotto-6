@@ -4,6 +4,11 @@ import GameError from '../errors/GameError.js';
 import paramType from '../lib/paramType/src/paramType.js';
 
 export default class InputReader {
+  async bonusNumber() {
+    const userInput = await this.#onRead(REQUEST_MESSAGE.BONUS_NUMBER);
+    return userInput;
+  }
+
   async winningNumbers() {
     const userInput = await this.#onRead(REQUEST_MESSAGE.WINNING_NUMBERS);
     return userInput;
