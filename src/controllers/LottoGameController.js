@@ -32,7 +32,7 @@ class LottoGameController {
       const totalPrizeAmount = this.lottoGame.getTotalPrizeAmount(winsStatistics);
       this.outputView.printProfitRatio(this.lottoGame.getProfitRatio(totalPrizeAmount));
     } catch ({ message }) {
-      this.outputView.printErrorMessage(message);
+      this.outputView.printError(message);
       await this.start();
     }
   }
@@ -49,7 +49,7 @@ class LottoGameController {
       const numbers = winningNumbers.split(',').map(Number);
       return new Lotto(numbers);
     } catch ({ message }) {
-      this.outputView.printErrorMessage(message);
+      this.outputView.printError(message);
       return this.getValidWinningLotto();
     }
   }
@@ -61,7 +61,7 @@ class LottoGameController {
       LottoValidator.validBonusNumber(bonusNumber, isContaining);
       return Number(bonusNumber);
     } catch ({ message }) {
-      this.outputView.printErrorMessage(message);
+      this.outputView.printError(message);
       return this.getValidBonusNumber(winningLotto);
     }
   }
