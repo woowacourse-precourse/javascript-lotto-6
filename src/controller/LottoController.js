@@ -84,7 +84,8 @@ class LottoController {
 	}
 
 	static calculateRate(amount) {
-		return (this.getEarnedMoney() / amount) * 100;
+		const rate = (this.getEarnedMoney() / amount) * 100;
+		return Math.round(rate * 100) / 100;
 	}
 }
 
