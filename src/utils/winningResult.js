@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import winningStatisticsSentence from "./winningStatisticsSentence.js";
+import mathcedCount from "./matchedCount.js";
 
 async function winningResult(winningMatchedResult, bonusMatchedResult) {
   let result = {
@@ -21,14 +22,6 @@ async function winningResult(winningMatchedResult, bonusMatchedResult) {
     `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.fiveAndBonus}개`
   );
   MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${result.six}개`);
-}
-
-async function mathcedCount(valueOne, valueTwo, countNumbers) {
-  if (valueOne === 3) countNumbers.three++;
-  if (valueOne === 4) countNumbers.four++;
-  if (valueOne === 5 && !(valueTwo === true)) countNumbers.five++;
-  if (valueOne === 5 && valueTwo === true) countNumbers.fiveAndBonus++;
-  if (valueOne === 6) countNumbers.six++;
 }
 
 export default winningResult;
