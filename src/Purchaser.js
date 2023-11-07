@@ -1,5 +1,4 @@
-import Util from './utils/util.js';
-import { LottoRule } from './models/rule.js';
+import Helper from './_shared/helper.js';
 
 class Purchaser {
   #lottos;
@@ -8,14 +7,8 @@ class Purchaser {
     this.#lottos = [];
   }
 
-  generateLotto() {
-    const numberSet = new Set();
-
-    while (numberSet.size < 6) {
-      numberSet.add(Util.randomNumber(LottoRule.MinNumber, LottoRule.MaxNumber));
-    }
-
-    const lotto = Util.toAscendingArray(Array.from(numberSet));
+  getLotto() {
+    const lotto = Helper.generateLotto();
     this.#lottos.push(lotto);
 
     return lotto;
