@@ -1,6 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import LottoPurchase from '../validates/lottoPurchase.js';
 import { MESSAGES } from '../constants/messages.js';
+import {
+  validateFormat,
+  validateMinimumAmount,
+} from '../validates/lottoPurchase.js';
 import {
   checkWinningNumbers,
   checkBonusNumber,
@@ -15,8 +18,8 @@ class User {
         );
         const amount = parseInt(inputAmount);
 
-        LottoPurchase.validateFormat(amount);
-        LottoPurchase.validateMinimumAmount(amount);
+        validateFormat(amount);
+        validateMinimumAmount(amount);
 
         const lottoCount = Math.floor(amount / 1000);
         Console.print(`\n${lottoCount}${MESSAGES.output.lottoPurchased}`);
