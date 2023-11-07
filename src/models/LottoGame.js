@@ -8,6 +8,7 @@ class LottoGame {
   #lottos;
   #winningNumber;
   #bonusNumber;
+  #result;
 
   setCount(amount) {
     validation.validateInputNumber(amount);
@@ -64,6 +65,7 @@ class LottoGame {
       const rank = this.matchWinningNumber(lotto.getNumbers());
       status[rank] += 1;
     });
+    this.#result = status;
     return status;
   }
 
@@ -79,6 +81,16 @@ class LottoGame {
     if (matchingNumbers === 4) return 4;
     if (matchingNumbers === 3) return 5;
     return 0;
+  }
+
+  calculateEarningRate() {
+    const amount = this.#count * 1000;
+    const prizeMoney = [0, 2000000000, 3000000, 1500000, 50000, 5000];
+    const earning = this.#result.reduce((acc, value, index) => {
+      return acc + value * prizeMoney[index];
+    }, 0);
+    const earningRate = ((earning / amount) * 100).toFixed(1);
+    return earningRate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }
 
