@@ -51,6 +51,10 @@ class User {
       this.#rank[rank] += 1;
     });
   }
+
+  printStatisticList() {
+    return Object.values(this.#rank);
+  }
 }
 
 export default User;

@@ -43,6 +43,11 @@ class LottoController {
 
   raffleLotto(lottoNumber, bonusNumber) {
     this.#user.getRank(lottoNumber, bonusNumber);
+    this.printResult();
+  }
+
+  printResult() {
+    OutputView.printRaffleStatistic(this.#user.printStatisticList());
   }
 }
 
