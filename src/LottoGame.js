@@ -13,6 +13,7 @@ class LottoGame {
     await this.#createWinningLotto();
     this.#lottoPurchaser.check(this.#winningLotto);
     this.#showResults();
+    this.#showProfitRate();
   }
 
   async #createPurchaser() {
@@ -63,6 +64,11 @@ class LottoGame {
   #showResults() {
     const resultMap = this.#lottoPurchaser.getResultMap();
     View.printWinningResults(resultMap);
+  }
+
+  #showProfitRate() {
+    const profitRate = this.#lottoPurchaser.getProfitRate();
+    console.log(profitRate);
   }
 }
 

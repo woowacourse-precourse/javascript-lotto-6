@@ -40,7 +40,9 @@ class LottoPurchaser {
   }
 
   getProfitRate() {
-    return 62.5;
+    const profit = this.#winningResults.getProfit();
+    const profitRate = (profit / this.#purchaseAmount) * 100;
+    return profitRate;
   }
 
   #setLottos(lottos) {
