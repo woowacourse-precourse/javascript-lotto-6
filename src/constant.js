@@ -1,4 +1,5 @@
 const REWARD = Object.freeze({
+  zero: 0,
   fifth: 5000,
   fourth: 50000,
   third: 1500000,
