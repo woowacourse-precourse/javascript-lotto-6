@@ -31,16 +31,54 @@ export const LOTTERY = Object.freeze({
   THIRD_CNT: 5,
   FOURTH_CNT: 4,
   FIFTH_CNT: 3,
-  FIRST_WINNINGS: 2000000000,
-  SECOND_WINNINGS: 30000000,
-  THIRD_WINNINGS: 1500000,
-  FOURTH_WINNINGS: 50000,
-  FIFTH_WINNINGS: 5000,
-  DEFAULT_WINNINGS: 0,
   FIRST_PLACE: 1,
   SECOND_PLACE: 2,
   THIRD_PLACE: 3,
   FOURTH_PLACE: 4,
   FIFTH_PLACE: 5,
   DEFAULT_PLACE: 0,
+  WINNINGS: new Map(
+    [
+      FIRST_PLACE,
+      Object.freeze({
+        label: '6개 일치',
+        winnings: 2000000000,
+      }),
+    ],
+    [
+      SECOND_PLACE,
+      Object.freeze({
+        label: '5개 일치, 보너스 볼 일치',
+        winnings: 30000000,
+      }),
+    ],
+    [
+      THIRD_PLACE,
+      Object.freeze({
+        label: '5개 일치',
+        winnings: 1500000,
+      }),
+    ],
+    [
+      FOURTH_PLACE,
+      Object.freeze({
+        label: '4개 일치',
+        winnings: 50000,
+      }),
+    ],
+    [
+      FIFTH_PLACE,
+      Object.freeze({
+        label: '3개 일치',
+        winnings: 5000,
+      }),
+    ],
+    [
+      DEFAULT_PLACE,
+      Object.freeze({
+        label: '',
+        winnings: 0,
+      }),
+    ],
+  ),
 });
