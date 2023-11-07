@@ -1,8 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
+import MESSAGES from "./constants/index.js";
 
 class App {
   async play() {
-    Console.print("Hello World");
+    Console.print(MESSAGES.INPUT_MONEY)
   }
 }
 
