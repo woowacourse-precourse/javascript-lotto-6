@@ -1,3 +1,4 @@
+import { Random } from "@woowacourse/mission-utils";
 import STRING_LIST from "../test_list/StringList";
 import ARRAY_LIST from "../test_list/ArrayList";
 import Formattor from "../../src/View/Formattor";
@@ -121,5 +122,57 @@ describe('Formattor formatStringArrayToNumberArray', () => {
     testCases.forEach (({input, expected}) => {
       expect(Formattor.formatStringArrayToNumberArray(input)).toStrictEqual(expected);
     });
+  });
+});
+
+const getUniqueRandomNumbersTestList = [
+  {minValue: '1', maxValue: 1, count: 1},
+  {minValue: 1, maxValue: '1', count: 1},
+  {minValue: 1, maxValue: 1, count: '1'},
+]
+
+const mockRandoms = (numbers) => {
+  Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, Random.pickUniqueNumbersInRange);
+};
+
+describe('Formattor getUniqueRandomNumbers', () => {
+  test('FormatParseAmountToNumber Function type이다 ', () => {
+    expect(typeof (Formattor.getUniqueRandomNumbers)).toBe('function');
+  })
+  test('getUniqueRandomNumbers 인자 유효성 검사, NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
+    getUniqueRandomNumbersTestList.forEach((minValue, maxValue, count) => {
+      expect(() => {
+        Formattor.getUniqueRandomNumbers(minValue, maxValue, count)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER));
+    });
+  });
+  test(`getUniqueRandomNumbers 기능 검사, 최소값과 최대값 사이의 겹치지 않는 랜덤한 값을 count만큼 배열에 할당한 후 배열을 리턴한다 `, () => {
+    const minValue = 1 
+    const maxValue = 10
+    const count = 3
+    const array = [2, 3, 4];
+    mockRandoms([array]);
+    expect(Formattor.getUniqueRandomNumbers(minValue, maxValue, count)).toStrictEqual(array);
+  });
+});
+
+describe('Formattor sortAscendingArray', () => {
+  test('sortAscendingArray Function type이다 ', () => {
+    expect(typeof (Formattor.sortAscendingArray)).toBe('function');
+  })
+  test('sortAscendingArray 인자 유효성 검사, 인자의 타입이 배열이 아니면 에러를 리턴한다. ', () => {
+    ARRAY_LIST.errorArrayTestCases.forEach((input) => {
+      expect(() => {
+        Formattor.sortAscendingArray(input)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY));
+    });
+  });
+  test(`sortAscendingArray 기능 검사, 인자로 받은 array를 오름차순으로 정렬하고 리턴한다 `, () => {
+    const input = [3,2,1];
+    const expected = [1,2,3];
+      expect(Formattor.sortAscendingArray(input)).toStrictEqual(expected);
   });
 });

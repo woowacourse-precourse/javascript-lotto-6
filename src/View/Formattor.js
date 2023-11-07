@@ -1,3 +1,4 @@
+import { Random } from "@woowacourse/mission-utils";
 import ValidationError from "../Error/ValidationError.js";
 import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
 import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js";
@@ -44,9 +45,35 @@ const formatStringArrayToNumberArray = (inputArrayString) => {
   return (arrayNumber);
 }
 
+const getUniqueRandomNumbers = (minValue, maxValue, count) => {
+  if (!Number.isInteger(minValue)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  };
+  if (!Number.isInteger(maxValue)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  };
+  if (!Number.isInteger(count)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  };
+
+  const numbers = Random.pickUniqueNumbersInRange(minValue, maxValue, count);
+  return (numbers);
+}
+
+const sortAscendingArray = (inputArray) => {
+  if (!Array.isArray(inputArray)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+
+  const ascendingArray = inputArray.sort((first, second) => first - second);
+  return (ascendingArray);
+}
+
 export default {
   formatStringToInteger,
   getDivisionQuotient,
   splitStringToArray,
   formatStringArrayToNumberArray,
+  getUniqueRandomNumbers,
+  sortAscendingArray,
 };
