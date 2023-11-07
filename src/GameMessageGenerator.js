@@ -1,14 +1,14 @@
 import { OTHERS, PRIZES_MESSAGE, PRIZES } from './utils/constants.js';
 
 class GameMessageGenerator {
-  getLottoNumberListMessage(lottoNumberArray) {
-    const LOTTO_NUMBER_LIST_MESSAGE_ARRAY = [];
+  getPurchaseLottosMessages(purchaseLottos) {
+    const PURCHASE_LOTTOS_MESSAGES = [];
 
-    lottoNumberArray.forEach((lotto) => {
-      LOTTO_NUMBER_LIST_MESSAGE_ARRAY.push(lotto.join(OTHERS.commaWithSpace));
+    purchaseLottos.forEach((lotto) => {
+      PURCHASE_LOTTOS_MESSAGES.push(lotto.join(OTHERS.commaWithSpace));
     });
 
-    return LOTTO_NUMBER_LIST_MESSAGE_ARRAY;
+    return PURCHASE_LOTTOS_MESSAGES;
   }
 
   getResultMessage(gameResultObj, purchaseMoney) {

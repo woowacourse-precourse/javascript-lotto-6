@@ -23,10 +23,10 @@ class GameController {
     // 로또 횟수 이용해서 로또 발급(랜덤넘버)
     const PURCHASE_LOTTOS = this.randomNumberGenerator.getRandomNumberArray(LOTTO_TRY_COUNT);
     // 발급받은 모든 로또 번호 이용해서 로또번호 리스트 메시지 만들기
-    const PURCHASE_LOTTOS_MESSAGE =
-      this.gameMessageGenerator.getLottoNumberListMessage(PURCHASE_LOTTOS);
+    const PURCHASE_LOTTOS_MESSAGES =
+      this.gameMessageGenerator.getPurchaseLottosMessages(PURCHASE_LOTTOS);
     // 발급 받은 로또 번호 출력하기
-    this.outputView.showLottoNumberListOutput(LOTTO_TRY_COUNT, PURCHASE_LOTTOS_MESSAGE);
+    this.outputView.showLottoNumberListOutput(LOTTO_TRY_COUNT, PURCHASE_LOTTOS_MESSAGES);
     // 당첨 번호 유저인풋 얻기
     const WINNING_NUMBERS = await this.inputView.getUserInputWinningNumbers();
     // 보너스 번호 유저인풋 얻기
