@@ -17,11 +17,12 @@ class App {
     const lottos = lottoNums.map(lotto => new Lotto(lotto));
 
     const winningNums = await inputWinningNum();
-    isDuplicate(winningNums);
-    isNumberInRange(winningNums);
-    isSixLength(winningNums);
+    isDuplicate(winningNums) || isNumberInRange(winningNums) || isSixLength(winningNums);
 
     const bonusNum = await inputBonnusNum();
+    winningNums.push(bonusNum);
+    isDuplicate(winningNums);
+    winningNums.pop();
   }
 }
 
