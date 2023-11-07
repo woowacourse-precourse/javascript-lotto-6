@@ -8,9 +8,18 @@ const number = Object.freeze({
   max: 45,
 });
 
+const match = Object.freeze({
+  threeMatch: 3,
+  fourMatch: 4,
+  fiveMatch: 5,
+  fiveMatchWithBonus: 7,
+  sixMatch: 6,
+});
+
 const CONSTANTS = Object.freeze({
   purchaseAmount,
   number,
+  match,
 });
 
 export default CONSTANTS;
