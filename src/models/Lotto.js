@@ -1,4 +1,7 @@
 import { sortNumbers } from '../utils/numberUtils.js';
+import { checkListSameValue } from '../utils/listUtils.js';
+import throwError from '../utils/throwError.js';
+import ERROR_MESSAGES from '../constants/errorMessage.js';
 
 class Lotto {
   #numbers;
@@ -12,6 +15,7 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    checkListSameValue(numbers) && throwError(ERROR_MESSAGES.isSameLottoNumber);
   }
 
   // TODO: 추가 기능 구현
