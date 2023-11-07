@@ -22,7 +22,18 @@ class ProfitCalculator {
   }
 
   getResultAndProfit() {
-    // [result, profit] 형식으로 출력!
+    this.#confirmLottos();
+
+    const result = {
+      three: this.#matchCount.three,
+      four: this.#matchCount.four,
+      five: this.#matchCount.five,
+      fiveWithBonus: this.#matchCount.fiveWithBonus,
+      six: this.#matchCount.six,
+    };
+    const profit = this.#calculateTotalProfit();
+
+    return [result, profit];
   }
 
   #confirmLottos() {
