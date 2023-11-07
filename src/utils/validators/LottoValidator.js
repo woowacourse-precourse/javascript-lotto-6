@@ -1,6 +1,6 @@
-import CustomError from '../../errors/CustomError';
-import ERROR from '../constants/error';
-import NUMBER from '../constants/number';
+import CustomError from '../../errors/CustomError.js';
+import ERROR from '../constants/error.js';
+import NUMBER from '../constants/number.js';
 
 function checkNumberInRange(number, min, max, error) {
   if (number > max || number < min) {
@@ -42,9 +42,7 @@ const BonusNumberValidator = {
   },
   duplicatedWithWinningNumbers: (number, winningNumbers) => {
     if (winningNumbers.includes(number)) {
-      throw new CustomError(
-        ERROR.bonusNumber.isDuplicatedWithLottoNumbers(number),
-      );
+      throw new CustomError(ERROR.bonusNumber.isDuplicatedWithLottoNumbers);
     }
   },
 };
