@@ -13,9 +13,27 @@ import {
   printLottoNumbers,
   printLottoResults,
 } from '../view/OutputView.js';
+import Lotto from '../Lotto.js';
+import BonusLotto from '../model/BonusLotto.js';
 
 export default class LottoController {
+  /**
+   * @private
+   * @type {LottoService}
+   */
   #lottoService;
+
+  /**
+   * @private
+   * @type {Lotto}
+   */
+  #lotto;
+
+  /**
+   * @private
+   * @type {BonusLotto}
+   */
+  #bonusLotto;
 
   /**
    * @public
@@ -53,7 +71,9 @@ export default class LottoController {
   async #readLottoNumbers() {
     try {
       const lottoNumbers = await readLottoMainNumbers();
-      await this.#readLottoBonusNumber(lottoNumbers);
+
+      this.#lotto = new Lotto(lottoNumbers);
+      await this.#readLottoBonusNumber();
     } catch (e) {
       printError(e.message);
       await this.#readLottoNumbers();
@@ -63,30 +83,30 @@ export default class LottoController {
   /**
    * @private
    * @async
-   * @param {string} lottoNumbers
    * @returns {Promise<void>}
    */
-  async #readLottoBonusNumber(lottoNumbers) {
+  async #readLottoBonusNumber() {
     try {
-      const lottoBonusNumber = await readLottoBonusNumber(lottoNumbers);
+      const lottoBonusNumber = await readLottoBonusNumber();
 
-      this.#compare(lottoNumbers, lottoBonusNumber);
+      this.#bonusLotto = new BonusLotto(
+        this.#lotto.getLottoNumbers(),
+        lottoBonusNumber
+      );
+      this.#compare();
     } catch (e) {
       printError(e.message);
-
-      await this.#readLottoBonusNumber(lottoNumbers);
+      await this.#readLottoBonusNumber();
     }
   }
 
   /**
    * @private
-   * @param {string} lottoNumbers
-   * @param {string} lottoBonusNumber
    */
-  #compare(lottoNumbers, lottoBonusNumber) {
+  #compare() {
     const { lottoResults, lottoAmount } = this.#lottoService.getCompareResults(
-      lottoNumbers,
-      lottoBonusNumber
+      this.#lotto.getLottoNumbers(),
+      this.#bonusLotto.getBonusLottoNumber()
     );
     const profit = (
       (lottoResults.prizeTotal / (lottoAmount * LOTTO_PRICE)) *
