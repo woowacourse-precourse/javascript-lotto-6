@@ -32,6 +32,10 @@ const Validator = {
     if (lottoNumbers.length !== CONSTANTS.number.count)
       throw new Error(ERROR.message.invalidLottoNumberCount);
   },
+  duplicatedLottoNumber: lottoNumbers => {
+    if (lottoNumbers.length !== new Set(lottoNumbers).size)
+      throw new Error(ERROR.message.duplicatedLottoNumber);
+  },
 };
 
 export default Validator;
