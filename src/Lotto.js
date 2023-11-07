@@ -47,6 +47,20 @@ class Lotto {
     return bonusNumber;
   }
 
+  static validateBonusNumber(input, winningNumbers) {
+    const bonusNumber = parseInt(input.trim(), 10);
+    if (isNaN(bonusNumber)) {
+      throw new Error("[ERROR] 보너스번호는 숫자여야 합니다.");
+    }
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 보너스번호는 1에서 45 사이의 숫자여야 합니다.");
+    }
+    if (winningNumbers.includes(bonusNumber)) {
+      throw new Error("[ERROR] 보너스번호는 당첨 번호와 달라야 합니다.");
+    }
+    return bonusNumber;
+  }
+
   get numbers() {
     return this.#numbers;
   }

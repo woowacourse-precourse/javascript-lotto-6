@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import {MissionUtils} from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 export default class InputHandler {
@@ -28,20 +28,11 @@ export default class InputHandler {
         }
     }
 
-    static async getBonusNumbers() {
-        let bonusNumber;
+    static async getBonusNumbers(winningNumbers) {
         while (true) {
+            const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
             try {
-                const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-                bonusNumber = parseInt(input.trim(), 10);
-                if (isNaN(bonusNumber)) {
-                    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
-                }
-                if (bonusNumber < 1 || bonusNumber > 45) {
-                    throw new Error("[ERROR] 보너스번호는 1에서 45 사이의 숫자여야 합니다.");
-                }
-                return bonusNumber;
-
+                return Lotto.validateBonusNumber(input, winningNumbers);
             } catch (error) {
                 MissionUtils.Console.print(`[ERROR] ${error.message}`);
             }
