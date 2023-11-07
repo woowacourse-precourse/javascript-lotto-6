@@ -1,13 +1,16 @@
 import { Console } from "@woowacourse/mission-utils";
 import { getLottoNumbers } from "./function/getLottoNumbers.js";
 import { calculateLottoCount } from "./function/util/calculateLottoCount.js";
+import { getPayLottoAmount } from "./function/getPayLottoAmount.js";
+import { getBonusNumber } from "./function/getBonusNumber.js";
+import { printWinningMoney } from "./function/util/printWinningMoney.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = numbers.sort((a, b) => a - b);
   }
 
   #validate(numbers) {
@@ -21,6 +24,7 @@ class Lotto {
 
     lottos.forEach((lottoNums) => {
       let count = 0;
+      let bonusCount = 0;
       lottoNums.forEach((el, index) => {
         if (el === this.#numbers[index]) {
           count += 1;
@@ -28,16 +32,17 @@ class Lotto {
 
         if (el === bonusNumber) {
           count += 1;
+          bonusCount += 1;
         }
       });
 
-      resultCount.push(count);
+      resultCount.push({ count: count, bonusCount: bonusCount });
     });
 
     return resultCount;
   }
 
-  static verifyAmount = (money) => {
+  verifyAmount = (money) => {
     if (isNaN(money)) {
       throw new Error("[ERROR] 유효한 금액이 아닙니다. 다시 입력 해주세요");
     }
@@ -51,12 +56,28 @@ class Lotto {
     return money;
   };
 
-  static buy(money) {
+   buyLotto(money) {
     this.verifyAmount(money);
     const lottoCount = calculateLottoCount(money);
+
     Console.print(`${lottoCount}개를 구매했습니다.`);
+
     const lottoNumberArr = getLottoNumbers(lottoCount);
+
     return lottoNumberArr;
+  }
+
+  async printLottoResult() {
+    const money = await getPayLottoAmount();
+    const lottoNumber = this.buyLotto(money)
+
+    this.#validate(this.#numbers);
+    
+    const bonusCount = await getBonusNumber(this.#numbers);
+
+    const winNumber = this.getWinNumberCount(lottoNumber, bonusCount);
+    
+    printWinningMoney(winNumber, money);
   }
 }
 
