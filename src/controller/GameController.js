@@ -1,11 +1,16 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import Validator from '../utils/validation.js';
 import UserInputView from '../view/UserInputView.js';
 
 class GameController {
-  // eslint-disable-next-line class-methods-use-this
   async startGame() {
-    const purchasePrice = await UserInputView.inputPrice();
-    MissionUtils.Console.print(purchasePrice);
+    const purchasePrice = Number(await UserInputView.inputPrice());
+    try {
+      Validator.purchasePrice(purchasePrice);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.startGame();
+    }
   }
 }
 
