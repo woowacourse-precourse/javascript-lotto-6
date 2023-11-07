@@ -3,6 +3,7 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
+    // numbers 입력받는 로또 당첨번호
     this.#validate(numbers);
     this.#numbers = numbers;
   }
@@ -13,17 +14,6 @@ class Lotto {
     }
   }
   // TODO: 추가 기능 구현
-  generateRandomNumber() {
-    //랜덤 숫자 생성
-    const randomNumbers = [];
-    while (randomNumbers.length < 6) {
-      const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      if (!randomNumbers.includes(randomNumber)) {
-        randomNumbers.push(randomNumber);
-      }
-    }
-    return randomNumbers;
-  }
 }
 
 export default Lotto;
