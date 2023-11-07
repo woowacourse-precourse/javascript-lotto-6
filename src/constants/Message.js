@@ -11,6 +11,8 @@ const OUTPUT_MESSAGE = {
 const ERROR_MESSAGE = {
   notNumber: '[ERROR] 숫자가 잘못된 형식입니다.',
   notDivide: '[ERROR] 금액 단위가 맞지 않습니다.',
+  length: '[ERROR] 로또 번호는 중복 없이 6개여야 합니다.',
+  range: '[ERROR] 1~45 범위가 아닌 번호가 존재합니다.',
 };
 
 export { INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };

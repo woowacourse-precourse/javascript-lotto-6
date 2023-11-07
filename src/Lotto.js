@@ -1,4 +1,5 @@
-// import { SETTING } from './constants/Constant.js';
+import { SETTING } from './constants/Constant.js';
+import { ERROR_MESSAGE } from './constants/Message.js';
 
 class Lotto {
   #numbers;
@@ -9,15 +10,13 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (new Set(numbers).size !== SETTING.pick) {
+      throw new Error(ERROR_MESSAGE.length);
+    }
+    if (!numbers.every((number) => /^([1-9]|[1-3][0-9]|4[0-5])$/.test(number))) {
+      throw new Error(ERROR_MESSAGE.range);
     }
   }
-
-  // generateLotto() {
-  //   this.#numbers = Random.pickUniqueNumbersInRange(SETTING.start, SETTING.end, SETTING.pick);
-  //   return this.#numbers.sort((a, b) => a - b);
-  // }
 }
 
 export default Lotto;
