@@ -95,4 +95,15 @@ describe("LottoStoreTest", () => {
     const results = await LottoStore.calculateWinningResults(userTickets);
     expect(results).toEqual(["5+1"]);
   });
+
+  test("사용자의 로또 티켓과 당첨 번호가 5개 일치시 해당 결과를 반환한다", async () => {
+    mockReadLineAsync
+      .mockResolvedValueOnce("1,2,3,4,5,30")
+      .mockResolvedValueOnce("31");
+    Validator.validateWinningNumbers.mockReturnValue(true);
+    Validator.validateBonusNumber.mockReturnValue(true);
+    const userTickets = [["1", "2", "3", "4", "5", "6"]];
+    const results = await LottoStore.calculateWinningResults(userTickets);
+    expect(results).toEqual([5]);
+  });
 });
