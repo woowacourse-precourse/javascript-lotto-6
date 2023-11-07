@@ -43,4 +43,19 @@ describe("구매 금액 예외 테스트", () => {
       expect.stringContaining("[ERROR] 구매금액을 천원 단위로 입력해 주세요.")
     );
   });
+
+  test("유효하지 않은 구매금액 타입 테스트", async () => {
+    const logSpy = getLogSpy();
+
+    mockRandoms([[1, 2, 3, 4, 5, 6]]);
+    mockQuestions(["1200ㅂ", "1000", "1,2,3,4,5,6", "7"]);
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("[ERROR] 구매금액은 숫자만 입력이 가능합니다.")
+    );
+  });
 });
