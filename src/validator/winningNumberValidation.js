@@ -5,3 +5,10 @@ export const winningNumberLength = (winningNumber) => {
   }
 };
 
+export const duplicate = (winningNumber) => {
+  const duplicateArray = winningNumber.split(',');
+  const setDuplicateArray = new Set(duplicateArray);
+  if(duplicateArray.length !== setDuplicateArray.size) {
+    throw new Error('로또 번호에 중복된 숫자가 있습니다.');
+  }
+};
