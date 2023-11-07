@@ -1,7 +1,7 @@
 import Lotto from './Lotto.js';
 import { PurchaseLotto } from './PurchaseLotto.js';
 import { randomNum } from './utils.js';
-import { GRADING_COUNT } from './constants.js';
+import { GRADING_COUNT, LOTTO_PRIZE_MONEY } from './constants.js';
 
 class GameExport {
   #lottos;
@@ -45,25 +45,32 @@ class GameExport {
 
   getStatistics(eachCompareResult) {
     const statistics = {
-      fifthPrize: 0,
-      fourthPrize: 0,
-      thirdPrize: 0,
-      secondPrize: 0,
-      firstPrize: 0,
+      FIFTH_PRIZE: 0,
+      FOURTH_PRIZE: 0,
+      THIRD_PRIZE: 0,
+      SECOND_PRIZE: 0,
+      FIRST_PRIZE: 0,
     };
 
     eachCompareResult.forEach(({ matchCount, hasBonusNumber }) => {
-      if (matchCount === GRADING_COUNT.SIX) statistics.firstPrize += 1;
+      if (matchCount === GRADING_COUNT.SIX) statistics.FIRST_PRIZE += 1;
       if (matchCount === GRADING_COUNT.FIVE && hasBonusNumber)
-        statistics.secondPrize += 1;
+        statistics.SECOND_PRIZE += 1;
       if (matchCount === GRADING_COUNT.FIVE && !hasBonusNumber)
-        statistics.thirdPrize += 1;
-      if (matchCount === GRADING_COUNT.FOUR) statistics.fourthPrize += 1;
-      if (matchCount === GRADING_COUNT.THREE) statistics.fifthPrize += 1;
+        statistics.THIRD_PRIZE += 1;
+      if (matchCount === GRADING_COUNT.FOUR) statistics.FOURTH_PRIZE += 1;
+      if (matchCount === GRADING_COUNT.THREE) statistics.FIFTH_PRIZE += 1;
     });
 
     console.log(statistics);
     return statistics;
+  }
+
+  getTotalPrizeMoney(statistics) {
+    return Object.entries(statistics).reduce(
+      (acc, [prize, count]) => acc + LOTTO_PRIZE_MONEY[prize] * count,
+      0,
+    );
   }
 
   getLottos() {
