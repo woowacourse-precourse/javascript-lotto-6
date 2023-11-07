@@ -13,27 +13,26 @@
 - [] 수익률 계산하기
   - [] 소수점 둘째 자리에서 반올림
 
-### MVC 패턴에 따른 클래스, 함수 정리
+### 관심사 분류에 따른 클래스, 함수 정리
 
 ```
-관심사 분리를 위해 MVC 패턴을 사용했습니다.
+관심사 분리를 Domain과 View로 분리하였습니다.
+Domain : 로또 관련 메인 기능
+View : 데이터 입출력 기능
 ```
 
-**1. Model**
+**1. Domain**
 
 - 1-1. 'Lotto' : 로또 번호 표시 클래스
   - 'Numbers' : 로또 번호
   - 'validate' : 로또 번호 6글자 외 길이 예외 처리 함수
   - 'compareNumbers' : 로또번호와 당첨번호 비교하는 함수
 - 1-2. 'CalculateLottoNumber' : 사야하는 로또 개수 계산하는 함수
-- 1-3. 'BuyLotto' : 구입금액에 따른 로또 번호 생성하는 함수
+- 1-3. 'makeRandomNumbers' : 로또 번호 생성하는 함수
+- 1-4. 'CalculateProfit' 수익률 계산하는 함수
 
 **2. View**
 
 - 2-1. 'AmountInput' : 구입금액 입력 받는 함수
 - 2-2. 'NumberInput' : 당첨 번호 및 보너스 번호 입력 받는 함수
 - 2-3. 'printResult' 당첨 결과 출력하는 함수
-
-**3. Controller**
-
-- 3-1. 'CalculateProfit' 수익률 계산하는 함수
