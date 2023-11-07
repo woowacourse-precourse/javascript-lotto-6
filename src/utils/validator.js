@@ -67,4 +67,4 @@ export const validateNoDuplicatesInBonus = (bonusNumber, winningNumbers) => {
   if (winningNumbers.includes(bonusNumber)) {
     throw new Error(ERROR_TYPE.CONTAINS_DUPLICATES_IN_BONUS);
   }
-}
+};

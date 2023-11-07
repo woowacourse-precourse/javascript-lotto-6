@@ -30,7 +30,7 @@ export const PROMPT_LOTTO_STATUS_RESULT = (value) => {
 };
 
 export const PROMPT_TOTAL_WINNING_PRICE = (value) => {
-    return {
-        RESULT: `총 수익률은 ${value}%입니다.`,
-    }
-}
+  return {
+    RESULT: `총 수익률은 ${value}%입니다.`,
+  };
+};
