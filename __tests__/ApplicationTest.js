@@ -1,9 +1,10 @@
-/* eslint-disable no-undef */
 /* eslint-disable max-lines-per-function */
-/* eslint-disable import/extensions */
 /* eslint-disable import/order */
+/* eslint-disable import/extensions */
 import App from '../src/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from '../src/Lotto.js';
+import PurchasedLotto from '../src/PurchasedLotto.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -98,5 +99,51 @@ describe('로또 테스트', () => {
 
   test('예외 테스트', async () => {
     await runException('1000j');
+  });
+});
+
+describe('구입로또 클래스 테스트', () => {
+  test('구입 금액이 숫자의 형태가 아니면 예외가 발생한다', () => {
+    expect(() => {
+      new PurchasedLotto('this is not a number');
+    }).toThrow('[ERROR]');
+  });
+
+  test('구입 금액이 0보다 작으면 예외가 발생한다.', () => {
+    expect(() => {
+      new PurchasedLotto(-1000);
+    }).toThrow('[ERROR]');
+  });
+
+  test('구입 금액이 1000원 단위가 아니면 예외가 발생한다.', () => {
+    expect(() => {
+      new PurchasedLotto(1234);
+    }).toThrow('[ERROR]');
+  });
+});
+
+describe('로또 클래스 테스트', () => {
+  test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6, 7]);
+    }).toThrow('[ERROR]');
+  });
+
+  test('로또 번호에 숫자의 형태가 아닌 부분이 있으면 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 'hi', 3, 4, 5, 6]);
+    }).toThrow('[ERROR]');
+  });
+
+  test('로또 번호에 중복된 숫자가 있으면 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 5]);
+    }).toThrow('[ERROR]');
+  });
+
+  test('로또 번호가 1~45의 범위 밖에 있으면 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 46]);
+    }).toThrow('[ERROR]');
   });
 });
