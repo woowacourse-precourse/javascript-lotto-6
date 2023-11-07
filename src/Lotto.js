@@ -1,6 +1,7 @@
 import Validate from './Validate.js';
 
 class Lotto {
+  // winning lotto
   #numbers;
 
   constructor(numbers) {
@@ -22,7 +23,7 @@ class Lotto {
     return this.#numbers;
   }
 
-  howManyMatchesLotto(lottos) {
+  computeMatchWithLotto(lottos) {
     let matches = 0;
     this.#numbers.forEach((num) => {
       if (lottos.includes(Number(num))) {

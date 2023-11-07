@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-class UserLotto {
+class IssuedLotto {
   #list;
 
   #count;
@@ -26,4 +26,4 @@ class UserLotto {
   }
 }
 
-export default UserLotto;
+export default IssuedLotto;
