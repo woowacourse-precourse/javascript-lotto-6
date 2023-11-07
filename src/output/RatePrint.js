@@ -6,7 +6,7 @@ export function rateprint(output, buyinput) {
       Math.round(
         ((5000 * output['5'] +
           50000 * output['4'] +
-          150000 * output['3'] +
+          1500000 * output['3'] +
           30000000 * output['2'] +
           2000000000 * output['1']) /
           (buyinput * 1000)) *
