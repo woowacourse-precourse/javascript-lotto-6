@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import messages from './constants/messages';
 
-class User {
+class LottoPlayer {
   async purchaseLotto() {
     const amount = await Console.readLineAsync(messages.purchase.request);
     this.#validatePurchase(amount);
@@ -27,4 +27,4 @@ class User {
   }
 }
 
-export default User;
+export default LottoPlayer;

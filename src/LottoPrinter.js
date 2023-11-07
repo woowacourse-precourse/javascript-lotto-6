@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import messages from './constants/messages';
 import prize from './constants/prize';
 
-class OutputHandler {
+class LottoPrinter {
   static requestPurchaseAmount() {
     Console.print(messages.purchase.request);
   }
@@ -44,4 +44,4 @@ class OutputHandler {
   }
 }
 
-export default OutputHandler;
+export default LottoPrinter;
