@@ -1,6 +1,11 @@
 import { ERROR_MESSAGE } from "../constant/Error.js";
 import { LOTTO_NUMBER_MAX, LOTTO_NUMBER_MIN } from "../constant/LottoInfo.js";
 class ValidateInputNumber {
+  static checkEmpty(str) {
+    if (str === "") {
+      throw new Error(ERROR_MESSAGE.inputEmpty);
+    }
+  }
   static checkString(num) {
     if (isNaN(num)) {
       throw new Error(ERROR_MESSAGE.inputString);
