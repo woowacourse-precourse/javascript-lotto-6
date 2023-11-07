@@ -8,5 +8,5 @@ const ERROR_MESSAGE_WITHOUT_PREFIX = Object.freeze({
 });
 
 export const ERROR_MESSAGE = Object.fromEntries(
-  Object.keys(ERROR_MESSAGE_WITHOUT_PREFIX).map(key => [key, '[Error] ' + ERROR_MESSAGE_WITHOUT_PREFIX[key]])
+  Object.keys(ERROR_MESSAGE_WITHOUT_PREFIX).map(key => [key, '[ERROR] ' + ERROR_MESSAGE_WITHOUT_PREFIX[key]])
 );

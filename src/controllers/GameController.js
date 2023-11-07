@@ -23,8 +23,13 @@ class GameController {
   }
 
   async buyLotto() {
-    const amount = await inputView.readLine(LOTTO_MESSAGE.get_purchase_amount);
-    this.#lottoCount = new LottoCount(amount);
+    try {
+      const amount = await inputView.readLine(LOTTO_MESSAGE.get_purchase_amount);
+      this.#lottoCount = new LottoCount(amount);
+    } catch (error) {
+      outputView.print(error.message);
+      await this.buyLotto();
+    }
   }
 
   async getLottoNumbers() {
@@ -33,20 +38,30 @@ class GameController {
   }
 
   async getWinningNumbers() {
-    const numbers = await inputView.readLine(LOTTO_MESSAGE.get_winning_numbers);
-    const numbersArray = numbers.split(',');
-    this.#winnings = new Lotto(numbersArray);
-    outputView.lineBreak();
+    try {
+      const numbers = await inputView.readLine(LOTTO_MESSAGE.get_winning_numbers);
+      const numbersArray = numbers.split(',');
+      this.#winnings = new Lotto(numbersArray);
+      outputView.lineBreak();
+    } catch (error) {
+      outputView.print(error.message);
+      await this.getWinningNumbers();
+    }
   }
 
   async getBonusNumber() {
-    const number = await inputView.readLine(LOTTO_MESSAGE.get_bonus_number);
-    this.#bonus = new Bonus(number);
-
-    if (this.#winnings.getWinningNumbers().includes(this.#bonus.getBonusNumber())) {
-      throw new Error(ERROR_MESSAGE.exists_duplication);
+    try {
+      const number = await inputView.readLine(LOTTO_MESSAGE.get_bonus_number);
+      this.#bonus = new Bonus(number);
+  
+      if (this.#winnings.getWinningNumbers().includes(this.#bonus.getBonusNumber())) {
+        throw new Error(ERROR_MESSAGE.exists_duplication);
+      }
+      outputView.lineBreak();
+    } catch (error) {
+      outputView.print(error.message);
+      await this.getBonusNumber();
     }
-    outputView.lineBreak();
   }
 
   printResult() {
