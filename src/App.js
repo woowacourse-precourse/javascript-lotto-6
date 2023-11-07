@@ -31,6 +31,25 @@ class App {
     winningNums.push(bonusNum);
     isDuplicate(winningNums);
     winningNums.pop();
+
+
+    let countReusult = {
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      bonus: 0
+    };
+
+    lottos.forEach((lotto) => {
+      const { winningCnt, bonusHit } = lotto.comapareNumbers(winningNums, bonusNum);
+      MissionUtils.Console.print(winningCnt)
+      
+      if(bonusHit) countReusult.bonus++;
+      else countReusult[winningCnt]++;
+    })
+
+    MissionUtils.Console.print(countReusult)
   }
 }
 
