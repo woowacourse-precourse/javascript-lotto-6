@@ -1,4 +1,4 @@
-import Validate from "../src/common/validate.js";
+import Validate from "../src/common/Validate.js";
 
 const validate = new Validate();
 describe("구매 입력 유효성 테스트", () => {
@@ -31,4 +31,4 @@ describe("보너스 번호 유효성 테스트", () => {
             validate.validateBonusNumber([bonus,numbers]);
         }).toThrow("[ERROR]");
     });
-})
+});
