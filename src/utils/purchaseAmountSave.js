@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Purchase from "../Purchase.js";
 import purchaseAmountSentence from "./purchaseAmountSentence.js";
+
 async function purchaseAmountSave() {
   try {
     purchaseAmountSentence();
