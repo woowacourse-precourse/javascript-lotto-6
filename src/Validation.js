@@ -29,6 +29,12 @@ class Validation {
 
   static validateWinningNumbers(numbers) {
     const winningNumbers = numbers.split(",").map(Number);
+    for (const number of winningNumbers) {
+      if (isNaN(number)) {
+        throw new Error(MESSAGE.ERROR_NOT_NUMBER);
+      }
+    }
+
     if (winningNumbers.length !== 6) {
       throw new Error(MESSAGE.ERROR_WINNING_NUMBER);
     }
@@ -46,6 +52,10 @@ class Validation {
   }
 
   static validateBonusNumber(bonusNumber, winningNumbers) {
+    if (isNaN(bonusNumber)) {
+      throw new Error(MESSAGE.ERROR_NOT_NUMBER);
+    }
+
     if (winningNumbers.includes(Number(bonusNumber))) {
       throw new Error(MESSAGE.ERROR_BONUS_DUPLICATED);
     }
