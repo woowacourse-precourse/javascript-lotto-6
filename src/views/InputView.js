@@ -6,3 +6,10 @@ async function readLineAndPrintBlank(prompt) {
   Console.print("");
   return input;
 }
+
+export const InputView = {
+  async getLotto() {
+    const LOTTO = await readLineAndPrintBlank(Print.start);
+    return Number(LOTTO);
+  },
+};
