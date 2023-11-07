@@ -4,19 +4,18 @@ describe('LottoGame', () => {
   let lottoGame;
 
   beforeEach(() => {
-    lottoGame = new LottoGame(2);
+    lottoGame = new LottoGame();
+    lottoGame.initializeLotto(2);
   });
 
   test('해당 메서드가 수량에 맞는 길이를 생성하는지 테스트한다.', () => {
-    const generatedTickets = lottoGame.generateLottoTickets(5);
+    const purchasedLotto = lottoGame.getPurchasedLotto();
 
-    expect(generatedTickets).toHaveLength(5);
+    expect(purchasedLotto).toHaveLength(2);
   });
 
   test('해당 메서드가 수량에 맞는 6자리의 배열을 반환하는지 테스트한다.', () => {
     const purchasedLotto = lottoGame.getPurchasedLotto();
-
-    expect(purchasedLotto).toHaveLength(2);
 
     purchasedLotto.forEach((lottoNumbers) => {
       expect(lottoNumbers).toBeInstanceOf(Array);
@@ -60,7 +59,9 @@ describe('LottoGame', () => {
   });
 
   test('수익률을 소수점 첫번째 자리까지 반올림하여 반환하는지 테스트한다.', () => {
-    const lottoGame = new LottoGame(8);
+    const lottoGame = new LottoGame();
+    lottoGame.initializeLotto(8);
+
     const expectedResult = '62.5';
     const result = lottoGame.getProfitRatio(5000);
 
