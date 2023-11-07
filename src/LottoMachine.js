@@ -10,17 +10,6 @@ class LottoMachine {
     this.#bonusNumber = bonusNumber;
   }
 
-  // 구매 금액을 받고 로또를 생성한다.
-  createLottos(amount) {
-    const n = amount / 1000;
-    const lottos = [];
-    for (let i = 0; i < n; i++) {
-      const nums = Random.pickUniqueNumbersInRange(1, 45, 6);
-      lottos.push(new Lotto(nums));
-    }
-    return lottos;
-  }
-
   getProfitRate(results) {
     let amount = results.length * 1000;
     let rewards = results.map((rank) => this.getReward(rank));
