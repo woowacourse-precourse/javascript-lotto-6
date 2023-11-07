@@ -68,7 +68,7 @@ class LottoGame {
 
   #showProfitRate() {
     const profitRate = this.#lottoPurchaser.getProfitRate();
-    console.log(profitRate);
+    View.printProfitRate(profitRate);
   }
 }
 

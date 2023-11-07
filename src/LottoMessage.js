@@ -1,7 +1,7 @@
 const QUERY = {
   purchaseAmount: '구입금액을 입력해 주세요.\n',
   winningNumbers: '당첨 번호를 입력해 주세요.\n',
-  bonusNumber: '보너스 번호를 입력해 주세요.\n',
+  bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 };
 Object.freeze(QUERY);
 
@@ -30,6 +30,7 @@ const TEMPLATE = {
   lottoCount: (lottoCount) => `\n${lottoCount}개를 구매했습니다.`,
   sortedLotto: (sortedLotto) => `[${sortedLotto}]\n`,
   winnigResultsBy: WINNING_RESULTS_BY,
+  profitRate: (profitRate) => `총 수익률은 ${profitRate}%입니다.`,
 };
 Object.freeze(TEMPLATE);
 

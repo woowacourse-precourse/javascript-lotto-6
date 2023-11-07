@@ -45,6 +45,22 @@ class View {
     View.print(message);
   }
 
+  static printProfitRate(profitRate) {
+    const trimmedRate = View.getTrimmedRate(profitRate);
+    const message = TEMPLATE.profitRate(trimmedRate);
+    View.print(message);
+  }
+
+  static getTrimmedRate(rate) {
+    const roundedRate = View.getRoundedRate(rate);
+    const includesDot = roundedRate.toString().includes('.');
+    return includesDot ? roundedRate : `${roundedRate}.0`;
+  }
+
+  static getRoundedRate(rate) {
+    return Math.round(rate * 10) / 10;
+  }
+
   static print(message) {
     Console.print(message);
   }
