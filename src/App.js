@@ -4,9 +4,11 @@ import Output from './view/output.js';
 
 class App {
   async play() {
-    const amount = await Input.amountToBuy();
-    const lottos = await Lotto.createLottos(amount);
-    Output.purchasedLottoNumbers(lottos);
+    // const amount = await Input.amountToBuy();
+    // const lottos = await Lotto.createLottos(amount);
+    // Output.purchasedLottoNumbers(lottos);
+    const winningNumber = await Input.winningNumber();
+    console.log(winningNumber);
   }
 }
 
