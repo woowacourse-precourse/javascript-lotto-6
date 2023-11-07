@@ -2,6 +2,12 @@ import ErrorMessage from '../errors/ErrorMessage.js';
 import ERROR from '../../constants/error.js';
 import NUMBER from '../../constants/number.js';
 
+function checkBlank(input) {
+  if (input === '') {
+    throw new ErrorMessage(ERROR.lotto.includeBlank);
+  }
+}
+
 function validateLottoBonusDuplication() {}
 
 class InputValidator {
@@ -43,6 +49,12 @@ class InputValidator {
   validateDrawCases(inputs) {
     if (inputs.length !== NUMBER.drawCount) {
       throw new ErrorMessage(ERROR.lotto.drawCount);
+    }
+  }
+
+  validateNoIncludeBlank(input) {
+    for (const letter of input) {
+      checkBlank(letter);
     }
   }
 }
