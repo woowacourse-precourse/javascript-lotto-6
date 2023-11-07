@@ -3,14 +3,14 @@ import { GAME_MESSAGE } from "../../constants/gameMessage.js";
 import bonusIsValid from "../../utils/bonusIsValid.js";
 
 class BonusInput {
-  async userInput() {
+  async #userInput() {
     return await Console.readLineAsync(`${GAME_MESSAGE.bonus_number}`);
   }
   
   async number(winningNumbers) {
     let valid, number;
     do {
-      number = await this.userInput();
+      number = await this.#userInput();
       try {
         valid = bonusIsValid(number, winningNumbers);
       } catch (error) {

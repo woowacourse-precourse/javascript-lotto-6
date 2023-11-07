@@ -4,7 +4,7 @@ import SYMBOLS from "../../constants/symbols.js";
 import Lotto from "../../controller/Lotto.js";
 
 class WinningInput {
-  async userInput() {
+  async #userInput() {
     const input = await Console.readLineAsync(`${GAME_MESSAGE.winning_number}`);
     return input.split(SYMBOLS.comma).map((str) => +str);
   }
@@ -12,7 +12,7 @@ class WinningInput {
   async winningNumbers() {
     let valid, numbers, bonusNumber;
     do {
-      numbers = await this.userInput();
+      numbers = await this.#userInput();
       try {
         const lotto = new Lotto(numbers);
         bonusNumber = await lotto.bonus();

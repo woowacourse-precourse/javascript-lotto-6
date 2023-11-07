@@ -35,19 +35,19 @@ class LottoGame {
   lottoLogic() {
     const rank = rank_stack;
     this.#userNumbers.forEach((value) => {
-      const match = this.countMatch(value);
+      const match = this.#countMatch(value);
       const bounsMatch = value.includes(Number(this.#bonusNumber));
-      this.checkRank(match, rank, bounsMatch);
+      this.#checkRank(match, rank, bounsMatch);
     });
     const profit = this.profitability(rank);
     resultOutput(rank, profit);
   }
 
-  countMatch(numbers) {
+  #countMatch(numbers) {
     return numbers.filter((number) => this.#numbers.includes(number)).length;
   }
 
-  checkRank(match, rank, bonus) {
+  #checkRank(match, rank, bonus) {
     const rankObj = {
       [three_match]: [five_place],
       [four_match]: [four_place],
