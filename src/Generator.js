@@ -17,10 +17,11 @@ class Generator {
   }
 
   static lottoCountGenerator(userNumbers, lottoNumbers) {
-    const countNumbers = userNumbers.fillter((number) =>
+    const countNumbers = userNumbers.filter((number) =>
       lottoNumbers.includes(number)
     );
-    const count = countNumbers.length() < 3 ? null : countNumbers.length();
+    console.log(countNumbers);
+    const count = countNumbers.length < 3 ? null : countNumbers.length;
 
     return count;
   }
