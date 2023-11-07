@@ -5,6 +5,7 @@ import Lotto from "./Lotto";
 import makeRandomNumbers from "./makeRandomNumbers";
 import calculateLottoNumber from "./calculateLottoNumber";
 import getStatistics from "./getStatistics";
+import calculateProfit from "./calculateProfit";
 class App {
   async play() {
     const amount = await AmountInput();
@@ -26,6 +27,7 @@ class App {
       );
       getStatistics(lottoResult, result, bonusResult);
     });
+    const profit = calculateProfit(amount, lottoResult);
   }
 }
 
