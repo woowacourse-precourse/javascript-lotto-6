@@ -1,6 +1,6 @@
 import WinningNumberArrayValidator from '../../src/validator/WinningNumberArrayValidator.js';
 import errorMessage from '../../src/constants/errorMessage.js';
-import { shuffleArray } from '../../src/util/ShuffleArray.js';
+import { shuffleArray } from '../../src/util/Shuffle.js';
 
 describe('winningNumberValidator 테스트', () => {
 	test('6자리를 입력하지 않았을 때 에러', () => {
