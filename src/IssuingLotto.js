@@ -33,7 +33,7 @@ class IssuingLotto {
     return usersLotto;
   }
 
-  showIssuedLotto() {
+  informIssuedLotto() {
     const lottoList = this.#issuedLotto.map((lotto) => `[${lotto.join(', ')}]`);
 
     Utils.informUser(`${this.#count}개를 구매했습니다.`);
