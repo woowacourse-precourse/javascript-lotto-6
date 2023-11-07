@@ -83,17 +83,27 @@ class Lotto {
     const hasBonus = numbers.some((number) => number === +this.bonusNumber);
 
     if (matchedCount >= 3 && matchedCount <= 6) {
-      if (matchedCount === 5 && hasBonus) {
-        this.matchingCounts.set(
-          "bonus",
-          (this.matchingCounts.get(matchedCount) || 0) + 1
-        );
-      } else
-        this.matchingCounts.set(
-          matchedCount,
-          (this.matchingCounts.get(matchedCount) || 0) + 1
-        );
+      this.hasMathedCountConditionalSentence(matchedCount, hasBonus);
     }
+  }
+
+  hasMathedCountConditionalSentence(matchedCount, hasBonus) {
+    if (matchedCount === 5 && hasBonus) {
+      this.hasBonusConditionalSentence(matchedCount);
+      return;
+    }
+    this.matchingCounts.set(
+      matchedCount,
+      (this.matchingCounts.get(matchedCount) || 0) + 1
+    );
+  }
+
+  hasBonusConditionalSentence(matchedCount) {
+    this.matchingCounts.set(
+      "bonus",
+      (this.matchingCounts.get(matchedCount) || 0) + 1
+    );
+    return;
   }
 
   calculateMatchingStatistics() {
@@ -108,17 +118,18 @@ class Lotto {
     return result.sort();
   }
 
-  calculateMatchingRate(purchasePrice) {
+  calculateTotalPrice() {
     const totalPrice = [...this.matchingCounts.values()].reduce(
-      (acc, cur, idx) => {
-        return acc + cur * this.WINNINGS[idx];
-      },
+      (acc, cur, idx) => acc + cur * this.WINNINGS[idx],
       0
     );
+    return totalPrice;
+  }
 
+  calculateMatchingRate(purchasePrice) {
+    const totalPrice = this.calculateTotalPrice();
     const profit = totalPrice - purchasePrice;
     const profitRate = (profit / purchasePrice) * 100;
-
     const roundedProfitRate = profitRate.toFixed(1);
 
     MissionUtils.Console.print(`총 수익률은 ${roundedProfitRate}%입니다.`);
