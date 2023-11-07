@@ -1,7 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import WinningStatistic from './WinningStatistic.js';
-const MESSAGE_WINNING_STATISTICS = '\n당첨 통계\n---';
-
+import { ENTER_MESSAGE } from './constants/message.js';
 class LottoView {
   static async getUserInput(message) {
     const userInput = await Console.readLineAsync(message);
@@ -9,7 +7,7 @@ class LottoView {
   }
 
   static printStatistics(winningStatistics) {
-    Console.print(MESSAGE_WINNING_STATISTICS);
+    Console.print(ENTER_MESSAGE.winning_statistics);
     Console.print(
       `3개 일치 (5,000원) - ${winningStatistics.getFifthPrize()}개`
     );

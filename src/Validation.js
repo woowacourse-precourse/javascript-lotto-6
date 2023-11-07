@@ -1,6 +1,8 @@
-const LOTTO_RANGE_MIN = 1;
-const LOTTO_RANGE_MAX = 45;
-const LOTTO_PRICE = 1000;
+import {
+  LOTTO_PRICE,
+  LOTTO_RANGE_MIN,
+  LOTTO_RANGE_MAX,
+} from './constants/gameinfo.js';
 class Validation {
   static hasDuplication([...numbers]) {
     const set = new Set(numbers);

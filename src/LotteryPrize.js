@@ -1,24 +1,10 @@
 import WinningStatistic from './WinningStatistic.js';
-
-const LOTTO_FIRSTPRIZE_MATCH_NUMBER = 6;
-const LOTTO_SECOND_OR_THIRD_PRIZE_MATCH_NUMBER = 5;
-const LOTTO_FOURTHPRIZE_MATCH_NUMBER = 4;
-const LOTTO_FIFTHPRIZE_MATCH_NUMBER = 3;
-
-const LOTTO_RANK_NONE = 0;
-const LOTTO_RANK_FIRST = 1;
-const LOTTO_RANK_SECOND = 2;
-const LOTTO_RANK_THIRD = 3;
-const LOTTO_RANK_FOURTH = 4;
-const LOTTO_RANK_FIFTH = 5;
-
-const PRIZE_MONEY_FIRST = 2000000000;
-const PRIZE_MONEY_SECOND = 30000000;
-const PRIZE_MONEY_THIRD = 1500000;
-const PRIZE_MONEY_FOURTH = 50000;
-const PRIZE_MONEY_FIFTH = 5000;
-
-const LOTTO_PRICE = 1000;
+import {
+  LOTTO_PRICE,
+  LOTTO_MATCH,
+  PRIZE_MONEY,
+  LOTTO_RANK,
+} from '../src/constants/gameinfo.js';
 
 class LotteryPrize {
   #lottoBundle;
@@ -60,19 +46,19 @@ class LotteryPrize {
         this.#bonusNumber
       );
       switch (lottoRank) {
-        case LOTTO_RANK_FIRST:
+        case LOTTO_RANK.first:
           prize.firstPrize += 1;
           break;
-        case LOTTO_RANK_SECOND:
+        case LOTTO_RANK.second:
           prize.secondePrize += 1;
           break;
-        case LOTTO_RANK_THIRD:
+        case LOTTO_RANK.third:
           prize.thirdPrize += 1;
           break;
-        case LOTTO_RANK_FOURTH:
+        case LOTTO_RANK.fourth:
           prize.fourthPrize += 1;
           break;
-        case LOTTO_RANK_FIFTH:
+        case LOTTO_RANK.fifth:
           prize.fifthPrize += 1;
           break;
       }
@@ -82,19 +68,19 @@ class LotteryPrize {
 
   #getLottoRank(lottoNumbers, winningNumbers, bonusNumber) {
     switch (this.#getMatchCount(lottoNumbers, winningNumbers)) {
-      case LOTTO_FIRSTPRIZE_MATCH_NUMBER:
-        return LOTTO_RANK_FIRST;
-      case LOTTO_SECOND_OR_THIRD_PRIZE_MATCH_NUMBER:
+      case LOTTO_MATCH.firstPrize:
+        return LOTTO_RANK.first;
+      case LOTTO_MATCH.secondOrThird:
         if (this.#isBonusNumberMatch(lottoNumbers, bonusNumber)) {
-          return LOTTO_RANK_SECOND;
+          return LOTTO_RANK.second;
         }
-        return LOTTO_RANK_THIRD;
-      case LOTTO_FOURTHPRIZE_MATCH_NUMBER:
-        return LOTTO_RANK_FOURTH;
-      case LOTTO_FIFTHPRIZE_MATCH_NUMBER:
-        return LOTTO_RANK_FIFTH;
+        return LOTTO_RANK.third;
+      case LOTTO_MATCH.fourth:
+        return LOTTO_RANK.fourth;
+      case LOTTO_MATCH.fifth:
+        return LOTTO_RANK.fifth;
       default:
-        return LOTTO_RANK_NONE;
+        return LOTTO_RANK.none;
     }
   }
 
@@ -119,11 +105,11 @@ class LotteryPrize {
     fifthPrize,
   }) {
     const totalPrizeMoney =
-      firstPrize * PRIZE_MONEY_FIRST +
-      secondePrize * PRIZE_MONEY_SECOND +
-      thirdPrize * PRIZE_MONEY_THIRD +
-      fourthPrize * PRIZE_MONEY_FOURTH +
-      fifthPrize * PRIZE_MONEY_FIFTH;
+      firstPrize * PRIZE_MONEY.first +
+      secondePrize * PRIZE_MONEY.second +
+      thirdPrize * PRIZE_MONEY.third +
+      fourthPrize * PRIZE_MONEY.fourth +
+      fifthPrize * PRIZE_MONEY.fifth;
     const lottoCount = this.#lottoBundle.length;
     const earingRate = (totalPrizeMoney / (lottoCount * LOTTO_PRICE)) * 100;
     return Number(earingRate).toFixed(1);

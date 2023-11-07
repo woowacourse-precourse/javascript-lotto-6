@@ -1,9 +1,7 @@
 import LottoView from './LottoView.js';
 import LottoMachine from './LottoMachine.js';
 import Validation from './Validation.js';
-
-const MESSAGE_PURCHASE_AMOUNT = '구입금액을 입력해 주세요.\n';
-
+import { ERROR_MESSAGE, ENTER_MESSAGE } from './constants/message.js';
 class Customer {
   #money;
   #lottoBundle;
@@ -12,13 +10,13 @@ class Customer {
     let money;
     while (true) {
       try {
-        money = await LottoView.getUserInput(MESSAGE_PURCHASE_AMOUNT);
+        money = await LottoView.getUserInput(ENTER_MESSAGE.purchase_amount);
         if (!Validation.isProperPurchaseAmount(money)) {
-          throw new Error('[ERROR] 로또 구입 금액이 잘못되었습니다.');
+          throw new Error(ERROR_MESSAGE.purchase_amount);
         }
         break;
       } catch {
-        LottoView.printMessage('[ERROR] 로또 구입 금액이 잘못되었습니다.');
+        LottoView.printMessage(ERROR_MESSAGE.purchase_amount);
       }
     }
     this.#money = money;
