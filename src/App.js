@@ -1,6 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
-import {ERROR_MESSAGE, PRINT_MESSAGE, INPUT_MESSAGE} from './message';
+import { ERROR_MESSAGE, PRINT_MESSAGE, INPUT_MESSAGE } from './message';
 
 class App {
   constructor() {
@@ -17,11 +17,9 @@ class App {
   checkLottoPrice(lottoPrice) {
     // test code
     lottoPrice = Number(lottoPrice);
-    if(isNaN(lottoPrice)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
-    if (lottoPrice < 1000)
-      throw new Error(ERROR_MESSAGE.MIN_PRICE);
-    if (lottoPrice % 1000 !== 0)
-      throw new Error(ERROR_MESSAGE.THOUSAND_UNIT);
+    if (isNaN(lottoPrice)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+    if (lottoPrice < 1000) throw new Error(ERROR_MESSAGE.MIN_PRICE);
+    if (lottoPrice % 1000 !== 0) throw new Error(ERROR_MESSAGE.THOUSAND_UNIT);
   }
 
   makeRandomNumber() {
@@ -47,15 +45,16 @@ class App {
     });
   }
 
-  checkBonusNumber(userBonusNumber){
+  checkBonusNumber(userBonusNumber) {
     // test code
-    if(userBonusNumber === '') throw new Error(ERROR_MESSAGE.EMPTY);
+    if (userBonusNumber === '') throw new Error(ERROR_MESSAGE.NUMBER_EMPTY);
     userBonusNumber = Number(userBonusNumber);
-    if(isNaN(userBonusNumber)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
-    if(1>userBonusNumber || userBonusNumber>45) throw new Error(ERROR_MESSAGE.RANGE_BONUS);
+    if (isNaN(userBonusNumber)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+    if (1 > userBonusNumber || userBonusNumber > 45)
+      throw new Error(ERROR_MESSAGE.RANGE_BONUS);
   }
 
-  printLottoResult(lottoResult, lottoRate){
+  printLottoResult(lottoResult, lottoRate) {
     Console.print(PRINT_MESSAGE.MATCH_STATS);
     Console.print(PRINT_MESSAGE.LINE);
     Console.print(PRINT_MESSAGE.THREE_MATCHES(lottoResult[0]));
@@ -66,26 +65,25 @@ class App {
     Console.print(PRINT_MESSAGE.TOTAL_RATE(lottoRate));
   }
 
-  getLottoNumberArray(userLottoNumber){
-    return userLottoNumber.split(',').map((value) => Number(value));
+  getLottoNumberArray(userLottoNumber) {
+    return userLottoNumber.split(',').map(value => Number(value));
   }
 
-  sortNumber(randomNumberArray){
+  sortNumber(randomNumberArray) {
     // test code
-    randomNumberArray.sort(function(a,b){
-      return a-b;
-    })
+    randomNumberArray.sort(function (a, b) {
+      return a - b;
+    });
     return randomNumberArray;
   }
 
-  printPurchaseAmount(lottoTicket){
+  printPurchaseAmount(lottoTicket) {
     Console.print(PRINT_MESSAGE.PURCHASE(lottoTicket));
   }
 
   async play() {
-    try{
-      const lottoPrice =
-      await Console.readLineAsync(INPUT_MESSAGE.PRICE);
+    try {
+      const lottoPrice = await Console.readLineAsync(INPUT_MESSAGE.PRICE);
       this.checkLottoPrice(lottoPrice);
       this.lottoTicket = this.getLottoTicket(lottoPrice);
       this.printPurchaseAmount(this.lottoTicket);
@@ -97,17 +95,23 @@ class App {
         this.countNumber += 1;
       }
       this.printLottoArray();
-      const userLottoNumber =
-        await Console.readLineAsync(INPUT_MESSAGE.MATCH_NUMBERS);
-      const userBonusNumber =
-        await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
+      const userLottoNumber = await Console.readLineAsync(
+        INPUT_MESSAGE.MATCH_NUMBERS,
+      );
+      const userBonusNumber = await Console.readLineAsync(
+        INPUT_MESSAGE.BONUS_NUMBER,
+      );
       this.checkBonusNumber(userBonusNumber);
       const lottoNumberArray = this.getLottoNumberArray(userLottoNumber);
       const lotto = new Lotto(lottoNumberArray);
-      let lottoResult = lotto.compareLottoNumbers(this.lottoRandomNumber, userLottoNumber, userBonusNumber);
+      let lottoResult = lotto.compareLottoNumbers(
+        this.lottoRandomNumber,
+        userLottoNumber,
+        userBonusNumber,
+      );
       const lottoRate = lotto.getLottoRate(lottoResult, lottoPrice);
       this.printLottoResult(lottoResult, lottoRate);
-    }catch(error){
+    } catch (error) {
       Console.print(error.message);
     }
   }
