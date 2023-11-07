@@ -37,7 +37,7 @@ const statsService = {
   // 수익률 계산
   getRate(price, total) {
     const rate = (total / price) * 100;
-    return rate.toFixed(2);
+    return Math.round(rate * 100) / 100;
   },
 };
 
