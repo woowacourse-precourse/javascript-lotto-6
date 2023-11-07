@@ -71,7 +71,7 @@ class Game {
     Console.print(MESSAGES.game.resultTitle);
     Console.print(MESSAGES.game.separator);
 
-    const prizeKeys = MESSAGES.templates.prizeKeys;
+    const prizeKeys = [3, 4, 5, 'five_b', 6];
 
     prizeKeys.forEach((key) => {
       const prize = stats[key].prize;
