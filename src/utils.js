@@ -42,8 +42,12 @@ function winCount(statistics) {
   MissionUtils.Console.print(templates.join('\n'));
 }
 
-function resultProfit(number) {
-  return MissionUtils.Console.print(WINNER_MESSAGE.PROFIT(number));
+function resultProfit(earningRatio) {
+  const formattedYieldRatio = earningRatio.toLocaleString('ko-KR', {
+    minimumFractionDigits: 1, // 최소 소수점 이하 자릿수
+    maximumFractionDigits: 1, // 최대 소수점 이하 자릿수
+  });
+  MissionUtils.Console.print(`총 수익률은 ${formattedYieldRatio}% 입니다.`);
 }
 
 function randomNum() {
