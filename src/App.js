@@ -6,6 +6,9 @@ class App {
 
     const lottoArray = getPurchasedLottoArray(purchasedLottoCounts);
     printPurchasedLottoNumbers(lottoArray);
+    const winningNumberArray = await userLottoInputSixNumbers();
+    const bonusNumber = await userLottoInputBonusNumber(winningNumberArray);
+
 }
 
 export default App;
