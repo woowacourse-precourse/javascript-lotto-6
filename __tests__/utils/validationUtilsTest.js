@@ -23,19 +23,21 @@ describe('숫자형 체크', () => {
 });
 
 describe('범위 체크', () => {
+  const ERROR_MESSAGE = '[ERROR]';
+
   test('1부터 45까지가 아닌 값이 들어가면 예외를 발생시킨다.', () => {
     const NUMBER = 46;
 
     expect(() => {
-      validationUtils.checkRange(NUMBER);
-    }).toThrow('[ERROR]');
+      validationUtils.checkRange(NUMBER, ERROR_MESSAGE);
+    }).toThrow(ERROR_MESSAGE);
   });
 
   test('1부터 45까지의 값이 들어가면 예외를 발생시키지 않는다.', () => {
     const NUMBER = 1;
 
     expect(() => {
-      validationUtils.checkRange(NUMBER);
-    }).not.toThrow('[ERROR]');
+      validationUtils.checkRange(NUMBER, ERROR_MESSAGE);
+    }).not.toThrow(ERROR_MESSAGE);
   });
 });
