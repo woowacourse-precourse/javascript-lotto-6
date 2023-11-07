@@ -1,9 +1,16 @@
 class Lotto {
   #numbers;
 
+  /**
+   * @param {number[]} numbers
+   */
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+  }
+
+  toString() {
+    return `[${this.#numbers.join(', ')}]`;
   }
 
   #validate(numbers) {
