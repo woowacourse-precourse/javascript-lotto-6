@@ -32,15 +32,14 @@ class WinnerDecider {
     let matchedNumberCount, matchedBonus;
 
     for (let i = 0; i < this.#lottoList.length; i += 1) {
-      matchedNumberCount = this.#matchNumber(this.#lottoList[i]);
-      matchedBonus = this.#matchBonus(this.#lottoList[i]);
+      matchedNumberCount = this.#matchNumber(this.#lottoList[i].numbers);
+      matchedBonus = this.#matchBonus(this.#lottoList[i].numbers);
       this.#checkWinner(matchedNumberCount, matchedBonus);
     }
   }
 
   #matchNumber(lotto) {
     let count = 0;
-
     for (let i = 0; i < 6; i += 1) {
       if (lotto.includes(this.#winNumber.numbers[i])) count += 1;
     }
@@ -49,7 +48,7 @@ class WinnerDecider {
   }
 
   #matchBonus(lotto) {
-    return lotto.includes(this.#winNumber.bonus) ? 1 : 0;
+    return lotto.includes(this.#winNumber.bonusNumber) ? 1 : 0;
   }
 
   #checkWinner(number, bonus) {
@@ -61,11 +60,7 @@ class WinnerDecider {
         this.#score.four += 1;
         break;
       case 5 :
-        if (bonus === 1) {
-          this.#score.bonus += 1;
-          break;
-        }
-        this.#score.five += 1;
+        bonus === 1 ? this.#score.bonus += 1 : this.#score.five += 1;
         break;
       case 6 :
         this.#score.six += 1;
