@@ -20,6 +20,7 @@ class App {
     await this.#requestWinningNumbers();
     await this.#requestBonusNumber();
     this.#respondWinningStatistics();
+    this.#respondRateOfReturn();
   }
 
   async #requestPurchase() {
@@ -89,6 +90,11 @@ class App {
   #getStatisticsMessage(stat) {
     const prize = Util.numberWithCommas(stat.prize);
     return `${stat.numberOfMatches}개 일치${stat.allowBonus ? ', 보너스 볼 일치' : ''} (${prize}원) - ${stat.count}개`;
+  }
+
+  #respondRateOfReturn() {
+    const rateOfReturnMessage = `총 수익률은 ${this.#statistics.rateOfReturn}%입니다.`;
+    Util.printConsole(rateOfReturnMessage);
   }
 }
 

@@ -2,13 +2,19 @@ import { LottoWinningCriteria, PurchaseRule } from './models/rule.js';
 
 class Statistics {
   #statistics = LottoWinningCriteria;
+  #rateOfReturn;
 
   get stat() {
     return this.#statistics;
   }
 
+  get rateOfReturn() {
+    return this.#rateOfReturn;
+  }
+
   constructor(winningNumbers, bonusNumber, lottos) {
     this.#setStatistics(winningNumbers, bonusNumber, lottos);
+    this.#setRateOfReturn(lottos);
   }
 
   #setStatistics(winningNumbers, bonusNumber, lottos) {
@@ -34,6 +40,14 @@ class Statistics {
     }
 
     found.count += 1;
+  }
+
+  #setRateOfReturn(lottos) {
+    const prize = this.#statistics.reduce((acc, cur) => acc + (cur.prize * cur.count), 0);
+    const paid = PurchaseRule.UNIT * lottos.length;
+    const rateOfReturn = (prize / paid) * 100;
+
+    this.#rateOfReturn = Math.round(rateOfReturn * 100) / 100;
   }
 }
 
