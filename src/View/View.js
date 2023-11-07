@@ -14,6 +14,11 @@ const View = {
     return goalNumber;
   },
 
+  async getBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(SYSTEM_MESSAGE.INPUT_BONUS_NUMBER);
+    return bonusNumber;
+  },
+
   printCountOfLotto(countOfLotto) {
     Console.print(`\n${countOfLotto}${SYSTEM_MESSAGE.PURCHASE_LOTTO_MESSAGE}`);
   },
@@ -21,6 +26,8 @@ const View = {
   printLottoNumbers(lottoArray) {
     lottoArray.forEach((lotto) => Console.print(lotto.getNumbers()));
   },
+
+
 };
 
 export default View;

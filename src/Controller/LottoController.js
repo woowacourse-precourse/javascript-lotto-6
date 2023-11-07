@@ -20,6 +20,7 @@ class LottoController {
     const goalNumber = await this.#view.getGoalNumber();
     const goalLotto = new Lotto(goalNumber.split(',').map(Number));
     validateGoalNumber(goalLotto.getNumbers().sort((a, b) => a - b));
+    const bonusNumber = await this.#view.getBonusNumber();
   }
 
   #getCountOfLotto(purchaseAmount) {
