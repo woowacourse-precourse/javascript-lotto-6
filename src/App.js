@@ -1,10 +1,9 @@
 import { INPUT } from './constant/index.js';
 import InputView from './View/InputView.js';
-import Lotto from './Lotto.js';
+import LottoReturnRateCalculator from './LottoReturnRateCalculator.js';
 import LottoResultCalculator from './LottoResultCalculator.js';
 import LottoShop from './LottoShop.js';
 import OutputView from './View/OutputView.js';
-import ReturnRateCalculator from './ReturnRateCalculator.js';
 import Validator from './validator/Validator.js';
 
 class App {
@@ -16,8 +15,8 @@ class App {
     const outcome = App.getLottoOutcome({ winningNumbers, lottos });
     OutputView.lottoOutcome(outcome);
 
-    const returnRate = ReturnRateCalculator.getReturnRate(outcome, buyingPrice);
-    OutputView.lottoRate(returnRate);
+    const calculator = new LottoReturnRateCalculator(outcome, buyingPrice);
+    OutputView.lottoRate(calculator.calculateReturnRate());
   }
 
   static async buyLotto() {
