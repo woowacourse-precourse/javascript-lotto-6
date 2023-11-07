@@ -55,4 +55,4 @@ class LottoPlay{
         return RETURN_RATIO;
     }
 }
-export default LottoPlay;
+export default LottoPlay

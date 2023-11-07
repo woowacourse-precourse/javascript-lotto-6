@@ -11,4 +11,4 @@ class Validate{
         if (numbers.includes(bonus) ) throw new Error(`${ERROR_MESSAGE.BONUS_NUMBER_DUPLICATE}`);
     }
 }
-export default Validate;
+export default Validate

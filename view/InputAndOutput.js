@@ -64,4 +64,4 @@ class InputAndOutput{
         Console.print(`${MESSAGE.TOTAL_RETURN.FRONT} ${ratio}${MESSAGE.TOTAL_RETURN.BACK}`);
     }
 }
-export default InputAndOutput;
+export default InputAndOutput

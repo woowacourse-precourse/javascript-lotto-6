@@ -30,4 +30,4 @@ class LottoController{
         this.inputAndOutput.gameResultOutput(result, RETURN_RATIO);
     }
 }
-export default LottoController;
+export default LottoController

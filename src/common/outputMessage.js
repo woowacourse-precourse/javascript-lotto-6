@@ -27,4 +27,4 @@ const ERROR_MESSAGE = {
     NUMBER_TYPE : "[ERROR] 숫자가 잘못된 형식입니다.",
     BONUS_NUMBER_DUPLICATE : "[ERROR] 로또 번호와 보너스 번호는 중복되지 않은 숫자여야 합니다.",
 }
-export {MESSAGE, ERROR_MESSAGE};
+export {MESSAGE, ERROR_MESSAGE}
