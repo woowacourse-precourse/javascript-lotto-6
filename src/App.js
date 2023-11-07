@@ -1,8 +1,12 @@
+import { Console, Random } from '@woowacourse/mission-utils';
+
 class App {
 	async play() {
 		const PURCHASE_AMOUNT =
 			await Console.readLineAsync('구입금액을 입력해 주세요.');
+
 		const PURCHASE_COUNT = Number(PURCHASE_AMOUNT) / 1000;
+
 		const LOTTERY_TICKET_LIST = [];
 
 		for (let i = 0; i < PURCHASE_COUNT; i += 1) {
@@ -19,6 +23,7 @@ class App {
 		const WINNING_NUMBERS_List = WINNING_NUMBERS.split(',').map((str) =>
 			Number(str.trim()),
 		);
+
 		const BONUS_NUMBER_INPUT =
 			await Console.readLineAsync('보너스 번호를 입력해 주세요.');
 
@@ -62,6 +67,15 @@ class App {
 			`5개 일치, 보너스 볼 일치 (30,000,000원) - ${match_five_plus_bonus}개`,
 		);
 		Console.print(`6개 일치 (2,000,000,000원) - ${match_six}개`);
+
+		const total =
+			5000 * match_three +
+			50000 * match_four +
+			1500000 * match_five +
+			30000000 * match_five_plus_bonus +
+			2000000000 * match_six;
+		const PROFIT_RATE = (total / Number(PURCHASE_AMOUNT)) * 100;
+		Console.print(`총 수익률은 ${PROFIT_RATE.toFixed(1)}%입니다.`);
 	}
 }
 
