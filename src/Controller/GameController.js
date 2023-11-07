@@ -89,6 +89,8 @@ class GameController {
   }
 
   printResult() {
+    OutputView.printLineBreak();
+    OutputView.printMatchingResult(this.#resultCalculator.cntRank);
     OutputView.printEarningRate(this.#resultCalculator.earningRate);
   }
 }

@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import COMMON from '../constants/common.js';
+import WINNING_INFO from '../constants/winningInfo.js';
 
 class OutputView {
   static printLineBreak() {
@@ -13,6 +14,15 @@ class OutputView {
   static printLottos(lottos) {
     lottos.forEach((lotto) => {
       Console.print(lotto.numbers);
+    });
+  }
+
+  static printMatchingResult(cntRank) {
+    Console.print('당첨 통계:');
+    Object.keys(WINNING_INFO).forEach((key) => {
+      Console.print(
+        `${WINNING_INFO[key].criteria} (${WINNING_INFO[key].prizeMoney}) - ${cntRank[key]}개`,
+      );
     });
   }
 
