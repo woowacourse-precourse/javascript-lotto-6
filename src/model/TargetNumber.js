@@ -5,11 +5,11 @@ import {
   MIN_NUMBER,
   MAX_NUMBER
 } from '../constants/constants.js'
+import InputView from "../view/inputView.js";
 
 class TargetNumber {
   #targetNumber;
 
-  #TARGET_NUMBER = '당첨 번호를 입력해 주세요. \n';
   #TARGET_NUM_SIX = '[ERROR] 당첨 번호는 6개여야 합니다.';
   #TARGET_NUM_MIN_MAX = '[ERROR] 당첨 번호는 1에서 45사이의 정수여야 합니다.';
   #TARGET_NUM_STRING = '[ERROR] 당첨 번호는 문자가 아닌 숫자를 입력해야 합니다.';
@@ -28,8 +28,7 @@ class TargetNumber {
   };
   
   async setTargetNumber() {
-    const input = await Console.readLineAsync(this.#TARGET_NUMBER);
-    const targetNumber = input.split(DELIMITER).map((number) => Number(number));
+    const targetNumber = await InputView.inputTargetNumber();
 
     try {
       this.checkTargetNumberValidity(targetNumber);

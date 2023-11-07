@@ -1,5 +1,7 @@
 export const USER_INPUT = Object.freeze({
-  LOTTO_PRICE: '구입금액을 입력해 주세요. \n'
+  LOTTO_PRICE: '구입금액을 입력해 주세요. \n',
+  TARGET_NUMBER: '당첨 번호를 입력해 주세요. \n',
+  BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n'
 });
 
 export const MESSAGE = Object.freeze({

@@ -1,11 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MIN_NUMBER , MAX_NUMBER } from "../constants/constants.js";
+import InputView from "../view/inputView.js";
 
 class BonusNumber {
   #bonusNumber;
   #targetNumber;
 
-  #BONUS_NUMBER = '보너스 번호를 입력해 주세요.\n';
   #BONUS_NUM_MIN_MAX = '[ERROR] 보너스 번호는 1에서 45사이의 정수여야 합니다.';
   #BONUS_NUM_STRING = '[ERROR] 보너스 번호는 숫자여야 합니다.';
   #BONUS_NUM_DUPLICATE = '[ERROR] 보너스 번호는 당첨번호와 중복되지 않아야 합니다.';
@@ -20,8 +20,7 @@ class BonusNumber {
   };
 
   async setBonusNumber() {
-    const input = await Console.readLineAsync(this.#BONUS_NUMBER);
-    const bonusNumber = Number(input);
+    const bonusNumber = await InputView.inputBonusNumber();
 
     try {
       this.checkBonusNumber(bonusNumber);

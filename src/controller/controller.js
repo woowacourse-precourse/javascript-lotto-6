@@ -1,12 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import { 
-  USER_INPUT,
   ERROR_MESSAGE,
   PRICE_UNIT,
   PRICE_ZERO,
   LOTTO_MONEY
 } from "../constants/constants.js";
 import OutputView from "../view/outputView.js";
+import InputView from "../view/inputView.js";
 import Lotto from "../Lotto.js";
 import TargetNumber from "../model/TargetNumber.js";
 import BonusNumber from "../model/BonusNumber.js";
@@ -54,8 +54,7 @@ class Controller {
   };
 
   async getLottoPrice() {
-    const input = await Console.readLineAsync(USER_INPUT.LOTTO_PRICE);
-    const lottoPrice = Number(input);
+    const lottoPrice = await InputView.inputLottoPrice();
   
     try{
       this.checkLottoPriceValidity(lottoPrice);
