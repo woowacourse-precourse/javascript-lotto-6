@@ -11,18 +11,6 @@ class App {
     this.bonusNumber = null;
   }
 
-  checkWinningNum(){
-    if(Object.values(this.winningNumbers).length!==6){
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
-  }
-
-  checkBonusNum(){
-    if(isNaN(this.bonusNumber)){
-      throw new Error('[ERROR] 올바른 숫자를 입력해주세요.');
-    } 
-  }
-
   printRateOfReturn(INPUT_MONEY,total_Return){
     let rate_of_return = (total_Return/INPUT_MONEY)*100
     Console.print('총 수익률은 '+rate_of_return.toFixed(1)+'%입니다.')
@@ -43,12 +31,10 @@ class App {
 
     const winningNumbers = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     this.winningNumbers = winningNumbers.split(',');
-    this.checkWinningNum();
     this.winningNumbers = new WinningNumbers(winningNumbers);
     
 
     const bonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    this.checkBonusNum(); 
     this.bonusNumber = new BonusNumber(bonusNumber);
 
 
