@@ -42,7 +42,7 @@ class App {
     outputs.printAmountOfLotto(this.#amount);
     const LottoNums = publishService.publishLottos(this.#amount);
     this.#lottos = publishService.createLottos(LottoNums);
-    outputs.printLottos(this.#amount, this.#lottos);
+    outputs.printLottos(this.#lottos);
   }
 
   // 당첨 번호 입력
