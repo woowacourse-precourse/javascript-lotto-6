@@ -17,10 +17,12 @@ class LottoGame {
   async start() {
     await this.buyLotto();
     this.setLottoTickets(this.#lottoTickets, this.#ticketCount);
-    this.sortLottoTickets(this.#lottoTickets);
+    this.#lottoTickets = this.sortLottoTickets(this.#lottoTickets);
     this.printLottoTickets(this.#lottoTickets, this.#ticketCount);
-    this.#winningTicket = await this.inputWinningNumbers();
-    this.#bonusNumber = this.inputBonusNumbers(this.#winningTicket);
+    const inputWinningTicket = await this.inputWinningNumbers();
+    console.log(inputWinningTicket);
+    this.#winningTicket = inputWinningTicket.map(number => Number(number));
+    this.#bonusNumber = await this.inputBonusNumbers(this.#winningTicket);
   }
 
   setTicketCount(count) {
@@ -52,10 +54,10 @@ class LottoGame {
   }
 
 
-  generateLottoNumbers(ticketCount) {
-    const lotto = [];
+  generateLottoNumbers() {
+    let lotto = [];
     while (lotto.length < 6) {
-      var number = Random.pickNumberInRange(1, 45);
+      let number = Random.pickNumberInRange(1, 45);
       if (!lotto.includes(number)) {
         lotto.push(number);
       }
@@ -82,16 +84,17 @@ class LottoGame {
   printLottoTickets(lottoTickets, count) {
     Console.print(`\n${count}개를 구매했습니다.`)
     lottoTickets.forEach(element => {
-      Console.print(element.getSortNumbers());
+      Console.print(element);
     });
   }
 
   async inputWinningNumbers() {
     const inputNumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    const winningNumbers = inputNumbers.split(',');
+    const winningNumbers = inputNumbers.split(',');;
     const winningTicket = new Lotto(winningNumbers);
-    this.#validateWinningNumbers(winningTicket);
-    return winningTicket.getSortNumbers();
+    const sortedWinningTicket = winningTicket.getSortNumbers();
+    this.#validateWinningNumbers(sortedWinningTicket);
+    return sortedWinningTicket;
   }
 
   #validateWinningNumbers(numbers) {
