@@ -29,19 +29,19 @@ describe("getInputCost() 테스트", () => {
 describe("costValid() 테스트", () => {
   test("1000으로 나누어 떨어지지 않는 숫자 입력 시 예외 발생", () => {
     const app = new App();
-    const inputCost = 2500;
+    const inputCost = "2500";
     expect(() => app.costValid(inputCost)).toThrow("[ERROR]");
   });
 
   test("음수 입력 시 예외 발생", () => {
     const app = new App();
-    const inputCost = -1000;
+    const inputCost = "-1000";
     expect(() => app.costValid(inputCost)).toThrow("[ERROR]");
   });
 
   test("실수 입력 시 예외 발생", () => {
     const app = new App();
-    const inputCost = 1000.1;
+    const inputCost = "1000.1";
     expect(() => app.costValid(inputCost)).toThrow("[ERROR]");
   });
 });
