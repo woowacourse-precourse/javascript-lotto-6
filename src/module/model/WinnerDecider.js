@@ -13,19 +13,10 @@ class WinnerDecider {
     six: 0,
   };
 
-  constructor(count, numbers, bonusNumber) {
-    this.#generateLottoList(count);
-    this.#generateWinNumber(numbers, bonusNumber);
+  constructor(winNumber, lottoList) {
+    this.#winNumber = winNumber;
+    this.#lottoList = lottoList.lottoList;
     this.#decideWinner();
-  }
-
-  #generateWinNumber(numbers, bonusNumber) {
-    this.#winNumber = new WinNumber(numbers, bonusNumber);
-  }
-
-  #generateLottoList(count) {
-    const tmp = new LottoGenerator(count);
-    this.#lottoList = tmp.lottoList;
   }
 
   #decideWinner() {
