@@ -1,5 +1,6 @@
 import Lotto from "./Lotto";
 import { Random } from "@woowacourse/mission-utils";
+import { REWARD } from "./constant";
 class LottoMachine {
   #winningNumbers;
   #bonusNumber;
@@ -28,30 +29,65 @@ class LottoMachine {
     return lottos;
   }
 
+  getProfitRate(results) {
+    let amount = results.length * 1000;
+    let rewards = results.map((rank) => this.getReward(rank));
+    const sumReward = rewards.reduce((acc, current) => acc + current, 0);
+    return ((sumReward / amount) * 100).toFixed(2);
+  }
+
   // Lottos 는 Lotto 인스턴스 배열
   getLottoResult(Lottos) {
     const results = [];
     Lottos.forEach((Lotto) => {
-      results.push(getResult(Lotto));
+      results.push(getResultRank(Lotto));
     });
     return results;
   }
 
-  getResult(Lotto) {
-    const result = Lotto.filter((num) => this.#winningNumbers.has(num)).length;
+  getResultRank(Lotto) {
+    const result = Lotto.filter((num) =>
+      this.#winningNumbers.includes(num)
+    ).length;
     switch (result) {
       case 3:
-        return 5000;
+        return 5;
       case 4:
-        return 50000;
+        return 4;
       case 5:
         if (Lotto.includes(this.#bonusNumber)) {
-          return 30000000;
+          return 2;
         }
-        return 1500000;
+        return 3;
       case 6:
-        return 2000000000;
+        return 1;
+      default:
+        return 0;
     }
+  }
+
+  getReward(rank) {
+    let money = 0;
+    switch (rank) {
+      case 5:
+        money = REWARD.fifth;
+        break;
+      case 4:
+        money = REWARD.fourth;
+        break;
+      case 3:
+        money = REWARD.third;
+        break;
+      case 2:
+        money = REWARD.second;
+        break;
+      case 1:
+        money = REWARD.first;
+        break;
+      default:
+        money = 0;
+    }
+    return money;
   }
 }
 
