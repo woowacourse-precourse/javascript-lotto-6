@@ -8,16 +8,24 @@ class Game {
 
   #myLotto = [];
 
-  async #getLottoPrice() {
+  static async #getLottoPrice() {
     const priceInput = await User.readInput(MESSAGE.enterPrice);
     return Validation.price(priceInput);
   }
 
-  #priceToAmount(price) {
+  static #priceToAmount(price) {
     return price / 1000;
   }
 
-  async play() {}
+  async #setLottoAmount() {
+    const price = await Game.#getLottoPrice();
+    this.#lottoAmount = Game.#priceToAmount(price);
+  }
+
+  async play() {
+    await this.#setLottoAmount();
+    Console.print(this.#lottoAmount);
+  }
 }
 
 export default Game;
