@@ -1,6 +1,8 @@
 import OutputHandler from './OutputHandler';
 import User from './User';
 import LottoMachine from './LottoMachine';
+import InputHandler from './InputHandler';
+import LottoChecker from './LottoChecker';
 
 class App {
   async play() {
@@ -11,8 +13,10 @@ class App {
     OutputHandler.printPurchaseComplete(ticketCount);
 
     const tickets = await machine.getTickets(ticketCount);
+    const winningNumbers = await InputHandler.inputWinningNumbers();
 
-    const checker = new LottoChecker();
+    const checker = new LottoChecker(tickets, winningNumbers);
+    const result = checker.getResult();
   }
 }
 
