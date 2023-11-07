@@ -16,6 +16,7 @@ class App {
     const lottos = this.buyLotto(lottoCount);
     this.printLotto(lottos, lottoCount);
     const winningNumbers = await this.getWinningNumber();
+    const bonusNumber = await this.getBonusNumber(winningNumbers);
   }
 
   // 1. 로또 구입금액 입력받기
@@ -85,6 +86,34 @@ class App {
         Console.print(error.message);
       }
     }
+  }
+
+  // 5. 보너스 번호를 입력받기
+  async getBonusNumber(winningNumbers) {
+    while (true) {
+      try {
+        const number = await Console.readLineAsync(
+          REQUEST_MESSAGE.PUT_BONUS_NUMBER,
+        );
+        return this.isValidBonusNumber(number, winningNumbers) && number;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  isValidBonusNumber(number, winningNumbers) {
+    if (isNaN(number))
+      throw new Error(VALIDATION_ERRORS_MESSAGE.NOT_ONLY_NUMBER);
+    if (!number) throw new Error(VALIDATION_ERRORS_MESSAGE.EMPTY_INPUT);
+    if (number.split(',').length > LOTTO_NUMBER_COUNT.BONUS)
+      throw new Error(VALIDATION_ERRORS_MESSAGE.ENTER_ONE_BONUS_NUMBER);
+    if (number < LOTTO_NUMBER_RANGE.MIN || number > LOTTO_NUMBER_RANGE.MAX)
+      throw new Error(VALIDATION_ERRORS_MESSAGE.OVER_THE_RANGE);
+    if (winningNumbers.includes(number))
+      throw new Error(VALIDATION_ERRORS_MESSAGE.CONTAIN_SAME_NUMBER);
+
+    return true;
   }
 }
 
