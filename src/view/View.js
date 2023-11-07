@@ -6,7 +6,7 @@ class View {
     return Console.readLineAsync(message);
   }
 
-  print(message) {
+  errorPrint(message) {
     Console.print(message);
   }
 

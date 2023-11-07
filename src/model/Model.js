@@ -4,19 +4,14 @@ import { LOTTO } from "../utils/Constant.js";
 import { validatePriceInput, validateWinLottoInput } from "../utils/vaildateInput.js";
 
 class Model {
-  #lotties;
-  #prizeCategories;
-
-  constructor() {
-    this.#lotties = [];
-    this.#prizeCategories = {
-      equal3: { count: 0, price: LOTTO.fifthPrice },
-      equal4: { count: 0, price: LOTTO.fourthPrice },
-      equal5: { count: 0, price: LOTTO.thirdPrice },
-      equal5WithBonus: { count: 0, price: LOTTO.secondPrice },
-      equal6: { count: 0, price: LOTTO.firstPrice },
-    };
-  }
+  #lotties = [];
+  #prizeCategories = {
+    equal3: { count: 0, price: LOTTO.fifthPrice },
+    equal4: { count: 0, price: LOTTO.fourthPrice },
+    equal5: { count: 0, price: LOTTO.thirdPrice },
+    equal5WithBonus: { count: 0, price: LOTTO.secondPrice },
+    equal6: { count: 0, price: LOTTO.firstPrice },
+  };
 
   get getLotties() {
     return this.#lotties;

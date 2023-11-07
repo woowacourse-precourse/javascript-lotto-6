@@ -19,7 +19,7 @@ class Controller {
 
       this.startLottoHandler(winLottoNumbersInput, winLottoBonusNumberInput);
     } catch (err) {
-      this.view.print(err.message);
+      this.view.errorPrint(err.message);
     }
   }
 
