@@ -59,7 +59,7 @@ class Lottos {
     this.lists.forEach(lotto => {
       lottoRanks.push(lotto.calculateRank(winningNumbers, bonusNumber));
     });
-    Console.print(lottoRanks);
+    // Console.print(lottoRanks);
     //5등까지만 반환되도록
     return lottoRanks.filter(rank => rank <= PLACE.LAST);
   }

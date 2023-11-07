@@ -34,28 +34,9 @@ class Lotto {
   }
 
   //등수 계산
-  // calculateRank(winningNumbers, bonusNumber) {
-  //   let count = 0;
-
-  //   this.#numbers.forEach(number => {
-  //     if (winningNumbers.includes(number)) {
-  //       count += 1;
-  //     }
-  //     if (count === 6) {
-  //       return PLACE.FIRST;
-  //     }
-
-  //     if (count === 5 && this.#numbers.includes(bonusNumber)) {
-  //       return PLACE.SECOND;
-  //     }
-
-  //     return 8 - count;
-  //   });
-  // }
   calculateRank(winningNumbers, bonusNumber) {
     let count = 0;
-    let rank = 8; // 기본적으로 8등으로 초기화합니다.
-
+    let rank = 8;
     this.#numbers.forEach(number => {
       if (winningNumbers.includes(number)) {
         count += 1;
@@ -70,7 +51,7 @@ class Lotto {
       rank = 8 - count;
     }
 
-    return rank; // 루프가 종료되면 올바른 등수를 반환합니다.
+    return rank;
   }
 }
 

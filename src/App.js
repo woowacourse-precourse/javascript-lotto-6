@@ -3,6 +3,7 @@ import { MESSAGE } from './libs/constants';
 import Lottos from './Lottos';
 import WinningNumbers from './WinningNumbers';
 import BonusNumber from './BonusNumber';
+import { checkValue } from './libs/checkValue';
 
 class App {
   constructor() {
@@ -16,32 +17,72 @@ class App {
   }
 
   async inputAmount() {
-    const purchaseAmount = await Console.readLineAsync(MESSAGE.INPUT_AMOUNT);
-    // Console.print(purchaseAmount);
-    this.lottos = new Lottos(purchaseAmount);
-    this.lottos.printTicketCount();
-    this.lottos.printTickets();
+    try {
+      const purchaseAmount = await Console.readLineAsync(MESSAGE.INPUT_AMOUNT);
+      // Console.print(purchaseAmount);
+      this.lottos = new Lottos(purchaseAmount);
 
-    await this.inputWinningNumbers();
+      this.lottos.printTicketCount();
+      this.lottos.printTickets();
+
+      await this.inputWinningNumbers();
+    } catch (error) {
+      Console.print(error.message);
+      const purchaseAmount = await Console.readLineAsync(MESSAGE.INPUT_AMOUNT);
+      this.lottos = new Lottos(purchaseAmount);
+
+      this.lottos.printTicketCount();
+      this.lottos.printTickets();
+
+      await this.inputWinningNumbers();
+    }
   }
 
   async inputWinningNumbers() {
-    let winningNumbers = await Console.readLineAsync(
-      MESSAGE.INPUT_WINNGING_NUMBERS,
-    );
+    try {
+      let winningNumbers = await Console.readLineAsync(
+        MESSAGE.INPUT_WINNGING_NUMBERS,
+      );
 
-    winningNumbers = winningNumbers.split(',').map(number => Number(number));
-    this.winningNumbers = new WinningNumbers(winningNumbers);
+      winningNumbers = winningNumbers.split(',').map(number => Number(number));
+      this.winningNumbers = new WinningNumbers(winningNumbers);
 
-    await this.inputBounsNumber();
+      await this.inputBounsNumber();
+    } catch (error) {
+      Console.print(error.message);
+
+      let winningNumbers = await Console.readLineAsync(
+        MESSAGE.INPUT_WINNGING_NUMBERS,
+      );
+
+      winningNumbers = winningNumbers.split(',').map(number => Number(number));
+      this.winningNumbers = new WinningNumbers(winningNumbers);
+
+      await this.inputBounsNumber();
+    }
   }
 
   async inputBounsNumber() {
-    let bonusNumber = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
-    bonusNumber = Number(bonusNumber);
-    this.bonusNumber = new BonusNumber(bonusNumber, this.winningNumbers.value);
+    try {
+      let bonusNumber = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+      bonusNumber = Number(bonusNumber);
+      this.bonusNumber = new BonusNumber(
+        bonusNumber,
+        this.winningNumbers.value,
+      );
 
-    this.printWinningStats();
+      this.printWinningStats();
+    } catch (error) {
+      Console.print(error.message);
+      let bonusNumber = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+      bonusNumber = Number(bonusNumber);
+      this.bonusNumber = new BonusNumber(
+        bonusNumber,
+        this.winningNumbers.value,
+      );
+
+      this.printWinningStats();
+    }
   }
 
   printWinningStats() {
