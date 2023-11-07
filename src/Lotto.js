@@ -11,12 +11,14 @@ class Lotto {
   #validate(numbers) {
     if (numbers.length !== COUNT_NUMBER)
       throw new Error(ERRORS.invalidWinningNumbersCount);
+
     if (new Set(numbers).size !== COUNT_NUMBER)
       throw new Error(ERRORS.invalidDuplicateLottoNumbers);
 
     const num = numbers.map((num) => {
       if (!Number.isInteger(+num) || Number.isNaN(+num))
         throw new Error(ERRORS.invalidNaN);
+      
       if (+num < MIN_NUMBER || +num > MAX_NUMBER)
         throw new Error(ERRORS.invalidRange);
       return +num;
@@ -35,6 +37,7 @@ class Lotto {
         this.#bonusMatch(bonus, num);
         return;
       }
+      
       this.checkMatch(match);
     });
     this.#printResult(lotto);

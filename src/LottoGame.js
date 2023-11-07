@@ -44,10 +44,13 @@ class LottoGame {
   validateBonusNumber(number) {
     if (number.trim() === '')
       throw new Error(ERRORS.invalidBlank);
+
     if (!Number.isInteger(+number) || Number.isNaN(+number))
       throw new Error(ERRORS.invalidNaN);
+
     if (+number < MIN_NUMBER || +number > MAX_NUMBER)
       throw new Error(ERRORS.invalidRange);
+
     if (this.#inputNumbers.includes(number))
       throw new Error(ERRORS.invalidDuplicateLottoNumbers);
   }
@@ -60,8 +63,10 @@ class LottoGame {
   async buyLotto() {
     try {
       const inputAmount = await Console.readLineAsync(PURCHASE_AMOUNT_MESSAGE);
+
       if (inputAmount.trim() === '')
         throw new Error(ERRORS.invalidBlank);
+      
       if (!Number.isInteger(+inputAmount) || Number.isNaN(+inputAmount))
         throw new Error(ERRORS.invalidNaN);
 
