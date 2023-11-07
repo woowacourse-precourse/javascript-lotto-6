@@ -31,20 +31,18 @@ class App {
     this.bonusNumberInput = '';
     this.lottos = [];
     this.winningNumbers = [];
+    this.purchaseAmount = 0;
     this.bonusNumber = 0;
-    this.gameResult = { 3: 0, 4: 0, 5: 0, 5.5: 0, 6: 0 };
   }
 
   async play() {
-    const purchaseAmount = await this.getPurchaseAmount();
-    const numberOfLottos = this.getNumberOfLottos(purchaseAmount);
+    this.purchaseAmount = await this.getPurchaseAmount();
+    const numberOfLottos = this.getNumberOfLottos();
     this.createLottos(numberOfLottos);
     this.outputManager.printPurchasedLottosInfo(this.lottos);
     this.winningNumbers = await this.getWinningNumbers();
     this.bonusNumber = await this.getBonusNumber();
-    this.getGameResult();
-    const totalPrize = this.getTotalPrize();
-    const rateOfReturn = this.getRateOfReturn(purchaseAmount, totalPrize);
+    const { matchingCounts, totalPrize, rateOfReturn } = this.getGameResult();
   }
 
   async getPurchaseAmount() {
@@ -84,8 +82,8 @@ class App {
     return Number(this.bonusNumberInput);
   }
 
-  getNumberOfLottos(purchaseAmount) {
-    return purchaseAmount / LOTTO_PRICE;
+  getNumberOfLottos() {
+    return this.purchaseAmount / LOTTO_PRICE;
   }
 
   createLottos(numberOfLottos) {
@@ -106,34 +104,52 @@ class App {
   }
 
   getGameResult() {
+    const matchingCounts = this.getMatchingCounts();
+    const totalPrize = this.getTotalPrize(matchingCounts);
+    const rateOfReturn = this.getRateOfReturn();
+    return { matchingCounts, totalPrize, rateOfReturn };
+  }
+
+  getMatchingCount(
+    matchingCountWithWinningNumbers,
+    matchingCountWithBonusNumber
+  ) {
+    return matchingCountWithWinningNumbers ===
+      MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER
+      ? matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT +
+          matchingCountWithBonusNumber * BONUS_NUMBER_WEIGHT
+      : matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT;
+  }
+
+  getMatchingCounts() {
+    const matchingCounts = { 3: 0, 4: 0, 5: 0, 5.5: 0, 6: 0 };
     this.lottos.forEach((lotto) => {
       const { matchingCountWithWinningNumbers, matchingCountWithBonusNumber } =
         lotto.getMatchingResultWithWinningNumbers(this.winningNumbers);
-      const winningCounts =
-        matchingCountWithWinningNumbers ===
-        MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER
-          ? matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT +
-            matchingCountWithBonusNumber * BONUS_NUMBER_WEIGHT
-          : matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT;
-
-      if (winningCounts < MIN_MATCHING_COUNTS_FOR_PRIZE) return;
-      this.gameResult[winningCounts] += 1;
+      const matchingCount = this.getMatchingCount(
+        matchingCountWithWinningNumbers,
+        matchingCountWithBonusNumber
+      );
+      if (matchingCount < MIN_MATCHING_COUNTS_FOR_PRIZE) return;
+      matchingCounts[matchingCount] += 1;
     });
+    return { ...matchingCounts };
   }
 
-  getTotalPrize() {
+  getTotalPrize(matchingCounts) {
     let totalPrize = 0;
-    Object.keys(this.gameResult).forEach((winningCount) => {
+    Object.keys(matchingCounts).forEach((matchingCount) => {
       totalPrize +=
-        this.gameResult[winningCount] * WINNING_PRIZE_BY_COUNT[winningCount];
+        matchingCounts[matchingCount] * WINNING_PRIZE_BY_COUNT[matchingCount];
     });
     return totalPrize;
   }
 
-  getRateOfReturn(purchaseAmount, totalPrize) {
-    return ((totalPrize / purchaseAmount) * PERCENT_CONVERSION_NUMBER).toFixed(
-      LAST_DECIMAL_PLACE_TO_DISPLAY
-    );
+  getRateOfReturn(totalPrize) {
+    return (
+      (totalPrize / this.purchaseAmount) *
+      PERCENT_CONVERSION_NUMBER
+    ).toFixed(LAST_DECIMAL_PLACE_TO_DISPLAY);
   }
 }
 
