@@ -18,8 +18,9 @@ class App {
   async getWinningNumber() {
     try {
       const winningNumbers = await InputView.getWinningNumbers();
-      const bonusNumber = await InputView.getBonusNumbers();
       const lotto = new Lotto(winningNumbers);
+
+      const bonusNumber = await InputView.getBonusNumbers();
       this.#winningRate = new WinningRate(lotto, bonusNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);
@@ -30,9 +31,7 @@ class App {
   result() {
     const resultCalculator = new Result(this.#lottos, this.#winningRate);
     const { results, roi } = resultCalculator.calcResults();
-
-    OutputView.printResults(results);
-    OutputView.printRoi(roi);
+    OutputView.printResults(results, roi);
   }
 
   async play() {

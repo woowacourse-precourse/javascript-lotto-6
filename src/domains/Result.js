@@ -1,3 +1,5 @@
+import { RESULT, resultOrder } from "../constant/gameMessge.js";
+
 class Result {
   constructor(lottos, winningRate) {
     this.lottos = lottos;
@@ -9,7 +11,13 @@ class Result {
       (results, lotto) => {
         return this.updateResults(results, lotto);
       },
-      { 3: 0, 4: 0, 5: 0, "5bonus": 0, 6: 0 },
+      {
+        [resultOrder[0]]: 0,
+        [resultOrder[1]]: 0,
+        [resultOrder[2]]: 0,
+        [resultOrder[3]]: 0,
+        [resultOrder[4]]: 0,
+      },
     );
 
     const investment = this.lottos.length * 1000;
@@ -24,7 +32,8 @@ class Result {
     const isMatchBonus = this.winningRate.isMatchBonusNumber(lotto);
 
     if (count >= 3) {
-      results[count === 5 && isMatchBonus ? "5bonus" : count]++;
+      let targetResultKey = isMatchBonus ? resultOrder[3] : count;
+      results[targetResultKey] = results[targetResultKey] + 1;
     }
 
     return results;
@@ -32,11 +41,11 @@ class Result {
 
   calcTotalPrize(results) {
     return (
-      results[3] * 5000 +
-      results[4] * 50000 +
-      results[5] * 1500000 +
-      results["5bonus"] * 30000000 +
-      results[6] * 2000000000
+      results[resultOrder[0]] * RESULT.prizeMap[resultOrder[0]] +
+      results[resultOrder[1]] * RESULT.prizeMap[resultOrder[1]] +
+      results[resultOrder[2]] * RESULT.prizeMap[resultOrder[2]] +
+      results[resultOrder[3]] * RESULT.prizeMap[resultOrder[3]] +
+      results[resultOrder[4]] * RESULT.prizeMap[resultOrder[4]]
     );
   }
 

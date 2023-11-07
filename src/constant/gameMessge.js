@@ -4,13 +4,7 @@ const MESSAGE = Object.freeze({
     winningNumber: "\n당첨 번호를 입력해주세요.\n",
     bonusNumber: "보너스 번호를 입력해주세요.",
   },
-  match: {
-    three: (input) => `3개 일치 (5,000원) - ${input}개`,
-    four: (input) => `4개 일치 (50,000원) - ${input}개`,
-    five: (input) => `5개 일치 (1,500,000원) - ${input}개`,
-    bonus: (input) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${input}개`,
-    six: (input) => `6개 일치 (2,000,000,000원) - ${input}개`,
-  },
+
   result: {
     Amount: (quantity) => `\n${quantity}개를 구매했습니다.`,
     title: "\n당첨 통계\n---",
@@ -36,4 +30,24 @@ const ERROR = Object.freeze({
   },
 });
 
-export { MESSAGE, ERROR };
+const resultOrder = [3, 4, 5, "5bonus", 6];
+
+const RESULT = Object.freeze({
+  resultMessages: {
+    3: "3개 일치",
+    4: "4개 일치",
+    5: "5개 일치",
+    "5bonus": "5개 일치, 보너스 볼 일치",
+    6: "6개 일치",
+  },
+
+  prizeMap: {
+    3: 5000,
+    4: 50000,
+    5: 1500000,
+    "5bonus": 30000000,
+    6: 2000000000,
+  },
+});
+
+export { MESSAGE, ERROR, resultOrder, RESULT };
