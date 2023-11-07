@@ -1,3 +1,5 @@
+import { ERROR } from '../../constants/constants.js';
+
 const trimmedNumber = number => {
   return number.trim();
 };
@@ -10,6 +12,6 @@ const validateNumber = number => {
   const trimmed = trimmedNumber(number);
   const parsed = parsedNumber(number);
 
-  if (trimmed === '' || Number.isNaN(parsed)) throw new Error();
-  if (trimmed !== parsed.toString()) throw new Error();
+  if (trimmed === '' || Number.isNaN(parsed)) throw new Error(ERROR.notNumber);
+  if (trimmed !== parsed.toString()) throw new Error(ERROR.notThousandWon);
 };
