@@ -29,7 +29,7 @@ export default class LottoGame {
   calculateResults(lotto) {
     const lottoNum = lotto.getLottoNumbers();
     const matchingCount = lottoNum.filter((number) => this.winningNumbers.includes(number)).length;
-    const bonusMatch = lottoNum.includes(this.bonusNum);
+    const bonusMatch = lottoNum.includes(this.bonusNumber);
     return { matchingCount, bonusMatch };
   }
 
