@@ -105,7 +105,7 @@ class App {
       1500000 * rankCounts[2] +
       30000000 * rankCounts[1] +
       2000000000 * rankCounts[0];
-    const earningRate = (earning / purchasePrice) * 100;
+    const earningRate = Math.round((earning / purchasePrice) * 10000) / 100;
 
     Console.print(`총 수익률은 ${earningRate}%입니다.`);
   }
