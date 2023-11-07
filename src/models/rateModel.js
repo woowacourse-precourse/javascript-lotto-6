@@ -7,9 +7,9 @@ const rateModel = {
 
   getRate(total, price) {
     const percent = (total / price) * 100;
-    const rate = Number(percent.toFixed(2));
+    const rate = percent.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    return rate.toLocaleString('en-US');
+    return rate;
   },
 };
 
