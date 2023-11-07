@@ -10,8 +10,8 @@ class Winning {
   #bonus;
 
   /**
-   * @param {number[]} numbers
-   * @param {number} bonus
+   * @param {number[]} numbers 당첨번호
+   * @param {number} bonus 보너스번호
    */
   constructor(numbers, bonus) {
     this.#validate(numbers, bonus);
