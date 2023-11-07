@@ -16,7 +16,11 @@ function calculateGrossReturn(purchaseAmount, statistics) {
     0
   );
 
-  const grossReturn = Math.round((totalPrizeMoney / purchaseAmount) * 100 * 10) / 10;
+  let grossReturn = String(Math.round((totalPrizeMoney / purchaseAmount) * 100 * 10) / 10);
+
+  if (!grossReturn.includes('.')) {
+    grossReturn += '.0';
+  }
 
   return grossReturn;
 }
