@@ -8,6 +8,9 @@ class Output {
     const FORMATTED_ARRAY = RandomLottoNumber.sort((a,b) => a - b).join(', ');
     Console.print(`[${FORMATTED_ARRAY}]`);
   }
+  static printError(error) {
+    Console.print(error.message);
+  }
 }
 
 export default Output;
