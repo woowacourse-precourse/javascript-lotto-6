@@ -23,7 +23,7 @@ class App {
 
   async getPrice() {
     this.amount = await View.inputAmountOfMoney();
-    this.userLotto = new UserLotto(this.amount / 1000);
+    this.userLotto = new UserLotto(this.amount);
   }
 
   showLottos() {
