@@ -27,6 +27,8 @@ const ERROR_MESSAGES = {
   error: '[ERROR]',
   isNumeric: '양의 정수로 입력해 주세요',
   priceUnit: '1000단위로 입력해주세요',
+  invalidNumber: '유효한 숫자가 아닙니다.',
+  nonDuplicateNumber: '중복된 숫자가 있습니다.',
 };
 
 const REGEX = {

@@ -12,6 +12,8 @@ class LottoController {
 
   async lottoDraw() {
     await this.inputAmount();
+    this.lottoModel.generateRandomLottoNumbers();
+    this.outputView.printLottos(this.lottoModel.randomNumbers);
   }
 
   async inputAmount() {
