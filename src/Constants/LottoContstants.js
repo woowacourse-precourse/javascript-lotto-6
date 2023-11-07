@@ -5,4 +5,8 @@ const LOTTO_CONSTANTS = Object.freeze({
 	minLottoNumber: 1,
 });
 
-export default LOTTO_CONSTANTS;
+const DEFAULT_CONSTANT = Object.freeze({
+	splitStandardText: ',',
+});
+
+export { LOTTO_CONSTANTS, DEFAULT_CONSTANT };

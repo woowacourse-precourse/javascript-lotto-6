@@ -1,4 +1,4 @@
-import LOTTO_CONSTANTS from '../Constants/LottoContstants.js';
+import { LOTTO_CONSTANTS } from '../Constants/LottoContstants.js';
 
 const Varificator = {
 	isNotNumber(value) {
@@ -23,6 +23,12 @@ const Varificator = {
 
 	isNotFitWithLottoLength(numbers) {
 		return numbers.length !== LOTTO_CONSTANTS.lottoNumberCount;
+	},
+
+	isDuplicatedNumber(numbers) {
+		const duplicateDeleteNumber = [...new Set(numbers)];
+
+		return duplicateDeleteNumber.length !== numbers.length;
 	},
 
 	isNotNumberInRange(number, maxRange, minRange) {
