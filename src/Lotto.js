@@ -13,6 +13,16 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  compareNumbers(winningNumbers, bonusNumber) {
+    const matchedNumbers = this.#numbers.filter((number) =>
+      winningNumbers.includes(number)
+    );
+    if (this.#numbers.includes(bonusNumber)) {
+      return [matchedNumbers.length.toString(), "bonusTrue"];
+    } else {
+      return [matchedNumbers.length.toString(), "bonusFalse"];
+    }
+  }
 }
 
 export default Lotto;

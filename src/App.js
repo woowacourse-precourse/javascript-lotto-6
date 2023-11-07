@@ -17,6 +17,12 @@ class App {
       lottoList.push(new Lotto(sortedRandomNumbers));
     }
     const [winningNumbers, bonusNumber] = await numberInput();
+    lottoList.forEach((lotto) => {
+      const [result, bonusResult] = lotto.compareNumbers(
+        winningNumbers,
+        bonusNumber
+      );
+    });
   }
 }
 
