@@ -1,11 +1,13 @@
 import LottoShop from './LottoShop.js';
 import { ERROR } from './Message.js';
+import WinningResults from './WinningResults.js';
 
 class LottoPurchaser {
   #ZERO = 0;
 
   #purchaseAmount;
   #lottos = [];
+  #winningResults = new WinningResults();
 
   constructor(purchaseAmount) {
     this.#validate(purchaseAmount);
@@ -29,7 +31,7 @@ class LottoPurchaser {
   check(winningLotto) {
     this.#lottos.forEach((lotto) => {
       const matchingNumbersCount = winningLotto.countMatchingNumbersWith(lotto);
-      console.log(matchingNumbersCount);
+      this.#winningResults.saveResultBy(matchingNumbersCount);
     });
   }
 
