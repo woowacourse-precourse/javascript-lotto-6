@@ -18,6 +18,9 @@ class Controller {
 
     OutputMessages.printCountMessage(this.#buy);
     OutputMessages.printRandomNumbers(this.#buy);
+
+    await this.getLottoNumbers();
+    await this.getBonusNumber();
   }
 
   async getPurchaseAmount() {
@@ -38,6 +41,31 @@ class Controller {
       await this.#buy.setRandomNumbers(
         Random.pickUniqueNumbersInRange(1, 45, 6)
       );
+    }
+  }
+
+  async getLottoNumbers() {
+    while (true) {
+      try {
+        const inputLotto = await InputMessages.inputLottoNumbers();
+        const lottoNumbers = await inputLotto.split(",").map(Number);
+        this.#lotto = new Lotto(lottoNumbers);
+        break;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
+  }
+
+  async getBonusNumber() {
+    while (true) {
+      try {
+        const bonusNumber = await InputMessages.inputBonusNumber();
+        this.#bonus = new Bonus(Number(bonusNumber));
+        break;
+      } catch (e) {
+        Console.print(e.message);
+      }
     }
   }
 }
