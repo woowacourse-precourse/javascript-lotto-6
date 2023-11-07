@@ -32,9 +32,7 @@ class LottoController {
     } catch (error) {
       OutputView.print(error.message);
 
-      const purchaseAmount = await this.#purchaseLotto();
-
-      return purchaseAmount;
+      return this.#purchaseLotto();
     }
   }
 
@@ -53,9 +51,7 @@ class LottoController {
     } catch (error) {
       OutputView.print(error.message);
 
-      const winningNumbers = this.#getWinningNumbers();
-
-      return winningNumbers;
+      return this.#getWinningNumbers();
     }
   }
 
@@ -67,9 +63,7 @@ class LottoController {
     } catch (error) {
       OutputView.print(error.message);
 
-      const bonusNumber = this.#getBonusNumber(winningNumbers);
-
-      return bonusNumber;
+      return this.#getBonusNumber(winningNumbers);
     }
   }
 }
