@@ -2,12 +2,10 @@ import bonusNumberValidator from '../../src/validator/bonusNumberValidator.js';
 import commonValidator from '../../src/validator/commonValidator.js';
 
 describe('보너스 번호 테스트', () => {
-  const BONUS_NUMBER_PRIFIX_MESSAGE = '보너스번호';
-
   describe('commonValidator.checkNumberType 숫자형태 테스트', () => {
     test.each([['40'], ['45'], ['7']])('올바른 숫자형태 보너스 번호 테스트', (input) => {
       expect(() => {
-        commonValidator.checkNumberType(BONUS_NUMBER_PRIFIX_MESSAGE, input);
+        commonValidator.checkNumberType(input);
       }).not.toThrow();
     });
 
@@ -15,7 +13,7 @@ describe('보너스 번호 테스트', () => {
       '잘못된 숫자형태 보너스번호 테스트',
       (input) => {
         expect(() => {
-          commonValidator.checkNumberType(BONUS_NUMBER_PRIFIX_MESSAGE, input);
+          commonValidator.checkNumberType(input);
         }).toThrow();
       }
     );
@@ -27,13 +25,13 @@ describe('보너스 번호 테스트', () => {
 
     test.each([['40'], ['45'], ['7']])('올바른 보너스 번호 범위 테스트', (input) => {
       expect(() => {
-        commonValidator.checkLottoNumberRange(BONUS_NUMBER_PRIFIX_MESSAGE, input);
+        commonValidator.checkLottoNumberRange(input);
       }).not.toThrow();
     });
 
     test.each([['0'], [MIN - 1], [MAX + 1]])('잘못된 보너스번호 범위 테스트', (input) => {
       expect(() => {
-        commonValidator.checkLottoNumberRange(BONUS_NUMBER_PRIFIX_MESSAGE, input);
+        commonValidator.checkLottoNumberRange(input);
       }).toThrow();
     });
   });

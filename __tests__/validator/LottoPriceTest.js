@@ -23,12 +23,11 @@ describe('로또 금액 테스트', () => {
   });
 
   describe('commonValidator.checkNumberType 로또 금액 숫자형태 테스트', () => {
-    const LOTTO_PRICE_PRIFIX_MESSAGE = '로또 금액은';
     test.each([['1000'], ['10000'], ['11000'], ['12000'], ['402000'], ['1201000']])(
       '올바른 숫자형태의 로또 금액 테스트',
       (input) => {
         expect(() => {
-          commonValidator.checkNumberType(LOTTO_PRICE_PRIFIX_MESSAGE, input);
+          commonValidator.checkNumberType(input);
         }).not.toThrow();
       }
     );
@@ -37,7 +36,7 @@ describe('로또 금액 테스트', () => {
       '잘못된 숫자형태의 로또 금액 테스트',
       (input) => {
         expect(() => {
-          commonValidator.checkNumberType(LOTTO_PRICE_PRIFIX_MESSAGE, input);
+          commonValidator.checkNumberType(input);
         }).toThrow();
       }
     );
