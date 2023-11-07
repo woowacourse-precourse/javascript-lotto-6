@@ -1,10 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import GuessLotto from './GuessLotto.js';
+import ProcessLotto from './ProcessLotto.js';
 import Lotto from './Lotto.js';
 
 class App {
   constructor() {
-    this.guess = new GuessLotto();
+    this.guess = new ProcessLotto();
   }
 
   async play() {
