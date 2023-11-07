@@ -27,7 +27,7 @@ class OutputHandler {
     ) {
       return;
     }
-    throw err;
+    throw error;
   }
 }
 

@@ -3,8 +3,8 @@ import { ERROR_MESSAGE, GAME_RULE } from "../Constants.js";
 
 class OutputView {
   static lottoBundle({ purchaseHistory }) {
-    Console.print(OutputView.lottoBundleMessage({ purchaseHistory })).join(
-      "\n",
+    Console.print(
+      OutputView.lottoBundleMessage({ purchaseHistory }).join("\n"),
     );
   }
 
