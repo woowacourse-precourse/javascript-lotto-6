@@ -2,6 +2,56 @@
 
 > 로또 구매 금액을 입력 하여 구매한 로또들을 확인한 다음 당첨 번호, 보너스 번호를 입력하여 당첨 금액 및 수익률을 확인하는 게임
 
+# 동작 영상
+
+<details>
+
+<summary> 정상 동작 case </summary>
+
+![lottoGame](assets/lottoGame.gif)
+
+</details>
+
+<br/>
+
+<details>
+
+<summary> 빈 값, 공백에 대한 예외 case </summary>
+
+![common](assets/common.gif)
+
+</details>
+
+<br/>
+
+<details>
+
+<summary> 구매 로또 금액 예외 case </summary>
+
+![lottoPurchase](assets/lottoPurchase.gif)
+
+</details>
+
+<br/>
+
+<details>
+
+<summary> 당첨 번호 예외 case </summary>
+
+![winningLottoNumber](assets/winningLottoNumber.gif)
+
+</details>
+
+<br/>
+
+<details>
+
+<summary> 보너스 번호 예외 case </summary>
+
+![bonusNumber](assets/bonusNumber.gif)
+
+</details>
+
 # 🚀 기능 목록
 
 ## 로또 구입 금액 입력 기능 (phase 1)
@@ -133,3 +183,102 @@
 
 - 사용자가 잘못된 값을 입력할 경우 throw문을 사용해 예외를 발생시킨다.
 - "[ERROR]"로 시작하는 에러 메시지를 출력하고 해당 부분부터 입력을 다시 받는다.
+
+<details>
+
+<summary> example </summary>
+
+```plain text
+[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.
+```
+
+</details>
+
+# 📈 Flow Chart
+
+![Alt text](assets/flowChart.png)
+
+# 📁 Folder Structure
+
+```plain text
+project
+│
+├── __tests__
+│   ├── ApplicationTest.js
+│   └── LottoTest.js
+│
+├── docs
+│   ├── MISSION_GOAL.md
+│   ├── ARCHITECTURE.md
+│   └── README.md
+│
+├── src
+│   ├── cli (입/출력을 담당하는 모듈)
+│   │   └── lottoGameConsole (로또 게임의 입/출력을 담당)
+│   │   │   ├── LottoGameConsole.test.js
+│   │   │   └── lottoGameConsole.module.js
+│   │   └── systemConsole.module.js (전체적인 입/출력을 담당)
+│   │
+│   ├── constants
+│   │   ├── lottoGame.js
+│   │   └── symbols.js
+│   │
+│   ├── domain
+│   │   ├── confirmWinningResult (우승 결과 확인 관련 모듈)
+│   │   │   ├── lottoNumberMatching (로또 - 당첨 번호 매칭)
+│   │   │   │     ├── LottoNumberMatching.test.js
+│   │   │   │     └── lottoNumberMatching.module.js
+│   │   │   ├── rateOfReturnCalculation (수익률 계산)
+│   │   │   │     ├── RateOfReturnCalculation.test.js
+│   │   │   │     └── rateOfReturnCalculation.module.js
+│   │   │   ├── winningInfoGeneration (당첨 정보 생성)
+│   │   │   │     ├── WinningInfoGeneration.test.js
+│   │   │   │     └── winningInfoGeneration.module.js
+│   │   │   └── index.js
+│   │   └── lottoPurchase (로또 구매)
+│   │   │   ├── lottoPurchase.module.js
+│   │   │   └── lottoPurchase.test.js
+│   │   ├── index.js
+│   │   └── lotto.module.js (로또)
+│   │
+│   ├── error (에러 관련 책임을 담당)
+│   │   ├── AppError (커스텀 에러)
+│   │   │   ├── AppError.module.js
+│   │   │   └── AppError.test.js
+│   │   └── systemErrorHandler (예외 처리 관련 핸들러)
+│   │       ├── SystemErrorHandler.test.js
+│   │       └── systemErrorHandler.module.js
+│   │
+│   ├── interactions (애플리케이션의 흐름 제어를 담당)
+│   │       └── lottoGame.module.js (로또 게임의 흐름 제어를 담당)
+│   │
+│   ├── utils (유틸 함수 관련 모듈)
+│   │   ├── array (배열 관련 유틸 함수)
+│   │   │   ├── Array.test.js
+│   │   │   └── array.module.js
+│   │   ├── object (객체 관련 유틸 함수)
+│   │   │   ├── Object.test.js
+│   │   │   └── object.module.js
+│   │   └── jsDoc.js (jsDoc의 custom type 들을 모아놓은 모듈)
+│   │
+│   └── validations (유효성 검증을 담당하는 모듈)
+│       ├── bonusNumberValidation (보너스 번호와 관련된 유효성을 담당하는 모듈)
+│       │   ├── bonusNumberValidation.module.js
+│       │   └── bonusNumberValidation.test.js
+│       ├── commonValidation (공통적인 유효성을 담당하는 모듈)
+│       │   ├── commonValidation.module.js
+│       │   └── commonValidation.test.js
+│       ├── lottoNumberValidation (로또 번호와 관련된 유효성을 담당하는 모듈)
+│       │   ├── lottoNumberValidation.module.js
+│       │   └── lottoNumberValidation.test.js
+│       ├── purchasedLottoAmountValidation (로또 구매 금액과 관련된 유효성을 담당하는 모듈)
+│       │   ├── purchasedLottoAmountValidation.module.js
+│       │   └── purchasedLottoAmountValidation.test.js
+│       └── utils
+│       │    └── startValidation.js (validate 관련 함수 들을 추상화 시킨 모듈)
+│       └── index.js
+├── App.js
+├── index.js
+└── Lotto.js
+
+```
