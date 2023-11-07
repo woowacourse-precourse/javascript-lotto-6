@@ -5,9 +5,10 @@ export default class DrawnLottoValidator {
   constructor() {
     this.setting = new LottoSettings();
   }
-  // TODO: bonus넘버 1개이상 입력시 에러 추가할것
+
   validateBonusNumber(numbers, bonusNumber) {
     const convertedBonumNumber = Number(bonusNumber);
+    this.#validateBonusNumbIsNan(convertedBonumNumber);
     this.#validateBonusNumberDuplicate(numbers, convertedBonumNumber);
     this.#validateRangeOfPlusNumber(convertedBonumNumber);
     return convertedBonumNumber;
@@ -29,5 +30,10 @@ export default class DrawnLottoValidator {
       throw new LottoError(
         `로또 번호는 ${minOfLottoNumberRange}이상 ${maxOfLottoNumberRange}이하여야 합니다.`
       );
+  }
+
+  #validateBonusNumbIsNan(bonusNumber) {
+    if (isNaN(bonusNumber))
+      throw new LottoError(`보너스 번호는 숫자만 입력이 가능합니다.`);
   }
 }
