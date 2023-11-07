@@ -5,11 +5,27 @@ const rateModel = {
     return total;
   },
 
-  getRate(total, price) {
+  getPercent(total, price) {
     const percent = (total / price) * 100;
-    const rate = percent.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return percent;
+  },
 
-    return rate;
+  getRoundedValue(percent) {
+    const roundedValue = percent.toFixed(1);
+    return roundedValue;
+  },
+
+  getMonetaryValue(roundedValue) {
+    const monetaryValue = roundedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return monetaryValue;
+  },
+
+  getRate(total, price) {
+    const percent = this.getPercent(total, price);
+    const roundedValue = this.getRoundedValue(percent);
+    const monetaryValue = this.getMonetaryValue(roundedValue);
+
+    return monetaryValue;
   },
 };
 
