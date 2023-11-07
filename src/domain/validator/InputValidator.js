@@ -8,6 +8,12 @@ function checkBlank(input) {
   }
 }
 
+function checkNotInRange(input) {
+  if (input < NUMBER.minNumber || input > NUMBER.maxNumber) {
+    throw new ErrorMessage(ERROR.lotto.notInRange);
+  }
+}
+
 function validateLottoBonusDuplication() {}
 
 class InputValidator {
@@ -48,7 +54,7 @@ class InputValidator {
 
   validateDrawCases(inputs) {
     if (inputs.length !== NUMBER.drawCount) {
-      throw new ErrorMessage(ERROR.lotto.drawCount);
+      throw new ErrorMessage(ERROR.lotto.wrongDrawCases);
     }
   }
 
@@ -56,6 +62,12 @@ class InputValidator {
     const letters = input.replace(/ /g, '').split(',');
     for (const letter of letters) {
       checkBlank(letter);
+    }
+  }
+
+  validateNotInRange(inputs) {
+    for (const element in inputs) {
+      checkNotInRange(element);
     }
   }
 }
