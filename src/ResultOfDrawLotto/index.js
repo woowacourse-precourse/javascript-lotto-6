@@ -6,12 +6,12 @@ class ResultOfDrawLotto {
 
   constructor() {
     this.#result = {
-      [LOTTO.rank.firstPlace]: 0,
-      [LOTTO.rank.secondPlace]: 0,
-      [LOTTO.rank.thirdPlace]: 0,
-      [LOTTO.rank.fourthPlace]: 0,
-      [LOTTO.rank.fifthPlace]: 0,
-      [LOTTO.rank.blank]: 0,
+      [LOTTO.rankKey.firstPlace]: 0,
+      [LOTTO.rankKey.secondPlace]: 0,
+      [LOTTO.rankKey.thirdPlace]: 0,
+      [LOTTO.rankKey.fourthPlace]: 0,
+      [LOTTO.rankKey.fifthPlace]: 0,
+      [LOTTO.rankKey.blank]: 0,
     };
   }
 

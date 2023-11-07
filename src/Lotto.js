@@ -16,6 +16,9 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  /**
+   * @returns {number[]}
+   */
   getNumbers() {
     return [...this.#numbers];
   }

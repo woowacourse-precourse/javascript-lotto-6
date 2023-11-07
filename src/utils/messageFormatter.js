@@ -10,8 +10,16 @@ const error = Object.freeze({
   }),
 });
 
+const output = Object.freeze({
+  purchaseCompleted: (length) => `\n${length}개를 구매했습니다.`,
+  winningStatisticsOneLine: (rankKey, prizeMoney, count) =>
+    `${rankKey} (${prizeMoney}원) - ${count}개`,
+  totalRateOfReturn: (rateOfReturn) => `총 수익률은 ${rateOfReturn}입니다.`,
+});
+
 const messageFormatter = Object.freeze({
   error,
+  output,
 });
 
 export default messageFormatter;

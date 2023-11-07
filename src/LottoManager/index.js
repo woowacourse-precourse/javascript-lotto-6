@@ -28,27 +28,6 @@ class LottoManager {
   #resultOfDrawLotto;
 
   /**
-   * @returns {Lotto[]}
-   */
-  getLottoes() {
-    return [...this.#lottoes];
-  }
-
-  /**
-   * @returns {WinningLotto}
-   */
-  getWinningLotto() {
-    return this.#winningLotto;
-  }
-
-  /**
-   * @returns {ResultOfDrawLotto}
-   */
-  getResultOfDrawLotto() {
-    return this.#resultOfDrawLotto;
-  }
-
-  /**
    * @description 당첨 로또 생성
    * @param {number[]} numbers
    * @param {number} bonusNumber
@@ -75,7 +54,8 @@ class LottoManager {
   }
 
   /**
-   * @description 로또 추첨
+   * @description 로또 추첨 결과 반환
+   * @returns {ResultOfDrawLotto}
    */
   drawLottoes() {
     this.#resultOfDrawLotto = new ResultOfDrawLotto();
@@ -83,6 +63,8 @@ class LottoManager {
     this.#lottoes.forEach((lotto) => {
       this.#drawLotto(lotto);
     });
+
+    return this.#resultOfDrawLotto;
   }
 
   /**
@@ -105,7 +87,6 @@ class LottoManager {
   }
 
   /**
-   *
    * @param {number} numberOfLottoTickets
    */
   #generateLottoes(numberOfLottoTickets) {

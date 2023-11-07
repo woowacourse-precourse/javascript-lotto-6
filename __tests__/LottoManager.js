@@ -1,5 +1,6 @@
 import { Random } from "@woowacourse/mission-utils";
 import LottoManager from "../src/LottoManager";
+import LOTTO from "../src/constants/lotto";
 
 /**
  *
@@ -72,12 +73,12 @@ describe("LottoManager(로또 매니저) 클래스 테스트", () => {
         bonusNumber: 11,
       },
       expected: {
-        matchSix: 1,
-        matchFiveAndBonus: 1,
-        matchFive: 2,
-        matchFour: 1,
-        matchThree: 1,
-        matchTwoOrLess: 0,
+        [LOTTO.rankKey.firstPlace]: 1,
+        [LOTTO.rankKey.secondPlace]: 1,
+        [LOTTO.rankKey.thirdPlace]: 2,
+        [LOTTO.rankKey.fourthPlace]: 1,
+        [LOTTO.rankKey.fifthPlace]: 1,
+        [LOTTO.rankKey.blank]: 0,
       },
     },
     {
@@ -97,17 +98,17 @@ describe("LottoManager(로또 매니저) 클래스 테스트", () => {
         bonusNumber: 7,
       },
       expected: {
-        matchSix: 0,
-        matchFiveAndBonus: 0,
-        matchFive: 0,
-        matchFour: 0,
-        matchThree: 1,
-        matchTwoOrLess: 7,
+        [LOTTO.rankKey.firstPlace]: 0,
+        [LOTTO.rankKey.secondPlace]: 0,
+        [LOTTO.rankKey.thirdPlace]: 0,
+        [LOTTO.rankKey.fourthPlace]: 0,
+        [LOTTO.rankKey.fifthPlace]: 1,
+        [LOTTO.rankKey.blank]: 7,
       },
     },
   ];
   test.each(cases)(
-    "drawLottoes 메서드를 통해 로또 추첨을 하면, getResultOfDrawLotto 메서드는 추첨 결과를 반환한다.",
+    "drawLottoes 메서드를 호출하면, 로또 추첨 결과를 반환한다.",
     ({ input, expected: expectedResultOfDrawLotto }) => {
       mockRandoms(input.numbersOfLottoes);
 
@@ -117,8 +118,7 @@ describe("LottoManager(로또 매니저) 클래스 테스트", () => {
         input.winningNumbers,
         input.bonusNumber,
       );
-      lottoManager.drawLottoes();
-      const resultOfDrawLotto = lottoManager.getResultOfDrawLotto();
+      const resultOfDrawLotto = lottoManager.drawLottoes();
 
       // then
       expect(resultOfDrawLotto.getResult()).toEqual(expectedResultOfDrawLotto);
@@ -174,7 +174,6 @@ describe("LottoManager(로또 매니저) 클래스 테스트", () => {
         input.bonusNumber,
       );
       lottoManager.drawLottoes();
-      lottoManager.getResultOfDrawLotto();
       const rateOfReturn = lottoManager.calculateRateOfReturn();
 
       // then
