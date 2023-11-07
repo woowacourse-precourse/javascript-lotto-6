@@ -15,6 +15,9 @@ export const checkBonusNumbers = (bonusNumber, winningNumbers) => {
     if (isNaN(bonusNumber)) {
         throw new Error(ERROR.INVALID_BONUS_NUMBER_MESSAGE);
     }
+    if (!Number.isInteger(bonusNumber)){
+        throw new Error(ERROR.INVALID_BONUS_NUMBER_MESSAGE);
+    }
     if (winningNumbers.includes(bonusNumber)) {
         throw new Error(ERROR.INVALID_BONUS_NUMBER_MESSAGE);
     }
