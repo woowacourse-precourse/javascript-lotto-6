@@ -1,5 +1,4 @@
 import view from './utils/view.js';
-import validation from './utils/validation.js';
 import CONSTANTS from './constants/Constants.js';
 
 class App {
@@ -9,8 +8,6 @@ class App {
 
   async setPurchaseAmount() {
     this.purchaseAmount = await view.readPurchaseAmount();
-
-    validation.isValidInputPurchaseAmount(this.purchaseAmount);
   }
 
   async play() {
