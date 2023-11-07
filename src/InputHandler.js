@@ -3,18 +3,14 @@ import Lotto from "./Lotto.js";
 
 export default class InputHandler {
     static async getPurchaseAmount() {
-        let amount;
         while (true) {
-            const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
-            const sanitizedInput = input.replace(/,/g, '');
-            amount = parseInt(sanitizedInput, 10);
-
-            if (!isNaN(amount) && amount > 0 && amount % Lotto.PRICE === 0) {
-                break;
+            try {
+                const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+                return Lotto.validatePurchaseAmount(input);
+            } catch (error) {
+                MissionUtils.Console.print(error.message);
             }
-            MissionUtils.Console.print("[ERROR] 로또 구입 금액은 1,000원 단위입니다.")
         }
-        return amount;
     }
 
     static async getWinningNumbers() {
@@ -32,7 +28,23 @@ export default class InputHandler {
         }
     }
 
-    static getBonusNumbers() {
-        MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
+    static async getBonusNumbers() {
+        let bonusNumber;
+        while (true) {
+            try {
+                const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+                bonusNumber = parseInt(input.trim(), 10);
+                if (isNaN(bonusNumber)) {
+                    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+                }
+                if (bonusNumber < 1 || bonusNumber > 45) {
+                    throw new Error("[ERROR] 보너스번호는 1에서 45 사이의 숫자여야 합니다.");
+                }
+                return bonusNumber;
+
+            } catch (error) {
+                MissionUtils.Console.print(`[ERROR] ${error.message}`);
+            }
+        }
     }
 }
