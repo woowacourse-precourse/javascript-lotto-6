@@ -8,6 +8,7 @@ import { pickRandomLottoNumbers } from './utils/random.js';
 import InputView from './view/inputView.js';
 import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
+import { WINNING_CATEGORY, WINNINGS } from './constants.js';
 
 class App {
   constructor() {
@@ -26,6 +27,9 @@ class App {
     const lottoBonusNumber = await this.getBonusNumber(lottoWinningNumbers);
 
     this.getRankingResult(lottoTickets, lottoWinningNumbers, lottoBonusNumber);
+    const lottoTotalWinnings = this.calculateTotalWinnings(
+      this.lottoRankingResult
+    );
   }
 
   async getLottoAmount() {
@@ -104,6 +108,17 @@ class App {
       this.lottoRankingResult.push(ranking);
     });
     return this.lottoRankingResult;
+  }
+
+  calculateTotalWinnings(rankingResult) {
+    const totalWinnings = rankingResult.reduce((total, ranking) => {
+      if (WINNINGS.hasOwnProperty(ranking)) {
+        total += WINNINGS[ranking];
+      }
+      return total;
+    }, 0);
+
+    return totalWinnings;
   }
 }
 
