@@ -56,9 +56,7 @@ class LottoGame {
       const winningNumbers = await this.input.getWinningNumbers();
       this.#winningLotto = new WinningLotto(winningNumbers);
 
-      const bonusNumber = await this.input.getBonusNumber(
-        this.#winningLotto.getNumbers(),
-      );
+      const bonusNumber = await this.input.getBonusNumber(winningNumbers);
       this.#winningLotto.setBonusNumber(bonusNumber);
     } catch (error) {
       Console.print(error.message);
@@ -77,13 +75,19 @@ class LottoGame {
   }
 
   calculateRate(purchaseAmount, rankCount) {
-    const totalPrize = rankCount.reduce((acc, count, idx) => {
-      return acc + count * LOTTO_PRIZE[idx];
-    }, 0);
+    const totalPrize = this.getTotalPrize(rankCount);
 
     const returnRate = (totalPrize / purchaseAmount) * 100;
 
     return Number(returnRate.toFixed(1));
+  }
+
+  getTotalPrize(rankCount) {
+    const totalPrize = rankCount.reduce((acc, count, idx) => {
+      return acc + count * LOTTO_PRIZE[idx];
+    }, 0);
+
+    return totalPrize;
   }
 
   getLottos() {
