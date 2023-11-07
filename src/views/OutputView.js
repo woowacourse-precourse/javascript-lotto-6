@@ -12,6 +12,7 @@ class OutputView {
 
   lottoStatic(staticObject) {
     Console.print(OUTPUT_MSG.LOTTO_STATIC_OUT);
+    Console.print(OUTPUT_MSG.STATIC_DIVISION);
     Console.print(OUTPUT_MSG.userLottoResult(staticObject));
   }
 
