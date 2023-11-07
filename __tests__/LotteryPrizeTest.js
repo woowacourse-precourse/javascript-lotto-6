@@ -1,9 +1,9 @@
-import LotteryPrize from "../src/LotteryPrize.js";
-import WinningStatistic from "../src/WinningStatistic.js";
-import Lotto from "../src/Lotto.js";
+import LotteryPrize from '../src/LotteryPrize.js';
+import WinningStatistic from '../src/WinningStatistic.js';
+import Lotto from '../src/Lotto.js';
 
-describe("LotteryPrize.calculatePrize", () => {
-  test("1등 당첨, 수익률 200,000,000%", () => {
+describe('LotteryPrize.calculatePrize', () => {
+  test('1등 당첨, 수익률 200,000,000%', () => {
     const lottoBundle = [new Lotto([1, 2, 3, 4, 5, 6])];
     const winningNumbers = [1, 2, 3, 4, 5, 6];
 
@@ -18,7 +18,7 @@ describe("LotteryPrize.calculatePrize", () => {
     expect(winningStatistic.getEaringRate()).toBe(200000000);
   });
 
-  test("3등 당첨, 수익률 62.5%", () => {
+  test('3등 당첨, 수익률 62.5%', () => {
     const lottoBundle = [
       new Lotto([8, 21, 23, 41, 42, 43]),
       new Lotto([3, 5, 11, 16, 32, 38]),
@@ -42,7 +42,7 @@ describe("LotteryPrize.calculatePrize", () => {
     expect(winningStatistic.getEaringRate()).toBe(62.5);
   });
 
-  test("4등 1개, 5등 3개당첨 수익률 812.5%", () => {
+  test('4등 1개, 5등 3개당첨 수익률 812.5%', () => {
     const lottoBundle = [
       new Lotto([1, 34, 2, 3, 4, 42]),
       new Lotto([1, 3, 4, 7, 8, 9]),

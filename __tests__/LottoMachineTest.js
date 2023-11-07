@@ -1,6 +1,6 @@
-import LottoMachine from "../src/LottoMachine.js";
-import { Random } from "@woowacourse/mission-utils";
-import Lotto from "../src/Lotto.js";
+import LottoMachine from '../src/LottoMachine.js';
+import { Random } from '@woowacourse/mission-utils';
+import Lotto from '../src/Lotto.js';
 const mockRandoms = (numbers) => {
   Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce((acc, number) => {
@@ -8,8 +8,8 @@ const mockRandoms = (numbers) => {
   }, Random.pickUniqueNumbersInRange);
 };
 
-describe("LottoMachine 클래스 테스트", () => {
-  test("8000원으로 8개의 로또가 발행되어야 한다.", () => {
+describe('LottoMachine 클래스 테스트', () => {
+  test('8000원으로 8개의 로또가 발행되어야 한다.', () => {
     mockRandoms([
       [8, 21, 23, 41, 42, 43],
       [3, 5, 11, 16, 32, 38],
