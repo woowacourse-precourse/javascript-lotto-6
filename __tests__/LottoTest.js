@@ -1,5 +1,5 @@
 import Lotto from '../src/model/Lotto.js';
-import { ERROR, RANK } from '../src/constants/Constant.js';
+import { ERROR, LOTTO_NUMBER, RANK } from '../src/constants/Constant.js';
 
 describe('로또 클래스 검증 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -15,7 +15,7 @@ describe('로또 클래스 검증 테스트', () => {
   });
 
   test.each([[[1, 2, 3, 4, 5]], [[1, 2, 3, 4, 5, 6, 7]]])(
-    '로또 번호의 개수가 6개가 아니면 예외가 발생한다.',
+    `로또 번호의 개수가 ${LOTTO_NUMBER.count}개가 아니면 예외가 발생한다.`,
     (input) => {
       expect(() => {
         new Lotto(input);
@@ -42,7 +42,7 @@ describe('로또 클래스 검증 테스트', () => {
   );
 
   test.each([[[0, 1, 2, 3, 4, 5]], [[1, 2, 3, 4, 5, 46]]])(
-    '로또 번호 중 1-45 사이의 숫자가 아닌 요소가 있으면 예외가 발생한다.',
+    `로또 번호 중 ${LOTTO_NUMBER.minNum}와 ${LOTTO_NUMBER.maxNum} 사이의 숫자가 아닌 요소가 있으면 예외가 발생한다.`,
     (input) => {
       expect(() => {
         new Lotto(input);
@@ -121,7 +121,7 @@ describe('로또 클래스 기능 테스트', () => {
   ])('로또의 순위를 구하는 기능 테스트', ({ matchingCount, rank }) => {
     // given
     const mockGetMatchingCount = jest.fn();
-    mockGetMatchingCount.mockReturnValue(matchingCount);
+    mockGetMatchingCount.mockReturnValueOnce(matchingCount);
 
     // when
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
