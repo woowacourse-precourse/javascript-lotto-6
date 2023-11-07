@@ -26,14 +26,27 @@ class Lotto {
     if (numbers.length !== LOTTO.COUNT) {
       throw new Error(ERROR.IS_NOT_LOTTO_LENGTH);
     }
-    if (isDuplicated(numbers)) {
+    if (this.#isDuplicated(numbers)) {
       throw new Error(ERROR.IS_DUPLICATED);
     }
-    if (!numbers.every(isPositiveInteger)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
-    if (isDuplicated(numbers)) throw new Error(ERROR.IS_DUPLICATED);
-    if (numbers.some((number) => number < LOTTO.RANGE.START || number > LOTTO.RANGE.END)) {
-      throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
-    }
+    if (this.#isNotPositiveInteger(numbers)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
+    if (this.#isRangeInvalid(numbers)) throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
+  }
+
+  #isDuplicated(numbers) {
+    const set = new Set(numbers);
+
+    return set.size !== numbers.length;
+  }
+
+  #isNotPositiveInteger(numbers) {
+    return !numbers.every(isPositiveInteger);
+  }
+
+  #isRangeInvalid(numbers) {
+    const { START, END } = LOTTO.RANGE;
+
+    return numbers.some((number) => number < START || number > END);
   }
 
   // TODO: 추가 기능 구현
