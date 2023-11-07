@@ -11,7 +11,9 @@ class App {
     isValidAmount(amount);
 
     const count = printLottoCount(amount);
-    const lottos = printLottoNum(count);
+    const lottoNums = printLottoNum(count);
+
+    const lottos = lottoNums.map(lotto => new Lotto(lotto));
   }
 }
 
