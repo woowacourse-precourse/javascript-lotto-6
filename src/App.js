@@ -56,6 +56,16 @@ class App {
     Console.print("6개 일치 (2,000,000,000원) - " + rank.first + "개");
   }
 
+  totalPrize(rank) {
+    return (
+      rank.first * 2000000000 +
+      rank.second * 30000000 +
+      rank.third * 1500000 +
+      rank.fourth * 50000 +
+      rank.fifth * 5000
+    );
+  }
+
   async play() {
   }
 }
