@@ -38,4 +38,4 @@ class LottoGame {
 
 }
 
-export { LottoGame };
+export default LottoGame;
