@@ -3,11 +3,6 @@ import { MESSAGE } from './constants/messages.js';
 import { REWORD, TRY_COST } from './constants/policy.js';
 
 class Board {
-  constructor(ranks) {
-    this.printResult(ranks);
-    this.printRevenue(ranks);
-  }
-
   static getTotalReword(rank) {
     let totalReword = 0;
     rank.forEach((v) => {

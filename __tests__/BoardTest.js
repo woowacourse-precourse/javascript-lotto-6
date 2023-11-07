@@ -17,8 +17,10 @@ describe("출력문 테스트", () => {
         // given
         const logSpy = getLogSpy();
 
+        const resultBoard = new Board()
         // when
-        new Board([1,3,4,5,3,4,6,7])
+        resultBoard.printResult([1,3,4,5,3,4,6,7])
+        resultBoard.printRevenue([1,3,4,5,3,4,6,7])
 
         // then
         const logs = [
@@ -42,7 +44,11 @@ describe("출력문 테스트", () => {
         const logSpy = getLogSpy();
 
         // when
-        new Board([5,5,4,3,5,6,6,7])
+
+        const resultBoard = new Board()
+
+        resultBoard.printResult([5,5,4,3,5,6,6,7])
+        resultBoard.printRevenue([5,5,4,3,5,6,6,7])
 
         // then
         const logs = [
