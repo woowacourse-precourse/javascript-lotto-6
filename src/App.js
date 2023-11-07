@@ -13,6 +13,7 @@ class App {
 
   async askMoney() {
     const money = await MissionUtils.Console.readLineAsync(PRINT.ASK_BUY);
+    this.moneyTypeCheck(money);
     return parseInt(money);
   }
 
@@ -41,7 +42,12 @@ class App {
 
   printAllLottos() {
     this.allLottos.forEach((lotto) => {
-      MissionUtils.Console.print(lotto.getLottoNumber().sort((a, b) => a - b));
+      MissionUtils.Console.print(
+        `[${lotto
+          .getLottoNumber()
+          .sort((a, b) => a - b)
+          .join(", ")}]`
+      );
     });
   }
 
@@ -164,7 +170,6 @@ class App {
 
   async play() {
     const inputMoney = await this.askMoney();
-    this.moneyTypeCheck(inputMoney);
 
     this.printLottosInfo(inputMoney);
 
