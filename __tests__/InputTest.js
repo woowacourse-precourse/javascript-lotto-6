@@ -1,4 +1,5 @@
 import validator from "../src/validate/Validator.js";
+import ScoreMyLottos from "../src/domain/ScoreMyLottos.js";
 
 describe("입력 예외 처리 테스트", () => {
 
@@ -22,6 +23,14 @@ describe("입력 예외 처리 테스트", () => {
         expect(() => validator.bonusValidator(INPUT)).toThrow("[ERROR]");
     });
 
+    test("보너스 - 보너스는 정답 배열 외의 숫자", () => {
+        const LOTTOS = [[1, 2, 3, 4, 5, 6]];
+        const ANSWER = [1, 2, 3, 4, 5, 6];
+        const BONUS = 6;
+        expect(() => {
+            new ScoreMyLottos(LOTTOS, ANSWER, BONUS);
+        }).toThrow("[ERROR]");
+    });
     test("정답 - 범위 외의 숫자", () => {
         const INPUT = "1,2,3,4,5,100";
         expect(() => validator.bonusValidator(INPUT)).toThrow("[ERROR]");
