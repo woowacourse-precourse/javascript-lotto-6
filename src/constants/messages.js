@@ -1,4 +1,4 @@
-import { LOTTO_CONDITION, PRICE_PER_TICKET, PRIZE_KEY } from './constants.js';
+import { LOTTO_CONDITION, PRICE_PER_TICKET, PRIZE_KEY, RANK } from './constants.js';
 
 const INPUT_MESSAGE = Object.freeze({
   purchaseAmount: '구입금액을 입력해 주세요.\n',
@@ -9,15 +9,16 @@ const INPUT_MESSAGE = Object.freeze({
 const OUTPUT_MESSAGE = Object.freeze({
   purchaseAmount: (amount) => `\n${amount}개를 구매했습니다.`,
   winsStatistic: `\n당첨통계\n---`,
+  totalWinsStatistic: (label, count) => `${label} - ${count}개`,
   totalProfitRatio: (profitRatio) => `총 수익률은 ${profitRatio}%입니다.`,
 });
 
 const STATISTIC_LABEL = Object.freeze({
-  [PRIZE_KEY.fifthPrize]: '3개 일치 (5,000원)',
-  [PRIZE_KEY.fourthPrize]: '4개 일치 (50,000원)',
-  [PRIZE_KEY.thirdPrize]: '5개 일치 (1,500,000원)',
-  [PRIZE_KEY.secondPrize]: '5개 일치, 보너스 볼 일치 (30,000,000원)',
-  [PRIZE_KEY.firstPrize]: '6개 일치 (2,000,000,000원)',
+  [PRIZE_KEY.fifthPrize]: `${RANK.fifth}개 일치 (5,000원)`,
+  [PRIZE_KEY.fourthPrize]: `${RANK.fourth}개 일치 (50,000원)`,
+  [PRIZE_KEY.thirdPrize]: `${RANK.third}개 일치 (1,500,000원)`,
+  [PRIZE_KEY.secondPrize]: `${RANK.second}개 일치, 보너스 볼 일치 (30,000,000원)`,
+  [PRIZE_KEY.firstPrize]: `${RANK.first}개 일치 (2,000,000,000원)`,
 });
 
 const PREFIX_ERROR = '[ERROR]';
