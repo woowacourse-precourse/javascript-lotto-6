@@ -1,19 +1,21 @@
+const errorString = (content) => `[ERROR] ${content}`;
+
 export const REWARD = Object.freeze({
   '1등': 2000000000,
   '2등': 30000000,
   '3등': 1500000,
   '4등': 50000,
   '5등': 5000,
-  '낙첨': 0,
+  낙첨: 0,
 });
 
 export const ERROR = Object.freeze({
-  invalidLength: '[ERROR] 로또 번호는 6개여야 합니다.',
-  duplicatedNumber: '[ERROR] 중복이 없는 숫자여야 합니다.',
-  invalidRange: '[ERROR] 숫자는 1부터 45중 하나여야 합니다.',
-  invalidNumber: '[ERROR] 숫자를 입력해주세요',
-  duplicatedWithWinning: '[ERROR] 기존 6개의 당첨번호와 중복 되면 안됩니다.',
-  invalidUnit: '[ERROR] 단위는 1000입니다.',
+  invalidLength: errorString('로또 번호는 6개여야 합니다.'),
+  duplicatedNumber: errorString('중복이 없는 숫자여야 합니다.'),
+  invalidRange: errorString('숫자는 1부터 45중 하나여야 합니다.'),
+  invalidNumber: errorString('숫자를 입력해주세요'),
+  duplicatedWithWinning: errorString('기존 6개의 당첨번호와 중복 되면 안됩니다.'),
+  invalidUnit: errorString('단위는 1000입니다.'),
 });
 
 export const VALUE = Object.freeze({
@@ -44,5 +46,5 @@ export const RANKING = Object.freeze({
 export const SIGN = Object.freeze({
   printUnit: ', ',
   blank: '',
-  cuttingUnit: ','
-})
+  cuttingUnit: ',',
+});
