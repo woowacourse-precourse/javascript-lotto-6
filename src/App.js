@@ -5,7 +5,8 @@ import purchaseAmountSave from "./utils/purchaseAmountSave.js";
 import winningNumbers from "./utils/winningNumbers.js";
 import bonusNumber from "./utils/bonusNumber.js";
 import winningResult from "./utils/winningResult.js";
-
+import mathcedCount from "./utils/matchedCount.js";
+import winningStatisticsFinalSentence from "./utils/winningStaticsFinalSentnece.js";
 class App {
   async play() {
     const PURCHASE_AMOUNT = await purchaseAmountSave();
@@ -22,6 +23,11 @@ class App {
       BONUSNUMBER
     );
     winningResult(WINNING_MACHEDRESULT, BONUS_MATCHEDRESULT);
+    winningStatistics(
+      PURCHASE_AMOUNT,
+      WINNING_MACHEDRESULT,
+      BONUS_MATCHEDRESULT
+    );
   }
 }
 
@@ -70,6 +76,42 @@ async function LottosNumberMatchBonusNumber(lottosNumber, bonusNumber) {
 
 function matchBonusProcess(arrayOne, number) {
   return arrayOne.includes(number);
+}
+
+async function winningStatistics(
+  purchaseAmout,
+  winningMatchedResult,
+  bonusMatchedResult
+) {
+  const totalMoney = winningMoney(winningMatchedResult, bonusMatchedResult);
+  const rateOfReturn = Math.round(totalMoney / purchaseAmout) * 100;
+  winningStatisticsFinalSentence(rateOfReturn);
+  return rateOfReturn;
+}
+
+function winningMoney(winningMatchedResult, bonusMatchedResult) {
+  let result = {
+    three: 0,
+    four: 0,
+    five: 0,
+    fiveAndBonus: 0,
+    six: 0,
+  };
+
+  for (const key in winningMatchedResult) {
+    mathcedCount(winningMatchedResult[key], bonusMatchedResult[key], result);
+  }
+
+  const TOTAL_GETMONEY =
+    result.three * 5000 +
+    result.four * 50000 +
+    result.five * 1500000 +
+    result.fiveAndBonus * 30000000 +
+    result.six * 2000000000;
+
+  console.log(TOTAL_GETMONEY);
+
+  return TOTAL_GETMONEY;
 }
 
 export default App;
