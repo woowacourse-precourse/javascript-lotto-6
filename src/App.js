@@ -24,8 +24,7 @@ class App {
 
     try {
       const buyingPrice = await InputView.readNumber(INPUT.BUYING_PRICE);
-      Validator.validateGreaterThanZero(buyingPrice);
-      Validator.validateValidUnit(buyingPrice);
+      Validator.validateBuyingPrice(buyingPrice);
       const lottos = LottoShop.issueLottoTickets(buyingPrice);
 
       result = { lottos, buyingPrice };
@@ -52,9 +51,7 @@ class App {
 
     try {
       const winningNumbers = await InputView.readNumbers(INPUT.WINNING_NUMBERS);
-      Validator.validateLottoNumbersLength(winningNumbers);
-      winningNumbers.forEach(Validator.validateLottoNumberRange);
-      Validator.validateUniqueLottoNumbers(winningNumbers);
+      Validator.validateLottoNumbers(winningNumbers);
       result = winningNumbers;
     } catch (e) {
       OutputView.print(e.message);
@@ -69,8 +66,7 @@ class App {
 
     try {
       const bonusNumber = await InputView.readNumber(INPUT.BONUS_NUMBERS);
-      Validator.validateLottoNumberRange(bonusNumber);
-      Validator.validateUniqueBonusNumber(bonusNumber, winningNumbers);
+      Validator.validateBonusNumber(bonusNumber, winningNumbers);
       result = bonusNumber;
     } catch (e) {
       OutputView.print(e.message);

@@ -13,9 +13,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validator.validateLottoNumbersLength(numbers);
-    numbers.forEach(Validator.validateLottoNumberRange);
-    Validator.validateUniqueLottoNumbers(numbers);
+    Validator.validateLottoNumbers(numbers);
   }
 }
 
