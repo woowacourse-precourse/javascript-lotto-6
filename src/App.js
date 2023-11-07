@@ -1,15 +1,17 @@
 import { Console } from "@woowacourse/mission-utils";
-import { validatePayment } from "./ValidateInput";
+import { validatePayment } from "./ValidateInput.js";
+import { paymentToLottoCount } from "./utils/lotto.js";
+import Input from "./Input.js";
 
 class App {
   async play() {
-    await this.readPayment();
+    const payment = await this.readPayment();
   }
 
   async readPayment() {
     while (true) {
       try {
-        const payment = Input.readPayment();
+        const payment = await Input.readPayment();
         validatePayment(payment);
         return Number(payment);
       } catch (error) {

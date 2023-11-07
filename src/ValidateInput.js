@@ -1,6 +1,6 @@
-import ERROR_MESSAGE from "./constant/errorData";
-import LOTTO from "./constant/lottoData";
-import { isBlank, isInvalidType } from "./utils/validation";
+import ERROR_MESSAGE from "./constant/errorData.js";
+import LOTTO from "./constant/lottoData.js";
+import { isBlank, isInvalidType } from "./utils/validation.js";
 
 const Validator = {
   paymentInvalid(input) {
