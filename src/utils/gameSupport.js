@@ -93,6 +93,21 @@ const isWinningLottoWithBonus = (
   return false;
 };
 
+export const totalProfit = (winningResults) => {
+  let totalReward = 0;
+  const reward = {
+    [WINNING_LOTTO_COUNT.THREE]: 5000,
+    [WINNING_LOTTO_COUNT.FOUR]: 50000,
+    [WINNING_LOTTO_COUNT.FIVE]: 1500000,
+    winningResultWithBonus: 30000000,
+    [WINNING_LOTTO_COUNT.SIX]: 2000000000,
+  };
+
+  for (const NumberOfwinning in winningResults) {
+    totalReward += reward[NumberOfwinning] * winningResults[NumberOfwinning];
+  }
+  return totalReward;
+};
 
 export const totalProfitMargin = (buyAmount, winningResults) => {
   const winnings = totalProfit(winningResults);
