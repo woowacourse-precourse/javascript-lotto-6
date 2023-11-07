@@ -7,7 +7,7 @@ import {
   PRIZE_BY_RANK,
   WINNING_CONDITION_BY_RANK,
 } from '../constants/index.js';
-import { hasDuplicates, numberWithCommas } from './utils.js';
+import { verifyIsNumber, numberWithCommas } from './utils.js';
 
 class App {
   #amount;
@@ -16,16 +16,13 @@ class App {
   #bonusNumber;
   #rankCount;
 
-  constructor(numbers) {}
-
   async play() {
     try {
       await this.buy();
-
       await this.setWinningNumbers();
       this.printResult();
     } catch (e) {
-      MissionUtils.Console.print(e);
+      MissionUtils.Console.print(e.message);
     }
   }
 
@@ -88,13 +85,6 @@ class App {
     MissionUtils.Console.print(`총 수익률은 ${rateOfRevenue}%입니다.`);
   }
 
-  #getProfit() {
-    const revenue = this.#getRevenue();
-    const cost = this.#amount;
-    const profit = revenue - cost;
-    return profit;
-  }
-
   #getRevenue() {
     let revenue = 0;
 
@@ -116,10 +106,12 @@ class App {
   }
 
   #convertToNumber(numberString) {
-    const number = parseInt(numberString);
-    if (!number) {
-      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+    const isNumber = verifyIsNumber(numberString);
+    console.log(numberString, isNumber);
+    if (!isNumber) {
+      throw new Error('[ERROR]');
     }
+    const number = parseInt(numberString);
     return number;
   }
 
