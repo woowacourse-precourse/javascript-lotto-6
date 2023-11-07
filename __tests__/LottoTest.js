@@ -1,18 +1,19 @@
-class Lotto {
-  #numbers;
+/* eslint-disable max-lines-per-function */
+import Lotto from '../src/Lotto.js';
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
+describe('로또 클래스 테스트', () => {
+  test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6, 7]);
+    }).toThrow('[ERROR]');
+  });
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
-  }
+  // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
+  test('로또 번호에 중복된 숫자가 있으면 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 5]);
+    }).toThrow('[ERROR]');
+  });
 
-  // TODO: 추가 기능 구현
-}
-
-export default Lotto;
+  // 아래에 추가 테스트 작성 가능
+});
