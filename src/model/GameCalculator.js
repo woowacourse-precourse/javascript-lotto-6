@@ -18,7 +18,9 @@ class GameCalculator {
       if(RESULT_PER_LOTTO >= 3 && RESULT_PER_LOTTO <= 6) {
         const RESULT_KEY = (RESULT_PER_LOTTO === 6) ? NUMBER.seven : String(RESULT_PER_LOTTO);
         this.winngingResult[RESULT_KEY] += 1
-      } else if(RESULT_PER_LOTTO === OTHERS.bonusNumber) {
+      }
+      
+      if(RESULT_PER_LOTTO === OTHERS.bonusNumber) {
         this.winngingResult[NUMBER.six] += 1;
       }
     });
