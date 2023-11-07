@@ -1,6 +1,5 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import { Console } from '@woowacourse/mission-utils';
 import CONSTANTS from '../constants/constants.js';
 import generateLotto from '../utils/generateLotto.js';
 
@@ -18,6 +17,7 @@ class LottoController {
     this.#printLottos(count);
     const winningNumbers = await this.#inputWinningNumbers();
     const bonusNumber = await this.#inputBonusNumber();
+    this.#printWinningStatistics(winningNumbers, bonusNumber);
   }
 
   async #inputPurchaseAmount() {
@@ -29,7 +29,7 @@ class LottoController {
   }
 
   async #inputBonusNumber() {
-    await InputView.readbonusNumber();
+    return await InputView.readbonusNumber();
   }
 
   #getCount(purchaseAmount) {
@@ -44,6 +44,10 @@ class LottoController {
 
   #printLottos(count) {
     OutputView.printLottosString(count, this.#lottos);
+  }
+
+  #printWinningStatistics(winningNumbers, bonusNumber) {
+    OutputView.printWinningStatisticsString(this.#lottos, winningNumbers, bonusNumber);
   }
 }
 
