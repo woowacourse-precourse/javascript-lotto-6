@@ -11,7 +11,7 @@ class App {
         for (let i = 0; i < USER.getAmount(); i++)
             USER.setUserLotto(Controller.generateRandomLotto());
 
-        View.showLotto(USER.getAmount(), USER.getUserLotto());
+        View.showLotto(USER.getUserLotto());
 
         const WINNING = new Winning();
         await WINNING.setWinning();

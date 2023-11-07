@@ -2,8 +2,10 @@ import { Console } from "@woowacourse/mission-utils";
 import { CONSTANT } from "./Constant.js";
 
 class View {
-    static showLotto(amount, userLotto) {
-        let output = `${amount}${CONSTANT.MONEY_INPUT_RESPONSE}\n`;
+    static showLotto(userLotto) {
+        const AMOUNT = userLotto.length;
+
+        let output = `${AMOUNT}${CONSTANT.MONEY_INPUT_RESPONSE}\n`;
         userLotto.forEach((lotto) => {
             output += `[${lotto.getNum().join(", ")}]\n`;
         });
