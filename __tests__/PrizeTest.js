@@ -67,7 +67,7 @@ test("제공한 값과 동일한 당첨 번호가 출력되어야 한다", async
   await prize.bonusNum("test");
 
   // then
-  await expect(prize.show()).toStrictEqual({
+  await expect(prize.get()).toStrictEqual({
     line: [1, 42, 32, 9, 27, 11],
     bonus: 24,
   });

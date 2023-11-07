@@ -23,8 +23,8 @@ test("당첨 횟수에 따라 올바른 메시지가 출력되어야 한다.", (
 
   // when
   const app = new App(1000);
-  const result = app.compare(mockLotto, prize);
-  app.printResult(result);
+  const result = App.compare(mockLotto, prize);
+  App.printResult(result);
 
   // then
   logs.forEach((log) => {

@@ -47,7 +47,7 @@ describe("프린터 테스트", () => {
 
     // then
     expect(logSpy).toHaveBeenCalledWith(
-      `[${printer.getTicket()[0].show().join(", ")}]`
+      `[${printer.getTicket()[0].get().join(", ")}]`
     );
   });
 });

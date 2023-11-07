@@ -17,7 +17,7 @@ class Lotto {
     }
   }
 
-  show() {
+  get() {
     return this.#numbers;
   }
 }

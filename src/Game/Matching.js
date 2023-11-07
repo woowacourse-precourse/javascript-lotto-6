@@ -3,9 +3,9 @@ export default class Matching {
     const lineAry = prizeObj.line;
     const bonusNum = prizeObj.bonus;
 
-    const luckyNums = lottoAry.show().filter((num) => lineAry.includes(num));
+    const luckyNums = lottoAry.get().filter((num) => lineAry.includes(num));
     const wins = luckyNums.length;
-    if (wins === 5 && lottoAry.show().includes(bonusNum)) {
+    if (wins === 5 && lottoAry.get().includes(bonusNum)) {
       return 5.1;
     }
     return wins;
