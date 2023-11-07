@@ -26,14 +26,11 @@ class LottoController {
     await this.#purchaseLottos();
     this.#printPurchasedLottos();
 
-    this.#setLottoBoard();
+    await this.#setLottoBoard();
     const lottoResult = this.#model.getLottoResult();
 
-    this.#printLottoResult();
-
-    this.#outputView.printLottoReturnRatio(
-      this.#getLottoReturnRatio(lottoResult, purchasePrice / LOTTO_PRICE)
-    );
+    this.#printLottoResult(lottoResult);
+    this.#printLottoReturnRatio(lottoResult);
   }
 
   async #purchaseLottos() {
@@ -52,7 +49,7 @@ class LottoController {
     this.#model.makeLottoBoard(winningNumbersArray, bonusNumber);
   }
 
-  async #printLottoResult() {
+  async #printLottoResult(lottoResult) {
     this.#outputView.printLineBreak();
     this.#outputView.printLottoResult(lottoResult);
   }
@@ -91,6 +88,15 @@ class LottoController {
         this.#outputView.printErrorMessage(error);
       }
     }
+  }
+
+  #printLottoReturnRatio(lottoResult) {
+    const returnRatio = this.#getLottoReturnRatio(
+      lottoResult,
+      this.#model.getNumberOfLottos()
+    );
+
+    this.#outputView.printLottoReturnRatio(returnRatio);
   }
 
   #getLottoReturnRatio(resultArray, numberOfLotto) {

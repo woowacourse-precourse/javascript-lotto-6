@@ -14,6 +14,11 @@ class LottoModel {
   #purchasedLottoArray;
   #lottoBoard;
 
+  constructor() {
+    this.#lottoBoard = [];
+    this.#lottoBoard = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
+  }
+
   purchaseLottos(numberOfLotto) {
     this.#purchasedLottoArray = Get.randomLottoArray(numberOfLotto);
   }
@@ -25,7 +30,11 @@ class LottoModel {
   }
 
   getPurchasedLottoArray() {
-    return this.#purchasedLottoArray;
+    return [...this.#purchasedLottoArray];
+  }
+
+  getBoard() {
+    return this.#lottoBoard;
   }
 
   getLottoResult() {
@@ -35,6 +44,10 @@ class LottoModel {
     );
 
     return Object.freeze(result);
+  }
+
+  getNumberOfLottos() {
+    return this.#purchasedLottoArray.length;
   }
 }
 
