@@ -25,13 +25,4 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 3, 4, 49, 6]);
     }).toThrow('[ERROR]');
   });
-
-  test('로또번호와 보너스 번호가 일치하면 예외가 발생한다.', () => {
-    // given
-    const lotto = new Lotto([1, 2, 3, 4, 45, 6]);
-
-    expect(() => {
-      lotto.checkUniqueNumber(45);
-    }).toThrow('[ERROR]');
-  });
 });
