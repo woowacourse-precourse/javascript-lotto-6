@@ -32,4 +32,11 @@ describe('유저 입력 유효성 검사', () => {
   test.each([['good'], ['ㅁ']])('보너스 번호 숫자인지 확인', (input) => {
     expect(() => Validator.validateBonusNumberString(input)).toThrow();
   });
+
+  test.each([[[1, 2, 2, 3, 4, 5]], [[0, 1, 2, 3, 4, 5]], [[11, 23, 34, 42, 46, 17]], [[11, 23, 34, 42, 45, 17, 38]]])(
+    '당첨번호 유효성 검사',
+    (input) => {
+      expect(() => Validator.validateWinningNumber(input)).toThrow();
+    },
+  );
 });
