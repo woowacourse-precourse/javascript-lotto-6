@@ -6,7 +6,6 @@ import OutputView from './view/outputView.js';
 class App {
   #inputView = new InputView();
   #outputView = new OutputView();
-  #compare;
 
   #coin = 0;
   #boughtLottos = [];
@@ -16,7 +15,8 @@ class App {
   async play() {
     await this.buyLottos(this.#inputView, this.#outputView);
     await this.getWinningNumber(this.#inputView);
-    this.getWinningResult(this.#outputView);
+    const compare = new Compare(this.#winning, this.#bonus);
+    this.printWinningResult(compare, this.#outputView);
   }
 
   async buyLottos(inputView, outputView) {
@@ -36,27 +36,25 @@ class App {
     this.#bonus = await inputView.bonus(winningNumber);
   }
 
-  // console.log('당첨결과 출력');
-  getWinningResult(outputView) {
-    this.#compare = new Compare(this.#winning, this.#bonus);
+  printWinningResult(compare, outputView) {
     outputView.winningResult();
     outputView.matchedThreeNumber(
-      this.#compare.getMatchedThreeNumber(this.#boughtLottos)
+      compare.getMatchedThreeNumber(this.#boughtLottos)
     );
     outputView.matchedFourNumber(
-      this.#compare.getMatchedFourNumber(this.#boughtLottos)
+      compare.getMatchedFourNumber(this.#boughtLottos)
     );
     outputView.matchedFiveNumber(
-      this.#compare.getMatchedFiveNumber(this.#boughtLottos)
+      compare.getMatchedFiveNumber(this.#boughtLottos)
     );
     outputView.matchedBonusNumber(
-      this.#compare.getMatchedBonusNumber(this.#boughtLottos)
+      compare.getMatchedBonusNumber(this.#boughtLottos)
     );
     outputView.matchedSixNumber(
-      this.#compare.getMatchedSixNumber(this.#boughtLottos)
+      compare.getMatchedSixNumber(this.#boughtLottos)
     );
 
-    outputView.profit(this.#compare.getProfit(this.#boughtLottos, this.#coin));
+    outputView.profit(compare.getProfit(this.#boughtLottos, this.#coin));
   }
 }
 
