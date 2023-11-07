@@ -24,7 +24,7 @@ const View = {
   },
 
   printLottoNumbers(lottoArray) {
-    lottoArray.forEach((lotto) => Console.print(lotto.getNumbers()));
+    lottoArray.forEach((lotto) => Console.print(`[${lotto.getNumbers().join(', ')}]`));
   },
 
   printResult(resultArray, rateOfReturn) {
