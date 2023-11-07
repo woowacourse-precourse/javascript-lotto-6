@@ -30,6 +30,38 @@ class App {
     for (let i = 0; i < numberOfLottoPurchased; i++) {
       Console.print(userLottoNumbers[i]);
     }
+
+    const winningNumbersInput = await Console.readLineAsync(
+      '당첨 번호를 입력해 주세요.\n'
+    );
+    const winningNumbersStringArray = winningNumbersInput.split(',');
+    const winningNumbersArray = [];
+
+    for (const stringNumber of winningNumbersStringArray) {
+      const integerNumber = parseInt(stringNumber, 10);
+
+      if (isNaN(integerNumber)) {
+        throw new Exception('[ERROR] 입력값이 숫자가 아닙니다.');
+      }
+
+      if (integerNumber < 1 || integerNumber > 45) {
+        throw new Exception('[ERROR] 1부터 45 사이의 숫자만 가능합니다.');
+      }
+      winningNumbersArray.push(integerNumber);
+    }
+
+    if (new Set(winningNumbersArray).size !== winningNumbersArray.length) {
+      throw new Exception('[ERROR] 중복된 값이 있습니다.');
+    }
+
+    if (winningNumbersArray.length !== 6) {
+      throw new Exception('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+
+    const bonusNumberString = await Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.\n'
+    );
+    // TODO: 보너스 번호 예외처리
   }
 }
 
