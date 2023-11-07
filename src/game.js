@@ -1,46 +1,62 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { isMoneyValid } from "./validation";
+import { isMoneyValid, isBonusValid } from "./validation";
+import Lotto from "./Lotto";
 
 let COUNT = 0;
+let BONUS = 0;
 
-const generateLotto = (amountOfLotto, numbers, number) => {
+const generateLotto = (amountOfLotto) => {
+  let lottoArr = [];
   for (let i = 0; i < amountOfLotto; i++) {
     let myLotto = Random.pickUniqueNumbersInRange(1, 45, 6);
     Console.print(myLotto);
-    // for (let j = 0; j < numbers.length; j++) {
-    //   if (myLotto[i] === numbers[j]) {
-    //     COUNT++;
-    //   }
-    // }
+    lottoArr.push(myLotto);
   }
+  return lottoArr;
 };
 
 const inputWinNumbers = async () => {
-  const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
-  Console.print(`당첨 번호를 입력해 주세요. \n${input}`);
+  try {
+    const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
+    Console.print(`당첨 번호를 입력해 주세요. \n${input}`);
+    const convertToArr = input.split(",").map((e) => +e);
+    return new Lotto(convertToArr);
+  } catch (error) {
+    Console.print(error.message);
+  }
 };
 
 const inputBonusNumber = async () => {
-  const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
-  Console.print(`보너스 번호를 입력해 주세요. \n${input}`);
+  try {
+    const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
+    Console.print(`보너스 번호를 입력해 주세요. \n${input}`);
+    isBonusValid(input);
+    return Number(input);
+  } catch (error) {
+    Console.print(error.message);
+  }
 };
 
 const inputMoney = async () => {
-  const input = await Console.readLineAsync("구입금액을 입력해 주세요.");
-  Console.print(`구입금액을 입력해 주세요. \n${input}`);
-
-  const amountOfLotto = input / 1000;
-
-  if (isMoneyValid(input) === "ERROR") {
-    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+  try {
+    const input = await Console.readLineAsync("구입금액을 입력해 주세요.");
+    Console.print(`구입금액을 입력해 주세요. \n${input}`);
+    const amountOfLotto = input / 1000;
+    isMoneyValid(input);
+    Console.print(`${amountOfLotto}개를 구매했습니다.`);
+    return amountOfLotto;
+  } catch (error) {
+    Console.print(error.message);
   }
-
-  Console.print(`${amountOfLotto}개를 구매했습니다.`);
-
-  return amountOfLotto;
 };
 
-const compareLottos = () => {};
+const compareLottos = (lottos, winNumbers, bonusNumber) => {
+  let max = 0;
+
+  for (let i = 0; i < lottos.length; i++) {
+    for (let j = 0; j < winNumbers.length; j++) {}
+  }
+};
 
 const printResult = (amount) => {
   Console.print("당첨 통계");
@@ -55,9 +71,10 @@ const printResult = (amount) => {
 
 const game = async () => {
   const amount = await inputMoney();
-  const numbers = await inputWinNumbers();
-  const number = await inputBonusNumber();
-  generateLotto(amount, numbers, number);
+  const winNumbers = await inputWinNumbers();
+  const bonusNumber = await inputBonusNumber();
+  const lottos = generateLotto(amount);
+  compareLottos(lottos, winNumbers, bonusNumber);
   printResult(amount);
 };
 
