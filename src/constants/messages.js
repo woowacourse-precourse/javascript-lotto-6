@@ -1,3 +1,9 @@
+const INPUT_MESSAGE = Object.freeze({
+  purchaseAmount: '구입금액을 입력해 주세요.\n',
+  winningNumbers: '당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '보너스 번호를 입력해 주세요.\n',
+});
+
 const ERROR_MESSAGE = Object.freeze({
   invalidLength: '[ERROR] 로또 번호는 6개여야 합니다.',
   invalidNumberic: '[ERROR] 숫자가 잘못된 형식입니다.',
@@ -8,4 +14,4 @@ const ERROR_MESSAGE = Object.freeze({
   invalidUniqueBonusNumber: '[ERROR] 보너스 번호는 로또 번호와 중복되지 않아야 합니다.',
 });
 
-export { ERROR_MESSAGE };
+export { INPUT_MESSAGE, ERROR_MESSAGE };
