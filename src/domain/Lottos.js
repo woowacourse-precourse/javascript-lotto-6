@@ -2,12 +2,12 @@ import Lotto from "./Lotto.js";
 import LottoNumberGenerator from "../utils/LottoNumberGenerator.js";
 
 class Lottos {
-  #lottos;
+  #lottos = [];
 
   constructor(count) {
-    this.#lottos = new Array(count)
-      .fill(0)
-      .map(() => new Lotto(LottoNumberGenerator.generate()).getLotto());
+    for (let i = 0; i < count; i += 1) {
+      this.#lottos.push(new Lotto(LottoNumberGenerator.generate()).getLotto());
+    }
   }
 
   getLottos() {
