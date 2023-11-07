@@ -24,5 +24,10 @@ class ExceptionList {
       throw new Error('[ERROR] 6개의 숫자를 입력해주세요.');
     }
   }
+  numberRangeError =(input)=>{
+    if(input<1||input>45){
+      throw new Error('[ERROR] 1~45사이의 숫자를 입력해주세요.');
+    }
+  }
 }
 export default ExceptionList;
