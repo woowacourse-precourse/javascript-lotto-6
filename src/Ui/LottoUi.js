@@ -37,6 +37,7 @@ const LottoUi = {
       const bonusNumber = Number(
         await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER)
       );
+      this.validateBonusNumber(bonusNumber);
 
       return bonusNumber;
     } catch (err) {
@@ -82,7 +83,7 @@ const LottoUi = {
       throw new Error(ERROR_MESSAGE.INPUT_SAME_NUMB);
     } else if (winningNumbers.length <= 6) {
       throw new Error(ERROR_MESSAGE.NOT_INPUT_6);
-    } else if (this.checkBounds(winningNumbers)) {
+    } else if (!this.checkBounds(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
     }
   },
@@ -91,6 +92,7 @@ const LottoUi = {
     if (Number.isNaN(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
     } else if (COMMON_VALUE.MIN < 1 || COMMON_VALUE.MAX > 45) {
+      throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
     }
   },
 };
