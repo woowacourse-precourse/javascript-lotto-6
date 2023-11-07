@@ -1,6 +1,9 @@
+import { Console } from "@woowacourse/mission-utils";
+import { MESSAGE_INPUT } from "./Constant";
+
 class LottoInput {
-  async racingCarInput() {
-    const price = await Console.readLineAsync("구입금액을 입력해 주세요.");
+  async priceInput() {
+    const price = await Console.readLineAsync(MESSAGE_INPUT.PRICE);
     this.checkValidPrice(Number(price));
     return Number(price);
   }

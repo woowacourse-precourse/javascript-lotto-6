@@ -16,4 +16,4 @@ const MESSAGE_OUTPUT = (num) =>
     RATE: `총 수익률은 ${num}%입니다.`,
   });
 
-export default { MESSAGE_INPUT, MESSAGE_OUTPUT };
+export { MESSAGE_INPUT, MESSAGE_OUTPUT };

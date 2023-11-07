@@ -2,9 +2,14 @@ import LottoInput from "./LottoInput";
 import LottoOutput from "./LottoOutput";
 
 class App {
+  constructor() {
+    this.lottoInput = new LottoInput();
+    this.lottoOutput = new LottoOutput();
+  }
+
   async play() {
-    const lottoPrice = await LottoInput.racingCarInput();
-    const lottoCnt = LottoOutput.printLottoCnt();
+    const money = await this.lottoInput.priceInput();
+    const count = this.lottoOutput.printLottoCnt();
   }
 }
 
