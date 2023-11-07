@@ -1,14 +1,20 @@
 class WinningLotto {
   #winningLotto;
 
-  constructor({ winningNumbers, bonusNumber }) {
-    this.#winningLotto = { numbers: winningNumbers, bonus: bonusNumber };
+  constructor(winningNumber, bonusNumber) {
+    this.#winningLotto = {
+      winningNumber: winningNumber,
+      bonusNumber: bonusNumber,
+    };
   }
 
   countMatchingNumbers(lotto) {
     const lottoNumbers = lotto.getLotto();
     const winnigCount = this.countWinning(lottoNumbers);
-    const bonusCount = this.countBonus(lottoNumbers);
+    let bonusCount = 0;
+    if (winnigCount === 5) {
+      bonusCount = this.countBonus(lottoNumbers);
+    }
 
     return [winnigCount, bonusCount];
   }
@@ -16,7 +22,7 @@ class WinningLotto {
   countWinning(lotto) {
     let count = 0;
     lotto.forEach((number) => {
-      if (this.#winningLotto.numbers.includes(number)) count += 1;
+      if (this.#winningLotto.winningNumber.includes(number)) count += 1;
     });
 
     return count;
@@ -24,7 +30,7 @@ class WinningLotto {
 
   countBonus(lotto) {
     let count = 0;
-    if (lotto.includes(this.#winningLotto.bonus)) count += 1;
+    if (lotto.includes(this.#winningLotto.bonusNumber)) count += 1;
 
     return count;
   }

@@ -1,5 +1,6 @@
-import Lotto from './Lotto';
 import { Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
+import { RANK } from '../constants/options.js';
 
 class Lottos {
   #lottos;
@@ -30,5 +31,13 @@ class Lottos {
 
     return new Lotto(numbers);
   }
+
+  compareLotto(winningLotto, winnigResult) {
+    this.#lottos.forEach((lotto) => {
+      const matchingResult = winningLotto.countMatchingNumbers(lotto);
+      winnigResult.push(matchingResult);
+    });
+  }
 }
+
 export default Lottos;
