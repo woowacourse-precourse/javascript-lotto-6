@@ -37,25 +37,41 @@ class Input {
       const lottoNumbers = number
         .split(",")
         .map((number) => parseInt(number, 10));
-      return lottoNumbers; // lottoNumbers를 반환
+      
+      // Validate lottoNumbers using the Lotto class
+      Lotto.validateLottoNumbers(lottoNumbers);
+      
+      return lottoNumbers;
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
     }
   }
+  
 
   static async bonusNumber() {
     try {
       const numberString = await Console.readLineAsync(
         "보너스 번호를 입력해 주세요.\n"
       );
-      const bonusNumber = parseInt(numberString, 10);
-      return bonusNumber; // bonusNumber를 반환
+      const bonusNumbers = numberString
+        .split(",")
+        .map((number) => parseInt(number, 10));
+  
+      if (bonusNumbers.length !== 1 || isNaN(bonusNumbers[0]) || bonusNumbers[0] < 1 || bonusNumbers[0] > 45) {
+        throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 하나의 숫자여야 합니다.");
+      }
+  
+      const bonusNumber = bonusNumbers[0];
+      return bonusNumber; // 보너스 번호를 반환
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
     }
   }
+  
+
+  
   
 }
 
