@@ -5,19 +5,9 @@ import { DELIMITER } from '../constants/setting.js';
 import { stringToNumber, stringToNumberArray } from '../utils/converter.js';
 import MoneyValidator from '../validator/Money.js';
 import LottoValidator from '../validator/Lotto.js';
-import OutputView from './Output.js';
 import CommonValidator from '../validator/Common.js';
 
 class InputView {
-  static async retryOnError(callbackReadFunc) {
-    try {
-      return await callbackReadFunc();
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
-      return this.retryOnError(callbackReadFunc);
-    }
-  }
-
   static async readMoney() {
     const inputMoney = await Console.readLineAsync(INPUT_MESSAGE.money);
     const money = stringToNumber(inputMoney);
