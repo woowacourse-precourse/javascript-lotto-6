@@ -47,6 +47,11 @@ class LottoController {
     if (!Validator.validateBonusNumber(mainNumberArray, bonusNumber))
       return this.readBonusNumber(mainNumberArray);
     OutputView.printBlank();
+    this.raffleLottos(mainNumberArray, bonusNumber);
+  }
+
+  raffleLottos(mainNumberArray, bonusNumber) {
+    this.#user.raffleLottos(mainNumberArray, bonusNumber);
   }
 }
 
