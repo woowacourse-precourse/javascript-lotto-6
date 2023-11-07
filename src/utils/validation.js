@@ -14,3 +14,8 @@ export const isInteger = (numbers) => {
     throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
 };
 
+export const isAvailableAmountNumber = (amount) => {
+  if (amount < THOUSAND || amount % THOUSAND)
+    throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
+};
+
