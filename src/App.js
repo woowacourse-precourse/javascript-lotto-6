@@ -73,7 +73,7 @@ class App {
   async getMyLottos() {
     for(let i = 0; i < this.count; i++){
       const takeNumber = await MissionUtils.Random.pickUniqueNumbersInRange(1,45,6);
-      const lottoNumber = takeNumber.sort((b,a)=>{return b-a})
+      const lottoNumber = takeNumber.sort((b,a)=>{return b-a});
       this.arrayNumbers.push(lottoNumber);
     }
   }
@@ -81,7 +81,7 @@ class App {
   printHowMany() {
     MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
     for(let i = 0; i < this.count; i++){
-      MissionUtils.Console.print(JSON.stringify(this.arrayNumbers[i]));
+      MissionUtils.Console.print(`[${this.arrayNumbers[i].join(', ')}]`);
     }
   }
   
@@ -99,7 +99,8 @@ class App {
 
   getWinningLottos() {
     for(let i = 0; i < this.count; i++){
-      const newArray = [...this.arrayNumbers[i],...this.winning.map(Number)]
+      const temporaryArray = this.arrayNumbers[i].map(Number)
+      const newArray = [...temporaryArray,...this.winning.map(Number)]
       const setObject = new Set(newArray)
       const set = Array.from(setObject);
 
