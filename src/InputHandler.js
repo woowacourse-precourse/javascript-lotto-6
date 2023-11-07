@@ -3,7 +3,7 @@ import messages from './constants/messages';
 
 class InputHandler {
   static async inputPurchaseAmount() {
-    return await Console.readLineAsync(messages.purchase.try);
+    return await Console.readLineAsync(messages.purchase.request);
   }
 
   static async inputWinningNumbers() {
