@@ -13,25 +13,31 @@ class App {
 
   async play() {
     await this.issueLottoes();
-
     await this.#generateWinningLotto();
-
     this.#drawLottoes();
   }
 
   async issueLottoes() {
-    const amountToPurchase = await this.#lottoInterface.readAmountToPurchase();
-
-    const lottoes = this.#lottoManager.issueLottoes(amountToPurchase);
-
-    this.#lottoInterface.printPurchasedLottoes(lottoes);
+    try {
+      const amountToPurchase =
+        await this.#lottoInterface.readAmountToPurchase();
+      const lottoes = this.#lottoManager.issueLottoes(amountToPurchase);
+      this.#lottoInterface.printPurchasedLottoes(lottoes);
+    } catch (error) {
+      this.#lottoInterface.printError(error.message);
+      await this.issueLottoes();
+    }
   }
 
   async #generateWinningLotto() {
-    const winningNumbers = await this.#lottoInterface.readWinningNumbers();
-    const bonusNumber = await this.#lottoInterface.readBonusNumber();
-
-    this.#lottoManager.generateWinningLotto(winningNumbers, bonusNumber);
+    try {
+      const winningNumbers = await this.#lottoInterface.readWinningNumbers();
+      const bonusNumber = await this.#lottoInterface.readBonusNumber();
+      this.#lottoManager.generateWinningLotto(winningNumbers, bonusNumber);
+    } catch (error) {
+      this.#lottoInterface.printError(error.message);
+      await this.#generateWinningLotto();
+    }
   }
 
   #drawLottoes() {

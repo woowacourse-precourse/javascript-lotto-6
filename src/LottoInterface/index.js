@@ -43,6 +43,10 @@ class LottoInterface {
     return parseInt(answer, 10);
   }
 
+  printError(errorMessage) {
+    Console.print(errorMessage);
+  }
+
   /**
    * @param {Lotto[]} lottoes
    */
