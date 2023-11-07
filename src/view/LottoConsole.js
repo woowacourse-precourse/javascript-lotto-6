@@ -5,7 +5,7 @@ class LottoConsole {
   static async getBudget() {
     const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     LottoConsole.#validateEmtpyInput(input);
-    this.printEmptyLine();
+    LottoConsole.printEmptyLine();
 
     const budget = LottoConsole.#parseNumber(input);
     LottoConsole.#isNumber(budget);
@@ -17,7 +17,7 @@ class LottoConsole {
   static async getLottoNumbers() {
     const input = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     LottoConsole.#validateEmtpyInput(input);
-    this.printEmptyLine();
+    LottoConsole.printEmptyLine();
 
     const numbers = LottoConsole.#parseNumbers(input);
     LottoConsole.#validateArrayLength(numbers);
