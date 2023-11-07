@@ -21,7 +21,7 @@ class App {
 
       const winningBonus = await guess.inputBonusNumber();
 
-      lotto.checkWin(winningBonus, guess.getLottoNumbers());
+      lotto.checkWin(winningBonus, guess.getGuessNumbers());
     } catch (error) {
       Console.print(error.message);
     }
