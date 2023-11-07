@@ -13,6 +13,10 @@ class checkBonus {
     if([...new Set(numbers)].length !== numbers.length){
         throw new Error(ERROR.BONUS_DUPLICATION);
       }
+    numbers.forEach(element => {
+        if(!Number.isInteger(element)) {throw new Error(ERROR.INTEGER);}
+        if(element < 1 || element > 45) {throw new Error(ERROR.RANGE)}
+    });
   }
 }
 

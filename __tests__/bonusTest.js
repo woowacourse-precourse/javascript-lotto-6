@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import checkBonus from "../src/Bonus.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -91,9 +92,23 @@ describe("추가 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
-
   test("보너스 숫자와 당첨번호에서 중복이 있으면 예외가 발생한다.", async () => {
     await runException("5");
+  });
+  test("로또 번호와 보너스 번호에 46이상의 숫자가 있으면 예외가 발생한다",()=>{
+    expect(()=>{
+      new checkBonus([1, 2, 3, 4, 5, 55, 66])
+    }).toThrow("[ERROR]");
+  });
+  test("로또 번호와 보너스 번호에 정수가 아닌 숫자가 있으면 예외가 발생한다",()=>{
+    expect(()=>{
+      new checkBonus([1, 2, 3, 4.5, 7.8, 9, 10])
+    }).toThrow("[ERROR]");
+  });
+  test("로또 번호와 보너스 번호에 1보다 작은 숫자가 있으면 예외가 발생한다",()=>{
+    expect(()=>{
+      new checkBonus([-1, 2, 4, 6, 7, 8, 10])
+    }).toThrow("[ERROR]");
   });
 });
 
