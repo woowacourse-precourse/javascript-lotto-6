@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 import { OUTPUT_MESSAGE } from '../data/message.js';
 import { REWORD } from '../data/reward.js';
@@ -17,31 +17,31 @@ class Result {
     }
 
     get printCount() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_INFO}\n---\n`);
+        return Console.print(`${OUTPUT_MESSAGE.RESULT_INFO}\n---\n`);
     }
 
     get fifth() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_THREE} (${REWORD.FIFTH_PLACE.toLocaleString()}원) - ${this.result[3] ?? 0}개`);
+        return Console.print(`${OUTPUT_MESSAGE.RESULT_THREE} (${REWORD.FIFTH_PLACE.toLocaleString()}원) - ${this.result[3] ?? 0}개`);
     }
 
     get fourth() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FOUR} (${REWORD.FOURTH_PLACE.toLocaleString()}원) - ${this.result[4] ?? 0}개`);
+        return Console.print(`${OUTPUT_MESSAGE.RESULT_FOUR} (${REWORD.FOURTH_PLACE.toLocaleString()}원) - ${this.result[4] ?? 0}개`);
     }
 
     get third() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE} (${REWORD.THIRD_PLACE.toLocaleString()}원) - ${this.result[5] ?? 0}개`);
+        return Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE} (${REWORD.THIRD_PLACE.toLocaleString()}원) - ${this.result[5] ?? 0}개`);
     }
 
     get second() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE_BOUNS} (${REWORD.SECOND_PLACE.toLocaleString()}원) - ${this.result['bonus'] ?? 0}개`); 
+        return Console.print(`${OUTPUT_MESSAGE.RESULT_FIVE_BOUNS} (${REWORD.SECOND_PLACE.toLocaleString()}원) - ${this.result['bonus'] ?? 0}개`); 
     }
 
     get first() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_SIX} (${REWORD.FIRST_PLACE.toLocaleString()}원) - ${this.result[6] ?? 0}개`);
+        return Console.print(`${OUTPUT_MESSAGE.RESULT_SIX} (${REWORD.FIRST_PLACE.toLocaleString()}원) - ${this.result[6] ?? 0}개`);
     }
 
     get printRate() {
-        return MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT_RATE} ${this.rate}%입니다.`);
+        return Console.print(`${OUTPUT_MESSAGE.RESULT_RATE} ${this.rate}%입니다.`);
     }
 }
 

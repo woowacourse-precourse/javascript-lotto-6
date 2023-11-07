@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 import { ERROR_MESSAGE } from '../data/message.js';
 import { INPUT_MESSAGE } from '../data/message.js';
@@ -21,8 +21,8 @@ class Amount {
                 await Amount.#validateCorrectFormat(amount);
                 isCorrect = true;
             } catch(error) {
-                MissionUtils.Console.print(`${ERROR_MESSAGE.AMOUT_NUMBER_ERROR}`);
-                amount = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
+                Console.print(`${ERROR_MESSAGE.AMOUT_NUMBER_ERROR}`);
+                amount = await Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
             }
         }
 

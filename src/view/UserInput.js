@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 import Amount from '../model/Amount.js';
 import Lotto from '../Lotto.js';
@@ -10,14 +10,14 @@ class UserInput {
     constructor() {}
     
     static async RequestAmount() {
-        const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
+        const input = await Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
         const amount = await Amount.changeIntoInt(input);
 
         return amount;
     }
 
     static async RequestNumbers() {
-        const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.WINNING_NUMBERS}`);
+        const input = await Console.readLineAsync(`${INPUT_MESSAGE.WINNING_NUMBERS}`);
 
         const numbers = input.split(',');
         const lotto = new Lotto(numbers);
@@ -26,7 +26,7 @@ class UserInput {
     }
 
     static async RequestBonus(numbers) {
-        const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.BONUS_NUMBER}`);
+        const input = await Console.readLineAsync(`${INPUT_MESSAGE.BONUS_NUMBER}`);
         const bonus = await Bonus.changeIntoInt(input, numbers);
 
         return bonus;
