@@ -19,6 +19,12 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
 describe("로또 생성 및 출력 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
@@ -59,5 +65,25 @@ describe("로또 생성 및 출력 테스트", () => {
     if (model.LOTTOS[0]) {
       expect(model.LOTTOS[0].getLottoNumber()).toEqual(printLottos);
     }
+  });
+
+  test("LOTTOS 출력 확인", async () => {
+    const logSpy = getLogSpy();
+
+    mockRandoms([
+      [1, 2, 3, 4, 5, 6],
+      [12, 2, 31, 4, 5, 6],
+    ]);
+    mockQuestions(["2000", "1,2,3,4,5,6", "7"]);
+
+    const printLottos = ["[1, 2, 3, 4, 5, 6]", "[12, 2, 31, 4, 5, 6]"];
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    printLottos.forEach((lotto) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(lotto));
+    });
   });
 });
