@@ -30,6 +30,7 @@ class Player {
       this.#lottos.push(new Lotto(Player.#generateRandomLottoNumbers()));
       this.#budget -= 1000;
     }
+    return this;
   }
 
   checkLottos(winningNumbers, bonusNumber) {
@@ -37,6 +38,7 @@ class Player {
       const rank = lotto.checkLotto(winningNumbers, bonusNumber).getRank();
       if (rank) this.#scoreCard[rank] += 1;
     });
+    return this;
   }
 
   getScoreCard() {
