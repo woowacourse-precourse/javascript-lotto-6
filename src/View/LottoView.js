@@ -1,12 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
-import { SCOREBOARD } from "../Utilities/Constant.js";
+import { MESSAGE, SCOREBOARD } from "../Utilities/Constant.js";
 
 class LottoView {
   createPurchaseData(numberOfSets, lottoNumbers) {
     const formattedNumbers = lottoNumbers
       .map((numbers) => `[${numbers.join(", ")}]`)
       .join("\n");
-    return `${numberOfSets}개를 구매했습니다. \n${formattedNumbers}`;
+    return `${numberOfSets}${MESSAGE.PURCHASING_TEXT}${formattedNumbers}`;
   }
 
   #getMatchResultText(key, value) {
@@ -27,8 +27,8 @@ class LottoView {
 
   createLottoResult(statistics) {
     const lottoResult = [
-      "당첨 통계",
-      "---",
+      MESSAGE.IN_TOTAL,
+      MESSAGE.MID_BAR_TRIO,
       ...Object.entries(statistics)
         .filter(([key]) => key !== "totalPrize")
         .map(([key, value]) => this.#getMatchResultText(key, value)),

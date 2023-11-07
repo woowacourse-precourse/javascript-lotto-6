@@ -2,6 +2,9 @@ export const MESSAGE = {
   PURCHASE_AMOUNT: `구입 금액을 입력해 주세요.`,
   LOTTO_NUMBER: `당첨 번호를 입력해 주세요.`,
   BONUS_NUMBER: `보너스 번호를 입력해 주세요.`,
+  PURCHASING_TEXT: `개를 구매했습니다. \n`,
+  IN_TOTAL: `당첨 통계`,
+  MID_BAR_TRIO: `---`,
 };
 
 export const STATISTICS = {
