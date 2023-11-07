@@ -34,4 +34,16 @@ describe("당첨 번호 생성", () => {
       "[ERROR] 로또 번호는 6개여야 합니다."
     );
   });
+
+  test("당첨 번호가 숫자가 아닌 경우", async () => {
+    mockRandoms([[1, 2, 3, 4, 5, 6]]);
+    mockQuestions(["1000", "1,2,3,4,5,ㅂ", "7"]);
+    // when
+    const app = new App();
+
+    // then
+    await expect(app.play()).rejects.toThrow(
+      "[ERROR] 로또 번호는 숫자로만 이루어져야 합니다."
+    );
+  });
 });
