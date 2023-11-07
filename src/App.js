@@ -1,4 +1,4 @@
-import { Console , Random } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 import { 
   USER_INPUT,
   MESSAGE,
@@ -6,9 +6,6 @@ import {
   PRICE_UNIT,
   PRICE_ZERO,
   DELIMITER,
-  LOTTO_LENGTH,
-  MIN_NUMBER,
-  MAX_NUMBER,
   LOTTO_MONEY,
   LOTTO_RESULT,
   DELIMITER_SPACE
@@ -16,6 +13,7 @@ import {
 import Lotto from "./Lotto.js";
 import TargetNumber from "./TargetNumber.js";
 import BonusNumber from "./BonusNumber.js";
+import { getLottoNumber } from "./utils/getLottoNumber.js";
 
 class App {
   lottoPrice;
@@ -83,7 +81,7 @@ class App {
     const lottoTicketLen = this.lottoPrice / PRICE_UNIT;
 
     for(let i = 0; i < lottoTicketLen; i++){
-      this.lottoTickets.push(new Lotto(this.getLottoNumber()));
+      this.lottoTickets.push(new Lotto(getLottoNumber()));
     }
   }
 
@@ -93,10 +91,6 @@ class App {
     this.lottoTickets.forEach((lotto) => {
       Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
     })
-  }
-
-  getLottoNumber() {
-    return Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH);
   }
 
   showLottoResult() {
