@@ -9,8 +9,11 @@ class App {
   async play() {
     const amount = await inputAmount();
     isValidAmount(amount);
+    MissionUtils.Console.print('');
 
-    const count = printLottoCount(amount);
+    const count = amount/1000;
+    printLottoCount(count);
+
     const lottoNums = [];
 
     // 로또 번호 생성
@@ -21,17 +24,20 @@ class App {
     const lottos = lottoNums.map(lotto => new Lotto(lotto));
 
     for(const lotto of lottos){
-      printLottoNum(lotto.getNumbers())
+      printLottoNum(lotto.getNumbers());
     }
+    MissionUtils.Console.print('');
+ 
 
     const winningNums = await inputWinningNum();
     isDuplicate(winningNums) || isNumberInRange(winningNums) || isSixLength(winningNums);
+    MissionUtils.Console.print('');
 
     const bonusNum = await inputBonnusNum();
     winningNums.push(bonusNum);
     isDuplicate(winningNums);
     winningNums.pop();
-
+    MissionUtils.Console.print('');
 
     let countReusult = {
       3: 0,

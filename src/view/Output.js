@@ -2,16 +2,13 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { generateLottoNum } from "../utils/generateRandomNum.js";
 
 // 로또 수량 출력
-export function printLottoCount(amount){
-  const count = amount / 1000;
+export function printLottoCount(count){
   MissionUtils.Console.print(`${count}개를 구매했습니다.`);
-
-  return count;
 }
 
 // 로또 번호 출력
 export function printLottoNum(nums){
-  MissionUtils.Console.print(nums);
+  MissionUtils.Console.print(`[${nums.join(", ")}]`);
 }
 
 // 로또 당첨 내역 출력
