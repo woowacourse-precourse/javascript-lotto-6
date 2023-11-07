@@ -28,6 +28,7 @@ describe("당첨 결과 테스트", () => {
       const LOTTO = [1, 2, 3, 4, 5, 7];
       const WINNIMG_NUMBERS = [1, 2, 3, 4, 5, 6];
       const BONUS_NUMBER = 7;
+      const NO2_COUNT = 5.5;
 
       const matchedCount = lottoResult.getMatchedCount(
         LOTTO,
@@ -35,7 +36,7 @@ describe("당첨 결과 테스트", () => {
         BONUS_NUMBER
       );
 
-      expect(matchedCount).toBe(5.5);
+      expect(matchedCount).toBe(NO2_COUNT);
     });
   });
 
@@ -67,17 +68,28 @@ describe("당첨 결과 테스트", () => {
   });
 
   test("총 보상액을 올바르게 반환", () => {
-    lottoResult.winningCounts["1등"] = 2;
-    lottoResult.winningCounts["3등"] = 3;
+    const FIRST_WINS_COUNT = 2;
+    const THIRD_WINS_COUNT = 3;
+    const NO1_PRIZE = 2000000000;
+    const NO3_PRIZE = 1500000;
+
+    lottoResult.winningCounts["1등"] = FIRST_WINS_COUNT;
+    lottoResult.winningCounts["3등"] = THIRD_WINS_COUNT;
+
     expect(lottoResult.calculateTotalReward()).toBe(
-      2 * 2000000000 + 3 * 1500000
+      FIRST_WINS_COUNT * NO1_PRIZE + THIRD_WINS_COUNT * NO3_PRIZE
     );
   });
 
   test("수익률을 올바르게 계산", () => {
-    lottoResult.calculateRateOfReturn(LOTTO_PRICE * 100, 100000);
+    const EARN_MONEY = 100000;
+    const NUMBER_OF_LOTTO = 100;
+    const BOUGHT_MONEY = NUMBER_OF_LOTTO * LOTTO_PRICE;
+    const TO_PERCENTAGE = 100;
+
+    lottoResult.calculateRateOfReturn(BOUGHT_MONEY, EARN_MONEY);
     expect(lottoResult.rateOfReturn).toBe(
-      ((100000 / (LOTTO_PRICE * 100)) * 100).toFixed(1)
+      ((EARN_MONEY / BOUGHT_MONEY) * TO_PERCENTAGE).toFixed(1)
     );
   });
 });

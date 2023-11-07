@@ -3,6 +3,7 @@ import {
   LOTTO_NUMBERS_COUNT,
   LOTTO_NUMBER_END,
   LOTTO_NUMBER_START,
+  LOTTO_PRICE,
 } from "../src/utils/lottoConstants.js";
 import {
   isArrayOfNumbersInRange,
@@ -18,9 +19,11 @@ beforeEach(() => {
 describe("로또 발행 테스트", () => {
   test("금액을 기반으로 로또 티켓 수를 정확하게 계산", () => {
     const MONEY = 20000;
+    const NUMBER_OF_LOTTO = MONEY / LOTTO_PRICE;
+
     const numberOfLotto = lottoGenerator.calculateNumberOfLottoTickets(MONEY);
 
-    expect(numberOfLotto).toBe(20);
+    expect(numberOfLotto).toBe(NUMBER_OF_LOTTO);
   });
 
   test("유일한 번호로 구성된 단일 로또 티켓을 생성", () => {
