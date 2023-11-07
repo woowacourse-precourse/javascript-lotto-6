@@ -13,7 +13,10 @@ export default class LottoMachine {
 
   #bonusNumber;
 
+  #INFINITE;
+
   constructor() {
+    this.#INFINITE = true;
     this.#bonusNumber = 0;
   }
 
@@ -58,7 +61,7 @@ export default class LottoMachine {
   }
 
   async #getPurchaseAmount() {
-    while (true) {
+    while (this.#INFINITE) {
       try {
         const purchaseAmountInput = await InputView.readPurchaseAmount();
         const parsePurchaseAmount = Number(purchaseAmountInput);
@@ -78,7 +81,7 @@ export default class LottoMachine {
   }
 
   async #getWinningNumbers() {
-    while (true) {
+    while (this.#INFINITE) {
       try {
         const winningNumbersInput = await InputView.readWinningNumbers();
 
@@ -90,7 +93,7 @@ export default class LottoMachine {
   }
 
   async #getBonusNumber() {
-    while (true) {
+    while (this.#INFINITE) {
       try {
         const bonusNumberInput = await InputView.readBonusNumber();
         this.#bonusNumberValidate(bonusNumberInput);
