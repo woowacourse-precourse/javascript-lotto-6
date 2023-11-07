@@ -10,9 +10,7 @@ describe('App - calculateRankByMatched() 테스트', () => {
   ])(
     '일치하는 숫자 개수에 맞는 등수를 반환한다',
     (matched, matchedBonus, expected) => {
-      const app = new App();
-      const result = app.calculateRankByMatched(matched, matchedBonus);
-
+      const result = App.calculateRankByMatched(matched, matchedBonus);
       expect(result).toEqual(expected);
     },
   );
@@ -26,9 +24,7 @@ describe('App - calculateMatchedByRank() 테스트', () => {
     [4, 4],
     [5, 3],
   ])('등수별 일치하는 숫자 개수를 반환한다', (rank, expected) => {
-    const app = new App();
-    const result = app.calculateMatchedByRank(rank);
-
+    const result = App.calculateMatchedByRank(rank);
     expect(result).toEqual(expected);
   });
 });
