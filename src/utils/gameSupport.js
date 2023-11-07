@@ -1,3 +1,26 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+import {
+  AMOUNT_GUIDE_MESSAGE,
+  BONUS_NUMBERS_GUIDE_MESSAGE,
+  FORTYFIVE,
+  ONE,
+  WINNING_NUMBERS_GUIDE_MESSAGE,
+} from "../constants/messages.js";
+import { getUserInput } from "../utils/userInterface.js";
+import {
+  hasComma,
+  isAvailableBonusNumber,
+  isAvailableNumber,
+  isNumber,
+  changeStringToNumbers,
+  splitNumbers,
+  isAvailableAmountNumber,
+} from "./validation.js";
+import { WINNING_LOTTO_COUNT } from "../constants/winningLottoCount.js";
+import { createSixNumbers } from "./createLotto.js";
+import Lotto from "../Lotto.js";
+
 export const userLottoInputAmount = async () => {
   while (true) {
     try {
