@@ -31,7 +31,12 @@ class LottoGameController {
     this.#outputview.printAllLottos(this.#lottoList);
   }
 
-  makeWinningLotto() {}
+  makeWinningLotto() {
+    // input받기
+    const winningLottoNumber = this.#inputview.readWinningLottoNumber();
+    const bonusNumber = this.#inputview.readBonusNumber();
+    const winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+  }
 
   printGameResult() {}
 }

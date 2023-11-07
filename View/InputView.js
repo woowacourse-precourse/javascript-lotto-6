@@ -12,5 +12,17 @@ class InputView {
 
     return userMoney;
   }
+
+  async readWinningLottoNumber() {
+    winningLottoNumber = await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+    // 유효성 검사
+    return winningLottoNumber;
+  }
+
+  async readBonusNumber() {
+    bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+    // 유효성 검사
+    return bonusNumber;
+  }
 }
 export default InputView;
