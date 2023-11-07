@@ -10,9 +10,13 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    // if (numbers.length !== 6) {
+    //   throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    // }
+    //  이 부분은 필수일거임 다 끝나면 주석 해제
+  }
+  getNumber() {
+    return this.#numbers;
   }
   // 메소드 추가 가능
   // TODO: 추가 기능 구현
