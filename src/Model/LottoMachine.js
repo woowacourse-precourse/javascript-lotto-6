@@ -1,7 +1,9 @@
 import { Random } from '@woowacourse/mission-utils';
+
 import Lotto from './Lotto.js';
-import ERROR from '../constants/Error.js';
+
 import { conditions, throwError } from '../util/Validator.js';
+import ERROR from '../constants/Error.js';
 
 const { PAYMENT_NUMBER, PAYMENT_THOUSAND } = ERROR;
 const { isPositiveInteger, isThousandUnits } = conditions;
@@ -37,6 +39,7 @@ class LottoMachine {
 
   #generateLottoNumbers() {
     const lottoNumbers = new Set();
+
     while (lottoNumbers.size < 6) {
       lottoNumbers.add(this.#getLottoNumber());
     }

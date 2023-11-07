@@ -1,8 +1,9 @@
 import { throwError, conditions } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
 
-const { LOTTO_RANGE, LOTTO_LENGTH, LOTTO_DUPLICATE } = ERROR;
-const { isCorrectLength, isDuplicate, isInRange } = conditions;
+const { LOTTO_NUMBER, LOTTO_RANGE, LOTTO_LENGTH, LOTTO_DUPLICATE } = ERROR;
+const { isCorrectLength, isDuplicate, isInRange, isPositiveInteger } =
+  conditions;
 
 class Lotto {
   #numbers;
@@ -13,9 +14,16 @@ class Lotto {
   }
 
   #validate(numbers) {
+    this.#validatePositiveInteger(numbers);
     this.#validateLength(numbers);
     this.#validateDuplicate(numbers);
     this.#validateRange(numbers);
+  }
+
+  #validatePositiveInteger(numbers) {
+    numbers.forEach((number) => {
+      throwError(LOTTO_NUMBER, isPositiveInteger(number));
+    });
   }
 
   #validateLength(numbers) {
