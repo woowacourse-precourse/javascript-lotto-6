@@ -19,7 +19,6 @@ else를 지양한다.
   단위 테스트 작성이 익숙하지 않다면 __tests__/LottoTest.js를 참고하여 학습한 후 테스트를 구현한다.
 */
 
-//TODO: 로또 클래스 및 메서드 분리
 //TODO: 테스트 케이스 작성하기
 //TODO: 프로그래밍 요구 사항에 맞는지 확인
 
@@ -211,12 +210,11 @@ class App {
         winningNumber,
         bonusNumber
       );
-      if (correctCount !== 0) {
+      if (correctCount !== 5 && correctCount >= 3) {
         NumberOfWins[correctCount]++;
       }
-      if (bonusFlag) {
-        NumberOfWins["bonus"]++;
-      }
+      if (correctCount === 5 && bonusFlag) NumberOfWins["bonus"]++;
+      if (correctCount === 5 && !bonusFlag) NumberOfWins[5]++;
     }
     return NumberOfWins;
   }
@@ -235,34 +233,25 @@ class App {
     let prizeValue =
       NUMBER_OF_WINS[3] * PRIZE.THREE_MATCHES +
       NUMBER_OF_WINS[4] * PRIZE.FOUR_MATCHES +
-      (NUMBER_OF_WINS[5] - NUMBER_OF_WINS["bonus"]) * PRIZE.FIVE_MATCHES +
+      NUMBER_OF_WINS[5] * PRIZE.FIVE_MATCHES +
       NUMBER_OF_WINS[6] * PRIZE.SIX_MATCHES +
       NUMBER_OF_WINS["bonus"] * PRIZE.BONUS_MATCHES;
     return prizeValue;
   }
 
   showEachPrize(NUMBER_OF_WINS) {
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_3 + NUMBER_OF_WINS[3] + "개"
+    this.printEachPrize(OUTPUT_MESSAGES.CORRECT_COUNT_3, NUMBER_OF_WINS[3]);
+    this.printEachPrize(OUTPUT_MESSAGES.CORRECT_COUNT_4, NUMBER_OF_WINS[4]);
+    this.printEachPrize(OUTPUT_MESSAGES.CORRECT_COUNT_5, NUMBER_OF_WINS[5]);
+    this.printEachPrize(
+      OUTPUT_MESSAGES.CORRECT_COUNT_BONUS,
+      NUMBER_OF_WINS["bonus"]
     );
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_4 + NUMBER_OF_WINS[4] + "개"
-    );
-    this.showBonusPrize(NUMBER_OF_WINS);
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_BONUS + NUMBER_OF_WINS["bonus"] + "개"
-    );
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_6 + NUMBER_OF_WINS[6] + "개"
-    );
+    this.printEachPrize(OUTPUT_MESSAGES.CORRECT_COUNT_6, NUMBER_OF_WINS[6]);
   }
 
-  showBonusPrize(NUMBER_OF_WINS) {
-    MissionUtils.Console.print(
-      OUTPUT_MESSAGES.CORRECT_COUNT_OUTPUT_5 +
-        (NUMBER_OF_WINS[5] - NUMBER_OF_WINS["bonus"]) +
-        "개"
-    );
+  printEachPrize(OUTPUT_MESSAGE, NUMBER_OF_WINS) {
+    MissionUtils.Console.print(OUTPUT_MESSAGE + NUMBER_OF_WINS + "개");
   }
 }
 export default App;
