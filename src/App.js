@@ -22,6 +22,13 @@ class App {
       this.inputWinningNumbers;
     });
   }
+
+  inputWinningNumbers() {
+    Console.readLineAsync(MESSAGE.INPUT_WINNGING_NUMBERS, winningNumbers => {
+      winningNumbers = winningNumbers.split(',').map(number => Number(number));
+      this.winningNumbers = new WinningNumbers(winningNumbers);
+    });
+  }
 }
 
 export default App;
