@@ -2,6 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./const/message";
 import { ERROR } from "./const/error";
 import Lotto from "./Lotto";
+import checkBonus from "./Bonus";
 
 
 class App {
@@ -43,23 +44,6 @@ class App {
     this.checkNaN(checkPrice);
     this.checkThousand(remainder);
 
-    console.log(checkPrice);
-    console.log(remainder);
-    // try {
-    //   if(isNaN(checkPrice)) {
-    //      throw new Error;
-    //   }
-    // } catch (err){
-    //   MissionUtils.Console.print(ERROR.NAN);
-    // };
-    // try {
-    //   if(remainder !== 0 ) {
-    //     throw new Error;
-    //   }
-    // } catch (err){
-    //   MissionUtils.Console.print(ERROR.THOUSAND);
-    // }
-
     this.price = checkPrice;
     return share;
   }
@@ -71,8 +55,6 @@ class App {
       }
     } catch (err){
       MissionUtils.Console.print(ERROR.NAN);
-
-      // 함수 재실행 안됨
       this.getMyLottos();
     };
   }
@@ -84,7 +66,6 @@ class App {
       }
     } catch (err){
       MissionUtils.Console.print(ERROR.THOUSAND);
-      // 함수 재실행 안됨
       this.getMyLottos();
     }
   }
@@ -111,21 +92,10 @@ class App {
     this.bonus = Number(bonusNumbers);
     this.winning = winningNumbers.split(",").map(Number);
     const numbers = [...this.winning,this.bonus]
-
-    this.checkError(winningNumbers,bonusNumbers,numbers);
     
     const checkNumbers = new Lotto(this.winning);    
+    const checkbonus = new checkBonus(numbers);
   } 
-
-  checkError(winningNumbers,bonusNumbers,numbers){
-    if(!winningNumbers.includes(',')) {throw new Error(ERROR.NO_COMMA)};
-    if(this.winning.length !== 6) { throw new Error(ERROR.SIX)};
-    if(bonusNumbers.includes(',')) {throw new Error(ERROR.INPUT_COMMA)};
-    if(isNaN(bonusNumbers)) {throw new Error(ERROR.NAN)};
-    if([...new Set(numbers)].length !== numbers.length){
-      throw new Error(ERROR.BONUS_DUPLICATION);
-    }
-  }
 
   getWinningLottos() {
     for(let i = 0; i < this.count; i++){
@@ -161,8 +131,8 @@ class App {
     + this.sameNumbersObject['bonus'] * 30000000 
     + this.sameNumbersObject['six'] * 2000000000;
 
-    const rate = winningPrice/this.price;
-    const percent = rate.toFixed(4) * 100;
+    const rate = winningPrice/this.price *100;
+    const percent = rate.toFixed(1);
     
     MissionUtils.Console.print(
     `당첨 통계
