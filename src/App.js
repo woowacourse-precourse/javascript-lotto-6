@@ -54,6 +54,8 @@ class App {
       this.totalReward,
       this.#money
     );
+
+    output.printFinalResult(this.lottoBoard);
   }
 
   makeLotto(money) {
