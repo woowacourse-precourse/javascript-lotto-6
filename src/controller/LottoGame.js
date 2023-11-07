@@ -45,6 +45,10 @@ class LottoGame {
     }
   }
 
+  getMoney() {
+    return this.#money;
+  }
+
   #validateMoney(input) {
     validateEmpty(input);
     validateNumber(input);
