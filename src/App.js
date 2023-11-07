@@ -1,26 +1,26 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 class App {
   async play() {
     try {
       const money = await buyLotto();
       validateMoney(money);
-      const data = makeNumbers(money);
-      showNumbersList(data);
+      const user_lotto_list = makeNumbers(money);
+      showNumbersList(user_lotto_list);
+      const lotto = await makeWinningNumbers();
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-export default App;
-
 const buyLotto = async () => {
   const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
   return parseInt(money);
 };
 
-const validateMoney = (money) => {
+export const validateMoney = (money) => {
   const input_money = money;
   const isRight = input_money % 1000;
   if (isNaN(isRight)) throw new Error('[ERROR] 숫자만 입력 가능 합니다.');
@@ -52,3 +52,20 @@ const showNumbersList = (list) => {
   });
   Console.print(result);
 };
+
+const makeWinningNumbers = async () => {
+  const winning_numbers_arr = [];
+  const input_winning_numbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+  const input_bonus_number = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+
+  input_winning_numbers.split(',').forEach((num) => {
+    winning_numbers_arr.push(parseInt(num));
+  });
+
+  const lotto = new Lotto(winning_numbers_arr);
+  lotto.setBonusNumber(parseInt(input_bonus_number));
+
+  return lotto;
+};
+
+export default App;
