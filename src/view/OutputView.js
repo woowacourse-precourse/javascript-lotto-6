@@ -2,9 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGES } from '../constants/messages.js';
 import SYMBOLS from '../constants/symbols.js';
 
-const print = any => {
-  Console.print(any);
-};
+const print = any => Console.print(any);
 
 const OutputView = {
   printError(error) {

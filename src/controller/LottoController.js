@@ -19,6 +19,10 @@ class LottoController {
 
   #stats;
 
+  #lotto;
+
+  #lottoStore;
+
   constructor() {
     this.#inputView = new InputView();
   }
@@ -36,8 +40,8 @@ class LottoController {
   async #buyLottos() {
     try {
       this.#purchaseAmount = await this.#inputView.readPurchaseAmount();
-      this.lottoStore = new LottoStore(this.#purchaseAmount);
-      this.#userLottos = this.lottoStore.getUserLottos();
+      this.#lottoStore = new LottoStore(this.#purchaseAmount);
+      this.#userLottos = this.#lottoStore.getUserLottos();
       this.#printUserLottos();
     } catch (error) {
       OutputView.printError(error);
@@ -53,14 +57,15 @@ class LottoController {
     OutputView.printLottoNumbers(this.#userLottos);
   }
 
+  /**
+   * 유저가 구입한 로또와 비교할 당첨 번호를 뽑는다.
+   */
   async #drawWinningNumbers() {
     try {
-      const winningNumbersInput = (await this.#inputView.readWinningNumbers())
-        .split(SYMBOLS.comma)
-        .map(Number);
-
-      const LottoInstance = new Lotto(winningNumbersInput);
-      this.#winningNumbers = LottoInstance.getWinningNumbers();
+      const inputNumbers = await this.#inputView.readWinningNumbers();
+      const parsedNumbers = inputNumbers.split(SYMBOLS.comma).map(Number);
+      this.#lotto = new Lotto(parsedNumbers);
+      this.#winningNumbers = this.#lotto.getWinningNumbers();
     } catch (error) {
       OutputView.printError(error);
       await this.#drawWinningNumbers();

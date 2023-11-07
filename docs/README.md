@@ -136,3 +136,10 @@
 - [x] Controller & Model에서는 number type을 유지 시키기 위해 OutputView에서 형 변환 후 출력
 - [x] 테스트를 통해 검증한다.
   - [x] 발급받은 로또 type 체크
+
+### ✅ refactor-3 당첨 번호를 입력 받는다.
+
+- [x] 가독성을 저하시키는 메소드 체이닝 간소화
+  - [x] `parsedNumbers` 변수 추가로 가독성 증진
+- [x] `Lotto` 클래스 테스트 코드 추가
+- [x] JSDoc 작성

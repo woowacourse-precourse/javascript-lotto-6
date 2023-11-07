@@ -5,15 +5,15 @@ class InputView {
   async readPurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync(INPUT_MESSAGES.purchase);
 
-    return purchaseAmount.trim();
+    return purchaseAmount;
   }
 
   async readWinningNumbers() {
-    const winningNumber = await Console.readLineAsync(
-      INPUT_MESSAGES.winningNumber,
+    const winningNumbers = await Console.readLineAsync(
+      INPUT_MESSAGES.winningNumbers,
     );
 
-    return winningNumber;
+    return winningNumbers;
   }
 
   async readBonusNumber() {
