@@ -1,14 +1,14 @@
 import { Console } from "@woowacourse/mission-utils";
-import { 
-  USER_INPUT,
-  MIN_NUMBER,
-  MAX_NUMBER,
-  ERROR_MESSAGE
- } from "./constants.js";
+import { MIN_NUMBER , MAX_NUMBER } from "./constants.js";
 
 class BonusNumber {
   #bonusNumber;
   #targetNumber;
+
+  #BONUS_NUMBER = '보너스 번호를 입력해 주세요.\n'
+  #BONUS_NUM_MIN_MAX = '[ERROR] 보너스 번호는 1에서 45사이의 정수여야 합니다.';
+  #BONUS_NUM_STRING = '[ERROR] 보너스 번호는 숫자여야 합니다.';
+  #BONUS_NUM_DUPLICATE = '[ERROR] 보너스 번호는 당첨번호와 중복되지 않아야 합니다.';
 
   constructor(targetNumber) {
     this.#bonusNumber = 0;
@@ -20,7 +20,7 @@ class BonusNumber {
   }
 
   async setBonusNumber() {
-    const input = await Console.readLineAsync(USER_INPUT.BONUS_NUMBER);
+    const input = await Console.readLineAsync(this.#BONUS_NUMBER);
     const bonusNumber = Number(input);
 
     try {
@@ -32,11 +32,17 @@ class BonusNumber {
   }
 
   checkBonusNumber(bonusNumber) {
-    if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) throw ERROR_MESSAGE.BONUS_NUM_MIN_MAX;
-    
-    if (isNaN(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_STRING;
+    if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
+      throw this.#BONUS_NUM_MIN_MAX;
+    }
 
-    if (this.#targetNumber.includes(bonusNumber)) throw ERROR_MESSAGE.BONUS_NUM_DUPLICATE;
+    if (isNaN(bonusNumber)) {
+      throw this.#BONUS_NUM_STRING;
+    }
+
+    if (this.#targetNumber.includes(bonusNumber)) {
+      throw this.#BONUS_NUM_DUPLICATE;
+    }
   }
 }
 

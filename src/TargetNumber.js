@@ -1,7 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
 import {
-  USER_INPUT,
-  ERROR_MESSAGE,
   DELIMITER,
   LOTTO_LENGTH,
   MIN_NUMBER,
@@ -10,6 +8,12 @@ import {
 
 class TargetNumber {
   #targetNumber;
+
+  #TARGET_NUMBER = '당첨 번호를 입력해 주세요. \n';
+  #TARGET_NUM_SIX = '[ERROR] 당첨 번호는 6개여야 합니다.';
+  #TARGET_NUM_MIN_MAX = '[ERROR] 당첨 번호는 1에서 45사이의 정수여야 합니다.';
+  #TARGET_NUM_STRING = '[ERROR] 당첨 번호는 문자가 아닌 숫자를 입력해야 합니다.';
+  #TARGET_NUM_SAME = '[ERROR] 당첨 번호는 중복되지 않아야 합니다.';
 
   constructor() {
     this.#targetNumber = [];
@@ -24,27 +28,35 @@ class TargetNumber {
   }
   
   async setTargetNumber() {
-    const input = await Console.readLineAsync(USER_INPUT.TARGET_NUMBER);
+    const input = await Console.readLineAsync(this.#TARGET_NUMBER);
     const targetNumber = input.split(DELIMITER).map((number) => Number(number));
 
-    try{
+    try {
       this.checkTargetNumberValidity(targetNumber);
       this.#targetNumber = targetNumber;
-    }catch (error){
+    } catch (error){
       Console.print(error);
     }
   }
 
   checkTargetNumberValidity(targetNumber) {
-    if (targetNumber.length !== LOTTO_LENGTH) throw ERROR_MESSAGE.TARGET_NUM_SIX;
+    if (targetNumber.length !== LOTTO_LENGTH) {
+      throw this.#TARGET_NUM_SIX;
+    }
 
-    if ([...new Set(targetNumber)].length !== LOTTO_LENGTH) throw ERROR_MESSAGE.TARGET_NUM_SAME;
+    if ([...new Set(targetNumber)].length !== LOTTO_LENGTH) {
+      throw this.#TARGET_NUM_SAME;
+    }
 
     targetNumber.forEach((number) => {
-      if (number < MIN_NUMBER || number > MAX_NUMBER) throw ERROR_MESSAGE.TARGET_NUM_MIN_MAX;
+      if (number < MIN_NUMBER || number > MAX_NUMBER) {
+        throw this.#TARGET_NUM_MIN_MAX;
+      }
 
-      if (isNaN(number)) throw ERROR_MESSAGE.TARGET_NUM_STRING;
-    })
+      if (isNaN(number)) {
+        throw this.#TARGET_NUM_STRING;
+      }
+    });
   }
 }
 
