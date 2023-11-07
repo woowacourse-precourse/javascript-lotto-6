@@ -3,7 +3,7 @@ export default class CheckNumber {
     static checkWinningNuber(input) {
         this.checkWinningNumberType(input);
         this.checkWinningNumberLength(input);
-        this.checkWinningNumberLength(input);
+        this.checkWinningNumberRange(input);
         this.checkWinningNumberDuplication(input);
     }
 
