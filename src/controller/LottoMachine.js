@@ -66,7 +66,7 @@ export default class LottoMachine {
         const purchaseAmountInput = await InputView.readPurchaseAmount();
         const parsePurchaseAmount = Number(purchaseAmountInput);
 
-        await this.#purchaseAmountValidate(parsePurchaseAmount);
+        this.#purchaseAmountValidate(parsePurchaseAmount);
 
         return parsePurchaseAmount;
       } catch (e) {
@@ -75,7 +75,7 @@ export default class LottoMachine {
     }
   }
 
-  async #purchaseAmountValidate(purchaseAmount) {
+  #purchaseAmountValidate(purchaseAmount) {
     if (purchaseAmount % LOTTO_MACHINE_RULES.inputUnit !== 0) {
       throw new Error(ERROR_MESSAGE.unit);
     }
