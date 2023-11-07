@@ -41,10 +41,13 @@
 ┗ src
   ┗ constant
     ┗ Constant.js
-  ┗ util
+  ┗ user
     ┗ Input.js
+    ┗ Output.js
+  ┗ validation
     ┗ Validation.js
   ┣ App.js
+  ┣ Game.js
   ┣ index.js
   ┗ Lotto.js
 ```
