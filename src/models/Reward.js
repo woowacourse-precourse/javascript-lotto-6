@@ -11,8 +11,8 @@ const reward = {
   },
 
   computeTotalReturn: function (winningAmount, purchaseAmount) {
-    const result = (winningAmount / purchaseAmount) * 1000;
-    return result.toFixed(2);
+    const result = (winningAmount / purchaseAmount) * 100;
+    return parseFloat(result.toFixed(1));
   },
 };
 
