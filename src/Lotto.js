@@ -9,6 +9,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.COUNT = 0;
   }
 
   #validate(numbers) {
@@ -46,6 +47,12 @@ class Lotto {
   printNumber() {
     const sortNumbers = Lotto.sortNumbers(this.#numbers);
     return Console.print(`[${sortNumbers.join(", ")}]`);
+  }
+
+  compareNumber(winningNumbers) {
+    this.#numbers.forEach((number) =>
+      this.qulificationWinNumber(winningNumbers, number)
+    );
   }
 
   qulificationWinNumber(winningNumber, number) {
