@@ -9,6 +9,11 @@ class Rank {
     this.#lottos = lottos;
   }
 
+  #getSameNumberCount(lotto, winningNumber) {
+    return winningNumber.map(Number).filter((number) => lotto.includes(number))
+      .length;
+  }
+
   /**
    * @param Object props { winningNumber: 당첨 번호 배열, bonusNumber: 보너스 번호 }
    * @returns {number} 구매한 로또 당첨 등수
@@ -32,11 +37,6 @@ class Rank {
       if (rank) this.#rankStatistic[rank - 1] += 1;
     });
     return this.#rankStatistic;
-  }
-
-  #getSameNumberCount(lotto, winningNumber) {
-    return winningNumber.map(Number).filter((number) => lotto.includes(number))
-      .length;
   }
 }
 
