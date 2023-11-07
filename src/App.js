@@ -12,7 +12,8 @@ class App {
     const lotto = await this.getLotto();
     const bonus = Number(await getBonus());
     getRank(lotto, bonus);
-
+    const rate = calculateRate();
+    printResults(rate);
   }
 
   getLotto = async() => {
@@ -98,10 +99,26 @@ const organizeRank = (lotto, published, bonus) => {
 const getRank = (lotto, bonus) => {
   PublishedLottoes.numbers.forEach((number) => {
     organizeRank(lotto, number, bonus);
-    console.log(number.includes(bonus));
   });
-  console.log(bonus);
-  console.log(PublishedLottoes.rank);
+}
+
+const calculateRate = () => {
+  let gain = 0;
+  for (let i = 0; i < 5; i += 1) {
+    gain += (PublishedLottoes.rank[i] * PublishedLottoes.GAIN[i]);
+  }
+  const rate = gain / (PublishedLottoes.numbers.length * 1e3);
+  return Math.round((rate * 10) / 10);
+}
+``
+const printResults = (rate) => {
+  Console.print('당첨 통계\n---');
+  Console.print(`3개 일치 (5,000원) - ${PublishedLottoes.rank.fifth}개`);
+  Console.print(`4개 일치 (50,000원) - ${PublishedLottoes.rank.fourth}개`);
+  Console.print(`5개 일치 (1,500,000원) - ${PublishedLottoes.rank.third}개`);
+  Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${PublishedLottoes.rank.second}개`);
+  Console.print(`6개 일치 (2,000,000,000원) - ${PublishedLottoes.rank.first}개`);
+  Console.print(`총 수익률은 ${rate}입니다.`);
 }
 
 const app = new App();
