@@ -6,7 +6,7 @@ const OutputView = {
   },
 
   issuedLotto(lotto) {
-    Console.print(`[${lotto.sort((a, b) => a - b).join(', ')}]`);
+    Console.print(`[${lotto}]`);
   },
 
   result(rankMap, earningsPercent) {
