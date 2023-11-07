@@ -53,6 +53,20 @@ class Lotto {
     }
   }
 
+  async inputMoney() {
+    const userMoney = await Console.readLineAsync("구입 금액을 입력해주세요.");
+    return userMoney;
+  }
+
+  validationUserMoney(userMoney) {
+    if (!+userMoney) {
+      throw new Error("[ERROR] 숫자를 입력해주세요.");
+    }
+    if (userMoney / LOTTOPRICE - Math.floor(userMoney / LOTTOPRICE)) {
+      throw new Error("[ERROR] 1000원 단위로 입금해주세요.");
+    }
+  }
+
   static async buy() {
     let userMoney;
     let whileBreak = true;
