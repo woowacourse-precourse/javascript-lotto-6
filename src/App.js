@@ -4,13 +4,14 @@ import InputWinningNumbers from "./input/InputWinningNumbers.js";
 import RandomNumber from "./RandomNumber.js";
 import LottoCount from "./LottoCount.js";
 import { printLottoNumbers } from "./print.js";
+import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async play() {
-    // const amount = await InputAmount();
-    // const count = LottoCount(amount);
-    // const lottoNumbers = RandomNumber(count);
-    // printLottoNumbers(lottoNumbers);
-    // const winningNumbers = await InputWinningNumbers();
+    const amount = await InputAmount();
+    const count = LottoCount(amount);
+    const lottoNumbers = RandomNumber(count);
+    printLottoNumbers(lottoNumbers);
+    const winningNumbers = await InputWinningNumbers();
     const bonus = await InputBonusNumber();
   }
 }

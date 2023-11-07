@@ -2,7 +2,7 @@ import { ERROR_MESSAGE } from "../constant/Error.js";
 import { LOTTO_NUMBER_MAX, LOTTO_NUMBER_MIN } from "../constant/LottoInfo.js";
 class ValidateInputNumber {
   static checkEmpty(str) {
-    if (str === "") {
+    if (str === "" || str.indexOf(" ") >= 0) {
       throw new Error(ERROR_MESSAGE.inputEmpty);
     }
   }
