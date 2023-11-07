@@ -32,6 +32,10 @@ class LottoData {
     const numbers = Random.pickUniqueNumbersInRange(SETTING.start, SETTING.end, SETTING.pick);
     return numbers.sort((a, b) => a - b);
   }
+
+  setBonusNumber(bonus) {
+    this.bonusNumber = bonus;
+  }
 }
 
 export default LottoData;
