@@ -27,8 +27,8 @@
 ## :heavy_plus_sign: 추가한 기능
 - 복권 번호, 보너스 번호 중복 검사
 ## :airplane: 테스트 결과
-![로또결과](https://github.com/leedbswo107/javascript-lotto-6/leedbswo107/docs/pass1.png)
-![로또결과](https://github.com/leedbswo107/javascript-lotto-6/leedbswo107/docs/pass2.png)
+![로또결과](https://github.com/leedbswo107/javascript-lotto-6/blob/leedbswo107/docs/pass1.png)
+![로또결과](https://github.com/leedbswo107/javascript-lotto-6/blob/leedbswo107/docs/pass2.png)
 ## :file_folder: 파일 구조 및 파일명
 :open_file_folder: src 
     :open_file_folder: common
