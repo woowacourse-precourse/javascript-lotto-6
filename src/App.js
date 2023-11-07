@@ -1,20 +1,11 @@
-import * as utils from './LottoUtils.js';
+import MainController from './controllers/MainController.js';
 class App {
+  constructor() {
+    this.mainController = new MainController();
+  }
+
   async play() {
-    const AMOUNT = await utils.multiInputAmount();
-    const LOTTO_COUNT = utils.getLottoCount(AMOUNT);
-
-    const LOTTOS = utils.getLottos(LOTTO_COUNT);
-    utils.printLottos(LOTTOS);
-
-    const WINNING_NUMBERS = await utils.multiInputWinningNumbers();
-    const BONUS_NUMBER = await utils.multiInputBonusNumber(WINNING_NUMBERS);
-
-    const RESULT = utils.getResult(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
-    utils.printResult(RESULT);
-
-    const RATEOFRETURNS = utils.getRateOfReturn(AMOUNT, RESULT);
-    utils.printRateOfReturn(RATEOFRETURNS);
+    await this.mainController.init();
   }
 }
 

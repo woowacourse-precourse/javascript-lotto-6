@@ -6,5 +6,4 @@ const MessageFormat = {
     return `총 수익률은 ${ratio}%입니다.`;
   },
 };
-
 export default MessageFormat;
