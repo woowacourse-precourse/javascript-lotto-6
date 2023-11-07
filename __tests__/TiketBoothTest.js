@@ -13,10 +13,12 @@ describe('TiketBooth 클래스 테스트', () => {
       .mockResolvedValueOnce(mockWinningNumbers)
       .mockResolvedValueOnce(mockBonusNumber);
 
-    const result = await ticketBooth.getWinningLotto();
-    expect(result.winnigNumbers).toEqual(
-      new Lotto(mockWinningNumbers.split(',').map(Number)),
+    const winNumbers = await ticketBooth.receiveWinNumbers();
+    const bonusNumber = await ticketBooth.receiveBonusNumber(winNumbers);
+
+    expect(winNumbers).toEqual(
+      new Lotto(mockWinningNumbers.split(',').map(Number))
     );
-    expect(result.bonusNumber).toBe(Number(mockBonusNumber));
+    expect(bonusNumber).toBe(Number(mockBonusNumber));
   });
 });
