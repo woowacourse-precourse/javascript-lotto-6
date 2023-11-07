@@ -28,7 +28,7 @@ class Money {
     if (typeof money !== "number" || isNaN(money)) {
       throw new Error(messages.getErrorMsg("notNumberMoney"));
     }
-    if (money < 0) {
+    if (money <= 0) {
       throw new Error(messages.getErrorMsg("negative"));
     }
     if (money % this.#constants.getLottoPriceUnit() !== 0) {

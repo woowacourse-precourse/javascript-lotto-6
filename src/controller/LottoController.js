@@ -60,18 +60,18 @@ class LottoController {
   async #runStatistics(money, result, output) {
     const statistics = new Statistics(money);
     const statisticsResult = await statistics.getRate(result);
-    output.printProfitRate(statisticsResult);
+    await output.printProfitRate(statisticsResult);
   }
 
   async #getResult(lotto, bonusLotto, money, output) {
     const lottoLogic = new LottoLogic(lotto, bonusLotto, money);
     const result = await lottoLogic.start();
-    output.printResult(result);
+    await output.printCount(await lottoLogic.getCount());
+    await output.printGeneratedLottos(await lottoLogic.getGeneratedLottosArr());
+    await output.printResult(result);
+
     return result;
   }
 }
-
-const lottoController = new LottoController();
-lottoController.run();
 
 export default LottoController;

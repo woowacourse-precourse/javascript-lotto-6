@@ -95,6 +95,18 @@ class LottoLogic {
       constants.getLottoNumberCount()
     );
   }
+
+  async getGeneratedLottosArr() {
+    const result = [];
+    for (let i = 0; i < this.#generatedLottos.length; i++) {
+      result.push(await this.#generatedLottos[i].getNumbers());
+    }
+    return result;
+  }
+
+  async getCount() {
+    return await this.#money.getCount();
+  }
 }
 
 // test done!

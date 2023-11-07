@@ -12,7 +12,7 @@ class Statistics {
   async getRate(result) {
     const money = await this.#money.getMoney();
     const sum = await this.getSum(result);
-    return ((sum / money) * 100).toFixed(2);
+    return ((sum / money) * 100).toFixed(1);
   }
 
   async getSum(res) {
