@@ -16,6 +16,7 @@ class App {
       return;
     } 
     this.lottos.printCount();
+    this.lottos.printLottoList();
 
   }
 

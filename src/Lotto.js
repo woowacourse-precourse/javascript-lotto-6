@@ -1,3 +1,5 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -12,7 +14,12 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  printLottoNumber() {
+    this.#numbers.sort((a,b) => a - b);
+    const numbersStr = this.#numbers.join(', ')
+    MissionUtils.Console.print(`[${numbersStr}]`)
+  }
+
 }
 
 export default Lotto;
