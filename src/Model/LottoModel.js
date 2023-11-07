@@ -61,6 +61,14 @@ class LottoModel {
     this.#winning_lotto = lotto;
   }
 
+  /**
+   * 당첨 로또 객체에 보너스 번호를 설정하는 메소드
+   * @param {int} number
+   */
+  set_bonus(number) {
+    this.#winning_lotto.set_bonus(number);
+  }
+
   set_winning_result(winning_result) {
     this.#winning_result = { ...winning_result };
   }
