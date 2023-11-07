@@ -23,5 +23,9 @@ export const WINNING_NUMBERS_ERROR_MESSAGES = Object.freeze({
   DUPLICATED: `[ERROR] 중복되는 당첨번호가 있습니다.`,
 });
 
+export const BONUS_NUMBER_ERROR_MESSAGES = Object.freeze({
+  NOT_NUMBER: '[ERROR] 보너스 번호는 숫자여야 합니다',
+});
+
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>
   `\n${numberOfLottos}개를 구매했습니다.`;

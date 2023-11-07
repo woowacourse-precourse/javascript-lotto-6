@@ -10,6 +10,10 @@ class OutputManager {
     await Console.print(errorMessage);
   }
 
+  async printBonusNumberInputErrorMessage(errorMessage) {
+    await Console.print(errorMessage);
+  }
+
   printPurchasedLottosInfo(purchasedLottos) {
     this.printNumberOfLottos(purchasedLottos);
     this.printLottosNumbers(purchasedLottos);

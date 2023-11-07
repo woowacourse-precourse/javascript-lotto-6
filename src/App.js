@@ -9,6 +9,7 @@ import InputManager from './UI/InputManager.js';
 import OutputManager from './UI/OutputManager.js';
 import { generateRandomNumbers } from './Utils.js';
 import {
+  validateBonusNumberInput,
   validatePurchaseAmountInput,
   validateWinnerNumbersInput,
 } from './Validation.js';
@@ -59,6 +60,11 @@ class App {
 
   async getBonusNumber() {
     this.bonusNumberInput = await this.inputManager.enterBonusNumberInput();
+    try {
+      await validateBonusNumberInput(this.bonusNumberInput);
+    } catch (e) {
+      await this.outputManager.printBonusNumberInputErrorMessage(e.message);
+    }
     return Number(this.bonusNumberInput);
   }
 

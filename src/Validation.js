@@ -1,4 +1,5 @@
 import {
+  BONUS_NUMBER_ERROR_MESSAGES,
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
   LOTTO_NUMBERS_LENGTH,
@@ -34,6 +35,12 @@ export const validateWinnerNumbersInput = async (winningNumbersInput) => {
   }
   if (isDuplicated(winningNumbersInput)) {
     throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.DUPLICATED);
+  }
+};
+
+export const validateBonusNumberInput = async (bonusNumberInput) => {
+  if (!isNumber(bonusNumberInput)) {
+    throw new Error(BONUS_NUMBER_ERROR_MESSAGES.NOT_NUMBER);
   }
 };
 
