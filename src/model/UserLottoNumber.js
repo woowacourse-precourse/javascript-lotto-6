@@ -8,7 +8,7 @@ class UserLottoNumber {
     this.#lottoNumber = this.#generateLottoNumber();
   }
 
-  getLottoNumber() {
+  getUserLottoNumber() {
     return this.#lottoNumber;
   }
 
@@ -19,11 +19,9 @@ class UserLottoNumber {
 
   calculateMatchingNumber(winningLotto) {
     const matchingNumbers = this.#lottoNumber.filter((number) =>
-      winningLotto.getLottoNumber().includes(number)
+      winningLotto.lottoNumber.includes(number)
     );
-    const bonusNumber = this.#lottoNumber.includes(
-      winningLotto.getBonusNumber()
-    );
+    const bonusNumber = this.#lottoNumber.includes(winningLotto.bonusNumber);
 
     if (matchingNumbers.length === NUMBER.six) return 'first';
     if (matchingNumbers.length === NUMBER.five && bonusNumber) return 'second';

@@ -27,7 +27,7 @@ class Statistics {
       return total + statistic.winnings * statistic.count;
     }, 0);
 
-    this.#rateOfReturn = this.roundRateOfReturns(totalWinnings, purchaseAmount);
+    this.#rateOfReturn = this.roundRateOfReturn(totalWinnings, purchaseAmount);
   }
 
   roundRateOfReturn(totalWinnings, purchaseAmount) {

@@ -15,7 +15,7 @@ class WinningLotto extends Lotto {
 
   getFullLottoNumber() {
     return {
-      lotto: super.getLottoNumber(),
+      lottoNumber: super.getLottoNumber(),
       bonusNumber: this.#bonusNumber,
     };
   }

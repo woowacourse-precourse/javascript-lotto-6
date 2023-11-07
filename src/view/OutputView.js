@@ -22,9 +22,9 @@ class OutputView {
     );
   }
 
-  printRateOfReturns(rateOfReturns) {
+  printRateOfReturn(rateOfReturn) {
     Console.print(
-      `${CHARACTER.newline}${CHARACTER.returnPreffix}${rateOfReturns}${CHARACTER.returnSuffix}`
+      `${CHARACTER.newline}${CHARACTER.returnPreffix}${rateOfReturn}${CHARACTER.returnSuffix}`
     );
   }
 }

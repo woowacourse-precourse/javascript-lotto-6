@@ -35,7 +35,7 @@ class Controller {
       this.#userLotto.getNumberOfPurchase()
     );
     this.#userLotto.getUserLottoNumbers().forEach((userLottoNumber) => {
-      const lottoNumberForPrint = userLottoNumber.getLottoNumber().join(`, `);
+      const lottoNumberForPrint = userLottoNumber.getUserLottoNumber().join(`, `);
       this.#outputView.print(`[${lottoNumberForPrint}]`);
     });
   }
@@ -83,7 +83,7 @@ class Controller {
       this.#outputView.printStatistic(statistic);
     });
 
-    this.#outputView.printRateOfReturns(this.#statistics.getRateOfReturns());
+    this.#outputView.printRateOfReturn(this.#statistics.getRateOfReturn());
   }
 }
 
