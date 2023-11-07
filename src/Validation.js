@@ -8,6 +8,20 @@ const Validation = {
     this.checkIndivisible(money);
   },
 
+  checkNumbers(numberList) {
+    this.checkNull(numberList);
+    this.checkWrong(numberList);
+
+    numberList.forEach((number) => {
+      this.checkEmpty(number);
+      this.checkBlank(number);
+      this.checkChar(number);
+      this.checkOutOfRange(number);
+    });
+
+    this.checkDuplicate(numberList);
+  },
+
   checkNull(number) {
     if (number.length === 0) {
       throw new Error(INPUT_ERROR.null);
