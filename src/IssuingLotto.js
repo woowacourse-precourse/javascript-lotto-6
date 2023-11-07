@@ -52,6 +52,13 @@ class IssuingLotto {
     return usersLotto;
   }
 
+  showIssuedLotto() {
+    const lottoList = this.#issuedLotto.map((lotto) => `[${lotto.join(', ')}]`);
+
+    Utils.informUser(`${this.#count}개를 구매했습니다.`);
+    Utils.informUser(`${lottoList.join('\n')}`);
+  }
+
   getPurchaseCount() {
     this.#calculateCount();
     return this.#count;
