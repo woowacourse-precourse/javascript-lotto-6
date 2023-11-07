@@ -14,4 +14,8 @@ describe('당첨 결과 클래스 테스트', () => {
     ]);
     expect(winningResults.getReversedResultMap()).toStrictEqual(map);
   });
+
+  test('getProfit', () => {
+    expect(winningResults.getProfit()).toBe(5000);
+  });
 });

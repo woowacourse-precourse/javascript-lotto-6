@@ -1,4 +1,9 @@
-import { IGNORE_MATCHING_COUNTS, RANKING, RANKING_BY } from './LottoInfo.js';
+import {
+  IGNORE_MATCHING_COUNTS,
+  PRIZE_MONEY_BY,
+  RANKING,
+  RANKING_BY,
+} from './LottoInfo.js';
 
 class WinningResults {
   #resultMap = new Map([
@@ -23,7 +28,11 @@ class WinningResults {
   }
 
   getProfit() {
-    return 5000;
+    let profit = 0;
+    this.#resultMap.forEach((count, ranking) => {
+      profit += PRIZE_MONEY_BY[ranking] * count;
+    });
+    return profit;
   }
 }
 
