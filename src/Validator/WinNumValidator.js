@@ -9,13 +9,13 @@ function isValidRangeNum(num) {
   return num >= 1 && num <= 45;
 }
 
-class WinningNumberValidator extends Validator {
-  evaluate(value) {
-    const splitedValues = value.includes(',') ? value.split(',') : [];
+class WinNumsValidator extends Validator {
+  evaluate(input) {
+    const splitedValues = input.includes(',') ? input.split(',') : [];
     if (!isValidLength(splitedValues) || !this.isNumsInRange(splitedValues)) {
-      throw new Error('[ERROR] 옳바른 당첨 번호를 입력하세요');
+      throw new Error('올바른 당첨 번호를 입력하세요');
     }
-    return splitedValues;
+    return splitedValues.map((value) => Number(value));
   }
 
   isNumsInRange(nums) {
@@ -27,4 +27,4 @@ class WinningNumberValidator extends Validator {
   }
 }
 
-export default WinningNumberValidator;
+export default WinNumsValidator;

@@ -4,12 +4,17 @@ function isValidRangeNum(value) {
   return value >= 1 && value <= 45;
 }
 
+function isIncludedWinNums(value, winNums) {
+  return winNums.includes(value);
+}
+
 class BonusNumberValidator extends Validator {
-  evaluate(value) {
-    if ((!isValidRangeNum(value) || !this.isValidValue(value))) {
-      throw new Error('[ERROR] : 옯바른 보너스 번호를 입력하세요.');
+  evaluate(value, winNums) {
+    const numberValue = Number(value);
+    if ((!isValidRangeNum(numberValue) || isIncludedWinNums(numberValue, winNums) || !this.isValidValue(value))) {
+      throw new Error('올바른 보너스 번호를 입력하세요');
     }
-    return Number(value);
+    return numberValue;
   }
 }
 
