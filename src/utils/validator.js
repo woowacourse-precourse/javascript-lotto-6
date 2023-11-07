@@ -19,7 +19,7 @@ const validator = {
 
   isValidRangeNumber(numbers) {
     numbers.forEach((number) => {
-      if (number < 1 || number > 45) throw new Error(ERROR.NUMBER_RANGE);
+      if (isNaN(number) || number < 1 || number > 45) throw new Error(ERROR.NUMBER_RANGE);
     });
   },
 };
