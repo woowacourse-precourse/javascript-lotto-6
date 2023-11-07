@@ -1,23 +1,5 @@
+import { LOTTO_NUMBER_RANGE, LOTTO_NUMBER_SIZE } from '../constants/GameSetting.js';
 import { MESSAGE_ERROR } from '../constants/Message.js';
-import { LOTTO_NUMBER_RANGE, LOTTO_NUMBER_SIZE, LOTTO_PRICE } from '../constants/GameSetting.js';
-
-const isNumber = (input) => {
-  const regExp = /^[0-9]+$/;
-  if (!regExp.test(input)) {
-    throw new Error(MESSAGE_ERROR.isNotNumber);
-  }
-};
-
-const isDividedByThousand = (input) => {
-  if (input % LOTTO_PRICE !== 0) {
-    throw new Error(MESSAGE_ERROR.isNotDividedByThousand);
-  }
-};
-
-export function isValidBuyAmount(input) {
-  isNumber(input);
-  isDividedByThousand(input);
-}
 
 const isNumberOrComma = (input) => {
   const regExp = /^[0-9]+(,[0-9]+)*$/;
@@ -54,14 +36,4 @@ export function isValidWinningLotto(input) {
   isLottoRange(inputArray);
   isLottoDuplicate(inputArray);
   isLottoSize(inputArray);
-}
-
-export function isValidBounsNumber(input, winningLottoNumbers) {
-  if (winningLottoNumbers.includes(Number(input))) {
-    throw new Error(MESSAGE_ERROR.bounsNumber);
-  }
-  if (input < LOTTO_NUMBER_RANGE.start || input > LOTTO_NUMBER_RANGE.end) {
-    throw new Error(MESSAGE_ERROR.bounsOnlyNumber);
-  }
-  isNumber(input);
 }

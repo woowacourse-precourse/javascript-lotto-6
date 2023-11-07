@@ -2,6 +2,7 @@ export const LOTTO_PRICE = 1000;
 export const LOTTO_NUMBER_RANGE = Object.freeze({ start: 1, end: 45 });
 export const LOTTO_NUMBER_SIZE = 6;
 export const DECIMAL_POINT = 1;
+export const TO_LOCALE_STRING_OPTION = undefined;
 
 export const LOTTO_RANK = Object.freeze({
   FIFTH: Object.freeze({ winningNumber: 3, bounsNumber: false, winningMoney: 5000 }),

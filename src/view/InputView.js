@@ -1,6 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE_NOTIFICATION } from '../constants/Message.js';
-import { isValidBounsNumber, isValidBuyAmount, isValidWinningLotto } from '../utils/Validation.js';
+import { isValidBuyAmount } from '../validator/BuyAmountValidator.js';
+import { isValidWinningLotto } from '../validator/WinningLottoValidator.js';
+import { isValidBounsNumber } from '../validator/BounsNumberValidator.js';
 
 export async function inputBuyAmount() {
   try {
