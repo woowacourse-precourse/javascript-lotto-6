@@ -2,12 +2,13 @@ import { Console } from "@woowacourse/mission-utils";
 import { message } from "../constants";
 
 const outputView = {
+  /* lottos: 로또 번호가 담긴 배열 */
   printPurchasedLottos: function (lottos) {
     Console.print(lottos.length + message.YOU_BUY);
-    lottos.forEach((lotto) => Console.print(lotto));
+    lottos.forEach((lotto) => Console.print(`[${lotto.join(", ")}]`));
   },
 
-  // matches: 5등부터 1등까지 일치하는 개수가 담긴 배열
+  /* matches: 5등부터 1등까지 일치하는 개수가 담긴 배열 */
   printWinningStatistics: function (matches) {
     Console.print(message.WINNING_STATISTICS);
 

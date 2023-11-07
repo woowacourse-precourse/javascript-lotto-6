@@ -19,13 +19,17 @@ describe("출력 테스트", () => {
       [7, 8, 9, 10, 11, 12],
       [13, 14, 15, 16, 17, 18],
     ];
-    const expectedCount = "3개를 구매했습니다.";
+    const logs = [
+      "3개를 구매했습니다.",
+      "[1, 2, 3, 4, 5, 6]",
+      "[7, 8, 9, 10, 11, 12]",
+      "[13, 14, 15, 16, 17, 18]",
+    ];
 
     outputView.printPurchasedLottos(lottos);
 
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(expectedCount));
-    lottos.forEach((lotto) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.arrayContaining(lotto));
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
 
