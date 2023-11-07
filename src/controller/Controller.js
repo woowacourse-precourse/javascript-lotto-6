@@ -34,8 +34,11 @@ class Controller {
     this.#outputView.printNumberOfPurchase(
       this.#userLotto.getNumberOfPurchase()
     );
+
     this.#userLotto.getUserLottoNumbers().forEach((userLottoNumber) => {
-      const lottoNumberForPrint = userLottoNumber.getUserLottoNumber().join(`, `);
+      const lottoNumberForPrint = userLottoNumber
+        .getUserLottoNumber()
+        .join(`, `);
       this.#outputView.print(`[${lottoNumberForPrint}]`);
     });
   }
@@ -70,9 +73,10 @@ class Controller {
     const matchingResult = this.#userLotto.calculateMatchingNumber(
       this.#winningLotto.getFullLottoNumber()
     );
+
     this.#statistics.calculateStatistics(
       matchingResult,
-      this.#userLotto.getNumberOfPurchase()
+      this.#userLotto.getPurchaseAmount()
     );
     this.printStatistics();
   }
