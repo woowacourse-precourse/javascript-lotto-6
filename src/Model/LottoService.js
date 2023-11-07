@@ -2,12 +2,12 @@ import { Random } from '@woowacourse/mission-utils';
 
 class LottoService {
   createLotto() {
-    const lottoNumberList = [];
-    while (lottoNumberList.length < 6) {
-      const pick = Random.pickUniqueNumbersInRange(1, 45);
-      if (!lottoNumberList.includes(pick)) lottoNumberList.push(pick);
-    }
-    return lottoNumberList;
+    let randomList;
+    do {
+      randomList = Random.pickUniqueNumbersInRange(1, 45, 6);
+    } while (randomList.some((num, index, arr) => arr.indexOf(num) !== index));
+
+    return randomList;
   }
 
   sortAscending(numList) {
