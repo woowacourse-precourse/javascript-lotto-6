@@ -30,7 +30,6 @@ class App {
 			this.sortNumber(numbers);
 			lottoTickets.push(numbers);
 		}
-		validation.duplicateLottoNumber(lottoTickets);
 		return lottoTickets;
 	}
 	lottoPrinter(tickets, lottoTickets) {
@@ -40,8 +39,9 @@ class App {
 		}
 	}
 	async winningNumber() {
-		const winningNumber = await Console.readLineAsync(MESSAGE.WINNING);
-		return winningNumber.split(',').map(Number);
+		const input = await Console.readLineAsync(MESSAGE.WINNING);
+		const winningNumber = input.split(',').map(Number);
+		return winningNumber;
 	}
 	async bonusNumber() {
 		const input = await Console.readLineAsync(MESSAGE.BONUS);
@@ -53,7 +53,9 @@ class App {
 			const lottoTickets = this.createLotto(tickets);
 			this.lottoPrinter(tickets, lottoTickets);
 			const winningNumber = await this.winningNumber();
+			const lotto = new Lotto(winningNumber);
 			const bonusNumber = await this.bonusNumber();
+			validation.bonusNumber(bonusNumber, winningNumber);
 			let ranks = {
 				first: 0,
 				second: 0,
@@ -61,7 +63,6 @@ class App {
 				fourth: 0,
 				fifth: 0,
 			};
-			const lotto = new Lotto(winningNumber);
 			lottoTickets.forEach((lottoTicket) => {
 				const rank = lotto.match(lottoTicket);
 				if (rank === 3) {
