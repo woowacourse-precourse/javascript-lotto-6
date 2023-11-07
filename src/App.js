@@ -10,17 +10,39 @@ class App {
   #game = new Lottery();
 
   async play() {
-    try {
-      // TODO
-      await this.#game.readPayMoney();
-      await this.#game.readWinningNumberList();
-      await this.#game.readBonusNumber();
-      this.#game.matchNumbers();
-      this.#game.printWinnigCount();
-    } catch (e) {
-      // prefix 이용
-      Console.print(`${this.#ERRORPREFIX} ${e.message}`);
-    }
+    const isInputStepEnd = {
+      payMoney: false,
+      winningNumberList: false,
+      bonusNumber: false,
+    };
+    do {
+      console.log(Object.entries(isInputStepEnd));
+      try {
+        // TODO
+        if (!isInputStepEnd.payMoney) {
+          await this.#game.readPayMoney();
+          isInputStepEnd.payMoney = true;
+        }
+
+        if (!isInputStepEnd.winningNumberList) {
+          await this.#game.readWinningNumberList();
+          isInputStepEnd.winningNumberList = true;
+        }
+
+        if (!isInputStepEnd.bonusNumber) {
+          await this.#game.readBonusNumber();
+          isInputStepEnd.bonusNumber = true;
+        }
+      } catch (e) {
+        Console.print(`${this.#ERRORPREFIX} ${e.message}`);
+
+        Object.keys(isInputStepEnd).forEach((curStep) => {
+          if (e.message.includes(curStep)) isInputStepEnd[curStep] = false;
+        });
+      }
+    } while (Object.values(isInputStepEnd).includes(false));
+    this.#game.matchNumbers();
+    this.#game.printWinnigCount();
   }
 }
 

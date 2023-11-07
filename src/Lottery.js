@@ -31,13 +31,22 @@ export default class Lottery {
     if (inputValue <= 0) throw Error('앙의 정수가 아닙니다.');
   }
 
+  #throwInputErrors(trialFunction, inputStep) {
+    try {
+      trialFunction();
+    } catch (error) {
+      throw Error(`${inputStep}: ${error.message}`);
+    }
+  }
+
   async readPayMoney() {
     this.#payMoney = Number(await Console.readLineAsync(PAYMENTCOMMENT));
 
     // exception check
-    this.commomValidator(this.#payMoney);
-
-    if (this.#payMoney % 1000 !== 0) throw Error('1000원 단위가 아닙니다.');
+    this.#throwInputErrors(() => {
+      this.commomValidator(this.#payMoney);
+      if (this.#payMoney % 1000 !== 0) throw Error('1000원 단위가 아닙니다.');
+    }, 'payMoney');
 
     // make Lottos.
     this.pay();
@@ -51,22 +60,25 @@ export default class Lottery {
       .map((element) => Number(element));
 
     // exception check
+    this.#throwInputErrors(() => {
+      if (this.#winningNumberList.length !== 6)
+        throw Error('6개의 번호가 아니거나 ","로 구분하지 않았습니다');
 
-    if (this.#winningNumberList.length !== 6)
-      throw Error('6개의 번호가 아니거나 ","로 구분하지 않았습니다');
-
-    this.#winningNumberList.forEach((winningNumber) => {
-      this.commomValidator(winningNumber);
-      if (winningNumber < 1 || winningNumber > 45)
-        throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
-    });
+      this.#winningNumberList.forEach((winningNumber) => {
+        this.commomValidator(winningNumber);
+        if (winningNumber < 1 || winningNumber > 45)
+          throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
+      });
+    }, 'winningNumberList');
   }
 
   async readBonusNumber() {
     this.#bonusNumer = Number(await Console.readLineAsync(BONUSNUMBERCOMMENT));
-    this.commomValidator(this.#bonusNumer);
-    if (this.#bonusNumer < 1 || this.#bonusNumer > 45)
-      throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
+    this.#throwInputErrors(() => {
+      this.commomValidator(this.#bonusNumer);
+      if (this.#bonusNumer < 1 || this.#bonusNumer > 45)
+        throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
+    }, 'bonusNumber');
   }
 
   pay() {
