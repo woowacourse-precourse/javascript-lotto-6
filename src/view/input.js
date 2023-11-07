@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { isEmpty, isPositiveInteger } from '../utils.js';
-import { ERROR, LOTTO } from '../config.js';
+import { ERROR, LOTTO, WINNING_NUMBER_DELIMITER } from '../config.js';
 import WinningLotto from '../WinningLotto.js';
 
 const MESSAGE = Object.freeze({
@@ -10,7 +10,7 @@ const MESSAGE = Object.freeze({
 
 export default class Input {
   static async amountToBuy() {
-    let amount = '';
+    let amount;
     try {
       amount = await Input.readTrimmedLineAsync(MESSAGE.AMOUNT_TO_BUY);
       if (isEmpty(amount)) throw new Error(ERROR.IS_EMPTY);
@@ -24,12 +24,11 @@ export default class Input {
     return amount;
   }
   static async winningNumbers() {
-    let winningLotto = null;
+    let winningLotto;
     try {
-      let winningNumber = await Input.readTrimmedLineAsync(MESSAGE.WINNING_NUMBER);
-      if (isEmpty(winningNumber)) throw new Error(ERROR.IS_EMPTY);
-      winningNumber = winningNumber.split(',').map((number) => number.trim());
-      winningLotto = new WinningLotto(winningNumber);
+      let winningNumbers = await Input.readTrimmedLineAsync(MESSAGE.WINNING_NUMBER);
+      winningNumbers = winningNumbers.split(WINNING_NUMBER_DELIMITER).filter((number) => !isEmpty(number));
+      winningLotto = new WinningLotto(winningNumbers);
     } catch (e) {
       Console.print(e.message);
       winningLotto = await Input.winningNumbers();
