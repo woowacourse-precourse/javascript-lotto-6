@@ -12,6 +12,22 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
+  getCompareResult(inputNumbers, bonusNumber) {
+    const matchCount = this.getMatchCount(inputNumbers);
+    const hasBonusNumber = this.hasBonusNumber(bonusNumber);
+
+    return { matchCount, hasBonusNumber };
+  }
+
+  getMatchCount(inputNumbers) {
+    return this.#numbers.filter((number) => inputNumbers.includes(number))
+      .length;
+  }
+
+  hasBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
 }
 
 export default Lotto;
