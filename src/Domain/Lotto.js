@@ -16,7 +16,7 @@ class Lotto {
 
   /**
    *
-   * @param {string[] | number[]} numbers
+   * @param {number[]} numbers
    */
   constructor(numbers) {
     this.#validate(numbers);
@@ -66,7 +66,7 @@ class Lotto {
     const validNumbers = numbers.every(this.isLottoNumber);
 
     if (!validNumbers) {
-      throw CustomError.lotto(ERROR.message.lotto.notInRange);
+      throw CustomError.lotto(ERROR.message.lotto.notInRange, numbers);
     }
   }
 

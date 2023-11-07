@@ -19,20 +19,17 @@ class LottoService {
   }
 
   #generateLotto() {
-    return new Lotto(this.#generateLottoNumbers());
-  }
+    const lottoNumber = this.#generateLottoNumber();
 
-  #generateLottoNumbers() {
-    const lottoNumbers = new Set();
-    while (lottoNumbers.size < Lotto.length) {
-      lottoNumbers.add(this.#generateLottoNumber());
-    }
-
-    return [...lottoNumbers];
+    return new Lotto(lottoNumber);
   }
 
   #generateLottoNumber() {
-    return Random.pickNumberInRange(Lotto.minNumber, Lotto.maxNumber);
+    return Random.pickUniqueNumbersInRange(
+      Lotto.minNumber,
+      Lotto.maxNumber,
+      Lotto.length,
+    );
   }
 
   #validatePurchaseAmount(purchaseAmount) {
