@@ -12,7 +12,9 @@ class PurchaseLotto {
   async initialize() {
     if (!this.initialized) {
       this.inputPrice = await inputLottoNum();
-      this.lottoCount = this.inputPrice / LOTTO_NUMBERS.PAY_LOTTO_MONEY;
+      this.lottoCount = Math.floor(
+        this.inputPrice / LOTTO_NUMBERS.PAY_LOTTO_MONEY,
+      );
       this.initialized = true;
     }
   }
