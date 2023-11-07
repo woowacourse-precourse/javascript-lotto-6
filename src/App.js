@@ -5,6 +5,7 @@ import inputBonusNumberValidation from "./error-check/inputBonusNumberCheck";
 import User from "./User";
 import Lotto from "./Lotto";
 import playLottoGame from './game/playLottoGame';
+import OutputView from "./view/OutputView";
 
 class App {
   constructor() {
@@ -22,7 +23,7 @@ class App {
       this.user.lottoBuy(buyLottoAmount);
       await this.userInputLottoNumbers();
     } catch (error) {
-      MissionUtils.Console.print(`${error}`);
+      OutputView.printError(error);
     }
   }
 
@@ -32,7 +33,7 @@ class App {
       this.lotto = new Lotto(inputLottoNumbers);
       await this.userInputBonusNumber(this.lotto.getNumber());
     } catch (error) {
-      MissionUtils.Console.print(`${error}`);
+      OutputView.printError(error);
     }
   }
 
@@ -43,7 +44,7 @@ class App {
       this.user.saveBonusNumber(inputBonusNumber);
       this.lottoGameStart(lottoNumber);
     } catch (error) {
-      MissionUtils.Console.print(`${error}`);
+      OutputView.printError(error);
     }
   }
 
