@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE, OTHERS } from '../../utils/constants.js';
-import Validator from '../../model/Validator.js';
+import Validator from '../../Validator';
 
 class InputView {
   constructor() {

@@ -42,13 +42,14 @@ class GameController {
   }
 
   printGameResult(winningNumbers, bonusNumber) {
-    this.gameCalculator = new GameCalculator(this.purchaseLottos, winningNumbers, bonusNumber);
-    const WINNING_RESULT = this.gameCalculator.calculate();
+    this.gameCalculator = new GameCalculator(this.purchaseLottos, winningNumbers, bonusNumber, this.purchaseMoney);
+    const CACULATE_RESULT = this.gameCalculator.calculate();
+    const WINNING_RESULT = CACULATE_RESULT[0];
+    const RETURN_RATE = CACULATE_RESULT[1]
     const WINNING_RESULT_MESSAGE = this.gameMessageGenerator.getResultMessage(
-      WINNING_RESULT,
-      this.purchaseMoney
+      WINNING_RESULT
     );
-    this.outputView.showGameResultOutput(WINNING_RESULT_MESSAGE);
+    this.outputView.showGameResultOutput([WINNING_RESULT_MESSAGE, RETURN_RATE]);
   }
 }
 

@@ -1,4 +1,4 @@
-import { NUMBER, ERROR_MESSAGE } from '../utils/constants.js';
+import { NUMBER, ERROR_MESSAGE } from './utils/constants.js';
 
 class Validator {
   validateUserInputPurchaseMoney(userInputPurchaseMoney) {

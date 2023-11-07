@@ -1,11 +1,12 @@
 import Lotto from '../Lotto.js';
-import { OTHERS, NUMBER } from '../utils/constants.js';
+import { OTHERS, NUMBER, PRIZES } from '../utils/constants.js';
 
 class GameCalculator {
-  constructor(purchaseLottos, winningNumbers, bonusNumber) {
+  constructor(purchaseLottos, winningNumbers, bonusNumber, purchaseMoney) {
     this.purchaseLottos = purchaseLottos;
     this.winningNumbers = winningNumbers;
     this.bonusNumber = bonusNumber;
+    this.purchaseMoney = purchaseMoney
     this.winngingResult = OTHERS.initialWinningResult;
     this.lotto = null;
   }
@@ -24,8 +25,18 @@ class GameCalculator {
         this.winngingResult[NUMBER.six] += 1;
       }
     });
+
+    const RETURN_RATE = this.calculateReturnRate();
     
-    return this.winngingResult;
+    return [this.winngingResult, RETURN_RATE];
+  }
+
+  calculateReturnRate() {
+    let totalPrize = 0;
+    Object.keys(this.winngingResult).forEach((key) => totalPrize += this.winngingResult[key] * PRIZES[key])
+    const RETURN_RATE = ((totalPrize / this.purchaseMoney) * 100).toFixed(1);
+
+    return RETURN_RATE;
   }
 }
 
