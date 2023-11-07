@@ -6,7 +6,6 @@ import {
 } from '../constants/LottoMessage.js';
 
 /**
- * @public
  * @param {string} error
  */
 export const printError = (error) => {
