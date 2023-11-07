@@ -90,6 +90,14 @@ class App {
     return parsedWinnigNumbers;
   }
 
+  checkDuplicate = (winningNumbers) => {
+    const duplicate = winningNumbers.filter((winningNumber, index) => {
+      winningNumbers.indexOd(winningNumber) != index;
+    })
+
+    if(duplicate) throw new Error('[ERROR] : can not have duplicate number in winning numbers.');
+  }
+
   checkWinngNumbers = (parsedWinnigNumbers) => {
     if(parsedWinnigNumbers.length != 6) throw new Error('[ERROR] : the length of winning numbers is not 6.');
 
@@ -98,6 +106,8 @@ class App {
 
       if(winningNumber < 1 || winningNumber > 45) throw new Error('[ERROR] : winning number must be in range 1~45');
     })
+
+    this.checkDuplicate(winningNumbers);
   }
 
   setWinningNumbers = (winningNumbers) => {
