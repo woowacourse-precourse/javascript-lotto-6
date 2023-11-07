@@ -41,16 +41,16 @@ class LottoMachine {
     const result = Lotto.filter((num) => this.#winningNumbers.has(num)).length;
     switch (result) {
       case 3:
-        return 5;
+        return 5000;
       case 4:
-        return 4;
+        return 50000;
       case 5:
         if (Lotto.includes(this.#bonusNumber)) {
-          return 2;
+          return 30000000;
         }
-        return 3;
+        return 1500000;
       case 6:
-        return 1;
+        return 2000000000;
     }
   }
 }

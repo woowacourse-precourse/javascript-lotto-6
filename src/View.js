@@ -16,7 +16,18 @@ class View {
   }
 
   async getLottoWinningNumbers() {
-    return await this.readLine("당첨 번호를 입력해 주세요.\n");
+    let winningNumbers;
+    while (true) {
+      try {
+        userInput = await this.readLine("당첨 번호를 입력해 주세요.\n");
+        winningNumbers = userInput.split(",").map(Number);
+        this.validateWinningNumbers(winningNumbers);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return winningNumbers;
   }
 
   async getLottoBonusNumber() {
@@ -26,6 +37,12 @@ class View {
   amountValidate(amount) {
     if (amount % 1000 !== 0) {
       throw new Error("[ERROR] 구입금액은 1,000원 단위만 가능합니다.");
+    }
+  }
+
+  validateWinningNumbers(numbers) {
+    for (let i = 0; i < numbers.length; i++) {
+      this.validateNumberRange(numbers[i]);
     }
   }
 
