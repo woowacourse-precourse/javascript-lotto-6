@@ -4,11 +4,19 @@ class LottoResult {
   #lottoRank;
   #lottoPrize;
   #bonusNumber;
+  #prize;
 
   constructor() {
     this.#lottoRank = [0, 0, 0, 0, 0];
     this.#lottoPrize = 0;
     this.#bonusNumber = 0;
+    this.#prize = [
+      SETTING.first_prize,
+      SETTING.second_prize,
+      SETTING.third_prize,
+      SETTING.fourth_prize,
+      SETTING.fifth_prize,
+    ];
   }
 
   setRank(userNumbers, answerNumbers) {
@@ -34,16 +42,8 @@ class LottoResult {
   }
 
   setLottoPrize() {
-    const prize = [
-      SETTING.first_prize,
-      SETTING.second_prize,
-      SETTING.third_prize,
-      SETTING.fourth_prize,
-      SETTING.fifth_prize,
-    ];
-
     this.#lottoRank.reduce((acc, cur, idx) => {
-      acc += cur * prize[idx];
+      acc += cur * this.#prize[idx];
       return (this.#lottoPrize = acc);
     }, 0);
   }
