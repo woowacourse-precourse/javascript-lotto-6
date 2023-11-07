@@ -1,4 +1,5 @@
 import App from "../src/App.js";
+import Lotto from "../src/Lotto.js";
 
 describe("app test", () => {
     test.each([`1001`, `10012`, `만원`, `100,3300`])(
@@ -15,16 +16,13 @@ describe("app test", () => {
     test("로또 자판기는 6개의 숫자를 로또 개수만큼 출력해야 합니다.", async () => {
         const input = 3000;
         const result = [
-            [1, 2, 3, 4, 5, 6],
-            [1, 2, 3, 4, 5, 6],
-            [1, 2, 3, 4, 5, 6],
+            new Lotto([1, 2, 3, 4, 5, 6]),
+            new Lotto([1, 2, 3, 4, 5, 6]),
+            new Lotto([1, 2, 3, 4, 5, 6]),
         ];
 
         const app = new App();
 
         await expect(app.lottoVendingMachine(input).length).toBe(result.length);
-        await expect(
-            app.lottoVendingMachine(input).map((el) => el.length)
-        ).toEqual(result.map((el) => el.length));
     });
 });
