@@ -29,7 +29,7 @@ class App {
   generateLottoNumbers(count) {  // 갯수에 맞게 랜덤 생성되는 로또
     const lottoNumbers = [];
     for (let i = 0; i < count; i++) {
-      const numbers = Random.pickUniqueNumbersInRage(1, 45, 6).sort((a, b) => a - b);
+      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
       lottoNumbers.push(numbers);
     }
     return lottoNumbers;
@@ -66,57 +66,46 @@ class App {
     }
   }
 
-  checkResult(lottoNumbers, winningNumbers, bonusNumber) {  // 로또 당첨 비교
+  checkResult(lottoNumbers, winningNumbers, bonusNumber) {
     let matchCounts = {
-      "3": 0,
-      "4": 0,
-      "5": 0,
-      "5_bonus": 0,
-      "6": 0
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "5_bonus": 0,
+        "6": 0
     };
 
     for (const lottoNumberSet of lottoNumbers) {
-      let matchCount = 0;
-      let hasBonusNumber = false;
+        let matchedCount = lottoNumberSet.filter(num => winningNumbers.includes(num)).length;
+        let hasBonusNumber = lottoNumberSet.includes(bonusNumber);
 
-      const matchedNumbers = lottoNumberSet.filter(num => winningNumbers.includes(num));
-      const matchedCount = matchedNumbers.length;
+        if (matchedCount === 6) {
+            matchCounts["6"]++;
+            continue;
+        }
 
-      if (matchCount === 6) {
-        matchCount = 6;
-        hasBonusNumber = lottoNumberSet.includes(bonusNumber);
-      } else if (matchedCount === 5 && lottoNumberSet.includes(bonusNumber)) {
-        matchCount = 5;
-        hasBonusNumber = true;
-      } else if (matchedCount === 5) {
-        matchCount = 5;
-      } else if (matchedCount === 4) {
-        matchCount = 4;
-      } else if (matchedCount === 3) {
-        matchCount = 3;
-      }
+        if (matchedCount === 5) {
+            if (hasBonusNumber) {
+                matchCounts["5_bonus"]++;
+            } else {
+                matchCounts["5"]++;
+            }
+            continue;
+        }
 
-      switch (matchCount) {
-        case 6:
-          matchCounts["6"]++;
-          break;
-        case 5:
-          if (hasBonusNumber) {
-            matchCounts["5_bonus"]++;
-          } else {
-            matchCounts["5"]++;
-          }
-          break;
-        case 4:
-          matchCounts["4"]++;
-          break;
-        case 3:
-          matchCounts["3"]++;
-          break;
-      }
+        if (matchedCount === 4) {
+            matchCounts["4"]++;
+            continue;
+        }
+
+        if (matchedCount === 3) {
+            matchCounts["3"]++;
+        }
     }
+
     return matchCounts;
-  }
+}
+
 
   calculateProfit(matchCounts, lottoMoney, prizeTable) {  // 수익 계산
     let totalEarnings = 0;
