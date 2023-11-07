@@ -30,6 +30,10 @@ class Lotto {
       throw new ConsoleError(ERROR.lotto.invalidRange)
     }
 
+    if(number % 1 !== 0){
+      throw new ConsoleError(ERROR.common.notNatural)
+    }
+
     this.#isDuplicate(number)
   }
 
