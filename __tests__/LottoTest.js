@@ -1,5 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import generateLotto from '../src/utils/generateLotto.js';
+import getWinningStatistics from '../src/utils/getWinningStatistics.js';
+import Lotto from '../src/Lotto.js';
 
 const mockRandoms = numbers => {
   Random.pickUniqueNumbersInRange = jest.fn();
@@ -19,5 +21,27 @@ describe('로또 기능 테스트', () => {
       recievedValue.push(generateLotto().getNumbers());
     });
     expect(recievedValue).toStrictEqual(expectedValue);
+  });
+
+  test('당첨 통계를 계산하는 기능', () => {
+    const expectedValue = [
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,0000원) - 1개',
+      '6개 일치, (2,000,000,000원) - 0개',
+    ];
+    const array = [
+      [1, 2, 3, 4, 5, 6],
+      [3, 4, 5, 6, 2, 8],
+      [10, 34, 2, 42, 33, 21],
+    ];
+    const winningNumbers = [10, 34, 2, 42, 33, 22];
+    const bonusNumber = 21;
+    const lottos = [];
+
+    array.forEach(lottoNumber => lottos.push(new Lotto(lottoNumber)));
+
+    expect(getWinningStatistics(lottos, winningNumbers, bonusNumber)).toStrictEqual(expectedValue);
   });
 });
