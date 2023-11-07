@@ -1,11 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PRIZE_MESSAGES } from './message';
+import { PRIZE_MESSAGES } from './message.js';
 
 class Output {
   purchaseHistory(purchaseList) {
-    Console.print(`${purchaseList.length}개 구매했습니다.`);
+    Console.print(`\n${purchaseList.length}개 구매했습니다.`);
     for (const lotto in purchaseList) {
-      Console.print(purchaseList[lotto]);
+      const msg = purchaseList[lotto].join(', ');
+      Console.print(`[${msg}]`);
     }
   }
 

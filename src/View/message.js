@@ -1,7 +1,7 @@
 export const MESSAGES = {
   PURCHASE_INPUT: '구입금액을 입력해 주세요.\n',
-  WINNING_INPUT: '당첨 번호를 입력해 주세요.\n',
-  BONUS_INPUT: '보너스 번호를 입력해 주세요.\n',
+  WINNING_INPUT: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_INPUT: '\n보너스 번호를 입력해 주세요.\n',
 };
 
 export const PRIZE_MESSAGES = [
