@@ -57,9 +57,17 @@ class LottoController {
   }
 
   async #getBonusNumber() {
-    const bonusNumber = await InputView.readBonusNumber();
+    try {
+      const bonusNumber = await InputView.readBonusNumber();
 
-    return bonusNumber;
+      return bonusNumber;
+    } catch (error) {
+      OutputView.print(error.message);
+
+      const bonusNumber = this.#getBonusNumber();
+
+      return bonusNumber;
+    }
   }
 }
 

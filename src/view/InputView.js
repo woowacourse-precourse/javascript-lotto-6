@@ -22,6 +22,8 @@ const InputView = {
   async readBonusNumber() {
     const bonusNumber = await Console.readLineAsync(OUTPUT_MESSAGE.bonusNumber);
 
+    checkEmptyString(bonusNumber);
+
     return bonusNumber;
   },
 };
