@@ -7,7 +7,11 @@ import {
 } from './Rule';
 
 const MESSAGE = Object.freeze({
-  paymentQuery: `구입금액을 입력해 주세요.(${LOTTO_FORM.price}원 이상, ${LOTTO_FORM.price}원 단위의 숫자로 입력해주세요. 예시:1000, 2000)`,
+  paymentQuery: `구입금액을 입력해 주세요.(${LOTTO_FORM.price}원 이상, ${
+    LOTTO_FORM.price
+  }원 단위의 숫자로 입력해주세요. 예시:${LOTTO_FORM.price * 1}, ${
+    LOTTO_FORM.price * 5
+  })`,
   numberOfTickets: '개를 구매했습니다.',
   winningNumbersQuery: `당첨 번호를 입력해 주세요.(당첨 번호는 ${LOTTO_FORM.range.min}~${LOTTO_FORM.range.max}까지의 숫자 ${LOTTO_FORM.length}자리로 이루어지며 "${DELIMITER}"을 사용해 숫자를 구별해주세요. 예시:1,2,3,4,5,6)`,
   bonusBallNumberQuery: `보너스 번호를 입력해 주세요.(보너스 번호는 ${LOTTO_FORM.range.min}~${LOTTO_FORM.range.max}의 숫자 중 이전에 입력한 당첨 번호와 중복되지 않는 하나의 숫자만 가능해요.)`,
