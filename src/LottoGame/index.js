@@ -45,6 +45,11 @@ class LottoGame {
     this.#lottoMachine.setBonusNumber(bonusNumber);
     this.prize();
   }
+
+  prize() {
+    const result = this.#lottoMachine.makeResult();
+    Output.log(result);
+  }
 }
 
 export default LottoGame;
