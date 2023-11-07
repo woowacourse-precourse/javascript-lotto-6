@@ -1,6 +1,5 @@
 import OPTIONS from '../../constants/options.js';
 
-const isValidAmount = amount =>
-  !Number.isNaN(amount / OPTIONS.baseAmount) && !(amount % OPTIONS.baseAmount);
+export const isValidAmountUnit = amount => !(amount % OPTIONS.baseAmount);
 
-export default isValidAmount;
+export const isValidAmountRange = amount => amount <= OPTIONS.maxPurchaseAmount;

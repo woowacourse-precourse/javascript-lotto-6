@@ -30,6 +30,9 @@ class LottoController {
     await this.#analyzeLottos();
   }
 
+  /**
+   * 구입금액을 입력받고 금액에 따라 로또를 발급받는다.
+   */
   async #buyLottos() {
     try {
       this.#purchaseAmount = await this.#inputView.readPurchaseAmount();

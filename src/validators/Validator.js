@@ -7,7 +7,10 @@ import {
   isValidUnique,
 } from './is-valid-numbers/index.js';
 import isValidType from './is-valid-type/index.js';
-import isValidAmount from './is-vallid-amount/index.js';
+import {
+  isValidAmountUnit,
+  isValidAmountRange,
+} from './is-vallid-amount/index.js';
 
 const Validator = {
   validatePurchaseAmount(amount) {
@@ -15,8 +18,12 @@ const Validator = {
       throw new AppError(ERROR_MESSAGES.invalidType);
     }
 
-    if (!isValidAmount(amount)) {
+    if (!isValidAmountUnit(amount)) {
       throw new AppError(ERROR_MESSAGES.invalidAmount);
+    }
+
+    if (!isValidAmountRange(amount)) {
+      throw new AppError(ERROR_MESSAGES.invalidPurchaseRange);
     }
   },
 

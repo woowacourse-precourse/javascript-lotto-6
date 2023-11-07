@@ -30,4 +30,6 @@ export const ERROR_MESSAGES = Object.freeze({
   invalidUnique: '로또 번호는 서로 다른 숫자여야 합니다.',
   invalidNumberRange: '로또 번호의 숫자 범위는 1~45까지입니다.',
   invalidBonusNumber: '당첨 번호와 중복되지 않아야 합니다.',
+  invalidPurchaseRange:
+    '복권 및 복권기금법 제5조에 따라 1인당 10만원을 초과해서 구입할 수 없습니다.',
 });

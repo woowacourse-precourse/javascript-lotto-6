@@ -9,12 +9,21 @@ describe('유효성 검사 로직 테스트', () => {
       Validator.validatePurchaseAmount(purchaseAmount);
     }).toThrow(ERROR_MESSAGES.invalidAmount);
   });
+
   test('올바르지 않은 구입금액 데이터 타입', () => {
-    const purchaseAmount = Number('1a');
+    const purchaseAmount = Number('1000a');
 
     expect(() => {
       Validator.validatePurchaseAmount(purchaseAmount);
     }).toThrow(ERROR_MESSAGES.invalidType);
+  });
+
+  test('구매한도를 초과한 구입금액 입력', () => {
+    const purchaseAmount = 110000;
+
+    expect(() => {
+      Validator.validatePurchaseAmount(purchaseAmount);
+    }).toThrow(ERROR_MESSAGES.invalidPurchaseRange);
   });
 
   test('6개를 초과한 당첨 번호 입력', () => {

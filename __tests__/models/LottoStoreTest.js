@@ -1,5 +1,4 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGES } from '../../src/constants/messages.js';
 import LottoStore from '../../src/model/LottoStore.js';
 
 describe('LottoStore 모델 테스트', () => {
@@ -9,11 +8,24 @@ describe('LottoStore 모델 테스트', () => {
     expect(lottoStore).toBeInstanceOf(LottoStore);
   });
 
-  test('유효하지 않은 입력에 대한 테스트', () => {
+  test('1,000원으로 나누어 떨어지지 않는 구입금액 입력', () => {
     const purchaseAmount = 8001;
-    expect(() => new LottoStore(purchaseAmount)).toThrow(
-      ERROR_MESSAGES.invalidAmount,
-    );
+    expect(() => new LottoStore(purchaseAmount)).toThrow('[ERROR]');
+  });
+
+  test('숫자가 아닌 구입금액 입력', () => {
+    const purchaseAmount = '8000j';
+    expect(() => new LottoStore(purchaseAmount)).toThrow('[ERROR]');
+  });
+
+  test('10만을 초과하는 구입금액을 입력', () => {
+    const purchaseAmount = 110000;
+    expect(() => new LottoStore(purchaseAmount)).toThrow('[ERROR]');
+  });
+
+  test('유효한 구입금액 입력', () => {
+    const purchaseAmount = 5000;
+    expect(() => new LottoStore(purchaseAmount)).not.toThrow();
   });
 
   test('getUserLottos() 메소드 테스트', () => {
