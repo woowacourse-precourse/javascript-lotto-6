@@ -57,4 +57,16 @@ describe('Lotto.getNumbers 태스트', () => {
     //then
     expect(result).toBe(false);
   });
+
+  test('sort callback을 넘겨주지 않았을때 생성된 로또 번호는 오름차순으로 만들어진 배열이여야 한다.', () => {
+    //given
+    const numbers = [6, 5, 4, 3, 2, 1];
+    const lotto = new Lotto(numbers);
+
+    //when
+    const result = lotto.getNumbers();
+
+    //then
+    expect(result).toEqual([1, 2, 3, 4, 5, 6]);
+  });
 });

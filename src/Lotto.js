@@ -5,14 +5,22 @@ import paramType from './lib/paramType/src/paramType.js';
 
 export default class Lotto {
   #numbers;
+  #sortCallback;
+  static ascendingSort = (a, b) => a - b;
 
-  constructor(numbers, _ = paramType(numbers, Array)) {
+  constructor(
+    numbers,
+    sortCallback = Lotto.ascendingSort,
+    _0 = paramType(numbers, Array),
+    _1 = paramType(sortCallback, Function),
+  ) {
     this.#validate(numbers);
+    this.#sortCallback = sortCallback;
     this.#numbers = numbers;
   }
 
   getNumbers() {
-    return [...this.#numbers];
+    return [...this.#numbers].sort(this.#sortCallback);
   }
 
   #validate(numbers) {

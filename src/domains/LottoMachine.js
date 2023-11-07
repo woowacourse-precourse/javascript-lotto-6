@@ -1,9 +1,9 @@
-import { LOTTO } from '../constants/lotto';
-import { ERROR_MESSAGE } from '../constants/message';
-import GameError from '../errors/GameError';
-import paramType from '../lib/paramType/src/paramType';
+import { LOTTO } from '../constants/lotto.js';
+import { ERROR_MESSAGE } from '../constants/message.js';
+import GameError from '../errors/GameError.js';
+import paramType from '../lib/paramType/src/paramType.js';
 import Lotto from '../Lotto.js';
-import RandomNumberGenerator from '../utils/RandomNumberGenerator';
+import RandomNumberGenerator from '../utils/RandomNumberGenerator.js';
 
 export default class LottoMachine {
   #sellingPrice;
@@ -41,7 +41,11 @@ export default class LottoMachine {
   }
 
   #createLotto(numbers, _ = paramType(numbers, Array)) {
-    return new Lotto(numbers);
+    return new Lotto(numbers, this.#ascendingSort);
+  }
+
+  #ascendingSort() {
+    return (a, b) => a - b;
   }
 
   #validateSellingPrice(sellingPrice, _ = paramType(sellingPrice, 'number')) {
