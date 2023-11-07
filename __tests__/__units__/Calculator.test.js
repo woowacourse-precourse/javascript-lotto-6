@@ -97,7 +97,7 @@ describe("Calculator 유닛 테스트", () => {
     );
   });
 
-  test("당첨 통계 출력 테스트", async () => {
+  test("당첨 통계 반환 테스트", async () => {
     // given
     const lottos = [
       [11, 23, 31, 14, 35, 46],
@@ -110,8 +110,6 @@ describe("Calculator 유닛 테스트", () => {
       lottoWinnings: [1, 0, 0, 0, 0],
       totalReturn: "166.7",
     };
-
-    const logSpy = getLogSpy();
     const calculator = new Calculator();
     mockQuestions([winningNumber, bonusNumber]);
 
