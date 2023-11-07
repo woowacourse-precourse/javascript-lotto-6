@@ -22,6 +22,7 @@ class App {
 
   async play() {
     this.#money = await this.untilValueAvailable(this.#money, MODE.MONEY);
+    const lottos = this.makeLotto(this.#money);
 
     this.#winningNumbers = await this.untilValueAvailable(
       this.#winningNumbers,
