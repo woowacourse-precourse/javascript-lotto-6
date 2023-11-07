@@ -1,3 +1,5 @@
+import { LOTTO_PRIZE_AMOUNT, PRICE } from "../constant/lottoConstants";
+
 class LottoResultChecker {
   #result = {
     firstPrize: 0,
@@ -7,8 +9,14 @@ class LottoResultChecker {
     lastPrize: 0,
   };
 
+  #profitRate;
+
+  #boughtLottos;
+
   constructor(winningNumbers, bonusNumber, boughtLottos) {
-    this.#checkResult(winningNumbers, bonusNumber, boughtLottos);
+    this.#boughtLottos = boughtLottos;
+    this.#checkResult(winningNumbers, bonusNumber);
+    this.#CalculateProfitRate();
   }
 
   getResult() {
@@ -21,8 +29,12 @@ class LottoResultChecker {
     };
   }
 
-  #checkResult(winningNumbers, bonusNumber, boughtLottos) {
-    boughtLottos.forEach((lottoNumbers) => {
+  getProfitRate() {
+    return this.#profitRate;
+  }
+
+  #checkResult(winningNumbers, bonusNumber) {
+    this.#boughtLottos.forEach((lottoNumbers) => {
       const matchCount = this.#comparsionLotto(winningNumbers, lottoNumbers);
       const bonusMatch = lottoNumbers.includes(bonusNumber);
 
@@ -63,6 +75,17 @@ class LottoResultChecker {
       default:
         break;
     }
+  }
+
+  #CalculateProfitRate() {
+    const keys = ['FIRST_PLACE', 'SECOND_PLACE', 'THIRD_PLACE', 'FOURTY_PLACE', 'LAST_PLACE'];
+    const purchaseAmount = this.#boughtLottos.length * PRICE.LOTTO;
+    const lottoProfits = Object.entries(this.#result)
+      .reduce((total, [, value], index) => (
+        total + value * LOTTO_PRIZE_AMOUNT[keys[index]]
+      ), 0);
+
+    this.#profitRate = (lottoProfits / purchaseAmount) * 100;
   }
 }
 
