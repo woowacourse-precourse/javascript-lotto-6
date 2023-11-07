@@ -1,3 +1,4 @@
+import lottoModel from './models/lottoModel.js';
 import validationUtils from './utils/validationUtils.js';
 import MESSAGE from './constants/message.js';
 import VALUE from './constants/value.js';
@@ -23,7 +24,7 @@ class Lotto {
   }
 
   #checkDuplicateNumber(number, currentIndex) {
-    const lastIndex = this.#numbers.lastIndexOf(number);
+    const lastIndex = lottoModel.getLastIndex(this.#numbers, number);
 
     if (lastIndex !== currentIndex) {
       throw new Error(MESSAGE.error.duplicateNumber);

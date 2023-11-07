@@ -4,6 +4,12 @@ const lottoModel = {
 
     return numbers;
   },
+
+  getLastIndex(numbers, number) {
+    const lastIndex = numbers.lastIndexOf(number);
+
+    return lastIndex;
+  },
 };
 
 export default lottoModel;
