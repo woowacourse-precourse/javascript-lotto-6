@@ -1,20 +1,20 @@
-import LottoGame from '../domain/LottoGame.js';
 import Lotto from '../Lotto.js';
 import LottoValidator from '../domain/LottoValidator.js';
 
 class LottoGameController {
-  constructor(inputView, outputView) {
+  constructor(inputView, outputView, lottoGame) {
     this.inputView = inputView;
     this.outputView = outputView;
-    this.lottoGame = null;
+    this.lottoGame = lottoGame;
   }
 
   async start() {
     try {
       const amount = await this.getValidPurchaseAmount();
-      this.lottoGame = new LottoGame(amount);
+      this.lottoGame.initializeLotto(amount);
 
       const purchasedLotto = this.lottoGame.getPurchasedLotto();
+
       this.outputView.printPurchaseAmount(amount);
       this.outputView.printPurchasedLotto(purchasedLotto);
 
