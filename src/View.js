@@ -17,9 +17,11 @@ class View {
   }
 
   static async outputUserLottosList(list, count) {
-    Console.print(`\n${count}개를 구매했습니다.`);
+    Console.print('');
+    Console.print(`${count}개를 구매했습니다.`);
     list.forEach((lottos) => {
-      Console.print(lottos.sort((a, b) => a - b));
+      const result = lottos.sort((a, b) => a - b);
+      Console.print(`[${result.join(', ')}]`);
     });
   }
 

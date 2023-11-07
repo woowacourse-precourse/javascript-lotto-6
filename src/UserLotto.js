@@ -5,18 +5,9 @@ class UserLotto {
 
   #count;
 
-  constructor(amount) {
+  constructor(count) {
     this.#list = [];
-    this.#validate(amount);
-    this.#count = amount / 1000;
-  }
-
-  #validate(amount) {
-    if (!/\d/.test(amount)) {
-      throw new Error('[ERROR] 숫자를 입력해 주세요.');
-    } else if (amount % 1000 !== 0) {
-      throw new Error('[ERROR] 1,000단위로 입력해주세요');
-    }
+    this.#count = count;
   }
 
   createLottos() {

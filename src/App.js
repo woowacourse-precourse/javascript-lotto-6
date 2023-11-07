@@ -1,8 +1,10 @@
+import { Console } from '@woowacourse/mission-utils';
 import UserLotto from './UserLotto.js';
 import Lotto from './Lotto.js';
 import Bonus from './Bonus.js';
 import View from './View.js';
 import Computer from './Computer.js';
+import Validate from './Validate.js';
 
 class App {
   amount;
@@ -23,7 +25,13 @@ class App {
 
   async getPrice() {
     this.amount = await View.inputAmountOfMoney();
-    this.userLotto = new UserLotto(this.amount);
+    try {
+      Validate.inputUserPay(this.amount);
+      this.userLotto = new UserLotto(this.amount / 1000);
+    } catch (err) {
+      Console.print(err.message);
+      await this.getPrice();
+    }
   }
 
   showLottos() {
