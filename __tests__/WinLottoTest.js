@@ -49,4 +49,13 @@ describe("WinLottoTest", () => {
     const winLotto = new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
     expect(winLotto.compareNumbers()).toEqual([4]);
   });
+
+  test("3개의 번호가 일치하는 경우 [3]을 반환한다", () => {
+    const winningNumbers = ["1", "2", "3", "24", "25", "29"];
+    const bonusNumber = "35";
+    const ticketNumbers = [["1", "2", "3", "4", "5", "6"]];
+
+    const winLotto = new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
+    expect(winLotto.compareNumbers()).toEqual([3]);
+  });
 });
