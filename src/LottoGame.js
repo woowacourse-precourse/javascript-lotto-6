@@ -15,7 +15,7 @@ class LottoGame {
     View.printLottoCount(this.#lottoPurchaser.getLottoCount());
     View.printSortedLottos(this.#lottoPurchaser.getSortedLottos());
 
-    await this.#createWinningLotto();
+    await this.#saveWinningLotto();
     this.#lottoPurchaser.check(this.#winningLotto);
 
     this.#showResults();
@@ -39,24 +39,24 @@ class LottoGame {
     return purchaseAmount;
   }
 
-  async #createWinningLotto() {
+  async #saveWinningLotto() {
     try {
       this.#winningLotto = new WinningLotto(
-        new Lotto(await this.#getWinningNumbers()),
-        await this.#getBonusNumber(),
+        new Lotto(await this.#askWinningNumbers()),
+        await this.#askBonusNumber(),
       );
     } catch (error) {
       View.print(error.message);
-      await this.#createWinningLotto();
+      await this.#saveWinningLotto();
     }
   }
 
-  async #getWinningNumbers() {
+  async #askWinningNumbers() {
     const winningNumbers = await View.askWinningNumbers();
     return winningNumbers;
   }
 
-  async #getBonusNumber() {
+  async #askBonusNumber() {
     const bonusNumber = await View.askBonusNumber();
     return bonusNumber;
   }
