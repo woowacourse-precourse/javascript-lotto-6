@@ -25,6 +25,9 @@ export const validateWinnerNumbersInput = async (winningNumbersInput) => {
       WINNING_NUMBERS_ERROR_MESSAGES.INVALID_WINNING_NUMBERS_LENGTH
     );
   }
+  if (!isNumbers(winningNumbersInput)) {
+    throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.NOT_NUMBER);
+  }
 };
 
 const isNumber = (input) => {
@@ -46,4 +49,8 @@ const isDivisibleByThousand = (input) => {
 
 const isValidWinningNumbersLength = (input) => {
   return input.split(',').length === 6;
+};
+
+const isNumbers = (input) => {
+  return input.split(',').every((el) => isNumber(el));
 };
