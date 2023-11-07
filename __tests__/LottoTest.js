@@ -67,4 +67,12 @@ describe('당첨 로또 클래스 테스트', () => {
       new WinningLotto(input);
     }).toThrow('[ERROR]');
   });
+
+  test.each(['1', '0', '46', '-1'])('보너스 번호 유효성 검사 테스트', (input) => {
+    const winningNumbers = ['1', '2', '3', '4', '5', '6'];
+    const winningLotto = new WinningLotto(winningNumbers);
+    expect(() => {
+      winningLotto.setBonusNumber(input);
+    }).toThrow('[ERROR]');
+  });
 });
