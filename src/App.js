@@ -5,7 +5,19 @@ class App {
     #lottoPrice = 1000;
     #prizeMoney = [2000000000, 30000000, 1500000, 50000, 5000];
     #winningCounts = [0, 0, 0, 0, 0];
-    async play() {}
+    async play() {
+      try {
+      const purchaseAmount = await this.#getPurchaseAmount();
+      const lottoCount = purchaseAmount / this.#lottoPrice;
+      const lottos = this.#purchaseLottos(lottoCount);
+      this.#printLottos(lottos);
+      const [winningNumbers, bonusNumber] =
+          await this.#getWinningNumbersAndBonus();
+      this.#calculateResults(lottos, winningNumbers, bonusNumber);
+      this.#printResults(purchaseAmount);
+  } catch (error) {
+      Console.print(error.message);
+  }}
 
     async #getPurchaseAmount() {
         const input = await Console.readLineAsync("구입금액을 입력해 주세요.");
