@@ -11,10 +11,6 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  getNumbers() {
-    return this.#numbers;
-  }
-
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error(ERROR.NUMBER_LENGTH);
