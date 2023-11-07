@@ -6,7 +6,8 @@ const SYMBOL = {
   winningStatisticsDivision: '---',
   winningAmountLeftBracket: '(',
   winiingAmountRightBracket: ')',
-  matchedNumberSeperator: '-'
-}
+  matchedNumberSeperator: '-',
+  blankDivider: '\n',
+};
 
 export default SYMBOL;
