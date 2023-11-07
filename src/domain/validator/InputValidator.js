@@ -35,7 +35,7 @@ class InputValidator {
   }
 
   validateUnitCost(input) {
-    if (input % NUMBER.unitCost != 0) {
+    if (input % NUMBER.unitCost !== 0) {
       throw new ErrorMessage(ERROR.cost.unmatchedUnit);
     }
   }
