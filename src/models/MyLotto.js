@@ -29,6 +29,14 @@ class MyLotto {
     return randomNumbers;
   }
 
+  #findMatchingCount(winningNumbers, numbers) {
+    return numbers.filter(num => winningNumbers.getLottoNumbers().includes(num)).length;
+  }
+
+  #findMatchingBonus(bonusNumber, numbers) {
+    return numbers.getLottoNumbers().includes(bonusNumber);
+  }
+
   printMyLottoNumbers() {
     this.#lottoNumbersList.forEach(lottoNumbers => lottoNumbers.printLottoNumbers());
   }
@@ -44,14 +52,6 @@ class MyLotto {
     });
 
     return matchingResult;
-  }
-
-  #findMatchingCount(winningNumbers, numbers) {
-    return numbers.filter(num => winningNumbers.getLottoNumbers().includes(num)).length;
-  }
-
-  #findMatchingBonus(bonusNumber, numbers) {
-    return numbers.getLottoNumbers().includes(bonusNumber);
   }
 
   getPurchaseAmount() {
