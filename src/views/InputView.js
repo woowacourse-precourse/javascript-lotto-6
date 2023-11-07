@@ -8,6 +8,11 @@ class InputView {
     const input = await Console.readLineAsync(INPUT_MESSAGE.amount);
     return input;
   }
+
+  async winningNumber() {
+    const input = await Console.readLineAsync(INPUT_MESSAGE.winning);
+    return input;
+  }
 }
 
 export default InputView;
