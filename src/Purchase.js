@@ -7,15 +7,16 @@ class Purchase { //예외처리 및 값 저장
 
     constructor(amount) {
         this.#amount = amount;
+        this.validate(amount);
     }
 
     validate(amount) {
-        this.validateNumber();
-        this.validateAmount();
+        this.validateNumber(amount);
+        this.validateAmount(amount);
     }
 
-    validateNumber() {
-        const isNumber = isNaN(this.#amount);
+    validateNumber(amount) {
+        const isNumber = isNaN(amount);
         try {
             if (isNumber) throw new Error(ERROR.PURCHASE);
         }
@@ -25,8 +26,8 @@ class Purchase { //예외처리 및 값 저장
         return isNumber;
     }
 
-    validateAmount() {
-        const isRightAmount = this.#amount % AMOUNT.UNIT !== 0;
+    validateAmount(amount) {
+        const isRightAmount = amount % AMOUNT.UNIT !== 0;
         try {
             if (isRightAmount) throw new Error(ERROR.PURCHASE);
         }
@@ -36,7 +37,7 @@ class Purchase { //예외처리 및 값 저장
         return isRightAmount;
     }
 
-    getQuantity() {
+    getQuantity() { //로또 수량
         return parseInt(this.#amount / AMOUNT.UNIT);
     }
 }

@@ -6,18 +6,18 @@ class Lotto { //예외처리 및 값 저장
 
   constructor(numbers) {
     this.#numbers = numbers;
-    this.#validate();
+    this.validate(numbers);
   }
 
-  #validate() {
-    this.validateLength();
-    this.validateRange();
-    this.validateDuplicate();
-    this.validateNumber();
+  validate(numbers) {
+    this.validateLength(numbers);
+    this.validateRange(numbers);
+    this.validateDuplicate(numbers);
+    this.validateNumber(numbers);
   }
 
-  validateLength() {
-    const isRightLength = this.#numbers.length !== LOTTO.LEN;
+  validateLength(numbers) {
+    const isRightLength = numbers.length !== LOTTO.LEN;
     try {
       if (isRightLength) throw new Error(ERROR.LOTTO);
     }
@@ -27,8 +27,8 @@ class Lotto { //예외처리 및 값 저장
     return isRightLength;
   }
   
-  validateRange() {
-    const isRightRange = this.#numbers.filter(v => v < LOTTO.MIN || v > LOTTO.MAX).length > 0;
+  validateRange(numbers) {
+    const isRightRange = numbers.filter(v => v < LOTTO.MIN || v > LOTTO.MAX).length > 0;
     try {
       if (isRightRange) throw new Error(ERROR.LOTTO);
     }
@@ -38,17 +38,18 @@ class Lotto { //예외처리 및 값 저장
     return isRightRange;
   }
   
-  validateDuplicate() {
+  validateDuplicate(numbers) {
+    const isDuplicate = new Set(numbers).size !== numbers.length;
     try {
-      if (this.isDuplicate) throw new Error(ERROR.LOTTO);
+      if (isDuplicate) throw new Error(ERROR.LOTTO);
     }
     catch (error) {
       Console.print(error.message);
     }
   }
   
-  validateNumber() {
-    const isNumber = this.#numbers.filter(v => isNaN(v)).length > 0;
+  validateNumber(numbers) {
+    const isNumber = numbers.filter(v => isNaN(v)).length > 0;
     try {
       if (isNumber) throw new Error(ERROR.LOTTO);
     }
@@ -58,6 +59,9 @@ class Lotto { //예외처리 및 값 저장
     return isNumber;
   }
 
+  getWinningNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

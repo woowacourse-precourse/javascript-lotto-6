@@ -11,13 +11,13 @@ class Bonus { //예외처리 및 값 저장
     }
 
     validate(numbers, bonus) {
-        this.validateRange();
-        this.validateDuplicate();
-        this.validateNumber();
+        this.validateRange(bonus);
+        this.validateDuplicate(numbers);
+        this.validateNumber(bonus);
     }
 
     validateRange() {
-        const isRightRange = this.#bonus < 1 || this.#bonus > 45;
+        const isRightRange = bonus < 1 || bonus > 45;
         try {
             if (isRightRange) throw new Error(ERROR.BONUS_RANGE);
         }
@@ -27,8 +27,8 @@ class Bonus { //예외처리 및 값 저장
         return isRightRange;
     }
 
-    validateDuplicate() {
-        const isDuplicate = this.numbers.includes(this.#bonus);
+    validateDuplicate(numbers, bonus) {
+        const isDuplicate = numbers.includes(bonus);
         try {
             if (isDuplicate) throw new Error(ERROR.BONUS_DUPLICATE);
         }
@@ -38,8 +38,8 @@ class Bonus { //예외처리 및 값 저장
         return isDuplicate;
     }
 
-    validateNumber() {
-        const isNumber = isNaN(this.#bonus);
+    validateNumber(bonus) {
+        const isNumber = isNaN(bonus);
         try {
             if (isNumber) throw new Error(ERROR.BONUS_INCLUDE);
         }
@@ -47,6 +47,10 @@ class Bonus { //예외처리 및 값 저장
             Console.print(error.message);
         }
         return isNumber;
+    }
+
+    getBonusNumber() {
+        return this.#bonus;
     }
 }
 
