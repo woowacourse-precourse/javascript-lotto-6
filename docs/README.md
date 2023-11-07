@@ -52,3 +52,7 @@
   - validateAmount()
   - validateNumbers()
   - validateBonusNumber()
+- UserInput.js
+  - inputNumber()
+  - inputBonus()
+  - inputAmount()
