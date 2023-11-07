@@ -4,7 +4,7 @@ import MESSAGES from "./constants/Messages.js";
 import Lotto from "./Lotto.js";
 
 class LottoStore {
-  buyLotto(number) {
+  publishLotto(number) {
     Console.print(MESSAGES.SHOW_PURCHASE_HISTORY(number));
 
     const lottos = [];

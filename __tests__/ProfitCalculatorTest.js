@@ -15,7 +15,7 @@ describe("수익 계산 관련 테스트", () => {
 
     mockRandoms([[1, 2, 3, 11, 12, 13]]);
 
-    const lottos = store.buyLotto(1);
+    const lottos = store.publishLotto(1);
     const winningNumber = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 9;
 
@@ -39,7 +39,7 @@ describe("수익 계산 관련 테스트", () => {
       [10, 21, 22, 23, 34, 43],
     ]);
 
-    const lottos = store.buyLotto(2);
+    const lottos = store.publishLotto(2);
     const winningNumber = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 9;
 
@@ -64,7 +64,7 @@ describe("수익 계산 관련 테스트", () => {
       [13, 14, 15, 16, 17, 18],
     ]);
 
-    const lottos = store.buyLotto(3);
+    const lottos = store.publishLotto(3);
     const winningNumber = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 9;
 
@@ -94,7 +94,7 @@ describe("수익 계산 관련 테스트", () => {
       [7, 8, 9, 10, 11, 12],
     ]);
 
-    const lottos = store.buyLotto(8);
+    const lottos = store.publishLotto(8);
     const winningNumber = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 9;
 
@@ -134,7 +134,7 @@ describe("수익 계산 관련 테스트", () => {
       [1, 2, 3, 4, 5, 6],
     ]);
 
-    const lottos = store.buyLotto(18);
+    const lottos = store.publishLotto(18);
     const winningNumber = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 9;
 
@@ -165,7 +165,7 @@ describe("수익 계산 관련 테스트", () => {
       [1, 2, 3, 4, 9, 18],
     ]);
 
-    const lottos = store.buyLotto(9);
+    const lottos = store.publishLotto(9);
     const winningNumber = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 9;
 
