@@ -20,7 +20,7 @@ class LottoGame {
     this.#purchaseQuantity = purchaseAmount / 1000;
   }
 
-
+  /** 랜덤 번호를 가진 로또 티켓을 구입 수량만큼 생성한다. */
   generateTickets() {
     for (let i = 0; i < this.#purchaseQuantity; i++) {
       // TODO: 상수 사용
@@ -32,6 +32,11 @@ class LottoGame {
     this.#tickets.forEach((ticket) => {
       console.log(ticket.getNumbers());
     })
+  }
+
+  /** @returns {number} 티켓 구입 수량 */
+  getPurchaseQuantity() {
+    return this.#purchaseQuantity;
   }
 }
 

@@ -9,7 +9,7 @@ class LottoGameController {
 	/** @type {LottoGame} : 로또게임 Domain */
 	#lottoGame = null;
 
-	/** @type {InputView} : 입출력 View */
+	/** @type {LottoGameView} : 입출력 View */
 	#view = null;
 
 	/** 컨트롤러 생성 시 model, view 객체를 생성한다. */
@@ -33,8 +33,9 @@ class LottoGameController {
 
 	/** 티켓의 발행 로직을 담당한다. */
 	#handlePublishTickets() {
-		this.#lottoGame.generateTickets()
-		// TODO: 구입 수량 출력
+		this.#lottoGame.generateTickets();
+		this.#view.breakLine();
+		this.#view.displayPurchaseQuantity(this.#lottoGame.getPurchaseQuantity());
 		// TODO: 티켓 번호 출력
 	}
 }
