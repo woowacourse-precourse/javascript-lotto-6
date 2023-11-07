@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { SIX, START_INCLUSIVE, END_INCLUSIVE } from './constants/data.js';
+import { SIX, START_INCLUSIVE, END_INCLUSIVE } from './constants/numbers.js';
 import { ERROR } from './constants/messages.js';
 
 class Lotto {
@@ -9,9 +9,9 @@ class Lotto {
     if (!numbers) {
       numbers = this.#pickNumbers();
     }
+
     this.#validate(numbers);
-    this.#numbers = numbers;
-    // this.#numbers = numbers.map(number => Number(number));
+    this.#numbers = numbers.map(number => Number(number));
   }
 
   #validate(numbers) {
@@ -30,13 +30,13 @@ class Lotto {
       }
     });
   }
-  
-  getNumbers() {
-    return this.#numbers;
-  }
 
   #pickNumbers() {
     return MissionUtils.Random.pickUniqueNumbersInRange(START_INCLUSIVE, END_INCLUSIVE, SIX);
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 
