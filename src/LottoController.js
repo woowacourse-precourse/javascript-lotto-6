@@ -10,12 +10,13 @@ class LottoController {
     this.view = new LottoView();
     this.lottos = [];
     this.calculateWinners = new CalculateWinners();
+    this.validator = new LottoValidator();
   }
 
   async purchaseLottos() {
     const amount = await this.view.askPayment();
     const countOfLotto = amount / 1000;
-    LottoValidator.validatePurchaseAmount(amount);
+    this.validator.validatePurchaseAmount(amount);
     this.lottos = this.makeLottoNumbers(countOfLotto);
     this.view.showLottoNumbers(countOfLotto, this.lottos);
   }
@@ -42,7 +43,6 @@ class LottoController {
   viewProfitRate(countWinners) {
     const amount = this.lottos.length * 1000;
     const profitRate = calculateProfit(amount, countWinners);
-    console.log(profitRate); //
     this.view.showProfitRate(profitRate);
   }
 }

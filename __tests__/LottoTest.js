@@ -29,10 +29,9 @@ describe("로또 클래스 테스트", () => {
 describe("구매 금액 테스트", () => {
   test("구매 금액이 1,000원으로 나누어 떨어지지 않는 경우 예외가 발생한다.", () => {
     const input = [2500];
+    const validator = new LottoValidator();
     input.forEach((input) => {
-      expect(() => LottoValidator.validatePurchaseAmount(input)).toThrow(
-        "[ERROR]"
-      );
+      expect(() => validator.validatePurchaseAmount(input)).toThrow("[ERROR]");
     });
   });
 });
