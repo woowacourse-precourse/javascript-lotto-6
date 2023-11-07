@@ -1,15 +1,15 @@
 import { LOTTO_RULE, MESSAGES } from "../../src/constants";
 import { getLogSpy, mockQuestions } from "../../src/utils";
-import { Lotto, LottoDrawMachine } from "../../src/domain/";
+import { Calculator } from "../../src/domain";
 import { CustomError } from "../../src/exception";
 
 const { LENGTH, RANGE } = LOTTO_RULE;
 const { MIN, MAX } = RANGE;
 
-describe("LottoDrawMachine 유닛 테스트", () => {
+describe("Calculator 유닛 테스트", () => {
   test("로또 인스턴스 생성", () => {
-    const lotto = new LottoDrawMachine();
-    expect(lotto).toBeInstanceOf(LottoDrawMachine);
+    const calculator = new Calculator();
+    expect(calculator).toBeInstanceOf(Calculator);
   });
 
   describe("당첨 번호 입력 유효성 테스트", () => {
@@ -30,11 +30,11 @@ describe("LottoDrawMachine 유닛 테스트", () => {
       async (validWinningNumber) => {
         // given
         const logSpy = getLogSpy();
-        const lottoDrawMachine = new LottoDrawMachine();
+        const calculator = new Calculator();
         mockQuestions(validWinningNumber);
 
         // when
-        await lottoDrawMachine.promptWinningNumber(
+        await calculator.promptWinningNumber(
           MESSAGES.WINNING_NUMBER.PLACE_HOLDER
         );
 
@@ -49,10 +49,10 @@ describe("LottoDrawMachine 유닛 테스트", () => {
       "틀린 케이스",
       async (inValidWinningNumber, errorMessage) => {
         // given
-        const lottoDrawMachine = new LottoDrawMachine();
+        const calculator = new Calculator();
         mockQuestions(inValidWinningNumber);
         // then
-        await expect(lottoDrawMachine.promptWinningNumber()).rejects.toThrow(
+        await expect(calculator.promptWinningNumber()).rejects.toThrow(
           new CustomError(errorMessage)
         );
       }
@@ -73,13 +73,11 @@ describe("LottoDrawMachine 유닛 테스트", () => {
     test.each(validBonusNumbers)("올바른 케이스", async (validBonusNumber) => {
       // given
       const logSpy = getLogSpy();
-      const lottoDrawMachine = new LottoDrawMachine();
+      const calculator = new Calculator();
       mockQuestions(validBonusNumber);
 
       // when
-      await lottoDrawMachine.promptBonusNumber(
-        MESSAGES.BONUS_NUMBER.PLACE_HOLDER
-      );
+      await calculator.promptBonusNumber(MESSAGES.BONUS_NUMBER.PLACE_HOLDER);
 
       // then
       await expect(logSpy).toHaveBeenCalledWith(7);
@@ -89,10 +87,10 @@ describe("LottoDrawMachine 유닛 테스트", () => {
       "틀린 케이스",
       async (inValidBonusNumber, errorMessage) => {
         // given
-        const lottoDrawMachine = new LottoDrawMachine();
+        const calculator = new Calculator();
         mockQuestions(inValidBonusNumber);
         // then
-        await expect(lottoDrawMachine.promptBonusNumber()).rejects.toThrow(
+        await expect(calculator.promptBonusNumber()).rejects.toThrow(
           new CustomError(errorMessage)
         );
       }
@@ -101,15 +99,6 @@ describe("LottoDrawMachine 유닛 테스트", () => {
 
   test("당첨 통계 출력 테스트", async () => {
     // given
-    const {
-      PREFIX,
-      1: one,
-      2: two,
-      3: three,
-      4: four,
-      5: five,
-      SUFFIX,
-    } = MESSAGES.WINNING_STATISTICS;
     const lottos = [
       [11, 23, 31, 14, 35, 46],
       [14, 25, 34, 43, 18, 49],
@@ -117,33 +106,21 @@ describe("LottoDrawMachine 유닛 테스트", () => {
     ];
     const winningNumber = "1,2,3,4,5,6";
     const bonusNumber = "7";
+    const expectedResult = {
+      lottoWinnings: [1, 0, 0, 0, 0],
+      totalReturn: "166.7",
+    };
 
     const logSpy = getLogSpy();
-    const lottoDrawMachine = new LottoDrawMachine();
+    const calculator = new Calculator();
     mockQuestions([winningNumber, bonusNumber]);
 
     // when
-    await lottoDrawMachine.promptWinningNumber(
-      MESSAGES.WINNING_NUMBER.PLACE_HOLDER
-    );
-
-    await lottoDrawMachine.promptBonusNumber(
-      MESSAGES.BONUS_NUMBER.PLACE_HOLDER
-    );
-
-    lottoDrawMachine.printResult(lottos);
+    await calculator.promptWinningNumber(MESSAGES.WINNING_NUMBER.PLACE_HOLDER);
+    await calculator.promptBonusNumber(MESSAGES.BONUS_NUMBER.PLACE_HOLDER);
+    const result = calculator.getWinningsResult(lottos);
 
     // then
-    await expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        PREFIX,
-        five(1),
-        four(0),
-        three(0),
-        two(0),
-        one(0),
-        SUFFIX(166.7)
-      )
-    );
+    expect(result).toEqual(expectedResult);
   });
 });
