@@ -10,8 +10,14 @@ class Input {
   static async getWinningNumber() {
     const lottoWinningNumber = await Console.readLineAsync(
       "\n당첨 번호를 입력해 주세요.\n"
-    )
+    );
     return lottoWinningNumber;
+  }
+  static async getBonusNumber() {
+    const lottoBonusNumber = await Console.readLineAsync(
+      "\n보너스 번호를 입력해 주세요.\n"
+    );
+    return lottoBonusNumber;
   }
 }
 
