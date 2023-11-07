@@ -5,6 +5,14 @@ import Lotto from "../model/Lotto.js";
 class LottoController {
 	static lottoList = [];
 	static lottoNumList = [];
+	static matchingNumMap = new Map([
+		// 하드코딩
+		["3", 0],
+		["4", 0],
+		["5", 0],
+		["5+1", 0],
+		["6", 0],
+	]);
 
 	static countLottos(amount) {
 		return Math.floor(amount / LOTTO.cost);
@@ -67,15 +75,12 @@ class LottoController {
 		const abc = this.countBonusNum(mathingNums, bonusNumber);
 		console.log("보너스 포함 일치값", abc); // 값이 5이면 한번 더 판별
 
-		// //보너스
-		// mathingNum.forEach((num) => {
-		// 	const key = num.toString();
-		// 	const value = this.matchingNumMap.get(key);
-		// 	if (this.matchingNumMap.has(key)) this.matchingNumMap.set(key, value + 1);
-		// });
+		abc.forEach((key) => {
+			const value = this.matchingNumMap.get(key);
+			if (this.matchingNumMap.has(key)) this.matchingNumMap.set(key, value + 1);
+		});
 
-		// mathingNum.map((v,i)=>v===5 ?)
-		// console.log(this.matchingNumMap);
+		console.log(this.matchingNumMap);
 	}
 }
 
