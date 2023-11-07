@@ -1,11 +1,13 @@
 import LOTTO_INFO from './constants/lottoInfo.js';
 import InputView from './view/InputView.js';
+import OutputView from './view/OutputView.js';
 
 class LottoGame {
   #purchaseAmount;
 
   async play() {
     await this.inputPurchaseAmount();
+    OutputView.printNewLine();
     this.purchaseLotto();
   }
 
@@ -15,6 +17,7 @@ class LottoGame {
 
   purchaseLotto() {
     const lottoCount = this.#purchaseAmount / LOTTO_INFO.purchase.unit;
+    OutputView.printPurchaseLottoCount(lottoCount);
   }
 }
 
