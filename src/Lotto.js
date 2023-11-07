@@ -19,6 +19,26 @@ class Lotto {
     MissionUtils.Console.print(this.#numbers);
   }
 
+  checkLottoLank(winningNumbers, bonusNum) {
+    const sameCnt = winningNumbers.reduce(
+      (a, c) => (this.#numbers.includes(c) ? a + 1 : a),
+      0
+    );
+    switch (sameCnt) {
+      case 6:
+        return 1;
+      case 5:
+        if (this.#numbers.includes(bonusNum)) return 2;
+        return 3;
+      case 4:
+        return 4;
+      case 3:
+        return 5;
+      default:
+        return 6;
+    }
+  }
+
   // TODO: 추가 기능 구현
 }
 
