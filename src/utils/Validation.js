@@ -24,7 +24,10 @@ export const checkBonusNumbers = (bonusNumber, winningNumbers) => {
 };
 
 export const checkPurchaseAmount = (amount) => {
-    if (isNaN(amount) || amount === ZERO || amount % LOTTO_PRICE !== ZERO) {
+    if (isNaN(amount) ||
+        amount === ZERO ||
+        amount % LOTTO_PRICE !== ZERO ||
+        !Number.isInteger(amount)) {
         throw new Error(ERROR.INVALID_AMOUNT_MESSAGE);
     }
 };
