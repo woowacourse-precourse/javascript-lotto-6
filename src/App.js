@@ -48,6 +48,27 @@ class App {
 		return lotto;
 	}
 
+	static async inputBonusNumber(lotto) {
+		const bonusNumber = await this.getValidBonusNumber(lotto);
+		Console.print('');
+		return bonusNumber;
+	}
+
+	static async getValidBonusNumber(lotto) {
+		Console.print('보너스 번호를 입력해 주세요.');
+		const bonusNumber = +(await Console.readLineAsync(''));
+		if (Number.isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45 || !Number.isInteger(bonusNumber)) {
+			Console.print('[ERROR] 보너스 번호는 1~45 사이의 자연수여야 합니다.');
+			return this.getValidBonusNumber(lotto);
+		}
+		if (lotto.includes(bonusNumber)) {
+			Console.print('[ERROR] 보너스 번호는 당첨 번호와 중복되선 안됩니다.');
+			return this.getValidBonusNumber(lotto);
+		}
+
+		return bonusNumber;
+	}
+
 	// async play() {}
 }
 
