@@ -1,17 +1,23 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/index.js';
+import {
+  ERROR_MESSAGE,
+  INPUT_MESSAGE,
+  LOTTO_VALUE,
+} from '../constants/index.js';
 
 class Lotto {
-  amount;
-  tickets = [];
+  #amount;
+  #tickets = [];
+
   constructor(numbers) {}
 
   async buy() {
-    this.#readBuyAmount();
-    const ticketCount = this.#getNumberOfAvailableTickets();
+    await this.#readBuyAmount();
+    const ticketCount = this.#getNumberOfAvailableTickets(this.#amount);
     for (let i = 0; i < ticketCount; i++) {
       this.#publishLottoTicket();
     }
+    console.log('\n' + `${ticketCount}개를 구매했습니다.`);
     this.#printAllTickets();
   }
 
@@ -29,7 +35,7 @@ class Lotto {
     );
     const amount = this.#convertToNumber(amountInput);
     this.#validateBuyUnit(amount);
-    this.amount = amount;
+    this.#amount = amount;
   }
 
   #convertToNumber(numberString) {
@@ -50,15 +56,20 @@ class Lotto {
 
   #validateIsInRange(input) {}
 
-  #getNumberOfAvailableTickets(amount) {}
+  #getNumberOfAvailableTickets(amount) {
+    return amount / LOTTO_VALUE.TICKET_PRICE;
+  }
 
   #publishLottoTicket() {
     const ticket = new LottoTicket();
-    this.tickets.push(ticket);
-    console.log(ticket);
+    this.#tickets.push(ticket);
   }
 
-  #printAllTickets() {}
+  #printAllTickets() {
+    this.#tickets.forEach(ticket => {
+      ticket.printNumbers();
+    });
+  }
 
   #readWinningNumbers() {}
 
@@ -68,8 +79,10 @@ class Lotto {
 }
 
 class LottoTicket {
-  numbers = [];
-  constructor() {}
+  #numbers = [];
+  constructor() {
+    this.#numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
 
   generateLottoNumbers() {}
 
@@ -77,7 +90,10 @@ class LottoTicket {
 
   getIsBonusNumberMatched() {}
 
-  printNumbers() {}
+  printNumbers() {
+    const numbers = this.#numbers.join(',');
+    console.log(`[${numbers}]`);
+  }
 }
 
 export default Lotto;
