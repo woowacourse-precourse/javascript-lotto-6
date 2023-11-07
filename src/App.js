@@ -37,7 +37,7 @@ class App {
         MESSAGES.OUTPUT_RETURN(((totalReturn / amount) * 100).toFixed(1))
       );
     } catch (err) {
-      Console.print('[ERROR]');
+      Console.print('[ERROR]\n');
       this.play();
     }
   }
