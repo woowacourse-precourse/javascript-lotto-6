@@ -52,23 +52,36 @@ describe("구입금액, 정렬 테스트", () => {
 
 describe("티켓생성, 출력 확인", () => {
   let tickets = [];
+  const ticket = 1;
   test("티켓 생성 테스트", () => {
-    const ticket = 6;
-    let ticket_arr = [];
     for (let i = 0; i < ticket; i++) {
-      ticket_arr = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-        (a, b) => a - b
-      );
-      tickets.push(new Lotto(ticket_arr));
+      tickets.push(new Lotto());
     }
+    // console.log(tickets);
   });
 
-  test("티켓 출력 테스트", () => {
-    const combinedString = tickets
-      .map((ticket) => "[" + ticket.get_numbers() + "]")
-      .join("\n");
-    MissionUtils.Console.print(combinedString);
+  // test("티켓 출력 테스트", () => {
+  //   const combinedString = tickets
+  //     .map((ticket) => "[" + ticket.get_numbers() + "]")
+  //     .join("\n");
+  //   // MissionUtils.Console.print(combinedString);
+  // });
+
+  test("티켓 생성&출력 테스트", () => {
+    const ticket = 3;
+    console.log("랜덤티켓생성");
+    const tickets = produce_ticket(ticket);
+    console.log(tickets);
+    // tickets.forEach((ticket) => console.log(ticket.get_numbers()));
   });
+
+  function produce_ticket(ticket) {
+    let tickets = [];
+    for (let i = 0; i < ticket; i++) {
+      tickets.push(new Lotto());
+    }
+    return tickets;
+  }
 });
 
 describe("티켓 결과 확인", () => {
@@ -80,7 +93,6 @@ describe("티켓 결과 확인", () => {
       ...winning_number.get_numbers(),
       ...t_ticket.get_numbers(),
     ]);
-    console.log(new_set);
     let result = "꽝";
     if (new_set.size == 6) {
       result = "1등";
@@ -98,6 +110,10 @@ describe("티켓 결과 확인", () => {
     if (new_set.size == 9) {
       result = "5등";
     } //3개번호일치
-    console.log(result);
+    // console.log(result);
+  });
+  test("Lotto확인", () => {
+    const test_lotto = new Lotto([1, 2, 10, 9, 7, 8]);
+    // console.log(test_lotto.get_price(winning_number, bonus_number));
   });
 });
