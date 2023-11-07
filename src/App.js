@@ -1,9 +1,9 @@
-import controller from "./controller/controller";
+import Controller from "./controller/controller";
 
 class App {
 
   async play() {
-    const game = new controller();
+    const game = new Controller();
     await game.play();
   }
 }

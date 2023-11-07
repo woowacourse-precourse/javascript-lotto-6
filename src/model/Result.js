@@ -2,7 +2,6 @@ import { print } from "../view/print";
 import { MESSAGE } from "../constant/MESSAGE";
 
 export default class Result {
-
   #winPrice;
   #ranking;
   #winning;
@@ -17,14 +16,13 @@ export default class Result {
 
   async printResult(money) {
     await this.addPrice();
-    console.log("w", this.#winPrice, "  ", money);
     print(MESSAGE.WINNING_STATICS);
     print(`3개 일치 (5,000원) - ${this.#ranking[0]}개`);
     print(`4개 일치 (50,000원) - ${this.#ranking[1]}개`);
     print(`5개 일치 (1,500,000원) - ${this.#ranking[2]}개`);
     print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#ranking[3]}개`);
-    print(`6개 일치 (2,000,000,000원)) - ${this.#ranking[4]}개`);
-    print(`${MESSAGE.TOTAL_RATE_OF_RETURN} ${(this.#winPrice / money).toPrecision(3)*100}%입니다.`);
+    print(`6개 일치 (2,000,000,000원) - ${this.#ranking[4]}개`,);
+    print(`${MESSAGE.TOTAL_RATE_OF_RETURN}${(this.#winPrice / money).toPrecision(3)*100}%입니다.`); 
   }
 
   // 정답 수 확인

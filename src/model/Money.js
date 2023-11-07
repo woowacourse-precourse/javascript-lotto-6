@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from "../constant/ERROR_MESSAGE";
-import { LOTTO_SETTINGS } from "../constant/LOTTO_SETTINGS";
+import { ERROR_MESSAGE } from '../constant/ERROR_MESSAGE';
+import { LOTTO_SETTINGS } from '../constant/LOTTO_SETTINGS';
 
 export default class Money {
 	#money;
@@ -11,7 +11,7 @@ export default class Money {
 	}
 
   #validateIsNumber(money) {
-    if (isNaN(money)) throw new Error('[ERROR] 숫자여야 합니다.');
+    if (isNaN(money)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
   }
 
   #validateIsDivided(money) {

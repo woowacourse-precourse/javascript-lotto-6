@@ -1,6 +1,6 @@
-import Lotto from "./Lotto";
-import { LOTTO_SETTINGS } from "../constant/LOTTO_SETTINGS";
-import { ERROR_MESSAGE } from "../constant/ERROR_MESSAGE";
+import Lotto from './Lotto';
+import { LOTTO_SETTINGS } from '../constant/LOTTO_SETTINGS';
+import { ERROR_MESSAGE } from '../constant/ERROR_MESSAGE';
 
 export default class LottoAnswer extends Lotto {
 	#bonusNumber;
@@ -14,7 +14,7 @@ export default class LottoAnswer extends Lotto {
 		if (
 			LOTTO_SETTINGS.LOTTO_MIN_NUMBER > bonusNumber ||
       bonusNumber > LOTTO_SETTINGS.LOTTO_MAX_NUMBER
-			) throw new Error("[ERROR] 범위에러");
+			) throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
 	}
 
 	#validateDuplicateBonusNumber(bonusNumber) {
