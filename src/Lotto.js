@@ -3,13 +3,13 @@ import { Console } from '@woowacourse/mission-utils';
 class Lotto {
   #numbers;
 
-  #isBonus;
+  #isWonBonus;
 
   #numOfCorrect;
 
   constructor(numbers) {
     Lotto.#printLottoNumber(numbers);
-    Lotto.#validate(numbers);
+    Lotto.#validateNumbers(numbers);
     this.#numbers = numbers;
     this.#numOfCorrect = 0;
     this.#isBonus = false;
@@ -49,7 +49,7 @@ class Lotto {
     Console.print(`[${numbers.join(', ')}]`);
   }
 
-  static #validate(numbers) {
+  static #validateNumbers(numbers) {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
