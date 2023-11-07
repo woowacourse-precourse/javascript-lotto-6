@@ -1,5 +1,8 @@
 import LottoGame from '../domain/LottoGame.js'
 import LottoGameView from '../view/LottoGameView.js'
+import LottoGameValidator from '../validation/LottoGameValidator.js'
+
+const Validator = LottoGameValidator;
 
 class LottoGameController {
 
@@ -24,11 +27,8 @@ class LottoGameController {
 	/** 구입 금액을 입력 받는 로직을 담당한다. */
 	async #handleInputPurchaseAmount() {
 		let purchaseAmount = await this.#view.inputPurchaseAmount();
-		// TODO: 유효성검사
+		Validator.validatePurchaseAmount(purchaseAmount);
 		// TODO: 도메인에 전달
-		
-		// TEST:
-		console.log(`구입금액 : ${purchaseAmount}`); 
 	}
 
 	/** 티켓의 발행 로직을 담당한다. */
