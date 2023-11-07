@@ -3,7 +3,9 @@ export const USER_INPUT = Object.freeze({
 });
 
 export const MESSAGE = Object.freeze({
-  LOTTO_TICKET: '개를 구매했습니다.'
+  LOTTO_TICKET: (length) => `${length}개를 구매했습니다.`,
+  LOTTO_RESULT: '당첨 통계\n---',
+  LOTTO_RATE: (rate) => `총 수익률은 ${rate}%입니다.`
 });
 
 export const ERROR_MESSAGE = Object.freeze({

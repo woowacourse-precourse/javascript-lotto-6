@@ -4,8 +4,7 @@ import {
   ERROR_MESSAGE,
   PRICE_UNIT,
   PRICE_ZERO,
-  LOTTO_MONEY,
-  LOTTO_RESULT
+  LOTTO_MONEY
 } from "./constants/constants.js";
 import OutputView from "./view/outputView.js";
 import Lotto from "./Lotto.js";
@@ -24,7 +23,6 @@ class App {
   constructor() {
     this.lottoPrice = 0;
     this.lottoTickets = [];
-    this.targetNumber = new TargetNumber;
     this.result = {
       FIFTH: 0,
       FOURTH: 0,
@@ -43,12 +41,12 @@ class App {
     this.setLottoNumbers();
     OutputView.showLottoNumbers(this.lottoTickets);
 
+    this.targetNumber = new TargetNumber;
     while(this.targetNumber.getTargetNumber().length === 0){
       await this.targetNumber.setTargetNumber();
     };
 
     this.bonusNumber = new BonusNumber(this.targetNumber.getTargetNumber());
-    
     while(this.bonusNumber.getBonusNumber() === 0){
       await this.bonusNumber.setBonusNumber();
     };

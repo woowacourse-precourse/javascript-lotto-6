@@ -14,7 +14,7 @@ class OutputView {
   }
   
   static showLottoNumbers (lottoTickets) {
-    Console.print(lottoTickets.length + MESSAGE.LOTTO_TICKET);
+    Console.print(MESSAGE.LOTTO_TICKET(lottoTickets.length));
 
     lottoTickets.forEach((lotto) => {
       Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
@@ -22,7 +22,7 @@ class OutputView {
   };
   
   static showLottoResult(result) {
-    Console.print('당첨 통계\n---');
+    Console.print(MESSAGE.LOTTO_RESULT);
     
     for (const KEY in result) {
       Console.print(`${LOTTO_RESULT[KEY]} - ${result[KEY]}개`);
@@ -31,7 +31,7 @@ class OutputView {
   
   static showRate(profits, lottoPrice) {
     const rate = ((profits/lottoPrice) * 100).toFixed(1);
-    Console.print(`총 수익률은 ${rate}%입니다.`);
+    Console.print(MESSAGE.LOTTO_RATE(rate));
   };
 }
 
