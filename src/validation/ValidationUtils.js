@@ -30,7 +30,7 @@ class ValidationUtils {
     }
   }
   static isLottoLength(input) {
-    if(input<6) {
+    if(input!==6) {
       throw new Error('[ERROR] 로또 번호는 6자리여야 합니다.');
     }
   }
