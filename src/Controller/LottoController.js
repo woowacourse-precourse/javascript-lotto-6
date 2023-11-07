@@ -24,6 +24,7 @@ class LottoController {
     validateBonusNumber(bonusNumber, goalLotto.getNumbers());
     const correctArray = goalLotto.calculateCorrectNumber(lottoArray, bonusNumber);
     const resultArray = this.#calculateResult(correctArray);
+    const rateOfReturn = this.#calculateRateOfReturn(resultArray, purchaseAmount);
   }
 
   #getCountOfLotto(purchaseAmount) {
@@ -59,6 +60,17 @@ class LottoController {
       else if (correctCount === 6) result[4] += 1;
     });
     return result;
+  }
+
+  #calculateRateOfReturn(resultArray, purchaseAmount) {
+    return (
+      (resultArray[0] * Constant[5] +
+        resultArray[1] * Constant[4] +
+        resultArray[2] * Constant[3] +
+        resultArray[3] * Constant[2] +
+        resultArray[4] * Constant[1]) /
+      purchaseAmount
+    );
   }
 }
 
