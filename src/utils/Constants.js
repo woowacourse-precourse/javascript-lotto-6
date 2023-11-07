@@ -11,6 +11,7 @@ class Constants {
       lottoNumberMin: 1,
       lottoPrice: 1000,
       lottoPriceUnit: 1000,
+      lottoPriceMax: 100000,
       prize: {
         3: 5000,
         4: 50000,
@@ -35,6 +36,10 @@ class Constants {
 
   getLottoPrice() {
     return this.#constants.lottoPrice;
+  }
+
+  getLottoPriceMax() {
+    return this.#constants.lottoPriceMax;
   }
 
   getLottoPriceUnit() {

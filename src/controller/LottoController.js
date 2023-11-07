@@ -7,6 +7,7 @@ import UserInput from "../model/UserInput.js";
 import Output from "../view/Output.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import BonusLotto from "../model/BonusLotto.js";
+import Statistics from "../model/Statistics.js";
 
 class LottoController {
   async run() {
@@ -52,10 +53,21 @@ class LottoController {
       }
     }
 
+    const result = await this.#getResult(lotto, bonusLotto, money, output);
+    await this.#runStatistics(money, result, output);
+  }
+
+  async #runStatistics(money, result, output) {
+    const statistics = new Statistics(money);
+    const statisticsResult = await statistics.getRate(result);
+    output.printProfitRate(statisticsResult);
+  }
+
+  async #getResult(lotto, bonusLotto, money, output) {
     const lottoLogic = new LottoLogic(lotto, bonusLotto, money);
     const result = await lottoLogic.start();
     output.printResult(result);
-    console.log(result);
+    return result;
   }
 }
 

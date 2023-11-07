@@ -34,6 +34,9 @@ class Money {
     if (money % this.#constants.getLottoPriceUnit() !== 0) {
       throw new Error(messages.getErrorMsg("divide"));
     }
+    if (money > this.#constants.getLottoPriceMax()) {
+      throw new Error(messages.getErrorMsg("max"));
+    }
   }
 }
 

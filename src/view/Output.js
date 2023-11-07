@@ -20,6 +20,10 @@ class Output {
     MissionUtils.Console.print(this.#messages.getBonusMsg(bonus));
   }
 
+  async printProfitRate(profitRate) {
+    MissionUtils.Console.print(this.#messages.getRateOfReturnMsg(profitRate));
+  }
+
   async printError(e) {
     MissionUtils.Console.print(e.message);
   }

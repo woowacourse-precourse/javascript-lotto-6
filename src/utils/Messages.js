@@ -21,6 +21,7 @@ class Messages {
     notLength: `[ERROR] 로또 번호는 ${this.#constants.getLottoNumberCount()}개여야 합니다.`,
     notNumberMoney: "[ERROR] 로또 구입 금액은 숫자여야 합니다.",
     negative: "[ERROR] 로또 구입 금액은 음수가 될 수 없습니다.",
+    max: `[ERROR] 로또 구입 금액은 최대 ${this.#constants.getLottoPriceMax()}원까지 가능합니다.`,
   };
 
   #outputMsg = {

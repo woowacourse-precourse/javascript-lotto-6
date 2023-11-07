@@ -10,6 +10,7 @@ class LottoLogic {
   #lotto; // 당첨번호
   #bonusLotto; // 보너스번호
   #money; // 구매한 로또 금액
+  #generatedLottos;
 
   constructor(lotto, bonusLotto, money) {
     this.#lotto = lotto;
@@ -28,6 +29,7 @@ class LottoLogic {
     };
     const count = await this.#money.getCount();
     const generatedLottos = await this.#generateLottos(count);
+    this.#generatedLottos = generatedLottos;
     const lotto = this.#lotto;
     const bonusNum = await this.#bonusLotto.getNumber();
 
