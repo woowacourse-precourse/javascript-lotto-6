@@ -2,6 +2,7 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import { checkValue } from './libs/checkValue';
 import { AMOUNT, LOTTO, PLACE, PRIZE, WINNING_DETAIL } from './libs/constants';
 import Lotto from './Lotto';
+import { throwError } from './libs/throwError';
 
 class Lottos {
   constructor(purchaseAmount) {
@@ -46,7 +47,7 @@ class Lottos {
 
   //구매한 로또 번호 목록 출력
   printTickets() {
-    // Console.print(this.list);
+    Console.print(this.lists);
     this.lists.forEach(list => {
       list.printNumbers();
     });

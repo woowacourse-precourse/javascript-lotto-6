@@ -1,5 +1,4 @@
-import { Random, Console } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
+import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from './libs/constants';
 import Lottos from './Lottos';
 import WinningNumbers from './WinningNumbers';
@@ -12,35 +11,45 @@ class App {
     this.bonusNumber = null;
   }
 
-  async play() {}
-
-  inputAmount() {
-    Console.readLineAsync(MESSAGE.INPUT_AMOUNT, amount => {
-      this.lottos = new Lottos(amount);
-      this.lottos.printTicketCount();
-      this.lottos.printTickets();
-
-      this.inputWinningNumbers;
-    });
+  async play() {
+    await this.inputAmount();
   }
 
-  inputWinningNumbers() {
-    Console.readLineAsync(MESSAGE.INPUT_WINNGING_NUMBERS, winningNumbers => {
-      winningNumbers = winningNumbers.split(',').map(number => Number(number));
-      this.winningNumbers = new WinningNumbers(winningNumbers);
-    });
+  async inputAmount() {
+    const purchaseAmount = await Console.readLineAsync(MESSAGE.INPUT_AMOUNT);
+    // Console.print(purchaseAmount);
+    this.lottos = new Lottos(purchaseAmount);
+    this.lottos.printTicketCount();
+    this.lottos.printTickets();
 
-    this.inputBounsNumber;
+    await this.inputWinningNumbers;
   }
 
-  inputBounsNumber() {
-    Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER, bonusNumber => {
-      bonusNumber = Number(bonusNumber);
-      this.bonusNumber = new BonusNumber(
-        bonusNumber,
-        this.winningNumbers.value,
-      );
-    });
+  async inputWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(
+      MESSAGE.INPUT_WINNGING_NUMBERS,
+    );
+    winningNumbers = winningNumbers.split(',').map(number => Number(number));
+    this.winningNumbers = new WinningNumbers(winningNumbers);
+    // Console.readLineAsync(MESSAGE.INPUT_WINNGING_NUMBERS, winningNumbers => {
+    //   winningNumbers = winningNumbers.split(',').map(number => Number(number));
+    //   this.winningNumbers = new WinningNumbers(winningNumbers);
+    // });
+
+    await this.inputBounsNumber;
+  }
+
+  async inputBounsNumber() {
+    const bonusNumber = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
+    bonusNumber = Number(bonusNumber);
+    this.bonusNumber = new BonusNumber(bonusNumber, this.winningNumbers.value);
+    // Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER, bonusNumber => {
+    //   bonusNumber = Number(bonusNumber);
+    //   this.bonusNumber = new BonusNumber(
+    //     bonusNumber,
+    //     this.winningNumbers.value,
+    //   );
+    // });
 
     this.printWinningStats();
   }
@@ -52,6 +61,9 @@ class App {
       this.winningNumbers.value,
       this.bonusNumber.value,
     );
+
+    this.lottos.printWinningDetails(lottoRanks);
+    this.lottos.printRate(lottoRanks);
   }
 }
 
