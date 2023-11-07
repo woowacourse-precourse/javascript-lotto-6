@@ -1,3 +1,4 @@
+import Bonus from '../Bonus.js';
 import Lotto from '../Lotto.js';
 import { LOTTO } from '../constants/System.js';
 import LottoModel from '../model/index.js';
@@ -37,7 +38,7 @@ class LottoController {
 
   async #drawLotto() {
     const winningNumbers = await this.#getWinningNumbers();
-    const bonusNumber = await this.#getBonusNumber();
+    const bonusNumber = await this.#getBonusNumber(winningNumbers);
 
     return { winningNumbers, bonusNumber };
   }
@@ -56,15 +57,15 @@ class LottoController {
     }
   }
 
-  async #getBonusNumber() {
+  async #getBonusNumber(winningNumbers) {
     try {
       const bonusNumber = await InputView.readBonusNumber();
 
-      return bonusNumber;
+      return Bonus.of(bonusNumber, winningNumbers);
     } catch (error) {
       OutputView.print(error.message);
 
-      const bonusNumber = this.#getBonusNumber();
+      const bonusNumber = this.#getBonusNumber(winningNumbers);
 
       return bonusNumber;
     }

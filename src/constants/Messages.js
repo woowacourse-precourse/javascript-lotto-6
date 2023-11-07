@@ -22,6 +22,7 @@ export const ERROR_MESSAGE = {
   integer: '정수만 입력이 가능합니다.\n',
   duplication: '중복되는 숫자는 입력하실 수 없습니다.\n',
   count: '로또 번호는 6개여야 합니다.\n',
+  winningDuplication: '당첨번호와 중복되는 숫자가 있습니다.\n',
 };
 
 export const ERROR_MESSAGE_FUNCTION = {

@@ -41,6 +41,10 @@ class Lotto {
       handleValidationError(ERROR_MESSAGE_FUNCTION.validScope());
     }
   }
+
+  isDuplicatedWinningNumbers(bonusNumber) {
+    return this.#numbers.includes(Number(bonusNumber));
+  }
 }
 
 export default Lotto;
