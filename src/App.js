@@ -1,8 +1,8 @@
 import { INPUT } from './constant/index.js';
 import InputView from './View/InputView.js';
 import Lotto from './Lotto.js';
+import LottoResultCalculator from './LottoResultCalculator.js';
 import LottoShop from './LottoShop.js';
-import LottoWinnerVerifier from './LottoWinnerVerifier.js';
 import OutputView from './View/OutputView.js';
 import ReturnRateCalculator from './ReturnRateCalculator.js';
 import Validator from './validator/Validator.js';
@@ -82,8 +82,8 @@ class App {
   }
 
   static getLottoOutcome({ winningNumbers, lottos }) {
-    const verifier = new LottoWinnerVerifier(winningNumbers);
-    return verifier.checkLottoOutcome(lottos);
+    const verifier = new LottoResultCalculator(winningNumbers);
+    return verifier.checkLottoResult(lottos);
   }
 }
 
