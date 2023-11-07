@@ -3,6 +3,11 @@ const NUMBERS = {
   LOTTO_PRICE: 1000,
   LOTTO_LOW_END: 1,
   LOTTO_HIGH_END: 45,
+  FIRST_REWARD: 2_000_000_000,
+  SECOND_REWARD: 30_000_000,
+  THIRD_REWARD: 1_500_000,
+  FOURTH_REWARD: 50_000,
+  FIFTH_REWARD: 5_000,
 };
 
 const ERRORS = {
@@ -30,10 +35,20 @@ const MESSAGES = {
   INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
 };
 
+const PLACE = {
+  FIRST: 'first',
+  SECOND: 'second',
+  THIRD: 'third',
+  FOURTH: 'fourth',
+  FIFTH: 'fifth',
+  SIXTH: 'sixth',
+};
+
 const CONSTANTS = {
   ERRORS,
   MESSAGES,
   NUMBERS,
+  PLACE,
 };
 
 export default CONSTANTS;

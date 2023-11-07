@@ -15,6 +15,10 @@ class App {
     const bonusNumber = await this.#inputBonusNumber(
       winningNumbers.getValues(),
     );
+
+    const result = this.#calculateResult(lottos, winningNumbers, bonusNumber);
+
+    this.#printResult(result);
   }
 
   async #buyLottos() {
@@ -43,6 +47,45 @@ class App {
     );
 
     return new Lotto(values);
+  }
+
+  /**
+   * @param {Lotto[]} lottos
+   * @param {WinningNumbers} winningNumbers
+   * @param {BonusNumber} bonusNumber
+   */
+  #calculateResult(lottos, winningNumbers, bonusNumber) {
+    const lottoResults = lottos.map(lotto =>
+      lotto.checkResult(winningNumbers, bonusNumber),
+    );
+
+    const finalResult = [0, 0, 0, 0, 0, 0];
+    lottoResults.forEach(value => finalResult[value]++);
+
+    return finalResult;
+  }
+
+  /**
+   * @param {number[]} result
+   */
+  #printResult(result) {
+    this.#printStatistics(result);
+  }
+
+  /**
+   * @param {number[]} result
+   */
+  #printStatistics(result) {
+    const numbers = CONSTANTS.NUMBERS;
+
+    Console.print('당첨 통계\n---');
+    Console.print(`3개 일치 (${numbers.FIFTH_REWARD}원) - ${result[5]}개`);
+    Console.print(`4개 일치 (${numbers.FOURTH_REWARD}원) - ${result[4]}개`);
+    Console.print(`5개 일치 (${numbers.THIRD_REWARD}) - ${result[3]}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${numbers.SECOND_REWARD}) - ${result[2]}개`,
+    );
+    Console.print(`6개 일치 (${numbers.FIRST_REWARD}) - ${result[1]}개`);
   }
 
   async #inputPurchaseAmount() {
