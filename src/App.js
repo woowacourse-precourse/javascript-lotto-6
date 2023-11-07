@@ -3,12 +3,12 @@ import Lotto from "./Lotto";
 class App {
     async play() {
         Console.print("구입금액을 입력해 주세요.");
-
         const purchaseAmount = await this.getPurchaseAmount();
         Console.print(purchaseAmount);
         const lottoArr = this.lottoVendingMachine(purchaseAmount);
         Console.print(this.renderLottoTickets(lottoArr));
         Console.print("당첨번호를 입력해주세요.");
+        Console.print(await this.getWinningNumber());
     }
 
     async getPurchaseAmount() {
@@ -57,6 +57,18 @@ class App {
         return lottoText;
     }
 
+    async getWinningNumber() {
+        const winningNumber = await Console.readLineAsync()
+            .then((value) => {
+                this.isValidWinningNumber(value);
+                return value;
+            })
+            .catch((err) => {
+                return this.getWinningNumber();
+            });
+        return winningNumber;
+    }
+
     isValidWinningNumber(input) {
         const inputArr = input.split(",");
         if (inputArr.length !== 6) {
@@ -69,6 +81,7 @@ class App {
             throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
         }
     }
+    
 }
 
 export default App;
