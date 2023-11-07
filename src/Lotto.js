@@ -12,6 +12,8 @@ class Lotto {
     }
     if (numbers.some((number) => isNaN(number)))
       throw new Error(NOT_NUMBER_ERROR_MESSAGE);
+    if (numbers.some((number) => number < ONE || number > FORTYFIVE))
+      throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
   }
 
   // TODO: 추가 기능 구현
