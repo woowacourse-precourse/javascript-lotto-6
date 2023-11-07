@@ -14,7 +14,9 @@ class Lotto {
     if (!numbers.every((number) => number >= 1 && number <= 45)) throw new Error(ERROR.outOfNumberRange);
   }
 
-  // TODO: 추가 기능 구현
+  getLottoNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
