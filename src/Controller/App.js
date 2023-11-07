@@ -20,6 +20,7 @@ class App {
     const view = new LottoView();
     const purchaseData = view.createPurchaseData(numberOfSets, lottoNumbers);
     const lottoResult = view.createLottoResult(statistics);
+
     const result = `${purchaseData}\n${lottoResult}`;
 
     view.displayResult(result);
