@@ -8,7 +8,7 @@ const LENGTH = LOTTO_RULE.LENGTH;
 const MIN = LOTTO_RULE.RANGE.MIN;
 const MAX = LOTTO_RULE.RANGE.MAX;
 
-export class LottoDrawMachine {
+export class Calculator {
   #winningNumbers;
   #bonusNumber;
 
@@ -32,16 +32,11 @@ export class LottoDrawMachine {
     OutputView.print(this.#bonusNumber);
   }
 
-  printResult(lottos) {
-    const boughtAmount = lottos.length * LOTTO_RULE.PRICE;
+  getWinningsResult(lottos) {
     const lottoWinnings = this.#calculateLottoWinnings(lottos);
+    const boughtAmount = lottos.length * LOTTO_RULE.PRICE;
     const totalReturn = this.#calculateTotalReturn(lottoWinnings, boughtAmount);
-
-    OutputView.print(MESSAGES.WINNING_STATISTICS.PREFIX);
-    lottoWinnings.forEach((lottoWinning, i) => {
-      OutputView.print(MESSAGES.WINNING_STATISTICS[5 - i](lottoWinning));
-    });
-    OutputView.print(MESSAGES.WINNING_STATISTICS.SUFFIX(totalReturn));
+    return { lottoWinnings, totalReturn };
   }
 
   #formatWinningNumber(str) {
