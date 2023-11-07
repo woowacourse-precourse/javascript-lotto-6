@@ -68,6 +68,21 @@ class App {
     }
   }
 
+  calculateMatchedByRank(rank) {
+    if (rank === 1) {
+      return 6;
+    }
+    if (rank <= 3) {
+      return 5;
+    }
+    if (rank === 4) {
+      return 4;
+    }
+    if (rank === 5) {
+      return 3;
+    }
+  }
+
   setRankAndPrize(matched, matchedBonus) {
     if (matched < 3) return;
 
@@ -86,7 +101,7 @@ class App {
 
   printRankedLotto(rank, prize, count) {
     const formattedPrize = new Intl.NumberFormat().format(prize);
-    const matched = rank > 2 ? 8 - rank : 7 - rank;
+    const matched = this.calculateMatchedByRank(rank);
 
     if (rank === 2) {
       Console.print(
