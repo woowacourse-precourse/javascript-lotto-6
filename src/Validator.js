@@ -18,9 +18,9 @@ class Validator {
   }
 
   validateUserInputWinningNumbers(userInputWinningNumbers) {
-    const UNIQUE_ELEMENT = new Set(userInputWinningNumbers);
+    const UNIQUE_NUMBER_SET = new Set(userInputWinningNumbers);
 
-    if (UNIQUE_ELEMENT.size !== userInputWinningNumbers.length) {
+    if (UNIQUE_NUMBER_SET.size !== userInputWinningNumbers.length) {
       throw new Error(ERROR_MESSAGE.numDuplicated);
     }
 
@@ -30,10 +30,10 @@ class Validator {
 
     userInputWinningNumbers.forEach((number) => {
       if (Number.isNaN(number)) {
-        throw new Error(ERROR_MESSAGE.isNotNumberForArr);
+        throw new Error(ERROR_MESSAGE.isNotNumberForWinningNum);
       }
 
-      if (number < 0 || number > 45) {
+      if (number <= 0 || number > 45) {
         throw new Error(ERROR_MESSAGE.isNotInRange);
       }
     });

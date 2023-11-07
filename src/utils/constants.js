@@ -31,7 +31,7 @@ export const ERROR_MESSAGE = Object.freeze({
   isNotNumber: '[ERROR] 숫자를 입력해 주세요.',
   inValidMoneyAmount: '[ERROR] 구매금액은 1000원 단위로 입력해야 합니다.',
   negativeNumber: '[ERROR] 금액은 양수여야 합니다.',
-  isNotNumberForArr: '[ERROR] 모든 수는 숫자여야 합니다.',
+  isNotNumberForWinningNum: '[ERROR] 모든 수는 숫자여야 합니다.',
   isNotInRange: '[ERROR] 숫자는 1~45까지의 숫자여야 합니다.',
   isNotSixDigit: '[ERROR] 총 6개의 숫자를 입력해야 합니다.',
   numDuplicated: '[ERROR] 중복된 숫자가 있습니다.',
