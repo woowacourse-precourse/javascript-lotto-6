@@ -19,7 +19,7 @@ const message = Object.freeze({
    */
   invalidNumberLimit: '로또 번호는 6개여야 합니다.',
   duplicateNumber: '중복된 숫자가 있습니다. 6개의 서로 다른 숫자를 입력해주세요.',
-  noZero: '0은 허용되지 않습니다.',
+  noZero: '앞자리에 0은 허용되지 않습니다. (예. 01, 02 등)',
 
   /**
    * 보너스 번호 입력 bonusNumber
