@@ -13,7 +13,15 @@ const view = {
     return userInput;
   },
 
-  async readWinningNumbers() {},
+  async readWinningNumbers() {
+    const userInput = await Console.readLineAsync(
+      MESSAGES.INPUT_REQUEST.WINNING_NUMBERS,
+    );
+
+    validation.isValidInputWinningNumbers(userInput);
+
+    return userInput.split(',');
+  },
 
   async readBonusNumber() {},
 };

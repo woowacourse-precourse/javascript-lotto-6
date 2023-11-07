@@ -1,5 +1,7 @@
+/* eslint-disable max-lines-per-function */
 import CONSTANTS from '../constants/Constants.js';
 import ERROR from '../constants/Error.js';
+import REGEXP from '../constants/RegExp.js';
 import messageFormat from './messageFormat.js';
 
 const isDuplicate = arr => {
@@ -7,15 +9,21 @@ const isDuplicate = arr => {
 };
 
 const validation = {
-  isValidInputPurchaseAmount(purchaseAmount) {
-    if (!purchaseAmount) {
+  isEmptyValue(inputValue) {
+    if (!inputValue) {
       throw new Error(messageFormat.error(ERROR.EMPTY_INPUT));
     }
-    if (!purchaseAmount.match(/^\d+$/)) {
+  },
+
+  isValidInputPurchaseAmount(purchaseAmount) {
+    this.isEmptyValue(purchaseAmount);
+
+    if (!purchaseAmount.match(REGEXP.PURCHASE_AMOUNT.FORMAT_CHECK)) {
       throw new Error(
         messageFormat.error(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_FORMAT),
       );
     }
+
     if (
       purchaseAmount < CONSTANTS.MIN_PURCHASE_AMOUNT ||
       purchaseAmount > CONSTANTS.MAX_PURCHASE_AMOUNT
@@ -24,16 +32,53 @@ const validation = {
         messageFormat.error(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_PRICE_RANGE),
       );
     }
-    if (!Number.isInteger(Number(purchaseAmount) / 1000)) {
+
+    if (!Number.isInteger(Number(purchaseAmount) / CONSTANTS.PRICE_UNIT)) {
       throw new Error(
         messageFormat.error(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_PRICE_UNIT),
       );
     }
   },
 
-  isValidInputWinningNumbers(winningNumbers) {},
+  isValidInputWinningNumbers(winningNumbers) {
+    this.isEmptyValue(winningNumbers);
 
-  isValidInputBonusNumber(bonusNumber) {},
+    if (!winningNumbers.match(REGEXP.WINNING_NUMBER.CHARACTER_CHECK)) {
+      throw new Error(
+        messageFormat.error(ERROR.INPUT_WINNING_NUMBERS.INVALID_CHARACTER),
+      );
+    }
+
+    if (!winningNumbers.match(REGEXP.WINNING_NUMBER.FORMAT_CHECK)) {
+      throw new Error(
+        messageFormat.error(ERROR.INPUT_WINNING_NUMBERS.INVALID_FORMAT),
+      );
+    }
+
+    const winningNumberList = winningNumbers.split(',');
+
+    if (winningNumberList.length !== 6) {
+      throw new Error(
+        messageFormat.error(ERROR.INPUT_WINNING_NUMBERS.INVALID_LENGTH),
+      );
+    }
+
+    if (winningNumberList.some(item => item < 1 || item > 45)) {
+      throw new Error(
+        messageFormat.error(ERROR.INPUT_WINNING_NUMBERS.INVALID_NUMBER_RANGE),
+      );
+    }
+
+    if (isDuplicate(winningNumberList)) {
+      throw new Error(
+        messageFormat.error(ERROR.INPUT_WINNING_NUMBERS.DUPLICATE_VALUE),
+      );
+    }
+  },
+
+  isValidInputBonusNumber(bonusNumber) {
+    this.isEmptyValue(bonusNumber);
+  },
 };
 
 export default validation;
