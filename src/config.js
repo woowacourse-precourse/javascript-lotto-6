@@ -4,6 +4,7 @@ export const LOTTO = {
     START: 1,
     END: 45,
   },
+  COUNT: 6,
 };
 
 export const ERROR = Object.freeze({

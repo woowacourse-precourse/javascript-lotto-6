@@ -1,4 +1,14 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
+import { LOTTO } from './config.js';
+
 class Lotto {
+  static generateLottoNumbers() {
+    const { RANGE, COUNT } = LOTTO;
+    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(RANGE.START, RANGE.END, COUNT);
+
+    return lottoNumbers;
+  }
+
   #numbers;
 
   constructor(numbers) {
@@ -8,7 +18,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
   }
 
