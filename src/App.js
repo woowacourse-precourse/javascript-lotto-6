@@ -3,8 +3,6 @@ import Lotto from './Lotto.js';
 import { Console, Random } from '@woowacourse/mission-utils';
 
 class App {
-
-
   async play() {
     const count = await inputAmount() / 1000;
     publishLotto(count);
