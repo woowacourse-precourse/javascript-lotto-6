@@ -21,8 +21,8 @@ class App {
   async play() {
     const purchaseAmount = await this.getPurchaseAmount();
     const numberOfLottos = this.getNumberOfLottos(purchaseAmount);
-    this.createLottos(numberOfLottos);
-    this.outputManager.printPurchasedLottosInfo(this.lottos);
+    await this.createLottos(numberOfLottos);
+    await this.outputManager.printPurchasedLottosInfo(this.lottos);
   }
 
   async getPurchaseAmount() {

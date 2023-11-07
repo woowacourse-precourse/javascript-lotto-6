@@ -9,6 +9,9 @@ export const PURCHASE_AMOUNT_ERROR_MESSAGES = Object.freeze({
   NOT_DIVISIBLE_BY_THOUSAND: `[ERROR] 1,000원으로 나누어 떨어지지 않는 구입 금액입니다.`,
 });
 
+export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>
+  `\n${numberOfLottos}개를 구매했습니다.`;
+
 export const LOTTO_PRICE = 1000;
 export const LOTTO_MIN_NUMBER = 1;
 export const LOTTO_MAX_NUMBER = 45;
