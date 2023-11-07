@@ -3,7 +3,7 @@ import Lotto from './Lotto.js';
 import LottoError from './error/LottoError.js';
 
 class GuessLotto {
-  #winningNumbers = [];
+  #winningNumber = [];
 
   #guessBonus = null;
 
@@ -11,12 +11,12 @@ class GuessLotto {
 
   #guessNumbers = [];
 
-  getWinningNumbers() {
-    return this.#winningNumbers;
+  getWinningNumber() {
+    return this.#winningNumber;
   }
 
-  setWinningNumbers(numbers) {
-    this.#winningNumbers = numbers;
+  setWinningNumber(numbers) {
+    this.#winningNumber = numbers;
   }
 
   getGuessBonus() {
@@ -45,13 +45,13 @@ class GuessLotto {
 
   async inputLottoNumber() {
     try {
-      const personalLottoNumber =
+      const lottoNum =
         await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
 
-      this.#winningNumbers = personalLottoNumber.split(',');
-      const lotto = new Lotto(this.#winningNumbers);
+      this.#winningNumber = lottoNum.split(',');
+      const lotto = new Lotto(this.#winningNumber);
 
-      return this.#winningNumbers;
+      return this.#winningNumber;
     } catch (error) {
       Console.print(error.message);
       return this.inputLottoNumber();
@@ -76,7 +76,7 @@ class GuessLotto {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
 
-    if (this.#winningNumbers.includes(number) || !Number.isInteger(+number)) {
+    if (this.#winningNumber.includes(number) || !Number.isInteger(+number)) {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
   }
