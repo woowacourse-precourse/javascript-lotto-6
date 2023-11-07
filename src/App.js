@@ -15,7 +15,7 @@ class App {
     const lottoList = new LottoList(lottoCnt);
 
     const winningNumberStr = await MissionUtils.Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.'
+      '당첨 번호를 입력해 주세요.\n'
     );
     const winningLottoArr = getWinningLottoArray(winningNumberStr);
   }

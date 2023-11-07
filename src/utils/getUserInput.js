@@ -1,4 +1,4 @@
-import Lotto from '../repository/Lotto';
+import Lotto from '../repository/Lotto.js';
 
 export const checkValueIsNumber = (value) => {
   if (isNaN(Number(value))) {
@@ -12,6 +12,14 @@ export const checkValueIsInteger = (value) => {
     return true;
   }
   return false;
+};
+
+export const checkValueIsDuplicate = (value) => {
+  const isDuplicated = value.some(
+    (item) => value.indexOf(item) !== value.lastIndexOf(item)
+  );
+
+  return isDuplicated;
 };
 
 export const getLottoCntFromInputMoney = (inputMoney) => {
