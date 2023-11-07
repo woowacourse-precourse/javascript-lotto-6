@@ -1,5 +1,5 @@
-import InputPrintout from "./utils/InputPrintout.js";
-import OutputPrintout from "./utils/OutputPrintout.js";
+import InputPrintout from "./view/InputPrintout.js";
+import OutputPrintout from "./view/OutputPrintout.js";
 
 class App {
 	async play() {

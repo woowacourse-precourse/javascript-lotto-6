@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
-import { PRINT_INPUT } from "./Constant.js";
-import { isVaildAmount, isVaildBonusNum } from "./checkValidation.js";
-import Lotto from "../Lotto.js";
+import { PRINT_INPUT } from "../utils/Constant.js";
+import { isVaildAmount, isVaildBonusNum } from "../utils/checkValidation.js";
+import Lotto from "../model/Lotto.js";
 
 const InputPrintout = {
 	inputAmount: async () => {
