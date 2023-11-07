@@ -1,6 +1,7 @@
 import {
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
+  LOTTO_NUMBERS_LENGTH,
   LOTTO_PRICE,
   PURCHASE_AMOUNT_ERROR_MESSAGES,
   WINNING_NUMBERS_ERROR_MESSAGES,
@@ -23,15 +24,16 @@ export const validatePurchaseAmountInput = async (purchaseAmountInput) => {
 
 export const validateWinnerNumbersInput = async (winningNumbersInput) => {
   if (!isValidWinningNumbersLength(winningNumbersInput)) {
-    throw new Error(
-      WINNING_NUMBERS_ERROR_MESSAGES.INVALID_WINNING_NUMBERS_LENGTH
-    );
+    throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.INVALID_NUMBERS_LENGTH);
   }
   if (!isNumbers(winningNumbersInput)) {
     throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.NOT_NUMBER);
   }
   if (!isOutOfRange(winningNumbersInput)) {
     throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.OUT_OF_RANGE);
+  }
+  if (isDuplicated(winningNumbersInput)) {
+    throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.DUPLICATED);
   }
 };
 
@@ -61,9 +63,12 @@ const isNumbers = (input) => {
 };
 
 const isOutOfRange = (input) => {
-  return input
-    .split(',')
-    .every(
-      (el) => Number(el) >= LOTTO_MIN_NUMBER && Number <= LOTTO_MAX_NUMBER
-    );
+  return input.split(',').every((el) => {
+    return Number(el) >= LOTTO_MIN_NUMBER && Number(el) <= LOTTO_MAX_NUMBER;
+  });
+};
+
+const isDuplicated = (input) => {
+  const numbers = new Set(input.split(',').map((el) => Number(el)));
+  return numbers.length !== LOTTO_NUMBERS_LENGTH;
 };
