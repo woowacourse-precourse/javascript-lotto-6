@@ -1,6 +1,7 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import { Outputs } from './ui/Output.js';
 import CONSTANT from './constants/constant.js';
+import VALIDATOR from './utils/Validator.js';
 
 class Lotto {
   #numbers;
@@ -10,15 +11,10 @@ class Lotto {
     this.#numbers = numbers;
   }
   #validate(numbers) {
-    const isDuplicated = new Set(numbers).size !== numbers.length;
-
-    if (numbers.length !== 6) {
-      throw new Error(CONSTANT.error.invalidWinningNumLength);
-    }
-
-    if (isDuplicated) {
-      throw new Error(CONSTANT.error.duplicate);
-    }
+    VALIDATOR.lottoValidators.validateDuplicate(numbers);
+    VALIDATOR.lottoValidators.validateWinningNumLength(numbers);
+    VALIDATOR.lottoValidators.validateWinningNumRange(numbers);
+    VALIDATOR.lottoValidators.validateWinningNumType(numbers);
   }
 
   get winningNum() {
@@ -35,13 +31,8 @@ class MakeLotto extends Lotto {
   }
 
   #validate(amount) {
-    const checkStyle = /\D/;
-    if (checkStyle.test(amount)) {
-      Console.print(CONSTANT.error.invalidAmountType);
-    }
-    if (amount % CONSTANT.game.unit !== 0) {
-      Console.print(CONSTANT.error.invalidAmountUnit);
-    }
+    VALIDATOR.makeLottoValidators.validateAmountType(amount);
+    VALIDATOR.makeLottoValidators.validateAmountUnit(amount);
   }
 
   #makeLottoArray(quantity) {
@@ -74,12 +65,20 @@ class LottoResult extends Lotto {
   constructor(numbers, bonusNum, amount, myLottos) {
     super(numbers);
     this.#validate(numbers, bonusNum, amount, myLottos);
-    this.#bonusNum = bonusNum;
+    this.#bonusNum = parseInt(bonusNum, 10);
     this.#amount = amount;
     this.#myLottos = myLottos;
   }
 
-  #validate(numbers, bonusNum, amount, myLottos) {}
+  #validate(numbers, bonusNum, amount, myLottos) {
+    VALIDATOR.lottoResultValidators.validateBonusNumDuplicate(
+      bonusNum,
+      this.winningNum
+    );
+    VALIDATOR.lottoResultValidators.validateBonusNumRange(bonusNum);
+    VALIDATOR.lottoResultValidators.validateBonusNumLength(bonusNum);
+    VALIDATOR.lottoResultValidators.validateBonusNumType(bonusNum);
+  }
 
   #initializeMatchesObj() {
     return {

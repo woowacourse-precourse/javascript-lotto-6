@@ -1,5 +1,4 @@
 import { Console } from '@woowacourse/mission-utils';
-import { validators } from '../utils/Validator.js';
 
 export const Inputs = {
   async getAmount(message) {
@@ -21,9 +20,9 @@ export const Inputs = {
     return userInputList;
   },
 
-  async getBonusNumber(message, winningNumber) {
-    const userInput = parseInt(await Console.readLineAsync(`${message}\n`), 10);
-    validators.validateBonusNum(userInput, winningNumber);
+  async getBonusNumber(message) {
+    const userInput = await Console.readLineAsync(`${message}\n`);
+
     Console.print('');
 
     return userInput;

@@ -12,11 +12,10 @@ class App {
       const winningNumber = await Inputs.getWinningNumber(
         CONSTANT.inputs.winningNumber
       );
-      const bonusNumber = await Inputs.getBonusNumber(
-        CONSTANT.inputs.bonusNumber,
-        winningNumber
-      );
       const lotto = new Lotto(winningNumber);
+      const bonusNumber = await Inputs.getBonusNumber(
+        CONSTANT.inputs.bonusNumber
+      );
       const lottoResult = new LottoResult(
         winningNumber,
         bonusNumber,
