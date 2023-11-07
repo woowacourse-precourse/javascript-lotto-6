@@ -26,6 +26,9 @@ class CompareLotto {
       if (count == 5) {
         this.matchingBonusNumber(userLotto[index]);
       }
+      if (count == 6) {
+        this.matchingLotto[4] += 1;
+      }
     });
 
     this.resultLotto();
@@ -68,7 +71,8 @@ class CompareLotto {
     });
     const profit = ((totalPrize / purchaseAmount) * 100)
       .toFixed(1)
-      .toLocaleString();
+      .toString()
+      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 
     Console.print(`총 수익률은 ${profit}%입니다.`);
   }
