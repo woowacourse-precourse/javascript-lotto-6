@@ -2,6 +2,16 @@ import { Random, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 
 class App {
+	#money;
+
+	#issuedLotteries;
+
+	#lotto;
+
+	#bonusNumber;
+
+	#result;
+
 	static async inputMoney() {
 		const money = await this.getValidMoney();
 		Console.print('');
@@ -69,7 +79,14 @@ class App {
 		return bonusNumber;
 	}
 
-	// async play() {}
+	async play() {
+		this.#money = await App.inputMoney();
+		this.#issuedLotteries = App.issueLottery(this.#money);
+		this.#lotto = await App.inputWinningNumbers();
+		this.#bonusNumber = await App.inputBonusNumber(this.#lotto.getNumbers());
+		this.#result = this.#lotto.getResult(this.#issuedLotteries, this.#bonusNumber);
+		Lotto.printResult(this.#money, this.#result);
+	}
 }
 
 export default App;
