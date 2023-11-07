@@ -73,3 +73,8 @@ const hasBonusNumber = (lottoArray, bonusNumber) => {
   return lottoArray.some((lottoNumber) => lottoNumber === bonusNumber);
 };
 
+const getWinningLottoResult = (winningNumberArray, lottoArray) => {
+  return lottoArray.filter((number) => winningNumberArray.includes(number))
+    .length;
+};
+
