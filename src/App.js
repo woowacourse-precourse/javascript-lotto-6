@@ -53,7 +53,7 @@ class App {
   showLottoList() {
     MissionUtils.Console.print(`${this.#cost / LOTTO_PRICE}개를 구매했습니다.`);
     this.#lottos.map((lotto) => {
-      MissionUtils.Console.print(`[${lotto.getNumbers().join(", ")}]`);
+      MissionUtils.Console.print(lotto.getNumbers());
     });
   }
   // 당첨 번호 관련 함수들
