@@ -7,7 +7,7 @@ export const MESSAGE = {
     setLuckyNumber: '당첨 번호를 입력해 주세요.\n',
     setBonusNumber: '보너스 번호를 입력해 주세요.\n',
   },
-  RESULT: {
+  BOARD: {
     'result': '당첨 통계\n---',
     '1th': (number) => `6개 일치 (2,000,000,000원) - ${number}개`,
     '2th': (number) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${number}개`,
