@@ -14,7 +14,7 @@ class User {
       fifthPrize: 0,
       fourthPrize: 0,
       thirdPrize: 0,
-      secondPirze: 0,
+      secondPrize: 0,
       firstPrize: 0,
     };
   }
