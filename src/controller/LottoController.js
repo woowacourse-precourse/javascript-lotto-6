@@ -17,8 +17,6 @@ class LottoController {
 
   #bonusNumber;
 
-  #stats;
-
   #lotto;
 
   #bonus;
@@ -47,8 +45,8 @@ class LottoController {
       this.#lottoStore = new LottoStore(this.#purchaseAmount);
       this.#userLottos = this.#lottoStore.getUserLottos();
       this.#printUserLottos();
-    } catch (error) {
-      OutputView.printError(error);
+    } catch ({ message }) {
+      OutputView.printError(message);
       await this.#buyLottos();
     }
   }
@@ -70,8 +68,8 @@ class LottoController {
       const parsedNumbers = inputNumbers.split(SYMBOLS.comma).map(Number);
       this.#lotto = new Lotto(parsedNumbers);
       this.#winningNumbers = this.#lotto.getWinningNumbers();
-    } catch (error) {
-      OutputView.printError(error);
+    } catch ({ message }) {
+      OutputView.printError(message);
       await this.#drawWinningNumbers();
     }
   }
@@ -84,21 +82,22 @@ class LottoController {
       const inputNumber = await this.#inputView.readBonusNumber();
       this.#bonus = new Bonus(inputNumber, this.#winningNumbers);
       this.#bonusNumber = this.#bonus.getBonusNumber();
-    } catch (error) {
-      OutputView.printError(error);
+    } catch ({ message }) {
+      OutputView.printError(message);
       await this.#drawBonusNumber();
     }
   }
 
+  /**
+   * 유저의 로또 번호와 당첨 번호를 계산하고 당첨 통계 결과 출력
+   */
   async #analyzeLottos() {
-    OutputView.printResult();
     this.#statistics = new Statistics(
       this.#userLottos,
       this.#winningNumbers,
       this.#bonusNumber,
     );
-    this.#stats = this.#statistics.getStats();
-    OutputView.printStats(this.#stats);
+    OutputView.printStats(this.#statistics.getStats());
     OutputView.printProfitRate(
       this.#statistics.getProfitRate(this.#purchaseAmount),
     );

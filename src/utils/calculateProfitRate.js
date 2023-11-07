@@ -5,8 +5,9 @@ const caculateProfitRate = (purchaseAmount, stats) => {
     (acc, winning, idx) => acc + winning * stats[idx],
     0,
   );
+  const profitRate = (totalWinnings * 100) / purchaseAmount;
 
-  return ((totalWinnings * 100) / purchaseAmount).toFixed(1);
+  return profitRate % 1 ? profitRate.toFixed(1) : profitRate;
 };
 
 export default caculateProfitRate;

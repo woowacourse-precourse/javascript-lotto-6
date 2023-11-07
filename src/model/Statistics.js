@@ -62,7 +62,7 @@ class Statistics {
    */
   #setStats() {
     this.#ranks.forEach(rank => {
-      if (INDEX_TABLE[rank]) this.#stats[INDEX_TABLE[rank] - 1] += 1;
+      if (INDEX_TABLE[rank] >= 0) this.#stats[INDEX_TABLE[rank]] += 1;
     });
   }
 

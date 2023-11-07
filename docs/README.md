@@ -96,7 +96,6 @@
 
 // Console.print <출력 뷰>
 당첨 통계
-// Console.print <출력 뷰>
 ---
 /**
  * Console.print <출력 뷰>
@@ -144,14 +143,33 @@
 - [x] `Lotto` 클래스 테스트 코드 추가
 - [x] JSDoc 작성
 
-### ✅ phase-4 보너스 번호를 입력 받는다.
+### ✅ refactor-4 보너스 번호를 입력 받는다.
 
 - [x] 유효하지 않은 자릿 수 사이 공백에 대해 예외 테스트.
   - [x] 테스트 코드 내 불필요 변수 선언 제거
 - [x] JSDoc 작성
 
-### ✅ phase-5 당첨 내역을 출력한다.
+### ✅ refactor-5 당첨 내역을 출력 및 통합 리팩토링
 
 - [x] `Stats` -> `Statistics` 클래스 명 명확화
 - [x] 테스트 코드 명 변경
+- [x] JSDoc 작성
+
+### ✅ refactor-6 수익률을 출력 및 전체 리팩토링
+
+- [x] LottoController 클래스
+
+  - [x] 불필요 변수 삭제
+  - [x] catch문 에러 메시지만 분해 할당 방식으로 수정
+
+- [x] Statistics 클래스
+
+  - [x] 테이블 인덱싱 직관화
+  - [x] 인덱스 상수 수정
+
+- [x] Validators
+- [x] 유효성 판별 함수 별 단위 테스트 코드 작성
+
+- [x] caculateProfitRate `toFixed(1)` 조건부 사용 (50.0% => 50%)
+
 - [x] JSDoc 작성

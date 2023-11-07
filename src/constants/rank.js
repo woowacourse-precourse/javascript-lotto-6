@@ -7,9 +7,9 @@ export const RANK = Object.freeze({
 });
 
 export const INDEX_TABLE = Object.freeze({
-  first: 5,
-  second: 4,
-  third: 3,
-  fourth: 2,
-  fifth: 1,
+  first: 4,
+  second: 3,
+  third: 2,
+  fourth: 1,
+  fifth: 0,
 });

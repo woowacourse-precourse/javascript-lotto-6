@@ -1,20 +1,24 @@
 import { ERROR_MESSAGES } from '../constants/messages.js';
 import AppError from '../errors/AppError.js';
-import isValidBonus from './is-valid-number/index.js';
+import isValidBonus from './isValidNumber/index.js';
+import isValidType from './isValidType/index.js';
 import {
   isValidLength,
   isValidRange,
   isValidUnique,
-} from './is-valid-numbers/index.js';
-import isValidType from './is-valid-type/index.js';
+} from './isValidNumbers/index.js';
 import {
   isValidAmountUnit,
   isValidAmountRange,
-} from './is-vallid-amount/index.js';
+} from './isValidAmount/index.js';
 
 const Validator = {
+  /**
+   * 구입 금액 입력에 대한 유효성 검증 메소드
+   * @param {number} amount
+   */
   validatePurchaseAmount(amount) {
-    if (!isValidType(amount)) {
+    if (!amount && !isValidType(amount)) {
       throw new AppError(ERROR_MESSAGES.invalidType);
     }
 
@@ -27,24 +31,33 @@ const Validator = {
     }
   },
 
-  validateLottoNumbers(numbers) {
-    if (!isValidLength(numbers)) {
+  /**
+   * 당첨 번호 입력에 대한 유효성 검증 메소드
+   * @param {number[]} winningNumbers
+   */
+  validateLottoNumbers(winningNumbers) {
+    if (!isValidLength(winningNumbers)) {
       throw new AppError(ERROR_MESSAGES.invalidNumberLength);
     }
 
-    if (!isValidUnique(numbers)) {
+    if (!isValidUnique(winningNumbers)) {
       throw new AppError(ERROR_MESSAGES.invalidUnique);
     }
 
-    numbers.forEach(number => {
+    winningNumbers.forEach(number => {
       if (!isValidRange(number)) {
         throw new AppError(ERROR_MESSAGES.invalidNumberRange);
       }
     });
   },
 
+  /**
+   * 보너스 번호 입력에 대한 유효성 검증 메소드
+   * @param {number} bonusNumber
+   * @param {number[]} winningNumbers
+   */
   validateBonusNumber(bonusNumber, winningNumbers) {
-    if (!isValidType(bonusNumber)) {
+    if (!bonusNumber && !isValidType(bonusNumber)) {
       throw new AppError(ERROR_MESSAGES.invalidType);
     }
 

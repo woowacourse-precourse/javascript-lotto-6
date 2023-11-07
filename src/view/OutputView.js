@@ -7,7 +7,6 @@ const print = any => Console.print(any);
 const OutputView = {
   printError(error) {
     print(error);
-    print(`${error}`);
   },
 
   printLottoQuantity(quantity) {
@@ -18,11 +17,8 @@ const OutputView = {
     lottos.forEach(lotto => print(`[${lotto.join(`${SYMBOLS.comma} `)}]`));
   },
 
-  printResult() {
-    print(OUTPUT_MESSAGES.result + OUTPUT_MESSAGES.divisionLine);
-  },
-
   printStats(stats) {
+    print(OUTPUT_MESSAGES.result + OUTPUT_MESSAGES.divisionLine);
     stats.forEach((stat, index) => print(OUTPUT_MESSAGES.hits(stat, index)));
   },
 
