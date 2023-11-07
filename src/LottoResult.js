@@ -42,6 +42,20 @@ class LottoResult {
       return this.#result['6개 일치'].count++;
     }
   }
+
+  calculateTotalPrize() {
+    const totalPrize = Object.keys(this.#result).reduce(
+      (total, key) => total + this.#result[key].prize * this.#result[key].count,
+      0
+    );
+
+    return totalPrize;
+  }
+
+  calculateProfitRate(totalSpent) {
+    const totalPrize = this.calculateTotalPrize();
+    return ((totalPrize / totalSpent) * 100).toFixed(1);
+  }
 }
 
 export default LottoResult;
