@@ -29,5 +29,10 @@ class ExceptionList {
       throw new Error('[ERROR] 1~45사이의 숫자를 입력해주세요.');
     }
   }
+  sameNumberError =(input)=>{
+    if (new Set(input).size !== input.length) {
+      throw new Error('[ERROR] 중복된 숫자가 입력되었습니다');
+    }
+  }
 }
 export default ExceptionList;
