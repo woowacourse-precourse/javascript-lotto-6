@@ -1,8 +1,14 @@
-import Game from './Game.js';
+import Game from './game/Game.js';
 
 class App {
+  #lottoGame;
+
+  constructor() {
+    this.#lottoGame = new Game();
+  }
+
   async play() {
-    await new Game().purchase();
+    await this.#lottoGame.purchase();
   }
 }
 

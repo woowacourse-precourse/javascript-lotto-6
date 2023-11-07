@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { OUTPUT } from './constants/messages.js';
+import { OUTPUT } from '../constants/messages.js';
 
 class Result {
   #match;
