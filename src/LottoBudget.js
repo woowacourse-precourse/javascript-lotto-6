@@ -6,8 +6,6 @@ class LottoBudget {
     LOTTO_PRICE=1000;
     ERROR_MESSEGE="[ERROR] 숫자가 잘못된 형식입니다.";
     GET_LOTTO_BUDGET_INPUT="구입금액을 입력해 주세요.\n";
-    constructor() {
-    }
 
     isValid(inputNumber){
         if(inputNumber < this.MIN_LOTTO_NUM*this.LOTTO_PRICE || inputNumber > this.MAX_LOTTO_NUM*this.LOTTO_PRICE){
@@ -26,4 +24,4 @@ class LottoBudget {
 
 }
 
-export default LottoBudget.js
+export default LottoBudget;
