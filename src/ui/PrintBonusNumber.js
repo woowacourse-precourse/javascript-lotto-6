@@ -5,9 +5,10 @@ import validateBonusNumber from "../util/validateBonusNumber.js";
 import ErrorMessages from "../common/errorMessages.js";
 
 const printBonusNumber = async (winningLotto) => {
+  let bonusLotto;
   while (true) {
     try {
-      const bonusLotto = await Console.readLineAsync(
+      bonusLotto = await Console.readLineAsync(
         Messages.GET_BONUS_NUMBER_MESSAGE
       );
       if (validateBonusNumber(winningLotto, bonusLotto))
