@@ -1,14 +1,13 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import BuyLotto from './BuyLotto.js';
-import { CONSTANT_VALUE, ERROR_MESSAGE } from './constants.js';
-import InputError from './InputError.js';
+import { CONSTANT_VALUE } from './constants.js';
 
 class App {
   async generateWinningNumbers() {
     const winningNumbers = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-
     const winningNumbersArray = winningNumbers.split(',').map(Number);
+
     return winningNumbersArray;
   }
 
@@ -24,10 +23,12 @@ class App {
       CONSTANT_VALUE.dailyLimitPrice,
       CONSTANT_VALUE.numberCheck,
     );
-    await buyLotto.start();
+    const lottoNumbers = await buyLotto.start();
 
     const winningNumbers = await this.generateWinningNumbers();
     const bonusNumber = await this.generateBonusNumber();
+
+    const lotto = new Lotto(winningNumbers);
   }
 }
 

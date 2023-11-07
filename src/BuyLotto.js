@@ -3,14 +3,14 @@ import { CONSTANT_VALUE, ERROR_MESSAGE } from './constants.js';
 import InputError from './InputError.js';
 
 class BuyLotto {
-  LOTTO_PRICE;
-  DAILY_LIMIT_PRICE;
-  NUMBER_CHECK;
+  lottoPrice;
+  dailyLimitPrice;
+  numberCheck;
 
-  constructor(LOTTO_PRICE, DAILY_LIMIT_PRICE, NUMBER_CHECK) {
-    this.LOTTO_PRICE = LOTTO_PRICE;
-    this.DAILY_LIMIT_PRICE = DAILY_LIMIT_PRICE;
-    this.NUMBER_CHECK = NUMBER_CHECK;
+  constructor(lottoPrice, dailyLimitPrice, numberCheck) {
+    this.LOTTO_PRICE = lottoPrice;
+    this.DAILY_LIMIT_PRICE = dailyLimitPrice;
+    this.NUMBER_CHECK = numberCheck;
   }
 
   async inputPurchaseAmount() {
@@ -33,21 +33,28 @@ class BuyLotto {
 
   async getLottoNumbers(purchaseAmout) {
     const lottoQuantity = purchaseAmout / 1000;
+    const lottoNumberArray = [];
 
     MissionUtils.Console.print(`\n${lottoQuantity}개를 구매했습니다.`);
 
     for (let i = 0; i < lottoQuantity; i++) {
       const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+
       randomNumber.sort((a, b) => a - b);
+      lottoNumberArray.push(randomNumber);
 
       MissionUtils.Console.print(`[${randomNumber.join(', ')}]`);
     }
+
+    return lottoNumberArray;
   }
 
   async start() {
     const purchaseAmount = await this.inputPurchaseAmount();
     await this.validateInputPurchaseAmount(purchaseAmount);
-    await this.getLottoNumbers(purchaseAmount);
+    const lottoNumbers = await this.getLottoNumbers(purchaseAmount);
+
+    return lottoNumbers;
   }
 }
 
