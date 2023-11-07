@@ -138,6 +138,7 @@ class App {
     MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (${SECOND.toLocaleString("ko-KR")}원) - ${this.winningDetail[3]}개`);
     MissionUtils.Console.print(`6개 일치 (${FIRST.toLocaleString("ko-KR")}원) - ${this.winningDetail[4]}개`);
   }
+  // 수익률 계산 함수
   calculateRateOfReturn() {
     this.rateOfReturn =
       ((FIFTH * this.winningDetail[0] +
@@ -148,6 +149,7 @@ class App {
         this.cost) *
       100;
   }
+  // 수익률 출력 함수
   printRateOfReturn() {
     MissionUtils.Console.print(`총 수익률은 ${parseFloat(this.rateOfReturn.toFixed(1)).toLocaleString("ko-KR")}%입니다.`);
   }
