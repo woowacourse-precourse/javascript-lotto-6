@@ -1,54 +1,99 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import Game from './Game.js';
+import Game, { RANK } from './Game.js';
 
-export const MESSAGES = {
-  INPUT_AMOUNT: '구입금액을 입력해 주세요.\n',
-  INPUT_WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
-  INPUT_BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
+export const MESSAGES = Object.freeze({
+  INPUT_AMOUNT: '구입금액을 입력해 주세요.',
+  INPUT_WINNING_NUMBERS: '당첨 번호를 입력해 주세요.',
+  INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
 
-  OUTPUT_BUY_TICKETS: (num) => `\n${num}개를 구매했습니다.`,
-  OUTPUT_RESULT: (winningInfo, totalReturn) => `
-  당첨 통계
-  ---
-  3개 일치 (5,000원) - ${winningInfo.count}개
-  4개 일치 (50,000원) - ${winningInfo.count}개
-  5개 일치 (1,500,000원) - ${winningInfo.count}개
-  5개 일치, 보너스 볼 일치 (30,000,000원) - ${winningInfo.count}개
-  6개 일치 (2,000,000,000원) - ${winningInfo.count}개
-  총 수익률은 ${totalReturn}%입니다.`,
-};
+  OUTPUT_BUY_TICKETS: (num) => `${num}개를 구매했습니다.`,
+  OUTPUT_RETURN: (num) => `총 수익률은 ${num}%입니다.`,
+});
 
 class App {
   async play() {
-    const amount = await this.getAmount();
-    const ticketNumber = amount / 1000;
+    try {
+      const amount = await this.getAmountInput();
+      const ticketNumber = amount / 1000;
 
-    const game = new Game(amount);
+      const game = new Game(amount);
+      game.getLottoTickets();
+      game.printTickets();
 
-    game.getLottoTickets();
-    this.printTickets(game.tickets);
+      const winningInfo = await this.getWinningInput();
 
-    const winningInfo = await this.getWinningInfo();
+      game.draw(winningInfo);
+      this.printResult(game.drawInfo);
+
+      const totalReturn = game.getReturn();
+
+      Console.print(
+        MESSAGES.OUTPUT_RETURN(((totalReturn / amount) * 100).toFixed(1))
+      );
+    } catch (err) {
+      Console.print('[ERROR]');
+      this.play();
+    }
   }
 
-  async getAmount() {
-    return await Console.readLineAsync(MESSAGES.INPUT_AMOUNT);
+  validateAmountInput(input) {
+    if (input === '') {
+      throw new Error('[ERROR] 입력값이 없습니다.');
+    }
+
+    if (isNaN(input)) {
+      throw new Error('[ERROR] 숫자를 입력해주세요.');
+    }
+
+    if (input % 1000 !== 0 || input < 1000) {
+      throw new Error('[ERROR] 1,000원 단위로 입력해주세요.');
+    }
   }
 
-  printTickets(tickets) {
-    Console.print(MESSAGES.OUTPUT_BUY_TICKETS(tickets.length));
+  validateWinningInput(input) {
+    if (input === '') {
+      throw new Error('[ERROR] 입력값이 없습니다.');
+    }
 
-    tickets.forEach((ticket) => Console.print(ticket));
+    const numbers = input.split(',');
+
+    if (input.split(',').length !== 6) {
+      throw new Error('[ERROR] 6개의 번호를 입력해주세요.');
+    }
+
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error('[ERROR] 중복된 숫자가 있습니다.');
+    }
+
+    if (numbers.some((num) => num < 1 || num > 45)) {
+      throw new Error('[ERROR] 1~45 사이의 숫자여야 합니다.');
+    }
   }
 
-  async getWinningInfo() {
+  validateBonusInput(input, winningInfo) {
+    if (winningInfo.split(',').includes(input)) {
+      throw new Error('[ERROR] 당첨 번호에 이미 있는 숫자입니다.');
+    }
+  }
+
+  async getAmountInput() {
+    const amountInput = await Console.readLineAsync(MESSAGES.INPUT_AMOUNT);
+    this.validateAmountInput(amountInput);
+
+    return amountInput;
+  }
+
+  async getWinningInput() {
     const winningNumbersInput = await Console.readLineAsync(
       MESSAGES.INPUT_WINNING_NUMBERS
     );
+    this.validateWinningInput(winningNumbersInput);
+
     const bonusNumberInput = await Console.readLineAsync(
       MESSAGES.INPUT_BONUS_NUMBER
     );
+    this.validateBonusInput(bonusNumberInput, winningNumbersInput);
 
     return {
       winningNumbers: winningNumbersInput.split(',').map(Number),
