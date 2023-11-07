@@ -1,16 +1,17 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Input from './Input.js';
+import Lotto from './Lotto.js';
 
 const CURRENCY_UNIT = 1000;
 const input = new Input();
 
 class App {
   purchaseAmount;
-  myLottoLits;
+  myLottoList;
 
   constructor() {
     this.purchaseAmount = 0;
-    this.myLottoLits = [];
+    this.myLottoList = [];
   }
 
   async play() {
@@ -19,8 +20,11 @@ class App {
 
     this.validateAskPurchaseAmount(parsedpurchaseAmount);
 
-    this.createLottos(parsedpurchaseAmount);
-    this.printLottos();
+    this.createMyLottoList(parsedpurchaseAmount);
+    this.printMyLottoList();
+
+    const lotteryNumbers = await input.askLotteryNumbers();
+    const lotto = new Lotto(lotteryNumbers);
   }
 
   validateAskPurchaseAmount(purchaseAmount) {
@@ -33,25 +37,25 @@ class App {
     }
   }
 
-  createLottos(parsedPurchaseAmount) {
+  createMyLottoList(parsedPurchaseAmount) {
     this.purchaseAmount = parsedPurchaseAmount / CURRENCY_UNIT;
 
     let count = 0;
     while (count < this.purchaseAmount) {
-      this.myLottoLits.push(
+      this.myLottoList.push(
         Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
       );
 
       count += 1;
     }
 
-    return this.myLottoLits;
+    return this.myLottoList;
   }
 
-  printLottos() {
+  printMyLottoList() {
     Console.print(`${this.purchaseAmount}개를 구매했습니다.`);
 
-    this.myLottoLits.forEach((lotto) => Console.print(lotto));
+    this.myLottoList.forEach((lotto) => Console.print(lotto));
   }
 }
 
