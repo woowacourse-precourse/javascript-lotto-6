@@ -11,7 +11,7 @@ describe('로또 번호 비교 테스트', () => {
   ])('로또 번호와 당첨 번호를 비교하여 포함된 개수를 구한다.', (number, expected) => {
     // given
     const WINNING_NUMBERS = '[1, 2, 3, 4, 5, 6]';
-    const BONUS_NUMBER = '7';
+    const BONUS_NUMBER = 7;
 
     // when
     const lottoCompare = new LottoCompare(WINNING_NUMBERS, BONUS_NUMBER);
