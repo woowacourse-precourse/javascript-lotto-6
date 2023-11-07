@@ -15,7 +15,7 @@ describe('LotteryPrize.calculatePrize', () => {
     expect(winningStatistic.getThirdPrize()).toBe(0);
     expect(winningStatistic.getFourthPrize()).toBe(0);
     expect(winningStatistic.getFifthPrize()).toBe(0);
-    expect(winningStatistic.getEaringRate()).toBe(200000000);
+    expect(winningStatistic.getEaringRate()).toBe('200000000.0');
   });
 
   test('3등 당첨, 수익률 62.5%', () => {
@@ -39,7 +39,7 @@ describe('LotteryPrize.calculatePrize', () => {
     expect(winningStatistic.getThirdPrize()).toBe(0);
     expect(winningStatistic.getFourthPrize()).toBe(0);
     expect(winningStatistic.getFifthPrize()).toBe(1);
-    expect(winningStatistic.getEaringRate()).toBe(62.5);
+    expect(winningStatistic.getEaringRate()).toBe('62.5');
   });
 
   test('4등 1개, 5등 3개당첨 수익률 812.5%', () => {
@@ -63,6 +63,6 @@ describe('LotteryPrize.calculatePrize', () => {
     expect(winningStatistic.getThirdPrize()).toBe(0);
     expect(winningStatistic.getFourthPrize()).toBe(1);
     expect(winningStatistic.getFifthPrize()).toBe(3);
-    expect(winningStatistic.getEaringRate()).toBe(812.5);
+    expect(winningStatistic.getEaringRate()).toBe('812.5');
   });
 });
