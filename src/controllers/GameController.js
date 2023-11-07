@@ -86,11 +86,11 @@ class GameController {
     let totals = commonNumbers.length;
     if (totals === 6) {
       this.#winningsCount[4] += 1;
-    } else {
-      totals += Number(item.includes(Number(this.#bonus.getBonusNumber())));
-      if (totals >=3){
-        this.#winningsCount[totals-3] += 1;
-      }
+      return ;
+    } 
+    totals += Number(item.includes(Number(this.#bonus.getBonusNumber())));
+    if (totals >=3){
+      this.#winningsCount[totals-3] += 1;
     }
   }
 
