@@ -34,6 +34,8 @@
 
 ```
 
+사용한 파일 : `/App.js`, `Output/LottoPrint.js`, `Game/Random.js`
+
 ## 기능3.
 
 ### 당첨 내역
@@ -46,6 +48,8 @@
 
 **\- 정수형** : 문자열, 실수형등 사용 불가
 
+**\- 중복** : 요소가 중복되면 안됨
+
 #### _- 보너스 번호 입력 조건_
 
 **\- 입력 범위** : 1~45
@@ -57,6 +61,8 @@
 ```JavaScript
 
 ```
+
+사용한 파일 : `/App.js`, `/Lotto.js`, `Input/Bonus.js`, `Exception/CheckBonus.js`, `Game/Jackpot.js`
 
 ## 기능4.
 
