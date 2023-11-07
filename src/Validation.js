@@ -38,12 +38,18 @@ export const validateWinnerNumbersInput = async (winningNumbersInput) => {
   }
 };
 
-export const validateBonusNumberInput = async (bonusNumberInput) => {
+export const validateBonusNumberInput = async ({
+  bonusNumberInput,
+  winningNumbers,
+}) => {
   if (!isNumber(bonusNumberInput)) {
     throw new Error(BONUS_NUMBER_ERROR_MESSAGES.NOT_NUMBER);
   }
   if (isOutOfRange(bonusNumberInput)) {
     throw new Error(BONUS_NUMBER_ERROR_MESSAGES.OUT_OF_RANGE);
+  }
+  if (isDuplicatedWithWinningNumber(bonusNumberInput, winningNumbers)) {
+    throw new Error(BONUS_NUMBER_ERROR_MESSAGES.DUPLICATED_WITH_WINNING_NUMBER);
   }
 };
 
@@ -84,4 +90,8 @@ const isOutOfRangeInNumbers = (input) => {
 const isDuplicated = (input) => {
   const numbers = new Set(input.split(',').map((el) => Number(el)));
   return numbers.size !== LOTTO_NUMBERS_LENGTH;
+};
+
+const isDuplicatedWithWinningNumber = (input, winningNumbers) => {
+  return winningNumbers.includes(Number(input));
 };

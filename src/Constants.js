@@ -26,6 +26,7 @@ export const WINNING_NUMBERS_ERROR_MESSAGES = Object.freeze({
 export const BONUS_NUMBER_ERROR_MESSAGES = Object.freeze({
   NOT_NUMBER: '[ERROR] 보너스 번호는 숫자여야 합니다',
   OUT_OF_RANGE: `[ERROR] 보너스 번호는 ${LOTTO_MIN_NUMBER} 이상 ${LOTTO_MAX_NUMBER} 이하의 숫자여야 합니다.`,
+  DUPLICATED_WITH_WINNING_NUMBER: `[ERROR] 당첨 번호와 동일한 보너스 번호가 있습니다.`,
 });
 
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>

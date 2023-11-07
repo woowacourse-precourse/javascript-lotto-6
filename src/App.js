@@ -61,7 +61,10 @@ class App {
   async getBonusNumber() {
     this.bonusNumberInput = await this.inputManager.enterBonusNumberInput();
     try {
-      await validateBonusNumberInput(this.bonusNumberInput);
+      await validateBonusNumberInput({
+        bonusNumberInput: this.bonusNumberInput,
+        winningNumbers: this.winningNumbers,
+      });
     } catch (e) {
       await this.outputManager.printBonusNumberInputErrorMessage(e.message);
     }
