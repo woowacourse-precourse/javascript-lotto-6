@@ -6,7 +6,7 @@ describe('로또 번호 테스트', () => {
   test('로또가 유효한 형식이라면 성공', () => {
     const validInput = [1, 2, 3, 4, 5, 6];
     const lottoValidator = new LottoValidator(validInput);
-    expect(() => lottoValidator.validate()).toThrow();
+    expect(() => lottoValidator.validate()).not.toThrow();
   });
 
   test('로또가 배열 형태가 아니면 실패', () => {

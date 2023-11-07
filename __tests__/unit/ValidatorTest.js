@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import {
   isDivisibleByUnit,
-  isLengthEqualTo,
+  isStringLengthEqualTo,
   containUniqueNumbersInString,
   isCommaSeparated,
   isElementInString,
@@ -29,8 +29,8 @@ describe('당첨 번호 테스트', () => {
     const validLengthWinningNumber = '1,12,33,4,25,45';
     const invalidLengthWinningNumber = '1,2,3,4,5';
 
-    expect(isLengthEqualTo(validLengthWinningNumber, 6)).toBe(true);
-    expect(isLengthEqualTo(invalidLengthWinningNumber, 6)).toBe(false);
+    expect(isStringLengthEqualTo(validLengthWinningNumber, 6)).toBe(true);
+    expect(isStringLengthEqualTo(invalidLengthWinningNumber, 6)).toBe(false);
   });
 
   test('당첨 번호 중 중복 존재 여부', () => {

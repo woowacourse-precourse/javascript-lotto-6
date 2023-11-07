@@ -1,5 +1,5 @@
 import { throwError } from '../common/utils.js';
-import { ERROR } from '../common/constants.js';
+import { LOTTO, ERROR } from '../common/constants.js';
 import { isNumeric, isElementInString, isInRange } from '../common/validator.js';
 
 class BonusNumberValidator {
@@ -15,8 +15,8 @@ class BonusNumberValidator {
     return this.input;
   };
 
-  validateUnique(arr) {
-    if (isElementInString(arr, this.input)) {
+  validateUnique(winningNumbers) {
+    if (!isElementInString(winningNumbers, this.input)) {
       throwError(ERROR.bonus_duplicate);
     }
   };
@@ -34,7 +34,7 @@ class BonusNumberValidator {
   };
 
   #validateRange() {
-    if (isInRange(this.input)) {
+    if (!isInRange(this.input, LOTTO.min_number, LOTTO.max_number)) {
       throwError(ERROR.range);
     }
   };

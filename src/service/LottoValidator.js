@@ -1,6 +1,6 @@
 import { LOTTO, ERROR } from '../common/constants.js';
 import { throwError } from '../common/utils.js';
-import { isNumeric, isInRange, containUniqueNumbersInArray, isElementInArray } from '../common/validator.js';
+import { isNumeric, isInRange, containUniqueNumbersInArray, isArrayLengthEqualTo } from '../common/validator.js';
 
 class LottoValidator {
   constructor(input) {
@@ -12,7 +12,7 @@ class LottoValidator {
     this.#validateNumber();
     this.#validateRange();
     this.#validateUnique();
-    this.#validateCount();
+    this.#validateLength();
   };
 
   #validateArray() {
@@ -43,8 +43,8 @@ class LottoValidator {
     }
   };
 
-  #validateCount() {
-    if (!isElementInArray(this.input)) {
+  #validateLength() {
+    if (!isArrayLengthEqualTo(this.input, LOTTO.max_match)) {
       throwError(ERROR.lotto_length);
     }
   };
