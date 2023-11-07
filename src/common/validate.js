@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "./OutputMessage.js";
+import { ERROR_MESSAGE } from "./outputMessage.js";
 class Validate{
     validatePrice(price) {
         if (isNaN(price)) throw new Error(`${ERROR_MESSAGE.NUMBER_TYPE}`);
