@@ -24,37 +24,34 @@ class Game {
 
   async purchase() {
     const amount = await InputView.purchaseLotto();
-    this.handlePurchase(amount);
+    await this.handlePurchase(amount);
   }
 
   handlePurchase = async (amount) => {
     this.#quantity = new Purchase(amount).getAmount();
     OutputView.printQuantity(this.#quantity);
-    this.#lottos = LottoMaker.generate(this.#quantity);
+    this.#lottos = await LottoMaker.generate(this.#quantity);
     OutputView.printLottos(this.#lottos);
-    this.askWinningNumbers();
+    await this.askWinningNumbers();
   };
 
   async askWinningNumbers() {
     this.winningNumbers = await InputView.readWinningNumbers();
-    this.handleWinningNumbers(this.winningNumbers);
+    await this.handleWinningNumbers(this.winningNumbers);
   }
 
-  handleWinningNumbers = (numbers) => {
-    const WINNING_LIST = numbers.split(',').map((number) => {
-      return (number = parseInt(number, 10));
-    });
-    this.winningNumbers = new Lotto(WINNING_LIST).getWinningNumbers();
-    this.askBonusNumber();
+  handleWinningNumbers = async (numbers) => {
+    this.winningNumbers = await new Lotto(numbers).getWinningNumbers();
+    await this.askBonusNumber();
   };
 
   async askBonusNumber() {
     this.bonusNumber = await InputView.readBonusNumbers();
-    this.handleBonusNumber(this.bonusNumber);
+    await this.handleBonusNumber(this.bonusNumber);
   }
 
   handleBonusNumber = (number) => {
-    const BONUS_NUMBER = parseInt(number, 10);
+    const BONUS_NUMBER = Number(number);
     this.bonusNumber = new Bonus(BONUS_NUMBER, this.winningNumbers).getBonusNumber();
 
     this.getReward();
