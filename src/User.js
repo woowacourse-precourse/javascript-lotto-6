@@ -4,14 +4,15 @@ import { GAME_MESSAGE } from './Constants.js';
 class User {
   constructor(userLotto) {
     this.userLotto = userLotto;
+    this.purchaseAmount = 0;
   }
 
   async inputPurchaseAmount() {
-    const purchaseAmount = await Console.readLineAsync(
+    this.purchaseAmount = await Console.readLineAsync(
       GAME_MESSAGE.purchaseAmount,
     );
 
-    this.purchaseLottoCount(purchaseAmount);
+    this.purchaseLottoCount(this.purchaseAmount);
   }
 
   purchaseLottoCount(purchaseAmount) {
@@ -31,6 +32,10 @@ class User {
     this.userLotto.forEach(numbers => {
       Console.print(numbers);
     });
+  }
+
+  getPurchaseAmount() {
+    return this.purchaseAmount;
   }
 
   getUserLotto() {

@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { GAME_MESSAGE } from './Constants.js';
+import { GAME_MESSAGE, GAME_NUMBER } from './Constants.js';
 
 class CompareLotto {
   constructor(user) {
@@ -56,6 +56,21 @@ class CompareLotto {
     this.matchingLotto.forEach((count, index) => {
       Console.print(`${resultMessege[index]} ${count}개`);
     });
+
+    this.totalProfit();
+  }
+
+  totalProfit() {
+    const purchaseAmount = this.user.getPurchaseAmount();
+    let totalPrize = 0;
+    this.matchingLotto.forEach((count, index) => {
+      totalPrize += GAME_NUMBER.prizeNumber[index] * count;
+    });
+    const profit = ((totalPrize / purchaseAmount) * 100)
+      .toFixed(1)
+      .toLocaleString();
+
+    Console.print(`총 수익률은 ${profit}%입니다.`);
   }
 }
 
