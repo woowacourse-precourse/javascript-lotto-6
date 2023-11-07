@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import COMMON from '../constants/common.js';
 import { WINNING_INFO } from '../constants/winningInfo.js';
 import MESSAGE from '../constants/message.js';
+import { formatMoney } from '../utils/function.js';
 
 class OutputView {
   static printLineBreak() {
@@ -28,12 +29,12 @@ class OutputView {
     Console.print(MESSAGE.output.winningTableHeader);
     OutputView.#printDivider();
 
-    Object.keys(WINNING_INFO).forEach((key) => {
-      const { rank, criteria, prizeMoney } = WINNING_INFO[key];
-      const prizeMoneyWithComma = prizeMoney.toLocaleString('ko-kr');
+    Object.entries(WINNING_INFO).forEach(([key, info]) => {
+      const { rank, criteria, prizeMoney } = info;
       const cnt = cntRank[key];
+      const formattedPrizeMoney = formatMoney(prizeMoney);
       Console.print(
-        `${rank}등\t${cnt}개 당첨\t${criteria} (${prizeMoneyWithComma}원)`,
+        `${rank}등\t${cnt}개 당첨\t${criteria} (${formattedPrizeMoney}원)`,
       );
     });
     OutputView.#printDivider();

@@ -22,4 +22,8 @@ function roundToOneDecimalPlace(number) {
   return (Math.round(number * 10) / 10).toFixed(1);
 }
 
-export { isPositiveInteger, roundToOneDecimalPlace };
+function formatMoney(money) {
+  return money.toLocaleString('ko-kr');
+}
+
+export { isPositiveInteger, roundToOneDecimalPlace, formatMoney };
