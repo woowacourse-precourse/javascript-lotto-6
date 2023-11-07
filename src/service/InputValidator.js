@@ -1,4 +1,4 @@
-import { UTILS, LOTTO, ERROR } from '../common/constants.js';
+import { LOTTO, ERROR } from '../common/constants.js';
 import { throwError } from '../common/utils.js';
 import { isCommaSeparated, isLengthEqualTo, containUniqueNumbers } from '../common/validator.js';
 

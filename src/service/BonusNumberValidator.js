@@ -1,6 +1,6 @@
 import { throwError } from '../common/utils.js';
 import { ERROR } from '../common/constants.js';
-import { isNumeric, isElementInArray, isInRange } from '../common/validator.js';
+import { isNumeric, isElementInString, isInRange } from '../common/validator.js';
 
 class BonusNumberValidator {
   constructor(input) {
@@ -16,7 +16,7 @@ class BonusNumberValidator {
   };
 
   validateUnique(arr) {
-    if (isElementInArray(arr, this.input)) {
+    if (isElementInString(arr, this.input)) {
       throwError(ERROR.bonus_duplicate);
     }
   };

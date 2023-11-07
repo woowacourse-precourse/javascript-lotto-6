@@ -20,16 +20,16 @@ class LottoValidator {
   };
 
   #validateNumber() {
-    this.input.forEach((num) => {
-      if (!isNumeric(num)) {
+    this.input.forEach((number) => {
+      if (!isNumeric(number)) {
         throwError(ERROR.numeric);
       }
     });
   };
 
   #validateRange() {
-    this.input.forEach((num) => {
-      if (!isInRange(num, LOTTO.min_number, LOTTO.max_number)) {
+    this.input.forEach((number) => {
+      if (!isInRange(number, LOTTO.min_number, LOTTO.max_number)) {
         throwError(ERROR.range);
       }
     });
