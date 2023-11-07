@@ -62,7 +62,7 @@ class LottoModel {
   }
 
   set_winning_result(winning_result) {
-    this.#winning_result = winning_result;
+    this.#winning_result = { ...winning_result };
   }
 
   /**
