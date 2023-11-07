@@ -1,6 +1,7 @@
 import Lotto from './Lotto.js';
 import { PurchaseLotto } from './PurchaseLotto.js';
 import { randomNum } from './utils.js';
+import { GRADING_COUNT } from './constants.js';
 
 class GameExport {
   #lottos;
@@ -34,6 +35,35 @@ class GameExport {
   async viewLottoList() {
     const theLottoList = await this.createLotto();
     return theLottoList.map((item) => `[${item.join(', ')}]`).join(`\n`);
+  }
+
+  getEachCompareResult(inputNumbers, bonusNumber) {
+    return this.#lottos.map((lotto) =>
+      lotto.getCompareResult(inputNumbers, bonusNumber),
+    );
+  }
+
+  getStatistics(eachCompareResult) {
+    const statistics = {
+      fifthPrize: 0,
+      fourthPrize: 0,
+      thirdPrize: 0,
+      secondPrize: 0,
+      firstPrize: 0,
+    };
+
+    eachCompareResult.forEach(({ matchCount, hasBonusNumber }) => {
+      if (matchCount === GRADING_COUNT.SIX) statistics.firstPrize += 1;
+      if (matchCount === GRADING_COUNT.FIVE && hasBonusNumber)
+        statistics.secondPrize += 1;
+      if (matchCount === GRADING_COUNT.FIVE && !hasBonusNumber)
+        statistics.thirdPrize += 1;
+      if (matchCount === GRADING_COUNT.FOUR) statistics.fourthPrize += 1;
+      if (matchCount === GRADING_COUNT.THREE) statistics.fifthPrize += 1;
+    });
+
+    console.log(statistics);
+    return statistics;
   }
 
   getLottos() {
