@@ -40,7 +40,7 @@ describe('로또 당첨 결과 테스트', () => {
     ];
     const WINNING_NUMBERS = '[1, 2, 3, 4, 5, 6]';
     const BONUS_NUMBER = 7;
-    const LOTTOS_RANKS = ['first', 'second', 'third', 'fourth', 'fifth', undefined];
+    const LOTTOS_RANKS = ['first', 'second', 'third', 'fourth', 'fifth'];
 
     // when
     const lottosResults = new LottosResults(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
