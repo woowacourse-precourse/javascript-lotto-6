@@ -1,9 +1,9 @@
 import ERROR_MESSAGE from "./Errors.js";
-class Validator {
-  static #MONEY_UNIT = 1000;
+import { LOTTO_UNIT } from "./constants/constants.js";
 
+class Validator {
   static validateMoneyUnit(inputMoney) {
-    if (parseInt(inputMoney, 10) % Validator.#MONEY_UNIT !== 0) {
+    if (parseInt(inputMoney, 10) % LOTTO_UNIT.MONEY_UNIT !== 0) {
       throw new Error(ERROR_MESSAGE.moneyUnit);
     }
   }
