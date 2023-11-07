@@ -22,10 +22,21 @@ class App {
 	}
 
 	async play() {
-		const PURCHASE_AMOUNT =
-			await Console.readLineAsync('구입금액을 입력해 주세요.');
+		let isValid = false;
+		let PURCHASE_AMOUNT;
+		while (!isValid) {
+			try {
+				const input = await Console.readLineAsync('구입금액을 입력해 주세요.');
 
-		ErrorCheck.inputNumberCheck(PURCHASE_AMOUNT);
+				ErrorCheck.inputNumberCheck(input);
+				PURCHASE_AMOUNT = input;
+				isValid = true;
+			} catch (error) {
+				Console.print(error.message);
+			}
+		}
+
+		isValid = false;
 
 		const PURCHASE_COUNT = Math.floor(Number(PURCHASE_AMOUNT) / 1000);
 
@@ -37,24 +48,48 @@ class App {
 
 		this.printMyLotto(LOTTERY_TICKET_LIST);
 
-		const WINNING_NUMBERS_INPUT =
-			await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+		let WINNING_NUMBERS_LIST;
 
-		const WINNING_NUMBERS_LIST = WINNING_NUMBERS_INPUT.split(',').map((str) =>
-			Number(str.trim()),
-		);
+		while (!isValid) {
+			try {
+				const WINNING_NUMBERS_INPUT =
+					await Console.readLineAsync('당첨 번호를 입력해 주세요.');
 
-		for (let item of WINNING_NUMBERS_LIST) {
-			ErrorCheck.inputNumberCheck(item);
+				const inputList = WINNING_NUMBERS_INPUT.split(',').map((str) =>
+					Number(str.trim()),
+				);
+
+				for (let item of inputList) {
+					ErrorCheck.inputNumberCheck(item);
+				}
+
+				WINNING_NUMBERS_LIST = inputList;
+				isValid = true;
+			} catch (error) {
+				Console.print(error.message);
+			}
 		}
+
+		isValid = false;
 
 		const WINNING_NUMBERS = new Lotto(WINNING_NUMBERS_LIST);
 
-		const BONUS_NUMBER = Number(
-			await Console.readLineAsync('보너스 번호를 입력해 주세요.'),
-		);
+		let BONUS_NUMBER;
+		while (!isValid) {
+			try {
+				const input = Number(
+					await Console.readLineAsync('보너스 번호를 입력해 주세요.'),
+				);
 
-		ErrorCheck.inputNumberCheck(BONUS_NUMBER);
+				ErrorCheck.inputNumberCheck(input);
+				BONUS_NUMBER = input;
+				isValid = true;
+			} catch (error) {
+				Console.print(error.message);
+			}
+		}
+
+		isValid = false;
 
 		const lottoCounter = new LottoCounter();
 
