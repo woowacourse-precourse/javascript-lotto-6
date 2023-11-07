@@ -19,7 +19,6 @@ export class Calculator {
     const winningNumbers = this.#formatWinningNumber(inputWinningNumbersStr);
     this.#validateWinningNumber(winningNumbers);
     this.#winningNumbers = winningNumbers;
-    OutputView.print(this.#winningNumbers.join(","));
   }
 
   async promptBonusNumber() {
@@ -29,7 +28,6 @@ export class Calculator {
     const bonusNumber = Number(inputBonusNumberStr);
     this.#validateBonusNumber(bonusNumber);
     this.#bonusNumber = bonusNumber;
-    OutputView.print(this.#bonusNumber);
   }
 
   getWinningsResult(lottos) {
