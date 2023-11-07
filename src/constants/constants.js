@@ -16,10 +16,19 @@ const match = Object.freeze({
   sixMatch: 6,
 });
 
+const prize = Object.freeze({
+  [match.threeMatch]: 5000,
+  [match.fourMatch]: 50000,
+  [match.fiveMatch]: 1500000,
+  [match.fiveMatchWithBonus]: 30000000,
+  [match.sixMatch]: 2000000000,
+});
+
 const CONSTANTS = Object.freeze({
   purchaseAmount,
   number,
   match,
+  prize,
 });
 
 export default CONSTANTS;
