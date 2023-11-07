@@ -2,7 +2,7 @@
 import { ERROR } from '../../src/common/constants.js';
 import MoneyValidator from '../../src/service/MoneyValidator.js';
 
-describe('MoneyValidator 클래스 테스트', () => {
+describe('구매 금액 테스트', () => {
   test('금액이 유효한 형식이라면 성공', () => {
     const validInput = '10000';
     const moneyValidator = new MoneyValidator(validInput);
