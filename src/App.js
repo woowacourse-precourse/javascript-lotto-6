@@ -34,7 +34,7 @@ class App {
   stringToNumber = (userInput) => {
     const number = Number(userInput);
 
-    if(isNaN(number)) throw new Error('[ERROR] : input is not a number.');
+    if(isNaN(number)) throw new Error("[ERROR] : input is not a number.");
 
     return number;
   }
@@ -192,19 +192,36 @@ class App {
     }
   }
 
-  async play() {
-    try {
-      MissionUtils.Console.print('구입금액을 입력해 주세요.');
+  getUserInputPrice = async () => {
+    let userInputPrice;
+
+    try{
+      MissionUtils.Console.print('\n구입금액을 입력해 주세요.');
 
       const userInput = await this.getUserInput();
-      const userInputPrice = this.stringToNumber(userInput);
+      userInputPrice = this.stringToNumber(userInput);
 
       this.checkIsValidPrice(userInputPrice);
-      this.setOrderPrice(userInputPrice);
-      this.setOrderQuantity(userInputPrice);
-      this.setLottoOrder();
-      this.printLottoOrder();
+    } catch(err) {
+      MissionUtils.Console.print(err.message);
 
+      userInputPrice = this.getUserInputPrice();
+    }
+
+    return userInputPrice;
+  }
+
+  async play() {
+
+    const userInputPrice = await this.getUserInputPrice();
+
+    this.setOrderPrice(userInputPrice);
+    this.setOrderQuantity(userInputPrice);
+
+    this.setLottoOrder();
+    this.printLottoOrder();
+
+    try {
       MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
 
       const userInputWinningNumbers = await this.getUserInput();
@@ -226,7 +243,6 @@ class App {
 
       this.printLottoStat();
     } catch(err) {
-      return Promise.reject(err);
     }
   }
 }
