@@ -42,11 +42,15 @@ class App {
     Console.readLine(MESSAGE.INPUT_USER_NUMBER, (userNumber) => {
       this.validator.checkUserNum(userNumber);
       this.userLotto = new Lotto(userNumber.split(',').map(num => Number(num)));
+      this.getUserBonusNumber();
     });
   }
 
   getUserBonusNumber() {
-    // Console.readLine();
+    Console.readLine(MESSAGE.INPUT_USER_BONUS_NUMBER, (bonusNumber) => {
+      this.validator.checkUserBonusNum(this.userLotto.getNumbers(), bonusNumber);
+      this.bonusNumber = Number(bonusNumber);
+    });
   }
 }
 

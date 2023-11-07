@@ -12,5 +12,5 @@ export const ERROR = {
   NOT_RANGE_OF_NUMBER: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
   DUPLICATE_NUMBER: "[ERROR] 중복된 값이 존재합니다.",
   NOT_FORMAT_OF_USER_NUMBER: "[ERROR] 번호를 쉼표로 구분하여 입력해야 합니다.",
-
+  EXIST_IN_USER_NUMBER: "[ERROR] 보너스 번호는 입력 번호와 중복되지 않아야 합니다.",
 };

@@ -31,6 +31,18 @@ class Validator {
     }
   }
 
+  checkUserBonusNum(userNumber, bonusNumber) {
+    if (this.isNotNumber(bonusNumber)) {
+      throw new Error(ERROR.NOT_NUMBER);
+    }
+    if (this.isNotRangeOfNumber(bonusNumber)) {
+      throw new Error(ERROR.NOT_RANGE_OF_NUMBER);
+    }
+    if (this.isExistInUserNumber(userNumber, bonusNumber)) {
+      throw new Error(ERROR.EXIST_IN_USER_NUMBER);
+    }
+  }
+
   isNotNumber(value) {
     const valid = /^[0-9]+$/;
     return !valid.test(value);
@@ -45,7 +57,7 @@ class Validator {
   }
 
   isNotRangeOfNumber(value) {
-    return value < 1 || value > 45;
+    return Number(value) < 1 || Number(value) > 45;
   }
 
   isDuplicate(numbers) {
@@ -55,6 +67,10 @@ class Validator {
   isNotUserNumberFormat(userNumber) {
     const valid = /^[0-9]+(,[0-9]+)+$/;
     return !valid.test(userNumber);
+  }
+
+  isExistInUserNumber (userNumber, bonusNumber) {
+    return userNumber.includes(Number(bonusNumber));
   }
 }
 
