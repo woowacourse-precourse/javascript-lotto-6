@@ -38,3 +38,9 @@ export const hasComma = (winningNumbers) => {
     throw new Error(NOT_HAS_COMMA_ERROR_MESSAGE);
 };
 
+export const splitNumbers = (winningNumbers) => {
+  const winningNumbersArray = winningNumbers.split(COMMA);
+  if (winningNumbersArray.length !== SIX_NUMBERS)
+    throw new Error(NOT_HAS_COMMA_ERROR_MESSAGE);
+  return winningNumbersArray;
+};
