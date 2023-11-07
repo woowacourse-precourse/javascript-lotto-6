@@ -1,30 +1,28 @@
-import { CONSTANT } from "./Constant.js";
-
 class User {
+    #money;
+    #userLotto;
+
     constructor() {
-        this.moeny = 0;
-        this.userLotto = [];
+        this.#money = 0;
+        this.#userLotto = [];
     }
 
     setMoney(money) {
-        this.money = money;
+        this.#money = money;
     }
-
     getMoney() {
-        return this.money;
+        return this.#money;
     }
 
     setUserLotto(Lotto) {
-        this.userLotto.push(Lotto);
+        this.#userLotto.push(Lotto);
     }
-
     getUserLotto() {
-        return this.userLotto;
+        return this.#userLotto;
     }
 
     getAmount() {
-        if (this.money % 1000 != 0) throw new Error(CONSTANT.ERROR_MONEY_INPUT);
-        return Number(this.money);
+        return Number(this.#money / 1000);
     }
 }
 

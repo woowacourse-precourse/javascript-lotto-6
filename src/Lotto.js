@@ -13,20 +13,19 @@ class Lotto {
 
     // 예외처리
     #validate(numbers) {
-        if (typeof numbers === "string") {
-            numbers.trim().split(",").map(Number);
-        }
         if (numbers.length !== 6) {
-            throw new Error(CONSTANT.ERROR_LOTTO_NUM_INPUT);
+            throw new Error(CONSTANT.ERROR);
         }
         numbers.forEach((element) => {
             if (!(element >= 1 && element <= 45))
-                throw new Error(CONSTANT.ERROR_LOTTO_NUM_INPUT);
+                throw new Error(CONSTANT.ERROR);
         });
+        let tmp = new Set(numbers);
+        if (tmp.size != numbers.length) throw new Error(CONSTANT.ERROR);
     }
 
     // TODO: 추가 기능 구현
-    getLottoNum() {
+    getNum() {
         return this.#numbers;
     }
 }
