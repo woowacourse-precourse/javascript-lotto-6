@@ -3,7 +3,7 @@ import Generator from './Generator.js';
 class User {
   constructor(purchaseAmout) {
     this.purchaseAmout = purchaseAmout / 1000;
-    this.userNumbers = Generator.randomNumbersGenerator(this.purchaseAmout);
+    this.userNumbersList = Generator.randomNumbersGenerator(this.purchaseAmout);
 
     this.results = {
       '3Equal': 0,
