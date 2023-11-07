@@ -24,11 +24,11 @@ class App {
     try {
       const priceAnswer = await inputs.enterPrice();
       const priceObject = new Price(Number(priceAnswer));
-      const { number } = priceObject.getPriceAndNumber();
+      const { price, number } = priceObject.getPriceAndNumber();
 
       outputs.printNumberOfLotto(number);
 
-      return { ...priceObject.getPriceAndNumber() };
+      return { price, number };
     } catch (error) {
       Console.print(error.message);
       return this.#executePrice();
