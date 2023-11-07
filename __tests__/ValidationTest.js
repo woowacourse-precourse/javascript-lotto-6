@@ -29,6 +29,12 @@ describe('유효성 검사 테스트', () => {
             expect(() => checkBonusNumbers(bonusNumber, winningNumbers)).toThrow(ERROR.INVALID_BONUS_NUMBER_MESSAGE);
         });
         
+        test('보너스 번호가 정수가 아닌 숫자라면 예외가 발생한다.', () => {
+            const bonusNumber = 1.1;
+            const winningNumbers = [1, 2, 3, 4, 5, 6];
+            expect(() => checkBonusNumbers(bonusNumber, winningNumbers)).toThrow(ERROR.INVALID_BONUS_NUMBER_MESSAGE);
+        });
+
         test('보너스 번호가 당첨 번호에 포함되어 있으면 예외가 발생한다.', () => {
             const bonusNumber = 1;
             const winningNumbers = [1, 2, 3, 4, 5, 6];
