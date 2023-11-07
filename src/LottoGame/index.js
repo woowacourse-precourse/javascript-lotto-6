@@ -37,6 +37,14 @@ class LottoGame {
     this.#lottoMachine.setWinningNumbers(winningNums);
     await this.askBonusNumber(winningNums);
   }
+
+  async askBonusNumber(winningNumbers) {
+    const bonusNumber = await Input.readLine(MESSAGE.askBonusNumber, (answer) =>
+      Validator.validateBonusNumber(winningNumbers, answer),
+    );
+    this.#lottoMachine.setBonusNumber(bonusNumber);
+    this.prize();
+  }
 }
 
 export default LottoGame;
