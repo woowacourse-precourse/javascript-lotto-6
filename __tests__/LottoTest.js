@@ -32,4 +32,9 @@ describe("로또 클래스 테스트", () => {
       new Lotto([1, -2, 3, 4, 11, 5]);
     }).toThrow("[ERROR]");
   });
+
+  test("로또 등수 테스트", () => {
+    const rank = new Lotto([1, 2, 3, 4, 11, 5]).getRank([1, 2, 3, 4, 11, 5], 7);
+    expect(rank).toBe(1);
+  });
 });
