@@ -32,13 +32,8 @@ class Lotto {
 
   static buyLottoTickets(money) {
     const purchaseAmount = money / Lotto.UNIT;
-    const lottoTickets = [];
 
-    for (let i = 0; i < purchaseAmount; i++) {
-      lottoTickets.push(Lotto.generateLottoNumber());
-    }
-
-    return lottoTickets;
+    return Array.from({ length: purchaseAmount }).map(() => Lotto.generateLottoNumber());
   }
 
   static toArray(number) {
