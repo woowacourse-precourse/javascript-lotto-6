@@ -1,18 +1,18 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const OutputView = {
+class OutputView {
   printErrorMessage(error) {
     return Console.print(error);
-  },
+  }
 
   printPurchaseAmount(amount) {
     return Console.print(`\n${amount}개를 구매했습니다.`);
-  },
+  }
 
   printPurchasedLotto(purchasedLotto) {
     const lottos = purchasedLotto.map((lotto) => `[${lotto.join(', ')}]`).join('\n');
     return Console.print(`${lottos}\n`);
-  },
+  }
 
   printWinsStatistics(winsStatistics) {
     Console.print(`\n당첨통계\n---`);
@@ -28,11 +28,11 @@ const OutputView = {
     prizeLevels.forEach((level) => {
       Console.print(`${level.label} - ${winsStatistics[level.prizeKey]}개`);
     });
-  },
+  }
 
   printProfitRatio(profitRatio) {
     Console.print(`총 수익률은 ${profitRatio}%입니다.`);
-  },
-};
+  }
+}
 
 export default OutputView;
