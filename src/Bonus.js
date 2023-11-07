@@ -11,12 +11,10 @@ import {
 
 class Bonus {
   #number;
-  #winningNumber;
 
   constructor(number, winningNumber) {
     this.#validate(number, winningNumber);
     this.#number = number;
-    this.#winningNumber = winningNumber;
   }
 
   #validate(number, winningNumber) {
