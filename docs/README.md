@@ -43,9 +43,6 @@
 ┗ src
   ┗ constant
     ┗ Constant.js
-  ┗ user
-    ┗ Input.js
-    ┗ Output.js
   ┗ validation
     ┗ Validation.js
   ┣ App.js
