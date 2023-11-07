@@ -29,9 +29,7 @@ class Lotto {
   }
 
   #checkDuplicate(numbers) {
-    const duplicate = numbers.filter((number, index) => {numbers.indexOf(number) != index});
-
-    if(duplicate) throw new Error('[ERROR] : winning number has to be uniqe.');
+    if(numbers.length != new Set(numbers).size) throw new Error('[ERROR] : winning number has to be uniqe.');
   }
 
   getNumbers() {
