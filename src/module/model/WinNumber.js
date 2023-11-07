@@ -36,7 +36,7 @@ class WinNumber {
   }
 
   #validateBonus(bonusNumber) {
-    if(isNaN(bonusNumber)) {
+    if (isNaN(bonusNumber)) {
       throw new Error('[ERROR] 보너스 번호는 정수 한개만 입력되어야 합니다.');
     }
   }
