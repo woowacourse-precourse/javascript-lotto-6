@@ -12,12 +12,15 @@ class App {
 
   #BONUS_NUMBER;
 
+  #MAX_LENGTH;
+
   constructor() {
     this.#USER_PRICE = 0;
     this.#USER_LOTTOS = [];
     this.#WINNING_NUMBERS = [];
     this.#LOTTOS_MAX = 0;
     this.#BONUS_NUMBER = 0;
+    this.#MAX_LENGTH = 6;
   }
 
   async getInputPrice() {
@@ -52,7 +55,7 @@ class App {
       this.makeWinningNumberArray(TMP_WINNING_NUMBER);
     } catch (e) {
       Console.print(e);
-      this.getInputWinningNumber();
+      return this.getInputWinningNumber();
     }
   }
 
@@ -63,9 +66,7 @@ class App {
   }
 
   checkInputWinningNumber(winningNumber) {
-    const MAX_LENGTH = 6;
-
-    if (winningNumber.length !== MAX_LENGTH) {
+    if (winningNumber.length !== this.#MAX_LENGTH) {
       throw new Error('[ERROR] 당첨 번호는 6자리 숫자여야 합니다.');
     } else if (new Set(winningNumber).size !== winningNumber.length) {
       throw new Error('[ERROR] 당첨 번호가 중복되었습니다.');
@@ -82,32 +83,60 @@ class App {
     const BONUS_NUMBER_INPUT =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
 
-    try{
+    try {
       this.checkInputBonusNumber(parseInt(BONUS_NUMBER_INPUT, 10));
       this.#BONUS_NUMBER = parseInt(BONUS_NUMBER_INPUT, 10);
-    } catch(e) {
+    } catch (e) {
       Console.print(e);
-      this.getInputBonusNumber();
+      return this.getInputBonusNumber();
     }
   }
 
   checkInputBonusNumber(bonusNumber) {
-    if(bonusNumber < 1 || bonusNumber > 45) {
+    if (bonusNumber < 1 || bonusNumber > 45) {
       throw new Error('[ERROR] 보너스 번호는 1 ~ 45 사이의 숫자여야 합니다.');
-    } else if(this.#WINNING_NUMBERS.includes(bonusNumber)) {
+    } else if (this.#WINNING_NUMBERS.includes(bonusNumber)) {
       throw new Error('[ERROR] 보너스 번호가 당첨 번호와 중복됩니다.');
     }
   }
 
+  makeLottoArray() {
+    try {
+      while (this.#USER_LOTTOS.length < this.#LOTTOS_MAX) {
+        this.#USER_LOTTOS.push(new Lotto(this.makeEachLotto()).makeLotto());
+      }
+    } catch(e) {
+      Console.print(e);
+      return this.makeLottoArray();
+    }
+    
+  }
+
+  makeEachLotto() {
+    const TMP_LOTTO = [];
+
+    while (TMP_LOTTO.length < this.#MAX_LENGTH) {
+      const NUMBER = Random.pickNumberInRange(1, 45);
+      if (!TMP_LOTTO.includes(NUMBER)) {
+        TMP_LOTTO.push(NUMBER);
+      }
+    }
+
+    return TMP_LOTTO;
+  }
+
   async play() {
     await this.getInputPrice();
+    
     await this.getInputWinningNumber();
     await this.getInputBonusNumber();
+    this.makeLottoArray();
 
     Console.print(this.#USER_PRICE);
     Console.print(this.#LOTTOS_MAX);
     Console.print(this.#WINNING_NUMBERS);
     Console.print(this.#BONUS_NUMBER);
+    Console.print(this.#USER_LOTTOS);
   }
 }
 
