@@ -1,55 +1,60 @@
+import { RANK } from '../constants/options.js';
+
 class Analyzer {
-  #prizeInfo;
+  #rankedLotto;
 
-  constructor() {
-    this.#prizeInfo = {
-      firstPlace: 0,
-      secondPlace: 0,
-      thirdPlace: 0,
-      fourthPlace: 0,
-      fifthPlace: 0,
-      totalPrizeMoeny: 0,
+  constructor(matchedNumberList) {
+    this.#rankedLotto = {
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+      losingLotto: 0,
     };
+    this.matchedNumberList = matchedNumberList;
+    this.getRankedLotto();
+    this.countWinningRank();
+    this.calculateTotalPrize();
   }
 
-  getPrizeInfo() {
-    return this.#prizeInfo;
+  getRankedLotto() {
+    return this.#rankedLotto;
   }
 
-  getPrize(winnigResult) {
-    const prizeLookup = {
-      '6,0': 'firstPlace',
-      '5,1': 'secondPlace',
-      '5,0': 'thirdPlace',
-      '4,0': 'fourthPlace',
-      '3,0': 'fifthPlace',
-    };
-    winnigResult.forEach((matchingResult) => {
-      const prize = prizeLookup[matchingResult.join(',')] || 0;
-      if (prize) {
-        this.#prizeInfo[prize] += 1;
-      }
+  countWinningRank() {
+    this.matchedNumberList.forEach((numbers) => {
+      this.#rankedLotto[this.checkRank(numbers[0], numbers[1])] += 1;
     });
   }
 
-  calculateTotalPrize() {
-    const prizeLookup = {
-      firstPlace: 2000000000,
-      secondPlace: 30000000,
-      thirdPlace: 1500000,
-      fourthPlace: 50000,
-      fifthPlace: 5000,
-    };
-    for (const rank in this.#prizeInfo) {
-      if (rank !== 'totalPrizeMoeny') {
-        this.#prizeInfo.totalPrizeMoeny +=
-          this.#prizeInfo[rank] * prizeLookup[rank];
-      }
-    }
+  checkRank(winCount, bonusCount) {
+    if (winCount === 6) return RANK.first[0];
+    if (winCount === 5 && bonusCount) return RANK.second[0];
+    if (winCount === 5) return RANK.third[0];
+    if (winCount === 4) return RANK.fourth[0];
+    if (winCount === 3) return RANK.fifth[0];
+    return RANK.losingLotto[0];
   }
 
-  calculateYield(money) {
-    return ((this.#prizeInfo.totalPrizeMoeny / money) * 100).toFixed(2);
+  calculateTotalPrize() {
+    let totalPrize = 0;
+    for (const rank in this.#rankedLotto) {
+      totalPrize += RANK[rank][1] * this.#rankedLotto[rank];
+    }
+
+    return totalPrize;
+  }
+
+  calculateProfitRate() {
+    const totalPrize = this.calculateTotalPrize();
+    let paymentAmount = 0;
+    for (const rank in this.#rankedLotto) {
+      paymentAmount += this.#rankedLotto[rank];
+    }
+    paymentAmount *= 1000;
+
+    return ((totalPrize / paymentAmount) * 100).toFixed(1);
   }
 }
 
