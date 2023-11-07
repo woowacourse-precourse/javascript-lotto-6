@@ -1,6 +1,6 @@
+import { Random } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE } from '../constants/Message.js';
 import { SETTING } from '../constants/Constant.js';
-import Lotto from '../Lotto.js';
 
 class LottoData {
   constructor(amount) {
@@ -22,10 +22,15 @@ class LottoData {
 
   getLottos() {
     for (let i = 0; i < this.count; i++) {
-      const numbers = new Lotto().generateLotto();
+      const numbers = this.generateLotto();
       this.lottos.push(numbers);
     }
     return { count: this.count, lottos: this.lottos };
+  }
+
+  generateLotto() {
+    const numbers = Random.pickUniqueNumbersInRange(SETTING.start, SETTING.end, SETTING.pick);
+    return numbers.sort((a, b) => a - b);
   }
 }
 
