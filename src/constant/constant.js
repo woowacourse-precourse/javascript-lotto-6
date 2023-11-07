@@ -3,6 +3,9 @@ export const WINNING_NUMBERS = '당첨 번호를 입력해주세요.';
 export const BONUS_NUMBER = '보너스 번호를 입력해 주세요.';
 
 export const THOUSAND = 1000;
+export const RANDOM_MIN = 1;
+export const RANDOM_MAX = 45;
+export const RANDOM_COUNT = 6;
 
 export const BUY_MESSAGE = (buyAmount) => {
     return `${buyAmount}개를 구매했습니다.`
