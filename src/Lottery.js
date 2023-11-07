@@ -64,10 +64,16 @@ export default class Lottery {
       if (this.#winningNumberList.length !== 6)
         throw Error('6개의 번호가 아니거나 ","로 구분하지 않았습니다');
 
-      this.#winningNumberList.forEach((winningNumber) => {
-        this.commomValidator(winningNumber);
-        if (winningNumber < 1 || winningNumber > 45)
+      this.#winningNumberList.forEach((targetNumber) => {
+        this.commomValidator(targetNumber);
+        if (targetNumber < 1 || targetNumber > 45)
           throw Error('각 번호가 1~45 사이 자연수이지 않습니다.');
+        if (
+          this.#winningNumberList.filter(
+            (winningNumber) => winningNumber === targetNumber,
+          ).length > 1
+        )
+          throw Error('중복된 번호가 존재합니다.');
       });
     }, 'winningNumberList');
   }
