@@ -19,10 +19,38 @@ const isDisvisible = (input) => {
   }
 };
 
+const isCorrectLength = (input) => {
+  if (input.length !== 6) {
+    throw new MyError(ERROR_MESSAGE.WRONG_LENGTH);
+  }
+};
+
+const isNotDuplicated = (input) => {
+  const set = new Set(input);
+  if (set.size !== input.length) {
+    throw new MyError(ERROR_MESSAGE.IS_DUPLICATED);
+  }
+};
+
+const isNumberInRange = (input) => {
+  if (!(input >= Constant.MIN_RANDOM_NUMBER && input <= Constant.MAX_RANDOM_NUMBER)) {
+    throw new MyError(ERROR_MESSAGE.NOT_IN_RANGE);
+  }
+};
+
+const validateGoalNumber = (numbers) => {
+  numbers.forEach((number) => {
+    isNumber(number);
+    isNumberInRange(number);
+  });
+  isCorrectLength(numbers);
+  isNotDuplicated(numbers);
+};
+
 const validatePurchaseAmount = (purchaseAmount) => {
   isNotEmpty(purchaseAmount);
   isNumber(purchaseAmount);
   isDisvisible(purchaseAmount);
 };
 
-export { validatePurchaseAmount };
+export { validatePurchaseAmount, validateGoalNumber };
