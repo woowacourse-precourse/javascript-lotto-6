@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
 import { LOTTO_PRICE } from '../constants/GameSetting.js';
 import { checkLottoResult } from '../utils/CheckLottoResult.js';
@@ -23,26 +24,32 @@ export default class LottoGameController {
   #profitRate;
 
   async play() {
-    await this.buyAmount();
-    this.countLotto();
-    this.buyLotto();
-    await this.giveLottoNumbers();
-    await this.giveBonusNumber();
-    this.checkLotto();
-    this.showProfitRate();
+    try {
+      await this.buyAmount();
+      //   this.countLotto();
+      //   this.buyLotto();
+      await this.giveLottoNumbers();
+      await this.giveBonusNumber();
+      this.checkLotto();
+      this.showProfitRate();
+    } catch (err) {
+      Console.print(err.message);
+      await this.play();
+    }
   }
 
   async buyAmount() {
     this.#buyLottoAmount = await inputBuyAmount();
+    this.countLotto();
   }
 
   countLotto() {
     this.#buyLottoCnt = this.#buyLottoAmount / LOTTO_PRICE;
+    this.buyLotto();
   }
 
   buyLotto() {
     printBuyLotto(this.#buyLottoCnt);
-
     for (let i = 0; i < this.#buyLottoCnt; i++) {
       this.#createdLottoNumbers.push(this.makeLotto());
     }

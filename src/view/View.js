@@ -1,5 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE_NOTIFICATION, MESSAGE_RANK_RESULT } from '../constants/Message.js';
+import {
+  MESSAGE_LOTTO_COUNT,
+  MESSAGE_NOTIFICATION,
+  MESSAGE_RANK_RESULT,
+} from '../constants/Message.js';
 import { isValidBounsNumber, isValidBuyAmount, isValidWinningLotto } from '../utils/Validation.js';
 
 export async function inputBuyAmount() {
@@ -8,7 +12,7 @@ export async function inputBuyAmount() {
     isValidBuyAmount(inputValue);
     return Number(inputValue);
   } catch (err) {
-    Console.print(err);
+    Console.print(err.message);
     return inputBuyAmount();
   }
 }
@@ -19,7 +23,7 @@ export async function inputWinningLotto() {
     isValidWinningLotto(inputValue);
     return inputValue.split(',').map((number) => Number(number));
   } catch (err) {
-    Console.print(err);
+    Console.print(err.message);
     return inputWinningLotto();
   }
 }
@@ -30,17 +34,21 @@ export async function inputBounsNumber(winningLottoNumbers) {
     isValidBounsNumber(inputValue, winningLottoNumbers);
     return Number(inputValue);
   } catch (err) {
-    Console.print(err);
+    Console.print(err.message);
     return inputBounsNumber(winningLottoNumbers);
   }
 }
 
 export function printBuyLotto(buyLottoCnt) {
-  Console.print(`\n${buyLottoCnt}${MESSAGE_NOTIFICATION.buyLotto}`);
+  Console.print(MESSAGE_LOTTO_COUNT.buyLotto(buyLottoCnt));
 }
 
 export function printLottoArray(lottos) {
-  lottos.forEach((lotto) => Console.print(lotto));
+  const lottosList = [];
+  lottos.forEach((lotto) => {
+    lottosList.push(`[${lotto.join(', ')}]`);
+  });
+  lottosList.forEach((lotto) => Console.print(lotto));
 }
 
 export function printResult() {
