@@ -7,7 +7,6 @@ import BonusNumber from "../model/BonusNumber.js";
 class LottoGameController {
   #lottoTickets;
   #winningLotto;
-  #purchaseAmount;
   #bonusNumber;
 
   constructor() {}
@@ -71,7 +70,7 @@ class LottoGameController {
 
   async handleBonusNumberError(number) {
     try {
-      InputValidator.bonusNumber(number);
+      InputValidator.bonusNumber(this.#winningLotto.getTicketNumbers(), number);
       this.#bonusNumber = new BonusNumber(number);
     } catch (error) {
       OutputView.printErrorMessage(error);

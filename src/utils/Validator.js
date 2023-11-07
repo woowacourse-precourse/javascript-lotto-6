@@ -1,4 +1,5 @@
 import { ErrorMessage } from "../static/Constant.js";
+import CheckDuplicates from "./CheckDuplicates.js";
 
 const InputValidator = {
   purchaseAmount(input) {
@@ -21,8 +22,11 @@ const InputValidator = {
         throw new Error(ErrorMessage.LOTTO_NUMBER_ERROR);
       }
     });
+    if (CheckDuplicates.winningNumber(input)) {
+      throw new Error(ErrorMessage.USER_DUPLICATE_ERROR);
+    }
   },
-  bonusNumber(input) {
+  bonusNumber(numbers, input) {
     if (input.length > 2) {
       throw new Error(ErrorMessage.BONUS_LENGTH_ERROR);
     }
@@ -31,6 +35,9 @@ const InputValidator = {
     }
     if (+input < 1 || +input > 45) {
       throw new Error(ErrorMessage.LOTTO_NUMBER_ERROR);
+    }
+    if (numbers.includes(input)) {
+      throw new Error(ErrorMessage.USER_DUPLICATE_ERROR);
     }
   },
 };
