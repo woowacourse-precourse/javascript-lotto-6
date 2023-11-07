@@ -24,13 +24,10 @@ class LottoController {
 
   async playGame() {
     await this.setPurchaseQty();
-    OutputView.printBlankLine();
-    this.showPurchaseQuantity();
+    this.showPurchaseQty();
     this.setLottoList();
     this.showLottoList();
-    OutputView.printBlankLine();
     await this.setWinningNums();
-    OutputView.printBlankLine();
     await this.setBonusNum();
     this.checkLottoList();
     this.showResult();
@@ -41,7 +38,7 @@ class LottoController {
     this.#purchaseQty = await InputView.readPurchasePrice();
   }
 
-  showPurchaseQuantity() {
+  showPurchaseQty() {
     OutputView.printPurchaseQuantity(this.#purchaseQty);
   }
 

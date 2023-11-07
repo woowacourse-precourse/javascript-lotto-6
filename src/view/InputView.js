@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import Calculator from "../utils/calc/Calculator.js";
-import { MESSAGE_ASK, SEPARATOR } from "../static/Static.js";
+import { MESSAGE_ASK } from "../static/Static.js";
 import InputValidator from "../utils/validator/InputValidator.js";
 import OutputView from "./OutputView.js";
 
@@ -21,6 +21,7 @@ const InputView = {
   },
 
   async readWinningNums() {
+    OutputView.printBlankLine();
     while (true) {
       try {
         const winningNums = await Console.readLineAsync(
@@ -35,6 +36,7 @@ const InputView = {
   },
 
   async readBonusNum(winningNums) {
+    OutputView.printBlankLine();
     while (true) {
       try {
         const bonusNum = await Console.readLineAsync(MESSAGE_ASK.bonusNum);
