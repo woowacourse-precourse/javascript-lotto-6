@@ -20,30 +20,6 @@ class InputView {
     }
   }
 
-  #validate(price) {
-    if (validation.isEmpty(price)) {
-      throw new ValidateError(ERROR_MESSAGE.empty);
-    }
-
-    const numberPrice = Number(price);
-
-    this.#numberValidate(numberPrice);
-  }
-
-  #numberValidate(price) {
-    if (validation.isNumberZero(price)) {
-      throw new ValidateError(ERROR_MESSAGE.notZero);
-    }
-
-    if (isNaN(price)) {
-      throw new ValidateError(ERROR_MESSAGE.notNumber);
-    }
-
-    if (validation.isNotLottoPurchagePriceRange(price)) {
-      throw new ValidateError(ERROR_MESSAGE.lottoPurchasePriceRange);
-    }
-  }
-
   async getLottoWinningNumbers() {
     while (true) {
       try {
@@ -57,6 +33,46 @@ class InputView {
       } catch (error) {
         Console.print(error.message);
       }
+    }
+  }
+
+  async getLottoBonusNumber(winningNumbers) {
+    while (true) {
+      try {
+        const lottoBonusNumber = Number(
+          await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber),
+        );
+
+        this.#validateBonusNumber(lottoBonusNumber, winningNumbers);
+
+        return lottoBonusNumber;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  #validate(price) {
+    if (validation.isEmpty(price)) {
+      throw new ValidateError(ERROR_MESSAGE.empty);
+    }
+
+    const numberPrice = Number(price);
+
+    this.#validateNumber(numberPrice);
+  }
+
+  #validateNumber(price) {
+    if (validation.isNumberZero(price)) {
+      throw new ValidateError(ERROR_MESSAGE.notZero);
+    }
+
+    if (isNaN(price)) {
+      throw new ValidateError(ERROR_MESSAGE.notNumber);
+    }
+
+    if (validation.isNotLottoPurchagePriceRange(price)) {
+      throw new ValidateError(ERROR_MESSAGE.lottoPurchasePriceRange);
     }
   }
 
@@ -90,23 +106,7 @@ class InputView {
     }
   }
 
-  async getLottoBonusNumber(winningNumbers) {
-    while (true) {
-      try {
-        const lottoBonusNumber = Number(
-          await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber),
-        );
-
-        this.#validateNumber(lottoBonusNumber, winningNumbers);
-
-        return lottoBonusNumber;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
-  }
-
-  #validateNumber(number, winningNumbers) {
+  #validateBonusNumber(number, winningNumbers) {
     if (validation.isEmpty(number)) {
       throw new ValidateError(ERROR_MESSAGE.empty);
     }
