@@ -12,7 +12,7 @@ export const MONEY_ERROR = Object.freeze({
 });
 
 export const LOTTO_ERROR = Object.freeze({
-  count: `로또 번호는 ${LOTTO_NUMBER.count}개여야 합니다.`,
+  count: `로또 번호는 ${LOTTO_NUMBER.count}개여야 합니다. (쉼표(,)를 기준으로 6개 입력해주세요.)`,
   duplication: '로또 번호는 중복될 수 없습니다.',
   range: `로또 번호는 ${LOTTO_NUMBER.min}이상 ${LOTTO_NUMBER.max}이하의 숫자로 구성되어야 합니다.`,
 });
