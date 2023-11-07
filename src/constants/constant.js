@@ -23,7 +23,7 @@ const ERROR_MESSAGE = Object.freeze({
   INPUT_TYPE_ERROR: '[ERROR] 숫자만 입력해 주세요.',
   INPUT_DUPLICATE_ERROR: '[ERROR] 중복 없는 6개의 로또 번호를 입력해 주세요.',
   INPUT_INCLUDES_ERROR: '[ERROR] 당첨 로또 번호에 포함되지 않는 번호를 입력해 주세요.',
-  RANDOM_ERROR: '[ERROR] random Number가 올바르게 생성되지 않았습니다.',
+  INVALID_ERROR: '[ERROR] 유효하지 않은 값입니다.',
 })
 
 export { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE };
