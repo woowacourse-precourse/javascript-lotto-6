@@ -5,20 +5,37 @@ import {
   ValidatePurchasePriceUserInput,
   ValidateBonusNumberUserInput,
 } from './utils/ValidateUserInput.js';
+import LottoMachine from './domains/LottoMachine.js';
+import { LOTTO } from './constants/lotto.js';
+import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
+import paramType from './lib/paramType/src/paramType.js';
 
 class App {
   #inputReader;
   #promptPrinter;
+  #randomNumberGenerator;
+  #lottoMachine;
 
   constructor() {
     this.#inputReader = new InputReader();
     this.#promptPrinter = new PromptPrinter();
+    this.#randomNumberGenerator = new RandomNumberGenerator(
+      LOTTO.NUMBER_RANGE.MIN,
+      LOTTO.NUMBER_RANGE.MAX,
+      LOTTO.NUMBER_COUNT,
+    );
+    this.#lottoMachine = new LottoMachine(
+      LOTTO.SELLING_PRICE,
+      this.#randomNumberGenerator,
+    );
   }
 
   async play() {
     const purchasePrice = await this.requestPurchasePrice();
     const winningNumbers = await this.requestWinningNumbers();
     const bonusNumber = await this.requestBonusNumber(winningNumbers);
+
+    this.setting(purchasePrice, winningNumbers, bonusNumber);
   }
 
   async requestPurchasePrice() {
@@ -55,6 +72,20 @@ class App {
       this.#promptPrinter.userInputErrorMessage(error);
       return await this.requestBonusNumber(winningNumbers);
     }
+  }
+
+  setting(
+    purchasePrice,
+    winningNumbers,
+    bonusNumber,
+    _0 = paramType(purchasePrice, 'string'),
+    _1 = paramType(winningNumbers, 'string'),
+    _2 = paramType(bonusNumber, 'string'),
+  ) {
+    const lottoInstances = this.#lottoMachine.purchase(Number(purchasePrice));
+    const lottoList = [...lottoInstances].map((lotto) => lotto.getNumbers());
+    this.#promptPrinter.purchaseCount([...lottoInstances].length);
+    this.#promptPrinter.purchaseLottoInfo(lottoList);
   }
 }
 
