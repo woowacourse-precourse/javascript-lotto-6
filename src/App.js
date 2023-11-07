@@ -3,11 +3,14 @@ import Lotto from "../src/Lotto.js";
 const WINNING_PRICE = [5000, 50000, 1500000, 30000000, 2000000000];
 const PRICE_UNIT = 1000;
 
+const INPUT = ["8000", "1,2,3,4,5,6", "7"];
+
 class App {
   async play() {
     //구매금액 입력
     MissionUtils.Console.print("구입금액을 입력해 주세요.");
     const price = await MissionUtils.Console.readLineAsync();
+    // const price = INPUT[0];
     check_number(price);
     if (parseInt(price) % PRICE_UNIT != 0) {
       throw new Error(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
@@ -20,17 +23,19 @@ class App {
     const tickets = produce_ticket(ticket_num);
 
     tickets.forEach((ticket) =>
-      MissionUtils.Console.print(ticket.get_numbers())
+      MissionUtils.Console.print(`[${ticket.get_numbers().join(", ")}]`)
     );
 
     //당첨번호 입력
     MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
     const input = await MissionUtils.Console.readLineAsync();
+    // const input = INPUT[1];
     const winning_number = new Lotto(input.split(",").map(Number));
 
     //보너스 번호 입력
     MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
     const bonus_number = await MissionUtils.Console.readLineAsync();
+    // const bonus_number = INPUT[2];
     check_number(bonus_number);
 
     //로또들 당첨 총액 확인
@@ -60,19 +65,29 @@ class App {
         sum_of_result += result;
       });
       MissionUtils.Console.print(
-        `3개 일치 (${WINNING_PRICE[0]}원) - ${winning_count[0]}개`
+        `3개 일치 (${WINNING_PRICE[0].toLocaleString()}원) - ${
+          winning_count[0]
+        }개`
       );
       MissionUtils.Console.print(
-        `4개 일치 (${WINNING_PRICE[1]}원) - ${winning_count[1]}개`
+        `4개 일치 (${WINNING_PRICE[1].toLocaleString()}원) - ${
+          winning_count[1]
+        }개`
       );
       MissionUtils.Console.print(
-        `5개 일치 (${WINNING_PRICE[2]}원) - ${winning_count[2]}개`
+        `5개 일치 (${WINNING_PRICE[2].toLocaleString()}원) - ${
+          winning_count[2]
+        }개`
       );
       MissionUtils.Console.print(
-        `5개 일치, 보너스 볼 일치 (${WINNING_PRICE[3]}원) - ${winning_count[3]}개`
+        `5개 일치, 보너스 볼 일치 (${WINNING_PRICE[3].toLocaleString()}원) - ${
+          winning_count[3]
+        }개`
       );
       MissionUtils.Console.print(
-        `6개 일치 (${WINNING_PRICE[4]}원) - ${winning_count[4]}개`
+        `6개 일치 (${WINNING_PRICE[4].toLocaleString()}원) - ${
+          winning_count[4]
+        }개`
       );
       return sum_of_result;
     }
