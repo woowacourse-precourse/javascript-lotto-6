@@ -2,7 +2,7 @@ import ERROR_MESSAGE from "../constant/ErrorMessage.js";
 
 const Validator = {
   purchaseAmount(money) {
-    if (money === 0 || isNaN(money)) {
+    if (money == 0 || isNaN(money)) {
       throw new Error(ERROR_MESSAGE.NOT_VALID_PURCHASE_AMOUNT);
     }
     if (money % 1000 !== 0) {
