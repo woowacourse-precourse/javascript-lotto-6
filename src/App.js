@@ -4,17 +4,20 @@ import { validatePurchaseFormat } from "./validation/validation.js";
 import { INPUT_MSG } from "./constants/InputMessage.js";
 
 class App {
+  #generatedLottoNums;
+
   constructor() {
     this.ticketsAmount = 0;
-    this.count = 0;
-    this.generatedLottoNums = [];
+    this.matchingTotalNumber = 0;
+    this.#generatedLottoNums = [];
     this.inputedLottoNums = [];
   }
   async play() {
     await this.purchaseTicket();
     await this.generateNumbers();
     await this.inputLotteryResults();
-    this.matchingNumbers(this.generatedLottoNums, this.inputedLottoNums);
+    this.matchingNumbers(this.#generatedLottoNums, this.inputedLottoNums);
+    console.log(this.matchingTotalNumber, "matching total number");
   }
 
   async purchaseTicket() {
@@ -31,24 +34,33 @@ class App {
       if (lottoNums.length > 6) {
         throw new Error("[ERROR]");
       }
-      this.generatedLottoNums.push(lottoNums);
+
+      this.#generatedLottoNums.push(lottoNums);
       await Console.print(stringifyNums);
+      // this.#generatedLottoNums = this.#generatedLottoNums.concat(lottoNums);
     }
+
+    // this.matchingNumbers(this.#generatedLottoNums, this.inputedLottoNums);
   }
   async inputLotteryResults() {
     const results = await Console.readLineAsync(INPUT_MSG.results);
     const resultsArray = results.split(",").map(Number);
     const validateNums = new Lotto(resultsArray);
-    this.inputedLottoNums.push(resultsArray);
+
+    // console.log(resultsArray, "inputed results");
+    this.inputedLottoNums = this.inputedLottoNums.concat(resultsArray);
+
+    // this.inputedLottoNums.push(resultsArray);
     Console.print(resultsArray);
   }
 
   matchingNumbers(generated, inputed) {
-    for (let i = 0; i < generated.length; i++) {
-      for (let j = 0; j < inputed.length; j++) {
-        if (generated[i] === inputed[j]) {
-          this.count += 1;
-          Console.print(this.count);
+    for (const ticket of generated) {
+      console.log(ticket, "const ticket of ticket result");
+      for (const num of this.inputedLottoNums) {
+        if (ticket.includes(num)) {
+          console.log(num, "matching num");
+          this.matchingTotalNumber++;
         }
       }
     }
