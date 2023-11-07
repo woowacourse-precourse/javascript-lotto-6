@@ -20,4 +20,5 @@ export function winningrule(arrary, bonusnum, i, result) {
   ) {
     result['5'] += 1;
   }
+  return result;
 }
