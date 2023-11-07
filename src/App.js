@@ -49,8 +49,13 @@ class App {
 		this.initialUserLotto(purchasePrice);
 
 		const lottoWinningNumber = await InputOutputManager.getUserInput(
-			'당첨 번호를 입력해 주세요.\n',
+			'\n당첨 번호를 입력해 주세요.\n',
 			VarificationManager.checkLottoNumber,
+		);
+
+		const lottoBonusNumber = await InputOutputManager.getUserInput(
+			'\n보너스 번호를 입력해 주세요.\n',
+			(value) => VarificationManager.checkBonusLottoNumber(lottoWinningNumber, value),
 		);
 	}
 
