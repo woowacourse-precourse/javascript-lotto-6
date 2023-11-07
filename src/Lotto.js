@@ -18,12 +18,7 @@ class Lotto {
     numbers.forEach((number) => {
       numbersCheck.duplicate(numbers, number, MESSAGE.ERROR.duplicate);
       numberCheck.number(number, MESSAGE.ERROR.number);
-      numberCheck.rangeCheck(
-        number,
-        LOTTO_NUMBER.startNumber,
-        LOTTO_NUMBER.endNumber,
-        MESSAGE.ERROR.lottoRange,
-      );
+      numberCheck.rangeCheck(number, LOTTO_NUMBER.startNumber, LOTTO_NUMBER.endNumber, MESSAGE.ERROR.lottoRange);
     });
   }
 
