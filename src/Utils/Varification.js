@@ -1,17 +1,33 @@
 import LOTTO_CONSTANTS from '../Constants/LottoContstants.js';
 
-const isNumber = (string) => {
-	if (Number.isNaN(string)) throw new Error('[ERROR] 유효한 숫자를 입력해주세요.');
+const Varificator = {
+	isNotNumber(value) {
+		return Number.isNaN(value);
+	},
 
-	return string;
+	isDecimal(value) {
+		return Number(value) % 1 !== 0;
+	},
+
+	isNotPlus(value) {
+		return Number(value) <= 0;
+	},
+
+	isInvalidNumber(value) {
+		return this.isNotNumber(value) || this.isDecimal(value) || this.isNotPlus(value);
+	},
+
+	isNotDividableWithStandardCost(string) {
+		return Number(string) % LOTTO_CONSTANTS.standartLottoCost !== 0;
+	},
+
+	isNotFitWithLottoLength(numbers) {
+		return numbers.length !== LOTTO_CONSTANTS.lottoNumberCount;
+	},
+
+	isNotNumberInRange(number, maxRange, minRange) {
+		return number > maxRange || number < minRange;
+	},
 };
 
-const isDividableWithStandardCost = (string) => {
-	if (Number(string) % LOTTO_CONSTANTS.standartLottoCost > 0) {
-		throw new Error(`[ERROR] ${LOTTO_CONSTANTS.standartLottoCost}원 단위로 입력해주세요.`);
-	}
-
-	return string;
-};
-
-export { isNumber, isDividableWithStandardCost };
+export default Varificator;

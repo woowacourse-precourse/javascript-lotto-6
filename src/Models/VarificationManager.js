@@ -1,10 +1,15 @@
-import { isNumber, isDividableWithStandardCost } from '../Utils/Varification.js';
+import Varificator from '../Utils/Varification.js';
+import LOTTO_CONSTANTS from '../Constants/LottoContstants.js';
 
-class VarirficationManager {
+class VarificationManager {
 	static checkPurchasePrice(value) {
-		isNumber(value);
-		isDividableWithStandardCost(value);
+		if (Varificator.isInvalidNumber(value)) {
+			throw new Error('[ERROR] 유효하지 않은 숫자입니다.');
+		}
+		if (Varificator.isNotDividableWithStandardCost(value)) {
+			throw new Error(`[ERROR] ${LOTTO_CONSTANTS.standartLottoCost}원 단위로 입력해주세요.`);
+		}
 	}
 }
 
-export default VarirficationManager;
+export default VarificationManager;
