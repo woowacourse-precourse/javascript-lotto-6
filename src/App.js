@@ -30,6 +30,8 @@ class App {
     const lottoTotalWinnings = this.calculateTotalWinnings(
       this.lottoRankingResult
     );
+
+    const lottoWinningCountList = this.getWinningCount(this.lottoRankingResult);
   }
 
   async getLottoAmount() {
@@ -119,6 +121,24 @@ class App {
     }, 0);
 
     return totalWinnings;
+  }
+
+  getWinningCount(rankingResult) {
+    const winningCount = {
+      5: 0,
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0,
+    };
+    rankingResult.forEach((ranking) => {
+      const rankingKey = ranking.toString();
+      if (winningCount.hasOwnProperty(rankingKey)) {
+        winningCount[rankingKey]++;
+      }
+    });
+
+    return winningCount;
   }
 }
 
