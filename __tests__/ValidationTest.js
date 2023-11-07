@@ -157,27 +157,45 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
     );
   });
 
-  test('test2: 보너스 번호가 입력 가능 범위를 벗어난 경우', async () => {
-    // given
-    const input = ['50'];
-    const winningNumbers = [1, 2, 3, 4, 5, 6];
-    mockQuestions(input);
+  test.each([[['3abc']], [[' 3']], [['..3']]])(
+    'test2: 입력 값에 숫자가 아닌 다른 문자를 사용했을 경우',
+    async inputs => {
+      // given
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      mockQuestions(inputs);
 
-    // then
-    await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
-      '[ERROR] 보너스 번호에는 1부터 45 사이의 숫자만 입력할 수 있습니다.',
-    );
-  });
+      // then
+      await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
+        '[ERROR] 보너스 번호에는 1부터 45 사이의 숫자만 입력할 수 있습니다.',
+      );
+    },
+  );
 
-  test('test3: 당첨 번호에 보너스 번호가 포함되어있는 경우', async () => {
-    // given
-    const input = ['3'];
-    const winningNumbers = [1, 2, 3, 4, 5, 6];
-    mockQuestions(input);
+  test.each([[['50']], [['0']]])(
+    'test3: 보너스 번호가 입력 가능 범위를 벗어난 경우',
+    async inputs => {
+      // given
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      mockQuestions(inputs);
 
-    // then
-    await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
-      '[ERROR] 보너스 번호는 당첨 번호에 포함되어 있지 않아야 합니다.',
-    );
-  });
+      // then
+      await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
+        '[ERROR] 보너스 번호에는 1부터 45 사이의 숫자만 입력할 수 있습니다.',
+      );
+    },
+  );
+
+  test.each([[['3']], [['6']]])(
+    'test4: 당첨 번호에 보너스 번호가 포함되어있는 경우',
+    async inputs => {
+      // given
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      mockQuestions(inputs);
+
+      // then
+      await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
+        '[ERROR] 보너스 번호는 당첨 번호에 포함되어 있지 않아야 합니다.',
+      );
+    },
+  );
 });
