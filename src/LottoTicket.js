@@ -31,7 +31,8 @@ class LottoTicket {
   #generate() {
     const issuedLottoList = [];
     while (issuedLottoList.length < this.#totalIssueLotto) {
-      issuedLottoList.push(RandomNumberGenerator());
+      const sortedRandomNumbers = RandomNumberGenerator().sort((a, b) => a - b);
+      issuedLottoList.push(sortedRandomNumbers);
     }
     this.#lottoList = issuedLottoList;
   }
