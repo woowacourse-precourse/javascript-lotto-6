@@ -10,11 +10,10 @@ class Output {
   
     Statistics(totalResult, rate) {
       Console.print(MESSAGE.output.statistics(totalResult, rate));
+
     
     }
-    print(message) {
-      Console.print(message);
-    }
+
   }
   
   export default Output;    

@@ -3,6 +3,7 @@ import OUTPUT from './views/Output.js';
 import COMPUTER from './Computer.js';
 import AppError from './constants/AppError.js';
 import CALCULATE from './Calculate.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class LottoGame {
   #input;
@@ -19,7 +20,7 @@ class LottoGame {
 
   async handleAppError(error) {
     if (error instanceof AppError) {
-      this.#output.print(error.message);
+      Console.print(error.message);
       await this.play();
     }else{
       throw error;
@@ -48,5 +49,4 @@ class LottoGame {
     this.#output.Statistics(finalResult, Rate);
   }
 }
-
 export default LottoGame;
