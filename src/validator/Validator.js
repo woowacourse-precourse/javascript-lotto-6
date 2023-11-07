@@ -18,4 +18,31 @@ export default class Validator {
       throw new Error('[ERROR] 금액은 1000원의 배수여야 합니다.');
     }
   }
+
+  checkIsCommaSeparatedNumber(value) {
+    if (!REGEX.isCommaSeparatedNumber.test(value)) {
+      throw new Error('[ERROR] 로또 번호는 콤마로 구분된 숫자여야 합니다.');
+    }
+  }
+
+  checkIsSixNumbers(value) {
+    if (!REGEX.isSixNumbers.test(value)) {
+      throw new Error('[ERROR] 로또 번호는 6개의 숫자여야 합니다.');
+    }
+  }
+
+  checkIsCommaSeparatedNumberBetween1And45(value) {
+    if (!REGEX.isCommaSeparatedNumberBetween1And45.test(value)) {
+      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }
+  }
+
+  checkIsUnique(value) {
+    value.split(',').forEach(number => {
+      const otherNumbers = value.split(',').filter(item => item !== number);
+      if (otherNumbers.includes(number)) {
+        throw new Error('[ERROR] 로또 번호는 유일한 숫자여야 합니다.');
+      }
+    });
+  }
 }

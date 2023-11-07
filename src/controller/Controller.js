@@ -1,7 +1,7 @@
 import View from '../view/View.js';
 import Validator from '../validator/Validator.js';
 import LottoGame from '../model/LottoGame.js';
-import { INPUT_MESSAGE } from '../constant/InputMessage.js';
+import { INPUT_MESSAGE } from '../constant/InputMessage.js'
 import { repeat } from '../util/repeat.js'
 
 export default class Controller {
@@ -19,12 +19,17 @@ export default class Controller {
     const money = await this.getMoney();
 
     const lottos = await lottoGame.buyLottos(money);
-    
+
+    this.#view.printLottos(lottos);
+
+    const win = await this.getWin();
+
+
   }
 
   async getMoney() {
     const moneyString = await repeat(
-      this.#view.readMoney,
+      this.#view.readLine,
       INPUT_MESSAGE.money,
       [
         this.#validator.checkIsNumber,
@@ -34,5 +39,20 @@ export default class Controller {
     );
 
     return parseInt(moneyString);
+  }
+
+  async getWin() {
+    const winString = await repeat(
+      this.#view.readLine,
+      INPUT_MESSAGE.win,
+      [
+        this.#validator.checkIsCommaSeparatedNumber,
+        this.#validator.checkIsSixNumbers,
+        this.#validator.checkIsCommaSeparatedNumberBetween1And45,
+        this.#validator.checkIsUnique
+      ]
+    );
+
+    return winString.split(',');
   }
 }
