@@ -1,12 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-
-const PRIZE_VALUES = {
-  3: 5000,
-  4: 50000,
-  5: 1500000,
-  "5+1": 30000000,
-  6: 2000000000,
-};
+import CONSTANT from "./constant/constants";
 
 class Lotto {
   #numbers;
@@ -17,11 +10,13 @@ class Lotto {
   }
 
   #validate(numbers) {
+    const { ERR_LOG } = CONSTANT;
+
     if (new Set(numbers).size !== 6) {
-      throw new Error("[ERROR] 로또 번호는 중복되지 않는 6개여야 합니다.");
+      throw new Error(`${ERR_LOG.WRONG_LENGTH}`);
     }
     if (numbers.some((number) => number < 1 || number > 45)) {
-      throw new Error("[ERROR] 로또 번호는 1에서 45 사이여야 합니다.");
+      throw new Error(`${ERR_LOG.OUT_OF_RANGE}`);
     }
   }
 
@@ -48,6 +43,8 @@ class Lotto {
   }
 
   calculatePrize(matchCount, isBonusMatched) {
+    const { PRIZE_VALUES } = CONSTANT;
+
     if (matchCount === 5 && isBonusMatched) {
       return PRIZE_VALUES["5+1"];
     } else {
