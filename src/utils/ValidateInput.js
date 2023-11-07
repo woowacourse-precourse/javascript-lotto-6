@@ -3,11 +3,15 @@ const MAX_WINNING_NUMBER = 45;
 
 class ValidateInput {
   static validateAmount(amount) {
-    if (isNaN(amount) || amount <= 0) {
+    if (isNaN(amount)) {
       throw new Error("[ERROR] 구입금액은 자연수만 입력 가능합니다.\n");
     }
 
-    if (amount % 1000 !== 0) {
+    if (amount < 1000) {
+      throw new Error("[ERROR] 구입금액은 최소 1000원부터 가능합니다.\n");
+    }
+
+    if (amount > 1000 && amount % 1000 !== 0) {
       throw new Error("[ERROR] 구입금액은 1,000원 단위만 가능합니다.\n");
     }
   }

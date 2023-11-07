@@ -4,11 +4,17 @@ describe("입력 유효성 검사 테스트", () => {
   // 구입 금액
   test("구입 금액이 자연수가 아니면 예외가 발생한다", () => {
     expect(() => {
-      ValidateInput.validateAmount(-1000);
+      ValidateInput.validateAmount("A");
     }).toThrow("[ERROR] 구입금액은 자연수만 입력 가능합니다.\n");
   });
 
-  test("구입 금액이 1000원으로 나누어 떨어지지 않으면 예외가 발생한다", () => {
+  test("구입 금액이 1000보다 작으면 예외가 발생한다", () => {
+    expect(() => {
+      ValidateInput.validateAmount(500);
+    }).toThrow("[ERROR] 구입금액은 최소 1000원부터 가능합니다.\n");
+  });
+
+  test("구입 금액이 1000원 단위가 아니면 예외가 발생한다", () => {
     expect(() => {
       ValidateInput.validateAmount(2500);
     }).toThrow("[ERROR] 구입금액은 1,000원 단위만 가능합니다.\n");
