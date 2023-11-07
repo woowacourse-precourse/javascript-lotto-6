@@ -1,7 +1,7 @@
-import Lotto from "./Lotto";
-import getRandomNumber from "./getRandomNumber";
-import { LOTTO_INFO } from "./constants";
-import LottoValidator from "./lottoValidator";
+import Lotto from "../Lotto";
+import getRandomNumber from "../getRandomNumber";
+import { LOTTO_INFO } from "../constants";
+import LottoValidator from "../lottoValidator";
 
 class LottoGenerator {
   #bonus;

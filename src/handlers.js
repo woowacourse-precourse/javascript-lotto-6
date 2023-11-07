@@ -1,5 +1,5 @@
-import LottoGenerator from './LottoGenerator';
-import LottoCalculator from './LottoCalculator';
+import LottoGenerator from './Domain/LottoGenerator';
+import LottoCalculator from './Domain/LottoCalculator';
 import InputView from './View/InputView';
 import OutputView from './View/OutputView';
 
