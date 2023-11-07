@@ -37,8 +37,4 @@ export default class Lotto {
     if (matchCnt === LOTTERY.FIRST_CNT) return LOTTERY.FIRST_PLACE;
     return LOTTERY.DEFAULT_PLACE;
   }
-
-  static getLabelAndWinnings(place) {
-    return LOTTERY.WINNINGS(place);
-  }
 }
