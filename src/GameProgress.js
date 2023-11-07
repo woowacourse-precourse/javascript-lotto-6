@@ -22,14 +22,16 @@ class GameProgress{
   }
 
   static getWinningStatistics(purchaseNumbers, winningNumbers, bonusNumber){
+    let isBonus = false;
     for(let i=0; i<purchaseNumbers.length; i++){
       let cnt = 0;
       purchaseNumbers[i].forEach((number)=>{
         winningNumbers.includes(number) ? cnt++ : '';
+        bonusNumber == number ? isBonus = true : '';
       })
       if(cnt === 3) WINNING_COUNT[0]++;
       else if(cnt === 4) WINNING_COUNT[1]++;
-      else if(cnt === 5) purchaseNumbers[i].includes(bonusNumber) ? WINNING_COUNT[3]++:WINNING_COUNT[2]++;
+      else if(cnt === 5) isBonus ? WINNING_COUNT[3]++:WINNING_COUNT[2]++;
       else if(cnt === 6) WINNING_COUNT[4]++;
     }
   }
