@@ -9,7 +9,7 @@ const OutputView = {
 
   printLottoNumbers(lottos) {
     for (const lottoNumbers of lottos) {
-      Console.print(lottoNumbers);
+      Console.print(`[${lottoNumbers.join(', ')}]`);
     }
   },
 
