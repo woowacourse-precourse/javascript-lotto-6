@@ -28,6 +28,8 @@ class Input {
 
   /**
    * 당첨 번호를 입력받아 ValidatableArray로 반환하는 메서드
+   *
+   * 입력 값은 콤마로 구분된 숫자여야 한다.
    * @returns {Promise<ValidatableArray>} 당첨번호
    */
   static async getWinningNumbers() {
