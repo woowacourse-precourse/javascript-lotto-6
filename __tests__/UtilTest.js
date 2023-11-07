@@ -1,6 +1,8 @@
-import calcProfit from '../src/utils/calcProfit';
-import formatLottoMatchResults from '../src/utils/formatLottoMatchResults';
-import formatLottoNumbers from '../src/utils/formatLottoNumbers';
+import { GAME_REWARD } from '../src/constants/gameRule.js';
+import calcProfit from '../src/utils/calcProfit.js';
+import formatGamePrizes from '../src/utils/formatGamePrizes.js';
+import formatLottoMatchResults from '../src/utils/formatLottoMatchResults.js';
+import formatLottoNumbers from '../src/utils/formatLottoNumbers.js';
 
 describe('💙 Util 함수를 테스트합니다. ฅ^._.^ฅ', () => {
   test('[formatLottoNumbers] lottoNumbers를 인자로 받아 포매팅된 문자열을 반환해요.', () => {
@@ -50,5 +52,27 @@ describe('💙 Util 함수를 테스트합니다. ฅ^._.^ฅ', () => {
     );
 
     expect(formattedResults).toEqual([]);
+  });
+
+  test('[formatGamePrizes] 상금 포맷팅이 올바르게 반환되는지 확인한다.', () => {
+    const matchCounts = {
+      three: 0,
+      four: 1,
+      five: 0,
+      bonus: 0,
+      six: 1,
+    };
+
+    const expectedPrizeString = [
+      `3개 일치 (${GAME_REWARD.three.toLocaleString()}원) - 0개`,
+      `4개 일치 (${GAME_REWARD.four.toLocaleString()}원) - 1개`,
+      `5개 일치 (${GAME_REWARD.five.toLocaleString()}원) - 0개`,
+      `5개 일치, 보너스 볼 일치 (${GAME_REWARD.bonus.toLocaleString()}원) - 0개`,
+      `6개 일치 (${GAME_REWARD.six.toLocaleString()}원) - 1개`,
+    ].join('\n');
+
+    const formattedPrize = formatGamePrizes(matchCounts);
+
+    expect(formattedPrize).toBe(expectedPrizeString);
   });
 });
