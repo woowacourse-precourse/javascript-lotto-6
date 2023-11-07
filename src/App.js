@@ -25,25 +25,40 @@ class App {
   }
 
   async initializePurchaseAmount() {
-    const purchaseAmount = await InputView.readPurchaseAmount();
-    Validator.validatePurchaseAmount(purchaseAmount);
+    try {
+      const purchaseAmount = await InputView.readPurchaseAmount();
+      Validator.validatePurchaseAmount(purchaseAmount);
 
-    this.#lotto = new Lotto(purchaseAmount);
+      this.#lotto = new Lotto(purchaseAmount);
+    } catch (error) {
+      OutputView.print(error);
+      await this.initializePurchaseAmount();
+    }
   }
 
   async initializeWinningNumbers() {
-    const winningNumbersInput = await InputView.readWinningNumbers();
-    const winningNumbers = winningNumbersInput.split(COMMA);
-    Validator.validateWinningNumbers(winningNumbers);
+    try {
+      const winningNumbersInput = await InputView.readWinningNumbers();
+      const winningNumbers = winningNumbersInput.split(COMMA);
+      Validator.validateWinningNumbers(winningNumbers);
 
-    this.#winningNumbers = winningNumbers;
+      this.#winningNumbers = winningNumbers;
+    } catch (error) {
+      OutputView.print(error);
+      await this.initializeWinningNumbers();
+    }
   }
 
   async initializeBonusNumber() {
-    const bonusNumber = await InputView.readBonusNumber();
-    Validator.validateBonusNumber(bonusNumber, this.#winningNumbers);
+    try {
+      const bonusNumber = await InputView.readBonusNumber();
+      Validator.validateBonusNumber(bonusNumber, this.#winningNumbers);
 
-    this.#bonusNumber = bonusNumber;
+      this.#bonusNumber = bonusNumber;
+    } catch (error) {
+      OutputView.print(error);
+      await this.initializeBonusNumber();
+    }
   }
 
   initializeResult() {
@@ -54,7 +69,10 @@ class App {
     );
 
     this.#matchResult = this.#resultClass.checkLotto();
-    this.#incomePercentage = this.#resultClass.calculateIncome() / Number(this.#lotto.getPurchaseAmount()) * 100;
+    this.#incomePercentage =
+      (this.#resultClass.calculateIncome() /
+        Number(this.#lotto.getPurchaseAmount())) *
+      100;
   }
 }
 
