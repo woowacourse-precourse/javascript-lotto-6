@@ -23,6 +23,37 @@
 1. Lotto 클래스
    1. Lotto에 필드 추가 안 됨
 
+## 폴더 구조
+
+```markdown
+📦src
+┣ 📂Domain
+┃ ┣ 📂Lotto (2. 당첨 번호 검증, 당첨 통계, 출력 단계)
+┃ ┃ ┣ Lotto.js (검증: 입력받은 당첨 번호 유효성 검증)
+┃ ┃ ┣ WinningChecker.js (통계: '당첨번호+보너스번호' 전달 및 구매번호와 비교하여 결과 통계 리턴)
+┃ ┃ ┣ ResultReturn.js (출력: 당첨 통계 출력, 수익률 출력)
+┃ ┃ ┣ index.js
+┃ ┃ ┗ utils.js
+┃ ┗ 📂Purchase (1. 구매단계)
+┃ ┃ ┣ PurchaseAmount.js (구매 금액 입력)
+┃ ┃ ┣ LottoGenerator.js (금액에 맞춘 로또 번호 생성)
+┃ ┃ ┣ index.js
+┃ ┃ ┗ utils.js
+┣ 📂Lib
+┃ ┣ 📂InputHanlder
+┃ ┃ ┗ InputHanlder.js // 구매 금액, 당첨 번호, 보너스 번호를 입력 받음.
+┃ ┣ ExceptionHandler.js
+┃ ┣ constans.js
+┃ ┣ error.js
+┃ ┣ message.js
+┃ ┣ messageFormat.js
+┃ ┗ utils.js
+┣ 📂errors
+┃ ┗ error.js
+┣ App.js
+┗ index.js
+```
+
 ## 구현할 기능 목록
 
 0. 사용자가 잘못된 값을 입력한 경우 `throw` 예외 처리 후 재입력 받는다!
@@ -78,41 +109,11 @@
    > 1000단위가 넘어가면 ,로 구분지어 포매팅해준다.
    > (ex. 62.5% 20,000.0%)
 
-## 폴더 구조
-
-```markdown
-📂Domain
-┣ 📂InputHanlder
-┃ ┗ InputHanlder.js // 구매 금액, 당첨 번호, 보너스 번호를 입력 받음.
-┃
-┣ 📂Lotto (2. 당첨 번호 검증, 당첨 통계, 출력 단계)
-┃ ┣ Lotto.js (검증: 입력받은 당첨 번호 유효성 검증)
-┃ ┣ WinningChecker.js (통계: '당첨번호+보너스번호' 전달 및 구매번호와 비교하여 결과 통계 리턴)
-┃ ┣ ResultReturn.js (출력: 당첨 통계 출력, 수익률 출력)
-┃ ┗ index.js
-┃
-┗ 📂Purchase (1. 구매단계)
-┃ ┣ PurchaseAmount.js (구매 금액 입력)
-┃ ┣ LottoGenerator.js (금액에 맞춘 로또 번호 생성)
-┃ ┣ index.js
-┃ ┗ utils.js
-┃
-📂Lib
-┣ ExceptionHandler.js
-┣ constans.js
-┣ error.js
-┣ message.js
-┣ messageFormat.js
-┗ utils.js
-📂errors
-┗ error.js
-App.js
-index.js
-```
+---
 
 ## 3주 차 목표
 
 1. 함수 분리, 함수별 테스트
 2. 클래스 분리 연습
 3. 도메인 로직에 대한 단위 테스트를 작성하는 연습
-4. 작은 기능부터 테스트를 작성하는 연습부터!!
+4. 작은 기능부터 테스트를 작성하는 연습
