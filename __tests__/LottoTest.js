@@ -49,9 +49,9 @@ describe("로또 클래스 테스트", () => {
     });
   });
 
-  test("로또 출력 테스트", async () => {
+  test("로또 오름차순 출력 테스트", async () => {
     const log = getLogSpy();
-    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const lotto = new Lotto([6,5,4,3,2,1]);
     await lotto.printLottos();
     expect(log).toHaveBeenCalledWith(expect.stringContaining("[1, 2, 3, 4, 5, 6]"));
   });

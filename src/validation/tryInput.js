@@ -6,6 +6,7 @@ export const getInputValue = async (message, validCallback)=>{
         try {
             const inputMessage = await input(message);
             validCallback(inputMessage);
+            print("");
             return inputMessage;
         } catch (error) {
             print(error.message);

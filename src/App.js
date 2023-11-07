@@ -95,7 +95,6 @@ class App {
     print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.prizeCounts["bonus"]}개`);
     print(`6개 일치 (2,000,000,000원) - ${result.prizeCounts["6"]}개`);
     print(`총 수익률은 ${result.rate}%입니다.`);
-    print("---");
   }
 
   async getPrizeNumbers() {
@@ -112,9 +111,9 @@ class App {
     const lottoCount = this.getLottoCount(+money);
     
     await this.printBuyCount(lottoCount);
-    print("");
 
     await this.createLottos(lottoCount);
+    print("");
   }
 
   async getInputMoney(){

@@ -16,7 +16,7 @@ class Lotto {
   }
 
   printLottos(){
-    print(`[${this.#numbers.join(', ')}]`);
+    print(`[${this.#numbers.sort((a,b) => a - b).join(', ')}]`);
   }
 
   getPrizeCount(userNumbers, bonusNumber){
