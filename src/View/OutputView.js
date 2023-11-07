@@ -41,7 +41,7 @@ class OutputView {
   }
 
   static #printDivider() {
-    Console.print(COMMON.dash.repeat(50));
+    Console.print(MESSAGE.output.divider);
   }
 
   static printEarningRate(earningRate) {

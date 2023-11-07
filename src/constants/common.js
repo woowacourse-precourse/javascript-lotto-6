@@ -1,6 +1,5 @@
 const COMMON = Object.freeze({
   comma: ',',
-  dash: '─',
   dot: '.',
   empty: '',
   lineBreak: '\n',
