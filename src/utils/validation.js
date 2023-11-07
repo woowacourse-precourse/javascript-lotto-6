@@ -33,3 +33,8 @@ export const changeStringToNumbers = (winningNumbersStringArray) => {
   return winningNumbersStringArray.map((value) => isNumber(value));
 };
 
+export const hasComma = (winningNumbers) => {
+  if (!winningNumbers.includes(COMMA))
+    throw new Error(NOT_HAS_COMMA_ERROR_MESSAGE);
+};
+
