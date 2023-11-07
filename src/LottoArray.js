@@ -26,7 +26,7 @@ class LottoArray {
 
   checkWinning(winningLotto, rank) {
     this.#lottoArray.forEach((lotto) => {
-      const [count, hasBonus] = winningLotto.countSameNumber(lotto);
+      const [count, hasBonus] = winningLotto.compareWith(lotto);
       rank.choose(count, hasBonus);
     });
   }

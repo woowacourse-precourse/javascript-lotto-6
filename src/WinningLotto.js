@@ -7,8 +7,8 @@ class WinningLotto {
     this.#bonusBall = bonusBall;
   }
 
-  countSameNumber(lotto) {
-    const count = this.#lotto.compareWith(lotto);
+  compareWith(lotto) {
+    const count = this.#lotto.countSameNumber(lotto);
     const hasBonus = this.#bonusBall.includedIn(lotto);
 
     return [count, hasBonus];

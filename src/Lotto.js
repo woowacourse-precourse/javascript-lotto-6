@@ -26,7 +26,7 @@ class Lotto {
     return this.#numbers.includes(number);
   }
 
-  countSameNumber(numbers) {
+  filterSameNumber(numbers) {
     const sameNumbers = numbers.filter((number) =>
       this.#numbers.includes(number)
     );
@@ -34,8 +34,8 @@ class Lotto {
     return sameNumbers.length;
   }
 
-  compareWith(lotto) {
-    return lotto.countSameNumber(this.#numbers);
+  countSameNumber(lotto) {
+    return lotto.filterSameNumber(this.#numbers);
   }
 }
 
