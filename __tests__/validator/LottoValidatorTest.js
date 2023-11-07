@@ -13,4 +13,16 @@ describe('LottoValidator 클래스 예외 테스트', () => {
       LottoValidator.validateDuplication([1, 2, 3, 4, 5, 5]);
     }).toThrow('[ERROR]');
   });
+
+  test('보너스 번호가 당첨 번호에 포함되어 있으면 예외가 발생한다.', () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 6;
+
+    expect(() => {
+      LottoValidator.validateBonusNumberInLottoNumbers(
+        winningNumbers,
+        bonusNumber,
+      );
+    }).toThrow('[ERROR]');
+  });
 });
