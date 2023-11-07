@@ -1,5 +1,5 @@
-import LottoMacine from '../src/LottoMachine';
-import { LOTTO_NUMBER } from '../src/constants/constant';
+import LottoMacine from '../src/LottoMachine.js';
+import { LOTTO_NUMBER } from '../src/constants/constant.js';
 import lottoRandomNumberGenerator from '../src/util/lottoRandomNumberGenerator.js';
 
 describe('lottoMachine.generateLotto 테스트', () => {
