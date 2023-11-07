@@ -1,6 +1,7 @@
 const { GAME_MESSAGE } = require("./Constant.js");
 const { Console } = require("@woowacourse/mission-utils");
-const winningNumbers = require("./winningNumbers.js");
+const validation = require("./Validation.js");
+const WinningNumbers = require("./WinningNumbers.js");
 const BonusNumber = require("./BonusNumber.js");
 const PublishedLottos = require("./PublishedLottos.js");
 
@@ -17,6 +18,7 @@ class App {
 
   inputMoney() {
     Console.readLineAsync(GAME_MESSAGE.MONEY, (money) => {
+      validation.validateMoney(money);
       this.lottos = new PublishedLottos(money);
       this.lottos.printCount();
       this.lottos.printList();
@@ -27,7 +29,8 @@ class App {
   inputwinningNumbers() {
     Console.readLineAsync(GAME_MESSAGE.WINNING_NUM, (winningNumbers) => {
       winningNumbers = winningNumbers.split(",").map((item) => Number(item));
-      this.winningNumbers = new winningNumbers(winningNumbers);
+      validation.checkNumberList(winningNumbers);
+      this.winningNumbers = new WinningNumbers(winningNumbers);
 
       this.inputBonusNum();
     });
@@ -35,10 +38,10 @@ class App {
 
   inputBonusNum() {
     Console.readLineAsync(GAME_MESSAGE.BONUS_NUM, (bonusNumber) => {
-      this.bonusNumber = new BonusNumber(
-        Number(bonusNumber),
-        this.winningNumbers.value
-      );
+      bonusNumber = Number(bonusNumber);
+      validation.checkBonusNum(bonusNumber, this.winningNumbers.value);
+      this.bonusNumber = new BonusNumber(bonusNumber);
+
       this.inputWinningStats();
     });
   }

@@ -1,12 +1,10 @@
 const { ERROR_MESSAGE } = require("./Constant.js");
 const { Console } = require("@woowacourse/mission-utils");
-const validation = require("./Validation.js");
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    validation.checkNumberList(numbers);
     this.#numbers = numbers;
   }
 

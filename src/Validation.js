@@ -1,6 +1,14 @@
 const { ERROR_MESSAGE } = require("./Constant.js");
 
 const validation = {
+  validateMoney(money) {
+    if (isNaN(money)) throw new Error(ERROR_MESSAGE.NUMBER);
+
+    if (money < 1000) throw new Error(ERROR_MESSAGE.MIN_MONEY);
+
+    if (money % 1000 !== 0) throw new Error(ERROR_MESSAGE.DIVISION);
+  },
+
   checkNumberList(nums) {
     if (numbers.length !== 6) throw new Error(ERROR_MESSAGE.NOT_SIX);
 
