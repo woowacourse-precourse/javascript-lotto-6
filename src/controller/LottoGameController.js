@@ -25,25 +25,9 @@ class LottoGameController {
   async start() {
     await this.buyLottos();
     this.printMyLottos();
+
     await this.setLottoNumbers();
     this.printStats();
-
-    // TODO 리팩토링
-    const winningMatchCounts = this.getWinningNumberMatchCounts();
-    const hasBonusMatches = this.hasBonusNumberMatches();
-    const matchResults = this.generateMatchResults(
-      winningMatchCounts,
-      hasBonusMatches,
-    );
-
-    this.lottoResult.setMatchCount(matchResults);
-    const userMoney = this.#moneyInstance.getMoney();
-    const prizeMoney = this.lottoResult.getPrizeMoney();
-
-    const profit = this.lottoResult.getProfit(userMoney, prizeMoney);
-
-    this.outputView.printLottoResult(this.lottoResult.getMatchCount());
-    this.outputView.printTotalProfit(profit);
   }
 
   async setLottoNumbers() {
@@ -52,16 +36,10 @@ class LottoGameController {
   }
 
   generateMatchResults(winningMatchCounts, hasBonusMatches) {
-    return winningMatchCounts.map((winningCount, i) => {
-      return this.createMatchTemplate(winningCount, hasBonusMatches[i]);
-    });
-  }
-
-  createMatchTemplate(winningMatchCount, hasBonusMatch) {
-    return {
-      count: winningMatchCount,
-      hasBonusNumber: hasBonusMatch,
-    };
+    return winningMatchCounts.map((winningCount, i) => ({
+      count: winningCount,
+      hasBonusNumber: hasBonusMatches[i],
+    }));
   }
 
   async setWinningNumbers() {
@@ -163,6 +141,22 @@ class LottoGameController {
 
   printStats() {
     this.outputView.print(MESSAGE.WINNING_STATS);
+
+    const winningMatchCounts = this.getWinningNumberMatchCounts();
+    const hasBonusMatches = this.hasBonusNumberMatches();
+    const matchResults = this.generateMatchResults(
+      winningMatchCounts,
+      hasBonusMatches,
+    );
+
+    this.lottoResult.setMatchCount(matchResults);
+    const userMoney = this.#moneyInstance.getMoney();
+    const prizeMoney = this.lottoResult.getPrizeMoney();
+
+    const profit = this.lottoResult.getProfit(userMoney, prizeMoney);
+
+    this.outputView.printLottoResult(this.lottoResult.getMatchCount());
+    this.outputView.printTotalProfit(profit);
   }
 
   getWinningNumberMatchCounts() {
