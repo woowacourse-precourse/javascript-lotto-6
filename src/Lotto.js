@@ -1,3 +1,4 @@
+import { MESSAGE_PRINT } from './constants/Message';
 import OutputView from './views/OutputView';
 
 class Lotto {
@@ -13,7 +14,7 @@ class Lotto {
   }
 
   printLottoNumbers() {
-    return OutputView.printLottoNumbers(this.#numbers.join(', '));
+    return OutputView.printLottoNumbers(this.#numbers.join(MESSAGE_PRINT.NUMBER_SEPARATOR));
   }
 
   getLottoNumbers() {

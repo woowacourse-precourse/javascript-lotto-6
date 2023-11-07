@@ -14,6 +14,7 @@ export const MESSAGE_PRINT = Object.freeze({
   LOTTO_NUMBER_TAIL: '] \n',
   TOTAL_RATE_HEAD: '총 수익률은 ',
   TOTAL_RATE_TAIL: '%입니다. \n',
+  NUMBER_SEPARATOR: ', ',
 });
 
 export const MESSAGE_RESULT_STATISTICS = Object.freeze({
@@ -23,3 +24,5 @@ export const MESSAGE_RESULT_STATISTICS = Object.freeze({
   FOURTH: `${MATCHING_COUNT.FOURTH}개 일치 (${WINNING_AMOUNT_STRING.FOURTH}원) - `,
   FIFTH: `${MATCHING_COUNT.FIFTH}개 일치 (${WINNING_AMOUNT_STRING.FIFTH}원) - `,
 });
+
+export const INPUT_SEPARATOR = ',';
