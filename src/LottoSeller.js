@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_INFO, MESSAGE } from "./utils/Constants.js";
+import { LOTTO, MESSAGE } from "./utils/Constants.js";
 
 class LottoSeller {
   constructor() {
@@ -9,7 +9,7 @@ class LottoSeller {
 
   async buyLotto() {
     await this.getValidMoney();
-    this.lottoTickets = (await this.money) / LOTTO_INFO.LOTTO_PRICE;
+    this.lottoTickets = (await this.money) / LOTTO.PRICE;
     this.#printTicketsNumber(this.lottoTickets);
   }
 
@@ -22,12 +22,15 @@ class LottoSeller {
   }
 
   #validate(moneyInput) {
-    if (isNaN(moneyInput) || moneyInput % LOTTO_INFO.LOTTO_PRICE !== 0) {
+    if (isNaN(moneyInput) || moneyInput % LOTTO.PRICE !== 0) {
       MissionUtils.Console.print(MESSAGE.ERROR.NO_VALID_MONEY);
       return false;
-    } else {
-      return true;
     }
+    if (!moneyInput || moneyInput === "0") {
+      MissionUtils.Console.print(MESSAGE.ERROR.NO_VALID_MONEY);
+      return false;
+    }
+    return true;
   }
 
   #printTicketsNumber(lottoTickets) {

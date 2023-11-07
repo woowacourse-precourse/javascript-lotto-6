@@ -38,4 +38,21 @@ describe("로또 판매 클래스 테스트", () => {
       expect.stringContaining(`3개를 구매했습니다.`),
     );
   });
+
+  test("로또 금액을 0으로 입력하거나 아무것도 입력하지 않으면 경고문구가 나오고 다시 입력한다.", async () => {
+    //given
+    const logSpy = getLogSpy();
+
+    const lottoSeller = new LottoSeller();
+    mockQuestions([undefined, "", "0", "4000"]);
+
+    //when
+    await lottoSeller.buyLotto();
+
+    // then
+    expect(lottoSeller.lottoTickets).toBe(4);
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(`4개를 구매했습니다.`),
+    );
+  });
 });

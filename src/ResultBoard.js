@@ -1,10 +1,10 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_INFO } from "./utils/Constants.js";
+import { LOTTO } from "./utils/Constants.js";
 
 class ResultBoard {
   constructor(myNumbers) {
     this.myLottoNumbers = myNumbers;
-    this.resultFromLastPrize = Array.from({ length: 5 }).fill(0);
+    this.resultFromLastPrize = new Array(5).fill(0);
     this.hasBonusNumer = false;
   }
 
@@ -20,37 +20,36 @@ class ResultBoard {
   }
 
   #decideRank(winNumberCount) {
-    if (
-      winNumberCount === LOTTO_INFO.REQUIREMENT_NUMBER[2] &&
-      this.hasBonusNumer === true
-    )
+    if (winNumberCount === LOTTO.REQUIREMENTS[2] && this.hasBonusNumer === true)
       return this.resultFromLastPrize[3]++;
-    if (winNumberCount === LOTTO_INFO.REQUIREMENT_NUMBER[2])
+
+    if (winNumberCount === LOTTO.REQUIREMENTS[2])
       return this.resultFromLastPrize[2]++;
-    if (winNumberCount === LOTTO_INFO.REQUIREMENT_NUMBER[0])
+
+    if (winNumberCount === LOTTO.REQUIREMENTS[0])
       return this.resultFromLastPrize[0]++;
-    if (winNumberCount === LOTTO_INFO.REQUIREMENT_NUMBER[1])
+
+    if (winNumberCount === LOTTO.REQUIREMENTS[1])
       return this.resultFromLastPrize[1]++;
-    if (winNumberCount === LOTTO_INFO.REQUIREMENT_NUMBER[4])
+
+    if (winNumberCount === LOTTO.REQUIREMENTS[4])
       return this.resultFromLastPrize[4]++;
   }
 
   printResultTable() {
     MissionUtils.Console.print(`당첨 통계`);
     MissionUtils.Console.print(`---`);
-    LOTTO_INFO.PRIZES.map((prize, index) => {
+    LOTTO.PRIZES.map((prize, index) => {
       if (index === 3)
         return MissionUtils.Console.print(
           `${
-            LOTTO_INFO.REQUIREMENT_NUMBER[index]
+            LOTTO.REQUIREMENTS[index]
           }개 일치, 보너스 볼 일치 (${prize.toLocaleString()}원) - ${
             this.resultFromLastPrize[index]
           }개`,
         );
       return MissionUtils.Console.print(
-        `${
-          LOTTO_INFO.REQUIREMENT_NUMBER[index]
-        }개 일치 (${prize.toLocaleString()}원) - ${
+        `${LOTTO.REQUIREMENTS[index]}개 일치 (${prize.toLocaleString()}원) - ${
           this.resultFromLastPrize[index]
         }개`,
       );
@@ -58,16 +57,12 @@ class ResultBoard {
   }
 
   calculateEarning(ticketNumbers) {
-    const inputCost = ticketNumbers * LOTTO_INFO.LOTTO_PRICE;
+    const inputCost = ticketNumbers * LOTTO.PRICE;
     let outputEarning = 0;
-    LOTTO_INFO.PRIZES.forEach((prize, index) => {
+    LOTTO.PRIZES.forEach((prize, index) => {
       outputEarning += prize * this.resultFromLastPrize[index];
     });
     const returnRate = ((outputEarning / inputCost) * 100).toFixed(1);
-    MissionUtils.Console.print(inputCost);
-
-    MissionUtils.Console.print((outputEarning / inputCost) * 100);
-
     MissionUtils.Console.print(`총 수익률은 ${returnRate}%입니다.`);
   }
 }

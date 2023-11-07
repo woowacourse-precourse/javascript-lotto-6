@@ -15,8 +15,8 @@ class App {
     const lottoManager = new LottoManager(this.lottoTickets);
     lottoManager.makeLottoAndPrint();
     const lotto = await lottoManager.runLottoWithNumbers();
-    const resultBoard = new ResultBoard(lottoManager.MyLottoNumbers);
 
+    const resultBoard = new ResultBoard(lottoManager.MyLottoNumbers);
     resultBoard.decideWinning(lotto.winningNumbers, lottoManager.BonusNumber);
     resultBoard.printResultTable();
     resultBoard.calculateEarning(this.lottoTickets);

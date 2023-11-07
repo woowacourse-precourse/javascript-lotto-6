@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { MESSAGE } from "./utils/Constants.js";
+import { LOTTO, MESSAGE } from "./utils/Constants.js";
 import Lotto from "./Lotto.js";
 import validation from "./utils/validation.js";
 
@@ -15,9 +15,9 @@ class LottoManager {
     this.count = 0;
     while (this.count < this.lottoTickets) {
       const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
-        1,
-        45,
-        6,
+        LOTTO.START_NUM,
+        LOTTO.LAST_NUM,
+        LOTTO.WINNING_NUMBERS_COUNT,
       );
       const sortedNumbers = randomNumbers.sort((a, b) => a - b);
       if (this.count === 0) {

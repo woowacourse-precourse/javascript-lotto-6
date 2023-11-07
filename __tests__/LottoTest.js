@@ -1,27 +1,28 @@
 import Lotto from "../src/Lotto.js";
+import { MESSAGE } from "../src/utils/Constants.js";
 
 describe("로또 클래스 테스트", () => {
-    test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
-        expect(() => {
-            new Lotto([1, 2, 3, 4, 5, 6, 7]);
-        }).toThrow("[ERROR]");
-    });
+  test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6, 7]);
+    }).toThrow(MESSAGE.ERROR.NO_VALID_COUNT(6));
+  });
 
-    test("로또 번호에 중복되지 않은 6개의 숫자가 있으면 통과된다.", () => {
-        expect(() => {
-            new Lotto([1, 2, 3, 4, 5, 6]);
-        }).not.toThrow();
-    });
+  test("로또 번호에 중복되지 않은 6개의 숫자가 있으면 통과된다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6]);
+    }).not.toThrow();
+  });
 
-    test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
-        expect(() => {
-            new Lotto([1, 2, 3, 4, 5, 5]);
-        }).toThrow("[ERROR]");
-    });
+  test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 5]);
+    }).toThrow(MESSAGE.ERROR.HAS_SAME_NUMBER);
+  });
 
-    test("숫자가 아닌 값이 들어가면 예외가 발생한다.", () => {
-        expect(() => {
-            new Lotto(['a', 'b', 'c', 'd', 'e', 'f']);
-        }).toThrow("[ERROR]");
-    });
+  test("숫자가 아닌 값이 들어가면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, "a"]);
+    }).toThrow(MESSAGE.ERROR.NO_NUMBER);
+  });
 });
