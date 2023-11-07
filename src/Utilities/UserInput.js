@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE } from "../Constants/Constant.js";
+import { MESSAGE } from "../Utilities/Constant.js";
 import Validator from "../Utilities/Validator.js";
 
 const UserInput = {
