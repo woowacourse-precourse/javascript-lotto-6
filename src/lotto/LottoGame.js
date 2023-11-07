@@ -1,13 +1,15 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
-import GameUtils from "./GameUtils.js";
-import { WINNIG_PROFITS } from "../Constants.js";
+import { MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
+import GameUtils from './GameUtils.js';
+import { WINNIG_PROFITS } from '../Constants.js';
+import Validation from '../validation/Validation.js';
 class LottoGame {
   #lottos;
   #purchaseNumber;
   #purchaseAmount;
   constructor(purchaseAmount) {
     this.#lottos = [];
+    Validation.validatepurchaseInput(purchaseAmount);
     this.#purchaseAmount = purchaseAmount;
     this.#purchaseNumber = purchaseAmount / 1000;
     this.#issueLotto();
@@ -35,24 +37,22 @@ class LottoGame {
 
   getWinningStatus(winningNumbers, bonusNumber) {
     const MATHING_COUNTS = [];
+    Validation.validateLottoNumbers(winningNumbers);
+    Validation.validateBonusNumber(bonusNumber);
     for (let index = 0; index < this.#lottos.length; index++) {
       MATHING_COUNTS.push(this.#lottos[index].getMatchingCount(winningNumbers));
     }
-    const MATHING_COUNT_OBJ = this.matchingCountsWithObj(
-      MATHING_COUNTS,
-      bonusNumber
-    );
-    const WINNING_STATUS =
-      GameUtils.processMatchingNumbersToResult(MATHING_COUNT_OBJ);
+    const MATHING_COUNT_OBJ = this.matchingCountsWithObj(MATHING_COUNTS,bonusNumber);
+    const WINNING_STATUS = GameUtils.processMatchingNumbersToResult(MATHING_COUNT_OBJ);
     return WINNING_STATUS;
   }
 
   checkBonusNumberMatch(index, bonusNumber) {
     const LOTTO_NUMBERS = this.#lottos[index].getNumbers();
     if (LOTTO_NUMBERS.includes(Number(bonusNumber))) {
-      return "bonus";
+      return 'bonus';
     }
-    return "5";
+    return '5';
   }
   addOrUpdatePropertyInObj(obj, matchingCount) {
     let newObj = { ...obj };
