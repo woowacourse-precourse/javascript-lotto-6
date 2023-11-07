@@ -1,7 +1,7 @@
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import message from '../constants/message.js';
-import MessageFormat from '../utils/messageFormat.js';
+import MessageFormat from '../utils/MessageFormat.js';
 
 const { PURCHASE_PRICE, WINNING_NUMBER, BONUS_NUMBER } = message;
 

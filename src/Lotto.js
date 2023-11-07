@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import LOTTO_NUMBER from './constants/lottoNumber.js';
 import ERROR from './constants/error.js';
-import MessageFormat from './utils/messageFormat.js';
+import MessageFormat from './utils/MessageFormat.js';
 
 class Lotto {
   #numbers;
