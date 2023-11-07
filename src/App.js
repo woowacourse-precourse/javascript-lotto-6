@@ -6,6 +6,7 @@ class App {
     const GAME = new lottoGame();
     const LOTTO_COUNT = await GAME.lottoMoneyInput();
     GAME.lottoCount(LOTTO_COUNT);
+    const LOTTO_WIN_NUMBER = await GAME.lottoWinNumber();
   }
 }
 
@@ -31,6 +32,24 @@ class lottoGame {
     }
   }
 
+  async lottoWinNumber(){
+    const WIN_NUMBER = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    
+    const LOTTO_WIN_NUMBER = WIN_NUMBER.split(",");
+    LOTTO_WIN_NUMBER.array.forEach(lottoNum => {
+      if(lottoNum < 1){
+        throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+      }
+      if(lottoNum > 45){
+        throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+      }
+      if(lottoNum.match(/[^0-9]/)){
+        throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+      }
+    });
+    
+    new Lotto(LOTTO_WIN_NUMBER);
+  }
 
 
 }
