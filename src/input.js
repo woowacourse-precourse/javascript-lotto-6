@@ -13,8 +13,10 @@ export const input = {
     return lottoArray;
   },
 
-  getInputBonusNumber() {
-    const bonusNumber = Console.readLineAsync(GAME_INFO.INPUT_BONUS_NUMBER);
-    return bonusNumber;
+  async getInputBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+      GAME_INFO.INPUT_BONUS_NUMBER
+    );
+    return await Number(bonusNumber);
   },
 };
