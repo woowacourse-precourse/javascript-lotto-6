@@ -1,5 +1,5 @@
 import Lotto from "../Lotto.js";
-import { PROFIT_FOR_PRIZE } from "../constants/lotto.js";
+import { PROFIT_FOR_PRIZE } from "../constants/lottoPrize.js";
 
 class LottoResultChecker {
   #lottos;
