@@ -26,20 +26,8 @@ class App {
 
 const PublishedLottoes = {
   numbers : [],
-  rank : {
-    first : 0,
-    second : 0,
-    third : 0,
-    fourth : 0,
-    fifth : 0
-  },
-  GAIN : {
-    FIRST : 2e9,
-    SECOND : 3e7,
-    THIRD : 15e5,
-    FOURTH : 5e4,
-    FIFTH : 5e3
-  }
+  rank : [0, 0, 0, 0, 0], // [1등, 2등, 3등, 4등, 5등]
+  GAIN : [2e9, 3e7, 15e5, 5e4, 5e3]
 }
 
 const inputAmount = async() => {
@@ -78,20 +66,20 @@ const organizeRank = (lotto, published, bonus) => {
   const result = lotto.compareNumbers(published);
   switch(result) {
     case 6 :
-      PublishedLottoes.rank.first += 1;
+      PublishedLottoes.rank[0] += 1;
       break;
     case 5 :
       if (published.includes(bonus)) {
-        PublishedLottoes.rank.second += 1;
+        PublishedLottoes.rank[1] += 1;
         break;
       }
-      PublishedLottoes.rank.third += 1;
+      PublishedLottoes.rank[2] += 1;
       break;
     case 4 : 
-      PublishedLottoes.rank.forth += 1;
+      PublishedLottoes.rank[3] += 1;
       break;
     case 3 :
-      PublishedLottoes.rank.fifth += 1;
+      PublishedLottoes.rank[4] += 1;
       break;
   }
 }
@@ -106,19 +94,21 @@ const calculateRate = () => {
   let gain = 0;
   for (let i = 0; i < 5; i += 1) {
     gain += (PublishedLottoes.rank[i] * PublishedLottoes.GAIN[i]);
+    console.log(PublishedLottoes.rank[i]);
   }
   const rate = gain / (PublishedLottoes.numbers.length * 1e3);
+  
   return Math.round((rate * 10) / 10);
 }
-``
+
 const printResults = (rate) => {
   Console.print('당첨 통계\n---');
-  Console.print(`3개 일치 (5,000원) - ${PublishedLottoes.rank.fifth}개`);
-  Console.print(`4개 일치 (50,000원) - ${PublishedLottoes.rank.fourth}개`);
-  Console.print(`5개 일치 (1,500,000원) - ${PublishedLottoes.rank.third}개`);
-  Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${PublishedLottoes.rank.second}개`);
-  Console.print(`6개 일치 (2,000,000,000원) - ${PublishedLottoes.rank.first}개`);
-  Console.print(`총 수익률은 ${rate}입니다.`);
+  Console.print(`3개 일치 (5,000원) - ${PublishedLottoes.rank[4]}개`);
+  Console.print(`4개 일치 (50,000원) - ${PublishedLottoes.rank[3]}개`);
+  Console.print(`5개 일치 (1,500,000원) - ${PublishedLottoes.rank[2]}개`);
+  Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${PublishedLottoes.rank[1]}개`);
+  Console.print(`6개 일치 (2,000,000,000원) - ${PublishedLottoes.rank[0]}개`);
+  Console.print(`총 수익률은 ${rate}%입니다.`);
 }
 
 const app = new App();
