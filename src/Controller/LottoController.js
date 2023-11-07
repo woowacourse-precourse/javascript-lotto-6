@@ -22,6 +22,8 @@ class LottoController {
     validateGoalNumber(goalLotto.getNumbers().sort((a, b) => a - b));
     const bonusNumber = await this.#view.getBonusNumber();
     validateBonusNumber(bonusNumber, goalLotto.getNumbers());
+    const correctArray = goalLotto.calculateCorrectNumber(lottoArray, bonusNumber);
+    const resultArray = this.#calculateResult(correctArray);
   }
 
   #getCountOfLotto(purchaseAmount) {
@@ -45,6 +47,18 @@ class LottoController {
     );
     const lotto = new Lotto(lottoNumber);
     return lotto;
+  }
+
+  #calculateResult(correctArray) {
+    const result = [0, 0, 0, 0, 0];
+    correctArray.forEach(([correctCount, correctBonus]) => {
+      if (correctCount === 3) result[0] += 1;
+      else if (correctCount === 4) result[1] += 1;
+      else if (correctCount === 5 && !correctBonus) result[2] += 1;
+      else if (correctCount === 5 && correctBonus) result[3] += 1;
+      else if (correctCount === 6) result[4] += 1;
+    });
+    return result;
   }
 }
 
