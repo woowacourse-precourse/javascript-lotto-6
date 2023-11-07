@@ -14,6 +14,14 @@ const {
   RATE_OF_RETURN,
 } = RESULT;
 
+const resultMessages = {
+  match3: RESULT_RANK_3,
+  match4: RESULT_RANK_4,
+  match5: RESULT_RANK_5,
+  match5Bonus: RESULT_RANK_5_BONUS,
+  match6: RESULT_RANK_6,
+};
+
 class View {
   #inputView = InputView;
 
@@ -34,23 +42,38 @@ class View {
   }
 
   printPurchaseLotto(purchaseLotto) {
-    this.#outputView.printLine(
-      `\n${purchaseLotto.length}${MESSAGE.LOTTO_AMOUNT}`,
-    );
+    this.#printQuantity(purchaseLotto.length);
+    this.#printLotto(purchaseLotto);
+  }
+
+  #printQuantity(quantity) {
+    this.#outputView.printLine(`\n${quantity}${MESSAGE.LOTTO_AMOUNT}`);
+  }
+
+  #printLotto(purchaseLotto) {
     this.#outputView.printLine(
       purchaseLotto.map((lotto) => lotto.getNumbersToString()).join('\n'),
     );
   }
 
   printWinningStatistics({ matchResult, rateOfReturn }) {
+    this.#printStatisticMessage();
+    this.#printStatisticContents(matchResult);
+    this.#printRateOfReturn(rateOfReturn);
+  }
+
+  #printStatisticContents(matchResult) {
+    Object.entries(matchResult).forEach(([key, count]) => {
+      const message = resultMessages[key];
+      this.#outputView.printLine(`${message}${COUNT(count)}`);
+    });
+  }
+
+  #printStatisticMessage() {
     this.#outputView.printLine(RESULT_MESSAGE);
-    this.#outputView.printLine(RESULT_RANK_3 + COUNT(matchResult.match3));
-    this.#outputView.printLine(RESULT_RANK_4 + COUNT(matchResult.match4));
-    this.#outputView.printLine(RESULT_RANK_5 + COUNT(matchResult.match5));
-    this.#outputView.printLine(
-      RESULT_RANK_5_BONUS + COUNT(matchResult.match5Bonus),
-    );
-    this.#outputView.printLine(RESULT_RANK_6 + COUNT(matchResult.match6));
+  }
+
+  #printRateOfReturn(rateOfReturn) {
     this.#outputView.printLine(RATE_OF_RETURN(rateOfReturn));
   }
 
