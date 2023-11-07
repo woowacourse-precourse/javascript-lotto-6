@@ -27,18 +27,18 @@ class Lotto {
   }
 
   checkSameNumber(winningNumbers, bonusNumber) {
-    const correct =
+    const match =
       this.#numbers.length +
       winningNumbers.length -
       new Set([...this.#numbers, ...winningNumbers]).size;
 
-    if (correct === 5) {
+    if (match === 5) {
       if (this.#numbers.includes(bonusNumber)) {
         return 5.5;
       }
     }
 
-    return correct;
+    return match;
   }
 }
 
