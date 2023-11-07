@@ -3,60 +3,74 @@ import { GAME_SETTINGS } from '../constants/GameSettings';
 
 export default class InputValidator {
   static validatePurchaseAmount(amount) {
-    if (!/^\d+$/.test(amount)) {
-      throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
-    }
-
-    const numericAmount = parseInt(amount, 10);
-
-    if (numericAmount <= 0) {
-      throw new Error(ERROR_MESSAGES.AMOUNT_NOT_IN_UNITS);
-    }
-
-    if (numericAmount % GAME_SETTINGS.TICKET_PRICE !== 0) {
-      throw new Error(ERROR_MESSAGES.AMOUNT_NOT_IN_UNITS);
-    }
-  }
-
-  static parseAndValidateNumbers(numbersString) {
-    return numbersString.split(',').map((numString) => {
-      const number = parseInt(numString.trim(), 10);
-
-      if (Number.isNaN(number)) {
-        throw new Error(ERROR_MESSAGES.EMPTY_NUMBER);
-      }
-      if (number < GAME_SETTINGS.MIN_LOTTO_NUMBER || number > GAME_SETTINGS.MAX_LOTTO_NUMBER) {
-        throw new Error(ERROR_MESSAGES.NUMBER_OUT_OF_RANGE);
-      }
-      return number;
-    });
+    InputValidator.#ensureIsNumeric(amount);
+    InputValidator.#ensureValidPurchaseAmount(amount);
   }
 
   static validateWinningNumbers(winningNumbersString) {
-    const winningNumbers = InputValidator.parseAndValidateNumbers(winningNumbersString);
-
-    if (winningNumbers.length !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
-      throw new Error(ERROR_MESSAGES.NOT_SIX_NUMBERS);
-    }
-    if (new Set(winningNumbers).size !== GAME_SETTINGS.NUMBERS_PER_TICKET) {
-      throw new Error(ERROR_MESSAGES.DUPLICATE_NUMBER);
-    }
+    return InputValidator.#parseAndValidateNumbers(winningNumbersString);
   }
 
   static validateBonusNumber(bonusNumberString, winningNumbersString) {
-    const bonusNumber = parseInt(bonusNumberString.trim(), 10);
+    const bonusNumber = InputValidator.#parseNumber(bonusNumberString);
+    const winningNumbers = InputValidator.#parseNumbers(winningNumbersString);
+    InputValidator.#ensureBonusNumberNotDuplicate(bonusNumber, winningNumbers);
+  }
 
+  static #ensureIsNumeric(amount) {
+    if (!/^\d+$/.test(amount)) {
+      throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
+    }
+  }
+
+  static #ensureValidPurchaseAmount(amount) {
+    const numericAmount = parseInt(amount, 10);
+    if (numericAmount <= 0 || numericAmount % GAME_SETTINGS.TICKET_PRICE !== 0) {
+      throw new Error(ERROR_MESSAGES.INVALID_AMOUNT);
+    }
+  }
+
+  static #parseAndValidateNumbers(numbersString) {
+    const numbers = InputValidator.#parseNumbers(numbersString);
+    InputValidator.#validateNumbers(numbers);
+    return numbers;
+  }
+
+  static #parseNumbers(numbersString) {
+    return numbersString.split(',').map(InputValidator.#parseNumber);
+  }
+
+  static #parseNumber(numString) {
+    const number = parseInt(numString.trim(), 10);
+    if (Number.isNaN(number) || !InputValidator.#isNumberInRange(number)) {
+      throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
+    }
+    return number;
+  }
+
+  static #validateNumbers(numbers) {
     if (
-      Number.isNaN(bonusNumber) ||
-      bonusNumber < GAME_SETTINGS.MIN_LOTTO_NUMBER ||
-      bonusNumber > GAME_SETTINGS.MAX_LOTTO_NUMBER
+      numbers.length !== GAME_SETTINGS.NUMBERS_PER_TICKET ||
+      new Set(numbers).size !== numbers.length
     ) {
+      throw new Error(ERROR_MESSAGES.INVALID_NUMBERS);
+    }
+    numbers.forEach(InputValidator.#ensureNumberInRange);
+  }
+
+  static #ensureNumberInRange(number) {
+    if (!InputValidator.#isNumberInRange(number)) {
       throw new Error(ERROR_MESSAGES.NUMBER_OUT_OF_RANGE);
     }
+  }
 
-    const winningNumbers = InputValidator.parseAndValidateNumbers(winningNumbersString);
+  static #ensureBonusNumberNotDuplicate(bonusNumber, winningNumbers) {
     if (winningNumbers.includes(bonusNumber)) {
       throw new Error(ERROR_MESSAGES.BONUS_NUMBER_DUPLICATE);
     }
+  }
+
+  static #isNumberInRange(number) {
+    return number >= GAME_SETTINGS.MIN_LOTTO_NUMBER && number <= GAME_SETTINGS.MAX_LOTTO_NUMBER;
   }
 }
