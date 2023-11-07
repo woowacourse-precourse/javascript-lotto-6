@@ -1,4 +1,4 @@
-import Validation from './Validation.js';
+import Validation from './utils/Validation.js';
 import { LOTTO_NUMBER, PRIZE } from './constants/Condition.js';
 
 class Lotto {

@@ -1,5 +1,5 @@
-import { INPUT_ERROR } from './constants/Messages.js';
-import { LOTTO_PURCHASE_UNIT, LOTTO_NUMBER } from './constants/Condition.js';
+import { INPUT_ERROR } from '../constants/Messages.js';
+import { LOTTO_PURCHASE_UNIT, LOTTO_NUMBER } from '../constants/Condition.js';
 
 class Validation {
   static validateInputEmpty(input) {

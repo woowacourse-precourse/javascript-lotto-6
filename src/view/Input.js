@@ -1,6 +1,6 @@
-import Validation from './Validation.js';
+import Validation from '../utils/Validation.js';
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT } from './constants/Messages.js';
+import { INPUT } from '../constants/Messages.js';
 
 class Input {
   async userMoney() {

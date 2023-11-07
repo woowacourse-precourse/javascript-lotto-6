@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import Validation from './Validation.js';
+import Validation from './utils/Validation.js';
 import { LOTTO_PURCHASE_UNIT, LOTTO_NUMBER, PRIZE, TOTAL_RETURN } from './constants/Condition.js';
 
 class Game {

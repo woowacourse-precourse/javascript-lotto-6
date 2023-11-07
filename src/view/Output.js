@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT } from './constants/Messages.js';
-import { LOTTO_NUMBER, PRIZE } from './constants/Condition.js';
+import { OUTPUT } from '../constants/Messages.js';
+import { LOTTO_NUMBER, PRIZE } from '../constants/Condition.js';
 
 class Output {
   error(message) {
