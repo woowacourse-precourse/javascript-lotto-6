@@ -25,6 +25,10 @@ class App {
 
     const lotteryNumbers = await input.askLotteryNumbers();
     const lotto = new Lotto(lotteryNumbers);
+
+    const bonusNumber = await input.askLotteryBonusNumber();
+    const parsedBonusNumber = Number(bonusNumber);
+    lotto.validateBonusNumber(parsedBonusNumber);
   }
 
   validateAskPurchaseAmount(purchaseAmount) {
