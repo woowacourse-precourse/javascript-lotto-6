@@ -51,6 +51,15 @@ class Lottos {
       list.printNumbers();
     });
   }
+
+  //당첨번호와 보너스번호를 받아와서 각 로또의 등수 계산하고 등수 목록 반환
+  calculateRanks(winningNumbers, bonusNumber) {
+    let lottoRanks = [];
+    this.lists.forEach(list => {
+      lottoRanks.push(list.calculateRank(winningNumbers, bonusNumber));
+    });
+    return lottoRanks.filter(rank => rank <= PLACE.LAST);
+  }
 }
 
 export default Lottos;
