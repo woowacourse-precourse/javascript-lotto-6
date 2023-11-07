@@ -45,5 +45,47 @@ class Lotto {
       throw new Error('[ERROR] 1부터 45 사이의 정수를 입력해주세요.');
     }
   }
+
+  getWinningList(myLottoList, bonusNumber) {
+    const list = {
+      first: [],
+      second: [],
+      third: [],
+      fourth: [],
+      fifth: [],
+    };
+
+    myLottoList.forEach((lotto) => {
+      let count = 0;
+
+      this.#numbers.forEach((number) => {
+        if (lotto.includes(Number(number))) {
+          count += 1;
+        }
+      });
+
+      if (count === 3) {
+        list.fifth.push(lotto);
+      }
+
+      if (count === 4) {
+        list.fourth.push(lotto);
+      }
+
+      if (count === 5) {
+        if (lotto.includes(bonusNumber)) {
+          list.second.push(lotto);
+        } else {
+          list.third.push(lotto);
+        }
+      }
+
+      if (count === 6) {
+        list.first.push(lotto);
+      }
+    });
+
+    return list;
+  }
 }
 export default Lotto;
