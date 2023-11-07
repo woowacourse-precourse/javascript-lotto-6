@@ -71,13 +71,44 @@ class App {
   }
 
   async settingLottoNumber() {
-    const result = await Console.readLineAsync("당첨 번호를 입력해 주세요");
-    this.winningLotto = result.split(',').map(Number);
+    while (true) {
+      try {
+        const result = await Console.readLineAsync("당첨 번호를 입력해 주세요");
+        const numbers = result.split(',').map(Number);
+        const isDuplicate = new Set(numbers).size !== numbers.length;
+
+        if (!isDuplicate) {
+          this.winningLotto = numbers;
+          break; 
+        } else {
+          Console.print(ERROR.INVALID_INPUT_IS_DUPLICATED);
+        }
+      } catch (error) {
+        Console.print(ERROR.INVALID_INPUT_LOTTO);
+      }
+    }
   }
 
   async settingLottoBonusNumber() {
-    const result = await Console.readLineAsync("보너스 번호를 입력해 주세요");
-    this.winningLotto.push(Number(result));
+    while (true){
+      try{
+        const result =  await Console.readLineAsync("보너스 번호를 입력해 주세요");
+        const isDuplicate = this.winningLotto.includes(Number(result));
+        if (!isDuplicate) {
+          this.winningLotto.push(Number(result));
+          break;
+        } else {
+          Console.print(ERROR.INVALID_INPUT_IS_DUPLICATED);
+        }
+      } catch (error) {
+        Console.print(ERROR.INVALID_INPUT_LOTTO);
+      }
+    }
+  }
+
+  async checkLottoResult(){
+    console.log("this.userByLottoList",this.userByLottoList);
+    console.log("this.winningLotto", this.winningLotto);
   }
 }
 
