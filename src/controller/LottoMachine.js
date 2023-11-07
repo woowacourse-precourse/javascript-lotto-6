@@ -8,8 +8,14 @@ import { ERROR_MESSAGE } from '../constants/Messages.js';
 
 export default class LottoMachine {
   #player;
+
   #winningNumbers;
+
   #bonusNumber;
+
+  constructor() {
+    this.#bonusNumber = 0;
+  }
 
   async run() {
     this.#player = new LottoPlayer(await this.#getPurchaseAmount());
@@ -75,6 +81,7 @@ export default class LottoMachine {
     while (true) {
       try {
         const winningNumbersInput = await InputView.readWinningNumbers();
+
         return new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
       } catch (e) {
         Console.print(e.message);
@@ -95,6 +102,7 @@ export default class LottoMachine {
         if (this.#winningNumbers.getNumbers().includes(Number(bonusNumberInput))) {
           throw new Error(ERROR_MESSAGE.duplication);
         }
+
         return Number(bonusNumberInput);
       } catch (e) {
         Console.print(e.message);
@@ -104,13 +112,12 @@ export default class LottoMachine {
 
   #findMatchCount() {
     this.#player.getLottoTickets().forEach((lotto) => {
-      const isIncludeBonusNumber = lotto.getNumbers().includes(this.#bonusNumber);
-      const correctCount = lotto
+      const matchCount = lotto
         .getNumbers()
         .filter((number) => this.#winningNumbers.getNumbers().includes(number)).length;
 
-      if (correctCount >= LOTTO_MACHINE_RULES.minimumWiningCount) {
-        this.#player.setRankCounts(correctCount, isIncludeBonusNumber);
+      if (LOTTO_MACHINE_RULES.minimumWiningCount <= matchCount) {
+        this.#player.setRankCounts(matchCount, !!this.#bonusNumber);
       }
     });
   }
