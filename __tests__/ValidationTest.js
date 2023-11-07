@@ -1,3 +1,4 @@
+import validateBonusNumber from '../src/validations/validateBonusNumber';
 import validateInputAmount from '../src/validations/validateInputAmount';
 import validateWinningNumbers from '../src/validations/validateWinningNumbers';
 
@@ -122,6 +123,64 @@ describe('로또 당첨 번호 유효성 검사', () => {
 
     // Act
     const resultFn = () => validateWinningNumbers(input);
+
+    // Assert
+    expect(resultFn).toThrow(ERROR_PREFIX);
+  });
+});
+
+describe('로또 보너스 번호 유효성 검사', () => {
+  const winningNumbers = [1, 2, 3, 4, 5, 6];
+  test('1 ~ 45 사이의 정수이면서 당첨 번호와 중복되지 않는 하나의 정수일 경우 true 반환', () => {
+    // Arrange
+    const bonusNumber = 7;
+
+    // Act
+    const result = validateBonusNumber(winningNumbers, bonusNumber);
+
+    // Assert
+    expect(result).toBe(true);
+  });
+
+  test('정수가 아닌 값일 경우 예외 발생', () => {
+    // Arrange
+    const bonusNumber = 'test';
+
+    // Act
+    const resultFn = () => validateBonusNumber(winningNumbers, bonusNumber);
+
+    // Assert
+    expect(resultFn).toThrow(ERROR_PREFIX);
+  });
+
+  test('당첨 번호와 중복된 값일 경우 예외 발생', () => {
+    // Arrange
+    const bonusNumber = 6;
+
+    // Act
+    const resultFn = () => validateBonusNumber(winningNumbers, bonusNumber);
+
+    // Assert
+    expect(resultFn).toThrow(ERROR_PREFIX);
+  });
+
+  test('1 미만의 정수일 경우 예외 발생', () => {
+    // Arrange
+    const bonusNumber = -4;
+
+    // Act
+    const resultFn = () => validateBonusNumber(winningNumbers, bonusNumber);
+
+    // Assert
+    expect(resultFn).toThrow(ERROR_PREFIX);
+  });
+
+  test('45 초과의 정수일 경우 예외 발생', () => {
+    // Arrange
+    const bonusNumber = 50;
+
+    // Act
+    const resultFn = () => validateBonusNumber(winningNumbers, bonusNumber);
 
     // Assert
     expect(resultFn).toThrow(ERROR_PREFIX);
