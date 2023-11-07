@@ -1,9 +1,11 @@
+import OutputHandler from './OutputHandler';
 import User from './User';
 
 class App {
   async play() {
     const user = new User();
-    const ticketCount = user.purchaseLotto();
+    const ticketCount = await user.purchaseLotto();
+    OutputHandler.printPurchaseComplete(ticketCount);
   }
 }
 

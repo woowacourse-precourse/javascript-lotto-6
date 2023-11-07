@@ -3,31 +3,31 @@ import messages from './constants/messages';
 import prize from './constants/prize';
 
 class OutputHandler {
-  requestPurchaseAmount() {
+  static requestPurchaseAmount() {
     Console.print(messages.purchase.request);
   }
 
-  printPurchaseComplete(number) {
-    Console.print(`${number}``${messages.purchase.complete}`);
+  static printPurchaseComplete(number) {
+    Console.print(`${number}${messages.purchase.complete}`);
   }
 
-  requestWinningNumbers() {
+  static requestWinningNumbers() {
     Console.print(messages.number.winning);
   }
 
-  requestBonusNumber() {
+  static requestBonusNumber() {
     Console.print(messages.number.bonus);
   }
 
-  printStaticsHeadLine() {
+  static printStaticsHeadLine() {
     Console.print(messages.statics.headline);
   }
 
-  printStaticsSeperator() {
+  static printStaticsSeperator() {
     Console.print(messages.statics.seperator);
   }
 
-  printResult(rank, count, isGuessBonus) {
+  static printResult(rank, count, isGuessBonus) {
     isGuessBonus
       ? Console.print(
           `${count}개 일치, 보너스 볼 일치 (${prize[rank]}원) - ${count}개`,
@@ -35,7 +35,7 @@ class OutputHandler {
       : Console.print(`${count}개 일치 (${prize[rank]}원) - ${count}개`);
   }
 
-  printReturnRate(returnRate) {
+  static printReturnRate(returnRate) {
     Console.print(`총 수익률은 ${returnRate}%입니다.`);
   }
 }
