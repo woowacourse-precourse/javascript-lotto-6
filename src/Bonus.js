@@ -1,4 +1,4 @@
-import { START_INCLUSIVE, END_INCLUSIVE } from './constants/data.js';
+import { START_INCLUSIVE, END_INCLUSIVE } from './constants/numbers.js';
 import { ERROR } from './constants/messages.js';
 
 class Bonus {
@@ -14,7 +14,7 @@ class Bonus {
       throw new Error(ERROR.not_a_valid_number);
     }
 
-    if (numbers.includes(number)) {
+    if (numbers.includes(Number(number))) {
       throw new Error(ERROR.not_duplicate_numbers);
     }
   }
