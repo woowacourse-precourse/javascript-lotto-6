@@ -144,7 +144,7 @@ class App {
       this.winResult[2] * win3 +
       this.winResult[1] * win4 +
       this.winResult[0] * win5;
-    return (100 + ((profit - input) / input) * 100).toFixed(2);
+    return 100 + ((profit - input) / input) * 100;
   }
 
   printLottosInfo(inputMoney) {
@@ -164,7 +164,7 @@ class App {
     this.printWinResult(this.winResult);
 
     MissionUtils.Console.print(
-      `총 수익률은 ${this.getProfit(inputMoney)}% 입니다.`
+      `총 수익률은 ${this.getProfit(inputMoney)}%입니다.`
     );
   }
 
