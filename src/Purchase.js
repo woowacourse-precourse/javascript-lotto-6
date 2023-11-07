@@ -36,3 +36,13 @@ class Purchase {
     return this.lottoList;
   }
 
+  ui() {
+    Console.print(`\n${this.lottoList.length}개를 구매했습니다.`);
+    this.lottoList.forEach((lotto) => {
+      const stringLotto = `[${lotto.join(', ')}]`;
+      Console.print(stringLotto);
+    });
+  }
+}
+
+export default Purchase;
