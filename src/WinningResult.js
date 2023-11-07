@@ -25,3 +25,5 @@ class WinningResult {
     return this.prizes[rank].count;
   }
 }
+
+export default WinningResult;

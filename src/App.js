@@ -7,11 +7,23 @@ class App {
     try {
       const purchaseAmount = await this.inputPurchaseAmount();
       const tickets = this.generateLottoTickets(purchaseAmount);
+      this.printTickets(tickets);
 
       // 당첨 번호 입력 받기
       const winningLotto = await this.inputWinningNumbers();
       const bonusNumber = await this.inputBonusNumber(winningLotto);
-      console.log(`보너스 번호: ${bonusNumber}`);
+
+      let winningResult = this.calculateWinning(
+        tickets,
+        winningLotto,
+        bonusNumber
+      );
+      let returnRate = this.calculateReturnRate(
+        winningResult.getTotalPrize(),
+        purchaseAmount
+      );
+
+      this.printWinningStatistics(winningResult, returnRate);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       this.play();
@@ -115,7 +127,9 @@ class App {
   }
 
   // 당첨 결과 계산
-  calculateWinning(tickets, winningLotto, bonusNumber, winningResult) {
+  calculateWinning(tickets, winningLotto, bonusNumber) {
+    let winningResult = new WinningResult();
+
     for (let ticket of tickets) {
       let count = 0;
       let isBonusMatched = false;
@@ -140,12 +154,46 @@ class App {
         winningResult.updatePrize(5);
       }
     }
+    return winningResult;
   }
 
+  // 총 수익률 계산
   calculateReturnRate(totalPrize, amount) {
     let returnRate = (totalPrize / amount) * 100;
     returnRate = Math.round(returnRate * 100) / 100; // 소수점 둘째 자리에서 반올림
     return returnRate;
+  }
+
+  // 로또 구매 개수와 번호 출력
+  printTickets(tickets) {
+    MissionUtils.Console.print(`${tickets.length}개를 구매했습니다.`);
+    for (let ticket of tickets) {
+      MissionUtils.Console.print(`[${ticket.join(', ')}]\n`);
+    }
+  }
+
+  // 당첨 통계 출력
+  printWinningStatistics(winningResult, returnRate) {
+    MissionUtils.Console.print('당첨 통계');
+    MissionUtils.Console.print('---');
+    MissionUtils.Console.print(
+      `3개 일치 (5,000원) - ${winningResult.getPrizeCount(5)}개`
+    );
+    MissionUtils.Console.print(
+      `4개 일치 (50,000원) - ${winningResult.getPrizeCount(4)}개`
+    );
+    MissionUtils.Console.print(
+      `5개 일치 (1,500,000원) - ${winningResult.getPrizeCount(3)}개`
+    );
+    MissionUtils.Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${winningResult.getPrizeCount(
+        2
+      )}개`
+    );
+    MissionUtils.Console.print(
+      `6개 일치 (2,000,000,000원) - ${winningResult.getPrizeCount(1)}개`
+    );
+    MissionUtils.Console.print(`총 수익률은 ${returnRate}%입니다.`);
   }
 }
 
