@@ -10,8 +10,8 @@ class App {
 
   #coin = 0;
   #boughtLottos = [];
-  #winningNumber = [];
-  #bonusNumber = 0;
+  #winning = [];
+  #bonus = 0;
 
   async play() {
     await this.buyLottos(this.#inputView, this.#outputView);
@@ -30,15 +30,15 @@ class App {
     }
   }
 
-  // console.log('당첨번호 입력로직');
   async getWinningNumber(inputView) {
-    this.#winningNumber = new Lotto(await inputView.winningNumber());
-    this.#bonusNumber = await inputView.bonus(this.#winningNumber.getNumbers());
+    const winningNumber = await inputView.winning();
+    this.#winning = new Lotto(winningNumber);
+    this.#bonus = await inputView.bonus(winningNumber);
   }
 
   // console.log('당첨결과 출력');
   getWinningResult(outputView) {
-    this.#compare = new Compare(this.#winningNumber, this.#bonusNumber);
+    this.#compare = new Compare(this.#winning, this.#bonus);
     outputView.winningResult();
     outputView.matchedThreeNumber(
       this.#compare.getMatchedThreeNumber(this.#boughtLottos)

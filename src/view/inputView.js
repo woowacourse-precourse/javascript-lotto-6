@@ -25,7 +25,7 @@ export default class View {
     return this.#coin;
   }
 
-  async winningNumber() {
+  async winning() {
     const winningNumber = await Console.readLineAsync(
       '\n당첨 번호를 입력해 주세요.\n'
     );
@@ -34,7 +34,7 @@ export default class View {
       return this.#validateWinningNumber(winningNumber);
     } catch (error) {
       Console.print(error.message);
-      return this.winningNumber();
+      return this.winning();
     }
   }
 
