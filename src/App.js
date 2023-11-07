@@ -19,20 +19,30 @@ class App {
 
     async buyLottoTickets() {
         //TODO : 로또 구입 금액을 입력 받는다.
-        const userInput = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
-        const purchaseAmount = parseInt(userInput);
-        if (isNaN(purchaseAmount) || purchaseAmount % 1000 !== 0 || purchaseAmount <= 0 || userInput.match(/\D/)) {
-            throw new Error(`[ERROR]`);
-        }
+        try {
+            const userInput = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+            if (isNaN(userInput) || userInput === null || userInput.includes(" ")) {
+                throw new Error(`[ERROR] 잘못된 숫자 입력입니다.`);
+            }
 
-        return purchaseAmount;
+            const purchaseAmount = parseInt(userInput);
+            if (purchaseAmount % 1000 !== 0 || purchaseAmount <= 0) {
+                throw new Error(`[ERROR] 숫자는 1000이상 입력해야 합니다.`);
+            }
+            MissionUtils.Console.print("");
+            return purchaseAmount;
+        } catch (error) {
+            MissionUtils.Console.print(`[ERROR] 잘못된 구입금액 입력입니다.`);
+            //throw error;
+        }
     }
 
     generateLottos(purchaseAmount) {
         //TODO : 로또 티켓의 최대 구매 가능 개수만큼 랜덤한 로또 번호 배열을 만들고 반환한다.
         const maxTickets = this.getMaxPurchasedTickets(purchaseAmount);
-        return Array.from({ length: maxTickets }, () => new Lotto(this.generateRandomNumbers()));
+        return Array.from({length: maxTickets}, () => new Lotto(this.generateRandomNumbers()));
     }
+
     getMaxPurchasedTickets(purchaseAmount) {
         return Math.floor(purchaseAmount / 1000);
     }
@@ -43,23 +53,48 @@ class App {
     }
 
     async inputWinningNumbers() {
-        //TODO : 당첨 번호를 입력 받는다.
-        let userInput = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-        const winningNumbers = userInput.split(',').map(Number);
-        return winningNumbers;
+        try {
+            //TODO : 당첨 번호를 입력 받는다.
+            let userInput = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+            const winningNumbers = userInput.split(',').map(Number);
+
+            if (!Array.isArray(winningNumbers) || winningNumbers.length !== 6 || winningNumbers.includes(null) || winningNumbers.includes("") || winningNumbers.includes(" ") || winningNumbers.includes(NaN)) {
+                throw new Error(`[ERROR] 잘못된 당첨 번호 입력입니다.`);
+            }
+
+            MissionUtils.Console.print("");
+            return winningNumbers;
+        } catch (error) {
+            MissionUtils.Console.print(`[ERROR] 잘못된 당첨 번호 입력입니다.`);
+            //throw error;
+        }
     }
 
     async inputBonusNumber() {
-        //TODO : 보너스 번호를 입력 받는다.
-        const userInput = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-        return parseInt(userInput);
+        try {
+            //TODO : 보너스 번호를 입력 받는다.
+            const userInput = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+            const bonusNumber = parseInt(userInput);
+
+            if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
+                throw new Error("[ERROR] 잘못된 보너스 번호 입력입니다.");
+            }
+
+            MissionUtils.Console.print("");
+            return bonusNumber;
+        } catch (error) {
+            MissionUtils.Console.print(`[ERROR] 잘못된 보너스 번호 입력입니다.`);
+            //throw error;
+        }
     }
 
     displayLottoNumbers(lottos) {
         //TODO : 발행한 로또 수량 및 번호를 출력한다.
         MissionUtils.Console.print(`${lottos.length}개를 구매했습니다.`);
         lottos.map(lotto => lotto.displayNumbers());
+        MissionUtils.Console.print("");
     }
+
     calculateResults(lottos, winningNumbers, bonusNumber) {
         const results = lottos.map(lotto => this.calculateSingleLottoResult(lotto, winningNumbers, bonusNumber));
         return this.countResults(results);
@@ -79,7 +114,7 @@ class App {
     }
 
     countResults(results) {
-        const countResults = { 3: 0, 4: 0, 5: 0, 5.1: 0, 6: 0 };
+        const countResults = {3: 0, 4: 0, 5: 0, 5.1: 0, 6: 0};
 
         for (const result of results) {
             countResults[result] += 1;
@@ -105,9 +140,11 @@ class App {
     calculateTotalEarningsRate(totalPrize, purchaseAmount) {
         return (totalPrize / purchaseAmount) * 100;
     }
+
     printTotalEarningsRate(totalEarningsRate) {
         MissionUtils.Console.print(`총 수익률은 ${totalEarningsRate.toFixed(1)}%입니다.`);
     }
+
     printTotalEarnings(purchaseAmount, countResults) {
         //TODO : 총 수익률을 출력한다.
 
@@ -116,8 +153,6 @@ class App {
 
         this.printTotalEarningsRate(totalEarningsRate);
     }
-
-
 }
 
 export default App;
