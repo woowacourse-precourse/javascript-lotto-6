@@ -20,6 +20,10 @@ class OutputView {
     const matchResultMessage = `\n${matchResultString}${matchResultSeperator}${matchResult}${returnRateResult}`;
     Console.print(matchResultMessage);
   }
+
+  printError(error) {
+    Console.print(error);
+  }
 }
 
 const messageGenerator = {

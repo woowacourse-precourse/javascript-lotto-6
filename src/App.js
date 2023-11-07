@@ -10,8 +10,12 @@ class App {
   #outputView = new OutputView();
 
   async play() {
-    await this.#purchaseLottos();
-    await this.#getLottoMatchResult();
+    try {
+      await this.#purchaseLottos();
+      await this.#getLottoMatchResult();
+    } catch (error) {
+      this.#outputView.printError(error.message);
+    }
   }
 
   async #purchaseLottos() {

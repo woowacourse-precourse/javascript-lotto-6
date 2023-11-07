@@ -28,4 +28,5 @@ export const ERROR_MESSAGE = Object.freeze({
   duplicatedNumber: "중복된 숫자가 없어야 합니다.",
   invalidBonousNumberCount: "보너스 숫자는 하나의 숫자를 입력하셔야 합니다.",
   invalidNumberRange: "로또 번호는 1부터 45 사이의 숫자여야 합니다.",
+  notInteger: "정수를 입력해야 합니다.",
 });

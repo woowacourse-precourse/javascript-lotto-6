@@ -22,3 +22,5 @@ export class DuplicatedNumberError extends CustomError {}
 export class InvalidBonousNumberCountError extends CustomError {}
 
 export class InvalidNumberRangeError extends CustomError {}
+
+export class NotIntegerError extends CustomError {}
