@@ -1,4 +1,4 @@
-import Counter from '../src/domains/Counter';
+import Counter from '../../src/domains/Counter';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const ERROR_PREFIX = '[ERROR]';

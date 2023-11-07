@@ -1,4 +1,4 @@
-import LottoComparison from '../src/domains/LottoComparison';
+import LottoComparison from '../../src/domains/LottoComparison';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const getLogSpy = () => {

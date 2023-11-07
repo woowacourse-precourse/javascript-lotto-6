@@ -1,6 +1,6 @@
-import { ERROR_MESSAGES } from '../src/constants/messages';
+import { ERROR_MESSAGES } from '../../src/constants/messages';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import WinningLottoMachine from '../src/domains/WinningLottoMachine';
+import WinningLottoMachine from '../../src/domains/WinningLottoMachine';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
