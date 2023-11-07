@@ -1,11 +1,14 @@
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto";
 import WORD from "./lib/constants/word";
+import { RANK_REWARD } from "./lib/constants/rank";
 
 class User {
   lottoList;
 
   #rank;
+
+  #payment;
 
   constructor(userLottoQuanitiy) {
     this.lottoList = this.#generateLotto(userLottoQuanitiy);
@@ -16,6 +19,7 @@ class User {
       secondRank: 0,
       firstRank: 0,
     };
+    this.#payment = userLottoQuanitiy * 1000;
   }
 
   #generateLotto(userLottoQuanitiy) {
@@ -54,6 +58,18 @@ class User {
 
   printStatisticList() {
     return Object.values(this.#rank);
+  }
+
+  calculateProfit() {
+    return Object.entries(this.#rank).reduce(
+      (acc, [rank, count]) => acc + RANK_REWARD[rank.toUpperCase()] * count,
+      0
+    );
+  }
+
+  calculateProfitRate() {
+    const profitRate = (this.calculateProfit() / this.#payment) * 100;
+    return profitRate.toFixed(1);
   }
 }
 

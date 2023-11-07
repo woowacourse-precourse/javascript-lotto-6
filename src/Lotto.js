@@ -1,4 +1,4 @@
-import RANK from "./lib/constants/rank";
+import { RANK } from "./lib/constants/rank";
 import WORD from "./lib/constants/word";
 
 class Lotto {

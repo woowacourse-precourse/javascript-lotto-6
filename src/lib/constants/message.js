@@ -17,4 +17,8 @@ export const RESULT_MESSAGE = Object.freeze({
       `6개 일치 (2,000,000,000원) - ${first}개`,
     ];
   },
+
+  printProfit(profit) {
+    return `총 수익률은 ${profit}%입니다.`;
+  },
 });

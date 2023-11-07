@@ -18,6 +18,10 @@ const OutputView = {
       Console.print(statistic)
     );
   },
+
+  printProfit(profit) {
+    Console.print(RESULT_MESSAGE.printProfit(profit));
+  },
 };
 
 export default OutputView;
