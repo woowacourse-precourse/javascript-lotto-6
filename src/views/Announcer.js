@@ -20,7 +20,7 @@ class Announcer {
     Console.print(PROMPT_MESSEGE.lottoResult);
 
     const rankedLotto = analyzer.getRankedLotto();
-    const rank = ['fifth', 'forth', 'third', 'second', 'first'];
+    const rank = ['fifth', 'fourth', 'third', 'second', 'first'];
     RESULT_MESSEGE.forEach((messege, idx) => {
       Console.print(`${messege + rankedLotto[rank[idx]]}개`);
     });
