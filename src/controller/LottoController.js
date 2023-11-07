@@ -4,6 +4,7 @@ import Lotto from "../model/Lotto.js";
 
 class LottoController {
 	static lottoList = [];
+	static lottoNumList = [];
 
 	static countLottos(amount) {
 		return Math.floor(amount / LOTTO.cost);
@@ -26,6 +27,13 @@ class LottoController {
 
 	static setLottoList(lotto) {
 		this.lottoList.push(new Lotto(lotto.join(COMMA)));
+	}
+
+	static setLottoNumList() {
+		this.lottoList.forEach((lotto) =>
+			this.lottoNumList.push(lotto.getNumbers())
+		);
+		console.log(this.lottoNumList);
 	}
 }
 
