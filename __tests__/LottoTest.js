@@ -16,7 +16,7 @@ describe('로또 클래스 테스트', () => {
   });
 
   // 아래에 추가 테스트 작성 가능
-  describe('로또 번호 테스트', () => {
+  describe('로또 번호 생성 테스트', () => {
     test('생성한 로또 번호 중복 테스트', () => {
       const numbers = Lotto.generateLottoNumbers();
       const set = new Set(numbers);
