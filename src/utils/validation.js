@@ -1,3 +1,5 @@
+import LOTTO from "../constant/lottoData.js";
+
 const pattern = {
   whitespace: /\s/,
   specialCharacter: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/,
@@ -5,6 +7,8 @@ const pattern = {
 };
 
 export const isBlank = (input) => input.trim() === "";
+
+export const isNumber = (input) => Number.isNaN(Number(input));
 
 const containsWhiteSpace = (input) => pattern.whitespace.test(input);
 
@@ -20,3 +24,7 @@ export function isInvalidType(input) {
     containsEmoticon(input)
   );
 }
+
+export const isInRange = (input) => {
+  return input >= LOTTO.MINIMUM_NUMBER && input <= LOTTO.MAXIMUM_NUMBER;
+};
