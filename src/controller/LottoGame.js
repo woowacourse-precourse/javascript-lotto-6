@@ -27,6 +27,8 @@ class LottoGame {
   }
 
   printResult() {
+    Output.print('당첨 통계');
+    Output.print('---');
     this.#result.getResults().forEach((each) => {
       Output.print(`${each}`);
     });

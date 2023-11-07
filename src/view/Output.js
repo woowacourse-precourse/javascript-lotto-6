@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, RateOfReturn } from '../constant/constant.js';
+import Util from '../utils/Util.js';
 
 class Output {
   static print(message) {
@@ -11,7 +12,10 @@ class Output {
   }
 
   static printPurchasedLottoList(lottoList) {
-    lottoList.forEach(Output.print);
+    lottoList.forEach((lotto) => {
+      const stringArrayLotto = Util.arrayToStringArray(lotto);
+      Output.print(stringArrayLotto);
+    });
   }
 
   static printRateOrReturn(number) {

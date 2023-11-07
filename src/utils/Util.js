@@ -23,6 +23,10 @@ class Util {
 
     return sortedArray;
   }
+
+  static arrayToStringArray(array) {
+    return `[${array.join(', ')}]`;
+  }
 }
 
 export default Util;

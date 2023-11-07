@@ -1,7 +1,7 @@
 export const PROMPT = Object.freeze({
   lottoBudget: '구입금액을 입력해 주세요.\n',
-  winLotto: '당첨 번호를 입력해 주세요.\n',
-  bonusLotto: '보너스 번호를 입력해 주세요.\n',
+  winLotto: '\n당첨 번호를 입력해 주세요.\n',
+  bonusLotto: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export const LOTTO = Object.freeze({
@@ -23,7 +23,7 @@ export const ERROR = Object.freeze({
 });
 
 export const MESSAGE = Object.freeze({
-  purchase: (count) => `${count}개를 구매했습니다.`,
+  purchase: (count) => `\n${count}개를 구매했습니다.`,
 });
 
 export const REGEX = Object.freeze({
