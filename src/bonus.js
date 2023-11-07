@@ -1,6 +1,5 @@
 /* eslint-disable class-methods-use-this */
 import { Console } from '@woowacourse/mission-utils';
-import LottoCycle from './LottoCycle.js';
 
 class Bonus {
   #bonusNum;
@@ -48,5 +47,3 @@ class Bonus {
 }
 
 export default Bonus;
-// const run = new Bonus();
-// run.validCheck();

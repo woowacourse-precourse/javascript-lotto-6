@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import Input from './input.js';
 import Money from './money.js';
 
@@ -46,6 +46,3 @@ class MoneyCycle {
 }
 
 export default MoneyCycle;
-
-//const run = new MoneyCycle();
-//run.run();

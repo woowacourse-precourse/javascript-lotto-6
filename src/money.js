@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 
 // 로또구입
 class Money {

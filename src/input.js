@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 class Input {
   async inputMoney() {

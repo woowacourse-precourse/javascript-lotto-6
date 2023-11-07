@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import Input from './input.js';
 
 class Winning {
