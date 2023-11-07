@@ -1,15 +1,16 @@
 import { Console } from '@woowacourse/mission-utils';
+import { UI_PROMPTS } from '../constants/UiConstants';
 
 export default class InputView {
   static async getPurchaseAmount() {
-    return Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    return Console.readLineAsync(UI_PROMPTS.PURCHASE_AMOUNT);
   }
 
   static async getWinningNumbers() {
-    return Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    return Console.readLineAsync(UI_PROMPTS.WINNING_NUMBERS);
   }
 
   static async getBonusNumber() {
-    return Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+    return Console.readLineAsync(UI_PROMPTS.BONUS_NUMBER);
   }
 }

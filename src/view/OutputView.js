@@ -1,20 +1,21 @@
 import { Console } from '@woowacourse/mission-utils';
+import { UI_MESSAGES } from '../constants/UiConstants';
 
 export default class OutputView {
   static displayTickets(tickets) {
-    Console.print(`\n${tickets.length}개를 구매했습니다.`);
+    Console.print(UI_MESSAGES.TICKETS_PURCHASED(tickets.length));
     tickets.forEach((ticket) => {
       Console.print(`[${ticket.numbers.join(', ')}]`);
     });
   }
 
   static displayResults(resultStrings) {
-    Console.print('\n당첨 통계\n---');
+    Console.print(UI_MESSAGES.WINNING_STATISTICS);
     Console.print(resultStrings);
   }
 
   static displayProfitRate(profitRate) {
-    Console.print(`총 수익률은 ${profitRate}%입니다.`);
+    Console.print(UI_MESSAGES.TOTAL_PROFIT_RATE(profitRate));
   }
 
   static displayError(message) {
