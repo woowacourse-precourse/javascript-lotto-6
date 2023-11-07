@@ -17,6 +17,20 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.range);
     }
   }
+
+  setBonusNumber(bonus) {
+    this.validateBonusNumber(bonus);
+    this.bonusNumber = bonus;
+  }
+
+  validateBonusNumber(bonus) {
+    if (this.#numbers.includes(bonus)) {
+      throw new Error(ERROR_MESSAGE.duplication);
+    }
+    if (!/^([1-9]|[1-3][0-9]|4[0-5])$/.test(bonus)) {
+      throw new Error(ERROR_MESSAGE.range);
+    }
+  }
 }
 
 export default Lotto;

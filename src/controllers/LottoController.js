@@ -47,7 +47,8 @@ class LottoController {
   async inputBonusNumber() {
     const bonus = await this.inputView.bonusNumber();
     try {
-      this.lottoData.setBonusNumber(bonus);
+      this.lotto.setBonusNumber(bonus);
+      return this.lotto;
     } catch (error) {
       this.outputView.printError(error.message);
       return this.inputBonusNumber();
