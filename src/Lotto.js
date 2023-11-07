@@ -28,7 +28,7 @@ class Lotto {
    * @param {int} number
    * @returns {boolean} is_include
    */
-  #is_include(number) {
+  is_include(number) {
     return this.#numbers.includes(number);
   }
 
@@ -39,7 +39,7 @@ class Lotto {
    */
   get_winning_count(numbers) {
     const WINNING = numbers.reduce(
-      (accumulator, current) => accumulator + this.#is_include(current),
+      (accumulator, current) => accumulator + this.is_include(current),
       0
     );
 
