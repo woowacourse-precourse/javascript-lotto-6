@@ -25,27 +25,27 @@ describe("프린터 테스트", () => {
   test.each([10000, 35000, 4000])(
     "구입 금액을 가격으로 나눈 몫만큼 구매 개수가 출력된다.",
     async (input) => {
-      //given
+      // given
       const result = amountResults.shift();
 
-      //when
+      // when
       const printer = new Printer(input);
 
-      //then
+      // then
       await expect(printer.amount).toBe(result);
     }
   );
 
   test("생성된 무작위 값과 동일한 번호 목록이 출력되어야 한다", () => {
-    //given
+    // given
     const logSpy = jest.spyOn(IO, "print");
 
-    //when
+    // when
     const printer = new Printer(1000);
     printer.pack();
     printer.print();
 
-    //then
+    // then
     expect(logSpy).toHaveBeenCalledWith(
       `[${printer.getTicket()[0].show().join(", ")}]`
     );

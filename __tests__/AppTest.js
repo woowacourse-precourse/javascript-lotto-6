@@ -14,19 +14,19 @@ const logs = [
 ];
 
 test("당첨 횟수에 따라 올바른 메시지가 출력되어야 한다.", () => {
-  //given
+  // given
   const logSpy = jest.spyOn(IO, "print");
   const prize = {
     line: [1, 2, 3, 4, 5, 16],
     bonus: 6,
   };
 
-  //when
+  // when
   const app = new App(1000);
   const result = app.compare(mockLotto, prize);
   app.printResult(result);
 
-  //then
+  // then
   logs.forEach((log) => {
     expect(logSpy).toHaveBeenCalledWith(log);
   });

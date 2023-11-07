@@ -21,13 +21,13 @@ describe("당첨 번호와 보너스 번호의 예외 테스트", () => {
   test.each(lineTest)(
     "생성한 당첨 번호에 중복되거나 잘못된 값이 있다면 예외가 발생한다.",
     async (input) => {
-      //given
+      // given
       mockQuestions(input);
 
-      //when
+      // when
       const prize = new Prize();
 
-      //then
+      // then
       await expect(prize.lotteryLine("test")).rejects.toThrow("[ERROR]");
     }
   );
@@ -35,38 +35,38 @@ describe("당첨 번호와 보너스 번호의 예외 테스트", () => {
   test.each(bonusTest)(
     "당첨 번호와 보너스 번호가 중복, 혹은 보너스 번호에 잘못된 값이 있다면 예외가 발생한다.",
     async (input) => {
-      //given
+      // given
       const lotteryLine = "1,12,23,34,45,6";
       mockQuestions(lotteryLine);
 
-      //when
+      // when
       const prize = new Prize();
       await prize.lotteryLine();
 
-      //given
+      // given
       mockQuestions(input);
 
-      //then
+      // then
       await expect(prize.bonusNum("test")).rejects.toThrow("[ERROR]");
     }
   );
 });
 
 test("제공한 값과 동일한 당첨 번호가 출력되어야 한다", async () => {
-  //given
+  // given
   mockQuestions("1,42,32,9,27,11");
 
-  //when
+  // when
   const prize = new Prize();
   await prize.lotteryLine("test");
 
-  //given
+  // given
   mockQuestions("24");
 
-  //when
+  // when
   await prize.bonusNum("test");
 
-  //then
+  // then
   await expect(prize.show()).toStrictEqual({
     line: [1, 42, 32, 9, 27, 11],
     bonus: 24,

@@ -20,7 +20,7 @@ for (let i = 0; i < mockRandoms.length; i += 1) {
 const wins = [1, 3, 4, 5, 6, 5.1];
 
 test.each(mockLottos)("맞춘 번호의 개수만큼 값이 반환되어야 한다.", (lotto) => {
-  //given
+  // given
   const win = wins.shift();
   const prize = {
     line: [1, 2, 3, 4, 5, 6],
@@ -28,9 +28,9 @@ test.each(mockLottos)("맞춘 번호의 개수만큼 값이 반환되어야 한�
   };
   const spyMatching = jest.spyOn(Matching, "between");
 
-  //when
+  // when
   Matching.between(lotto, prize);
 
-  //then
+  // then
   expect(spyMatching).toHaveReturnedWith(win);
 });
