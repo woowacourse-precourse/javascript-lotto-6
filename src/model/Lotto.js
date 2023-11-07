@@ -24,6 +24,17 @@ class Lotto {
       throw new Error("[ERROR] 쉼표 외 문자는 포함될 수 없습니다.");
     }
   }
+  compareWithRandomLotto(lotto) {
+    const WINNING_NUMBER_SPLIT = this.#numbers.map(Number);
+    const resultArray = [];
+    for(let index in lotto) {
+      resultArray.push(lotto[index].filter(x => WINNING_NUMBER_SPLIT.includes(x)).length);
+    }
+    return resultArray;
+  }
+  getCompareResult(lotto) {
+    return this.compareWithRandomLotto(lotto);
+  }
 }
 
 export default Lotto;
