@@ -24,7 +24,7 @@ class PurchaseCost {
       throw new Error(ERROR.STRING_IN_PURCHASECOST);
     } else if (cost % NUMBER.UNIT) {
       throw new Error(ERROR.NOT_UNIT_PURCHASECOST);
-    }
+    };
   }
 
   #getRandomLottoNumbersList() {
@@ -32,7 +32,7 @@ class PurchaseCost {
     for (let i = 0; i < parseInt(this.#cost / NUMBER.UNIT); i++) {
       purchaseLottoList.push(Computer.getRandomLottoNumbers());
     };
-    return purchaseLottoList
+    return purchaseLottoList;
   }
   
   getPurchaseCost() {

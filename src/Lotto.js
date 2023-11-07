@@ -24,7 +24,7 @@ class Lotto {
       throw new Error(ERROR.AREA_OVER_LOTTO_NUMBERS);
     } else if (this.findDuplicationInNumbers(numbers)) {
       throw new Error(ERROR.SAME_NUMBER_IN_LOTTO_NUMBERS);
-    }
+    };
   }
 
   // TODO: 추가 기능 구현

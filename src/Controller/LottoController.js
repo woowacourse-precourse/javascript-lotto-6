@@ -12,9 +12,9 @@ class LottoController {
   #lottoMatchResult;
   #incomeResult;
   constructor() {
-    this.#userLottoCost = 0,
-    this.#userPickLottoNumbers = [0]
-    this.#userPickBonusLottoNumber = 0,
+    this.#userLottoCost = 0;
+    this.#userPickLottoNumbers = [0];
+    this.#userPickBonusLottoNumber = 0;
     this.#lottoMatchResult = {};
     this.#incomeResult = 0;
   }
@@ -33,7 +33,7 @@ class LottoController {
       try {
         this.#userLottoCost = new PurchaseCost(await InputView.inputPurchaseCost());
         await this.printPurChaseResult();
-        break
+        break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
       };
@@ -49,7 +49,7 @@ class LottoController {
     while (true) {
       try {
         this.#userPickLottoNumbers = new Lotto((await InputView.inputLotto()).split(","));
-        break
+        break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
       };
@@ -60,7 +60,7 @@ class LottoController {
     while (true) {
       try {
         this.#userPickBonusLottoNumber = new BonusLotto(await InputView.inputBonusLotto(), this.#userPickLottoNumbers.getLottoNumbers());
-        break
+        break;
       } catch (error) {
         OutputView.printErrorMessage(error.message);
       };
@@ -90,7 +90,7 @@ class LottoController {
   }
 
   async checkIncomeResult(numberMatchCount, bonusCount) {
-    let price = NUMBER.MATCH_NUMBER_PRICE[numberMatchCount]
+    let price = NUMBER.MATCH_NUMBER_PRICE[numberMatchCount];
     if (NUMBER.CHECK_MATCH_BONUS_NUMBER[numberMatchCount] && (bonusCount)) {
       price = NUMBER.MATCH_BONUS_NUMBER_PRICE[numberMatchCount];
     };
@@ -101,7 +101,6 @@ class LottoController {
     this.#incomeResult = this.#incomeResult / await this.#userLottoCost.getPurchaseCost() * 100 - 100;
     if (this.#incomeResult < 0) this.#incomeResult += 100;
   }
-
 }
 
 export default LottoController;
