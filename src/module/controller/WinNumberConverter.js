@@ -13,3 +13,5 @@ class WinNumberConverter {
     return this.#numbers;
   }
 }
+
+export default WinNumberConverter;
