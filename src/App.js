@@ -6,6 +6,8 @@ class App {
 
         const purchaseAmount = await this.getPurchaseAmount();
         Console.print(purchaseAmount);
+        const lottoArr = this.lottoVendingMachine(purchaseAmount);
+        Console.print(this.renderLottoTickets(lottoArr));
     }
 
     async getPurchaseAmount() {
@@ -38,12 +40,18 @@ class App {
                     1,45,6
                 ).sort((a, b) => a - b);
                 lottoArr.push(new Lotto(lottoNumberArr));
-                console.log(lottoArr);
             } catch (err) {
                 this.lottoVendingMachine(purchaseAmount);
             }
         }
         return lottoArr;
+    }
+
+    renderLottoTickets(lottoArr) {
+        const lottoNumberArr = lottoArr.map((el)=>el.printLottoNumber())
+        const removeArrSpace = lottoNumberArr.map((el)=>el.join(", "))
+        const lottoText = `${lottoArr.length}개를 구매했습니다.\n[${removeArrSpace.join("]\n[")}]`
+        return lottoText;
     }
 }
 
