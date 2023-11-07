@@ -14,7 +14,8 @@ class InputValidator {
   }
 
   // 당첨 번호에 대해 검증한다.
-  static validateLuckyNumbers(luckyNumbers) {
+  static validateLuckyNumbers(numbers) {
+    const luckyNumbers = numbers.split(",").map((number) => Number(number));
     if (!this.validateArray(luckyNumbers, this.isNumber)) return false;
     if (!LottoValidator.isLengthSix(luckyNumbers)) return false;
     if (!LottoValidator.isRepeat(luckyNumbers)) return false;

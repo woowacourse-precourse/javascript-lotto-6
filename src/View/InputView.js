@@ -8,14 +8,13 @@ class InputView {
   }
 
   static async getLuckyNumbers() {
-    const numbers = await Console.readLineAsync(INPUT_MESSAGE.getLuckyNumbers);
-    const luckyNumbers = numbers.split(",").map((number) => Number(number));
+    const luckyNumbers = await Console.readLineAsync(INPUT_MESSAGE.getLuckyNumbers);
     return luckyNumbers;
   }
 
   static async getBonusNumber() {
     const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.getBonusNumber);
-    return Number(bonusNumber);
+    return bonusNumber;
   }
 }
 
