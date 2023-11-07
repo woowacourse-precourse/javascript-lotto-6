@@ -6,15 +6,10 @@ class LottoService {
     do {
       randomList = Random.pickUniqueNumbersInRange(1, 45, 6);
     } while (randomList.some((num, index, arr) => arr.indexOf(num) !== index));
-
-    return randomList;
-  }
-
-  sortAscending(numList) {
-    const result = [...numList];
-    return result.sort((a, b) => {
+    const sortRandomList = randomList.sort((a, b) => {
       return a - b;
     });
+    return sortRandomList;
   }
 
   rateReturn(purchase, revenue) {
