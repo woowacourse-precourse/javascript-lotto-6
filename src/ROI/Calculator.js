@@ -1,7 +1,7 @@
 import IO from "../Util/IOHandler.js";
 
 export default class Calculator {
-  static prizeMoney = {
+  static #prizeMoney = {
     3: 5000,
     4: 50000,
     5: 1500000,
@@ -9,8 +9,9 @@ export default class Calculator {
     6: 2000000000,
   };
 
-  static profit(object) {
-    const objArray = Object.entries(object);
+  static profit(result) {
+    // result === Object
+    const objArray = Object.entries(result);
 
     const profit = objArray.reduce((sum, cur, index) => {
       const key = objArray[index][0];
@@ -18,15 +19,15 @@ export default class Calculator {
       if (value === 0) {
         return sum;
       }
-      return sum + value * this.prizeMoney[key];
+      return sum + value * this.#prizeMoney[key];
     }, 0);
-
     return profit;
   }
 
   static print(invest, profit) {
     const roi = ((profit / invest) * 100).toFixed(1);
     IO.print(`총 수익률은 ${roi}%입니다.`);
+    IO.print("");
     return roi;
   }
 }
