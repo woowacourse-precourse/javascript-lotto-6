@@ -11,6 +11,7 @@ export default class LottoGame {
     this.#printLottoList(lottoList);
     const winningLotteryNumbers = await this.#requireLotteryNumbers();
     const bonusNumber = await this.#requireBonusNumber(winningLotteryNumbers);
+    const lotteryResult = this.#confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber);
   }
 
   async #requirePurchaseAmount() {
@@ -52,5 +53,17 @@ export default class LottoGame {
 
   #printLottoList(lottoList) {
     OutputView.printLottoList(lottoList);
+  }
+
+  #confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber) {
+    const lotteryResult = lottoList.map((lotto) =>
+      lotto.getPrize(winningLotteryNumbers, bonusNumber),
+    );
+
+    const lotteryResultMap = new Map();
+    lotteryResult.forEach((result) => {
+      lotteryResultMap.set(result, (lotteryResultMap.get(result) || 0) + 1);
+    });
+    return lotteryResultMap;
   }
 }
