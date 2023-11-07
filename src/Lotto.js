@@ -55,12 +55,10 @@ class Lotto {
     }
   }
 
-  #validateIsInRange(numbers, startNumber, endNumber) {
-    numbers.forEach(number => {
-      if (number < startNumber || number > endNumber) {
-        throw new Error(ERROR_MESSAGE.NOT_IN_RANGE);
-      }
-    });
+  #validateIsInRange(number, startNumber, endNumber) {
+    if (number < startNumber || number > endNumber) {
+      throw new Error(ERROR_MESSAGE.NOT_IN_RANGE);
+    }
   }
 
   #getNumberOfAvailableTickets(amount) {
@@ -94,11 +92,15 @@ class Lotto {
     const inputs = winningNumbersInput.split(DELIMITER);
     const winningNumbers = this.#convertToIntegerArray(inputs);
 
-    this.#validateIsInRange(
-      winningNumbers,
-      LOTTO_VALUE.START_NUMBER,
-      LOTTO_VALUE.END_NUMBER,
-    );
+    winningNumbers.forEach(winningNumber => {
+      this.#validateIsInRange(
+        winningNumber,
+        LOTTO_VALUE.START_NUMBER,
+        LOTTO_VALUE.END_NUMBER,
+      );
+    });
+
+    this.winningNumbers = winningNumbers;
   }
 
   #validateNumberOfInputs(stringInput, numberOfInputs, delimiter) {
@@ -119,7 +121,31 @@ class Lotto {
     return numbers;
   }
 
-  #readWinningBonusNumber() {}
+  async #readWinningBonusNumber() {
+    const bonusNumberInput = await MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGE.GET_WINNING_BONUS_NUMBER + '\n',
+    );
+    this.#validateIsNumber(bonusNumberInput);
+
+    const bonusNumber = parseInt(bonusNumberInput);
+    this.#validateIsInRange(
+      bonusNumber,
+      LOTTO_VALUE.START_NUMBER,
+      LOTTO_VALUE.END_NUMBER,
+    );
+
+    if (this.winningNumbers.includes(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.BONUS_WINNING_NUMBERS_DUPLICATED);
+    }
+    this.bonusNumber = bonusNumber;
+  }
+
+  #validateIsNumber(stringValue) {
+    const isNumber = !Number.isNaN(stringValue);
+    if (!isNumber) {
+      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+    }
+  }
 
   #getRank() {}
 }
