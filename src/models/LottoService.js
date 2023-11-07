@@ -1,5 +1,5 @@
-import NUMBER from '../utils/constants/number.js';
-import LottoValidator from '../utils/validators/LottoValidator.js';
+import NUMBER from '../utils/constants/number';
+import LottoValidator from '../utils/validators/LottoValidator';
 
 class LottoService {
   #winningNumbers;

@@ -1,5 +1,5 @@
-import NUMBER from './constants/number.js';
-import SYMBOL from './constants/symbol.js';
+import NUMBER from './constants/number';
+import SYMBOL from './constants/symbol';
 
 const { statistics } = NUMBER;
 const { winningCriteria } = statistics;

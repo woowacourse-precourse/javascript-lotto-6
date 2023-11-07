@@ -1,6 +1,6 @@
-import CustomError from '../../errors/CustomError.js';
-import ERROR from '../constants/error.js';
-import SYMBOL from '../constants/symbol.js';
+import CustomError from '../../errors/CustomError';
+import ERROR from '../constants/error';
+import SYMBOL from '../constants/symbol';
 
 function validateIsNumber(input) {
   if (Number.isNaN(input)) {

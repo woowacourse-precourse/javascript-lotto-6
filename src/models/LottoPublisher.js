@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
-import NUMBER from '../utils/constants/number.js';
-import Lotto from '../Lotto.js';
-import LottoValidator from '../utils/validators/LottoValidator.js';
+import NUMBER from '../utils/constants/number';
+import Lotto from '../Lotto';
+import LottoValidator from '../utils/validators/LottoValidator';
 
 const { game } = NUMBER;
 const { lotto } = game;

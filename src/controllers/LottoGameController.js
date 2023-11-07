@@ -1,7 +1,7 @@
-import View from '../views/View.js';
-import LottoPublisher from '../models/LottoPublisher.js';
-import LottoService from '../models/LottoService.js';
-import LottoResultCalculator from '../models/LottoResultCalculator.js';
+import View from '../views/View';
+import LottoPublisher from '../models/LottoPublisher';
+import LottoService from '../models/LottoService';
+import LottoResultCalculator from '../models/LottoResultCalculator';
 
 class LottoGameController {
   #view = new View();

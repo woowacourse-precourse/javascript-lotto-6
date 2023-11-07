@@ -1,4 +1,4 @@
-import NUMBER from './number.js';
+import NUMBER from './number';
 
 const inputView = Object.freeze({
   notNumber: '숫자만 입력할 수 있습니다.',

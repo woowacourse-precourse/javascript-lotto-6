@@ -1,4 +1,4 @@
-import NUMBER from '../utils/constants/number.js';
+import NUMBER from '../utils/constants/number';
 
 const { statistics } = NUMBER;
 const { winningCriteria, prizes } = statistics;

@@ -1,6 +1,6 @@
-import CustomError from '../../errors/CustomError.js';
-import ERROR from '../constants/error.js';
-import NUMBER from '../constants/number.js';
+import CustomError from '../../errors/CustomError';
+import ERROR from '../constants/error';
+import NUMBER from '../constants/number';
 
 function checkNumberInRange(number, min, max, error) {
   if (number > max || number < min) {

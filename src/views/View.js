@@ -1,9 +1,9 @@
-import MessageFormat from '../utils/MessageFormat.js';
-import MESSAGE from '../utils/constants/string.js';
-import SYMBOL from '../utils/constants/symbol.js';
-import InputView from './InputView.js';
-import OutputView from './OutputView.js';
-import NUMBER from '../utils/constants/number.js';
+import MessageFormat from '../utils/MessageFormat';
+import MESSAGE from '../utils/constants/string';
+import SYMBOL from '../utils/constants/symbol';
+import InputView from './InputView';
+import OutputView from './OutputView';
+import NUMBER from '../utils/constants/number';
 
 const { statistics } = NUMBER;
 const { prizes } = statistics;
