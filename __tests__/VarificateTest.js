@@ -43,46 +43,45 @@ describe('Varification Test', () => {
 	describe('isNotDividableWithStandardCost => 전달 받은 값이 기준 요금으로 나누어 떨어지는지 검증하는 함수', () => {
 		test.each([
 			// given
-			[`${4 * LOTTO_CONSTANTS.standartLottoCost}`],
-			[`${2 * LOTTO_CONSTANTS.standartLottoCost}`],
-			[`${12 * LOTTO_CONSTANTS.standartLottoCost}`],
-		])(`%s는 ${LOTTO_CONSTANTS.standartLottoCost}로 나누어 떨어진다.`, (value) => {
+			[`${4 * LOTTO_CONSTANTS.standartLottoCost}`, LOTTO_CONSTANTS.standartLottoCost],
+			[`${2 * LOTTO_CONSTANTS.standartLottoCost}`, LOTTO_CONSTANTS.standartLottoCost],
+			[`${12 * LOTTO_CONSTANTS.standartLottoCost}`, LOTTO_CONSTANTS.standartLottoCost],
+		])(`%s는 ${LOTTO_CONSTANTS.standartLottoCost}로 나누어 떨어진다.`, (value, standardCost) => {
 			// when, then
-			expect(Varificator.isNotDividableWithStandardCost(value)).toBe(false);
+			expect(Varificator.isNotDividableWithStandardCost(value, standardCost)).toBe(false);
 		});
 
 		test.each([
 			// given
-			[`${4 * LOTTO_CONSTANTS.standartLottoCost + 100}`],
-			[`${2 * LOTTO_CONSTANTS.standartLottoCost + 10}`],
-			[`${12 * LOTTO_CONSTANTS.standartLottoCost + 1}`],
-		])(`%s는 ${LOTTO_CONSTANTS.standartLottoCost}로 나누어 떨어지지 않는다.`, (value) => {
-			// when, then
-			expect(Varificator.isNotDividableWithStandardCost(value)).toBe(true);
-		});
+			[`${4 * LOTTO_CONSTANTS.standartLottoCost + 100}`, LOTTO_CONSTANTS.standartLottoCost],
+			[`${2 * LOTTO_CONSTANTS.standartLottoCost + 10}`, LOTTO_CONSTANTS.standartLottoCost],
+			[`${12 * LOTTO_CONSTANTS.standartLottoCost + 1}`, LOTTO_CONSTANTS.standartLottoCost],
+		])(
+			`%s는 ${LOTTO_CONSTANTS.standartLottoCost}로 나누어 떨어지지 않는다.`,
+			(value, standardCost) => {
+				// when, then
+				expect(Varificator.isNotDividableWithStandardCost(value, standardCost)).toBe(true);
+			},
+		);
 	});
 
 	describe('isNotFitWithLottoLength => 인자로 받은 값이 로또 번호 개수에 맞는지 검증하는 로직', () => {
 		test('로또 번호 개수와 일치한다.', () => {
 			// given
-			const numbers = Array.from(
-				{ length: LOTTO_CONSTANTS.lottoNumberCount },
-				(_, idx) => `${++idx}`,
-			);
+			const lottoCount = 5;
+			const numbers = Array.from({ length: lottoCount }, (_, idx) => `${++idx}`);
 
 			// when, then
-			expect(Varificator.isNotFitWithLottoLength(numbers)).toBe(false);
+			expect(Varificator.isNotFitWithLottoLength(numbers, lottoCount)).toBe(false);
 		});
 
 		test('로또 번호 개수와 불일치 한다.', () => {
 			// given
-			const numbers = Array.from(
-				{ length: LOTTO_CONSTANTS.lottoNumberCount + 1 },
-				(_, idx) => `${++idx}`,
-			);
+			const lottoCount = 5;
+			const numbers = Array.from({ length: lottoCount + 1 }, (_, idx) => `${++idx}`);
 
 			// when, then
-			expect(Varificator.isNotFitWithLottoLength(numbers)).toBe(true);
+			expect(Varificator.isNotFitWithLottoLength(numbers, lottoCount)).toBe(true);
 		});
 	});
 
@@ -130,6 +129,26 @@ describe('Varification Test', () => {
 		])(`%s는 ${MIN_RANGE}과 ${MAX_RANGE} 사이에 존재하지 않는다.`, (value) => {
 			// when, then
 			expect(Varificator.isNotNumberInRange(value, MAX_RANGE, MIN_RANGE)).toBe(true);
+		});
+	});
+
+	describe('isNumberInArray => 숫자가 배열 내에 존재하는지 검증하는 로직', () => {
+		test('배열 내에 숫자가 존재한다.', () => {
+			// given
+			const numbers = [1, 2, 3, 4, 5];
+			const targetNumber = 5;
+
+			// when, given
+			expect(Varificator.isNumberInArray(numbers, targetNumber)).toBe(true);
+		});
+
+		test('배열 내에 숫자가 존재하지 않는다.', () => {
+			// given
+			const numbers = [1, 2, 3, 4, 5];
+			const targetNumber = 6;
+
+			// when, given
+			expect(Varificator.isNumberInArray(numbers, targetNumber)).toBe(false);
 		});
 	});
 });
