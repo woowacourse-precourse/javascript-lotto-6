@@ -52,6 +52,7 @@ errors: 예외 처리 함수들을 관리 폴더
 - 1-4. 'CalculateProfit': 수익률 계산하는 함수
 - 1-5. 'calculateRank': 로또 등수를 결정하는 함수
 - 1-6. 'buyLotto': 로또 클래스를 리스트에 저장하는 함수
+- 1-7. 'getStatistics': 등수 결과들을 통계내주는 함수
 
 **2. View**
 
@@ -78,8 +79,10 @@ errors: 예외 처리 함수들을 관리 폴더
  ┃ ┣ 📜numberInput.js
  ┃ ┗ 📜printResult.js
  ┣ 📜App.js
+ ┣ 📜buyLotto.js
  ┣ 📜calculateLottoNumber.js
  ┣ 📜calculateProfit.js
+ ┣ 📜calculateRank.js
  ┣ 📜getStatistics.js
  ┣ 📜index.js
  ┣ 📜Lotto.js

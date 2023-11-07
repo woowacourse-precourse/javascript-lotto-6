@@ -3,9 +3,9 @@ import AmountInput from "./View/AmountInput";
 import numberInput from "./View/numberInput";
 import printResult from "./View/printResult";
 import calculateLottoNumber from "./calculateLottoNumber";
-import calculateRank from "./calculateRank";
 import calculateProfit from "./calculateProfit";
 import buyLotto from "./buyLotto";
+import getStatistics from "./getStatistics";
 class App {
   async play() {
     // 구입 금액 입력
@@ -17,15 +17,9 @@ class App {
     buyLotto(lottoList, lottoNumber);
     // 당첨 번호 입력
     const [winningNumbers, bonusNumber] = await numberInput();
-    // 로또 결과 계산
+    // 로또 결과 통계
     const lottoResult = { 3: 0, 4: 0, 5: 0, "5bonus": 0, 6: 0 };
-    lottoList.forEach((lotto) => {
-      const [result, bonusResult] = lotto.compareNumbers(
-        winningNumbers,
-        bonusNumber
-      );
-      calculateRank(lottoResult, result, bonusResult);
-    });
+    getStatistics(lottoList, lottoResult, winningNumbers, bonusNumber);
     // 최종 결과 출력
     const profit = calculateProfit(amount, lottoResult);
     printResult(lottoResult, profit);
