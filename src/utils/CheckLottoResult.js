@@ -6,12 +6,26 @@ export function checkLottoResult(createdLottoNumbers, winningLottoNumbers, bonus
     const matchCount = lotto.filter((number) => winningLottoNumbers.includes(number)).length;
     const isBouns = lotto.includes(bonusNumber);
 
-    Object.values(LOTTO_RANK).forEach((rank, index) => {
-      if (matchCount === rank.winningNumber && isBouns === rank.bounsNumber) {
-        result[index]++;
-      }
-    });
+    if (matchCount === LOTTO_RANK.SECOND.winningNumber) {
+      updateSecondOrThirdResult(isBouns, result);
+    } else {
+      updateNormalResults(matchCount, result);
+    }
   });
-
   return result;
+}
+
+function updateNormalResults(matchCount, result) {
+  Object.values(LOTTO_RANK).forEach((rank, index) => {
+    if (matchCount === rank.winningNumber) {
+      result[index]++;
+    }
+  });
+}
+
+function updateSecondOrThirdResult(isBouns, result) {
+  const secondIndex = Object.keys(LOTTO_RANK).indexOf('SECOND');
+  const thirdIndex = Object.keys(LOTTO_RANK).indexOf('THIRD');
+
+  return isBouns ? result[secondIndex]++ : result[thirdIndex]++;
 }
