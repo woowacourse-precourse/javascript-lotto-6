@@ -7,6 +7,11 @@ const inputs = {
     const price = await Console.readLineAsync(MESSAGE.input.price);
     return price;
   },
+  // 당첨 번호 입력
+  async inputWinningNum() {
+    const winningNum = await Console.readLineAsync(MESSAGE.input.winningNum);
+    return winningNum;
+  },
 };
 
 export default inputs;
