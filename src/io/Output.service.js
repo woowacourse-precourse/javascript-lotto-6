@@ -37,4 +37,8 @@ export default class OutPutService {
   printRateOfReturn(rate) {
     Console.print(getRateOfReturn(rate));
   }
+
+  printErrorMessage(err) {
+    Console.print(err);
+  }
 }

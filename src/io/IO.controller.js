@@ -14,23 +14,38 @@ export default class IOController {
   }
 
   async readAmount() {
-    const MONEY = await this.#InputService.readAmount();
-    this.#ValidationController.validateInputMoney(MONEY);
-    return +MONEY;
+    try {
+      const MONEY = await this.#InputService.readAmount();
+      this.#ValidationController.validateInputMoney(MONEY);
+      return +MONEY;
+    } catch (err) {
+      this.#OutputService.printErrorMessage(err.message);
+      return await this.readAmount();
+    }
   }
 
   async readWinningNumbers() {
-    const INPUT = await this.#InputService.readWinningNumbers();
-    const NUMBERS = INPUT.split(',').map((num) => +num);
-    this.#ValidationController.validateWinningNumbers(NUMBERS);
-    return NUMBERS;
+    try {
+      const INPUT = await this.#InputService.readWinningNumbers();
+      const NUMBERS = INPUT.split(',').map((num) => +num);
+      this.#ValidationController.validateWinningNumbers(NUMBERS);
+      return NUMBERS;
+    } catch (err) {
+      this.#OutputService.printErrorMessage(err.message);
+      return await this.readWinningNumbers();
+    }
   }
 
   async readBonusNumber(winningNumbers) {
-    const INPUT = await this.#InputService.readBonusNumber();
-    const BONUS = +INPUT;
-    this.#ValidationController.validateBonusNumber(BONUS, winningNumbers);
-    return BONUS;
+    try {
+      const INPUT = await this.#InputService.readBonusNumber();
+      const BONUS = +INPUT;
+      this.#ValidationController.validateBonusNumber(BONUS, winningNumbers);
+      return BONUS;
+    } catch (err) {
+      this.#OutputService.printErrorMessage(err.message);
+      return await this.readBonusNumber(winningNumbers);
+    }
   }
 
   printTicketCount(tickets) {
