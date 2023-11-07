@@ -10,35 +10,35 @@ class GuessLotto {
 
   #lottoNumbers = [];
 
-  get guessNumbers() {
+  getGuessNumbers() {
     return this.#guessNumbers;
   }
 
-  set guessNumbers(numbers) {
+  setGuessNumbers(numbers) {
     this.#guessNumbers = numbers;
   }
 
-  get guessBonus() {
+  getGuessBonus() {
     return this.#guessBonus;
   }
 
-  set guessBonus(bonus) {
+  setGuessBonus(bonus) {
     this.#guessBonus = bonus;
   }
 
-  get lottoPieces() {
+  getLottoPieces() {
     return this.#lottoPieces;
   }
 
-  set lottoPieces(pieces) {
+  setLottoPieces(pieces) {
     this.#lottoPieces = pieces;
   }
 
-  get lottoNumbers() {
+  getLottoNumbers() {
     return this.#lottoNumbers;
   }
 
-  set lottoNumbers(numbers) {
+  setLottoNumbers(numbers) {
     this.#lottoNumbers = numbers;
   }
 
