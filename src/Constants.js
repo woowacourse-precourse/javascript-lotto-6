@@ -23,11 +23,6 @@ export const INPUT_DUPLICATE_ERROR_MESSAGE =
   "[ERROR] 중복된 숫자가 포함되어있습니다.";
 
 // 기타
-export const THREE_MATCH_MONEY = 5000;
-export const FOUR_MATCH_MONEY = 50000;
-export const FIVE_MATCH_MONEY = 1500000;
-export const BONUS_MATCH_MONEY = 30000000;
-export const ALL_MATCH_MONEY = 2000000000;
 export const THREE_MATCH_MESSAGE = "(5,000원)";
 export const FOUR_MATCH_MESSAGE = "(50,000원)";
 export const FIVE_MATCH_MESSAGE = "(1500,000원)";
@@ -45,3 +40,8 @@ export const MONEY_ARRAY = [
   BONUS_MATCH_MESSAGE,
   ALL_MATCH_MESSAGE,
 ];
+export const THREE_MATCH_MONEY = 5000;
+export const FOUR_MATCH_MONEY = 50000;
+export const FIVE_MATCH_MONEY = 1500000;
+export const BONUS_MATCH_MONEY = 30000000;
+export const ALL_MATCH_MONEY = 2000000000;

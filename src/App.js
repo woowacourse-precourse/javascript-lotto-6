@@ -7,6 +7,11 @@ import {
   INPUT_RANGE_ERROR_MESSAGE,
   MONEY_ARRAY,
   NUM_ARRAY,
+  THREE_MATCH_MONEY,
+  FOUR_MATCH_MONEY,
+  FIVE_MATCH_MONEY,
+  BONUS_MATCH_MONEY,
+  ALL_MATCH_MONEY,
 } from "./Constants.js";
 
 import User from "./User.js";
@@ -59,15 +64,32 @@ class App {
     }
   }
 
+  printYield(STATS, MONEY) {
+    const YIELD = (
+      ((STATS.MATCH_THREE * THREE_MATCH_MONEY +
+        STATS.MATCH_FOUR * FOUR_MATCH_MONEY +
+        STATS.MATCH_FIVE * FIVE_MATCH_MONEY +
+        STATS.MATCH_BONUS * BONUS_MATCH_MONEY +
+        STATS.MATCH_ALL * ALL_MATCH_MONEY) /
+        MONEY) *
+      100
+    ).toFixed(2);
+
+    const YIELD_PRINT_MESSAGE = "\n총 수익률은" + YIELD + "%입니다.";
+
+    MissionUtils.Console.print(YIELD_PRINT_MESSAGE);
+  }
+
   async play() {
     const user = new User();
-    await user.play();
+    const MONEY = await user.play();
     const NUMBERS = await this.inputNumber();
     const lotto = new Lotto(NUMBERS);
     const CORRECT = lotto.getNumbers();
     const BONUS = await this.inputBonus();
     const STATS = user.matching(CORRECT, BONUS);
     await this.printStats(STATS);
+    this.printYield(STATS, MONEY);
   }
 }
 

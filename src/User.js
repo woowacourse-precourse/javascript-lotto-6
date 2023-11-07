@@ -89,7 +89,7 @@ class User {
     const COUNT = await this.calculateCount(MONEY);
     this.createLotto(COUNT);
 
-    return;
+    return MONEY;
   }
 }
 
