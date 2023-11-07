@@ -1,30 +1,8 @@
 import { CONSTANT } from "./Constant.js";
-import { Random, Console } from "@woowacourse/mission-utils";
+import { Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 class Controller {
-    static async userInputMoney() {
-        const MONEY = await Console.readLineAsync(
-            `${CONSTANT.MONEY_INPUT_ASK}\n`
-        );
-        if (Number(MONEY) % 1000 != 0) throw new Error(CONSTANT.ERROR);
-        return Number(MONEY);
-    }
-    static async userInputLotto() {
-        let lotto = await Console.readLineAsync(
-            `${CONSTANT.LOTTO_INPUT_ASK}\n`
-        );
-        return new Lotto(lotto.trim().split(",").map(Number));
-    }
-    static async userInputBonus(Lotto) {
-        const BONUS = await Console.readLineAsync(
-            `\n${CONSTANT.BONUS_INPUT_ASK}\n`
-        );
-        if (!(BONUS >= 1 && BONUS <= 45) || Lotto.getNum().includes(BONUS))
-            throw new Error(CONSTANT.ERROR);
-        return Number(BONUS);
-    }
-
     static generateRandomLotto() {
         return new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6));
     }

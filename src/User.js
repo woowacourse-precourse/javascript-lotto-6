@@ -1,3 +1,6 @@
+import { Console } from "@woowacourse/mission-utils";
+import { CONSTANT } from "./Constant.js";
+
 class User {
     #money;
     #userLotto;
@@ -7,8 +10,17 @@ class User {
         this.#userLotto = [];
     }
 
-    setMoney(money) {
-        this.#money = money;
+    async setMoney() {
+        try {
+            const MONEY = await Console.readLineAsync(
+                `${CONSTANT.MONEY_INPUT_ASK}\n`
+            );
+            if (Number(MONEY) % 1000 != 0) throw new Error(CONSTANT.ERROR);
+            this.#money = MONEY;
+        } catch (e) {
+            Console.print(e.message);
+            await this.setMoney();
+        }
     }
     getMoney() {
         return this.#money;

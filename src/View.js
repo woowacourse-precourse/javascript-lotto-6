@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import { CONSTANT } from "./Constant.js";
 
 class View {
-    static showLottoNum(amount, userLotto) {
+    static showLotto(amount, userLotto) {
         let output = `${amount}${CONSTANT.MONEY_INPUT_RESPONSE}\n`;
         userLotto.forEach((lotto) => {
             output += `[${lotto.getNum().join(", ")}]\n`;
@@ -10,7 +10,7 @@ class View {
         Console.print(output);
     }
 
-    static showStatisticsResult(result, rateOfReturn) {
+    static showStatistics(result, rateOfReturn) {
         let output = `\n${CONSTANT.STATISTICS_RESPONSE}`;
         [3, 4, 5, "b5", 6].forEach((key) => {
             let tmp = `${key}개 일치 `;
