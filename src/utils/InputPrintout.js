@@ -13,18 +13,19 @@ const InputPrintout = {
 	},
 	inputLottoNumbers: async () => {
 		let numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
+		let lotto;
 		let isInvaildInput = true;
 		while (isInvaildInput) {
 			try {
 				isInvaildInput = false;
-				new Lotto(numbers);
+				lotto = new Lotto(numbers);
 			} catch (error) {
 				isInvaildInput = true;
 				Console.print(error);
 				numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
 			}
 		}
-		return numbers;
+		return lotto;
 	},
 	//보너스번호
 };

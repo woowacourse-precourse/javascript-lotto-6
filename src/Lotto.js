@@ -11,6 +11,10 @@ class Lotto {
 	#validate(numbers) {
 		if (!isVaildLottoNumbers(numbers.split(","))) throw new Error();
 	}
+
+	getNumbers() {
+		return this.#numbers.split(",");
+	}
 }
 
 export default Lotto;
