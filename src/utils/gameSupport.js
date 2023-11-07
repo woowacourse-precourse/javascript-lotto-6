@@ -93,3 +93,8 @@ const isWinningLottoWithBonus = (
   return false;
 };
 
+
+export const totalProfitMargin = (buyAmount, winningResults) => {
+  const winnings = totalProfit(winningResults);
+  return Math.round((winnings / buyAmount) * 1000) / 10;
+};
