@@ -33,19 +33,11 @@ describe('입력에 대한 유효성 test', () => {
     });
 
     test('당첨 번호를 6개 입력하지 않았을 경우', () => {
-      validateAndExpectError(
-        Validation.validateWinningNumbers,
-        '1,2,3,4,5',
-        ERROR_MESSAGE.duplicationWinningNumbers,
-      );
+      validateAndExpectError(Validation.validateWinningNumbers, '1,2,3,4,5', ERROR_MESSAGE.duplicationWinningNumbers);
     });
 
     test('당첨 번호가 중복되었을 경우', () => {
-      validateAndExpectError(
-        Validation.validateWinningNumbers,
-        '1,2,3,4,5,5',
-        ERROR_MESSAGE.duplicationWinningNumbers,
-      );
+      validateAndExpectError(Validation.validateWinningNumbers, '1,2,3,4,5,5', ERROR_MESSAGE.duplicationWinningNumbers);
     });
 
     test('당첨 번호에 소수가 포함되었을 경우', () => {
@@ -81,7 +73,7 @@ describe('입력에 대한 유효성 test', () => {
     test('보너스 번호가 1~45사이가 아닌 숫자일 경우', () => {
       expect(() => {
         Validation.validateBonusNumber(46, winningNumbers);
-      }).toThrow(Error(ERROR_MESSAGE.invalidBonusNumber));
+      }).toThrow(Error(ERROR_MESSAGE.duplicationBonusNumber));
     });
   });
 });
