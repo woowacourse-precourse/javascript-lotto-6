@@ -6,7 +6,7 @@ const generateLotto = () => {
   const randomNumber = generateRandomNumber(
     CONSTANTS.number.min,
     CONSTANTS.number.max,
-    CONSTANTS.number.winningNumbersCount,
+    CONSTANTS.number.count,
   );
 
   return new Lotto(randomNumber);

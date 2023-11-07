@@ -4,7 +4,7 @@ class App {
   #lottoController = new LottoController();
 
   async play() {
-    await this.#lottoController.startLotto();
+    await this.#lottoController.play();
   }
 }
 
