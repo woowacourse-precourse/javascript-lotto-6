@@ -1,4 +1,4 @@
-import GameManage from './mvc/controller/parent/game_manage';
+import GameManage from './mvc/controller/parent/game_manage.js';
 
 class App {
   async play() {
