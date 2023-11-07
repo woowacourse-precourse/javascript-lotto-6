@@ -1,3 +1,5 @@
 build/
 *.json
 .npmrc
+ApplicationTest.js
+LottoTest.js
