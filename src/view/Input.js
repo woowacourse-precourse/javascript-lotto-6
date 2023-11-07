@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { GAMEMSG_INPUT_MONEY, GAMEMSG_INPUT_WINNING_LOTTO, GAMEMSG_INPUT_BONUS_NUMBER } from "../constants/GameMessage.js";
+import { GAMEMSG_INPUT_MONEY, GAMEMSG_INPUT_WINNING_NUMBERS, GAMEMSG_INPUT_BONUS_NUMBER } from "../constants/GameMessage.js";
 
 class Input{
     constructor () {}
@@ -9,14 +9,14 @@ class Input{
         return inputMoney;
     }
 
-    static async inputWinningLotto(){
-        const inputWinningLotto = await Console.readLineAsync(GAMEMSG_INPUT_WINNING_LOTTO);
-        return inputWinningLotto;
+    static async inputWinningNumbers(){
+        const inputWinningNumbers = await Console.readLineAsync(GAMEMSG_INPUT_WINNING_NUMBERS);
+        return inputWinningNumbers;
     }
 
     static async inputBonusNumber(){
         const inputBonusNumber = await Console.readLineAsync(GAMEMSG_INPUT_BONUS_NUMBER);
-        return Number.parseInt(inputBonusNumber, 10);
+        return inputBonusNumber;
     }
 }
 
