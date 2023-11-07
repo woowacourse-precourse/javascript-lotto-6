@@ -1,23 +1,28 @@
-import ErrorMessage from "../errors/ErrorMessage.js"
-import ERROR from "../../constants/error.js"
+import ErrorMessage from '../errors/ErrorMessage.js';
+import ERROR from '../../constants/error.js';
 
-function validateNumber(input) {
-  if (isNaN(input)) {
-    throw new ErrorMessage(ERROR.number.notNumber);
+function validatePriceUnit(input) {}
+
+function validatePositiveNumber() {}
+
+function validateInteger() {}
+
+function validateNaturalNumber() {}
+
+function validateNoDuplication() {}
+
+function validateNoIncludeBlank() {}
+
+function validateDrawCases() {}
+
+function validateLottoBonusDuplication() {}
+
+class InputValidator {
+  validateNumber(input) {
+    if (isNaN(input)) {
+      throw new ErrorMessage(ERROR.number.notNumber);
+    }
   }
 }
 
-
-
-
-// const ValidationTestSet = {
-  
-// }
-
-export { validateNumber };
-
-// const InputValidator = {
-
-// }
-
-// export default InputValidator;
+export default InputValidator;
