@@ -11,11 +11,17 @@ class App {
     const { lottos, buyingPrice } = await App.buyLotto();
     OutputView.printBuyingLottos(lottos);
 
-    const winningNumbers = await App.drawLottoBalls();
-    const outcome = App.checkLottoResult({ winningNumbers, lottos });
-    OutputView.lottoOutcome(outcome);
+    const { winningNumbers, bonusNumber } = await App.drawLottoBalls();
+    const lottoResult = App.checkLottoResult(
+      {
+        winningNumbers,
+        bonusNumber,
+      },
+      lottos
+    );
+    OutputView.lottoOutcome(lottoResult);
 
-    const calculator = new LottoReturnRateCalculator(outcome, buyingPrice);
+    const calculator = new LottoReturnRateCalculator(lottoResult, buyingPrice);
     OutputView.lottoRate(calculator.calculateReturnRate());
   }
 
@@ -41,8 +47,8 @@ class App {
     const bonusNumber = await App.getBonusNumber(winningNumbers);
 
     return {
-      winningNumbers: winningNumbers,
-      bonusNumber: bonusNumber,
+      winningNumbers,
+      bonusNumber,
     };
   }
 
@@ -76,8 +82,8 @@ class App {
     return result;
   }
 
-  static checkLottoResult({ winningNumbers, lottos }) {
-    const verifier = new LottoResultCalculator(winningNumbers);
+  static checkLottoResult(lottoBalls, lottos) {
+    const verifier = new LottoResultCalculator(lottoBalls);
     return verifier.checkLottoResult(lottos);
   }
 }
