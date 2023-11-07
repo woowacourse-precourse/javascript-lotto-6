@@ -7,7 +7,7 @@ export default class Money {
 	constructor(money) {
 		this.#validateIsNumber(money);
 		this.#validateIsDivided(money);
-		this.#money = money;
+		this.#money = Number(money);
 	}
 
   #validateIsNumber(money) {
