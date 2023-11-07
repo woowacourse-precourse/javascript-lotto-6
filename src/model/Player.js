@@ -1,24 +1,19 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
 import { CONSTANTS, PRIZE_TABLE } from '../constants/lotto.js';
+import ScoreBoard from './ScoreBoard.js';
 
 class Player {
   #budget = 0;
 
   #lottos = [];
 
-  #scoreCard;
+  #scoreBoard;
 
   constructor(budget) {
     Player.#validateBudget(budget);
     this.#budget = budget;
-    this.#scoreCard = {
-      '1등': 0,
-      '2등': 0,
-      '3등': 0,
-      '4등': 0,
-      '5등': 0,
-    };
+    this.#scoreBoard = new ScoreBoard();
   }
 
   getNumOfLottos() {
@@ -35,21 +30,24 @@ class Player {
 
   checkLottos(winningNumbers, bonusNumber) {
     this.#validateHasLottos();
-    this.#lottos.forEach((lotto) => {
-      const rank = lotto.checkLotto(winningNumbers, bonusNumber).getRank();
-      if (rank) this.#scoreCard[rank] += 1;
-    });
+    this.#lottos.forEach((lotto) =>
+      this.#scoreBoard.checkLotto(
+        winningNumbers,
+        bonusNumber,
+        lotto.getNumbers()
+      )
+    );
     return this;
   }
 
   getScoreCard() {
-    return this.#scoreCard;
+    return this.#scoreBoard.getScoreBoard();
   }
 
   getPrize() {
     let prize = 0;
 
-    Object.entries(this.#scoreCard).forEach(([key, value]) => {
+    Object.entries(this.#scoreBoard.getScoreBoard()).forEach(([key, value]) => {
       prize += PRIZE_TABLE[key] * value;
     });
 
