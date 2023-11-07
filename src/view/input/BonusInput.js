@@ -6,6 +6,7 @@ class BonusInput {
   async userInput() {
     return await Console.readLineAsync(`${GAME_MESSAGE.bonus_number}`);
   }
+  
   async number(winningNumbers) {
     let valid, number;
     do {

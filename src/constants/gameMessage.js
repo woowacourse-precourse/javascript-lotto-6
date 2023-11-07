@@ -4,6 +4,7 @@ const GAME_MESSAGE = Object.freeze({
   winning_number: "\n당첨 번호를 입력해 주세요.\n",
   bonus_number: "\n보너스 번호를 입력해 주세요.\n",
 });
+
 const GAME_RESULT = Object.freeze({
   result: "\n당첨 통계",
   hyphon: "---",

@@ -4,10 +4,10 @@ import NUMBERS from "../../constants/numbers.js";
 import moneyIsValid from "../../utils/moneyIsValid.js";
 
 class MoneyInput {
-  constructor() {}
   async userInput() {
     return await Console.readLineAsync(`${GAME_MESSAGE.buy_money}`);
   }
+
   async buyMoney() {
     let valid, money;
     do {

@@ -15,4 +15,5 @@ const BONUS_ERROR = Object.freeze({
   range_error: "[ERROR] 1 이상 45 이하의 숫자만 입력해주세요.",
   dulicate_error: "[ERROR] 당첨 번호와 중복된 번호가 있습니다.",
 });
+
 export { MONEY_ERROR, WINNING_ERROR, BONUS_ERROR };

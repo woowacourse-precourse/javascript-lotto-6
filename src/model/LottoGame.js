@@ -42,9 +42,11 @@ class LottoGame {
     const profit = this.profitability(rank);
     resultOutput(rank, profit);
   }
+
   countMatch(numbers) {
     return numbers.filter((number) => this.#numbers.includes(number)).length;
   }
+
   checkRank(match, rank, bonus) {
     const rankObj = {
       [three_match]: [five_place],
@@ -62,12 +64,8 @@ class LottoGame {
     const totalPrize = rank
       .map((count, index) => count * PRIZE_MONEY[index + rank_index])
       .reduce((a, b) => a + b, zero);
-    return !totalPrize
-      ? zero
-      : (
-          (totalPrize / (this.#userNumbers.length * purchase_money)) *
-          percent
-        ).toFixed(profit_rounded);
+    const profit = (totalPrize / (this.#userNumbers.length * purchase_money)) * percent;
+    return !totalPrize ? zero : profit.toFixed(profit_rounded);
   }
 }
 
