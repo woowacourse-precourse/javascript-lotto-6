@@ -51,6 +51,7 @@ errors: 예외 처리 함수들을 관리 폴더
 - 1-3. 'makeRandomNumbers' : 로또 번호 생성하는 함수
 - 1-4. 'CalculateProfit': 수익률 계산하는 함수
 - 1-5. 'getStatistics': 당첨 통계를 내리는 함수
+- 1-6. 'buyLotto': 로또 클래스를 리스트에 저장하는 함수
 
 **2. View**
 

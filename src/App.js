@@ -2,11 +2,10 @@ import { Console } from "@woowacourse/mission-utils";
 import AmountInput from "./View/AmountInput";
 import numberInput from "./View/numberInput";
 import printResult from "./View/printResult";
-import Lotto from "./Lotto";
-import makeRandomNumbers from "./makeRandomNumbers";
 import calculateLottoNumber from "./calculateLottoNumber";
 import getStatistics from "./getStatistics";
 import calculateProfit from "./calculateProfit";
+import buyLotto from "./buyLotto";
 class App {
   async play() {
     // 구입 금액 입력
@@ -15,11 +14,7 @@ class App {
     Console.print(`${lottoNumber}개를 구매했습니다.`);
     // 로또 번호 생성
     const lottoList = [];
-    for (let i = 0; i < lottoNumber; i++) {
-      const sortedRandomNumbers = makeRandomNumbers().sort((a, b) => a - b);
-      Console.print(`[${sortedRandomNumbers.join(", ")}]`);
-      lottoList.push(new Lotto(sortedRandomNumbers));
-    }
+    buyLotto(lottoList, lottoNumber);
     // 당첨 번호 입력
     const [winningNumbers, bonusNumber] = await numberInput();
     // 로또 결과 계산
