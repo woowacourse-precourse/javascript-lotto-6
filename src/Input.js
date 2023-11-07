@@ -4,17 +4,17 @@ import { INPUT } from './constants/Messages.js';
 
 class Input {
   async userMoney() {
-    const userMoneyInput = await this.read(INPUT.userMoney);
+    const userMoneyInput = await this.read(INPUT.user_money);
     return userMoneyInput.trim();
   }
 
   async winningNumbers() {
-    const winningNumbersInput = await this.read(INPUT.winningNumbers);
+    const winningNumbersInput = await this.read(INPUT.winning_numbers);
     return winningNumbersInput.trim();
   }
 
   async bonusNumbers() {
-    const bonusNumbersInput = await this.read(INPUT.bonusNumber);
+    const bonusNumbersInput = await this.read(INPUT.bonus_number);
     return bonusNumbersInput.trim();
   }
 

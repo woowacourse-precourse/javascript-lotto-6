@@ -15,8 +15,8 @@ class Lotto {
     }
   }
 
-  printLottoNumbers() {
-    Console.print(`[${this.#numbers.join(', ')}]`);
+  getNumbers() {
+    return this.#numbers;
   }
 
   calculateLottoResult(winningNumbers, bonusNumber) {

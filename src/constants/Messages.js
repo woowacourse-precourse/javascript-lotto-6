@@ -1,7 +1,21 @@
 export const INPUT = {
-  userMoney: '구입 금액을 입력해 주세요.\n',
-  winningNumbers: '당첨 번호를 입력해 주세요.\n',
-  bonusNumber: '보너스 번호를 입력해 주세요.\n',
+  user_money: '구입 금액을 입력해 주세요.\n',
+  winning_numbers: '당첨 번호를 입력해 주세요.\n',
+  bonus_number: '보너스 번호를 입력해 주세요.\n',
+};
+
+export const OUTPUT = {
+  statistics: '당첨 통계',
+  divider: '---',
+  ticket_count: (count) => `${count}개를 구매했습니다.`,
+  ticket_number: (number) => `[${number}]`,
+  first_prize: (count) => `6개 일치 (2,000,000,000원) - ${count}개`,
+  second_prize: (count) =>
+    `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개`,
+  third_prize: (count) => `5개 일치 (1,500,000원) - ${count}개`,
+  fourth_prize: (count) => `4개 일치 (50,000원) - ${count}개`,
+  fifth_prize: (count) => `3개 일치 (5,000원) - ${count}개`,
+  total_return: (value) => `총 수익률은 ${value}%입니다.`,
 };
 
 export const INPUT_ERROR = {
