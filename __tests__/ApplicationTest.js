@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import WinningNumbers from "../src/WinningNumbers.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -96,3 +97,29 @@ describe("로또 테스트", () => {
   });
 });
 
+describe("당첨번호 클래스 테스트", () => {
+  test("당첨번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
+    expect(() => {
+      new WinningNumbers([1, 2, 3, 4, 5, 6, 7]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("당첨번호의 숫자가 1~45 범위 내에 있지 않으면 예외가 발생한다.", () => {
+    expect(() => {
+      new WinningNumbers([1,2,3,4,5,46]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("당첨번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new WinningNumbers([1, 2, 3, 4, 5, 5]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("보너스번호의 숫자가 1~45 범위 내에 있지 않으면 예외가 발생한다.", () => {
+    expect(() => {
+      let winningNumbers = new WinningNumbers([1,2,3,4,5,45]);
+      winningNumbers.addBonusNumber(46);
+    }).toThrow("[ERROR]");
+  });
+});

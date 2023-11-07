@@ -1,3 +1,6 @@
+import { Console } from "@woowacourse/mission-utils";
+import { ERROR, LOTTO_SCOPE } from './Constant.js'
+
 class Lotto {
   #numbers;
 
@@ -5,14 +8,39 @@ class Lotto {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
-
+  
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    const numberArray = Object.values(numbers);
+    if (numberArray.length !== LOTTO_SCOPE.LENGTH) {
+      throw new Error(ERROR.LOTTO_NUMBER_NOT_SIX);
+    }
+
+    numberArray.forEach((number) => {
+      number = Number(number);
+      if(number < LOTTO_SCOPE.MIN || number > LOTTO_SCOPE.MAX) throw new Error(ERROR.LOTTO_NUMBER_NOT_IN_VALID_RANGE);
+    });
+    
+    const numberSet = new Set(numberArray);
+    if (numberArray.length !== numberSet.size) {
+      throw new Error(ERROR.LOTTO_NUMBER_IS_REDUNDANT);
     }
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
+
+  sortNumbers() {
+    this.#numbers.sort(function(a, b) {
+      if (a > b) return 1;
+      if (a < b) return -1;
+    });
+  }
+
+  printNumbers() {
+    const numberString = this.#numbers.join(', ');
+    Console.print(`[${numberString}]`); 
+  }
 }
 
 export default Lotto;
