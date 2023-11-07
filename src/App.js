@@ -1,15 +1,19 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-
+import { Message, ERROR } from "./env/Message.js";
+import { WINNING_AMOUNT } from "./env/Constant.js";
+import Validation from "./Validation.js";
 function App() {
+  const validation = new Validation();
+
   this.play = async () => {
     const inputAmount = await InputPurchaseAmount();
     const inputAmountCount = InputAmountValidation(inputAmount);
     const myLotto = MyLotto(inputAmountCount);
     printMyLotto(myLotto);
     const lottoWinningNumber = await LottoWinningNumber();
-    new Lotto(lottoWinningNumber);
-    const lottoBonusNumber = await LottoBonusNumber();
+
+    const lottoBonusNumber = await LottoBonusNumber(lottoWinningNumber);
     printWinningStatistics(
       myLotto,
       lottoWinningNumber,
@@ -17,22 +21,26 @@ function App() {
       inputAmount
     );
   };
+
   const InputPurchaseAmount = async () => {
-    const inputAmount = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
+    let inputAmount = 0;
+    while (true) {
+      try {
+        inputAmount = await Console.readLineAsync(Message.INPUT_AMOUNT);
+        validation.InvalidValue(inputAmount);
+        validation.InvalidUnits(inputAmount);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
     return inputAmount;
   };
+
   const InputAmountValidation = (inputAmount) => {
-    try {
-      if (inputAmount % 1000 !== 0) {
-        throw new Error("[ERROR] 1000원 단위로 입력해주세요.");
-      }
-      return inputAmount / 1000;
-    } catch (error) {
-      console.log(error.message);
-    }
+    return inputAmount / 1000;
   };
+
   const MyLotto = (inputAmountCount) => {
     let lottoArr = [];
     for (let i = 0; i < inputAmountCount; i++) {
@@ -41,23 +49,47 @@ function App() {
     }
     return lottoArr;
   };
+
   const printMyLotto = (myLotto) => {
     const LOTTO_COUNT = myLotto.length;
-    Console.print(`\n${LOTTO_COUNT}개를 구매했습니다.`);
-    myLotto.forEach((lotto) => Console.print(lotto));
-    Console.print("\n");
+    Console.print(`${LOTTO_COUNT}${Message.BUY}`);
+    myLotto.forEach((lotto) => Console.print(`[${lotto.join(", ")}]`));
   };
-  const LottoWinningNumber = async () => {
-    const lottoWinningNumber = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
-    );
-    return lottoWinningNumber.split(",").map(Number);
-  };
-  const LottoBonusNumber = async () => {
-    const lottoBonusNumber = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
-    );
 
+  const LottoWinningNumber = async () => {
+    let lottoWinningNumber = [];
+    while (true) {
+      try {
+        lottoWinningNumber = await Console.readLineAsync(
+          Message.INPUT_WINNING_NUMBER
+        );
+        lottoWinningNumber = lottoWinningNumber.split(",").map(Number);
+        const lotto = new Lotto(lottoWinningNumber);
+        lottoWinningNumber = lotto.getNumbers();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return lottoWinningNumber;
+  };
+
+  const LottoBonusNumber = async (lottoWinningNumber) => {
+    let lottoBonusNumber = 0;
+    while (true) {
+      try {
+        lottoBonusNumber = await Console.readLineAsync(
+          Message.INPUT_BONUS_NUMBER
+        );
+        validation.DuplicationBonusNumber(
+          lottoWinningNumber,
+          Number(lottoBonusNumber)
+        );
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
     return Number(lottoBonusNumber);
   };
 
@@ -67,8 +99,8 @@ function App() {
     lottoBonusNumber,
     inputAmount
   ) => {
-    Console.print("당첨 통계");
-    Console.print("---");
+    Console.print(Message.WINNING_STATISTICS);
+    Console.print(Message.BR);
     const resultLotto = myLotto.map((lotto) => {
       return lottoCheck(lotto, lottoWinningNumber, lottoBonusNumber);
     });
@@ -100,13 +132,7 @@ function App() {
       5.5: 0,
       6: 0,
     };
-    const WINNING_AMOUNT = {
-      3: "5,000",
-      4: "50,000",
-      5: "1,500,000",
-      5.5: "30,000,000",
-      6: "2,000,000,000",
-    };
+
     resultLotto.forEach((result) => {
       if (result >= 3) {
         WinningAmountResult[result]++;
@@ -141,7 +167,7 @@ function App() {
       Console.print(
         `${key === "5.5" ? "5" : key}개 일치${
           key === "5.5" ? ", 보너스 볼 일치 " : " "
-        }${WINNING_AMOUNT[key]} - ${WinningAmountResult[key]}개`
+        }(${WINNING_AMOUNT[key]}원) - ${WinningAmountResult[key]}개`
       );
     }
   };
