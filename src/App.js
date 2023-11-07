@@ -38,6 +38,7 @@ class App {
       }
     }
   }
+
   async INPUT_WINNING_NUMBERS() {
     const WINNING_NUMBERS = await Console.readLineAsync(
       "당첨 번호를 입력해 주세요.\n"
@@ -71,6 +72,7 @@ class App {
 
     return LOTTO_TICKETS;
   }
+
   CHECK_LOTTO_TICKETS(LOTTO_TICKETS, WINNING_NUMBERS, BONUS_NUMBER) {
     const WINNING = {
       1: { count: 0, prize: 2000000000 },
@@ -108,6 +110,7 @@ class App {
 
     return WINNING;
   }
+
   SHOW_WINNING(WINNING, TICKET_COUNT) {
     Console.print("\n당첨 통계");
     Console.print("---");
