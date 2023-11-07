@@ -31,5 +31,27 @@ class Validation {
 
     return true;
   }
+
+  static isDuplicateBonusNumber([...numbers], bonusNumber) {
+    return numbers.includes(bonusNumber);
+  }
+
+  static isProperWinningNumbers(userInput) {
+    const winningNumbers = userInput.split(',');
+    if (winningNumbers.length === 0) {
+      return false;
+    }
+    if (winningNumbers.length !== 6) {
+      return false;
+    }
+    if (!Validation.hasProperRange(winningNumbers)) {
+      return false;
+    }
+    if (Validation.hasDuplication(winningNumbers)) {
+      return false;
+    }
+
+    return true;
+  }
 }
 export default Validation;
