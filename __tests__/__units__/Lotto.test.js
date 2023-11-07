@@ -40,6 +40,17 @@ describe("Lotto 유닛 테스트", () => {
 
   test("로또 번호 반환", () => {
     // given
+    const lotto = new Lotto(generatedNumber);
+
+    const result = lotto.getNumbers();
+    const expectedResult = generatedNumber;
+
+    // then
+    expect(result).toEqual(expectedResult);
+  });
+
+  test("로또 번호 출력", () => {
+    // given
     const logSpy = getLogSpy();
     const lotto = new Lotto(generatedNumber);
 
