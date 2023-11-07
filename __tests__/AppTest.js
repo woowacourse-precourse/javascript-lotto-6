@@ -31,8 +31,10 @@ describe("app test", () => {
         const lotto2 = new Lotto([1, 2, 3, 4, 5, 7]);
 
         const input = [lotto1, lotto2];
-        const result =
-            `${input.length}개를 구매했습니다.\n[${input.map((el) => el.printLottoNumber()).join("]\n[")}]`;
+        const result = `${input.length}개를 구매했습니다.\n[${input
+            .map((el) => el.printLottoNumber())
+            .map((el) => el.join(", "))
+            .join("]\n[")}]`;
 
         const app = new App();
 
