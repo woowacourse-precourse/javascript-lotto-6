@@ -58,7 +58,7 @@ class Player {
   }
 
   static #validateBudget(budget) {
-    if (budget % 1000 !== 0)
+    if (budget % 1000 !== 0 || budget === 0)
       throw new Error('[ERROR] 예산은 1000원 단위이어야 합니다.');
   }
 }
