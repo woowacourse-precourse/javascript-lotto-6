@@ -4,7 +4,9 @@ import OutputPrintout from "./utils/OutputPrintout.js";
 class App {
 	async play() {
 		OutputPrintout.printLottos(await InputPrintout.inputAmount());
-		await InputPrintout.inputLottoNumbers();
+		let a = await InputPrintout.inputLottoNumbers();
+
+		console.log("밖에 값 ", a.split(","));
 	}
 }
 
