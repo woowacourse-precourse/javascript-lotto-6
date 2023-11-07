@@ -10,12 +10,14 @@ import { Lotto } from "../Lotto";
 import { Validate } from "./Validate";
 
 class View {
-  static outputPurchaseAmount(input) {
-    MissionUtils.Console.print(`${input.length}${MESSAGE.PURCHASE_NUM}`);
-    input.forEach((lotto) => {
-      print(`[${lotto.getNumbers().join(",")}]`);
+  static outputPurchaseAmount(lottosForUser) {
+    MissionUtils.Console.print(
+      `${lottosForUser.length}${MESSAGE.PURCHASE_NUM}`
+    );
+    lottosForUser.forEach((lotto) => {
+      MissionUtils.Console.print(`[${lotto.getNumbers().join(",")}]`);
     });
-    print("");
+    MissionUtils.Console.print("");
   }
 
   static outputResult({ THREE, FOUR, FIVE, BONUS, SIX }, totalProfitRate) {
@@ -33,7 +35,7 @@ class View {
   static inputPurchaseAmount(callback) {
     MissionUtils.Console.readLineAsync(QUERY.PURCHASE_AMOUNT, (answer) => {
       this.#validatePurchaseAmount(answer);
-      print("");
+      MissionUtils.Console.print("");
       callback(answer);
     });
   }
@@ -47,7 +49,7 @@ class View {
   static inputLottoNum(callback) {
     MissionUtils.Console.readLineAsync(QUERY.WINNING_NUM, (answer) => {
       this.#validateWinningNum(answer);
-      print("");
+      MissionUtils.Console.print("");
       callback(answer);
     });
   }
@@ -67,7 +69,7 @@ class View {
   static inputBonusNum(callback) {
     MissionUtils.Console.readLineAsync(QUERY.BONUS_NUM, (answer) => {
       this.#validateBonusNum(answer);
-      print("");
+      MissionUtils.Console.print("");
       callback(answer);
     });
   }
