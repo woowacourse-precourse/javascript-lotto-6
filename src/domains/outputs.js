@@ -11,6 +11,7 @@ const outputs = {
     lottos.forEach((lotto) => {
       Console.print(lotto);
     });
+    Console.print("");
   },
 };
 
