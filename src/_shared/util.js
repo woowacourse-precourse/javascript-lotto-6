@@ -1,4 +1,4 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 
 class Util {
   static readLineAsyncConsole(message) {
@@ -7,10 +7,6 @@ class Util {
 
   static printConsole(message) {
     return Console.print(message);
-  }
-
-  static randomNumber(min, max) {
-    return Random.pickNumberInRange(min, max);
   }
 
   static toAscendingArray(arr) {

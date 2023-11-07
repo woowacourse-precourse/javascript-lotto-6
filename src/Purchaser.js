@@ -1,4 +1,6 @@
-import Helper from './_shared/helper.js';
+import { Random } from '@woowacourse/mission-utils';
+
+import { LottoRule } from './models/rule.js';
 
 class Purchaser {
   #lottos;
@@ -12,7 +14,7 @@ class Purchaser {
   }
 
   getLotto() {
-    const lotto = Helper.generateLotto();
+    const lotto = Random.pickUniqueNumbersInRange(LottoRule.MinNumber, LottoRule.MaxNumber, LottoRule.Number);
     this.#lottos.push(lotto);
 
     return lotto;
