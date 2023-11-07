@@ -33,6 +33,18 @@ class App {
     return winning_number;
   }
 
+  async getBonusNum() {
+    const num = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    if(
+      num === null
+      || num.match(/\D/)
+    ) {
+      throw new Error('[ERROR] 잘못된 번호를 입력하셨습니다.');
+    }
+
+    return num;
+  }
+
   async play() {
     const MONEY = await this.getUserMoney();
     const NUM_TICKETS = parseInt(MONEY) / 1000;
@@ -42,9 +54,8 @@ class App {
     tickets.forEach(ticket => {
       ticket.print_num();
     })
-    //사용자로부터 당첨 번호 입력 받기
     const winning_number = await this.getWinningNum();
-    winning_number.print_num();
+    const bonus_number = await this.getBonusNum();
 
   }
 }
