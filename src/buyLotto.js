@@ -39,7 +39,7 @@ async function userAutomaticLottoNumber(numberOfLottoTickets) {
   const userLottoList = [];
   for (let i = 1; i <= numberOfLottoTickets; i += 1) {
     const randomNumbers = await randomNumber();
-    Console.print(randomNumbers);
+    Console.print(`[${randomNumbers.join(', ')}]`);
     userLottoList.push(randomNumbers);
   }
 
