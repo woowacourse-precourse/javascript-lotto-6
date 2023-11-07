@@ -28,3 +28,17 @@ export const userLottoInputSixNumbers = async () => {
   }
 };
 
+export const userLottoInputBonusNumber = async (winningNumberArray) => {
+  while (true) {
+    try {
+      const userInputString = await getUserInput(BONUS_NUMBERS_GUIDE_MESSAGE);
+      const bonusNumber = isNumber(userInputString);
+      isAvailableNumber(bonusNumber, ONE, FORTYFIVE);
+      isAvailableBonusNumber(winningNumberArray, bonusNumber);
+      return bonusNumber;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+  }
+};
+
