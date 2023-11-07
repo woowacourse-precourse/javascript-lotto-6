@@ -34,55 +34,61 @@ class App {
 
   #generateLottos() {
     const count = this.purchaseAmount / 1000;
-    for (let i = 0; i < count; i++) {
+    this.#createLottos(count);
+    this.#printLottos();
+  }
+
+  #createLottos(count) {
+    for (let i= 0; i<count; i++) {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       this.lottos.push(new Lotto(numbers));
       this.lottoNumbers.push(numbers);
     }
-    MissionUtils.Console.print(`${count}개를 구매했습니다.`);
+  }
+
+  #printLottos() {
+    MissionUtils.Console.print(`${this.lottos.length}개를 구매했습니다.`);
     this.lottoNumbers.forEach(numbers =>
-      MissionUtils.Console.print(`[${numbers.join(', ')}]`)
-    );
+      MissionUtils.Console.print(`[${numbers.join(', ')}]`));
   }
 
   async #requestWinningNumbers() {
-    MissionUtils.Console.print("당첨 번호를 입력해 주세요.")
-    let input = await MissionUtils.Console.readLineAsync();
-    let numbers = input.split(',').map(s => parseInt(s.trim(), 10));
+    const winningNumbers = await this.#requestNumbers("당첨 번호를 입력해 주세요.");
+    const bonusNumber = await this.#requestNumbers("보너스 번호를 입력해 주세요", true);
+    return [...winningNumbers, bonusNumber];
+  }
 
-    try {
-      const lotto = new Lotto(numbers);
-      numbers = lotto.numbers;
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      return this.#requestWinningNumbers();
+  async #requestNumbers (promptMessage, isBonus = false) {
+    MissionUtils.Console.print(promptMessage);
+    let input = await MissionUtils.Console.readLineAsync();
+
+    if (isBonus) {
+      return parseInt (input.trim(), 10);
     }
 
-    MissionUtils.Console.print(`${numbers.join(', ')}`); // 당첨번호 출력
-
-    MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
-    input = await MissionUtils.Console.readLineAsync();
-    const bonusNumber = parseInt (input.trim(), 10);
-
-    MissionUtils.Console.print(`${bonusNumber}`); // 보너스 번호 출력
-    return [...numbers, bonusNumber];
+    let numbers = input.split(',').map (s => parseInt(s.trim(), 10));
+    const lotto = new Lotto(numbers);
+    return lotto.numbers;
   }
 
   #calculatePrize(winningNumbers) {
-    const bonusNumber = winningNumbers.pop()
+    const bonusNumber = winningNumbers.pop();
+    this.#matchNumbers(winningNumbers, bonusNumber);
+  }
 
+  #matchNumbers(winningNumbers, bonusNumber) {
     this.lottos.forEach(lotto => {
       const matchedCount = lotto.numbers.filter(number => winningNumbers.includes(number)).length;
       const hasBonus = lotto.numbers.includes(bonusNumber);
       this.prizeMoney += this.#calculateIndividualPrize(matchedCount, hasBonus);
-
+      
       if (matchedCount >= 3) {
         const matchKey = matchedCount === 5 && hasBonus ? '5B' : matchedCount;
         this.matchedCount[matchKey]++;
       }
-    });
-  }
-
+      });
+    };
+  
   #calculateIndividualPrize(matchedCount, hasBonus) {
     switch (matchedCount) {
       case 3: return 5000;
