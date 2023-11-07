@@ -48,6 +48,7 @@ class WinningCalculator {
     this.#totalWinningNumbers = totalWinningNumbers;
     this.#issuedLottoNumbers = issuedLottoNumbers;
     this.winnerList = new Map();
+    this.#analyzeWinner();
   }
 
   #analyzeWinner() {
