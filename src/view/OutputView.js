@@ -8,27 +8,27 @@ const OutputView = Object.freeze({
   },
 
   lottoQuantity(quantity) {
-    Console.print(MESSAGES.printLottoQuantity(quantity));
+    this.print(MESSAGES.printLottoQuantity(quantity));
   },
 
   userLotto(lottos) {
-    Console.print(MESSAGES.printLottos(lottos));
+    this.print(MESSAGES.printLottos(lottos));
   },
 
   winningStatistics() {
-    Console.print(MESSAGES.printWinningStatistics);
+    this.print(MESSAGES.printWinningStatistics);
   },
 
   rewards(rewards) {
-    rewards.forEach((reward) => Console.print(MESSAGES.printReward(reward)));
+    rewards.forEach((reward) => this.print(MESSAGES.printReward(reward)));
   },
 
   earningRate(earningRate) {
-    Console.print(MESSAGES.printEarningRate(earningRate));
+    this.print(MESSAGES.printEarningRate(earningRate));
   },
 
   error(error) {
-    Console.print(error);
+    this.print(error);
   },
 });
 

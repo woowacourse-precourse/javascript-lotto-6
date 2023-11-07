@@ -9,17 +9,17 @@ const InputView = Object.freeze({
   },
 
   async readPurchaseMoney() {
-    const answer = await InputView.readLine(MESSAGES.readPurchaseMoney);
+    const answer = await this.readLine(MESSAGES.readPurchaseMoney);
     return answer;
   },
 
   async readWinningNumbers() {
-    const answer = await InputView.readLine(MESSAGES.readWinningNumbers);
+    const answer = await this.readLine(MESSAGES.readWinningNumbers);
     return answer;
   },
 
   async readBonusNumber() {
-    const answer = await InputView.readLine(MESSAGES.readBonusNumber);
+    const answer = await this.readLine(MESSAGES.readBonusNumber);
     return answer;
   },
 });
