@@ -68,7 +68,8 @@ class LottoStore {
   #calculateReturnRate() {
     const totalWinningAmount = this.#calculateTotalWinningAmount();
     const returnRate = (totalWinningAmount / (this.#lottos.length * 1000)) * 100;
-    this.#LottoMatchResult.returnRate = returnRate;
+    const roundedReturnRate = Math.round((returnRate + Number.EPSILON) * 10) / 10;
+    this.#LottoMatchResult.returnRate = roundedReturnRate;
   }
 
   #calculateTotalWinningAmount() {
