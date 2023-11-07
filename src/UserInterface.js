@@ -13,6 +13,7 @@ const UserInterface = () => {
         Console.print(error.message);
       }
     }
+    return inputToNumber;
   };
 
   const validateLottoNumbers = (input) => {
@@ -29,7 +30,14 @@ const UserInterface = () => {
     return inputToNumber;
   };
 
-  return { getLottoNumbers, validateLottoNumbers };
+  const printLottoNumbers = (lottoNumbers) => {
+    Console.print("\n" + lottoNumbers.length + "개를 구매했습니다.");
+    lottoNumbers.forEach((lottoNumber) => {
+      Console.print(lottoNumber);
+    });
+  };
+
+  return { getLottoNumbers, validateLottoNumbers, printLottoNumbers };
 };
 
 export default UserInterface;
