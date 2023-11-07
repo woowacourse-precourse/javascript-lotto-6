@@ -56,3 +56,15 @@ export const printPurchasedLottoNumbers = (lottoArray) => {
   });
 };
 
+export const getPurchasedLottoArray = (lottoCounts) => {
+  const purchasedLottoArray = [];
+  for (let index = 0; index < lottoCounts; index += 1) {
+    try {
+      const lotto = new Lotto(createSixNumbers().sort((a, b) => a - b));
+      purchasedLottoArray.push(lotto.getLotto());
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+  }
+  return purchasedLottoArray;
+};
