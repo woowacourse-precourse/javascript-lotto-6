@@ -7,3 +7,7 @@ export const SECOND_PRIZE = 30000000;
 export const THIRD_PRIZE = 1500000;
 export const FOURTH_PRIZE = 50000;
 export const FIFTH_PRIZE = 5000;
+export const FIRST_PRIZE_CORRECT = 6;
+export const SECOND_THIRD_PRIZE_CORRECT = 5;
+export const FOURTH_PRIZE_CORRECT = 4;
+export const FIFTH_PRIZE_CORRECT = 3;
