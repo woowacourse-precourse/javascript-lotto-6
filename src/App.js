@@ -7,6 +7,7 @@ import Lotto from './Lotto.js';
 class App {
   inputMoney;
   lottos;
+  userLotto;
 
   constructor() {
     this.lottos = [];
@@ -22,6 +23,7 @@ class App {
     this.inputMoney = Number(inputMoney);
     this.issueLotto();
     this.printLottoNum();
+    this.getUserNumber();
   }
 
   issueLotto() {
@@ -34,6 +36,17 @@ class App {
   printLottoNum() {
     Console.print(`\n${this.lottos.length}${MESSAGE.PRINT_ISSUE_LOTTOS}`);
     this.lottos.forEach(lotto => lotto.print());
+  }
+
+  getUserNumber() {
+    Console.readLine(MESSAGE.INPUT_USER_NUMBER, (userNumber) => {
+      this.validator.checkUserNum(userNumber);
+      this.userLotto = new Lotto(userNumber.split(',').map(num => Number(num)));
+    });
+  }
+
+  getUserBonusNumber() {
+    // Console.readLine();
   }
 }
 

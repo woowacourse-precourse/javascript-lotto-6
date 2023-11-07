@@ -25,6 +25,12 @@ class Validator {
     }
   }
 
+  checkUserNum(userNumber) {
+    if (this.isNotUserNumberFormat(userNumber)) {
+      throw new Error(ERROR.NOT_FORMAT_OF_USER_NUMBER);
+    }
+  }
+
   isNotNumber(value) {
     const valid = /^[0-9]+$/;
     return !valid.test(value);
@@ -44,6 +50,11 @@ class Validator {
 
   isDuplicate(numbers) {
     return new Set(numbers).size !== numbers.length;
+  }
+
+  isNotUserNumberFormat(userNumber) {
+    const valid = /^[0-9]+(,[0-9]+)+$/;
+    return !valid.test(userNumber);
   }
 }
 
