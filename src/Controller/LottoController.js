@@ -4,7 +4,7 @@ import { lottoSeller } from "../domain/LottoSeller.js";
 import Lotto from "../Lotto.js";
 import { lottoNumbersParser } from "../domain/lottoNumbersParser.js";
 import LottoAnswer from "../domain/LottoAnswer.js";
-import LottoBuyer from "../domain/LottoBuyer.js";
+import LottoResultChecker from "../domain/LottoResultChecker.js";
 import { OutputView } from "../view/outputView.js";
 import { repeatUntillComplete } from "../utils/repeatUntillComplete.js";
 
@@ -48,9 +48,9 @@ class LottoController {
   }
 
   static async getLottoResult(lottos, answer) {
-    const buyer = new LottoBuyer(lottos);
-    const prizes = buyer.getMyGrades(answer);
-    const profitRate = buyer.checkProfitRate(prizes);
+    const checker = new LottoResultChecker(lottos);
+    const prizes = checker.calculatePrizes(answer);
+    const profitRate = checker.checkProfitRate(prizes);
     return { prizes, profitRate };
   }
 
