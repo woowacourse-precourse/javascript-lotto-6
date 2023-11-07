@@ -8,19 +8,19 @@ import { Random } from "@woowacourse/mission-utils";
 class LottoGame {
 
   async start() {
-    const price = await this.#buy();
+    const price = await this.#handleInput(InputView.price, Validator.checkMoney);
     const count = LottoService.purchase(price);
     OutputView.count(count);
     const lottos = this.make(count);
-    const winningNumber = await InputView.win();
-    const bonusNumber = await InputView.bonus();
+    const winningNumber = await this.#handleInput(InputView.win, Validator.checkSixNumber);
+    const bonusNumber = await this.#handleInput(InputView.bonus, Validator.checkIsNumber);
     this.result(lottos, winningNumber, bonusNumber, price);
   }
-  
-  async #buy() {
-    const price = await InputView.price();
-    if (!Validator.checkMoney(price)) return this.#buy();
-    return price;
+
+  async #handleInput(inputView, validator) {
+    const input = await inputView();
+    if (!validator(input)) return this.#handleInput(inputView, validator);
+    return input;
   }
 
   make(count) {
@@ -35,7 +35,6 @@ class LottoGame {
     OutputView.result(rankingResult);
     OutputView.profit(profitResult);
   }
-
 }
 
 export default LottoGame;
