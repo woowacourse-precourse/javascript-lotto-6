@@ -1,11 +1,12 @@
 export default class Matching {
-  static between(lottoAry, prizeObj) {
-    const lineAry = prizeObj.line;
-    const bonusNum = prizeObj.bonus;
+  static between(lotto, prize) {
+    // lotto ==== Array, prize === Object
+    const prizeLine = prize.line;
+    const bonusNum = prize.bonus;
 
-    const luckyNums = lottoAry.get().filter((num) => lineAry.includes(num));
-    const wins = luckyNums.length;
-    if (wins === 5 && lottoAry.get().includes(bonusNum)) {
+    const matchingNums = lotto.get().filter((num) => prizeLine.includes(num));
+    const wins = matchingNums.length;
+    if (wins === 5 && lotto.get().includes(bonusNum)) {
       return 5.1;
     }
     return wins;
