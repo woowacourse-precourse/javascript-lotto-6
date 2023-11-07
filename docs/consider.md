@@ -204,3 +204,35 @@ class Lotto {
 최상위 추상층이기 때문에 이 부분만 보고 로또 게임의 전체 흐름을 알수 있도록 코드를 작성하였습니다.  
 현재 1차구현이기 때문에 아직 메서드 명이랑 변수명이 확정되지 않아 미흡하지만 winningResult는 불필요한 로컬변수인 것 같아서 2차 구현에서는 이 부분을 제거한다면 조금 더 좋을 것 같습니다.  
 따라서 `model`에 `winningNumbers`와 `bonusNumber`을 전달해주면 바로 결과값이 나오도록 구현해야할 것 같습니다.
+
+## 5. 에러 발견
+
+```js
+async #getPurchaseAmount() {
+      return await InputView.readPurchaseAmount();
+  }
+```
+
+예를들어 위와 같은 코드가 있다고 해봅시다. 현재 `airbnb style guide`를 적용하면 `no-return-await`규칙 때문에 에러가 발생합니다. 하지만 이 에러는 [ESLint v8.46.0 버전 부터 지원되지 않는 규칙입니다.](https://eslint.org/blog/2023/07/eslint-v8.46.0-released/#features)
+
+이 규칙이 처음에 생긴 이유는 `async function`내부에서 `return await`를 사용하면 현재 함수가 호출 스택에 유지되며, 프로미스가 해결될 때까지 현재 함수가 스택에 남아 있게 됩니다. 이로 인해 외부 프로미스가 해결되기 전에 추가적인 마이크로태스크가 실행되는 비용이 발생(ex. 성능 저하)하기 때문입니다.
+
+```
+마이크로태스크는 비동기 작업이 실행되는 시간과 방법을 제어하는 것을 돕는 개념입니다. 마이크로태스크는 주로 'Promise'와 관련이 있으며, 마이크로태스크 큐에 들어온 작업은 현재 호출 스택이 완전히 비어있을 때 실행됩니다.
+
+마이크로태스크는 비동기 작업을 스케줄링하기 위해 사용되며, await를 사용할 때 추가적인 마이크로태스크가 발생하여 현재 함수가 완료될 때까지 다른 비동기 작업을 처리할 수 없게 만들 수 있습니다.
+```
+
+[하지만 이는 async/await 기능이 처음 출시되었을 때 구현된 기능입니다.](https://github.com/eslint/eslint/issues/17613#issuecomment-1741025439) 지금은 많은 [업데이트](https://github.com/tc39/ecma262/pull/1250)가 되어서 [더 이상 유의미한 성능 저하를 일으키지 않기 때문에](https://github.com/eslint/eslint/issues/17345) 규칙을 더 이상 지원하지 않습니다. (다만 제거되는 것은 아니라 사용하고 싶으면 사용하셔도 됩니다.)
+
+### 📌 Reference
+
+- <https://eslint.org/docs/latest/rules/no-return-await>
+- <https://github.com/eslint/eslint/issues/17345>
+- <https://github.com/eslint/eslint/issues/17613>
+- <https://github.com/eslint/eslint/pull/17417>
+- <https://github.com/eslint/eslint/pull/17417/files>
+- <https://github.com/tc39/ecma262/pull/1250>
+- <https://typescript-eslint.io/rules/return-await/>
+- <https://eslint.org/blog/2023/07/eslint-v8.46.0-released/#features>
+- <https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/rules/best-practices.js>
