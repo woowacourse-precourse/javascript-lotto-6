@@ -52,7 +52,7 @@ class App {
     while (true) {
       try {
         const INPUT_CASH = await this.inputCash();
-        this.validateCashInteger(INPUT_CASH);
+        this.validateCashCollection(INPUT_CASH);
         return INPUT_CASH;
       } catch (error) {
         MissionUtils.Console.print(error.message);
@@ -60,12 +60,22 @@ class App {
     }
   }
 
-  validateCashInteger(cash) {
-    if (+cash % 1000 === 0) {
-      return cash;
+  validateCashCollection(INPUT_CASH) {
+    this.validateCashInteger(INPUT_CASH);
+    this.validateCashNone(INPUT_CASH);
+  }
+
+  validateCashInteger(INPUT_CASH) {
+    if (+INPUT_CASH % 1000 === 0) {
+      return INPUT_CASH;
     }
     throw new Error(ERROR_MESSAGES.CASH_NOT_INTEGER_IN_THOUSANDS);
-    //if(돈을 입력하지 않은 경우)
+  }
+
+  validateCashNone(INPUT_CASH) {
+    if (typeof INPUT_CASH === "undefined" || INPUT_CASH.trim() === "") {
+      throw new Error(ERROR_MESSAGES.CASH_NOT_INTEGER_IN_THOUSANDS);
+    }
   }
 
   createLottoNumber() {
