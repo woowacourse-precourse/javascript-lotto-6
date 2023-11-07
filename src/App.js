@@ -1,4 +1,5 @@
-import { Start } from './Lotto.js';
+import { Start } from './start.js';
+
 class App {
   async play() {
     const startGame = new Start();

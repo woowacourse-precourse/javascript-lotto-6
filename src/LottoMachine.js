@@ -10,7 +10,12 @@ export class LottoMachine {
   generateLotto() {
     const lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
     this.lottos.push(lotto);
-    MissionUtils.Console.print(lotto);
+  }
+
+  printLottos(lottos) {
+    this.lottos.forEach((lotto) => {
+      MissionUtils.Console.print(JSON.stringify(lotto).replace(/,/g, ', '));
+    });
   }
 
   buyLottos(cash) {
@@ -19,7 +24,7 @@ export class LottoMachine {
     for (let count = 1; count <= cashCount; count++) {
       this.generateLotto();
     }
-
+    this.printLottos();
     return this.lottos;
   }
 }

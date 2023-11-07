@@ -1,3 +1,5 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
+
 // 현금->횟수
 export class CashCount {
   #count;
@@ -8,6 +10,7 @@ export class CashCount {
   }
 
   #validate(cash) {
+    MissionUtils.Console.print(cash);
     if (isNaN(cash)) {
       throw new Error('[ERROR] 숫자가 아닙니다.');
     }
