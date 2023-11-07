@@ -30,6 +30,10 @@ class LottoArray {
       rank.choose(count, hasBonus);
     });
   }
+
+  calculateWinnings(rank) {
+    const totalWinnings = rank.findTotalWinnings();
+  }
 }
 
 export default LottoArray;

@@ -22,6 +22,10 @@ class RankItem {
       this.#winningAmount += 1;
     }
   }
+
+  getWinnings() {
+    return this.#prize * this.#winningAmount;
+  }
 }
 
 export default RankItem;
