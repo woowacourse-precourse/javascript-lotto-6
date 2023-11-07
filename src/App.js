@@ -1,14 +1,13 @@
-import { Console,Random } from "@woowacourse/mission-utils";
+import {Console} from "@woowacourse/mission-utils";
 import Lottos from "./Lottos.js";
 import WinningNumbers from "./WinningNumbers.js";
 import BonusNumber from "./BonusNumber.js";
 
-
 class App {
   constructor(){
-    this.lottos = null;
-    this.winningNumbers =null;
-    this.bonusNumber = null;
+    this.LOTTOS = null;
+    this.WINNINGNUMBER =null;
+    this.BONUSNUMBER = null;
   }
 
   printRateOfReturn(INPUT_MONEY,total_Return){
@@ -18,28 +17,25 @@ class App {
   }
 
   async play() {
-  
     const INPUT_MONEY = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    this.lottos=new Lottos(INPUT_MONEY);
-    let keep = this.lottos.returnStopOrKeep();
-    if(keep==false){
+    this.LOTTOS=new Lottos(INPUT_MONEY);
+    
+    let keep = this.LOTTOS.returnStopOrKeep();
+    if(keep==false){ //금액 입력 예외 발생 시 다시 입력받기
       return this.play();
     }
+    this.LOTTOS.printCount();
+    this.LOTTOS.printList();
 
-    this.lottos.printCount();
-    this.lottos.printList();
+    const WINNINGNUMBER = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    this.WINNINGNUMBER = WINNINGNUMBER.split(',');
+    this.WINNINGNUMBER = new WinningNumbers(WINNINGNUMBER);
 
-    const winningNumbers = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    this.winningNumbers = winningNumbers.split(',');
-    this.winningNumbers = new WinningNumbers(winningNumbers);
-    
+    const BONUSNUMBER = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    this.BONUSNUMBER = new BonusNumber(BONUSNUMBER);
 
-    const bonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    this.bonusNumber = new BonusNumber(bonusNumber);
-
-
-    this.lottos.printResult(this.winningNumbers.value, this.bonusNumber.value);
-    this.printRateOfReturn(INPUT_MONEY,this.lottos.total_Return);
+    this.LOTTOS.printResult(this.WINNINGNUMBER.value, this.BONUSNUMBER.value);
+    this.printRateOfReturn(INPUT_MONEY,this.LOTTOS.total_Return);
   }
 }
 

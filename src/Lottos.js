@@ -6,10 +6,11 @@ class Lottos{
         this.validate(money);
         this.count = money/1000;
         this.list =[];
-        this.publish();
         this.total_Return=0;
         this.stoporkeep;
+        this.publish();
     }
+
     validate(money){
         const Money = Number(money);
         if (isNaN(money)!=false){
@@ -36,16 +37,19 @@ class Lottos{
             this.stoporkeep=true;
         }
     }
+
     publish(){
         for (let num = 0; num < this.count; num++) {
         const newLotto = this.createNewLotto();
         this.list.push(newLotto);
         }
     }
+
     createNewLotto() {
         const newNumbers = Random.pickUniqueNumbersInRange(1,45,6);
         return new Lotto(newNumbers);
     }
+
     printCount() {
         Console.print(this.count+'개를 구매했습니다.');
     }
@@ -97,6 +101,7 @@ class Lottos{
         }
         this.total_Return = count;
     }
+    
     returnStopOrKeep(){
         return this.stoporkeep;
     }

@@ -5,8 +5,8 @@ class WinningNumbers {
     this.validate(numbers);
     this.value = numbers;
   }
+  
   validate(numbers){
-    
     let words = String(numbers).split(',');
     const setCollection = new Set(words);
     const isDuplicate = setCollection.size < words.length;
@@ -28,9 +28,6 @@ class WinningNumbers {
     if(isDuplicate!=false){
       throw new Error('[ERROR] 당첨 번호는 중복을 포함할 수 없습니다.');
     }
-
-    
-
   }
 }
 export default WinningNumbers;
