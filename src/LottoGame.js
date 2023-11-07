@@ -1,3 +1,4 @@
+import Lotto from './Lotto.js';
 import LottoPurchaser from './LottoPurchaser.js';
 import View from './View.js';
 import WinningLotto from './WinningLotto.js';
@@ -42,7 +43,7 @@ class LottoGame {
   async #createWinningLotto() {
     try {
       this.#winningLotto = new WinningLotto(
-        await this.#getWinningNumbers(),
+        new Lotto(await this.#getWinningNumbers()),
         await this.#getBonusNumber(),
       );
     } catch (error) {
