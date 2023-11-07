@@ -1,5 +1,4 @@
 import { ERROR_MESSAGE } from '../constants/constants';
-import { Console } from '@woowacourse/mission-utils';
 
 class Lotto {
   #numbers;

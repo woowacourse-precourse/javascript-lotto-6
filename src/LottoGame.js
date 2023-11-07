@@ -15,7 +15,7 @@ class LottoGame {
   async #inputPrice() {
     const price = await new Player().readPrice();
 
-    this.#buyLotto(price);
+    await this.#buyLotto(price);
   }
 
   async #buyLotto(price) {
@@ -26,7 +26,7 @@ class LottoGame {
 
       this.#tickets.push(lotto.getLottoNumbers());
     }
-    this.#inputWinningBonus();
+    await this.#inputWinningBonus();
   }
 
   async #inputWinningBonus() {
@@ -34,10 +34,10 @@ class LottoGame {
     const winningNumber = await winningBonus.readWinning();
     const bonusNumber = await winningBonus.readBonus();
 
-    this.#checkLottos(winningNumber, bonusNumber);
+    await this.#checkLottos(winningNumber, bonusNumber);
   }
 
-  #checkLottos(winningNumber, bonusNumber) {
+  async #checkLottos(winningNumber, bonusNumber) {
     this.#tickets.forEach((ticket) => {
       const result = this.#checkLotto(ticket, winningNumber, bonusNumber);
       this.#results[result] += 1;
@@ -48,10 +48,10 @@ class LottoGame {
       Console.print(`${PRINT_MESSAGE.prize[i]}${this.#results[i]}개`);
     }
 
-    this.#calculateTotal();
+    await this.#calculateTotal();
   }
 
-  #calculateTotal() {
+  async #calculateTotal() {
     const totalPrize = this.#results.reduce(
       (acc, cur, i) => acc + cur * CONFIG.prize[i],
       0,
