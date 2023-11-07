@@ -16,7 +16,6 @@ class InputValidator {
 
     ValidatorUtil.lengthValidate(inputToNumArr);
     inputToNumArr.map((number) => {
-      console.log(number);
       ValidatorUtil.isNumberValidate(number);
       ValidatorUtil.isNumberInRangeValidate(number);
     });

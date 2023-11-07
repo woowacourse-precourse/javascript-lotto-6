@@ -20,7 +20,6 @@ class Generator {
     const countNumbers = userNumbers.filter((number) =>
       lottoNumbers.includes(number)
     );
-    console.log(countNumbers);
     const count = countNumbers.length < 3 ? null : countNumbers.length;
 
     return count;
