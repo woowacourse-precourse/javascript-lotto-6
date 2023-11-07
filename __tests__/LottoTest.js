@@ -8,6 +8,29 @@ const invalidLottoNumbers = [
 ];
 const validLottoNumber = [1, 2, 3, 4, 5, 6];
 
+const mainNumbers = [1, 2, 3, 4, 5, 6];
+const bonusNumber = 7;
+const testCases = [
+  [7, 8, 9, 10, 11, 12],
+  [1, 8, 9, 10, 11, 12],
+  [1, 2, 8, 9, 10, 11],
+  [1, 2, 3, 8, 9, 10],
+  [1, 2, 3, 4, 8, 9],
+  [1, 2, 3, 4, 5, 8],
+  [1, 2, 3, 4, 5, 7],
+  [1, 2, 3, 4, 5, 6],
+];
+const expectedResult = [
+  'nothing',
+  'nothing',
+  'nothing',
+  'fifthPrize',
+  'fourthPrize',
+  'thirdPrize',
+  'secondPrize',
+  'firstPrize',
+];
+
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
     expect(() => {
@@ -31,5 +54,13 @@ describe('로또 클래스 테스트', () => {
   });
   test('로또 번호에 모두 조건에 맞는 번호가 있으면 예외가 발생하지 않는다.', () => {
     expect(() => new Lotto(validLottoNumber)).not.toThrow(ERROR_MESSAGE.invalidLottoNumber);
+  });
+
+  test('일치하는 번호의 갯수에 맞는 등수를 리턴하는지 테스트', () => {
+    testCases.forEach((testCase, index) => {
+      expect(new Lotto(testCase).raffleNumbers(mainNumbers, bonusNumber)).toBe(
+        expectedResult[index],
+      );
+    });
   });
 });
