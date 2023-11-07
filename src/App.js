@@ -31,6 +31,19 @@ class App {
             Console.print(`[${lotto.numbers.join(", ")}]`)
         );
     }
+
+    async #getWinningNumbersAndBonus() {
+        const winningNumbersInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
+        const winningNumbers = winningNumbersInput.split(",").map((num) => parseInt(num.trim(), 10));
+        if (winningNumbers.some((num) => isNaN(num) || num < 1 || num > 45) || new Set(winningNumbers).size !== 6) {
+            throw new Error("[ERROR] 당첨 번호를 잘못 입력하셨습니다.");}
+        const bonusNumberInput = await Console.readLineAsync(
+            "보너스 번호를 입력해 주세요."
+        );
+        const bonusNumber = parseInt(bonusNumberInput.trim(), 10);
+        if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45 || winningNumbers.includes(bonusNumber) ) {
+            throw new Error("[ERROR] 잘못된 보너스 번호입니다.");}
+        return [winningNumbers, bonusNumber];}
 }
 
 export default App;
