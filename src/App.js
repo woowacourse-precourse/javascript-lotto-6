@@ -1,8 +1,13 @@
+import { Console } from '@woowacourse/mission-utils';
 import {
+  BONUS_NUMBER_WEIGHT,
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
   LOTTO_NUMBERS_LENGTH,
   LOTTO_PRICE,
+  MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER,
+  MIN_MATCHING_COUNTS_FOR_PRIZE,
+  WINNING_NUMBER_WEIGHT,
 } from './Constants.js';
 import Lotto from './Lotto.js';
 import InputManager from './UI/InputManager.js';
@@ -24,6 +29,7 @@ class App {
     this.lottos = [];
     this.winningNumbers = [];
     this.bonusNumber = 0;
+    this.gameResult = { 3: 0, 4: 0, 5: 0, 5.5: 0, 6: 0 };
   }
 
   async play() {
@@ -33,6 +39,8 @@ class App {
     this.outputManager.printPurchasedLottosInfo(this.lottos);
     this.winningNumbers = await this.getWinningNumbers();
     this.bonusNumber = await this.getBonusNumber();
+    this.calculateGameResult();
+    Console.print(this.gameResult);
   }
 
   async getPurchaseAmount() {
@@ -91,6 +99,22 @@ class App {
     );
     numbers.sort((a, b) => a - b);
     return numbers;
+  }
+
+  getGameResult() {
+    this.lottos.forEach((lotto) => {
+      const { matchingCountWithWinningNumbers, matchingCountWithBonusNumber } =
+        lotto.getMatchingResultWithWinningNumbers(this.winningNumbers);
+      const winningWeight =
+        matchingCountWithWinningNumbers ===
+        MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER
+          ? matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT +
+            matchingCountWithBonusNumber * BONUS_NUMBER_WEIGHT
+          : matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT;
+
+      if (winningWeight < MIN_MATCHING_COUNTS_FOR_PRIZE) return;
+      this.gameResult[winningWeight] += 1;
+    });
   }
 }
 

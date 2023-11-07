@@ -16,6 +16,15 @@ class Lotto {
     return this.#numbers;
   }
 
+  getMatchingResultWithWinningNumbers(winningNumbers) {
+    return {
+      matchingCountWithWinningNumbers:
+        this.getMatchingCountWithWinningNumbers(winningNumbers),
+      matchingCountWithBonusNumber:
+        this.getMatchingCountWithBonusNumber(winningNumbers),
+    };
+  }
+
   getMatchingCountWithWinningNumbers(winningNumbers) {
     let matchingCountWithWinningNumbers = 0;
     this.#numbers.forEach((number) => {
@@ -26,7 +35,7 @@ class Lotto {
     return matchingCountWithWinningNumbers;
   }
 
-  getMatchingCountBonusNumbers(bonusNumber) {
+  getMatchingCountWithBonusNumber(bonusNumber) {
     return this.#numbers.includes(bonusNumber) ? 1 : 0;
   }
 }

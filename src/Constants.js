@@ -2,6 +2,10 @@ export const LOTTO_PRICE = 1000;
 export const LOTTO_MIN_NUMBER = 1;
 export const LOTTO_MAX_NUMBER = 45;
 export const LOTTO_NUMBERS_LENGTH = 6;
+export const MIN_MATCHING_COUNTS_FOR_PRIZE = 3;
+export const MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER = 5;
+export const WINNING_NUMBER_WEIGHT = 1;
+export const BONUS_NUMBER_WEIGHT = 0.5;
 
 export const GUIDE_MESSAGES = Object.freeze({
   ENTER_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
@@ -31,3 +35,19 @@ export const BONUS_NUMBER_ERROR_MESSAGES = Object.freeze({
 
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>
   `\n${numberOfLottos}개를 구매했습니다.`;
+
+export const WINNING_PRIZE_BY_COUNTS = Object.freeze({
+  3: 5000,
+  4: 50000,
+  5: 1500000,
+  5.5: 30000000,
+  6: 2000000000,
+});
+
+export const WINNING_DESCRIPTION_BY_COUNTS = Object.freeze({
+  3: `3개 일치 (5,000원)`,
+  4: `4개 일치 (50,000원)`,
+  5: `5개 일치 (1,500,000원)`,
+  5.5: `5개 일치, 보너스 볼 일치 (30,000,000원)`,
+  6: `6개 일치 (2,000,000,000원)`,
+});
