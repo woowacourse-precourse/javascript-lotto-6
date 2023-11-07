@@ -132,19 +132,19 @@ classDiagram
 
 flowchart TB
 
-    A[게임 시작 <br> App] --> B(구입금액 입력 <br> InputView)
+    A([게임 시작 <br> App]) --> B[/구입금액 입력 <br> InputView/]
     B --> C{구입금액 유효성 검사 <br> Validator}
     C -->|yes| D[랜덤 로또 발행 <br> LottoTicket]
     C --> |no| B
-    D --> E(당첨 번호 입력 <br> InputView)
+    D --> E[/당첨 번호 입력 <br> InputView/]
     E --> F{당첨 번호 유효성 검사 <br> Validator}
-    F -->|yes| G(보너스 번호 입력 <br> InputView)
+    F -->|yes| G[/보너스 번호 입력 <br> InputView/]
     F --> |no| E
     G --> H{보너스 번호 유효성 검사 <br> Validator}
     H --> |yes| I[등수 결정 <br> Lotto]
     H --> |no| G
     I --> J[당첨통계 및 수익률 계산 <br> LottoService]
-    J --> K(결과 출력 <br >OutputView)
-    K --> L[게임 종료]
+    J --> K[/결과 출력 <br >OutputView/]
+    K --> L([게임 종료])
 
 ```
