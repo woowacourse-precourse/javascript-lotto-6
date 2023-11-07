@@ -5,14 +5,28 @@ export default class PlayerLotto {
    */
   #lottoNumbers;
 
+  /**
+   * @constructor
+   * @param {number[]} numbers
+   */
   constructor(numbers) {
     this.#lottoNumbers = numbers;
   }
 
+  /**
+   * @public
+   * @returns {number[]}
+   */
   getLottoNumbers() {
     return this.#lottoNumbers;
   }
 
+  /**
+   * @public
+   * @param {number[]} winningNumbers
+   * @param {number} winningBonusNumber
+   * @returns {{bonusNumber: boolean, mainNumber: number}}
+   */
   compare(winningNumbers, winningBonusNumber) {
     const compareResult = {
       mainNumber: 0,
