@@ -7,18 +7,15 @@ import PROMPT from './constants/prompt.js';
 import NumberValidator from './validators/NumberValidator.js';
 import CustomError from './customs/CustomError.js';
 import ERROR_MESSAGE from './constants/error.js';
+import WinningNumbers from './WinningNumbers.js';
 
 /**
  * @classdesc 복권 발급처
  * 복권 발급처는 복권을 발급, 당첨 번호를 입력받는 기능을 가진다.
  */
 class DongHang {
-  mainNumbers = [];
-
-  bonusNumber = 0;
-
   /**
-   * 발급
+   * 주어진 금액만큼 발급
    * @param {number} money 금액
    * @returns {Lotto[]} 발급된 복권
    */
@@ -30,7 +27,7 @@ class DongHang {
   }
 
   /**
-   * 발급
+   * 단건 발급
    * @returns {Lotto} 발급된 복권
    */
   static issueOne() {
@@ -44,30 +41,22 @@ class DongHang {
   }
 
   /**
-   * 당첨 번호와 보너스 번호를 입력받는 메서드
+   * 사용자로부터 당첨 번호와 보너스 번호를 입력받아 WinningNumbers 객체를 생성한다.
+   * @returns {Promise<WinningNumbers>}
    */
-  async inputWinningNumbers() {
-    const mainNumbers = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
-    this.mainNumbers = mainNumbers.sort((a, b) => a - b);
+  static async makeWinningNumbers() {
+    const mainInput = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
+    const main = mainInput.sort((a, b) => a - b);
+    const bonusInput = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
 
-    const bonusNumber = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
-    if (!NumberValidator.isInRange(bonusNumber, LOTTO_RANGE)) {
+    if (!NumberValidator.isInRange(bonusInput, LOTTO_RANGE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
     }
-    if (mainNumbers.includes(bonusNumber)) {
+    if (main.includes(bonusInput)) {
       throw new CustomError(ERROR_MESSAGE.DUPLICATED_NUMBER);
     }
-    this.bonusNumber = bonusNumber;
-  }
 
-  /**
-   * @returns {{ mainNumbers: number[], bonusNumber: number }}}
-   */
-  getWinningNumbers() {
-    return {
-      mainNumbers: this.mainNumbers,
-      bonusNumber: this.bonusNumber,
-    };
+    return new WinningNumbers(main, bonusInput);
   }
 }
 

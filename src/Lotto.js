@@ -35,23 +35,11 @@ class Lotto {
   }
 
   /**
-   *
-   * @param {Object} winnningNumbers
-   * @param {number[]} winnningNumbers.mainNumbers
-   * @param {number} winnningNumbers.bonusNumber
-   */
-  check({ mainNumbers, bonusNumber }) {
-    const matchingMain = this.#countMatchingNumbers(mainNumbers);
-    const isBonusNumberMatched = this.#countMatchingNumbers([bonusNumber]) === 1;
-
-    return { matchingMain, isBonusNumberMatched };
-  }
-
-  /**
+   * 일치하는 숫자의 개수를 반환하는 메서드
    * @param {number[]} numbers
    * @returns {number} 일치하는 숫자의 개수
    */
-  #countMatchingNumbers(numbers) {
+  countMatchingNumbers(numbers) {
     let count = 0;
 
     numbers.forEach((number) => {

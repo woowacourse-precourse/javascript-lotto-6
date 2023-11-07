@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import Format from './Format.js';
 
 class Message {
   /**
@@ -13,7 +14,7 @@ class Message {
    * @param {number[]} arr
    */
   static array(arr) {
-    Console.print(`[${arr.join(', ')}]`);
+    Console.print(Format.array(arr));
   }
 }
 
