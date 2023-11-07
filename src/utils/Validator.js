@@ -19,7 +19,7 @@ const Validator = {
     if (numbers.includes('')) throw new Error(ERROR.message.invalidSeparator);
   },
   invalidNumbersCount: numbers => {
-    if (numbers.length !== CONSTANTS.number.winningNumbersCount)
+    if (numbers.length !== CONSTANTS.number.count)
       throw new Error(ERROR.message.invalidNumbersCount);
   },
   invalidRange: numbers => {
@@ -27,6 +27,10 @@ const Validator = {
       if (Number(number) < CONSTANTS.number.min || Number(number) > CONSTANTS.number.max)
         throw new Error(ERROR.message.invalidRange);
     });
+  },
+  invalidLottoNumberCount: lottoNumbers => {
+    if (lottoNumbers.length !== CONSTANTS.number.count)
+      throw new Error(ERROR.message.invalidLottoNumberCount);
   },
 };
 

@@ -3,7 +3,7 @@ const purchaseAmount = Object.freeze({
 });
 
 const number = Object.freeze({
-  winningNumbersCount: 6,
+  count: 6,
   min: 1,
   max: 45,
 });
