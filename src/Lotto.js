@@ -1,4 +1,4 @@
-import OutputView from '../views/OutputView';
+import OutputView from './views/OutputView';
 
 class Lotto {
   #numbers;
