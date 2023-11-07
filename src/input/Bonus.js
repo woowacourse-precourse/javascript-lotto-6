@@ -2,6 +2,7 @@ import { checkbonus } from '../Exception/CheckBonus.js';
 import { checkduplication } from '../Exception/Checkduplication.js';
 import { bonusinput } from './BonusInput.js';
 import { Console } from '@woowacourse/mission-utils';
+
 // 기능3의 보너스 번호 입력 조건
 export async function bonus(lottonum) {
   const input = lottonum;
