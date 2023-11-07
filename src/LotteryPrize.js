@@ -126,7 +126,7 @@ class LotteryPrize {
       fifthPrize * PRIZE_MONEY_FIFTH;
     const lottoCount = this.#lottoBundle.length;
     const earingRate = (totalPrizeMoney / (lottoCount * LOTTO_PRICE)) * 100;
-    return Number(earingRate.toFixed(1));
+    return Number(earingRate).toFixed(1);
   }
 }
 export default LotteryPrize;
