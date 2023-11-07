@@ -1,26 +1,39 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import {
+  CONSOLE_MESSAGE,
+  ERROR_MESSAGE,
+  CONSTANT_NUMBERS,
+} from './constants.js';
 
 class App {
   async play() {
     const purchaseAmountInput = await Console.readLineAsync(
-      '구입금액을 입력해 주세요.\n'
+      CONSOLE_MESSAGE.TYPE_PURCHASE_AMOUNT
     );
     const purchaseAmount = parseInt(purchaseAmountInput);
 
     if (isNaN(purchaseAmount)) {
-      throw new Exception('[ERROR] 숫자가 아닙니다.');
+      throw new Exception(ERROR_MESSAGE.NOT_A_NUMBER);
     }
 
-    if (purchaseAmountInput % 1000 != 0) {
-      throw new Exception('[ERROR] 구입금액은 1,000원 단위여야 합니다.');
+    if (purchaseAmount % CONSTANT_NUMBERS.THOUSAND != 0) {
+      throw new Exception(ERROR_MESSAGE.NOT_DIVISIBLE_BY_THOUSAND);
     }
 
-    const numberOfLottoPurchased = parseInt(purchaseAmountInput) / 1000;
-    Console.print(`\n${numberOfLottoPurchased}개를 구매했습니다.`);
+    const numberOfLottoPurchased = purchaseAmount / CONSTANT_NUMBERS.THOUSAND;
+    Console.print(
+      CONSOLE_MESSAGE.NEW_LINE +
+        numberOfLottoPurchased +
+        CONSOLE_MESSAGE.PURCHASE_COUNT
+    );
 
     const userLottoNumbers = [];
     for (let i = 0; i < numberOfLottoPurchased; i++) {
-      const eachLottoTicket = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const eachLottoTicket = Random.pickUniqueNumbersInRange(
+        CONSTANT_NUMBERS.LOTTO_NUMBER_MIN,
+        CONSTANT_NUMBERS.LOTTO_NUMBER_MAX,
+        CONSTANT_NUMBERS.LOTTO_NUMBER_COUNT
+      );
       userLottoNumbers.push(eachLottoTicket.sort((a, b) => a - b));
     }
 
@@ -29,44 +42,44 @@ class App {
     }
 
     const winningNumbersInput = await Console.readLineAsync(
-      '\n당첨 번호를 입력해 주세요.\n'
+      CONSOLE_MESSAGE.TYPE_WINNING_NUMBERS
     );
     const winningNumbersStringArray = winningNumbersInput.split(',');
     const winningNumbersArray = [];
 
     for (const stringNumber of winningNumbersStringArray) {
-      const integerNumber = parseInt(stringNumber, 10);
+      const integerNumber = parseInt(stringNumber);
 
       if (isNaN(integerNumber)) {
-        throw new Exception('[ERROR] 숫자가 아닙니다.');
+        throw new Exception(ERROR_MESSAGE.NOT_A_NUMBER);
       }
 
       if (integerNumber < 1 || integerNumber > 45) {
-        throw new Exception('[ERROR] 1부터 45 사이의 숫자만 가능합니다.');
+        throw new Exception(ERROR_MESSAGE.BETWEEN_MIN_AND_MAX);
       }
       winningNumbersArray.push(integerNumber);
     }
 
     if (new Set(winningNumbersArray).size !== winningNumbersArray.length) {
-      throw new Exception('[ERROR] 중복된 값이 있습니다.');
+      throw new Exception(ERROR_MESSAGE.DUPLICATED);
     }
 
     if (winningNumbersArray.length !== 6) {
-      throw new Exception('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Exception(ERROR_MESSAGE.SHOULD_BE_SIX);
     }
 
     const bonusNumberString = await Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n'
+      CONSOLE_MESSAGE.TYPE_BONUS_NUMBER
     );
     // TODO: 보너스 번호 예외처리
     const bonusNumber = parseInt(bonusNumberString);
 
     const winnings = Object.freeze({
-      three: 5000,
-      four: 50000,
-      five: 1500000,
-      fiveBonus: 30000000,
-      six: 2000000000,
+      three: CONSTANT_NUMBERS.THREE_PRIZE,
+      four: CONSTANT_NUMBERS.FOUR_PRIZE,
+      five: CONSTANT_NUMBERS.FIVE_PRIZE,
+      fiveBonus: CONSTANT_NUMBERS.FIVE_BONUS_PRIZE,
+      six: CONSTANT_NUMBERS.SIX_PRIZE,
     });
     let totalWinnings = 0;
     let threeNumbersHitCount = 0;
@@ -75,7 +88,7 @@ class App {
     let fiveNumbersWithBonusHitCount = 0;
     let sixNumbersHitCount = 0;
 
-    Console.print('\n당첨 통계\n---');
+    Console.print(CONSOLE_MESSAGE.RESULT_STATISTICS);
 
     for (const numbers of userLottoNumbers) {
       let hitCount = 0;
@@ -116,19 +129,33 @@ class App {
     }
 
     // 당첨 통계 출력
-    Console.print(`3개 일치 (5,000원) - ${threeNumbersHitCount}개`);
-    Console.print(`4개 일치 (50,000원) - ${fourNumbersHitCount}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${fiveNumbersHitCount}개`);
     Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${fiveNumbersWithBonusHitCount}개`
+      CONSOLE_MESSAGE.CORRECT_THREE +
+        threeNumbersHitCount +
+        CONSOLE_MESSAGE.COUNT
     );
-    Console.print(`6개 일치 (2,000,000,000원) - ${sixNumbersHitCount}개`);
+    Console.print(
+      CONSOLE_MESSAGE.CORRECT_FOUR + fourNumbersHitCount + CONSOLE_MESSAGE.COUNT
+    );
+    Console.print(
+      CONSOLE_MESSAGE.CORRECT_FIVE + fiveNumbersHitCount + CONSOLE_MESSAGE.COUNT
+    );
+    Console.print(
+      CONSOLE_MESSAGE.CORRECT_FIVE_BONUS +
+        fiveNumbersWithBonusHitCount +
+        CONSOLE_MESSAGE.COUNT
+    );
+    Console.print(
+      CONSOLE_MESSAGE.CORRECT_SIX + sixNumbersHitCount + CONSOLE_MESSAGE.COUNT
+    );
 
     const rateToReturn = (
       ((totalWinnings - purchaseAmount) / purchaseAmount) *
       100
     ).toFixed(1);
-    Console.print(`총 수익률은 ${rateToReturn}%입니다.`);
+    Console.print(
+      CONSOLE_MESSAGE.TOTAL_PROFIT_IS + rateToReturn + CONSOLE_MESSAGE.PERCENT
+    );
   }
 }
 
