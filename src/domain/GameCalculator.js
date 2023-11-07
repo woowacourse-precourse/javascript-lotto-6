@@ -34,7 +34,7 @@ class GameCalculator {
   calculateReturnRate() {
     let totalPrize = 0;
     Object.keys(this.winngingResult).forEach((key) => totalPrize += this.winngingResult[key] * PRIZES[key])
-    const RETURN_RATE = ((totalPrize / this.purchaseMoney) * 100).toFixed(1);
+    const RETURN_RATE = ((totalPrize / this.purchaseMoney) * 100).toFixed(1).replace(OTHERS.regularExpression, OTHERS.comma);
 
     return RETURN_RATE;
   }

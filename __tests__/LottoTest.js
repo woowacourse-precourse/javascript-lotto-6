@@ -40,4 +40,14 @@ describe("로또 클래스 테스트", () => {
     const gameResult = oneGame.calculate();
     expect(gameResult).toBe('bonus');
   })
+
+  test("구입 금액과 로또 결과에 대한 수익률을 소수점 둘째 자리에서 반올림하여 계산한다.", () => {
+    const purchaseLottos = [[1, 2, 3, 4, 5, 6], [2, 5, 6, 8, 10, 12]];
+    const winningNumbers = [1, 2, 5, 6, 8 ,10];
+    const bonusNumber = 7;
+    const purchaseMoney = 2000;
+    const oneGame = new GameCalculator(purchaseLottos, winningNumbers, bonusNumber, purchaseMoney);
+    const returnRate = oneGame.calculate()[1];
+    expect(returnRate).toBe('77,500.0');
+  })
 });

@@ -56,4 +56,5 @@ export const OTHERS = Object.freeze({
   numKorean: '개',
   percent: '%',
   initialWinningResult: { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 },
+  regularExpression: /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g
 });
