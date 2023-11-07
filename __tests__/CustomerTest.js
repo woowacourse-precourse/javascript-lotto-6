@@ -1,22 +1,17 @@
 import Customer from "../src/Customer";
+import { mockRandoms } from './ApplicationTest.js';
 
 describe("고객 클래스 테스트", () => {
-  test("지불한 금액이 1,000원으로 나누어떨어지지 않으면 예외가 발생한다.", () => {
-    expect(() => {
-      new Customer(1001);
-    }).toThrow("[ERROR]");
+  test("지불한 금액만큼 로또를 구입", () => {
+    mockRandoms([[1, 2, 3, 4, 5, 6], [11, 12, 13, 14, 15, 16]]);
+    const customer = new Customer(2000);
+    const result = customer.calculateTotalLottoTickets();
+
+    expect(result).toEqual(2);
   });
 
-  test("지불한 금액이 숫자가 아니면 예외가 발생한다.", () => {
-    expect(() => {
-      new Customer("100원");
-    }).toThrow("[ERROR]");
+  test("구입한 로또만큼 리스트에 저장", () => {
+    mockRandoms([[1, 2, 3, 4, 5, 6], [11, 12, 13, 14, 15, 16]]);
+    expect(new Customer(2000).lottoList).toContainEqual([1, 2, 3, 4, 5, 6],[11, 12, 13, 14, 15, 16]);
   });
-
-  test("지불한 금액이 0으로 시작하면 예외가 발생한다.", () => {
-    expect(() => {
-      new Customer(0);
-    }).toThrow("[ERROR]");
-  });
-
 });

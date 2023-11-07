@@ -1,3 +1,5 @@
+import Lotto from './Lotto.js'
+
 class Customer {
   #payment;
   lottoList = [];
@@ -14,7 +16,8 @@ class Customer {
   }
 
   buyLottoTickets() {
-    this.lottoList.push(new Lotto());
+    const lottoNumbers = new Lotto().getNumbers();
+    this.lottoList.push(lottoNumbers);
   }
 
 }
