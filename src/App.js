@@ -20,21 +20,48 @@ class App {
   }
   
   async getPurchaseAmount() {
-    const input = await Console.readLineAsync(inputPrompts.PURCHASE);
-    validatePurchase(input);
+    let input;
+
+    do {
+      try {
+        input = await Console.readLineAsync(inputPrompts.PURCHASE);
+        validatePurchase(input);  
+      } catch (error) {
+        Console.print(error.message);
+        input = null;
+      }
+    } while(!input)
     return Number(input);
   }
 
   async getWinningNumbers() {
-    const input = await Console.readLineAsync(inputPrompts.WINNING_NUMBERS);
-    const numbers = input.split(',').map((number) => Number(number));
-    const lotto = new Lotto(numbers);
+    let input;
+    let lotto;
+
+    do {
+      try {
+        input = await Console.readLineAsync(inputPrompts.WINNING_NUMBERS);
+        const numbers = input.split(',').map((number) => Number(number));
+        lotto = new Lotto(numbers);
+      } catch (error) {
+        Console.print(error.message);
+      }
+    } while(!lotto)
     return lotto;
   }
 
   async getBonusNumber(winningNumbers) {
-    const input = await Console.readLineAsync(inputPrompts.BONUS_NUMBER);
-    validateBonusNumber(winningNumbers, input);
+    let input;
+
+    do {
+      try {
+        input = await Console.readLineAsync(inputPrompts.BONUS_NUMBER);
+        validateBonusNumber(winningNumbers, input);
+      } catch (error) {
+        Console.print(error.message);
+        input = null;
+      }
+    } while(!input)
     return Number(input);
   }
 
