@@ -54,7 +54,9 @@ class App {
         const winningNumber = await Input.readWinningNumber();
         Validator.blank(winningNumber);
         validateWinningNumber(winningNumber.split(","));
-        this.#winningNumber = winningNumber.split(",");
+        this.#winningNumber = winningNumber.split(",").map((number) => {
+          return Number(number);
+        });
         break;
       } catch (error) {
         Console.print(error);
