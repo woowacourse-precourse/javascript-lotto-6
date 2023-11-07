@@ -1,5 +1,4 @@
 import Calculate from '../src/model/Calculate.js';
-import LottoController from '../src/controller/LottoController.js';
 
 describe('로또 계산 기능 테스트', () => {
   test('로또 수량 계산', () => {
@@ -17,10 +16,7 @@ describe('로또 계산 기능 테스트', () => {
     const calculate = new Calculate();
     const rank = [0, 0, 0, 0, 1];
     const price = 2000;
-    const mock = jest.fn((rank, price) =>
-      calculate.calculateBenefit(rank, price),
-    );
 
-    expect(mock(rank, price)).toEqual('100000000.0');
+    expect(calculate.calculateBenefit(rank, price)).toEqual('100000000.0');
   });
 });
