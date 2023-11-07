@@ -107,7 +107,7 @@ describe("Calculator 유닛 테스트", () => {
     const winningNumber = "1,2,3,4,5,6";
     const bonusNumber = "7";
     const expectedResult = {
-      lottoWinnings: [1, 0, 0, 0, 0],
+      lottoWinningsResult: [1, 0, 0, 0, 0],
       totalReturn: "166.7",
     };
     const calculator = new Calculator();
