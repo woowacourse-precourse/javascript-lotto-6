@@ -8,10 +8,6 @@ export default class OutputHandler {
         });
     }
 
-    static getWinningNumbers() {
-        MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
-    }
-
     static getBonusNumbers() {
         MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
     }
