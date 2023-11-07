@@ -14,5 +14,21 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test('로또 번호에 1 미만인 수가 있다.', () => {
+    expect(() => {
+      new Lotto([-1, 2, 3, 4, 5, 7]);
+    }).toThrow('[ERROR]');
+  });
+
+  test('로또 번호에 45 초과인 수가 있다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 47]);
+    }).toThrow('[ERROR]');
+  });
+
+  test('로또 번호에 정수가 아닌것이 있다.', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 'lotto']);
+    }).toThrow('[ERROR]');
+  });
 });
