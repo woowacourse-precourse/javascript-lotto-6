@@ -7,7 +7,8 @@ export const printAttempt = (attempt) => {
 
 export const printRandomNumbersArray = (array) => {
   array.forEach((numbers) => {
-    print(numbers);
+    //console.log("numbers",numbers);
+    print(`[${numbers.join(', ')}]`);
   })
 }
 
