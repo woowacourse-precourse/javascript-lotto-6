@@ -11,4 +11,7 @@ export const ERROR = Object.freeze({
   sameNumber: '[ERROR] 서로다른 값을 입력해주세요',
   bonusTypeNotNumber: '[ERROR] 보너스 번호는 정수여야 합니다.',
   rangeOfBonusNumber: '[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.',
+  rangeOfLottoNumber: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
+  checkInteger: '[ERROR] 로또 번호는 정수여야 합니다.',
+  differentNumber: '[ERROR] 로또 번호는 서로다른 숫자여야 합니다.',
 });
