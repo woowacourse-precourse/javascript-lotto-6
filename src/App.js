@@ -1,4 +1,4 @@
-import { bonusNumberHandler, lottoCalculatorHandler, lottoGeneratorHandler } from "./handlers";
+import { bonusNumberHandler, lottoCalculatorHandler, lottoGeneratorHandler } from "./Utils/handlers";
 import OutputView from "./View/OutputView";
 
 class App {

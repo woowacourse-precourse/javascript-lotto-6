@@ -1,6 +1,6 @@
 import Lotto from "../Lotto";
-import getRandomNumber from "../getRandomNumber";
-import { LOTTO_INFO } from "../constants";
+import getRandomNumber from "../Utils/getRandomNumber";
+import { LOTTO_INFO } from "../Utils/constants";
 import LottoValidator from "../lottoValidator";
 
 class LottoGenerator {

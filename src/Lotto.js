@@ -1,4 +1,4 @@
-import { PRIZE_CHECK } from "./constants";
+import { PRIZE_CHECK } from "./Utils/constants";
 import LottoValidator from "./lottoValidator";
 
 class Lotto {
