@@ -41,6 +41,6 @@ describe("로또 클래스 테스트", () => {
   test("정상적인 입력이면 에러가 발생하지 않는다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6]);
-    }).not.toThrow(ERROR_MESSAGE.exists_duplication);
+    }).not.toThrow();
   });
 });
