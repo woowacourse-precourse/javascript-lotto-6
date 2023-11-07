@@ -11,7 +11,6 @@ class InputHandler {
   }
 
   static async getBonusNumberString() {
-    Console.print(MESSAGE.OUTPUT.BLANK);
     return await Console.readLineAsync(MESSAGE.INPUT.BONUS_NUMBER);
   }
 }
