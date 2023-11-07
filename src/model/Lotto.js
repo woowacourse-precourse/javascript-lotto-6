@@ -66,14 +66,14 @@ class Lotto {
     return countCorrect;
   }
 
-  #includeBonus(bonusNumber) {
-    return this.#numbers.includes(bonusNumber);
+  #includeBonus(randomNumber, bonusNumber) {
+    return randomNumber.includes(bonusNumber);
   }
 
-  #getPrize(compareResult, bonusNumber) {
+  #getPrize(compareResult, randomNumber, bonusNumber) {
     if (compareResult === FIRST_PRIZE_CORRECT) {
       return "first";
-    } else if (compareResult === SECOND_THIRD_PRIZE_CORRECT && this.#includeBonus(bonusNumber)) {
+    } else if (compareResult === SECOND_THIRD_PRIZE_CORRECT && this.#includeBonus(randomNumber, bonusNumber)) {
       return "second";
     } else if (compareResult === SECOND_THIRD_PRIZE_CORRECT) {
       return "third";
@@ -89,7 +89,7 @@ class Lotto {
     const result = Object.seal({ first: 0, second: 0, third: 0, fourth: 0, fifth: 0 });
     for (const randomNumber of randomNumbers) {
       const compareResult = this.#compareNumbers(randomNumber);
-      const prize = this.#getPrize(compareResult, bonusNumber);
+      const prize = this.#getPrize(compareResult, randomNumber, bonusNumber);
       if (prize) {
         result[prize] += 1;
       }
