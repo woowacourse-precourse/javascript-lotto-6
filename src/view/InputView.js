@@ -25,7 +25,7 @@ const InputView = {
 
     Validator.validateBonusNumber(bonusNumber);
 
-    return bonusNumber;
+    return Number(bonusNumber);
   },
 };
 
