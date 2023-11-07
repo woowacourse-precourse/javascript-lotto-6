@@ -9,8 +9,8 @@ class App {
 
   async play() {
     try {
-      this.buyAndPrintLotto();
-      const winningNumber = await this.guess.inputLottoNumber();
+      await this.buyAndPrintLotto();
+      const winningNumber = await this.inputLottoNumber();
       await this.checkWinning(winningNumber);
     } catch (error) {
       Console.print(error.message);
@@ -25,6 +25,10 @@ class App {
       Console.print(this.guess.generateLottoNumber());
     }
     Console.print('');
+  }
+
+  async inputLottoNumber() {
+    return this.guess.inputLottoNumber();
   }
 
   async checkWinning(winningNumber) {
