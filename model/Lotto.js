@@ -18,7 +18,7 @@ class Lotto {
     });
   }
 
-  getNumbers() {
+  getLottoNumbers() {
     return this.#numbers;
   }
 
@@ -26,6 +26,11 @@ class Lotto {
     const lottoNum = Random.pickUniqueNumbersInRange(1, 45, 6);
     const sortedLottoNum = lottoNum.sort((a, b) => a - b);
     return new Lotto(sortedLottoNum);
+  }
+
+  static generateAndStoreLotto(arr) {
+    const lottoNumbers = Lotto.generateRandomLotto();
+    arr.push(lottoNumbers);
   }
 }
 
