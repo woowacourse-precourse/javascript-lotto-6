@@ -2,6 +2,16 @@ import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
+  #winMent = [
+    "",
+    "6개 일치 (2,000,000,000원) - ",
+    "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+    "5개 일치 (1,500,000원) - ",
+    "4개 일치 (50,000원) - ",
+    "3개 일치 (5,000원) - ",
+  ];
+  #winMoney = [0, 2000000000, 30000000, 1500000, 50000, 5000, 0];
+
   async #getInput(message) {
     try {
       const input = await MissionUtils.Console.readLineAsync(message);
@@ -54,20 +64,38 @@ class App {
     return ary;
   }
 
+  #printLottoResult(winInfoAry) {
+    for (let i = 5; i > 0; i--) {
+      MissionUtils.Console.print(`${this.#winMent[i]}${winInfoAry[i]}개`);
+    }
+  }
+
+  #printRateOfReturn(winInfoAry, lottoCnt) {
+    const money = lottoCnt * 1000;
+    const amount = winInfoAry.reduce(
+      (a, c, idx) => a + c * this.#winMoney[idx],
+      0
+    );
+    const winAmount = Math.round((amount / money) * 100, 2);
+    MissionUtils.Console.print(`총 수익률은 ${winAmount}% 입니다.`);
+  }
+
   async play() {
     const lottoCnt = await this.#getUserMoney();
-
     const lottoAry = this.#makeLottoAry(lottoCnt);
 
     const winningNumbers = await this.#getWinningNumber();
     const bonusNumber = await this.#getBonusNumber(winningNumbers);
 
+    //각 인덱스에 결과 저장
     const winInfoAry = [0, 0, 0, 0, 0, 0, 0];
     lottoAry.forEach((lotto) => {
       const rank = lotto.checkLottoLank(winningNumbers, bonusNumber);
       winInfoAry[rank]++;
     });
-    console.log(winInfoAry);
+
+    this.#printLottoResult(winInfoAry);
+    this.#printRateOfReturn(winInfoAry, lottoCnt);
   }
 }
 
