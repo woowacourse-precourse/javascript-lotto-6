@@ -19,20 +19,22 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
   getRank(winningNumbers, bonusNumber) {
     const matched = this.#numbers.filter(x => winningNumbers.includes(x));
     switch (matched.length) {
       case 6:
-        return 'rank1';
+        return 1;
       case 5:
-        if (this.#numbers.includes(bonusNumber)) return 'rank2';
-        return 'rank3';
+        if (this.#numbers.includes(bonusNumber)) return 2;
+        return 3;
       case 4:
-        return 'rank4';
+        return 4;
       case 3:
-        return 'rank5';
+        return 5;
+      default:
+        return 0;
     }
-    return false;
   }
 }
 

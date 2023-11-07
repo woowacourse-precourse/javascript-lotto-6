@@ -6,19 +6,20 @@ import {
   UNIT,
   LOTTO_LENGTH,
   MATCH,
-  INPUT_MESSAGE,
-  RESULT_MESSAGE,
-  ERROR_MESSAGE,
+  MATCH_MESSAGE,
+  MATCH_MONEY,
+  MESSAGE,
 } from './constants.js';
 import {
   isValidAmount,
   isValidBonusNumber,
   isValidWinningNumbers,
 } from './Validation.js';
+import MessageFormat from './MessageFormat.js';
 export const inputAmount = async () => {
   try {
-    const amount = await Console.readLineAsync(INPUT_MESSAGE.amount);
-    if (!isValidAmount(amount)) throw new Error(ERROR_MESSAGE.amount);
+    const amount = await Console.readLineAsync(MESSAGE.input.amount);
+    if (!isValidAmount(amount)) throw new Error(MESSAGE.error.amount);
     return amount;
   } catch (error) {
     Console.print(error.message);
@@ -27,19 +28,18 @@ export const inputAmount = async () => {
 };
 export const multiInputAmount = async () => {
   let amount;
-  while (true) {
+  do {
     amount = await inputAmount();
-    if (amount) break;
-  }
+  } while (!amount);
   return amount;
 };
 export const inputWinningNumbers = async () => {
   try {
     const winningNumbers = await Console.readLineAsync(
-      INPUT_MESSAGE.winningNumbers,
+      MESSAGE.input.winningNumbers,
     );
     if (!isValidWinningNumbers(winningNumbers))
-      throw new Error(ERROR_MESSAGE.winningNumbers);
+      throw new Error(MESSAGE.error.winningNumbers);
     return winningNumbers.split(',').map(x => Number(x));
   } catch (error) {
     Console.print(error.message);
@@ -56,9 +56,9 @@ export const multiInputWinningNumbers = async () => {
 };
 export const inputBonusNumber = async winningNumbers => {
   try {
-    const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
+    const bonusNumber = await Console.readLineAsync(MESSAGE.input.bonusNumber);
     if (!isValidBonusNumber(winningNumbers, Number(bonusNumber)))
-      throw new Error(ERROR_MESSAGE.bonusNumber);
+      throw new Error(MESSAGE.error.bonusNumber);
     return Number(bonusNumber);
   } catch (error) {
     Console.print(error.message);
@@ -67,14 +67,15 @@ export const inputBonusNumber = async winningNumbers => {
 };
 export const multiInputBonusNumber = async winningNumbers => {
   let bonusNumber;
-  while (true) {
+  do {
     bonusNumber = await inputBonusNumber(winningNumbers);
-    if (bonusNumber) break;
-  }
+  } while (!bonusNumber);
   return bonusNumber;
 };
 export const getRandomNumbers = () => {
-  const numbers = Random.pickUniqueNumbersInRange(MIN, MAX, LOTTO_LENGTH);
+  const numbers = Random.pickUniqueNumbersInRange(MIN, MAX, LOTTO_LENGTH).sort(
+    (a, b) => a - b,
+  );
   return numbers;
 };
 export const getLottoCount = amount => {
@@ -94,42 +95,40 @@ export const getLottos = lotto_count => {
   return lottos;
 };
 export const printLottos = lottos => {
-  Console.print(`\n${lottos.length}개를 구매했습니다.`);
+  Console.print(MessageFormat.lottoCount(lottos.length));
   lottos.forEach(lotto => {
     Console.print(`[${lotto.getNumbers().join(', ')}]`);
   });
-  Console.print('');
 };
 export const getResult = (lottos, winningNumbers, bonusNumber) => {
-  const result = {};
-  Object.keys(MATCH).forEach(rank => {
-    result[rank] = {
-      money: MATCH[rank].money,
+  const result = MATCH.map(rank => {
+    return {
+      rank: rank,
+      message: MATCH_MESSAGE[rank],
+      money: MATCH_MONEY[rank],
       count: 0,
     };
   });
   lottos.forEach(lotto => {
     const rank = lotto.getRank(winningNumbers, bonusNumber);
-    if (rank) result[rank].count += 1;
+    if (rank > 0) result[rank - 1].count += 1;
   });
   return result;
 };
 export const printResult = result => {
-  Console.print(RESULT_MESSAGE);
-  Object.keys(result)
-    .reverse()
-    .forEach(rank => {
-      Console.print(`${MATCH[rank].message} - ${result[rank].count}개`);
-    });
+  Console.print(MESSAGE.result);
+  result.reverse().forEach(rank => {
+    Console.print(`${rank.message} - ${rank.count}개`);
+  });
 };
 export const getRateOfReturn = (amount, result) => {
   let totalMoney = 0;
-  Object.keys(result).forEach(rank => {
-    totalMoney += result[rank].money * result[rank].count;
+  result.forEach(rank => {
+    totalMoney += rank.money * rank.count;
   });
   const ratio = ((totalMoney / amount) * 100).toFixed(1);
   return ratio;
 };
 export const printRateOfReturn = ratio => {
-  Console.print(`총 수익률은 ${ratio}%입니다.`);
+  Console.print(MessageFormat.rateOfReturn(ratio));
 };
