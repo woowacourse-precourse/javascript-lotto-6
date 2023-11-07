@@ -26,7 +26,7 @@ export class Lotto {
   }
 }
 
-class CommonError {
+export class CommonError {
   numberError(isNumber) {
     if (isNaN(isNumber)) {
       throw new Error('[ERROR] 숫자가 아닙니다.');
@@ -38,7 +38,7 @@ class CommonError {
 }
 
 //로또 번호 생성
-class LottoMachine {
+export class LottoMachine {
   constructor() {
     this.lottos = [];
   }
@@ -65,8 +65,8 @@ export class CashCount {
   #count;
 
   constructor(cash) {
+    this.#count = 0;
     this.#validate(cash);
-    this.#count = cash / 1000;
   }
 
   #validate(cash) {
@@ -79,6 +79,7 @@ export class CashCount {
     if (cash % 1000 !== 0) {
       throw new Error('[ERROR] 1000원 단위가 아닙니다.');
     }
+    this.#count = cash / 1000;
   }
 
   get count() {
@@ -88,6 +89,7 @@ export class CashCount {
 
 export class LottoGame {
   constructor() {
+    this.lottoMachine = new LottoMachine();
     this.playerLottos;
     this.bonusNumber;
     this.winningNumbers;
@@ -95,8 +97,7 @@ export class LottoGame {
 
   async buyLottos() {
     const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
-    const lottoMachine = new LottoMachine();
-    this.playerLottos = lottoMachine.buyLottos(Number(cash));
+    this.playerLottos = this.lottoMachine.buyLottos(Number(cash));
   }
 
   async winLottos() {
@@ -113,13 +114,20 @@ export class LottoGame {
   }
 
   #bonusNumberValidate(number) {
+    this.#validateSingleNumber(number);
+    const isNumber = Number(number[0]);
+    this.#validateBonusNumber(isNumber);
+  }
+
+  #validateSingleNumber(number) {
     if (number.length !== 1) {
       throw new Error('[ERROR] 하나의 입력이 아닙니다.');
     }
+  }
 
-    const isNumber = Number(number[0]);
-    if (this.playerLottos.includes(isNumber)) {
-      throw new Error('[ERROR] 중복된 숫자가 있습니다.');
+  #validateBonusNumber(isNumber) {
+    if (this.winningNumbers.includes(isNumber)) {
+      throw new Error('[ERROR] 당첨 번호와 중복된 숫자가 있습니다.');
     }
 
     const numberError = new CommonError();
@@ -127,7 +135,7 @@ export class LottoGame {
   }
 }
 
-class LottoStatistics {
+export class LottoStatistics {
   constructor(playerLottos, winningNumbers, bonusNumber) {
     this.playerLottos = playerLottos;
     this.bonusNumber = bonusNumber;
@@ -143,22 +151,33 @@ class LottoStatistics {
 
   calculateStatistics() {
     this.playerLottos.forEach((lotto) => {
-      let count = 0;
-      let bonusMatch = false;
-      lotto.forEach((number) => {
-        if (this.winningNumbers.includes(number)) {
-          count += 1;
-        }
-        if (this.bonusNumber === number) {
-          bonusMatch = true;
-        }
-      });
-      if (count === 5 && bonusMatch) {
-        this.statistics['5개 일치, 보너스 볼 일치'].count += 1;
-      } else if (this.statistics[`${count}개 일치`]) {
-        this.statistics[`${count}개 일치`].count += 1;
+      const { count, bonusMatch } = this.countMatchedNumbers(lotto);
+      this.updateStatistics(count, bonusMatch);
+    });
+  }
+
+  countMatchedNumbers(lotto) {
+    let count = 0;
+    let bonusMatch = false;
+    lotto.forEach((number) => {
+      if (this.bonusNumber === number) {
+        bonusMatch = true;
+      }
+      if (this.winningNumbers.includes(number)) {
+        count += 1;
       }
     });
+    return { count, bonusMatch };
+  }
+
+  updateStatistics(count, bonusMatch) {
+    if (count === 5 && bonusMatch) {
+      this.statistics['5개 일치, 보너스 볼 일치'].count += 1;
+      return;
+    }
+    if (this.statistics[`${count}개 일치`]) {
+      this.statistics[`${count}개 일치`].count += 1;
+    }
   }
 
   calculateReturnRate(cost) {
@@ -171,9 +190,11 @@ class LottoStatistics {
   }
 
   printStatistics() {
-    console.log('당첨 통계\n---');
+    MissionUtils.Console.print('당첨 통계\n---');
     for (const key in this.statistics) {
-      console.log(`${key} (${this.statistics[key].prize}원) - ${this.statistics[key].count}개`);
+      MissionUtils.Console.print(
+        `${key} (${this.statistics[key].prize}원) - ${this.statistics[key].count}개`,
+      );
     }
   }
 }
