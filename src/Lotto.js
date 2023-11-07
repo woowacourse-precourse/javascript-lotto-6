@@ -3,6 +3,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#sortLotto(numbers);
     this.#numbers = numbers;
   }
 
