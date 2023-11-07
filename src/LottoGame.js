@@ -32,16 +32,16 @@ class LottoGame {
         OutputView.printErrorMessage(error.message);
       }
     }
-    this.generateRandomNumbers();
+    await this.generateRandomNumbers();
   }
 
-  generateRandomNumbers() {
+  async generateRandomNumbers() {
     for (let i = 0; i < this.#count; i++) {
       const randomTicket = this.generateRandomLotto();
       this.#lottos.push(randomTicket);
     }
     OutputView.printLottoNumbers(this.#lottos);
-    this.setupInputWinningNumbers();
+    await this.setupInputWinningNumbers();
   }
 
   generateRandomLotto() {
