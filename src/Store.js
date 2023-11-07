@@ -57,8 +57,33 @@ class Store {
     this.#printLottoList();
   }
 
-  static async inputWinningNumbers() {
-    const money = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+  #winningNumbersValidate(winningNumbers) {
+    if (winningNumbers.length !== 6) {
+      throw new Error("[ERROR] 숫자는 6개여야 합니다.");
+    }
+    for (const number of winningNumbers) {
+      if (isNaN(number)) {
+        throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해주세요.");
+      }
+      if (number < 1 || number > 45) {
+        throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+      }
+    }
+  }
+
+  async inputWinningNumbers() {
+    while (true) {
+      try {
+        const winningNumbersInput = await Console.readLineAsync(
+          "당첨 번호를 입력해 주세요.\n"
+        );
+        const winningNumbers = winningNumbersInput.split(",");
+        this.#winningNumbersValidate(winningNumbers);
+        return winningNumbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
 
