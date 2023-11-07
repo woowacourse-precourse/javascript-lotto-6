@@ -1,0 +1,6 @@
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 45;
+const LOTTO_NUMBER_COUNT = 6;
+const PERCHASE_AMOUNT = paymentAmount => paymentAmount / 1000;
+
+export { MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT, PERCHASE_AMOUNT };
