@@ -1,6 +1,6 @@
-import * as error from '../constant/Error.js';
+import * as error from './constant/Error.js';
 
-const CheckInputError = {
+const Domain = {
   async checkPriceInputError(purchasePrice) {
     purchasePrice.split('').forEach((ele, idx) => {
       if (idx === 0 && ele === '-')
@@ -14,7 +14,13 @@ const CheckInputError = {
 
     if (Number(purchasePrice) % 1000 !== 0)
       throw new Error(error.PURCHASE_PRICE_NOT_DIVIDE_ERROR);
+
+    return true;
+  },
+
+  calculateLottoCount(purchasePrice) {
+    return purchasePrice / 1000;
   },
 };
 
-export default CheckInputError;
+export default Domain;
