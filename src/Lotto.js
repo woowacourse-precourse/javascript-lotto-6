@@ -7,7 +7,7 @@ class Lotto {
     this.#validate(numbers);
     Lotto.#validateNumbersInRange(numbers, 1, 45);
     Lotto.#validateHasNoDuplicate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = Lotto.sortInAscendingOrder(numbers);
   }
 
   getNumbers() {
@@ -15,7 +15,12 @@ class Lotto {
   }
 
   has(value) {
-    return value in this.getNumbers();
+    const numbers = this.getNumbers();
+    return numbers.includes(value);
+  }
+
+  static sortInAscendingOrder(numbers) {
+    return numbers.sort((prev, current) => prev - current);
   }
 
   #validate(numbers) {

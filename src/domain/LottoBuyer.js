@@ -26,7 +26,7 @@ class LottoBuyer {
     }
 
     const profit = prizes.reduce((acc, prize) => acc + PROFIT_FOR_PRIZE[prize] || 0, 0);
-    return Number((profit / investment).toFixed(2) * 100);
+    return Number((profit / investment) * 100).toFixed(1);
   }
 
   static #validateLottos(value) {
