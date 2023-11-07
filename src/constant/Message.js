@@ -1,5 +1,6 @@
 import {
   BONUS_BALL_FORM,
+  CORRECT_NUMBER,
   DELIMITER,
   LOTTO_FORM,
   NUMBER_RANGE,
@@ -29,11 +30,13 @@ const STATISTICS_MESSAGE = Object.freeze({
 });
 
 const RANK_MESSAGE = Object.freeze({
-  three: `3개 일치 (${WINNINGS.three}원)`,
-  four: `4개 일치 (${WINNINGS.four}원)`,
-  fiveNoBonus: `5개 일치 (${WINNINGS.fiveNoBonus}원)`,
-  fiveAndBonus: `5개 일치, 보너스 볼 일치 (${WINNINGS.fiveAndBonus}원)`,
-  six: `6개 일치 (${WINNINGS.six}원)`,
+  fifth: `3개 일치 (${WINNINGS[CORRECT_NUMBER.three]}원)`,
+  fourth: `4개 일치 (${WINNINGS[CORRECT_NUMBER.four]}원)`,
+  third: `5개 일치 (${WINNINGS[CORRECT_NUMBER.fiveNoBonus]}원)`,
+  second: `5개 일치, 보너스 볼 일치 (${
+    WINNINGS[CORRECT_NUMBER.fiveAndBonus]
+  }원)`,
+  first: `6개 일치 (${WINNINGS[CORRECT_NUMBER.six]}원)`,
 });
 
 const ERROR_MESSAGE = Object.freeze({

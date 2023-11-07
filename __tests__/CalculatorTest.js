@@ -1,26 +1,32 @@
 import Calculator from '../src/Calculator';
-import { WINNINGS_MONEY } from '../src/constant';
+import { CORRECT_NUMBER, WINNINGS_MONEY } from '../src/constant';
 import { makeExpectedWinningResult } from '../testUtils';
 
 describe('Calculator 클래스 테스트', () => {
-  const RANK_ARRAY = [
+  const PARAMETER_ARRAY = [
     [1, 1, 1, 1, 1],
     [0, 0, 0, 1, 1],
     [0, 0, 0, 0, 0],
   ];
-  const WINNING_RESULT_ARRAY = RANK_ARRAY.map((v) =>
+  const WINNING_RESULT_ARRAY = PARAMETER_ARRAY.map((v) =>
     makeExpectedWinningResult(...v),
   );
 
   const WINNINGS_ARRAY = [
     [
-      WINNINGS_MONEY.three,
-      WINNINGS_MONEY.four,
-      WINNINGS_MONEY.fiveNoBonus,
-      WINNINGS_MONEY.fiveAndBonus,
-      WINNINGS_MONEY.six,
+      WINNINGS_MONEY[CORRECT_NUMBER.three],
+      WINNINGS_MONEY[CORRECT_NUMBER.four],
+      WINNINGS_MONEY[CORRECT_NUMBER.fiveNoBonus],
+      WINNINGS_MONEY[CORRECT_NUMBER.fiveAndBonus],
+      WINNINGS_MONEY[CORRECT_NUMBER.six],
     ],
-    [0, 0, 0, WINNINGS_MONEY.fiveAndBonus, WINNINGS_MONEY.six],
+    [
+      0,
+      0,
+      0,
+      WINNINGS_MONEY[CORRECT_NUMBER.fiveAndBonus],
+      WINNINGS_MONEY[CORRECT_NUMBER.six],
+    ],
     [0, 0, 0, 0, 0],
   ];
 
@@ -65,7 +71,7 @@ describe('Calculator 클래스 테스트', () => {
       makeItems(2000, 0, 0),
       makeItems(10000, 5000, 50),
       makeItems(500000, 15000, 3),
-      makeItems(1000, WINNINGS_MONEY.six, 200000000),
+      makeItems(1000, WINNINGS_MONEY[CORRECT_NUMBER.six], 200000000),
     ];
 
     TEST_ITEMS.forEach((v) => {

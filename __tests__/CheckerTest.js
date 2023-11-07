@@ -1,7 +1,7 @@
 import BonusBall from '../src/BonusBall';
 import Checker from '../src/Checker';
 import Lotto from '../src/Lotto';
-import { FIVE_AND_BONUS, FIVE_NO_BONUS, RANK } from '../src/constant';
+import { CORRECT_NUMBER, RANK } from '../src/constant';
 import { makeLottos, makeExpectedWinningResult } from '../testUtils';
 
 describe('Checker 클래스 테스트', () => {
@@ -16,7 +16,7 @@ describe('Checker 클래스 테스트', () => {
         [1, 2, 3, 10, 11, 12],
         [1, 2, 3, 10, 11, 12],
       ],
-      rankArray: ['three', 'three'],
+      rankArray: [CORRECT_NUMBER.three, CORRECT_NUMBER.three],
       expectedWinningResult: makeExpectedWinningResult(2, 0, 0, 0, 0),
     },
     {
@@ -24,7 +24,7 @@ describe('Checker 클래스 테스트', () => {
         [21, 22, 23, 10, 11, 12],
         [1, 2, 3, 4, 5, 6],
       ],
-      rankArray: [undefined, 'six'],
+      rankArray: [undefined, CORRECT_NUMBER.six],
       expectedWinningResult: makeExpectedWinningResult(0, 0, 0, 0, 1),
     },
     {
@@ -32,7 +32,7 @@ describe('Checker 클래스 테스트', () => {
         [1, 2, 3, 4, 7, 11],
         [1, 2, 3, 4, 5, 7],
       ],
-      rankArray: ['four', FIVE_AND_BONUS],
+      rankArray: [CORRECT_NUMBER.four, CORRECT_NUMBER.fiveAndBonus],
       expectedWinningResult: makeExpectedWinningResult(0, 1, 0, 1, 0),
     },
     {
@@ -40,7 +40,7 @@ describe('Checker 클래스 테스트', () => {
         [1, 2, 3, 4, 6, 11],
         [1, 2, 3, 4, 5, 7],
       ],
-      rankArray: [FIVE_NO_BONUS, FIVE_AND_BONUS],
+      rankArray: [CORRECT_NUMBER.fiveNoBonus, CORRECT_NUMBER.fiveAndBonus],
       expectedWinningResult: makeExpectedWinningResult(0, 0, 1, 1, 0),
     },
   ];

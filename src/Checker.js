@@ -1,4 +1,4 @@
-import { FIVE_AND_BONUS, RANK } from './constant';
+import { CORRECT_NUMBER } from './constant';
 import { getWinningResult } from './utils';
 
 class Checker {
@@ -13,13 +13,19 @@ class Checker {
   }
 
   changeToRank(number, bonus) {
-    if (number === 5) {
-      return bonus ? FIVE_AND_BONUS : RANK[2];
+    if (number < 3) return;
+    switch (number) {
+      case 3:
+        return CORRECT_NUMBER.three;
+      case 4:
+        return CORRECT_NUMBER.four;
+      case 5:
+        return bonus ? CORRECT_NUMBER.fiveAndBonus : CORRECT_NUMBER.fiveNoBonus;
+      case 6:
+        return CORRECT_NUMBER.six;
+      default:
+        break;
     }
-    if (number < 5) {
-      return RANK[number - 3];
-    }
-    if (number === 6) return RANK[4];
   }
 
   compareLotto(lotto, winningLottoNumbers, bonusNumber) {

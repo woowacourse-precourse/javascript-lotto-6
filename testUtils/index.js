@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { FIVE_AND_BONUS, FIVE_NO_BONUS } from '../src/constant';
 import Lotto from '../src/Lotto';
+import { CORRECT_NUMBER } from '../src/constant';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -34,11 +34,11 @@ const makeExpectedWinningResult = (
   fiveAndBonus,
   six,
 ) => [
-  { rank: 'three', number: three },
-  { rank: 'four', number: four },
-  { rank: FIVE_NO_BONUS, number: fiveNoBonus },
-  { rank: FIVE_AND_BONUS, number: fiveAndBonus },
-  { rank: 'six', number: six },
+  { rank: CORRECT_NUMBER.three, number: three },
+  { rank: CORRECT_NUMBER.four, number: four },
+  { rank: CORRECT_NUMBER.fiveNoBonus, number: fiveNoBonus },
+  { rank: CORRECT_NUMBER.fiveAndBonus, number: fiveAndBonus },
+  { rank: CORRECT_NUMBER.six, number: six },
 ];
 
 export {

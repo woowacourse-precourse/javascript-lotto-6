@@ -17,31 +17,42 @@ const BONUS_BALL_FORM = Object.freeze({
 
 const DELIMITER = ',';
 
+const CORRECT_NUMBER = Object.freeze({
+  three: 'fifth',
+  four: 'fourth',
+  fiveNoBonus: 'third',
+  fiveAndBonus: 'second',
+  six: 'first',
+});
+
 const WINNINGS = Object.freeze({
-  three: '5,000',
-  four: '50,000',
-  fiveNoBonus: '1,500,000',
-  fiveAndBonus: '30,000,000',
-  six: '2,000,000,000',
+  first: '2,000,000,000',
+  second: '30,000,000',
+  third: '1,500,000',
+  fourth: '50,000',
+  fifth: '5,000',
 });
 
 const WINNINGS_MONEY = Object.freeze({
-  three: changeStringToMoney(WINNINGS.three),
-  four: changeStringToMoney(WINNINGS.four),
-  fiveNoBonus: changeStringToMoney(WINNINGS.fiveNoBonus),
-  fiveAndBonus: changeStringToMoney(WINNINGS.fiveAndBonus),
-  six: changeStringToMoney(WINNINGS.six),
+  first: changeStringToMoney(WINNINGS.first),
+  second: changeStringToMoney(WINNINGS.second),
+  third: changeStringToMoney(WINNINGS.third),
+  fourth: changeStringToMoney(WINNINGS.fourth),
+  fifth: changeStringToMoney(WINNINGS.fifth),
 });
 
-const FIVE_AND_BONUS = 'fiveAndBonus';
-const FIVE_NO_BONUS = 'fiveNoBonus';
-const RANK = ['three', 'four', FIVE_NO_BONUS, FIVE_AND_BONUS, 'six'];
+const RANK = [
+  CORRECT_NUMBER.three,
+  CORRECT_NUMBER.four,
+  CORRECT_NUMBER.fiveNoBonus,
+  CORRECT_NUMBER.fiveAndBonus,
+  CORRECT_NUMBER.six,
+];
 
 export {
   BONUS_BALL_FORM,
+  CORRECT_NUMBER,
   DELIMITER,
-  FIVE_AND_BONUS,
-  FIVE_NO_BONUS,
   NUMBER_RANGE,
   LOTTO_FORM,
   RANK,
