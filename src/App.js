@@ -9,7 +9,7 @@ import Validator from './validator/Validator.js';
 
 class App {
   async play() {
-    const { lottos, buyingPrice } = await App.buyLotto().catch();
+    const { lottos, buyingPrice } = await App.buyLotto();
     OutputView.printBuyingLottos(lottos);
 
     const winningNumbers = await App.drawLottoNumbers();
