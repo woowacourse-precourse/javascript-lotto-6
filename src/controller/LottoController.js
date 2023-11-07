@@ -5,6 +5,7 @@ import LottoGenerator from '../model/LottoGenerator.js';
 import Price from '../model/Price.js';
 import Lotto from '../Lotto.js';
 import Bonus from '../model/Bonus.js';
+import { SPLITWORD } from '../util/constant.js';
 
 export default class LottoController {
   #price;
@@ -54,7 +55,7 @@ export default class LottoController {
 
   #checkUserLottoNumber(userInputNumber) {
     try {
-      let userLottoNumber = userInputNumber.split(',').map(number => Number(number));
+      let userLottoNumber = userInputNumber.split(SPLITWORD).map(number => Number(number));
       new Lotto(userLottoNumber);
       this.#userLotto = userLottoNumber;
       return this.inputBonusNumber();

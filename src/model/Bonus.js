@@ -1,4 +1,4 @@
-import { ERROR } from '../util/constant.js';
+import { ERROR, LOTTO_NUMBER_RANGE } from '../util/constant.js';
 
 class Bonus {
   #bonus;
@@ -17,7 +17,7 @@ class Bonus {
   }
 
   checkRange() {
-    if (this.#bonus < 1 || this.#bonus > 45) {
+    if (this.#bonus < LOTTO_NUMBER_RANGE[0] || this.#bonus > LOTTO_NUMBER_RANGE[1]) {
       throw ERROR.rangeOverInput;
     }
   }

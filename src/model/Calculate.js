@@ -1,12 +1,12 @@
-import { PRICE } from '../util/constant.js';
+import { PRICE, NUMBERS } from '../util/constant.js';
 
 class Calculate {
   countLottoAmounnt(money) {
-    return parseInt(Number(money) / 1000);
+    return parseInt(Number(money) / NUMBERS.unitOfMoney);
   }
 
   async countTotalRanking(lottoList, lotto, bonus) {
-    this.countMatch = [0, 0, 0, 0, 0];
+    this.countMatch = new Array(NUMBERS.rankLength).fill(0);
 
     await lottoList.forEach(eachLotto => {
       this.#countEachLotto(eachLotto, lotto, bonus);
@@ -23,29 +23,29 @@ class Calculate {
   #rankCount(matchLength, eachLotto, bonus) {
     switch (matchLength) {
       case 6:
-        this.countMatch[4] += 1;
+        this.countMatch[4] += NUMBERS.rankCountUp;
         break;
       case 5:
-        this.countMatch[this.#chechBonusAndFive(eachLotto, bonus)] += 1;
+        this.countMatch[this.#chechBonusAndFive(eachLotto, bonus)] += NUMBERS.rankCountUp;
         break;
       case 4:
-        this.countMatch[1] += 1;
+        this.countMatch[1] += NUMBERS.rankCountUp;
         break;
       case 3:
-        this.countMatch[0] += 1;
+        this.countMatch[0] += NUMBERS.rankCountUp;
         break;
     }
   }
 
   #chechBonusAndFive(eachLotto, bonus) {
-    if (eachLotto.includes(bonus)) return 3;
+    if (eachLotto.includes(Number(bonus))) return 3;
     return 2;
   }
 
   calculateBenefit(rank, price) {
     let eachPrice = 0;
 
-    Array.from({ length: 5 }, (v, rankIdx) => {
+    Array.from({ length: NUMBERS.rankLength }, (v, rankIdx) => {
       eachPrice += PRICE[rankIdx] * rank[rankIdx];
     });
 

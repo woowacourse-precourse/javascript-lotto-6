@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import { LOTTO_NUMBER_RANGE } from '../util/constant.js';
 
 const LottoGenerator = {
   generateLottoList: amount => {
@@ -13,7 +14,7 @@ const LottoGenerator = {
 };
 
 const randomNumberGenerator = () => {
-  return sort(Random.pickUniqueNumbersInRange(1, 45, 6));
+  return sort(Random.pickUniqueNumbersInRange(LOTTO_NUMBER_RANGE[0], LOTTO_NUMBER_RANGE[1], 6));
 };
 
 const sort = eachLottoList => {

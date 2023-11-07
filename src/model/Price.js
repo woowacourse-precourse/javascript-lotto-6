@@ -1,4 +1,4 @@
-import { ERROR } from '../util/constant.js';
+import { ERROR, NUMBERS } from '../util/constant.js';
 
 class Price {
   #money;
@@ -16,7 +16,7 @@ class Price {
   }
 
   notInputValue() {
-    if (this.#money.trim().length === 0) {
+    if (!this.#money.trim().length) {
       throw ERROR.emptyValue;
     }
   }
@@ -28,13 +28,13 @@ class Price {
   }
 
   moneyRangeOver() {
-    if (Number(this.#money) < 1000) {
+    if (Number(this.#money) < NUMBERS.minimumMoney) {
       throw ERROR.underThousandMoney;
     }
   }
 
   notDivisibleByThousand() {
-    if (Number(this.#money) % 1000 !== 0) {
+    if (Number(this.#money) % NUMBERS.unitOfMoney) {
       throw ERROR.notDivisibleMoney;
     }
   }

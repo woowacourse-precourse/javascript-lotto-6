@@ -24,3 +24,14 @@ export const RESULT = {
     `3개 일치 (5,000원) - ${countList[0]}개\n4개 일치 (50,000원) - ${countList[1]}개\n5개 일치 (1,500,000원) - ${countList[2]}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${countList[3]}개\n6개 일치 (2,000,000,000원) - ${countList[4]}개`,
   printBenefit: benefit => `총 수익률은 ${benefit}%입니다.`,
 };
+
+export const NUMBERS = Object.freeze({
+  lottoLength: 6,
+  minimumMoney: 1000,
+  unitOfMoney: 1000,
+  rankCountUp: 1,
+  rankLength: 5,
+});
+
+export const SPLITWORD = `,`;
+export const LOTTO_NUMBER_RANGE = [1, 45];

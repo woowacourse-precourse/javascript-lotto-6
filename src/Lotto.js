@@ -1,4 +1,4 @@
-import { ERROR } from './util/constant.js';
+import { ERROR, NUMBERS, LOTTO_NUMBER_RANGE } from './util/constant.js';
 
 class Lotto {
   #numbers;
@@ -23,14 +23,14 @@ class Lotto {
   }
 
   notNumber(number) {
-    if (/[^0-9]/g.test(number)) {
+    if (/[\D]/g.test(number)) {
       throw ERROR.notNumberic;
     }
   }
 
   // 6개가 아닌 경우
   notSixNumber() {
-    if (this.#numbers.length !== 6) {
+    if (this.#numbers.length !== NUMBERS.lottoLength) {
       throw ERROR.notSixNumber;
     }
   }
@@ -38,12 +38,12 @@ class Lotto {
   // 1~45사이의 정수가 아닌 경우
   notRangeNumber() {
     this.#numbers.forEach(number => {
-      return this.numberListRangeCheck(number);
+      return this.numberListRangeCheck(Number(number));
     });
   }
 
   numberListRangeCheck(number) {
-    if (Number(number) < 1 || Number(number) > 45) {
+    if (number < LOTTO_NUMBER_RANGE[0] || number > LOTTO_NUMBER_RANGE[1]) {
       throw ERROR.rangeOverInput;
     }
   }
