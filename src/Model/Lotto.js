@@ -23,18 +23,24 @@ class Lotto {
   // TODO: 추가 기능 구현
   static generateNumbers(count) {
     const lottoNumbers = [];
+
+    function generateUniqueNumbers() {
+      return Random.pickUniqueNumbersInRange(1, 45, 6);
+    }
+
     for (let i = 0; i < count; i++) {
-      let uniqueNumbers;
-      do {
-        uniqueNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-      } while (
+      let uniqueNumbers = generateUniqueNumbers();
+      while (
         lottoNumbers.some((numbers) =>
           numbers.every((num) => uniqueNumbers.includes(num))
         )
-      );
+      ) {
+        uniqueNumbers = generateUniqueNumbers();
+      }
       const sortedNumbers = uniqueNumbers.sort((a, b) => a - b);
       lottoNumbers.push(sortedNumbers);
     }
+
     return lottoNumbers;
   }
 }

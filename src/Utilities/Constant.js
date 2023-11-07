@@ -2,6 +2,9 @@ export const MESSAGE = {
   PURCHASE_AMOUNT: `구입 금액을 입력해 주세요.`,
   LOTTO_NUMBER: `당첨 번호를 입력해 주세요.`,
   BONUS_NUMBER: `보너스 번호를 입력해 주세요.`,
+  PURCHASING_TEXT: `개를 구매했습니다. \n`,
+  IN_TOTAL: `당첨 통계`,
+  MID_BAR_TRIO: `---`,
 };
 
 export const STATISTICS = {
@@ -28,4 +31,12 @@ export const SCOREBOARD = {
   MATCH_5: "5개 일치 (1,500,000원)",
   MATCH_5_BONUS: "5개 일치, 보너스 볼 일치 (30,000,000원)",
   MATCH_6: "6개 일치 (2,000,000,000원)",
+};
+
+export const PRIZES = {
+  6: 2_000_000_000,
+  5: 1_500_000,
+  4: 50_000,
+  3: 5_000,
+  "5+bonus": 30_000_000,
 };
