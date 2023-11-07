@@ -17,7 +17,7 @@ class LottoController {
 			this.#lottoMaker.getAmount() / INPUT_MESSAGE.LOTTO_UNITS,
 			this.#lottoMaker.getLottoNumbers()
 		);
-		await this.matching();
+		await this.inputNumbers();
 	}
 
 	async initializeLotto() {
@@ -32,12 +32,28 @@ class LottoController {
 		}
 	}
 
-	async matching() {
+	async inputNumbers() {
+		await this.inputMatchNumbers();
+		await this.inputBonusNumber();
+	}
+
+	async inputMatchNumbers() {
 		while (true) {
 			let matchNumbers = await inputView.readMatchNumbers();
 
 			if (validator.matchNumberValidator(matchNumbers.split(','))) {
 				this.#lotto = new Lotto(matchNumbers.split(','));
+				break;
+			}
+		}
+	}
+
+	async inputBonusNumber() {
+		while (true) {
+			let bonusNumber = await inputView.readBonusNumber();
+
+			if (validator.bonusNumberValidator(this.#lotto.getNumbers(), bonusNumber)) {
+				this.#lotto.setBonusNumber(bonusNumber);
 				break;
 			}
 		}

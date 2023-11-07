@@ -10,6 +10,10 @@ const inputView = {
 		return this.getUserInput(INPUT_MESSAGE.matchNumbers);
 	},
 
+	readBonusNumber() {
+		return this.getUserInput(INPUT_MESSAGE.bonusNumber);
+	},
+
 	async getUserInput(message) {
 		const result = await Console.readLineAsync(`${message}\n`);
 		return result;
