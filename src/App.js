@@ -4,7 +4,7 @@ import Output from './domain/Output.js';
 import GenerateLotto from './domain/GenerateLotto.js';
 import isWinningLotto from './domain/CheckLotto.js';
 import ROI from './domain/CalculateROI.js';
-import Lotto from './domain/Lotto.js';
+import Lotto from './Lotto.js';
 
 class App {
   async play() {

@@ -1,4 +1,4 @@
-import { MAGIC_NUMBER } from '../constants/MagicNumber';
+import { MAGIC_NUMBER } from '../constants/MagicNumber.js';
 
 export default function ROI(amount, winningNumber) {
   const prize = [

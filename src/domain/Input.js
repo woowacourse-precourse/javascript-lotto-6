@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 import { validAmount, validBonusNumber } from './ValidationInput.js';
 import { MESSAGE } from '../constants/Message.js';
 

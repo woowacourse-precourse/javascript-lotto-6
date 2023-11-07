@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { MAGIC_NUMBER } from '../constants/MagicNumber';
+import { MAGIC_NUMBER } from '../constants/MagicNumber.js';
 
 export default function GenerateLotto(count) {
   const lottoNumbers = [];

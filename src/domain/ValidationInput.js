@@ -1,5 +1,5 @@
-import { ERROR } from '../constants/Error';
-import { MAGIC_NUMBER } from '../constants/MagicNumber';
+import { ERROR } from '../constants/Error.js';
+import { MAGIC_NUMBER } from '../constants/MagicNumber.js';
 
 export function validAmount(amount) {
   if (!Number(amount)) {
