@@ -8,6 +8,7 @@ class LottoGameController {
   #winningLotto;
   #purchaseAmount;
   #lottoTicket;
+  #bonusNumber;
 
   constructor() {}
 
@@ -34,8 +35,21 @@ class LottoGameController {
   }
 
   async readBonusNumber() {
-    const input = await InputView.lottoBonusNumber();
+    this.#bonusNumber = await InputView.lottoBonusNumber();
   }
+
+  async handlePurchaseAmountError(amount) {
+    try {
+      InputValidator.purchaseAmount(amount);
+      this.#purchaseAmount = amount;
+      this.setLottoTicketCount(amount);
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+      await this.readPurchaseAmount();
+      await this.handlePurchaseAmountError(this.#purchaseAmount);
+    }
+  }
+
   async handleWinningNumberError(numbers) {
     try {
       InputValidator.winningNumber(numbers);
@@ -48,15 +62,14 @@ class LottoGameController {
     }
   }
 
-  async handlePurchaseAmountError(amount) {
+  async handleBonusNumberError(number) {
     try {
-      InputValidator.purchaseAmount(amount);
-      this.#purchaseAmount = amount;
-      this.setLottoTicketCount(amount);
+      InputValidator.bonusNumber(number);
+      this.#bonusNumber = number;
     } catch (error) {
       OutputView.printErrorMessage(error);
-      await this.readPurchaseAmount();
-      await this.handlePurchaseAmountError(this.#purchaseAmount);
+      await this.readBonusNumber();
+      await this.handleBonusNumberError(this.#bonusNumber);
     }
   }
 
