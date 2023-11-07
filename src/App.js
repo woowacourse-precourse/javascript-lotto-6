@@ -8,36 +8,68 @@ class App {
     this.lottoManagement = new LottoManagement();
     this.lottoResultChecker = new LottoResultChecker();
   }
-  async play() {
-    this.inputPurchasePrice = await this.getPurchasePrice();
 
-    this.purchasePrice = this.convertToNum(this.inputPurchasePrice);
-    this.checkValidationInputPrice(this.purchasePrice);
+  async play() {
+    while (1) {
+      try {
+        this.inputPurchasePrice = await this.getPurchasePrice();
+
+        this.purchasePrice = this.convertToNum(this.inputPurchasePrice);
+
+        this.checkValidationInputPrice(this.purchasePrice);
+
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
     const lottoCount = Number(this.purchasePrice / lottoPrice);
 
-    const generatedLottoNumbers =
-      this.lottoManagement.getLottoArray(lottoCount);
-    const generatedLottoNumbersArr = generatedLottoNumbers.map((lotto) =>
+    try {
+      this.generatedLottoNumbers =
+        this.lottoManagement.getLottoArray(lottoCount);
+    } catch (error) {
+      Console.print(error.message);
+    }
+
+    const generatedLottoNumbersArr = this.generatedLottoNumbers.map((lotto) =>
       lotto.getNumbers()
     );
 
     Console.print(`${lottoCount}개를 구매했습니다.`);
 
-    generatedLottoNumbers.forEach((lotto) => {
+    this.generatedLottoNumbers.forEach((lotto) => {
       lotto.print();
     });
 
-    this.winningNumbers = this.lottoResultChecker.convertToArr(
-      await this.lottoResultChecker.inputWinningLottoNum()
-    );
+    while (1) {
+      this.winningNumbers = this.lottoResultChecker.convertToArr(
+        await this.lottoResultChecker.inputWinningLottoNum()
+      );
 
-    new Lotto(this.winningNumbers);
+      try {
+        new Lotto(this.winningNumbers);
 
-    this.bonusNumber = this.convertToNum(await this.inputBonusNumber());
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
 
-    this.checkValidateInputBonus(this.bonusNumber);
+    while (1) {
+      this.bonusNumber = this.convertToNum(await this.inputBonusNumber());
 
-    this.includedbonusArr = this.countBonuses(generatedLottoNumbers);
+      try {
+        this.checkValidateInputBonus(this.bonusNumber);
+
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    this.includedbonusArr = this.countBonuses(this.generatedLottoNumbers);
 
     this.matchingCounts = this.lottoResultChecker.compareInputNumAndRandomNum(
       this.winningNumbers,
