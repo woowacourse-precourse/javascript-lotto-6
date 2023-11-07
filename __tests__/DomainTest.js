@@ -24,24 +24,14 @@ const getLogSpy = () => {
   logSpy.mockClear();
   return logSpy;
 };
-// X getPrice
-// printLotto
-// getWinNum
-// getBonusNum
 
-// generateAndStoreLotto
-// checkWin
-// getWinCountArr
-// printWinCount
-// calculateReturnRate
-// printReturnRate
 describe('핵심 로직 테스트', () => {
   test('generateAndStoreLotto() - 생성된 로또가 배열에 순차적으로 저장한다.', () => {
     // given
     const arr = [];
 
     // when
-   LottoController.generateAndStoreLotto(arr);
+    LottoController.generateAndStoreLotto(arr);
 
     // then
     expect(arr).toEqual([{}]);
