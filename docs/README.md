@@ -11,12 +11,12 @@
 # 구매장수 출력 PrintNUmberOfLotto#printNumberOfLotto()
 - [x]반환한 값을 이용하여 'x개를 구매했습니다'를 출력한다. 
 
-# 번호 출력
-- []아래 과정들을 구매 장수만큼 반복한다.
-- []pickUniqueNumbersInRange를 통해 1부터 45까지 6개의 랜덤 번호를 뽑는다.
-- []로또 번호는 sort()함수를 이용하여 오름차순으로 정렬한다.
-- []배열을 생성해 저장한다.
-- []출력한다.
+# 번호 출력 PrintPurchasedLottoResult#result()
+- [x]아래 과정들을 구매 장수만큼 반복한다.
+- [x]pickUniqueNumbersInRange를 통해 1부터 45까지 6개의 랜덤 번호를 뽑는다.
+- [x]로또 번호는 sort()함수를 이용하여 오름차순으로 정렬한다.
+- [x]출력한다.
+- [x]배열을 생성해 push함수를 이용해 저장한다.
 
 # 로또 번호 입력
 - []로또 번호를 ,로 구분하여 입력받는다.
