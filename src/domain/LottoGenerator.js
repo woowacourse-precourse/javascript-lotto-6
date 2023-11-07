@@ -4,6 +4,8 @@ import { LOTTO_INFO } from "../utils/constants";
 import LottoValidator from "../Validator/LottoValidator";
 
 class LottoGenerator {
+  #bonus;
+
   constructor(purcaseAmount) {
     this.#validate(purcaseAmount);
     this.#generateLotto(purcaseAmount);
@@ -23,6 +25,14 @@ class LottoGenerator {
       this.items.push(new Lotto(numbers));
       this.purchasedList.push(numbers);
     });
+  }
+
+  set bonus (bonus) {
+    this.#bonus = bonus;
+  }
+
+  get bonus () {
+    return this.#bonus;
   }
 }
 export default LottoGenerator;
