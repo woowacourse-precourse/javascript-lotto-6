@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils'
-import { INPUT } from '../constants/INPUT.js';
+import { INPUT } from '../../old/constants/INPUT.js';
 import LottoUtils from '../model/LottoUtils.js';
 
 export default class View {

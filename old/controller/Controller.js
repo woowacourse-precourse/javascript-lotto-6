@@ -1,6 +1,6 @@
-import View from '../view/View.js'
-import LottoGame from '../model/LottoGame.js';
-import LottoCalculator from '../model/LottoCalculator.js';
+import View from '../../../src/view/View.js'
+import LottoGame from '../../../src/model/LottoGame.js';
+import LottoCalculator from '../../../src/model/LottoCalculator.js';
 
 export default class Controller {
   #view;
