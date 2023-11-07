@@ -1,5 +1,5 @@
 // 예외: 1,000원으로 나누어 떨어지는지
-export function validAmount(amount){
+export function isValidAmount(amount){
   if(amount % 1000 === 0) { 
     return;
   }
