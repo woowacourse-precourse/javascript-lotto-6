@@ -1,5 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { LOTTERY } from './constants.js';
+import { MESSAGE, LOTTERY } from './constants.js';
 import Lotto from './Lotto.js';
 import UserInput from './UserInput.js';
 
@@ -11,6 +11,8 @@ export default class Computer {
   async issueLottoForUserInput() {
     const purchaseAmount = await UserInput.getPurchaseAmount();
     const lottoCnt = purchaseAmount / 1000;
+    Console.print(MESSAGE.PURCHASE_COUNT(lottoCnt));
+
     for (let count = 0; count < lottoCnt; count++) {
       this.issueLotto();
     }
@@ -24,6 +26,10 @@ export default class Computer {
     );
 
     this.lottos.push(new Lotto(randNum));
+  }
+
+  printLotto() {
+    this.lottos.forEach((lotto) => Console.print(lotto.getNumbers()));
   }
 
   resetLotto() {
