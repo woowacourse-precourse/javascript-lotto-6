@@ -36,7 +36,11 @@ class ResultCalculator {
     if (cnt < RANK.fifth) {
       return;
     }
-    if (cnt === 5 && this.#isBonusMatch(lotto, winningLotto)) {
+
+    if (
+      cnt === WINNING_INFO[RANK.second].matchingNumber &&
+      this.#isBonusMatch(lotto, winningLotto)
+    ) {
       this.#cntRank[RANK.second] += 1;
       return;
     }
