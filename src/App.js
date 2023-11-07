@@ -4,6 +4,7 @@ import { inputAmount, inputBonnusNum, inputWinningNum } from "./view/Input.js";
 import { printLottoCount, printLottoNum, printLottoResult, printRate } from "./view/Output.js";
 import Lotto from "./Lotto.js";
 import { generateLottoNum } from "./utils/generateRandomNum.js";
+import { PRIZES } from "./constants/constants.js";
 
 class App {
   async play() {
@@ -68,11 +69,11 @@ class App {
 
   rateCalculator(result, amount){
     let prize = 0;
-    prize += result["3"] * 5000;
-    prize += result["4"] * 50000;
-    prize += result["5"] * 1500000;
-    prize += result["bonus"] * 3000000;
-    prize += result["6"] * 2000000000;
+    prize += result["3"] * PRIZES[3];
+    prize += result["4"] * PRIZES[4];
+    prize += result["5"] * PRIZES[5];
+    prize += result["bonus"] * PRIZES["bonus"];
+    prize += result["6"] * PRIZES[6];
 
     return (prize / amount * 100).toFixed(1)
   }
