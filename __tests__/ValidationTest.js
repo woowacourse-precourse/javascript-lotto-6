@@ -58,4 +58,10 @@ describe('Lotto Number Validation', () => {
       inputValidator.validateNoIncludeBlank(blankTestList);
     }).toThrow(ErrorMessage);
   });
+
+  test('범위를 벗어나는 숫자가 입력되면 예외가 발생한다.', () => {
+    expect(() => {
+      inputValidator.validateNotInRange([1, 2, 3, 4, 5, 46]);
+    }).toThrow(ErrorMessage);
+  });
 });
