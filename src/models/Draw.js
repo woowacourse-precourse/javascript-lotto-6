@@ -3,19 +3,21 @@ import { lottoInfo } from "../constants";
 
 const draw = {
   /*
+   * purchased: 사용자가 구매한 로또
    * winning: 사용자가 입력한 당첨 번호
    * bounus: 사용자가 입력한 보너스 번호
-   * purchased: 사용자가 구매한 로또
    */
   getResult: function (purchased, winning, bounus) {
-    const matches = this.getLottoMatches(purchased, winning);
-    const result = this.addBounusMatches(matches, bounus);
+    let matches = this.getLottoMatches(purchased, winning);
+    const count = this.getBounusMatches(matches, bounus);
+    matches.splice(3, 0, count);
 
     return result;
   },
 
+  /* 5등, 4등, 3등, 1등 개수의 개수를 반환한다. */
   getLottoMatches: function (lottos, winning) {
-    let matches = [0, 0, 0, 0]; // (3개 일치하는 개수)부터 (6개 일치하는 개수)
+    let matches = [0, 0, 0, 0]; // 5등, 4등, 3등, 1등 개수
 
     lottos.forEach((lotto) => {
       const count = this.countMatches(lotto, winning);
@@ -25,6 +27,7 @@ const draw = {
     return matches;
   },
 
+  /* 로또번호와 당첨번호가 일치하는 개수를 센다. */
   countMatches: function (lotto, winning) {
     let count = 0;
     winning.forEach((number) => {
@@ -34,13 +37,15 @@ const draw = {
     return count;
   },
 
-  addBounusMatches: function (matches, bounus) {
+  /* 2등의 개수를 반환한다. */
+  getBounusMatches: function (matches, bounus) {
+    let count = 0;
+
     if (bounus === this.pickBounusNumber()) {
-      const fiveMatches = matches[2];
-      matches.splice(3, 0, fiveMatches);
+      count = matches[2];
     }
 
-    return matches;
+    return count;
   },
 
   pickBounusNumber: function () {
