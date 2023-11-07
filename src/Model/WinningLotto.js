@@ -1,9 +1,9 @@
 import Lotto from './Lotto.js';
-import { throwError, conditions } from '../util/Validator.js';
+import { throwError, Conditions } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
 
 const { BONUS_NUMBER, BONUS_RANGE, BONUS_DUPLICATE } = ERROR;
-const { isPositiveInteger, isInRange } = conditions;
+const { isPositiveInteger, isInRange } = Conditions;
 
 class WinningLotto extends Lotto {
   #bonusNumber;

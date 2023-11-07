@@ -73,7 +73,7 @@ class LottoGame {
   }
 
   #getWinningMachineResults() {
-    const matchResult = this.#winningMachine.getPrizeStructure();
+    const matchResult = this.#winningMachine.getMatchResult();
     const rateOfReturn = this.#winningMachine.getRateOfReturn();
 
     return { matchResult, rateOfReturn };

@@ -1,12 +1,12 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import { conditions, throwError } from '../util/Validator.js';
+import { Conditions, throwError } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
 import { SETTING } from '../constants/GameSetting.js';
 
 const { PAYMENT_NUMBER, PAYMENT_THOUSAND } = ERROR;
 const { UNIT, RANGE_MIN, RANGE_MAX, MAX_SIZE } = SETTING;
-const { isPositiveInteger, isThousandUnits } = conditions;
+const { isPositiveInteger, isThousandUnits } = Conditions;
 
 class LottoMachine {
   #quantity;

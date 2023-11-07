@@ -4,7 +4,7 @@ import { SETTING } from '../constants/GameSetting.js';
 
 const { EMPTY, UNIT, RANGE_MIN, RANGE_MAX, MAX_SIZE, MIN_VALUE } = SETTING;
 
-const conditions = {
+const Conditions = {
   isNotEmpty(value) {
     return value !== EMPTY;
   },
@@ -38,10 +38,10 @@ function throwError(message, condition) {
 
 function validateCommonInput(value) {
   const inputConditions = [
-    { message: ERROR.COMMON_INPUT, condition: conditions.isNotEmpty(value) },
+    { message: ERROR.COMMON_INPUT, condition: Conditions.isNotEmpty(value) },
     {
       message: ERROR.COMMON_WHITESPACE,
-      condition: conditions.hasNoWhitespace(value),
+      condition: Conditions.hasNoWhitespace(value),
     },
   ];
   inputConditions.forEach(({ message, condition }) => {
@@ -49,4 +49,4 @@ function validateCommonInput(value) {
   });
 }
 
-export { throwError, validateCommonInput, conditions };
+export { throwError, validateCommonInput, Conditions };
