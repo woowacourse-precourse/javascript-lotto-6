@@ -31,6 +31,13 @@ class App {
     
     return randomNum;
   }
+  buyLottoEntire() {
+    const num = this.lottoEach;
+
+    for (let i = 0; i < num; i++) {
+      this.lottoAll.push(this.randomPickNum());
+    }
+  }
     
   }
   }
