@@ -17,6 +17,14 @@ class Lotto {
   printLotto() {
     Console.print(`[${this.#numbers.join(', ')}]`);
   }
+
+  checkMatchNumber(winNumbers, bonusNumber) {
+    const match = winNumbers.filter((win) =>
+      this.#numbers.includes(win)
+    ).length;
+    const bonus = this.#numbers.includes(bonusNumber);
+    return { match, bonus };
+  }
   // TODO: 추가 기능 구현
 }
 
