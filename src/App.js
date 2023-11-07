@@ -22,9 +22,7 @@ class App {
 
   async play() {
     const buyLotto = new BuyLotto(LOTTO_PRICE, DAILY_LIMIT_PRICE, NUMBER_CHECK);
-    const purchaseAmount = await buyLotto.inputPurchaseAmount();
-    buyLotto.validateInputPurchaseAmount(purchaseAmount);
-    buyLotto.getLottoNumbers(purchaseAmount);
+    await buyLotto.start();
 
     const winningNumbers = await this.generateWinningNumbers();
     const bonusNumber = await this.generateBonusNumber();

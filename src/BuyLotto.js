@@ -41,6 +41,12 @@ class BuyLotto {
       MissionUtils.Console.print(`[${randomNumber.join(', ')}]`);
     }
   }
+
+  async start() {
+    const purchaseAmount = await this.inputPurchaseAmount();
+    await this.validateInputPurchaseAmount(purchaseAmount);
+    await this.getLottoNumbers(purchaseAmount);
+  }
 }
 
 export default BuyLotto;
