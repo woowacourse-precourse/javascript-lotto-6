@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import Lotto from '../src/Lotto.js';
 
 describe('로또 클래스 테스트', () => {
