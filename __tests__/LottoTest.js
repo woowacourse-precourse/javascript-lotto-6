@@ -13,7 +13,7 @@ describe('Lotto 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  test('로또 번호가 범위( 1 ~ 45 ) 예외 테스트', () => {
+  test('로또 번호 범위(1 ~ 45) 예외 테스트', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 50]);
     }).toThrow('[ERROR]');

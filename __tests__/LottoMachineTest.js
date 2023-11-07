@@ -4,7 +4,7 @@ import ERROR from '../src/constants/Error.js';
 
 describe('LottoMachine 클래스 테스트', () => {
   describe('결제 금액 유효성 검사 테스트', () => {
-    test('결제금액 양의 정수 예외값 테스트', () => {
+    test('결제금액 특이값 예외 테스트', () => {
       expect(() => {
         new LottoMachine('positivetest');
       }).toThrow(new CustomError(ERROR.PAYMENT_NUMBER));
