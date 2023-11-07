@@ -26,8 +26,8 @@ class UserInput {
     }
 
     static async RequestBonus(numbers) {
-        const bonus = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.BONUS_NUMBER}`);
-        new Bonus(bonus, numbers);
+        const input = await MissionUtils.Console.readLineAsync(`${INPUT_MESSAGE.BONUS_NUMBER}`);
+        const bonus = await Bonus.changeIntoInt(input, numbers);
 
         return bonus;
     }
