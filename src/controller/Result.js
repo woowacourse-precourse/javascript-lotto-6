@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Result {
   static getWinningResult(resultArray) {
     this.winningThird = resultArray.filter(x => x != 0 && x % 3 == 0).length;
@@ -15,18 +17,17 @@ class Result {
   }
   static calculrateRateOfReturn(userPurchaseAmount) {
     this.RateOfReturn = (this.winMoney - userPurchaseAmount) / userPurchaseAmount * 100;
-    return RateOfReturn;
   }
   static printWinningStastics(winningInFive) {
     Console.print(`
-      당첨통계
-      ---
-      3개 일치 (5,000원) - ${this.winningThird}개
-      4개 일치 (50,000원) - ${this.winningForth}개
-      5개 일치 (1,500,000원) - ${winningInFive[0]}개
-      5개 일치, 보너스 볼 일치 (30,000,000원) - ${winningInFive[1]}개
-      6개 일치 (2,000,000,000원) - ${this.winningSix}개
-      총 수익률은 ${(100-(-this.winMoney)).toFixed(1)}%입니다.`)
+당첨통계
+---
+3개 일치 (5,000원) - ${this.winningThird}개
+4개 일치 (50,000원) - ${this.winningForth}개
+5개 일치 (1,500,000원) - ${winningInFive[0]}개
+5개 일치, 보너스 볼 일치 (30,000,000원) - ${winningInFive[1]}개
+6개 일치 (2,000,000,000원) - ${this.winningSix}개
+총 수익률은 ${(100-(-this.RateOfReturn)).toFixed(1)}%입니다.`)
   }
 }
 
