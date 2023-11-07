@@ -2,7 +2,7 @@ import SetGame from "./settings/Settings.js";
 import OutputView from "./view/OutputView.js";
 import Issue from "./utils/Issue.js";
 import Compare from "./utils/Compare.js";
-import Stats from "./utils/Stats.js";
+import Stats from "./utils/stats.js";
 import MESSAGE from "./constants/message.js";
 
 class App {
