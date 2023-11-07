@@ -70,5 +70,5 @@ const isOutOfRange = (input) => {
 
 const isDuplicated = (input) => {
   const numbers = new Set(input.split(',').map((el) => Number(el)));
-  return numbers.length !== LOTTO_NUMBERS_LENGTH;
+  return numbers.size !== LOTTO_NUMBERS_LENGTH;
 };
