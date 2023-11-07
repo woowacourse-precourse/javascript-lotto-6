@@ -3,6 +3,7 @@ import { MODE } from "./constants/mode.js";
 import { Random, Console } from "@woowacourse/mission-utils";
 import { Input } from "./Input.js";
 import { Output } from "./Output.js";
+import Lotto from "./Lotto.js";
 
 class App {
   #money;
@@ -33,12 +34,17 @@ class App {
       this.#winningNumbers,
       MODE.WINNING_NUMBERS
     );
-
+    const lottoGame = new Lotto(this.#winningNumbers);
     this.#bonusNumber = await this.untilValueAvailable(
       this.#bonusNumber,
       MODE.BONUS_NUMBER,
       this.#winningNumbers
     );
+
+    lottos.forEach((lotto) => {
+      const compareResult = lottoGame.compareLottos(lotto, this.#bonusNumber);
+      lottoGame.saveCompareResult(compareResult, this.lottoBoard);
+    });
   }
 
   makeLotto(money) {
@@ -92,4 +98,6 @@ class App {
   }
 }
 
+const app = new App();
+app.play();
 export default App;
