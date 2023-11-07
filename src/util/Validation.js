@@ -36,7 +36,7 @@ const checkInputRange = (input, message) => {
 };
 
 const checkBonusDuplicated = (bonusNumber, winningNumbers) => {
-  if (winningNumbers.split(',').includes(bonusNumber))
+  if (winningNumbers.includes(bonusNumber))
     throw new Error(ERROR_MESSAGES.bonusDuplicated);
 };
 
@@ -74,6 +74,7 @@ const checkLottoNumbers = (inputs) => {
 };
 
 const checkWinningNumbers = (inputs) => {
+  checkDuplicatedNumber(inputs.split(','));
   checkInputLength(
     inputs,
     GAME_RULE_NUMBER.lottoLength,
