@@ -29,3 +29,13 @@ export const duplicateNum = (numbers) => {
     }
   }
 };
+
+export const amountValidate = (value) => {
+  numberType(Number(value));
+  amountType(value);
+};
+
+export const bonusNumValidate = (bonusNum) => {
+  numberType(Number(bonusNum));
+  numberRange(bonusNum);
+};
