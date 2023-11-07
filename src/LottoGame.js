@@ -21,8 +21,8 @@ class LottoGame {
       try {
         const lotto = new Lotto(lottoMachine.sortLottoNumbers(lottoArray));
         lottoList.push(lotto.getNumbers());
+        this.#lottoTickets.push(lotto.getNumbers());
         generateCount++;
-        console.log(lotto.getNumbers());
       } catch (error) {
         console.error(error.message);
       }
