@@ -1,3 +1,5 @@
+export const LOTTO_PRICE = 1000;
+
 class Lotto {
   #numbers;
 
@@ -12,7 +14,9 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  static calculateQuantityFromPrice(price) {
+    return price / LOTTO_PRICE;
+  }
 }
 
 export default Lotto;
