@@ -33,6 +33,10 @@ class OutputHandler {
     this.printAllRankResult(rankResult);
     Console.print(MESSAGE.OUTPUT.PROFIT_RATE(profitRate));
   }
+
+  static printErrorMessage(error) {
+    Console.print(error.message);
+  }
 }
 
 export default OutputHandler;
