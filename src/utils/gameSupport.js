@@ -109,6 +109,32 @@ export const updateWinningResult = (winningResults, winningLottoCount) => {
       break;
   }
 };
+export const checkLottoNumbers = (
+  winningNumberArray,
+  totalLottoArray,
+  bonusNumber
+) => {
+  const winningResults = {
+    [WINNING_LOTTO_COUNT.THREE]: 0,
+    [WINNING_LOTTO_COUNT.FOUR]: 0,
+    [WINNING_LOTTO_COUNT.FIVE]: 0,
+    winningResultWithBonus: 0,
+    [WINNING_LOTTO_COUNT.SIX]: 0,
+  };
+
+  for (const lottoArray of totalLottoArray) {
+    if (isWinningLottoWithBonus(winningNumberArray, lottoArray, bonusNumber)) {
+      winningResults["winningResultWithBonus"] += 1;
+      continue;
+    }
+    const winningLottoCount = getWinningLottoResult(
+      winningNumberArray,
+      lottoArray
+    );
+    updateWinningResult(winningResults, winningLottoCount);
+  }
+  return winningResults;
+};
 
 export const totalProfit = (winningResults) => {
   let totalReward = 0;
