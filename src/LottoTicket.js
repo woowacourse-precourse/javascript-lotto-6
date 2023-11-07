@@ -1,5 +1,5 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto";
+import { MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from './Lotto';
 
 class LottoTicket {
   static generateLottotickets(purchaseAmount) {
@@ -8,7 +8,7 @@ class LottoTicket {
       const LOTTO_NUMBERS = MissionUtils.Random.pickUniqueNumbersInRange(
         1,
         45,
-        6
+        6,
       );
       LOTTO_TICKETS.push(new Lotto(LOTTO_NUMBERS));
     }
