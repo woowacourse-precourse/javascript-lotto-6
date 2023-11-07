@@ -1,11 +1,14 @@
 import { Console } from "@woowacourse/mission-utils";
 class LottoBudget {
     lottoBudget;
-    MIN_LOTTO_NUM=0;
-    MAX_LOTTO_NUM=10;
-    LOTTO_PRICE=1000;
     ERROR_MESSEGE="[ERROR] 숫자가 잘못된 형식입니다.";
     GET_LOTTO_BUDGET_INPUT="구입금액을 입력해 주세요.\n";
+
+    constructor(MIN_LOTTO_NUM,MAX_LOTTO_NUM,LOTTO_PRICE) {
+        this.MIN_LOTTO_NUM=MIN_LOTTO_NUM;
+        this.MAX_LOTTO_NUM=MAX_LOTTO_NUM;
+        this.LOTTO_PRICE=LOTTO_PRICE;
+    }
 
     isValid(inputNumber){
         if(inputNumber < this.MIN_LOTTO_NUM*this.LOTTO_PRICE || inputNumber > this.MAX_LOTTO_NUM*this.LOTTO_PRICE){
