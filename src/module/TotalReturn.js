@@ -8,7 +8,7 @@ const totalReturn = (purchasedLottoAmount, matchCount) => {
     matchCount.fiveBonusMatches * money.fiveBonusMatches +
     matchCount.sixMatches * money.sixMatches;
   const tempReturn = (totalWinning / purchasedLottoAmount) * 100;
-  return Number(tempReturn.toFixed(1));
+  return tempReturn.toFixed(1);
 };
 
 export default totalReturn;

@@ -36,7 +36,8 @@ class ValidateBonus {
   }
 
   checkDuplicated(userInput) {
-    if (this.#winningNumbers.includes(userInput)) {
+    const winningArray = this.#winningNumbers.split(',');
+    if (winningArray.some(number => number === userInput)) {
       throw new Error(errorMessage.duplicatedBonusNumber);
     }
   }
