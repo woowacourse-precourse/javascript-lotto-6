@@ -43,4 +43,19 @@ class MainController {
       }
     }
   }
+  static async UserBonus() {
+    let userBonusNumber = await Input.getBonusNumber();
+    while(true) {
+      try {
+        const bonus = new Bonus(userBonusNumber);
+        bonus.IsinFive(this.resultArray);
+        this.winningInFive = bonus.IsinBonusNumber(this.lottoNumber);
+        break;
+      }
+      catch(error) {
+        Output.printError(error);
+        userBonusNumber = await Input.getBonusNumber();
+      }
+    }
+  }
 }
