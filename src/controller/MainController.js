@@ -15,7 +15,7 @@ class MainController {
       try {
         const purchase = new Purchase(userPurchaseAmount);
         this.userPurchaseAmount = userPurchaseAmount;
-        this.lottoCount = purchase.getPurchaseAmount();
+        this.lottoCount = purchase.calculatePurchaseCount();
         Output.printPurchaseCount(this.lottoCount);
         break;
       }
@@ -59,7 +59,7 @@ class MainController {
     }
   }
   static getWinningResult() {
-    Result.getWinningResult;
+    Result.getWinningResult(this.resultArray);
     Result.calculateWinningMoney(this.winningInFive);
     Result.calculrateRateOfReturn(this.userPurchaseAmount);
     Result.printWinningStastics(this.winningInFive);
