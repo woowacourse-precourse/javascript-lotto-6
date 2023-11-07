@@ -1,5 +1,6 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+
 import Ticket from './Ticket.js';
 
 async function getPurchasePrice() {
@@ -27,7 +28,7 @@ async function getValidPurchasePrice() {
       validatePurchasePrice(purchasePrice);
       return purchasePrice;
     } catch (error) {
-      Console.print('[ERROR]');
+      Console.print(error.message);
     }
   }
 }
@@ -58,7 +59,7 @@ async function getValidLottoNumber() {
       const lotto = new Lotto(numbers);
       return lotto.Numbers;
     } catch (error) {
-      Console.print('[ERROR]');
+      Console.print(error.message);
     }
   }
 }
