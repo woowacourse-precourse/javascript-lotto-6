@@ -1,5 +1,4 @@
 /* eslint-disable default-case */
-import { Console, Random } from '@woowacourse/mission-utils';
 import App from './App.js';
 
 class Lotto {
