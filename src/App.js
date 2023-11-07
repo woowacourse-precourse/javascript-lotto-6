@@ -2,19 +2,14 @@ import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
-  #orderPrice;
-  #orderQuantity;
-  #lottoOrder;
-  #winningNumbers;
-  #bonusNumber;
-  #lottoStat;
-  #prizeMoney;
-  #rateOfEarn;
+  #winningNumbers = [];
 
   constructor() {
-    this.#lottoOrder = [];
-    this.#winningNumbers = [];
-    this.#lottoStat = [0, 0, 0, 0, 0, 0];
+    let count = 0;
+    while(count <= 45) {
+      this.#winningNumbers.push(false);
+      count++;
+    }
   }
 
   getUserInput = async () => {
@@ -43,14 +38,6 @@ class App {
     if(!Number.isInteger(userInputNum)) throw new Error('[ERROR] : input is not a integer');
     if(userInputNum <= 0) throw new Error('[ERROR] : pirce must greater than 0');
     if(userInputNum % 1000 != 0) throw new Error('[ERROR] : cannot divide price by 1,000');
-  }
-
-  setOrderPrice = (userInputPrice) => {
-    this.#orderPrice = userInputPrice;
-  }
-
-  setOrderQuantity = (userInputPrice) => {
-    this.#orderQuantity = userInputPrice/1000;
   }
 
   generateLottoNumbers = () => {
@@ -111,12 +98,6 @@ class App {
   }
 
   setWinningNumbers = (winningNumbers) => {
-    let count = 0;
-    while(count <= 45) {
-      this.#winningNumbers.push(false);
-      count++;
-    }
-
     winningNumbers.forEach((winningNumber) => {
       this.#winningNumbers[winningNumber] = true;
     })
@@ -193,11 +174,11 @@ class App {
     return rateOfEarn.toFixed(3);
   }
 
-  generateLottoOrder = () => {
+  generateLottoOrder = (orderQuantity) => {
     let count = 0;
     let lottoOrder = [];
 
-    while(count < this.#orderQuantity) {
+    while(count < orderQuantity) {
       const lottoNumbers = this.generateLottoNumbers();
         
       lottoOrder.push(lottoNumbers);
@@ -242,7 +223,7 @@ class App {
       await this.getUserInputWinningNumbers();
     }
 
-    this.setWinningNumbers(parsedWinnigNumbers);
+    return parsedWinnigNumbers;
   }
 
   getUserInputBonusNumber = async () => {
@@ -263,22 +244,20 @@ class App {
   }
 
   async play() {
+    const orderPrice = await this.getUserInputPrice();
+    const orderQuantity = orderPrice / 1000;
+    const lottoOrder = this.generateLottoOrder(orderQuantity);
 
-    const userInputPrice = await this.getUserInputPrice();
-
-    this.setOrderPrice(userInputPrice);
-    this.setOrderQuantity(userInputPrice);
-
-    const lottoOrder = this.generateLottoOrder();
     this.printLottoOrder(lottoOrder);
 
-    await this.getUserInputWinningNumbers();
+    const winningNumbers = await this.getUserInputWinningNumbers();
+
+    this.setWinningNumbers(winningNumbers);
 
     const bonusNumber = await this.getUserInputBonusNumber();
-
     const lottoStat = this.getLottoStat(lottoOrder, bonusNumber);
     const prizeMoney = this.getPrizeMoney(lottoStat);
-    const rateOfEarn = this.getRateOfEarn(prizeMoney, userInputPrice);
+    const rateOfEarn = this.getRateOfEarn(prizeMoney, orderPrice);
 
     this.printLottoStat(lottoStat, rateOfEarn);
   }
