@@ -1,6 +1,7 @@
 class Computer {
   #winnerNumbers;
   #bonusNumber;
+  #prizeResult;
 
   constructor(winnnersNumbers, bonusNumber) {
     this.#winnerNumbers = winnnersNumbers;
