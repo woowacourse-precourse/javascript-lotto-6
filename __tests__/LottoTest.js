@@ -21,3 +21,27 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 });
+
+describe("Lotto 도메인 로직 단위 테스트", () => {
+  test("로또 생성 매서드", () => {
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto(numbers);
+    expect(lotto.getNumbers()).toEqual(numbers);
+  });
+
+  test("로또 생성 오류 메서드", () => {
+    const invalidNumbers = [1, 2, 3, 4];
+    expect(() => new Lotto(invalidNumbers)).toThrow();
+  });
+
+  test("checkLuckyNumber 동작 확인", () => {
+    const luckyNumber = "1,2,3,4,5,6";
+    const winNum = Lotto.checkLuckyNumber(luckyNumber);
+    expect(winNum).toEqual([1, 2, 3, 4, 5, 6]);
+  });
+
+  test("checkLuckyNumber 예외 확인", () => {
+    const invalidLuckyNumber = "1,2,3,4,5"; // 6개의 숫자가 아님
+    expect(() => Lotto.checkLuckyNumber(invalidLuckyNumber)).toThrow();
+  });
+});
