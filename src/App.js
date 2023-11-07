@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import {
   Validator,
+  validateBonusNumber,
   validatePayment,
   validateWinningNumber,
 } from "./ValidateInput.js";
@@ -12,6 +13,7 @@ class App {
   #payment;
   #lottoCount;
   #winningNumber;
+  #bonusNumber;
 
   constructor() {
     this.lottos = [];
@@ -21,6 +23,7 @@ class App {
     await this.readPayment();
     this.lottoIssuance();
     await this.readWinningNumber();
+    await this.readBonusNumber();
   }
 
   async readPayment() {
@@ -52,6 +55,19 @@ class App {
         Validator.blank(winningNumber);
         validateWinningNumber(winningNumber.split(","));
         this.#winningNumber = winningNumber.split(",");
+        break;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
+  }
+
+  async readBonusNumber() {
+    while (true) {
+      try {
+        const bonusNumber = await Input.readBonusNumber();
+        validateBonusNumber(bonusNumber, this.#winningNumber);
+        this.#bonusNumber = Number(bonusNumber);
         break;
       } catch (error) {
         Console.print(error);
