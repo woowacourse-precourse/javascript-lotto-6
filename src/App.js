@@ -36,6 +36,7 @@ class App {
   inputWinningStats() {
     Console.print(GAME_MESSAGE.STATIC);
     this.game.setWinningStats();
+    this.game.printLottoRate();
   }
 }
 
