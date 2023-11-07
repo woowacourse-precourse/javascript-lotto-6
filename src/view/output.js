@@ -8,8 +8,12 @@ class Output{
         Console.print(`[ERROR] ${errorMessage}`);
     }
 
-    static outputBoughtLottoNumbers(boughtLottoNumber){
+    static outputBoughtLottoNumber(boughtLottoNumber){
         Console.print(`\n${boughtLottoNumber}${GAMEMST_OUTPUT_BOUGHT_LOTTO_NUMBERS}`);
+    }
+
+    static outputLottoSetNumbers(lottoSetString){
+        Console.print(`${lottoSetString}\n`);
     }
 
 }
