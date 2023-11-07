@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import {
   GAEM_RESULT_MESSAGE,
   NUMBER_OF_PURCHASED_LOTTO_MESSAGE,
+  RATE_OF_RETURN_OUTPUT_FORMAT,
   WINNING_DESCRIPTION_BY_COUNT,
 } from '../Constants.js';
 
@@ -36,9 +37,14 @@ class OutputManager {
       });
   }
 
+  printRateOfReturn(rateOfReturn) {
+    Console.print(RATE_OF_RETURN_OUTPUT_FORMAT(rateOfReturn));
+  }
+
   printGameResult({ matchingCounts, rateOfReturn }) {
     Console.print(GAEM_RESULT_MESSAGE);
     this.printMatchingResult(matchingCounts);
+    this.printRateOfReturn(rateOfReturn);
   }
 }
 

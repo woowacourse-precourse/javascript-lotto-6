@@ -109,7 +109,7 @@ class App {
   getGameResult() {
     const matchingCounts = this.getMatchingCounts();
     const totalPrize = this.getTotalPrize(matchingCounts);
-    const rateOfReturn = this.getRateOfReturn();
+    const rateOfReturn = this.getRateOfReturn(totalPrize);
     return { matchingCounts, totalPrize, rateOfReturn };
   }
 

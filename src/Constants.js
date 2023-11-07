@@ -40,9 +40,8 @@ export const GAEM_RESULT_MESSAGE = `당첨 통계\n---`;
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>
   `\n${numberOfLottos}개를 구매했습니다.`;
 
-export const convertToOutputNumberFormat = (number) => {
-  return number.toLocaleString('ko-KR');
-};
+export const RATE_OF_RETURN_OUTPUT_FORMAT = (rateOfReturn) =>
+  `총 수익률은 ${rateOfReturn.toLocaleString('ko-KR')}%입니다.`;
 
 export const WINNING_PRIZE_BY_COUNT = Object.freeze({
   3: 5000,
