@@ -16,6 +16,7 @@ class InputView {
     const purchaseAmount = await Console.readLineAsync(
       INPUT_MESSAGE.winningNumbers,
     );
+    Validator.checkWinningNumbers(purchaseAmount);
 
     return purchaseAmount;
   }
