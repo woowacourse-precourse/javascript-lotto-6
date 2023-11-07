@@ -3,12 +3,12 @@ import { lottoNumbersParser } from "./lottoNumbersParser.js";
 import { validateNumberInRange } from "../utils/validators.js";
 
 class LottoAnswer {
-  #lottoAnswer;
+  #answerLotto;
   #bonusNumber;
 
-  constructor(lottoAnswer, bonusNumber) {
-    LottoAnswer.#validateIsLotto(lottoAnswer);
-    this.#lottoAnswer = lottoAnswer;
+  constructor(answerLotto, bonusNumber) {
+    LottoAnswer.#validateIsLotto(answerLotto);
+    this.#answerLotto = answerLotto;
     const parsedBonusNumber = LottoAnswer.#parseBonusNumber(bonusNumber);
     this.#validateBonusNumber(parsedBonusNumber);
     this.#bonusNumber = parsedBonusNumber;
@@ -28,7 +28,7 @@ class LottoAnswer {
 
   #compare(lotto) {
     const lottoNumbers = lotto.getNumbers();
-    const answerNumbers = this.#lottoAnswer.getNumbers();
+    const answerNumbers = this.#answerLotto.getNumbers();
     return {
       answerCount: LottoAnswer.#countIntersection(lottoNumbers, answerNumbers),
       isBonus: lottoNumbers.includes(this.#bonusNumber),
@@ -55,7 +55,7 @@ class LottoAnswer {
   }
 
   #validateNotInLottoAnswer(number) {
-    if (this.#lottoAnswer.has(number)) {
+    if (this.#answerLotto.has(number)) {
       throw new Error("[ERROR] 보너스 번호는 당첨 번호와 겹칠 수 없습니다.");
     }
   }

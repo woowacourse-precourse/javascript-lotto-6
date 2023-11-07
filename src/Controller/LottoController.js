@@ -13,8 +13,8 @@ class LottoController {
     const lottos = await repeatUntillComplete(this.readMoneyAndGetLottos)();
     LottoController.printLottos(lottos);
 
-    const lottoAnswer = await repeatUntillComplete(this.getLottoAnswerFromUser)();
-    const answer = await repeatUntillComplete(this.attachBonusNumberToAnswer)(lottoAnswer);
+    const answerLotto = await repeatUntillComplete(this.getAnswerLottoFromUser)();
+    const answer = await repeatUntillComplete(this.attachBonusNumberToLottoAnswer)(answerLotto);
 
     const result = await LottoController.getLottoResult(lottos, answer);
     LottoController.printResult(result);
@@ -34,16 +34,16 @@ class LottoController {
     OutputView.printBlankLine();
   }
 
-  async getLottoAnswerFromUser() {
+  async getAnswerLottoFromUser() {
     const lottoAnswerInput = await InputView.readLottoAnswer();
     const parsedLottoAnwerInput = lottoNumbersParser.parse(lottoAnswerInput);
     const lottoAnwer = new Lotto(parsedLottoAnwerInput);
     return lottoAnwer;
   }
 
-  async attachBonusNumberToAnswer(lottoAnswer) {
+  async attachBonusNumberToLottoAnswer(answerLotto) {
     const bonusNumber = await InputView.readBonusNumber();
-    const answer = new LottoAnswer(lottoAnswer, bonusNumber);
+    const answer = new LottoAnswer(answerLotto, bonusNumber);
     return answer;
   }
 
