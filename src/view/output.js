@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { GAMEMST_OUTPUT_BOUGHT_LOTTO_NUMBERS } from "../constants/GameMessage.js";
 
 class Output{
     constructor(){}
@@ -7,9 +8,10 @@ class Output{
         Console.print(`[ERROR] ${errorMessage}`);
     }
 
-    static outputMessage(message){
-        Console.print(message);
+    static outputBoughtLottoNumbers(boughtLottoNumber){
+        Console.print(`\n${boughtLottoNumber}${GAMEMST_OUTPUT_BOUGHT_LOTTO_NUMBERS}`);
     }
+
 }
 
 export default Output;
