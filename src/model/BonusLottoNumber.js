@@ -4,15 +4,19 @@ import { printErrorMessage } from '../utils/printMessage.js';
 
 class BonusLottoNumber {
   static validate(userBonusNumberInput, userLottoNumberInput) {
+    if (userBonusNumberInput.length > 1 || userBonusNumberInput.length === 0) {
+      printErrorMessage(MESSAGES.inputOneNumber);
+      return;
+    }
     if (
-      userBonusNumberInput < NUMBERS.minLottoNumber
-      || userBonusNumberInput > NUMBERS.maxLottoNumber
+      userBonusNumberInput < NUMBERS.minLottoNumber ||
+      userBonusNumberInput > NUMBERS.maxLottoNumber
     ) {
-      printErrorMessage(MESSAGES.errorHeader, MESSAGES.invalidRange);
+      printErrorMessage(MESSAGES.invalidRange);
       return;
     }
     if (userLottoNumberInput.includes(userBonusNumberInput)) {
-      printErrorMessage(MESSAGES.errorHeader, MESSAGES.duplicatedNumber);
+      printErrorMessage(MESSAGES.duplicatedNumber);
     }
   }
 }
