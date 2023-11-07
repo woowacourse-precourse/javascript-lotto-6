@@ -3,7 +3,7 @@ import { OUTPUT_MESSAGE, OTHERS } from '../../utils/constants.js';
 
 class OutputView {
   showPurchaseLottosOutput(lottoTryCount, purchaseLottosMessages) {
-    Console.print(`${lottoTryCount}${OUTPUT_MESSAGE.lottoTryCount}`);
+    Console.print(`${OTHERS.lineBreak}${lottoTryCount}${OUTPUT_MESSAGE.lottoTryCount}`);
     purchaseLottosMessages.forEach((lottoMessage) => Console.print(`[${lottoMessage}]`));
   }
 
