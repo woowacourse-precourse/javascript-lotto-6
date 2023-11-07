@@ -26,10 +26,10 @@ class Lotto {
   };
 
   #validate(numbers) {
-    if (numbers.some(num => Number.isNaN(num)))
-      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.some(num => Number.isNaN(num)))
+      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if (this.hasDuplicates(numbers))
       throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
     if (numbers.some(num => num <= 0 || num >= 46))
@@ -44,25 +44,25 @@ class Lotto {
       return this.#numbers;
     let validNumbers = 0;
     while(validNumbers === 0 && this.#numbers === undefined) {
-      try {
+      // try {
         let sixNum = await Console.readLineAsync("당첨 번호를 다시 입력해 주세요.\n");
         validNumbers = this.#validate(sixNum);
-        return validNumbers;
-      } catch(error) {
-        Console.print(error.message);
-      }
+      // } catch(error) {
+      //   Console.print(error.message);
+      // }
     }
+    return validNumbers;
   };
 
   getBonusNum = async (sixNum) => {
     let validBonusNum = 0;
     while(validBonusNum === 0) {
-      try {
+      // try {
         let bonusNum = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
         validBonusNum = this.validateBonusNum(sixNum, bonusNum);
-      } catch(error) {
-        Console.print(error.message);
-      }
+      // } catch(error) {
+      //   Console.print(error.message);
+      // }
     }
     return validBonusNum;
   };

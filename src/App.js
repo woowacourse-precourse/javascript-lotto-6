@@ -16,12 +16,12 @@ class App {
   getPrice = async () => {
     let validPrice = 0;
     while(validPrice === 0) {
-      try {
+      // try {
         let price = await Console.readLineAsync("구입 금액을 입력해 주세요.\n");
         validPrice = validatePrice(price);
-      } catch(error) {
-        Console.print(error.message);
-      }
+      // } catch(error) {
+      //   Console.print(error.message);
+      // }
     }
     return validPrice;
   };
