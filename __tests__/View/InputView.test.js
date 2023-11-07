@@ -1,6 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import InputView from "../../src/View/InputView.js";
 import { INPUT_MESSAGE } from "../../src/constants/message.js";
+import {
+  NoInputError,
+  NotNumberError,
+  InvalidAmountRangeError,
+  InvalidAmountUnitError,
+} from "../../src/utils/Error.js";
 
 Console.readLineAsync = jest.fn();
 
@@ -8,6 +14,7 @@ let inputView;
 
 describe("InputView 객체 테스트", () => {
   beforeEach(() => {
+    jest.clearAllMocks();
     inputView = new InputView();
   });
   describe("readLottoPurchaseAmount 메서드 테스트", () => {
@@ -17,6 +24,7 @@ describe("InputView 객체 테스트", () => {
     });
 
     test("readLottoPurchaseAmount 메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
+      Console.readLineAsync.mockReturnValue(5000);
       // when
       inputView.readLottoPurchaseAmount();
       // tehn
@@ -32,6 +40,34 @@ describe("InputView 객체 테스트", () => {
       const purchaseAmount = await inputView.readLottoPurchaseAmount();
       // then
       expect(purchaseAmount).toBe(purchaseAmountInput);
+    });
+
+    test("아무 입력이 없다면 NoInputError를 throw 해야 한다.", async () => {
+      const noInput = "";
+      Console.readLineAsync.mockReturnValue(noInput);
+
+      await expect(inputView.readLottoPurchaseAmount()).rejects.toThrow(NoInputError);
+    });
+
+    test("입력된 값이 숫자가 아니라면 NotNumberError를 throw 해야 한다.", async () => {
+      const notNumber = "a";
+      Console.readLineAsync.mockReturnValue(notNumber);
+
+      await expect(inputView.readLottoPurchaseAmount()).rejects.toThrow(NotNumberError);
+    });
+
+    test("입력된 값이 1000보다 작다면 InvalidAmountRangeError를 throw 해야 한다.", async () => {
+      const invalidAmountRange = "-8000";
+      Console.readLineAsync.mockReturnValue(invalidAmountRange);
+
+      await expect(inputView.readLottoPurchaseAmount()).rejects.toThrow(InvalidAmountRangeError);
+    });
+
+    test("입력된 값이 1000으로 나누어 떨어지지 않는다면 InvalidAmountUnitError를 throw 해야 한다.", async () => {
+      const invalidAmountUnit = 48500;
+      Console.readLineAsync.mockReturnValue(invalidAmountUnit);
+
+      await expect(inputView.readLottoPurchaseAmount()).rejects.toThrow(InvalidAmountUnitError);
     });
   });
 
