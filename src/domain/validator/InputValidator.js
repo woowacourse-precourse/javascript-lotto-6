@@ -25,6 +25,12 @@ class InputValidator {
       throw new ErrorMessage(ERROR.number.negativeNumber);
     }
   }
+
+  validateInteger(input) {
+    if (!Number.isInteger(Number(input))) {
+      throw new ErrorMessage(ERROR.number.notInterger);
+    }
+  }
 }
 
 export default InputValidator;
