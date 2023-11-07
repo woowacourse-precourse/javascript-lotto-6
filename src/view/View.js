@@ -28,7 +28,7 @@ export async function inputBounsNumber(winningLottoNumbers) {
   try {
     const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.bonusNumber);
     isValidBounsNumber(inputValue, winningLottoNumbers);
-    return inputValue;
+    return Number(inputValue);
   } catch (err) {
     Console.print(err);
     return inputBounsNumber(winningLottoNumbers);
@@ -41,4 +41,8 @@ export function printBuyLotto(buyLottoCnt) {
 
 export function printLottoArray(lottos) {
   lottos.forEach((lotto) => Console.print(lotto));
+}
+
+export function printResult() {
+  Console.print(MESSAGE_NOTIFICATION.result);
 }

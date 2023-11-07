@@ -3,6 +3,7 @@ export const MESSAGE_NOTIFICATION = Object.freeze({
   buyLotto: '개를 구매했습니다.',
   winningLotto: '\n당첨 번호를 입력해 주세요.\n',
   bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
+  result: '\n당첨 통계\n---',
 });
 
 const ERROR_PREFIX = '[ERROR]';
