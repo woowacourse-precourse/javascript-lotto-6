@@ -10,6 +10,12 @@ import {
 } from '../validates/winningNumber.js';
 
 class User {
+  #lottoCount;
+
+  constructor() {
+    this.#lottoCount = null;
+  }
+
   async calculateLottoCount() {
     while (true) {
       try {
@@ -22,8 +28,8 @@ class User {
         validateMinimumAmount(amount);
 
         const lottoCount = Math.floor(amount / 1000);
-        Console.print(`\n${lottoCount}${MESSAGES.output.lottoPurchased}`);
-        return lottoCount;
+        Console.print(`\n${this.#lottoCount}${MESSAGES.output.lottoPurchased}`);
+        return this.#lottoCount;
       } catch (error) {
         Console.print(error.message);
       }
