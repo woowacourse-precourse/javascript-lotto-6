@@ -22,6 +22,7 @@ class StartGame {
     this.#inputMoney = await this.getValidatedPurchaseInput();
 
     this.#purchaseAmount = lottoPurchaseCount(this.#inputMoney);
+    Output.print(`${MESSAGE.BLINK}${this.#purchaseAmount}${MESSAGE.NUMBER_OF_LOTTO}`);
 
     this.purchaseLottos();
   }
@@ -43,10 +44,11 @@ class StartGame {
     for (let count = 0; count < this.#purchaseAmount; count += 1) {
       const randomLottoNumber = randomLottoNumbers();
       const sortedLottoNumber = sortLottoNumbers(randomLottoNumber);
-
+      Output.printArray(sortedLottoNumber);
       this.#purchasedLottos.push(sortedLottoNumber);
     }
   }
+
   async inputWinningNumbers() {
     this.#winningNumbers = await this.getValidatedWinningNumbersInput(MESSAGE.WINNING_NUMBER);
 
