@@ -107,22 +107,20 @@ class App {
   };
 
   async getBonus(winningNumsList, numRangePattern) {
-    // while (1) {
-      try {
-        const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
+    try {
+      const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
 
-        if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-        }
-        if (!numRangePattern.test(Number(inputBonus))) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-        }
-        return Number(inputBonus);
-      } catch (error) {
-        Console.print(ERROR_MESSAGE.INPUT_ERROR);
-        await this.getBonus(winningNumsList, numRangePattern);
+      if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
+        throw new Error(ERROR_MESSAGE.INPUT_ERROR)
       }
-    // }
+      if (!numRangePattern.test(Number(inputBonus))) {
+        throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+      }
+      return Number(inputBonus);
+    } catch (error) {
+      Console.print(ERROR_MESSAGE.INPUT_ERROR);
+      await this.getBonus(winningNumsList, numRangePattern);
+    }
   };
 
   checkWinningResults(userMoney, winningNumsList, bonus) {
