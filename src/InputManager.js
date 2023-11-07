@@ -1,7 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 import Validator from "./Validator.js";
-import LottoPurchaser from "./LottoPurchaser.js";
 
 const InputManager = {
   async inputPrice() {
@@ -25,8 +24,9 @@ const InputManager = {
     const bonusNumber = await Console.readLineAsync(
       "보너스 번호를 입력해 주세요.\n"
     );
-
-    return bonusNumber;
+    const bonusNumberAsNumber = Number(bonusNumber);
+    Validator.validateBonus(bonusNumber);
+    return bonusNumberAsNumber;
   },
 };
 

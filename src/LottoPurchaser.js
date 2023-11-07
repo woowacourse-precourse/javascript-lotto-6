@@ -1,24 +1,35 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console, Random } = MissionUtils;
+import Lotto from "./Lotto.js";
 
-const LottoPurchaser = {
-  lottoList(inputPrice) {
-    const countLotto = inputPrice / 1000;
-    const lottoTickets = [];
+class LottoPurchaser {
+  constructor(price) {
+    this.countLotto = price / 1000;
+    this.lottoTickets = [];
+    this.lottoList();
+  }
 
-    const generateLottoNumbers = () => {
-      return Random.pickUniqueNumbersInRange(1, 45, 6);
-    };
-
-    for (let i = 0; i < countLotto; i++) {
-      const randomNumber = generateLottoNumbers();
-      lottoTickets.push(randomNumber);
+  lottoList() {
+    for (let num = 0; num < this.countLotto; num++) {
+      const newLotto = this.generateLottoNumbers();
+      this.lottoTickets.push(newLotto);
     }
+  }
 
-    Console.print(`${countLotto}개를 구매했습니다.`);
+  generateLottoNumbers() {
+    const newNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return new Lotto(newNumbers);
+  }
 
-    return lottoTickets;
-  },
-};
+  printCount() {
+    Console.print(`\n${this.countLotto}개를 구매했습니다.`);
+  }
+
+  printList() {
+    this.lottoTickets.forEach((lotto) => {
+      lotto.printNumbers();
+    });
+  }
+}
 
 export default LottoPurchaser;
