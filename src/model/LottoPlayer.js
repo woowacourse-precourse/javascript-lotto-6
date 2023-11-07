@@ -47,11 +47,7 @@ export default class LottoPlayer {
         this.#rankCounts[4] += 1;
         break;
       case 5:
-        if (!isIncludedBonusNumber) {
-          this.#rankCounts[3] += 1;
-        } else {
-          this.#rankCounts[2] += 1;
-        }
+        isIncludedBonusNumber ? (this.#rankCounts[2] += 1) : (this.#rankCounts[3] += 1);
         break;
       default:
         this.#rankCounts[1] += 1;
