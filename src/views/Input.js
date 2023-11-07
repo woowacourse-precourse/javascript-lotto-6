@@ -1,32 +1,64 @@
 import { Console } from "@woowacourse/mission-utils";
-
 import { error, exceptionType, message } from "../constants.js";
 import { throwErrorIf } from "../utils/index.js";
 
 const inputView = {
   enterPurchaseAmount: async function () {
-    const amount = await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
-    this.validate(exceptionType.PURCHASE, amount);
+    let input = "";
 
-    return Number(amount);
+    while (true) {
+      const amount = await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);
+
+      try {
+        this.validate(exceptionType.PURCHASE, amount);
+        input = Number(amount);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    return input;
   },
 
   enterWinningNumber: async function () {
-    const numbers = await Console.readLineAsync(message.ENTER_WINNING_NUMBER);
-    const splited = numbers.split(",");
+    let input = "";
 
-    splited.forEach((number) => {
-      this.validate(exceptionType.LOTTO, number);
-    });
+    while (true) {
+      const numbers = await Console.readLineAsync(message.ENTER_WINNING_NUMBER);
+      const splited = numbers.split(",");
 
-    return splited.map((number) => Number(number));
+      try {
+        input = splited.map((number) => {
+          this.validate(exceptionType.LOTTO, number);
+
+          return Number(number);
+        });
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    return input;
   },
 
   enterBonusNumber: async function () {
-    const number = await Console.readLineAsync(message.ENTER_BONUS_NUMBER);
-    this.validate(exceptionType.LOTTO, number);
+    let input = "";
 
-    return Number(number);
+    while (true) {
+      const number = await Console.readLineAsync(message.ENTER_BONUS_NUMBER);
+
+      try {
+        this.validate(exceptionType.LOTTO, number);
+        input = Number(number);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    return input;
   },
 
   validate: function (type, value) {
