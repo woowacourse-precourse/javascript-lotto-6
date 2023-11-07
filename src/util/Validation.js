@@ -80,15 +80,14 @@ const checkWinningNumbers = (inputs) => {
     ERROR_MESSAGES.lottoLength,
   );
   inputs.split(',').forEach((input) => {
-    /* checkInput(input); */
+    checkInput(input);
     checkInputType(input, ERROR_MESSAGES.lottoType);
     checkInputRange(input, ERROR_MESSAGES.lottoRange);
   });
 };
 
 const checkBonusNumber = (inputs, winningNumbers) => {
-  /* checkInput(inputs); */
-  checkBonusDuplicated(inputs, winningNumbers);
+  checkInput(inputs);
   checkInputType(inputs, ERROR_MESSAGES.bonusType);
   checkInputRange(inputs, ERROR_MESSAGES.bonusRange);
   checkInputLength(
@@ -96,6 +95,7 @@ const checkBonusNumber = (inputs, winningNumbers) => {
     GAME_RULE_NUMBER.bonusNumberLength,
     ERROR_MESSAGES.bonusLength,
   );
+  checkBonusDuplicated(inputs, winningNumbers);
 };
 
 export {
