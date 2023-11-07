@@ -29,7 +29,7 @@ class LottoGame {
 
       return new LottoBundle(amount);
     } catch (error) {
-      OutputView.printMessage(error.message);
+      OutputView.printErrorMessage(error.message);
 
       return this.#getLottoBundle();
     }
@@ -42,7 +42,7 @@ class LottoGame {
 
       return new Lotto(splitWinningNumbers);
     } catch (error) {
-      OutputView.printMessage(error.message);
+      OutputView.printErrorMessage(error.message);
 
       return this.#getWinningLotto();
     }
@@ -57,7 +57,7 @@ class LottoGame {
       const bonusNumber = await InputView.readBonusNumber();
       return new BonusNumber(bonusNumber, this.#winningLotto.getNumbers());
     } catch (error) {
-      OutputView.printMessage(error.message);
+      OutputView.printErrorMessage(error.message);
 
       return this.#getBonusNumber();
     }

@@ -48,12 +48,12 @@ class LottoBundle {
   }
 
   getProfitRate() {
-    const profit = this.getProfit();
+    const profit = this.#getProfit();
 
     return ((profit / (this.#lottoCount * CONSTANT.amountUnit)) * 100).toFixed(1);
   }
 
-  getProfit() {
+  #getProfit() {
     const rewards = Object.values(RANK).map((rank) => rank.reward);
 
     return this.#totalRank.reduce((sum, rankCount, index) => sum + rankCount * rewards[index], 0);

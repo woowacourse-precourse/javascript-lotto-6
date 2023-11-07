@@ -11,7 +11,7 @@ const OutputView = {
     Console.print(lottoMessage);
   },
 
-  printMessage(message) {
+  printErrorMessage(message) {
     Console.print(message);
   },
 
