@@ -36,4 +36,17 @@ describe("로또 구매 테스트", () => {
       user.validate("hi");
     }).toThrow("[ERROR]");
   });
+
+  // describe("로또 발행 테스트", () => {
+  //   test("8000원은 입력한 경우 8개의 로또를 발행한다.", () => {
+  //     const consoleSpy = jest.spyOn(console, "log");
+
+  //     const user = new User();
+  //     user.calculateCount(8000);
+
+  //     expect(consoleSpy).toHaveBeenCalledWith("\n8개를 구매했습니다.");
+
+  //     consoleSpy.mockRestore();
+  //   });
+  // });
 });

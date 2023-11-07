@@ -45,10 +45,16 @@ class User {
         PICK_NUMBER
       );
       lotto.sort((a, b) => a - b);
-      MissionUtils.Console.print("[" + lotto.join("," + " ").toString() + "]");
+      this.printLotto(lotto);
       const MATCH = new Match(lotto);
       this.users.push(MATCH);
     }
+  }
+
+  async printLotto(lotto) {
+    await MissionUtils.Console.print(
+      "[" + lotto.join("," + " ").toString() + "]"
+    );
   }
 
   matching(CORRECT, BONUS) {
