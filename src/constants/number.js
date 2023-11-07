@@ -1,10 +1,12 @@
 const NUMBER = {
   minNumber : 1,
   maxNumber: 45,
-  drawNumber: 6,
+  drawCases: 6,
+  
+  unitCost: 1000,
 
   winningAmount: {
-    first: 2000000000,
+  first: 2000000000,
   second: 30000000,
   third: 1500000,
   fourth: 50000,
