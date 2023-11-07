@@ -1,20 +1,24 @@
-import { LOTTO_RESULT, LOTTO } from '../constants/lotto';
+import { LOTTO_RESULT, LOTTO } from '../constants/lotto.js';
+import { utils } from '../utils/utils.js';
 
 class LottosRetruns {
-  #lottosResult;
+  #lottosResultsCount;
 
-  constructor(lottosResult) {
-    this.#lottosResult = lottosResult;
+  constructor(lottosResultsCount) {
+    this.#lottosResultsCount = lottosResultsCount;
   }
 
-  #getTotalPrize() {
+  getTotalPrize() {
     const ranks = Object.keys(LOTTO_RESULT);
 
-    return ranks.reduce((acc, cur) => acc + this.#lottosResult[cur] * LOTTO_RESULT[cur].prize, 0);
+    return ranks.reduce(
+      (acc, cur) => acc + this.#lottosResultsCount[cur] * LOTTO_RESULT[cur].prize,
+      0,
+    );
   }
 
   getLottosReturns(purchasePrice) {
-    const totalPrize = this.#getTotalPrize();
+    const totalPrize = this.getTotalPrize();
     const lottonReturns = (totalPrize / purchasePrice) * LOTTO.percentage;
 
     return utils.roundingSecondDecimalPlace(lottonReturns);

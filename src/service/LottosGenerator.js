@@ -6,7 +6,7 @@ class LottosGenerator {
   #lottos = [];
 
   constructor(money) {
-    this.#generateLottos(this.#getTotalIssueCount(money));
+    this.#generateLottos(this.getTotalIssueCount(money));
   }
 
   #generateLottos(totalIssueCount) {
@@ -32,7 +32,7 @@ class LottosGenerator {
     return lottoNumbers;
   }
 
-  #getTotalIssueCount(money) {
+  getTotalIssueCount(money) {
     return money / LOTTO.unitPrice;
   }
 
