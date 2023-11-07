@@ -49,8 +49,6 @@ describe("CheckManager 테스트", () => {
 
     test("등수를 똑바로 체크하는지 테스트합니다.", async () => {
         // given
-        const logSpy = getLogSpy();
-
         mockRandoms([
             [1, 2, 3, 4, 5, 6],
             [3, 4, 5, 6, 7, 8],

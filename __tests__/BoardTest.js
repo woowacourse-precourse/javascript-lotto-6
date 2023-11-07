@@ -1,5 +1,4 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
-import CheckManager from "../src/CheckManager.js";
 import Board from "../src/Board.js";
 
 const getLogSpy = () => {

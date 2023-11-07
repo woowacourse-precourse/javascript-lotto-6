@@ -30,8 +30,8 @@ class CheckManager {
     return randomPublishLottos.map((randomPublishLotto) => {
       const differentCount = this.#checkLuckyNumber(luckyNumber,randomPublishLotto);
       const isBonus = this.#checkBonus(bonusNumber, randomPublishLottos);
-      if (differentCount == 0) return 1;
-      if (differentCount == 1) {
+      if (differentCount === 0) return 1;
+      if (differentCount === 1) {
         if (isBonus) {
           return 2;
         }
