@@ -4,8 +4,6 @@ import NUMBER from '../../constants/number.js';
 
 function validateNoIncludeBlank() {}
 
-function validateDrawCases() {}
-
 function validateLottoBonusDuplication() {}
 
 class InputValidator {
@@ -41,6 +39,12 @@ class InputValidator {
   validateNoDuplication(input) {
     if (input.length !== new Set(input).size) {
       throw new ErrorMessage(ERROR.lotto.duplication);
+    }
+  }
+
+  validateDrawCases(input) {
+    if (input.length !== NUMBER.drawCount) {
+      throw new ErrorMessage(ERROR.lotto.drawCount);
     }
   }
 }
