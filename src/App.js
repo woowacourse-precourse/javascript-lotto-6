@@ -1,7 +1,7 @@
-import INPUT from '../view/Input.js';
-import OUTPUT from '../view/Output.js';
+import INPUT from '../views/Input.js';
+import OUTPUT from '../views/Output.js';
 import COMPUTER from '../src/Computer.js';
-import AppError from '../constant/AppError.js';
+import AppError from '../constants/AppError.js';
 import CALCULATE from '../src/Calculate.js';
 
 class App {
