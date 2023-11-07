@@ -3,23 +3,24 @@ import Lotto from './Lotto.js';
 import { Console, Random } from '@woowacourse/mission-utils';
 
 class App {
+#lotto;
   async play() {
+
     const count = await inputAmount() / 1000;
     publishLotto(count);
     printLottoNumbers();
-    const lotto = await this.getLotto();
-    const bonus = Number(await getBonus(lotto));
+    const inputNumbers = await this.getNumbers();
+    const lotto = new Lotto(inputNumbers);
+    const bonus = Number(await getBonus(inputNumbers));
     getRank(lotto, bonus);
     const rate = calculateRate();
-    console.log(rate);
     printResults(styleRate(rate));
   }
 
-  getLotto = async() => {
+  getNumbers = async() => {
     const input = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     const inputNumbers = input.split(',').map(Number);
-    const lotto = new Lotto(inputNumbers);
-    return lotto;
+    return inputNumbers;
   }
 }
 
@@ -58,17 +59,17 @@ const printLottoNumbers = () => {
   })
 }
 
-const getBonus = async(lotto) => {
-  const bonus = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+const getBonus = async(numbers) => {
+  const bonus = Number(await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n'));
   const WARNING = '[ERROR] 잘못된 형식입니다. 앞서 입력한 번호와 겹치지 않는 1~45 안의 정수를 입력하시오.\n'
   try {
     if (isNaN(bonus)) throw new Error(WARNING);
     if (bonus > 45 || bonus < 1) throw new Error(WARNING);
     if (!Number.isInteger(bonus)) throw new Error(WARNING);
-    if (lotto.numbers(bonus)) throw new Error(WARNING);
+    if (numbers.includes(bonus)) throw new Error(WARNING);
   } catch {
     Console.print(WARNING);
-    await getBonus(lotto);
+    await getBonus(numbers);
   }
   return bonus;
 }
