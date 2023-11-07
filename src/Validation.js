@@ -1,4 +1,6 @@
 import {
+  LOTTO_MAX_NUMBER,
+  LOTTO_MIN_NUMBER,
   LOTTO_PRICE,
   PURCHASE_AMOUNT_ERROR_MESSAGES,
   WINNING_NUMBERS_ERROR_MESSAGES,
@@ -28,6 +30,9 @@ export const validateWinnerNumbersInput = async (winningNumbersInput) => {
   if (!isNumbers(winningNumbersInput)) {
     throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.NOT_NUMBER);
   }
+  if (!isOutOfRange(winningNumbersInput)) {
+    throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.OUT_OF_RANGE);
+  }
 };
 
 const isNumber = (input) => {
@@ -53,4 +58,12 @@ const isValidWinningNumbersLength = (input) => {
 
 const isNumbers = (input) => {
   return input.split(',').every((el) => isNumber(el));
+};
+
+const isOutOfRange = (input) => {
+  return input
+    .split(',')
+    .every(
+      (el) => Number(el) >= LOTTO_MIN_NUMBER && Number <= LOTTO_MAX_NUMBER
+    );
 };

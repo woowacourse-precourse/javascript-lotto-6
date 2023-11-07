@@ -18,6 +18,7 @@ export const PURCHASE_AMOUNT_ERROR_MESSAGES = Object.freeze({
 export const WINNING_NUMBERS_ERROR_MESSAGES = Object.freeze({
   INVALID_WINNING_NUMBERS_LENGTH: `[ERROR] 당첨 번호는 ${LOTTO_NUMBERS_LENGTH}개여야 합니다.`,
   NOT_NUMBER: '[ERROR] 당첨 번호는 숫자여야 합니다',
+  OUT_OF_RANGE: `[ERROR] 당첨 번호는 ${LOTTO_MIN_NUMBER}부터 ${LOTTO_MAX_NUMBER} 사이의 숫자여야 합니다.`,
 });
 
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>
