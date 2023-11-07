@@ -1,3 +1,4 @@
+import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Utils from './Utils.js';
 import Validation from './Validation.js';
@@ -27,11 +28,16 @@ class IssuingLotto {
     return this.#count;
   }
 
+  #getRandomNumbers() {
+    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return randomNumbers;
+  }
+
   #issueLotto() {
     const usersLotto = [];
 
     for (let issueCount = 0; issueCount < this.#count; issueCount += 1) {
-      const numbers = Utils.getRandomNumbers();
+      const numbers = this.#getRandomNumbers();
       const lotto = new Lotto(numbers);
       const lottoNumbers = lotto.getNumbers();
       usersLotto.push(lottoNumbers);
