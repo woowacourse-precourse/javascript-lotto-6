@@ -1,8 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "../lotto/Lotto.js";
 import LottoUtils from "./lottoUtils.js";
-import { LOTTO_RANK_MESSAGES } from "../utils/constants.js";
-import { LOTTO_GAME_RULE } from "../utils/constants.js";
+import { COMMAND, LOTTO_RANK, LOTTO_GAME_RULE } from "../utils/constants.js";
 
 class LottoGame {
   #purchasedAmount;
@@ -28,7 +27,11 @@ class LottoGame {
   generateLotto(amount) {
     this.#purchasedAmount = amount;
 
-    for (let i = 0; i < this.#purchasedAmount / 1000; i++) {
+    for (
+      let i = 0;
+      i < this.#purchasedAmount / LOTTO_GAME_RULE.lottoAmout;
+      i++
+    ) {
       const lottoNumbers = LottoUtils.generateRandomNumber();
       this.#purchasedLottos.push(new Lotto(lottoNumbers));
     }
@@ -37,7 +40,11 @@ class LottoGame {
   }
 
   printPurchasedLottos() {
-    Console.print(`${this.#purchasedAmount / 1000}개를 구매했습니다.`);
+    Console.print(
+      `${this.#purchasedAmount / LOTTO_GAME_RULE.lottoAmout}${
+        COMMAND.purchaseMessage
+      }`
+    );
 
     this.#purchasedLottos.forEach((lotto) => {
       const sortedNumbers = LottoUtils.ascendingSort(lotto.getNumbers());
@@ -86,7 +93,7 @@ class LottoGame {
   }
 
   getRankName(rank) {
-    return ["fifth", "fourth", "third", "second", "first"][rank];
+    return LOTTO_RANK.rankNames[rank];
   }
 
   calculateProfitRate() {
@@ -101,8 +108,8 @@ class LottoGame {
   }
 
   printWinner() {
-    Console.print(`${LOTTO_RANK_MESSAGES.startMessage}`);
-    LOTTO_RANK_MESSAGES.rankResultMessage.forEach((message, index) => {
+    Console.print(`${LOTTO_RANK.startMessage}`);
+    LOTTO_RANK.rankResultMessage.forEach((message, index) => {
       Console.print(
         `${message} - ${this.#rank[`${this.getRankName(index)}Place`]}개`
       );
