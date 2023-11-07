@@ -1,6 +1,10 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-import { INPUT_MESSAGES, OUTPUT_MESSAGES } from "./constants/Messages.js";
+import {
+  INPUT_MESSAGES,
+  OUTPUT_MESSAGES,
+  ERROR_MESSAGES,
+} from "./constants/Messages.js";
 
 /*
 추가된 요구 사항
@@ -14,23 +18,19 @@ else를 지양한다.
   단위 테스트 작성이 익숙하지 않다면 __tests__/LottoTest.js를 참고하여 학습한 후 테스트를 구현한다.
 */
 
-//TODO: 에러 메세지 상수화 후 분리하기
-//TODO: GPT 리펙토링 한거 확인하기
-//TODO: 각 에러 시 재입력하게 변경
 //TODO: 로또 클래스 및 메서드 분리
 //TODO: 테스트 케이스 작성하기
 //TODO: 프로그래밍 요구 사항에 맞는지 확인
+
 class App {
   async play() {
-    const INPUT_CASH = await this.inputCash();
-    const ARRAY_OF_GAMES = this.getLottoNumbers(INPUT_CASH);
-    const WINNING_NUMBER = await this.inputWinningNumber();
-    const VERIFIED_WINNING_NUMBER = this.validateWinningNumber(WINNING_NUMBER);
-    const BOUNUS_NUMBER = Number(await this.inputBonusNumber());
-    const VERIFIED_BOUNUS_NUMBER = this.validateBonusNumber(
-      VERIFIED_WINNING_NUMBER,
-      BOUNUS_NUMBER
+    const INPUT_CASH = await this.validateCash();
+    const ARRAY_OF_GAMES = this.showLottoNumbers(INPUT_CASH);
+    const VERIFIED_WINNING_NUMBER = await this.validateWinningNumber();
+    const VERIFIED_BOUNUS_NUMBER = await this.validateBonusNumber(
+      VERIFIED_WINNING_NUMBER
     );
+
     const NUMBER_OF_WINS = this.compareLottoNumber(
       ARRAY_OF_GAMES,
       VERIFIED_WINNING_NUMBER,
@@ -41,48 +41,61 @@ class App {
   }
 
   async inputCash() {
-    let cash;
+    const INPUT_CASH = await MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGES.INPUT_CASH_MESSAGE
+    );
+    return INPUT_CASH;
+  }
+
+  async validateCash() {
     while (true) {
-      cash = await MissionUtils.Console.readLineAsync(
-        INPUT_MESSAGES.INPUT_CASH_MESSAGE
-      );
       try {
-        cash = this.validateCash(cash); // 입력값을 검증
-        return cash; // 유효한 입력이 들어온 경우 반환하고 반복 종료
+        const INPUT_CASH = await this.inputCash();
+        this.validateCashInteger(INPUT_CASH);
+        return INPUT_CASH;
       } catch (error) {
-        MissionUtils.Console.print(error.message); // 에러 메시지 출력
-        // 예외 발생시 다시 입력을 받도록 반복
+        MissionUtils.Console.print(error.message);
       }
     }
   }
 
-  validateCash(cash) {
+  validateCashInteger(cash) {
     if (+cash % 1000 === 0) {
       return cash;
     }
-    throw new Error("[ERROR] 구입금액은 1000 단위 정수로 입력이 가능합니다.");
+    throw new Error(ERROR_MESSAGES.CASH_NOT_INTEGER_IN_THOUSANDS);
   }
 
-  getLottoNumbers(cash) {
-    const numberOfGames = cash / 1000;
+  showLottoNumbers(INPUT_CASH) {
+    const NUMBER_OF_GAMES = INPUT_CASH / 1000;
     MissionUtils.Console.print(
-      numberOfGames + OUTPUT_MESSAGES.PURCHASE_QUANTITY
+      NUMBER_OF_GAMES + OUTPUT_MESSAGES.PURCHASE_QUANTITY
     );
+    const ARRAY_OF_GAMES = this.getLottoNUmbers(NUMBER_OF_GAMES);
+    return ARRAY_OF_GAMES;
+  }
+
+  getLottoNUmbers(NUMBER_OF_GAMES) {
     const ARRAY_OF_GAMES = [];
-    for (let i = 0; i < numberOfGames; i++) {
-      const LOTTO_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(
-        1,
-        45,
-        6
-      );
-      const SORTED_LOTTO_NUMBER = LOTTO_NUMBER.sort((a, b) => {
-        return a - b;
-      });
-      MissionUtils.Console.print("[" + SORTED_LOTTO_NUMBER.join(", ") + "]");
+    for (let i = 0; i < NUMBER_OF_GAMES; i++) {
+      const LOTTO_NUMBER = this.getRandomSixNumber();
+      const SORTED_LOTTO_NUMBER = this.getSortedLottoNumber(LOTTO_NUMBER);
+      MissionUtils.Console.print(`[${SORTED_LOTTO_NUMBER.join(", ")}]`);
       ARRAY_OF_GAMES.push(SORTED_LOTTO_NUMBER);
     }
-    MissionUtils.Console.print("");
     return ARRAY_OF_GAMES;
+  }
+
+  getRandomSixNumber() {
+    const LOTTO_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return LOTTO_NUMBER;
+  }
+
+  getSortedLottoNumber(LOTTO_NUMBER) {
+    const SORTED_LOTTO_NUMBER = LOTTO_NUMBER.sort((a, b) => {
+      return a - b;
+    });
+    return SORTED_LOTTO_NUMBER;
   }
 
   inputWinningNumber() {
@@ -92,20 +105,40 @@ class App {
     return WINNING_NUMBER;
   }
 
-  validateWinningNumber(WINNING_NUMBER) {
-    const WINNING_NUMBER_ARRAY = WINNING_NUMBER.split(",").map(Number);
-    const UNIQUE_ARRAY = [...new Set(WINNING_NUMBER_ARRAY)];
+  async validateWinningNumber() {
+    while (true) {
+      try {
+        const WINNING_NUMBER = await this.inputWinningNumber();
+        const WINNING_NUMBER_ARRAY = WINNING_NUMBER.split(",").map(Number);
+        this.validateWinningNumberCollection(WINNING_NUMBER_ARRAY);
+        return WINNING_NUMBER_ARRAY;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
+  }
+
+  validateWinningNumberCollection(WINNING_NUMBER_ARRAY) {
+    this.validateWinningNumberSix(WINNING_NUMBER_ARRAY);
+    this.validateWinningNumberOutOfBounds(WINNING_NUMBER_ARRAY);
+    this.validateWinningNumberDuplication(WINNING_NUMBER_ARRAY);
+  }
+
+  validateWinningNumberSix(WINNING_NUMBER_ARRAY) {
     if (WINNING_NUMBER_ARRAY.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR_MESSAGES.WINNING_NUMBER_NOT_SIX);
     }
+  }
+  validateWinningNumberOutOfBounds(WINNING_NUMBER_ARRAY) {
     if (!WINNING_NUMBER_ARRAY.every((number) => number >= 1 && number <= 45)) {
-      throw new Error("[ERROR] 로또 번호는 1 ~ 45 사이의 수여야 합니다.");
+      throw new Error(ERROR_MESSAGES.WINNING_NUMBER_OUT_OF_BOUNDS);
     }
+  }
+  validateWinningNumberDuplication(WINNING_NUMBER_ARRAY) {
+    const UNIQUE_ARRAY = [...new Set(WINNING_NUMBER_ARRAY)];
     if (WINNING_NUMBER_ARRAY.length !== UNIQUE_ARRAY.length) {
-      throw new Error("[ERROR] 로또 번호는 중복되지 않는 수여야 합니다.");
+      throw new Error(ERROR_MESSAGES.WINNING_NUMBER_DUPLICATION);
     }
-    //정수 여부 확인?
-    return WINNING_NUMBER_ARRAY;
   }
 
   inputBonusNumber() {
@@ -115,15 +148,52 @@ class App {
     return BOUNUS_NUMBER;
   }
 
-  validateBonusNumber(VERIFIED_WINNING_NUMBER, BOUNUS_NUMBER) {
-    if (BOUNUS_NUMBER < 1 || BOUNUS_NUMBER > 45) {
-      throw new Error("[ERROR] 보너스 번호는 1 ~ 45 사이의 수여야 합니다.");
+  async validateBonusNumber(VERIFIED_WINNING_NUMBER) {
+    while (true) {
+      try {
+        const BOUNUS_NUMBER = await this.inputBonusNumber();
+        this.validateBonusNumberCollection(
+          BOUNUS_NUMBER,
+          VERIFIED_WINNING_NUMBER
+        );
+        const VERIFIED_BOUNUS_NUMBER = Number(BOUNUS_NUMBER);
+        return VERIFIED_BOUNUS_NUMBER;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
-    if (VERIFIED_WINNING_NUMBER.includes(BOUNUS_NUMBER)) {
-      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
-    }
+  }
 
-    return BOUNUS_NUMBER;
+  validateBonusNumberCollection(BOUNUS_NUMBER, VERIFIED_WINNING_NUMBER) {
+    this.validateBonusNumberOutOfBounds(BOUNUS_NUMBER);
+    this.validateBonusNumberDuplicatedWithWinningNumber(
+      VERIFIED_WINNING_NUMBER,
+      BOUNUS_NUMBER
+    );
+    this.validateBonusNumberInteger(BOUNUS_NUMBER);
+  }
+
+  validateBonusNumberOutOfBounds(BOUNUS_NUMBER) {
+    if (BOUNUS_NUMBER < 1 || BOUNUS_NUMBER > 45) {
+      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_OUT_OF_BOUNDS);
+    }
+  }
+
+  validateBonusNumberDuplicatedWithWinningNumber(
+    VERIFIED_WINNING_NUMBER,
+    BOUNUS_NUMBER
+  ) {
+    if (VERIFIED_WINNING_NUMBER.includes(+BOUNUS_NUMBER)) {
+      throw new Error(
+        ERROR_MESSAGES.BONUS_NUMBER_DUPLICATION_WITH_WINNING_NUMBER
+      );
+    }
+  }
+
+  validateBonusNumberInteger(BOUNUS_NUMBER) {
+    if (!Number.isInteger(+BOUNUS_NUMBER)) {
+      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_NOT_INTEGER);
+    }
   }
 
   compareLottoNumber(lottoNumber, winningNumber, bonusNumber) {
@@ -190,5 +260,3 @@ class App {
   }
 }
 export default App;
-
-//입력받은 값을 검증하고, 해당 값을 가지고 연산을 수행해서 결과값을 도출하는 것
