@@ -47,10 +47,9 @@ const runExceptionByInput = async (input) => {
   const logSpy = getLogSpy();
 
   const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-  const INPUT_NUMBERS_TO_END = input;
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
-  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+  mockQuestions([...input]);
 
   // when
   const app = new App();
@@ -58,6 +57,23 @@ const runExceptionByInput = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+};
+
+const checkRank = async (amount, randoms, logs) => {
+  // given
+  const logSpy = getLogSpy();
+
+  mockRandoms(randoms);
+  mockQuestions([amount, '1,2,3,4,5,6', '7']);
+
+  // when
+  const app = new App();
+  await app.play();
+
+  // then
+  logs.forEach((log) => {
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+  });
 };
 
 describe('로또 테스트', () => {
@@ -107,6 +123,128 @@ describe('로또 테스트', () => {
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
+  });
+
+  test('기능 테스트 - 0개 일치', async () => {
+    const randoms = [[8, 9, 10, 11, 12, 13]];
+    const logs = [
+      '1개를 구매했습니다.',
+      '[8, 9, 10, 11, 12, 13]',
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      '총 수익률은 0.0%입니다.',
+    ];
+
+    await checkRank('1000', randoms, logs);
+  });
+
+  test('기능 테스트 - 3개 일치', async () => {
+    const percent = ((5000 / 1000) * 100).toFixed(1);
+    const randoms = [[1, 2, 3, 11, 12, 13]];
+    const logs = [
+      '1개를 구매했습니다.',
+      '[1, 2, 3, 11, 12, 13]',
+      '3개 일치 (5,000원) - 1개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      `총 수익률은 ${percent}%입니다.`,
+    ];
+
+    await checkRank('1000', randoms, logs);
+  });
+
+  test('기능 테스트 - 4개 일치', async () => {
+    const percent = ((50000 / 1000) * 100).toFixed(1);
+    const randoms = [[1, 2, 3, 4, 12, 13]];
+    const logs = [
+      '1개를 구매했습니다.',
+      '[1, 2, 3, 4, 12, 13]',
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 1개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      `총 수익률은 ${percent}%입니다.`,
+    ];
+
+    await checkRank('1000', randoms, logs);
+  });
+
+  test('기능 테스트 - 5개 일치', async () => {
+    const percent = ((1500000 / 1000) * 100).toFixed(1);
+    const randoms = [[1, 2, 3, 4, 5, 13]];
+    const logs = [
+      '1개를 구매했습니다.',
+      '[1, 2, 3, 4, 5, 13]',
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 1개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      `총 수익률은 ${percent}%입니다.`,
+    ];
+
+    await checkRank('1000', randoms, logs);
+  });
+
+  test('기능 테스트 - 5개 일치, 보너스 볼 일치', async () => {
+    const percent = ((30000000 / 1000) * 100).toFixed(1);
+    const randoms = [[1, 2, 3, 4, 5, 7]];
+    const logs = [
+      '1개를 구매했습니다.',
+      '[1, 2, 3, 4, 5, 7]',
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 1개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      `총 수익률은 ${percent}%입니다.`,
+    ];
+
+    await checkRank('1000', randoms, logs);
+  });
+
+  test('기능 테스트 - 6개 일치', async () => {
+    const percent = ((2000000000 / 1000) * 100).toFixed(1);
+    const randoms = [[1, 2, 3, 4, 5, 6]];
+    const logs = [
+      '1개를 구매했습니다.',
+      '[1, 2, 3, 4, 5, 6]',
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 1개',
+      `총 수익률은 ${percent}%입니다.`,
+    ];
+
+    await checkRank('1000', randoms, logs);
+  });
+
+  test('기능 테스트 - 중복 당첨(5개 일치 + 5개 일치, 보너스볼 일치)', async () => {
+    const percent = (((1500000 + 30000000) / 2000) * 100).toFixed(1);
+    const randoms = [
+      [1, 2, 3, 4, 5, 8],
+      [1, 2, 3, 4, 5, 7],
+    ];
+    const logs = [
+      '2개를 구매했습니다.',
+      '[1, 2, 3, 4, 5, 8]',
+      '[1, 2, 3, 4, 5, 7]',
+      '3개 일치 (5,000원) - 0개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 1개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 1개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      `총 수익률은 ${percent}%입니다.`,
+    ];
+
+    await checkRank('2000', randoms, logs);
   });
 
   test('예외 테스트 - 구입 금액이 숫자가 아닌 경우', async () => {
