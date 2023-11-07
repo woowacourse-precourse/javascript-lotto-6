@@ -1,7 +1,7 @@
 const LOTTERROR = {
  regex: {
-    number: /^[0-9]+$/,
-    lottoNumber: /^(?:[1-9]|[1-3][0-9]|4[0-5])$/,
+  number: /^\d+$/, // 숫자만 포함하는 표현식
+    lottoNumber: /^\d{1,2}$/, // 로또 번호에 대한 표현식
   },
 
   errormessage: {

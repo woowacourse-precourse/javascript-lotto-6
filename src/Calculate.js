@@ -18,7 +18,12 @@ class Calculate {
       (acc, key) => acc + VARIABLE.money[key] * finalResult[key],
       0
     );
-    return (finalAmount / amount * 100).toFixed(1);
+    if (amount === 0) {
+      return '0';
+    } else {
+      const rate = ((finalAmount / amount) * 100).toFixed(1);
+      return isNaN(rate) || !isFinite(rate) ? '0' : rate;
+    }
   }
 }
 
