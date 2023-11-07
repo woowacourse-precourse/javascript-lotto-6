@@ -6,7 +6,7 @@ class UserInput {
     const purchasedLotto = await MissionUtils.Console.readLineAsync(
       message.tryPurchaseLotto,
     );
-    return Number(purchasedLotto);
+    return purchasedLotto;
   }
 
   static async winningNumbers() {

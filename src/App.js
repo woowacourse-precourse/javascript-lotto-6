@@ -17,7 +17,7 @@ class App {
   async userSpendMoney() {
     this.purchasedLottoAmount = await UserInput.purchasedLottoAmount();
     const validatePurchase = new ValidatePurchase(this.purchasedLottoAmount);
-    this.lottoArray = purchasedLottoArray(this.purchasedLottoAmount);
+    this.lottoArray = purchasedLottoArray(Number(this.purchasedLottoAmount));
     Output.printUserLottos(this.lottoArray);
   }
 
@@ -40,7 +40,7 @@ class App {
 
   printRateOfReturn() {
     Output.printTotalReturn(
-      this.purchasedLottoAmount,
+      Number(this.purchasedLottoAmount),
       new Match(
         this.lottoArray,
         this.winningNumbers,
