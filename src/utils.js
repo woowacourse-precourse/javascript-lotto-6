@@ -22,6 +22,7 @@ function consoleWinner() {
 }
 function consoleError(error) {
   MissionUtils.Console.print(`${error.message}`);
+  return error;
 }
 
 function winnerMessage() {
@@ -36,7 +37,7 @@ function winCount(statistics) {
       );
     }
 
-    return `${GRADING_COUNT[prize]}개 일치` + `(${LOTTO_PRIZE_MONEY[prize].toLocaleString()}원) - ${count}개`;
+    return `${GRADING_COUNT[prize]}개 일치 ` + `(${LOTTO_PRIZE_MONEY[prize].toLocaleString()}원) - ${count}개`;
   });
 
   MissionUtils.Console.print(templates.join('\n'));
@@ -47,7 +48,7 @@ function resultProfit(earningRatio) {
     minimumFractionDigits: 1, // 최소 소수점 이하 자릿수
     maximumFractionDigits: 1, // 최대 소수점 이하 자릿수
   });
-  MissionUtils.Console.print(`총 수익률은 ${formattedYieldRatio}% 입니다.`);
+  MissionUtils.Console.print(`총 수익률은 ${formattedYieldRatio}%입니다.`);
 }
 
 function randomNum() {
