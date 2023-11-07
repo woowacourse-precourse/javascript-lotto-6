@@ -16,6 +16,7 @@ const map = new Map();
 prizeConditionArr.forEach((elem) => map.set(JSON.stringify(elem.key), elem.value));
 
 class Computer {
+  #cost;
   #winnerNumbers;
   #bonusNumber;
   #prizeResult;
