@@ -124,5 +124,37 @@ describe('함수 기능 단위 테스트', () => {
 				expect(LOTTO.getResult(issuedLottery, bonus)).toEqual(result);
 			});
 		});
+		describe('getRevenue', () => {
+			test.each([
+				{
+					money: 2000,
+					result: {
+						5000: 1,
+						50000: 1,
+						1500000: 0,
+						30000000: 0,
+						2000000000: 0,
+					},
+					revenue: 2750,
+				},
+				{
+					money: 11000,
+					result: {
+						5000: 0,
+						50000: 0,
+						1500000: 0,
+						30000000: 1,
+						2000000000: 1,
+					},
+					revenue: 18454545.5,
+				},
+			])('당첨결과와 수익률을 출력함', ({ money, result, revenue }) => {
+				let sum = 0;
+				for (const [reward, amount] of Object.entries(result)) {
+					sum += reward * amount;
+				}
+				expect(Lotto.getRevenue(money, result)).toEqual(revenue);
+			});
+		});
 	});
 });
