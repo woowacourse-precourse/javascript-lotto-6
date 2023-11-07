@@ -27,6 +27,10 @@ export default class Validator {
     return numbers.length !== numbersSet.size;
   }
 
+  static #isIncludedLotteryNumbers(bonusNumber, lotteryNumbers) {
+    return lotteryNumbers.includes(bonusNumber);
+  }
+
   static validatePurchaseAmount(amount) {
     if (!this.#isPositiveNumber(amount)) {
       const message = MESSAGE_FORMAT.error('구입 금액은 0 이상의 숫자로 입력해 주세요.');
@@ -54,6 +58,23 @@ export default class Validator {
 
     if (this.#isDuplicatedNumber(numbers)) {
       const message = MESSAGE_FORMAT.error('로또 번호는 중복되면 안됩니다.');
+      throw new Error(message);
+    }
+  }
+
+  static validateBonusNumber(bonusNumber, lotteryNumbers) {
+    if (!this.#isValidLotteryNumberRange(bonusNumber)) {
+      const { minNumber, maxNumber } = LOTTO_ROLE;
+      const message = MESSAGE_FORMAT.error(
+        `보너스 번호는 ${minNumber}부터 ${maxNumber}까지의 숫자만 입력해 주세요.`,
+      );
+      throw new Error(message);
+    }
+
+    if (this.#isIncludedLotteryNumbers(bonusNumber, lotteryNumbers)) {
+      const message = MESSAGE_FORMAT.error(
+        '당첨 번호에 포함되지 않는 보너스 번호를 입력해 주세요.',
+      );
       throw new Error(message);
     }
   }
