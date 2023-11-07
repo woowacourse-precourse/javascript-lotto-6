@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import COMMON from '../constants/common.js';
-import WINNING_INFO from '../constants/winningInfo.js';
+import { WINNING_INFO } from '../constants/winningInfo.js';
 import MESSAGE from '../constants/message.js';
 
 class OutputView {
