@@ -1,5 +1,5 @@
-import print from '../utils/print.js';
-import PRINT_PHRASE from '../constants/print.js';
+import print from '../utils/print';
+import PRINT_PHRASE from '../constants/print';
 
 class InputView {
   static printInputPurchaseAmountPhrase() {

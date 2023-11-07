@@ -1,7 +1,7 @@
-import Winning from '../model/Winning.js';
-import input from '../utils/input.js';
-import print from '../utils/print.js';
-import InputView from '../view/InputView.js';
+import Winning from '../model/Winning';
+import input from '../utils/input';
+import print from '../utils/print';
+import InputView from '../view/InputView';
 
 class WinningController {
   #winning;

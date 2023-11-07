@@ -1,6 +1,6 @@
-import UserController from './controller/UserController.js';
-import WinningController from './controller/WinningController.js';
-import StoreController from './controller/StoreController.js';
+import UserController from './controller/UserController';
+import WinningController from './controller/WinningController';
+import StoreController from './controller/StoreController';
 
 class App {
   async play() {

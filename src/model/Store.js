@@ -1,4 +1,4 @@
-import { MATCH_STRINGS, MATCH_WINNING_AMOUNTS } from '../constants/match.js';
+import { MATCH_STRINGS, MATCH_WINNING_AMOUNTS } from '../constants/match';
 
 class Store {
   #principal;

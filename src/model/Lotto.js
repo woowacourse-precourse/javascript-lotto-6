@@ -1,5 +1,5 @@
-import { LOTTO_ERROR_MESSAGE } from '../constants/errorMessage.js';
-import Validate from '../Validate.js';
+import { LOTTO_ERROR_MESSAGE } from '../constants/errorMessage';
+import Validate from '../Validate';
 
 class Lotto {
   #numbers;

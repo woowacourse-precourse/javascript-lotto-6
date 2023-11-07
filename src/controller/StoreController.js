@@ -1,5 +1,5 @@
-import Store from '../model/Store.js';
-import OutputView from '../view/OutputView.js';
+import Store from '../model/Store';
+import OutputView from '../view/OutputView';
 
 class StoreController {
   #store;

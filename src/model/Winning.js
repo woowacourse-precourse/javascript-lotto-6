@@ -1,8 +1,8 @@
 import {
   WINNING_NUMBERS_ERROR_MESSAGE,
   WINNING_BONUS_ERROR_MESSAGE,
-} from '../constants/errorMessage.js';
-import Validate from '../Validate.js';
+} from '../constants/errorMessage';
+import Validate from '../Validate';
 
 class Winning {
   #winningNumbers;

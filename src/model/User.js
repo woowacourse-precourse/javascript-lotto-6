@@ -1,5 +1,5 @@
-import Validate from '../Validate.js';
-import { PURCHASE_AMOUNT_ERROR_MESSAGE } from '../constants/errorMessage.js';
+import Validate from '../Validate';
+import { PURCHASE_AMOUNT_ERROR_MESSAGE } from '../constants/errorMessage';
 
 class User {
   #purchaseAmount;

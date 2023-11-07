@@ -1,11 +1,11 @@
-import LOTTO_NUMBER from '../constants/lottoNumber.js';
-import pickUniqueRandomNumbers from '../utils/pickUniqueRandomNumbers.js';
-import input from '../utils/input.js';
-import OutputView from '../view/OutputView.js';
-import Lotto from '../model/Lotto.js';
-import User from '../model/User.js';
-import InputView from '../view/InputView.js';
-import print from '../utils/print.js';
+import LOTTO_NUMBER from '../constants/lottoNumber';
+import pickUniqueRandomNumbers from '../utils/pickUniqueRandomNumbers';
+import input from '../utils/input';
+import OutputView from '../view/OutputView';
+import Lotto from '../model/Lotto';
+import User from '../model/User';
+import InputView from '../view/InputView';
+import print from '../utils/print';
 
 class UserController {
   #user;
