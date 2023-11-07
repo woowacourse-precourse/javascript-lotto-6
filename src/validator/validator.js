@@ -1,79 +1,74 @@
-import { COMMON_ERROR_MESSAGE, PURCHASE_AMOUNT_ERROR_MESSAGE, UNIT, MAXIMUM, TOTAL_LOTTO_NUMBERS, BONUS_NUMBER_ERROR_MESSAGE, WINNING_NUMBERS_ERROR_MESSAGE } from "../constants/constants";
+import { COMMON_ERROR_MESSAGE, PURCHASE_AMOUNT_ERROR_MESSAGE, UNIT, TOTAL_LOTTO_NUMBERS, BONUS_NUMBER_ERROR_MESSAGE, WINNING_NUMBERS_ERROR_MESSAGE } from "../constants/constants";
+import CustomError from '../view/CustomError'
 
 class Validator {
-  isMoneyValid(input){
+  static isMoneyValid(input){
     const NUMERIC_MONEY = Number(input)
 
-    if (input === 0) {
-      return COMMON_ERROR_MESSAGE.emptyString
+    if (input === '') {
+     throw new CustomError(COMMON_ERROR_MESSAGE.emptyString)
     }
     if (isNaN(NUMERIC_MONEY)) {
-      return COMMON_ERROR_MESSAGE.onlyNumber
+      throw new CustomError(COMMON_ERROR_MESSAGE.onlyNumber)
     }
     if (NUMERIC_MONEY % UNIT) {
-      return PURCHASE_AMOUNT_ERROR_MESSAGE.wrongUnit
+      throw new CustomError(PURCHASE_AMOUNT_ERROR_MESSAGE.wrongUnit)
     }
     if (NUMERIC_MONEY < UNIT) {
-      return PURCHASE_AMOUNT_ERROR_MESSAGE.underThousan
+      throw new CustomError(PURCHASE_AMOUNT_ERROR_MESSAGE.underThousan)
     }
-
-    return undefined
   }
 
-  isWinningNumbersValid(input) {
+  static isNumbersValid(input) {
     const WINNINGS = String(input).split(',').map(Number)
     const MY_NUMBERS = WINNINGS.sort((a, b) => a + b).join('')
     const REMOVE_DUPLICATE_NUMBERS = [...new Set(WINNINGS)].sort((a, b) => a + b).join('')
     const FILTERED_NUMBERS = WINNINGS.filter(num => num < 1 || num > 45)
     
     if (!input) {
-      return COMMON_ERROR_MESSAGE.emptyString
+      throw new CustomError(COMMON_ERROR_MESSAGE.emptyString)
     }
 
     if (input[input.length - 1] === ',') {
-      return WINNING_NUMBERS_ERROR_MESSAGE.detectedLastComma
+      throw new CustomError(WINNING_NUMBERS_ERROR_MESSAGE.detectedLastComma)
     }
     
     if (WINNINGS.length > TOTAL_LOTTO_NUMBERS) {
-     throw new Error(`${WINNING_NUMBERS_ERROR_MESSAGE.wrongWinningNumber} 게임을 종료합니다.`)
+      throw new CustomError(`${WINNING_NUMBERS_ERROR_MESSAGE.wrongWinningNumber} 게임을 종료합니다.`)
     }
 
     if (MY_NUMBERS !== REMOVE_DUPLICATE_NUMBERS) {
-      throw new Error(`${COMMON_ERROR_MESSAGE.detectedDuplicate} 게임을 종료합니다.`)
+      throw new CustomError(`${COMMON_ERROR_MESSAGE.detectedDuplicate} 게임을 종료합니다.`)
     }
 
     if (FILTERED_NUMBERS.length) {
-      return COMMON_ERROR_MESSAGE.wrongRange
+      throw new CustomError(COMMON_ERROR_MESSAGE.wrongRange)
     }
-
-    return undefined
   }
 
-  isBonusNumberValid(winningNumbers, bonusNumber) {
+  static isBonusNumberValid(bonusNumber, winningNumbers) {
     const WINNINGS = winningNumbers.split(',').map(Number)
     const NUMERIC_NUMBER = Number(bonusNumber)
     
     if (!bonusNumber) {
-      return COMMON_ERROR_MESSAGE.emptyString
+      throw new CustomError(COMMON_ERROR_MESSAGE.emptyString)
     }
 
     if (isNaN(bonusNumber)) {
-      return COMMON_ERROR_MESSAGE.onlyNumber
+      throw new CustomError(COMMON_ERROR_MESSAGE.onlyNumber)
     }
 
     if (NUMERIC_NUMBER === 0) {
-      return BONUS_NUMBER_ERROR_MESSAGE.underZero
+      throw new CustomError(BONUS_NUMBER_ERROR_MESSAGE.underZero)
     }
 
     if (NUMERIC_NUMBER < 1 || NUMERIC_NUMBER > 45) {
-      return COMMON_ERROR_MESSAGE.wrongRange
+      throw new CustomError(COMMON_ERROR_MESSAGE.wrongRange)
     }
 
     if (WINNINGS.includes(NUMERIC_NUMBER)) {
-      return BONUS_NUMBER_ERROR_MESSAGE.duplicatedNumberWithWinningNumbers
+      throw new CustomError(BONUS_NUMBER_ERROR_MESSAGE.duplicatedNumberWithWinningNumbers)
     }
-
-    return undefined
   }
 }
 
