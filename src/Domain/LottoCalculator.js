@@ -2,6 +2,8 @@ import Lotto from '../Lotto';
 import { LOTTO_INFO } from '../Utils/constants';
 
 class LottoCalculator extends Lotto {
+  #bonus;
+  
   calculateResult(lottos) {
     const prizeResultMap = new Map();
     lottos.forEach((lotto) => {
@@ -18,6 +20,15 @@ class LottoCalculator extends Lotto {
     const earningRate = (profits / (lottoSize * LOTTO_INFO.PRICE)) * 100;
     return { prizeResultMap, earningRate };
   }
+
+  set bonus(bonus) {
+    this.#bonus = bonus;
+  }
+
+  get bonus() {
+    return this.#bonus;
+  }
+
 }
 
 export default LottoCalculator;
