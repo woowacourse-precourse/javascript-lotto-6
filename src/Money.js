@@ -14,6 +14,7 @@ class Money {
     this.payedMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
     this.noInputError(this.payedMoney);
     this.isNaNError(this.payedMoney);
+    this.notThousandError(this.payedMoney);
   };
   noInputError = (input) => {
     if (input === '') {
@@ -23,6 +24,11 @@ class Money {
   isNaNError = (input) => {
     if (Number.isNaN(input)) {
       throw new Error('[ERROR] 입력값이 숫자가 아닙니다.');
+    }
+  };
+  notThousandError = (input) => {
+    if (input % 1000 !== 0) {
+      throw new Error('[ERROR] 복권은 천원단위로 구매할 수 있습니다.');
     }
   };
 
