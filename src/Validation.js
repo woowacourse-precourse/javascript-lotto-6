@@ -42,6 +42,9 @@ export const validateBonusNumberInput = async (bonusNumberInput) => {
   if (!isNumber(bonusNumberInput)) {
     throw new Error(BONUS_NUMBER_ERROR_MESSAGES.NOT_NUMBER);
   }
+  if (isOutOfRange(bonusNumberInput)) {
+    throw new Error(BONUS_NUMBER_ERROR_MESSAGES.OUT_OF_RANGE);
+  }
 };
 
 const isNumber = (input) => {
