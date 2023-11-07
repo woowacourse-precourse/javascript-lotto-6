@@ -59,5 +59,20 @@ describe('함수 기능 단위 테스트', () => {
 				await expect(App.inputWinningNumbers()).rejects.toThrow(ERROR);
 			});
 		});
+		describe('inputBonusNumber', () => {
+			test.each(['7', '45', '30'])('정상적인 보너스 번호가 입력된 경우', async (input) => {
+				Console.readLineAsync = jest.fn().mockResolvedValueOnce(input);
+				await expect(App.inputBonusNumber([1, 2, 3, 4, 5, 6])).resolves.toEqual(+input);
+			});
+			test.each(['-1', 'a1b2c', '0', '9999', '10.12'])('비정상적인 보너스 번호가 입력된 경우', async (input) => {
+				Console.readLineAsync = jest.fn().mockResolvedValueOnce(input).mockResolvedValueOnce('30');
+				Console.print = jest.fn();
+
+				const result = await App.inputBonusNumber([1, 2, 3, 4, 5, 6]);
+				expect(Console.print).toHaveBeenCalledWith(expect.stringContaining(ERROR));
+				expect(result).toEqual(30);
+				expect(Console.readLineAsync).toHaveBeenCalledTimes(2);
+			});
+		});
 	});
 });
