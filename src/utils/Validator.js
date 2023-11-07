@@ -13,10 +13,13 @@ export default class Validator {
   static #isRequiredCount(numbers) {
     return numbers.length === LOTTO_ROLE.requiredCount;
   }
-
-  static #isValidLottoRange(numbers) {
+  static #isValidLotteryNumberRange(number) {
     const { minNumber, maxNumber } = LOTTO_ROLE;
-    return numbers.every((number) => number >= minNumber && number <= maxNumber);
+    return number >= minNumber && number <= maxNumber;
+  }
+
+  static #isValidLotteryNumbersRange(numbers) {
+    return numbers.every((number) => this.#isValidLotteryNumberRange(number));
   }
 
   static #isDuplicatedNumber(numbers) {
@@ -43,7 +46,7 @@ export default class Validator {
       throw new Error(message);
     }
 
-    if (!this.#isValidLottoRange(numbers)) {
+    if (!this.#isValidLotteryNumbersRange(numbers)) {
       const { minNumber, maxNumber } = LOTTO_ROLE;
       const message = MESSAGE_FORMAT.error(`로또 번호는 ${minNumber}부터 ${maxNumber}까지입니다.`);
       throw new Error(message);
