@@ -5,7 +5,7 @@ describe("입력 유효성 검사 테스트", () => {
   test("구입 금액이 자연수가 아니면 예외가 발생한다", () => {
     expect(() => {
       ValidateInput.validateAmount("A");
-    }).toThrow("[ERROR] 구입금액은 자연수만 입력 가능합니다.\n");
+    }).toThrow("[ERROR] 구입금액은 자연수로 입력해주세요.\n");
   });
 
   test("구입 금액이 1000보다 작으면 예외가 발생한다", () => {
