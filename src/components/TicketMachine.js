@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
-import { MAGIC_NUMBER } from './constants/numbers.js';
+import { MAGIC_NUMBER } from '../constants/numbers.js';
 
-import View from './View.js';
+import View from '../view/View.js';
 
 class TicketMachine {
   #purchaseAmount = 0;

@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INFO_MESSAGE, STATS_MESSAGE } from './constants/messages.js';
-import Validator from './utils/Validator.js';
+import { INFO_MESSAGE, STATS_MESSAGE } from '../constants/messages.js';
+import Validator from '../utils/Validator.js';
 
 class View {
   static getUserInput(amount) {

@@ -3,6 +3,8 @@ export const MAGIC_NUMBER = Object.freeze({
   TICKET_PRICE: 1000,
   MIN_NUMBER: 1,
   MAX_NUMBER: 45,
+  BONUS_THRESHOLD_NUMBER: 5,
+  MIN_RANK_LIMIT: 2,
 });
 
 export const PRIZE_MONEY = Object.freeze({

@@ -1,5 +1,5 @@
-import { PRIZE_MONEY } from './constants/numbers.js';
-import View from './View.js';
+import { PRIZE_MONEY } from '../constants/numbers.js';
+import View from '../view/View.js';
 
 class ResultAnnouncer {
   constructor({ tickets, rank }) {

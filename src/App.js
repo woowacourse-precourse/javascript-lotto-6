@@ -1,8 +1,8 @@
-import View from './View.js';
-import TicketMachine from './TicketMachine.js';
+import View from './view/View.js';
+import TicketMachine from './components/TicketMachine.js';
 import Lotto from './Lotto.js';
-import DrawMachine from './DrawMachine.js';
-import ResultAnnouncer from './ResultAnnouncer.js';
+import DrawMachine from './components/DrawMachine.js';
+import ResultAnnouncer from './components/ResultAnnouncer.js';
 
 class App {
   #state = {

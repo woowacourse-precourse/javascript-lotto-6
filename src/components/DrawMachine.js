@@ -1,18 +1,17 @@
-import { MAGIC_NUMBER, RANK } from './constants/numbers.js';
+import { MAGIC_NUMBER, RANK } from '../constants/numbers.js';
 
 class DrawMachine {
-  constructor({ tickets, myNumbers, bonusNumber, rank, profitRate }) {
+  constructor({ tickets, myNumbers, bonusNumber, rank }) {
     this.tickets = tickets;
     this.myNumbers = myNumbers;
     this.bonusNumber = bonusNumber;
     this.rank = rank;
-    this.profitRate = profitRate;
   }
 
   calculateWinningStats() {
     this.tickets.forEach(ticket => {
       const matchingCount = this.countMatchNumber(ticket);
-      if (matchingCount > 2) {
+      if (matchingCount > MAGIC_NUMBER.MIN_RANK_LIMIT) {
         this.checkRank(matchingCount, ticket);
       }
     });
@@ -30,7 +29,7 @@ class DrawMachine {
   }
 
   checkRank(matchingCount, ticket) {
-    if (matchingCount === 5) {
+    if (matchingCount === MAGIC_NUMBER.BONUS_THRESHOLD_NUMBER) {
       return this.checkBonus(ticket);
     }
     this.rank[RANK[matchingCount]] += 1;
