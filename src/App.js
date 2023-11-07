@@ -3,6 +3,11 @@ import Input from './Input.js';
 import Lotto from './Lotto.js';
 
 const CURRENCY_UNIT = 1000;
+const FIRST_PRIZE = 2000000000;
+const SECOND_PRIZE = 30000000;
+const THIRD_PRIZE = 1500000;
+const FOURTH_PRIZE = 50000;
+const FIFTH_PRIZE = 5000;
 const input = new Input();
 
 class App {
@@ -29,6 +34,13 @@ class App {
     const bonusNumber = await input.askLotteryBonusNumber();
     const parsedBonusNumber = Number(bonusNumber);
     lotto.validateBonusNumber(parsedBonusNumber);
+
+    const winningResult = lotto.getWinningList(
+      this.myLottoList,
+      parsedBonusNumber
+    );
+
+    this.printWinningResult(winningResult);
   }
 
   validateAskPurchaseAmount(purchaseAmount) {
@@ -60,6 +72,28 @@ class App {
     Console.print(`${this.purchaseAmount}개를 구매했습니다.`);
 
     this.myLottoList.forEach((lotto) => Console.print(lotto));
+  }
+
+  printWinningResult({ first, second, third, fourth, fifth }) {
+    Console.print('당첨 통계');
+    Console.print('---');
+    Console.print(
+      `3개 일치 (${FIFTH_PRIZE.toLocaleString()}원) - ${fifth.length}개`
+    );
+    Console.print(
+      `4개 일치 (${FOURTH_PRIZE.toLocaleString()}원) - ${fourth.length}개`
+    );
+    Console.print(
+      `5개 일치 (${THIRD_PRIZE.toLocaleString()}원) - ${third.length}개`
+    );
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${SECOND_PRIZE.toLocaleString()}원) - ${
+        second.length
+      }개`
+    );
+    Console.print(
+      `6개 일치 (${FIRST_PRIZE.toLocaleString()}원) - ${first.length}개`
+    );
   }
 }
 
