@@ -5,15 +5,40 @@ class App {
     const purchaseAmount = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
     const purchaseCount = purchaseAmount / 1000;
 
-    Console.print(`${purchaseCount}개를 구매했습니다.\n`);
+    Console.print(`\n${purchaseCount}개를 구매했습니다.`);
     const lottoRandomNumbers = [];
     for (let i = 0; i < purchaseCount; i++) {
       const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       lottoRandomNumbers.push(randomNumber);
+      Console.print(randomNumber);
     }
 
-    const winningNumbers = await Console.readLineAsync('당첨 번호를 입력해주세요.\n');
-    const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해주세요.\n');
+    const winningNumbers = (await Console.readLineAsync('\n당첨 번호를 입력해주세요.\n')).split(',').map(Number);
+    const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해주세요.\n');
+    const results = [0, 0, 0, 0, 0]
+
+    lottoRandomNumbers.forEach(lottoNumber => {
+      let count = 0;
+      // 로또 번호 안에 당첨 번호가 있는지 확인
+      lottoNumber.forEach(number => {
+        if (winningNumbers.indexOf(number) !== -1) {
+          count += 1;
+        }
+      });
+
+      if (count == 5 && lottoNumber.indexOf(bonusNumber) !== -1) {
+        results[count - 2] += 1;
+      } else {
+        results[count - 3] += 1;
+      }
+    });
+    
+    Console.print('\n당첨 통계\n---');
+    Console.print(`3개 일치 (5,000원) - ${results[0]}개`);
+    Console.print(`4개 일치 (50,000원) - ${results[1]}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${results[2]}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${results[3]}개`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${results[4]}개`);
   }
 }
 
