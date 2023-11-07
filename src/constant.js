@@ -14,4 +14,13 @@ const ERROR_MESSAGES = Object.freeze({
     '[ERROR] 중복된 번호가 있습니다. 서로 다른 당첨 번호를 입력해주세요.',
 });
 
-export { INFO_MESSAGES, ERROR_MESSAGES };
+const WINNING_MESSAGES = Object.freeze({
+  MATCHING_3: '3개 일치 (5,000원) - ',
+  MATCHING_4: '4개 일치 (50,000원) - ',
+  MATCHING_5: '5개 일치 (1,500,000원) - ',
+  MATCHING_5_BONUS: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  MATCHING_6: '6개 일치 (2,000,000,000원) - ',
+  COUNT: '개',
+});
+
+export { INFO_MESSAGES, ERROR_MESSAGES, WINNING_MESSAGES };

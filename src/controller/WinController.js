@@ -1,8 +1,13 @@
+import OutputView from '../view/OutputView.js';
+
 export default class WinController {
   #amount;
   #lottoNumbers;
   #bonusNumber;
   #purchasedLottos;
+  #WinningCount = [0, 0, 0, 0, 0, 0, 0];
+  #Win5andBonus = 0;
+  outputView = new OutputView();
 
   constructor(amount, lottoNumbers, bonusNumber, purchasedLottos) {
     this.#amount = amount;
@@ -13,15 +18,15 @@ export default class WinController {
   }
 
   checkWinResults() {
-    // 당첨 내역
     this.calculateWinningDetails();
+    this.printWinningDetails();
     // 수익률
     // 출력
   }
 
   calculateWinningDetails() {
     this.#purchasedLottos.forEach((pLotto) => {
-      pLotto.setNumberOfMatch(
+      pLotto.setMatchCount(
         this.countMatchingNumbers(pLotto.getNumbers()),
         this.countMatchingBonusNumber(pLotto.getNumbers())
       );
@@ -47,5 +52,17 @@ export default class WinController {
 
   calculateProfitRate() {}
 
-  printWinResults() {}
+  printWinningDetails() {
+    this.#purchasedLottos.forEach((pLotto) => {
+      if (
+        pLotto.getMatchedBonusCount() == 1 &&
+        pLotto.getMatchedNumberCount() == 5
+      ) {
+        this.#Win5andBonus++;
+      } else {
+        this.#WinningCount[pLotto.getMatchedNumberCount()]++;
+      }
+    });
+    this.outputView.printWinning(this.#WinningCount, this.#Win5andBonus);
+  }
 }
