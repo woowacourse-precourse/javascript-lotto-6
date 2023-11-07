@@ -1,9 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
-import purchaseService from "./services/purchaseService.js";
-import publishService from "./services/publishService.js";
 import inputs from "./domains/inputs.js";
 import outputs from "./domains/outputs.js";
 import validationUtils from "./utils/validationUtils.js";
+import publishService from "./services/publishService.js";
+import purchaseService from "./services/purchaseService.js";
+import winningService from "./services/winningService.js";
+import statsService from "./services/statsService.js";
 
 class App {
   #price;
@@ -11,12 +13,17 @@ class App {
   #lottos;
   #winningLotto;
   #bonusNum;
+  #counts;
+  #stats;
+  #rate;
 
   async play() {
     await this.#executePurchaseLotto();
     this.#executePublishLotto();
     await this.#executeWinningNum();
     await this.#executeBonusNum();
+    this.#executeWinningLotto();
+    this.#executeStats();
   }
 
   // 로또 구입
@@ -35,7 +42,7 @@ class App {
     outputs.printAmountOfLotto(this.#amount);
     const LottoNums = publishService.publishLottos(this.#amount);
     this.#lottos = publishService.createLottos(LottoNums);
-    outputs.printLottos(this.#lottos);
+    outputs.printLottos(this.#amount, this.#lottos);
   }
 
   // 당첨 번호 입력
@@ -62,6 +69,33 @@ class App {
       Console.print(error.message);
       return this.#executeBonusNum();
     }
+  }
+
+  // 로또 당첨
+  #executeWinningLotto() {
+    this.#counts = this.#lottos.map((lotto) => {
+      const count = winningService.getMatchedCount(lotto, this.#winningLotto);
+      const bonus = winningService.getBonusCount(lotto, this.#bonusNum);
+      return count + bonus;
+    });
+  }
+
+  // 당첨 통계
+  #executeStats() {
+    const stats = this.#counts.map((count) => {
+      const reCount = statsService.getSecondRank(count);
+      const stats = statsService.getRank(reCount);
+      return stats;
+    });
+    this.#stats = stats.at(-1);
+
+    // 통계 출력
+    outputs.printStats(this.#stats);
+
+    // 수익률 출력
+    const total = statsService.getTotal(this.#stats);
+    this.#rate = statsService.getRate(this.#price, total);
+    outputs.printRate(this.#rate);
   }
 }
 
