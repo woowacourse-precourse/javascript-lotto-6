@@ -1,8 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import CustomError from '../customs/CustomError.js';
-import ValidatableString from '../validators/ValidatableString.js';
-import PROMPT from '../constants/prompt.js';
 import ERROR_MESSAGE from '../constants/error.js';
+import { TypeValidator, StringValidator } from '../validators/index.js';
 
 /**
  * @classdesc 사용자 입력을 담당하는 클래스,
@@ -11,53 +10,56 @@ import ERROR_MESSAGE from '../constants/error.js';
  */
 class Input {
   /**
-   * 로또 구입 금액을 입력받아 ValidatableString으로 반환하는 메서드
-   *
-   * 입력값은 양의 정수여야 한다.
-   * @returns {Promise<ValidatableString>} 구입금액
+   * 사용자로부터 양의 정수를 입력 받아 number로 반환하는 메서드
+   * @returns {Promise<number>} 구입금액
    */
-  static async getCost() {
-    const cost = await Input.readValidatableAsync(PROMPT.BUY_COST);
+  static async readIntegerAsync(message) {
+    const userInput = await this.readNonEmptyAsync(message);
 
-    if (!cost.isPositiveInteger()) {
-      throw new CustomError(ERROR_MESSAGE.NOT_INTEGER);
+    if (!StringValidator.isPositiveInteger(userInput)) {
+      throw new CustomError(ERROR_MESSAGE.NOT_POSITIVE_INTEGER);
     }
 
-    return cost;
+    return Number(userInput);
   }
 
   /**
-   * 당첨 번호를 입력받아 ValidatableArray로 반환하는 메서드
+   * 사용자로부터 콤마로 구분된 정수를 입력 받아 number[]으로 반환하는 메서드
    *
    * 입력 값은 콤마로 구분된 숫자여야 한다.
-   * @returns {Promise<ValidatableArray>} 당첨번호
+   * @returns {Promise<number[]>} 당첨번호
    */
-  static async getWinningNumbers() {
-    const winningNumbers = await Input.readValidatableAsync(PROMPT.WINNING_NUMBERS);
+  static async readCommaSeparatedIntegerAsync(message) {
+    const userInput = await this.readNonEmptyAsync(message);
 
-    if (!winningNumbers.isCommaSeparatedNumbers()) {
+    if (!StringValidator.isCommaSeparatedNumbers(userInput)) {
       throw new CustomError(ERROR_MESSAGE.NOT_COMMA_SEPARATED_NUMBERS);
     }
 
-    return winningNumbers.toValidatableArray();
+    const parsed = userInput.split(',').map(Number);
+
+    if (parsed.some((number) => !TypeValidator.isPositiveInteger(number))) {
+      throw new CustomError(ERROR_MESSAGE.NOT_POSITIVE_INTEGER);
+    }
+
+    return parsed;
   }
 
   /**
-   * 문자열을 읽어서 검증 가능한 객체로 반환하는 메서드
+   * 문자열을 읽어서 반환하는 메서드
    *
    * 비어있다면 에러를 던진다.
    * @param {string} message
-   * @returns {Promise<ValidatableString>}
+   * @returns {Promise<string>}
    */
-  static async readValidatableAsync(message) {
+  static async readNonEmptyAsync(message) {
     const userInput = await Console.readLineAsync(message);
-    const validatable = new ValidatableString(userInput);
 
-    if (validatable.isEmpty()) {
+    if (TypeValidator.isEmpty(userInput)) {
       throw new CustomError(ERROR_MESSAGE.EMPTY_STRING);
     }
 
-    return validatable;
+    return userInput;
   }
 }
 

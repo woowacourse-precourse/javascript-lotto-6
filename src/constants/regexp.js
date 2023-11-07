@@ -1,10 +1,11 @@
-export const EMPTY_STRING = /^\s*$/;
-export const INTERGER = /^\d+$/;
-export const COMMA_SEPARATED_NUMBERS = /^\d+(,\d+)*$/;
+const EMPTY_STRING = /^\s*$/;
+const INTERGER = /^[^0]\d*/;
+const COMMA_SEPARATED_NUMBERS = /^\d+(,\d+)*$/;
 
 const REGEXP = Object.freeze({
   EMPTY_STRING,
   INTERGER,
+  COMMA_SEPARATED_NUMBERS,
 });
 
 export default REGEXP;

@@ -3,9 +3,7 @@ import Lotto from './Lotto.js';
 import Message from './utils/Message.js';
 import { LOTTO_RANGE, LOTTO_COUNT, LOTTO_PRICE } from './constants/number.js';
 import Input from './utils/Input.js';
-import ValidatableArray from './validators/ValidatableArray.js';
-import CustomError from './customs/CustomError.js';
-import ERROR_MESSAGE from './constants/error.js';
+import PROMPT from './constants/prompt.js';
 
 /**
  * @classdesc 복권 발급처
@@ -35,29 +33,20 @@ class DongHang {
   static issueOne() {
     const { from, to } = LOTTO_RANGE;
     const numbers = Random.pickUniqueNumbersInRange(from, to, LOTTO_COUNT);
-    const validatableNumbers = new ValidatableArray(numbers);
-    validatableNumbers.sort('asc');
+    const sorted = numbers.sort((a, b) => a - b);
 
-    Message.array(validatableNumbers.value);
+    Message.array(sorted);
 
-    return new Lotto(validatableNumbers);
+    return new Lotto(sorted);
   }
 
   /**
    * 당첨 번호와 보너스 번호를 입력받는 메서드
    */
   async inputWinningNumbers() {
-    const mainNumbers = await Input.getWinningNumbers();
+    const mainNumbers = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
 
-    if (!mainNumbers.isUniqueArray()) {
-      throw new CustomError(ERROR_MESSAGE.DUPLICATED_NUMBER);
-    }
-
-    if (!mainNumbers.isInRange(LOTTO_RANGE.from, LOTTO_RANGE.to)) {
-      throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
-    }
-
-    this.#winningNumbers.mainNumbers = mainNumbers;
+    this.#winningNumbers.mainNumbers = new Lotto(mainNumbers);
   }
 }
 

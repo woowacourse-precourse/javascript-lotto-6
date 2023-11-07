@@ -4,10 +4,3 @@ export const LOTTO_RANGE = Object.freeze({
   to: 45,
 });
 export const LOTTO_COUNT = 6;
-
-const NUMBER = Object.freeze({
-  LOTTO_PRICE,
-  LOTTO_RANGE,
-});
-
-export default NUMBER;
