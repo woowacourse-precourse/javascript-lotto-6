@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import App from '../src/App';
+import Lotto from '../src/Lotto';
 
 describe('함수 기능 단위 테스트', () => {
 	const ERROR = '[ERROR]';
@@ -72,6 +73,55 @@ describe('함수 기능 단위 테스트', () => {
 				expect(Console.print).toHaveBeenCalledWith(expect.stringContaining(ERROR));
 				expect(result).toEqual(30);
 				expect(Console.readLineAsync).toHaveBeenCalledTimes(2);
+			});
+		});
+	});
+
+	describe('Lotto', () => {
+		const LOTTO = new Lotto([1, 2, 3, 4, 5, 6]);
+		describe('getResult', () => {
+			test.each([
+				{
+					issuedLottery: [
+						[1, 2, 3, 10, 11, 12],
+						[1, 2, 3, 4, 31, 33],
+					],
+					bonus: 9,
+					result: {
+						5000: 1,
+						50000: 1,
+						1500000: 0,
+						30000000: 0,
+						2000000000: 0,
+					},
+				},
+				{
+					issuedLottery: [
+						[1, 2, 3, 10, 11, 12],
+						[1, 2, 3, 4, 5, 33],
+					],
+					bonus: 6,
+					result: {
+						5000: 1,
+						50000: 0,
+						1500000: 0,
+						30000000: 1,
+						2000000000: 0,
+					},
+				},
+				{
+					issuedLottery: [[1, 2, 3, 4, 5, 6]],
+					bonus: 6,
+					result: {
+						5000: 0,
+						50000: 0,
+						1500000: 0,
+						30000000: 0,
+						2000000000: 1,
+					},
+				},
+			])('당첨된 각 복권의 금액의 수를 구함', ({ issuedLottery, bonus, result }) => {
+				expect(LOTTO.getResult(issuedLottery, bonus)).toEqual(result);
 			});
 		});
 	});
