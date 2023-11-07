@@ -34,7 +34,7 @@ class App {
     const moneyNumber = Number(money);
     if (!money) throw new Error(VALIDATION_ERRORS_MESSAGE.EMPTY_INPUT);
     if (!regexNumber.test(money))
-      throw new Error(VALIDATION_ERRORS_MESSAGE.NOT_ONLY_NUMBER);
+      throw new Error(VALIDATION_ERRORS_MESSAGE.MONEY_NOT_NUMBER);
     if (moneyNumber < LOTTO_PRICE)
       throw new Error(VALIDATION_ERRORS_MESSAGE.INCORRECT_AMOUNT);
     if (moneyNumber % LOTTO_PRICE !== 0) {
