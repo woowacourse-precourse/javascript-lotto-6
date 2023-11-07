@@ -5,7 +5,7 @@ async function retryOnError(callbackReadFunc) {
     return await callbackReadFunc();
   } catch (error) {
     OutputView.printErrorMessage(error.message);
-    return this.retryOnError(callbackReadFunc);
+    return retryOnError(callbackReadFunc);
   }
 }
 
