@@ -1,27 +1,20 @@
 import { LOTTO, ERROR } from '../common/constants.js';
 import { throwError } from '../common/utils.js';
-import { isCommaSeparated, isLengthEqualTo, containUniqueNumbersInString } from '../common/validator.js';
+import { isCommaSeparated, containUniqueNumbersInString } from '../common/validator.js';
 
-class InputValidator {
+class WinningNumberValidator {
   constructor(input) {
     this.input = input;
   };
 
   validate() {
     this.#validateFormat();
-    this.#validateLength();
     this.#validateUnique();
   };
 
   #validateFormat() {
-    if (!isCommaSeparated(this.input, LOTTO.winning_length)) {
+    if (!isCommaSeparated(this.input, LOTTO.max_match)) {
       throwError(ERROR.winning_format);
-    }
-  };
-
-  #validateLength() {
-    if (!isLengthEqualTo(this.input, LOTTO.winning_length)) {
-      throwError(ERROR.winning_length);
     }
   };
 
@@ -32,4 +25,4 @@ class InputValidator {
   };
 };
 
-export default InputValidator;
+export default WinningNumberValidator;
