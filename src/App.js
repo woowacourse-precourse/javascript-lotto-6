@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import AmountInput from "./View/AmountInput";
+import numberInput from "./View/numberInput";
 import Lotto from "./Lotto";
 import makeRandomNumbers from "./makeRandomNumbers";
 import calculateLottoNumber from "./calculateLottoNumber";
@@ -15,6 +16,7 @@ class App {
       Console.print(`[${sortedRandomNumbers.join(", ")}]`);
       lottoList.push(new Lotto(sortedRandomNumbers));
     }
+    const [winningNumbers, bonusNumber] = await numberInput();
   }
 }
 
