@@ -93,6 +93,23 @@ const isWinningLottoWithBonus = (
   return false;
 };
 
+export const updateWinningResult = (winningResults, winningLottoCount) => {
+  switch (winningLottoCount) {
+    case WINNING_LOTTO_COUNT.THREE:
+      winningResults[WINNING_LOTTO_COUNT.THREE] += 1;
+      break;
+    case WINNING_LOTTO_COUNT.FOUR:
+      winningResults[WINNING_LOTTO_COUNT.FOUR] += 1;
+      break;
+    case WINNING_LOTTO_COUNT.FIVE:
+      winningResults[WINNING_LOTTO_COUNT.FIVE] += 1;
+      break;
+    case WINNING_LOTTO_COUNT.SIX:
+      winningResults[WINNING_LOTTO_COUNT.SIX] += 1;
+      break;
+  }
+};
+
 export const totalProfit = (winningResults) => {
   let totalReward = 0;
   const reward = {
