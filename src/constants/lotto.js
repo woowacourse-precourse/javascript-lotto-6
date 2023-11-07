@@ -16,6 +16,7 @@ export const MATCHED_COUNT = {
   FIVE: 5,
   FOUR: 4,
   THREE: 3,
+  QQUANG: 2,
 };
 
 export const GRADE = {

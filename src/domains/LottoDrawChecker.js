@@ -60,7 +60,7 @@ export default class LottoDrawChecker {
     matchingLottoNumberCount,
     _ = paramType(matchingLottoNumberCount, 'number'),
   ) {
-    return matchingLottoNumberCount === 0;
+    return matchingLottoNumberCount <= MATCHED_COUNT.QQUANG;
   }
 
   #drawResultTemplete() {
