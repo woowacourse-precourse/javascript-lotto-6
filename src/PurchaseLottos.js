@@ -1,4 +1,5 @@
-import { NUMBER, ERROR } from "./utils/constants.js";
+import { NUMBER } from "./utils/constants.js";
+import { ERROR } from "./utils/messages.js";
 
 class PurchaseLottos {
   #amount;

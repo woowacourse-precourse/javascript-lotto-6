@@ -3,7 +3,8 @@ import Lotto from "./Lotto.js";
 import Bonus from "./Bonus.js";
 import Result from "./Result.js";
 import { Console, Random } from "@woowacourse/mission-utils";
-import { USER_PROMPT, RESULT, NUMBER } from "./utils/constants.js";
+import { NUMBER } from "./utils/constants.js";
+import { INPUT, OUTPUT } from "./utils/messages.js";
 
 class App {
   #lottoCount;
@@ -34,7 +35,7 @@ class App {
 
   async inputLottoCount() {
     try {
-      const input = await Console.readLineAsync(USER_PROMPT.PURCHASE_AMOUNT);
+      const input = await Console.readLineAsync(INPUT.PURCHASE_AMOUNT);
       const purchaseLottos = new PurchaseLottos(input);
       return purchaseLottos.getLottoCount();
     } catch (error) {
@@ -45,14 +46,17 @@ class App {
 
   async getLottoCount() {
     this.#lottoCount = await this.inputLottoCount();
-    Console.print(USER_PROMPT.SHOW_LOTTO_COUNT(this.#lottoCount));
+    Console.print(OUTPUT.SHOW_LOTTO_COUNT(this.#lottoCount));
   }
 
   generateWinningNumbers() {
     for (let index = 0; index < this.#lottoCount; index++) {
-      const winningNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-        (a, b) => a - b
-      );
+      const winningNumbers = Random.pickUniqueNumbersInRange(
+        NUMBER.MIN,
+        NUMBER.MAX,
+        NUMBER.COUNT
+      ).sort((a, b) => a - b);
+
       this.#winningNumberList.push(winningNumbers);
       Console.print(`[${winningNumbers.join(", ")}]`);
     }
@@ -60,7 +64,7 @@ class App {
 
   async inputWinningNumbers() {
     try {
-      const input = await Console.readLineAsync(USER_PROMPT.WINNING_NUMBERS);
+      const input = await Console.readLineAsync(INPUT.WINNING_NUMBERS);
       const lotto = new Lotto(input.split(","));
       return lotto.getWinningNumbers();
     } catch (error) {
@@ -71,7 +75,7 @@ class App {
 
   async inputBonusNumber() {
     try {
-      const input = await Console.readLineAsync(USER_PROMPT.BONUS_NUMBER);
+      const input = await Console.readLineAsync(INPUT.BONUS_NUMBER);
       const bouns = new Bonus(input, this.#userWinningNumbers);
       return bouns.getBonusNumber();
     } catch (error) {
@@ -109,12 +113,12 @@ class App {
   printResult() {
     const { three, four, five, fiveBonus, six } = this.#result;
 
-    Console.print(RESULT.STATISTICS);
-    Console.print(`${RESULT.THREE} - ${three}개`);
-    Console.print(`${RESULT.FOUR} - ${four}개`);
-    Console.print(`${RESULT.FIVE} - ${five}개`);
-    Console.print(`${RESULT.FIVE_BONUS} - ${fiveBonus}개`);
-    Console.print(`${RESULT.SIX} - ${six}개`);
+    Console.print(OUTPUT.STATISTICS);
+    Console.print(`${OUTPUT.THREE} - ${three}개`);
+    Console.print(`${OUTPUT.FOUR} - ${four}개`);
+    Console.print(`${OUTPUT.FIVE} - ${five}개`);
+    Console.print(`${OUTPUT.FIVE_BONUS} - ${fiveBonus}개`);
+    Console.print(`${OUTPUT.SIX} - ${six}개`);
     Console.print(
       `총 수익률은 ${this.#profit
         .toFixed(1)
