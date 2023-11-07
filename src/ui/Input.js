@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import { USER_INPUT } from '../constants/Logs.js';
-import Validation from '../domain/Validation.js';
+import { USER_INPUT } from '../constants/Logs';
+import Validation from '../domain/Validation';
+import Lotto from '../domain/Lotto';
 
 export async function getLottoPurchaseAmount() {
   try {
@@ -17,14 +18,18 @@ export async function getLottoPurchaseAmount() {
 }
 
 export async function getWinningLottoNumbers() {
-  const winningLottoNumbersInput = await Console.readLineAsync(
-    USER_INPUT.winningNumbersInputPrompt,
-  );
-  const winningLottoNumbers = winningLottoNumbersInput
-    .split(',')
-    .map(inputChar => parseInt(inputChar, 10));
-
-  return winningLottoNumbers;
+  try {
+    const lottoInput = await Console.readLineAsync(
+      USER_INPUT.winningNumbersInputPrompt,
+    );
+    const winningLotto = lottoInput
+      .split(',')
+      .map(input => parseInt(input, 10));
+    return new Lotto(winningLotto);
+  } catch (error) {
+    Console.print(error.message);
+    return getWinningLottoNumbers();
+  }
 }
 
 export async function getBonusNumber() {
