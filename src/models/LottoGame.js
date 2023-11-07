@@ -57,6 +57,29 @@ class LottoGame {
       LOTTO_NUMBER.COUNT
     ).map(Number);
   }
+
+  calculateResults() {
+    const status = Array.from({ length: 6 }, () => 0);
+    this.#lottos.forEach((lotto) => {
+      const rank = this.matchWinningNumber(lotto.getNumbers());
+      status[rank] += 1;
+    });
+    return status;
+  }
+
+  matchWinningNumber(lotto) {
+    const matchingNumbers = lotto.filter((number) =>
+      this.#winningNumber.getNumbers().includes(number)
+    ).length;
+    const bonusMatch = lotto.includes(this.#bonusNumber);
+
+    if (matchingNumbers === 6) return 1;
+    if (matchingNumbers === 5 && bonusMatch) return 2;
+    if (matchingNumbers === 5) return 3;
+    if (matchingNumbers === 4) return 4;
+    if (matchingNumbers === 3) return 5;
+    return 0;
+  }
 }
 
 export default LottoGame;
