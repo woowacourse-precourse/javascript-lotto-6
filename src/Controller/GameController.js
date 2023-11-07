@@ -19,16 +19,14 @@ class GameController {
 
   async play() {
     await this.getMoney();
-    OutputView.printLineBreak();
+
     this.createLottos();
     this.printLottoInfo();
 
-    OutputView.printLineBreak();
     await this.getWinningNumbers();
-    OutputView.printLineBreak();
+
     await this.getBonusNumbers();
 
-    OutputView.printLineBreak();
     this.calculateResult();
     this.printResult();
   }
