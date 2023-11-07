@@ -21,15 +21,21 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
+  test("로또 번호에 1~45 사이의 값이 아닌 값이 포함되어 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 50, 4, 11, 18]);
+    }).toThrow("[ERROR]");
+  });
+
   // test("로또 구입 금액이 1000 단위가 아니면 예외가 발생한다.", () => {
   //   const app = new App();
   //   const value = "1100";
-  //   expect(() => app.getIncomeError(value)).toThrow("[ERROR]");
+  //   expect(() => app.getIncomeAndCheck(value)).toThrow("[ERROR]");
   // });
 
   // test("로또 구입 금액이 숫자가 아니면 아니면 예외가 발생한다.", () => {
   //   const app = new App();
-  //   const value = "2000";
-  //   expect(() => app.getIncomeError(value)).toThrow("[ERROR]");
+  //   const value = "200j";
+  //   expect(() => app.getIncomeAndCheck(value)).toThrow("[ERROR]");
   // });
 });
