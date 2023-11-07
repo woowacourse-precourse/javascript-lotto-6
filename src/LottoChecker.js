@@ -19,8 +19,8 @@ class LottoChecker {
     return ticket.includes(this.bonusNumber);
   }
 
-  getResult() {
-    const result = {};
+  getMatches() {
+    const results = {};
 
     this.tickets.forEach(ticket => {
       const matchCount = this.#countMatchingNumbers(ticket);
@@ -30,10 +30,10 @@ class LottoChecker {
         matchKey += this.#hasBonusNumber(ticket) ? '+bonus' : '';
       }
 
-      result[matchKey] = (result[matchKey] || 0) + 1;
+      results[matchKey] = (results[matchKey] || 0) + 1;
     });
-
-    return result;
+    console.log(results);
+    return results;
   }
 }
 

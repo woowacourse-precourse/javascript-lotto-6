@@ -6,16 +6,17 @@ import LottoChecker from './LottoChecker';
 class App {
   async play() {
     const player = new LottoPlayer();
-    const machine = new LottoMachine(ticketCount);
+    const purchaseCount = await player.purchaseLotto();
+    const machine = new LottoMachine(purchaseCount);
+    LottoPrinter.printPurchaseComplete(purchaseCount);
+    const tickets = await machine.getTickets(purchaseCount);
 
-    const ticketCount = await player.purchaseLotto();
-    LottoPrinter.printPurchaseComplete(ticketCount);
-
-    const tickets = await machine.getTickets(ticketCount);
     const winningNumbers = await player.enterWinningNumbers();
 
     const checker = new LottoChecker(tickets, winningNumbers);
-    const result = checker.getResult();
+    const matches = checker.getMatches();
+    LottoPrinter.printMatches(matches);
+    console.log(LottoPrinter.printMatches(matches));
   }
 }
 

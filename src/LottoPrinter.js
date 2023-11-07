@@ -31,14 +31,27 @@ class LottoPrinter {
     Console.print(messages.statics.seperator);
   }
 
-  static printResult(matchCount, ticketCount) {
-    isGuessBonus
-      ? Console.print(
-          `${matchCount}개 일치, 보너스 볼 일치 (${prize[matchCount]}원) - ${ticketCount}개`,
-        )
-      : Console.print(
-          `${matchCount}개 일치 (${prize[matchCount]}원) - ${ticketCount}개`,
-        );
+  static printMatch(matchCount, ticketCount) {
+    if (matchCount.includes('+bonus')) {
+      const matchCountWithoutBonus = matchCount.replace('+bonus', '');
+      Console.print(
+        `${matchCountWithoutBonus}개 일치, 보너스 볼 일치 (${prize[matchCount]}원) - ${ticketCount}개`,
+      );
+    } else {
+      Console.print(
+        `${matchCount}개 일치 (${prize[matchCount]}원) - ${ticketCount}개`,
+      );
+    }
+  }
+
+  static printMatches(results) {
+    const matchCounts = Object.keys(prize);
+
+    matchCounts.forEach(matchCount => {
+      const ticketCount = results[matchCount] || 0;
+
+      this.printMatch(matchCount, ticketCount);
+    });
   }
 
   static printReturnRate(returnRate) {
