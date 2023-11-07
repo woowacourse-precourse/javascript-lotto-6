@@ -28,6 +28,11 @@ describe('로또 클래스 테스트', () => {
       const numbers = Lotto.generateLottoNumbers();
       expect(numbers.length).toBe(LOTTO.COUNT);
     });
+    test('생성한 로또 번호 오름차순 테스트', () => {
+      const numbers = Lotto.generateLottoNumbers();
+      const sortedNumbers = numbers.sort((a, b) => a - b);
+      expect(numbers).toEqual(sortedNumbers);
+    });
   });
 
   test.each(['1000', '2000', '3000'])('금액에 따른 로또 발행 테스트', (input) => {
