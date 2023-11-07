@@ -1,18 +1,57 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+const { Random } = MissionUtils;
+import CONSTANT from "./constant/constants";
+
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
+  constructor(numbers, shouldSort = true) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = shouldSort ? numbers.sort((a, b) => a - b) : [...numbers];
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    const { ERR_LOG } = CONSTANT;
+
+    if (new Set(numbers).size !== 6) {
+      throw new Error(`${ERR_LOG.WRONG_LENGTH}`);
+    }
+    if (numbers.some((number) => number < 1 || number > 45)) {
+      throw new Error(`${ERR_LOG.OUT_OF_RANGE}`);
     }
   }
 
-  // TODO: 추가 기능 구현
+  get numbers() {
+    return this.#numbers;
+  }
+
+  static generateRandom() {
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
+  checkWinning(winningNumbers, bonusNumber) {
+    let matchCount = this.numbers.filter((number) =>
+      winningNumbers.includes(number)
+    ).length;
+    let isBonusMatched = this.numbers.includes(bonusNumber);
+    let prize = this.calculatePrize(matchCount, isBonusMatched);
+
+    return {
+      matchCount,
+      isBonusMatched,
+      prize,
+    };
+  }
+
+  calculatePrize(matchCount, isBonusMatched) {
+    const { PRIZE_VALUES } = CONSTANT;
+
+    if (matchCount === 5 && isBonusMatched) {
+      return PRIZE_VALUES["5+1"];
+    } else {
+      return PRIZE_VALUES[matchCount] || 0;
+    }
+  }
 }
 
 export default Lotto;
