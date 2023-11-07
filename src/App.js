@@ -20,6 +20,7 @@ class App {
   }
 
   generateLottos(lottoAmount) {
+    Console.print(' ');
     let generatedLottos = [];
 
     for (let i = 0; i < lottoAmount; i++) {
@@ -39,6 +40,7 @@ class App {
   }
 
   async getUserLottoNumbers() {
+    Console.print(' ');
     const lottoNumbersInput = await Console.readLineAsync(
       CONSOLE_MESSAGE.PROMPT_USER_LOTTO_NUMBER
     );
@@ -76,10 +78,8 @@ class App {
   async play() {
     const userPriceInput = await this.getUserPrice();
     const lottoAmount = Price.calculateLottoAmount(userPriceInput);
-    Console.print(' ');
     const lottos = this.generateLottos(lottoAmount);
     this.printPurchasedLottos(lottos);
-    Console.print(' ');
     const lottoNumbers = await this.getUserLottoNumbers();
     const bonusNumber = await this.getUserBonusNumber(lottoNumbers);
   }
