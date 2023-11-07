@@ -6,6 +6,7 @@ export const INPUT_MESSAGE = Object.freeze({
 	RANDOM_MAX_NUMBER: 45,
 	RANDOM_COUNT: 6,
 	LOTTO_UNITS: 1000,
+	BONUS_CHECK_NUMBER: 5,
 });
 
 export const OUTPUT_MESSAGE = Object.freeze({

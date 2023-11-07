@@ -13,11 +13,12 @@ class LottoController {
 
 	async start() {
 		await this.initializeLotto();
-		outputView.printLottoNumbers(
-			this.#lottoMaker.getAmount() / INPUT_MESSAGE.LOTTO_UNITS,
-			this.#lottoMaker.getLottoNumbers()
-		);
+
+		outputView.printLottoNumbers(this.#lottoMaker.getAmount(), this.#lottoMaker.getLottoNumbers());
+
 		await this.inputNumbers();
+
+		this.getResult();
 	}
 
 	async initializeLotto() {
@@ -25,8 +26,8 @@ class LottoController {
 			let amount = Number(await inputView.readPurchaseAmount());
 
 			if (validator.purchaseAmountValidator(amount)) {
-				this.#lottoMaker = new LottoMaker(amount);
-				this.#lottoMaker.makeLotto(this.#lottoMaker.getAmount() / INPUT_MESSAGE.LOTTO_UNITS);
+				this.#lottoMaker = new LottoMaker(amount / INPUT_MESSAGE.LOTTO_UNITS);
+				this.#lottoMaker.makeLotto(this.#lottoMaker.getAmount());
 				break;
 			}
 		}
@@ -40,9 +41,10 @@ class LottoController {
 	async inputMatchNumbers() {
 		while (true) {
 			let matchNumbers = await inputView.readMatchNumbers();
+			const convertMatchNumbers = matchNumbers.split(',').map(Number);
 
-			if (validator.matchNumberValidator(matchNumbers.split(','))) {
-				this.#lotto = new Lotto(matchNumbers.split(','));
+			if (validator.matchNumberValidator(convertMatchNumbers)) {
+				this.#lotto = new Lotto(convertMatchNumbers);
 				break;
 			}
 		}
@@ -52,11 +54,35 @@ class LottoController {
 		while (true) {
 			let bonusNumber = await inputView.readBonusNumber();
 
-			if (validator.bonusNumberValidator(this.#lotto.getNumbers(), bonusNumber)) {
-				this.#lotto.setBonusNumber(bonusNumber);
+			if (validator.bonusNumberValidator(this.#lotto.getNumbers(), Number(bonusNumber))) {
+				this.#lotto.setBonusNumber(Number(bonusNumber));
 				break;
 			}
 		}
+	}
+
+	getResult() {
+		this.initializeStatics();
+		this.numbersMatching();
+		this.bonusNumberMatching();
+	}
+
+	initializeStatics() {
+		this.#lotto.setMatchingStatics(Array.from({ length: this.#lottoMaker.getAmount() }, () => 0));
+	}
+
+	numbersMatching() {
+		for (let i = 0; i < this.#lottoMaker.getAmount(); i++) {
+			this.#lotto.compareMatching(i, this.#lottoMaker.getLottoNumbers()[i]);
+		}
+	}
+
+	bonusNumberMatching() {
+		this.#lotto.getMatchingStatics().forEach((matchingStatic, index) => {
+			if (matchingStatic === INPUT_MESSAGE.BONUS_CHECK_NUMBER) {
+				this.#lotto.bonusCompareMatching(index, this.#lottoMaker.getLottoNumbers()[index]);
+			}
+		});
 	}
 }
 

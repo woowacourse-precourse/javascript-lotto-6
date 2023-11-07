@@ -19,7 +19,7 @@ export const validator = {
 			numbers.forEach((number) => {
 				this.isNull(number);
 				this.isOutOfRange(number);
-				this.isNotInteger(Number(number));
+				this.isNotInteger(number);
 			});
 
 			this.isUnvalidCount(numbers);
@@ -35,7 +35,7 @@ export const validator = {
 		try {
 			this.isNull(bonusNumber);
 			this.isOutOfRange(bonusNumber);
-			this.isNotInteger(Number(bonusNumber));
+			this.isNotInteger(bonusNumber);
 			this.isDuplicateNumber(concatArray);
 			return true;
 		} catch (error) {
