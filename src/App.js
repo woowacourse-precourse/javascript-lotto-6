@@ -1,14 +1,27 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Money from "./Money.js";
 import GAME_MESSAGES from "./constants/GameMessages.js";
+import Lotto from "./Lotto.js";
 
 class App {
   async play() {
     const money = new Money();
     const userMoney = await money.userMoney();
-    const lottoCount = userMoney / 1000;
+    const lottoCount = parseInt(userMoney / 1000, 10);
     Console.print(`\n${lottoCount}${GAME_MESSAGES.COUNT_LOTTO}`);
-    Console.print(this.generateLottoNumber(lottoCount))
+    let lottos = this.generateLottoNumber(lottoCount);
+    this.getWinningNumbers(lottos);
+  }
+
+  async getWinningNumbers(lottos) {
+    const winningNumber = await Console.readLineAsync(
+      GAME_MESSAGES.INPUT_WINNING_NUMBER,
+    );
+    let winningNumberArray = winningNumber
+      .split(",")
+      .map((x) => parseInt(x, 10));
+    let winning = new Lotto(winningNumberArray);
+    Console.print(lottos,winning)
   }
 
   generateLottoNumber(lottoCount) {
