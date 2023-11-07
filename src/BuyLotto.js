@@ -13,7 +13,7 @@ class BuyLotto {
   }
 
   #validatePrice(price) {
-    if (!price || !price.trim || LOTTO.REG_NUMBER.test(price)) {
+    if (!price || !price.trim() || LOTTO.REG_NUMBER.test(price)) {
       throw new Error(ERROR.PRICE_ONLY_NUMBER);
     }
     if (Number(price) % LOTTO.PRICE > 0) {

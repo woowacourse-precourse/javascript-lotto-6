@@ -60,7 +60,7 @@ class App {
   }
 
   #validateBonus(bonusNumber, winningNumber) {
-    if (!bonusNumber || !bonusNumber.trim) {
+    if (!bonusNumber || !bonusNumber.trim()) {
       throw new Error(`${ERROR.PREFIX} ${INPUT.BONUS_NUMBER}`);
     }
     if (LOTTO.REG_NUMBER.test(bonusNumber)) {
