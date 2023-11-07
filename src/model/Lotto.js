@@ -9,11 +9,6 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  async setNumbers(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
-
   async getNumbers() {
     return this.#numbers;
   }
@@ -38,9 +33,25 @@ class Lotto {
 
   #checkArange(number) {
     const constants = new Constants();
-    return (number) =>
+    if (
       number < constants.getLottoNumberMin() ||
-      number > constants.getLottoNumberMax();
+      number > constants.getLottoNumberMax()
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  async compare(lotto) {
+    const lottoNumbers = await lotto.getNumbers();
+    const matchCount = this.#numbers.filter((number) =>
+      lottoNumbers.includes(number)
+    ).length;
+    return matchCount;
+  }
+
+  async isBonusInclude(bonusNum) {
+    return this.#numbers.includes(bonusNum);
   }
 }
 

@@ -20,9 +20,10 @@ class BonusLotto {
 
   async #validate(bonusNumber) {
     const messages = new Messages();
-    if (numbers.some((num) => this.#checkArange(num))) {
+    if (this.#checkArange(bonusNumber)) {
       throw new Error(messages.getErrorMsg("outOfindex"));
     }
+
     if (typeof bonusNumber !== "number") {
       throw new Error(messages.getErrorMsg("notNumber"));
     }
@@ -31,9 +32,13 @@ class BonusLotto {
 
   #checkArange(number) {
     const constants = new Constants();
-    return (number) =>
+    if (
       number < constants.getLottoNumberMin() ||
-      number > constants.getLottoNumberMax();
+      number > constants.getLottoNumberMax()
+    ) {
+      return true;
+    }
+    return false;
   }
 }
 

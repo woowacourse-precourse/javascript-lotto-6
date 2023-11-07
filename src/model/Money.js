@@ -1,4 +1,4 @@
-import Messages from "../utils/Messages";
+import Messages from "../utils/Messages.js";
 
 class Money {
   #money;
