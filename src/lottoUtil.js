@@ -190,3 +190,20 @@ function printRankStatistics(rankMap) {
             MissionUtils.Console.print(msg);
         });
 }
+
+/**
+ * @param {number} lottoPay
+ * @param {Map<number, number>} rankMap
+ */
+export function getReturnRate(lottoPay, rankMap) {
+    const returnSum = [...rankMap.keys()].reduce((acc, cur) => acc + LOTTO_REWARD[cur] * rankMap.get(cur), 0);
+    return ((returnSum / lottoPay) * 100).toFixed(1);
+}
+
+/**
+ * @param {number} lottoPay
+ * @param {Map<number, number>} rankMap
+ */
+function printReturnRate(lottoPay, rankMap) {
+    MissionUtils.Console.print(`총 수익률은 ${getReturnRate(lottoPay, rankMap)}%입니다.`);
+}
