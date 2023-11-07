@@ -10,7 +10,7 @@ import {
   MESSAGE_PROFIT,
 } from '../constants/message.js';
 
-export default class outputView {
+export default class OutputView {
   insertCoins(coins) {
     Console.print(MESSAGE_OUTPUT_COINS.replace('{result}', coins));
   }

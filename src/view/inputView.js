@@ -29,7 +29,7 @@ import {
   ERROR_INVALID_RANGE,
 } from '../constants/message.js';
 
-export default class View {
+export default class InputView {
   async coin() {
     const cash = await Console.readLineAsync(MEESAGE_INPUT_COINS);
 

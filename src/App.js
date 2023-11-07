@@ -1,7 +1,7 @@
-import Lotto from './model/Lotto.js';
-import Compare from './model/Compare.js';
-import InputView from './view/inputView.js';
-import OutputView from './view/outputView.js';
+import Lotto from './domains/Lotto.js';
+import Compare from './domains/Compare.js';
+import InputView from './view/InputView.js';
+import OutputView from './view/OutputView.js';
 
 class App {
   #inputView = new InputView();

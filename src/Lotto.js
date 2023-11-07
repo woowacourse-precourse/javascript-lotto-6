@@ -1,1 +1,1 @@
-export { default } from './model/Lotto.js';
+export { default } from './domains/Lotto.js';
