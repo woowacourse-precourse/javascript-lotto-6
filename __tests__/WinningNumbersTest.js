@@ -40,4 +40,10 @@ describe('당첨 번호 클래스 테스트', () => {
       new WinningNumbers('1,1,2,3,4,5');
     }).toThrow('[ERROR]');
   });
+
+  test('입력받은 값의 개수가 로또 번호 개수와 다르면 예외가 발생한다.', () => {
+    expect(() => {
+      new WinningNumbers('1,2,3,4,5');
+    }).toThrow('[ERROR]');
+  });
 });

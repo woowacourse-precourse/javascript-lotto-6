@@ -1,3 +1,10 @@
+const NUMBERS = {
+  LOTTO_COUNT: 6,
+  LOTTO_PRICE: 1000,
+  LOTTO_LOW_END: 1,
+  LOTTO_HIGH_END: 45,
+};
+
 const ERRORS = {
   INCLUDE_BLANK: '[ERROR] 입력에 의미없는 공백이 존재할 수 없습니다.',
   PURCHASE_AMOUNT_NOT_NUMBER: '[ERROR] 구입 금액은 숫자여야 합니다.',
@@ -15,13 +22,6 @@ const ERRORS = {
   BONUS_NUMBER_NOT_BETWEEN_RANGE: '[ERROR] 보너스 번호는 1~45 사이여야 합니다.',
   BONUS_NUMBER_DUPLICATED:
     '[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.',
-};
-
-const NUMBERS = {
-  LOTTO_COUNT: 6,
-  LOTTO_PRICE: 1000,
-  LOTTO_LOW_END: 1,
-  LOTTO_HIGH_END: 45,
 };
 
 const MESSAGES = {
