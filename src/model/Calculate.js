@@ -77,30 +77,30 @@ class Calculate {
   }
   
   rate(result) {
-    for(const value of Object.keys(result)) {
-      this.#onSwitch(value);
+    for(const key in result) {
+      this.#onSwitch(key, result);
     } 
     const rate = ((this.sum / this.#amount) * 100).toFixed(1).toLocaleString();
 
     return rate;
   }
 
-  #onSwitch(value) {
-    switch(value) {
+  #onSwitch(key, result) {
+    switch(key) {
       case '3':
-        this.sum += `${REWORD.FIFTH_PLACE}`;
+        this.sum += result[key] * `${REWORD.FIFTH_PLACE}`;
         break;
       case '4':
-        this.sum += `${REWORD.FOURTH_PLACE}`;
+        this.sum += result[key] * `${REWORD.FOURTH_PLACE}`;
         break;
       case '5':
-        this.sum += `${REWORD.THIRD_PLACE}`;
+        this.sum += result[key] * `${REWORD.THIRD_PLACE}`;
         break;
       case 'bonus':
-        this.sum += `${REWORD.SECOND_PLACE}`;
+        this.sum += result[key] * `${REWORD.SECOND_PLACE}`;
         break;
       case '6':
-        this.sum += `${REWORD.FIRST_PLACE}`;
+        this.sum += result[key] * `${REWORD.FIRST_PLACE}`;
         break;
     }
   }
