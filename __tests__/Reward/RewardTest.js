@@ -5,6 +5,11 @@ describe('Reward 클래스 테스트', () => {
   let winningLotto;
   let reward;
 
+  const lottos = [
+    { getNumbers: jest.fn().mockReturnValue([1, 2, 3, 10, 20, 30]) },
+    { getNumbers: jest.fn().mockReturnValue([1, 2, 3, 4, 5, 6]) },
+  ];
+
   beforeEach(() => {
     winningLotto = new WinningLotto([1, 2, 3, 4, 5, 6], 7);
     reward = new Reward(winningLotto);
@@ -43,11 +48,6 @@ describe('Reward 클래스 테스트', () => {
   test('calculateTotalPrizeAndStatistics는 모든 로또에 대한 총 상금과 통계를 계산해야 한다', () => {
     const initialStatistics = Reward.INITIAL_STATISTICS;
 
-    const lottos = [
-      { getNumbers: jest.fn().mockReturnValue([1, 2, 3, 10, 20, 30]) },
-      { getNumbers: jest.fn().mockReturnValue([1, 2, 3, 4, 5, 6]) },
-    ];
-
     const result = reward.calculateTotalPrizeAndStatistics(lottos, initialStatistics);
     expect(result.totalPrize).toBe(Reward.PRIZE_MONEY[3] + Reward.PRIZE_MONEY[6]);
     expect(result.statistics['3']).toBe(1);
@@ -55,11 +55,6 @@ describe('Reward 클래스 테스트', () => {
   });
 
   test('calculateReward는 구입한 모든 로또에 대한 보상을 계산해야 한다', () => {
-    const lottos = [
-      { getNumbers: jest.fn().mockReturnValue([1, 2, 3, 10, 20, 30]) },
-      { getNumbers: jest.fn().mockReturnValue([1, 2, 3, 4, 5, 6]) },
-    ];
-
     const expectedLogs = [
       '3개 일치 (5,000원) - 1개',
       '4개 일치 (50,000원) - 0개',
