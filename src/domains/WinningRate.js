@@ -1,4 +1,4 @@
-import { ERROR } from "../constant/gameMessge.js";
+import { validateBonusNumber } from "../utils/validate.js";
 
 class WinningRate {
   #lotto;
@@ -8,21 +8,11 @@ class WinningRate {
   constructor(lotto, bonusNumber) {
     this.#lotto = lotto;
     this.#bonusNumber = bonusNumber;
-    this.#validate(bonusNumber);
+    this.#validate(lotto, bonusNumber);
   }
 
-  #validate(bonusNumber) {
-    if (this.#lotto.includesNumber(bonusNumber)) {
-      throw new Error(ERROR.bonus.duplicate);
-    }
-
-    if (typeof bonusNumber !== "number" || Number.isNaN(bonusNumber)) {
-      throw new Error(ERROR.bonus.numeric);
-    }
-
-    if (!(1 <= bonusNumber && bonusNumber <= 45)) {
-      throw new Error(ERROR.lotto.numberRange);
-    }
+  #validate(lotto, bonusNumber) {
+    validateBonusNumber(lotto, bonusNumber);
   }
 
   countMatchLottoNumber(lotto) {
