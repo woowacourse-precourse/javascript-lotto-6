@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES, GAME_RULE_NUMBER } from './Constants.js';
+import { ERROR_MESSAGES, GAME_RULE_NUMBER } from '../constant/Constants.js';
 
 const checkDivisibleByLottoPrice = (money) => {
   if (money % GAME_RULE_NUMBER.price)

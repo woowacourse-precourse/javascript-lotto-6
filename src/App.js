@@ -1,9 +1,9 @@
-import LottoGame from './LottoProcess.js';
+import LottoProcess from './domain/LottoProcess.js';
 
 class App {
   async play() {
-    const lottoGame = new LottoGame();
-    await lottoGame.lottoProcess();
+    const lottoGame = new LottoProcess();
+    await lottoGame.processStart();
   }
 }
 

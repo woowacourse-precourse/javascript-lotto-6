@@ -1,16 +1,16 @@
 import { Random } from '@woowacourse/mission-utils';
-import { GAME_RULE_NUMBER, RANKING } from './Constants.js';
+import { GAME_RULE_NUMBER, RANKING } from '../constant/Constants.js';
 import {
   getInputBonusNumber,
   getInputPurchasingMoney,
   getInputWinningNumbers,
   printPurchasedAmount,
   printRankingList,
-} from './Utils.js';
+} from '../util/Utils.js';
 import Lotto from './Lotto.js';
 
-class LottoGame {
-  async lottoProcess() {
+class LottoProcess {
+  async processStart() {
     this.money = await getInputPurchasingMoney();
     await this.generateUserLottos();
     this.winningNumbers = await getInputWinningNumbers();
@@ -68,4 +68,4 @@ class LottoGame {
   }
 }
 
-export default LottoGame;
+export default LottoProcess;

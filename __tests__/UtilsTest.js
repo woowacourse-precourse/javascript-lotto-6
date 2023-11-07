@@ -6,7 +6,7 @@ import {
   printPurchasedAmount,
   printProfit,
   printRankingList,
-} from '../src/Utils';
+} from '../src/util/Utils';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
