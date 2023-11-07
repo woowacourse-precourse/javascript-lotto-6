@@ -17,7 +17,4 @@ class Output {
     }
   }
   
-  export default Output;
-  
-  
-    
+  export default Output;    
