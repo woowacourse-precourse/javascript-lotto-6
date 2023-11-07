@@ -21,12 +21,12 @@ export default class LottoMachine {
   }
 
   async run() {
-    await this.#getPurchaseAmount();
+    this.#purchaseAmount = await this.#getPurchaseAmount();
     this.#makeLottos(this.#purchaseAmount);
     OutputView.printLottoTickets(this.#player.getLottoTickets());
-    await this.#getWinningNumbers();
+    this.#winningNumbers = await this.#getWinningNumbers();
     OutputView.printNewLine();
-    await this.#getBonusNumber();
+    this.#bonusNumber = await this.#getBonusNumber();
     OutputView.printNewLine();
     this.#findMatchCount();
     this.#calculateWinningStats();
@@ -63,14 +63,15 @@ export default class LottoMachine {
   }
 
   async #getPurchaseAmount() {
-    try {
-      const purchaseAmountInput = await InputView.readPurchaseAmount();
-      const parsePurchaseAmount = Number(purchaseAmountInput);
-      await this.#purchaseAmountValidate(parsePurchaseAmount);
-      this.#purchaseAmount = purchaseAmountInput;
-    } catch (e) {
-      Console.print(e.message);
-      await this.#getPurchaseAmount();
+    while (true) {
+      try {
+        const purchaseAmountInput = await InputView.readPurchaseAmount();
+        const parsePurchaseAmount = Number(purchaseAmountInput);
+        await this.#purchaseAmountValidate(parsePurchaseAmount);
+        return parsePurchaseAmount;
+      } catch (e) {
+        Console.print(e.message);
+      }
     }
   }
 
@@ -81,31 +82,33 @@ export default class LottoMachine {
   }
 
   async #getWinningNumbers() {
-    try {
-      const winningNumbersInput = await InputView.readWinningNumbers();
-      this.#winningNumbers = new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
-    } catch (e) {
-      Console.print(e.message);
-      await this.#getWinningNumbers();
+    while (true) {
+      try {
+        const winningNumbersInput = await InputView.readWinningNumbers();
+        return new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
+      } catch (e) {
+        Console.print(e.message);
+      }
     }
   }
 
   async #getBonusNumber() {
-    try {
-      const bonusNumberInput = await InputView.readBonusNumber();
-      const ONLY_DIGIT_PATTERN = /^\d+$/;
+    while (true) {
+      try {
+        const bonusNumberInput = await InputView.readBonusNumber();
+        const ONLY_DIGIT_PATTERN = /^\d+$/;
 
-      if (!ONLY_DIGIT_PATTERN.test(bonusNumberInput)) {
-        throw new Error(ERROR_MESSAGE.notNumber);
-      }
+        if (!ONLY_DIGIT_PATTERN.test(bonusNumberInput)) {
+          throw new Error(ERROR_MESSAGE.notNumber);
+        }
 
-      if (this.#winningNumbers.getNumbers().includes(Number(bonusNumberInput))) {
-        throw new Error(ERROR_MESSAGE.duplication);
+        if (this.#winningNumbers.getNumbers().includes(Number(bonusNumberInput))) {
+          throw new Error(ERROR_MESSAGE.duplication);
+        }
+        return Number(bonusNumberInput);
+      } catch (e) {
+        Console.print(e.message);
       }
-      this.#bonusNumber = Number(bonusNumberInput);
-    } catch (e) {
-      Console.print(e.message);
-      await this.#getBonusNumber();
     }
   }
 
