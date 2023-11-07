@@ -1,4 +1,5 @@
 import { ERROR_MSG } from "./constants/constants.js";
+import { validateLottoResult } from "./utility/validation.js";
 
 class Lotto {
   #numbers;
@@ -15,19 +16,7 @@ class Lotto {
 
     // TODO: 추가 기능 구현
     numbers.map((number) => {
-      // results 숫자 검사
-      if (isNaN(number)) {
-        throw new Error(ERROR_MSG.NUMBER_ERROR);
-      }
-
-      // results 범위 검사
-      if (number < 1 || number > 45) {
-        throw new Error(ERROR_MSG.NUMBER_RANGE);
-      }
-      // resuls 중복 검사
-      if (numbers.filter((n) => n === number).length > 1) {
-        throw new Error(ERROR_MSG.NUMBER_RANGE);
-      }
+      validateLottoResult(number, numbers);
     });
   }
 }

@@ -2,44 +2,60 @@ import { Random } from "@woowacourse/mission-utils";
 import { ConsoleInput } from "./ConsoleInput.js";
 import { ConsoleOutput } from "./ConsoleOutput.js";
 import Lotto from "./Lotto.js";
-import { validateLottoPrice } from "./validation/validation.js";
+import { validateLottoPrice } from "./utility/validation.js";
 import { LOTTO_RULES } from "./constants/constants.js";
+import { findMatchingNums } from "./utility/results.js";
 
 class LottoPlay {
+  #lottoPrice;
+  #result;
+  #generatedNums;
+
+  constructor(result, generated) {
+    this.#lottoPrice = 0;
+    this.#result = result;
+    this.#generatedNums = generated;
+    this.lottos = [];
+  }
   async startGame() {
     // 로또 금액 입력 함수
     await this.inputLottoPrice();
     await this.inputLottoResult();
-    await this.inputBonus();
+    const bonusNum = await this.inputBonus();
+
+    //   로또 번호에 중복된 숫자가 있는지 체크하는 유효성 검사 함수
+    findMatchingNums(this.lottos, this.#result);
+    // console.log(this.lottos);
   }
 
   async inputLottoPrice() {
-    let lottoPrice = await ConsoleInput.inputLottoPrice();
+    this.#lottoPrice = await ConsoleInput.inputLottoPrice();
     // 1000 단위 검사, 1000부터 입력 가능
-    validateLottoPrice(lottoPrice);
-    const price = lottoPrice / LOTTO_RULES.PRICE;
+    validateLottoPrice(this.#lottoPrice);
+    const price = this.#lottoPrice / LOTTO_RULES.PRICE;
     await ConsoleOutput.lottoPurchasedMessage(price);
     await this.generateLotto(price);
   }
 
   async generateLotto(quantity) {
     for (let i = 0; i < quantity; i++) {
-      let generate = await Random.pickUniqueNumbersInRange(
+      this.#generatedNums = await Random.pickUniqueNumbersInRange(
         LOTTO_RULES.START,
         LOTTO_RULES.END,
         LOTTO_RULES.LENGTH
       );
-      generate.sort((a, b) => a - b);
-      const stringifyNums = `[${generate.join(", ")}]`;
+      const lottos = this.#generatedNums.sort((a, b) => a - b);
+      this.lottos.push(lottos);
+      const stringifyNums = `[${this.#generatedNums.join(", ")}]`;
       await ConsoleOutput.generatedLotto(stringifyNums);
     }
   }
 
   async inputLottoResult() {
-    const result = await ConsoleInput.inputLottoResult();
+    this.#result = await ConsoleInput.inputLottoResult();
     // NaN, 범위, 중복 검사
-    new Lotto(result);
-    await ConsoleOutput.lottoNumberList(result);
+    new Lotto(this.#result);
+    await ConsoleOutput.lottoNumberList(this.#result);
   }
 
   async inputBonus() {

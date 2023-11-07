@@ -17,4 +17,5 @@ export const LOTTO_RULES = Object.freeze({
   START: 1,
   END: 45,
   LENGTH: 6,
+  PRICE: 1000,
 });

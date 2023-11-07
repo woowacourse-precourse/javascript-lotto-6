@@ -1,6 +1,6 @@
 import Lotto from "./Lotto.js";
 import { Console, Random } from "@woowacourse/mission-utils";
-import { validatePurchaseFormat } from "./validation/validation.js";
+import { validatePurchaseFormat } from "./utility/validation.js";
 import { INPUT_MSG } from "./constants/InputMessage.js";
 import { ERROR_MSG } from "./constants/ErrorMessage.js";
 import { matchingCounts } from "./constants/ResultMessage.js";
