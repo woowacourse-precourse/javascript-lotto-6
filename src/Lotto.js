@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-/* eslint-disable no-plusplus */
+
 class Lotto {
   #numbers;
 
@@ -21,7 +21,7 @@ class Lotto {
     this.#isBonus = false;
 
     winningNumbers.forEach((number) => {
-      if (this.#numbers.includes(number)) this.#numOfCorrect++;
+      if (this.#numbers.includes(number)) this.#numOfCorrect += 1;
     });
     if (this.#numbers.includes(bonusNumber)) this.#isBonus = true;
 
