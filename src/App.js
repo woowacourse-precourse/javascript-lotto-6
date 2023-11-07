@@ -11,8 +11,8 @@ import {
   DELIMITER_SPACE
 } from "./constants/constants.js";
 import Lotto from "./Lotto.js";
-import TargetNumber from "./TargetNumber.js";
-import BonusNumber from "./BonusNumber.js";
+import TargetNumber from "./model/TargetNumber.js";
+import BonusNumber from "./model/BonusNumber.js";
 import { getLottoNumber } from "./utils/getLottoNumber.js";
 
 class App {
