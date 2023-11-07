@@ -142,19 +142,18 @@
 
 ## 프로그래밍 요구 사항 확인 목록
 
-- [ ] Node.js 18.17.1 버전에 실행 가능해야 함
-- [ ] 프로그램 실행 시작점은 `App.js`의 `play` 메서드
+- [x] Node.js 18.17.1 버전에 실행 가능해야 함
+- [x] 프로그램 실행 시작점은 `App.js`의 `play` 메서드
   ```
   const app = new App();
   app.play();
   ```
-- [ ] package.json 변경 불가 & 순수 Vanila JS 구현
-- [ ] [JavaScript 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript)을 지키면서 프로그래밍
-- [ ] [커밋 메시지 컨벤션 가이드](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)를 참고하여 기능 목록 단위로 커밋
+- [x] [JavaScript 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript)을 지키면서 프로그래밍
+- [x] [커밋 메시지 컨벤션 가이드](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)를 참고하여 기능 목록 단위로 커밋
 - [ ] 프로그램 종료 시 `process.exit()`를 호출하지 않음
-- [ ] 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름 수정 및 이동 금지
-- [ ] indent depth를 2까지만 허용
-- [ ] 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현. 한 가지 일만 잘 하도록
+- [x] 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름 수정 및 이동 금지
+- [x] indent depth를 2까지만 허용
+- [x] 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현. 한 가지 일만 잘 하도록
 - [ ] else 사용을 지양
 - [ ] Jest를 이용해서 기능이 정상 동작함을 테스트 코드로 확인
   - `__tests__/LottoTest.js` 를 참고하여 학습한 후 테스트 구현
