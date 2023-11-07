@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import InputView from "../view/InputView";
 import OutputView from "../view/OutputView";
 import Purchase from "../model/Purchase";
@@ -8,6 +9,8 @@ class LottoController {
   #inputView;
   #outputView;
   #purchase;
+  #purchaseAmount;
+  #winningNumber;
   #bonusNumber;
   #lotto;
 
@@ -17,25 +20,56 @@ class LottoController {
   }
 
   async process() {
-    const purchaseAmount = await this.#inputView.inputPurchase();
-
-    this.#purchase = new Purchase(purchaseAmount);
+    await this.#purchaseProcess();
     const purchaseNumber = this.#purchase.purchaseNumber();
     const randomNumbers = this.#purchase.createRandomNumbers();
 
     this.#outputView.purchaseResultView(purchaseNumber, randomNumbers);
 
-    const winningNumber = await this.#inputView.inputWinningNumber();
-    let bonusNumber = await this.#inputView.inputBonusNumber();
+    await this.#winningNumberProcess();
+    await this.#bonusNumberProcess();
 
-    this.#bonusNumber = new BonusNumber(bonusNumber, winningNumber);
-    this.#lotto = new Lotto(winningNumber);
-    bonusNumber = this.#bonusNumber.convertNumber;
-
-    const winningResult = this.#lotto.winningResult(randomNumbers, bonusNumber);
-    const rate = this.#lotto.rateResult(purchaseAmount, winningResult);
+    const winningResult = this.#lotto.winningResult(randomNumbers, this.#bonusNumber);
+    const rate = this.#lotto.rateResult(this.#purchaseAmount, winningResult);
 
     this.#outputView.winningResultView(winningResult, rate);
+  }
+
+  async #purchaseProcess() {
+    while (true) {
+      try {
+        this.#purchaseAmount = await this.#inputView.inputPurchase();
+        this.#purchase = new Purchase(this.#purchaseAmount);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  async #winningNumberProcess() {
+    while (true) {
+      try {
+        this.#winningNumber = await this.#inputView.inputWinningNumber();
+        this.#lotto = new Lotto(this.#winningNumber);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
+
+  async #bonusNumberProcess() {
+    while (true) {
+      try {
+        this.#bonusNumber = await this.#inputView.inputBonusNumber();
+        const bonusNumber = new BonusNumber(this.#bonusNumber, this.#winningNumber);
+        this.#bonusNumber = bonusNumber.convertNumber();
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
 
