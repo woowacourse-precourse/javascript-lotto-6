@@ -16,7 +16,6 @@ class App {
     };
   }
   async play() {
-
     this.purchaseAmount = await getValidPurchaseAmount();
     const lottoCnt = this.purchaseAmount/CONSTANTS.LOTTO_TICKET_PRICE;
     this.lottos = purchaseLottos(lottoCnt);

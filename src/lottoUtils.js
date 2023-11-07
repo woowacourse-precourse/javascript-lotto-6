@@ -31,7 +31,6 @@ export function purchaseLottos(count) {
   Console.print(`${count}개를 구매했습니다.`);
   for (let i = 0; i < count; i++) {
     const numbers = Random.pickUniqueNumbersInRange(1, 45, CONSTANTS.LOTTO_NUMBERS_COUNT);
-    numbers.sort((a, b) => a - b);
     const lotto = new Lotto(numbers);
     lottos.push(lotto);
   }
@@ -40,7 +39,6 @@ export function purchaseLottos(count) {
 }
 
 export async function getWinningNumbersAndBonus() {
-    //TODO: 예외처리
   const winningNumbersInput = await Console.readLineAsync(CONSTANTS.WINNING_NUMBER_INPUT_MESSAGE);
   const winningNums = winningNumbersInput.split(',').map(number => Number(number.trim()));
   const bonusNum = await Console.readLineAsync(CONSTANTS.BONUS_NUMBER_INPUT_MESSAGE);
