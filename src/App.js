@@ -29,7 +29,6 @@ class App {
     } catch (error) {
       Console.print(error.message);
       await this.inputMoney();
-      return;
     }
   }
 
@@ -50,7 +49,6 @@ class App {
     } catch (error) {
       Console.print(error.message);
       await this.inputWinning();
-      return;
     }
     this.inputBonusNum();
   }
@@ -66,9 +64,7 @@ class App {
     } catch (error) {
       Console.print(error.message);
       await this.inputBonusNum();
-      return;
     }
-
     this.compareLotto();
   }
 
@@ -83,16 +79,17 @@ class App {
       const same = result.getResultObject();
       this.#compareResult.push(same);
     });
-
-    this.printResult();
+    this.getResult();
   }
 
-  printResult() {
+  getResult() {
     let result = new Output();
     result.calcLottoResult(this.#compareResult);
-
     const lottoResult = result.printLottoResult();
+    this.printResult(lottoResult);
+  }
 
+  printResult(lottoResult) {
     Console.print("");
     Console.print("당첨 통계");
     Console.print("---");
@@ -103,7 +100,6 @@ class App {
       `5개 일치, 보너스 볼 일치 (30,000,000원) - ${lottoResult.num5Bouns}개`
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${lottoResult.num6}개`);
-
     const rate = (lottoResult.winMoney / this.#inputMoney) * 100;
     const resultRate = Math.round(rate * 100) / 100;
     Console.print(`총 수익률은 ${resultRate}%입니다.`);
