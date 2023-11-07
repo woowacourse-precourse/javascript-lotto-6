@@ -1,10 +1,10 @@
-const INPUT_MESSAGES = {
+export const INPUT_MESSAGES = {
   INPUT_CASH_MESSAGE: "구입금액을 입력해 주세요.\n",
   INPUT_WINNING_NUMBER: "당첨 번호를 입력해 주세요.\n",
   INPUT_BOUNUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
 };
 
-const OUTPUT_MESSAGES = {
+export const OUTPUT_MESSAGES = {
   PURCHASE_QUANTITY: "개를 구매했습니다.",
   WINNING_STATISTICS: "\n당첨 통계\n---",
   CORRECT_COUNT_OUTPUT_3: "3개 일치 (5,000원) - ",
@@ -15,7 +15,7 @@ const OUTPUT_MESSAGES = {
   RATE_OF_RETURN: "총 수익률은 ",
 };
 
-const ERROR_MESSAGES = {
+export const ERROR_MESSAGES = {
   CASH_NOT_INTEGER_IN_THOUSANDS:
     "[ERROR] 구입금액은 1000 단위 정수로 입력이 가능합니다.",
   WINNING_NUMBER_NOT_SIX: "[ERROR] 로또 번호는 6개여야 합니다.",
@@ -31,5 +31,3 @@ const ERROR_MESSAGES = {
   LOTTO_LENGTH_NOT_SIX: "[ERROR] 로또 번호는 6개여야 합니다.",
   LOTTO_VALUE_DUPLICATED: "[ERROR] 로또 번호는 중복될 수 없습니다.",
 };
-
-export { INPUT_MESSAGES, OUTPUT_MESSAGES, ERROR_MESSAGES };
