@@ -21,7 +21,7 @@ class LottoGameController {
       const winningLotto = await this.getValidWinningLotto();
       const bonusNumber = await this.getValidBonusNumber(winningLotto);
 
-      const comparisonResults = this.lottoGame.getLottoComparisonResults(
+      const comparisonResults = this.lottoGame.getComparisonResults(
         winningLotto.getSortedLotto(),
         bonusNumber
       );
@@ -29,7 +29,7 @@ class LottoGameController {
       const winsStatistics = this.lottoGame.getStatistics(comparisonResults);
       this.outputView.printWinsStatistics(winsStatistics);
 
-      const totalPrizeAmount = this.lottoGame.calcTotalPrizeAmount(winsStatistics);
+      const totalPrizeAmount = this.lottoGame.getTotalPrizeAmount(winsStatistics);
       this.outputView.printProfitRatio(this.lottoGame.getProfitRatio(totalPrizeAmount));
     } catch ({ message }) {
       this.outputView.printErrorMessage(message);

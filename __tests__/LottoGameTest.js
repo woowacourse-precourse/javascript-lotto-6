@@ -53,7 +53,7 @@ describe('LottoGame', () => {
     };
 
     const expectedResult = 5000;
-    const result = lottoGame.calcTotalPrizeAmount(statistics);
+    const result = lottoGame.getTotalPrizeAmount(statistics);
 
     expect(result).toEqual(expectedResult);
   });
