@@ -30,7 +30,7 @@ class LottoUtill {
         this.#compareBonus(lotto, bonusNumber);
       }
       if (correctAmount >= 3 && correctAmount !== 5) {
-        this.#staticObject[correctAmount] += 1;
+        this.#staticObject[correctAmount] += utillConst.addStatic;
       }
     });
     return this.#staticObject;
@@ -48,10 +48,10 @@ class LottoUtill {
 
   #compareBonus(lotto, bonusNumber) {
     if (lotto.includes(bonusNumber)) {
-      this.#staticObject.bonus += 1;
+      this.#staticObject.bonus += utillConst.addStatic;
       return;
     }
-    this.#staticObject[5] += 1;
+    this.#staticObject[5] += utillConst.addStatic;
   }
 
   getRate() {

@@ -25,6 +25,7 @@ export const lottoVal = {
 };
 
 export const utillConst = {
+  addStatic: 1,
   buyCalc: (money) => parseInt(money / 1000, 10),
   calcRate: (earnMoney, calcNumber) =>
     Math.round((earnMoney / calcNumber) * 10000) / 100,
