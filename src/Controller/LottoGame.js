@@ -14,9 +14,9 @@ class LottoGame {
     const purchaseLotto = await this.#startLottoMachine();
     const winningLotto = await this.#getWinningLotto();
 
-    purchaseLotto.map((lotto) =>
-      this.#winningMachine.getStatistics({ lotto, winningLotto }),
-    );
+    this.#startWinningMachine({ purchaseLotto, winningLotto });
+    const matchResult = this.#winningMachine.getPrizeStructure();
+    this.#view.printWinningResult(matchResult);
   }
 
   async #startLottoMachine() {
@@ -50,6 +50,12 @@ class LottoGame {
     const bonusNumber = await this.#view.readBonusNumber();
 
     return { numbers, bonusNumber };
+  }
+
+  #startWinningMachine({ purchaseLotto, winningLotto }) {
+    purchaseLotto.map((lotto) =>
+      this.#winningMachine.calculateStatistics({ lotto, winningLotto }),
+    );
   }
 }
 

@@ -13,15 +13,13 @@ class WinningMachine {
     return new WinningLotto({ numbers, bonusNumber });
   }
 
-  getStatistics({ lotto, winningLotto }) {
+  calculateStatistics({ lotto, winningLotto }) {
     const lottoNumber = lotto.getNumbers();
     const winningNumber = winningLotto.getNumbers();
 
     const hasBonus = lotto.isInclude(winningLotto.getBonusNumber());
     const matchCount = this.#evaluateMatch({ lottoNumber, winningNumber });
     this.#updatePrizeStructure(matchCount, hasBonus);
-
-    return this.#getPrizeStructure();
   }
 
   #evaluateMatch({ lottoNumber, winningNumber }) {
@@ -41,7 +39,7 @@ class WinningMachine {
     }
   }
 
-  #getPrizeStructure() {
+  getPrizeStructure() {
     return { ...this.#prizeStructure };
   }
 }
