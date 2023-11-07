@@ -203,6 +203,125 @@ JavaScript에서는 클래스 말고도 객체를 만드는 방법은 여러 가
  ┗ 📜index.js
 ```
 
+# - 도메인 클래스들 안에 담긴 함수에 대한 간략한 설명
+
+## - App.js (로또 진행의 메인이 되는 클래스)
+
+1. getLottoAmount
+
+- 금액을 입력받아서 해당 금액에 맞는 구매한 로또 갯수를 this.#lottoAmount에 할당합니다.
+
+2. printLottos
+
+- 로또 갯수에 걸맞은 구매한 총 로또를 출력합니다.
+
+3. getWinningNumbers
+
+- 당첨 번호를 입력받아서 this.#winningLottoNumbers 필드에 인스턴스를 할당합니다.
+
+4. getTotalWinningNumbers
+
+- 보너스 번호를 입력받아서 WinnigLotto 클래스에서 당첨 번호와 보너스 번호에 대한 유효성 검사를 해준 후, this.#totalWinningLotto에 해당 인스턴스를 할당합니다.
+
+5. printRewards
+
+- this.#totalWinningLotto 인스턴스를 Reward 클래스에서 받아서 당첨 통계 결과를 출력합니다.
+
+---
+
+## - Money.js (구입 금액을 담당하는 클래스)
+
+1. getLottoAmount
+
+- 해당 금액을 인스턴스화 해서 유효성 검사를 해준후, 해당 금액에 맞는 로또 구입 갯수를 반환합니다.
+
+2. validate
+
+- 입력 받은 금액의 유효성 검사를 진행합니다. 타입, 금액, 1000원 단위 인지를 검사하고 있습니다.
+
+---
+
+## - Lotto.js (단일 로또 담당 클래스)
+
+1. getRandomNums
+
+- 새로운 로또를 무작위의 번호로 만듭니다.
+
+2. getPurchasedLottos
+
+- 로또 구입 갯수를 인자로 받아서, 그 갯수에 맞는 무작위 로또를 발행합니다.
+
+3. toStringFromNumbers
+
+- 로또를 출력 형식에 맞게 문자열로 변환하여 반환합니다.
+
+4. getNumbers
+
+- 해당 로또 번호를 반환합니다.
+
+5. fromInputString
+
+- 당첨 번호를 입력 받아서 Lotto 인스턴스로 반환합니다.
+
+6. validate
+
+- 로또 번호에 대한 유효성 검사를 진행하는 함수 입니다.
+  타입, 범위, 길이, 중복에 관한 유효성 검사를 다루고 있습니다.
+
+## - WinningLotto.js (보너스 번호까지 포함한 당첨 로또 담당 클래스)
+
+1. validateBonusNumber
+
+- 입력받은 보너스 번호에 대한 유효성 검증입니다. 타입, 범위, 중복에 관한 유효성 검증을 진행합니다.
+
+2. getWinningNumbers
+
+- 당첨 번호를 반환합니다.
+
+3. getBonusNumber
+
+- 보너스 번호를 반환합니다.
+
+## - Reward.js (당첨 통계를 담당하는 클래스)
+
+1. calculatePrizeForMatch
+
+- 인자로 matchCount를 받아서 입력된 일치하는 번호의 갯수에 따라 상금을 반환합니다.
+
+2. updateMatchCount
+
+- 통계 객체와, key를 인자로 받아서 통계 결과 객체를 업데이트합니다.
+
+3. updateStatisticsAndPrize
+
+- 일치하는 번호의 갯수(matchCount)와 보너스 번호의 일치 여부를 고려하여, 통계 객체(statistics)와 상금을 업데이트합니다.
+- 업데이트 된 통계 객체와 계산된 상금을 객체로 묶어 반환합니다.
+
+4. updateStatistics
+
+- 일치하는 번호의 갯수(matchCount)에 따라 통계 객체(statistics)를 업데이트
+- 함수 길이 제한을 위해 updateStatisticsAndPrize와 분리하였습니다.
+
+5. getStatisticsRow
+
+- 통계 key에 맞춰서 통계 결과 문자열을 반환해주는 함수입니다.
+
+6. calculateMatchCount
+
+- 로또 번호 배열(lotto)을 인자로 받아 당첨 번호(#winningNumbers)와 일치하는 갯수를 반환합니다.
+
+7. calculateTotalPrizeAndStatistics
+
+- 여러 로또 번호들(lottos)을 인자로 받아서 각각 계산을 해서, 총 상금과 각각의 통계를 계산합니다.
+
+8. calculateReward
+
+- 구매한 로또 번호들(lottos)에 대한 총 상금과 수익률을 계산하여, 그 결과를 문자열의 배열로 반환합니다.
+
+9. formatOutput
+
+- ORDER_KEYS에 정의된 순서에 따라 각각의 통계 결과를 문자열로 변환하여 배열로 반환합니다.
+
 # - 클래스 다이어그램
 
 ![3주차](https://github.com/brgndyy/javascript-lotto-6/assets/109535991/051d4623-fef0-4bd2-bdc7-eecc23ce98cb)
