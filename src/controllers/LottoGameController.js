@@ -17,46 +17,60 @@ class LottoGameController {
 
   async executeLottoGame() {
     await this.#purchaseLottos();
-    await this.#getAndSetWinningNumbers();
-    await this.#getAndSetBonusNumber();
+    await this.#ensureWinningNumbersInput();
+    await this.#ensureBonusNumberInput();
     const { results, profitRate } = this.#executeLottoMatch();
     this.#displayLottoResult(results, profitRate);
   }
 
-  async #retryOnFailure(func) {
+  async #retryOnFailure(readFunction, setFunction) {
     try {
-      return await func();
+      const input = await readFunction();
+      setFunction(input);
+      return input;
     } catch (error) {
       this.#view.printError(error);
-      return this.#retryOnFailure(func);
+      return this.#retryOnFailure(readFunction, setFunction);
     }
   }
 
-  async #getAndSetMoneyAmount() {
-    await this.#retryOnFailure(async () => {
-      const moneyAmount = await this.#view.readMoneyAmount();
-      this.#lottoPublisher.setMoneyAmount(moneyAmount);
-    });
+  #setMoneyAmount(moneyAmount) {
+    this.#lottoPublisher.setMoneyAmount(moneyAmount);
   }
 
-  async #getAndSetWinningNumbers() {
-    await this.#retryOnFailure(async () => {
-      const winningNumbers = await this.#view.readWinningNumbers();
-      this.#lottoService.setWinningNumbers(winningNumbers);
-      this.#view.printNewLine();
-    });
+  #setWinningNumbers(winningNumbers) {
+    this.#lottoService.setWinningNumbers(winningNumbers);
+    this.#view.printNewLine();
   }
 
-  async #getAndSetBonusNumber() {
-    await this.#retryOnFailure(async () => {
-      const bonusNumber = await this.#view.readBonusNumber();
-      this.#lottoService.setBonusNumber(bonusNumber);
-      this.#view.printNewLine();
-    });
+  #setBonusNumber(bonusNumber) {
+    this.#lottoService.setBonusNumber(bonusNumber);
+    this.#view.printNewLine();
+  }
+
+  async #ensureMoneyAmountInput() {
+    return this.#retryOnFailure(
+      this.#view.readMoneyAmount.bind(this.#view),
+      this.#setMoneyAmount.bind(this),
+    );
+  }
+
+  async #ensureWinningNumbersInput() {
+    return this.#retryOnFailure(
+      this.#view.readWinningNumbers.bind(this.#view),
+      this.#setWinningNumbers.bind(this),
+    );
+  }
+
+  async #ensureBonusNumberInput() {
+    return this.#retryOnFailure(
+      this.#view.readBonusNumber.bind(this.#view),
+      this.#setBonusNumber.bind(this),
+    );
   }
 
   async #purchaseLottos() {
-    await this.#getAndSetMoneyAmount();
+    await this.#ensureMoneyAmountInput();
     const tickets = this.#lottoPublisher.publishLottos();
     this.#lottoService.setLottoTickets(tickets);
     this.#view.printLottoPurchaseResult(tickets);
