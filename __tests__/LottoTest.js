@@ -13,6 +13,12 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
+  test("로또 번호에 숫자가 아닌 값이 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, "a"]);
+    }).toThrow("[ERROR]");
+  });
+
   test("보너스 번호가 로또 번호와 중복이면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6]).getBonus(6);
