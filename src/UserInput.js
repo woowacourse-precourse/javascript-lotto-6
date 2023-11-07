@@ -7,21 +7,21 @@ class UserInput{
   #bonusNumber;
 
   async getInputMoney(){
-    const inputMoney = Number(await MissionUtils.Console.readLineAsync(MESSAGE.inputMoney));
+    const inputMoney = Number(await MissionUtils.Console.readLineAsync(MESSAGE.money));
     this.#checkMoneyValidation(inputMoney);
     this.#money = inputMoney;
     return this.#money;
   }
   
   async getInputWinningNumbers(){
-    const inputNumbers = (await MissionUtils.Console.readLineAsync(MESSAGE.inputWinningNumbers)).split(',').map((element) => Number(element));
+    const inputNumbers = (await MissionUtils.Console.readLineAsync(MESSAGE.winningNumbers)).split(',').map((element) => Number(element));
     this.#checkWinningsNumbersValidation(inputNumbers);
     this.#winningNumbers = inputNumbers;
     return this.#winningNumbers;
   }
 
   async getInputBonusNumber(){
-    const inputBonusNumber = Number(await MissionUtils.Console.readLineAsync(MESSAGE.inputBonusNumber));
+    const inputBonusNumber = Number(await MissionUtils.Console.readLineAsync(MESSAGE.bonusNumber));
     this.#checkBonusNumberValidation(inputBonusNumber);
     this.#bonusNumber = inputBonusNumber;
     return this.#bonusNumber;
