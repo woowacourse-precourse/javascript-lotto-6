@@ -1,4 +1,5 @@
 import WinningLotto from './WinningLotto.js';
+import { PRIZE } from '../constants/GameSetting.js';
 
 class WinningMachine {
   #prizeStructure = {
@@ -8,6 +9,8 @@ class WinningMachine {
     match5Bonus: 0,
     match6: 0,
   };
+
+  #rateOfReturn;
 
   generateWinningLotto({ numbers, bonusNumber }) {
     return new WinningLotto({ numbers, bonusNumber });
@@ -20,6 +23,17 @@ class WinningMachine {
     const hasBonus = lotto.isInclude(winningLotto.getBonusNumber());
     const matchCount = this.#evaluateMatch({ lottoNumber, winningNumber });
     this.#updatePrizeStructure(matchCount, hasBonus);
+  }
+
+  calculateRateOfReturn(purchaseAmount) {
+    const totalPrize = Object.keys(this.#prizeStructure).reduce(
+      (acc, key) => acc + this.#prizeStructure[key] * PRIZE[key],
+      0,
+    );
+
+    this.#rateOfReturn = ((totalPrize / Number(purchaseAmount)) * 100).toFixed(
+      1,
+    );
   }
 
   #evaluateMatch({ lottoNumber, winningNumber }) {
@@ -41,6 +55,10 @@ class WinningMachine {
 
   getPrizeStructure() {
     return { ...this.#prizeStructure };
+  }
+
+  getRateOfReturn() {
+    return this.#rateOfReturn;
   }
 }
 
