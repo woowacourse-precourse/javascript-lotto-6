@@ -24,9 +24,15 @@ const isValidatedPrice = inputPrice => {
   }
 };
 
+const isIncludedBonusNumbers = (lottoNumbers, bonusNumber) => {
+  if (lottoNumbers.includes(bonusNumber)) {
+    throw new Error(ERROR.includedBonusNumber);
+  }
+};
+
 const validatedPrice = inputPrice => {
   validateNumber(inputPrice);
   isValidatedPrice(inputPrice);
 };
 
-export { validateNumber, validatedPrice, parsedNumber };
+export { validateNumber, isIncludedBonusNumbers, validatedPrice, parsedNumber };
