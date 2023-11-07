@@ -37,6 +37,7 @@ class WinningNumbers {
     this.#validateNaN(values);
     this.#validateBetweenRange(values);
     this.#validateDuplicated(values);
+    this.#validateNumbersCount(values);
   }
 
   /**
@@ -73,6 +74,15 @@ class WinningNumbers {
 
     if (deduplicated.size !== values.length) {
       throw new Error(CONSTANTS.ERRORS.WINNING_NUMBERS_DUPLICATED);
+    }
+  }
+
+  /**
+   * @param {number[]} values
+   */
+  #validateNumbersCount(values) {
+    if (values.length !== CONSTANTS.NUMBERS.LOTTO_COUNT) {
+      throw new Error(CONSTANTS.ERRORS.WINNING_NUMBERS_WRONG_LENGTH);
     }
   }
 
