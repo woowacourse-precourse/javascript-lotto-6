@@ -2,6 +2,7 @@ import Lotto from "./Lotto.js";
 import LottoView from "./LottoView.js";
 import LottoValidator from "./Validator.js";
 import CalculateWinners from "./CalculateWinners.js";
+import calculateProfit from "./CalculateProfit.js";
 import { Random } from "@woowacourse/mission-utils";
 
 class LottoController {
@@ -35,6 +36,14 @@ class LottoController {
       bonusNumber
     );
     this.view.showResults(countWinners);
+    this.viewProfitRate(countWinners);
+  }
+
+  viewProfitRate(countWinners) {
+    const amount = this.lottos.length * 1000;
+    const profitRate = calculateProfit(amount, countWinners);
+    console.log(profitRate); //
+    this.view.showProfitRate(profitRate);
   }
 }
 
