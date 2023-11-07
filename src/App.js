@@ -1,17 +1,18 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoList from './LottoList.js';
+import GameExport from './GameExport.js';
 import Validation from './validation.js';
 import {
   readLineLottoCount,
   readLineBonusCount,
   consoleError,
 } from './utils.js';
+import { INPUT_MESSAGE } from './constants.js';
 
 class App {
-  #lottoApp;
+  #gameExport;
 
   constructor() {
-    this.#lottoApp = new LottoList();
+    this.#gameExport = new GameExport();
   }
 
   async play() {
@@ -24,9 +25,9 @@ class App {
   }
 
   async initializeAndPurchaseLotto() {
-    await this.#lottoApp.purchaseLotto.initialize();
+    await this.#gameExport.purchaseLotto.initialize();
     const purchaseResult =
-      await this.#lottoApp.purchaseLotto.alertPurchaseLotto();
+      await this.#gameExport.purchaseLotto.alertPurchaseLotto();
 
     if (
       typeof purchaseResult === 'string' &&
@@ -40,7 +41,7 @@ class App {
   }
 
   async printLottoList() {
-    const lottoList = await this.#lottoApp.viewLottoList();
+    const lottoList = await this.#gameExport.viewLottoList();
     MissionUtils.Console.print(lottoList);
   }
 
