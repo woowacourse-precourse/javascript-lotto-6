@@ -19,20 +19,26 @@ class Board {
   }
 
   static getRevenue(tryCount, totalReword) {
-    return Math.floor((totalReword / tryCount) * TRY_COST * 1000) / 10;
+    const cost = tryCount * TRY_COST;
+    const revenue = totalReword / cost;
+    return Math.floor(revenue * 1000) / 10;
   }
 
   printResult(ranks) {
-    Console.print(MESSAGE.LOTTO.result);
+    Console.print(MESSAGE.BOARD.result);
     for (let i = 1; i < 6; i++) {
       Console.print(
-        MESSAGE.LOTTO[`${i}th`](ranks.filter((v) => v === i).length),
+        MESSAGE.BOARD[`${i}th`](ranks.filter((v) => v === i).length),
       );
     }
   }
 
   printRevenue(ranks) {
-    Console.print(Board.getRevenue(ranks.length, Board.getTotalReword(ranks)));
+    Console.print(
+      MESSAGE.BOARD.revenue(
+        Board.getRevenue(ranks.length, Board.getTotalReword(ranks)),
+      ),
+    );
   }
 }
 
