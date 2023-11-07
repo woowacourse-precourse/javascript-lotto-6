@@ -14,23 +14,24 @@ class App {
     throw new Error(`\n${message}`);
   }
 
-  getBonusNumber() {
-    const bonusNumber = MissionUtils.Console.readLineAsync(
+  async getBonusNumber() {
+    const bonusNumber = await MissionUtils.Console.readLineAsync(
       "\n보너스 번호를 입력해 주세요.\n"
     );
     return bonusNumber;
   }
 
-  getWinningNumber() {
-    const winningNumber = MissionUtils.Console.readLineAsync(
+  async getWinningNumber() {
+    const winningNumber = await MissionUtils.Console.readLineAsync(
       "\n당첨 번호를 입력해 주세요.\n"
     );
     return winningNumber;
   }
 
-  getMoney() {
-    const money =
-      MissionUtils.Console.readLineAsync("구입 금액을 입력해주세요. \n");
+  async getMoney() {
+    const money = await MissionUtils.Console.readLineAsync(
+      "구입 금액을 입력해주세요. \n"
+    );
     return money;
   }
 
@@ -102,16 +103,20 @@ class App {
   }
 
   setLotto(quantity) {
-    MissionUtils.Console.print(`\n${quantity}개를 구매했습니다.`);
+    MissionUtils.Console.print(`${quantity}개를 구매했습니다.`);
+    let purchasedLottos = [];
 
     for (let i = 0; i < quantity; i += 1) {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-
-      new Lotto(numbers).displayNumbers();
+      purchasedLottos.push(numbers);
+      const lottoString = new Lotto(numbers).displayNumbers();
+      MissionUtils.Console.print(`${lottoString}`);
     }
+
+    return purchasedLottos;
   }
 
-  async setWinnigAndBonusNumber() {
+  async setWinnigAndBonusNumber(quantity, purchasedLottos) {
     const winningNumber = await this.getWinningNumber();
     const winningNumberArray = await this.checkCommaSeparated(winningNumber);
     const userLotto = new Lotto(winningNumberArray);
@@ -119,14 +124,23 @@ class App {
 
     const bonusNumber = await this.getBonusNumber();
     userLotto.setBonusNumber(bonusNumber);
+    this.getMatchingStatistics(quantity, purchasedLottos, userLotto);
+  }
+
+  getMatchingStatistics(quantity, purchasedLottos, userLotto) {
+    for (let i = 0; i < quantity; i += 1) {
+      userLotto.updateMatchingCount(purchasedLottos[i]);
+    }
+    const result = userLotto.calculateMatchingStatistics();
+    for (let score of result) MissionUtils.Console.print(score);
   }
 
   async play() {
     const money = await this.checkPrice();
     const quantity = this.getLottoQuantity(money);
-    this.setLotto(quantity);
+    const purchasedLottos = this.setLotto(quantity);
 
-    this.setWinnigAndBonusNumber();
+    await this.setWinnigAndBonusNumber(quantity, purchasedLottos);
   }
 }
 
