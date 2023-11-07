@@ -79,7 +79,11 @@ const validation = {
   isValidInputBonusNumber(bonusNumber) {
     this.isEmptyValue(bonusNumber);
 
-    if (Number(bonusNumber) < 1 || Number(bonusNumber) > 45) {
+    if (
+      !bonusNumber.match(REGEXP.BONUS_NUMBER.FORMAT_CHECK) ||
+      Number(bonusNumber) < 1 ||
+      Number(bonusNumber) > 45
+    ) {
       throw new Error(
         messageFormat.error(ERROR.INPUT_BONUS_NUMBER.INVALID_FORMAT),
       );
