@@ -1,10 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import LottoModel from '../../../../src/mvc/model/LottoModel';
 
-import CONSTANTS from '../../../../src/constants/CONSTANTS';
-
-const { MISS_STATE, BONUS_STATE, HIT_STATE, LOTTO_NUMBER_UPPER } = CONSTANTS;
-
 const mockRandoms = numbers => {
   Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce((acc, number) => {
