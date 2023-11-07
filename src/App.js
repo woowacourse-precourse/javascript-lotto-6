@@ -26,7 +26,7 @@ class App {
       const winningIndex = lotto.checkLottoWinning(winningNumbers, bonusNumber);
       lottoResult.result[winningIndex]++;
     });
-    lottoResult.printResult();
+    lottoResult.printResult(money);
   }
 }
 
