@@ -1,4 +1,3 @@
-import MessageFormat from '../utils/MessageFormat.js';
 import NUMBER from '../utils/constants/number.js';
 
 const { statistics } = NUMBER;
