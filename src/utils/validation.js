@@ -19,3 +19,8 @@ export const isAvailableAmountNumber = (amount) => {
     throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
 };
 
+export const isAvailableNumber = (amount, firstNumber, lastNumber) => {
+  if (amount < firstNumber || amount > lastNumber)
+    throw new Error(NOT_AVAILABLE_NUMBER_ERROR_MESSAGE);
+};
+
