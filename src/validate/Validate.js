@@ -1,4 +1,9 @@
-import { LOTTO_PRICE, MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER } from '../constants/lotto.js'
+import {
+  LOTTO_LENGTH,
+  LOTTO_PRICE,
+  MAX_LOTTO_NUMBER,
+  MIN_LOTTO_NUMBER,
+} from '../constants/lotto.js'
 import ValidationError from '../errors/ValidationError.js'
 
 class Validate {
@@ -46,8 +51,12 @@ class Validate {
     return new Set(numbers).size !== numbers.length
   }
 
-  static isBonusNumber(bonusNumber, numbers) {
-    return numbers.includes(bonusNumber)
+  /**
+   * @param {number[]} numbers
+   * @returns boolean
+   */
+  static isLottoLength(numbers) {
+    return numbers.length === LOTTO_LENGTH
   }
 
   /**
@@ -75,10 +84,16 @@ class Validate {
    *
    * @param {number[]} numbers
    * @throws {ValidationError} 로또 번호는 중복될 수 없습니다.
+   * @throws {ValidationError} 로또 번호는 6개만 입력 가능합니다.
+   * @throws {ValidationError} 로또 번호는 1~45 사이의 숫자만 가능합니다.
    */
   static validLottoNumbers(numbers) {
     if (Validate.isDuplicateLottoNumbers(numbers)) {
       throw new ValidationError('로또 번호는 중복될 수 없습니다.')
+    }
+
+    if (!Validate.isLottoLength(numbers)) {
+      throw new ValidationError('로또 번호는 6개만 입력 가능합니다.')
     }
 
     numbers.forEach((number) => {
@@ -90,11 +105,12 @@ class Validate {
    *
    * @param {number} bonusNumber
    * @param {number[]} numbers
+   * @throws {ValidationError} 보너스 번호는 1~45 사이의 숫자만 가능합니다.
    * @throws {ValidationError} 보너스 번호는 로또 번호와 중복될 수 없습니다.
    */
   static validBonusNumber(bonusNumber, numbers) {
-    if (!Validate.isBonusNumber(bonusNumber, numbers)) {
-      throw new ValidationError('보너스 번호는 로또 번호와 중복될 수 없습니다.')
+    if (!Validate.isLottoNumber(bonusNumber)) {
+      throw new ValidationError('보너스 번호는 1~45 사이의 숫자만 가능합니다.')
     }
 
     if (!Validate.isDuplicateLottoNumbers(numbers.concat(bonusNumber))) {
