@@ -7,6 +7,30 @@ async function getPurchasePrice() {
   return purchasePrice;
 }
 
+function validatePurchasePrice(purchasePrice) {
+  if (purchasePrice.length < 1) {
+    throw new Error('[ERROR] 금액을 입력하세요.');
+  }
+  if (isNaN(purchasePrice)) {
+    throw new Error('[ERROR] 금액은 숫자만 입력하세요.');
+  }
+  if (purchasePrice % 1000 !== 0) {
+    throw new Error('[ERROR] 금액을 1000원 단위로 입력하세요.');
+  }
+}
+
+async function getValidPurchasePrice() {
+  while (true) {
+    try {
+      const purchasePrice = await getPurchasePrice();
+      validatePurchasePrice(purchasePrice);
+      return purchasePrice;
+    } catch (error) {
+      Console.print('[ERROR]');
+    }
+  }
+}
+
 function getAmountOfTickets(purchasePrice) {
   return purchasePrice / 1000;
 }
@@ -40,7 +64,7 @@ async function getValidLottoNumber() {
 
 class App {
   async play() {
-    const purchasePrice = await getPurchasePrice();
+    const purchasePrice = await getValidPurchasePrice();
     const amountOfTickets = getAmountOfTickets(purchasePrice);
     showAmountOfTickets(amountOfTickets);
 
