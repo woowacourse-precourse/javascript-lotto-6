@@ -3,12 +3,9 @@ import Lotto from '../Lotto';
 import NUMBER from '../constants/Number';
 
 class MyLotto {
-  #purchaseAmount;
-
   #lottoNumbersList = [];
 
-  constructor(purchaseLottoAmount, lottoCount) {
-    this.#purchaseAmount = purchaseLottoAmount;
+  constructor(lottoCount) {
     this.#createLottoNumbersList(lottoCount);
   }
 
@@ -34,7 +31,7 @@ class MyLotto {
   }
 
   #findMatchingBonus(bonusNumber, numbers) {
-    return numbers.getLottoNumbers().includes(bonusNumber);
+    return numbers.includes(bonusNumber);
   }
 
   printMyLottoNumbers() {
@@ -55,7 +52,7 @@ class MyLotto {
   }
 
   getPurchaseAmount() {
-    return this.#purchaseAmount;
+    return this.#lottoNumbersList.length * NUMBER.PURCHASE_AMOUNT_UNIT;
   }
 }
 

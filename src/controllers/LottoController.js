@@ -36,7 +36,7 @@ class LottoController {
     const lottoCount = await this.#calculateLottoCount(purchaseLottoAmount);
     this.#printLottoCount(lottoCount);
 
-    this.#myLotto = new MyLotto(purchaseLottoAmount, lottoCount);
+    this.#myLotto = new MyLotto(lottoCount);
     this.#myLotto.printMyLottoNumbers();
   }
 
