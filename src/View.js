@@ -31,6 +31,10 @@ class View {
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${resultObject.rank2.count}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${resultObject.rank1.count}개`);
   }
+
+  static async outputEarningRate(value) {
+    Console.print(`총 수익률은 ${value}%입니다.`);
+  }
 }
 
 export default View;

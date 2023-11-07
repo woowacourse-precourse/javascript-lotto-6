@@ -15,6 +15,8 @@ class App {
 
   computer;
 
+  earningRate;
+
   constructor() {
     this.computer = new Computer();
   }
@@ -50,11 +52,12 @@ class App {
   }
 
   computeEarningRate() {
-    this.computer.earningRate(this.amount, this.computer.state);
+    this.earningRate = this.computer.earningRate(this.amount, this.computer.state);
   }
 
   showComputeResult() {
     View.outputComputeResult(this.computer.state);
+    View.outputEarningRate(this.earningRate);
   }
 
   async play() {
