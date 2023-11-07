@@ -9,11 +9,11 @@ class Compare{
     this.#lotto = lotto
     this.#bonus = bonus
     this.#result = {
-      '1': 0,
-      '2': 0,
-      '3': 0,
-      '4': 0,
-      '5': 0
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0
     }
   }
 
@@ -47,19 +47,19 @@ class Compare{
 
     switch(count){
       case 6 :
-        this.#result['1']++
+        this.#result.first++
         break;
 
       case 5 :
-        this.#result['3']++
+        this.#result.third++
         break;
 
       case 4 :
-        this.#result['4']++
+        this.#result.fourth++
         break;
 
       case 3 : 
-        this.#result['5']++
+        this.#result.fifth++
         break;
     }
   }

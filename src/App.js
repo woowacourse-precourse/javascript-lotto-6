@@ -2,21 +2,23 @@ import SetGame from "./settings/Settings.js";
 import OutputView from "./view/OutputView.js";
 import Issue from "./utils/Issue.js";
 import Compare from "./utils/Compare.js";
-import { Console } from "@woowacourse/mission-utils";
+import stats from "./utils/stats.js";
+import Stats from "./utils/stats.js";
+import MESSAGE from "./constants/message.js";
 
 class App {
 
   #output
   #issue
-
   #setGame
+
   #amounts
   #lotto
   #bonus
   #numberOfLotto
   #lottos
   #result
-  #prizes
+  #earnings
 
   constructor(){
     this.#setGame = new SetGame();
@@ -27,9 +29,10 @@ class App {
   async play() {
     await this.setGame();
     this.#numberOfLotto = await this.#setGame.setNumOfLotto(this.#amounts);
+    this.#output.printPurchase(this.#numberOfLotto);
     await this.#issueLottos(this.#numberOfLotto);
-
-    this.result();
+    
+    await this.result();
   }
 
   async setGame(){
@@ -39,14 +42,14 @@ class App {
   }
 
   async #issueLottos(number){
-    this.#output.printPurchase(number);
+    
 
     const lottos = []
     let counter = 0
 
     while(counter < number){
       const lotto = this.#issue.issueLotto();
-      this.#output.print(lotto)
+      this.#output.print(`[${lotto.join(', ')}]`)
       lottos.push(lotto)
 
       counter++
@@ -59,8 +62,26 @@ class App {
     const compare = new Compare(this.#lotto, this.#bonus);
     this.#result = await compare.compareLotto(this.#lottos);
     
+    await this.printStats();
   }
-  
+
+  async printStats(){
+    const stats = new Stats(this.#result);
+    const results = stats.getStats();
+
+    await this.#printResult(results);
+
+    this.#earnings = (stats.profits() / this.#amounts) * 100 ;
+    this.#output.printEarnings(this.#earnings)
+  }  
+
+  async #printResult(results){
+    this.#output.print(MESSAGE.result.stats)
+    
+    for(const result in results){
+      this.#output.print(results[result])
+    }
+  }
 
 }
 
