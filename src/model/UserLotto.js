@@ -32,19 +32,13 @@ class UserLotto {
     return this.#purchaseAmount;
   }
 
+  // prettier-ignore
   calculateMatchingNumber(winningLotto) {
-    const ranking = {
-      fifth: 0,
-      fourth: 0,
-      third: 0,
-      second: 0,
-      first: 0,
-    };
-
-    this.#userLottoNumbers.forEach((userLottoNumber) => {
+    const ranking = this.#userLottoNumbers.reduce((accumulator, userLottoNumber) => {
       const rank = userLottoNumber.calculateMatchingNumber(winningLotto);
-      ranking[rank] += 1;
-    });
+      accumulator[rank] = (accumulator[rank] || 0) + 1;
+      return accumulator;
+    }, {});
 
     return ranking;
   }

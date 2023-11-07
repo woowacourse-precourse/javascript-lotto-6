@@ -20,7 +20,7 @@ class Statistics {
   calculateStatistics(matchingResult, purchaseAmount) {
     this.#statistics = STATISTICS.map((statistic) => ({
       ...statistic,
-      count: matchingResult[statistic.rank],
+      count: matchingResult[statistic.rank] || 0,
     }));
 
     const totalWinnings = this.#statistics.reduce((total, statistic) => {
