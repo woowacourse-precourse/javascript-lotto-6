@@ -37,6 +37,13 @@ describe('구입금액 입력 예외 테스트', () => {
     }).toThrow('[ERROR] 1000원 단위로 입력해 주세요.');
   });
 
+  test('구입금액이 0으로 시작하면 예외가 발생한다.', () => {
+    const USER_INPUT = '01500';
+    expect(() => {
+      new ValidatePurchase(USER_INPUT);
+    }).toThrow('[ERROR] 구입금액을 숫자로 입력해 주세요.');
+  });
+
   test('구입금액에 빈 공간이 입력되면 예외가 발생한다.', () => {
     const USER_INPUT = '1500 ';
     expect(() => {
