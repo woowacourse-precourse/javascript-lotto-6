@@ -2,14 +2,19 @@ import { Console } from '@woowacourse/mission-utils';
 import CONFIG from '../constants/config.js';
 import calculator from '../utils/calculator.js';
 import LOTTO_VIEW from '../views/lottoView.js';
-import LottoModel from '../models/LottoModel.js';
-import throwError from '../utils/throwError.js';
-import ERROR_MESSAGES from '../constants/errorMessage.js';
-import { checkNumberType } from '../utils/numberUtils.js';
-import { checkListSameValue, checkListValues } from '../utils/listUtils.js';
+import LottosModel from '../models/LottosModel.js';
+import CorrectNumbersModel from '../models/CorrectNumbersModel.js';
+import BonusNumberModel from '../models/BonusNumberModel.js';
+import TotalBuyPriceModel from '../models/TotalBuyPriceModel.js';
 
 class LottoController {
-  #lottoModel = new LottoModel();
+  #totalBuyPriceModel;
+
+  #correctNumbersModel;
+
+  #bonusNumberModel;
+
+  #lottosModel = new LottosModel();
 
   async start() {
     await this.processUserInputs();
@@ -20,28 +25,30 @@ class LottoController {
 
   // prettier-ignore
   async processUserInputs() {
-    this.#lottoModel.setTotalBuyPrice(await this.getAndCheckTotalBuyPrice());
-    this.#lottoModel.createLottos(this.#lottoModel.getTotalBuyPrice() / CONFIG.lottoPrice);
+    await this.getAndCheckTotalBuyPrice();
+    this.#lottosModel.setTotalBuyPriceModel(this.#totalBuyPriceModel);
+    this.#lottosModel.createLottos(this.#totalBuyPriceModel.getPrice() / CONFIG.lottoPrice);
     
-    LOTTO_VIEW.printBuyMessage(this.#lottoModel.getLottoList().length);
-    LOTTO_VIEW.printLottoList(this.#lottoModel.getLottoList());
+    LOTTO_VIEW.printBuyMessage(this.#lottosModel.getLottoList().length);
+    LOTTO_VIEW.printLottoList(this.#lottosModel.getLottoList());
+    
+    await this.getAndCheckCorrectNumber();
+    this.#lottosModel.setCorrectNumbersModel(this.#correctNumbersModel)
 
-    this.#lottoModel.setCorrectNumber(await this.getAndCheckCorrectNumber());
-
-    const bonusNumber = await this.getAndCheckBonusNumber(this.#lottoModel.getCorrectNumber());
-    this.#lottoModel.setBonusNumber(bonusNumber);
+    await this.getAndCheckBonusNumber(this.#correctNumbersModel.getNumbers())
+    
   }
 
   calculateLotto() {
-    this.#lottoModel.checkAllLottoNumber();
-    this.#lottoModel.calculatorTotalWinCounts();
+    this.#lottosModel.checkAllLottoNumber();
+    this.#lottosModel.calculatorTotalWinCounts();
   }
 
   resultPrint() {
-    const totalWinMoney = this.#lottoModel.getTotalWinMoney();
-    LOTTO_VIEW.printResult(this.#lottoModel.getMatchNumberList());
+    const totalWinMoney = this.#lottosModel.getTotalWinMoney();
+    LOTTO_VIEW.printResult(this.#lottosModel.getMatchNumberList());
     LOTTO_VIEW.printRateOfReturn(
-      calculator.profitRate(totalWinMoney, this.#lottoModel.getTotalBuyPrice())
+      calculator.profitRate(totalWinMoney, this.#totalBuyPriceModel.getPrice())
     );
   }
 
@@ -49,18 +56,11 @@ class LottoController {
     const TOTAL_BUY_PRICE = await LOTTO_VIEW.getUserInputTotalBuyPrice();
 
     try {
-      this.checkUserInputTotalBuyPrice(TOTAL_BUY_PRICE);
-      return TOTAL_BUY_PRICE;
+      this.#totalBuyPriceModel = new TotalBuyPriceModel(TOTAL_BUY_PRICE);
     } catch (e) {
       Console.print(`${e}`);
       return this.getAndCheckTotalBuyPrice();
     }
-  }
-
-  // prettier-ignore
-  checkUserInputTotalBuyPrice(totalBuyPrice) {
-    totalBuyPrice % CONFIG.lottoPrice && throwError(ERROR_MESSAGES.buyLottoPriceError);
-    !checkNumberType(totalBuyPrice) && throwError(ERROR_MESSAGES.numberTypeError)
   }
 
   async getAndCheckCorrectNumber() {
@@ -68,45 +68,23 @@ class LottoController {
     const correctNumberList = CORRECT_NUMBER.split(',').map(Number);
 
     try {
-      this.checkUserInputCorrectLottoNumber(correctNumberList);
-      return correctNumberList;
+      this.#correctNumbersModel = new CorrectNumbersModel(correctNumberList);
     } catch (e) {
       Console.print(`${e}`);
       return this.getAndCheckCorrectNumber();
     }
   }
 
-  // prettier-ignore
-  checkUserInputCorrectLottoNumber(correctLottoNumber) {
-    correctLottoNumber.forEach((lottoNumber) => !checkNumberType(lottoNumber) && throwError(ERROR_MESSAGES.numberTypeError));
-
-    checkListValues(correctLottoNumber,CONFIG.minLottoNumber,CONFIG.maxLottoNumber) && throwError(ERROR_MESSAGES.numberOutOfRange);
-
-    correctLottoNumber.length !== CONFIG.lottoLength && throwError(ERROR_MESSAGES.numberOverLength);
-
-    checkListSameValue(correctLottoNumber) && throwError(ERROR_MESSAGES.isSameLottoNumber);
-  }
-
   async getAndCheckBonusNumber(correctNumber) {
     const BONUS_NUMBER = await LOTTO_VIEW.getUserInputBonusNumber();
 
     try {
-      this.checkUserInputBonusNumber(correctNumber, BONUS_NUMBER);
-      return BONUS_NUMBER;
+      // prettier-ignore
+      this.#bonusNumberModel = new BonusNumberModel(BONUS_NUMBER,this.#correctNumbersModel)
     } catch (e) {
       Console.print(`${e}`);
       return this.getAndCheckBonusNumber(correctNumber);
     }
-  }
-
-  // prettier-ignore
-  checkUserInputBonusNumber(correctLottoNumber, bonusNumber) {
-    !checkNumberType(bonusNumber) && throwError(ERROR_MESSAGES.numberTypeError);
-
-    checkListValues([bonusNumber],CONFIG.minLottoNumber,CONFIG.maxLottoNumber) && throwError(ERROR_MESSAGES.numberOutOfRange);
-    
-    checkListSameValue([...correctLottoNumber,+bonusNumber]) && throwError(ERROR_MESSAGES.isSameLottoNumber)
-
   }
 }
 
