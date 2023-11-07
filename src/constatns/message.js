@@ -7,8 +7,8 @@ export const INPUT_MESSAGE = Object.freeze({
 export const OUTPUT_MESSAGE = Object.freeze({
   COUNT: "개를 구매했습니다.",
   WINNING_TITLE: "\n당첨 통계\n---",
-  REVENUE_START:"\n총 수익률은 ",
-  REVENUE_END:"%입니다."
+  REVENUE_START: "\n총 수익률은 ",
+  REVENUE_END: "%입니다."
 });
 
 export const RESULT = Object.freeze([
