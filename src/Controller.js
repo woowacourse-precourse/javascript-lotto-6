@@ -53,6 +53,10 @@ class Controller {
   announceProfit() {
     return this.#domain.announceProfit();
   }
+
+  get getDomain() {
+    return this.#domain;
+  }
 }
 
 export default Controller;

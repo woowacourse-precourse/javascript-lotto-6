@@ -86,7 +86,11 @@ export default class Domain {
 
   get getLottos() {
     if (this.#lottos.length !== 0) {
-      // #lottos 배열 순환하면서 요소를 문자열형으로 변환하여 반환
+      return this.#lottos;
     }
+  }
+
+  get getLotteryResults() {
+    return this.#lotteryResults;
   }
 }
