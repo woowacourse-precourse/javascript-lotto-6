@@ -1,3 +1,5 @@
+import { LOTTO_RESULT } from '../constants/lotto.js';
+
 class LottoService {
   #winningNumbers;
   #bonusNumber;
@@ -20,10 +22,26 @@ class LottoService {
   }
 
   createLottoResult(lottos) {
-    return lottos.map((lotto) => ({
-      includesCount: this.#getCountIncludesWinningNumbers(lotto),
-      isSecond: this.#isSecond(lotto),
-    }));
+    const { fifth, fourth, second, first } = LOTTO_RESULT;
+    const [firstRank, secondRank, thirdRank, fourthRank, fifthRank] = Object.keys(LOTTO_RESULT);
+
+    return lottos.map((lotto) => {
+      const includesCount = this.#getCountIncludesWinningNumbers(lotto);
+
+      if (fifth.includesCount === includesCount) return fifthRank;
+
+      if (fourth.includesCount === includesCount) return fourthRank;
+
+      if (second.includesCount === includesCount) {
+        const isSecond = this.#isSecond(lotto);
+
+        if (isSecond) return secondRank;
+
+        return thirdRank;
+      }
+
+      if (first.includesCount === includesCount) return firstRank;
+    });
   }
 }
 
