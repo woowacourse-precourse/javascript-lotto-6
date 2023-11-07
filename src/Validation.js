@@ -1,4 +1,4 @@
-import { PURCHASE_AMOUNT_ERROR_MESSAGES } from './Constants.js';
+import { LOTTO_PRICE, PURCHASE_AMOUNT_ERROR_MESSAGES } from './Constants.js';
 
 export const validatePurchaseAmountInput = async (purchaseAmountInput) => {
   if (!isNumber(purchaseAmountInput)) {
@@ -6,6 +6,9 @@ export const validatePurchaseAmountInput = async (purchaseAmountInput) => {
   }
   if (isStartWithZero(purchaseAmountInput)) {
     throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGES.START_WITH_ZERO);
+  }
+  if (isSmallerThanLottoPrice(purchaseAmountInput)) {
+    throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGES.LESS_THAN_LOTTO_PRICE);
   }
 };
 
@@ -16,4 +19,8 @@ const isNumber = (input) => {
 
 const isStartWithZero = (input) => {
   return input[0] === '0';
+};
+
+const isSmallerThanLottoPrice = (input) => {
+  return LOTTO_PRICE > Number(input);
 };
