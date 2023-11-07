@@ -1,9 +1,11 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import * as LottoCompute from '../model/LottoCompute';
+import * as LottoGenerator from '../model/LottoGenerator';
 
+import Lotto from '../Lotto';
 import * as ErrorCheck from '../model/ErrorCheck';
-
 import * as ErrorMessage from '../view/ErrorMessage';
-
+import * as outView from '../view/outView';
 
 class Controller{
 
@@ -24,6 +26,9 @@ class Controller{
 
   async run() {
     await this.buyLotto();
+    LottoGenerator.makeLotto(this.lottoArray, this.count);
+    outView.printLottoArray(this.lottoArray, this.count);
+    await this.inputWinning();
   }
   
 
@@ -36,6 +41,25 @@ class Controller{
     } catch (error) {
       ErrorMessage.moneyErrorPrint();
       return this.buyLotto();
+    }
+  }
+
+  parseWinning(INPUT) {
+    const [num1, num2, num3, num4, num5, num6] = INPUT.split(',').map(Number);
+    return new Lotto([num1, num2, num3, num4, num5, num6]);
+  }
+
+  async inputWinning(){
+    while(true){
+      try{
+        const USERINPUT = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해주세요.");
+        this.winning = this.parseWinning(USERINPUT);
+        break;
+      }
+      catch(e){
+        ErrorMessage.winningErrorPrint();
+        return;
+      }
     }
   }
 
