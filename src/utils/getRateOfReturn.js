@@ -6,7 +6,7 @@ const getRateOfReturn = (purchaseAmount, returns) => {
     Number(purchaseAmount) + returns.reduce((acc, currentReturn) => acc + currentReturn);
   const rateOfReturn = (((finalValue - purchaseAmount) / purchaseAmount) * 100).toFixed(1);
 
-  return rateOfReturn + '%';
+  return `${rateOfReturn}%`;
 };
 
 export default getRateOfReturn;

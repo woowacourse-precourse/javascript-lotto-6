@@ -14,12 +14,9 @@ describe('로또 기능 테스트', () => {
       [1, 2, 3, 4, 5, 6],
       [2, 3, 4, 5, 6, 7],
     ];
-    const recievedValue = [];
     const count = 2;
     mockRandoms(expectedValue);
-    Array.from({ length: count }, () => {
-      recievedValue.push(generateLotto().getNumbers());
-    });
+    const recievedValue = Array.from({ length: count }, () => generateLotto().getNumbers());
     expect(recievedValue).toStrictEqual(expectedValue);
   });
 

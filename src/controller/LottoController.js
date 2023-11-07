@@ -10,7 +10,7 @@ class LottoController {
     this.#lottos = [];
   }
 
-  async play() {
+  async gameStart() {
     const purchaseAmount = await this.#inputPurchaseAmount();
     const count = this.#getCount(purchaseAmount);
     this.#generateLottos(count);
@@ -22,15 +22,15 @@ class LottoController {
   }
 
   async #inputPurchaseAmount() {
-    return await InputView.readPurchaseAmount();
+    return InputView.readPurchaseAmount();
   }
 
   async #inputWinningNumbers() {
-    return await InputView.readWinningNumbers();
+    return InputView.readWinningNumbers();
   }
 
   async #inputBonusNumber() {
-    return await InputView.readbonusNumber();
+    return InputView.readbonusNumber();
   }
 
   #getCount(purchaseAmount) {
@@ -38,9 +38,7 @@ class LottoController {
   }
 
   #generateLottos(count) {
-    Array.from({ length: count }, () => {
-      this.#lottos.push(generateLotto());
-    });
+    Array.from({ length: count }, () => this.#lottos.push(generateLotto()));
   }
 
   #printLottos(count) {
