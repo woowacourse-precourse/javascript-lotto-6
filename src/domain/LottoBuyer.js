@@ -1,4 +1,5 @@
 import Lotto from "../Lotto.js";
+import { PROFIT_FOR_PRIZE } from "../constants/lotto.js";
 
 class LottoBuyer {
   #myLottos;
@@ -8,12 +9,24 @@ class LottoBuyer {
     this.#myLottos = lottos;
   }
 
-  checkMyLottos(lottoAnswer) {
+  getMyGrades(lottoAnswer) {
     return this.#myLottos
       .map((lotto) => {
         return lottoAnswer.grade(lotto);
       })
       .filter((element) => element !== undefined);
+  }
+
+  checkProfitRate(prizes) {
+    const LOTTO_PRICE = 1000;
+    const investment = LOTTO_PRICE * this.#myLottos.length;
+
+    if (!investment) {
+      return 0;
+    }
+
+    const profit = prizes.reduce((acc, prize) => acc + PROFIT_FOR_PRIZE[prize] || 0, 0);
+    return Number((profit / investment).toFixed(2) * 100);
   }
 
   static #validateLottos(value) {

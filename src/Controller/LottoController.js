@@ -5,6 +5,7 @@ import Lotto from "../Lotto.js";
 import { lottoNumbersParser } from "../domain/lottoNumbersParser.js";
 import LottoAnswer from "../domain/LottoAnswer.js";
 import LottoBuyer from "../domain/LottoBuyer.js";
+import { OutputView } from "../view/outputView.js";
 
 class LottoController {
   async init() {
@@ -20,7 +21,11 @@ class LottoController {
     const answer = new LottoAnswer(lottoAnwer, bonusNumber);
 
     const buyer = new LottoBuyer(lottos);
-    const result = buyer.checkMyLottos(answer);
+    const prizes = buyer.getMyGrades(answer);
+    const profitRate = buyer.checkProfitRate(prizes);
+
+    OutputView.printPrizes(prizes);
+    OutputView.printProfitRate(profitRate);
   }
 }
 
