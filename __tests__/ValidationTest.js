@@ -41,4 +41,10 @@ describe('List<number> Validation', () => {
       inputValidator.validateNoDuplication([1, 2, 3, 4, 5, 5]);
     }).toThrow(ErrorMessage);
   });
+
+  test('로또 번호 개수가 맞지 않으면 예외가 발생한다.', () => {
+    expect(() => {
+      inputValidator.validateDrawCases([1, 2, 3, 4, 5, 6, 7]);
+    }).toThrow(ErrorMessage);
+  });
 });
