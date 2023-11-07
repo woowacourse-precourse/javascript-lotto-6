@@ -29,16 +29,20 @@ class Validator {
     }
 
     userInputWinningNumbers.forEach((number) => {
-      if (Number.isNaN(number)) {
-        throw new Error(ERROR_MESSAGE.isNotNumberForWinningNum);
-      }
-
-      if (number <= 0 || number > 45) {
-        throw new Error(ERROR_MESSAGE.isNotInRange);
-      }
+      this.validateUserInputWinningNumber(number);
     });
 
     return true;
+  }
+
+  validateUserInputWinningNumber(userInputWinningNumber) {
+    if (Number.isNaN(userInputWinningNumber)) {
+      throw new Error(ERROR_MESSAGE.isNotNumberForWinningNum);
+    }
+
+    if (userInputWinningNumber <= 0 || userInputWinningNumber > 45) {
+      throw new Error(ERROR_MESSAGE.isNotInRange);
+    }
   }
 
   validateUserInputBonusNumber(userInputBonusNumber, winningNumbers) {
