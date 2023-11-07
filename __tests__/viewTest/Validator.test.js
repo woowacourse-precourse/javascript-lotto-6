@@ -188,3 +188,26 @@ describe('Validator assertValueInRange', () => {
     }).not.toThrow();
   })
 })
+
+describe('Validator assertNotInDuplicateValueInArray', () => {
+  test('assertNotInDuplicateValueInArray Function type이다 ', () => {
+    expect(typeof (Validator.assertNotInDuplicateValueInArray)).toBe('function');
+  })
+  test('assertNotInDuplicateValueInArray 인자 유효성 검사, 인자의 타입이 배열이 아니면 에러를 리턴한다. ', () => {
+    ARRAY_LIST.errorArrayTestCases.forEach((input) => {
+      expect(() => {
+        Validator.assertNotInDuplicateValueInArray(input)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY))
+    });
+  });
+  test('assertNotInDuplicateValueInArray 기능 검사, 배열 원소에 같은 인자가 있는 경우 에러를 리턴한다. ', () => {
+    const DuplicateValueInArray = [1, 1];
+    const DuplicateValueNotInArray = [1, 2];
+    expect(() => {
+      Validator.assertNotInDuplicateValueInArray(DuplicateValueInArray)
+    }).toThrow(new ValidationError(ERROR_CONSTANT.DUPLICATE_VALUE_IN_ARRAY));
+    expect(() => {
+      Validator.assertNotInDuplicateValueInArray(DuplicateValueNotInArray)
+    }).not.toThrow();
+  });
+});

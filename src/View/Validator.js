@@ -86,6 +86,17 @@ const assertValueInRange = (value, minValue, maxValue) => {
   }
 }
 
+const assertNotInDuplicateValueInArray = (inputArray) => {
+  if (!Array.isArray(inputArray)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+
+  const inputSet = new Set(inputArray);
+  if (inputSet.size !== inputArray.length) {
+    throw new ValidationError(ERROR_CONSTANT.DUPLICATE_VALUE_IN_ARRAY);
+  }
+}
+
 export default {
   assertNonEmptyString,
   assertParsableAsInteger,
@@ -93,4 +104,5 @@ export default {
   assertRemainderNotEqual,
   assertArraySizeEqual,
   assertValueInRange,
+  assertNotInDuplicateValueInArray,
 };
