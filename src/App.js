@@ -22,7 +22,7 @@ class App {
     } while (!this.#lottoMachine);
   }
 
-  async #EnterlottoNumbers() {
+  async #enterLottoNumbers() {
     // 사용자가 올바른 입력을 할때까지 do while 블럭을 통해 입력받는다.
     do {
       try {
@@ -39,7 +39,7 @@ class App {
     await this.#purchaseLotto();
     const boughtLottos = this.#lottoMachine.getLotto();
     LottoViewer.purchasedLottos(boughtLottos);
-    await this.#EnterlottoNumbers();
+    await this.#enterLottoNumbers();
     const { winningNumbers, bonusNumber } = this.#lotto.getWinningNumbers();
     const lottoResultChecker = new LottoResultChecker(winningNumbers, bonusNumber, boughtLottos);
     LottoViewer.winningResult(lottoResultChecker.getResult());
