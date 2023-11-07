@@ -9,7 +9,7 @@ class InputView {
     );
     Validator.checkPurchaseAmount(purchaseAmount);
 
-    return purchaseAmount;
+    return Number(purchaseAmount);
   }
 
   static async readWinningNumbers() {
@@ -18,7 +18,7 @@ class InputView {
     );
     Validator.checkWinningNumbers(winningNumbers);
 
-    return winningNumbers;
+    return winningNumbers.split(',').map(Number);
   }
 
   static async readBonusNumber() {
@@ -27,7 +27,7 @@ class InputView {
     );
     Validator.checkBonusNumbers(bonusNumbers);
 
-    return bonusNumbers;
+    return Number(bonusNumbers);
   }
 }
 

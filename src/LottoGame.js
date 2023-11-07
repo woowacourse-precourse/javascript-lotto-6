@@ -9,19 +9,19 @@ class LottoGame {
   #lottoList;
   #winningNumbers;
   #bonusNumber;
+  #statistics;
 
   async play() {
     await this.inputPurchaseAmount();
     OutputView.printNewLine();
-
     this.purchaseLotto();
     OutputView.printNewLine();
-
     await this.inputWinningNumbers();
     OutputView.printNewLine();
-
     await this.inputBonusNumber();
     OutputView.printNewLine();
+    this.outputStatistics();
+    this.outputTotalProfitRate();
   }
 
   async inputPurchaseAmount() {
@@ -54,6 +54,43 @@ class LottoGame {
 
   async inputBonusNumber() {
     this.#bonusNumber = await InputView.readBonusNumber();
+  }
+
+  outputStatistics() {
+    const results = this.caculateStatistics();
+    OutputView.printStatistics(results);
+  }
+
+  caculateStatistics() {
+    this.#statistics = this.#lottoList.reduce(
+      (acc, lotto) => {
+        const rank = lotto.getRank(this.#winningNumbers, this.#bonusNumber);
+
+        if (rank) {
+          acc[rank - 1] += 1;
+        }
+        return acc;
+      },
+      [0, 0, 0, 0, 0],
+    );
+
+    return this.#statistics;
+  }
+
+  outputTotalProfitRate() {
+    const totalProfitRate = this.caculateTotalProfitRate();
+    OutputView.printTotalProfitRate(totalProfitRate);
+  }
+
+  caculateTotalProfitRate() {
+    const totalAmount =
+      2000000000 * this.#statistics[0] +
+      30000000 * this.#statistics[1] +
+      1500000 * this.#statistics[2] +
+      50000 * this.#statistics[3] +
+      5000 * this.#statistics[4];
+
+    return ((totalAmount / this.#purchaseAmount) * 100).toFixed(1);
   }
 }
 

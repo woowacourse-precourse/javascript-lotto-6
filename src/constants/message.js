@@ -8,6 +8,8 @@ const INPUT_MESSAGE = Object.freeze({
 
 const OUTPUT_MESSAGE = Object.freeze({
   purchaseLottoCount: '개를 구매했습니다.',
+  statistics: '당첨 통계',
+  divider: '---',
 });
 
 const ERROR_MESSAGE = Object.freeze({
