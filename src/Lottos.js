@@ -102,6 +102,12 @@ class Lottos {
     //소수점 반올림
     return ((totalPrize / purchaseAmount) * 100).toFixed(1);
   }
+
+  //수익률 출력
+  printRate(lottoRanks) {
+    const lottoRate = this.calculateRate(lottoRanks);
+    Console.print(`총 수익률은 ${lottoRate}%입니다.`);
+  }
 }
 
 export default Lottos;
