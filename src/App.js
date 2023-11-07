@@ -1,4 +1,3 @@
-// App.js
 import InputView from './View/InputView.js';
 import Inputs from './Inputs.js';
 import Lotto from './Lotto.js';
@@ -32,6 +31,8 @@ class App {
     this.#winningNumbers = await this.inputs.returnWinningNumbers();
     this.outputView.printMessage(OUTPUT_MESSAGE.statisticsMessage);
     this.calculateWinningStats();
+    this.outputView.printWinningStats(this.calculateStats.stats);
+    this.printEarningsRate();
   }
 
   getNumberOfLottoTickets(purchaseAmount) {
@@ -41,20 +42,35 @@ class App {
   generateLottoTickets() {
     this.#lottoNumbers = Array.from({ length: this.#numLottoTickets }, () => {
       const lotto = new Lotto();
-      this.outputView.printGetNumbers(lotto.getNumbers());
-      return lotto.getNumbers();
+      const lottoNumbers = lotto.getNumbers();
+      const formattedLottoNumbers = `[${lottoNumbers.join(', ')}]`;
+      this.outputView.printGetNumbers(formattedLottoNumbers);
+      return lottoNumbers;
     });
   }
 
   calculateWinningStats() {
+    this.calculateStats.stats = { ...this.calculateStats.stats };
+
     this.#lottoNumbers.forEach((ticket) => {
       const matchingNumbersCount = this.calculateStats.countMatchingNumbers(
         ticket,
         this.#winningNumbers.winningNumbers,
       );
       const bonusMatch = this.calculateStats.checkBonusMatch(ticket, this.#winningNumbers.bonusNumber);
-      this.calculateStats.updateStats(this.calculateStats.stats, matchingNumbersCount, bonusMatch);
+      this.calculateStats.stats = this.calculateStats.updateStats(
+        this.calculateStats.stats,
+        matchingNumbersCount,
+        bonusMatch,
+      );
     });
+
+    return this.calculateStats.stats;
+  }
+
+  printEarningsRate() {
+    const earningsRate = this.calculateStats.calculateEarningsRate(this.#purchaseAmount);
+    this.outputView.printEarningsRate(earningsRate);
   }
 }
 
