@@ -1,4 +1,4 @@
-import InputView from './InputView.js';
+import InputView from './View/InputView.js';
 import Validation from './Validation.js';
 import { PROMPT_MESSAGE } from './constants.js';
 
