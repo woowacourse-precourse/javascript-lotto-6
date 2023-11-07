@@ -1,5 +1,4 @@
 export const CONSTANT = Object.freeze({
-  digit: 6,
   amountUnit: 1000,
 });
 
@@ -39,7 +38,7 @@ export const ERROR = Object.freeze({
   isNotInAmountUnit: `입력된 금액이 ${CONSTANT.amountUnit}원 단위가 아닙니다.`,
   isNotPositive: '입력값이 양수가 아닙니다. 입력값은 양수여야 합니다.',
   hasNonNumericElements: '로또 번호 중 숫자가 아닌 요소가 있습니다. 로또 번호는 숫자만 가능합니다.',
-  hasDuplicate: '로또 번호 중 중복된 숫자가 있습니다. 로또 번호는 모두 다른 수여야 합니다.',
+  hasDuplicate: '번호 중 중복된 숫자가 있습니다. 각 번호는 모두 다른 수여야 합니다.',
   isInvalidCount: `${LOTTO_NUMBER.count}개가 입력되지 않았습니다. ${LOTTO_NUMBER.count}개의 숫자를 입력해주세요.`,
   hasOutOfRange: `입력된 숫자 중 ${LOTTO_NUMBER.minNum}-${LOTTO_NUMBER.maxNum} 범위가 아닌 숫자가 있습니다. 범위 안의 숫자를 입력해주세요`,
   isOutOfRange: `입력된 숫자가 ${LOTTO_NUMBER.minNum}-${LOTTO_NUMBER.maxNum} 범위가 아닙니다. 범위 안의 숫자를 입력해주세요`,
