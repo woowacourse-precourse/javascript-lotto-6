@@ -32,6 +32,7 @@ export async function buyLotto(amount) {
 
 async function randomNumber() {
   const number = Random.pickUniqueNumbersInRange(1, 45, 6);
+
   return number.sort((a, b) => a - b);
 }
 

@@ -5,9 +5,11 @@ export async function inputBonusNumber(winningNumber) {
   try {
     const userInputBonusNumber = await Console.readLineAsync(MESSAGE.enterBonusNumber);
     await validateBonusNumber(winningNumber, userInputBonusNumber);
+
     return userInputBonusNumber;
   } catch (error) {
     Console.print(error.message);
+
     return inputBonusNumber(winningNumber);
   }
 }

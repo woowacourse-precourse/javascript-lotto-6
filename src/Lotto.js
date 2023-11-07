@@ -24,6 +24,8 @@ class Lotto {
     if (!numbers.every((number) => Number.isInteger(number))) {
       throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
     }
+
+    return;
   }
 
   checkSameNumber(bonusNumber) {
@@ -31,8 +33,8 @@ class Lotto {
   }
 
   numberComparison(lottoNumber, bonusNumber) {
-    const result = lottoNumber.reduce((count, curr) => {
-      if (this.#numbers.includes(curr)) {
+    const result = lottoNumber.reduce((count, number) => {
+      if (this.#numbers.includes(number)) {
         count += 1;
       }
 
@@ -43,7 +45,6 @@ class Lotto {
   }
 
   resultnumberComparison(result, lottoNumber, bonusNumber) {
-    console.log(lottoNumber);
     if (result === 6) return 'six';
     if (result === 5 && lottoNumber.includes(bonusNumber)) return 'fiveAndBonus';
     if (result === 5) return 'five';

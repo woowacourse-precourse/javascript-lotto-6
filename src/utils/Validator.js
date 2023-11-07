@@ -1,5 +1,4 @@
 import { ERROR } from '../constants/Constant.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class Validator {
   static checkThousandWonUnit(userInput) {
@@ -13,6 +12,7 @@ class Validator {
     if (userInput < 1000) {
       throw new Error(ERROR.checkBelowThousand);
     }
+
     return;
   }
 }

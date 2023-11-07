@@ -15,6 +15,7 @@ class Result {
       const comparisonResult = winningNumber.numberComparison(lottoNumber, bonusNumber);
       this.resultRanking(comparisonResult);
     });
+
     return this.printResult();
   }
 
