@@ -1,6 +1,8 @@
 import Counter from '../src/domains/Counter';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
+const ERROR_PREFIX = '[ERROR]';
+
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce((acc, number) => {
@@ -29,5 +31,20 @@ describe('카운터 클래스 테스트', () => {
 
     // Assert
     expect(myLottos).toEqual(output);
+  });
+  test('잘못된 로또 번호를 받으면 예외가 발생한다.', () => {
+    // Arrange
+    const inputAmount = 2000;
+
+    const input = [
+      [1, 2, 3, 4, 5, 5],
+      [3, 4, 5, 6, 7, 8],
+    ];
+    mockRandoms(input);
+    // Act
+    const resultFn = () => new Counter(inputAmount).giveLotto();
+
+    // Assert
+    expect(resultFn).toThrow(ERROR_PREFIX);
   });
 });
