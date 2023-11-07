@@ -1,7 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 import Calculator from "../utils/calc/Calculator.js";
-import { MESSAGE_ASK, MESSAGE_ERROR } from "../static/Static.js";
+import { MESSAGE_ASK } from "../static/Static.js";
 import InputValidator from "../utils/validator/InputValidator.js";
+import OutputView from "./OutputView.js";
 
 const InputView = {
   async readPurchasePrice() {
@@ -14,12 +15,7 @@ const InputView = {
         const purchaseQuantity = Calculator.calcPurchaseQuantity(purchasePrice);
         return purchaseQuantity;
       } catch (error) {
-        if (error.message.includes(MESSAGE_ERROR.purchasePrice)) {
-          Console.print(error.message);
-        }
-        if (error.message.includes(MESSAGE_ERROR.blank)) {
-          Console.print(error.message);
-        }
+        OutputView.printPurchasePriceError(error);
       }
     }
   },

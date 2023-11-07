@@ -1,5 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE_ALERT, MESSAGE_RESULT } from "../static/Static.js";
+import {
+  MESSAGE_ALERT,
+  MESSAGE_RESULT,
+  MESSAGE_ERROR,
+} from "../static/Static.js";
 
 const OutputView = {
   printBlankLine() {
@@ -19,6 +23,14 @@ const OutputView = {
   },
   printRateOfReturn(rateOfReturn) {
     Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
+  },
+  printPurchasePriceError(error) {
+    if (error.message.includes(MESSAGE_ERROR.purchasePrice)) {
+      Console.print(error.message);
+    }
+    if (error.message.includes(MESSAGE_ERROR.blank)) {
+      Console.print(error.message);
+    }
   },
 };
 
