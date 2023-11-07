@@ -8,16 +8,23 @@ export default class Cash {
   }
 
   async toSpend() {
-    let cash;
-    while (true) {
-      try {
-        cash = await IO.get(Constants.input.askAmount);
-        this.Check.money(parseInt(cash.trim(), 10));
-        break;
-      } catch (error) {
-        IO.print(error.message);
-      }
+    let cash = 0;
+    while (cash === 0) {
+      cash = await this.getValidCash();
     }
-    return parseInt(cash, 10);
+    IO.print("");
+    return cash;
+  }
+
+  async getValidCash() {
+    try {
+      const cashStr = await IO.get(Constants.input.askAmount);
+      const cashInt = parseInt(cashStr.trim(), 10);
+      const isChecked = this.Check.money(cashInt);
+      if (isChecked) return cashInt;
+    } catch (error) {
+      IO.print(error.message);
+    }
+    return 0;
   }
 }

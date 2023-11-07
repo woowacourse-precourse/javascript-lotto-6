@@ -4,6 +4,7 @@ import Check from "../Util/Check.js";
 
 export default class Prize {
   #line;
+
   #bonus;
 
   constructor() {
@@ -16,39 +17,57 @@ export default class Prize {
   }
 
   async lotteryLine(test = null) {
-    while (true) {
-      try {
-        const input = await IO.get(Constants.input.numbers);
-        const numbers = IO.stringConverter(input);
-        this.Check.base(numbers);
+    let numbers = null;
+    while (!numbers) {
+      numbers = await this.getLineInput(test);
+      if (numbers) {
         this.#line = numbers;
-        return;
-      } catch (error) {
-        IO.print(error.message);
-        if (test == "test") throw error;
+        IO.print("");
       }
+    }
+  }
+
+  async getLineInput(test = null) {
+    try {
+      const input = await IO.get(Constants.input.numbers);
+      const numbers = IO.stringConverter(input);
+      this.Check.base(numbers);
+      return numbers;
+    } catch (error) {
+      IO.print(error.message);
+      if (test === "test") throw error;
+      return null;
     }
   }
 
   async bonusNum(test = null) {
-    while (true) {
-      try {
-        let input = await IO.get(Constants.input.bonus);
-        input = IO.stringConverter(input);
-        this.Check.isValidNumber(input);
-
-        const number = parseInt(input, 10);
-        this.Check.bonus(this.#line, number);
+    let number = null;
+    while (!number) {
+      number = await this.getBonusInput(test);
+      if (number) {
         this.#bonus = number;
-        return;
-      } catch (error) {
-        IO.print(error);
-        if (test == "test") throw error;
+        IO.print("");
       }
     }
   }
 
-  show() {
+  async getBonusInput(test = null) {
+    try {
+      let input = await IO.get(Constants.input.bonus);
+      input = IO.stringConverter(input);
+      this.Check.isValidNumber(input);
+
+      const number = parseInt(input, 10);
+      this.Check.bonus(this.#line, number);
+      return number;
+    } catch (error) {
+      IO.print(error);
+      if (test === "test") throw error;
+      return null;
+    }
+  }
+
+  get() {
     const winningNumbers = {
       line: this.#line,
       bonus: this.#bonus,
