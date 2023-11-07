@@ -56,6 +56,10 @@ class LottoResult {
     const totalPrize = this.calculateTotalPrize();
     return ((totalPrize / totalSpent) * 100).toFixed(1);
   }
+
+  getResult() {
+    return this.#result;
+  }
 }
 
 export default LottoResult;
