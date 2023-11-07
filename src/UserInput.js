@@ -28,11 +28,11 @@ class UserInput{
   }
 
   #checkMoneyValidation(inputMoney){
-    if(!inputMoney || inputMoney % 1000){
-      throw new Error(ERROR_MESSAGE.notMultiplesOf1000);
-    }
     if(isNaN(inputMoney)){
       throw new Error(ERROR_MESSAGE.notNumber);
+    }
+    if(!inputMoney || inputMoney % 1000){
+      throw new Error(ERROR_MESSAGE.notMultiplesOf1000);
     }
   }
 
