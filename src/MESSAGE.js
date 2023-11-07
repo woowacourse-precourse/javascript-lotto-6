@@ -1,4 +1,4 @@
-export default Object.freeze({
+const MESSAGE = Object.freeze({
   enterPrice: '구입금액을 입력해 주세요.',
   enterWinNumbers: '당첨 번호를 입력해 주세요.',
   enterBonusNumber: '보너스 번호를 입력해 주세요.',
@@ -18,4 +18,9 @@ export default Object.freeze({
   profitRate(rate) {
     return `총 수익률은 ${rate}%입니다.`;
   },
+  formatError(message) {
+    return `[ERROR] ${message}`;
+  },
 });
+
+export default MESSAGE;

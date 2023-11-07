@@ -1,11 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const readInput = (message) => {
-  return Console.readLineAsync(message);
+const User = {
+  readInput(message) {
+    return Console.readLineAsync(message);
+  },
+  printMessage(message) {
+    Console.print(message);
+  },
 };
 
-const printMessage = (message) => {
-  Console.print(message);
-};
-
-export default { readInput, printMessage };
+export default User;
