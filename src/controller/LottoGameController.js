@@ -36,7 +36,7 @@ class LottoGameController {
 		this.#lottoGame.generateTickets();
 		this.#view.breakLine();
 		this.#view.displayPurchaseQuantity(this.#lottoGame.getPurchaseQuantity());
-		// TODO: 티켓 번호 출력
+		this.#view.displayTickets(this.#lottoGame.getTickets());
 	}
 }
 

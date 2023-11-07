@@ -38,6 +38,11 @@ class LottoGame {
   getPurchaseQuantity() {
     return this.#purchaseQuantity;
   }
+
+  /** @returns {Lotto} 구입한 티켓 */
+  getTickets() {
+    return this.#tickets;
+  }
 }
 
 export default LottoGame;

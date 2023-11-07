@@ -1,3 +1,4 @@
+import Lotto from '../model/Lotto.js';
 import { Console } from '@woowacourse/mission-utils';
 
 class LottoGameView {
@@ -27,6 +28,17 @@ class LottoGameView {
   displayPurchaseQuantity(purchaseQuantity) {
     // TODO: 상수 사용
     Console.print(`${purchaseQuantity}개를 구매했습니다.`);
+  }
+
+  /**
+   * 
+   * @param {Array<Lotto>} tickets 구입한 티켓 리스트
+   */
+  displayTickets(tickets) {
+    tickets.forEach((ticket) => {
+      // TODO: 상수 사용
+      Console.print(`[${ticket.getNumbers()}]`);
+    });
   }
 }
 
