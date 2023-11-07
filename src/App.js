@@ -1,12 +1,11 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
 import WinningLotto from "./classes/WinningLotto.js";
 import Util from "./classes/util.js";
 
 const Console = MissionUtils.Console;
 
 class App {
-  async intro() {
+  async lottoClassesArray() {
     const userMoney = await Util.validateUserMoney();
     const purchaseNumber = Util.getPurchaseNumber(userMoney);
     Console.print(purchaseNumber + "개를 구매했습니다.");
@@ -65,10 +64,9 @@ class App {
   }
 
   async play() {
-    const lottoClasses = await this.intro();
+    const lottoClasses = await this.lottoClassesArray();
     const winningNumberClass = await this.WinningLotto();
     this.getLottosCount(lottoClasses, winningNumberClass);
-    console.log(lottoClasses);
     const rank = this.getRank(lottoClasses);
     this.printResult(rank);
     const total = this.totalPrize(rank);
