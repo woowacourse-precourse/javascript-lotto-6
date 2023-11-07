@@ -10,7 +10,7 @@ const InputView = {
 
     return purchaseAmount;
   },
-  
+
   readWinningNumbers: async () => {
     const input = await Console.readLineAsync(MESSAGE.read.winningNumbers);
     const winningNumbers = input.split(',').map(item => item.trim());
@@ -21,8 +21,9 @@ const InputView = {
   },
 
   readbonusNumber: async () => {
-    const input = await Console.readLineAsync(MESSAGE.read.bonusNumber);
-    const bonusNumber = [input];
+    const bonusNumber = await Console.readLineAsync(MESSAGE.read.bonusNumber);
+
+    Validator.validateBonusNumber(bonusNumber);
 
     return bonusNumber;
   },
