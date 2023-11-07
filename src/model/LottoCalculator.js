@@ -45,4 +45,23 @@ export default class LottoCalculator {
 
     return count;
   }
+
+  sumPrize(data) {
+    let sum = 0;
+
+    sum += data.matches3;
+    sum += data.matches4;
+    sum += data.matches5;
+    sum += data.matchesBonus;
+    sum += data.matches6;
+
+    return sum;
+  }
+
+  getRatio(data) {
+    const ratio = (data.prize / data.money).toFixed(2);
+    const formattedRatio = parseFloat(ratio).toLocaleString();
+
+    return formattedRatio;
+  }
 }
