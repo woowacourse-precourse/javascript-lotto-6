@@ -4,7 +4,16 @@ import ValidationError from '../error/ValidationError.js';
 import validateCommon from './CommonValidator.js';
 
 /**
- * @public
+ * @param {number} input
+ * @throws {ValidationError}
+ */
+const checkValidCharacter = (input) => {
+  if (Number.isNaN(input)) {
+    throw new ValidationError(LOTTO_ERROR_MESSAGE.notAValidCharacter);
+  }
+};
+
+/**
  * @param {number} input
  * @throws {ValidationError}
  */
@@ -15,7 +24,6 @@ const checkValidNumber = (input) => {
 };
 
 /**
- * @public
  * @param {number} input
  * @throws {ValidationError}
  */
@@ -29,7 +37,6 @@ const checkValidRange = (input) => {
 };
 
 /**
- * @public
  * @param {number} input
  * @param {number[]} lottoNumbers
  * @throws {ValidationError}
@@ -41,7 +48,6 @@ const checkDuplicationNumber = (input, lottoNumbers) => {
 };
 
 /**
- * @public
  * @param {number[]} lottoNumbers
  * @param {string} lottoBonusNumber
  */
@@ -49,6 +55,7 @@ const validateLottoBonusNumber = (lottoNumbers, lottoBonusNumber) => {
   const number = Number(lottoBonusNumber);
 
   validateCommon(lottoBonusNumber);
+  checkValidCharacter(number);
   checkValidNumber(number);
   checkValidRange(number);
   checkDuplicationNumber(number, lottoNumbers);
