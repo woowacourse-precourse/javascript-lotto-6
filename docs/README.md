@@ -51,20 +51,20 @@
 
 ### 🖥️ View 🖥️
 - [x] 구입금액을 입력한다. - Inputs 클래스의 inputMoney
-- [ ] 구매한 로또 번호를 오름차순으로 정렬해서 구매한 순서대로 출력하여 준다.
+- [x] 구매한 로또 번호를 오름차순으로 정렬해서 구매한 순서대로 출력하여 준다. - Outputs 클래스의 printLottoList
 - [x] 당첨 번호를 입력 받는다. - Inputs 클래스의 inputNUmbers
 - [x] 보너스 번호를 입력 받는다. - Inputs 클래스의 inputBonus
-- [ ] 당첨 통계를 출력한다.
+- [x] 당첨 통계를 출력한다. - Outputs 클래스의 printScore
 - [ ] 수익률을 출력한다.
 
 ### 🎮 Controller 🎮
 - [x] 사용자의 구입금액을 입력 받아 이를 로또 생성 횟수로 바꾼다. - MoneyChanger 클래스의 contsructor
     - [x] 예외 :: 1000으로 나누어떨어지지 않으면 "[ERROR]"로 시작하는 예외를 출력한다.
-- [ ] 로또 생성 횟수를 바탕으로 로또를 생성한다. - LottoGenerator 클래스의 #generatLottos
-- [ ] 생성된 사용자의 로또 번호를 넘겨준다.
-- [ ] 사용자의 당첨 번호를 입력받아 모델에 넘겨 준다.
-- [ ] 사용자의 보너스 번호를 입력받아 모델에 넘겨 준다.
-- [ ] 모델의 당첨 통계를 뷰에 넘겨준다.
+- [x] 로또 생성 횟수를 바탕으로 로또를 생성한다. - LottoGenerator 클래스의 #generatLottos
+- [x] 생성된 사용자의 로또 번호를 넘겨준다. - Operator의 get lottoList
+- [x] 사용자의 당첨 번호를 입력받아 모델에 넘겨 준다. - Operator의 Constructor
+- [x] 사용자의 보너스 번호를 입력받아 모델에 넘겨 준다. - Operator의 Constructor
+- [x] 모델의 당첨 통계를 뷰에 넘겨준다. - Operator의 get Score
 - [ ] 모델의 수익률을 뷰에 넘겨준다.
 - [ ] 파악된 당첨 등수를 바탕으로 수익률을 계산한다.
 - [ ] 수익률을 읽는다.
