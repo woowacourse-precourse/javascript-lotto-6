@@ -115,11 +115,8 @@ describe('method test : compareLottoNumbers()', () => {
   test('로또 결과를 담은 배열을 잘 반환할 수 있는가 ?', () => {
     const testArray = [1, 2, 3, 4, 5, 6];
     const lotto = new Lotto(testArray);
-    const lottoRandomNumber = [
-      [1, 2, 3, 4, 5, 6],
-      [4, 5, 6, 7, 8, 9],
-    ];
-    const userLottoNumber = [1, 2, 4, 5, 6, 9];
+    const lottoRandomNumber = [[1, 2, 3, 4, 5, 6]];
+    const userLottoNumber = [1, 2, 4, 5, 16, 9];
     const userBonusNumber = 13;
     const lottoResult = lotto.compareLottoNumbers(
       lottoRandomNumber,
