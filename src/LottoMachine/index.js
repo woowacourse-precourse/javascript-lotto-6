@@ -3,9 +3,12 @@ import { NUMBER, MESSAGE, RANDOM, SYMBOLS } from '../constants/index.js';
 import Lotto from '../Lotto.js';
 
 class LottoMachine {
+  #purchaseAmount;
+
   #lottos;
 
   constructor() {
+    this.#purchaseAmount = 0;
     this.#lottos = [];
   }
 
@@ -20,13 +23,15 @@ class LottoMachine {
     });
   }
 
-  buy(lottoCount) {
+  buy(purchaseAmount) {
+    const lottoCount = purchaseAmount / NUMBER.lottoPurchaseUnit;
+    this.#purchaseAmount = purchaseAmount;
     this.#lottos = this.#pickLottos(lottoCount);
+
     const lottoStrings = this.#lottos
       .map((lotto) => lotto.formatString())
       .join(SYMBOLS.lineBreak);
-
-    return `${lottoCount}${MESSAGE.purchase}${lottoStrings}`;
+    return `${SYMBOLS.lineBreak}${lottoCount}${MESSAGE.purchase}${lottoStrings}`;
   }
 }
 
