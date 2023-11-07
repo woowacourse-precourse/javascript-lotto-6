@@ -44,10 +44,16 @@ describe('입력 예외 상황 테스트', () => {
       Validator.invalidWinningNumbers(received);
     }).toThrow(ERROR.message.invalidNumber);
   });
-  test('1~45의 값이 아닌 경우', () => {
+  test('당첨 번호가 1~45의 값이 아닌 경우', () => {
     const received = ['0', '2', '3', '4', '5', '46'];
     expect(() => {
       Validator.invalidRange(received);
+    }).toThrow(ERROR.message.invalidRange);
+  });
+  test('입력한 값이 1~45의 값이 아닌 경우', () => {
+    const received = ['0', '2', '3', '4', '5', '46'];
+    expect(() => {
+      Validator.invalidNumberRange(received);
     }).toThrow(ERROR.message.invalidRange);
   });
 });
