@@ -20,29 +20,32 @@ class App {
     [...Array(NUM_TICKETS)].forEach((_, cnt) => {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       const lotto = new Lotto(numbers);
-      tickets.push(new Lotto(numbers));
+      tickets.push(lotto);
     })
     
     return tickets;
   }
 
-  /* async getWinningNum() {
-    const winning_number = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.')
-  } */
+  async getWinningNum() {
+    const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const winning_number = new Lotto(input.split(',').map(Number));
+
+    return winning_number;
+  }
 
   async play() {
     const MONEY = await this.getUserMoney();
     const NUM_TICKETS = parseInt(MONEY) / 1000;
     MissionUtils.Console.print(`\n${NUM_TICKETS}개를 구매했습니다.`);
-    //로또 발행
+
     const tickets = this.generateRandomLottoNum(NUM_TICKETS);
     tickets.forEach(ticket => {
       ticket.print_num();
     })
-    
-
     //사용자로부터 당첨 번호 입력 받기
-    //const winning_number = getWinningNum();
+    const winning_number = await this.getWinningNum();
+    winning_number.print_num();
+
   }
 }
 
