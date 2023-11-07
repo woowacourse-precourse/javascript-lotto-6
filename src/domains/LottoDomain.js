@@ -3,17 +3,21 @@ import { NUMBER, number } from '../constants.js';
 import { Random } from '@woowacourse/mission-utils';
 
 class LottoMachine {
-  static make(lottoCount) {
+  #make(lottoCount) {
     return Array.from({ length: lottoCount }).map(() => {
-      const lottoNumbers = this.makeNumbers(NUMBER.START, NUMBER.LAST, NUMBER.LOTTO_LENGTH);
+      const lottoNumbers = this.#makeNumbers(NUMBER.START, NUMBER.LAST, NUMBER.LOTTO_LENGTH);
       lottoNumbers.sort((a, b) => a - b);
       const lotto = new Lotto(lottoNumbers);
       return lotto;
     });
   }
 
-  static makeNumbers(start, end, length) {
+  #makeNumbers(start, end, length) {
     return Random.pickUniqueNumbersInRange(start, end, length);
+  }
+
+  doMake(lottoCount) {
+    return this.#make(lottoCount);
   }
 
   static find(lotto, winningNumbers) {

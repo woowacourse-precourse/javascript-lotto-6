@@ -44,7 +44,8 @@ class App {
   async makeLotto() {
     this.#money = await Request.money();
     this.#lottoQuantity = calculate.countFrom(this.#money);
-    this.#lottos = LottoMachine.make(this.#lottoQuantity);
+    const lottoMachine = new LottoMachine();
+    this.#lottos = lottoMachine.doMake(this.#lottoQuantity);
   }
 
   async getWinningNumbers() {
@@ -56,12 +57,12 @@ class App {
   }
 
   makeResult() {
-    const result = this.getResult(this.#lottos, this.#winningNumbers);
+    const result = App.getResult(this.#lottos, this.#winningNumbers);
     this.#prizeResult = LottoMachine.read(result, this.#bonusNumber);
     this.#profit = calculate.profitFrom(this.#prizeResult, this.#money);
   }
 
-  getResult(lottos, winningNumbers) {
+  static getResult(lottos, winningNumbers) {
     return lottos.map((lotto) => LottoMachine.find(lotto, winningNumbers));
   }
 }

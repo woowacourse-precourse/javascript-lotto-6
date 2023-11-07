@@ -1,4 +1,4 @@
-import lottoMachine from '../src/domains/LottoDomain.js';
+import LottoMachine from '../src/domains/LottoDomain.js';
 
 describe('lottoMachine 테스트', () => {
   test('입력받은 숫자만큼 로또를 만드는 기능 확인', () => {
@@ -6,7 +6,8 @@ describe('lottoMachine 테스트', () => {
     const lottoCount = 8;
 
     // when
-    const result = lottoMachine.make(lottoCount);
+    const lottoMachine = new LottoMachine();
+    const result = lottoMachine.doMake(lottoCount);
 
     // then
     expect(Array.isArray(result)).toBe(true);
