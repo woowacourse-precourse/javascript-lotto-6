@@ -1,7 +1,7 @@
 import { LOTTO_ERROR } from '../../src/constants/message/error';
 import LottoValidator from '../../src/validator/LottoValidator';
 
-describe('LottoValidator 클래스 예외 테스트', () => {
+describe('로또 검증 클래스 예외 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
     expect(() => {
       LottoValidator.validateCount([1, 2, 3, 4, 5, 6, 7]);

@@ -1,36 +1,33 @@
 import { MONEY_ERROR } from '../../src/constants/message/error';
+import { LOTTO_PRICE } from '../../src/constants/setting';
 import MoneyValidator from '../../src/validator/MoneyValidator';
 
-describe('Money Validator 클래스 테스트', () => {
-  describe('로또 구매', () => {
-    test('숫자가 1000 이상이라면 에러가 발생하지 않는다.', () => {
-      const money = 1000;
+describe('구매금액 검증 클래스 테스트', () => {
+  test('구매금액이 로또 금액으로 나누어 떨어진다.', () => {
+    const money = LOTTO_PRICE;
 
-      expect(() =>
-        MoneyValidator.validateLottoPurchaseAmount(money),
-      ).not.toThrow();
-    });
+    expect(() =>
+      MoneyValidator.validateLottoPurchaseAmount(money),
+    ).not.toThrow();
   });
 
-  describe('로또 구매 예외 상황', () => {
-    test('숫자가 1000보다 작다면 예외가 발생한다.', () => {
-      const moneyList = [-1, 0, 999];
+  test('구매금액이 로또 금액보다 작다면 예외가 발생한다.', () => {
+    const moneyList = [-1, 0, LOTTO_PRICE - 1];
 
-      moneyList.forEach(money =>
-        expect(() => MoneyValidator.validateLottoPurchaseAmount(money)).toThrow(
-          MONEY_ERROR.purchaseAmount,
-        ),
+    moneyList.forEach(money =>
+      expect(() => MoneyValidator.validateLottoPurchaseAmount(money)).toThrow(
+        MONEY_ERROR.purchaseAmount,
+      ),
+    );
+  });
+
+  test('구매금액이 로또가격으로 정확히 나누어 떨어지지 않는다면 예외 처리한다.', () => {
+    const moneyList = [LOTTO_PRICE + 1, 1999, 2500];
+
+    moneyList.forEach(money => {
+      expect(() => MoneyValidator.validateLottoAmountExactness(money)).toThrow(
+        MONEY_ERROR.amountExactness,
       );
-    });
-
-    test('구매금액이 로또가격으로 정확히 나누어 떨어지지 않는다면 예외 처리한다.', () => {
-      const moneyList = [1001, 1999, 2500];
-
-      moneyList.forEach(money => {
-        expect(() =>
-          MoneyValidator.validateLottoAmountExactness(money),
-        ).toThrow(MONEY_ERROR.amountExactness);
-      });
     });
   });
 });
