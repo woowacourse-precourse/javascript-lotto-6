@@ -22,6 +22,6 @@
 
 - publishGameNums(gameCnt) : 게임 번호 발행
 - classificRank(count, haveBonusNum) : 등수 분류
-- matchNums(game) : 맞한 갯수 카운트
-- calcResult(games) : 결과 계산
+- matchNums(game, bonusNum) : 맞한 갯수 카운트
+- calcResult(games, bonusNum) : 결과 계산
 - calcEarningRate(amount, earn) : 수익률 계산
