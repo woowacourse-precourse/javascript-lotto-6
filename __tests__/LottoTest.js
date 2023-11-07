@@ -46,4 +46,17 @@ describe('로또 클래스 테스트', () => {
       new Lotto(numbers);
     }).not.toThrow('[ERROR]');
   });
+
+  test('예외 없이 유효성 검사를 마치면 당첨 번호를 얻을 수 있다.', () => {
+    // given
+    const numbers = [1, 7, 17, 27, 37, 45];
+
+    // when
+    const lottoObject = new Lotto(numbers);
+    const lotto = lottoObject.getLotto();
+
+    // then
+
+    expect(lotto).toEqual(numbers);
+  });
 });
