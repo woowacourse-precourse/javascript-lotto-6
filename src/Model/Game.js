@@ -19,13 +19,13 @@ class Game {
     const { lottos, luckyNumbers, bonusNumber } = this;
     lottos.forEach((lotto) => {
       const matchResult = lotto.match(luckyNumbers, bonusNumber);
-      this.calculateGame(matchResult);
+      this.calculateResult(matchResult);
     });
 
     return this.matchResult;
   }
 
-  calculateGame(result) {
+  calculateResult(result) {
     const { cnt, bonus } = result;
     // 5등 미만이라면 return
     const rank = this.calculateRank(cnt, bonus);
