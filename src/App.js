@@ -49,6 +49,10 @@ class App {
     });
   }
 
+  showComputeResult() {
+    View.outputComputeResult(this.computer.state);
+  }
+
   async play() {
     await this.getPrice();
     this.userLotto.createLottos();
@@ -56,6 +60,7 @@ class App {
     await this.getWinningNumber();
     await this.getBonusNumber();
     this.computeConditions();
+    this.showComputeResult();
   }
 }
 
