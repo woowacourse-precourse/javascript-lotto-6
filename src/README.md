@@ -185,6 +185,10 @@ ex)
 ```
 
 
-## 프로세스
+## 로또게임 프로세스
 
 ![로또 프로세스](./lottoGameProcess.png)
+
+## 프로세스에 따른 클래스 리스트
+
+![프로세스에 따른 클래스 리스트](./classListByProcess.png)
