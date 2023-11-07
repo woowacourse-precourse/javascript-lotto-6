@@ -1,27 +1,25 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { TICKET_CONFIGURATION } from "./Rule.js";
 
 class LottoNumberGenerator {
-  static #RANGE_START = 1;
-  static #RANGE_END = 45;
-  static #QUANTITY = 6;
 
   static generate() {
     return MissionUtils.Random.pickUniqueNumbersInRange(
-      this.#RANGE_START,
-      this.#RANGE_END,
-      this.#QUANTITY
+      TICKET_CONFIGURATION.startRange,
+      TICKET_CONFIGURATION.endRange,
+      TICKET_CONFIGURATION.quantity
     );
   }
 
   static isValidLottoNumber(number) {
-    if(number < this.#RANGE_START || number > this.#RANGE_END) {
+    if(number < TICKET_CONFIGURATION.startRange || number > TICKET_CONFIGURATION.endRange) {
         return false;
     }
     return true;
   }
 
   static isValidNumberQuantity(numbers) {
-    if(numbers.length != this.#QUANTITY) {
+    if(numbers.length != TICKET_CONFIGURATION.quantity) {
         return false;
     }
     return true;

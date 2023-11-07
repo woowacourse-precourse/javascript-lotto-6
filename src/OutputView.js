@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { WINNING_RANK } from "./WinningRecord.js";
+import { WINNING_RANK } from "./Rule.js";
 
 const InputView = {
   printError(error) {

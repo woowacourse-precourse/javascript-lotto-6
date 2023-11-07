@@ -1,30 +1,4 @@
-export const WINNING_RANK = {
-  first: {
-    reward: 2_000_000_000,
-    matchingNumberCount: 6,
-    hasBonusNumber: false,
-  },
-  second: {
-    reward: 30_000_000,
-    matchingNumberCount: 5,
-    hasBonusNumber: true,
-  },
-  third: {
-    reward: 1_500_000,
-    matchingNumberCount: 5,
-    hasBonusNumber: false,
-  },
-  fourth: {
-    reward: 50_000,
-    matchingNumberCount: 4,
-    hasBonusNumber: false,
-  },
-  fifth: {
-    reward: 5_000,
-    matchingNumberCount: 3,
-    hasBonusNumber: false,
-  },
-};
+import { WINNING_RANK } from "./Rule.js";
 
 export class WinningRecord {
   #winningNumbers;
@@ -57,7 +31,10 @@ export class WinningRecord {
 
     for (let rank in WINNING_RANK) {
       if (matchingNumberCount == WINNING_RANK[rank].matchingNumberCount) {
-        if (WINNING_RANK[rank].hasBonusNumber == true && hasBonusNumber == false) {
+        if (
+          WINNING_RANK[rank].hasBonusNumber == true &&
+          hasBonusNumber == false
+        ) {
           continue;
         }
         statistics[rank] += 1;
@@ -68,11 +45,11 @@ export class WinningRecord {
 
   getRateOfReturn(tickets, statistics) {
     let totalReward = 0;
-    for(let rank in statistics) {
-        if(statistics[rank] === 0) {
-            continue;
-        }
-        totalReward += WINNING_RANK[rank].reward * statistics[rank];
+    for (let rank in statistics) {
+      if (statistics[rank] === 0) {
+        continue;
+      }
+      totalReward += WINNING_RANK[rank].reward * statistics[rank];
     }
     return (totalReward / (tickets.length * 1000)) * 100;
   }
