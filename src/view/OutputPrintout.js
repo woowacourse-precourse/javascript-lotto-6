@@ -33,5 +33,9 @@ const OutputPrintout = {
 			);
 		});
 	},
+	printRate: (amount) => {
+		const rate = LottoController.calculateRate(amount);
+		Console.print(`${PRINT_OUTPUT.totalRate}${rate}${PRINT_OUTPUT.percentage}`);
+	},
 };
 export default OutputPrintout;

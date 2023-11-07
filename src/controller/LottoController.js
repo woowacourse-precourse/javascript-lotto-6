@@ -1,17 +1,16 @@
 import { Random } from "@woowacourse/mission-utils";
-import { LOTTO, COMMA } from "../utils/Constant.js";
+import { LOTTO, COMMA, PRINT_OUTPUT, MONEY } from "../utils/Constant.js";
 import Lotto from "../model/Lotto.js";
 
 class LottoController {
 	static lottoList = [];
 	static lottoNumList = [];
 	static matchingNumMap = new Map([
-		// 하드코딩
-		["3", 0],
-		["4", 0],
-		["5", 0],
-		["5+1", 0],
-		["6", 0],
+		[PRINT_OUTPUT.three, 0],
+		[PRINT_OUTPUT.four, 0],
+		[PRINT_OUTPUT.five, 0],
+		[PRINT_OUTPUT.fiveBonus, 0],
+		[PRINT_OUTPUT.six, 0],
 	]);
 
 	static countLottos(amount) {
@@ -21,11 +20,7 @@ class LottoController {
 	static generateLotto() {
 		const lottoNumbers = [];
 		while (lottoNumbers.length < LOTTO.count) {
-			const number = Random.pickNumberInRange(
-				LOTTO.minRange,
-				LOTTO.maxRange,
-				LOTTO.count
-			);
+			const number = Random.pickNumberInRange(LOTTO.minRange, LOTTO.maxRange, LOTTO.count);
 			if (!lottoNumbers.includes(number)) {
 				lottoNumbers.push(number);
 			}
@@ -38,10 +33,7 @@ class LottoController {
 	}
 
 	static setLottoNumList() {
-		this.lottoList.forEach((lotto) =>
-			this.lottoNumList.push(lotto.getNumbers())
-		);
-		console.log(this.lottoNumList); //나중에 삭제
+		this.lottoList.forEach((lotto) => this.lottoNumList.push(lotto.getNumbers()));
 	}
 
 	static countMatchingNum(winningNumber) {
@@ -50,16 +42,15 @@ class LottoController {
 		);
 	}
 
+	static decideBonusNum = (idx, bonusNumber) => {
+		if (this.lottoNumList[idx].includes(bonusNumber)) return PRINT_OUTPUT.fiveBonus;
+		return PRINT_OUTPUT.five;
+	};
+
 	static countBonusNum(mathingNums, bonusNumber) {
-		const decideBonusNum = (idx) => {
-			console.log(bonusNumber);
-			if (this.lottoNumList[idx].includes(bonusNumber)) return "5+1"; // 하드 코딩
-			return "5"; // 하드코딩
-		};
 		return mathingNums.reduce((prev, curr, idx) => {
-			if (curr === 5) {
-				// 하드코딩
-				prev.push(decideBonusNum(idx));
+			if (curr.toString() === PRINT_OUTPUT.five) {
+				prev.push(this.decideBonusNum(idx, bonusNumber));
 				return prev;
 			}
 			prev.push(curr.toString());
@@ -69,18 +60,31 @@ class LottoController {
 
 	static setMatchingNumMap(winningNumber, bonusNumber) {
 		this.setLottoNumList();
-		const mathingNums = this.countMatchingNum(winningNumber);
+		let mathingNums = this.countMatchingNum(winningNumber);
+		mathingNums = this.countBonusNum(mathingNums, bonusNumber);
 
-		console.log("보너스 제외 일치값", mathingNums); // 값이 5이면 한번 더 판별
-		const abc = this.countBonusNum(mathingNums, bonusNumber);
-		console.log("보너스 포함 일치값", abc); // 값이 5이면 한번 더 판별
-
-		abc.forEach((key) => {
+		mathingNums.forEach((key) => {
 			const value = this.matchingNumMap.get(key);
 			if (this.matchingNumMap.has(key)) this.matchingNumMap.set(key, value + 1);
 		});
+	}
 
-		console.log(this.matchingNumMap);
+	static getEarnedMoney() {
+		const money = [
+			MONEY.krw5000,
+			MONEY.krw50000,
+			MONEY.krw1500000,
+			MONEY.krw30000000,
+			MONEY.krw2000000000,
+		];
+		return [...this.matchingNumMap.values()].reduce(
+			(sum, count, idx) => sum + count * money[idx],
+			0
+		);
+	}
+
+	static calculateRate(amount) {
+		return (this.getEarnedMoney() / amount) * 100;
 	}
 }
 
