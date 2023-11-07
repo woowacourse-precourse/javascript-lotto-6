@@ -1,15 +1,14 @@
 import CustomError from './customs/CustomError.js';
-import ValidatableArray from './validators/ValidatableArray.js';
 import ERROR_MESSAGE from './constants/error.js';
 
 class Lotto {
   #numbers;
 
   /**
-   * @param {number[]} numbers
+   * @param {ValidatableArray} numbers
    */
   constructor(numbers) {
-    this.#validate(new ValidatableArray(numbers));
+    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
