@@ -23,14 +23,15 @@ class App {
       CONSTANT_VALUE.dailyLimitPrice,
       CONSTANT_VALUE.numberCheck,
     );
+
     const lottoNumbers = await buyLotto.start();
 
     const winningNumbers = await this.generateWinningNumbers();
     const bonusNumber = await this.generateBonusNumber();
-
     const lotto = new Lotto(winningNumbers);
 
     lotto.validateBonus(bonusNumber);
+    lotto.printEarnings(lottoNumbers, winningNumbers, bonusNumber);
   }
 }
 
