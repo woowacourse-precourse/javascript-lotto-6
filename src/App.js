@@ -120,11 +120,11 @@ class App {
     const winningNumber = await this.getWinningNumber();
     const winningNumberArray = await this.checkCommaSeparated(winningNumber);
     const userLotto = new Lotto(winningNumberArray);
-    userLotto.setWinningNumber();
+    userLotto.setWinningNumber(winningNumberArray);
 
     const bonusNumber = await this.getBonusNumber();
     userLotto.setBonusNumber(bonusNumber);
-    this.getMatchingStatisticsAndRate(
+    await this.getMatchingStatisticsAndRate(
       quantity,
       purchasedLottos,
       userLotto,
@@ -143,7 +143,6 @@ class App {
     }
     const result = await userLotto.calculateMatchingStatistics();
     for (let score of result) MissionUtils.Console.print(score);
-
     await userLotto.calculateMatchingRate(money);
   }
 

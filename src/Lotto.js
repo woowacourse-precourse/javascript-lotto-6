@@ -62,8 +62,8 @@ class Lotto {
     return bonusNumber;
   }
 
-  setWinningNumber() {
-    this.winningNumber = this.#validate(this.#numbers);
+  setWinningNumber(winningNumberArray) {
+    this.winningNumber = this.#validate(winningNumberArray);
   }
 
   setBonusNumber(bonusNumber) {

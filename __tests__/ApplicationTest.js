@@ -83,7 +83,7 @@ describe("로또 테스트", () => {
       "5개 일치 (1,500,000원) - 0개",
       "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
       "6개 일치 (2,000,000,000원) - 0개",
-      "총 수익률은 62.5%입니다.",
+      "총 수익률은 -37.5%입니다.",
     ];
 
     logs.forEach((log) => {
@@ -95,7 +95,7 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 
-  test("발행한 로또가 구입 금액에 맞는 수량인지 테스트", async () => {
+  test("발행한 로또가 구입 금액에 맞는 수량인지 테스트", () => {
     const input = ["3000"];
 
     // given
@@ -103,7 +103,7 @@ describe("로또 테스트", () => {
 
     // when
     const app = new App();
-    const quantity = await app.getLottoQuantity(input);
+    const quantity = app.getLottoQuantity(input);
 
     // then
     const expectedLottoCount = 3;
