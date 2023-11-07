@@ -87,3 +87,47 @@
 - [ ] 폴더 구조 나눠보기
 - [ ] eslint, prettier 세팅 및 적용해보기
 
+### 폴더 구조
+
+```
+ root
+ |---src
+     |--- App.js
+     |--- index.js
+     |--- Lotto.js
+```
+
+### eslint 사용해보기
+
+```
+module.exports = {
+  extends: ['airbnb', 'plugin:prettier/recommended'],
+  rules: {
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'operator-linebreak': ['error', 'before'],
+    'max-depth': ['error', 2],
+  },
+  'import/extensions': ['error', 'ignorePackages', {
+    js: 'never',
+  }],
+  },
+};
+```
+
+### prettier 사용해보기
+
+```
+module.exports = {
+  printWidth: 80,
+  tabWidth: 2,
+  useTabs: false,
+  semi: true,
+  singleQuote: true,
+  bracketSpacing: true,
+  arrowParens: 'avoid',
+  proseWrap: 'never',
+  endOfLine: 'auto',
+};
+```
+
+
