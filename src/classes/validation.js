@@ -25,6 +25,18 @@ class Validation {
       }
     });
   }
+
+  static bonusNumber(winningNumbers, bonusNumber) {
+    if (winningNumbers.includes(bonusNumber)) {
+      throw new Error("[ERROR] 당첨 번호와 다른 번호를 입력하세요.");
+    }
+    if (!+bonusNumber) {
+      throw new Error("[ERROR] 숫자를 입력하세요.");
+    }
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 1~45 내의 숫자를 입력해주세요.");
+    }
+  }
 }
 
 export default Validation;
