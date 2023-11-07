@@ -14,6 +14,11 @@ const PERCENT = Object.freeze(100);
 
 const PREFIX = Object.freeze("[ERROR]");
 
+const NUMBER_RANGE = Object.freeze({
+  min: 1,
+  max: 45,
+});
+
 const INPUT_ERROR = Object.freeze({
   null: `${PREFIX} 아무것도 입력하지 않았습니다.\n`,
   blank: `${PREFIX} 공백없이 입력해야 합니다.\n`,
@@ -25,4 +30,11 @@ const INPUT_ERROR = Object.freeze({
   duplicate: `${PREFIX} 서로 다른 ${NUMBER_CRITERIA}개의 숫자를 입력해야 합니다.\n`,
 });
 
-export { IN_GAME_MESSAGE, UNIT, NUMBER_CRITERIA, PERCENT, INPUT_ERROR };
+export {
+  IN_GAME_MESSAGE,
+  UNIT,
+  NUMBER_CRITERIA,
+  PERCENT,
+  NUMBER_RANGE,
+  INPUT_ERROR,
+};
