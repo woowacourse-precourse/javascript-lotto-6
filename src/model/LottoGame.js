@@ -41,13 +41,13 @@ class LottoGame {
 
   profitability(rank) {
     const totalPrize = rank
-      .map((count, index) => count * PRIZE_MONEY[index + 1])
+      .map((count, index) => count * PRIZE_MONEY[index + NUMBERS.rank_index])
       .reduce((a, b) => a + b, NUMBERS.zero);
     return !totalPrize
       ? NUMBERS.zero
       : (
           (totalPrize / (this.#userNumbers.length * NUMBERS.purchase_money)) * NUMBERS.percent
-        ).toFixed(1);
+        ).toFixed(NUMBERS.profit_rounded);
   }
 }
 

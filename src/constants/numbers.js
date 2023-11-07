@@ -16,6 +16,9 @@ const NUMBERS = Object.freeze({
   third_place: 2,
   four_place: 3,
   five_place: 4,
+  rank_index: 1,
+  profit_rounded: 1,
+  array_all_index: 4
 });
 
 export default NUMBERS;

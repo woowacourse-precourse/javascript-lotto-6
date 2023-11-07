@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GAME_RESULT } from "../../constants/gameMessage.js";
+import NUMBERS from "../../constants/numbers.js";
 
 const {
   piece,
@@ -13,6 +14,7 @@ const {
   bonus_five_matching,
   six_matching,
 } = GAME_RESULT;
+const { array_all_index } = NUMBERS;
 
 const resultOutput = (rank, profit) => {
   const messages = [
@@ -27,7 +29,7 @@ const resultOutput = (rank, profit) => {
   Console.print(hyphon);
 
   messages.forEach((message, i) => {
-    Console.print(`${message}${rank[4 - i]}${piece}`);
+    Console.print(`${message}${rank[array_all_index - i]}${piece}`);
   });
 
   Console.print(`${money_return}${profit}${text_end}`);
