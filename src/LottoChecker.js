@@ -21,12 +21,7 @@ class LottoChecker {
 
     this.tickets.forEach(ticket => {
       const matchCount = this.#countMatchingNumbers(ticket);
-
-      if (result[matchCount]) {
-        result[matchCount] += 1;
-      } else {
-        result[matchCount] = 1;
-      }
+      result[matchCount] ? (result[matchCount] += 1) : (result[matchCount] = 1);
     });
 
     return result;
