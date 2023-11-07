@@ -15,4 +15,13 @@ class Lotto {
   // TODO: 추가 기능 구현
 }
 
+function lottoNumbersGenerator(amount) {
+  const randomNumbers = [];
+  for (let i = 0; i < amount; i++) {
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    randomNumbers.push(numbers.sort());
+  }
+  return randomNumbers;
+}
+
 export default Lotto;
