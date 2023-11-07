@@ -1,3 +1,35 @@
+import Utils from './Utils.js';
+
+const RANKING = new Map([
+  [5, '3개 일치'],
+  [4, '4개 일치'],
+  [3, '5개 일치'],
+  [2, '5개 일치, 보너스 볼 일치'],
+  [1, '6개 일치'],
+]);
+
+const MATCH_RANKING = new Map([
+  [5, 3],
+  [4, 4],
+  [3, 5],
+  [2, '보너스'],
+  [1, 6],
+]);
+
+const WINNING_PRIZE = new Map([
+  [5, 5000],
+  [4, 50000],
+  [3, 1500000],
+  [2, 30000000],
+  [1, 2000000000],
+]);
+
+const PRINT_STRING = {
+  resultHeader: '당첨 통계\n---',
+  prizeUnit: '원',
+  matchNumberUnit: '개',
+};
+
 class WinningCalculator {
   #totalWinningNumbers;
 
@@ -43,6 +75,22 @@ class WinningCalculator {
       this.winnerList.set(matchCount, this.winnerList.get(matchCount) - 1);
       this.winnerList.set('보너스', 1 + (this.winnerList.get('보너스') ?? 0));
     }
+  }
+
+  informResult() {
+    Utils.informUser(PRINT_STRING.resultHeader);
+
+    RANKING.forEach((standard, rank) => {
+      const prize = WINNING_PRIZE.get(rank);
+      const matchCount = MATCH_RANKING.get(rank);
+      const matchNumber = this.winnerList.get(matchCount);
+
+      Utils.informUser(
+        `${standard} (${prize.toLocaleString()}${
+          PRINT_STRING.prizeUnit
+        }) - ${matchNumber}${PRINT_STRING.matchNumberUnit}`,
+      );
+    });
   }
 }
 
