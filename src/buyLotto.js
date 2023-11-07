@@ -6,9 +6,8 @@ export async function inputMoney() {
   try {
     const userInputAmount = await Console.readLineAsync(MESSAGE.enterPurchaseAmount);
     const amount = await validateAmount(userInputAmount);
-    const numberOfLottoTickets = amount / 1000;
 
-    return buyLotto(numberOfLottoTickets);
+    return amount;
   } catch (error) {
     Console.print(error.message);
 
@@ -23,7 +22,8 @@ async function validateAmount(userInputAmount) {
   return userInputAmount;
 }
 
-async function buyLotto(numberOfLottoTickets) {
+export async function buyLotto(amount) {
+  const numberOfLottoTickets = amount / 1000;
   await Console.print(`\n${numberOfLottoTickets}${MESSAGE.bought}`);
   const userLottoList = await userAutomaticLottoNumber(numberOfLottoTickets);
 
