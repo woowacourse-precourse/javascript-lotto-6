@@ -1,5 +1,4 @@
 export function validateAmountInput(input) {
-  console.log(input);
   if (input === '') {
     throw new Error('[ERROR] 입력값이 없습니다.');
   }

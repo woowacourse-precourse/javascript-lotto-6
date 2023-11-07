@@ -39,7 +39,7 @@ class Game {
 
   draw({ winningNumbers, bonusNumber }) {
     this.tickets.forEach((ticket) => {
-      const result = ticket.getWinningInfo(winningNumbers, bonusNumber); // {count, bonus}
+      const result = ticket.getWinningInfo(winningNumbers, bonusNumber);
 
       if (result.matchCount >= 3) {
         this.recordResult(result);
