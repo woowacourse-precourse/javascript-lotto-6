@@ -51,4 +51,15 @@ describe("app test", () => {
             );
         }
     );
+
+    test.each([`1,2`, `1 2`, `48`, `0`])(
+        "로또 보너스 번호 예외 처리 테스트",
+        async (value) => {
+            const app = new App();
+
+            await expect(() => app.isValidBonusNumber(value)).toThrow(
+                "[ERROR] 숫자가 잘못된 형식입니다."
+            );
+        }
+    );
 });
