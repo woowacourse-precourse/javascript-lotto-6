@@ -1,4 +1,4 @@
-import { ERROR } from '../common/constants.js';
+import { LOTTO, ERROR } from '../common/constants.js';
 import { throwError } from '../common/utils.js';
 import { isNumeric, isDivisibleByUnit } from '../common/validator.js';
 
@@ -19,7 +19,7 @@ class MoneyValidator {
   };
 
   #validateMoneyUnit() {
-    if (!isDivisibleByUnit(this.input)) {
+    if (!isDivisibleByUnit(this.input, LOTTO.money_unit)) {
       throwError(ERROR.money);
     }
   };

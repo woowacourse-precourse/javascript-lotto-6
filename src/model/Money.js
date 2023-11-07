@@ -1,9 +1,10 @@
 import MoneyValidator from '../service/MoneyValidator.js';
 
 class Money {
-  #amount; // 이 돈 얼마인지
+  #amount;
 
   constructor(amount) {
+    this.#validate(amount);
     this.#amount = amount;
   }
 
@@ -12,7 +13,6 @@ class Money {
   }
 
   #validate(amount) {
-    // validator 호출하여 검증하는 로직
     const moneyValidator = new MoneyValidator(amount);
     moneyValidator.validate();
   }
