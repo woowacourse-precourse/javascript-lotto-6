@@ -3,6 +3,28 @@ import App from '../src/App.js';
 describe('기능 테스트', () => {
     const app = new App();
 
+    test('로또를 구매할 수 있다.', () => {
+        expect(app.buyLotto(5000)).toHaveLength(5);
+    });
+
+    test('로또를 구매할 때 1000원 미만의 금액을 입력하면 예외가 발생한다.', () => {
+        expect(() => {
+            app.buyLotto(500);
+        }).toThrow('[ERROR]');
+    });
+
+    test('로또를 구매할 때 1000원 단위가 아닌 금액을 입력하면 예외가 발생한다.', () => {
+        expect(() => {
+            app.buyLotto(1500);
+        }).toThrow('[ERROR]');
+    });
+
+    test('로또를 구매할 때 숫자가 아닌 다른 문자가 있으면 예외가 발생한다.', () => {
+        expect(() => {
+            app.buyLotto('1000원');
+        }).toThrow('[ERROR]');
+    });
+
     test('당첨 번호에 중복이 있으면 예외가 발생한다.', () => {
         expect(app.getWinNumbers('1,2,3,4,5,5')).rejects.toThrow('[ERROR]');
     });
