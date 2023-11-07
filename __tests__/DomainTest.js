@@ -41,14 +41,13 @@ describe('핵심 로직 테스트', () => {
     const arr = [];
 
     // when
-    const controller = new LottoController();
-    controller.generateAndStoreLotto(arr);
+   LottoController.generateAndStoreLotto(arr);
 
     // then
     expect(arr).toEqual([{}]);
 
     // when
-    controller.generateAndStoreLotto(arr);
+    LottoController.generateAndStoreLotto(arr);
 
     // then
     expect(arr).toEqual([{}, {}]);
@@ -92,7 +91,7 @@ describe('핵심 로직 테스트', () => {
     // when
     const controller = new LottoController();
     for (let i = 0; i < price / 1000; i++) {
-      controller.generateAndStoreLotto(arr);
+      LottoController.generateAndStoreLotto(arr);
     }
     controller.checkWin(price, win, bonus, arr);
 

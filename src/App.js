@@ -13,15 +13,18 @@ class App {
   }
 
   async play() {
+    await this.startLottery();
+    this.computeAndPrintWins();
+  }
+
+  async startLottery() {
     await this.input.getPrice();
     this.output.printLotto(this.input.price, this.lottoArr);
     await this.input.getWinNum();
     await this.input.getBonusNum();
-
-    this.getWinStatistics();
   }
 
-  getWinStatistics() {
+  computeAndPrintWins() {
     this.controller.checkWin(
       this.input.price,
       this.input.winNum,

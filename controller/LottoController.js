@@ -1,21 +1,19 @@
 import Lotto from '../model/Lotto.js';
-import InputView from '../view/InputView.js';
 import Label from '../constants/Label.js';
 
 class LottoController {
   constructor() {
-    this.input = new InputView();
     this.sameNumCountArr = [];
     this.totalPrice = 0;
   }
 
-  generateAndStoreLotto(arr) {
+  static generateAndStoreLotto(arr) {
     const lottoNumbers = Lotto.generateRandomLotto();
     arr.push(lottoNumbers);
   }
 
   checkWin(price, win, bonus, arr) {
-    for (let i = 0; i < price / 1000; i++) {
+    for (let i = 0; i < price / 1000; i += 1) {
       const lotto = arr[i].getNumbers();
       const sameNumArr = lotto.filter((num) => win.includes(num));
       if (sameNumArr.length === 5) {
@@ -35,13 +33,14 @@ class LottoController {
   }
 
   getWinCountArr(arr) {
-    for (let i = 3; i <= 7; i++) {
+    for (let i = 3; i <= 7; i += 1) {
       const count = this.sameNumCountArr.reduce(
         (cnt, element) => cnt + (element === i),
         0,
       );
       arr.push(count);
     }
+    // eslint-disable-next-line no-param-reassign
     [arr[3], arr[4]] = [arr[4], arr[3]];
   }
 

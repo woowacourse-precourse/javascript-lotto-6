@@ -6,7 +6,6 @@ import Label from '../constants/Label.js';
 
 class OutputView {
   constructor() {
-    this.controller = new LottoController();
     this.input = new InputView();
   }
 
@@ -14,7 +13,7 @@ class OutputView {
     let lottoCount = price / 1000;
     Console.print(PromptMessage.PRINT_PURCHASED_NUM(lottoCount));
     while (lottoCount > 0) {
-      this.controller.generateAndStoreLotto(arr);
+      LottoController.generateAndStoreLotto(arr);
       const lottoNumbers = arr[arr.length - 1];
       Console.print(`[${lottoNumbers.getNumbers().join(', ')}]`);
       lottoCount -= 1;
