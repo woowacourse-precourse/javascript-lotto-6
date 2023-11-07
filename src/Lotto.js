@@ -1,5 +1,6 @@
 import { RANK } from "./lib/constants/rank";
 import WORD from "./lib/constants/word";
+import InputError from "./lib/utils/error";
 
 class Lotto {
   #numbers;
@@ -10,9 +11,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    this.Error = new InputError();
+    this.Error.validateLottoInput(numbers);
   }
 
   getLottoNumber() {
