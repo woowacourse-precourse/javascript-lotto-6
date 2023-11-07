@@ -1,17 +1,8 @@
-import MESSAGE from '../Constant/message.js';
-import Read from '../View/Input.js';
-
 class User {
   #amount;
 
   constructor(amount) {
     this.#amount = amount;
-  }
-
-  async selectLottery() {
-    const userLottery = this.#convertToNumber(await this.getLotteryInput());
-
-    return userLottery;
   }
 
   #convertToNumber(array) {
@@ -20,20 +11,15 @@ class User {
     return result;
   }
 
-  async getLotteryInput() {
-    const lotteryInput = await Read.input(MESSAGE.QUESTION_PRIZE_NUMBER);
+  async getLotteryInput(lotteryInput) {
+    const inputArr = this.#divdeEach(lotteryInput);
+    const result = this.#convertToNumber(inputArr);
 
-    return this.#divdeEach(lotteryInput);
+    return result;
   }
 
   #divdeEach(input) {
     return input.split(',');
-  }
-
-  async selectBonus() {
-    const bonusNumber = await Read.input(MESSAGE.QUESTION_BONUS_NUMBER);
-
-    return bonusNumber;
   }
 
   getNumberofPurchase() {

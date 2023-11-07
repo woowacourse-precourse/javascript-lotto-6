@@ -2,6 +2,9 @@ import { Console } from '@woowacourse/mission-utils';
 import CheckNumber from './Domain/NumberCheck.js';
 import User from './Domain/User.js';
 import Print from './View/Output.js';
+import Read from './View/Input.js';
+import MESSAGE from './Constant/message.js';
+import Create from './Controller/Create.js';
 
 class Lotto {
   #numbers;
@@ -21,20 +24,20 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-  async compareWith(randomNum) {
-    const bonus = await new User().selectBonus();
 
+  async compareWith(randomNum) {
+    const bonus = await new Create().userBonusNumber();
     const userNum = { user: this.#numbers, bonus };
 
-    this.checkNumberMatching({ randomNum, userNum });
-  }
-
-  checkNumberMatching(numbers) {
-    const { randomNum, userNum } = numbers;
     const check = new CheckNumber({ randomNum, userNum });
 
-    const matchResult = check.sameResult(check.sameCount());
-    Print.repeatResult(matchResult);
+    this.checkNumberMatching(check);
+  }
+
+  checkNumberMatching(check) {
+    const matchResult = check.getSameResult(check.sameCount());
+
+    Print.repeatResult(matchResult); // 숫자 비교결과 출력
 
     // 수익률 계산
     const margin = check.getMargin(check.totalAmount(matchResult));

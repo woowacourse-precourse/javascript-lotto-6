@@ -25,7 +25,7 @@ class CheckNumber {
     return matchedNumber;
   }
 
-  sameResult(matchResult) {
+  getSameResult(matchResult) {
     const matched = { ...MATCHED.NUMBER_RESULT };
 
     matchResult.forEach((sameCount) => {
@@ -47,8 +47,6 @@ class CheckNumber {
   }
 
   totalAmount(matchData) {
-    const numberRegex = /\(([^)]+)\)/;
-
     let total = 0;
 
     matchData.forEach((result) => {

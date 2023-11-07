@@ -7,7 +7,7 @@ class App {
   }
 
   async play() {
-    await this.PlayLottery.getLotteryResult();
+    await this.PlayLottery.draw();
   }
 }
 

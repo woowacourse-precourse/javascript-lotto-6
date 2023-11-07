@@ -9,7 +9,7 @@ class PlayLottery {
     this.create = new Create();
   }
 
-  async getLotteryResult() {
+  async draw() {
     try {
       await this.compareUserWith(await this.create.RandomLottery());
     } catch (error) {
@@ -18,8 +18,8 @@ class PlayLottery {
   }
 
   async compareUserWith(randoms) {
-    const lottoInstance = new Lotto(await this.user.selectLottery());
-    await lottoInstance.compareWith(randoms);
+    const lotto = new Lotto(await this.create.userLotteryNumber());
+    await lotto.compareWith(randoms);
   }
 }
 

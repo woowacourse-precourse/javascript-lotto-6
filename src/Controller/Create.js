@@ -14,7 +14,10 @@ class Create {
 
   async RandomLottery() {
     try {
-      await this.#getRandomNumber(await this.userPurchaseTimes());
+      const purchaseTimes = await this.userPurchaseTimes();
+      await this.#getRandomNumber(purchaseTimes);
+
+      Print.output(`${purchaseTimes}${MESSAGE.RESULT_PAID}`);
       Print.repeatLottery(this.#randomNum);
     } catch (error) {
       throw new Error(error.message);
@@ -23,22 +26,33 @@ class Create {
     return this.#randomNum;
   }
 
-  #getRandomNumber(times) {
-    this.#randomNum = this.computer.getLotteryNumbers(times);
+  async userLotteryNumber() {
+    const lotteryInput = await Read.input(MESSAGE.QUESTION_PRIZE_NUMBER);
+
+    return new User().getLotteryInput(lotteryInput);
+  }
+
+  async userBonusNumber() {
+    const bonusNumber = await Read.input(MESSAGE.QUESTION_BONUS_NUMBER);
+
+    return bonusNumber;
   }
 
   async userPurchaseTimes() {
     const userInput = await Read.input(MESSAGE.QUESTION_PURCHASE);
+    this.validateNumberInput(userInput);
 
-    if (Number.isNaN(Number(userInput))) {
-      throw new Error('[ERROR]');
+    return new User(userInput).getNumberofPurchase();
+  }
+
+  #getRandomNumber(times) {
+    this.#randomNum = this.computer.getLotteryNumbers(times);
+  }
+
+  validateNumberInput(input) {
+    if (Number.isNaN(Number(input))) {
+      throw new Error('[ERROR] 잘못된 입력 형식입니다.');
     }
-
-    const purchaseTimes = new User(userInput).getNumberofPurchase();
-
-    Print.output(`${purchaseTimes}${MESSAGE.RESULT_PAID}`);
-
-    return purchaseTimes;
   }
 }
 
