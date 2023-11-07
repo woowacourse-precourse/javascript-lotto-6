@@ -1,24 +1,26 @@
 import { MissionUtils, Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import Purchase from "./purchase.js";
+import WinningNumbers from "./WinningNumbers.js";
 class App {
     async play() {
-        const purchaseAmount = await this.inputPurchaseAmount();
-        Console.print(purchaseAmount / 1000 + "개를 구매했습니다.");
+        const purchase = new Purchase(await this.inputPurchaseAmount());
+        Console.print(purchase.getAmount() / 1000 + "개를 구매했습니다.");
 
-        const lottoTickets = this.generateLottoTickets(purchaseAmount);
+        const lottoTickets = this.generateLottoTickets(purchase);
 
         this.printLottoTickets(lottoTickets);
 
-        const winningNumbers = await this.inputWinningNumbers();
-        const bonusNumber = await this.inputBonusNumber();
-        this.checkDuplicate(winningNumbers, bonusNumber);
+        const winningNumbers = new WinningNumbers(
+            await this.inputWinningNumbers(),
+            await this.inputBonusNumber()
+        );
 
         const matchingCounts = this.calculateMatchingCounts(
             lottoTickets,
-            winningNumbers,
-            bonusNumber
+            winningNumbers
         );
-        this.calculateTotalProfit(matchingCounts, purchaseAmount);
+        this.calculateTotalProfit(matchingCounts, purchase.getAmount());
     }
 
     async inputPurchaseAmount() {
@@ -27,7 +29,7 @@ class App {
                 const purchaseAmount = await Console.readLineAsync(
                     "구입금액을 입력해 주세요.\n"
                 );
-                if (!this.isValidAmount(purchaseAmount)) {
+                if (!new Purchase(purchaseAmount)) {
                     throw new Error("[ERROR] 유효한 구입금액을 입력해주세요.");
                 }
                 return purchaseAmount;
@@ -37,17 +39,8 @@ class App {
         }
     }
 
-    isValidAmount(amount) {
-        return (
-            !isNaN(amount) &&
-            amount >= 1000 &&
-            amount <= 1000000 &&
-            amount % 1000 === 0
-        );
-    }
-
-    generateLottoTickets(purchaseAmount) {
-        const ticketCount = purchaseAmount / 1000;
+    generateLottoTickets(purchase) {
+        const ticketCount = purchase.getAmount() / 1000;
         const lottoTickets = [];
 
         for (let i = 0; i < ticketCount; i++) {
@@ -79,9 +72,7 @@ class App {
             try {
                 const winningNumbers = await Console.readLineAsync(
                     "당첨 번호를 입력해 주세요.\n"
-                ).then((winningNumbers) =>
-                    winningNumbers.split(",").map(Number)
-                );
+                ).then((numbers) => numbers.split(",").map(Number));
                 if (!new Lotto(winningNumbers)) {
                     throw new Error("[ERROR] 유효한 당첨 번호를 입력해주세요.");
                 }
@@ -114,12 +105,6 @@ class App {
         return !isNaN(bonusNumber) && bonusNumber >= 1 && bonusNumber <= 45;
     }
 
-    checkDuplicate(winningNumbers, bonusNumber) {
-        if (winningNumbers.includes(bonusNumber)) {
-            throw new Error("[ERROR] 당첨 번호와 보너스 번호가 중복됩니다.");
-        }
-    }
-
     initializeMatchingCounts() {
         return {
             "3개 일치": 0,
@@ -130,13 +115,16 @@ class App {
         };
     }
 
-    calculateMatchingCounts(lottoTickets, winningNumbers, bonusNumber) {
+    calculateMatchingCounts(lottoTickets, winningNumbers) {
         const matchingCounts = this.initializeMatchingCounts();
+
+        const winningNumbersArray = winningNumbers.getNumbers();
+        const bonusNumber = winningNumbers.getBonusNumber();
 
         for (const lottoTicket of lottoTickets) {
             const matchingNumbers = lottoTicket
                 .getNumbers()
-                .filter((number) => winningNumbers.includes(number));
+                .filter((number) => winningNumbersArray.includes(number));
 
             this.updateMatchingCounts(
                 matchingCounts,
@@ -151,10 +139,7 @@ class App {
     updateMatchingCounts(matchingCounts, matchingCount, bonusNumber) {
         if (matchingCount === 6) {
             matchingCounts["6개 일치"]++;
-        } else if (
-            matchingCount === 5 &&
-            matchingNumbers.includes(bonusNumber)
-        ) {
+        } else if (matchingCount === 5 && bonusNumber !== null) {
             matchingCounts["5개 일치, 보너스 볼 일치"]++;
         } else if (matchingCount === 5) {
             matchingCounts["5개 일치"]++;
