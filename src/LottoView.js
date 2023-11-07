@@ -24,13 +24,13 @@ class LottoView {
   }
 
   showResults(countWinners) {
-    console.log("\n당첨 통계\n---");
+    Console.print("\n당첨 통계\n---");
     const winnerOrder = [3, 4, 5, "5+1", 6];
 
     winnerOrder.forEach((key) => {
       const { count, prize, text } = PRINT_WINNERS[key];
       const winnerCount = countWinners[key];
-      console.log(`${text} (${prize.toLocaleString()}원) - ${winnerCount}개`);
+      Console.print(`${text} (${prize.toLocaleString()}원) - ${winnerCount}개`);
     });
   }
 }
