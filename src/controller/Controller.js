@@ -1,5 +1,6 @@
 import View from '../view/View.js';
 import Validator from '../validator/Validator.js';
+import LottoGame from '../model/LottoGame.js';
 import { INPUT_MESSAGE } from '../constant/InputMessage.js';
 import { repeat } from '../util/repeat.js'
 
@@ -13,7 +14,12 @@ export default class Controller {
   }
 
   async run() {
-    const money = this.getMoney();
+    const lottoGame = new LottoGame();
+
+    const money = await this.getMoney();
+
+    const lottos = await lottoGame.buyLottos(money);
+    
   }
 
   async getMoney() {
