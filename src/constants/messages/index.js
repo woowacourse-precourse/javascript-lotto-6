@@ -1,3 +1,4 @@
+import { formatKoreaWon } from "../../utils";
 import { LOTTO_RULE } from "../lotto";
 
 const LOTTO_ERROR_PREFIX = "로또 번호는";
@@ -40,12 +41,18 @@ export const MESSAGES = Object.freeze({
 
   WINNING_STATISTICS: {
     PREFIX: "당첨 통계\n---",
-    5: (count) => `3개 일치 (${LOTTO_RULE.WINNING_AMOUNT[5]}) - ${count}개`,
-    4: (count) => `4개 일치 (${LOTTO_RULE.WINNING_AMOUNT[4]}) - ${count}개`,
-    3: (count) => `5개 일치 (${LOTTO_RULE.WINNING_AMOUNT[3]}) - ${count}개`,
+    5: (count) =>
+      `3개 일치 (${formatKoreaWon(LOTTO_RULE.WINNING_AMOUNT[5])}) - ${count}개`,
+    4: (count) =>
+      `4개 일치 (${formatKoreaWon(LOTTO_RULE.WINNING_AMOUNT[4])}) - ${count}개`,
+    3: (count) =>
+      `5개 일치 (${formatKoreaWon(LOTTO_RULE.WINNING_AMOUNT[3])}) - ${count}개`,
     2: (count) =>
-      `5개 일치, 보너스 볼 일치 (${LOTTO_RULE.WINNING_AMOUNT[2]}) - ${count}개`,
-    1: (count) => `6개 일치 (${LOTTO_RULE.WINNING_AMOUNT[1]}) - ${count}개`,
+      `5개 일치, 보너스 볼 일치 (${formatKoreaWon(
+        LOTTO_RULE.WINNING_AMOUNT[2]
+      )}) - ${count}개`,
+    1: (count) =>
+      `6개 일치 (${formatKoreaWon(LOTTO_RULE.WINNING_AMOUNT[1])}) - ${count}개`,
     SUFFIX: (rateOfReturn) => `총 수익률은 ${rateOfReturn}%입니다.`,
   },
 });
