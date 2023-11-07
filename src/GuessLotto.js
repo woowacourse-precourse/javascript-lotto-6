@@ -3,20 +3,20 @@ import Lotto from './Lotto.js';
 import LottoError from './error/LottoError.js';
 
 class GuessLotto {
-  #guessNumbers = [];
+  #winningNumbers = [];
 
   #guessBonus = null;
 
   #lottoPieces = 0;
 
-  #lottoNumbers = [];
+  #guessNumbers = [];
 
-  getGuessNumbers() {
-    return this.#guessNumbers;
+  getWinningNumbers() {
+    return this.#winningNumbers;
   }
 
-  setGuessNumbers(numbers) {
-    this.#guessNumbers = numbers;
+  setWinningNumbers(numbers) {
+    this.#winningNumbers = numbers;
   }
 
   getGuessBonus() {
@@ -35,12 +35,12 @@ class GuessLotto {
     this.#lottoPieces = pieces;
   }
 
-  getLottoNumbers() {
-    return this.#lottoNumbers;
+  getGuessNumbers() {
+    return this.#guessNumbers;
   }
 
-  setLottoNumbers(numbers) {
-    this.#lottoNumbers = numbers;
+  setGuessNumbers(numbers) {
+    this.#guessNumbers = numbers;
   }
 
   async inputLottoNumber() {
@@ -48,10 +48,10 @@ class GuessLotto {
       const personalLottoNumber =
         await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
 
-      this.#guessNumbers = personalLottoNumber.split(',');
-      const lotto = new Lotto(this.#guessNumbers);
+      this.#winningNumbers = personalLottoNumber.split(',');
+      const lotto = new Lotto(this.#winningNumbers);
 
-      return this.#guessNumbers;
+      return this.#winningNumbers;
     } catch (error) {
       Console.print(error.message);
       return this.inputLottoNumber();
@@ -76,7 +76,7 @@ class GuessLotto {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
 
-    if (this.#guessNumbers.includes(number) || !Number.isInteger(+number)) {
+    if (this.#winningNumbers.includes(number) || !Number.isInteger(+number)) {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
   }
@@ -108,11 +108,11 @@ class GuessLotto {
   }
 
   generateLottoNumber() {
-    const lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+    const guessNumber = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
       (a, b) => a - b,
     );
-    this.#lottoNumbers.push(lottoNumber);
-    return `[${lottoNumber.join(', ')}]`;
+    this.#guessNumbers.push(guessNumber);
+    return `[${guessNumber.join(', ')}]`;
   }
 }
 
