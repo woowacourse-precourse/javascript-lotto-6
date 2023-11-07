@@ -1,5 +1,3 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-
 // 1,000원으로 나누어 떨어지는지
 export function isValidAmount(amount){
   if(amount % 1000 === 0) { 
@@ -10,7 +8,6 @@ export function isValidAmount(amount){
 
 // 숫자 중복 체크
 export function isDuplicate(nums){
-  MissionUtils.Console.print(nums.length)
   if(new Set(nums).size === nums.length){
     return;
   }
