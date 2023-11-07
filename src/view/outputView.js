@@ -7,11 +7,6 @@ import {
 } from "../constants/constants.js";
 
 class OutputView {
-  profits;
-
-  constructor() {
-    this.profits = 0;
-  }
   
   static showLottoNumbers (lottoTickets) {
     Console.print(MESSAGE.LOTTO_TICKET(lottoTickets.length));
