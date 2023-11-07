@@ -42,11 +42,17 @@ class LottoGame {
   }
 
   async buyLotto() {
-    const inputPrice = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
+    while (true) {
+      try {
+        const inputPrice = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
 
-    const tempPrice = Number(inputPrice);
-    this.#validatePrice(tempPrice);
-    return tempPrice;
+        const tempPrice = Number(inputPrice);
+        this.#validatePrice(tempPrice);
+        return tempPrice;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 
   #validatePrice(price) {
@@ -93,19 +99,25 @@ class LottoGame {
   }
 
   printLottoTickets(lottoTickets, count) {
-    Console.print(`\n${count}개를 구매했습니다.`)
+    Console.print(`${count}개를 구매했습니다.`);
     lottoTickets.forEach(element => {
       Console.print(element);
     });
   }
 
   async inputWinningNumbers() {
-    const inputNumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    const winningNumbers = inputNumbers.split(',');;
-    const winningTicket = new Lotto(winningNumbers);
-    const sortedWinningTicket = winningTicket.getSortNumbers();
-    this.#validateWinningNumbers(sortedWinningTicket);
-    return sortedWinningTicket;
+    while (true) {
+      try {
+        const inputNumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+        const winningNumbers = inputNumbers.split(',');;
+        const winningTicket = new Lotto(winningNumbers);
+        const sortedWinningTicket = winningTicket.getSortNumbers();
+        this.#validateWinningNumbers(sortedWinningTicket);
+        return sortedWinningTicket;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 
   #validateWinningNumbers(numbers) {
@@ -130,9 +142,15 @@ class LottoGame {
   }
 
   async inputBonusNumbers(winningNumbers) {
-    const inputNumbers = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-    this.#validateBonusNumbers(inputNumbers, winningNumbers);
-    return inputNumbers;
+    while (true) {
+      try {
+        const inputNumbers = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+        this.#validateBonusNumbers(inputNumbers, winningNumbers);
+        return inputNumbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 
   #validateBonusNumbers(number, winningNumbers) {
@@ -199,13 +217,13 @@ class LottoGame {
   }
 
   calculateProfitRate(winningResult, purchaseAmount) {
-    const prizeMoney = [2000000000, 30000000, 1500000, 50000, 5000,  0];
+    const prizeMoney = [2000000000, 30000000, 1500000, 50000, 5000, 0];
 
     const totalWinnings = winningResult.reduce((sum, count, index) => sum + prizeMoney[index] * count, 0);
-  
+
     const profit = totalWinnings - purchaseAmount;
     const profitRate = ((profit / purchaseAmount) * 100).toFixed(1);
-    
+
     return profitRate;
   }
 
