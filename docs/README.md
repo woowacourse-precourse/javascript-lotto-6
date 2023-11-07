@@ -31,16 +31,16 @@
 
 - ![로또결과](https://github.com/leedbswo107/javascript-lotto-6/blob/leedbswo107/docs/pass2.png)
 ## :file_folder: 파일 구조 및 파일명
-:open_file_folder: src 
-    :open_file_folder: common
-        :memo: outputMessage.js
-        :memo: validate.js
-    :open_file_folder: controller
-        :memo: LottoController.js
-    :memo: App.js
-    :memo: index.js
-    :memo: Lotto.js
-    :memo: LottoPlay.js
+- src :open_file_folder: 
+    - common :open_file_folder:
+        - outputMessage.js :memo:
+        - validate.js :memo:
+    - controller :open_file_folder:
+        - LottoController.js :memo:
+    - App.js :memo:
+    - index.js :memo:
+    - Lotto.js :memo:
+    - LottoPlay.js :memo:
 
 ## :book: 커밋 컨벤션
 - 자주 사용하는 태그 종류
