@@ -27,17 +27,18 @@ class App {
   }
 
   async getWinningNum() {
-    const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const input = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     const winning_number = new Lotto(input.split(',').map(Number));
 
     return winning_number;
   }
 
   async getBonusNum() {
-    const num = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const num = await MissionUtils.Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     if(
       num === null
       || num.match(/\D/)
+      || (num < 1 || num > 45)
     ) {
       throw new Error('[ERROR] 잘못된 번호를 입력하셨습니다.');
     }
