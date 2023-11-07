@@ -23,6 +23,26 @@
 
 ```
 
+### eslint 설정
+```
+{
+	"parserOptions": {
+    "ecmaVersion": 2022
+  },
+	"extends": ["airbnb", "plugin:prettier/recommended"],
+	"rules": {
+		"class-methods-use-this": "off",
+		"prettier/prettier": "error",
+		"lines-between-class-members": "off",
+		"import/prefer-default-export": "off",
+		"import/extensions": "off",
+		"no-useless-constructor": "off"
+	}
+}
+```
+
+
+
 # 🗂기능 구현 목록
 
 ## Lotto.js
@@ -30,7 +50,6 @@
 ### 🔬variable
 
   - #numbers - 로또 번호를 저장하는 배열
-  - #bonusNumbers - 보너스 번호
 
 ### 🛠주요 메소드
 
@@ -38,25 +57,53 @@ __constructor(numbers)__
 
   - 배열 numbers를 인자로 받아서 this.#numbers 초기화
 
-__initBonusNumber(bonusNumber)__
+__#validate(number)__
 
-  - 배열 bonusNumbers를 인자로 받아서 this.#bonusNumber 초기화
+  - [x] 숫자가 아니면 에러 발생
+  - [x] 1~45 사이의 숫자가 아니면 에러 발생
+  - [x] 길이가 6이 아니면 에러 발생
+  - [x] 중복되는 숫자가 있으면 에러 발생
+
 ___
+
+## WinningLotto.js
+
+### 🔬variable
+
+  - #bonusNumber - 보너스 번호를 저장하는 변수
+
+### 🛠주요 메소드
+
+__constructor()__
+
+  - Lotto.js를 상속받아서 Lotto 객체를 초기화
+
+__getFullLottoNumber()__
+
+  - 보너스 번호를 포함한 로또 번호를 { numbers: [], bonusNumber: number } 형태로 반환
+
+  #bonusValidate(number)
+
+  - [x] 보너스 번호가 숫자가 아니면 에러 발생
+  - [x] 보너스 번호가 1~45 사이의 숫자가 아니면 에러 발생
+  - [x] 보너스 번호가 로또 번호와 중복되면 에러 발생
+
+---
 
 ## Statistics.js
 
 ### 🔬variable
 
-  - #rateOfReturns - 수익률
+  - #rateOfReturn - 수익률
   - #statistics - 통계 결과를 저장하는 객체
 
 ### 🛠주요 메소드
 
 __constructor()__
 
-  - 수익률 this.#rateOfReturns와 결과값 객체 this.#statistics를 초기화
+  - 수익률 this.#rateOfReturn와 결과값 객체 this.#statistics를 초기화
 
-__calculateStatistics(userLotto, lotto)__
+__calculateStatistics(matchingResult, purchaseAmount)__
 
   - 유저의 로또와 정답 로또를 인자로 받아서 통계 결과를 this.#statistics에 저장
 
@@ -78,6 +125,12 @@ __constructor(purchaseAmount)__
 __calculateMatchingNumber(winningLotto)__
 
   - 정답 로또를 객체를 인자로 받아서 결과에 따라 등수를 객체로 반환
+
+__validate(purchaseAmount)__
+
+  - [x] 구매 금액이 숫자가 아니면 에러 발생
+  - [x] 구매 금액이 음수거나 40억 초과하면 에러 발생
+  - [x] 구매 금액이 1000원 단위가 아니면 에러 발생
 
 ___
 
@@ -135,7 +188,6 @@ __setWinningLottoNumbers()__
 
   - 정답 로또 번호를 입력받아서 Lotto 객체를 생성
 
-
 __setBonusNumber()__
 
   - 보너스 번호를 입력받아서 Lotto 객체에 보너스 번호를 저장
@@ -143,7 +195,6 @@ __setBonusNumber()__
 __calculateStatistics()__
 
   - 유저의 로또와 정답 로또를 비교한 최종 통계 결과를 계산
-
 
 __printStatistics(result)__
 
