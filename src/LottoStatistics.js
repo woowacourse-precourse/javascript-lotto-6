@@ -1,6 +1,3 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
-
 export default class LottoStatistics {
     constructor(winningNumbers, bonusNumber, priceAvg) {
         this.winningNumbers = winningNumbers;
