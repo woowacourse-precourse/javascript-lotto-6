@@ -16,6 +16,7 @@ export const LOTTO_RESULT = {
   second: {
     prize: 30000000,
     includesCount: 5,
+    isSecond: true,
   },
   third: {
     prize: 1500000,

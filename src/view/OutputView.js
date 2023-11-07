@@ -10,7 +10,7 @@ class OutputView {
 
   static printLottoNumbers(lottos) {
     lottos.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(', ')}]`);
     });
   }
 
@@ -18,16 +18,16 @@ class OutputView {
     Console.print(PRINT_MESSAGE.prizesDescription);
     Console.print(PRINT_MESSAGE.divide);
 
-    const ranksKey = Object.keys(LOTTO_RESULT).reverse();
+    const ranksKey = Object.keys(count).reverse();
 
     ranksKey.forEach((key) => {
       const rank = LOTTO_RESULT[key];
       let isSecond = '';
 
-      if (rank.matchBonus) isSecond = ', 보너스 볼 일치';
+      if (rank.isSecond) isSecond = ', 보너스 볼 일치';
 
       Console.print(
-        `${rank.matchCount}개 일치${isSecond} (${utils.numberFormat(rank.prize)}원) - ${
+        `${rank.includesCount}개 일치${isSecond} (${utils.numberFormat(rank.prize)}원) - ${
           count[key]
         }개`,
       );
