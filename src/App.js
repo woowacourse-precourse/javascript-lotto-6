@@ -31,11 +31,13 @@ const PublishedLottoes = {
 
 const inputAmount = async() => {
   const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+  const WARNING = '[ERROR] 잘못된 형식입니다. 로또 1장에 1000원이며 거스름돈은 지불되지 않으니, 1000의 배수인 정수를 입력하시오.\n'
   try {
-    if (isNaN(input)) throw new Error('[ERROR]');
-    if ((input % 1000) !== 0) throw new Error('[ERROR]');
+    if (isNaN(input)) throw new Error(WARNING);
+    if ((input % 1000) !== 0) throw new Error(WARNING);
+    if (input == 0 || '') throw new Error(WARNING)
   } catch {
-    Console.print('[ERROR]');
+    Console.print(WARNING);
     return inputAmount();
   }
   return input;
