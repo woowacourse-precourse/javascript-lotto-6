@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT_MESSAGE } from '../constants/messages.js';
+import { PRIZE_KEY } from '../constants/constants.js';
+import { OUTPUT_MESSAGE, STATISTIC_LABEL } from '../constants/messages.js';
 
 class OutputView {
   printErrorMessage(error) {
@@ -18,17 +19,11 @@ class OutputView {
   printWinsStatistics(winsStatistics) {
     Console.print(OUTPUT_MESSAGE.winsStatistic);
 
-    const prizeLevels = [
-      { label: '3개 일치 (5,000원)', prizeKey: 'fifthPrize' },
-      { label: '4개 일치 (50,000원)', prizeKey: 'fourthPrize' },
-      { label: '5개 일치 (1,500,000원)', prizeKey: 'thirdPrize' },
-      { label: '5개 일치, 보너스 볼 일치 (30,000,000원)', prizeKey: 'secondPrize' },
-      { label: '6개 일치 (2,000,000,000원)', prizeKey: 'firstPrize' },
-    ];
+    for (const prizeKey in winsStatistics) {
+      const label = STATISTIC_LABEL[prizeKey];
 
-    prizeLevels.forEach((level) => {
-      Console.print(`${level.label} - ${winsStatistics[level.prizeKey]}개`);
-    });
+      Console.print(`${label} - ${winsStatistics[prizeKey]}개`);
+    }
   }
 
   printProfitRatio(profitRatio) {

@@ -1,4 +1,4 @@
-import { LOTTO_CONDITION, PRICE_PER_TICKET } from './constants.js';
+import { LOTTO_CONDITION, PRICE_PER_TICKET, PRIZE_KEY } from './constants.js';
 
 const INPUT_MESSAGE = Object.freeze({
   purchaseAmount: '구입금액을 입력해 주세요.\n',
@@ -10,6 +10,14 @@ const OUTPUT_MESSAGE = Object.freeze({
   purchaseAmount: (amount) => `\n${amount}개를 구매했습니다.`,
   winsStatistic: `\n당첨통계\n---`,
   totalProfitRatio: (profitRatio) => `총 수익률은 ${profitRatio}%입니다.`,
+});
+
+const STATISTIC_LABEL = Object.freeze({
+  [PRIZE_KEY.fifthPrize]: '3개 일치 (5,000원)',
+  [PRIZE_KEY.fourthPrize]: '4개 일치 (50,000원)',
+  [PRIZE_KEY.thirdPrize]: '5개 일치 (1,500,000원)',
+  [PRIZE_KEY.secondPrize]: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+  [PRIZE_KEY.firstPrize]: '6개 일치 (2,000,000,000원)',
 });
 
 const PREFIX_ERROR = '[ERROR]';
@@ -24,4 +32,4 @@ const ERROR_MESSAGE = Object.freeze({
   invalidUniqueBonusNumber: `${PREFIX_ERROR} 보너스 번호는 로또 번호와 중복되지 않아야 합니다.`,
 });
 
-export { INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
+export { INPUT_MESSAGE, OUTPUT_MESSAGE, STATISTIC_LABEL, ERROR_MESSAGE };
