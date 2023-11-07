@@ -43,8 +43,8 @@ class LottoController {
   async #inputWinNumber() {
     this.LOTTO_DATA.getWinNumber(await this.INPUT_VIEW.winLotteryNumber());
     try {
-      // await Lotto.createLottoInstance(this.LOTTO_DATA.winNumber);
-      await new Lotto(this.LOTTO_DATA.winNumber);
+      await Lotto.createLottoInstance(this.LOTTO_DATA.winNumber);
+      // await new Lotto(this.LOTTO_DATA.winNumber);
       return this.#inputBonusNumber();
     } catch (error) {
       this.OUTPUT_VIEW.printError(error.message);
