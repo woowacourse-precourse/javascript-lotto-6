@@ -1,3 +1,10 @@
+const ERROR = {
+  LIMIT_LOTTO_NUMBERS: "[ERROR] 로또 번호는 6개여야 합니다.",
+  STRING_IN_LOTTO_NUMBERS: "[ERROR] 로또 번호에 문자가 있습니다.",
+  AREA_OVER_LOTTO_NUMBERS: "[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.",
+  SAME_NUMBER_IN_LOTTO_NUMBERS: "[ERROR] 로또 번호에 중복된 숫자가 있습니다.",
+}
+
 class Lotto {
   #numbers;
 
@@ -8,13 +15,13 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR.LIMIT_LOTTO_NUMBERS);
     } else if (this.findStringInNumbers(numbers)) {
-      throw new Error("[ERROR] 로또 번호에 문자가 있습니다.")
+      throw new Error(ERROR.STRING_IN_LOTTO_NUMBERS);
     } else if (this.findOverNumbers(numbers)) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.")
+      throw new Error(ERROR.AREA_OVER_LOTTO_NUMBERS);
     } else if (this.findDuplicationInNumbers(numbers)) {
-      throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
+      throw new Error(ERROR.SAME_NUMBER_IN_LOTTO_NUMBERS);
     }
   }
 
