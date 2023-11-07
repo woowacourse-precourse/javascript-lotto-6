@@ -52,7 +52,7 @@ class App {
     try {
       await validatePurchaseAmountInput(this.purchaseAmountInput);
     } catch (e) {
-      await this.outputManager.printPurchaseAmountInputErrorMessage(e.message);
+      await this.outputManager.printInputErrorMessage(e.message);
       await this.getPurchaseAmount();
     }
     return Number(this.purchaseAmountInput);
@@ -64,7 +64,7 @@ class App {
     try {
       await validateWinnerNumbersInput(this.winningNumbersInput);
     } catch (e) {
-      await this.outputManager.printWinningNumbersInputErrorMessage(e.message);
+      await this.outputManager.printInputErrorMessage(e.message);
       await this.getWinningNumbers();
     }
     return this.winningNumbersInput.split(',').map((el) => Number(el));
@@ -78,7 +78,7 @@ class App {
         winningNumbers: this.winningNumbers,
       });
     } catch (e) {
-      await this.outputManager.printBonusNumberInputErrorMessage(e.message);
+      await this.outputManager.printInputErrorMessage(e.message);
       await this.getBonusNumber();
     }
     return Number(this.bonusNumberInput);

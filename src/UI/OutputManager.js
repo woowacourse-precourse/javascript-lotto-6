@@ -2,15 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { NUMBER_OF_PURCHASED_LOTTO_MESSAGE } from '../Constants.js';
 
 class OutputManager {
-  async printPurchaseAmountInputErrorMessage(errorMessage) {
-    await Console.print(errorMessage);
-  }
-
-  async printWinningNumbersInputErrorMessage(errorMessage) {
-    await Console.print(errorMessage);
-  }
-
-  async printBonusNumberInputErrorMessage(errorMessage) {
+  async printInputErrorMessage(errorMessage) {
     await Console.print(errorMessage);
   }
 
