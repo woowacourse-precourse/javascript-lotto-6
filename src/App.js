@@ -92,7 +92,7 @@ class App {
   setRankAndPrize(matched, matchedBonus) {
     if (matched < 3) return;
 
-    const rank = this.calculateRankByMatched(matched, matchedBonus);
+    const rank = App.calculateRankByMatched(matched, matchedBonus);
     this.#rankedLotto.set(rank, this.#rankedLotto.get(rank) + 1);
     this.#totalPrize += LOTTO_PRIZE.get(rank);
   }
@@ -105,9 +105,9 @@ class App {
     });
   }
 
-  printRankedLotto(rank, prize, count) {
+  static printRankedLotto(rank, prize, count) {
     const formattedPrize = new Intl.NumberFormat().format(prize);
-    const matched = this.calculateMatchedByRank(rank);
+    const matched = App.calculateMatchedByRank(rank);
 
     if (rank === 2) {
       Console.print(
@@ -125,7 +125,7 @@ class App {
 
   printResult() {
     this.#rankedLotto.forEach((count, rank) => {
-      this.printRankedLotto(rank, LOTTO_PRIZE.get(rank), count);
+      App.printRankedLotto(rank, LOTTO_PRIZE.get(rank), count);
     });
     this.printMarginRate();
   }
