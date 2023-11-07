@@ -1,4 +1,4 @@
-import { LOTTO_ERROR_MSG } from "./Utils/Constants";
+import { LOTTO_ERROR_MSG, MESSAGE } from "./Utils/Constants";
 
 class Lotto {
   #numbers;
@@ -24,6 +24,29 @@ class Lotto {
 
   getNumbers() {
     return [...this.#numbers];
+  }
+
+  calculateLottoRanking(winningNum, bonusNum) {
+    const NumberOfMatch = this.calculateNumberOfMatch(winningNum);
+    if (NumberOfMatch === 6) {
+      return MESSAGE.SIX_MATCH;
+    } else if (NumberOfMatch === 5) {
+      if (winningNum.includes(bonusNum)) {
+        return MESSAGE.BONUS_MATCH;
+      }
+      return MESSAGE.FIVE_MATCH;
+    } else if (NumberOfMatch === 4) {
+      return MESSAGE.FOUR_MATCH;
+    } else if (NumberOfMatch === 3) {
+      return MESSAGE.THREE_MATCH;
+    } else return null;
+  }
+
+  calculateNumberOfMatch(winningNum) {
+    const winningNums = this.getNumbers();
+    return winningNum.filter((number) => {
+      winningNums.includes(number);
+    });
   }
 }
 
