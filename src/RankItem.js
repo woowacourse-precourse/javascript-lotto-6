@@ -1,22 +1,20 @@
 class RankItem {
   #ranking;
   #standard;
-  #price;
+  #prize;
   #winningAmount;
 
-  constructor(ranking, standard, price) {
+  constructor(ranking, standard, prize) {
     this.#ranking = ranking;
     this.#standard = standard;
-    this.#price = price;
+    this.#prize = prize;
     this.#winningAmount = 0;
   }
 
   #meetStandard(count, hasBonus) {
     const { numbers, bonus } = this.#standard;
 
-    if (numbers === count && bonus === hasBonus) {
-      return true;
-    }
+    return numbers === count && bonus === hasBonus;
   }
 
   win(count, hasBonus) {
