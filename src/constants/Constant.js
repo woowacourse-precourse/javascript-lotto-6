@@ -37,7 +37,7 @@ export const ERROR = Object.freeze({
   errorPrefix: '[ERROR]',
   isNotNumber: '입력값이 숫자가 아닙니다. 숫자만 입력할 수 있습니다.',
   isNotInAmountUnit: `입력된 금액이 ${CONSTANT.amountUnit}원 단위가 아닙니다.`,
-  isNegative: '입력값이 양수가 아닙니다. 입력값은 양수여야 합니다.',
+  isNotPositive: '입력값이 양수가 아닙니다. 입력값은 양수여야 합니다.',
   hasNonNumericElements: '로또 번호 중 숫자가 아닌 요소가 있습니다. 로또 번호는 숫자만 가능합니다.',
   hasDuplicate: '로또 번호 중 중복된 숫자가 있습니다. 로또 번호는 모두 다른 수여야 합니다.',
   isInvalidCount: `${LOTTO_NUMBER.count}개가 입력되지 않았습니다. ${LOTTO_NUMBER.count}개의 숫자를 입력해주세요.`,

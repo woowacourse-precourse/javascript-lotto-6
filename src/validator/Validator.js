@@ -16,7 +16,7 @@ const Validator = {
 
   checkIsNotPositive(userInput) {
     if (Number(userInput) <= 0) {
-      throw new ValidationError(ERROR.isNegative);
+      throw new ValidationError(ERROR.isNotPositive);
     }
   },
 
