@@ -28,24 +28,21 @@ const InputView = {
   },
 
   createOutput(rank, statistics) {
-    if (rank === "second") {
-      return (
-        WINNING_RANK[rank].matchingNumberCount +
-        "개 일치, 보너스 볼 일치 (" +
-        WINNING_RANK[rank].reward.toLocaleString().replace(/_/g, ",") +
-        "원) - " +
-        statistics[rank] +
-        "개"
-      );
-    }
     return (
-      WINNING_RANK[rank].matchingNumberCount +
-      "개 일치 (" +
+      this.createFirstPartOfOutput(rank) +
+      " (" +
       WINNING_RANK[rank].reward.toLocaleString().replace(/_/g, ",") +
       "원) - " +
       statistics[rank] +
       "개"
     );
+  },
+
+  createFirstPartOfOutput(rank) {
+    if (rank === "second") {
+      return WINNING_RANK[rank].matchingNumberCount + "개 일치, 보너스 볼 일치";
+    }
+    return WINNING_RANK[rank].matchingNumberCount + "개 일치";
   },
 
   printRateOfReturn(rateOfReturn) {
