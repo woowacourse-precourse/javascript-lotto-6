@@ -3,7 +3,6 @@ import Lotto from './Lotto.js';
 import {
   MIN,
   MAX,
-  UNIT,
   LOTTO_LENGTH,
   MATCH,
   MATCH_MESSAGE,
@@ -15,9 +14,6 @@ export const getRandomNumbers = () => {
     (a, b) => a - b,
   );
   return numbers;
-};
-export const getLottoCount = amount => {
-  return amount / UNIT;
 };
 export const issueLotto = () => {
   const numbers = getRandomNumbers();
