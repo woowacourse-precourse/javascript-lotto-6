@@ -99,6 +99,7 @@ class LottoController {
 
   async getIncomeResult() {
     this.#incomeResult = this.#incomeResult / await this.#userLottoCost.getPurchaseCost() * 100 - 100;
+    this.#incomeResult = Math.round(this.#incomeResult * 10**NUMBER.INCOME_DECIMAL_POINT_AREA) / 10**NUMBER.INCOME_DECIMAL_POINT_AREA;
     if (this.#incomeResult < 0) this.#incomeResult += 100;
   }
 }

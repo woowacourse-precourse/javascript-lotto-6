@@ -15,6 +15,7 @@ const NUMBER = {
   MATCH_BONUS_NUMBER_PRICE: {
     5: 30000000,
   },
+  INCOME_DECIMAL_POINT_AREA: 2,
 }
 
 export { NUMBER };
