@@ -1,6 +1,6 @@
 import App from '../src/App';
 
-describe('App -calculateRankByMatched() 테스트', () => {
+describe('App - calculateRankByMatched() 테스트', () => {
   test.each([
     [6, false, 1],
     [5, true, 2],
@@ -16,4 +16,19 @@ describe('App -calculateRankByMatched() 테스트', () => {
       expect(result).toEqual(expected);
     },
   );
+});
+
+describe('App - calculateMatchedByRank() 테스트', () => {
+  test.each([
+    [1, 6],
+    [2, 5],
+    [3, 5],
+    [4, 4],
+    [5, 3],
+  ])('등수별 일치하는 숫자 개수를 반환한다', (rank, expected) => {
+    const app = new App();
+    const result = app.calculateMatchedByRank(rank);
+
+    expect(result).toEqual(expected);
+  });
 });
