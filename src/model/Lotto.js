@@ -1,11 +1,15 @@
 import {
   FIFTH_PRIZE,
+  FIFTH_PRIZE_CORRECT,
   FIRST_PRIZE,
+  FIRST_PRIZE_CORRECT,
   FOURTH_PRIZE,
+  FOURTH_PRIZE_CORRECT,
   LOTTO_LENGTH,
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
   SECOND_PRIZE,
+  SECOND_THIRD_PRIZE_CORRECT,
   THIRD_PRIZE,
 } from "../constant/Constant";
 import errorMessage from "../constant/ErrorMessage";
@@ -51,17 +55,12 @@ class Lotto {
     while (inputNumberPointer < LOTTO_LENGTH && randomNumberPointer < LOTTO_LENGTH) {
       if (+this.#numbers[inputNumberPointer] > +randomNumber[randomNumberPointer]) {
         randomNumberPointer += 1;
-        continue;
-      }
-      if (+this.#numbers[inputNumberPointer] < +randomNumber[randomNumberPointer]) {
+      } else if (+this.#numbers[inputNumberPointer] < +randomNumber[randomNumberPointer]) {
         inputNumberPointer += 1;
-        continue;
-      }
-      if (+this.#numbers[inputNumberPointer] === +randomNumber[randomNumberPointer]) {
+      } else if (+this.#numbers[inputNumberPointer] === +randomNumber[randomNumberPointer]) {
         countCorrect += 1;
         inputNumberPointer += 1;
         randomNumberPointer += 1;
-        continue;
       }
     }
     return countCorrect;
@@ -71,31 +70,30 @@ class Lotto {
     return this.#numbers.includes(bonusNumber);
   }
 
+  #getPrize(compareResult, bonusNumber) {
+    if (compareResult === FIRST_PRIZE_CORRECT) {
+      return "first";
+    } else if (compareResult === SECOND_THIRD_PRIZE_CORRECT && this.#includeBonus(bonusNumber)) {
+      return "second";
+    } else if (compareResult === SECOND_THIRD_PRIZE_CORRECT) {
+      return "third";
+    } else if (compareResult === FOURTH_PRIZE_CORRECT) {
+      return "fourth";
+    } else if (compareResult === FIFTH_PRIZE_CORRECT) {
+      return "fifth";
+    }
+    return null;
+  }
+
   winningResult(randomNumbers, bonusNumber) {
     const result = Object.seal({ first: 0, second: 0, third: 0, fourth: 0, fifth: 0 });
-    randomNumbers.forEach((randomNumber) => {
+    for (const randomNumber of randomNumbers) {
       const compareResult = this.#compareNumbers(randomNumber);
-      if (compareResult === 3) {
-        result.fifth += 1;
-        return;
+      const prize = this.#getPrize(compareResult, bonusNumber);
+      if (prize) {
+        result[prize] += 1;
       }
-      if (compareResult === 4) {
-        result.fourth += 1;
-        return;
-      }
-      if (compareResult === 5) {
-        result.third += 1;
-        return;
-      }
-      if (compareResult === 5 && this.#includeBonus(bonusNumber)) {
-        result.second += 1;
-        return;
-      }
-      if (compareResult === 6) {
-        result.first += 1;
-        return;
-      }
-    });
+    }
     return result;
   }
 
