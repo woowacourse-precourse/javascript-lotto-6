@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils'
-import { RANKS } from '../constants/lotto'
+import { RANKS } from '../constants/lotto.js'
 
 const OutputView = {
   printPurchaseLottoList: (lottoList) => {
@@ -8,24 +8,21 @@ const OutputView = {
   },
 
   printLotto: (lotto) => {
-    const copiedLotto = [...lotto]
-    const sortedLotto = copiedLotto.sort((a, b) => a - b)
+    const sortedLotto = [...lotto].sort((a, b) => a - b)
     Console.print('[' + sortedLotto.join(', ') + ']')
   },
 
   /**
    *
-   * @param {{ rankType: string, winningCount: string }[]} winningStatistics
+   * @param {{ winningCount: string }[]} winningStatistics
    */
   printWinningStatistics: (winningStatistics) => {
     Console.print('당첨 통계')
     Console.print('---')
 
     RANKS.forEach((rank) => {
-      const winningStat = winningStatistics.find(
-        (stat) => stat.rankType.toUpperCase() === rank.rankType.toUpperCase()
-      )
-      OutputView.printRank(rank, winningStat.winningCount)
+      const winningCount = winningStatistics[rank.index].winningCount
+      OutputView.printRank(rank, winningCount)
     })
 
     Console.print('---')

@@ -3,34 +3,38 @@ export const MIN_LOTTO_NUMBER = 1
 export const MAX_LOTTO_NUMBER = 45
 export const LOTTO_LENGTH = 6
 
-const FIRST = Object.freeze({
-  rankType: 'FIRST',
-  match: 6,
+export const FIRST = Object.freeze({
+  index: 4,
+  matchCount: 6,
+  isBonusMatch: false,
   winning_price: 2_000_000_000,
 })
 
-const SECOND = Object.freeze({
-  rankType: 'SECOND',
-  match: 5,
-  isBonus: true,
+export const SECOND = Object.freeze({
+  index: 3,
+  matchCount: 5,
+  isBonusMatch: true,
   winning_price: 30_000_000,
 })
 
-const THIRD = Object.freeze({
-  rankType: 'THIRD',
-  match: 5,
+export const THIRD = Object.freeze({
+  index: 2,
+  matchCount: 5,
+  isBonusMatch: false,
   winning_price: 1_500_000,
 })
 
-const FOURTH = Object.freeze({
-  rankType: 'FOURTH',
-  match: 4,
+export const FOURTH = Object.freeze({
+  index: 1,
+  matchCount: 4,
+  isBonusMatch: false,
   winning_price: 50_000,
 })
 
-const FIFTH = Object.freeze({
-  rankType: 'FIFTH',
-  match: 3,
+export const FIFTH = Object.freeze({
+  index: 0,
+  matchCount: 3,
+  isBonusMatch: false,
   winning_price: 5_000,
 })
 

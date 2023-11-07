@@ -13,17 +13,15 @@ const mockRandoms = (numbers) => {
 describe('로또 머신 테스트', () => {
   const lottoMachine = new LottoMachine()
 
-  beforeEach(() => {
-    const lottoNumbers = [
-      [1, 2, 3, 4, 5, 6], // first
-      [2, 3, 4, 5, 6, 7], // second
-      [3, 4, 5, 6, 7, 8], // fourth
-      [4, 5, 6, 7, 8, 9], // fifth
-      [5, 6, 7, 8, 9, 10], // no match
-    ]
+  const lottoNumbers = [
+    [1, 2, 3, 4, 5, 6], // first
+    [2, 3, 4, 5, 6, 7], // second
+    [3, 4, 5, 6, 7, 8], // fourth
+    [4, 5, 6, 7, 8, 9], // fifth
+    [5, 6, 7, 8, 9, 10], // no match
+  ]
 
-    mockRandoms(lottoNumbers.flat())
-  })
+  mockRandoms(lottoNumbers)
 
   test('로또 머신 생성', () => {
     expect(lottoMachine).toBeInstanceOf(LottoMachine)
@@ -45,16 +43,17 @@ describe('로또 머신 테스트', () => {
   test('당첨 통계를 산출한다.', () => {
     const winningStatistics = lottoMachine.calculateWinningStatistics()
     expect(winningStatistics).toEqual([
-      { rankType: 'FIRST', winningCount: 1 },
-      { rankType: 'SECOND', winningCount: 1 },
-      { rankType: 'THIRD', winningCount: 0 },
-      { rankType: 'FOURTH', winningCount: 1 },
-      { rankType: 'FIFTH', winningCount: 1 },
+      { winningCount: 1 },
+      { winningCount: 1 },
+      { winningCount: 0 },
+      { winningCount: 1 },
+      { winningCount: 1 },
     ])
   })
 
   test('수익률을 계산한다.', () => {
-    const profitRate = lottoMachine.calculateProfitRate()
+    const winningStatistics = lottoMachine.calculateWinningStatistics()
+    const profitRate = lottoMachine.calculateProfitRate(winningStatistics)
     expect(profitRate).toBe((2_000_000_000 + 30_000_000 + 50_000 + 5_000) / (LOTTO_PRICE * 5))
   })
 })
