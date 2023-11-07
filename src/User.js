@@ -43,7 +43,7 @@ class User {
 
   raffleLottos(mainNumberArray, bonusNumber) {
     this.lottos.forEach((lotto) => {
-      const prize = this.prize[lotto.raffleNumbers(mainNumberArray, bonusNumber)];
+      const prize = lotto.raffleLotto(mainNumberArray, bonusNumber);
       if (prize === CONSTANTS.nothing) return;
       this.#prize[prize] += 1;
     });
