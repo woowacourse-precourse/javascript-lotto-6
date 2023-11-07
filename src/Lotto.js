@@ -15,14 +15,14 @@ class Lotto {
     }
   }
   #noNumber(numbers) {
-    numbers.map((number) => {
+    numbers.forEach((number) => {
       if (!Number.isInteger(number)) {
         throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
       }
     });
   }
   #inRange(numbers) {
-    numbers.map((number) => {
+    numbers.forEach((number) => {
       if (number < 1 || number > 45) {
         throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
       }

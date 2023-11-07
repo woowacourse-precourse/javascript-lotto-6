@@ -26,18 +26,20 @@ class App {
   }
   // 구입 금액 관련 함수들
   async inputCost() {
-    try {
-      const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
-      this.costValid(input);
-      this.#cost = input;
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      await this.inputCost();
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+        this.costValid(input);
+        this.#cost = input;
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
   }
   costValid(input) {
     const numberInput = Number(input);
-    if (!(Number.isInteger(numberInput) && input % LOTTO_PRICE === 0 && input > 0)) {
+    if (!(Number.isInteger(numberInput) && numberInput % LOTTO_PRICE === 0 && numberInput > 0)) {
       throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
     }
   }
@@ -58,29 +60,33 @@ class App {
   }
   // 당첨 번호 관련 함수들
   async inputWinnerNum() {
-    try {
-      const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-      this.#winningNum = new Lotto(input.split(",").map(Number));
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      await this.inputWinnerNum();
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+        this.#winningNum = new Lotto(input.split(",").map(Number));
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
   }
   // 보너스 번호 관련 함수들
   async inputBonusNum() {
-    try {
-      const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-      this.bonusNumValid(input);
-      this.checkInOrigin(input);
-      this.#bonusNum = input;
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      await this.inputBonusNum();
+    while (true) {
+      try {
+        const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+        this.bonusNumValid(input);
+        this.checkInOrigin(input);
+        this.#bonusNum = input;
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
   }
   bonusNumValid(input) {
     const numberInput = Number(input);
-    if (!(Number.isInteger(numberInput) && input > 0 && input < 46)) {
+    if (!(Number.isInteger(numberInput) && numberInput > 0 && numberInput < 46)) {
       throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
     }
   }
@@ -110,11 +116,11 @@ class App {
   //당첨 내역 출력 관련 함수
   showWinningDetail() {
     MissionUtils.Console.print("당첨 통계\n---");
-    MissionUtils.Console.print(`3개 일치 (${FIFTH.toLocaleString("en-US")}원) - ${this.#winningDetail[0]}개`);
-    MissionUtils.Console.print(`4개 일치 (${FOURTH.toLocaleString("en-US")}원) - ${this.#winningDetail[1]}개`);
-    MissionUtils.Console.print(`5개 일치 (${THIRD.toLocaleString("en-US")}원) - ${this.#winningDetail[2]}개`);
-    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (${SECOND.toLocaleString("en-US")}원) - ${this.#winningDetail[3]}개`);
-    MissionUtils.Console.print(`6개 일치 (${FIRST.toLocaleString("en-US")}원) - ${this.#winningDetail[4]}개`);
+    MissionUtils.Console.print(`3개 일치 (${FIFTH.toLocaleString("ko-KR")}원) - ${this.#winningDetail[0]}개`);
+    MissionUtils.Console.print(`4개 일치 (${FOURTH.toLocaleString("ko-KR")}원) - ${this.#winningDetail[1]}개`);
+    MissionUtils.Console.print(`5개 일치 (${THIRD.toLocaleString("ko-KR")}원) - ${this.#winningDetail[2]}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (${SECOND.toLocaleString("ko-KR")}원) - ${this.#winningDetail[3]}개`);
+    MissionUtils.Console.print(`6개 일치 (${FIRST.toLocaleString("ko-KR")}원) - ${this.#winningDetail[4]}개`);
   }
   calculateRateOfReturn() {
     this.#rateOfReturn =
@@ -127,7 +133,7 @@ class App {
       100;
   }
   printRateOfReturn() {
-    MissionUtils.Console.print(`총 수익률은 ${parseFloat(this.#rateOfReturn.toFixed(1)).toLocaleString("en-US")}%입니다.`);
+    MissionUtils.Console.print(`총 수익률은 ${parseFloat(this.#rateOfReturn.toFixed(1)).toLocaleString("ko-KR")}%입니다.`);
   }
 
   async play() {
