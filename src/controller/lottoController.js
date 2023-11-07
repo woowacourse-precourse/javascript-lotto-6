@@ -28,16 +28,16 @@ class LottoController {
   }
 
   async readLottoNumber() {
-    const LottoNumber = await InputView.inputLotto();
-    this.readBonusNumber(LottoNumber);
+    const lottoNumber = await InputView.inputLotto();
+    this.readBonusNumber(lottoNumber);
   }
 
-  async readBonusNumber(LottoNumber) {
+  async readBonusNumber(lottoNumber) {
     const bonusNumber = await InputView.inputLottoBonus();
-    await this.handleLotto(LottoNumber, bonusNumber);
+    await this.handleLotto(lottoNumber, bonusNumber);
   }
 
-  handleLotto(LottoNumber, bonusNumber) {}
+  handleLotto(lottoNumber, bonusNumber) {}
 }
 
 export default LottoController;
