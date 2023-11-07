@@ -1,7 +1,22 @@
 import {
+  BONUS_SCORE,
   LOTTO_NUMBER_COUNT,
   MAX_LOTTO_NUMBER,
   MIN_LOTTO_NUMBER,
+  PRIZE_WINNING_FIVE,
+  PRIZE_WINNING_FIVE_BONUS,
+  PRIZE_WINNING_FOUR,
+  PRIZE_WINNING_SIX,
+  PRIZE_WINNING_THREE,
+  WINNING_FIVE,
+  WINNING_FIVE_BONUS,
+  WINNING_FOUR,
+  WINNING_FOUR_BOUNS,
+  WINNING_SCORE,
+  WINNING_SIX,
+  WINNING_SIX_BONUS,
+  WINNING_THREE,
+  WINNING_THREE_BONUS,
 } from "./constants/standard.js";
 import {
   ERROR_NUMBER_COUNT,
@@ -64,9 +79,11 @@ class Lotto {
 
     issuedNumbers.map((issuedNumber, index) => {
       compareResult.push(0);
-      issuedNumber.includes(+bonusNumber) && (compareResult[index] += 0.5);
+      issuedNumber.includes(+bonusNumber) &&
+        (compareResult[index] += BONUS_SCORE);
       this.#numbers.map((winningNumber) => {
-        issuedNumber.includes(+winningNumber) && (compareResult[index] += 1);
+        issuedNumber.includes(+winningNumber) &&
+          (compareResult[index] += WINNING_SCORE);
       });
     });
     return compareResult;
@@ -74,32 +91,32 @@ class Lotto {
 
   async winningResult(resultData, result) {
     switch (result) {
-      case 3:
-      case 3.5: {
-        resultData.totalProfits += 5000;
-        resultData.lottoResult[0] += 1;
+      case WINNING_THREE:
+      case WINNING_THREE_BONUS: {
+        resultData.totalProfits += PRIZE_WINNING_THREE;
+        resultData.lottoResult[0] += WINNING_SCORE;
         break;
       }
-      case 4:
-      case 4.5: {
-        resultData.totalProfits += 50000;
-        resultData.lottoResult[1] += 1;
+      case WINNING_FOUR:
+      case WINNING_FOUR_BOUNS: {
+        resultData.totalProfits += PRIZE_WINNING_FOUR;
+        resultData.lottoResult[1] += WINNING_SCORE;
         break;
       }
-      case 5: {
-        resultData.totalProfits += 1500000;
-        resultData.lottoResult[2] += 1;
+      case WINNING_FIVE: {
+        resultData.totalProfits += PRIZE_WINNING_FIVE;
+        resultData.lottoResult[2] += WINNING_SCORE;
         break;
       }
-      case 5.5: {
-        resultData.totalProfits += 30000000;
-        resultData.lottoResult[3] += 1;
+      case WINNING_FIVE_BONUS: {
+        resultData.totalProfits += PRIZE_WINNING_FIVE_BONUS;
+        resultData.lottoResult[3] += WINNING_SCORE;
         break;
       }
-      case 6:
-      case 6.5: {
-        resultData.totalProfits += 2000000000;
-        resultData.lottoResult[4] += 1;
+      case WINNING_SIX:
+      case WINNING_SIX_BONUS: {
+        resultData.totalProfits += PRIZE_WINNING_SIX;
+        resultData.lottoResult[4] += WINNING_SCORE;
         break;
       }
       default: {
@@ -112,7 +129,7 @@ class Lotto {
 
   async result(issuedNumbers, bonusNumber) {
     let resultData = {
-      lottoResult: [0, 0, 0, 0, 0, 0], // 일치 개수 : [3개, 4개, 5개, 5개 + 보너스. 6개]
+      lottoResult: [0, 0, 0, 0, 0, 0], // 일치 개수 : [3개, 4개, 5개, 5개 + 보너스, 6개]
       totalProfits: 0,
     };
 
