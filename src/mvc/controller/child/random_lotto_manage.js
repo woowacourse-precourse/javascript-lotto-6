@@ -7,6 +7,10 @@ class RandomLottoManage {
   get randomLotto() {
     return this.#randomLotto;
   }
+
+  async inputPurchaseAmount() {
+    const AMOUNT = await userInput(Question.purchaseAmount());
+  }
 }
 
 export default RandomLottoManage;
