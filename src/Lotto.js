@@ -5,6 +5,7 @@ class Lotto {
     this.#validate(numbers);
     this.#checkInteger(numbers);
     this.#checkNumberRange(numbers);
+    this.#checkDuplicate(numbers);
     this.#numbers = numbers;
   }
 
@@ -25,6 +26,16 @@ class Lotto {
     numbers.forEach((number) => {
       if(number < 1 || number > 45) throw new Error('[ERROR] : winning number must be in range 1~45');
     })
+  }
+
+  #checkDuplicate(numbers) {
+    const duplicate = numbers.filter((number, index) => {numbers.indexOf(number) != index});
+
+    if(duplicate) throw new Error('[ERROR] : winning number has to be uniqe.');
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 
