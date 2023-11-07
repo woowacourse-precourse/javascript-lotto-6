@@ -3,7 +3,6 @@ import { Console } from '@woowacourse/mission-utils';
 export const Inputs = {
   async getAmount(message) {
     const userInput = await Console.readLineAsync(`${message}\n`);
-
     Console.print('');
 
     return Number(userInput);

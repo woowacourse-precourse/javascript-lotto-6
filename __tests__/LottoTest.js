@@ -60,7 +60,6 @@ describe('MakeLotto 클래스 테스트', () => {
     //  myLottos 배열 내부의 로또 값 배열들 중 중복된 값이 들어간 배열이 있는지 확인
     myLottos.forEach((item) => {
       const duplicatedArr = new Set(item).size !== item.length;
-      console.log(duplicatedArr);
       expect(duplicatedArr.length).toBeFalsy();
       // 로또 번호가 6가지로 구성되어있는지 확인.
       expect(item.length).toBe(6);

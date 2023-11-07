@@ -40,7 +40,6 @@ const lottoResultValidators = {
     });
   },
   validateBonusNumRange(bonusNum) {
-    console.log(parseInt(bonusNum, 10), typeof parseInt(bonusNum, 10));
     if (parseInt(bonusNum, 10) < 1) {
       throw new Error(CONSTANT.error.invalidNumRange);
     }
@@ -68,13 +67,27 @@ const makeLottoValidators = {
   validateAmountType(amount) {
     const checkStyle = /\D/;
     if (checkStyle.test(amount)) {
+      // throw new Error(CONSTANT.error.invalidAmountType);
       return Console.print(CONSTANT.error.invalidAmountType);
     }
   },
   validateAmountUnit(amount) {
     const checkStyle = /\D/;
     if (!checkStyle.test(amount) && amount % CONSTANT.game.unit !== 0) {
+      // throw new Error(CONSTANT.error.invalidAmountUnit);
       return Console.print(CONSTANT.error.invalidAmountUnit);
+    }
+  },
+  validateAmountUnitForLoop(amount) {
+    const checkStyle = /\D/;
+    if (!checkStyle.test(amount) && amount % CONSTANT.game.unit !== 0) {
+      throw new Error(CONSTANT.error.invalidAmountUnit);
+    }
+  },
+  validateAmountTypeForLoop(amount) {
+    const checkStyle = /\D/;
+    if (checkStyle.test(amount)) {
+      throw new Error(CONSTANT.error.invalidAmountType);
     }
   },
 };
