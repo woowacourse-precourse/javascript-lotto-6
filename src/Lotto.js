@@ -1,3 +1,4 @@
+import ERROR from "..constants/Error.js";
 class Lotto {
   #numbers;
 
@@ -9,19 +10,19 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR.isSix);
     }
 
     if (numbers.some((el) => isNaN(el))) {
-      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+      throw new Error(ERROR.isNan);
     }
 
     if (numbers.length > new Set(numbers).size) {
-      throw new Error("[ERROR] 로또 번호는 중복이 아닌 6개여야 합니다.");
+      throw new Error(ERROR.notDuplicate);
     }
 
     if (numbers.some((el) => el > 45 || el < 1)) {
-      throw new Error("[ERROR] 로또 번호는 1~45범위여야 합니다.");
+      throw new Error(ERROR.range);
     }
   }
   // TODO: 추가 기능 구현
