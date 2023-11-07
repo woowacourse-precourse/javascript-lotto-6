@@ -1,6 +1,5 @@
 import { Lotto, MakeLotto, LottoResult } from '../src/Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { Outputs } from '../src/ui/Output.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -60,9 +59,12 @@ describe('MakeLotto 클래스 테스트', () => {
     //  myLottos 배열 내부의 로또 값 배열들 중 중복된 값이 들어간 배열이 있는지 확인
     myLottos.forEach((item) => {
       const duplicatedArr = new Set(item).size !== item.length;
+
       expect(duplicatedArr.length).toBeFalsy();
+
       // 로또 번호가 6가지로 구성되어있는지 확인.
       expect(item.length).toBe(6);
+
       // 로또 번호가 1~45 사이의 값인지 확인
       item.forEach((item) => {
         expect(item).toBeGreaterThanOrEqual(1);
@@ -129,8 +131,7 @@ describe('LottoResult 클래스 테스트', () => {
   });
 
   test('updateMatchesObj 메서드 테스트', () => {
-    // count를 받아서 일치한 로또를 MatchesObj에 업데이트 해주는 메서드 테스트
-    // 앞선 테스트와 해당 테스트에서 isMatch()의 테스트 또한 겸한다 생각하여 생략
+    // count를 받아서 일치한 로또를 MatchesObj에 업데이트 해주는 메서드 테스트로 앞선 테스트와 함께 isMatch()의 테스트 또한 겸한다 생각하여 생략
     const lottoResult = new LottoResult([1, 2, 3, 4, 5, 6], '7', 1000, [
       [1, 2, 3, 10, 11, 12],
       [1, 2, 3, 4, 13, 14],

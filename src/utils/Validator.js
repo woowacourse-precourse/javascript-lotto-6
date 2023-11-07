@@ -67,20 +67,18 @@ const makeLottoValidators = {
   validateAmountType(amount) {
     const checkStyle = /\D/;
     if (checkStyle.test(amount)) {
-      // throw new Error(CONSTANT.error.invalidAmountType);
       return Console.print(CONSTANT.error.invalidAmountType);
     }
   },
   validateAmountUnit(amount) {
     const checkStyle = /\D/;
-    if (!checkStyle.test(amount) && amount % CONSTANT.game.unit !== 0) {
-      // throw new Error(CONSTANT.error.invalidAmountUnit);
+    if (!checkStyle.test(amount) && amount % CONSTANT.game.unit) {
       return Console.print(CONSTANT.error.invalidAmountUnit);
     }
   },
   validateAmountUnitForLoop(amount) {
     const checkStyle = /\D/;
-    if (!checkStyle.test(amount) && amount % CONSTANT.game.unit !== 0) {
+    if (!checkStyle.test(amount) && amount % CONSTANT.game.unit) {
       throw new Error(CONSTANT.error.invalidAmountUnit);
     }
   },

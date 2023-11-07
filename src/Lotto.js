@@ -30,18 +30,19 @@ class MakeLotto extends Lotto {
     this.#amount = amount;
   }
 
-  #validate(amount = 0) {
+  #validate(amount) {
     VALIDATOR.makeLottoValidators.validateAmountType(amount);
     VALIDATOR.makeLottoValidators.validateAmountUnit(amount);
   }
 
-  #makeLottoArray(quantity = 0) {
+  #makeLottoArray(quantity) {
     const lottosArr = Array.from({ length: quantity }, () => {
       const lottosNumber = Random.pickUniqueNumbersInRange(
         CONSTANT.game.lottoMin,
         CONSTANT.game.lottoMax,
         CONSTANT.game.lottoLength
       );
+
       Console.print(`[${lottosNumber.join(', ')}]`);
       return lottosNumber;
     });
@@ -50,9 +51,12 @@ class MakeLotto extends Lotto {
 
   async makeLottos() {
     Console.print(`${this.#amount / CONSTANT.game.unit}개를 구매했습니다.`);
+
     const quantity = this.#amount / CONSTANT.game.unit;
     const myLottos = this.#makeLottoArray(quantity);
+
     Console.print('');
+
     return myLottos;
   }
 }
@@ -91,8 +95,9 @@ class LottoResult extends Lotto {
   }
 
   // 당첨 번호가 로또 번호와 일치할 때마다 카운트 +=1 한 후 리턴.
-  countMatchingNumbers(currentLotto = []) {
+  countMatchingNumbers(currentLotto) {
     let count = 0;
+
     currentLotto.forEach((number) => {
       if (this.winningNum.includes(number)) {
         count += 1;
@@ -101,11 +106,12 @@ class LottoResult extends Lotto {
         count += 1;
       }
     });
+
     return count;
   }
 
   // 로또 번호를 적중한 갯수를 나타내는 Object 제작.
-  updateMatchesObj(matchesObj = {}, count = 0, currentLotto = []) {
+  updateMatchesObj(matchesObj, count, currentLotto) {
     if (count === 3) {
       return (matchesObj.three += 1);
     }
@@ -124,17 +130,20 @@ class LottoResult extends Lotto {
 
   async #isMatch() {
     const matchesObj = this.#initializeMatchesObj();
+
     this.#myLottos.forEach((currentLotto) => {
       const count = this.countMatchingNumbers(currentLotto);
       this.updateMatchesObj(matchesObj, count, currentLotto);
     });
+
     return matchesObj;
   }
 
-  calcRevenue(matchResult = {}, matcheAmountObj = {}) {
+  calcRevenue(matchResult, matcheAmountObj) {
     let revenue = 0;
+
     Object.entries(matchResult).forEach(([key, value]) => {
-      if (value > 0) {
+      if (value) {
         revenue += matcheAmountObj[key] * value;
       }
     });
@@ -153,6 +162,7 @@ class LottoResult extends Lotto {
     };
     const revenue = this.calcRevenue(matchResult, matcheAmountObj);
     const rateOfReturn = (revenue / (this.#amount / 100)).toFixed(1);
+
     return rateOfReturn;
   }
 

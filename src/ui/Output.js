@@ -3,7 +3,7 @@ import CONSTANT from '../constants/constant.js';
 
 // 객체를 받아 값 출력
 export const OUTPUTS = {
-  printStatistics(bills = {}) {
+  printStatistics(bills) {
     Console.print(CONSTANT.outputs.statistics);
     Console.print(
       `3개 일치 (5,000원) - ${bills.three ?? 0}개\n4개 일치 (50,000원) - ${
@@ -16,7 +16,7 @@ export const OUTPUTS = {
     );
   },
 
-  printRateOfReturn(rate = 0) {
+  printRateOfReturn(rate) {
     Console.print(`총 수익률은 ${rate ?? 0}%입니다.`);
   },
 };
