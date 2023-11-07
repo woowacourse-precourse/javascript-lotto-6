@@ -15,7 +15,7 @@ class lottoGame {
                 }
                 validInput = true; 
             } catch (error) {
-                console.error(error.message);
+                MissionUtils.Console.print(error.message);
             }
         }
         return LOTTO_MONEY / 1000;
@@ -59,7 +59,7 @@ class lottoGame {
                 validInput = true;
                 return BONUS_NUMBER; // 올바른 입력을 받았을 때 반환
             } catch (error) {
-                console.error(error.message);
+                MissionUtils.Console.print(error.message);
             }
         }
     }

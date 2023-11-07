@@ -50,7 +50,8 @@ class gameEnd {
         const MONEY = LOTTO_COUNT*1000;
         if(revenue === 0)return 0;
         const PROFIT_MARGIN = (revenue - MONEY) / MONEY * 100;
-        return 100 + PROFIT_MARGIN;
+        
+        return 100 + PROFIT_MARGIN.toFixed(2)*1;
     }
 
     lottoEndPrint(winList,END_MONEY){
