@@ -1,4 +1,7 @@
 const PRIZE = Object.freeze({
+  0: 'nothing',
+  1: 'nothing',
+  2: 'nothing',
   3: 'fifthPrize',
   4: 'fourthPrize',
   6: 'firstPrize',

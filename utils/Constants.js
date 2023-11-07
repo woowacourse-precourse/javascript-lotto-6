@@ -6,6 +6,7 @@ const CONSTANTS = Object.freeze({
   mainNumberCount: 6,
   numberDelimiter: ',',
   bonusNumberConditionCount: 5,
+  nothing: 'nothing',
 });
 
 export default CONSTANTS;
