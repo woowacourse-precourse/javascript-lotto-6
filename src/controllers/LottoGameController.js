@@ -2,7 +2,6 @@ import { Console } from '@woowacourse/mission-utils';
 import LottoGame from '../models/LottoGame.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import validation from '../utills/validation.js';
 
 class LottoGameController {
   #lottoGame;
@@ -15,14 +14,13 @@ class LottoGameController {
     this.printLottosCount();
     this.printLottos();
     await this.enterWinningNumbers();
+    await this.enterBonusNumber();
   }
 
   async purchaseLottos() {
     try {
       const purchaseAmount = await InputView.readLottoAmount();
-      validation.validateInputNumber(purchaseAmount);
-      validation.validatePurchaseAmount(purchaseAmount);
-      this.#lottoGame.setCount(Number(purchaseAmount));
+      this.#lottoGame.setCount(purchaseAmount);
       this.#lottoGame.setLottos();
     } catch (error) {
       Console.print(error.message);
@@ -43,21 +41,18 @@ class LottoGameController {
   async enterWinningNumbers() {
     try {
       const winningNumber = await InputView.readWinningNumber();
-      validation.validateInputArray(winningNumber);
-      const parsedNumber = winningNumber.split(',').map(Number);
-      this.#lottoGame.setWinningNumber(parsedNumber);
-      this.enterBonusNumber(winningNumber);
+      this.#lottoGame.setWinningNumber(winningNumber);
     } catch (error) {
       Console.print(error.message);
       await this.enterWinningNumbers();
     }
   }
 
-  async enterBonusNumber(winningNumber) {
+  async enterBonusNumber() {
+    const winningNumber = this.#lottoGame.getWinningNumbers();
     try {
       const bonusNumber = await InputView.readBonusNumber();
-      validation.validateBonusNumber(bonusNumber, winningNumber);
-      this.#lottoGame.setBonusNumber(Number(bonusNumber));
+      this.#lottoGame.setBonusNumber(bonusNumber);
     } catch (error) {
       Console.print(error.message);
       await this.enterBonusNumber(winningNumber);

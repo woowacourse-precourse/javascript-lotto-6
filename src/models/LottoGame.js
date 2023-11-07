@@ -1,6 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import { GAME_NUMBER, LOTTO_NUMBER } from '../constants/constants.js';
 import Lotto from '../Lotto.js';
+import validation from '../utills/validation.js';
 
 class LottoGame {
   #count;
@@ -9,7 +10,9 @@ class LottoGame {
   #bonusNumber;
 
   setCount(amount) {
-    this.#count = amount / GAME_NUMBER.MONEY_UNIT;
+    validation.validateInputNumber(amount);
+    validation.validatePurchaseAmount(amount);
+    this.#count = Number(amount) / GAME_NUMBER.MONEY_UNIT;
   }
 
   setLottos() {
@@ -21,11 +24,14 @@ class LottoGame {
   }
 
   setWinningNumber(numbers) {
-    this.#winningNumber = new Lotto(numbers);
+    validation.validateInputArray(numbers);
+    const parsedNumber = numbers.split(',').map(Number);
+    this.#winningNumber = new Lotto(parsedNumber);
   }
 
   setBonusNumber(number) {
-    this.#bonusNumber = number;
+    validation.validateBonusNumber(number, this.#winningNumber.getNumbers());
+    this.#bonusNumber = Number(number);
   }
 
   getLottoCount() {
@@ -38,6 +44,10 @@ class LottoGame {
 
   getWinningNumbers() {
     return this.#winningNumber.getNumbers();
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
   }
 
   makeRandomNumbers() {
