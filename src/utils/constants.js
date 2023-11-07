@@ -18,7 +18,6 @@ export const COMMAND = Object.freeze({
   purchaseAmountMessage: "구입금액을 입력해 주세요.\n",
   lottoNumbersMessage: "당첨 번호를 입력해 주세요.\n",
   bonusNumberMessage: "보너스 번호를 입력해 주세요.\n",
-  bonusNumberMessage: "보너스 번호를 입력해 주세요.\n",
   purchaseMessage: "개를 구매했습니다.",
 });
 
