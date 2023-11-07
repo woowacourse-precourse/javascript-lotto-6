@@ -1,6 +1,12 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { LOTTO_PRICE } from '../../constants/constants.js';
 
+const changeParseInt = numbersStringArray => {
+  return numbersStringArray.map(number => {
+    return parseInt(number, 10);
+  });
+};
+
 const lottoPurchaseCount = inputPrice => {
   return Math.floor(parseInt(inputPrice, 10) / LOTTO_PRICE);
 };
@@ -14,4 +20,4 @@ const sortLottoNumbers = numbers => {
   return sortedNumbers;
 };
 
-export { lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers };
+export { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers };

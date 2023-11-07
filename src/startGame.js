@@ -1,5 +1,5 @@
 import Input from './utils/inputOutput/input.js';
-import { lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
+import { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
 
 
 
@@ -9,6 +9,8 @@ class StartGame {
   #purchaseAmount;
 
   #purchasedLottos = [];
+
+  #winningNumbers;
 
   constructor() { }
 
@@ -40,6 +42,15 @@ class StartGame {
 
       this.#purchasedLottos.push(sortedLottoNumber);
     }
+  }
+  async inputWinningNumbers() {
+    this.#winningNumbers = await this.getValidatedWinningNumbersInput(MESSAGE.WINNING_NUMBER);
+  }
+
+  async getValidatedWinningNumbersInput(message) {
+    const inputWinningNumbers = await Input.readLineAsync(message);
+    const winningNumbersStringArray = inputWinningNumbers.replace('[', '').replace(']', '').split(',');
+    const winningNumbers = changeParseInt(winningNumbersStringArray);
   }
 }
 
