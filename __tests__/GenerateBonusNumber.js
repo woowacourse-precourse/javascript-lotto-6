@@ -43,4 +43,16 @@ describe("보너스 번호 생성", () => {
     // then
     await expect(app.play()).rejects.toThrow("[ERROR] 1에서 45 사이에 숫자만 입력이 가능합니다.");
   });
+
+  test("BONUS_NUMBER 상수 확인", async () => {
+    const winningNumberMockData = [1, 2, 3, 4, 5, 6];
+    const bonusNumberMockData = [2];
+    // when
+    const model = new GameModel();
+    model.generateWinningNumber(winningNumberMockData);
+    model.generateBonusNumber(bonusNumberMockData);
+
+    // then
+    expect(model.BONUS_NUMBER).toBe(2);
+  });
 });
