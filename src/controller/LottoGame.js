@@ -62,6 +62,10 @@ class LottoGame {
     }
   }
 
+  getMyLottos() {
+    return this.#myLottos;
+  }
+
   async drawLotto() {
     await this.#winningLotto.setWinningNumber();
     await this.#winningLotto.setBonusNumber();
