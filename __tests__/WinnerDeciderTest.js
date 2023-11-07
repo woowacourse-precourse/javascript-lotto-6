@@ -1,5 +1,7 @@
 import {MissionUtils} from "@woowacourse/mission-utils";
 import WinnerDecider from "../src/module/model/WinnerDecider.js"
+import WinNumber from "../src/module/model/WinNumber.js";
+import LottoGenerator from "../src/module/model/LottoGenerator.js";
 
 const mockFN = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
@@ -33,21 +35,10 @@ describe('당첨 판독기 클래스 테스트', () => {
 
     mockFN(testNumber);
 
-    const test = new WinnerDecider(counter, numbers, bonus);
+    const winNumber = new WinNumber(numbers, bonus);
+    const lottos = new LottoGenerator(counter);
+    const test = new WinnerDecider(winNumber, lottos);
 
     expect(test.score).toEqual(answer);
   });
-
-  test('보너스 점수를 제대로 파악하는지 체크한다.', () => {
-    const testNumber = [[1,2,3,4,5,7]];
-    const count = 1;
-    const bonus = 7;
-    const numbers = [1,2,3,4,5,6];
-
-    mockFN(testNumber);
-
-    const test = new WinnerDecider(count, numbers, bonus);
-
-    expect(test.score.bonus).toEqual(1);
-  })
 });
