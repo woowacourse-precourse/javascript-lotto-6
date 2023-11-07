@@ -23,20 +23,20 @@ class App {
 		});
 	}
 	createLotto(tickets) {
-		const lottos = [];
+		const lottoTickets = [];
 		let numbers = [];
-		while (lottos.length < tickets) {
+		while (lottoTickets.length < tickets) {
 			numbers = this.createNumber();
 			this.sortNumber(numbers);
-			lottos.push(numbers);
+			lottoTickets.push(numbers);
 		}
-		validation.duplicateLottoNumber(lottos);
-		return lottos;
+		validation.duplicateLottoNumber(lottoTickets);
+		return lottoTickets;
 	}
-	lottoPrinter(tickets, lottos) {
+	lottoPrinter(tickets, lottoTickets) {
 		Console.print(`\n${tickets}개를 구매했습니다.`);
-		for (let lotto of lottos) {
-			Console.print(`[${lotto.toString().split(',').join(', ')}]`);
+		for (let lottoTicket of lottoTickets) {
+			Console.print(`[${lottoTicket.toString().split(',').join(', ')}]`);
 		}
 	}
 	async winningNumber() {
@@ -44,12 +44,17 @@ class App {
 		const winningNumber = input.split(',').map(Number);
 		new Lotto(winningNumber);
 	}
+	async bonusNumber() {
+		const input = await Console.readLineAsync(MESSAGE.BONUS);
+		return Number(input);
+	}
 	async play() {
 		try {
 			const tickets = await this.buy();
-			const lottos = this.createLotto(tickets);
-			this.lottoPrinter(tickets, lottos);
+			const lottoTickets = this.createLotto(tickets);
+			this.lottoPrinter(tickets, lottoTickets);
 			this.winningNumber();
+			const bonusNumber = this.bonusNumber();
 		} catch (error) {
 			throw error;
 		}
