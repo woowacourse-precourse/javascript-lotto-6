@@ -6,8 +6,18 @@ import Lotto from '../Lotto.js';
 
 const INPUT_VIEW = {
   async inputPrice() {
-    const PRICE = await Console.readLineAsync(LOTTO_MESSAGE.INPUT_PRICE);
-    await VALIDATION.priceValidation(PRICE);
+    let VAL = false;
+    let PRICE = 0;
+    while (!VAL) {
+      const input = await Console.readLineAsync(LOTTO_MESSAGE.INPUT_PRICE);
+      try {
+        VALIDATION.priceValidation(input);
+        PRICE = input;
+        VAL = true;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
     const LOTTO_COUNT = PRICE / NUMBERS.LOTTO_PRICE;
     OUTPUT_VIEW.outputLottoCount(LOTTO_COUNT);
     return LOTTO_COUNT;

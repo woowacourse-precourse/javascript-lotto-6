@@ -9,7 +9,8 @@ const OUTPUT_VIEW = {
   },
 
   async outputRank(rankArr) {
-    for (let i = 1; i <= 5; i += 1) {
+    Console.print(LOTTO_MESSAGE.STATISTICS_MESSAGE);
+    for (let i = 5; i > 0; i -= 1) {
       Console.print(
         LOTTO_MESSAGE[`RANKING_${i}`](
           rankArr.filter((element) => element === i).length,

@@ -51,10 +51,10 @@ const VALIDATION = {
     return true;
   },
 
-  async priceValidation(price) {
-    if (!this.inputNothing(price)) throw new Error(ERROR_MESSAGE.INPUT_NOTHING);
-    if (!this.isNum(price)) throw new Error(ERROR_MESSAGE.NOT_NUMBERS);
-    if (!this.isThousands(price)) throw new Error(ERROR_MESSAGE.NOT_THOUSANDS);
+  priceValidation(price) {
+    if (!this.inputNothing(price)) throw ERROR_MESSAGE.INPUT_NOTHING;
+    if (!this.isNum(price)) throw ERROR_MESSAGE.NOT_NUMBERS;
+    if (!this.isThousands(price)) throw ERROR_MESSAGE.NOT_THOUSANDS;
   },
 
   lottoNumValidation(numbers) {
