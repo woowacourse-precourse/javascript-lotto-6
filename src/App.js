@@ -1,4 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+const { Console } = MissionUtils;
+import CONSTANT from "./constant/constants";
 import Lotto from "./Lotto.js";
 
 class App {
@@ -16,132 +18,101 @@ class App {
         bonusNumber
       );
       this.displayResults(resultCount);
-
       this.calculateAndDisplayProfitRate(purchaseAmount, resultCount);
     } catch (error) {
-      MissionUtils.Console.print(`[ERROR] ${error.message}`);
+      Console.print(`[ERROR] ${error.message}`);
     }
   }
 
   calculateAndDisplayProfitRate(purchaseAmount, resultCount) {
+    const { LOG, RATE } = CONSTANT;
     let totalPrize = 0;
     for (const result in resultCount) {
       totalPrize += this.getPrizeValue(result) * resultCount[result];
     }
 
-    // 수익률 계산
-    const profit = totalPrize - purchaseAmount;
-    let profitRate = (profit / purchaseAmount) * 100;
-
-    // 수익률 출력
-    MissionUtils.Console.print(
-      `총 수익률은 ${100 - Math.abs(profitRate).toFixed(1)}%입니다.`
-    );
+    const profitRate = RATE(totalPrize, purchaseAmount);
+    const message = LOG.TOTAL_RATE(profitRate);
+    Console.print(message);
   }
 
   getPrizeValue(match) {
-    const prizeValues = {
-      3: 5000,
-      4: 50000,
-      5: 1500000,
-      "5+1": 30000000,
-      6: 2000000000,
-    };
-
-    return prizeValues[match] || 0;
+    const { PRIZE_VALUES } = CONSTANT;
+    return PRIZE_VALUES[match] || 0;
   }
 
   async getInputPurchaseAmount() {
-    const purchaseAmountInput = await MissionUtils.Console.readLineAsync(
-      "구입 금액을 입력해 주세요."
-    );
+    const { LOG, ERR_LOG, UNIT } = CONSTANT;
+    const purchaseAmountInput = await Console.readLineAsync(`${LOG.PURCHASE}`);
     if (!/^\d+$/.test(purchaseAmountInput)) {
-      throw new Error("구입 금액은 숫자여야 합니다.");
+      throw new Error(`${ERR_LOG.NAN_AMOUNT}`);
     }
 
     const purchaseAmount = parseInt(purchaseAmountInput, 10);
 
     if (isNaN(purchaseAmount) || purchaseAmount <= 0) {
-      throw new Error("올바른 금액을 입력십시오.");
+      throw new Error(`${ERR_LOG.WRONG_PRICE}`);
     }
 
-    if (purchaseAmount % 1000 !== 0) {
-      throw new Error("구입 금액은 1000원 단위로 입력해야 합니다.");
+    if (purchaseAmount % UNIT !== 0) {
+      throw new Error(`${ERR_LOG.WRONG_MEASURE}`);
     }
 
     return purchaseAmount;
   }
 
   purchaseLottos(purchaseAmount) {
-    const numberOfLottos = Math.floor(purchaseAmount / 1000);
+    const { UNIT } = CONSTANT;
+    const numberOfLottos = Math.floor(purchaseAmount / UNIT);
     const lottos = Array.from(
       { length: numberOfLottos },
       () => new Lotto(Lotto.generateRandom(), false)
-    ); // Lotto 클래스의 생성자 수정 필요
+    );
     return lottos;
   }
 
   displayPurchasedLottos(lottos) {
-    MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
+    Console.print(`\n${lottos.length}개를 구매했습니다.`);
     lottos.forEach((lotto) => {
-      // 로또 번호를 오름차순으로 정렬합니다.
       const sortedNumbers = lotto.numbers.sort((a, b) => a - b);
-      MissionUtils.Console.print(`[${sortedNumbers.join(", ")}]`); // 정렬된 번호를 출력합니다.
+      Console.print(`[${sortedNumbers.join(", ")}]`);
     });
   }
 
   async getInputWinningNumbers() {
-    const winningNumbersInput = await MissionUtils.Console.readLineAsync(
-      "\n당첨 번호를 입력해 주세요."
-    );
+    const { LOG, ERR_LOG } = CONSTANT;
+    const winningNumbersInput = await Console.readLineAsync(`${LOG.WIN_NUM}`);
 
-    // 입력된 당첨 번호를 구분자로 분리하고 공백을 제거한 후 숫자로 변환합니다.
     const winningNumbers = winningNumbersInput
       .split(",")
       .map((num) => num.trim())
-      .map(Number); // 문자열을 숫자로 변환
+      .map(Number);
 
-    // 숫자의 개수가 6개인지 확인합니다.
     if (winningNumbers.length !== 6) {
-      throw new Error("당첨 번호는 6개여야 합니다.");
+      throw new Error(ERR_LOG.WIN_LENGTH);
     }
 
-    // 모든 입력값이 숫자인지 확인합니다.
     if (winningNumbers.some(isNaN)) {
-      throw new Error("당첨 번호는 숫자여야 합니다.");
+      throw new Error(ERR_LOG.NAN);
     }
 
-    const bonusNumberInput = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해 주세요."
-    );
-    const bonusNumber = parseInt(bonusNumberInput, 10);
+    const bonusNumberInput = await Console.readLineAsync();
+    const bonusNumber = Number(bonusNumberInput);
 
-    // 보너스 번호가 유효한 숫자인지 확인합니다.
     if (isNaN(bonusNumber)) {
-      throw new Error("보너스 번호가 올바르지 않습니다.");
+      throw new Error(ERR_LOG.WRONG_BONUS);
     }
 
-    // 보너스 번호가 당첨 번호와 중복되는지 확인합니다.
     if (winningNumbers.includes(bonusNumber)) {
-      throw new Error("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+      throw new Error(ERR_LOG.REPEATED_BONUS);
     }
 
     return { winningNumbers, bonusNumber };
   }
 
-  parseNumbers(numbersInput) {
-    return numbersInput.split(",").map((num) => {
-      const parsedNum = parseInt(num.trim(), 10);
-      if (isNaN(parsedNum)) {
-        throw new Error("번호가 올바르지 않습니다.");
-      }
-      return parsedNum;
-    });
-  }
-
   calculateResults(lottos, winningNumbers, bonusNumber) {
+    const { RESULT_COUNT } = CONSTANT;
     let prize = 0;
-    const resultCount = { 3: 0, 4: 0, 5: 0, "5+1": 0, 6: 0 };
 
     lottos.forEach((lotto) => {
       const {
@@ -152,33 +123,26 @@ class App {
       prize += lottoPrize;
       const resultKey =
         matchCount === 5 && isBonusMatched ? "5+1" : matchCount.toString();
-      if (resultCount.hasOwnProperty(resultKey)) {
-        resultCount[resultKey]++;
+      if (RESULT_COUNT.hasOwnProperty(resultKey)) {
+        RESULT_COUNT[resultKey]++;
       }
     });
-
-    return resultCount;
+    return RESULT_COUNT;
   }
 
-  displayResults(resultCount) {
-    MissionUtils.Console.print("\n당첨 통계");
-    MissionUtils.Console.print("---");
-    // 0개 이상인 결과만 출력합니다.
-    Object.keys(resultCount).forEach((match) => {
-      const prizeMessage = this.getPrizeMessage(match);
-      MissionUtils.Console.print(`${prizeMessage} - ${resultCount[match]}개`);
+  displayResults(resultCnt) {
+    const { WIN_LOG } = CONSTANT;
+    Console.print(`${WIN_LOG.MSG}`);
+    Console.print(`${WIN_LOG.SLASH}`);
+    Object.keys(resultCnt).forEach((match) => {
+      const prizeMsg = this.getPrizeMessage(match);
+      Console.print(`${prizeMsg} - ${resultCnt[match]}개`);
     });
   }
 
   getPrizeMessage(match) {
-    const prizeMessages = {
-      3: "3개 일치 (5,000원)",
-      4: "4개 일치 (50,000원)",
-      5: "5개 일치 (1,500,000원)",
-      "5+1": "5개 일치, 보너스 볼 일치 (30,000,000원)",
-      6: "6개 일치 (2,000,000,000원)",
-    };
-    return prizeMessages[match];
+    const { PRIZE_MSG } = CONSTANT;
+    return PRIZE_MSG[match];
   }
 }
 
