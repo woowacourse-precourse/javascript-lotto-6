@@ -10,33 +10,31 @@ class Lotto {
 
   async getResult() {}
 
-  readBuyAmount() {}
-
-  validateIsNumber(input) {}
-
-  validateBuyUnit(input) {}
-
-  validateNumberOfInputs(input) {}
-
-  validateIsInRange(input) {}
-
-  getNumberOfAvailableTickets(amount) {}
-
-  publishLottoTicket() {}
-
-  printAllTickets() {}
-
-  readWinningNumbers() {}
-
-  readWinningBonusNumber() {}
-
-  getResult() {}
-
-  getRank() {}
-
   printPrize() {}
 
   printRateOfRevenue() {}
+
+  #readBuyAmount() {}
+
+  #validateIsNumber(input) {}
+
+  #validateBuyUnit(input) {}
+
+  #validateNumberOfInputs(input) {}
+
+  #validateIsInRange(input) {}
+
+  #getNumberOfAvailableTickets(amount) {}
+
+  #publishLottoTicket() {}
+
+  #printAllTickets() {}
+
+  #readWinningNumbers() {}
+
+  #readWinningBonusNumber() {}
+
+  #getRank() {}
 }
 
 class LottoTicket {
