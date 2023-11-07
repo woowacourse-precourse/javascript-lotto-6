@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import LottoError from './error/LottoError.js';
 
 class Lotto {
   #numbers;
@@ -33,31 +34,28 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.\n');
+      throw new LottoError(LottoError.ERROR_MSG.length);
     }
 
     this.validateNumberCheck(numbers);
 
-    const checkNumberSet = new Set(numbers);
+    const checkNumberSet = new Set(this.#numbers);
     if (numbers.length !== checkNumberSet.size)
-      throw new Error('[ERROR] 로또 번호를 중복으로 입력할 수 없습니다.\n');
+      throw new LottoError(LottoError.ERROR_MSG.duplicate);
 
     return this.#numbers;
   }
 
   validateNumberCheck(numbers) {
     this.#numbers = numbers.map(num => {
-      if (Number.isNaN(+num) || !Number.isInteger(+num)) {
-        throw new Error(
-          '[ERROR] 로또 번호 입력이 잘못되었습니다. 숫자를 정확히 입력해주세요.\n',
-        );
+      const intNum = parseInt(num, 10);
+      if (Number.isNaN(intNum) || !Number.isInteger(intNum)) {
+        throw new LottoError(LottoError.ERROR_MSG.noNumber);
       }
-      if (+num < 1 || +num > 45) {
-        throw new Error(
-          '[ERROR] 로또 번호 입력이 잘못되었습니다. 1과 45 사이의 숫자를 입력해주세요.\n',
-        );
+      if (intNum < 1 || intNum > 45) {
+        throw new LottoError(LottoError.ERROR_MSG.range);
       }
-      return +num;
+      return intNum;
     });
   }
 
