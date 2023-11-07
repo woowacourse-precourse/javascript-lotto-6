@@ -14,7 +14,7 @@ class LottoPurchaser {
 
   purchase() {
     const lottos = new LottoShop().sell(this.#purchaseAmount);
-    this.#set(lottos);
+    this.#setLottos(lottos);
   }
 
   check(winningLotto) {
@@ -35,7 +35,11 @@ class LottoPurchaser {
     return sortedLottos;
   }
 
-  #set(lottos) {
+  getResultMap() {
+    return this.#winningResults.getReversedResultMap();
+  }
+
+  #setLottos(lottos) {
     this.#lottos = lottos;
   }
 

@@ -11,6 +11,7 @@ class LottoGame {
     this.#purchaseLottos();
     await this.#createWinningLotto();
     this.#lottoPurchaser.check(this.#winningLotto);
+    this.#showResults();
   }
 
   async #createPurchaser() {
@@ -54,6 +55,11 @@ class LottoGame {
   async #getBonusNumber() {
     const bonusNumber = await View.askBonusNumber();
     return bonusNumber;
+  }
+
+  #showResults() {
+    const resultMap = this.#lottoPurchaser.getResultMap();
+    View.printWinningResults(resultMap);
   }
 }
 

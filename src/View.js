@@ -1,8 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { QUERY, TEMPLATE } from './LottoMessage.js';
+import { QUERY, TEMPLATE, WINNING_STATISTICS } from './LottoMessage.js';
 
 class View {
   static #DELIMITER = ',';
+  static #DIVISION_LINE = '---';
 
   static async askPurchaseAmount() {
     const answer = await Console.readLineAsync(QUERY.purchaseAmount);
@@ -30,6 +31,17 @@ class View {
       (acc, cur) => acc + TEMPLATE.sortedLotto(cur.join(`${this.#DELIMITER} `)),
       '',
     );
+    View.print(message);
+  }
+
+  static printWinningResults(resultMap) {
+    View.print(WINNING_STATISTICS);
+    View.print(View.#DIVISION_LINE);
+
+    let message = '';
+    resultMap.forEach((count, ranking) => {
+      message += TEMPLATE.winnigResultsBy[ranking](count);
+    });
     View.print(message);
   }
 
