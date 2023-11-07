@@ -28,7 +28,7 @@ class Controller {
     this.lottoNumbers = await input.userNumber();
     this.lottoBonusNumber = await input.userBonusNumber();
     this.lottoTickets = Output.ticketPrint(this.purchaseAmount);
-    console.log((this.lottoTickets).length);
+    // console.log((this.lottoTickets).length);
     this.gameResult();
   }
 
@@ -40,8 +40,10 @@ class Controller {
     const matchingCounts = Output.compareTickets(this.lottoTickets, this.lottoNumbers, this.lottoBonusNumber);
     console.log(matchingCounts);
 
-    const totalPrize = Output.calculatePrizes(matchingCounts);
+    Console.print('\n당첨 통계');
+    Console.print('---');
 
+    const totalPrize = Output.calculatePrizes(matchingCounts);
     Output.calculateEarnings(totalPrize, this.purchaseAmount);
 
   }

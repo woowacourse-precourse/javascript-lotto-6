@@ -3,6 +3,7 @@ import Input from './UserInput.js';
 import Lotto from './Lotto.js';
 
 class Output {
+
   static ticketPrint(purchaseAmount) {
     const numOfTickets = purchaseAmount / 1000;
     const lottoTickets = [];
@@ -33,42 +34,22 @@ class Output {
     const prizes = [0, 5000, 50000, 1500000, 30000000, 2000000000];
     let totalPrize = 0;
 
-    Console.print('\n당첨 통계');
-    Console.print('---');
-
-    const countTickets = (matchedCount, hasBonusNumber) => {
-      return matchingCounts.filter(ticket => ticket.matchedCount === matchedCount && ticket.hasBonusNumber === hasBonusNumber).length;
+    const printMatchingCount = (matchedCount, prizeIndex) => {
+      const matchingCount = matchingCounts.filter(ticket => ticket.matchedCount === matchedCount).length;
+      Console.print(`${matchedCount}개 일치 (${prizes[prizeIndex].toLocaleString()}원) - ${matchingCount}개`);
+      totalPrize += prizes[prizeIndex] * matchingCount;
     };
 
-    let matchingCount = countTickets(3, false);
-    Console.print(`3개 일치 (5,000원) - ${matchingCount}개`);
-    totalPrize += prizes[1] * matchingCount;
+    printMatchingCount(3, 1);
+    printMatchingCount(4, 2);
+    printMatchingCount(5, 3);
 
-    matchingCount = countTickets(3, true);
-    Console.print(`3개 일치 (5,000원) - ${matchingCount}개`);
-    totalPrize += prizes[1] * matchingCount;
+    const matchingCount5WithBonus = matchingCounts.filter(ticket => ticket.matchedCount === 5 && ticket.hasBonusNumber).length;
+    Console.print(`5개 일치, 보너스 볼 일치 (${prizes[4].toLocaleString()}원) - ${matchingCount5WithBonus}개`);
+    totalPrize += prizes[4] * matchingCount5WithBonus;
 
-    matchingCount = countTickets(4, false);
-    Console.print(`4개 일치 (50,000원) - ${matchingCount}개`);
-    totalPrize += prizes[2] * matchingCount;
+    printMatchingCount(6, 4);
 
-    matchingCount = countTickets(4, true);
-    Console.print(`4개 일치 (50,000원) - ${matchingCount}개`);
-    totalPrize += prizes[2] * matchingCount;
-
-    matchingCount = countTickets(5, false);
-    Console.print(`5개 일치 (1,500,000원) - ${matchingCount}개`);
-    totalPrize += prizes[3] * matchingCount;
-
-    matchingCount = countTickets(5, true);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${matchingCount}개`);
-    totalPrize += prizes[4] * matchingCount;
-
-    matchingCount = countTickets(6, false);
-    Console.print(`6개 일치 (2,000,000,000원) - ${matchingCount}개`);
-    totalPrize += prizes[5] * matchingCount;
-
-    Console.print(`총 당첨금액: ${totalPrize.toLocaleString()}원`);
     return totalPrize;
   }
 
@@ -77,8 +58,6 @@ class Output {
     const profitRatio = ((earnings / purchaseAmount) * 100).toFixed(2);
     Console.print(`총 수익률은 ${profitRatio}%입니다.`);
   }
-
-
 }
 
 export default Output;
