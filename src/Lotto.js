@@ -20,7 +20,7 @@ class Lotto {
   }
 
   getNumbers() {
-    return Object.freeze([...this.#numbers]);
+    return [...this.#numbers];
   }
 }
 
