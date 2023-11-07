@@ -3,6 +3,7 @@ import { isDuplicate, isNumberInRange, isSixLength, isValidAmount } from "./util
 import { inputAmount, inputBonnusNum, inputWinningNum } from "./view/Input.js";
 import { printLottoCount, printLottoNum } from "./view/Output.js";
 import Lotto from "./Lotto.js";
+import { generateLottoNum } from "./utils/generateRandomNum.js";
 
 class App {
   async play() {
@@ -10,9 +11,18 @@ class App {
     isValidAmount(amount);
 
     const count = printLottoCount(amount);
-    const lottoNums = printLottoNum(count);
+    const lottoNums = [];
+
+    // 로또 번호 생성
+    for(let i=0; i<count; i++){
+      lottoNums.push(generateLottoNum());
+    }
 
     const lottos = lottoNums.map(lotto => new Lotto(lotto));
+
+    for(const lotto of lottos){
+      printLottoNum(lotto.getNumbers())
+    }
 
     const winningNums = await inputWinningNum();
     isDuplicate(winningNums) || isNumberInRange(winningNums) || isSixLength(winningNums);

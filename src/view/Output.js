@@ -10,14 +10,6 @@ export function printLottoCount(amount){
 }
 
 // 로또 번호 출력
-export function printLottoNum(count){
-  const lottos = [];
-
-  for(let i=0; i<count; i++){
-    const lotto = generateLottoNum();
-    lottos.push(lotto);
-
-    MissionUtils.Console.print(lotto);
-  }
-  return lottos;
+export function printLottoNum(nums){
+  MissionUtils.Console.print(nums);
 }
