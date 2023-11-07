@@ -5,22 +5,22 @@ import WinningResult from '../src/WinningResult.js';
 class App {
   async play() {
     try {
-      const purchaseAmount = await this.inputPurchaseAmount();
-      const tickets = this.generateLottoTickets(purchaseAmount);
-      this.printTickets(tickets);
+      const PURCHASE_AMOUNT = await this.inputPurchaseAmount();
+      const TICKETS = this.generateLottoTickets(PURCHASE_AMOUNT);
+      this.printTickets(TICKETS);
 
       // 당첨 번호 입력 받기
-      const winningLotto = await this.inputWinningNumbers();
-      const bonusNumber = await this.inputBonusNumber(winningLotto);
+      const WINNING_LOTTO = await this.inputWinningNumbers();
+      const BONUS_NUMBER = await this.inputBonusNumber(WINNING_LOTTO);
 
       let winningResult = this.calculateWinning(
-        tickets,
-        winningLotto,
-        bonusNumber
+        TICKETS,
+        WINNING_LOTTO,
+        BONUS_NUMBER
       );
       let returnRate = this.calculateReturnRate(
         winningResult.getTotalPrize(),
-        purchaseAmount
+        PURCHASE_AMOUNT
       );
 
       this.printWinningStatistics(winningResult, returnRate);
@@ -32,30 +32,30 @@ class App {
 
   // 로또 구입 금액 입력
   async inputPurchaseAmount() {
-    const input = await MissionUtils.Console.readLineAsync(
+    const INPUT = await MissionUtils.Console.readLineAsync(
       '구입 금액을 입력해 주세요.'
     );
-    const amount = Number(input);
-    if (Number.isNaN(amount) || amount % 1000 !== 0) {
+    const AMOUNT = Number(INPUT);
+    if (Number.isNaN(AMOUNT) || AMOUNT % 1000 !== 0) {
       throw new Error(
         '[ERROR] 로또 구입 금액은 1,000원 단위로 입력해야 합니다.'
       );
     }
-    return amount;
+    return AMOUNT;
   }
 
   // 로또 구입 금액에 따라 티켓 생성
   generateLottoTickets(amount) {
-    const tickets = [];
-    const ticketCount = amount / 1000;
+    const TICKETS = [];
+    const TICKET_COUNT = amount / 1000;
 
-    for (let i = 0; i < ticketCount; i++) {
+    for (let i = 0; i < TICKET_COUNT; i++) {
       let ticket = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       ticket = this.sortTicketNumbers(ticket);
-      tickets.push(ticket);
+      TICKETS.push(ticket);
     }
 
-    return tickets;
+    return TICKETS;
   }
 
   // 로또 번호 오름차순으로 정렬
@@ -68,18 +68,18 @@ class App {
     let winningLotto;
     while (true) {
       try {
-        const input = await MissionUtils.Console.readLineAsync(
+        const INPUT = await MissionUtils.Console.readLineAsync(
           '당첨 번호 6개를 입력해 주세요.'
         );
-        const winningNumbers = input
-          .split(',')
-          .map((num) => Number(num.trim()));
+        const WINNING_NUMBERS = INPUT.split(',').map((num) =>
+          Number(num.trim())
+        );
 
-        if (winningNumbers.some(isNaN)) {
+        if (WINNING_NUMBERS.some(isNaN)) {
           throw new Error('[ERROR] 당첨 번호는 숫자로 입력해야 합니다.');
         }
 
-        winningLotto = new Lotto(winningNumbers);
+        winningLotto = new Lotto(WINNING_NUMBERS);
 
         break; // 입력값이 모든 조건을 만족하면 무한루프를 빠져나감
       } catch (error) {
@@ -96,10 +96,10 @@ class App {
     let bonusNumber;
     while (true) {
       try {
-        const input = await MissionUtils.Console.readLineAsync(
+        const INPUT = await MissionUtils.Console.readLineAsync(
           '보너스 번호 1개를 입력해 주세요.'
         );
-        bonusNumber = Number(input);
+        bonusNumber = Number(INPUT);
 
         if (isNaN(bonusNumber)) {
           throw new Error('[ERROR] 보너스 번호는 숫자로 입력해야 합니다.');
@@ -127,10 +127,10 @@ class App {
   }
 
   // 당첨 결과 계산
-  calculateWinning(tickets, winningLotto, bonusNumber) {
+  calculateWinning(TICKETS, winningLotto, bonusNumber) {
     let winningResult = new WinningResult();
 
-    for (let ticket of tickets) {
+    for (let ticket of TICKETS) {
       let count = 0;
       let isBonusMatched = false;
 
