@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { MissionUtils } from '@woowacourse/mission-utils';
 import App from '../src/App.js';
 import * as Statistics from '../src/utils/Statistics.js';

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Lotto from '../src/model/Lotto.js';
 import { Place } from '../src/utils/Statistics.js';
 

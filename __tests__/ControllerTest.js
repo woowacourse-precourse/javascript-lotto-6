@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../src/model/Lotto.js';
 import LottoController from '../src/controller/LottoController.js';
