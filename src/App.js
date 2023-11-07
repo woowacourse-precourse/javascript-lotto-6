@@ -1,6 +1,6 @@
-import View from './utils/View.js';
-import Validation from './utils/Validation.js';
-import CONSTANTS from './constants/Constants';
+import view from './utils/view.js';
+import validation from './utils/validation.js';
+import CONSTANTS from './constants/Constants.js';
 
 class App {
   constructor() {
@@ -8,8 +8,9 @@ class App {
   }
 
   async setPurchaseAmount() {
-    this.purchaseAmount = await View.readPurchaseAmount();
-    Validation.isValidInputPurchaseAmount(this.purchaseAmount);
+    this.purchaseAmount = await view.readPurchaseAmount();
+
+    validation.isValidInputPurchaseAmount(this.purchaseAmount);
   }
 
   async play() {

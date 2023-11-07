@@ -1,9 +1,11 @@
 const ERROR = Object.freeze({
+  EMPTY_INPUT: '입력 값이 없습니다. 값을 입력해주세요',
+
   INPUT_PURCHASE_AMOUNT: {
     INVALID_FORMAT: '로또 구매 금액에는 숫자만 입력할 수 있습니다.',
+    INVALID_PRICE_RANGE:
+      '로또는 최소 1,000원부터 최대 100,000원까지 구매할 수 있습니다.',
     INVALID_PRICE_UNIT: '로또 구입 금액은 1,000원 단위여야 합니다.',
-    LESS_THAN_MINIMUM_PRICE: '로또는 최소 1,000원부터 구매할 수 있습니다.',
-    MORE_THAN_MAXIMUM_PRICE: '로또는 최대 100,000원까지 구매할 수 있습니다.',
   },
 
   INPUT_WINNING_NUMBERS: {
