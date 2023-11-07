@@ -1,4 +1,5 @@
 import ERROR_MESSAGES from "./constants/ErrorMessage.js";
+import LOTTO_MESSAGES from "./constants/LottoMessages.js";
 
 class Lotto {
   #numbers;
@@ -9,15 +10,19 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) throw new Error(ERROR_MESSAGES.IS_LOTTO_COUNT);
+    if (numbers.length !== LOTTO_MESSAGES.MAX_LOTTO_COUNT)
+      throw new Error(ERROR_MESSAGES.IS_LOTTO_COUNT);
 
     numbers.map((number) => {
       if (isNaN(number)) throw new Error(ERROR_MESSAGES.IS_LOTTO_NUMBER);
-      if (number < 1 || number > 45)
+      if (
+        number < LOTTO_MESSAGES.MIN_LOTTO_NUMBER ||
+        number > LOTTO_MESSAGES.MAX_LOTTO_NUMBER
+      )
         throw new Error(ERROR_MESSAGES.IS_LOTTO_RANGE);
     });
-
-    if (new Set(numbers).size !== 6)
+    
+    if (new Set(numbers).size !== LOTTO_MESSAGES.MAX_LOTTO_COUNT)
       throw new Error(ERROR_MESSAGES.IS_DUPLICATION);
   }
 
