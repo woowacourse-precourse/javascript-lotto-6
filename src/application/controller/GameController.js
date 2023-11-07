@@ -11,6 +11,7 @@ class GameController {
     this.outputView = new OutputView();
     this.randomNumberGenerator = new RandomNumberGenerator();
     this.gameMessageGenerator = new GameMessageGenerator();
+    this.gameCalculator = null;
   }
 
   async start() {
@@ -32,8 +33,8 @@ class GameController {
     // 보너스 번호 유저인풋 얻기
     const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber(WINNING_NUMBERS);
     // 발급받은 로또번호 어레이, 당첨번호, 보너스 번호 이용해서 게임 계산하기
-    const GAME_CALCULATOR = new GameCalculator(PURCHASE_LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
-    const WINNING_RESULT = GAME_CALCULATOR.calculate();
+    this.gameCalculator = new GameCalculator(PURCHASE_LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
+    const WINNING_RESULT = this.gameCalculator.calculate();
     // 계산된 객체이용해서 게임 결과 메시지 만들기
     const WINNING_RESULT_MESSAGE = this.gameMessageGenerator.getResultMessage(
       WINNING_RESULT,

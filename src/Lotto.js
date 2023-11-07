@@ -13,21 +13,21 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
 
-    const UNIQUE_NUMBERS = new Set(numbers);
+    const UNIQUE_NUMBER_SET = new Set(numbers);
 
-    if (UNIQUE_NUMBERS.size !== numbers.length) {
+    if (UNIQUE_NUMBER_SET.size !== numbers.length) {
       throw new Error('[ERROR] 숫자가 중복됩니다.');
     }
   }
 
   // TODO: 추가 기능 구현
 
-  get lottoNumbers() {
+  get lotto() {
     return this.#numbers;
   }
 
-  getResultForEachLotto(bonusNumber, winningNumber) {
-    const LOTTO_CALCULATOR = new LottoCalculator(this.lottoNumbers, bonusNumber, winningNumber);
+  getResultPerLotto(bonusNumber, winningNumbers) {
+    const LOTTO_CALCULATOR = new LottoCalculator(this.lotto, bonusNumber, winningNumbers);
     return LOTTO_CALCULATOR.calculate();
   }
 }

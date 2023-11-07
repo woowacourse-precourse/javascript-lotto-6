@@ -2,44 +2,41 @@ import Lotto from './Lotto.js';
 import { OTHERS, NUMBER } from './utils/constants.js';
 
 class GameCalculator {
-  constructor(lottoNumberArray, winningNumbers, bonusNumber) {
-    this.lottoNumberArray = lottoNumberArray;
+  constructor(purchaseLottos, winningNumbers, bonusNumber) {
+    this.purchaseLottos = purchaseLottos;
     this.winningNumbers = winningNumbers;
     this.bonusNumber = bonusNumber;
-    this.objForResult = { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+    this.winngingResult = { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
     this.lotto = null;
   }
 
   calculate() {
-    this.lottoNumberArray.forEach((lotto) => {
+    this.purchaseLottos.forEach((lotto) => {
       this.lotto = new Lotto(lotto);
-      const RESULT_PER_LOTTO = this.lotto.getResultForEachLotto(
-        this.bonusNumber,
-        this.winningNumbers
-      );
+      const RESULT_PER_LOTTO = this.lotto.getResultPerLotto(this.bonusNumber, this.winningNumbers);
 
       if (RESULT_PER_LOTTO === 3) {
-        this.objForResult[NUMBER.three] += 1;
+        this.winngingResult[NUMBER.three] += 1;
       }
 
       if (RESULT_PER_LOTTO === 4) {
-        this.objForResult[NUMBER.four] += 1;
+        this.winngingResult[NUMBER.four] += 1;
       }
 
       if (RESULT_PER_LOTTO === 5) {
-        this.objForResult[NUMBER.five] += 1;
+        this.winngingResult[NUMBER.five] += 1;
       }
 
       if (RESULT_PER_LOTTO === OTHERS.bonusNumber) {
-        this.objForResult[NUMBER.six] += 1;
+        this.winngingResult[NUMBER.six] += 1;
       }
 
       if (RESULT_PER_LOTTO === 6) {
-        this.objForResult[NUMBER.seven] += 1;
+        this.winngingResult[NUMBER.seven] += 1;
       }
     });
 
-    return this.objForResult;
+    return this.winngingResult;
   }
 }
 

@@ -41,8 +41,6 @@ export const ERROR_MESSAGE = Object.freeze({
 
 export const NUMBER = Object.freeze({
   purchaseMoneyDivisor: 1000,
-  zero: 0,
-  lotto: 6,
   three: '3',
   four: '4',
   five: '5',

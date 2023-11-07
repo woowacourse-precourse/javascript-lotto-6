@@ -11,15 +11,15 @@ class GameMessageGenerator {
     return PURCHASE_LOTTOS_MESSAGES;
   }
 
-  getResultMessage(gameResultObj, purchaseMoney) {
+  getResultMessage(winningResult, purchaseMoney) {
     let totalPrize = 0;
     const RESULT_MESSAGE_ARRAY = [];
-    Object.keys(gameResultObj).forEach((key) => {
+    Object.keys(winningResult).forEach((key) => {
       RESULT_MESSAGE_ARRAY.push(
-        `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${gameResultObj[key]}${OTHERS.numKorean}`
+        `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${winningResult[key]}${OTHERS.numKorean}`
       );
 
-      totalPrize += gameResultObj[key] * PRIZES[key];
+      totalPrize += winningResult[key] * PRIZES[key];
     });
 
     const returnRate = ((totalPrize / purchaseMoney) * 100).toFixed(1);
