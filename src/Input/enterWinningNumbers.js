@@ -8,7 +8,7 @@ async function enterWinningNumbers() {
   const winningNumbersArray = winningNumbers.split(',').map((item) => item.trim());
 
   if (validateWinningNumbers(winningNumbersArray)) {
-    return winningNumbersArray;
+    return winningNumbersArray.map((item) => Number(item));
   }
 
   throw new Error(message.ERROR);
