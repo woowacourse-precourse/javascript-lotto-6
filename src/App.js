@@ -14,6 +14,7 @@ class App {
       await this.checkUserMoneyPossible(userMoney);
 
       const countTicket = this.countLottoTicket(userMoney);
+      const lottoNumbers = await this.showUsersLottoNumbers(countTicket);
       const winNum = await this.getLuckyNumber();
       const bonusNumber = await this.getBonusNumber();
       this.checkBonusNumber(bonusNumber, winNum);
@@ -30,6 +31,18 @@ class App {
     const countTicket = userMoney / 1000;
     MissionUtils.Console.print(`${countTicket}개를 구매했습니다.`);
     return countTicket;
+  }
+  async showUsersLottoNumbers(countTicket) {
+    const lottoNumbers = [];
+    for (let i = 0; i < countTicket; i++) {
+      const lotto = Lotto.generateRandomLotto();
+      lottoNumbers.push(lotto);
+    }
+    const allLottoNumbers = lottoNumbers
+      .map((lotto) => `[${lotto.join(", ")}]`)
+      .join("\n");
+    await MissionUtils.Console.print(allLottoNumbers);
+    return lottoNumbers;
   }
 
   async getLuckyNumber() {
