@@ -33,7 +33,9 @@ class LottoGameController {
 
 	/** 티켓의 발행 로직을 담당한다. */
 	#handlePublishTickets() {
-		// TODO:
+		this.#lottoGame.generateTickets()
+		// TODO: 구입 수량 출력
+		// TODO: 티켓 번호 출력
 	}
 }
 
