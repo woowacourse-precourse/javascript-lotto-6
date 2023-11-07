@@ -6,10 +6,11 @@ const LOTTO_NUMBERS = {
 };
 
 const GRADING_COUNT = {
-  THREE: 3,
-  FOUR: 4,
-  FIVE: 5,
-  SIX: 6,
+  FIFTH_PRIZE: 3,
+  FOURTH_PRIZE: 4,
+  THIRD_PRIZE: 5,
+  SECOND_PRIZE: 5,
+  FIRST_PRIZE: 6,
 };
 
 const LOTTO_PRIZE_MONEY = {
@@ -37,14 +38,7 @@ const ERROR_MESSAGE = {
 };
 
 const WINNER_MESSAGE = {
-  WINLOG: '당첨 통계 \n+ --- \n',
-  WINCOUNT: (count) => `
-    ${GRADING_COUNT.THREE}개 일치 (${LOTTO_PRIZE_MONEY.FIFTH_PRIZE}원) - ${count}개
-    ${GRADING_COUNT.FOUR}개 일치 (${LOTTO_PRIZE_MONEY.FOURTH_PRIZE}원) - ${count}개
-    ${GRADING_COUNT.FIVE}개 일치 (${LOTTO_PRIZE_MONEY.THIRD_PRIZE}원) - ${count}개
-    ${GRADING_COUNT.FIVE}개 일치, 보너스 볼 일치 (${LOTTO_PRIZE_MONEY.SECOND_PRIZE}원) - ${count}개
-    ${GRADING_COUNT.SIX}개 일치 (${LOTTO_PRIZE_MONEY.FIRST_PRIZE}원) - ${count}개
-    `,
+  WINLOG: '\n당첨 통계 \n---',
   PROFIT: (number) => `총 수익률은 ${number}%입니다.`,
 };
 
