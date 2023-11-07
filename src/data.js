@@ -2,6 +2,7 @@ const LOTTO = {
   MIN_NUMBER: 1,
   MAX_NUMBER: 45,
   COUNT_OF_NUMBERS: 6,
+  PRICE: 1000,
 };
 
 const CASH = {
@@ -23,14 +24,6 @@ const TOTAL_REWARD = {
   INITIAL_REWARD: 0,
 };
 
-const rewardCountMap = new Map([
-  [6, 2000000000],
-  ['5 + 1', 30000000],
-  [5, 1500000],
-  [4, 50000],
-  [3, 5000],
-]);
-
 const UTILITY = {
   ZERO: 0,
   EMPTY: '',
@@ -39,6 +32,14 @@ const UTILITY = {
   PERCENT: 100,
   FIXED_DIGITS: 1,
 };
+
+const rewardCountMap = new Map([
+  [6, 2000000000],
+  ['5 + 1', 30000000],
+  [5, 1500000],
+  [4, 50000],
+  [3, 5000],
+]);
 
 const rewardMessageMap = new Map([
   [3, `3개 일치 (5,000원) - `],

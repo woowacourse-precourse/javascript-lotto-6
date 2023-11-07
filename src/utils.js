@@ -15,7 +15,7 @@ function generateRandomNumbers(count) {
   ).sort((a, b) => a - b);
 }
 
-function getMatchCount(lottoNumbers, winningNumbers, bonus) {
+function getMatchCount({ lottoNumbers, winningNumbers, bonusNumber }) {
   let match = MATCH.INITIAL_COUNT;
 
   lottoNumbers.forEach((number) => {
@@ -24,7 +24,7 @@ function getMatchCount(lottoNumbers, winningNumbers, bonus) {
     }
   });
 
-  if (match === MATCH.FIVE && lottoNumbers.includes(bonus)) {
+  if (match === MATCH.FIVE && lottoNumbers.includes(bonusNumber)) {
     return MATCH.SECOND_REWARD_CONDITION;
   }
 

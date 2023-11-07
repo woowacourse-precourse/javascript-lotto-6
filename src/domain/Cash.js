@@ -1,5 +1,5 @@
-import { CASH, UTILITY } from '../data.js';
 import { ERROR } from '../messages.js';
+import { CASH, UTILITY } from '../data.js';
 import { isPositiveInteger } from '../utils.js';
 
 class Cash {
