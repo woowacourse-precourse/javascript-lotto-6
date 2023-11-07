@@ -65,3 +65,5 @@ class MainController {
     Result.printWinningStastics(this.winningInFive);
   }
 }
+
+export default MainController;
