@@ -10,6 +10,7 @@ class ValidatePurchase {
 
   #validate(userInput) {
     this.checkType(userInput);
+    this.checkZero(userInput);
     this.checkWhiteSpace(userInput);
     this.checkUnit(userInput);
   }
@@ -17,6 +18,12 @@ class ValidatePurchase {
   checkType(userInput) {
     if (Number.isNaN(Number(userInput))) {
       throw new Error(errorMessage.purchaseNotNumber);
+    }
+  }
+
+  checkZero(userInput) {
+    if (userInput === '0') {
+      throw new Error(errorMessage.purchaseWrongUnit);
     }
   }
 
