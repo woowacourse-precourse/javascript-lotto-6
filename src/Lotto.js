@@ -99,11 +99,17 @@ class Lotto {
   }
 
   getMatchingNumbersArray(lottoWinningNumberArray) {
-    return this.#numbers.map((myLottoticket) => {
+    return this.#numbers.map((myLottoTicket) => {
       const matchingArray = lottoWinningNumberArray.filter((winningNumber) => {
-        return myLottoticket.includes(winningNumber);
+        return myLottoTicket.includes(winningNumber);
       });
       return matchingArray.length;
+    });
+  }
+
+  getMatchingBonusNumberArray(bonusNumber) {
+    return this.#numbers.map((myLottoTicket) => {
+      return myLottoTicket.includes(bonusNumber) ? 1 : 0;
     });
   }
 }
