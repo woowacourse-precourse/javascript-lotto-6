@@ -52,12 +52,14 @@ export default class Validator {
 
     if (!this.#isValidLotteryNumbersRange(numbers)) {
       const { minNumber, maxNumber } = LOTTO_ROLE;
-      const message = MESSAGE_FORMAT.error(`로또 번호는 ${minNumber}부터 ${maxNumber}까지입니다.`);
+      const message = MESSAGE_FORMAT.error(
+        `로또 번호는 ${minNumber}부터 ${maxNumber}까지의 숫자만 입력해 주세요.`,
+      );
       throw new Error(message);
     }
 
     if (this.#isDuplicatedNumber(numbers)) {
-      const message = MESSAGE_FORMAT.error('로또 번호는 중복되면 안됩니다.');
+      const message = MESSAGE_FORMAT.error('로또 번호들이 중복되지 않게 입력해 주세요.');
       throw new Error(message);
     }
   }
