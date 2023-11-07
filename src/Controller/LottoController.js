@@ -1,5 +1,5 @@
 import View from '../View/View.js';
-import Lotto from '../Lotto.js';
+import Lotto from '../Model/Lotto.js';
 import { Random } from '@woowacourse/mission-utils';
 import Constant from '../Constants/Constant.js';
 
@@ -16,6 +16,7 @@ class LottoController {
     this.#view.printCountOfLotto(countOfLotto);
     const lottoArray = this.#getLottoNumber(countOfLotto);
     this.#view.printLottoNumbers(lottoArray);
+    const goalLotto = await this.#view.getGoalNumber();
   }
 
   #getCountOfLotto(purchaseAmount) {

@@ -9,6 +9,11 @@ const View = {
     return purchaseAmount;
   },
 
+  async getGoalNumber() {
+    const goalNumber = await Console.readLineAsync(SYSTEM_MESSAGE.INPUT_GOAL_NUMBER);
+    return goalNumber;
+  },
+
   printCountOfLotto(countOfLotto) {
     Console.print(`\n${countOfLotto}${SYSTEM_MESSAGE.PURCHASE_LOTTO_MESSAGE}`);
   },
