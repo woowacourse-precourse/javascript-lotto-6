@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { isEmpty, isPositiveInteger } from '../utils.js';
-import ERROR from '../error.js';
+import { ERROR } from '../config.js';
 
 const MESSAGE = Object.freeze({
   AMOUNT_TO_BUY: '구입금액을 입력해 주세요.\n',
