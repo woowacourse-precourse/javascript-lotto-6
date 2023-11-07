@@ -1,6 +1,6 @@
 import Validator from '../Validator/index.js';
 import { MESSAGE } from '../constants/index.js';
-import { Input } from '../View/index.js';
+import { Input, Output } from '../View/index.js';
 import LottoMachine from '../LottoMachine/index.js';
 
 class LottoGame {
@@ -19,6 +19,13 @@ class LottoGame {
       Validator.validatePurchaseAmount(answer),
     );
     this.purchase(Number(amount));
+  }
+
+  async purchase(amount) {
+    const lottos = this.#lottoMachine.buy(amount);
+    Output.log(lottos);
+
+    await this.askWinningNumbers();
   }
 }
 
