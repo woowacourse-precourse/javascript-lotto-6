@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT } from '../constants/constants';
+import { INPUT } from '../constants/constants.js';
 
 const InputView = {
   /**
