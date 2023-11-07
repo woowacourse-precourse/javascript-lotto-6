@@ -42,6 +42,24 @@ const runException = async (input) => {
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
 };
 
+const runBonusException = async (input) => {
+  // given
+  const logSpy = getLogSpy();
+
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+  const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", input];
+
+  mockRandoms([RANDOM_NUMBERS_TO_END]);
+  mockQuestions([INPUT_NUMBERS_TO_END]);
+
+  // when
+  const app = new App();
+  await app.play();
+
+  // then
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+};
+
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
@@ -53,5 +71,13 @@ describe("로또 테스트", () => {
 
   test("구입 금액 테스트 : 1000원 단위", async () => {
     await runException("1234");
+  });
+
+  test("보너스 번호 입력 테스트 : 숫자 범위", async () => {
+    await runException("59");
+  });
+
+  test("보너스 번호 입력 테스트 : 당첨 번호와 중복되지 않는 숫자", async () => {
+    await runException("1");
   });
 });
