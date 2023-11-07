@@ -10,16 +10,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (validateArray.isNumber(numbers)) {
+    if (validateArray.isNotNumber(numbers)) {
       throw new Error(LOTTO_ERROR.isNumber);
     }
-    if (validateArray.isSixSize(numbers)) {
+    if (validateArray.isNotSixSize(numbers)) {
       throw new Error(LOTTO_ERROR.isSixSize);
     }
-    if (validateArray.isOneToFourtyFive(numbers)) {
+    if (validateArray.isNotOneToFourtyFive(numbers)) {
       throw new Error(LOTTO_ERROR.isOneToFourtyFive);
     }
-    if (validateArray.isNotDuplicate(numbers)) {
+    if (validateArray.isDuplicate(numbers)) {
       throw new Error(LOTTO_ERROR.isNotDuplicate);
     }
   }
