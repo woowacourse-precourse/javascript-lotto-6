@@ -77,12 +77,12 @@ class App {
     })
   }
 
-  checkBonusNumber = (bonusNumber) => {
+  checkBonusNumber = (bonusNumber, winningNumbers = this.#winningNumbers) => {
     if(!Number.isInteger(bonusNumber)) throw new Error('[ERROR] : bonus number must be integer.');
 
     if(bonusNumber < 1 || bonusNumber > 45) throw new Error('[ERROR] : bonus number must be in range 1~45');
 
-    this.#winningNumbers.forEach((winningNumber) => {
+    winningNumbers.forEach((winningNumber) => {
       if(winningNumber == bonusNumber) throw new Error('[ERROR] : bonus number can not be duplicated with winning numbers.')
     })
   }
