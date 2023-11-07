@@ -1,14 +1,14 @@
 import LottoUi from '../Ui/LottoUi';
 import { Random } from '@woowacourse/mission-utils';
 
-class LottoMachine {
+const LottoMachine = {
   async purchaseLotto() {
     const purchaseAmount = await LottoUi.inputPurchaseAmount();
     const purchasedLottos = this.drawLottos(purchaseAmount);
     LottoUi.printPurchasedLottos(purchasedLottos);
 
     return purchasedLottos;
-  }
+  },
 
   drawLottos(purchaseAmount) {
     const purchasedLottos = [];
@@ -23,7 +23,7 @@ class LottoMachine {
     LottoUi.alertFinishdrawLottos(numberOfLottos);
 
     return purchasedLottos;
-  }
-}
+  },
+};
 
-export default LottoMachine;
+export default Object.freeze(LottoMachine);
