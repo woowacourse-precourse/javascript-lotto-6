@@ -18,7 +18,7 @@ class LottoController {
 
   // 스택 오버플로우를 방지하기 위해 재귀 대신 while loop를 사용
   async #readPurchaseAmount() {
-    while (!this.#service.getAccount()) {
+    while (!this.#service.getAccount().getPurchaseAmount()) {
       try {
         const purchaseAmount = await this.#view.readPurchaseAmount();
         this.#service.setPurchaseAmount(purchaseAmount);

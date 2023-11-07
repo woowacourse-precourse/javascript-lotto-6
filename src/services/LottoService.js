@@ -6,8 +6,12 @@ import getRandomLottoNumbers from '../utils/random.js';
 class LottoService {
   #account;
 
+  constructor() {
+    this.#account = new Account();
+  }
+
   setPurchaseAmount(purchaseAmount) {
-    this.#account = new Account(purchaseAmount);
+    this.#account.setPurchaseAmount(purchaseAmount);
   }
 
   buyLottos() {

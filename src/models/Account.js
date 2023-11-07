@@ -7,9 +7,8 @@ class Account {
 
   #lottos;
 
-  constructor(purchaseAmount) {
-    this.#validate(purchaseAmount);
-    this.#purchaseAmount = purchaseAmount;
+  constructor() {
+    this.#purchaseAmount = 0;
     this.#lottos = [];
   }
 
@@ -22,12 +21,17 @@ class Account {
     }
   }
 
-  addLotto(lotto) {
-    this.#lottos.push(lotto);
+  setPurchaseAmount(purchaseAmount) {
+    this.#validate(purchaseAmount);
+    this.#purchaseAmount = purchaseAmount;
   }
 
   getPurchaseAmount() {
     return this.#purchaseAmount;
+  }
+
+  addLotto(lotto) {
+    this.#lottos.push(lotto);
   }
 
   getLottos() {
