@@ -24,6 +24,10 @@ class Bonus {
       throw new Error(ERROR_MESSAGES.bonusNumberAlreadyIncluded);
     }
   }
+
+  getBonus() {
+    return this.#number;
+  }
 }
 
 export default Bonus;

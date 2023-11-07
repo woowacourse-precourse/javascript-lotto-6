@@ -2,11 +2,12 @@ import { Console } from "@woowacourse/mission-utils";
 import { GAME_MESSAGES } from "../utils/message";
 
 class LottoGame {
-  constructor(createModel, input, output, myLotto) {
+  constructor(createModel, input, output, myLotto, result) {
     this.CreateModel = createModel;
     this.Input = input;
     this.Output = output;
     this.MyLotto = myLotto;
+    this.Result = result;
   }
 
   // 로또 게임
@@ -14,7 +15,20 @@ class LottoGame {
     const purchase = await this.getLottoPurchaseAmount();
     this.generateLottoTicket(purchase);
     const lottoWinngNumbers = await this.getLottoWinningNumbers();
-    await this.getLottoBonusNumber(lottoWinngNumbers);
+    const lottoBonusNumber = await this.getLottoBonusNumber(lottoWinngNumbers);
+    this.getLottoResult(lottoWinngNumbers, lottoBonusNumber);
+    this.lottoResultPrint(purchase);
+  }
+
+  // 로또 결과 출력하기
+  lottoResultPrint(purchase) {
+    const profitMargin = this.Result.getProfitMargin(purchase.getAmount());
+    this.Output.printWinngStatistics(this.Result, profitMargin);
+  }
+
+  // 로또 당첨 결과 구하기
+  getLottoResult(winngNumbers, bonusNumber) {
+    this.Result.getMatchingNumbersCount(winngNumbers, bonusNumber, this.MyLotto);
   }
 
   // 보너스 번호 입력 받기
@@ -31,7 +45,7 @@ class LottoGame {
       return this.CreateModel.createBonusModel(bonusNumber, lottoWinngNumbers);
     } catch ({ message }) {
       this.Output.printResult(message);
-      // this.getLottoBonusNumber();
+      this.getLottoBonusNumber();
       return null;
     }
   }
@@ -50,8 +64,7 @@ class LottoGame {
       return this.CreateModel.createLottoModel(winngNumbers);
     } catch ({ message }) {
       this.Output.printResult(message);
-      this.getLottoWinningNumbers();
-      return null;
+      return this.getLottoWinningNumbers();
     }
   }
 
@@ -68,20 +81,20 @@ class LottoGame {
   }
 
   // 로또 구매 금액 저장
-  setLottoPurchaseAmount(purchaseAmount) {
+  async setLottoPurchaseAmount(purchaseAmount) {
     try {
-      return this.CreateModel.createPurchaseModel(Number(purchaseAmount));
+      const returnResult = this.CreateModel.createPurchaseModel(Number(purchaseAmount));
+      return returnResult;
     } catch ({ message }) {
       this.Output.printResult(message);
-      this.getLottoPurchaseAmount();
-      return null;
+      return this.getLottoPurchaseAmount();
     }
   }
 
   // 로또 발행하기
   generateLottoTicket(purchase) {
     const lottoTicketCount = purchase.getLottoTicketCount();
-    this.Output.printResult(lottoTicketCount + GAME_MESSAGES.lottoTicketCount);
+    this.Output.printResultNewLine(lottoTicketCount + GAME_MESSAGES.lottoTicketCount);
     this.MyLotto.buyLottoTicket(lottoTicketCount);
   }
 }
