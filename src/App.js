@@ -16,6 +16,7 @@ class App {
       const ticketList = game.buy(this.#money);
       await this.#inputWinningNumbers();
       game.setWinningNumbers(this.#winningNumbers, this.#bonusNumbers);
+      game.checkTicket(ticketList);
       game.announceResults(ticketList);
     } catch (error) {
       Console.print(error.message);
