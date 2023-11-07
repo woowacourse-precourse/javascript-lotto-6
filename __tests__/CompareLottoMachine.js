@@ -1,4 +1,35 @@
 import CompareLottoMachine from '../src/CompareLottoMachine.js';
+import { LOTTO_PRIZE } from '../src/constants/constant.js';
+
+const resultFormmater = (fifth, fourth, third, second, first) => {
+  return [
+    {
+      matchCriteria: LOTTO_PRIZE.FIFTH.MATCH_CRITERIA,
+      matchedNumber: fifth,
+      prize: LOTTO_PRIZE.FIFTH.PRIZE,
+    },
+    {
+      matchCriteria: LOTTO_PRIZE.FOURTH.MATCH_CRITERIA,
+      matchedNumber: fourth,
+      prize: LOTTO_PRIZE.FOURTH.PRIZE,
+    },
+    {
+      matchCriteria: LOTTO_PRIZE.THIRD.MATCH_CRITERIA,
+      matchedNumber: third,
+      prize: LOTTO_PRIZE.THIRD.PRIZE,
+    },
+    {
+      matchCriteria: LOTTO_PRIZE.SECOND.MATCH_CRITERIA,
+      matchedNumber: second,
+      prize: LOTTO_PRIZE.SECOND.PRIZE,
+    },
+    {
+      matchCriteria: LOTTO_PRIZE.FIRST.MATCH_CRITERIA,
+      matchedNumber: first,
+      prize: LOTTO_PRIZE.FIRST.PRIZE,
+    },
+  ];
+};
 
 describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
   const winnigNumbers = '1,2,3,4,5,6';
@@ -17,13 +48,7 @@ describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
     const result = compareLottoMachine.compareLottoNumbers(userNumbers);
 
     // then
-    expect(result).toEqual([
-      { matchCriteria: 3, matchedNumber: 3, prize: 5000 },
-      { matchCriteria: 4, matchedNumber: 0, prize: 50000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 1500000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 30000000 },
-      { matchCriteria: 6, matchedNumber: 0, prize: 2000000000 },
-    ]);
+    expect(result).toEqual(resultFormmater(3, 0, 0, 0, 0));
   });
 
   test('50,000원 2개 당첨시 결과 테스트', () => {
@@ -37,13 +62,7 @@ describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
     const result = compareLottoMachine.compareLottoNumbers(userNumbers);
 
     // then
-    expect(result).toEqual([
-      { matchCriteria: 3, matchedNumber: 0, prize: 5000 },
-      { matchCriteria: 4, matchedNumber: 2, prize: 50000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 1500000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 30000000 },
-      { matchCriteria: 6, matchedNumber: 0, prize: 2000000000 },
-    ]);
+    expect(result).toEqual(resultFormmater(0, 2, 0, 0, 0));
   });
 
   test('1,500,000원 4개 당첨시 결과 테스트', () => {
@@ -59,13 +78,7 @@ describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
     const result = compareLottoMachine.compareLottoNumbers(userNumbers);
 
     // then
-    expect(result).toEqual([
-      { matchCriteria: 3, matchedNumber: 0, prize: 5000 },
-      { matchCriteria: 4, matchedNumber: 0, prize: 50000 },
-      { matchCriteria: 5, matchedNumber: 4, prize: 1500000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 30000000 },
-      { matchCriteria: 6, matchedNumber: 0, prize: 2000000000 },
-    ]);
+    expect(result).toEqual(resultFormmater(0, 0, 4, 0, 0));
   });
 
   test('30,000,000원 2개 당첨시 결과 테스트', () => {
@@ -83,13 +96,7 @@ describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
     const result = compareLottoMachine.compareLottoNumbers(userNumbers);
 
     // then
-    expect(result).toEqual([
-      { matchCriteria: 3, matchedNumber: 0, prize: 5000 },
-      { matchCriteria: 4, matchedNumber: 0, prize: 50000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 1500000 },
-      { matchCriteria: 5, matchedNumber: 2, prize: 30000000 },
-      { matchCriteria: 6, matchedNumber: 0, prize: 2000000000 },
-    ]);
+    expect(result).toEqual(resultFormmater(0, 0, 0, 2, 0));
   });
 
   test('2,000,000,000원 1개 당첨시 결과 테스트', () => {
@@ -105,13 +112,7 @@ describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
     const result = compareLottoMachine.compareLottoNumbers(userNumbers);
 
     // then
-    expect(result).toEqual([
-      { matchCriteria: 3, matchedNumber: 0, prize: 5000 },
-      { matchCriteria: 4, matchedNumber: 0, prize: 50000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 1500000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 30000000 },
-      { matchCriteria: 6, matchedNumber: 1, prize: 2000000000 },
-    ]);
+    expect(result).toEqual(resultFormmater(0, 0, 0, 0, 1));
   });
 
   test('5,000원 1개, 50,000원 2개, 1,500,000 1개 테스트', () => {
@@ -128,13 +129,7 @@ describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
     const result = compareLottoMachine.compareLottoNumbers(userNumbers);
 
     // then
-    expect(result).toEqual([
-      { matchCriteria: 3, matchedNumber: 1, prize: 5000 },
-      { matchCriteria: 4, matchedNumber: 2, prize: 50000 },
-      { matchCriteria: 5, matchedNumber: 1, prize: 1500000 },
-      { matchCriteria: 5, matchedNumber: 0, prize: 30000000 },
-      { matchCriteria: 6, matchedNumber: 0, prize: 2000000000 },
-    ]);
+    expect(result).toEqual(resultFormmater(1, 2, 1, 0, 0));
   });
 
   test('1,500,000 3개, 30,000,000원 2개, 2,000,000,000원 1개 테스트', () => {
@@ -153,12 +148,6 @@ describe('compareLottoMachine.compareLottoNumbers 테스트', () => {
     const result = compareLottoMachine.compareLottoNumbers(userNumbers);
 
     // then
-    expect(result).toEqual([
-      { matchCriteria: 3, matchedNumber: 0, prize: 5000 },
-      { matchCriteria: 4, matchedNumber: 0, prize: 50000 },
-      { matchCriteria: 5, matchedNumber: 3, prize: 1500000 },
-      { matchCriteria: 5, matchedNumber: 2, prize: 30000000 },
-      { matchCriteria: 6, matchedNumber: 1, prize: 2000000000 },
-    ]);
+    expect(result).toEqual(resultFormmater(0, 0, 3, 2, 1));
   });
 });

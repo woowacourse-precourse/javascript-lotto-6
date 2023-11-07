@@ -1,5 +1,6 @@
 import Lotto from './Lotto.js';
 import lottoRandomNumberGenerator from './util/lottoRandomNumberGenerator.js';
+import { LOTTO_PRICE_UNIT } from './constants/constant.js';
 
 class LottoMachine {
   generateLotto(lottoPrice) {
@@ -12,7 +13,8 @@ class LottoMachine {
   }
 
   #generateSingleLotto() {
-    return new Lotto(this.#generatorRandomNumber()).getAscendingNumber();
+    const randomNumbers = this.#generatorRandomNumber();
+    return new Lotto(randomNumbers).getAscendingNumber();
   }
 
   #generatorRandomNumber() {
@@ -20,7 +22,7 @@ class LottoMachine {
   }
 
   #calculateQuantity(lottoPrice) {
-    return Number(lottoPrice) / 1000;
+    return Number(lottoPrice) / LOTTO_PRICE_UNIT;
   }
 }
 

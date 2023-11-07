@@ -1,21 +1,23 @@
+import { LOTTO_PRICE } from '../constants/constant.js';
+import { ERROR_MESSAGE } from '../constants/message.js';
 import commonValidator from './commonValidator.js';
 
 const lottoPriceValidator = {
   currencyAmount(price) {
-    if (Number(price) % 1000 !== 0) {
-      throw new Error('[ERROR] 1,000원 단위로 입력해주세요');
+    if (Number(price) % LOTTO_PRICE.CURRENCY_AMOUNT !== 0) {
+      throw new Error(ERROR_MESSAGE.CURRENCY_AMOUNT);
     }
   },
 
   maximumLimitPrice(price) {
-    if (Number(price) > 2000000000) {
-      throw new Error('[ERROR] 금액이 너무 큽니다.');
+    if (Number(price) > LOTTO_PRICE.MAXIMUM) {
+      throw new Error(ERROR_MESSAGE.MAXIMUM_LIMIT);
     }
   },
 
   minimumLimitPrice(price) {
-    if (Number(price) < 1000) {
-      throw new Error('[ERROR] 1,000원 이상부터 구매가 가능합니다.');
+    if (Number(price) < LOTTO_PRICE.CURRENCY_AMOUNT) {
+      throw new Error(ERROR_MESSAGE.MINIMUM_LIMIT);
     }
   },
 

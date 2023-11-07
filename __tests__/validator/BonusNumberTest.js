@@ -1,3 +1,4 @@
+import { LOTTO_NUMBER } from '../../src/constants/constant.js';
 import bonusNumberValidator from '../../src/validator/bonusNumberValidator.js';
 import commonValidator from '../../src/validator/commonValidator.js';
 
@@ -20,20 +21,20 @@ describe('보너스 번호 테스트', () => {
   });
 
   describe('commonValidator.checkLottoNumberRange 범위 테스트', () => {
-    const MAX = 45;
-    const MIN = 1;
-
     test.each([['40'], ['45'], ['7']])('올바른 보너스 번호 범위 테스트', (input) => {
       expect(() => {
         commonValidator.checkLottoNumberRange(input);
       }).not.toThrow();
     });
 
-    test.each([['0'], [MIN - 1], [MAX + 1]])('잘못된 보너스번호 범위 테스트', (input) => {
-      expect(() => {
-        commonValidator.checkLottoNumberRange(input);
-      }).toThrow();
-    });
+    test.each([['0'], [LOTTO_NUMBER.MIN - 1], [LOTTO_NUMBER.MAX + 1]])(
+      '잘못된 보너스번호 범위 테스트',
+      (input) => {
+        expect(() => {
+          commonValidator.checkLottoNumberRange(input);
+        }).toThrow();
+      }
+    );
   });
 
   describe('bonusNumberValidator.checkDuplicate 보너스 번호가 당첨 번호와 중복된 경우 테스트', () => {

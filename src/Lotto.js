@@ -1,3 +1,5 @@
+import { LOTTO_NUMBER } from './constants/constant.js';
+import { ERROR_MESSAGE } from './constants/message.js';
 import commonValidator from './validator/commonValidator.js';
 
 class Lotto {
@@ -9,15 +11,15 @@ class Lotto {
   }
 
   #validate(numbers) {
-    this.#validateSixLength(numbers);
+    this.#validateLottoNumberLength(numbers);
     this.#validateDuplicated(numbers);
     this.#validateRangeNumber(numbers);
     this.#validateNumberType(numbers);
   }
 
-  #validateSixLength(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+  #validateLottoNumberLength(numbers) {
+    if (numbers.length !== LOTTO_NUMBER.LENGTH) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NUMBER_LENGTH);
     }
   }
 

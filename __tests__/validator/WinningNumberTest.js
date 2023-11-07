@@ -1,4 +1,5 @@
-import winnigNumberValidator from '../../src/validator/winningNumberValidator';
+import { LOTTO_NUMBER } from '../../src/constants/constant.js';
+import winnigNumberValidator from '../../src/validator/winningNumberValidator.js';
 
 describe('당첨 번호 테스트', () => {
   describe('winnigNumberValidator.numberOfLottoLitmit 당첨번호 개수 제한 테스트', () => {
@@ -60,9 +61,6 @@ describe('당첨 번호 테스트', () => {
   });
 
   describe('winnigNumberValidator.checkLottoNumberRange 당첨번호 범위 테스트', () => {
-    const MIN = 1;
-    const MAX = 45;
-
     test.each([
       [
         ['1', '2', '3', '4', '5', '6'],
@@ -76,8 +74,8 @@ describe('당첨 번호 테스트', () => {
 
     test.each([
       [
-        ['1', '2', '3', '4', '5', `${MAX + 1}`],
-        ['1', '5', '12', '24', '35', `${MIN - 1}`],
+        ['1', '2', '3', '4', '5', `${LOTTO_NUMBER.MAX + 1}`],
+        ['1', '5', '12', '24', '35', `${LOTTO_NUMBER.MIN - 1}`],
       ],
     ])('당첨번호 6개가 중 범위 밖의 숫자가 있는 경우 테스트', (input) => {
       expect(() => {

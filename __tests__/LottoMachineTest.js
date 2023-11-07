@@ -1,4 +1,5 @@
 import LottoMacine from '../src/LottoMachine';
+import { LOTTO_NUMBER } from '../src/constants/constant';
 import lottoRandomNumberGenerator from '../src/util/lottoRandomNumberGenerator.js';
 
 describe('lottoMachine.generateLotto 테스트', () => {
@@ -19,19 +20,15 @@ describe('lottoMachine.generateLotto 테스트', () => {
   });
 
   test('randomNumber의 번호 개수, 최소값 및 최대값 테스트', () => {
-    // given
-    const MIN = 1;
-    const MAX = 45;
-    const COUNT = 6;
-
     // when
     const randomNumber = lottoRandomNumberGenerator.generate();
 
     // then
-    expect(randomNumber).toHaveLength(COUNT);
+    expect(randomNumber).toHaveLength(LOTTO_NUMBER.LENGTH);
     randomNumber.forEach(
       (number) =>
-        expect(number).toBeGreaterThanOrEqual(MIN) && expect(number).toBeLessThanOrEqual(MAX)
+        expect(number).toBeGreaterThanOrEqual(LOTTO_NUMBER.MIN) &&
+        expect(number).toBeLessThanOrEqual(LOTTO_NUMBER.MAX)
     );
   });
 });

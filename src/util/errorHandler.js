@@ -20,7 +20,7 @@ const checkValidate = async (input, validation) => {
     validation(input);
     return true;
   } catch (error) {
-    Console.print(`[ERROR] ${error}`);
+    Console.print(error.message);
     return false;
   }
 };

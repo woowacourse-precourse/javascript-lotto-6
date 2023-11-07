@@ -1,3 +1,5 @@
+import { LOTTO_PRIZE } from './constants/constant.js';
+
 class CompareLottoMachine {
   #winningNumbers;
   #bonusNumber;
@@ -17,22 +19,24 @@ class CompareLottoMachine {
   }
 
   #filterMatchedNumbers(matchedLottos) {
-    const result = Array.from({ length: 5 }).fill(0);
+    const result = Array.from({ length: Object.keys(LOTTO_PRIZE).length }).fill(0);
+    const { FIFTH, FOURTH, THIRD, SECOND, FIRST } = LOTTO_PRIZE;
+
     matchedLottos.forEach(([matchedCount, hasBonus]) => {
-      if (matchedCount < 3) return;
-      if (matchedCount === 3) result[0] += 1;
-      if (matchedCount === 4) result[1] += 1;
-      if (matchedCount === 5 && !hasBonus) result[2] += 1;
-      if (matchedCount === 5 && hasBonus) result[3] += 1;
-      if (matchedCount === 6) result[4] += 1;
+      if (matchedCount === FIFTH.MATCH_CRITERIA) result[FIFTH.INDEX] += 1;
+      if (matchedCount === FOURTH.MATCH_CRITERIA) result[FOURTH.INDEX] += 1;
+      if (matchedCount === THIRD.MATCH_CRITERIA && !hasBonus) result[THIRD.INDEX] += 1;
+      if (matchedCount === SECOND.MATCH_CRITERIA && hasBonus) result[SECOND.INDEX] += 1;
+      if (matchedCount === FIRST.MATCH_CRITERIA) result[FIRST.INDEX] += 1;
     });
 
     return result;
   }
 
   #formatMatchedNumbers(filterdMatchedNumbers) {
-    const prizeList = [5000, 50000, 1500000, 30000000, 2000000000];
-    const matchCriteriaList = [3, 4, 5, 5, 6];
+    const prizeList = Object.values(LOTTO_PRIZE).map((item) => item.PRIZE);
+    const matchCriteriaList = Object.values(LOTTO_PRIZE).map((item) => item.MATCH_CRITERIA);
+
     const result = prizeList.map((prize, index) => ({
       prize,
       matchCriteria: matchCriteriaList[index],

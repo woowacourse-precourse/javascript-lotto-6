@@ -1,12 +1,9 @@
 import { Random } from '@woowacourse/mission-utils';
-
-const MIN = 1;
-const MAX = 45;
-const LENGTH = 6;
+import { LOTTO_NUMBER } from '../constants/constant.js';
 
 const lottoRandomNumberGenerator = {
   generate() {
-    return Random.pickUniqueNumbersInRange(MIN, MAX, LENGTH);
+    return Random.pickUniqueNumbersInRange(LOTTO_NUMBER.MIN, LOTTO_NUMBER.MAX, LOTTO_NUMBER.LENGTH);
   },
 };
 

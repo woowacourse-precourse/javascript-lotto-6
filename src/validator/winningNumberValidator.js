@@ -1,9 +1,11 @@
+import { LOTTO_NUMBER } from '../constants/constant.js';
+import { ERROR_MESSAGE } from '../constants/message.js';
 import commonValidator from './commonValidator.js';
 
 const winnigNumberValidator = {
   numberOfLottoLitmit(splitedWinnigNumbers) {
-    if (splitedWinnigNumbers.length !== 6) {
-      throw new Error('[ERROR] 쉼표(,)를 기준으로 6자리를 입력해주세요');
+    if (splitedWinnigNumbers.length !== LOTTO_NUMBER.LENGTH) {
+      throw new Error(ERROR_MESSAGE.NUMBER_OF_LOTTO_LIMIT);
     }
   },
 

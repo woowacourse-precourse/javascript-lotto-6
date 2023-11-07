@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import roundAndFormatWithComma from '../util/roundAndFormatWithComma.js';
+import { OUPUT_STATISTICS_MESSAGE } from '../constants/message.js';
 
 const OutputView = {
   printTotalLottos(lottos) {
@@ -25,7 +26,7 @@ const OutputView = {
     const prizeMessages = OutputView.formatPrizeMessages(statistics);
     const profitRateMessage = OutputView.formatProfitRate(profitRate);
 
-    OutputView.print(`\n당첨 통계\n---`);
+    OutputView.print(OUPUT_STATISTICS_MESSAGE);
     OutputView.print(prizeMessages);
     OutputView.print(profitRateMessage);
   },
