@@ -104,7 +104,7 @@ class LottoGame {
 
     const profitRate = (totalProfit / this.#purchasedAmount) * 100;
 
-    return profitRate.toFixed(1);
+    return Number(profitRate.toFixed(1));
   }
 
   printWinner() {
@@ -114,7 +114,12 @@ class LottoGame {
         `${message} - ${this.#rank[`${this.getRankName(index)}Place`]}개`
       );
     });
-    Console.print(`총 수익률은 ${this.calculateProfitRate()}%입니다.`);
+
+    const totalProfitRate = this.calculateProfitRate().toLocaleString("ko-KR", {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
+    Console.print(`총 수익률은 ${totalProfitRate}%입니다.`);
   }
 }
 

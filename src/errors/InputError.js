@@ -1,5 +1,4 @@
-import { ERRORS } from "../utils/constants";
-import { LOTTO_GAME_RULE } from "../utils/constants";
+import { ERRORS, LOTTO_GAME_RULE } from "../utils/constants.js";
 
 class InputError {
   static checkEmpty(input) {
