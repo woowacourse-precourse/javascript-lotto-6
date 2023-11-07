@@ -20,12 +20,12 @@ class Game {
   #validateWinningNumbers(winningNumbers) {
     Validation.validateInputHasCommas(winningNumbers);
 
-    const winningNumbersArray = this.#parseWinningNumbers(winningNumbers);
+    const parsedWinningNumbers = this.#parseWinningNumbers(winningNumbers);
 
-    Validation.validateInputDuplicate(winningNumbersArray);
-    Validation.validateInputLength(winningNumbersArray, 6);
+    Validation.validateInputDuplicate(parsedWinningNumbers);
+    Validation.validateInputLength(parsedWinningNumbers, 6);
 
-    winningNumbersArray.forEach((number) => {
+    parsedWinningNumbers.forEach((number) => {
       Validation.validateInputNumber(number);
       Validation.validateInputOutOfLottoRange(number);
     });
@@ -50,24 +50,26 @@ class Game {
     this.#bonusNumber = bonusNumber;
   }
 
-  generateRandomLottoNumbers() {
+  createLottoNumbers() {
     return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
-  generateSingleLottoTicket() {
-    const numbers = this.generateRandomLottoNumbers();
+  createSingleLottoTicket() {
+    const numbers = this.createLottoNumbers();
     return new Lotto(numbers.sort((a, b) => a - b));
   }
 
-  purchaseLottoTickets(user) {
-    const tickets = Array.from({ length: user.getMoney() / 1000 }).map(() => {
-      return this.generateSingleLottoTicket();
+  purchaseLottoTickets() {
+    const ticketCount = user.getMoney() / 1000;
+
+    const tickets = Array.from({ length: ticketCount }).map(() => {
+      return this.createSingleLottoTicket();
     });
 
-    user.setTickets(tickets);
+    return tickets;
   }
 
-  calculateWinningResult(tickets) {
+  calculateTotalWinningResults(tickets) {
     const results = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
     tickets.forEach((ticket) => {

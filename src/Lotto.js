@@ -19,7 +19,7 @@ class Lotto {
     Console.print(`[${this.#numbers.join(', ')}]`);
   }
 
-  calculateLottoWinning(winningNumbers, bonusNumber) {
+  calculateLottoResult(winningNumbers, bonusNumber) {
     const matchNumberCount =
       12 - new Set([...this.#numbers, ...winningNumbers]).size;
 
