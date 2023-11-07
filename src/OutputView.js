@@ -21,6 +21,10 @@ const OutputView = {
     }
   },
 
+  printProfitRate(profitRate) {
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  },
+
   printErrorMessage(message) {
     Console.print(`${message}\n`);
   },
