@@ -4,9 +4,11 @@ import Lotto from "./Lotto.js";
 class App {
   async play() {
     let lottoAmount = 0;
+
+    Console.print("구입금액을 입력해 주세요.");
     do {
       try {
-        lottoAmount = await Console.readLineAsync("구입금액을 입력해 주세요.");
+        lottoAmount = await Console.readLineAsync();
 
         if (isNaN(lottoAmount)) {
           throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
@@ -23,7 +25,12 @@ class App {
 
     Console.print(`${lottoList.length}개를 구매했습니다.`);
     for (const lotto of lottoList) {
-      Console.print(lotto.getLottoNumbers().sort((a, b) => a - b));
+      Console.print(
+        `[${lotto
+          .getLottoNumbers()
+          .sort((a, b) => a - b)
+          .join(", ")}]`
+      );
     }
 
     const winningNumber = (
@@ -65,7 +72,7 @@ class App {
       switch (matchingCount) {
         case 6:
           result.n6++;
-          return;
+          break;
         case 5:
           result.n5++;
           if (matchingNumbers.includes(bonusNumber)) {
@@ -91,7 +98,7 @@ class App {
       n4: 50000,
       n5: 1500000,
       n5b: 30000000,
-      n6: 200000000,
+      n6: 2000000000,
     };
 
     let totalPrize = 0;
@@ -108,19 +115,23 @@ class App {
         case "n4":
         case "n5":
         case "n6":
-          Console.print(`${key}개 일치 (${prize}원 - ${count}개)`);
+          Console.print(
+            `${key.charAt(1)}개 일치 (${prize.toLocaleString()}원) - ${count}개`
+          );
           totalPrize += count * prize;
           break;
         case "n5b":
           Console.print(
-            `${key}개 일치, 보너스 불 일치 (${prize}원 - ${count}개)`
+            `${key.charAt(
+              1
+            )}개 일치, 보너스 볼 일치 (${prize.toLocaleString()}원) - ${count}개`
           );
           totalPrize += count * prize;
           break;
       }
     }
 
-    const returnRate = ((totalPrize - lottoAmount) / lottoAmount) * 100;
+    const returnRate = (totalPrize / lottoAmount) * 100;
 
     Console.print(`총 수익률은 ${returnRate.toFixed(1)}%입니다.`);
   }
