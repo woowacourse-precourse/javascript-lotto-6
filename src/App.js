@@ -139,12 +139,17 @@ class App {
     lottos.forEach((lotto) => {
       const matchCount = this.matchNumberCount(lotto, winningNumbers);
 
-      if (matchCount === 3) winningRank.fifth += 1;
-      if (matchCount === 4) winningRank.fourth += 1;
-      if (matchCount === 5) winningRank.third += 1;
-      if (matchCount === 5 && lotto.includes(bonusNumber))
-        winningRank.second += 1;
-      if (matchCount === 6) winningRank.first += 1;
+      if (matchCount === 3) {
+        winningRank.fifth += 1;
+      } else if (matchCount === 4) {
+        winningRank.fourth += 1;
+      } else if (matchCount === 5) {
+        lotto.includes(bonusNumber)
+          ? (winningRank.second += 1)
+          : (winningRank.third += 1);
+      } else if (matchCount === 6) {
+        winningRank.first += 1;
+      }
     });
 
     return winningRank;
