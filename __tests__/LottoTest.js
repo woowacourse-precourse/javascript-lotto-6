@@ -32,3 +32,26 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 });
+
+describe('Lotto 메서드 테스트', () => {
+  const otherLotto = [1, 2, 3, 8, 11, 15];
+  let lotto;
+
+  beforeEach(() => {
+    lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+  });
+
+  it('countMatchedNumbers 메서드가 일치하는 숫자의 수를 반환', () => {
+    expect(lotto.countMatchedNumbers(otherLotto)).toBe(3);
+  });
+
+  it('isBonusNumberMatch 메서드가 보너스 숫자와 일치하는 경우 true를 반환', () => {
+    const bonusNumber = 1;
+    expect(lotto.isBonusNumberMatch(otherLotto, bonusNumber)).toBe(true);
+  });
+
+  it('isBonusNumberMatch 메서드가 보너스 숫자와 일치하지 않는 경우 false를 반환', () => {
+    const bonusNumber = 12;
+    expect(lotto.isBonusNumberMatch(otherLotto, bonusNumber)).toBe(false);
+  });
+});
