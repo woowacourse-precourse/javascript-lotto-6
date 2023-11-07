@@ -37,7 +37,7 @@ export function validateBonusInput(input, winningInfo) {
     throw new Error('[ERROR] 당첨 번호에 이미 있는 숫자입니다.');
   }
 
-  if (numbers.some((num) => num < 1 || num > 45)) {
+  if (input < 1 || input > 45) {
     throw new Error('[ERROR] 1~45 사이의 숫자여야 합니다.');
   }
 }
