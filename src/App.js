@@ -1,8 +1,8 @@
-import INPUT from './view/Input.js';
-import OUTPUT from './view/Output.js';
-import COMPUTER from './Computer.js';
-import AppError from './constant/AppError.js';
-import CALCULATE from './Calculate.js';
+import INPUT from '../view/Input.js';
+import OUTPUT from '../view/Output.js';
+import COMPUTER from '../src/Computer.js';
+import AppError from '../constant/AppError.js';
+import CALCULATE from '../src/Calculate.js';
 
 class App {
   constructor() {
