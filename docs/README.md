@@ -1,45 +1,45 @@
 ### 미션 - 로또 기능목록
 
-# 구입금액 입력 InputMoney#inputMoney()
+# 구입금액 입력 - InputMoney#inputMoney()
 - [x]구입금액을 입력 받는다.
 - [x]1000으로 나눈 몫을 이용하여 구매 장수를 반환한다.
 - [x]try-catch를 이용하여 "[ERROR]"로 시작하는 에러 메시지를 출력하고 return 재귀함수를 이용하여 해당 부분부터 입력을 다시 받는다.
 
-# 구입금액 유효성 검증 MoneyValidity#inputMoneyValidity()
+# 구입금액 유효성 검증 - MoneyValidity#inputMoneyValidity()
 - [x]1000으로 나누어 나머지가 존재하면 예외로 판단한다.
 
-# 구매장수 출력 PrintNUmberOfLotto#printNumberOfLotto()
+# 구매장수 출력 - PrintNUmberOfLotto#printNumberOfLotto()
 - [x]반환한 값을 이용하여 'x개를 구매했습니다'를 출력한다. 
 
-# 번호 출력 PrintPurchasedLottoResult#result()
+# 번호 출력 - PrintPurchasedLottoResult#result()
 - [x]아래 과정들을 구매 장수만큼 반복한다.
 - [x]pickUniqueNumbersInRange를 통해 1부터 45까지 6개의 랜덤 번호를 뽑는다.
 - [x]로또 번호는 sort()함수를 이용하여 오름차순으로 정렬한다.
 - [x]출력한다.
 - [x]배열을 생성해 push함수를 이용해 저장한다.
 
-# 로또 번호 입력 InputLotto#lotto()
+# 로또 번호 입력 - InputLotto#lotto()
 - [x]로또 번호를 ,로 구분하여 입력받는다.
 - [x]split을 이용하여 배열화 한다.
 - [x]map(Number)을 이용하여 문자열을 숫자로 바꾼다.
 - [x]try-catch를 이용하여 "[ERROR]"로 시작하는 에러 메시지를 출력하고 return 재귀함수를 이용하여 해당 부분부터 입력을 다시 받는다.
 
-# 로또 번호 유효성 검증 Lotto
-- [x]numbers의 값이 privatefield이므로 값이 undefined가 되어 property나 method를 이용하지 못한다. 이러한 것을 방지하기위하여 sort()를 이용하여 값을 설정해준다.
-- [x]당첨 번호가 6자리인지 확인한다.
-- [x]숫자인지 확인한다.
-- [x]1에서 45 사이 숫자인지 확인한다.
-- [x]중복되는 수가 없는지 확인한다.
+# 로또 번호 유효성 검증 - Lotto
+- [x]numbers의 값이 privatefield이므로 값이 undefined가 되어 property나 method를 이용하지 못한다. 이러한 것을 방지하기위하여 sort()를 이용하여 값을 설정해준다. - Lotto#numbersSort()
+- [x]당첨 번호가 6자리인지 확인한다. - Lotto#validate()
+- [x]숫자인지 확인한다. - Lotto#numberNaNvalidity()
+- [x]1에서 45 사이 숫자인지 확인한다. - Lotto#numberRangeValidity()
+- [x]중복되는 수가 없는지 확인한다. - Lotto#numberDuplicateValidity()
 
-# 보너스 번호 입력 InputBonusNumber#bonusNumber()
+# 보너스 번호 입력 - InputBonusNumber#bonusNumber()
 - [x]보너스 번호를 입력받는다.
 - [x]Number를 이용하여 받은 문자열을 숫자로 바꾼다.
-- []try-catch를 이용하여 "[ERROR]"로 시작하는 에러 메시지를 출력하고 return 재귀함수를 이용하여 해당 부분부터 입력을 다시 받는다.
+- [x]try-catch를 이용하여 "[ERROR]"로 시작하는 에러 메시지를 출력하고 return 재귀함수를 이용하여 해당 부분부터 입력을 다시 받는다.
 
-# 보너스 번호 유효성 검증
-- []숫자인지 확인한다.
-- []1에서 45 사이 숫자인지 확인한다.
-- []앞에 입력받은 당첨 번호와의 중복이 없는지 확인한다.
+# 보너스 번호 유효성 검증 - BonusNumberValidity#inputNumberValidity()
+- [x]숫자인지 확인한다. - BonusNumberValidity#numberNaNvalidity()
+- [x]1에서 45 사이 숫자인지 확인한다. - BonusNumberValidity#numberRangeValidity()
+- [x]앞에 입력받은 당첨 번호와의 중복이 없는지 확인한다. - BonusNumberValidity#numberDuplicateValidity()
 
 # 로또 번호 일치 검증
 - []길이 5, 값 0으로 채워진 등수 배열을 생성한다.

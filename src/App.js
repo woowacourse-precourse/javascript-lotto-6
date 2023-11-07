@@ -24,7 +24,9 @@ class App {
 
     const LOTTO_NUMBER_ARRAY = await INPUT_LOTTO.lotto();
 
-    const BONUS_NUMBER = await INPUT_BONUS_NUMBER.bonusNumber();
+    const BONUS_NUMBER = await INPUT_BONUS_NUMBER.bonusNumber(
+      LOTTO_NUMBER_ARRAY
+    );
   }
 }
 
