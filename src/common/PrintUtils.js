@@ -8,3 +8,7 @@ export const printTiceks = (money) => {
   Console.print(`${lottoTicket}${OUTPUT_MESSAGE.BUY_COUNT}`);
   return lottoTicket;
 };
+// 7. 로또 구매 결과 출력
+export const printLottos = (lottos) => {
+  lottos.map((el) => Console.print("[" + el.join(", ") + "]"));
+};

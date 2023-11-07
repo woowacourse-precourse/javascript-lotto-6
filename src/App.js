@@ -1,10 +1,17 @@
 import { Random } from "@woowacourse/mission-utils";
+import {
+  inputMoney,
+  inputWinning,
+  inputBonusNumber,
+} from "./common/InputUtils.js";
 
 class App {
   async play() {
     const money = await inputMoney();
     let lottoTicket = printTiceks(money);
     const lottos = repeatMakeLotto(lottoTicket);
+
+    printLottos(lottos);
   }
 }
 
