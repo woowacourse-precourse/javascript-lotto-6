@@ -7,17 +7,28 @@ class Purchase {
 
     constructor(amount) {
         this.#count = amount / 1000;
+        this.lottoArray = [];
+    }
+
+    get getCount() {
+        return this.#count;
     }
 
     async public() {
-        let lottoArray = [];
         this.printCount;
         for (let i = 0; i < this.#count; i++) {
-            const numbers = await Random.pickUniqueNumbersInRange(1, 45, 6);
-            const lotto = this.onSortNumbers(numbers);
-
-            lottoArray.push(lotto);
+            await this.getLotto(this.lottoArray);
         }
+
+        return this.lottoArray;
+    }
+
+    async getLotto(lottoArray) {
+        const numbers = await Random.pickUniqueNumbersInRange(1, 45, 6);
+        const lotto = this.onSortNumbers(numbers);
+
+        lottoArray.push(lotto);
+
 
         return lottoArray;
     }
