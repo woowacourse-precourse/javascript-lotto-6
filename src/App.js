@@ -4,7 +4,9 @@ class App {
   async play() {
     const lotteryController = new LotteryController();
     await lotteryController.setup();
-    await lotteryController.drawLottoNumbers();
+    await lotteryController.checkWinningLottery();
+    await lotteryController.getTotalPrize();
+    await lotteryController.showResult();
   }
 }
 

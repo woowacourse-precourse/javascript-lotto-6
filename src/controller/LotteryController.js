@@ -1,17 +1,18 @@
-import Lotto from "../models/Lotto.js";
 import InputView from "../views/InputView.js";
 import OutputView from "../views/OutputView.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import LottoModel from "../models/LottoModel.js";
 
 class LotteryController {
   lotteryTickets;
   winningNums;
   bonusNum;
   totalAmountInput;
+  winningTickets;
 
   constructor() {
     this.totalPrize = 0;
-    this.lotto = null;
+    this.winningTickets = [];
+    this.lottoModel = new LottoModel();
     this.inputView = new InputView();
     this.outputView = new OutputView();
   }
@@ -19,53 +20,24 @@ class LotteryController {
   async setup() {
     this.totalAmountInput = await this.inputView.getCostUserInput();
     const lotteryTicketsCount = this.totalAmountInput / 1000;
-    this.outputView.printLotteryTicketsCount(lotteryTicketsCount);
-
-    this.lotteryTickets = await this.outputView.printLotteryTickets(lotteryTicketsCount);
-    this.winningNums = await this.inputView
-      .getWinningNumUserInput()
-      .then((res) => res.split(",").map(Number));
-
-    this.lotto = new Lotto(this.winningNums);
-
-    this.bonusNum = Number(await this.inputView.getBonusNumUserInput());
+    this.lotteryTickets = this.lottoModel.setLotteryTickets(lotteryTicketsCount);
+    this.outputView.printLotteryTickets(this.lotteryTickets);
+    this.winningNums = await this.inputView.getWinningNumUserInput();
+    [this.bonusNum] = await this.inputView.getBonusNumUserInput(); //<<-- 구조 분해 할당
   }
 
-  async drawLottoNumbers() {
-    const results = [];
-
-    for (let i = 0; i < this.lotteryTickets.length; i++) {
-      const lotteryTicket = this.lotteryTickets[i];
-      let isBonus = false;
-
-      const winningNumsInTicket = lotteryTicket.filter((ele) => this.winningNums.includes(ele));
-
-      if (winningNumsInTicket.length < 3) continue;
-
-      if (winningNumsInTicket.length === 5) {
-        isBonus = lotteryTicket.includes(this.bonusNum);
-      }
-
-      const prize = this.getLotteryPrize(winningNumsInTicket.length, isBonus);
-      this.totalPrize += prize;
-
-      results.push({ count: winningNumsInTicket.length, prize: prize });
-      this.showResult(results);
-    }
+  async checkWinningLottery() {
+    this.lottoModel.checkWinningNums(this.lotteryTickets, this.winningNums);
+    this.winningTickets = this.lottoModel.checkBonusNum(this.bonusNum);
   }
 
-  getLotteryPrize(winNumsCount, isBonus = false) {
-    if (isBonus) return 30000000;
-    if (winNumsCount === 3) return 5000;
-    if (winNumsCount === 4) return 50000;
-    if (winNumsCount === 5) return 1500000;
-    if (winNumsCount === 6) return 2000000000;
-    return 0;
+  getTotalPrize() {
+    this.totalPrize = this.lottoModel.getTotalPrize(this.winningTickets);
   }
 
-  showResult(results) {
+  showResult() {
     const lottoROI = ((this.totalPrize / this.totalAmountInput) * 100).toFixed(1);
-    this.outputView.printLotteryResult(results, lottoROI);
+    this.outputView.printLotteryResult(this.winningTickets, lottoROI);
   }
 }
 

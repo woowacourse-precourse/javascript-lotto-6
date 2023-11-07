@@ -7,18 +7,20 @@ export const LOTTO_INPUT_MESSAGE = {
 export const LOTTO_OUTPUT_MESSAGE = {
   numOfLotto: "개를 구매했습니다.",
   winningStatistics: "당첨 통계\n---",
-  matches: (prize) => {
-    return `${PRICE[prize].count} (${PRICE[prize].prize}) - `;
-  },
 };
 
-const PRICE = {
-  5000: { prize: "5,000원", count: "3개 일치" },
-  50000: { prize: "50,000원", count: "4개 일치" },
-  1500000: { prize: "1,500,000원", count: "5개 일치" },
-  30000000: { prize: "30,000,000원", count: "5개 일치, 보너스 볼 일치" },
-  2000000000: { prize: "2,000,000,000원", count: "6개 일치" },
-};
+export const PRICE = [
+  { prize: 5000, count: 3, message: "3개 일치 (5,000원) - ", isBonus: false },
+  { prize: 50000, count: 4, message: "4개 일치 (50,000원) - ", isBonus: false },
+  { prize: 1500000, count: 5, message: "5개 일치 (1,500,000원) - ", isBonus: false },
+  {
+    prize: 30000000,
+    count: "bonus",
+    message: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+    isBonus: true,
+  },
+  { prize: 2000000000, count: 6, message: "6개 일치 (2,000,000,000원) - ", isBonus: false },
+];
 
 export const ERROR_MESSAGE = {
   isNotNumber: "[ERROR] 숫자를 입력해주세요.",

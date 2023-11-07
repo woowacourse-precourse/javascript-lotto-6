@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE } from "../constants.js";
+import { ERROR_MESSAGE } from "./constants.js";
 
 class Lotto {
   #numbers;
@@ -18,7 +18,7 @@ class Lotto {
   }
 
   validateIsDuplicated(numbers) {
-    if (new Set(numbers) < numbers.length) {
+    if (new Set(numbers).size < numbers.length) {
       throw new Error(ERROR_MESSAGE.isDuplicatedNumber);
     }
   }
@@ -39,8 +39,6 @@ class Lotto {
       }
     }
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

@@ -1,33 +1,57 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { LOTTO_INPUT_MESSAGE, ERROR_MESSAGE } from "../constants.js";
+import Lotto from "../Lotto.js";
+const { Console } = MissionUtils;
 
 class InputView {
+  lotto;
+
   async getCostUserInput() {
-    const userInput = await MissionUtils.Console.readLineAsync(LOTTO_INPUT_MESSAGE.inputCost);
-    this.validateIsInvaildUnit(userInput);
-    return userInput;
+    try {
+      const userInput = await MissionUtils.Console.readLineAsync(LOTTO_INPUT_MESSAGE.inputCost);
+      this.validateIsInvaildUnit(userInput);
+
+      if (userInput % 1000 !== 0) {
+        throw new Error(ERROR_MESSAGE.isInvaildUnit);
+      }
+
+      return userInput;
+    } catch (e) {
+      Console.print(e.message);
+      return this.getCostUserInput();
+    }
   }
 
   async getWinningNumUserInput() {
-    const userInputWinningNum = await MissionUtils.Console.readLineAsync(
-      LOTTO_INPUT_MESSAGE.inputWinnigNum
-    );
+    try {
+      const winningNums = await MissionUtils.Console.readLineAsync(
+        LOTTO_INPUT_MESSAGE.inputWinnigNum
+      ).then((res) => res.split(",").map(Number));
 
-    return userInputWinningNum;
+      this.lotto = new Lotto(winningNums);
+      return winningNums;
+    } catch (e) {
+      Console.print(e.message);
+      return this.getWinningNumUserInput();
+    }
   }
 
   async getBonusNumUserInput() {
-    const userInputBonusNum = await MissionUtils.Console.readLineAsync(
-      LOTTO_INPUT_MESSAGE.inputBonusNum
-    );
-    return userInputBonusNum;
-  }
+    try {
+      const bonusNum = await MissionUtils.Console.readLineAsync(
+        LOTTO_INPUT_MESSAGE.inputBonusNum
+      ).then((res) => res.split(",").map(Number));
+      this.lotto.validateIsNotNumber(bonusNum);
+      this.lotto.validateIsIncorrecRage(bonusNum);
 
-  validateIsInvaildUnit(userInput) {
-    if (userInput % 1000 !== 0 || userInput < 1000) {
-      throw new Error(ERROR_MESSAGE.isInvaildUnit);
+      return bonusNum;
+    } catch (e) {
+      Console.print(e.message);
+      return this.getBonusNumUserInput();
     }
   }
+
+  validateIsInvaildUnit(userInput) {}
 }
 
 export default InputView;

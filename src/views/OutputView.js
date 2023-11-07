@@ -1,34 +1,26 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_OUTPUT_MESSAGE } from "../constants.js";
-import Lotto from "../models/Lotto.js";
+import { LOTTO_OUTPUT_MESSAGE, PRICE } from "../constants.js";
+const { Console } = MissionUtils;
 
 class OutputView {
-  async printLotteryTicketsCount(lotteryTicketsCount) {
-    await MissionUtils.Console.print(`${lotteryTicketsCount}${LOTTO_OUTPUT_MESSAGE.numOfLotto}`);
+  printLotteryTickets(lotteryTickets) {
+    MissionUtils.Console.print(`${lotteryTickets.length}${LOTTO_OUTPUT_MESSAGE.numOfLotto}`);
+    lotteryTickets.map((ele) => Console.print(`[${ele.join(", ")}]`));
   }
 
-  async printLotteryTickets(lotteryTicketsCount) {
-    const lotteryTickets = [];
-
-    for (let i = 0; i < lotteryTicketsCount; i++) {
-      let lottoNumbers = await MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-
-      await MissionUtils.Console.print(`[${lottoNumbers.join(", ")}]`);
-
-      lotteryTickets.push(lottoNumbers);
-    }
-
-    return lotteryTickets;
-  }
-
-  printLotteryResult(lotteryResult, lottoROI) {
+  printLotteryResult(winningTickets, lottoROI) {
     MissionUtils.Console.print(LOTTO_OUTPUT_MESSAGE.winningStatistics);
 
-    lotteryResult.map((ele) => {
-      MissionUtils.Console.print(`${LOTTO_OUTPUT_MESSAGE.matches(ele.prize)}${ele.count}개`);
-      MissionUtils.Console.print(`총 수익률은 ${lottoROI}%입니다.`);
+    PRICE.map((ele) => {
+      Console.print(`${ele.message}${winningTickets[ele.count]["count"]}개`);
     });
+    for (const key in winningTickets) {
+    }
+
+    MissionUtils.Console.print(`총 수익률은 ${lottoROI}%입니다.`);
   }
 }
 
 export default OutputView;
+
+// "3개 일치 (5,000원) - 1개"
