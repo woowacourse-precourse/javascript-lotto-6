@@ -1,10 +1,11 @@
 import Lotto from "../../Lotto.js";
-import { GAME_RULE, PRIZE_TO_REWARD } from "../Constants.js";
+import { ERROR_MESSAGE, GAME_RULE, PRIZE_TO_REWARD } from "../Constants.js";
 
 class ReferenceLotto extends Lotto {
   #bonus;
 
   calcResult(lottoBundleItems) {
+    if (!this.#bonus) throw new Error(ERROR_MESSAGE.INSTANCE_NOT_INITIALIZED);
     const prizeMap = this.#calcPrizeMap(lottoBundleItems);
     const winRate = this.#calcWinRate(prizeMap);
     return { prizeMap, winRate };
@@ -32,6 +33,7 @@ class ReferenceLotto extends Lotto {
   }
 
   set bonus(bonus) {
+    if (this.#bonus) throw new Error(ERROR_MESSAGE.FIELD_ALREADY_INITIALIZED);
     this.validateBonusNumber(bonus);
     this.#bonus = bonus;
   }
