@@ -6,7 +6,7 @@ import {
   PERCENTAGE,
   RANKING,
 } from './constants/conditions.js';
-import RANKING_PRIZE from './constants/rankingPrize.js';
+import PRIZE from './constants/rankingPrize.js';
 
 const IS_BOUNS_INDEX = 1;
 
@@ -25,9 +25,9 @@ export default class LottoGame {
 
   getWinningResult() {
     const matchCountList = this.#countMatchingNumbers();
-    const rankingList = this.#transformRankingList(matchCountList);
-    const rateOfReturn = this.#getRateOfReturn(rankingList);
-    return { rankingList, rateOfReturn };
+    const matchingTable = this.#transformMatchingTable(matchCountList);
+    const rateOfReturn = this.#getRateOfReturn(matchingTable);
+    return { matchingTable, rateOfReturn };
   }
 
   #countMatchingNumbers() {
@@ -52,19 +52,25 @@ export default class LottoGame {
     matchCountList.push(count);
   }
 
-  #transformRankingList(matchCountList) {
-    const rankingList = [];
+  #transformMatchingTable(matchCountList) {
+    const table = {
+      three: 0,
+      four: 0,
+      fiveNotBonus: 0,
+      fiveAndBonus: 0,
+      all: 0,
+    };
     matchCountList.forEach((count) => {
       if (Array.isArray(count)) {
-        rankingList.push(
-          count[IS_BOUNS_INDEX] ? RANKING.second : RANKING.third,
-        );
+        count[IS_BOUNS_INDEX]
+          ? (table.fiveAndBonus += 1)
+          : (table.fiveNotBonus += 1);
       }
-      if (count === MATCH_COUNTS.three) rankingList.push(RANKING.fifth);
-      if (count === MATCH_COUNTS.four) rankingList.push(RANKING.fourth);
-      if (count === MATCH_COUNTS.all) rankingList.push(RANKING.first);
+      if (count === MATCH_COUNTS.three) table.three += 1;
+      if (count === MATCH_COUNTS.four) table.four += 1;
+      if (count === MATCH_COUNTS.all) table.all += 1;
     });
-    return rankingList;
+    return table;
   }
 
   #calculateRateOfReturn(income) {
@@ -73,10 +79,10 @@ export default class LottoGame {
     return +`${Math.round(`${rateOfReturn}e+2`)}e-2`;
   }
 
-  #getRateOfReturn(rankingList) {
+  #getRateOfReturn(matchingTable) {
     let income = DEFAULT_NUM;
-    rankingList.forEach((ranking) => {
-      income += RANKING_PRIZE[ranking];
+    Object.entries(matchingTable).forEach(([key, value]) => {
+      income += PRIZE[key] * value;
     });
     return this.#calculateRateOfReturn(income);
   }

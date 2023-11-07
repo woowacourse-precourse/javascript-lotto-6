@@ -20,12 +20,12 @@ class App {
 
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
-    const { rankingList, rateOfReturn } = this.#getWinningResult(
+    const { matchingTable, rateOfReturn } = this.#getWinningResult(
       purchaseLotto,
       this.#winningLotto.getLotto(),
       this.#bonus.getBonus(),
     );
-    OutputView.printLotteryResultsSummary(rankingList, rateOfReturn);
+    OutputView.printLotteryResultsSummary(matchingTable, rateOfReturn);
   }
 
   async #getPurchaseLotto() {

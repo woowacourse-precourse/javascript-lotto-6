@@ -7,7 +7,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [7, 8, 9, 10, 11, 12],
       bonus: 13,
       expected: {
-        rankingList: [],
+        matchingTable: {
+          three: 0,
+          four: 0,
+          fiveNotBonus: 0,
+          fiveAndBonus: 0,
+          all: 0,
+        },
         rateOfReturn: 0.0,
       },
     },
@@ -19,7 +25,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [13, 14, 15, 16, 17, 18],
       bonus: 19,
       expected: {
-        rankingList: [],
+        matchingTable: {
+          three: 0,
+          four: 0,
+          fiveNotBonus: 0,
+          fiveAndBonus: 0,
+          all: 0,
+        },
         rateOfReturn: 0.0,
       },
     },
@@ -31,7 +43,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [1, 2, 20, 21, 22, 23],
       bonus: 24,
       expected: {
-        rankingList: [],
+        matchingTable: {
+          three: 0,
+          four: 0,
+          fiveNotBonus: 0,
+          fiveAndBonus: 0,
+          all: 0,
+        },
         rateOfReturn: 0.0,
       },
     },
@@ -53,7 +71,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [2, 7, 12, 14, 32, 41],
       bonus: 45,
       expected: {
-        rankingList: [1],
+        matchingTable: {
+          three: 0,
+          four: 0,
+          fiveNotBonus: 0,
+          fiveAndBonus: 0,
+          all: 1,
+        },
         rateOfReturn: 100000000.0,
       },
     },
@@ -75,7 +99,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [2, 7, 12, 14, 32, 43],
       bonus: 41,
       expected: {
-        rankingList: [2],
+        matchingTable: {
+          three: 0,
+          four: 0,
+          fiveNotBonus: 0,
+          fiveAndBonus: 1,
+          all: 0,
+        },
         rateOfReturn: 1500000.0,
       },
     },
@@ -97,7 +127,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [2, 7, 12, 14, 32, 43],
       bonus: 39,
       expected: {
-        rankingList: [3],
+        matchingTable: {
+          three: 0,
+          four: 0,
+          fiveNotBonus: 1,
+          fiveAndBonus: 0,
+          all: 0,
+        },
         rateOfReturn: 75000.0,
       },
     },
@@ -119,7 +155,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [2, 7, 12, 14, 20, 21],
       bonus: 39,
       expected: {
-        rankingList: [4],
+        matchingTable: {
+          three: 0,
+          four: 1,
+          fiveNotBonus: 0,
+          fiveAndBonus: 0,
+          all: 0,
+        },
         rateOfReturn: 2500.0,
       },
     },
@@ -141,7 +183,13 @@ describe('로또 게임 테스트', () => {
       winningLotto: [2, 7, 12, 20, 21, 22],
       bonus: 39,
       expected: {
-        rankingList: [5],
+        matchingTable: {
+          three: 1,
+          four: 0,
+          fiveNotBonus: 0,
+          fiveAndBonus: 0,
+          all: 0,
+        },
         rateOfReturn: 250.0,
       },
     },

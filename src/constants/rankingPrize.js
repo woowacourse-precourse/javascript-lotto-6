@@ -1,11 +1,11 @@
-import { PRIZE_MONEY, RANKING } from './conditions.js';
+import { PRIZE_MONEY } from './conditions.js';
 
-const RANKING_PRIZE = Object.freeze({
-  [RANKING.first]: PRIZE_MONEY.first,
-  [RANKING.second]: PRIZE_MONEY.second,
-  [RANKING.third]: PRIZE_MONEY.third,
-  [RANKING.fourth]: PRIZE_MONEY.fourth,
-  [RANKING.fifth]: PRIZE_MONEY.fifth,
+const PRIZE = Object.freeze({
+  three: PRIZE_MONEY.fifth,
+  four: PRIZE_MONEY.fourth,
+  fiveNotBonus: PRIZE_MONEY.third,
+  fiveAndBonus: PRIZE_MONEY.second,
+  all: PRIZE_MONEY.first,
 });
 
-export default RANKING_PRIZE;
+export default PRIZE;
