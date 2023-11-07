@@ -4,6 +4,7 @@ import {
   LOTTO_NUMBERS_LENGTH,
   LOTTO_PRICE,
 } from './Constants.js';
+import Lotto from './Lotto.js';
 import InputManager from './UI/InputManager.js';
 import OutputManager from './UI/OutputManager.js';
 import { generateRandomNumbers } from './Utils.js';
@@ -41,6 +42,7 @@ class App {
   createLottos(numberOfLottos) {
     for (let i = 0; i < numberOfLottos; i++) {
       const lottoNumbers = this.generateLottoNumbers();
+      this.lottos.push(new Lotto(lottoNumbers));
     }
   }
 
