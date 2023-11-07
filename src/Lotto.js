@@ -9,26 +9,35 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  async start() {
-    this.#validate(this.#numbers);
-    this.bonusNum = await this.getBonusNum();
-    await this.print();
+  async start(validPrice) { 
+    let validNumbers = 0;  
+    validNumbers = this.#validate(this.#numbers); 
+    while(validNumbers === 0) {
+      let sixNum = await Console.readLineAsync("당첨 번호를 다시 입력해 주세요.\n");
+      validNumbers = this.#validate(sixNum);
+    }
+    const validBonusNum = await this.getBonusNum();
+
+    const printOutput = new PrintOutput();
+    const winningArray = await printOutput.calculateWinningDetails(validNumbers, validBonusNum, printOutput.lottoNumSets);
+    await printOutput.printWinningDetails(winningArray);
+    await printOutput.printTotalReturn(winningArray, validPrice);
   }
 
-  #hasDuplicates = (numbers) => {
+  hasDuplicates = (numbers) => {
     const uniqueNumbers = [...new Set(numbers)];
     return numbers.length !== uniqueNumbers.length;
   };
 
   #validate(numbers) {
-    numbers = numbers.split(",").map(Number);
+    numbers = numbers.split(",").map(str => str.trim()).map(Number);
     if (!Array.isArray(numbers))
       throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
     if (numbers.some(num => Number.isNaN(num)))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    if (this.#hasDuplicates(numbers))
+    if (this.hasDuplicates(numbers))
       throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
     if (numbers.some(num => num <= 0 || num >= 46))
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
@@ -38,30 +47,27 @@ class Lotto {
   };
 
   getBonusNum = async () => {
+    let bonusNum;
+    let validBonusNum = 0;
     do {
       try {
-        let bonusNum = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-        bonusNum = this.#validateBonusNum(bonusNum);
+        bonusNum = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+        validBonusNum = this.validateBonusNum(this.#numbers, bonusNum);
       } catch(error) {
         throw new Error(error.message);
       }
-    } while(!bonusNum);
-
-    return bonusNum;
+    } while(validBonusNum === 0);
+    return validBonusNum;
   };
 
-  print = async () => {
-    PrintOutput.calculateWinningDetails(this.sixNum, this.bonusNum);
-    PrintOutput.printWinningDetails();
-    PrintOutput.printTotalReturn();
-  };
-
-  #validateBonusNum(bonusNum) {
-    if (Array.isArray(bonusNum))
+  validateBonusNum(sixNum, bonusNum) {
+    if (bonusNum.includes(","))
       throw new Error("[ERROR] 숫자는 1개만 입력해야 합니다.");
+    sixNum = sixNum.split(",").map(str => str.trim()).map(Number);
+    bonusNum = parseInt(bonusNum);
     if (Number.isNaN(bonusNum))
       throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-    if (this.#numbers.includes(bonusNum))
+    if (sixNum.includes(bonusNum))
       throw new Error("[ERROR] 6개의 당첨 번호 이외의 숫자를 입력해야 합니다.");
     if (bonusNum <= 0 || bonusNum >= 46)
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");

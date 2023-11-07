@@ -6,10 +6,11 @@ import PrintOutput from "./PrintOutput.js";
 class App {
   async play() {
     const validPrice = await this.getPrice();
-    PrintOutput.printLottoNumSet(validPrice);
+    const printOutput = new PrintOutput();
+    await printOutput.printLottoNumSet(validPrice);
     const numbers = await this.getSixNum();
     const lotto = new Lotto(numbers);
-    await lotto.start();
+    await lotto.start(validPrice);
   }
 
   getPrice = async () => {
@@ -27,7 +28,7 @@ class App {
   };
 
   getSixNum = async () => {
-    let sixNum = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    let sixNum = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
     return sixNum;
   };
 }
