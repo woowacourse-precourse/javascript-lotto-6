@@ -17,4 +17,8 @@ export class CustomError extends Error {
   static Lotto(message) {
     return new CustomError(message, '로또 숫자 에러');
   }
+
+  static BonusNumber(message) {
+    return new CustomError(message, '보너스 로또 숫자 에러');
+  }
 }

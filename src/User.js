@@ -50,6 +50,8 @@ export class User {
 
   async #setWinningNumbers(numbers) {
     try {
+      Validator.WinningNumbers.validate(numbers);
+
       this.#winningNumbers = numbers;
     } catch (e) {
       Console.print(`${e.name} ${e.message} `);
@@ -59,6 +61,8 @@ export class User {
 
   async #setBonusNumber(number) {
     try {
+      Validator.BonusNumber.validate(this.#winningNumbers, number);
+
       this.#bonusNumber = number;
     } catch (e) {
       Console.print(`${e.name} ${e.message} `);
