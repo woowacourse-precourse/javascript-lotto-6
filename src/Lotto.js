@@ -24,6 +24,9 @@ class Lotto {
     }
   }
 
+  lottoReturn(numbers) {
+    return numbers;
+  }
 }
 
 export default Lotto;
