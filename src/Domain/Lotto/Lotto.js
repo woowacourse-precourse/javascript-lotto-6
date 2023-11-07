@@ -1,7 +1,7 @@
 import AppError from '../../errors/error.js';
 import CONSTANTS from '../../Lib/constans.js';
 import ERROR from '../../Lib/error.js';
-import { isValidNumber } from '../../Lib/utils.js';
+import { isValidNumber } from './utils.js';
 
 class Lotto {
   #numbers;

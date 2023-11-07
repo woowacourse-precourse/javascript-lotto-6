@@ -14,13 +14,6 @@ export const deepFreeze = (object) => {
 };
 
 /**
- * 주어진 숫자가 1부터 45 사이의 정수인지 확인하는 함수
- */
-export const isValidNumber = (num) => {
-  return Number.isInteger(num) && num >= CONSTANTS.number.min && num <= CONSTANTS.number.max;
-};
-
-/**
  * 입력 메서드를 실행하고, 오류가 발생하면 재시도함
  *
  * @param {function} inputMethod - 사용자 입력을 처리하는 함수

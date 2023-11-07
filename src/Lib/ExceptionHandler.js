@@ -1,7 +1,7 @@
 import AppError from '../errors/error.js';
 import CONSTANTS from './constans.js';
 import ERROR from './error.js';
-import { isValidNumber } from './utils.js';
+import { isValidNumber } from '../Domain/Lotto/utils.js';
 
 class ExceptionHandler {
   /**
