@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGES } from "./constants/Messages";
+import { ERROR_MESSAGES } from "./constants/Messages.js";
 
 //입력받은 값을 검증하고, 해당 값을 가지고 연산을 수행해서 결과값을 도출하는 것을 도메인 로직으로 함.
 class Lotto {
@@ -22,7 +22,9 @@ class Lotto {
   }
 
   printLottoNumber() {
-    MissionUtils.Console.print(this.#numbers.sort((a, b) => a - b));
+    MissionUtils.Console.print(
+      `[${this.#numbers.sort((a, b) => a - b).join(", ")}]`
+    );
   }
 
   compareLottoNumber(winningNumber, bonusNumber) {
