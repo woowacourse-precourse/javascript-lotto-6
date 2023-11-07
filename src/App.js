@@ -24,8 +24,8 @@ class App {
   async lottoNumbers() {
     this.winningNumbers = await UserInput.winningNumbers();
     const lotto = new Lotto(this.winningNumbers);
-    const bonus = await UserInput.bonusNumber();
-    const validateBonus = new ValidateBonus(bonus);
+    this.bonus = await UserInput.bonusNumber();
+    const validateBonus = new ValidateBonus(this.bonus, this.winningNumbers);
   }
 
   printStatistics() {

@@ -9,45 +9,45 @@ class Lotto {
     this.numbersArray = [];
   }
 
-  static numbers(numbers) {
+  static numbersToArray(numbers) {
     return numbers.split(',');
   }
 
   #validate(numbers) {
-    this.numbersArray = Lotto.numbers(numbers);
-    this.checkLength();
-    this.checkType();
-    this.checkRange();
-    this.checkDuplicated();
-    this.checkWhiteSpace();
+    this.numbersArray = Lotto.numbersToArray(numbers);
+    this.checkLength(this.numbersArray);
+    this.checkType(this.numbersArray);
+    this.checkRange(this.numbersArray);
+    this.checkDuplicated(this.numbersArray);
+    this.checkWhiteSpace(this.numbersArray);
   }
 
-  checkLength() {
-    if (this.numbersArray.length !== 6) {
+  checkLength(numbersArray) {
+    if (numbersArray.length !== 6) {
       throw new Error(errorMessage.winningNumbersCount);
     }
   }
 
-  checkType() {
-    if (this.numbersArray.some(number => Number.isNaN(Number(number)))) {
+  checkType(numbersArray) {
+    if (numbersArray.some(number => Number.isNaN(Number(number)))) {
       throw new Error(errorMessage.winningNumbersNotNumber);
     }
   }
 
-  checkRange() {
-    if (this.numbersArray.some(number => Number(number) < 1 || Number(number) > 45)) {
+  checkRange(numbersArray) {
+    if (numbersArray.some(number => Number(number) < 1 || Number(number) > 45)) {
       throw new Error(errorMessage.winningNumbersRange);
     }
   }
 
-  checkDuplicated() {
-    if (new Set(this.numbersArray).size !== 6) {
+  checkDuplicated(numbersArray) {
+    if (new Set(numbersArray).size !== 6) {
       throw new Error(errorMessage.duplicatedWinningNumbers);
     }
   }
 
-  checkWhiteSpace() {
-    if (this.numbersArray.some(number => number.includes(' '))) {
+  checkWhiteSpace(numbersArray) {
+    if (numbersArray.some(number => number.includes(' '))) {
       throw new Error(errorMessage.whiteSpace);
     }
   }
