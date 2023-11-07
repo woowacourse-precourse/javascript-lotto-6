@@ -1,26 +1,28 @@
+import { ERROR_MESSAGE } from '../constant/index.js';
 const bonusNumberInputValidator = {
   format(rawInput) {
     if (rawInput.length === 0) {
-      throw new Error('[ERROR] 보너스 번호를 입력해 주세요.\n');
+      throw new Error(ERROR_MESSAGE.FORMAT_INVALID_BONUS_VALUE);
     }
     if (!/^[0-9]+$/.test(rawInput)) {
-      throw new Error('[ERROR] 1~45범위 사이의 하나의 숫자만 입력해 주세요.\n');
+      throw new Error(ERROR_MESSAGE.FORMAT_INVALID_BONUS_REGEX);
     }
   },
+
   data(bonusNumberRawInput, winningNumberRawInput) {
     const bonusNumberInput = Number(bonusNumberRawInput);
 
     if (Number.isNaN(bonusNumberInput)) {
-      throw new Error('[ERROR] 1~45범위 사이의 하나의 숫자만 입력해 주세요.\n');
+      throw new Error(ERROR_MESSAGE.DATA_NON_BONUS_NUMBER);
     }
     if (bonusNumberInput < 1 || bonusNumberInput > 45) {
-      throw new Error('[ERROR] 1~45범위 사이의 하나의 숫자만 입력해 주세요.\n');
+      throw new Error(ERROR_MESSAGE.DATA_NON_BONUS_NUMBER);
     }
     const winningNumberInput = winningNumberRawInput.split(',').map(Number);
 
     if (winningNumberInput.includes(bonusNumberInput)) {
       throw new Error(
-        `[ERROR] 당첨번호와 중복되지 않는 숫자를 입력해 주세요.\n(당첨번호 : "${winningNumberRawInput}")\n`
+        ERROR_MESSAGE.DATA_NON_BONUS_REPEAT + `"${winningNumberRawInput}")\n`
       );
     }
   },
