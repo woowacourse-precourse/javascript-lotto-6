@@ -1,4 +1,4 @@
-import { Console, PRINT_PURCHASE_COUNT, PRINT_WINNING_STATISTIC } from './Constant';
+import { Console, PRINT_PURCHASE_COUNT, PRINT_WINNING_STATISTIC, TOTAL_REVENUE } from './Constant';
 
 const OutputView = {
   printLottoCount(lottoList) {
@@ -11,7 +11,7 @@ const OutputView = {
 
   printResultStastics(result) {
     Console.print(PRINT_WINNING_STATISTIC);
-
+    Console.print('---');
     Object.keys(result).map(rank => {
       this.getResultState(result, rank);
     });
@@ -59,6 +59,10 @@ const OutputView = {
         Console.print('당첨 내역이 없습니다.');
         break;
     }
+  },
+
+  printRevenueRate(rate) {
+    Console.print(`${TOTAL_REVENUE}${rate}%입니다.`);
   },
 };
 

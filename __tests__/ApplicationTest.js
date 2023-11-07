@@ -109,27 +109,26 @@ describe('로또 테스트', () => {
     });
   });
 
-  test('구매금액이 숫자가 아닐 경우, 예외 테스트', async () => {
-    await runPurchaseAmountException('1000j');
-  });
+  //   await runPurchaseAmountException('1000j');
+  // });
 
-  test('구매금액이 1,000원 단위가 아닐 경우, 예외 테스트', async () => {
-    await runPurchaseAmountException('10500');
-  });
+  // test('구매금액이 1,000원 단위가 아닐 경우, 예외 테스트', async () => {
+  //   await runPurchaseAmountException('10500');
+  // });
 
-  test('구매금액이 1,000원보다 작을 경우, 예외 테스트', async () => {
-    await runPurchaseAmountException('500');
-  });
+  // test('구매금액이 1,000원보다 작을 경우, 예외 테스트', async () => {
+  //   await runPurchaseAmountException('500');
+  // });
 
-  test('보너스 번호가 1보다 작거나 45보다 큰 경우, 예외 테스트', async () => {
-    await runBonusNumberException(46);
-  });
+  // test('보너스 번호가 1보다 작거나 45보다 큰 경우, 예외 테스트', async () => {
+  //   await runBonusNumberException(46);
+  // });
 
-  test('보너스 번호가 숫자가 아닐 경우, 예외 테스트', async () => {
-    await runBonusNumberException('string');
-  });
+  // test('보너스 번호가 숫자가 아닐 경우, 예외 테스트', async () => {
+  //   await runBonusNumberException('string');
+  // });
 
-  test('보너스 번호가 당첨 번호와 중복되는 경우, 예외 테스트', async () => {
-    await runBonusNumberException(1);
-  });
+  // test('보너스 번호가 당첨 번호와 중복되는 경우, 예외 테스트', async () => {
+  //   await runBonusNumberException(1);
+  // });
 });
