@@ -1,12 +1,15 @@
 import { CONVERTER_VAR } from '../constants/constant';
 
+const { comma } = CONVERTER_VAR
+
 const TYPE_CONVERTOR = {
-  stringToArr: (str) => str.split(CONVERTER_VAR.strToArr),
+  strToArr: (str) => str.split(comma),
   strArrToNumArr: (strArr) => strArr.map(str => Number(str)),
   strToNumArr: (str) => {
-    const strArr = this.strToArr(str);
-    return this.strArrToNumArr(strArr);
+    const strArr = str.split(comma);
+    return strArr.map(strEl => Number(strEl));
   },
+  strToNum: (str) => Number(str),
 }
 
 export default TYPE_CONVERTOR;

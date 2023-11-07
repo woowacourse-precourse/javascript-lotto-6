@@ -7,5 +7,5 @@ export const LOTTO_RANGE = {
 }
 
 export const CONVERTER_VAR = {
-  strToArr: ',',
+  comma: ',',
 }
