@@ -11,12 +11,26 @@ class App {
   }
 
   async getLottoMoney(){
-    const MONEY = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    const LOTTO_MONEY = parseInt(MONEY, 10);
-    if(LOTTO_MONEY % 1000 !== 0){
-      throw new Error("[ERROR] 로또 구입 금액은 1000으로 나누어 떨어져야 합니다.");
+    let validData = false;
+    let money;
+
+    while(!validData){
+      try{
+        money = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+        if(isNaN(Number(money))){
+          throw new Error("[ERROR] 로또 구입 금액은 숫자여야 합니다.");
+        }
+
+        if(money % 1000 != 0) { 
+          throw new Error("[ERROR] 로또 구입 금액은 1000으로 나누어져야 합니다."); 
+        }
+
+        validData = true;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
-    return LOTTO_MONEY / 1000;
+    return Number(money) / 1000;
   }
 
   async getLottoObject(LOTTO_NUM){
@@ -28,7 +42,8 @@ class App {
 
     MissionUtils.Console.print(`\n${LOTTO_NUM}개를 구매했습니다.`);
     ARR.forEach(obj => {
-      MissionUtils.Console.print(obj.getNumbers);
+      const LOTTO = obj.getNumbers;
+      MissionUtils.Console.print(`[${LOTTO[0]}, ${LOTTO[1]}, ${LOTTO[2]}, ${LOTTO[3]}, ${LOTTO[4]}, ${LOTTO[5]}]`);
     });
 
     return ARR;
@@ -36,16 +51,20 @@ class App {
 
   async getWinningNum(){
     const WINNING_NUM = await MissionUtils.Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
-    const regex = /^\d+(,\d+){5}$/;
-    if(!regex.test(WINNING_NUM)) throw new Error("[ERROR] 당첨 번호는 숫자,숫자,숫자,숫자,숫자,숫자 의 형태로 입력해야 합니다.");
-
+    if(WINNING_NUM.includes(" ")) { throw new Error("[ERROR] 당첨 번호를 입력할 때, 띄어쓰기를 하면 안 됩니다."); }
+    //const regex = /^\d+(,\d+){5}$/;
+    
+    //if(!regex.test(WINNING_NUM)) { throw new Error("[ERROR] 당첨 번호는 숫자,숫자,숫자,숫자,숫자,숫자 의 형태로 입력해야 합니다."); }
     const WINNING_NUM_ARR = WINNING_NUM.split(',').map(Number);
+    if(WINNING_NUM_ARR.length != 6) throw new Error("[ERROR] 숫자는 6개를 입력하셔야 합니다.");
+
     WINNING_NUM_ARR.forEach(num => {
-      if(num < 1 || num > 45) throw new Error("[ERROR] 당첨 번호는 1 ~ 45 사이로 입력해야 합니다.");
+      if(num < 1 || num > 45 || isNaN(num)) { throw new Error("[ERROR] 당첨 번호는 1 ~ 45 사이로 입력해야 합니다."); }
     });
 
     const UNIQUEARR = [...new Set(WINNING_NUM_ARR)];
-    if(UNIQUEARR.length !== WINNING_NUM_ARR.length) throw new Error("[ERROR] 당첨 번호는 중복되지 않은 숫자로 입력해야 합니다.");
+    if(UNIQUEARR.length !== WINNING_NUM_ARR.length) { throw new Error("[ERROR] 당첨 번호는 중복되지 않은 숫자로 입력해야 합니다."); }
+
     return WINNING_NUM_ARR;
   }
 
@@ -53,7 +72,7 @@ class App {
     const BONUS = await MissionUtils.Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
     const BONUS_NUMBER = parseInt(BONUS, 10);
 
-    if(isNaN(BONUS_NUMBER)) throw new Error("[ERROR] 숫자를 입력해야 합니다.");
+    if(isNaN(BONUS)) throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if(BONUS_NUMBER < 1 || BONUS_NUMBER > 45) throw new Error("[ERROR] 보너스 번호는 1 ~ 45 사이의 숫자입니다.");
     if(WIN_NUM.includes(BONUS_NUMBER))throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복되어서는 안됩니다.");
     
