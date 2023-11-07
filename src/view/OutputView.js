@@ -7,7 +7,8 @@ import getRateOfReturn from '../utils/getRateOfReturn.js';
 const OutputView = {
   printLottosString: (count, lottos) => {
     Console.print(`\n${count}개를 구매했습니다.`);
-    lottos.forEach(lotto => Console.print(lotto.getNumbers()));
+
+    lottos.forEach(lotto => Console.print(`[${lotto.getNumbers().join(', ')}]`));
   },
 
   printWinningStatisticsString: (lottos, winningNumbers, bonusNumber) => {
