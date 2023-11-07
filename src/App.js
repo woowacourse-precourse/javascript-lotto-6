@@ -2,6 +2,7 @@ import Input from './view/Input.js';
 import InputError from './domain/InputError.js';
 import Output from './view/Output.js';
 import LottoMachine from './domain/LottoMachine.js';
+import Statistics from './Statistics.js';
 
 class App {
   async play() {
@@ -20,9 +21,25 @@ class App {
     this.generateLotto(count);
   }
 
-  generateLotto(count) {
+  async generateLotto(count) {
     const lottoList = LottoMachine.generateLotto(count);
     Output.printLottoList(lottoList);
+    await this.getWinningAndBonusNum(lottoList);
+  }
+
+  async getWinningAndBonusNum(lottoList) {
+    const winningNumberStr = await Input.getWinningNumber();
+    const winningNumber = [];
+    winningNumberStr.split(',').map((num) => {
+      winningNumber.push(Number(num));
+    });
+    const bonusNumber = await Input.getBonusNumber();
+
+    this.getStatisticsResult(winningNumber, bonusNumber, lottoList);
+  }
+
+  getStatisticsResult(winningNumber, bonusNumber, lottoList) {
+    LottoMachine.getStatisticsResult(winningNumber, bonusNumber, lottoList);
   }
 }
 

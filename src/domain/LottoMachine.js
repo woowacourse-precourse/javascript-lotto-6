@@ -1,5 +1,6 @@
 import Lotto from '../Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
+import Statistics from '../Statistics.js';
 
 const LottoMachine = {
   async getLottoCount(purchasePrice) {
@@ -14,6 +15,15 @@ const LottoMachine = {
     }
 
     return lottoList;
+  },
+  getStatisticsResult(winningNumber, bonusNumber, lottoList) {
+    const result = [];
+    const statisticsInst = new Statistics(
+      winningNumber,
+      bonusNumber,
+      lottoList
+    );
+    return statisticsInst.calculate(lottoList);
   },
 };
 
