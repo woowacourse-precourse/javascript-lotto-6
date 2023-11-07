@@ -1,3 +1,8 @@
+const COUNT = '개';
+const PERCENT = '%입니다.';
+const HYPHEN = '-';
+const LINE_BREAK = '\n';
+
 const INPUT = Object.freeze({
   price: '구입금액을 입력해 주세요.',
   winning_numbers: '당첨 번호를 입력해 주세요.',
@@ -15,14 +20,12 @@ const ERROR = Object.freeze({
 const OUTPUT = Object.freeze({
   count: '개를 구매했습니다.',
   winning_statistics: '당첨 통계',
-  three_numbers: '3개 일치 (5,000원)',
-  four_numbers: '4개 일치 (50,000원)',
-  five_plus_bonus_numbers: '5개, 보너스 볼 일치 (30,000,000원)',
-  six_numbers: '6개 일치 (2,000,000,000원)',
+  three_match: `3개 일치 (5,000원) ${HYPHEN} `,
+  four_match: `4개 일치 (50,000원) ${HYPHEN} `,
+  five_match: `5개 일치 (1,500,000원) ${HYPHEN} `,
+  five_plus_bonus_match: `5개 일치, 보너스 볼 일치 (30,000,000원) ${HYPHEN} `,
+  six_match: `6개 일치 (2,000,000,000원) ${HYPHEN} `,
+  total_profit_margin: '총 수익률은 ',
 });
 
-const COUNT = '개';
-const HYPHEN = '-';
-const LINE_BREAK = '\n';
-
-export { INPUT, ERROR, OUTPUT, COUNT, HYPHEN, LINE_BREAK };
+export { COUNT, PERCENT, HYPHEN, LINE_BREAK, INPUT, ERROR, OUTPUT };
