@@ -27,7 +27,7 @@ class User {
         validateFormat(amount);
         validateMinimumAmount(amount);
 
-        const lottoCount = Math.floor(amount / 1000);
+        this.#lottoCount = Math.floor(amount / 1000);
         Console.print(`\n${this.#lottoCount}${MESSAGES.output.lottoPurchased}`);
         return this.#lottoCount;
       } catch (error) {

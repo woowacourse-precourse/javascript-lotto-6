@@ -1,7 +1,7 @@
 const input = Object.freeze({
   purchaseAmount: '구입금액을 입력해주세요.\n',
-  winningNumbers: '당첨 번호를 입력해 주세요.\n',
-  bonusNumber: '보너스 번호를 입력해 주세요.\n',
+  winningNumbers: '\n당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 const output = Object.freeze({
@@ -9,7 +9,7 @@ const output = Object.freeze({
 });
 
 const game = Object.freeze({
-  resultTitle: '당첨 통계',
+  resultTitle: '\n당첨 통계',
   separator: '---',
   zeroRevenueRate: '총 수익률은 0%입니다.',
   noWinnning: '\n당첨되지 않았습니다. 다음 기회에 참여해주세요.',
