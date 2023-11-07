@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { GAME_MESSAGE } from './Constants.js';
 import Lotto from './Lotto.js';
 import CompareLotto from './CompareLotto.js';
+import Validator from './Validator.js';
 
 class InputLottoNumber extends CompareLotto {
   constructor(user) {
@@ -17,19 +18,32 @@ class InputLottoNumber extends CompareLotto {
     );
 
     this.winningNumber = inputWinningNumber.split(',').map(Number);
-    const lotto = new Lotto(this.winningNumber);
+    try {
+      const lotto = new Lotto(this.winningNumber);
 
-    this.inputBonusNumber();
+      this.inputBonusNumber(this.winningNumber);
+    } catch (error) {
+      Console.print(error.message);
+
+      return this.inputWinningNumber();
+    }
   }
 
-  async inputBonusNumber() {
+  async inputBonusNumber(winningNumber) {
     const bonusNumber = await Console.readLineAsync(
       GAME_MESSAGE.inputBonusNumber,
     );
-
     this.bonusNumber = Number(bonusNumber);
 
-    super.compareLottoNumber();
+    try {
+      Validator.bonusNumber(bonusNumber, winningNumber);
+
+      super.compareLottoNumber();
+    } catch (error) {
+      Console.print(error.message);
+
+      return this.inputBonusNumber(winningNumber);
+    }
   }
 }
 

@@ -1,10 +1,11 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { GAME_MESSAGE } from './Constants.js';
+import { GAME_MESSAGE, ERROR_MESSAGE } from './Constants.js';
+import Validator from './Validator.js';
 
 class User {
-  constructor(userLotto) {
+  constructor(userLotto, purchaseAmount) {
     this.userLotto = userLotto;
-    this.purchaseAmount = 0;
+    this.purchaseAmount = purchaseAmount;
   }
 
   async inputPurchaseAmount() {
@@ -12,7 +13,13 @@ class User {
       GAME_MESSAGE.purchaseAmount,
     );
 
-    this.purchaseLottoCount(this.purchaseAmount);
+    try {
+      Validator.purchaseAmount(this.purchaseAmount);
+      this.purchaseLottoCount(this.purchaseAmount);
+    } catch (error) {
+      Console.print(error.message);
+      return this.inputPurchaseAmount();
+    }
   }
 
   purchaseLottoCount(purchaseAmount) {

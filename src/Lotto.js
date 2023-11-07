@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from './Constants.js';
+
 class Lotto {
   #numbers;
 
@@ -7,11 +9,20 @@ class Lotto {
   }
 
   #validate(numbers) {
+    if (numbers.some(number => isNaN(number))) {
+      throw new Error(ERROR_MESSAGE.typeError);
+    }
+    if (numbers.some(number => number < 1 || number > 45)) {
+      throw new Error(ERROR_MESSAGE.rangeError);
+    }
+    if (!numbers.toString().includes(',')) {
+      throw new Error(ERROR_MESSAGE.commaError);
+    }
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR_MESSAGE.lottoLengthError);
     }
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error('[ERROR] 중복된 숫자가 없어야 합니다.');
+      throw new Error(ERROR_MESSAGE.duplicationError);
     }
   }
 
