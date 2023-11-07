@@ -5,7 +5,7 @@ const matchSix = Object.freeze({
   message: '6개 일치 (2,000,000,000원) - ',
 });
 
-const matchFiveAndBonus = Object.freeze({
+const matchFiveWithBonus = Object.freeze({
   status: 'matchFiveAndBonus',
   match: 5,
   winningPrize: 30_000_000,
@@ -34,11 +34,11 @@ const marchThree = Object.freeze({
 });
 
 const PRIZE = Object.freeze({
-  marchThree,
-  matchFour,
-  matchFive,
-  matchFiveAndBonus,
-  matchSix,
+  3: marchThree,
+  4: matchFour,
+  5: matchFive,
+  matchFiveAndBonus: matchFiveWithBonus,
+  6: matchSix,
 });
 
 export default PRIZE;

@@ -37,9 +37,16 @@ class View {
     this.#printPurchasedLotto(purchasedLottos);
   }
 
-  printGameResult(prizes) {
+  printGameResult({ prizes, profitRate }) {
     this.#printResultTitle();
     this.#printPrizes(prizes);
+    this.#printProfitRate(profitRate);
+  }
+
+  #printProfitRate(profitRate) {
+    const message = MessageFormat.profitRate(profitRate);
+
+    this.#outputView.print(message);
   }
 
   #printResultTitle() {

@@ -14,6 +14,10 @@ const MessageFormat = {
       .map(([key, { message }]) => `${message}${prizeCount[key] || 0}개`)
       .join('\n');
   },
+
+  profitRate(profitRate) {
+    return `총 수익률은 ${profitRate}%입니다.`;
+  },
 };
 
 export default MessageFormat;

@@ -16,7 +16,8 @@ class LottoGameController {
     const winningLotto = await this.#createWinningLotto();
 
     const prizes = this.#getLottoPrize({ lottos, winningLotto });
-    this.#view.printGameResult(prizes);
+    const profitRate = this.#getProfitRate({ prizes, lottos });
+    this.#view.printGameResult({ prizes, profitRate });
   }
 
   #getLottoPrize({ lottos, winningLotto }) {
@@ -25,6 +26,13 @@ class LottoGameController {
     );
 
     return this.#prizeService.countPrize(prizes);
+  }
+
+  #getProfitRate({ prizes, lottos }) {
+    return this.#prizeService.getProfitRate({
+      prizes,
+      purchaseQuantity: lottos.length,
+    });
   }
 
   async #getLotto() {

@@ -2,11 +2,11 @@ import PRIZE from '../constants/prize.js';
 
 class Prize {
   static prizeMap = new Map([
-    [3, PRIZE.marchThree],
-    [4, PRIZE.matchFour],
-    [5, PRIZE.matchFive],
+    [3, PRIZE[3]],
+    [4, PRIZE[4]],
+    [5, PRIZE[5]],
     ['matchFiveAndBonus', PRIZE.matchFiveAndBonus],
-    [6, PRIZE.matchSix],
+    [6, PRIZE[6]],
   ]);
 
   static #losePrize = 0;
