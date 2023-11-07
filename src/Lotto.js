@@ -10,6 +10,8 @@ class Lotto {
     if (numbers.length !== SIX_NUMBERS) {
       throw new Error(NOT_SIX_NUMBER_LENGTH_ERROR_MESSAGE);
     }
+    if (numbers.some((number) => isNaN(number)))
+      throw new Error(NOT_NUMBER_ERROR_MESSAGE);
   }
 
   // TODO: 추가 기능 구현
