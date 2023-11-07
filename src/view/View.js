@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE_NOTIFICATION } from '../constants/Message.js';
+import { MESSAGE_NOTIFICATION, MESSAGE_RANK_RESULT } from '../constants/Message.js';
 import { isValidBounsNumber, isValidBuyAmount, isValidWinningLotto } from '../utils/Validation.js';
 
 export async function inputBuyAmount() {
@@ -45,4 +45,10 @@ export function printLottoArray(lottos) {
 
 export function printResult() {
   Console.print(MESSAGE_NOTIFICATION.result);
+}
+
+export function printResultDetail(result) {
+  result.forEach((value, index) => {
+    Console.print(Object.values(MESSAGE_RANK_RESULT)[index](value));
+  });
 }

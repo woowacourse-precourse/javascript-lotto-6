@@ -9,6 +9,7 @@ import {
   printBuyLotto,
   printLottoArray,
   printResult,
+  printResultDetail,
 } from '../view/View.js';
 
 export default class LottoGameController {
@@ -24,13 +25,6 @@ export default class LottoGameController {
     this.buyLotto();
     await this.giveLottoNumbers();
     await this.giveBonusNumber();
-
-    console.log('---------');
-    console.log('구입금액: ', this.getBuyLottoAmount());
-    console.log('로또 구매 갯수: ', this.getBuyLottoCnt());
-    console.log('로또 번호: ', this.#createdLottoNumbers);
-    console.log('당첨 번호: ', this.#winningLottoNumbers);
-    console.log('보너스 번호: ', this.#bonusNumber);
     this.checkLotto();
   }
 
@@ -66,8 +60,12 @@ export default class LottoGameController {
 
   checkLotto() {
     printResult();
-    // TODO: 당첨 통계 출력
-    checkLottoResult(this.#createdLottoNumbers, this.#winningLottoNumbers, this.#bonusNumber);
+    const result = checkLottoResult(
+      this.#createdLottoNumbers,
+      this.#winningLottoNumbers,
+      this.#bonusNumber,
+    );
+    printResultDetail(result);
   }
 
   getBuyLottoAmount() {
