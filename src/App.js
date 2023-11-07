@@ -11,6 +11,7 @@ import {
   MATCH_COUNTS,
 } from './constants/conditions.js';
 import WinningResult from './WinningResult.js';
+import RateOfReturn from './RateOfReturn.js';
 
 class App {
   #winningLotto;
@@ -24,14 +25,19 @@ class App {
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
     const matchCountList = this.#countMatchingNumbers(purchaseLotto);
-    const { matchingTable, rateOfReturn } =
-      this.#getWinningResult(matchCountList);
+    const matchingTable = this.#getWinningResult(matchCountList);
+    const rateOfReturn = this.#getRateOfReturn(purchaseAmount, matchingTable);
     OutputView.printLotteryResultsSummary(matchingTable, rateOfReturn);
   }
 
   #getWinningResult(matchCountList) {
     const winningResult = new WinningResult(matchCountList);
     return winningResult.getResult();
+  }
+
+  #getRateOfReturn(purchaseAmount, matchingTable) {
+    const rateOfReturn = new RateOfReturn(purchaseAmount);
+    return rateOfReturn.getRateOfReturn(matchingTable);
   }
 
   #countMatchingNumbers(purchaseLotto) {

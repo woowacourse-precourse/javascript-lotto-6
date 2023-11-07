@@ -1,141 +1,87 @@
 import WinningResult from '../src/WinningResult';
 
-describe('로또 게임 테스트', () => {
-  test.each([
-    {
-      matchCountList: [0, 1, 2],
-      expected: {
-        matchingTable: {
-          three: 0,
-          four: 0,
-          fiveNotBonus: 0,
-          fiveAndBonus: 0,
-          all: 0,
-        },
-        rateOfReturn: 0.0,
-      },
-    },
-  ])(
-    '당첨된 랭킹리스트와 수익률을 반환합니다. - 당첨갯수가 2개이하면 랭킹에 등록되지 않습니다.',
-    ({ matchCountList, expected }) => {
-      const lottoGame = new WinningResult(matchCountList);
+describe('당첨 결과 테스트', () => {
+  test('당첨 결과를 반환합니다. - 당첨갯수가 2개이하면 결과에 기록되지 않습니다.', () => {
+    const matchCountList = [0, 1, 2];
+    const expected = {
+      three: 0,
+      four: 0,
+      fiveNotBonus: 0,
+      fiveAndBonus: 0,
+      all: 0,
+    };
+    const winningResult = new WinningResult(matchCountList);
 
-      expect(lottoGame.getResult()).toEqual(expected);
-    },
-  );
+    expect(winningResult.getResult()).toEqual(expected);
+  });
 
-  test.each([
-    {
-      matchCountList: [6, 0],
-      expected: {
-        matchingTable: {
-          three: 0,
-          four: 0,
-          fiveNotBonus: 0,
-          fiveAndBonus: 0,
-          all: 1,
-        },
-        rateOfReturn: 100000000.0,
-      },
-    },
-  ])(
-    '당첨된 랭킹리스트와 수익률을 반환합니다. - 당첨갯수6개 => 1등',
-    ({ matchCountList, expected }) => {
-      const lottoGame = new WinningResult(matchCountList);
+  test('당첨 결과를 반환합니다. - 당첨갯수6개 => 1등', () => {
+    const matchCountList = [6];
+    const expected = {
+      three: 0,
+      four: 0,
+      fiveNotBonus: 0,
+      fiveAndBonus: 0,
+      all: 1,
+    };
+    const winningResult = new WinningResult(matchCountList);
 
-      expect(lottoGame.getResult()).toEqual(expected);
-    },
-  );
+    expect(winningResult.getResult()).toEqual(expected);
+  });
 
-  test.each([
-    {
-      matchCountList: [[5, true], 0],
-      expected: {
-        matchingTable: {
-          three: 0,
-          four: 0,
-          fiveNotBonus: 0,
-          fiveAndBonus: 1,
-          all: 0,
-        },
-        rateOfReturn: 1500000.0,
-      },
-    },
-  ])(
-    '당첨된 랭킹리스트와 수익률을 반환합니다. - 당첨갯수5개, 보너스번호 당첨 => 2등',
-    ({ matchCountList, expected }) => {
-      const lottoGame = new WinningResult(matchCountList);
+  test('당첨 결과를 반환합니다. - 당첨갯수5개, 보너스 당첨 => 2등', () => {
+    const matchCountList = [[5, true]];
+    const expected = {
+      three: 0,
+      four: 0,
+      fiveNotBonus: 0,
+      fiveAndBonus: 1,
+      all: 0,
+    };
+    const winningResult = new WinningResult(matchCountList);
 
-      expect(lottoGame.getResult()).toEqual(expected);
-    },
-  );
+    expect(winningResult.getResult()).toEqual(expected);
+  });
 
-  test.each([
-    {
-      matchCountList: [[5, false], 0],
-      expected: {
-        matchingTable: {
-          three: 0,
-          four: 0,
-          fiveNotBonus: 1,
-          fiveAndBonus: 0,
-          all: 0,
-        },
-        rateOfReturn: 75000.0,
-      },
-    },
-  ])(
-    '당첨된 랭킹리스트와 수익률을 반환합니다. - 당첨갯수5개, 보너스번호 미당첨 => 3등',
-    ({ matchCountList, expected }) => {
-      const lottoGame = new WinningResult(matchCountList);
+  test('당첨 결과를 반환합니다. - 당첨갯수5개, 보너스 미당첨 => 3등', () => {
+    const matchCountList = [[5, false]];
+    const expected = {
+      three: 0,
+      four: 0,
+      fiveNotBonus: 1,
+      fiveAndBonus: 0,
+      all: 0,
+    };
+    const winningResult = new WinningResult(matchCountList);
 
-      expect(lottoGame.getResult()).toEqual(expected);
-    },
-  );
+    expect(winningResult.getResult()).toEqual(expected);
+  });
 
-  test.each([
-    {
-      matchCountList: [4, 0],
-      expected: {
-        matchingTable: {
-          three: 0,
-          four: 1,
-          fiveNotBonus: 0,
-          fiveAndBonus: 0,
-          all: 0,
-        },
-        rateOfReturn: 2500.0,
-      },
-    },
-  ])(
-    '당첨된 랭킹리스트와 수익률을 반환합니다. - 당첨갯수 4개 => 4등',
-    ({ matchCountList, expected }) => {
-      const lottoGame = new WinningResult(matchCountList);
+  test('당첨 결과를 반환합니다. - 당첨갯수4개 => 4등', () => {
+    const matchCountList = [4];
+    const expected = {
+      three: 0,
+      four: 1,
+      fiveNotBonus: 0,
+      fiveAndBonus: 0,
+      all: 0,
+    };
+    const winningResult = new WinningResult(matchCountList);
 
-      expect(lottoGame.getResult()).toEqual(expected);
-    },
-  );
+    expect(winningResult.getResult()).toEqual(expected);
+  });
 
-  test.each([
-    {
-      matchCountList: [3, 0],
-      expected: {
-        matchingTable: {
-          three: 1,
-          four: 0,
-          fiveNotBonus: 0,
-          fiveAndBonus: 0,
-          all: 0,
-        },
-        rateOfReturn: 250.0,
-      },
-    },
-  ])(
-    '당첨된 랭킹리스트와 수익률을 반환합니다. - 당첨갯수 3개 => 5등',
-    ({ matchCountList, expected }) => {
-      const lottoGame = new WinningResult(matchCountList);
+  test('당첨 결과를 반환합니다. - 당첨갯수3개 => 5등', () => {
+    const matchCountList = [3];
+    const expected = {
+      three: 1,
+      four: 0,
+      fiveNotBonus: 0,
+      fiveAndBonus: 0,
+      all: 0,
+    };
+    const winningResult = new WinningResult(matchCountList);
 
-      expect(lottoGame.getResult()).toEqual(expected);
-    },
-  );
+    expect(winningResult.getResult()).toEqual(expected);
+  });
 });
