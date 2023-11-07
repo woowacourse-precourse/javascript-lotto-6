@@ -5,7 +5,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#validate2(numbers);
+    this.#validateDuplication(numbers);
     this.#validate3(numbers);
     this.#numbers = numbers;
   }
@@ -17,16 +17,19 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-  #validate2(numbers) {
+  #validateDuplication(numbers){
     if (new Set(numbers).size !== 6) {
       throw new Error(ERROR_MESSAGE.INPUT_DUPLICATION);
     }
   }
 
-  #validate3(number) {
+  #validate3(numbers){
     for(let i=0; i<6; i++){
-      if(parseInt(number[i])>45 || parseInt(number[i])<1){
+      if(parseInt(numbers[i])>45 || parseInt(numbers[i])<1){
           throw new Error(ERROR_MESSAGE.OUT_OF_RANGE);
+      }
+      if(isNaN(numbers[i])){
+        throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
       }
     }
   }
