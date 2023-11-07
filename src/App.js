@@ -31,6 +31,12 @@ class App {
     }
 
     // 당첨 번호 및 보너스 번호 입력 받기
+    MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
+    const winnigNum = await MissionUtils.Console.readLineAsync("");
+    const winningNumList = winnigNum.split(",");
+
+    MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
+    const bonusNum = await MissionUtils.Console.readLineAsync("");
   }
 }
 
