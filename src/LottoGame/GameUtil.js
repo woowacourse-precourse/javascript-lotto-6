@@ -27,7 +27,7 @@ export default class GameUtil {
       throw new Error(ErrorMessage.INVALID_BONUS_NUMBER_TYPE);
     }
 
-    if (!(Number(bonusNumber) >= 1) && !(Number(bonusNumber) <= 45)) {
+    if (!(bonusNumber >= 1 && bonusNumber <= 45)) {
       throw new Error(ErrorMessage.INVALID_BONUS_NUMBER);
     }
 
@@ -38,9 +38,7 @@ export default class GameUtil {
   }
 
   countMatchingNumbers(lottoNumbers, winningNumbers) {
-    return lottoNumbers.filter((number) =>
-      winningNumbers.includes(number.toString())
-    ).length;
+    return lottoNumbers.filter((number) => winningNumbers.includes(number.toString())).length;
   }
 
   isBonusNumberMatched(lottoNumbers, bonusNumber, matchingNumbers) {
