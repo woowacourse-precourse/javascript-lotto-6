@@ -6,7 +6,6 @@ import {
   readLineBonusCount,
   consoleError,
 } from './utils.js';
-import { INPUT_MESSAGE } from './constants.js';
 
 class App {
   #gameExport;
@@ -46,7 +45,6 @@ class App {
 
   async userInputNumbers() {
     const inputNumbers = await this.getUserInput();
-    console.log(inputNumbers);
 
     try {
       Validation.validateUserInputNumbers(inputNumbers);
@@ -85,6 +83,8 @@ class App {
       bonusNumber,
     );
     const statistics = this.#gameExport.getStatistics(eachCompareResult);
+    const totalPrizeMoney = this.#gameExport.getTotalPrizeMoney(statistics);
+    console.log(totalPrizeMoney);
   }
 }
 
