@@ -2,15 +2,19 @@ import LOTTO_INFO from './constants/lottoInfo.js';
 import InputView from './view/InputView.js';
 
 class LottoGame {
-  #lottoCount;
+  #purchaseAmount;
 
-  play() {
+  async play() {
+    await this.inputPurchaseAmount();
     this.purchaseLotto();
   }
 
-  async purchaseLotto() {
-    const purchaseAmount = await InputView.readPurchaseAmount();
-    this.#lottoCount = purchaseAmount / LOTTO_INFO.purchase.unit;
+  async inputPurchaseAmount() {
+    this.#purchaseAmount = await InputView.readPurchaseAmount();
+  }
+
+  purchaseLotto() {
+    const lottoCount = this.#purchaseAmount / LOTTO_INFO.purchase.unit;
   }
 }
 
