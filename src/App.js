@@ -7,6 +7,7 @@ class App {
     const MONEY = await this.inputMoney();
     const INPUT_NUMBERS = await this.getLottoNumber();
     const LOTTO_NUMBERS = new Lotto(INPUT_NUMBERS);
+    const BONUS_NUMBERS = LOTTO_NUMBERS.getBonusNumber(LOTTO_NUMBERS);
   }
 
   async inputMoney() {
