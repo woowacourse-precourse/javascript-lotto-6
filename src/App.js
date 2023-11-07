@@ -3,25 +3,28 @@ import GuessLotto from './GuessLotto.js';
 import Lotto from './Lotto.js';
 
 class App {
+  constructor() {
+    this.guess = new GuessLotto();
+  }
+
   async play() {
     try {
-      const guess = new GuessLotto();
-      await guess.buyLotto();
+      await this.guess.buyLotto();
 
-      Console.print(`\n${guess.getLottoPieces()}개를 구매했습니다.`);
+      Console.print(`\n${this.guess.getLottoPieces()}개를 구매했습니다.`);
 
-      for (let i = 1; i <= guess.getLottoPieces(); i += 1) {
-        Console.print(guess.generateLottoNumber());
+      for (let i = 1; i <= this.guess.getLottoPieces(); i += 1) {
+        Console.print(this.guess.generateLottoNumber());
       }
       Console.print('');
 
-      const winningNumber = await guess.inputLottoNumber();
+      const winningNumber = await this.guess.inputLottoNumber();
 
       const lotto = new Lotto(winningNumber);
 
-      const winningBonus = await guess.inputBonusNumber();
+      const winningBonus = await this.guess.inputBonusNumber();
 
-      lotto.checkWin(winningBonus, guess.getGuessNumbers());
+      lotto.checkWin(winningBonus, this.guess.getGuessNumbers());
     } catch (error) {
       Console.print(error.message);
     }
