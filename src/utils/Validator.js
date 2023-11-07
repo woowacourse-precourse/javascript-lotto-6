@@ -42,8 +42,8 @@ const Validator = {
     }
   },
 
-  validateLength(number, length) {
-    if (number.length !== length) {
+  validateLength(numbers, length) {
+    if (numbers.length !== length) {
       throw new Error(errorMessage.INVALID_LENGTH_WINNING_NUMBER);
     }
   },
@@ -66,13 +66,13 @@ const Validator = {
     }
   },
 
-  validateWinningNumber(number) {
-    this.validateRegExp(number.join(''), LOTTO_NUMBER.regExp, errorMessage.INVALID_STRING_WINNING_NUMBER);
-    for (let i = 0; i < number.length; i += 1) {
-      this.validateInRange(number[i]);
+  validateWinningNumber(numbers) {
+    this.validateRegExp(numbers.join(''), LOTTO_NUMBER.regExp, errorMessage.INVALID_STRING_WINNING_NUMBER);
+    for (let i = 0; i < numbers.length; i += 1) {
+      this.validateInRange(numbers[i]);
     }
-    this.validateUnique(number);
-    this.validateLength(number, LOTTO_NUMBER.count);
+    this.validateUnique(numbers);
+    this.validateLength(numbers, LOTTO_NUMBER.count);
   },
 
   validateBonusNumber(number, winningNumbers) {
