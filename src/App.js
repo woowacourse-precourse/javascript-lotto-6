@@ -1,6 +1,6 @@
 import INPUT from './views/Input.js'
-import OUTPUT from '../src/views/Output.js';
-import COMPUTER from './src/Computer.js';
+import OUTPUT from './views/Output.js';
+import COMPUTER from './Computer.js';
 import AppError from './constants/AppError.js';
 import CALCULATE from '../src/Calculate.js';
 
