@@ -5,11 +5,11 @@ import { PRIZE_AMOUNT, PRICE_PER_TICKET } from '../constants/constants.js';
 class LottoGame {
   #purchasedLotto;
 
-  constructor(amount) {
-    this.#purchasedLotto = this.generateLottoTickets(amount);
+  initializeLotto(amount) {
+    this.#purchasedLotto = this.#generateLottoTickets(amount);
   }
 
-  generateLottoTickets(amount) {
+  #generateLottoTickets(amount) {
     return Array.from({ length: amount }, () => new Lotto(randomNumberGenerator()));
   }
 
