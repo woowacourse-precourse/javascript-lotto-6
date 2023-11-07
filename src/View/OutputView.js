@@ -11,19 +11,17 @@ const OutputView = {
   printLotteries(lotteries) {
     this.print(OUTPUT_MESSAGE.purchased(lotteries.length));
     lotteries.map((lottery) => {
-      this.print(lottery);
+      this.print(JSON.stringify(lottery).replace(/,/g, ', '));
     });
   },
 
   printResult(matchResult) {
-    this.print(
-      OUTPUT_MESSAGE.winningResult +
-      OUTPUT_MESSAGE.threeNumbersCorrect(matchResult.threeNumbersCorrect) +
-      OUTPUT_MESSAGE.fourNumbersCorrect(matchResult.fourNumbersCorrect) +
-      OUTPUT_MESSAGE.fiveNumbersCorrect(matchResult.fiveNumbersCorrect) +
-      OUTPUT_MESSAGE.fiveNumbersAndBonusBallCorrect(matchResult.fiveNumbersAndBonusBallCorrect) +
-      OUTPUT_MESSAGE.sixNumbersCorrect(matchResult.sixNumbersCorrect)
-    );
+    this.print(OUTPUT_MESSAGE.winningResult);
+    this.print(OUTPUT_MESSAGE.threeNumbersCorrect(matchResult.threeNumbersCorrect));
+    this.print(OUTPUT_MESSAGE.fourNumbersCorrect(matchResult.fourNumbersCorrect));
+    this.print(OUTPUT_MESSAGE.fiveNumbersCorrect(matchResult.fiveNumbersCorrect));
+    this.print(OUTPUT_MESSAGE.fiveNumbersAndBonusBallCorrect(matchResult.fiveNumbersAndBonusBallCorrect));
+    this.print(OUTPUT_MESSAGE.sixNumbersCorrect(matchResult.sixNumbersCorrect));
   },
 
   printIncomePercentage(incomePercentage) {
