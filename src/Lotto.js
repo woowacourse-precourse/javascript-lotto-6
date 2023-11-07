@@ -7,34 +7,39 @@ class Lotto {
 
   #numOfCorrect;
 
+  #isChecked;
+
   constructor(numbers) {
     Lotto.#printLottoNumber(numbers);
     Lotto.#validateNumbers(numbers);
     this.#numbers = numbers;
     this.#numOfCorrect = 0;
-    this.#isBonus = false;
+    this.#isWonBonus = false;
+    this.#isChecked = false;
   }
 
   // TODO: 추가 기능 구현
   checkLotto(winningNumbers, bonusNumber) {
+    this.#isChecked = true;
     this.#numOfCorrect = 0;
-    this.#isBonus = false;
+    this.#isWonBonus = false;
 
     winningNumbers.forEach((number) => {
       if (this.#numbers.includes(number)) this.#numOfCorrect += 1;
     });
-    if (this.#numbers.includes(bonusNumber)) this.#isBonus = true;
+    if (this.#numbers.includes(bonusNumber)) this.#isWonBonus = true;
 
     return this;
   }
 
   getRank() {
+    this.#validateCheck();
     switch (this.#numOfCorrect) {
       case 6:
         return '1등';
-      case 5 && this.#isBonus === true:
+      case 5 && this.#isWonBonus === true:
         return '2등';
-      case 5 && this.#isBonus === false:
+      case 5 && this.#isWonBonus === false:
         return '3등';
       case 4:
         return '4등';
@@ -57,6 +62,13 @@ class Lotto {
     if (new Set(numbers).size !== 6) {
       throw new Error('[ERROR] 로또 번호는 중복된 숫자가 있으면 안됩니다.');
     }
+  }
+
+  #validateCheck() {
+    if (!this.#isChecked)
+      throw new Error(
+        '[ERROR] 로또 순위를 알기위해서는 채점을 먼저 해야합니다,'
+      );
   }
 }
 
