@@ -75,7 +75,7 @@ class Controller {
     Object.entries(rankingObj).forEach(([ranking, count]) => {
       profit += REWARD[ranking] * (count ?? 0);
     });
-    this.#outputView.printPrice(profit, cost);
+    this.#outputView.printProfit(profit, cost);
   }
 
   printAllLottos() {
@@ -83,7 +83,7 @@ class Controller {
     if (!allLotto.length) {
       return;
     }
-    this.#outputView.printLottoNumbes(allLotto);
+    this.#outputView.printLottoNumbers(allLotto);
   }
 }
 

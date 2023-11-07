@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, RANKING } from '../constants/constants.js';
 
 class OutputView {
-  printLottoNumbes(lottos) {
+  printLottoNumbers(lottos) {
     Console.print(`${lottos.length}` + MESSAGE.purchaseLotto);
     lottos.forEach((lotto) => {
       Console.print(`[${lotto.getNumbers().join(', ')}]`);
@@ -31,7 +31,7 @@ class OutputView {
     Console.print('');
   }
 
-  printPrice(profit, cost) {
+  printProfit(profit, cost) {
     Console.print(
       MESSAGE.profitHeader +
         ((profit / cost) * 100).toFixed(1) +
