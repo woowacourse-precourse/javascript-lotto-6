@@ -1,5 +1,8 @@
-import Utils from './Utils.js';
 import Validation from './Validation.js';
+
+const LOTTO = {
+  price: 1000,
+};
 
 class PurchasingLotto {
   #cost;
