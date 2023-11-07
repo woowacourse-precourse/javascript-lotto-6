@@ -1,6 +1,6 @@
 import { buycount } from './Input/buycount.js';
 import { Console } from '@woowacourse/mission-utils';
-import { lottoprint } from './output/Lottoprint.js';
+import { lottoprint } from './Output/LottoPrint.js';
 import Lotto from './Lotto.js';
 import { bonus } from './input/Bonus.js';
 import { winningnum } from './Game/WinningNum.js';
