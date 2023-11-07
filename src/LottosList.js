@@ -45,6 +45,10 @@ class LottosList {
   get lottosList() {
     return this.#lottosList;
   }
+
+  get lottoAmount() {
+    return this.#lottoAmount;
+  }
 }
 
 export default LottosList;
