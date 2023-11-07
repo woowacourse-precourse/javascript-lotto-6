@@ -1,6 +1,6 @@
 import Lotto from "../model/Lotto.js"
 import { getBonusNumber, getUserAmount, getWinningNumber } from "../view/input.js"
-import { printAttempt, printRandomNumbersArray } from "../view/output.js";
+import { printAttempt, printRandomNumbersArray, printResult } from "../view/output.js";
 import { LOTTO } from "../constatns/number.js";
 import { getRandomNumbersArray } from "../utils.js";
 
@@ -16,6 +16,7 @@ class LottoController {
     const bonusNumber = await getBonusNumber();
     const lottoResult = lotto.lottoMatchStart(randomNumbersArray, bonusNumber);
 
+    printResult(lottoResult, attempt);
   }
 }
 export default LottoController;

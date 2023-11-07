@@ -5,8 +5,19 @@ export const INPUT_MESSAGE = Object.freeze({
 });
 
 export const OUTPUT_MESSAGE = Object.freeze({
-  ATTEMPT: "개를 구매했습니다.",
+  COUNT: "개를 구매했습니다.",
+  WINNING_TITLE: "\n당첨 통계\n---",
+  REVENUE_START:"\n총 수익률은 ",
+  REVENUE_END:"%입니다."
 });
+
+export const RESULT = Object.freeze([
+  "3개 일치 (5,000원) - ",
+  "4개 일치 (50,000원) - ",
+  "5개 일치 (1,500,000원) - ",
+  "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+  "6개 일치 (2,000,000,000원) - ",
+]);
 
 export const ERROR_MESSAGE = Object.freeze({
   AMOUNT: "[ERROR] 잘못된 금액입니다.\n",
