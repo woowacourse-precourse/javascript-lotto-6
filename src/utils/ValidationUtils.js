@@ -1,6 +1,7 @@
 class ValidationUtils {
   static validateIsNumber(input, message) {
-    if (Number.isNaN(input)) {
+    const inputNumber = Number(input);
+    if (Number.isNaN(inputNumber)) {
       throw new Error(message);
     }
   }
