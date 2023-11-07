@@ -6,6 +6,7 @@ export const MESSAGE_NOTIFICATION = Object.freeze({
   winningLotto: '\n당첨 번호를 입력해 주세요.\n',
   bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
   result: '\n당첨 통계\n---',
+  profitRate: `총 수익률은`,
 });
 
 const ERROR_PREFIX = '[ERROR]';

@@ -1,6 +1,7 @@
 import Lotto from '../Lotto.js';
 import { LOTTO_PRICE } from '../constants/GameSetting.js';
 import { checkLottoResult } from '../utils/CheckLottoResult.js';
+import { incomingProfits } from '../utils/IncomingProfits.js';
 import { getRandomNumber } from '../utils/RandomNumber.js';
 import {
   inputBounsNumber,
@@ -8,6 +9,7 @@ import {
   inputWinningLotto,
   printBuyLotto,
   printLottoArray,
+  printProfitRate,
   printResult,
   printResultDetail,
 } from '../view/View.js';
@@ -18,6 +20,7 @@ export default class LottoGameController {
   #createdLottoNumbers = [];
   #winningLottoNumbers;
   #bonusNumber;
+  #profitRate;
 
   async play() {
     await this.buyAmount();
@@ -26,6 +29,7 @@ export default class LottoGameController {
     await this.giveLottoNumbers();
     await this.giveBonusNumber();
     this.checkLotto();
+    this.showProfitRate();
   }
 
   async buyAmount() {
@@ -58,25 +62,23 @@ export default class LottoGameController {
     this.#bonusNumber = await inputBounsNumber(this.#winningLottoNumbers);
   }
 
+  giveProfitRate(profit) {
+    this.#profitRate = profit;
+  }
+
   checkLotto() {
-    printResult();
     const result = checkLottoResult(
       this.#createdLottoNumbers,
       this.#winningLottoNumbers,
       this.#bonusNumber,
     );
+    printResult();
     printResultDetail(result);
+    const profit = incomingProfits(result, this.#buyLottoAmount);
+    this.giveProfitRate(profit);
   }
 
-  getBuyLottoAmount() {
-    return this.#buyLottoAmount;
-  }
-
-  getBuyLottoCnt() {
-    return this.#buyLottoCnt;
-  }
-
-  getCreatedLottoNumbers() {
-    return this.#createdLottoNumbers;
+  showProfitRate() {
+    printProfitRate(this.#profitRate);
   }
 }

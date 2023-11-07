@@ -6,7 +6,7 @@ export async function inputBuyAmount() {
   try {
     const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.buyAmount);
     isValidBuyAmount(inputValue);
-    return inputValue;
+    return Number(inputValue);
   } catch (err) {
     Console.print(err);
     return inputBuyAmount();
@@ -51,4 +51,8 @@ export function printResultDetail(result) {
   result.forEach((value, index) => {
     Console.print(Object.values(MESSAGE_RANK_RESULT)[index](value));
   });
+}
+
+export function printProfitRate(profitRate) {
+  Console.print(`${MESSAGE_NOTIFICATION.profitRate} ${profitRate}%입니다.`);
 }
