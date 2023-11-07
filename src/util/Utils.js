@@ -8,7 +8,6 @@ import {
 import {
   checkPurchasingMoney,
   checkBonusNumber,
-  checkBonusDuplicated,
   checkWinningNumbers,
 } from './Validation.js';
 import Lotto from '../Lotto.js';
@@ -28,23 +27,24 @@ async function getInputPurchasingMoney() {
 async function getInputWinningNumbers() {
   let userInput;
   let lotto;
+  let winningNumber;
   try {
     userInput = await Console.readLineAsync(INPUT_MESSAGES.lottoWinningNumbers);
     checkWinningNumbers(userInput);
     lotto = new Lotto(userInput.split(','));
+    winningNumber = lotto.getNumbers().toString();
   } catch (error) {
     Console.print(error.message);
     userInput = await getInputWinningNumbers();
   }
-  return lotto.getNumbers().toString();
+  return winningNumber;
 }
 
 async function getInputBonusNumber(winningNumbers) {
   let userInput;
   try {
     userInput = await Console.readLineAsync(INPUT_MESSAGES.lottoBonusNumber);
-    checkBonusNumber(userInput);
-    checkBonusDuplicated(userInput, winningNumbers);
+    checkBonusNumber(userInput, winningNumbers);
   } catch (error) {
     Console.print(error.message);
     userInput = await getInputBonusNumber(winningNumbers);

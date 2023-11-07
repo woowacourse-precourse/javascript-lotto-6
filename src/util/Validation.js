@@ -81,22 +81,21 @@ const checkWinningNumbers = (inputs) => {
   });
 };
 
-const checkBonusNumber = (inputs) => {
+const checkBonusNumber = (inputs, winningNumbers) => {
+  checkInput(inputs);
+  checkBonusDuplicated(inputs, winningNumbers);
+  checkInputType(inputs, ERROR_MESSAGES.bonusType);
+  checkInputRange(inputs, ERROR_MESSAGES.bonusRange);
   checkInputLength(
     inputs,
     GAME_RULE_NUMBER.bonusNumberLength,
     ERROR_MESSAGES.bonusLength,
   );
-  checkInputType(inputs, ERROR_MESSAGES.bonusType);
-  checkInputRange(inputs, ERROR_MESSAGES.bonusRange);
-  checkInput(inputs);
 };
 
 export {
   checkPurchasingMoney,
   checkLottoNumbers,
   checkBonusNumber,
-  checkBonusDuplicated,
-  checkInput,
   checkWinningNumbers,
 };
