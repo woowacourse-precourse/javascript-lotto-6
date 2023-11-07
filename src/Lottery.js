@@ -51,6 +51,7 @@ export default class Lottery {
       .map((element) => Number(element));
 
     // exception check
+
     if (this.#winningNumberList.length !== 6)
       throw Error('6개의 번호가 아니거나 ","로 구분하지 않았습니다');
 
@@ -121,12 +122,12 @@ export default class Lottery {
       const resultStringParts = [];
       for (let i = 3; i >= 1; i -= 1) {
         const tmp = Math.floor(eachPrize / 1000 ** i);
-        if (tmp >= 1 && tmp < 1000) {
-          resultStringParts.push(tmp);
+        if (tmp < 1) continue;
+        if (tmp % 1000 > 0) {
+          resultStringParts.push(tmp % 1000);
+          continue;
         }
-        if (tmp >= 1000) {
-          resultStringParts.push('000');
-        }
+        resultStringParts.push('000');
       }
       resultStringParts.push('000');
       return resultStringParts.join(',');
