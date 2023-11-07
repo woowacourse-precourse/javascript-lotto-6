@@ -1,8 +1,5 @@
-import { Random } from '@woowacourse/mission-utils';
-
-import { LOTTO_PRICE } from '../constants/setting.js';
-import Lotto from '../domain/Lotto.js';
 import OutputView from '../views/OutputView.js';
+import LottoShop from '../domain/LottoShop.js';
 
 class LottoController {
   #money;
@@ -12,7 +9,7 @@ class LottoController {
 
   constructor(money) {
     this.#money = money;
-    this.#lottos = [];
+    this.#lottos = LottoShop.purchaseLotto(money);
     this.#statistics = this.initLottoStatistics();
     this.#totalRevenueRate = 0;
   }
@@ -27,28 +24,11 @@ class LottoController {
     };
   }
 
-  purchaseLotto() {
-    const lottoCount = this.#money / LOTTO_PRICE;
-    OutputView.printPurchaseMessage(lottoCount);
-
-    for (let i = 0; i < lottoCount; i += 1) {
-      const lotto = this.issueLotto();
-      this.#lottos.push(lotto);
-    }
-  }
-
   showLottos() {
     this.#lottos.forEach(lotto => {
       const numbers = lotto.getNumbers();
       OutputView.printIssuedLottoNumbers(numbers);
     });
-  }
-
-  issueLotto() {
-    const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-    const lotto = new Lotto(lottoNumbers);
-
-    return lotto;
   }
 
   compareLottos(winningNumbers, bonusNumber) {
