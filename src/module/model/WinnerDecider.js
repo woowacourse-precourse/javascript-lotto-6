@@ -76,3 +76,5 @@ class WinnerDecider {
     }
   }
 }
+
+export default WinnerDecider;
