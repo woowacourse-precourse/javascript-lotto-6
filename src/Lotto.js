@@ -12,9 +12,18 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+
     const set = new Set(numbers);
     if (numbers.length !== set.size) {
       throw new Error("[ERROR] 로또 번호중 중복된 값이 존재합니다.\n");
+    }
+
+    if (numbers.some((number) => isNaN(Number(number)) || number % 1 !== 0)) {
+      throw new Error("[ERROR] 로또 번호는 자연수여야 합니다.");
+    }
+
+    if (numbers.some((number) => number < 1 || number > 45)) {
+      throw new Error("[ERROR] 로또 번호는 1과 45사이의 값이어야 합니다.");
     }
   }
 
