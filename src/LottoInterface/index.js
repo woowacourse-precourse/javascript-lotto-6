@@ -13,7 +13,7 @@ class LottoInterface {
       LOTTO_INTERFACE.input.amountToPurchase,
     );
     validateAmountToPurchase(answer);
-    return answer;
+    return parseInt(answer, 10);
   }
 
   async readWinningNumbers() {
@@ -21,7 +21,7 @@ class LottoInterface {
       LOTTO_INTERFACE.input.winningNumbers,
     );
     validateWinningNumbers(answer);
-    return answer;
+    return answer.split(",");
   }
 
   async readBonusNumber() {
@@ -29,7 +29,7 @@ class LottoInterface {
       LOTTO_INTERFACE.input.bonusNumber,
     );
     validateBonusNumber(answer);
-    return answer;
+    return parseInt(answer, 10);
   }
 }
 
