@@ -25,11 +25,11 @@ class Store {
     };
   }
 
-  sellLotto({ count, cash }) {
+  async sellLotto({ count, cash }) {
     this.cash = cash;
-    Console.print(OUTPUT.BUY_LOTTO(count));
+    Console.print(OUTPUT.BUY_LOTTO({ count }));
     this.#generateLottoNumbers({ count });
-    this.#printLottoNumbers();
+    await this.#printLottoNumbers();
   }
 
   #generateLottoNumbers({ count }) {
@@ -39,7 +39,7 @@ class Store {
     }
   }
 
-  #printLottoNumbers() {
+  async #printLottoNumbers() {
     this.lottoNumbersList.forEach((lottoNumbers) => {
       Console.print(
         JSON.stringify(lottoNumbers).replace(/,/g, UTILITY.JOIN_SEPERATOR)
@@ -47,7 +47,7 @@ class Store {
     });
 
     Console.print(UTILITY.EMPTY);
-    this.#registerWinningNumbers();
+    await this.#registerWinningNumbers();
   }
 
   async #registerWinningNumbers() {
@@ -103,7 +103,7 @@ class Store {
     const profit = ((this.totalRewards * UTILITY.PERCENT) / this.cash).toFixed(
       UTILITY.FIXED_DIGITS
     );
-    Console.print(OUTPUT.PROFIT(profit));
+    Console.print(OUTPUT.PROFIT({ profit }));
   }
 
   #setMatchCounter() {

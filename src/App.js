@@ -6,7 +6,7 @@ class App {
     const customer = new Customer();
     const store = new Store();
 
-    customer.buyLottoIn({ store });
+    await customer.buyLottoIn({ store });
   }
 }
 
