@@ -8,6 +8,7 @@ class App {
         Console.print(purchaseAmount);
         const lottoArr = this.lottoVendingMachine(purchaseAmount);
         Console.print(this.renderLottoTickets(lottoArr));
+        Console.print("당첨번호를 입력해주세요.");
     }
 
     async getPurchaseAmount() {
@@ -48,10 +49,25 @@ class App {
     }
 
     renderLottoTickets(lottoArr) {
-        const lottoNumberArr = lottoArr.map((el)=>el.printLottoNumber())
-        const removeArrSpace = lottoNumberArr.map((el)=>el.join(", "))
-        const lottoText = `${lottoArr.length}개를 구매했습니다.\n[${removeArrSpace.join("]\n[")}]`
+        const lottoNumberArr = lottoArr.map((el) => el.printLottoNumber());
+        const removeArrSpace = lottoNumberArr.map((el) => el.join(", "));
+        const lottoText = `${
+            lottoArr.length
+        }개를 구매했습니다.\n[${removeArrSpace.join("]\n[")}]`;
         return lottoText;
+    }
+
+    isValidWinningNumber(input) {
+        const inputArr = input.split(",");
+        if (inputArr.length !== 6) {
+            throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+        }
+        const invalidWinningNumberArr = inputArr.filter(
+            (el) => el > 45 || el < 1
+        );
+        if (invalidWinningNumberArr.length !== 0) {
+            throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+        }
     }
 }
 
