@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../utils/constants';
-import InputValidator from '../validator/InputValidator';
+import InputValidator from '../validator/inputValidator';
 
 const getInputWithValidate = async (userInput, validate) => {
   const input = await userInput();
@@ -22,7 +22,7 @@ const InputView = {
       async () => Console.readLineAsync(INPUT_MESSAGE.WINNING_NUMBERS),
       InputValidator.winningNumbers,
     );
-    return numbers.split(',').map((number) => Number(number));
+    return numbers.split(',').map(number => Number(number));
   },
 
   bonusNumber: async () => {
