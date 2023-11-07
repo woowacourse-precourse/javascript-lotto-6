@@ -11,7 +11,6 @@ const LottoUi = {
       return Number(purchaseAmount);
     } catch (err) {
       Console.print(err.message);
-
       return await this.inputPurchaseAmount();
     }
   },
@@ -99,7 +98,10 @@ const LottoUi = {
   validateBonusNumber(bonusNumber) {
     if (Number.isNaN(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
-    } else if (COMMON_VALUE.MIN < 1 || COMMON_VALUE.MAX > 45) {
+    } else if (
+      bonusNumber < COMMON_VALUE.MIN ||
+      COMMON_VALUE.MAX < bonusNumber
+    ) {
       throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
     }
   },
