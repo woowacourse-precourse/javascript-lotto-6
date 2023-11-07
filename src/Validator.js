@@ -6,6 +6,7 @@ import {
   isIntegarNumList,
   isIntegarString,
   isValidPurchaseUnit,
+  isInvalidNumberRange,
   hasInvalidNumberRange,
   hasDuplicateNumber,
 } from './utils/validation.js';
@@ -33,6 +34,14 @@ class Validator {
       throw new CustomError(ERROR_MESSAGE.invalidWinningNumberRange);
     if (hasDuplicateNumber(numberList))
       throw new CustomError(ERROR_MESSAGE.duplicate);
+  }
+
+  static async checkBonusNumbers(input) {
+    if (isEmptyString(input)) throw new CustomError(ERROR_MESSAGE.empty);
+    if (!isIntegarString(input))
+      throw new CustomError(ERROR_MESSAGE.notInteger);
+    if (isInvalidNumberRange(Number(input)))
+      throw new CustomError(ERROR_MESSAGE.invalidWinningNumberRange);
   }
 }
 

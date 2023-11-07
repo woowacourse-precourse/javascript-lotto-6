@@ -8,9 +8,7 @@ export const hasDuplicateNumber = (numList) =>
 
 export const isValidPurchaseUnit = (num) =>
   num % LOTTO_INFO.purchase.unit === 0 && num >= LOTTO_INFO.purchase.unit;
-
+export const isInvalidNumberRange = (num) =>
+  num < LOTTO_INFO.lottoNumber.min || num > LOTTO_INFO.lottoNumber.max;
 export const hasInvalidNumberRange = (numList) =>
-  numList.some(
-    (num) =>
-      num < LOTTO_INFO.lottoNumber.min || num > LOTTO_INFO.lottoNumber.max,
-  );
+  numList.some(isInvalidNumberRange);

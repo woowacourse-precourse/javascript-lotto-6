@@ -25,6 +25,7 @@ class InputView {
     const bonusNumbers = await Console.readLineAsync(
       INPUT_MESSAGE.bonusNumbers,
     );
+    Validator.checkBonusNumbers(bonusNumbers);
 
     return bonusNumbers;
   }
