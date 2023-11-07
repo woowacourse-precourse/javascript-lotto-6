@@ -29,6 +29,8 @@ class App {
     const bonusNumber = await this.generateBonusNumber();
 
     const lotto = new Lotto(winningNumbers);
+
+    lotto.validateBonus(bonusNumber);
   }
 }
 

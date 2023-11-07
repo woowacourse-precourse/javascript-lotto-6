@@ -24,6 +24,19 @@ class Lotto {
       }
     }
   }
+
+  validateBonus(bonusNumber) {
+    const allNumbers = this.#numbers.concat(bonusNumber);
+    const numberSet = new Set(allNumbers);
+
+    if (numberSet.size !== allNumbers.length) {
+      throw new InputError(ERROR_MESSAGE.noDuplicate);
+    } else if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new InputError(ERROR_MESSAGE.invalidNumberRange);
+    } else if (!CONSTANT_VALUE.numberCheck.test(bonusNumber)) {
+      throw new InputError(ERROR_MESSAGE.notNumber);
+    }
+  }
 }
 
 export default Lotto;
