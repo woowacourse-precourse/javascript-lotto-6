@@ -22,12 +22,12 @@ class Lotto {
       total: 0,
     };
 
-    this.prize = Object.freeze({
-      FIRST_PRIZE: 2000000000,
-      SECOND_PRIZE: 30000000,
-      THIRD_PRIZE: 1500000,
-      FOURTH_PRIZE: 50000,
-      FIFTH_PRIZE: 5000,
+    this.PRIZE = Object.freeze({
+      first: 2000000000,
+      second: 30000000,
+      third: 1500000,
+      fourth: 50000,
+      fifth: 5000,
     });
   }
 
@@ -79,13 +79,13 @@ class Lotto {
   checkMatch(matchNumber) {
     switch (matchNumber.length) {
       case 3:
-        this.#increaseWinCount(3, this.prize.FIFTH_PRIZE);
+        this.#increaseWinCount(3, this.PRIZE.fifth);
         break;
       case 4:
-        this.#increaseWinCount(4, this.prize.FOURTH_PRIZE);
+        this.#increaseWinCount(4, this.PRIZE.fourth);
         break;
       case 6:
-        this.#increaseWinCount(6, this.prize.FIRST_PRIZE);
+        this.#increaseWinCount(6, this.PRIZE.first);
         break;
       default:
         break;
@@ -99,10 +99,10 @@ class Lotto {
 
   #checkBonusMatch(bonusNumber, eachNumber) {
     if (eachNumber.includes(+bonusNumber)) {
-      this.#increaseWinCount('5+', this.prize.SECOND_PRIZE);
+      this.#increaseWinCount('5+', this.PRIZE.second);
       return;
     }
-    this.#increaseWinCount(5, this.prize.THIRD_PRIZE);
+    this.#increaseWinCount(5, this.PRIZE.third);
   }
 
   #printResult(guessNumber) {
