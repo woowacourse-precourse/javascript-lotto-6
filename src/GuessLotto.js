@@ -83,13 +83,13 @@ class GuessLotto {
 
   async buyLotto() {
     try {
-      const inputMoney =
-        await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
-      if (Number.isNaN(+inputMoney) || inputMoney.trim() === '') {
-        throw new Error('[ERROR] 구입 금액이 잘못되었습니다.\n');
+      const money = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
+      const intMoney = parseInt(money, 10);
+      if (Number.isNaN(intMoney)) {
+        throw new LottoError(LottoError.ERROR_MSG.notMoney);
       }
-      this.#validatePurchaseAmount(+inputMoney);
-      this.#lottoPieces = inputMoney / 1000;
+      this.#validatePurchaseAmount(intMoney);
+      this.#lottoPieces = intMoney / 1000;
       return this.#lottoPieces;
     } catch (error) {
       Console.print(error.message);
