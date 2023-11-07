@@ -9,6 +9,12 @@ class OutputView {
     });
   }
 
+  printStats(lottoStats) {
+    Console.print(OUTPUT_MESSAGE.result);
+    Console.print('---');
+    Console.print(OUTPUT_MESSAGE.stats(lottoStats));
+  }
+
   printError(message) {
     Console.print(message);
   }

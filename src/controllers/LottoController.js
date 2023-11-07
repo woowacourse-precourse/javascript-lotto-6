@@ -61,6 +61,7 @@ class LottoController {
     const winningNumber = this.lotto.getWinningNumber();
     const bonusNumber = this.lotto.getBonusNumber();
     const lottoStats = this.calculateStats(lottos, winningNumber, bonusNumber);
+    this.outputView.printStats(lottoStats);
   }
 
   calculateStats(lottos, winningNumber, bonusNumber) {
