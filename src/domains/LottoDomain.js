@@ -36,26 +36,17 @@ class LottoMachine {
 
   static read(resultObject, bonusNumber) {
     const rank = Array.from({ length: NUMBER.LOTTO_LENGTH }, () => NUMBER.DEFAULT);
-
     resultObject.forEach((result) => {
-      switch (result.matchCount) {
-        case NUMBER.LOTTO_LENGTH:
-          rank[number.first] += NUMBER.ADD;
-          break;
-        case NUMBER.SECOND_THIRD:
-          if (result.notMatchNumber === bonusNumber) rank[number.second] += NUMBER.ADD;
-          else rank[number.third] += NUMBER.ADD;
-          break;
-        case NUMBER.FOURTH:
-          rank[number.fourth] += NUMBER.ADD;
-          break;
-        case NUMBER.FIFTH:
-          rank[number.fifth] += NUMBER.ADD;
-          break;
-        default:
+      const { matchCount, notMatchNumber } = result;
+      if (matchCount === NUMBER.LOTTO_LENGTH) rank[number.first] += NUMBER.ADD;
+      else if (matchCount === NUMBER.FOURTH) rank[number.fourth] += NUMBER.ADD;
+      else if (matchCount === NUMBER.FIFTH) rank[number.fifth] += NUMBER.ADD;
+      else if (matchCount === NUMBER.SECOND_THIRD && notMatchNumber === bonusNumber) {
+        rank[number.second] += NUMBER.ADD;
+      } else if (matchCount === NUMBER.SECOND_THIRD && notMatchNumber !== bonusNumber) {
+        rank[number.third] += NUMBER.ADD;
       }
     });
-
     return rank;
   }
 }
