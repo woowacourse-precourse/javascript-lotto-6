@@ -8,6 +8,7 @@ import {
   VALIDATION_ERRORS_MESSAGE,
   regexNumber,
 } from './Constants.js';
+import Lotto from './Lotto.js';
 
 class App {
   async play() {
@@ -17,6 +18,11 @@ class App {
     this.printLotto(lottos, lottoCount);
     const winningNumbers = await this.getWinningNumber();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
+    const winningRank = this.compareLottoNumber(
+      lottos,
+      winningNumbers,
+      bonusNumber,
+    );
   }
 
   // 1. 로또 구입금액 입력받기
@@ -114,6 +120,37 @@ class App {
       throw new Error(VALIDATION_ERRORS_MESSAGE.CONTAIN_SAME_NUMBER);
 
     return true;
+  }
+
+  // 6. 사용자가 구매한 로또 번호와 당첨 번호를 비교
+  compareLottoNumber(lottos, winningNumbers, bonusNumber) {
+    const winningRank = {
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+    };
+
+    lottos.forEach((lotto) => {
+      const matchCount = this.matchNumberCount(lotto, winningNumbers);
+
+      if (matchCount === 3) winningRank.fifth += 1;
+      if (matchCount === 4) winningRank.fourth += 1;
+      if (matchCount === 5) winningRank.third += 1;
+      if (matchCount === 5 && lotto.includes(bonusNumber))
+        winningRank.second += 1;
+      if (matchCount === 6) winningRank.first += 1;
+    });
+
+    return winningRank;
+  }
+
+  matchNumberCount(lotto, winningNumbers) {
+    const matchingNumbers = winningNumbers.filter((number) =>
+      lotto.includes(number),
+    );
+    return matchingNumbers.length;
   }
 }
 
