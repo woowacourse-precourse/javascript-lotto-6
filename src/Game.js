@@ -91,7 +91,7 @@ class Game {
   #getEarningsRate(counts) {
     const totalPrice = counts.reduce((acc, curr, idx) => acc +this.#PRICE_TABLE[idx].price * curr, 0);
     const rates = totalPrice / this.money;
-    Console.print(`총 수익률은 ${Math.floor(rates*1000)/10}%입니다.`);
+    Console.print(`총 수익률은 ${Math.round(rates*1000)/10}%입니다.`);
   }
 
 };
