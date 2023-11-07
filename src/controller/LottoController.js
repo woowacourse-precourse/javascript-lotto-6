@@ -69,8 +69,8 @@ class LottoController {
   }
 
   async setWinningNums() {
-    const winningNumsArr = await InputView.readWinningNums();
-    this.#winningNums = winningNumsArr.map((winningNum) => Number(winningNum));
+    const winningNums = await InputView.readWinningNums();
+    this.#winningNums = winningNums.map((winningNum) => Number(winningNum));
   }
 
   async setBonusNum() {

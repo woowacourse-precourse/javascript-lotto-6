@@ -26,9 +26,8 @@ const InputView = {
         const winningNums = await Console.readLineAsync(
           MESSAGE_ASK.winningNums
         );
-        const winningNumsArr = winningNums.split(SEPARATOR.comma);
-        InputValidator.validateWinningNums(winningNumsArr);
-        return winningNumsArr;
+        const winningNumArr = InputValidator.validateWinningNums(winningNums);
+        return winningNumArr;
       } catch (error) {
         OutputView.printErrorMessage(error);
       }
