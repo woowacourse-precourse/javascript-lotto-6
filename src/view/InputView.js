@@ -11,17 +11,22 @@ const InputView = {
   },
 
   async readWinningNumbers() {
-    let winningNumbers = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-    winningNumbers = winningNumbers.split(',').map((number) => {
-      return (number = Number(number));
-    });
+    const winningNumbers = await MissionUtils.Console.readLineAsync(
+      '\n당첨 번호를 입력해 주세요.\n',
+    );
+
+    Validator.inputWinningNumber(winningNumbers);
+
     return winningNumbers;
   },
 
-  async readBonusNumbers() {
+  async readBonusNumbers(winningNumber) {
     const bonusNumber = await MissionUtils.Console.readLineAsync(
       '\n보너스 번호를 입력해 주세요.\n',
     );
+
+    Validator.inputBonusNumber(bonusNumber, winningNumber);
+
     return bonusNumber;
   },
 };
