@@ -30,7 +30,7 @@ export const SCOREBOARD = {
   MATCH_6: "6개 일치 (2,000,000,000원)",
 };
 
-export const LottoResultKey = {
+export const LOTTO_RESULT_KEY = {
   3: "MATCH_3",
   4: "MATCH_4",
   5: "MATCH_5",

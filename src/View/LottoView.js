@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { SCOREBOARD, LottoResultKey } from "../Utilities/Constant.js";
+import { SCOREBOARD } from "../Utilities/Constant.js";
 
 class LottoView {
   createPurchaseData(numberOfSets, lottoNumbers) {
@@ -16,11 +16,19 @@ class LottoView {
       ...Object.entries(statistics)
         .filter(([key]) => key !== "totalPrize")
         .map(([key, value]) => {
-          const formattedKey = LottoResultKey[key] || `${key}개 일치`;
-          if (key === "profitRate") {
-            return `총 수익률은 ${value}%입니다.`;
+          switch (key) {
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+              return `${SCOREBOARD[`MATCH_${key}`]} - ${value}개`;
+            case "5+bonus":
+              return `${SCOREBOARD.MATCH_5_BONUS} - ${value}개`;
+            case "profitRate":
+              return `총 수익률은 ${value}%입니다.`;
+            default:
+              return `${key}개 일치 - ${value}개`;
           }
-          return `${SCOREBOARD[formattedKey]} - ${value}개`;
         }),
     ];
     return lottoResult.join("\n");
