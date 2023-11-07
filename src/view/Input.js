@@ -6,7 +6,6 @@ class Input{
 
     static async inputMoney(){
         const inputMoney = await Console.readLineAsync(GAMEMSG_INPUT_MONEY);
-        if(Number.isNaN(Number(inputMoney))){ Console.print("[ERROR]");throw new Error("[ERROR]");}
         return inputMoney;
     }
 
