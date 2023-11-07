@@ -1,9 +1,7 @@
 const MIN_WINNING_NUMBER = 1;
 const MAX_WINNING_NUMBER = 45;
 const ERROR_MESSAGES = {
-  BONUS_NUMBER_IS_NOT_NATURAL: "[ERROR] 보너스 번호는 자연수로 입력해주세요.\n",
-  WINNING_NUMBER_IS_NOT_NATURAL: "[ERROR] 당첨 번호는 자연수로 입력해주세요.\n",
-  AMOUNT_IS_NOT_NATURAL: "[ERROR] 당첨 번호는 자연수로 입력해주세요.\n",
+  NATURAL_NUMBER: (subject) => `[ERROR] ${subject} 자연수로 입력해주세요.\n`,
   MIN_AMOUNT: "[ERROR] 구입금액은 최소 1000원부터 가능합니다.\n",
   AMOUNT_UNIT: "[ERROR] 구입금액은 1,000원 단위만 가능합니다.\n",
   WINNING_NUMBER_COUNT:
@@ -16,10 +14,14 @@ const ERROR_MESSAGES = {
 };
 
 class ValidateInput {
-  static validateAmount(amount) {
-    if (isNaN(amount)) {
-      throw new Error(ERROR_MESSAGES.AMOUNT_IS_NOT_NATURAL);
+  static validateNaturalNumber(number, subject) {
+    if (isNaN(number) || number < MIN_WINNING_NUMBER || number % 1 !== 0) {
+      throw new Error(ERROR_MESSAGES.NATURAL_NUMBER(subject));
     }
+  }
+
+  static validateAmount(amount) {
+    ValidateInput.validateNaturalNumber(amount, "구입 금액은");
 
     if (amount < 1000) {
       throw new Error(ERROR_MESSAGES.MIN_AMOUNT);
@@ -40,9 +42,9 @@ class ValidateInput {
       throw new Error(ERROR_MESSAGES.DUPLICATE_NUMBER);
     }
 
-    if (numbers.some((number) => isNaN(number) || number % 1 !== 0)) {
-      throw new Error(ERROR_MESSAGES.WINNING_NUMBER_IS_NOT_NATURAL);
-    }
+    numbers.forEach((number) => {
+      ValidateInput.validateNaturalNumber(number, "당첨 번호는");
+    });
 
     if (
       numbers.some(
@@ -54,9 +56,7 @@ class ValidateInput {
   }
 
   static validateBonusNumber(number, winningNumber) {
-    if (isNaN(number) || number % 1 !== 0) {
-      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_IS_NOT_NATURAL);
-    }
+    ValidateInput.validateNaturalNumber(number, "보너스 번호는");
 
     if (number < MIN_WINNING_NUMBER || number > MAX_WINNING_NUMBER) {
       throw new Error(ERROR_MESSAGES.BONUS_NUMBER_RANGE);

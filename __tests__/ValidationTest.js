@@ -5,7 +5,7 @@ describe("입력 유효성 검사 테스트", () => {
   test("구입 금액이 자연수가 아니면 예외가 발생한다", () => {
     expect(() => {
       ValidateInput.validateAmount("A");
-    }).toThrow("[ERROR] 구입금액은 자연수로 입력해주세요.\n");
+    }).toThrow("[ERROR] 구입 금액은 자연수로 입력해주세요.\n");
   });
 
   test("구입 금액이 1000보다 작으면 예외가 발생한다", () => {
@@ -44,15 +44,15 @@ describe("입력 유효성 검사 테스트", () => {
     expect(() => {
       ValidateInput.validateWinningNumber([1, 2, 3, 4, 5, 7.1]);
     }).toThrow("[ERROR] 당첨 번호는 자연수로 입력해주세요.\n");
+
+    expect(() => {
+      ValidateInput.validateWinningNumber([-1, 2, 3, 4, 5, 6]);
+    }).toThrow("[ERROR] 당첨 번호는 자연수로 입력해주세요.\n");
   });
 
   test("당첨번호가 1부터 45사이의 값이 아니면 예외가 발생한다", () => {
     expect(() => {
       ValidateInput.validateWinningNumber([1, 2, 3, 4, 5, 46]);
-    }).toThrow("[ERROR] 당첨 번호는 1부터 45사이의 값을 입력해주세요.\n");
-
-    expect(() => {
-      ValidateInput.validateWinningNumber([-1, 2, 3, 4, 5, 6]);
     }).toThrow("[ERROR] 당첨 번호는 1부터 45사이의 값을 입력해주세요.\n");
   });
 
@@ -73,15 +73,15 @@ describe("입력 유효성 검사 테스트", () => {
     expect(() => {
       ValidateInput.validateBonusNumber(7.1);
     }).toThrow("[ERROR] 보너스 번호는 자연수로 입력해주세요.\n");
+
+    expect(() => {
+      ValidateInput.validateBonusNumber(-1);
+    }).toThrow("[ERROR] 보너스 번호는 자연수로 입력해주세요.\n");
   });
 
   test("보너스 번호가 1부터 45사이의 값이 아니면 예외가 발생한다", () => {
     expect(() => {
       ValidateInput.validateBonusNumber(46);
-    }).toThrow("[ERROR] 보너스 번호는 1부터 45사이의 숫자로 입력해주세요.\n");
-
-    expect(() => {
-      ValidateInput.validateBonusNumber(-1);
-    }).toThrow("[ERROR] 보너스 번호는 1부터 45사이의 숫자로 입력해주세요.\n");
+    }).toThrow("[ERROR] 보너스 번호는 1부터 45사이의 값을 입력해주세요.\n");
   });
 });
