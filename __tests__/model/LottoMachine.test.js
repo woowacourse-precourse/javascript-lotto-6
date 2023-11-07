@@ -1,5 +1,5 @@
 import LottoMachine from '../../src/model/LottoMachine';
-import { GAME_SETTINGS } from '../../src/constants/gameSettings';
+import { GAME_SETTINGS } from '../../src/constants/GameSettings';
 import { generateUniqueNumbers } from '../../src/utils/GenerateRandomNumberUtils';
 
 jest.mock('../../src/utils/GenerateRandomNumberUtils.js', () => ({
