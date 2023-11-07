@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { ERROR_MESSAGES } from "./constants/Messages";
 
 //입력받은 값을 검증하고, 해당 값을 가지고 연산을 수행해서 결과값을 도출하는 것을 도메인 로직으로 함.
 class Lotto {
@@ -12,11 +13,11 @@ class Lotto {
   #validate(numbers) {
     const NUMBER_SET = new Set(numbers);
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR_MESSAGES.LOTTO_LENGTH_NOT_SIX);
     }
     if (NUMBER_SET.size !== numbers.length) {
       console.log(NUMBER_SET.length);
-      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
+      throw new Error(ERROR_MESSAGES.LOTTO_VALUE_DUPLICATED);
     }
   }
 
