@@ -6,7 +6,7 @@ class Lotto {
     const { RANGE, COUNT } = LOTTO;
     const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(RANGE.START, RANGE.END, COUNT);
 
-    return lottoNumbers;
+    return lottoNumbers.sort((a, b) => a - b);
   }
 
   static createLottos(inputAmount) {
