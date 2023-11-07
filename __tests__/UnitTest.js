@@ -125,4 +125,59 @@ describe('단위 테스트', () => {
 
         expect(lottoUtil.lottoGenerate(1)[0].getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
     });
+
+    test('당첨 번호 갯수를 계산하는 기능', () => {
+        const winLottoSet = new Set([1, 2, 3, 4, 5, 6]);
+        const inputs = [
+            [1, 7, 8, 9, 10, 11],
+            [1, 2, 7, 8, 9, 10],
+            [1, 2, 3, 7, 8, 9],
+            [1, 2, 3, 4, 7, 8],
+            [1, 2, 3, 4, 5, 7],
+            [1, 2, 3, 4, 5, 6],
+        ];
+
+        const expectResult = [1, 2, 3, 4, 5, 6];
+
+        inputs.forEach((input, i) => {
+            expect(lottoUtil.checkAnswerCnt(input, winLottoSet)).toEqual(expectResult[i]);
+        });
+    });
+
+    test('보너스 번호 일치 여부를 검사하는 기능', () => {
+        const inputs = [
+            [1, 2, 3, 4, 5, 6],
+            [1, 2, 3, 4, 5, 7],
+            [1, 2, 3, 7, 8, 9],
+            [1, 2, 3, 4, 5, 8],
+            [1, 2, 7, 10, 17, 20],
+            [1, 2, 3, 8, 20, 45],
+        ];
+
+        const expectResult = [false, true, true, false, true, false];
+
+        inputs.forEach((input, i) => {
+            expect(lottoUtil.checkHasBonus(input, 7)).toEqual(expectResult[i]);
+        });
+    });
+
+    test('당첨 번호 갯수와 보너스 일치 여부로 등수를 결정하는 기능', () => {
+        const inputs = [
+            [1, true],
+            [2, false],
+            [3, false],
+            [3, true],
+            [4, false],
+            [5, false],
+            [5, true],
+            [6, false],
+            [6, true],
+        ];
+
+        const expectResult = [-1, -1, 5, 5, 4, 3, 2, 1, 1];
+
+        inputs.forEach(([answerCnt, hasBonusNumber], i) => {
+            expect(lottoUtil.lottoRank(answerCnt, hasBonusNumber)).toEqual(expectResult[i]);
+        });
+    });
 });
