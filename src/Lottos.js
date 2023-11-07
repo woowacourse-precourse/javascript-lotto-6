@@ -13,7 +13,7 @@ export class Lottos {
   }
 
   get() {
-    return this.#list;
+    return this.#list.map((lotto) => lotto.getNumbers());
   }
 
   #setList() {
@@ -21,6 +21,7 @@ export class Lottos {
       this.makeNewLotto(generateRandomNumbers(1, 45, 6)),
     );
   }
+
   makeNewLotto(numbers) {
     return new Lotto(numbers);
   }
