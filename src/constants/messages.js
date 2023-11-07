@@ -1,6 +1,7 @@
 const INPUT_MESSAGE = Object.freeze({
   purchaseAmount: '구매금액을 입력해 주세요.\n',
   winningNumbers: '\n당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 const ERROR_MESSAGE = Object.freeze({

@@ -31,6 +31,15 @@ class Validator {
       throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidUnique}`);
     }
   }
+
+  static bonusNumberValidator(bonusNumber) {
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidRange}`);
+    }
+
+    const NUMBER_REGEX = /^[0-9]+$/.test(bonusNumber);
+    if (!NUMBER_REGEX) throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidNumber}`);
+  }
 }
 
 export default Validator;

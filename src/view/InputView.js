@@ -28,6 +28,18 @@ class InputView {
       }
     }
   }
+
+  static async readBonusNumber() {
+    while (true) {
+      const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
+      try {
+        Validator.bonusNumberValidator(bonusNumber);
+        return bonusNumber;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
 }
 
 export default InputView;
