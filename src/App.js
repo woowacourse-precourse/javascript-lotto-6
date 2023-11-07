@@ -20,7 +20,7 @@ class App {
   async buyAndPrintLotto() {
     await this.guess.buyLotto();
 
-    Console.print(`${this.guess.getLottoPieces()}개를 구매했습니다.`);
+    Console.print(`\n${this.guess.getLottoPieces()}개를 구매했습니다.`);
     for (let i = 1; i <= this.guess.getLottoPieces(); i += 1) {
       Console.print(this.guess.generateLottoNumber());
     }
