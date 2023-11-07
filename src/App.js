@@ -5,6 +5,7 @@ import {
 } from './utils/getUserInput.js';
 import LottoList from './repository/LottoList.js';
 import Lotto from './repository/Lotto.js';
+import BounsNumber from './repository/BonusNumber.js';
 
 class App {
   async play() {
@@ -21,6 +22,11 @@ class App {
     const winningNumberArr = getWinningNumberArray(winningNumberStr);
 
     const winningLottoNumbers = new Lotto(winningNumberArr).getLotto();
+
+    const inputBonusNumber = await MissionUtils.Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.\n'
+    );
+    const bonusNumber = new BounsNumber(Number(inputBonusNumber));
   }
 }
 
