@@ -13,12 +13,11 @@ class WinningLotto extends Lotto {
     this.#bonusNumber = bonusNumber;
   }
 
-  getLottoNumber() {
-    return super.getLottoNumber();
-  }
-
-  getBonusNumber() {
-    return this.#bonusNumber;
+  getFullLottoNumber() {
+    return {
+      lotto: super.getLottoNumber(),
+      bonusNumber: this.#bonusNumber,
+    };
   }
 
   #bonusValidate(bonusNumber) {
