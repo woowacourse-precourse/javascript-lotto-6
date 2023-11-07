@@ -32,11 +32,17 @@ class App {
   ];
 
   async start() {
-    this.inputPrice = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
-    validate.priceValidate(this.inputPrice);
-
+    while (true) {
+      try {
+        this.inputPrice = await Console.readLineAsync(
+          "구입금액을 입력해 주세요.\n"
+        );
+        validate.priceValidate(this.inputPrice);
+        break;
+      } catch (e) {
+        Console.print(e);
+      }
+    }
     return this.inputPrice / 1000;
   }
 
