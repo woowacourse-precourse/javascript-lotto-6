@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 class LottoBudget {
     lottoBudget;
+    LOTTO_NUMBER;
     ERROR_MESSEGE="[ERROR] 숫자가 잘못된 형식입니다.";
     GET_LOTTO_BUDGET_INPUT="구입금액을 입력해 주세요.\n";
 
@@ -15,7 +16,10 @@ class LottoBudget {
             throw new Error(this.ERROR_MESSEGE);
         }
 
-        if(lottoBudget % this.LOTTO_PRICE!==0){
+        this.LOTTO_NUMBER = lottoBudget/LOTTO_PRICE;
+        const CHANGE = lottoBudget%LOTTO_PRICE
+
+        if(CHANGE!==0){
             throw new Error(this.ERROR_MESSEGE);
         }
     }
