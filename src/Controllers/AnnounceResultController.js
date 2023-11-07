@@ -1,5 +1,5 @@
 import LottoYieldCalculator from "../service/LottoYieldCalculator.js";
-import OutputView from "../Views/OutputView.js";
+import { OutputView } from "../Views/index.js";
 
 export default class AnnounceResult {
   static announceTotalResult(lottos, drawnLotto, purchaseAmount) {

@@ -1,7 +1,6 @@
 import { Lotto, PurchaseAmount } from "../Models/index.js";
-import { Random, Console } from "@woowacourse/mission-utils";
-import InputView from "../Views/InputView.js";
-import OutputView from "../Views/OutputView.js";
+import { Random } from "@woowacourse/mission-utils";
+import { InputView, OutputView } from "../Views/index.js";
 
 export default class LottoPurchaseController {
   static async purchaseLottos() {
@@ -21,7 +20,7 @@ export default class LottoPurchaseController {
         purchaseAmount = new PurchaseAmount(inputMoney);
         break;
       } catch (error) {
-        Console.print(error.message);
+        OutputView.print(error.message);
       }
     }
     return purchaseAmount;

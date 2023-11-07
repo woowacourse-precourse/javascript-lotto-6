@@ -1,6 +1,5 @@
 import { DrawnLotto } from "../Models/index.js";
-import { Console } from "@woowacourse/mission-utils";
-import InputView from "../Views/InputView.js";
+import { InputView, OutputView } from "../Views/index.js";
 
 export default class DrawnLottoController {
   static async createDrawnLotto() {
@@ -20,7 +19,7 @@ export default class DrawnLottoController {
         drawnLottoWithoutBonusNumber = new DrawnLotto(inputdrawnLottoNumbers);
         break;
       } catch (error) {
-        Console.print(error.message);
+        OutputView.print(error.message);
       }
     }
     return drawnLottoWithoutBonusNumber;
@@ -35,7 +34,7 @@ export default class DrawnLottoController {
         drawnLotto = drawnLottoWithOutBonusNumber;
         break;
       } catch (error) {
-        Console.print(error.message);
+        OutputView.print(error.message);
       }
     }
     return drawnLotto;

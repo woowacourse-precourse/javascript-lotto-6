@@ -33,4 +33,8 @@ export default class OutputView {
   static printYieldRate(yieldRate) {
     Console.print(`총 수익률은 ${yieldRate}%입니다.`);
   }
+
+  static print(message) {
+    Console.print(message);
+  }
 }
