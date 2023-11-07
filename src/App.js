@@ -46,5 +46,12 @@ class App {
     MissionUtils.Console.print(`${lottos.length}개를 구매했습니다.`);
     lottos.forEach(lotto => MissionUtils.Console.print(`[${lotto.numbers.join(", ")}]`));
   }
+
+  // TODO: 당첨 번호가 유효한지 검증
+  async #askWinningNumbers() {
+    const input = await MissionUtils.Console.readLine("당첨 번호를 입력해 주세요.");
+    const numbers = input.split(',').map(num => parseInt(num.trim(), 10));
+    return numbers;
+  }
 }
 export default App;
