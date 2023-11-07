@@ -5,7 +5,7 @@ import {
   COMMON_NUMBER_VALIDATOR,
   BONUS_NUMBER_VALIDATOR,
 } from "../utils/validation.js";
-import { INPUT_MESSAGE } from "../constants/message.js";
+import { INPUT_MESSAGE, MESSAGE_FACTOR } from "../constants/message.js";
 
 class InputView {
   async readLottoPurchaseAmount() {
@@ -17,9 +17,9 @@ class InputView {
 
   async readLottoWinningNumbers() {
     const lottoWinningNumbers = await Console.readLineAsync(INPUT_MESSAGE.lottoWinningNumbers);
-    const validatedLottoNumbers = lottoWinningNumbers.split(",").reduce((numbers, number) => {
+    const validatedLottoNumbers = lottoWinningNumbers.split(MESSAGE_FACTOR.seperator).reduce((numbers, number) => {
       const trimmedNumber = number.trim();
-      if (trimmedNumber !== "") numbers.push(Number(trimmedNumber));
+      if (trimmedNumber !== MESSAGE_FACTOR.noInput) numbers.push(Number(trimmedNumber));
       return numbers;
     }, []);
 
@@ -30,7 +30,7 @@ class InputView {
 
   async readBonusNumber(lottoWinningNumbers) {
     const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
-    const validatedBonusNumber = bonusNumber && bonusNumber.split(",").map(Number);
+    const validatedBonusNumber = bonusNumber && bonusNumber.split(MESSAGE_FACTOR.seperator).map(Number);
     this.#validateBonusNumberInput(validatedBonusNumber, lottoWinningNumbers);
 
     return validatedBonusNumber;

@@ -10,22 +10,23 @@ import {
   NotIntegerError,
 } from "./Error.js";
 import { ERROR_MESSAGE } from "../constants/message.js";
+import { LOTTO, PURCHASE_AMOUNT } from "../constants/lotto.js";
 
 export const LOTTO_NUMBERS_VALILDATOR = Object.freeze({
   invalidLottoNumberCount(numbers) {
-    if (numbers.length !== 6)
+    if (numbers.length !== LOTTO.numberLength) 
       throw new InvalidLottoNumberCountError(ERROR_MESSAGE.invalidLottoNumberCount);
   },
 
   duplicatedNumber(numbers) {
-    if (new Set(numbers).size !== numbers.length)
+    if (new Set(numbers).size !== numbers.length) 
       throw new DuplicatedNumberError(ERROR_MESSAGE.duplicatedNumber);
   },
 });
 
 export const BONUS_NUMBER_VALIDATOR = Object.freeze({
   invalidBonusNumberCount(bonusNumber, lottoWinningNumbers) {
-    if (bonusNumber.length !== 1)
+    if (bonusNumber.length !== LOTTO.bonusNumberLength) 
       throw new InvalidBonusNumberCountError(ERROR_MESSAGE.invalidBonusNumberCount);
   },
 
@@ -37,12 +38,12 @@ export const BONUS_NUMBER_VALIDATOR = Object.freeze({
 
 export const COMMON_NUMBER_VALIDATOR = Object.freeze({
   notNumber(numbers) {
-    if (numbers.some(isNaN)) 
+    if (numbers.some(isNaN))
       throw new NotNumberError(ERROR_MESSAGE.notNumber);
   },
 
   invalidNumberRange(numbers) {
-    if (numbers.some((number) => number < 1 || number > 45))
+    if (numbers.some((number) => number < LOTTO.minValue || number > LOTTO.maxValue))
       throw new InvalidNumberRangeError(ERROR_MESSAGE.invalidNumberRange);
   },
 
@@ -54,22 +55,22 @@ export const COMMON_NUMBER_VALIDATOR = Object.freeze({
 
 export const PURCHASE_AMOUNT_VALIDATOR = {
   noInput(purchaseAmount) {
-    if (purchaseAmount === "") 
+    if (purchaseAmount === PURCHASE_AMOUNT.noInput)
       throw new NoInputError(ERROR_MESSAGE.noInput);
   },
 
   notNumber(purchaseAmount) {
-    if (isNaN(purchaseAmount)) 
+    if (isNaN(purchaseAmount))
       throw new NotNumberError(ERROR_MESSAGE.notNumber);
   },
 
   invalidAmountRange(purchaseAmount) {
-    if (purchaseAmount < 1000) 
+    if (purchaseAmount < PURCHASE_AMOUNT.minValue)
       throw new InvalidAmountRangeError(ERROR_MESSAGE.invalidAmountRange);
   },
 
   invalidAmountUnit(purchaseAmount) {
-    if (purchaseAmount % 1000 !== 0)
+    if (purchaseAmount % PURCHASE_AMOUNT.unit !== PURCHASE_AMOUNT.checkRemain)
       throw new InvalidAmountUnitError(ERROR_MESSAGE.invalidAmountUnit);
   },
 };

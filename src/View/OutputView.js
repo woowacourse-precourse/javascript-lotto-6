@@ -1,12 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
-import { OUTPUT_MESSAGE } from "../constants/message.js";
+import { MESSAGE_FACTOR, OUTPUT_MESSAGE } from "../constants/message.js";
 
 class OutputView {
   printPurchaseResult(purchasedLottoNumbers) {
     const purchasedResultString = messageGenerator.purchaseResultString(purchasedLottoNumbers);
     const lottoNumbers = messageGenerator.lottoNumbers(purchasedLottoNumbers);
 
-    const purchasedResultMessage = `\n${purchasedResultString}${lottoNumbers}`;
+    const purchasedResultMessage = `${MESSAGE_FACTOR.newLine}${purchasedResultString}${lottoNumbers}`;
 
     Console.print(purchasedResultMessage);
   }
@@ -15,12 +15,12 @@ class OutputView {
     const matchResultString = messageGenerator.matchResultString();
     const matchResultSeperator = messageGenerator.matchResultSeperator();
     const matchResult = Object.entries(lottoMatchResult)
-      .filter(([place, count]) => place !== "returnRate")
+      .filter(([place, count]) => place !== MESSAGE_FACTOR.returnRate)
       .map(([place, count]) => messageGenerator.generatePlaceMessage(place, count))
-      .join("");
+      .join(MESSAGE_FACTOR.blankSeperator);
     const returnRateResult = messageGenerator.returnRate(lottoMatchResult.returnRate);
 
-    const matchResultMessage = `\n${matchResultString}${matchResultSeperator}${matchResult}${returnRateResult}`;
+    const matchResultMessage = `${MESSAGE_FACTOR.newLine}${matchResultString}${matchResultSeperator}${matchResult}${returnRateResult}`;
 
     Console.print(matchResultMessage);
   }
@@ -37,8 +37,8 @@ const messageGenerator = {
 
   lottoNumbers(purchasedLottoNumbers) {
     return purchasedLottoNumbers
-      .map((row) => `[${row.sort((a, b) => a - b).join(", ")}]`)
-      .join("\n");
+      .map((row) => `${MESSAGE_FACTOR.openArray}${row.sort((a, b) => a - b).join(MESSAGE_FACTOR.joinSeperator)}${MESSAGE_FACTOR.closeArray}`)
+      .join(MESSAGE_FACTOR.newLine);
   },
 
   matchResultString() {

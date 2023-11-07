@@ -1,6 +1,7 @@
 import LottoStore from "./Model/LottoStore.js";
 import InputView from "./View/InputView.js";
 import OutputView from "./View/OutputView.js";
+import { PURCHASE_AMOUNT } from "./constants/lotto.js";
 
 class App {
   #lottoStore;
@@ -33,7 +34,7 @@ class App {
   }
 
   #changeAmountToQuantity(purchaseAmount) {
-    return purchaseAmount / 1000;
+    return purchaseAmount / PURCHASE_AMOUNT.unit;
   }
 
   #setUpLottoStore(purchaseQuantity) {

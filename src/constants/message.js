@@ -30,3 +30,14 @@ export const ERROR_MESSAGE = Object.freeze({
   invalidNumberRange: "로또 번호는 1부터 45 사이의 숫자여야 합니다.\n",
   notInteger: "정수를 입력해야 합니다.\n",
 });
+
+export const MESSAGE_FACTOR = Object.freeze({
+  seperator: ",",
+  joinSeperator: ", ",
+  blankSeperator: "",
+  noInput: "",
+  returnRate: "returnRate",
+  newLine: "\n",
+  openArray: "[",
+  closeArray: "]",
+});

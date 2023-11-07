@@ -1,17 +1,24 @@
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
-import { LOTTO_WINNING_AMOUNT } from "../constants/lotto.js";
+import {
+  LOTTO,
+  LOTTO_MATCH_RESULT,
+  LOTTO_WINNING_AMOUNT,
+  MATH_FACTORS,
+  PURCHASE_AMOUNT,
+} from "../constants/lotto.js";
+import { MESSAGE_FACTOR } from "../constants/message.js";
 
 class LottoStore {
   #lottos = [];
 
   #LottoMatchResult = {
-    fifthPlace: 0,
-    fourthPlace: 0,
-    thirdPlace: 0,
-    secondPlace: 0,
-    firstPlace: 0,
-    returnRate: 0,
+    fifthPlace: LOTTO_MATCH_RESULT.initialResultValue,
+    fourthPlace: LOTTO_MATCH_RESULT.initialResultValue,
+    thirdPlace: LOTTO_MATCH_RESULT.initialResultValue,
+    secondPlace: LOTTO_MATCH_RESULT.initialResultValue,
+    firstPlace: LOTTO_MATCH_RESULT.initialResultValue,
+    returnRate: LOTTO_MATCH_RESULT.initialResultValue,
   };
 
   constructor(purchaseQuantity) {
@@ -28,7 +35,7 @@ class LottoStore {
   }
 
   #pickRandomNumbers() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(LOTTO.minValue, LOTTO.maxValue, LOTTO.numberLength);
   }
 
   #createLottos(randomLottoNumbers) {
@@ -76,17 +83,17 @@ class LottoStore {
 
   #calculateReturnRate() {
     const totalWinningAmount = this.#calculateTotalWinningAmount();
-    const returnRate = (totalWinningAmount / (this.#lottos.length * 1000)) * 100;
-    const roundedReturnRate = Math.round((returnRate + Number.EPSILON) * 10) / 10;
+    const returnRate = (totalWinningAmount / (this.#lottos.length * PURCHASE_AMOUNT.unit)) * MATH_FACTORS.percentage;
+    const roundedReturnRate = Math.round((returnRate + Number.EPSILON) * MATH_FACTORS.roundingDigit) / MATH_FACTORS.roundingDigit;
     this.#LottoMatchResult.returnRate = roundedReturnRate;
   }
 
   #calculateTotalWinningAmount() {
     return Object.keys(this.#LottoMatchResult)
-      .filter((place) => place !== "returnRate")
+      .filter((place) => place !== MESSAGE_FACTOR.returnRate)
       .reduce((acc, place) => {
         return acc + this.#LottoMatchResult[place] * LOTTO_WINNING_AMOUNT[place];
-      }, 0);
+      }, MATH_FACTORS.initialValue);
   }
 }
 

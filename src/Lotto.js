@@ -1,4 +1,5 @@
 import { COMMON_NUMBER_VALIDATOR, LOTTO_NUMBERS_VALILDATOR } from "./utils/validation.js";
+import { MATH_FACTORS } from "./constants/lotto.js";
 
 class Lotto {
   #numbers;
@@ -37,7 +38,7 @@ class Lotto {
   }
 
   #calculateMatchCount(numbers) {
-    let matchCount = 0;
+    let matchCount = MATH_FACTORS.initialValue;
 
     numbers.forEach((number) => {
       if (this.#numbers.includes(number)) matchCount++;
