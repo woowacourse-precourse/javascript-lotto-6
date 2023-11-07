@@ -5,7 +5,7 @@ export const printAttempt = (attempt) => {
   print(`\n${attempt + OUTPUT_MESSAGE.ATTEMPT}`)
 }
 
-export const printRandomNumberArray = (array) => {
+export const printRandomNumbersArray = (array) => {
   array.forEach((numbers) => {
     print(numbers);
   })

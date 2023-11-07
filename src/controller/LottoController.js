@@ -1,30 +1,30 @@
 import Lotto from "../model/Lotto.js"
 import { getBonusNumber, getUserAmount, getWinningNumber } from "../view/input.js"
-import { printAttempt, printRandomNumberArray } from "../view/Output.js";
-import { LOTTO_PRICE } from "../constatns/number.js";
-import { getRandomNumber } from "../utils.js";
+import { printAttempt, printRandomNumbersArray } from "../view/output.js";
+import { LOTTO } from "../constatns/number.js";
+import { getRandomNumbers } from "../utils.js";
 
 class LottoController {
 
   async lottoStart() {
-    const attempt = await getUserAmount() / LOTTO_PRICE;
-    const randomNumberArray = this.getRandomNumberArray(attempt);
+    const attempt = await getUserAmount() / LOTTO.PRICE;
+    const randomNumbersArray = this.getRandomNumbersArray(attempt);
     printAttempt(attempt);
-    printRandomNumberArray(randomNumberArray);
+    printRandomNumbersArray(randomNumbersArray);
 
-    const winningNumber = await getWinningNumber();
-    const lotto = new Lotto(winningNumber);
+    const lotto = new Lotto(await getWinningNumber());
     const bonusNumber = await getBonusNumber();
+    lotto.lottoMatchStart(randomNumbersArray);
   }
 
-  // 로또 번호 저장할 2차원 배열 생성
-  getRandomNumberArray(attempt) {
+  // 랜덤 번호 저장할 2차원 배열 생성
+  getRandomNumbersArray(attempt) {
     const array = Array(attempt);
-    const randomNumberArray = array.fill();
-    randomNumberArray.forEach((e, index) => {
-      randomNumberArray[index] = getRandomNumber();
+    const randomNumbersArray = array.fill();
+    randomNumbersArray.forEach((e, index) => {
+      randomNumbersArray[index] = getRandomNumbers();
     })
-    return randomNumberArray;
+    return randomNumbersArray;
   }
 
 }
