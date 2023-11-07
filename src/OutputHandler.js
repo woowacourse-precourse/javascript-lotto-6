@@ -1,10 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 export default class OutputHandler {
-    static lottoPurchaseAmount() {
-        MissionUtils.Console.print("구입금액을 입력해 주세요.");
-    }
-
     static numberOfLottoPurchase(lottos) {
         MissionUtils.Console.print(`${lottos.length}개를 구매했습니다.`);
         lottos.forEach(lotto => {
