@@ -1,24 +1,23 @@
-import OutputView from '../views/OutputView.js';
-import LottoShop from '../domain/LottoShop.js';
 import { getMatchCount, includeBonusNumber } from '../utils/match.js';
+import LottoShop from '../domain/LottoShop.js';
 import Statistics from '../domain/Statistics.js';
+import OutputView from '../views/OutputView.js';
 
 class LottoController {
   #money;
   #lottos;
   #statistics;
-  #totalRevenueRate;
 
   constructor(money) {
     this.#money = money;
     this.#lottos = LottoShop.purchaseLotto(money);
     this.#statistics = new Statistics();
-    this.#totalRevenueRate = 0;
   }
 
   compareLottos(winningNumbers, bonusNumber) {
     this.#lottos.forEach(lotto => {
       const matchResult = this.matchLotto(lotto, winningNumbers, bonusNumber);
+
       this.#statistics.updateTable(matchResult);
     });
   }
@@ -31,17 +30,9 @@ class LottoController {
     return { count, bonus };
   }
 
-  calculateRateOfReturn() {
-    const matches = Object.values(this.#statistics);
-    let totalRevenueMoney = 0;
-
-    matches.forEach(({ count, prize }) => (totalRevenueMoney += count * prize));
-    this.#totalRevenueRate = (totalRevenueMoney / this.#money) * 100;
-  }
-
   getLottoResult() {
     const statisticsTable = this.#statistics.getTable();
-    const revenueRate = this.calculateRateOfReturn();
+    const revenueRate = this.#statistics.calculateRevenueRate(this.#money);
 
     return { statisticsTable, revenueRate };
   }

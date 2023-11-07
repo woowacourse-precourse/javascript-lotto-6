@@ -1,4 +1,4 @@
-import { MATCH_COUNT, RANK } from '../constants/statistics.js';
+import { MATCH_COUNT, PRIZE, RANK } from '../constants/statistics.js';
 
 class Statistics {
   #table;
@@ -34,6 +34,16 @@ class Statistics {
       return RANK.fifth;
 
     return null;
+  }
+
+  calculateRevenueRate(money) {
+    const tableArray = Object.entries(this.#table);
+    const totalMoney = tableArray.reduce((total, [rank, count]) => {
+      return total + count * PRIZE[rank];
+    }, 0);
+    const revenueRate = (totalMoney / money) * 100;
+
+    return revenueRate;
   }
 
   getRankCount(rank) {
