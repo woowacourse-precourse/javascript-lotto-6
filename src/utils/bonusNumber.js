@@ -6,8 +6,9 @@ async function bonusNumber() {
   try {
     bonusNumberSentence();
     const GET_BONUSNUMBER = await MissionUtils.Console.readLineAsync("");
-    new Bonus(GET_BONUSNUMBER);
-    return GET_BONUSNUMBER;
+    const bonusNumber = Math.floor(GET_BONUSNUMBER);
+    new Bonus(bonusNumber);
+    return bonusNumber;
   } catch (error) {
     MissionUtils.Console.print(error);
   }
