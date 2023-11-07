@@ -19,12 +19,28 @@ class App {
   }
 
   async #readPrice() {
-    const price = await MissionUtils.Console.readLineAsync(PRICE_MESSAGE);
-
+    const input = await MissionUtils.Console.readLineAsync(PRICE_MESSAGE);
+    const price = Number(input);
     if (price % 1000 !== 0) {
-      MissionUtils.Console.print(price);
       throw new Error(ERROR_PRICE_INPUT);
     }
+    this.#buyLotto(price / 1000);
+  }
+
+  #buyLotto(count) {
+    let lottos = [];
+
+    for (let i = 0; i < count; i++) {
+      lottos.push(
+        MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
+          (a, b) => a - b,
+        ),
+      );
+    }
+    MissionUtils.Console.print(count + "개를 구매했습니다.");
+    lottos.forEach((lotto) => {
+      MissionUtils.Console.print(`[${lotto.join(", ")}]`);
+    });
   }
 }
 
