@@ -20,7 +20,7 @@ class App {
 
   async play() {
     const { purchaseLotto, purchaseAmount } = await this.#getPurchaseLotto();
-    OutputView.printAutoLotto(purchaseLotto, purchaseAmount);
+    OutputView.printPurchaseLotto(purchaseLotto, purchaseAmount);
 
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
