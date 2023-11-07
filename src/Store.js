@@ -36,13 +36,13 @@ class Store {
     }
   }
 
-  #calculateLottoAmount() {
+  calculateLottoAmount() {
     const lottoAmount = this.#money / 1000;
     return lottoAmount;
   }
 
   issueLotto() {
-    const lottoAmount = this.#calculateLottoAmount();
+    const lottoAmount = this.calculateLottoAmount();
     for (let i = 0; i < lottoAmount; i++) {
       const lottoNumbers = Lotto.generateLottoNumbers();
       this.#lottoList.push(new Lotto(lottoNumbers));
