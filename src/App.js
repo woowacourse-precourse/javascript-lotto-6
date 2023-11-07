@@ -116,6 +116,40 @@ class App {
   #calculateResult() {
     Console.print(INPUT_MESSAGE.WINNING_MESSAGE);
     Console.print(SYMBOL.DIVIDER);
+    this.#calculateMatchedNumber();
+  }
+
+  #calculateMatchedNumber() {
+    let threeSame = 0;
+    let fourSame = 0;
+    let fiveSame = 0;
+    let fiveSameAndBonusMatch = 0;
+    let sixSame = 0;
+
+    this.#lottoList.forEach(lottoNumbers => {
+      const matchedCount = lottoNumbers.returnSameCount(
+        this.#winningNumbers,
+        this.#bonusNumber,
+      );
+
+      switch (matchedCount) {
+        case 3:
+          threeSame++;
+          break;
+        case 4:
+          fourSame++;
+          break;
+        case 5:
+          fiveSame++;
+          break;
+        case 6:
+          sixSame++;
+          break;
+        case 7:
+          fiveSameAndBonusMatch++;
+          break;
+      }
+    });
   }
 }
 

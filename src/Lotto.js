@@ -25,6 +25,24 @@ class Lotto {
   print() {
     Console.print(`[${this.#numbers.join(', ')}]`);
   }
+
+  returnSameCount(winningNumbers, bonusNumber) {
+    let sameCount = 0;
+    this.#numbers.forEach(number => {
+      if (winningNumbers.includes(number)) {
+        sameCount++;
+      }
+    });
+
+    if (sameCount === 6) {
+      sameCount++;
+    }
+
+    if (this.#numbers.includes(bonusNumber)) {
+      sameCount++;
+    }
+    return sameCount;
+  }
 }
 
 export default Lotto;
