@@ -11,6 +11,10 @@ class OutputHandler {
     Console.print(`${number}${messages.purchase.complete}`);
   }
 
+  static printTicketNumbers(ticketNumbers) {
+    Console.print(ticketNumbers);
+  }
+
   static requestWinningNumbers() {
     Console.print(messages.number.winning);
   }

@@ -10,8 +10,7 @@ class App {
     const ticketCount = await user.purchaseLotto();
     OutputHandler.printPurchaseComplete(ticketCount);
 
-    await machine.getTickets(ticketCount);
-    console.log(machine.getTickets);
+    const tickets = await machine.getTickets(ticketCount);
   }
 }
 
