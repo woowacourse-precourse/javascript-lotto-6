@@ -17,6 +17,7 @@ class OutputView {
 
 	static printWinningResult(lottoResult, rateOfReturn) {
 		Console.print(OUTPUT_VIEW_MESSAGE.winningResult);
+		Console.print(OUTPUT_VIEW_MESSAGE.threeDashLine);
 		Console.print(OUTPUT_VIEW_MESSAGE.fifthPlaceFn(lottoResult.fifthPlaceCount));
 		Console.print(OUTPUT_VIEW_MESSAGE.fourthPlaceFn(lottoResult.fourthPlaceCount));
 		Console.print(OUTPUT_VIEW_MESSAGE.thirdPlaceFn(lottoResult.thirdPlaceCount));

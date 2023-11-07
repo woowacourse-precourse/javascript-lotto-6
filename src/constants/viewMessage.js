@@ -5,7 +5,8 @@ export const INPUT_VIEW_MESSAGE = Object.freeze({
 });
 
 export const OUTPUT_VIEW_MESSAGE = Object.freeze({
-	winningResult: '당첨 통계\n---',
+	winningResult: '당첨 통계',
+	threeDashLine: '---',
 	purchaseHistoryFn: (count) => `${count}개를 구매했습니다.`,
 	fifthPlaceFn: (count) => `3개 일치 (5,000원) - ${count}개`,
 	fourthPlaceFn: (count) => `4개 일치 (50,000원) - ${count}개`,
