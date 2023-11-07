@@ -16,7 +16,7 @@ class OutputView {
   }
 
   static printProfit(profit) {
-    printMessage(STATISTICS.profit_prefix + profit.toFixed(2) + STATISTICS.profit_postfix);
+    printMessage(STATISTICS.profit_prefix + profit.toFixed(1) + STATISTICS.profit_postfix);
   }
 }
 
