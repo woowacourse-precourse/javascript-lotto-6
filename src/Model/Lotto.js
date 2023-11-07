@@ -44,12 +44,16 @@ class Lotto {
     return numbers.sort((a, b) => a - b);
   }
 
+  isInclude(number) {
+    return this.#numbers.includes(number);
+  }
+
   getNumbersToString() {
     return `[${this.#numbers.join(', ')}]`;
   }
 
   getNumbers() {
-    return this.#numbers;
+    return this.#numbers.map(Number);
   }
 }
 

@@ -11,30 +11,45 @@ class LottoGame {
   #lottoMachine;
 
   async run() {
+    const purchaseLotto = await this.#startLottoMachine();
+    const winningLotto = await this.#getWinningLotto();
+
+    purchaseLotto.map((lotto) =>
+      this.#winningMachine.getStatistics({ lotto, winningLotto }),
+    );
+  }
+
+  async #startLottoMachine() {
     const purchaseAmount = await this.#view.readPurchaseAmount();
-    const purchaseLotto = this.#startLottoMachine(purchaseAmount);
-
-    this.#view.printPurchaseLotto(purchaseLotto);
-
-    const numbers = await this.#view.readWinningNumber();
-    const bonusNumber = await this.#view.readBonusNumber();
-
-    const winningLotto = this.#getWinningLotto({
-      numbers,
-      bonusNumber,
-    });
+    this.#generateLottoMachine(purchaseAmount);
+    return this.#getPurchaseLotto();
   }
 
-  #startLottoMachine(purchaseAmount) {
-    this.#lottoMachine = new LottoMachine(purchaseAmount);
-    return this.#lottoMachine.getLotto();
-  }
+  async #getWinningLotto() {
+    const { numbers, bonusNumber } = await this.#readCompareNumbers();
 
-  #getWinningLotto({ numbers, bonusNumber }) {
     return this.#winningMachine.generateWinningLotto({
       numbers,
       bonusNumber,
     });
+  }
+
+  #generateLottoMachine(purchaseAmount) {
+    this.#lottoMachine = new LottoMachine(purchaseAmount);
+  }
+
+  #getPurchaseLotto() {
+    const purchaseLotto = this.#lottoMachine.getLotto();
+    this.#view.printPurchaseLotto(purchaseLotto);
+
+    return purchaseLotto;
+  }
+
+  async #readCompareNumbers() {
+    const numbers = await this.#view.readWinningNumber();
+    const bonusNumber = await this.#view.readBonusNumber();
+
+    return { numbers, bonusNumber };
   }
 }
 

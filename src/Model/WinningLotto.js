@@ -11,7 +11,7 @@ class WinningLotto extends Lotto {
   constructor({ numbers, bonusNumber }) {
     super(numbers);
     this.#validate(numbers, bonusNumber);
-    this.#bonusNumber = bonusNumber;
+    this.#bonusNumber = Number(bonusNumber);
   }
 
   #validate(numbers, bonusNumber) {
@@ -30,6 +30,10 @@ class WinningLotto extends Lotto {
 
   #validateDuplicate(numbers, bonusNumber) {
     throwError(BONUS_DUPLICATE, !numbers.includes(bonusNumber));
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
   }
 }
 
