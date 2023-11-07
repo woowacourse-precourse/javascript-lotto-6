@@ -11,31 +11,31 @@ const WINNING_INFO = Object.freeze({
     rank: 1,
     matchingNumber: 6,
     criteria: '6개 번호 일치',
-    prizeMoney: 2000000000,
+    prizeMoney: 2_000_000_000,
   }),
   [RANK.second]: Object.freeze({
     rank: 2,
     matchingNumber: 5,
     criteria: '5개 번호 + 보너스 번호 일치',
-    prizeMoney: 30000000,
+    prizeMoney: 30_000_000,
   }),
   [RANK.third]: Object.freeze({
     rank: 3,
     matchingNumber: 5,
     criteria: '5개 번호 일치',
-    prizeMoney: 1500000,
+    prizeMoney: 1_500_000,
   }),
   [RANK.fourth]: Object.freeze({
     rank: 4,
     matchingNumber: 4,
     criteria: '4개 번호 일치',
-    prizeMoney: 50000,
+    prizeMoney: 50_000,
   }),
   [RANK.fifth]: Object.freeze({
     rank: 5,
     matchingNumber: 3,
     criteria: '3개 번호 일치',
-    prizeMoney: 5000,
+    prizeMoney: 5_000,
   }),
 });
 
