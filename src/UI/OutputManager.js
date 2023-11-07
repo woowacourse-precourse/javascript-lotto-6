@@ -5,6 +5,7 @@ import {
   RATE_OF_RETURN_OUTPUT_FORMAT,
   WINNING_DESCRIPTION_BY_COUNT,
 } from '../Constants.js';
+import { converttNumberWithCommas } from '../Utils.js';
 
 class OutputManager {
   async printInputErrorMessage(errorMessage) {
@@ -38,7 +39,9 @@ class OutputManager {
   }
 
   printRateOfReturn(rateOfReturn) {
-    Console.print(RATE_OF_RETURN_OUTPUT_FORMAT(rateOfReturn));
+    Console.print(
+      RATE_OF_RETURN_OUTPUT_FORMAT(converttNumberWithCommas(rateOfReturn))
+    );
   }
 
   printGameResult({ matchingCounts, rateOfReturn }) {
