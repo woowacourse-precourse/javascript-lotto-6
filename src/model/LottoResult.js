@@ -1,4 +1,4 @@
-import { GAME_SETTINGS } from '../constants/gameSettings';
+import { GAME_SETTINGS } from '../constants/GameSettings';
 import { PRIZES } from '../constants/Prizes';
 
 export default class LottoResult {

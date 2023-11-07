@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES } from '../constants/ErrorMessages';
-import { GAME_SETTINGS } from '../constants/gameSettings';
+import { GAME_SETTINGS } from '../constants/GameSettings';
 
 export default class InputValidator {
   static validatePurchaseAmount(amount) {

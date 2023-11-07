@@ -1,6 +1,6 @@
 import Lotto from '../../src/model/Lotto';
 import LottoResult from '../../src/model/LottoResult';
-import { GAME_SETTINGS } from '../../src/constants/gameSettings';
+import { GAME_SETTINGS } from '../../src/constants/GameSettings';
 import { PRIZES } from '../../src/constants/Prizes';
 
 describe('LottoResult 클래스', () => {

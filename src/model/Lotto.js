@@ -1,4 +1,4 @@
-import { GAME_SETTINGS } from '../constants/gameSettings';
+import { GAME_SETTINGS } from '../constants/GameSettings';
 import { ERROR_MESSAGES } from '../constants/ErrorMessages';
 
 export default class Lotto {
