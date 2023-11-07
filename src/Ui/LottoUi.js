@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, ERROR_MESSAGE } from '../constants/message';
+import COMMON_VALUE from '../constants/\bcommonValue';
 
 const LottoUi = {
   async inputPurchaseAmount() {
@@ -60,7 +61,7 @@ const LottoUi = {
 
   checkBounds(winningNumbers) {
     winningNumbers.forEach((number) => {
-      if (number < 1 || number > 45) {
+      if (number < COMMON_VALUE.MIN || number > COMMON_VALUE.MAX) {
         return false;
       }
     });
@@ -89,6 +90,7 @@ const LottoUi = {
   validateBonusNumber(bonusNumber) {
     if (Number.isNaN(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
+    } else if (COMMON_VALUE.MIN < 1 || COMMON_VALUE.MAX > 45) {
     }
   },
 };
