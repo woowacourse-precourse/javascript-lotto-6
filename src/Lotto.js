@@ -1,3 +1,13 @@
+import AppError from "./AppError.js";
+import LottoResult from "./LottoResult.js";
+
+const LOTTO_NUMBER_LENGTH = 6;
+
+const ERROR_MESSAGE = {
+  invalidRottoLength: "로또 번호는 6개여야 합니다.",
+  duplication: "중복된 로또 번호가 존재합니다.",
+};
+
 class Lotto {
   #numbers;
 
@@ -7,12 +17,27 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTO_NUMBER_LENGTH) {
+      throw new AppError(ERROR_MESSAGE.invalidRottoLength);
+    }
+    if (new Set(numbers).size !== LOTTO_NUMBER_LENGTH) {
+      throw new AppError(ERROR_MESSAGE.duplication);
     }
   }
 
-  // TODO: 추가 기능 구현
+  getInformation() {
+    return [...this.#numbers].sort((a, b) => a - b);
+  }
+
+  checkWinningNumbers(winningNumbers, bonusNumber) {
+    const matchedCount = this.#numbers.reduce(
+      (count, num) => (winningNumbers.includes(num) ? count + 1 : count),
+      0,
+    );
+    const bonusIncluded = this.#numbers.includes(bonusNumber);
+
+    return new LottoResult(matchedCount, bonusIncluded);
+  }
 }
 
 export default Lotto;

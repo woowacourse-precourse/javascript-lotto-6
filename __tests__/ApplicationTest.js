@@ -1,38 +1,16 @@
 import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { mockQuestions, mockRandoms, getLogSpy } from "../test-utils.js";
 
-const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
-
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-
-    return Promise.resolve(input);
-  });
-};
-
-const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
-};
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-  return logSpy;
-};
-
-const runException = async (input) => {
+const runException = async (inputs, randomNumbers) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
-  const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
+  const questionMock = inputs.flatMap((input) =>
+    input.fallback == undefined ? [input.value] : [input.value, input.fallback],
+  );
 
-  mockRandoms([RANDOM_NUMBERS_TO_END]);
-  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
+  mockRandoms([randomNumbers]);
+  mockQuestions(questionMock);
 
   // when
   const app = new App();
@@ -40,12 +18,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -91,8 +69,40 @@ describe("로또 테스트", () => {
     });
   });
 
-  test("예외 테스트", async () => {
-    await runException("1000j");
+  describe("사용자 인풋 예외 테스트", () => {
+    const DEFAULT_RANDOM_NUMBERS = [1, 2, 3, 4, 5, 6];
+
+    test("구입금액 예외 발생시 에러를 발생시키고 다시 구입금액을 물어본다.", async () => {
+      await runException(
+        [
+          { value: "1000j", fallback: "1000" },
+          { value: "1,2,3,4,5,6" },
+          { value: "7" },
+        ],
+        DEFAULT_RANDOM_NUMBERS,
+      );
+    });
+
+    test("당첨번호 입력 예외 발생시 에러를 발생시키고 다시 당첨번호를 물어본다.", async () => {
+      await runException(
+        [
+          { value: "1000" },
+          { value: "a,b,c,d,e,f", fallback: "1,2,3,4,5,6" },
+          { value: "7" },
+        ],
+        DEFAULT_RANDOM_NUMBERS,
+      );
+    });
+
+    test("보너스 번호 입력 예외 발생시 에러를 발생시키고 다시 보너스 번호를 물어본다.", async () => {
+      await runException(
+        [
+          { value: "1000" },
+          { value: "1,2,3,4,5,6" },
+          { value: "100", fallback: "7" },
+        ],
+        DEFAULT_RANDOM_NUMBERS,
+      );
+    });
   });
 });
-
