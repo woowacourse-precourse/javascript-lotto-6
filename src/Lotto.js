@@ -1,3 +1,6 @@
+import { Console } from '@woowacourse/mission-utils';
+import { JOIN_SEPARATOR, JOIN_PREFIX, JOIN_SUFFIX } from './constant/Constant.js';
+
 class Lotto {
   #numbers;
 
@@ -12,7 +15,9 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  printLotto() {
+    Console.print(`${JOIN_PREFIX}${this.#numbers.join(JOIN_SEPARATOR)}${JOIN_SUFFIX}`);
+  }
 }
 
 export default Lotto;

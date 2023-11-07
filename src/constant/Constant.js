@@ -1,9 +1,9 @@
 export const MESSAGE = {
   PRICE_INPUT: "구입금액을 입력해 주세요.\n",
   BOUGHT_LOTTOS: "개를 구매했습니다.",
-  LOTTO_INPUT: "당첨 번호를 입력해 주세요.",
-  BONUS_INPUT: "보너스 번호를 입력해 주세요.",
-  LOTTO_RESULT_PREFIX: "당첨 통계\n---",
+  LOTTO_INPUT: "\n당첨 번호를 입력해 주세요.",
+  BONUS_INPUT: "\n보너스 번호를 입력해 주세요.",
+  LOTTO_RESULT_PREFIX: "\n당첨 통계\n---",
   LOTTO_RESULT_THREE: "3개 일치 (5,000원) - ",
   LOTTO_RESULT_FOUR: "4개 일치 (50,000원) - ",
   LOTTO_RESULT_FIVE: "5개 일치 (1,500,000원) - ",
@@ -14,9 +14,16 @@ export const MESSAGE = {
   EARNING_RATE_SUFFIX: "입니다."
 };
 
-export const SEPARATOR = ",";
+export const SPLIT_SEPARATOR = ",";
+export const JOIN_SEPARATOR = ", ";
+export const JOIN_PREFIX = "[";
+export const JOIN_SUFFIX = "]";
+export const NEW_LINE = "\n";
 export const UNIT = 1000;
 export const PRICE_TYPE = "number";
+export const RANGE_START = 1;
+export const RANGE_END = 45;
+export const BALL_NUMBERS = 6;
 
 export const MATCH = {
   THREE: 5000,
