@@ -6,7 +6,9 @@ class App {
     const MONEY = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
     if(
       MONEY === null 
+      || MONEY === '0'
       || MONEY.match(/\D/) 
+      || isNaN(parseInt(MONEY))
       || parseInt(MONEY) % 1000 != 0
     ) {
       throw new Error('[ERROR] 잘못된 금액을 입력하셨습니다.');
@@ -38,7 +40,9 @@ class App {
     if(
       num === null
       || num.match(/\D/)
-      || (num < 1 || num > 45)
+      || isNaN(parseInt(num))
+      || parseInt(num) < 1 
+      || parseInt(num) > 45
     ) {
       throw new Error('[ERROR] 잘못된 번호를 입력하셨습니다.');
     }
@@ -59,8 +63,6 @@ class App {
       const match_num = ticket.countMatchNumber(winning_number);
       const has_bonus_num = ticket.hasBonusNumber(bonus_number);
 
-      //ticket.printNum();
-      //MissionUtils.Console.print(`${match_num}개와 보너스 ${match_bonus_num}`);
       if(match_num >= 3) {
         winning_stats[has_bonus_num ? (match_num === 5 ? 'bonus' : match_num) : match_num] += 1;
       }
@@ -86,10 +88,33 @@ class App {
 
   }
 
+  calcProfitRate(MONEY, winning_stats) {
+    const pirze_money = {
+      3: 5000,
+      4: 50000,
+      5: 1500000,
+      'bonus': 300000000,
+      6: 2000000000,
+    };
+    let total_money = 0;
+    let profit_rate = 0;
+
+    for(const key in winning_stats) {
+      if(winning_stats[key]) {
+        total_money += winning_stats[key] * pirze_money[key];
+      }
+    }
+
+    profit_rate = (total_money / MONEY) * 100;
+    profit_rate = profit_rate.toFixed(1);
+    profit_rate = profit_rate.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    MissionUtils.Console.print(`총 수익률은 ${profit_rate}%입니다.`);
+  }
+
   async play() {
     const MONEY = await this.getUserMoney();
     const NUM_TICKETS = parseInt(MONEY) / 1000;
-    MissionUtils.Console.print(`\n${NUM_TICKETS}개를 구매했습니다.`);
+    MissionUtils.Console.print(`${NUM_TICKETS}개를 구매했습니다.`);
 
     const tickets = this.generateRandomLottoNum(NUM_TICKETS);
     tickets.forEach(ticket => {
@@ -100,6 +125,7 @@ class App {
     
     const winning_stats = this.winningStats(winning_number, bonus_number, tickets);
     this.printWinningStats(winning_stats);
+    this.calcProfitRate(MONEY, winning_stats);
   }
 }
 
