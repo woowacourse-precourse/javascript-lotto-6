@@ -42,12 +42,25 @@ class LottoController {
   }
 
   async getWinningNumbers() {
-    return InputView.getWinningNumbers();
+    while (true) {
+      try {
+        return await InputView.getWinningNumbers();
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
-
+  
   async getBonusNumbers() {
-    return InputView.getBonusNumbers();
+    while (true) {
+      try {
+        return await InputView.getBonusNumbers();
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
+  
 
   playLottoGame(winningNumbers, bonusNumbers, ticketPrice) {
     const result = this.#calculateLottoResult(winningNumbers, bonusNumbers, ticketPrice);
