@@ -1,4 +1,4 @@
-import VARIABLE from "../constant/Variable.js";
+import VARIABLE from "./constant/Variable.js";
 
 class Calculate {
   calculateResult(lottoResult) {

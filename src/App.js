@@ -2,7 +2,7 @@ import INPUT from './view/Input.js';
 import OUTPUT from './view/Output.js';
 import COMPUTER from './Computer.js';
 import AppError from './constant/AppError.js';
-import CALCULATE from './calculate/Calculate.js';
+import CALCULATE from './Calculate.js';
 
 class App {
   constructor() {
