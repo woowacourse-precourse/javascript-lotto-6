@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import OutputView from './OutputView.js';
 
 class InputView {
   static async readLottoAmount() {
@@ -14,9 +15,16 @@ class InputView {
       .split(',')
       .map((number) => parseInt(number.trim()));
 
-    console.log(winningNumbersList);
-
     return winningNumbersList;
+  }
+
+  static async readLottoBonusNumber() {
+    OutputView.printBlankLine();
+    const bonusNumber = await Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.\n'
+    );
+
+    return parseInt(bonusNumber);
   }
 }
 
