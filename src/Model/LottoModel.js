@@ -7,6 +7,7 @@ class LottoModel {
   #lottos; // 구입한 로또 배열
   #winning_lotto; // 당첨 로또
   #winning_result; // 등수별 당첨 횟수
+  #rate; // 수익률
 
   constructor() {
     this.#winning_result = new Object(WINNING_RESULT_DEFAULT);
@@ -69,6 +70,20 @@ class LottoModel {
    */
   get_winning_result() {
     return this.#winning_result;
+  }
+
+  /**
+   * 수익률을 반환하는 메서드
+   */
+  get_rate() {
+    return this.#rate;
+  }
+
+  /**
+   * 수익률을 갱신하는 메서드
+   */
+  set_rate(rate) {
+    this.#rate = rate;
   }
 }
 
