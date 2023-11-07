@@ -1,15 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
 import { 
   USER_INPUT,
-  MESSAGE,
   ERROR_MESSAGE,
   PRICE_UNIT,
   PRICE_ZERO,
-  DELIMITER,
   LOTTO_MONEY,
-  LOTTO_RESULT,
-  DELIMITER_SPACE
+  LOTTO_RESULT
 } from "./constants/constants.js";
+import OutputView from "./view/outputView.js";
 import Lotto from "./Lotto.js";
 import TargetNumber from "./model/TargetNumber.js";
 import BonusNumber from "./model/BonusNumber.js";
@@ -43,7 +41,7 @@ class App {
     }
 
     this.setLottoNumbers();
-    this.showLottoNumbers();
+    OutputView.showLottoNumbers(this.lottoTickets);
 
     while(this.targetNumber.getTargetNumber().length === 0){
       await this.targetNumber.setTargetNumber();
@@ -55,8 +53,9 @@ class App {
       await this.bonusNumber.setBonusNumber();
     }
 
-    this.showLottoResult();
-    this.showRate();
+    this.setLottoResult();
+    OutputView.showLottoResult(this.result);
+    OutputView.showRate(this.profits , this.lottoPrice);
   }
 
   async getLottoPrice() {
@@ -85,29 +84,21 @@ class App {
     }
   }
 
-  showLottoNumbers() {
-    Console.print(this.lottoTickets.length + MESSAGE.LOTTO_TICKET);
-
-    this.lottoTickets.forEach((lotto) => {
-      Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
-    })
-  }
-
-  showLottoResult() {
-    Console.print('당첨 통계\n---');
-    
+  setLottoResult() {
     this.lottoTickets.forEach((lotto) => {
       const matchTargetNumber = lotto.getMatchTargetNumber(this.targetNumber.getTargetNumber());
       const matchBonusNumber = lotto.getMatchBonusNumber(this.bonusNumber.getBonusNumber());
      
-      this.updateResult(matchTargetNumber , matchBonusNumber)
+      this.updateResult(matchTargetNumber , matchBonusNumber);
     })
 
-    for (const KEY in this.result) {
-      Console.print(`${LOTTO_RESULT[KEY]} - ${this.result[KEY]}개`);
-      this.profits += LOTTO_MONEY[KEY] * this.result[KEY];
-    }
+    this.calcaulateProfits();
+  }
 
+  calcaulateProfits() {
+    for (const key in this.result) {
+      this.profits += LOTTO_MONEY[key] * this.result[key];
+    }
   }
 
   updateResult(matchTargetNumber , matchBonusNumber) {
@@ -125,11 +116,6 @@ class App {
         this.result.FIFTH += 1;
         break;
     }
-  }
-
-  showRate() {
-    const rate = ((this.profits/this.lottoPrice) * 100).toFixed(1);
-    Console.print(`총 수익률은 ${rate}%입니다.`) 
   }
 }
 
