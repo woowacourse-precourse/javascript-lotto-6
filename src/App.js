@@ -1,5 +1,15 @@
 class App {
-  async play() {}
+  async play() {
+    const PRICE = await getPurchaseAmount();
+  }
+
+  async getPurchaseAmount(){
+    const INPUTPRICE = parseInt(Console.readLineAsync("구입금액을 입력해 주세요."));
+    if(INPUTPRICE % 1000 !== 0)
+      throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.")
+    return INPUTPRICE;
+  }
+
 }
 
 export default App;
