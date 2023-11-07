@@ -20,6 +20,7 @@ class Customer {
 
   printLottoTickets() {
     Console.print(`${this.cntLottoTicekts}개를 구매했습니다.`);
+    
     this.lottoList.forEach((lotto) => {
       Console.print(`${lotto.getNumbers()}`);
     })
