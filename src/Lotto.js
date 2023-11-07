@@ -9,8 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validator.invalidLottoNumberCount(numbers);
-    Validator.duplicatedLottoNumber(numbers);
+    Validator.validateLotto(numbers);
   }
 
   getNumbers() {

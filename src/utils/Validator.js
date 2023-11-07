@@ -28,6 +28,12 @@ class Validator {
     validators.forEach(validator => validator(bonusNumber));
   }
 
+  static validateLotto(numbers) {
+    const validators = [this.invalidLottoNumberCount, this.duplicatedLottoNumber];
+
+    validators.forEach(validator => validator(numbers));
+  }
+
   static remainderNotZero(purchaseAmount) {
     if (purchaseAmount % CONSTANTS.purchaseAmount.amountDivisor !== 0)
       throw new Error(ERROR.message.remainderNotZero);
