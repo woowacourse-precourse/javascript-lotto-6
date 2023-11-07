@@ -45,6 +45,10 @@ class GameManager {
     if (match === 3) return 'five';
     return null;
   }
+
+  static calculateProfit(earn, money) {
+    Console.print(`총 수익률은 ${((earn / money) * 100).toFixed(1)}%입니다.`);
+  }
 }
 
 export default GameManager;
