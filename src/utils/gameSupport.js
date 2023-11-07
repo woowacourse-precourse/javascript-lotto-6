@@ -68,3 +68,8 @@ export const getPurchasedLottoArray = (lottoCounts) => {
   }
   return purchasedLottoArray;
 };
+
+const hasBonusNumber = (lottoArray, bonusNumber) => {
+  return lottoArray.some((lottoNumber) => lottoNumber === bonusNumber);
+};
+
