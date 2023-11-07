@@ -70,7 +70,7 @@ describe("LottoStoreTest", () => {
     expect(mockReadLineAsync).toHaveBeenCalledTimes(1);
   });
 
-  test("사용자의 로또 티켓과 당첨 번호를 비교하여 결과를 반환한다", async () => {
+  test("사용자의 로또 티켓과 당첨 번호가 6개 일치시 해당 결과를 반환한다", async () => {
     mockReadLineAsync
       .mockResolvedValueOnce("1,2,3,4,5,6")
       .mockResolvedValueOnce("7");
