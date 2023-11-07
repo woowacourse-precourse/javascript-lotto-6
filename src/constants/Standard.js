@@ -7,9 +7,10 @@ const LOTTO = Object.freeze({
 });
 
 const PROFIT = Object.freeze({
+  underTwo: 0,
   three: 5,
   four: 50,
-  five: 15000,
+  five: 1500,
   fiveWithBonus: 30000,
   six: 2000000,
 });
