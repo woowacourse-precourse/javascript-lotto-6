@@ -31,4 +31,9 @@ describe('로또 클래스 테스트', () => {
     const numbers = [1, 2, 3, 4, 5, 46];
     await expect(Lotto.createLottoInstance(numbers)).rejects.toThrow('[ERROR]');
   });
+
+  test('로또 번호의 범위는 1부터 45 안되면 예외가 발생한다.', async () => {
+    const numbers = [-1, 2, 3, 4, 5, 6];
+    await expect(Lotto.createLottoInstance(numbers)).rejects.toThrow('[ERROR]');
+  });
 });
