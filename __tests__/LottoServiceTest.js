@@ -3,6 +3,24 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE } from '../src/utils/Define';
 import LottoService from '../src/LottoService';
 
+describe('로또 생성 테스트', () => {
+  // given
+  const lottoService = new LottoService();
+  const addCases = [
+    { input: 3000, expected: 3 },
+    { input: 1000, expected: 1 },
+  ];
+  test.each(addCases)(
+      '구입 금액이 $input이라면, 로또 개수는 $expected 개가 되어야 한다.',
+      ({ input, expected }) => {
+        // when
+        const lottoCount = lottoService.sellLotto(input)[0].length;
+        // then
+        expect(lottoCount).toEqual(expected);
+      },
+  );
+});
+
 describe('로또 구입 금액 유효성 테스트', () => {
   // given
   const inputCases = [
@@ -27,20 +45,4 @@ describe('로또 구입 금액 유효성 테스트', () => {
   );
 });
 
-describe('로또 생성 테스트', () => {
-  // given
-  const lottoService = new LottoService();
-  const addCases = [
-    { input: 3000, expected: 3 },
-    { input: 1000, expected: 1 },
-  ];
-  test.each(addCases)(
-    '구입 금액이 $input이라면, 로또 개수는 $expected 개가 되어야 한다.',
-    ({ input, expected }) => {
-      // when
-      const lottoCount = lottoService.sellLotto(input)[0].length;
-      // then
-      expect(lottoCount).toEqual(expected);
-    },
-  );
-});
+

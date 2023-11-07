@@ -35,8 +35,12 @@ class Lotto {
   }
 
   #validateNumbersRange(numbers) {
-    numbers.every(this.validateOutOfRange);
+    const isValid = numbers.every(this.validateOutOfRange);
+    if (!isValid) {
+      throw CustomError.lottoValidateError(ERROR_MESSAGE.outOfRange);
+    }
   }
+
 
   includeNumber(number) {
     return this.#numbers.includes(number);
