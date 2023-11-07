@@ -21,6 +21,8 @@ class LottoController {
 
   #lotto;
 
+  #bonus;
+
   #lottoStore;
 
   constructor() {
@@ -72,11 +74,14 @@ class LottoController {
     }
   }
 
+  /**
+   * 2등과 3등을 구분할 보너스 번호를 뽑는다.
+   */
   async #drawBonusNumber() {
     try {
-      const bonusNumberInput = await this.#inputView.readBonusNumber();
-      const bonusInstance = new Bonus(bonusNumberInput, this.#winningNumbers);
-      this.#bonusNumber = bonusInstance.getBonusNumber();
+      const inputNumber = await this.#inputView.readBonusNumber();
+      this.#bonus = new Bonus(inputNumber, this.#winningNumbers);
+      this.#bonusNumber = this.#bonus.getBonusNumber();
     } catch (error) {
       OutputView.printError(error);
       await this.#drawBonusNumber();

@@ -26,14 +26,12 @@ describe('로또 클래스 테스트', () => {
   });
 
   test('getWinningNumbers() 메서드가 기대한 값과 일치하는지 확인한다.', () => {
-    const numbers = [1, 2, 3, 4, 5, 6];
-    const lotto = new Lotto(numbers);
-    expect(lotto.getWinningNumbers()).toEqual(numbers);
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    expect(lotto.getWinningNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
   test('getUserLotto() 메서드가 기대한 값과 일치하는지 확인한다.', () => {
-    const numbers = [10, 20, 30, 40, 41, 42];
-    const lotto = new Lotto(numbers);
-    expect(lotto.getUserLotto()).toEqual(numbers);
+    const lotto = new Lotto([10, 20, 30, 40, 41, 42]);
+    expect(lotto.getUserLotto()).toEqual([10, 20, 30, 40, 41, 42]);
   });
 });

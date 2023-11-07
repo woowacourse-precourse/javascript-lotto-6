@@ -5,6 +5,11 @@ class Bonus {
 
   #winningNumbers;
 
+  /**
+   * 입력받은 당첨 번호와 보너스 번호
+   * @param {string} bonusNumber
+   * @param {number[]} winningNumbers
+   */
   constructor(bonusNumber, winningNumbers) {
     this.#bonusNumber = Number(bonusNumber);
     this.#winningNumbers = winningNumbers;
