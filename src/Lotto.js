@@ -1,3 +1,6 @@
+import OPTION from './constants/option.js';
+import InputError from './error/InputError.js';
+
 class Lotto {
   #numbers;
 
@@ -7,8 +10,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== OPTION.lottoLength) {
+      throw new InputError(`로또 번호는 ${OPTION.lottoLength}개여야 합니다.`);
+    }
+    if (numbers.length !== new Set(numbers).size) {
+      throw new InputError('로또 번호는 중복되지 않아야 합니다.');
     }
   }
 
