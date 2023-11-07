@@ -27,4 +27,20 @@ describe('LottoService 테스트', () => {
 
     expect(lottoService.getLottos()).toHaveLength(2);
   });
+
+  test(`당첨 번호를 설정할 수 있다.`, () => {
+    const input = [1, 2, 3, 4, 5, 6];
+
+    lottoService.setWinningNumbers(input);
+
+    expect(lottoService.getWinningNumbers()).toBeDefined();
+  });
+
+  test(`당첨 번호를 반환할 수 있다.`, () => {
+    const input = [1, 2, 4, 3, 5, 6];
+
+    lottoService.setWinningNumbers(input);
+
+    expect(lottoService.getWinningNumbers()).toEqual(input);
+  });
 });
