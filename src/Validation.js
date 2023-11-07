@@ -22,6 +22,13 @@ const Validation = {
     this.checkDuplicate(numberList);
   },
 
+  checkBonusNumber(bonusNumber) {
+    this.checkNull(bonusNumber);
+    this.checkBlank(bonusNumber);
+    this.checkChar(bonusNumber);
+    this.checkOutOfRange(bonusNumber);
+  },
+
   checkNull(number) {
     if (number.length === 0) {
       throw new Error(INPUT_ERROR.null);
