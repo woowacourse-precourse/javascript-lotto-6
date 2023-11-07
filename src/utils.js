@@ -9,3 +9,9 @@ export const isEmpty = (value) => {
 
   return false;
 };
+
+export const isDuplicated = (values) => {
+  const set = new Set(values);
+
+  return set.size !== values.length;
+};
