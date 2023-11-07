@@ -1,4 +1,5 @@
 import { Random, Console } from "@woowacourse/mission-utils";
+import { MESSAGE_OUTPUT } from "../constant/Constant";
 
 class LottoOutput {
   lottoCnt(money) {
@@ -13,6 +14,17 @@ class LottoOutput {
       Console.print(lottoNum);
       lottoNumArr.push(lottoNum);
     }
+  }
+
+  printWinning() {
+    let [matchThree, matchFour, matchFive, matchBonus, matchSix] = 0;
+
+    Console.print(MESSAGE_OUTPUT.WINNING_OUTPUT);
+    Console.print(MESSAGE_OUTPUT.WINNING_THREE(matchThree));
+    Console.print(MESSAGE_OUTPUT.WINNING_FOUR(matchFour));
+    Console.print(MESSAGE_OUTPUT.WINNING_FIVE(matchFive));
+    Console.print(MESSAGE_OUTPUT.WINNING_BONUS(matchBonus));
+    Console.print(MESSAGE_OUTPUT.WINNING_SIX(matchSix));
   }
 }
 
