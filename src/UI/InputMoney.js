@@ -7,8 +7,12 @@ class InputMoney {
     const MONEY = await MissionUtils.Console.readLineAsync(
       "구입금액을 입력해 주세요.\n"
     );
-
-    MONEY_VALIDITY.inputMoneyValidity(MONEY);
+    try {
+      MONEY_VALIDITY.inputMoneyValidity(MONEY);
+    } catch (e) {
+      MissionUtils.Console.print(e.message);
+      return this.inputMoney();
+    }
     return Math.floor(MONEY / 1000);
   }
 }
