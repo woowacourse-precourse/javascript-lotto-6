@@ -1,3 +1,29 @@
+import {
+  FIVE_AND_BONUS_MATCHES_MESSAGE,
+  FIVE_MATCHES_MESSAGE,
+  FOUR_MATCHES_MESSAGE,
+  PURCHASE_AMOUNT_GUIDE_MESSAGE,
+  SEPERATOR,
+  SIX_MATCHES_MESSAGE,
+  THREE_MATCHES_MESSAGE,
+  TOTAL_RETURN_GUIDE_MESSAGE,
+  TOTAL_RETURN_MESSAGE,
+  UNIT_MESSAGE,
+  WINNING_STATISTICS_GUIDE_MESSAGE,
+} from "./constants/messages.js";
+import { WINNING_LOTTO_COUNT } from "./constants/winningLottoCount.js";
+import {
+  checkLottoNumbers,
+  getPurchasedLottoArray,
+  getPurchasedLottoCounts,
+  printMessage,
+  printPurchasedLottoNumbers,
+  totalProfitMargin,
+  userLottoInputAmount,
+  userLottoInputBonusNumber,
+  userLottoInputSixNumbers,
+} from "./utils/gameSupport.js";
+
 class App {
   async play() {
     const amount = await userLottoInputAmount();
