@@ -1,7 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-
 import Lotto from './Lotto.js';
-
 import { conditions, throwError } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
 

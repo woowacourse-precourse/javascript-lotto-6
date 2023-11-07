@@ -1,8 +1,6 @@
 import View from '../View/View.js';
-
 import LottoMachine from '../Model/LottoMachine.js';
 import WinningMachine from '../Model/WinningMachine.js';
-import ERROR from '../constants/Error.js';
 
 class LottoGame {
   #view = new View();

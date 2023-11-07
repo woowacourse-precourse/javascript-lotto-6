@@ -1,10 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import { Validator } from '../util/Validator.js';
+import { validateCommonInput } from '../util/Validator.js';
 
 const InputView = {
   async inputLine(message) {
     const userInput = await Console.readLineAsync(message);
-    Validator.validateCommonInput(userInput);
+    validateCommonInput(userInput);
 
     return userInput;
   },
