@@ -1,4 +1,5 @@
-import { input } from "./input.js";
+import { Input } from "./Input.js";
+import { Output } from "./Output.js";
 import PurchasePrice from "./PurchasePrice.js";
 import Lotto from "./Lotto.js";
 import BonusNumber from "./BonusNumber.js";
@@ -9,45 +10,46 @@ class App {
   bonusNumber = 0;
 
   constructor() {
-    this.purchasePrice = 0;
-    this.lotto = [];
-    this.bonusNumber = 0;
+    this.game = new Game();
   }
 
-  async inputLottoMoney() {
+  async getPurchasePrice() {
     try {
-      const price = await input.getInputPurchasePrice();
-      this.purchasePrice = new PurchasePrice(price);
+      this.purchasePrice = await Input.inputPurchasePrice();
+      Output.showEnter();
+      return new PurchasePrice(this.purchasePrice);
     } catch (error) {
-      console.error(error);
-      return this.inputLottoMoney();
+      Output.showError(error);
+      return this.getPurchasePrice();
     }
   }
 
-  async inputLottoNumbers() {
+  async getLottoNumbers() {
     try {
-      const lottoArray = await input.getInputLotto();
-      this.lotto = new Lotto(lottoArray);
+      this.lotto = await Input.inputLotto();
+      Output.showEnter();
+      return new Lotto(this.lotto);
     } catch (error) {
-      console.error(error);
+      Output.showError(error);
       return this.inputLottoNumbers();
     }
   }
 
-  async inputBonusNumber() {
+  async getBonusNumber() {
     try {
-      const bonus = await input.getInputBonusNumber();
-      this.bonusNumber = new BonusNumber(bonus);
+      this.bonusNumber = await Input.inputBonusNumber();
+      Output.showEnter();
+      return new BonusNumber(this.bonusNumber);
     } catch (error) {
-      console.error(error);
+      Output.showError(error);
       return this.inputBonusNumber();
     }
   }
 
   async play() {
-    await this.inputLottoMoney();
-    await this.inputLottoNumbers();
-    await this.inputBonusNumber();
+    await this.getPurchasePrice();
+    await this.getLottoNumbers();
+    await this.getBonusNumber();
   }
 }
 
