@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MATCHED_RESULT } from "./LottoResult.js";
+import { MATCHED_RESULT_TO_PRICE } from "./TotalLottoResult.js";
 import InputValidator from "./InputValidator.js";
 
 const TEXT = {
@@ -14,19 +15,35 @@ const printFormat = {
     const formattedLottoInfos = lottoInformations
       .map((info) => `[${info.join(", ")}]`)
       .join("\n");
-    return `${count}개를 구매했습니다.
-${formattedLottoInfos}`;
+
+    const logs = [`${count}개를 구매했습니다.`, formattedLottoInfos];
+    return logs.join("\n");
   },
   statistics: (totalLottoResult, profitRate) => {
     const result = totalLottoResult.getResult();
-    return `당첨 통계
----
-3개 일치 (5,000원) - ${result[MATCHED_RESULT.three]}개
-4개 일치 (50,000원) - ${result[MATCHED_RESULT.four]}개
-5개 일치 (1,500,000원) - ${result[MATCHED_RESULT.five]}개
-5개 일치, 보너스 볼 일치 (30,000,000원) - ${result[MATCHED_RESULT.fiveBonus]}개
-6개 일치 (2,000,000,000원) - ${result[MATCHED_RESULT.six]}개
-총 수익률은 ${profitRate}%입니다.`;
+    const priceFormat = (num) => num.toLocaleString("ko-KR");
+
+    const logs = [
+      `당첨 통계`,
+      `---`,
+      `3개 일치 (${priceFormat(
+        MATCHED_RESULT_TO_PRICE[MATCHED_RESULT.three],
+      )}원) - ${result[MATCHED_RESULT.three]}개`,
+      `4개 일치 (${priceFormat(
+        MATCHED_RESULT_TO_PRICE[MATCHED_RESULT.four],
+      )}원) - ${result[MATCHED_RESULT.four]}개`,
+      `5개 일치 (${priceFormat(
+        MATCHED_RESULT_TO_PRICE[MATCHED_RESULT.five],
+      )}원) - ${result[MATCHED_RESULT.five]}개`,
+      `5개 일치, 보너스 볼 일치 (${priceFormat(
+        MATCHED_RESULT_TO_PRICE[MATCHED_RESULT.fiveBonus],
+      )}원) - ${result[MATCHED_RESULT.fiveBonus]}개`,
+      `6개 일치 (${priceFormat(
+        MATCHED_RESULT_TO_PRICE[MATCHED_RESULT.six],
+      )}원) - ${result[MATCHED_RESULT.six]}개`,
+      `총 수익률은 ${profitRate}%입니다.`,
+    ];
+    return logs.join("\n");
   },
 };
 
