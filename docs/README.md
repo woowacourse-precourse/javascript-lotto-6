@@ -5,7 +5,7 @@
 
 ## 2주차 공통 피드백
 
-- [] README.md 상세히 작성
+- [x] README.md 상세히 작성
 - [] 기능 목록 재검토
   - 너무 상세히 작성하지 말자
   - 정상적인 경우도 중요하나 예외적인 상황도 기능 목록에 정리 (이후 계속 추가)
@@ -79,7 +79,7 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 
   - [] 당첨 결과를 구한다. Lotto#result()
 
-- [] 6개의 숫자를 생성한다. NumberGenerator#create()
+- [x] 6개의 숫자를 생성한다. NumberGenerator#createRandomNumber()
 
 ## 예외 목록
 
