@@ -1,4 +1,3 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import GameUtils from './GameUtils.js';
 import { LOTTO_PRICE, WINNIG_PROFITS } from '../Constants.js';
