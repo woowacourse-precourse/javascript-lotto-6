@@ -1,4 +1,6 @@
-export const REWARD_MESSAGES = Object.freeze({
+import { deepFreeze } from '../utils/deepFreeze.js';
+
+export const REWARD_MESSAGES = deepFreeze({
   winning_statistics_start: '당첨 통계\n---',
   /**
    *
