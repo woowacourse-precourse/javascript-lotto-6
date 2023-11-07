@@ -6,15 +6,15 @@ export default class GameUtil {
     this.VALID_MONEY = true;
   }
   buyingMoneyValidator(buyingMoney) {
-    // 유효 숫자인지 확인
-    if (buyingMoney % 1000 !== 0) {
-      MissionUtils.Console.print(ErrorMessage.INVALID_BUYING_MONEY);
-      this.VALID_MONEY = false;
-      return;
-    }
     // 타입 확인
     if (/\D/.test(buyingMoney)) {
       MissionUtils.Console.print(ErrorMessage.INVALID_MONEY_TYPE);
+      this.VALID_MONEY = false;
+      return;
+    }
+    // 유효 숫자인지 확인
+    if (buyingMoney % 1000 !== 0) {
+      MissionUtils.Console.print(ErrorMessage.INVALID_BUYING_MONEY);
       this.VALID_MONEY = false;
       return;
     }
