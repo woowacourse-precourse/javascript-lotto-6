@@ -129,7 +129,7 @@ class LottoController {
   }
 
   compareLottoNumbers() {
-    this.lottoComparer.processLotto();
+    this.lottoComparer.start();
   }
 }
 export default LottoController;

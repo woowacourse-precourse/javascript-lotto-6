@@ -18,7 +18,7 @@ class LottoComparer {
     this.lottoWinnerPrize = lottoWinnerPrize;
   }
 
-  processLotto() {
+  start() {
     this.lottos.forEach(lotto => {
       const { hasBonusNumber, correctCount } = this.compareLottoNumbers(lotto);
       if (correctCount < this.LIMIT_COUNT) return;
