@@ -95,7 +95,6 @@ class ExceptionHandler {
         throw new AppError(ERROR.message.noZero);
       }
     } else if (typeof input === 'string' || typeof input === 'number') {
-      console.log('input', input);
       if (String(input).startsWith('0')) {
         throw new AppError(ERROR.message.noZero);
       }
