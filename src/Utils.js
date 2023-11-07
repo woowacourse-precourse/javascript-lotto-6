@@ -1,12 +1,13 @@
 /**
  * 수익률 계산기
- * @param {number} netProfit
+ * @param {number} prize
  * @param {number} round
  * @returns {number}
  */
-export const CalculateYield = (netProfit, round) => {
-  const result = (netProfit / round).toFixed(2);
-  return result;
+export const CalculateYield = (prize, investment) => {
+  var returnRate = (prize / investment) * 100;
+
+  return Math.round(returnRate * 100) / 100;
 };
 
 /**
@@ -14,13 +15,10 @@ export const CalculateYield = (netProfit, round) => {
  * @param {number[]} numbers
  * @returns {boolean}
  */
-export const IsUniqueNumbersInArray = (list) => {
-  const numbers = list.map((num) => IsNumber(num));
-  const uniqNum = new Set(numbers);
-  if (numbers.length === uniqNum.length) return true;
-  if (numbers.length !== uniqNum.length) return false;
+export const IsUniqueInArray = (list) => {
+  const uniqNum = new Set(list);
 
-  return false;
+  return list.length === [...uniqNum].length;
 };
 
 /**
