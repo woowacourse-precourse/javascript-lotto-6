@@ -16,7 +16,7 @@ class App {
     if (error instanceof AppError) {
       this.output.print(error.message);
       await this.play();
-    } else {
+    }else{
       throw error;
     }
   }
