@@ -28,4 +28,19 @@ class MainController {
   static RandomLotto() {
     this.lottoNumber = RandomNumber.createRandomLottoNumber(this.lottoCount);
   }
+  static async UserWinning() {
+    let UserWinningNumber = await Input.getWinningNumber();
+    while(true) {
+      try{
+        const winningNumberArray = UserWinningNumber.split(',');
+        const lotto = new Lotto(winningNumberArray);
+        this.resultArray = lotto.getCompareResult(this.lottoNumber);
+        break;
+      }
+      catch(error) {
+        Output.printError(error);
+        UserWinningNumber = await Input.getWinningNumber();
+      }
+    }
+  }
 }
