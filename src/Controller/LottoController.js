@@ -11,7 +11,13 @@ class LottoController {
   #userPickBonusLottoNumber;
   #lottoMatchResult;
   #incomeResult;
-  constructor() {}
+  constructor() {
+    this.#userLottoCost = 0,
+    this.#userPickLottoNumbers = [0]
+    this.#userPickBonusLottoNumber = 0,
+    this.#lottoMatchResult = {};
+    this.#incomeResult = 0;
+  }
 
   async play() {
     await this.getPurchaseCost();
@@ -66,8 +72,6 @@ class LottoController {
   }
 
   async getLottoMatchResultData() {
-    this.#lottoMatchResult = {};
-    this.#incomeResult = 0;
     (await this.getLottoMatchResult()).forEach(matchData => {
       const [numberMatchCount, bonusCount] = matchData;
       if (this.#lottoMatchResult[numberMatchCount] === undefined) {
