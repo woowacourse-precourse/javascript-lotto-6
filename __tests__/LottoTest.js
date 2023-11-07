@@ -1,4 +1,12 @@
 import Lotto from "../src/Lotto.js";
+import {
+  InvalidLottoNumberCountError,
+  DuplicatedNumberError,
+  NotNumberError,
+  InvalidNumberRangeError,
+  NotIntegerError,
+  InvalidBonousNumberCountError,
+} from "../src/utils/Error.js";
 
 let randomNumbers, lotto;
 
@@ -54,6 +62,94 @@ describe("로또 클래스 테스트", () => {
       };
       const matchResult = lotto.matchNumbers(mockLottoWinningNumbers);
       expect(matchResult).toEqual(mockMatchResult);
+    });
+
+    describe("lottoNumbers값에 대한 validation 테스트", () => {
+      test("matchNumbers의 lottoWinningNumbers에 6자리 숫자가 들어오지 않으면 InvalidLottoNumberCountError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6, 7];
+        const bonousNumber = [8];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(InvalidLottoNumberCountError);
+      });
+
+      test("matchNumbers의 lottoWinningNumbers에 중복된 숫자가 존재하면 DuplicatedNumberError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 1];
+        const bonousNumber = [8];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(DuplicatedNumberError);
+      });
+
+      test("matchNumbers의 lottoWinningNumbers에 숫자가 아닌 값이 존재하면 NotNumberError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, "a"];
+        const bonousNumber = [8];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(NotNumberError);
+      });
+
+      test("matchNumbers의 lottoWinningNumbers에 45보다 큰 값이 존재하면 InvalidNumberRangeError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 46];
+        const bonousNumber = [8];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(InvalidNumberRangeError);
+      });
+
+      test("matchNumbers의 lottoWinningNumbers에 1보다 작은 값이 존재하면 InvalidNumberRangeError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, -7];
+        const bonousNumber = [8];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(InvalidNumberRangeError);
+      });
+
+      test("matchNumbers의 lottoWinningNumbers에 정수가 아닌 값이 존재하면 NotIntegerError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6.5];
+        const bonousNumber = [8];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(NotIntegerError);
+      });
+    });
+
+    describe("bonousNumber에 대한 validation 테스트", () => {
+      test("matchNumbers의 bonousNumber에 1개의 숫자가 입력되지 않으면 InvalidBonousNumberCountError를 throw 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+        const bonousNumber = [7, 8];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(InvalidBonousNumberCountError);
+      });
+
+      test("matchNumbers의 bonousNumber에 lottoWinningNumbers와 중복된 값이 입력되면 DuplicatedNumberError를 throw 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+        const bonousNumber = [1];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(DuplicatedNumberError);
+      });
+
+      test("matchNumbers의 bonousNumber에 숫자가 아닌 값이 입력되면 NotNumberError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+        const bonousNumber = ["a"];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(NotNumberError);
+      });
+
+      test("matchNumbers의 bonousNumber에 45보다 큰 값이 입력되면 InvalidNumberRangeError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+        const bonousNumber = [50];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(InvalidNumberRangeError);
+      });
+
+      test("matchNumbers의 bonousNumber에 1보다 작은 값이 입력되면 InvalidNumberRangeError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+        const bonousNumber = [0];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(InvalidNumberRangeError);
+      });
+
+      test("matchNumbers의 bonousNumber에 정수가 아닌 값이 입력되면 NotIntegerError를 throw 해야 한다.", () => {
+        const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
+        const bonousNumber = [8.5];
+
+        expect(() => lotto.matchNumbers({ lottoWinningNumbers, bonousNumber })).toThrow(NotIntegerError);
+      });
     });
   });
 });
