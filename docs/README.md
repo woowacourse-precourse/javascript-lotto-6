@@ -1,8 +1,8 @@
 # 🚀 기능 구현 목록
 
-- [ ] 구입금액 만큼 로또 티켓을 발행한다. - `LottoShop.issueLottoTickets()`
-- [ ] 로또 티켓 1장을 발행한다. - `LottoShop.#issueLottoTicket()`
-- [ ] 로또 번호를 생성한다. - `LottoShop.#createLottoNumbers()`
+- [x] 구입금액 만큼 로또 티켓을 발행한다. - `LottoShop.issueLottoTickets(buyingPrice)`
+- [x] 로또 티켓 1장을 발행한다. - `LottoShop.#issueLottoTicket()`
+- [x] 로또 번호를 생성한다. - `LottoShop.#createLottoNumbers()`
 
 - [ ] 로또 당첨을 확인한다. - `LottoResultCalculator.checkLottoResult()`
 - [ ] 로또 번호에서 당첨 번호와 일치하는 숫자의 개수를 계산한다. - `LottoResultCalculator.#countSameNumber()`
