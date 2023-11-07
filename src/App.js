@@ -15,7 +15,7 @@ class App {
 
   async play() {
     this.#initialize();
-    await this.buyLotto(this.#inputView, this.#outputView);
+    await this.buyLottos(this.#inputView, this.#outputView);
     await this.getWinningNumber(this.#inputView);
     this.getWinningResult(this.#outputView);
   }
@@ -25,14 +25,14 @@ class App {
     this.#outputView = new OutputView();
   }
 
-  // console.log('로또 구매하는 로직');
-  async buyLotto(inputView) {
+  async buyLottos(inputView, outputView) {
     this.#coin = await inputView.coin();
-    console.log(`\n${this.#coin}개를 구매했습니다.`);
+    outputView.insertCoins(this.#coin);
 
     for (let i = 0; i < this.#coin; i++) {
-      this.#boughtLottos.push(Lotto.random());
-      console.log(this.#boughtLottos[i].getNumbers());
+      const lotto = Lotto.random();
+      this.#boughtLottos.push(lotto);
+      outputView.boughtLotto(lotto.getNumbersString());
     }
   }
 

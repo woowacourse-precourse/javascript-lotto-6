@@ -1,6 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 
 export default class outputView {
+  insertCoins(coins) {
+    Console.print(`\n${coins}개를 구매했습니다.`);
+  }
+
+  boughtLotto(lotto) {
+    Console.print(lotto);
+  }
+
   winningResult() {
     Console.print(`\n당첨 통계\n---`);
   }
