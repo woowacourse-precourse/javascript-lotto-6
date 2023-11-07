@@ -34,6 +34,18 @@ class WinningLotto {
       }
     }
   }
+
+  static async getBonusNumber(winningNumbers) {
+    while (true) {
+      try {
+        const bonusNumber = await WinningLotto.createBonusNumber();
+        Validation.bonusNumber(winningNumbers, bonusNumber);
+        return +bonusNumber;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+  }
 }
 
 export default WinningLotto;
