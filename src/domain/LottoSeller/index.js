@@ -16,7 +16,7 @@ export class LottoSeller {
   }
 
   async sellLotto() {
-    const paidAmount = await InputView.readLine(MESSAGES.BUY);
+    const paidAmount = Number(await InputView.readLine(MESSAGES.BUY));
     this.#validatePaidAmount(paidAmount);
     const amount = this.#calculateLottoAmount(paidAmount);
     OutputView.print(MESSAGES.BUY.RESULT(amount));
