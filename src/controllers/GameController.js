@@ -41,4 +41,15 @@ export const GameController = {
       return this.getLottoWinningNumbers();
     }
   },
+
+  async getBonusNumber(LOTTERY_NUMBERS) {
+    try {
+      let bonus_Number = await InputView.getBonusNumber();
+      Validator.isBonusNumber(bonus_Number, LOTTERY_NUMBERS);
+      return bonus_Number;
+    } catch (error) {
+      OutputView.print(error.message);
+      return this.getBonusNumber(LOTTERY_NUMBERS);
+    }
+  },
 };
