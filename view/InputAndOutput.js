@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from "../src/common/OutputMessage.js";
-import Validate from "../src/common/validate.js";
+import Validate from "../src/common/Validate.js";
 import Lotto from "../src/Lotto.js";
 import LottoPlay from "../src/Lottoplay.js";
 
