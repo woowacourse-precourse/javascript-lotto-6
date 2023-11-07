@@ -25,4 +25,26 @@ describe("로또 클래스 테스트", () => {
     expect(result).toContainEqual(1, 2, 3, 4, 5, 6);
   });
 
+  test("로또의 결과를 출력한다.", () => {
+    mockRandoms([
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 17],
+      [1, 2, 3, 4, 5, 19],
+      [1, 2, 3, 4, 36, 17],
+      [1, 2, 3, 28, 36, 17],
+      [1, 2, 9, 28, 36, 17],
+      [1, 12, 9, 28, 36, 17]
+    ]);
+
+    const result = [];
+    for (let i = 0; i < 7; i++){
+      const lotto = new Lotto();
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      const bonusNumber = 17;
+      result.push(lotto.checkPrizeRank(winningNumbers, bonusNumber));
+    }
+
+    expect(result).toContainEqual(1,2,3,4,5,0,0);
+  });
+
 });

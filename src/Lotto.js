@@ -28,6 +28,37 @@ class Lotto {
     return this.#numbers;
   }
 
+  checkPrizeRank(winnigNumbers, bonusNumber) {
+    let prizeRank = 0;
+    let matchCount = 0;
+
+    winnigNumbers.forEach(winningNumber => {
+      if (this.#numbers.includes(winningNumber)) {
+        matchCount++;
+      }
+    });
+
+    switch(matchCount) {
+      case 3: 
+        prizeRank = 5;
+        break;
+      case 4:
+        prizeRank = 4;
+        break;
+      case 5:
+        if (this.#numbers.includes(bonusNumber)) {
+          prizeRank = 2;
+          break;
+        }
+        prizeRank = 3;
+        break;
+      case 6:
+        prizeRank = 1;
+        break;
+    }
+
+    return prizeRank;
+  }
 }
 
 export default Lotto;
