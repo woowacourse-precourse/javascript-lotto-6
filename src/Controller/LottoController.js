@@ -25,7 +25,7 @@ class LottoController {
     const correctArray = goalLotto.calculateCorrectNumber(lottoArray, bonusNumber);
     const resultArray = this.#calculateResult(correctArray);
     const rateOfReturn = this.#calculateRateOfReturn(resultArray, purchaseAmount);
-    this.#view.printResult(resultArray, rateOfReturn);
+    this.#view.printResult(resultArray, rateOfReturn * 100);
   }
 
   #getCountOfLotto(purchaseAmount) {

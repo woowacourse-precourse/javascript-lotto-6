@@ -28,7 +28,7 @@ const View = {
   },
 
   printResult(resultArray, rateOfReturn) {
-    Console.print(resultMessage(resultArray, rateOfReturn.toFixed(2)));
+    Console.print(resultMessage(resultArray, (rateOfReturn.toFixed(2) * 100) / 100));
   },
 };
 
