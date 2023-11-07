@@ -39,7 +39,7 @@ export default class LottoService {
    * @public
    * @param {number[]} mainNumbers
    * @param {number} bonusNumber
-   * @returns {{lottoResults: {prizeAmount: number[], prizeTotal: number}, lottoAmount: *}}
+   * @returns {{lottoResults: {prizeAmount: number[], prizeTotal: number}, lottoAmount: number}}
    */
   getCompareResults(mainNumbers, bonusNumber) {
     const { lottoList, lottoAmount } = this.#lottoGame.getLottoes();
