@@ -28,7 +28,7 @@ class LottoGameController {
 	async #handleInputPurchaseAmount() {
 		let purchaseAmount = await this.#view.inputPurchaseAmount();
 		Validator.validatePurchaseAmount(purchaseAmount);
-		// TODO: 도메인에 전달
+		this.#lottoGame.setPurchaseQuantityFromAmount(purchaseAmount);
 	}
 
 	/** 티켓의 발행 로직을 담당한다. */
