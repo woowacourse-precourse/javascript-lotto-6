@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import MESSAGE from "../constant/Message.js";
+import MESSAGE from './constant/Message.js';
 
 
 class Output {
