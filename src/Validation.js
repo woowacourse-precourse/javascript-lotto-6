@@ -30,7 +30,7 @@ export const validateWinnerNumbersInput = async (winningNumbersInput) => {
   if (!isNumbers(winningNumbersInput)) {
     throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.NOT_NUMBER);
   }
-  if (!isOutOfRange(winningNumbersInput)) {
+  if (isOutOfRangeInNumbers(winningNumbersInput)) {
     throw new Error(WINNING_NUMBERS_ERROR_MESSAGES.OUT_OF_RANGE);
   }
   if (isDuplicated(winningNumbersInput)) {
@@ -70,8 +70,11 @@ const isNumbers = (input) => {
 };
 
 const isOutOfRange = (input) => {
-  return input.split(',').every((el) => {
-    return Number(el) >= LOTTO_MIN_NUMBER && Number(el) <= LOTTO_MAX_NUMBER;
+  return Number(input) < LOTTO_MIN_NUMBER || Number(input) > LOTTO_MAX_NUMBER;
+};
+const isOutOfRangeInNumbers = (input) => {
+  return input.split(',').some((el) => {
+    return isOutOfRange(el);
   });
 };
 
