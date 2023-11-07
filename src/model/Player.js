@@ -1,4 +1,4 @@
-import { generateRandomLottoNumbers } from '../utils/index.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
 import { PRIZE_TABLE } from '../constants/lotto.js';
 
@@ -27,7 +27,7 @@ class Player {
 
   buyLottos() {
     while (this.#budget > 0) {
-      this.#lottos.push(new Lotto(generateRandomLottoNumbers()));
+      this.#lottos.push(new Lotto(Player.#generateRandomLottoNumbers()));
       this.#budget -= 1000;
     }
   }
@@ -51,6 +51,10 @@ class Player {
     });
 
     return prize;
+  }
+
+  static #generateRandomLottoNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   static #validateBudget(budget) {
