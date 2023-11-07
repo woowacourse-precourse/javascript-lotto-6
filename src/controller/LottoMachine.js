@@ -104,13 +104,13 @@ export default class LottoMachine {
 
   #findMatchCount() {
     this.#player.getLottoTickets().forEach((lotto) => {
-      const isIncludedBonusNumber = lotto.getNumbers().includes(this.#bonusNumber);
+      const isIncludeBonusNumber = lotto.getNumbers().includes(this.#bonusNumber);
       const correctCount = lotto
         .getNumbers()
         .filter((number) => this.#winningNumbers.getNumbers().includes(number)).length;
 
       if (correctCount >= LOTTO_MACHINE_RULES.minimumWiningCount) {
-        this.#player.setRankCounts(correctCount, isIncludedBonusNumber);
+        this.#player.setRankCounts(correctCount, isIncludeBonusNumber);
       }
     });
   }
