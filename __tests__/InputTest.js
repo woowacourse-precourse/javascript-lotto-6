@@ -26,22 +26,30 @@ const validator = {
 
 describe('Input 클래스 테스트', () => {
 	test('판별에 실패했을 경우 다시 질문 받아야 한다.', async () => {
-		const input = new Input();
-
+		// given
 		const spyFn = jest.spyOn(input, 'askUser');
 
 		mockQuestions(['foo', 'foo', 'foo']);
 
+		// when
+		const input = new Input();
 		await input.askUserUntilValid(
 			'질문1',
 			validator.validateFunc.bind(validator),
 		);
+
+		// then
 		expect(spyFn).toBeCalledTimes(EXPECTED_ASKING_CNT);
 	});
 
 	test('판별에 실패했을 경우 에러를 던져야 한다.', () => {
-		const input = new Input();
+		// given
 		mockQuestions(['foo', 'foo', 'foo']);
+
+		// when
+		const input = new Input();
+
+		// then
 		expect(async () => {
 			await input.askUserUntilValid(
 				'질문1',
