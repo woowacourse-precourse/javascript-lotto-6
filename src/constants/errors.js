@@ -9,4 +9,6 @@ export const ERROR_MESSAGE = Object.freeze({
   hasEmpty: `${ERROR_CONVENTION} 입력받은 값에 공백이 존재합니다.`,
   hasChanges: `${ERROR_CONVENTION} 잔돈이 존재합니다.`,
   incorrectPrecision: `${ERROR_CONVENTION} 올바른 정확도(소숫점)가 아닙니다.`,
+  outOfRange: `${ERROR_CONVENTION} 올바른 범위의 값을 입력해야 합니다.`,
+  isNumberExists: `${ERROR_CONVENTION} 이미 존재하는 번호입니다.`,
 });
