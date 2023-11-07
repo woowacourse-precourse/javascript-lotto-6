@@ -15,7 +15,7 @@ class OutputView {
 
   static printLottos(lottos) {
     lottos.forEach((lotto) => {
-      MissionUtils.Console.print(lotto.numbers);
+      MissionUtils.Console.print(`[${lotto.numbers.join(', ')}]`);
     });
   }
 
