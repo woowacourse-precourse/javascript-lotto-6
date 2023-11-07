@@ -27,7 +27,7 @@ describe('로또 클래스 테스트', () => {
     }).toThrow(ERROR_MESSAGE.outOfRange);
   });
 
-  test('로또 번호를 형식에 맞게 출력하기', () => {
+  test('print 메서드로 로또 번호를 형식에 맞게 출력하기', () => {
     const logSpy = jest.spyOn(MissionUtils.Console, 'print');
     logSpy.mockClear();
 
@@ -36,5 +36,13 @@ describe('로또 클래스 테스트', () => {
     lotto.print();
 
     expect(logSpy).toHaveBeenCalledWith(result);
+  });
+
+  test('countMatched 메서드로 당첨 번호와 몇 개가 일치하는지 검사하기', () => {
+    const winning = new Lotto([1, 2, 3, 4, 5, 6]);
+    const lotto = new Lotto([6, 7, 8, 9, 10, 11]);
+    const result = lotto.countMatched(winning);
+
+    expect(result).toEqual(1);
   });
 });
