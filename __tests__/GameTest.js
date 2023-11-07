@@ -1,5 +1,5 @@
 import { Console, MissionUtils } from "@woowacourse/mission-utils";
-import Game from "../src/Game"
+import Game from "../src/Game";
 import Lotto from "../src/Lotto";
 
 const mockQuestions = (inputs) => {
@@ -26,7 +26,6 @@ const getLogSpy = () => {
 };
 
 describe("Game 클래스 관련 테스트", () => {
-
   describe("금액 입력 관련 테스트", () => {
     test("금액 입력 테스트", async () => {
       mockQuestions(["8000"]);
@@ -34,7 +33,7 @@ describe("Game 클래스 관련 테스트", () => {
       await game.getMoney();
 
       expect(game.lottos.length).toEqual(8);
-    })
+    });
 
     test("금액 입력 오류 테스트(1000원으로 나누어 떨어지지 않는 경우)", async () => {
       const game = new Game();
@@ -42,7 +41,7 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["150"]);
 
       await expect(game.getMoney()).rejects.toThrow("[ERROR]");
-    })
+    });
 
     test("금액 입력 오류 테스트(숫자가 아닌 값이 입력된 경우)", async () => {
       const game = new Game();
@@ -50,8 +49,8 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["금액"]);
 
       await expect(game.getMoney()).rejects.toThrow("[ERROR]");
-    })
-  })
+    });
+  });
 
   describe("당첨 번호 입력 관련 테스트", () => {
     test("당첨 번호 입력 테스트", async () => {
@@ -60,7 +59,7 @@ describe("Game 클래스 관련 테스트", () => {
       await game.getChoiceNumbers();
 
       expect(game.choice.numbers).toEqual([1, 2, 3, 4, 5, 6]);
-    })
+    });
 
     test("당첨 번호 입력 오류 테스트(입력한 번호가 6개 미만일 때)", async () => {
       const game = new Game();
@@ -68,7 +67,7 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["1,2,3,4,5"]);
 
       await expect(game.getChoiceNumbers()).rejects.toThrow("[ERROR]");
-    })
+    });
 
     test("당첨 번호 입력 오류 테스트(입력한 번호가 6개 초과일 때)", async () => {
       const game = new Game();
@@ -76,7 +75,7 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["1,2,3,4,5,6,7"]);
 
       await expect(game.getChoiceNumbers()).rejects.toThrow("[ERROR]");
-    })
+    });
 
     test("당첨 번호 입력 오류 테스트(입력한 번호가 1과 45 사이의 수가 아닐 때)", async () => {
       const game = new Game();
@@ -84,7 +83,7 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["0, 1, 2, 3, 4, 5"]);
 
       await expect(game.getChoiceNumbers()).rejects.toThrow("[ERROR]");
-    })
+    });
 
     test("당첨 번호 입력 오류 테스트(입력한 번호가 수가 아닐 때)", async () => {
       const game = new Game();
@@ -92,8 +91,8 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["0, 1, 2, 3, 4, 오"]);
 
       await expect(game.getChoiceNumbers()).rejects.toThrow("[ERROR]");
-    })
-  })
+    });
+  });
 
   describe("보너스 번호 입력 관련 테스트", () => {
     test("보너스 번호 입력 테스트", async () => {
@@ -102,7 +101,7 @@ describe("Game 클래스 관련 테스트", () => {
       await game.getBonusNumber();
 
       expect(game.bonus).toEqual(7);
-    })
+    });
 
     test("보너스 번호 입력 오류 테스트(입력한 번호가 1과 45 사이의 수가 아닐 때)", async () => {
       const game = new Game();
@@ -110,7 +109,7 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["0"]);
 
       await expect(game.getChoiceNumbers()).rejects.toThrow("[ERROR]");
-    })
+    });
 
     test("보너스 번호 입력 오류 테스트(입력한 번호가 수가 아닐 때)", async () => {
       const game = new Game();
@@ -118,7 +117,7 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["오"]);
 
       await expect(game.getChoiceNumbers()).rejects.toThrow("[ERROR]");
-    })
+    });
 
     test("보너스 번호 입력 오류 테스트(당첨 번호와 중복되는 번호일 때)", async () => {
       const game = new Game();
@@ -126,9 +125,8 @@ describe("Game 클래스 관련 테스트", () => {
       mockQuestions(["1,2,3,4,5,6", "1"]);
       await game.getChoiceNumbers();
       await expect(game.getBonusNumber()).rejects.toThrow("[ERROR]");
-    })
-
-  })
+    });
+  });
 
   describe("당첨 결과 관련 테스트", () => {
     test("당첨 결과 출력 테스트", async () => {
@@ -162,7 +160,7 @@ describe("Game 클래스 관련 테스트", () => {
         "5개 일치 (1,500,000원) - 0개",
         "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
         "6개 일치 (2,000,000,000원) - 0개",
-      ]
+      ];
 
       await game.getMoney();
       await game.getChoiceNumbers();
@@ -171,10 +169,10 @@ describe("Game 클래스 관련 테스트", () => {
       game.printLottos();
       game.getResult();
 
-      logs.forEach(log => {
+      logs.forEach((log) => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
-      })
-    })
+      });
+    });
 
     test("수익률 출력 테스트", async () => {
       const game = new Game();
@@ -207,8 +205,8 @@ describe("Game 클래스 관련 테스트", () => {
         "5개 일치 (1,500,000원) - 0개",
         "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
         "6개 일치 (2,000,000,000원) - 0개",
-        "총 수익률은 62.5%입니다."
-      ]
+        "총 수익률은 62.5%입니다.",
+      ];
 
       await game.getMoney();
       await game.getChoiceNumbers();
@@ -217,9 +215,9 @@ describe("Game 클래스 관련 테스트", () => {
       game.printLottos();
       game.getResult();
 
-      logs.forEach(log => {
+      logs.forEach((log) => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
-      })
-    })
-  })
-})
+      });
+    });
+  });
+});

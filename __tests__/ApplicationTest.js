@@ -38,13 +38,13 @@ const runException = async (input) => {
   const app = new App();
 
   // then
-  await expect(app.play()).rejects.toThrow("[ERROR]")
-}
+  await expect(app.play()).rejects.toThrow("[ERROR]");
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   describe("기능 테스트", () => {
     test("실행 결과 테스트", async () => {
@@ -95,9 +95,7 @@ describe("로또 테스트", () => {
       // given
       const logSpy = getLogSpy();
 
-      mockRandoms([
-        [8, 21, 23, 41, 42, 43]
-      ]);
+      mockRandoms([[8, 21, 23, 41, 42, 43]]);
       mockQuestions(["1000", "8,21,23,41,42,43", "7"]);
 
       // when
@@ -123,9 +121,7 @@ describe("로또 테스트", () => {
       // given
       const logSpy = getLogSpy();
 
-      mockRandoms([
-        [7, 21, 23, 41, 42, 43]
-      ]);
+      mockRandoms([[7, 21, 23, 41, 42, 43]]);
       mockQuestions(["1000", "8,21,23,41,42,43", "7"]);
 
       // when
@@ -175,10 +171,9 @@ describe("로또 테스트", () => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
       });
     });
-  })
+  });
 
   test("예외 테스트", async () => {
     await runException("1000j");
   });
 });
-

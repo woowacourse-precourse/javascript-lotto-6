@@ -17,11 +17,15 @@ class Lotto {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
 
-    if(numbers.filter((num, idx)=>numbers.indexOf(num)===idx).length !== 6) {
+    if (
+      numbers.filter((num, idx) => numbers.indexOf(num) === idx).length !== 6
+    ) {
       throw new Error("[ERROR] 로또 번호에 중복된 수가 존재해선 안됩니다.");
     }
 
-    numbers.forEach(number=>{this.#validateNumber(number)});
+    numbers.forEach((number) => {
+      this.#validateNumber(number);
+    });
   }
 
   #validateNumber(number) {
@@ -36,11 +40,11 @@ class Lotto {
   }
 
   compare(numbers, bonus) {
-    const same = numbers.filter(num=>this.#numbers.includes(num)).length;
-    switch(same) {
+    const same = numbers.filter((num) => this.#numbers.includes(num)).length;
+    switch (same) {
       case 6:
         return 1;
-     case 5:
+      case 5:
         return this.#numbers.includes(bonus) ? 2 : 3;
       case 4:
         return 4;
