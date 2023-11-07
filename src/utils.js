@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { LOTTO_NUMBERS, INPUT_MESSAGE, WINNER_MESSAGE } from './constants.js';
+import { LOTTO_NUMBERS, INPUT_MESSAGE, WINNER_MESSAGE, GRADING_COUNT, LOTTO_PRIZE_MONEY } from './constants.js';
 
 function inputLottoNum() {
   return MissionUtils.Console.readLineAsync(INPUT_MESSAGE.PURCHASE_MESSAGE);
@@ -24,8 +24,22 @@ function consoleError(error) {
   MissionUtils.Console.print(`${error.message}`);
 }
 
-function winCount(count) {
-  return MissionUtils.Console.print(WINNER_MESSAGE.WINCOUNT(count));
+function winnerMessage() {
+  return MissionUtils.Console.print(WINNER_MESSAGE.WINLOG);
+}
+function winCount(statistics) {
+  const templates = Object.entries(statistics).map(([prize, count]) => {
+    if (prize === 'SECOND_PRIZE') {
+      return (
+        `${GRADING_COUNT[prize]}개 일치, 보너스 볼 일치 ` +
+        `(${LOTTO_PRIZE_MONEY[prize].toLocaleString()}원) - ${count}개`
+      );
+    }
+
+    return `${GRADING_COUNT[prize]}개 일치` + `(${LOTTO_PRIZE_MONEY[prize].toLocaleString()}원) - ${count}개`;
+  });
+
+  MissionUtils.Console.print(templates.join('\n'));
 }
 
 function resultProfit(number) {
@@ -47,6 +61,7 @@ export {
   readLineBonusCount,
   consoleWinner,
   consoleError,
+  winnerMessage,
   winCount,
   resultProfit,
   randomNum,
