@@ -94,12 +94,12 @@ describe('기능 테스트', () => {
     });
 
     test('로또의 수익률을 반환한다.', () => {
-        const lottoRanks = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1 };
+        const lottoRanks = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0 };
         expect(app.getLottoRate(10000, lottoRanks)).toBe(50);
     });
 
     test('로또의 수익률은 소숫점 둘째 자리에서 반올림한다.', () => {
-        const lottoRanks = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1 };
+        const lottoRanks = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 0 };
         expect(app.getLottoRate(8000, lottoRanks)).toBe(62.5);
     });
 });
