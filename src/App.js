@@ -9,6 +9,7 @@ class App {
   constructor() {
     this.ticketsAmount = 0;
     this.matchingTotalNumber = 0;
+    this.matchingTickets = 0;
     this.#generatedLottoNums = [];
     this.inputedLottoNums = [];
   }
@@ -18,6 +19,7 @@ class App {
     await this.inputLotteryResults();
     this.matchingNumbers(this.#generatedLottoNums, this.inputedLottoNums);
     console.log(this.matchingTotalNumber, "matching total number");
+    console.log(this.matchingTickets, "matching tickets ");
   }
 
   async purchaseTicket() {
@@ -56,12 +58,17 @@ class App {
 
   matchingNumbers(generated, inputed) {
     for (const ticket of generated) {
+      let isValidLottery = false;
       console.log(ticket, "const ticket of ticket result");
-      for (const num of this.inputedLottoNums) {
+      for (const num of inputed) {
         if (ticket.includes(num)) {
           console.log(num, "matching num");
           this.matchingTotalNumber++;
+          isValidLottery = true;
         }
+      }
+      if (isValidLottery) {
+        this.matchingTickets++;
       }
     }
   }
