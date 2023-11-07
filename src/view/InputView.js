@@ -7,11 +7,11 @@ export default class InputView {
   }
 
   async readWinningNumbers() {
-    return this.readLine(INFO_MESSAGES.WINNING_NUMBERS);
+    return this.readLine(`\n${INFO_MESSAGES.WINNING_NUMBERS}`);
   }
 
   async readBonusNumber() {
-    return this.readLine(INFO_MESSAGES.BONUS_NUMBER);
+    return this.readLine(`\n${INFO_MESSAGES.BONUS_NUMBER}`);
   }
 
   async readLine(message) {

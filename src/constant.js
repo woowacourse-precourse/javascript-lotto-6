@@ -15,6 +15,7 @@ const ERROR_MESSAGES = Object.freeze({
 });
 
 const WINNING_MESSAGES = Object.freeze({
+  WINNING_STATS: '당첨 통계\n---',
   MATCHING_3: '3개 일치 (5,000원) - ',
   MATCHING_4: '4개 일치 (50,000원) - ',
   MATCHING_5: '5개 일치 (1,500,000원) - ',
