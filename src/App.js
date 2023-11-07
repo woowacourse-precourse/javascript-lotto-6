@@ -9,10 +9,11 @@ class App {
 
   constructor() {
     this.#controller = new LottoGameController({
+      // LottoMachine, WinningJudge, inputview, outputview
       inputview: new Inputview(),
       outputview: new Outputview(),
-      lottoMachine: new LottoMachine(),
-      winningJudge: new WinningJudge(),
+      LottoMachine: new LottoMachine(),
+      WinningJudge: new WinningJudge(),
     });
   }
 

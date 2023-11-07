@@ -1,11 +1,11 @@
 import Lotto from './Lotto.js';
-import Random from '';
+import Random from '../utils/random.js';
 
 class LottoMachine {
   #random;
 
-  constructor(Random) {
-    this.#random = Random;
+  constructor() {
+    this.#random = new Random();
   }
 
   buyLotto(money) {
