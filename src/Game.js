@@ -88,13 +88,14 @@ class Game {
     if (totalPrize === 0) {
       Console.print(MESSAGES.game.zeroRevenueRate);
       Console.print(MESSAGES.game.noWinnning);
-    } else {
-      const revenueRate = (
-        (totalPrize / (this.#lottoCount * 1000)) *
-        100
-      ).toFixed(1);
-      Console.print(`총 수익률은 ${revenueRate}%입니다.`);
+      return;
     }
+
+    const revenueRate = (
+      (totalPrize / (this.#lottoCount * 1000)) *
+      100
+    ).toFixed(1);
+    Console.print(`총 수익률은 ${revenueRate}%입니다.`);
   }
 
   calculateTotalPrize(stats) {
