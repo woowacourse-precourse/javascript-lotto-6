@@ -6,8 +6,8 @@ import {
   INPUT_BONUS_MESSAGE,
   INPUT_RANGE_ERROR_MESSAGE,
   INCLUDE_BONUS_ERROR_MESSAGE,
-  MONEY_ARRAY,
-  NUM_ARRAY,
+  MONEYS,
+  NUMS,
   THREE_MATCH_MONEY,
   FOUR_MATCH_MONEY,
   FIVE_MATCH_MONEY,
@@ -47,7 +47,7 @@ class App {
   }
 
   async printStats(STATS) {
-    const STATS_ARRAY = [
+    const STATISTICS = [
       STATS.MATCH_THREE,
       STATS.MATCH_FOUR,
       STATS.MATCH_FIVE,
@@ -59,12 +59,7 @@ class App {
 
     for (let i = 0; i < 5; i++) {
       await MissionUtils.Console.print(
-        NUM_ARRAY[i] +
-          "개 일치" +
-          MONEY_ARRAY[i] +
-          " - " +
-          STATS_ARRAY[i] +
-          "개"
+        NUMS[i] + "개 일치" + MONEYS[i] + " - " + STATISTICS[i] + "개"
       );
     }
   }

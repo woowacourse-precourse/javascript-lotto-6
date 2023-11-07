@@ -34,8 +34,8 @@ export const INPUT_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
 export const INPUT_BONUS_MESSAGE = "보너스 번호를 입력해 주세요.";
 export const INCLUDE_BONUS_ERROR_MESSAGE =
   "당첨 번호에 보너스 번호가 포함되어 있습니다.";
-export const NUM_ARRAY = [THREE, FOUR, FIVE, FIVE, SIX];
-export const MONEY_ARRAY = [
+export const NUMS = [THREE, FOUR, FIVE, FIVE, SIX];
+export const MONEYS = [
   THREE_MATCH_MESSAGE,
   FOUR_MATCH_MESSAGE,
   FIVE_MATCH_MESSAGE,
