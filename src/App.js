@@ -129,35 +129,15 @@ class App {
   async checkLottoResult() {
     const mainNumber = this.winningLotto.slice(0, 6);
     const bonusNumber = this.winningLotto.slice(6);
+    this.forCheckUserTotalLotto(mainNumber,bonusNumber);
+    this.setForError();
+    this.printUserLottoResult();
+  }
 
+  forCheckUserTotalLotto(mainNumber,bonusNumber){
     this.userByLottoList.forEach((lotto, index) => {
-        this.checkUserLotto(mainNumber,bonusNumber,lotto);
+      this.checkUserLotto(mainNumber, bonusNumber, lotto);
     });
-
-    // 아무도 걸리지 않은 등수 값 0 처리 
-    for (const score in this.countWinner) {
-      if (this.countWinner[score] === 0) {
-        this.countWinner[score] = 0;
-      }
-    }
-
-    const totalSpentMoney = this.userMoneyInput;
-
-    const totalWinnings = (this.countWinner[5] * 5000) +
-      (this.countWinner[4] * 50000) +
-      (this.countWinner[3] * 1500000) +
-      (this.countWinner[2] * 30000000) +
-      (this.countWinner[1] * 2000000000);
-
-    const profitRate = (totalWinnings / totalSpentMoney) * 100;
-    Console.print("당첨 통계");
-    Console.print("---");
-    Console.print(`3개 일치 (5,000원) - ${this.countWinner[5]}개`);
-    Console.print(`4개 일치 (50,000원) - ${this.countWinner[4]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${this.countWinner[3]}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.countWinner[2]}개`);
-    Console.print(`6개 일치 (2,000,000,000원) - ${this.countWinner[1]}개`);
-    Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
   checkUserLotto(mainNumber, bonusNumber, lotto) {
@@ -190,6 +170,35 @@ class App {
     if (countScore !== 3 && countScore !== 4 && countScore !== 5 && countScore !== 6) {
       this.countWinner[6]++;
     }
+  }
+
+  setForError(){
+    // 아무도 걸리지 않은 등수 값 0 처리 undefined 방지
+    for (const score in this.countWinner) {
+      if (this.countWinner[score] === 0) {
+        this.countWinner[score] = 0;
+      }
+    }
+  }
+
+  printUserLottoResult(){
+    const totalSpentMoney = this.userMoneyInput;
+
+    const totalWinnings = (this.countWinner[5] * 5000) +
+      (this.countWinner[4] * 50000) +
+      (this.countWinner[3] * 1500000) +
+      (this.countWinner[2] * 30000000) +
+      (this.countWinner[1] * 2000000000);
+
+    const profitRate = (totalWinnings / totalSpentMoney) * 100;
+    Console.print("당첨 통계");
+    Console.print("---");
+    Console.print(`3개 일치 (5,000원) - ${this.countWinner[5]}개`);
+    Console.print(`4개 일치 (50,000원) - ${this.countWinner[4]}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${this.countWinner[3]}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.countWinner[2]}개`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${this.countWinner[1]}개`);
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
   
 }
