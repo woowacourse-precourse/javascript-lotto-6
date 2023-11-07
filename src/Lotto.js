@@ -1,3 +1,5 @@
+import { ERROR, LOTTO } from './Constant';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,30 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTO.LOTTO_LENGHT) {
+      throw new Error(ERROR.NOT_LOTTO_LENGTH);
+    }
+
+    const numberSet = new Set(numbers);
+    if (numbers.length !== numberSet.size) {
+      throw new Error(ERROR.DUPLICATE_NUMBER);
+    }
+
+    for (const number of numbers) {
+      if (
+        LOTTO.REG_NUMBER.test(number) ||
+        Number(number) > 45 ||
+        Number(number) < 1
+      ) {
+        throw new Error(ERROR.NOT_LOTTO_RANGE);
+      }
     }
   }
 
   // TODO: 추가 기능 구현
+  getLottoNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
