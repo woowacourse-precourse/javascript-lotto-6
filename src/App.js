@@ -2,53 +2,61 @@
  * 추후, 맨 처음 docs 커밋 바꾸기 -> 동사로 시작하게.
  */
 import { Console } from '@woowacourse/mission-utils';
-import Lottery from './Lottery.js';
+import Lottery from './domain/Lottery.js';
+import ERRORPREFIX from './constants/errorConstant.js';
+import { outputErrorComment } from './view/outputView.js';
 
 class App {
-  #ERRORPREFIX = '[ERROR]';
+  #lottery = new Lottery();
 
-  #game = new Lottery();
+  #isInputStepEnd = {
+    payMoney: false,
+    winningNumberList: false,
+    bonusNumber: false,
+  };
+
+  async readInputs() {
+    if (!this.#isInputStepEnd.payMoney) {
+      await this.#lottery.readPayMoney();
+      this.#isInputStepEnd.payMoney = true;
+    }
+    if (!this.#isInputStepEnd.winningNumberList) {
+      await this.#lottery.readWinningNumberList();
+      this.#isInputStepEnd.winningNumberList = true;
+    }
+
+    if (!this.#isInputStepEnd.bonusNumber) {
+      await this.#lottery.readBonusNumber();
+      this.#isInputStepEnd.bonusNumber = true;
+    }
+  }
+
+  resultIssues() {
+    this.#lottery.matchNumbers();
+    this.#lottery.printWinnigCount();
+  }
+
+  checkErrorStep(error) {
+    let errorStep = '';
+    Object.keys(this.#isInputStepEnd).forEach((curStep) => {
+      if (error.message.includes(curStep)) {
+        this.#isInputStepEnd[curStep] = false;
+        errorStep = curStep;
+      }
+    });
+    return errorStep;
+  }
 
   async play() {
-    const isInputStepEnd = {
-      payMoney: false,
-      winningNumberList: false,
-      bonusNumber: false,
-    };
     do {
       try {
-        // TODO
-        if (!isInputStepEnd.payMoney) {
-          await this.#game.readPayMoney();
-          isInputStepEnd.payMoney = true;
-        }
-
-        if (!isInputStepEnd.winningNumberList) {
-          await this.#game.readWinningNumberList();
-          isInputStepEnd.winningNumberList = true;
-        }
-
-        if (!isInputStepEnd.bonusNumber) {
-          await this.#game.readBonusNumber();
-          isInputStepEnd.bonusNumber = true;
-        }
-      } catch (e) {
-        let errorStep = '';
-
-        Object.keys(isInputStepEnd).forEach((curStep) => {
-          if (e.message.includes(curStep)) {
-            isInputStepEnd[curStep] = false;
-            errorStep = curStep;
-          }
-        });
-
-        Console.print(
-          `\n ${this.#ERRORPREFIX} ${e.message}`.replace(`${errorStep}: `, ''),
-        );
+        await this.readInputs();
+      } catch (error) {
+        const errorStep = this.checkErrorStep(error);
+        outputErrorComment(error, errorStep);
       }
-    } while (Object.values(isInputStepEnd).includes(false));
-    this.#game.matchNumbers();
-    this.#game.printWinnigCount();
+    } while (Object.values(this.#isInputStepEnd).includes(false));
+    this.resultIssues();
   }
 }
 
