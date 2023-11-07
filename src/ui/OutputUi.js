@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE, WINNING_NUMBERS } from '../Constants.js';
+import UiUtils from './UiUtils.js';
 
 class OutputUi {
   constructor() {}
@@ -22,7 +23,7 @@ class OutputUi {
     for (const index in WINNING_NUMBERS) {
       const MATHING_COUNT = WINNING_NUMBERS[index];
       MissionUtils.Console.print(
-        OUTPUT_MESSAGE.winningStatus(MATHING_COUNT, winnigStatus)
+        UiUtils.winningStatusForUser(MATHING_COUNT, winnigStatus)
       );
     }
   }
