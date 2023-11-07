@@ -85,3 +85,35 @@ export function lottoGenerate(amount) {
         () => new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b))
     );
 }
+
+/**
+ * @param {number[]} lottoNumbers
+ * @param {Set<number>} winLottoSet
+ * @returns {number}
+ */
+export function checkAnswerCnt(lottoNumbers, winLottoSet) {
+    return lottoNumbers.reduce((acc, cur) => (acc += winLottoSet.has(cur) ? 1 : 0), 0);
+}
+
+/**
+ * @param {number[]} lottoNumbers
+ * @param {number} bonusNumber
+ */
+export function checkHasBonus(lottoNumbers, bonusNumber) {
+    return lottoNumbers.includes(bonusNumber);
+}
+
+/**
+ * @param {number} answerCnt
+ * @param {boolean} hasBonusNumber
+ * @return {number}
+ */
+export function lottoRank(answerCnt, hasBonusNumber) {
+    if (answerCnt < 3) return -1;
+    if (answerCnt === 3) return 5;
+    if (answerCnt === 4) return 4;
+    if (answerCnt === 5 && !hasBonusNumber) return 3;
+    if (answerCnt === 5 && hasBonusNumber) return 2;
+    if (answerCnt === 6) return 1;
+    return -1;
+}
