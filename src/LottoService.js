@@ -7,7 +7,7 @@ class LottoService {
   sellLotto(purchaseAmount) {
     this.validatePurchaseAmount(purchaseAmount);
     const quantitiy = Math.floor(purchaseAmount / LOTTO.price);
-    return Array.from({ length: quantitiy }, () => this.#generateLotto());
+    return this.#generateLotto(quantitiy);
   }
 
   validatePurchaseAmount(purchaseAmount) {
@@ -16,17 +16,31 @@ class LottoService {
     }
   }
 
-  #generateLotto() {
-    return new Lotto(this.#generateLottoNumbers);
+  #generateLotto(quantitiy) {
+    const lottoNumbers = this.#generateLottoNumbers(quantitiy);
+    return lottoNumbers.map((number) => new Lotto(number));
   }
 
-  #generateLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(
-      LOTTO.numberMim,
-      LOTTO.numberMax,
-      LOTTO.numberCount,
-    );
+  #generateLottoNumbers(quantitiy) {
+    const lottoNumbers = new Set();
+    while (lottoNumbers.size < quantitiy) {
+      const newLottoNumbers = Random.pickUniqueNumbersInRange(
+        LOTTO.numberMim,
+        LOTTO.numberMax,
+        LOTTO.numberCount,
+      );
+      newLottoNumbers.sort((a, b) => a - b);
+      lottoNumbers.add(JSON.stringify(newLottoNumbers));
+    }
+    return Array.from(lottoNumbers).map(JSON.parse);
   }
+
+  // #checkduplication(lottoNumbers, newLottoNumbers) {
+  //   const duplication = lottoNumbers.some((number) =>
+  //     number.every((val, index) => val === newLottoNumbers[index]),
+  //   );
+  //   return duplication;
+  // }
 }
 
 export default LottoService;

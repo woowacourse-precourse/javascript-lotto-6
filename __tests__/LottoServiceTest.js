@@ -31,7 +31,7 @@ describe('로또 생성 테스트', () => {
   // given
   const lottoService = new LottoService();
   const addCases = [
-    { input: 3000, expected: 2 },
+    { input: 3000, expected: 3 },
     { input: 1000, expected: 1 },
   ];
   test.each(addCases)(
