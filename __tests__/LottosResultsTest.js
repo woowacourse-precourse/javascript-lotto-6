@@ -1,4 +1,3 @@
-import LottoCompare from '../src/service/LottoCompare.js';
 import LottosResults from '../src/service/LottosResults.js';
 
 describe('로또 당첨 결과 테스트', () => {
