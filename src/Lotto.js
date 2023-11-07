@@ -16,11 +16,13 @@ class Lotto {
       if (isNaN(number)) {
         throw new Error(Messages.ERROR_ISNAN);
       }
-    }
-    for (let number of numbers) {
       if (number < 1 || number > 45) {
         throw new Error(Messages.ERROR_NUMBER_OUT_OF_RANGE);
       }
+    }
+    let unique = new Set(numbers);
+    if (unique.length !== numbers.length) {
+      throw new Error(Messages.ERROR_WINNING_NUMBER_DUPLICATED);
     }
   }
 
