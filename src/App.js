@@ -9,6 +9,7 @@ class App {
   async setLottoGameConfig() {
     this.purchaseAmount = await view.readPurchaseAmount();
     this.winningNumbers = await view.readWinningNumbers();
+    this.bonusNumber = await view.readBonusNumber(this.winningNumbers);
   }
 
   async play() {

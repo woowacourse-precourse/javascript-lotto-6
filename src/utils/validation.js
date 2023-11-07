@@ -78,6 +78,20 @@ const validation = {
 
   isValidInputBonusNumber(bonusNumber) {
     this.isEmptyValue(bonusNumber);
+
+    if (Number(bonusNumber) < 1 || Number(bonusNumber) > 45) {
+      throw new Error(
+        messageFormat.error(ERROR.INPUT_BONUS_NUMBER.INVALID_FORMAT),
+      );
+    }
+  },
+
+  bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers) {
+    if (winningNumbers.includes(bonusNumber)) {
+      throw new Error(
+        messageFormat.error(ERROR.INPUT_BONUS_NUMBER.INCLUDE_WINNING_NUMBERS),
+      );
+    }
   },
 };
 

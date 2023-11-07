@@ -21,7 +21,7 @@ const ERROR = Object.freeze({
   INPUT_BONUS_NUMBER: {
     INVALID_FORMAT:
       '보너스 번호에는 1부터 45 사이의 숫자만 입력할 수 있습니다.',
-    DUPLICATE_WINNING_NUMBERS:
+    INCLUDE_WINNING_NUMBERS:
       '보너스 번호는 당첨 번호에 포함되어 있지 않아야 합니다.',
   },
 });
