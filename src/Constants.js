@@ -6,6 +6,8 @@ export const MIN_MATCHING_COUNTS_FOR_PRIZE = 3;
 export const MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER = 5;
 export const WINNING_NUMBER_WEIGHT = 1;
 export const BONUS_NUMBER_WEIGHT = 0.5;
+export const PERCENT_CONVERSION_NUMBER = 100;
+export const LAST_DECIMAL_PLACE_TO_DISPLAY = 1;
 
 export const GUIDE_MESSAGES = Object.freeze({
   ENTER_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',

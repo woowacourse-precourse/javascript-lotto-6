@@ -1,12 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 import {
   BONUS_NUMBER_WEIGHT,
+  LAST_DECIMAL_PLACE_TO_DISPLAY,
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
   LOTTO_NUMBERS_LENGTH,
   LOTTO_PRICE,
   MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER,
   MIN_MATCHING_COUNTS_FOR_PRIZE,
+  PERCENT_CONVERSION_NUMBER,
   WINNING_NUMBER_WEIGHT,
   WINNING_PRIZE_BY_COUNT,
 } from './Constants.js';
@@ -42,6 +44,7 @@ class App {
     this.bonusNumber = await this.getBonusNumber();
     this.getGameResult();
     const totalPrize = this.getTotalPrize();
+    const rateOfReturn = this.getRateOfReturn(purchaseAmount, totalPrize);
   }
 
   async getPurchaseAmount() {
@@ -125,6 +128,12 @@ class App {
         this.gameResult[winningCount] * WINNING_PRIZE_BY_COUNT[winningCount];
     });
     return totalPrize;
+  }
+
+  getRateOfReturn(purchaseAmount, totalPrize) {
+    return ((totalPrize / purchaseAmount) * PERCENT_CONVERSION_NUMBER).toFixed(
+      LAST_DECIMAL_PLACE_TO_DISPLAY
+    );
   }
 }
 
