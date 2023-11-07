@@ -20,12 +20,19 @@ class Lotto {
     if(numbers.filter((num, idx)=>numbers.indexOf(num)===idx).length !== 6) {
       throw new Error("[ERROR] 로또 번호에 중복된 수가 존재해선 안됩니다.");
     }
+
+    numbers.forEach(number=>{this.#validateNumber(number)});
+  }
+
+  #validateNumber(number) {
+    if (isNaN(number) || number < 1 || number > 45) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
   }
 
   // TODO: 추가 기능 구현
   printLotto() {
     Console.print(`[${this.#numbers.join(", ")}]`);
-    return `[${this.#numbers.join(", ")}]`;
   }
 
   compare(numbers, bonus) {

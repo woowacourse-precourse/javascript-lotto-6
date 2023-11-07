@@ -58,7 +58,7 @@ class Game {
 
   async getChoiceNumbers() {
     const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\ n");
-    this.choice = new Lotto(input.split(","));
+    this.choice = new Lotto(input.split(",").map(num=>Number.parseInt(num)));
   }
 
   async getBonusNumber() {
@@ -85,10 +85,10 @@ class Game {
       Console.print(`${this.#PRICE_TABLE[idx].string} - ${count}개`);
     })
 
-    this.getEarningsRate(result);
+    this.#getEarningsRate(result);
   }
 
-  getEarningsRate(counts) {
+  #getEarningsRate(counts) {
     const totalPrice = counts.reduce((acc, curr, idx) => acc +this.#PRICE_TABLE[idx].price * curr, 0);
     const rates = totalPrice / this.money;
     Console.print(`총 수익률은 ${Math.floor(rates*1000)/10}%입니다.`);
