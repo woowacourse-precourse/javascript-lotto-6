@@ -45,7 +45,13 @@ class App {
       Console.print(lotto);
     });
   }
+  async numberInput() {
+    const input = await Console.readLineAsync("\n당첨 번호를 입력해 주세요. \n");
     
+    const lotto = new Lotto(input.split(",").map(Number));
+    this.number = lotto.lottoReturn(input.split(",").map(Number));
+    
+    return this.number;
   }
   }
   async printAllLotto() {
