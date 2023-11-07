@@ -50,11 +50,11 @@ class LottoGame {
 
   checkResult() {
     this.#result = {
-      3: { count: 0, prize: 2_000_000_000 },
+      1: { count: 0, prize: 5_000 },
+      2: { count: 0, prize: 50_000 },
+      3: { count: 0, prize: 1_500_000 },
       4: { count: 0, prize: 30_000_000 },
-      5: { count: 0, prize: 1_500_000 },
-      bonus: { count: 0, prize: 50_000 },
-      6: { count: 0, prize: 5_000 },
+      5: { count: 0, prize: 2_000_000_000 },
     };
     this.#lottoList.forEach(ticket => {
       const matchingNumbers = ticket.numbers.filter(number =>
