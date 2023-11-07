@@ -17,6 +17,7 @@ class App {
       sixSame: 0,
       rateOfReturn: 0,
     };
+    this.totalReward = 0;
   }
 
   async play() {
