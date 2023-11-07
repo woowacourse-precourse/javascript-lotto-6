@@ -37,4 +37,14 @@ export default class Lottos {
             lotto.printLottoNumber();
         });
     }
+
+    getRanks(winningNumbers, bonusNumber) {
+        let lottoRanks = [];
+
+        this.list.forEach((lotto) => {
+          lottoRanks.push(lotto.getRank(winningNumbers, bonusNumber));
+        });
+    
+        return lottoRanks.filter((rank) => rank <= 5);
+      }
 }

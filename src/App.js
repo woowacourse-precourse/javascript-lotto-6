@@ -46,8 +46,12 @@ class App {
       MissionUtils.Console.print(e.message)
       await this.bonusNumberInput()
       return
-    }
-    
+    } this.printWinningState(this.winning.value, this.bonus.value)
+  }
+
+    printWinningState(win, bonus) {
+      MissionUtils.Console.print('\n당첨 통계\n---')
+      const lottoRanks = this.lottos.getRanks(win, bonus) 
   }
 }
 export default App;

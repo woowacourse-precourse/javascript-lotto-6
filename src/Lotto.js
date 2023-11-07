@@ -20,6 +20,17 @@ class Lotto {
     MissionUtils.Console.print(`[${numbersStr}]`)
   }
 
+  getRank(winningNumbers, bonusNumber) {
+    let count = 0;
+    this.#numbers.forEach((number) => {
+      if (winningNumbers.includes(number)) count += 1;
+    });
+
+    if (count === 6) return 1;
+    if (count === 5 && this.#numbers.includes(bonusNumber)) return 2;
+    return 8 - count;
+  }
+
 }
 
 export default Lotto;
