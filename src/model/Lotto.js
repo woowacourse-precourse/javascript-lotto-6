@@ -17,8 +17,6 @@ class Lotto {
     const lottoValidator = new LottoValidator(numbers);
     lottoValidator.validate();
   }
-
-  // TODO: 추가 기능 구현
-}
+};
 
 export default Lotto;
