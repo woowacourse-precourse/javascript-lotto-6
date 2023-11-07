@@ -4,7 +4,11 @@ import { LOTTO_CONFIG } from "../constants.js";
 
 class LottoShop {
   #generateLotto() {
-    const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(
+      LOTTO_CONFIG.minNumber,
+      LOTTO_CONFIG.maxNumber,
+      LOTTO_CONFIG.numberLength
+    );
     return new Lotto(lottoNumber);
   }
 
