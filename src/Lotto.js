@@ -10,9 +10,31 @@ class Lotto {
   }
 
   async start() {
+    this.#validate(this.#numbers);
     this.bonusNum = await this.getBonusNum();
     await this.print();
   }
+
+  #hasDuplicates = (numbers) => {
+    const uniqueNumbers = [...new Set(numbers)];
+    return numbers.length !== uniqueNumbers.length;
+  };
+
+  #validate(numbers) {
+    if (!Array.isArray(numbers))
+      throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
+    if (numbers.some(num => Number.isNaN(num)))
+      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
+    if (numbers.length !== 6)
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (this.#hasDuplicates(numbers))
+      throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
+    if (numbers.some(num => num <= 0 || num >= 46))
+      throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
+    if (numbers.some(num => num >= 1 && num <= 45 && Number.isInteger(num)) === false)
+      throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
+    return numbers;
+  };
 
   // getSixNum = async () => {
   //   let sixNum;
@@ -45,28 +67,7 @@ class Lotto {
     PrintOutput.calculateWinningDetails(this.sixNum, this.bonusNum);
     PrintOutput.printWinningDetails();
     PrintOutput.printTotalReturn();
-  }
-
-  #hasDuplicates = (numbers) => {
-    const uniqueNumbers = [...new Set(numbers)];
-    return numbers.length !== uniqueNumbers.length;
   };
-
-  #validate(numbers) {
-    if (!Array.isArray(numbers))
-      throw new Error("[ERROR] 콤마(,)로 구분해야 합니다.");
-    if (numbers.some(num => Number.isNaN(num)))
-      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-    if (numbers.length !== 6)
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    if (this.#hasDuplicates(numbers))
-      throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
-    if (numbers.some(num => num <= 0 || num >= 46))
-      throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
-    if (numbers.some(num => num >= 1 && num <= 45 && Number.isInteger(num)) === false)
-      throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
-    return numbers;
-  }
 
   #validateBonusNum(numbers, bonusNum) {
     if (Array.isArray(bonusNum))
@@ -80,7 +81,7 @@ class Lotto {
     if (bonusNum >= 1 && bonusNum <= 45 && Number.isInteger(bonusNum) === false)
       throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
     return bonusNum;
-  }
+  };
 }
 
 export default Lotto;

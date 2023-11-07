@@ -6,9 +6,16 @@ import PrintOutput from "./PrintOutput.js";
 class App {
   async play() {
     await this.getPrice();
-    const numbers = await this.getSixNum();
-    const lotto = new Lotto(numbers);
-    await lotto.start();
+    let validNumbers = false;
+    do {
+      try {
+        const numbers = await this.getSixNum();
+        const lotto = new Lotto(numbers);
+        await lotto.start();
+      } catch(error) {
+        throw new Error(error.message);
+      }
+    } while(!validNumbers);
   }
 
   getPrice = async () => {
