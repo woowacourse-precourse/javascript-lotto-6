@@ -5,12 +5,12 @@ export default class LottoYieldCalculator {
     this.setting = new LottoSettings();
   }
   caculateYieldRate(result, money) {
-    const totalPrize = this.#getTotalPrize(result);
+    const totalPrize = this.getTotalPrize(result);
     const yieldRate = Number(((totalPrize / money) * 100).toFixed(2));
     return yieldRate;
   }
 
-  #getTotalPrize(result) {
+  getTotalPrize(result) {
     const totalPrize = Object.entries(result).reduce(
       (accPrize, [key, matchCount]) => {
         return accPrize + this.#calculatePrizeForRank(key, matchCount);
@@ -26,12 +26,10 @@ export default class LottoYieldCalculator {
 
   getResult(lottosNumbers, drawnLotto) {
     const result = this.#initializeResultObject();
-    const { drawnLottoNumbers, bonusNumber } = drawnLotto.getFullNumbers();
     lottosNumbers.forEach((lottoNumbers) => {
       const { matchCount, hasBonusNumber } = this.#checkMatchCount(
         lottoNumbers,
-        drawnLottoNumbers,
-        bonusNumber
+        drawnLotto
       );
       const prize = this.#findPrizeKey(matchCount, hasBonusNumber);
       if (prize) result[prize] += 1;
@@ -50,7 +48,8 @@ export default class LottoYieldCalculator {
     return result;
   }
 
-  #checkMatchCount(lottonumbers, drawnLottoNumbers, bonusNumber) {
+  #checkMatchCount(lottonumbers, drawnLotto) {
+    const { drawnLottoNumbers, bonusNumber } = drawnLotto.getFullNumbers();
     const matchCount = lottonumbers.filter((number) =>
       drawnLottoNumbers.includes(number)
     ).length;
@@ -60,16 +59,15 @@ export default class LottoYieldCalculator {
   }
 
   #findPrizeKey(matchCount, isBonusMatched) {
-    for (const [key, { matchNum }] of Object.entries(
+    const prizeDetailEntries = Object.entries(
       this.setting.getAllPrizeDetails()
-    )) {
-      if (
+    );
+    const foundKey = prizeDetailEntries.find(
+      ([key, { matchNum }]) =>
         matchCount === matchNum &&
         (!isBonusMatched || key === this.getSecondPrizeRank())
-      ) {
-        return key;
-      }
-    }
-    return null;
+    );
+
+    return foundKey ? foundKey[0] : null;
   }
 }
