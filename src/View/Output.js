@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { PRIZE_MESSAGES } from './message';
 
 class Output {
   purchaseHistory(purchaseList) {
@@ -9,7 +10,7 @@ class Output {
   }
 
   winningDetails(matchNum, rateReturn) {
-    for (let i = 0; i < matchNum.length; i++) {
+    for (let i = 0; i < matchNum.length; i += 1) {
       Console.print(`${PRIZE_MESSAGES[i]} - ${matchNum[i]}개`);
     }
     Console.print(`총 수익률은 ${rateReturn}입니다.`);

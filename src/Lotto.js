@@ -1,4 +1,4 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 
 class Lotto {
   #numbers;
@@ -18,7 +18,7 @@ class Lotto {
   createLotto() {
     const lottoNumberList = [];
     while (lottoNumberList.length < 6) {
-      pick = Random.pickUniqueNumbersInRange(1, 45);
+      const pick = Random.pickUniqueNumbersInRange(1, 45);
       if (!lottoNumberList.includes(pick)) lottoNumberList.push(pick);
     }
     return lottoNumberList;
