@@ -1,5 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
+import UserOutput from '../view/UserOutput.js';
+
 import { ERROR_MESSAGE } from '../data/message.js';
 import { INPUT_MESSAGE } from '../data/message.js';
 
@@ -21,7 +23,7 @@ class Amount {
                 Amount.validateCorrectFormat(amount);
                 isCorrect = true;
             } catch(error) {
-                Console.print(`${ERROR_MESSAGE.AMOUT_NUMBER_ERROR}`);
+                UserOutput.error(`${ERROR_MESSAGE.AMOUT_NUMBER_ERROR}`);
                 amount = await Console.readLineAsync(`${INPUT_MESSAGE.PURCHASE_AMOUNT}`);
             }
         }

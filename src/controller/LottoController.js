@@ -1,7 +1,7 @@
 import UserInput from '../view/UserInput.js';
 import Purchase from '../model/Purchase.js';
 import Calculate from '../model/Calculate.js';
-import OutPut from '../view/OutPut.js';
+import Result from '../model/Result.js';
 
 class LottoController {
     #amount;
@@ -43,11 +43,12 @@ class LottoController {
         const count = calculate.count();
         this.#collectedCount = await calculate.collect(count);
         this.#rate = calculate.rate(this.#collectedCount);
-        this.printOutput();
+        this.getResult();
     }
 
-    printOutput() {
-        new OutPut(this.#collectedCount, this.#rate);
+    getResult() {
+        const result = new Result(this.#collectedCount, this.#rate);
+        result.print();
     }
 }
 

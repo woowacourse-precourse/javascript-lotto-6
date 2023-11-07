@@ -13,6 +13,6 @@ describe("로또 발행 클래스 테스트", () => {
     });
 
     test("구매 금액에 따른 로또 발행 개수 테스트", () => {
-        expect(purchase.getCount).toBe(3);
+        expect(purchase.count).toBe(3);
     });
 });
