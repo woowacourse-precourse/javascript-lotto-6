@@ -4,8 +4,8 @@ class User {
   async purchaseLotto() {
     const amount = await InputHandler.inputPurchaseAmount();
     //유효성 검사 해야함.
-    const tickets = amount / 1000;
-    return tickets;
+    const ticketCount = amount / 1000;
+    return ticketCount;
   }
 
   async enterWinningNumbers() {
