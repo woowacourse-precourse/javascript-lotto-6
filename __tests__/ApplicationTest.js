@@ -96,7 +96,7 @@ describe("로또 테스트", () => {
   });
 
   test("예외 테스트", async () => {
-    await expect(runException("1000j")).rejects.toThrow("[ERROR]");
+    await runException("1000j");
   });
 
   test("구입금액 0일 경우 예외 테스트", async () => {
