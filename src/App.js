@@ -21,12 +21,12 @@ class App {
   }
 
   randomPickNum() {
-    this.randomNum = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+    const randomNum = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
     
-    return this.randomNum;
+    return randomNum;
   }
-  printLottoNum() {
-    Console.print(this.randomNum);
+    
+  }
   }
   async printAllLotto() {
     const cnt = await this.countBuytLotto();
