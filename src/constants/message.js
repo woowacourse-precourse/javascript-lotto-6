@@ -17,3 +17,14 @@ export const OUTPUT_MESSAGE = Object.freeze({
   returnRate: "총 수익률은 ",
   returnRatePostFix: "%입니다.",
 });
+
+export const ERROR_MESSAGE = Object.freeze({
+  noInput: "내용을 입력해 주세요.",
+  invalidAmountUnit: "구입금액은 1,000원으로 나누어 떨어져야 합니다.",
+  notNumber: "숫자를 입력해야 합니다.",
+  invalidAmountRange: "구입금액은 1,000보다 큰 숫자여야 합니다.",
+  invalidLottoNumberCount: "6자리 숫자를 입력하셔야 합니다.",
+  duplicatedNumber: "중복된 숫자가 없어야 합니다.",
+  invalidBonousNumberCount: "보너스 숫자는 하나의 숫자를 입력하셔야 합니다.",
+  invalidNumberRange: "로또 번호는 1부터 45 사이의 숫자여야 합니다.",
+});
