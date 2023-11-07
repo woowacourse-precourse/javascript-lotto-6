@@ -1,11 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import GameExport from './GameExport.js';
 import Validation from './validation.js';
-import {
-  readLineLottoCount,
-  readLineBonusCount,
-  consoleError,
-} from './utils.js';
+import { readLineLottoCount, readLineBonusCount, consoleError, winnerMessage, winCount } from './utils.js';
 
 class App {
   #gameExport;
@@ -24,13 +20,9 @@ class App {
 
   async initializeAndPurchaseLotto() {
     await this.#gameExport.purchaseLotto.initialize();
-    const purchaseResult =
-      await this.#gameExport.purchaseLotto.alertPurchaseLotto();
+    const purchaseResult = await this.#gameExport.purchaseLotto.alertPurchaseLotto();
 
-    if (
-      typeof purchaseResult === 'string' &&
-      purchaseResult.includes('[ERROR]')
-    ) {
+    if (typeof purchaseResult === 'string' && purchaseResult.includes('[ERROR]')) {
       MissionUtils.Console.print(purchaseResult);
       return false;
     }
@@ -78,13 +70,12 @@ class App {
   async compareLotto() {
     const inputNumbers = await this.userInputNumbers();
     const bonusNumber = await this.userInputBonusNumber(inputNumbers);
-    const eachCompareResult = this.#gameExport.getEachCompareResult(
-      inputNumbers,
-      bonusNumber,
-    );
+    const eachCompareResult = this.#gameExport.getEachCompareResult(inputNumbers, bonusNumber);
     const statistics = this.#gameExport.getStatistics(eachCompareResult);
     const totalPrizeMoney = this.#gameExport.getTotalPrizeMoney(statistics);
-    console.log(totalPrizeMoney);
+    const earningRatio = this.#gameExport.getPriceEarningsRatio(totalPrizeMoney);
+    winnerMessage();
+    winCount(statistics);
   }
 }
 
