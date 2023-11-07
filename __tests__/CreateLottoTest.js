@@ -14,4 +14,15 @@ describe("로또 생성 및 출력 테스트", () => {
     // then
     expect(model.LOTTO_COUNT).toBe(3);
   });
+
+  test("로또 생성 갯수 확인", async () => {
+    const mockData = "3000";
+    // when
+    const model = new GameModel();
+    await model.lottoCount(mockData);
+    await model.generateLotto(model.LOTTO_COUNT);
+
+    // then
+    expect(model.LOTTOS.length).toBe(3);
+  });
 });
