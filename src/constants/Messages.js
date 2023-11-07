@@ -9,4 +9,6 @@ export const ErrorMessages = {
   NOT_MULTIPLES_OF_1000: '[ERROR] 1000의 배수가 아닙니다.',
   NOT_NUMBER_IN_RANGE: '[ERROR] 1~45의 숫자가 아닙니다.',
   NOT_LENGTH_6: '[ERROR] 입력된 숫자가 6개가 아닙니다.',
+  NOT_QNIQUE_NUMBERS: '[ERROR] 중복된 숫자가 입력되었습니다.',
+  NOT_QNIQUE_BONUS_NUMBERS: '[ERROR] 중복된 보너스숫자가 입력되었습니다.',
 };

@@ -21,6 +21,15 @@ class ValidatorUtil {
   static lengthValidate(input) {
     if (input.length !== 6) throw new Error(ErrorMessages.NOT_LENGTH_6);
   }
+
+  static duplicationValidate(input, bonusNumber) {
+    const inputToSet = new Set(input);
+
+    if (inputToSet.size !== input.length)
+      throw new Error(ErrorMessages.NOT_QNIQUE_NUMBERS);
+    if (input.includes(bonusNumber))
+      throw new Error(ErrorMessages.NOT_QNIQUE_BONUS_NUMBERS);
+  }
 }
 
 export default ValidatorUtil;
