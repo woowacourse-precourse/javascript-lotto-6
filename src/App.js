@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import AmountInput from "./View/AmountInput";
 import numberInput from "./View/numberInput";
+import printResult from "./View/printResult";
 import Lotto from "./Lotto";
 import makeRandomNumbers from "./makeRandomNumbers";
 import calculateLottoNumber from "./calculateLottoNumber";
@@ -28,6 +29,7 @@ class App {
       getStatistics(lottoResult, result, bonusResult);
     });
     const profit = calculateProfit(amount, lottoResult);
+    printResult(lottoResult, profit);
   }
 }
 
