@@ -11,7 +11,7 @@ const number = {
 };
 
 const lotto = {
-  dulication: '로또 번호에 중복된 숫자를 입력할 수 없습니다.',
+  duplication: '로또 번호에 중복된 숫자를 입력할 수 없습니다.',
   includeBlank: '로또 번호에 공백을 입력할 수 없습니다.',
   wrongDrawCases: `로또 번호에 ${NUMBER.drawCases}개의 수를 입력해주세요.`,
   notInRange: `로또 번호는 각각 ${NUMBER.minNumber}에서 ${NUMBER.maxNumber} 사이의 수를 입력해야 합니다.`,
