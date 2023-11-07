@@ -19,8 +19,7 @@ class App {
     const isLottoGenerated = await this.initializeAndPurchaseLotto();
     if (isLottoGenerated) {
       await this.printLottoList();
-      const inputNumbers = await this.userInputNumbers();
-      await this.userInputBonusNumber(inputNumbers);
+      await this.compareLotto();
     }
   }
 
@@ -70,12 +69,22 @@ class App {
 
     try {
       Validation.validateBonusNumbers(bonusNumber, inputNumbers);
-      console.log(bonusNumber);
+
       return bonusNumber;
     } catch (error) {
       consoleError(error);
       return this.userInputBonusNumber(inputNumbers);
     }
+  }
+
+  async compareLotto() {
+    const inputNumbers = await this.userInputNumbers();
+    const bonusNumber = await this.userInputBonusNumber(inputNumbers);
+    const eachCompareResult = this.#gameExport.getEachCompareResult(
+      inputNumbers,
+      bonusNumber,
+    );
+    const statistics = this.#gameExport.getStatistics(eachCompareResult);
   }
 }
 
