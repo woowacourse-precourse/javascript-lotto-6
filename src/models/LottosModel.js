@@ -1,33 +1,21 @@
 import { Random } from '@woowacourse/mission-utils';
-import {
-  checkListSameValue,
-  checkListValues,
-  getCommonElementCount,
-} from '../utils/listUtils.js';
+import { getCommonElementCount } from '../utils/listUtils.js';
 import CONFIG from '../constants/config.js';
 import Lotto from './Lotto.js';
 import MATCHES from '../constants/matches.js';
-import throwError from '../utils/throwError.js';
-import { checkNumberType } from '../utils/numberUtils.js';
-import ERROR_MESSAGES from '../constants/errorMessage.js';
 
-class LottoModel {
-  #correctNumber;
+class LottosModel {
+  #totalBuyPriceModel;
 
-  #bonusNumber;
+  #correctNumbersModel;
+
+  #bonusNumberModel;
 
   #lottoList = [];
 
   #winCounts = this.initWinCounts();
 
-  #totalBuyPrice = 0;
-
   #totalWinMoney = 0;
-
-  constructor(correctNumber, bonusNumber) {
-    this.#correctNumber = correctNumber;
-    this.#bonusNumber = bonusNumber;
-  }
 
   calculatorTotalWinCounts() {
     Object.keys(MATCHES).forEach((key) => {
@@ -39,13 +27,14 @@ class LottoModel {
     this.#lottoList.forEach((lotto) => this.checkNumber(lotto.getNumbers()));
   }
 
+  // prettier-ignore
   checkNumber(targetNumber) {
     const keyList = Object.keys(MATCHES).filter(
       (key) => key !== CONFIG.bonusMatchKey
     );
-    const winCount = +getCommonElementCount(this.#correctNumber, targetNumber);
-    // prettier-ignore
-    if (winCount === CONFIG.bonusNumberMatch && targetNumber.includes(this.#bonusNumber)) {
+    const winCount = +getCommonElementCount(this.#correctNumbersModel.getNumbers(), targetNumber);
+
+    if (winCount === CONFIG.bonusNumberMatch && targetNumber.includes(this.#bonusNumberModel.getNumber())) {
        this.#winCounts[CONFIG.bonusMatchKey] += 1
        return 
     }
@@ -72,24 +61,20 @@ class LottoModel {
     return results;
   }
 
-  setCorrectNumber(correctNumber) {
-    this.#correctNumber = correctNumber;
-  }
-
-  setBonusNumber(bonusNumber) {
-    this.#bonusNumber = bonusNumber;
-  }
-
-  setTotalBuyPrice(totalBuyPrice) {
-    this.#totalBuyPrice = totalBuyPrice;
-  }
-
   setTotalWinMoney(totalWinMoney) {
     this.#totalWinMoney = totalWinMoney;
   }
 
-  getCorrectNumber() {
-    return this.#correctNumber;
+  setTotalBuyPriceModel(totalBuyPriceModel) {
+    this.#totalBuyPriceModel = totalBuyPriceModel;
+  }
+
+  setCorrectNumbersModel(correctNumbersModel) {
+    this.#correctNumbersModel = correctNumbersModel;
+  }
+
+  setBonusNumberModel(bonusNumberModel) {
+    this.#bonusNumberModel = bonusNumberModel;
   }
 
   getLottoList() {
@@ -100,13 +85,9 @@ class LottoModel {
     return this.#winCounts;
   }
 
-  getTotalBuyPrice() {
-    return this.#totalBuyPrice;
-  }
-
   getTotalWinMoney() {
     return this.#totalWinMoney;
   }
 }
 
-export default LottoModel;
+export default LottosModel;
