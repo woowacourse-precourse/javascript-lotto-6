@@ -1,6 +1,11 @@
 import Lotto from "../src/Lotto.js";
 
 describe("로또 클래스 테스트", () => {
+  const textTestCases = [
+    [1, 2, "안녕", 4, 5, 6],
+    [1, "Hello", 3, 4, 5, 6],
+  ];
+
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6, 7]);
@@ -18,44 +23,32 @@ describe("로또 클래스 테스트", () => {
   test("로또 번호에 1과 45 사이의 값이 아닌 값이 있으면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 46, 5, 6]);
-    }).toThrow("[ERROR]");
+    }).toThrow("[ERROR] 로또 번호는 1에서 45 사이의 값이어야 합니다.");
   });
 
   test("로또 번호에 공백이 있으면 예외가 발생한다.", () => {
     expect(() => {
-      new Lotto([1, 2, , 4, 5, 6]);
-    }).toThrow("[ERROR]");
+      new Lotto([1, 2, " ", 4, 5, 6]);
+    }).toThrow("[ERROR] 로또 번호에 공백인 값이 있습니다.");
   });
 
   test("로또 번호에 특수문자가 있으면 예외가 발생한다.", () => {
     expect(() => {
-      new Lotto([1, 2, "^", 4, 5, 6]);
-    }).toThrow("[ERROR]");
-  });
-
-  test("로또 번호에 문자(영어나 한글)가 있으면 예외가 발생한다.", () => {
-    const input = ["123456,123", "123,1234567", "123456,123456"];
-    input.forEach((v) => {
-      expect(() => Validation(v)).toThrow("[ERROR]");
-    });
+      new Lotto([1, 2, "10^", 4, 5, 6]);
+    }).toThrow("[ERROR] 로또 번호에 특수문자가 있습니다.");
   });
 
   test("로또 번호에 boolean 값이 있으면 예외가 발생한다.", () => {
     expect(() => {
-      new Lotto([1, 2, !4, 4, 5, 6]);
-    }).toThrow("[ERROR]");
+      new Lotto([10, 2, true, 40, 5, 6]);
+    }).toThrow("[ERROR] 로또 번호에 불리언 값이 있습니다.");
   });
 
-  const testCases = [
-    [1, 2, "안녕", 4, 5, 6],
-    [1, "Hello", 3, 4, 5, 6],
-  ];
-
-  testCases.forEach((testCase, index) => {
+  textTestCases.forEach((testCase, index) => {
     test(`로또 번호에 문자(영어나 한글)가 있으면 예외가 발생한다 - 테스트 케이스 ${index}`, () => {
       expect(() => {
         new Lotto(testCase);
-      }).toThrow("[ERROR]");
+      }).toThrow("[ERROR] 로또 번호에 영어나 한글이 포함 되어 있습니다.");
     });
   });
 });
