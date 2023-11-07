@@ -1,32 +1,35 @@
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGES } from '../constants/messages.js';
+import SYMBOLS from '../constants/symbols.js';
+
+const print = any => {
+  Console.print(any);
+};
 
 const OutputView = {
   printError(error) {
-    Console.print(error);
-    Console.print(`${error}`);
+    print(error);
+    print(`${error}`);
   },
 
-  printLottosQuantity(quantity) {
-    Console.print(OUTPUT_MESSAGES.lottosQuantity(quantity));
+  printLottoQuantity(quantity) {
+    print(OUTPUT_MESSAGES.lottosQuantity(quantity));
   },
 
-  printLottos(lottos) {
-    lottos.forEach(lotto => Console.print(lotto));
+  printLottoNumbers(lottos) {
+    lottos.forEach(lotto => print(`[${lotto.join(`${SYMBOLS.comma} `)}]`));
   },
 
   printResult() {
-    Console.print(OUTPUT_MESSAGES.result + OUTPUT_MESSAGES.divisionLine);
+    print(OUTPUT_MESSAGES.result + OUTPUT_MESSAGES.divisionLine);
   },
 
   printStats(stats) {
-    stats.forEach((stat, index) =>
-      Console.print(OUTPUT_MESSAGES.hits(stat, index)),
-    );
+    stats.forEach((stat, index) => print(OUTPUT_MESSAGES.hits(stat, index)));
   },
 
   printProfitRate(profitRate) {
-    Console.print(OUTPUT_MESSAGES.profitRate(profitRate));
+    print(OUTPUT_MESSAGES.profitRate(profitRate));
   },
 };
 

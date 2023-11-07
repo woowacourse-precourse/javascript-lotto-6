@@ -125,3 +125,14 @@
 - [x] 테스트를 통한 검증
   - [x] LottoStore 테스트 코드 추가
 - [x] JSDoc 작성
+
+### ✅ refactor-2 발행한 로또 수량 및 번호를 출력한다.
+
+- [x] `LottoStore` 리팩토링
+  - [x] `getUserLottos()` 메소드 책임 분리
+  - [x] 구입 수량 계산 분리 `getPurchaseQuantity()`
+  - [x] 로또 발급 분리 `publishLottos()`
+- [x] string 형 변환 후 발급받은 로또 출력
+- [x] Controller & Model에서는 number type을 유지 시키기 위해 OutputView에서 형 변환 후 출력
+- [x] 테스트를 통해 검증한다.
+  - [x] 발급받은 로또 type 체크

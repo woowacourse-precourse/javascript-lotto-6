@@ -33,9 +33,18 @@ describe('LottoStore 모델 테스트', () => {
     Random.pickUniqueNumbersInRange.mockReturnValue([1, 2, 3, 4, 5, 6]);
 
     const purchaseAmount = 2000;
-    const lottos = new LottoStore(purchaseAmount).getUserLottos();
+    const userLottos = new LottoStore(purchaseAmount).getUserLottos();
 
-    expect(lottos).toHaveLength(2);
-    lottos.forEach(lotto => expect(lotto).toEqual([1, 2, 3, 4, 5, 6]));
+    expect(userLottos).toHaveLength(2);
+    userLottos.forEach(lotto => expect(lotto).toEqual([1, 2, 3, 4, 5, 6]));
+  });
+
+  test('getUserLottos() 반환 값 타입 테스트', () => {
+    const purchaseAmount = 1000;
+    const userLottos = new LottoStore(purchaseAmount).getUserLottos();
+
+    userLottos.forEach(userLotto =>
+      userLotto.forEach(number => expect(typeof number).toBe('number')),
+    );
   });
 });

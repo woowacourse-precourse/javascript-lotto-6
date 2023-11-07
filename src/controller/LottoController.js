@@ -36,17 +36,21 @@ class LottoController {
   async #buyLottos() {
     try {
       this.#purchaseAmount = await this.#inputView.readPurchaseAmount();
-      const LottoStoreInstance = new LottoStore(this.#purchaseAmount);
-      this.#userLottos = LottoStoreInstance.getUserLottos();
-
-      OutputView.printLottosQuantity(this.#userLottos.length);
-      OutputView.printLottos(
-        this.#userLottos.map(lotto => `[${lotto.join(', ')}]`),
-      );
+      this.lottoStore = new LottoStore(this.#purchaseAmount);
+      this.#userLottos = this.lottoStore.getUserLottos();
+      this.#printUserLottos();
     } catch (error) {
       OutputView.printError(error);
       await this.#buyLottos();
     }
+  }
+
+  /**
+   * 유저가 구입한 로또 개수와 로또 번호를 출력한다.
+   */
+  #printUserLottos() {
+    OutputView.printLottoQuantity(this.#userLottos.length);
+    OutputView.printLottoNumbers(this.#userLottos);
   }
 
   async #drawWinningNumbers() {
