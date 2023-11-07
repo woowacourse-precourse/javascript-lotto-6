@@ -5,8 +5,17 @@ import WORD from "./lib/constants/word";
 class User {
   lottoList;
 
+  #rank;
+
   constructor(userLottoQuanitiy) {
     this.lottoList = this.#generateLotto(userLottoQuanitiy);
+    this.#rank = {
+      fifthRank: 0,
+      fourthRank: 0,
+      thirdRank: 0,
+      secondRank: 0,
+      firstRank: 0,
+    };
   }
 
   #generateLotto(userLottoQuanitiy) {
@@ -33,6 +42,14 @@ class User {
 
   getLotto() {
     return this.lottoList;
+  }
+
+  getRank(lottoNumber, bonusNumber) {
+    this.lottoList.forEach((lotto) => {
+      const rank = lotto.raffleNumber(lottoNumber, bonusNumber);
+      if (rank === WORD.NOTING) return;
+      this.#rank[rank] += 1;
+    });
   }
 }
 

@@ -37,7 +37,13 @@ class LottoController {
     await this.handleLotto(lottoNumber, bonusNumber);
   }
 
-  handleLotto(lottoNumber, bonusNumber) {}
+  handleLotto(lottoNumber, bonusNumber) {
+    this.raffleLotto(lottoNumber, bonusNumber);
+  }
+
+  raffleLotto(lottoNumber, bonusNumber) {
+    this.#user.getRank(lottoNumber, bonusNumber);
+  }
 }
 
 export default LottoController;
