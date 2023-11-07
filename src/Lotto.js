@@ -1,4 +1,5 @@
 import ERROR_MESSAGE from "./Errors.js";
+import { LOTTO_UNIT } from "./constants/constants.js";
 
 class Lotto {
   #numbers;
@@ -9,17 +10,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_UNIT.LOTTO_LENGTH) {
       throw new Error(ERROR_MESSAGE.lottoSize);
     }
 
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== LOTTO_UNIT.LOTTO_LENGTH) {
       throw new Error(ERROR_MESSAGE.duplicateNumbers);
     }
   }
 
   static countingLottos(inputMoney) {
-    return inputMoney / 1000;
+    return inputMoney / LOTTO_UNIT.MONEY_UNIT;
   }
 }
 
