@@ -48,7 +48,7 @@ export default class LottoResult {
   }
 
   calculateProfitRate() {
-    const totalSpent = this.#tickets.length * 1000;
+    const totalSpent = this.#tickets.length * GAME_SETTINGS.TICKET_PRICE;
     const totalPrize = this.#calculateTotalPrize();
     return Number(((totalPrize / totalSpent) * 100).toFixed(2));
   }
