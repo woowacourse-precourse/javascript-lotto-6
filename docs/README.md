@@ -1,21 +1,35 @@
 # 🚀 기능 구현 목록
 
-- [x] 구입 금액에 해당하는 만큼 로또를 발행한다. - LottoVendingMachine
-- [x] 1개의 로또를 발행할 때 로또 번호는 1~45 사이의 중복되지 않는 숫자 6개여야 한다. - Lotto
-- [x] 사용자가 구매한 로또와 당첨 번호 및 보너스 번호를 비교하여 당첨 여부를 계산한다. - LottoWinnerVerifier
+- [ ] 구입금액 만큼 로또 티켓을 발행한다. - `LottoShop.issueLottoTickets()`
+- [ ] 로또 티켓 1장을 발행한다. - `LottoShop.#issueLottoTicket()`
+- [ ] 로또 번호를 생성한다. - `LottoShop.#createLottoNumbers()`
 
-  - [x] 등수 계산
-  - [x] 당첨 개수 계산
-  - [x] 수익률 계산
+- [ ] 로또 당첨을 확인한다. - `LottoResultCalculator.checkLottoResult()`
+- [ ] 로또 번호에서 당첨 번호와 일치하는 숫자의 개수를 계산한다. - `LottoResultCalculator.#countSameNumber()`
+- [ ] 로또 번호에 보너스 번호가 있는지 확인한다. - `LottoResultCalculator#hasBonusNumber()`
 
-- [ ] 잘못된 입력을 받을 경우 "[ERROR]"로 시작하는 에러 메시지를 출력하고 해당 부분부터 입력을 다시 받는다.
+- [ ] 수익률을 계산한다. - `LottoReturnRateCalculator.calculateReturnRate()`
+- [ ] 총 수익을 계산한다. - `LottoReturnRateCalculator.#calculateTotalProfit()`
+
+<br />
 
 # ⚠ 입력 예외 처리
 
-- [x] 구입 금액은 0보다 큰 숫자여야 한다.
-- [x] 구입 금액은 1,000원 단위이어야 한다.
-- [x] 당첨 번호는 6개여야 한다.
-- [x] 당첨 번호는 1~45 사이의 정수여야 한다.
-- [x] 당첨 번호는 중복이 없어야 한다.
-- [x] 보너스 번호는 1~45 사이의 정수여야 한다.
-- [x] 보너스 번호는 당첨 번호와 중복이 아니어야 한다.
+### 구입 금액
+
+- [ ] 숫자만 입력 받는다.
+- [ ] 0보다 커야 한다.
+- [ ] 1,000원 단위이어야 한다.
+
+### 당첨 번호
+
+- [ ] 숫자만 입력 받는다.
+- [ ] 6개여야 한다.
+- [ ] 1보다 크거나 같고 45보다 작거나 같아야 한다.
+- [ ] 중복 숫자가 없어야 한다.
+
+### 보너스 번호
+
+- [ ] 숫자만 입력 받는다.
+- [ ] 1보다 크거나 같고 45보다 작거나 같아야 한다.
+- [ ] 당첨 번호와 중복 숫자가 있으면 안 된다.
