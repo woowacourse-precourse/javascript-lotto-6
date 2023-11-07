@@ -24,7 +24,7 @@ class ValidatePurchase {
   }
 
   checkFirst(userInput) {
-    if (userInput[0] === '0') {
+    if (userInput[0] === '0' || userInput[0] == '+') {
       throw new Error(errorMessage.purchaseNotNumber);
     }
   }
