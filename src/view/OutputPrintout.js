@@ -4,18 +4,20 @@ import LottoController from "../controller/LottoController.js";
 
 const OutputPrintout = {
 	printLottos: (amount) => {
-		const LottoControll = new LottoController();
-		const count = LottoControll.countLottos(amount);
+		const count = LottoController.countLottos(amount);
 		Console.print(`${NEWLINE}${count}${PRINT_OUTPUT.outputLottoCount}`);
 
 		Array.from({ length: count }).forEach(() => {
-			const lotto = LottoControll.generateLotto();
-			LottoControll.setLottoList(lotto);
+			const lotto = LottoController.generateLotto();
+			LottoController.setLottoList(lotto);
 			Console.print(lotto);
 		});
+	},
+	printWinningRanks: () => {
+		Console.print(PRINT_OUTPUT.outputWinnigRanks);
 
-		//리스트 저장
-		LottoControll.getLottoList().forEach((v) => {
+		//리스트 출력
+		LottoController.lottoList.forEach((v) => {
 			Console.print(v.getNumbers());
 		});
 	},

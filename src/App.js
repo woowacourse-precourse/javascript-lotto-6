@@ -9,6 +9,8 @@ class App {
 		console.log("밖에 값 ", a.getNumbers());
 		let b = await InputPrintout.inputBonusNum();
 		console.log("보너스", b);
+
+		OutputPrintout.printWinningRanks();
 	}
 }
 

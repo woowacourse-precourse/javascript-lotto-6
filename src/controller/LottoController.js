@@ -3,17 +3,13 @@ import { LOTTO, COMMA } from "../utils/Constant.js";
 import Lotto from "../model/Lotto.js";
 
 class LottoController {
-	#LottoList;
+	static lottoList = [];
 
-	constructor() {
-		this.#LottoList = [];
-	}
-
-	countLottos(amount) {
+	static countLottos(amount) {
 		return Math.floor(amount / LOTTO.cost);
 	}
 
-	generateLotto() {
+	static generateLotto() {
 		const lottoNumbers = [];
 		while (lottoNumbers.length < LOTTO.count) {
 			const number = Random.pickNumberInRange(
@@ -28,12 +24,9 @@ class LottoController {
 		return lottoNumbers.sort((a, b) => a - b);
 	}
 
-	setLottoList(lotto) {
-		this.#LottoList.push(new Lotto(lotto.join(COMMA)));
-	}
-
-	getLottoList() {
-		return this.#LottoList;
+	static setLottoList(lotto) {
+		this.lottoList.push(new Lotto(lotto.join(COMMA)));
 	}
 }
+
 export default LottoController;
