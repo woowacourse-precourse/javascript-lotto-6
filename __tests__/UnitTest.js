@@ -33,6 +33,18 @@ describe('기능 테스트', () => {
         );
     });
 
+    test('당첨 번호를 받아올 수 있다.', () => {
+        expect(app.getWinNumbers('1,2,3,4,5,6')).resolves.toEqual([
+            1, 2, 3, 4, 5, 6,
+        ]);
+    });
+
+    test('보너스 번호를 받아올 수 있다.', () => {
+        expect(app.getBonusNumbers([1, 2, 3, 4, 5, 6], '7')).resolves.toEqual(
+            7
+        );
+    });
+
     test('로또의 등수를 반환한다.', () => {
         expect(
             app.getLottoRank([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], 7)
