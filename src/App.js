@@ -1,6 +1,8 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
 import {
   LOTTO_PRICE,
+  LOTTO_NUMBER_RANGE,
+  LOTTO_NUMBER_COUNT,
   REQUEST_MESSAGE,
   VALIDATION_ERRORS_MESSAGE,
   regexNumber,
@@ -9,6 +11,8 @@ import {
 class App {
   async play() {
     const money = await this.getMoney();
+    const lottoCount = money / LOTTO_PRICE;
+    const lottos = this.buyLotto(lottoCount);
   }
 
   // 1. 로또 구입금액 입력받기
@@ -35,6 +39,22 @@ class App {
     }
 
     return true;
+  }
+
+  // 2. 구입금액에 해당하는 만큼 로또를 발행
+  buyLotto(lottoCount) {
+    const lottos = [];
+
+    for (let i = 0; i < lottoCount; i++) {
+      const lotto = Random.pickUniqueNumbersInRange(
+        LOTTO_NUMBER_RANGE.MIN,
+        LOTTO_NUMBER_RANGE.MAX,
+        LOTTO_NUMBER_COUNT.LOTTO,
+      );
+      lottos.push(lotto.sort((a, b) => a - b));
+    }
+
+    return lottos;
   }
 }
 
