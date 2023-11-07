@@ -34,5 +34,10 @@ class ExceptionList {
       throw new Error('[ERROR] 중복된 숫자가 입력되었습니다');
     }
   }
+  sameBonusError =(win,bonus)=>{
+    if(win.includes(bonus)){
+      throw new Error('[ERROR] 당첨번호와 동일한 숫자가 입력되었습니다');
+    }
+  }
 }
 export default ExceptionList;
