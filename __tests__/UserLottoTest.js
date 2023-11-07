@@ -3,7 +3,6 @@ import UserLotto from '../src/model/UserLotto.js';
 import { ERRORMESSAGE } from '../src/constants/constants.js';
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce((acc, number) => {

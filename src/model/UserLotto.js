@@ -13,7 +13,7 @@ class UserLotto {
 
   #setPurchaseVariable(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
-    this.#numberOfPurchase = purchaseAmount / NUMBER.lottoprice;
+    this.#numberOfPurchase = purchaseAmount / NUMBER.lottoPrice;
     this.#userLottoNumbers = Array.from(
       { length: this.#numberOfPurchase },
       () => new UserLottoNumber()
@@ -63,8 +63,7 @@ class UserLotto {
       throw new Error(ERRORMESSAGE.purchaseToSmall);
 
     // eslint-disable-next-line prettier/prettier
-    if (purchaseAmount < 0) 
-      throw new Error(ERRORMESSAGE.purchaseRange1);
+    if (purchaseAmount < 0) throw new Error(ERRORMESSAGE.purchaseRange1);
 
     if (purchaseAmount > 4000000000)
       throw new Error(ERRORMESSAGE.purchaseRange2);
