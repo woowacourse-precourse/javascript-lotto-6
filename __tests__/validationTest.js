@@ -51,3 +51,33 @@ describe("당첨 번호 입력 유효성 검사 테스트", () => {
     expect(() => Validation.winningNumber(input)).toThrow("[ERROR]");
   });
 });
+
+describe("보너스 번호 유효성 검사 테스트", () => {
+    test("보너스 번호가 당첨번호가 똑같은 경우 에러를 발생시키는 테스트", () =>{
+        const winningNumber = [1,2,3,4,5,6];
+        const bonusNumber = 6;
+
+        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
+    });
+
+    test("보너스 번호가 문자열일 경우 에러를 발생시키는 테스트", () => {
+        const winningNumber = [1,2,3,4,5,6];
+        const bonusNumber = "j";
+        
+        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
+    });
+
+    test("보너스 번호가 공백일 경우 에러를 발생시키는 테스트", () => {
+        const winningNumber = [1,2,3,4,5,6];
+        const bonusNumber = "";
+        
+        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
+    });
+
+    test("보너스 번호가  1~45 내의 숫자가 아닐 경우 에러를 발생시키는 테스트", () => {
+        const winningNumber = [1,2,3,4,5,6];
+        const bonusNumber = 50;
+        
+        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
+    });
+});
