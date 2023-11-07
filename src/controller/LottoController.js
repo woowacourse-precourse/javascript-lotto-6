@@ -17,31 +17,41 @@ export default class LottoController {
 
   async run() {
     const { lottoTickets, lottoPrice } = await this.#createLottoArrays();
-    const { winningNumberArray, bonusNumber } =
-      await this.#createWinningNumberArrays();
-    this.#lotto = new Lotto(winningNumberArray, bonusNumber);
-    const { result, calculateProfitRate } = this.#lotto.checkLotto(
-      lottoTickets,
-      bonusNumber,
-      lottoPrice
-    );
+    const { result, calculateProfitRate } = await this.#makeLotto(lottoTickets,lottoPrice);
     this.#outputView.printResult(result, calculateProfitRate);
   }
+
+  async #makeLotto(lottoTickets, lottoPrice) {
+    try {
+      const { winningNumberArray, bonusNumber } =
+        await this.#createWinningNumberArrays();
+      this.#lotto = new Lotto(winningNumberArray, bonusNumber);
+      const { result, calculateProfitRate } = this.#lotto.checkLotto(
+        lottoTickets,
+        bonusNumber,
+        lottoPrice
+      );
+      return { result, calculateProfitRate };
+    } catch (e) {
+      Console.print(e.message);
+      return this.#makeLotto(lottoTickets, lottoPrice);
+    }
+  }
+
   async #getPrice() {
-    try{
+    try {
       const lottoPrice = await this.#inputView.readLottoPrice();
       await this.#inputValidation.isPrice(lottoPrice);
-      return lottoPrice
-    }
-    catch(e) {
-      Console.print("[ERROR]"+e.message)
-      return this.#getPrice()
+      return lottoPrice;
+    } catch (e) {
+      Console.print("[ERROR]" + e.message);
+      return this.#getPrice();
     }
   }
 
   async #createLottoArrays() {
     const lottoPrice = await this.#getPrice();
-    const lottoTickets = Purchase.makeTicket(lottoPrice);
+    const lottoTickets = Purchase.makeLottoArray(lottoPrice);
     this.#outputView.printLottoTickets(lottoTickets);
     return { lottoTickets, lottoPrice };
   }

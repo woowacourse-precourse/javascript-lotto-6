@@ -1,8 +1,9 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 function Purchase() {}
-Purchase.makeLottoArray = function (lottoCount) {
+Purchase.makeLottoArray = function (lottoPrice) {
   const lottoNumberArray = [];
+  let lottoCount = lottoPrice / 1000;
   while (lottoCount > 0) {
     const randomArray = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a,b)=>a-b);
     lottoNumberArray.push(randomArray);
@@ -10,10 +11,6 @@ Purchase.makeLottoArray = function (lottoCount) {
   }
   return lottoNumberArray;
 };
-Purchase.makeTicket = function (lottoPrice) {
-  const lottoCount = lottoPrice / 1000;
-  const lottoTickets = this.makeLottoArray(lottoCount);
-  return lottoTickets;
-};
+
 
 export default Purchase;
