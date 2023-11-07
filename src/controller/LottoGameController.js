@@ -35,10 +35,10 @@ class LottoGameController {
     await this.setBonusNumber();
   }
 
-  async setWinningNumbers() {
+  async getUserInputAndSet(setterFn, getterCallback) {
     while (true) {
       try {
-        this.lottoResult.setWinningNumbers(await this.getWinningNumbers());
+        setterFn(await getterCallback());
         break;
       } catch (error) {
         this.outputView.print(error);
@@ -46,15 +46,18 @@ class LottoGameController {
     }
   }
 
+  async setWinningNumbers() {
+    await this.getUserInputAndSet(
+      this.lottoResult.setWinningNumbers.bind(this.lottoResult),
+      this.getWinningNumbers.bind(this),
+    );
+  }
+
   async setBonusNumber() {
-    while (true) {
-      try {
-        this.lottoResult.setBonusNumber(await this.getBonusNumber());
-        break;
-      } catch (error) {
-        this.outputView.print(error);
-      }
-    }
+    await this.getUserInputAndSet(
+      this.lottoResult.setBonusNumber.bind(this.lottoResult),
+      this.getBonusNumber.bind(this),
+    );
   }
 
   printMyLottos() {
