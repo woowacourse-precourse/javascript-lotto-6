@@ -1,16 +1,18 @@
-import { ERROR } from "../const/Messages.js";
-import { Console } from "@woowacourse/mission-utils";
+import { ERROR, PRINT } from "../const/Messages.js";
 
 class UserPayment {
   constructor() {
     this.payment = null;
   }
 
-  async userPayment() {
-    const input = await Console.readLineAsync();
-    this.payment = parseInt(input.trim(), 10);
-    this.#validate(this.payment);
+  getUserPayment() {
     return this.payment;
+  }
+
+  setUserPayment(input) {
+    const pay = parseInt(input.trim(), 10);
+    this.#validate(pay);
+    this.payment = pay;
   }
 
   #validate(pay) {
@@ -20,8 +22,12 @@ class UserPayment {
   }
 
   numberOfTickets() {
+    if (this.payment === null) {
+      return 0;
+    }
     const ticketCounts = this.payment / 1000;
-    return ticketCounts;
+    const printTicketCounts = `${ticketCounts}${PRINT.HOW_MANY_BUY}`;
+    return printTicketCounts;
   }
 }
 
