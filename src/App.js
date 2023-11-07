@@ -17,6 +17,12 @@ class App {
     return lottoClasses;
   }
 
+  async WinningLotto() {
+    const winningNumbers = await WinningLotto.getWinningNumbers();
+    const bonusNumber = await WinningLotto.getBonusNumber(winningNumbers);
+    return new WinningLotto(winningNumbers, bonusNumber);
+  }
+
   async play() {
   }
 }
