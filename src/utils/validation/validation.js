@@ -23,3 +23,10 @@ const isValidatedPrice = inputPrice => {
     throw new Error(ERROR.notThousandWon);
   }
 };
+
+const validatedPrice = inputPrice => {
+  validateNumber(inputPrice);
+  isValidatedPrice(inputPrice);
+};
+
+export { validateNumber, validatedPrice, parsedNumber };
