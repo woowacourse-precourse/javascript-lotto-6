@@ -1,7 +1,7 @@
 import { LOTTO_ERROR } from '../constants/message/error.js';
 import { LOTTO } from '../constants/setting.js';
 import InputError from '../error/InputError.js';
-import CommonValidator from './Common.js';
+import CommonValidator from './CommonValidator.js';
 
 class LottoValidator {
   static validate(numbers) {

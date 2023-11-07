@@ -3,9 +3,9 @@ import { Console } from '@woowacourse/mission-utils';
 import { INPUT } from '../constants/message/io.js';
 import { DELIMITER } from '../constants/setting.js';
 import { stringToNumber, stringToNumberArray } from '../utils/converter.js';
-import MoneyValidator from '../validator/Money.js';
-import LottoValidator from '../validator/Lotto.js';
-import CommonValidator from '../validator/Common.js';
+import MoneyValidator from '../validator/MoneyValidator.js';
+import LottoValidator from '../validator/LottoValidator.js';
+import CommonValidator from '../validator/CommonValidator.js';
 
 class InputView {
   static async readMoney() {
