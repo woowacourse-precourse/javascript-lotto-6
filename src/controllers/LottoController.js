@@ -15,6 +15,7 @@ class LottoController {
     this.buyLottos();
     await this.inputWinningNumber();
     await this.inputBonusNumber();
+    this.compareLottos();
   }
 
   async inputPurchaseAmount() {
@@ -29,14 +30,14 @@ class LottoController {
   }
 
   buyLottos() {
-    const { count, lottos } = this.lottoData.getLottos();
+    const { count, lottos } = this.lottoData.lottoIssuance();
     this.outputView.printLottos(count, lottos);
   }
 
   async inputWinningNumber() {
     const winning = await this.inputView.winningNumber();
     try {
-      this.lotto = new Lotto(winning.split(','));
+      this.lotto = new Lotto(winning.split(',').map(Number));
       return this.lotto;
     } catch (error) {
       this.outputView.printError(error.message);
@@ -47,12 +48,35 @@ class LottoController {
   async inputBonusNumber() {
     const bonus = await this.inputView.bonusNumber();
     try {
-      this.lotto.setBonusNumber(bonus);
+      this.lotto.setBonusNumber(Number(bonus));
       return this.lotto;
     } catch (error) {
       this.outputView.printError(error.message);
       return this.inputBonusNumber();
     }
+  }
+
+  compareLottos() {
+    const lottos = this.lottoData.getLottos();
+    const winningNumber = this.lotto.getWinningNumber();
+    const bonusNumber = this.lotto.getBonusNumber();
+    const lottoStats = this.calculateStats(lottos, winningNumber, bonusNumber);
+  }
+
+  calculateStats(lottos, winningNumber, bonusNumber) {
+    const lottoStats = { 3: 0, 4: 0, 5: 0, 6: 0, bonus: 0 };
+
+    lottos.forEach((lotto) => {
+      const winningCount = lotto.filter((number) => winningNumber.includes(number)).length;
+      const bonusCount = lotto.includes(bonusNumber);
+
+      if (winningCount === 5 && bonusCount) {
+        lottoStats.bonus += 1;
+      } else if (winningCount in lottoStats) {
+        lottoStats[winningCount] += 1;
+      }
+    });
+    return lottoStats;
   }
 }
 

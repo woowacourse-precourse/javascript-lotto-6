@@ -31,6 +31,14 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.range);
     }
   }
+
+  getWinningNumber() {
+    return this.#numbers;
+  }
+
+  getBonusNumber() {
+    return this.bonusNumber;
+  }
 }
 
 export default Lotto;

@@ -20,7 +20,7 @@ class LottoData {
     }
   }
 
-  getLottos() {
+  lottoIssuance() {
     for (let i = 0; i < this.count; i++) {
       const numbers = this.generateLotto();
       this.lottos.push(numbers);
@@ -31,6 +31,10 @@ class LottoData {
   generateLotto() {
     const numbers = Random.pickUniqueNumbersInRange(SETTING.start, SETTING.end, SETTING.pick);
     return numbers.sort((a, b) => a - b);
+  }
+
+  getLottos() {
+    return this.lottos;
   }
 }
 
