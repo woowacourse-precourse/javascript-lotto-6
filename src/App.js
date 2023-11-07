@@ -1,11 +1,20 @@
 import { Console } from "@woowacourse/mission-utils";
 import { validatePayment } from "./ValidateInput.js";
-import { paymentToLottoCount } from "./utils/lotto.js";
+import { generateLottos, paymentToLottoCount } from "./utils/lotto.js";
 import Input from "./Input.js";
+import Output from "./Output.js";
 
 class App {
+  #payment;
+  #lottoCount;
+
+  constructor() {
+    this.lottos = [];
+  }
+
   async play() {
-    const payment = await this.readPayment();
+    await this.readPayment();
+    this.lottoIssuance();
   }
 
   async readPayment() {
@@ -13,11 +22,21 @@ class App {
       try {
         const payment = await Input.readPayment();
         validatePayment(payment);
-        return Number(payment);
+        this.#payment = Number(payment);
+        break;
       } catch (error) {
         Console.print(error.message);
       }
     }
+  }
+
+  lottoIssuance() {
+    this.#lottoCount = paymentToLottoCount(this.#payment);
+    Output.writeLottoCount(this.#lottoCount);
+    this.lottos = generateLottos(this.#lottoCount);
+    this.lottos.forEach((lotto) => {
+      lotto.print();
+    });
   }
 }
 
