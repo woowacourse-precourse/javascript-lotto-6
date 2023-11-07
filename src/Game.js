@@ -33,7 +33,7 @@ class Game {
   async getMoney() {
     const input = await Console.readLineAsync("구입 금액을 입력해주세요.\n");
     this.#validateMoney(input);
-    this.money = input;
+    this.money = Number.parseInt(input);
     this.#getLottos(input / 1_000);
   }
 
@@ -62,14 +62,17 @@ class Game {
   }
 
   async getBonusNumber() {
-    const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    const input = Number.parseInt(await Console.readLineAsync("보너스 번호를 입력해 주세요.\n"));
     this.#validateNumber(input);
     this.bonus = input;
   }
 
   #validateNumber(number) {
     if (isNaN(number) || number < 1 || number > 45) {
-      throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.")
+      throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+    if(this.choice && this.choice.numbers.includes(number)) {
+      throw new Error("[ERROR] 보너스 번호는 당첨 번호 이외의 번호여야 합니다.");
     }
   }
 
@@ -91,7 +94,7 @@ class Game {
   #getEarningsRate(counts) {
     const totalPrice = counts.reduce((acc, curr, idx) => acc +this.#PRICE_TABLE[idx].price * curr, 0);
     const rates = totalPrice / this.money;
-    Console.print(`총 수익률은 ${Math.round(rates*1000)/10}%입니다.`);
+    Console.print(`총 수익률은 ${((rates*1000)/10).toFixed(1)}%입니다.`);
   }
 
 };
