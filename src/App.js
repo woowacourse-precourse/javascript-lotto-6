@@ -1,8 +1,8 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./const/message";
 import { ERROR } from "./const/error";
-import Lotto from "./Lotto";
-import checkBonus from "./Bonus";
+import Lotto from "../domain/Lotto";
+import checkBonus from "../domain/Bonus";
 
 
 class App {
@@ -20,6 +20,7 @@ class App {
     this.bonus = 0;
     this.count = 0;
     this.arrayNumbers = [];
+    this.lottos = 0;
   }
 
   async play() {
@@ -31,74 +32,68 @@ class App {
     this.printWinningStatics();
   }
 
+  // static async getLottoPrice() {
+
+  //   this.price = await getInputs.boughtPrice();
+  //   this.count = parseInt(this.price/1000);
+  // }
+
+
   async getLottoPrice() {
-    const priceInput = await MissionUtils.Console.readLineAsync(MESSAGE.BUY);
-    this.count = this.checkPrice(priceInput);
-  }
+    while (true) {
+      const priceInput = await Console.readLineAsync(MESSAGE.BUY);
 
-  async checkPrice(priceInput) {
-    const checkPrice = Number(priceInput);
-    const remainder = checkPrice % 1000;
-    const share = parseInt(checkPrice/1000)
+      try {
+        if (isNaN(Number(priceInput))) {
+          throw new Error(ERROR.NAN);
+        }
 
-    await this.checkNaN(checkPrice);
-    await this.checkThousand(remainder);
+        if (priceInput % 1000 !== 0) {
+          throw new Error(ERROR.THOUSAND);
+        }
 
-    this.price = checkPrice;
-    return share;
-  }
-
-  async checkNaN(checkPrice){
-    try {
-      if(isNaN(checkPrice)) {
-         throw new Error;
+        this.price = priceInput;
+        this.count = parseInt(priceInput / 1000);
+        return; // 올바른 값이 입력되면 함수를 종료합니다.
+      } catch (error) {
+        Console.print(error.message);
       }
-    } catch (err){
-      MissionUtils.Console.print(ERROR.NAN);
-      await this.getLottoPrice();
-    };
-  }
-
-  async checkThousand(remainder){
-    try {
-      if(remainder !== 0 ) {
-        throw new Error;
-      }
-    } catch (err){
-      MissionUtils.Console.print(ERROR.THOUSAND);
-      await this.getLottoPrice();
     }
   }
 
+
   async getMyLottos() {
     for(let i = 0; i < this.count; i++){
-      const takeNumber = await MissionUtils.Random.pickUniqueNumbersInRange(1,45,6);
+      const takeNumber = await Random.pickUniqueNumbersInRange(1,45,6);
       const lottoNumber = takeNumber.sort((b,a)=>{return b-a});
       this.arrayNumbers.push(lottoNumber);
     }
   }
 
   printHowMany() {
-    MissionUtils.Console.print(`${this.count}개를 구매했습니다.`);
+    Console.print(`${this.count}개를 구매했습니다.`);
     for(let i = 0; i < this.count; i++){
-      MissionUtils.Console.print(`[${this.arrayNumbers[i].join(', ')}]`);
+      Console.print(`[${this.arrayNumbers[i].join(', ')}]`);
     }
   }
   
-  async getNumbers(){
-    const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.WINNING_NUMBER);
-    const bonusNumbers = await MissionUtils.Console.readLineAsync(MESSAGE.BONUS_NUMBER);
-    
-    this.bonus = Number(bonusNumbers);
-    this.winning = winningNumbers.split(",").map(Number);
-    const numbers = [...this.winning,this.bonus]
-    try {
-      const checkNumbers = new Lotto(this.winning);    
-      const checkbonus = new checkBonus(numbers);
-    } catch {
-      await this.getNumbers();
+  async getNumbers() {
+    let validInput = false;
+    while (!validInput) {
+      const winningNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBER);
+      const bonusNumbers = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
+
+      try {
+        this.winning = new Lotto(winningNumbers.split(',')); // 쉼표로 구분된 값을 배열로 변환합니다.
+        const checkbonus = new checkBonus([...this.winning, bonusNumbers]);
+        this.bonus = Number(bonusNumbers);
+        validInput = true;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
-  } 
+  }
+
 
   getWinningLottos() {
     for(let i = 0; i < this.count; i++){
@@ -138,7 +133,7 @@ class App {
     const rate = winningPrice/this.price *100;
     const percent = rate.toFixed(1);
     
-    MissionUtils.Console.print(
+    Console.print(
     `당첨 통계
     ---
     3개 일치 (5,000원) - ${this.sameNumbersObject['three']}개
@@ -152,3 +147,5 @@ class App {
 }
 
 export default App;
+
+

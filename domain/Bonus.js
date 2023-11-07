@@ -1,5 +1,5 @@
-import { ERROR } from "./const/error";
-import { NUMBERS } from "./const/numbers";
+import { ERROR } from "../src/const/error";
+import { NUMBERS } from "../src/const/numbers";
 
 class checkBonus {
   #numbers
