@@ -12,7 +12,7 @@ const checkList = [
   },
   {
     check: (array) => {
-      array.every((elem) => {
+      return array.every((elem) => {
         const isNumber = /^[0-9]+$/.test(elem);
         const isInRange = Number(elem) >= 1 && Number(elem) <= 45;
         const isValid = isNumber && isInRange;
