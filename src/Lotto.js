@@ -5,7 +5,7 @@ import {
   NotNumberError,
   InvalidNumberRangeError,
   NotIntegerError,
-  InvalidBonousNumberCountError,
+  InvalidBonusNumberCountError,
 } from "./utils/Error.js";
 
 class Lotto {
@@ -22,11 +22,11 @@ class Lotto {
     this.#validateCommon(numbers);
   }
   // TODO: 추가 기능 구현
-  #validateBonousNumber(bonousNumber, lottoWinningNumbers) {
-    if (bonousNumber.length !== 1) throw new InvalidBonousNumberCountError(ERROR_MESSAGE.invalidBonousNumberCount);
-    if (new Set(bonousNumber.concat(lottoWinningNumbers)).size === lottoWinningNumbers.length)
+  #validateBonusNumber(bonusNumber, lottoWinningNumbers) {
+    if (bonusNumber.length !== 1) throw new InvalidBonusNumberCountError(ERROR_MESSAGE.invalidBonusNumberCount);
+    if (new Set(bonusNumber.concat(lottoWinningNumbers)).size === lottoWinningNumbers.length)
       throw new DuplicatedNumberError(ERROR_MESSAGE.duplicatedNumber);
-    this.#validateCommon(bonousNumber);
+    this.#validateCommon(bonusNumber);
   }
 
   #validateCommon(numbers) {
@@ -40,12 +40,12 @@ class Lotto {
     return this.#numbers;
   }
 
-  matchNumbers({ lottoWinningNumbers, bonousNumber }) {
+  matchNumbers({ lottoWinningNumbers, bonusNumber }) {
     this.#validateLottoNumbers(lottoWinningNumbers);
-    this.#validateBonousNumber(bonousNumber, lottoWinningNumbers);
+    this.#validateBonusNumber(bonusNumber, lottoWinningNumbers);
     const lottoWinningNumbersMatchCount = this.#calculateMatchCount(lottoWinningNumbers);
-    const bonousNumberMatchCount = this.#calculateMatchCount(bonousNumber);
-    return { lottoWinningNumbersMatchCount, bonousNumberMatchCount };
+    const bonusNumberMatchCount = this.#calculateMatchCount(bonusNumber);
+    return { lottoWinningNumbersMatchCount, bonusNumberMatchCount };
   }
 
   #calculateMatchCount(numbers) {

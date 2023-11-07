@@ -19,7 +19,7 @@ export class InvalidLottoNumberCountError extends CustomError {}
 
 export class DuplicatedNumberError extends CustomError {}
 
-export class InvalidBonousNumberCountError extends CustomError {}
+export class InvalidBonusNumberCountError extends CustomError {}
 
 export class InvalidNumberRangeError extends CustomError {}
 

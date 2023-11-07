@@ -95,29 +95,29 @@ describe("InputView 객체 테스트", () => {
     });
   });
 
-  describe("readBonousNumber 메서드 테스트", () => {
-    test("readBonousNumber 메서드가 존재해야 한다.", () => {
-      expect(typeof inputView.readBonousNumber).toBe("function");
+  describe("readBonusNumber 메서드 테스트", () => {
+    test("readBonusNumber 메서드가 존재해야 한다.", () => {
+      expect(typeof inputView.readBonusNumber).toBe("function");
     });
 
-    test("readBonousNumber메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
-      const bonousNumberInput = "7";
-      const resolvedPromise = Promise.resolve(bonousNumberInput);
+    test("readBonusNumber메서드가 호출되면 Console.readLineAsync가 호출되어야 한다.", () => {
+      const bonusNumberInput = "7";
+      const resolvedPromise = Promise.resolve(bonusNumberInput);
       Console.readLineAsync.mockReturnValue(resolvedPromise);
       const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
-      inputView.readBonousNumber(lottoWinningNumbers);
-      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.lottoBonousNumber);
+      inputView.readBonusNumber(lottoWinningNumbers);
+      expect(Console.readLineAsync).toBeCalledWith(INPUT_MESSAGE.lottoBonusNumber);
     });
 
-    test("readBonousNumber메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
-      const bonousNumberInput = "7";
-      const NumberedBonousNumber = [7];
-      const resolvedPromise = Promise.resolve(bonousNumberInput);
+    test("readBonusNumber메서드가 promise를 반환하고 그 resolve 값이 입력값이어야 한다.", async () => {
+      const bonusNumberInput = "7";
+      const NumberedBonusNumber = [7];
+      const resolvedPromise = Promise.resolve(bonusNumberInput);
       Console.readLineAsync.mockReturnValue(resolvedPromise);
       const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
 
-      const bonousNumber = await inputView.readBonousNumber(lottoWinningNumbers);
-      expect(bonousNumber).toEqual(NumberedBonousNumber);
+      const bonusNumber = await inputView.readBonusNumber(lottoWinningNumbers);
+      expect(bonusNumber).toEqual(NumberedBonusNumber);
     });
   });
 });

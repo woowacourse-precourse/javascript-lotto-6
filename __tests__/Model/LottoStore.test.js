@@ -15,19 +15,19 @@ let matchResultIndex = 0;
 const mockMatchResult = [
   {
     lottoWinningNumbersMatchCount: 6,
-    bonousNumberMatchCount: 0,
+    bonusNumberMatchCount: 0,
   },
   {
     lottoWinningNumbersMatchCount: 5,
-    bonousNumberMatchCount: 1,
+    bonusNumberMatchCount: 1,
   },
   {
     lottoWinningNumbersMatchCount: 2,
-    bonousNumberMatchCount: 1,
+    bonusNumberMatchCount: 1,
   },
   {
     lottoWinningNumbersMatchCount: 4,
-    bonousNumberMatchCount: 1,
+    bonusNumberMatchCount: 1,
   },
 ];
 
@@ -69,7 +69,7 @@ describe("LottoStore 클래스 테스트", () => {
 
   test("getLottoMatchResult 메서드를 호출하면 당첨 번호와 비교해여 생성된 matchResult를 반환해야 한다.", () => {
     const lottoWinningNumbers = [1, 2, 3, 4, 5, 6];
-    const bonousNumber = [7];
+    const bonusNumber = [7];
     const expectedMatchResult = {
       fifthPlace: 0,
       fourthPlace: 1,
@@ -78,7 +78,7 @@ describe("LottoStore 클래스 테스트", () => {
       firstPlace: 1,
       returnRate: 50751250,
     };
-    const matchResult = lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
+    const matchResult = lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonusNumber });
     expect(matchResult).toEqual(expectedMatchResult);
   });
 });

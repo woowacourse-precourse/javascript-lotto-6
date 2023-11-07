@@ -52,8 +52,8 @@ class App {
 
   async #getLottoMatchResult() {
     const lottoWinningNumbers = await this.#getLottoWinningNumbers();
-    const bonousNumber = await this.#getBonousNumber(lottoWinningNumbers);
-    const lottoMatchResult = this.#lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonousNumber });
+    const bonusNumber = await this.#getBonusNumber(lottoWinningNumbers);
+    const lottoMatchResult = this.#lottoStore.getLottoMatchResult({ lottoWinningNumbers, bonusNumber });
     this.#outputView.printMatchResult(lottoMatchResult);
   }
 
@@ -63,17 +63,17 @@ class App {
       return lottoWinningNumbers;
     } catch (error) {
       this.#outputView.printError(error.message);
-      return await this.#getLottoMatchResult();
+      return await this.#getLottoWinningNumbers();
     }
   }
 
-  async #getBonousNumber(lottoWinningNumbers) {
+  async #getBonusNumber(lottoWinningNumbers) {
     try {
-      const bonousNumber = await this.#inputView.readBonousNumber(lottoWinningNumbers);
-      return bonousNumber;
+      const bonusNumber = await this.#inputView.readBonusNumber(lottoWinningNumbers);
+      return bonusNumber;
     } catch (error) {
       this.#outputView.printError(error.message);
-      return await this.#getBonousNumber(lottoWinningNumbers);
+      return await this.#getBonusNumber(lottoWinningNumbers);
     }
   }
 }

@@ -7,7 +7,7 @@ import {
   InvalidAmountUnitError,
   InvalidLottoNumberCountError,
   DuplicatedNumberError,
-  InvalidBonousNumberCountError,
+  InvalidBonusNumberCountError,
   InvalidNumberRangeError,
   NotIntegerError,
 } from "../utils/Error.js";
@@ -30,11 +30,11 @@ class InputView {
     return validatedLottoNumbers;
   }
 
-  async readBonousNumber(lottoWinningNumbers) {
-    const bonousNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonousNumber);
-    const validatedBonousNumber = Array.from(bonousNumber, Number);
-    this.#validateBonousNumber(validatedBonousNumber, lottoWinningNumbers);
-    return validatedBonousNumber;
+  async readBonusNumber(lottoWinningNumbers) {
+    const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.lottoBonusNumber);
+    const validatedBonusNumber = Array.from(bonusNumber, Number);
+    this.#validateBonusNumber(validatedBonusNumber, lottoWinningNumbers);
+    return validatedBonusNumber;
   }
 
   #validatePurchaseAmount(purchaseAmount) {
@@ -50,11 +50,11 @@ class InputView {
     this.#validateCommon(numbers);
   }
 
-  #validateBonousNumber(bonousNumber, lottoWinningNumbers) {
-    if (bonousNumber.length !== 1) throw new InvalidBonousNumberCountError(ERROR_MESSAGE.invalidBonousNumberCount);
-    if (new Set(bonousNumber.concat(lottoWinningNumbers)).size === lottoWinningNumbers.length)
+  #validateBonusNumber(bonusNumber, lottoWinningNumbers) {
+    if (bonusNumber.length !== 1) throw new InvalidBonusNumberCountError(ERROR_MESSAGE.invalidBonusNumberCount);
+    if (new Set(bonusNumber.concat(lottoWinningNumbers)).size === lottoWinningNumbers.length)
       throw new DuplicatedNumberError(ERROR_MESSAGE.duplicatedNumber);
-    this.#validateCommon(bonousNumber);
+    this.#validateCommon(bonusNumber);
   }
 
   #validateCommon(numbers) {
