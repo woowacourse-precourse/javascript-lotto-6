@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoPurchase from '../src/LottoPurchase.js';
+import LottoInput from '../src/View/LottoInput';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -34,7 +34,7 @@ describe('LottoPurchase.getLottoPurchase 테스트', () => {
     mockQuestions(['3000']);
 
     // when
-    const amount = await LottoPurchase.getLottoAmount();
+    const amount = await LottoInput.getLottoAmount();
 
     // then
     expect(amount).toBe(3000);
@@ -48,25 +48,25 @@ describe('LottoPurchase.validateAmount', () => {
 
   test('금액이 숫자가 아닌 경우에는 에러를 발생시켜야 한다.', () => {
     expect(() => {
-      LottoPurchase.validateAmount(NaN);
+      LottoInput.validateAmount(NaN);
     }).toThrow('[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.');
   });
 
   test('금액이 1000원 미만인 경우에는 에러를 발생시켜야 한다.', () => {
     expect(() => {
-      LottoPurchase.validateAmount(500);
+      LottoInput.validateAmount(500);
     }).toThrow('[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.');
   });
 
   test('금액이 1000원 단위가 아닌 경우에는 에러를 발생시켜야 한다.', () => {
     expect(() => {
-      LottoPurchase.validateAmount(2500);
+      LottoInput.validateAmount(2500);
     }).toThrow('[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.');
   });
 
   test('올바른 금액이 입력된 경우에는 에러를 발생시키지 않는다.', () => {
     expect(() => {
-      LottoPurchase.validateAmount(3000);
+      LottoInput.validateAmount(3000);
     }).not.toThrow();
   });
 });

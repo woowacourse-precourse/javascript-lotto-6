@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
+import Lotto from '../Lotto';
 
 class LottoTicket {
   static generateLottotickets(purchaseAmount) {
