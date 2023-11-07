@@ -4,6 +4,8 @@ import { ERROR } from './Message.js';
 class WinningLotto {
   #START = 1;
   #END = 45;
+  #FIVE = 5;
+  #FIVE_BONUS_NUMBER = 51;
 
   #numbers;
   #bonusNumber;
@@ -15,7 +17,15 @@ class WinningLotto {
   }
 
   countMatchingNumbersWith(numbers) {
-    return numbers.countMatchingNumbersWith(this.#numbers);
+    const count = numbers.countMatchingNumbersWith(this.#numbers);
+    if (count === this.#FIVE && this.#includesBonusNumber(numbers)) {
+      return this.#FIVE_BONUS_NUMBER;
+    }
+    return count;
+  }
+
+  #includesBonusNumber(numbers) {
+    return numbers.includes(this.#bonusNumber);
   }
 
   #validate(bonusNumber) {

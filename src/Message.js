@@ -23,8 +23,8 @@ Object.freeze(TEMPLATE);
 
 const RANKING_BY = {
   6: 1,
-  5: 2,
-  51: 3,
+  51: 2,
+  5: 3,
   4: 4,
   3: 5,
 };
