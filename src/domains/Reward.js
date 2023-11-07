@@ -13,14 +13,16 @@ class Reward {
   static BONUS_MATCH_COUNT = 5;
 
   static PRIZE_MONEY = {
-    3: 5000,
-    4: 50000,
-    5: 1500000,
-    6: 2000000000,
-    '5+1': 30000000,
+    3: 5_000,
+    4: 50_000,
+    5: 1_500_000,
+    '5+1': 30_000_000,
+    6: 2_000_000_000,
   };
 
   static ORDER_KEYS = ['3', '4', '5', '5+1', '6'];
+
+  static INITIAL_STATISTICS = { 3: 0, 4: 0, 5: 0, '5+1': 0, 6: 0 };
 
   /**
    * @type { [number, number, number, number, number, number] }
@@ -170,26 +172,15 @@ class Reward {
    */
 
   calculateReward(lottos) {
-    const statistics = this.initializeStatistics();
-
     const { totalPrize, statistics: updatedStatistics } = this.calculateTotalPrizeAndStatistics(
       lottos,
-      statistics,
+      Reward.INITIAL_STATISTICS,
     );
 
     const totalSpent = lottos.length * 1000;
     const rateOfReturn = ((totalPrize / totalSpent) * 100).toFixed(1);
 
     return this.formatOutput(updatedStatistics, rateOfReturn);
-  }
-
-  /**
-   * 초기 통계 객체
-   * @returns { object }
-   */
-
-  initializeStatistics() {
-    return { 3: 0, 4: 0, 5: 0, 6: 0, '5+1': 0 };
   }
 
   /**

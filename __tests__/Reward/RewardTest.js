@@ -41,7 +41,7 @@ describe('Reward 클래스 테스트', () => {
   });
 
   test('calculateTotalPrizeAndStatistics는 모든 로또에 대한 총 상금과 통계를 계산해야 한다', () => {
-    const initialStatistics = reward.initializeStatistics();
+    const initialStatistics = Reward.INITIAL_STATISTICS;
 
     const lottos = [
       { getNumbers: jest.fn().mockReturnValue([1, 2, 3, 10, 20, 30]) },

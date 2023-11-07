@@ -205,4 +205,4 @@ JavaScript에서는 클래스 말고도 객체를 만드는 방법은 여러 가
 
 # - 클래스 다이어그램
 
-![3주차](https://github.com/brgndyy/javascript-lotto-6/assets/109535991/687837ac-b2f7-42d5-99c1-1df005b3ef7b)
+![3주차](https://github.com/brgndyy/javascript-lotto-6/assets/109535991/051d4623-fef0-4bd2-bdc7-eecc23ce98cb)
