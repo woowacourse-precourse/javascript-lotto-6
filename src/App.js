@@ -5,6 +5,8 @@ import purchaseAmountSave from "./utils/purchaseAmountSave.js";
 import purchaseAmountSentence from "./utils/purchaseAmountSentence.js";
 import winningNumbers from "./utils/winningNumbers.js";
 import winningNumbersSentence from "./utils/winningNumbersSentence.js";
+import bonusNumberSentence from "./utils/bonusNumberSentence.js";
+import bonusNumber from "./utils/bonusNumber.js";
 
 class App {
   async play() {
@@ -13,7 +15,9 @@ class App {
     await lottoAmountSentence(PURCHASE_AMOUNT);
     await purchaseLottosNumber(PURCHASE_AMOUNT);
     winningNumbersSentence();
-    await winningNumbers();
+    const WINNING_NUMBERS = await winningNumbers();
+    bonusNumberSentence();
+    const BONUSNUMBER = await bonusNumber();
   }
 }
 
