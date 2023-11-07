@@ -1,4 +1,4 @@
-import RateOfReturn from '../src/RateOfReturn';
+import getRateOfReturn from '../src/utils/getRateOfReturn';
 
 describe('로또 수익율 계산 테스트', () => {
   test.each([
@@ -27,10 +27,7 @@ describe('로또 수익율 계산 테스트', () => {
   ])(
     '구입한 로또 갯수와 당첨내역을 전달하면 수익율을 계산합니다.',
     ({ purchaseAmount, matchingTable, expected }) => {
-      const rateOfReturn = new RateOfReturn();
-      expect(rateOfReturn.getRateOfReturn(matchingTable, purchaseAmount)).toBe(
-        expected,
-      );
+      expect(getRateOfReturn(matchingTable, purchaseAmount)).toBe(expected);
     },
   );
 });
