@@ -29,11 +29,3 @@ export const SCOREBOARD = {
   MATCH_5_BONUS: "5개 일치, 보너스 볼 일치 (30,000,000원)",
   MATCH_6: "6개 일치 (2,000,000,000원)",
 };
-
-export const LOTTO_RESULT_KEY = {
-  3: "MATCH_3",
-  4: "MATCH_4",
-  5: "MATCH_5",
-  6: "MATCH_6",
-  "5+bonus": "MATCH_5_BONUS",
-};
