@@ -22,4 +22,39 @@ describe('로또 클래스 테스트', () => {
       }
     });
   });
+  describe('로또 추첨 결과 테스트', () => {
+    const mockLottoResult = {
+      first: 0,
+      second: 0,
+      third: 0,
+      forth: 0,
+      fifth: 0,
+    };
+
+    const mockBonusNumber = 8;
+
+    test('각 등수별 당첨 테스트', () => {
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+      const lottoTickets = [
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 8],
+        [1, 2, 3, 4, 5, 11],
+        [1, 2, 3, 4, 10, 11],
+        [1, 2, 3, 14, 15],
+      ];
+
+      const evaluatedResult = lotto.evaluateLottoTickets(
+        lottoTickets,
+        mockBonusNumber,
+        { ...mockLottoResult },
+      );
+
+      expect(evaluatedResult.first).toBe(1);
+      expect(evaluatedResult.second).toBe(1);
+      expect(evaluatedResult.third).toBe(1);
+      expect(evaluatedResult.forth).toBe(1);
+      expect(evaluatedResult.fifth).toBe(1);
+    });
+  });
 });
