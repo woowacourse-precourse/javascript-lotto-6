@@ -1,4 +1,5 @@
 import User from "../User";
+import WORD from "../lib/constants/word";
 import InputView from "../views/inputView";
 import OutputView from "../views/outputView";
 
@@ -11,16 +12,18 @@ class LottoController {
 
   async readUserPayment() {
     const payment = await InputView.inputPayment();
-    this.creatUserObject(payment);
+    const userLottoQuanitiy = payment / WORD.LOTTOPRICE;
+    this.creatUserObject(userLottoQuanitiy);
   }
 
-  creatUserObject(payment) {
-    this.#user = new User(payment);
-    return this.printResult(payment);
+  creatUserObject(userLottoQuanitiy) {
+    this.#user = new User(userLottoQuanitiy);
+    return this.printResult(userLottoQuanitiy);
   }
 
-  printResult(payment) {
-    OutputView.printUserLottoQuanitiy(payment);
+  printResult(userLottoQuanitiy) {
+    OutputView.printUserLottoQuanitiy(userLottoQuanitiy);
+    OutputView.printLottoList(this.#user);
   }
 }
 
