@@ -26,6 +26,18 @@ async function getBounusNumber() {
   return bonusNumber;
 }
 
+async function getValidLottoNumber() {
+  while (true) {
+    try {
+      const numbers = await getLottoNumbers();
+      const lotto = new Lotto(numbers);
+      return lotto.Numbers;
+    } catch (error) {
+      Console.print('[ERROR]');
+    }
+  }
+}
+
 class App {
   async play() {
     const purchasePrice = await getPurchasePrice();
@@ -39,7 +51,7 @@ class App {
       ticket.showNumbers();
       ticketArr.push(ticket);
     }
-    const winningNumbers = await getLottoNumbers();
+    const winningNumbers = await getValidLottoNumber();
     const bonusNumber = await getBounusNumber();
 
     ticketArr.forEach((ticket) => {
