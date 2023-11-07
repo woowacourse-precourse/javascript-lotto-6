@@ -1,4 +1,4 @@
-import { PRIZE } from '../constants/prize.js';
+import { PRIZE_STATUS } from '../constants/prize.js';
 import Validator from '../utils/validator.js';
 
 class Lotto {
@@ -21,15 +21,15 @@ class Lotto {
     const [matchCount, matchBonus] = this.#matchLottery(winningLotteryNumbers, bonusNumber);
     switch (matchCount) {
       case 3:
-        return PRIZE.fifth;
+        return PRIZE_STATUS.fifth;
       case 4:
-        return PRIZE.fourth;
+        return PRIZE_STATUS.fourth;
       case 5:
-        return matchBonus ? PRIZE.second : PRIZE.third;
+        return matchBonus ? PRIZE_STATUS.second : PRIZE_STATUS.third;
       case 6:
-        return PRIZE.first;
+        return PRIZE_STATUS.first;
       default:
-        return PRIZE.out;
+        return PRIZE_STATUS.out;
     }
   }
 

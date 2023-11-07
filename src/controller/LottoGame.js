@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import { PRIZE } from '../constants/prize.js';
 import { LOTTO_ROLE } from '../constants/lotto.js';
 import Validator from '../utils/validator.js';
 import { InputView, OutputView } from '../view/index.js';
@@ -12,6 +13,7 @@ export default class LottoGame {
     const winningLotteryNumbers = await this.#requireLotteryNumbers();
     const bonusNumber = await this.#requireBonusNumber(winningLotteryNumbers);
     const lotteryResult = this.#confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber);
+    const earningsRate = this.#calculateEarningsRate(purchaseAmount, lotteryResult);
   }
 
   async #requirePurchaseAmount() {
@@ -65,5 +67,16 @@ export default class LottoGame {
       lotteryResultMap.set(result, (lotteryResultMap.get(result) || 0) + 1);
     });
     return lotteryResultMap;
+  }
+
+  #calculateEarningsRate(purchaseAmount, lotteryResult) {
+    let profit = 0;
+    for (const [key, count] of lotteryResult) {
+      const { prizeMoney } = PRIZE[key];
+      profit += prizeMoney * count;
+    }
+
+    const EarningsRate = profit / purchaseAmount;
+    return EarningsRate.toFixed(1);
   }
 }
