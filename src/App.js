@@ -134,20 +134,19 @@ class App {
 	getWinningStatistics(matchingNumbersArray, matchingBonusNumberArray) {
 		return winningRules
 			.map((rule) => {
-				let count;
-				if (rule.bonus) {
-					count = matchingNumbersArray.reduce((acc, cur, i) => {
+				let count = matchingNumbersArray.reduce((acc, cur, i) => {
+					if (rule.bonus) {
 						return (
 							acc +
 							(cur === rule.match && matchingBonusNumberArray[i] === 1 ? 1 : 0)
 						);
-					}, 0);
-				} else {
-					count = matchingNumbersArray.reduce(
-						(acc, cur) => acc + (cur === rule.match ? 1 : 0),
-						0
-					);
-				}
+					} else {
+						return (
+							acc +
+							(cur === rule.match && matchingBonusNumberArray[i] === 0 ? 1 : 0)
+						);
+					}
+				}, 0);
 				return `${rule.match}개 일치${rule.bonusText || ''} (${
 					rule.prize
 				}) - ${count}개`;
