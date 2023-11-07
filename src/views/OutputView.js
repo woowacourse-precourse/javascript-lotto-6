@@ -3,8 +3,8 @@ import { PRIZE_KEY } from '../constants/constants.js';
 import { OUTPUT_MESSAGE, STATISTIC_LABEL } from '../constants/messages.js';
 
 class OutputView {
-  printErrorMessage(error) {
-    Console.print(error);
+  printError(message) {
+    Console.print(message);
   }
 
   printPurchaseAmount(amount) {
@@ -19,11 +19,11 @@ class OutputView {
   printWinsStatistics(winsStatistics) {
     Console.print(OUTPUT_MESSAGE.winsStatistic);
 
-    for (const prizeKey in winsStatistics) {
+    Object.entries(winsStatistics).forEach(([prizeKey, count]) => {
       const label = STATISTIC_LABEL[prizeKey];
 
-      Console.print(`${label} - ${winsStatistics[prizeKey]}개`);
-    }
+      Console.print(`${label} - ${count}개`);
+    });
   }
 
   printProfitRatio(profitRatio) {
