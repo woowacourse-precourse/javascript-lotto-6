@@ -20,7 +20,7 @@ export const ERROR_MESSAGE = {
   existDuplicateNumber: `${ERROR_PREFIX} 중복된 숫자가 존재합니다.`,
   lottoPurchasePriceRange: `${ERROR_PREFIX} 로또 구입 금액은 1,000원 단위로 입력 가능합니다.`,
   lottoNumberRangee: `${ERROR_PREFIX} 로또 번호는 1부터 45 사이의 숫자여야 합니다.`,
-  lottoLength: `${ERROR_PREFIX} 로또 번호는 6자리 입니다.`,
+  lottoLength: `${ERROR_PREFIX} 로또 번호는 6개여야 합니다.`,
   bonusNumberIncludeWinningNumber: `${ERROR_PREFIX} 당첨 번호와 중복된 숫자입니다.`,
 };
 
