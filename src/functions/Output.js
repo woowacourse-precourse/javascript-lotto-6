@@ -24,5 +24,15 @@ const Output = {
 	bonusNumberPrint() {
 		Console.print(MESSAGE.BONUS_NUMBER_MESSAGE);
 	},
+
+	winTotal(winRank) {
+		Console.print(MESSAGE.WIN_STASTICS);
+		Console.print(MESSAGE.DIVISION_LINE);
+		Console.print(`${MESSAGE.THD_MATCH}${winRank[4]}개
+		${MESSAGE.FRTH_MATCH}${winRank[3]}개
+		${MESSAGE.FTH_MATCH}${winRank[2]}개
+		${MESSAGE.FTH_BONUS_MATCH_MATCH}${winRank[1]}개
+		${MESSAGE.STH_MATCH}${winRank[0]}개`);
+	},
 }
 export default Output;
