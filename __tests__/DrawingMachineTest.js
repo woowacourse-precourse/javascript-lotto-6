@@ -69,7 +69,7 @@ describe('DrawingMachine 테스트', () => {
 
   test('보너스 번호 입렵 받기 및 저장 테스트1: 잘못된 보너스 번호 입력 시 예외 발생', () => {
     const TEST_ITEMS = ['이십', 'seven'];
-    TEST_ITEMS.forEach(async (v) => {
+    TEST_ITEMS.forEach((v) => {
       const drawingMachine = new DrawingMachine();
       expect(() => drawingMachine.setBonusBall(v)).toThrow(
         getErrorMessage(ERROR_MESSAGE.isNotNumber),

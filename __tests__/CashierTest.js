@@ -53,7 +53,7 @@ describe('Cashier 클래스 테스트', () => {
     const PAYMENT_ARRAY = [price * 1, price * 3, price * 4];
     const NUMBER_OF_TICKETS_ARRAY = [1, 3, 4];
     const user = new User();
-    PAYMENT_ARRAY.forEach(async (v, i) => {
+    PAYMENT_ARRAY.forEach((v, i) => {
       const cashier = new Cashier(user);
       const number = cashier.getNumberOfTickets(v);
       expect(number).toEqual(NUMBER_OF_TICKETS_ARRAY[i]);
