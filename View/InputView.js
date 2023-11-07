@@ -25,9 +25,15 @@ class InputView {
   }
 
   async readBonusNumber() {
-    const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+    let bonusNumber;
     // 유효성 검사 추가
-    return Number(bonusNumber);
+
+    do {
+      bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+      bonusNumber = Number(bonusNumber);
+    } while (!Validation.isBonusNumberOk(bonusNumber));
+
+    return bonusNumber;
   }
 }
 export default InputView;

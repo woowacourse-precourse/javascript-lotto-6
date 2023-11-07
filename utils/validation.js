@@ -28,9 +28,6 @@ const Validation = {
   },
 
   isWinningLottoNumberOk(winningLottoNumber) {
-    // 입력한 숫자가 6자리인지 검사
-    // 중복되는 숫자가 없는지 검사
-    // 입력한 숫자의 범위가 1~45사이인지 검사
     const isSixDigits = this.isSixDigits(winningLottoNumber);
     const isDuplicated = this.isDuplicated(winningLottoNumber);
     const isWithinRange = this.isWithinRange(winningLottoNumber);
@@ -63,7 +60,27 @@ const Validation = {
     const isWithinRange = (number) => number >= 1 && number <= 45;
 
     if (!userInput.every(isWithinRange)) {
-      Console.print('[ERROR] 배열의 모든 숫자는 1에서 45 사이에 있어야 합니다.');
+      Console.print('[ERROR] 배열의 모든 숫자는 1에서 45 사이에 있어야 합니다');
+      return false;
+    }
+    return true;
+  },
+
+  isBonusNumberOk(bonusNumber) {
+    const isNaturalNumber = this.isNaturalNumber(bonusNumber);
+    // 이후 추가 // const isWithinRange = this.isWithinRange(bonusNumber);
+
+    if (isNaturalNumber) {
+      return true;
+    }
+    return false;
+  },
+
+  isNaturalNumber(userInput) {
+    const regex = /^[0-9]+$/;
+
+    if (!regex.test(userInput)) {
+      Console.print('[ERROR] 보너스 번호는 자연수여야합니다');
       return false;
     }
     return true;
