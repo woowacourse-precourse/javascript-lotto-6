@@ -36,37 +36,37 @@ class App {
     this.count = this.checkPrice(priceInput);
   }
 
-  checkPrice(priceInput) {
+  async checkPrice(priceInput) {
     const checkPrice = Number(priceInput);
     const remainder = checkPrice % 1000;
     const share = parseInt(checkPrice/1000)
 
-    this.checkNaN(checkPrice);
-    this.checkThousand(remainder);
+    await this.checkNaN(checkPrice);
+    await this.checkThousand(remainder);
 
     this.price = checkPrice;
     return share;
   }
 
-  checkNaN(checkPrice){
+  async checkNaN(checkPrice){
     try {
       if(isNaN(checkPrice)) {
          throw new Error;
       }
     } catch (err){
       MissionUtils.Console.print(ERROR.NAN);
-      this.getMyLottos();
+      await this.getLottoPrice();
     };
   }
 
-  checkThousand(remainder){
+  async checkThousand(remainder){
     try {
       if(remainder !== 0 ) {
         throw new Error;
       }
     } catch (err){
       MissionUtils.Console.print(ERROR.THOUSAND);
-      this.getMyLottos();
+      await this.getLottoPrice();
     }
   }
 
@@ -92,9 +92,12 @@ class App {
     this.bonus = Number(bonusNumbers);
     this.winning = winningNumbers.split(",").map(Number);
     const numbers = [...this.winning,this.bonus]
-    
-    const checkNumbers = new Lotto(this.winning);    
-    const checkbonus = new checkBonus(numbers);
+    try {
+      const checkNumbers = new Lotto(this.winning);    
+      const checkbonus = new checkBonus(numbers);
+    } catch {
+      await this.getNumbers();
+    }
   } 
 
   getWinningLottos() {
