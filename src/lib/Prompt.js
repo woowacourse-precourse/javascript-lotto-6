@@ -14,8 +14,7 @@ export const INPUT = {
 
 export const PROMPT = {
   purchase: num => `\n${num}개를 구매했습니다.`,
-  returnRate: rate =>
-    `총 수익률은 ${rate.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%입니다.`,
+  returnRate: rate => `총 수익률은 ${rate}%입니다.`,
   result: '\n당첨 통계',
 };
 

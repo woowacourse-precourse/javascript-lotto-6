@@ -77,8 +77,9 @@ class Lotto {
   calculateReturnRate(cntArr, money) {
     const WIN_ARR = cntArr.map((item, idx) => item * WINNINGS[idx]);
     const TOTAL = WIN_ARR.reduce((acc, curr) => acc + curr, 0);
-    const returnRate = (TOTAL / money) * 100;
-    return returnRate.toFixed(1); // 소수점 둘째 자리에서 반올림하고 100.0으로 포맷
+    const returnRate =
+      TOTAL < money ? (TOTAL / money) * 100 : ((TOTAL - money) / money) * 100;
+    return returnRate.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 소수점 둘째 자리에서 반올림하고 100.0으로 포맷
   }
 }
 

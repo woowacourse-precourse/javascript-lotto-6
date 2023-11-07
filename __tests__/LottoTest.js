@@ -84,7 +84,7 @@ describe('Lotto 클래스', () => {
       const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
       const cntArr = [0, 1, 2, 3, 0]; // 예상되는 등수별 개수
       const money = 10000; // 입력 금액
-      const expectedReturnRate = '930500.0'; // 예상 수익률
+      const expectedReturnRate = '930,500.0'; // 예상 수익률
 
       // Act
       const result = lotto.calculateReturnRate(cntArr, money);
@@ -118,7 +118,7 @@ describe('Lotto 클래스', () => {
       const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
       const cntArr = [0, 0, 1, 0, 0]; // 예상되는 등수별 개수
       const money = 10000; // 입력 금액
-      const expectedReturnRate = '15000.0'; // 예상 수익률
+      const expectedReturnRate = '15,000.0'; // 예상 수익률
 
       // Act
       const result = lotto.calculateReturnRate(cntArr, money);
@@ -135,7 +135,7 @@ describe('Lotto 클래스', () => {
       const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
       const cntArr = [0, 0, 0, 1, 0]; // 예상되는 등수별 개수
       const money = 10000; // 입력 금액
-      const expectedReturnRate = '300000.0'; // 예상 수익률
+      const expectedReturnRate = '300,000.0'; // 예상 수익률
 
       // Act
       const result = lotto.calculateReturnRate(cntArr, money);
@@ -152,7 +152,7 @@ describe('Lotto 클래스', () => {
       const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
       const cntArr = [0, 0, 0, 0, 1]; // 예상되는 등수별 개수
       const money = 10000; // 입력 금액
-      const expectedReturnRate = '20000000.0'; // 예상 수익률
+      const expectedReturnRate = '20,000,000.0'; // 예상 수익률
 
       // Act
       const result = lotto.calculateReturnRate(cntArr, money);
