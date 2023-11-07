@@ -2,22 +2,27 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 class LottoGame {
+  #purchaseAmount
   #ticketCount;
   #lottoTickets;
   #winningTicket;
   #bonusNumber
   #winningResult;
+  #profitRate;
 
   constructor() {
-    this.#ticketCount;
+    this.#purchaseAmount = 0;
+    this.#ticketCount = 0;
     this.#lottoTickets = [];
     this.#winningTicket = [];
     this.#bonusNumber = "";
     this.#winningResult = [];
+    this.#profitRate = 0.0;
   }
 
   async start() {
-    await this.buyLotto();
+    this.#purchaseAmount = await this.buyLotto();
+    this.#ticketCount = this.#purchaseAmount / 1000;
     this.setLottoTickets(this.#lottoTickets, this.#ticketCount);
     this.#lottoTickets = this.sortLottoTickets(this.#lottoTickets);
     this.printLottoTickets(this.#lottoTickets, this.#ticketCount);
@@ -27,6 +32,9 @@ class LottoGame {
 
     this.#winningResult = this.checkLottoResult(this.#lottoTickets, this.#winningTicket, this.#bonusNumber);
     this.printWinningResults(this.#winningResult);
+
+    this.#profitRate = this.calculateProfitRate(this.#winningResult, this.#purchaseAmount);
+    this.printProfitRate(this.#profitRate);
   }
 
   setTicketCount(count) {
@@ -38,8 +46,7 @@ class LottoGame {
 
     const tempPrice = Number(inputPrice);
     this.#validatePrice(tempPrice);
-    const termTicketCount = tempPrice / 1000;
-    this.setTicketCount(termTicketCount);
+    return tempPrice;
   }
 
   #validatePrice(price) {
@@ -181,8 +188,8 @@ class LottoGame {
   printWinningResults(winningResult) {
     const prizeMoney = ['5,000', '50,000', '1,500,000', '30,000,000', '2,000,000,000'];
     const matchCountList = [3, 4, 5, 5, 6];
-    winningResult.reverse();
-    winningResult.forEach((result, index) => {
+    const reversedWinningResult = [...winningResult].reverse();
+    reversedWinningResult.forEach((result, index) => {
       let bonusText = '';
       if (index === 3) {
         bonusText = ' 보너스 볼 일치';
@@ -191,6 +198,20 @@ class LottoGame {
     });
   }
 
+  calculateProfitRate(winningResult, purchaseAmount) {
+    const prizeMoney = [2000000000, 30000000, 1500000, 50000, 5000,  0];
+
+    const totalWinnings = winningResult.reduce((sum, count, index) => sum + prizeMoney[index] * count, 0);
+  
+    const profit = totalWinnings - purchaseAmount;
+    const profitRate = ((profit / purchaseAmount) * 100).toFixed(1);
+    
+    return profitRate;
+  }
+
+  printProfitRate(profitRate) {
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  }
 }
 
 export default LottoGame;
