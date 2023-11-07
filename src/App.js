@@ -57,7 +57,7 @@ class App {
     }
   }
 
-  calculateRankByMatched(matched, matchedBonus) {
+  static calculateRankByMatched(matched, matchedBonus) {
     if (matched === 6) {
       return 1;
     }
@@ -70,9 +70,10 @@ class App {
     if (matched === 3) {
       return 5;
     }
+    return undefined;
   }
 
-  calculateMatchedByRank(rank) {
+  static calculateMatchedByRank(rank) {
     if (rank === 1) {
       return 6;
     }
@@ -85,6 +86,7 @@ class App {
     if (rank === 5) {
       return 3;
     }
+    return undefined;
   }
 
   setRankAndPrize(matched, matchedBonus) {
