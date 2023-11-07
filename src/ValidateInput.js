@@ -2,9 +2,9 @@ import ERROR_MESSAGE from "./constant/errorData.js";
 import LOTTO from "./constant/lottoData.js";
 import {
   isBlank,
-  isInRange,
   isInvalidType,
   isNumber,
+  isOutRange,
 } from "./utils/validation.js";
 
 export const Validator = {
@@ -29,7 +29,7 @@ export const Validator = {
     if (LOTTO.SIZE !== input.length) throw ERROR_MESSAGE.SIZE_INVALID;
   },
   invalidLottoRange(input) {
-    if (!input.some(isInRange)) throw ERROR_MESSAGE.RANGE_INVALID;
+    if (input.some(isOutRange)) throw ERROR_MESSAGE.RANGE_INVALID;
   },
 };
 

@@ -25,6 +25,8 @@ export function isInvalidType(input) {
   );
 }
 
-export const isInRange = (input) => {
-  return input >= LOTTO.MINIMUM_NUMBER && input <= LOTTO.MAXIMUM_NUMBER;
+export const isOutRange = (input) => {
+  return (
+    Number(input) < LOTTO.MINIMUM_NUMBER || Number(input) > LOTTO.MAXIMUM_NUMBER
+  );
 };
