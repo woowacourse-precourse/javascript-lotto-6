@@ -1,8 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
+import InputView from './view/InputView.js';
+import OutputView from './View/OutputView.js';
 import UserLotto from './UserLotto.js';
 import Lotto from './Lotto.js';
 import Bonus from './Bonus.js';
-import View from './View.js';
 import Computer from './Computer.js';
 import Validate from './Validate.js';
 
@@ -24,7 +25,7 @@ class App {
   }
 
   async getPrice() {
-    this.amount = await View.inputAmountOfMoney();
+    this.amount = await InputView.purchaseAmount();
     try {
       Validate.isItNumber(this.amount);
       Validate.isItUnitOf1000(this.amount);
@@ -38,11 +39,11 @@ class App {
   showLottos() {
     const list = this.userLotto.getList();
     const count = this.userLotto.getCount();
-    View.outputUserLottosList(list, count);
+    OutputView.issuedLottosList(list, count);
   }
 
   async getWinningNumber() {
-    let numbers = await View.inputSixWinningNumbers();
+    let numbers = await InputView.sixWinningNumbers();
     numbers = numbers.split(',');
     try {
       this.lotto = new Lotto(numbers);
@@ -53,7 +54,7 @@ class App {
   }
 
   async getBonusNumber() {
-    const bonusNumber = await View.inputBonusNumber();
+    const bonusNumber = await InputView.bonusNumber();
     try {
       this.bonus = new Bonus(bonusNumber, this.lotto.getNumbers());
     } catch (err) {
@@ -75,8 +76,8 @@ class App {
   }
 
   showComputeResult() {
-    View.outputComputeResult(this.computer.state);
-    View.outputEarningRate(this.earningRate);
+    OutputView.computeResult(this.computer.state);
+    OutputView.earningRate(this.earningRate);
   }
 
   async play() {
