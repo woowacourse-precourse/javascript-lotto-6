@@ -1,6 +1,6 @@
 import Lottos from "../src/model/Lottos";
 
-describe("로또 클래스 테스트", () => {
+describe("Lottos 클래스 테스트", () => {
   
   test('Lottos 생성시 잘못된 입력 테스트', () => {
     const tryExample = ['1', '2500', '4684'];
