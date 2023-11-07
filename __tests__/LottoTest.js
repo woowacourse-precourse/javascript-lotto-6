@@ -40,8 +40,8 @@ describe("🎰 Lotto 클래스 내 비즈니스 로직, 메소드 테스트", ()
     const lotto1 = new Lotto([1, 2, 3, 4, 5, 6])
     const winningNum = [1, 2, 3, 7, 8, 9]
 
-    const result = lotto1.countIncludingNumbers(winningNum)
-    
+    const result = lotto1.countMatchingNumbers(winningNum)
+
     expect(result).toBe(3)
   });
 })
