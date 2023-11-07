@@ -7,6 +7,9 @@ import Money from "../model/Money.js";
 import generateLottos from "../utils/generateLottos.js";
 import LottoSet from "../model/LottoSet.js";
 
+import { generateWinningNumbers, generateBonusNumber } from "../utils/generateWinningLotto.js";
+import WinningLotto from "../model/WinningLotto.js";
+
 class LottoController{
     #money;
 
@@ -26,16 +29,7 @@ class LottoController{
     async run(){
         const boughtLottoNumber = await this.#buyLotto();
         this.#writeLotto(boughtLottoNumber);
-        
-        // const boughtLottoNumber = buyLotto(this.#money);
-        // Output.outputMessage(`${boughtLottoNumber}개를 구매했습니다.`);
-        // const lottoset = new LottoSet(generateLottos(boughtLottoNumber));
-        // lottoset.printLottoSet();
-        // await this.inputWinningLottoUntilValid();
-        // await this.inputBonusNumberUntilValid();
-        // lottoset.calculatePrizeResult(this.#winningLotto, this.#bonusNumber);
-        // const total = lottoset.printResult();
-        // Output.outputMessage(`총 수익률은 ${Math.round((total/this.#money)*1000)/10}%입니다.`);
+        const winningLotto = this.#makeWinningLotto();
     }
 
     async #buyLotto(){
@@ -64,16 +58,17 @@ class LottoController{
         }
     }
 
-    async inputWinningLottoUntilValid(){
-        let input  = await Input.inputWinningLotto();
-        input = input.split(',');
-        const numArray = [];
-        input.forEach(str => numArray.push(Number.parseInt(str, 10)));
-        this.#winningLotto = new Lotto(numArray);
-    }
-
-    async inputBonusNumberUntilValid(){
-        this.#bonusNumber = await Input.inputBonusNumber();
+    async #makeWinningLotto(){
+        try{
+            const winningNumbersString = await Input.inputWinningNumbers();
+            const bonusNumberString = await Input.inputBonusNumber();
+            const winningNumbers = generateWinningNumbers(winningNumbersString);
+            const bonusNumber = generateBonusNumber(bonusNumberString);
+            return new WinningLotto(winningNumbers, bonusNumber);
+        }catch(e){
+            Output.outputError(e);
+            this.#makeWinningLotto();
+        }
     }
 }
 
