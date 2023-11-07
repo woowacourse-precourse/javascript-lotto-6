@@ -7,7 +7,7 @@ const message = Object.freeze({
   invalidNumbersCount: '당첨 번호 6개를 입력해주세요.',
   invalidRange: '1에서 45사이의 값이 아닙니다.',
   invalidLottoNumberCount: '로또 번호의 개수가 6개가 아닙니다.',
-  duplicatedLottoNumber: ' 로또 번호가 중복되었습니다.'
+  duplicatedLottoNumber: '로또 번호가 중복되었습니다.'
 });
 
 const ERROR = Object.freeze({ message });
