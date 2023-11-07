@@ -11,12 +11,12 @@ class Input {
    */
   static async getCost() {
     const cost = await Input.readValidatableAsync(PROMPT.BUY_COST);
-    console.log(cost.isDivisibleBy(1000));
+
     if (!cost.isDivisibleBy(1000)) {
       throw new CustomError(ERROR_MESSAGE.NOT_DIVISIBLE_BY_1000);
     }
 
-    return cost;
+    return cost.toInteger();
   }
 
   /**

@@ -1,4 +1,4 @@
-import Validatable from './Validatable';
+import Validatable from './Validatable.js';
 
 class CustomArray extends Validatable {
   /**
@@ -31,7 +31,7 @@ class CustomArray extends Validatable {
    * @param {'asc' | 'desc'} order 정렬 순서
    * @returns {boolean} 정렬된 배열인지 여부
    */
-  isSortedArray(order) {
+  isSortedArray(order = 'asc') {
     if (!this.isArray()) {
       return false;
     }
@@ -63,6 +63,17 @@ class CustomArray extends Validatable {
    */
   isInRange(from, to) {
     return this.isArray() && this.value.every((element) => element >= from && element <= to);
+  }
+
+  /**
+   * 배열을  정렬하는 메서드
+   * @param {'asc' | 'desc'} order 정렬 순서
+   */
+  sort(order = 'asc') {
+    this.value = [...this.value].sort((a, b) => {
+      if (order === 'asc') return a - b;
+      return b - a;
+    });
   }
 }
 

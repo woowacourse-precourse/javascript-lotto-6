@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
-import { LOTTO_RANGE, LOTTO_COUNT, LOTTO_PRICE } from './constants/number.js';
+import Lotto from './Lotto.js';
 import Message from './utils/Message.js';
+import { LOTTO_RANGE, LOTTO_COUNT, LOTTO_PRICE } from './constants/number.js';
 
 /**
  * @classdesc 복권 발급처
@@ -26,8 +26,10 @@ class DongHang {
   static issueOne() {
     const { from, to } = LOTTO_RANGE;
     const numbers = Random.pickUniqueNumbersInRange(from, to, LOTTO_COUNT);
+    const sorted = numbers.sort((a, b) => a - b);
+    Message.array(sorted);
 
-    return new Lotto(numbers);
+    return new Lotto(sorted);
   }
 }
 

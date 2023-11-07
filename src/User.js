@@ -1,12 +1,12 @@
 import Input from './utils/Input.js';
 
 class User {
-  // eslint-disable-next-line class-methods-use-this
-  async buy() {
-    const cost = await Input.getCost();
-    const count = cost / 1000;
+  #money = 0;
 
-    return count;
+  async buy() {
+    this.#money = await Input.getCost();
+
+    return this.#money;
   }
 }
 

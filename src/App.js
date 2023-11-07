@@ -1,9 +1,12 @@
+import DongHang from './DongHang.js';
 import User from './User.js';
 
 class App {
   async play() {
     this.user = new User();
-    this.lottoCount = await this.user.buy();
+
+    this.money = await this.user.buy();
+    this.lottos = DongHang.issue(this.money);
   }
 }
 
