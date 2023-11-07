@@ -8,6 +8,18 @@ const mockRandoms = (numbers) => {
   }, Random.pickUniqueNumbersInRange);
 };
 
+describe('로또 구입 기능 테스트', () => {
+  test('구입 금액이 1,000원일 때, 하나의 로또를 구입한다.', () => {
+    const money = 1000;
+    expect(new Game().purchaseLottoTickets(money)).toHaveLength(1);
+  });
+
+  test('구입 금액이 8,000원일 때, 8장의 로또를 구입한다.', () => {
+    const money = 8000;
+    expect(new Game().purchaseLottoTickets(money)).toHaveLength(8);
+  });
+});
+
 describe('로또 생성 기능 테스트', () => {
   test('로또는 중복되지 않은 번호로 생성된다.', () => {
     const ticket = new Game().createSingleLottoTicket();
