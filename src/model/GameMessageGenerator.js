@@ -14,11 +14,11 @@ class GameMessageGenerator {
   getResultMessage(winningResult, purchaseMoney) {
     let totalPrize = 0;
     const RESULT_MESSAGE_ARRAY = [];
+
     Object.keys(winningResult).forEach((key) => {
       RESULT_MESSAGE_ARRAY.push(
         `${PRIZES_MESSAGE[key]} ${OTHERS.dash} ${winningResult[key]}${OTHERS.numKorean}`
       );
-
       totalPrize += winningResult[key] * PRIZES[key];
     });
 

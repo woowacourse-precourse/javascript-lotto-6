@@ -24,7 +24,7 @@ class GameCalculator {
         this.winngingResult[NUMBER.six] += 1;
       }
     });
-
+    
     return this.winngingResult;
   }
 }

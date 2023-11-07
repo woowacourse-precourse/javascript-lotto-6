@@ -18,14 +18,12 @@ class GameController {
 
   async start() {
     await this.getLottoTryCount();
-
     await this.getNumbersForWinner();
   }
 
   async getLottoTryCount() {
     this.purchaseMoney = await this.inputView.getUserInputPurchaseMoney();
     const LOTTO_TRY_COUNT = this.purchaseMoney / NUMBER.purchaseMoneyDivisor;
-
     this.printPurchaseLottos(LOTTO_TRY_COUNT);
   }
 
@@ -34,14 +32,12 @@ class GameController {
     const PURCHASE_LOTTOS_MESSAGES = this.gameMessageGenerator.getPurchaseLottosMessages(
       this.purchaseLottos
     );
-
     this.outputView.showPurchaseLottosOutput(lottoTryCount, PURCHASE_LOTTOS_MESSAGES);
   }
 
   async getNumbersForWinner() {
     const WINNING_NUMBERS = await this.inputView.getUserInputWinningNumbers();
     const BONUS_NUMBER = await this.inputView.getUserInputBonusNumber(WINNING_NUMBERS);
-
     this.printGameResult(WINNING_NUMBERS, BONUS_NUMBER);
   }
 
@@ -52,7 +48,6 @@ class GameController {
       WINNING_RESULT,
       this.purchaseMoney
     );
-
     this.outputView.showGameResultOutput(WINNING_RESULT_MESSAGE);
   }
 }
