@@ -1,5 +1,5 @@
-import Lotto from './Lotto.js';
-import { OTHERS, NUMBER } from './utils/constants.js';
+import Lotto from '../Lotto.js';
+import { OTHERS, NUMBER } from '../utils/constants.js';
 
 class GameCalculator {
   constructor(purchaseLottos, winningNumbers, bonusNumber) {

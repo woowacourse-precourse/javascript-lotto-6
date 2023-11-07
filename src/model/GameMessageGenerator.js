@@ -1,4 +1,4 @@
-import { OTHERS, PRIZES_MESSAGE, PRIZES } from './utils/constants.js';
+import { OTHERS, PRIZES_MESSAGE, PRIZES } from '../utils/constants.js';
 
 class GameMessageGenerator {
   getPurchaseLottosMessages(purchaseLottos) {

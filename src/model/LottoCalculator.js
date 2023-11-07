@@ -1,4 +1,4 @@
-import { OTHERS } from './utils/constants.js';
+import { OTHERS } from '../utils/constants.js';
 
 class LottoCalculator {
   constructor(lotto, bonusNumber, winningNumbers) {

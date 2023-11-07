@@ -1,8 +1,8 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import RandomNumberGenerator from '../../RandomNumberGenerator.js';
-import GameMessageGenerator from '../../GameMessageGenerator.js';
-import GameCalculator from '../../GameCalculator.js';
+import RandomNumberGenerator from '../../model/RandomNumberGenerator.js';
+import GameMessageGenerator from '../../model/GameMessageGenerator.js';
+import GameCalculator from '../../model/GameCalculator.js';
 import { NUMBER } from '../../utils/constants.js';
 
 class GameController {
@@ -17,7 +17,7 @@ class GameController {
   async start() {
     const PURCHASE_MONEY = await this.inputView.getUserInputPurchaseMoney();
 
-    const LOTTO_TRY_COUNT = this.getLottoTryCount(PURCHASE_LOTTOS);
+    const LOTTO_TRY_COUNT = this.getLottoTryCount(PURCHASE_MONEY);
 
     const PURCHASE_LOTTOS = this.randomNumberGenerator.getRandomNumberArray(LOTTO_TRY_COUNT);
     const PURCHASE_LOTTOS_MESSAGES = this.gameMessageGenerator.getPurchaseLottosMessages(PURCHASE_LOTTOS);
@@ -39,7 +39,7 @@ class GameController {
 
   getLottoTryCount(purchaseMoney) {
     const LOTTO_TRY_COUNT = purchaseMoney / NUMBER.purchaseMoneyDivisor;
-    
+
     return LOTTO_TRY_COUNT;
   }
 }

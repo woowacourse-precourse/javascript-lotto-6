@@ -1,4 +1,4 @@
-import LottoCalculator from './LottoCalculator.js';
+import LottoCalculator from './model/LottoCalculator.js';
 
 class Lotto {
   #numbers;
