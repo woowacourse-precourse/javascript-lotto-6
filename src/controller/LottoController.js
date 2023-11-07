@@ -5,8 +5,7 @@ import generateMoney from "../utils/generateMoney.js";
 import Money from "../model/Money.js";
 
 import generateLottos from "../utils/generateLottos.js";
-import LottoSet from "./LottoSet.js";
-import Lotto from "../model/Lotto.js";
+import LottoSet from "../model/LottoSet.js";
 
 class LottoController{
     #money;
@@ -26,6 +25,7 @@ class LottoController{
 
     async run(){
         const boughtLottoNumber = await this.#buyLotto();
+        this.#writeLotto(boughtLottoNumber);
         
         // const boughtLottoNumber = buyLotto(this.#money);
         // Output.outputMessage(`${boughtLottoNumber}개를 구매했습니다.`);
@@ -42,11 +42,25 @@ class LottoController{
         try {
             const moneyString = await Input.inputMoney();
             const money = generateMoney(moneyString);
-            return new Money(money).buyLottos();
+            const boughtLottoNumber = new Money(money).buyLottos();
+            Output.outputBoughtLottoNumber(boughtLottoNumber);
+            return boughtLottoNumber;
         }
         catch(e){
             Output.outputError(e);
             this.#buyLotto();
+        }
+    }
+
+    #writeLotto(boughtLottoNumber){
+        try {
+            const lottos = generateLottos(boughtLottoNumber);
+            const lottoSet = new LottoSet(lottos);
+            Output.outputLottoSetNumbers(lottoSet.toString());
+            return lottoSet;
+        }catch(e){
+            Output.outputError(e);
+            this.#writeLotto();
         }
     }
 
