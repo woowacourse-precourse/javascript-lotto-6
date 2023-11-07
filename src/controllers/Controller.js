@@ -36,19 +36,33 @@ class Controller {
     this.#person.purchasedLottoInformation(this.#lottos);
   }
 
-  async makeLottoShop() {
+  async getLottoShopWinningNumber() {
     while (true) {
       try {
-        // 당첨번호 보너스번호 분리필요
-        this.#lottoShop = new LottoShop(
-          await InputView.askWinningNumber(),
-          await InputView.askBonusNumber()
-        );
+        const winningNumber = await InputView.askWinningNumber();
+        this.#lottoShop = new LottoShop(winningNumber);
         break;
       } catch (e) {
         Console.print(e.message);
       }
     }
+  }
+
+  async getLottoShopBonusNumber() {
+    while (true) {
+      try {
+        const bonusNumber = await InputView.askBonusNumber();
+        this.#lottoShop.setBonusNumber(bonusNumber);
+        break;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
+  }
+
+  async makeLottoShop() {
+    await this.getLottoShopWinningNumber();
+    await this.getLottoShopBonusNumber();
   }
 
   async run() {
