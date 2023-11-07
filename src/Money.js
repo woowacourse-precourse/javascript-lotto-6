@@ -1,4 +1,4 @@
-import { ZERO, THOUSAND } from './constants/data.js';
+import { ZERO, THOUSAND } from './constants/numbers.js';
 import { ERROR } from './constants/messages.js';
 
 class Money {
