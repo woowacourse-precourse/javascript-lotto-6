@@ -38,6 +38,22 @@ class App {
       }
     }
   }
+  async INPUT_WINNING_NUMBERS() {
+    const WINNING_NUMBERS = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요.\n"
+    );
+    const WINNING_NUMBERS_ARRAY = WINNING_NUMBERS.split(",").map(Number);
+
+    const BONUS_NUMBER = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요.\n"
+    );
+    const PARSED_BONUS_NUMBER = parseInt(BONUS_NUMBER, 10);
+
+    return {
+      WINNING_NUMBERS: WINNING_NUMBERS_ARRAY,
+      BONUS_NUMBER: PARSED_BONUS_NUMBER,
+    };
+  }
 }
 
 export default App;
