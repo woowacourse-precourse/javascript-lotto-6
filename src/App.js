@@ -1,10 +1,11 @@
 import BuyLotto from './BuyLotto.js';
-import validator from './Validator.js';
+import Validator from './Validator.js';
 import Compare from './Compare.js';
 import PlayerInput from './PlayerInput.js';
 import Output from './Output.js';
 import { result } from './constants/message.js';
 import error from './constants/error.js';
+import Lotto from './Lotto.js';
 
 class App {
   playerInput = new PlayerInput();
@@ -12,6 +13,8 @@ class App {
   buyLotto = new BuyLotto();
 
   output = new Output();
+
+  validator = new Validator();
 
   expense;
 
@@ -57,9 +60,9 @@ class App {
     this.expense = Number(this.expense);
 
     try {
-      validator.validationExpense(this.expense);
+      this.validator.validationExpense(this.expense);
     } catch (e) {
-      this.output.print(`${error.ERROR} ${e.message}`);
+      this.output.print(e.message);
       await this.inputAmount();
     }
   }
@@ -82,16 +85,13 @@ class App {
   async inputWinning() {
     const numberInput = await this.playerInput.winningNumberInput();
     try {
-      const inputArray = numberInput.split(',');
-      const numberArray = inputArray.map((inputElement) =>
-        Number(inputElement),
-      );
+      const inputArray = numberInput
+        .split(',')
+        .map((inputElement) => Number(inputElement));
 
-      validator.validationNumber(numberArray);
-
-      this.winningNumber = numberArray;
+      this.winningNumber = new Lotto(inputArray).getNumber();
     } catch (e) {
-      this.output.print(`${error.ERROR} ${e.message}`);
+      this.output.print(e.message);
       await this.inputWinning();
     }
   }
@@ -100,11 +100,11 @@ class App {
     const bonusInput = await this.playerInput.bonusNumberInput();
     const number = Number(bonusInput);
     try {
-      validator.validationBonusNumber(this.winningNumber, number);
+      this.validator.validationBonusNumber(this.winningNumber, number);
 
       this.bonusNumber = number;
     } catch (e) {
-      this.output.print(`${error.ERROR} ${e.message}`);
+      this.output.print(e.message);
       await this.inputBonus();
     }
   }
