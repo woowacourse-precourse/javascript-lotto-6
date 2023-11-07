@@ -36,7 +36,12 @@ export class LottoGenerator {
     return new LottoGenerator(true);
   }
 
-  static fixed(isGenerate) {
+  /**
+   *
+   * @return {LottoGenerator}
+   * @description 랜덤 로또 생성 부분 테스트 시 활용
+   */
+  static fixed() {
     return new LottoGenerator(false);
   }
 
