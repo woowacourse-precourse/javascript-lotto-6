@@ -82,6 +82,17 @@ class LottoPrizeManager {
 
     return rankResult;
   }
+
+  static calculateProfitRate({ rankResult, totalMoney }) {
+    const prizeMoney = Object.keys(PRIZE.RANK).reduce((acc, rankKey) => {
+      const { MONEY } = PRIZE.RANK[rankKey];
+      return acc + rankResult[rankKey] * MONEY;
+    }, 0);
+
+    const profitRate = (prizeMoney / totalMoney) * 100;
+
+    return profitRate.toFixed(1);
+  }
 }
 
 export default LottoPrizeManager;
