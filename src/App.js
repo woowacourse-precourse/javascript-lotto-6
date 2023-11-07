@@ -82,6 +82,23 @@ class App {
     });
     return result;
   }
-  
+
+  // TODO: 수익률 계산
+  #calculateProfitRate(purchaseAmount, results) {
+    const prizeMoney = {
+      '3': 5000,
+      '4': 50000,
+      '5': 1500000,
+      '5+1': 30000000,
+      '6': 2000000000
+    };
+    let totalWinnings = 0;
+    for (const [key, value] of Object.entries(results)) {
+      totalWinnings += prizeMoney[key] * value;
+    }
+    return ((totalWinnings - purchaseAmount) / purchaseAmount * 100).toFixed(2);
+  }
+    
+
 }
 export default App;
