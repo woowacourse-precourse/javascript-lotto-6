@@ -1,4 +1,5 @@
 const PERCENTAGE_FACTOR = 100;
+const DECIMAL_POINT = 1;
 
 class Calculator {
   constructor() {
@@ -7,7 +8,7 @@ class Calculator {
 
   calculateRevenue(reward, amount) {
     const value = (reward / amount) * PERCENTAGE_FACTOR;
-    this.revenue = value.toFixed(1);
+    this.revenue = value.toFixed(DECIMAL_POINT);
   }
 }
 
