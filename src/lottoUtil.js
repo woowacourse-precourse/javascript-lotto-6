@@ -76,3 +76,12 @@ export async function winLottoGenerate() {
         }
     }
 }
+
+/**
+ * @param {number} amount
+ */
+export function lottoGenerate(amount) {
+    return [...Array(amount)].map(
+        () => new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b))
+    );
+}
