@@ -52,7 +52,9 @@ class Controller {
   async #getWinningNumbers() {
     this.inputWinningNumbers = await InputView.readLottoWinningNumbers();
     this.#validateWinningNumbers(this.inputWinningNumbers);
-    this.inputWinningNumbers = this.inputWinningNumbers.split(',').map((number) => Number(number));
+    this.inputWinningNumbers = this.inputWinningNumbers.replace(/\s/g, '');
+    this.inputWinningNumbers = this.inputWinningNumbers.split(',');
+    this.inputWinningNumbers = this.inputWinningNumbers.map((number) => Number(number));
     this.#winningNumbers = new Lotto(this.inputWinningNumbers).winningNumbers;
   }
 
