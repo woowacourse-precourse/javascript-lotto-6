@@ -2,20 +2,23 @@ import { Console, MissionUtils, Random } from "@woowacourse/mission-utils";
 import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE } from "./constants/constant.js";
 
 class App {
+  constructor() {
+    this.userRandomList = [];
+  }
+
   async play() {
+
     const userMoney = await this.getUserMoney();
 
-    const randomCount = (userMoney / 1000);
-    Console.print(MESSAGE_INPUT(randomCount).COUNT+'\n');
+    Console.print(MESSAGE_INPUT(userMoney / 1000).COUNT+'\n');
     
-    let userRandomList = [];
-    const userRandomListNums = this.makeRandomNumbers(userRandomList);
+    const userRandomListNums = this.makeRandomNumbers();
 
     const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
     const winningNumsList = await this.getWinningNumbers(numRangePattern);
 
     const bonus = await this.getBonus(winningNumsList, numRangePattern);
-    this.checkWinningResults(userRandomListNums, userMoney, winningNumsList, bonus);
+    this.checkWinningResults(this.userMoney, winningNumsList, bonus);
   }
 
   async getUserMoney() {
@@ -37,9 +40,10 @@ class App {
   };
 
   makeRandomNumbers() {
-    // this.userRandomList = []; // 배열 저장
+    this.userRandomList = []; // 배열 초기화
+    const randomCount = (this.userMoney / 1000);
 
-    // while (this.userRandomList.length < this.randomCount) {
+    while (this.userRandomList.length < randomCount) {
       let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       randomNums.sort((a, b) => a - b); // 오름차순 정렬
       
@@ -60,11 +64,8 @@ class App {
       this.userRandomList.push(randomNums); // 숫자 배열 저장
       Console.print(printedString)
 
-      if (this.userRandomList.length < 6) {
-        this.makeRandomNumbers()
-      }
-    // }
-    return this.userRandomListNums;
+    }
+    return this.userRandomList;
   };
 
   async getWinningNumbers(numRangePattern) {
@@ -93,10 +94,10 @@ class App {
           throw new Error(ERROR_MESSAGE.INPUT_ERROR)
         }
       }
-      return this.winningNumsList;
+      return winningNumsList;
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
-      await getWinningNumbers(numRangePattern);
+      return await this.getWinningNumbers(numRangePattern);
     }
   };
 
@@ -119,18 +120,18 @@ class App {
     // }
   };
 
-  checkWinningResults(userRandomListNums, userMoney, winningNumsList, bonus) {
+  checkWinningResults(userMoney, winningNumsList, bonus) {
     let winningThree = 0;
     let winningFour = 0;
     let winningFive = 0;
     let winningBonus = 0;
     let winningSix = 0;
 
-    for (let i = 0; i < userRandomListNums.length; i++) {
-      let winningCount = userRandomListNums[i].filter(it => winningNumsList.includes(it)).length
+    for (let i = 0; i < this.userRandomList.length; i++) {
+      let winningCount = this.userRandomList[i].filter(it => winningNumsList.includes(it)).length
       let isBonus = false;
 
-      if (userRandomListNums[i].includes(bonus)) {
+      if (this.userRandomList[i].includes(bonus)) {
         isBonus = true;
       }
 
