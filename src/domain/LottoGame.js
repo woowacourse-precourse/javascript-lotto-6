@@ -1,6 +1,7 @@
 import Lotto from "../model/Lotto.js";
-
 import { Random } from '@woowacourse/mission-utils';
+
+const ASC = (a, b) => a - b;
 
 class LottoGame {
 
@@ -23,10 +24,11 @@ class LottoGame {
   generateTickets() {
     for (let i = 0; i < this.#purchaseQuantity; i++) {
       // TODO: 상수 사용
-      let number = Random.pickUniqueNumbersInRange(1, 45, 6);
-      this.#tickets.push(ticket)
+      let numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(ASC);
+      this.#tickets.push(new Lotto(numbers));
     }
 
+    // TEST: 생성된 티켓들의 로또번호 출력
     this.#tickets.forEach((ticket) => {
       console.log(ticket.getNumbers());
     })

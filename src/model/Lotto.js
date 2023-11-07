@@ -1,5 +1,7 @@
 class Lotto {
-  #numbers;
+
+  /** @type {Array<number>} : Lotto 번호 리스트 */
+  #numbers = null;
 
   constructor(numbers) {
     this.#validate(numbers);
