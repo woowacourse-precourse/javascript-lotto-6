@@ -1,4 +1,4 @@
-import { IGNORE_COUNT, RANKING, RANKING_BY } from './LottoInfo.js';
+import { IGNORE_MATCHING_COUNTS, RANKING, RANKING_BY } from './LottoInfo.js';
 
 class WinningResults {
   #resultMap = new Map([
@@ -10,7 +10,7 @@ class WinningResults {
   ]);
 
   saveResultBy(matchingCount) {
-    if (IGNORE_COUNT.includes(matchingCount)) return;
+    if (IGNORE_MATCHING_COUNTS.includes(matchingCount)) return;
 
     const ranking = RANKING_BY[matchingCount];
     const rankingCount = this.#resultMap.get(ranking);

@@ -1,11 +1,8 @@
 import Lotto from './Lotto.js';
-import { LOTTO_NUMBER } from './LottoInfo.js';
+import { LOTTO, MATCHING_COUNT } from './LottoInfo.js';
 import { ERROR } from './LottoMessage.js';
 
 class WinningLotto {
-  #FIVE = 5;
-  #BONUS_FIVE = 51;
-
   #numbers;
   #bonusNumber;
 
@@ -16,19 +13,17 @@ class WinningLotto {
   }
 
   countMatchingWith(numbers) {
+    const { FIVE, BONUS_FIVE } = MATCHING_COUNT;
+
     const matchingCount = numbers.countMatchingWith(this.#numbers);
-    if (matchingCount === this.#FIVE && this.#includesBonusNumber(numbers)) {
-      return this.#BONUS_FIVE;
+    if (matchingCount === FIVE && numbers.includes(this.#bonusNumber)) {
+      return BONUS_FIVE;
     }
     return matchingCount;
   }
 
-  #includesBonusNumber(numbers) {
-    return numbers.includes(this.#bonusNumber);
-  }
-
   #validate(bonusNumber) {
-    if (bonusNumber < LOTTO_NUMBER.min || bonusNumber > LOTTO_NUMBER.max) {
+    if (bonusNumber < LOTTO.number.min || bonusNumber > LOTTO.number.max) {
       throw new Error(ERROR.notOneToFortyFive);
     }
     if (this.#numbers.includes(bonusNumber)) {

@@ -1,17 +1,27 @@
-const LOTTO = {
-  count: 6,
-  price: 1000,
-};
-Object.freeze(LOTTO);
-
 const LOTTO_NUMBER = {
   min: 1,
   max: 45,
 };
 Object.freeze(LOTTO_NUMBER);
 
-const IGNORE_COUNT = [0, 1, 2];
-Object.freeze(IGNORE_COUNT);
+const LOTTO = {
+  count: 6,
+  price: 1000,
+  number: LOTTO_NUMBER,
+};
+Object.freeze(LOTTO);
+
+const IGNORE_MATCHING_COUNTS = [0, 1, 2];
+Object.freeze(IGNORE_MATCHING_COUNTS);
+
+const MATCHING_COUNT = {
+  THREE: 3,
+  FOUR: 4,
+  FIVE: 5,
+  BONUS_FIVE: 51,
+  SIX: 6,
+};
+Object.freeze(MATCHING_COUNT);
 
 const RANKING = {
   first: 1,
@@ -40,4 +50,11 @@ const PRIZE_MONEY_BY = {
 };
 Object.freeze(PRIZE_MONEY_BY);
 
-export { LOTTO, IGNORE_COUNT, RANKING, RANKING_BY, PRIZE_MONEY_BY };
+export {
+  LOTTO,
+  IGNORE_MATCHING_COUNTS,
+  MATCHING_COUNT,
+  RANKING,
+  RANKING_BY,
+  PRIZE_MONEY_BY,
+};

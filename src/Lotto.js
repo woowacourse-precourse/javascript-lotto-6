@@ -1,4 +1,4 @@
-import { LOTTO, LOTTO_NUMBER } from './LottoInfo.js';
+import { LOTTO } from './LottoInfo.js';
 import { ERROR } from './LottoMessage.js';
 
 class Lotto {
@@ -33,7 +33,7 @@ class Lotto {
     }
     if (
       numbers.some(
-        (number) => number < LOTTO_NUMBER.min || number > LOTTO_NUMBER.max,
+        (number) => number < LOTTO.number.min || number > LOTTO.number.max,
       )
     ) {
       throw new Error(ERROR.notOneToFortyFive);
