@@ -22,4 +22,22 @@ describe("WinLottoTest", () => {
       new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
     }).toThrow(ERROR_MESSAGE.duplicateNumbers);
   });
+
+  test("모든 번호가 일치하는 경우 [6]을 반환한다", () => {
+    const winningNumbers = ["1", "2", "3", "4", "5", "6"];
+    const bonusNumber = "7";
+    const ticketNumbers = [["1", "2", "3", "4", "5", "6"]];
+
+    const winLotto = new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
+    expect(winLotto.compareNumbers()).toEqual([6]);
+  });
+
+  test("5개의 번호가 일치하는 경우 [5]을 반환한다", () => {
+    const winningNumbers = ["1", "2", "3", "4", "5", "25"];
+    const bonusNumber = "7";
+    const ticketNumbers = [["1", "2", "3", "4", "5", "6"]];
+
+    const winLotto = new WinLotto(winningNumbers, bonusNumber, ticketNumbers);
+    expect(winLotto.compareNumbers()).toEqual([5]);
+  });
 });
