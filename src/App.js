@@ -106,12 +106,11 @@ class App {
         this.#USER_LOTTOS.push(new Lotto(this.makeEachLotto()).makeLotto());
       }
     } catch(e) {
-      Console.print(e);
-      this.makeLottoArray();
+      throw new Error(e);
     }
     
   }
-
+ 
   makeEachLotto() {
     const TMP_LOTTO = [];
 
@@ -122,8 +121,18 @@ class App {
       }
     }
 
+    TMP_LOTTO.sort();
+
     return TMP_LOTTO;
   }
+
+  printLottoArray() {
+    Console.print(`${this.#LOTTOS_MAX}개를 구매했습니다.`);
+    this.#USER_LOTTOS.forEach((lotto) => {
+      Console.print(lotto);
+    })
+  }
+
 
   async play() {
     await this.getInputPrice();
@@ -131,12 +140,7 @@ class App {
     await this.getInputWinningNumber();
     await this.getInputBonusNumber();
     this.makeLottoArray();
-
-    Console.print(this.#USER_PRICE);
-    Console.print(this.#LOTTOS_MAX);
-    Console.print(this.#WINNING_NUMBERS);
-    Console.print(this.#BONUS_NUMBER);
-    Console.print(this.#USER_LOTTOS);
+    this.printLottoArray();
   }
 }
 
