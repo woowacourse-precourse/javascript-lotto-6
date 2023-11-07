@@ -21,15 +21,13 @@ class LottoGame {
     // this.#view.printRaceResult({ winner, raceResult });
   }
   async #setConfig() {
-    //구입금액을 입력받아 로또수에 맞는 로또 번호를 출력한다.
     const purchaseAmount = await Input.getPurchaseAmount();
     const numberOfLotto = this.#exchangeTicket(purchaseAmount);
     const lotteries = this.#IssueLottery(numberOfLotto);
 
     Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
     lotteries.forEach((lottery) => {
-      // console.log(lottery);
-      Console.print(`${lottery.printLotto()}`);
+      Console.print(`[${lottery.printLotto()}]`);
     });
 
     //당첨 번호를 입력한다. (당첨번호 6자리+ 보너스번호)
@@ -54,7 +52,6 @@ class LottoGame {
         range.to,
         length
       );
-
       set.add(new Lotto(lottery.sort((a, b) => a - b)));
     }
     return Array.from(set);
