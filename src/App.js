@@ -12,8 +12,7 @@ class App {
   async buyLotto() {
     const money = await InputView.getUserPurchaseAmout();
     this.#lottos = Lotto.buyLottoTickets(money);
-    OutputView.printPurchaseAmout(this.#lottos.length);
-    this.#lottos.forEach((lotto) => MissionUtils.Console.print(lotto.toPrintableString()));
+    OutputView.printPurchaseAmout(this.#lottos);
   }
 
   async getWinningNumber() {

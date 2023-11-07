@@ -2,8 +2,11 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE } from "../constant/gameMessge.js";
 
 const OutputView = {
-  printPurchaseAmout(quantity) {
-    MissionUtils.Console.print(MESSAGE.result.Amount(quantity));
+  printPurchaseAmout(lottos) {
+    MissionUtils.Console.print(MESSAGE.result.Amount(lottos.length));
+    lottos.forEach((lotto) => {
+      MissionUtils.Console.print(lotto.toPrintableString());
+    });
   },
 
   printResultMsg() {
