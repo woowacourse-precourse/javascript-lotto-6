@@ -48,16 +48,17 @@ class Output {
     Console.print(`5개 일치, 보너스 볼 일치 (${prizes[4].toLocaleString()}원) - ${matchingCount5WithBonus}개`);
     totalPrize += prizes[4] * matchingCount5WithBonus;
 
-    printMatchingCount(6, 4);
+    printMatchingCount(6, 5);
 
     return totalPrize;
   }
 
   static calculateEarnings(totalPrize, purchaseAmount) {
-    const earnings = totalPrize - purchaseAmount;
-    const profitRatio = ((earnings / purchaseAmount) * 100).toFixed(2);
-    Console.print(`총 수익률은 ${profitRatio}%입니다.`);
+    const earnings = (totalPrize / +purchaseAmount) * 100;
+    Console.print(`총 수익률은 ${earnings.toFixed(1)}%입니다.`);
   }
+
+
 }
 
 export default Output;

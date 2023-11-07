@@ -38,7 +38,7 @@ class Controller {
     Console.print(`\n보너스 번호를 입력해 주세요.\n${this.lottoBonusNumber}`);
 
     const matchingCounts = Output.compareTickets(this.lottoTickets, this.lottoNumbers, this.lottoBonusNumber);
-    console.log(matchingCounts);
+    // console.log(matchingCounts);
 
     Console.print('\n당첨 통계');
     Console.print('---');
