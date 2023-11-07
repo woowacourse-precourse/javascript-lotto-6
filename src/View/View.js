@@ -37,6 +37,14 @@ class View {
     this.#printPurchasedLotto(purchasedLottos);
   }
 
+  printGameResult(prizes) {
+    this.#printPrizes(prizes);
+  }
+
+  #printPrizes(prizes) {
+    this.#outputView.print(MessageFormat.totalPrize(prizes));
+  }
+
   #printPurchasedQuantity(purchaseQuantity) {
     const message = MessageFormat.purchasedQuantity(purchaseQuantity);
 

@@ -1,7 +1,7 @@
 import Prize from '../Domain/Prize.js';
 
 class PrizeService {
-  static #defaultMatchCount = 0;
+  static #defaultCount = 0;
 
   static #countUnit = 1;
 
@@ -12,6 +12,16 @@ class PrizeService {
     });
 
     return Prize.getPrize({ matchCount, matchBonus });
+  }
+
+  countPrize(prizes) {
+    return prizes.reduce((acc, prize) => {
+      const { status } = prize;
+      acc[status] =
+        (acc[status] || PrizeService.#defaultCount) + PrizeService.#countUnit;
+
+      return acc;
+    }, {});
   }
 
   #matchLottoNumber({ lotto, winningLotto }) {
@@ -28,7 +38,7 @@ class PrizeService {
     return winningNumbers.reduce(
       (count, number) =>
         lotto.hasInclude(number) ? count + PrizeService.#countUnit : count,
-      PrizeService.#defaultMatchCount,
+      PrizeService.#defaultCount,
     );
   }
 }

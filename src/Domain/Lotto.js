@@ -3,6 +3,7 @@ import CustomError from '../errors/error.js';
 import Validator from '../utils/Validator.js';
 
 class Lotto {
+  // TODO: static 필드 상수로 분리하기.
   static minNumber = 1;
 
   static maxNumber = 45;

@@ -15,29 +15,20 @@ class Prize {
   }
 
   static getPrize({ matchCount, matchBonus }) {
-    const winningPrize = this.#checkWinningPrize({ matchCount, matchBonus });
-    const status = this.#checkStatus({ matchCount, matchBonus });
+    const prizeData = this.#getPrizeData({ matchCount, matchBonus });
 
     return new Prize({
-      winningPrize,
-      status,
+      winningPrize: prizeData?.winningPrize || this.#losePrize,
+      status: prizeData?.status || this.#losePrize,
     });
   }
 
-  static #checkWinningPrize({ matchCount, matchBonus }) {
-    if (matchCount === this.#matchFive && matchBonus) {
-      return PRIZE.matchFiveAndBonus.prize;
+  static #getPrizeData({ matchCount, matchBonus }) {
+    if (matchCount === Prize.#matchFive && matchBonus) {
+      return PRIZE.matchFiveAndBonus;
     }
 
-    return PRIZE[matchCount]?.prize || this.#losePrize;
-  }
-
-  static #checkStatus({ matchCount, matchBonus }) {
-    if (matchCount === this.#matchFive && matchBonus) {
-      return PRIZE.matchFiveAndBonus.status;
-    }
-
-    return PRIZE[matchCount]?.status || this.#losePrize;
+    return PRIZE[matchCount];
   }
 }
 

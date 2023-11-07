@@ -12,16 +12,29 @@ class LottoGameController {
   }
 
   async startGame() {
-    const lottos = await this.#purchaseLottos();
-    this.#view.printPurchasedResult(lottos);
+    const lottos = await this.#getLotto();
     const winningLotto = await this.#createWinningLotto();
 
+    const prizes = this.#getLottoPrize({ lottos, winningLotto });
+    this.#view.printGameResult(prizes);
+  }
+
+  #getLottoPrize({ lottos, winningLotto }) {
     const prizes = lottos.map((lotto) =>
       this.#prizeService.getPrize({ lotto, winningLotto }),
     );
+
+    return this.#prizeService.countPrize(prizes);
   }
 
-  async #purchaseLottos() {
+  async #getLotto() {
+    const lottos = await this.#purchaseLotto();
+    this.#view.printPurchasedResult(lottos);
+
+    return lottos;
+  }
+
+  async #purchaseLotto() {
     const purchaseAmount = await this.#view.readPurchaseAmount();
 
     return this.#lottoService.sellLotto(purchaseAmount);
