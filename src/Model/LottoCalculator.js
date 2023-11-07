@@ -1,4 +1,4 @@
-import { STATISTICS } from "./Constant.js";
+import { STATISTICS } from "../Constants/Constant.js";
 
 class LottoCalculator {
   #winningNumbers;

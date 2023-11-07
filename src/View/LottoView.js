@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { SCOREBOARD } from "./Constant.js";
+import { SCOREBOARD } from "../Constants/Constant.js";
 
 class LottoView {
   createPurchaseData(numberOfSets, lottoNumbers) {

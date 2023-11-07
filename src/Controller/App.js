@@ -1,7 +1,7 @@
-import Lotto from "./Lotto.js";
-import LottoCalculator from "./LottoCalculator.js";
-import UserInput from "./UserInput.js";
-import LottoView from "./LottoView.js";
+import Lotto from "../Model/Lotto.js";
+import LottoCalculator from "../Model/LottoCalculator.js";
+import UserInput from "../Utilities/UserInput.js";
+import LottoView from "../View/LottoView.js";
 
 class App {
   async play() {

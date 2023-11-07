@@ -1,4 +1,4 @@
-import LottoView from "../src/LottoView.js";
+import LottoView from "../src/View/LottoView.js";
 import { Console } from "@woowacourse/mission-utils";
 
 jest.mock("@woowacourse/mission-utils", () => ({
