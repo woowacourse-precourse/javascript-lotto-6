@@ -54,7 +54,7 @@ class WinningLotto{
             let matchCount = lottoNumbers.filter(num => this.#winningnumbers.includes(num));
             matchCount = matchCount.length;
             let bonus = lottoNumbers.includes(bonusNumber);
-            let key = (matchCount === 6 && bonus) ? '5+' : matchCount.toString();
+            let key = (matchCount === 5 && bonus) ? '5+' : matchCount.toString();
 
             if (result.has(key)){
                 result.set(key, result.get(key)+1)
