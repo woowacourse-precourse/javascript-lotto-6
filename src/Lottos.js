@@ -17,14 +17,19 @@ class Lottos{
             Console.print('[ERROR] 숫자만 입력 가능합니다.');
             return;
         }   
-        if (Money%1000!=0 && Money>1000){
+        else if (Money%1000!=0 && Money>1000){
             this.stoporkeep=false;
             Console.print('[ERROR] 1000원으로 떨어지는 금액을 지불해야 합니다.');
             return;
         }
-        if (Money<1000){
+        else if (Money<1000){
             this.stoporkeep=false;
             Console.print('[ERROR] 1000원이상의 금액을 지불해야 합니다.');
+            return;
+        }
+        else if (money[0]=='0'){
+            this.stoporkeep=false;
+            Console.print('[ERROR] 금액은 0이 아닌 숫자로 시작해야 합니다.');
             return;
         }
         else{
