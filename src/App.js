@@ -160,29 +160,37 @@ class App {
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
-  checkUserLotto(mainNumber,bonusNumber,lotto){
+  checkUserLotto(mainNumber, bonusNumber, lotto) {
     let checkNumber = mainNumber.filter(x => lotto.includes(x));
     let countScore = checkNumber.length;
+
     if (countScore === 3) {
       this.countWinner[5]++;
-    } else if (countScore === 4) {
+    }
+
+    if (countScore === 4) {
       this.countWinner[4]++;
-    } else if (countScore === 5) {
-      // 3등부터는 보너스 유무 중요
+    }
+
+    if (countScore === 5) {
       const bonusMatch = lotto.includes(bonusNumber[0]);
+      // 보너스 포함 5개 3등 제외 5개 2등 
       if (bonusMatch) {
-        this.countWinner[3]++; // 보너스 포함 5개 3등
-      } else {
-        this.countWinner[2]++; // 보너스 제외 5개 2등 
+        this.countWinner[3]++;
+      } 
+      if (!bonusMatch) {
+        this.countWinner[2]++;
       }
-    } else if (countScore === 6) {
+    }
+
+    if (countScore === 6) {
       this.countWinner[1]++;
-    } else {
+    }
+
+    if (countScore !== 3 && countScore !== 4 && countScore !== 5 && countScore !== 6) {
       this.countWinner[6]++;
     }
   }
-
-
   
 }
 
