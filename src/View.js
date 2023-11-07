@@ -8,7 +8,7 @@ class View {
 
   static async inputSixWinningNumbers() {
     const numbers = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-    return numbers;
+    return numbers.replace(/ /g, '');
   }
 
   static async inputBonusNumber() {

@@ -26,7 +26,8 @@ class App {
   async getPrice() {
     this.amount = await View.inputAmountOfMoney();
     try {
-      Validate.inputUserPay(this.amount);
+      Validate.isItNumber(this.amount);
+      Validate.isItUnitOf1000(this.amount);
       this.userLotto = new UserLotto(this.amount / 1000);
     } catch (err) {
       Console.print(err.message);
@@ -43,12 +44,22 @@ class App {
   async getWinningNumber() {
     let numbers = await View.inputSixWinningNumbers();
     numbers = numbers.split(',');
-    this.lotto = new Lotto(numbers);
+    try {
+      this.lotto = new Lotto(numbers);
+    } catch (err) {
+      Console.print(err.message);
+      await this.getWinningNumber();
+    }
   }
 
   async getBonusNumber() {
     const bonusNumber = await View.inputBonusNumber();
-    this.bonus = new Bonus(bonusNumber, this.lotto.getNumbers());
+    try {
+      this.bonus = new Bonus(bonusNumber, this.lotto.getNumbers());
+    } catch (err) {
+      Console.print(err.message);
+      await this.getBonusNumber();
+    }
   }
 
   computeConditions() {
