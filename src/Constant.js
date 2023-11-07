@@ -18,5 +18,4 @@ export const MESSAGE = Object.freeze({
   RESULT_FIVE: "5개 일치 (1,500,000원) - ",
   RESULT_FIVE_BONUS: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
   RESULT_SIX: "6개 일치 (2,000,000,000원) - ",
-  RESULT_PROFIT_RATE: "총 수익률은 ",
 });

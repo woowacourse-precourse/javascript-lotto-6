@@ -16,17 +16,6 @@ class Validation {
     return true;
   }
 
-  static validateLottoNumbers(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error(MESSAGE.ERROR_LOTTO_NUMBER);
-    }
-
-    if (new Set(numbers).size !== 6) {
-      throw new Error(MESSAGE.ERROR_NUMBER_DUPLICATED);
-    }
-    return true;
-  }
-
   static validateWinningNumbers(numbers) {
     const winningNumbers = numbers.split(",").map(Number);
     if (winningNumbers.length !== 6) throw new Error(MESSAGE.ERROR_WINNING_NUMBER);

@@ -9,9 +9,7 @@ class LottoGame {
       let lotto = new Lotto(
         MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
       );
-      if (Validation.validateLottoNumbers(lotto.getNumbers())) {
-        lottos.push(lotto);
-      }
+      lottos.push(lotto);
     }
     return lottos;
   }

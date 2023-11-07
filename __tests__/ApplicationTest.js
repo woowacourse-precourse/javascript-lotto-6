@@ -96,7 +96,7 @@ describe("로또 테스트", () => {
   });
 
   test("예외 테스트", async () => {
-    await runException("1000j");
+    await expect(runException("1000j")).rejects.toThrow("[ERROR]");
   });
 
   test("구입금액 0일 경우 예외 테스트", async () => {
@@ -116,11 +116,7 @@ describe("로또 테스트", () => {
       [1, 2, 3, 4, 5, 6],
       [6, 7, 8, 9, 10, 11],
     ];
-    MissionUtils.Random.pickUniqueNumbersInRange = jest
-      .fn()
-      .mockReturnValueOnce(mockNumbers[0])
-      .mockReturnValueOnce(mockNumbers[1])
-      .mockReturnValueOnce(mockNumbers[2]);
+    mockRandoms(mockNumbers);
 
     const lottos = LottoGame.generateLottos(count);
     expect(lottos.length).toBe(count);
