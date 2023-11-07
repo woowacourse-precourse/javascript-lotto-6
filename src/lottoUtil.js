@@ -134,3 +134,20 @@ export function getRankMap(ranks) {
     ranks.filter(rank => resultMap.has(rank)).forEach(rank => resultMap.set(rank, resultMap.get(rank) + 1));
     return resultMap;
 }
+
+/**
+ * @param {Lotto[]} lottos
+ * @param {WinLotto} winLotto
+ * @return {Map<number, number>}
+ */
+export function runCalculate(lottos, winLotto) {
+    const winLottoSet = new Set([...winLotto.getLotto().getNumbers()]);
+    const ranks = lottos
+        .map(lotto => lotto.getNumbers())
+        .map(lottoNumbers => [
+            checkAnswerCnt(lottoNumbers, winLottoSet),
+            checkHasBonus(lottoNumbers, winLotto.getBonusNumber()),
+        ])
+        .map(([answerCnt, hasBonusNumber]) => lottoRank(answerCnt, hasBonusNumber));
+    return getRankMap(ranks);
+}
