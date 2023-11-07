@@ -38,6 +38,7 @@ class Store {
 
   calculateLottoAmount() {
     const lottoAmount = this.#money / 1000;
+    Console.print(`${lottoAmount}개를 구매했습니다.`);
     return lottoAmount;
   }
 
