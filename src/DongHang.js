@@ -45,18 +45,27 @@ class DongHang {
    * @returns {Promise<WinningNumbers>}
    */
   static async makeWinningNumbers() {
-    const mainInput = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
-    const main = mainInput.sort((a, b) => a - b);
+    const mainInput = await this.inputMainNumbers();
     const bonusInput = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
 
     if (!NumberValidator.isInRange(bonusInput, LOTTO_RANGE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
     }
-    if (main.includes(bonusInput)) {
+    if (mainInput.includes(bonusInput)) {
       throw new CustomError(ERROR_MESSAGE.DUPLICATED_NUMBER);
     }
 
-    return new WinningNumbers(main, bonusInput);
+    return new WinningNumbers(mainInput, bonusInput);
+  }
+
+  static async inputMainNumbers() {
+    const mainInput = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
+    if (mainInput.length !== LOTTO_COUNT) {
+      throw new CustomError(ERROR_MESSAGE.NOT_IN_LOTTO_COUNT);
+    }
+    const sorted = mainInput.sort((a, b) => a - b);
+
+    return sorted;
   }
 }
 

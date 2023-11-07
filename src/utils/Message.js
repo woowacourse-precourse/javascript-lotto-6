@@ -4,6 +4,13 @@ import { LOTTO_STATISTICS, LOTTO_STATISTICS_TITLE } from '../constants/number.js
 
 class Message {
   /**
+   * @param {Error} error
+   */
+  static error(error) {
+    Console.print(error.message);
+  }
+
+  /**
    * @param {number} count
    */
   static youBought(count) {
