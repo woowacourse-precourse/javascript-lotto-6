@@ -14,6 +14,10 @@ class Validator {
     return VALIDATOR.DIGITS_REGEX.test(string);
   }
 
+  static isStringOnlyDigitsAndComma(string) {
+    return VALIDATOR.DIGITS_COMMA_REGEX.test(string);
+  }
+
   static isDivisible(dividend, divisor) {
     return dividend % divisor === 0;
   }
