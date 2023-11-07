@@ -4,6 +4,11 @@ const LOTTO_RULES = {
   pickCount: 6,
 };
 
+const LOTTO_MACHINE_RULES = {
+  minimumWiningCount: 3,
+  inputUnit: 1000,
+};
+
 const MATCHES_TO_RANK = {
   5: 3,
   4: 4,
@@ -20,4 +25,4 @@ const WINNING_RANK_TO_PRIZE = {
   5: 5_000,
 };
 
-export { LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE };
+export { LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE, LOTTO_MACHINE_RULES };

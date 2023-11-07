@@ -3,26 +3,17 @@ import InputView from '../view/InputView.js';
 import LottoPlayer from '../model/LottoPlayer.js';
 import Lotto from '../Lotto.js';
 import OutputView from '../view/OutputView.js';
-import { LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
+import { LOTTO_MACHINE_RULES, LOTTO_RULES, MATCHES_TO_RANK, WINNING_RANK_TO_PRIZE } from '../constants/Rules.js';
 import { ERROR_MESSAGE } from '../constants/Messages.js';
 
 export default class LottoMachine {
-  #purchaseAmount;
   #player;
   #winningNumbers;
   #bonusNumber;
-  #MINIMUM_WINNING_COUNT;
-  #INPUT_UNIT;
-
-  constructor() {
-    this.#purchaseAmount = 0;
-    this.#MINIMUM_WINNING_COUNT = 3;
-    this.#INPUT_UNIT = 1000;
-  }
 
   async run() {
-    this.#purchaseAmount = await this.#getPurchaseAmount();
-    this.#makeLottos(this.#purchaseAmount);
+    this.#player = new LottoPlayer(await this.#getPurchaseAmount());
+    this.#makeLottos(this.#player.getPurchaseAmount());
     OutputView.printLottoTickets(this.#player.getLottoTickets());
     this.#winningNumbers = await this.#getWinningNumbers();
     OutputView.printNewLine();
@@ -52,8 +43,7 @@ export default class LottoMachine {
   }
 
   #makeLottos(purchaseAmount) {
-    const lottoTicketCount = purchaseAmount / this.#INPUT_UNIT;
-    this.#player = new LottoPlayer(purchaseAmount);
+    const lottoTicketCount = purchaseAmount / LOTTO_MACHINE_RULES.inputUnit;
 
     for (let i = 1; i <= lottoTicketCount; i += 1) {
       this.#player.setLottoTickets(this.#makeOneLotto());
@@ -68,6 +58,7 @@ export default class LottoMachine {
         const purchaseAmountInput = await InputView.readPurchaseAmount();
         const parsePurchaseAmount = Number(purchaseAmountInput);
         await this.#purchaseAmountValidate(parsePurchaseAmount);
+
         return parsePurchaseAmount;
       } catch (e) {
         Console.print(e.message);
@@ -76,7 +67,7 @@ export default class LottoMachine {
   }
 
   async #purchaseAmountValidate(purchaseAmount) {
-    if (purchaseAmount % this.#INPUT_UNIT !== 0) {
+    if (purchaseAmount % LOTTO_MACHINE_RULES.inputUnit !== 0) {
       throw new Error(ERROR_MESSAGE.unit);
     }
   }
@@ -119,7 +110,7 @@ export default class LottoMachine {
         .getNumbers()
         .filter((number) => this.#winningNumbers.getNumbers().includes(number)).length;
 
-      if (correctCount >= this.#MINIMUM_WINNING_COUNT) {
+      if (correctCount >= LOTTO_MACHINE_RULES.minimumWiningCount) {
         this.#player.setRankCounts(correctCount, isIncludedBonusNumber);
       }
     });
