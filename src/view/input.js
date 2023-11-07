@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import { isDuplicated, isEmpty, isPositiveInteger } from '../utils.js';
+import { isEmpty, isPositiveInteger } from '../utils.js';
 import { ERROR, LOTTO } from '../config.js';
+import WinningLotto from '../WinningLotto.js';
 
 const MESSAGE = Object.freeze({
   AMOUNT_TO_BUY: '구입금액을 입력해 주세요.\n',
@@ -22,22 +23,18 @@ export default class Input {
     }
     return amount;
   }
-  static async winningNumber() {
-    let winningNumber = '';
+  static async winningNumbers() {
+    let winningLotto = null;
     try {
-      winningNumber = await Input.readTrimmedLineAsync(MESSAGE.WINNING_NUMBER);
+      let winningNumber = await Input.readTrimmedLineAsync(MESSAGE.WINNING_NUMBER);
       if (isEmpty(winningNumber)) throw new Error(ERROR.IS_EMPTY);
       winningNumber = winningNumber.split(',').map((number) => number.trim());
-      if (!winningNumber.every(isPositiveInteger)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
-      if (winningNumber.length !== LOTTO.COUNT) throw new Error(ERROR.IS_NOT_LOTTO_LENGTH);
-      if (isDuplicated(winningNumber)) throw new Error(ERROR.IS_DUPLICATED);
-      if (winningNumber.some((number) => number < LOTTO.RANGE.START || number > LOTTO.RANGE.END))
-        throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
+      winningLotto = new WinningLotto(winningNumber);
     } catch (e) {
       Console.print(e.message);
-      winningNumber = await Input.winningNumber();
+      winningLotto = await Input.winningNumbers();
     }
-    return winningNumber;
+    return winningLotto;
   }
 
   static async bonusNumber() {}

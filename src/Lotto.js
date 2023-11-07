@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { LOTTO } from './config.js';
-import { isDuplicated } from './utils.js';
+import { ERROR, LOTTO } from './config.js';
+import { isDuplicated, isPositiveInteger } from './utils.js';
 
 class Lotto {
   static generateLottoNumbers() {
@@ -23,11 +23,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== LOTTO.COUNT) {
+      throw new Error(ERROR.IS_NOT_LOTTO_LENGTH);
     }
     if (isDuplicated(numbers)) {
-      throw new Error('[ERROR] 로또 번호에 중복된 숫자가 있습니다.');
+      throw new Error(ERROR.IS_DUPLICATED);
+    }
+    if (!numbers.every(isPositiveInteger)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
+    if (isDuplicated(numbers)) throw new Error(ERROR.IS_DUPLICATED);
+    if (numbers.some((number) => number < LOTTO.RANGE.START || number > LOTTO.RANGE.END)) {
+      throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
     }
   }
 
