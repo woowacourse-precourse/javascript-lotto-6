@@ -14,7 +14,6 @@ export const printError = (error) => {
 };
 
 /**
- * @public
  * @param {string[]} lottoList
  * @param {number} lottoAmount
  */
@@ -24,9 +23,8 @@ export const printLottoNumbers = ({ lottoList, lottoAmount }) => {
 };
 
 /**
- * @public
  * @param {number[]} lottoResult
- * @param {number} profit
+ * @param {string} profit
  */
 export const printLottoResults = (lottoResult, profit) => {
   Console.print(LOTTO_NOTIFICATION_MESSAGE.result);

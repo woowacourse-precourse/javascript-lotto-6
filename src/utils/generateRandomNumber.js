@@ -1,7 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 
 /**
- * @public
  * @param {number} startNum
  * @param {number} endNum
  * @param {number} amount
@@ -11,7 +10,6 @@ const generateRandomNumbers = (startNum, endNum, amount) =>
   Random.pickUniqueNumbersInRange(startNum, endNum, amount);
 
 /**
- * @public
  * @param {number} startNum
  * @param {number} endNum
  * @param {number} amount
