@@ -9,7 +9,21 @@ class App {
       Console.print("[ERROR] 1,000원 단위로 입력하세요.");
       return;
     }
-    this.SHOW_WINNING(WINNING);
+
+    const TICKET_COUNT = SUM_OF_PURCHASE / 1000;
+    Console.print(`\n${TICKET_COUNT}개를 구매했습니다.`);
+
+    const LOTTO_TICKETS = this.generateLotto(TICKET_COUNT);
+    const { WINNING_NUMBERS, BONUS_NUMBER } =
+      await this.INPUT_WINNING_NUMBERS();
+
+    const WINNING = this.CHECK_LOTTO_TICKETS(
+      LOTTO_TICKETS,
+      WINNING_NUMBERS,
+      BONUS_NUMBER
+    );
+
+    this.SHOW_WINNING(WINNING, TICKET_COUNT);
   }
 
   async inputAmount() {
