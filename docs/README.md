@@ -2,6 +2,26 @@
 
 # 파일 구조
 
+```
+src/
+├── constants/
+│   ├── lotto.js
+│   ├── message.js
+│   ├── statistics.js
+├── module/
+│   ├── setting.js
+│   ├── statistics.js
+├── utils/
+│   ├── calculator.js
+│   ├── validator.js
+├── view/
+│   ├── view.js
+├── App.js
+├── Bonus.js
+├── index.js
+├── Lotto.js
+```
+
 # 기능 명세서
 
 ## input/Output
@@ -88,10 +108,6 @@ n개를 구매했습니다.
 ```
 
 - 예외에 맞는 에러 문구를 출력한다.
-
-## Game Flow
-
-## Error
 
 # 추가된 프로그래밍 요구 사항
 
