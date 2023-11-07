@@ -2,6 +2,14 @@ import Input from "./Input";
 import Lotto from "./Lotto";
 import { LOTTO_CONSTANT, pickUniqueRandomNumbers, printOutput } from "./utils";
 
+const MESSAGES = Object.freeze({
+  BUYING_COUNT: (count) => `${count}개를 구매했습니다.`,
+  LOTTO_NUMBERS: (string) => `[${string.join(", ")}]`,
+  LOTTO_RESULT_START: `\n당첨 통계\n---`,
+  LOTTO_RESULT_DETAIL: (string, count) => `${string} - ${count}개`,
+  RATE_INCOME: (RATE) => `총 수익률은 ${RATE}%입니다.`,
+});
+
 class App {
   #RANK_INFO = {
     1: { STRING: "6개 일치 (2,000,000,000원)", PRICE: 2000000000 },
@@ -50,11 +58,11 @@ class App {
   }
 
   #printLottoCount(count) {
-    printOutput(`${count}개를 구매했습니다.`);
+    printOutput(MESSAGES.BUYING_COUNT(count));
   }
 
   #printLottoNumbers(lottoNumbers) {
-    printOutput(`[${lottoNumbers.join(", ")}]`);
+    printOutput(MESSAGES.LOTTO_NUMBERS(lottoNumbers));
   }
 
   calculLottoResult() {
@@ -74,12 +82,12 @@ class App {
   }
 
   printLottoResult(lottoRanks) {
-    printOutput(`\n당첨 통계\n---`);
+    printOutput(MESSAGES.LOTTO_RESULT_START);
 
     for (let rank = this.#NUMBER_OF_RANK; rank > 0; rank -= 1) {
       const COUNT = lottoRanks[rank];
-      const STRING = `${this.#RANK_INFO[rank].STRING} - ${COUNT}개`;
-      printOutput(STRING);
+      const RANK_STRING = this.#RANK_INFO[rank].STRING;
+      printOutput(MESSAGES.LOTTO_RESULT_DETAIL(RANK_STRING, COUNT));
     }
   }
 
@@ -90,8 +98,7 @@ class App {
     });
 
     const RATE_INCOME = Math.round((income / this.userInput.money) * 1000) / 10;
-    const STRING = `총 수익률은 ${RATE_INCOME}%입니다.`;
-    printOutput(STRING);
+    printOutput(MESSAGES.RATE_INCOME(RATE_INCOME));
   }
 }
 

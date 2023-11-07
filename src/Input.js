@@ -1,5 +1,37 @@
 import { LOTTO_CONSTANT, printOutput, readInput } from "./utils";
 
+const MONEY_MESSAGES = Object.freeze({
+  QUESTION: "\n구입금액을 입력해 주세요.\n",
+  ERROR: {
+    MUST_NUMBER: "[ERROR] 숫자만 입력해주세요.",
+    NO_SPACE: "[ERROR] 공백을 입력하셨습니다.",
+    MUST_DIVIED: `[ERROR] ${LOTTO_CONSTANT.LOTTO_PRICE}원 단위로 입력해주세요.`,
+  },
+});
+
+const NUMBERS_MESSAGES = Object.freeze({
+  QUESTION: "\n당첨 번호를 입력해 주세요.\n",
+  ERROR: {
+    MUST_SAME_LENGTH: `[ERROR] 숫자는 ${LOTTO_CONSTANT.LOTTO_LENGTH}개를 입력해주세요.`,
+    NO_DUPLICATE_NUMBER: "[ERROR] 중복된 숫자를 입력하셨습니다.",
+  },
+});
+
+const NUMBER_MESSAGES = Object.freeze({
+  ERROR: {
+    MUST_NUMBER: "[ERROR] 숫자만 입력해주세요.",
+    NO_SPACE: "[ERROR] 공백을 입력하셨습니다.",
+    MUST_IN_RANGE: `[ERROR] 숫자의 범위는 ${LOTTO_CONSTANT.MIN_LOTTO_NUMBER}~${LOTTO_CONSTANT.MAX_LOTTO_NUMBER} 이어야 합니다.`,
+  },
+});
+
+const BONUS_MESSAGES = Object.freeze({
+  QUESTION: "\n보너스 번호를 입력해 주세요.\n",
+  ERROR: {
+    NO_DUPLICATE_NUMBER: "[ERROR] 중복된 숫자를 입력하셨습니다.",
+  },
+});
+
 class Input {
   async handleMoney() {
     let money;
@@ -13,22 +45,21 @@ class Input {
   }
 
   async readMoneyBuyingLotto() {
-    const INPUT = await readInput("\n구입금액을 입력해 주세요.\n");
+    const INPUT = await readInput(MONEY_MESSAGES.QUESTION);
     this.#validLottoMoney(INPUT);
     return Number(INPUT);
   }
 
   #validLottoMoney(input) {
     const INPUT_NUMBER = Number(input);
-    const LOTTO_PRICE = 1000;
     if (Number.isNaN(INPUT_NUMBER)) {
-      throw new Error("[ERROR] 숫자만 입력해주세요.");
+      throw new Error(MONEY_MESSAGES.ERROR.MUST_NUMBER);
     }
     if (!input.trim()) {
-      throw new Error("[ERROR] 공백을 입력하셨습니다.");
+      throw new Error(MONEY_MESSAGES.ERROR.NO_SPACE);
     }
-    if (INPUT_NUMBER % LOTTO_PRICE !== 0) {
-      throw new Error("[ERROR] 1,000원 단위로 입력해주세요.");
+    if (INPUT_NUMBER % LOTTO_CONSTANT.LOTTO_PRICE !== 0) {
+      throw new Error(MONEY_MESSAGES.ERROR.MUST_DIVIED);
     }
   }
 
@@ -44,7 +75,7 @@ class Input {
   }
 
   async readLottoNumbers() {
-    const INPUT = await readInput("\n당첨 번호를 입력해 주세요.\n");
+    const INPUT = await readInput(NUMBERS_MESSAGES.QUESTION);
     const NUMBERS = INPUT.split(",").map(Number);
     this.#validLottoNumbers(NUMBERS);
     return NUMBERS;
@@ -52,11 +83,10 @@ class Input {
 
   #validLottoNumbers(numbers) {
     if (numbers.length !== LOTTO_CONSTANT.LOTTO_LENGTH) {
-      const STRING = `[ERROR] 숫자는 ${LOTTO_CONSTANT.LOTTO_LENGTH}개를 입력해주세요.`;
-      throw new Error(STRING);
+      throw new Error(NUMBERS_MESSAGES.ERROR.MUST_SAME_LENGTH);
     }
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error("[ERROR] 중복된 숫자를 입력하셨습니다.");
+      throw new Error(NUMBERS_MESSAGES.ERROR.NO_DUPLICATE_NUMBER);
     }
     numbers.forEach((number) => {
       this.#validNumber(number);
@@ -65,17 +95,16 @@ class Input {
 
   #validNumber(number) {
     if (Number.isNaN(number)) {
-      throw new Error("[ERROR] 숫자만 입력해주세요.");
+      throw new Error(NUMBER_MESSAGES.ERROR.MUST_NUMBER);
     }
     if (!number) {
-      throw new Error("[ERROR] 공백을 입력하셨습니다.");
+      throw new Error(NUMBER_MESSAGES.ERROR.NO_SPACE);
     }
-    if (
-      number < LOTTO_CONSTANT.MIN_LOTTO_NUMBER ||
-      number > LOTTO_CONSTANT.MAX_LOTTO_NUMBER
-    ) {
-      const STRING = `[ERROR] 숫자의 범위는 ${LOTTO_CONSTANT.MIN_LOTTO_NUMBER}~${LOTTO_CONSTANT.MAX_LOTTO_NUMBER} 이어야 합니다.`;
-      throw new Error(STRING);
+    const IS_NUMBER_IN_RANGE =
+      number >= LOTTO_CONSTANT.MIN_LOTTO_NUMBER &&
+      number <= LOTTO_CONSTANT.MAX_LOTTO_NUMBER;
+    if (!IS_NUMBER_IN_RANGE) {
+      throw new Error(NUMBER_MESSAGES.ERROR.MUST_IN_RANGE);
     }
   }
 
@@ -91,7 +120,7 @@ class Input {
   }
 
   async readBonusNumber() {
-    const INPUT = await readInput("\n보너스 번호를 입력해 주세요.\n");
+    const INPUT = await readInput(BONUS_MESSAGES.QUESTION);
     this.#validBonusNumber(INPUT);
     return Number(INPUT);
   }
@@ -101,7 +130,7 @@ class Input {
 
     this.#validNumber(INPUT_NUMBER);
     if (this.lottoNumbers.includes(INPUT_NUMBER)) {
-      throw new Error("[ERROR] 중복된 숫자를 입력하셨습니다.");
+      throw new Error(BONUS_MESSAGES.ERROR.NO_DUPLICATE_NUMBER);
     }
   }
 }
