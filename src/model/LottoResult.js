@@ -22,7 +22,7 @@ export default class LottoResult {
     return Object.keys(PRIZES).reduce((acc, key) => {
       acc[key] = { count: 0, prize: PRIZES[key] };
       return acc;
-    }, []);
+    }, {});
   }
 
   #calculateResults() {
