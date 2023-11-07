@@ -16,7 +16,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== NUMBER.TOTAL_LOTTO_NUMBER) {
       throw new Error(ERROR.LIMIT_LOTTO_NUMBERS);
     } else if (this.findStringInNumbers(numbers)) {
       throw new Error(ERROR.STRING_IN_LOTTO_NUMBERS);
