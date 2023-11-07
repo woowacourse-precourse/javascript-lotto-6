@@ -25,9 +25,9 @@ export default class LottoAnswer extends Lotto {
 
 	#validateOverLength(bonusNumber) {
 		if (bonusNumber.length !== LOTTO_SETTINGS.BONUS_NUMBER_LENGTH) {
-			throw new Error(ERROR_MESSAGE.LOTTO_LENGTH_ERROR);
+			throw new Error(ERROR_MESSAGE.BONUS_LENGTH_ERROR);
 		}
-	}
+  }
 
 	#validateBonusNumber(bonusNumber) {
 		const number = bonusNumber;

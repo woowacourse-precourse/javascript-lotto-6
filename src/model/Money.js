@@ -5,13 +5,14 @@ export default class Money {
 	#money;
 
 	constructor(money) {
-		this.#validateIsNumber(money);
+		this.#validateIsInteger(money);
+    this.#validatePositiveNumber(money);
 		this.#validateIsDivided(money);
 		this.#money = Number(money);
 	}
 
-  #validateIsNumber(money) {
-    if (isNaN(money)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+  #validateIsInteger(money) {
+    if (!Number.isInteger(+money)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
   }
 
   #validateIsDivided(money) {
@@ -22,6 +23,13 @@ export default class Money {
       throw new Error(ERROR_MESSAGE.AMOUNT_DIVIDE);
     }
   }
+
+  #validatePositiveNumber(money) {
+    if (money <= 0) {
+      throw new Error(ERROR_MESSAGE.NOT_POSITIVE_NUMBER)
+    }
+  }
+
 
   getMoney() {
     return this.#money;

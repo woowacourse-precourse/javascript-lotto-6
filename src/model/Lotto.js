@@ -38,18 +38,17 @@ class Lotto {
     }
   }
 
-  #validatePositiveNumber(numbers) {
-    const check = /^[0-9]+$/;
-    for (let number of numbers){
-        if (!check.test(number)) throw new Error(ERROR_MESSAGE.NOT_POSITIVE_NUMBER); // // 나중에 에러 메시지로 빼기
-    }
+  #validateIsInteger(numbers) {
+    numbers.map((number) => {
+      if (!Number.isInteger(+number)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+    })
   }
 
   #validateNumbers(numbers) {
     const checkNumber = numbers;
+    this.#validateIsInteger(checkNumber);
     this.#validateLength(checkNumber);
     this.#validateDuplicate(checkNumber);
-    this.#validatePositiveNumber(checkNumber);
     this.#validateRange(checkNumber);
     return checkNumber;
   }
