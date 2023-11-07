@@ -13,7 +13,7 @@ const InputView = {
 
   readWinningNumbers: async () => {
     const input = await Console.readLineAsync(MESSAGE.read.winningNumbers);
-    const winningNumbers = input.split(',').map(item => item.trim());
+    const winningNumbers = input.split(',').map(item => Number(item.trim()));
 
     Validator.validateWinningNumbers(winningNumbers);
 
