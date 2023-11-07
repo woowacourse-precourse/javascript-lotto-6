@@ -53,6 +53,14 @@ class App {
     
     return this.number;
   }
+
+  async bonusNumInput() {
+    const input = await Console.readLineAsync("\n보너스 번호를 입력해 주세요. \n");
+
+    this.validBonusInput(Number(input));
+    
+    this.bonus = Number(input);
+    return this.bonus;
   }
 
     }
