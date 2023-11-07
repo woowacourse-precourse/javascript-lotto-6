@@ -38,6 +38,7 @@ const isNumberInRange = (input) => {
   }
 };
 
+
 const validateGoalNumber = (numbers) => {
   numbers.forEach((number) => {
     isNumber(number);
@@ -53,4 +54,10 @@ const validatePurchaseAmount = (purchaseAmount) => {
   isDisvisible(purchaseAmount);
 };
 
-export { validatePurchaseAmount, validateGoalNumber };
+const validateBonusNumber = (bonusNumber, goalLotto) =>{
+  isNumber(bonusNumber);
+  isNumberInRange(bonusNumber);
+  isNotDuplicated([...goalLotto,Number(bonusNumber)]);
+}
+
+export { validatePurchaseAmount, validateGoalNumber, validateBonusNumber };

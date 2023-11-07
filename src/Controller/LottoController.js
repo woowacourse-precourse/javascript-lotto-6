@@ -2,7 +2,7 @@ import View from '../View/View.js';
 import Lotto from '../Model/Lotto.js';
 import { Random } from '@woowacourse/mission-utils';
 import Constant from '../Constants/Constant.js';
-import { validateGoalNumber } from '../Validator/Validate.js';
+import { validateBonusNumber, validateGoalNumber } from '../Validator/Validate.js';
 
 class LottoController {
   #view;
@@ -21,6 +21,7 @@ class LottoController {
     const goalLotto = new Lotto(goalNumber.split(',').map(Number));
     validateGoalNumber(goalLotto.getNumbers().sort((a, b) => a - b));
     const bonusNumber = await this.#view.getBonusNumber();
+    validateBonusNumber(bonusNumber, goalLotto.getNumbers());
   }
 
   #getCountOfLotto(purchaseAmount) {
