@@ -6,6 +6,7 @@ import WinningLotto from '../WinningLotto.js';
 const MESSAGE = Object.freeze({
   AMOUNT_TO_BUY: '구입금액을 입력해 주세요.\n',
   WINNING_NUMBER: '\n당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export default class Input {
@@ -36,7 +37,16 @@ export default class Input {
     return winningLotto;
   }
 
-  static async bonusNumber() {}
+  static async bonusNumber(winningLotto) {
+    try {
+      const bonusNumber = await Input.readTrimmedLineAsync(MESSAGE.BONUS_NUMBER);
+      if (isEmpty(bonusNumber)) throw new Error(ERROR.IS_EMPTY);
+      winningLotto.setBonusNumber(bonusNumber);
+    } catch (e) {
+      Console.print(e.message);
+      await Input.bonusNumber(winningLotto);
+    }
+  }
   static async readTrimmedLineAsync(message) {
     return Console.readLineAsync(message).then((input) => input.trim());
   }

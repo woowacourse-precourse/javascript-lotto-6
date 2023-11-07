@@ -8,6 +8,7 @@ class App {
     const lottos = await Lotto.createLottos(amount);
     Output.purchasedLottoNumbers(lottos);
     const winningLotto = await Input.winningNumbers();
+    await Input.bonusNumber(winningLotto);
   }
 }
 
