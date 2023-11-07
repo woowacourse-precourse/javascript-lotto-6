@@ -5,13 +5,10 @@ class App {
     const purchaseAmountInput = await Console.readLineAsync(
       '구입금액을 입력해 주세요.\n'
     );
+    const purchaseAmount = parseInt(purchaseAmountInput);
 
-    if (purchaseAmountInput.length === 0) {
-      throw new Exception('[ERROR] 입력값이 존재하지 않습니다.');
-    }
-
-    if (/[\n\s]|[^0-9]/.test(purchaseAmountInput)) {
-      throw new Exception('[ERROR] 숫자가 아닌 값이 있습니다.');
+    if (isNaN(purchaseAmount)) {
+      throw new Exception('[ERROR] 숫자가 아닙니다.');
     }
 
     if (purchaseAmountInput % 1000 != 0) {
@@ -32,7 +29,7 @@ class App {
     }
 
     const winningNumbersInput = await Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.\n'
+      '\n당첨 번호를 입력해 주세요.\n'
     );
     const winningNumbersStringArray = winningNumbersInput.split(',');
     const winningNumbersArray = [];
@@ -41,7 +38,7 @@ class App {
       const integerNumber = parseInt(stringNumber, 10);
 
       if (isNaN(integerNumber)) {
-        throw new Exception('[ERROR] 입력값이 숫자가 아닙니다.');
+        throw new Exception('[ERROR] 숫자가 아닙니다.');
       }
 
       if (integerNumber < 1 || integerNumber > 45) {
@@ -59,9 +56,59 @@ class App {
     }
 
     const bonusNumberString = await Console.readLineAsync(
-      '보너스 번호를 입력해 주세요.\n'
+      '\n보너스 번호를 입력해 주세요.\n'
     );
     // TODO: 보너스 번호 예외처리
+    const bonusNumber = parseInt(bonusNumberString);
+
+    Console.print('\n당첨 통계\n---');
+    let threeNumbersHitCount = 0;
+    let fourNumbersHitCount = 0;
+    let fiveNumbersHitCount = 0;
+    let fiveNumbersWithBonusHitCount = 0;
+    let sixNumbersHitCount = 0;
+
+    for (const numbers of userLottoNumbers) {
+      let hitCount = 0;
+      let bonusHit = false;
+      for (const eachNumber of numbers) {
+        if (winningNumbersArray.includes(eachNumber)) {
+          hitCount += 1;
+        }
+        if (eachNumber === bonusNumber) {
+          bonusHit = true;
+        }
+      }
+      switch (hitCount) {
+        case 3:
+          threeNumbersHitCount += 1;
+          break;
+        case 4:
+          fourNumbersHitCount += 1;
+          break;
+        case 5:
+          if (bonusHit) {
+            fiveNumbersWithBonusHitCount += 1;
+          } else {
+            fiveNumbersHitCount += 1;
+          }
+          break;
+        case 6:
+          sixNumbersHitCount += 1;
+          break;
+        default:
+          break;
+      }
+    }
+
+    // 당첨 통계 출력
+    Console.print(`3개 일치 (5,000원) - ${threeNumbersHitCount}개`);
+    Console.print(`4개 일치 (50,000원) - ${fourNumbersHitCount}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${fiveNumbersHitCount}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${fiveNumbersWithBonusHitCount}개`
+    );
+    Console.print(`6개 일치 (2,000,000,000원) - ${sixNumbersHitCount}개`);
   }
 }
 
