@@ -1,4 +1,4 @@
-import { ERROR } from './Constant.js'
+import { ERROR, LOTTO_SCOPE } from './Constant.js'
 
 class WinningNumbers{
   #numbers;
@@ -16,13 +16,13 @@ class WinningNumbers{
 
   #validateNumbers(numbers) {
     const numberArray = Object.values(numbers);
-    if (numberArray.length !== 6) {
+    if (numberArray.length !== LOTTO_SCOPE.LENGTH) {
       throw new Error(ERROR.WINNING_NUMBER_NOT_SIX);
     }
 
     numberArray.forEach((number) => {
       number = Number(number);
-      if(number < 1 || number > 45) throw new Error(ERROR.WINNING_NUMBER_NOT_IN_VALID_RANGE);
+      if(number < LOTTO_SCOPE.MIN || number > LOTTO_SCOPE.MAX) throw new Error(ERROR.WINNING_NUMBER_NOT_IN_VALID_RANGE);
     });
 
     const numberSet = new Set(numberArray);
@@ -33,7 +33,7 @@ class WinningNumbers{
 
   #validateBonusNumber(bonus) {
     bonus = Number(bonus);
-    if(bonus < 1 || bonus > 45) throw new Error(ERROR.BONUS_NUMBER_NOT_IN_VALID_RANGE);
+    if(bonus < LOTTO_SCOPE.MIN || bonus > LOTTO_SCOPE.MAX) throw new Error(ERROR.BONUS_NUMBER_NOT_IN_VALID_RANGE);
   }
 
   checkYourLotto(yourLottoNumbers) {

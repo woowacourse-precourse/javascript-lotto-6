@@ -31,4 +31,16 @@ export const PRIZE_STRING = {
   FIRST: '2,000,000,000원',
 }
 
+export const INPUT_MESSAGE = {
+    MONEY: '구입금액을 입력해주세요.\n',
+    WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
+    BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
+}
+
+export const LOTTO_SCOPE = {
+    MIN: 1,
+    MAX: 45,
+    LENGTH: 6,
+}
+
 export const TICKET_PRICE = 1000;

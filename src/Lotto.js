@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR } from './Constant.js'
+import { ERROR, LOTTO_SCOPE } from './Constant.js'
 
 class Lotto {
   #numbers;
@@ -11,13 +11,13 @@ class Lotto {
   
   #validate(numbers) {
     const numberArray = Object.values(numbers);
-    if (numberArray.length !== 6) {
+    if (numberArray.length !== LOTTO_SCOPE.LENGTH) {
       throw new Error(ERROR.LOTTO_NUMBER_NOT_SIX);
     }
 
     numberArray.forEach((number) => {
       number = Number(number);
-      if(number < 1 || number > 45) throw new Error(ERROR.LOTTO_NUMBER_NOT_IN_VALID_RANGE);
+      if(number < LOTTO_SCOPE.MIN || number > LOTTO_SCOPE.MAX) throw new Error(ERROR.LOTTO_NUMBER_NOT_IN_VALID_RANGE);
     });
     
     const numberSet = new Set(numberArray);

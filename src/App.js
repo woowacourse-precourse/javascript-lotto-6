@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR, TICKET_PRICE } from './Constant.js';
+import { ERROR, INPUT_MESSAGE, TICKET_PRICE } from './Constant.js';
 import WinningNumbers from './WinningNumbers.js';
 import TicketManager from "./TicketManager.js";
 import MoneyManager from "./MoneyManager.js";
@@ -25,7 +25,7 @@ class App {
 }
 
 async function inputMoney() {
-  let money = await Console.readLineAsync('구입금액을 입력해주세요.\n');
+  let money = await Console.readLineAsync(INPUT_MESSAGE.MONEY);
   let validity = checkMoney(money);
   while(!validity) {
     money = await Console.readLineAsync();
@@ -57,7 +57,7 @@ async function inputWinningNumbers() {
 }
 
 async function inputNumbers() {
-  let numberInput = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+  let numberInput = await Console.readLineAsync(INPUT_MESSAGE.WINNING_NUMBERS);
   let numberStrings = numberInput.split(',');
   let numbers = [];
 
@@ -71,7 +71,7 @@ async function inputNumbers() {
 }
 
 async function inputBonusNumber() {
-  let bonusString = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+  let bonusString = await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
   let bonus = Number(bonusString);
   if (Number.isNaN(bonus)) throw new Error(ERROR.BONUS_NUMBER_IS_NAN);
   return bonus;
