@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from "../constants/errors.js";
+import { stringToNumber } from "../utils/conversion.js";
 
 class Amount {
   #string;
@@ -19,14 +20,14 @@ class Amount {
 
   #isNotNumber(string) {
     // 숫자인지 체크
-    if (isNaN(Number(string))) {
+    if (isNaN(stringToNumber(string))) {
       throw new Error(ERROR_MESSAGE.typeDismatching);
     }
   }
 
   #isNotDividedByAmount(string) {
     // 잔돈이 존재하는경우를 체크
-    if (Number(string) % 1000 !== 0) {
+    if (stringToNumber(string) % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.hasChanges);
     }
   }
