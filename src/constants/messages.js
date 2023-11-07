@@ -26,7 +26,10 @@ export const OUTPUT_MESSAGE = Object.freeze({
   prize2nd: count =>
     `5개 일치, 보너스 볼 일치 (${PRICE_2ND.toLocaleString()}원) - ${count}개`,
   prize1st: count => `6개 일치 (${PRICE_1ST.toLocaleString()}원) - ${count}개`,
-  rate: rate => `총 수익률은 ${rate}%입니다.`,
+  rate: obj =>
+    `총 수익률은 ${Number(obj.integer).toLocaleString()}.${
+      obj.decimal
+    }%입니다.`,
 });
 
 export const ERROR_PRIFIX = '[ERROR] ';

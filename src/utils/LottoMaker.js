@@ -154,7 +154,9 @@ class LottoMaker {
       divisionResult = 0;
     }
 
-    return (divisionResult * 100).toFixed(1);
+    const rate = (divisionResult * 100).toFixed(1).toString().split('.');
+
+    return { integer: rate[0], decimal: rate[1] };
   }
 
   set publishCount(count) {
