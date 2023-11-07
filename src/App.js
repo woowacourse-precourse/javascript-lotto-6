@@ -54,13 +54,7 @@ class App {
     return this.number;
   }
   }
-  async printAllLotto() {
-    const cnt = await this.countBuytLotto();
-    Console.print(cnt + '개를 구매했습니다.');
 
-    for (let i = cnt; i > 0; i--) {
-      this.randomPickNum();
-      this.printLottoNum();
     }
   }
   async play() {
