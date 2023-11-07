@@ -1,56 +1,55 @@
 import { Console } from '@woowacourse/mission-utils';
+import { REGEXS } from '../constants/options.js';
+import { INPUT_MESSEGE, ERROR } from '../constants/messages.js';
 import Lotto from '../models/Lotto.js';
-import REGEXS from '../constants/regexs.js';
 
 class TiketBooth {
   async takePaymentForTickets() {
-    const money = await Console.readLineAsync('구입 금액을 입력해주세요.\n');
-    this.validateNumber(money);
-    this.validateMoney(money);
+    const paymentAmount = await Console.readLineAsync(INPUT_MESSEGE.purchase);
+    this.#validateNumber(paymentAmount);
+    this.#validateMoney(paymentAmount);
 
-    return Number(money) / 1000;
+    return Number(paymentAmount) / 1000;
   }
 
-  async getWinningLotto() {
-    const winnigNumbers = await this.receiveWinningNumbers();
-    const bonusNumber = await this.receiveBonusNumber();
-
-    return { winnigNumbers, bonusNumber };
-  }
-
-  async receiveWinningNumbers() {
-    const winnigInput =
-      await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-    this.validateWinningNumbers(winnigInput.split(','));
-    const numbers = winnigInput.split(',').map(Number);
+  async receiveWinNumbers() {
+    const winInput = await Console.readLineAsync(INPUT_MESSEGE.win);
+    this.#validateWinNumbers(winInput.split(','));
+    const numbers = winInput.split(',').map(Number);
 
     return new Lotto(numbers);
   }
 
-  async receiveBonusNumber() {
-    const bonusInput =
-      await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-    this.validateNumber(bonusInput);
+  async receiveBonusNumber(winNumbers) {
+    const bonusInput = await Console.readLineAsync(INPUT_MESSEGE.bonus);
+    this.#validateNumber(bonusInput);
+    this.#validateBonusNumber(winNumbers, bonusInput);
 
     return Number(bonusInput);
   }
 
-  validateNumber(number) {
+  #validateNumber(number) {
     if (!REGEXS.NUMBER.test(number)) {
-      throw new Error('[ERROR] 입력값은 숫자만 가능합니다.');
+      throw new Error(ERROR.notNumber);
     }
   }
 
-  validateMoney(money) {
-    if (Number(money) % 1000 !== 0) {
-      throw new Error('[ERROR] 로또 구매는 1,000원 단위로만 가능합니다.');
+  #validateMoney(paymentAmount) {
+    if (Number(paymentAmount) % 1000 !== 0) {
+      throw new Error(ERROR.invalidUnit);
     }
   }
 
-  validateWinningNumbers(winnigNumbers) {
-    winnigNumbers.forEach((number) => {
-      this.validateNumber(number);
+  #validateWinNumbers(winNumbers) {
+    winNumbers.forEach((number) => {
+      this.#validateNumber(number);
     });
+  }
+
+  #validateBonusNumber(winNumbers, bonusNumber) {
+    if (winNumbers.getLotto().includes(Number(bonusNumber))) {
+      throw new Error(ERROR.duplicate);
+    }
   }
 }
 
