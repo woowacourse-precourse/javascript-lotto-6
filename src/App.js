@@ -149,6 +149,17 @@ class App {
     const earningsRate = (winningAmount / this.amount) * 100;
     return earningsRate.toLocaleString('ko-kr', { minimumFractionDigits: 1 });
   }
+
+  printLottoRanking() {
+    MissionUtils.Console.print('당첨 통계');
+    MissionUtils.Console.print('---');
+    let i = 0;
+    while (i < this.ranks.length) {
+      this.ranks[i].printRank();
+      i += 1;
+    }
+    MissionUtils.Console.print(`총 수익률은 ${this.getEarningsRate()}%입니다.`);
+  }
 }
 
 export default App;
