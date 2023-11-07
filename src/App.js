@@ -5,6 +5,12 @@ import Bonus from './BonusNumber.js'
 
 
 class App {
+  constructor() {
+    this.lottos = null;
+    this.winningNumbers = null;
+    this.bonusNumber = null;
+  }
+  
   async play() {
     await this.userInputMoney();
   }

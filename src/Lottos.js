@@ -49,18 +49,34 @@ export default class Lottos {
         return lottoRanks.filter((rank) => rank <= 5);
       }
 
-      printRank(lottoRanks) {
+    printRank(lottoRanks) {
         const RANK_NUMBER = [5,4,3,2,1]
         let newLottoRanks = [];
+        let calculateArray = [];
 
         RANK_NUMBER.forEach((e,index) => {
             const count = lottoRanks.filter(i => i === e).length
             const mesage = WINNING_MESSAGE[index]
+            calculateArray.push(`${count}`)
             newLottoRanks.push(`${mesage} - ${count}개`)
         })
 
         newLottoRanks.forEach((rank) => {
             MissionUtils.Console.print(rank)
         });
+        this.printRateOfReturn(calculateArray);
+    }
+
+    printRateOfReturn(count) {
+        let rank = count.map(Number);
+        
+        const calculateResults = rank.map((rank, index) => {
+            return rank * PRIZEAMONUT[index]
+        });
+
+        const sumCalculateResults = calculateResults.reduce((a,b) => (a+b));
+        const purchaseMoney = this.count * 1000;
+        const rateResult = (sumCalculateResults / purchaseMoney * 100).toFixed(1);
+        MissionUtils.Console.print(`총 수익률은 ${rateResult}%입니다.`);
     }
 }
