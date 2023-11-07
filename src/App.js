@@ -48,7 +48,6 @@ class App {
       try{
         const winNumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.');
         let lotto = this.string2number(winNumbers);
-        if(lotto.length===0) continue;
         this.winLotto = new Lotto(lotto);
       }catch(e){
         Console.print(e.message);
@@ -88,6 +87,7 @@ class App {
   }
 
   string2number(input){
+    if(input.trim()==='') throw new Error("[ERROR] 값을 입력해주세요.");
     let numbers = input.split(",");
     let result = [];
     for(let i=0;i<numbers.length;i++){
