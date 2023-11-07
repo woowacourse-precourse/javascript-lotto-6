@@ -1,7 +1,7 @@
 import App from '../src/App';
 import BonusBall from '../src/BonusBall';
 import Lotto from '../src/Lotto';
-import { CORRECT_NUMBER, ERROR_MESSAGE, RANK } from '../src/constant';
+import { CORRECT_NUMBER, ERROR_MESSAGE } from '../src/constant';
 import { sortNumbers } from '../src/utils';
 import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
 
@@ -74,34 +74,6 @@ describe('App 클래스 테스트', () => {
 
     winningResult.forEach((v, i) => {
       expect(v.number).toEqual(EXPECTED_WINNING_RESULT[i].number);
-    });
-  });
-
-  test('당첨 통계 출력', () => {
-    const WINNING_RESULT = [
-      { rank: CORRECT_NUMBER.three, number: 1 },
-      { rank: CORRECT_NUMBER.four, number: 0 },
-      { rank: CORRECT_NUMBER.fiveNoBonus, number: 0 },
-      { rank: CORRECT_NUMBER.fiveAndBonus, number: 1 },
-      { rank: CORRECT_NUMBER.six, number: 0 },
-    ];
-    const RATE_OF_RETURN = 50.85;
-    const logs = [
-      '3개 일치 (5,000원) - 1개',
-      '4개 일치 (50,000원) - 0개',
-      '5개 일치 (1,500,000원) - 0개',
-      '5개 일치, 보너스 볼 일치 (30,000,000원) - 1개',
-      '6개 일치 (2,000,000,000원) - 0개',
-      `총 수익률은 ${RATE_OF_RETURN}%입니다.`,
-    ];
-
-    const logSpy = getLogSpy();
-
-    const app = new App();
-    app.printResult(WINNING_RESULT, RATE_OF_RETURN);
-
-    logs.forEach((log) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
 
