@@ -29,6 +29,4 @@ class InputAmount {
   }  
 }
 
-const input = new InputAmount();
-
 export default InputAmount;
