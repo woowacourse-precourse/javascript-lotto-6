@@ -35,6 +35,7 @@ class App {
       MODE.WINNING_NUMBERS
     );
     const lottoGame = new Lotto(this.#winningNumbers);
+    Console.print("");
     this.#bonusNumber = await this.untilValueAvailable(
       this.#bonusNumber,
       MODE.BONUS_NUMBER,
