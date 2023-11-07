@@ -18,7 +18,7 @@ const getLogSpy = () => {
 };
 
 describe("getInputCost() 테스트", () => {
-  test("문자열 '3000' 입력 시 3000 숫자으로 변환", async () => {
+  test("문자열 '3000' 입력 시 3000 숫자로 변환", async () => {
     mockQuestions(["3000"]);
     const app = new App();
     const inputCost = await app.getInputCost();
