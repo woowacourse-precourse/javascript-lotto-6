@@ -22,6 +22,15 @@ const publishService = {
     }
     return LottoNums;
   },
+
+  // 로또 객체 생성
+  createLottos(LottoNums) {
+    const lottos = [];
+    LottoNums.map((lottoNum) => {
+      lottos.push(new Lotto(lottoNum));
+    });
+    return lottos;
+  },
 };
 
 export default publishService;

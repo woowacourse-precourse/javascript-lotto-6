@@ -9,7 +9,7 @@ const outputs = {
   // 발행한 로또 출력
   printLottos(lottos) {
     lottos.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(lotto.getLottoNum());
     });
     Console.print("");
   },

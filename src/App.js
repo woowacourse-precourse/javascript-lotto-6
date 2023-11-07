@@ -9,7 +9,7 @@ class App {
   #price;
   #amount;
   #lottos;
-  #winningNum;
+  #winningLotto;
   #bonusNum;
 
   async play() {
@@ -33,7 +33,8 @@ class App {
   #executePublishLotto() {
     this.#amount = publishService.calculateAmount(this.#price);
     outputs.printAmountOfLotto(this.#amount);
-    this.#lottos = publishService.publishLottos(this.#amount);
+    const LottoNums = publishService.publishLottos(this.#amount);
+    this.#lottos = publishService.createLottos(LottoNums);
     outputs.printLottos(this.#lottos);
   }
 
@@ -41,7 +42,7 @@ class App {
   async #executeWinningNum() {
     try {
       const winningNum = await inputs.inputWinningNum();
-      this.#winningNum = validationUtils.inputWinningNumValidate(winningNum);
+      this.#winningLotto = validationUtils.inputWinningNumValidate(winningNum);
     } catch (error) {
       Console.print(error.message);
       return this.#executeWinningNum();
@@ -52,9 +53,10 @@ class App {
   async #executeBonusNum() {
     try {
       const bonusNum = await inputs.inpustBonusNum();
+      const winningNums = this.#winningLotto.getLottoNum();
       this.#bonusNum = validationUtils.inputBonusNumValidate(
         bonusNum,
-        this.#winningNum
+        winningNums
       );
     } catch (error) {
       Console.print(error.message);

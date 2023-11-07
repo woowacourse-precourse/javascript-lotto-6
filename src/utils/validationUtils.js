@@ -1,3 +1,4 @@
+import Lotto from "../Lotto.js";
 import CONDITION from "../constants/condition.js";
 import MESSAGE from "../constants/message.js";
 
@@ -38,7 +39,7 @@ const validationUtils = {
     if (new Set(winningNums).size !== 6) {
       throw new Error(MESSAGE.error.repeatNum);
     }
-    return winningNums;
+    return new Lotto(winningNums);
   },
 
   inputBonusNumValidate(bonusNum, winningNums) {
