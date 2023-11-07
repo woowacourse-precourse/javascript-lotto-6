@@ -3,6 +3,8 @@ export const ERROR_MESSAGE = {
   NOT_NUMBER: '[ERROR] 숫자만 입력 가능합니다.',
   NOT_INTEGER: '[ERROR] 정수만 입력 가능합니다. ',
   NOT_IN_RANGE: '[ERROR] 1 ~ 45 사이 숫자만 입력 가능합니다. ',
+  NUMBER_OF_ELEMENTS_ERROR: '[ERROR] 로또볼 숫자는 6개 입력되어야합니다.',
+  WINNING_BALL_INPUT_ERROR: '[ERROR] 로또볼 숫자가 6개 입력되어야합니다.',
 };
 
 export const INPUT_MESSAGE = {
@@ -13,4 +15,6 @@ export const INPUT_MESSAGE = {
 
 export const LOTTO_VALUE = {
   TICKET_PRICE: 1000,
+  START_NUMBER: 1,
+  END_NUMBER: 45,
 };

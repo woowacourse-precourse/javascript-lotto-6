@@ -21,7 +21,10 @@ class Lotto {
     this.#printAllTickets();
   }
 
-  async setWinningNumbers() {}
+  async setWinningNumbers() {
+    await this.#readWinningNumbers();
+    await this.#readWinningBonusNumber();
+  }
 
   async getResult() {}
 
@@ -52,9 +55,13 @@ class Lotto {
     }
   }
 
-  #validateNumberOfInputs(input) {}
-
-  #validateIsInRange(input) {}
+  #validateIsInRange(numbers, startNumber, endNumber) {
+    numbers.forEach(number => {
+      if (number < startNumber || number > endNumber) {
+        throw new Error(ERROR_MESSAGE.NOT_IN_RANGE);
+      }
+    });
+  }
 
   #getNumberOfAvailableTickets(amount) {
     return amount / LOTTO_VALUE.TICKET_PRICE;
@@ -71,7 +78,46 @@ class Lotto {
     });
   }
 
-  #readWinningNumbers() {}
+  async #readWinningNumbers() {
+    const WINNING_NUMBERS_COUNT = 6;
+    const DELIMITER = ',';
+
+    const winningNumbersInput = await MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGE.GET_WINNING_NUMBERS + '\n',
+    );
+    this.#validateNumberOfInputs(
+      winningNumbersInput,
+      WINNING_NUMBERS_COUNT,
+      DELIMITER,
+    );
+
+    const inputs = winningNumbersInput.split(DELIMITER);
+    const winningNumbers = this.#convertToIntegerArray(inputs);
+
+    this.#validateIsInRange(
+      winningNumbers,
+      LOTTO_VALUE.START_NUMBER,
+      LOTTO_VALUE.END_NUMBER,
+    );
+  }
+
+  #validateNumberOfInputs(stringInput, numberOfInputs, delimiter) {
+    const elements = stringInput.split(delimiter);
+    if (elements.length !== numberOfInputs) {
+      throw new Error(ERROR_MESSAGE.NUMBER_OF_ELEMENTS_ERROR);
+    }
+  }
+
+  #convertToIntegerArray(stringInputs) {
+    const numbers = stringInputs.map(stringInput => {
+      const number = parseInt(stringInput);
+      if (!number) {
+        throw new Error(ERROR_MESSAGE.WINNING_BALL_INPUT_ERROR);
+      }
+      return parseInt(stringInput);
+    });
+    return numbers;
+  }
 
   #readWinningBonusNumber() {}
 
