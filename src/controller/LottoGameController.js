@@ -1,5 +1,4 @@
 import Lotto from '../Lotto.js';
-import Money from '../model/Money.js';
 import InputValidator from '../validator/InputValidator.js';
 import formatLottoNumbers from '../utils/formatLottoNumbers.js';
 import formatLottoMatchResults from '../utils/formatLottoMatchResults.js';
@@ -7,15 +6,15 @@ import { MESSAGE } from '../constants/messages.js';
 import { GAME_RULE } from '../constants/gameRule.js';
 
 class LottoGameController {
-  #moneyInstance;
-
   constructor({
+    money,
     lottoResult,
     lottoTickets,
     randomNumberGeneration,
     inputView,
     outputView,
   }) {
+    this.money = money;
     this.lottoResult = lottoResult;
     this.lottoTickets = lottoTickets;
     this.randomNumberGeneration = randomNumberGeneration;
@@ -59,9 +58,9 @@ class LottoGameController {
   }
 
   printMyLottos() {
-    const loopCount = this.#moneyInstance.getPurchaseCount();
+    const loopCount = this.money.getPurchaseCount();
     Array.from({ length: loopCount }).forEach((_, i) => {
-      this.setLottoTicketInstance();
+      this.addLottoTicketInstance();
       const lottoInstance = this.lottoTickets.getLottoTicket(i);
       this.outputView.print(
         formatLottoNumbers(lottoInstance.getLottoNumbers()),
@@ -73,24 +72,16 @@ class LottoGameController {
     return new Lotto(this.generateLottoNumbers().sort((a, b) => a - b));
   }
 
-  setLottoTicketInstance() {
+  addLottoTicketInstance() {
     const lotto = this.createLottoInstance();
     this.lottoTickets.addLotto(lotto);
-  }
-
-  async createMoneyInstance() {
-    const money = await this.getPurchaseAmount();
-    return new Money(money);
-  }
-
-  async setMoney() {
-    this.#moneyInstance = await this.createMoneyInstance();
   }
 
   async buyLottos() {
     while (true) {
       try {
-        await this.setMoney();
+        const money = await this.getPurchaseAmount();
+        this.money.setMoney(money);
         this.printPurchaseCount();
         break;
       } catch (error) {
@@ -106,7 +97,7 @@ class LottoGameController {
   }
 
   printPurchaseCount() {
-    const purchaseCount = this.#moneyInstance.getPurchaseCount();
+    const purchaseCount = this.money.getPurchaseCount();
     this.outputView.print(`\n${purchaseCount}${MESSAGE.BUY}`);
   }
 
@@ -147,7 +138,7 @@ class LottoGameController {
     );
 
     this.lottoResult.setMatchCount(matchResults);
-    const userMoney = this.#moneyInstance.getMoney();
+    const userMoney = this.money.getMoney();
     const prizeMoney = this.lottoResult.getPrizeMoney();
 
     const profit = this.lottoResult.getProfit(userMoney, prizeMoney);

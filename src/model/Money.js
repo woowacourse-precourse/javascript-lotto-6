@@ -3,7 +3,7 @@ import { GAME_RULE } from '../constants/gameRule.js';
 class Money {
   #money = 0;
 
-  constructor(money) {
+  setMoney(money) {
     this.#money = money;
   }
 

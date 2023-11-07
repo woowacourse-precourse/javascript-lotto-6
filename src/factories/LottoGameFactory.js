@@ -1,6 +1,7 @@
 import LottoGameController from '../controller/LottoGameController.js';
 import LottoResult from '../model/LottoResult.js';
 import LottoTickets from '../model/LottoTickets.js';
+import Money from '../model/Money.js';
 import RandomNumberStrategy from '../model/strategies/RandomNumberStrategy.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
@@ -11,6 +12,7 @@ class LottoGameFactory {
     const outputView = new OutputView();
     const lottoResult = new LottoResult();
     const lottoTickets = new LottoTickets();
+    const money = new Money();
     const randomNumberGeneration = new RandomNumberStrategy();
 
     return new LottoGameController({
@@ -18,6 +20,7 @@ class LottoGameFactory {
       outputView,
       lottoResult,
       lottoTickets,
+      money,
       randomNumberGeneration,
     });
   }
