@@ -1,6 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import NUMBER from '../../src/utils/constants/number.js';
-import Lotto from '../../src/Lotto.js';
 import LottoPublisher from '../../src/models/LottoPublisher.js';
 
 describe('LottoPublisher 클래스 테스트', () => {
