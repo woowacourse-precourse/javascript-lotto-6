@@ -83,7 +83,7 @@ describe('로또 클래스 테스트', () => {
     const lotto = new Lotto([1, 28, 3, 44, 35, 45]);
     const result = lotto.checkSameNumber(bonusNumber);
 
-    expect(result).toEqual(false);
+    expect(result).toBeFalsy();
   });
 
   test('로또번호와 보너스번호가 같으면 true ', () => {
@@ -91,7 +91,7 @@ describe('로또 클래스 테스트', () => {
     const lotto = new Lotto([6, 28, 3, 44, 35, 45]);
     const result = lotto.checkSameNumber(bonusNumber);
 
-    expect(result).toEqual(true);
+    expect(result).toBeTruthy();
   });
 
   test('보너스번호는 문자열로 비교되면 안됩니다.', () => {
@@ -99,6 +99,6 @@ describe('로또 클래스 테스트', () => {
     const lotto = new Lotto([6, 28, 3, 44, 35, 45]);
     const result = lotto.checkSameNumber(bonusNumber);
 
-    expect(result).toEqual(false);
+    expect(result).toBeFalsy();
   });
 });
