@@ -1,9 +1,12 @@
 import { Random } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 import {
   inputMoney,
   inputWinning,
   inputBonusNumber,
 } from "./common/InputUtils.js";
+import { printTiceks, printLottos, printResult } from "./common/PrintUtils.js";
+import { checkResult } from "./common/Result.js";
 
 class App {
   async play() {
@@ -14,6 +17,8 @@ class App {
     printLottos(lottos);
     const winningNumbers = await inputWinning();
     const bonusNumber = await inputBonusNumber(winningNumbers);
+    const result = checkResult(lottos, winningNumbers, bonusNumber);
+    printResult(result, money);
   }
 }
 

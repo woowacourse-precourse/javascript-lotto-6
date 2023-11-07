@@ -1,6 +1,13 @@
 const DEFAULT_ERROR = "[ERROR]";
 
 export const LOTTO_PRICE = 1000;
+export const rankReward = {
+  three: 5000,
+  four: 50000,
+  five: 1500000,
+  bonus: 30000000,
+  six: 2000000000,
+};
 
 export const INPUT_MESSAGE = {
   GAME_START: "구입금액을 입력해 주세요.\n",

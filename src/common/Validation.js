@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGE } from "./Text.js";
 
 // 2. 구매금액 입력값 유효성 검사

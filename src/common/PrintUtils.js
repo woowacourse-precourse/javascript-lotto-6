@@ -12,3 +12,21 @@ export const printTiceks = (money) => {
 export const printLottos = (lottos) => {
   lottos.map((el) => Console.print("[" + el.join(", ") + "]"));
 };
+
+// 13. 결과 출력
+export const printResult = (rank, money) => {
+  let revenue = calculateRevenue(rank, money);
+  Console.print(`${RESULT_MESSAGE.GUAID}`);
+  Console.print(
+    `${RESULT_MESSAGE.THREE.replace("($count$)", `${rank.three}`)}`
+  );
+  Console.print(`${RESULT_MESSAGE.FOUR.replace("($count$)", `${rank.four}`)}`);
+  Console.print(`${RESULT_MESSAGE.FIVE.replace("($count$)", `${rank.five}`)}`);
+  Console.print(
+    `${RESULT_MESSAGE.FIVE_BONUS.replace("($count$)", `${rank.bonus}`)}`
+  );
+  Console.print(`${RESULT_MESSAGE.SIX.replace("($count$)", `${rank.six}`)}`);
+  Console.print(
+    `${RESULT_MESSAGE.REVENUE.replace("($number$)", `${revenue}`)}`
+  );
+};
