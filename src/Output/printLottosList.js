@@ -1,7 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 
 function printLottosList(lottosList) {
-  Console.print(lottosList.join('\n'));
+  const list = lottosList.map((item) => '[' + item.join(', ') + ']');
+  Console.print(list.join('\n'));
 }
 
 export default printLottosList;
