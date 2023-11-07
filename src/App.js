@@ -3,9 +3,9 @@ import MVC from './mvc/MVC.js';
 
 class App {
   async play() {
-    //await Fucntional.play();
+    await Fucntional.play();
 
-    await MVC.play();
+    //await MVC.play();
   }
 }
 
