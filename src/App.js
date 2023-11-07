@@ -1,7 +1,14 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import GameExport from './GameExport.js';
 import Validation from './validation.js';
-import { readLineLottoCount, readLineBonusCount, consoleError, winnerMessage, winCount } from './utils.js';
+import {
+  readLineLottoCount,
+  readLineBonusCount,
+  consoleError,
+  winnerMessage,
+  winCount,
+  resultProfit,
+} from './utils.js';
 
 class App {
   #gameExport;
@@ -76,6 +83,7 @@ class App {
     const earningRatio = this.#gameExport.getPriceEarningsRatio(totalPrizeMoney);
     winnerMessage();
     winCount(statistics);
+    resultProfit(earningRatio);
   }
 }
 
