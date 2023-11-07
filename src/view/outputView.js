@@ -7,7 +7,7 @@ import {
 } from "../constants/constants.js";
 
 class OutputView {
-  profits
+  profits;
 
   constructor() {
     this.profits = 0;
@@ -18,8 +18,8 @@ class OutputView {
 
     lottoTickets.forEach((lotto) => {
       Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
-    })
-  }
+    });
+  };
   
   static showLottoResult(result) {
     Console.print('당첨 통계\n---');
@@ -27,12 +27,12 @@ class OutputView {
     for (const KEY in result) {
       Console.print(`${LOTTO_RESULT[KEY]} - ${result[KEY]}개`);
     }
-  }
+  };
   
   static showRate(profits, lottoPrice) {
     const rate = ((profits/lottoPrice) * 100).toFixed(1);
-    Console.print(`총 수익률은 ${rate}%입니다.`) 
-  }
+    Console.print(`총 수익률은 ${rate}%입니다.`);
+  };
 }
 
 export default OutputView

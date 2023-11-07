@@ -33,30 +33,30 @@ class App {
       FIRST: 0
     };
     this.profits = 0;
-  }
+  };
 
   async play() {
     while(!this.lottoPrice){
       await this.getLottoPrice();
-    }
+    };
 
     this.setLottoNumbers();
     OutputView.showLottoNumbers(this.lottoTickets);
 
     while(this.targetNumber.getTargetNumber().length === 0){
       await this.targetNumber.setTargetNumber();
-    }
+    };
 
     this.bonusNumber = new BonusNumber(this.targetNumber.getTargetNumber());
     
     while(this.bonusNumber.getBonusNumber() === 0){
       await this.bonusNumber.setBonusNumber();
-    }
+    };
 
     this.setLottoResult();
     OutputView.showLottoResult(this.result);
     OutputView.showRate(this.profits , this.lottoPrice);
-  }
+  };
 
   async getLottoPrice() {
     const input = await Console.readLineAsync(USER_INPUT.LOTTO_PRICE);
@@ -67,22 +67,24 @@ class App {
       this.lottoPrice = lottoPrice;
     }catch (error){
       Console.print(error);
-    }
-  }
+    };
+  };
 
   checkLottoPriceValidity(lottoPrice) {
     if(isNaN(lottoPrice)) throw ERROR_MESSAGE.PRICE_NOT_STRING;
+
     if(lottoPrice === PRICE_ZERO) throw ERROR_MESSAGE.PRICE_NOT_ZERO;
+
     if(lottoPrice % PRICE_UNIT != PRICE_ZERO) throw ERROR_MESSAGE.PRICE_NOT_REST;
-  }
+  };
 
   setLottoNumbers() {
     const lottoTicketLen = this.lottoPrice / PRICE_UNIT;
 
     for(let i = 0; i < lottoTicketLen; i++){
       this.lottoTickets.push(new Lotto(getLottoNumber()));
-    }
-  }
+    };
+  };
 
   setLottoResult() {
     this.lottoTickets.forEach((lotto) => {
@@ -90,7 +92,7 @@ class App {
       const matchBonusNumber = lotto.getMatchBonusNumber(this.bonusNumber.getBonusNumber());
      
       this.updateResult(matchTargetNumber , matchBonusNumber);
-    })
+    });
 
     this.calcaulateProfits();
   }
@@ -116,7 +118,7 @@ class App {
         this.result.FIFTH += 1;
         break;
     }
-  }
+  };
 }
 
 export default App;

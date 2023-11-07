@@ -1,10 +1,10 @@
 export const USER_INPUT = Object.freeze({
   LOTTO_PRICE: '구입금액을 입력해 주세요. \n'
-})
+});
 
 export const MESSAGE = Object.freeze({
   LOTTO_TICKET: '개를 구매했습니다.'
-})
+});
 
 export const ERROR_MESSAGE = Object.freeze({
   LOTTO_ERROR: '[ERROR] 잘못된 로또 번호가 입력되었습니다.',
@@ -12,7 +12,7 @@ export const ERROR_MESSAGE = Object.freeze({
   PRICE_NOT_STRING: '[ERROR] 금액은 숫자가 입력되어야 합니다',
   PRICE_NOT_ZERO: '[ERROR] 금액은 0원 일 수 없습니다.',
   PRICE_NOT_REST: '[ERROR] 금액은 1,000원 단위여야 합니다.'
-})
+});
 
 export const LOTTO_MONEY = Object.freeze({
   FIRST: 2000000000,
@@ -20,7 +20,7 @@ export const LOTTO_MONEY = Object.freeze({
   THIRD: 1500000,
   FOURTH: 50000,
   FIFTH: 5000
-})
+});
 
 export const LOTTO_RESULT = Object.freeze({
   FIRST: '6개 일치 (2,000,000,000원)',
@@ -28,7 +28,7 @@ export const LOTTO_RESULT = Object.freeze({
   THIRD: '5개 일치 (1,500,000원)',
   FOURTH: '4개 일치 (50,000원)',
   FIFTH: '3개 일치 (5,000원)'
-})
+});
 
 export const PRICE_UNIT = 1000;
 export const PRICE_ZERO = 0;

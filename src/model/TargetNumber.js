@@ -17,15 +17,15 @@ class TargetNumber {
 
   constructor() {
     this.#targetNumber = [];
-  }
+  };
 
   getTargetNumber() {
     return this.#targetNumber;
-  }
+  };
 
   hasNumber(number) {
     return this.#targetNumber.includes(number);
-  }
+  };
   
   async setTargetNumber() {
     const input = await Console.readLineAsync(this.#TARGET_NUMBER);
@@ -37,7 +37,7 @@ class TargetNumber {
     } catch (error){
       Console.print(error);
     }
-  }
+  };
 
   checkTargetNumberValidity(targetNumber) {
     if (targetNumber.length !== LOTTO_LENGTH) {
@@ -57,7 +57,7 @@ class TargetNumber {
         throw this.#TARGET_NUM_STRING;
       }
     });
-  }
+  };
 }
 
 export default TargetNumber;
