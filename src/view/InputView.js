@@ -31,12 +31,11 @@ const InputView = {
 
   async getBonusNumbers() {
     try {
-      const userInputBonumsNumbers = await MissionUtils.Console.readLineAsync(
+      const userInputBonusNumbers = await MissionUtils.Console.readLineAsync(
         `\n${MESSAGE.purchase.bonusNumber}\n`,
       );
-      const bonusNumber = parseInt(userInputBonumsNumbers, 10);
 
-      return bonusNumber;
+      return Number(userInputBonusNumbers);
     } catch (error) {
       MissionUtils.Console.print(error.message);
     }
