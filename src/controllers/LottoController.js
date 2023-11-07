@@ -1,5 +1,5 @@
 import { randomNumbers } from '../utils/randomNumbers.js'
-import { lottosValues } from '../model/lottosValues.js'
+import { result } from '../model/result.js'
 import InputView from '../view/InputView.js'
 import OutputView from '../view/OutputView.js'
 
@@ -18,43 +18,34 @@ class LottoController {
     const lottoMainNumbers = await this.#inputView.lottoMainNumberInput();
     const lottoBonusNumber = await this.#inputView.lottoBonusNumberInput(lottoMainNumbers);
     const calculationResult = this.calculationResult(lottoTickets, lottoMainNumbers, lottoBonusNumber);
-    this.printResult(lottoPrice, lottoTickets, calculationResult);
+    this.printResult(lottoPrice, lottoTickets, calculationResult, lottoBonusNumber);
   }
 
-    lottoTickets(lottoPrice) {
-        const unitLottoNumbers = ~~(lottoPrice / 1000);
-        this.#outputView.lottoTotalOutput(unitLottoNumbers);
-        const lottoTickets = [];
-        for (let i = 0; i < unitLottoNumbers; i++) {
-            const randomLottoNumbers = randomNumbers();
-            const lottoNumbers = randomLottoNumbers.sort((a, b) => a - b);
-            lottoTickets.push(lottoNumbers);
-            this.#outputView.lottoNumbersOutput(lottoNumbers);
-        }
-        return lottoTickets;
+  lottoTickets(lottoPrice) {
+    const unitLottoNumbers = ~~(lottoPrice / 1000);
+    this.#outputView.lottoTotalOutput(unitLottoNumbers);
+    const lottoTickets = [];
+    for (let i = 0; i < unitLottoNumbers; i++) {
+      const randomLottoNumbers = randomNumbers();
+      const lottoNumbers = randomLottoNumbers.sort((a, b) => a - b);
+      lottoTickets.push(lottoNumbers);
+      this.#outputView.lottoNumbersOutput(lottoNumbers);
     }
+    return lottoTickets;
+  }
 
-    calculationResult(lottoTickets, lottoMainNumbers, lottoBonusNumber) {
-        lottoTickets.forEach(ticket => {
-            const matchingNumbers = ticket.filter(number => lottoMainNumbers.includes(number));
-            const matchingCount = matchingNumbers.length;
-            const bonusNumber = ticket.includes(lottoBonusNumber);
-            if (matchingCount === 6) {
-                lottosValues[4].count++; 
-            } else if (matchingCount === 5) {
-                if (bonusNumber) {
-                    lottosValues[3].count++; 
-                } else {
-                    lottosValues[2].count++; 
-                }
-            } else if (matchingCount === 4) {
-                lottosValues[1].count++; 
-            } else if (matchingCount === 3) {
-                lottosValues[0].count++; 
-            }
-        });
-        return lottosValues;
-    }
+  calculationResult(lottoTickets, lottoMainNumbers, lottoBonusNumber) {
+    lottoTickets.forEach(ticket => {
+      const matchingNumbers = ticket.filter(number => lottoMainNumbers.includes(number));
+      const matchingCount = matchingNumbers.length;
+      const bonusNumber = ticket.includes(Number(lottoBonusNumber));
+      if (matchingCount === 6) result[4].count++;
+      else if (matchingCount === 5) result[bonusNumber ? 3 : 2].count++;
+      else if (matchingCount === 4) result[1].count++;
+      else if (matchingCount === 3) result[0].count++;
+    });
+    return result;
+  }
     
   printResult(lottoPrice, lottoTickets, calculationResult) {
     this.#outputView.printMessageOutput();
