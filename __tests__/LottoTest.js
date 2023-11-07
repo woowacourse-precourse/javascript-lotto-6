@@ -1,5 +1,6 @@
 import Lotto from "../src/Lotto.js";
 import RandomNumberGenerator from "../src/domain/RandomNumberGenerator.js";
+import LottoCalculator from "../src/domain/LottoCalculator.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -20,5 +21,11 @@ describe("로또 클래스 테스트", () => {
     const randomNumberGenerator = new RandomNumberGenerator();
     const randomNumbers = randomNumberGenerator.getRandomNumberArray(input);
     expect(randomNumbers).toHaveLength(input);
+  })
+
+  test("한 장의 로또 번호와 당첨 번호를 비교하여 같은 수를 찾아낼 수 있어야 한다.", () => {
+    const oneGame = new LottoCalculator([1, 2, 3, 4, 5, 6], undefined, [2, 4, 6, 8, 10])
+    const correctNumbers = oneGame.calculate();
+    expect(correctNumbers).toBe(3);
   })
 });
