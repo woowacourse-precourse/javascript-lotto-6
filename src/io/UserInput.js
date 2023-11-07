@@ -1,11 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import ValidateInput from "../utils/ValidateInput.js";
+import InputConstants from "../Constants/InputConstants.js";
 
 class UserInput {
   static async getAmount() {
     while (true) {
       try {
-        const input = await Console.readLineAsync("구입금액을 입력해주세요.\n");
+        const input = await Console.readLineAsync(InputConstants.INPUT_AMOUNT);
         const amount = Number(input);
         ValidateInput.validateAmount(amount);
         return amount;
@@ -18,8 +19,9 @@ class UserInput {
   static async getWinningNumber() {
     while (true) {
       try {
-        const input =
-          await Console.readLineAsync("당첨 번호를 입력해주세요.\n");
+        const input = await Console.readLineAsync(
+          InputConstants.INPUT_WINNING_NUMBERS,
+        );
         const numbers = input.split(",").map((item) => Number(item.trim()));
         ValidateInput.validateWinningNumber(numbers);
         return numbers;
@@ -33,7 +35,7 @@ class UserInput {
     while (true) {
       try {
         const input = await Console.readLineAsync(
-          "\n보너스 번호를 입력해주세요.\n",
+          InputConstants.INPUT_BONUS_NUMBER,
         );
         const number = Number(input);
         ValidateInput.validateBonusNumber(number, winningNumber);
