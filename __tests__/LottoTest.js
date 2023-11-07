@@ -15,6 +15,12 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
+  test("로또 번호에 숫자가 아닌 값이 포함되어 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, "%", 17, 45, 8]);
+    }).toThrow("[ERROR]");
+  });
+
   // test("로또 구입 금액이 1000 단위가 아니면 예외가 발생한다.", () => {
   //   const app = new App();
   //   const value = "1100";

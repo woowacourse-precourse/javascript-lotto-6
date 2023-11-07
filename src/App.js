@@ -5,6 +5,11 @@ class App {
     let lotto_num = await this.getIncomeAndCheck();
     lotto_num = Math.floor(lotto_num / 1000);
     MissionUtils.Console.print(`${lotto_num}개를 구매했습니다.`);
+
+    let lotto_num_real = await this.getRealLottoNumber();
+    let lotto_num_real_arr = lotto_num_real.split(",");
+    lotto_num_real_arr = lotto_num_real_arr.map((e) => Number(e));
+    console.log(lotto_num_real_arr, "배열");
   }
 
   //함수: 로또구입금액을 입력받고, 1000단위가 아닐 경우 예외처리
@@ -27,6 +32,21 @@ class App {
       }
     }
     return income_num;
+  }
+
+  async getRealLottoNumber() {
+    let real_number;
+    while (true) {
+      try {
+        real_number = await MissionUtils.Console.readLineAsync(
+          "\n당첨 번호를 입력해 주세요.\n"
+        );
+        break;
+      } catch (error) {
+        throw new Error("[error]");
+      }
+    }
+    return real_number;
   }
 }
 
