@@ -1,9 +1,9 @@
 import InputView from "../../View/InputView.js";
+import OutputView from "../../View/OutputView.js";
+import { NUMBER } from "../../utils/Constant.js";
 import PurchaseCost from "../PurchaseCost.js";
 import Lotto from "../Lotto.js";
 import BonusLotto from "../BonusLotto.js";
-import OutputView from "../../View/OutputView.js";
-import { NUMBER } from "../../utils/Constant.js";
 
 class LottoController {
   #userLottoCost;
@@ -81,8 +81,8 @@ class LottoController {
   
   async getLottoMatchResult() {
     const matchCount = await this.#userPickLottoNumbers.getLottoMathCount(await this.#userLottoCost.getRandomLottoNumbersList());
-    const mathBonusCount = await this.#userPickBonusLottoNumber.getLottoMatchBonusCount(await this.#userLottoCost.getRandomLottoNumbersList());
-    return matchCount.map((numberMatchCount, index) => [numberMatchCount, mathBonusCount[index]]);
+    const matchBonusCount = await this.#userPickBonusLottoNumber.getLottoMatchBonusCount(await this.#userLottoCost.getRandomLottoNumbersList());
+    return matchCount.map((numberMatchCount, index) => [numberMatchCount, matchBonusCount[index]]);
   }
 
   async checkIncomeResult(numberMatchCount, bonusCount) {
