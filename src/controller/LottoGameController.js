@@ -2,6 +2,7 @@ import Lotto from '../Lotto.js';
 import Money from '../model/Money.js';
 import InputValidator from '../validator/InputValidator.js';
 import formatLottoNumbers from '../utils/formatLottoNumbers.js';
+import formatLottoMatchResults from '../utils/formatLottoMatchResults.js';
 import { MESSAGE } from '../constants/messages.js';
 import { GAME_RULE } from '../constants/gameRule.js';
 
@@ -33,13 +34,6 @@ class LottoGameController {
   async setLottoNumbers() {
     await this.setWinningNumbers();
     await this.setBonusNumber();
-  }
-
-  generateLottoMatchResults(winningMatchCounts, hasBonusMatches) {
-    return winningMatchCounts.map((winningCount, i) => ({
-      count: winningCount,
-      hasBonusNumber: hasBonusMatches[i],
-    }));
   }
 
   async setWinningNumbers() {
@@ -147,7 +141,7 @@ class LottoGameController {
 
     const winningMatchCounts = this.getWinningNumberMatchCounts();
     const hasBonusMatches = this.hasBonusNumberMatches();
-    const matchResults = this.generateLottoMatchResults(
+    const matchResults = formatLottoMatchResults(
       winningMatchCounts,
       hasBonusMatches,
     );
