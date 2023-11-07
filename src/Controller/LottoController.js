@@ -27,8 +27,7 @@ class LottoController {
     const inputBonusNumber = await InputView.inputBonusNumber();
     this.bonusNumber = inputBonusNumber;
 
-    const prizes = this.calculatePrizes();
-    OutputView.printPrize(prizes);
+    this.calculatePrizes();
   }
 
   // 로또 번호 생성
@@ -50,6 +49,8 @@ class LottoController {
     return lotto;
   }
 
+  // 당첨 통계 계산
+
   calculatePrizes() {
     const results = {
       3: 0,
@@ -60,11 +61,30 @@ class LottoController {
     };
 
     for (const lottoNumbers of this.lottoList) {
-      const prize = this.lotto.calculatePrize(lottoNumbers, this.bonusNumber);
-      console.log(prize);
+      const matchCount = this.countMatchNumbers(lottoNumbers, this.bonusNumber);
+      let prize = 0;
+
+      if (matchCount === 6) {
+        prize = bonus ? 5.5 : 6;
+      } else if (matchCount === 5 && bonus) {
+        prize = 5.5;
+      } else if ([3, 4, 5].includes(matchCount)) {
+        prize = matchCount;
+      }
+
       results[prize]++;
     }
-    return results;
+    OutputView.printPrize(results);
+  }
+
+  countMatchNumbers(lottoNumbers) {
+    let count = 0;
+    for (let i = 0; i < this.AMOUNT; i++) {
+      if (lottoNumbers.includes(this.lotto[i])) {
+        count++;
+      }
+    }
+    return count;
   }
 }
 
