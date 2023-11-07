@@ -7,15 +7,12 @@ class TicketMachine {
   #purchaseAmount = 0;
 
   constructor(purchaseAmount) {
-    try {
-      this.#purchaseAmount = purchaseAmount;
-    } catch (error) {
-      this.buyTicketsaAgain();
-    }
+    this.#purchaseAmount = purchaseAmount;
   }
 
   getNumberOfGame() {
-    const purchasedTicktesCount = Number(this.#purchaseAmount) / 1000;
+    const purchasedTicktesCount =
+      Number(this.#purchaseAmount) / MAGIC_NUMBER.TICKET_PRICE;
     View.printPurchasedTicketNumber(purchasedTicktesCount);
     return TicketMachine.getTickets(purchasedTicktesCount);
   }
