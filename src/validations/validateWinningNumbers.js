@@ -10,8 +10,7 @@ const checkInteger = (winningNumbers) => {
 };
 
 const checkDuplicate = (winningNumbers) => {
-  const uniqueWinningNumbers = [...new Set(winningNumbers)];
-  const duplicateFlag = uniqueWinningNumbers.length !== winningNumbers.length;
+  const duplicateFlag = new Set(winningNumbers).size !== winningNumbers.length;
   if (duplicateFlag) throw new CustomError(ERROR_MESSAGES.winningNumbersAndBonusNumber.duplicate);
 
   return true;
