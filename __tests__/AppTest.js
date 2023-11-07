@@ -60,7 +60,7 @@ describe('App 클래스 테스트', () => {
       { rank: CORRECT_NUMBER.fiveAndBonus, number: 1 },
       { rank: CORRECT_NUMBER.six, number: 0 },
     ];
-    const EXPECTED_RATE_OF_RETURN = 1000166.67;
+    const EXPECTED_RATE_OF_RETURN = 1000166.7;
     const app = new App();
 
     const { winningResult, rateOfReturn } = app.checkLottos(
