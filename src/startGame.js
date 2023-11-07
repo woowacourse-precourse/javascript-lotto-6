@@ -25,6 +25,8 @@ class StartGame {
     5: 0,
   };
 
+  #earnedPriceRate;
+
   constructor() { }
 
   async runGame() {
@@ -101,6 +103,12 @@ class StartGame {
   printProfits() {
     this.#lottoResults = countIncludeNumbers(this.#lottoResults, this.#winningNumbers, this.#bonusNumber, this.#purchasedLottos);
 
+    const userEarnedPrice = calculateProfit(this.#lottoResults);
+    const userStartMoney = this.#purchaseAmount * 1000;
+
+    this.#earnedPriceRate = calculateProfitRate(userStartMoney, userEarnedPrice);
+
+    Output.printWinningResult(this.#lottoResults, this.#earnedPriceRate);
   }
 }
 
