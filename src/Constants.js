@@ -13,6 +13,7 @@ export const CONSOLE_MESSAGE = {
 
 export const ERROR_MESSAGE = {
   NOT_DIVISIBLE_BY_1000: "[ERROR] 1000원 단위로 입력해야 합니다.",
+  NOT_VALID_MAIN_LOTTO: "[ERROR] 올바른 값을 다시 입력해주세요",
   DUPLICATE_NUMBER: "[ERROR] 당첨번호에 중복된 값이 있습니다.",
   NOT_NUMBER_6: "[ERROR] 로또 번호는 6개여야 합니다.",
   NOT_NUMBER_IN_1_TO_45: "[ERROR] 로또 번호는 1에서 45 사이의 값이어야 합니다.",
