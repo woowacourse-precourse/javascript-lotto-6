@@ -29,5 +29,11 @@ describe('로또 컴퓨터 클래스 테스트', () => {
     });
   });
 
-  test('최종 산출된 등수의 결과를 바탕으로 수익률을 계산한다.', () => {});
+  test('최종 산출된 등수의 결과를 바탕으로 수익률을 계산한다.', () => {
+    const computer = new Computer(winnnersNumbers, bonusNumber);
+    const lottos = numbers.map((elem) => new Lotto(elem));
+    computer.setPrizeResult(lottos);
+
+    expect(computer.getProfitRatio()).toEqual(62.5);
+  });
 });
