@@ -1,6 +1,7 @@
-import { Random, Console } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 import Input from './Input.js';
 import Output from './Output.js';
+import User from './User.js';
 import Lotto from './Lotto.js';
 import Validation from './Validation.js';
 
@@ -13,23 +14,12 @@ class App {
     this.#output = new Output();
   }
 
-  validateUserPurchaseMoney(input) {
-    Validation.validateInputEmpty(input);
-
-    const number = Number(input);
-
-    Validation.validateInputNumber(number);
-    Validation.validateInputZeroOrLess(number);
-    Validation.validateInputThousands(number);
-  }
-
-  async getUserPurchaseMoney() {
+  async getUserPurchaseMoney(user) {
     while (true) {
       try {
         const userMoney = await this.#input.userMoney();
-        this.validateUserPurchaseMoney(userMoney);
-
-        return Number(userMoney);
+        user.setMoney(userMoney);
+        break;
       } catch (err) {
         this.#output.error(err.message);
       }
@@ -106,23 +96,19 @@ class App {
     return new Lotto(numbers.sort((a, b) => a - b));
   }
 
-  purchaseLottoTickets(userMoney) {
-    const userTickets = Array.from({ length: userMoney / 1000 }).map(() => {
+  purchaseLottoTickets(user) {
+    const tickets = Array.from({ length: user.getMoney() / 1000 }).map(() => {
       return this.generateSingleLottoTicket();
     });
 
-    return userTickets;
+    user.setTickets(tickets);
   }
 
-  calculateWinningResult(userTickets, winningNumbers, bonusNumber) {
+  calculateWinningResult(tickets, winningNumbers, bonusNumber) {
     const results = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
-    userTickets.forEach((userTicket) => {
-      const rank = userTicket.calculateLottoWinning(
-        winningNumbers,
-        bonusNumber
-      );
-
+    tickets.forEach((ticket) => {
+      const rank = ticket.calculateLottoWinning(winningNumbers, bonusNumber);
       results[rank] += 1;
     });
 
@@ -141,22 +127,24 @@ class App {
   }
 
   async play() {
-    const userMoney = await this.getUserPurchaseMoney();
-    const userTickets = this.purchaseLottoTickets(userMoney);
+    const user = new User();
 
-    this.#output.lottoTicketCount(userTickets);
-    this.#output.lottoTicketNumbers(userTickets);
+    await this.getUserPurchaseMoney(user);
+    this.purchaseLottoTickets(user);
+
+    this.#output.lottoTicketCount(user.getTickets());
+    this.#output.lottoTicketNumbers(user.getTickets());
 
     const winningNumbers = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
 
     const results = this.calculateWinningResult(
-      userTickets,
+      user.getTickets(),
       winningNumbers,
       bonusNumber
     );
 
-    const totalReturn = this.calculateTotalReturn(results, userMoney);
+    const totalReturn = this.calculateTotalReturn(results, user.getMoney());
 
     this.#output.winningResult(results);
     this.#output.totalReturnResult(totalReturn);
