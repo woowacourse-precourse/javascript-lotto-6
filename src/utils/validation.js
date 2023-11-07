@@ -87,7 +87,7 @@ const validation = {
   },
 
   bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers) {
-    if (winningNumbers.includes(bonusNumber)) {
+    if (winningNumbers.includes(Number(bonusNumber))) {
       throw new Error(
         messageFormat.error(ERROR.INPUT_BONUS_NUMBER.INCLUDE_WINNING_NUMBERS),
       );

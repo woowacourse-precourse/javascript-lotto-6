@@ -10,7 +10,7 @@ const view = {
 
     validation.isValidInputPurchaseAmount(purchaseAmount);
 
-    return purchaseAmount;
+    return Number(purchaseAmount);
   },
 
   async readWinningNumbers() {
@@ -20,7 +20,10 @@ const view = {
 
     validation.isValidInputWinningNumbers(winningNumbers);
 
-    return winningNumbers.split(',').sort((a, b) => a - b);
+    return winningNumbers
+      .split(',')
+      .map(number => Number(number))
+      .sort((a, b) => a - b);
   },
 
   async readBonusNumber(winningNumbers) {
@@ -31,7 +34,7 @@ const view = {
     validation.isValidInputBonusNumber(bonusNumber);
     validation.bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers);
 
-    return bonusNumber;
+    return Number(bonusNumber);
   },
 };
 
