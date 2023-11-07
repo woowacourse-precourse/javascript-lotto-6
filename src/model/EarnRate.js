@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../constants/errors";
+import { ERROR_MESSAGE } from "../constants/errors.js";
 
 class EarnRate {
   #number;
