@@ -16,6 +16,7 @@ const {
   RETURN_RATIO_FOOTER,
   DASH,
   SPACE,
+  BLANK,
   UNIT_OF_LOTTO,
 } = CONSTANTS;
 
@@ -95,7 +96,7 @@ class Print {
   }
 
   static lineBreak() {
-    Console.print('');
+    Console.print(BLANK);
   }
 }
 

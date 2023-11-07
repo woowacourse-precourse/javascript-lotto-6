@@ -11,6 +11,8 @@ const NUMBERS = Object.freeze({
   THIRD_PLACE_WINNINGS: 1500000,
   FOURTH_PLACE_WINNINGS: 50000,
   FIFTH_PLACE_WINNINGS: 5000,
+
+  ZERO: 0,
 });
 
 export default NUMBERS;

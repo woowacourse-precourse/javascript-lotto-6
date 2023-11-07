@@ -4,8 +4,7 @@ import Lotto from '../../Lotto.js';
 import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const {
-  MISS_STATE,
-  BONUS_STATE,
+  ZERO,
   HIT_STATE,
   LOTTO_PRICE,
   NUMBER_OF_LOTTO_NUMBERS,
@@ -34,7 +33,9 @@ class Get {
   }
 
   static lottoResult(lottoArray, lottoBoard) {
-    const result = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(0);
+    const result = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(
+      ZERO
+    );
     lottoArray.forEach(lotto => result[Get.lottoCheck(lotto, lottoBoard)]++);
 
     return Object.freeze(result);
@@ -43,7 +44,7 @@ class Get {
   static lottoCheck(lotto, lottoBoard) {
     return lotto
       .getNumbers()
-      .reduce((previous, current) => previous + lottoBoard[current], 0);
+      .reduce((previous, current) => previous + lottoBoard[current], ZERO);
   }
 
   static lottoReturnRatio(resultArray, numberOfLotto) {
