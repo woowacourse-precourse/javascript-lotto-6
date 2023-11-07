@@ -1,4 +1,5 @@
 import calcProfit from '../src/utils/calcProfit';
+import formatLottoMatchResults from '../src/utils/formatLottoMatchResults';
 import formatLottoNumbers from '../src/utils/formatLottoNumbers';
 
 describe('💙 Util 함수를 테스트합니다. ฅ^._.^ฅ', () => {
@@ -21,5 +22,33 @@ describe('💙 Util 함수를 테스트합니다. ฅ^._.^ฅ', () => {
         calcProfit(mockData.purchaseAmounts[i], mockData.winningAmounts[i]),
       ).toBe(expectedResult);
     });
+  });
+
+  test('[formatLottoMatchResults] 당첨 번호 일치 개수 배열과 보너스 번호 보유 여부 배열을 객체로 포매팅해요.', () => {
+    const winningMatchCounts = [3, 5, 0];
+    const hasBonusMatches = [false, true, false];
+
+    const formattedResults = formatLottoMatchResults(
+      winningMatchCounts,
+      hasBonusMatches,
+    );
+
+    expect(formattedResults).toEqual([
+      { count: 3, hasBonusNumber: false },
+      { count: 5, hasBonusNumber: true },
+      { count: 0, hasBonusNumber: false },
+    ]);
+  });
+
+  test('[formatLottoMatchResults] 당첨 번호 일치 배열과 보너스 번호 보유 여부 배열이 비어 있으면 빈 배열을 반환해요.', () => {
+    const winningMatchCounts = [];
+    const hasBonusMatches = [];
+
+    const formattedResults = formatLottoMatchResults(
+      winningMatchCounts,
+      hasBonusMatches,
+    );
+
+    expect(formattedResults).toEqual([]);
   });
 });
