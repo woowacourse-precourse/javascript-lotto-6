@@ -15,7 +15,7 @@ class Ticket {
   }
 
   showNumbers() {
-    Console.print(this.numbers);
+    Console.print(`[${this.numbers.join(', ')}]`);
   }
 
   get Numbers() {
