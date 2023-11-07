@@ -35,13 +35,17 @@ class LottoMatcher {
     const matchedCount = matchedNumbers.length;
     if (matchedCount === NUMBER.SIX) {
       this.#updateFirstPrize(result);
-    } else if (matchedCount === NUMBER.FIVE && this.#includesBonusNumber(ticket, this.bonusNumber)) {
+    }
+    if (matchedCount === NUMBER.FIVE && this.#includesBonusNumber(ticket, this.bonusNumber)) {
       this.#updateSecondPrize(result);
-    } else if (matchedCount === NUMBER.FIVE) {
+    }
+    if (matchedCount === NUMBER.FIVE && !this.#includesBonusNumber(ticket, this.bonusNumber)) {
       this.#updateThirdPrize(result);
-    } else if (matchedCount === NUMBER.FOUR) {
+    }
+    if (matchedCount === NUMBER.FOUR) {
       this.#updateFourthPrize(result);
-    } else if (matchedCount === NUMBER.THREE) {
+    }
+    if (matchedCount === NUMBER.THREE) {
       this.#updateFifthPrize(result);
     }
   }
