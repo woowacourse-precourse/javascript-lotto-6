@@ -4,9 +4,10 @@ import User from './User.js';
 class App {
   async play() {
     this.user = new User();
+    this.donHang = new DongHang();
 
-    this.money = await this.user.buy();
-    this.lottos = DongHang.issue(this.money);
+    await this.user.buy();
+    await this.donHang.inputWinningNumbers();
   }
 }
 

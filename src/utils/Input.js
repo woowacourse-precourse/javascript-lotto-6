@@ -4,19 +4,40 @@ import ValidatableString from '../validators/ValidatableString.js';
 import PROMPT from '../constants/prompt.js';
 import ERROR_MESSAGE from '../constants/error.js';
 
+/**
+ * @classdesc 사용자 입력을 담당하는 클래스,
+ *
+ * 입력과 관련된 조건만을 검사하며, 정책적인 검사는 하지 않는다.
+ */
 class Input {
   /**
-   * 로또 구입 금액을 입력받아 number로 반환하는 메서드
-   * @returns {Promise<number>} 구입금액
+   * 로또 구입 금액을 입력받아 ValidatableString으로 반환하는 메서드
+   *
+   * 입력값은 양의 정수여야 한다.
+   * @returns {Promise<ValidatableString>} 구입금액
    */
   static async getCost() {
     const cost = await Input.readValidatableAsync(PROMPT.BUY_COST);
 
-    if (!cost.isDivisibleBy(1000)) {
-      throw new CustomError(ERROR_MESSAGE.NOT_DIVISIBLE_BY_1000);
+    if (!cost.isPositiveInteger()) {
+      throw new CustomError(ERROR_MESSAGE.NOT_INTEGER);
     }
 
-    return cost.toInteger();
+    return cost;
+  }
+
+  /**
+   * 당첨 번호를 입력받아 ValidatableArray로 반환하는 메서드
+   * @returns {Promise<ValidatableArray>} 당첨번호
+   */
+  static async getWinningNumbers() {
+    const winningNumbers = await Input.readValidatableAsync(PROMPT.WINNING_NUMBERS);
+
+    if (!winningNumbers.isCommaSeparatedNumbers()) {
+      throw new CustomError(ERROR_MESSAGE.NOT_COMMA_SEPARATED_NUMBERS);
+    }
+
+    return winningNumbers.toValidatableArray();
   }
 
   /**
