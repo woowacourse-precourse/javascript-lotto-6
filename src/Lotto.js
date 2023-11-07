@@ -11,6 +11,10 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error(ERROR.NUMBER_LENGTH);
@@ -21,10 +25,7 @@ class Lotto {
 
   validateBonusNumber(bonusNumber) {
     if (bonusNumber < 1 || bonusNumber > 45) throw new Error(ERROR.NUMBER_RANGE);
-
-    if (this.#numbers.includes(bonusNumber)) {
-      throw new Error(ERROR.BONUSNUMBER_DUPPLICATE);
-    }
+    if (this.#numbers.includes(bonusNumber)) throw new Error(ERROR.BONUSNUMBER_DUPPLICATE);
   }
 
   getLottoResult(myLottoNumbers, bonusNumber, purchasePrice) {
