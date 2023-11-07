@@ -1,9 +1,12 @@
 import InputHandler from './InputHandler';
+import messages from './constants/messages';
+import { Console } from '@woowacourse/mission-utils';
 
 class User {
   async purchaseLotto() {
     const amount = await InputHandler.inputPurchaseAmount();
-    //유효성 검사 해야함.
+    this.#validatePurchase(amount);
+
     const ticketCount = amount / 1000;
     return ticketCount;
   }
@@ -18,6 +21,10 @@ class User {
     const bonusNumber = await InputHandler.inputBonusNumber();
 
     return bonusNumber;
+  }
+
+  #validatePurchase(amount) {
+    if (isNaN(amount)) Console.print(messages.error.invalidAmount);
   }
 }
 
