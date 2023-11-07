@@ -30,4 +30,24 @@ describe("로또 클래스 테스트", () => {
 
     expect(result).toEqual(6);
   });
+
+  test("번호 5개 일치시 남은 번호가 보너스 번호와 일치할때 true 반환 테스트", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const prizeList = [1, 2, 3, 4, 5, 7];
+    const bonus = 6;
+
+    const result = lotto.validateIncludeBonus(prizeList, bonus);
+
+    expect(result).toEqual(true);
+  });
+
+  test("번호 5개 일치시 남은 번호가 보너스 번호와 일치하지 않을때 false 반환 테스트", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const prizeList = [1, 2, 3, 4, 5, 7];
+    const bonus = 8;
+
+    const result = lotto.validateIncludeBonus(prizeList, bonus);
+
+    expect(result).toEqual(false);
+  });
 });
