@@ -73,6 +73,25 @@ class App {
 
         return bonusNumber;
     }
+
+    getLottoRank(lottoNumbers, winNumbers, bonusNumber) {
+        const count = lottoNumbers.filter((number) =>
+            winNumbers.includes(number)
+        ).length;
+
+        switch (count) {
+            case 6:
+                return 1;
+            case 5:
+                return lottoNumbers.includes(bonusNumber) ? 2 : 3;
+            case 4:
+                return 4;
+            case 3:
+                return 5;
+            default:
+                return 0;
+        }
+    }
 }
 
 export default App;
