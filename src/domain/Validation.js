@@ -1,5 +1,5 @@
-import CONSTANTS from '../constants/Constants.js';
-import { ERROR_MESSAGES, CustomError } from '../constants/Errors.js';
+import CONSTANTS from '../constants/Constants';
+import { ERROR_MESSAGES, CustomError } from '../constants/Errors';
 
 class Validation {
   static isPurchaseMoneyValidated(purchaseMoneyInput) {
@@ -42,6 +42,13 @@ class Validation {
     ) {
       throw new CustomError(ERROR_MESSAGES.invalidLottoNumberRange);
     }
+  }
+
+  static isLottoNumbersValidated(numbers) {
+    this.validateLottoNumberType(numbers);
+    this.validateLottoNumberLength(numbers);
+    this.validateLottoNumberDuplicate(numbers);
+    this.validateLottoNumberRange(numbers);
   }
 
   static isBonusNumberValidated(bonusNumber) {
