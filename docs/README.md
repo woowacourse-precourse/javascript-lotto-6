@@ -103,3 +103,43 @@
 6개 일치 (2,000,000,000원) - 0개
 총 수익률은 62.5%입니다.
 ```
+
+## 디렉터리 구조
+
+```
+├── __test__
+│   ├── ApplicationTest.js
+│   ├── BonusNumberTest.js
+│   ├── LottoTest.js
+│   ├── LottoTicketResultTest.js
+│   ├── PurchaseAmountTest.js
+│   ├── ReturnRateTest.js
+│   ├── WinningNumbersTest.js
+├── docs
+│   ├── README.md
+├── node_modules
+├── src
+│   ├── controller
+│   │   ├── LottoController.js
+│   ├── models
+│   │   ├── BonusNumber.js
+│   │   ├── Lotto.js
+│   │   ├── LottoGenerator.js
+│   │   ├── LottoTicket.js
+│   │   ├── PurchaseAmount.js
+│   │   ├── ReturnRate.js
+│   │   ├── WinnigNumber.js
+│   ├── utils
+│   │   ├── constants.js
+│   │   ├── validate.js
+│   ├── views
+│   │   ├── InputView.js
+│   │   ├── OutputView.js
+│   ├── App.js
+│   ├── index.js
+├── .gitignore
+├── .npmrc
+├── .package-lock.json
+├── package.json
+└── README.md
+```
