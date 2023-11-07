@@ -1,10 +1,14 @@
 const { GAME_MESSAGE } = require("./Constant.js");
 const { Console } = require("@woowacourse/mission-utils");
-const LottoGame = require("./LottoGame.js");
+const winningNumbers = require("./winningNumbers.js");
+const BonusNumber = require("./BonusNumber.js");
+const PublishedLottos = require("./PublishedLottos.js");
 
 class App {
   constructor() {
-    this.game = new LottoGame();
+    this.lottos = null;
+    this.winningNumbers = null;
+    this.bonusNumber = null;
   }
 
   async play() {
@@ -13,31 +17,40 @@ class App {
 
   inputMoney() {
     Console.readLineAsync(GAME_MESSAGE.MONEY, (money) => {
-      this.game.setLottoCount(money);
-      this.game.printLottoCount();
-      this.game.printLottoList();
+      this.lottos = new PublishedLottos(money);
+      this.lottos.printCount();
+      this.lottos.printList();
       this.game.inputWinningNumbers();
     });
   }
 
-  inputWinningNums() {
-    Console.readLineAsync(GAME_MESSAGE.WINNING_NUM, (winningNums) => {
-      this.game.setWinningNums(winningNums);
+  inputwinningNumbers() {
+    Console.readLineAsync(GAME_MESSAGE.WINNING_NUM, (winningNumbers) => {
+      winningNumbers = winningNumbers.split(",").map((item) => Number(item));
+      this.winningNumbers = new winningNumbers(winningNumbers);
+
       this.inputBonusNum();
     });
   }
 
   inputBonusNum() {
     Console.readLineAsync(GAME_MESSAGE.BONUS_NUM, (bonusNumber) => {
-      this.game.setBonusNumber(bonusNumber);
+      this.bonusNumber = new BonusNumber(
+        Number(bonusNumber),
+        this.winningNumbers.value
+      );
       this.inputWinningStats();
     });
   }
 
   inputWinningStats() {
     Console.print(GAME_MESSAGE.STATIC);
-    this.game.setWinningStats();
-    this.game.printLottoRate();
+    const lottoResultArray = this.lottos.getResult(
+      this.winningNumbers.value,
+      this.bonusNumber.value
+    );
+    this.lottos.printWinningHistory(lottoResultArray);
+    this.lottos.printRate(lottoResultArray);
     this.gameEnd();
   }
 

@@ -76,10 +76,10 @@
 
 ### 4️⃣ 리팩토링
 
-- [ ] 클래스 분리
-  - [ ] `WinningNums`, `BonusNumber`, `PublishedLotto` 클래스로 각각 분리
+- [x] 클래스 분리
+  - [x] `winningNumbers`, `BonusNumber`, `PublishedLotto` 클래스로 각각 분리
   - `PublishedLotto` : 입력한 금액에 따라 출력된 로또들 관리
-  - `WinningNums` : 당첨 번호 관리
+  - `winningNumbers` : 당첨 번호 관리
   - `BonusNumber` : 보너스 번호 관리
 - [ ] 함수 이동 및 분리
 - [ ] else 지양하도록 고민
