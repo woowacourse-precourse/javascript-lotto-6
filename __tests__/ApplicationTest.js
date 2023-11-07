@@ -156,7 +156,7 @@ describe("로또 테스트", () => {
   test("로또 수익률 계산 테스트", async () => {
     const result = { 3: 1, 4: 1, 5: 0, "5+1": 0, 6: 0 };
     const lottoPrice = 2000;
-    const profit = UserInterface.displayResult(result, lottoPrice);
+    const profit = LottoGame.calculateProfit(result, lottoPrice);
     expect(profit.toFixed(1)).toEqual("2750.0");
   });
 });

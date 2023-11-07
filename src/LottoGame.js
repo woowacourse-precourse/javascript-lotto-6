@@ -29,6 +29,19 @@ class LottoGame {
     });
     return result;
   }
+
+  static calculateProfit(result, lottoPrice) {
+    return (
+      ((result[3] * 5 +
+        result[4] * 50 +
+        result[5] * 1500 +
+        result["5+1"] * 30000 +
+        result[6] * 2000000) /
+        lottoPrice) *
+      1000 *
+      100
+    );
+  }
 }
 
 export default LottoGame;
