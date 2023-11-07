@@ -18,12 +18,8 @@ const LottoUi = {
 
   async inputWinningNumbers() {
     try {
-      const winningNumbers = await Console.readLineAsync(
-        MESSAGE.INPUT_WINNING_NUMBERS
-      )
-        .split(',')
-        .map((number) => Number(number));
-
+      const input = await Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
+      const winningNumbers = input.split(',').map((number) => Number(number));
       this.validateWinningNumbers(winningNumbers);
 
       return winningNumbers;
@@ -47,13 +43,24 @@ const LottoUi = {
     }
   },
 
+  printWinningStatus(winningStatus) {
+    winningStatus.reverse();
+    winningStatus.forEach((rank, idx) => {
+      Console.print(`${MESSAGE.WINNING_STATICS[idx]} - ${rank}개`);
+    });
+  },
+
+  printRateOfReturn(rateOfReturn) {
+    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
+  },
+
   alertFinishdrawLottos(numberOfLottos) {
     Console.print(`${numberOfLottos}${MESSAGE.FINISH_DRAW_LOTTOS}`);
   },
 
   printPurchasedLottos(purchasedLottos) {
     purchasedLottos.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(', ')}]`);
     });
   },
 
@@ -82,7 +89,7 @@ const LottoUi = {
       throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
     } else if (this.checkSameNumber(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.INPUT_SAME_NUMB);
-    } else if (winningNumbers.length <= 6) {
+    } else if (winningNumbers.length < 6) {
       throw new Error(ERROR_MESSAGE.NOT_INPUT_6);
     } else if (!this.checkBounds(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
