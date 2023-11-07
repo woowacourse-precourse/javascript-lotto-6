@@ -1,8 +1,15 @@
 import { Random } from '@woowacourse/mission-utils';
-import { getCommonElementCount } from '../utils/listUtils.js';
+import {
+  checkListSameValue,
+  checkListValues,
+  getCommonElementCount,
+} from '../utils/listUtils.js';
 import CONFIG from '../constants/config.js';
 import Lotto from './Lotto.js';
 import MATCHES from '../constants/matches.js';
+import throwError from '../utils/throwError.js';
+import { checkNumberType } from '../utils/numberUtils.js';
+import ERROR_MESSAGES from '../constants/errorMessage.js';
 
 class LottoModel {
   #correctNumber;
@@ -13,9 +20,23 @@ class LottoModel {
 
   #winCounts = this.initWinCounts();
 
+  #totalBuyPrice = 0;
+
+  #totalWinMoney = 0;
+
   constructor(correctNumber, bonusNumber) {
     this.#correctNumber = correctNumber;
     this.#bonusNumber = bonusNumber;
+  }
+
+  calculatorTotalWinCounts() {
+    Object.keys(MATCHES).forEach((key) => {
+      this.#totalWinMoney += MATCHES[key].reward * this.#winCounts[key];
+    });
+  }
+
+  checkAllLottoNumber() {
+    this.#lottoList.forEach((lotto) => this.checkNumber(lotto.getNumbers()));
   }
 
   checkNumber(targetNumber) {
@@ -23,13 +44,32 @@ class LottoModel {
       (key) => key !== CONFIG.bonusMatchKey
     );
     const winCount = +getCommonElementCount(this.#correctNumber, targetNumber);
-    if (winCount === CONFIG.bonusNumberMatch) {
-      // prettier-ignore
-      targetNumber.includes(this.#bonusNumber)? this.#winCounts[CONFIG.bonusMatchKey] += 1: this.#winCounts[keyList[winCount-CONFIG.minLottoWinningNumber]] += 1;
-      return;
+    // prettier-ignore
+    if (winCount === CONFIG.bonusNumberMatch && targetNumber.includes(this.#bonusNumber)) {
+       this.#winCounts[CONFIG.bonusMatchKey] += 1
+       return 
     }
     // prettier-ignore
-    winCount >= CONFIG.minLottoWinningNumber && (this.#winCounts[keyList[winCount-CONFIG.minLottoWinningNumber]] += 1);
+    winCount >= CONFIG.minLottoWinningNumber && (this.#winCounts[keyList[winCount - CONFIG.minLottoWinningNumber]] += 1);
+  }
+
+  createLottos(count) {
+    Array.from({ length: count }).forEach(() => {
+      const randomNumberList = Random.pickUniqueNumbersInRange(
+        CONFIG.minLottoNumber,
+        CONFIG.maxLottoNumber,
+        CONFIG.lottoLength
+      );
+      this.#lottoList.push(new Lotto(randomNumberList));
+    });
+  }
+
+  initWinCounts() {
+    const results = {};
+    Object.keys(MATCHES).forEach((key) => {
+      results[key] = 0;
+    });
+    return results;
   }
 
   setCorrectNumber(correctNumber) {
@@ -40,13 +80,16 @@ class LottoModel {
     this.#bonusNumber = bonusNumber;
   }
 
-  createLotto() {
-    const randomNumberList = Random.pickUniqueNumbersInRange(
-      CONFIG.MIN_LOTTO_NUMBER,
-      CONFIG.MAX_LOTTO_NUMBER,
-      CONFIG.LOTTO_LENGTH
-    );
-    this.#lottoList.push(new Lotto(randomNumberList));
+  setTotalBuyPrice(totalBuyPrice) {
+    this.#totalBuyPrice = totalBuyPrice;
+  }
+
+  setTotalWinMoney(totalWinMoney) {
+    this.#totalWinMoney = totalWinMoney;
+  }
+
+  getCorrectNumber() {
+    return this.#correctNumber;
   }
 
   getLottoList() {
@@ -57,12 +100,12 @@ class LottoModel {
     return this.#winCounts;
   }
 
-  initWinCounts() {
-    const results = {};
-    Object.keys(MATCHES).forEach((key) => {
-      results[key] = 0;
-    });
-    return results;
+  getTotalBuyPrice() {
+    return this.#totalBuyPrice;
+  }
+
+  getTotalWinMoney() {
+    return this.#totalWinMoney;
   }
 }
 
