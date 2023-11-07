@@ -8,8 +8,13 @@ const View = {
     validatePurchaseAmount(purchaseAmount);
     return purchaseAmount;
   },
+
   printCountOfLotto(countOfLotto) {
-    Console.print(countOfLotto + SYSTEM_MESSAGE.PURCHASE_LOTTO_MESSAGE);
+    Console.print(`\n${countOfLotto}${SYSTEM_MESSAGE.PURCHASE_LOTTO_MESSAGE}`);
+  },
+
+  printLottoNumbers(lottoArray) {
+    lottoArray.forEach((lotto) => Console.print(lotto.getNumbers()));
   },
 };
 
