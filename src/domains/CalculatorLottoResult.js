@@ -28,7 +28,7 @@ class CalculatorLottoResult {
 
   getTotalProfitRate(totalProfit) {
     const consumption = this.#user.getUsedMoney();
-    return ((totalProfit / consumption) * 100).toFixed(1);
+    return Number(((totalProfit / consumption) * 100).toFixed(1));
   }
 }
 
