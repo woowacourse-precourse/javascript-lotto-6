@@ -6,5 +6,4 @@ class App {
     await lottoGame.play();
   }
 }
-
 export default App;

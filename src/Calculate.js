@@ -4,7 +4,7 @@ class Calculate {
   calculateResult(lottoResult) {
     const result = { ...VARIABLE.result };
     lottoResult.forEach(({ lottoCount, bonusIncluded }) => {
-      if (lottoCount === 3){ result.three += 1;}
+      if (lottoCount === 3) {result.three += 1};
       if (lottoCount === 4) {result.four += 1;}
       if (lottoCount === 5 && !bonusIncluded) {result.five += 1;}
       if (lottoCount === 5 && bonusIncluded) {result.fiveBonus += 1;}
