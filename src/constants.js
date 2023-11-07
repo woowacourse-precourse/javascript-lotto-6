@@ -16,6 +16,14 @@ export const inputPrompts = Object.freeze({
     BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n'
 });
 
+export const tierDescriptions = Object.freeze({
+    THREE: '3개 일치 (5,000원)',
+    FOUR: '4개 일치 (50,000원)',
+    FIVE: '5개 일치 (1,500,000원)',
+    FIVE_BONUS: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+    SIX: '6개 일치 (2,000,000,000원)'
+});
+
 export const errorMessages = Object.freeze({
     LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
     NAN: '[ERROR] 숫자를 입력해야 합니다.',
