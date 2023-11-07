@@ -21,7 +21,7 @@ class Lotto {
   }
   #validateDuplicate(numbers) {
     if (checkValueIsDuplicate(numbers)) {
-      throw new Error('[ERROR] 중복된 이름이 있습니다.');
+      throw new Error('[ERROR] 중복된 번호가 있습니다.');
     }
   }
   #validateType(numbers) {
