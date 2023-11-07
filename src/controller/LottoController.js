@@ -2,7 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 
 import { LOTTO } from '../constants/setting.js';
 import Lotto from '../Lotto.js';
-import OutputView from '../views/Output.js';
+import OutputView from '../views/OutputView.js';
 
 class LottoController {
   #money;

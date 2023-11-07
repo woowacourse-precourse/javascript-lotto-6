@@ -1,4 +1,4 @@
-import OutputView from '../views/Output.js';
+import OutputView from '../views/OutputView.js';
 
 async function retryOnError(callbackReadFunc) {
   try {
