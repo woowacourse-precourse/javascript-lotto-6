@@ -18,31 +18,13 @@ class CalculateStats {
   }
 
   updateStats(stats, matchingNumbersCount, bonusMatch) {
-    const updatedStats = { ...stats };
-
-    if (matchingNumbersCount === 6) {
-      updatedStats[6] += 1;
-    }
-    if (matchingNumbersCount === 5 && bonusMatch) {
-      updatedStats['5b'] += 1;
-    }
-    if (matchingNumbersCount === 5) {
-      updatedStats[5] += 1;
-    }
-    if (matchingNumbersCount === 4) {
-      updatedStats[4] += 1;
-    }
-    if (matchingNumbersCount === 3) {
-      updatedStats[3] += 1;
-    }
-
-    return updatedStats;
+    const key = matchingNumbersCount === 5 && bonusMatch ? '5b' : matchingNumbersCount;
+    return { ...stats, [key]: (stats[key] || 0) + 1 };
   }
 
   calculateEarningsRate(purchaseAmount) {
     const totalPrize = this.calculateTotalPrize(this.stats);
-    const totalSpent = purchaseAmount;
-    const earningsRate = `${((totalPrize / totalSpent) * 100).toFixed(1)}%`;
+    const earningsRate = `${((totalPrize / purchaseAmount) * 100).toFixed(1)}%`;
     return earningsRate;
   }
 
