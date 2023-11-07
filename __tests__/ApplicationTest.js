@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "../src/Lotto.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -28,7 +29,7 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
@@ -40,12 +41,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -94,5 +95,64 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
-});
 
+  test("사용자가 로또 구입 시 로또 번호 발행", async () => {
+    const lottoAmount = 2;
+    const purchaseAmount = 2000;
+
+    const app = new App();
+
+    mockRandoms([
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+    ]);
+
+    const lottos = app.createLottos(purchaseAmount);
+    expect(lottos).toHaveLength(lottoAmount);
+    expect(lottos[0].getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(lottos[1].getNumbers()).toEqual([7, 8, 9, 10, 11, 12]);
+  });
+
+  test("당첨 번호와 보너스 번호 입력", async () => {
+    const winningNumbers = "1,2,3,4,5,6";
+    const bounsNumber = "7";
+
+    const app = new App();
+
+    expect(app.validateLottoNumbers(winningNumbers)).toEqual([
+      1, 2, 3, 4, 5, 6,
+    ]);
+    expect(app.validateBonusNumber(bounsNumber, winningNumbers)).toBe(7);
+  });
+
+  test("당첨 결과 계산: 6자리 다 맞출 경우", () => {
+    const userNumbers = [new Lotto([1, 2, 3, 4, 5, 6])];
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+
+    const app = new App();
+
+    const results = app.winningLotto(userNumbers, winningNumbers, bonusNumber);
+
+    expect(results).toEqual({
+      fifth: 0,
+      fourth: 0,
+      third: 0,
+      second: 0,
+      first: 1,
+    });
+  });
+
+  test("당첨 결과 계산: 수익률", () => {
+    const userMoney = 1000;
+    const results = { fifth: 0, fourth: 0, third: 0, second: 0, first: 1 };
+    const app = new App();
+
+    const profit = app.calculateProfit(userMoney, results);
+
+    const expectedProfitRate =
+      Math.round((2000000000 / userMoney) * 100 * 10) / 10;
+
+    expect(profit).toBeCloseTo(expectedProfitRate, 1);
+  });
+});
