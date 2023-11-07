@@ -4,22 +4,23 @@ import Lotto from "./Lotto.js";
 class LottoGame {
   #ticketCount;
   #lottoTickets;
-  #winningNumbers;
+  #winningTicket;
   #bonusNumber
 
   constructor() {
     this.#ticketCount;
     this.#lottoTickets = [];
-    this.#winningNumbers = [];
-    this.#bonusNumber = 0;
+    this.#winningTicket = [];
+    this.#bonusNumber = "";
   }
 
   async start() {
     await this.buyLotto();
     this.setLottoTickets(this.#lottoTickets, this.#ticketCount);
+    this.sortLottoTickets(this.#lottoTickets);
     this.printLottoTickets(this.#lottoTickets, this.#ticketCount);
-    this.#winningNumbers = await this.inputWinningNumbers();
-    this.#bonusNumber = this.inputBonusNumbers(this.#winningNumbers);
+    this.#winningTicket = await this.inputWinningNumbers();
+    this.#bonusNumber = this.inputBonusNumbers(this.#winningTicket);
   }
 
   setTicketCount(count) {
@@ -67,8 +68,15 @@ class LottoGame {
     while (lottoTickets.length < count) {
       const lottoNumbers = this.generateLottoNumbers();
       lottoTickets.push(lottoNumbers);
-
     }
+  }
+
+  sortLottoTickets(lottoTickets, count) {
+    const sortedLottoTickets = [];
+    [...lottoTickets].forEach(lottoTicket => {
+      sortedLottoTickets.push(lottoTicket.getSortNumbers());
+    });
+    return sortedLottoTickets;
   }
 
   printLottoTickets(lottoTickets, count) {
@@ -81,15 +89,13 @@ class LottoGame {
   async inputWinningNumbers() {
     const inputNumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     const winningNumbers = inputNumbers.split(',');
-    this.#validateWinningNumbers(winningNumbers);
-    return winningNumbers;
+    const winningTicket = new Lotto(winningNumbers);
+    this.#validateWinningNumbers(winningTicket);
+    return winningTicket.getSortNumbers();
   }
 
   #validateWinningNumbers(numbers) {
     const termNumbers = [];
-    if (numbers.length != 6) {
-      throw new Error("[ERROR] 입력된 숫자가 6개가 아닙니다.")
-    }
     numbers.forEach(number => {
       number = Number(number);
       if (isNaN(number)) {
@@ -111,7 +117,6 @@ class LottoGame {
 
   async inputBonusNumbers(winningNumbers) {
     const inputNumbers = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-    console.log(winningNumbers);
     this.#validateBonusNumbers(inputNumbers, winningNumbers);
     return inputNumbers;
   }
@@ -131,6 +136,7 @@ class LottoGame {
       throw new Error("[ERROR] 당첨 번호와 중복된 숫자가 있습니다.")
     }
   }
+
 }
 
 export default LottoGame;
