@@ -41,5 +41,6 @@ export function caseOfWinning(matchCount, hasBonus, rankCounts) {
 
 export function checkBonusBallIsMatching(hasBonus, rankCounts) {
   // 짧은 회로를 통해 hasBonus가 참일 경우 rankCounts[2], 거짓일 경우 rankCounts[3] 값 증가
+  // 배열의 특성 상 return없이 직접 수정되는 효과 보유
   rankCounts[hasBonus ? 2 : 3] += 1;
 }
