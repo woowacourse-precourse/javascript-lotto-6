@@ -27,7 +27,7 @@ class Lotto {
   }
 
   raffleMainNumber(mainNumbers) {
-    return CONSTANTS.mainNumberCount * 2 - new Set([...this.#numbers, mainNumbers]).size;
+    return CONSTANTS.mainNumberCount * 2 - new Set([...this.#numbers, ...mainNumbers]).size;
   }
 
   raffleBonusNumber(bonusNumber) {
