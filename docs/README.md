@@ -1,6 +1,6 @@
 # **기능 흐름**
 
-## **로또 시작 전**
+## **로또 게임 시작 전**
 
 - 구입금액을 입력 받는다
 
@@ -43,7 +43,7 @@
   🚨 당첨 번호가 정수가 아니면 예외 처리 한다</br>
   🚨 중복된 번호가 있으면 예외 처리 한다
 
-## 🎱 **로또 시작**
+## 🎱 **로또 게임 시작**
 
 - 당첨 통계를 출력한다
 
@@ -54,3 +54,73 @@
 - 수익률을 출력한다
 
   - (총 당첨금액 / 구입금액) \* 100을 하고 소수점 둘째 자리에서 반올림을 한다
+
+# </br>**기능 목록**
+
+## 💾 **Model**
+
+### **Model**
+
+### `private field`
+
+- `#lotties`: 랜덤으로 부여된 로또들이 담긴 배열
+
+- `#prizeCategories`: 당첨 통계 분류에 기반한 객체
+
+#### `method`
+
+- `getLotties`: privatelotties 배열을 반환하는 메서드
+
+- `getPrizeCategories`: prizeCategories 객체를 반환하는 메서드
+
+- `makeLotto`: 구매금액에 따른 로또를 만들어주는 메서드
+
+- `compareWinLotto`: 우승번호와 구매한 로또번호를 비교해주는 메서드
+
+- `checkEqualWinNum`: 구매한 로또 번호 중에서 당첨 번호와 같은 번호를 반환해주는 메서드
+
+- `makePrizeCategory`: 당첨 조건에 해당하는 로또 개수를 `prizeCategories`에 분류해주는 메서드
+
+- `calculateProfit`: 수익률을 계산해주는 메서드
+
+## 📺 **View**
+
+### **View**
+
+#### `method`
+
+- `readLine`: 인풋을 프로미스 형식으로 반환해 주는 메서드
+
+- `errorPrint`: 에러 메세지를 출력해 주는 메서드
+
+- `printLotto`: 구매한 로또를 출력해 주는 메서드
+
+- `printLottoPrize`: 당첨 통계를 출력해 주는 메서드
+
+- `printProfitRate`: 수익률을 출력해 주는 메서드
+
+## 🎮 **Controller**
+
+### **Controller**
+
+#### `constructor`
+
+- `this.model`: Model 인스턴스
+
+- `this.view`: View 인스턴스
+
+#### `method`
+
+- `initHandler`: 로또 게임 시작전 초기 설정을 해주는 메서드
+
+- `startLottoHandler`: 로또 게임을 시작하는 메서드
+
+## ⚙️ **utils**
+
+### **Constant**
+
+- 상수 관리
+
+### **validateInput**
+
+- 로또 구매 인풋과 당첨 로또 번호 인풋 유효성 판단
