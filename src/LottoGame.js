@@ -57,7 +57,6 @@ class LottoGame {
     let bonus = await MissionUtils.Console.readLineAsync(
       Messages.BONUS_NUMBER_INPUT
     );
-    console.log(typeof bonus);
     if (isNaN(bonus)) {
       throw new Error(Messages.ERROR_ISNAN);
     }
@@ -79,10 +78,8 @@ class LottoGame {
           winningCount++;
         }
       }
-      if (winningCount === 5) {
-        if (ticket.includes(this.#bonus_number)) {
-          stats[4]++;
-        }
+      if (winningCount === 5 && ticket.includes(this.#bonus_number)) {
+        stats[4]++;
       }
       stats[winningCount - 3]++;
     }
@@ -97,7 +94,11 @@ class LottoGame {
     }
     profit = (profit / (this.#purchase_amount * 1000)) * 100;
     profit = parseFloat(profit).toFixed(1);
-    return profit;
+    const parts = profit.toString().split('.');
+    const result =
+      Number(parts[0]).toLocaleString('ko-KR') +
+      (parts[1] ? '.' + parts[1] : '');
+    return result;
   };
 
   printWinningStats = () => {
