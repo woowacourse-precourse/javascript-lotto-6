@@ -53,5 +53,15 @@ class App {
     const numbers = input.split(',').map(num => parseInt(num.trim(), 10));
     return numbers;
   }
+
+  // TODO: 보너스 번호가 당첨 번호에 포함되는지 검증
+  async #askBonusNumber() {
+    const input = await MissionUtils.Console.readLine("보너스 번호를 입력해 주세요.");
+    const bonusNumber = parseInt(input.trim(), 10);
+    if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 보너스 번호가 잘못되었습니다.");
+    }
+    return bonusNumber;
+  }
 }
 export default App;
