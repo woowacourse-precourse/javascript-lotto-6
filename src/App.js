@@ -1,85 +1,108 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { THOUSAND } from './constants/data.js';
-import { INPUT, LINE_BREAK, OUTPUT } from './constants/messages.js';
+import { ONE, THREE, THOUSAND, HUNDRED } from './constants/numbers.js';
+import { COUNT, PERCENT, HYPHEN, INPUT, LINE_BREAK, OUTPUT } from './constants/messages.js';
+import { matchNumbers } from './variables/data.js';
 import Bonus from './Bonus.js';
 import Lotto from './Lotto.js';
 import Money from './Money.js';
+import Result from './Result.js';
 
 class App {
+  price;
+  count;
+  winning;
+  bonus;
+  profit;
+  lottos = [];
+
   async play() {
     await this.inputPrice();
-    const winningNumbers = await this.inputWinnings();
-    await this.inputBonus(winningNumbers);
+    this.makeLottos();
+    this.outputLottos();
+    await this.inputWinning();
+    await this.inputBonus();
+    this.calculateResult();
+    this.outputResult();
   }
 
   async inputPrice() {
     try {
       const price = await MissionUtils.Console.readLineAsync(`${INPUT.price}${LINE_BREAK}`);
       const money = new Money(price);
-      return this.outputCount(money);
+      
+      this.price = money.getPrice();
     } catch (error) {
-      console.error(`${error.message}`);
-      // return Promise.reject(error);
+      MissionUtils.Console.print(error.message);
       return this.inputPrice();
     }
   }
 
-  outputCount(money) {
-    const count = money.getPrice() / THOUSAND;
-    MissionUtils.Console.print(`${LINE_BREAK}${count}${OUTPUT.count}`);
+  makeLottos() {
+    this.count = this.price / THOUSAND;
 
-    return this.makeLottos(count);
-  }
-
-  makeLottos(count) {
-    const lottos = [];
-
-    while (count > 0) {
+    let count = 0;
+    while (count < this.count) {
       const lotto = new Lotto();
-      lottos.push(lotto.getNumbers());
+      this.lottos.push(lotto.getNumbers().sort((prev, curr) => prev - curr));
 
-      count = count - 1;
+      count = count + 1;
     }
-
-    return this.outputLottos(lottos);
   }
 
-  outputLottos(lottos) {
-    lottos.forEach(lotto => {
-      MissionUtils.Console.print(lotto.sort((prev, curr) => prev - curr));
-    });
+  outputLottos() {
+    const totalLottos = this.lottos.map(lotto => `[${lotto.join(', ')}]`).join(LINE_BREAK);
+    
+    MissionUtils.Console.print(`${LINE_BREAK}${this.count}${OUTPUT.count}${LINE_BREAK}${totalLottos}`);
   }
 
-  async inputWinnings() {
+  async inputWinning() {
     try {
       const winningNumbers = await MissionUtils.Console.readLineAsync(`${LINE_BREAK}${INPUT.winning_numbers}${LINE_BREAK}`);
       const winningLotto = new Lotto(winningNumbers.split(','));
       
-      return winningLotto.getNumbers();
+      this.winning = winningLotto.getNumbers();
     } catch (error) {
-      console.error(`${error.message}`);
-      return this.inputWinnings();
+      MissionUtils.Console.print(error.message);
+      return this.inputWinning();
     }
   }
 
-  async inputBonus(winningNumbers) {
+  async inputBonus() {
     try {
       const bonusNumber = await MissionUtils.Console.readLineAsync(`${LINE_BREAK}${INPUT.bonus_number}${LINE_BREAK}`);
-      const bonusLotto = new Bonus(bonusNumber, winningNumbers);
-
-      return bonusLotto.getNumber();
+      const bonusLotto = new Bonus(bonusNumber, this.winning);
+      
+      this.bonus = bonusLotto.getNumber();
     } catch (error) {
-      console.error(`${error.message}`);
+      MissionUtils.Console.print(error.message);
       return this.inputBonus();
     }
   }
 
+  calculateResult() {
+    const result = new Result(this.lottos, this.winning, this.bonus);
+    result.spreadLottos();
+    result.countProfit();
+
+    this.profit = result.getProfit();
+  }
+
   outputResult() {
-    
+    const profitRate = (this.profit / this.price * HUNDRED).toFixed(ONE).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const results = [
+      `${OUTPUT.three_match}${matchNumbers.three}${COUNT}`,
+      `${OUTPUT.four_match}${matchNumbers.four}${COUNT}`,
+      `${OUTPUT.five_match}${matchNumbers.five}${COUNT}`,
+      `${OUTPUT.five_plus_bonus_match}${matchNumbers.fivePlusBonus}${COUNT}`,
+      `${OUTPUT.six_match}${matchNumbers.six}${COUNT}`
+    ];
+    const totalResult = [`${LINE_BREAK}${OUTPUT.winning_statistics}${LINE_BREAK}${HYPHEN.repeat(THREE)}`, ...results, `${OUTPUT.total_profit_margin}${profitRate}${PERCENT}`];
+  
+    MissionUtils.Console.print(totalResult.join(LINE_BREAK));
   }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 export default App;
