@@ -22,6 +22,14 @@ class App {
       console.error("[ERROR]", error); // 두 번째 인수로 에러 객체를 전달
     }
   }
+  // TODO: 구입 금액이 유효한지 검증
+  async #askPurchaseAmount() {
+    const amount = await MissionUtils.Console.readLine("구입금액을 입력해 주세요.");
+    if (isNaN(amount) || amount % 1000 !== 0) {
+      throw new Error("[ERROR] 금액은 1,000원 단위로 입력해야 합니다.");
+    }
+    return parseInt(amount, 10);
+  }
 
 }
 export default App;
