@@ -78,3 +78,18 @@ const getWinningLottoResult = (winningNumberArray, lottoArray) => {
     .length;
 };
 
+const isWinningLottoWithBonus = (
+  winningNumberArray,
+  lottoArray,
+  bonusNumber
+) => {
+  if (!hasBonusNumber(lottoArray, bonusNumber)) return false;
+  if (
+    getWinningLottoResult(winningNumberArray, lottoArray) ===
+    WINNING_LOTTO_COUNT.FIVE
+  ) {
+    return true;
+  }
+  return false;
+};
+
