@@ -11,14 +11,11 @@ class App {
     const lotto = new Input();
     const print = new Output();
     const amount = await lotto.getAmount();
-    new Lotto(amount);
     const ticketCount = amount / 1000;
     const lottoNumbers = GenerateLotto(ticketCount);
     print.printLotto(ticketCount, lottoNumbers);
     const winningLotto = await lotto.getWinningNumber();
-    new Lotto(winningLotto);
     const bonusNumber = await lotto.getBonusNumber();
-    new Lotto(bonusNumber);
     const winningNumber = isWinningLotto(
       winningLotto,
       bonusNumber,
