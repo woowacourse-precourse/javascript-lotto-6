@@ -1,5 +1,5 @@
-import { generateLotteries } from "./LottoGenerator.js";
-import { CURRENCY_NUMBER_TO_DIVIDE } from "../constants/constants.js";
+import { generateLotteries } from "./Model/LottoGenerator.js";
+import { CURRENCY_NUMBER_TO_DIVIDE } from "./constants/constants.js";
 
 class Lotto {
   #purchaseAmount;

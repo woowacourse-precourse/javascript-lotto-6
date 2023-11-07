@@ -1,6 +1,6 @@
 import InputView from "./View/InputView.js";
 import OutputView from "./View/OutputView.js";
-import Lotto from "./Model/Lotto.js";
+import Lotto from "./Lotto.js";
 import Validator from "./Validator.js";
 import { COMMA } from "./constants/constants.js";
 import Result from "./Model/Result.js";
