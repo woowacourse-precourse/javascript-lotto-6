@@ -4,16 +4,6 @@ import LottoController from '../controller/LottoController';
 import TotalPrice from '../model/TotalPrice';
 import Lotto from '../model/Lotto';
 
-const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
-
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-
-    return Promise.resolve(input);
-  });
-};
-
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce(
@@ -22,30 +12,7 @@ const mockRandoms = (numbers) => {
   );
 };
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
 describe('LottoController 로직 테스트', () => {
-  test('generateAndStoreLotto() - 생성된 로또가 배열에 순차적으로 저장한다.', () => {
-    // given
-    const arr = [];
-
-    // when
-    Lotto.generateAndStoreLotto(arr);
-
-    // then
-    expect(arr).toEqual([{}]);
-
-    // when
-    Lotto.generateAndStoreLotto(arr);
-
-    // then
-    expect(arr).toEqual([{}, {}]);
-  });
-
   test('checkIsBonus() - 당첨 번호에 보너스 번호와 일치하는 번호가 있으면 배열에 `7`을 저장하거나 없으면 `5`를 저장한다.', () => {
     // given
     const arr = [

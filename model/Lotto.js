@@ -17,10 +17,6 @@ class Lotto {
     this.#numbers.map((num) => Exception.isValidRange(num));
   }
 
-  getLottoNumbers() {
-    return this.#numbers;
-  }
-
   static generateRandomLotto() {
     const lottoNum = Random.pickUniqueNumbersInRange(1, 45, 6);
     const sortedLottoNum = lottoNum.sort((a, b) => a - b);
@@ -30,6 +26,10 @@ class Lotto {
   static generateAndStoreLotto(arr) {
     const lottoNumbers = Lotto.generateRandomLotto();
     arr.push(lottoNumbers);
+  }
+
+  getLottoNumbers() {
+    return this.#numbers;
   }
 }
 
