@@ -7,7 +7,7 @@ const OutputView = {
   },
 
   printLottoList(user) {
-    user.getLotto().forEach((lotto) => Console.print(lotto));
+    user.getLotto().forEach((lotto) => Console.print(lotto.getLottoNumber()));
   },
 };
 

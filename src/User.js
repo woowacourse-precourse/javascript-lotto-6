@@ -3,9 +3,10 @@ import Lotto from "./Lotto";
 import WORD from "./lib/constants/word";
 
 class User {
-  lottos;
+  lottoList;
+
   constructor(userLottoQuanitiy) {
-    this.lottos = this.#generateLotto(userLottoQuanitiy);
+    this.lottoList = this.#generateLotto(userLottoQuanitiy);
   }
 
   #generateLotto(userLottoQuanitiy) {
@@ -27,11 +28,11 @@ class User {
       lottoList.push(lotto);
     }
 
-    return lottoList.map((lotto) => lotto.getLottoNumber());
+    return lottoList;
   }
 
   getLotto() {
-    return this.lottos.map((lotto) => lotto);
+    return this.lottoList;
   }
 }
 
