@@ -1,4 +1,6 @@
 import InputError from "../errors/InputError.js";
+import { ERRORS } from "../utils/constants.js";
+import { LOTTO_GAME_RULE } from "../utils/constants.js";
 
 class Lotto {
   #numbers;
@@ -9,12 +11,12 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTO_GAME_RULE.lottoCount) {
+      throw new Error(`${ERRORS.error} ${ERRORS.numberLengthError}`);
     }
 
-    if (new Set(numbers).size !== 6) {
-      throw new Error("[ERROR] 중복된 숫자가 입력되었습니다.");
+    if (new Set(numbers).size !== LOTTO_GAME_RULE.lottoCount) {
+      throw new Error(`${ERRORS.error} ${ERRORS.duplicatedNumberError}`);
     }
 
     numbers.forEach((number) => {

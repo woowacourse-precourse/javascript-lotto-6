@@ -17,19 +17,19 @@ describe("로또 테스트: 금액 입력 예외 테스트", () => {
     );
   });
 
-  test("0 이하 또는 음수 입력", () => {
+  test("0 입력", () => {
     const negativeInput = "0";
 
     expect(() => InputValidate.validateAmount(negativeInput)).toThrow(
-      "[ERROR] 유효한 범위의 값을 입력해 주세요."
+      "[ERROR] 0 이하의 음수를 입력할 수 없습니다."
     );
   });
 
-  test("0이하 또는 음수 입력", () => {
+  test("음수 입력", () => {
     const negativeInput = "-1000";
 
     expect(() => InputValidate.validateAmount(negativeInput)).toThrow(
-      "[ERROR] 유효한 범위의 값을 입력해 주세요."
+      "[ERROR] 0 이하의 음수를 입력할 수 없습니다."
     );
   });
 

@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import InputValidate from "./InputValidate.js";
+import { COMMAND } from "./constants.js";
 
 class UserInput {
   static async getUserInput(inputFunction) {
@@ -17,7 +18,7 @@ class UserInput {
 
   static async getPurchaseAmount() {
     const lottoAmount = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
+      `${COMMAND.purchaseAmountMessage}`
     );
 
     const validatedAmount = InputValidate.validateAmount(lottoAmount);
@@ -27,7 +28,7 @@ class UserInput {
 
   static async getLottoNumbers() {
     const lottoNumbers = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
+      `${COMMAND.lottoNumbersMessage}`
     );
 
     InputValidate.validateEmptyLottoNumbers(lottoNumbers);
@@ -37,7 +38,7 @@ class UserInput {
 
   static async getBonusNumber() {
     const bonusNumber = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
+      `${COMMAND.bonusNumberMessage}`
     );
 
     const validatedBonusNumber = InputValidate.validateBonusNumber(bonusNumber);

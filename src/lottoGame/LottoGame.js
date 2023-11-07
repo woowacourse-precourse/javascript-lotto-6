@@ -1,6 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "../lotto/Lotto.js";
 import LottoUtils from "./lottoUtils.js";
+import { LOTTO_RANK_MESSAGES } from "../utils/constants.js";
+import { LOTTO_GAME_RULE } from "../utils/constants.js";
 
 class LottoGame {
   #purchasedAmount;
@@ -37,11 +39,10 @@ class LottoGame {
   printPurchasedLottos() {
     Console.print(`${this.#purchasedAmount / 1000}개를 구매했습니다.`);
 
-    this.#purchasedLottos.forEach((lotto) =>
-      Console.print(
-        `[${LottoUtils.ascendingSort(lotto.getNumbers()).join(", ")}]`
-      )
-    );
+    this.#purchasedLottos.forEach((lotto) => {
+      const sortedNumbers = LottoUtils.ascendingSort(lotto.getNumbers());
+      Console.print(`[${sortedNumbers.join(", ")}]`);
+    });
   }
 
   setWinningNumbers(winningNumbers, bonusNumber) {
@@ -84,13 +85,15 @@ class LottoGame {
     this.printWinner();
   }
 
+  getRankName(rank) {
+    return ["fifth", "fourth", "third", "second", "first"][rank];
+  }
+
   calculateProfitRate() {
-    const totalProfit =
-      this.#rank.fifthPlace * 5000 +
-      this.#rank.fourthPlace * 50000 +
-      this.#rank.thirdPlace * 1500000 +
-      this.#rank.secondPlace * 30000000 +
-      this.#rank.firstPlace * 2000000000;
+    let totalProfit = 0;
+    LOTTO_GAME_RULE.prize.forEach((amount, index) => {
+      totalProfit += amount * this.#rank[`${this.getRankName(index)}Place`];
+    });
 
     const profitRate = (totalProfit / this.#purchasedAmount) * 100;
 
@@ -98,14 +101,12 @@ class LottoGame {
   }
 
   printWinner() {
-    Console.print("당첨 통계\n---");
-    Console.print(`3개 일치 (5,000원) - ${this.#rank.fifthPlace}개`);
-    Console.print(`4개 일치 (50,000원) - ${this.#rank.fourthPlace}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${this.#rank.thirdPlace}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#rank.secondPlace}개`
-    );
-    Console.print(`6개 일치 (2,000,000,000원) - ${this.#rank.firstPlace}개`);
+    Console.print(`${LOTTO_RANK_MESSAGES.startMessage}`);
+    LOTTO_RANK_MESSAGES.rankResultMessage.forEach((message, index) => {
+      Console.print(
+        `${message} - ${this.#rank[`${this.getRankName(index)}Place`]}개`
+      );
+    });
     Console.print(`총 수익률은 ${this.calculateProfitRate()}%입니다.`);
   }
 }
