@@ -7,15 +7,15 @@ import Lotto from './Lotto.js';
 class LottoShop {
   static purchaseLotto(money) {
     const lottoCount = money / LOTTO_PRICE;
-    OutputView.printPurchaseMessage(lottoCount);
     const lottos = [];
 
+    OutputView.printPurchaseMessage(lottoCount);
     for (let i = 0; i < lottoCount; i += 1) {
       const lotto = this.generateLotto();
       lottos.push(lotto);
     }
-
     OutputView.printLottos(lottos);
+
     return lottos;
   }
 
