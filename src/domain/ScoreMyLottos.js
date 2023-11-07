@@ -1,4 +1,5 @@
 import Constants from "../constants/Constants.js";
+import ErrorMessage from "../constants/ErrorMessage.js";
 
 class ScoreMyLottos {
     #MY_LOTTO;
@@ -13,6 +14,7 @@ class ScoreMyLottos {
         this.#BONUS = Bonus;
         this.checkLotto(Lottos);
         this.countEarning();
+        this.bonusValidator(Answer, Bonus);
     }
     checkLotto(Lotto) {
         Lotto.forEach(v => {
@@ -41,6 +43,9 @@ class ScoreMyLottos {
         this.#EARNING = (EARNING / (this.#MY_LOTTO.length * Constants.LOTTO_PRICE) * 100).toFixed(Constants.EARNING_RADIX_POINT);
     }
 
+    bonusValidator(Answer, Bonus) {
+        if (Answer.includes(Bonus)) throw new Error(ErrorMessage.BONUS_ANSWER_DUPLICATE);
+    }
     getResult() {
         return this.#RESULT;
     }
