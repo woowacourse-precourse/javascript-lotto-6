@@ -1,6 +1,6 @@
 import Lotto from './Lotto.js';
-import Input from './utils/inputOutput/input.js';
-import Output from './utils/inputOutput/output.js';
+import Input from './utils/inputOutput/Input.js';
+import Output from './utils/inputOutput/Output.js';
 import { parsedNumber, validateNumber, isIncludedBonusNumbers, validatedPrice } from './utils/validation/validation.js';
 import { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
 
