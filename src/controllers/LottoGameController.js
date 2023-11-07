@@ -14,6 +14,7 @@ class LottoGameController {
     await this.purchaseLottos();
     this.printLottosCount();
     this.printLottos();
+    await this.enterWinningNumbers();
   }
 
   async purchaseLottos() {
@@ -37,6 +38,18 @@ class LottoGameController {
   printLottos() {
     const lottos = this.#lottoGame.getLottos();
     OutputView.printLottos(lottos);
+  }
+
+  async enterWinningNumbers() {
+    try {
+      const winningNumber = await InputView.readWinningNumber();
+      validation.validateInputArray(winningNumber);
+      const parsedNumber = winningNumber.split(',').map(Number);
+      this.#lottoGame.setWinningNumber(parsedNumber);
+    } catch (error) {
+      Console.print(error.message);
+      await this.enterWinningNumbers();
+    }
   }
 }
 

@@ -5,6 +5,9 @@ const InputView = {
   readLottoAmount() {
     return Console.readLineAsync(MESSAGE.INPUT_AMOUNT);
   },
+  readWinningNumber() {
+    return Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBER);
+  },
 };
 
 export default InputView;

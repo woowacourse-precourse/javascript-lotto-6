@@ -5,6 +5,7 @@ import Lotto from '../Lotto.js';
 class LottoGame {
   #count;
   #lottos;
+  #winningNumber;
 
   setCount(amount) {
     this.#count = amount / GAME_NUMBER.MONEY_UNIT;
@@ -18,6 +19,10 @@ class LottoGame {
     this.#lottos = lottos;
   }
 
+  setWinningNumber(numbers) {
+    this.#winningNumber = new Lotto(numbers);
+  }
+
   getLottoCount() {
     return this.#count;
   }
@@ -26,12 +31,16 @@ class LottoGame {
     return this.#lottos;
   }
 
+  getWinningNumbers() {
+    return this.#winningNumber.getNumbers();
+  }
+
   makeRandomNumbers() {
     return Random.pickUniqueNumbersInRange(
       LOTTO_NUMBER.MIN,
       LOTTO_NUMBER.MAX,
       LOTTO_NUMBER.COUNT
-    );
+    ).map(Number);
   }
 }
 
