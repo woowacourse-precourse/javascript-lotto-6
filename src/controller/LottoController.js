@@ -34,7 +34,7 @@ class LottoController {
       checkMoneyValidate(money);
       this.#money = Number(money);
     } catch (error) {
-      OutputView.moneyError(error);
+      OutputView.moneyError(error.message);
       await this.inputMoney();
     }
   }
