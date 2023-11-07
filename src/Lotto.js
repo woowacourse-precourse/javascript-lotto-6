@@ -34,7 +34,7 @@ class Lotto {
       throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
     }
   }
-
+  //로또 숫자 반환
   getNumbers() {
     return this.#numbers;
   }

@@ -21,7 +21,7 @@ class App {
     this.lottos = [];
     this.winningNum = [];
     this.bonusNum = 0;
-    this.winningDetail = [0, 0, 0, 0, 0];
+    this.winningDetail = [0, 0, 0, 0, 0]; // 5등,4등,3등,2등,1등의 개수이다.
     this.rateOfReturn = 0;
   }
   // 구입 금액 관련 함수들
@@ -48,15 +48,18 @@ class App {
   }
   // lotto 생성 관련 함수들
   generateLottos() {
-    for (let i = 0; i < this.cost / LOTTO_PRICE; i++) {
+    const numberOfLottos = this.cost / LOTTO_PRICE;
+    for (let i = 0; i < numberOfLottos; i++) {
       this.lottos.push(this.makeLotto());
     }
   }
   makeLotto() {
     return new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
   }
+  //로또 목록 보여주는 함수
   showLottoList() {
-    MissionUtils.Console.print(`${this.cost / LOTTO_PRICE}개를 구매했습니다.`);
+    const numberOfLottos = this.cost / LOTTO_PRICE;
+    MissionUtils.Console.print(`${numberOfLottos}개를 구매했습니다.`);
     this.lottos.forEach((lotto) => {
       MissionUtils.Console.print(`[${lotto.getNumbers().join(", ")}]`);
     });
@@ -66,7 +69,7 @@ class App {
     while (true) {
       try {
         const input = await this.getInputWinnerNum();
-        this.winningNum = new Lotto(input);
+        this.winningNum = new Lotto(input); // lotto 객체로 만들어줌으로서 유효성 검사
         break;
       } catch (error) {
         MissionUtils.Console.print(error.message);
@@ -108,22 +111,23 @@ class App {
       if (num === input) throw new Error("[ERROR] 이미 선택된 번호입니다.");
     });
   }
-  // 구입한 로또와 당첨 번호 비교 관련 함수
+  // 구입한 로또와 당첨 번호 비교 함수
   checkLottos() {
     let matchWinnerNum = 0;
     let matchBonusNum = 0;
     this.lottos.forEach((lotto) => {
-      matchWinnerNum = lotto.getNumbers().filter((num) => this.winningNum.getNumbers().includes(num)).length;
-      matchBonusNum = lotto.getNumbers().filter((num) => num === this.bonusNum).length;
+      matchWinnerNum = lotto.getNumbers().filter((num) => this.winningNum.getNumbers().includes(num)).length; //구입한 로또와 일치하는 당첨 번호의 수
+      matchBonusNum = lotto.getNumbers().filter((num) => num === this.bonusNum).length; //구입한 로또와 일치하는 보너스 번호의 수
       this.checkWinningDetail(matchWinnerNum, matchBonusNum);
     });
   }
+  //등수 확인하는 함수
   checkWinningDetail(matchWinnerNum, matchBonusNum) {
-    if (matchWinnerNum === 6) this.winningDetail[4]++;
-    if (matchWinnerNum === 5 && matchBonusNum === 1) this.winningDetail[3]++;
-    if (matchWinnerNum === 5 && matchBonusNum === 0) this.winningDetail[2]++;
-    if (matchWinnerNum === 4) this.winningDetail[1]++;
     if (matchWinnerNum === 3) this.winningDetail[0]++;
+    if (matchWinnerNum === 4) this.winningDetail[1]++;
+    if (matchWinnerNum === 5 && matchBonusNum === 0) this.winningDetail[2]++;
+    if (matchWinnerNum === 5 && matchBonusNum === 1) this.winningDetail[3]++;
+    if (matchWinnerNum === 6) this.winningDetail[4]++;
   }
   //당첨 내역 출력 관련 함수
   showWinningDetail() {
