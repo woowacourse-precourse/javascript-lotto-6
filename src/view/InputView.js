@@ -1,17 +1,35 @@
 import { Console } from '@woowacourse/mission-utils';
+import { INPUT_MESSAGE } from '../Constants';
+
+const getInputWithValidate = async (userInput, validate) => {
+  const input = await userInput();
+  validate(input);
+  return input;
+};
 
 const InputView = {
-  async readPurchaseAmount() {
-    const money = Console.readLineAsync('구입금액을 입력해 주세요.');
-    return money;
+  purchaseAmount: async () => {
+    const amount = await getInputWithValidate(
+      async () => Console.readLineAsync(INPUT_MESSAGE.PURCHASE_AMOUNT),
+      // ValidateInput
+    );
+    return Number(amount);
   },
-  async readWinningNumbers() {
-    const winningNumbers = Console.readLineAsync('당첨 번호를 입력해 주세요.');
-    return winningNumbers;
+
+  winningNumbers: async () => {
+    const numbers = await getInputWithValidate(
+      async () => Console.readLineAsync(INPUT_MESSAGE.WINNING_NUMBERS),
+      // ValidateInput
+    );
+    return numbers.split(',').map(number => Number(number));
   },
-  async readBonusNumber() {
-    const bonusNumber = Console.readLineAsync('보너스 번호를 입력해 주세요.');
-    return bonusNumber;
+
+  bonusNumber: async () => {
+    const bonusNumber = await getInputWithValidate(
+      async () => Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER),
+      // ValidateInput
+    );
+    return Number(bonusNumber);
   },
 };
 
