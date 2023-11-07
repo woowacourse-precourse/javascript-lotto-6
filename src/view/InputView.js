@@ -6,12 +6,6 @@ export default class InputView {
     return await Console.readLineAsync(MESSAGES.PURCHASE_AMOUNT);
   }
 
-  printPurchaseResult(purchaseCount, lottoArray) {
-    Console.print(MESSAGES.PURCHASE_RESULT(purchaseCount));
-    lottoArray.forEach((lottoNumber) => Console.print(lottoNumber));
-    Console.print("");
-  }
-
   async getWinningNumber() {
     return await Console.readLineAsync(MESSAGES.WINNIG_NUMBER);
   }
