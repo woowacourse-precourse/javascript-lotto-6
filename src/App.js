@@ -1,8 +1,8 @@
-import draw from "./modules/Draw";
-import purchase from "./modules/Purchase";
-import reward from "./modules/Reward";
-import inputView from "./views/Input";
-import outputView from "./views/Output";
+import draw from "./modules/Draw.js";
+import purchase from "./modules/Purchase.js";
+import reward from "./modules/Reward.js";
+import inputView from "./views/Input.js";
+import outputView from "./views/Output.js";
 
 class App {
   async play() {

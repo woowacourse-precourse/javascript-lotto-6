@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import draw from "../src/models/Draw";
+import draw from "../src/modules/Draw.js";
 
 const mockRandoms = (number) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();

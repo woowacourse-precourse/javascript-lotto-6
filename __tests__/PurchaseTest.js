@@ -1,4 +1,4 @@
-import purchase from "../src/models/Purchase";
+import purchase from "../src/modules/Purchase.js";
 
 describe("구매 객체 테스트", () => {
   test("구매 금액만큼 로또를 구입한다.", () => {

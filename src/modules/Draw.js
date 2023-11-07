@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import { lottoInfo } from "../constants";
+import { lottoInfo } from "../constants.js";
 
 const draw = {
   /*

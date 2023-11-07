@@ -1,5 +1,5 @@
 import { rewards } from "../src/constants";
-import reward from "../src/models/Reward";
+import reward from "../src/modules/Reward";
 
 describe("수익 객체 테스트", () => {
   test("등수에 따라 당첨 금액을 계산한다.", () => {

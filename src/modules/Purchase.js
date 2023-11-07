@@ -1,8 +1,8 @@
 import { Random } from "@woowacourse/mission-utils";
 
-import { error, lottoInfo } from "../constants";
-import Lotto from "./Lotto";
-import { throwErrorIf } from "../utils";
+import { error, lottoInfo } from "../constants.js";
+import Lotto from "./Lotto.js";
+import { throwErrorIf } from "../utils/index.js";
 
 const purchase = {
   countMoney: function (money) {

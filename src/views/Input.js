@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
-import { error, exceptionType, message } from "../constants";
-import { throwErrorIf } from "../utils";
+import { error, exceptionType, message } from "../constants.js";
+import { throwErrorIf } from "../utils/index.js";
 
 const inputView = {
   enterPurchaseAmount: async function () {

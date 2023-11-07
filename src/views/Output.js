@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { message } from "../constants";
+import { message } from "../constants.js";
 
 const outputView = {
   /* lottos: 로또 번호가 담긴 배열 */

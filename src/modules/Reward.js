@@ -1,4 +1,4 @@
-import { rewards } from "../constants";
+import { rewards } from "../constants.js";
 
 const reward = {
   computeWinningAmount: function (matches) {

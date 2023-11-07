@@ -1,5 +1,5 @@
-import { error } from "../constants";
-import { throwErrorIf } from "../utils";
+import { error } from "../constants.js";
+import { throwErrorIf } from "../utils/index.js";
 
 class Lotto {
   #numbers;
