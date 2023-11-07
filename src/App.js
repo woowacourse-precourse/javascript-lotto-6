@@ -79,10 +79,10 @@ class App {
   }
 
   async #inputBonusNumber() {
-    const bonusNumber =
-      await Console.readLineAsync('보너스 번호를 입력해 주세요.');
     try {
-      this.#validateBonusNumber(bonusNumber);
+      const bonusNumber =
+        await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+      this.#validateBonusNumber(Number(bonusNumber));
       this.#bonusNumber = Number(bonusNumber);
     } catch (error) {
       Console.print(error.message);
@@ -91,8 +91,8 @@ class App {
   }
 
   #validatePaymentAmount(amount) {
-    if (Number.isNaN(amount)) {
-      throw new Error('[ERROR] 숫자를 입력해주세요.');
+    if (!Number.isInteger(Number(amount))) {
+      throw new Error('[ERROR] 정수를 입력해주세요.');
     }
     if (amount % 1000 !== 0) {
       throw new Error('[ERROR] 로또 구입 금액은 1000원 단위로만 가능합니다.');
@@ -100,29 +100,34 @@ class App {
   }
 
   #validateWinningNumber(winningNumbers) {
-    const numbers = winningNumbers;
-    if (numbers.length !== 6) {
+    if (winningNumbers.length !== 6) {
       throw new Error('[ERROR] 당첨 번호는 6개여야 합니다.');
     }
-    if (numbers.some(number => number < MIN_NUMBER || number > MAX_NUMBER)) {
+    if (
+      winningNumbers.some(number => number < MIN_NUMBER || number > MAX_NUMBER)
+    ) {
       throw new Error('[ERROR] 당첨 번호는 1~45 사이여야 합니다.');
     }
-    if (numbers.some(number => Number.isNaN(number))) {
-      throw new Error('[ERROR] 당첨 번호는 숫자여야 합니다.');
+    if (winningNumbers.some(number => !Number.isInteger(Number(number)))) {
+      throw new Error('[ERROR] 당첨 번호는 정수여야 합니다.');
     }
-    if (numbers.some((number, index) => numbers.indexOf(number) !== index)) {
+    if (
+      winningNumbers.some(
+        (number, index) => winningNumbers.indexOf(number) !== index
+      )
+    ) {
       throw new Error('[ERROR] 당첨 번호는 중복될 수 없습니다.');
     }
   }
 
-  #validateBonusNumber(winningNumbers, bonusNumber) {
+  #validateBonusNumber(bonusNumber) {
     if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
       throw new Error('[ERROR] 보너스 번호는 1~45 사이여야 합니다.');
     }
-    if (Number.isNaN(bonusNumber)) {
-      throw new Error('[ERROR] 보너스 번호는 숫자여야 합니다.');
+    if (!Number.isInteger(Number(bonusNumber))) {
+      throw new Error('[ERROR] 보너스 번호는 정수여야 합니다.');
     }
-    if (winningNumbers.includes(bonusNumber)) {
+    if (this.#winningNumbers.includes(bonusNumber)) {
       throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.');
     }
   }
