@@ -1,7 +1,7 @@
 import CustomError from './customs/CustomError.js';
 import ERROR_MESSAGE from './constants/error.js';
 import ArrayValidator from './validators/ArrayValidator.js';
-import { LOTTO_RANGE } from './constants/number.js';
+import { LOTTO_COUNT, LOTTO_RANGE } from './constants/number.js';
 
 class Lotto {
   #numbers;
@@ -19,7 +19,7 @@ class Lotto {
    */
   // eslint-disable-next-line class-methods-use-this
   #validate(numbers) {
-    if (!ArrayValidator.isArrayOfLength(numbers, 6)) {
+    if (!ArrayValidator.isArrayOfLength(numbers, LOTTO_COUNT)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_LOTTO_COUNT);
     }
 
