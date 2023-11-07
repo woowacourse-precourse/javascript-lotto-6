@@ -12,9 +12,21 @@ export function isInputEmpty(input) {
   }
 }
 
+export function isZero(input) {
+  if (input === "0") {
+    throw new Error(ERRORS.SHOULD_BUY);
+  }
+}
+
 export function isInputNumeric(input) {
   if (isNaN(input)) {
     throw new Error(ERRORS.NOT_NUMBER);
+  }
+}
+
+export function isPositiveNumber(input) {
+  if (Number(input) < 0) {
+    throw new Error(ERRORS.NEGATIVE_NUMBER);
   }
 }
 

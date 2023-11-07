@@ -4,6 +4,8 @@ import {
   isDivisibleByThousand,
   isInputEmpty,
   isInputNumeric,
+  isPositiveNumber,
+  isZero,
 } from "./libs/validate.js";
 
 class User {
@@ -33,7 +35,9 @@ class User {
 
   #validate(input) {
     isInputEmpty(input);
+    isZero(input);
     isInputNumeric(input);
+    isPositiveNumber(input);
     isDivisibleByThousand(input);
   }
 }

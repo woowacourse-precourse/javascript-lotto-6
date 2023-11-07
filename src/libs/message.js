@@ -15,7 +15,9 @@ const MESSAGES = {
 
 const ERRORS = {
   EMPTY_INPUT: "[ERROR] 입력을 하지 않으셨습니다.",
+  SHOULD_BUY: "[ERROR] 구입하지 않으셨습니다.",
   NOT_NUMBER: "[ERROR] 숫자를 입력하세요.",
+  NEGATIVE_NUMBER: "[ERROR] 양수를 입력하세요.",
   INVALID_PURCHASE_AMOUNT: "[ERROR] 1000원 단위로 구입해주세요.",
   INVALID_NUMBERS_LENGTH: "[ERROR] 입력된 숫자의 개수를 확인해주세요.",
   CONTAIN_DUPLICATE: "[ERROR] 중복된 로또 번호가 있습니다.",
