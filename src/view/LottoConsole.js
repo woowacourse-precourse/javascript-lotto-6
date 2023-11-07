@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { CONSTANTS } from '../constants/lotto.js';
 
 class LottoConsole {
   static async getBudget() {
@@ -80,10 +81,14 @@ class LottoConsole {
   }
 
   static #validateNumberBetweenRange(number) {
-    if (number < 1)
-      throw new Error('[ERROR] 로또 숫자는 1과 45사이어야 합니다.');
-    if (number > 45)
-      throw new Error('[ERROR] 로또 숫자는 1과 45사이어야 합니다.');
+    if (number < CONSTANTS.MINIMUM_BOUNDARY)
+      throw new Error(
+        `[ERROR] 로또 숫자는 ${CONSTANTS.MINIMUM_BOUNDARY}과 ${CONSTANTS.MAXIMUM_BOUNDARY}사이어야 합니다.`
+      );
+    if (number > CONSTANTS.MAXIMUM_BOUNDARY)
+      throw new Error(
+        `[ERROR] 로또 숫자는 ${CONSTANTS.MINIMUM_BOUNDARY}과 ${CONSTANTS.MAXIMUM_BOUNDARY}사이어야 합니다.`
+      );
   }
 
   static #validateLottoNumber(number) {
@@ -92,12 +97,12 @@ class LottoConsole {
   }
 
   static #validateThousands(number) {
-    if (number % 1000 !== 0)
+    if (number % CONSTANTS.BASE_PRICING_UNIT !== 0)
       throw new Error('[ERROR] 입력값은 1000원 단위입니다.');
   }
 
   static #validateArrayLength(arr) {
-    if (arr.length !== 6)
+    if (arr.length !== CONSTANTS.LENGTH_OF_LOTTO)
       throw new Error('[ERROR] 로또는 6자리 숫자이어야 합니다.');
   }
 }

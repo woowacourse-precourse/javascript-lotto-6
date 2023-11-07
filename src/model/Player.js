@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
-import { PRIZE_TABLE } from '../constants/lotto.js';
+import { CONSTANTS, PRIZE_TABLE } from '../constants/lotto.js';
 
 class Player {
   #budget = 0;
@@ -28,7 +28,7 @@ class Player {
   buyLottos() {
     while (this.#budget > 0) {
       this.#lottos.push(new Lotto(Player.#generateRandomLottoNumbers()));
-      this.#budget -= 1000;
+      this.#budget -= CONSTANTS.BASE_PRICING_UNIT;
     }
     return this;
   }
@@ -57,12 +57,18 @@ class Player {
   }
 
   static #generateRandomLottoNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return MissionUtils.Random.pickUniqueNumbersInRange(
+      CONSTANTS.MINIMUM_BOUNDARY,
+      CONSTANTS.MAXIMUM_BOUNDARY,
+      CONSTANTS.LENGTH_OF_LOTTO
+    );
   }
 
   static #validateBudget(budget) {
-    if (budget % 1000 !== 0 || budget === 0)
-      throw new Error('[ERROR] 예산은 1000원 단위이어야 합니다.');
+    if (budget % CONSTANTS.BASE_PRICING_UNIT !== 0 || budget === 0)
+      throw new Error(
+        `[ERROR] 예산은 ${CONSTANTS.BASE_PRICING_UNIT}원 단위이어야 합니다.`
+      );
   }
 
   #validateHasLottos() {
