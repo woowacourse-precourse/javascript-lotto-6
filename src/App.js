@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lottos from './Lottos.js'
-import { Winning } from "./WinningNumber.js";
+import Winning from "./WinningNumber.js";
 
 class App {
   async play() {
@@ -26,7 +26,7 @@ class App {
     let userLottoNumber = inputLottoNumber.split(',');
     let newUserLottoNumber = userLottoNumber.map(Number)
     this.winning = new Winning(newUserLottoNumber)
-    console.log(this.winning)
+    console.log(this.winning.value)
   }
 }
 
