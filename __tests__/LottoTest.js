@@ -7,6 +7,7 @@ describe("로또 클래스 테스트", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6, 7]);
     }).toThrow(errorMessage);
+
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5, 5, 5, 5, 6]);
     }).toThrow(errorMessage);
@@ -37,6 +38,7 @@ describe("로또 클래스 테스트", () => {
     expect(() => {
       new Lotto(['hyuk', 2, 3, 4, 5, 6]);
     }).toThrow(errorMessage);
+    
     expect(() => {
       new Lotto(['1a', 2, 3, 4, 5, 6]);
     }).toThrow(errorMessage);

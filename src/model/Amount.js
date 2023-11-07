@@ -18,7 +18,7 @@ class Amount {
 
         while(!isCorrect) {
             try {
-                await Amount.#validateCorrectFormat(amount);
+                Amount.validateCorrectFormat(amount);
                 isCorrect = true;
             } catch(error) {
                 Console.print(`${ERROR_MESSAGE.AMOUT_NUMBER_ERROR}`);
@@ -29,9 +29,9 @@ class Amount {
         return amount;
     }
 
-    static async #validateCorrectFormat(amount) {
+    static validateCorrectFormat(amount) {
         if(isNaN(+amount) || +amount % 1000 !== 0 || +amount < 1000 || +amount > 20000) {
-            throw 'error';
+            throw '[ERROR]';
         }
     }
 }
