@@ -10,12 +10,13 @@ class Lotto {
   }
 
   #validate(numbers) {
+    const { error } = WINNING_ERROR;
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error(`${WINNING_ERROR.error}`);
+      throw new Error(`${error}`);
     }
     const regex = /^(?:(?:[1-9]|[1-3][0-9]|4[0-5])(?:, ?|$)){6}$/;
     if (!regex.test(numbers)) {
-      throw new Error(`${WINNING_ERROR.error}`);
+      throw new Error(`${error}`);
     }
   }
 

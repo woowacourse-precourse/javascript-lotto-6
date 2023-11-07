@@ -2,6 +2,25 @@ import NUMBERS from "../constants/numbers.js";
 import PRIZE_MONEY from "../constants/prize.js";
 import resultOutput from "../view/output/resultOutput.js";
 
+const {
+  three_match,
+  four_match,
+  five_match,
+  six_match,
+  five_place,
+  four_place,
+  third_place,
+  second_place,
+  first_place,
+  rank_stack,
+  stack_add,
+  zero,
+  purchase_money,
+  percent,
+  profit_rounded,
+  rank_index,
+} = NUMBERS;
+
 class LottoGame {
   #userNumbers;
   #numbers;
@@ -14,7 +33,7 @@ class LottoGame {
   }
 
   lottoLogic() {
-    const rank = NUMBERS.rank;
+    const rank = rank_stack;
     this.#userNumbers.forEach((value) => {
       const match = this.countMatch(value);
       const bounsMatch = value.includes(Number(this.#bonusNumber));
@@ -28,26 +47,27 @@ class LottoGame {
   }
   checkRank(match, rank, bonus) {
     const rankObj = {
-      [NUMBERS.three_match]: [NUMBERS.five_place],
-      [NUMBERS.four_match]: [NUMBERS.four_place],
-      [NUMBERS.five_match]: bonus ? [NUMBERS.second_place] : [NUMBERS.third_place],
-      [NUMBERS.six_match]: [NUMBERS.first_place],
+      [three_match]: [five_place],
+      [four_match]: [four_place],
+      [five_match]: bonus ? [second_place] : [third_place],
+      [six_match]: [first_place],
     };
     const matchingRank = rankObj[match];
     if (matchingRank) {
-      rank[matchingRank] += NUMBERS.stack;
+      rank[matchingRank] += stack_add;
     }
   }
 
   profitability(rank) {
     const totalPrize = rank
-      .map((count, index) => count * PRIZE_MONEY[index + NUMBERS.rank_index])
-      .reduce((a, b) => a + b, NUMBERS.zero);
+      .map((count, index) => count * PRIZE_MONEY[index + rank_index])
+      .reduce((a, b) => a + b, zero);
     return !totalPrize
-      ? NUMBERS.zero
+      ? zero
       : (
-          (totalPrize / (this.#userNumbers.length * NUMBERS.purchase_money)) * NUMBERS.percent
-        ).toFixed(NUMBERS.profit_rounded);
+          (totalPrize / (this.#userNumbers.length * purchase_money)) *
+          percent
+        ).toFixed(profit_rounded);
   }
 }
 
