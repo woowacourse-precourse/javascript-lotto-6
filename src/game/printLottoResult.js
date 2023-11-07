@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import calculateProfit from "./calculateProfit";
+import OutputView from "../view/OutputView";
 
 const printLottoResult = (lottoResult, userBuyMoney) => {
     const calculateProfitPer = ((calculateProfit(lottoResult) / userBuyMoney) * 100).toFixed(1);
@@ -18,7 +19,7 @@ const printLottoContent = (lottoResult, totalPer) => {
         총 수익률은 ${totalPer}%입니다.
     `;
 
-    MissionUtils.Console.print(contents);
+    OutputView.printResult(contents);
 }
 
 export default printLottoResult;
