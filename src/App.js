@@ -61,12 +61,6 @@ class App {
     })
   }
 
-  splitStringByComma = (userInputWinningNumbers) => {
-    const stringPieces = userInputWinningNumbers.split(',');
-
-    return stringPieces;
-  }
-
   parseWinningNumbers = (WinningNumbers) => {
     const parsedString = WinningNumbers.split(',');
 
@@ -75,26 +69,6 @@ class App {
     })
 
     return parsedWinnigNumbers;
-  }
-
-  checkDuplicate = (winningNumbers) => {
-    const duplicate = winningNumbers.filter((winningNumber, index) => {
-      winningNumbers.indexOf(winningNumber) != index;
-    })
-
-    if(isNaN(duplicate)) throw new Error('[ERROR] : can not have duplicate number in winning numbers.');
-  }
-
-  checkWinngNumbers = (parsedWinnigNumbers) => {
-    if(parsedWinnigNumbers.length != 6) throw new Error('[ERROR] : the length of winning numbers is not 6.');
-
-    parsedWinnigNumbers.forEach((winningNumber) => {
-      if(!Number.isInteger(winningNumber)) throw new Error('[ERROR] : winning number must be integer.');
-
-      if(winningNumber < 1 || winningNumber > 45) throw new Error('[ERROR] : winning number must be in range 1~45');
-    })
-
-    this.checkDuplicate(parsedWinnigNumbers);
   }
 
   setWinningNumbers = (winningNumbers) => {
@@ -209,21 +183,21 @@ class App {
   }
 
   getUserInputWinningNumbers = async () => {
-    let parsedWinnigNumbers;
-
     try {
       MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
 
       const userInputWinningNumbers = await this.getUserInput();
-      parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
+      const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
+      const lotto = new Lotto(parsedWinnigNumbers);
 
-      this.checkWinngNumbers(parsedWinnigNumbers);
+      return lotto;
     } catch(err) {
       MissionUtils.Console.print(err.message);
-      await this.getUserInputWinningNumbers();
-    }
 
-    return parsedWinnigNumbers;
+      const lotto = await this.getUserInputWinningNumbers();
+
+      return lotto;
+    }
   }
 
   getUserInputBonusNumber = async () => {
@@ -250,9 +224,9 @@ class App {
 
     this.printLottoOrder(lottoOrder);
 
-    const winningNumbers = await this.getUserInputWinningNumbers();
+    const lotto = await this.getUserInputWinningNumbers();
 
-    this.setWinningNumbers(winningNumbers);
+    this.setWinningNumbers(lotto.getNumbers());
 
     const bonusNumber = await this.getUserInputBonusNumber();
     const lottoStat = this.getLottoStat(lottoOrder, bonusNumber);
