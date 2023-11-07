@@ -8,14 +8,16 @@ class App {
     );
 
     const lottoGame = new LottoGame();
-    lottoGame.generateLotto(lottoAmount);
+    lottoGame.generateRandomLotto(lottoAmount);
 
     const lottoNumbers = await UserInput.getUserInput(
       UserInput.getLottoNumbers
     );
-    const bonusNumber = await UserInput.getUserInput(UserInput.getBonusNumber);
+    lottoGame.generateWinnigLotto(lottoNumbers);
 
-    lottoGame.setWinningNumbers(lottoNumbers, bonusNumber);
+    const bonusNumber = await UserInput.getUserInput(UserInput.getBonusNumber);
+    lottoGame.setLottoBonusNumber(bonusNumber);
+
     lottoGame.calculateWinner();
   }
 }

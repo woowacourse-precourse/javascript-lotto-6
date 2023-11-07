@@ -19,6 +19,17 @@ class InputValidate {
     InputError.checkEmpty(inputNumberList);
   }
 
+  static validateLottoNumbers(inputNumberList) {
+    InputError.checkNumberLength(inputNumberList);
+    InputError.checkDuplicateLength(inputNumberList);
+
+    inputNumberList.forEach((number) => {
+      InputError.checkNonNumeric(number);
+      InputError.checkNagativeNumber(number);
+      InputError.checkOutOfRangeNumber(number);
+    });
+  }
+
   static validateAmount(inputNumber) {
     return this.validateInput(inputNumber);
   }

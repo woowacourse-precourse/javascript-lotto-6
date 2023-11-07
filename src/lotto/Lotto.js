@@ -1,4 +1,5 @@
 import InputError from "../errors/InputError.js";
+import InputValidate from "../utils/InputValidate.js";
 import { ERRORS } from "../utils/constants.js";
 import { LOTTO_GAME_RULE } from "../utils/constants.js";
 
@@ -11,19 +12,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO_GAME_RULE.lottoCount) {
-      throw new Error(`${ERRORS.error} ${ERRORS.numberLengthError}`);
-    }
-
-    if (new Set(numbers).size !== LOTTO_GAME_RULE.lottoCount) {
-      throw new Error(`${ERRORS.error} ${ERRORS.duplicatedNumberError}`);
-    }
-
-    numbers.forEach((number) => {
-      InputError.checkNonNumeric(number);
-      InputError.checkNagativeNumber(number);
-      InputError.checkOutOfRangeNumber(number);
-    });
+    InputValidate.validateLottoNumbers(numbers);
   }
 
   getNumbers() {

@@ -33,6 +33,18 @@ class InputError {
       throw new Error(`${ERRORS.error} ${ERRORS.outOfRangeNumberError}`);
     }
   }
+
+  static checkNumberLength(input) {
+    if (input.length !== LOTTO_GAME_RULE.lottoCount) {
+      throw new Error(`${ERRORS.error} ${ERRORS.numberLengthError}`);
+    }
+  }
+
+  static checkDuplicateLength(input) {
+    if (new Set(input).size !== LOTTO_GAME_RULE.lottoCount) {
+      throw new Error(`${ERRORS.error} ${ERRORS.duplicatedNumberError}`);
+    }
+  }
 }
 
 export default InputError;

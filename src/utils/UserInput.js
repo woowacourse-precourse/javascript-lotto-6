@@ -33,7 +33,10 @@ class UserInput {
 
     InputValidate.validateEmptyLottoNumbers(lottoNumbers);
 
-    return lottoNumbers.split(",").map(Number);
+    const lottoNumberList = lottoNumbers.split(",").map(Number);
+    InputValidate.validateLottoNumbers(lottoNumberList);
+
+    return lottoNumberList;
   }
 
   static async getBonusNumber() {

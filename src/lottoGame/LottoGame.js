@@ -1,20 +1,18 @@
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "../lotto/Lotto.js";
+import WinningLotto from "../lotto/WinningLotto.js";
 import LottoUtils from "./lottoUtils.js";
 import { COMMAND, LOTTO_RANK, LOTTO_GAME_RULE } from "../utils/constants.js";
 
 class LottoGame {
   #purchasedAmount;
   #purchasedLottos;
-  #winningNumbers;
-  #bonusNumber;
+  #winningLotto;
   #rank;
 
   constructor() {
     this.#purchasedAmount = 0;
     this.#purchasedLottos = [];
-    this.#winningNumbers = [];
-    this.#bonusNumber = 1;
     this.#rank = {
       firstPlace: 0,
       secondPlace: 0,
@@ -24,7 +22,7 @@ class LottoGame {
     };
   }
 
-  generateLotto(amount) {
+  generateRandomLotto(amount) {
     this.#purchasedAmount = amount;
 
     for (
@@ -37,6 +35,14 @@ class LottoGame {
     }
 
     this.printPurchasedLottos();
+  }
+
+  generateWinnigLotto(numbers) {
+    this.#winningLotto = new WinningLotto(numbers);
+  }
+
+  setLottoBonusNumber(number) {
+    this.#winningLotto.setBonusNumber(number);
   }
 
   printPurchasedLottos() {
@@ -52,18 +58,13 @@ class LottoGame {
     });
   }
 
-  setWinningNumbers(winningNumbers, bonusNumber) {
-    this.#winningNumbers = winningNumbers;
-    this.#bonusNumber = bonusNumber;
-  }
-
   updateRank(sameNumbers) {
     switch (sameNumbers.length) {
       case 6:
         this.#rank.firstPlace++;
         break;
       case 5:
-        if (sameNumbers.includes(this.#bonusNumber)) {
+        if (sameNumbers.includes(this.#winningLotto.getBonusNumber())) {
           this.#rank.secondPlace++;
         } else {
           this.#rank.thirdPlace++;
@@ -84,7 +85,7 @@ class LottoGame {
     this.#purchasedLottos.forEach((lotto) => {
       const sameNumbers = lotto
         .getNumbers()
-        .filter((number) => this.#winningNumbers.includes(number));
+        .filter((number) => this.#winningLotto.getNumbers().includes(number));
 
       this.updateRank(sameNumbers);
     });
