@@ -10,58 +10,62 @@ class Calculate {
 
   constructor(amount, arrays, numbers, bonus) {
     this.#amount = amount;
-    this.#numbers = numbers;
     this.#issuedLotto = arrays;
+    this.#numbers = numbers;
     this.#bonus = bonus;
-    this.result = [];
-    this.#isBonus = false;
-    this.#count = 0;
     this.sum = 0;
   }
 
   count() {
+    let result = [];
     for(let lotto = 0; lotto < this.#issuedLotto.length; lotto++) {
       this.#count = 0;
       this.#isBonus = false;
       for(let number = 0; number < this.#issuedLotto[lotto].length; number++) {
-        this.countNumbers(lotto, number);
+        this.#countNumbers(lotto, number);
       }
       if(this.#isBonus && this.#count === 5) {
-        this.result.push('bonus');
+        result.push('bonus');
       }
-      this.onPushResult();
+      this.#onPushResult(result);
     }
 
-    return this.result;
+    return result;
   };
 
-  isCheckBonus(lotto) {
+  #isCheckBonus(lotto) {
     if(this.#issuedLotto[lotto].includes(+this.#bonus)) {
       this.#isBonus = true;
     }
+
+    return this.#isBonus;
   }
 
-  isCheckCorrectNumber(lotto, number) {
+  #isCheckCorrectNumber(lotto, number) {
     if(this.#issuedLotto[lotto].includes(+this.#numbers[number])) {
       this.#count += 1
     }
+
+    return this.#count;
   }
 
-  onPushResult() {
+  #onPushResult(result) {
     if(!this.#isBonus && this.#count >= 3) {
-      this.result.push(this.#count);
+      result.push(this.#count);
     }
+
+    return result;
   }
 
-  countNumbers(lotto, number) {
-    this.isCheckCorrectNumber(lotto, number);
+  #countNumbers(lotto, number) {
+    this.#isCheckCorrectNumber(lotto, number);
     if (this.#count === 5) {
-      this.isCheckBonus(lotto);
+      this.#isCheckBonus(lotto);
     }
   }
   
-  collect() {
-    return this.result.reduce((allCount, count) => {
+  collect(result) {
+    return result.reduce((allCount, count) => {
       if(count in allCount) {
         allCount[count] += 1;
       } else {
@@ -74,14 +78,14 @@ class Calculate {
   
   rate(result) {
     for(const value of Object.keys(result)) {
-      this.onSwitch(value);
+      this.#onSwitch(value);
     } 
     const rate = ((this.sum / this.#amount) * 100).toFixed(1).toLocaleString();
 
     return rate;
   }
 
-  onSwitch(value) {
+  #onSwitch(value) {
     switch(value) {
       case '3':
         this.sum += `${REWORD.FIFTH_PLACE}`;
