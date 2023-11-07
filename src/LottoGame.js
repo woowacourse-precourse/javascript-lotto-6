@@ -1,4 +1,4 @@
-import { CONFIG } from '../constants/constants';
+import { CONFIG, PRINT_MESSAGE } from '../constants/constants';
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 import Player from './Player';
@@ -15,38 +15,40 @@ class LottoGame {
   };
 
   async run() {
-    await this.inputPrice();
+    await this.#inputPrice();
   }
 
-  async inputPrice() {
+  async #inputPrice() {
     const price = await new Player().readPrice();
 
-    this.buyLotto(price);
+    this.#buyLotto(price);
   }
 
-  async buyLotto(price) {
+  async #buyLotto(price) {
     for (let i = 0; i < price / 1000; i += 1) {
       const lottoNumber = this.#generateRandomLottoNumbers();
       const lotto = new Lotto(lottoNumber);
       lotto.displayBoard();
       this.#tickets.push(lotto.getLottoNumbers());
     }
-    this.inputWinningBonus();
+    this.#inputWinningBonus();
   }
 
-  async inputWinningBonus() {
+  async #inputWinningBonus() {
     const winningBonus = new WinningBonus();
     const winningNumber = await winningBonus.readWinning();
     const bonusNumber = await winningBonus.readBonus();
 
-    this.checkLottos(winningNumber, bonusNumber);
+    this.#checkLottos(winningNumber, bonusNumber);
   }
 
-  checkLottos(winningNumber, bonusNumber) {
+  #checkLottos(winningNumber, bonusNumber) {
     this.#tickets.forEach((ticket) => {
-      const result = this.checkLotto(ticket, winningNumber, bonusNumber);
+      const result = this.#checkLotto(ticket, winningNumber, bonusNumber);
       this.#results[result] += 1;
     });
+
+    Console.print(PRINT_MESSAGE.jackpot);
 
     for (const [prize, count] of Object.entries(this.#results)) {
       if (prize !== 'undefined') {
@@ -54,10 +56,10 @@ class LottoGame {
       }
     }
 
-    this.calculateTotal();
+    this.#calculateTotal();
   }
 
-  calculateTotal() {
+  #calculateTotal() {
     const totalPrize =
       this.#results['3개 일치 (5,000원)'] * CONFIG.prize['5등'] +
       this.#results['4개 일치 (50,000원)'] * CONFIG.prize['4등'] +
@@ -71,7 +73,7 @@ class LottoGame {
     Console.print(`총 수익률은 ${profitPercentage}%입니다.`);
   }
 
-  checkLotto(ticket, winningNumber, bonusNumber) {
+  #checkLotto(ticket, winningNumber, bonusNumber) {
     const matchingNumbers = ticket.filter((num) =>
       winningNumber.includes(num),
     ).length;
