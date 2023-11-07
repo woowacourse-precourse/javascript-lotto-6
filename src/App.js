@@ -25,43 +25,11 @@ class App {
     this.#winningLotto = await this.#generateWinningLotto();
     this.#bonus = await this.#generateBonus();
     const matchCountList = this.#countMatchingNumbers(purchaseLotto);
-    const matchingTable = this.#getWinningResult(matchCountList);
-    const rateOfReturn = this.#getRateOfReturn(purchaseAmount, matchingTable);
+    const matchingTable = new WinningResult(matchCountList).getResult();
+    const rateOfReturn = new RateOfReturn(purchaseAmount).getRateOfReturn(
+      matchingTable,
+    );
     OutputView.printLotteryResultsSummary(matchingTable, rateOfReturn);
-  }
-
-  #getWinningResult(matchCountList) {
-    const winningResult = new WinningResult(matchCountList);
-    return winningResult.getResult();
-  }
-
-  #getRateOfReturn(purchaseAmount, matchingTable) {
-    const rateOfReturn = new RateOfReturn(purchaseAmount);
-    return rateOfReturn.getRateOfReturn(matchingTable);
-  }
-
-  #countMatchingNumbers(purchaseLotto) {
-    const matchCountList = [];
-    purchaseLotto.reduce((acc, autoLotto) => {
-      let count = DEFAULT_NUM;
-      acc.forEach((winningNum) => {
-        if (autoLotto.includes(winningNum)) count += COUNT.plus;
-      });
-      this.#updateMatchCountList(matchCountList, count, autoLotto);
-      return acc;
-    }, this.#winningLotto.getLotto());
-    return matchCountList;
-  }
-
-  #updateMatchCountList(matchCountList, count, autoLotto) {
-    if (count === MATCH_COUNTS.five) {
-      matchCountList.push(
-        autoLotto.includes(this.#bonus.getBonus())
-          ? [count, true]
-          : [count, false],
-      );
-    }
-    matchCountList.push(count);
   }
 
   async #getPurchaseLotto() {
@@ -98,6 +66,31 @@ class App {
       OutputView.printError(error.message);
       return this.#generateBonus();
     }
+  }
+
+  #countMatchingNumbers(purchaseLotto) {
+    const matchCountList = [];
+    purchaseLotto.reduce((acc, autoLotto) => {
+      let count = DEFAULT_NUM;
+      acc.forEach((winningNum) => {
+        if (autoLotto.includes(winningNum)) count += COUNT.plus;
+      });
+      this.#updateMatchCountList(matchCountList, count, autoLotto);
+      return acc;
+    }, this.#winningLotto.getLotto());
+
+    return matchCountList;
+  }
+
+  #updateMatchCountList(matchCountList, count, autoLotto) {
+    if (count === MATCH_COUNTS.five) {
+      matchCountList.push(
+        autoLotto.includes(this.#bonus.getBonus())
+          ? [count, true]
+          : [count, false],
+      );
+    }
+    matchCountList.push(count);
   }
 }
 
