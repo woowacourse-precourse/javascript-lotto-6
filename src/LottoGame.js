@@ -31,6 +31,7 @@ class LottoGame {
         throw new Error(ERROR_LOTTO_REPEAT);
       }
       this.checkResult();
+      OutputView.printResultStastics(this.#result);
     } catch (error) {
       Console.print(error.message);
     }
@@ -49,17 +50,16 @@ class LottoGame {
 
   checkResult() {
     this.#result = {
-      1: { count: 0, prize: 2_000_000_000 },
-      2: { count: 0, prize: 30_000_000 },
-      3: { count: 0, prize: 1_500_000 },
-      4: { count: 0, prize: 50_000 },
-      5: { count: 0, prize: 5_000 },
+      3: { count: 0, prize: 2_000_000_000 },
+      4: { count: 0, prize: 30_000_000 },
+      5: { count: 0, prize: 1_500_000 },
+      bonus: { count: 0, prize: 50_000 },
+      6: { count: 0, prize: 5_000 },
     };
     this.#lottoList.forEach(ticket => {
       const matchingNumbers = ticket.numbers.filter(number =>
         this.#winningLotto.numbers.includes(number),
       );
-      console.log(matchingNumbers);
 
       if (matchingNumbers.length === 6) {
         this.#result[1].count++;
@@ -73,7 +73,6 @@ class LottoGame {
         this.#result[5].count++;
       }
     });
-    console.log(this.#result);
   }
 
   get lottoList() {

@@ -1,4 +1,4 @@
-import { Console, PRINT_PURCHASE_COUNT } from './Constant';
+import { Console, PRINT_PURCHASE_COUNT, PRINT_WINNING_STATISTIC } from './Constant';
 
 const OutputView = {
   printLottoCount(lottoList) {
@@ -7,6 +7,10 @@ const OutputView = {
 
   printLotto(lotto) {
     Console.print(lotto);
+  },
+
+  printResultStastics(result) {
+    Console.print(PRINT_WINNING_STATISTIC);
   },
 };
 
