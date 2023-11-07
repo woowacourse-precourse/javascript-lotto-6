@@ -27,7 +27,6 @@ const controllerCommonLottoWinningNumbersElements = (lottoCommonWinningNumbersAr
     Validator.assertNonEmptyString(itemString);
     Validator.assertParsableAsInteger(itemString);
     const itemNumber = Formattor.formatStringToInteger(itemString);
-    Validator.assertPositiveNumber(itemNumber);
     Validator.assertValueInRange(
       itemNumber,
       RULE_CONSTANT.LOTTO_MIN_NUMBER,
@@ -58,7 +57,24 @@ const controllerCommonLottoWinningNumbers = async () => {
   return {getlottoCommonWinningNumbersArray};
 }
 
+const controllerBonusLottoWinningNumber = async () => {
+  const lottoBonusWinningNumberString = (
+    await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_BONUS_WINNING_NUMBERS_MESSAGE)
+  );
+  Validator.assertNonEmptyString(lottoBonusWinningNumberString);
+  Validator.assertParsableAsInteger(lottoBonusWinningNumberString);
+  const lottoBonusWinningNumber =Formattor.formatStringToInteger(lottoBonusWinningNumberString);
+  Validator.assertValueInRange(
+    lottoBonusWinningNumber,
+    RULE_CONSTANT.LOTTO_MIN_NUMBER,
+    RULE_CONSTANT.LOTTO_MAX_NUMBER
+  );
+  const getlottoBonusWinningNumber = () => lottoBonusWinningNumber;
+  return {getlottoBonusWinningNumber};
+}
+
 export default {
   controllerLottoPurchase,
   controllerCommonLottoWinningNumbers,
+  controllerBonusLottoWinningNumber,
 }
