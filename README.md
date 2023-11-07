@@ -237,3 +237,15 @@ class Lotto {
 - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
   - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
 - 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
+
+## 🛠️ 기능 목록
+
+- [x] 구입 금액을 입력받아서 예외처리 후 값을 리턴해주는 함수 / `App.inputMoney`
+- [x] 금액만큼 로또를 발행하고 출력하는 함수 / `App.issueLottery`
+- [x] 당첨 번호를 입력받아서 예외처리 후 Lotto 객체를 돌려주는 함수 / `App.inputWinningNumber`
+- [x] 보너스 번호를 입력받아서 예외처리 후 값을 리턴해주는 함수 / `App.inputBonusNumber`
+- [x] 입력받은 당첨 번호가 유효한 지 확인하는 함수 / `Lotto.#validate`
+- [x] 변수에 저장된 값이 자연수인지 확인하는 함수 / `Lotto.#isValidNumber`
+- [x] 당첨 개수를 파악해서 결과 object를 리턴해주는 함수 / `Lotto.getResult`
+- [x] 결과를 계산해서 출력해주는 함수 / `Lotto.printResult`
+- [x] 에러메세지를 출력하고 에러를 발생시키는 함수 / `Lotto.#throwError`
