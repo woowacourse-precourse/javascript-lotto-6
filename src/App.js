@@ -53,8 +53,8 @@ class App {
   }
 
   async requestWinningNumbers() {
-    const winningNumbers = await this.#requestNumbers("당첨 번호를 입력해 주세요.\n");
-    const bonusNumber = await this.#requestNumbers("보너스 번호를 입력해 주세요\n", true);
+    const winningNumbers = await this.#requestNumbers("\n당첨 번호를 입력해 주세요.\n");
+    const bonusNumber = await this.#requestNumbers("\n보너스 번호를 입력해 주세요\n", true);
     return [...winningNumbers, bonusNumber];
   }
 
