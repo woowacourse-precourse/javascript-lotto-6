@@ -14,6 +14,7 @@ class LottoGame {
   async gameStart() {
     await this.getUserMoney();
     this.buyLottoTicket();
+    this.printPurchasedTicket();
   }
 
   async getUserMoney() {
@@ -22,11 +23,15 @@ class LottoGame {
   }
 
   buyLottoTicket() {
-    Console.print(`${this.numberOfLotto}개 구매했습니다.`);
+    Console.print(`\n${this.numberOfLotto}개 구매했습니다.`);
     for (let i = 0; i < Number(this.numberOfLotto); i++) {
       const lotto = new Lotto(GameManager.getRandomNumber());
       this.purchasedTicket.push(lotto);
     }
+  }
+
+  printPurchasedTicket() {
+    this.purchasedTicket.forEach((lotto) => lotto.printLotto());
   }
 }
 
