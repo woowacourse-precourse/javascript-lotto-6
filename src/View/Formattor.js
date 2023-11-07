@@ -23,7 +23,20 @@ const getDivisionQuotient = (value1, value2) => {
   return (divisionQuotient);
 }
 
+const splitStringToArray = (inputString, delimiter) => {
+  if (typeof inputString !== DATATYPE_CONSTANT.STRING) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
+  }
+
+  if (typeof delimiter !== DATATYPE_CONSTANT.STRING) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
+  }
+
+  return (inputString.split(delimiter));
+}
+
 export default {
   formatStringToInteger,
   getDivisionQuotient,
+  splitStringToArray,
 };

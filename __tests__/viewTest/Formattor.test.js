@@ -24,14 +24,14 @@ describe('Formattor formatStringToInteger', () => {
     { input: "1.2", expected: 1.2 },
   ];
   test('formatStringToInteger 기능 검사, 문자열을 숫자로 파싱한다 ', () => {
-    testCases.forEach (async ({ input, expected }) => {
+    testCases.forEach (({input, expected}) => {
       expect(Formattor.formatStringToInteger(input)).toStrictEqual(expected);
     });
   });
 });
 
 const getDivisionQuotientTestList = [
-  { value1: null, value2: 1 },
+  { inputString: null, value2: 1 },
   { value1: undefined, value2: 1 },
   { value1: true, value2: 1 },
   { value1: '123', value2: 1 },
@@ -64,9 +64,38 @@ describe('Formattor getDivisionQuotient', () => {
   ];
   const value2 = 1000;
   test(`getDivisionQuotient 기능 검사, 입력받은 숫자를 조건에 따라 횟수로 파싱한다 `, () => {
-    testCases.forEach (async ({ value1, expected }) => {
+    testCases.forEach (({value1, expected}) => {
       expect(Formattor.getDivisionQuotient(value1, value2)).toStrictEqual(expected);
     });
   });
 });
 
+const splitStringToArrayTestList = [
+  {inputString: '1', delimiter: 1},
+  {inputString: 1, delimiter: '1'},
+]
+
+describe('Formattor splitStringToArray', () => {
+  test('FormatParseAmountToNumber Function type이다 ', () => {
+    expect(typeof (Formattor.splitStringToArray)).toBe('function');
+  })
+  test('splitStringToArray 인자 유효성 검사, string이 아니면 에러를 thorw한다 ', () => {
+    splitStringToArrayTestList.forEach((inputString, delimiter) => {
+      expect(() => {
+        Formattor.splitStringToArray(inputString, delimiter)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NOT_STRING));
+    })
+    const inputString = '1';
+    const delimiter = '1';
+    expect(() => Formattor.splitStringToArray(inputString, delimiter)).not.toThrow();
+  });
+  const testCases = [
+    {inputString: '1,2,3', delimiter: ',', expected: ['1','2','3']},
+  {inputString: '1!23!4', delimiter: '!', expected: ['1','23','4']},
+  ];
+  test(`splitStringToArray 기능 검사, 입력받은 inputString를 delimiter 기준으로 split한 배열을 리턴한다. `, () => {
+    testCases.forEach (({inputString, delimiter, expected}) => {
+      expect(Formattor.splitStringToArray(inputString, delimiter)).toStrictEqual(expected);
+    });
+  });
+});
