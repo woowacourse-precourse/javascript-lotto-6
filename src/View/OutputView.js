@@ -1,5 +1,11 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class OutputView {
-  async printLottoNumbers() {}
+  static async printLottoNumbers(lottoList) {
+    for (const lotto of lottoList) {
+      Console.print(lotto);
+    }
+  }
 
   async printPrize() {}
 
