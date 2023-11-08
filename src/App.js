@@ -7,23 +7,38 @@ class App {
       const lottoService = new LottoService();
       let validate, moneyInput, numberInput, bonusNumberInput;
 
-      moneyInput = Number(await Console.readLineAsync("구입금액을 입력해 주세요.\n"));
-      validate = lottoService.validateMoney(moneyInput);
+      do{
+        moneyInput = Number(await Console.readLineAsync("구입금액을 입력해 주세요.\n"));
+        validate = lottoService.validateMoney(moneyInput);
+      }while(!validate);
+        
       lottoService.buyLotto(moneyInput);
 
-      numberInput = (await Console.readLineAsync("당첨 번호를 입력해 주세요.\n")).split(",").map(n=>Number(n));
-      validate = lottoService.validateNumbers(numberInput);
+      do{
+        numberInput = (await Console.readLineAsync("당첨 번호를 입력해 주세요.\n")).split(",").map(n=>Number(n));
+        validate = lottoService.validateNumbers(numberInput);
+      }while(!validate);
+      
       lottoService.setNumber(numberInput);
 
 
-      bonusNumberInput = Number(await Console.readLineAsync("보너스 번호를 입력해 주세요.\n"));
-      lottoService.validateBonusNumber(bonusNumberInput);
+      do{
+        bonusNumberInput = Number(await Console.readLineAsync("보너스 번호를 입력해 주세요.\n"));
+        lottoService.validateBonusNumber(bonusNumberInput);
+      }while(!validate);
+
       lottoService.setBonusNumber(bonusNumberInput)
+
 
       const [result, winning] = lottoService.getResult();
       lottoService.printResult(result);
       lottoService.printRateOfReturn(moneyInput, winning);
+
+    
   }
+
+
+
 }
 
 export default App;
