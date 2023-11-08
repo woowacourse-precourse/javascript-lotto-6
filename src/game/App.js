@@ -19,6 +19,9 @@ class App {
     // 당첨 번호 입력
     const winnigNumbers = await inputHandlers.inputWinningNumbers();
     const bonusNumber = await inputHandlers.inputBonusNumber(winnigNumbers);
+
+    // 결과 출력
+    this.#customer.lottoResult(winnigNumbers, bonusNumber);
   }
 }
 
