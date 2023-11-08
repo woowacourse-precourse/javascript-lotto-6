@@ -1,8 +1,10 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Input from "./input";
+import Money from "./Money.js";
+import Lotto from "./Lotto.js";
+import Bonus from "./Bonus.js";
 
 
-class Validation extends Input {
+class Validation {
 
   checkMoney (inputValue) {
     try {
@@ -13,7 +15,7 @@ class Validation extends Input {
       return inputValue;
     } catch (error) {
         MissionUtils.Console.print(error);
-        return Input.getMoney();
+        return Money.getMoney();
     }
   }
 
@@ -29,7 +31,7 @@ class Validation extends Input {
       return arrValue;
     } catch (error) {
       MissionUtils.Console.print(error);
-      return Input.getNumbers();
+      return Lotto.getNumbers();
     }
   }
   
@@ -43,7 +45,7 @@ class Validation extends Input {
       return inputValue;
     } catch (error) {
       MissionUtils.Console.print(error);
-      return Input.getBonus();
+      return Bonus.getBonus();
     }
   }
 }
