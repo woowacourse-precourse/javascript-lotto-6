@@ -1,3 +1,5 @@
+import { EVERYTHING_OK } from './constants/lottoGame.js';
+
 class RankItem {
   #ranking;
   #standard;
@@ -13,6 +15,10 @@ class RankItem {
 
   #meetStandard(count, hasBonus) {
     const { numbers, bonus } = this.#standard;
+
+    if (bonus === EVERYTHING_OK) {
+      return numbers === count;
+    }
 
     return numbers === count && bonus === hasBonus;
   }

@@ -11,7 +11,7 @@ export const OUTPUT_MESSAGE = Object.freeze({
   WINNINGS_RATE: (winningsRate) => `총 수익률은 ${winningsRate}%입니다.`,
   WINNING_RESULT: (numbers, bonus, prize, winningAmount) =>
     `${numbers}개 일치${
-      bonus ? ', 보너스 볼 일치' : ''
+      bonus === true ? ', 보너스 볼 일치' : ''
     } (${prize}원) - ${winningAmount}개`,
 });
 
