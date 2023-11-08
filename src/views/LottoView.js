@@ -11,8 +11,13 @@ export default class UserView {
     }
 
     async startLottoGame() {
-        const money = await Console.readLineAsync(LOTTO_COMMAND.inputPurchaseAmountCommand);
-        this.#initLottoUser(money);
+        try {
+            const money = await Console.readLineAsync(LOTTO_COMMAND.inputPurchaseAmountCommand);
+            this.#initLottoUser(money);
+        } catch (error) {
+            Console.print(error.message);
+            this.startLottoGame();
+        }
     }
 
     #initLottoUser(money) {
@@ -21,8 +26,13 @@ export default class UserView {
     }
 
     async inputWinningNumbers() {
-        const winningNumbers = await Console.readLineAsync(LOTTO_COMMAND.inputWinningNumbersCommand);
-        this.#initLottoGame(winningNumbers);
+        try {
+            const winningNumbers = await Console.readLineAsync(LOTTO_COMMAND.inputWinningNumbersCommand);
+            this.#initLottoGame(winningNumbers);
+        } catch (error) {
+            Console.print(error.message);
+            this.inputWinningNumbers();
+        }
     }
 
     #initLottoGame(winningNumbers) {
@@ -37,9 +47,14 @@ export default class UserView {
     }
 
     async inputBonusNumber() {
-        const bonusNumber = await Console.readLineAsync(LOTTO_COMMAND.inputBonusNumberCommand);
-        this.#lottoController.validateBonusNumber(bonusNumber);
-        return bonusNumber;
+        try {
+            const bonusNumber = await Console.readLineAsync(LOTTO_COMMAND.inputBonusNumberCommand);
+            this.#lottoController.validateBonusNumber(bonusNumber);
+            return bonusNumber;
+        } catch (error) {
+            Console.print(error.message);
+            this.inputBonusNumber();
+        }
     }
 
     printLottoResult(bonusNumber) {
