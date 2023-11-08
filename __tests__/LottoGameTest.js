@@ -102,58 +102,57 @@ describe('DOMAIN: 수익률 계산 함수 검증', ()=>{
   });
 
   test('1000원으로 아무 숫자도 맞추지 못한 경우 테스트', () => {
-      const money = 1000;
-      const expectedReturnRate = '0.0';
-      const lottoResultsList = {
-        first: 0,
-        second: 0,
-        third: 0,
-        fourth: 0,
-        fifth: 0,
-      };
+    const money = 1000;
+    const expectedReturnRate = '0.0';
+    const lottoResultsList = {
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+    };
 
-      expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate);
-    });
+    expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate);
+  });
 
-    test('1000원으로 1등에 당첨된 경우 테스트', () => {
-      const money = 1000;
-      const expectedReturnRate = '200000000.0';
-      const lottoResultsList = {
-        first: 1,
-        second: 0,
-        third: 0,
-        fourth: 0,
-        fifth: 0,
-      };
-      expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate); 
-    });
+  test('1000원으로 1등에 당첨된 경우 테스트', () => {
+    const money = 1000;
+    const expectedReturnRate = '200000000.0';
+    const lottoResultsList = {
+      first: 1,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+    };
+    expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate); 
+  });
 
-    test('5000원으로 2등 1개, 4등 1개, 5등 2개 당첨인 경우 테스트', () => {
-      const money = 5000;
-      const expectedReturnRate = '601200.0';
-      const lottoResultsList = {
-        first: 0,
-        second: 1,
-        third: 0,
-        fourth: 1,
-        fifth: 2,
-      };
+  test('5000원으로 2등 1개, 4등 1개, 5등 2개 당첨인 경우 테스트', () => {
+    const money = 5000;
+    const expectedReturnRate = '601200.0';
+    const lottoResultsList = {
+      first: 0,
+      second: 1,
+      third: 0,
+      fourth: 1,
+      fifth: 2,
+    };
 
-      expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate);
-    });
+    expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate);
+  });
 
-    test('15000원으로 1등 1개, 2등 2개, 3등 3개, 4등 4개, 5등 5개 당첨인 경우 테스트', () => {
-      const money = 15000;
-      const expectedReturnRate = '13764833.3';
-      const lottoResultsList = {
-        first: 1,
-        second: 2,
-        third: 3,
-        fourth: 4,
-        fifth: 5,
-      };
+  test('15000원으로 1등 1개, 2등 2개, 3등 3개, 4등 4개, 5등 5개 당첨인 경우 테스트', () => {
+    const money = 15000;
+    const expectedReturnRate = '13764833.3';
+    const lottoResultsList = {
+      first: 1,
+      second: 2,
+      third: 3,
+      fourth: 4,
+      fifth: 5,
+    };
 
-      expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate);
-    });
-
+    expect(lottoGame.calculateReturnRate(money, lottoResultsList)).toBe(expectedReturnRate);
+  });
 });
