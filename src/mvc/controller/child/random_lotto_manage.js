@@ -7,6 +7,7 @@ import userInput from '../../../utils/input/user_input.js';
 
 class RandomLottoManage {
   #randomLotto = null;
+  #amount = null;
 
   get randomLotto() {
     return this.#randomLotto;
@@ -17,22 +18,20 @@ class RandomLottoManage {
   }
 
   async #inputPurchaseAmount() {
-    const AMOUNT = await userInput(Question.purchaseAmount());
-    await this.#checkPurchaseAmount(AMOUNT);
-  }
-
-  async #checkPurchaseAmount(AMOUNT) {
-    try {
-      new PurchaseAmountError(AMOUNT);
-      this.#printRandomLotto(AMOUNT);
-    } catch (error) {
-      printError(error);
-      await this.#inputPurchaseAmount();
+    while (true) {
+      this.#amount = await userInput(Question.purchaseAmount());
+      try {
+        new PurchaseAmountError(this.#amount);
+        break;
+      } catch (error) {
+        printError(error);
+      }
     }
+    this.#printRandomLotto();
   }
 
-  #printRandomLotto(AMOUNT) {
-    const LOTTO_QUANTITY = Number(AMOUNT) / 1000;
+  #printRandomLotto() {
+    const LOTTO_QUANTITY = Number(this.#amount) / 1000;
     this.#randomLotto = new CalculateRandomLotto(LOTTO_QUANTITY).randomLotto;
     new PrintRandomLotto(LOTTO_QUANTITY, this.#randomLotto).printLotto();
   }

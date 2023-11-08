@@ -20,32 +20,28 @@ class InputNumManage {
   }
 
   async #inputWinningNum() {
-    this.#winningNum = await userInput(Question.winningNum());
-    this.#winningNum = this.#winningNum.split(',');
-    await this.#checkWinningNum();
-  }
-
-  async #checkWinningNum() {
-    try {
-      new Lotto(this.#winningNum);
-      await this.#inputBonusNum();
-    } catch (error) {
-      printError(error);
-      await this.#inputWinningNum();
+    while (true) {
+      this.#winningNum = await userInput(Question.winningNum());
+      this.#winningNum = this.#winningNum.split(',');
+      try {
+        new Lotto(this.#winningNum);
+        break;
+      } catch (error) {
+        printError(error);
+      }
     }
+    await this.#inputBonusNum();
   }
 
   async #inputBonusNum() {
-    this.#bonusNum = await userInput(Question.bonusNum());
-    await this.#checkBonusNum();
-  }
-
-  async #checkBonusNum() {
-    try {
-      new BonusNumError(this.#winningNum, this.#bonusNum);
-    } catch (error) {
-      printError(error);
-      await this.#inputBonusNum();
+    while (true) {
+      this.#bonusNum = await userInput(Question.bonusNum());
+      try {
+        new BonusNumError(this.#winningNum, this.#bonusNum);
+        break;
+      } catch (error) {
+        printError(error);
+      }
     }
   }
 }
