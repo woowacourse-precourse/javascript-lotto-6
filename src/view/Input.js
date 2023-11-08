@@ -1,21 +1,27 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import { GUIDE_MESSAGE } from "../constants/constants.js";
+import { MissionUtils } from '@woowacourse/mission-utils';
+import { GUIDE_MESSAGE } from '../constants/constants.js';
 
 class Input {
-  async getPurchaseAmount(){
-    const money = await MissionUtils.Console.readLineAsync(GUIDE_MESSAGE.insertMoney)
+  async getPurchaseAmount() {
+    const money = await MissionUtils.Console.readLineAsync(
+      GUIDE_MESSAGE.insertMoney
+    );
 
-    return money.trim()
+    return money.trim();
   }
 
   async getWinningNumbers() {
-    const numbers = await MissionUtils.Console.readLineAsync(GUIDE_MESSAGE.insertWinnerNumbers)
+    const numbers = await MissionUtils.Console.readLineAsync(
+      GUIDE_MESSAGE.insertWinnerNumbers
+    );
 
-    return numbers.trim()
+    return numbers.trim();
   }
 
   async getBonusNumber() {
-    const number = await MissionUtils.Console.readLineAsync(GUIDE_MESSAGE.insertBonusNumber)
+    const number = await MissionUtils.Console.readLineAsync(
+      GUIDE_MESSAGE.insertBonusNumber
+    );
 
     return number.trim();
   }

@@ -1,6 +1,6 @@
 class CustomError extends Error {
-   constructor(message) {
+  constructor(message) {
     super(`${message}`);
   }
 }
-export default CustomError
+export default CustomError;
