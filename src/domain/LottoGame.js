@@ -45,7 +45,7 @@ class LottoGame {
     }
   }
 
-  /** 각 티켓을 당첨번호와 비교하여 당청 등수를 계산한다. */
+  /** 각 티켓을 당첨번호와 비교하여 당첨 등수를 계산한다. */
   evaluateTickets() {
     this.#tickets.forEach((ticket) => {
       ticket.setMatch(this.#countMatchingNumbers(ticket));
