@@ -4,7 +4,7 @@ const Converter = class {
   }
 
   static arrToSetStructure(arr) {
-    return new Set(...arr);
+    return new Set(arr);
   }
 };
 
