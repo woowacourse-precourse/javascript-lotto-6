@@ -32,7 +32,7 @@ class Vendor {
         return scores;
     }
     
-    #calculateEarnings(matches) {
+    calculateEarnings(matches) {
         let earnings = 0;
         const keyList = Object.values(keys);
         const matchingKeys = keyList.filter((key) => matches[key] !== 0);
@@ -66,7 +66,7 @@ class Vendor {
     }
 
     getProfit(matches) {
-        const earnings = this.#calculateEarnings(matches);
+        const earnings = this.calculateEarnings(matches);
         const profit = calculatePercentageProfit(this.purchaseAmount, earnings);
         return profit;
     }
