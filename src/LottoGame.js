@@ -51,7 +51,6 @@ class LottoGame {
         .filter((number) => this.#winningNumbers.includes(number)).length;
       const hasBonus = lotto.getNumbers().includes(this.#bonusNumber);
 
-      // Determine the rank based on matched numbers and bonus number
       const rank = this.#determineRank(matchedNumbers, hasBonus);
 
       return {

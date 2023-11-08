@@ -1,5 +1,3 @@
-// constants.js
-
 const MIN_NUMBER = 1;
 const MAX_NUMBER = 45;
 const NUMBERS_COUNT = 6;
