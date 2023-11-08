@@ -1,36 +1,36 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { Data, CONST_VALUE, STAGES } from './Db.js';
+import { CONST_VALUE, STAGES, Data } from './Db.js';
 import Lotto from './Lotto.js';
-
-const db = Data.getInstance();
 
 const methodForService = {
   getLottoNums: async function chooseRandomNumLotto() {
-    let numSet = new Set();
     let numbers = [];
-    while (numSet.size !== CONST_VALUE.LOTTO_LENGTH) {
-      numSet.clear();
-      numbers = await MissionUtils.Random.pickUniqueNumbersInRange(
-        CONST_VALUE.LOTTO_RANGE_START,
-        CONST_VALUE.LOTTO_RANGE_END,
-        CONST_VALUE.LOTTO_LENGTH,
-      );
-      numSet = new Set(numbers);
-    }
+    numbers = await MissionUtils.Random.pickUniqueNumbersInRange(
+      CONST_VALUE.LOTTO_RANGE_START,
+      CONST_VALUE.LOTTO_RANGE_END,
+      CONST_VALUE.LOTTO_LENGTH,
+    );
     return numbers;
   },
 };
 
 const stageService = {
   stage1Service: async function buyLotto(money) {
-    db.moneyInput = money;
-    db.lottoCnt = money / CONST_VALUE.LOTTO_PRICE;
-
-    let tmpLottos = [];
-    for (let i = 0; i < db.lottoCnt; i += 1) {
-      tmpLottos = await methodForService.getLottoNums();
-      db.addLottoBuy(tmpLottos);
+    Data.moneyInput = money;
+    Data.lottoCnt = money / CONST_VALUE.LOTTO_PRICE;
+    let tmp;
+    let idx = 0;
+    while (idx < Data.lottoCnt) {
+      tmp = await methodForService.getLottoNums();
+      Data.addLottoBuy(tmp);
+      idx += 1;
     }
+  },
+  stage3Service: async function setWinLotto(winNumArr) {
+    Data.lottoWin = new Lotto(winNumArr);
+  },
+  stage4Service: async function setBonusNum(num) {
+    Data.lottoBonus = num;
   },
 };
 
@@ -43,7 +43,6 @@ class Service {
   }
 
   constructor() {
-    db.resetData();
     Service.instance = this;
     Object.freeze(Service.instance);
   }
@@ -52,7 +51,12 @@ class Service {
     switch (stageNum) {
       case STAGES.NUM_1:
         await stageService.stage1Service(value);
-        // console.log(db.lottoBuy[2].getNumbers());
+        break;
+      case STAGES.NUM_3:
+        await stageService.stage3Service(value);
+        break;
+      case STAGES.NUM_4:
+        await stageService.stage4Service(value);
         break;
       default:
         break;

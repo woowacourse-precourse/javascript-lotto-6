@@ -11,10 +11,10 @@ const STAGES = Object.freeze({
 });
 
 const TEXTVIEW = Object.freeze({
-  REQUEST_MONEYINPUT: '구입금액을 입력해 주세요',
+  REQUEST_MONEYINPUT: '구입금액을 입력해 주세요. ',
   LOTTO_AMOUNT: '개를 구매했습니다.',
-  REQUEST_LOTTOWIN: '당첨 번호를 입력해주세요.',
-  REQUEST_LOTTOBONUS: '보너스 번호를 입력해주세요.',
+  REQUEST_LOTTOWIN: '당첨 번호를 입력해주세요.\n',
+  REQUEST_LOTTOBONUS: '보너스 번호를 입력해주세요.\n',
   RESULT: ([win3, win4, win5, win5Bonus, win6, percent]) => `
     당첨 통계\n
     ---\n
@@ -53,21 +53,6 @@ class Data {
 
   #moneyInput = INITIAL_VALUES.NUM;
 
-  constructor() {
-    if (!Data.instance) {
-      Data.instance = this;
-    }
-  }
-
-  static getInstance() {
-    if (!Data.instance) {
-      Data.instance = new Data();
-      return Data.instance;
-    }
-
-    return Data.instance;
-  }
-
   resetData() {
     this.#moneyInput = INITIAL_VALUES.NUM;
     this.#lottoBonus = INITIAL_VALUES.NUM;
@@ -105,6 +90,14 @@ class Data {
     this.#lottoBuy = [...this.#lottoBuy, addLotto];
   }
 
+  textLottoBuy() {
+    let text = '';
+    this.#lottoBuy.forEach((lotto) => {
+      text = `${text}[${lotto.getNumbers()}]\n`;
+    });
+    return text;
+  }
+
   get lottoCnt() {
     return this.#lottoCnt;
   }
@@ -122,6 +115,8 @@ class Data {
   }
 }
 
+const db = new Data();
+
 export {
-  TEXTVIEW, Data, STAGES, INITIAL_VALUES, CONST_VALUE,
+  TEXTVIEW, db as Data, STAGES, INITIAL_VALUES, CONST_VALUE,
 };
