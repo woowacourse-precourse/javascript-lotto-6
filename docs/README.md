@@ -99,3 +99,33 @@ npm install
 ```
 
 <br><br><br><br><br><br>
+
+## 5. 동작 예시
+
+- 애플리케이션 실행<br>
+
+![1  실행](https://github.com/woowacourse-precourse/javascript-lotto-6/assets/124991681/ff8818e1-d01f-420f-a889-0eb65a64ba09)
+
+<br><br><br><br><br><br>
+
+- 구입 금액 입력<br>
+
+![금액입력](https://github.com/woowacourse-precourse/javascript-lotto-6/assets/124991681/29cc0690-ffbe-4984-a1cd-6b48acc0257e)
+
+<br><br><br><br><br><br>
+
+- 당첨 번호 입력 및 결과출력<br>
+
+![결과출력](https://github.com/woowacourse-precourse/javascript-lotto-6/assets/124991681/26164413-bec8-4f6f-8d47-23a7550016be)
+
+<br><br><br><br><br><br>
+
+- 예외(1) - 잘못된 형식의 금액 입력<br>
+
+![잘못된 금액](https://github.com/woowacourse-precourse/javascript-lotto-6/assets/124991681/32d95b69-b892-4de9-8d7d-c741176a267c)
+
+<br><br><br><br><br><br>
+
+- 예외(2) - 잘못된 형식의 번호 입력<br>
+
+![숫자범위 값 입력](https://github.com/woowacourse-precourse/javascript-lotto-6/assets/124991681/e3433a29-0834-423a-b753-c85c2f62790a)

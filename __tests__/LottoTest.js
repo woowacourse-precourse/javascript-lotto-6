@@ -1,8 +1,8 @@
 /* eslint-disable no-new */
 /* eslint-disable max-lines-per-function */
+import { Console } from '@woowacourse/mission-utils';
 import Lotto from '../src/Lotto.js';
 import Create from '../src/Controller/Create.js';
-import { Console } from '@woowacourse/mission-utils';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {

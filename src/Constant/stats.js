@@ -15,4 +15,14 @@ const MATCHED = Object.freeze({
   },
 });
 
-export default MATCHED;
+const NUMBER = Object.freeze({
+  LOTTERY_PRICE: 1000,
+  MIN: 1,
+  MAX: 45,
+  COUNT: 6,
+  PERCENTAGE: 100,
+  DECIMAL: 10,
+  TWO_DECIMAL_POINT: 2,
+});
+
+export { MATCHED, NUMBER };

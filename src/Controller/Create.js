@@ -44,7 +44,6 @@ class Create {
 
   async userBonusNumber() {
     const bonusNumber = await Read.input(MESSAGE.QUESTION_BONUS_NUMBER);
-    console.log(bonusNumber);
     checkValidateNumbers(bonusNumber);
 
     return bonusNumber;

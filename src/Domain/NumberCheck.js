@@ -1,4 +1,4 @@
-import MATCHED from '../Constant/stats.js';
+import { MATCHED, NUMBER } from '../Constant/stats.js';
 import { MONEY_REGEX } from '../Utils/Regex.js';
 
 class CheckNumber {
@@ -56,14 +56,16 @@ class CheckNumber {
 
   getMargin(total) {
     const paid = this.#PaidAmount();
-    const result = parseFloat(((total / paid) * 100).toFixed(2));
+    const result = parseFloat(
+      ((total / paid) * NUMBER.PERCENTAGE).toFixed(NUMBER.TWO_DECIMAL_POINT)
+    );
 
     return result;
   }
 
   #PaidAmount() {
     const { randomNum } = this.#numbers;
-    const amount = randomNum.length * 1000;
+    const amount = randomNum.length * 1000; // 지불 금액값
 
     return amount;
   }
@@ -84,7 +86,7 @@ class CheckNumber {
     const [moneyInfo, countInfo] = result.split(' - ');
 
     const money = moneyInfo.match(MONEY_REGEX)[0].replace(/,/g, '');
-    const count = parseInt(countInfo, 10);
+    const count = parseInt(countInfo, NUMBER.DECIMAL);
 
     return { money, count };
   }

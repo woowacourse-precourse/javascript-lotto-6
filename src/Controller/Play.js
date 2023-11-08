@@ -22,7 +22,7 @@ class PlayLottery {
     const lotto = new Lotto(await this.create.userLotteryNumber());
     const { matchResult, marginResult } = await lotto.compareWith(randoms);
 
-    Print.repeatResult(matchResult); // 숫자 비교결과 출력
+    Print.repeatResult(matchResult);
     Print.marginResult(marginResult);
   }
 }

@@ -1,3 +1,4 @@
+import { NUMBER } from '../Constant/stats.js';
 import {
   validateNumberLength,
   checkValidateNumbers,
@@ -12,7 +13,7 @@ class User {
   }
 
   #validateAmount(amount) {
-    if (amount % 1000 > 0) {
+    if (amount % NUMBER.LOTTERY_PRICE > 0) {
       throw new Error('[ERROR] 1000원 단위로 입력하세요.');
     }
   }
@@ -39,7 +40,7 @@ class User {
   }
 
   getNumberofPurchase() {
-    return this.#parseAsNumber(this.#amount) / 1000;
+    return this.#parseAsNumber(this.#amount) / NUMBER.LOTTERY_PRICE;
   }
 
   #parseAsNumber(string) {
