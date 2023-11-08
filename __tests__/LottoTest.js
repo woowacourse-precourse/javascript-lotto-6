@@ -126,3 +126,17 @@ describe('method test : compareLottoNumbers()', () => {
     expect(lottoResult).toEqual([0, 1, 0, 0, 0]);
   });
 });
+
+describe('method test : sumPrizeMoney()', () => {
+  test('당첨 금액을 계산할 수 있는가 ?', () => {
+    const testArray = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto(testArray);
+    const money = [5000, 50000, 1500000, 30000000, 2000000000];
+    const lottoResult = [0,1,0,1,0];
+    let prizeMoney = 0;
+    lottoResult.forEach((amount, index) =>{
+      prizeMoney += lotto.sumPrizeMoney(amount, index, money);
+    });
+    expect(prizeMoney).toBe(30050000);
+  });
+});
