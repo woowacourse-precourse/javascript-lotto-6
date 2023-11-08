@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import LottoHandler from "../src/lottohandler/LottoHandler.js";
+import LottoHandler from "../src/handler/LottoHandler";
 
 describe("함수별 기능 테스트", () => {
   test("구매 로또 개수 추출하기", () => {

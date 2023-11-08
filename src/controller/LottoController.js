@@ -1,4 +1,4 @@
-import LottoHandler from "../lottohandler/LottoHandler.js";
+import LottoHandler from "../handler/LottoHandler.js";
 import View from "../view/View.js";
 
 class LottoController {
