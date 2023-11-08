@@ -28,7 +28,7 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
@@ -40,12 +40,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -91,8 +91,83 @@ describe("로또 테스트", () => {
     });
   });
 
+  test("기능 테스트2", async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    mockRandoms([
+      [5, 11, 16, 22, 32, 45],
+      [2, 7, 14, 28, 34, 42],
+      [9, 18, 25, 33, 38, 44],
+      [1, 10, 19, 29, 39, 43],
+      [4, 15, 21, 30, 35, 41],
+    ]);
+    mockQuestions(["5000", "1,2,3,4,5,6", "9"]);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    const logs = [
+      "5개를 구매했습니다.",
+      "[5, 11, 16, 22, 32, 45]",
+      "[2, 7, 14, 28, 34, 42]",
+      "[9, 18, 25, 33, 38, 44]",
+      "[1, 10, 19, 29, 39, 43]",
+      "[4, 15, 21, 30, 35, 41]",
+      "3개 일치 (5,000원) - 0개",
+      "4개 일치 (50,000원) - 0개",
+      "5개 일치 (1,500,000원) - 0개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+      "6개 일치 (2,000,000,000원) - 0개",
+      "총 수익률은 0.0%입니다.",
+    ];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
+  test("기능 테스트3: 2등", async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    mockRandoms([
+      [5, 11, 16, 22, 32, 45],
+      [2, 7, 14, 28, 34, 42],
+      [9, 18, 25, 33, 38, 44],
+      [1, 10, 19, 29, 39, 43],
+      [4, 15, 21, 30, 35, 41],
+    ]);
+    mockQuestions(["5000", "5,11,16,22,32,4", "45"]);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    const logs = [
+      "5개를 구매했습니다.",
+      "[5, 11, 16, 22, 32, 45]",
+      "[2, 7, 14, 28, 34, 42]",
+      "[9, 18, 25, 33, 38, 44]",
+      "[1, 10, 19, 29, 39, 43]",
+      "[4, 15, 21, 30, 35, 41]",
+      "3개 일치 (5,000원) - 0개",
+      "4개 일치 (50,000원) - 0개",
+      "5개 일치 (1,500,000원) - 0개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
+      "6개 일치 (2,000,000,000원) - 0개",
+      "총 수익률은 600,000.0%입니다.",
+    ];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
   test("예외 테스트", async () => {
     await runException("1000j");
   });
 });
-
