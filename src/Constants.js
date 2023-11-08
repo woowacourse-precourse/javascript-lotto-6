@@ -39,6 +39,7 @@ export const LOTTO_NUMBERS_ERROR_MESSAGES = Object.freeze({
   NOT_GENERATED: '[ERROR] 로또 번호가 셍성되지 않았습니다.',
   NOT_NUMERIC: '[ERROR] 로또 번호는 숫자형이여야 합니다.',
   INVALID_LOTTO_NUMBERS_LENGTH: `[ERROR] 로또 번호는 ${LOTTO_NUMBERS_LENGTH}개여야 합니다.`,
+  OUT_OF_RANGE: `[ERROR] 로또 번호는 ${LOTTO_MIN_NUMBER} 이상 ${LOTTO_MAX_NUMBER} 이하의 숫자여야 합니다.`,
 });
 
 export const GAEM_RESULT_MESSAGE = `\n당첨 통계\n---`;
