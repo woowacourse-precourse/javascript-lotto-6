@@ -15,9 +15,9 @@ class Utils {
   }
 
   static convertPercentNumber(numerator, denominator) {
-    const targetNumber = (numerator / denominator) * 1000;
-    const roundNumber = Math.round(targetNumber);
-    return (roundNumber / 10).toLocaleString();
+    const targetNumber = numerator / denominator;
+    const roundNumber = targetNumber.toFixed(1);
+    return roundNumber.toLocaleString();
   }
 
   static informUser(informations) {
