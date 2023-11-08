@@ -37,8 +37,8 @@ export const Validator = {
   },
 
   Non_Exist: (value) => {
-    if (!value) {
-      throw ERROR_MESSAGE.INVALID_VALUE;
+    if (value === undefined) {
+      throw new Error(ERROR_MESSAGE.INVALID_VALUE);
     }
   },
 

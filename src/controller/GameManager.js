@@ -31,9 +31,6 @@ export class GameManager {
   /* 구입할 금액 입력 및 복권 추첨 */
   async #initQuantity_PickLotto() {
     const quantitiy = await this.#initMoney();
-
-    Validator.Non_Exist(quantitiy);
-
     const num_generator = new RandomNumber();
     const lotto_collection = [];
 
@@ -49,6 +46,7 @@ export class GameManager {
   }
 
   async #initMoney() {
+    
     this.#money_amount = parseInt(await Handle_Input.moneyInput());
 
     return this.#money_amount / 1000;
