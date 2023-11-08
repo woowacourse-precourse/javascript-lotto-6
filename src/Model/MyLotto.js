@@ -11,9 +11,11 @@ export default class MyLotto {
 
   setlottoCount(input) {
     this.#lottoCount = Number(input.slice(0, -3));
+
+    return this.#setQuickPicks();
   }
 
-  setQuickPicks() {
+  #setQuickPicks() {
     while (this.#quickPicks.length < this.#lottoCount) {
       this.#quickPicks.push(randomLotto());
     }

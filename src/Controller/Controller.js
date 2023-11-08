@@ -17,8 +17,6 @@ export default class Controller {
     this.#myWallet.setPurchaseAmount(input);
     this.#myLotto.setlottoCount(input);
 
-    this.#myLotto.setQuickPicks();
-
     return console.log(this.#myLotto.getQuickPicks());
   }
 }
