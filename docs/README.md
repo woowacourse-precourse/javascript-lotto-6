@@ -73,7 +73,7 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 
   - [x] 당첨 번호를 입력받는다. Game#getWinningNumbers()
 
-  - [] 보너스 번호를 입력한다. Game#getBonusNumber()
+  - [x] 보너스 번호를 입력한다. Game#getBonusNumber()
 
   - [] 당첨 통계를 계산한다. Game#calcWinningStatistics()
 
@@ -111,3 +111,7 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 - [x] 로또 번호에 중복된 숫자가 있으면 예외처리한다.
 
   - [ERROR] 로또 번호는 중복되지 않습니다.
+
+- [x] 보너스 번호에 숫자가 아닌 값이 입력되면 예외처리한다.
+
+  - [ERROR] 보너스 번호는 숫자입니다.

@@ -6,6 +6,8 @@ class Game {
 
   #winningNumbers = [];
 
+  #bonusNumber;
+
   constructor(lotteryNumbers) {
     this.createLotto(lotteryNumbers);
   }
@@ -75,6 +77,25 @@ class Game {
       throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
     }
     return parsedNumbers;
+  }
+
+  async getBonusNumber() {
+    try {
+      const inputBonusNumber = await Console.readLineAsync(
+        "\n보너스 번호를 입력해 주세요.\n",
+      );
+
+      const parsedNumber = parseInt(inputBonusNumber, 10);
+
+      if (Number.isNaN(parsedNumber)) {
+        throw new Error("[ERROR] 보너스 번호는 숫자입니다.");
+      }
+      this.#bonusNumber = parsedNumber;
+      return parsedNumber;
+    } catch (error) {
+      Console.print(error.message);
+      return this.getBonusNumber();
+    }
   }
 }
 
