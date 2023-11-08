@@ -47,7 +47,7 @@ class DrawController {
       throw new Error(MESSAGES.winningNumberRangeError);
     }
 
-    if (!DrawController.checkAllNumbersUnique(numbers)) {
+    if (!DrawController.checkWinningNumbersUnique(numbers)) {
       throw new Error(MESSAGES.duplicatedWinningNumbersError);
     }
 
@@ -58,6 +58,43 @@ class DrawController {
     const bonusNumberText = await MissionUtils.Console.readLineAsync("");
 
     return bonusNumberText;
+  }
+
+  static checkBonusNumberTextOnlyNumber(text) {
+    const pattern = /^\d+$/;
+
+    return pattern.test(text);
+  }
+
+  static checkBonusNumberInRange(number) {
+    return LottoNumberValidator.checkNumberInRange(number);
+  }
+
+  static checkWinningBonusDifferent({ winningNumbers, bonusNumber }) {
+    return !winningNumbers.includes(bonusNumber);
+  }
+
+  
+  static processBonusNumberText(text) {
+    const textNumber = text.trim();
+
+    if (!DrawController.checkBonusNumberTextOnlyNumber(textNumber)) {
+      throw new Error(MESSAGES.bonusNumberNotAllowedCharacterError);
+    }
+
+    const bonusNumber = parseInt(textNumber);
+
+    if (!DrawController.checkBonusNumberInRange(bonusNumber)) {
+      throw new Error(MESSAGES.bonusNumberRangeError);
+    }
+
+    return bonusNumber;
+  }
+
+  static compareWinningBonus({ winningNumbers, bonusNumber }) {
+    if (!this.checkWinningBonusDifferent({ winningNumbers, bonusNumber })) {
+      throw new Error(MESSAGES.winningBonusIncludeError);
+    }
   }
 }
 
