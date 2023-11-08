@@ -2,19 +2,18 @@ import { LOTTO } from './constants/lotto.js';
 import paramType from './lib/paramType/src/paramType.js';
 import InputReader from './view/InputReader.js';
 import PromptPrinter from './view/promptPrinter.js';
-import PurchasePriceUserInputValidator from './validator/PurchasePriceUserInputValidator.js';
-import WinningNumbersUserInputValidator from './validator/WinningNumbersUserInputValidator.js';
-import BonusNumberUserInputValidator from './validator/BonusNumberUserInputValidator.js';
 import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
 import LottoMachine from './domains/LottoMachine.js';
 import LottoDrawChecker from './domains/LottoDrawChecker.js';
 import LottoReward from './domains/LottoReward.js';
+import ValidUserInputs from './validator/ValidUserInputs.js';
 
 class App {
   #inputReader;
   #promptPrinter;
   #randomNumberGenerator;
   #lottoMachine;
+  #validUserInput;
 
   constructor() {
     this.#inputReader = new InputReader();
@@ -28,22 +27,21 @@ class App {
       LOTTO.SELLING_PRICE,
       this.#randomNumberGenerator,
     );
+    this.#validUserInput = new ValidUserInputs();
   }
 
   async play() {
-    const purchasePrice = await this.#requestPurchasePrice();
-    const winningNumbers = await this.#requestWinningNumbers();
-    const bonusNumber = await this.#requestBonusNumber(winningNumbers);
+    await this.#requestPurchasePrice();
+    await this.#requestWinningNumbers();
+    await this.#requestBonusNumber();
 
-    this.#excuteProcess(purchasePrice, winningNumbers, bonusNumber);
+    this.#excuteProcess();
   }
 
   async #requestPurchasePrice() {
     try {
-      const purchasePrice = await this.#inputReader.purchasePrice();
-      new PurchasePriceUserInputValidator(purchasePrice);
-
-      return purchasePrice;
+      const userInput = await this.#inputReader.purchasePrice();
+      this.#validUserInput.addPurchasePrice(userInput);
     } catch (error) {
       this.#promptPrinter.userInputErrorMessage(error);
       return await this.#requestPurchasePrice();
@@ -52,10 +50,8 @@ class App {
 
   async #requestWinningNumbers() {
     try {
-      const winningNumbers = await this.#inputReader.winningNumbers();
-      new WinningNumbersUserInputValidator(winningNumbers);
-
-      return winningNumbers;
+      const userInput = await this.#inputReader.winningNumbers();
+      this.#validUserInput.addWinningNumbers(userInput);
     } catch (error) {
       this.#promptPrinter.userInputErrorMessage(error);
       return await this.#requestWinningNumbers();
@@ -64,35 +60,28 @@ class App {
 
   async #requestBonusNumber(winningNumbers) {
     try {
-      const bonusNumber = await this.#inputReader.bonusNumber();
-      new BonusNumberUserInputValidator(bonusNumber, winningNumbers);
-
-      return bonusNumber;
+      const userInput = await this.#inputReader.bonusNumber();
+      this.#validUserInput.addBonusNumber(userInput);
     } catch (error) {
       this.#promptPrinter.userInputErrorMessage(error);
       return await this.#requestBonusNumber(winningNumbers);
     }
   }
 
-  #excuteProcess(
-    purchasePrice,
-    winningNumbers,
-    bonusNumber,
-    _0 = paramType(purchasePrice, 'string'),
-    _1 = paramType(winningNumbers, 'string'),
-    _2 = paramType(bonusNumber, 'string'),
-  ) {
-    const lottoInstances = this.#lottoMachine.purchase(Number(purchasePrice));
+  #excuteProcess() {
+    const lottoInstances = this.#lottoMachine.purchase(
+      this.#validUserInput.purchasePrice,
+    );
     const lottoList = [...lottoInstances].map((lotto) => lotto.getNumbers());
-    const winngingNumbers = winningNumbers
-      .split(',')
-      .map((charNumber) => Number(charNumber));
     const lottoDrawChecker = new LottoDrawChecker(
-      winngingNumbers,
-      Number(bonusNumber),
+      this.#validUserInput.winningNumbers,
+      this.#validUserInput.bonusNumber,
     );
     const drawResult = lottoDrawChecker.getDrawResult(lottoList);
-    const reward = new LottoReward(drawResult, Number(purchasePrice));
+    const reward = new LottoReward(
+      drawResult,
+      this.#validUserInput.purchasePrice,
+    );
     const profitRate = reward.calculrateProfitRate();
 
     this.#processResult(lottoList, profitRate, drawResult);
