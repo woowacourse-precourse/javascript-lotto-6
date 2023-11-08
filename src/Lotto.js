@@ -1,18 +1,42 @@
+import Validator from './validator/Validator.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = this.#sort(numbers);
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    Validator.length(numbers);
+    Validator.range(numbers);
+    Validator.duplication(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
+
+  #sort(numbers) {
+    return numbers.sort((a, b) => a - b);
+  }
+
+  includes(number) {
+    return this.#numbers.includes(number);
+  }
+
+  filterSameNumber(numbers) {
+    const sameNumbers = numbers.filter((number) =>
+      this.#numbers.includes(number)
+    );
+
+    return sameNumbers.length;
+  }
+
+  countSameNumber(lotto) {
+    return lotto.filterSameNumber(this.#numbers);
+  }
 }
 
 export default Lotto;
