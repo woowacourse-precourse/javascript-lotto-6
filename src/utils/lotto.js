@@ -25,3 +25,20 @@ export const returnRateCalculate = (result, payment) => {
   }
   return ((winnnings / payment) * 100).toFixed(1);
 };
+
+export const matchRank = (result, lottoMatched, bonusMatched) => {
+  for (const rank in result) {
+    if (rank === "third" || rank === "second") {
+      if (
+        result[rank].count === lottoMatched &&
+        result[rank].bonus === bonusMatched
+      ) {
+        result[rank].matched++;
+      }
+    } else {
+      if (result[rank].count === lottoMatched) {
+        result[rank].matched++;
+      }
+    }
+  }
+};

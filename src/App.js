@@ -5,7 +5,11 @@ import {
   validatePayment,
   validateWinningNumber,
 } from "./ValidateInput.js";
-import { generateLottos, paymentToLottoCount } from "./utils/lotto.js";
+import {
+  generateLottos,
+  matchRank,
+  paymentToLottoCount,
+} from "./utils/lotto.js";
 import Input from "./Input.js";
 import Output from "./Output.js";
 
@@ -91,20 +95,7 @@ class App {
       const lottoMatched = lotto.draw(this.#winningNumber);
       const bonusMatched = lotto.bonusDraw(this.#bonusNumber);
 
-      for (const rank in this.result) {
-        if (rank === "third" || rank === "second") {
-          if (
-            this.result[rank].count === lottoMatched &&
-            this.result[rank].bonus === bonusMatched
-          ) {
-            this.result[rank].matched++;
-          }
-        } else {
-          if (this.result[rank].count === lottoMatched) {
-            this.result[rank].matched++;
-          }
-        }
-      }
+      matchRank(this.result, lottoMatched, bonusMatched);
     });
   }
 
