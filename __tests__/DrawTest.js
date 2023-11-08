@@ -61,3 +61,42 @@ describe("당첨 번호 입력 테스트", () => {
     expect(answers).toEqual(results);
   });
 });
+
+describe("보너스 번호 입력 테스트", () => {
+  test("불필요한 공백이 제거된 후 숫자 이외의 문자가 있는지 확인", () => {
+    // given
+    const texts = ["10", "1 1", "1a", "1!"];
+    const results = [true, false, false, false];
+
+    // when
+    const answers = texts.map((text) => DrawController.checkBonusNumberTextOnlyNumber(text));
+
+    // then
+    expect(answers).toEqual(results);
+  });
+
+  test("보너스 번호의 범위가 맞는지 확인한다.", () => {
+    // given
+    const bonusNumbers = [0, 1, 45, 46];
+    const results = [false, true, true, false];
+
+    // when
+    const answers = bonusNumbers.map((bonusNumber) => DrawController.checkBonusNumberInRange(bonusNumber));
+
+    // then
+    expect(answers).toEqual(results);
+  });
+
+  test("당첨 번호 중에 보너스 번호와 동일한 숫자가 있으면 안 된다.", () => {
+    // given
+    const winningNumbers = [1, 2, 3, 4, 5];
+    const bonusNumbers = [1, 2, 3, 4, 5, 6];
+    const results = [false, false, false, false, false, true];
+
+    // when
+    const answers = bonusNumbers.map((bonusNumber) => DrawController.checkWinningBonusDifferent({ winningNumbers, bonusNumber }));
+
+    // then
+    expect(answers).toEqual(results);
+  });
+});
