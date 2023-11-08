@@ -1,3 +1,6 @@
+import { ERROR_MESSAGES } from './constants/messages.js';
+import InputValidator from './model/InputValidator.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,19 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    const numbersSet = new Set(numbers);
+
+    InputValidator.errorCondition(numbersSet.size !== 6, ERROR_MESSAGES.nonDuplicateNumber);
+    InputValidator.errorCondition(numbers.length !== 6, ERROR_MESSAGES.nonDuplicateNumber);
+    InputValidator.errorCondition(
+      numbers.some(number => typeof number !== 'number'),
+      ERROR_MESSAGES.invalidNumber
+    );
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
