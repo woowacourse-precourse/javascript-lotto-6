@@ -1,4 +1,4 @@
-import Lotto from "./Lotto.js";
+//import Lotto from "./Lotto.js";
 const { Console, Random } = require("@woowacourse/mission-utils");
 const Lotto = require("./Lotto.js");
 
@@ -13,8 +13,28 @@ class App {
     this.bonusNumber = 0;
     this.lottos = [];
     this.winningResult = [0, 0, 0, 0, 0, 0, 0];
-    
-  async play() {}
+
+  async play() {
+    try {
+      await this.inputPurchaseAmount();
+      this.publishLottos();
+      this.printLottos();
+      await this.inputWinningNumbers();
+      await this.inputBonusNumber();
+      this.calculateWinningResult();
+      this.printWinningResult();
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+  async inputPurchaseAmount() {
+    const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    const amount = Number(input);
+    if (amount % this.LOTTO_PRICE !== 0) {
+      throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
+    }
+    this.purchaseAmount = amount;
+  }
 }
 
 export default App;
