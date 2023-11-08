@@ -35,8 +35,11 @@ function lottoIssue(store, randomMockInput, lottoMockAmount) {
 describe("스토어 클래스 테스트", () => {
   test("구입 금액에 따른 로또 개수를 올바르게 구하는지 테스트", async () => {
     const store = new Store();
+
     Store.inputMoney = jest.fn().mockReturnValue(5000);
     await store.receivePayment();
+    Store.inputMoney.mockClear();
+
     expect(store.calculateLottoAmount()).toBe(5);
   });
 
@@ -102,5 +105,17 @@ describe("스토어 클래스 테스트", () => {
       "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개\n" +
       "6개 일치 (2,000,000,000원) - 1개\n";
     expect(Store.generateWinningMessage(rankCountMap)).toBe(messageOutput);
+  });
+
+  test("수익률 계산하기 테스트", async () => {
+    const store = new Store();
+    const rankCountMap = getRankCountMap();
+    const PROFIT_RATE_OUTPUT = 100000250;
+
+    Store.inputMoney = jest.fn().mockReturnValue(2000);
+    await store.receivePayment();
+    Store.inputMoney.mockClear();
+
+    expect(store.calculateProfitRate(rankCountMap)).toBe(PROFIT_RATE_OUTPUT);
   });
 });
