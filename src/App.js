@@ -7,19 +7,6 @@ class App {
   #winningLottoNumbers;
   #bonusNumber;
   #inputMoney;
-  async play() {
-    const userInput = new UserInput();
-
-    this.#inputMoney = await userInput.getInputMoney();
-    const lottoCnt = Number(this.#inputMoney) / 1000;
-    this.#lottoList = new LottoList(lottoCnt).getLottoList();
-
-    this.#winningLottoNumbers = await userInput.getWinningNumbers();
-
-    this.#bonusNumber = await userInput.getBonusNumber();
-    console.log(this.#bonusNumber);
-    this.winningStat();
-  }
   winningStat() {
     let sum = 0;
     const stat = [];
@@ -84,6 +71,20 @@ class App {
     });
     const totalReturnRate = ((sum / Number(this.#inputMoney)) * 100).toFixed(1);
     MissionUtils.Console.print(`총 수익률은 ${totalReturnRate}%입니다.`);
+  }
+
+  async play() {
+    const userInput = new UserInput();
+
+    this.#inputMoney = await userInput.getInputMoney();
+    const lottoCnt = Number(this.#inputMoney) / 1000;
+    this.#lottoList = new LottoList(lottoCnt).getLottoList();
+
+    this.#winningLottoNumbers = await userInput.getWinningNumbers();
+
+    this.#bonusNumber = await userInput.getBonusNumber();
+    console.log(this.#bonusNumber);
+    this.winningStat();
   }
 }
 
