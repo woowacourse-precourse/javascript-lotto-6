@@ -1,4 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 const LOTTO_UNIT_PRICE = 1000;
 const MIN_LOTTO_NUMBER = 1;
@@ -35,14 +36,14 @@ class App {
   generateLottoNumbers(lottoCount) {
     this.lottoNumbers = [];
     for (let i = 0; i < lottoCount; i++) {
-      const lotto = this.generateSingleLotto();
+      const lotto = new Lotto(this.generateSingleLotto());
       this.lottoNumbers.push(lotto);
     }
   }
 
   printLottoNumbers() {
     for (const lotto of this.lottoNumbers) {
-      Console.print(lotto);
+      Console.print(lotto.numbers);
     }
   }
 
