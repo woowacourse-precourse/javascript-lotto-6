@@ -32,15 +32,11 @@ class App {
     this.printWinningStatics();
   }
 
-  // static async getLottoPrice() {
-
-  //   this.price = await getInputs.boughtPrice();
-  //   this.count = parseInt(this.price/1000);
-  // }
-
-
   async getLottoPrice() {
-    // while (true) {
+    let validPriceInput = false;
+    let priceAttempts = 0;
+    const maxPriceAttempts = 3; // 최대 시도 횟수를 설정합니다.
+    while (!validPriceInput && priceAttempts < maxPriceAttempts) {
       const priceInput = await Console.readLineAsync(MESSAGE.BUY);
 
       try {
@@ -54,11 +50,12 @@ class App {
 
         this.price = priceInput;
         this.count = parseInt(priceInput / 1000);
-        return; // 올바른 값이 입력되면 함수를 종료합니다.
+        validPriceInput = true;
       } catch (error) {
         Console.print(error.message);
+        priceAttempts++;
       }
-    // }
+    }
   }
 
 
@@ -78,25 +75,26 @@ class App {
   }
   
   async getNumbers() {
-    let validInput = false;
     let winningNumbers;
-    // while (!validInput) {
-      const getWinningNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBER);
-      const bonusNumbers = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
+    
+    const getWinningNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBER);
+    const bonusNumbers = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
 
       try {
+    
         Console.print(getWinningNumbers);
+        const checkWinning = new Lotto(getWinningNumbers.split(',').map(Number));
+        const temporaryBonus = Number(bonusNumbers);
         winningNumbers = getWinningNumbers.split(',').map(Number); // 쉼표로 구분된 값을 배열로 변환합니다.
-        const checkWinning = new Lotto(winningNumbers);
         this.winning = Array.from(winningNumbers);
-        const number = [...this.winning, bonusNumbers].split(',').map(Number);
+        const number = [...this.winning, temporaryBonus];
         const checkbonus = new checkBonus(number);
+        
         validInput = true;
       } catch (error) {
         Console.print(error.message);
       }
       this.bonus = Number(bonusNumbers);
-    // }
   }
 
 

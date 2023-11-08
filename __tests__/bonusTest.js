@@ -28,19 +28,20 @@ const getLogSpy = () => {
 
 const runException = async (input) => {
   // given
+  const logSpy = getLogSpy();
 
   const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
-  const INPUT_NUMBERS_TO_END = ["1000","1,2,3,4,5,6"];
+  const INPUT_NUMBERS_TO_END = ["1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
-  mockQuestions([...INPUT_NUMBERS_TO_END,input]);
+  mockQuestions([input, ...INPUT_NUMBERS_TO_END]);
 
   // when
   const app = new App();
-  
+  await app.play();
 
   // then
-  expect(app.play()).rejects.toThrow("[ERROR]");
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
 }
 
 describe("추가 테스트", () => {
@@ -93,9 +94,9 @@ describe("추가 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
-  // test("보너스 숫자와 당첨번호에서 중복이 있으면 예외가 발생한다.", async () => {
-  //   await runException("5");
-  // });
+  test("보너스 숫자와 당첨번호에서 중복이 있으면 예외가 발생한다.", async () => {
+    await runException("5");
+  });
   test("로또 번호와 보너스 번호에 46이상의 숫자가 있으면 예외가 발생한다",()=>{
     expect(()=>{
       new checkBonus([1, 2, 3, 4, 5, 55, 66])
