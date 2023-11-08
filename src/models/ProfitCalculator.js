@@ -1,8 +1,7 @@
 import { PRIZE_MONEY } from "../constants/Constant";
 
 export default class ProfitCalculator {
-
-  static calculateTotalPrize(result) {
+  calculateTotalPrize(result) {
     return (
       result[5] * PRIZE_MONEY[5] +
       result[4] * PRIZE_MONEY[4] +
@@ -12,7 +11,7 @@ export default class ProfitCalculator {
     );
   }
 
-  static calculateROI(totalPrize, purchasePrice) {
+  calculateROI(totalPrize, purchasePrice) {
     return (totalPrize / purchasePrice) * 100;
   }
 }
