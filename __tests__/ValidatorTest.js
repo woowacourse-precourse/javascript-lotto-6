@@ -1,5 +1,5 @@
-import LottoValidator from '../src/Validator.js';
-import ErrorMessages from '../src/ErrorMessages';
+import LottoValidator from '../src/validator/Validator.js';
+import ErrorMessages from '../src/constants/error.js';
 
 describe('LottoValidator 클래스 테스트', () => {
   let validator;

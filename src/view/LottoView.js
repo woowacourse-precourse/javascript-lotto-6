@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import COUNT_WINNERS from './CountWinners.js';
-import MESSAGES from './messages.js';
+import COUNT_WINNERS from '../constants/CountWinners.js';
+import MESSAGES from '../constants/messages.js';
 
 class LottoView {
   showLottoNumbers(countOfLotto, lottos) {

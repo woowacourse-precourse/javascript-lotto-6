@@ -1,4 +1,4 @@
-import LottoView from '../src/LottoView.js';
+import LottoView from '../src/view/LottoView.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const getLogSpy = () => {

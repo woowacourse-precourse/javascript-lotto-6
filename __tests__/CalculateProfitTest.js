@@ -1,4 +1,4 @@
-import calculateProfit from '../src/CalculateProfit.js';
+import calculateProfit from '../src/utils/CalculateProfit.js';
 
 describe('수익률 계산 테스트', () => {
   test('모든 당첨 1이상 일때', () => {

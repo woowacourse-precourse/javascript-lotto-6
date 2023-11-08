@@ -1,5 +1,5 @@
-import * as Utils from './ValidatorUtils.js';
-import ErrorMessages from './ErrorMessages.js';
+import * as Utils from './validatorutils.js';
+import ErrorMessages from '../constants/error.js';
 
 class LottoValidator {
   validatePurchaseAmount(amount) {

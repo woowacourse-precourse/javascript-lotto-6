@@ -1,9 +1,9 @@
-import Lotto from './Lotto.js';
-import LottoView from './LottoView.js';
-import InputView from './InputView.js';
-import LottoValidator from './Validator.js';
-import CalculateWinners from './CalculateWinners.js';
-import calculateProfit from './CalculateProfit.js';
+import Lotto from '../domain/Lotto.js';
+import LottoView from '../view/LottoView.js';
+import InputView from '../view/InputView.js';
+import LottoValidator from '../validator/Validator.js';
+import CalculateWinners from '../utils/CalculateWinners.js';
+import calculateProfit from '../utils/CalculateProfit.js';
 import { Random } from '@woowacourse/mission-utils';
 
 class LottoController {
