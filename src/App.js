@@ -21,19 +21,19 @@ class App {
 
     return Interface.printResults(matches, profit);
   }
-  
+
   async getPurchaseAmount() {
     let input;
 
     do {
       try {
         input = await Console.readLineAsync(inputPrompts.PURCHASE);
-        validatePurchase(input);  
+        validatePurchase(input);
       } catch (error) {
         Console.print(error.message);
         input = null;
       }
-    } while(!input)
+    } while (!input);
     return Number(input);
   }
 
@@ -49,7 +49,7 @@ class App {
       } catch (error) {
         Console.print(error.message);
       }
-    } while(!lotto)
+    } while (!lotto);
     return lotto;
   }
 
@@ -64,7 +64,7 @@ class App {
         Console.print(error.message);
         input = null;
       }
-    } while(!input)
+    } while (!input);
     return Number(input);
   }
 }

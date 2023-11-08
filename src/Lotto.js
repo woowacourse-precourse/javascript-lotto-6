@@ -1,4 +1,9 @@
-import { RANGE_MIN, RANGE_MAX, LOTTO_LENGTH, errorMessages } from './constants.js';
+import {
+  RANGE_MIN,
+  RANGE_MAX,
+  LOTTO_LENGTH,
+  errorMessages,
+} from './constants.js';
 
 class Lotto {
   #numbers;
@@ -9,16 +14,13 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO_LENGTH)
-      throw new Error(errorMessages.LENGTH);
-    if (numbers.includes(NaN))
-      throw new Error(errorMessages.NAN);
+    if (numbers.length !== LOTTO_LENGTH) throw new Error(errorMessages.LENGTH);
+    if (numbers.includes(NaN)) throw new Error(errorMessages.NAN);
     if (this.#containsDecimals(numbers))
       throw new Error(errorMessages.DECIMALS);
     if (this.#containsDuplicates(numbers))
       throw new Error(errorMessages.DUPLICATES);
-    if (this.#isOutOfRange(numbers))
-      throw new Error(errorMessages.RANGE);
+    if (this.#isOutOfRange(numbers)) throw new Error(errorMessages.RANGE);
   }
 
   getLottoNumbers() {
