@@ -32,7 +32,7 @@ export const LOTTO_RANK = Object.freeze({
   },
   second: {
     rank: 'second',
-    reward: 300000000,
+    reward: 30000000,
     matchedNumber: 5,
     bonudNumberText: ', 보너스 볼 일치',
     rewardText: '30,000,000원',
