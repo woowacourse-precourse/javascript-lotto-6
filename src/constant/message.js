@@ -16,3 +16,11 @@ export const MATCH_DATA= {
   BONUS: '5개 일치, 보너스 볼 일치 (30,000,000원) -',
   SIX: '6개 일치 (2,000,000,000원) -',
 }
+
+export const PRICE= {
+  THREE: 5000,
+  FOUR: 50000,
+  FIVE: 1500000,
+  BONUS: 30000000,
+  SIX: 2000000000,
+}

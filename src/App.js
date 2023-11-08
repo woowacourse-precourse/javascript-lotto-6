@@ -3,6 +3,7 @@ import Output from './Output.js';
 import UserInput from './UserInput.js';
 import Validate from './Validate.js';
 import Lotto from './Lotto.js';
+import { PRICE } from './constant/message.js'
 
 class App {
   Output = new Output();
@@ -125,11 +126,11 @@ class App {
   totalObjectSum(key, value) {
     let money = 0
 
-    if(key ==="3") money += value * 5000
-    if(key === "4") money += value * 50000
-    if(key === "5") money += value * 1500000
-    if(key === "bonus") money += value * 30000000
-    if(key === "6")  money += value * 2000000000
+    if(key ==="3") money += value * PRICE.THREE
+    if(key === "4") money += value * PRICE.FIVE
+    if(key === "5") money += value * PRICE.FIVE
+    if(key === "bonus") money += value * PRICE.BONUS
+    if(key === "6")  money += value * PRICE.SIX
 
     return money;
   }
