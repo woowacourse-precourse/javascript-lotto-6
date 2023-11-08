@@ -4,6 +4,8 @@ import Lotto from './Lotto.js';
 class App {
   async play() {
     Console.print('로또 게임을 시작합니다.');
+
+    const purchaseAmount = await this.inputPurchaseAmount();
   }
 
   // 2. 로또 구입하기: 로또 구입 금액 입력
