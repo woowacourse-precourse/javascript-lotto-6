@@ -31,10 +31,7 @@ class LottoController{
         this.generateLotto = this.#lottoGenerator.generateRandomNumbers(this.#purchaseAmount/1000);
         await this.occurIssueWinningNumbers();
         await this.occurIssueBonusNumber();
-        for (let i = 0; i < this.generateLotto.length; i++) {
-            this.comapreLotto(this.#winningNumbers,this.generateLotto[i],this.#bonusNumber)
-        }
-        this.#output.printStatistics(this.#dicQuantity);
+        this.calculateStatistics(this.generateLotto);
         const totalRate = this.getTotalRate(this.#purchaseAmount);
         this.#output.printTotalRate(totalRate);    
     }
@@ -66,7 +63,7 @@ class LottoController{
         }
     }
 
-    comapreLotto(winNumbers, lotto, bonusNumber) {
+    compareLotto(winNumbers, lotto, bonusNumber) {
         let matchCount = 0;
         for (const lottoNumber of lotto) {
             if (winNumbers.includes(lottoNumber)) {
@@ -81,6 +78,13 @@ class LottoController{
         if (this.#dicQuantity[matchCount] !== undefined) {
             this.#dicQuantity[matchCount]++;
         }
+    }
+
+    calculateStatistics(generateLotto) {
+        for (let i = 0; i < generateLotto.length; i++) {
+            this.compareLotto(this.#winningNumbers, generateLotto[i], this.#bonusNumber);
+        }
+        this.#output.printStatistics(this.#dicQuantity);
     }
 
     getTotalRate(purchaseAmount) { 
