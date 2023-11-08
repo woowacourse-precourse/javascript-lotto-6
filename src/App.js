@@ -1,5 +1,4 @@
 import Host from './Host.js';
-import Lotto from './Lotto.js';
 import Statistics from './Statistics.js';
 import Vendor from './Vendor.js';
 
@@ -8,15 +7,11 @@ class App {
     const vendor = new Vendor();
     const paid = await vendor.recieveMoney();
     const tickets = vendor.issueTickets(paid);
-    const winningNumbers = await Host.getWinningNumbers();
-    const lotto = new Lotto(winningNumbers);
-    const bonusNumber = await Host.getBonusNumber(winningNumbers);
-    const user = [
-      [1, 2, 3, 4, 5, 6],
-      [1, 2, 3, 4, 5, 7],
-      [1, 2, 6, 7, 8, 9],
-    ];
-    const prize = lotto.printResult(user, bonusNumber);
+
+    const host = new Host();
+    const lotto = await host.enrollWinningNumbers();
+    const bonusNumber = await host.getBonusNumber();
+    const prize = lotto.printResult(tickets, bonusNumber);
     Statistics.printRateOfReturn(paid, prize);
   }
 }
