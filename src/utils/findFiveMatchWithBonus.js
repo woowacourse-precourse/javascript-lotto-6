@@ -8,7 +8,7 @@ const findFiveMatchWithBonus = (lottos, matchCounts, bonusNumber) => {
     }
   });
   matchWithBonuscCounts.forEach(indice => {
-    if (lottos[indice].getNumbers().includes(bonusNumber))
+    if (lottos[indice].includes(bonusNumber))
       matchCounts[indice] = CONSTANTS.match.fiveMatchWithBonus;
   });
 };
