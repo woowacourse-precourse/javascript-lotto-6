@@ -34,7 +34,6 @@ class App {
       this.#winningNumbers,
       MODE.WINNING_NUMBERS
     );
-    const lottoGame = new Lotto(this.#winningNumbers);
     Console.print("");
     this.#bonusNumber = await this.untilValueAvailable(
       this.#bonusNumber,
@@ -42,6 +41,7 @@ class App {
       this.#winningNumbers
     );
 
+    const lottoGame = new Lotto(this.#winningNumbers);
     lottos.forEach((lotto) => {
       const compareResult = lottoGame.compareLottos(lotto, this.#bonusNumber);
       lottoGame.saveCompareResult(compareResult, this.lottoBoard);
