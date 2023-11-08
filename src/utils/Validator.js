@@ -22,6 +22,12 @@ const Validator = {
       throw error.numberRangeError;
     }
   },
+
+  validatePurchaseAmount(purchaseAmount) {
+    if (purchaseAmount % condition.oneLottoPrice !== condition.correctRemain) {
+      throw error.purchaseAmountError;
+    }
+  },
 };
 
 export default Validator;
