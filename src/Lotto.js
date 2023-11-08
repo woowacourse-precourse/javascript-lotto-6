@@ -1,3 +1,6 @@
+import { MESSAGE_ERROR } from './constants/Error.js';
+import { LOTTO_NUMBER_SIZE } from './constants/GameSetting.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,20 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    const setLottoNumbers = new Set(numbers);
+
+    if (numbers.length !== LOTTO_NUMBER_SIZE) {
+      throw new Error(MESSAGE_ERROR.lottoNumberSize);
+    }
+
+    if (setLottoNumbers.size !== LOTTO_NUMBER_SIZE) {
+      throw new Error(MESSAGE_ERROR.lottoDuplicateNumber);
     }
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
