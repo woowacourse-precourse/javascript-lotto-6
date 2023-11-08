@@ -80,6 +80,24 @@ class App {
     );
   }
 
+  printRateOfReturn(amount) {
+    let sum = 0;
+    const rates = {
+      first: 2000000000,
+      second: 30000000,
+      third: 1500000,
+      fourth: 50000,
+      fifth: 5000,
+    };
+
+    for (const award in this.award) {
+      sum += this.award[award] * rates[award];
+    }
+
+    const rateOfReturn = (((sum - amount) / amount) * 100).toFixed(2);
+    MissionUtils.Console.print(`총 수익률은 ${rateOfReturn}% 입니다.`);
+  }
+
   async play() {
     const amount = await this.payAmount();
     const quantity = this.quantityLotto(amount);
@@ -88,6 +106,7 @@ class App {
     await this.enterBosunNumber();
     this.checkResult();
     this.printResult();
+    this.printRateOfReturn(amount);
   }
 }
 
