@@ -1,7 +1,7 @@
 import Lotto from "../Lotto.js";
 import { ERROR_MESSAGE } from "../constants/messages.js";
 import REGEX from "../constants/Regex.js";
-import { pickLottoNumbers } from "../utils/lottoNumberPicker.js";
+import { Random } from "@woowacourse/mission-utils";
 
 const LottoSeller = {
   LOTTO_PRICE: 1000,
@@ -39,12 +39,16 @@ const LottoSeller = {
   pickLottos(count) {
     return new Array(count)
       .fill()
-      .map((_) => this.pickLotto())
+      .map((_) => this.pickLottoNumbers())
       .map((lottoNumbers) => new Lotto(lottoNumbers));
   },
 
-  pickLotto() {
-    return pickLottoNumbers(this.LOTTO_LENGTH);
+  pickLottoNumbers() {
+    const LOTTO_MIN_NUMBER = 1;
+    const LOTTO_MAX_NUMBER = 45;
+    const LOTTO_LENGTH = 6;
+
+    return Random.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_LENGTH);
   },
 };
 
