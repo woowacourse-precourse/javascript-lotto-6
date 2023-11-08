@@ -1,7 +1,7 @@
 import { mockReadLineAsync } from './mockMissionUtils';
 import { askPurchaseAmount } from '../src/askPurchaseAmount';
 
-describe('askPurchaseAmount', () => {
+describe('askPurchaseAmount 함수 테스트', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
