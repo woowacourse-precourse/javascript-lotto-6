@@ -3,6 +3,8 @@ import { ERROR_MESSAGE } from '../src/utils/constants';
 import { getLogSpy, mockQuestions, mockRandoms } from './utils';
 
 describe('LottoController', () => {
+  const INPUT = ['1000', '1,2,3,4,5,6', '7'];
+
   beforeEach(() => {
     jest.restoreAllMocks();
   });
@@ -51,7 +53,7 @@ describe('LottoController', () => {
   test('실패 - 구입 금액이 숫자가 아닌 경우', async () => {
     const logSpy = getLogSpy();
 
-    mockQuestions(['a']);
+    mockQuestions(['a', ...INPUT]);
 
     const instance = new LottoController();
     await instance.start();
@@ -64,7 +66,7 @@ describe('LottoController', () => {
   test('실패 - 구입 금액이 빈값일 경우', async () => {
     const logSpy = getLogSpy();
 
-    mockQuestions(['']);
+    mockQuestions(['', ...INPUT]);
 
     const instance = new LottoController();
     await instance.start();
@@ -77,7 +79,7 @@ describe('LottoController', () => {
   test('실패 - 구입 금액이 1000원 미만일 경우', async () => {
     const logSpy = getLogSpy();
 
-    mockQuestions(['500']);
+    mockQuestions(['500', ...INPUT]);
 
     const instance = new LottoController();
     await instance.start();
@@ -90,7 +92,7 @@ describe('LottoController', () => {
   test('실패 - 구입 금액이 1000원 단위가 아닌 경우', async () => {
     const logSpy = getLogSpy();
 
-    mockQuestions(['1500']);
+    mockQuestions(['1500', ...INPUT]);
 
     const instance = new LottoController();
     await instance.start();
@@ -104,7 +106,7 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', 'a,b,c,d,e,f', '7'];
+    const INPUT_NUMBERS_TO_END = ['1000', 'a,b,c,d,e,f', ...INPUT.slice(1)];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -121,7 +123,7 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '', '7'];
+    const INPUT_NUMBERS_TO_END = ['1000', '', ...INPUT.slice(1)];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -138,7 +140,7 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5', '7'];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5', ...INPUT.slice(1)];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -155,7 +157,7 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,5', '7'];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,5', ...INPUT.slice(1)];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -172,7 +174,7 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,46', '7'];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,46', ...INPUT.slice(1)];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -189,7 +191,12 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', 'a'];
+    const INPUT_NUMBERS_TO_END = [
+      '1000',
+      '1,2,3,4,5,6',
+      'a',
+      ...INPUT.slice(2),
+    ];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -206,7 +213,7 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', ''];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', '', ...INPUT.slice(2)];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -223,7 +230,12 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', '1'];
+    const INPUT_NUMBERS_TO_END = [
+      '1000',
+      '1,2,3,4,5,6',
+      '1',
+      ...INPUT.slice(2),
+    ];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
@@ -240,7 +252,12 @@ describe('LottoController', () => {
     const logSpy = getLogSpy();
 
     const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', '46'];
+    const INPUT_NUMBERS_TO_END = [
+      '1000',
+      '1,2,3,4,5,6',
+      '46',
+      ...INPUT.slice(2),
+    ];
 
     mockRandoms([RANDOM_NUMBERS_TO_END]);
     mockQuestions(INPUT_NUMBERS_TO_END);
