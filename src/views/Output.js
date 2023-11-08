@@ -19,5 +19,17 @@ const Output = {
   printStatistic() {
     MissionUtils.Console.print(MESSAGE.OUTPUT_STATISTIC);
   },
+
+  printWinningResult(winningResult) {
+    const messages = [
+      `${MESSAGE.OUTPUT_FIFTH}${winningResult.fifth}개`,
+      `${MESSAGE.OUTPUT_FOURTH}${winningResult.fourth}개`,
+      `${MESSAGE.OUTPUT_THIRD}${winningResult.third}개`,
+      `${MESSAGE.OUTPUT_SECOND}${winningResult.second}개`,
+      `${MESSAGE.OUTPUT_FIRST}${winningResult.first}개`,
+    ];
+
+    messages.forEach((message) => MissionUtils.Console.print(message));
+  },
 };
 export default Output;
