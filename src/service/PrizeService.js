@@ -1,6 +1,5 @@
 import {LOTTO} from "../utils/Define.js";
 import Prize from "../domain/Prize.js";
-import rank from "../domain/Rank.js";
 
 class PrizeService {
     constructor() {
