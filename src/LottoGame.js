@@ -1,6 +1,7 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import { validateBonusNumber, validateInputMoney } from "./Validator.js";
 import Lotto from "./Lotto.js";
+import LottoResult from "./LottoResult.js";
 
 class LottoGame {
   #gameCount;
@@ -60,6 +61,7 @@ class LottoGame {
       await this.getBonusNumber();
     } catch (error) {
       Console.print(error.message);
+      return this.getWinningNumber();
     }
   }
 
@@ -69,6 +71,19 @@ class LottoGame {
         "\n보너스 번호를 입력해 주세요.\n"
       );
       validateBonusNumber(this.#bonusNumber);
+    } catch (error) {
+      Console.print(error.message);
+      return this.getBonusNumber();
+    }
+  }
+
+  checkLottoNumbers() {
+    try {
+      const result = new LottoResult(
+        this.#lottoList,
+        this.#winningNumber,
+        this.#bonusNumber
+      );
     } catch (error) {
       Console.print(error.message);
     }

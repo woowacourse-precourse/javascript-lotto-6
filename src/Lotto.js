@@ -6,6 +6,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    return this.#numbers;
   }
 
   #validate(numbers) {
@@ -23,10 +24,6 @@ class Lotto {
         throw new Error("[ERROR] 로또 번호는 1과 45 사이의 숫자여야 합니다.");
       }
     });
-  }
-
-  get numbers() {
-    return this.#numbers;
   }
 }
 

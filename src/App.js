@@ -5,6 +5,7 @@ class App {
     const lottoGame = new LottoGame();
     await lottoGame.getUserInputMoney();
     await lottoGame.getWinningNumber();
+    lottoGame.checkLottoNumbers();
   }
 }
 
