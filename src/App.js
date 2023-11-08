@@ -12,9 +12,7 @@ class App {
         const buyMoney = await this.inputNum();
         this.Money = new Money(buyMoney);
         return buyMoney;
-      } catch (Err) {
-        Console.print(Err);
-      }
+      } catch {}
     }
   }
   modifyWinningNum(winningNum) {
@@ -33,9 +31,7 @@ class App {
         winningNum = this.modifyWinningNum(winningNum);
         this.Lotto = new Lotto(winningNum);
         return winningNum;
-      } catch (err) {
-        Console.print(err);
-      }
+      } catch {}
     }
     return winningNum;
   }
@@ -48,9 +44,7 @@ class App {
         bonusNum = parseInt(bonusNum);
         this.BonusNum = new BonusNum(bonusNum, this.winningNum);
         return bonusNum;
-      } catch (Err) {
-        Console.print(Err);
-      }
+      } catch {}
     }
   }
   async inputNum() {

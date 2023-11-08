@@ -90,7 +90,13 @@ describe('로또 테스트', () => {
     });
   });
 
-  test('예외 테스트', async () => {
+  test('구입금액이 숫자가 아닌 경우 예외가 발생한다.', async () => {
     await runException('1000j');
+  });
+  test('구입금액이 음수나 0인 경우 예외가 발생한다.', async () => {
+    await runException('0');
+  });
+  test('구입금액이 1000으로 나누어 떨어지지 않는 경우 예외가 발생한다..', async () => {
+    await runException('1001');
   });
 });
