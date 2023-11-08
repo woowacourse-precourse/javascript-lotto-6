@@ -1,8 +1,8 @@
 import InputView from '../View/InputView.js';
-import Inputs from '../models/Inputs.js';
-import Lotto from '../models/Lotto.js';
+import Inputs from '../Inputs.js';
+import Lotto from '../Lotto.js';
 import OutputView from '../View/OutputView.js';
-import CalculateStats from '../models/CalculateStats.js';
+import CalculateStats from '../CalculateStats.js';
 import { LOTTO_NUMBER, OUTPUT_MESSAGE } from '../constants.js';
 
 class LottoGameController {
@@ -10,10 +10,7 @@ class LottoGameController {
 
   #numLottoTickets = 0;
 
-  #winningNumbers = {
-    winningNumbers: [],
-    bonusNumber: 0,
-  };
+  #winningNumbers = { winningNumbers: [], bonusNumber: 0 };
 
   #lottoNumbers = [];
 
@@ -61,13 +58,15 @@ class LottoGameController {
   }
 
   generateLottoTickets() {
-    return Array.from({ length: this.#numLottoTickets }, () => {
-      const lotto = new Lotto();
-      const lottoNumbers = lotto.getNumbers();
-      const formattedLottoNumbers = `[${lottoNumbers.join(', ')}]`;
-      this.outputView.printGetNumbersOrMessage(formattedLottoNumbers);
-      return lottoNumbers;
-    });
+    return Array.from({ length: this.#numLottoTickets }, () => this.generateSingleLottoTicket());
+  }
+
+  generateSingleLottoTicket() {
+    const lotto = new Lotto();
+    const lottoNumbers = lotto.getNumbers();
+    const formattedLottoNumbers = `[${lottoNumbers.join(', ')}]`;
+    this.outputView.printGetNumbersOrMessage(formattedLottoNumbers);
+    return lottoNumbers;
   }
 
   calculateMatchingNumbersCount(ticket) {
