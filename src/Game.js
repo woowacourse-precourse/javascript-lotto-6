@@ -88,6 +88,7 @@ class Game {
     const lottos = [];
     for (let i = 0; i < number; i += 1) {
       const numbers = this.getRandomNumbers();
+      numbers.sort((a, b) => a - b);
       const lotto = new Lotto(numbers);
       lottos.push(lotto);
       Console.print(`[${numbers.join(", ")}]`);
