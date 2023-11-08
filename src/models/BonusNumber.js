@@ -12,7 +12,13 @@ class BonusNumber {
   }
 
   #validate(number, winningNumbers) {
-    if (!numberInRange(number, OPTION.minLottoNumber, OPTION.maxLottoNumber)) {
+    if (
+      !numberInRange(
+        number,
+        OPTION.lotto.minLottoNumber,
+        OPTION.lotto.maxLottoNumber,
+      )
+    ) {
       throw new InputError(MESSAGE.error.bonuseNumberMustBeInRange);
     }
     if (winningNumbers.includes(number)) {

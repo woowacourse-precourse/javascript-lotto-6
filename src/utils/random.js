@@ -3,9 +3,9 @@ import OPTION from '../constants/option.js';
 
 function getRandomLottoNumbers() {
   return Random.pickUniqueNumbersInRange(
-    OPTION.minLottoNumber,
-    OPTION.maxLottoNumber,
-    OPTION.lottoLength,
+    OPTION.lotto.minLottoNumber,
+    OPTION.lotto.maxLottoNumber,
+    OPTION.lotto.lottoLength,
   );
 }
 

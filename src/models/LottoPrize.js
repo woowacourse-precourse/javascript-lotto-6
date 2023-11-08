@@ -35,11 +35,11 @@ class LottoPrize {
 
   static getPrizeAmount(status) {
     const prizeAmount =
-      status.firstPrizeCount * OPTION.firstPrizeAmount +
-      status.secondPrizeCount * OPTION.secondPrizeAmount +
-      status.thirdPrizeCount * OPTION.thirdPrizeAmount +
-      status.fourthPrizeCount * OPTION.fourthPrizeAmount +
-      status.fifthPrizeCount * OPTION.fifthPrizeAmount;
+      status.firstPrizeCount * OPTION.prize.firstPrizeAmount +
+      status.secondPrizeCount * OPTION.prize.secondPrizeAmount +
+      status.thirdPrizeCount * OPTION.prize.thirdPrizeAmount +
+      status.fourthPrizeCount * OPTION.prize.fourthPrizeAmount +
+      status.fifthPrizeCount * OPTION.prize.fifthPrizeAmount;
 
     return prizeAmount;
   }

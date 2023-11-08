@@ -31,7 +31,7 @@ class LottoService {
   }
 
   buyLottos() {
-    const lottoCount = this.getPurchaseAmount() / OPTION.amountUnit;
+    const lottoCount = this.getPurchaseAmount() / OPTION.lotto.amountUnit;
     for (let i = 0; i < lottoCount; i += 1) {
       const lottoNumbers = sortAscendingNumber(getRandomLottoNumbers());
       this.#account.addLotto(new Lotto(lottoNumbers));

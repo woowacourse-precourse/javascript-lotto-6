@@ -16,7 +16,7 @@ class Account {
     if (!Number.isSafeInteger(purchaseAmount) || purchaseAmount < 0) {
       throw new InputError(MESSAGE.error.purchaseAmountMustBePositiveInteger);
     }
-    if (purchaseAmount === 0 || purchaseAmount % OPTION.amountUnit) {
+    if (purchaseAmount === 0 || purchaseAmount % OPTION.lotto.amountUnit) {
       throw new InputError(MESSAGE.error.purchaseAmountMustBeAmountUnit);
     }
   }

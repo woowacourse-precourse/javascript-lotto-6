@@ -20,7 +20,7 @@ class LottoView {
 
   async readWinningNumbers() {
     const result = await this.#inputView.read(MESSAGE.read.winningNumbers);
-    return result.split(OPTION.inputSeparator).map(Number);
+    return result.split(OPTION.read.inputSeparator).map(Number);
   }
 
   async readBonusNumber() {
@@ -37,7 +37,7 @@ class LottoView {
   }
 
   printLottoCount(lottoCount) {
-    this.print(`${lottoCount}${MESSAGE.print.lottoCount}`);
+    this.print(MESSAGE.print.lottoCount(lottoCount));
   }
 
   printLottos(lottos) {
@@ -47,22 +47,16 @@ class LottoView {
   }
 
   printLottoResult(lottoResult) {
-    const messages = [
-      MESSAGE.print.lottoResultHeader,
-      `${MESSAGE.print.fifthPrizeCount} ${lottoResult.fifthPrizeCount}개`,
-      `${MESSAGE.print.fourthPrizeCount} ${lottoResult.fourthPrizeCount}개`,
-      `${MESSAGE.print.thirdPrizeCount} ${lottoResult.thirdPrizeCount}개`,
-      `${MESSAGE.print.secondPrizeCount} ${lottoResult.secondPrizeCount}개`,
-      `${MESSAGE.print.firstPrizeCount} ${lottoResult.firstPrizeCount}개`,
-    ];
-
-    messages.forEach((message) => this.print(message));
+    this.print(MESSAGE.print.lottoResultHeader);
+    this.print(MESSAGE.print.fifthPrizeResult(lottoResult.fifthPrizeCount));
+    this.print(MESSAGE.print.fourthPrizeResult(lottoResult.fourthPrizeCount));
+    this.print(MESSAGE.print.thirdPrizeResult(lottoResult.thirdPrizeCount));
+    this.print(MESSAGE.print.secondPrizeResult(lottoResult.secondPrizeCount));
+    this.print(MESSAGE.print.firstPrizeResult(lottoResult.firstPrizeCount));
   }
 
   printLottoTotalReturns(lottoTotalReturns) {
-    this.print(
-      `${MESSAGE.print.lottoTotalReturns[0]} ${lottoTotalReturns}${MESSAGE.print.lottoTotalReturns[1]}`,
-    );
+    this.print(MESSAGE.print.lottoTotalReturns(lottoTotalReturns));
   }
 }
 
