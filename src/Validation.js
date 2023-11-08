@@ -25,6 +25,12 @@ class Validation {
     this.validateRepeatedNumbers(PARSED_ANSWERS);
   }
 
+  static validateNumbersLength(numbers){
+    if (numbers.length !== 6) {
+      throw new Error(STRINGS.ERROR_LENGTH);
+    }
+  }
+
 }
 
 export default Validation;
