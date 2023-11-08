@@ -5,13 +5,14 @@ import REGEXS from '../constants/regexs.js';
 import Lotto from '../models/Lotto.js';
 
 class TicketBooth {
+  #winLotto;
+
   constructor() {
-    this.winNumber;
-    this.bonusNumber;
+    this.#winLotto = [];
   }
 
   getWinNumbers() {
-    return [this.winNumber, this.bonusNumber];
+    return this.#winLotto;
   }
 
   async takePaymentForTickets() {
@@ -25,13 +26,13 @@ class TicketBooth {
     const winInput = await Console.readLineAsync(INPUT_MESSEGE.win);
     this.#validateWinNumbers(winInput.split(','));
     const numbers = winInput.split(',').map(Number);
-    this.winNumber = new Lotto(numbers);
+    this.#winLotto.push(new Lotto(numbers));
   }
 
   async receiveBonusNumber() {
     const bonusInput = await Console.readLineAsync(INPUT_MESSEGE.bonus);
-    this.#validateBonusNumber(this.winNumber, bonusInput);
-    this.bonusNumber = Number(bonusInput);
+    this.#validateBonusNumber(this.#winLotto[0], bonusInput);
+    this.#winLotto.push(Number(bonusInput));
   }
 
   #validateMoney(paymentAmount) {
