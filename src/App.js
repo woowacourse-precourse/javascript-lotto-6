@@ -1,7 +1,16 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import User from './User.js';
 
 class App {
+  
+  #user
+
+  constructor() {
+    this.#user = new User();
+  }
+
   async play() {
+    await this.#user.setPurchaseAmount();
     const purchaseAmount = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
     const purchaseCount = purchaseAmount / 1000;
 
