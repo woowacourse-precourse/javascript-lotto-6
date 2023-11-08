@@ -75,6 +75,10 @@ class LottoModel {
       .map((count, i) => (count === 5 && this.hasBonus[i] ? 7 : count))
       .filter(count => this.filterResultCount(count));
   }
+
+  initializeResultObject() {
+    this.initObject = Object.fromEntries(Array.from({ length: 5 }, (_, i) => i + 3).map(v => [v, 0]));
+  }
 }
 
 export default LottoModel;

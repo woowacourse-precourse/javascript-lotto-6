@@ -19,10 +19,12 @@ class LottoController {
     this.lottoModel.calculateTotalMatchCount();
     this.lottoModel.checkBonusNumber();
     this.lottoModel.calculateResult();
+    this.lottoModel.initializeResultObject();
 
     this.outputView.print(this.lottoModel.matchCount);
     this.outputView.print(this.lottoModel.hasBonus);
     this.outputView.print(this.lottoModel.result);
+    this.outputView.print(this.lottoModel.initObject);
   }
 
   async inputAmount() {
