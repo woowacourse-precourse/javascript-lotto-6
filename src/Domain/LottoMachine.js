@@ -7,13 +7,13 @@ export class LottoMachine {
   }
 
   generateLotto() {
-    const lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6); //1~45 6개랜덤
     this.lottos.push(lotto.sort((a, b) => a - b));
   }
 
   printLottos(lottos) {
     this.lottos.forEach((lotto) => {
-      MissionUtils.Console.print(JSON.stringify(lotto).replace(/,/g, ', '));
+      MissionUtils.Console.print(JSON.stringify(lotto).replace(/,/g, ', ')); //배열 출력시
     });
   }
 

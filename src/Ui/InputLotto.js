@@ -9,7 +9,7 @@ export class InputLotto {
   async buyLottos() {
     try {
       const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
-      this.lottoGame.buyLottos(cash);
+      this.lottoGame.buyLottos(cash); //예외 처리
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.buyLottos();
@@ -20,7 +20,7 @@ export class InputLotto {
   async winLottos() {
     try {
       const winningNumber = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
-      this.lottoGame.winLottos(winningNumber);
+      this.lottoGame.winLottos(winningNumber); //예외 처리
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.winLottos();
@@ -31,7 +31,7 @@ export class InputLotto {
   async isBonusNumber() {
     try {
       const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.');
-      this.lottoGame.isBonusNumber(bonusNumber);
+      this.lottoGame.isBonusNumber(bonusNumber); //예외 처리
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.isBonusNumber();
