@@ -13,7 +13,6 @@ class Lotto {
 
   #validate(numbers) {
     const inputValidator = new InputValidator();
-
     const NUMBER_STRING = numbers.toString();
     inputValidator.validateNumber(NUMBER_STRING);
 

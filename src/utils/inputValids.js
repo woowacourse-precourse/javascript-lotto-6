@@ -5,6 +5,7 @@ export default class InputValidator {
     if (isNaN(userInput)) {
       throw new Error(ERROR.input_double_num);
     }
+
     const inputAsNumber = parseInt(userInput, 10);
     if (inputAsNumber < 1000) throw new Error(ERROR.input_minimum);
     if (inputAsNumber % 1000 !== 0) throw new Error(ERROR.input_1000);
