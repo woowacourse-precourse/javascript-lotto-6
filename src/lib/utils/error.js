@@ -21,10 +21,26 @@ class InputError {
     }
   }
 
-  validateLottoInputDataType(input) {
+  validateLottoDataType(input) {
     for (let i = 0; i < input.length; i++) {
       if (isNaN(Number(input[i]))) {
         throw new Error(ERROR_MESSAGE.INPUT_DATA_TYPE_ERROR);
+      }
+    }
+  }
+
+  validateLottoIsPositiveNumber(input) {
+    for (let i = 0; i < input.length; i++) {
+      if (Number(input[i]) < 0) {
+        throw new Error(ERROR_MESSAGE.POSITIVE_NUMBER_ERROR);
+      }
+    }
+  }
+
+  validateLottoRange(input) {
+    for (let i = 0; i < input.length; i++) {
+      if (Number(input[i]) < 1 || 45 < Number(input[i])) {
+        throw new Error(ERROR_MESSAGE.LOTTO_NUMBER_RANGE_ERROR);
       }
     }
   }
@@ -51,6 +67,9 @@ class InputError {
     this.validateInputExist(input);
     this.validateLottoNumberLength(input);
     this.validateLottoIsDistinct(input);
+    this.validateLottoDataType(input);
+    this.validateLottoIsPositiveNumber(input);
+    this.validateLottoRange(input);
   }
 
   validatePaymentInput(input) {
@@ -63,7 +82,9 @@ class InputError {
     this.validateInputExist(input);
     this.validateLottoNumberLength(input);
     this.validateLottoIsDistinct(input);
-    this.validateLottoInputDataType(input);
+    this.validateLottoDataType(input);
+    this.validateLottoIsPositiveNumber(input);
+    this.validateLottoRange(input);
   }
 }
 

@@ -6,7 +6,7 @@ const WORD = Object.freeze({
   MAXNUMBER: 45,
   PICKNUMBER: 6,
   NOTING: "nothing",
-  BONUSCONDITION: 6,
+  BONUSCONDITION: 5,
   OPENBRANCKET: "[",
   CLOSEBRANCKET: "]",
 });

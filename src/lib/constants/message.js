@@ -31,4 +31,5 @@ export const ERROR_MESSAGE = Object.freeze({
     "[ERROR] 6개의 서로 다른 숫자를 입력하세요.",
   INPUT_DATA_TYPE_ERROR: "[ERROR] 숫자만 입력하세요.",
   POSITIVE_NUMBER_ERROR: "[ERROR] 양수만 입력하세요.",
+  LOTTO_NUMBER_RANGE_ERROR: "[ERROR] 1에서 45사이의 숫자만 입력하세요.",
 });
