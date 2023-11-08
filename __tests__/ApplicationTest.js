@@ -102,3 +102,26 @@ describe("inputPurchaseAmount 테스트", () => {
   });
 })
 
+describe("generateLottos 테스트", () => {
+  test("로또가 배열인지 확인해야 합니다", () => {
+    // given
+    const purchaseAmount = 6000; // 6,000원을 기반으로 로또 티켓 생성
+
+    mockRandoms([
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+      [13, 14, 15, 16, 17, 18],
+      [19, 20, 21, 22, 23, 24],
+      [25, 26, 27, 28, 29, 30],
+    ]);
+    mockQuestions([String(purchaseAmount), "1,2,3,4,5,6"]);
+
+    // when
+    const app = new App();
+    const lottos = app.generateLottos(purchaseAmount);
+
+    // then
+    expect(Array.isArray(lottos)).toBe(false); // lottos가 배열인지 확인
+  });
+});
+
