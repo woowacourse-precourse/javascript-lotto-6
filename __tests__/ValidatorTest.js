@@ -20,12 +20,14 @@ describe('유효성 검사 기능 테스트', () => {
   ])('구입 금액에 대한 유효성 검사 테스트', (purchaseAmounts, validation, result) => {
     purchaseAmounts.forEach((purchaseAmount) => expect(validation(purchaseAmount)).toEqual(result));
   });
+
   test.each([
     [invalidMainNumbers, Validator.validateLottoNumbers, false],
     [validMainNumbers, Validator.validateLottoNumbers, true],
   ])('로또 당첨 번호에 대한 유효성 검사 테스트', (mainNumbers, validation, result) => {
     mainNumbers.forEach((mainNumber) => expect(validation(mainNumber)).toEqual(result));
   });
+
   test.each([
     [invalidBonusNumbers, ...validMainNumbers, Validator.validateBonusNumber, false],
     [validBonusNumbers, ...validMainNumbers, Validator.validateBonusNumber, true],
