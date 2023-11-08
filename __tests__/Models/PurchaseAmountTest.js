@@ -21,4 +21,14 @@ describe("PurchaseAmount 클래스 테스트", () => {
     expect(() => new PurchaseAmount("0")).toThrow(LottoError.PREFIX);
     expect(() => new PurchaseAmount("-1000")).toThrow(LottoError.PREFIX);
   });
+
+  test("구입 금액을 리턴해야한다.", () => {
+    const purchaseAmount = new PurchaseAmount("2000");
+    expect(purchaseAmount.getAmount()).toBe(2000);
+  });
+
+  test("구입 금액으로 살 수 있는 로또 갯수를 리턴해야한다.", () => {
+    const purchaseAmount = new PurchaseAmount("2000");
+    expect(purchaseAmount.getNumberOfLottos()).toBe(2);
+  });
 });

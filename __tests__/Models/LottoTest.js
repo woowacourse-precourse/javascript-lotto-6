@@ -51,4 +51,11 @@ describe("로또 클래스 테스트", () => {
         ])
     ).not.toThrow(LottoError.PREFIX);
   });
+
+  test("Lotto 인스턴스의 numbers를 리턴해야한다.", () => {
+    const lotto = new Lotto(["1", "2", "3", "4", "5", "6"]);
+    const numbers = lotto.getNumbers();
+
+    expect(numbers).toEqual([1, 2, 3, 4, 5, 6]);
+  });
 });

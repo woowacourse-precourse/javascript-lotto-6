@@ -57,4 +57,16 @@ describe("DrawnLotto 클래스 테스트", () => {
 
     expect(() => drawnLotto.setBonusNumber("3 5")).toThrow();
   });
+
+  test("당첨번호와 보너스 번호를 리턴해야한다.", () => {
+    const drawnLotto = new DrawnLotto(["1", "2", "3", "4", "5", "6"]);
+    drawnLotto.setBonusNumber("7");
+
+    expect(drawnLotto.getBonusNumber()).toBe(7);
+    expect(drawnLotto.getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(drawnLotto.getFullNumbers()).toEqual({
+      drawnLottoNumbers: [1, 2, 3, 4, 5, 6],
+      bonusNumber: 7,
+    });
+  });
 });
