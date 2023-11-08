@@ -41,4 +41,22 @@ describe("스토어 클래스 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(output);
     }
   });
+
+  test("등수 계산하기 테스트", () => {
+    const outputs = [2, 1];
+    const compareResultList = [
+      { sameNumberCount: 5, bonusIsSame: true },
+      { sameNumberCount: 6, bonusIsSame: false },
+    ];
+
+    const logSpy = jest.spyOn(Store, "calculateRank");
+    logSpy.mockClear();
+
+    for (const compareResult of compareResultList) {
+      Store.calculateRank(compareResult);
+    }
+    for (const output of outputs) {
+      expect(logSpy).toHaveReturnedWith(output);
+    }
+  });
 });
