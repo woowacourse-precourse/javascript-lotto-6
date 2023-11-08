@@ -59,4 +59,28 @@ describe('User 클래스 테스트', () => {
 
     testCases.forEach((testCase, index) => expect(testCase).toEqual(expectedResult[index]));
   });
+
+  test('수익률을 소수점 둘째 자리에서 반올림하는 기능 테스트(둘재 자리가 올림 되는 경우와 내림 되는 경우)', () => {
+    const mainNumbersArray = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+    const floorRandomCase = [
+      [1, 2, 3, 4, 7, 8],
+      [1, 2, 3, 7, 8, 9],
+      [1, 2, 7, 8, 9, 10],
+    ];
+    const ceilRandomCase = [
+      [1, 2, 3, 4, 5, 8],
+      [1, 2, 3, 4, 8, 9],
+      [7, 8, 9, 10, 11, 12],
+    ];
+
+    const expectedResult = ['1833.3', '51666.7'];
+    mockRandoms([...floorRandomCase, ...ceilRandomCase]);
+    const users = [new User(3000), new User(3000)];
+
+    users.forEach((user, index) => {
+      user.raffleLottos(mainNumbersArray, bonusNumber);
+      expect(user.calculateEarningRate()).toBe(expectedResult[index]);
+    });
+  });
 });
