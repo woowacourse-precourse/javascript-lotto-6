@@ -16,6 +16,12 @@ class App {
     return this.countLottoAmount(INPUT_LOTTO_AMOUNT);
   }
 
+  async countLottoAmount(inputLottoAmount){
+    Validation.validateInputPrice(inputLottoAmount);
+    const LOTTO_AMOUNT = inputLottoAmount / 1000;
+    return this.createLottos(LOTTO_AMOUNT);
+  }
+
 }
 
 export default App;
