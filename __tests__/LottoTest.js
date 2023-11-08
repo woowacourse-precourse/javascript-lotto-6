@@ -55,6 +55,12 @@ describe('로또 클래스 테스트', () => {
 });
 
 describe('당첨 로또 클래스 테스트', () => {
+  const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = LOTTO.WIN;
+  const winningNumbers = ['1', '2', '3', '4', '5', '6'];
+  const bonusNumber = '7';
+  const winningLotto = new WinningLotto(winningNumbers);
+  winningLotto.setBonusNumber(bonusNumber);
+
   test.each([
     [''],
     ['1', '2', '3', '', '4', '5'],
@@ -69,8 +75,6 @@ describe('당첨 로또 클래스 테스트', () => {
   });
 
   test.each(['1', '0', '46', '-1'])('보너스 번호 유효성 검사 테스트', (input) => {
-    const winningNumbers = ['1', '2', '3', '4', '5', '6'];
-    const winningLotto = new WinningLotto(winningNumbers);
     expect(() => {
       winningLotto.setBonusNumber(input);
     }).toThrow('[ERROR]');
@@ -101,16 +105,58 @@ describe('당첨 로또 클래스 테스트', () => {
       numbers: ['1', '2', '8', '9', '10', '11'],
       result: 0,
     },
-  ])('당첨 통계 계산', (input) => {
-    const winningNumbers = ['1', '2', '3', '4', '5', '6'];
-    const bonusNumber = '7';
-    const winningLotto = new WinningLotto(winningNumbers);
-    winningLotto.setBonusNumber(bonusNumber);
-
+  ])('당첨 금액 계산 테스트', (input) => {
     const { numbers, result } = input;
     const lotto = new Lotto(numbers);
 
     const lottoResult = winningLotto.calculate(lotto);
     expect(lottoResult).toBe(result);
+  });
+
+  test.each([
+    {
+      numbers: [
+        ['1', '2', '3', '4', '5', '6'],
+        ['1', '2', '3', '4', '5', '7'],
+      ],
+      result: {
+        [FIRST]: 1,
+        [SECOND]: 1,
+        [THIRD]: 0,
+        [FOURTH]: 0,
+        [FIFTH]: 0,
+      },
+    },
+    {
+      numbers: [
+        ['1', '2', '3', '4', '5', '8'],
+        ['1', '2', '3', '4', '8', '9'],
+      ],
+      result: {
+        [FIRST]: 0,
+        [SECOND]: 0,
+        [THIRD]: 1,
+        [FOURTH]: 1,
+        [FIFTH]: 0,
+      },
+    },
+    {
+      numbers: [
+        ['1', '2', '3', '8', '9', '10'],
+        ['1', '2', '8', '9', '10', '11'],
+      ],
+      result: {
+        [FIRST]: 0,
+        [SECOND]: 0,
+        [THIRD]: 0,
+        [FOURTH]: 0,
+        [FIFTH]: 1,
+      },
+    },
+  ])('통계 테스트', (input) => {
+    const { numbers, result } = input;
+    const lottos = numbers.map((numbers) => new Lotto(numbers));
+    const lottoResult = winningLotto.getStatistics(lottos);
+    expect(lottoResult).toEqual(result);
   });
 });
