@@ -10,7 +10,7 @@ const outputs = {
   printLottos(lottos) {
     lottos.forEach((lotto) => {
       const lottoNums = lotto.getLottoNum();
-      const printLotto = `[${lottoNums.join(", ")}]\n`;
+      const printLotto = `[${lottoNums.join(", ")}]`;
 
       Console.print(`${printLotto}`);
     });

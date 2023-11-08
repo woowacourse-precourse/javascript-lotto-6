@@ -13,14 +13,17 @@ const publishService = {
   publishLottos(amount) {
     const LottoNums = [];
     for (let i = 0; i < amount; i++) {
-      const LottoNum = MissionUtils.Random.pickUniqueNumbersInRange(
-        1,
-        45,
-        6
-      ).sort((a, b) => a - b);
+      const LottoNum = this.sortArray(
+        MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)
+      );
       LottoNums.push(LottoNum);
     }
     return LottoNums;
+  },
+
+  // 정렬 함수
+  sortArray(array) {
+    return array.sort((a, b) => a - b);
   },
 
   // 로또 객체 생성
