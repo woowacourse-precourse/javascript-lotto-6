@@ -50,20 +50,20 @@ class LottoController {
   }
 
   async #generateWinningResult() {
-    await this.#outputView.printWinningMessage();
+    this.#outputView.printWinningMessage();
     this.#resultProcessor = new ResultProcessor(
       this.#lotto.getLottoNumber(),
       this.#bonus.getBonusNumber(),
       this.#lottoDataProcessor.getLottoResults()
     );
     const result = this.#resultProcessor.getResult();
-    await this.#outputView.printWinningResult(result);
+    this.#outputView.printWinningResult(result);
     this.#profitProcessor = new ProfitProcessor(
       result,
       this.#lottoDataProcessor.getPurchaseAmount()
     );
     const profit = this.#profitProcessor.getProfit();
-    await this.#outputView.printWinningProfit(profit);
+    this.#outputView.printWinningProfit(profit);
   }
 }
 

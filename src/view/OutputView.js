@@ -9,21 +9,21 @@ const hitMoney = [
 ];
 
 class OutputView {
-  async printPurchaseAmount(input) {
-    await Console.print(`${input}개를 구매했습니다.`);
+  printPurchaseAmount(input) {
+    Console.print(`${input}개를 구매했습니다.`);
   }
 
-  async printLottoResult(arr) {
+  printLottoResult(arr) {
     for (const value of arr) {
-      await Console.print(value);
+      Console.print(value);
     }
   }
 
-  async printWinningMessage() {
-    await Console.print("당첨 통계\n---");
+  printWinningMessage() {
+    Console.print("당첨 통계\n---");
   }
 
-  async printWinningResult(result) {
+  printWinningResult(result) {
     for (const key of ["3", "4", "5", "bonus", "6"]) {
       if (key !== "bonus") {
         this.#printWithoutBonus(key, result[key]);
@@ -33,8 +33,8 @@ class OutputView {
     }
   }
 
-  async printWinningProfit(result) {
-    await Console.print(`총 수익률은 ${result}%입니다.`);
+  printWinningProfit(result) {
+    Console.print(`총 수익률은 ${result}%입니다.`);
   }
 
   #printWithoutBonus(key, value) {
