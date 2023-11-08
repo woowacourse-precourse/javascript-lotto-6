@@ -26,7 +26,7 @@ class Lotto {
         return this.#numbers;
     }
 
-    calculateLottoResult(winningNumber, bonusNumber, lottoResult) {
+    calculateLotto(winningNumber, bonusNumber, lottoResult) {
         const winningNumArr = winningNumber.split(",").map((el) => Number(el));
         const bonusNumbertoNumber = Number(bonusNumber);
         const winningMatches = winningNumArr.filter((el) =>
