@@ -27,16 +27,14 @@ class Input {
       const inputValue = await new this().readInput(
         INPUT_QUERY_MESSAGES.winningLottery
       );
-      const winningLottery = Parser.stringToArray(inputValue);
-      Validator.isValidLottery(
-        winningLottery.map((num) => Parser.stringToNumber(num))
-      );
+      let winningLottery = Parser.stringToArray(inputValue);
+      winningLottery = winningLottery.map((num) => Parser.stringToNumber(num));
+      Validator.isValidLottery(winningLottery);
 
       const bonusNumber = await new this().readInput(
         INPUT_QUERY_MESSAGES.bonusNumber
       );
       winningLottery.push(Parser.stringToNumber(bonusNumber));
-      // console.log(winningLottery);
       if (Validator.isValidLottery(winningLottery)) return winningLottery;
     } catch (error) {
       console.log(error);

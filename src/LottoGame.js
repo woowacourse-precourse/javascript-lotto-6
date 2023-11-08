@@ -5,11 +5,13 @@ class LottoGame {
   #numberOfLotto;
   #lotteries;
   #winningLottery;
+  #lottoResult;
 
   constructor() {
     this.#numberOfLotto = 0;
-    this.#lotteries = {};
+    this.#lotteries = [];
     this.#winningLottery = [];
+    this.#lottoResult = [0, 0, 0, 0, 0, 0];
   }
   async play() {
     const { lotteries, winningLottery } = await this.#setConfig();
@@ -18,6 +20,8 @@ class LottoGame {
 
     //당첨내역을 계산한다.
     this.calculateWinningHistory();
+    console.log(this.#lottoResult);
+
     //수익률을 계산한다.
     // this.#view.printRaceResult({ winner, raceResult });
   }
@@ -57,6 +61,29 @@ class LottoGame {
     }
     return Array.from(set);
   }
-  calculateWinningHistory() {}
+  calculateWinningHistory() {
+    this.#lotteries.forEach((lottery) => {
+      let lotto = lottery.printLotto();
+      let result = this.matchingValues(lotto, this.#winningLottery);
+      console.log(result);
+      if (result === 7) {
+        this.#lottoResult[6] = this.#lottoResult[6] + 1;
+      }
+      this.#lottoResult[result] = this.#lottoResult[result] + 1;
+    });
+  }
+  matchingValues(arr, answer) {
+    const set1 = new Set(arr);
+    const set2 = new Set(answer);
+    let count = 0;
+
+    for (const num of set1) {
+      if (set2.has(num)) {
+        count++;
+      }
+    }
+
+    return count;
+  }
 }
 export default LottoGame;
