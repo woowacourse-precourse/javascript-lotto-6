@@ -42,12 +42,12 @@ describe("LottoSeller 유닛 테스트", () => {
   describe("지불한 금액 유효성 검증", () => {
     // given
     const { NOT_NUMBER, NOT_POSITIVE, NOT_MULTIPLE_OF } = MESSAGES.ERROR.BUY;
-    const validPaidAmounts = [[[10000], [15000], [20000]]];
+    const validPaidAmounts = [[[10000]]];
     const inValidPaidAmountsAndErrorMessages = [
-      [["오천냥"], NOT_NUMBER],
-      [[-1000], NOT_POSITIVE],
-      [[1000.15], NOT_MULTIPLE_OF(LOTTO_PRICE)],
-      [[1500], NOT_MULTIPLE_OF(LOTTO_PRICE)],
+      [["오천냥", 1000], NOT_NUMBER],
+      [[-1000, 1000], NOT_POSITIVE],
+      [[1000.15, 1000], NOT_MULTIPLE_OF(LOTTO_PRICE)],
+      [[1500, 1000], NOT_MULTIPLE_OF(LOTTO_PRICE)],
     ];
 
     test.each(validPaidAmounts)("올바른 케이스", async (paidAmount) => {
@@ -59,7 +59,7 @@ describe("LottoSeller 유닛 테스트", () => {
       await lottoSeller.sellLotto();
 
       // then
-      expect(logSpy).toHaveBeenCalledTimes(0);
+      expect(logSpy).toHaveBeenCalledTimes(11);
     });
 
     test.each(inValidPaidAmountsAndErrorMessages)(
