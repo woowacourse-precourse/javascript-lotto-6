@@ -17,6 +17,11 @@ export const PURCHASE_AMOUNT_ERROR_MESSAGE = Object.freeze({
     "[ERROR] 잘못된 입력입니다. 구입 금액은 숫자여야 합니다. 다시 입력해 주세요.",
 });
 
+export const LOTTO_NUMBERS_ERROR_MESSAGE = Object.freeze({
+  notSixNumbers: "[ERROR] 로또 번호는 6개여야 합니다.",
+  duplicatedNumber: "[ERROR] 로또 번호에 중복된 숫자가 있습니다."
+});
+
 export const WINNING_NUMBERS_ERROR_MESSAGE = Object.freeze({
   notNaturalNumber:
     "[ERROR] 잘못된 입력입니다. 0 이하의 값은 입력이 불가합니다. 다시 입력해 주세요.",
