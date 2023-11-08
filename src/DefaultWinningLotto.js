@@ -7,7 +7,7 @@ class DefaultWinningLotto {
     }
 
     #validate(numbers) {
-        const LOTTO= new Lotto(numbers);
+        new Lotto(numbers);
     }
 }
 export default DefaultWinningLotto;
