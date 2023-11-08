@@ -206,7 +206,7 @@ class App {
   #printRateOfRevenue() {
     const revenue = this.#getRevenue();
     const cost = this.#amount;
-    const rateOfRevenue = ((revenue / cost) * 100).toFixed(2);
+    const rateOfRevenue = parseFloat(((revenue / cost) * 100).toFixed(2));
     MissionUtils.Console.print(`총 수익률은 ${rateOfRevenue}%입니다.`);
   }
 }
