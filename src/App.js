@@ -69,10 +69,9 @@ class App {
   }
 
   #excuteProcess() {
-    const lottoInstances = this.#lottoMachine.purchase(
-      this.#validUserInput.purchasePrice,
-    );
-    const lottoList = [...lottoInstances].map((lotto) => lotto.getNumbers());
+    const lottoList = this.#lottoMachine
+      .purchase(this.#validUserInput.purchasePrice)
+      .map((lotto) => lotto.getNumbers());
     const lottoDrawChecker = new LottoDrawChecker(
       this.#validUserInput.winningNumbers,
       this.#validUserInput.bonusNumber,
@@ -84,16 +83,14 @@ class App {
     );
     const profitRate = reward.calculrateProfitRate();
 
-    this.#processResult(lottoList, profitRate, drawResult);
+    this.#processResult({ lottoList, drawResult, profitRate });
   }
 
   #processResult(
-    lottoList,
-    profitRate,
-    drawResult,
+    { lottoList, profitRate, drawResult },
     _0 = paramType(lottoList, Array),
-    _1 = paramType(profitRate, 'string'),
-    _2 = paramType(drawResult, Object),
+    _1 = paramType(drawResult, Object),
+    _2 = paramType(profitRate, 'string'),
   ) {
     this.#promptPrinter.purchaseCount([...lottoList].length);
     this.#promptPrinter.purchaseLottoInfo(lottoList);
