@@ -1,4 +1,4 @@
-import Lotto from '../src/Model/Lotto.js';
+import Lotto from '../src/Lotto.js';
 
 describe('Lotto 클래스 테스트', () => {
   test('로또 번호 길이 예외 테스트(6자리 이상)', () => {

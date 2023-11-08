@@ -1,11 +1,10 @@
-import ERROR from '../src/constants/Error.js';
-import { Validator } from '../src/util/Validator.js';
-import CustomError from '../src/util/CustomError.js';
+import { validateCommonInput } from '../../src/util/Validator.js';
+import CustomError from '../../src/util/CustomError.js';
+import ERROR from '../../src/constants/Error.js';
 
 describe('입력값 공통 유효성 검사 테스트', () => {
   describe('에러 테스트', () => {
-    const commonValidator = (input) => () =>
-      Validator.validateCommonInput(input);
+    const commonValidator = (input) => () => validateCommonInput(input);
     test.each([
       {
         input: '',
@@ -20,8 +19,7 @@ describe('입력값 공통 유효성 검사 테스트', () => {
     });
   });
   describe('통과 테스트', () => {
-    const commonValidator = (input) => () =>
-      Validator.validateCommonInput(input);
+    const commonValidator = (input) => () => validateCommonInput(input);
     test.each([
       {
         input: '1000000',

@@ -1,6 +1,6 @@
-import WinningLotto from '../src/Model/WinningLotto.js';
-import CustomError from '../src/util/CustomError.js';
-import ERROR from '../src/constants/Error.js';
+import WinningLotto from '../../src/Model/WinningLotto.js';
+import CustomError from '../../src/util/CustomError.js';
+import ERROR from '../../src/constants/Error.js';
 
 describe('WinningLotto 클래스 테스트', () => {
   test('보너스 번호 특이값 예외 테스트', () => {
