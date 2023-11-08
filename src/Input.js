@@ -37,9 +37,7 @@ class Input {
       this.validateWinningNumbers(input, numbers);
       return numbers;
     } catch (error) {
-      // return Promise.reject(error);
-      console.log(error.message);
-      return null;
+      return Promise.reject(error);
     }
   }
 
