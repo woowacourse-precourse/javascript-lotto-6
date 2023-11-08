@@ -13,7 +13,7 @@ class LottosList {
   }
 
   calculateLottoAmount(purchaseAmount) {
-    return (this.#lottoAmount = purchaseAmount / 1000);
+    return (this.#lottoAmount = purchaseAmount / num.LOTTO_PRICE);
   }
 
   produceNewLotto() {
