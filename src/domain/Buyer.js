@@ -1,12 +1,19 @@
 import CustomError from '../CustomError.js';
 import { ERROR, LOTTO } from '../Constant.js';
+import LottoFactory from './LottoFactory.js';
 
 class Buyer {
   #money;
 
+  #lottos;
+
   constructor(money) {
     this.#validate(money);
     this.#money = money;
+  }
+
+  buyLottos(lottoFactory = new LottoFactory()) {
+    this.#lottos = lottoFactory.exchangeLottos(this.#money);
   }
 
   #validate(money) {
