@@ -6,13 +6,21 @@ const WINNING_NUMBERS = "\n당첨 번호를 입력해 주세요.\n";
 const BONUS_NUM = "\n보너스 번호를 입력해 주세요.\n";
 
 class App {
+  constructor() {
+    this.lottos = [];
+    this.price = 0;
+  }
+
   async play() {
     await this.#controller();
   }
+
   async #controller() {
     while (true) {
       try {
-        await this.#readPrice();
+        this.price = await this.#readPrice();
+        this.lottos = this.#buyLotto(this.price / 1000);
+        await this.#readWinningNums();
         break;
       } catch (error) {
         MissionUtils.Console.print(error.message);
@@ -23,10 +31,10 @@ class App {
   async #readPrice() {
     const input = await MissionUtils.Console.readLineAsync(PRICE_MESSAGE);
     const price = Number(input);
-    if (price % 1000 !== 0) {
+    if (isNaN(price) || price % 1000 !== 0) {
       throw new Error(ERROR_PRICE_INPUT);
     }
-    this.#buyLotto(price / 1000);
+    return price;
   }
 
   #buyLotto(count) {
@@ -42,7 +50,7 @@ class App {
     lottos.forEach((lotto) => {
       MissionUtils.Console.print(`[${lotto.join(", ")}]`);
     });
-    this.#readWinningNums();
+    return lottos;
   }
 
   async #readWinningNums() {
