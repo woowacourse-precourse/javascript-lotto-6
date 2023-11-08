@@ -1,36 +1,19 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 
-import App, { MESSAGES } from './App.js';
+import App from './App.js';
 import Lotto from './Lotto.js';
-
-export const RANK = Object.freeze({
-  5: '5th',
-  4: '4th',
-  3: '3rd',
-  2: '2nd',
-  1: '1st',
-});
-
-export const TICKET_PRICE = 1000;
-
-export const REWARD = Object.freeze({
-  5: 5000,
-  4: 50000,
-  3: 1500000,
-  2: 30000000,
-  1: 2000000000,
-});
+import { MESSAGES, RANK, REWARDS, TICKET_PRICE } from './util/constants.js';
 
 class Game {
   constructor(amount) {
     this.amount = amount;
     this.tickets = [];
     this.drawInfo = {
-      [RANK[5]]: { count: 0, reward: REWARD[5] },
-      [RANK[4]]: { count: 0, reward: REWARD[4] },
-      [RANK[3]]: { count: 0, reward: REWARD[3] },
-      [RANK[2]]: { count: 0, reward: REWARD[2] },
-      [RANK[1]]: { count: 0, reward: REWARD[1] },
+      [RANK[5]]: { winningCount: 0, reward: REWARDS[5], matchCount: 3 },
+      [RANK[4]]: { winningCount: 0, reward: REWARDS[4], matchCount: 4 },
+      [RANK[3]]: { winningCount: 0, reward: REWARDS[3], matchCount: 5 },
+      [RANK[2]]: { winningCount: 0, reward: REWARDS[2], matchCount: 5 },
+      [RANK[1]]: { winningCount: 0, reward: REWARDS[1], matchCount: 6 },
     };
   }
 
@@ -59,7 +42,7 @@ class Game {
 
   recordResult(drawResult) {
     const rank = this.getRank(drawResult);
-    this.drawInfo[rank].count += 1;
+    this.drawInfo[rank].winningCount += 1;
   }
 
   printTickets() {
@@ -92,8 +75,8 @@ class Game {
   getReturn() {
     let totalReturn = 0;
 
-    for (const { count, reward } of Object.values(this.drawInfo)) {
-      totalReturn += Number(count * reward);
+    for (const { winningCount, reward } of Object.values(this.drawInfo)) {
+      totalReturn += Number(winningCount * reward);
     }
 
     return totalReturn;
