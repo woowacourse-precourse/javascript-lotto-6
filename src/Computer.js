@@ -2,6 +2,7 @@ import Consumer from "./Consumer.js";
 import User from "./User.js";
 import Lotto from "./Lotto.js";
 import Provider from "./Provider.js";
+import LottoMachine from "./LottoMachine.js";
 
 export default class Computer {
   user;
@@ -28,6 +29,9 @@ export default class Computer {
     this.#buyLottos(purchaseAmount);
     this.user.printLottosCount(this.consumer.lottos);
     this.user.printLottos(this.consumer.lottos);
+    const correctNumbers = await this.user.promptCorrectNumber();
+    const bonusNumber = await this.user.promptBounusNumber();
+    this.lottoMachine = LottoMachine.createLottoMachine(correctNumbers, bonusNumber);
   }
 
   #buyLottos(purchaseAmount) {

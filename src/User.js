@@ -21,4 +21,12 @@ export default class User {
     })
     Console.print(result);
   }
+
+  async promptCorrectNumber() {
+    return await Console.readLineAsync(GAME_MESSAGE.correctNumbers);
+  }
+
+  async promptBounusNumber() {
+    return await Console.readLineAsync(GAME_MESSAGE.bounusNumber);
+  }
 }

@@ -14,7 +14,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    this.#commonValidate(numbers,
+    this.#validateCommonWrapper(numbers,
       (number) => {
         Object.values(commonValidation).forEach(
           ({ errorMessage, isInvalid }) => {
@@ -32,7 +32,7 @@ class Lotto {
     )
   }
 
-  #commonValidate(numbers, callback) {
+  #validateCommonWrapper(numbers, callback) {
     numbers.forEach(number => {
       callback(number)
     });
