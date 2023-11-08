@@ -1,20 +1,11 @@
 class Lotto {
-  /**
-   * @type {number[]}
-   */
   #numbers;
 
-  /**
-   * @param {number[]} numbers
-   */
   constructor(numbers) {
       this.#validate(numbers);
       this.#numbers = numbers;
   }
 
-  /**
-   * @param {number[]} numbers
-   */
   #validate(numbers) {
       if (!(numbers instanceof Array && numbers.length === 6)) {
           throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
