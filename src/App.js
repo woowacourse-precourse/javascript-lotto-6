@@ -5,15 +5,13 @@ import StoreController from './controller/StoreController';
 class App {
   async play() {
     const user = await App.#purchaseLottos();
-
     const winning = await App.#inputWinningNumbers();
-
     App.#getMatchResult(user, winning);
   }
 
   static async #purchaseLottos() {
     const user = (await new UserController().createUser())
-      .purchaseNLottos()
+      .purchaseLottos()
       .printUserLottosNumber()
       .getUser();
 
