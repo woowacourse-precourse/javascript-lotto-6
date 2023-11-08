@@ -1,6 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
+  error(error) {
+    Console.print(error);
+  },
+
   buyLotto(quantity) {
     Console.print(`\n${quantity}개를 구매했습니다.`);
   },
