@@ -125,6 +125,7 @@ class App {
     const lottoResult = this.checkAllLottoResult(lottos, lottoWinningNumber, lottoBonusNumber);
     user.printAllLottoResult(lottoResult);
     const profitRate = this.calculateProfitRate(lottoResult, theNumberOfLotto);
+    user.printLottoProfitRate(profitRate);
   }
 }
 

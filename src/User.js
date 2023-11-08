@@ -26,14 +26,20 @@ class User {
   }
 
   printAllLottoResult(allLottoResult) {
-    let result = '\n당첨 통계\n---\n';
+    let result = '\n당첨 통계\n---';
 
     Object.values(allLottoResult).forEach(value => {
       const {rankingDetail, reward, count} = value;
-      result += `${rankingDetail.theNumberOfMatches}개 일치${rankingDetail.haveBonusNumber?', 보너스 볼 일치':''} (${reward.toLocaleString('ko-KR')}) - ${count}개\n`;
+      result += `\n${rankingDetail.theNumberOfMatches}개 일치${rankingDetail.haveBonusNumber?', 보너스 볼 일치':''} (${reward.toLocaleString('ko-KR')}) - ${count}개`;
     });
 
     Console.print(result);
+  }
+
+  printLottoProfitRate(profitRate) {
+    const roundedProfitRate = Math.round(profitRate * 10) / 10;
+
+    Console.print(`총 수익률은 ${roundedProfitRate}%입니다.`);
   }
 }
 
