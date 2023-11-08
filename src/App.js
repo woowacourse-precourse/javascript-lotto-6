@@ -56,7 +56,7 @@ class App {
     }
     return userInput;
   }
-
+  
   checkUserMoneyInput(userInput) {
     const inputNumber = Number(userInput);
     if (isNaN(inputNumber) || inputNumber % 1000 !== 0 || inputNumber === 0) {
@@ -64,6 +64,7 @@ class App {
     }
     return true;
   }
+
 
   totalLottoListUser() {
     const num = this.userMoneyInput / 1000;
@@ -117,20 +118,19 @@ class App {
   }
 
   async checkLottoResult() {
-    const mainNumber = this.winningLotto.getNumbers();
     const bonusNumber = this.winningLotto.getBonusNumber();
-    this.forCheckUserTotalLotto(mainNumber, bonusNumber);
+    this.forCheckUserTotalLotto(bonusNumber);
     this.setForError();
     this.printUserLottoResult();
   }
 
-  forCheckUserTotalLotto(mainNumber, bonusNumber) {
+  forCheckUserTotalLotto(bonusNumber) {
     this.userByLottoList.forEach((lotto) => {
-      this.checkUserLotto(mainNumber, bonusNumber, lotto.getNumbers());
+      this.checkUserLotto(bonusNumber, lotto.getNumbers());
     });
   }
 
-  checkUserLotto(mainNumber, bonusNumber, userLotto) {
+  checkUserLotto(bonusNumber, userLotto) {
     const matchNumbers = this.winningLotto.checkLotto(new Lotto(userLotto));
     if (matchNumbers === 3) {
       this.countWinner[5]++;

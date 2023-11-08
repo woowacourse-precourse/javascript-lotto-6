@@ -31,4 +31,9 @@ describe("테스트", () => {
         expect(app.countWinner[5]).toBe(0);
         expect(app.countWinner[4]).toBe(0);
     });
+
+    test("랜덤으로 생성된 수가 6개인지 테스트", () => {
+        const lottoNumbers = app.generateLotto();
+        expect(lottoNumbers).toHaveLength(6);
+    });
 });
