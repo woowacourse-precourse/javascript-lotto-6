@@ -12,4 +12,5 @@ const LOTTO_ERROR = Object.freeze({
   over1000: '[ERROR] 6개의 로또 번호를 입력하세요.',
   duplication: '[ERROR] 로또 번호에 중복이 있습니다.',
 });
-export default ERROR;
+
+module.exports = { MONEY_ERROR, LOTTO_ERROR };
