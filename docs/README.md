@@ -1,8 +1,6 @@
 # 미션 전 구현할 기능 목록
 
----
-
-## View
+## UI 로직
 
 ### 입력
 
@@ -26,10 +24,9 @@
 ⚠ 당첨 번호 입력
 
 - [x] 숫자 이외의 값 입력 시 예외 처리
-- [x] 숫자 중복 시 예외 처리
 - [x] 1~ 45 숫자 범위를 벗어났을 경우 예외 처리
+- [x] 숫자 중복 시 예외 처리
 - [x] 숫자 6개가 아닐 시 예외 처리
-- [x] 쉼표로 끝났을 경우 예외 처리
 
 ⚠ 보너스 번호 입력
 
@@ -43,3 +40,25 @@
 - [x] 수량에 따른 로또 발행하기 (6개의 서로 다른 랜덤 수를 생성)
 - [x] 당첨 기준에 맞춰 계산하기
 - [x] 수익률 계산하기
+
+---
+
+## file tree
+
+- 발행 로또: issued lotto / IssuedLotto 클래스
+- 당첨 로또: winning lotto / Lotto 클래스
+- MVC 패턴 적용
+
+📦src
+┣ 📂model
+┃ ┣ 📜Bonus.js
+┃ ┣ 📜Computer.js
+┃ ┣ 📜IssuedLotto.js
+┃ ┗ 📜Lotto.js
+┣ 📂validation
+┃ ┗ 📜Validate.js
+┣ 📂view
+┃ ┣ 📜InputView.js
+┃ ┗ 📜OutputView.js
+┣ 📜App.js // Controller
+┗ 📜index.js
