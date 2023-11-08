@@ -43,6 +43,8 @@
 사용자로부터 보너스 번호를 입력받는 메서드
 ### printWinningStatistics
 당첨 통계를 출력해주는 메서드
+### countMatchedNumbers
+몇개의 숫자가 일치하는지 계산해주는 메서드
 ### calculateProfit
 총 수익률을 계산해주는 메서드
 
