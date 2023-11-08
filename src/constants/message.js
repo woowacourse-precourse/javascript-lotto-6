@@ -5,9 +5,9 @@ import {
 } from './lotto.js';
 
 export const REQUEST_MESSAGE = {
-  PURCHASE_PRICE: '구입금액을 입력해 주세요.',
-  WINNING_NUMBERS: '당첨 번호를 입력해 주세요.',
-  BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
+  PURCHASE_PRICE: '구입금액을 입력해 주세요.\n',
+  WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
 };
 
 export const ERROR_MESSAGE = {

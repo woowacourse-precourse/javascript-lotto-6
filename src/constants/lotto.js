@@ -14,6 +14,7 @@ export const LIMIT_PER_DAY_PURCHASABLE_TOTAL_PRICE =
 export const MATCHED_COUNT = {
   SIX: 6,
   FIVE: 5,
+  FIVE_WITH_BONUS: 5,
   FOUR: 4,
   THREE: 3,
   QQUANG: 2,

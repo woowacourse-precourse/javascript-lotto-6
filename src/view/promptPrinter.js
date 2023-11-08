@@ -4,14 +4,16 @@ import { UserInputError } from '../errors/UserInputErrors.js';
 import { PRINT_MESSSAGE } from '../constants/message.js';
 import LottoReward from '../domains/LottoReward.js';
 import krwCurrencyAsWonFormat from '../utils/krwCurrencyAsWonFormat.js';
+import { GRADE, MATCHED_COUNT } from '../constants/lotto.js';
 
 export default class PromptPrinter {
+  BONUS_NUMBER_CORRECT_GRADE = '2';
   static GRADE_CORRECT_COUNT = {
-    1: 6,
-    2: 5,
-    3: 5,
-    4: 4,
-    5: 3,
+    [GRADE.FIRST]: MATCHED_COUNT.SIX,
+    [GRADE.SECOND]: MATCHED_COUNT.FIVE_WITH_BONUS,
+    [GRADE.THIRD]: MATCHED_COUNT.FIVE,
+    [GRADE.FOURTH]: MATCHED_COUNT.FOUR,
+    [GRADE.FIFTH]: MATCHED_COUNT.THREE,
   };
 
   userInputErrorMessage(error, _ = paramType(error, UserInputError)) {
@@ -23,35 +25,41 @@ export default class PromptPrinter {
   }
 
   purchaseLottoInfo(lottoList, _ = paramType(lottoList, Array)) {
-    const lottoListText = [...lottoList].reduce((accString, lotto) => {
-      const lottoString = this.#lottoTemplete(lotto);
+    const lottoListHTML = [...lottoList].reduce((accString, lotto) => {
+      const lottoNumbers = this.#lottoTemplete(lotto);
 
-      return (accString += `${lottoString}\n`);
+      return (accString += `${lottoNumbers}\n`);
     }, '');
 
-    this.#onPrint(lottoListText);
+    this.#onPrint(lottoListHTML);
   }
 
   drawResult(result, _ = paramType(result, Object)) {
-    const resultText = Object.entries(result).reduce(
-      (accString, [grade, count]) => {
-        if (grade === '2') {
-          return (accString += `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`);
-        }
-        return (accString += `${
-          PromptPrinter.GRADE_CORRECT_COUNT[grade]
-        }개 일치 (${krwCurrencyAsWonFormat(
-          LottoReward.GRADE_PRIZE[grade],
-        )}) - ${count}개\n`);
+    const drawDetailsHTML = Object.entries(result).reduce(
+      (drawDetailsString, [grade, count]) => {
+        const gradeMessage = this.#getLottoGradeMessageTemplete(grade, count);
+        return (drawDetailsString += gradeMessage);
       },
       '',
     );
 
-    this.#onPrint(resultText);
+    this.#onPrint(drawDetailsHTML);
   }
 
   profitRate(profitRate, _ = paramType(profitRate, 'string')) {
     this.#onPrint(`총 수익률은 ${profitRate}%입니다.`);
+  }
+
+  #getLottoGradeMessageTemplete(grade, count) {
+    if (grade === this.BONUS_NUMBER_CORRECT_GRADE) {
+      return `${PromptPrinter.GRADE_CORRECT_COUNT[grade]}개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`;
+    }
+
+    return `${
+      PromptPrinter.GRADE_CORRECT_COUNT[grade]
+    }개 일치 (${krwCurrencyAsWonFormat(
+      LottoReward.GRADE_PRIZE[grade],
+    )}) - ${count}개\n`;
   }
 
   #lottoTemplete(lotto, _ = paramType(lotto, Array)) {
