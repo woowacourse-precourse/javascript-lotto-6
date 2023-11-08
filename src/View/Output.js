@@ -1,7 +1,7 @@
-import { Console } from "@woowacourse/mission-utils";
-import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
-import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js";
-import ValidationError from "../Error/ValidationError.js";
+import { Console } from '@woowacourse/mission-utils';
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
+import DATATYPE_CONSTANT from '../Constant/DataTypeConstant';
+import ValidationError from '../Error/ValidationError';
 
 const outputString = (output) => {
   if (typeof output !== DATATYPE_CONSTANT.STRING) {

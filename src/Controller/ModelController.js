@@ -1,9 +1,9 @@
-import LottoStore from "../model/LottoStore.js";
-import WinningNumbersChecker from "../model/WinningNumbersChecker.js";
-import RULE_CONSTANT from "../Constant/RuleConstant.js";
-import Formattor from "../View/Formattor.js";
-import MatchedNumber from "../model/MatchedNumber.js";
-import NUMBER_CONSTANT from "../Constant/NumberConstant.js";
+import LottoStore from '../model/LottoStore';
+import WinningNumbersChecker from '../model/WinningNumbersChecker';
+import RULE_CONSTANT from '../Constant/RuleConstant';
+import Formattor from '../View/Formattor';
+import MatchedNumber from '../model/MatchedNumber';
+import NUMBER_CONSTANT from '../Constant/NumberConstant';
 
 const openLottoStore = () => {
   const lottoStore = new LottoStore(

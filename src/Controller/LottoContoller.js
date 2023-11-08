@@ -1,9 +1,8 @@
-import ModelController from "./ModelController.js";
-import InputController from "./InputController.js";
-import OutputController from "./OutputController.js";
-import Validator from "../View/Validator.js";
-import { Console } from "@woowacourse/mission-utils";
-import RULE_CONSTANT from "../Constant/RuleConstant.js";
+import ModelController from './ModelController';
+import InputController from './InputController';
+import OutputController from './OutputController';
+import Validator from '../View/Validator';
+import RULE_CONSTANT from '../Constant/RuleConstant';
 
 const lottopurchaseController = async () => {
   const purchaseCount = (await InputController.controllerLottoPurchase()).getLottoTicketCount();

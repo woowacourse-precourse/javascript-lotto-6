@@ -1,4 +1,4 @@
-import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
 
 class ValidationError extends Error {
   static name = 'LottoValidationError';

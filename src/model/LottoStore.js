@@ -1,10 +1,10 @@
-import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js";
-import RULE_CONSTANT from "../Constant/RuleConstant.js";
-import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
-import ValidationError from "../Error/ValidationError.js";
-import Formattor from "../View/Formattor.js";
-import LottoSellectNumberCard from "./LottoSellectNumberCard.js";
-import Lotto from "./Lotto.js";
+import DATATYPE_CONSTANT from '../Constant/DataTypeConstant';
+import RULE_CONSTANT from '../Constant/RuleConstant';
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
+import ValidationError from '../Error/ValidationError';
+import Formattor from '../View/Formattor';
+import LottoSellectNumberCard from './LottoSellectNumberCard';
+import Lotto from './Lotto';
 
 const TRUE = true;
 

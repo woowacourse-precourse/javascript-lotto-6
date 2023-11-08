@@ -1,8 +1,8 @@
-import Output from "../View/Output.js"
-import OUTPUT_CONSTANT from "../Constant/OutputConstant.js"
-import RULE_CONSTANT from "../Constant/RuleConstant.js";
-import Formattor from "../View/Formattor.js";
-import NUMBER_CONSTANT from "../Constant/NumberConstant.js";
+import Output from '../View/Output';
+import OUTPUT_CONSTANT from '../Constant/OutputConstant';
+import RULE_CONSTANT from '../Constant/RuleConstant';
+import Formattor from '../View/Formattor';
+import NUMBER_CONSTANT from '../Constant/NumberConstant';
 
 const outputPurchaseCount = (count) => {
   Output.outputString(`${count}${OUTPUT_CONSTANT.PURCHASE_COUNT}`);

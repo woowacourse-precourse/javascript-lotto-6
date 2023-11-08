@@ -1,9 +1,9 @@
-import RULE_CONSTANT from "../Constant/RuleConstant.js"
-import NUMBER_CONSTANT from "../Constant/NumberConstant.js";
-import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
-import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js";
-import ValidationError from "../Error/ValidationError.js"
-import Formattor from "../View/Formattor.js";
+import RULE_CONSTANT from '../Constant/RuleConstant'
+import NUMBER_CONSTANT from '../Constant/NumberConstant';
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
+import DATATYPE_CONSTANT from '../Constant/DataTypeConstant';
+import ValidationError from '../Error/ValidationError'
+import Formattor from '../View/Formattor';
 
 class MatchedNumber {
   #name

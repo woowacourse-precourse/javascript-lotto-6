@@ -1,5 +1,5 @@
-import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
-import ValidationError from "../Error/ValidationError.js";
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
+import ValidationError from '../Error/ValidationError';
 
 class Lotto {
   #numbers;

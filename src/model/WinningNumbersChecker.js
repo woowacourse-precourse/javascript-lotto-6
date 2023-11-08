@@ -1,9 +1,9 @@
-import ValidationError from "../Error/ValidationError.js";
-import ERROR_CONSTANT from "../Constant/ErrorConstant.js";
-import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js";
-import NUMBER_CONSTANT from "../Constant/NumberConstant.js"
-import Formattor from "../View/Formattor.js";
-import RULE_CONSTANT from "../Constant/RuleConstant.js";
+import ValidationError from '../Error/ValidationError';
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
+import DATATYPE_CONSTANT from '../Constant/DataTypeConstant';
+import NUMBER_CONSTANT from '../Constant/NumberConstant'
+import Formattor from '../View/Formattor';
+import RULE_CONSTANT from '../Constant/RuleConstant';
 
 class WinningNumbersChecker {
   #commonWinningNumbers

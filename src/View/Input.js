@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import ValidationError from '../Error/ValidationError.js';
-import ERROR_CONSTANT from '../Constant/ErrorConstant.js';
-import DATATYPE_CONSTANT from '../Constant/DataTypeConstant.js';
+import ValidationError from '../Error/ValidationError';
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
+import DATATYPE_CONSTANT from '../Constant/DataTypeConstant';
 
 const getUserInputAsync = (async (message) => {
   if (typeof message !== DATATYPE_CONSTANT.STRING) {

@@ -1,10 +1,10 @@
-import getUserInputAsync from "../View/input.js";
-import Output from "../View/Output.js";
-import Validator from "../View/Validator.js";
-import INPUT_CONSTANT from "../Constant/InputConstant.js";
-import Formattor from "../View/Formattor.js";
-import RULE_CONSTANT from "../Constant/RuleConstant.js";
-import NUMBER_CONSTANT from "../Constant/NumberConstant.js";
+import getUserInputAsync from '../View/Input';
+import Output from '../View/Output';
+import Validator from '../View/Validator';
+import INPUT_CONSTANT from '../Constant/InputConstant';
+import Formattor from '../View/Formattor';
+import RULE_CONSTANT from '../Constant/RuleConstant';
+import NUMBER_CONSTANT from '../Constant/NumberConstant';
 
 const TRUE = true;
 

@@ -1,7 +1,7 @@
-import ValidationError from "../Error/ValidationError.js"
-import ERROR_CONSTANT from "../Constant/ErrorConstant.js"
-import NUMBER_CONSTANT from "../Constant/NumberConstant.js"
-import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js"
+import ValidationError from '../Error/ValidationError';
+import ERROR_CONSTANT from '../Constant/ErrorConstant';
+import NUMBER_CONSTANT from '../Constant/NumberConstant';
+import DATATYPE_CONSTANT from '../Constant/DataTypeConstant';
 
 const DOT = '.';
 
