@@ -2,6 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import generateLotto from '../src/utils/generateLotto.js';
 import getWinningStatistics from '../src/utils/getWinningStatistics.js';
 import Lotto from '../src/Lotto.js';
+import getRateOfReturn from '../src/utils/getRateOfReturn.js';
 
 const mockRandoms = numbers => {
   Random.pickUniqueNumbersInRange = jest.fn();
@@ -40,5 +41,12 @@ describe('로또 기능 테스트', () => {
     array.forEach(lottoNumber => lottos.push(new Lotto(lottoNumber)));
 
     expect(getWinningStatistics(lottos, winningNumbers, bonusNumber)).toStrictEqual(expectedValue);
+  });
+
+  test('총 수익률을 계산하는 기능', () => {
+    const purchaseAmount = 8000;
+    const returns = [5000];
+    const expectedValue = '62.5%';
+    expect(getRateOfReturn(purchaseAmount, returns)).toBe(expectedValue);
   });
 });
