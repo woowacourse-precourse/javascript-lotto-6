@@ -68,6 +68,10 @@ class App {
     );
   }
 
+  static rate(totalPrize, investMoney) {
+    return ((totalPrize / investMoney) * 100).toFixed(1);
+  }
+
   async play() {
     const purchaseNumber = await App.purchaseNumber();
     const lottoClasses = App.lottoClassesArray(purchaseNumber);
@@ -77,7 +81,7 @@ class App {
     App.printResult(rank);
     const total = App.totalPrize(rank);
     const money = lottoClasses.length * 1000;
-    const rate = ((total / money) * 100).toFixed(1);
+    const rate = App.rate(total, money);
     Console.print("총 수익률은 " + rate + "%입니다.");
   }
 }
