@@ -37,12 +37,21 @@ class LottoData {
     return this.lottos;
   }
 
-  setLottoStats(stats) {
-    this.lottoStats = stats;
-  }
-
   getLottoStats() {
     return this.lottoStats;
+  }
+
+  calculateStats(winningNumber, bonusNumber) {
+    this.lottos.forEach((lotto) => {
+      const winningCount = lotto.filter((number) => winningNumber.includes(number)).length;
+      const bonusCount = lotto.includes(bonusNumber);
+
+      if (winningCount === 5 && bonusCount) {
+        this.lottoStats.bonus += 1;
+      } else if (winningCount in this.lottoStats) {
+        this.lottoStats[winningCount] += 1;
+      }
+    });
   }
 
   getProfit() {
