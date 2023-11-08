@@ -3,6 +3,15 @@ import { Random } from '@woowacourse/mission-utils';
 
 const ASC = (a, b) => a - b;
 
+// TODO: 상수화
+const lotto_prize = [
+  { match: 6, PRIZE: 2000000000 },
+  { match: 5, bonusMatch: true, PRIZE: 30000000 },
+  { match: 5, PRIZE: 1500000 },
+  { match: 4, PRIZE: 50000 },
+  { match: 3, PRIZE: 5000 },
+]
+
 class LottoGame {
 
   /** @type {number} : 구매한 티켓 수량 */
@@ -33,6 +42,39 @@ class LottoGame {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(ASC);
       this.#tickets.push(new Lotto(numbers));
     }
+  }
+
+  /** 각 티켓을 당첨번호와 비교하여 "일치개수", "보너스번호일치여부"를 계산한다. */
+  evaluateTicketMatches() {
+    this.#tickets.forEach((ticket) => {
+      ticket.setMatch(this.#countMatchingNumbers(ticket));
+      ticket.setBonusMatch(this.#hasBonusNumber(ticket));
+    });
+  }
+
+  /**
+   * 당첨 번호와 비교하여 일치하는 번호의 개수를 반환한다.
+   * @param {Lotto} ticket 구매한 로또 티켓
+   * @returns {number} 일치하는 번호의 개수
+   */
+  #countMatchingNumbers(ticket) {
+    return this.#winningNumbers.filter((winningNumber) => {
+      ticket.getNumbers().includes(winningNumber)
+    }).length;
+  }
+
+  /**
+   * 보너스 번호의 포함 여부를 반환한다.
+   * @param {Lotto} ticket 구매한 로또 티켓
+   * @returns {boolean} 보너스 번호의 포함 여부
+   */
+  #hasBonusNumber(ticket) {
+    return ticket.getNumbers().includes(this.#bonusNumber);
+  }
+
+
+  #determinePrize(match, bonusMatch) {
+
   }
 
   /** @returns {number} 티켓 구입 수량 */
