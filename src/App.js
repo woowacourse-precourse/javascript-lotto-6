@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GAME_MESSAGES } from "./Constatns.js";
-import Ticket from "./ticket.js";
+import Ticket from "./Ticket.js";
 import Lotto from "./Lotto.js";
 import getLottos from "./getLottos.js";
 
