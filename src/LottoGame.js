@@ -97,7 +97,7 @@ class LottoGame {
     }
 
     const profit = totalIncome - totalMoney;
-    const profitRate = (profit / totalMoney) * 100;
+    let profitRate = ((profit + totalMoney) / totalMoney) * 100;
 
     return Math.round(profitRate * 100) / 100;
   };
