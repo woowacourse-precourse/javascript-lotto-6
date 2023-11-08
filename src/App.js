@@ -88,6 +88,19 @@ export function calculatePrizes(matchCount, prizeList, lottoTicket, bonusNumber)
   return prizeList;
 }
 
+export function countPrizes(ticketCount, lottoTickets, winningNumbers, bonusNumber) {
+  let prizeList = [0, 0, 0, 0, 0];
+  for (let i = 0; i < ticketCount; i++) {
+    let matchCount = countMatchingNumbers(lottoTickets[i], winningNumbers);
+    prizeList = calculatePrizes(matchCount, prizeList, lottoTickets[i], bonusNumber);
+  }
+  return prizeList;
+}
+
+export function countMatchingNumbers(lottoTicket, winningNumbers) {
+  return lottoTicket.filter((number) => winningNumbers.includes(number)).length;
+}
+
 class App {
   async play() {}
 }
