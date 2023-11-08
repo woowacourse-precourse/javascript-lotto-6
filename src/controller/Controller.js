@@ -56,7 +56,7 @@ class Controller {
     const winLotto = new WinLotto(this.tiketBooth.getWinNumbers());
     const matchedNumberList = this.#lottoBundle.populateWinResult(winLotto);
     this.analyzer.countWinningRank(matchedNumberList);
-    this.announcer.printPrize(this.analyzer);
+    this.announcer.printResult(this.analyzer);
   }
 }
 

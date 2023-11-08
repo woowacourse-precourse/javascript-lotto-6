@@ -4,15 +4,24 @@ export const OPTIONS = Object.freeze({
   length: 6,
 });
 
-export const REGEXS = {
-  NUMBER: /^[0-9]+$/,
-};
+export const REGEXS = Object.freeze({
+  number: /^[0-9]+$/,
+});
 
 export const RANK = Object.freeze({
-  first: ['first', 2000000000],
-  second: ['second', 30000000],
-  third: ['third', 1500000],
-  fourth: ['fourth', 50000],
-  fifth: ['fifth', 5000],
-  losingLotto: ['losingLotto', 0],
+  fifth: 'fifth',
+  fourth: 'fourth',
+  third: 'third',
+  second: 'second',
+  first: 'first',
+  losing: 'losing',
+});
+
+export const PRIZE = Object.freeze({
+  first: 2000000000,
+  second: 30000000,
+  third: 1500000,
+  fourth: 50000,
+  fifth: 5000,
+  losing: 0,
 });

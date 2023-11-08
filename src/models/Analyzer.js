@@ -1,4 +1,4 @@
-import { RANK } from '../constants/options.js';
+import { RANK, PRIZE } from '../constants/options.js';
 
 class Analyzer {
   #rankedLotto;
@@ -10,7 +10,7 @@ class Analyzer {
       third: 0,
       fourth: 0,
       fifth: 0,
-      losingLotto: 0,
+      losing: 0,
     };
   }
 
@@ -25,18 +25,18 @@ class Analyzer {
   }
 
   #checkRank(winCount, bonusCount) {
-    if (winCount === 6) return RANK.first[0];
-    if (winCount === 5 && bonusCount) return RANK.second[0];
-    if (winCount === 5) return RANK.third[0];
-    if (winCount === 4) return RANK.fourth[0];
-    if (winCount === 3) return RANK.fifth[0];
-    return RANK.losingLotto[0];
+    if (winCount === 6) return RANK.first;
+    if (winCount === 5 && bonusCount) return RANK.second;
+    if (winCount === 5) return RANK.third;
+    if (winCount === 4) return RANK.fourth;
+    if (winCount === 3) return RANK.fifth;
+    return RANK.losing;
   }
 
   #calculateTotalPrize() {
     let totalPrize = 0;
     for (const rank in this.#rankedLotto) {
-      totalPrize += RANK[rank][1] * this.#rankedLotto[rank];
+      totalPrize += PRIZE[rank] * this.#rankedLotto[rank];
     }
 
     return totalPrize;

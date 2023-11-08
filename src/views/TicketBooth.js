@@ -36,7 +36,7 @@ class TiketBooth {
   }
 
   #validateNumber(number) {
-    if (!REGEXS.NUMBER.test(number)) {
+    if (!REGEXS.number.test(number)) {
       throw new Error(ERROR.notNumber);
     }
   }
