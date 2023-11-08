@@ -1,3 +1,5 @@
+import { BONUS_NUMBER_TYPE } from '../../constants.js';
+
 export class LottoResult {
   #numbers;
   #winningNumbers;
@@ -16,8 +18,14 @@ export class LottoResult {
     return this.#countOfWinningNumbers;
   }
 
-  getCountOfBonusNumber() {
-    return this.#countOfBonusNumber();
+  getBonusNumberType() {
+    if (this.#countOfWinningNumbers === 5) {
+      if (this.#numbers.some((number) => number === this.#bonusNumber)) {
+        return BONUS_NUMBER_TYPE.withFiveWinningNumbers;
+      }
+      return BONUS_NUMBER_TYPE.withOutFiveWinningNumbers;
+    }
+    return BONUS_NUMBER_TYPE.useless;
   }
 
   #setCountOfWinningNumbers() {
@@ -26,18 +34,8 @@ export class LottoResult {
     ).length;
   }
 
-  #countOfBonusNumber() {
-    if (this.#countOfWinningNumbers === 5) {
-      if (this.#numbers.some((number) => number === this.#bonusNumber)) {
-        return 2;
-      }
-      return 1;
-    }
-    return 0;
-  }
-
-  isWin(condition, countOfWinningNumbers, countOfBonusNumber) {
-    const { winningCount, bonusCount } = condition;
-    return winningCount === countOfWinningNumbers && bonusCount === countOfBonusNumber;
+  isWin(condition) {
+    const { winningCount, bonusType } = condition;
+    return winningCount === this.#countOfWinningNumbers && bonusType === this.getBonusNumberType();
   }
 }

@@ -1,11 +1,12 @@
 import { LottoResult } from './Lotto.js';
 import { Print } from '../../interface/Output.js';
 import { getRoundedNumber } from '../../utils/getRoundedNumber.js';
+import { BONUS_NUMBER_TYPE } from '../../constants.js';
 
 export class WinningLottosResult {
   #winningLottosResult = WinningLottosResult.RESULT_CONDITIONS.map(
-    ({ winningCount, bonusCount, prize }) => {
-      return { condition: { winningCount, bonusCount }, prize, count: 0, profit: 0 };
+    ({ winningCount, bonusType, prize }) => {
+      return { condition: { winningCount, bonusType }, prize, count: 0, profit: 0 };
     },
   );
 
@@ -14,27 +15,27 @@ export class WinningLottosResult {
   static RESULT_CONDITIONS = [
     {
       winningCount: 3,
-      bonusCount: 0,
+      bonusType: BONUS_NUMBER_TYPE.useless,
       prize: 5000,
     },
     {
       winningCount: 4,
-      bonusCount: 0,
+      bonusType: BONUS_NUMBER_TYPE.useless,
       prize: 50000,
     },
     {
       winningCount: 5,
-      bonusCount: 1,
+      bonusType: BONUS_NUMBER_TYPE.withOutFiveWinningNumbers,
       prize: 1500000,
     },
     {
       winningCount: 5,
-      bonusCount: 2,
+      bonusType: BONUS_NUMBER_TYPE.withFiveWinningNumbers,
       prize: 30000000,
     },
     {
       winningCount: 6,
-      bonusCount: 0,
+      bonusType: BONUS_NUMBER_TYPE.useless,
       prize: 2000000000,
     },
   ];
@@ -49,13 +50,7 @@ export class WinningLottosResult {
 
   #setWinningLottos(lottoResult) {
     this.#winningLottosResult.forEach((winningLotto) => {
-      if (
-        lottoResult.isWin(
-          winningLotto.condition,
-          lottoResult.getCountOfWinningNumbers(),
-          lottoResult.getCountOfBonusNumber(),
-        )
-      ) {
+      if (lottoResult.isWin(winningLotto.condition)) {
         winningLotto.count += 1;
         winningLotto.profit += winningLotto.prize;
       }
@@ -64,7 +59,7 @@ export class WinningLottosResult {
 
   getTotalProfitRate() {
     let totalProfit = 0;
-    this.#winningLottosResult().forEach(({ profit }) => {
+    this.#winningLottosResult.forEach(({ profit }) => {
       totalProfit += profit;
     });
 
@@ -75,8 +70,8 @@ export class WinningLottosResult {
   print() {
     Print('당첨통계\n---\n');
     this.#winningLottosResult.forEach(({ condition, prize, count }) => {
-      const { winningCount, bonusCount } = condition;
-      if (bonusCount === 2) {
+      const { winningCount, bonusType } = condition;
+      if (bonusType === 2) {
         Print(`${winningCount}개 일치, 보너스 볼 일치 (${prize}원) - ${count}개`);
 
         return;
