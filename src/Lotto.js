@@ -1,3 +1,7 @@
+const MIN_VALUE = 1;
+const MAX_VALUE = 45;
+const LOTTO_NUMBER_COUNT = 6;
+
 class Lotto {
   #numbers;
 
@@ -20,7 +24,7 @@ class Lotto {
   }
   
   validateNumberLength(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_NUMBER_COUNT) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
   }
@@ -38,7 +42,7 @@ class Lotto {
   }
   
   validateNumberRange(number) {
-    if (number < 1 || number > 45) {
+    if (number < MIN_VALUE || number > MAX_VALUE) {
       throw new Error("[ERROR] 1부터 45 사이의 숫자가 아닌 입력이 있습니다.");
     }
   }
