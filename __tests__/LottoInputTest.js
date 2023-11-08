@@ -73,6 +73,7 @@ describe('LottoInput.validateAmount 테스트', () => {
   });
 });
 
+// LottoMachine 로직에 대한 테스트
 describe('LottoInput.getWinningNumbers 테스트', () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -95,5 +96,48 @@ describe('LottoInput.getWinningNumbers 테스트', () => {
     await expect(LottoInput.getWinningNumbers()).rejects.toThrow(
       '올바른 당첨 번호를 입력해야 합니다.',
     );
+  });
+});
+
+// LottoMachine 로직에 대한 테스트 - 숫자들 배열에 대한 테스트
+describe('LottoInput.validateNumbersArray 테스트', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test('유효한 숫자 배열이라면 에러를 발생시키지 않는다.', () => {
+    expect(() => {
+      LottoInput.validateNumbersArray([15, 16, 17, 18, 19, 20]);
+    }).not.toThrow();
+  });
+
+  test('숫자가 1~45의 범위를 벗어나면 에러를 발생시킨다. - 숫자 < 1 인 경우', () => {
+    expect(() => {
+      LottoInput.validateNumbersArray([0, 16, 17, 18, 19, 45]);
+    }).toThrow('[ERROR] 입력은 1~45사이의 숫자이고, 6개의 숫자여야 합니다.');
+  });
+
+  test('숫자가 1~45의 범위를 벗어나면 에러를 발생시킨다. - 숫자 > 45 인 경우', () => {
+    expect(() => {
+      LottoInput.validateNumbersArray([11, 16, 17, 18, 19, 47]);
+    }).toThrow('[ERROR] 입력은 1~45사이의 숫자이고, 6개의 숫자여야 합니다.');
+  });
+
+  test('숫자가 중복되는 경우엔 에러를 발생시킨다.', () => {
+    expect(() => {
+      LottoInput.validateNumbersArray([11, 16, 17, 18, 19, 19]);
+    }).toThrow('[ERROR] 입력은 1~45사이의 숫자이고, 6개의 숫자여야 합니다.');
+  });
+
+  test('숫자가 6개가 아닌 경우 에러를 발생 시킨다 - 6개 초과인 경우', () => {
+    expect(() => {
+      LottoInput.validateNumbersArray([11, 16, 17, 18, 19, 43, 45]);
+    }).toThrow('[ERROR] 입력은 1~45사이의 숫자이고, 6개의 숫자여야 합니다.');
+  });
+
+  test('숫자가 6개가 아닌 경우 에러를 발생 시킨다 - 6개 미만인 경우', () => {
+    expect(() => {
+      LottoInput.validateNumbersArray([11, 16, 17, 18, 19]);
+    }).toThrow('[ERROR] 입력은 1~45사이의 숫자이고, 6개의 숫자여야 합니다.');
   });
 });
