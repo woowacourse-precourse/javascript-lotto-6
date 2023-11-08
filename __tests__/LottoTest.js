@@ -57,21 +57,13 @@ describe("티켓생성, 출력 확인", () => {
     for (let i = 0; i < ticket; i++) {
       tickets.push(new Lotto());
     }
-    // console.log(tickets);
   });
-
-  // test("티켓 출력 테스트", () => {
-  //   const combinedString = tickets
-  //     .map((ticket) => "[" + ticket.get_numbers() + "]")
-  //     .join("\n");
-  //   // MissionUtils.Console.print(combinedString);
-  // });
 
   test("티켓 생성&출력 테스트", () => {
     const ticket = 3;
     console.log("랜덤티켓생성");
     const tickets = produce_ticket(ticket);
-    console.log(tickets);
+    // console.log(tickets);
     // tickets.forEach((ticket) => console.log(ticket.get_numbers()));
   });
 
@@ -115,5 +107,61 @@ describe("티켓 결과 확인", () => {
   test("Lotto확인", () => {
     const test_lotto = new Lotto([1, 2, 10, 9, 7, 8]);
     // console.log(test_lotto.get_price(winning_number, bonus_number));
+  });
+});
+describe("예외 테스트..", () => {
+  const INPUT = ["1000j", "1004", "2000"];
+  const PRICE_UNIT = 1000;
+  let loop = true;
+  test("구입금액", () => {
+    MissionUtils.Console.print("구입금액을 입력해 주세요.");
+    // const price = input_price();
+    let price;
+    let i = 0;
+    while (true) {
+      let input = INPUT[i];
+      i++;
+      if (is_not_number(input)) {
+        continue;
+      }
+      if (is_not_multiple_of_priceunit(input)) {
+        continue;
+      }
+      price = input;
+      break;
+    }
+    console.log(price);
+
+    function input_price() {
+      let input;
+      let i = 0;
+      while (true) {
+        // inputs = MissionUtils.Console.readLineAsync();
+        input = INPUT[i];
+        i++;
+        if (is_not_number(input)) {
+          continue;
+        }
+        if (is_not_multiple_of_priceunit(input)) {
+          continue;
+        }
+        return input;
+      }
+    }
+
+    function is_not_number(input) {
+      if (isNaN(input)) {
+        console.log("[ERROR] 숫자가 잘못된 형식입니다.");
+        return true;
+      }
+      return false;
+    }
+    function is_not_multiple_of_priceunit(input) {
+      if (parseInt(input) % PRICE_UNIT != 0 || parseInt(input) < PRICE_UNIT) {
+        console.log(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
+        return true;
+      }
+      return false;
+    }
   });
 });

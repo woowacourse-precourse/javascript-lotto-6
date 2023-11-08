@@ -9,11 +9,17 @@ class App {
   async play() {
     //구매금액 입력
     MissionUtils.Console.print("구입금액을 입력해 주세요.");
-    const price = await MissionUtils.Console.readLineAsync();
-    // const price = INPUT[0];
-    check_number(price);
-    if (parseInt(price) % PRICE_UNIT != 0) {
-      throw new Error(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
+    let price;
+    while (true) {
+      let input = await MissionUtils.Console.readLineAsync();
+      if (is_not_number(input)) {
+        continue;
+      }
+      if (is_not_multiple_of_priceunit(input)) {
+        continue;
+      }
+      price = input;
+      break;
     }
 
     // 발행한 로또 수량 및 번호를 출력
@@ -93,10 +99,19 @@ class App {
     }
 
     //숫자 확인 함수
-    function check_number(input) {
+    function is_not_number(input) {
       if (isNaN(input)) {
-        throw new Error("[ERROR] 숫자를 입력해주세요");
+        console.log("[ERROR] 숫자가 잘못된 형식입니다.");
+        return true;
       }
+      return false;
+    }
+    function is_not_multiple_of_priceunit(input) {
+      if (parseInt(input) % PRICE_UNIT != 0 || parseInt(input) < PRICE_UNIT) {
+        console.log(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
+        return true;
+      }
+      return false;
     }
 
     // 랜덤로또 생산
