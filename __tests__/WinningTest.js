@@ -1,17 +1,18 @@
 import WinningController from "../src/WinningController.js";
+import Lotto from "../src/Lotto.js";
 
 describe("당첨 계산 테스트", () => {
   test("로또 번호와 당첨 번호가 몇 개가 맞는지 계산한다.", () => {
     // given
     const winningNumbers = [1, 2, 3, 4, 5, 6];
     const lottos = [
-      [7, 8, 9, 10, 11, 12],
-      [1, 7, 8, 9, 10, 11],
-      [1, 2, 7, 8, 9, 10],
-      [1, 2, 3, 7, 8, 9],
-      [1, 2, 3, 4, 7, 8],
-      [1, 2, 3, 4, 5, 7],
-      [1, 2, 3, 4, 5, 6],
+      new Lotto([7, 8, 9, 10, 11, 12]),
+      new Lotto([1, 7, 8, 9, 10, 11]),
+      new Lotto([1, 2, 7, 8, 9, 10]),
+      new Lotto([1, 2, 3, 7, 8, 9]),
+      new Lotto([1, 2, 3, 4, 7, 8]),
+      new Lotto([1, 2, 3, 4, 5, 7]),
+      new Lotto([1, 2, 3, 4, 5, 6]),
     ];
     const results = [0, 1, 2, 3, 4, 5, 6];
 
@@ -25,7 +26,7 @@ describe("당첨 계산 테스트", () => {
   test("로또 번호와 보너스 번호가 일치하는지 확인한다.", () => {
     // given
     const bonusNumbers = [1, 2, 3, 4, 5, 6, 7];
-    const lotto = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
     const results = [true, true, true, true, true, true, false];
 
     // when
@@ -59,12 +60,12 @@ describe("당첨 계산 테스트", () => {
     const winningNumbers = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 7;
     const lottos = [
-      [1, 2, 3, 4, 5, 6],
-      [1, 2, 3, 4, 5, 7],
-      [1, 2, 3, 4, 5, 8],
-      [1, 2, 3, 4, 7, 8],
-      [1, 2, 3, 7, 8, 9],
-      [1, 2, 7, 8, 9, 10],
+      new Lotto([1, 2, 3, 4, 5, 6]),
+      new Lotto([1, 2, 3, 4, 5, 7]),
+      new Lotto([1, 2, 3, 4, 5, 8]),
+      new Lotto([1, 2, 3, 4, 7, 8]),
+      new Lotto([1, 2, 3, 7, 8, 9]),
+      new Lotto([1, 2, 7, 8, 9, 10]),
     ];
     const results = [1, 1, 1, 1, 1, 1];
 

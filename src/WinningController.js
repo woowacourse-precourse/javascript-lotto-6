@@ -3,7 +3,7 @@ import { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_NONE, PRIZE_LIST } from ".
 class WinningController {
   static countWinning({ lotto, winningNumbers }) {
     const winning = winningNumbers.reduce((acc, winningNumber) => {
-      if (lotto.includes(winningNumber)) {
+      if (lotto.getNumbers().includes(winningNumber)) {
         return acc + 1;
       }
 
@@ -14,7 +14,7 @@ class WinningController {
   }
 
   static checkBonus({ lotto, bonusNumber }) {
-    return lotto.includes(bonusNumber);
+    return lotto.getNumbers().includes(bonusNumber);
   }
 
   static toRank({ winning, bonus }) {
