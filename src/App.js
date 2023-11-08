@@ -32,6 +32,7 @@ class App {
 		do {
 			try {
 				input = await Console.readLineAsync(promptMessage);
+				console.log(typeof input);
 				if (validateFunc) {
 					validateFunc(input);
 				}
@@ -63,6 +64,7 @@ class App {
 
 		let WINNING_NUMBERS_LIST;
 		let isValid;
+
 		while (!isValid) {
 			try {
 				const WINNING_NUMBERS_INPUT = await Console.readLineAsync(

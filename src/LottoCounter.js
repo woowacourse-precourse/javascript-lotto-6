@@ -6,6 +6,13 @@ import {
 	FIVE_PLUS_BONUS_MATCH_MESSAGE,
 	SIX_MATCH_MESSAGE,
 } from './Constant.js';
+
+const match_three_prize = 5000;
+const match_four_prize = 50000;
+const match_5_prize = 1500000;
+const second_prize = 30000000;
+const first_prize = 2000000000;
+
 class LottoCounter {
 	constructor() {
 		this.match_three = 0;
@@ -36,11 +43,12 @@ class LottoCounter {
 
 	calculatePrize(number) {
 		const total =
-			5000 * this.match_three +
-			50000 * this.match_four +
-			1500000 * this.match_five +
-			30000000 * this.match_five_plus_bonus +
-			2000000000 * this.match_six;
+			match_three_prize * this.match_three +
+			match_four_prize * this.match_four +
+			match_5_prize * this.match_five +
+			second_prize * this.match_five_plus_bonus +
+			first_prize * this.match_six;
+
 		const PROFIT_RATE = (total / Number(number)) * 100;
 
 		return PROFIT_RATE;
