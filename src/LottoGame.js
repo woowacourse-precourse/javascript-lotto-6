@@ -15,8 +15,6 @@ class LottoGame {
     this.#winningLottery = [];
     this.#bonusNumber = 0;
     this.#lottoResult = {
-      onePoint: 0,
-      twoPoint: 0,
       threePoint: 0,
       fourPoint: 0,
       fivePoint: 0,
@@ -32,7 +30,11 @@ class LottoGame {
     this.printResultCount();
 
     //수익률을 계산한다.
-    // this.#view.printRaceResult({ winner, raceResult });
+    const profit = this.calculateTotalResultPrice();
+    // console.log(profit);
+    const profitPercentage = this.calculateProfit(this.#numberOfLotto, profit);
+    // console.log(profitPercentage);
+    Console.print(`총 수익률은 ${profitPercentage}%입니다.`);
   }
   printResultCount() {
     Console.print(`\n당첨 통계`);
@@ -64,6 +66,7 @@ class LottoGame {
     this.#lotteries = lotteries;
     this.#winningLottery = winningLottery;
     this.#bonusNumber = bonusNumber;
+    this.#numberOfLotto = numberOfLotto;
     return { lotteries, winningLottery, bonusNumber };
   }
 
@@ -91,16 +94,10 @@ class LottoGame {
     this.#lotteries.forEach((lottery) => {
       let lotto = lottery.printLotto();
       let result = this.matchingValues(lotto, this.#winningLottery);
-      this.saveResult(result);
+      this.saveResult(result, lotto);
     });
   }
-  saveResult(result) {
-    if (result === 1) {
-      this.#lottoResult.onePoint = +1;
-    }
-    if (result === 2) {
-      this.#lottoResult.twoPoint = +1;
-    }
+  saveResult(result, lotto) {
     if (result === 3) {
       this.#lottoResult.threePoint = +1;
     }
@@ -135,13 +132,24 @@ class LottoGame {
   }
   calculateTotalResultPrice() {
     let price = 0;
-    this.#lottoResult.forEach((num, idx) => {
-      price += num * WINNING_PRICE[idx];
-    });
+    const keys = Object.keys(this.#lottoResult); // ['name', 'weight', 'price', 'isFresh']
+    // console.log(keys);
+    for (let i = 0; i < keys.length; i++) {
+      let property = keys[i];
+      // // console.log(property);
+      // console.log(this.#lottoResult[property]);
+      // console.log(WINNING_PRICE[property]);
+      price += this.#lottoResult[property] * WINNING_PRICE[property];
+    }
 
     return price;
   }
-  calculateProfit(money, prize) {
+  calculateProfit(count, prize) {
+    // console.log(count);
+    const money = count * 1000;
+    // console.log(prize);
+    // console.log(money);
+
     const percentage = ((prize / money) * 100).toFixed(1);
     return percentage;
   }

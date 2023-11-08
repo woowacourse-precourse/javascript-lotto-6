@@ -4,6 +4,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#duplicate(numbers);
     this.#numbers = numbers;
   }
 
@@ -11,13 +12,11 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
-
-    const set = new Set();
-    for (const num of numbers) {
-      if (set.has(num)) {
-        throw new InputError('중복된 숫자가 존재합니다.');
-      }
-      set.add(num);
+  }
+  #duplicate(numbers) {
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== 6) {
+      throw new Error('[ERROR] 로또 번호가 중복됩니다.');
     }
   }
 

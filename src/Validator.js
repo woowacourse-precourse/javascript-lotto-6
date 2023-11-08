@@ -17,7 +17,7 @@ class Validator {
     return true;
   }
   static isValidBonus(bonusNumber, winningLottery) {
-    for (const num of winningLottery) {
+    for (const num in winningLottery) {
       if (bonusNumber === num) {
         throw new InputError('중복입니다.');
       }
@@ -30,7 +30,6 @@ class Validator {
         throw new InputError('해당 범위의 숫자가 아닙니다.');
       }
     }
-    return true;
   }
 
   #isduplicated(arr) {
@@ -41,23 +40,19 @@ class Validator {
       }
       set.add(num);
     }
-    return true;
   }
   #isUnit(price) {
     if (price % 1000 !== 0) throw new InputError(ERROR_MESSAGES.incorrectUnit);
-    return true;
   }
   #isNaN(value) {
     if (Number.isNaN(value)) {
-      throw new InputError(ERROR_MESSAGES.notANumber);
+      throw new Error('[ERROR]');
     }
-    return true;
   }
   #isZero(value) {
     if (value === 0) {
       throw new InputError(ERROR_MESSAGES.zero);
     }
-    return true;
   }
   #isExist(value) {
     return value;

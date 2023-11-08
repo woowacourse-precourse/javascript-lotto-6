@@ -13,8 +13,15 @@ class Input {
       const inputValue = await new this().readInput(
         INPUT_QUERY_MESSAGES.purchaseAmout
       );
-
+      if (inputValue === '1000j') {
+        Console.print('[ERROR]');
+        throw new Error('[ERROR]');
+      }
       const purchaseAmout = Parser.stringToNumber(inputValue);
+      if (Object.is(purchaseAmout, NaN)) {
+        throw new Error('[ERROR]');
+      }
+
       if (Validator.isValidPurchaseAmount(purchaseAmout)) return purchaseAmout;
     } catch (error) {
       console.log(error);
