@@ -4,7 +4,9 @@ import {MissionUtils} from "@woowacourse/mission-utils";
 
 class App {
     checkInputPurchasedAmount(purchasedAmount) {
-        if (isNaN(purchasedAmount) || purchasedAmount % 1000 !== 0) throw new Error("[ERROR] 잘못된 숫자를 입력하셨습니다.");
+        if (isNaN(purchasedAmount) || purchasedAmount % 1000 !== 0) {
+            throw new Error("[ERROR] 잘못된 숫자를 입력하셨습니다.");
+        }
     }
 
 
@@ -14,8 +16,8 @@ class App {
                 const purchasedAmount = await MissionUtils.Console.readLineAsync("구입금액을 입력해주세요.\n");
                 this.checkInputPurchasedAmount(purchasedAmount);
                 return purchasedAmount / 1000;
-            } catch (e) {
-                console.log(e.message);
+            } catch (error) {
+                MissionUtils.Console.print(error.message)
             }
         }
     }
@@ -68,14 +70,14 @@ class App {
                 this.isInputWinningBonusNumberError(lottoWinningNumber, lottoBonusNumber)
                 return `${lottoWinningNumber},${lottoBonusNumber}`.split(',').map(number => parseInt(number))
             } catch (error) {
-                console.log(error.message)
+                MissionUtils.Console.print(error.message)
             }
         }
     }
 
     checkingWinningLottoNumber(lottoWinningNumber, buyLottoNumber) {
         const [winningNumber, bonusNumber] = [lottoWinningNumber.slice(0, 6), lottoWinningNumber.slice(6)]
-        const winningLottoResult = buyLottoNumber.reduce((result, lotto) => {
+        return buyLottoNumber.reduce((result, lotto) => {
             const matchCount = winningNumber.filter(matchedNumber => lotto.includes(matchedNumber)).length
             if (matchCount === 3) result.matchedThree++; else if (matchCount === 4) result.matchedFour++; else if (matchCount === 5) result.matchedFive++; else if (matchCount === 5 && bonusNumber.some(matchedNumber => lotto.includes(matchedNumber))) result.matchedFiveBonus++; else if (matchCount === 6) result.matchedFull++;
             return result
@@ -87,7 +89,6 @@ class App {
             matchedFull: 0,
             lottoPurchasedAmount: buyLottoNumber.length * 1000
         })
-        return winningLottoResult
     }
 
     calculateProfitablity(resultObj) {
