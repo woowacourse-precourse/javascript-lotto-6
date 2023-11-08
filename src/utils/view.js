@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import MESSAGES from '../constants/Messages.js';
 import validation from './validation.js';
 import CONSTANTS from '../constants/Constants.js';
-import { arraySort } from './arrayUtils.js';
+import { sortArray } from './arrayUtils.js';
 
 const view = {
   async readPurchaseLottos() {
@@ -22,7 +22,7 @@ const view = {
 
     validation.isValidInputWinningNumbers(winningNumbers);
 
-    return arraySort(winningNumbers.split(',').map(number => Number(number)));
+    return sortArray(winningNumbers.split(',').map(number => Number(number)));
   },
 
   async readBonusNumber(winningNumbers) {
