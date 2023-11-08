@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import Input from './Input.js';
 import Print from './Print.js';
 import Lotto from './Lotto.js';
@@ -66,9 +66,16 @@ class App {
   }
 
   async buyLotto() {
-    this.#price = await Input.getLottoPrice();
-    Print.printNewLine();
+    try {
+      this.#price = await Input.getLottoPrice();
+      Print.printNewLine();
+    } catch (error) {
+      Console.print(error.message);
+      await this.buyLotto();
+    }
+  }
 
+  createLotto() {
     this.#count = this.#countLotto(this.#price);
     Print.printPurchase(this.#count);
 
@@ -78,11 +85,23 @@ class App {
   }
 
   async createLottoAnswer() {
-    this.#answer = await Input.getLottoNumber();
-    Print.printNewLine();
+    try {
+      this.#answer = await Input.getLottoNumber();
+      Print.printNewLine();
+    } catch (error) {
+      Console.print(error.message);
+      await this.createLottoAnswer();
+    }
+  }
 
-    this.#bonus = await Input.getLottoBonusNumber(this.#answer);
-    Print.printNewLine();
+  async createLottoBonus() {
+    try {
+      this.#bonus = await Input.getLottoBonusNumber(this.#answer);
+      Print.printNewLine();
+    } catch (error) {
+      Console.print(error.message);
+      await this.createLottoBonus();
+    }
   }
 
   drawLotto() {
@@ -95,7 +114,9 @@ class App {
 
   async play() {
     await this.buyLotto();
+    this.createLotto();
     await this.createLottoAnswer();
+    await this.createLottoBonus();
     this.drawLotto();
   }
 }
