@@ -2,58 +2,72 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import ErrorCheck from './ErrorCheck.js';
 import LottoCounter from './LottoCounter.js';
+import {
+	ENTER_THE_PURCHASE_AMOUNT_MESSAGE,
+	HOW_MANY_I_BOUGHT_MESSAGE,
+	PLZ_INPUT_WINNING_NUMBER_MESSAGE,
+	PLZ_INPUT_BONUS_NUMBER_MESSAGE,
+	TOTAL_YEILD_MESSAGE,
+	IS_MESSAGE,
+} from './constant.js';
+
 class App {
+	static LOTTO_PRICE = 1000;
+
 	makeLottoList(number) {
-		const LOTTERY_TICKET_LIST = [];
-
-		for (let i = 0; i < number; i += 1) {
-			const LOTTERY_TICKET = new Lotto(
-				Random.pickUniqueNumbersInRange(1, 45, 6),
-			);
-			LOTTERY_TICKET_LIST.push(LOTTERY_TICKET);
-		}
-		return LOTTERY_TICKET_LIST;
+		return Array.from(
+			{ length: number },
+			() => new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)),
+		);
 	}
 
-	printMyLotto(array) {
-		for (let item of array) {
-			Console.print(`[${item.getNumbers().join(', ')}]`);
-		}
+	printMyLotto(lottos) {
+		lottos.forEach((lotto) =>
+			Console.print(`[${lotto.getNumbers().join(', ')}]`),
+		);
 	}
 
-	async play() {
-		let isValid = false;
-		let PURCHASE_AMOUNT;
-		while (!isValid) {
+	async readValidInput(promptMessage, validateFunc) {
+		let input;
+		do {
 			try {
-				const input = await Console.readLineAsync('구입금액을 입력해 주세요.');
-
-				ErrorCheck.inputNumberCheck(input);
-				PURCHASE_AMOUNT = input;
-				isValid = true;
+				input = await Console.readLineAsync(promptMessage);
+				if (validateFunc) {
+					validateFunc(input);
+				}
+				break;
 			} catch (error) {
 				Console.print(error.message);
 			}
-		}
+		} while (true);
+		return input;
+	}
 
-		isValid = false;
+	async play() {
+		const HOW_MUCH_ARE_YOU_GOING_TO_BUY = await this.readValidInput(
+			ENTER_THE_PURCHASE_AMOUNT_MESSAGE,
+			ErrorCheck.inputNumberCheck,
+		);
 
-		const PURCHASE_COUNT = Math.floor(Number(PURCHASE_AMOUNT) / 1000);
+		const NUMBER_OF_LOTTERY = Math.floor(
+			Number(HOW_MUCH_ARE_YOU_GOING_TO_BUY) / App.LOTTO_PRICE,
+		);
 
-		ErrorCheck.purchaseCountCheck(PURCHASE_COUNT);
+		ErrorCheck.purchaseCountCheck(NUMBER_OF_LOTTERY);
 
-		const LOTTERY_TICKET_LIST = this.makeLottoList(PURCHASE_COUNT);
+		const TOTAL_LOTTO = this.makeLottoList(NUMBER_OF_LOTTERY);
 
-		Console.print(`${PURCHASE_COUNT}개를 구매했습니다.`);
+		Console.print(`${NUMBER_OF_LOTTERY}` + HOW_MANY_I_BOUGHT_MESSAGE);
 
-		this.printMyLotto(LOTTERY_TICKET_LIST);
+		this.printMyLotto(TOTAL_LOTTO);
 
 		let WINNING_NUMBERS_LIST;
-
+		let isValid;
 		while (!isValid) {
 			try {
-				const WINNING_NUMBERS_INPUT =
-					await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+				const WINNING_NUMBERS_INPUT = await Console.readLineAsync(
+					PLZ_INPUT_WINNING_NUMBER_MESSAGE,
+				);
 
 				const inputList = WINNING_NUMBERS_INPUT.split(',').map((str) =>
 					Number(str.trim()),
@@ -70,26 +84,14 @@ class App {
 			}
 		}
 
-		isValid = false;
-
 		const WINNING_NUMBERS = new Lotto(WINNING_NUMBERS_LIST);
 
-		let BONUS_NUMBER;
-		while (!isValid) {
-			try {
-				const input = Number(
-					await Console.readLineAsync('보너스 번호를 입력해 주세요.'),
-				);
-
-				ErrorCheck.inputNumberCheck(input);
-				BONUS_NUMBER = input;
-				isValid = true;
-			} catch (error) {
-				Console.print(error.message);
-			}
-		}
-
-		isValid = false;
+		const BONUS_NUMBER = Number(
+			await this.readValidInput(
+				PLZ_INPUT_BONUS_NUMBER_MESSAGE,
+				ErrorCheck.inputNumberCheck,
+			),
+		);
 
 		const lottoCounter = new LottoCounter();
 
@@ -98,8 +100,8 @@ class App {
 				.length;
 		};
 
-		for (let ticket of LOTTERY_TICKET_LIST) {
-			const ticketNumbers = ticket.getNumbers();
+		for (let one_lotto of TOTAL_LOTTO) {
+			const ticketNumbers = one_lotto.getNumbers();
 			const winningNumbers = WINNING_NUMBERS.getNumbers();
 			const count = countMatchingNumbers(ticketNumbers, winningNumbers);
 			lottoCounter.countMatches(count, ticketNumbers, BONUS_NUMBER);
@@ -107,8 +109,13 @@ class App {
 
 		lottoCounter.printCountMatches();
 
-		const PROFIT_RATE = lottoCounter.calculatePrize(PURCHASE_AMOUNT);
-		Console.print(`총 수익률은 ${PROFIT_RATE.toFixed(1)}%입니다.`);
+		const PROFIT_RATE = lottoCounter.calculatePrize(
+			HOW_MUCH_ARE_YOU_GOING_TO_BUY,
+		);
+
+		Console.print(
+			TOTAL_YEILD_MESSAGE + `${PROFIT_RATE.toFixed(1)}` + IS_MESSAGE,
+		);
 	}
 }
 

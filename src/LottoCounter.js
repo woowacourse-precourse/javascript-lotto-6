@@ -7,6 +7,7 @@ class LottoCounter {
 		this.match_five_plus_bonus = 0;
 		this.match_six = 0;
 	}
+
 	countMatches(count, ticket, bonusNumber) {
 		if (count === 3) this.match_three++;
 		if (count === 4) this.match_four++;
