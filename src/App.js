@@ -44,6 +44,16 @@ class App {
     const bonusNumber = await getBonusNumber();
 
     this.#bonusNumber = bonusNumber;
+
+    this.#displayWinningStatistics();
+  }
+
+  #displayWinningStatistics() {
+    display.winningStatisticsInfo({
+      lottoGenerator: this.#lottoGenerator,
+      lotto: this.#lottoNumbers,
+      bonus: this.#bonusNumber,
+    });
   }
 
   async play() {
