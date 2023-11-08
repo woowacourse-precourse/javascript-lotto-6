@@ -2,8 +2,7 @@ import LottoGameFactory from './factories/LottoGameFactory.js';
 import RandomNumberStrategy from './model/strategies/RandomNumberStrategy.js';
 
 class App {
-  constructor(strategy) {
-    this.strategy = strategy || new RandomNumberStrategy();
+  constructor() {
     this.factory = new LottoGameFactory();
   }
 
