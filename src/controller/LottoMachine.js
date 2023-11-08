@@ -59,7 +59,7 @@ export default class LottoMachine {
     while (this.#INFINITE) {
       try {
         const purchaseAmountInput = await InputView.readPurchaseAmount();
-        const parsePurchaseAmount = Number(purchaseAmountInput);
+        const parsePurchaseAmount = this.#numberParser(purchaseAmountInput);
 
         this.#purchaseAmountValidate(parsePurchaseAmount);
 
@@ -68,6 +68,10 @@ export default class LottoMachine {
         Console.print(e.message);
       }
     }
+  }
+
+  #numberParser(input) {
+    return Number(input);
   }
 
   #purchaseAmountValidate(purchaseAmount) {
@@ -102,7 +106,7 @@ export default class LottoMachine {
 
   #splitAndParseNumbers(input) {
     const COMMA = ',';
-    return input.split(COMMA).map((number) => Number(number));
+    return input.split(COMMA).map((number) => this.#numberParser(number));
   }
 
   async #getBonusNumber() {
@@ -110,7 +114,7 @@ export default class LottoMachine {
     while (this.#INFINITE) {
       try {
         const bonusNumberInput = await InputView.readBonusNumber();
-        const parseBonusNumber = Number(bonusNumberInput);
+        const parseBonusNumber = this.#numberParser(bonusNumberInput);
 
         this.#winningNumbers.setBonusNumber(parseBonusNumber);
         break;
