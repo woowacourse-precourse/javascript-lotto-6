@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE, LOTTO } from './Constants.js';
 import Lotto from './Lotto.js';
-import { getPurchasePrice, getLottoNumbers, getBounusNumber } from './App.js';
+import { getPurchasePrice, getLottoNumbers, getBounusNumber } from './Input.js';
 
 function validatePurchasePrice(purchasePrice) {
   if (purchasePrice.length < 1) {

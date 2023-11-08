@@ -1,13 +1,7 @@
-import { MissionUtils, Console } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import Ticket from './Ticket.js';
-import { INPUT_MESSAGE, OUTPUT_MESSAGE, LOTTO } from './Constants.js';
+import { OUTPUT_MESSAGE, LOTTO } from './Constants.js';
 import { getValidPurchasePrice, getValidLottoNumber, getValidBonusNumber } from './Validate.js';
-
-async function getPurchasePrice() {
-  const price = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.PURCHASE_PRICE);
-  const purchasePrice = Number(price);
-  return purchasePrice;
-}
 
 function getAmountOfTickets(purchasePrice) {
   return purchasePrice / LOTTO.PRICE;
@@ -15,17 +9,6 @@ function getAmountOfTickets(purchasePrice) {
 
 function showAmountOfTickets(amountOfTickets) {
   Console.print(OUTPUT_MESSAGE.BUY_TICKET(amountOfTickets));
-}
-
-async function getLottoNumbers() {
-  const lottoNumbers = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.LOTTO_NUMBERS);
-  const lottoNumbersArr = lottoNumbers.split(',').map(Number);
-  return lottoNumbersArr;
-}
-
-async function getBounusNumber() {
-  const bonusNumber = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
-  return bonusNumber;
 }
 
 class App {
@@ -72,4 +55,3 @@ class App {
 }
 
 export default App;
-export { getPurchasePrice, getLottoNumbers, getBounusNumber };
