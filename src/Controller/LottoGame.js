@@ -36,7 +36,7 @@ class LottoGame{
         
         // 당첨 번호, 보너스 번호 입력받기
         this.#winningLotto = await this.getWinningLotto()
-        this.#bonus = await InputView.getBonus()
+        this.#bonus = await InputView.getBonus(this.#winningLotto.getNumbers())
 
         // 결과 생성 및 출력
         this.makeResult()
@@ -68,6 +68,7 @@ class LottoGame{
         return sortedLottoNum
     }
 
+    // 
     async getWinningLotto(){
         const winningLotto = await InputView.getWinningLotto()
         return new Lotto(winningLotto)

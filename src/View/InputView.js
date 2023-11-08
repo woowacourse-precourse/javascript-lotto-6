@@ -33,10 +33,13 @@ const InputView = {
     },
 
     // 사용자로부터 보너스번호 받기
-    async getBonus(){
+    async getBonus(winningLotto){
         try{
             const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.')
             this.checkIsNumber(Number(input))
+            this.checkIsInteger(Number(input))
+            this.checkNumberRange(Number(input))
+            this.checkLottoDuplicate(Number(input), winningLotto)
 
             return Number(input)
         }
@@ -47,13 +50,13 @@ const InputView = {
 
     checkIsNumber(number){
         if (isNaN(number)) {
-            throw new Error('[ERROR] 구입 금액은 숫자여야 합니다.')
+            throw new Error('[ERROR] 숫자여야 합니다.')
         }
     },
 
     checkIsInteger(number){
         if(!Number.isInteger(number)){
-            throw new Error('[ERROR] 구입 금액은 정수여야 합니다.')
+            throw new Error('[ERROR] 정수여야 합니다.')
         }
     },
 
@@ -66,6 +69,18 @@ const InputView = {
     checkMoneyRange(number){
         if(number < 1000){
             throw new Error('[ERROR] 구입 금액은 1000원 이상이어야 합니다.')
+        }
+    },
+
+    checkNumberRange(number){
+        if(number < 1 && number > 45){
+            throw new Error('[ERROR] 로또 번호는 1-45 사이여야 합니다.')
+        }
+    },
+
+    checkLottoDuplicate(bonus, winningLotto){
+        if(winningLotto.includes(bonus)){
+            throw new Error('[ERROR] 로또 번호는 중복되어서는 안됩니다.')
         }
     }
 }
