@@ -33,8 +33,3 @@ export function validateLottoNumbers(numbers, bonusNumber) {
     );
   }
 }
-
-export function create2DArray(rows, columns) {
-  let arr = Array.from(Array(rows), () => new Array(columns));
-  return arr;
-}
