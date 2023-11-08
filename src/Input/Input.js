@@ -23,6 +23,7 @@ const Input = {
     const bonusNumber = await Console.readLineAsync(
       PRINT_MESSAGE.REQUEST_BONUS_NUMBER
     );
+    Validator.InputBonusNumber(bonusNumber, winningNumber);
     return bonusNumber;
   },
 };

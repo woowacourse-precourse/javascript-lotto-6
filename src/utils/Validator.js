@@ -16,22 +16,22 @@ const Validator = {
       throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT_ZERO);
   },
 
-  lottoNumber(numbers) {
-    const number = numbers.join("");
-    if (number.replace(/\d/g, "").length > 0)
+  lottoNumber(lottoNumbers) {
+    const lottoNumber = lottoNumbers.join("");
+    if (lottoNumber.replace(/\d/g, "").length > 0)
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBER);
 
-    if (numbers.length !== new Set(numbers).size)
+    if (lottoNumbers.length !== new Set(lottoNumbers).size)
       throw new Error(ERROR_MESSAGE.LOTTO_DUPLICATE);
 
-    if (numbers.length !== 6) throw new Error(ERROR_MESSAGE.LOTTO_COUNT);
+    if (lottoNumbers.length !== 6) throw new Error(ERROR_MESSAGE.LOTTO_COUNT);
 
-    if (RangeTest(numbers)) throw new Error(ERROR_MESSAGE.LOTTO_RANGE);
+    if (RangeTest(lottoNumbers)) throw new Error(ERROR_MESSAGE.LOTTO_RANGE);
   },
 
-  InputWinningNumber(input) {
-    const inputWinninNumbers = input.split(",");
-    if (input.replace(/\d|\,/g, "").length > 0)
+  InputWinningNumber(winningNumber) {
+    const inputWinninNumbers = winningNumber.split(",");
+    if (winningNumber.replace(/\d|\,/g, "").length > 0)
       throw new Error(ERROR_MESSAGE.WINNING_NUMBER);
 
     if (inputWinninNumbers.length !== new Set(inputWinninNumbers).size)
@@ -42,6 +42,18 @@ const Validator = {
 
     if (RangeTest(inputWinninNumbers))
       throw new Error(ERROR_MESSAGE.WINNING_RANGE);
+  },
+
+  InputBonusNumber(bonusNumber, winningNumber) {
+    const inputBonusNumberArray = [bonusNumber];
+    if (bonusNumber.replace(/\d/g, "").length > 0)
+      throw new Error("[ERROR] 보너스 번호는 숫자만 입력 가능합니다.");
+
+    if (winningNumber.includes(bonusNumber))
+      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+
+    if (RangeTest(inputBonusNumberArray))
+      throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 값이어야 합니다.");
   },
 };
 
