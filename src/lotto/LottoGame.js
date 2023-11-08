@@ -13,7 +13,6 @@ class LottoGame {
   }
 
   async playLottoGame() {
-  
   }
 }
 

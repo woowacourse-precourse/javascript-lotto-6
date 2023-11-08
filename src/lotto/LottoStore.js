@@ -1,3 +1,4 @@
+import Lotto from './Lotto.js';
 import { Validator } from '../utility/validation.js';
 import { print, getAndValidateInput } from '../utility/console.js';
 import {
@@ -49,6 +50,28 @@ class LottoStore {
 
   #printPublishCount() {
     print(FORMATTER.publishCountFormatter(this.#publishCount));
+  }
+
+  #getLottoNumbers() {
+    return pickUniqueNumbersInRange(
+      LOTTO_CONSTANT.minInclusive,
+      LOTTO_CONSTANT.maxInclusive,
+      LOTTO_CONSTANT.numberCount,
+    ).sort((a, b) => a - b);
+  }
+
+  publishLottos() {
+    const issuedLottoList = [];
+
+    Array(this.#publishCount)
+      .fill()
+      .forEach(() => {
+        const lottoNumbers = this.#getLottoNumbers();
+        const lotto = new Lotto([...lottoNumbers]);
+        issuedLottoList.push(lotto);
+      });
+
+    return [...issuedLottoList];
   }
 }
 
