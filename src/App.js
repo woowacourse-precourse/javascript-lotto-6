@@ -21,23 +21,29 @@ class App {
       this.printLottos();
       await this.inputWinningNumbers();
       await this.inputBonusNumber();
-      this.calculateWinningResult();
+      this.calculate
+      WinningResult();
       this.printWinningResult();
     } catch (error) {
       Console.print(error.message);
     }
   }
-  
 }
 
-async function inputPurchaseAmount() {
-  const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-  const amount = Number(input);
-  if (amount % this.LOTTO_PRICE !== 0) {
-    throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
-  }
-  this.purchaseAmount = amount;
+function inputPurchaseAmount() {
+  return Console.readLineAsync("구입금액을 입력해 주세요.\n")
+    .then((input) => {
+      const amount = Number(input);
+      if (amount % this.LOTTO_PRICE !== 0) {
+        throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
+      }
+      this.purchaseAmount = amount;
+    })
+    .catch((error) => {
+      Console.print(error.message);
+    });
 }
+
 
 function publishLottos() {
   const lottoCount = this.purchaseAmount / this.LOTTO_PRICE;
@@ -141,10 +147,4 @@ function getProfitRate() {
   const profitRate = (totalWinningMoney / this.purchaseAmount) * 100;
   return profitRate.toFixed(1);
 }
-
-
-
-
-
-
 export default App;
