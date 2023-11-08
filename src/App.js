@@ -123,6 +123,17 @@ function getRank(matchCount, isBonusMatch) {
   }
   return 6;
 }
+function printWinningResult() {
+  Console.print("당첨 통계\n---");
+  for (let i = 1; i <= 5; i++) {
+    Console.print(
+      `${i}개 일치 (${this.WINNING_MONEY[i]}원) - ${this.winningResult[i]}개`
+    );
+  }
+  const profitRate = this.getProfitRate();
+  Console.print(`총 수익률은 ${profitRate}%입니다.`);
+}
+
 
 
 
