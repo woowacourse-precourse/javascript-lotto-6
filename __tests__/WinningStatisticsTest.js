@@ -12,9 +12,15 @@ describe('당첨 통계 클래스 테스트', () => {
     [4, 5, 6, 7, 8, 9],
   ];
   const result = new winningStatistics(lottos, bonusNum, winningNum, buyMoney);
+  test('몇개의 숫자가 일치하는 지 알 수 있다.', () => {
+    const expectedSameNum = [6, 5, 5, 4, 3];
+    result.result;
+    expect(result.result).toEqual(expectedSameNum);
+  });
+
   test('보너스 번호 일치 여부를 알 수 있다.', () => {
     const expectBonusStatus = [false, true, false, true, true]; //7 포함시 보너스 번호 포함
-    expect(expectBonusStatus).toEqual(result.winningBonusNum);
+    expect(result.winningBonusNum).toEqual(expectBonusStatus);
   });
 
   test('등 수 별로 당첨된 로또의 개수를 알 수 있다.', () => {
