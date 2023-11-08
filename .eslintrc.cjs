@@ -18,5 +18,6 @@ module.exports = {
     'no-console': 'error',
     'operator-linebreak': ['error', 'before'],
     'class-methods-use-this': 'off',
+    'consistent-return': 'off',
   },
 };
