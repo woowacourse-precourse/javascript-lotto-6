@@ -2,29 +2,20 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import { isMoneyValid, isBonusValid } from "./validation";
 import Lotto from "./Lotto";
 
-let COUNT = 0;
-let BONUS = 0;
-
-const generateLotto = (amountOfLotto) => {
-  let lottoArr = [];
-  for (let i = 0; i < amountOfLotto; i++) {
-    let myLotto = Random.pickUniqueNumbersInRange(1, 45, 6);
-    Console.print(myLotto);
-    lottoArr.push(myLotto);
-  }
-  return lottoArr;
+const generateLotto = () => {
+  const randomLotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+  const sortedLotto = randomLotto.sort((a, b) => a - b);
+  return sortedLotto;
 };
-
 const inputWinNumbers = async () => {
   try {
     const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
     Console.print(`당첨 번호를 입력해 주세요. \n${input}`);
-    const convertToArr = input.split(",").map((e) => +e);
-    const testLotto = new Lotto(convertToArr);
-    return convertToArr;
+    const numbers = input.split(",").map((e) => +e);
+    const test = new Lotto(numbers);
+    return test.getLottos();
   } catch (error) {
     Console.print(error.message);
-    return inputWinNumbers();
   }
 };
 
@@ -36,18 +27,31 @@ const inputBonusNumber = async () => {
     return Number(input);
   } catch (error) {
     Console.print(error.message);
-    return inputBonusNumber();
   }
 };
 
-const inputMoney = async () => {
+const amountOfLottos = async () => {
   try {
     const input = await Console.readLineAsync("구입금액을 입력해 주세요.");
     Console.print(`구입금액을 입력해 주세요. \n${input}`);
-    const amountOfLotto = input / 1000;
     isMoneyValid(input);
-    Console.print(`${amountOfLotto}개를 구매했습니다.`);
+    const amountOfLotto = input / 1000;
     return amountOfLotto;
+  } catch (error) {
+    Console.print(error.message);
+  }
+};
+
+const inputMoney = async (amount) => {
+  try {
+    const lottos = Array.from({ length: amount }, () => generateLotto());
+    const lottosInfo = lottos
+      .map((lotto) => `[${lotto.join(", ")}]`)
+      .join("\n");
+
+    Console.print(`${amount}개를 구매했습니다.`);
+    Console.print(lottosInfo);
+    return lottos;
   } catch (error) {
     Console.print(error.message);
   }
@@ -92,39 +96,70 @@ const calculateResult = (matchingNumberArr, bonusArr) => {
 };
 
 const compareLottos = (lottos, winNumbers, bonusNumber) => {
-  const matchingNumberArr = lottos.map((lotto) => {
-    const matchingNumber2 = lotto.filter((number) =>
-      winNumbers.includes(number)
-    );
-    return matchingNumber2.length;
-  });
-
-  const bonusArr = lottos.map((lotto) => {
-    const temp2 = lotto.filter((number) => number === bonusNumber);
-    return temp2.length;
-  });
-
-  return calculateResult(matchingNumberArr, bonusArr);
+  try {
+    const matchingNumber = lottos.map((lotto) => {
+      const matchingNumber2 = lotto.filter((number) =>
+        winNumbers.includes(number)
+      );
+      return matchingNumber2.length;
+    });
+    const bonusArr = lottos.map((lotto) => {
+      const temp2 = lotto.filter((number) => number === bonusNumber);
+      return temp2.length;
+    });
+    return calculateResult(matchingNumber, bonusArr);
+  } catch (error) {
+    Console.print(error.message);
+  }
 };
 
-const printResult = (result) => {
+const calculateProfitRatio = (result) => {
+  const money = {
+    zero: 0,
+    three: 5000,
+    four: 50000,
+    five: 1500000,
+    bonus: 30000000,
+    six: 2000000000,
+  };
+  let total =
+    money.three * result.three +
+    money.four * result.four +
+    money.five * result.five +
+    money.bonus * result.bonus +
+    money.six * result.six;
+
+  return total;
+};
+
+const printResult = (result, amount) => {
+  const profit = (
+    (calculateProfitRatio(result) / (amount * 1000)) *
+    100
+  ).toFixed(1);
   Console.print("당첨 통계");
   Console.print("---");
   Console.print(`3개 일치 (5,000원) - ${result.three}개`);
   Console.print(`4개 일치 (50,000원) - ${result.four}개`);
-  Console.print(`5개 일치 (1500,000원) - ${result.bonus}개`);
-  Console.print(`5개 일치, 보너스 불 일치 (30,000,000원) - ${result.five}개`);
+  Console.print(`5개 일치 (1,500,000원) - ${result.bonus}개`);
+  Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.five}개`);
   Console.print(`6개 일치 (2,000,000,000원) - ${result.six}개`);
-  Console.print(`총 수익률은 62.5%입니다.`);
+  Console.print(`총 수익률은 ${profit}%입니다.`);
 };
 
 const game = async () => {
-  const amount = await inputMoney();
-  const winNumbers = await inputWinNumbers();
-  const bonusNumber = await inputBonusNumber();
-  const lottos = generateLotto(amount);
-  const result = compareLottos(lottos, winNumbers, bonusNumber);
-  printResult(result);
+  try {
+    const amount = await amountOfLottos();
+    const lottos = await inputMoney(amount);
+    const winNumbers = await inputWinNumbers();
+    const bonusNumber = await inputBonusNumber();
+    const result = compareLottos(lottos, winNumbers, bonusNumber);
+    if (!isNaN(amount)) {
+      printResult(result, amount);
+    }
+  } catch (error) {
+    Console.print(error.message);
+  }
 };
 
 export default game;
