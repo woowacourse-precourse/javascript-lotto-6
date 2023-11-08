@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
 
-class outputView {
+class OutputView {
   static async printError(message) {
     Console.print(message);
   }
 }
 
-export default outputView;
+export default OutputView;

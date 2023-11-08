@@ -1,18 +1,18 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import inputView from '../view/inputView.js';
-import outputView from '../view/outputView.js';
+import InputView from '../view/InputView.js';
+import OutputView from '../view/outputView.js';
 import { ERROR_MESSEGE } from '../constant/messages.js';
 
 class PurchaseController {
   async inputPurchase() {
     while (true) {
       try {
-        const purchaseAmount = await inputView.inputPurchaseAmount();
+        const purchaseAmount = await InputView.inputPurchaseAmount();
         this.validatePurchaseAmount(purchaseAmount);
         Console.print(purchaseAmount);
         break;
       } catch (error) {
-        outputView.printError(error.message);
+        OutputView.printError(error.message);
       }
     }
   }

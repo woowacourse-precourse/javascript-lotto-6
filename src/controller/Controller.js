@@ -1,4 +1,4 @@
-import PurchaseController from './purchaseController.js';
+import PurchaseController from './PurchaseController.js';
 
 class Controller {
   #purchaseController;
