@@ -1,8 +1,5 @@
 /* eslint-disable */
-import { MissionUtils } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE } from '../src/utils/Define';
 import LottoService from '../src/LottoService';
-import lotto from "../src/Lotto.js";
 import WinningLotto from "../src/domain/WinningLotto.js";
 describe('로또 서비스 테스트', () => {
   describe('로또 생성 테스트', () => {
@@ -27,7 +24,7 @@ describe('로또 서비스 테스트', () => {
     //given
     const testCase =[[1,2,3,4,5,6],7]
     const lottoService = new LottoService();
-    const expected = new WinningLotto([1,2,3,4,5,6],7)
+    const expected = new WinningLotto({numbers:[1,2,3,4,5,6],bonusNumber:7})
     //when then
       expect(lottoService.getWinningLotto(...testCase)).toEqual(expected);
   });
