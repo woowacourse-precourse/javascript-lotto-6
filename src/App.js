@@ -4,12 +4,10 @@ import Lotto from "../src/Lotto.js";
 import BonusLotto from "../src/BonusLotto.js";
 import MatchLottoNumber from "../src/MatchLottoNumber.js";
 import { INPUTMESSAGES } from "./util/Message.js";
-
+import { CONSTANTS } from "./util/constants.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 class App {
-  moneyList = ["5,000", "50,000", "1,500,000", "30,000,000", "2,000,000,000"];
-
   async winningNumberInput() {
     const winningNumbers = await Console.readLineAsync(
       INPUTMESSAGES.WINNING_NUMBER
@@ -58,19 +56,19 @@ class App {
 
   winningStatisticsOutput(moneys) {
     Console.print(
-      `3개 일치 (${this.moneyList[0]}원) - ${moneys.getRankingCounts[4]}개`
+      `3개 일치 (${CONSTANTS.WINNINGS_OUTPUTS[4]}원) - ${moneys.getRankingCounts[4]}개`
     );
     Console.print(
-      `4개 일치 (${this.moneyList[1]}원) - ${moneys.getRankingCounts[3]}개`
+      `4개 일치 (${CONSTANTS.WINNINGS_OUTPUTS[3]}원) - ${moneys.getRankingCounts[3]}개`
     );
     Console.print(
-      `5개 일치 (${this.moneyList[2]}원) - ${moneys.getRankingCounts[2]}개`
+      `5개 일치 (${CONSTANTS.WINNINGS_OUTPUTS[2]}원) - ${moneys.getRankingCounts[2]}개`
     );
     Console.print(
-      `5개 일치, 보너스 볼 일치 (${this.moneyList[3]}원) - ${moneys.getRankingCounts[1]}개`
+      `5개 일치, 보너스 볼 일치 (${CONSTANTS.WINNINGS_OUTPUTS[1]}원) - ${moneys.getRankingCounts[1]}개`
     );
     Console.print(
-      `6개 일치 (${this.moneyList[4]}원) - ${moneys.getRankingCounts[0]}개`
+      `6개 일치 (${CONSTANTS.WINNINGS_OUTPUTS[0]}원) - ${moneys.getRankingCounts[0]}개`
     );
   }
 
@@ -93,7 +91,7 @@ class App {
 
   async start() {
     const moneys = await this.moneyInput();
-    const lottoCount = moneys.getMoney / 1000;
+    const lottoCount = moneys.getMoney / CONSTANTS.MONEY_UNIT;
 
     const buyLotto = new BuyLotto(lottoCount);
     buyLotto.buyLottos();

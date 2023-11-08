@@ -1,4 +1,5 @@
 import { ERRORMESSAGES } from "./util/Message";
+import { CONSTANTS } from "./util/constants";
 class Money {
   #money;
   #winningMoney = 0;
@@ -28,7 +29,7 @@ class Money {
       throw new Error(ERRORMESSAGES.MONEY_RANGE);
     }
     if (money % 1000 !== 0) {
-      throw new Error(ERRORMESSAGES.MONEY_DEVISION);
+      throw new Error();
     }
     return true;
   }
@@ -36,15 +37,15 @@ class Money {
   winnings(rank) {
     switch (rank) {
       case 1:
-        return 2000000000;
+        return CONSTANTS.WINNINGS_LIST[0];
       case 2:
-        return 30000000;
+        return CONSTANTS.WINNINGS_LIST[1];
       case 3:
-        return 1500000;
+        return CONSTANTS.WINNINGS_LIST[2];
       case 4:
-        return 50000;
+        return CONSTANTS.WINNINGS_LIST[3];
       case 5:
-        return 5000;
+        return CONSTANTS.WINNINGS_LIST[4];
       default:
         break;
     }
