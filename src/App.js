@@ -11,14 +11,7 @@ class App {
 
   async play() {
     await this.#user.setPurchaseAmount();
-
-    Console.print(`\n${purchaseCount}개를 구매했습니다.`);
-    const lottoRandomNumbers = [];
-    for (let i = 0; i < purchaseCount; i++) {
-      const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-      lottoRandomNumbers.push(randomNumber);
-      Console.print(randomNumber);
-    }
+    this.#user.setLottoNumbers();
 
     const winningNumbers = (await Console.readLineAsync('\n당첨 번호를 입력해주세요.\n')).split(',').map(Number);
     const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해주세요.\n');
