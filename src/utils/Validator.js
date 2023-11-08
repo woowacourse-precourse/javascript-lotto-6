@@ -39,7 +39,15 @@ const Validator = {
     if (new Set(winningNumbers).size !== condition.winningNumbersLength) {
       throw error.winningNumbersDuplicationError;
     }
-    winningNumbers.forEach((number) => validateLottonRange(number));
+    winningNumbers.forEach((number) => {
+      isInteger(number);
+      validateLottonRange(number);
+    });
+  },
+
+  validateBonusNumber(bonusNumber) {
+    isInteger(bonusNumber);
+    validateLottonRange(bonusNumber);
   },
 };
 
