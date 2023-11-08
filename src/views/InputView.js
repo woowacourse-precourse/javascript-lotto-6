@@ -5,9 +5,9 @@ const InputView = {
   async readLineAsync(money) {
     const inputMoney = await Console.readLineAsync(money);
     Validator.validInputMoneyType(inputMoney);
-    // Validator.validInputMoneyEmpty(inputMoney);
-    // Validator.validInputMoneyAmount(inputMoney);
-    // Validator.validInputMoneyRemainder(inputMoney);
+    Validator.validInputMoneyEmpty(inputMoney);
+    Validator.validInputMoneyAmount(inputMoney);
+    Validator.validInputMoneyRemainder(inputMoney);
 
     return inputMoney;
   },

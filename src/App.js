@@ -13,6 +13,16 @@ class App {
     this.bonusNumber = null;
   }
 
+  async #replay(callback) {
+    try {
+      return await callback();
+    } catch (error) {
+      this.#view.printError(error);
+
+      return this.#replay(callback);
+    }
+  }
+
   async play() {
     await this.buyingLottos();
     await this.inputWinningNumbers();
@@ -21,14 +31,16 @@ class App {
   }
 
   async buyingLottos() {
-    const money = await this.#view.inputMoney();
+    const money = await this.#replay(() => this.#view.inputMoney());
     this.lottos = new GameCenter(money);
     this.lottos.printCount();
     this.lottos.printList();
   }
 
   async inputWinningNumbers() {
-    const winningNumbers = await this.#view.inputWinningNumbers();
+    const winningNumbers = await this.#replay(() =>
+      this.#view.inputWinningNumbers(),
+    );
 
     this.winningNumbers = winningNumbers;
   }

@@ -1,4 +1,3 @@
-import ERROR_MESSAGE from '../constants/errors.js';
 import formation from '../utils/formation.js';
 
 class AppError extends Error {

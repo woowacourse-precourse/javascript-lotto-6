@@ -11,13 +11,10 @@ class GameCenter {
    * @param {number} money
    */
   constructor(money) {
-    this.validate(money);
     this.count = money / LOTTO_CONFIG.price;
     this.list = [];
     this.publish();
   }
-
-  validate(numbers) {}
 
   publish() {
     Array.from({ length: this.count }).forEach(() => {

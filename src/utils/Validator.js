@@ -4,6 +4,7 @@ import LOTTO_CONFIG from '../constants/lotto.js';
 import AppError from '../errors/AppError.js';
 import InputError from '../errors/InputError.js';
 import LottoError from '../errors/LottoError.js';
+import App from '../App.js';
 
 const Validator = {
   isEmptyString(string) {

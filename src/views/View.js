@@ -16,6 +16,10 @@ class View {
     return money;
   }
 
+  printError(error) {
+    this.#outputView.print(error.message);
+  }
+
   async inputWinningNumbers() {
     const numbers = await this.#inputView.lottoReadLineAsync(
       GAME_GUIDE_MESSAGE.input.winningNumbers,
