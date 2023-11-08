@@ -1,6 +1,8 @@
 import { Random } from '@woowacourse/mission-utils';
 
-const generateLottoNumbers = (min, max, length) =>
+export const generateLottoNumbers = (min, max, length) =>
   Random.pickUniqueNumbersInRange(min, max, length).sort((a, b) => a - b);
 
-export default generateLottoNumbers;
+export const calculateMatchingCount = (lottoA, lottoB) =>
+  lottoA.getNumbers().filter((number) => lottoB.getNumbers().includes(number))
+    .length;
