@@ -10,10 +10,18 @@ class App {
   #prizeManager;
 
   async #initializeLottoController() {
-    this.#totalMoney = await InputHandler.getUserTotalMoney();
-    this.#lottoController = new LottoController(this.#totalMoney, (number) => {
-      return new Lotto(number);
-    });
+    try {
+      this.#totalMoney = await InputHandler.getUserTotalMoney();
+      this.#lottoController = new LottoController(
+        this.#totalMoney,
+        (number) => {
+          return new Lotto(number);
+        }
+      );
+    } catch (e) {
+      OutputHandler.printErrorMessage(e);
+      await this.#initializeLottoController();
+    }
   }
 
   #printLottoTickets() {
@@ -25,13 +33,18 @@ class App {
   }
 
   async #initializePrizeManager() {
-    const winningNumberString = await InputHandler.getWinningNumberString();
-    const bonusNumberString = await InputHandler.getBonusNumberString();
+    try {
+      const winningNumberString = await InputHandler.getWinningNumberString();
+      const bonusNumberString = await InputHandler.getBonusNumberString();
 
-    this.#prizeManager = new LottoPrizeManager(
-      winningNumberString,
-      bonusNumberString
-    );
+      this.#prizeManager = new LottoPrizeManager(
+        winningNumberString,
+        bonusNumberString
+      );
+    } catch (e) {
+      OutputHandler.printErrorMessage(e);
+      await this.#initializePrizeManager();
+    }
   }
 
   #calculateLottoPrizeResult() {
@@ -48,15 +61,11 @@ class App {
   }
 
   async play() {
-    try {
-      await this.#initializeLottoController();
-      this.#printLottoTickets();
+    await this.#initializeLottoController();
+    this.#printLottoTickets();
 
-      await this.#initializePrizeManager();
-      this.#calculateLottoPrizeResult();
-    } catch (e) {
-      OutputHandler.printErrorMessage(e);
-    }
+    await this.#initializePrizeManager();
+    this.#calculateLottoPrizeResult();
   }
 }
 

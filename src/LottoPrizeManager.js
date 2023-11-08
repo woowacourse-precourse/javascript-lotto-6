@@ -21,6 +21,7 @@ class LottoPrizeManager {
 
     const array = string.split(",");
 
+    // TODO: 메서드 분리
     if (!Validator.isArrayLengthEqualTo(array, LOTTO.SIZE)) {
       throw new Error(PRIZE.ERROR.WINNING_NUMBER_SIZE);
     }
