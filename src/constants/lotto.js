@@ -1,0 +1,14 @@
+export const PRIZE_TABLE = {
+  '1등': 2000000000,
+  '2등': 30000000,
+  '3등': 15000000,
+  '4등': 50000,
+  '5등': 5000,
+};
+
+export const CONSTANTS = {
+  BASE_PRICING_UNIT: 1000,
+  MINIMUM_BOUNDARY: 1,
+  MAXIMUM_BOUNDARY: 45,
+  LENGTH_OF_LOTTO: 6,
+};
