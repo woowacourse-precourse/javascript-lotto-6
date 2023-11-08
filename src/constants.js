@@ -48,6 +48,13 @@ const REQUEST = {
   BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 };
 
+const NOTICE = {
+  lotto: (quantity) => `${quantity}개를 구매했습니다.`,
+  FINAL_RESULT: '\n당첨 통계\n---',
+  final: (profit) => `총 수익률은 ${profit}%입니다.`,
+  lottoRecord: (rank, prizeResult, index) => `${rank}${prizeResult[index]}개`,
+};
+
 const ERROR = {
   TYPE_CHECK: `${pattern.prefix} 정확한 값이 아닙니다.`,
   AMOUNT_CHECK: `${pattern.prefix} 금액은 ${NUMBER.DEFAULT}원 단위로 입력해주세요.`,
@@ -65,4 +72,5 @@ export {
   ERROR,
   REQUEST,
   number,
+  NOTICE,
 };
