@@ -13,9 +13,11 @@ class BonusNumber {
     if (!validateNumber.isNumber(number)) {
       throw new Error(BONUS_NUMBER.isNumber);
     }
+
     if (!validateNumber.isInRange(number)) {
       throw new Error(BONUS_NUMBER.isInRange);
     }
+
     if (validateNumber.isInArray(number, array)) {
       throw new Error(BONUS_NUMBER.isInArray);
     }

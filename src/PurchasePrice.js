@@ -13,9 +13,11 @@ class PurchasePrice {
     if (!validateNumber.isNumber(price)) {
       throw new Error(PURCHASE_PRICE.isNumber);
     }
+
     if (!validateNumber.isDivisible(price)) {
       throw new Error(PURCHASE_PRICE.isDivisible);
     }
+
     if (!validateNumber.isAtLeastPrice(price)) {
       throw new Error(PURCHASE_PRICE.isAtLeastPrice);
     }

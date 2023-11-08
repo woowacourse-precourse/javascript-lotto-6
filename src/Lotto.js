@@ -13,12 +13,15 @@ class Lotto {
     if (!validateArray.isNumber(numbers)) {
       throw new Error(LOTTO.isNumber);
     }
+
     if (!validateArray.isSize(numbers)) {
       throw new Error(LOTTO.isSize);
     }
+
     if (!validateArray.isInRange(numbers)) {
       throw new Error(LOTTO.isInRange);
     }
+
     if (validateArray.isDuplicate(numbers)) {
       throw new Error(LOTTO.isDuplicate);
     }
