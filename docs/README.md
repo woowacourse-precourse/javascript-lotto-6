@@ -49,3 +49,37 @@
 
 - 테스트 코드를 먼저 작성한다.
 - 테스트가 통과되지 않으면 커밋하지 않는다.
+
+## 플로우 차트
+
+```mermaid
+flowchart LR
+  START((Start))
+  END((End))
+  VALID_COST{유효한 구입 금액}
+  VALID_PRIZE{유효한 당첨 번호}
+  VALID_BONUS{유효한 보너스 번호}
+  COST_INPUT(구입 금액 입력)
+  PRIZE_INPUT(당첨 번호 입력)
+  BONUS_INPUT(보너스 번호 입력)
+  CREATE_LOTTO(로또 생성)
+  PRINT_LOTTO(로또 번호 출력)
+  COMPUTE_PRIZE(당첨 결과 연산)
+  PRINT_PRIZE(당첨 결과 출력)
+  COMPUTE_PROFIT(수익률 연산)
+  PRINT_PROFIT(수익률 출력)
+
+  START-->COST_INPUT-->VALID_COST
+  VALID_COST --NO--> COST_INPUT
+  VALID_COST --YES--> CREATE_LOTTO --> PRINT_LOTTO
+
+  PRINT_LOTTO --> PRIZE_INPUT --> VALID_PRIZE
+  VALID_PRIZE --NO--> PRIZE_INPUT
+  VALID_PRIZE --YES--> BONUS_INPUT
+
+  BONUS_INPUT --> VALID_BONUS
+  VALID_BONUS --NO--> BONUS_INPUT
+  VALID_BONUS --YES--> COMPUTE_PRIZE
+
+  COMPUTE_PRIZE --> PRINT_PRIZE --> COMPUTE_PROFIT --> PRINT_PROFIT --> END
+```
