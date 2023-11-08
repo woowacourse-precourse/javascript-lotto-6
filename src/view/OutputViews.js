@@ -24,6 +24,12 @@ const OutputView = {
       );
     });
   },
+
+  printRateOfReturn(number) {
+    this.print(
+      `${outputString.rateOfReturn}${number}${outputString.rateOfReturnSuffix}`,
+    );
+  },
 };
 
 export default OutputView;
