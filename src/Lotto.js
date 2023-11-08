@@ -39,9 +39,7 @@ class Lotto {
   }
 
   printNumbers() {
-    console.log(this.#numbers.join());
     this.#orderNumbersByASC();
-    console.log(this.#numbers.join());
     const numbers = this.#numbers.join(', ');
     MissionUtils.Console.print(`[${numbers}]`);
   }
