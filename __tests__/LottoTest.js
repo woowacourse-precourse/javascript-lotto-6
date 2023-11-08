@@ -1,6 +1,17 @@
 import Lotto from "../src/Lotto.js";
 
 describe("로또 클래스 테스트", () => {
+  const testLottoRank = (numbers, winNumbers, bounsNum, rank) => {
+    test(`로또 등수 확인 - ${rank}등`, () => {
+      expect(
+        (() => {
+          const lotto = new Lotto(numbers);
+          return lotto.checkLottoLank(winNumbers, bounsNum);
+        })()
+      ).toEqual(rank);
+    });
+  };
+
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6, 7]);
@@ -15,57 +26,29 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
-  test("로또 등수 확인 - 1등", () => {
-    expect(
-      (() => {
-        const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-        return lotto.checkLottoLank([1, 2, 3, 4, 5, 6], 7);
-      })()
-    ).toEqual(1);
-  });
 
-  test("로또 등수 확인 - 2등", () => {
-    expect(
-      (() => {
-        const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-        return lotto.checkLottoLank([1, 2, 3, 4, 5, 7], 6);
-      })()
-    ).toEqual(2);
-  });
+  //1등
+  const lottoNumAry = [
+    [],
+    [1, 2, 3, 4, 5, 6],
+    [1, 2, 3, 4, 5, 6],
+    [1, 2, 3, 4, 5, 8],
+    [1, 2, 3, 4, 7, 8],
+    [1, 2, 3, 7, 8, 9],
+    [1, 7, 8, 9, 10, 11],
+  ];
+  const winNumAry = [
+    [],
+    [1, 2, 3, 4, 5, 6],
+    [1, 2, 3, 4, 5, 7],
+    [1, 2, 3, 4, 5, 6],
+    [1, 2, 3, 4, 5, 6],
+    [1, 2, 3, 4, 5, 6],
+    [1, 2, 3, 4, 5, 6],
+  ];
+  const bonusNumAry = [0, 7, 6, 7, 7, 7, 7];
 
-  test("로또 등수 확인 - 3등", () => {
-    expect(
-      (() => {
-        const lotto = new Lotto([1, 2, 3, 4, 5, 8]);
-        return lotto.checkLottoLank([1, 2, 3, 4, 5, 6], 7);
-      })()
-    ).toEqual(3);
-  });
-
-  test("로또 등수 확인 - 4등", () => {
-    expect(
-      (() => {
-        const lotto = new Lotto([1, 2, 3, 4, 7, 8]);
-        return lotto.checkLottoLank([1, 2, 3, 4, 5, 6], 7);
-      })()
-    ).toEqual(4);
-  });
-
-  test("로또 등수 확인 - 5등", () => {
-    expect(
-      (() => {
-        const lotto = new Lotto([1, 2, 3, 7, 8, 9]);
-        return lotto.checkLottoLank([1, 2, 3, 4, 5, 6], 7);
-      })()
-    ).toEqual(5);
-  });
-
-  test("로또 등수 확인 - 6등", () => {
-    expect(
-      (() => {
-        const lotto = new Lotto([1, 7, 8, 9, 10, 11]);
-        return lotto.checkLottoLank([1, 2, 3, 4, 5, 6], 7);
-      })()
-    ).toEqual(6);
-  });
+  for (let rank = 1; rank <= 6; rank++) {
+    testLottoRank(lottoNumAry[rank], winNumAry[rank], bonusNumAry[rank], rank);
+  }
 });
