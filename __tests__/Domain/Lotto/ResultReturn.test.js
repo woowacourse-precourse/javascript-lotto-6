@@ -1,7 +1,6 @@
 import CONSTANTS from '../../../src/Lib/constans.js';
 import { MessageFormat } from '../../../src/Lib/messageFormat.js';
 import ResultReturn from '../../../src/Domain/Lotto/ResultReturn.js';
-import { formatNumberWithCommasAndDecimals } from '../../../src/Lib/utils';
 
 describe('ResultReturn', () => {
   let resultReturn;
