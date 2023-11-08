@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class LottoGame {
   #userLottoNumberList;
 
@@ -54,6 +56,37 @@ class LottoGame {
     } else if (count === 6) {
       this.winnerStatic[4] += 1;
     }
+  }
+
+  printResult() {
+    Console.print('\n당첨 통계\n---');
+    this.#print3MatchedResult();
+    this.#print4MatchedResult();
+    this.#print5MatchedResult();
+    this.#print5MatchedWithBonusResult();
+    this.#print6MatchedResult();
+  }
+
+  #print3MatchedResult() {
+    Console.print(`3개 일치 (5,000원) - ${this.winnerStatic[0]}개`);
+  }
+
+  #print4MatchedResult() {
+    Console.print(`4개 일치 (50,000원) - ${this.winnerStatic[1]}개`);
+  }
+
+  #print5MatchedResult() {
+    Console.print(`5개 일치 (1,500,000원) - ${this.winnerStatic[2]}개`);
+  }
+
+  #print5MatchedWithBonusResult() {
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.winnerStatic[3]}개`,
+    );
+  }
+
+  #print6MatchedResult() {
+    Console.print(`6개 일치 (2,000,000,000원) - ${this.winnerStatic[4]}개`);
   }
 }
 export default LottoGame;

@@ -21,6 +21,7 @@ class App {
       lotto.getNumbers(),
       lotto.getBonusNumber(),
     );
+    lottoGame.printResult();
   }
 }
 
