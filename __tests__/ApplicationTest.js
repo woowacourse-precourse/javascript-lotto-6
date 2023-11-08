@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "../src/Lotto.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -138,5 +139,18 @@ describe("로또 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining("[ERROR] 자연수만 입력이 가능합니다.")
     );
+  });
+
+  test("보너스 입력값이 랜덤 배열에 포함 여부 테스트", () => {
+    const app = new App();
+    app.bonusNumber = 20;
+    const randomArrs = [
+      new Lotto([1, 2, 3, 4, 5, 6]),
+      new Lotto([7, 8, 9, 10, 11, 12]),
+    ];
+
+    const result = app.countBonuses(randomArrs);
+
+    expect(result).toEqual([0, 0]);
   });
 });
