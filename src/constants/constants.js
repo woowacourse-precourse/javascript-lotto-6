@@ -5,7 +5,7 @@ const lotto = {
   MAX_RANGE: 45,
 };
 
-const lottoCount = {
+const lottoMatch = {
   FIFTH: 3,
   FORTH: 4,
   THIRD: 5,
@@ -21,4 +21,4 @@ const lottoPrize = {
   FIRST: 2000000000,
 };
 
-export { lotto, lottoCount, lottoPrize };
+export { lotto, lottoMatch, lottoPrize };
