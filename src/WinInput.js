@@ -17,11 +17,6 @@ class WinInput {
       exception.numberRangeError(number);
     });
     exception.sameNumberError(win);
-    // exception.notThousandError(winNumber);
-    // exeption.isNaNError(winNumber);
-    // if (winNumber==='') {
-    //   throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    // }
   };
   
 }

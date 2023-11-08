@@ -6,7 +6,6 @@ const mockQuestions = (inputs) => {
 
   MissionUtils.Console.readLineAsync.mockImplementation(() => {
     const input = inputs.shift();
-
     return Promise.resolve(input);
   });
 };
