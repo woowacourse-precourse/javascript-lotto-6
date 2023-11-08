@@ -59,13 +59,13 @@ class LottoGame {
     });
   }
 
-  updateRank(sameNumbers) {
+  updateRank(sameNumbers, lottoNumbers) {
     switch (sameNumbers.length) {
       case 6:
         this.#rank.firstPlace++;
         break;
       case 5:
-        if (sameNumbers.includes(this.#winningLotto.getBonusNumber())) {
+        if (lottoNumbers.includes(this.#winningLotto.getBonusNumber())) {
           this.#rank.secondPlace++;
         } else {
           this.#rank.thirdPlace++;
@@ -83,12 +83,16 @@ class LottoGame {
   }
 
   calculateWinner() {
-    this.#purchasedLottos.forEach((lotto) => {
-      const sameNumbers = lotto
-        .getNumbers()
-        .filter((number) => this.#winningLotto.getNumbers().includes(number));
+    const WinningLottoNumbers = this.#winningLotto.getNumbers();
 
-      this.updateRank(sameNumbers);
+    this.#purchasedLottos.forEach((lotto) => {
+      const lottoNumbers = lotto.getNumbers();
+
+      const sameNumbers = lottoNumbers.filter((number) =>
+        WinningLottoNumbers.includes(number)
+      );
+
+      this.updateRank(sameNumbers, lottoNumbers);
     });
 
     this.printWinner();
