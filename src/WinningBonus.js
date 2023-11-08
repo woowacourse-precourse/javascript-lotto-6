@@ -6,6 +6,9 @@ class WinningBonus {
   #winningNumber;
   #bonusNumber;
 
+  /*
+   * @returns {array} this.#winningNumber - 당첨 번호
+   */
   async readWinning() {
     this.#winningNumber = await Console.readLineAsync(INPUT_MESSAGE.jackpot);
     const lotto = new Lotto(Array.from(this.#winningNumber.split(','), Number));
@@ -14,6 +17,9 @@ class WinningBonus {
     return this.#winningNumber;
   }
 
+  /*
+   * @returns {number} Number(this.#bonusNumber) - 보너스 번호
+   */
   async readBonus() {
     this.#bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.bonus);
     this.validate(this.#winningNumber, this.#bonusNumber);
@@ -21,6 +27,10 @@ class WinningBonus {
     return Number(this.#bonusNumber);
   }
 
+  /*
+   * @param {array} winningNumber - 당첨 번호
+   * @param {string} bonusNumber - 보너스 번호
+   */
   validate(winningNumber, bonusNumber) {
     if (Number.isNaN(Number(bonusNumber))) {
       throw new Error(ERROR_MESSAGE.bonus.notNumber);

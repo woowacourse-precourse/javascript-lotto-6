@@ -18,6 +18,9 @@ class LottoGame {
     await this.#buyLotto(price);
   }
 
+  /*
+   * @param {number} price - 구입 금액
+   */
   async #buyLotto(price) {
     for (let i = 0; i < price / CONFIG.price; i += 1) {
       const lottoNumber = this.#generateRandomLottoNumbers();
@@ -37,6 +40,10 @@ class LottoGame {
     await this.#checkLottos(winningNumber, bonusNumber);
   }
 
+  /*
+   * @param {array} winningNumber - 당첨 번호
+   * @param {number} bonusNumber - 보너스 번호
+   */
   async #checkLottos(winningNumber, bonusNumber) {
     this.#tickets.forEach((ticket) => {
       const result = this.#checkLotto(ticket, winningNumber, bonusNumber);
@@ -63,6 +70,11 @@ class LottoGame {
     Console.print(`총 수익률은 ${profitPercentage}%입니다.`);
   }
 
+  /*
+   * @param {array} ticket - 로또 번호
+   * @param {array} winningNumber - 당첨 번호
+   * @param {number} bonusNumber - 보너스 번호
+   */
   #checkLotto(ticket, winningNumber, bonusNumber) {
     const matchingNumbers = ticket.filter((num) =>
       winningNumber.includes(num),
@@ -76,6 +88,9 @@ class LottoGame {
     if (matchingNumbers === CONFIG.rank['5등']) return 0;
   }
 
+  /*
+   * @returns {array} Random.pickUniqueNumbersInRange() - 로또 번호
+   */
   #generateRandomLottoNumbers() {
     return Random.pickUniqueNumbersInRange(
       CONFIG.range.minNumber,

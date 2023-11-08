@@ -8,6 +8,9 @@ class Lotto {
     this.#numbers = numbers.sort((a, b) => a - b);
   }
 
+  /*
+   * @param {array} numbers - 로또 번호, 당첨 번호
+   */
   #validate(numbers) {
     if (numbers.length !== CONFIG.lottoLength) {
       throw new Error(ERROR_MESSAGE.lotto.length);
@@ -35,6 +38,9 @@ class Lotto {
     }
   }
 
+  /*
+   * @returns {array} this.#numbers - 로또 번호, 당첨 번호
+   */
   getLottoNumbers() {
     return this.#numbers;
   }
