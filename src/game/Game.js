@@ -32,17 +32,17 @@ class Game {
   }
 
   async #purchase() {
-    const amount = await InputView.purchaseLotto();
+    const amount = await InputView.readPurchasePrice();
     await this.#handlePurchase(amount);
   }
 
-  #handlePurchase = async (amount) => {
+  async #handlePurchase(amount) {
     this.#quantity = new Purchase(amount);
     this.#lottos = new Lottos(this.#quantity.getAmount());
     OutputView.printPurchaseAmount(this.#quantity.getAmount());
     OutputView.printLottos(this.#lottos.getLottos());
     await this.#askWinningNumbers();
-  };
+  }
 
   async #askWinningNumbers() {
     const winningNumber = await InputView.readWinningNumbers();

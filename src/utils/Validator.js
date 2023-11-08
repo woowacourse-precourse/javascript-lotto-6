@@ -13,8 +13,7 @@ const Validator = {
 
   inputPurchaseAmount(input) {
     if (input.replace(/0/g, '').length === 0) throw new Error('[ERROR] 0임.');
-    if (input.replace(/\d/g, '').length > 0)
-      throw new Error('[ERROR] 구입 금액은 숫자만 입력 가능합니다.');
+    if (input.replace(/\d/g, '').length > 0) throw new Error('[ERROR] 문자가 포함됨.');
     if (input % 1000 !== 0) throw new Error('[ERROR] 천원 단위로.');
   },
 
