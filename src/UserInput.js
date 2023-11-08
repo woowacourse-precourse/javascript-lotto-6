@@ -3,6 +3,7 @@ import { checkValueIsNumber, checkValueIsInteger } from './utils/checkValue.js';
 import Lotto from './repository/Lotto.js';
 
 class UserInput {
+  #lotto;
   async getInputMoney() {
     while (true) {
       try {
@@ -36,9 +37,9 @@ class UserInput {
           .split(',')
           .map((item) => Number(item));
 
-        const lottoList = new Lotto(winningNumberArr).getLotto();
+        this.#lotto = new Lotto(winningNumberArr).getLotto();
 
-        return lottoList;
+        return this.#lotto;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
@@ -51,6 +52,11 @@ class UserInput {
         const bonusNumber = await MissionUtils.Console.readLineAsync(
           '\n보너스 번호를 입력해 주세요.\n'
         );
+        if (this.#lotto.includes(Number(bonusNumber))) {
+          throw new Error(
+            '[ERROR] 당첨 번호중에 보너스 번호와 같은 수가 있습니다.'
+          );
+        }
         return Number(bonusNumber);
       } catch (error) {
         MissionUtils.Console.print(error.message);

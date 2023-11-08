@@ -20,7 +20,6 @@ class BounsNumber {
       throw new Error('[ERROR] 1에서 45 사이의 숫자를 입력해주세요.');
     }
   }
-
   getBonusNumber() {
     return this.#bonusNumber;
   }
