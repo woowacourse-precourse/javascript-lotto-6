@@ -5,10 +5,6 @@ const LottoValidation = {
     Validation.checkWrong(numberList);
     Validation.checkDuplicate(numberList);
   },
-
-  checkLottoNumber(number) {
-    Validation.checkOutOfRange(number);
-  },
 };
 
 export default LottoValidation;

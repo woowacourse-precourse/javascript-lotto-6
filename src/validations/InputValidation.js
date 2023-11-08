@@ -1,11 +1,11 @@
 import Validation from "./hooks/Validation.js";
 
 const InputValidation = {
-  checkMoney(money) {
-    Validation.checkNull(money);
-    Validation.checkBlank(money);
-    Validation.checkChar(money);
-    Validation.checkIndivisible(money);
+  checkCost(cost) {
+    Validation.checkNull(cost);
+    Validation.checkBlank(cost);
+    Validation.checkChar(cost);
+    Validation.checkIndivisible(cost);
   },
 
   checkNumbers(numberList) {
