@@ -105,28 +105,32 @@ class LottoManager {
     Console.print('당첨 통계');
     Console.print('---');
 
-    Console.print(`3개 일치 (${LottoResult.MATCH_3.prize.toLocaleString('ko-KR')}원) - ${result.match3}개`);
-    Console.print(`4개 일치 (${LottoResult.MATCH_4.prize.toLocaleString('ko-KR')}원) - ${result.match4}개`);
-    Console.print(`5개 일치 (${LottoResult.MATCH_5.prize.toLocaleString('ko-KR')}원) - ${result.match5}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (${LottoResult.MATCH_5_BONUS.prize.toLocaleString('ko-KR')}원) - ${
-        result.match5Bonus
-      }개`,
-    );
-    Console.print(`6개 일치 (${LottoResult.MATCH_6.prize.toLocaleString('ko-KR')}원) - ${result.match6}개`);
+    const resultItems = [
+      { count: result.match3, prize: LottoResult.MATCH_3.prize, text: '3개 일치' },
+      { count: result.match4, prize: LottoResult.MATCH_4.prize, text: '4개 일치' },
+      { count: result.match5, prize: LottoResult.MATCH_5.prize, text: '5개 일치' },
+      { count: result.match5Bonus, prize: LottoResult.MATCH_5_BONUS.prize, text: '5개 일치, 보너스 볼 일치' },
+      { count: result.match6, prize: LottoResult.MATCH_6.prize, text: '6개 일치' },
+    ];
+
+    resultItems.forEach((item) => {
+      Console.print(`${item.text} (${item.prize.toLocaleString('ko-KR')}원) - ${item.count}개`);
+    });
   }
 
   printYield() {
+    const result = this.#result;
     const totalPrize =
-      this.#result.match3 * LottoResult.MATCH_3.prize +
-      this.#result.match4 * LottoResult.MATCH_4.prize +
-      this.#result.match5 * LottoResult.MATCH_5.prize +
-      this.#result.match5Bonus * LottoResult.MATCH_5_BONUS.prize +
-      this.#result.match6 * LottoResult.MATCH_6.prize;
+      result.match3 * LottoResult.MATCH_3.prize +
+      result.match4 * LottoResult.MATCH_4.prize +
+      result.match5 * LottoResult.MATCH_5.prize +
+      result.match5Bonus * LottoResult.MATCH_5_BONUS.prize +
+      result.match6 * LottoResult.MATCH_6.prize;
 
     const yieldRate = (totalPrize / this.#money) * 100;
+    const formattedYieldRate = yieldRate.toFixed(1);
 
-    Console.print(`총 수익률은 ${yieldRate.toFixed(1)}%입니다.`);
+    Console.print(`총 수익률은 ${formattedYieldRate}%입니다.`);
   }
 }
 
