@@ -15,16 +15,18 @@ class Computer {
     rank.forEach((elem) => (this.#prizeResult[elem] = 0));
   }
 
+  getMathResult(lotto) {
+    const lottoNumbers = lotto.getNumbers();
+    const mathNumbers = this.#winnerNumbers.filter((number) => lottoNumbers.includes(number));
+
+    const mathNumber = mathNumbers.length;
+    const isMatchBonus = lottoNumbers.includes(this.#bonusNumber);
+
+    return { mathNumber, isMatchBonus };
+  }
+
   setPrizeResult(lottos) {
-    const mathResult = lottos.map((lotto) => {
-      const lottoNumbers = lotto.getNumbers();
-      const mathNumbers = this.#winnerNumbers.filter((number) => lottoNumbers.includes(number));
-
-      const mathNumber = mathNumbers.length;
-      const isMatchBonus = lottoNumbers.includes(this.#bonusNumber);
-
-      return { mathNumber, isMatchBonus };
-    });
+    const mathResult = lottos.map((lotto) => this.getMathResult(lotto));
 
     mathResult.forEach((elem) => {
       const keyString = JSON.stringify(elem);
