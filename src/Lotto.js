@@ -1,53 +1,39 @@
 import { Console } from "@woowacourse/mission-utils";
-import Validation from "./libs/Validation.js";
-import { RANK } from "./libs/Constant.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
+    this.#validateIsNum(numbers);
+    this.#validateDuplicate(numbers);
+    this.#validate(numbers);
     this.#numbers = numbers;
-    this.validation = new Validation();
-    this.validation.checkLottoNum(numbers);
   }
 
-  getNumbers() {
-    return this.#numbers;
-  }
-
-  print() {
-    Console.print("[" + this.getNumbers().join(", ") + "]");
-  }
-
-  getRank(userNumber, bonusNumber) {
-    const winningCount = this.countWinning(userNumber);
-
-    if (winningCount === RANK.FIRST.MATCHING_COUNT) {
-      return RANK.FIRST.NAME;
-    }
-    if (
-      winningCount === RANK.SECOND.MATCHING_COUNT &&
-      this.hasBonusNumber(bonusNumber)
-    ) {
-      return RANK.SECOND.NAME;
-    }
-    if (winningCount === RANK.THIRD.MATCHING_COUNT) {
-      return RANK.THIRD.NAME;
-    }
-    if (winningCount === RANK.FOURTH.MATCHING_COUNT) {
-      return RANK.FOURTH.NAME;
-    }
-    if (winningCount === RANK.FIFTH.MATCHING_COUNT) {
-      return RANK.FIFTH.NAME;
+  #validate(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
   }
 
-  countWinning() {
-    return this.getNumbers().filter((num) => userNumber.includes(num)).length;
+  #validateIsNum(numbers) {
+    numbers.forEach((element) => {
+      if (isNaN(element)) {
+        throw new Error("[ERROR] 숫자를 입력해 주세요.");
+      }
+    });
   }
 
-  hasBonusNumber() {
-    return this.getNumbers().includes(bonusNumber);
+  #validateDuplicate(numbers) {
+    const set = new Set(numbers);
+
+    if (numbers.length !== set.size) {
+      throw new Error("[ERROR] 로또 번호는 중복되지 않아야 됩니다.");
+    }
+  }
+
+  lottoReturn(numbers) {
+    return numbers;
   }
 }
 
