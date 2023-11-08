@@ -108,7 +108,6 @@ class LottoReward {
     if (this.#requirement.hasBonus && !requirement.hasBonus) {
       return false;
     }
-
     if (this.#requirement.match === requirement.match) {
       this.#quantity += 1;
       return true;

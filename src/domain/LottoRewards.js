@@ -61,7 +61,9 @@ class LottoRewards {
    */
   getLottosResult(lottos) {
     this.#validateLottos(lottos);
+
     lottos.forEach((lotto) => this.#compareLotto(lotto));
+
     return this.#prizeTable;
   }
 
@@ -80,7 +82,6 @@ class LottoRewards {
    */
   #compareLotto(lotto) {
     const rewardResult = this.#winningLotto.grade(lotto);
-
     this.#prizeTable.some((reward) => reward.checkRequirement(rewardResult));
   }
 }

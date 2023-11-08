@@ -17,8 +17,6 @@ const MESSAGES = Object.freeze({
     return `${Array.from(lottos, (lotto) => `[${lotto.getNumbers().join(', ')}]`).join('\n')}\n`;
   },
 
-  printWinningStatistics: '\n당첨 통계\n---',
-
   /**
    * @param {LottoReward} reward
    * @returns {string}
@@ -38,8 +36,12 @@ const MESSAGES = Object.freeze({
     return `총 수익률은 ${earningRate.toLocaleString()}%입니다.`;
   },
 
+  printWinningStatistics: '\n당첨 통계\n---',
+
   readPurchaseMoney: '구입금액을 입력해 주세요.\n',
+
   readWinningNumbers: '당첨 번호를 입력해 주세요.\n',
+
   readBonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 });
 

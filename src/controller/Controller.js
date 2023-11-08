@@ -87,6 +87,7 @@ class Controller {
    */
   async #readPurchaseMoney() {
     const money = await this.#view.input.readPurchaseMoney();
+
     return Number(money);
   }
 
@@ -96,6 +97,7 @@ class Controller {
    */
   async #readWinningNumbers() {
     const winningNumbers = await this.#view.input.readWinningNumbers();
+
     return splitNumbersToArray(winningNumbers, SYSTEM.lottoNumberSeparator);
   }
 
@@ -105,6 +107,7 @@ class Controller {
    */
   async #readBonusNumber() {
     const bonusNumber = await this.#view.input.readBonusNumber();
+
     return Number(bonusNumber.trim());
   }
 

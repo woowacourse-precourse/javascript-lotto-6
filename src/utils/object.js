@@ -24,7 +24,6 @@ export const isEqualObject = (obj, otherObj) => {
   if (isObjectOrNull(obj) || isObjectOrNull(otherObj)) return false;
   const keys1 = Object.keys(obj);
   const keys2 = Object.keys(otherObj);
-
   if (keys1.length !== keys2.length) {
     return false;
   }

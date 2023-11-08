@@ -35,6 +35,7 @@ class Calculator {
    */
   earningRate(income, rewards) {
     this.#validateEarningRate(income, rewards);
+
     const totalPrize = rewards.reduce((total, reward) => total + reward.getTotalPrize(), 0);
     const earningRate = (totalPrize / income) * 100;
 
