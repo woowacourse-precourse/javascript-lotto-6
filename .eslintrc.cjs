@@ -19,5 +19,6 @@ module.exports = {
     'operator-linebreak': ['error', 'before'],
     'max-lines-per-function': ['error', { max: 15 }],
     'class-methods-use-this': 'warn',
+    'lines-between-class-members': 'off',
   },
 };

@@ -1,4 +1,3 @@
-/* eslint-disable lines-between-class-members */
 import { LOTTO_VAL, REGEX} from '../constants/constant'
 import { ERR_MESSAGE } from '../constants/message'
 

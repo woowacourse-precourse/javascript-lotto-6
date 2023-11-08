@@ -1,4 +1,3 @@
-/* eslint-disable lines-between-class-members */
 import { CONVERTER_VAR, RANK, RANK_BY_COUNT, RANK_BY_PRIZE, RANK_STANDARD , REGEX } from '../constants/constant';
 
 class RankCalculator {

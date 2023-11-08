@@ -6,7 +6,8 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
   lottoCount: '개를 구매했습니다.',
-  winStatistics: '당첨 통계\n---',
+  winStatistics: '당첨 통계',
+  line: '---',
   fifth: '3개 일치 (5,000원) - ',
   fourth: '4개 일치 (50,000원) - ',
   third: '5개 일치 (1,500,000원) - ',

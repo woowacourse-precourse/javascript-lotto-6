@@ -2,6 +2,7 @@ import { CONVERTER_VAR } from '../constants/constant';
 
 const { comma } = CONVERTER_VAR
 
+// Number(), toString() 메서드는 직접적으로 사용
 const TYPE_CONVERTOR = {
   strToArr: (str) => str.split(comma),
   strArrToNumArr: (strArr) => strArr.map(str => Number(str)),
@@ -9,7 +10,6 @@ const TYPE_CONVERTOR = {
     const strArr = str.split(comma);
     return strArr.map(strEl => Number(strEl));
   },
-  strToNum: (str) => Number(str),
   arrTostrArr: (arr) => {
     let str = '';
     arr.forEach((num, idx)=> {

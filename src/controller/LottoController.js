@@ -1,4 +1,3 @@
-/* eslint-disable lines-between-class-members */
 import InputView from '../view/InputView';
 import OutputView from '../view/OutputView';
 import PlayerLottoAmount from '../domain/PlayerLottoAmount';
@@ -57,6 +56,7 @@ class LottoController{
       const lottoStr = TYPE_CONVERTOR.arrTostrArr(numsArr);
       this.#outputView.printInput(lottoStr);
     });
+    this.#outputView.printLineBreak();
   }
 
   async receivePlayerLottoNums(){
@@ -68,7 +68,7 @@ class LottoController{
   async receivePlayerBonusNums(){
     this.#outputView.printLineBreak();
     const bonusStr = await this.#inputView.receiveUserBonusNum();
-    const bonusNum = TYPE_CONVERTOR.strToNum(bonusStr);
+    const bonusNum = Number(bonusStr);
     this.#lotto.validateBonusNum(bonusNum);
     this.#lotto.addBonusToNumbers(bonusNum);
   }
