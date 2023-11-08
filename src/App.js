@@ -10,6 +10,9 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 class App {
   lottoCount = 0;
+  moneys;
+  buyLotto;
+  matchLottoNumber;
 
   async winningNumberInput() {
     const winningNumbers = await Console.readLineAsync(
@@ -28,7 +31,8 @@ class App {
     try {
       const moneys = await Console.readLineAsync(INPUTMESSAGES.MONEY);
       const money = await new Money(moneys);
-      return money;
+      this.moneys = money;
+      this.lottoCount = this.moneys.getMoney / LOTTO_PRICE;
     } catch (e) {
       Console.print(e.message);
       return await this.moneyInput();
@@ -85,33 +89,32 @@ class App {
     this.returnOutput(moneys);
   }
 
-  purchaseListOutput(number, lottos) {
+  buyListOutput(number, lottos) {
     Console.print(`${number}개를 구매했습니다.`);
     lottos.map((lotto) => {
       Console.print(`[${lotto.join(", ")}]`);
     });
   }
+  buyLottos() {
+    this.buyLotto = new BuyLotto(this.lottoCount);
+    this.buyLotto.buyLottos();
+    this.buyListOutput(this.lottoCount, this.buyLotto.getBoughtLotto);
+  }
 
   async start() {
-    // 돈 입력
-    const moneys = await this.moneyInput();
-    this.lottoCount = moneys.getMoney / LOTTO_PRICE;
-    // 입력된 돈으로 로또 구매
-    const buyLotto = new BuyLotto(this.lottoCount);
-    buyLotto.buyLottos();
-    this.purchaseListOutput(this.lottoCount, buyLotto.getBoughtLotto);
-    // 당첨 번호, 보너스 번호 입력
+    await this.moneyInput();
+    this.buyLottos();
     const lotto = await this.lottoInput();
     const bonusLotto = await this.bonusLottoInput(await lotto.getNumbers);
     // 당첨 번호, 보너스 번호, 구매한 로또, 구매한 로또 개수를 통해 당첨 통계 계산
     const matchLottoNumber = new MatchLottoNumber(
       lotto.getNumbers,
       bonusLotto.getBonusNumbers,
-      buyLotto.getBoughtLotto,
+      this.buyLotto.getBoughtLotto,
       this.lottoCount
     );
-    moneys.rankingMoney(matchLottoNumber.getRank);
-    this.lottoResultOutput(moneys);
+    this.moneys.rankingMoney(matchLottoNumber.getRank);
+    this.lottoResultOutput(this.moneys);
   }
 
   async play() {
