@@ -28,6 +28,7 @@ class LottoShop {
     if (Number.isNaN(amount) || amount === 0) {
       throw new Error(ERROR.positiveNumber);
     }
+
     if (amount % LOTTO.price !== 0) {
       throw new Error(ERROR.canDividedByPrice);
     }

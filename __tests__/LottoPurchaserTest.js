@@ -35,6 +35,7 @@ describe('로또 구매자 클래스 테스트', () => {
       [2, 13, 22, 32, 38, 45],
       [1, 3, 5, 14, 22, 45],
     ];
+
     expect(lottoPurchaser.getLottos()).toStrictEqual(answer);
   });
 
@@ -46,6 +47,7 @@ describe('로또 구매자 클래스 테스트', () => {
       [4, 0],
       [5, 1],
     ];
+
     expect(lottoPurchaser.getWinningResults()).toStrictEqual(answer);
   });
 

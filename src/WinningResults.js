@@ -31,6 +31,7 @@ class WinningResults {
     this.#resultMap.forEach((count, ranking) => {
       profit += PRIZE_MONEY_BY[ranking] * count;
     });
+
     return profit;
   }
 }

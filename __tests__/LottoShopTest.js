@@ -12,11 +12,13 @@ describe('로또 판매점 클래스 테스트', () => {
           Lottoshop.sellTo(lottoPurchaser, Number(''));
         }).toThrow(ERROR.positiveNumber);
       });
+
       test('로또 구입 금액이 0이면 예외가 발생한다', () => {
         expect(() => {
           Lottoshop.sellTo(lottoPurchaser, Number(0));
         }).toThrow(ERROR.positiveNumber);
       });
+
       test('로또 구입 금액이 숫자가 아니면 예외가 발생한다', () => {
         expect(() => {
           Lottoshop.sellTo(lottoPurchaser, Number('천원'));
@@ -29,9 +31,11 @@ describe('로또 판매점 클래스 테스트', () => {
         expect(() => {
           Lottoshop.sellTo(lottoPurchaser, 1);
         }).toThrow(ERROR.canDividedByPrice);
+
         expect(() => {
           Lottoshop.sellTo(lottoPurchaser, 999);
         }).toThrow(ERROR.canDividedByPrice);
+
         expect(() => {
           Lottoshop.sellTo(lottoPurchaser, 2001);
         }).toThrow(ERROR.canDividedByPrice);

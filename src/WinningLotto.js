@@ -20,6 +20,7 @@ class WinningLotto {
     if (matchingCount === five && otherLotto.includes(this.#bonusNumber)) {
       return bonusFive;
     }
+
     return matchingCount;
   }
 
@@ -27,6 +28,7 @@ class WinningLotto {
     if (!(LOTTO.number.min <= bonusNumber && bonusNumber <= LOTTO.number.max)) {
       throw new Error(ERROR.between);
     }
+
     if (this.#lotto.includes(bonusNumber)) {
       throw new Error(ERROR.uniqueBonusNumber);
     }
