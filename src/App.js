@@ -4,12 +4,14 @@ import Machine from './LottoMachine.js';
 import LottoGenerator from './LottoGenerator.js';
 import Lotto from './Lotto.js';
 import LottoResultCalculator from './LottoMachine.js';
+import OutputView from './OutputView.js';
 
 class App {
   async play() {
     const inputview = new InputView();
     const machine = new Machine();
     const lottoGerner = new LottoGenerator();
+    const outputView = new OutputView();
 
     while (true) {
       try {
@@ -45,15 +47,16 @@ class App {
     }
 
     const results = LottoResultCalculator.calculateResults(purchase, winningNumber, inputview.bonusNumber);
-    Console.print('당첨 통계\n---');
-    for (const resultKey in results) {
-      const result = results[resultKey];
-      if (resultKey === '총 수익률') {
-        Console.print(`${resultKey}은 ${result}입니다.`);
-      } else if (resultKey !== '0') {
-        Console.print(`${resultKey} - ${result}개`);
-      }
-    }
+    outputView.printResult(results);
+    // Console.print('당첨 통계\n---');
+    // for (const resultKey in results) {
+    //   const result = results[resultKey];
+    //   if (resultKey === '총 수익률') {
+    //     Console.print(`${resultKey}은 ${result}입니다.`);
+    //   } else if (resultKey !== '0') {
+    //     Console.print(`${resultKey} - ${result}개`);
+    //   }
+    // }
   }
 }
 
