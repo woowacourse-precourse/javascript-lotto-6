@@ -22,4 +22,16 @@ describe('PurchaseAmount', () => {
     const invalidInput = 100_500;
     expect(() => PurchaseAmount.of(invalidInput)).toThrow('[ERROR]');
   });
+
+  test('getLottoCount 메서드가 정확한 로또 티켓 수를 반환해야 합니다', () => {
+    // given
+    const validAmount = 4000;
+    const purchaseAmount = PurchaseAmount.of(validAmount);
+
+    // when
+    // then
+    const lottoCount = purchaseAmount.getLottoCount();
+
+    expect(lottoCount).toBe(4);
+  });
 });
