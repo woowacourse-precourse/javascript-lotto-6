@@ -13,4 +13,5 @@ export const MessageFormat = {
     return `${description} (${prize}원) - ${winCount}개`;
   },
   totalReturnRate: (rate) => `총 수익률은 ${formatNumberWithCommasAndDecimals(rate)}%입니다.`,
+  ticketResult: (ticket) => `[${ticket.join(', ')}]`,
 };

@@ -1,5 +1,5 @@
 import CONSTANTS from './Lib/constans.js';
-import InputHandler from './Lib/InputHanlder/InputHanlder.js';
+import InputHandler from './View/InputHanlder.js';
 import Lotto from './Domain/Lotto/Lotto.js';
 import LottoGenerator from './Domain/Purchase/LottoGenerator.js';
 import PurchaseAmount from './Domain/Purchase/PurchaseAmount.js';

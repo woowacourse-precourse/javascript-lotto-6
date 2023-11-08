@@ -1,5 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
-import { MessageFormat } from '../../Lib/messageFormat.js';
+import OutputHandler from '../../View/OutputHandler.js';
 import { calculateTicketCountFromAmount } from './utils.js';
 
 class PurchaseAmount {
@@ -24,7 +23,7 @@ class PurchaseAmount {
    * @param {number} ticketCount 구매한 로또 티켓의 수
    */
   printPurchaseConfirm(ticketCount) {
-    Console.print(MessageFormat.purchaseConfirm(ticketCount));
+    OutputHandler.printPurchaseConfirm(ticketCount);
   }
 
   /**
@@ -44,7 +43,7 @@ class PurchaseAmount {
   }
 
   printLottoTicket(ticket) {
-    Console.print(`[${ticket.join(', ')}]`);
+    OutputHandler.printLottoTicket(ticket);
   }
 }
 export default PurchaseAmount;

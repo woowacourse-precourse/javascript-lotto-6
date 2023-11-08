@@ -1,7 +1,5 @@
 import CONSTANTS from '../../Lib/constans.js';
-import { Console } from '@woowacourse/mission-utils';
-import MESSAGE from '../../Lib/message.js';
-import { MessageFormat } from '../../Lib/messageFormat.js';
+import OutputHandler from '../../View/OutputHandler.js';
 
 class WinningChecker {
   constructor(winningNumbers) {
@@ -12,7 +10,7 @@ class WinningChecker {
    * 당첨 통계 헤더를 출력한다.
    */
   printResultHeader() {
-    Console.print(MESSAGE.output.resultHeader);
+    OutputHandler.printResultHeader();
   }
 
   /**
@@ -56,7 +54,7 @@ class WinningChecker {
    */
   printTotalResult(result) {
     Array.from(CONSTANTS.lottoPrizesMap.keys()).forEach((key) => {
-      Console.print(MessageFormat.resultRow(key, result[key]));
+      OutputHandler.printTotalResult(key, result[key]);
     });
   }
 }

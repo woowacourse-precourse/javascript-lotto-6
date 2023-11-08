@@ -1,6 +1,5 @@
 import CONSTANTS from '../../Lib/constans.js';
-import { Console } from '@woowacourse/mission-utils';
-import { MessageFormat } from '../../Lib/messageFormat.js';
+import OutputHandler from '../../View/OutputHandler.js';
 
 class ResultReturn {
   /**
@@ -41,7 +40,7 @@ class ResultReturn {
    * @returns {void} 반환값 없음
    */
   printTotalReturnRate(totalReturnRate) {
-    Console.print(MessageFormat.totalReturnRate(totalReturnRate));
+    OutputHandler.printTotalReturnRate(totalReturnRate);
   }
 }
 

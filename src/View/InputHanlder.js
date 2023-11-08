@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import ExceptionHandler from '../../Lib/ExceptionHandler.js';
-import MESSAGE from '../../Lib/message.js';
+import ExceptionHandler from '../Lib/ExceptionHandler.js';
+import MESSAGE from '../Lib/message.js';
 
 class InputHandler {
   /**

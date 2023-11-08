@@ -1,4 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
+import OutputHandler from '../View/OutputHandler.js';
 
 /**
  * 객체의 모든 하위 객체까지 불변성을 보장하는 함수
@@ -30,7 +30,7 @@ export const inputWithRetry = async (inputMethod, winningNumbers) => {
     try {
       return await inputMethod(winningNumbers);
     } catch (error) {
-      Console.print(`${error.message}`);
+      OutputHandler.printError(error);
     }
   }
 };
