@@ -56,7 +56,7 @@ describe("inputCost() 테스트", () => {
   });
 
   test("값이 1000으로 나누어지지 않는 경우 다시 입력", async () => {
-    mockQuestions(["3500", "3000"]);
+    mockQuestions(["3500", "3671", "3000"]);
     const logSpy = getLogSpy();
 
     const app = new App();
@@ -66,7 +66,7 @@ describe("inputCost() 테스트", () => {
     expect(app.cost).toEqual(3000);
   });
   test("값이 숫자가 아닌 경우 다시 입력", async () => {
-    mockQuestions(["정환", "3000"]);
+    mockQuestions(["정환", "jeonghwan", "3000"]);
     const logSpy = getLogSpy();
 
     const app = new App();

@@ -13,7 +13,7 @@ describe("generateLottos() 테스트", () => {
     expect(app.lottos).toHaveLength(3);
   });
 });
-describe(" makeLotto() 테스트", () => {
+describe("makeLotto() 테스트", () => {
   test("1~45 사이의 6자리 숫자를 생성한다.", () => {
     const app = new App();
     mockRandoms([1, 2, 3, 4, 5, 6]);

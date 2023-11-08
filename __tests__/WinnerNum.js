@@ -58,7 +58,7 @@ describe("inputWinnerNum() 테스트", () => {
   });
 
   test("당첨 번호 중 1~45 범위를 벗어나는 수가 있으면 다시 입력", async () => {
-    mockQuestions(["1,2,3,4,5,56", "1,2,3,4,5,6"]);
+    mockQuestions(["1,2,3,4,5,56", "1,2,3,4,5,0", "1,2,3,4,5,6"]);
     const logSpy = getLogSpy();
 
     const app = new App();
@@ -69,7 +69,7 @@ describe("inputWinnerNum() 테스트", () => {
   });
 
   test("당첨 번호 중에 숫자나 정수가 아닌 것이 있으면 다시 입력", async () => {
-    mockQuestions(["1,2,3,4,5,a", "1,2,3,4,5,6"]);
+    mockQuestions(["1,2,3,4,5,a", "1,2,3,4,5,1.1", "1,2,3,4,5,6"]);
     const logSpy = getLogSpy();
 
     const app = new App();

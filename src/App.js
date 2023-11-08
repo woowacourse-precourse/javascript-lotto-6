@@ -111,7 +111,7 @@ class App {
       if (num === input) throw new Error("[ERROR] 이미 선택된 번호입니다.");
     });
   }
-  // 구입한 로또와 당첨 번호 비교 함수
+  // 구입한 로또와 당첨 번호 비교 함수들
   checkLottos() {
     let matchWinnerNum = 0;
     let matchBonusNum = 0;
@@ -121,7 +121,6 @@ class App {
       this.checkWinningDetail(matchWinnerNum, matchBonusNum);
     });
   }
-  //등수 확인하는 함수
   checkWinningDetail(matchWinnerNum, matchBonusNum) {
     if (matchWinnerNum === 3) this.winningDetail[0]++;
     if (matchWinnerNum === 4) this.winningDetail[1]++;
