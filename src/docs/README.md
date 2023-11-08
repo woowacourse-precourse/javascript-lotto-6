@@ -1,39 +1,134 @@
-# 로또 미션
+# 🎟️ 로또 미션
 
-## 기능 구현 예정 목록
+## 📜 기능 목록
 
-1. View에서 돈 입력 받기
-- 마지막 세숫자가 000이 아닌지 valide
-- 입력값의 길이가 4이상인지 valide
-- 입력값이 인티저 인지 valide
-- 입력값이 음수가 아닌지 valide
+### 🧾 로또 구매  
+#### 입력값 받기
+- 구매 금액 입력 받은 후 구매 갯수 생성 
 
-2. 입력값 Model에 저장 
-- View에서 입력 받은 돈을 Money Model에 저장 -> Controller
-- 로또 갯수를 MyLotto Model에 slice하여 마지막 000 지운 후 형변환 해서 저장 -> Service
+### 🎲 자동 랜덤 번호
+#### 자동 랜덤 번호 생성
+- 구매 갯수 만큼 `missionUtils`의 `Random` 함수를 통해 6개의 자동 랜덤 번호 생성
 
-3. util에서 Random 모듈을 통한 랜덤 로또 생성 후 MyLotto Model에 저장
+#### 자동 랜덤 번호 출력
 
-4. 출력 #1
-- 구매한 로또 갯수 출력
-- 랜덤로또 출력
+### 🎲 당첨 번호 입력
+#### 일반 당첨 번호 입력
+- 당첨번호를 입력 받고 split 하여 저장
+#### 보너스 당첨 번호 입력
 
-5. 당첨번호 및 보너스 번호 입력 받기
-- 번호 하나가 1-45 사이의 숫자인지!! (CommonLottoNum)
-- 일반 번호: CommonLottoNum을 사용해 foreach로 valide
-- 보너스 번호: CommonLottoNum 그대로 사용하여 valide
+### 🖨️ 결과 출력
+#### 당첨 등수 출력
+- 당첨 번호와 자동 랜덤 번호를 비교하여 당첨 등수 및 당첨 금액 출력
+#### 수익률 출력
+- 구매 금액과 당첨금액의 합을 비교하여 수익률 계산 후 출력
 
-6. 입력값 Model에 저장
-- 당첨번호 WinNumber Model에 저장 (Controller)
+## 🗄️ Class Diagram
 
-7. util에서 비교할 두개의 Number를 받아와서 
-몇개 일치하는지 myLotto Model에 저장
+``` mermaid
 
-8. Constant: {당첨 갯수, 당첨 금액} 
+classDiagram
+  Controller <-- inputView : Passing Input
+  Controller --> outputView : Passing myLottoCount, quickPicks, returnRate
+  Controller --> MyLotto : Handle MyLotto Model
+  Controller --> MyWallet : Handle MyWallet Model
+  Controller --> WinNumber : Handle WinNumber Model
+  Controller --> ReturnMoneyService
+  Controller --> Service
+  MyLotto <--> Service
+  MyLotto <--> ReturnMoneyService
+  MyWallet <--> ReturnMoneyService
+  WinNumber <--> Service
 
-9. Money Model에서 Constant 가져와서
-당첨 금액 확인(당첨금액 선정 util 함수)
 
-10. Money Model에서 수익률 계산
+  Controller : #myWallet
+  Controller : #myLotto
+  Controller : #winNumber
 
-11. 전부 출력 #2
+  Controller : handlePurchaseAmount() 
+  Controller : handleLottoCount(input)
+  Controller : handleQuickPicks()
+  Controller : handleCommonWinNumber()
+  Controller : handleBonusWinNumber()
+  Controller : handleWinCount()
+  Controller : handleReturnRate()
+
+  inputView : readPurchaseAmount()
+  inputView : readCommonWinNumber()
+  inputView : readBonusWinNumber()
+
+  outputView : printLottoCount(count)
+  outputView : printQuickPicks(quickPicks)
+  outputView : printReturnRate(returnRate)
+
+  MyLotto : #lottoCount
+  MyLotto : #quickPicks
+  MyLotto : #winCountArr
+  MyLotto : #winResultArr
+  MyLotto : setLottoCount(input)
+  MyLotto : setQuickPicks()
+  MyLotto : setWinCount()
+  MyLotto : setWinResult()
+  MyLotto : getLottoCount()
+  MyLotto : getQuickPicks()
+  MyLotto : getWinCountArr()
+  MyLotto : getWinResultArr()
+  
+
+  MyWallet : #purchaseAmount
+  MyWallet : #returnMoney
+  MyWallet : #returnRate
+  MyWallet : setPurchaseAmount(input)
+  MyWallet : setReturnMoney(input)
+  MyWallet : setReturnRate()
+  MyWallet : getPurchaseAmount()
+  MyWallet : getReturnRate()
+
+  WinNumber : #commonWinNum
+  WinNumber : #bonusWinNum
+  WinNumber : setCommonWinNum(input)
+  WinNumber : setBonusWinNum(input)
+  WinNumber : getCommonWinNum()
+  WinNumber : getBonusWinNum()
+
+  Service : compareNumber()
+  Service : compareEachNumber(quickPick)
+
+  ReturnMoneyService : calculateWinMoney()
+  
+```
+
+## 🗂️ 폴더 구조
+```
+📂 javascript-baseball-6
+├─ .gitignore
+├─ .npmrc
+├─ README.md
+├─ 📂 src
+│  ├─ App.js
+│  ├─ index.js
+│  ├─ Lotto.js
+│  ├─ 📂 constant
+│  │  ├─ CODE.js
+│  │  ├─ MESSAGE.js
+│  │  └─ SETTING.js
+│  ├─ 📂 Controller
+│  │  └─ Controller.js
+│  ├─ 📂 docs
+│  │  └─ README.md
+│  ├─ 📂 Model
+│  │  │ MyLotto.js
+│  │  │ MyWallet.js
+│  │  │ WinNumber.js
+│  │  └─ 📂 utils
+│  │     │  randomLotto.js
+│  │     └─ winResult.js
+│  ├─ 📂 Validation
+│  │  └─ .gitkeep
+│  └─ 📂 view
+│     ├─ inputView.js
+│     └─ outputView.js
+└─ 📂 __tests__
+   ├─ ApplicationTest.js
+   └─ LottoTest.js
+```
