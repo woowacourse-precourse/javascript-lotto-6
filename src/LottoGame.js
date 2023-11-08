@@ -1,11 +1,13 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import { validateInputMoney } from "./Validator.js";
 
 class LottoGame {
   #gameCount;
+  #lottoList;
 
   constructor() {
     this.#gameCount = 0;
+    this.#lottoList = [];
   }
 
   async getUserInputMoney() {
@@ -15,9 +17,25 @@ class LottoGame {
       );
       validateInputMoney(userInputMoney);
       this.#gameCount = userInputMoney / 1000;
+
+      this.generateLottoNumbers();
     } catch (error) {
       Console.print(error.message);
     }
+  }
+
+  generateLottoNumbers() {
+    for (let i = 0; i < this.#gameCount; i++) {
+      const lottoNum = this.sortRandomLottoNumbers();
+      this.#lottoList.push(lottoNum);
+    }
+  }
+
+  sortRandomLottoNumbers() {
+    const ramdomNum = Random.pickUniqueNumbersInRange(1, 45, 6);
+    ramdomNum.sort((a, b) => a - b);
+
+    return ramdomNum;
   }
 }
 
