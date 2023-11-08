@@ -40,10 +40,11 @@ class Ranking {
     print(`\n${WINNING_STATISTICS_PRINT_MESSAGE}`);
     print("---");
 
-    input.reverse().forEach((count, rankIndex) => {
-      const message = this.formatMessage(rankIndex, count);
+    for (let rankIndex = input.length - 1; rankIndex >= 0; rankIndex--) {
+      const count = input[rankIndex];
+      const message = this.formatMessage(input.length - rankIndex - 1, count);
       print(message);
-    });
+    }
   }
 }
 

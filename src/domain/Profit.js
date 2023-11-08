@@ -8,15 +8,17 @@ class Profit {
   constructor() {}
 
   calcProfit(ranking, purchase_amount) {
-    ranking.map((el, i) => (this.total_profit += el * PRIZE_ARR[4 - i]));
+    ranking.map((el, i) => (this.total_profit += el * PRIZE_ARR[i]));
     this.total_rate = ((this.total_profit / purchase_amount) * 100).toFixed(1);
+
+    return this.total_rate;
   }
 
   printProfit() {
     print(`총 수익률은 ${this.total_rate}%입니다.`);
   }
 
-  retrunProfit(ranking, purchase_amount) {
+  returnProfit(ranking, purchase_amount) {
     this.calcProfit(ranking, purchase_amount);
     this.printProfit();
   }

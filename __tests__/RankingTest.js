@@ -8,9 +8,9 @@ describe("랭킹 클래스 테스트", () => {
       [7, 11, 16, 35, 36, 44],
       [1, 8, 11, 31, 41, 42],
     ];
-    const winning_number = [8, 21, 23, 41, 42, 11];
+    const winning_number = [8, 21, 23, 41, 42, 10];
     const bonus_number = 43;
-    const result = [0, 1, 0, 1, 0];
+    const result = [0, 1, 0, 0, 1];
 
     const ranking = new Ranking();
     const list = ranking.compareRank(lotto_list, winning_number, bonus_number);

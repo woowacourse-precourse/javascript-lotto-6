@@ -47,7 +47,7 @@ class App {
     // 6. 당첨 통계 출력하기
     ranking.printRank(this.rank_result);
     const profit = new Profit();
-    profit.retrunProfit(this.rank_result, this.purchase_amount);
+    profit.returnProfit(this.rank_result, this.purchase_amount);
   }
 }
 
