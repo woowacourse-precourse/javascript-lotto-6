@@ -1,3 +1,6 @@
+import { Console } from '@woowacourse/mission-utils';
+import SCENARIO from './constant/scenario';
+
 class LottoGame {
   constructor(price) {
     this.validatePrice(price);
@@ -94,6 +97,23 @@ class LottoGame {
 
   calculateProfitability(price, prize) {
     return (prize / price) * 100;
+  }
+
+  printResult() {
+    Console.print(SCENARIO.result_start);
+    Console.print(`${SCENARIO.match_3}${this.fifth}${SCENARIO.match_end}`);
+    Console.print(`${SCENARIO.match_4}${this.fourth}${SCENARIO.match_end}`);
+    Console.print(`${SCENARIO.match_5}${this.third}${SCENARIO.match_end}`);
+    Console.print(
+      `${SCENARIO.match_5_bonus}${this.seccond}${SCENARIO.match_end}`,
+    );
+    Console.print(`${SCENARIO.match_6}${this.first}${SCENARIO.match_end}`);
+    Console.print(
+      `${SCENARIO.profit_start}${this.calculateProfitability(
+        this.price,
+        this.lottoPrize,
+      )}${SCENARIO.profit_end}`,
+    );
   }
 }
 

@@ -15,17 +15,14 @@ class App {
       await this.buyPriceData()
         // eslint-disable-next-line no-loop-func
         .then(result => {
-          Console.print(result[0]);
-          lottoGame = new LottoGame(result[0]);
+          Console.print(result);
+          lottoGame = new LottoGame(result);
           ok = false;
         })
         .catch(error => {
           Console.print(error.message);
         });
     }
-
-    // const price = await Console.readLineAsync('구입금액을 입력해 주세요.');
-    // lottoGame = new LottoGame(price);
 
     Console.print(lottoGame);
 
@@ -48,20 +45,7 @@ class App {
     lottoGame.calculateLottoResult();
     lottoGame.calculateLottoPrize();
 
-    // Console.print('당첨 통계');
-    Console.print(`3개 일치 (5,000원) - ${lottoGame.fifth}개`);
-    Console.print(`4개 일치 (50,000원) - ${lottoGame.fourth}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${lottoGame.third}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${lottoGame.seccond}개`,
-    );
-    Console.print(`6개 일치 (2,000,000,000원) - ${lottoGame.first}개`);
-    Console.print(
-      `총 수익률은 ${lottoGame.calculateProfitability(
-        lottoGame.price,
-        lottoGame.lottoPrize,
-      )}%입니다.`,
-    );
+    lottoGame.printResult();
   }
 }
 
