@@ -71,7 +71,7 @@ export default class LottoCalculator {
   }
 
   getRatio(data) {
-    const ratio = (data.prize / this.money).toFixed(2);
+    const ratio = (data.prize * 100 / this.money).toFixed(2);
     const formattedRatio = parseFloat(ratio).toLocaleString();
 
     return formattedRatio;

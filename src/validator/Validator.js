@@ -38,12 +38,10 @@ export default class Validator {
   }
 
   checkIsUnique(value) {
-    value.split(',').forEach(number => {
-      const otherNumbers = value.split(',').filter(item => item !== number);
-      if (otherNumbers.includes(number)) {
-        throw new Error('[ERROR] 로또 번호는 유일한 숫자여야 합니다.');
-      }
-    });
+    const numbers = value.split(',');
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error('[ERROR] 로또 번호는 유일한 숫자여야 합니다.');
+    }
   }
 
   checkIsNumberBonus(value) {

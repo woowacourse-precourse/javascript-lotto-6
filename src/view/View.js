@@ -7,7 +7,7 @@ export default class View {
 
   printLottos(lottos) {
     const lottosCount = lottos.length;
-    MissionUtils.Console.print(`\n${lottosCount}개를 구매하였습니다.`);
+    MissionUtils.Console.print(`${lottosCount}개를 구매했습니다.`);
 
     for (let i = 0; i < lottosCount; i++) {
       MissionUtils.Console.print(lottos[i].toString());
