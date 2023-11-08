@@ -2,7 +2,7 @@ import Lotto from "./Lotto.js";
 import calculateWinningLottosCount from "./controller/result/calculateWinningLottosCount.js";
 import printBonusNumber from "./ui/PrintBonusNumber.js";
 import printWinningStatic from "./ui/PrintWinningStatic.js";
-import purchasePriceInput from "./ui/purchasePriceInput.js";
+import purchasePriceInput from "./ui/PurchasePriceInput.js";
 
 class RunApp {
   constructor() {
