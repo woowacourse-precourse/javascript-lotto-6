@@ -39,3 +39,21 @@
 - [x] 로또 번호와 중복이면 예외처리
 - [x] 보너스 번호가 1-45의 범위를 벗어나면 예외처리
 - [x] 모든 에러처리의 prefix는 **'[ERROR]'**를 붙여준다.
+
+## 📁 폴더구조
+
+  📦src
+  ┣ 📂constants
+  ┃ ┗ 📜constants.js
+  ┣ 📂controller
+  ┃ ┗ 📜Controller.js
+  ┣ 📂model
+  ┃ ┣ 📜BonusLotto.js
+  ┃ ┣ 📜Lotto.js
+  ┃ ┣ 📜Lottos.js
+  ┃ ┗ 📜WinningLotto.js
+  ┣ 📂view
+  ┃ ┣ 📜InputView.js
+  ┃ ┗ 📜OutputView.js
+  ┣ 📜App.js
+  ┗ 📜index.js
