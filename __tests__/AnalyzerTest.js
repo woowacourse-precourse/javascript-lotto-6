@@ -23,7 +23,7 @@ describe('Analyzer 클래스 테스트', () => {
     expect(rankedLotto.third).toBe(1);
     expect(rankedLotto.fourth).toBe(1);
     expect(rankedLotto.fifth).toBe(1);
-    expect(rankedLotto.losingLotto).toBe(2);
+    expect(rankedLotto.losing).toBe(2);
   });
 
   test('수익률을 계산한다', () => {
