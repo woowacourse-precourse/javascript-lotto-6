@@ -1,8 +1,8 @@
 import Validator from '../../src/View/Validator';
 import ERROR_CONSTANT from '../../src/Constant/ErrorConstant';
-import STRING_LIST from '../test_list/StringList';
-import NUMBER_LIST from '../test_list/NumberList';
-import ARRAY_LIST from '../test_list/ArrayList';
+import STRING_LIST from '../../t_list/StringList';
+import NUMBER_LIST from '../../t_list/NumberList';
+import ARRAY_LIST from '../../t_list/ArrayList';
 import ValidationError from '../../src/Error/ValidationError';
 
 describe('Validator assertNonEmptyString', () => {

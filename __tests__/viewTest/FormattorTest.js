@@ -1,7 +1,7 @@
 import { Random } from "@woowacourse/mission-utils";
-import STRING_LIST from "../test_list/StringList";
-import ARRAY_LIST from "../test_list/ArrayList";
-import NUMBER_LIST from "../test_list/NumberList";
+import STRING_LIST from "../../t_list/StringList";
+import ARRAY_LIST from "../../t_list/ArrayList";
+import NUMBER_LIST from "../../t_list/NumberList";
 import Formattor from "../../src/View/Formattor";
 import ValidationError from "../../src/Error/ValidationError";
 import ERROR_CONSTANT from "../../src/Constant/ErrorConstant";

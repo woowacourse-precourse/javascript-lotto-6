@@ -2,8 +2,8 @@ import { Console } from '@woowacourse/mission-utils';
 import Output from '../../src/View/Output.js';
 import ValidationError from '../../src/Error/ValidationError.js';
 import ERROR_CONSTANT from '../../src/Constant/ErrorConstant.js';
-import STRING_CONSTANT from '../test_list/StringList';
-import ARRAY_LIST from '../test_list/ArrayList.js'
+import STRING_LIST from '../../t_list/StringList.js';
+import ARRAY_LIST from '../../t_list/ArrayList.js'
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(Console, "print");
@@ -24,7 +24,7 @@ describe('Output outputString', () => {
     expect(typeof (Output.outputString)).toBe("function");
   })
   test('outputString 인자 유효성 검사, string이 아니면 에러를 thorw한다  ', () => {
-    STRING_CONSTANT.errorStringTestCases.forEach((input) => {
+    STRING_LIST.errorStringTestCases.forEach((input) => {
       expect(() => Output.outputString(input)).toThrow(new ValidationError(ERROR_CONSTANT.IS_NOT_STRING));
     })
   })
