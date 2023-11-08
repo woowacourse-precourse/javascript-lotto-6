@@ -1,9 +1,9 @@
-import ERROR from "../constants/error.js";
+import ERROR from "../../constants/error.js";
 import {
   isExistNotNumberAndCommaInString,
   isExistNotNumberInString,
-} from "../utils/checkIsExistInString.js";
-import messageFormatter from "../utils/messageFormatter.js";
+} from "./checkIsExistInString.js";
+import messageFormatter from "../../utils/messageFormatter.js";
 
 /**
  * @param {string} answer

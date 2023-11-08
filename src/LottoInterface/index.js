@@ -4,7 +4,7 @@ import {
   validateAmountToPurchase,
   validateBonusNumber,
   validateWinningNumbers,
-} from "../validators/lottoInterface.js";
+} from "../validators/lottoInterface/index.js";
 import LOTTO_INTERFACE from "../constants/lottoInterface.js";
 import LOTTO from "../constants/lotto.js";
 import messageFormatter from "../utils/messageFormatter.js";
