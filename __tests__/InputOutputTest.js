@@ -31,4 +31,18 @@ describe("InputOutput 클래스 테스트", () => {
       expect(mockReadLineAsync).toHaveBeenCalledWith("테스트 입력 메시지");
     });
   });
+
+  describe("print 메서드 테스트", () => {
+    it("메시지를 출력할 수 있어야 합니다.", () => {
+      const mockConsolePrint = jest.fn();
+      MissionUtils.Console.print = mockConsolePrint;
+
+      const message = "테스트 출력 메시지";
+      InputOutput.print(message);
+
+      expect(mockConsolePrint).toHaveBeenCalledTimes(1);
+
+      expect(mockConsolePrint).toHaveBeenCalledWith(message);
+    });
+  });
 });
