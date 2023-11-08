@@ -20,12 +20,6 @@ class LottoGame {
     this.#ranks = new Rank();
   }
 
-  async play() {
-    await this.buyLottos();
-    await this.createWinningLotto();
-    this.createWinningResult();
-  }
-
   async buyLottos() {
     const money = await InputView.readPurchaseAmount();
 
