@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from './constants.js';
 import InputValidator from './InputValidator.js';
 
-export default class UserInput {
+export default class InputManager {
   static async getPurchaseAmount() {
     const input = await Console.readLineAsync(MESSAGE.INPUT_PURCHASE_AMOUNT);
     try {

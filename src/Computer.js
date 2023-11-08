@@ -1,7 +1,7 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import { MESSAGE, LOTTERY, LOTTERY_WINNINGS } from './constants.js';
 import Lotto from './Lotto.js';
-import UserInput from './UserInput.js';
+import InputManager from './InputManager.js';
 import { NumberConverter, ArrayConverter } from './utils/converter.js';
 
 export default class Computer {
@@ -10,7 +10,7 @@ export default class Computer {
   }
 
   async issueLottoForUserInput() {
-    this.purchaseAmount = await UserInput.getPurchaseAmount();
+    this.purchaseAmount = await InputManager.getPurchaseAmount();
     const lottoCnt = this.purchaseAmount / 1000;
     Console.print(MESSAGE.PURCHASE_COUNT(lottoCnt));
 
@@ -20,11 +20,11 @@ export default class Computer {
   }
 
   async getWinningNumbersrFromUserInput() {
-    this.winningNumbers = await UserInput.getWinningNumbers();
+    this.winningNumbers = await InputManager.getWinningNumbers();
   }
 
   async getBonusNumberFromUserInput() {
-    this.bonusNumber = await UserInput.getBonusNumber(this.winningNumbers);
+    this.bonusNumber = await InputManager.getBonusNumber(this.winningNumbers);
   }
 
   issueLotto() {
