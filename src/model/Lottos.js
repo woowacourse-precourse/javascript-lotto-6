@@ -1,5 +1,6 @@
 import { Random } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
+import UserView from '../view/UserView.js';
 import { LOTTO_OUTPUT_RANK, LOTTO_PRIZE_MONEY } from '../comm/Util.js';
 import LottoValidate from "../validate/LottoValidate.js";
 
@@ -15,7 +16,14 @@ class Lottos{
         this.purchaseLottoNumbers = [];
         this.lottoOutputRank = [];
         this.lottoCount = this.amount / Lottos.UNIT_PRICE;
+        this.userView = new UserView();
+        this.#validate(amount);
         this.lottoNumbers();
+    }
+
+    #validate() {
+        new LottoValidate().inputPurchaseAmountValidate(this.amount);
+        this.userView.userOutputLottoCount(this.amount);
     }
 
     lottoNumbers = () => {    
