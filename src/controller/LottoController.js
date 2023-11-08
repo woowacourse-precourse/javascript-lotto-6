@@ -56,6 +56,10 @@ class LottoController {
       this.#lottoDataProcessor.getLottoResults()
     );
     const result = this.#resultProcessor.getResult();
+    this.#generateWinningProfit(result);
+  }
+
+  async #generateWinningProfit(result) {
     this.#outputView.printWinningResult(result);
     this.#profitProcessor = new ProfitProcessor(
       result,
