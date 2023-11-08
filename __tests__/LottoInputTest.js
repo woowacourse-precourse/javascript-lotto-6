@@ -105,10 +105,13 @@ describe('LottoInput.getBonusNumber 테스트', () => {
   });
 
   test('유저가 올바른 보너스 번호를 입력하면 숫자를 반환한다.', async () => {
+    // given
     mockQuestions(['15']);
 
+    // when
     const BONUS_NUMBER = await LottoInput.getBonusNumber();
 
+    // then
     expect(BONUS_NUMBER).toBe(15);
   });
 });
