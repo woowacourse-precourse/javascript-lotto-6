@@ -7,6 +7,8 @@ class User {
   async buy() {
     const price = await Console.readLineAsync(MESSAGE.GET_PRICE);
     this.validate(price);
+
+    return price / 1000;
   }
 
   validate(price) {
