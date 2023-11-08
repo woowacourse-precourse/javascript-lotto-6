@@ -1,4 +1,4 @@
-import { MissionUtils, Random } from '@woowacourse/mission-utils';
+import { Console, MissionUtils } from '@woowacourse/mission-utils';
 
 class Lotto {
   #numbers;
@@ -25,7 +25,7 @@ class Lotto {
   }
 
   async getBonusNumber(lottoNumber) {
-    const INPUT = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const INPUT = await MissionUtils.Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     this.validateBonusNumber(INPUT);
     this.validateBonusDuplicate(INPUT, lottoNumber);
     return Number(INPUT);
@@ -43,6 +43,46 @@ class Lotto {
     if (bonus in lottoNumber) {
       throw new Error('[ERROR] 보너스 번호가 이미 로또 번호에 존재합니다.');
     }
+  }
+
+  getLottoResult(tickets, numbers, bonus) {
+    let lottoResult = [0, 0, 0, 0, 0];
+    let sameNumArray;
+
+    for (let i = 0; i < tickets.length; i += 1) {
+      sameNumArray = numbers.filter((num) => tickets[i].includes(num));
+      lottoResult = this.findLottoRank(lottoResult, sameNumArray.length, bonus, tickets[i]);
+    }
+    return lottoResult;
+  }
+
+  // eslint-disable-next-line max-lines-per-function
+  findLottoRank(resultArray, sameNumCnt, bonus, tickets) {
+    let rankResultArray = resultArray;
+    if (sameNumCnt === 6) {
+      rankResultArray[4] += 1;
+    }
+    if (sameNumCnt === 5) {
+      rankResultArray = this.checkSecondRank(rankResultArray, sameNumCnt, bonus, tickets);
+    }
+    if (sameNumCnt === 4) {
+      rankResultArray[1] += 1;
+    }
+    if (sameNumCnt === 3) {
+      rankResultArray[0] += 1;
+    }
+    return rankResultArray;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  checkSecondRank(resultArray, sameNumCnt, bonus, tickets) {
+    const rankResultArray = resultArray;
+    if (tickets.includes(bonus)) {
+      rankResultArray[3] += 1;
+      return rankResultArray;
+    }
+    rankResultArray[2] += 1;
+    return rankResultArray;
   }
 }
 
