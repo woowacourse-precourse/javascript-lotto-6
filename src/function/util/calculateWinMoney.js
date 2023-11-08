@@ -27,7 +27,7 @@ export const calculateWinMoney = (winCount) => {
     }
 
     if (el.count === 6 && el.bonusCount === 1) {
-      result[3]["불일치5"] += 1;
+      result[3]["볼일치5"] += 1;
       result[3].winMoney += 30000000;
     }
 
