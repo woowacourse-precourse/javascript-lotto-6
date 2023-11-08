@@ -1,28 +1,6 @@
 import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-getUserInput = async () => {
-  let userInput = '';
-
-  await MissionUtils.Console.readLineAsync('')
-    .then((input) => {
-      userInput = input;
-    })
-    .catch((err) => {
-      throw new Error('[ERROR] : fail to get user input by console.');
-    })
-
-  return userInput;
-}
-
-stringToNumber = (numberString) => {
-  const number = Number(numberString);
-
-  if(isNaN(number)) throw new Error("[ERROR] : input is not a number.");
-
-  return number;
-}
-
 class App {
   #winningNumbers = [];
 
@@ -32,6 +10,28 @@ class App {
       this.#winningNumbers.push(false);
       count++;
     }
+  }
+
+  getUserInput = async () => {
+    let userInput = '';
+  
+    await MissionUtils.Console.readLineAsync('')
+      .then((input) => {
+        userInput = input;
+      })
+      .catch((err) => {
+        throw new Error('[ERROR] : fail to get user input by console.');
+      })
+  
+    return userInput;
+  }
+  
+  stringToNumber = (numberString) => {
+    const number = Number(numberString);
+  
+    if(isNaN(number)) throw new Error("[ERROR] : input is not a number.");
+  
+    return number;
   }
 
   checkIsValidPrice = (userInputNum) => {
@@ -52,9 +52,9 @@ class App {
     let lottoOrder = [];
 
     while(count < orderQuantity) {
-      const lottoNumbers = this.generateLottoNumbers();
+      const lotto = new Lotto(this.generateLottoNumbers());
         
-      lottoOrder.push(lottoNumbers);
+      lottoOrder.push(lotto);
 
       count++;
     }
@@ -62,17 +62,11 @@ class App {
     return lottoOrder;
   }
 
-  lottoNumbersToString = (lottoNumbers) => {
-    const string = `[${lottoNumbers[0]}, ${lottoNumbers[1]}, ${lottoNumbers[2]}, ${lottoNumbers[3]}, ${lottoNumbers[4]}, ${lottoNumbers[5]}]`;
-
-    return string;
-  }
-
   printLottoOrder = (lottoOrder) => {
     MissionUtils.Console.print(`\n${lottoOrder.length}개를 구매했습니다.`);
 
-    lottoOrder.forEach((lottoNumbers) => {
-      MissionUtils.Console.print(this.lottoNumbersToString(lottoNumbers));
+    lottoOrder.forEach((lotto) => {
+      MissionUtils.Console.print(lotto.toString());
     })
   }
 
@@ -80,15 +74,15 @@ class App {
     const parsedString = userInputWinningNumbers.split(',');
 
     const parsedWinnigNumbers = parsedString.map((string) => {
-      return stringToNumber(string);
+      return this.stringToNumber(string);
     })
 
     return parsedWinnigNumbers;
   }
 
-  setWinningNumbers = (winningNumbers) => {
-    winningNumbers.forEach((winningNumber) => {
-      this.#winningNumbers[winningNumber] = true;
+  setWinningNumbers = (lotto) => {
+    lotto.getNumbers().forEach((lottoNumber) => {
+      this.#winningNumbers[lottoNumber] = true;
     })
   }
 
@@ -123,9 +117,10 @@ class App {
   }
 
   getLottoStat = (lottoOrder, bonusNumber) => {
-    const lottoStats = [0, 0, 0, 0, 0, 0]
-    lottoOrder.forEach((lottoNumbers) => {
-      const rank = this.getLottoRanking(lottoNumbers, bonusNumber);
+    const lottoStats = [0, 0, 0, 0, 0, 0];
+
+    lottoOrder.forEach((lotto) => {
+      const rank = this.getLottoRanking(lotto.getNumbers(), bonusNumber);
 
       lottoStats[rank]++;
     })
@@ -168,8 +163,8 @@ class App {
       try{
         MissionUtils.Console.print('\n구입금액을 입력해 주세요.');
   
-        const userInput = await getUserInput();
-        userInputPrice = stringToNumber(userInput);
+        const userInput = await this.getUserInput();
+        userInputPrice = this.stringToNumber(userInput);
   
         this.checkIsValidPrice(userInputPrice);
         break;
@@ -188,7 +183,7 @@ class App {
       try {
         MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
   
-        const userInputWinningNumbers = await getUserInput();
+        const userInputWinningNumbers = await this.getUserInput();
         const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
         lotto = new Lotto(parsedWinnigNumbers);
 
@@ -208,8 +203,8 @@ class App {
       try {
         MissionUtils.Console.print('\n보너스 번호를 입력해 주세요.');
     
-        const userInputBonusNumber = await getUserInput();
-        bonusNumber = stringToNumber(userInputBonusNumber);
+        const userInputBonusNumber = await this.getUserInput();
+        bonusNumber = this.stringToNumber(userInputBonusNumber);
 
         this.checkBonusNumber(bonusNumber);
         break;
@@ -222,18 +217,18 @@ class App {
   }
 
   async play() {
-    const orderPrice = await getUserInputPrice();
+    const orderPrice = await this.getUserInputPrice();
     const orderQuantity = orderPrice / 1000;
-    const lottoOrder = this.generateLottoOrder(orderQuantity);
+    const userLottoOrder = this.generateLottoOrder(orderQuantity);
 
-    this.printLottoOrder(lottoOrder);
+    this.printLottoOrder(userLottoOrder);
 
-    const lotto = await getUserInputWinningNumbers();
+    const lotto = await this.getUserInputWinningNumbers();
 
-    this.setWinningNumbers(lotto.getNumbers());
+    this.setWinningNumbers(lotto);
 
-    const bonusNumber = await getUserInputBonusNumber();
-    const lottoStat = this.getLottoStat(lottoOrder, bonusNumber);
+    const bonusNumber = await this.getUserInputBonusNumber();
+    const lottoStat = this.getLottoStat(userLottoOrder, bonusNumber);
     const prizeMoney = this.getPrizeMoney(lottoStat);
     const rateOfEarn = this.getRateOfEarn(prizeMoney, orderPrice);
 

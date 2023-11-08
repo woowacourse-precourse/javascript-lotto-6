@@ -34,7 +34,9 @@ describe("로또 클래스 테스트", () => {
       }).toThrow('[ERROR]');
     })
   })
+});
 
+describe("App 클래스 테스트", () => {
   const app = new App();
 
   test("문자열이 숫자가 아닌경우 예외 발생", () => {
@@ -48,7 +50,7 @@ describe("로또 클래스 테스트", () => {
   });
 
   test("사용자가 입력한 가격이 유효한 값이 아닌경우 예외 발생", ()=> {
-    const inputs = ['0.001, -1000', '0', '1500'];
+    const inputs = ['a', '0.001, -1000', '0', '1500'];
 
     inputs.forEach((input) => {
       expect(() => {
@@ -68,7 +70,7 @@ describe("로또 클래스 테스트", () => {
   });
 
   test("보너스 숫자가 유효한 값이 아닌경우 예외발생", () => {
-    const inputs = [0.1, 0, 46, 1];
+    const inputs = [-1, 'a', 0.1, 0, 46, 1];
     const winningNumbers = [false, true];
 
     inputs.forEach((input) => {
@@ -77,4 +79,4 @@ describe("로또 클래스 테스트", () => {
       }).toThrow('[ERROR]');
     })
   })
-});
+})

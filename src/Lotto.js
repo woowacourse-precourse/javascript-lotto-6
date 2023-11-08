@@ -35,6 +35,13 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
+  toString() {
+    const commaSeperateNumbers = this.#numbers.join(', ');
+    const text = `[${commaSeperateNumbers}]`;
+
+    return text;
+  }
 }
 
 export default Lotto;
