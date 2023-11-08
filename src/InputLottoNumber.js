@@ -16,12 +16,9 @@ class InputLottoNumber extends CompareLotto {
     const inputWinningNumber = await Console.readLineAsync(
       GAME_MESSAGE.inputNumber,
     );
-    if (!inputWinningNumber.includes(',')) {
-      throw new Error(ERROR_MESSAGE.commaError);
-    }
-    this.winningNumber = inputWinningNumber.split(',').map(Number);
-
     try {
+      this.commaValidate(inputWinningNumber);
+      this.winningNumber = inputWinningNumber.split(',').map(Number);
       const lotto = new Lotto(this.winningNumber);
       this.inputBonusNumber(this.winningNumber);
     } catch (error) {
@@ -31,12 +28,17 @@ class InputLottoNumber extends CompareLotto {
     }
   }
 
+  commaValidate(inputWinningNumber) {
+    if (!inputWinningNumber.includes(',')) {
+      throw new Error(ERROR_MESSAGE.commaError);
+    }
+  }
+
   async inputBonusNumber(winningNumber) {
     const bonusNumber = await Console.readLineAsync(
       GAME_MESSAGE.inputBonusNumber,
     );
     this.bonusNumber = Number(bonusNumber);
-
     try {
       Validator.bonusNumber(bonusNumber, winningNumber);
       super.compareLottoNumber();

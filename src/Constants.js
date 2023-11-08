@@ -1,5 +1,9 @@
 export const GAME_NUMBER = Object.freeze({
   prizeNumber: [5000, 50000, 1500000, 30000000, 2000000000],
+  numberMin: 1,
+  numberMax: 45,
+  numberLength: 6,
+  purchaseUnit: 1000,
 });
 
 export const GAME_MESSAGE = Object.freeze({

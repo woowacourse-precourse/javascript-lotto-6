@@ -1,23 +1,37 @@
-import { ERROR_MESSAGE } from './Constants.js';
+import { ERROR_MESSAGE, GAME_NUMBER } from './Constants.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.#typeValidate(numbers);
+    this.#rangeValidate(numbers);
+    this.#lengthValidate(numbers);
+    this.#duplicationValidate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
+  #typeValidate(numbers) {
     if (numbers.some(number => isNaN(number))) {
       throw new Error(ERROR_MESSAGE.typeError);
     }
-    if (numbers.some(number => number < 1 || number > 45)) {
+  }
+  #rangeValidate(numbers) {
+    if (
+      numbers.some(
+        number =>
+          number < GAME_NUMBER.numberMin || number > GAME_NUMBER.numberMax,
+      )
+    ) {
       throw new Error(ERROR_MESSAGE.rangeError);
     }
-    if (numbers.length !== 6) {
+  }
+  #lengthValidate(numbers) {
+    if (numbers.length !== GAME_NUMBER.numberLength) {
       throw new Error(ERROR_MESSAGE.lottoLengthError);
     }
+  }
+  #duplicationValidate(numbers) {
     if (new Set(numbers).size !== numbers.length) {
       throw new Error(ERROR_MESSAGE.duplicationError);
     }

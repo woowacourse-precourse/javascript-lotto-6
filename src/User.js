@@ -1,5 +1,5 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import { GAME_MESSAGE, ERROR_MESSAGE } from './Constants.js';
+import { GAME_MESSAGE, ERROR_MESSAGE, GAME_NUMBER } from './Constants.js';
 import Validator from './Validator.js';
 
 class User {
@@ -23,7 +23,7 @@ class User {
   }
 
   purchaseLottoCount(purchaseAmount) {
-    const lottoCount = purchaseAmount / 1000;
+    const lottoCount = purchaseAmount / GAME_NUMBER.purchaseUnit;
 
     Console.print(`\n${lottoCount}${GAME_MESSAGE.printPurchase}`);
 
@@ -32,7 +32,11 @@ class User {
 
   purchaseLottoNumber(lottoCount) {
     this.userLotto = new Array(lottoCount).fill(0).map(() => {
-      const userLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const userLottoNumber = Random.pickUniqueNumbersInRange(
+        GAME_NUMBER.numberMin,
+        GAME_NUMBER.numberMax,
+        GAME_NUMBER.numberLength,
+      );
       return userLottoNumber.sort((a, b) => a - b);
     });
 
