@@ -1,10 +1,10 @@
 const composeAscending = (numbers) => numbers.sort((a, b) => a - b);
 
 // 받은 input값 배열로 만들기
-const composeLists = (line) => line.replaceAll(' ', '').split(',');
+const composeLists = (line) => line.split(',').map(Number);
 
 const getDuplicates = (lottos, winningLotto) =>
-  lottos.filter((number) => winningLotto.includes(number));
+  lottos.filter((number) => winningLotto?.includes(number));
 
 const isDuplicate = (lottos, bonus) => lottos.includes(bonus);
 
@@ -21,5 +21,3 @@ const modifiers = {
 };
 
 export default modifiers;
-
-// console.log(isDuplicate(['3', '12', '14', '21', '39', '7'], '7'));

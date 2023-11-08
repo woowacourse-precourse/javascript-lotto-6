@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import modifiers from '../utils/modifiers.js';
 
-export default class LottoDrawing {
+class LottoDrawing {
   #line;
 
   #getRandomNumbers;
@@ -27,5 +27,6 @@ export default class LottoDrawing {
   }
 }
 
+export default LottoDrawing;
 // const drawing = new LottoDrawing('3000');
 // console.log(drawing.makeLottos());

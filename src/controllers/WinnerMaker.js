@@ -7,20 +7,23 @@ class WinnerMaker {
 
   #winner;
 
-  constructor(lottos) {
+  #winningLotto;
+
+  constructor(lottos, numbers, bonus) {
     this.#lottos = lottos;
     this.#winner = new Winner();
+    this.#winningLotto = new Lotto(numbers, bonus);
   }
 
-  #winningLotto = new Lotto('1,2,3,4,5,12', '7'); // 로또값 입력
+  // #winningLotto = new Lotto('1,2,3,4,5,12', '7'); // 로또값 입력
 
   // 일치 개수 확인
   #checkNumbers(lotto) {
-    const numbers = modifiers.getDuplicates(
+    const duplicateNumber = modifiers.getDuplicates(
       lotto,
       this.#winningLotto.getNumbers(),
     );
-    return numbers.length;
+    return duplicateNumber.length;
   }
 
   // 보너스 확인
@@ -30,7 +33,7 @@ class WinnerMaker {
 
   // 등수 저장
   #getWinner() {
-    this.#lottos.map((lotto) =>
+    this.#lottos.forEach((lotto) =>
       this.#winner.switchNumber(
         this.#checkNumbers(lotto),
         this.#checkBonus(lotto),
@@ -40,15 +43,20 @@ class WinnerMaker {
 
   getResult() {
     this.#getWinner();
-    return this.#winner.getResult();
+    const result = this.#winner.getResult();
+    const revenue = this.#winner.getRevenue();
+    return { result, revenue };
   }
 }
 
 export default WinnerMaker;
 
-// const winnermaker = new WinnerMaker([
-//   ['1', '2', '3', '4', '39', '44'],
-//   ['1', '2', '3', '0', '4', '5'],
-// ]);
-
-// console.log(winnermaker.getResult());
+// const winnerMaker = new WinnerMaker(
+//   [
+//     [1, 2, 3, 4, 39, 44],
+//     [1, 2, 3, 0, 4, 5],
+//   ],
+//   '1,2,3,0,39,6',
+//   '7',
+// );
+// console.log(winnerMaker.checkNumbers([3, 1, 17, 30, 43, 45]));

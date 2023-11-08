@@ -12,7 +12,7 @@ class Lotto {
   constructor(numbers, bonus) {
     this.#validate(numbers);
     this.#numbers = modifiers.composeLists(numbers);
-    this.#bonus = bonus;
+    this.#bonus = Number(bonus);
   }
 
   // 유효성 검사

@@ -16,3 +16,7 @@ class UserInput {
   getBonusNumber = () => this.#getLine(USER_INPUT.bonusNumber);
 }
 export default UserInput;
+
+// const userinput = new UserInput();
+
+// userinput.getTotalPrice();
