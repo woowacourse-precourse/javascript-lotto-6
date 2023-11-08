@@ -30,8 +30,9 @@ class App {
       try {
         const moneyInput = await Console.readLineAsync(GET_INPUT_MONEY);
         if (moneyInput % 1000 === 0) {
-          this.printCounts(moneyInput/1000)
-          return moneyInput;}
+          this.printCounts(moneyInput / 1000);
+          return moneyInput;
+        }
         throw Error(ERROR_GET_INPUT_MONEY);
       } catch (error) {
         Console.print("[ERROR] 구입금액은 1000원 단위로 입력하셔야 합니다.");
@@ -86,7 +87,7 @@ class App {
     Console.print(counts + COUNTS_MESSAGE);
   }
   printRandomLotto(lotto) {
-    lotto.map((random) => Console.print(random.number));
+    lotto.map((random) => Console.print(`[${random.number.join(", ")}]`));
     Console.print("");
   }
   async getCountLotto(lotto, randomLottos) {
@@ -104,15 +105,15 @@ class App {
   async printResult(result, bonus, money) {
     const rank = await this.getRank(result, bonus);
     Console.print(BEFORE_RESULT);
-    await Console.print(FIFTH_RANK_MESSAGE + `${rank[3]} 개`);
-    await Console.print(FOURTH_RANK_MESSAGE + `${rank[4]} 개`);
-    await Console.print(THIRD_RANK_MESSAGE + `${rank[5]} 개`);
-    await Console.print(SECOND_RANK_MESSAGE + `${rank["bonus"]} 개`);
-    await Console.print(FIRST_RANK_MESSAGE + `${rank[6]} 개`);
+    await Console.print(FIFTH_RANK_MESSAGE + `${rank[3]}개`);
+    await Console.print(FOURTH_RANK_MESSAGE + `${rank[4]}개`);
+    await Console.print(THIRD_RANK_MESSAGE + `${rank[5]}개`);
+    await Console.print(SECOND_RANK_MESSAGE + `${rank["bonus"]}개`);
+    await Console.print(FIRST_RANK_MESSAGE + `${rank[6]}개`);
     await this.printRateOfReturn(rank, money);
   }
   getRank(result, bonus) {
-    const rank = {1: 0,2: 0,3: 0,4: 0,5: 0,6: 0,bonus: 0};
+    const rank = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, bonus: 0 };
 
     result.map((element) => {
       if (element.count === 5 && this.checkBonus(element.number, bonus))
@@ -134,7 +135,7 @@ class App {
     const sumOfReturn = amountReturn
       .filter((element) => element >= 0)
       .reduce((x, y) => x + y);
-    const rateOfReturn = +(Math.round(sumOfReturn / money + "e+1") + "e-1");
+    const rateOfReturn = Math.round(sumOfReturn / money * 1000) / 10;
     Console.print(`총 수익률은 ${rateOfReturn.toLocaleString()}%입니다.`);
   }
 }
