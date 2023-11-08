@@ -91,6 +91,8 @@ class App {
 			),
 		);
 
+		ErrorCheck.rangeCheck(BONUS_NUMBER);
+
 		const lottoCounter = new LottoCounter();
 
 		const countMatchingNumbers = (ticketNumbers, winningNumbers) => {
