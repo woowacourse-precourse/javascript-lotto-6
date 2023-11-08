@@ -115,15 +115,19 @@ class Game {
   }
 
   async play() {
-    await this.#setLottoAmount();
-    this.#setMyLotto();
-    this.#printMyLotto();
-    await this.#setWinLotto();
-    await this.#setBonusNumber();
-    this.#setWinningDetails();
-    this.#printWinningDetails();
-    this.#setProfit();
-    this.#printProfitRate();
+    try {
+      await this.#setLottoAmount();
+      this.#setMyLotto();
+      this.#printMyLotto();
+      await this.#setWinLotto();
+      await this.#setBonusNumber();
+      this.#setWinningDetails();
+      this.#printWinningDetails();
+      this.#setProfit();
+      this.#printProfitRate();
+    } catch (e) {
+      Console.print(e.message);
+    }
   }
 }
 
