@@ -6,7 +6,16 @@ const OutputView = {
   },
 
   printLotto(lotto) {
-    Console.print(lotto);
+    let lottoStr = '[';
+
+    lotto.map((number, index) => {
+      lottoStr += String(number);
+      if (index + 1 !== lotto.length) {
+        lottoStr += ', ';
+      }
+    });
+    lottoStr += ']';
+    Console.print(lottoStr);
   },
 
   printResultStastics(result) {
@@ -20,44 +29,39 @@ const OutputView = {
   getResultState(result, rank) {
     switch (rank) {
       case '1':
-        Console.print(
-          `3개 일치 (${result[rank].prize.toLocaleString('ko-KR')}원) - ${result[rank].count}개`,
-        );
+        this.printResult(3, result, rank);
         break;
-
       case '2':
-        Console.print(
-          `4개 일치 (${result[rank].prize.toLocaleString('ko-KR')}원) - ${result[rank].count}개`,
-        );
-
+        this.printResult(4, result, rank);
         break;
-
       case '3':
-        Console.print(
-          `5개 일치 (${result[rank].prize.toLocaleString('ko-KR')}원) - ${result[rank].count}개`,
-        );
-
+        this.printResult(5, result, rank);
         break;
-
       case '4':
-        Console.print(
-          `5개 일치, 보너스 볼 일치 (${result[rank].prize.toLocaleString('ko-KR')}원) - ${
-            result[rank].count
-          }개`,
-        );
-
+        this.printResult(5, result, rank);
         break;
-
       case '5':
-        Console.print(
-          `6개 일치 (${result[rank].prize.toLocaleString('ko-KR')}원) - ${result[rank].count}개`,
-        );
-
+        this.printResult(6, result, rank);
         break;
-
       default:
         Console.print('당첨 내역이 없습니다.');
         break;
+    }
+  },
+
+  printResult(match, result, rank) {
+    if (rank === '4') {
+      Console.print(
+        `5개 일치, 보너스 볼 일치 (${result[rank].prize.toLocaleString('ko-KR')}원) - ${
+          result[rank].count
+        }개`,
+      );
+    } else {
+      Console.print(
+        `${match}개 일치 (${result[rank].prize.toLocaleString('ko-KR')}원) - ${
+          result[rank].count
+        }개`,
+      );
     }
   },
 
