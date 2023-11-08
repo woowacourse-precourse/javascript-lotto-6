@@ -1,4 +1,5 @@
 import inputView from '../view/InputView.js';
+import outputView from '../view/Outputview.js';
 import MyWallet from '../Model/MyWallet.js';
 import MyLotto from '../Model/MyLotto.js';
 
@@ -17,6 +18,6 @@ export default class Controller {
     this.#myWallet.setPurchaseAmount(input);
     this.#myLotto.setlottoCount(input);
 
-    return console.log(this.#myLotto.getQuickPicks());
+    return outputView.printLottoCount(this.#myLotto.getLottoCount());
   }
 }
