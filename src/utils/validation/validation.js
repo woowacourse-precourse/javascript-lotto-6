@@ -7,7 +7,7 @@ const ensureIsNumberString = number => {
   if (trimmed === '' || Number.isNaN(parsed) || trimmed !== parsed.toString()) throw new Error(ERROR.notNumber);
 };
 
-const isValidatedPrice = inputPrice => {
+const validateLottoPurchase = inputPrice => {
   const parsed = parseInt(inputPrice, 10);
 
   if (parsed % LOTTO_PRICE !== 0) {
@@ -23,7 +23,7 @@ const isIncludedBonusNumbers = (lottoNumbers, bonusNumber) => {
 
 const validatedPrice = inputPrice => {
   ensureIsNumberString(inputPrice);
-  isValidatedPrice(inputPrice);
+  validateLottoPurchase(inputPrice);
 };
 
 export { ensureIsNumberString, isIncludedBonusNumbers, validatedPrice };
