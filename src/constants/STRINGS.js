@@ -1,0 +1,38 @@
+const ERROR_HEADER = '[ERROR]';
+
+const STRINGS = Object.freeze({
+  PURCHASE_PRICE_INPUT_MESSAGE: '구입금액을 입력해 주세요.\n',
+  WINNING_NUMBER_INPUT_MESSAGE: '당첨 번호를 입력해 주세요.\n',
+  BONUS_NUMBER_INPUT_MESSAGE: '보너스 번호를 입력해 주세요.\n',
+
+  ERROR_HEADER,
+
+  NOT_POSITIVE_INTEGER_ERROR_MESSAGE: `${ERROR_HEADER} 양의 정수가 아닙니다.`,
+  NOT_MULTIPLES_ERROR_MESSAGE: `${ERROR_HEADER} 딱 떨어지는 수가 아닙니다.`,
+  WRONG_LENGTH_ERROR_MESSAGE: `${ERROR_HEADER} 잘못된 길이입니다.`,
+  WRONG_RANGE_NUMBER_ERROR_MESSAGE: `${ERROR_HEADER} 범위 바깥의 숫자입니다.`,
+  SAME_ELEMENT_IN_ARRAY_ERROR_MESSAGE: `${ERROR_HEADER} 중복된 요소가 존재합니다.`,
+
+  PURCHASED_LOTTO_FORMAT: '개를 구매했습니다.',
+
+  LOTTO_RESULT_HEADER: '당첨 통계',
+  FIRST_PLACE_RESULT_HEADER: '6개 일치 (2,000,000,000원)',
+  SECOND_PLACE_RESULT_HEADER: '5개 일치, 보너스 볼 일치 (30,000,000원)',
+  THIRD_PLACE_RESULT_HEADER: '5개 일치 (1,500,000원)',
+  FOURTH_PLACE_RESULT_HEADER: '4개 일치 (50,000원)',
+  FIFTH_PLACE_RESULT_HEADER: '3개 일치 (5,000원)',
+
+  RETURN_RATIO_HEADER: '총 수익률은 ',
+  RETURN_RATIO_FOOTER: '%입니다.',
+
+  STRING_TYPE: 'string',
+  BLANK: '',
+  LOTTO_FRONT_COVER: '[',
+  LOTTO_BEHIND_COVER: ']',
+  DASH: '-',
+  SPACE: ' ',
+  LOTTO_NUMBERS_SEPARATOR: ',',
+  UNIT_OF_LOTTO: '개',
+});
+
+export default STRINGS;
