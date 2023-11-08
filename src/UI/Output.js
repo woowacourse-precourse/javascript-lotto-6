@@ -28,7 +28,7 @@ class Output {
       if (index === BONUS_MATCH_INDEX) {
         bonusText = ', 보너스 볼 일치';
       }
-      Console.print(`${matchCountList[index]}개 일치${bonusText} (${prizeMoney[index]}원) - ${result}개`)
+      Console.print(`${matchCountList[index]}개 일치${bonusText} (${prizeMoney[index]}원) - ${result}개`);
     });
   }
 
