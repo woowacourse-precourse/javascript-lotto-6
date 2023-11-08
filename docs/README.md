@@ -69,7 +69,7 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 
 - [] 로또 게임을 생성한다. Game#run()
 
-  - [] 로또의 개수를 만큼 6개의 숫자를 전달하여 로또를 생성한다. Game#createLotto()
+  - [x] 로또의 개수를 만큼 6개의 숫자를 전달하여 로또를 생성한다. Game#createLotto()
 
   - [] 당첨 번호를 입력받는다. Game#getWinningNumbers()
 

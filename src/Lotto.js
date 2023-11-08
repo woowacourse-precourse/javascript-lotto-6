@@ -1,3 +1,5 @@
+import { Random, Console } from "@woowacourse/mission-utils";
+
 class Lotto {
   #numbers;
 
@@ -19,6 +21,11 @@ class Lotto {
     if (uniqueNumbers.size !== numbers.length) {
       throw new Error("[ERROR] 로또 번호는 중복되지 않습니다.");
     }
+  }
+
+  getRandomNumbers() {
+    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return randomNumbers;
   }
 }
 
