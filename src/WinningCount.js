@@ -32,7 +32,7 @@ class WinningCount {
         this.#winningRate.first += 1;
         break;
       case 5:
-        if (lottoNumbers.includes(this.#bonusNumber.getNumber())) {
+        if (lottoNumbers.includes(this.#bonusNumber)) {
           this.#winningRate.second += 1;
           break;
         }
