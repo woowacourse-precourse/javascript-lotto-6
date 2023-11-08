@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import Result from "../src/model/Result";
 
 describe("로또 당첨 결과 테스트", () => {
@@ -48,4 +47,16 @@ describe("로또 당첨 결과 테스트", () => {
       expect(result.fifth).toBe(0);
     });
   });
+});
+
+describe("로또 수익률 결과 테스트", () => {
+  const result = new Result();
+
+  result.fourth = 1;
+  result.third = 1;
+  const purchase = 1000000;
+
+  const profitMargin = result.getProfitMargin(purchase);
+
+  expect(profitMargin).toBe("155.0");
 });
