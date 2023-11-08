@@ -85,6 +85,15 @@ function validateNumber(number) {
     throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
   }
 }
+function calculateWinningResult() {
+  for (const lotto of this.lottos) {
+    const matchCount = this.getMatchCount(lotto);
+    const isBonusMatch = this.isBonusMatch(lotto);
+    const rank = this.getRank(matchCount, isBonusMatch);
+    this.winningResult[rank]++;
+  }
+}
+
 
 
 export default App;
