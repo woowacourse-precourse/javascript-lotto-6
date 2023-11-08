@@ -4,6 +4,7 @@ import Lotto from '../Lotto.js';
 import getRandomLottoNumbers from '../utils/random.js';
 import sortAscendingNumber from '../utils/sort.js';
 import BonusNumber from '../models/BonusNumber.js';
+import LottoPrize from '../models/LottoPrize.js';
 
 class LottoService {
   #account;
@@ -55,6 +56,21 @@ class LottoService {
     if (!this.#bonusNumber) return undefined;
 
     return this.#bonusNumber.getNumber();
+  }
+
+  getLottoResult() {
+    const lottoPrize = new LottoPrize();
+    const winningNumbers = this.getWinningNumbers();
+    const bonusNumber = this.getBonusNumber();
+    this.getLottos().forEach((lotto) => {
+      const matchLottoCount = lotto.filter((number) =>
+        winningNumbers.includes(number),
+      );
+      const isBonusMatch = lotto.includes(bonusNumber);
+      lottoPrize.calculatePrize(matchLottoCount, isBonusMatch);
+    });
+
+    return lottoPrize.getStatus();
   }
 }
 

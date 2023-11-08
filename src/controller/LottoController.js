@@ -17,6 +17,7 @@ class LottoController {
     this.#printLottos();
     await this.#readWinningNumbers();
     await this.#readBonusNumber();
+    this.#getLottoResult();
   }
 
   // 스택 오버플로우를 방지하기 위해 재귀 대신 while loop를 사용
@@ -68,6 +69,10 @@ class LottoController {
       }
     }
     this.#view.printNewLine();
+  }
+
+  #getLottoResult() {
+    this.#service.getLottoResult();
   }
 }
 
