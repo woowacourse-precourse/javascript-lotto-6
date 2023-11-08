@@ -1,4 +1,5 @@
 import { INPUT_MESSAGES, OUPUT_MESSAGES, WINNING_NUMBERS } from '../Constants';
+import { Console } from '@woowacourse/mission-utils';
 
 class OuputView {
   constructor() {}

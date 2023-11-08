@@ -1,4 +1,4 @@
-import SetGame from './SetGame.js';
+import SetGame from './domain/SetGame.js';
 import Utils from './Utils.js';
 import InputView from './View/InputView.js';
 import OuputView from './View/OutputView.js';

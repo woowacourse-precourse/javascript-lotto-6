@@ -1,4 +1,4 @@
-import { LOTTO_RULE } from './Constants.js';
+import { LOTTO_RULE, WINNING_NUMBERS, WINNING_PROFITS } from './Constants.js';
 import { Random, Console } from '@woowacourse/mission-utils';
 
 class Utils {
@@ -8,7 +8,7 @@ class Utils {
     return arr;
   }
 
-  // 일정 범위 내, 6개의 랜덤 번호 생성
+  // 일정 범위 내 6개의 랜덤 번호 생성
   static generateRandomNumbers() {
     const RANDOM_NUMBERS = Random.pickUniqueNumbersInRange(
       LOTTO_RULE.RANGE.MIN,
@@ -27,6 +27,33 @@ class Utils {
     }
     newObject[el] += 1;
     return newObject;
+  }
+
+  // 객체의 요소가 3보다 작다면 제거
+  static removeLessThanThree(el) {
+    const object = { ...el };
+    for (const i in object) {
+      if (typeof Number(i) === 'number' && i < 3) {
+        delete object[i];
+      }
+    }
+    return object;
+  }
+  // 객체의 요소가 3보다 작다면 제거
+  static addMissingElement(el) {
+    const object = { ...el };
+    for (const i in WINNING_PROFITS) {
+      const key = i.toString();
+      if (!(key in object)) {
+        object[key] = 0;
+      }
+    }
+    return object;
+  }
+
+  // 문자열을 ,을 기준으로 나눈다.
+  static splitComma(str) {
+    return str.split(',');
   }
 }
 export default Utils;
