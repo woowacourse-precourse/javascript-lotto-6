@@ -4,7 +4,7 @@
 - [ ] (README.md) MVC 패턴으로 코드 구조 분할하기
 - [x] (src/constants) 에러 메세지를 상수 객체로 설정
 - [x] (src/constants) 입력받을 때 사용할 쿼리를 상수 객체로 설정
-- [ ] (src/constants) 로또 발행과 관련된 메세지를 상수 객체로 설정
+- [x] (src/constants) 로또 발행과 관련된 메세지를 상수 객체로 설정
 - [ ] (src/constants) 로또 입력개수 조건을 상수 객체로 설정
 - [ ] (src/validators) 구매금액의 유효성을 확인하는 함수 구현
 - [ ] (src/validators) 당첨 번호의 유효성을 확인하는 함수 구현
