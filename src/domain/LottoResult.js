@@ -39,7 +39,7 @@ class LottoResult{
             return sum + (value * this.#matchReward[index]);
         }, 0);
 
-        return reward/purchaseAmount;
+        return (reward/purchaseAmount).toFixed(1);
     }
     
     getMatching() {
