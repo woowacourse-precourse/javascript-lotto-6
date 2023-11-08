@@ -95,7 +95,7 @@ class LottoGame {
     });
   }
 
-  static validatebonusNumber(bonusNumber = NUMBER.defaultNumber, winningNumbersArray = []) {
+  static validateBonusNumber(bonusNumber = NUMBER.defaultNumber, winningNumbersArray = []) {
     const bonusNumberInt = Number(bonusNumber);
     if (
       winningNumbersArray.includes(bonusNumberInt) ||
