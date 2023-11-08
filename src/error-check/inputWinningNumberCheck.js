@@ -1,4 +1,5 @@
 import { ERROR_MESSAGES } from "../constant/message";
+import OPTIONS from "../constant/option";
 
 const isNotNumber = (numbers) => {
     for (const number of numbers) {
@@ -19,7 +20,7 @@ const isOnlyNumber = (numbers) => {
 
 const isFromOneToFortyFive = (numbers) => {
     for (const number of numbers) {
-        if (Number(number) > 45 || Number(number) < 1) {
+        if (Number(number) > OPTIONS.maxRandomNumber || Number(number) < OPTIONS.minRandomNumber) {
             throw new Error(`${ERROR_MESSAGES.prefix} ${ERROR_MESSAGES.invalidBetweenOneAndFortyFive}`);
         }
     }

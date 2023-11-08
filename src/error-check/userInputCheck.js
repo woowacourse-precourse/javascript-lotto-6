@@ -1,7 +1,8 @@
 import { ERROR_MESSAGES } from "../constant/message";
+import OPTIONS from "../constant/option";
 
 const buyLottoBuyValueCheck = (money) => {
-    if ((Number(money) % 1000)) {
+    if ((Number(money) % OPTIONS.thousand)) {
         throw new Error(`${ERROR_MESSAGES.prefix} ${ERROR_MESSAGES.invalidThousandWonUnit}`);
     }
 }
@@ -13,7 +14,7 @@ const isNotNumber = (number) => {
 }
 
 const underThousandValue = (money) => {
-    if (Number(money) < 1000) {
+    if (Number(money) < OPTIONS.thousand) {
         throw new Error(`${ERROR_MESSAGES.prefix} ${ERROR_MESSAGES.invalidMoreThousand}`);
     }
 }
