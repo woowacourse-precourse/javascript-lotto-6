@@ -11,6 +11,7 @@ const {
   NUMBER_OF_LOTTO_NUMBERS,
   LOTTO_NUMBER_LOWER,
   LOTTO_NUMBER_UPPER,
+  LOTTO_NUMBERS_SEPARATOR,
 } = CONSTANTS;
 
 class ErrorCheck {
@@ -20,7 +21,7 @@ class ErrorCheck {
   }
 
   static lottoNumbersString(string) {
-    const arrayFromString = string.split(',');
+    const arrayFromString = string.split(LOTTO_NUMBERS_SEPARATOR);
     ErrorCheck.arrayLikeLength(arrayFromString, NUMBER_OF_LOTTO_NUMBERS);
     arrayFromString.forEach(ErrorCheck.lottoNumberString);
     ErrorCheck.differentElementArray(arrayFromString);
