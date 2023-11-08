@@ -8,6 +8,8 @@ class App {
     controller.showLottoTickets();
     await controller.askWinningNum();
     await controller.askBonusNum();
+    controller.checkResult();
+    controller.printRankStat();
   }
 }
 

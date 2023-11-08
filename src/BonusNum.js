@@ -11,7 +11,7 @@ class BonusNum {
   #validate(input, lottoNum) {
     Validator.bonusNum(input);
     Validator.checkRange(input);
-    Validator.bonusIsSameWithLotto(input, lottoNum);
+    Validator.isBonusSameWithLotto(input, lottoNum);
   }
 
   returnNum() {

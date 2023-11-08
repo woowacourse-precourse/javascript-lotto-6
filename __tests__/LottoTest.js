@@ -74,7 +74,7 @@ describe("보너스 클래스 테스트", () => {
   });
   test("보너스 번호가 당첨번호와 중복하면 예외가 발생한다", () => {
     expect(() => {
-      Validator.bonusIsSameWithLotto(1, [1, 2, 3, 4, 5, 6]);
+      Validator.isBonusSameWithLotto(1, [1, 2, 3, 4, 5, 6]);
     }).toThrow(ErrorMsg.BONUS_NUM.INCLUDES_IN_LOTTO_NUM);
   });
 });

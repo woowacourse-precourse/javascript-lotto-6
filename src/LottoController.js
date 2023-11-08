@@ -11,12 +11,15 @@ class LottoController {
   #lottoCount;
   #lottoTickets;
   #winningNum;
+  #bonusNum;
+  #rankStats;
 
   constructor() {
     this.#budget = 0;
     this.#lottoCount = 0;
     this.#lottoTickets = [];
     this.#winningNum = [];
+    this.#rankStats = {};
   }
 
   async askBudget() {
@@ -55,12 +58,12 @@ class LottoController {
   createLottoTickets() {
     for (let i = 0; i < this.#lottoCount; i += 1) {
       const nums = LottoNumGenerator();
-      this.#lottoTickets.push(nums);
+      this.#lottoTickets.push(new Lotto(nums));
     }
   }
 
   showLottoTickets() {
-    this.#lottoTickets.forEach((ticket) => View.output(ticket));
+    this.#lottoTickets.forEach((ticket) => View.output(ticket.returnNumbers()));
   }
 
   async askWinningNum() {
@@ -70,7 +73,6 @@ class LottoController {
       const isValid = this.validateWinningNum(removedSpace);
 
       if (isValid === true) {
-        this.winningNum = input;
         break;
       }
     }
@@ -79,8 +81,8 @@ class LottoController {
   validateWinningNum(str) {
     try {
       Validator.isLottoNumSeperatedByComma(str);
-      const lotto = new Lotto(str.split(","));
-      this.winningNum = lotto.returnNumbers();
+      const lotto = new Lotto(str.split(",").map((s) => Number(s)));
+      this.#winningNum = lotto.returnNumbers();
     } catch (err) {
       View.output(err);
       return false;
@@ -92,7 +94,9 @@ class LottoController {
     while (true) {
       const input = await View.input(InfoMsg.ASK_BONUS_NUM);
       const isValid = this.validateBonusNum(input);
+      this.#bonusNum = input;
       if (isValid === true) {
+        this.#bonusNum = Number(input);
         break;
       }
     }
@@ -100,13 +104,35 @@ class LottoController {
 
   validateBonusNum(input) {
     try {
-      const bonusNum = new BonusNum(input, this.winningNum);
-      this.bonusNum = bonusNum.returnNum();
+      const bonusNum = new BonusNum(Number(input), this.#winningNum);
+      // this.bonusNum = bonusNum.returnNum();
     } catch (err) {
       View.output(err);
       return false;
     }
     return true;
+  }
+
+  checkResult() {
+    this.#lottoTickets.forEach((lottoTicket) => {
+      const rank = lottoTicket.checkRank(
+        lottoTicket.returnNumbers(),
+        this.#winningNum,
+        this.#bonusNum
+      );
+      if (rank !== false) {
+        this.#rankStats[rank] = (this.#rankStats[rank] || 0) + 1;
+      }
+    });
+  }
+
+  printRankStat() {
+    View.output(InfoMsg.WINNING_STATS);
+    View.output(InfoMsg.fifthRankResult(this.#rankStats[5] || 0));
+    View.output(InfoMsg.fourthRankResult(this.#rankStats[4] || 0));
+    View.output(InfoMsg.thirdRankResult(this.#rankStats[3] || 0));
+    View.output(InfoMsg.secondRankResult(this.#rankStats[2] || 0));
+    View.output(InfoMsg.firstRankResult(this.#rankStats[1] || 0));
   }
 }
 

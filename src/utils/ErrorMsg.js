@@ -16,7 +16,7 @@ const ErrorMsg = {
   },
   BONUS_NUM: {
     IS_NOT_A_NUM: `${ERROR_TAG} 보너스 번호는 1개의 숫자만 입력해주세요`,
-    INCLUDES_IN_LOTTO_NUM: `${ERROR_TAG} 보너스 번호는 당첨번호와 중복될 수 없습니다`,
+    INCLUDES_IN_LOTTO_NUM: `${ERROR_TAG} 보너스 번호는 당첨 번호와 중복될 수 없습니다`,
   },
 };
 

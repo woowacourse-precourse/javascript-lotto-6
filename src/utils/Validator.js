@@ -44,7 +44,7 @@ const Validator = {
       throw new Error(ErrorMsg.BONUS_NUM.IS_NOT_A_NUM);
     }
   },
-  bonusIsSameWithLotto(bonusNum, lottoNum) {
+  isBonusSameWithLotto(bonusNum, lottoNum) {
     if (lottoNum.includes(bonusNum)) {
       throw new Error(ErrorMsg.BONUS_NUM.INCLUDES_IN_LOTTO_NUM);
     }
