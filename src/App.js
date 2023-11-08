@@ -6,47 +6,60 @@ import Lotto from './Lotto.js';
 import LottoResultCalculator from './LottoMachine.js';
 import OutputView from './OutputView.js';
 
-const inputview = new InputView();
-const machine = new Machine();
-const lottoGerner = new LottoGenerator();
-const outputView = new OutputView();
 class App {
+  constructor() {
+    this.inputview = new InputView();
+    this.machine = new Machine();
+    this.lottoGenerator = new LottoGenerator();
+    this.outputView = new OutputView();
+  }
+
   async play() {
+    try {
+      const amountLotto = await this.getAndValidateAmountMoney();
+      const purchase = this.lottoGenerator.purchaseLotto(amountLotto);
+
+      const winningNumber = await this.getAndValidateWinningNumber();
+      const bonusNumber = await this.getAndValidateBonusNumber();
+
+      const results = LottoResultCalculator.calculateResults(purchase, winningNumber, bonusNumber);
+      this.outputView.printResult(results);
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+
+  async getAndValidateAmountMoney() {
     while (true) {
       try {
-        await inputview.AmountOfMoney();
-        break;
+        const playerMoney = await this.inputview.amountOfMoney();
+        return this.machine.CalculatorOfLottoAmount(playerMoney);
       } catch (error) {
         Console.print(error.message);
       }
     }
+  }
 
-    const amountLotto = machine.CalculatorOfLottoAmount(inputview.playerMoney);
-    const purchase = lottoGerner.purchaseLotto(amountLotto);
-
-    let inputLottoNumber = 0;
+  async getAndValidateWinningNumber() {
     while (true) {
       try {
-        inputLottoNumber = await inputview.WinningNumber();
-        break;
+        const inputLottoNumber = await this.inputview.playerWinningNumber();
+        return inputLottoNumber;
       } catch (error) {
         Console.print(error.message);
       }
     }
+  }
 
-    const winningNumber = inputview.toNumberArray(inputLottoNumber);
-    const lotto = new Lotto(winningNumber);
+  async getAndValidateBonusNumber() {
     while (true) {
       try {
-        await inputview.BonusNumber();
-        break;
+        const bonusNumber = await this.inputview.playerBonusNumber();
+        return bonusNumber;
       } catch (error) {
         Console.print(error.message);
       }
     }
-
-    const results = LottoResultCalculator.calculateResults(purchase, winningNumber, inputview.bonusNumber);
-    outputView.printResult(results);
   }
 }
 

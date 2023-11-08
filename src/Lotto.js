@@ -1,4 +1,4 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
 
 class Lotto {
   #numbers;
@@ -10,8 +10,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      Console.print(numbers.length);
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== numbers.length) {
@@ -24,9 +23,10 @@ class Lotto {
       }
     }
     if (numbers.some((item) => typeof item === 'string')) {
-      throw new Error('[ERROR]');
+      throw new Error('[ERROR] 숫자만 입력 해 주세요.');
     }
   }
+
   getNumbers() {
     return [...this.#numbers]; // 배열 복사본을 반환하여 원본을 보호합니다.
   }
@@ -54,8 +54,4 @@ class Lotto {
 
 export default Lotto;
 
-
-  // TODO: 추가 기능 구현
-
-
-
+// TODO: 추가 기능 구현
