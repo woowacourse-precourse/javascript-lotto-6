@@ -22,7 +22,7 @@ describe("클래스 테스트", () => {
         expect(app.getAmount()).rejects.toThrowError('[ERROR] 입력값이 잘못 되었습니다.');
     });
 
-    test('구매 금액이 1000원 단위가 아니라면 예외가 발생한다.', () => {
+    test('구매 금액이 1000원 미만이면 예외가 발생한다.', () => {
         //given
         const input = '100';
         const playerInputMock = jest.fn(() => input);
@@ -71,6 +71,19 @@ describe("클래스 테스트", () => {
 
         //then
         expect(result).toEqual([1, 2, 5, 6, 7, 43]);
+    });
+
+    test('보너스 번호를 입력하지 않았을경우 예외가 발생한다.', () => {
+        //given
+        const winningNumber = new Lotto([1, 2, 3, 4, 5, 6]);
+        const input = null;
+
+        //when
+        const playerInputMock = jest.fn(() => input);
+        const app = new App(playerInputMock);
+
+        //then
+        expect(app.getBonusNumber(winningNumber)).rejects.toThrowError('[ERROR] 보너스 번호는 1부터 45 사이의 한개의 정수여야 합니다.');
     });
 
     test('보너스 번호와 입력한 로또 번호가 중복일시 예외가 발생한다.', () => {
