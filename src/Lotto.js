@@ -45,6 +45,26 @@ class Lotto {
       return count;
     }, 0);
   }
+
+  /**
+   * @param {number[]} numbers
+   * @param {number} bonus
+   * @returns {number}
+   */
+  getRank(numbers, bonus) {
+    const match = this.getMatchNumberCount(numbers);
+
+    if (match <= 6 - 5 + 1) {
+      return 0;
+    }
+    if (match === 6) {
+      return 1;
+    }
+    if (match === 6 - 1 && this.#numbers.includes(bonus)) {
+      return 2;
+    }
+    return 6 - match + 2;
+  }
 }
 
 export default Lotto;
