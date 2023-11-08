@@ -25,7 +25,6 @@ export default class InputReader {
       if (!this.#isOk(response)) {
         throw new GameError(ERROR_MESSAGE.INVALID_RESPONSE);
       }
-
       return response.trim();
     } catch (error) {
       this.#alert(error.message);

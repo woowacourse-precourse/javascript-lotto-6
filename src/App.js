@@ -1,9 +1,6 @@
 import InputReader from './view/InputReader.js';
 import PromptPrinter from './view/promptPrinter.js';
-import {
-  ValidatePurchasePriceUserInput,
-  ValidateBonusNumberUserInput,
-} from './validator/ValidateUserInput.js';
+import { ValidatePurchasePriceUserInput } from './validator/ValidateUserInput.js';
 import WinningNumbersUserInputValidator from './validator/WinningNumbersUserInputValidator.js';
 import LottoMachine from './domains/LottoMachine.js';
 import { LOTTO } from './constants/lotto.js';
@@ -11,6 +8,7 @@ import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
 import paramType from './lib/paramType/src/paramType.js';
 import LottoDrawChecker from './domains/LottoDrawChecker.js';
 import LottoReward from './domains/LottoReward.js';
+import BonusNumberUserInputValidator from './validator/BonusNumberUserInputValidator.js';
 
 class App {
   #inputReader;
@@ -67,7 +65,7 @@ class App {
   async #requestBonusNumber(winningNumbers) {
     try {
       const bonusNumber = await this.#inputReader.bonusNumber();
-      new ValidateBonusNumberUserInput(bonusNumber, winningNumbers);
+      new BonusNumberUserInputValidator(bonusNumber, winningNumbers);
 
       return bonusNumber;
     } catch (error) {
