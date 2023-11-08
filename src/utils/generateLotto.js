@@ -1,4 +1,4 @@
-import Lotto from '../Lotto.js';
+import Lotto from '../domain/Lotto.js';
 import CONSTANTS from '../constants/constants.js';
 import generateRandomNumber from './generateRandomNumber.js';
 

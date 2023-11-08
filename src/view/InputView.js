@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import MESSAGE from '../constants/message.js';
-import Validator from '../utils/Validator.js';
+import Validator from '../domain/Validator.js';
 
 const InputView = {
   readPurchaseAmount: async () => {

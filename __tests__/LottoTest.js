@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import generateLotto from '../src/utils/generateLotto.js';
 import getWinningStatistics from '../src/utils/getWinningStatistics.js';
-import Lotto from '../src/Lotto.js';
+import Lotto from '../src/domain/Lotto.js';
 import getRateOfReturn from '../src/utils/getRateOfReturn.js';
 
 const mockRandoms = numbers => {

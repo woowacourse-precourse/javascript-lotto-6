@@ -1,4 +1,4 @@
-import Lotto from '../src/Lotto.js';
+import Lotto from '../src/domain/Lotto.js';
 import ERROR from '../src/constants/error.js';
 
 describe('로또 클래스 예외 테스트', () => {

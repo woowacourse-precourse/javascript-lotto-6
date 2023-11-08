@@ -1,4 +1,4 @@
-import Validator from '../src/utils/Validator';
+import Validator from '../src/domain/Validator';
 import ERROR from '../src/constants/error.js';
 
 describe('입력 예외 상황 테스트', () => {
