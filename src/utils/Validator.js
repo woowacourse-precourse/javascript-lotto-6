@@ -7,13 +7,10 @@ class Validator {
       throw new Error("[ERROR] 1,000원 단위의 구입금액만 입력 가능합니다.");
   }
   static validateLottoNumbers(inputArr) {
-    const splitNumbers = inputArr
-      .split(",")
-      .map((number) => parseInt(number, 10));
-    if (splitNumbers.length !== 6) {
+    if (inputArr.length !== 6) {
       throw new Error("[ERROR] 6개의 숫자를 입력해야 합니다.");
     }
-    for (const number of splitNumbers) {
+    for (const number of inputArr) {
       if (isNaN(number)) {
         throw new Error("[ERROR] 숫자만 입력 가능합니다.");
       }
@@ -21,7 +18,7 @@ class Validator {
         throw new Error("[ERROR] 1~45 범위의 숫자만 입력 가능합니다.");
       }
     }
-    if (!Validator.#validateLottoDuplication(splitNumbers)) {
+    if (!Validator.#validateLottoDuplication(inputArr)) {
       throw new Error("[ERROR] 중복되지 않는 6개의 숫자만 입력 가능합니다.");
     }
   }
