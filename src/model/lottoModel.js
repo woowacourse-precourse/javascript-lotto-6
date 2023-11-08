@@ -16,6 +16,16 @@ export default class LottoModel {
     this.#bonusNumber;
   }
 
+  settingLottoValue(purchaseAmount) {
+    this.setPurchaseAmount(purchaseAmount);
+    this.setPurchaseCount();
+    this.setLottoArray();
+  }
+  settingWinningValue(winningInput, bonusNumber) {
+    this.setWinningNumber(winningInput);
+    this.setBonusNumber(bonusNumber);
+  }
+
   setPurchaseAmount(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
   }
