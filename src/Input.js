@@ -24,7 +24,7 @@ class Input {
 
       if (Validator.isValidPurchaseAmount(purchaseAmout)) return purchaseAmout;
     } catch (error) {
-      console.log(error);
+      Console.print(error);
       await this.getPurchaseAmount();
     }
   }
