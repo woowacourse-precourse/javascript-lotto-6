@@ -1,4 +1,5 @@
-import {Console} from '@woowacourse/mission-utils';
+import {MissionUtils, Console} from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 /**
  * @typedef {Object} LottoInfo
@@ -47,6 +48,18 @@ class App {
    * @param {number} money
    * @return {Lotto[]} */
   buyLottos(money) {
+    const LOTTO_COUNT = Math.floor(money / 1000);
+    const LOTTOS = [];
+
+    Console.print(`${LOTTO_COUNT}개를 구매했습니다.`);
+    for (let i = 0; i < LOTTO_COUNT; i++) {
+      const RANDOMS = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const LOTTO = new Lotto(RANDOMS);
+      Console.print(LOTTO.toString());
+      LOTTOS.push(LOTTO);
+    }
+
+    return LOTTOS;
   }
 
   /**
