@@ -4,6 +4,7 @@ import Output from "../Output/Output";
 import LottoCount from "../domain/LottoCount";
 import Lottos from "../domain/Lottos";
 import WinningNumber from "../domain/WinningNumber";
+import BonusNumber from "../domain/BonusNumber";
 
 class LottoController {
   #lottoCount;
@@ -42,8 +43,8 @@ class LottoController {
     const bonusNumber = await Input.lottoBonusNumber(
       this.#winningNumber.getWinningNumber()
     );
-    Console.print(bonusNumber);
-    Console.print(typeof bonusNumber);
+    this.#winningNumber = new BonusNumber(bonusNumber);
+    Console.print(this.#winningNumber.getBonusNumber());
   }
 }
 
