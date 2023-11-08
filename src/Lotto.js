@@ -22,10 +22,7 @@ class Lotto {
       case 6:
         return PRIZE.six;
       case 5:
-        if (this.#numbers.includes(bonus)) {
-          return PRIZE.fivePlus;
-        }
-        return PRIZE.five;
+        return this.#numbers.includes(bonus) ? PRIZE.fivePlus : PRIZE.five;
       case 4:
         return PRIZE.four;
       case 3:
