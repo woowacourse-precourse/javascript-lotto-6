@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import { lotto } from "../constants/constants.js";
 import { inputMessage, winningMessage } from "../constants/messages.js";
 
-import Lotto from "../Lotto.js";
+import WinningLotto from "../domain/WinningLotto.js";
 import Validator from "../validators/Validator.js";
 
 class View {
@@ -15,6 +15,7 @@ class View {
           inputMessage.PURCHASE_MESSAGE
         );
         cash = parseInt(input);
+
         if (Validator.checkLottoPurchase(cash)) break;
       } catch (error) {
         Console.print(error.message);
@@ -32,26 +33,26 @@ class View {
   }
 
   #createInputLotto(input) {
-    const lottoArray = input.split(",").map(Number);
-    return new Lotto(lottoArray);
+    const lottoInput = input.split(",").map(Number);
+    return new WinningLotto(lottoInput);
   }
 
   async getWinningLotto() {
     Console.print(inputMessage.ENTER);
 
     let input = await Console.readLineAsync(inputMessage.LOTTO_MESSAGE);
-    let lotto;
+    let winningLotto;
 
     while (true) {
       try {
-        lotto = this.#createInputLotto(input);
+        winningLotto = this.#createInputLotto(input);
         break;
       } catch (error) {
         Console.print(error.message);
         input = await Console.readLineAsync(inputMessage.LOTTO_MESSAGE);
       }
     }
-    return lotto;
+    return winningLotto;
   }
 
   async getBonusNumber(winningLotto) {

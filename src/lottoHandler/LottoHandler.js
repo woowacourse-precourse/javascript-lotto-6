@@ -1,7 +1,7 @@
 import { Random } from "@woowacourse/mission-utils";
 import { lotto, lottoCount, lottoPrize } from "../constants/constants.js";
 
-import Lotto from "../Lotto.js";
+import Lotto from "../domain/Lotto.js";
 
 class LottoHandler {
   getLottoCount(cash) {
