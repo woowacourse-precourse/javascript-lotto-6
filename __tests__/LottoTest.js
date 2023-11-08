@@ -54,8 +54,8 @@ describe("로또 클래스 테스트", () => {
 
 	test("올바른 입력값을 입력시 객체가 생성된다.", () => {
 		const testVal = [1, 2, 3, 4, 5, 6];
-		expect(() => {
-			new Lotto(testVal.join(","));
-		}).not.toThrow("[ERROR]");
+		const lotto = new Lotto(testVal.join(","));
+		expect(() => lotto).not.toThrow("[ERROR]");
+		expect(lotto.getNumbers()).toStrictEqual(['1', '2', '3', '4', '5', '6']);
 	});
 });
