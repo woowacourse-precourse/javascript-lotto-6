@@ -28,6 +28,7 @@ export const ERROR = {
   NO_INCLUDE: "[ERROR] 보너스 번호는 기존 번호와 겹치지 않아야 합니다.",
   ONE_NUMBER: "[ERROR] 보너스 번호는 1개의 숫자만 입력해야 합니다.",
   NO_THOUSAND_UNIT: "[ERROR] 구입금액은 천 원 단위여야 합니다.",
+  MAXIMUM_ATTEMPTS_REACHED: "[ERROR] 최대 입력 횟수를 초과 했습니다. 다음에 다시 시도해 주세요.",
 };
 
 export const PRIZE_MONEY = {
