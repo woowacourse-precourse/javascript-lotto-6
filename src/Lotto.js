@@ -1,18 +1,31 @@
+import LottoMachine from "./LottoMachine.js";
+import ValidatorUtil from "../validators/ValidatorUtil.js";
+
 class Lotto {
-  #numbers;
+	#numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
+	constructor(numbers, bonus) {
+		this.#validate(numbers, bonus);
+		this.#numbers = numbers;
+		this.bonus = bonus;
+	}
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
-  }
+	#validate(numbers, bonus) {
+		ValidatorUtil.isDuplicated(numbers, bonus);
+	}
 
-  // TODO: 추가 기능 구현
+	getResult(userNumbers) {
+		const lottoCount = LottoMachine.getPurchasedLottoAmount(
+			userNumbers,
+			this.#numbers
+		);
+
+		const isBonus = null;
+		if (lottoCount === 5)
+			isBonus = LottoMachine.isBonus(userNumbers, this.bonus);
+
+		return { lottoCount, isBonus };
+	}
 }
 
 export default Lotto;
