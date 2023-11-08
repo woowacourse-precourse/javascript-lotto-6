@@ -1,5 +1,7 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import Input from "./UI/Input.js";
+import Output from "./UI/Output.js";
 
 class LottoGame {
   #purchaseAmount
@@ -18,33 +20,32 @@ class LottoGame {
     this.#bonusNumber = "";
     this.#winningResult = [];
     this.#profitRate = 0.0;
+
+    this.input = new Input();
+    this.output = new Output();
   }
 
   async start() {
-    this.#purchaseAmount = await this.buyLotto();
+    this.#purchaseAmount = await this.buyLotto(); //입력
     this.#ticketCount = this.#purchaseAmount / 1000;
-    this.setLottoTickets(this.#lottoTickets, this.#ticketCount);
+    this.setLottoTickets(this.#lottoTickets, this.#ticketCount);  //이름 generateLottoTickets로 바꾸기
     this.#lottoTickets = this.sortLottoTickets(this.#lottoTickets);
-    this.printLottoTickets(this.#lottoTickets, this.#ticketCount);
+    this.output.boughtTickets(this.#lottoTickets, this.#ticketCount);
     const inputWinningTicket = await this.inputWinningNumbers();
     this.#winningTicket = inputWinningTicket.map(number => Number(number));
     this.#bonusNumber = await this.inputBonusNumbers(this.#winningTicket);
 
-    this.#winningResult = this.checkLottoResult(this.#lottoTickets, this.#winningTicket, this.#bonusNumber);
-    this.printWinningResults(this.#winningResult);
+    this.#winningResult = this.checkLottoResult(this.#lottoTickets, this.#winningTicket, this.#bonusNumber); 
+    this.output.winningResults(this.#winningResult);
 
     this.#profitRate = this.calculateProfitRate(this.#winningResult, this.#purchaseAmount);
-    this.printProfitRate(this.#profitRate);
-  }
-
-  setTicketCount(count) {
-    this.#ticketCount = count;
+    this.output.profitRate(this.#profitRate);
   }
 
   async buyLotto() {
     while (true) {
       try {
-        const inputPrice = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
+        const inputPrice = await this.input.price();
 
         const tempPrice = Number(inputPrice);
         this.#validatePrice(tempPrice);
@@ -93,22 +94,13 @@ class LottoGame {
     return sortedLottoTickets;
   }
 
-  printLottoTickets(lottoTickets, count) {
-    Console.print(`${count}개를 구매했습니다.`);
-    lottoTickets.forEach(lottoTicket => {
-      Console.print(`[${lottoTicket.join(', ')}]`);
-    });
-  }
-
-
   async inputWinningNumbers() {
     while (true) {
       try {
-        const inputNumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
-        const winningNumbers = inputNumbers.split(',');;
+        const inputNumbers = await this.input.winningNumbers();
+        const winningNumbers = inputNumbers.split(',');
         const winningTicket = new Lotto(winningNumbers);
         const sortedWinningTicket = winningTicket.getSortNumbers();
-        //this.#validateWinningNumbers(sortedWinningTicket);
         return sortedWinningTicket;
       } catch (error) {
         Console.print(error.message);
@@ -116,31 +108,10 @@ class LottoGame {
     }
   }
 
-  #validateWinningNumbers(numbers) {
-    const termNumbers = [];
-    numbers.forEach(number => {
-      number = Number(number);
-      if (isNaN(number)) {
-        throw new Error("[ERROR] 숫자가 아닌 입력이 있습니다.")
-      }
-      if (!Number.isInteger(number)) {
-        throw new Error("[ERROR] 정수가 아닌 입력이 있습니다.")
-      }
-      if (number < 1 || number > 45) {
-        throw new Error("[ERROR] 1부터 45 사이의 숫자가 아닌 입력이 있습니다.")
-      }
-      if (termNumbers.includes(number)) {
-        throw new Error("[ERROR] 중복된 숫자가 있습니다.")
-      }
-
-      termNumbers.push(number);
-    });
-  }
-
   async inputBonusNumbers(winningNumbers) {
     while (true) {
       try {
-        const inputNumbers = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+        const inputNumbers = await this.input.bonusNumber();
         this.#validateBonusNumbers(inputNumbers, winningNumbers);
         return inputNumbers;
       } catch (error) {
@@ -196,20 +167,6 @@ class LottoGame {
     return lottoTicket.includes(bonusNumber);
   }
 
-  printWinningResults(winningResult) {
-    const prizeMoney = ['5,000', '50,000', '1,500,000', '30,000,000', '2,000,000,000'];
-    const matchCountList = [3, 4, 5, 5, 6];
-    const reversedWinningResult = [...winningResult].reverse();
-    reversedWinningResult.forEach((result, index) => {
-      let bonusText = '';
-      if (index === 3) {
-        bonusText = ', 보너스 볼 일치';
-      }
-      Console.print(`${matchCountList[index]}개 일치${bonusText} (${prizeMoney[index]}원) - ${result}개`)
-    });
-  }
-
-
   calculateProfitRate(winningResult, purchaseAmount) {
     const prizeMoney = [2000000000, 30000000, 1500000, 50000, 5000, 0];
 
@@ -218,10 +175,6 @@ class LottoGame {
     const profitRate = ((totalWinnings / purchaseAmount) * 100).toFixed(1);
 
     return profitRate;
-  }
-
-  printProfitRate(profitRate) {
-    Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 }
 
