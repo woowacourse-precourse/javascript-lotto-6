@@ -61,13 +61,24 @@ class Game {
     this.#bonusNumber = await Game.#enterBonusNumber();
   }
 
+  static #howManyMatch(winLotto, myLotto) {
+    const winNumbers = winLotto.getNumbers();
+    const myNumbers = myLotto.getNumbers();
+    const mergedNumbers = [...winNumbers, ...myNumbers];
+    return 12 - new Set(mergedNumbers).size;
+  }
+
+  #hasBonusNumber(myLotto) {
+    const myNumbers = myLotto.getNumbers();
+    return myNumbers.include(this.#bonusNumber);
+  }
+
   async play() {
     await this.#setLottoAmount();
     this.#setMyLotto();
     this.#printMyLotto();
     await this.#setWinLotto();
     await this.#setBonusNumber();
-    Console.print(this.#bonusNumber);
   }
 }
 
