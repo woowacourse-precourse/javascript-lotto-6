@@ -32,6 +32,7 @@ const STRINGS = Object.freeze({
   LOTTO_BEHIND_COVER: ']',
   DASH: '-',
   SPACE: ' ',
+  LOTTO_NUMBERS_SEPARATOR: ',',
   UNIT_OF_LOTTO: '개',
 });
 

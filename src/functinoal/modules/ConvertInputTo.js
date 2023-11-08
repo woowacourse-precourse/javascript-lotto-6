@@ -9,6 +9,7 @@ const {
   PURCHASE_PRICE_INPUT_MESSAGE,
   WINNING_NUMBER_INPUT_MESSAGE,
   BONUS_NUMBER_INPUT_MESSAGE,
+  LOTTO_NUMBERS_SEPARATOR,
   LOTTO_PRICE,
   LOTTO_NUMBER_UPPER,
   MISS_STATE,
@@ -56,7 +57,7 @@ class ConvertInputTo {
       );
       try {
         ErrorCheck.lottoNumbersString(numbersString);
-        return numbersString.split(',').map(Number);
+        return numbersString.split(LOTTO_NUMBERS_SEPARATOR).map(Number);
       } catch (error) {
         Print.errorMessage(error);
       }

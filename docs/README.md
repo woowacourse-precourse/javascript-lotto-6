@@ -72,7 +72,7 @@ Functional과 MVC 모두 다음과 같이 게임이 진행됨
 
 # Lotto
 
-로또의 정보가 담긴 클래스
+- 로또의 정보가 담긴 클래스
 
 ```jsx
 const lotto = new Lotto([1,2,3,4,5,6]);
@@ -88,6 +88,9 @@ const lotto = new Lotto([1,2,3,4,5,6]);
 
 매개변수가 1~45 범위의 중복되지 않은 정수 6개가 담긴 배열이 아니면 예외를 던짐
 
+**참고**
+
+해당 프로그램은 이 클래스 생성자를 통해 직접 예외가 던져지지 않도록 설계되었음 
 
 # App
 
@@ -122,7 +125,7 @@ const lottoArray = await ConvertInputTo.lottoArray();
 - 로또 구매금액이 1000 단위가 아니면 오류 메시지를 출력 후 다시 입력 받음
 
 ```jsx
-const purchasePrice = await purchasePrice();
+const purchasePrice = await ConvertInputTo.purchasePrice();
 ```
 
 
@@ -151,30 +154,20 @@ const purchasePrice = await purchasePrice();
 const lottoBoard = ConverInputTo.lottoBoard();
 ```
 
-### 'async winningNumbersArray()'
+### 'async lottoNumbersArray()'
 
-- `','` 로 구분되는 숫자 6개를 입력받아
+- `','` 로 구분되는 로또 수(1~45) 6개를 입력받아 해당 값들이 `Number` 형으로 담긴 배열로 반환
+- `','` 로 구분되는 로또 수(1~45) 6개가 아니면 다시 입력 받음
 
 ```jsx
-'사용 방법'
+const winningNumber = await ConverInputTo.lottoNumbersArray();
 ```
 
-**매개변수**
+**입출력예시**
 
-`'매개변수'`
+```
 
-'매개변수 설명'
-
-**반환**
-
-'반환 값'
-
-**예외**
-
-'예외 경우'
-
-
-
+```
 
 
 
