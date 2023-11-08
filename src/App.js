@@ -1,6 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import ERROR from './error.js';
-import Lotto from "../src/Lotto";
+import Lotto from './Lotto.js';
 
 class App {
   constructor() {
@@ -13,8 +13,8 @@ class App {
       3: 0,
       4: 0,
       5: 0,
-      0: 0
-    }
+      0: 0,
+    };
   }
 
   async play() {
@@ -22,12 +22,12 @@ class App {
     await this.lottoMachine();
   }
 
-  async user(){
+  async user() {
     await this.getUserInput();
     this.totalLottoListUser();
   }
 
-  async lottoMachine(){
+  async lottoMachine() {
     await this.setLottoNumber();
     await this.setLottoBonusNumber();
     this.checkLottoResult();
@@ -65,29 +65,21 @@ class App {
     return true;
   }
 
-  calcLottoQuantity() {
-    const count = this.userMoneyInput / 1000;
-    Console.print(`${count}개를 구매했습니다.`);
-    return count;
-  }
-
   totalLottoListUser() {
-    const num = this.calcLottoQuantity();
+    const num = this.userMoneyInput / 1000;
+    Console.print(`${num}개를 구매했습니다.`);
     let lottoList = [];
 
     for (let i = 0; i < num; i++) {
-      let randomNumbers = this.generateLotto();
-      randomNumbers.sort(function (a, b) {
-        return a - b;
-      })
-      Console.print(`[${randomNumbers.join(', ')}]`);
-      lottoList.push(randomNumbers);
+      const randomLotto = new Lotto(this.generateLotto());
+      Console.print(`[${randomLotto.getNumbers().join(', ')}]`);
+      lottoList.push(randomLotto);
     }
     this.userByLottoList = lottoList;
   }
 
   generateLotto() {
-    return Random.pickUniqueNumbersInRange(1, 45, 7);
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   async setLottoNumber() {
@@ -98,12 +90,11 @@ class App {
         const isDuplicate = new Set(numbers).size !== numbers.length;
 
         if (!isDuplicate && numbers.length === 6) {
-          this.winningLotto = numbers;
+          this.winningLotto = new Lotto(numbers);
           break;
         } else {
           throw new Error("[ERROR]: 중복된 수 입니다.");
         }
-
       } catch (error) {
         Console.print(ERROR.INVALID_INPUT_LOTTO);
       }
@@ -114,9 +105,9 @@ class App {
     while (true) {
       try {
         const result = await Console.readLineAsync("보너스 번호를 입력해 주세요");
-        const isDuplicate = this.winningLotto.includes(Number(result));
+        const isDuplicate = this.winningLotto.inBonusNumbers(Number(result));
         if (!isDuplicate && result.length === 1) {
-          this.winningLotto.push(Number(result));
+          this.winningLotto.addBonusNumber(Number(result));
           break;
         }
       } catch (error) {
@@ -126,52 +117,44 @@ class App {
   }
 
   async checkLottoResult() {
-    const mainNumber = this.winningLotto.slice(0, 6);
-    const bonusNumber = this.winningLotto.slice(6);
-    this.forCheckUserTotalLotto(mainNumber,bonusNumber);
+    const mainNumber = this.winningLotto.getNumbers();
+    const bonusNumber = this.winningLotto.getBonusNumber();
+    this.forCheckUserTotalLotto(mainNumber, bonusNumber);
     this.setForError();
     this.printUserLottoResult();
   }
 
-  forCheckUserTotalLotto(mainNumber,bonusNumber){
-    this.userByLottoList.forEach((lotto, index) => {
-      this.checkUserLotto(mainNumber, bonusNumber, lotto);
+  forCheckUserTotalLotto(mainNumber, bonusNumber) {
+    this.userByLottoList.forEach((lotto) => {
+      this.checkUserLotto(mainNumber, bonusNumber, lotto.getNumbers());
     });
   }
 
-  checkUserLotto(mainNumber, bonusNumber, lotto) {
-    let checkNumber = mainNumber.filter(x => lotto.includes(x));
-    let countScore = checkNumber.length;
-
-    if (countScore === 3) {
+  checkUserLotto(mainNumber, bonusNumber, userLotto) {
+    const matchNumbers = this.winningLotto.checkLotto(new Lotto(userLotto));
+    if (matchNumbers === 3) {
       this.countWinner[5]++;
     }
-
-    if (countScore === 4) {
+    if (matchNumbers === 4) {
       this.countWinner[4]++;
     }
-
-    if (countScore === 5) {
-      const bonusMatch = lotto.includes(bonusNumber[0]);
-      // 보너스 포함 5개 3등 제외 5개 2등 
-      if (bonusMatch) {
+    if (matchNumbers === 5) {
+      // 보너스 문자 여부 2등 3등
+      if (bonusNumber !== null && new Lotto(userLotto).inBonusNumbers(bonusNumber)) {
         this.countWinner[3]++;
-      } 
-      if (!bonusMatch) {
+      } else {
         this.countWinner[2]++;
       }
     }
-
-    if (countScore === 6) {
+    if (matchNumbers === 6) {
       this.countWinner[1]++;
     }
-
-    if (countScore !== 3 && countScore !== 4 && countScore !== 5 && countScore !== 6) {
+    if (matchNumbers !== 3 && matchNumbers !== 4 && matchNumbers !== 5 && matchNumbers !== 6) {
       this.countWinner[6]++;
     }
   }
 
-  setForError(){
+  setForError() {
     // 아무도 걸리지 않은 등수 값 0 처리 undefined 방지
     for (const score in this.countWinner) {
       if (this.countWinner[score] === 0) {
@@ -180,25 +163,25 @@ class App {
     }
   }
 
-  printUserLottoResult(){
-    this.calculateRevenue();
-    this.printLottoResult(this.calculateRevenue());
+  printUserLottoResult() {
+    const profitRate = this.calculateRevenue();
+    this.printLottoResult(profitRate);
   }
 
-  calculateRevenue(){
+  calculateRevenue() {
     const totalSpentMoney = this.userMoneyInput;
-
-    const totalWinnings = (this.countWinner[5] * 5000) +
-      (this.countWinner[4] * 50000) +
-      (this.countWinner[3] * 1500000) +
-      (this.countWinner[2] * 30000000) +
-      (this.countWinner[1] * 2000000000);
-
+    const totalWinnings = (
+      this.countWinner[5] * 5000 +
+      this.countWinner[4] * 50000 +
+      this.countWinner[3] * 1500000 +
+      this.countWinner[2] * 30000000 +
+      this.countWinner[1] * 2000000000
+    );
     const profitRate = (totalWinnings / totalSpentMoney) * 100;
     return profitRate;
   }
 
-  printLottoResult(profitRate){
+  printLottoResult(profitRate) {
     Console.print("당첨 통계");
     Console.print("---");
     Console.print(`3개 일치 (5,000원) - ${this.countWinner[5]}개`);
@@ -208,7 +191,6 @@ class App {
     Console.print(`6개 일치 (2,000,000,000원) - ${this.countWinner[1]}개`);
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
-  
 }
 
 export default App;
