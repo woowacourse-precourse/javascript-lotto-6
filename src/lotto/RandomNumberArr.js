@@ -11,8 +11,8 @@ export default class RandomNumber {
 
   printRandomNumber() {
     this.#randomNumber.forEach((numbers, idx) => {
-      const tmp = this.#makeArrStr(numbers);
-      printMethod(tmp);
+      const numberStr = this.#makeArrStr(numbers);
+      printMethod(numberStr);
       if (idx === this.#randomNumber.length - 1) printMethod('\n');
     });
   }
@@ -21,14 +21,10 @@ export default class RandomNumber {
     const tmpArr = arr.slice();
     let tmpStr = '';
     tmpStr += '[';
-    tmpStr += `${tmpArr.shift()}, `;
-    tmpStr += `${tmpArr.shift()}, `;
-    tmpStr += `${tmpArr.shift()}, `;
-    tmpStr += `${tmpArr.shift()}, `;
-    tmpStr += `${tmpArr.shift()}, `;
-    tmpStr += `${tmpArr.shift()}`;
-    tmpStr += ']';
-
+    tmpArr.forEach((str) => {
+      tmpStr += `${str}, `;
+    });
+    tmpStr = tmpStr.replace(/,.$/, ']');
     return tmpStr;
   }
 

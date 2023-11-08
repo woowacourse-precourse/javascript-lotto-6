@@ -21,14 +21,29 @@ export default class PurchaseAmount {
 
   #validate(purchaseAmount) {
     // 숫자인지 체크
-    if (isNaN(purchaseAmount)) throw new Error(errorConstants.NOT_A_NUMBER);
+    this.#isNumber(purchaseAmount);
     // 0 체크
-    if (!purchaseAmount) throw new Error(errorConstants.NOT_ZERO);
+    this.#isNotZero(purchaseAmount);
     // 양옆 공백 체크
-    if (/\s/.test(String(purchaseAmount)))
-      throw new Error(errorConstants.NOT_EMPTY);
+    this.#isNotEmpty(purchaseAmount);
     // 1000단위 체크
-    if (purchaseAmount % magicNumber.UNIT !== magicNumber.ZERO)
+    this.#isRightUnit(purchaseAmount);
+  }
+
+  #isNumber(number) {
+    if (isNaN(number)) throw new Error(errorConstants.NOT_A_NUMBER);
+  }
+
+  #isNotZero(number) {
+    if (!number) throw new Error(errorConstants.NOT_ZERO);
+  }
+
+  #isNotEmpty(number) {
+    if (/\s/.test(String(number))) throw new Error(errorConstants.NOT_EMPTY);
+  }
+
+  #isRightUnit(number) {
+    if (number % magicNumber.UNIT !== magicNumber.ZERO)
       throw new Error(errorConstants.WRONG_UNIT);
   }
 
