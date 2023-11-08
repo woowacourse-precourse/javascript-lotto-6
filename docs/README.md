@@ -69,3 +69,34 @@
      - [x] 검사: 중복되지 않음
 2. [x] 로또 번호 반환
 3. [x] 보너스 번호 반환
+
+---
+
+## 클래스 구조
+
+- App: 앱
+  - LottoInterface: 로또 인터페이스 (입출력 담당)
+  - LottoManager: 로또 관리자 (메인 로직 담당)
+    - Lotto: 로또 객체
+    - WinningLotto: 당첨 로또 객체
+    - ResultOfDrawLotto: 로또 추첨 결과 정보 객체
+
+## 클래스의 주요 메서드
+
+- App
+  - `play()`: 앱 실행
+  - `#issueLottoes()`: 로또 발행
+  - `generateWinningLotto()`: 당첨 로또 생성
+  - `drawLottoes()`: 로또 추첨
+- LottoInterface
+  - `readAmountToPurchase()`: 구입 금액 입력
+  - `readWinningNumbers()`: 당첨 로또 번호 입력
+  - `readBonusNumber()`: 보너스 번호 입력
+  - `printError()`: 에러 메시지 출력
+  - `printPurchasedLottoes()`: 구입한 로또 출력
+  - `printWinningStatistics()`: 당첨 통계 출력
+- LottoManager
+  - `issueLottoes()`: 로또 발행
+  - `generateWinningLotto()`: 당첨 로또 생성
+  - `drawLottoes()`: 로또 추첨
+  - `calculateRateOfReturn()`: 로또 수익률 반환
