@@ -1,10 +1,10 @@
-import ExceptionList from "./ExceptionList";
+import ExceptionList from './ExceptionList';
 
 class BonusInput {
   bonus;
-  win;
+  
   constructor(bonus) {
-    this.validateBonusInput(bonus)
+    this.validateBonusInput(bonus);
     this.bonus = bonus;
   }
   validateBonusInput = (bonus) => {

@@ -14,19 +14,19 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
-    const exception=new ExceptionList();
+    const exception = new ExceptionList();
     exception.sameNumberError(numbers);
-    numbers.forEach((number)=>{
+    numbers.forEach((number) => {
       exception.isNaNError(number);
       exception.numberRangeError(number);
-    })
+    });
   }
   printNumbers() {
-    let stringNumber=`[${this.#numbers.join(', ')}]`
+    const stringNumber = `[${this.#numbers.join(', ')}]`;
     MissionUtils.Console.print(stringNumber);
   }
   compareWinNumbers(winNumber) {
-    let winCount=0;
+    let winCount = 0;
     winNumber.forEach((num) => {
       if (this.#numbers.includes(Number(num))) {
         winCount += 1;

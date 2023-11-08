@@ -10,9 +10,8 @@ class Money {
     this.calLottoCount();
   }
 
-  
   validateMoney = (payedMoney) => {
-    let exception = new ExceptionList();
+    const exception = new ExceptionList();
     exception.noInputError(payedMoney);
     exception.isZeroError(payedMoney);
     // exception.notThousandError(payedMoney);

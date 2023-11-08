@@ -33,7 +33,7 @@ class App {
       };
     }
     let check = new Check();
-    check.checkLotto(checkLotto,newMoney.payedMoney)
+    check.checkLotto(checkLotto, newMoney.payedMoney);
   }
 }
 

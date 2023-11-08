@@ -70,7 +70,7 @@ class Check {
     MissionUtils.Console.print(this.fiveBonusCorrect(countArray.shift()));
     MissionUtils.Console.print(this.sixCorrect(countArray.shift()));
   }
-  checkLotto(lottoArray,payedMoney){
+  checkLotto(lottoArray, payedMoney) {
     lottoArray.forEach((item) => {
       this.checkCount(item);
     });

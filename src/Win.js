@@ -1,14 +1,13 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import ExceptionList from './ExceptionList.js';
 
 class WinInput {
   win;
   constructor(numbers) {
-    this.validateWinInput(numbers)
+    this.validateWinInput(numbers);
     this.win = numbers.split(',');
   }
   validateWinInput = (winNumber) => {
-    let exception = new ExceptionList();
+    const exception = new ExceptionList();
     exception.noInputError(winNumber);
     const win = winNumber.split(',');
     exception.LengthError(win);
@@ -18,7 +17,6 @@ class WinInput {
     });
     exception.sameNumberError(win);
   };
-  
 }
 
 export default WinInput;

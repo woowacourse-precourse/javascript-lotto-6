@@ -19,25 +19,25 @@ class ExceptionList {
       throw new Error('[ERROR] 복권은 천원단위로만 구매할 수 있습니다.');
     }
   };
-  LengthError = (input)=>{
-    if(input.length!==6){
+  LengthError = (input) => {
+    if (input.length !== 6) {
       throw new Error('[ERROR] 6개의 숫자를 입력해주세요.');
     }
-  }
-  numberRangeError =(input)=>{
-    if(input<1||input>45){
+  };
+  numberRangeError = (input) => {
+    if (input < 1 || input > 45) {
       throw new Error('[ERROR] 1~45사이의 숫자를 입력해주세요.');
     }
-  }
-  sameNumberError =(input)=>{
+  };
+  sameNumberError = (input) => {
     if (new Set(input).size !== input.length) {
       throw new Error('[ERROR] 중복된 숫자가 입력되었습니다');
     }
-  }
-  sameBonusError =(win,bonus)=>{
-    if(win.includes(bonus)){
+  };
+  sameBonusError = (win, bonus) => {
+    if (win.includes(bonus)) {
       throw new Error('[ERROR] 당첨번호와 동일한 숫자가 입력되었습니다');
     }
-  }
+  };
 }
 export default ExceptionList;
