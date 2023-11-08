@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
+import { PRIZE_MONEY } from './constants/constants.js';
 
-class Calculate {
+class LottoResultCalculator {
   #userLottos;
 
   #winningNumbers;
@@ -75,13 +76,35 @@ class Calculate {
   #printResults() {
     Console.print('\n당첨 통계\n---');
 
-    Console.print(`3개 일치 (5,000원) - ${this.#results[3]}개`);
-    Console.print(`4개 일치 (50,000원) - ${this.#results[4]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${this.#results[5]}개`);
     Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#results['5+']}개`,
+      `3개 일치 (${this.#formatNumber(PRIZE_MONEY[3])}원) - ${
+        this.#results[3]
+      }개`,
     );
-    Console.print(`6개 일치 (2,000,000,000원) - ${this.#results[6]}개`);
+    Console.print(
+      `4개 일치 (${this.#formatNumber(PRIZE_MONEY[4])}원) - ${
+        this.#results[4]
+      }개`,
+    );
+    Console.print(
+      `5개 일치 (${this.#formatNumber(PRIZE_MONEY[5])}원) - ${
+        this.#results[5]
+      }개`,
+    );
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${this.#formatNumber(
+        PRIZE_MONEY['5+'],
+      )}원) - ${this.#results['5+']}개`,
+    );
+    Console.print(
+      `6개 일치 (${this.#formatNumber(PRIZE_MONEY[6])}원) - ${
+        this.#results[6]
+      }개`,
+    );
+  }
+
+  #formatNumber(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   get results() {
@@ -89,4 +112,4 @@ class Calculate {
   }
 }
 
-export default Calculate;
+export default LottoResultCalculator;
