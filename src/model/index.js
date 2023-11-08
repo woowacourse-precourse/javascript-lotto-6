@@ -23,13 +23,17 @@ class LottoModel {
   }
 
   getWinningStatistics(winningNumbers, bonus) {
-    const lottoResult = this.#userLottos.map((userLotto) =>
-      winningNumbers.compareWinningNumbers(userLotto, bonus.getBonusNumber()),
-    );
+    const lottoResult = this.#checkLottoResult(winningNumbers, bonus);
     const ranks = LottoModel.#calculateRanks(lottoResult);
     const rateOfReturn = this.#calculateRateOfReturn(ranks);
 
     return { ranks, rateOfReturn };
+  }
+
+  #checkLottoResult(winningNumbers, bonus) {
+    return this.#userLottos.map((userLotto) =>
+      winningNumbers.compareWinningNumbers(userLotto, bonus.getBonusNumber()),
+    );
   }
 
   static #calculateRanks(lottoResult) {
