@@ -23,6 +23,7 @@ export const VALUE = Object.freeze({
   maxLottoNumber: 45,
   lottoNumberCount: 6,
   lottoUnit: 1000,
+  decimalPlace: 1,
 });
 
 export const MESSAGE = Object.freeze({

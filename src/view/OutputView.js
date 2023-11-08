@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE, RANKING } from '../constants/constants.js';
+import { MESSAGE, RANKING, VALUE } from '../constants/constants.js';
 
 class OutputView {
   printLottoNumbers(lottos) {
@@ -34,7 +34,7 @@ class OutputView {
   printProfit(profit, cost) {
     Console.print(
       MESSAGE.profitHeader +
-        ((profit / cost) * 100).toFixed(1) +
+        ((profit / cost) * 100).toFixed(VALUE.decimalPlace) +
         MESSAGE.profitFooter,
     );
   }
