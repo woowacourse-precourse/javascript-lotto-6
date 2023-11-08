@@ -1,18 +1,44 @@
+import { LOTTO } from "./constants/lotto.js";
+import { ERROR_MESSAGE } from "./constants/message.js";
+import { Validator } from "./utils/validator.js";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.#validate(numbers.toString());
     this.#numbers = numbers;
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    const numberArray = numbers.split(",").map(Number);
+
+    if (!this.isLottoFormat(numberArray)) {
+      throw new Error(ERROR_MESSAGE.FORMAT_ERROR);
+    }
+    if (!this.isLengthValid(numberArray)) {
+      throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
+    }
+    if (this.isDuplicates(numberArray)) {
+      throw new Error(ERROR_MESSAGE.DUPLICATE_ERROR);
     }
   }
 
-  // TODO: 추가 기능 구현
+  isLengthValid(numbers) {
+    return numbers.length === LOTTO.LENGTH;
+  }
+
+  isDuplicates(numbers) {
+    const numberSet = new Set(numbers);
+    return numbers.length !== numberSet.size;
+  }
+
+  isLottoFormat(numbers) {
+    return numbers.every(
+      (number) =>
+        Validator.isNumberInRange(number) && Validator.isNumber(number)
+    );
+  }
 }
 
 export default Lotto;
