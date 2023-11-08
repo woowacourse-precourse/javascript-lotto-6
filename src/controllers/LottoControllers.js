@@ -2,8 +2,8 @@ import { Console } from '@woowacourse/mission-utils';
 import LottoGame from '../LottoGame.js';
 import LottoView from '../views/LottoView.js';
 import {
-  TICKET_PRICE,
-  PRIZE_INFO,
+  MAX_NUMBER,
+  MIN_NUMBER,
   NUMBERS_COUNT,
 } from '../constants/Constants.js';
 import { isValidAmount, areNumbersInRange } from '../utils/Utils.js';

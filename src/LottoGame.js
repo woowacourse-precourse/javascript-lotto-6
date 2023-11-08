@@ -7,7 +7,7 @@ import {
   TICKET_PRICE,
   PRIZE_INFO,
 } from './constants/Constants.js';
-import { isValidAmount } from './utils/Utils.js';
+import { isValidAmount, areNumbersInRange } from './utils/Utils.js';
 
 class LottoGame {
   #lottos;
@@ -42,6 +42,26 @@ class LottoGame {
     do {
       this.#bonusNumber = Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
     } while (this.#winningNumbers.includes(this.#bonusNumber));
+  }
+
+  setWinningNumbers(winningNumbers) {
+    if (
+      winningNumbers.length !== NUMBERS_COUNT ||
+      !areNumbersInRange(winningNumbers, MIN_NUMBER, MAX_NUMBER)
+    ) {
+      throw new Error('[ERROR] 잘못된 당첨 번호입니다.');
+    }
+    this.#winningNumbers = winningNumbers;
+  }
+
+  setBonusNumber(bonusNumber) {
+    if (!areNumbersInRange([bonusNumber], MIN_NUMBER, MAX_NUMBER)) {
+      throw new Error('[ERROR] 잘못된 보너스 번호입니다.');
+    }
+    if (this.#winningNumbers.includes(bonusNumber)) {
+      throw new Error('[ERROR] 보너스 번호가 당첨 번호와 중복됩니다.');
+    }
+    this.#bonusNumber = bonusNumber;
   }
 
   calculateResults() {
