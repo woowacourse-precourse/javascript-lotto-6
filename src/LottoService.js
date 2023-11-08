@@ -1,20 +1,14 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
-import { ERROR_MESSAGE, LOTTO } from './utils/Define';
-import CustomError from './utils/Errors';
+import { LOTTO } from './utils/Define';
 import WinningLotto from './domain/WinningLotto';
+import InputValidator from "./utils/InputValidator.js";
 
 class LottoService {
   sellLotto(purchaseAmount) {
-    this.#validatePurchaseAmount(purchaseAmount);
+    InputValidator.purchaseAmount(purchaseAmount);
     const quantitiy = Math.floor(purchaseAmount / LOTTO.price);
     return [this.#generateLotto(quantitiy), quantitiy];
-  }
-
-  #validatePurchaseAmount(purchaseAmount) {
-    if (!/^\d000$/.test(String(purchaseAmount))) {
-      throw CustomError.userInputError(ERROR_MESSAGE.invalidAmountError);
-    }
   }
 
   #generateLotto(quantitiy) {
@@ -38,24 +32,9 @@ class LottoService {
   }
 
   getWinningLotto(winningNumbers, bonusNumber) {
-    this.#validateLottoNumbers(winningNumbers);
-    this.#validateBonusNumber(bonusNumber);
-    console.log(winningNumbers,bonusNumber)
+    InputValidator.lottoNumbers(winningNumbers);
+    InputValidator.bonusNumber(bonusNumber);
     return this.#generateWinningLotto(winningNumbers, bonusNumber);
-  }
-
-  #validateLottoNumbers(winningNumbers) {
-    if (!/^(\d+)(,\d+)*$/.test(String(winningNumbers))) {
-      throw CustomError.lottoValidateError(ERROR_MESSAGE.invalidInputNumbers);
-    }
-  }
-
-  #validateBonusNumber(bonusNumber) {
-    if (!Number(bonusNumber)) {
-      throw CustomError.lottoValidateError(
-          ERROR_MESSAGE.invalidInputBonusNumber,
-      );
-    }
   }
 
   #generateWinningLotto(winningNumbers, bonusNumber) {

@@ -13,7 +13,7 @@ const lottoNumbers = (input) => {
   }
 };
 const bonusNumber = (input) => {
-  if (Number(input)) {
+  if (!Number(input)) {
     throw CustomError.lottoValidateError(ERROR_MESSAGE.invalidInputBonusNumber);
   }
 };
