@@ -1,56 +1,40 @@
-import { ERROR } from "./constants/messages";
-import { Console } from "@woowacourse/mission-utils";
-
+import { ERROR } from "./constant";
+import Lotto from "./Lotto";
 
 class Bonus { //예외처리 및 값 저장
+    /** 
+     * @type {Lotto}
+     * @type {number}
+     */
+    #numbers;
     #bonus;
-    
-    constructor(numbers ,bonus) {
+
+    /** 
+     * @param {Lotto} numbers
+     * @param {number} bonus
+     */
+    constructor(numbers, bonus) {
+        this.#validate(numbers, bonus);
         this.#bonus = bonus;
-        this.validate(numbers, bonus);
+        this.#numbers = numbers;
     }
 
-    validate(numbers, bonus) {
-        this.validateRange(bonus);
-        this.validateDuplicate(numbers);
-        this.validateNumber(bonus);
-    }
-
-    validateRange() {
-        const isRightRange = bonus < 1 || bonus > 45;
-        try {
-            if (isRightRange) throw new Error(ERROR.BONUS_RANGE);
-        }
-        catch (error) {
-            Console.print(error.message);
-        }
-        return isRightRange;
-    }
-
-    validateDuplicate(numbers, bonus) {
-        const isDuplicate = numbers.includes(bonus);
-        try {
-            if (isDuplicate) throw new Error(ERROR.BONUS_DUPLICATE);
-        }
-        catch (error) {
-            Console.print(error.message);
-        }
-        return isDuplicate;
-    }
-
-    validateNumber(bonus) {
-        const isNumber = isNaN(bonus);
-        try {
-            if (isNumber) throw new Error(ERROR.BONUS_INCLUDE);
-        }
-        catch (error) {
-            Console.print(error.message);
-        }
-        return isNumber;
+    /** 
+     * @param {Lotto} numbers
+     * @param {number} bonus
+     */
+    #validate(numbers, bonus) {
+        if (bonus < 1 || bonus > 45) throw new Error(ERROR.BONUS_RANGE);
+        if (numbers.getWinningNumbers().includes(bonus)) throw new Error(ERROR.BONUS_DUPLICATE);
+        if (isNaN(bonus)) throw new Error(ERROR.BONUS_INCLUDE);
     }
 
     getBonusNumber() {
         return this.#bonus;
+    }
+
+    getWinningNumbers() {
+        return this.#numbers;
     }
 }
 
