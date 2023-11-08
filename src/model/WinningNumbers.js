@@ -26,9 +26,7 @@ export default class WinningNumbers extends Lotto {
   }
 
   #validateOnlyDigit(bonusNumber) {
-    const ONLY_DIGIT_PATTERN = /^\d+$/;
-
-    if (!ONLY_DIGIT_PATTERN.test(bonusNumber)) {
+    if (!this.DIGITS_ONLY_PATTERN.test(bonusNumber)) {
       throw new Error(ERROR_MESSAGE.notNumber);
     }
   }
