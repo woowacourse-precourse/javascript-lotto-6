@@ -9,6 +9,14 @@ describe('보너스번호 입력 테스트', () => {
     expect(() => new BonusNumber(invalidBonusNumber, winningNumbers)).toThrow('[ERROR]');
   });
 
+  test('빈 입력이 들어올 때 에러 메시지가 출력된다.', () => {
+    // given
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const invalidBonusNumber = '';
+
+    expect(() => new BonusNumber(invalidBonusNumber, winningNumbers)).toThrow('[ERROR]');
+  });
+
   test('로또 범위에 맞지 않는 숫자가 들어올 때 에러 메시지가 출력된다.', () => {
     // given
     const winningNumbers = [1, 2, 3, 4, 5, 6];
