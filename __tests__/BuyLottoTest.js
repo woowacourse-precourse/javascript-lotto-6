@@ -1,6 +1,6 @@
 import GetLotto from "../src/models/GetLotto";
 
-describe("로또 클래스 테스트", () => {
+describe("로또 구매 테스트", () => {
     const BUDGET = 3000;
     const tickets = new GetLotto();
     const count = tickets.calculateLottoCount(BUDGET);

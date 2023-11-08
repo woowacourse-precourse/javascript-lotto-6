@@ -8,6 +8,8 @@ class LottoController {
     budget = 0;
     lottoCount = 0;
     lottos = [];
+    winningNum = [];
+    bonusNum = 0;
 
     async getBudget() {
         //입력받은 값을 유효성 검사를 위해 넘겨줌
@@ -18,7 +20,7 @@ class LottoController {
     async getInputBudget() {
         //사용자에게 로또 구매 금액을 입력받음
         const inputViewInstance = new inputView();
-        return await inputViewInstance.inputBudget();
+        return await inputViewInstance.inputLottoBudget();
     }
     
     checkValidateBudget(inputBudget) {
@@ -53,6 +55,19 @@ class LottoController {
         //로또 출력
         const print = new OutputView();
         this.lottos.forEach(numbers => print.printLottoNum(numbers));
+    }
+
+    async getWinningNumber() {
+        //당첨 숫자 입력받음
+        const winning = new inputView();
+        const inputWinning = await winning.inputLottoWinningNumber();
+        new Lotto(inputWinning);
+    }
+
+    async getBonusNumber() {
+        //보너스 번호 입력받음
+        const bonus = new inputView();
+        this.bonusNum = bonus.inputLottoBonusNumber();
     }
 
     async start() {
