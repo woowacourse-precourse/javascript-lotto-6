@@ -7,7 +7,7 @@ describe('checkPurchasePrice => 구매 금액으로 유효한지 테스트', () 
 		const cost = '1000j';
 
 		// when, then
-		expect(() => VarificationManager.checkPurchasePrice(cost)).toThrow('[ERROR]');
+		expect(() => VarificationManager.checkPurchaseCost(cost)).toThrow('[ERROR]');
 	});
 
 	test(`${LOTTO_CONSTANTS.standartLottoCost} 단위로 들어오지 않을 경우 에러를 띄운다.`, () => {
@@ -15,7 +15,7 @@ describe('checkPurchasePrice => 구매 금액으로 유효한지 테스트', () 
 		const cost = `${LOTTO_CONSTANTS.standartLottoCost + LOTTO_CONSTANTS.standartLottoCost / 10}`;
 
 		// when, then
-		expect(() => VarificationManager.checkPurchasePrice(cost)).toThrow('[ERROR]');
+		expect(() => VarificationManager.checkPurchaseCost(cost)).toThrow('[ERROR]');
 	});
 
 	test('유효한 값이 들어오는 경우 정상 동작한다.', () => {
@@ -23,7 +23,7 @@ describe('checkPurchasePrice => 구매 금액으로 유효한지 테스트', () 
 		const cost = '1000';
 
 		// when, then
-		expect(() => VarificationManager.checkPurchasePrice(cost)).not.toThrow();
+		expect(() => VarificationManager.checkPurchaseCost(cost)).not.toThrow();
 	});
 });
 
@@ -116,9 +116,9 @@ describe('checkBonusLottoNumber => 보너스 로또 번호가 유효한 번호�
 	test('유효한 값이 입력되었을 경우 정상 동작한다.', () => {
 		// given
 		const numbers = '1,2,3,4,5,6';
-		const targetNumber = '10';
+		const bonusNumber = '10';
 
 		// when, then
-		expect(() => VarificationManager.checkBonusLottoNumber(numbers, targetNumber)).not.toThrow();
+		expect(() => VarificationManager.checkBonusLottoNumber(bonusNumber, numbers)).not.toThrow();
 	});
 });

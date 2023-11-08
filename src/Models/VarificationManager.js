@@ -1,8 +1,9 @@
 import Varificator from '../Utils/Varification.js';
-import { LOTTO_CONSTANTS, DEFAULT_CONSTANT } from '../Constants/LottoContstants.js';
+import { LOTTO_CONSTANTS } from '../Constants/LottoContstants.js';
+import StringUtil from '../Utils/StringUti.js';
 
 class VarificationManager {
-	static checkPurchasePrice(value) {
+	static checkPurchaseCost(value) {
 		if (Varificator.isInvalidNumber(value)) {
 			throw new Error('[ERROR] 유효하지 않은 숫자입니다.');
 		}
@@ -11,21 +12,24 @@ class VarificationManager {
 		}
 	}
 
-	static checkLottoNumber(textNumbers) {
-		const numbers = textNumbers.split(DEFAULT_CONSTANT.splitStandardText);
-		const trimmedNumbers = numbers.map((number) => number.trim());
+	static checkLottoNumber(numbers) {
+		let parsedNumber = numbers;
 
-		if (trimmedNumbers.some((number) => Varificator.isInvalidNumber(number))) {
+		if (typeof numbers === 'string') {
+			parsedNumber = StringUtil.stringToNumberArray(numbers);
+		}
+
+		if (parsedNumber.some((number) => Varificator.isInvalidNumber(number))) {
 			throw new Error('[ERROR] 유효하지 않은 숫자가 포함되어 있습니다.');
 		}
-		if (Varificator.isNotFitWithLottoLength(trimmedNumbers, LOTTO_CONSTANTS.lottoNumberCount)) {
+		if (Varificator.isNotFitWithLottoLength(parsedNumber, LOTTO_CONSTANTS.lottoNumberCount)) {
 			throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
 		}
-		if (Varificator.isDuplicatedNumber(trimmedNumbers)) {
+		if (Varificator.isDuplicatedNumber(parsedNumber)) {
 			throw new Error('[ERROR] 중복된 번호가 존재합니다.');
 		}
 		if (
-			trimmedNumbers.some((number) =>
+			parsedNumber.some((number) =>
 				Varificator.isNotNumberInRange(
 					number,
 					LOTTO_CONSTANTS.maxLottoNumber,
@@ -39,13 +43,18 @@ class VarificationManager {
 		}
 	}
 
-	static checkBonusLottoNumber(numbers, bonusNumber) {
+	static checkBonusLottoNumber(bonusNumber, numbers) {
+		let lottoNumbers = numbers;
+
+		if (typeof lottoNumbers === 'string') {
+			lottoNumbers = StringUtil.stringToNumberArray(numbers);
+		}
+
 		if (Varificator.isInvalidNumber(bonusNumber)) {
 			throw new Error('[ERROR] 유효하지 않은 숫자입니다.');
 		}
 
-		const splitNumbers = numbers.split(DEFAULT_CONSTANT.splitStandardText);
-		if (Varificator.isNumberInArray(splitNumbers, bonusNumber)) {
+		if (Varificator.isNumberInArray(lottoNumbers, bonusNumber)) {
 			throw new Error('[ERROR] 중복된 숫자가 존재합니다.');
 		}
 
