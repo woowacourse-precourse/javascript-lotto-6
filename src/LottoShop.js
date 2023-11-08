@@ -5,18 +5,18 @@ import LottoNumbersGenerator from './LottoNumbersGenerator.js';
 
 class LottoShop {
   sellTo(purchaser, amount) {
-    this.#validate(amount);
+    LottoShop.#validate(amount);
 
-    const lottoCount = this.#calculateLottoCount(amount);
-    const lottos = this.#createLottos(lottoCount);
+    const lottoCount = LottoShop.#calculateLottoCount(amount);
+    const lottos = LottoShop.#createLottos(lottoCount);
     purchaser.purchase(lottos);
   }
 
-  #calculateLottoCount(amount) {
+  static #calculateLottoCount(amount) {
     return amount / LOTTO.price;
   }
 
-  #createLottos(number) {
+  static #createLottos(number) {
     const lottos = Array.from(
       { length: number },
       () => new Lotto(LottoNumbersGenerator.generate()),
@@ -24,7 +24,7 @@ class LottoShop {
     return lottos;
   }
 
-  #validate(amount) {
+  static #validate(amount) {
     if (Number.isNaN(amount)) {
       throw new Error(ERROR.positiveNumber);
     }

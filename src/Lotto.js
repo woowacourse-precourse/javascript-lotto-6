@@ -5,7 +5,7 @@ class Lotto {
   #numbers = [];
 
   constructor(numbers) {
-    this.#validate(numbers);
+    Lotto.#validate(numbers);
     this.#numbers = numbers;
   }
 
@@ -24,7 +24,7 @@ class Lotto {
     return [...this.#numbers];
   }
 
-  #validate(numbers) {
+  static #validate(numbers) {
     if (numbers.length !== LOTTO.count) {
       throw new Error(ERROR.count);
     }

@@ -1,4 +1,4 @@
-import { LOTTO } from './LottoInfo';
+import { LOTTO } from './LottoInfo.js';
 
 const QUERY = {
   purchaseAmount: '구입금액을 입력해 주세요.\n',

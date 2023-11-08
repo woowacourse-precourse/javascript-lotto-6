@@ -1,11 +1,9 @@
 import LottoGame from './LottoGame.js';
 
 class App {
-  #lottoGame;
-
   async play() {
-    this.#lottoGame = new LottoGame();
-    await this.#lottoGame.play();
+    const lottoGame = new LottoGame();
+    await lottoGame.play();
   }
 }
 
