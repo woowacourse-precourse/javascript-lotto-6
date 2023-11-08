@@ -16,18 +16,18 @@ const MESSAGE_MATCHING = Object.freeze({
   six: (number = 0) => `6개 일치 (2,000,000,000원) - ${number}개`,
 });
 
-const makeNumberOfLottoMessageFn = (number = 0) => `\n${number}개를 구매했습니다.`;
-
-const makeRateOfReturnMessageFn = (number = 0) => {
-  const numberString = String(number.toFixed(1)).replace(NUMERIC_COMMA_EXPRESSION, MESSAGE.COMMA);
-  return `총 수익률은 ${numberString}%입니다.`;
-};
+const MESSAGE_MAKE_FN = Object.freeze({
+  makeNumberOfLottoMessageFn: (number = 0) => `\n${number}개를 구매했습니다.`,
+  makeRateOfReturnMessageFn: (number = 0) => {
+    const numberString = String(number.toFixed(1)).replace(NUMERIC_COMMA_EXPRESSION, MESSAGE.COMMA);
+    return `총 수익률은 ${numberString}%입니다.`;
+  },
+});
 
 export const MESSAGE_OBJECT = Object.freeze({
   MESSAGE,
   MESSAGE_MATCHING,
-  makeNumberOfLottoMessageFn,
-  makeRateOfReturnMessageFn,
+  MESSAGE_MAKE_FN,
 });
 
-export { MESSAGE, MESSAGE_MATCHING, makeNumberOfLottoMessageFn, makeRateOfReturnMessageFn };
+export { MESSAGE, MESSAGE_MATCHING, MESSAGE_MAKE_FN };

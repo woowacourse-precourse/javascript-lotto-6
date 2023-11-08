@@ -1,29 +1,16 @@
 import { Console } from '@woowacourse/mission-utils';
-import {
-  makeNumberOfLottoMessageFn,
-  MESSAGE,
-  makeRateOfReturnMessageFn,
-  MESSAGE_MATCHING,
-} from '../constants/message.js';
+import { MESSAGE_MATCHING } from '../constants/message.js';
 
 class OutputView {
   /**
-   * 총구매 내역과 로또 리스트 출력
-   * @param {number} number
+   * 숫자로 이루어진 로또 리스트를 문자로 전환하여 출력
    * @param {number[][]} lottos
    */
-  static printPurchacingLotto(number, lottos) {
-    Console.print(makeNumberOfLottoMessageFn(number));
+  static printPurchacingLotto(lottos) {
     lottos.forEach((lotto) => {
-      Console.print(lotto);
+      const lottoString = `[${lotto.join(', ')}]`;
+      Console.print(lottoString);
     });
-  }
-
-  /**
-   *  당첨 통계 출력
-   */
-  static printWinningStatistics() {
-    Console.print(MESSAGE.WINNING_STATISICS);
   }
 
   /**
@@ -38,19 +25,11 @@ class OutputView {
   }
 
   /**
-   * 총 수익률 출력
-   * @param {number} rate
+   * 인자로 들어온 문자열을 받아 Console.print 메서드 실행
+   * @param {string} message
    */
-  static printRateOfReturn(rate) {
-    Console.print(makeRateOfReturnMessageFn(rate));
-  }
-
-  /**
-   * Error 발생시 Error 메시지 출력
-   * @param {string} error
-   */
-  static printError(error) {
-    Console.print(error);
+  static printOutput(message) {
+    Console.print(message);
   }
 }
 

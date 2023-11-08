@@ -4,7 +4,7 @@ import { MULTIPLE } from '../constants/constant.js';
 
 class MoneyValidation {
   /**
-   * 인자가 NAN이거나 1000보다 작은 수면 Error를 생성
+   * 인자가 NaN이거나 1000보다 작은 수면 Error를 생성
    * @param {number} money
    */
   static checkNumber(money) {

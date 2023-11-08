@@ -20,7 +20,7 @@ class Lotto {
   }
 
   /**
-   *
+   * 입력한 당첨 번호를 배열로 반환합니다.
    * @returns {number[]} numbers
    */
   getLotto() {

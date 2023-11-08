@@ -1,4 +1,4 @@
-import { MESSAGE_OBJECT } from '../../src/constants/message.js';
+import { MESSAGE_MAKE_FN, MESSAGE_MATCHING } from '../../src/constants/message.js';
 
 describe('메시지를 생성하는 메서드가 정상적으로 메시지를 생성하는지 확인합니다.', () => {
   test('당첨 통계를 정상적으로 생성하는지 확인합니다.', () => {
@@ -11,7 +11,7 @@ describe('메시지를 생성하는 메서드가 정상적으로 메시지를 �
       { number: 0, message: '6개 일치 (2,000,000,000원) - 0개' },
     ];
 
-    const { three, four, five, fiveAndBonus, six } = MESSAGE_OBJECT.MESSAGE_MATCHING;
+    const { three, four, five, fiveAndBonus, six } = MESSAGE_MATCHING;
 
     const testFn = [three, four, five, fiveAndBonus, six];
 
@@ -30,7 +30,7 @@ describe('메시지를 생성하는 메서드가 정상적으로 메시지를 �
     const message = '8개를 구매했습니다.';
 
     // when
-    const result = MESSAGE_OBJECT.makeNumberOfLottoMessageFn(number);
+    const result = MESSAGE_MAKE_FN.makeNumberOfLottoMessageFn(number);
 
     // then
     expect(result).toMatch(message);
@@ -47,7 +47,7 @@ describe('메시지를 생성하는 메서드가 정상적으로 메시지를 �
   ];
   test.each(rateCases)('수익률 메시지를 정확히 생성하는지 확인합니다.', ({ rate, message }) => {
     // when
-    const result = MESSAGE_OBJECT.makeRateOfReturnMessageFn(rate);
+    const result = MESSAGE_MAKE_FN.makeRateOfReturnMessageFn(rate);
 
     // then
     expect(result).toMatch(message);

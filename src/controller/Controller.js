@@ -5,12 +5,9 @@ import Lotto from '../model/Lotto.js';
 import OutputView from '../view/OutputView.js';
 import InputView from '../view/InputView.js';
 
-import calculateMatch from '../util/calculateMatch.js';
-import calculateTotal from '../util/calculateTotal.js';
-import calcultePercent from '../util/calcultePercent.js';
-import checkMatch from '../util/checkMatch.js';
+import Calculate from '../util/Calculate.js';
 
-import { MESSAGE } from '../constants/message.js';
+import { MESSAGE, MESSAGE_MAKE_FN } from '../constants/message.js';
 
 class Controller {
   #lotto;
@@ -34,37 +31,38 @@ class Controller {
 
   async #initMoney() {
     while (true) {
-      const input = await InputView.writeInput(MESSAGE.PURCHASING_MESSAGE);
       try {
+        const input = await InputView.writeInput(MESSAGE.PURCHASING_MESSAGE);
         this.#money = new Money(input);
-        OutputView.printPurchacingLotto(this.#money.getCount(), this.#money.getLottoList());
+        OutputView.printOutput(MESSAGE_MAKE_FN.makeNumberOfLottoMessageFn(this.#money.getCount()));
+        OutputView.printPurchacingLotto(this.#money.getLottoList());
         break;
       } catch (e) {
-        OutputView.printError(e.message);
+        OutputView.printOutput(e.message);
       }
     }
   }
 
   async #initlotto() {
     while (true) {
-      const input = await InputView.writeInput(MESSAGE.WINNING_NUMBERS);
       try {
+        const input = await InputView.writeInput(MESSAGE.WINNING_NUMBERS);
         this.#lotto = new Lotto(input);
         break;
       } catch (e) {
-        OutputView.printError(e.message);
+        OutputView.printOutput(e.message);
       }
     }
   }
 
   async #initBonus() {
     while (true) {
-      const input = await InputView.writeInput(MESSAGE.BONUS_NUMBER);
       try {
+        const input = await InputView.writeInput(MESSAGE.BONUS_NUMBER);
         this.#bonus = new BonusNumber(input, this.#lotto.getLotto());
         break;
       } catch (e) {
-        OutputView.printError(e.message);
+        OutputView.printOutput(e.message);
       }
     }
   }
@@ -78,17 +76,17 @@ class Controller {
    */
   #calculateLotto(lottoList, lotto, bonus, match) {
     lottoList.forEach((item) => {
-      const { matchCount, bonusMatch } = calculateMatch(item, lotto, bonus);
-      checkMatch(matchCount, bonusMatch, match);
+      const { matchCount, bonusMatch } = Calculate.calculateMatch(item, lotto, bonus);
+      Calculate.checkMatch(matchCount, bonusMatch, match);
     });
-    OutputView.printWinningStatistics();
+    OutputView.printOutput(MESSAGE.WINNING_STATISICS);
     OutputView.printMatching(match);
   }
 
   #calculateRate() {
-    const total = calculateTotal(this.#money.getMatch());
-    const rate = calcultePercent(total, this.#money.getMoney());
-    OutputView.printRateOfReturn(rate);
+    const total = Calculate.calculateTotal(this.#money.getMatch());
+    const rate = Calculate.calcultePercent(total, this.#money.getMoney());
+    OutputView.printOutput(MESSAGE_MAKE_FN.makeRateOfReturnMessageFn(rate));
   }
 }
 

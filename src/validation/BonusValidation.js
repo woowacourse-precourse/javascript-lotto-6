@@ -14,7 +14,7 @@ class BonusValidation {
 
   /**
    * 입력된 보너스 번호가 숫자인지 확인합니다.
-   * @param {any} bonusNnumbers
+   * @param {number} bonusNnumbers
    */
   static checkNumber(bonusNnumber) {
     if (

@@ -2,6 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import Money from '../../src/model/Money.js';
 import ValidationError from '../../src/error/ValidationError.js';
 import { PURCHASE_AMOUNT_ERROR } from '../../src/constants/error.js';
+import { MATCH } from '../../src/constants/constant.js';
 
 const mockRandoms = (numbers) => {
   Random.pickUniqueNumbersInRange = jest.fn();
@@ -45,7 +46,7 @@ describe('Money class 기능 테스트', () => {
   test('Money 인스턴스가 생성될시 match 객체가 정상적으로 생성되는지 확인', () => {
     // given
     const input = '2000';
-    const result = { three: 0, four: 0, five: 0, fiveAndBonus: 0, six: 0 };
+    const result = { ...MATCH };
 
     // when
     const money = new Money(input);

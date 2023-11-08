@@ -4,7 +4,7 @@ class BonusNumber {
   #bonusNumber;
 
   /**
-   *
+   * 보너스 번호 생성 및 validaion 확인
    * @param {string} bonusNumber
    * @param {number []} lottos
    */
@@ -20,7 +20,7 @@ class BonusNumber {
   }
 
   /**
-   *
+   * 보너스 번호를 반환합니다.
    * @returns {number} bonunNumber
    */
   getBonusNumber() {
