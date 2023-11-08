@@ -55,10 +55,12 @@
  ┃ ┣ 📜Bonus.js
  ┃ ┣ 📜Computer.js
  ┃ ┗ 📜IssuedLotto.js
+ ┣ 📂utils
+ ┃ ┗ 📜message.js
  ┣ 📂view
  ┃ ┣ 📜InputView.js
  ┃ ┗ 📜OutputView.js
- ┣ 📜App.js // controller
+ ┣ 📜App.js
  ┣ 📜index.js
- ┗ 📜Lotto.js // model
+ ┗ 📜Lotto.js
 ```
