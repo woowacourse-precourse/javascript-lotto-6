@@ -15,26 +15,28 @@ class LotteryMachine {
   }
 
   #ticketMaker() {
-    this.#lottoTicket = Array.from({ length : this.#issuanceLimit }, () => 
-    this.#ascendingOrder(Random.pickUniqueNumbersInRange(
-      LOTTO_RULE.minNumber,
-      LOTTO_RULE.maxNumber,
-      LOTTO_RULE.selectTime
-    )));
-  }
-  
-  #ascendingOrder(lottoArray) {
-    return lottoArray.sort((a, b) => a - b);
+    this.#lottoTicket = Array.from( { length : this.#issuanceLimit }, () =>
+      Random.pickUniqueNumbersInRange(
+        LOTTO_RULE.minNumber,
+        LOTTO_RULE.maxNumber,
+        LOTTO_RULE.selectTime
+      ).sort((a, b) => a - b)
+    )
   }
 
   #validatePurchaseAmount(amountString) {
-    if (REGEX.number.test(amountString)) throw new CustomError(LOTTO_ERROR.form);
-
-    if (Number(amountString) > LOTTO_RULE.buyMax) throw new CustomError(LOTTO_ERROR.buyLimit);
-  
-    if (Number(amountString) < LOTTO_RULE.buyUnit) throw new CustomError(LOTTO_ERROR.moneyLack);
-  
-    if(Number(amountString) % LOTTO_RULE.buyUnit !== 0) throw new CustomError(LOTTO_ERROR.unitBreak);
+    if (REGEX.number.test(amountString)) {
+      throw new CustomError(LOTTO_ERROR.form);
+    }
+    if (Number(amountString) > LOTTO_RULE.buyMax) {
+      throw new CustomError(LOTTO_ERROR.buyLimit);
+    }
+    if (Number(amountString) < LOTTO_RULE.buyUnit) {
+      throw new CustomError(LOTTO_ERROR.moneyLack);
+    }
+    if (Number(amountString) % LOTTO_RULE.buyUnit !== 0) {
+      throw new CustomError(LOTTO_ERROR.unitBreak);
+    }
   }
   
   getTiket() {
