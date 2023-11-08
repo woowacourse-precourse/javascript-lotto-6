@@ -6,6 +6,7 @@ class App {
     Console.print('로또 게임을 시작합니다.');
 
     const purchaseAmount = await this.inputPurchaseAmount();
+    const lottos = await this.generateLottos(purchaseAmount);
   }
 
   // 2. 로또 구입하기: 로또 구입 금액 입력
@@ -20,6 +21,22 @@ class App {
         return purchaseAmount;
       }
     }
+  }
+
+  // 2. 로또 구입하기: 로또 티켓 생성
+  async generateLottos(purchaseAmount) {
+    const numberOfLotto = Math.floor(purchaseAmount / 1000);
+    const lottos = [];
+
+    for (let i = 0; i < numberOfLotto; i++) {
+      let lottoNumbers;
+      do {
+        lottoNumbers = Lotto.generateRandom();
+      } while (lottos.some(lotto => lotto.getNumbers().toString() === lottoNumbers.toString()));
+      const lotto = new Lotto(lottoNumbers);
+      lottos.push(lotto);
+    }
+    return lottos;
   }
 }
 
