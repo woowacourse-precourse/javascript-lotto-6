@@ -18,6 +18,11 @@ export const ERROR_MESSAGES = {
   DUPLICATE_BONUS: '[ERROR] 보너스 번호가 당첨 번호와 중복될 수 없습니다.',
 };
 
+export const MESSAGES = {
+  PURCHASE_MESSAGE_TEMPLATE: '개를 구매했습니다.',
+  RESULT_HEADER: '\n당첨 통계\n---',
+};
+
 export const LOTTO_PRICE = 1000;
 
 export const NUMBER_RANGE = {
