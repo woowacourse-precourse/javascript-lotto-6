@@ -1,3 +1,16 @@
 export default class MoneyManager {
-  constructor() {}
+  /** @type {number} */
+  #purchaseValue;
+
+  constructor() {
+    this.#purchaseValue = -1;
+  }
+
+  /**
+   *
+   * @param {number} purchaseValue
+   */
+  setPurchaseValue(purchaseValue) {
+    this.#purchaseValue = purchaseValue;
+  }
 }
