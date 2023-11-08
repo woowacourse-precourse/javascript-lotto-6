@@ -1,4 +1,4 @@
-import { typeofNumber, amountUnit } from "../src/validator/purchaseAmountValidation"; 
+import { typeofNumber, amountUnit } from "../src/validator/purchaseAmountValidation.js"; 
 
 describe("구입 금액 테스트", () => {
   test("로또 구입 금액이 숫자 타입이 아니면 예외가 발생한다.", () => {
