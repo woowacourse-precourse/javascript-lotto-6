@@ -18,3 +18,7 @@ export const printWinningLotto = (winningLotto) => {
   res += outputMessages.FIR(winningLotto[4]);
   Console.print(outputMessages.RESULT(res));
 };
+
+export const printBenefit = (benefit) => {
+  Console.print(outputMessages.BENEFIT(benefit));
+};

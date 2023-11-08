@@ -32,4 +32,4 @@
 - [x] Lotto 결과를 출력하는 method 작성
     - argument : 비교 결과 array
 
-- [] 수익률 출력
+- [x] 수익률 출력

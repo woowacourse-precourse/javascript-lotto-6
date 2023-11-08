@@ -9,6 +9,8 @@ class Model {
 
   #bonusNumber;
 
+  #money;
+
   // 테스트를 위해 추가한 getter
   getLottoNumbersLength() {
     return this.#lottoNumbers.length;
@@ -16,6 +18,7 @@ class Model {
 
   generateRandomLottoNumbers(money) {
     let i;
+    this.#money = money;
     const count = money / 1000;
 
     for (i = 0; i < count; i += 1) {
@@ -70,6 +73,18 @@ class Model {
       }
     });
     return winningLottos;
+  }
+
+  getBenefit() {
+    const winningLottos = this.getWinningLottos();
+    const winningMoney = [0, 0, 0, 0, 0];
+    winningMoney[0] = winningLottos[0] * 5000;
+    winningMoney[1] = winningLottos[1] * 50000;
+    winningMoney[2] = winningLottos[2] * 1500000;
+    winningMoney[3] = winningLottos[3] * 30000000;
+    winningMoney[4] = winningLottos[4] * 2000000000;
+
+    return (winningMoney.reduce((acc, cur) => acc + cur, 0) * 100) / this.#money;
   }
 }
 
