@@ -1,13 +1,13 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
+import Lotto from './Lotto.js';
 import {
   MAX_NUMBER,
   MIN_NUMBER,
   NUMBERS_COUNT,
   TICKET_PRICE,
   PRIZE_INFO,
-} from './constants/Constants';
-import { isValidAmount } from './utils/Utils';
+} from './constants/Constants.js';
+import { isValidAmount } from './utils/Utils.js';
 
 class LottoGame {
   #lottos;

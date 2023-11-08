@@ -1,6 +1,10 @@
 import { Random } from '@woowacourse/mission-utils';
-import { NUMBERS_COUNT, MAX_NUMBER, MIN_NUMBER } from './constants/Constants';
-import { areNumbersInRange } from './utils/Utils';
+import {
+  NUMBERS_COUNT,
+  MAX_NUMBER,
+  MIN_NUMBER,
+} from './constants/Constants.js';
+import { areNumbersInRange } from './utils/Utils.js';
 
 class Lotto {
   #numbers;

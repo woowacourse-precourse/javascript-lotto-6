@@ -1,4 +1,8 @@
-import { MIN_NUMBER, MAX_NUMBER, PURCHASE_UNIT } from '../constants/Constants';
+import {
+  MIN_NUMBER,
+  MAX_NUMBER,
+  PURCHASE_UNIT,
+} from '../constants/Constants.js';
 
 function isInRange(number) {
   return number >= MIN_NUMBER && number <= MAX_NUMBER;

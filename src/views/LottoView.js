@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PRIZE_INFO } from '../constants/Constants';
+import { PRIZE_INFO } from '../constants/Constants.js';
 
 class LottoView {
   static displayTickets(lottos) {
