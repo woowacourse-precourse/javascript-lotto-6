@@ -1,5 +1,6 @@
 import checkNumbersRange from './utils/checkNumbersRange.js';
 import isDuplicateNumbers from './utils/isDuplicateNumbers.js';
+import { LOTTO_ERROR_MESSAGE } from './constants.js';
 
 class Lotto {
   #numbers;
@@ -12,13 +13,11 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(LOTTO_ERROR_MESSAGE.length);
     } else if (!checkNumbersRange(numbers)) {
-      throw new Error('[ERROR] 로또 번호는 1부터 45까지의 숫자여야 합니다.');
+      throw new Error(LOTTO_ERROR_MESSAGE.range);
     } else if (isDuplicateNumbers(numbers)) {
-      throw new Error(
-        '[ERROR] 로또 번호는 중복되지 않는 숫자로 이뤄져야 합니다.'
-      );
+      throw new Error(LOTTO_ERROR_MESSAGE.duplicate);
     }
   }
 
