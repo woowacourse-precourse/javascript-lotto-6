@@ -1,25 +1,12 @@
-export const purchaseAmountValidation = purchaseAmout => {
-Object.values(purchaseAmountValidation.validation).forEach(({ errorMessage, isInvalid }) => {
-    if(isInvalid(purchaseAmout)) throw new Error (errorMessage);
-  },
-  );
-};
+export const typeofNumber = (purchaseAmout) => {
+  const regExp = /^[0-9]+$/g;
+  if (!regExp.test(purchaseAmout)) {
+    throw new Error('[ERROR] 숫자 타입이 아닙니다.');
+  }
+}
 
-purchaseAmountValidation.validation = Object.freeze({
-  typeofNumber: Object.freeze({
-  errorMessage: '숫자 타입이 아닙니다.',
-  isInvalid(purchaseAmout) {
-    const regExp = /^[0-9]+$/g;
-    return !regExp.test(purchaseAmout)
-    },
-  }),
-  amountUnit: Object.freeze({
-  errorMessage: '1000원 단위가 아닙니다.',
-  isInvalid(purchaseAmout) {
-    if (purchaseAmout % 1000 !== 0)
-    return true;
-    }
-  })
-})
-
-export default purchaseAmountValidation
+export const amountUnit = (purchaseAmout) => {
+  if (purchaseAmout % 1000 !== 0)
+  throw new Error('[ERROR] 1000원 단위가 아닙니다.')
+    
+}

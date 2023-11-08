@@ -1,5 +1,4 @@
 import Lotto from "./Lotto.js"
-import { Console } from '@woowacourse/mission-utils';
 
 class Computer {
   static purchaseList(lottoNumber) {
