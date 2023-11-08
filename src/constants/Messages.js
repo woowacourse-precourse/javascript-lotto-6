@@ -8,11 +8,21 @@ const MESSAGES = Object.freeze({
   outputLottoAmount: '개를 구매했습니다.',
   outputResultTitle: '\n당첨 통계\n---',
 
-  outputFifthPrize: `3개 일치 (${SETTINGS.fifthPrize.toLocaleString('ko-KR')}원) - `,
-  outputFourthPrize: `4개 일치 (${SETTINGS.fourthPrize.toLocaleString('ko-KR')}원) - `,
-  outputThirdPrize: `5개 일치 (${SETTINGS.thirdPrize.toLocaleString('ko-KR')}원) - `,
-  outputSecondPrize: `5개 일치, 보너스 볼 일치 (${SETTINGS.secondPrize.toLocaleString('ko-KR')}원) - `,
-  outputFirstPrize: `6개 일치 (${SETTINGS.firstPrize.toLocaleString('ko-KR')}원) - `,
+  outputFifthPrize: `3개 일치 (${SETTINGS.fifthPrize.toLocaleString(
+    'ko-KR',
+  )}원) - `,
+  outputFourthPrize: `4개 일치 (${SETTINGS.fourthPrize.toLocaleString(
+    'ko-KR',
+  )}원) - `,
+  outputThirdPrize: `5개 일치 (${SETTINGS.thirdPrize.toLocaleString(
+    'ko-KR',
+  )}원) - `,
+  outputSecondPrize: `5개 일치, 보너스 볼 일치 (${SETTINGS.secondPrize.toLocaleString(
+    'ko-KR',
+  )}원) - `,
+  outputFirstPrize: `6개 일치 (${SETTINGS.firstPrize.toLocaleString(
+    'ko-KR',
+  )}원) - `,
   outputReturnRate: `총 수익률은 `,
 
   suffixAmount: '개',

@@ -2,7 +2,7 @@ import { BalanceTypeError } from '../error/CustomErrors.js';
 import REGEXP from '../constants/RegExp.js';
 
 export default class Balance {
-  #balance
+  #balance;
 
   constructor(balance) {
     this.#validate(balance);

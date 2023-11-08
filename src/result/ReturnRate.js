@@ -8,7 +8,9 @@ export default class ReturnRate {
   }
 
   calculate(returns, balance) {
-    this.#returnRate = (returns / balance * 100).toFixed(SETTINGS.returnRateDecimal);
+    this.#returnRate = ((returns / balance) * 100).toFixed(
+      SETTINGS.returnRateDecimal,
+    );
 
     return this.#returnRate;
   }

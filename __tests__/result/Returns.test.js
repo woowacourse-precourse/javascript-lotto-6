@@ -1,4 +1,4 @@
-import Returns from '../../src/result/Returns.js'
+import Returns from '../../src/result/Returns.js';
 
 describe('result/returns 추가 및 호출 테스트', () => {
   const returns = new Returns();

@@ -12,19 +12,22 @@ export default class Lottos {
   }
 
   #addLottos(amount) {
-    for (let counter = 0; counter < amount; counter++) {
+    for (let counter = 0; counter < amount; counter += 1) {
       this.#lottos.push(
-        new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(
-          SETTINGS.minimumLottoRange,
-          SETTINGS.maximumLottoRange,
-          SETTINGS.lottoLength))
+        new Lotto(
+          MissionUtils.Random.pickUniqueNumbersInRange(
+            SETTINGS.minimumLottoRange,
+            SETTINGS.maximumLottoRange,
+            SETTINGS.lottoLength,
+          ),
+        ),
       );
     }
   }
 
   get() {
     const lottoNumbers = [];
-    this.#lottos.forEach((lotto) => {
+    this.#lottos.forEach(lotto => {
       lottoNumbers.push(lotto.get());
     });
 
@@ -33,7 +36,7 @@ export default class Lottos {
 
   print() {
     const lottoNumbers = [];
-    this.#lottos.forEach((lotto) => {
+    this.#lottos.forEach(lotto => {
       lottoNumbers.push(Utils.numberArrayToString(lotto.get()));
     });
 

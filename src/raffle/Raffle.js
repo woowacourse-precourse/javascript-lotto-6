@@ -22,6 +22,6 @@ export default class Raffle {
   }
 
   bonus() {
-    return this.#bonus.get()
+    return this.#bonus.get();
   }
 }

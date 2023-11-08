@@ -23,12 +23,15 @@ export default class Result {
     lottos.forEach(lotto => {
       this.#lottos.push(new Lotto(lotto));
     });
-    this.#raffle = new Raffle(raffle['numbers'], raffle['bonus']);
+    this.#raffle = new Raffle(raffle.numbers, raffle.bonus);
   }
 
   calculateRanks() {
-    this.#lottos.forEach((lotto) => {
-      const rank = lotto.getRank(this.#raffle.getNumbers(), this.#raffle.getBonus());
+    this.#lottos.forEach(lotto => {
+      const rank = lotto.getRank(
+        this.#raffle.getNumbers(),
+        this.#raffle.getBonus(),
+      );
       this.#prizes.addPrize(rank);
     });
   }
@@ -36,17 +39,18 @@ export default class Result {
   calculateReturns() {
     const prizes = this.#prizes.get();
 
-    this.#returns.add(
-      SETTINGS.fifthPrize * prizes['5']
-      + SETTINGS.fourthPrize * prizes['4']
-      + SETTINGS.thirdPrize * prizes['3']
-      + SETTINGS.secondPrize * prizes['2']
-      + SETTINGS.firstPrize * prizes['1']
-    );
+    this.#returns.add(SETTINGS.fifthPrize * prizes['5']);
+    this.#returns.add(SETTINGS.fourthPrize * prizes['4']);
+    this.#returns.add(SETTINGS.thirdPrize * prizes['3']);
+    this.#returns.add(SETTINGS.secondPrize * prizes['2']);
+    this.#returns.add(SETTINGS.firstPrize * prizes['1']);
   }
 
   returnRate() {
-    return this.#returnRate.calculate(this.#returns.get(), this.#lottos.length * SETTINGS.lottoPrice);
+    return this.#returnRate.calculate(
+      this.#returns.get(),
+      this.#lottos.length * SETTINGS.lottoPrice,
+    );
   }
 
   prizes() {

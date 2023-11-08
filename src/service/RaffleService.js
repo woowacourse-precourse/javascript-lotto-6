@@ -6,10 +6,12 @@ export default class RaffleService {
   raffleNumbers(numbers) {
     this.#raffle = new Raffle(numbers);
   }
+
   raffleBonus(bonus) {
     this.#raffle.addBonus(bonus);
   }
+
   getRaffle() {
-    return { 'numbers': this.#raffle.numbers(), 'bonus': this.#raffle.bonus() };
+    return { numbers: this.#raffle.numbers(), bonus: this.#raffle.bonus() };
   }
 }

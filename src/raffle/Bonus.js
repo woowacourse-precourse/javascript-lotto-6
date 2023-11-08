@@ -1,14 +1,11 @@
 import SETTINGS from '../constants/Settings.js';
 import REGEXP from '../constants/RegExp.js';
-import {
-  BonusTypeError,
-  BonusRangeError
-} from '../error/CustomErrors.js';
+import { BonusTypeError, BonusRangeError } from '../error/CustomErrors.js';
 
 export default class Bonus {
   #bonus;
 
-  constructor( bonus) {
+  constructor(bonus) {
     this.#validate(bonus);
     this.#bonus = bonus;
   }

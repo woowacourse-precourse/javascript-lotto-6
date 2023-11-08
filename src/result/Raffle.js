@@ -7,9 +7,8 @@ import {
   LottoTypeError,
   BonusRangeError,
   BonusTypeError,
-  BonusIncludedError
+  BonusIncludedError,
 } from '../error/CustomErrors.js';
-
 
 export default class Raffle {
   #numbers;
@@ -47,7 +46,7 @@ export default class Raffle {
       throw new BonusRangeError(bonus);
     }
     if (this.#numbers.includes(Number(bonus))) {
-      throw new BonusIncludedError(bonus)
+      throw new BonusIncludedError(bonus);
     }
   }
 

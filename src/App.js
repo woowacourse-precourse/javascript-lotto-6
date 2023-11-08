@@ -19,7 +19,8 @@ class App {
     await this.#raffleController.raffleNumber();
     await this.#raffleController.raffleBonus();
     this.#resultController.setResult(
-      this.#purchaseController.getLottos(), this.#raffleController.getRaffle()
+      this.#purchaseController.getLottos(),
+      this.#raffleController.getRaffle(),
     );
     this.#resultController.calculateResults();
     this.#resultController.printResult();

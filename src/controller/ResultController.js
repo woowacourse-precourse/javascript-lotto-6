@@ -35,10 +35,9 @@ export default class ResultController {
   }
 
   printResult() {
-
     const prizes = this.#prizes();
     const returnRate = this.#calculateReturnRate();
-    
+
     View.printOutput(MESSAGES.outputResultTitle);
     View.printOutput(`${MESSAGES.outputFifthPrize}${prizes['5']}${MESSAGES.suffixAmount}`);
     View.printOutput(`${MESSAGES.outputFourthPrize}${prizes['4']}${MESSAGES.suffixAmount}`);

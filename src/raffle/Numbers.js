@@ -5,7 +5,7 @@ import {
   LottoTypeError,
   LottoDuplicatedError,
   LottoLengthError,
-  LottoRangeError
+  LottoRangeError,
 } from '../error/CustomErrors.js';
 
 export default class Numbers {
