@@ -1,4 +1,4 @@
-import { Random, Console } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 import {
   LOTTO_PRICE,
   LOTTO_NUMBER_RANGE,
@@ -6,7 +6,6 @@ import {
   PRINT_MESSAGE,
   REQUEST_MESSAGE,
   VALIDATION_ERRORS_MESSAGE,
-  WINNING_MONEY,
   WINNING_LIST,
   regexNumber,
 } from './Constants.js';
@@ -16,16 +15,21 @@ class App {
   async play() {
     const money = await this.getMoney();
     const lottoCount = money / LOTTO_PRICE;
-    const lottos = this.buyLotto(lottoCount);
+
+    // 2.
+    const lottos = Lotto.generateLotto(lottoCount);
     this.printLotto(lottos, lottoCount);
+
     const winningNumbers = await this.getWinningNumber();
     const bonusNumber = await this.getBonusNumber(winningNumbers);
-    const winningRank = this.compareLottoNumber(
+
+    const winningRank = this.winningRankResult(
       lottos,
       winningNumbers,
       bonusNumber,
     );
-    const winningProfit = this.calculateProfit(money, winningRank);
+    // 7.
+    const winningProfit = Lotto.calculatePrizeProfit(money, winningRank);
     this.printResult(winningRank, winningProfit);
   }
 
@@ -55,22 +59,6 @@ class App {
     return true;
   }
 
-  // 2. 구입금액에 해당하는 만큼 로또를 발행
-  buyLotto(lottoCount) {
-    const lottos = [];
-
-    for (let i = 0; i < lottoCount; i++) {
-      const lotto = Random.pickUniqueNumbersInRange(
-        LOTTO_NUMBER_RANGE.MIN,
-        LOTTO_NUMBER_RANGE.MAX,
-        LOTTO_NUMBER_COUNT.LOTTO,
-      );
-      lottos.push(lotto.sort((a, b) => a - b));
-    }
-
-    return lottos;
-  }
-
   // 3. 발행한 로또 수량 및 번호를 출력
   printLotto(lottos, lottoCount) {
     const message = PRINT_MESSAGE(lottoCount);
@@ -89,9 +77,11 @@ class App {
         const numbers = await Console.readLineAsync(
           REQUEST_MESSAGE.PUT_WINNING_NUMBER,
         );
+
+        console.log('numbers', numbers);
         const winningNumbers = numbers.split(',');
         const lotto = new Lotto(winningNumbers);
-        return winningNumbers;
+        return lotto.lottoNumbers();
       } catch (error) {
         Console.print(error.message);
       }
@@ -127,7 +117,7 @@ class App {
   }
 
   // 6. 사용자가 구매한 로또 번호와 당첨 번호를 비교
-  compareLottoNumber(lottos, winningNumbers, bonusNumber) {
+  winningRankResult(lottos, winningNumbers, bonusNumber) {
     const winningRank = {
       first: 0,
       second: 0,
@@ -136,47 +126,9 @@ class App {
       fifth: 0,
     };
 
-    lottos.forEach((lotto) => {
-      const matchCount = this.matchNumberCount(lotto, winningNumbers);
-
-      if (matchCount === 3) {
-        winningRank.fifth += 1;
-      } else if (matchCount === 4) {
-        winningRank.fourth += 1;
-      } else if (matchCount === 5) {
-        lotto.includes(bonusNumber)
-          ? (winningRank.second += 1)
-          : (winningRank.third += 1);
-      } else if (matchCount === 6) {
-        winningRank.first += 1;
-      }
-    });
+    Lotto.compareLottoNumber(winningRank, lottos, winningNumbers, bonusNumber);
 
     return winningRank;
-  }
-
-  matchNumberCount(lotto, winningNumbers) {
-    const matchingNumbers = winningNumbers.filter((number) =>
-      lotto.includes(Number(number)),
-    );
-    return matchingNumbers.length;
-  }
-
-  // 7. 수익률 계산
-  calculateProfit(money, winningRank) {
-    const totalPrize = Object.entries(winningRank).reduce(
-      (currentTotal, [key, value]) => {
-        if (value > 0) {
-          const prize = WINNING_MONEY[key.toUpperCase()] * value;
-          return currentTotal + prize;
-        }
-        return currentTotal;
-      },
-      0,
-    );
-
-    const profit = (totalPrize / money) * 100;
-    return profit.toFixed(1);
   }
 
   // 8. 당첨 내역 및 수익률 출력
