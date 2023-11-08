@@ -6,20 +6,32 @@ class LottoController {
   constructor() {
     this.lottoMachine = new LottoMachine()
   }
+
   async start() {
+    await this.buyLottoStep()
+    await this.winningLottoStep()
+    await this.winningStatisticsStep()
+  }
+
+  async buyLottoStep() {
     const lottoPurchasePrice = await this.getLottoPurchasePrice()
     this.lottoMachine.buyLotto(lottoPurchasePrice)
     OutputView.printEmptyLine()
     OutputView.printPurchaseLottoList(this.lottoMachine.getLottos())
     OutputView.printEmptyLine()
+  }
 
+  async winningLottoStep() {
     const winningLottoNumbers = await this.getWinningLottoNumbers()
+
     OutputView.printEmptyLine()
     const bonusNumber = await this.getBonusNumber(winningLottoNumbers)
     OutputView.printEmptyLine()
 
     this.lottoMachine.createWinningLotto(winningLottoNumbers, bonusNumber)
+  }
 
+  async winningStatisticsStep() {
     const winningStatistics = this.lottoMachine.calculateWinningStatistics()
     OutputView.printWinningStatistics(winningStatistics)
     OutputView.printProfitRate(this.lottoMachine.calculateProfitRate(winningStatistics))
