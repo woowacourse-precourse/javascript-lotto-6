@@ -1,3 +1,6 @@
+import { validateArray } from "./utils/validation.js";
+import { LOTTO } from "./constant/ERROR.js";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,26 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (!validateArray.isNumber(numbers)) {
+      throw new Error(LOTTO.isNumber);
+    }
+
+    if (!validateArray.isSize(numbers)) {
+      throw new Error(LOTTO.isSize);
+    }
+
+    if (!validateArray.isInRange(numbers)) {
+      throw new Error(LOTTO.isInRange);
+    }
+
+    if (validateArray.isDuplicate(numbers)) {
+      throw new Error(LOTTO.isDuplicate);
     }
   }
 
-  // TODO: 추가 기능 구현
+  get numbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
