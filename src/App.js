@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import LottoController from './Controller/LottoController.js';
 class App {
   #controller;

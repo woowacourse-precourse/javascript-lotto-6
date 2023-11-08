@@ -1,5 +1,4 @@
 import { validateLotto } from '../Validator/Validate.js';
-import { Console } from '@woowacourse/mission-utils';
 class Lotto {
   #numbers;
 
