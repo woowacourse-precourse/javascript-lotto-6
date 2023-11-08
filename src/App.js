@@ -66,7 +66,6 @@ class App {
     }
     rateOfReturn = rateOfReturn / (buyLottoCnt*1000);
     Console.print(`총 수익률은 ${rateOfReturn*100}%입니다.`);
-
   }
 }
 
