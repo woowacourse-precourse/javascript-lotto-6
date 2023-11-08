@@ -21,13 +21,19 @@ class LottoManager {
   }
 
   generateLottoNumber() {
-    const lottoNumberArray = Random.pickUniqueNumbersInRange(LOTTO_CONSTANTS.minRange, LOTTO_CONSTANTS.maxRange, LOTTO_CONSTANTS.digits);
+    const lottoNumberArray = Random.pickUniqueNumbersInRange(
+      LOTTO_CONSTANTS.minRange,
+      LOTTO_CONSTANTS.maxRange,
+      LOTTO_CONSTANTS.digits,
+    );
 
     return lottoNumberArray;
   }
 
   generateLottoTickets(money) {
     this.#money = money;
+    Console.print(this.#money);
+
     this.#count = parseInt(money / MONEY_CONSTANTS.countUnit);
     const arr = Array(this.#count).fill(null);
     this.#lottoArray = arr.map(() => new Lotto(this.generateLottoNumber()));
@@ -42,10 +48,16 @@ class LottoManager {
 
   setUserLottoArray(userLottoArray) {
     this.#userLottoArray = userLottoArray;
+
+    Console.print('당첨 번호를 입력해 주세요.');
+    Console.print(this.#userLottoArray);
   }
 
   setUserBonusNumber(userBonusNumber) {
     this.#userLottoBonusNumber = userBonusNumber;
+
+    Console.print('보너스 번호를 입력해 주세요.');
+    Console.print(this.#userLottoBonusNumber);
   }
 
   determineLotteryResult() {
@@ -80,6 +92,9 @@ class LottoManager {
   printResult() {
     const result = this.#result;
 
+    Console.print('당첨 통계');
+    Console.print('---');
+    
     Console.print(`3개 일치 (${LottoResult.MATCH_3.prize.toLocaleString('ko-KR')}원) - ${result.match3}개`);
     Console.print(`4개 일치 (${LottoResult.MATCH_4.prize.toLocaleString('ko-KR')}원) - ${result.match4}개`);
     Console.print(`5개 일치 (${LottoResult.MATCH_5.prize.toLocaleString('ko-KR')}원) - ${result.match5}개`);
