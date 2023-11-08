@@ -28,7 +28,11 @@ class LottoGame {
 
   // 로또 당첨 결과 구하기
   getLottoResult(winngNumbers, bonusNumber) {
-    this.Result.getMatchingNumbersCount(winngNumbers, bonusNumber, this.MyLotto);
+    this.Result.getMatchingNumbersCount(
+      winngNumbers.getLotto(),
+      bonusNumber.getBonus(),
+      this.MyLotto.getMyLottoList(),
+    );
   }
 
   // 보너스 번호 입력 받기

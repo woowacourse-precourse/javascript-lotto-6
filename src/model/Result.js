@@ -11,11 +11,8 @@ class Result {
   }
 
   getMatchingNumbersCount(winning, bonus, myLotto) {
-    const winningArray = winning.getLotto();
-    const bonusArray = bonus.getBonus();
-    const myLottoArray = myLotto.getMyLottoList();
-    myLottoArray.forEach((lotto) => {
-      this.checkLottoMatch(lotto, winningArray, bonusArray[0]);
+    myLotto.forEach((lotto) => {
+      this.checkLottoMatch(lotto, winning, bonus[0]);
     });
   }
 
