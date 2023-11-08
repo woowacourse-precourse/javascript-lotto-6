@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { PROMPT_MESSAGE } from './constant/lottoConstants';
 import LottoMachine from './classes/LottoMachine';
 import LottoViewer from './classes/LottoViewer';
-import Lotto from './classes/Lotto';
+import Lotto from './Lotto';
 import LottoResultChecker from './classes/LottoResultChecker';
 
 class App {
