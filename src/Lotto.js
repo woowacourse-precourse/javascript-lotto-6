@@ -9,6 +9,7 @@ class Lotto {
     this.#drawNumbers = numbers;
     this.statCount = [0, 0, 0, 0, 0];
     this.rank = 0;
+    this.profitRate = 0;
   }
 
   getRandomNumbers() {
@@ -25,9 +26,8 @@ class Lotto {
   }
 
   printLottoNumbers(lottoNumbers) {
-    for (let i = 0; i < lottoNumbers.length; i++) {
-      Console.print(lottoNumbers[i]);
-    }
+    const allLottoNumbers = lottoNumbers.map((numbers) => `[ ${numbers.join(", ")} ]`).join("\n");
+    Console.print(allLottoNumbers);
   }
 
   async enterDrawNumbers(num) {
@@ -103,7 +103,7 @@ class Lotto {
     let result = this.matchCountCheck(random, drew);
     let isBonus = this.matchBonusCheck(random, bonus);
     if (result < 3) {
-      throw new Error(ERROR.BAD_RESULT);
+      return (this.rank = 0);
     }
     if (result === 3) {
       return (this.rank = 5);
@@ -172,11 +172,17 @@ class Lotto {
     }
   }
 
-  lottoDrawPrinter(count) {
+  lottoResultPrinter(count, rate) {
     const statCount = this.statCount;
+    const profitRate = this.profitRate;
     Console.print(
-      `${RESULT.START}${RESULT.RANK5}${statCount[0]}개\n${RESULT.RANK4}${statCount[1]}개\n${RESULT.RANK3}${statCount[2]}개\n${RESULT.RANK2}${statCount[3]}개\n${RESULT.RANK1}${statCount[4]}개\n`
+      `${RESULT.START}${RESULT.RANK5}${statCount[0]}개\n${RESULT.RANK4}${statCount[1]}개\n${RESULT.RANK3}${statCount[2]}개\n${RESULT.RANK2}${statCount[3]}개\n${RESULT.RANK1}${statCount[4]}개\n\n총 수익률은 ${profitRate}%입니다.`
     );
+  }
+
+  profitRateAcc(profit, cost) {
+    this.profitRate = parseFloat(((profit / cost) * 100).toFixed(2));
+    return this.profitRate;
   }
 }
 

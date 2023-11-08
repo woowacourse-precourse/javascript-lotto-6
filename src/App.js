@@ -1,12 +1,10 @@
 import Purchase from "./Credit.js";
-import Profit from "./Profit.js";
 import Lotto from "./Lotto.js";
 
 class App {
   constructor() {
     this.Purchase = new Purchase();
     this.Lotto = new Lotto();
-    this.Profit = new Profit();
   }
   async play() {
     const credit = await this.Purchase.getCredit();
@@ -18,9 +16,8 @@ class App {
     const bonusNumber = await this.Lotto.enterBonusNumber();
     const rankOfResult = this.Lotto.resultOfDraw(lottoNumbers, drawNumbers, bonusNumber);
     const resultOfLotto = this.Lotto.lottoDrawResult(rankOfResult);
-    this.Lotto.lottoDrawPrinter(resultOfLotto);
-    const profitRate = this.Profit.profitRateAcc(resultOfLotto, credit);
-    this.Profit.profitRatePrinter(profitRate);
+    const profitRate = this.Lotto.profitRateAcc(resultOfLotto, credit);
+    this.Lotto.lottoResultPrinter(resultOfLotto, profitRate);
   }
 }
 export default App;
