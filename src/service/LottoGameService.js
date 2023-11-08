@@ -16,8 +16,8 @@ class LottoGameService {
   getPublishedLottos(purchaseCount) {
     let publishedLottos = [];
     let count = purchaseCount;
-    while (count !== 0) {
-      const newLotto = new Lotto(this.publishLotto()).sortAscending();
+    while (count > 0) {
+      const newLotto = this.publishLotto();
       publishedLottos = [...publishedLottos, newLotto];
       count -= 1;
     }
@@ -39,8 +39,7 @@ class LottoGameService {
     return matchingNumbers ? matchingNumbers.length : 0;
   }
 
-  getRanksArray(purchaseCount, winningNumbers, bonusNumber) {
-    const publishedLottos = this.getPublishedLottos(purchaseCount);
+  getRanksArray(publishedLottos, winningNumbers, bonusNumber) {
     const ranks = Array.from({ length: condition.maxRankNumber }, () => 0);
     publishedLottos.forEach((lotto) => {
       const matchingNumbers = this.getMatchingNumbers(

@@ -1,4 +1,4 @@
-import { error, condition } from '../consts';
+import { error, condition } from '../consts.js';
 
 const isInteger = (number) => {
   if (!Number.isInteger(number)) {
@@ -27,7 +27,7 @@ const Validator = {
   },
 
   validateLottoLength(numbers) {
-    if (numbers.length !== condition.lottoNumbersLength) {
+    if (!numbers || numbers.length !== condition.lottoNumbersLength) {
       throw error.LottoNumbersLengthError;
     }
   },
@@ -61,7 +61,7 @@ const Validator = {
   validateBonusNumberDuplicate(winningNumbers, bonusNumber) {
     const totalNumbers = [...winningNumbers, bonusNumber];
     const totalNumbersLength =
-      condition.LottoNumbersLength + condition.bonusNumberLength;
+      condition.lottoNumbersLength + condition.bonusNumberLength;
 
     if (new Set(totalNumbers).size !== totalNumbersLength) {
       throw error.LottoNumbersDuplicationError;

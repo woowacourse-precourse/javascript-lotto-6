@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { condition } from './consts';
+import { condition } from './consts.js';
 
 class LottoGenerator {
   generateLotto() {
