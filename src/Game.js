@@ -33,15 +33,15 @@ class Game {
         let winNumInput = "";
         let winNum = [];
         let lotto = null;
-        
+
         while (true) {
             try {
                 winNumInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
                 winNum = winNumInput.split(',').map(n => parseInt(n));
-                lotto = new Lotto(winNum);  // 유효성 검사는 Lotto 클래스의 생성자에서 자동으로 실행됩니다.
+                lotto = new Lotto(winNum);  
                 break;
             } catch (error) {
-                Console.print(error.message);  // Lotto 클래스의 에러 메시지를 출력합니다.
+                Console.print(error.message); 
             }
         }
 
@@ -58,6 +58,31 @@ class Game {
             }
         }
 
+        Console.print("\n당첨 통계\n---\n")
+        // 일치 검사 로직 추가
+        let matchCount = {
+            3: 0,
+            4: 0,
+            5: 0,
+            51: 0,
+            6: 0
+        };
+
+        numList.forEach((numbers, i) => {
+            const matchResult = lottoList[i].checkWinningNumbers(winNum, bonusNum);
+            matchCount[matchResult]++;
+        });
+
+        Console.print(`3개 일치 (5,000원) - ${matchCount[3]}개`);
+        Console.print(`4개 일치 (50,000원) - ${matchCount[4]}개`);
+        Console.print(`5개 일치 (1,500,000원) - ${matchCount[5]}개`);
+        Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${matchCount[51]}개`);
+        Console.print(`6개 일치 (2,000,000,000원) - ${matchCount[6]}개`);
+
+        // 수익률 계산 및 출력
+        const totalPrize = matchCount[3] * 5000 + matchCount[4] * 50000 + matchCount[5] * 1500000 + matchCount[51] * 30000000 + matchCount[6] * 2000000000;
+        const profitRate = (totalPrize - purchaseAmount) / purchaseAmount * 100;
+        Console.print(`총 수익률은 ${+100 + +profitRate.toFixed(2)}%입니다.`);
     }
 }
 
