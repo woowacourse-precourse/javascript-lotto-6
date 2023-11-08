@@ -217,31 +217,29 @@
 |----------|----------|
 |checkLottoPrice()|로또 금액에 대한 예외를 검사한다|
 |checkBonusNumber()| 보너스 번호에 대한 예외를 검사한다|
+----------
+## 파일 구조 📂
 
--------------------------
-## 파일 구조
-
-<br>
-
+```
 javascript-lotto-6
- ┣ .git
- ┣ docs
- ┃ ┗ README.md
- ┣ src
- ┃ ┣ App.js
- ┃ ┣ constant.js
- ┃ ┣ index.js
- ┃ ┣ Lotto.js
- ┃ ┣ message.js
- ┃ ┗ Validate.js
- ┣ __tests__
- ┃ ┣ App.test.js
- ┃ ┣ ApplicationTest.js
- ┃ ┗ LottoTest.js
- ┣ .gitignore
- ┣ .npmrc
- ┣ package-lock.json
- ┗ package.json
+├─ .git
+├─ .gitignore
+├─ .npmrc
+├─ docs
+│  └─ README.md
+├─ package.json
+├─ src
+│  ├─ App.js
+│  ├─ constant.js
+│  ├─ index.js
+│  ├─ Lotto.js
+│  ├─ message.js
+│  └─ Validate.js
+└─ __tests__
+   ├─ App.test.js
+   ├─ ApplicationTest.js
+   └─ LottoTest.js
+```
 
 -------
 ## 기술 스택
