@@ -1,5 +1,6 @@
 import { CONSOLE_MESSAGE } from "../Constants.js";
 import { Console } from "@woowacourse/mission-utils";
+import { PrintView } from "../view/printView.js";
 
 class Statistics {
   constructor() {
@@ -35,24 +36,10 @@ class Statistics {
           break;
       }
     });
-
-    console.log(CONSOLE_MESSAGE.STATISTICS_TITLE + "\n---");
-    this.printPlaces();
+    PrintView.printStatisticsTitle();
+    PrintView.printPlaces(this.countByPlace);
 
     return Object.values(this.countByPlace);
-  }
-  printPlaces() {
-    const placeNames = [
-      CONSOLE_MESSAGE.FIFTH_PLACE,
-      CONSOLE_MESSAGE.FOURTH_PLACE,
-      CONSOLE_MESSAGE.THIRD_PLACE,
-      CONSOLE_MESSAGE.SECOND_PLACE,
-      CONSOLE_MESSAGE.FIRST_PLACE,
-    ];
-    placeNames.forEach((placeName, index) => {
-      const count = this.countByPlace[Object.keys(this.countByPlace)[index]];
-      Console.print(`${placeName}${count}개`);
-    });
   }
 
   rateOfReturn(places, purchaseQuantity) {

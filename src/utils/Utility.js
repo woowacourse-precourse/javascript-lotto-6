@@ -16,9 +16,6 @@ class Utility {
   getLottoNumbers(quantity, min, max, count) {
     return this.lottoPurchased.getLottoNumbers(quantity, min, max, count);
   }
-  printLottoNumbers(lottoArr) {
-    return this.lottoPurchased.printLottoNumbers(lottoArr);
-  }
 
   getWinningLotto() {
     return this.winningLotto.getWinningLotto();

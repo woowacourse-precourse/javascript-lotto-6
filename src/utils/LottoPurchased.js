@@ -1,7 +1,7 @@
 import { Random, Console } from "@woowacourse/mission-utils";
-import { CONSOLE_MESSAGE, ERROR_MESSAGE } from "../Constants.js";
-import Purchase from "../errors/Purchase.js";
-import { InputView } from "../view/inputVeiw.js";
+import { CONSOLE_MESSAGE } from "../Constants.js";
+import { InputView } from "../view/InputVeiw.js";
+import { PrintView } from "../view/printView.js";
 class LottoPurchased {
   async getPurchaseQuantity() {
     let purchaseAmount;
@@ -12,12 +12,13 @@ class LottoPurchased {
 
         break;
       } catch (error) {
-        Console.print(ERROR_MESSAGE.NOT_DIVISIBLE_BY_1000);
+        Console.print(error.message);
       }
     }
 
     const purchaseQuantity = purchaseAmount / 1000;
-    Console.print(purchaseQuantity + CONSOLE_MESSAGE.PURCHASE_AMOUNT);
+    PrintView.printpurchaseQuantity(purchaseQuantity);
+
     return purchaseQuantity;
   }
 
@@ -31,13 +32,6 @@ class LottoPurchased {
     }
 
     return myLottos;
-  }
-
-  printLottoNumbers(lottoArr) {
-    lottoArr.map((lotto) => {
-      const lottoStr = lotto.join(", ");
-      Console.print("[" + lottoStr + "]");
-    });
   }
 }
 
