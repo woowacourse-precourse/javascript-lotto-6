@@ -1,22 +1,23 @@
-import { LOTTO_RESULT } from '../constants/lotto.js';
+import { LOTTO_RESULT, LOTTO } from '../constants/lotto.js';
+import { COMMON } from '../constants/common.js';
 import LottoCompare from './LottoCompare.js';
 
 class LottosResults {
   #lottoCompare;
   #lottos;
-  #initialResults;
+  #initialLottoResults;
 
   constructor(lottos, winningNumbers, bonusNumber) {
     this.#lottos = lottos;
     this.#lottoCompare = new LottoCompare(winningNumbers, bonusNumber);
-    this.#initialResults = this.#getInitialResults();
+    this.#initialLottoResults = this.#getInitialLottoResults();
   }
 
-  #getInitialResults() {
+  #getInitialLottoResults() {
     return Object.keys(LOTTO_RESULT).reduce(
-      (acc, key) => ({
+      (acc, rank) => ({
         ...acc,
-        [key]: 0,
+        [rank]: COMMON.zero,
       }),
       {},
     );
@@ -53,10 +54,10 @@ class LottosResults {
     const lottosRanks = this.getLottosRanks();
 
     lottosRanks.forEach((lottoRank) => {
-      this.#initialResults[lottoRank] += 1;
+      this.#initialLottoResults[lottoRank] += LOTTO.increaseRankCount;
     });
 
-    return this.#initialResults;
+    return this.#initialLottoResults;
   }
 }
 

@@ -5,6 +5,7 @@ export const LOTTO = Object.freeze({
   percentage: 100,
   unitPrice: 1000,
   increseLottoUnit: 1,
+  increaseRankCount: 1,
 });
 
 export const LOTTO_RESULT = Object.freeze({
