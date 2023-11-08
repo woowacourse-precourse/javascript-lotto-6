@@ -28,7 +28,7 @@ class Game {
         this.#validatePrice(price);
         return price;
       } catch(err) {
-        Console.print(err);
+        Console.print(err.message);
       }
     }
   }
@@ -47,7 +47,7 @@ class Game {
         const lotto = new Lotto(input.split(SPLIT_SEPARATOR).map((number) => Number(number)).sort((a, b) => a - b));
         return lotto;
       } catch(err) {
-        Console.print(err);
+        Console.print(err.message);
       }
     }
   }
@@ -60,7 +60,7 @@ class Game {
         this.#validateBonusNumber(bonusNumber);
         return bonusNumber;
       } catch(err) {
-        Console.print(err);
+        Console.print(err.message);
       }
     }
   }
