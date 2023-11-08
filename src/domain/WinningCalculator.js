@@ -4,7 +4,6 @@ import {
   STATISTICS_STANDARD,
   PURCHASE_OPTIONS,
 } from '../service/Constants.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class WinningCalculator {
   #totalWinningNumbers;
@@ -12,7 +11,7 @@ class WinningCalculator {
   #issuedLotto;
 
   constructor(totalWinningNumbers, issuedLotto) {
-    this.#totalWinningNumbers = totalWinningNumbers;
+    this.#totalWinningNumbers = new Map(totalWinningNumbers);
     this.#issuedLotto = issuedLotto;
     this.standard = STATISTICS_STANDARD;
     this.winnerList = new Map();
@@ -46,7 +45,6 @@ class WinningCalculator {
     return targetNumbers.includes(bonusNumber);
   }
 
-  // 끝
   #compileWinner(matchCount) {
     const rankList = this.standard.matchCountRank;
     const rank = rankList.get(matchCount);
@@ -63,6 +61,14 @@ class WinningCalculator {
       this.winnerList.set(rank, this.winnerList.get(rank) - 1);
       this.winnerList.set(bonusRank, 1 + (this.winnerList.get(bonusRank) ?? 0));
     }
+  }
+
+  runCompilingWinner(matchCount) {
+    this.#compileWinner(matchCount);
+  }
+
+  runCompileBonusWinner(matchCount, isWinningBonus) {
+    this.#compileBonusWinner(matchCount, isWinningBonus);
   }
 
   #calculateProfit() {
