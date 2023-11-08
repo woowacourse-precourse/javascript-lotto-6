@@ -25,6 +25,21 @@ class Lotto {
     printLottoNumber() {
         return this.#numbers;
     }
+
+    calculateLottoResult(winningNumber, bonusNumber, lottoResult) {
+        const winningNumArr = winningNumber.split(",").map((el) => Number(el));
+        const bonusNumbertoNumber = Number(bonusNumber);
+        const winningMatches = winningNumArr.filter((el) =>
+            this.#numbers.includes(el)
+        ).length;
+        if (this.#numbers.includes(bonusNumbertoNumber)) {
+            winningMatches += "bonus";
+        }
+        if (winningMatches > 2 || winningMatches === "5bonus") {
+            lottoResult.push(winningMatches);
+        }
+        return lottoResult;
+    }
 }
 
 export default Lotto;
