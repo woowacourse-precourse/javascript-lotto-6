@@ -15,10 +15,17 @@ class Input {
         const count = purchaseAmount / 1000;
         Console.print(`${count}개를 구매했습니다.`);
         const lottoNumbersArray = [];
-        for (let i = 0; i < count; i++) {
+
+        while (lottoNumbersArray.length < 6) {
           const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-          lottoNumbersArray.push(lottoNumbers.join(',')); // 각 로또 번호 세트를 문자열로 저장
-          Console.print(`[${lottoNumbers.join(", ")}]`);
+          const isDuplicate = lottoNumbersArray.some(
+            (numbers) =>
+              JSON.stringify(numbers) === JSON.stringify(lottoNumbers)
+          );
+          if (!isDuplicate) {
+            lottoNumbersArray.push(lottoNumbers);
+            Console.print(`[${lottoNumbers.join(", ")}]`);
+          }
         }
         return { purchaseAmount, lottoNumbersArray };
       }
@@ -28,7 +35,6 @@ class Input {
     }
   }
 
-
   static async inputNumber() {
     try {
       const number = await Console.readLineAsync(
@@ -37,17 +43,16 @@ class Input {
       const lottoNumbers = number
         .split(",")
         .map((number) => parseInt(number, 10));
-      
+
       // Use the Lotto class constructor to perform validation
       const lotto = new Lotto(lottoNumbers);
-      
+
       return lottoNumbers;
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
     }
   }
-  
 
   static async bonusNumber() {
     try {
@@ -57,11 +62,18 @@ class Input {
       const bonusNumbers = numberString
         .split(",")
         .map((number) => parseInt(number, 10));
-  
-      if (bonusNumbers.length !== 1 || isNaN(bonusNumbers[0]) || bonusNumbers[0] < 1 || bonusNumbers[0] > 45) {
-        throw new Error("[ERROR] 보너스 번호는 1부터 45 사이의 하나의 숫자여야 합니다.");
+
+      if (
+        bonusNumbers.length !== 1 ||
+        isNaN(bonusNumbers[0]) ||
+        bonusNumbers[0] < 1 ||
+        bonusNumbers[0] > 45
+      ) {
+        throw new Error(
+          "[ERROR] 보너스 번호는 1부터 45 사이의 하나의 숫자여야 합니다."
+        );
       }
-  
+
       const bonusNumber = bonusNumbers[0];
       return bonusNumber;
     } catch (error) {
@@ -69,7 +81,6 @@ class Input {
       process.exit(1);
     }
   }
-  
 }
 
 export default Input;
