@@ -10,9 +10,7 @@ class Store {
     this.#lottoList = [];
   }
 
-  static async inputMoney() {
-    const money = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    // 예외 처리
+  static #moneyValidate(money) {
     if (isNaN(money)) {
       throw new Error("[ERROR] 1,000원 단위의 숫자를 입력해주세요.");
     }
@@ -21,7 +19,16 @@ class Store {
         "[ERROR] 올바르지 않은 금액입니다. 1,000원 단위로 입력해주세요."
       );
     }
-    return money;
+  }
+
+  static async inputMoney() {
+    try {
+      const money = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+      Store.#moneyValidate(money);
+      return money;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async receivePayment() {
@@ -57,21 +64,26 @@ class Store {
     this.#printLottoList();
   }
 
+  #numberValidate(number, winningNumbersMap) {
+    if (isNaN(number)) {
+      throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해주세요.");
+    }
+    if (number < 1 || number > 45) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    }
+    if (winningNumbersMap.has(number)) {
+      throw new Error("[ERROR] 중복 번호 없이 입력해주세요.");
+    }
+    winningNumbersMap.set(number, true);
+  }
+
   #winningNumbersValidate(winningNumbers, winningNumbersMap) {
     winningNumbersMap.clear();
     if (winningNumbers.length !== 6) {
       throw new Error("[ERROR] 숫자는 6개여야 합니다.");
     }
     for (const number of winningNumbers) {
-      if (isNaN(number)) {
-        throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해주세요.");
-      }
-      if (number < 1 || number > 45) {
-        throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-      }
-      if (winningNumbersMap.has(number)) {
-        throw new Error("[ERROR] 중복 번호 없이 입력해주세요.");
-      }
+      this.#numberValidate(number, winningNumbersMap);
       winningNumbersMap.set(number, true);
     }
   }
