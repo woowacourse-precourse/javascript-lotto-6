@@ -17,4 +17,10 @@ describe("ErrorMessages 클래스 테스트", () => {
     expect(result).toBe("[ERROR] 보너스 번호는 로또번호와 달라야 합니다.");
   });
 
+  it("lottoFormatError 메서드가 올바른 에러 메시지를 반환해야 합니다.", () => {
+    const result = ErrorMessages.lottoFormatError();
+    expect(result).toBe("[ERROR] 로또 형식에 부합하지 않습니다.");
+  });
+
+
 });
