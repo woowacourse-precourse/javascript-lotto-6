@@ -58,9 +58,9 @@ class StartGame {
   purchaseLottos() {
     for (let count = 0; count < this.#purchaseAmount; count += 1) {
       const randomLottoNumber = randomLottoNumbers();
-      const sortedLottoNumber = sortLottoNumbers(randomLottoNumber);
-      Output.printArray(sortedLottoNumber);
-      this.#purchasedLottos.push(sortedLottoNumber);
+      const sortedRandomLottoNumber = sortLottoNumbers(randomLottoNumber);
+      Output.printArray(sortedRandomLottoNumber);
+      this.#purchasedLottos.push(sortedRandomLottoNumber);
     }
   }
 
