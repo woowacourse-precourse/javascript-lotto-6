@@ -1,32 +1,52 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
+import LOTTO_CONFIG from '../constants/lotto.js';
+import Validator from '../utils/Validator.js';
 
 class Lotto {
+  /**
+   * @type {number[]}
+   */
   #numbers;
 
+  /**
+   * Lotto Numbers
+   * @param {number[]} numbers
+   */
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
-
-    if (new Set(numbers).size <= 5) {
-      throw new Error('[ERROR] 로또 번호는 중복되지 않아야 합니다.');
-    }
+    Validator.validInputLottoType(numbers);
+    Validator.validInputLottoScope(numbers);
+    Validator.validInputLottoLength(numbers);
+    Validator.validInputNumbersDuplicate(numbers);
   }
 
-  static randomLottoGenerate() {
-    const arr = Random.pickUniqueNumbersInRange(1, 45, 6);
-    return arr;
+  printNumbers() {
+    this.sortNumbers();
+
+    Console.print(`[${this.#numbers.join(', ')}]`);
   }
 
-  // TODO: 추가 기능 구현
+  sortNumbers() {
+    this.#numbers.sort((a, b) => a - b);
+  }
+
+  getRank(winningNumbers, bonusNumber) {
+    let count = 0;
+
+    this.#numbers.forEach((number) => {
+      if (winningNumbers.includes(number)) count += 1;
+    });
+
+    if (count === 6) return 1;
+
+    if (count === 5 && this.#numbers.includes(bonusNumber)) return 2;
+
+    return 8 - count;
+  }
 }
-
-// const lotto = new Lotto();
-// lotto.randomLottoGenerate();
 
 export default Lotto;

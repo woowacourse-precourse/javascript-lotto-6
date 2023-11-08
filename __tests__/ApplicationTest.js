@@ -1,10 +1,10 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
 import App from '../src/App.js';
 
 const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
+  Console.readLineAsync = jest.fn();
 
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
+  Console.readLineAsync.mockImplementation(() => {
     const input = inputs.shift();
 
     return Promise.resolve(input);
@@ -12,15 +12,15 @@ const mockQuestions = (inputs) => {
 };
 
 const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce(
     (acc, number) => acc.mockReturnValueOnce(number),
-    MissionUtils.Random.pickUniqueNumbersInRange,
+    Random.pickUniqueNumbersInRange,
   );
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  const logSpy = jest.spyOn(Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
@@ -41,6 +41,7 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  //   await expect().rejects.toThrow('[ERROR]');
 };
 
 describe('로또 테스트', () => {
@@ -93,6 +94,14 @@ describe('로또 테스트', () => {
   });
 
   test('예외 테스트', async () => {
-    await runException('1000j');
+    // given
+    mockQuestions(['1000j']);
+    // await runException('1000j');
+
+    // when
+    const app = new App();
+
+    // then
+    await expect(app.play()).rejects.toThrow('[ERROR]');
   });
 });
