@@ -12,6 +12,15 @@ const validation = {
       throw new Error(ERROR_MESSAGE.INVALID_COMMA_SEPARATED);
     }
   },
+
+  validateBonusNumber(input, winningNumbers) {
+    if (Number.isNaN(input)) {
+      throw new Error(ERROR_MESSAGE.INVALID_NUMBER_INPUT);
+    }
+    if (winningNumbers.includes(input)) {
+      throw new Error(ERROR_MESSAGE.DUPLICATE_NUMBERS);
+    }
+  },
 };
 
 export default validation;

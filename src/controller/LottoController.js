@@ -40,6 +40,8 @@ class LottoController {
 
   async getBonusNumber() {
     const input = await inputView.bonusNumber();
+    const parsedInput = parseInt(input, 10);
+    validation.validateBonusNumber(parsedInput, this.winningNumbers);
   }
 }
 
