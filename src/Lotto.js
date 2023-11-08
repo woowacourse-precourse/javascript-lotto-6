@@ -14,6 +14,13 @@ class Lotto {
 
     if (uniqueNumbers.length !== 6)
       throw new Error('[ERROR] duplicate lotto numbers exist.');
+
+    uniqueNumbers.forEach((num) => {
+      if (num > 45 || num < 1 || isNaN(num))
+        throw new Error(
+          '[ERROR] lotto number must be between 1 and 45 or not number.'
+        );
+    });
   }
 
   checkBonusNumber(bonus) {
