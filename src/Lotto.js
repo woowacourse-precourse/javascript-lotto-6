@@ -1,3 +1,5 @@
+import * as NUMBER from './constant/Number.js';
+
 class Lotto {
   #numbers;
 
@@ -7,7 +9,7 @@ class Lotto {
   }
 
   #validate(num) {
-    if (num.length !== 6) {
+    if (num.length !== NUMBER.LOTTO_COUNT) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
     const set = new Set(num);

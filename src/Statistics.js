@@ -1,4 +1,5 @@
 import Output from './view/Output.js';
+import * as NUMBER from './constant/Number.js';
 
 class Statistics {
   #winnigNumbers;
@@ -51,7 +52,7 @@ class Statistics {
         winnerPrice += price[sameNum - 1] * totalCnt;
       }
     });
-    const purchasePrice = lottoList.length * 1000;
+    const purchasePrice = lottoList.length * NUMBER.LOTTO_PRICE;
     const totalReturn = ((winnerPrice / purchasePrice) * 100).toFixed(1);
     Output.printTotalReturn(totalReturn);
   }

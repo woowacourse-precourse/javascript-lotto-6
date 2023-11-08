@@ -1,15 +1,20 @@
 import Lotto from '../Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Statistics from '../Statistics.js';
+import * as NUMBER from '../constant/Number.js';
 
 const LottoMachine = {
   async getLottoCount(purchasePrice) {
-    return purchasePrice / 1000;
+    return purchasePrice / NUMBER.LOTTO_PRICE;
   },
   async generateLotto(count) {
     const lottoList = [];
     while (count--) {
-      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
+        NUMBER.LOTTO_FIRST_NUMBER,
+        NUMBER.LOTTO_LAST_NUMBER,
+        NUMBER.LOTTO_COUNT
+      );
       const LottoInstance = new Lotto(numbers);
       lottoList.push(LottoInstance.result());
     }
@@ -17,7 +22,6 @@ const LottoMachine = {
     return lottoList;
   },
   async getStatisticsResult(winningNumber, bonusNumber, lottoList) {
-    const result = [];
     const statisticsInst = new Statistics(
       winningNumber,
       bonusNumber,
