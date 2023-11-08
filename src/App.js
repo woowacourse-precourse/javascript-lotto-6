@@ -23,6 +23,12 @@ class App {
 
     const winningNumbers = await this.getWinningNumber();
     const bonusNumber = await this.getBonusNumber();
+    const rankCount = this.getRankCount(winningNumbers, bonusNumber, lottoList);
+    const rateOfReturn = this.calculateRateOfReturn(payment, rankCount);
+
+    this.showResult(rankCount, rateOfReturn);
+  }
+
   async getPayment() {
     try {
       const payment =
@@ -96,6 +102,40 @@ class App {
       Console.print(e.message);
       return this.getBonusNumber();
     }
+  }
+
+  getRankCount(winningLotto, bonusNumber, lottoList) {
+    const winningNumbers = winningLotto.getNumber();
+    let rankCount = Array(INPUT_LENGTH).fill(0);
+    lottoList.forEach((lotto) => {
+      const rank = lotto.getRank(winningNumbers, bonusNumber);
+      rankCount[rank] += 1;
+    });
+
+    return rankCount;
+  }
+  calculateRateOfReturn(payment, rankCount) {
+    const profit = rankCount.reduce(
+      (total, count, idx) =>
+        total + count * this.LOTTO_UNIT * this.LOTTO_REWARD[idx],
+      0
+    );
+
+    const rateOfReturn = (profit / payment) * 100;
+    return rateOfReturn.toFixed(1);
+  }
+
+  showResult(rankCount, rateOfReturn) {
+    Console.print(`\n당첨 통계\n---`);
+    for (let i = 5; i > 0; i--) {
+      const rule = this.LOTTO_RULES[i];
+      const reward = this.LOTTO_REWARD[i] * this.LOTTO_UNIT;
+      const count = rankCount[i];
+      Console.print(
+        `${rule} (${reward.toLocaleString("ko-KR")}원) - ${count}개`
+      );
+    }
+    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   }
 }
 

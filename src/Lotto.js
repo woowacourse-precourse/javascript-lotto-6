@@ -33,6 +33,24 @@ class Lotto {
     return this.#numbers;
   }
 
+  getRank(winningNumber, bonusNumber) {
+    const isMatchedBonus = this.#numbers.includes(bonusNumber);
+    let count = winningNumber.filter((n) => this.#numbers.includes(n))?.length;
+
+    if (count === 6) {
+      return 1;
+    }
+    if (count === 5) {
+      return isMatchedBonus ? 2 : 3;
+    }
+    if (count === 4) {
+      return 4;
+    }
+    if (count === 3) {
+      return 5;
+    }
+    return 0;
+  }
 }
 
 export default Lotto;
