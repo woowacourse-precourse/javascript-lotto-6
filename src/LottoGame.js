@@ -19,7 +19,8 @@ export class LottoGame {
       this.playerLottos = this.lottoMachine.buyLottos(cashCount.count);
     } catch (error) {
       MissionUtils.Console.print(error.message);
-      return this.buyLottos();
+      await this.buyLottos();
+      return;
     }
   }
 
@@ -30,7 +31,8 @@ export class LottoGame {
       this.winningNumbers = winningNumbers.numbers;
     } catch (error) {
       MissionUtils.Console.print(error.message);
-      return this.winLottos();
+      await this.winLottos();
+      return;
     }
   }
 
@@ -41,7 +43,8 @@ export class LottoGame {
       this.bonusNumber = Number(bonusNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);
-      return this.isBonusNumber();
+      await this.isBonusNumber();
+      return;
     }
   }
 
