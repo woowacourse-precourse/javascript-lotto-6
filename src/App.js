@@ -1,7 +1,7 @@
-import Lotto from './models/Lotto.js';
-import LottoCalculator from './models/LottoCalculator.js';
-import InputView from './views/InputView.js';
-import OutputView from './views/OutputView.js';
+import Lotto from './Lotto.js';
+import LottoCalculator from './LottoCalculator.js';
+import InputView from './InputView.js';
+import OutputView from './OutputView.js';
 
 class App {
   constructor() {

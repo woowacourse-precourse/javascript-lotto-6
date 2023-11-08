@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import { OPTION } from '../constants/Lotto.js';
-import Validation from '../validations/Lotto.js';
+import { OPTION } from './Constant.js';
+import Validation from './Validation.js';
 
 class Lotto {
   /** @type {number[]} */

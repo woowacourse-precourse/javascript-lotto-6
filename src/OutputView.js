@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE, OPTION } from '../constants/Lotto.js';
+import { MESSAGE, OPTION } from './Constant.js';
 
 const OutputView = {
   /**

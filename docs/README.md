@@ -6,16 +6,12 @@
 
 ```
  📁src
- ┣ 📂constants
- ┃ ┗ 📃Lotto.js
- ┣ 📂models
- ┃ ┣ 📃Lotto.js
- ┃ ┗ 📃LottoCalculator.js
- ┣ 📂validations
- ┃ ┗ 📃Lotto.js
- ┣ 📂views
- ┃ ┣ 📃InputView.js
- ┃ ┗ 📃OutputView.js
+ ┃ 📃Constant.js
+ ┃ 📃Lotto.js
+ ┃ 📃LottoCalculator.js
+ ┃ 📃Validation.js
+ ┃ 📃InputView.js
+ ┃ 📃OutputView.js
  ┣ 📃App.js
  ┗ 📃index.js
 ```
@@ -34,7 +30,7 @@
 
 - [x] 당첨 통계 출력
 
-### `constants/Lotto.js`
+### `Constant.js`
 
 > 로또에 필요한 입출력 메시지와 상수를 모아둔 파일
 
@@ -42,7 +38,7 @@
 
 - [x] 기타 상수 (로또 가격, 추첨 숫자의 개수, 로또 숫자 범위, 당첨 등수, 당첨금 등)
 
-### `models/Lotto.js`
+### `Lotto.js`
 
 > 로또 1 게임을 표현하는 클래스
 
@@ -58,7 +54,7 @@
 
   - [x] 구매 금액이 로또 가격에 나누어떨어지지 않는 경우에도 정상 작동하게끔 구현
 
-### `models/LottoCalculator.js`
+### `LottoCalculator.js`
 
 > 각 로또들의 당첨 여부를 계산해 당첨 통계를 내는 클래스
 
@@ -70,7 +66,7 @@
 
 - [x] 총 당첨금과 수익률 구하기
 
-### `validations/Lotto.js`
+### `Validation.js`
 
 > 로또에 번호에 대한 유효성 검사
 
@@ -82,7 +78,7 @@
 
 - [x] 로또 번호의 개수가 정해진 상수와 같아야 함
 
-### `views/InputView.js`
+### `InputView.js`
 
 > 사용자로부터 데이터를 입력받는 부분을 모아둔 파일
 
@@ -92,7 +88,7 @@
 
 - [x] 보너스 번호 입력받기
 
-### `views/OutputView.js`
+### `OutputView.js`
 
 > 데이터를 적절하게 출력하는 함수를 모아둔 파일
 
