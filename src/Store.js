@@ -194,6 +194,13 @@ class Store {
     profitRate = (lottoProfit / this.#money) * 100;
     return profitRate;
   }
+
+  printLottoResult(rankCountMap) {
+    const profitRate = this.calculateProfitRate(rankCountMap);
+    Console.print("\n당첨 통계\n---");
+    Console.print(Store.generateWinningMessage(rankCountMap));
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  }
 }
 
 export default Store;
