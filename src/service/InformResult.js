@@ -4,6 +4,7 @@ const INFORM_TEMPLATE = {
   purchase: '개를 구매했습니다.',
   numberSeperator: ', ',
   lottoSeperator: '\n',
+  profit: (profit) => `총 수익률은 ${profit}%입니다.`,
 };
 
 const RANKING = new Map([
@@ -51,6 +52,11 @@ const informResult = {
         }) - ${matchCount}${PRINT_STRING.matchCountUnit}`,
       );
     });
+  },
+
+  winningProfit: (profit) => {
+    const message = INFORM_TEMPLATE.profit(profit);
+    Utils.informUser(message);
   },
 };
 
