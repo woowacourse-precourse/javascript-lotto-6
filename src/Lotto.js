@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 class Lotto {
   #numbers;
 
@@ -45,6 +45,20 @@ class Lotto {
       }
     }
     return count;
+  }
+  getMatchCount(rank) {
+    // 등수별 당첨 개수 구하기
+    return this.prizes[rank].matchCount;
+  }
+
+  printWinningResult() {
+    Console.print("당첨 통계");
+    Console.print("---");
+    Console.print(`3개 일치 (5000원)- ${this.getMatchCount(5)}개`);
+    Console.print(`4개 일치 (50000원)- ${this.getMatchCount(4)}개`);
+    Console.print(`5개 일치 (1500000원)- ${this.getMatchCount(3)}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30000000원)- ${this.getMatchCount(2)}개`);
+    Console.print(`6개 일치 (2000000000원)- ${this.getMatchCount(1)}개`);
   }
 }
 

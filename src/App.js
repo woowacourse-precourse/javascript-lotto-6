@@ -18,6 +18,7 @@ class App {
     for (let i = 0; i < randomNumbers.length; i += 1) {
       loto.winningResult(randomNumbers[i], Number(inputBonusNumbers)); // 당첨 결과 구하기
     }
+    loto.printWinningResult();
   }
 
   countOfLotto(inputPrice) {
@@ -36,10 +37,6 @@ class App {
 
   sortNumbers(randomNumbers) {
     randomNumbers.sort((a, b) => a - b);
-  }
-
-  printResult() {
-    // 결과 출력
   }
 }
 
