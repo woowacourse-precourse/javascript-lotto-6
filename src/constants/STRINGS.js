@@ -12,6 +12,7 @@ const STRINGS = Object.freeze({
   RATE_OF_RETURN: (rateOfReturn) => `총 수익률은 ${rateOfReturn}%입니다.\n`,
 
   ERROR_LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
+  ERROR_COMMA: '[ERROR] 당첨 번호는 쉼표(,)로 구분해야 합니다.',
   ERROR_UNIT: '[ERROR] 구입 금액은 1,000원 단위만 가능합니다.',
   ERROR_NAN: '[ERROR] 숫자만 입력 가능합니다.',
   ERROR_RANGE: '[ERROR] 1부터 45까지의 숫자만 입력 가능합니다.',
