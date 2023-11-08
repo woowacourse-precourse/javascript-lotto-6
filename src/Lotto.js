@@ -15,6 +15,10 @@ class Lotto {
         throw new Error('[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.');
       }
     });
+    const set = new Set(numbers);
+    if (numbers.length !== set.size) {
+      throw new Error('[ERROR] 숫자가 중복되어서는 안 됩니다.');
+    }
   }
 
   // TODO: 추가 기능 구현
