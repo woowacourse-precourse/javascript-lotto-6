@@ -25,14 +25,14 @@ export default class Controller {
     return this.handleLottoCount(input);
   }
 
-  handleLottoCount(input) {
+  async handleLottoCount(input) {
     this.#myLotto.setLottoCount(input);
     outputView.printLottoCount(this.#myLotto.getLottoCount());
 
     return this.handleQuickPicks();
   }
 
-  handleQuickPicks() {
+  async handleQuickPicks() {
     this.#myLotto.setQuickPicks();
     outputView.printQuickPicks(this.#myLotto.getQuickPicks());
 
@@ -49,12 +49,12 @@ export default class Controller {
 
   async handleBonusWinNumber() {
     const input = await inputView.readBonusWinNumber();
-    this.#winNumber.setBonusWinNum(input);
+    await this.#winNumber.setBonusWinNum(input);
 
     return this.handleWinCount();
   }
 
-  async handleWinCount() {
+  handleWinCount() {
     const service = new Service(this.#myLotto, this.#winNumber);
     service.compareNumber();
     this.#myLotto.setWinResult();
@@ -63,9 +63,9 @@ export default class Controller {
     return this.handleReturnRate();
   }
 
-  handleReturnRate() {
+  async handleReturnRate() {
     const returnMoneyService = new ReturnMoneyService(this.#myLotto, this.#myWallet);
-    returnMoneyService.calculateWinMoney();
+    await returnMoneyService.calculateWinMoney();
 
     return outputView.printReturnRate(this.#myWallet.getReturnRate());
   }

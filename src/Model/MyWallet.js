@@ -9,8 +9,8 @@ export default class MyWallet {
     this.#purchaseAmount = Number(input);
   }
 
-  setReturnMoney(input) {
-    this.#returnMoney = input;
+  async setReturnMoney(input) {
+    this.#returnMoney = await input;
     return this.setReturnRate();
   }
 
