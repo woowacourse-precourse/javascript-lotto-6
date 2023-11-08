@@ -1,13 +1,13 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { ERROR, LOTTO } from './config.js';
-import { isDuplicated, isPositiveInteger } from './utils.js';
+import { isPositiveInteger } from './utils.js';
 
 class Lotto {
   static generateLottoNumbers() {
     const { RANGE, COUNT } = LOTTO;
     const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(RANGE.START, RANGE.END, COUNT);
 
-    return lottoNumbers.sort((a, b) => a - b);
+    return lottoNumbers.sort((a, b) => a - b).map((number) => String(number));
   }
 
   static createLottos(inputAmount) {
@@ -29,7 +29,7 @@ class Lotto {
     if (this.#isDuplicated(numbers)) {
       throw new Error(ERROR.IS_DUPLICATED);
     }
-    if (this.#isNotPositiveInteger(numbers)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
+    if (!this.#isPositiveInteger(numbers)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
     if (this.#isRangeInvalid(numbers)) throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
   }
 
@@ -39,8 +39,8 @@ class Lotto {
     return set.size !== numbers.length;
   }
 
-  #isNotPositiveInteger(numbers) {
-    return !numbers.every(isPositiveInteger);
+  #isPositiveInteger(numbers) {
+    return numbers.every(isPositiveInteger);
   }
 
   #isRangeInvalid(numbers) {
