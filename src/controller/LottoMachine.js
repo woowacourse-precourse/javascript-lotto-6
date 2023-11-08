@@ -26,7 +26,7 @@ export default class LottoMachine {
     await this.#getBonusNumber();
     this.#findMatchCount();
     this.#calculateWinningStats();
-    this.#calculateProfit();
+    this.#printProfit();
   }
 
   #makeOneLotto() {
@@ -148,8 +148,10 @@ export default class LottoMachine {
   }
 
   #calculateProfit() {
-    const roundProfit = ((this.#player.getWinningAmount() / this.#player.getPurchaseAmount()) * 100).toFixed(1);
+    return ((this.#player.getWinningAmount() / this.#player.getPurchaseAmount()) * 100).toFixed(1);
+  }
 
-    OutputView.printProfit(roundProfit);
+  #printProfit() {
+    OutputView.printProfit(this.#calculateProfit());
   }
 }
