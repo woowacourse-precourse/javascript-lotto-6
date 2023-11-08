@@ -12,16 +12,11 @@ class InputView {
     this.inputBonusNumber = 0;
   }
 
-  saveLottoWinningNumber() {
-    const input = this.WinningNumber();
-    this.inputWinningNumber = this.stringToNumberArray(input);
-    return this.winningNumber;
-  }
-
   async playerWinningNumber() {
     const playerNumber = await Console.readLineAsync(INPUT_WINNING_NUMBER);
     this.inputWinningNumber = this.toNumberArray(playerNumber);
-    return this.inputWinningNumber;
+    Console.print(this.inputWinningNumber);
+    return new Lotto(this.inputWinningNumber);
   }
 
   async amountOfMoney() {

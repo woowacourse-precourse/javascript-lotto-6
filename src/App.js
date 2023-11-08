@@ -43,8 +43,9 @@ class App {
   async getAndValidateWinningNumber() {
     while (true) {
       try {
-        const inputLottoNumber = await this.inputview.playerWinningNumber();
-        return inputLottoNumber;
+        const inputLotto = await this.inputview.playerWinningNumber();
+        Console.print(inputLotto);
+        return inputLotto.getNumbers();
       } catch (error) {
         Console.print(error.message);
       }
