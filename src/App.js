@@ -28,7 +28,7 @@ class App {
 
   getSixNum = async () => {
     let sixNum = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
-    const sixNumToArray = sixNum.split(",").map(str => str.trim()).map(Number);
+    const sixNumToArray = sixNum.split(",").map(str => parseFloat(str.trim()));
     return sixNumToArray;
   };
 }

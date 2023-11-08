@@ -16,23 +16,26 @@ class Lotto {
     await printOutput.print(validNumbers, validBonusNum, lottoNumSets, validPrice);
   }
 
-  hasDuplicates = (numbers) => {
-    const uniqueNumbers = [...new Set(numbers)];
-    return numbers.length !== uniqueNumbers.length;
-  };
-
   #validate(numbers) {
     if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     if (this.hasDuplicates(numbers))
       throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
-    if (numbers.some(num => Number.isNaN(num)))
-      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
+    if (numbers.some(num => this.containsNonNumeric(num)))
+      throw new Error("[ERROR] 숫자(정수)를 입력해야 합니다.");
     if (numbers.some(num => num <= 0 || num >= 46))
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
-    if (numbers.some(num => num >= 1 && num <= 45 && !Number.isInteger(num)))
-      throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
     return numbers;
+  };
+
+  hasDuplicates = (numbers) => {
+    const uniqueNumbers = [...new Set(numbers)];
+    return numbers.length !== uniqueNumbers.length;
+  };
+
+  containsNonNumeric = (str) => {
+    const nonNumericPattern = /[^0-9]/;
+    return nonNumericPattern.test(str);
   };
 
   checkSixNum = async () => {
@@ -66,15 +69,13 @@ class Lotto {
   validateBonusNum(sixNum, bonusNum) {
     if (bonusNum.includes(","))
       throw new Error("[ERROR] 숫자는 1개만 입력해야 합니다.");
-    const bonusNumToInt = parseFloat(bonusNum);
-    if (Number.isNaN(bonusNumToInt))
-      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
+    if (this.containsNonNumeric(bonusNum))
+      throw new Error("[ERROR] 숫자(정수)를 입력해야 합니다.");
+    const bonusNumToInt = parseInt(bonusNum);
     if (sixNum.includes(bonusNumToInt))
       throw new Error("[ERROR] 6개의 당첨 번호 이외의 숫자를 입력해야 합니다.");
     if (bonusNumToInt <= 0 || bonusNumToInt >= 46)
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
-    if (bonusNumToInt >= 1 && bonusNumToInt <= 45 && !Number.isInteger(bonusNumToInt))
-      throw new Error("[ERROR] 1부터 45 사이의 정수를 입력해야 합니다.");
     return bonusNumToInt;
   };
 }

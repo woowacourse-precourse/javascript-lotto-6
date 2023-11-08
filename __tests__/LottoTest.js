@@ -14,27 +14,62 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test("로또 번호 중 하나라도 숫자가 아니면 예외가 발생한다.", () => {
+  test("로또 번호 중 하나라도 숫자가 아니면(문자를 포함하면) 예외가 발생한다.", () => {
     expect(() => {
-      new Lotto([1, 2, 3, "a"]);
+      new Lotto([1, 2, 3, 4, 5, "a"]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("로또 번호 중 하나라도 소수점을 포함하는 숫자이면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4.5, 6, 7]);
     }).toThrow("[ERROR]");
   });
 
   test("로또 번호 중 하나라도 1부터 45 사이의 숫자가 아니면 예외가 발생한다.", () => {
     expect(() => {
-      new Lotto([1, 2, 3, 46]);
-    }).toThrow("[ERROR]");
-  });
-
-  test("로또 번호 중 하나라도 정수가 아니면(실수이면) 예외가 발생한다.", () => {
-    expect(() => {
-      new Lotto([1, 2, 3, 4.5]);
+      new Lotto([1, 2, 3, 46, 4, 5]);
     }).toThrow("[ERROR]");
   });
 
   test("로또 번호 정상 작동하는 경우", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6]);
+    }).not.toThrow();
+  });
+
+  test("보너스 번호에 콤마(,)가 포함되면 예외가 발생한다.", () => {
+    expect(() => {
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      lotto.validateBonusNum([1, 2, 3, 4, 5, 6], "1, 2");
+    }).toThrow("[ERROR]");
+  });
+
+  test("보너스 번호가 숫자가 아니면 예외가 발생한다.", () => {
+    expect(() => {
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      lotto.validateBonusNum([1, 2, 3, 4, 5, 6], "1a");
+    }).toThrow("[ERROR]");
+  });
+
+  test("보너스 번호가 로또 번호 중 하나이면 예외가 발생한다.", () => {
+    expect(() => {
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      lotto.validateBonusNum([1, 2, 3, 4, 5, 6], "1");
+    }).toThrow("[ERROR]");
+  });
+
+  test("보너스 번호가 1부터 45 사이의 숫자가 아니면 예외가 발생한다.", () => {
+    expect(() => {
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      lotto.validateBonusNum([1, 2, 3, 4, 5, 6], "46");
+    }).toThrow("[ERROR]");
+  });
+
+  test("보너스 번호 정상 작동하는 경우", () => {
+    expect(() => {
+      const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+      lotto.validateBonusNum([1, 2, 3, 4, 5, 6], "7");
     }).not.toThrow();
   });
 });
