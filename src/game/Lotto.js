@@ -1,6 +1,6 @@
 import lottoRanking from "./lottoRanking";
 import { Random } from "@woowacourse/mission-utils";
-import { ERROR, CONSTANTS } from "../output/Constants";
+import { ERROR, CONSTANTS } from "../output/constants";
 
 class Lotto {
   #numbers;

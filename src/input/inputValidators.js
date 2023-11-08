@@ -1,4 +1,4 @@
-import { ERROR, CONSTANTS } from "../output/Constants";
+import { ERROR, CONSTANTS } from "../output/constants";
 
 const inputValidators = {
   validatePayment(payment) {

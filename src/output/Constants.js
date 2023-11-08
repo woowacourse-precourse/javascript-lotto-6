@@ -19,7 +19,6 @@ export const ERROR = {
 export const MESSAGES = {
   RESULT : "당첨 통계",
   PAYMENT_INPUT : "구입금액을 입력해 주세요.",
-  TOTAL_PROFIT_RATE : "총 수익률은 ${profitRate}%입니다.",
   TICKETS_PURCHASED : "개를 구매했습니다.",
   BONUS_NUMBER_INPUT : "보너스 번호를 입력해 주세요.",
   WINNING_NUMBERS_INPUT : "당첨 번호를 입력해 주세요."

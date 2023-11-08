@@ -1,6 +1,6 @@
 import inputValidators from './inputValidators.js';
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR, MESSAGES } from '../output/Constants.js';
+import { ERROR, MESSAGES } from '../output/constants.js';
 
 const inputHandlers = {
   async inputPayment() {
