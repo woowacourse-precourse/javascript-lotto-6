@@ -102,11 +102,12 @@ node index
 
 | 메소드 | 설명 |
 | --- | --- |
-| setComparedLottoNumbers() | 로또 티켓을 비교하고 당첨 상금을 업데이트 |
-| updatePrize(hasBonusNumber, correctCount) | 로또 티켓의 당첨 상금을 업데이트 |
+| start() | 주어진 로또 티켓 목록을 순회하면서 당첨 여부를 확인 |
+| compareLottoNumbers(lotto) | 주어진 로또 티켓과 당첨 번호를 비교|
+| updatePrize(hasBonusNumber, correctCount) | 로또 티켓의 당첨 상급 업데이트 |
 | findMatchedPrize(hasBonusNumber, correctCount) | 일치하는 상금 정보를 찾아 반환 |
-| checkBonusNumber(lottoNumbers) | 보너스 번호와 일치하는지 확인 |
-| countCorrectNumbers(lottoNumbers) | 일치하는 번호의 개수를 세어 반환 |
+| checkBonusNumber(lottoNumbers) | 로또 티켓 번호와 보너스 번호를 비교하여 일치 여부를 확인 |
+| countCorrectNumbers(lottoNumbers) | 로또 티켓 번호와 당첨 번호를 비교하여 일치하는 번호의 개수 반환 |
 
 
 </br>
