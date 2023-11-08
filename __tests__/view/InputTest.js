@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import InputVeiw from "../../src/veiw/input-veiw";
+import InputView from "../../src/view/input-view";
 
 const mockInput = (input) => {
     MissionUtils.Console.readLineAsync = jest.fn();
@@ -13,7 +13,7 @@ describe("입력값 테스트", () => {
         mockInput(input);
 
         //when
-        const inputValue = new InputVeiw();
+        const inputValue = new InputView();
         const output = await inputValue.readPurchaseAmount();
 
         //then
@@ -26,7 +26,7 @@ describe("입력값 테스트", () => {
         mockInput(input);
 
         //when
-        const inputValue = new InputVeiw();
+        const inputValue = new InputView();
 
         //then
         await expect(inputValue.readPurchaseAmount()).rejects.toThrow("[ERROR]");
@@ -39,7 +39,7 @@ describe("입력값 테스트", () => {
         mockInput(inputs);
 
         //when
-        const inputValue = new InputVeiw();
+        const inputValue = new InputView();
 
         //then
         await expect(inputValue.readPurchaseAmount()).rejects.toThrow("[ERROR]");
