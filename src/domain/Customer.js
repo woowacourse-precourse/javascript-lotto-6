@@ -2,7 +2,7 @@ import CustomError from '../CustomError.js';
 import { ERROR, LOTTO } from '../Constant.js';
 import LottoFactory from './LottoFactory.js';
 
-class Buyer {
+class Customer {
   #money;
 
   #lottos; // @type {Array<Lotto>}
@@ -43,4 +43,4 @@ class Buyer {
   }
 }
 
-export default Buyer;
+export default Customer;

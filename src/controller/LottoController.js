@@ -1,6 +1,6 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import Buyer from '../domain/Buyer.js';
+import Customer from '../domain/Customer.js';
 import LottoWinResult from '../domain/LottoWinResult.js';
 import WinningLotto from '../domain/WinningLotto.js';
 
@@ -11,7 +11,7 @@ class LottoController {
 
   async handleBuyLottos() {
     const money = await InputView.readMoney();
-    this.#buyer = new Buyer(money);
+    this.#buyer = new Customer(money);
     this.#buyer.buyLottos();
     OutputView.printLottos(this.#buyer.getLottos());
   }
@@ -27,6 +27,8 @@ class LottoController {
 
   async handleLottoResult() {
     const receivedPrizes = this.#buyer.receivePrizes(this.#lottoWinResult);
+
+    OutputView.printLottoResult(receivedPrizes);
   }
 }
 
