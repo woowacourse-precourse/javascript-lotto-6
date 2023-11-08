@@ -23,5 +23,8 @@ class UserLotto{
         })
     }
 
+    getLottoNumbers(){
+        return this.lottoNumbers;
+    }
 }
 export default UserLotto;

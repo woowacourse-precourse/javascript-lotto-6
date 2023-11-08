@@ -8,5 +8,12 @@ class UserWinningLotto{
         this.lottoNumber = new Lotto(lottoNumber);
         this.bonusNumber = bonusNumber;
     }
+
+    getLottoNumber(){
+        return this.lottoNumber.getLottoNumber();
+    }
+    getBonusNumber(){
+        return this.bonusNumber;
+    }
 }
 export default UserWinningLotto;

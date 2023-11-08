@@ -26,6 +26,8 @@ class LottoSettingController {
 
         const userLotto = new UserLotto(lottoPurchaseCount);
         userLotto.printLottoNumbers();
+        
+        return userLotto;
     }
 }
 export default LottoSettingController;

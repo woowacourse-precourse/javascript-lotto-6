@@ -1,5 +1,6 @@
 import LottoView from "../views/LottoView.js";
 import Validation from "../models/Validation.js";
+import UserWinningLotto from "../models/UserWinningLotto.js";
 
 class UserLottoNumberController{
     static async setUserLottoNumber(){
@@ -18,9 +19,10 @@ class UserLottoNumberController{
 
     static async setUserInputLottoNumber(){
         const userLottoNumber = await this.setUserLottoNumber();
-        console.log("유저로또넘버는?",userLottoNumber);
         const userBonusLottoNumber = await this.setUserBonusLottoNumber(userLottoNumber);
-
+        
+        const userWinningLotto = new UserWinningLotto(userLottoNumber, userBonusLottoNumber);
+        return userWinningLotto;
     }
 }
 

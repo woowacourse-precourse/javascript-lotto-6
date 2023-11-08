@@ -19,6 +19,10 @@ class Lotto {
     LottoView.printPurchaseLottoNumbers(`[${this.#numbers.join(", ")}]`);
   }
 
+  getLottoNumber(){
+    return this.#numbers;
+  }
+
 }
 
 export default Lotto;
