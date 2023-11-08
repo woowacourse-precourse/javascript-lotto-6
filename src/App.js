@@ -9,18 +9,22 @@ class App {
   #lottos;
   #winningNumbers;
 
+  constructor() {
+    this.InputView = new InputView();
+  }
+
   async getLotto() {
-    const money = await InputView.getPurchaseAmout();
+    const money = await this.InputView.getPurchaseAmout();
     this.#lottos = Lotto.purchaseLotto(money);
     OutputView.printPurchaseAmout(this.#lottos);
   }
 
   async getWinningNumbers() {
     try {
-      const numbers = await InputView.getWinningNumbers();
+      const numbers = await this.InputView.getWinningNumbers();
       const lotto = new Lotto(numbers);
 
-      const bonusNumber = await InputView.getBonusNumber();
+      const bonusNumber = await this.InputView.getBonusNumber();
       this.#winningNumbers = new WinningNumbers(lotto, bonusNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);

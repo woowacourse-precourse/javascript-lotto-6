@@ -2,7 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { validatePurchaseAmount } from "../utils/validate.js";
 import { MESSAGE } from "../constant/GameConfig.js";
 
-const InputView = {
+class InputView {
   async getPurchaseAmout() {
     try {
       const purchaseAmout = await MissionUtils.Console.readLineAsync(`${MESSAGE.input.purchase}`);
@@ -13,7 +13,7 @@ const InputView = {
       MissionUtils.Console.print(error.message);
       return await this.getPurchaseAmout();
     }
-  },
+  }
 
   async getWinningNumbers() {
     try {
@@ -25,7 +25,7 @@ const InputView = {
     } catch (error) {
       MissionUtils.Console.print(error.message);
     }
-  },
+  }
 
   async getBonusNumber() {
     try {
@@ -37,7 +37,7 @@ const InputView = {
     } catch (error) {
       MissionUtils.Console.print(error.message);
     }
-  },
-};
+  }
+}
 
 export default InputView;
