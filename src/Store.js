@@ -57,7 +57,8 @@ class Store {
     this.#printLottoList();
   }
 
-  #winningNumbersValidate(winningNumbers) {
+  #winningNumbersValidate(winningNumbers, winningNumbersMap) {
+    winningNumbersMap.clear();
     if (winningNumbers.length !== 6) {
       throw new Error("[ERROR] 숫자는 6개여야 합니다.");
     }
@@ -68,26 +69,35 @@ class Store {
       if (number < 1 || number > 45) {
         throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
       }
+      if (winningNumbersMap.has(number)) {
+        throw new Error("[ERROR] 중복 번호 없이 입력해주세요.");
+      }
+      winningNumbersMap.set(number, true);
     }
   }
 
-  #bonusNumberValidate(bonusNumber) {
+  #bonusNumberValidate(bonusNumber, winningNumbersMap) {
     if (isNaN(bonusNumber)) {
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해주세요.");
     }
     if (bonusNumber < 1 || bonusNumber > 45) {
       throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
+    if (winningNumbersMap.has(bonusNumber)) {
+      throw new Error("[ERROR] 당첨 번호과 중복되지 않는 번호를 입력해주세요.");
+    }
   }
 
-  async inputWinningNumbers() {
+  async inputWinningNumbers(winningNumbersMap) {
     while (true) {
       try {
         const winningNumbersInput = await Console.readLineAsync(
           "당첨 번호를 입력해 주세요.\n"
         );
-        const winningNumbers = winningNumbersInput.split(",");
-        this.#winningNumbersValidate(winningNumbers);
+        const winningNumbers = Array.from(winningNumbersInput.split(",")).map(
+          Number
+        );
+        this.#winningNumbersValidate(winningNumbers, winningNumbersMap);
         return winningNumbers;
       } catch (error) {
         Console.print(error.message);
@@ -95,18 +105,53 @@ class Store {
     }
   }
 
-  async inputBonusNumber() {
+  async inputBonusNumber(winningNumbersMap) {
     while (true) {
       try {
-        const bonusNumber = await Console.readLineAsync(
+        const bonusNumberInput = await Console.readLineAsync(
           "보너스 번호를 입력해 주세요.\n"
         );
-        this.#bonusNumberValidate(bonusNumber);
+        const bonusNumber = Number(bonusNumberInput);
+        this.#bonusNumberValidate(bonusNumber, winningNumbersMap);
         return bonusNumber;
       } catch (error) {
         Console.print(error.message);
       }
     }
+  }
+
+  static calculateRank(compareResult) {
+    if (compareResult.sameNumberCount === 6) {
+      return 1;
+    }
+    if (compareResult.sameNumberCount === 5) {
+      if (compareResult.bonusIsSame === true) {
+        return 2;
+      }
+      return 3;
+    }
+    if (compareResult.sameNumberCount === 4) {
+      return 4;
+    }
+    if (compareResult.sameNumberCount === 3) {
+      return 5;
+    }
+  }
+
+  calculateRankStatistics(winningNumbers, bonusNumber) {
+    const rankCountMap = new Map();
+    for (let rank = 1; rank < 6; rank++) {
+      rankCountMap.set(rank, 0);
+    }
+    for (const lotto of this.#lottoList) {
+      const compareResult = lotto.compareNumbers(winningNumbers, bonusNumber);
+      const rank = Store.calculateRank(compareResult);
+      if (!isNaN(rank)) {
+        let rankCount = rankCountMap.get(rank) + 1;
+        rankCountMap.set(rank, rankCount);
+      }
+    }
+    return rankCountMap;
   }
 }
 
