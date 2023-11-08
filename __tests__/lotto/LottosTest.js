@@ -1,8 +1,8 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { Lottos } from "../src/game/lotto/Lottos.js";
-import { generateRandomNumbers } from "../src/utils/generateRandomNumbers.js";
+import { Lottos } from "../../src/game/lotto/Lottos.js";
+import { generateRandomNumbers } from "../../src/utils/generateRandomNumbers.js";
 
-jest.mock("../src/utils/generateRandomNumbers",()=>({
+jest.mock("../../src/utils/generateRandomNumbers.js",()=>({
     generateRandomNumbers : jest.fn()
 }));
 

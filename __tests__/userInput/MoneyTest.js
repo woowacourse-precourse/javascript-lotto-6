@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
-import { Input } from "../src/interface/Input.js";
-import { checkErrorInstance } from "../src/utils/test/error.js";
-import { User } from "../src/User.js";
+import { Input } from "../../src/interface/Input.js";
+import { checkErrorInstance } from "../../src/utils/test/error.js";
+import { User } from "../../src/User.js";
 
 Console.readLineAsync = jest.fn();
 
