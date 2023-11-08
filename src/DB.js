@@ -1,16 +1,16 @@
-const STAGE_NUM_1 = 1;
-const STAGE_NUM_2 = 2;
-const STAGE_NUM_3 = 3;
-const STAGE_NUM_4 = 4;
-const STAGE_NUM_5 = 5;
-const STAGE_NUM_6 = 6;
+import Lotto from './Lotto.js';
 
-const INITIALIZE_NUM = 0;
-const INITIALIZE_ARR = [];
-const INITIALIZE_OBJECT = {};
+const STAGES = Object.freeze({
+  NUM_1: 1,
+  NUM_2: 2,
+  NUM_3: 3,
+  NUM_4: 4,
+  NUM_5: 5,
+  NUM_6: 6,
+  EXIT: 7,
+});
 
-// textViews.js
-const TEXTVIEW = {
+const TEXTVIEW = Object.freeze({
   REQUEST_MONEYINPUT: '구입금액을 입력해 주세요',
   LOTTO_AMOUNT: '개를 구매했습니다.',
   REQUEST_LOTTOWIN: '당첨 번호를 입력해주세요.',
@@ -25,45 +25,55 @@ const TEXTVIEW = {
     6개 일치 (2,000,000,000원) - ${win6}\n
     총 수익률은 ${percent}%입니다.
   `,
-};
+});
+
+const CONST_VALUE = Object.freeze({
+  LOTTO_PRICE: 1000,
+  LOTTO_LENGTH: 6,
+  LOTTO_RANGE_START: 1,
+  LOTTO_RANGE_END: 45,
+});
+
+const INITIAL_VALUES = Object.freeze({
+  NUM: 0,
+  ARR: [],
+  OBJECT: {},
+});
 
 class Data {
-  #dataResetNeed = false;
+  static instance;
 
-  #lottoBuy = INITIALIZE_ARR;
+  #lottoBuy = INITIAL_VALUES.ARR;
 
-  #lottoWin = INITIALIZE_OBJECT;
+  #lottoWin = INITIAL_VALUES.OBJECT;
 
-  #lottoBonus = INITIALIZE_NUM;
+  #lottoBonus = INITIAL_VALUES.NUM;
 
-  #lottoCnt = INITIALIZE_NUM;
+  #lottoCnt = INITIAL_VALUES.NUM;
 
-  #moneyInput = INITIALIZE_NUM;
+  #moneyInput = INITIAL_VALUES.NUM;
 
-  getInstance() {
+  constructor() {
+    if (!Data.instance) {
+      Data.instance = this;
+    }
+  }
+
+  static getInstance() {
     if (!Data.instance) {
       Data.instance = new Data();
-      Object.freeze(Data.instance);
-      this.#dataResetNeed = true;
       return Data.instance;
     }
 
-    if (this.#dataResetNeed) {
-      this.#moneyInput = INITIALIZE_NUM;
-      this.#lottoBonus = INITIALIZE_NUM;
-      this.#lottoBuy = INITIALIZE_ARR;
-      this.#lottoCnt = INITIALIZE_NUM;
-      this.#lottoWin = INITIALIZE_OBJECT;
-    }
     return Data.instance;
   }
 
-  constructor() {
-    this.#moneyInput = INITIALIZE_NUM;
-    this.#lottoBonus = INITIALIZE_NUM;
-    this.#lottoBuy = INITIALIZE_ARR;
-    this.#lottoCnt = INITIALIZE_NUM;
-    this.#lottoWin = INITIALIZE_OBJECT;
+  resetData() {
+    this.#moneyInput = INITIAL_VALUES.NUM;
+    this.#lottoBonus = INITIAL_VALUES.NUM;
+    this.#lottoBuy = INITIAL_VALUES.ARR;
+    this.#lottoCnt = INITIAL_VALUES.NUM;
+    this.#lottoWin = INITIAL_VALUES.OBJECT;
   }
 
   get moneyInput() {
@@ -91,7 +101,8 @@ class Data {
   }
 
   addLottoBuy(value) {
-    this.#lottoBuy = [...this.#lottoBuy, value];
+    const addLotto = new Lotto(value);
+    this.#lottoBuy = [...this.#lottoBuy, addLotto];
   }
 
   get lottoCnt() {
@@ -112,5 +123,5 @@ class Data {
 }
 
 export {
-  TEXTVIEW, Data, STAGE_NUM_1, STAGE_NUM_2, STAGE_NUM_3, STAGE_NUM_4, STAGE_NUM_5, STAGE_NUM_6,
+  TEXTVIEW, Data, STAGES, INITIAL_VALUES, CONST_VALUE,
 };
