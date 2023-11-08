@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { lottoCount } from "../constants/constants.js";
+import { lottoMatch } from "../constants/constants.js";
 import { errorMessage } from "../constants/messages.js";
 
 import Validator from "../validators/Validator.js";
@@ -37,10 +37,10 @@ class Lotto {
       winningLotto.getLottoNumbers().includes(number)
     );
     if (
-      compareCount.length === lottoCount.THIRD &&
+      compareCount.length === lottoMatch.THIRD &&
       this.getLottoNumbers().includes(winningLotto.bonus)
     ) {
-      return lottoCount.SECOND;
+      return lottoMatch.SECOND;
     }
     return compareCount.length;
   }

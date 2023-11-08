@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import { lotto, lottoCount, lottoPrize } from "../constants/constants.js";
+import { lotto, lottoMatch, lottoPrize } from "../constants/constants.js";
 
 import Lotto from "../domain/Lotto.js";
 
@@ -31,7 +31,7 @@ class LottoHandler {
     };
     countArray.forEach((count) => {
       const rankKey = Object.keys(rank).find(
-        (key) => count === lottoCount[key]
+        (key) => count === lottoMatch[key]
       );
       if (rankKey) rank[rankKey]++;
     });
