@@ -2,7 +2,7 @@ import Output from "../View/Output.js";
 import Input from "../View/Input.js";
 import Lottos from "../Model/Lottos.js";
 import Calculate from "../Model/Calculate.js";
-import { Console } from "@woowacourse/mission-utils";
+import { ERROR } from "../util/Constants.js";
 
 class LottoController {
   constructor() {
@@ -25,7 +25,7 @@ class LottoController {
       try {
         purchaseAmount = await this.input.getPurchaseAmount();
         if (!this.lottos.validatePurchaseAmount(purchaseAmount)) {
-          throw new Error("[ERROR] 유효한 구매 금액을 입력하세요.");
+          throw new Error(ERROR.INVALID_PURCAHSE_AMOUNT);
         }
         break;
       } catch (error) {
