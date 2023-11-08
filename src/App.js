@@ -4,8 +4,6 @@ import InputReader from './view/InputReader.js';
 import PromptPrinter from './view/promptPrinter.js';
 import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
 import LottoMachine from './domains/LottoMachine.js';
-import LottoDrawChecker from './domains/LottoDrawChecker.js';
-import LottoReward from './domains/LottoReward.js';
 import ValidUserInputs from './validator/ValidUserInputs.js';
 import LottoGame from './domains/LottoGame.js';
 
@@ -14,6 +12,7 @@ class App {
   #promptPrinter;
   #randomNumberGenerator;
   #validUserInput;
+  #lottoMachine;
 
   constructor() {
     this.#inputReader = new InputReader();
@@ -23,15 +22,20 @@ class App {
       LOTTO.NUMBER_RANGE.MAX,
       LOTTO.NUMBER_COUNT,
     );
+    this.#lottoMachine = new LottoMachine(
+      LOTTO.SELLING_PRICE,
+      this.#randomNumberGenerator,
+    );
     this.#validUserInput = new ValidUserInputs();
   }
 
   async play() {
     await this.#requestPurchasePrice();
+    this.#prepareLottoList();
     await this.#requestWinningNumbers();
     await this.#requestBonusNumber();
 
-    this.#excuteProcess();
+    this.#calcualteLottoDrawResult();
   }
 
   async #requestPurchasePrice() {
@@ -54,37 +58,43 @@ class App {
     }
   }
 
-  async #requestBonusNumber(winningNumbers) {
+  async #requestBonusNumber() {
     try {
       const userInput = await this.#inputReader.bonusNumber();
       this.#validUserInput.addBonusNumber(userInput);
     } catch (error) {
       this.#promptPrinter.userInputErrorMessage(error);
-      return await this.#requestBonusNumber(winningNumbers);
+      return await this.#requestBonusNumber();
     }
   }
 
-  #excuteProcess() {
-    const lottoMachine = new LottoMachine(
-      LOTTO.SELLING_PRICE,
-      this.#randomNumberGenerator,
-    );
-    const lottoGame = new LottoGame(this.#validUserInput, lottoMachine);
-    const lottoList = lottoGame.publishLottoList();
-    const drawDetails = lottoGame.calculateDrawDetails(lottoList);
-    const profitRate = lottoGame.calculateProfitRate(drawDetails);
+  #prepareLottoList() {
+    const purchasePrice = this.#validUserInput.purchasePrice;
+    const unverifiedLottoList = this.#lottoMachine.purchase(purchasePrice);
 
-    this.#processResult({ lottoList, drawDetails, profitRate });
+    this.#validUserInput.addLottoList(unverifiedLottoList);
+    this.#announcePurchaseLottoList(this.#validUserInput.lottoList);
   }
 
-  #processResult(
-    { lottoList, profitRate, drawDetails },
-    _0 = paramType(lottoList, Array),
+  #calcualteLottoDrawResult() {
+    const lottoGame = new LottoGame(this.#validUserInput);
+    const drawDetails = lottoGame.calculateDrawDetails();
+    const profitRate = lottoGame.calculateProfitRate(drawDetails);
+
+    this.#announceLottoDrawResult(drawDetails, profitRate);
+  }
+
+  #announcePurchaseLottoList(lottoList, _ = paramType(lottoList, Array)) {
+    this.#promptPrinter.purchaseCount([...lottoList].length);
+    this.#promptPrinter.purchaseLottoInfo([...lottoList]);
+  }
+
+  #announceLottoDrawResult(
+    drawDetails,
+    profitRate,
     _1 = paramType(drawDetails, Object),
     _2 = paramType(profitRate, 'string'),
   ) {
-    this.#promptPrinter.purchaseCount([...lottoList].length);
-    this.#promptPrinter.purchaseLottoInfo(lottoList);
     this.#promptPrinter.drawResult(drawDetails);
     this.#promptPrinter.profitRate(profitRate);
   }
