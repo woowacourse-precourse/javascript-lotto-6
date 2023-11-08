@@ -210,6 +210,7 @@
 |getLottoNumberArray()| 문자열을 숫자 배열로 반환한다|
 |sortNumber()| 서로 다른 6개의 숫자가 담긴 로또 번호 배열을 오름차순으로 정렬한다|
 |printPurchaseAmount()|로또 구입 개수를 출력 형식에 맞게 출력한다|
+|makeLottoNumberArray()|로또 구입 개수에 맞게 로또 번호를 생성하고 배열을 만든다. makeRandomNumber(), sortNumber(), pushArray() 순서대로 호출한다.
 
 ---------------------------
 ## Validate 클래스
