@@ -51,16 +51,30 @@ describe("LottoSeller 유닛 테스트", () => {
     ];
 
     test.each(validPaidAmounts)("올바른 케이스", async (paidAmount) => {
+      // given
+      const logSpy = getLogSpy();
       mockQuestions(paidAmount);
-      await expect(lottoSeller.sellLotto()).resolves.not.toThrow();
+
+      // when
+      await lottoSeller.sellLotto();
+
+      // then
+      expect(logSpy).toHaveBeenCalledTimes(0);
     });
 
     test.each(inValidPaidAmountsAndErrorMessages)(
       "틀린 케이스",
       async (paidAmount, errorMessage) => {
+        // given
+        const logSpy = getLogSpy();
         mockQuestions(paidAmount);
-        await expect(lottoSeller.sellLotto()).rejects.toThrow(
-          new CustomError(errorMessage)
+
+        // when
+        await lottoSeller.sellLotto();
+
+        // then
+        expect(logSpy).toHaveBeenCalledWith(
+          expect.stringContaining(errorMessage)
         );
       }
     );
