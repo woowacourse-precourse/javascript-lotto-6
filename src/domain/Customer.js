@@ -6,6 +6,7 @@ class Customer {
   #money;
 
   #lottos; // @type {Array<Lotto>}
+
   #prizes;
 
   constructor(money) {
@@ -24,6 +25,17 @@ class Customer {
   receivePrizes(lottoResult) {
     this.#prizes = lottoResult.countPrizes(this.#lottos);
     return this.#prizes;
+  }
+
+  calcProfitRate() {
+    const rewards = this.#prizes.reduce((acc, { prize, cnt }) => {
+      if (cnt > 0) {
+        return acc + prize.getRewards() * cnt;
+      }
+      return acc;
+    }, 0);
+
+    return rewards / this.#money;
   }
 
   #validate(money) {

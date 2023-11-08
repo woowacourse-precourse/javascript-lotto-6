@@ -5,15 +5,15 @@ import LottoWinResult from '../domain/LottoWinResult.js';
 import WinningLotto from '../domain/WinningLotto.js';
 
 class LottoController {
-  #buyer;
+  #customer;
 
   #lottoWinResult;
 
   async handleBuyLottos() {
     const money = await InputView.readMoney();
-    this.#buyer = new Customer(money);
-    this.#buyer.buyLottos();
-    OutputView.printLottos(this.#buyer.getLottos());
+    this.#customer = new Customer(money);
+    this.#customer.buyLottos();
+    OutputView.printLottos(this.#customer.getLottos());
   }
 
   async handleCreateWinResult() {
@@ -26,9 +26,8 @@ class LottoController {
   }
 
   async handleLottoResult() {
-    const receivedPrizes = this.#buyer.receivePrizes(this.#lottoWinResult);
-
-    OutputView.printLottoResult(receivedPrizes);
+    const receivedPrizes = this.#customer.receivePrizes(this.#lottoWinResult);
+    const profitRate = this.#customer.calcProfitRate();
   }
 }
 
