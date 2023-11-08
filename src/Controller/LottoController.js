@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import Input from "../Input/Input";
-import LottoCount from "../domain/LottoCount";
+import LottoCount from "../Main/LottoCount";
+import Output from "../Output/Output";
 
 class LottoController {
   #lottoCount;

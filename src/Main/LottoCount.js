@@ -1,8 +1,10 @@
+import STATIC_NUMBER from "../Constant/StaticNumber";
+
 class LottoCount {
     #lottoCount;
   
     constructor(inputPurchaseAmount) {
-      this.#lottoCount = Number(inputPurchaseAmount) / 1000;
+      this.#lottoCount = Number(inputPurchaseAmount) / STATIC_NUMBER.PURCHASE_AMOUNT_Split;
     }
   
     getLottoCount() {
