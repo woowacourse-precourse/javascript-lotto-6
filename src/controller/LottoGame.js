@@ -9,11 +9,12 @@ const lottoGame = {
   start: async function () {
     const { purchaseAmount, lottoCount } = await this.purchase();
     const lottos = purchase.getLottos(lottoCount);
-    const lottoNumbersArr = this.showNumbers(lottos);
+    const lottoNumbersArr = this.showNumbers(lottos); // 구매한 모든 로또의 번호가 담긴 배열
 
     const winningNumber = await this.getWinningNumber();
     const bonusNumber = await this.getBonusNumber();
 
+    // 당첨 통계
     const matches = draw.getResult(lottoNumbersArr, winningNumber, bonusNumber);
     outputView.printWinningStatistics(matches);
 
