@@ -1,3 +1,6 @@
+import { GAME_RULE } from './constants/gameRule.js';
+import { ERROR_MESSAGE } from './constants/messages.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,28 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== GAME_RULE.LOTTO_NUMBER_COUNT) {
+      throw new Error(ERROR_MESSAGE.INVALID_COUNT);
+    }
+
+    if (new Set(numbers).size !== GAME_RULE.LOTTO_NUMBER_COUNT) {
+      throw new Error(ERROR_MESSAGE.NOT_A_UNIQUE);
     }
   }
 
-  // TODO: 추가 기능 구현
+  getLottoNumbers() {
+    return [...this.#numbers];
+  }
+
+  getMatchWinningNumbers(winningNumbers) {
+    return winningNumbers.filter((winningNumber) =>
+      this.#numbers.includes(winningNumber),
+    );
+  }
+
+  isMatchBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
 }
 
 export default Lotto;
