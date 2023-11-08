@@ -93,7 +93,22 @@ class LottoGame {
     return this.#lottoTickets;
   }
 
-  
+  async matchLotto(lottoTickets, answerLotto, bonusLotto, result) {
+    const answerLottoValue = answerLotto.getNumbers();
+    const bonusLottoValue = bonusLotto.getNumber();
+    lottoTickets.forEach((lotto) => {
+      const { lottoJudgingResult, bonusJudgingResult } = judgeLotto(lotto, answerLottoValue, bonusLottoValue);
+      judgeResult(lottoJudgingResult, bonusJudgingResult, result);
+      
+    })
+    Console.print(`\n당첨 통계\n---`);
+    resultPrint(result);
+  }
+  async printTotalProfitRate() {
+    const TotalProfit = getTotalProfit(this.#money.getResult());
+    const totalProfitRate = ((TotalProfit / this.#money.getMoney()) * 100).toFixed(1);
+    Console.print(`총 수익률은 ${totalProfitRate}%입니다.`);
+  }
 }
 
 export default LottoGame;
