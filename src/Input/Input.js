@@ -21,7 +21,7 @@ const Input = {
 
   async lottoBonusNumber(winningNumber) {
     const bonusNumber = await Console.readLineAsync(
-      "\n보너스 번호를 입력해 주세요.\n"
+      PRINT_MESSAGE.REQUEST_BONUS_NUMBER
     );
     return bonusNumber;
   },
