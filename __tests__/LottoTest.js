@@ -50,6 +50,19 @@ describe('로또 클래스 테스트', () => {
 
     // then // second === 1 이어야함
     expect(winningJudge.countWinner(lottoNumbers, testWinningLotto)).toEqual(testWinner);
-    MissionUtils.Console.print(`testbench : ${winningJudge.countWinner(lottoNumbers, testWinningLotto)}`);
+  });
+
+  test('당첨 금액이 맞는지 계산', () => {
+    const passInput = 8000;
+    const testWinner = {
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 1,
+    };
+
+    const winningJudge = new WinningJudge();
+    expect(winningJudge.calculateRateOfReturn(testWinner, passInput)).toEqual(62.5);
   });
 });

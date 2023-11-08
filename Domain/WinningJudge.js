@@ -43,7 +43,7 @@ class WinningJudge {
     // 이후 객체 상수화
     const wholePrizeMoney = winnerList.first * 2000000000 + winnerList.second * 30000000 + winnerList.third * 1500000 + winnerList.fourth * 50000 + winnerList.fifth * 5000;
     const rateOfReturn = (wholePrizeMoney / purchaseAmount) * 100;
-    return rateOfReturn;
+    return parseFloat(rateOfReturn.toFixed(1));
   }
 }
 export default WinningJudge;
