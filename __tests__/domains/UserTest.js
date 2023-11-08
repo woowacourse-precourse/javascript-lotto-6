@@ -1,4 +1,4 @@
-import User from "../src/domains/User.js";
+import User from "../../src/domains/User.js";
 
 describe("사용자 클래스 테스트", () => {
   function mockUserLotto(numbers) {

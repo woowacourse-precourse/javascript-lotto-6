@@ -1,5 +1,5 @@
-import LottoShop from "../src/domains/LottoShop.js";
-import User from "../src/domains/User.js";
+import LottoShop from "../../src/domains/LottoShop.js";
+import User from "../../src/domains/User.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 describe("로또 가게 클래스 테스트", () => {

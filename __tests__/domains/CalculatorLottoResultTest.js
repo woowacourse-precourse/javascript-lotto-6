@@ -1,7 +1,7 @@
-import CalculatorLottoResult from "../src/domains/CalculatorLottoResult.js";
-import User from "../src/domains/User.js";
-import TargetLotto from "../src/domains/TargetLotto.js";
-import Lotto from "../src/domains/Lotto.js";
+import CalculatorLottoResult from "../../src/domains/CalculatorLottoResult.js";
+import User from "../../src/domains/User.js";
+import TargetLotto from "../../src/domains/TargetLotto.js";
+import Lotto from "../../src/domains/Lotto.js";
 
 describe("로또 결과 계산 클래스 테스트", () => {
   let calCulatorLottoResult;

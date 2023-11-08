@@ -1,4 +1,4 @@
-import TargetLotto from "../src/domains/TargetLotto.js";
+import TargetLotto from "../../src/domains/TargetLotto.js";
 
 describe("당첨 로또 클래스 테스트", () => {
   let targetLotto;
