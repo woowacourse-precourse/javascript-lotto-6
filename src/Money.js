@@ -9,8 +9,8 @@ class Money {
   async inputMoney() {
     let money;
     try {
-      money = await Console.readLineAsync(LOTTO_MESSAGE.MONEY_INPUT);
-      if (!Number.isInteger(money) && money % 1000 !== 0) {
+      money = Number(await Console.readLineAsync(LOTTO_MESSAGE.MONEY_INPUT));
+      if (!Number.isInteger(money) || money % 1000 !== 0 || money < 1000) {
         throw new Error(ERROR_MESSAGE.MONEY);
       }
     } catch (error) {

@@ -100,7 +100,7 @@ describe('로또 테스트', () => {
   });
 
   test('구입 금액이 1000원 이하인 경우 예외가 발생한다', async () => {
-    await runException('2500');
+    await runException('500');
   });
 
   test('구입한 복권이 다 맞은 경우', async () => {

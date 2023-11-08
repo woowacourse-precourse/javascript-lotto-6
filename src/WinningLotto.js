@@ -11,22 +11,24 @@ class WinningLotto {
     this.#bonusNumber = 0;
   }
 
+  #validate(numbers) {
+    if (numbers.length !== 6 || numbers.length !== new Set(numbers).size) {
+      throw new Error(ERROR_MESSAGE.THE_NUMBER);
+    }
+    numbers.forEach((number) => {
+      if (!Number.isInteger(number) || number < 1 || number > 45) {
+        throw new Error(ERROR_MESSAGE.LOTTO_NUMBER_CONDITION);
+      }
+    });
+  }
+
   async inputWinningNumbers() {
     let winningNumbers;
     try {
       winningNumbers = (await Console.readLineAsync(LOTTO_MESSAGE.WINNING_INPUT))
         .split(',')
         .map((number) => Number(number));
-      if (winningNumbers.length !== 6) {
-        throw new Error(ERROR_MESSAGE.THE_NUMBER);
-      } else if (winningNumbers.length !== new Set(winningNumbers).size) {
-        throw new Error(ERROR_MESSAGE.OVERLAP);
-      }
-      winningNumbers.forEach((number) => {
-        if (!Number.isInteger(number) || number < 1 || number > 45) {
-          throw new Error(ERROR_MESSAGE.LOTTO_NUMBER_CONDITION);
-        }
-      });
+      this.#validate(winningNumbers);
     } catch (error) {
       Console.print(error.message);
       winningNumbers = await this.inputWinningNumbers();
