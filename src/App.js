@@ -3,29 +3,23 @@ import BuyLotto from "../src/BuyLotto.js";
 import Lotto from "../src/Lotto.js";
 import BonusLotto from "../src/BonusLotto.js";
 import MatchLottoNumber from "../src/MatchLottoNumber.js";
+import { INPUTMESSAGES } from "./util/Message.js";
+
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 class App {
   moneyList = ["5,000", "50,000", "1,500,000", "30,000,000", "2,000,000,000"];
 
-  async purchaseListOutput(number, lottos) {
-    await Console.print(`${number}개를 구매했습니다.`);
-    lottos.map((lotto) => {
-      Console.print(`[${lotto.join(", ")}]`);
-    });
-  }
   async winningNumberInput() {
     const winningNumbers = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요."
+      INPUTMESSAGES.WINNING_NUMBER
     );
     const winningNumber = await winningNumbers.split(",");
     return winningNumber;
   }
 
   async bonusNumberInput() {
-    const bonusNumber = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요."
-    );
+    const bonusNumber = await Console.readLineAsync(INPUTMESSAGES.BONUS_NUMBER);
     return bonusNumber;
   }
 
@@ -39,6 +33,7 @@ class App {
       return await this.moneyInput();
     }
   }
+
   async lottoInput() {
     try {
       const winningNumber = await this.winningNumberInput();
@@ -49,6 +44,7 @@ class App {
       return await this.lottoInput();
     }
   }
+
   async bonusLottoInput(number) {
     try {
       const bonusNumber = await this.bonusNumberInput();
@@ -59,6 +55,7 @@ class App {
       return await this.bonusLottoInput(number);
     }
   }
+
   winningStatisticsOutput(moneys) {
     Console.print(
       `3개 일치 (${this.moneyList[0]}원) - ${moneys.getRankingCounts[4]}개`
@@ -76,6 +73,7 @@ class App {
       `6개 일치 (${this.moneyList[4]}원) - ${moneys.getRankingCounts[0]}개`
     );
   }
+
   returnOutput(moneys) {
     const price = ((moneys.getWinningMoney / moneys.getMoney) * 100).toFixed(1);
     Console.print(`총 수익률은 ${price}%입니다.`);
@@ -84,6 +82,13 @@ class App {
   lottoResultOutput(moneys) {
     this.winningStatisticsOutput(moneys);
     this.returnOutput(moneys);
+  }
+
+  async purchaseListOutput(number, lottos) {
+    await Console.print(`${number}개를 구매했습니다.`);
+    lottos.map((lotto) => {
+      Console.print(`[${lotto.join(", ")}]`);
+    });
   }
 
   async start() {

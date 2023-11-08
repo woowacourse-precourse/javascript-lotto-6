@@ -1,3 +1,4 @@
+import { ERRORMESSAGES } from "./util/Message";
 class BonusLotto {
   #bonusNumbers;
 
@@ -8,15 +9,13 @@ class BonusLotto {
 
   #validate(numbers, bonusNumbers) {
     if (Number.isNaN(Number(bonusNumbers))) {
-      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+      throw new Error(ERRORMESSAGES.NOT_A_NUMBER);
     }
     if (numbers.some((number) => number === bonusNumbers)) {
-      throw new Error(
-        "[ERROR] 보너스 로또 번호는 로또 번호와 중복되지 않아야 합니다."
-      );
+      throw new Error(ERRORMESSAGES.BONUS_DUPLICATE);
     }
     if (bonusNumbers < 1 || bonusNumbers > 45) {
-      throw new Error("[ERROR] 보너스 로또 번호는 1~45 사이여야 합니다.");
+      throw new Error(ERRORMESSAGES.LOTTO_NUMBER_RANGE);
     }
 
     return true;

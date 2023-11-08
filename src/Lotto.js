@@ -1,3 +1,4 @@
+import { ERRORMESSAGES } from "./util/Message";
 class Lotto {
   #numbers;
 
@@ -8,16 +9,16 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.some((number) => Number.isNaN(Number(number)))) {
-      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+      throw new Error(ERRORMESSAGES.NOT_A_NUMBER);
     }
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERRORMESSAGES.LOTTO_NUMBER_LENGTH);
     }
     if (new Set(numbers).size !== 6) {
-      throw new Error("[ERROR] 로또 번호는 중복되지 않아야 합니다.");
+      throw new Error(ERRORMESSAGES.LOTTO_DUPLICATE);
     }
     if (numbers.some((number) => number < 1 || number > 45)) {
-      throw new Error("[ERROR] 로또 번호는 1~45 사이여야 합니다.");
+      throw new Error(ERRORMESSAGES.LOTTO_NUMBER_RANGE);
     }
 
     return true;
