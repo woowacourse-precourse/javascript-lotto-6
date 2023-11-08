@@ -1,0 +1,10 @@
+class OuputView{
+
+    constructor(){
+
+    }
+
+
+}
+
+export default OuputView
