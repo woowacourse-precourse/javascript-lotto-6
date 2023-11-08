@@ -27,6 +27,10 @@ class Calculate {
     return this.#results;
   }
 
+  getProfitRate() {
+    return this.#profitRate;
+  }
+
   caculateResults() {
     this.lottoTickets.forEach((lottoTicket) => {
       const matchedNumbers = this.countMatchNumbers(lottoTicket);
