@@ -11,4 +11,13 @@ describe('PurchasingLotto 클래스 테스트', () => {
 
     expect(purchaseCount).toBe(expected);
   });
+
+  test.each([['숫자 아님'], [-1], [0], [900]])(
+    '로또 구매 금액 유효성 검사 테스트',
+    (inputs) => {
+      expect(() => {
+        new PurchasingLotto(inputs);
+      }).toThrow('[ERROR]');
+    },
+  );
 });
