@@ -1,4 +1,6 @@
 import { NUMBER } from '../Constant/stats.js';
+import ERROR from '../Constant/Error.js';
+import CustomError from '../Utils/CustomError.js';
 import {
   validateNumberLength,
   checkValidateNumbers,
@@ -14,7 +16,7 @@ class User {
 
   #validateAmount(amount) {
     if (amount % NUMBER.LOTTERY_PRICE > 0) {
-      throw new Error('[ERROR] 1000원 단위로 입력하세요.');
+      throw new CustomError(ERROR.MONEY_UNIT);
     }
   }
 
