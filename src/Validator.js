@@ -23,7 +23,7 @@ class Validator {
       throw new Error(ERR.NAN);
     }
 
-    if (1 > number || 45 < number) {
+    if (number < 1 || number > 45) {
       throw new Error(ERR.RANGE);
     }
   }

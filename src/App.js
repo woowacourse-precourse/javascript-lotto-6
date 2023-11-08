@@ -22,6 +22,10 @@ class App {
     let [win, bonus] = await Controls.writeWin();
     this.#background.setNumbers(win);
     this.#background.setBonus(bonus);
+
+    // print statistics
+    let [matchCounter, rate] = this.#background.calcStatistics(this.#lottos);
+    Controls.printStatistics(matchCounter, rate);
   }
 }
 
