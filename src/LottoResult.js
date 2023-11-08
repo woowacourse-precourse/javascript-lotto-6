@@ -34,5 +34,17 @@ class LottoResult {
     this.#numbers = numbers;
     this.#bonus = bonus;
   }
+
+  /**
+   * @returns {number[]}
+   */
+  getResult() {
+    return this.#lottoes.reduce((previousValue, lotto) => {
+      const result = previousValue;
+      const rank = lotto.getRank(this.#numbers, this.#bonus);
+      result[rank] += 1;
+      return result;
+    }, new Array(6 + 1).fill(0));
+  }
 }
 export default LottoResult;
