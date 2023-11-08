@@ -1,3 +1,5 @@
+import Lotto from '../src/Lotto';
+import LottoBonus from '../src/Models/LottoBouns';
 import LottoCycle from '../src/Models/LottoCycle';
 
 describe('Lotto 사이클 테스트', () => {
@@ -11,8 +13,8 @@ describe('Lotto 사이클 테스트', () => {
 		// given
 		const purchaseCost = 1000;
 		const userLottos = [lottoNumber];
-		const winnerLotto = [1, 2, 3, 4, 5, 6];
-		const bonusLotto = 7;
+		const winnerLottoNumbers = [1, 2, 3, 4, 5, 6];
+		const bonusLottoNumber = 7;
 		const scoreCount = {
 			1: 0,
 			2: 0,
@@ -22,6 +24,8 @@ describe('Lotto 사이클 테스트', () => {
 		};
 
 		// when
+		const winnerLotto = new Lotto(winnerLottoNumbers);
+		const bonusLotto = new LottoBonus(bonusLottoNumber, winnerLottoNumbers);
 		const lottoCycle = new LottoCycle({ purchaseCost, userLottos, winnerLotto, bonusLotto });
 		lottoCycle.checkLottosRank(lottoNumber);
 		scoreCount[rank] += 1;
@@ -33,8 +37,8 @@ describe('Lotto 사이클 테스트', () => {
 	test('수익률을 계산할 수 있다.', () => {
 		// given
 		const purchaseCost = 14000;
-		const winnerLotto = [1, 2, 3, 4, 5, 6];
-		const bonusLotto = 7;
+		const winnerLottoNumbers = [1, 2, 3, 4, 5, 6];
+		const bonusLottoNumber = 7;
 		const userLottos = [
 			[1, 2, 3, 9, 10, 20], // 5등
 			[4, 5, 6, 9, 12, 13], // 5등
@@ -53,6 +57,8 @@ describe('Lotto 사이클 테스트', () => {
 		];
 
 		// when
+		const winnerLotto = new Lotto(winnerLottoNumbers);
+		const bonusLotto = new LottoBonus(bonusLottoNumber, winnerLottoNumbers);
 		const lottoCycle = new LottoCycle({ purchaseCost, userLottos, winnerLotto, bonusLotto });
 		lottoCycle.checkLottosRank();
 
