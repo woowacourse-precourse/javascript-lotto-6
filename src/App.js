@@ -3,14 +3,23 @@ import Lotto from "./Lotto.js";
 
 class App {
   async play() {
-    const COUNT = await this.getPurchaseAmount();
-    this.printLottoCounts(COUNT);
-    const TICKETS = this.createUniqueRandomNums(COUNT);
-    const WINNINGNUMS = await this.getWinningNum();
-    const BONUS = await this.getBonusNum(WINNINGNUMS);
-    const WINLOG = this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
-    this.printWinningStatistics(WINLOG);
-    this.calculateProfit(COUNT, WINLOG);
+    let COUNT, TICKETS, WINNINGNUMS, BONUS, WINLOG;
+
+    while (true) {
+      try {
+        COUNT = await this.getPurchaseAmount();
+        this.printLottoCounts(COUNT);
+        TICKETS = this.createUniqueRandomNums(COUNT);
+        WINNINGNUMS = await this.getWinningNum();
+        BONUS = await this.getBonusNum(WINNINGNUMS);
+        WINLOG = this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
+        this.printWinningStatistics(WINLOG);
+        this.calculateProfit(COUNT, WINLOG);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 
   // 사용자로부터 구입금액을 입력 받는 메서드
