@@ -58,16 +58,21 @@
 |메서드 이름|설명|
 |----------|----------|
 |getLottoTicket()|로또 구입 금액으로 로또 구입 개수를 반환한다|
-|checkLottoPrice()|로또 금액에 대한 예외를 검사한다|
 |makeRandomNumber()| 서로 다른 로또 번호 6개를 생성한 배열을 반환한다|
 |pushArray()| 로또 번호의 배열을 lottoRandomNumber에 push한다.
 |removeSpace()|출력 형식에 맞게 문자열을 설정하고 반환한다|
 |printLottoArray()| 모든 로또 번호를 출력한다|
-|checkBonusNumber()| 보너스 번호에 대한 예외를 검사한다|
 |printLottoResult()|로또 당첨 결과를 출력 형식에 맞춰 출력한다|
 |getLottoNumberArray()| 문자열을 숫자 배열로 반환한다|
 |sortNumber()| 서로 다른 6개의 숫자가 담긴 로또 번호 배열을 오름차순으로 정렬한다|
 |printPurchaseAmount()|로또 구입 개수를 출력 형식에 맞게 출력한다|
+
+---------------------------
+## Validate 클래스
+|메서드 이름|설명|
+|----------|----------|
+|checkLottoPrice()|로또 금액에 대한 예외를 검사한다|
+|checkBonusNumber()| 보너스 번호에 대한 예외를 검사한다|
 
 
 -------
