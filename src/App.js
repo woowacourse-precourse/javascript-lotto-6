@@ -112,13 +112,13 @@ class App {
     );
 
     Output.resultLottoPrint(
-      result.WINNING.FIVE_MATCHES,
+      result.WINNING.FIFTH_MATCHES,
       this.resultLotto.thirdPlace.sameCount,
       result.COUNT,
     );
 
     Output.resultLottoPrint(
-      result.WINNING.FIVE_AND_BONUS_MATCHES,
+      result.WINNING.FIFTH_AND_BONUS_MATCHES,
       this.resultLotto.secondPlace.sameCount,
       result.COUNT,
     );

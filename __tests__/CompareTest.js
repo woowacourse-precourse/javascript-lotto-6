@@ -52,7 +52,7 @@ describe('Compare 클래스 테스트', () => {
     test('카운트 된 당첨 번호와 보너스 번호의 개수에 따라 각 등수 별 카운트', () => {
       // given
       const output = {
-        fivePlace: { sameCount: 1, winningMoney: 5000 },
+        fifthPlace: { sameCount: 1, winningMoney: 5000 },
         fourthPlace: { sameCount: 1, winningMoney: 50000 },
         thirdPlace: { sameCount: 1, winningMoney: 1500000 },
         secondPlace: { sameCount: 1, winningMoney: 30000000 },
@@ -116,8 +116,7 @@ describe('Compare 클래스 테스트', () => {
       const input = 34403.5893;
 
       // when
-      const rorCompare = new Compare();
-      const ror = rorCompare.commaAfterRounding(input);
+      const ror = Compare.commaAfterRounding(input);
 
       // then
       expect(ror).toBe('34,403.6');

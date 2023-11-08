@@ -13,15 +13,15 @@ class Compare {
     this.lotto = lotto;
     this.winningNumber = winningNumber;
     this.bonusNumber = bonusNumber;
-      }
+  }
 
   compareNumber() {
     this.lotto.forEach((lottoElement) => {
       const winningCounting = this.includesWinningNumber(lottoElement);
       const bonusCounting = this.includesBonusNumber(lottoElement);
 
-            if (winningCounting === 3) {
-        this.sameNumber.fivePlace.sameCount += 1;
+      if (winningCounting === 3) {
+        this.sameNumber.fifthPlace.sameCount += 1;
       }
 
       if (winningCounting === 4) {
@@ -39,7 +39,7 @@ class Compare {
       if (winningCounting === 6) {
         this.sameNumber.firstPlace.sameCount += 1;
       }
-          });
+    });
 
     return this.sameNumber;
   }
