@@ -1,10 +1,10 @@
 const EMPTY_STRING = /^\s*$/;
-const INTERGER = /^[^0]\d*/;
+const POSITIVE_INTEGER = /^[1-9]\d*$/;
 const COMMA_SEPARATED_NUMBERS = /^\d+(,\d+)*$/;
 
 const REGEXP = Object.freeze({
   EMPTY_STRING,
-  INTERGER,
+  POSITIVE_INTEGER,
   COMMA_SEPARATED_NUMBERS,
 });
 

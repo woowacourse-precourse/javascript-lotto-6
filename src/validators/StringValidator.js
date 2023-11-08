@@ -3,21 +3,12 @@ import TypeValidator from './TypeValidator.js';
 
 class StringValidator {
   /**
-   * 정수형태의 문자열인지 검사하는 메서드
-   * @param {string} value 검사할 값
-   * @returns {boolean} 정수형태의 문자열인지 여부
-   */
-  static isInteger(value) {
-    return TypeValidator.isString(value) && REGEXP.INTERGER.test(value);
-  }
-
-  /**
    * 양의 정수 형태의 문자열인지 검사하는 메서드
    * @param {string} value 검사할 값
    * @returns {boolean} 양의 정수 형태의 문자열인지 여부
    */
   static isPositiveInteger(value) {
-    return this.isInteger(value) && Number(value) > 0;
+    return TypeValidator.isString(value) && REGEXP.POSITIVE_INTEGER.test(value);
   }
 
   /**
