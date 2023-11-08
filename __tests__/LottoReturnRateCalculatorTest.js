@@ -10,10 +10,10 @@ describe('LottoReturnRateCalculator 테스트', () => {
       fifth: 2,
     };
     const buyingPrice = 11000;
-    const lottoReturnRateCalculator = new LottoReturnRateCalculator(
+    const lottoReturnRateCalculator = new LottoReturnRateCalculator({
       lottoResult,
-      buyingPrice
-    );
+      buyingPrice,
+    });
 
     const returnRate = lottoReturnRateCalculator.calculateReturnRate();
 

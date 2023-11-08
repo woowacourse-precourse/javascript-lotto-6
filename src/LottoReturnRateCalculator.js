@@ -9,7 +9,7 @@ class LottoReturnRateCalculator {
   #lottoResult;
   #buyingPrice;
 
-  constructor(lottoResult, buyingPrice) {
+  constructor({ lottoResult, buyingPrice }) {
     this.#lottoResult = lottoResult;
     this.#buyingPrice = buyingPrice;
   }

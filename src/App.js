@@ -21,8 +21,11 @@ class App {
     );
     OutputView.lottoOutcome(lottoResult);
 
-    const calculator = new LottoReturnRateCalculator(lottoResult, buyingPrice);
-    OutputView.lottoRate(calculator.calculateReturnRate());
+    const returnRate = App.calculateLottoReturnRate({
+      lottoResult,
+      buyingPrice,
+    });
+    OutputView.lottoRate(returnRate);
   }
 
   static async buyLotto() {
@@ -82,9 +85,14 @@ class App {
     return result;
   }
 
-  static checkLottoResult(lottoBalls, lottos) {
+  static checkLottoResult(lottoBalls, lottoTickets) {
     const verifier = new LottoResultCalculator(lottoBalls);
-    return verifier.checkLottoResult(lottos);
+    return verifier.checkLottoResult(lottoTickets);
+  }
+
+  static calculateLottoReturnRate(operands) {
+    const calculator = new LottoReturnRateCalculator(operands);
+    return calculator.calculateReturnRate();
   }
 }
 
