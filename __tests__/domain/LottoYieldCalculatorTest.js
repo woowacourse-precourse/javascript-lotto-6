@@ -1,10 +1,17 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../../src/domain/Lotto.js';
 import LottoNumber from '../../src/domain/LottoNumber.js';
 import LottoShop from '../../src/domain/LottoShop.js';
 import LottoYieldCalculator from '../../src/domain/LottoYieldCalculator.js';
 import LottosMatcher from '../../src/domain/LottosMatcher.js';
 import Money from '../../src/domain/Money.js';
-import { mockRandoms } from '../ApplicationTest.js';
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
 
 describe('로또 수익률 계산기 테스트', () => {
   mockRandoms([

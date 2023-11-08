@@ -3,7 +3,14 @@ import LottoShop from '../../src/domain/LottoShop.js';
 import Lotto from '../../src/domain/Lotto.js';
 import Money from '../../src/domain/Money.js';
 import LottoNumber from '../../src/domain/LottoNumber.js';
-import { mockRandoms } from '../ApplicationTest.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
 
 describe('로또 매치 결과 테스트', () => {
   mockRandoms([
