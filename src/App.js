@@ -22,6 +22,7 @@ class App {
       const bonusNumber = await this.getAndValidateBonusNumber();
 
       const results = LottoResultCalculator.calculateResults(purchase, winningNumber, bonusNumber);
+      this.outputView.printHeader();
       this.outputView.printResult(results);
     } catch (error) {
       Console.print(error.message);
