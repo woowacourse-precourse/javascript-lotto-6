@@ -52,4 +52,9 @@ export default class WinningLotto extends Lotto {
 
     return NONE;
   }
+
+  getProfitRate(statistics, amount) {
+    const totalPrizeAmount = Object.keys(statistics).reduce((acc, key) => acc + Number(key) * statistics[key], 0);
+    return ((totalPrizeAmount * 100) / amount).toFixed(1);
+  }
 }
