@@ -1,10 +1,10 @@
 import InputReader from './view/InputReader.js';
 import PromptPrinter from './view/promptPrinter.js';
 import {
-  ValidateWinningNumbersUserInput,
   ValidatePurchasePriceUserInput,
   ValidateBonusNumberUserInput,
-} from './utils/ValidateUserInput.js';
+} from './validator/ValidateUserInput.js';
+import WinningNumbersUserInputValidator from './validator/WinningNumbersUserInputValidator.js';
 import LottoMachine from './domains/LottoMachine.js';
 import { LOTTO } from './constants/lotto.js';
 import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
@@ -55,7 +55,7 @@ class App {
   async #requestWinningNumbers() {
     try {
       const winningNumbers = await this.#inputReader.winningNumbers();
-      new ValidateWinningNumbersUserInput(winningNumbers);
+      new WinningNumbersUserInputValidator(winningNumbers);
 
       return winningNumbers;
     } catch (error) {
