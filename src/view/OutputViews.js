@@ -7,8 +7,12 @@ const OutputView = {
   },
 
   printPurchaseCount(count) {
-    this.print(`${count}${outputString.purchaseCount}`;)
+    this.print(`${count}${outputString.purchaseCount}`);
   },
-}
+
+  printPublishedLotto(numbers) {
+    this.print(numbers);
+  },
+};
 
 export default OutputView;
