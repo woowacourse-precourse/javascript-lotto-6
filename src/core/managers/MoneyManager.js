@@ -27,6 +27,7 @@ export default class MoneyManager {
    *    bonusFive: number;
    *    six: number;
    * }} board
+   * @returns {number}
    */
   calculateTotalReturns(board) {
     const entries = Object.entries(board);
@@ -34,5 +35,13 @@ export default class MoneyManager {
     return entries
       .map(([fieldName, amount]) => WINNING_PRICES[fieldName] * amount)
       .reduce((acc, cur) => acc + cur, 0);
+  }
+
+  /**
+   * @param {number} returns
+   * @returns {number}
+   */
+  calculateReturnRate(returns) {
+    return (returns / this.#purchaseValue) * 100;
   }
 }
