@@ -12,7 +12,7 @@ const LottoNumbersParser = {
   },
 
   parseSingle(input) {
-    TypeValidator.isString(input);
+    if (typeof input === "number") return input;
     this.validateSingle(input);
     return this.parse(input)[0];
   },
