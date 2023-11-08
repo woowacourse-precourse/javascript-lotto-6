@@ -40,14 +40,14 @@ class App {
     // 입력받은 가격에 대해 로또 생성
     this.buyLottos(price);
 
-    // 내 로또 번호(당첨번호) 입력 받음
+    // 당첨번호(직접 입력하는 번호) 입력 받음
     this.answer = (
       await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n")
     )
       .split(",")
       .map(Number);
 
-    //보너스 번호 실행
+    //보너스 번호 입력 받음
     await this.BonusInput();
 
     //당첨 결과 실행
@@ -81,7 +81,7 @@ class App {
         1,
         45,
         6
-      ).sort((a, b) => a - b); // [1,2,3,4,5,6,]
+      ).sort((a, b) => a - b);
       this.lottos.push(new Lotto(numbers));
 
       let str = "[";

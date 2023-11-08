@@ -22,7 +22,7 @@ class Lotto {
       throw new Error("[ERROR] 숫자가 중복됩니다.");
     }
   }
-  //로또 번호(answer)와 생성한 번호(this.#numbers) 비교
+  //당첨번호(answer)와 생성한 번호(this.#numbers) 비교
   answerCount(answer) {
     let count = 0;
     for (const n of this.#numbers) {
