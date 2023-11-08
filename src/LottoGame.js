@@ -27,7 +27,7 @@ export class LottoGame {
   async winLottos() {
     try {
       const winningNumber = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
-      const winningNumbers = new Lotto(winningNumber.split(',').map((number) => Number(number)));
+      const winningNumbers = new Lotto(winningNumber.split(',').map(Number));
       this.winningNumbers = winningNumbers.numbers;
     } catch (error) {
       MissionUtils.Console.print(error.message);
