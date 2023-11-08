@@ -20,7 +20,7 @@ export const ANNOUNCEMENT = {
       `5개 일치 (${PRIZE.third.toLocaleString()}원) - ${third}개\n` +
       `5개 일치, 보너스 볼 일치 (${PRIZE.second.toLocaleString()}원) - ${second}개\n` +
       `6개 일치 (${PRIZE.first.toLocaleString()}원) - ${first}개\n` +
-      `총 수익률은 ${rateOfReturn}%입니다.`
+      `총 수익률은 ${(+rateOfReturn).toLocaleString()}%입니다.`
     );
   },
 };
