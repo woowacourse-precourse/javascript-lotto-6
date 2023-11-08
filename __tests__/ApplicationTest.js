@@ -3,7 +3,6 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
-
   MissionUtils.Console.readLineAsync.mockImplementation(() => {
     const input = inputs.shift();
 
@@ -95,4 +94,3 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 });
-
