@@ -35,9 +35,15 @@ class Validator {
     }
   }
 
-  static isDivisibleBy1000(number) {
+  static isDivisibleByThousand(number) {
     if (number % CONSTANT.ONE_THOUSAND) {
-      throw printError(ERROR.NOT_DIVISIBLE_BY_1000);
+      throw printError(ERROR.NOT_DIVISIBLE_BY_ONE_THOUSAND);
+    }
+  }
+
+  static isInvaildIndex(firstIndex, lastIndex, index) {
+    if (firstIndex < index || lastIndex <= index) {
+      throw printError(ERROR.INVALID_INDEX);
     }
   }
 }

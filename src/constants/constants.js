@@ -3,14 +3,16 @@ export const ERROR = Object.freeze({
   DUPLICATE_NUMBER: '중복된 숫자가 존재합니다.',
   INVALID_NUMBER: '숫자가 아닙니다.',
   INVALID_INTEGER: '정수가 아닙니다.',
-  NOT_DIVISIBLE_BY_1000: '1000원으로 나눠지지 않습니다.',
+  NOT_DIVISIBLE_BY_ONE_THOUSAND: '1000원으로 나눠지지 않습니다.',
 });
 
 export const CONSTANT = Object.freeze({
   LOTTO_NUMBER_LENGTH: 6,
   ONE_THOUSAND: 1000,
+  ZERO: 0,
 });
 
 export const CONSOLE_MESSAGE = Object.freeze({
   INPUT_MONEY: '구입금액을 입력해 주세요.',
+  PURCHASED_MESSAGE: '개를 구매했습니다.',
 });

@@ -14,7 +14,7 @@ class Money {
   #validate(money) {
     Validator.isNaN(money);
     Validator.isDouble(money);
-    Validator.isDivisibleBy1000(money);
+    Validator.isDivisibleByThousand(money);
   }
 
   #setPurchaseCount(money) {
