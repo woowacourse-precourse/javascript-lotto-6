@@ -9,6 +9,11 @@ class BonusNumberValidator {
 
   static validate(bonusNumber, winningNumber) {
     const validator = new BonusNumberValidator(bonusNumber,winningNumber);
+    validator.checkIsNumber()
+      .checkIsInRange()
+      .checkIsUsual()
+      .checkIsNatural()
+      .checkIsPicked()
   }
 
   checkIsNumber() {
@@ -23,22 +28,22 @@ class BonusNumberValidator {
 		} return this
 	}
 
+	checkIsNatural() {
+		if (!(Number.isInteger(Number(this.bonusNumber)))) {
+			throw new Error(Statics.message.error.isUnNatural);
+		} return this
+	}
+
+	checkIsUsual() {
+		if (this.bonusNumber !== Number(this.bonusNumber).toString()) {
+			throw new Error(Statics.message.error.isUnNatural);
+		} return this
+  }
+  
 	checkIsPicked() {
 		if (this.winningNumber.includes(Number(this.bonusNumber))) {
 			throw new Error(Statics.message.error.isAlreadyPicked);
 		} return this
-	}
-
-	validateNaturalNumber(bonusNumber) {
-		if (!Number.isInteger(Number(bonusNumber))) {
-			throw new Error(errorMessage.NOT_NATURAL_NUMBER);
-		}
-	}
-
-	validateUnusualCase(bonusNumber) {
-		if (bonusNumber !== Number(bonusNumber).toString()) {
-			throw new Error(errorMessage.UNUSUAL_INPUT);
-		}
 	}
 }
 

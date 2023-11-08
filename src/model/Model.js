@@ -4,10 +4,10 @@ import Lotto from "../Lotto.js";
 
 class Model {
   #lottos;
-  // #purchaseBudget;
+  #purchaseBudget;
 
   constructor(purchaseBudget) {
-    // this.#purchaseBudget = purchaseBudget;
+    this.#purchaseBudget = purchaseBudget;
     this.#lottos = this.purchaseLottos(purchaseBudget)
   }
   
@@ -20,7 +20,30 @@ class Model {
     })
   }
 
+  checkIsWinTheLottery(winningNumber, bonusNumber) {
+    const lotteryResult = {
+        place1: 0,
+        place2: 0,
+        place3: 0,
+        place4: 0,
+        place5: 0,
+    };
+
+    this.#lottos.map((lotto) => {
+        const lottoNumbers = lotto.getNumberArray();
+        const place = CompareTwoNumber.getPlace(lottoNumbers, winningNumber, bonusNumber);
+        if (place !== null) {
+            lotteryResult[`${place}PlaceCount`] += 1;
+        }
+    });
+    return lotteryResult;
+  }
+
   getNumbersInLottos() { return this.#lottos.map(lotto => lotto.getNumbers()); }
+
+  getPurchaseBudget() {
+    return this.#purchaseBudget
+  }  
 }
 
 export default Model;

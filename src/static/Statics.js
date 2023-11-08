@@ -26,7 +26,16 @@ const Statics = {
       ${MAXpurchasableAmount}개를 구입했습니다.
       `,
       printArrayAsString: array => `[${array.join(', ')}]`,
-
+      lotteryResult: {
+        header: `당첨 통계
+        ---`,
+        func5: (count) => `3개 일치 (5,000원) - ${count}개`,
+        func4:(count) => `4개 일치 (50,000원) - ${count}개`,
+        func3:(count) => `5개 일치 (1,500,000원) - ${count}개`,
+        func2: (count) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개`,
+        func1: (count) => `6개 일치 (2,000,000,000원) - ${count}개`,
+        earningRatio:(ratio) => `총 수익률은 ${ratio}%입니다.`,
+      }
     },
 
   }

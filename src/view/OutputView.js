@@ -11,8 +11,14 @@ class OutputView {
     Console.print(errorMessage);
   } 
   
-  static printResult() {
-    // 우승 로직 출력
+  static printResult(lotteryResult, earningRatio) {
+    Console.print(Statics.message.output.lotteryResult.header);
+    Console.print(Statics.message.output.lotteryResult.func5(lotteryResult.place5));
+    Console.print(Statics.message.output.lotteryResult.func4(lotteryResult.place4));
+    Console.print(Statics.message.output.lotteryResult.func3(lotteryResult.place3));
+    Console.print(Statics.message.output.lotteryResult.func2(lotteryResult.place2));
+    Console.print(Statics.message.output.lotteryResult.func1(lotteryResult.place1));
+		Console.print(Statics.message.output.lotteryResult.earningRatio(earningRatio));
   }
 }
 

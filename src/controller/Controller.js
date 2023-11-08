@@ -9,15 +9,17 @@ import {
 
 class Controller {
   #model;
+  #winningNumber;
+  #bonusNumber;
 
   async run() {
     await this.purchaseLottos();
     await this.setWinningNumber();
     await this.setBonusNumber();
-    this.checkIsWinTheLottery()
+    this.speakEarningRatio();
   }
 
-  async purchaseLottos (){
+  async purchaseLottos() {
     let isValidate = false;
     do {
       try {
@@ -35,7 +37,7 @@ class Controller {
     let isValidate = false;
     do {
       try {
-        const winningNumber = await this.getWinningNumber();
+        this.#winningNumber = await this.getWinningNumber();
         isValidate = true;
       } catch (error) {
         OutputView.printError(error.message)
@@ -47,7 +49,7 @@ class Controller {
   let isValidate = false;
     do {
       try {
-        const bonusNumber = await this.getBonusNumber();
+        this.#bonusNumber = await this.getBonusNumber();
         isValidate = true;
       } catch (error) {
         OutputView.printError(error.message)
@@ -56,8 +58,10 @@ class Controller {
   }
   
 
-  checkIsWinTheLottery() {
-    
+  speakEarningRatio() {
+    const purchaseBudget = this.#model.getPurchaseBudget();
+    const lotteryResult = this.#model.checkResult(this.#winningNumber, this.#bonusNumber);
+    OutputView.printResult()
   }
 
   async getPurchaseBudget() {
@@ -74,7 +78,7 @@ class Controller {
 
   async getBonusNumber() {
     const bonusNumber = await InputView.inputBonusNumber();
-    BonusNumberValidator.validate(bonusNumber);
+    BonusNumberValidator.validate(bonusNumber,this.#winningNumber);
     return
   }
 }
