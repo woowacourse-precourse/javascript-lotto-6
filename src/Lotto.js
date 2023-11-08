@@ -21,7 +21,7 @@ class Lotto {
       }
     }
     let unique = new Set(numbers);
-    if (unique.length !== numbers.length) {
+    if (unique.size !== numbers.length) {
       throw new Error(Messages.ERROR_WINNING_NUMBER_DUPLICATED);
     }
   }

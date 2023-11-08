@@ -12,6 +12,9 @@ class LottoGame {
     const input_amount = await MissionUtils.Console.readLineAsync(
       Messages.PURCHASE_AMOUNT_INPUT
     );
+    if (input_amount === '') {
+      throw new Error(Messages.ERROR_IS_BLANK);
+    }
     if (isNaN(input_amount)) {
       throw new Error(Messages.ERROR_ISNAN);
     }
