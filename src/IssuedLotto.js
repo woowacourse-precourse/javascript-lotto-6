@@ -21,13 +21,16 @@ class IssuedLotto {
     return issuedLottos;
   }
 
-  printOut(issuedLottos) {
+  printOut() {
+    const issuedLottos = this.lottoIssuance();
     MissionUtils.Console.print(
       `\n${this.#numOfPurchasedLotto}개를 구매했습니다.`,
     );
     issuedLottos.map((lotto) => {
       MissionUtils.Console.print(lotto);
     });
+
+    return issuedLottos;
   }
 }
 
