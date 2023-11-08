@@ -7,16 +7,19 @@ class Input {
 	}
 
 	static async askUserUntilValid(question, validatorCallBack = () => true) {
-		let reply = await Input.askUser(question);
-		try {
-			validatorCallBack(reply);
-		} catch (err) {
-			reply = await Input.askUserUntilValid(
-				question,
-				validatorCallBack,
-			);
-		}
+		let isNotValid = true;
+		let reply = '';
+		while (isNotValid) {
+			try {
+				reply = await Input.askUser(question);
 
+				validatorCallBack(reply);
+				isNotValid = false;
+			} catch (err) {
+				Console.print(err.message);
+			}
+		}
+		Console.print('');
 		return reply;
 	}
 }

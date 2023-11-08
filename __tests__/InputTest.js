@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import Input from '../src/Input';
+import Input from '../src/Input.js';
 
 const EXPECTED_ASKING_CNT = 2;
 
@@ -30,11 +30,10 @@ describe('Input 클래스 테스트', () => {
 		mockQuestions(['foo', 'foo', 'foo']);
 
 		// when
-		const input = Input;
 
-		const spyFn = jest.spyOn(input, 'askUser');
+		const spyFn = jest.spyOn(validator, 'validateFunc');
 
-		await input.askUserUntilValid(
+		await Input.askUserUntilValid(
 			'질문1',
 			validator.validateFunc.bind(validator),
 		);
