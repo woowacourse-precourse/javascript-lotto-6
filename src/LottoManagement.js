@@ -52,9 +52,9 @@ class LottoManagement {
 
     return matchingCounts;
   }
-  countBonuses(randomArrs) {
+  countBonuses(randomArrs, inputBonus) {
     return randomArrs.map((randomArr) =>
-      randomArr.getNumbers().includes(this.bonusNumber) ? 1 : 0
+      randomArr.getNumbers().includes(inputBonus) ? 1 : 0
     );
   }
 }
