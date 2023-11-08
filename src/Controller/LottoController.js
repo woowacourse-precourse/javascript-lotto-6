@@ -1,5 +1,5 @@
-import Input from "../View/Input.js";
 import Output from "../View/Output.js";
+import Input from "../View/Input.js";
 import Lottos from "../Model/Lottos.js";
 import Calculate from "../Model/Calculate.js";
 import { Console } from "@woowacourse/mission-utils";
