@@ -27,8 +27,8 @@ class Game {
         const price = Number(input);
         this.#validatePrice(price);
         return price;
-      } catch(e) {
-        Console.print(e);
+      } catch(err) {
+        Console.print(err);
       }
     }
   }
@@ -46,8 +46,8 @@ class Game {
         const input = await Console.readLineAsync(MESSAGE.LOTTO_INPUT);
         const lotto = new Lotto(input.split(SPLIT_SEPARATOR).map((number) => Number(number)).sort((a, b) => a - b));
         return lotto;
-      } catch(e) {
-        Console.print(e);
+      } catch(err) {
+        Console.print(err);
       }
     }
   }
@@ -59,8 +59,8 @@ class Game {
         const bonusNumber = Number(input);
         this.#validateBonusNumber(bonusNumber);
         return bonusNumber;
-      } catch(e) {
-        Console.print(e);
+      } catch(err) {
+        Console.print(err);
       }
     }
   }
