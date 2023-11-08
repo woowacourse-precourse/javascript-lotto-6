@@ -1,11 +1,13 @@
 import { Random } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE } from '../constants/messages.js';
+import { validator } from '../validators/validator.js';
 
 class LottoMaker {
 	#amount;
 	#lottoNumbers;
 
 	constructor(number) {
+		validator.purchaseAmountValidator(number);
 		this.#amount = number;
 	}
 

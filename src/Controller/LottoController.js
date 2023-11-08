@@ -28,14 +28,11 @@ class LottoController {
 	}
 
 	async initializeLotto() {
-		while (true) {
-			let amount = Number(await inputView.readPurchaseAmount());
-
-			if (validator.purchaseAmountValidator(amount)) {
-				this.#lottoMaker = new LottoMaker(amount / INPUT_MESSAGE.LOTTO_UNITS);
-				this.#lottoMaker.makeLotto(this.#lottoMaker.getAmount());
-				break;
-			}
+		try {
+			this.#lottoMaker = new LottoMaker(Number((await inputView.readPurchaseAmount()) / INPUT_MESSAGE.LOTTO_UNITS));
+			this.#lottoMaker.makeLotto(this.#lottoMaker.getAmount());
+		} catch {
+			await this.initializeLotto();
 		}
 	}
 
@@ -45,15 +42,9 @@ class LottoController {
 	}
 
 	async inputMatchNumbers() {
-		while (true) {
-			let matchNumbers = await inputView.readMatchNumbers();
-			const convertMatchNumbers = matchNumbers.split(',').map(Number);
-
-			if (validator.matchNumberValidator(convertMatchNumbers)) {
-				this.#lotto = new Lotto(convertMatchNumbers);
-				break;
-			}
-		}
+		let matchNumbers = await inputView.readMatchNumbers();
+		const convertMatchNumbers = matchNumbers.split(',').map(Number);
+		this.#lotto = new Lotto(convertMatchNumbers);
 	}
 
 	async inputBonusNumber() {

@@ -5,8 +5,8 @@ class App {
 
 	constructor() {}
 
-	play() {
-		this.#lottoController.start();
+	async play() {
+		await this.#lottoController.start();
 	}
 }
 
