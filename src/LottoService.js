@@ -27,12 +27,13 @@ class LottoService {
         }
     }
 
-    validateBonusNumber(bonusNumber) {
+    validateNumbers(numbers) {
         try{
-            if(Number.isNaN(bonusNumber)) throw Error("[ERROR] 보너스 번호는 숫자 형식이어야 합니다.");
-            if(bonusNumber < 1 || bonusNumber > 45) throw Error("[ERROR] 보너스 숫자의 범위는 1 ~ 45 사이여야 합니다.");
-            if(!Number.isInteger(bonusNumber)) throw Error("[ERROR] 보너스 번호는 정수 형식이어야 합니다.");
-            if(this.numbers.includes(bonusNumber)) throw Error("[ERROR] 보너스 번호는 로또 번호와 중복되면 안됩니다.");
+            if (numbers.length !== 6) throw Error("[ERROR] 로또 번호는 6개여야 합니다.");
+            if (numbers.filter(n=>!Number.isNaN(n)).length != 6) throw Error("[ERROR] 로또 번호는 숫자 형식이어야 합니다.");
+            if (numbers.filter(n=>Number.isInteger(n)).length != 6) throw Error("[ERROR] 로또 번호는 정수 형식이어야 합니다.");
+            if (numbers.filter(n=>n <= 45 && n >= 1).length != 6) throw Error("[ERROR] 로또 번호는 1에서 45사이여야 합니다.");
+            if (new Set(numbers).size != 6) throw Error("[ERROR] 로또 번호는 중복되면 안됩니다.");
             return true;
         }catch(e){
             Console.print(`${e}`);
