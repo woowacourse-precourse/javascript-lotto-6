@@ -26,7 +26,7 @@ class LottoGameController {
 
 	/** 구입 금액을 입력 받는 로직을 담당한다. */
 	async #handleInputPurchaseAmount() {
-		let purchaseAmount = await this.#view.inputPurchaseAmount();
+		const purchaseAmount = await this.#view.inputPurchaseAmount();
 		Validator.validatePurchaseAmount(purchaseAmount);
 		this.#lottoGame.setPurchaseQuantityFromAmount(purchaseAmount);
 	}
@@ -37,6 +37,58 @@ class LottoGameController {
 		this.#view.breakLine();
 		this.#view.displayPurchaseQuantity(this.#lottoGame.getPurchaseQuantity());
 		this.#view.displayTickets(this.#lottoGame.getTickets());
+	}
+
+	/** 당첨/보너스 번호의 입력 로직을 담당한다. */
+	async handleSetWinningNumbers() {
+		await this.#handleInputWinningNumbers();
+		await this.#handleInputBonusNumber();
+	}
+
+	/** 당첨 번호의 입력 로직을 담당한다. */
+	async#handleInputWinningNumbers() {
+		this.#view.breakLine();
+		const winningNumbers = this.#preprocessWinningNumbers(
+			await this.#view.inputWinningNumbers()
+		);
+		this.#lottoGame.setWinningNumbers(winningNumbers);
+	}
+
+
+	/**
+	 * 당첨 번호(사용자 입력)에 대하여 전처리 및 유효성검사를 수행한다.
+	 * @param {string} winningNumbers 쉼표로 구분된 당첨 번호 목록
+	 * @returns 전처리, 유효성검사가 완료된 당첨 번호 배열
+	 */
+	#preprocessWinningNumbers(winningNumbers) {
+		// TODO: 상수 사용
+		let newWinningNumbers = winningNumbers
+			.split(',')
+			.map(item => item.trim())
+			.filter(item => item !== '');
+		Validator.validateWinningNumbers(newWinningNumbers);
+		return newWinningNumbers.map(item => Number(item));
+	}
+
+	/** 보너스 번호의 입력 로직을 담당한다. */
+	async #handleInputBonusNumber() {
+		this.#view.breakLine();
+		const bonusNumber = this.#preprocessBonusNumber(
+			await this.#view.inputBonusNumber()
+		);
+		this.#lottoGame.setBonusNumber(bonusNumber);
+	}
+
+	/**
+ * 보너스 번호(사용자 입력)에 대하여 전처리 및 유효성검사를 수행한다.
+ * @param {string} bonusNumber 보너스 번호
+ * @returns 전처리, 유효성검사가 완료된 보너스 번호
+ */
+	#preprocessBonusNumber(bonusNumber) {
+		let newBonusNumber = bonusNumber.trim();
+		const winningNumbers = this.#lottoGame.getWinningNumbers();
+		Validator.validateBonusNumber(newBonusNumber, winningNumbers);
+		return parseInt(newBonusNumber);
 	}
 }
 

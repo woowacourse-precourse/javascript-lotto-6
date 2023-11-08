@@ -1,6 +1,6 @@
 class Lotto {
 
-  /** @type {Array<number>} : Lotto 번호 리스트 */
+  /** @type {Array<number>} : Lotto 번호 배열 */
   #numbers = null;
 
   constructor(numbers) {

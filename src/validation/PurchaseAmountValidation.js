@@ -2,10 +2,11 @@ const PurchaseAmountValidation = {
 
 	/**
 	 * 구입금액에 대하여 유효성검사를 수행한다.
-	 * @param {string} value 구입금액
+	 * @param {string} value 구입 금액
 	 */
 	validate(value) {
 		this.checkIsNumeric(value);
+		this.checkIsInteger(value);
 		this.checkIsNotNegative(value);
 		this.checkIsNotZero(value);
 		this.checkIsDivisibleByPrice(value);
