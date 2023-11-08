@@ -1,4 +1,5 @@
 import Lotto from "../src/Lotto.js";
+import validatePrice from "../src/validatePrice.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -45,7 +46,7 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test("보너스 번호가 숫자가 아니면 예외가 발생한다.", () => {
+  test("보너스 번호가 숫자가 아니면(문자를 포함하면) 예외가 발생한다.", () => {
     expect(() => {
       const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
       lotto.validateBonusNum([1, 2, 3, 4, 5, 6], "1a");
@@ -71,5 +72,26 @@ describe("로또 클래스 테스트", () => {
       const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
       lotto.validateBonusNum([1, 2, 3, 4, 5, 6], "7");
     }).not.toThrow();
+  });
+});
+
+
+describe("구매 금액 유효성 테스트", () => {
+  test("구매 금액이 숫자가 아니면(문자를 포함하면) 예외가 발생한다.", () => {
+    expect(() => {
+      validatePrice("2000won");
+    }).toThrow("[ERROR]");
+  });
+
+  test("구매 금액이 0 이하이면 예외가 발생한다.", () => {
+    expect(() => {
+      validatePrice("0");
+    }).toThrow("[ERROR]");
+  });
+
+  test("구매 금액이 1000으로 나누어 떨어지지 않으면 예외가 발생한다.", () => {
+    expect(() => {
+      validatePrice("1500");
+    }).toThrow("[ERROR]");
   });
 });
