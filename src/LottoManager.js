@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { PRIZE_TEXT_BY_MATCH_COUNT } from './constants/index.js';
 import Lotto from './Lotto.js';
 
 class LottoManager {
@@ -6,13 +7,14 @@ class LottoManager {
     #purchaseLottos;
     #winLotto;
     #bonusNumber;
+    #prizeCount;
 
     constructor(amount) {
         this.#amount = amount;
         this.#purchaseLottos = this.#generatePurchaseLottos();
         this.#winLotto;
         this.#bonusNumber;
-        this.winCount = [0, 0, 0, 0, 0];
+        this.#prizeCount = this.#initializePrizeCount();
     }
 
     #generatePurchaseLottos() {
@@ -28,36 +30,43 @@ class LottoManager {
         this.#winLotto = new Lotto(winNumbers);
     }
 
-    setBonusNumber(bonusNumber) {
-        this.#bonusNumber = bonusNumber;
+    #initializePrizeCount() {
+        const prizeCount = {
+            first: 0,
+            second: 0,
+            third: 0,
+            fourth: 0,
+            fifth: 0
+        };
+
+        return prizeCount;
     }
 
     getLottos() {
         return this.#purchaseLottos;
     }
 
-    setWinCount(player) {
-        const winMatch = Lotto.getMatchCount(this.#winLotto, player);
-        let bonusMatch = false;
+    setBonusNumber(bonusNumber) {
+        this.#bonusNumber = bonusNumber;
+    }
 
-        if (winMatch === 5 || player.getNumbers().includes(this.#bonusNumber)) {
-            bonusMatch = true;
-        }
-
-        if (winMatch === 6 || bonusMatch === true) {
-            this.winCount[winMatch - 2]++;
-        } else if (winMatch >= 3) {
-            this.winCount[winMatch - 3]++;
+    #setPrizeCount(purchaseLotto) {
+        const matchCount = Lotto.getMatchCount(this.#winLotto, purchaseLotto);
+        const matchBonus = matchCount === 5 && purchaseLotto.isIncludeBonus(this.#bonusNumber);
+        if (matchBonus) {
+            this.#prizeCount['second'] += 1;
+        } else if (matchCount in PRIZE_TEXT_BY_MATCH_COUNT) {
+            this.#prizeCount[PRIZE_TEXT_BY_MATCH_COUNT[matchCount]] += 1;
         }
     }
 
-    setAllwinCount() {
-        this.#purchaseLottos.forEach((player) => this.setWinCount(player));
+    #setAllPrizeCount() {
+        this.#purchaseLottos.forEach((lotto) => this.#setPrizeCount(lotto));
     }
 
-    getWinCount() {
-        this.setAllwinCount()
-        return this.winCount;
+    getPrizeCount() {
+        this.#setAllPrizeCount()
+        return this.#prizeCount;
     }
 }
 

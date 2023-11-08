@@ -30,7 +30,7 @@ class InputView {
         try {
             const bonusNumber = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
             LottoValidator.isValidBonus(winNumbers, bonusNumber);
-            return bonusNumber;
+            return parseInt(bonusNumber);
         } catch (err) {
             Console.print(err.message);
             return this.readBonusNumber(winNumbers);

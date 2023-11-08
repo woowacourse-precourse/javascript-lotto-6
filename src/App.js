@@ -22,11 +22,11 @@ class App {
     const bonusNumber = await InputView.readBonusNumber(winNumbers);
     lottoManager.setBonusNumber(bonusNumber);
 
-    // 기능 ➎ 당첨 로또 번호와 구매한 로또 번호를 비교한다.
-    const prize = lottoManager.getWinCount();
+    // 기능 ➎ 로또 숫자를 비교하여 당첨 통계를 계산하고 출력
+    const prize = lottoManager.getPrizeCount();
     OutputView.printPrize(prize);
 
-    // 기능 ➏ 수익률을 계산한다.
+    // 기능 ➏ 수익률을 계산하고 출력
     const bank = new Bank(money, prize);
     OutputView.printProfitRate(bank.getProfitRate());
   }

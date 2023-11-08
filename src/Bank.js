@@ -1,32 +1,26 @@
-import PRIZE_MONEYMONEY from "./constants/money.js";
+import { PRIZE_MONEY } from "./constants/index.js";
 
 class Bank {
+    #money;
     #prizeCount;
     #profit;
     #profitRate;
-    #money;
 
     constructor(money, prize) {
         this.#money = money;
-        this.#prizeCount = {
-            first: prize[4],
-            second: prize[3],
-            third: prize[2],
-            fourth: prize[1],
-            fifth: prize[0],
-        };
+        this.#prizeCount = prize;
         this.#profit = 0;
         this.#profitRate;
     }
 
-    calculateProfit() {
+    #calculateProfit() {
         for (const key in this.#prizeCount) {
-            this.#profit += this.#prizeCount[key] * PRIZE_MONEYMONEY[key];
+            this.#profit += this.#prizeCount[key] * PRIZE_MONEY[key];
         }
     }
 
     getProfitRate() {
-        this.calculateProfit();
+        this.#calculateProfit();
         this.#profitRate = (this.#profit / this.#money) * 100;
         return this.#profitRate.toFixed(1);
     }

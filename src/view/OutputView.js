@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import PRIZE from '../constants/message.js';
+import { PRIZE_MESSAGE, GUIDE_MESSAGE } from '../constants/message.js';
 
 class OutputView {
     static printPurchaseAmount(amount) {
@@ -15,12 +15,10 @@ class OutputView {
     }
 
     static printPrize(prize) {
-        Console.print(PRIZE.guide);
-        Console.print(PRIZE.fifth + prize[0] + '개');
-        Console.print(PRIZE.fourth + prize[1] + '개');
-        Console.print(PRIZE.third + prize[2] + '개');
-        Console.print(PRIZE.second + prize[3] + '개');
-        Console.print(PRIZE.first + prize[4] + '개');
+        Console.print(GUIDE_MESSAGE.prize);
+        for (const key in PRIZE_MESSAGE) {
+            Console.print(PRIZE_MESSAGE[key] + prize[key] + '개');
+        }
     }
 
     static printProfitRate(profitRate) {

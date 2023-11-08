@@ -16,6 +16,13 @@ class Lotto {
     return this.#numbers;
   }
 
+  isIncludeBonus(bonus) {
+    if (this.#numbers.includes(bonus)) {
+      return true
+    }
+    return false;
+  }
+
   /**
    * 두 로또 객체의 숫자를 비교하여
    * 일치하는 숫자의 개수를 반환하는 메소드
