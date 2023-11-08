@@ -31,8 +31,8 @@ class App {
       this.setWinDetail();
       this.printResult();
     } catch (error) {
-      console.log("에러 발생");
-      console.log(error);
+      console.log("에러 발생", error.message);
+
       throw new Error(`[ERROR] ${error.message}`);
     }
   }
@@ -53,18 +53,30 @@ class App {
   }
   async buyLotto() {
     try {
-      MissionUtils.Console.print("로또 구입 금액을 입력해주세요.(1장= 1000원)");
-      const money = await MissionUtils.Console.readLineAsync(
-        "로또 구입 금액을 입력해주세요.(1장= 1000원)"
-      );
-      this.validateBuyLotto(Number(money));
-
+      let money = await this.inputMoney();
       const LOTTO_PRICE = 1000;
       const lottoTiket = money / LOTTO_PRICE;
       MissionUtils.Console.print(`${lottoTiket}개를 구매했습니다.`);
       return lottoTiket;
     } catch (error) {
       throw new Error(error.message);
+    }
+  }
+
+  async inputMoney() {
+    while (true) {
+      try {
+        MissionUtils.Console.print(
+          "로또 구입 금액을 입력해주세요.(1장= 1000원)"
+        );
+        let money = await MissionUtils.Console.readLineAsync(
+          "로또 구입 금액을 입력해주세요.(1장= 1000원)"
+        );
+        this.validateBuyLotto(Number(money));
+        return money;
+      } catch (error) {
+        MissionUtils.Console.print(`[ERROR] ${error.message}`);
+      }
     }
   }
   validateBuyLotto(money) {
