@@ -22,6 +22,8 @@ class App {
 
   #AWARD_PRICE;
 
+  #RATE_OF_RETURN;
+
   constructor() {
     this.#PRICE = [2000000000, 30000000, 1500000, 50000, 5000];
     this.#USER_PRICE = 0;
@@ -33,6 +35,7 @@ class App {
     this.#WINNING_COUNT = [0, 0, 0, 0, 0];
     this.#TMP_WINNING_COUNT = [];
     this.#AWARD_PRICE = 0;
+    this.#RATE_OF_RETURN = 0;
   }
 
   async getInputPrice() {
@@ -187,6 +190,8 @@ class App {
   // 총 수익률은 62.5%입니다.
   calculateResults() {
     this.calculateAwardPrice();
+    this.#RATE_OF_RETURN =
+      ((this.#AWARD_PRICE - this.#USER_PRICE) / this.#USER_PRICE) * 100;
   }
 
   calculateAwardPrice() {
@@ -201,15 +206,19 @@ class App {
     });
   }
 
+  
+
   async play() {
     await this.getInputPrice();
     this.makeLottoArray();
+    Console.print(this.#USER_LOTTOS);
     await this.getInputWinningNumber();
     await this.getInputBonusNumber();
 
     this.printLottoArray();
     this.checkLotto();
     this.calculateResults();
+    Console.print(this.#RATE_OF_RETURN.toFixed(2));
   }
 }
 
