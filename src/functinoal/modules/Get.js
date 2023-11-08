@@ -19,10 +19,10 @@ const {
 
 class Get {
   static randomLottoArray(numberOfLotto) {
-    return new Array(numberOfLotto).fill(null).map(Get.randomLottoNumbers);
+    return new Array(numberOfLotto).fill(null).map(Get.randomLotto);
   }
 
-  static randomLottoNumbers() {
+  static randomLotto() {
     return new Lotto(
       Random.pickUniqueNumbersInRange(
         LOTTO_NUMBER_LOWER,
