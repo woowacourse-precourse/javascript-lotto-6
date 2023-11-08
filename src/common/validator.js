@@ -13,11 +13,6 @@ const isStringLengthEqualTo = (input, length) => {
   return number.length === length;
 };
 
-const containUniqueNumbersInString = (input) => {
-  const number = input.split(UTILS.comma).map(name => name.trim());
-  return number.length === new Set(number).size;
-};
-
 const containUniqueNumbersInArray = (array) => array.length === new Set(array).size;
 
 const isArrayLengthEqualTo = (array, length) => array.length === length;
@@ -29,5 +24,5 @@ const isNumeric = (input) => UTILS.positive_integer.test(input);
 const isInRange = (input, min, max) => input >= min && input <= max;
 
 export {
-  containUniqueNumbersInArray, containUniqueNumbersInString, isArrayLengthEqualTo, isCommaSeparated, isDivisibleByUnit, isElementInTarget, isInRange, isNumeric, isStringLengthEqualTo
+  containUniqueNumbersInArray, isArrayLengthEqualTo, isCommaSeparated, isDivisibleByUnit, isElementInTarget, isInRange, isNumeric, isStringLengthEqualTo
 };

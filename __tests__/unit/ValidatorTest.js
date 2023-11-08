@@ -1,6 +1,5 @@
 /* eslint-disable max-lines-per-function */
 import {
-  containUniqueNumbersInString,
   isCommaSeparated,
   isDivisibleByUnit,
   isElementInTarget,
@@ -31,14 +30,6 @@ describe('당첨 번호 테스트', () => {
 
     expect(isStringLengthEqualTo(validLengthWinningNumber, 6)).toBe(true);
     expect(isStringLengthEqualTo(invalidLengthWinningNumber, 6)).toBe(false);
-  });
-
-  test('당첨 번호 중 중복 존재 여부', () => {
-    const uniqueWinningNumber = '1,12,33,4,25,45';
-    const duplicateWinningNumber = '1,2,3,4,4,6';
-  
-    expect(containUniqueNumbersInString(uniqueWinningNumber)).toBe(true);
-    expect(containUniqueNumbersInString(duplicateWinningNumber)).toBe(false);
   });
 
   test('당첨 번호가 쉼표로 구분되었는지 여부', () => {
