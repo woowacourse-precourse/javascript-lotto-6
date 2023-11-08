@@ -1,4 +1,4 @@
-import { MESSAGE } from "./Message.js";
+import { LOTTO_CONSTANTS, MESSAGE } from "./Message.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class LottoResult {
@@ -17,23 +17,23 @@ class LottoResult {
 
   calculateEarningMoney(number, index){
     if(index === 0){
-      this.earningMoney += 5000 * number;
+      this.earningMoney += LOTTO_CONSTANTS.fifth * number;
       return MESSAGE.threeSame(number);
     }
     if(index === 1){
-      this.earningMoney += 50000 * number;
+      this.earningMoney += LOTTO_CONSTANTS.fourth * number;
       return MESSAGE.fourSame(number);
     }
     if(index === 2){
-      this.earningMoney += 1500000 * number;
+      this.earningMoney += LOTTO_CONSTANTS.third * number;
       return MESSAGE.fiveSame(number);
     }
     if(index === 3){
-      this.earningMoney += 30000000 * number;
+      this.earningMoney += LOTTO_CONSTANTS.second * number;
       return MESSAGE.fiveAndBonusSame(number);
     }
     if(index === 4){
-      this.earningMoney += 2000000000 * number;
+      this.earningMoney += LOTTO_CONSTANTS.first * number;
       return MESSAGE.sixSame(number);
     }
   }

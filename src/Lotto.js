@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE } from "./Message.js";
+import { LOTTO_CONSTANTS, ERROR_MESSAGE } from "./Message.js";
 
 class Lotto {
   #numbers;
@@ -10,7 +10,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if(numbers.length !== 6){
+    if(numbers.length !== LOTTO_CONSTANTS.numberCount){
       throw new Error(ERROR_MESSAGE.notSixNumbers);
     }
     numbers.forEach((number) => {
@@ -22,7 +22,7 @@ class Lotto {
       }
     })
     const set = new Set(numbers);
-    if(set.size !== 6){
+    if(set.size !== LOTTO_CONSTANTS.numberCount){
       throw new Error(ERROR_MESSAGE.notUniqueNumbers);
     }
   }
@@ -38,7 +38,7 @@ class Lotto {
 
   checkLottoWinning(winningNumbers, bonusNumber){
     let count = 0, bonus = 0;
-    for(let i = 0; i < 6; i++){
+    for(let i = 0; i < LOTTO_CONSTANTS.numberCount; i++){
       if(winningNumbers.includes(this.#numbers[i])){
         count++;
         continue;

@@ -1,6 +1,6 @@
 import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { MESSAGE, ERROR_MESSAGE } from "./Message.js";
+import { LOTTO_CONSTANTS, MESSAGE, ERROR_MESSAGE } from "./Message.js";
 
 class UserInput{
   #money;
@@ -13,7 +13,7 @@ class UserInput{
         const inputMoney = Number(await MissionUtils.Console.readLineAsync(MESSAGE.money));
         this.#checkMoneyValidation(inputMoney);
         this.#money = inputMoney;
-        return this.#money;
+        return [this.#money, this.#money / LOTTO_CONSTANTS.unitMoney];
       } catch(error){
         MissionUtils.Console.print(error.message);
       }
@@ -50,7 +50,7 @@ class UserInput{
     if(isNaN(inputMoney)){
       throw new Error(ERROR_MESSAGE.notNumber);
     }
-    if(!inputMoney || inputMoney % 1000){
+    if(!inputMoney || inputMoney % LOTTO_CONSTANTS.unitMoney){
       throw new Error(ERROR_MESSAGE.notMultiplesOf1000);
     }
   }

@@ -1,4 +1,14 @@
-const MESSAGE = {
+const LOTTO_CONSTANTS = Object.freeze({
+  unitMoney: 1000,
+  numberCount: 6,
+  first: 2000000000,
+  second: 30000000,
+  third: 1500000,
+  fourth: 50000,
+  fifth: 5000
+});
+
+const MESSAGE = Object.freeze({
   money: "구입금액을 입력해 주세요.\n",
   winningNumbers: "\n당첨 번호를 입력해 주세요.\n",
   bonusNumber: "\n보너스 번호를 입력해 주세요.\n",
@@ -10,14 +20,14 @@ const MESSAGE = {
   fiveAndBonusSame : (number) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${number}개`,
   sixSame : (number) => `6개 일치 (2,000,000,000원) - ${number}개`,
   earningRate: (number) => `총 수익률은 ${number}%입니다.`
-};
+});
 
-const ERROR_MESSAGE = {
+const ERROR_MESSAGE = Object.freeze({
   notMultiplesOf1000: "[ERROR] 1000의 배수의 값을 입력해 주세요.",
   notNumber: "[ERROR] 숫자를 입력해 주세요.",
   notSixNumbers: "[ERROR] 6개의 숫자를 입력해 주세요.",
   notLottoNumbers: "[ERROR] 0 ~ 45 숫자를 입력해 주세요.",
   notUniqueNumbers: "[ERROR] 서로 다른 숫자를 입력해 주세요."
-}
+});
 
-export { MESSAGE, ERROR_MESSAGE };
+export { LOTTO_CONSTANTS, MESSAGE, ERROR_MESSAGE };

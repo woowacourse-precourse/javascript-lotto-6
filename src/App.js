@@ -2,13 +2,12 @@ import UserInput from "./UserInput.js";
 import Lotto from "./Lotto.js";
 import LottoResult from "./LottoResult.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { MESSAGE } from "./Message.js";
+import { LOTTO_CONSTANTS, MESSAGE } from "./Message.js";
 
 class App {
   async play() {
     const userInput = new UserInput();
-    const money = await userInput.getInputMoney();
-    let countOfLottos = money / 1000;
+    let [money, countOfLottos] = await userInput.getInputMoney();
     MissionUtils.Console.print(MESSAGE.numberOfLottos(countOfLottos));
     
     const myLottos = [];
