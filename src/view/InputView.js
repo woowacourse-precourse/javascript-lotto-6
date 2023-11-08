@@ -18,7 +18,9 @@ const InputView = {
     return lottoNumbers;
   },
   async readBonusNumber() {
-    const bonusNumber = await Console.readLine(MESSAGE.GET_BONUS_NUMBER);
+    const bonusNumber = await Console.readLineAsync(
+      `${MESSAGE.GET_BONUS_NUMBER}\n`
+    );
     return Number(bonusNumber);
   },
 };
