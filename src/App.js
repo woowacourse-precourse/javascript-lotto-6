@@ -1,26 +1,26 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-import InputPrice from "./InputPrice.js";
-import InputBonus from "./InputBonus.js";
+import InputPriceValidation from "./InputPriceValidation.js";
+import InputBonusValidation from "./InputBonusValidation.js";
 
 class App {
   async play() {
-    const randomLottoArr = await InputPriceValidation();
-    const lottoNumber = await InputLottoValidation();
-    const bonus = await InputBonusValidation(lottoNumber);
+    const randomLottoArr = await InputPrice();
+    const lottoNumber = await InputLotto();
+    const bonus = await InputBonus(lottoNumber);
     const matchList = matchLotto(randomLottoArr[0], lottoNumber, bonus);
     const resultList = matchResult(matchList);
     printResult(resultList, randomLottoArr[1]);
   }
 }
 
-async function InputPriceValidation() {
+async function InputPrice() {
   while (true) {
     try {
       const budgetInput = await Console.readLineAsync(
         "구입금액을 입력해 주세요.\n"
       );
-      const budgetPrice = new InputPrice(budgetInput);
+      const budgetPrice = new InputPriceValidation(budgetInput);
       budgetPrice.validate(budgetInput);
       const numLotto = budgetPrice.calculateLottoCount(budgetInput);
       Console.print("");
@@ -33,7 +33,7 @@ async function InputPriceValidation() {
   }
 }
 
-async function InputLottoValidation() {
+async function InputLotto() {
   while (true) {
     try {
       const lottoInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
@@ -49,11 +49,11 @@ async function InputLottoValidation() {
   }
 }
 
-async function InputBonusValidation(lottoNumber) {
+async function InputBonus(lottoNumber) {
   while (true) {
     try {
       const bonusInput = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-      const bonus = new InputBonus(bonusInput, lottoNumber);
+      const bonus = new InputBonusValidation(bonusInput, lottoNumber);
       bonus.validate(bonusInput, lottoNumber);
       Console.print("");
       return bonusInput;
