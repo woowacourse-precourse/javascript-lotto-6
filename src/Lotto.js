@@ -23,7 +23,7 @@ class Lotto {
     }
     return lottoNumbers;
   }
-  //key = index, value = 숫자
+
   printLottoNumbers(lottoNumbers) {
     for (let i = 0; i < lottoNumbers.length; i++) {
       Console.print(lottoNumbers[i]);
@@ -31,15 +31,25 @@ class Lotto {
   }
 
   async enterDrawNumbers(num) {
-    const input = await Console.readLineAsync(INPUT.DRAW);
-    const number = input.split(",");
-    return this.#validateDraw(number).map(Number);
+    try {
+      const input = await Console.readLineAsync(INPUT.DRAW);
+      const number = input.split(",");
+      return this.#validateDraw(number).map(Number);
+    } catch (error) {
+      Console.print(error.message);
+      await this.enterDrawNumbers();
+    }
   }
 
   async enterBonusNumber(num) {
-    const input = await Console.readLineAsync(INPUT.BONUS);
-    const number = input.split(",");
-    return this.#validateBonus(number).map(Number);
+    try {
+      const input = await Console.readLineAsync(INPUT.BONUS);
+      const number = input.split(",");
+      return this.#validateBonus(number).map(Number);
+    } catch (error) {
+      Console.print(error.message);
+      await this.enterBonusNumber();
+    }
   }
 
   #validateDraw(numbers) {

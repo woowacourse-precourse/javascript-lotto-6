@@ -2,22 +2,22 @@ import { Console } from "@woowacourse/mission-utils";
 import { ERROR, INPUT } from "./Message.js";
 
 class Purchase {
-  #amountOfLotto;
   constructor() {
-    this.#amountOfLotto = 0;
+    this.credit = 0;
   }
 
-  getCredit() {
-    const cash = Console.readLineAsync(INPUT.CREDIT);
-    return cash;
+  async getAmountOfLotto() {
+    try {
+      this.credit = await Console.readLineAsync(INPUT.CREDIT);
+      const credit = this.isDividedBy1000(Number(this.credit));
+      return credit;
+    } catch (error) {
+      Console.print(error.message);
+      await this.getAmountOfLotto();
+    }
   }
 
-  async getAmountOfLotto(credit) {
-    this.#amountOfLotto = this.isDividedBy1000(credit);
-    return this.#amountOfLotto;
-  }
-
-  async isDividedBy1000(credit) {
+  isDividedBy1000(credit) {
     if (isNaN(credit)) {
       throw new Error(ERROR.NOT_NUMBER);
     }
@@ -29,7 +29,7 @@ class Purchase {
 
   printAmountOfLotto(amount) {
     const amountOfLotto = amount;
-    Console.print(`${amountOfLotto}개를 구매했습니다.\n`);
+    Console.print(`\n${amountOfLotto}개를 구매했습니다.`);
   }
 }
 
