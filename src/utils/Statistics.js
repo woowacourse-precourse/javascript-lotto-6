@@ -2,69 +2,70 @@ import { CONSOLE_MESSAGE } from "../Constants.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class Statistics {
-  statisticsOfWinningLotto(sameNumbers) {
-    let first = 0;
-    let second = 0;
-    let third = 0;
-    let fourth = 0;
-    let fifth = 0;
-    sameNumbers.forEach((sameNumber) => {
-      switch (sameNumber) {
+  constructor() {
+    this.prizes = [5, 50, 1500, 30000, 2000000];
+    this.countByPlace = {
+      fifthPlace: 0,
+      fourthPlace: 0,
+      thirdPlace: 0,
+      secondPlace: 0,
+      firstPlace: 0,
+    };
+  }
+
+  statisticsOfWinningLotto(matchedNumbers) {
+    matchedNumbers.forEach((number) => {
+      switch (number) {
         case 3:
-          fifth++;
+          this.countByPlace.fifthPlace++;
           break;
         case 4:
-          fourth++;
+          this.countByPlace.fourthPlace++;
           break;
         case 5:
-          third++;
+          this.countByPlace.thirdPlace++;
           break;
         case "bonus":
-          second++;
+          this.countByPlace.secondPlace++;
           break;
         case 6:
-          first++;
+          this.countByPlace.firstPlace++;
           break;
         default:
           break;
       }
     });
-    console.log(CONSOLE_MESSAGE.STATISTICS_TITLE + "\n---");
-    Console.print(`${CONSOLE_MESSAGE.FIFTH_PLACE}${fifth}개`);
-    Console.print(`${CONSOLE_MESSAGE.FOURTH_PLACE}${fourth}개`);
-    Console.print(`${CONSOLE_MESSAGE.THIRD_PLACE}${third}개`);
-    Console.print(`${CONSOLE_MESSAGE.SECOND_PLACE}${second}개`);
-    Console.print(`${CONSOLE_MESSAGE.FIRST_PLACE}${first}개`);
 
-    return [fifth, fourth, third, second, first];
+    console.log(CONSOLE_MESSAGE.STATISTICS_TITLE + "\n---");
+    this.printPlaces();
+
+    return Object.values(this.countByPlace);
   }
+  printPlaces() {
+    const placeNames = [
+      CONSOLE_MESSAGE.FIFTH_PLACE,
+      CONSOLE_MESSAGE.FOURTH_PLACE,
+      CONSOLE_MESSAGE.THIRD_PLACE,
+      CONSOLE_MESSAGE.SECOND_PLACE,
+      CONSOLE_MESSAGE.FIRST_PLACE,
+    ];
+    placeNames.forEach((placeName, index) => {
+      const count = this.countByPlace[Object.keys(this.countByPlace)[index]];
+      Console.print(`${placeName}${count}개`);
+    });
+  }
+
   rateOfReturn(places, purchaseQuantity) {
     let result = 0;
     for (let i = 0; i < places.length; i++) {
       if (places[i] > 0) {
-        result += this.moneyForPlace(i);
+        result += this.prizes[i];
       }
     }
     return (
       Math.round(((Number(result) * 100) / Number(purchaseQuantity)) * 100) /
       100
     );
-  }
-  moneyForPlace(placeIndex) {
-    switch (placeIndex) {
-      case 0:
-        return 5;
-      case 1:
-        return 50;
-      case 2:
-        return 1500;
-      case 3:
-        return 30000;
-      case 4:
-        return 2000000;
-      default:
-        return 0;
-    }
   }
 }
 export default Statistics;
