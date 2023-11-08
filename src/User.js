@@ -10,9 +10,16 @@ class User {
   }
 
   #validatePurchaseAmount(){
+    this.#validateEmpty(this.purchaseAmount)
     const formattedValue = Number(this.purchaseAmount);
     this.#validateType(formattedValue);
     this.#validateMinAmount(formattedValue);
+  }
+
+  #validateEmpty(inputValue){
+    if (inputValue === ""){
+      throw new LottoError(ERROR_MESSAGE.WRONG_TYPE);
+    }
   }
 
   #validateType(value){
