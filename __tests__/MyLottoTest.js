@@ -54,4 +54,26 @@ describe('로또 클래스 메서드 테스트', () => {
 			expect(() => lotto.validateLottoWinningNumbers()).toThrow(errorMessage);
 		});
 	});
+
+	describe('validateLottoBonusNumber 메서드 테스트', () => {
+		test('보너스 번호 유효성 검사 - 당첨번호와 중복된 수를 입력한 경우', () => {
+			const bonusNumber = '1';
+			const winningNumber = [1, 2, 3, 4, 5, 6];
+			const errorMessage =
+				'[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.';
+			lotto = new Lotto(bonusNumber);
+
+			expect(() => lotto.validateLottoBonusNumber(winningNumber)).toThrow(
+				errorMessage
+			);
+		});
+
+		test('보너스 번호 유효성 검사 - 올바른 보너스 번호일 경우', () => {
+			const bonusNumber = '7';
+			const winningNumber = [1, 2, 3, 4, 5, 6];
+			lotto = new Lotto(bonusNumber);
+
+			expect(() => lotto.validateLottoBonusNumber(winningNumber)).not.toThrow();
+		});
+	});
 });
