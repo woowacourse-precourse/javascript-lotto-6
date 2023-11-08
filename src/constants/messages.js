@@ -15,5 +15,7 @@ export const MESSAGES = Object.freeze({
 const ERROR_PREFIX = "[ERROR]";
 export const ERROR_MESSAGE = Object.freeze({
   INVALID_AMOUNT: `${ERROR_PREFIX} 구입 금액이 1,000원 단위가 아닙니다.`,
-  DUPLICATED_LOTTO: `${ERROR_PREFIX} 당첨 번호가 중복 되었습니다.`,
+  DUPLICATED_WINNING_NUMBER: `${ERROR_PREFIX} 당첨 번호가 중복 되었습니다.`,
+  INVALID_WINNING_NUMBER: `${ERROR_PREFIX} 당첨 번호가 잘못된 형식입니다.`,
+  INVALID_BONUS_NUMBER: `${ERROR_PREFIX} 보너스 번호가 잘못된 형식입니다.`,
 });
