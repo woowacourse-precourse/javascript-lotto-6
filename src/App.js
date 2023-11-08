@@ -137,9 +137,9 @@ class App {
       totalPrize += this.lottoResult[i] * LOTTO_RANK_INFO[i].prize;
     }
     MissionUtils.Console.print(
-      `총 수익률은 ${
+      `총 수익률은 ${(
         (totalPrize / this.purchaseAmount).toFixed(4) * 100
-      }%입니다.`
+      ).toLocaleString()}%입니다.`
     );
   }
 
