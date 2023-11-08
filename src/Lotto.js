@@ -1,6 +1,3 @@
-/* eslint-disable default-case */
-import { Console, Random } from '@woowacourse/mission-utils';
-
 class Lotto {
   #numbers;
 
