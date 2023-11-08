@@ -33,7 +33,7 @@ class App {
     const winner = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     const winNum = winner.split(',');
 
-    const inputbonus = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    const inputbonus = await MissionUtils.Console.readLineAsync("보너스번호를 입력해 주세요.\n");
     const Numbonus = Number(inputbonus);
 
     MissionUtils.Console.print('\n당첨 통계');
