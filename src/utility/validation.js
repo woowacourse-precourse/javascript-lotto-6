@@ -1,8 +1,11 @@
-import { ConsoleInput } from "../ConsoleInput.js";
 import { ERROR_MSG, LOTTO_RULES } from "../constants/constants.js";
 
 export const validateLottoPrice = (price) => {
-  if (price % LOTTO_RULES.PRICE !== 0 || price < 1000 || price === "") {
+  if (
+    Number(price) % LOTTO_RULES.PRICE !== 0 ||
+    Number(price) < 1000 ||
+    Number(price) === ""
+  ) {
     throw new Error(ERROR_MSG.PRICE);
   }
 };

@@ -1,15 +1,18 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { ConsoleInput } from "./ConsoleInput.js";
-import { ConsoleOutput } from "./ConsoleOutput.js";
+
 import Lotto from "./Lotto.js";
 import { validateBonusNum, validateLottoPrice } from "./utility/validation.js";
 import { LOTTO_RULES } from "./constants/constants.js";
 import { calculateProfit, findMatchingNums } from "./utility/results.js";
-
+import ConsoleInput from "./view/ConsoleInput.js";
+import ConsoleOutput from "./view/ConsoleOutput.js";
 class LottoPlay {
   #lottoPrice;
   #result;
   #generatedNums;
+
+  #input = new ConsoleInput();
+  #output = new ConsoleOutput();
 
   constructor(result, generated) {
     this.#lottoPrice = 0;
@@ -32,12 +35,20 @@ class LottoPlay {
   }
 
   async inputLottoPrice() {
-    this.#lottoPrice = await ConsoleInput.inputLottoPrice();
     // 1000 단위 검사, 1000부터 입력 가능
-    validateLottoPrice(this.#lottoPrice);
-    const price = this.#lottoPrice / LOTTO_RULES.PRICE;
-    await ConsoleOutput.lottoPurchasedMessage(price);
-    await this.generateLotto(price);
+
+    while (true) {
+      try {
+        this.#lottoPrice = Number(await this.#input.inputLottoPrice());
+        validateLottoPrice(this.#lottoPrice);
+        const price = this.#lottoPrice / LOTTO_RULES.PRICE;
+        await this.#output.lottoPurchasedMessage(price);
+        await this.generateLotto(price);
+        return this.#lottoPrice;
+      } catch (error) {
+        this.#output.print("[ERROR]");
+      }
+    }
   }
 
   async generateLotto(quantity) {
@@ -50,20 +61,33 @@ class LottoPlay {
       const lottos = this.#generatedNums.sort((a, b) => a - b);
       this.lottos.push(lottos);
       const stringifyNums = `[${this.#generatedNums.join(", ")}]`;
-      await ConsoleOutput.generatedLotto(stringifyNums);
+      await this.#output.generatedLotto(stringifyNums);
     }
   }
 
   async inputLottoResult() {
-    this.#result = await ConsoleInput.inputLottoResult();
-    // NaN, 범위, 중복 검사
-    new Lotto(this.#result);
-    await ConsoleOutput.lottoNumberList(this.#result);
+    while (true) {
+      try {
+        this.#result = await this.#input.inputLottoResult();
+        // NaN, 범위, 중복 검사
+        new Lotto(this.#result);
+        await this.#output.lottoNumberList(this.#result);
+        return this.#result;
+      } catch (error) {}
+      this.#output.print("[ERROR]");
+    }
   }
 
   async inputBonus() {
-    const bonus = await ConsoleInput.inputBonusNumber();
-    validateBonusNum(bonus, this.#result);
+    while (true) {
+      try {
+        const bonus = await this.#input.inputBonusNumber();
+        validateBonusNum(bonus, this.#result);
+        return bonus;
+      } catch (error) {
+        this.#output.print("[ERROR]");
+      }
+    }
   }
 }
 export default LottoPlay;
