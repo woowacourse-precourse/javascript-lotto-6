@@ -11,8 +11,7 @@ class WinLotto {
   countMatchingNumbers(lotto) {
     const lottoNumbers = lotto.getLotto();
     const winCount = this.#countWinNumbers(lottoNumbers);
-    let bonusCount = 0;
-    bonusCount = this.#countBonusNumber(lottoNumbers);
+    const bonusCount = this.#countBonusNumber(lottoNumbers);
 
     return [winCount, bonusCount];
   }
