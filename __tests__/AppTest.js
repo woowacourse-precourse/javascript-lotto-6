@@ -63,4 +63,28 @@ describe("app test", () => {
             ).toThrow("[ERROR]");
         }
     );
+
+    test("로또 당첨 결과를 다루기 쉬운 배열로 바꿔야 합니다.", async () => {
+        const winningNumber = "1,2,3,4,5,6";
+        const bonusNumber = "7";
+        const lottoArr = [];
+        lottoArr.push(new Lotto([1, 2, 3, 4, 5, 6]));
+        const result = [0, 0, 0, 1, 0];
+        const app = new App();
+
+        await expect(
+            app.calculateWinningArr(winningNumber, bonusNumber, lottoArr)
+        ).toEqual(result);
+    });
+
+    test("로또 당첨 수익률 계산을 해야 합니다.", async () => {
+        const winningArr = [0, 0, 0, 1, 0];
+        const purchaseAmount = 1000;
+        const result = ((2000000000 / purchaseAmount) * 100).toFixed(1);
+        const app = new App();
+
+        await expect(
+            app.calculateProfitRate(winningArr, purchaseAmount)
+        ).toEqual(result);
+    });
 });
