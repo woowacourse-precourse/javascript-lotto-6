@@ -5,9 +5,11 @@ import {
   validateMinimumAmount,
 } from '../validates/lottoPurchase.js';
 import {
-  checkWinningNumbers,
-  checkBonusNumber,
+  checkDuplicate,
+  checkLength,
+  checkTypeAndRange,
 } from '../validates/winningNumber.js';
+import { checkBonusNumber } from '../validates/bonusNumber.js';
 
 class User {
   #lottoCount;
@@ -46,7 +48,9 @@ class User {
         .split(',')
         .map((num) => parseInt(num));
 
-      checkWinningNumbers(winningNumbers);
+      checkLength(winningNumbers);
+      checkDuplicate(winningNumbers);
+      checkTypeAndRange(winningNumbers);
 
       return winningNumbers;
     } catch (error) {
