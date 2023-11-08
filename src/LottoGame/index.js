@@ -1,5 +1,5 @@
 import Validator from '../Validator/index.js';
-import { MESSAGE, NUMBER, SYMBOLS } from '../constants/index.js';
+import { MESSAGE, SYMBOLS } from '../constants/index.js';
 import { Input, Output } from '../View/index.js';
 import LottoMachine from '../LottoMachine/index.js';
 import WinningNumberValidator from '../Validator/WinningNumbersValidator/index.js';
@@ -26,8 +26,7 @@ class LottoGame {
   }
 
   async purchase(amount) {
-    const lottoCount = Number(amount) / NUMBER.lottoPurchaseUnit;
-    const lottos = this.#lottoMachine.buy(amount);
+    const { lottos, lottoCount } = this.#lottoMachine.buy(amount);
     Output.log(`${SYMBOLS.lineBreak}${lottoCount}${MESSAGE.purchase}`);
     Output.log(lottos);
 

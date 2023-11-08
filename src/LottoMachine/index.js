@@ -56,7 +56,7 @@ class LottoMachine {
     this.#purchaseAmount = purchaseAmount;
     this.#lottos = this.#pickLottos(lottoCount);
 
-    return Formatter.formatLottos(this.#lottos);
+    return { lottos: Formatter.formatLottos(this.#lottos), lottoCount };
   }
 
   makeResult() {
