@@ -11,7 +11,6 @@ import CustomError from '../view/CustomError';
 class Validator {
   static isMoneyValid(input) {
     const NUMERIC_MONEY = Number(input);
-    console.log(input);
 
     if (NUMERIC_MONEY < UNIT) {
       throw new CustomError(PURCHASE_AMOUNT_ERROR_MESSAGE.underThousand);
