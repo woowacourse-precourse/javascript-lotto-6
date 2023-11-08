@@ -25,7 +25,7 @@ class LottoGame {
     try {
       return await func();
     } catch (err) {
-      Console.print(err);
+      Console.print('[ERROR]');
       return await this.reInput(func);
     }
   }
@@ -41,7 +41,7 @@ class LottoGame {
       await this.matchLotto(this.#lottoTicketsValues, this.#answerLotto, this.#bonusLotto, this.#money.getResult());
       this.printTotalProfitRate();
     } catch (err) {
-      Console.print(err);
+      Console.print('[ERROR]');
     }
     
   }
@@ -49,6 +49,32 @@ class LottoGame {
   async inputMoney() {
       const moneyInput = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
       this.#money = new Money(moneyInput);
+  }
+
+  async countTicket() {
+    this.#ticketCount = await this.#money.getMoney() / 1000;
+    Console.print(`${this.#ticketCount}개를 구매했습니다.`);
+  }
+
+  async buyLotto() {
+    const lottoTickets = [];
+    const lottoTicketsValues = [];
+    for (let i = 0; i < this.#ticketCount; i++) {
+      const lotto = randomLottogenerator();
+      const sortedLotto = lotto.sort((a, b) => a - b);
+      lottoTicketsValues.push(sortedLotto);
+      const lottoObject = new Lotto(sortedLotto);
+      lottoTickets.push(lottoObject);
+    }
+    this.#lottoTickets = lottoTickets;
+    this.#lottoTicketsValues = lottoTicketsValues;
+  }
+
+  async printLottoTickets() {
+    this.#lottoTickets.forEach((lotto) => {
+      const lottoNumbers = lotto.getNumbersString();
+      Console.print(`[${lottoNumbers}]`);
+    })
   }
 
   

@@ -1,5 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
-
 class Lotto {
   #numbers;
 
@@ -9,18 +7,19 @@ class Lotto {
   }
 
   #validate(numbers) {
+    if (numbers.some((number) => isNaN(Number(number)))) {
+      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+    }
+    if (!numbers.every((number) => typeof number === "number")) {
+      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+    }
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
     if (new Set(numbers).size !== 6) {
       throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
     }
-    if (!numbers.every((number) => typeof number === "number")) {
-      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
-    }
-    if (numbers.some((number) => isNaN(Number(number)))) {
-      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
-    }
+    
   }
 
   // TODO: 
@@ -33,10 +32,10 @@ class Lotto {
   }
 
   judgeLotto(answerLotto) { 
+    const answerLottoValue = answerLotto.getNumbers();
     const lottoResult = this.#numbers.filter((number) => 
-      answerLotto.includes(number)
+      answerLottoValue.includes(number)
     );
-    //Console.print('lottoResult : '+lottoResult);
     const lottoResultCount = lottoResult.length;
     return lottoResultCount;
   }
