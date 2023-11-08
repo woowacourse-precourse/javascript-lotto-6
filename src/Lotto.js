@@ -14,6 +14,7 @@ class Lotto {
 
   has(value) {
     const numbers = this.getNumbers();
+
     return numbers.includes(value);
   }
 

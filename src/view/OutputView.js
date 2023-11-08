@@ -1,13 +1,15 @@
 import { Console } from "@woowacourse/mission-utils";
+import { OUTPUT_MESSAGE } from "../constants/messages.js";
+import { PRIZE } from "../constants/lotto.js";
 
 const OutputView = {
   printLottoCount(lottos) {
-    Console.print(`${lottos.length}개를 구매했습니다.`);
+    Console.print(OUTPUT_MESSAGE.buyLottos(lottos));
   },
 
   printLottos(lottos) {
     lottos.forEach((lotto) => {
-      Console.print(`[${lotto.getNumbers().join(", ")}]`);
+      Console.print(OUTPUT_MESSAGE.lottoArray(lotto));
     });
   },
 
@@ -15,15 +17,18 @@ const OutputView = {
     Console.print("");
   },
 
-  printPrizes(prizes) {
-    Console.print(`\
-당첨 통계
----
-3개 일치 (5,000원) - ${this.countElementInArray("5등", prizes)}개  
-4개 일치 (50,000원) - ${this.countElementInArray("4등", prizes)}개
-5개 일치 (1,500,000원) - ${this.countElementInArray("3등", prizes)}개
-5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.countElementInArray("2등", prizes)}개
-6개 일치 (2,000,000,000원) - ${this.countElementInArray("1등", prizes)}개`);
+  printPrizes(targetPrizes) {
+    const prizeCount = this.countPrizes(targetPrizes);
+    Console.print(OUTPUT_MESSAGE.lottoResult(prizeCount));
+  },
+
+  countPrizes(targetPrizes) {
+    const AVAILABLE_PRIZES = Object.values(PRIZE);
+
+    return AVAILABLE_PRIZES.reduce((acc, availablePrize) => {
+      acc[availablePrize] = this.countElementInArray(availablePrize, targetPrizes);
+      return acc;
+    }, {});
   },
 
   countElementInArray(target, array) {
@@ -31,7 +36,7 @@ const OutputView = {
   },
 
   printProfitRate(profitRate) {
-    Console.print(`총 수익률은 ${parseFloat(profitRate).toLocaleString()}%입니다.`);
+    Console.print(OUTPUT_MESSAGE.profitRate(profitRate));
   },
 };
 

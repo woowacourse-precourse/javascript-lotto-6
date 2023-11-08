@@ -1,10 +1,13 @@
 import REGEX from "../constants/Regex.js";
+import { LOTTO_BUSINESS_RULES } from "../constants/lotto.js";
+import { ERROR_MESSAGE } from "../constants/messages.js";
 import { validateNumberInRange } from "../utils/validators.js";
 
 const LottoNumbersParser = {
   parse(input) {
     const splittedInput = this.splitByComma(input).map((value) => value.trim());
     this.validateInput(splittedInput);
+
     return this.parseInts(splittedInput);
   },
 
@@ -24,12 +27,13 @@ const LottoNumbersParser = {
   validateHasOnlyPositiveInt(array) {
     const isAllInt = array.every((value) => REGEX.onlyInt.test(value) && value > 0);
     if (!isAllInt) {
-      throw new Error("[ERROR] 입력 값은 모두 양의 정수 형태여야 합니다.");
+      throw new Error(ERROR_MESSAGE.hasNotOnlyPostiveInt);
     }
   },
 
   validateVaildLottoNumbers(numbers) {
-    numbers.forEach((number) => validateNumberInRange(number, 1, 45));
+    const { minNumber, maxNumber } = LOTTO_BUSINESS_RULES;
+    numbers.forEach((number) => validateNumberInRange(number, minNumber, maxNumber));
   },
 
   parseInts(array) {

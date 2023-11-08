@@ -1,5 +1,7 @@
 import Lotto from "../Lotto.js";
-import { PROFIT_FOR_PRIZE } from "../constants/lottoPrize.js";
+import { LOTTO_PRICE, PROFIT_FOR_PRIZE } from "../constants/lotto.js";
+import { ERROR_MESSAGE } from "../constants/messages.js";
+import SCALE from "../constants/scale.js";
 import { typeValidator } from "../utils/validators.js";
 
 class LottoResultCalculator {
@@ -19,11 +21,11 @@ class LottoResultCalculator {
   }
 
   calculateProfitRate(prizes) {
-    const LOTTO_PRICE = 1000;
     const investment = LOTTO_PRICE * this.#lottos.length;
-
     const profit = prizes.reduce((acc, prize) => acc + PROFIT_FOR_PRIZE[prize] || 0, 0);
-    return Number((profit / investment) * 100).toFixed(1);
+    const profitRate = Number((profit / investment) * SCALE.percentage);
+
+    return profitRate.toFixed(SCALE.firstDecimalPlace);
   }
 
   static #validateLottos(value) {
@@ -34,13 +36,13 @@ class LottoResultCalculator {
 
   static #validateHasElement(value) {
     if (!value.length) {
-      throw new Error("[ERROR] 배열에 요소가 1개 이상 존재하지 않습니다.");
+      throw new Error(ERROR_MESSAGE.hasNoElement);
     }
   }
 
   static #validateHasOnlyLotto(value) {
     if (!value.every((element) => element instanceof Lotto)) {
-      throw new Error("[ERROR] 로또 객체가 아닌 값이 포함되어 있습니다.");
+      throw new Error(ERROR_MESSAGE.hasNonLotto);
     }
   }
 }

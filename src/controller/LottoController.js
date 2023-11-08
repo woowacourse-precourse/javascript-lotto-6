@@ -24,6 +24,7 @@ const LottoController = {
     const moneyInput = await InputView.readMoney();
     const money = new Money(moneyInput);
     const lottos = LottoSeller.getLottos(money.getAmount());
+
     return lottos;
   },
 
@@ -38,12 +39,14 @@ const LottoController = {
     const lottoAnswerInput = await InputView.readLottoAnswer();
     const parsedLottoAnwerInput = LottoNumbersParser.parse(lottoAnswerInput);
     const answerLotto = new Lotto(parsedLottoAnwerInput);
+
     return answerLotto;
   },
 
   async readBonusNumberForLottoAnswer(answerLotto) {
     const bonusNumber = await InputView.readBonusNumber();
     const lottoAnswer = new LottoAnswer(answerLotto, bonusNumber);
+
     return lottoAnswer;
   },
 
@@ -51,6 +54,7 @@ const LottoController = {
     const checker = new LottoResultCalculator(lottos);
     const prizes = checker.calculatePrizes(answer);
     const profitRate = checker.calculateProfitRate(prizes);
+
     return { prizes, profitRate };
   },
 
