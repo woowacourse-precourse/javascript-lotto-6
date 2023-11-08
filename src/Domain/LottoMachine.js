@@ -2,14 +2,6 @@ import LottoUi from '../Ui/LottoUi';
 import { Random } from '@woowacourse/mission-utils';
 
 const LottoMachine = {
-  async purchaseLotto() {
-    const purchaseAmount = await LottoUi.inputPurchaseAmount();
-    const purchasedLottos = this.drawLottos(purchaseAmount);
-    LottoUi.printPurchasedLottos(purchasedLottos);
-
-    return purchasedLottos;
-  },
-
   drawLottos(purchaseAmount) {
     const purchasedLottos = [];
     const numberOfLottos = purchaseAmount / 1000;
@@ -21,6 +13,7 @@ const LottoMachine = {
     }
 
     LottoUi.alertFinishdrawLottos(numberOfLottos);
+    LottoUi.printPurchasedLottos(purchasedLottos);
 
     return purchasedLottos;
   },

@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from '../constants/message';
 import COMMON_VALUE from '../constants/\bcommonValue';
+import { ERROR_MESSAGE } from '../constants/message';
 
 const Validate = {
   PurchaseAmount(purchaseAmount) {
