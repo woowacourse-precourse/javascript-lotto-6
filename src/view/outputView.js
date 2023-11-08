@@ -21,7 +21,11 @@ class OutputView {
   }
 
   static async printRating(rate) {
-    Console.print(`\n총 수익률은 ${rate.toFixed(1)}%입니다.`);
+    const result = rate
+      .toFixed(1)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    Console.print(`\n총 수익률은 ${result}%입니다.`);
   }
 }
 
