@@ -1,0 +1,36 @@
+import {
+  LOTTO_PRICE,
+  LOTTO_MIN_NUMBER,
+  LOTTO_MAX_NUMBER,
+  LOTTO_NUMBERS_LENGTH,
+} from '../Constants.js';
+import { generateRandomNumbers } from '../Utils.js';
+import Lotto from '../Lotto.js';
+
+class LottoGenerator {
+  generateLottos(purchaseAmount) {
+    const lottos = [];
+    const numberOfLottos = this.getNumberOfLottos(purchaseAmount);
+    for (let i = 0; i < numberOfLottos; i++) {
+      const lottoNumbers = this.generateLottoNumbers();
+      lottos.push(new Lotto(lottoNumbers));
+    }
+    return lottos;
+  }
+
+  getNumberOfLottos(purchaseAmount) {
+    return purchaseAmount / LOTTO_PRICE;
+  }
+
+  generateLottoNumbers() {
+    const numbers = generateRandomNumbers(
+      LOTTO_MIN_NUMBER,
+      LOTTO_MAX_NUMBER,
+      LOTTO_NUMBERS_LENGTH
+    );
+    numbers.sort((a, b) => a - b);
+    return numbers;
+  }
+}
+
+export default LottoGenerator;

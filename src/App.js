@@ -1,21 +1,15 @@
-import {
-  LOTTO_MAX_NUMBER,
-  LOTTO_MIN_NUMBER,
-  LOTTO_NUMBERS_LENGTH,
-  LOTTO_PRICE,
-} from './Constants.js';
-import Lotto from './Lotto.js';
 import InputManager from './UI/InputManager.js';
 import OutputManager from './UI/OutputManager.js';
-import { generateRandomNumbers } from './Utils.js';
 import { Validators } from './Service/Validators.js';
 import LottoGameResultCalculator from './Components/LottoGameResultCalculator.js';
+import LottoGenerator from './Components/LottoGenerator.js';
 
 class App {
   constructor() {
     this.inputManager = new InputManager();
     this.outputManager = new OutputManager();
     this.lottoGameResultCalculator = new LottoGameResultCalculator();
+    this.lottoGenerator = new LottoGenerator();
     this.purchaseAmountInput = '';
     this.winningNumbersInput = '';
     this.bonusNumberInput = '';
@@ -26,7 +20,7 @@ class App {
   }
 
   async play() {
-    await this.setConditionForGame();
+    await this.setConditionForGamePlaying();
     const { matchingResults, rateOfReturn } =
       this.lottoGameResultCalculator.getGameResult({
         lottos: [...this.lottos],
@@ -40,10 +34,9 @@ class App {
     });
   }
 
-  async setConditionForGame() {
+  async setConditionForGamePlaying() {
     this.purchaseAmount = await this.getPurchaseAmount();
-    const numberOfLottos = this.getNumberOfLottos();
-    this.createLottos(numberOfLottos);
+    this.lottos = [...this.lottoGenerator.generateLottos(this.purchaseAmount)];
     this.outputManager.printPurchasedLottosInfo(this.lottos);
     this.winningNumbers = await this.getWinningNumbers();
     this.bonusNumber = await this.getBonusNumber();
@@ -88,27 +81,6 @@ class App {
       await this.getBonusNumber();
     }
     return Number(this.bonusNumberInput);
-  }
-
-  getNumberOfLottos() {
-    return this.purchaseAmount / LOTTO_PRICE;
-  }
-
-  createLottos(numberOfLottos) {
-    for (let i = 0; i < numberOfLottos; i++) {
-      const lottoNumbers = this.generateLottoNumbers();
-      this.lottos.push(new Lotto(lottoNumbers));
-    }
-  }
-
-  generateLottoNumbers() {
-    const numbers = generateRandomNumbers(
-      LOTTO_MIN_NUMBER,
-      LOTTO_MAX_NUMBER,
-      LOTTO_NUMBERS_LENGTH
-    );
-    numbers.sort((a, b) => a - b);
-    return numbers;
   }
 }
 
