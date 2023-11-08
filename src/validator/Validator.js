@@ -6,7 +6,7 @@ import {
   BONUS_NUMBER_ERROR_MESSAGE,
   WINNING_NUMBERS_ERROR_MESSAGE
 } from '../constants/constants.js';
-import CustomError from '../View/CustomError.js';
+import CustomError from '../view/CustomError.js';
 
 class Validator {
   static isMoneyValid(input) {
