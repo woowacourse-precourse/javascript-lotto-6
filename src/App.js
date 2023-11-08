@@ -10,13 +10,14 @@ class App {
   #coin = 0;
   #boughtLottos = [];
   #winning = [];
+
   #bonus = 0;
 
   async play() {
     await this.buyLottos(this.#inputView, this.#outputView);
     await this.getWinningNumber(this.#inputView);
-    const compare = new Compare(this.#winning, this.#bonus);
-    this.printWinningResult(compare, this.#outputView);
+    const { matched, profit } = this.getMachedResult();
+    this.printWinningResult(matched, profit, this.#outputView);
   }
 
   async buyLottos(inputView, outputView) {
@@ -36,16 +37,22 @@ class App {
     this.#bonus = await inputView.bonus(winningNumber);
   }
 
-  printWinningResult(compare, outputView) {
+  getMachedResult() {
+    const compare = new Compare(this.#winning, this.#bonus);
+    const matched = compare.getMathced(this.#boughtLottos);
+    const profit = compare.getProfit(Object.values(matched), this.#coin);
+    return {
+      matched: Object.entries(matched),
+      profit,
+    };
+  }
+
+  printWinningResult(matched, profit, outputView) {
     outputView.winningResult();
-
-    outputView.matchedThree(compare.getMatchedThree(this.#boughtLottos));
-    outputView.matchedFour(compare.getMatchedFour(this.#boughtLottos));
-    outputView.matchedFive(compare.getMatchedFive(this.#boughtLottos));
-    outputView.matchedBonus(compare.getMatchedBonus(this.#boughtLottos));
-    outputView.matchedSix(compare.getMatchedSix(this.#boughtLottos));
-
-    outputView.profit(compare.getProfit(this.#boughtLottos, this.#coin));
+    for (const [digit, value] of matched) {
+      outputView.matchedAll(digit, value);
+    }
+    outputView.profit(profit);
   }
 }
 

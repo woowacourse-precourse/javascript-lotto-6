@@ -43,6 +43,14 @@ export default class OutputView {
     Console.print(MESSAGE_SIX_MATCHED.replace('{result}', result));
   }
 
+  matchedAll(digit, value) {
+    if (digit === 'three') this.matchedThree(value);
+    if (digit === 'four') this.matchedFour(value);
+    if (digit === 'five') this.matchedFive(value);
+    if (digit === 'bonus') this.matchedBonus(value);
+    if (digit === 'six') this.matchedSix(value);
+  }
+
   profit(result) {
     Console.print(MESSAGE_PROFIT.replace('{result}', result));
   }

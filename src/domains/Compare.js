@@ -1,113 +1,57 @@
-import {
-  PROFIT,
-  THREE,
-  FOUR,
-  FIVE,
-  SIX,
-  KRW_UNIT,
-} from '../constants/constants.js';
+import { PROFIT, KRW_UNIT } from '../constants/constants.js';
 
 export default class Compare {
   #winningNumber;
   #bonusNumber;
 
+  #machedNumber;
+
   constructor(winningNumber, bonusNumber) {
     this.#winningNumber = winningNumber.getNumbers();
     this.#bonusNumber = bonusNumber;
+    this.#machedNumber = { three: 0, four: 0, five: 0, bonus: 0, six: 0 };
   }
 
-  getMatchedThree(boughtLottos) {
-    let Matched = 0;
-
-    boughtLottos.forEach((Lotto) => {
-      const lottoNumbers = Lotto.getNumbers();
-      const matchedNumbers = lottoNumbers.filter((number) =>
+  getMathced(boughtLottos) {
+    boughtLottos.forEach((boughtLotto) => {
+      const lotto = boughtLotto.getNumbers();
+      const matchedNumbers = lotto.filter((number) =>
         this.#winningNumber.includes(number)
       );
-      if (matchedNumbers.length === THREE) Matched += 1;
+      this.countMachedNumbers(matchedNumbers.length, lotto);
     });
 
-    return Matched;
+    return this.#machedNumber;
   }
 
-  getMatchedFour(boughtLottos) {
-    let Matched = 0;
-
-    boughtLottos.forEach((Lotto) => {
-      const lottoNumbers = Lotto.getNumbers();
-      const matchedNumbers = lottoNumbers.filter((number) =>
-        this.#winningNumber.includes(number)
-      );
-      if (matchedNumbers.length === FOUR) Matched += 1;
-    });
-
-    return Matched;
-  }
-
-  getMatchedFive(boughtLottos) {
-    let Matched = 0;
-
-    boughtLottos.forEach((Lotto) => {
-      const lottoNumbers = Lotto.getNumbers();
-      const matchedNumbers = lottoNumbers.filter((number) =>
-        this.#winningNumber.includes(number)
-      );
-      if (matchedNumbers.length === FIVE) Matched += 1;
-    });
-
-    return Matched;
-  }
-
-  getMatchedBonus(boughtLottos) {
-    let Matched = 0;
-
-    boughtLottos.forEach((Lotto) => {
-      const lottoNumbers = Lotto.getNumbers();
-      const matchedNumbers = lottoNumbers.filter((number) =>
-        this.#winningNumber.includes(number)
-      );
-      if (
-        matchedNumbers.length === FIVE &&
-        lottoNumbers.includes(this.#bonusNumber)
-      ) {
-        Matched += 1;
+  countMachedNumbers(matchedNumbersLength, lotto) {
+    if (matchedNumbersLength === 3) this.#machedNumber.three += 1;
+    if (matchedNumbersLength === 4) this.#machedNumber.four += 1;
+    if (matchedNumbersLength === 5) {
+      if (lotto.includes(this.#bonusNumber)) {
+        this.#machedNumber.bonus += 1;
+        return;
       }
-    });
-
-    return Matched;
+      this.#machedNumber.five += 1;
+    }
+    if (matchedNumbersLength === 6) this.#machedNumber.six += 1;
   }
 
-  getMatchedSix(boughtLottos) {
-    let Matched = 0;
-
-    boughtLottos.forEach((Lotto) => {
-      const lottoNumbers = Lotto.getNumbers();
-      const matchedNumbers = lottoNumbers.filter((number) =>
-        this.#winningNumber.includes(number)
-      );
-      if (matchedNumbers.length === SIX) Matched += 1;
-    });
-
-    return Matched;
-  }
-
-  getMatchedAll(boughtLottos) {
-    const results = [];
-
-    results.push(this.getMatchedThree(boughtLottos));
-    results.push(this.getMatchedFour(boughtLottos));
-    results.push(this.getMatchedFive(boughtLottos));
-    results.push(this.getMatchedBonus(boughtLottos));
-    results.push(this.getMatchedSix(boughtLottos));
-    return results;
-  }
-
-  getProfit(boughtLottos, coin) {
+  getProfit(result, coin) {
     let totalProfit = 0;
-    const result = this.getMatchedAll(boughtLottos);
+    // const result = this.getMatchedAll(boughtLottos);
     result.forEach((count, index) => {
       totalProfit += count * PROFIT[index];
     });
     return ((totalProfit / (coin * KRW_UNIT)) * 100).toFixed(1);
   }
 }
+
+// getProfit(boughtLottos, coin) {
+//   let totalProfit = 0;
+//   const result = this.getMatchedAll(boughtLottos);
+//   result.forEach((count, index) => {
+//     totalProfit += count * PROFIT[index];
+//   });
+//   return ((totalProfit / (coin * KRW_UNIT)) * 100).toFixed(1);
+// }
