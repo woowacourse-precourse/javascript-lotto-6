@@ -4,6 +4,9 @@ const INFORM_TEMPLATE = {
   purchase: '개를 구매했습니다.',
   numberSeperator: ', ',
   lottoSeperator: '\n',
+  statisticHeader: '당첨 통계\n---',
+  statistic: (matchStandard, prize, count) =>
+    `${matchStandard}개 일치 (${prize}원) - ${count}개`,
   profit: (profit) => `총 수익률은 ${profit}%입니다.`,
 };
 
@@ -23,12 +26,6 @@ const WINNING_PRIZE = new Map([
   ['1등', 2000000000],
 ]);
 
-const PRINT_STRING = {
-  resultHeader: '당첨 통계\n---',
-  prizeUnit: '원',
-  matchCountUnit: '개',
-};
-
 const informResult = {
   issuedLotto: (issuedLotto, count) => {
     const lottoList = issuedLotto.map(
@@ -40,16 +37,15 @@ const informResult = {
   },
 
   winningStatistic: (winnerList) => {
-    Utils.informUser(PRINT_STRING.resultHeader);
+    Utils.informUser(INFORM_TEMPLATE.statisticHeader);
 
     RANKING.forEach((standard, rank) => {
       const prize = WINNING_PRIZE.get(rank);
+      const prizeLocal = prize.toLocaleString();
       const matchCount = winnerList.get(rank) ?? 0;
 
       Utils.informUser(
-        `${standard} (${prize.toLocaleString()}${
-          PRINT_STRING.prizeUnit
-        }) - ${matchCount}${PRINT_STRING.matchCountUnit}`,
+        INFORM_TEMPLATE.statistic(standard, prizeLocal, matchCount),
       );
     });
   },
