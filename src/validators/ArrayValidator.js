@@ -1,3 +1,5 @@
+import ERROR_MESSAGE from '../constants/error.js';
+import { LOTTO_COUNT, LOTTO_RANGE } from '../constants/number.js';
 import TypeValidator from './TypeValidator.js';
 
 class ArrayValidator {
@@ -52,6 +54,17 @@ class ArrayValidator {
     return (
       TypeValidator.isArray(value) && value.every((element) => element >= from && element <= to)
     );
+  }
+
+  static validateLottoNumbers(numbers) {
+    let message = '';
+
+    if (!this.isArrayOfLength(numbers, LOTTO_COUNT)) message = ERROR_MESSAGE.NOT_IN_LOTTO_COUNT;
+    if (!this.isUniqueArray(numbers)) message = ERROR_MESSAGE.DUPLICATED_NUMBER;
+    if (!this.isSortedArray(numbers)) message = ERROR_MESSAGE.NOT_SORTED;
+    if (!this.isInRange(numbers, LOTTO_RANGE)) message = ERROR_MESSAGE.NOT_IN_RANGE;
+
+    return message;
   }
 }
 

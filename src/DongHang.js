@@ -9,6 +9,7 @@ import CustomError from './customs/CustomError.js';
 import ERROR_MESSAGE from './constants/error.js';
 import WinningNumbers from './WinningNumbers.js';
 import reTryCatch from './exceptions/reTryCatch.js';
+import ArrayValidator from './validators/ArrayValidator.js';
 
 /**
  * @classdesc 복권 발급처
@@ -54,13 +55,19 @@ class DongHang {
 
   static async inputWinningNumbers() {
     const mainInput = await Input.readCommaSeparatedAsync(PROMPT.WINNING_NUMBERS);
-    const main = new Lotto(mainInput.sort((a, b) => a - b));
 
-    return main;
+    const message = ArrayValidator.validateLottoNumbers(mainInput);
+    if (message.length > 0) throw new CustomError(message);
+
+    return mainInput;
   }
 
+  /**
+   * @param {number[]} mainInput
+   * @returns {Promise<number>}
+   */
   static async inputBonusNumber(mainInput) {
-    const bonusInput = await reTryCatch(async () => Input.readIntegerAsync(PROMPT.BONUS_NUMBER));
+    const bonusInput = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
 
     if (!NumberValidator.isInRange(bonusInput, LOTTO_RANGE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);

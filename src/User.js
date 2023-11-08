@@ -5,6 +5,7 @@ import CustomError from './customs/CustomError.js';
 import Input from './utils/Input.js';
 import PROMPT from './constants/prompt.js';
 import NumberValidator from './validators/NumberValidator.js';
+import reTryCatch from './exceptions/reTryCatch.js';
 
 /**
  * @classdesc 복권 구매자
@@ -22,7 +23,7 @@ class User {
    * 로또를 구매하는 메서드
    */
   async buy() {
-    const money = await Input.readIntegerAsync(PROMPT.BUY_COST);
+    const money = await reTryCatch(async () => Input.readIntegerAsync(PROMPT.BUY_COST));
 
     if (!NumberValidator.isDivisibleBy(money, LOTTO_PRICE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_DIVISIBLE_BY_LOTTO_PRICE);

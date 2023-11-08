@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import CustomError from '../customs/CustomError.js';
 import ERROR_MESSAGE from '../constants/error.js';
 import { TypeValidator, StringValidator } from '../validators/index.js';
+import reTryCatch from '../exceptions/reTryCatch.js';
 
 /**
  * @classdesc 사용자 입력을 담당하는 클래스,
@@ -14,7 +15,7 @@ class Input {
    * @returns {Promise<number>} 구입금액
    */
   static async readIntegerAsync(message) {
-    const userInput = await this.readNonEmptyAsync(message);
+    const userInput = await reTryCatch(async () => this.readNonEmptyAsync(message));
 
     if (!StringValidator.isPositiveInteger(userInput)) {
       throw new CustomError(ERROR_MESSAGE.NOT_POSITIVE_INTEGER);
@@ -30,7 +31,7 @@ class Input {
    * @returns {Promise<number[]>} 당첨번호
    */
   static async readCommaSeparatedAsync(message) {
-    const userInput = await this.readNonEmptyAsync(message);
+    const userInput = await reTryCatch(async () => this.readNonEmptyAsync(message));
 
     if (!StringValidator.isCommaSeparatedNumbers(userInput.replace(/\s/g, ''))) {
       throw new CustomError(ERROR_MESSAGE.NOT_COMMA_SEPARATED_NUMBERS);
