@@ -7,7 +7,7 @@ class App {
     this.printLottoCounts(COUNT);
     const TICKETS = this.createUniqueRandomNums(COUNT);
     const WINNINGNUMS = await this.getWinningNum();
-    const BONUS = await this.getBonusNum();
+    const BONUS = await this.getBonusNum(WINNINGNUMS);
     const WINLOG = this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
     this.printWinningStatistics(WINLOG);
     this.calculateProfit(COUNT, TICKETS);
@@ -58,13 +58,14 @@ class App {
       WINNUM.push(num);
     }
     const WINNINGNUM = new Lotto(WINNUM);
+    WINNINGNUM.sortNumbers();
     return WINNINGNUM.returnNumbers();
   }
 
   // 사용자로부터 보너스 번호를 입력받는 메서드
   async getBonusNum(WINNINGNUMS) {
     const BONUS = parseInt(await Console.readLineAsync("보너스 번호를 입력해 주세요."));
-    if(WINNINGNUMS.has(BONUS)){
+    if(WINNINGNUMS.includes(BONUS)){
       throw new Error("[ERROR] 보너스 번호와 당첨번호 중 한개가 일치합니다.");
     }
     return BONUS;
