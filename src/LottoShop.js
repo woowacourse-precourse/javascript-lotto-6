@@ -25,10 +25,7 @@ class LottoShop {
   }
 
   static #validate(amount) {
-    if (Number.isNaN(amount)) {
-      throw new Error(ERROR.positiveNumber);
-    }
-    if (amount === 0) {
+    if (Number.isNaN(amount) || amount === 0) {
       throw new Error(ERROR.positiveNumber);
     }
     if (amount % LOTTO.price !== 0) {

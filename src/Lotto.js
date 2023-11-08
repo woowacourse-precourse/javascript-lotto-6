@@ -32,7 +32,7 @@ class Lotto {
       throw new Error(ERROR.unique);
     }
     const { min, max } = LOTTO.number;
-    if (numbers.some((number) => number < min || number > max)) {
+    if (!numbers.every((number) => min <= number && number <= max)) {
       throw new Error(ERROR.between);
     }
   }

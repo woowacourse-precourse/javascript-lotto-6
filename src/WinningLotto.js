@@ -24,7 +24,7 @@ class WinningLotto {
   }
 
   #validate(bonusNumber) {
-    if (bonusNumber < LOTTO.number.min || bonusNumber > LOTTO.number.max) {
+    if (!(LOTTO.number.min <= bonusNumber && bonusNumber <= LOTTO.number.max)) {
       throw new Error(ERROR.between);
     }
     if (this.#lotto.includes(bonusNumber)) {
