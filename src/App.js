@@ -9,6 +9,7 @@ class App {
     this.winningFive = 0;
     this.winningBonus = 0;
     this.winningSix = 0;
+    this.pattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
   }
 
   async play() {
@@ -55,7 +56,7 @@ class App {
       
       this.checkDuplicateNums(randomNums);
       this.checkListLength(randomNums);
-      
+
       const printedString = `[${randomNums.join(', ')}]`;
       Console.print(printedString)
       
@@ -80,12 +81,8 @@ class App {
       this.checkInputIsNull(winningNums);
       this.checkListLength(winningNumsList);
       this.checkDuplicateNums(winningNumsList);
+      this.checkNumsRange(winningNumsList);
 
-      for (let i = 0; i < winningNumsList.length; i++) {
-        if (!numRangePattern.test(winningNumsList[i])) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-        }
-      }
       return winningNumsList;
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
@@ -104,6 +101,15 @@ class App {
       throw new Error(ERROR_MESSAGE.INVALID_ERROR)
     }
   };
+
+  checkNumsRange(winningNumsList) {
+    for (let i = 0; i < winningNumsList.length; i++) {
+      if (!this.pattern.test(winningNumsList[i])) {
+        throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+      }
+    }
+  };
+  
 
   async getBonus(winningNumsList, numRangePattern) {
     try {
