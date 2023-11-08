@@ -1,18 +1,55 @@
 import Lotto from "../src/Lotto.js";
+import validatePurchaseAmount from "../src/validatePurchaseAmount.js";
+import validateBonusNumber from "../src/validateBonusNumber.js";
 
-describe("로또 클래스 테스트", () => {
-  test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
+describe("로또 번호 테스트", () => {
+  test("로또 번호 유효성 검사", () => {
     expect(() => {
-      new Lotto([1, 2, 3, 4, 5, 6, 7]);
+      new Lotto([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     }).toThrow("[ERROR]");
   });
 
-  // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
-  test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
+  test("로또 번호 중복 검사", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
     }).toThrow("[ERROR]");
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test("로또 번호 범위 및 정렬 검사", () => {
+    expect(() => {
+      new Lotto([1, 2, 4, 3, 6, 5]);
+    }).toThrow("[ERROR]");
+  });
+});
+
+describe("보너스 번호 테스트", () => {
+  test("보너스 번호 유효성 검사", () => {
+    expect(() => {
+      validateBonusNumber("a", [1, 2, 3, 4, 5, 6]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("보너스 번호 중복 검사", () => {
+    expect(() => {
+      validateBonusNumber(1, [1, 2, 3, 4, 5, 6]);
+    }).toThrow("[ERROR]");
+  });
+});
+
+describe("구입금액 테스트", () => {
+  test("구입금액 유효성 검사", () => {
+    expect(() => {
+      validatePurchaseAmount("a");
+    }).toThrow("[ERROR]");
+  });
+
+  test("구입금액 음수 및 소수점 검사", () => {
+    expect(() => {
+      validatePurchaseAmount(-1001);
+    }).toThrow("[ERROR]");
+
+    expect(() => {
+      validatePurchaseAmount(1.2);
+    }).toThrow("[ERROR]");
+  });
 });
