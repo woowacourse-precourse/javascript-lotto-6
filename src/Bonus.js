@@ -11,15 +11,15 @@ class Bonus {
 
   #validate(winnerNumbers, number) {
     if (!Validator.isNumber(number)) {
-      throw new Error(ERROR_MESSAGE.bonusNumberError);
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_ERROR);
     }
 
     if (!Validator.isNumberInRange(number)) {
-      throw new Error(ERROR_MESSAGE.bonusFormatError);
+      throw new Error(ERROR_MESSAGE.BONUS_FORMAT_ERROR);
     }
 
     if (this.isBonusNumberIncluded(winnerNumbers, number)) {
-      throw new Error(ERROR_MESSAGE.bonusIncludesWinnerError);
+      throw new Error(ERROR_MESSAGE.BONUS_INCLUDES_WINNER_ERROR);
     }
   }
 

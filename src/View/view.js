@@ -15,14 +15,14 @@ import { calculateProfit, calculateStatistics } from "../utils/calculator.js";
 export const View = {
   async getAmount() {
     const amount = await Console.readLineAsync(
-      INPUT_MESSAGE.requestPurchaseAmount
+      INPUT_MESSAGE.REQUEST_PURCHASE_AMOUNT
     );
     return amount;
   },
 
   async getWinnerNumber() {
     const winnerNumber = await Console.readLineAsync(
-      INPUT_MESSAGE.requestWinnerNumber
+      INPUT_MESSAGE.REQUEST_WINNER_NUMBER
     );
 
     Console.print(winnerNumber);
@@ -31,14 +31,13 @@ export const View = {
 
     if (lotto) {
       return winnerNumber;
-    } else {
-      return null;
     }
+    return null;
   },
 
   async getBonusNumber(winnerNumbers) {
     const bonusNumber = await Console.readLineAsync(
-      INPUT_MESSAGE.requestBonusNumber
+      INPUT_MESSAGE.REQUEST_BONUS_NUMBER
     );
 
     const bonus = new Bonus(winnerNumbers, bonusNumber);
@@ -46,19 +45,21 @@ export const View = {
     return bonus;
   },
 
-  async displayPurchaseLotto(purchaseAmount, lottoArray) {
-    Console.print(
-      OUTPUT_MESSAGE.purchaseConfirmation(purchaseAmount / LOTTO.price)
-    );
-    lottoArray.forEach((lotto) => {
+  async displayPurchaseLotto(amount, lottoTickets) {
+    Console.print(OUTPUT_MESSAGE.PURCHASE_CONFIRMATION(amount / LOTTO.PRICE));
+    lottoTickets.forEach((lotto) => {
       Console.print(`[${lotto.join(", ")}]`);
     });
   },
 
-  displayWinningStatics(lottoArray, winnerLotto, bonus) {
-    Console.print(OUTPUT_MESSAGE.winningStatics);
+  displayWinningStatistics(lottoTickets, winningNumber, bonusNumber) {
+    Console.print(OUTPUT_MESSAGE.WINNING_STATISTICS);
 
-    const statics = calculateStatistics(lottoArray, winnerLotto, bonus);
+    const statics = calculateStatistics(
+      lottoTickets,
+      winningNumber,
+      bonusNumber
+    );
     Console.print(`3개 일치 (5,000원) - ${statics[MATCH_3]}개`);
     Console.print(`4개 일치 (50,000원) - ${statics[MATCH_4]}개`);
     Console.print(`5개 일치 (1,500,000원) - ${statics[MATCH_5]}개`);
@@ -70,8 +71,9 @@ export const View = {
     return statics;
   },
 
-  displayProfit(statics, purchaseAmount) {
-    const profit = calculateProfit(statics);
-    Console.print(`총 수익률은 ${(profit / purchaseAmount) * 100}%입니다.`);
+  displayProfit(statistics, amount) {
+    const profit = calculateProfit(statistics);
+    const roundedProfit = Math.round((profit / amount) * 100 * 100) / 100;
+    Console.print(`총 수익률은 ${roundedProfit}%입니다.`);
   },
 };

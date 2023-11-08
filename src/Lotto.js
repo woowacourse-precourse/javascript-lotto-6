@@ -14,18 +14,18 @@ class Lotto {
     const numberArray = numbers.split(",").map(Number);
 
     if (!this.isLottoFormat(numberArray)) {
-      throw new Error(ERROR_MESSAGE.formatError);
+      throw new Error(ERROR_MESSAGE.FORMAT_ERROR);
     }
     if (!this.isLengthValid(numberArray)) {
-      throw new Error(ERROR_MESSAGE.lengthError);
+      throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
     }
     if (this.isDuplicates(numberArray)) {
-      throw new Error(ERROR_MESSAGE.duplicateError);
+      throw new Error(ERROR_MESSAGE.DUPLICATE_ERROR);
     }
   }
 
   isLengthValid(numbers) {
-    return numbers.length === LOTTO.length;
+    return numbers.length === LOTTO.LENGTH;
   }
 
   isDuplicates(numbers) {

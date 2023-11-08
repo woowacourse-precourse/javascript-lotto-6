@@ -1,6 +1,6 @@
 export const LOTTO = Object.freeze({
-  price: 1000,
-  min: 1,
-  max: 45,
-  length: 6,
+  PRICE: 1000,
+  MIN: 1,
+  MAX: 45,
+  LENGTH: 6,
 });

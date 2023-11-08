@@ -6,33 +6,33 @@ import { Validator } from "./utils/validator.js";
 
 class App {
   async play() {
-    const { purchaseAmount, lottoArray } = await this.setLottoConfig();
-    View.displayPurchaseLotto(purchaseAmount, lottoArray);
+    const { amount, lottoTickets } = await this.configureLotto();
+    View.displayPurchaseLotto(amount, lottoTickets);
 
-    const winnerLotto = await View.getWinnerNumber();
+    const winnerNumber = await View.getWinnerNumber();
 
-    const bonus = await View.getBonusNumber(winnerLotto);
+    const bonusNumber = await View.getBonusNumber(winnerNumber);
 
-    const statics = View.displayWinningStatics(
-      lottoArray,
-      winnerLotto,
-      bonus.number
+    const statistics = View.displayWinningStatistics(
+      lottoTickets,
+      winnerNumber,
+      bonusNumber.number
     );
 
-    View.displayProfit(statics, purchaseAmount);
+    View.displayProfit(statistics, amount);
   }
 
-  async setLottoConfig() {
+  async configureLotto() {
     while (true) {
       try {
-        const purchaseAmount = await View.getAmount();
+        const amount = await View.getAmount();
 
-        if (!Validator.isValidPurchaseAmount(purchaseAmount)) {
-          throw new Error(ERROR_MESSAGE.purchaseError);
+        if (!Validator.isValidPurchaseAmount(amount)) {
+          throw new Error(ERROR_MESSAGE.PURCHASE_ERROR);
         }
 
-        const lottoArray = setPurchaseLotto(purchaseAmount);
-        return { purchaseAmount, lottoArray };
+        const lottoTickets = setPurchaseLotto(amount);
+        return { amount, lottoTickets };
       } catch (error) {
         Console.print(error.message);
       }

@@ -7,48 +7,57 @@ import {
   STATISTICS,
 } from "../constants/statistics.js";
 
-export const calculateProfit = (statics) => {
-  let profit = 0;
-  profit += statics[MATCH_3] * STATISTICS.three;
-  profit += statics[MATCH_4] * STATISTICS.four;
-  profit += statics[MATCH_5] * STATISTICS.five;
-  profit += statics[MATCH_5_BONUS] * STATISTICS.five_bonus;
-  profit += statics[MATCH_6] * STATISTICS.six;
+export const calculateProfit = (statistics) => {
+  let totalProfit = 0;
+  totalProfit += statistics[MATCH_3] * STATISTICS.THREE;
+  totalProfit += statistics[MATCH_4] * STATISTICS.FOUR;
+  totalProfit += statistics[MATCH_5] * STATISTICS.FIVE;
+  totalProfit += statistics[MATCH_5_BONUS] * STATISTICS.FIVE_BONUS;
+  totalProfit += statistics[MATCH_6] * STATISTICS.SIX;
 
-  return profit;
+  return totalProfit;
 };
 
 export const calculateStatistics = (lottoArray, winnerLotto, bonus) => {
-  const statics = {
+  const statistics = initializeStatistics();
+
+  lottoArray.forEach((lotto) => {
+    updateStatistics(statistics, lotto, winnerLotto, bonus);
+  });
+
+  return statistics;
+};
+
+const initializeStatistics = () => {
+  return {
     [MATCH_3]: 0,
     [MATCH_4]: 0,
     [MATCH_5]: 0,
     [MATCH_5_BONUS]: 0,
     [MATCH_6]: 0,
   };
+};
 
-  lottoArray.forEach((lotto) => {
-    const machedNumber = lotto.filter((number) => winnerLotto.includes(number));
-    const isIncludeBonus = lotto.includes(Number(bonus));
-    const machedCount = machedNumber.length;
+const updateStatistics = (stats, lotto, winnerLotto, bonus) => {
+  const matchedNumbers = countMatchedNumbers(lotto, winnerLotto);
+  const isIncludeBonus = lotto.includes(Number(bonus));
 
-    if (machedCount === 3) {
-      statics[machedCount] += 1;
+  if (matchedNumbers === 3) {
+    stats[matchedNumbers] += 1;
+  } else if (matchedNumbers === 4) {
+    stats[matchedNumbers] += 1;
+  } else if (matchedNumbers === 5) {
+    if (isIncludeBonus) {
+      stats[`${matchedNumbers}+`] += 1;
+    } else {
+      stats[matchedNumbers] += 1;
     }
-    if (machedCount === 4) {
-      statics[machedCount] += 1;
-    }
-    if (machedCount === 5) {
-      if (isIncludeBonus) {
-        statics[`${machedCount}+`] += 1;
-      } else {
-        statics[machedCount] += 1;
-      }
-    }
-    if (machedCount === 6) {
-      statics[machedCount] += 1;
-    }
-  });
+  } else if (matchedNumbers === 6) {
+    stats[matchedNumbers] += 1;
+  }
+};
 
-  return statics;
+const countMatchedNumbers = (lotto, winnerLotto) => {
+  const matchedNumbers = lotto.filter((number) => winnerLotto.includes(number));
+  return matchedNumbers.length;
 };

@@ -5,12 +5,12 @@ export const Validator = {
     return this.isInThousandUnit(number) && this.isNumber(number);
   },
   isInThousandUnit(number) {
-    return Number(number) % LOTTO.price === 0;
+    return Number(number) % LOTTO.PRICE === 0;
   },
   isNumber(number) {
     return !isNaN(number);
   },
   isNumberInRange(number) {
-    return number >= LOTTO.min && number <= LOTTO.max;
+    return number >= LOTTO.MIN && number <= LOTTO.MAX;
   },
 };

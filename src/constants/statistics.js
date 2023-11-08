@@ -1,9 +1,9 @@
 export const STATISTICS = Object.freeze({
-  three: 5000,
-  four: 50000,
-  five: 1500000,
-  five_bonus: 300000000,
-  six: 2000000000,
+  THREE: 5000,
+  FOUR: 50000,
+  FIVE: 1500000,
+  FIVE_BONUS: 300000000,
+  SIX: 2000000000,
 });
 
 export const MATCH_3 = 3;
