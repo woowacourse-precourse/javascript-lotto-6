@@ -23,7 +23,8 @@ const LottoMachine = {
       bonusNumber,
       lottoList
     );
-    return statisticsInst.calculate(lottoList);
+
+    return await statisticsInst.calculate(lottoList);
   },
 };
 

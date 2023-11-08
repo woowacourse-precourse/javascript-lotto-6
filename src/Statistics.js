@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import Output from './view/Output.js';
 
 class Statistics {
@@ -7,13 +8,9 @@ class Statistics {
   constructor(winningNumbers, bonusNumber) {
     this.#winnigNumbers = winningNumbers;
     this.#bonusNumber = bonusNumber;
-    this.#validateWinningNum(winningNumbers);
-    this.#validateBonusNum(bonusNumber);
   }
-  #validateWinningNum(winningNumbers) {}
-  #validateBonusNum(bonusNumber) {}
 
-  calculate(lottoList) {
+  async calculate(lottoList) {
     let len = 0;
     const resultMap = new Map();
     resultMap.set(3, 0);
@@ -28,12 +25,12 @@ class Statistics {
       ).length;
 
       if (len === 5) {
-        if (lotto.filter((num) => this.#bonusNumber.includes(Number(num)))) {
+        if (lotto.filter((num) => this.#bonusNumber.includes(Number(num))))
           len = 6;
-        }
       }
 
       if (len === 6) len = 7;
+
       if (resultMap.get(len)) {
         resultMap.set(len, resultMap.get(len) + 1);
       } else {

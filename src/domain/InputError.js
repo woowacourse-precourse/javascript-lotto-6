@@ -18,8 +18,8 @@ const InputError = {
         throw new Error(error.PURCHASE_PRICE_NOT_DIVIDE_ERROR);
 
       return true;
-    } catch (e) {
-      Console.print(e);
+    } catch (error) {
+      Console.print(error.message);
       return false;
     }
   },

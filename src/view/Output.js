@@ -5,7 +5,7 @@ const Output = {
   async printLottoCount(lottoCount) {
     await Console.print(`\n${lottoCount}${OUTPUT_LOTTO_COUNT}`);
   },
-  printLottoList(lottoList) {
+  async printLottoList(lottoList) {
     lottoList.map((lotto) => {
       lotto.sort((pre, next) => {
         return pre - next;
