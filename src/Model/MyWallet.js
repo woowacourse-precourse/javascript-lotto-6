@@ -11,10 +11,11 @@ export default class MyWallet {
 
   setReturnMoney(input) {
     this.#returnMoney = input;
+    return this.setReturnRate();
   }
 
   setReturnRate() {
-    this.#returnRate = this.#purchaseAmount / this.#returnMoney;
+    this.#returnRate = this.#returnMoney / this.#purchaseAmount;
   }
 
   getPurchaseAmount() {

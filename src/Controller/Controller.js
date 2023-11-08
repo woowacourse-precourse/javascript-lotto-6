@@ -56,16 +56,16 @@ export default class Controller {
 
   async handleWinCount() {
     const service = new Service(this.#myLotto, this.#winNumber);
-    await service.compareNumber();
-    await this.#myLotto.setWinResult();
+    service.compareNumber();
+    this.#myLotto.setWinResult();
+    outputView.printWinCount(this.#myLotto.getWinResultArr());
 
-    return outputView.printWinCount(this.#myLotto.getWinResultArr());
+    return this.handleReturnRate();
   }
 
-  async handleReturnRate() {
-    const returnMoneyService = new ReturnMoneyService();
-    await returnMoneyService.compareWinRate();
-    this.#myWallet.setReturnRate();
+  handleReturnRate() {
+    const returnMoneyService = new ReturnMoneyService(this.#myLotto, this.#myWallet);
+    returnMoneyService.calculateWinMoney();
 
     return outputView.printReturnRate(this.#myWallet.getReturnRate());
   }
