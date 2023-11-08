@@ -1,6 +1,4 @@
 import { InputConsole } from "./view/inputConsole";
-import { MissionUtils, Console } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
 import { Game } from "./Game";
 
 class App {
