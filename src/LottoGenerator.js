@@ -15,8 +15,9 @@ class LottoGenerator {
     const lottos = [];
     for (let i = 0; i < count; i++) {
       const lotto = new Lotto(this.generateRandomNumbers());
+      const sortedNumbers = lotto.getNumbers().sort((a, b) => a - b); // 정렬 추가
       lottos.push(lotto);
-      Console.print(`[${lotto.getNumbers().join(', ')}]`);
+      Console.print(`[${sortedNumbers.join(', ')}]`);
     }
     return lottos;
   }
