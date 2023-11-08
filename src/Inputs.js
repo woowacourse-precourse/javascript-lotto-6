@@ -1,5 +1,5 @@
-import Validation from '../Validation.js';
-import { PROMPT_MESSAGE } from '../constants.js';
+import Validation from './Validation.js';
+import { PROMPT_MESSAGE } from './constants.js';
 
 class Inputs {
   #inputView;

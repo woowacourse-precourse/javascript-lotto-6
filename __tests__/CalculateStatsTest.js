@@ -1,4 +1,4 @@
-import CalculateStats from '../src/models/CalculateStats';
+import CalculateStats from '../src/CalculateStats';
 
 describe('CalculateStats', () => {
   let calculateStats;
