@@ -20,6 +20,7 @@ class Lotto {
       if(!Number.isInteger(element)) {throw new Error(ERROR.INTEGER);}
       if(element < NUMBERS.MIN || element > NUMBERS.MAX) {throw new Error(ERROR.RANGE)}
     });
+    return numbers;
   }
 }
 

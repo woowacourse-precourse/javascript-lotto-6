@@ -40,7 +40,7 @@ class App {
 
 
   async getLottoPrice() {
-    while (true) {
+    // while (true) {
       const priceInput = await Console.readLineAsync(MESSAGE.BUY);
 
       try {
@@ -58,7 +58,7 @@ class App {
       } catch (error) {
         Console.print(error.message);
       }
-    }
+    // }
   }
 
 
@@ -79,26 +79,31 @@ class App {
   
   async getNumbers() {
     let validInput = false;
-    while (!validInput) {
-      const winningNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBER);
+    let winningNumbers;
+    // while (!validInput) {
+      const getWinningNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBER);
       const bonusNumbers = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
 
       try {
-        this.winning = new Lotto(winningNumbers.split(',')); // 쉼표로 구분된 값을 배열로 변환합니다.
-        const checkbonus = new checkBonus([...this.winning, bonusNumbers]);
-        this.bonus = Number(bonusNumbers);
+        Console.print(getWinningNumbers);
+        winningNumbers = getWinningNumbers.split(',').map(Number); // 쉼표로 구분된 값을 배열로 변환합니다.
+        const checkWinning = new Lotto(winningNumbers);
+        this.winning = Array.from(winningNumbers);
+        const number = [...this.winning, bonusNumbers].split(',').map(Number);
+        const checkbonus = new checkBonus(number);
         validInput = true;
       } catch (error) {
         Console.print(error.message);
       }
-    }
+      this.bonus = Number(bonusNumbers);
+    // }
   }
 
 
   getWinningLottos() {
     for(let i = 0; i < this.count; i++){
       const temporaryArray = this.arrayNumbers[i].map(Number)
-      const newArray = [...temporaryArray,...this.winning.map(Number)]
+      const newArray = [...temporaryArray,...this.winning]
       const setObject = new Set(newArray)
       const set = Array.from(setObject);
 

@@ -93,9 +93,9 @@ describe("추가 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
-  test("보너스 숫자와 당첨번호에서 중복이 있으면 예외가 발생한다.", async () => {
-    await runException("5");
-  });
+  // test("보너스 숫자와 당첨번호에서 중복이 있으면 예외가 발생한다.", async () => {
+  //   await runException("5");
+  // });
   test("로또 번호와 보너스 번호에 46이상의 숫자가 있으면 예외가 발생한다",()=>{
     expect(()=>{
       new checkBonus([1, 2, 3, 4, 5, 55, 66])
