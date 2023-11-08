@@ -22,6 +22,14 @@ const Receiver = class {
 
     return answer;
   }
+
+  static async receiveBonusNum() {
+    const answer = await MissionUtils.Console.readLineAsync(
+      `${RANGE_START_NUM}~${RANGE_END_NUM} 사이의 보너스 숫자를 입력해주세요`,
+    );
+
+    return answer;
+  }
 };
 
 export default Receiver;

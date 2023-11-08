@@ -26,6 +26,11 @@ const Validator = class {
     Validator.checkLength(lottoArr);
   }
 
+  static checkBonusNum(number) {
+    Validator.checkIsNaN(+number);
+    Validator.checkNumRange(+number);
+  }
+
   static checkMoneyUnit(money) {
     if (+money % MONEY_UNIT !== 0) {
       throw new CustomError(ERROR_MEESAGE.NOT_VALID_MONEY);
