@@ -1,3 +1,5 @@
+import LottoTypeConversion from './LottoTypeConversion.js';
+
 const Validator = {
   numberType(input) {
     const isNotNumber = /[^0-9]/;
@@ -13,6 +15,10 @@ const Validator = {
   },
 
   winningNumbersType(numbers) {
+    LottoTypeConversion.winningNumbers(numbers).map((number) => this.numberType(number));
+  },
+
+  commaSeparatedWinningNumbers(numbers) {
     if (numbers.indexOf(',') === - 1 || numbers.indexOf(',') === numbers.length - 1) {
       throw ('[ERROR] 당첨번호는 쉼표(,)로 구분하여 입력하여야 합니다.');
     }
