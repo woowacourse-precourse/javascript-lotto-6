@@ -9,6 +9,10 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   #validate(numbers) {
     if (numbers.length !== LOTTO.COUNT) {
       throw new CustomError(ERROR.INVALID_LOTTO_NUMBER_COUNT);
