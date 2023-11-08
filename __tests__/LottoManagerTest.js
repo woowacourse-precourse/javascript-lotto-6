@@ -3,6 +3,7 @@ import { MONEY_CONSTANTS } from '../src/constants/constants';
 
 describe('LottoManager 테스트', () => {
   const lottoManager = new LottoManager();
+  const defaultTestMoney = 3000;
 
   test('generateLottoNumber 확인, 중복 없는 6개의 숫자 반환', () => {
     const generatedLottoNumbers = lottoManager.generateLottoNumber();
@@ -22,10 +23,17 @@ describe('LottoManager 테스트', () => {
   });
 
   test('getMoney 확인, 같은 금액 반환', () => {
-    const money1 = 3000;
-    lottoManager.generateLottoTickets(money1);
+    lottoManager.generateLottoTickets(defaultTestMoney);
 
-    const money2 = lottoManager.getMoney();
-    expect(money2).toBe(money1);
+    const actualMoney = lottoManager.getMoney();
+    expect(actualMoney).toBe(defaultTestMoney);
+  });
+
+  test('getCount 확인', () => {
+    lottoManager.generateLottoTickets(defaultTestMoney);
+
+    const expectedCount = parseInt(defaultTestMoney / MONEY_CONSTANTS.countUnit);
+    const actualCount = lottoManager.getCount();
+    expect(actualCount).toBe(expectedCount);
   });
 });
