@@ -14,8 +14,8 @@ class LottoEvaluator {
   }
 
   evaluateTicket(ticket) {
-    let matchCount = ticket.filter((number) => this.baseNumbers.includes(number)).length;
-    let isBonusMatched = ticket.includes(this.bonusNumber);
+    const matchCount = ticket.filter((number) => this.baseNumbers.includes(number)).length;
+    const isBonusMatched = ticket.includes(this.bonusNumber);
 
     switch (matchCount) {
       case 6:
@@ -34,11 +34,12 @@ class LottoEvaluator {
   }
 
   getResults() {
-    const prizeKeys = Object.keys(this.matchCounts);
-    const resultsArray = prizeKeys.map((prizeKey) => {
-      return `${PRIZE[prizeKey]} ${this.matchCounts[prizeKey]}${PRINT.COUNT}`;
+    const results = Object.entries(this.matchCounts).map(([prizeLevel, count]) => {
+      const prizeLabel = PRIZE[prizeLevel];
+      const countText = count + PRINT.COUNT;
+      return `${prizeLabel} ${countText}`;
     });
-    return resultsArray.join("\n");
+    return results.join("\n");
   }
 
   evaluateTickets(randomLottos) {
