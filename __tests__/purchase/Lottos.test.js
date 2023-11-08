@@ -11,7 +11,7 @@ const mockRandoms = (numbers) => {
 describe('purchase/lottos : 다수 로또 번호 반환값 테스트', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("lottos 생성값과, getLottos의 반환값이 요구사항과 동일해야 한다.", async () => {
     const INPUT = [
@@ -38,7 +38,7 @@ describe('purchase/lottos : 다수 로또 번호 반환값 테스트', () => {
     mockRandoms(INPUT);
 
     const lottos = new Lottos(INPUT.length)
-    const result = lottos.get();
+    const result = lottos.print();
 
     expect(result).toEqual(OUTPUT);
   });

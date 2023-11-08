@@ -29,9 +29,12 @@ export default class ResultController {
     return this.#resultService.prizes();
   }
 
-  printResult() {
+  calculateResults() {
     this.#calculateRanks();
     this.#calculateReturns();
+  }
+
+  printResult() {
 
     const prizes = this.#prizes();
     const returnRate = this.#calculateReturnRate();

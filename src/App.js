@@ -1,16 +1,13 @@
-import LottoController from './controller/LottoController.js';
 import PurchaseController from './controller/PurchaseController.js';
 import RaffleController from './controller/RaffleController.js';
 import ResultController from './controller/ResultController.js';
 
 class App {
-  // #lottoController
   #purchaseController;
   #raffleController;
   #resultController;
 
   constructor() {
-    // this.#lottoController = new LottoController();
     this.#purchaseController = new PurchaseController();
     this.#raffleController = new RaffleController();
     this.#resultController = new ResultController();
