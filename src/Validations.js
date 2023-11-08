@@ -27,6 +27,13 @@ class Validations {
       throw new Error(Errors.IS_NOT_THOUSAND_UNIT);
     }
   }
+
+  static isInRange(input) {
+    const number = Number(input);
+    if (number < 1 || number > 45) {
+      throw new Error(Errors.IS_NOT_IN_RANGE);
+    }
+  }
 }
 
 export default Validations;

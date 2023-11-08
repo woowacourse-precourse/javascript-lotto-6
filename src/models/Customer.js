@@ -25,11 +25,19 @@ class Customer {
     Validations.isThousandUnit(lottoPrice);
   }
 
+  #validateLottoNumbers(lottoNumbers) {
+    lottoNumbers.forEach((lottoNumber) => {
+      Validations.isNumber(lottoNumber);
+      Validations.isInRange(lottoNumber);
+    });
+  }
+
   getLottoCount() {
     return this.#lottoCount;
   }
 
   setLottoNumbers(lottoNumbers) {
+    this.#validateLottoNumbers(lottoNumbers);
     this.#lottoNumbers = lottoNumbers;
   }
 

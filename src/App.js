@@ -6,8 +6,8 @@ import LottoGameController from "./controllers/LottoGameController.js";
 class App {
   async play() {
     const lottoPrice = await InputView.getLottoPrice();
-    const customer = new Customer(lottoPrice);
 
+    const customer = new Customer(lottoPrice);
     const lottoCount = customer.getLottoCount();
     const lottoNumbers = LottoGameController.generateCustomerNumbers(lottoCount);
     customer.setLottoNumbers(lottoNumbers);
