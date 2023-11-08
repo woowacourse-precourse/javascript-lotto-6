@@ -49,6 +49,7 @@
 - 당첨 로또: winning lotto / Lotto 클래스
 - MVC 패턴 적용
 
+```bash
 📦src
 ┣ 📂model
 ┃ ┣ 📜Bonus.js
@@ -62,3 +63,4 @@
 ┃ ┗ 📜OutputView.js
 ┣ 📜App.js // Controller
 ┗ 📜index.js
+```
