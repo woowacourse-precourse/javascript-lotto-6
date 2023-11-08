@@ -20,4 +20,18 @@ describe("Validate 클래스 테스트", () => {
       expect(Validate.isMultipleOf1000("3001")).toBe(false);
     });
   });
+
+  describe("isLottoNumbersFormat 메서드 테스트", () => {
+    test("로또 번호 배열이 6개의 숫자로 이루어져 중복된 숫자가 없으면 true를 반환해야 합니다.", () => {
+      expect(Validate.isLottoNumbersFormat([1, 2, 3, 4, 5, 6])).toBe(true);
+    });
+
+    test("로또 번호 배열이 6개 이상의 숫자로 이루어져 false를 반환해야 합니다.", () => {
+      expect(Validate.isLottoNumbersFormat([1, 2, 3, 4, 5, 6, 7])).toBe(false);
+    });
+
+    test("로또 번호 배열에 중복된 숫자가 있으면 false를 반환해야 합니다.", () => {
+      expect(Validate.isLottoNumbersFormat([1, 2, 3, 3, 4, 5])).toBe(false);
+    });
+  });
 });
