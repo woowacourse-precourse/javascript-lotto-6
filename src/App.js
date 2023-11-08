@@ -33,6 +33,12 @@ class App {
 
     const lottoWinningCountList = this.getWinningCount(this.lottoRankingResult);
     OutputView.printWinningResult(lottoWinningCountList);
+
+    const lottoProfitRate = this.calculateLottoProfitRate(
+      lottoAmount,
+      lottoTotalWinnings
+    );
+    OutputView.printProfitRate(lottoProfitRate);
   }
 
   async getLottoAmount() {
@@ -140,6 +146,12 @@ class App {
     });
 
     return winningCount;
+  }
+
+  calculateLottoProfitRate(lottoAmount, totalWinnings) {
+    const profitRate = ((totalWinnings / lottoAmount) * 100).toFixed(1);
+
+    return `${profitRate}%`;
   }
 }
 
