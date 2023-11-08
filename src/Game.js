@@ -17,7 +17,12 @@ class Game {
     };
   }
 
-  getLottoTickets() {
+  generateTickets() {
+    this.getTickets();
+    this.printTickets();
+  }
+
+  getTickets() {
     const ticketNum = this.amount / TICKET_PRICE;
 
     for (let i = 0; i < ticketNum; i++) {
@@ -30,27 +35,27 @@ class Game {
     }
   }
 
-  draw({ winningNumbers, bonusNumber }) {
-    this.tickets.forEach((ticket) => {
-      const result = ticket.getWinningInfo(winningNumbers, bonusNumber);
-
-      if (result.matchCount >= 3) {
-        this.recordResult(result);
-      }
-    });
-  }
-
-  recordResult(drawResult) {
-    const rank = this.getRank(drawResult);
-    this.drawInfo[rank].winningCount += 1;
-  }
-
   printTickets() {
     Console.print(MESSAGES.OUTPUT_BUY_TICKETS(this.amount / TICKET_PRICE));
     this.tickets.forEach((ticket) => Console.print(ticket.info));
   }
 
-  getRank(drawResult) {
+  draw({ winningNumbers, bonusNumber }) {
+    this.tickets.forEach((ticket) => {
+      const result = ticket.getWinningInfo(winningNumbers, bonusNumber);
+
+      if (result.matchCount >= 3) {
+        this.recordDrawResult(result);
+      }
+    });
+  }
+
+  recordDrawResult(drawResult) {
+    const rank = this.getDrawRank(drawResult);
+    this.drawInfo[rank].winningCount += 1;
+  }
+
+  getDrawRank(drawResult) {
     const { matchCount, isBonusMatched } = drawResult;
 
     switch (matchCount) {
