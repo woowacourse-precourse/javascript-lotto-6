@@ -12,17 +12,17 @@ class InputView {
   }
 
   saveLottoWinningNumber() {
-    const input = this.inputWinningNumber();
+    const input = this.WinningNumber();
     this.winningNumber = this.stringToNumberArray(input);
     return this.winningNumber;
   }
 
-  async inputWinningNumber() {
+  async WinningNumber() {
     const playerWinningNumber = await Console.readLineAsync(INPUT_WINNING_NUMBER);
     return playerWinningNumber;
   }
 
-  async inputAmountOfMoney() {
+  async AmountOfMoney() {
     const playerInputMoney = await Console.readLineAsync(INPUT_PURCHASING_AMOUNT);
     this.playerMoney = Number(playerInputMoney);
   }
@@ -33,7 +33,7 @@ class InputView {
     return this.bonusNumber;
   }
 
-  stringToNumberArray(inputNumber) {
+  toNumberArray(inputNumber) {
     return inputNumber.split(',').map(Number);
   }
 }
