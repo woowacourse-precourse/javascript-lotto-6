@@ -82,4 +82,28 @@ describe('WinningCalculator 클래스 테스트', () => {
       expect(winningCalculator.winnerList.get(bonusRank)).toBe(expected);
     },
   );
+
+  test.each([
+    [[[1, 2, 3, 4, 5, 6]], '200,000,000'],
+    [[[1, 2, 3, 4, 5, 7]], '3,000,000'],
+  ])('수익률 반환 테스트', (inputs, expected) => {
+    const testWinningNumbers = [1, 2, 3, 4, 5, 6];
+    const testBonusNumber = 7;
+
+    const totalWinningNumbers = new Map([
+      [NUMBER_OPTIONS.winningName, testWinningNumbers],
+      [NUMBER_OPTIONS.bonusName, testBonusNumber],
+    ]);
+
+    const issuedLotto = [...inputs];
+
+    const winningCalculator = new WinningCalculator(
+      totalWinningNumbers,
+      issuedLotto,
+    );
+
+    const profit = winningCalculator.getProfit();
+
+    expect(profit).toBe(expected);
+  });
 });
