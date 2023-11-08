@@ -61,13 +61,14 @@ class LottoController {
         //당첨 숫자 입력받음
         const winning = new inputView();
         const inputWinning = await winning.inputLottoWinningNumber();
-        new Lotto(inputWinning);
+        const inputBonusNumber = await this.getBonusNumber();
+        new Lotto(inputWinning, inputBonusNumber);
     }
 
     async getBonusNumber() {
         //보너스 번호 입력받음
         const bonus = new inputView();
-        this.bonusNum = bonus.inputLottoBonusNumber();
+        return await bonus.inputLottoBonusNumber();
     }
 
     async start() {

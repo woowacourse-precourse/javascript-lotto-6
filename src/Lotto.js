@@ -2,11 +2,14 @@ import { WINNING_ERROR } from "./constants/ErrorMsg";
 
 class Lotto {
   #numbers;
+  #bonusNumber;
 
   constructor(numbers) {
-    this.#numbers = this.#validate(numbers);
+    this.#validate(numbers);
+    this.#validateBounus(bonusNumber)
   }
 
+  // 당첨 번호에 대한 유효성 검사
   #validate(numbers) {
     //1. null일 경우
     if (numbers === null) {
@@ -45,6 +48,25 @@ class Lotto {
       }
     }
     return numbersArray;
+  }
+
+  //보너스 번호에 대한 유효성 검사
+  #validateBounus(bonusNumber) {
+    //1. null일 경우
+    if (bonusNumber === null) {
+      throw new Error(WINNING_ERROR.NULL_ERROR);
+    }
+    //2. 숫자를 입력하지 않은 경우
+    const REGEX = /^\d+$/;
+    if ( !REGEX.test(bonusNumber) ) {
+      throw new Error(WINNING_ERROR.NUM_ERROR);
+    }
+    //3. 1부터 45사이의 숫자를 입력하지 않은 경우
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error(WINNING_ERROR.RANGE_ERROR);
+    }
+
+    return bonusNumber;
   }
 
 }
