@@ -1,6 +1,10 @@
 import lottoCompare from '../utils/lottoCompare.js';
-import printLottoResult from '../print/printLottoResult.js';
 import RANK from '../constants/rank.js';
+import RATE from '../constants/rate.js';
+import PRIZE from '../constants/prize.js';
+import { OUTPUT_MESSAGES } from '../constants/messages.js';
+import LOTTO_CONSTANT from '../constants/lotto.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class LottoComparison {
   #myLotto;
@@ -22,15 +26,20 @@ class LottoComparison {
 
   run() {
     this.#compare(this.#myLotto);
-    this.#printResult(this.#rank);
+    this.#printResult(this.#myLotto.length, this.#rank);
   }
 
   #compare(lottos) {
     lottos.forEach((lotto) => lottoCompare(lotto, this.#winningNumbers, this.#bonusNumber, this.#rank));
   }
 
-  #printResult(rank) {
-    printLottoResult(this.#myLotto.length, rank);
+  #printResult(lottoTicketNumber, ranks) {
+    const income = Array.from(ranks).reduce((acc, [_, value], idx) => acc + value * PRIZE[idx], 0);
+    const input = lottoTicketNumber * LOTTO_CONSTANT.price;
+    const rateOfReturn = +((income / input) * RATE.percent).toFixed(RATE.float);
+
+    OUTPUT_MESSAGES.result(ranks).forEach((result) => Console.print(result));
+    Console.print(OUTPUT_MESSAGES.rate(rateOfReturn));
   }
 }
 
