@@ -32,6 +32,14 @@ class App {
    * @throws {Error} 입력값이 정수가 아닐 경우, 1000으로 나누어 떨어지지 않을 경우 에러 발생
    * @return {number} */
   async getUserMoney() {
+    const USER_STRING = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    const USER_NUMS = Number(USER_STRING);
+
+    if (isNaN(USER_STRING) || !Number.isInteger(USER_NUMS) || USER_NUMS % 1000 !== 0 || USER_NUMS <= 0) {
+      throw new Error('[ERROR] 숫자는 1000의 배수 인 양의 정수만 입력해야 합니다.');
+    }
+
+    return USER_NUMS;
   }
 
   /**
