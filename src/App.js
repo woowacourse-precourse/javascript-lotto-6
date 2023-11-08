@@ -13,12 +13,13 @@ class App {
     const [purchaseAmount, randomNumObj, lottoObj, bonusNumber] =
       await this.#printGameNumber();
 
-    // 당첨결과 발표 출력
+    // 당첨결과 발표 출력문
     printMethod(uiConstants.WINNING_STATISTICS_MESSAGE);
     printMethod(uiConstants.BORDER_LINE);
 
-    // 당첨결과 구하기
+    // 당첨결과 구하기 및 출력
     const moneyArr = this.#makeSumWinning(randomNumObj, bonusNumber, lottoObj);
+    lottoObj.printWinningMoney(moneyArr);
 
     // 수익률 계산 및 출력
     this.#calculateReturn(purchaseAmount, moneyArr);
@@ -72,24 +73,28 @@ class App {
       bonusNumber,
     );
     const moneyArr = lottoObj.createMoneyArr(winningCnt, bonusCnt);
-    lottoObj.printWinningMoney(moneyArr);
     return moneyArr;
   }
 
   #calculateReturn(purchaseAmount, moneyArr) {
-    let sumMoney = 0;
+    let sumMoney = magicNumber.ZERO;
     moneyArr.forEach((cnt, idx) => {
       const sum = magicNumber.ZERO;
-      if (cnt >= 1) sumMoney += cnt * magicNumber.WINNING_AMOUNT[idx];
+      if (cnt >= magicNumber.ONE)
+        sumMoney += cnt * magicNumber.WINNING_AMOUNT[idx];
     });
-    let resultNum = (sumMoney / purchaseAmount.getPurchaseAmount()) * 100;
+    let resultNum =
+      (sumMoney / purchaseAmount.getPurchaseAmount()) * magicNumber.HUNDRED;
 
-    resultNum = Math.round(resultNum * 10).toPrecision(15) / 10;
+    resultNum =
+      Math.round(resultNum * magicNumber.TEN).toPrecision(
+        magicNumber.FLOATING_POINT,
+      ) / magicNumber.TEN;
     printMethod(uiConstants.RETURN + resultNum + uiConstants.END);
   }
 
   async #createObj(type, lotto) {
-    let obj = 0;
+    let obj = magicNumber.ZERO;
 
     try {
       obj = await this.#createType(type, lotto);
@@ -101,7 +106,7 @@ class App {
   }
 
   async #createType(type, lotto) {
-    let obj = 0;
+    let obj = magicNumber.ZERO;
     switch (type) {
       case 'purchaseAmount':
         obj = await createPurchaseAmount();
