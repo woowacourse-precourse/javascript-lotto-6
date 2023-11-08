@@ -20,11 +20,14 @@ class App {
 
     if (isNaN(parseInt(amount)))
       throw new Error("[ERROR] 구입 금액은 숫자여야합니다.");
+
     return amount;
   }
 
   quantityLotto(amount) {
-    // TODO: 1000으로 나눠 떨어지는지 확인
+    if (amount % 1000 !== 0)
+      throw new Error("[ERROR] 구입 금액은 1000으로 나누어 떨어져야 합니다.");
+
     return amount / 1000;
   }
 
