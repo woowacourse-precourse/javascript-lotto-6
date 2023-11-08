@@ -26,12 +26,7 @@ class App {
   async getPurchaseAmount() {
     this.amount = await InputView.purchaseAmount();
     try {
-      if (/[^0-9]/g.test(this.amount)) {
-        throw new Error('[ERROR] 숫자를 입력해 주세요.');
-      } else if (this.amount % 1000 !== 0) {
-        throw new Error('[ERROR] 1,000단위로 입력해주세요');
-      }
-      this.issuedLotto = new IssuedLotto(this.amount / 1000);
+      this.issuedLotto = new IssuedLotto(this.amount);
     } catch (err) {
       Console.print(err.message);
       await this.getPurchaseAmount();
