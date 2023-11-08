@@ -15,4 +15,9 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+
+  test("구입 금액을 1,000 단위로 입력하지 않으면 예외가 발생한다.", async () => {
+    const result = await buyLotto(8800);
+    expect(result).toThrow("[ERROR]");
+  });
 });
