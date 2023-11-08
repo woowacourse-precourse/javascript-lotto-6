@@ -1,6 +1,6 @@
 import CustomError from '../../src/errors/error.js';
 
-describe('ErrorTest', () => {
+describe('에러 테스트', () => {
   describe('에러가 발생하면', () => {
     test('[ERROR] 문구를 포함한 에러 메시지를 출력한다.', () => {
       // given
