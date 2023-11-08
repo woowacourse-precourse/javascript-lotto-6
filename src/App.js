@@ -38,7 +38,7 @@ class App {
 
     // 5. 로또 번호와 당첨 번호 비교하기
     const ranking = new Ranking();
-    this.rank_result = ranking.returnRank(
+    this.rank_result = ranking.compareRank(
       this.lotto_list,
       this.winning_number,
       this.bonus_number

@@ -8,7 +8,7 @@ class Ranking {
 
   constructor() {}
 
-  #calculateRank(correct_number, hasBonus) {
+  #calcRank(correct_number, hasBonus) {
     if (correct_number === 3) {
       this.#rank[4]++;
     } else if (correct_number === 4) {
@@ -24,13 +24,13 @@ class Ranking {
     return `${PRIZES[rankIndex]} - ${count}개`;
   }
 
-  returnRank(lotto_list, winning_number, bonus_number) {
+  compareRank(lotto_list, winning_number, bonus_number) {
     lotto_list.forEach((lotto) => {
       const correct_number = lotto.filter((num) =>
         winning_number.includes(num)
       ).length;
       const hasBonus = lotto.includes(bonus_number);
-      this.#calculateRank(correct_number, hasBonus);
+      this.#calcRank(correct_number, hasBonus);
     });
 
     return this.#rank;
