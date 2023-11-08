@@ -42,12 +42,25 @@ class LottoGame {
       IO.printMsg(tempLotto.formatNumbers());
     }
 
-    const winningStr = await IO.receiveUserInput(NORMAR_MSG.WINNING_INPUT);
-    const winningArr = winningStr.split(',');
-    Validation.isValidLen(winningArr);
-    Validation.isDuplicate(winningArr);
-    winningArr.forEach(el => Validation.isNumber(el, ERROR_MSG.WINNING_FORMAT_ERROR));
-    winningArr.forEach(el => Validation.isValidLottoNum(el));
+    flag = false;
+    let winningStr = '';
+    let winningArr = [];
+
+    do {
+      try {
+        winningStr = await IO.receiveUserInput(NORMAR_MSG.WINNING_INPUT);
+        winningArr = winningStr.split(',');
+        Validation.isValidLen(winningArr);
+        Validation.isDuplicate(winningArr);
+        winningArr.forEach(el => Validation.isNumber(el, ERROR_MSG.WINNING_FORMAT_ERROR));
+        winningArr.forEach(el => Validation.isValidLottoNum(el));
+        flag = true;
+      } catch(e) {
+        IO.printMsg(e.message);
+      }
+    } while(!flag);
+
+    
     this.#winnings = winningArr.map(el => {return Number(el)});
 
     const bonusStr = await IO.receiveUserInput(NORMAR_MSG.BONUS_INPUT);
