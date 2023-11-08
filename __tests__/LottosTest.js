@@ -18,7 +18,13 @@ const initializeLottosInstances = ()=>{
     money = 5000;
     count = money / 1000;
         
-    mockGenerateRandomNumbers([[6,5,4,3,2,1],[45,30,1,2,4,20],[4,3,45,2,10,1],[6,7,4,25,1,2],[41,42,1,8,9,32]])
+    mockGenerateRandomNumbers([
+        [6,5,4,3,2,1],
+        [45,30,1,2,4,20],
+        [4,3,45,2,10,1],
+        [6,7,4,25,1,2],
+        [41,42,1,8,9,32]
+    ])
 
     lottos = new Lottos(count);
 
