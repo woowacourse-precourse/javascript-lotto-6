@@ -14,20 +14,30 @@ class App {
   };
 
   async payAmount() {
-    const amount = await MissionUtils.Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
+    try {
+      const amount = await MissionUtils.Console.readLineAsync(
+        "구입금액을 입력해 주세요.\n"
+      );
 
-    if (isNaN(amount)) throw new Error("[ERROR] 구입 금액은 숫자여야합니다.");
+      if (isNaN(amount)) {
+        throw new Error("[ERROR] 구입 금액은 숫자여야합니다.");
+      }
 
-    return parseInt(amount);
+      return parseInt(amount);
+    } catch (error) {
+      this.payAmount();
+    }
   }
 
   quantityLotto(amount) {
-    if (amount % 1000 !== 0)
-      throw new Error("[ERROR] 구입 금액은 1000으로 나누어 떨어져야 합니다.");
+    try {
+      if (amount % 1000 !== 0)
+        throw new Error("[ERROR] 구입 금액은 1000으로 나누어 떨어져야 합니다.");
 
-    return amount / 1000;
+      return amount / 1000;
+    } catch (error) {
+      this.payAmount();
+    }
   }
 
   perchaseLotto(number) {
@@ -35,43 +45,53 @@ class App {
 
     for (let i = 0; i < number; i++) {
       const number = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      MissionUtils.Console.print(number.sort((a, b) => a - b));
+      number.sort((a, b) => a - b);
+      MissionUtils.Console.print(number);
       this.totalLotto.push(new Lotto(number.sort((a, b) => a - b)));
     }
   }
 
   async enterWinningNumber() {
-    const numbers = await MissionUtils.Console.readLineAsync(
-      "당첨 번호를 입력해 주세요.\n"
-    );
+    try {
+      const numbers = await MissionUtils.Console.readLineAsync(
+        "당첨 번호를 입력해 주세요.\n"
+      );
 
-    this.winningNumber = numbers.split(",").map(Number);
+      this.winningNumber = numbers.split(",").map(Number);
 
-    for (const num of this.winningNumber) {
-      if (!(num >= 1 && num <= 45))
-        throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야합니다.");
-    }
+      for (const num of this.winningNumber) {
+        if (!(num >= 1 && num <= 45))
+          throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야합니다.");
+      }
 
-    if (this.winningNumber.length !== 6)
-      throw new Error("[ERROR] 당첨 번호는 6개여야합니다.");
+      if (this.winningNumber.length !== 6)
+        throw new Error("[ERROR] 당첨 번호는 6개여야합니다.");
 
-    const uniqueNumbers = new Set(this.winningNumber);
-    if (uniqueNumbers.size !== this.winningNumber.length) {
-      throw new Error("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
+      const uniqueNumbers = new Set(this.winningNumber);
+      if (uniqueNumbers.size !== this.winningNumber.length) {
+        throw new Error("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
+      }
+    } catch (error) {
+      this.enterWinningNumber();
     }
   }
 
   async enterBosunNumber() {
-    const number = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
-    );
+    try {
+      const number = await MissionUtils.Console.readLineAsync(
+        "보너스 번호를 입력해 주세요.\n"
+      );
 
-    if (isNaN(number)) throw new Error("[ERROR] 보너스 번호는 숫자여야합니다.");
+      if (isNaN(number))
+        throw new Error("[ERROR] 보너스 번호는 숫자여야합니다.");
 
-    if (!(number >= 1 && number <= 45))
-      throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야합니다.");
+      if (!(number >= 1 && number <= 45))
+        throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야합니다.");
 
-    this.bonusNumber = parseInt(number);
+      this.bonusNumber = parseInt(number);
+    } catch (error) {
+      this.enterBosunNumber();
+    }
   }
 
   checkResult() {
