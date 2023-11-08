@@ -69,16 +69,32 @@ class App {
   }
 
   validateBonusNumber(bonusNumber, lottoNumber) {
-    if (isNaN(bonusNumber)) {
+    this.checkIsNumber(bonusNumber);
+    this.checkIsInteger(bonusNumber);
+    this.checkIsNotDuplicate(bonusNumber, lottoNumber);
+    this.checkNumberInRange(bonusNumber);
+  }
+
+  checkIsNumber(value) {
+    if (isNaN(value)) {
       throw new Error(ERROR_MESSAGE.BONUS_NUMBER_FORMAT_ERROR);
     }
-    if (bonusNumber !== parseInt(bonusNumber)) {
+  }
+
+  checkIsInteger(value) {
+    if (value !== parseInt(value)) {
       throw new Error(ERROR_MESSAGE.BONUS_NUMBER_INTEGER_FORMAT_ERROR);
     }
-    if (lottoNumber.getNumbers().some(num => num === bonusNumber)) {
+  }
+
+  checkIsNotDuplicate(value, lottoNumber) {
+    if (lottoNumber.getNumbers().includes(value)) {
       throw new Error(ERROR_MESSAGE.BONUS_NUMBER_DUPLICATE_ERROR);
     }
-    if (bonusNumber < 1 || bonusNumber > 45) {
+  }
+
+  checkNumberInRange(value) {
+    if (value < 1 || value > 45) {
       throw new Error(ERROR_MESSAGE.BONUS_NUMBER_RANGE_ERROR);
     }
   }
