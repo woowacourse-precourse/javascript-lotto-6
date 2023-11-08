@@ -9,7 +9,7 @@ class BonusValidation {
         }
         //3. 1부터 45사이의 숫자를 입력하지 않은 경우
         if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new Error(WINNING_ERROR.RANGE_ERROR);
+            throw new Error(WINNING_ERROR.BONUS_RANGE_ERROR);
         }
         return bonusNumber;
     }

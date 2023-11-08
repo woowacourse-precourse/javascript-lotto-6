@@ -12,5 +12,6 @@ export const WINNING_ERROR = {
     LENGTH_ERROR : "[ERROR] 당첨 번호는 6개의 숫자여야 합니다.",
     NUM_ERROR : "[ERROR] 당첨 번호는 숫자여야 합니다.",
 
-    BONUS_ONE_NUM_ERROR : "[ERROR] 보너스 숫자는 한개의 숫자만 입력할 수 있습니다.",
+    BONUS_ONE_NUM_ERROR : "[ERROR] 보너스 번호는 한개의 숫자만 입력할 수 있습니다.",
+    BONUS_RANGE_ERROR : "[ERROR] 보너스 번호는 1부터 45사이의 숫자여야 합니다.",
 };

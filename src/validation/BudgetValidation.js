@@ -18,11 +18,6 @@ class BudgetValidation {
             throw new Error(INPUT_BUDGET_ERROR.NO_MONEY_ERROR);
         }
 
-        // 4. null일 경우
-        if (budget === null) {
-            throw new Error(INPUT_BUDGET_ERROR.NULL_ERROR);
-        }
-
         return budget;
     }
 }
