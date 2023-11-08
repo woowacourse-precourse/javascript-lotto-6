@@ -22,6 +22,14 @@ class LottoGame {
     this.#bonusNumber = null;
   }
 
+  getWinningNumbers() {
+    return this.#winningNumbers;
+  }
+
+  getBonusNumber() {
+    return this.#bonusNumber;
+  }
+
   purchaseTickets(amount) {
     if (!isValidAmount(amount)) {
       throw new Error('[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다.');
