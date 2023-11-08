@@ -1,7 +1,7 @@
 import ErrorMessages from "./ErrorMessages.js";
 
 class LottoValidator {
-  static validatePurchaseAmount(amount) {
+  validatePurchaseAmount(amount) {
     if (amount % 1000 !== 0) {
       throw new Error(ErrorMessages.NOT_DIVISIBLE_AMOUNT);
     }
