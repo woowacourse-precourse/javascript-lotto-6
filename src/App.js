@@ -5,7 +5,7 @@ class App {
 
   async play() {
     this.#lottoFlow = new LottoFlow();
-    this.#lottoFlow.startLotto();
+    this.#lottoFlow.makeLotto();
   }
 }
 

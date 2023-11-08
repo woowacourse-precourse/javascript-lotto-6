@@ -26,20 +26,16 @@ class ResultAnalyzer {
     this.#profit = 0;
   }
 
-  getResult() {
-    this.findResult();
-    const result = {
-      prize: this.#prize,
-      profit: this.#profit,
-    };
-    return result;
-  }
-
   findResult() {
     this.#ticketList.forEach((ticket) => {
       this.countCorrect(ticket);
     });
     this.calculateProfit();
+    const result = {
+      prize: this.#prize,
+      profit: this.#profit,
+    };
+    return result;
   }
 
   countCorrect(ticket) {

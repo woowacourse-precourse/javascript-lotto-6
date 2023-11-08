@@ -6,7 +6,9 @@ import Lotto from '../Lotto.js';
 class Seller {
   #lottoMachine;
 
-  #lotto;
+  #winningNumber;
+
+  #bonusNumber;
 
   constructor() {
     this.ticketList = [];
@@ -16,7 +18,7 @@ class Seller {
   setAmount(money) {
     const amount = money / 1000;
     OutputView.printAmount(amount, this.makeLotto);
-    this.setLottoTicket(amount);
+    return amount;
   }
 
   setLottoTicket(amount) {
@@ -26,20 +28,17 @@ class Seller {
       this.ticketList.push(ticket);
     }
     OutputView.printTickets(this.ticketList);
-    this.makeWinnigNumber();
   }
 
   async makeWinnigNumber() {
-    const winningNumber = await InputView.InputWinningNumber();
-    this.#lotto = new Lotto(winningNumber, this.ticketList);
-    const bonusNumber = await InputView.InputBonusNumber();
-    this.#lotto.confirmNumber(bonusNumber);
-    this.printResult();
-  }
-
-  printResult() {
-    const result = this.#lotto.getResult();
-    OutputView.printResult(result);
+    this.#winningNumber = await InputView.InputWinningNumber();
+    this.#bonusNumber = await InputView.InputBonusNumber();
+    const NumberSet = {
+      winningNumber: this.#winningNumber,
+      bonusNumber: this.#bonusNumber,
+      ticketList: this.ticketList,
+    };
+    return NumberSet;
   }
 }
 
