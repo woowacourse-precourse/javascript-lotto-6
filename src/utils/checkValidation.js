@@ -2,14 +2,8 @@ import { Console } from "@woowacourse/mission-utils";
 import { LOTTO, ERROR_MESSAGE } from "./Constant.js";
 
 const isVaildAmount = (amount) => {
-	try {
-		throwError(!isValidNumber(amount), ERROR_MESSAGE.invalidInputNumber);
-		throwError(isDivisibleBy1000(amount), ERROR_MESSAGE.invalidInputAmount);
-	} catch (error) {
-		Console.print(error);
-		return false;
-	}
-	return true;
+	throwError(!isValidNumber(amount), ERROR_MESSAGE.invalidInputNumber);
+	throwError(isDivisibleBy1000(amount), ERROR_MESSAGE.invalidInputAmount);
 };
 
 const isVaildLottoNumbers = (numList) => {

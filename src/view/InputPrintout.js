@@ -6,8 +6,17 @@ import Lotto from "../model/Lotto.js";
 const InputPrintout = {
 	inputAmount: async () => {
 		let amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
-		while (!isVaildAmount(amount)) {
-			amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
+		let isInvaildAmount = true;
+		console.log("입력값", amount);
+		while (isInvaildAmount) {
+			try {
+				isInvaildAmount = false;
+				isVaildAmount(amount);
+			} catch (error) {
+				Console.print(error);
+				isInvaildAmount = true;
+				amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
+			}
 		}
 		return Number(amount);
 	},
@@ -19,8 +28,8 @@ const InputPrintout = {
 				isInvaildInput = false;
 				new Lotto(numbers);
 			} catch (error) {
-				isInvaildInput = true;
 				Console.print(error);
+				isInvaildInput = true;
 				numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
 			}
 		}
