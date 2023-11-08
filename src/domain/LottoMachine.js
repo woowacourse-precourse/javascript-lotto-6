@@ -54,27 +54,19 @@ class LottoMachine {
    * @returns  {WinningStat[]}
    */
   calculateWinningStatistics() {
-    const initWinningStatistics = Array.from({ length: RANKS.length }, () => ({
-      winningCount: 0,
-    }))
+    const initWinningStatistics = Array.from({ length: RANKS.length }, () => ({ winningCount: 0 }))
+    const winningLotto = this.#winningLotto.getLotto()
+    const bonusNumber = this.#winningLotto.getBonusNumber()
 
-    const winningStatistics = this.#lottos.reduce((acc, lotto) => {
-      const rank = this.getLottoRank(
-        lotto.getLotto(),
-        this.#winningLotto.getLotto(),
-        this.#winningLotto.getBonusNumber()
-      )
-
+    return this.#lottos.reduce((acc, lotto) => {
+      const rank = this.getLottoRank(lotto.getLotto(), winningLotto, bonusNumber)
       if (!rank) {
         return acc
       }
 
       acc[rank.index].winningCount += 1
-
       return acc
     }, initWinningStatistics)
-
-    return winningStatistics
   }
 
   /**
