@@ -1,23 +1,23 @@
 import CODE from '../Constant/CODE.js';
 
 export default class WinNumber {
-  #commonNum;
+  #commonWinNum;
 
-  #bonusNum;
+  #bonusWinNum;
 
-  setCommonNum(input) {
-    this.#commonNum = input.split(CODE.splitCode).map((num) => Number(num));
+  setCommonWinNum(input) {
+    this.#commonWinNum = input.split(CODE.splitCode).map((num) => Number(num));
   }
 
-  setBonusNum(input) {
-    this.#bonusNum = Number(input);
+  setBonusWinNum(input) {
+    this.#bonusWinNum = Number(input);
   }
 
-  getCommonNum() {
-    return this.#commonNum;
+  getCommonWinNum() {
+    return this.#commonWinNum;
   }
 
-  getBonusNum() {
-    return this.#bonusNum;
+  getBonusWinNum() {
+    return this.#bonusWinNum;
   }
 }

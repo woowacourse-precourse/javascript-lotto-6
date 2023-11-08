@@ -39,15 +39,15 @@ export default class Controller {
   async handleCommonWinNum() {
     const input = await inputView.readCommonWinNum();
     this.#winNumber = new WinNumber();
-    this.#winNumber.setCommonNum(input);
+    this.#winNumber.setCommonWinNum(input);
 
     return this.handleBonusWinNum();
   }
 
   async handleBonusWinNum() {
     const input = await inputView.readBonusWinNum();
-    this.#winNumber.setBonusNum(input);
+    this.#winNumber.setBonusWinNum(input);
 
-    return console.log(this.#winNumber.getCommonNum(), this.#winNumber.getBonusNum());
+    return console.log(this.#winNumber.getCommonWinNum(), this.#winNumber.getBonusWinNum());
   }
 }
