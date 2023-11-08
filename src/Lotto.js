@@ -1,18 +1,45 @@
+import { isValidRangeArr } from "./utils/validateRange";
 class Lotto {
-  #numbers;
+    #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
-
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    constructor(numbers) {
+        this.#validate(numbers);
+        this.#numbers = numbers;
     }
-  }
 
-  // TODO: 추가 기능 구현
+    #validate(numbers) {
+        if (numbers.length !== 6) {
+            throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+        }
+        if (!isValidRangeArr(numbers)) {
+            throw new Error("[ERROR] 로또 번호는 1~45의 숫자여야 합니다.");
+        }
+        const isLottoNumberUnique = numbers.every(
+            (el, idx, arr) => arr.indexOf(el) === idx
+        );
+        if (!isLottoNumberUnique) {
+            throw new Error("[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.");
+        }
+    }
+
+    printLottoNumber() {
+        return this.#numbers;
+    }
+
+    calculateLotto(winningNumber, bonusNumber, lottoResult) {
+        const winningNumArr = winningNumber.split(",").map((el) => Number(el));
+        const bonusNumbertoNumber = Number(bonusNumber);
+        const winningMatches = winningNumArr.filter((el) =>
+            this.#numbers.includes(el)).length;
+        if (
+            winningMatches === 5 &&
+            this.#numbers.includes(bonusNumbertoNumber)
+        ) {
+            lottoResult.push("5bonus");}
+        if (winningMatches > 2) {
+            lottoResult.push(winningMatches);}
+        return lottoResult;
+    }
 }
 
 export default Lotto;
