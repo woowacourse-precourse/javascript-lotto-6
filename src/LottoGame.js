@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { LottoMachine } from './LottoMachine.js';
+import { CashCount } from './CashCount.js';
 import { Lotto } from './Lotto.js';
 import { CommonError } from './CommonError.js';
 
@@ -12,45 +13,35 @@ export class LottoGame {
   }
 
   async buyLottos() {
-    while (true) {
-      try {
-        const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
-        this.playerLottos = await this.lottoMachine.buyLottos(Number(cash));
-        break;
-      } catch (error) {
-        MissionUtils.Console.print(error.message);
-      }
+    try {
+      const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
+      const cashCount = new CashCount(cash);
+      this.playerLottos = this.lottoMachine.buyLottos(cashCount.count);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return this.buyLottos();
     }
   }
 
   async winLottos() {
-    while (true) {
-      try {
-        const winningNumbers = await MissionUtils.Console.readLineAsync(
-          '당첨 번호를 입력해 주세요.',
-        );
-        this.winningNumbers = await new Lotto(
-          winningNumbers.split(',').map((number) => Number(number)),
-        ).numbers;
-        break;
-      } catch (error) {
-        MissionUtils.Console.print(error.message);
-      }
+    try {
+      const winningNumber = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
+      const winningNumbers = new Lotto(winningNumber.split(',').map((number) => Number(number)));
+      this.winningNumbers = winningNumbers.numbers;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return this.winLottos();
     }
   }
 
   async isBonusNumber() {
-    while (true) {
-      try {
-        const bonusNumber = await MissionUtils.Console.readLineAsync(
-          '보너스 번호를 입력해 주세요.',
-        );
-        await this.#bonusNumberValidate(bonusNumber.split(','));
-        this.bonusNumber = Number(bonusNumber);
-        break;
-      } catch (error) {
-        MissionUtils.Console.print(error.message);
-      }
+    try {
+      const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.');
+      this.#bonusNumberValidate(bonusNumber.split(','));
+      this.bonusNumber = Number(bonusNumber);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return this.isBonusNumber();
     }
   }
 

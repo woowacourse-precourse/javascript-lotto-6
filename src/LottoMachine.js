@@ -1,5 +1,4 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { CashCount } from './CashCount.js';
 
 //로또 번호 생성
 export class LottoMachine {
@@ -18,8 +17,7 @@ export class LottoMachine {
     });
   }
 
-  buyLottos(cash) {
-    const cashCount = new CashCount(cash).count;
+  buyLottos(cashCount) {
     MissionUtils.Console.print(`${cashCount}개를 구매했습니다.`);
     for (let count = 1; count <= cashCount; count++) {
       this.generateLotto();
