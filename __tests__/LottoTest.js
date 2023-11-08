@@ -1,5 +1,4 @@
 import Lotto from '../src/Lotto.js';
-import { LOTTO } from '../src/constants/System.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -24,6 +23,12 @@ describe('로또 클래스 테스트', () => {
   test('로또 번호가 1~45사이의 숫자가 존재하면 아니면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 49, 6]);
+    }).toThrow('[ERROR]');
+  });
+
+  test('로또 번호가 정수가 아니면 예외가 발생한다.', () => {
+    expect(() => {
+      new Lotto([1, 2.2, 3, 4, 49, 6]);
     }).toThrow('[ERROR]');
   });
 
