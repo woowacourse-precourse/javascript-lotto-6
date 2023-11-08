@@ -1,8 +1,14 @@
+import LottoValidator from "./validator/LottoValidator.js";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
+    LottoValidator.isSixLength(numbers);
+    LottoValidator.isInteger(numbers);
+    LottoValidator.isValidRange(numbers);
+    LottoValidator.isDuplicated(numbers);
     this.#numbers = numbers;
   }
 

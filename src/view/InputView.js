@@ -12,7 +12,7 @@ class InputView {
                 MoneyValidator.isDivisibleBy1000(moneyInput);
                 money = parseInt(moneyInput);
             } catch (err) {
-                Console.print(err);
+                Console.print(err.message);
             }
         }
         return money;
@@ -30,7 +30,7 @@ class InputView {
                 LottoValidator.isDuplicated(winNumbers);
                 winNumbersArr = winNumbers.map((num) => parseInt(num));
             } catch (err) {
-                Console.print(err);
+                Console.print(err.message);
             }
         }
         return winNumbersArr;
@@ -45,7 +45,7 @@ class InputView {
                 LottoValidator.isValidRange2(bonusNumberInput);
                 bonusNumber = bonusNumberInput;
             } catch (err) {
-                Console.print(err);
+                Console.print(err.message);
             }
         }
         return bonusNumber;
