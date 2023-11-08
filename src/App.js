@@ -4,6 +4,9 @@ class App {
 
     async play() {
         const purchasePrice = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+        const quantity = purchasePrice/1000;
+        Console.print(`\n${quantity}개를 구매했습니다.`);
+        this.generateLottoNumber(quantity);
         
     }
 
