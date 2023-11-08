@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 import { Conditions, throwError } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
 import { SETTING } from '../constants/GameSetting.js';

@@ -1,4 +1,4 @@
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 import { throwError, Conditions } from '../util/Validator.js';
 import ERROR from '../constants/Error.js';
 
