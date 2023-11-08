@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import { LOTTO_CONSTANT } from '../constant/lottoConstant.js';
 import {
   validateLength,
   validateNumber,
@@ -16,7 +17,11 @@ class Lotto {
   }
 
   static setLottery() {
-    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const numbers = Random.pickUniqueNumbersInRange(
+      LOTTO_CONSTANT.MIN_LOTTO_RANGE,
+      LOTTO_CONSTANT.MAX_LOTTO_RANGE,
+      LOTTO_CONSTANT.LOTTO_LENGTH,
+    );
     return new Lotto(numbers);
   }
 

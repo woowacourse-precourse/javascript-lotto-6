@@ -14,6 +14,7 @@ import {
   printWinningStatus,
 } from '../view/outputPompt.js';
 import WinningLotto from '../model/WinningLotto.js';
+import { LOTTO_CONSTANT } from '../constant/lottoConstant.js';
 
 class LottoGame {
   #money = 0;
@@ -60,7 +61,7 @@ class LottoGame {
    * 입력받은 돈의 액수에 비례해 로또리스트에 로또 추가
    */
   #setMyLottoList() {
-    const amount = this.#money / 1000;
+    const amount = this.#money / LOTTO_CONSTANT.MONEY_UNIT;
     for (let i = 0; i < amount; i++) {
       this.#myLottos.add(Lotto.setLottery());
     }
@@ -133,9 +134,13 @@ class LottoGame {
   }
 
   #setRewardCount(matchCount, hasBonusNumber) {
-    if (matchCount < 3 || matchCount > 6) return;
+    if (
+      matchCount < LOTTO_CONSTANT.MIN_MATCH_COUNT ||
+      matchCount > LOTTO_CONSTANT.MAX_MATCH_COUNT
+    )
+      return;
 
-    if (matchCount === 5) {
+    if (matchCount === LOTTO_CONSTANT.MATCH_COUNT_FIVE) {
       hasBonusNumber
         ? this.#rewardCount['5b']++
         : this.#rewardCount[matchCount]++;
@@ -153,7 +158,9 @@ class LottoGame {
       200000000 * this.#rewardCount['6'];
 
     const myThrowMoney = this.#money;
-    const myBenefit = (this.#myWinningMoney / myThrowMoney) * 100;
+    const myBenefit =
+      (this.#myWinningMoney / myThrowMoney) *
+      LOTTO_CONSTANT.FOR_PERCENTAGE_NUMBER;
 
     return myBenefit.toLocaleString('ko-KR', { minimumFractionDigits: 1 });
   }

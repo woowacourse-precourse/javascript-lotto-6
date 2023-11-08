@@ -1,3 +1,4 @@
+import { LOTTO_CONSTANT } from '../constant/lottoConstant.js';
 import { ERROR_MESSAGE } from '../constant/message.js';
 
 export const validateEmpty = (input) => {
@@ -19,21 +20,24 @@ export const validateNumber = (number) => {
 };
 
 export const validateDivisible = (number) => {
-  if (number % 1000 !== 0 || number === '0') {
+  if (number % LOTTO_CONSTANT.MONEY_UNIT !== 0 || number === '0') {
     throw ERROR_MESSAGE.INVALID_NON_DIVISIBLE;
   }
   return true;
 };
 
 export const validateLength = (numberArr) => {
-  if (numberArr.length !== 6) {
+  if (numberArr.length !== LOTTO_CONSTANT.LOTTO_LENGTH) {
     throw ERROR_MESSAGE.INVALID_LOTTO_LENGTH;
   }
   return true;
 };
 
 export const validateRange = (number) => {
-  if (number < 1 || number > 45) {
+  if (
+    number < LOTTO_CONSTANT.MIN_LOTTO_RANGE ||
+    number > LOTTO_CONSTANT.MAX_LOTTO_RANGE
+  ) {
     throw ERROR_MESSAGE.INVALID_LOTTO_RANGE;
   }
   return true;
