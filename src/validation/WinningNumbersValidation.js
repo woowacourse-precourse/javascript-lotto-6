@@ -1,3 +1,5 @@
+import { ERROR_MESSAGES as ERROR } from "../constant/ErrorMessages";
+
 const WinningNumbersValidation = {
 
   /**
@@ -14,9 +16,8 @@ const WinningNumbersValidation = {
 
   /** @throws 배열의 길이가 6이 아니라면 에러를 발생시킨다. */
   checkIsLengthSix(value) {
-    // TODO: 상수 사용
     if (value.length !== 6) {
-      throw new Error('in checkIsLengthSix');
+      throw new Error(ERROR.invalid_winning_numbers_length);
     }
   },
 
@@ -24,8 +25,7 @@ const WinningNumbersValidation = {
   checkIsNumeric(value) {
     value.forEach((item) => {
       if (isNaN(item)) {
-        // TODO: 상수 사용
-        throw new Error('in checkNonNumeric');
+        throw new Error(ERROR.invalid_winning_numbers_format);
       }
     });
   },
@@ -34,8 +34,7 @@ const WinningNumbersValidation = {
   checkIsInteger(value) {
     value.forEach((item) => {
       if (!Number.isInteger(Number(item))) {
-        // TODO: 상수 사용
-        throw new Error('in checkIsInteger');
+        throw new Error(ERROR.invalid_winning_numbers_integer);
       }
     });
   },
@@ -44,8 +43,7 @@ const WinningNumbersValidation = {
   checkIsValidRange(value) {
     value.forEach((item) => {
       if (Number(item) < 1 || Number(item) > 45) {
-        // TODO: 상수 사용
-        throw new Error('in checkIsValidRange');
+        throw new Error(ERROR.invalid_winning_numbers_range);
       }
     });
   },
@@ -53,8 +51,7 @@ const WinningNumbersValidation = {
   /** @throws 중복된 값이 포함되어 있다면 에러를 발생시킨다. */
   checkIsUnique(value) {
     if (value.length !== new Set(value).size) {
-      // TODO: 상수 사용
-      throw new Error('in checkIsUnique');
+      throw new Error(ERROR.duplicate_winning_numbers);
     }
   }
 }
