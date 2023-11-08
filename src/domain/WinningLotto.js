@@ -54,7 +54,6 @@ class WinningLotto {
     if (!(bonus instanceof LottoNumber)) {
       throw new ApplicationError(WinningLotto.ERROR_MESSAGES.invalidBonusArg);
     }
-
     if (lotto.match(bonus)) {
       throw new ApplicationError(WinningLotto.ERROR_MESSAGES.existBonus);
     }
