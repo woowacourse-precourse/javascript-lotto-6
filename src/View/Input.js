@@ -7,4 +7,20 @@ export default class Input {
     );
     return purchaseAmount;
   }
+
+  async getWinningNumbers() {
+    const winningNumbers = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요."
+    );
+
+    return winningNumbers;
+  }
+
+  async getBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요."
+    );
+
+    return bonusNumber;
+  }
 }
