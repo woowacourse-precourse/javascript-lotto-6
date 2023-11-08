@@ -1,5 +1,14 @@
+import User from './User';
+
 class App {
-  async play() {}
-}
+  #player
+
+  constructor() {}
+
+  async play() {
+    this.#player = new User();
+    await this.#player.setPurchaseAmount();
+  }
+};
 
 export default App;
