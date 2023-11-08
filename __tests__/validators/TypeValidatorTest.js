@@ -1,109 +1,97 @@
-import TypeValidator from '../../src/validators/TypeValidator';
+import NumberValidator from '../../src/validators/NumberValidator';
 
-describe('TypeValidator 클래스 테스트', () => {
-  describe('isDefined 메서드 테스트', () => {
-    test('undefined를 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isDefined(undefined)).toBe(false);
+describe('NumberValidator 클래스 테스트', () => {
+  describe('isDivisibleBy 메서드 테스트', () => {
+    test('나누는 수가 0일 경우, CustomError를 던진다', () => {
+      // given
+      const value = 10;
+      const divisor = 0;
+
+      // when
+      const result = () => NumberValidator.isDivisibleBy(value, divisor);
+
+      // then
+      expect(result).toThrow('divisor는 0이 될 수 없습니다.');
     });
 
-    test('null을 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isDefined(null)).toBe(false);
+    test('값이 숫자가 아닐 경우 false를 반환한다', () => {
+      // given
+      const value = '10';
+      const divisor = 3;
+      const expectedValue = false;
+
+      // when
+      const result = NumberValidator.isDivisibleBy(value, divisor);
+
+      // then
+      expect(result).toBe(expectedValue);
     });
 
-    test('값이 정의되어 있으면 true를 반환한다.', () => {
-      expect(TypeValidator.isDefined('hello')).toBe(true);
-    });
-  });
+    test('값이 divisor로 나누어 떨어지면 true를 반환한다', () => {
+      // given
+      const value = 10;
+      const divisor = 2;
+      const expectedValue = true;
 
-  describe('isString 메서드 테스트', () => {
-    test('문자열을 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isString('hello')).toBe(true);
-    });
+      // when
+      const result = NumberValidator.isDivisibleBy(value, divisor);
 
-    test('숫자를 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isString(123)).toBe(false);
-    });
-  });
-
-  describe('isNumber 메서드 테스트', () => {
-    test('숫자를 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isNumber(123)).toBe(true);
+      // then
+      expect(result).toBe(expectedValue);
     });
 
-    test('문자열을 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isNumber('hello')).toBe(false);
-    });
+    test('값이 divisor로 나누어 떨어지지 않으면 false를 반환한다', () => {
+      // given
+      const value = 10;
+      const divisor = 3;
+      const expectedValue = false;
 
-    test('NaN을 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isNumber(NaN)).toBe(false);
-    });
-  });
+      // when
+      const result = NumberValidator.isDivisibleBy(value, divisor);
 
-  describe('isInteger 메서드 테스트', () => {
-    test('정수를 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isInteger(123)).toBe(true);
-    });
-
-    test('소수를 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isInteger(1.23)).toBe(false);
-    });
-
-    test('문자열을 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isInteger('hello')).toBe(false);
-    });
-  });
-
-  describe('isPositiveInteger 메서드 테스트', () => {
-    test('양의 정수를 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isPositiveInteger(123)).toBe(true);
-    });
-
-    test('음의 정수를 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isPositiveInteger(-123)).toBe(false);
-    });
-
-    test('소수를 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isPositiveInteger(1.23)).toBe(false);
-    });
-
-    test('문자열을 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isPositiveInteger('hello')).toBe(false);
+      // then
+      expect(result).toBe(expectedValue);
     });
   });
 
-  describe('isArray 메서드 테스트', () => {
-    test('배열을 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isArray([1, 2, 3])).toBe(true);
+  describe('isInRange 메서드 테스트', () => {
+    test('값이 숫자가 아닐 경우 false를 반환한다', () => {
+      // given
+      const value = '10';
+      const range = { from: 1, to: 5 };
+      const expectedValue = false;
+
+      // when
+      const result = NumberValidator.isInRange(value, range);
+
+      // then
+      expect(result).toBe(expectedValue);
     });
 
-    test('객체를 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isArray({ a: 1, b: 2 })).toBe(false);
-    });
-  });
+    test('값이 범위 내에 있으면 true를 반환한다', () => {
+      // given
+      const value = 3;
+      const range = { from: 1, to: 5 };
+      const expectedValue = true;
 
-  describe('isEmpty 메서드 테스트', () => {
-    test('undefined를 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isEmpty(undefined)).toBe(true);
-    });
+      // when
+      const result = NumberValidator.isInRange(value, range);
 
-    test('null을 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isEmpty(null)).toBe(true);
-    });
-
-    test('빈 문자열을 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isEmpty('')).toBe(true);
+      // then
+      expect(result).toBe(expectedValue);
     });
 
-    test('빈 배열을 입력하면 true를 반환한다.', () => {
-      expect(TypeValidator.isEmpty([])).toBe(true);
-    });
+    test('값이 범위 내에 없으면 false를 반환한다', () => {
+      // given
+      const value = 10;
+      const range = { from: 1, to: 5 };
+      const expectedValue = false;
 
-    test('값이 있는 문자열을 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isEmpty('hello')).toBe(false);
-    });
+      // when
+      const result = NumberValidator.isInRange(value, range);
 
-    test('값이 있는 배열을 입력하면 false를 반환한다.', () => {
-      expect(TypeValidator.isEmpty([1, 2, 3])).toBe(false);
+      // then
+      expect(result).toBe(expectedValue);
     });
   });
 });
