@@ -1,0 +1,1 @@
+import LottoList from "../../src/models/LottoList.js";
