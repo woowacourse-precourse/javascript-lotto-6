@@ -9,6 +9,7 @@ class App {
     MissionUtils.Console.print(`${money / 1000}개를 구매했습니다.\n`);
     const lottos = buyLotto(money);
     const userLottos = await askUserLotto();
+    const bonusLotto = await askUserBonusLotto();
   }
 }
 
@@ -57,4 +58,18 @@ const askUserLotto = async () => {
   return lottoNumbers.split(",");
 };
 
+const askUserBonusLotto = async () => {
+  let isPass = false;
+  let bonusLotto = "";
+  while (!isPass) {
+    try {
+      bonusLotto = await MissionUtils.Console.readLineAsync(Message.BONUSINPUT);
+      checkBonusNumber(bonusLotto);
+      isPass = true;
+    } catch (error) {
+      MissionUtils.Console.print(error.Message);
+    }
+  }
+  return bonusLotto;
+};
 export default App;
