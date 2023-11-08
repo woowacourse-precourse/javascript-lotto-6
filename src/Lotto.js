@@ -1,3 +1,7 @@
+import NumberGenerator from './util/NumberGenerator.js';
+import ERROR from './Constants/Error.js';
+import { NUMBER } from './Constants/LottoGame.js';
+
 class Lotto {
   #numbers;
 
@@ -6,13 +10,35 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  static generateLottos(ticket) {
+    return Array(ticket).fill().map(() => new Lotto(NumberGenerator.generator(NUMBER.minNumber, NUMBER.maxNumber, NUMBER.defaultLength)).getNumbers());
   }
 
-  // TODO: 추가 기능 구현
+  #validate(numbers) {
+    this.validateLength(numbers);
+    this.validateDuplicate(numbers);
+    numbers.map((number) => Lotto.validateLottoNumber(number));
+  }
+
+  validateLength(numbers) {
+    if (numbers.length !== NUMBER.defaultLength) throw (ERROR.lottoLength);
+  }
+
+  validateDuplicate(numbers) {
+    if (new Set(numbers).size !== NUMBER.defaultLength) throw (ERROR.lottoDuplicate);
+  }
+
+  static validateLottoNumber(number) {
+    if (number < NUMBER.minNumber || number > NUMBER.maxNumber) throw (ERROR.lottoNumberRange);
+  }
+
+  static validateBonusNumberInWinningNumbers(WinningNumbers, BonusNumber) {
+    if (WinningNumbers.includes(BonusNumber)) throw (ERROR.bonusNumberInWinningNumber);
+  }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
