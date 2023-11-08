@@ -20,6 +20,11 @@ class Validation {
     }
   }
 
+  static repeatedAnswerNumbers(answerNumbers){
+    const PARSED_ANSWERS = answerNumbers.split(",");
+    this.validateRepeatedNumbers(PARSED_ANSWERS);
+  }
+
 }
 
 export default Validation;
