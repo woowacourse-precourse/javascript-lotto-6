@@ -1,7 +1,13 @@
-import { LOTTO } from '../config.js';
+import { LOTTO, REGEX_POSITIVE_INTEGER } from '../constant/index.js';
+
+const {
+  PRICE,
+  RANGE: { START, END },
+  COUNT,
+} = LOTTO;
 
 export const isPositiveInteger = (value) => {
-  const regex = /^[0-9]*$/;
+  const regex = REGEX_POSITIVE_INTEGER;
 
   return regex.test(value);
 };
@@ -18,14 +24,10 @@ export const isDuplicated = (values) => {
   return set.size !== values.length;
 };
 
-export const isLessThanLottoPrice = (price) => price < LOTTO.PRICE;
+export const isLessThanLottoPrice = (price) => price < PRICE;
 
-export const isNotMultipleOfLottoPrice = (price) => price % LOTTO.PRICE !== 0;
+export const isNotMultipleOfLottoPrice = (price) => price % PRICE !== 0;
 
-export const isRangeInvalid = (number) => {
-  const { START, END } = LOTTO.RANGE;
+export const isRangeInvalid = (number) => number < START || number > END;
 
-  return number < START || number > END;
-};
-
-export const isLengthInvalid = (numbers) => numbers.length !== LOTTO.COUNT;
+export const isLengthInvalid = (numbers) => numbers.length !== COUNT;
