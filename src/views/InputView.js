@@ -10,6 +10,20 @@ const InputView = {
     validate.isValidate(money);
     return money;
   },
+  async InputWinningNumber() {
+    const winningNumber = parseInt(
+      await Console.readLineAsync('당첨 번호를 입력해 주세요.'),
+      10,
+    );
+    return winningNumber;
+  },
+  async InputBonusNumber() {
+    const bonusNumber = parseInt(
+      await Console.readLineAsync('보너스 번호를 입력해 주세요.'),
+      10,
+    );
+    return bonusNumber;
+  },
 };
 
 export default InputView;

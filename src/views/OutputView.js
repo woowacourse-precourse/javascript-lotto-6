@@ -9,6 +9,7 @@ const OutputView = {
       Console.print(ticket);
     });
   },
+  printResult() {},
 };
 
 export default OutputView;
