@@ -12,24 +12,35 @@ class Lotto {
     this.#validateNumberLength(numbers);
     this.#validateNumberUnit(numbers);
     this.#validateNumberRange(numbers);
+    this.#validateNumberUniqueness(numbers);
   }
 
-  #validateNumberLength(number) {
-    if (number.length !== 6) {
+  #validateNumberLength(numbers) {
+    if (numbers.length !== 6) {
       // ToDo: 에러 상수명 변경하기
       throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
     }
   }
 
-  #validateNumberUnit(number) {
-    if (Number.isNaN(parseInt(number, 10))) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
-    }
+  #validateNumberUnit(numbers) {
+    numbers.forEach(number => {
+      if (Number.isNaN(parseInt(number, 10))) {
+        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+      }
+    });
   }
 
-  #validateNumberRange(number) {
-    if (number < 1 || number > 45) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+  #validateNumberRange(numbers) {
+    numbers.forEach(number => {
+      if (number < 1 || number > 45) {
+        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
+      }
+    });
+  }
+
+  #validateNumberUniqueness(numbers) {
+    if (new Set(numbers).size !== 6) {
+      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
     }
   }
 
