@@ -29,13 +29,15 @@ class App {
     for(let i = 0; i<COUNT; i++){
       const UNIQUENUMS = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       const TICKET = new Lotto(UNIQUENUMS);
+      this.printLottoNums(TICKET);
       TICKETS.push(TICKET);
     }
     return TICKETS;
   }
-
-  // printLottoNums
   // 생성된 로또의 번호를 출력하는 메서드
+  printLottoNums(TICKET){
+    Console.print(`[${TICKET.join(", ")}]`);
+  }
   // getWinningNum
   // 사용자로부터 당첨 번호를 입력받는 메서드
   // getBonusNum
