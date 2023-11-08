@@ -14,6 +14,10 @@ class ErrorMessages {
   static lottoFormatError() {
     return "[ERROR] 로또 형식에 부합하지 않습니다.";
   }
+
+  static lottoNumberRangeError() {
+    return "[ERROR] 1~45 사이 수를 입력하세요";
+  }
 }
 
 export default ErrorMessages;
