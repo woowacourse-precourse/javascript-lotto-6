@@ -2,6 +2,10 @@ import { Random } from "@woowacourse/mission-utils";
 import OutputView from "../../src/view/OutputView.js";
 
 describe("OutputView 객체 테스트", () => {
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
   const mockRandoms = (numbers) => {
     Random.pickUniqueNumbersInRange = jest.fn();
     numbers.reduce((acc, number) => {
