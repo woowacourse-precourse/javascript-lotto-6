@@ -1,21 +1,24 @@
-import * as GameFactors from './GameFactors';
+import * as Game from './Game';
+import * as Input from './UserInput';
+import * as Print from './Print';
+
 
 class App {
   async play() {
-    const amount = await GameFactors.getPurchaseAmount();
-    GameFactors.validatePurchaseAmount(amount);
+    const amount = await Input.getPurchaseAmount();
+    Input.validatePurchaseAmount(amount);
 
     const quantity = parseInt(amount / 1000);
-    const lotteries = GameFactors.LottoMaker(quantity);
-    GameFactors.printLotteries(quantity, lotteries);
+    const lotteries = Game.LottoMaker(quantity);
+    Print.printLotteries(quantity, lotteries);
 
-    const lottoNumbers = await GameFactors.validateLottoNumbers();
+    const lottoNumbers = await Input.validateLottoNumbers();
 
     const winningNumbers = lottoNumbers.getWinningNumbers().getWinningNumbers();
     const bonusNumber = lottoNumbers.getBonusNumber();
 
-    GameFactors.printLottoCount(winningNumbers, bonusNumber, lotteries);
-    GameFactors.printLottoReturns(quantity, winningNumbers, bonusNumber, lotteries);
+    Print.printLottoCount(winningNumbers, bonusNumber, lotteries);
+    Print.printLottoReturns(quantity, winningNumbers, bonusNumber, lotteries);
 
   }
 }
