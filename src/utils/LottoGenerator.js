@@ -24,7 +24,7 @@ class LottoGenerator {
     }
   }
 
-  getLottoNumber() {
+  #getLottoNumber() {
     while (this.#numbers.length !== 6) {
       this.#addBall();
     }
@@ -33,14 +33,15 @@ class LottoGenerator {
     return lottoNumber;
   }
 
-  // getMultipleLotto(lottoCount) {
-  //   for (let i = 0; i < lottoCount; i++){
-  //     this.#getLottoNumber();
-  //     lottoNumbers.push(this.#numbers.sort((a, b) => a - b, 0));
-  //     this.#numbers = [];
-  //   }
-  //   return lottoNumbers;
-  // }
+  getMultipleLotto(lottoCount) {
+    const lottoNumbers = [];
+    for (let i = 0; i < lottoCount; i++) {
+      const lottoNumber = this.#getLottoNumber();
+      MissionUtils.Console.print(lottoNumber.sort((a, b)=> a - b, 0));
+      lottoNumbers.push(lottoNumber);
+    }
+    return lottoNumbers;
+  }
 }
 
 export default LottoGenerator;

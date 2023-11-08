@@ -1,9 +1,11 @@
 class Lotto {
   #numbers;
+  #bonusNumber;
 
-  constructor(numbers) {
+  constructor(numbers, bonusNumber) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = numbers.sort((a, b) => a-b, 0);
+    this.#bonusNumber = bonusNumber;
   }
 
   #validate(numbers) {
@@ -13,6 +15,21 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  getCompareCount (lottoNumber) {
+    let count = 0;
+    this.#numbers.forEach(number => {
+      if (lottoNumber.includes(Number(number))) {
+        count++;
+      }
+    });
+    return count;
+  }
+
+  getIsBonus (lottoNumber) {
+    if (lottoNumber.includes(this.#bonusNumber)) {
+      return true;
+    }
+  }
 }
 
 export default Lotto;
