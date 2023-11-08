@@ -1,7 +1,7 @@
 //@ts-check
 
 import {
-  LOTTO_NUMBER_AMOUNT,
+  WINNING_NUMBER_AMOUNT,
   LOTTO_NUMBER_RANGE,
   MONEY_UNIT,
 } from "../core/const";
@@ -26,13 +26,9 @@ export default class Assert {
    * @param {string} winningNumberString
    */
   assertWinningNumber(winningNumberString) {
-    const winningNumberTokens = winningNumberString.split(",");
-    const winningNumbers = winningNumberTokens.map((token) =>
-      parseInt(token.trim())
-    );
-    const uniqueWinningNumbers = new Set(winningNumbers);
+    const winningNumbers = this.#extractWiningNumbersFrom(winningNumberString);
 
-    if (winningNumbers.length !== LOTTO_NUMBER_AMOUNT)
+    if (this.#isExactWinningNumberAmount(winningNumbers))
       throw new WinningNumberError(WinningNumberError.TYPE_NOT_AMOUNT_6);
 
     winningNumbers.forEach((winningNumber) => {
@@ -42,8 +38,39 @@ export default class Assert {
         throw new WinningNumberError(WinningNumberError.TYPE_OUT_OF_RANGE);
     });
 
-    if (winningNumbers.length !== uniqueWinningNumbers.size)
+    if (!this.#hasAllUniqueArgumentsIn(winningNumbers))
       throw new WinningNumberError(WinningNumberError.TYPE_DUPLICATED);
+  }
+
+  /**
+   *
+   * @param {string} str
+   * @returns {number[]}
+   */
+  #extractWiningNumbersFrom(str) {
+    return str
+      .split(",")
+      .map((token) => token.trim())
+      .map((token) => parseInt(token));
+  }
+
+  /**
+   *
+   * @param {any[]} arr
+   * @returns {boolean}
+   */
+  #hasAllUniqueArgumentsIn(arr) {
+    const uniqueArr = new Set(arr);
+    return arr.length === uniqueArr.size;
+  }
+
+  /**
+   *
+   * @param {any[]} winningNumbers
+   * @returns {boolean}
+   */
+  #isExactWinningNumberAmount(winningNumbers) {
+    return winningNumbers.length !== WINNING_NUMBER_AMOUNT;
   }
 
   /**
