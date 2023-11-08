@@ -1,4 +1,4 @@
-import Constants from "../utils/Constants.js";
+import Constants from '../utils/Constants.js';
 
 class Statistics {
   //상수는 static 하게 사용
@@ -19,7 +19,7 @@ class Statistics {
     const result = res;
     const sum =
       result[1] * this.#constants.getPrize()[6] +
-      result[2] * this.#constants.getPrize()["b"] +
+      result[2] * this.#constants.getPrize()['b'] +
       result[3] * this.#constants.getPrize()[5] +
       result[4] * this.#constants.getPrize()[4] +
       result[5] * this.#constants.getPrize()[3];

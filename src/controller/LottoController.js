@@ -1,11 +1,11 @@
-import Lotto from "../model/Lotto.js";
-import Money from "../model/Money.js";
-import LottoLogic from "../model/LottoLogic.js";
-import UserInput from "../model/UserInput.js";
-import Output from "../view/Output.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
-import BonusLotto from "../model/BonusLotto.js";
-import Statistics from "../model/Statistics.js";
+import Lotto from '../model/Lotto.js';
+import Money from '../model/Money.js';
+import LottoLogic from '../model/LottoLogic.js';
+import UserInput from '../model/UserInput.js';
+import Output from '../view/Output.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
+import BonusLotto from '../model/BonusLotto.js';
+import Statistics from '../model/Statistics.js';
 
 class LottoController {
   async run() {
@@ -31,7 +31,7 @@ class LottoController {
     while (true) {
       try {
         const lottoStr = await userInput.setLottoInput();
-        const lottoArr = lottoStr.split(",").map((num) => Number(num));
+        const lottoArr = lottoStr.split(',').map((num) => Number(num));
         lotto = new Lotto(lottoArr);
         break;
       } catch (error) {

@@ -1,7 +1,7 @@
-import Lotto from "./Lotto.js";
-import BonusLotto from "./BonusLotto.js";
-import Constants from "../utils/Constants.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from './Lotto.js';
+import BonusLotto from './BonusLotto.js';
+import Constants from '../utils/Constants.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 class LottoLogic {
   // 로또 로직을 돌린 후에 결과를 반환
@@ -58,7 +58,7 @@ class LottoLogic {
       result[5]++;
       return;
     }
-    result["miss"]++;
+    result['miss']++;
     return;
   }
 

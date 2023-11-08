@@ -1,5 +1,5 @@
-import Messages from "../utils/Messages.js";
-import Constants from "../utils/Constants.js";
+import Messages from '../utils/Messages.js';
+import Constants from '../utils/Constants.js';
 
 class Money {
   #money;
@@ -25,17 +25,17 @@ class Money {
 
   #validate(money) {
     const messages = new Messages();
-    if (typeof money !== "number" || isNaN(money)) {
-      throw new Error(messages.getErrorMsg("notNumberMoney"));
+    if (typeof money !== 'number' || isNaN(money)) {
+      throw new Error(messages.getErrorMsg('notNumberMoney'));
     }
     if (money <= 0) {
-      throw new Error(messages.getErrorMsg("negative"));
+      throw new Error(messages.getErrorMsg('negative'));
     }
     if (money % this.#constants.getLottoPriceUnit() !== 0) {
-      throw new Error(messages.getErrorMsg("divide"));
+      throw new Error(messages.getErrorMsg('divide'));
     }
     if (money > this.#constants.getLottoPriceMax()) {
-      throw new Error(messages.getErrorMsg("max"));
+      throw new Error(messages.getErrorMsg('max'));
     }
   }
 }

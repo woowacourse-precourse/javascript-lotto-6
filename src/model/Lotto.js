@@ -1,5 +1,5 @@
-import Messages from "../utils/Messages.js";
-import Constants from "../utils/Constants.js";
+import Messages from '../utils/Messages.js';
+import Constants from '../utils/Constants.js';
 
 class Lotto {
   #numbers;
@@ -16,17 +16,17 @@ class Lotto {
   #validate(numbers) {
     const messages = new Messages();
     const constants = new Constants();
-    if (numbers.some((number) => isNaN(number) || typeof number !== "number")) {
-      throw new Error(messages.getErrorMsg("notNumber"));
+    if (numbers.some((number) => isNaN(number) || typeof number !== 'number')) {
+      throw new Error(messages.getErrorMsg('notNumber'));
     }
     if (numbers.length !== constants.getLottoNumberCount()) {
-      throw new Error(messages.getErrorMsg("notLength"));
+      throw new Error(messages.getErrorMsg('notLength'));
     }
     if (numbers.some((num) => this.#checkArange(num))) {
-      throw new Error(messages.getErrorMsg("outOfindex"));
+      throw new Error(messages.getErrorMsg('outOfindex'));
     }
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error(messages.getErrorMsg("overlap"));
+      throw new Error(messages.getErrorMsg('overlap'));
     }
 
     // 보너스 번호와 당첨 번호가 중복되는 경우는 controller에서 처리

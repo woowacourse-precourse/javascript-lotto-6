@@ -1,6 +1,6 @@
-import Messages from "../utils/Messages.js";
-import Constants from "../utils/Constants.js";
-import Lotto from "./Lotto.js";
+import Messages from '../utils/Messages.js';
+import Constants from '../utils/Constants.js';
+import Lotto from './Lotto.js';
 
 class BonusLotto {
   #number;
@@ -22,15 +22,15 @@ class BonusLotto {
   #validate(bonusNumber, lottoNumbers) {
     const messages = new Messages();
     if (this.#checkArange(bonusNumber)) {
-      throw new Error(messages.getErrorMsg("outOfindex"));
+      throw new Error(messages.getErrorMsg('outOfindex'));
     }
 
-    if (typeof bonusNumber !== "number" || isNaN(bonusNumber)) {
-      throw new Error(messages.getErrorMsg("notNumber"));
+    if (typeof bonusNumber !== 'number' || isNaN(bonusNumber)) {
+      throw new Error(messages.getErrorMsg('notNumber'));
     }
 
     if (lottoNumbers.includes(bonusNumber)) {
-      throw new Error(messages.getErrorMsg("overlap"));
+      throw new Error(messages.getErrorMsg('overlap'));
     }
   }
 
