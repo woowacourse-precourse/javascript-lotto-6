@@ -4,6 +4,11 @@ const INPUT_MESSAGE = Object.freeze({
   bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
 });
 
+const OUTPUT_MESSAGE = Object.freeze({
+  purchase: '개를 구매했습니다.',
+  enter: '\n',
+});
+
 const ERROR_MESSAGE = Object.freeze({
   prefix: '[ERROR]',
   invalidNumber: '숫자만 입력 가능합니다.',
@@ -15,4 +20,4 @@ const ERROR_MESSAGE = Object.freeze({
   invalidUnique: '당첨 번호는 중복되지 않게 입력해 주세요.',
 });
 
-export { INPUT_MESSAGE, ERROR_MESSAGE };
+export { INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
