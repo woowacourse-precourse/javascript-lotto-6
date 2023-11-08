@@ -138,19 +138,19 @@ describe('총 수익률 계산 기능 테스트', () => {
   test('구입 금액이 1,000원이고 로또가 1등에 당첨됐을 때', () => {
     const money = 1000;
     const results = { 0: 0, 1: 1, 2: 0, 3: 0, 4: 0, 5: 0 };
-    expect(game.calculateTotalReturn(results, money)).toEqual(200000000);
+    expect(game.calculateTotalReturn(money, results)).toEqual(200000000);
   });
 
   test('구입 금액이 8,000원이고 로또가 5등에 당첨됐을 때', () => {
     const money = 8000;
     const results = { 0: 7, 1: 0, 2: 0, 3: 0, 4: 0, 5: 1 };
-    expect(game.calculateTotalReturn(results, money)).toEqual(62.5);
+    expect(game.calculateTotalReturn(money, results)).toEqual(62.5);
   });
 
   test('로또가 당첨되지 않았을 때', () => {
     const money = 1000;
     const results = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
-    expect(game.calculateTotalReturn(results, money)).toEqual(0);
+    expect(game.calculateTotalReturn(money, results)).toEqual(0);
   });
 });
