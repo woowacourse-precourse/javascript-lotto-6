@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoGame from '../src/controller/LottoGame.js';
-import Lotto from '../src/model/Lotto.js';
+import LottoGame from '../../src/controller/LottoGame.js';
+import Lotto from '../../src/model/Lotto.js';
 
 const mockQuestion = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
