@@ -68,23 +68,6 @@ class App {
     this.#rankCount = rankCount;
   }
 
-  #printPrize() {
-    const NUMBER_OF_RANKS = 5;
-    for (let i = NUMBER_OF_RANKS; i > 0; i--) {
-      const condition = WINNING_CONDITION_BY_RANK[i];
-      const prize = `(${numberWithCommas(PRIZE_BY_RANK[i])}원)`;
-      const count = this.#rankCount[i];
-      MissionUtils.Console.print(`${condition} ${prize} - ${count}개`);
-    }
-  }
-
-  #printRateOfRevenue() {
-    const revenue = this.#getRevenue();
-    const cost = this.#amount;
-    const rateOfRevenue = (revenue / cost) * 100;
-    MissionUtils.Console.print(`총 수익률은 ${rateOfRevenue}%입니다.`);
-  }
-
   #getRevenue() {
     let revenue = 0;
 
@@ -96,6 +79,10 @@ class App {
     return revenue;
   }
 
+  #getNumberOfAvailableTickets(amount) {
+    return amount / LOTTO_VALUE.TICKET_PRICE;
+  }
+
   async #readBuyAmount() {
     const amountInput = await MissionUtils.Console.readLineAsync(
       INPUT_MESSAGE.GET_BUY_AMOUNT + '\n',
@@ -103,44 +90,6 @@ class App {
     const amount = this.#convertToNumber(amountInput);
     this.#validateBuyUnit(amount);
     this.#amount = amount;
-  }
-
-  #convertToNumber(numberString) {
-    const isNumber = verifyIsNumber(numberString);
-    console.log(numberString, isNumber);
-    if (!isNumber) {
-      throw new Error('[ERROR]');
-    }
-    const number = parseInt(numberString);
-    return number;
-  }
-
-  #validateBuyUnit(amount) {
-    if (amount % 1000 > 0) {
-      throw new Error(ERROR_MESSAGE.BUY_AMOUNT_ERROR);
-    }
-  }
-
-  #validateIsInRange(number, startNumber, endNumber) {
-    if (number < startNumber || number > endNumber) {
-      throw new Error(ERROR_MESSAGE.NOT_IN_RANGE);
-    }
-  }
-
-  #getNumberOfAvailableTickets(amount) {
-    return amount / LOTTO_VALUE.TICKET_PRICE;
-  }
-
-  #publishLotto() {
-    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    const ticket = new Lotto(numbers);
-    this.#tickets.push(ticket);
-  }
-
-  #printAllTickets() {
-    this.#tickets.forEach(ticket => {
-      ticket.printNumbers();
-    });
   }
 
   async #readWinningNumbers() {
@@ -170,24 +119,6 @@ class App {
     this.#winningNumbers = winningNumbers;
   }
 
-  #validateNumberOfInputs(stringInput, numberOfInputs, delimiter) {
-    const elements = stringInput.split(delimiter);
-    if (elements.length !== numberOfInputs) {
-      throw new Error(ERROR_MESSAGE.NUMBER_OF_ELEMENTS_ERROR);
-    }
-  }
-
-  #convertToIntegerArray(stringInputs) {
-    const numbers = stringInputs.map(stringInput => {
-      const number = parseInt(stringInput);
-      if (!number) {
-        throw new Error(ERROR_MESSAGE.WINNING_BALL_INPUT_ERROR);
-      }
-      return parseInt(stringInput);
-    });
-    return numbers;
-  }
-
   async #readWinningBonusNumber() {
     const bonusNumberInput = await MissionUtils.Console.readLineAsync(
       INPUT_MESSAGE.GET_WINNING_BONUS_NUMBER + '\n',
@@ -207,11 +138,76 @@ class App {
     this.#bonusNumber = bonusNumber;
   }
 
+  #validateBuyUnit(amount) {
+    if (amount % 1000 > 0) {
+      throw new Error(ERROR_MESSAGE.BUY_AMOUNT_ERROR);
+    }
+  }
+
   #validateIsNumber(stringValue) {
     const isNumber = !Number.isNaN(stringValue);
     if (!isNumber) {
       throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     }
+  }
+
+  #validateIsInRange(number, startNumber, endNumber) {
+    if (number < startNumber || number > endNumber) {
+      throw new Error(ERROR_MESSAGE.NOT_IN_RANGE);
+    }
+  }
+
+  #validateNumberOfInputs(stringInput, numberOfInputs, delimiter) {
+    const elements = stringInput.split(delimiter);
+    if (elements.length !== numberOfInputs) {
+      throw new Error(ERROR_MESSAGE.NUMBER_OF_ELEMENTS_ERROR);
+    }
+  }
+
+  #convertToNumber(numberString) {
+    this.#validateIsNumber(numberString);
+    const number = parseInt(numberString);
+    return number;
+  }
+
+  #convertToIntegerArray(stringInputs) {
+    const numbers = stringInputs.map(stringInput => {
+      const number = parseInt(stringInput);
+      if (!number) {
+        throw new Error(ERROR_MESSAGE.WINNING_BALL_INPUT_ERROR);
+      }
+      return parseInt(stringInput);
+    });
+    return numbers;
+  }
+
+  #publishLotto() {
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const ticket = new Lotto(numbers);
+    this.#tickets.push(ticket);
+  }
+
+  #printAllTickets() {
+    this.#tickets.forEach(ticket => {
+      ticket.printNumbers();
+    });
+  }
+
+  #printPrize() {
+    const NUMBER_OF_RANKS = 5;
+    for (let i = NUMBER_OF_RANKS; i > 0; i--) {
+      const condition = WINNING_CONDITION_BY_RANK[i];
+      const prize = `(${numberWithCommas(PRIZE_BY_RANK[i])}원)`;
+      const count = this.#rankCount[i];
+      MissionUtils.Console.print(`${condition} ${prize} - ${count}개`);
+    }
+  }
+
+  #printRateOfRevenue() {
+    const revenue = this.#getRevenue();
+    const cost = this.#amount;
+    const rateOfRevenue = (revenue / cost) * 100;
+    MissionUtils.Console.print(`총 수익률은 ${rateOfRevenue}%입니다.`);
   }
 }
 
