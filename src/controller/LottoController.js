@@ -28,6 +28,9 @@ class LottoController {
   async handleLottoResult() {
     const receivedPrizes = this.#customer.receivePrizes(this.#lottoWinResult);
     const profitRate = this.#customer.calcProfitRate();
+
+    OutputView.printLottoResult(receivedPrizes);
+    OutputView.printProfitRate(profitRate);
   }
 }
 
