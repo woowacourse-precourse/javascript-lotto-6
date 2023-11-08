@@ -5,11 +5,19 @@ class OutputView {
   amount = 0;
 
   static printLottoNumbers(amount, lottoList) {
-    Console.print(`\n${amount} ${MESSAGE.OUTPUT_LOTTO}`);
-    for (const lotto of lottoList) {
-      Console.print(lotto);
-    }
+    Console.print(`${amount}${MESSAGE.OUTPUT_LOTTO}`);
+
     this.amount = amount;
+    this.printNumber(lottoList);
+  }
+
+  static printNumber(lottoList) {
+    for (const lotto of lottoList) {
+      const lottoNum = lotto;
+      const formattedOutput = '[' + lottoNum.join(', ') + ']';
+      Console.print(formattedOutput);
+    }
+    JSON.s;
   }
 
   static printPrize(prize) {

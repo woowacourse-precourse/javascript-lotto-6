@@ -2,6 +2,7 @@ import InputView from '../View/InputView.js';
 import OutputView from '../View/OutputView.js';
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from '../Model/Lotto.js';
+import validator from '../Validator/validator.js';
 
 class LottoController {
   constructor() {
@@ -25,6 +26,8 @@ class LottoController {
     this.lotto = this.createLotto();
 
     const inputBonusNumber = await InputView.inputBonusNumber();
+    //validator.validateBonusNumber(inputBonusNumber, this.winLottoNumbers);
+
     this.bonusNumber = inputBonusNumber;
 
     this.calculatePrizes();
@@ -80,9 +83,6 @@ class LottoController {
     });
     return count;
   }
-
-  // 상금 반환
-  getPrizeAmount() {}
 }
 
 export default LottoController;
