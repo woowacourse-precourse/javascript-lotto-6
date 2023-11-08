@@ -15,5 +15,9 @@ const Output = {
   printErrorMessage(message) {
     MissionUtils.Console.print(message);
   },
+
+  printStatistic() {
+    MissionUtils.Console.print(MESSAGE.OUTPUT_STATISTIC);
+  },
 };
 export default Output;

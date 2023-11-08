@@ -26,6 +26,12 @@ class Validation {
     }
   }
 
+  static validateLottoLength(number) {
+    if (number.length !== CONSTRAINTS.LOTTO_NUMBERS_LENGTH) {
+      throw new Error(ERROR_MESSAGE.LENGTH);
+    }
+  }
+
   #isCheckNumber() {
     return !Number.isNaN(Number(this.#number));
   }
