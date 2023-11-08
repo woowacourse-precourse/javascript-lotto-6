@@ -60,7 +60,6 @@ class App {
   }
 
   // eslint-disable-next-line class-methods-use-this
-
   publishAllTicket(money) {
     const tickets = [];
     let oneTicket = [];
@@ -117,7 +116,6 @@ class App {
       profit += PRICE[i] * result[i];
     }
     profit /= (money * 10);
-
     return profit.toFixed(1);
   }
 }
