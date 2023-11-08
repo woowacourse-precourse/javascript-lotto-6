@@ -2,7 +2,7 @@ import {
   ERROR_PRICE_INVALID,
   ERROR_PRICE_NOT_SPLITTED,
   UNIT_OF_PURCHASE,
-} from "./constants";
+} from "./constants/index.js";
 
 class GetPurchaseAmount {
   #purchase;

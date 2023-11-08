@@ -1,4 +1,7 @@
-import { ERROR_BONUS_INVALID, ERROR_PRIZE_INCLUDES_BONUS } from "./constants";
+import {
+  ERROR_BONUS_INVALID,
+  ERROR_PRIZE_INCLUDES_BONUS,
+} from "./constants/index.js";
 
 class GetBonusNumber {
   #bonusNumber;

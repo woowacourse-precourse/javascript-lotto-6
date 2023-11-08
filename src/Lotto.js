@@ -1,4 +1,4 @@
-import { ERROR_DUPLICATED, ERROR_PRIZE_NUMBER } from "./constants";
+import { ERROR_DUPLICATED, ERROR_PRIZE_NUMBER } from "./constants/index.js";
 
 class Lotto {
   #numbers;

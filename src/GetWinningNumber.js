@@ -1,4 +1,4 @@
-import { ERROR_DUPLICATED, ERROR_PRIZE_INVALID } from "./constants";
+import { ERROR_DUPLICATED, ERROR_PRIZE_INVALID } from "./constants/index.js";
 
 class GetWinningNumber {
   #winningNumbers;
