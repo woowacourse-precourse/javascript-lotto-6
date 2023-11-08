@@ -12,15 +12,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const inputValidator = new InputValidator();
-    inputValidator.validateNumber(numbers);
+    //const inputValidator = new InputValidator();
+    //inputValidator.validateNumber(numbers);
 
-    // if (numbers.length !== 6) {
-    //   throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    // }
+    if (numbers.length !== 6) {
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+
+    if (new Set(numbers).size !== numbers.length)
+      throw new Error(ERROR.input_double_num);
   }
-
-  // 추가 기능 구현
 
   getNumbers() {
     return this.#numbers;
