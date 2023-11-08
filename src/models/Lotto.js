@@ -1,5 +1,5 @@
-import ErrorMessage from '../constants/ErrorMessage.js';
-import GAME_SETTINGS from '../constants/LottoSettings.js';
+import ErrorMessage from '../constants/ErrorMessage';
+import GAME_SETTINGS from '../constants/LottoSettings';
 
 const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = GAME_SETTINGS;
 

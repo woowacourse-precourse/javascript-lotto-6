@@ -1,10 +1,11 @@
-import { Console } from '@woowacourse/mission-utils';
+import OutputMessage from '../constants/OutputMessage';
+import { printMessage } from '../utils/messages';
 
 class OutputView {
   static printLottos(lottos) {
-    Console.print(`${lottos.length}개를 구매했습니다.`);
+    printMessage(OutputMessage.PURCHASED_LOTTO_COUNT(lottos.length));
     lottos.forEach(lotto => {
-      Console.print(`[${lotto.join(', ')}]`);
+      printMessage(`[${lotto.join(', ')}]`);
     });
   }
 
@@ -15,22 +16,17 @@ class OutputView {
 
   static printResults(results) {
     const order = [3, 4, 5, '5+1', 6];
-    Console.print('당첨 통계');
-    Console.print('---');
+    printMessage(OutputMessage.RESULT_HEADER);
 
     order.map(key => {
       const { count } = results[key];
       const { prize } = results[key];
-      Console.print(
-        `${key === '5+1' ? '5' : key}개 일치${
-          key === '5+1' ? ', 보너스 볼 일치' : ''
-        } (${prize.toLocaleString()}원) - ${count}개`,
-      );
+      printMessage(OutputMessage.RESULT(key, prize, count));
     });
   }
 
   static printProfit(profit) {
-    Console.print(`총 수익률은 ${profit}%입니다.`);
+    printMessage(OutputMessage.PROFIT(profit));
   }
 }
 

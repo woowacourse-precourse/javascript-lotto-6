@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import GAME_SETTINGS from '../constants/LottoSettings.js';
-import Lotto from './Lotto.js';
+import GAME_SETTINGS from '../constants/LottoSettings';
+import Lotto from './Lotto';
 
 const { LOTTO_PRICE, MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = GAME_SETTINGS;
 

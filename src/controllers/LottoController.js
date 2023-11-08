@@ -1,10 +1,10 @@
-import InputView from '../views/InputView.js';
-import OutputView from '../views/OutputView.js';
-import Result from '../models/Result.js';
-import PurchasedLotto from '../models/purchasedLottos.js';
-import Validator from '../utils/Validator.js';
-import { printMessage } from '../utils/messages.js';
-import GAME_SETTINGS from '../constants/LottoSettings.js';
+import InputView from '../views/InputView';
+import OutputView from '../views/OutputView';
+import Result from '../models/Result';
+import PurchasedLotto from '../models/PurchasedLottos';
+import Validator from '../utils/Validator';
+import { printMessage } from '../utils/messages';
+import GAME_SETTINGS from '../constants/LottoSettings';
 
 const { LOTTO_PRICE } = GAME_SETTINGS;
 

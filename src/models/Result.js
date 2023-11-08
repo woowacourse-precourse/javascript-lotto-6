@@ -1,4 +1,4 @@
-import GAME_SETTINGS from '../constants/LottoSettings.js';
+import GAME_SETTINGS from '../constants/LottoSettings';
 
 const { PRIZES } = GAME_SETTINGS;
 

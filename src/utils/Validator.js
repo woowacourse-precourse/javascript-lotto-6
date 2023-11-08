@@ -1,6 +1,6 @@
-import ErrorMessage from '../constants/ErrorMessage.js';
-import GAME_SETTINGS from '../constants/LottoSettings.js';
-import { printErrorMessage } from './messages.js';
+import ErrorMessage from '../constants/ErrorMessage';
+import GAME_SETTINGS from '../constants/LottoSettings';
+import { printErrorMessage } from './messages';
 
 const { LOTTO_PRICE, MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = GAME_SETTINGS;
 

@@ -1,18 +1,17 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import InputMessage from '../constants/InputMessage';
 
 class InputView {
   static async inputParchaseCost() {
-    return MissionUtils.Console.readLineAsync('구입 금액을 입력해 주세요. \n');
+    return MissionUtils.Console.readLineAsync(InputMessage.PURCHASE_COST);
   }
 
   static async inputWinningNumbers() {
-    return MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요. \n');
+    return MissionUtils.Console.readLineAsync(InputMessage.WINNING_NUMBERS);
   }
 
   static async inputBonusNumber() {
-    return MissionUtils.Console.readLineAsync(
-      '보너스 번호를 입력해 주세요. \n',
-    );
+    return MissionUtils.Console.readLineAsync(InputMessage.BONUS_NUMBER);
   }
 }
 
