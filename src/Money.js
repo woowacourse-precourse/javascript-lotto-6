@@ -29,7 +29,7 @@ class Money {
       throw new Error(ERRORMESSAGES.MONEY_RANGE);
     }
     if (money % 1000 !== 0) {
-      throw new Error();
+      throw new Error(ERRORMESSAGES.MONEY_DEVISION);
     }
     return true;
   }
