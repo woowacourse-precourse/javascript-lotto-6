@@ -69,6 +69,31 @@ export const winningNumberRange = (winningNumber) => {
   return winningNumber.every((number) => 1 <= number && number <= 45);
 };
 export const winningNumberDuplication = (winningNumber) => {
-  const duplicationNumber = new Set(winningNumber);
+  const duplicationNumber = [...new Set(winningNumber)];
   return duplicationNumber.length === winningNumber.length;
+};
+
+export const validateBonusNumberInput = async (bonusNumber, winningNumber) => {
+  if (!isBonusNumberInput(bonusNumber)) {
+    throw new Error(INPUT_ERROR_MESSAGE.NON_NUMERIC);
+  }
+  if (!bonusNumberRange(bonusNumber)) {
+    throw new Error(LOTTO_ERROR_MESSAGE.LOTTO_RANGE);
+  }
+  if (duplicateNumber(bonusNumber, winningNumber)) {
+    throw new Error(INPUT_ERROR_MESSAGE.BONUS_NUMBER_DUPLICATION);
+  }
+};
+
+export const isBonusNumberInput = (bonusNumber) => {
+  const REGEX = /^(?!0[0-9])[1-9][0-9]*$/;
+  return REGEX.test(bonusNumber);
+};
+
+export const bonusNumberRange = (bonusNumber) => {
+  return 1 <= bonusNumber && bonusNumber <= 45;
+};
+
+export const duplicateNumber = (inputBonusNumber, winningNumber) => {
+  return winningNumber.includes(inputBonusNumber);
 };

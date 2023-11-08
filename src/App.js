@@ -2,11 +2,16 @@ import Lotto from "./Lotto.js";
 import { LOTTO, MESSAGE } from "./common/constants.js";
 import { lottoRandomNumber, lottoSort, print } from "./common/utils.js";
 import {
+  validateBonusNumberInput,
   validatePurchaseInput,
   validateWinningInput,
   validateWinningNumber,
 } from "./common/validation.js";
-import { purchaseAmountInput, winningNumberInput } from "./view/inputView.js";
+import {
+  bonusNumberInput,
+  purchaseAmountInput,
+  winningNumberInput,
+} from "./view/inputView.js";
 
 class App {
   constructor() {
@@ -44,11 +49,24 @@ class App {
 
   async winningNumber() {
     const inputWinningNumber = await winningNumberInput();
+    this.createWinningNumber(inputWinningNumber);
+  }
+  async createWinningNumber(inputWinningNumber) {
     validateWinningInput(inputWinningNumber);
     const winningNumber = inputWinningNumber
       .split(",")
       .map((number) => Number(number));
     validateWinningNumber(winningNumber);
+    this.bonusNumber(winningNumber);
+  }
+
+  async bonusNumber(winningNumber) {
+    const inputBonusNumber = Number(await bonusNumberInput());
+    this.createBonusNumber(inputBonusNumber, winningNumber);
+  }
+
+  async createBonusNumber(inputBonusNumber, winningNumber) {
+    validateBonusNumberInput(inputBonusNumber, winningNumber);
   }
 }
 
