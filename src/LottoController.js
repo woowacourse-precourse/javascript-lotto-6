@@ -2,31 +2,33 @@ import Counter from './domains/Counter.js';
 import LottoComparison from './domains/LottoComparison.js';
 import WinningLottoMachine from './domains/WinningLottoMachine.js';
 import getInputAmount from './input/getInputAmount.js';
-import printLottoNumbers from './print/printLottoNumbers.js';
+import { Console } from '@woowacourse/mission-utils';
+import printEachLotto from './print/printEachLotto.js';
+import { OUTPUT_MESSAGES } from './constants/messages.js';
 
 class LottoController {
   #myLotto;
-  #winningLottoMachine;
 
   async run() {
     await this.#buyLotto();
-    await this.#printLotto(this.#myLotto.length, this.#myLotto);
-    await this.#getWinningNumbers();
-    await this.#compare();
+    this.#printLotto(this.#myLotto.length, this.#myLotto);
+    await this.#compareWithWinningNumbersAndBonusNumber();
   }
+
   async #buyLotto() {
     const inputAmount = await getInputAmount();
     const counter = new Counter(inputAmount);
     this.#myLotto = counter.giveLotto();
   }
-  async #printLotto(lottoCount, lotto) {
-    printLottoNumbers(lottoCount, lotto);
+
+  #printLotto(lottoTicketNumber, lottos) {
+    Console.print(OUTPUT_MESSAGES.lottoTicketNumber(lottoTicketNumber));
+    lottos.forEach((lotto) => printEachLotto(lotto));
   }
-  async #getWinningNumbers() {
-    this.#winningLottoMachine = await WinningLottoMachine.machineStart();
-  }
-  async #compare() {
-    new LottoComparison(this.#myLotto, this.#winningLottoMachine).run();
+
+  async #compareWithWinningNumbersAndBonusNumber() {
+    const winningLottoMachine = await WinningLottoMachine.machineStart();
+    new LottoComparison(this.#myLotto, winningLottoMachine).run();
   }
 }
 
