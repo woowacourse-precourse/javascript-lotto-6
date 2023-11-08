@@ -1,8 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { LottoMachine } from './LottoMachine.js';
-import { CashCount } from './CashCount.js';
 import { Lotto } from './Lotto.js';
-import { CommonError } from './CommonError.js';
+import { BonusNumberValidate, CashValidate } from './Validate.js';
 
 export class LottoGame {
   constructor() {
@@ -15,8 +14,9 @@ export class LottoGame {
   async buyLottos() {
     try {
       const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
-      const cashCount = new CashCount(cash);
-      this.playerLottos = this.lottoMachine.buyLottos(cashCount.count);
+      CashValidate.cashValidate(Number(cash));
+      const lottoCount = Number(cash) / 1000;
+      this.playerLottos = this.lottoMachine.buyLottos(lottoCount);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.buyLottos();
@@ -39,33 +39,12 @@ export class LottoGame {
   async isBonusNumber() {
     try {
       const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.');
-      this.#bonusNumberValidate(bonusNumber.split(','));
+      BonusNumberValidate.bonusNumberValidate(bonusNumber.split(','), this.winningNumbers);
       this.bonusNumber = Number(bonusNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.isBonusNumber();
       return;
     }
-  }
-
-  #bonusNumberValidate(number) {
-    this.#validateSingleNumber(number);
-    const isNumber = Number(number[0]);
-    this.#validateBonusNumber(isNumber);
-  }
-
-  #validateSingleNumber(number) {
-    if (number.length !== 1) {
-      throw new Error('[ERROR] 하나의 입력이 아닙니다.');
-    }
-  }
-
-  #validateBonusNumber(isNumber) {
-    if (this.winningNumbers.includes(isNumber)) {
-      throw new Error('[ERROR] 당첨 번호와 중복된 숫자가 있습니다.');
-    }
-
-    const numberError = new CommonError();
-    numberError.numberError(isNumber);
   }
 }
