@@ -37,10 +37,18 @@ class LottoMachine {
   }
 
   async setWinningNumbers() {
-    const winningNumbers = await LottoView.getUserInput(
-      ENTER_MESSAGE.winning_number
-    );
-    Validation.isProperWinningNumbers(winningNumbers);
+    let winningNumbers;
+    while (true) {
+      try {
+        winningNumbers = await LottoView.getUserInput(
+          ENTER_MESSAGE.winning_number
+        );
+        Validation.isProperWinningNumbers(winningNumbers);
+        break;
+      } catch (error) {
+        LottoView.printMessage(error.message);
+      }
+    }
     this.#winningNumbers = winningNumbers.split(',').map(Number);
   }
 
