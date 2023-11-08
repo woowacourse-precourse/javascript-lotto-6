@@ -9,6 +9,7 @@ class LottoOutput {
     this.matchFive = 0;
     this.matchBonus = 0;
     this.matchSix = 0;
+    this.rate = 0;
   }
 
   lottoCnt(money) {
@@ -59,6 +60,18 @@ class LottoOutput {
     Console.print(MESSAGE_OUTPUT(this.matchFive).WINNING_FIVE);
     Console.print(MESSAGE_OUTPUT(this.matchBonus).WINNING_BONUS);
     Console.print(MESSAGE_OUTPUT(this.matchSix).WINNING_SIX);
+  }
+
+  printRate(money) {
+    let sums =
+      this.matchThree * 5000 +
+      this.matchFour * 50000 +
+      this.matchFive * 1500000 +
+      this.matchBonus * 30000000 +
+      this.matchSix * 2000000000;
+    this.rate = ((sums / money) * 100).toFixed(1);
+
+    Console.print(MESSAGE_OUTPUT(this.rate).RATE);
   }
 }
 

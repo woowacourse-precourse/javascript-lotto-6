@@ -15,6 +15,7 @@ class App {
     const bonusNum = await this.lottoInput.bonusInput();
 
     this.lottoOutput.printWinning(winningNum, bonusNum);
+    this.lottoOutput.printRate(money);
   }
 }
 
