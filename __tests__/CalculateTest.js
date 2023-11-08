@@ -21,4 +21,15 @@ describe('당첨금 계산 함수 테스트', () => {
       expect(calculateProfit(result)).toBe(prices[index]);
     });
   });
+
+  test('당첨 수익률 확인 테스트', () => {
+    const startMoney = [8000, 1000, 5000];
+    const winningMoney = [2000000000, 5000, 5000];
+
+    const profitRate = [25000000, 500, 100];
+
+    startMoney.forEach((_, index) => {
+      expect(calculateProfitRate(startMoney[index], winningMoney[index])).toBe(profitRate[index]);
+    });
+  });
 });
