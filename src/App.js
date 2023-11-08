@@ -5,7 +5,7 @@ import Lotto from './Lotto.js';
 import Computer from './Computer.js';
 import CheckList from './datas/CheckList.js';
 import { prize, rank } from './datas/prize.js';
-import { NUMBER, PROMPT } from './datas/constants.js';
+import { NUMBER, PROMPT, INPUT_TYPE } from './datas/constants.js';
 
 class App {
   #lottos;
@@ -69,17 +69,17 @@ class App {
   }
 
   async setLottos() {
-    this.#cost = await this.getInput(PROMPT.costInput, 'cost');
+    this.#cost = await this.getInput(PROMPT.costInput, INPUT_TYPE.cost);
     this.createLotto(this.#cost);
   }
 
   async setPrizeNumber() {
-    const prizeNumberString = await this.getInput(PROMPT.prizeNumberInput, 'prizeNumber');
+    const prizeNumberString = await this.getInput(PROMPT.prizeNumberInput, INPUT_TYPE.prizeNumber);
     this.#prizeNumber = prizeNumberString.split(',').map((elem) => Number(elem));
   }
 
   async setBonusNumber() {
-    const bonusString = await this.getInput(PROMPT.bonusNumberInput, 'bonusNumber');
+    const bonusString = await this.getInput(PROMPT.bonusNumberInput, INPUT_TYPE.bonusNumber);
     this.#bonusNumber = Number(bonusString);
   }
 
