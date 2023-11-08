@@ -3,6 +3,7 @@ export const ERROR = Object.freeze({
   DUPLICATE_NUMBER: '중복된 숫자가 존재합니다.',
   INVALID_NUMBER: '숫자가 아닙니다.',
   INVALID_INTEGER: '정수가 아닙니다.',
+  INVALID_INDEX: '잘못된 인덱스에 접근했습니다.',
   NOT_DIVISIBLE_BY_ONE_THOUSAND: '1000원으로 나눠지지 않습니다.',
 });
 

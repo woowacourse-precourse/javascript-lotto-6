@@ -1,5 +1,7 @@
 import Lotto from './Lotto';
 import Money from './Money';
+import Validator from './utils/vaildators';
+import { CONSTANT } from './constants';
 
 class LottoMachine {
   #lottos;
@@ -8,6 +10,18 @@ class LottoMachine {
   constructor(lottos = [], money = null) {
     this.#lottos = lottos;
     this.#money = money;
+  }
+
+  getPurchaseCount() {
+    const purchaseCount = this.#money.getPurchaseCount();
+    return purchaseCount;
+  }
+
+  getLotto(index) {
+    const lottoLength = this.#lottos.length;
+    Validator.isInvaildIndex(CONSTANT.ZERO, lottoLength.index, index);
+    const lotto = this.#lottos[index].getLotto();
+    return lotto;
   }
 
   insertMoney(money) {

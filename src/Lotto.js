@@ -14,6 +14,10 @@ class Lotto {
     Validator.hasDuplicateNumbers(numbers);
   }
 
+  getLotto() {
+    return [...this.#numbers];
+  }
+
   compareWinningNumbers(winningNumbers) {
     let matchingCount = 0;
 

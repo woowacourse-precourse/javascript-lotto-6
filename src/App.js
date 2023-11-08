@@ -11,7 +11,8 @@ class App {
 
   async play() {
     await this.#requestUserMoney();
-    this.#lottoMachine.issueLottos;
+    this.#lottoMachine.issueLottos();
+    this.#printLottos();
   }
 
   async #requestUserMoney() {
@@ -25,6 +26,16 @@ class App {
       } catch (errorMessage) {
         OutputView.printError(errorMessage);
       }
+    }
+  }
+
+  #printLottos() {
+    const purchaseCount = this.#lottoMachine.getPurchaseCount();
+    OutputView.printPurchaseCount(purchaseCount);
+
+    for (let i = 0; i < purchaseCount; i++) {
+      const lotto = this.#lottoMachine.getLotto(i);
+      OutputView.printLotto(lotto);
     }
   }
 }
