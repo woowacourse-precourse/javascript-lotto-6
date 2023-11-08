@@ -29,14 +29,14 @@ class LottoResultChecker {
 
   #checkResult(winningNumbers, bonusNumber) {
     this.#boughtLottos.forEach((lottoNumbers) => {
-      const matchCount = this.#comparsionLotto(winningNumbers, lottoNumbers);
+      const matchCount = this.#compareLotto(winningNumbers, lottoNumbers);
       const bonusMatch = lottoNumbers.includes(bonusNumber);
 
       this.#updateResult(matchCount, bonusMatch);
     });
   }
 
-  #comparsionLotto(winningNumbers, lottoNumbers) {
+  #compareLotto(winningNumbers, lottoNumbers) {
     const winningNums = new Set(winningNumbers);
     let matchCount = 0;
 
