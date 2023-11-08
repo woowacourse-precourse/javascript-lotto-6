@@ -66,6 +66,13 @@ class Lotto {
     }
     return 6 - match + 2;
   }
+
+  /**
+   * @returns {number[]}
+   */
+  getNumbers() {
+    return Object.freeze(this.#numbers);
+  }
 }
 
 export default Lotto;
