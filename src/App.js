@@ -14,7 +14,7 @@ class App {
 
   // 사용자로부터 구입금액을 입력 받는 메서드
   async getPurchaseAmount(){
-    const INPUTPRICE = parseInt(Console.readLineAsync("구입금액을 입력해 주세요."));
+    const INPUTPRICE = parseInt(await Console.readLineAsync("구입금액을 입력해 주세요."));
     if(INPUTPRICE % 1000 !== 0)
       throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.")
     const COUNT = INPUTPRICE/1000;
@@ -47,14 +47,14 @@ class App {
 
   // 사용자로부터 당첨 번호를 입력받는 메서드
   async getWinningNum() {
-    const INPUTNUMS = parseInt(Console.readLineAsync("당첨 번호를 입력해 주세요."));
+    const INPUTNUMS = parseInt(await Console.readLineAsync("당첨 번호를 입력해 주세요."));
     const WINNINGNUM = new Lotto(INPUTNUMS);
     return WINNINGNUM.returnNumbers();
   }
 
   // 사용자로부터 보너스 번호를 입력받는 메서드
   async getBonusNum(WINNINGNUMS) {
-    const BONUS = parseInt(Console.readLineAsync("보너스 번호를 입력해 주세요."));
+    const BONUS = parseInt(await Console.readLineAsync("보너스 번호를 입력해 주세요."));
     if(WINNINGNUMS.has(BONUS)){
       throw new Error("[ERROR] 보너스 번호와 당첨번호 중 한개가 일치합니다.");
     }
