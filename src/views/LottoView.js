@@ -8,7 +8,10 @@ const LottoView = {
 
     printPurchaseLottoCount(lottoPurchaseCount){
         return Console.print(`\n${lottoPurchaseCount}${PROMPT.PURCHASE_AMOUNT}`)
-    }
+    },
 
+    printPurchaseLottoNumbers(lottoNumber){
+        return Console.print(lottoNumber);
+    }
 }
 export default LottoView;

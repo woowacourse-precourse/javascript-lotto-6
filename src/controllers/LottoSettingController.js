@@ -4,7 +4,6 @@ import { CONSTANTS } from "../constants/GameConstant.js";
 import UserLotto from "../models/UserLotto.js";
 
 class LottoSettingController {
-    // 입력 받은 로또 구입 금액 
     static async setLottoPurchasePrice() {
         const lottoPurchasePrice = await LottoView.getLottoPurchasePrice();
         if(Validation.isPurchasePriceValidate(lottoPurchasePrice)){
@@ -26,11 +25,7 @@ class LottoSettingController {
         this.printPurchaseLottoCount(lottoPurchaseCount);
 
         const userLotto = new UserLotto(lottoPurchaseCount);
-        
-
+        userLotto.printLottoNumbers();
     }
-
-    // 입력 받은 로또 구입 금액으로 로또 구입 개수 계산
-    
 }
 export default LottoSettingController;
