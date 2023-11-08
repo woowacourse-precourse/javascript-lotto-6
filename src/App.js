@@ -64,7 +64,7 @@ class App {
   };
 
   generateLottosList = (count) => {
-    Console.print(`${count}개를 구입했습니다.\n`);
+    Console.print(`${count}개를 구입했습니다.`);
 
     for (let i = 0; i < count; i += 1) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -107,39 +107,28 @@ class App {
     const winningNumbers = await this.inputWinningNumbers();
     const bonusNumber = await this.inputBonusNumber(winningNumbers);
 
-    let matched = [];
+    let matched = [0, 0, 0, 0, 0];
     this.#lottos.forEach((lotto) => {
-      const matchedCount = this.compareNumbers(
-        lotto,
-        winningNumbers,
-        bonusNumber
-      );
-      matched.push(matchedCount);
-    });
-
-    return matched;
-  };
-
-  compareNumbers = (lotto, winningNumbers, bonusNumber) => {
-    let matchedCount = 0;
-
-    lotto.forEach((number) => {
-      if (winningNumbers.includes(number)) {
-        matchedCount += 1;
+      let matchedCount = 0;
+      lotto.forEach((number) => {
+        if (winningNumbers.includes(number)) {
+          matchedCount += 1;
+        }
+      });
+      if (matchedCount === 6) {
+        matched[4] += 1;
+      } else if (matchedCount === 5 && lotto.includes(bonusNumber)) {
+        matched[3] += 1;
+      } else if (matchedCount === 5) {
+        matched[2] += 1;
+      } else if (matchedCount === 4) {
+        matched[1] += 1;
+      } else if (matchedCount === 3) {
+        matched[0] += 1;
       }
     });
 
-    if (matchedCount === 6) {
-      return 4;
-    } else if (matchedCount === 5 && lotto.includes(bonusNumber)) {
-      return 3;
-    } else if (matchedCount === 5) {
-      return 2;
-    } else if (matchedCount === 4) {
-      return 1;
-    } else if (matchedCount === 3) {
-      return 0;
-    }
+    return matched;
   };
 
   winningStatistics = async () => {
@@ -150,7 +139,6 @@ class App {
 
   printWinningStatistics = (matchedCounts) => {
     Console.print(GAME.WINNING_STATISTICS);
-    console.log(matchedCounts);
 
     const prizeMoney = [
       "5,000",
@@ -160,9 +148,6 @@ class App {
       "2,000,000,000",
     ];
     for (let i = 0; i < 5; i += 1) {
-      if (isNaN(matchedCounts[i])) {
-        matchedCounts[i] = 0;
-      }
       Console.print(
         `${i + 3}개 일치 (${prizeMoney[i]}원) - ${matchedCounts[i]}개`
       );
@@ -171,7 +156,7 @@ class App {
 
   calculateProfitRate = (matchedCounts) => {
     const prizeMoney = [5000, 50000, 1500000, 30000000, 2000000000];
-    let totalCost = this.#amount;
+    let totalCost = 0;
 
     for (let i = 0; i < 5; i += 1) {
       totalCost += prizeMoney[i] * matchedCounts[i];

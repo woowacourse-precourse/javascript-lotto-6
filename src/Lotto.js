@@ -27,7 +27,6 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-
   sortAscending = () => {
     this.#numbers.sort((a, b) => a - b);
   };
@@ -35,6 +34,7 @@ class Lotto {
   printLottos = () => {
     this.sortAscending();
     Console.print(`[${this.#numbers.join(", ")}]`);
+    console.log(this.#numbers);
   };
 }
 
