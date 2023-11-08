@@ -25,64 +25,63 @@ class LottoGame{
     
     async startGame(){
         // 구매 개수 확인하기
-        this.#count = await this.getCount()
+        this.#count = await this.#getCount()
         OutputView.printCount(this.#count) 
 
         // 구매한 로또 리스트 출력
-        this.#lottoList = await this.getLottoNumList()
+        this.#lottoList = await this.#getLottoNumList()
         this.#lottoList.forEach((lotto) => {
             OutputView.printLottoList(lotto.getNumbers())
         })
         
         // 당첨 번호, 보너스 번호 입력받기
-        this.#winningLotto = await this.getWinningLotto()
+        this.#winningLotto = await this.#getWinningLotto()
         this.#bonus = await InputView.getBonus(this.#winningLotto.getNumbers())
 
         // 결과 생성 및 출력
-        this.makeResult()
-        const returnRate = this.getReturnRate()
+        this.#makeResult()
+        const returnRate = this.#getReturnRate()
         OutputView.printResult(this.#result, returnRate)
     }
 
     // 구매금액 받아서 로또 구매개수 확인
-    async getCount(){
+    async #getCount(){
         this.#money = await InputView.getMoney()
         return Math.floor(this.#money / 1000) 
     }
 
     // 구매개수에 맞게 로또 번호 리스트 받아오기
-    async getLottoNumList(){
+    async #getLottoNumList(){
         const lottoNumList = []
         for(let i=0; i<this.#count; i++){
-            const lottoNum = await this.getLottoNum()
+            const lottoNum = await this.#getLottoNum()
             lottoNumList.push(new Lotto(lottoNum))
         }
-
         return lottoNumList
     }
 
     // 로또 1장의 번호 생성
-    async getLottoNum(){
+    async #getLottoNum(){
         const lottoNum = await MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)
         const sortedLottoNum = lottoNum.sort((a, b) => a - b)
         return sortedLottoNum
     }
 
     // 
-    async getWinningLotto(){
+    async #getWinningLotto(){
         const winningLotto = await InputView.getWinningLotto()
         return new Lotto(winningLotto)
     }
 
     // 구매개수에 맞게 당첨번호와 로또번호리스트 대조
-    makeResult(){
+    #makeResult(){
         this.#lottoList.forEach(lotto => {
-            this.compareLotto(lotto.getNumbers())
+            this.#compareLotto(lotto.getNumbers())
         })
     }
 
     // 로또 1장과 당첨번호 대조
-    compareLotto(lotto){
+    #compareLotto(lotto){
         const winningLotto = this.#winningLotto.getNumbers()
 
         // 당첨번호와 일치한 번호 개수 계산
@@ -99,7 +98,7 @@ class LottoGame{
                 break
             case 5:
                 // 일치한 번호 개수가 5개인 경우 보너스 번호가 맞았는지 여부 검사
-                if(this.checkBonus(lotto)) this.#result.correct5_bonus += 1
+                if(this.#checkBonus(lotto)) this.#result.correct5_bonus += 1
                 else this.#result.correct5 += 1
                 break
             case 4: 
@@ -114,13 +113,13 @@ class LottoGame{
     }
 
     // 보너스번호가 구매한 로또번호에 있는지 확인
-    checkBonus(lotto){
+    #checkBonus(lotto){
         if(lotto.includes(this.#bonus)) return true
         return false
     }
 
     // 수익률 계산
-    getReturnRate(){
+    #getReturnRate(){
         const total = 
             this.#result.correct3 * 5000 +
             this.#result.correct4 * 50000 + 
