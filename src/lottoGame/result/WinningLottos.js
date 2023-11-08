@@ -1,6 +1,7 @@
 import { Print } from '../../interface/Output.js';
 import { getRoundedNumber } from '../../utils/getRoundedNumber.js';
 import { WINNING_CONDITIONS_AND_PRIZES } from '../../constants.js';
+import { separator } from '../../utils/separator.js';
 
 export class WinningLottosResult {
   #winningLottosResult = WINNING_CONDITIONS_AND_PRIZES.map(({ condition, prize }) => {
@@ -16,9 +17,7 @@ export class WinningLottosResult {
 
     this.#userMoney = userMoney;
 
-    this.#winningLottosResult.forEach((winningLotto) => {
-      this.#setWinningLottosResult(winningLotto);
-    });
+    this.#setWinningLottosResult();
   }
 
   getWinningLottos() {
@@ -39,17 +38,23 @@ export class WinningLottosResult {
     return getRoundedNumber(rate);
   }
 
-  #setWinningLottosResult(winningLotto) {
-    const { condition } = winningLotto;
+  #setWinningLottosResult() {
+    this.#winningLottos.forEach((winningLotto) => {
+      const winningLottoResult = this.getWinningLottoResultPairedWithConditions(winningLotto);
 
-    this.getWinningLottos().forEach((lottoResult) => {
-      if (lottoResult.compareResultWithCondition(condition)) {
-        this.#increaseWinningLottoCountAndProfit(winningLotto);
+      if (winningLottoResult) {
+        this.increaseWinningLottoCountAndProfit(winningLottoResult);
       }
     });
   }
 
-  #increaseWinningLottoCountAndProfit(winningLotto) {
+  getWinningLottoResultPairedWithConditions(winningLotto) {
+    return this.#winningLottosResult.find(({ condition }) =>
+      winningLotto.compareResultWithCondition(condition),
+    );
+  }
+
+  increaseWinningLottoCountAndProfit(winningLotto) {
     winningLotto.count += 1;
     winningLotto.profit += winningLotto.prize;
   }
@@ -59,11 +64,11 @@ export class WinningLottosResult {
     this.#winningLottosResult.forEach(({ condition, prize, count }) => {
       const { winningNumbersCount, bonusNumberType } = condition;
       if (bonusNumberType === 2) {
-        Print(`${winningNumbersCount}개 일치, 보너스 볼 일치 (${prize}원) - ${count}개`);
+        Print(`${winningNumbersCount}개 일치, 보너스 볼 일치 (${separator(prize)}원) - ${count}개`);
 
         return;
       }
-      Print(`${winningNumbersCount}개 일치 (${prize}원) - ${count}개`);
+      Print(`${winningNumbersCount}개 일치 (${separator(prize)}원) - ${count}개`);
     });
 
     Print(`총 수익률은 ${this.getTotalProfitRate()}%입니다.`);

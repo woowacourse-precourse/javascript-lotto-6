@@ -9,17 +9,14 @@ export class Lottos {
   #count;
   constructor(count) {
     this.#count = count;
-    this.#setList();
+
+    this.#list = Array.from({ length: this.#count }).map(() =>
+      this.makeNewLotto(generateRandomNumbers(1, 45, 6)),
+    );
   }
 
   get() {
     return this.#list.map((lotto) => lotto.getNumbers());
-  }
-
-  #setList() {
-    this.#list = Array.from({ length: this.#count }).map(() =>
-      this.makeNewLotto(generateRandomNumbers(1, 45, 6)),
-    );
   }
 
   makeNewLotto(numbers) {
