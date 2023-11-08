@@ -10,14 +10,14 @@ class WinLotto {
 
   countMatchingNumbers(lotto) {
     const lottoNumbers = lotto.getLotto();
-    const winCount = this.countWinNumbers(lottoNumbers);
+    const winCount = this.#countWinNumbers(lottoNumbers);
     let bonusCount = 0;
-    bonusCount = this.countBonusNumber(lottoNumbers);
+    bonusCount = this.#countBonusNumber(lottoNumbers);
 
     return [winCount, bonusCount];
   }
 
-  countWinNumbers(lotto) {
+  #countWinNumbers(lotto) {
     let count = 0;
     lotto.forEach((num) => {
       if (this.#winLotto.winNumbers.includes(num)) count += 1;
@@ -26,7 +26,7 @@ class WinLotto {
     return count;
   }
 
-  countBonusNumber(lotto) {
+  #countBonusNumber(lotto) {
     let count = 0;
     if (lotto.includes(this.#winLotto.bonusNumber)) count += 1;
 

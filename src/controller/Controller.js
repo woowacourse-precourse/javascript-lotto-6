@@ -8,57 +8,60 @@ import Analyzer from '../models/Analyzer.js';
 
 class Controller {
   #lottoBundle;
+  #ticketBooth;
+  #announcer;
+  #analyzer;
 
   constructor() {
-    this.ticketBooth = new TicketBooth();
-    this.announcer = new Announcer();
-    this.analyzer = new Analyzer();
     this.#lottoBundle;
+    this.#ticketBooth = new TicketBooth();
+    this.#announcer = new Announcer();
+    this.#analyzer = new Analyzer();
   }
 
   async startLottoGame() {
-    await this.purchaseLotto();
-    await this.drawWinNumbers();
-    await this.drawBonusNumber();
-    this.processLottoResults();
+    await this.#purchaseLotto();
+    await this.#drawWinNumbers();
+    await this.#drawBonusNumber();
+    this.#processLottoResults();
   }
 
-  async purchaseLotto() {
+  async #purchaseLotto() {
     try {
-      const amount = await this.ticketBooth.takePaymentForTickets();
+      const amount = await this.#ticketBooth.takePaymentForTickets();
       this.#lottoBundle = new LottoBundle(amount);
-      this.announcer.printLottoBundle(this.#lottoBundle);
+      this.#announcer.printLottoBundle(this.#lottoBundle);
     } catch (error) {
-      await this.handleErrorAndRetry(error, this.purchaseLotto.bind(this));
+      await this.#handleErrorAndRetry(error, this.#purchaseLotto.bind(this));
     }
   }
 
-  async drawWinNumbers() {
+  async #drawWinNumbers() {
     try {
-      await this.ticketBooth.receiveWinNumbers();
+      await this.#ticketBooth.receiveWinNumbers();
     } catch (error) {
-      await this.handleErrorAndRetry(error, this.drawWinNumbers.bind(this));
+      await this.#handleErrorAndRetry(error, this.#drawWinNumbers.bind(this));
     }
   }
 
-  async drawBonusNumber() {
+  async #drawBonusNumber() {
     try {
-      await this.ticketBooth.receiveBonusNumber();
+      await this.#ticketBooth.receiveBonusNumber();
     } catch (error) {
-      await this.handleErrorAndRetry(error, this.drawBonusNumber.bind(this));
+      await this.#handleErrorAndRetry(error, this.#drawBonusNumber.bind(this));
     }
   }
 
-  async handleErrorAndRetry(error, retryProcess) {
+  async #handleErrorAndRetry(error, retryProcess) {
     Console.print(error.message + ERROR_MESSEGE.invalideInput);
     await retryProcess();
   }
 
-  processLottoResults() {
-    const winLotto = new WinLotto(this.ticketBooth.getWinNumbers());
+  #processLottoResults() {
+    const winLotto = new WinLotto(this.#ticketBooth.getWinNumbers());
     const matchedNumberList = this.#lottoBundle.populateWinResult(winLotto);
-    this.analyzer.countWinningRank(matchedNumberList);
-    this.announcer.printResult(this.analyzer);
+    this.#analyzer.countWinningRank(matchedNumberList);
+    this.#announcer.printResult(this.#analyzer);
   }
 }
 
