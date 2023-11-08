@@ -12,6 +12,7 @@ class App {
   async play() {
     await this.getPurchaseAmount();
     this.buyLottos();
+    await this.getWinningNumbers();
   }
 
   async getPurchaseAmount() {
