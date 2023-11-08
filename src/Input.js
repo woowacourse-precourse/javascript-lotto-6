@@ -6,21 +6,48 @@ class Input {
     try {
       const purchaseAmount =
         await Console.readLineAsync('구입금액을 입력해 주세요.\n');
-      if (this.validateGetPurchaseAmount(purchaseAmount)) {
-        return parseInt(purchaseAmount);
-      }
+      const amount = parseInt(purchaseAmount);
+
+      this.validateGetPurchaseAmount(amount);
+      return amount;
     } catch (error) {
       return Promise.reject(error);
     }
   }
 
   validateGetPurchaseAmount(purchaseAmount) {
-    const amount = parseInt(purchaseAmount);
-    if (isNaN(amount)) {
+    if (isNaN(purchaseAmount)) {
       throw new Error('[ERROR] 구입금액은 숫자여야 합니다.');
     }
-    if (amount % 1000 !== 0) {
+    if (purchaseAmount % 1000 !== 0) {
       throw new Error('[ERROR] 구입금액은 1000의 배수여야 합니다.');
+    }
+  }
+
+  async getWinningNumbers() {
+    try {
+      const input = await Console.readLineAsync(
+        '\n당첨 번호를 입력해 주세요.\n',
+      );
+      const numbers = input.split(',').map(Number);
+
+      this.validateWinningNumbers(input, numbers);
+      return numbers;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  validateWinningNumbers(input, numbers) {
+    const numberOfCommas = (input.match(/,/g) || []).length;
+    if (numberOfCommas !== 5 || numbers.length !== 6) {
+      throw new Error('[ERROR] 쉼표(,)를 기준으로 숫자 6개를 입력해야 합니다.');
+    }
+    if (numbers.some((number) => number < 1 || number > 45)) {
+      throw new Error('[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }
+    if (new Set(numbers).size !== 6) {
+      throw new Error('[ERROR] 당첨 번호 6개는 중복되지 않아야 합니다.');
     }
   }
 }
