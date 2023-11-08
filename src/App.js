@@ -68,7 +68,8 @@ class App {
     });
 
     this.includedbonusArr = this.lottoManagement.countBonuses(
-      this.generatedLottoNumbers
+      this.generatedLottoNumbers,
+      this.bonusNumber
     );
 
     this.matchingCounts = this.lottoManagement.compareInputNumAndRandomNum(
@@ -140,11 +141,6 @@ class App {
     if (this.winningNumbers.includes(bonus)) {
       throw new Error(BONUS_ERROR_MESSAGE.DUPLICATE_WINNING_NUMBER_ERROR);
     }
-  }
-  countBonuses(randomArrs) {
-    return randomArrs.map((randomArr) =>
-      randomArr.getNumbers().includes(this.bonusNumber) ? 1 : 0
-    );
   }
 }
 export default App;
