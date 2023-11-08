@@ -5,8 +5,8 @@ import {
   TOTAL_LOTTO_NUMBERS,
   BONUS_NUMBER_ERROR_MESSAGE,
   WINNING_NUMBERS_ERROR_MESSAGE
-} from '../constants/constants';
-import CustomError from '../View/CustomError';
+} from '../constants/constants.js';
+import CustomError from '../View/CustomError.js';
 
 class Validator {
   static isMoneyValid(input) {
@@ -25,6 +25,15 @@ class Validator {
     }
   }
 
+  isNotNumber(numbers){
+    numbers.forEach(num => {
+      if (!sNaN(num)) {
+        return true
+      }
+    })
+    return false
+  }
+
   static isNumbersValid(input) {
     const WINNINGS = String(input).split(',').map(Number);
     const MY_NUMBERS = WINNINGS.sort((a, b) => a - b).join('');
@@ -32,12 +41,19 @@ class Validator {
       .sort((a, b) => a + b)
       .join('');
     const FILTERED_NUMBERS = WINNINGS.filter((num) => num < 1 || num > 45);
+    const FILTER_STRINGS = WINNINGS.filter(num => isNaN(num))
 
-    if (!input) {
+    if (FILTER_STRINGS.length > 0) {
       throw new CustomError(COMMON_ERROR_MESSAGE.emptyString);
     }
 
     if (WINNINGS.length > TOTAL_LOTTO_NUMBERS) {
+      throw new CustomError(
+        `${WINNING_NUMBERS_ERROR_MESSAGE.wrongWinningNumber} 게임을 종료합니다.`
+      );
+    }
+
+    if (WINNINGS.length < TOTAL_LOTTO_NUMBERS - 1) {
       throw new CustomError(
         `${WINNING_NUMBERS_ERROR_MESSAGE.wrongWinningNumber} 게임을 종료합니다.`
       );
