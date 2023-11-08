@@ -12,13 +12,10 @@ class Lotto {
   #validate(numbers) {
     // test code
     if (numbers.length === CONSTANT.ZERO) throw new Error(ERROR_MESSAGE.LOTTO_EMPTY);
-    if (numbers.length !== CONSTANT.NUMBER_MAX_LENGTH) {
-      throw new Error(ERROR_MESSAGE.SIX_NUMBERS);
-    }
+    if (numbers.length !== CONSTANT.NUMBER_MAX_LENGTH) throw new Error(ERROR_MESSAGE.SIX_NUMBERS);
     if (this.checkRange(numbers)) throw new Error(ERROR_MESSAGE.LOTTO_RANGE);
     const numbersSet = this.getNumbersSet(numbers);
-    if ([...numbersSet].length !== CONSTANT.NUMBER_MAX_LENGTH)
-      throw new Error(ERROR_MESSAGE.SAME_NUMBERS);
+    if ([...numbersSet].length !== CONSTANT.NUMBER_MAX_LENGTH) throw new Error(ERROR_MESSAGE.SAME_NUMBERS);
   }
   // test code
   checkRange(numbers) {
@@ -58,18 +55,18 @@ class Lotto {
     let lottoResult = [];
     let bonusResult = CONSTANT.ZERO;
     lottoRandomNumber.forEach(randomNumberArray => {
-      const equalNumber = this.countEqualNumbers(
-        randomNumberArray,
-        userLottoNumber,
-      );
-      bonusResult = this.checkBonusNumber(
-        randomNumberArray,
-        equalNumber,
-        userBonusNumber,
-      );
+      const equalNumber = this.countEqualNumbers(randomNumberArray,userLottoNumber);
+      bonusResult = this.checkBonusNumber(randomNumberArray,equalNumber,userBonusNumber);
       lottoResult = this.getLottoResult(equalNumber, bonusResult);
     });
     return lottoResult;
+  }
+  sumPrizeMoney(amount, index, money){
+    let priceMoney =0;
+    if (amount) {
+      priceMoney += (amount * money[index]);
+    }
+    return priceMoney;
   }
 
   getLottoRate(lottoResult, lottoPrice) {
@@ -78,7 +75,7 @@ class Lotto {
     let investment = Number(lottoPrice);
     let rate = CONSTANT.ZERO;
     lottoResult.forEach((amount, index) => {
-      if (amount) prizeMoney += amount * money[index];
+      prizeMoney += this.sumPrizeMoney(amount, index, money);
     });
     rate = ((prizeMoney - investment) / investment) * 100;
     rate = 100 + Math.round(rate * 10) / 10;
