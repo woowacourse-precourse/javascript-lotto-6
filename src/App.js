@@ -1,6 +1,6 @@
 import { Random, Console } from "@woowacourse/mission-utils";
 import * as Util from "./Util";
-import { Lotto } from "./Lotto.js";
+import Lotto from "./Lotto.js";
 
 class App {
   lottoArray;
@@ -15,7 +15,7 @@ class App {
   constructor() {
     this.basedAmount = 1000;
     this.totalPrice = 0;
-    this.lottoArray = new Array();
+    this.lottoArray = [];
     this.winningCounts = new Array(6).fill(0);
     this.prizeMoney = [0, 2000000000, 30000000, 1500000, 50000, 5000];
   }
