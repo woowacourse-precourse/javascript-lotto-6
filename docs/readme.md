@@ -106,7 +106,7 @@
         <td>로또 구입 금액이 0 이하일 경우 예외 처리한다.</td>
     </tr>
     <tr>
-        <td><input type="checkBox" disabled></td>
+        <td><input type="checkBox" checked></td>
         <td>로또 번호가 자연수가 아닐 경우 예외 처리한다.</td>
     </tr>
     <tr>
