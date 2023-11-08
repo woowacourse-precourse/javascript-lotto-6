@@ -7,6 +7,20 @@ describe('함수 기능 테스트', () => {
 
   const organize = new OrganizeResults();
   const inputAmount = new InputAmount();
+  inputAmount.Published.numbers = [
+    [1, 13, 18, 23, 30, 42],
+    [2, 7, 18, 20, 42, 44],
+    [2, 4, 12, 17, 36, 39],
+    [4, 7, 15, 19, 26, 31],
+    [3, 11, 16, 22, 25, 45],
+    [2, 7, 18, 19, 20, 44],
+    [2, 7, 8, 20, 42, 44]
+  ]
+  const BONUS = 8;
+  const lotto = new Lotto([2, 7, 18, 20, 42, 44]);
+
+  organize.organizeRank(lotto, inputAmount.Published, BONUS);
+  const rate = organize.calculateRate(inputAmount.Published);
 
   test('로또 발행 번호 오름차순 배열 기능 테스트', () => {
     const inputAmount = new InputAmount();
@@ -19,22 +33,6 @@ describe('함수 기능 테스트', () => {
     });
   });
 
-    inputAmount.Published.numbers = [
-      [1, 13, 18, 23, 30, 42],
-      [2, 7, 18, 20, 42, 44],
-      [2, 4, 12, 17, 36, 39],
-      [4, 7, 15, 19, 26, 31],
-      [3, 11, 16, 22, 25, 45],
-      [2, 7, 18, 19, 20, 44],
-      [2, 7, 8, 20, 42, 44]
-    ]
-  const BONUS = 8;
-  const lotto = new Lotto([2, 7, 18, 20, 42, 44]);
-
-  organize.organizeRank(lotto, inputAmount.Published, BONUS);
-
-  const rate = organize.calculateRate(inputAmount.Published);
-
   test('당첨 로또 분류 기능 테스트', () => {
     expect(inputAmount.Published.rank).toEqual([1, 1, 1, 0, 0]);
   });
@@ -46,5 +44,5 @@ describe('함수 기능 테스트', () => {
   test('수익률 출력 기능 테스트', () => {
     const print = new PrintResults();
     expect(print.styleRate(rate)).toEqual('29,021,428.6');
-  })
+  });
 });
