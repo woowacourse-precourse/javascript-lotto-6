@@ -6,11 +6,12 @@ class App {
   #lottoMachine;
 
   constructor() {
-    lottoMachine = new LottoMachine();
+    this.#lottoMachine = new LottoMachine();
   }
 
   async play() {
     await this.#requestUserMoney();
+    this.#lottoMachine.issueLottos;
   }
 
   async #requestUserMoney() {

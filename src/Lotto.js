@@ -1,3 +1,6 @@
+import { Random } from '@woowacourse/mission-utils';
+import Validator from './utils/vaildators';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,31 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    Validator.isSixNumbers(numbers);
+    Validator.hasDuplicateNumbers(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  compareWinningNumbers(winningNumbers) {
+    let matchingCount = 0;
+
+    for (const number of winningNumbers) {
+      const isMaching = this.#numbers.includes(number);
+
+      if (isMaching) matchingCount += 1;
+    }
+
+    return matchingCount;
+  }
+
+  compareBounsNumber(bounsNumber) {
+    return this.#numbers.includes(bounsNumber);
+  }
+
+  static generateLottoNumbers() {
+    const uniqueNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    uniqueNumbers.sort((a, b) => a - b);
+    return uniqueNumbers;
+  }
 }
 
 export default Lotto;
