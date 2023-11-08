@@ -1,3 +1,5 @@
+import STATIC_NUMBER from "../constant/StaticNumber";
+
 class Rank {
   #lottos;
   #rankStatistic;
@@ -18,10 +20,12 @@ class Rank {
   getRank(lotto, props) {
     const count = this.getSameNumberCount(lotto, props.winningNumber);
     const rankMapping = {
-      3: 5,
-      4: 4,
-      5: lotto.includes(props.bonusNumber) ? 2 : 3,
-      6: 2,
+      3: STATIC_NUMBER.FIFTH_PLACE,
+      4: STATIC_NUMBER.FOURTH_PLACE,
+      5: lotto.includes(props.bonusNumber)
+        ? STATIC_NUMBER.SECOND_PLACE
+        : STATIC_NUMBER.THIRD_PLACE,
+      6: STATIC_NUMBER.FIRST_PLACE,
     };
     return rankMapping[count];
   }
