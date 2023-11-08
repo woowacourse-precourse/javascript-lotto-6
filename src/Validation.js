@@ -1,5 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-import { STRINGS } from './constants/STRINGS';
+import STRINGS from './constants/STRINGS';
 class Validation {
   static validateInputPrice(inputPrice) {
     if (inputPrice % 1000 !== 0) {
@@ -13,10 +12,18 @@ class Validation {
     }
   }
 
-  static validateRepeatedNumbers(numbers) {
-    const SET_ANSWERS = new Set(numbers);
-    if (numbers.length !== SET_ANSWERS) {
-      throw new Error(STRINGS.ERROR_REPEATED);
+  static validateRepeatedNumbers(testNumbers) {
+    // const testArray = [...testNumbers];
+    // const SET_ANSWERS = new Set(testArray);
+    // if (testNumbers.length !== SET_ANSWERS.size) {
+    //   throw new Error(STRINGS.ERROR_REPEATED);
+    // }
+    const setAnswers = new Set();
+    for (const number of testNumbers) {
+      if (setAnswers.has(number)) {
+        throw new Error(STRINGS.ERROR_REPEATED);
+      }
+      setAnswers.add(number);
     }
   }
 
@@ -25,8 +32,8 @@ class Validation {
     this.validateRepeatedNumbers(PARSED_ANSWERS);
   }
 
-  static validateNumbersLength(numbers) {
-    if (numbers.length !== 6) {
+  static validateNumbersLength(randomNumbers) {
+    if (randomNumbers.length !== 6) {
       throw new Error(STRINGS.ERROR_LENGTH);
     }
   }
@@ -34,6 +41,9 @@ class Validation {
   static validateRandomNumbers(randomNumbers) {
     this.validateNumbersLength(randomNumbers);
     this.validateRepeatedNumbers(randomNumbers);
+    for (let i = 0; i < randomNumbers.length; i++) {
+      this.validateRangeNumbers(randomNumbers[i]);
+    }
   }
 
   static validateRangeNumbers(bonusNumber) {
@@ -43,7 +53,7 @@ class Validation {
   }
 
   static validateBonusNumber(answerNumbers, inputBonusNumber) {
-    const compareNumberArray = answerNumbers.push(inputBonusNumber);
+    const compareNumberArray = [...answerNumbers, Number(inputBonusNumber)];
     this.validateRepeatedNumbers(compareNumberArray);
     this.validateRangeNumbers(inputBonusNumber);
   }
