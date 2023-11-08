@@ -1,9 +1,9 @@
-import { RESULT_CHECK } from "../constant/constant";
+import { LOTTO_RESULT_CHECK } from "../constant/winning";
 import { includedBonusNumber, includedLottoNumbers } from "./checkBonusNumber";
 import printLottoResult from "./printLottoResult";
 
 const playLottoGame = (inputNumber, lottoArray, bonusNumber, userBuyMoney) => {
-    const checkLottoResult = RESULT_CHECK;
+    const checkLottoResult = LOTTO_RESULT_CHECK;
 
     lottoArray.forEach((numbers) => {
         const lottoCount = includedLottoNumbers(inputNumber, numbers);
