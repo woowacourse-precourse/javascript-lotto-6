@@ -39,7 +39,7 @@ class LottoGame {
   async start() {
     this.#purchaseAmount = await this.buyLotto();
     this.#ticketCount = this.#purchaseAmount / TICKET_PRICE;
-    this.setLottoTickets(this.#lottoTickets, this.#ticketCount);  //이름 generateLottoTickets로 바꾸기
+    this.generateLottoTickets(this.#lottoTickets, this.#ticketCount);
     this.#lottoTickets = this.sortLottoTickets(this.#lottoTickets);
     this.output.boughtTickets(this.#lottoTickets, this.#ticketCount);
     const inputWinningTicket = await this.inputWinningNumbers();
@@ -90,7 +90,7 @@ class LottoGame {
     return lottoTicket;
   }
 
-  setLottoTickets(lottoTickets, count) {
+  generateLottoTickets(lottoTickets, count) {
     while (lottoTickets.length < count) {
       const lottoNumbers = this.generateLottoNumbers();
       lottoTickets.push(lottoNumbers);
