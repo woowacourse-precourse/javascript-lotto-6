@@ -1,6 +1,8 @@
 import LottoGame from '../domain/LottoGame.js'
 import LottoGameView from '../view/LottoGameView.js'
 import LottoGameValidator from '../validation/LottoGameValidator.js'
+import { MESSAGES as MSG } from '../constant/Messages.js';
+import { LOTTO_GAME_OPTIONS as OPT } from '../constant/Options.js';
 
 const Validator = LottoGameValidator;
 
@@ -61,11 +63,10 @@ class LottoGameController {
 	 * @returns 전처리, 유효성검사가 완료된 당첨 번호 배열
 	 */
 	#preprocessWinningNumbers(winningNumbers) {
-		// TODO: 상수 사용
 		let newWinningNumbers = winningNumbers
-			.split(',')
+			.split(OPT.number_input_seperator)
 			.map(item => item.trim())
-			.filter(item => item !== '');
+			.filter(item => item !== MSG.null);
 		Validator.validateWinningNumbers(newWinningNumbers);
 		return newWinningNumbers.map(item => Number(item));
 	}

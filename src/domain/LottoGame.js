@@ -4,24 +4,6 @@ import { LOTTO_GAME_OPTIONS as OPT } from "../constant/Options.js";
 
 const ASC = (a, b) => a - b;
 
-// TODO: 상수화
-const prize_conditions = [
-  { rank: 1, match: 6 },
-  { rank: 2, match: 5, bonusMatch: true },
-  { rank: 3, match: 5 },
-  { rank: 4, match: 4 },
-  { rank: 5, match: 3 }
-];
-
-const prize_amount = {
-  1: 2000000000,
-  2: 30000000,
-  3: 1500000,
-  4: 50000,
-  5: 5000,
-  0: 0
-}
-
 class LottoGame {
 
   /** @type {number} : 구입 금액 */
@@ -105,7 +87,7 @@ class LottoGame {
    * @returns {number} 당첨 등수 (0 : 낙첨)
    */
   #determinePrizeRank(ticket) {
-    for (const prize of prize_conditions) {
+    for (const prize of OPT.prize_conditions) {
       if (this.#isPrizeMatch(ticket, prize)) {
         return prize.rank;
       }
@@ -129,7 +111,7 @@ class LottoGame {
   calculateTotalPrizeAmount() {
     let totalPrizeAmount = 0;
     this.#tickets.forEach((ticket) => {
-      totalPrizeAmount += prize_amount[ticket.getPrizeRank()];
+      totalPrizeAmount += OPT.prize_amount[ticket.getPrizeRank()];
     });
     this.#totalPrizeAmount = totalPrizeAmount
   }

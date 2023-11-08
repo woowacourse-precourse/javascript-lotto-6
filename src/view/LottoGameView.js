@@ -53,7 +53,10 @@ class LottoGameView {
    * @param {number} purchaseQuantity 구입 수량
    */
   displayPurchaseQuantity(purchaseQuantity) {
-    Console.print(`${purchaseQuantity}개를 구매했습니다.`);
+    Console.print(FormatString(
+      MSG.purchase_result_f,
+      [purchaseQuantity]
+    ));
   }
 
   /**

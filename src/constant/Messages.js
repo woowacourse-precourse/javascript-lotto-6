@@ -2,6 +2,7 @@ export const MESSAGES = Object.freeze({
 
   // 기호
   null: '',
+  comma: ',',
   new_line: '\n',
 
   // 프롬프트 안내
