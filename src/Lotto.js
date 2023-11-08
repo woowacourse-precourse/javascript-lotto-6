@@ -12,7 +12,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    numbers.map(number => Validate.isNumberInRange(number));
+    numbers.forEach(number => {
+      Validate.isNumber(number);
+      Validate.isInteger(number);
+      Validate.isPositive(number);
+    });
     Validate.isWinningNumbersLength(numbers);
     Validate.isDuplicateWinningNumbers(numbers);
     numbers.map(number => Validate.isNumberInRange(number));
