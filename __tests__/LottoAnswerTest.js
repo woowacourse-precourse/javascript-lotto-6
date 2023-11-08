@@ -48,13 +48,10 @@ describe("LottoAnswer 클래스 테스트", () => {
       [[1, 2, 3, 4, 10, 11], PRIZE.fourth],
       [[1, 2, 3, 4, 5, Number(BONUS_NUMBER)], PRIZE.second],
       [[1, 2, 3, 4, 5, 6], PRIZE.first],
-    ])(
-      "보너스 번호가 숫자 외의 형태일 경우 예외가 발생한다. (%expected)",
-      (lottoNumbers, expected) => {
-        expect(new LottoAnswer(answerLotto, BONUS_NUMBER).grade(new Lotto(lottoNumbers))).toEqual(
-          expected
-        );
-      }
-    );
+    ])("당첨 개수에 따라 등수를 올바르게 반환한다. %s %s", (lottoNumbers, expected) => {
+      expect(new LottoAnswer(answerLotto, BONUS_NUMBER).grade(new Lotto(lottoNumbers))).toEqual(
+        expected
+      );
+    });
   });
 });
