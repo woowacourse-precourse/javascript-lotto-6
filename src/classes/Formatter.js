@@ -1,10 +1,8 @@
 class Formatter {
-  static numberFormat() {
-    return new Intl.NumberFormat('ko-KR');
-  }
+  static numberFormat = new Intl.NumberFormat('ko-KR');
 
   static convertToTwoDecimalPoints(number) {
-    if (Math.floor(number) === number) {
+    if (Number.isInteger(number)) {
       return number;
     }
 
