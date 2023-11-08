@@ -10,7 +10,7 @@ class Calculate {
       inputWinningNumbers,
       inputBonusNumbers
     );
-    this.lottos.this.lottoTickets = lottos.getLottoTickets();
+    this.lottoTickets = lottos.getLottoTickets();
     this.winningNumbers = winningNumber.getWinningNumbers();
     this.bonusNumber = winningNumber.getBonus();
 
