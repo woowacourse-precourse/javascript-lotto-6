@@ -15,6 +15,10 @@ class App {
     // 로또 구입
     this.#customer = new Customer(payment);
     this.#customer.buyLottoTickets();
+
+    // 당첨 번호 입력
+    const winnigNumbers = await inputHandlers.inputWinningNumbers();
+    const bonusNumber = await inputHandlers.inputBonusNumber(winnigNumbers);
   }
 }
 
