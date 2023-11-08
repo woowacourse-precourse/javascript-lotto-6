@@ -15,29 +15,6 @@ class Lotto {
   getLottoNumbers() {
     return this.#numbers;
   }
-
-  getMatchingCount({ winningNumbers, bonusNumber }) {
-    return {
-      matchingCountWithWinningNumbers:
-        this.getMatchingCountWithWinningNumbers(winningNumbers),
-      matchingCountWithBonusNumber:
-        this.getMatchingCountWithBonusNumber(bonusNumber),
-    };
-  }
-
-  getMatchingCountWithWinningNumbers(winningNumbers) {
-    let matchingCountWithWinningNumbers = 0;
-    this.#numbers.forEach((number) => {
-      if (winningNumbers.includes(number)) {
-        matchingCountWithWinningNumbers += 1;
-      }
-    });
-    return matchingCountWithWinningNumbers;
-  }
-
-  getMatchingCountWithBonusNumber(bonusNumber) {
-    return this.#numbers.includes(bonusNumber) ? 1 : 0;
-  }
 }
 
 export default Lotto;

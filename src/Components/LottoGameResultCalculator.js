@@ -20,6 +20,33 @@ class LottoGameResultCalculator {
     return { matchingResults, totalPrize, rateOfReturn };
   }
 
+  getMatchingCount({ winningNumbers, bonusNumber, lottoNumbers }) {
+    return {
+      matchingCountWithWinningNumbers: this.getMatchingCountWithWinningNumbers({
+        winningNumbers,
+        lottoNumbers,
+      }),
+      matchingCountWithBonusNumber: this.getMatchingCountWithBonusNumber({
+        bonusNumber,
+        lottoNumbers,
+      }),
+    };
+  }
+
+  getMatchingCountWithWinningNumbers({ winningNumbers, lottoNumbers }) {
+    let matchingCountWithWinningNumbers = 0;
+    lottoNumbers.forEach((number) => {
+      if (winningNumbers.includes(number)) {
+        matchingCountWithWinningNumbers += 1;
+      }
+    });
+    return matchingCountWithWinningNumbers;
+  }
+
+  getMatchingCountWithBonusNumber({ bonusNumber, lottoNumbers }) {
+    return lottoNumbers.includes(bonusNumber) ? 1 : 0;
+  }
+
   getMatchingResult(
     matchingCountWithWinningNumbers,
     matchingCountWithBonusNumber
@@ -34,8 +61,9 @@ class LottoGameResultCalculator {
   getMatchingResults({ lottos, winningNumbers, bonusNumber }) {
     const matchingResults = { 3: 0, 4: 0, 5: 0, 5.5: 0, 6: 0 };
     lottos.forEach((lotto) => {
+      const lottoNumbers = lotto.getLottoNumbers();
       const { matchingCountWithWinningNumbers, matchingCountWithBonusNumber } =
-        lotto.getMatchingCount({ winningNumbers, bonusNumber });
+        this.getMatchingCount({ winningNumbers, bonusNumber, lottoNumbers });
       const matchingResult = this.getMatchingResult(
         matchingCountWithWinningNumbers,
         matchingCountWithBonusNumber
