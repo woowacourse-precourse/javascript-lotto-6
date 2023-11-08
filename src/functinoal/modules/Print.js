@@ -50,7 +50,7 @@ class Print {
     Print.firstPlaceResult(resultArray);
   }
 
-  static lottoReturnRatio(returnRatio) {
+  static returnRatio(returnRatio) {
     Console.print(
       `${RETURN_RATIO_HEADER}${returnRatio.toFixed(1)}${RETURN_RATIO_FOOTER}`
     );
