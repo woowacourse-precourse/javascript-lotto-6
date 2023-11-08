@@ -18,7 +18,7 @@ describe('보너스 번호 클래스 검증 테스트', () => {
   });
 
   test.each([[46], [1000], ['100000']])(
-    `보너스 번호가 ${LOTTO_NUMBER.minNum}와 ${LOTTO_NUMBER.maxNum}의 사이의 숫자가 아니면 예외가 발생한다.`,
+    `보너스 번호가 ${LOTTO_NUMBER.minNum}과 ${LOTTO_NUMBER.maxNum} 사이의 숫자가 아니면 예외가 발생한다.`,
     (input) => {
       expect(() => {
         new BonusNumber(input, winningLottoNumbers);
@@ -34,7 +34,7 @@ describe('보너스 번호 클래스 검증 테스트', () => {
   });
 
   test.each([[32], [45], [17]])(
-    `보너스 번호가 ${LOTTO_NUMBER.minNum}와 ${LOTTO_NUMBER.maxNum}의 사이의 양수이고, 당첨 번호와 중복되지 않으면 예외가 발생하지 않는다.`,
+    `보너스 번호가 ${LOTTO_NUMBER.minNum}과 ${LOTTO_NUMBER.maxNum} 사이의 양수이고, 당첨 번호와 중복되지 않으면 예외가 발생하지 않는다.`,
     (input) => {
       expect(() => {
         new BonusNumber(input, winningLottoNumbers);

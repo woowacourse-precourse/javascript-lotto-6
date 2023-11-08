@@ -1,5 +1,5 @@
 import { CONSTANT, ERROR, LOTTO_NUMBER } from '../constants/Constant.js';
-import ValidationError from '../ValidationError.js';
+import ValidationError from './ValidationError.js';
 
 const Validator = {
   checkIsNotNumber(input) {

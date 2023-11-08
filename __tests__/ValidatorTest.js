@@ -36,7 +36,7 @@ describe('검증 메서드 테스트', () => {
   });
 
   test.each([[[1, 2, 3, 4, 5]], [[1, 2, 3, 4, 5, 6, 7]], [[]]])(
-    `입력값의 길이가 ${LOTTO_NUMBER.count}가 아니면 예외가 발생한다.`,
+    `입력값의 길이가 ${LOTTO_NUMBER.count}이 아니면 예외가 발생한다.`,
     (input) => {
       expect(() => Validator.checkIsInvalidCount(input)).toThrow(ERROR.isInvalidCount);
     },
