@@ -1,5 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-
+import WinningNumbers from './WinningNumbers.js';
 
 class App { 
 
@@ -8,7 +8,8 @@ class App {
         const quantity = purchasePrice/1000;
         Console.print(`\n${quantity}개를 구매했습니다.`);
         this.generateLottoNumber(quantity);
-        
+
+        this.getWinningNumbers();
     }
 
     generateLottoNumber(quantity) {
@@ -18,6 +19,12 @@ class App {
             lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
             Console.print(lotto.sort((a,b) => a - b));
         }
+    }
+
+    getWinningNumbers() {
+        Console.readLine('당첨 번호를 입력해 주세요.\n', (winningNumbers) => {
+            this.winningNumbers = new WinningNumbers(winningNumbers);
+        });
     }
     
     // 입력값이 1000으로 나누어 떨어지지 않는 경우 예외 처리한다. if %1000 !== 0 return throw [ERROR]
