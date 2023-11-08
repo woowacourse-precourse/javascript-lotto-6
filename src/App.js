@@ -109,7 +109,7 @@ class App {
 
   checkListLength(list) {
     if (list.length !== 6) {
-      throw new Error(ERROR_MESSAGE.INVALID_ERROR)
+      throw new Error(ERROR_MESSAGE.INPUT_ERROR)
     }
   };
 
