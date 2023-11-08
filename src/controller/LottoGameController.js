@@ -140,9 +140,8 @@ class LottoGameController {
   }
 
   #printProfit() {
-    const userMoney = this.money.getMoney();
-    const prizeMoney = this.lottoResult.getPrizeMoney();
-    const profit = this.lottoResult.getProfit(userMoney, prizeMoney);
+    const purchaseAmount = this.money.getMoney();
+    const profit = this.lottoResult.getProfit(purchaseAmount);
     this.outputView.printTotalProfit(profit);
   }
 

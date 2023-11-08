@@ -32,11 +32,11 @@ describe('💙 LottoResult 클래스를 테스트합니다. ฅ^._.^ฅ', () => 
     expect(lottoResult.getPrizeMoney()).toBe(expectedPrizeMoney);
   });
 
-  test('[getProfit] 투입 금액과 상금을 인자로 넣어 수익률을 계산하여 반환한다.', () => {
-    const userMoney = 8000;
-    const prizeMoney = 5000;
+  test('[getProfit] 투입 금액을 인자로 넣어 수익률을 계산하여 반환한다.', () => {
+    const purchaseAmount = 8000;
     const expectedProfit = '62.5%';
+    lottoResult.setMatchCount([{ count: 3, hasBonusNumber: false }]);
 
-    expect(lottoResult.getProfit(userMoney, prizeMoney)).toBe(expectedProfit);
+    expect(lottoResult.getProfit(purchaseAmount)).toBe(expectedProfit);
   });
 });

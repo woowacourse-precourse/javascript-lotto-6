@@ -11,7 +11,6 @@ class LottoResult {
     six: 0,
     bonus: 0,
   };
-  #prizeMoney = 0;
 
   setWinningNumbers(winningNumbers) {
     this.#winningNumbers = winningNumbers;
@@ -58,20 +57,16 @@ class LottoResult {
     };
   }
 
-  #calcPrizeMoney() {
-    Object.entries(this.#matchCount).forEach(([key, value]) => {
-      this.#prizeMoney += GAME_REWARD[key] * value;
-    });
-  }
-
   getPrizeMoney() {
-    this.#calcPrizeMoney();
-
-    return this.#prizeMoney;
+    return Object.entries(this.#matchCount).reduce((acc, [key, value]) => {
+      if (value === 0) return acc;
+      return acc + GAME_REWARD[key] * value;
+    }, 0);
   }
 
-  getProfit(userMoney, prizeMoney) {
-    return calcProfit(userMoney, prizeMoney);
+  getProfit(purchaseAmount) {
+    const prizeMoney = this.getPrizeMoney();
+    return calcProfit(purchaseAmount, prizeMoney);
   }
 }
 
