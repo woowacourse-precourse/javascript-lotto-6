@@ -1,4 +1,4 @@
-import { NumberConverter } from '../src/utils/NumberConverter.js';
+import { NumberConverter, ArrayConverter } from '../src/utils/Converter.js';
 describe('숫자 변환 테스트', () => {
   test.each([
     { input: 1000, expected: '1,000' },
@@ -19,4 +19,13 @@ describe('숫자 변환 테스트', () => {
       expected,
     );
   });
+});
+
+describe('배열 문자열 변환 테스트', () => {
+  test.each([{ input: [1, 2, 3, 4, 5], expected: '[1, 2, 3, 4, 5]' }])(
+    '$input을 문자열로 변환하면, $expected가 반환된다.',
+    ({ input, expected }) => {
+      expect(ArrayConverter.convertArrayToString(input)).toBe(expected);
+    },
+  );
 });
