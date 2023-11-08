@@ -28,7 +28,7 @@ class Lottos {
       CONSTANTS.number.max,
       CONSTANTS.number.count,
     );
-    return new Lotto(randomNumber);
+    return new Lotto(randomNumber).getNumbers();
   }
 }
 
