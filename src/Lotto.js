@@ -17,10 +17,15 @@ class Lotto {
   #checkDuplication(numbers) {
     for (let i = 0; i < numbers.length; i += 1) {
       for (let j = i + 1; j < numbers.length; j += 1) {
-        if (numbers[i] === numbers[j]) {
-          throw new Error('[ERROR] 로또 번호는 중복되면 안됩니다.');
-        }
+        this.#checkError(numbers[i], numbers[j]);
       }
+    }
+  }
+
+
+  #checkError(number1, number2) {
+    if (number1 === number2) {
+      throw new Error('[ERROR] 로또 번호는 중복되면 안됩니다.');
     }
   }
 
