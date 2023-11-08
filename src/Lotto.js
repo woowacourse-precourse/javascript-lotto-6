@@ -30,16 +30,18 @@ class Lotto {
         }
 
         this.purchaseAmount = amount;
-        isValidInput = true; // 유효한 입력이면 루프 종료
+        isValidInput = true;
       } catch (error) {
         console.error(error.message);
       }
     }
   }
 
-  async buyTicket() {
+  async buyLotto() {
     await this.readPurchaseAmount();
-    // 이어서 다른 작업을 수행
+    MissionUtils.Console.print(
+      `${this.purchaseAmount / 1000}개를 구매했습니다.`
+    );
   }
 }
 export default Lotto;
