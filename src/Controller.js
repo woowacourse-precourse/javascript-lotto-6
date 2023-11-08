@@ -18,16 +18,6 @@ class Controller {
         return result;
     }
 
-    static compare(userLotto, winningLotto, bonusNum) {
-        let result = 0;
-        winningLotto.getNum().forEach((element) => {
-            if (userLotto.getNum().includes(element)) result += 1;
-        });
-        if (result == 5 && userLotto.getNum().includes(bonusNum))
-            result = "b" + result;
-        return result;
-    }
-
     // 수익률 계산
     static rateOfReturnCal(money, result) {
         let price = 0;

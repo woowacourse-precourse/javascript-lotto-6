@@ -16,7 +16,7 @@ class User {
                 `${CONSTANT.MONEY_INPUT_ASK}\n`
             );
             if (Number(MONEY) % 1000 != 0) throw new Error(CONSTANT.ERROR);
-            this.#money = MONEY;
+            this.#money = Number(MONEY);
         } catch (e) {
             Console.print(e.message);
             await this.setMoney();

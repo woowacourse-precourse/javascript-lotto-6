@@ -1,5 +1,4 @@
 import { CONSTANT } from "./Constant.js";
-import Controller from "./Controller.js";
 
 class Lotto {
     #numbers;
