@@ -1,4 +1,4 @@
-import Lotto from "./Lotto.js"; // 가정한 경로입니다.
+import Lotto from "./Lotto.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class GameResult {
@@ -34,9 +34,9 @@ class GameResult {
     const prize = {
       3: 5000,
       4: 50000,
-      5: 1500000,
-      "5+1": 30000000,
-      6: 2000000000,
+      5: 15e4,
+      "5+1": 3e7,
+      6: 2e9,
     };
     let totalPrize = 0;
     const totalCost = this.#lottos.length * 1000;

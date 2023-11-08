@@ -11,10 +11,13 @@ class App {
 
     const [winningNumberStr, bonusNumberStr] =
       await WinningNumberInput.collect();
-    const winningNumber = App.parseWinningNumber(winningNumberStr);
-    const bonusNumber = Number(bonusNumberStr);
 
-    const gameResult = new GameResult(lottos, winningNumber, bonusNumber);
+    const gameResult = new GameResult(
+      lottos,
+      App.parseWinningNumber(winningNumberStr),
+      Number(bonusNumberStr)
+    );
+
     gameResult.show();
   }
 
