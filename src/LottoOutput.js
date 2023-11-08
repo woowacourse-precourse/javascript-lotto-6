@@ -32,3 +32,11 @@ export function printLottoStatistics(matchedCounts) {
 
   return winningCountData;
 }
+
+export function printProfitRate(amount, winningData) {
+  const totalPrice = Object.keys(winningData).reduce((acc, key) => {
+    return acc + (winningData[key].value * winningData[key].price);
+  }, 0);
+  const rate = ((totalPrice / amount) * 100).toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  MissionUtils.Console.print(`총 수익률은 ${rate}%입니다.`);
+}
