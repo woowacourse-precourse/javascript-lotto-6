@@ -17,11 +17,8 @@ class LottoController {
     this.#view.printCountOfLotto(countOfLotto);
     const lottoArray = this.#getLottoNumber(countOfLotto);
     this.#view.printLottoNumbers(lottoArray);
-    const goalNumber = await this.#view.getGoalNumber();
-    const goalLotto = new Lotto(goalNumber.split(',').map(Number));
-    validateGoalNumber(goalLotto.getNumbers().sort((a, b) => a - b));
-    const bonusNumber = await this.#view.getBonusNumber();
-    validateBonusNumber(bonusNumber, goalLotto.getNumbers());
+    const goalLotto = await this.#view.getGoalNumber();
+    const bonusNumber = await this.#view.getBonusNumber(goalLotto.getNumbers());
     const correctArray = goalLotto.calculateCorrectNumber(lottoArray, bonusNumber);
     const resultArray = this.#calculateResult(correctArray);
     const rateOfReturn = this.#calculateRateOfReturn(resultArray, purchaseAmount);
