@@ -9,7 +9,12 @@ class LottoGame {
   }
 
   async #inputPurchaseCount() {
-    this.#count = (await Screen.inputPurchaseMoney()) / MONEY_UNIT;
+    try {
+      this.#count = (await Screen.inputPurchaseMoney()) / MONEY_UNIT;
+    } catch ({ message }) {
+      Screen.printErrorMessage(message);
+      await this.#inputPurchaseCount();
+    }
   }
 }
 

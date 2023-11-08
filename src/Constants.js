@@ -1,5 +1,12 @@
+export const ERROR_PREFIX = '[ERROR]';
+
 export const MESSAGES = Object.freeze({
   purchaseMoneyInputMessage: '구입금액을 입력해 주세요.',
+});
+
+export const ERROR = Object.freeze({
+  moneyNumberErrorMessage: '구입금액은 양의 정수여야 합니다.',
+  moneyUnitErrorMessage: '구입금액은 1,000원 단위여야 합니다.',
 });
 
 export const MONEY_UNIT = 1000;
