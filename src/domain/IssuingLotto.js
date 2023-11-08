@@ -5,11 +5,8 @@ import { NUMBER_OPTIONS } from '../service/Constants.js';
 class IssuingLotto {
   #count;
 
-  #issuedLotto;
-
   constructor(count) {
     this.#count = count;
-    this.#issueLotto();
   }
 
   #getRandomNumbers() {
@@ -28,13 +25,18 @@ class IssuingLotto {
       const numbers = this.#getRandomNumbers();
       const lotto = new Lotto(numbers);
       const lottoNumbers = lotto.getNumbers();
+
       lottoNumbers.sort((prev, follow) => prev - follow);
 
       usersLotto.push(lottoNumbers);
     }
 
-    this.#issuedLotto = usersLotto;
     return usersLotto;
+  }
+
+  getLottoList() {
+    const lottoList = this.#issueLotto();
+    return lottoList;
   }
 }
 
