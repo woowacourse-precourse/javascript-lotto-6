@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import MESSAGES from '../constants/messages.js';
+import Messages from '../constants/Messages.js';
 
 const InputView = {
   getLottoPrice() {
-    return Console.readLineAsync(`${MESSAGES.LOTTO_PRICE_INPUT}\n`);
+    return Console.readLineAsync(`${Messages.LOTTO_PRICE_INPUT}\n`);
   },
 }
 
