@@ -9,8 +9,9 @@ class App {
   }
 
   async startGame() {
-      this.getLottoAmount();
-      this.getAnswerNumbers();
+      const lottos = this.getLottoAmount();
+      const answers= this.getAnswerNumbers();
+      this.getResult(lottos, answers);
   }
 
   async getLottoAmount(){
@@ -31,6 +32,7 @@ class App {
         const RANDOM_NUMBERS = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
         lottos.push(new Lotto(RANDOM_NUMBERS));
     }
+    return lottos;
   }
 
   async getAnswerNumbers(){
@@ -42,9 +44,25 @@ class App {
   }
 
   async getBonusNumber(answerNumbers){
+    const answers = [];
     const INPUT_BONUS_NUMBER = await MissionUtils.Console.readLineAsync(STRINGS.BONUS_NUMBER);
     Validation.validateBonusNumber(answerNumbers, INPUT_BONUS_NUMBER);
+    answers.push(answerNumbers);
+    answers.push(INPUT_BONUS_NUMBER);
+    return answers;
   }
+
+  async getResult(lottos, answers){
+    const matches = [];
+    const bonuses = [];
+    for(i = 0; i < lottos.length; i++){
+      const {match, bonus} = this.calculateScore(lottos[i], answers);
+      matches.push(match);
+      bonuses.push(bonus);
+    }
+    return this.calculateMatches(matches, bonuses);
+  }
+
 }
 
 export default App;
