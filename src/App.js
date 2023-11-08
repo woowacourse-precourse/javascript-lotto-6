@@ -11,7 +11,8 @@ class App {
       lotto.showResult(user_lotto_list);
       lotto.showRateOfReturn(user_lotto_list);
     } catch (error) {
-      console.log(error);
+      Console.print(error.message);
+      this.play();
     }
   }
 }
