@@ -82,9 +82,7 @@ class App {
 
     if(bonusNumber < 1 || bonusNumber > 45) throw new Error('[ERROR] : bonus number must be in range 1~45');
 
-    winningNumbers.forEach((winningNumber) => {
-      if(winningNumber == bonusNumber) throw new Error('[ERROR] : bonus number can not be duplicated with winning numbers.')
-    })
+    if(winningNumbers[bonusNumber]) throw new Error('[ERROR] : bonus number must be distinct with winning numbers.');
   }
 
   calculateLottoRanking = (matchCount, bonusCount) => {
@@ -166,52 +164,58 @@ class App {
   getUserInputPrice = async () => {
     let userInputPrice;
 
-    try{
-      MissionUtils.Console.print('\n구입금액을 입력해 주세요.');
-
-      const userInput = await this.getUserInput();
-      userInputPrice = this.stringToNumber(userInput);
-
-      this.checkIsValidPrice(userInputPrice);
-    } catch(err) {
-      MissionUtils.Console.print(err.message);
-
-      userInputPrice = await this.getUserInputPrice();
+    while(1) {
+      try{
+        MissionUtils.Console.print('\n구입금액을 입력해 주세요.');
+  
+        const userInput = await this.getUserInput();
+        userInputPrice = this.stringToNumber(userInput);
+  
+        this.checkIsValidPrice(userInputPrice);
+        break;
+      } catch(err) {
+        MissionUtils.Console.print(err.message);
+      }
     }
 
     return userInputPrice;
   }
 
   getUserInputWinningNumbers = async () => {
-    try {
-      MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
+    let lotto;
 
-      const userInputWinningNumbers = await this.getUserInput();
-      const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
-      const lotto = new Lotto(parsedWinnigNumbers);
+    while(1) {
+      try {
+        MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
+  
+        const userInputWinningNumbers = await this.getUserInput();
+        const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
+        lotto = new Lotto(parsedWinnigNumbers);
 
-      return lotto;
-    } catch(err) {
-      MissionUtils.Console.print(err.message);
-
-      const lotto = await this.getUserInputWinningNumbers();
-
-      return lotto;
+        break;
+      } catch(err) {
+        MissionUtils.Console.print(err.message);
+      }
     }
+
+    return lotto;
   }
 
   getUserInputBonusNumber = async () => {
     let bonusNumber;
 
-    try {
-      MissionUtils.Console.print('\n보너스 번호를 입력해 주세요.');
-  
-      const userInputBonusNumber = await this.getUserInput();
-      bonusNumber = this.stringToNumber(userInputBonusNumber);
-      this.checkBonusNumber(bonusNumber);
-    } catch(err) {
-      MissionUtils.Console.print(err.message);
-      bonusNumber = this.getUserInputBonusNumber();
+    while(1) {
+      try {
+        MissionUtils.Console.print('\n보너스 번호를 입력해 주세요.');
+    
+        const userInputBonusNumber = await this.getUserInput();
+        bonusNumber = this.stringToNumber(userInputBonusNumber);
+
+        this.checkBonusNumber(bonusNumber);
+        break;
+      } catch(err) {
+        MissionUtils.Console.print(err.message);
+      }
     }
 
     return bonusNumber;
