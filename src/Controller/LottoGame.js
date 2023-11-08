@@ -128,6 +128,7 @@ class LottoGame{
             this.#result.correct6 * 2000000000
         
         const rate = ( total / this.#money ) * 100
+        if(Number.isInteger(rate)) return rate
         return rate.toFixed(1)
     }
 }
