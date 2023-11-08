@@ -1,17 +1,13 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import { CONSOLE_MESSAGE, CONSTANT_NUMBERS } from './constants.js';
 import UserInput from './Input.js';
+import UserOutput from './Output.js';
 
 class App {
   async play() {
     const purchaseAmount = await UserInput.getPurchaseAmount();
-
     const numberOfLottoPurchased = purchaseAmount / CONSTANT_NUMBERS.THOUSAND;
-    Console.print(
-      CONSOLE_MESSAGE.NEW_LINE +
-        numberOfLottoPurchased +
-        CONSOLE_MESSAGE.PURCHASE_COUNT
-    );
+    UserOutput.printNumberOfLotto(purchaseAmount);
 
     const userLottoNumbers = [];
     for (let i = 0; i < numberOfLottoPurchased; i++) {
@@ -30,7 +26,7 @@ class App {
     const winningNumbersArray = await UserInput.getSixWinningNumbers();
     const bonusNumber = await UserInput.getBonusNumber(winningNumbersArray);
 
-    const winnings = Object.freeze({
+    const winningPrize = Object.freeze({
       three: CONSTANT_NUMBERS.THREE_PRIZE,
       four: CONSTANT_NUMBERS.FOUR_PRIZE,
       five: CONSTANT_NUMBERS.FIVE_PRIZE,
@@ -39,13 +35,13 @@ class App {
     });
 
     let totalWinnings = 0;
-    let threeNumbersHitCount = 0;
-    let fourNumbersHitCount = 0;
-    let fiveNumbersHitCount = 0;
-    let fiveNumbersWithBonusHitCount = 0;
-    let sixNumbersHitCount = 0;
-
-    Console.print(CONSOLE_MESSAGE.RESULT_STATISTICS);
+    let winningCounts = {
+      three: 0,
+      four: 0,
+      five: 0,
+      fiveBonus: 0,
+      six: 0,
+    };
 
     for (const numbers of userLottoNumbers) {
       let hitCount = 0;
@@ -60,59 +56,39 @@ class App {
       }
       switch (hitCount) {
         case 3:
-          threeNumbersHitCount += 1;
-          totalWinnings += winnings['three'];
+          winningCounts.three += 1;
+          totalWinnings += winningPrize.three;
           break;
         case 4:
-          fourNumbersHitCount += 1;
-          totalWinnings += winnings['four'];
+          winningCounts.four += 1;
+          totalWinnings += winningPrize.four;
           break;
         case 5:
           if (bonusHit) {
-            fiveNumbersWithBonusHitCount += 1;
-            totalWinnings += winnings['fiveBonus'];
+            winningCounts.fiveBonus += 1;
+            totalWinnings += winningPrize.fiveBonus;
           } else {
-            fiveNumbersHitCount += 1;
-            totalWinnings += winnings['five'];
+            winningCounts.five += 1;
+            totalWinnings += winningPrize.five;
           }
           break;
         case 6:
-          sixNumbersHitCount += 1;
-          totalWinnings += winnings['six'];
+          winningCounts.six += 1;
+          totalWinnings += winningPrize.six;
           break;
         default:
           break;
       }
     }
 
-    // 당첨 통계 출력
-    Console.print(
-      CONSOLE_MESSAGE.CORRECT_THREE +
-        threeNumbersHitCount +
-        CONSOLE_MESSAGE.COUNT
-    );
-    Console.print(
-      CONSOLE_MESSAGE.CORRECT_FOUR + fourNumbersHitCount + CONSOLE_MESSAGE.COUNT
-    );
-    Console.print(
-      CONSOLE_MESSAGE.CORRECT_FIVE + fiveNumbersHitCount + CONSOLE_MESSAGE.COUNT
-    );
-    Console.print(
-      CONSOLE_MESSAGE.CORRECT_FIVE_BONUS +
-        fiveNumbersWithBonusHitCount +
-        CONSOLE_MESSAGE.COUNT
-    );
-    Console.print(
-      CONSOLE_MESSAGE.CORRECT_SIX + sixNumbersHitCount + CONSOLE_MESSAGE.COUNT
-    );
+    UserOutput.printStatistics(winningCounts);
 
     const rateToReturn = (
       ((totalWinnings - purchaseAmount) / purchaseAmount) *
       100
     ).toFixed(1);
-    Console.print(
-      CONSOLE_MESSAGE.TOTAL_PROFIT_IS + rateToReturn + CONSOLE_MESSAGE.PERCENT
-    );
+
+    UserOutput.printRateToReturn(rateToReturn);
   }
 }
 

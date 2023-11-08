@@ -9,7 +9,7 @@ const CONSOLE_MESSAGE = Object.freeze({
   CORRECT_THREE: '3개 일치 (5,000원) - ',
   CORRECT_FOUR: '4개 일치 (50,000원) - ',
   CORRECT_FIVE: '5개 일치 (1,500,000원) - ',
-  CORRECT_FIVE_BONUS: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  CORRECT_FIVEBONUS: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
   CORRECT_SIX: '6개 일치 (2,000,000,000원) - ',
   COUNT: '개',
 
@@ -30,6 +30,7 @@ const CONSTANT_NUMBERS = Object.freeze({
   LOTTO_NUMBER_MIN: 1,
   LOTTO_NUMBER_MAX: 45,
   LOTTO_NUMBER_COUNT: 6,
+
   THREE_PRIZE: 5000,
   FOUR_PRIZE: 50000,
   FIVE_PRIZE: 1500000,

@@ -1,9 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import {
-  CONSOLE_MESSAGE,
-  ERROR_MESSAGE,
-  CONSTANT_NUMBERS,
-} from './constants.js';
+import { CONSOLE_MESSAGE, CONSTANT_NUMBERS } from './constants.js';
+import Validation from './Validation.js';
 
 class UserInput {
   // 구입 금액 입력
@@ -12,14 +9,7 @@ class UserInput {
       CONSOLE_MESSAGE.TYPE_PURCHASE_AMOUNT
     );
     const purchaseAmount = parseInt(purchaseAmountInput);
-
-    if (isNaN(purchaseAmount)) {
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-    }
-
-    if (purchaseAmount % CONSTANT_NUMBERS.THOUSAND != 0) {
-      throw new Error(ERROR_MESSAGE.NOT_DIVISIBLE_BY_THOUSAND);
-    }
+    Validation.validatePurchaseAmount(purchaseAmount);
     return purchaseAmount;
   }
 
@@ -34,23 +24,17 @@ class UserInput {
     for (const stringNumber of winningNumbersStringArray) {
       const integerNumber = parseInt(stringNumber);
 
-      if (isNaN(integerNumber)) {
-        throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-      }
-
-      if (integerNumber < 1 || integerNumber > 45) {
-        throw new Error(ERROR_MESSAGE.BETWEEN_MIN_AND_MAX);
-      }
+      Validation.checkIfNumber(integerNumber);
+      Validation.checkIfNumberInRange(
+        integerNumber,
+        CONSTANT_NUMBERS.LOTTO_NUMBER_MIN,
+        CONSTANT_NUMBERS.LOTTO_NUMBER_MAX
+      );
       winningNumbersArray.push(integerNumber);
     }
+    Validation.checkDuplicate(winningNumbersArray);
+    Validation.checkWinningNumberCount(winningNumbersArray);
 
-    if (new Set(winningNumbersArray).size !== winningNumbersArray.length) {
-      throw new Error(ERROR_MESSAGE.DUPLICATED);
-    }
-
-    if (winningNumbersArray.length !== 6) {
-      throw new Error(ERROR_MESSAGE.SHOULD_BE_SIX);
-    }
     return winningNumbersArray;
   }
 
@@ -59,14 +43,9 @@ class UserInput {
     const bonusNumberInput = await Console.readLineAsync(
       CONSOLE_MESSAGE.TYPE_BONUS_NUMBER
     );
-
     const bonusNumber = parseInt(bonusNumberInput);
-    if (isNaN(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-    }
-    if (winningNumbersArray.includes(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.DUPLICATED);
-    }
+    Validation.checkIfNumber(bonusNumber);
+    Validation.checkIfArrayHasThisNumber(winningNumbersArray, bonusNumber);
     return bonusNumber;
   }
 }
