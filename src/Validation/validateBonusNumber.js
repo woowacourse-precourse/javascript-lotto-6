@@ -3,7 +3,7 @@ function validateBonusNumber(bonusNumberInput, winningNumbers) {
     return false;
   }
 
-  if (winningNumbers.includes(bonusNumberInput)) {
+  if (winningNumbers.includes(Number(bonusNumberInput))) {
     return false;
   }
 
