@@ -1,17 +1,24 @@
+import LottoValidation from "./LottoValidation.js";
+
 export const LOTTO_PRICE = 1000;
+export const LOTTO_NUMBER_RANGE = Object.freeze({
+  MIN: 1,
+  MAX: 45,
+});
+export const LOTTO_NUMBER_COUNT = 6;
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    LottoValidation.validate(numbers);
+
     this.#numbers = numbers;
+    this.#numbers.sort((x, y) => x - y);
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  get numbers() {
+    return this.#numbers;
   }
 
   static calculateQuantityFromPrice(price) {
