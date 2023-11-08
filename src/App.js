@@ -13,6 +13,7 @@ class App {
     const purchaseAmount = await MissionUtils.Console.readLineAsync(
       "구입금액을 입력해 주세요.\n"
     );
+    MissionUtils.Console.print("");
     return parseInt(purchaseAmount);
   }
   makeLottos(purchaseAmount) {
@@ -28,8 +29,9 @@ class App {
   printLottos(lottos) {
     MissionUtils.Console.print(`${lottos.length}개를 구매했습니다.`);
     for (const lotto of lottos) {
-      MissionUtils.Console.print(lotto.getNumbers());
+      MissionUtils.Console.print("[" + lotto.toString() + "]");
     }
+    MissionUtils.Console.print("");
   }
   async getFullWinningNumbers() {
     const formattingWinningNumbers = await this.getWinningNumbers();
@@ -41,8 +43,9 @@ class App {
   }
   async getWinningNumbers() {
     const winningNumbers = await MissionUtils.Console.readLineAsync(
-      "지난 주 당첨 번호를 입력해 주세요.\n"
+      "당첨 번호를 입력해 주세요.\n"
     );
+    MissionUtils.Console.print("");
     const formattingWinningNumbers = this.isValidWinningNumbers(
       winningNumbers.split(",").map((num) => parseInt(num)),
       6
@@ -53,6 +56,7 @@ class App {
     const bonusNumber = await MissionUtils.Console.readLineAsync(
       "보너스 번호를 입력해 주세요.\n"
     );
+    MissionUtils.Console.print("");
     const formattingFullWinningNumbers = [
       ...formattingWinningNumbers,
       parseInt(bonusNumber),
@@ -105,16 +109,17 @@ class App {
     return prizes[idx];
   }
   printResult(results) {
+    MissionUtils.Console.print("당첨 통계");
+    MissionUtils.Console.print("---");
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${results[1]}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${results[2]}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${results[3]}개`);
     MissionUtils.Console.print(
-      `당첨 통계\n---------\n3개 일치 (5000원)- ${
-        results[1]
-      }개\n4개 일치 (50000원)- ${results[2]}개\n5개 일치 (1500000원)- ${
-        results[3]
-      }개\n5개 일치, 보너스 볼 일치 (30000000원)- ${
-        results[4]
-      }개\n6개 일치 (2000000000원)- ${
-        results[5]
-      }개\n총 수익률은 ${this.getProfitRate(results)}%입니다.`
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${results[4]}개`
+    );
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${results[5]}개`);
+    MissionUtils.Console.print(
+      `총 수익률은 ${this.getProfitRate(results)}%입니다.`
     );
   }
 }
