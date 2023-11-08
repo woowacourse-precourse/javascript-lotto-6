@@ -19,10 +19,10 @@ class LottoController {
 
   creatUserObject(userLottoQuanitiy) {
     this.#user = new User(userLottoQuanitiy);
-    return this.printResult(userLottoQuanitiy);
+    this.printUserLottoQuanitiy(userLottoQuanitiy);
   }
 
-  printResult(userLottoQuanitiy) {
+  printUserLottoQuanitiy(userLottoQuanitiy) {
     OutputView.printUserLottoQuanitiy(userLottoQuanitiy);
     OutputView.printLottoList(this.#user);
   }
