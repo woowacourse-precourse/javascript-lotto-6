@@ -1,4 +1,4 @@
-import { Random } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import { LOTTO } from "../Constants/Constant";
 
 export default class Generation{
@@ -6,19 +6,21 @@ export default class Generation{
     #lottoNum;
 
     constructor(){
-        this.#lottoNum = []
+        this.#lottoNum = [];
     }
 
-    create(){
-        while(this.#lottoNum.length < LOTTO.MAX_COUNT){
-            const winnigNum = Random.pickNumberInRange(LOTTO.MIN_NUM, LOTTO.MAX_NUM)
-            this.#lottoNum.push(winnigNum)
-            
+    #create(){
+        return Random.pickUniqueNumbersInRange(LOTTO.MIN_NUM, LOTTO.MAX_NUM, LOTTO.MAX_COUNT) 
+    }
+    
+    list(num){
+        for(let i = 0; i < num; i++){
+            const Arr = this.#create();
+            this.#lottoNum.push(Arr)
         }
     }
 
     getNum(){
-        this.create()
-        return this.#lottoNum;
+        return this.#lottoNum
     }
 }
