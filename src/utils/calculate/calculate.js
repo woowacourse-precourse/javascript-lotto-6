@@ -49,4 +49,4 @@ const countIncludeNumbers = (lottoResults, winningNumbers, bonusNumber, lottoNum
   return updatedLottoResults;
 };
 
-export { calculateProfit, calculateProfitRate, countIncludeNumbers };
+export { calculateProfit, calculateProfitRate, countIncludeNumbers, matchedLottoNumbers, filterLottoNumbers };
