@@ -6,6 +6,7 @@ class Buyer {
   #money;
 
   #lottos; // @type {Array<Lotto>}
+  #prizes;
 
   constructor(money) {
     this.#validate(money);
@@ -18,6 +19,11 @@ class Buyer {
 
   buyLottos(lottoFactory = new LottoFactory()) {
     this.#lottos = lottoFactory.exchangeLottos(this.#money);
+  }
+
+  receivePrizes(lottoResult) {
+    this.#prizes = lottoResult.countPrizes(this.#lottos);
+    return this.#prizes;
   }
 
   #validate(money) {
