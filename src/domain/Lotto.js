@@ -1,4 +1,4 @@
-class Lotto {
+export default class Lotto {
   #numbers;
   #correctTarget = 0;
   #correctBonus = 0;
@@ -42,5 +42,3 @@ class Lotto {
     return 0;
   }
 }
-
-export default Lotto;

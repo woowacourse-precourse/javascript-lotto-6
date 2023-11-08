@@ -4,7 +4,7 @@ import GenerateLottoNumbers from "../domain/GenerateLottoNumbers.js";
 import LottoResultCalculator from "../domain/LottoResultCalculator.js";
 import ProfitCalculator from "../domain/ProfitCalculator.js";
 
-class LottoController {
+export default class LottoController {
   #purchasePrice;
   #lottos;
   #winningNumbers;
@@ -64,5 +64,3 @@ class LottoController {
     OutputView.printResult(this.#roi, this.#result);
   }
 }
-
-export default LottoController;
