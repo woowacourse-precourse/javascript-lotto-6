@@ -45,16 +45,16 @@ class App {
     });
   }
 
+  computePrize() {
+    this.#computer = new Computer(this.#prizeNumber, this.#bonusNumber, this.#cost);
+    this.#computer.setPrizeResult(this.#lottos);
+  }
+
   printLottos() {
     print(`${this.#cost / NUMBER.divisor}개를 구매했습니다.`);
     this.#lottos.forEach((lotto) => {
       print(`[${lotto.getNumbers().join(', ')}]`);
     });
-  }
-
-  computePrize() {
-    this.#computer = new Computer(this.#prizeNumber, this.#bonusNumber, this.#cost);
-    this.#computer.setPrizeResult(this.#lottos);
   }
 
   printPrizeResult() {
