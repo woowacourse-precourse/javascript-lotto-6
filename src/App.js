@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from './Lotto.js';
 
 class App {
   async play() {
@@ -16,8 +17,11 @@ class App {
     while(count--) {
       lottoList.push(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
     }
+    MissionUtils.Console.print(lottoList);
 
-    console.log(lottoList);
+    // 당첨 번호 입력
+    const win = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const lotto = new Lotto(win.split(','));
   }
 }
 
