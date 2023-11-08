@@ -57,9 +57,7 @@ class App {
   }
 
   callResults(winning, bonus, counts) {
-    this.results = new Results(model.lottoNumbers, winning, bonus, counts)
-    //console.log(model.winningResults)
-    //console.log(model.winning)
+    new Results(model.lottoNumbers, winning, bonus, counts)
   }
 
   inputNumberComment() {

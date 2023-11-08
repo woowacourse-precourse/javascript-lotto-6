@@ -2,6 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { model } from "./Model.js";
 
 export class Results {
+  #results = [0,0,0,0,0];
 
   constructor(lotto, winning, bonus, count) {
     this.lotto = lotto;
@@ -12,6 +13,7 @@ export class Results {
   }
 
   #lottosReader(lotto, winning, bonus, count) {
+    model.winningResults = [];
     for (let i = 0; i < count; i++) {
       const result = this.#lottoReader(lotto[i], winning, bonus)
       model.winningResults.push(result);
@@ -34,7 +36,7 @@ export class Results {
       this.#lottoResultCounter(results[i]);
     }
 
-    this.#lottoResultsPrinter(model.winning);
+    this.#lottoResultsPrinter(this.#results);
   }
 
   #lottoResultCounter(result) {
@@ -50,26 +52,26 @@ export class Results {
 
   #lottoRatingCounter(sameCounts) {
     if (sameCounts === 3) {
-      model.winning[0] += 1;
+      this.#results[0] += 1;
       model.totalPrize += model.prize[0];
       return true;
     }
     if (sameCounts === 4) {
-      model.winning[1] += 1;
+      this.#results[1] += 1;
       model.totalPrize += model.prize[1];
       return true;
     }
-    model.winning[4] += 1;
+    this.#results[4] += 1;
     model.totalPrize += model.prize[4];
   }
 
   #lottoResultBonusCounter(result) {
     if (result[1] === 0) {
-      model.winning[2] += 1;
+      this.#results[2] += 1;
       model.totalPrize += model.prize[2];
       return true;
     }
-    model.winning[3] += 1;
+    this.#results[3] += 1;
     model.totalPrize += model.prize[3];
   }
 
