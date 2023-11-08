@@ -11,11 +11,12 @@ class App {
   #lottoList;
   #winningLottoNumbers;
   #bonusNumber;
+  #inputMoney;
   async play() {
-    const inputMoney = await MissionUtils.Console.readLineAsync(
+    this.#inputMoney = await MissionUtils.Console.readLineAsync(
       '구입금액을 입력해 주세요.\n'
     );
-    const lottoCnt = getLottoCntFromInputMoney(inputMoney);
+    const lottoCnt = getLottoCntFromInputMoney(this.#inputMoney);
 
     this.#lottoList = new LottoList(lottoCnt).getLottoList();
 
@@ -33,6 +34,7 @@ class App {
     this.winningStat();
   }
   winningStat() {
+    let sum = 0;
     const stat = [];
     const winningStat = {
       3: {
@@ -81,6 +83,7 @@ class App {
     Object.values(winningStat).forEach((item) => {
       if (item.message) {
         MissionUtils.Console.print(`${item.message} - ${item.count}개`);
+        sum += item.price * item.count;
       } else {
         MissionUtils.Console.print(
           `${item.false.message} - ${item.false.count}개`
@@ -88,8 +91,12 @@ class App {
         MissionUtils.Console.print(
           `${item.true.message} - ${item.true.count}개`
         );
+        sum += item.false.price * item.false.count;
+        sum += item.true.price * item.true.count;
       }
     });
+    const totalReturnRate = (sum / Number(this.#inputMoney)) * 100;
+    MissionUtils.Console.print(`총 수익률은 ${totalReturnRate}%입니다.`);
   }
 }
 
