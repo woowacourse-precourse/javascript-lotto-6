@@ -14,7 +14,7 @@ export default class Logger {
   printLottoNumbers(lottos) {
     const lottoAmount = lottos.length;
 
-    Console.print(`${lottoAmount}개를 구매했습니다.`);
+    Console.print(`\n${lottoAmount}개를 구매했습니다.`);
     lottos
       .map((lotto) => lotto.getNumbers())
       .map((lotto) => this.#arrayToPrettyString(lotto))
@@ -35,7 +35,7 @@ export default class Logger {
    * @param {number} returnRate
    */
   printWinningBoard(board, returnRate) {
-    Console.print("당첨 통계");
+    Console.print("\n당첨 통계");
     Console.print("---");
 
     Object.keys(board).forEach((fieldName) => {
