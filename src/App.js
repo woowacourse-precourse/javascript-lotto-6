@@ -4,7 +4,9 @@ class App {
   async play() {
     try {
       let [count, change] = await this.userPriceInput();
-      await this.printCnt(count, change);
+      this.printCnt(count, change);
+      const lotto = this.printLottoNumber(count);
+
     } catch (error) {
       [count, change] = await this.userPriceInput();
     }
@@ -34,6 +36,25 @@ class App {
     if (change > 0) {
       MissionUtils.Console.print(`거스름돈은 ${change}원입니다.`)
     }
+  }
+
+  printLottoNumber(count) {
+    const lotto = [];
+    for (let i = 0; i < count; i++) {
+      const random = this.generateRandomNumber(6);
+      MissionUtils.Console.print(`[${random.join(',')}]`);
+      lotto.add();
+    }
+    return lotto;
+  }
+  
+  generateRandomNumber(len) {
+    const randomList = new Set();
+    while (randomList.size < len) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 45);
+      randomList.push(randomNumber);
+    }
+    return randomList.sort();
   }
 }
   
