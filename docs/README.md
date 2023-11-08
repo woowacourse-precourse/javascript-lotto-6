@@ -9,7 +9,7 @@ ver 1.0
 ## coverage
 File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ------------------------|---------|----------|---------|---------|-------------------
-All files               |   85.38 |    97.36 |   83.58 |   85.53 |                   
+All files               |   85.79 |    97.05 |   84.05 |   85.88 |                   
  src                    |     100 |      100 |     100 |     100 |                   
   -App.js               |     100 |      100 |     100 |     100 |                   
   -Lotto.js             |     100 |      100 |     100 |     100 |                   
@@ -19,18 +19,19 @@ All files               |   85.38 |    97.36 |   83.58 |   85.53 |
   -STRINGS.js           |     100 |      100 |     100 |     100 | 
  src/functinoal         |     100 |      100 |     100 |     100 | 
   -Functional.js        |     100 |      100 |     100 |     100 | 
- src/functinoal/modules |   98.01 |    96.42 |   97.43 |    98.9 | 
-  -ConvertInputTo.js    |     100 |      100 |     100 |     100 | 
+ src/functinoal/modules |   98.09 |    95.83 |   97.56 |   98.93 | 
+  -ConvertInputTo.j     |     100 |      100 |     100 |     100 | 
   -ErrorCheck.js        |     100 |      100 |     100 |     100 | 
   -Get.js               |     100 |      100 |     100 |     100 | 
-  -Is.js                |   94.11 |    92.85 |     100 |     100 | 7
-  -Print.js             |   95.23 |      100 |   91.66 |   95.23 | 75
+  -Is.js                |   93.33 |    91.66 |     100 |     100 | 7
+  -Print.js             |   95.23 |      100 |   91.66 |   95.23 | 76
  src/mvc/model          |      80 |      100 |   66.66 |   78.57 | 
-  -LottoModel.js        |      80 |      100 |   66.66 |   78.57 | 33~37,50
+  -LottoModel.js        |      80 |      100 |   66.66 |   78.57 | 33-37,50
  src/mvc/model/utils    |   54.54 |      100 |    62.5 |      60 | 
-  -Get.js               |   54.54 |      100 |    62.5 |      60 | 37~40,50
+  -Get.js               |   54.54 |      100 |    62.5 |      60 | 37-40,50
  src/mvc/view           |   21.05 |      100 |   33.33 |   21.05 | 
-  -LottoOutputView.js   |   21.05 |      100 |   33.33 |   21.05 | 37~89
+  -LottoOutputView.js   |   21.05 |      100 |   33.33 |   21.05 | 37-89
+
 
 
 # `App`
@@ -495,6 +496,8 @@ const sum = Get.sumOfArray([1,2,3]);
 
 예외 상황인지 확인해, 예외인 경우 예외를 던지는 함수들
 
+본 모듈의 사용예시는 모두 예외를 던지지 않는 경우임
+
 ### `purchasePrice(string, lottoPrice)`
 
 - `string` 이 `lottoPrice`에 맞는 로또 구매 금액이 될 수 있는 문자열인지 확인해, 그렇지 않으면 예외를 던짐
@@ -519,9 +522,101 @@ ErrorCheck.purchasePrice('10000', 1000);
 ErrorCheck.lottoNumbersString('1,2,3,4,5,6');
 ```
 
+### `bonusNumberString(string, winningNumbers)`
 
+- `string`이 로또 수이면서, `winningNumbers` 없는 수인지 확인하고, 아니라면 예외를 던짐
 
+```jsx
+ErrorCheck.bonusNumberString('7',[1,2,3,4,5,6]);
+```
 
+**매개변수**
+
+`string`
+
+문자열
+
+`winningNumbers`
+
+당첨 숫자들이 담긴 배열
+
+### `lottoNumber(number)`
+
+- `number`가 로또 수(1~45사이의 정수)인지 확인하고, 아니라면 예외를 던짐
+
+```jsx
+ErrorCheck.lottoNumber('1');
+```
+
+### `positiveIntegerString(string)`
+
+- `string`이 양의 정수로 바꿀 수 있는 문자열인지 확인하고, 아니라면 예외를 던짐
+
+```jsx
+ErrorCheck.positiveIntegerString('1');
+```
+
+### `multiplesInPositive(multiplier, multiplicand)`
+
+- `multiplier`가 `multiplier` 의 양의 배수인지 확인하고, 아니라면 예외를 던짐
+
+```jsx
+ErrorCheck.multiplesInPositive(1000, 20);
+```
+
+### `arrayLikeLength(arrayLike, length)`
+
+- `arrayLike`(유사배열 객체)의 길이가 `length`와 같은지 확인하고, 아니라면 예외를 던짐
+
+```jsx
+ErrorCheck.arrayLikeLength([1,2,3], 3);
+```
+
+### `numberInRange(number, lower, upper)`
+
+- `number`가 `lower`와 `upper` 사이의 값인지 확인하고, 아니라면 예외를 던짐
+
+```jsx
+ErrorCheck.numberInRange(3,1,45);
+```
+
+### `numberInRange(number, lower, upper)`
+
+- `number`가 `lower`와 `upper` 사이의 값인지 확인하고, 아니라면 예외를 던짐
+
+```jsx
+ErrorCheck.numberInRange(3,1,45);
+```
+
+### `differentElementArray(array)`
+
+- `array` 내에 중복되는 요소가 없는지 확인하고, 아니라면 예외를 던짐
+
+```jsx
+ErrorCheck.differentElementArray([1,2,3]);
+```
+
+## Is
+
+`boolean` 값을 반환하는 함수들
+
+### `positiveIntegerString(string)`
+
+- `string` 이 양의 정수로 바꿀 수 있는 문자열인지 확인해서 바꿀수 있으면 `true`, 아니면 `false` 를 반환
+
+```jsx
+Is.positiveIntegerString('1'); // true
+Is.positiveIntegerString('-1'); // false
+```
+
+### `multiplesInPositive(multiplier, multiplicand)`
+
+- `multiplier` 이 `multiplicand`의 양의 배수인지 확인해서 맞으면 `true`, 아니면 `false` 를 반환
+
+```jsx
+Is.multiplesInPositive(10,2); // true
+Is.multiplesInPositive(0,2); // false
+```
 
 구현해야할 기능
 - [x] 구입 금액 입력
