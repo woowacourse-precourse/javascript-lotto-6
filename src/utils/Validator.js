@@ -28,7 +28,7 @@ const Validator = {
 
   validateLottoLength(numbers) {
     if (numbers.length !== condition.lottoNumbersLength) {
-      throw error.lottoNumbersLengthError;
+      throw error.LottoNumbersLengthError;
     }
   },
 
@@ -61,7 +61,7 @@ const Validator = {
   validateBonusNumberDuplicate(winningNumbers, bonusNumber) {
     const totalNumbers = [...winningNumbers, bonusNumber];
     const totalNumbersLength =
-      condition.lottoNumbersLength + condition.bonusNumberLength;
+      condition.LottoNumbersLength + condition.bonusNumberLength;
 
     if (new Set(totalNumbers).size !== totalNumbersLength) {
       throw error.LottoNumbersDuplicationError;
