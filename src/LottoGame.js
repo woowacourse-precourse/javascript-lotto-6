@@ -16,23 +16,22 @@ class LottoGame {
   }
 
   async start() {
-    // const amountStr = await IO.receiveUserInput(NORMAR_MSG.AMOUNT_INPUT);
-    // Validation.isNumber(amountStr, ERROR_MSG.AMOUNT_FORMAT_ERROR);
-    let amountStr = '';
-
     let flag = false;
+    
+    let amountStr = '';
+    let amount = 0;
     do {
       try {
         amountStr = await IO.receiveUserInput(NORMAR_MSG.AMOUNT_INPUT);
         Validation.isNumber(amountStr, ERROR_MSG.AMOUNT_FORMAT_ERROR);
+        amount = Number(amountStr);
+        Validation.isDivisible(amount);
         flag = true;
       } catch(e) {
         IO.printMsg(e.message);
       }
     } while(!flag);
 
-    const amount = Number(amountStr);
-    Validation.isDivisible(amount);
 
     const lottoNum = this.calculateLottomNum(amount);
     IO.printMsg(`\n${lottoNum}개를 구매했습니다.`);
