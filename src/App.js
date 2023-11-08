@@ -4,11 +4,15 @@ import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE, PRIZE } from "./constants/consta
 class App {
   constructor() {
     this.userRandomList = [];
+
     this.winningThree = 0;
     this.winningFour = 0;
     this.winningFive = 0;
     this.winningBonus = 0;
     this.winningSix = 0;
+
+    this.isBonus = false;
+
     this.pattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
   }
 
@@ -23,7 +27,7 @@ class App {
     const winningNumsList = await this.getWinningNumbers();
     const bonus = await this.getBonus(winningNumsList);
 
-    this.checkWinningResults(this.userMoney, winningNumsList, bonus);
+    this.checkWinningResults(winningNumsList, bonus);
   }
 
   async getUserMoney() {
@@ -34,9 +38,7 @@ class App {
       this.checkInputIsNull(inputMoney);
       this.userMoney = Number(inputMoney);
       this.checkRemains();
-      // if (this.userMoney % 1000 > 0 || this.userMoney <= 0) {
-      //   throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
-      // }
+
       return this.userMoney;
 
     } catch (error) {
@@ -124,7 +126,7 @@ class App {
       this.checkInputIsNull(inputBonus);
       this.checkInputIsNaN(inputBonus);
       this.checkNumsRange(Number(inputBonus));
-      this.checkIsIncludes(inputBonus, winningNumsList);
+      this.checkIsIncludes(inputBonus, winningNumsList, false);
       
       return Number(inputBonus);
 
@@ -140,20 +142,22 @@ class App {
     }
   };
 
-  checkIsIncludes(input, list) {
+  checkIsIncludes(input, list, bonusCase) {
     if (list.includes(Number(input))) {
-      throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+    switch (bonusCase) {
+      case false:
+        throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+      default:
+        this.isBonus = true;
+    }
     }
   };
 
-  checkWinningResults(userMoney, winningNumsList, bonus) {
+  checkWinningResults(winningNumsList, bonus) {
     for (let i = 0; i < this.userRandomList.length; i++) {
-      let winningCount = this.userRandomList[i].filter(it => winningNumsList.includes(it)).length
-      let isBonus = false;
+      let winningCount = this.userRandomList[i].filter(it => winningNumsList.includes(Number(it))).length
 
-      if (this.userRandomList[i].includes(bonus)) {
-        isBonus = true;
-      }
+      this.checkIsIncludes(bonus, this.userRandomList[i], true)
       this.calcWinningCount(winningCount);
     }
 
@@ -173,7 +177,7 @@ class App {
         this.winningThree++;
         return;
       case 4:
-        if (isBonus) {
+        if (this.isBonus) {
           this.winningBonus++;
           return;
         }
