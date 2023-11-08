@@ -17,9 +17,9 @@
 
 #### 2. 로또 발행 단계
 
-- [ ] 발행한 로또 수량 출력
-- [ ] 발행한 로또 번호 출력 (오름차순으로 정렬하여 보여줌)
-- [ ] 로또 번호 발행 시 Random 값 추출은 `Random.pickUniqueNumbersInRange()`를 활용
+- [x] 발행한 로또 수량 출력
+- [x] 발행한 로또 번호 출력 (오름차순으로 정렬하여 보여줌)
+- [x] 로또 번호 발행 시 Random 값 추출은 `Random.pickUniqueNumbersInRange()`를 활용
 
 #### 3. 로또 당첨 번호 입력 단계
 

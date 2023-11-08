@@ -1,10 +1,9 @@
 import LottoController from "./controller/LottoController";
 
 class App {
-
   #controller;
-  
-  constructor(){
+
+  constructor() {
     this.#controller = new LottoController();
   }
 
