@@ -10,23 +10,24 @@
 
 #### __tests__
 
-- Unit Test와 Integration Test로 분리
-- 폴더명은 `camelCase`, 파일명은 `.test.js`로 작성
+- Unit Test와 Application Test로 분리
+- 폴더명은 `camelCase`, 파일명은 `PascalCase`로 작성
 
 #### docs
 
-- README(미션 개요), requirement(요구사항), convention(컨벤션)으로 분리
+- README(미션 개요), requirement(요구 사항), convention(컨벤션)으로 분리
 - 파일명은 `camelCase`(README 제외)로 작성
 
 #### src
 
-- MVC 패턴에 따라 model, controller, view로 분리
+- MVC 패턴에 따라 model, service, controller, view로 분리
 - 비즈니스 로직 외의 함수는 utils, 상수는 constants로 분리
 - 파일명은 함수는 `camelCase`, 클래스는 `PascalCase`로 작성
 
 ### 함수 및 상수
 
 - 함수명은 동사로 시작, 하나의 함수는 한 가지 일만 담당
+- 함수(또는 메서드)의 길이가 15라인을 넘지 않도록 구현
 - 코드 내 변수명과 클래스명은 영문만 사용
 - 상수는 `snake_case`로 작성
 
