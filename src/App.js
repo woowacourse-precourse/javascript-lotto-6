@@ -10,7 +10,34 @@ class App {
     const userLotto = this.generateAndPrintLotto();
     const winningLotto = this.getWinningLotto();
     const bonusLotto = this.getBonusLotto(winningLotto);
+    this.getResult(lottoCount, userLotto, winningLotto, bonusLotto);
   }
+
+  getResult(lottoCount, userLotto, winningLotto, bonusLotto) {
+    const resultArray = [];
+    for(let i=0; i<lottoCount; i++) {
+      const oneLotto = userLotto[i];
+      const result = this.getResultInOneLotto(oneLotto, winningLotto, bonusLotto);
+      resultArray.push(result);
+    }
+  }
+
+  getResultInOneLotto(oneLotto, winningLotto, bonusLotto) {
+    let count = 0;
+    let isBonus = false;
+    for(let i=0; i<6; i++) {
+      const oneNum = oneLotto[i];
+      if(winningLotto.includes(oneNum)) count++;
+    }
+    if(oneLotto.includes(bonusLotto)) isBonus = true;
+
+    return this.getRank(count, isBonus)
+  }
+
+  getProfit() {
+
+  }
+  
 
   async getBonusLotto(winning) {
     const bonusNumber = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
