@@ -1,4 +1,3 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
 import calculateProfit from "./calculateProfit";
 import OutputView from "../view/OutputView";
 
