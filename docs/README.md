@@ -50,24 +50,24 @@
 - 앞서 언급한 도메인 로직을 좀 더 세분화 시키고, 그 외 필요한 로직을 정리하면 아래와 같다.
 
 ### 🖥️ View 🖥️
-- [x] 구입금액을 입력한다. - Inputs 클래스의 inputMoney
-- [x] 구매한 로또 번호를 오름차순으로 정렬해서 구매한 순서대로 출력하여 준다. - Outputs 클래스의 printLottoList
-- [x] 당첨 번호를 입력 받는다. - Inputs 클래스의 inputNUmbers
-- [x] 보너스 번호를 입력 받는다. - Inputs 클래스의 inputBonus
-- [x] 당첨 통계를 출력한다. - Outputs 클래스의 printScore
-- [ ] 수익률을 출력한다.
+- [x] 구입금액을 입력한다. - UIUX 클래스의 inputMoney
+- [x] 구매한 로또 번호를 오름차순으로 정렬해서 구매한 순서대로 출력하여 준다. - UIUX 클래스의 printLotto
+- [x] 당첨 번호를 입력 받는다. - UIUX 클래스의 inputNumber
+- [x] 보너스 번호를 입력 받는다. - UIUX 클래스의 inputBonusNumber
+- [x] 당첨 통계를 출력한다. - UIUX 클래스의 printScore
+- [x] 수익률을 출력한다. - UIUX 클래스의 printEarningRate()
 
 ### 🎮 Controller 🎮
-- [x] 사용자의 구입금액을 입력 받아 이를 로또 생성 횟수로 바꾼다. - MoneyChanger 클래스의 contsructor
+- [x] 사용자의 구입금액을 입력 받아 이를 로또 생성 횟수로 바꾼다. - UIUX 클래스의 useLottoGenerator
     - [x] 예외 :: 1000으로 나누어떨어지지 않으면 "[ERROR]"로 시작하는 예외를 출력한다.
-- [x] 로또 생성 횟수를 바탕으로 로또를 생성한다. - LottoGenerator 클래스의 #generatLottos
-- [x] 생성된 사용자의 로또 번호를 넘겨준다. - Operator의 get lottoList
-- [x] 사용자의 당첨 번호를 입력받아 모델에 넘겨 준다. - Operator의 Constructor
-- [x] 사용자의 보너스 번호를 입력받아 모델에 넘겨 준다. - Operator의 Constructor
-- [x] 모델의 당첨 통계를 뷰에 넘겨준다. - Operator의 get Score
-- [ ] 모델의 수익률을 뷰에 넘겨준다.
-- [ ] 파악된 당첨 등수를 바탕으로 수익률을 계산한다.
-- [ ] 수익률을 읽는다.
+- [x] 로또 생성 횟수를 바탕으로 로또를 생성한다. - UIUX 클래스의 useLottoGenerator
+- [x] 생성된 사용자의 로또 번호를 넘겨준다. - UIUX 클래스의 printLotto
+- [x] 사용자의 당첨 번호를 입력받아 모델에 넘겨 준다. - UIUX 클래스의 useWinnerDecier
+- [x] 사용자의 보너스 번호를 입력받아 모델에 넘겨 준다. - UIUX 클래스의 useWinnerDecider
+- [x] 모델의 당첨 통계를 뷰에 넘겨준다. - UIUX의 printScore
+- [x] 모델의 수익률을 뷰에 넘겨준다. - EarningRate의 calEarningRate
+- [x] 파악된 당첨 등수를 바탕으로 수익률을 계산한다. - EarningRate의 calEarningRate
+- [x] 수익률을 읽는다.- EarningRate의 calEarningRate
 
 ### ⚙️ Model ⚙️
 - [x] 1개의 로또 발행 시, 1 이상 45 이하의 중복되지 않은 6개의 숫자를 생성한다. - LottoGenerator 클래스의 #generateLottos
