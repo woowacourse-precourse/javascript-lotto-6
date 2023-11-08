@@ -12,16 +12,14 @@ class App {
   async play() {
     try {
       const enteredAmount = await this.getAmountInput();
-      const game = new Game(enteredAmount);
-      game.getLottoTickets();
-      game.printTickets();
+      const LottoGame = new Game(enteredAmount);
+      LottoGame.generateTickets();
 
       const enteredWinningInfo = await this.getWinningInput();
-      game.draw(enteredWinningInfo);
+      LottoGame.draw(enteredWinningInfo);
 
-      const drawInfo = game.drawInfo;
-      const profitRate = game.getProfitRate();
-      this.printResult(drawInfo, profitRate);
+      const gameResultInfo = this.getResultInfo(LottoGame);
+      this.printResult(gameResultInfo);
     } catch (err) {
       Console.print('[ERROR]\n');
       this.play();
@@ -52,11 +50,18 @@ class App {
     };
   }
 
-  printResult(drawResult, profitRate) {
+  getResultInfo(gameInstance) {
+    const drawInfo = gameInstance.drawInfo;
+    const profitRate = gameInstance.getProfitRate();
+
+    return { drawInfo, profitRate };
+  }
+
+  printResult({ drawInfo, profitRate }) {
     Console.print(MESSAGES.OUTPUT_RESULT_TITLE);
 
     for (let i = 5; i >= 1; i--) {
-      Console.print(MESSAGES.OUTPUT_RESULT_DETAILS(i, drawResult[RANK[i]]));
+      Console.print(MESSAGES.OUTPUT_RESULT_DETAILS(i, drawInfo[RANK[i]]));
     }
 
     Console.print(MESSAGES.OUTPUT_RETURN(profitRate.toFixed(1)));
