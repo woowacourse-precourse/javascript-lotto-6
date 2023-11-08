@@ -1,5 +1,5 @@
 import { AlertError } from './utils/AlertError.js';
-import { MESSAGE, ERROR, LOTTERY } from './constants.js';
+import { ERROR, LOTTERY } from './constants.js';
 export default class Lotto {
   #numbers;
 

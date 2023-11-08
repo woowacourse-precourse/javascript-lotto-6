@@ -1,5 +1,5 @@
-import { Console, Random } from '@woowacourse/mission-utils';
-import { MESSAGE, LOTTERY, LOTTERY_WINNINGS } from './constants.js';
+import { Console } from '@woowacourse/mission-utils';
+import { MESSAGE, LOTTERY_WINNINGS } from './constants.js';
 import LottoManager from './LottoManager.js';
 import InputManager from './InputManager.js';
 import { NumberConverter, ArrayConverter } from './utils/converter.js';
