@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Output {
   boughtTickets(lottoTickets, count) {
     Console.print(`${count}개를 구매했습니다.`);
@@ -23,3 +25,4 @@ class Output {
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 }
+

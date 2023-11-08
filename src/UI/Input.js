@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Input {
   async price() {
     try {
@@ -26,3 +28,5 @@ class Input {
     }
   }
 }
+
+
