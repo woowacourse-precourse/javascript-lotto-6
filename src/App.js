@@ -1,5 +1,6 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import Checker from "./Checker.js";
 
 class UserInputHandler {
   async getUserInput(question) {
@@ -14,12 +15,13 @@ class App {
   #bonusNumber;
   #winningNumbers;
   #result;
-  #price;
+  #checker;
 
   constructor() {
     this.#userInputHandler = new UserInputHandler();
     this.#lottos = [];
     this.#result = Array.from({ length: 5 }, (_) => 0);
+    this.#checker = new Checker();
   }
 
   async getPriceInput() {
@@ -29,14 +31,7 @@ class App {
 
     try {
       const parsedPrice = Number(price);
-      if (
-        isNaN(price) ||
-        !Number.isInteger(parsedPrice) ||
-        parsedPrice === 0 ||
-        parsedPrice % 1000
-      ) {
-        throw new Error("[ERROR] : 잘못된 구입금액입니다.");
-      }
+      this.#checker.checkPrice(parsedPrice);
     } catch ({ message }) {
       Console.print(message);
       return this.getPriceInput();
@@ -54,30 +49,6 @@ class App {
     this.#lottos.forEach((lotto) => lotto.printNumbers());
   }
 
-  //TODO 1. 6개인지 2. 중복된 것이 없는지 3. 숫자인지 4. 1~45인지 5. int인지
-  validateWinningNumbers() {
-    const uniqueWinningNumber = new Set(this.#winningNumbers);
-
-    if (this.#winningNumbers.length !== 6) {
-      throw new Error("[ERROR] : 6개의 숫자를 입력해주세요");
-    }
-
-    if (uniqueWinningNumber.size !== 6) {
-      throw new Error("[ERROR] : 중복된 숫자가 있습니다");
-    }
-
-    this.#winningNumbers.forEach((winningNumber) => {
-      if (
-        isNaN(winningNumber) ||
-        !Number.isInteger(winningNumber) ||
-        winningNumber < 1 ||
-        winningNumber > 45
-      ) {
-        throw new Error("[ERROR] : 잘못된 로또 입력값입니다");
-      }
-    });
-  }
-
   async getWinningInput() {
     try {
       const winningInputs = await this.#userInputHandler.getUserInput(
@@ -85,7 +56,7 @@ class App {
       );
 
       this.#winningNumbers = winningInputs.split(",").map(Number);
-      this.validateWinningNumbers();
+      this.#checker.checkWinningNumber(this.#winningNumbers);
       Console.print(`[${this.#winningNumbers.join(", ")}]\n`);
     } catch ({ message }) {
       Console.print(message);
@@ -93,26 +64,13 @@ class App {
     }
   }
 
-  //숫자인지, 1~45인지, winning과 중복인지, int인지
   async getBonusInput() {
     try {
       const bonusInput = await this.#userInputHandler.getUserInput(
         "보너스 번호를 입력해 주세요.\n"
       );
       const parsedBonus = Number(bonusInput);
-
-      const uniqueWinningNumber = new Set(this.#winningNumbers);
-
-      if (
-        isNaN(bonusInput) ||
-        !Number.isInteger(parsedBonus) ||
-        uniqueWinningNumber.has(parsedBonus) ||
-        parsedBonus < 1 ||
-        parsedBonus > 45
-      ) {
-        throw new Error("[ERROR] : 잘못된 로또 입력값입니다");
-      }
-
+      this.#checker.checkBonus(this.#winningNumbers, parsedBonus);
       this.#bonusNumber = parsedBonus;
     } catch ({ message }) {
       Console.print(message);
