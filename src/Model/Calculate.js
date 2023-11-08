@@ -36,6 +36,22 @@ class CalculateWinnings {
     const bonusMatch = lotto.getNumber().includes(this.bonusNumber);
     return bonusMatch;
   }
+
+  countWinnings(matchedNumbers, bonusMatch) {
+    if (matchedNumbers.length === 3) {
+      this.#results.three += 1;
+    } else if (matchedNumbers.length === 4) {
+      this.#results.four += 1;
+    } else if (matchedNumbers.length === 5) {
+      if (bonusMatch) {
+        this.#results.fiveBonus += 1;
+      } else {
+        this.#results.five += 1;
+      }
+    } else if (matchedNumbers.length === 6) {
+      this.#results.six += 1;
+    }
+  }
 }
 
 export default CalculateWinnings;
