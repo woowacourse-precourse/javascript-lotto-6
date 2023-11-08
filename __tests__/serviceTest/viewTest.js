@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { MissionUtils } from '@woowacourse/mission-utils';
 import {
   firstPlaceOutput,

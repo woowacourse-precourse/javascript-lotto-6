@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import ERROR_MESSAGES from '../../src/constants/message/error';
 import validationUtils from '../../src/services/utils/validation';
 

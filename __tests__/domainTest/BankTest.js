@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { WINNING_RANK_COUNT } from '../../src/constants/lotto';
 import { ZERO } from '../../src/constants/validate';
 import bank from '../../src/domain/Bank';
