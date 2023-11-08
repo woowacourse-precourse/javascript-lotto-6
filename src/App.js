@@ -68,10 +68,7 @@ class App {
 
   async getTotalWinningNumbers() {
     const inputBonusNumber = await InputView.readLine(LOTTO_MESSAGES.input_bonus_number);
-    this.#totalWinningLotto = new WinningLotto(
-      this.#winningLottoNumbers.getNumbers(),
-      inputBonusNumber,
-    );
+    this.#totalWinningLotto = new WinningLotto(this.#winningLottoNumbers, inputBonusNumber);
     OutputView.divideLine();
   }
 

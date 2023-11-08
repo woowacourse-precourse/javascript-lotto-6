@@ -7,6 +7,7 @@ class Lotto {
    * @member {number} LOTTO_LENGTH 로또가 가질 수 있는 숫자 갯수
    * @member {number} MIN_NUM 로또가 가질 수 있는 숫자의 최소값
    * @member {number} MAX_NUM 로또가 가질 수 있는 숫자의 최대값
+   * @member {number} LOTTO_PRICE 로또 한장당 가격
    */
 
   static LOTTO_LENGTH = 6;
@@ -14,6 +15,8 @@ class Lotto {
   static MIN_NUM = 1;
 
   static MAX_NUM = 45;
+
+  static LOTTO_PRICE = 1000;
 
   /**
    * @type {[number, number, number, number, number, number]}
@@ -61,7 +64,8 @@ class Lotto {
 
   static fromInputString(inputString) {
     const winningNumbers = inputString.split(',').map((str) => parseInt(str.trim(), 10));
-    return new Lotto(winningNumbers);
+    const winningLotto = new Lotto(winningNumbers);
+    return winningLotto.getNumbers();
   }
 
   validate() {
