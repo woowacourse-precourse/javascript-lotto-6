@@ -5,7 +5,7 @@ import {
   UNIT,
 } from "../../models/Constants.js";
 
-const ValidationHook = {
+const Validation = {
   checkNull(number) {
     if (number.length === 0) {
       throw new Error(INPUT_ERROR.null);
@@ -55,4 +55,4 @@ const ValidationHook = {
   },
 };
 
-export default ValidationHook;
+export default Validation;
