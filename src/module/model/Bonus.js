@@ -1,5 +1,6 @@
 class bonus {
   #bonusNumber;
+
   constructor(bonusNumber) {
     this.#validateBonus(bonusNumber);
     this.#checkBonusBound(bonusNumber);
