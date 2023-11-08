@@ -7,6 +7,8 @@ import {
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
   LOTTO_PRICE,
+  BONUS_ERROR_MESSAGE,
+  PRICE_ERROR_MESSAGE,
 } from "./constant/lotto.js";
 
 class App {
@@ -107,7 +109,7 @@ class App {
       purchasePrice <= 0 ||
       purchasePrice % 1 !== 0
     ) {
-      throw new Error("[ERROR] 구입금액을 올바르게 입력해 주세요.");
+      throw new Error(PRICE_ERROR_MESSAGE);
     }
   }
   async inputWinningLottoNum() {
@@ -130,15 +132,13 @@ class App {
       bonus < LOTTO_MIN_NUMBER ||
       bonus > LOTTO_MAX_NUMBER
     ) {
-      throw new Error(
-        "[ERROR] 1부터 45 사이의 숫자 한 개만 입력이 가능합니다."
-      );
+      throw new Error(BONUS_ERROR_MESSAGE.INVALID_BONUS_NUMBER_ERROR);
     }
     if (bonus % 1 !== 0) {
-      throw new Error("[ERROR] 자연수만 입력이 가능합니다.");
+      throw new Error(BONUS_ERROR_MESSAGE.NON_INTEGER_INPUT_ERROR);
     }
     if (this.winningNumbers.includes(bonus)) {
-      throw new Error("[ERROR] 입력한 당첨 번호 외 숫자를 입력해 주세요.");
+      throw new Error(BONUS_ERROR_MESSAGE.DUPLICATE_WINNING_NUMBER_ERROR);
     }
   }
   countBonuses(randomArrs) {
