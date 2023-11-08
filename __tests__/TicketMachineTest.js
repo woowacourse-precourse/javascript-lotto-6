@@ -22,7 +22,7 @@ describe('로또 티켓 클래스에 대한 단위 테스트', () => {
   const lottoTicket = LottoTicket.getInstance();
   const ticketMachine = new TicketMachine();
   test('티켓이 구매 가능한 갯수 만큼 로또 줄이 작성되는가?', async () => {
-    const inputs = [2000, 3000];
+    const inputs = ['2000', '3000'];
     const expectedAnswer = [2, 3];
 
     mockQuestions(inputs);
@@ -35,7 +35,7 @@ describe('로또 티켓 클래스에 대한 단위 테스트', () => {
   });
 
   test('티켓의 각 줄은 Lotto 클래스로 구성이 되어 있는가?', async () => {
-    const inputs = [2000];
+    const inputs = ['2000'];
 
     mockQuestions(inputs);
 
@@ -48,7 +48,7 @@ describe('로또 티켓 클래스에 대한 단위 테스트', () => {
   });
 
   test('티켓의 각 줄의 로또 숫자가 중복되지 않는 고유한 숫자인가?', async () => {
-    const inputs = [2000, 3000];
+    const inputs = ['2000', '3000'];
 
     mockQuestions(inputs);
 

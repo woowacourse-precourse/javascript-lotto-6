@@ -3,8 +3,8 @@ import Comparator from '../src/Controller/Comparator.js';
 import Lotto from '../src/Lotto.js';
 
 describe('비교기 클래스 테스트', () => {
+  // 테스트에 쓰일 기본적인 환경으로 사용자가 구매한 로또 티켓을 설정한다.
   const lottoTicket = LottoTicket.getInstance();
-
   lottoTicket.saveSpecificTypeData('ticket', [
     new Lotto([1, 2, 3, 4, 5, 6]),
     new Lotto([4, 5, 6, 7, 8, 9]),
@@ -18,26 +18,28 @@ describe('비교기 클래스 테스트', () => {
 
     for (let i = 0; i < inputs.length; i += 1) {
       lottoTicket.ticket.forEach((lotto, j) => {
+        // 로또 티켓에 당첨번호와 보너스 번호 저장
         lottoTicket.saveSpecificTypeData('win', inputs[i][0]);
         lottoTicket.saveSpecificTypeData('bonus', inputs[i][1]);
-        const matchesCount = comparator.countMatches(lotto.numbers);
 
+        const matchesCount = comparator.countMatches(lotto.numbers);
         expect(matchesCount).toBe(answers[i][j]);
       });
     }
   });
 
-  test('같은 개수의 번호가 여러번 당첨되었을 경우를 구분할 수 있는가?', () => {
+  test('중복된 일치횟수가 여러개일 경우 중복된 횟수 만큼 데이터를 저장할 수 있는가?', () => {
     const inputs = [['11,22,33,4,5,6', '10'], ['4,5,6,17,18,10', '9']];
 
     for (let i = 0; i < inputs.length; i += 1) {
+      // 로또 티켓에 당첨번호와 보너스 번호 저장
       const comparator = new Comparator();
       lottoTicket.saveSpecificTypeData('win', inputs[i][0]);
       lottoTicket.saveSpecificTypeData('bonus', inputs[i][1]);
 
+      // 일치 횟수를 키로 갖는 값을 증가 시킨다.
       lottoTicket.ticket.forEach((lotto) => {
         const matchesCount = comparator.countMatches(lotto.numbers);
-        console.log(matchesCount);
         comparator.increaseMatchesCount(matchesCount);
       });
 
@@ -50,8 +52,8 @@ describe('비교기 클래스 테스트', () => {
 
     for (let i = 0; i < inputs.length; i += 1) {
       const comparator = new Comparator();
-
       lottoTicket.ticket.forEach((lotto) => {
+        // 로또 티켓에 당첨번호와 보너스 번호 저장
         lottoTicket.saveSpecificTypeData('win', inputs[i][0]);
         lottoTicket.saveSpecificTypeData('bonus', inputs[i][1]);
         const matchesCount = comparator.countMatches(lotto.numbers);

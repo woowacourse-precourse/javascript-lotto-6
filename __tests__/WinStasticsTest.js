@@ -29,7 +29,7 @@ describe('당첨 통계에 대한 클래스 테스트', () => {
       lottoTicket.saveSpecificTypeData('bonus', inputs[i][1]);
 
       winStastics.setMatchesCount();
-      expect(winStastics.statics.matchesCount).toMatchObject(answers[i]);
+      expect(winStastics.statistics.matchesCount).toMatchObject(answers[i]);
     }
   });
 
@@ -48,7 +48,7 @@ describe('당첨 통계에 대한 클래스 테스트', () => {
 
       winStastics.setMatchesCount();
       winStastics.setEarningRate();
-      expect(winStastics.statics.earningRate).toBe(answers[i].earningRate);
+      expect(winStastics.statistics.earningRate).toBe(answers[i].earningRate);
     }
   });
 });
