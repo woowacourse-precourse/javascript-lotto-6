@@ -11,6 +11,11 @@ class LottoController {
   #bonusNumber;
   #result;
   #roi;
+  #lottoNumberGenerator;
+
+  constructor() {
+    this.#lottoNumberGenerator = new GenerateLottoNumbers(); 
+  }
 
   async playGame() {
     await this.#inputPurchasePrice();
@@ -29,7 +34,7 @@ class LottoController {
   #generateLottos() {
     const lottoCount = parseInt(this.#purchasePrice / 1000);
     OutputView.printLottoCount(lottoCount);
-    this.#lottos = GenerateLottoNumbers.getLottos(lottoCount);
+    this.#lottos = this.#lottoNumberGenerator.getLottos(lottoCount);
     OutputView.printLottos(this.#lottos);
   }
 
