@@ -28,14 +28,14 @@ const OUPUT_MESSAGES = Object.freeze({
     return `${lottoCount}개를 구매했습니다.`;
   },
   BUY_LOTTOS(lottos) {
-    return `[${lottos.join(',')}]`;
+    return `[${lottos.join(', ')}]`;
   },
   WINNING_STATUS(matchingCount, winningStatus) {
     const winningProfit = WINNING_PROFITS[matchingCount].toLocaleString();
     if (matchingCount === 'bonus') {
-      return `5개 일치, 보너스 볼 일치(${winningProfit}원) - ${winningStatus[matchingCount]}개`;
+      return `5개 일치, 보너스 볼 일치 (${winningProfit}원) - ${winningStatus[matchingCount]}개`;
     }
-    return `${matchingCount}개 일치,(${winningProfit}원) - ${winningStatus[matchingCount]}개`;
+    return `${matchingCount}개 일치 (${winningProfit}원) - ${winningStatus[matchingCount]}개`;
   },
   PROFIT(profit) {
     return `총 수익률은 ${profit}%입니다.`;
