@@ -1,19 +1,17 @@
-export const GAME = Object.freeze({
-  INPUT_CAR_NAMES:
-    "경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분): ",
-  INPUT_NUMBER_OF_ATTEMPTS: "시도 횟수: ",
-  RUN_RESULT: "실행결과",
-  WINNER: "최종 우승자: ",
-  FINISH_THRESHOLD: 0,
-  ATTEMPT_DECREASE_AMOUNT: 1,
-  MAX_NAME_LENGTH: 5,
+export const MESSAGE = Object.freeze({
+  INPUT_PURCHASE_AMOUNT: "구매금액을 입력해 주세요.",
+  INPUT_WINNING_NUMBERS: "당첨 번호를 입력해 주세요.",
+  INPUT_BONUS_NUMBER: "보너스 번호를 입력해 주세요.",
+  WINNING_RESULT: "당첨 통계",
+  THREE_MATCH: "3개 일치 (5,000원) - ",
+  FOUR_MATCH: "4개 일치 (50,000원) - ",
+  FIVE_MATCH: "5개 일치 (1,500,000원) - ",
+  FIVE_BONUS_MATCH: "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+  SIX_MATCH: "6개 일치 (2,000,000,000원) - ",
 });
 
-export const MOVE = Object.freeze({
-  FORWARD: 1,
-  MOVABLE_THRESHOLD: 4,
-  DASH: "-",
-});
+
+
 
 export const ERROR = Object.freeze({
   INVALID_PURCAHSE_AMOUNT: "[ERROR] 유효한 구매 금액을 입력하세요.",

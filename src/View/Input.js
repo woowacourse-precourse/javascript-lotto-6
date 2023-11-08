@@ -1,16 +1,17 @@
 import { Console } from "@woowacourse/mission-utils";
+import { MESSAGE } from "../util/Constants";
 
 export default class Input {
   async getPurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync(
-      "구매금액을 입력해 주세요."
+      MESSAGE.INPUT_PURCHASE_AMOUNT
     );
     return purchaseAmount;
   }
 
   async getWinningNumbers() {
     const winningNumbers = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요."
+      MESSAGE.INPUT_WINNING_NUMBERS
     );
 
     return winningNumbers;
@@ -18,7 +19,7 @@ export default class Input {
 
   async getBonusNumber() {
     const bonusNumber = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요."
+      MESSAGE.INPUT_BONUS_NUMBER
     );
 
     return bonusNumber;

@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { MESSAGE } from "../util/Constants";
 
 class Output {
   printPurchaseQuantity(LottoQuantity) {
@@ -17,15 +18,15 @@ class Output {
   }
 
   printWinningResult(results) {
-    Console.print("당첨 통계");
+    Console.print(MESSAGE.WINNING_RESULT);
     Console.print("---");
-    Console.print(`3개 일치 (5,000원) - ${results.three}개`);
-    Console.print(`4개 일치 (50,000원) - ${results.four}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${results.five}개`);
+    Console.print(`${MESSAGE.THREE_MATCH}${results.three}개`);
+    Console.print(`${MESSAGE.FOUR_MATCH}${results.four}개`);
+    Console.print(`${MESSAGE.FIVE_MATCH}${results.five}개`);
     Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${results.fiveBonus}개`
+      `${MESSAGE.FIVE_BONUS_MATCH}${results.fiveBonus}개`
     );
-    Console.print(`6개 일치 (2,000,000,000원) - ${results.six}개`);
+    Console.print(`${MESSAGE.SIX_MATCH}${results.six}개`);
   }
 
   printProfitRate(profitRate) {
