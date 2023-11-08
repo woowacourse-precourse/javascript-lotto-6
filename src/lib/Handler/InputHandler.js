@@ -1,10 +1,10 @@
 // domain
 import LottoBundle from "../Domain/LottoBundle.js";
 import ReferenceLotto from "../Domain/ReferenceLotto.js";
-// handler
+// non-domain
 import OutputHandler from "./OutputHandler.js";
-// view
 import InputView from "../View/InputView.js";
+import InputValidator from "../Validator/InputValidator.js";
 // constants
 import { ERROR_MESSAGE } from "../Constants.js";
 import { ValidationError } from "../Error/ValidationError.js";
@@ -13,7 +13,9 @@ export class InputHandler {
   static async lottoBundle() {
     try {
       const response = await InputView.lottoMoney();
-      const lottoBundle = new LottoBundle(response);
+      InputValidator.lottoMoney(response);
+      const money = Number(response);
+      const lottoBundle = new LottoBundle(money);
       return lottoBundle;
     } catch (err) {
       const retryFunction = () => InputHandler.lottoBundle();
@@ -24,7 +26,9 @@ export class InputHandler {
   static async referenceLotto() {
     try {
       const response = await InputView.winNumbers();
-      const referenceLotto = new ReferenceLotto(response);
+      InputValidator.winNumbers(response);
+      const numbers = response.split(",").map((e) => Number(e));
+      const referenceLotto = new ReferenceLotto(numbers);
       return referenceLotto;
     } catch (err) {
       const retryFunction = () => InputHandler.referenceLotto();
@@ -36,7 +40,9 @@ export class InputHandler {
     try {
       if (!referenceLotto) throw new Error(ERROR_MESSAGE.LOTTO_NOT_EXIST);
       const response = await InputView.bonusNumber();
-      referenceLotto.bonus = response;
+      InputValidator.bonusNumber(response);
+      const bonusNumber = Number(response);
+      referenceLotto.bonus = bonusNumber;
     } catch (err) {
       const retryFunction = () => InputHandler.injectBonus(referenceLotto);
       return InputHandler.#handleError(err, retryFunction);
