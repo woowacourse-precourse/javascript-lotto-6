@@ -1,4 +1,7 @@
-import { ErrorMessage } from '../constants/ErrorMessage.js';
+import ErrorMessage from '../constants/ErrorMessage.js';
+import GAME_SETTINGS from '../constants/LottoSettings.js';
+
+const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = GAME_SETTINGS;
 
 class Lotto {
   #numbers;
@@ -16,30 +19,29 @@ class Lotto {
   }
 
   #validateNumberLength(numbers) {
-    if (numbers.length !== 6) {
-      // ToDo: 에러 상수명 변경하기
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
+    if (numbers.length !== NUMBER_LENGTH) {
+      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_LENGTH);
     }
   }
 
   #validateNumberUnit(numbers) {
     numbers.forEach(number => {
-      if (Number.isNaN(parseInt(number, 10))) {
-        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+      if (Number.isNaN(Number(number))) {
+        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
       }
     });
   }
 
   #validateNumberRange(numbers) {
     numbers.forEach(number => {
-      if (number < 1 || number > 45) {
-        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+      if (number < MIN_NUMBER || number > MAX_NUMBER) {
+        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
       }
     });
   }
 
   #validateNumberUniqueness(numbers) {
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== NUMBER_LENGTH) {
       throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
     }
   }

@@ -1,49 +1,53 @@
-import { ErrorMessage } from '../constants/ErrorMessage.js';
+import ErrorMessage from '../constants/ErrorMessage.js';
+import GAME_SETTINGS from '../constants/LottoSettings.js';
+import { printErrorMessage } from './messages.js';
+
+const { LOTTO_PRICE, MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = GAME_SETTINGS;
 
 class Validator {
   static purchaseCostValidator(input) {
     const purchaseCost = parseInt(input, 10);
-    if (Number.isNaN(purchaseCost)) {
-      throw new Error(ErrorMessage.INVALID_PURCHASE_COST);
+    if (Number.isNaN(Number(input))) {
+      printErrorMessage(ErrorMessage.INVALID_PURCHASE_COST);
     }
     if (purchaseCost < 0) {
-      throw new Error(ErrorMessage.INVALID_PURCAHSE_COST_RANGE);
+      printErrorMessage(ErrorMessage.INVALID_PURCAHSE_COST_RANGE);
     }
-    if (purchaseCost % 1000 !== 0) {
-      throw new Error(ErrorMessage.INVALID_PURCHASE_COST_UNIT);
+    if (purchaseCost % LOTTO_PRICE !== 0) {
+      printErrorMessage(ErrorMessage.INVALID_PURCHASE_COST_UNIT);
     }
   }
 
   static winningNumberValidator(input) {
     const winningNumber = input.split(',').map(number => {
       const parseNumber = parseInt(number.trim(), 10);
-      if (Number.isNaN(parseNumber)) {
-        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+      if (Number.isNaN(Number(number))) {
+        printErrorMessage(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
       }
-      if (parseNumber < 1 || parseNumber > 45) {
-        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+      if (parseNumber < MIN_NUMBER || parseNumber > MAX_NUMBER) {
+        printErrorMessage(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
       }
       return parseNumber;
     });
-    if (winningNumber.length !== 6) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
+    if (winningNumber.length !== NUMBER_LENGTH) {
+      printErrorMessage(ErrorMessage.INVALID_LOTTO_NUMBERS_LENGTH);
     }
-    if (new Set(winningNumber).size !== 6) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
+    if (new Set(winningNumber).size !== NUMBER_LENGTH) {
+      printErrorMessage(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
     }
     return winningNumber;
   }
 
   static bonusNumberValidator(input, winningNumber) {
     const BonusNumber = parseInt(input, 10);
-    if (Number.isNaN(BonusNumber)) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+    if (Number.isNaN(Number(input))) {
+      printErrorMessage(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
     }
-    if (BonusNumber < 1 || BonusNumber > 45) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+    if (BonusNumber < MIN_NUMBER || BonusNumber > MAX_NUMBER) {
+      printErrorMessage(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
     }
     if (winningNumber.includes(BonusNumber)) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
+      printErrorMessage(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
     }
     return BonusNumber;
   }

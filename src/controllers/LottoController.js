@@ -1,11 +1,12 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import Result from '../models/Result.js';
 import PurchasedLotto from '../models/purchasedLottos.js';
 import Validator from '../utils/Validator.js';
 import { printMessage } from '../utils/messages.js';
-import { ErrorMessage } from '../constants/ErrorMessage.js';
+import GAME_SETTINGS from '../constants/LottoSettings.js';
+
+const { LOTTO_PRICE } = GAME_SETTINGS;
 
 class LottoController {
   #lottos;
@@ -39,7 +40,7 @@ class LottoController {
         Validator.purchaseCostValidator(inputCost);
         return inputCost;
       } catch (error) {
-        printMessage(error);
+        printMessage(error.message);
       }
     }
   }
@@ -57,7 +58,7 @@ class LottoController {
         const winningNumber = Validator.winningNumberValidator(input);
         return winningNumber;
       } catch (error) {
-        printMessage(error);
+        printMessage(error.message);
       }
     }
   }
@@ -72,7 +73,7 @@ class LottoController {
         );
         return bonusNumber;
       } catch (error) {
-        printMessage(error);
+        printMessage(error.message);
       }
     }
   }
@@ -87,7 +88,7 @@ class LottoController {
       (acc, { count, prize }) => acc + count * prize,
       0,
     );
-    const totalCost = this.#lottos.length * 1000;
+    const totalCost = this.#lottos.length * LOTTO_PRICE;
     return Number(((totalPrize / totalCost) * 100).toFixed(2));
   }
 }

@@ -1,4 +1,6 @@
-import { PRIZES } from '../constants/ErrorMessage.js';
+import GAME_SETTINGS from '../constants/LottoSettings.js';
+
+const { PRIZES } = GAME_SETTINGS;
 
 class Result {
   #winningNumbers;

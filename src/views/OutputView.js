@@ -22,9 +22,9 @@ class OutputView {
       const { count } = results[key];
       const { prize } = results[key];
       Console.print(
-        `${key}개 일치${
+        `${key === '5+1' ? '5' : key}개 일치${
           key === '5+1' ? ', 보너스 볼 일치' : ''
-        } (${prize.toLocaleString()}원)- ${count}개`,
+        } (${prize.toLocaleString()}원) - ${count}개`,
       );
     });
   }

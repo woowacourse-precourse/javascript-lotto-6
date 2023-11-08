@@ -1,5 +1,5 @@
 import Validator from '../src/utils/Validator';
-import { ErrorMessage } from '../src/constants/ErrorMessage';
+import ErrorMessage from '../src/constants/ErrorMessage';
 
 describe('보너스 번호 입력 테스트', () => {
   test('보너스 번호가 1~45 사이의 숫자가 아닌 경우', () => {
