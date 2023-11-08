@@ -31,8 +31,11 @@ const Output = {
 		Console.print(`${MESSAGE.THD_MATCH}${winRank[4]}개
 		${MESSAGE.FRTH_MATCH}${winRank[3]}개
 		${MESSAGE.FTH_MATCH}${winRank[2]}개
-		${MESSAGE.FTH_BONUS_MATCH_MATCH}${winRank[1]}개
+		${MESSAGE.FTH_BONUS_MATCH}${winRank[1]}개
 		${MESSAGE.STH_MATCH}${winRank[0]}개`);
+	},
+	rateOfReturnPrint(rate) {
+		Console.print(`총 수익률은 ${rate}%입니다.`);
 	},
 }
 export default Output;
