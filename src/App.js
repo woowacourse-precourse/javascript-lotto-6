@@ -4,6 +4,8 @@ const PRICE_MESSAGE = "구입금액을 입력해 주세요.\n";
 const ERROR_PRICE_INPUT = "[ERROR] 숫자가 잘못된 형식입니다.\n";
 const WINNING_NUMBERS = "\n당첨 번호를 입력해 주세요.\n";
 const BONUS_NUM = "\n보너스 번호를 입력해 주세요.\n";
+const ERROR_NUMBER_RANGE =
+  "[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.\n";
 
 class App {
   constructor() {
@@ -56,13 +58,42 @@ class App {
   }
 
   async #readWinningNumbers() {
-    const input_winningNums =
-      await MissionUtils.Console.readLineAsync(WINNING_NUMBERS);
-    return input_winningNums.split(",").map((num) => Number(num.trim()));
+    while (true) {
+      const input_winningNums =
+        await MissionUtils.Console.readLineAsync(WINNING_NUMBERS);
+      const winningNums = input_winningNums
+        .split(",")
+        .map((num) => Number(num.trim()));
+
+      const isValidInput =
+        winningNums.length === 6 &&
+        winningNums.every(
+          (num) => num >= 1 && num <= 45 && Number.isInteger(num),
+        );
+
+      if (isValidInput) {
+        return winningNums;
+      } else {
+        MissionUtils.Console.print(ERROR_NUMBER_RANGE);
+      }
+    }
   }
 
   async #readBonusNumber() {
-    return await MissionUtils.Console.readLineAsync(BONUS_NUM);
+    while (true) {
+      const input_bonusNum =
+        await MissionUtils.Console.readLineAsync(BONUS_NUM);
+      const bonusNum = Number(input_bonusNum);
+
+      const isValidInput =
+        bonusNum >= 1 && bonusNum <= 45 && Number.isInteger(bonusNum);
+
+      if (isValidInput) {
+        return bonusNum;
+      } else {
+        MissionUtils.Console.print(ERROR_BONUS_NUMBER);
+      }
+    }
   }
 
   #matchCount(lotto, winningNums, bonusNum) {
@@ -88,8 +119,10 @@ class App {
         `4개 일치 (50,000원) - ${results[4]}개\n` +
         `5개 일치 (1,500,000원) - ${results[5]}개\n` +
         `5개 일치, 보너스 볼 일치 (30,000,000원) - ${results["5.5"]}개\n` +
-        `6개 일치 (2,000,000,000원) - ${results[6]}개\n` +
-        `총 수익률은 ${this.#calculatePercentage(price, totalWinnings)}입니다.`,
+        `6개 일치 (2,000,000,000원) - ${results[6]}개\n`,
+    );
+    MissionUtils.Console.print(
+      `총 수익률은 ${this.#calculatePercentage(price, totalWinnings)}%입니다.`,
     );
   }
 
