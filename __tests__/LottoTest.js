@@ -50,4 +50,16 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 3, 4, 5, 6], '*');
     }).toThrow('[ERROR]');
   });
+
+  test('로또 번호와 보너스 번호가 중복되면 예외 발생', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], 1);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], 6);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], 3);
+    }).toThrow('[ERROR]');
+  });
 });
