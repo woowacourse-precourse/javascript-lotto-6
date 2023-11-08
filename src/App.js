@@ -1,4 +1,4 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import { arraySort } from './utils/arrayUtils.js';
 import view from './utils/view.js';
@@ -10,28 +10,32 @@ class App {
     this.bonusNumber = null;
   }
 
-  async setLottoGameConfig() {
-    this.purchaseLottos = await view.readPurchaseLottos();
-    this.winningNumbers = await view.readWinningNumbers();
-    this.bonusNumber = await view.readBonusNumber(this.winningNumbers);
-  }
+  async setPurchaseLottos() {
+    const purchaseLottoCount = await view.readPurchaseLottos();
 
-  getLotto() {
     let i;
 
-    for (i = 0; this.purchaseLottos > i; i += 1) {
+    for (i = 0; purchaseLottoCount > i; i += 1) {
       const numbers = arraySort(Random.pickUniqueNumbersInRange(1, 45, 6));
 
       this.lottos.push(new Lotto(numbers));
     }
+  }
 
-    view.printPurchaseLottoCount(this.purchaseLottos);
-    this.lottos.forEach(item => Console.print(item.getString()));
+  async setWinningNumbers() {
+    this.winningNumbers = await view.readWinningNumbers();
+    this.bonusNumber = await view.readBonusNumber(this.winningNumbers);
+  }
+
+  async setLottoGameConfig() {
+    await this.setPurchaseLottos();
+    view.printPurchaseLottoInfo(this.lottos);
+
+    await this.setWinningNumbers();
   }
 
   async play() {
     await this.setLottoGameConfig();
-    this.getLotto();
   }
 }
 

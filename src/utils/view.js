@@ -36,8 +36,13 @@ const view = {
     return Number(bonusNumber);
   },
 
-  printPurchaseLottoCount(lottoCount) {
-    Console.print(`\n${lottoCount + MESSAGES.PURCHASE_COUNT}`);
+  printPurchaseLottoInfo(lottos) {
+    const lottoCountMessage = `\n${lottos.length + MESSAGES.PURCHASE_COUNT}`;
+    const lottoNumbers = lottos.map(lotto => lotto.getString());
+
+    const messages = [lottoCountMessage, ...lottoNumbers];
+
+    messages.forEach(message => Console.print(message));
   },
 };
 
