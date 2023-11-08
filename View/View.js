@@ -1,29 +1,24 @@
 import { Console } from '@woowacourse/mission-utils';
+import { MESSAGE, WIN_MESSAGE } from '../modules/constant';
 
 class View {
   async inputPurchaseMoney() {
-    const purchaseMoney = await Console.readLineAsync(
-      '구입금액을 입력해 주세요.\n'
-    );
+    const purchaseMoney = await Console.readLineAsync(MESSAGE.moneyInput);
     return purchaseMoney;
   }
 
   async inputLottoNumber() {
-    const winNumber = await Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.\n'
-    );
+    const winNumber = await Console.readLineAsync(MESSAGE.lottoNumberInput);
     return winNumber.split(',').map((number) => Number(number));
   }
 
   async inputBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(
-      '보너스 번호를 입력해 주세요.\n'
-    );
+    const bonusNumber = await Console.readLineAsync(MESSAGE.bonusNumberInput);
     return bonusNumber;
   }
 
   printAmount(amount) {
-    Console.print(`${amount}개를 구매했습니다.\n`);
+    Console.print(`${amount}${MESSAGE.amount}`);
   }
 
   printPurchasedNumbers(numbers) {
@@ -31,13 +26,13 @@ class View {
   }
 
   printWinResult(profit, resultBoard) {
-    Console.print('당첨 통계\n');
-    Console.print('---');
-    Console.print(`3개 일치 (5,000원) - ${resultBoard.three}개
-    4개 일치 (50,000원) - ${resultBoard.four}개
-    5개 일치 (1,500,000원) - ${resultBoard.five}개
-    5개 일치, 보너스 볼 일치 (30,000,000원) - ${resultBoard.fiveBonus}개
-    6개 일치 (2,000,000,000원) - ${resultBoard.six}개\n`);
+    Console.print(MESSAGE.winResult);
+    Console.print(MESSAGE.line);
+    Console.print(`${WIN_MESSAGE.matchThree} - ${resultBoard.three}개
+    ${WIN_MESSAGE.matchFour} - ${resultBoard.four}개
+    ${WIN_MESSAGE.matchFive} - ${resultBoard.five}개
+    ${WIN_MESSAGE.matchFiveWithBonus} - ${resultBoard.fiveBonus}개
+    ${WIN_MESSAGE.matchSix} - ${resultBoard.six}개\n`);
     Console.print(`총 수익률은 ${profit}%입니다.`);
   }
 

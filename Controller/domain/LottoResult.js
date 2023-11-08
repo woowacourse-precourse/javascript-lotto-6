@@ -1,3 +1,9 @@
+import {
+  MATCH_COUNT,
+  PRIZE_MONEY,
+  PURCHASE_PRICE,
+} from '../../modules/constant';
+
 const compareNumberArr = (baseArr, targetArr) => {
   let matchCount = 0;
   targetArr.forEach((number) => {
@@ -10,30 +16,31 @@ const compareNumberArr = (baseArr, targetArr) => {
 const addCountOnResultBoard = (matchCount, numbers, bonus) => {
   switch (matchCount) {
     case 3:
-      return 'three';
+      return MATCH_COUNT.three;
     case 4:
-      return 'four';
+      return MATCH_COUNT.four;
     case 5:
-      if (numbers.includes(bonus)) return 'fiveBonus';
-      return 'five';
+      if (numbers.includes(bonus)) return MATCH_COUNT.fiveBonus;
+      return MATCH_COUNT.five;
     case 6:
-      return 'six';
+      return MATCH_COUNT.six;
+    default:
+      return MATCH_COUNT.zero;
   }
-  return 'zero';
 };
 
 const addProfit = (matchNumber) => {
   switch (matchNumber[0]) {
-    case 'three':
-      return matchNumber[1] * 5000;
-    case 'four':
-      return matchNumber[1] * 50000;
-    case 'five':
-      return matchNumber[1] * 1500000;
-    case 'fiveBonus':
-      return matchNumber[1] * 30000000;
-    case 'six':
-      return matchNumber[1] * 2000000000;
+    case MATCH_COUNT.three:
+      return matchNumber[1] * PRIZE_MONEY.fifth;
+    case MATCH_COUNT.four:
+      return matchNumber[1] * PRIZE_MONEY.fourth;
+    case MATCH_COUNT.five:
+      return matchNumber[1] * PRIZE_MONEY.third;
+    case MATCH_COUNT.fiveBonus:
+      return matchNumber[1] * PRIZE_MONEY.second;
+    case MATCH_COUNT.six:
+      return matchNumber[1] * PRIZE_MONEY.first;
   }
 };
 
@@ -45,7 +52,7 @@ const LottoResult = {
     purchasedNumbers.forEach((numbers) => {
       matchCount = compareNumberArr(numbers, lottoNumber);
       let matchNumber = addCountOnResultBoard(matchCount, numbers, bonusNumber);
-      if (matchNumber !== 'zero') resultBoard[matchNumber] += 1;
+      if (matchNumber !== MATCH_COUNT.zero) resultBoard[matchNumber] += 1;
     });
 
     return resultBoard;
@@ -59,7 +66,7 @@ const LottoResult = {
       totalProfit += addProfit(matchNumber);
     });
 
-    profitPercent = (totalProfit / (purchaseAmount * 1000)) * 100;
+    profitPercent = (totalProfit / (purchaseAmount * PURCHASE_PRICE)) * 100;
 
     return profitPercent.toFixed(1);
   },

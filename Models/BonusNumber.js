@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE, RANDOM_NUMBER_RANGE } from '../modules/constant.js';
 import ValidationUtils from '../utils/ValidationUtils.js';
 
 const { checkIsInRange, checkIsNumber } = ValidationUtils;
@@ -12,11 +13,14 @@ class BonusNumber {
 
   #validateBonusNumber(number) {
     const bonusNumberIsNumber = checkIsNumber(number);
-    if (!bonusNumberIsNumber) throw new Error('[ERROR] 숫자를 입력해주세요.');
+    if (!bonusNumberIsNumber) throw new Error(ERROR_MESSAGE.isNotNumber);
 
-    const bonusNumberIsInRange = checkIsInRange(number, 45, 1);
-    if (!bonusNumberIsInRange)
-      throw new Error('[ERROR]1 ~ 45 범위의 숫자를 입력해 주세요.');
+    const bonusNumberIsInRange = checkIsInRange(
+      number,
+      RANDOM_NUMBER_RANGE.max,
+      RANDOM_NUMBER_RANGE.min
+    );
+    if (!bonusNumberIsInRange) throw new Error(ERROR_MESSAGE.isNotInRange);
   }
 
   getBonusNumber() {

@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from '../modules/constant.js';
 import ValidationUtils from '../utils/ValidationUtils.js';
 
 const { checkIsNumber, checkIncludedZero, checkIsDuplicated } = ValidationUtils;
@@ -11,19 +12,20 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) throw new Error('[ERROR]');
+    if (numbers.length !== 6) throw new Error(ERROR_MESSAGE.isNotSixLength);
 
-    const lottoNumberIsNumber = numbers.filter(
+    const lottoNumberHasCharacter = numbers.filter(
       (number) => !checkIsNumber(number)
     );
 
-    if (lottoNumberIsNumber.length !== 0) throw new Error('[ERROR]');
+    if (lottoNumberHasCharacter.length !== 0)
+      throw new Error(ERROR_MESSAGE.isNotNumber);
 
     const lottoNumbersIncludedZero = checkIncludedZero(numbers);
-    if (lottoNumbersIncludedZero) throw new Error('[ERROR]');
+    if (lottoNumbersIncludedZero) throw new Error(ERROR_MESSAGE.isNotInRange);
 
     const lottoNumberIsDuplicated = checkIsDuplicated(numbers);
-    if (lottoNumberIsDuplicated) throw new Error('[ERROR]');
+    if (lottoNumberIsDuplicated) throw new Error(ERROR_MESSAGE.isDuplicated);
   }
 
   getLottoNumbers() {
