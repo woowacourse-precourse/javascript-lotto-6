@@ -3,9 +3,10 @@ import Lotto from "./Lotto";
 
 class App {
   constructor() {
-    this.lottoList;
+    this.lottoList = [];
     this.winNumber;
     this.bonusNumber;
+
     this.winDetail = {
       match3: 0,
       match4: 0,
@@ -22,28 +23,21 @@ class App {
     };
   }
   async play() {
-    await this.setLottoList();
-    await this.inputWinNumber();
-    await this.inputBonusNumber();
-    this.printLottoList();
-    this.setWinDetail();
-    this.printResult();
+    try {
+      await this.setLottoList();
+      await this.inputWinNumber();
+      await this.inputBonusNumber();
+      this.printLottoList();
+      this.setWinDetail();
+      this.printResult();
+    } catch (error) {
+      console.log("에러 발생");
+      console.log(error);
+      throw new Error(`[ERROR] ${error.message}`);
+    }
   }
-  async buyLotto() {
-    MissionUtils.Console.print(
-      "로또 구입 금액을 입력해주세요.(로또 티켓 1장= 1000원)"
-    );
-    const money = await MissionUtils.Console.readLineAsync(
-      "로또 구입 금액을 입력해주세요.(로또 티켓 1장= 1000원)"
-    );
-    // 유효성 검사 필요, money
-    const LOTTO_PRICE = 1000;
-    const lottoTiket = money / LOTTO_PRICE;
-    MissionUtils.Console.print(`${lottoTiket}개를 구매했습니다.`);
-    return lottoTiket;
-  }
+
   async setLottoList() {
-    this.lottoList = [];
     const lottoTiket = await this.buyLotto();
     const DRAW_COUNT = 6;
     for (let i = 0; i !== lottoTiket; i++) {
@@ -56,8 +50,31 @@ class App {
       });
       this.lottoList.push(lotto);
     }
-    return;
   }
+  async buyLotto() {
+    try {
+      MissionUtils.Console.print("로또 구입 금액을 입력해주세요.(1장= 1000원)");
+      const money = await MissionUtils.Console.readLineAsync(
+        "로또 구입 금액을 입력해주세요.(1장= 1000원)"
+      );
+      this.validateBuyLotto(Number(money));
+
+      const LOTTO_PRICE = 1000;
+      const lottoTiket = money / LOTTO_PRICE;
+      MissionUtils.Console.print(`${lottoTiket}개를 구매했습니다.`);
+      return lottoTiket;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+  validateBuyLotto(money) {
+    console.log("money", money);
+    if (isNaN(money)) throw new Error("금액은 오로지 숫자만 입력가능합니다.");
+    if (money < 1000) throw new Error("금액은 1000원 이상이어야 합니다.");
+    if (money % 1000 !== 0)
+      throw new Error("금액은 1000원 단위로 입력가능합니다.");
+  }
+
   async inputWinNumber() {
     MissionUtils.Console.print(
       "당첨 번호를 입력해주세요. \n 번호는 6개가 필요하며 쉼표(,)로 구분해서 한꺼번에 입력해주세요. \n 번호의 범위는 1에서 45까지이며 중복되어선 안됩니다."
@@ -72,17 +89,24 @@ class App {
     this.winNumber = new Lotto(winNumber);
   }
   async inputBonusNumber() {
-    MissionUtils.Console.print(
-      "보너스 번호를 입력해주세요. \n 번호의 범위는 1에서 45까지이며 당첨번호와 중복되어선 안됩니다."
-    );
-    let bonusNumber = Number(
-      await MissionUtils.Console.readLineAsync(
+    try {
+      MissionUtils.Console.print(
         "보너스 번호를 입력해주세요. \n 번호의 범위는 1에서 45까지이며 당첨번호와 중복되어선 안됩니다."
-      )
-    );
-    // console.log("bonusNumber", bonusNumber);
+      );
+      this.bonusNumber = await Number(
+        await MissionUtils.Console.readLineAsync(
+          "보너스 번호를 입력해주세요. \n 번호의 범위는 1에서 45까지이며 당첨번호와 중복되어선 안됩니다."
+        )
+      );
+      this.validateBonusNumber();
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
-  validateBonusNumber() {}
+  validateBonusNumber() {
+    if (this.winNumber.getNumber().includes(this.bonusNumber))
+      throw new Error("보너스 번호는 당첨 번호와 중복되어선 안됩니다.");
+  }
   printLottoList() {
     this.lottoList.forEach((element, index) => {
       MissionUtils.Console.print(
@@ -91,7 +115,6 @@ class App {
           : `\n [${element.join().replaceAll(",", ", ")}]`
       );
     });
-    //임시로 주석 처리
   }
 
   setWinDetail() {
@@ -125,46 +148,42 @@ class App {
   }
 
   printResult() {
-    console.log("printResult");
     MissionUtils.Console.print(`당첨 통계 \n --- \n  `);
     this.printWinDetail();
     this.printProfit();
   }
 
   printWinDetail() {
+    const makeProfit = (match) => `${this.profit[match].toLocaleString()}원`;
+    const makeMatch = (match) => `${this.winDetail[match]}개`;
     MissionUtils.Console.print(
-      `3개 일치 (${this.profit.match3.toLocaleString()}원) - ${
-        this.winDetail.match3
-      }개
-      \n4개 일치 (${this.profit.match4.toLocaleString()}원) - ${
-        this.winDetail.match4
-      }개
-      \n5개 일치 (${this.profit.match5.toLocaleString()}원) - ${
-        this.winDetail.match5
-      }개
-      \n5개 일치, 보너스 볼 일치 (${this.profit.match5Bonus.toLocaleString()}원) - ${
-        this.winDetail.match5Bonus
-      }개
-      \n6개 일치 (${this.profit.match6.toLocaleString()}원) - ${
-        this.winDetail.match6
-      }개
+      `3개 일치 (${makeProfit("match3")}) - ${makeMatch("match3")}
+      \n4개 일치 (${makeProfit("match4")}) - ${makeMatch("match4")}
+      \n5개 일치 (${makeProfit("match5")}) - ${makeMatch("match5")}
+      \n5개 일치, 보너스 볼 일치 (${makeProfit("match5Bonus")}) - ${makeMatch(
+        "match5Bonus"
+      )}
+      \n6개 일치 (${makeProfit("match6")}) - ${makeMatch("match6")}
       `
     );
   }
-  printProfit() {
-    let profit = 0;
-    const count = Object.keys(this.profit).length;
 
-    for (let i = 3; i !== count + 2; i++) {
-      profit += this.profit[`match${i}`] * this.winDetail[`match${i}`];
-    }
-    profit += this.profit.match5Bonus * this.winDetail.match5Bonus;
+  printProfit() {
+    const count = Object.keys(this.profit).length;
+    const calculateProfit = (count) => {
+      let profit = 0;
+      for (let i = 3; i !== count + 2; i++) {
+        profit += this.profit[`match${i}`] * this.winDetail[`match${i}`];
+      }
+      profit += this.profit.match5Bonus * this.winDetail.match5Bonus;
+      return profit;
+    };
+    const profit = calculateProfit(count);
+
     const inputMoney = this.lottoList.length * 1000;
     const rateProfit = ((profit / inputMoney) * 100).toFixed(1);
     MissionUtils.Console.print(`총 수익률은 ${rateProfit}%입니다. `);
   }
-
-  // reset(){}
 }
 
 export default App;

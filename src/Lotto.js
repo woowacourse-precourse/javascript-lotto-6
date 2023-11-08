@@ -10,10 +10,18 @@ class Lotto {
   }
 
   #validate(numbers) {
-    // if (numbers.length !== 6) {
-    //   throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    // }
-    //  이 부분은 필수일거임 다 끝나면 주석 해제
+    if (numbers.length !== 6)
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+
+    numbers.forEach((element, index, array) => {
+      if (array.indexOf(element) !== array.lastIndexOf(element))
+        throw new Error("[ERROR] 로또 번호는 서로 중복되면 안됩니다.");
+    });
+
+    numbers.forEach((element) => {
+      if (element > 45)
+        throw new Error("[ERROR] 로또 번호는 1~45까지만 가능합니다.");
+    });
   }
   getNumber() {
     return this.#numbers;
