@@ -15,23 +15,22 @@ class Lotto {
     this.#numbers = numbers.map(Number);
   }
 
-  printLottos(){
-    print(`[${this.#numbers.sort((a,b) => a - b).join(', ')}]`);
+  printLottos() {
+    print(`[${this.#numbers.sort((a, b) => a - b).join(", ")}]`);
   }
 
-  getPrizeCount(userNumbers, bonusNumber){
+  getPrizeCount(userNumbers, bonusNumber) {
     let count = 0;
     let isbonus = false;
-    userNumbers.forEach((userNumber)=>{
-      if(this.#numbers.includes(userNumber)) count++;
+    userNumbers.forEach((userNumber) => {
+      if (this.#numbers.includes(userNumber)) count++;
     });
 
-
-    if(count === 5 && this.#numbers.includes(bonusNumber)) isbonus = true;
+    if (count === 5 && this.#numbers.includes(bonusNumber)) isbonus = true;
 
     return {
       count,
-      isbonus
+      isbonus,
     };
   }
 }
