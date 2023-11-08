@@ -1,79 +1,78 @@
-import Input from './Input';
-import LottoList from './LottoList';
-import Output from './Output';
-import Validator from './Validator';
-import WinningLotoCounter from './WinningLottoCounter';
-import ProfitCalculator from './ProfitCalculator';
+import Input from './Input.js';
+import LottoList from './LottoList.js';
+import Output from './Output.js';
+import Validator from './Validator.js';
+import WinningLotoCounter from './WinningLottoCounter.js';
+import ProfitCalculator from './ProfitCalculator.js';
 
 class App {
-	#input;
-
-	#output;
-
-	#validator;
-
 	#lottoList;
 
-	#winningLottoCounter;
+	#winningLottoList;
 
 	#profitCalculator;
 
 	constructor() {
-		this.#input = Input;
-		this.#output = new Output();
-		this.#validator = Validator;
-		this.#lottoList = new LottoList();
-		this.#winningLottoCounter = new WinningLotoCounter();
 		this.#profitCalculator = ProfitCalculator;
 	}
 
 	async play() {
 		const budget = await this.#getBudget();
 
-		this.#lottoList.generateLottoList(budget);
-		const lottoList = this.#lottoList.getLottoList();
-
-		this.#output.printLottoList(lottoList);
+		this.#announceLottoList(budget);
 
 		const { winningNumber, bonusNumber } = await this.#getWinningCondition();
 
-		this.#winningLottoCounter.countWinningLottos(
-			lottoList,
+		this.#announceWinningLottoList(winningNumber, bonusNumber);
+
+		this.#announceProfitRate(budget);
+	}
+
+	#announceLottoList(budget) {
+		const lottoListObj = new LottoList(budget);
+		this.#lottoList = lottoListObj.getLottoList();
+		Output.printLottoList(this.#lottoList);
+	}
+
+	#announceWinningLottoList(winningNumber, bonusNumber) {
+		const winningLottoCounter = new WinningLotoCounter();
+
+		winningLottoCounter.countWinningLottos(
+			this.#lottoList,
 			winningNumber,
 			bonusNumber,
 		);
-		const winningLottoList = this.#winningLottoCounter.getWinningLottoList();
+		this.#winningLottoList = winningLottoCounter.getWinningLottoList();
+		Output.printWinningResult(this.#winningLottoList);
+	}
 
-		this.#output.printWinningResult(winningLottoList);
-
-		const profitRate = this.#profitCalculator.getProfitRate(
+	#announceProfitRate(budget) {
+		const profitRate = ProfitCalculator.getProfitRate(
 			budget,
-			winningLottoList,
+			this.#winningLottoList,
 		);
-
-		this.#output.printProfitRate(profitRate);
+		Output.printProfitRate(profitRate);
 	}
 
 	async #getBudget() {
-		const budgetStr = await this.#input.aksUserUntilValid(
-			'구입금액을 입력해 주세요.',
-			this.#validator.checkBudgetValidity,
+		const budgetStr = await Input.askUserUntilValid(
+			'구입금액을 입력해 주세요.\n',
+			Validator.checkBudgetValidity,
 		);
 		const budget = budgetStr * 1;
 		return budget;
 	}
 
 	async #getWinningCondition() {
-		const winningNumberStr = await this.#input.aksUserUntilValid(
-			'당첨 번호를 입력해 주세요.',
-			this.#validator.checkWinningNumberValidity,
+		const winningNumber = await Input.askUserUntilValid(
+			'당첨 번호를 입력해 주세요.\n',
+			Validator.checkWinningNumberValidity,
 		);
-		const bonusNumberStr = await this.#input.aksUserUntilValid(
-			'보너스 번호를 입력해 주세요.',
-			this.#validator.checkBonusNumberValidity,
+		const bonusNumber = await Input.askUserUntilValid(
+			'보너스 번호를 입력해 주세요.\n',
+			Validator.generateBonusNumberValidateFunc(winningNumber),
 		);
-		const winningNumber = winningNumberStr * 1;
-		const bonusNumber = bonusNumberStr * 1;
+
 		return { winningNumber, bonusNumber };
 	}
 }
