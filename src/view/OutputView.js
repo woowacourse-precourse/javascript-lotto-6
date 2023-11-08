@@ -1,16 +1,9 @@
 import { Console } from '@woowacourse/mission-utils'
 import { RANKS } from '../constants/lotto.js'
+import { Rank } from '../types.js'
 
 /**
  * @typedef {import('../domain/Lotto').default} Lotto
- */
-
-/**
- * @typedef {Object} rank
- * @property {number} index
- * @property {number} matchCount
- * @property {boolean} isBonusMatch
- * @property {number} winning_price
  */
 
 const OutputView = {
@@ -50,7 +43,7 @@ const OutputView = {
 
   /**
    *
-   * @param {rank} rank
+   * @param {Rank} rank
    * @param {number} winningCount
    */
   printRank: (rank, winningCount) => {

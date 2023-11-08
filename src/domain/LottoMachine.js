@@ -10,13 +10,13 @@ import {
 import Lotto from './Lotto.js'
 import WinningLotto from './WinningLotto.js'
 import { getMatchCount, hasLottoNumber } from '../utils/lotto.js'
+import { WinningStat, Rank } from '../types.js'
 
 class LottoMachine {
   /** @type {Lotto[]} */
   #lottos
   /** @type {WinningLotto} */
   #winningLotto
-  /** @type {{ winningCount: number }[]} */
 
   constructor() {
     this.#lottos = []
@@ -32,18 +32,10 @@ class LottoMachine {
     this.#lottos = Array.from({ length: lottoCount }, () => this.#makeLotto())
   }
 
-  /**
-   *
-   * @returns {Lotto[]} lottos
-   */
   getLottos() {
     return this.#lottos
   }
 
-  /**
-   *
-   * @returns {WinningLotto} winningLotto
-   */
   getWinningLotto() {
     return this.#winningLotto
   }
@@ -59,7 +51,7 @@ class LottoMachine {
 
   /**
    *
-   * @returns  {{ winningCount: number }[]}
+   * @returns  {WinningStat[]}
    */
   calculateWinningStatistics() {
     const initWinningStatistics = Array.from({ length: RANKS.length }, () => ({
@@ -67,10 +59,12 @@ class LottoMachine {
     }))
 
     const winningStatistics = this.#lottos.reduce((acc, lotto) => {
-      const lottoNumbers = lotto.getLotto()
-      const winningNumbers = this.#winningLotto.getLotto()
-      const bonusNumber = this.#winningLotto.getBonusNumber()
-      const rank = this.getLottoRank(lottoNumbers, winningNumbers, bonusNumber)
+      const rank = this.getLottoRank(
+        lotto.getLotto(),
+        this.#winningLotto.getLotto(),
+        this.#winningLotto.getBonusNumber()
+      )
+
       if (!rank) {
         return acc
       }
@@ -86,31 +80,20 @@ class LottoMachine {
   /**
    *
    * @param {Lotto} lotto
-   * @returns {{ matchCount: number, isBonusMatch: boolean, winning_price: number, index: number} | undefined} rank
+   * @returns {Rank | undefined} rank
    */
   getLottoRank(lottoNumbers, winningNumbers, bonusNumber) {
     const matchCount = getMatchCount(lottoNumbers, winningNumbers)
     const isBonusMatch = hasLottoNumber(lottoNumbers, bonusNumber)
 
-    //TODO: 리팩토링 필요
-    const rank = RANKS.find((RANK) => {
-      if (RANK.matchCount === matchCount) {
-        if (RANK.index === THIRD.index) {
-          return RANK.isBonusMatch === isBonusMatch
-        }
-
-        return true
-      }
-
-      return false
-    })
+    const rank = RANKS.find((RANK) => this.#isMatch(RANK, matchCount, isBonusMatch))
 
     return rank
   }
 
   /**
    *
-   * @param {{ winningCount: number }[]} winningStatistics
+   * @param {WinningStat[]} winningStatistics
    * @returns {number} profitRate
    */
   calculateProfitRate(winningStatistics) {
@@ -134,6 +117,25 @@ class LottoMachine {
     const sortedLottoNumbers = [...lottoNumbers].sort((a, b) => a - b)
 
     return new Lotto(sortedLottoNumbers)
+  }
+
+  /**
+   *
+   * @param {Rank} rank
+   * @param {number} matchCount
+   * @param {number} isBonusMatch
+   * @returns
+   */
+  #isMatch(rank, matchCount, isBonusMatch) {
+    if (rank.matchCount !== matchCount) {
+      return false
+    }
+
+    if (rank.index === THIRD.index) {
+      return rank.isBonusMatch === isBonusMatch
+    }
+
+    return true
   }
 }
 
