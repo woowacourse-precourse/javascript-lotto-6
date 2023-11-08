@@ -1,5 +1,4 @@
 import { Console } from '@woowacourse/mission-utils';
-//  발행한 로또번호 전부 출력
 import modifiers from '../utils/modifiers.js';
 
 const printing = (message) => Console.print(message);

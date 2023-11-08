@@ -1,10 +1,4 @@
-const PRICE = {
-  first: 2000000000,
-  second: 30000000,
-  third: 1500000,
-  forth: 50000,
-  fifth: 5000,
-};
+import CONSTANTS from './constants.js';
 
 class Winner {
   #result;
@@ -22,9 +16,9 @@ class Winner {
     this.#revenue = 0;
   }
 
-  #priceResult(hi) {
-    this.#result[hi] += 1;
-    this.#revenue += PRICE[hi];
+  #priceResult(number) {
+    this.#result[number] += 1;
+    this.#revenue += CONSTANTS.PRICE[number];
   }
 
   switchNumber(number, bonus) {
@@ -46,10 +40,3 @@ class Winner {
 }
 
 export default Winner;
-
-// const winner = new Winner();
-
-// winner.switchNumber(3, false);
-// winner.switchNumber(3, false);
-// winner.switchNumber(3, false);
-// console.log(winner.getResult());

@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import USER_INPUT from './messages.js';
+import CONSTANTS from './constants.js';
 
 class UserInput {
   #line;
@@ -9,14 +9,10 @@ class UserInput {
     return this.#line;
   }
 
-  getTotalPrice = () => this.#getLine(USER_INPUT.totalPrice);
+  getTotalPrice = () => this.#getLine(CONSTANTS.USER_INPUT.totalPrice);
 
-  getWinningNumbers = () => this.#getLine(USER_INPUT.winningNumbers);
+  getWinningNumbers = () => this.#getLine(CONSTANTS.USER_INPUT.winningNumbers);
 
-  getBonusNumber = () => this.#getLine(USER_INPUT.bonusNumber);
+  getBonusNumber = () => this.#getLine(CONSTANTS.USER_INPUT.bonusNumber);
 }
 export default UserInput;
-
-// const userinput = new UserInput();
-
-// userinput.getTotalPrice();

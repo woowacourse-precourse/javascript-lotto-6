@@ -15,14 +15,12 @@ class Lotto {
     this.#bonus = Number(bonus);
   }
 
-  // 유효성 검사
   #validate(numbers) {
     // if (numbers.length !== 6) {
     //   throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     // }
   }
 
-  // TODO: 추가 기능 구현
   getNumbers() {
     return this.#numbers;
   }
@@ -33,6 +31,3 @@ class Lotto {
 }
 
 export default Lotto;
-
-// const lotto = new Lotto('1, 2, 3, 4, 5, 6', '1');
-// console.log(lotto.getNumbers(), typeof lotto.getBonus());

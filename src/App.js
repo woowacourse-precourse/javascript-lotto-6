@@ -16,17 +16,10 @@ class App {
     this.#userInput = new UserInput();
   }
 
-  async play() {
-    await this.drawLotto();
-    await this.makeWinner();
-  }
-
   async drawLotto() {
-    // 몇장 샀는지 입력
     this.#totalPrice = await this.#userInput.getTotalPrice();
-    const lottoDrawing = new LottoDrawing(this.#totalPrice);
 
-    // 로또 발행
+    const lottoDrawing = new LottoDrawing(this.#totalPrice);
     const count = lottoDrawing.checkCount();
     this.#lottos = lottoDrawing.makeLottos();
 
@@ -47,10 +40,11 @@ class App {
 
     printMessage.results(result, this.#totalPrice);
   }
+
+  async play() {
+    await this.drawLotto();
+    await this.makeWinner();
+  }
 }
 
 export default App;
-
-const myapp = new App();
-
-myapp.play();
