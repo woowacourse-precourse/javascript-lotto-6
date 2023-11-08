@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-
+import { ERROR_MESSAGE } from './Constant.js';
 class Lotto {
   #numbers;
 
@@ -12,6 +12,11 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    if (new Set(numbers).size !== numbers.length)
+      throw new Error(ERROR_MESSAGE.CHECK_LOTTO_NUMBER_DUPLICATE);
+
+    if (numbers.join('').replace(/[0-9]/g, '').length > 0)
+      throw new Error(ERROR_MESSAGE.CHECK_LOTTO_NUMBER);
   }
 
   printLotto() {
