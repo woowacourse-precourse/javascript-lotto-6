@@ -5,7 +5,7 @@ export default class InputView {
     return await Console.readLineAsync(query);
   }
 
-  static async readPurchaseAmount() {
+  static async readPurchaseMoney() {
     const input = await this.read('구입금액을 입력해 주세요.\n');
     const amount = Number(input);
     return amount;

@@ -7,8 +7,8 @@ import Lotto from '../model/Lotto.js';
 
 export default class LottoGame {
   async run() {
-    const purchaseAmount = await this.#handleErrorAndRetry(() => this.#requirePurchaseAmount());
-    const lottoList = this.#generateLotto(purchaseAmount);
+    const purchaseMoney = await this.#handleErrorAndRetry(() => this.#requirePurchaseMoney());
+    const lottoList = this.#generateLotto(purchaseMoney);
     this.#printLottoList(lottoList);
     const winningLotteryNumbers = await this.#handleErrorAndRetry(() =>
       this.#requireLotteryNumbers(),
@@ -17,7 +17,7 @@ export default class LottoGame {
       this.#requireBonusNumber(winningLotteryNumbers),
     );
     const lotteryResult = this.#confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber);
-    const earningsRate = this.#calculateEarningsRate(purchaseAmount, lotteryResult);
+    const earningsRate = this.#calculateEarningsRate(purchaseMoney, lotteryResult);
     this.#printPrizeResult(lotteryResult, earningsRate);
   }
 
@@ -30,9 +30,9 @@ export default class LottoGame {
     }
   }
 
-  async #requirePurchaseAmount() {
-    const amount = await InputView.readPurchaseAmount();
-    Validator.validatePurchaseAmount(amount);
+  async #requirePurchaseMoney() {
+    const amount = await InputView.readPurchaseMoney();
+    Validator.validatePurchaseMoney(amount);
     return amount;
   }
 
@@ -48,8 +48,8 @@ export default class LottoGame {
     return bonusNumber;
   }
 
-  #generateLotto(purchaseAmount) {
-    const numberOfLotto = purchaseAmount / LOTTO_ROLE.unit;
+  #generateLotto(purchaseMoney) {
+    const numberOfLotto = purchaseMoney / LOTTO_ROLE.unit;
     const lottoList = [];
 
     for (let i = 0; i < numberOfLotto; i++) {
@@ -88,14 +88,14 @@ export default class LottoGame {
     return lotteryResultMap;
   }
 
-  #calculateEarningsRate(purchaseAmount, lotteryResult) {
+  #calculateEarningsRate(purchaseMoney, lotteryResult) {
     let profit = 0;
     for (const [key, count] of lotteryResult) {
       const { prizeMoney } = PRIZE[key];
       profit += prizeMoney * count;
     }
 
-    const EarningsRate = (profit / purchaseAmount) * 100;
+    const EarningsRate = (profit / purchaseMoney) * 100;
     return EarningsRate.toFixed(1);
   }
 }
