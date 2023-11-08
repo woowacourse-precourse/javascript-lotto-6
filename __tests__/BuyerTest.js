@@ -1,3 +1,5 @@
+/* eslint-disable max-lines-per-function */
+
 import Buyer from '../src/domain/Buyer';
 import { LOTTO } from '../src/Constant';
 
@@ -15,4 +17,12 @@ describe('Buyer 도메인 로직 테스트', () => {
       expect(() => new Buyer(money)).toThrow('[ERROR]');
     }
   );
+
+  test('구매자는 구입 금액 / 단위금액 만큼 로또를 발행받는다.', () => {
+    const money = 10000;
+
+    const buyer = new Buyer(money);
+    buyer.buyLottos();
+    expect(buyer.getLottos().length).toBe(money / LOTTO.MONEY_UNIT);
+  });
 });
