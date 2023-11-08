@@ -57,6 +57,17 @@ class App {
     }
   }
 
+  calculateWin() {
+    this.#lottoNumbers.forEach((num) => {
+      const match = num.filter(num => this.#winNumber.includes(+num));
+      if (match.length === 6) this.#winResult[1]++;
+      if (match.length === 5 && num.includes(this.#bonusNumber)) this.#winResult[2]++;
+      if (match.length === 5 && !num.includes(this.#bonusNumber)) this.#winResult[3]++;
+      if (match.length === 4 || (match.length === 3 && num.includes(this.#bonusNumber))) this.#winResult[4]++;
+      if (match.length === 3 || (match.length === 2 && num.includes(this.#bonusNumber))) this.#winResult[5]++;
+    })
+  }
+
   async play() {}
 }
 
