@@ -1,2 +1,3 @@
+export { default as inputBonusNumber } from "./inputBonusNumber.js";
 export { default as inputPurchasePrice } from "./inputPurchasePrice.js";
 export { default as inputWinningNumbers } from "./inputWinningNumbers.js";
