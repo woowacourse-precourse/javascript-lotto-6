@@ -67,6 +67,19 @@ class LottoGame {
     this.#print6MatchedResult();
   }
 
+  printProfit() {
+    const result = (
+      ((Number(this.winnerStatic[0]) * 5000 +
+        Number(this.winnerStatic[1]) * 50000 +
+        Number(this.winnerStatic[2]) * 1500000 +
+        Number(this.winnerStatic[3]) * 30000000 +
+        Number(this.winnerStatic[4]) * 2000000000) *
+        100) /
+      (this.#userLottoNumberList.length * 1000)
+    ).toFixed(1);
+    Console.print(`\n총 수익률은 ${result}%입니다.`);
+  }
+
   #print3MatchedResult() {
     Console.print(`3개 일치 (5,000원) - ${this.winnerStatic[0]}개`);
   }

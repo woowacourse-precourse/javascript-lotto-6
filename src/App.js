@@ -12,9 +12,7 @@ class App {
     const purchaseAmount = await inputUserPurchaseAmount();
     const user = new User(purchaseAmount);
     const userWinningNumberInput = await inputUserWinningNumber();
-    console.log(userWinningNumberInput); // TODO 디버깅용
     const bonusNumber = await inputUserBonusNumber();
-    console.log(bonusNumber); // TODO 디버깅용
     const lotto = new Lotto(userWinningNumberInput, bonusNumber);
     const lottoGame = new LottoGame(
       user.issuedLottoNumberList,
@@ -22,6 +20,7 @@ class App {
       lotto.getBonusNumber(),
     );
     lottoGame.printResult();
+    lottoGame.printProfit();
   }
 }
 

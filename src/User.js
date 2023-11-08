@@ -36,10 +36,20 @@ class User {
   }
 
   printissuedLotto() {
-    Console.print(`\n${this.#purchaseAmount}개를 구매했습니다.`);
+    Console.print(`${this.#purchaseAmount}개를 구매했습니다.`);
     this.issuedLottoNumberList.forEach((value) => {
-      Console.print(value);
+      this.#output(value);
     });
+  }
+
+  #output(value) {
+    let printValue = '[';
+    for (let i = 0; i < 6; i += 1) {
+      printValue += value[i];
+      if (i !== 5) printValue += ', ';
+    }
+    printValue += ']';
+    Console.print(printValue);
   }
 }
 
