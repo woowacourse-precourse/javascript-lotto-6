@@ -8,9 +8,9 @@ class Lotto {
     this.#numbers = this.getNumbers();
   }
 
-  async getNumbers () {
+  async getNumbers (callback) {
     const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
-    return this.checkNumbers(input);
+    return callback(this.checkNumbers(input));
   }
 
   checkNumbers (inputValue) {
