@@ -9,6 +9,16 @@ class App {
     }
     return money;
   }
+  // 로또 발행
+  publishLotto(money) {
+    const lottoCount = money / 1000;
+    const lottos = [];
+    for (let i = 0; i < lottoCount; i++) {
+      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)
+      lottos.push(randomNumbers);
+    }
+    return lottos;
+  }
 }
 
 export default App;
