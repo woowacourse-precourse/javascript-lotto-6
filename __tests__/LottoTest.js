@@ -1,18 +1,57 @@
-import Lotto from "../src/Lotto.js";
+import Lotto, { LOTTO_PRICE } from "../src/Lotto.js";
+import { getLogSpy } from "../test-utils/index.js";
 
 describe("로또 클래스 테스트", () => {
-  test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
-    expect(() => {
-      new Lotto([1, 2, 3, 4, 5, 6, 7]);
-    }).toThrow("[ERROR]");
+  test("로또 번호를 출력한다.", () => {
+    // given
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto(numbers);
+
+    const logSpy = getLogSpy();
+
+    // when
+    lotto.printNumbers();
+
+    // then
+    const expected = "[1, 2, 3, 4, 5, 6]";
+    expect(logSpy).toHaveBeenCalledWith(expected);
   });
 
-  // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
-  test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
-    expect(() => {
-      new Lotto([1, 2, 3, 4, 5, 5]);
-    }).toThrow("[ERROR]");
+  test("로또의 갯수는 (구매 금액 / 로또 가격) 이다.", () => {
+    // given
+    const purchasePrice = 3000;
+
+    // when
+    const result = Lotto.calculateQuantityFromPrice(purchasePrice);
+
+    // then
+    const expected = purchasePrice / LOTTO_PRICE;
+    expect(result).toBe(expected);
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test("로또 번호는 초기화 될 때 오름차순으로 정렬된다.", () => {
+    // given
+    const numbers = [6, 4, 5, 3, 2, 1];
+
+    // when
+    const lotto = new Lotto(numbers);
+    const result = lotto.numbers;
+
+    // then
+    const expected = [1, 2, 3, 4, 5, 6];
+    expect(result).toEqual(expected);
+  });
+
+  test("구입한 로또 갯수만큼 로또를 생성 한다.", () => {
+    // given
+    const lottoQuantity = 4;
+
+    // when
+    const lottos = Lotto.generateLottos(lottoQuantity);
+
+    // then
+    lottos.forEach((lotto) => {
+      expect(lotto).toBeInstanceOf(Lotto);
+    });
+  });
 });

@@ -1,18 +1,55 @@
+import { Console, Random } from "@woowacourse/mission-utils";
+import LottoValidation from "./LottoValidation.js";
+
+export const LOTTO_PRICE = 1000;
+export const LOTTO_NUMBER_RANGE = Object.freeze({
+  MIN: 1,
+  MAX: 45,
+});
+export const LOTTO_NUMBER_COUNT = 6;
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    LottoValidation.validate(numbers);
+
     this.#numbers = numbers;
+    this.#numbers.sort((x, y) => x - y);
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  get numbers() {
+    return this.#numbers;
   }
 
-  // TODO: 추가 기능 구현
+  printNumbers() {
+    const SEPERATOR = ", ";
+    Console.print(`[${this.#numbers.join(SEPERATOR)}]`);
+  }
+
+  static calculateQuantityFromPrice(price) {
+    return price / LOTTO_PRICE;
+  }
+
+  static #generateLotto() {
+    const lottoNumbers = Random.pickUniqueNumbersInRange(
+      LOTTO_NUMBER_RANGE.MIN,
+      LOTTO_NUMBER_RANGE.MAX,
+      LOTTO_NUMBER_COUNT
+    );
+
+    return new Lotto(lottoNumbers);
+  }
+
+  static generateLottos(quantity) {
+    const result = [];
+
+    Array.from({ length: quantity }, () => {
+      result.push(this.#generateLotto());
+    });
+
+    return result;
+  }
 }
 
 export default Lotto;
