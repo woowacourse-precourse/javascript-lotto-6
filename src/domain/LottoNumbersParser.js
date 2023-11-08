@@ -1,13 +1,12 @@
 import REGEX from "../constants/Regex.js";
-import { LOTTO_BUSINESS_RULES } from "../constants/lotto.js";
 import { ERROR_MESSAGE } from "../constants/messages.js";
-import { TypeValidator, validateNumberInRange } from "../utils/validators.js";
+import { TypeValidator } from "../utils/validators.js";
 
 const LottoNumbersParser = {
   parse(input) {
     TypeValidator.isString(input);
     const splittedInput = this.splitByComma(input).map((value) => value.trim());
-    this.validateInput(splittedInput);
+    this.validateHasOnlyPositiveInt(splittedInput);
 
     return this.parseInts(splittedInput);
   },
@@ -22,11 +21,6 @@ const LottoNumbersParser = {
     return value.split(",");
   },
 
-  validateInput(array) {
-    this.validateHasOnlyPositiveInt(array);
-    this.validateVaildLottoNumbers(array);
-  },
-
   parseInts(array) {
     return array.map((value) => parseInt(value, 10));
   },
@@ -36,11 +30,6 @@ const LottoNumbersParser = {
     if (!isAllInt) {
       throw new Error(ERROR_MESSAGE.hasNotOnlyPostiveInt);
     }
-  },
-
-  validateVaildLottoNumbers(numbers) {
-    const { minNumber, maxNumber } = LOTTO_BUSINESS_RULES;
-    numbers.forEach((number) => validateNumberInRange(number, minNumber, maxNumber));
   },
 
   validateSingle(input) {
