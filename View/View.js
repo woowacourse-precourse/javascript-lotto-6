@@ -2,19 +2,23 @@ import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, WIN_MESSAGE } from '../modules/constant';
 
 class View {
+  #purchaseMoney;
+  #winNumber;
+  #bonusNumber;
+
   async inputPurchaseMoney() {
-    const purchaseMoney = await Console.readLineAsync(MESSAGE.moneyInput);
-    return purchaseMoney;
+    this.#purchaseMoney = await Console.readLineAsync(MESSAGE.moneyInput);
+    return this.#purchaseMoney;
   }
 
   async inputLottoNumber() {
-    const winNumber = await Console.readLineAsync(MESSAGE.lottoNumberInput);
-    return winNumber.split(',').map((number) => Number(number));
+    this.#winNumber = await Console.readLineAsync(MESSAGE.lottoNumberInput);
+    return this.#winNumber.split(',').map((number) => Number(number));
   }
 
   async inputBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(MESSAGE.bonusNumberInput);
-    return bonusNumber;
+    this.#bonusNumber = await Console.readLineAsync(MESSAGE.bonusNumberInput);
+    return this.#bonusNumber;
   }
 
   printAmount(amount) {
