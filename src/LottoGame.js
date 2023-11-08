@@ -78,6 +78,7 @@ class LottoGame {
         matchedNumbers,
         rank,
         prize: PRIZE_INFO[rank]?.prize || 0,
+        hasBonus: rank === 'SECOND',
       };
     });
 
@@ -85,18 +86,22 @@ class LottoGame {
   }
 
   #determineRank(matchedNumbers, hasBonus) {
-    switch (matchedNumbers) {
-      case 6:
-        return 'FIRST';
-      case 5:
-        return hasBonus ? 'SECOND' : 'THIRD';
-      case 4:
-        return 'FOURTH';
-      case 3:
-        return 'FIFTH';
-      default:
-        return null;
+    if (matchedNumbers === 6) {
+      return 'FIRST';
     }
+    if (matchedNumbers === 5 && hasBonus) {
+      return 'SECOND';
+    }
+    if (matchedNumbers === 5) {
+      return 'THIRD';
+    }
+    if (matchedNumbers === 4) {
+      return 'FOURTH';
+    }
+    if (matchedNumbers === 3) {
+      return 'FIFTH';
+    }
+    return null;
   }
 
   getLottos() {

@@ -14,8 +14,14 @@ class LottoView {
     Console.print('---');
     Object.keys(PRIZE_INFO).forEach((rank) => {
       const count = results.filter((result) => result.rank === rank).length;
-      const prize = PRIZE_INFO[rank].prize.toLocaleString();
-      const message = `${PRIZE_INFO[rank].match}개 일치 (${prize}원) - ${count}개`;
+      let message = `${PRIZE_INFO[rank].match}개 일치 (${PRIZE_INFO[
+        rank
+      ].prize.toLocaleString()}원) - ${count}개`;
+      if (rank === 'SECOND') {
+        message = `5개 일치, 보너스 볼 일치 (${PRIZE_INFO[
+          rank
+        ].prize.toLocaleString()}원) - ${count}개`;
+      }
       Console.print(message);
     });
   }
