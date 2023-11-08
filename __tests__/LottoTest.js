@@ -10,12 +10,12 @@ describe('Lotto 클래스 테스트', () => {
 
   test('6개가 아닌 로또 번호일 경우 예외 처리', () => {
     const invalidNumbers = [1, 2, 3, 4, 5, 6, 7];
-    expect(() => new Lotto(invalidNumbers)).toThrow(ERROR_MESSAGE.errorText);
+    expect(() => new Lotto(invalidNumbers)).toThrow(ERROR_MESSAGE.duplicationWinningNumbers);
   });
 
   test('중복된 로또 번호일 경우 예외 처리', () => {
     const invalidNumbers = [1, 2, 3, 4, 5, 5];
-    expect(() => new Lotto(invalidNumbers)).toThrow(ERROR_MESSAGE.errorText);
+    expect(() => new Lotto(invalidNumbers)).toThrow(ERROR_MESSAGE.duplicationWinningNumbers);
   });
 
   test('로또번호가 6개이고 1부터 45 사이의 수이다.', () => {

@@ -1,28 +1,16 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, LOTTO_NUMBER } from '../constants.js';
+import { LOTTO_NUMBER } from '../constants.js';
+import Validation from '../Validation.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     if (numbers && Array.isArray(numbers)) {
-      this.#validateNumbers(numbers);
+      Validation.validateWinningNumbers(numbers.toString());
       this.#numbers = numbers;
     } else {
       this.#numbers = this.#generateRandomNumbers();
-    }
-  }
-
-  #validateNumbers(numbers) {
-    if (numbers.length !== LOTTO_NUMBER.numberCount) {
-      throw new Error(ERROR_MESSAGE.errorText);
-    }
-    const uniqueNumbers = new Set(numbers);
-    if (
-      uniqueNumbers.size !== numbers.length ||
-      numbers.some((num) => num < LOTTO_NUMBER.inRangeFrom || num > LOTTO_NUMBER.inRangeTo)
-    ) {
-      throw new Error(ERROR_MESSAGE.errorText);
     }
   }
 
