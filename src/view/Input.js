@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { INPUT_MESSAGE } from "../constatns/message.js"
+import { ERROR_MESSAGE, INPUT_MESSAGE } from "../constatns/message.js"
 import { validAmountCheck, validBonusNumberCheck } from "../validator.js"
-import { changeArrayStringIntoNumber } from "../utils.js"
+import { print, changeArrayStringIntoNumber } from "../utils.js"
 
 export const getUserAmount = async () => {
   try {
@@ -9,7 +9,7 @@ export const getUserAmount = async () => {
     await validAmountCheck(input);
     return input;
   } catch (error) {
-    throw error;
+    print(ERROR_MESSAGE.AMOUNT);
   }
 }
 
@@ -29,6 +29,6 @@ export const getBonusNumber = async () => {
     await validBonusNumberCheck(input);
     return input;
   } catch (error) {
-    throw error;
+    print(error);
   }
 }
