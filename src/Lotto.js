@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import ExceptionList from './ExceptionList';
+import ExceptionList from './ExceptionList.js';
 
 class Lotto {
   #numbers;

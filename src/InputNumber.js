@@ -8,6 +8,9 @@ class InputNumber {
   getWinNumber = async () => {
     try {
       const numberString = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+      if (typeof numberString !== 'string' || numberString.trim() === '') {
+        throw new Error('[ERROR] 입력값이 유효하지 않습니다.');
+      }
       let exception = new ExceptionList();
       exception.noInputError(numberString);
       this.win = numberString.split(',');
