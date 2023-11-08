@@ -63,5 +63,14 @@ class LottoResult {
       this.#resultList[4] += 1;
     }
   }
+
+  getProfit() {
+    let amount = 0;
+    this.#resultList.forEach((result, index) => {
+      amount += result * this.#prizeList[index];
+    });
+    this.#profit = (amount / (this.#lottoList.length * 1000)) * 100;
+    this.#profit = Number(this.#profit.toFixed(1));
+  }
 }
 export default LottoResult;
