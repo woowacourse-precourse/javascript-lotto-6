@@ -58,16 +58,18 @@ class LottoController {
   }
 
   compareLottos() {
-    this.calculateStats(
-      this.lottoData.getLottos(),
-      this.lotto.getWinningNumber(),
-      this.lotto.getBonusNumber(),
+    this.lottoData.setLottoStats(
+      this.calculateStats(
+        this.lottoData.getLottos(),
+        this.lotto.getWinningNumber(),
+        this.lotto.getBonusNumber(),
+      ),
     );
     this.outputView.printStats(this.lottoData.getLottoStats());
   }
 
   calculateStats(lottos, winningNumber, bonusNumber) {
-    const lottoStats = { 3: 0, 4: 0, 5: 0, 6: 0, bonus: 0 };
+    const lottoStats = this.lottoData.getLottoStats();
 
     lottos.forEach((lotto) => {
       const winningCount = lotto.filter((number) => winningNumber.includes(number)).length;
@@ -79,7 +81,7 @@ class LottoController {
         lottoStats[winningCount] += 1;
       }
     });
-    this.lottoData.setLottoStats(lottoStats);
+    return lottoStats;
   }
 
   profitRate() {

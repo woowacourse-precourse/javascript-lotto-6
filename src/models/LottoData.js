@@ -7,7 +7,7 @@ class LottoData {
     this.amount = amount;
     this.count = amount / SETTING.unit;
     this.lottos = [];
-    this.lottoStats = {};
+    this.lottoStats = { 3: 0, 4: 0, 5: 0, 6: 0, bonus: 0 };
     this.winningAmount = 0;
     this.#validatePurchaseAmount(amount);
   }
