@@ -30,6 +30,34 @@ class Game {
             Console.print(`[${numbers.join(", ")}]`);
         }
 
+        let winNumInput = "";
+        let winNum = [];
+        let lotto = null;
+        
+        while (true) {
+            try {
+                winNumInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
+                winNum = winNumInput.split(',').map(n => parseInt(n));
+                lotto = new Lotto(winNum);  // 유효성 검사는 Lotto 클래스의 생성자에서 자동으로 실행됩니다.
+                break;
+            } catch (error) {
+                Console.print(error.message);  // Lotto 클래스의 에러 메시지를 출력합니다.
+            }
+        }
+
+        let bonusNum = 0;
+        while (true) {
+            try {
+                bonusNum = parseInt(await Console.readLineAsync("보너스 번호를 입력해 주세요.\n"));
+                if (isNaN(bonusNum) || bonusNum < 1 || bonusNum > 45) {
+                    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+                }
+                break;
+            } catch (error) {
+                Console.print(error.message);
+            }
+        }
+
     }
 }
 
