@@ -113,3 +113,22 @@ describe('로또 번호 유효성 검사', () => {
     }
   });
 });
+
+describe('보너스 번호 유효성 검사', () => {
+  test('보너스 번호가 당첨 번호와 중복되지 않는 경우', () => {
+    const winningNumber = [1, 2, 3, 4, 5, 6];
+    const validInput = '33';
+    expect(validateFindEqual(winningNumber, validInput)).toBe(true);
+  });
+  test('보너스 번호가 당첨 번호와 중복되는 경우', () => {
+    const winningNumber = [1, 2, 3, 4, 5, 6];
+    const invalidInput = [1, 6, 4];
+    try {
+      invalidInput.forEach((bonusNum) => {
+        expect(validateFindEqual(winningNumber, bonusNum)).toBe(true);
+      });
+    } catch (error) {
+      expect(error).toEqual(ERROR_MESSAGE.INVALID_LOTTO_BONUS);
+    }
+  });
+});
