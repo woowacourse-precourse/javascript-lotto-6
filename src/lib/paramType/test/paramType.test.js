@@ -1,5 +1,5 @@
-import { ReferenceTypeError } from '../src/errorTypes/index';
-import paramType from '../src/pramType';
+import { ReferenceTypeError } from '../src/errorTypes/index.js';
+import paramType from '../src/paramType.js';
 
 describe('function paramType Test', () => {
   class SuperClass {}
