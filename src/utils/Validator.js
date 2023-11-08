@@ -1,4 +1,5 @@
 import ERROR_MESSAGE from "../constant/ErrorMessage";
+import RangeTest from "./RangeTest";
 
 const Validator = {
   InputPurchaseAmount(purchaseAmount) {
