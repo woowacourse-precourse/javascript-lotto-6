@@ -12,7 +12,6 @@ class Lotto {
     LottoValidator.validateLottoNumbers(numbers);
   }
 
-  // TODO: 추가 기능 구현
   getNumbers() {
     return this.#numbers;
   }
