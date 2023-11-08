@@ -22,7 +22,7 @@ describe("어플리케이션 테스트", () => {
 
     mockQuestions(inputs);
 
-    value = await app.untilValueAvailable(value, mode);
+    value = await app.getValueOf(value, mode);
 
     expect(value).toEqual(result);
   });

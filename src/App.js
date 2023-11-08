@@ -24,18 +24,18 @@ class App {
 
   async play() {
     const output = new Output();
-    this.#money = await this.untilValueAvailable(this.#money, MODE.MONEY);
+    this.#money = await this.getValueOf(this.#money, MODE.MONEY);
     const lottos = this.makeLotto(this.#money);
 
     output.printHowManyLotto(this.#money);
     output.printMyLotto(lottos);
 
-    this.#winningNumbers = await this.untilValueAvailable(
+    this.#winningNumbers = await this.getValueOf(
       this.#winningNumbers,
       MODE.WINNING_NUMBERS
     );
     Console.print("");
-    this.#bonusNumber = await this.untilValueAvailable(
+    this.#bonusNumber = await this.getValueOf(
       this.#bonusNumber,
       MODE.BONUS_NUMBER,
       this.#winningNumbers
@@ -92,7 +92,7 @@ class App {
     return temp;
   }
 
-  async untilValueAvailable(value, mode, winningNumbers) {
+  async getValueOf(value, mode, winningNumbers) {
     while (!value) {
       try {
         value = await this.assignValue(mode, winningNumbers);
