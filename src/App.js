@@ -1,4 +1,4 @@
-import StartGame from './startGame.js';
+import StartGame from './StartGame.js';
 
 class App {
   constructor() {
