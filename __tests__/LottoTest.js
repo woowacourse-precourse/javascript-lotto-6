@@ -24,6 +24,18 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
+  test('로또 번호가 오름차순으로 정렬되어 출력되는지 확인한다', () => {
+    //given
+    const lotto = new Lotto([3, 5, 1, 4, 2, 6]);
+    const logSpy = getLogSpy();
+
+    //when
+    lotto.printNumbers();
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('[1, 2, 3, 4, 5, 6]')
+    );
+  });
+
   test('로또 번호 출력이 올바른지 확인한다.', () => {
     //given
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
