@@ -67,6 +67,10 @@ class App {
    * @throws {Error} 입력값이 정수가 아닐 경우, 1~45 범위를 벗어날 경우 에러 발생
    * @return {Lotto} */
   async getWinningLotto() {
+    const USER_STRING = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const USER_NUMS = USER_STRING.split(',').map((num) => Number(num));
+
+    return new Lotto(USER_NUMS);
   }
 
   /**
