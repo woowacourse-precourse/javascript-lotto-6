@@ -14,15 +14,14 @@ describe("함수별 기능 테스트", () => {
 
   test("로또 번호 오름차순으로 정렬하기", () => {
     const handler = new LottoHandler();
-    const logSpy = jest.spyOn(MissionUtils.Console, "print");
 
     const mockFn = jest.spyOn(MissionUtils.Random, "pickUniqueNumbersInRange");
     mockFn.mockReturnValue([6, 5, 4, 3, 2, 1]);
-    const output = "[1, 2, 3, 4, 5, 6]";
 
-    handler.createLotto().printLottoNumbers();
+    const result = handler.createLotto().getLottoNumbers();
+    const output = [1, 2, 3, 4, 5, 6];
 
-    expect(logSpy).toHaveBeenCalledWith(output);
+    expect(result).toEqual(output);
   });
 
   test("일치 번호 개수 추출하기", () => {
