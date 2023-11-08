@@ -1,5 +1,6 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import { ERROR_MESSAGE } from './constants/constants.js';
 
 class LottoList {
   #lottos;
@@ -25,7 +26,7 @@ class LottoList {
 
   #validate(lottoCount) {
     if (!Number.isInteger(lottoCount) || lottoCount < 0) {
-      throw new Error('[ERROR] 로또 개수 값이 올바르지 않습니다.');
+      throw new Error(ERROR_MESSAGE.LOTTO_COUNT);
     }
   }
 

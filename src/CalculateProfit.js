@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PRIZE_MONEY } from './constants/constants.js';
+import { PRIZE_MONEY, ERROR_MESSAGE } from './constants/constants.js';
 
 class CalculateProfit {
   #results;
@@ -19,7 +19,7 @@ class CalculateProfit {
 
   #validate(results, moneySpent) {
     if (typeof moneySpent !== 'number' || moneySpent <= 0) {
-      throw new Error('[ERROR] 사용한 금액이 잘못된 형식입니다.');
+      throw new Error(ERROR_MESSAGE.MONEY_SPENT);
     }
     if (
       !results ||
@@ -28,7 +28,7 @@ class CalculateProfit {
         (value) => Number.isInteger(value) && value >= 0,
       )
     ) {
-      throw new Error('[ERROR] 당첨 결과가 잘못된 형식입니다.');
+      throw new Error(ERROR_MESSAGE.LOTTO_RESULT);
     }
   }
 

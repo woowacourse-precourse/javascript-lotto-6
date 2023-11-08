@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE, MESSAGE } from './constants/constants.js';
 
 class User {
   #lottoCount;
@@ -9,10 +10,10 @@ class User {
 
   //   구입 금액
   async inputMoney() {
-    const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    const money = await Console.readLineAsync(MESSAGE.MONEY_SPENT);
 
     if (!this.#moneyValidate(money)) {
-      Console.print('[ERROR] 로또 구입 금액이 잘못된 형식입니다.');
+      Console.print(ERROR_MESSAGE.MONEY_SPENT);
       return this.inputMoney();
     }
 
@@ -28,14 +29,13 @@ class User {
     return this.#lottoCount;
   }
 
+  //   당첨 번호
   async inputWinningNumbers() {
-    const numbers = await Console.readLineAsync(
-      '\n당첨 번호를 입력해 주세요.\n',
-    );
+    const numbers = await Console.readLineAsync(MESSAGE.LOTTO_NUMBER);
 
     const splitNumbers = numbers.split(',').map(Number);
     if (!this.#numbersValidate(splitNumbers)) {
-      Console.print('[ERROR] 당첨 번호가 잘못된 형식입니다.');
+      Console.print(ERROR_MESSAGE.LOTTO_NUMBER);
       return this.inputWinningNumbers();
     }
 
@@ -57,14 +57,13 @@ class User {
     return this.#winningNumbers;
   }
 
+  //   보너스 번호
   async inputBonusNumber() {
-    const number = await Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n',
-    );
+    const number = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
 
     const bonusNumber = Number(number);
     if (!this.#bonusNumberValidate(bonusNumber)) {
-      Console.print('[ERROR] 보너스 번호가 잘못된 형식입니다.');
+      Console.print(ERROR_MESSAGE.BONUS_NUMBER);
       return this.inputBonusNumber();
     }
 

@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PRIZE_MONEY } from './constants/constants.js';
+import { PRIZE_MONEY, ERROR_MESSAGE, MESSAGE } from './constants/constants.js';
 
 class LottoResultCalculator {
   #userLottos;
@@ -25,20 +25,20 @@ class LottoResultCalculator {
       !Array.isArray(userLottos) ||
       !userLottos.every((lotto) => this.#numbersValidate(lotto))
     ) {
-      throw new Error('[ERROR] 로또 번호가 잘못된 형식입니다.');
+      throw new Error(ERROR_MESSAGE.LOTTO_NUMBER);
     }
     if (
       !Array.isArray(winningNumbers) ||
       !this.#numbersValidate(winningNumbers)
     ) {
-      throw new Error('[ERROR] 당첨 번호가 잘못된 형식입니다.');
+      throw new Error(ERROR_MESSAGE.LOTTO_RESULT);
     }
     if (
       !Number.isInteger(bonusNumber) ||
       bonusNumber <= 0 ||
       bonusNumber > 45
     ) {
-      throw new Error('[ERROR] 보너스 번호가 잘못된 형식입니다.');
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER);
     }
   }
 
@@ -73,7 +73,7 @@ class LottoResultCalculator {
   }
 
   printResults() {
-    Console.print('\n당첨 통계\n---');
+    Console.print(MESSAGE.WINNING_STATISTICS);
 
     Console.print(
       `3개 일치 (${this.#formatNumber(PRIZE_MONEY[3])}원) - ${
