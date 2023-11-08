@@ -1,6 +1,6 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import { MESSAGE, LOTTERY, LOTTERY_WINNINGS } from './constants.js';
-import Lotto from './Lotto.js';
+import LottoManager from './LottoManager.js';
 import InputManager from './InputManager.js';
 import { NumberConverter, ArrayConverter } from './utils/converter.js';
 
@@ -13,15 +13,6 @@ export default class Computer {
     this.purchaseAmount = await InputManager.getPurchaseAmount();
   }
 
-  issueLottoForPurchaseAmount() {
-    const lottoCnt = this.purchaseAmount / 1000;
-    Console.print(MESSAGE.PURCHASE_COUNT(lottoCnt));
-
-    for (let count = 0; count < lottoCnt; count++) {
-      this.issueLotto();
-    }
-  }
-
   async getWinningNumbersrFromUserInput() {
     this.winningNumbers = await InputManager.getWinningNumbers();
   }
@@ -30,17 +21,11 @@ export default class Computer {
     this.bonusNumber = await InputManager.getBonusNumber(this.winningNumbers);
   }
 
-  issueLotto() {
-    const randNum = Random.pickUniqueNumbersInRange(
-      LOTTERY.MIN_NUM,
-      LOTTERY.MAX_NUM,
-      LOTTERY.NUM_COUNT,
-    );
-
-    try {
-      this.lottos.push(new Lotto(randNum));
-    } catch (exception) {
-      this.printError(exception.message);
+  issueLottoForPurchaseAmount() {
+    const lottoCnt = this.purchaseAmount / 1000;
+    Console.print(MESSAGE.PURCHASE_COUNT(lottoCnt));
+    for (let count = 0; count < lottoCnt; count++) {
+      this.lottos.push(LottoManager.issueLotto());
     }
   }
 
@@ -100,9 +85,5 @@ export default class Computer {
     this.winningNumbers = [];
     this.lottos = [];
     this.result = [];
-  }
-
-  printError(error) {
-    Console.print(error);
   }
 }
