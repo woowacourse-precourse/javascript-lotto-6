@@ -20,30 +20,24 @@ class Lotto {
     }
 
     numbers.forEach(number => {
-      if (number.trim() === '') {
-        throw new Error(ERROR_MESSAGE.notNumberException);
-      }
-
-      if (Number.isNaN(Number(number))) {
-        throw new Error(ERROR_MESSAGE.notNumberException);
-      }
-
-      if (Number(number) < LOTTO_NUMBER_RANGE.minimum || Number(number) > LOTTO_NUMBER_RANGE.maximum) {
-        throw new Error(ERROR_MESSAGE.numberRangeException);
-      }
+      this.#validateNumberCase(number);
     });
   }
 
   validateBonusNumber(bonusNumber) {
-    if (bonusNumber.trim() === '') {
+    this.#validateNumberCase(bonusNumber);
+  }
+
+  #validateNumberCase(number) {
+    if (number.trim() === '') {
       throw new Error(ERROR_MESSAGE.notNumberException);
     }
 
-    if (Number.isNaN(Number(bonusNumber))) {
+    if (Number.isNaN(Number(number))) {
       throw new Error(ERROR_MESSAGE.notNumberException);
     }
 
-    if (Number(bonusNumber) < LOTTO_NUMBER_RANGE.minimum || Number(bonusNumber) > LOTTO_NUMBER_RANGE.maximum) {
+    if (Number(number) < LOTTO_NUMBER_RANGE.minimum || Number(number) > LOTTO_NUMBER_RANGE.maximum) {
       throw new Error(ERROR_MESSAGE.numberRangeException);
     }
   }
