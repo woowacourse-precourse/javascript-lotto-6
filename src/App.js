@@ -127,6 +127,9 @@ class App {
 
     return calculateRateOfReturn(totalReward);
   }
+  async calculateRateOfReturn(totalReward, lottoAmount) {
+    const RATE = (totalReward / (lottoAmount * 1000)).toFixed(1);
+    MissionUtils.Console.print(STRINGS.RATE_OF_RETURN(RATE));
   }
 }
 
