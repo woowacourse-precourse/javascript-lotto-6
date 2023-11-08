@@ -1,3 +1,6 @@
+import { PRIZE_STATUS } from './constants/prize.js';
+import Validator from './utils/validator.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,38 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    Validator.validateLotteryNumbers(numbers);
+  }
+
+  getLottoNumbers() {
+    return `[${this.#numbers.join(', ')}]`;
+  }
+
+  getPrize(winningLotteryNumbers, bonusNumber) {
+    const [matchCount, matchBonus] = this.#matchLottery(winningLotteryNumbers, bonusNumber);
+    switch (matchCount) {
+      case 3:
+        return PRIZE_STATUS.fifth;
+      case 4:
+        return PRIZE_STATUS.fourth;
+      case 5:
+        return matchBonus ? PRIZE_STATUS.second : PRIZE_STATUS.third;
+      case 6:
+        return PRIZE_STATUS.first;
+      default:
+        return PRIZE_STATUS.out;
     }
   }
 
-  // TODO: 추가 기능 구현
+  #matchLottery(winningLotteryNumbers, bonusNumber) {
+    const initialCount = 0;
+    const matchCount = this.#numbers.reduce(
+      (count, number) => (winningLotteryNumbers.includes(number) ? count + 1 : count),
+      initialCount,
+    );
+    const matchBonus = this.#numbers.includes(bonusNumber);
+    return [matchCount, matchBonus];
+  }
 }
 
 export default Lotto;
