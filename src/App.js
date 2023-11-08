@@ -37,7 +37,13 @@ class App {
         45,
         6
       );
-      lottos.push(randomNumbers);
+      try {
+        const lotto = new Lotto(randomNumbers);
+        lottos.push(lotto);
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+        i--;
+      }
     }
     return lottos;
   }
@@ -45,7 +51,7 @@ class App {
   printLottos(lottos) {
     MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
     for (const lotto of lottos) {
-      MissionUtils.Console.print(`[${lotto.join(", ")}]`);
+      MissionUtils.Console.print(lotto.toString());
     }
   }
 
@@ -99,7 +105,7 @@ class App {
 
   countMatchingNumbers(lotto) {
     let count = 0;
-    lotto.forEach((number) => {
+    lotto.getNumbers().forEach((number) => {
       if (this.winningNumbers.includes(number)) {
         count++;
       }
@@ -108,14 +114,13 @@ class App {
   }
 
   computeRank(lotto) {
-    const count = this.countMatchingNumbers(lotto, this.winningNumbers);
+    const count = this.countMatchingNumbers(lotto);
+    const isBonusMatched = lotto.hasNumber(this.bonusNumber);
     switch (count) {
       case 6:
         return "1등";
       case 5:
-        if (lotto.includes(this.bonusNumber)) {
-          return "2등";
-        } else return "3등";
+        return isBonusMatched ? "2등" : "3등";
       case 4:
         return "4등";
       case 3:
