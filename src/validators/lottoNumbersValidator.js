@@ -27,11 +27,16 @@ const validateUniqueness = (numbers) => {
   }
 };
 
-const lottoNumberValidator = {
+export const lottoNumbersValidator = {
   validateType,
   validateCount,
   validateRange,
   validateUniqueness,
 };
 
-export default lottoNumberValidator;
+export const lottoWinningNumbersValidator = {
+  validateType,
+  validateCount,
+  validateRange,
+  validateUniqueness,
+};
