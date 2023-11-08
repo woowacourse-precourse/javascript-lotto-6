@@ -1,6 +1,6 @@
 import RandomLottoManage from '../child/random_lotto_manage.js';
 import InputNumManage from '../child/input_num_manage.js';
-import LottoResult from '../child/lotto_result.js';
+import LottoResultManage from '../child/lotto_result_manage.js';
 
 class GameManage {
   async gameManage() {
@@ -11,7 +11,7 @@ class GameManage {
     const RANDOM_LOTTO = RANDOM_LOTTO_MANAGE.randomLotto;
     const WINNING_NUM = INPUT_NUM_MANAGE.winningNum;
     const BONUS_NUM = INPUT_NUM_MANAGE.bonusNum;
-    const LOTTO_RESULT = new LottoResult(RANDOM_LOTTO, WINNING_NUM, BONUS_NUM);
+    const LOTTO_RESULT = new LottoResultManage(RANDOM_LOTTO, WINNING_NUM, BONUS_NUM);
     LOTTO_RESULT.calculateLottoResult();
   }
 }
