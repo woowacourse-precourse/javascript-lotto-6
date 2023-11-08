@@ -23,17 +23,6 @@ class LottoResultChecker {
     };
   }
 
-  #getResultCount(count, flag) {
-    if (count === MATCH.COUNT.FIVE) {
-      return this.#matchResult.filter(
-        ({ sameCount, hasBonus }) => sameCount === count && hasBonus === flag
-      ).length;
-    }
-
-    return this.#matchResult.filter(({ sameCount }) => sameCount === count)
-      .length;
-  }
-
   #matchLottoBalls(lottoTickets) {
     return lottoTickets.map(lottoTicket => ({
       lottoTicket,
@@ -54,6 +43,17 @@ class LottoResultChecker {
 
   #hasBonusNumber(lottoTicket) {
     return lottoTicket.getNumbers().includes(this.#bonusNumber);
+  }
+
+  #getResultCount(count, flag) {
+    if (count === MATCH.COUNT.FIVE) {
+      return this.#matchResult.filter(
+        ({ sameCount, hasBonus }) => sameCount === count && hasBonus === flag
+      ).length;
+    }
+
+    return this.#matchResult.filter(({ sameCount }) => sameCount === count)
+      .length;
   }
 }
 
