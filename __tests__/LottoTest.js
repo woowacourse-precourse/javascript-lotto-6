@@ -15,4 +15,13 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("번호 비교하기 테스트", () => {
+    const lotto = new Lotto([1, 3, 5, 6, 7, 45]);
+    const output = { sameNumberCount: 4, bonusIsSame: true };
+
+    const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
+    const BONUS_NUMBER = 7;
+
+    expect(lotto.compareNumbers(WINNING_NUMBERS, BONUS_NUMBER)).toEqual(output);
+  });
 });
