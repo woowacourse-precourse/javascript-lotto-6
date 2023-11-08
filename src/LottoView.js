@@ -4,7 +4,10 @@ import COUNT_WINNERS from "./CountWinners.js";
 class LottoView {
   showLottoNumbers(countOfLotto, lottos) {
     Console.print(`\n${countOfLotto}개를 구매했습니다.`);
-    lottos.forEach((lotto) => Console.print(`[${lotto.numbers.join(", ")}]`));
+    lottos.forEach((lotto) => {
+      const sortLotto = lotto.numbers.sort((a, b) => a - b);
+      Console.print(`[${sortLotto.join(", ")}]`);
+    });
   }
 
   showResults(countWinners) {
