@@ -5,6 +5,7 @@ export const GUIDE_MESSAGE = Object.freeze({
   totalTickets: "개를 구매했습니다.\n",
   winningStatistics: "당첨 통계",
   divider: "---",
+  amount: "개",
   totalReturn: "총 수익률은 *%입니다.",
 });
 

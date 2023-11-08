@@ -37,11 +37,11 @@ const OutputView = {
     Console.print(GUIDE_MESSAGE.winningStatistics);
     Console.print(GUIDE_MESSAGE.divider);
 
-    Console.print(`${WINNING_RESULT_DETAILS.FIFTH}${result[5]}개`);
-    Console.print(`${WINNING_RESULT_DETAILS.FOURTH}${result[4]}개`);
-    Console.print(`${WINNING_RESULT_DETAILS.THIRD}${result[3]}개`);
-    Console.print(`${WINNING_RESULT_DETAILS.SECOND}${result[2]}개`);
-    Console.print(`${WINNING_RESULT_DETAILS.FIRST}${result[1]}개`);
+    Console.print(`${WINNING_RESULT_DETAILS.FIFTH}${result[5]}${GUIDE_MESSAGE.amount}`);
+    Console.print(`${WINNING_RESULT_DETAILS.FOURTH}${result[4]}${GUIDE_MESSAGE.amount}`);
+    Console.print(`${WINNING_RESULT_DETAILS.THIRD}${result[3]}${GUIDE_MESSAGE.amount}`);
+    Console.print(`${WINNING_RESULT_DETAILS.SECOND}${result[2]}${GUIDE_MESSAGE.amount}`);
+    Console.print(`${WINNING_RESULT_DETAILS.FIRST}${result[1]}${GUIDE_MESSAGE.amount}`);
     Console.print(
       GUIDE_MESSAGE.totalReturn.replace(
         "*",
