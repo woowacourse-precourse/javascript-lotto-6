@@ -9,11 +9,13 @@ class LottoController {
   #budget;
   #lottoCount;
   #lottoTickets;
+  #winningNum;
 
   constructor() {
     this.#budget = 0;
     this.#lottoCount = 0;
     this.#lottoTickets = [];
+    this.#winningNum = [];
   }
 
   async askBudget() {
@@ -67,6 +69,7 @@ class LottoController {
       const isValid = this.validateWinningNum(removedSpace);
 
       if (isValid === true) {
+        this.winningNum = input;
         break;
       }
     }
@@ -82,6 +85,18 @@ class LottoController {
     }
     return true;
   }
+
+  async askBonusNum() {
+    // while (true) {
+    const input = View.input(InfoMsg.ASK_BONUS_NUM);
+    const isValid = this.validateBonusNum(input);
+    if (isValid) {
+      // break;
+    }
+  }
+  // }
+
+  validateBonusNum(input) {}
 }
 
 export default LottoController;
