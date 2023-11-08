@@ -104,7 +104,11 @@
 app.play() 호출 시 프로그램 실행 순서  >
 
 - 입력(구입 금액 입력)
-  - makeLotto();
+  - makeLotto(); 
+  
+- 입력값 검증 - 구입 매수 계산
+
+- 로또 생성 - 필드 값 추가
 
 - 출력(구입 내용 출력)
   - Notice.totalLotto();
@@ -112,8 +116,15 @@ app.play() 호출 시 프로그램 실행 순서  >
 - 입력(당첨 번호 입력)
   - getWinningNumbers();
 
+- 입력값 검증 - 필드 값 추가
+
 - 입력(보너스 번호 입력)
   - getBonusNumber();
+  
+- 입력값 검증 - 필드 값 추가
+
+- 당첨 결과, 수익률 계산
+  - makeResult(); 
 
 - 출력(당첨 통계 출력)
   - Notice.finalProfit();
