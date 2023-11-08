@@ -11,6 +11,7 @@ class App {
     this.winningNumbers = null;
     this.bonusNumber = null;
 
+    this.totalPrize = CONSTANTS.DEFAULT_VALUE;
     this.matchCount = {
       first: CONSTANTS.DEFAULT_VALUE,
       second: CONSTANTS.DEFAULT_VALUE,
@@ -51,9 +52,9 @@ class App {
     );
 
     const prize = Object.keys(LOTTO_PRIZE).find(
-      prizeTitle =>
-        LOTTO_PRIZE[prizeTitle].CONDITION.matchCount === matchCount &&
-        LOTTO_PRIZE[prizeTitle].CONDITION.matchBonus === isMatchBonus,
+      key =>
+        LOTTO_PRIZE[key].CONDITION.matchCount === matchCount &&
+        LOTTO_PRIZE[key].CONDITION.matchBonus === isMatchBonus,
     );
 
     return prize;
@@ -68,31 +69,53 @@ class App {
     return lottoResult;
   }
 
-  setTotalPrize(lottoResult) {
-    const prizeCount = {};
+  setMatchCount(lottoResult) {
+    const matchCount = {};
 
     lottoResult.forEach(prize => {
-      prizeCount[prize] = (prizeCount[prize] || 0) + 1;
+      matchCount[prize] = (matchCount[prize] || 0) + 1;
     });
 
-    this.matchCount = { ...this.matchCount, ...prizeCount };
+    this.matchCount = { ...this.matchCount, ...matchCount };
   }
 
-  drawLotto(lottoList) {
-    const lottoResult = this.getLottoResult(lottoList);
+  setTotalPrize() {
+    const matchCount = Object.values(this.matchCount);
+    const prize = Object.values(LOTTO_PRIZE).map(key => key.PRIZE);
 
-    this.setTotalPrize(lottoResult);
+    const totalPrize = prize.reduce(
+      (total, amount, index) => total + amount * matchCount[index],
+      CONSTANTS.DEFAULT_VALUE,
+    );
+
+    this.totalPrize = totalPrize;
+  }
+
+  drawLotto() {
+    const lottoResult = this.getLottoResult(this.lottos);
+
+    this.setMatchCount(lottoResult);
+    this.setTotalPrize();
+  }
+
+  getProfitRate() {
+    const purchaseNumber = this.lottos.length;
+    const profitRate =
+      (this.totalPrize / (purchaseNumber * CONSTANTS.LOTTO_PRICE)) * 100;
+
+    return profitRate.toFixed(CONSTANTS.DEMICAL_PLACE);
   }
 
   printResult() {
     const matchCount = Object.values(this.matchCount);
+    const profitRate = this.getProfitRate();
 
-    view.printLottoResult(matchCount);
+    view.printLottoResult(matchCount, profitRate);
   }
 
   async play() {
     await this.setLottoConfig();
-    this.drawLotto(this.lottos);
+    this.drawLotto();
     this.printResult();
   }
 }

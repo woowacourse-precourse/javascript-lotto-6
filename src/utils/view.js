@@ -46,13 +46,18 @@ const view = {
     messages.forEach(message => Console.print(message));
   },
 
-  printLottoResult(matchCount) {
-    const prizeText = Object.values(LOTTO_PRIZE).map(prize => prize.TEXT);
+  printLottoResult(matchCount, profitRate) {
+    const prizeText = Object.values(LOTTO_PRIZE).map(key => key.TEXT);
     const countMessages = prizeText
       .map((text, index) => `${text} - ${matchCount[index]}개`)
       .reverse();
+    const profitRateMessage = MESSAGES.PROFIT_RESULT.join(`${profitRate}`);
 
-    const messages = [MESSAGES.LOTTO_RESULT, ...countMessages];
+    const messages = [
+      MESSAGES.LOTTO_RESULT,
+      ...countMessages,
+      profitRateMessage,
+    ];
 
     messages.forEach(message => Console.print(message));
   },
