@@ -1,19 +1,19 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INPUT_MSG } from '../constants/messages.js';
+import { INPUT } from '../constants/messages.js';
 
 const inputView = {
   async money() {
-    const input = await Console.readLineAsync(INPUT_MSG.MONEY);
+    const input = await Console.readLineAsync(INPUT.MONEY);
     return input;
   },
 
   async winnerNumbers() {
-    const input = await Console.readLineAsync(INPUT_MSG.WINNER_NUMBERS);
+    const input = await Console.readLineAsync(INPUT.WINNER_NUMBERS);
     return input;
   },
 
   async bonusNumber() {
-    const input = await Console.readLineAsync(INPUT_MSG.BONUS_NUMBER);
+    const input = await Console.readLineAsync(INPUT.BONUS_NUMBER);
     return input;
   },
 };

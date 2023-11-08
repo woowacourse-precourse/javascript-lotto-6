@@ -1,5 +1,4 @@
-import { NUM_REGEXP } from '../constants/numbers.js';
-import { LOTTO } from '../constants/numbers.js';
+import { NUM_REGEXP, LOTTO } from '../constants/numbers.js';
 
 const validation = {
   isNumber(input) {

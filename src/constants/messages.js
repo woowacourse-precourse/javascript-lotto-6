@@ -10,13 +10,13 @@ export const ERROR_MSG = {
     '[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.',
 };
 
-export const INPUT_MSG = {
+export const INPUT = {
   MONEY: '구입금액을 입력해 주세요.\n',
   WINNER_NUMBERS: '당첨 번호를 입력해 주세요.\n',
   BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
 };
 
-export const OUTPUT_MSG = {
+export const OUTPUT = {
   NEW_LINE: '',
   LOTTOS: '개를 구매했습니다.',
   RESULT: '당첨 통계\n---',
