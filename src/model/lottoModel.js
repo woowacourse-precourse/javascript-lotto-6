@@ -1,6 +1,6 @@
-import generateLotto from "../utils/generateLotto";
+import generateLotto from "../utils/generateLotto.js";
 
-export default class lottoModel {
+export default class LottoModel {
   #purchaseAmount;
   #purchaseCount;
   #lottoArray;
@@ -8,11 +8,15 @@ export default class lottoModel {
   #bonusNumber;
 
   constructor(purchaseAmount) {
-    this.#purchaseAmount = purchaseAmount;
+    this.#purchaseAmount;
     this.#purchaseCount;
     this.#lottoArray;
     this.#winningNumber;
     this.#bonusNumber;
+  }
+
+  setPurchaseAmount(purchaseAmount) {
+    this.#purchaseAmount = purchaseAmount;
   }
 
   setPurchaseCount() {
@@ -27,11 +31,15 @@ export default class lottoModel {
     this.#lottoArray = generateLotto(this.#purchaseCount);
   }
 
-  setLottoArray() {
-    this.#lottoArray;
+  getLottoArray() {
+    return this.#lottoArray;
   }
 
-  setBonusNumber() {
-    this.#bonusNumber;
+  setWinningNumber(winningNumber) {
+    this.#winningNumber = winningNumber;
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = bonusNumber;
   }
 }

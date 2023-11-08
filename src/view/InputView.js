@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGES } from "../constants/messages";
+import { MESSAGES } from "../constants/messages.js";
 
 export default class InputView {
   async getPurchaseAmount() {
@@ -7,10 +7,14 @@ export default class InputView {
   }
 
   async getWinningNumber() {
-    return await Console.readLineAsync(MESSAGES.WINNIG_NUMBER);
+    const winningInput = await Console.readLineAsync(MESSAGES.WINNIG_NUMBER);
+    const winningNumber = winningInput.split(",").map(Number);
+    return winningNumber;
   }
 
   async getBonusNumber() {
-    return await Console.readLineAsync(MESSAGES.BONUS_NUMBER);
+    const bonusInput = await Console.readLineAsync(MESSAGES.BONUS_NUMBER);
+    const bonusNumber = Number(bonusInput);
+    return bonusNumber;
   }
 }

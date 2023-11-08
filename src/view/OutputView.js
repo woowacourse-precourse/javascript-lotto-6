@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGES } from "../constants/messages";
+import { MESSAGES } from "../constants/messages.js";
 
 export default class OutputView {
   printPurchaseResult(purchaseCount, lottoArray) {
