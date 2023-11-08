@@ -37,7 +37,7 @@ describe('LottoGameController-LottoService 통합 테스트', () => {
   describe('주어진 입력에 대해서 정확한 결과를 반환하고 출력해야 한다.', () => {
     it('1등 : 6개 일치', async () => {
       const mockGeneratedNumbers = [
-        [1, 2, 3, 4, 5, 6],
+        [5, 6, 1, 2, 3, 4],
         [3, 5, 11, 16, 32, 38],
       ];
       mockRandoms(mockGeneratedNumbers);
