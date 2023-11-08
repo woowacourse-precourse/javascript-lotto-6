@@ -80,16 +80,27 @@ class App {
     print(`총 수익률은 ${this.#computer.getProfitRatio()}입니다.`);
   }
 
-  async play() {
+  async setLottos() {
     this.#cost = await this.getInput(inputStep.cost.prompt, 'cost');
     this.createLotto(this.#cost);
-    this.printLottos();
+  }
 
+  async setPrizeNumber() {
     const prizeNumberString = await this.getInput(inputStep.winnerNumbers.prompt, 'prizeNumber');
     this.#prizeNumber = prizeNumberString.split(',').map((elem) => Number(elem));
+  }
 
+  async setBonusNumber() {
     const bonusString = await this.getInput(inputStep.bonusNumber.prompt, 'bonusNumber');
     this.#bonusNumber = Number(bonusString);
+  }
+
+  async play() {
+    await this.setLottos();
+    this.printLottos();
+
+    await this.setPrizeNumber();
+    await this.setBonusNumber();
 
     print(PROMPT.prize);
     print(PROMPT.dividingLine);
