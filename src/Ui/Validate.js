@@ -38,13 +38,14 @@ const Validate = {
   },
 
   checkBounds(winningNumbers) {
+    let result = false;
     winningNumbers.forEach((number) => {
       if (number < COMMON_VALUE.MIN || number > COMMON_VALUE.MAX) {
-        return true;
+        result = true;
       }
     });
 
-    return false;
+    return result;
   },
 };
 
