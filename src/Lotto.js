@@ -29,7 +29,7 @@ class Lotto {
         winStatus[rankOfwin - 1] += 1;
       }
     });
-
+    // 당첨 통계는 5등부터 나오므로 순서를 뒤집어준다.
     return winStatus.reverse();
   }
 
