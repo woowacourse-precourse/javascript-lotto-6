@@ -8,7 +8,7 @@ class Game {
 
   #bonusNumber;
 
-  #isBonus = false;
+  #bonusCount = 0;
 
   #matchingNumbers = [];
 
@@ -42,7 +42,9 @@ class Game {
       let message = `${key}개 일치 (${stat.prize}) - ${stat.count}개`;
 
       if (key === "5.1") {
-        message = `5개 일치, 보너스 볼 일치 (30,000,000원) - ${stat.count}개`;
+        message = `5개 일치, 보너스 볼 일치 (30,000,000원) - ${
+          this.#bonusCount
+        }개`;
       }
       Console.print(message);
     }
@@ -60,7 +62,7 @@ class Game {
         matchedNumbers.length === 4 &&
         lottoNumbers.includes(this.#bonusNumber)
       ) {
-        this.#isBonus = true;
+        this.#bonusCount += 1;
       }
 
       return matchedNumbers.length;
