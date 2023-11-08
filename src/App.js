@@ -1,13 +1,19 @@
 import Lotto from "./Lotto";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-
 class App {
   async play() {
     const lottoCount = await this.getMoneyReturnCount();
     console.log("lottoCount", lottoCount);
     MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
-    const lotto = this.generateAndPrintLotto();
+    const userLotto = this.generateAndPrintLotto();
+    const winningLotto = this.getWinningLotto();
+  }
+
+  async getWinningLotto() {
+    const winningNumber = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    const lotto = new Lotto(winningNumber);
+    if(lotto) return winningNumber;
   }
 
   async getMoneyReturnCount() {
