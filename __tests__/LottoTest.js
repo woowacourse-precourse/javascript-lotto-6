@@ -52,16 +52,15 @@ describe("로또 클래스 테스트", () => {
       .toEqual([2, "5+bonus", 3]);
   });
 
-  test("당첨 통계를 출력한다", () => {
-    MissionUtils.Console.print = jest.fn();
-    printLottoStatistics([2, "5+bonus", 3, "5+bonus", 5]);
-    expect(MissionUtils.Console.print).toHaveBeenCalledWith(
-      [
-        "3개 일치 (5,000원) - 1개",
-        "4개 일치 (50,000원) - 0개",
-        "5개 일치 (1,500,000원) - 1개",
-        "5개 일치, 보너스 볼 일치 (30,000,000원) - 2개",
-        "6개 일치 (2,000,000,000원) - 0개"
-      ]);
+  test("일치 개수에 따라 당첨 항목을 분리한다.", () => {
+    const matchedCounts = [2, "5+bonus", 3, "5+bonus", 5];
+    expect(printLottoStatistics(matchedCounts))
+      .toEqual({
+        "3": { "price": 5000, "text": "3개 일치 (5,000원)", "value": 1 },
+        "4": { "price": 50000, "text": "4개 일치 (50,000원)", "value": 0 },
+        "5": { "price": 1500000, "text": "5개 일치 (1,500,000원)", "value": 1 },
+        "5+bonus": { "price": 30000000, "text": "5개 일치, 보너스 볼 일치 (30,000,000원)", "value": 2 },
+        "6": { "price": 2000000000, "text": "6개 일치 (2,000,000,000원)", "value": 0 }
+      });
   });
 });
