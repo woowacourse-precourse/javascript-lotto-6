@@ -33,7 +33,7 @@ const validate = {
     return inputNumber;
   },
 
-  lottoNumbers(inputArray) {
+  lotto(inputArray) {
     if (!inputArray) throw new Error(ERROR.TYPE_CHECK);
 
     if (inputArray.length !== NUMBER.LOTTO_LENGTH) throw new Error(ERROR.LENGTH_CHECK);

@@ -11,7 +11,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    validate.lottoNumbers(numbers);
+    validate.lotto(numbers);
   }
 
   getNumbers() {
