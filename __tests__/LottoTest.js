@@ -31,6 +31,7 @@ describe("로또 클래스 테스트", () => {
     expect(result).toContainEqual(1, 2, 3, 4, 5, 6);
   });
 
+  // TEST 이후, checkLottoRank 함수의 return값 없앰.
   /*
   test("로또의 결과를 출력한다.", () => {
     mockRandoms([

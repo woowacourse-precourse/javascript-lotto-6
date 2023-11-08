@@ -1,19 +1,20 @@
 import Lotto from './Lotto.js';
 import lottoRanking from './lottoRanking.js';
-import { MESSAGES, CONSTANTS } from '../output/Constants.js';
 import { Console } from "@woowacourse/mission-utils";
+import { MESSAGES, CONSTANTS } from '../output/Constants.js';
 
 class Customer {
   #payment;
+  #cntLottoTickets;
 
   constructor(payment) {
     this.#payment = payment;
-    this.cntLottoTicekts = this.#payment / CONSTANTS.ONE_THOUSAND;
+    this.#cntLottoTickets = this.#payment / CONSTANTS.ONE_THOUSAND;
     this.lottoList = [];
   } 
 
   buyLottoTickets() {
-    for (let i = 0; i < this.cntLottoTicekts; i++) {
+    for (let i = 0; i < this.#cntLottoTickets; i++) {
       this.lottoList.push(new Lotto());
     }
 
@@ -21,7 +22,7 @@ class Customer {
   }
 
   printLottoTickets() {
-    Console.print(`${this.cntLottoTicekts}${MESSAGES.TICKETS_PURCHASED}`);
+    Console.print(`${this.#cntLottoTickets}${MESSAGES.TICKETS_PURCHASED}`);
 
     this.lottoList.forEach((lotto) => {
       Console.print(`[${lotto.getNumbers().join(', ')}]`);

@@ -1,9 +1,9 @@
 const lottoRanking = {
-  FIRST: { price: 2000000000, count: 0 },
-  SECOND: { price: 30000000, count: 0 },
-  THIRD: { price: 1500000, count: 0 },
-  FOURTH: { price: 50000, count: 0 },
-  FIFTH: { price: 5000, count: 0 },
+  FIRST: { PRICE: 2000000000, count: 0 },
+  SECOND: { PRICE: 30000000, count: 0 },
+  THIRD: { PRICE: 1500000, count: 0 },
+  FOURTH: { PRICE: 50000, count: 0 },
+  FIFTH: { PRICE: 5000, count: 0 },
 
   initializeRanking() {
     this.FIRST.count = 0;
@@ -15,11 +15,12 @@ const lottoRanking = {
 
   calculateTotalPrice() {
     const totalAmount = 
-      this.FIRST.count * this.FIRST.price +
-      this.SECOND.count * this.SECOND.price +
-      this.THIRD.count * this.THIRD.price +
-      this.FOURTH.count * this.FOURTH.price +
-      this.FIFTH.count * this.FIFTH.price;
+      this.FIRST.count * this.FIRST.PRICE +
+      this.SECOND.count * this.SECOND.PRICE +
+      this.THIRD.count * this.THIRD.PRICE +
+      this.FOURTH.count * this.FOURTH.PRICE +
+      this.FIFTH.count * this.FIFTH.PRICE;
+
     return totalAmount;
   }
 };
