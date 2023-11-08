@@ -15,15 +15,14 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
-  test("로또 번호를 정확한 포맷으로 출력해야한다.", () => {
+  test("로또 has", () => {
     //given
-    logSpy = jest.spyOn(Console, "print").mockImplementation(() => {});
     const lotto = new Lotto([1, 44, 3, 5, 6, 7]);
 
     //when
-    lotto.print();
+    const has = lotto.has(3);
     //then
-    expect(logSpy).toHaveBeenCalledWith("[1, 44, 3, 5, 6, 7]");
+    expect(has).toBeTruthy();
   });
 
   test("로또 간의 비교 (일치수)", () => {
