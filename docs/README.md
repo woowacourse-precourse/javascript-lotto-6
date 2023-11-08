@@ -8,7 +8,7 @@
 ## 📱 도메인
 ![](./image/domains.png)
 
-### 로또 구매 - Purchase
+### Purchase - 로또 구매
 
 - #balance 만큼의 랜덤한 번호로 이루어진 로또를 구매합니다.
 - 구매하는 과정에서 lotto에 대한 유효성 검사를 진행합니다.
@@ -48,7 +48,7 @@ export default class PurchaseController {
 }
 ```
 
-### 로또 추첨 - Raffle
+### Raffle - 로또 추첨
 
 - #numbers로 이루어진 당첨번호를 생성하고, 보너스 번호를 추가합니다.
 - 당첨번호와 보너스번호를 생성하는 과정에서 유효성 검사를 진행합니다.
@@ -85,7 +85,7 @@ export default class RaffleController {
 }
 ```
 
-### 로또 결과 - Result
+### Result - 로또 결과
 
 - 로또들과 추첨결과를 가져와 결과를 계산합니다.
 - 각 로또들의 등수를 계산하고, 이를 이용해 수익 및 수익률 계산을 진행합니다.
