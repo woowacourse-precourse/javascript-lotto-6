@@ -1,5 +1,5 @@
 "use strict";
-import Purchase from "./Purchase";
+import { Random } from "@woowacourse/mission-utils";
 class Lotto {
     #numbers;
 
@@ -14,10 +14,15 @@ class Lotto {
         }
     }
 
-    // TODO: 추가 기능 구현
-    play() {
-        const purchase = new Purchase();
-        purchase.putMoney();
+    /**
+     * 로또 랜덤 번호를 생성하는 함수
+     */
+    buy(tickets) {
+        for (let i = 0; i < tickets; i++) {
+            this.#numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+            this.#numbers.sort((a, b) => a - b);
+            Console.print(this.#numbers);
+        }
     }
 }
 

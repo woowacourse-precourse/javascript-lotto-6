@@ -6,7 +6,7 @@ const MESSAGES = Object.freeze({
     PURCHASED: "개를 구매했습니다.",
     PUT_NUMBER: "당첨 번호를 입력해 주세요.",
     PUT_BONUS_NUMBER: "보너스 번호를 입력해 주세요.",
-    WINNING_LOTTERY_NUMBER: "당첨 통계/n---",
+    WINNING_LOTTERY_NUMBER: "당첨 통계---",
     THREE_NUMBER_MATCH: "3개 일치 (5,000원) - ",
     FOUR_NUMBER_MATCH: "4개 일치 (50,000원) - ",
     FIVE_NUMBER_MATCH: "5개 일치 (1,500,000원) - ",
