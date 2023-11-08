@@ -19,7 +19,7 @@ class Validator {
 
   checkIsInteger(value) {
     if (!this.isInteger(value)) {
-      throw new Error('빈 문자열을 입력하지 마세요.');
+      throw new Error('숫자 이외의 값을 입력하지 마세요.');
     }
   }
 

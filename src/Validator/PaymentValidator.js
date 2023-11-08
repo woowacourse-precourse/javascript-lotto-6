@@ -2,10 +2,11 @@ import Validator from './Validator.js';
 
 class PaymentValidator extends Validator {
   evaluate(value) {
-    if (!this.isValidValue(value) || !this.isDividedByThousand(value)) {
+    const numberValue = Number(value);
+    if (!this.isValidValue(value) || !this.isDividedByThousand(numberValue)) {
       throw new Error('올바른 구입 금액을 입력하세요.');
     }
-    return value;
+    return numberValue;
   }
 
   isDividedByThousand(value) {

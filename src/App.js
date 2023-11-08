@@ -1,9 +1,8 @@
 import LottoMachine from './Controller/LottoMachine.js';
 import TicketMachine from './Controller/TicketMachine.js';
-import WinStastics from './Controller/WinStastics.js';
+import WinStastics from './Model/WinStastics.js';
 import Printer from './View/Printer.js';
 import LottoTicket from './Model/LottoTicket.js';
-import Interface from './View/Interface.js';
 
 class App {
   constructor() {
@@ -18,8 +17,8 @@ class App {
     await this.buyTicket();
 
     // 당첨번호와 보너스 번호 설정
-    await this.setWinngNumber();
-    await this.setBonusNumber();
+    await this.lottoMachine.createWinningNumber();
+    await this.lottoMachine.createBonusNumber();
 
     // 티켓과 당첨번호를 토대로 당첨 통계를 설정한다.
     this.setWinningstatistics();
@@ -38,34 +37,6 @@ class App {
   async buyTicketErrorHandler(error) {
     Printer.printBuyTicketErrorMessage(error);
     await this.buyTicket();
-  }
-
-  async setWinngNumber() {
-    try {
-      const winNums = await Interface.requestWinNums();
-      this.lottoMachine.createWinNum(winNums);
-    } catch (error) {
-      await this.winNumsErrorHandler(error);
-    }
-  }
-
-  async winNumsErrorHandler(error) {
-    Printer.printWinNumsErrorMessage(error);
-    await this.setWinngNumber();
-  }
-
-  async setBonusNumber() {
-    try {
-      const bonusNum = await Interface.requestBonusNum();
-      this.lottoMachine.createBonusNum(bonusNum);
-    } catch (error) {
-      await this.bonusNumErrorHandler(error);
-    }
-  }
-
-  async bonusNumErrorHandler(error) {
-    Printer.printBonusNumErrorMessage(error);
-    await this.setBonusNumber();
   }
 
   setWinningstatistics() {

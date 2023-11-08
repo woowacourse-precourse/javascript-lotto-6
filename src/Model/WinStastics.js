@@ -1,5 +1,5 @@
-import Comparator from './Comparator.js';
-import ProfitCalculator from './ProfitCalculator.js';
+import Comparator from '../Controller/Comparator.js';
+import ProfitCalculator from '../Controller/ProfitCalculator.js';
 
 class WinStastics {
   #statistics;

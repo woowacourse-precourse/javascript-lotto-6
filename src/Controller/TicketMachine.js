@@ -35,7 +35,7 @@ class TicketMachine {
   }
 
   numOfPurchase(payment) {
-    return Number(payment) / 1000;
+    return payment / 1000;
   }
 }
 

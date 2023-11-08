@@ -1,4 +1,4 @@
-import WinStastics from '../src/Controller/WinStastics.js';
+import WinStastics from '../src/Model/WinStastics.js';
 import Lotto from '../src/Lotto';
 import LottoTicket from '../src/Model/LottoTicket.js';
 
