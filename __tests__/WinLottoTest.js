@@ -9,7 +9,7 @@ describe('WinLotto 클래스 테스트', () => {
   ];
   const winningNumbers = new Lotto([1, 2, 3, 4, 5, 6]);
   const bonusNumber = 7;
-  const winningLotto = new WinLotto(winningNumbers, bonusNumber);
+  const winningLotto = new WinLotto([winningNumbers, bonusNumber]);
 
   test.each(lotteryList)(
     '당첨된 번호가 몇개인지 카운트한다.',
