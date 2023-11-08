@@ -5,10 +5,12 @@ import LottoValidator from './LottoValidator.js';
 class InputHandler {
   #numOfLottos;
   #winningNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#numOfLottos = 0;
     this.#winningNumbers = [];
+    this.#bonusNumber = 0;
   }
 
   async #getUserInput(promptMessage, validateFunction) {
@@ -49,6 +51,16 @@ class InputHandler {
     );
 
     return this.#winningNumbers;
+  }
+
+  async inputBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+      INPUT_MESSAGES.INPUT_BONUS_NUMBER
+    );
+
+    this.#bonusNumber = bonusNumber;
+
+    return this.#bonusNumber;
   }
 }
 

@@ -4,6 +4,7 @@ import LottoGenerator from './LottoGenerator.js';
 class App {
   #inputHandler;
   #winningNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#inputHandler = new InputHandler();
@@ -13,6 +14,7 @@ class App {
     const userAmount = await this.#inputHandler.inputAmount();
     const lottoGenerator = new LottoGenerator(userAmount);
     this.#winningNumbers = await this.#inputHandler.inputWinningNumbers();
+    this.#bonusNumber = await this.#inputHandler.inputBonusNumber();
   }
 }
 
