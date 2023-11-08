@@ -7,7 +7,7 @@ class Output {
 
   printLottoTickets(lottoTickets) {
     lottoTickets.forEach((ticket) => {
-      Console.print(ticket);
+      Console.print(ticket.getNumbers());
     });
   }
 
