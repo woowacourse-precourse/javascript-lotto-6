@@ -126,8 +126,7 @@ class Lotto {
 
   calculateMatchingRate(purchasePrice) {
     const totalPrice = this.calculateTotalPrice();
-    const profit = totalPrice - purchasePrice;
-    const profitRate = (profit / purchasePrice) * 100;
+    const profitRate = (totalPrice / purchasePrice) * 100;
     const roundedProfitRate = profitRate.toFixed(1);
 
     MissionUtils.Console.print(`총 수익률은 ${roundedProfitRate}%입니다.`);
