@@ -23,6 +23,44 @@ const InputError = {
       return false;
     }
   },
+  async checkWinningNumInputError(numbers) {
+    try {
+      numbers.split(',').map((num) => {
+        num.split('').forEach((ele) => {
+          if (!/[0-9]/.test(ele))
+            throw new Error(error.WINNING_NUM_NOT_NUMBER_ERROR);
+        });
+      });
+      if (numbers.split(',').length !== 6) {
+        throw new Error(error.WINNING_NUM_LENGTH_ERROR);
+      }
+      numbers.split(',').forEach((number) => {
+        if (!Number(number) >= 1 && Number(number) <= 45)
+          throw new Error(error.WINNING_NUM_OVER_RANGE_ERROR);
+      });
+      return true;
+    } catch (error) {
+      Console.print(error.message);
+      return false;
+    }
+  },
+  async checkBonusNumInputError(number, winningNumber) {
+    try {
+      number.split('').forEach((ele) => {
+        if (!/[0-9]/.test(ele))
+          throw new Error(error.BONUS_NUM_NOT_NUMBER_ERROR);
+      });
+      if (Number(number) < 1 || Number(number) > 45)
+        throw new Error(error.BONUS_NUM_RANGE_OVER_ERROR);
+      if (winningNumber.includes(Number(number)))
+        throw new Error(error.BONUS_NUM_EQUAL_WINNING_NUM_ERROR);
+
+      return true;
+    } catch (error) {
+      Console.print(error.message);
+      return false;
+    }
+  },
 };
 
 export default InputError;

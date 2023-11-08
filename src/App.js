@@ -2,7 +2,6 @@ import Input from './view/Input.js';
 import InputError from './domain/InputError.js';
 import Output from './view/Output.js';
 import LottoMachine from './domain/LottoMachine.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async play() {
@@ -43,26 +42,7 @@ class App {
       : await this.getWinningNumber(lottoList);
   }
   async validateWinningNumber(numbers) {
-    try {
-      numbers.split(',').map((num) => {
-        num.split('').forEach((ele) => {
-          if (!/[0-9]/.test(ele)) throw new Error('[ERROR] 숫자가 아닙니다.');
-        });
-      });
-      if (numbers.split(',').length !== 6) {
-        throw new Error('[ERROR] 당첨 번호는 6개여야 합니다.');
-      }
-      numbers.split(',').forEach((number) => {
-        if (!Number(number) >= 1 && Number(number) <= 45)
-          throw new Error(
-            '[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.'
-          );
-      });
-      return true;
-    } catch (error) {
-      Console.print(error.message);
-      return false;
-    }
+    return await InputError.checkWinningNumInputError(numbers);
   }
 
   async getBonusNum(winningNumber, lottoList) {
@@ -77,23 +57,7 @@ class App {
   }
 
   async validateBonusNum(number, winningNumber) {
-    try {
-      number.split('').forEach((ele) => {
-        if (!/[0-9]/.test(ele))
-          throw new Error('[ERROR] 보너스 번호는 숫자여야 합니다.');
-      });
-      if (Number(number) < 1 || Number(number) > 45)
-        throw new Error(
-          '[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.'
-        );
-      if (winningNumber.includes(Number(number)))
-        throw new Error('[ERROR] 당첨 번호와 같습니다.');
-
-      return true;
-    } catch (error) {
-      Console.print(error.message);
-      return false;
-    }
+    return await InputError.checkBonusNumInputError(number, winningNumber);
   }
   async getStatisticsResult(winningNumber, bonusNumber, lottoList) {
     await LottoMachine.getStatisticsResult(
