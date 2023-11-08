@@ -7,7 +7,7 @@
 - [x] (src/constants) 로또 발행과 관련된 메세지를 상수 객체로 설정
 - [x] (src/constants) 로또 입력개수 조건을 상수 객체로 설정
 - [x] (src/validators) 구매금액의 유효성을 확인하는 함수 구현
-- [ ] (src/validators) 당첨 번호의 유효성을 확인하는 함수 구현
+- [x] (src/validators) 당첨 번호의 유효성을 확인하는 함수 구현
 - [ ] (src/validators) 보너스 번호의 유효성을 확인하는 함수 구현
 
 # 추가된 요구사항
