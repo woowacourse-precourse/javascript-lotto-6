@@ -47,13 +47,13 @@ const Validator = {
   InputBonusNumber(bonusNumber, winningNumber) {
     const inputBonusNumberArray = [bonusNumber];
     if (bonusNumber.replace(/\d/g, "").length > 0)
-      throw new Error("[ERROR] 보너스 번호는 숫자만 입력 가능합니다.");
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER);
 
     if (winningNumber.includes(bonusNumber))
-      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+      throw new Error(ERROR_MESSAGE.BONUS_DUPLICATE);
 
     if (RangeTest(inputBonusNumberArray))
-      throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 값이어야 합니다.");
+      throw new Error(ERROR_MESSAGE.BONUS_RANGE);
   },
 };
 
