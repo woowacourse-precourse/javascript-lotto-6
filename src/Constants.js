@@ -10,3 +10,6 @@ export const ERROR = Object.freeze({
 });
 
 export const MONEY_UNIT = 1000;
+export const LOTTO_LENGTH = 6;
+export const MIN_NUMBER = 1;
+export const MAX_NUMBER = 45;
