@@ -73,6 +73,16 @@ describe("LottoModel 테스트", () => {
     });
   });
 
+  describe("get 메서드", () => {
+    test("LottoModel은 올바른 price, count 값을 반환한다.", () => {
+      const price = 1000;
+      const lottoModel = new LottoModel(price);
+
+      expect(lottoModel.getPrice()).toEqual(price);
+      expect(lottoModel.getCount()).toEqual(price / SETTINGS.priceUnit);
+    });
+  });
+
   describe("calculateCorrect 메서드", () => {
     const lottoModel = new LottoModel(1000);
     const cases = [
