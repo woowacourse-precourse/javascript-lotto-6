@@ -34,6 +34,34 @@ class Validations {
       throw new Error(Errors.IS_NOT_IN_RANGE);
     }
   }
+
+  static isInteger(input) {
+    const number = Number(input);
+    if (!Number.isInteger(number)) {
+      throw new Error(Errors.IS_NOT_INTEGER);
+    }
+  }
+
+  static isNotDuplicated(input) {
+    input.forEach((number, index) => {
+      if (input.indexOf(number) !== index) {
+        throw new Error(Errors.IS_NOT_DUPLICATED);
+      }
+    });
+  }
+
+  static isNotProperLength(input) {
+    if (input.length !== 6) {
+      throw new Error(Errors.IS_NOT_PROPER_LENGTH);
+    }
+  }
+
+  static isNotSorted(input) {
+    const sortedInput = [...input].sort((a, b) => a - b);
+    if (JSON.stringify(input) !== JSON.stringify(sortedInput)) {
+      throw new Error(Errors.IS_NOT_SORTED);
+    }
+  }
 }
 
 export default Validations;
