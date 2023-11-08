@@ -1,3 +1,5 @@
+import {OUTPUT, OUTPUT_ERROR} from "./text.js";
+
 class Lotto {
   #numbers;
 
@@ -10,9 +12,11 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    const result = Array.from(new Set(numbers));
+    if (result.length !== 6) {
+      throw new Error(OUTPUT_ERROR.set_err);
+    }
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
