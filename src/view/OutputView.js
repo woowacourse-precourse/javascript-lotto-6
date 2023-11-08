@@ -4,7 +4,12 @@ import { MESSAGES } from "../constants/messages.js";
 export default class OutputView {
   printPurchaseResult(purchaseCount, lottoArray) {
     Console.print(MESSAGES.PURCHASE_RESULT(purchaseCount));
-    lottoArray.forEach((lottoNumber) => Console.print(lottoNumber));
+
+    lottoArray.forEach((lottoNumber) => {
+      const stringLottoNumber = "[" + lottoNumber.join(", ") + "]";
+      Console.print(stringLottoNumber);
+    });
+
     Console.print("");
   }
 
