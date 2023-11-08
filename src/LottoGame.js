@@ -23,11 +23,7 @@ class LottoGame {
   async start() {
     await this.purchaseLotto();
     await this.createWinningLotto();
-    const rankCountResult = this.compareLotto(
-      this.#lottos,
-      this.#winningLotto.getNumbers(),
-      this.#winningLotto.getBonusNumber(),
-    );
+    const rankCountResult = this.compareLotto(this.#lottos, this.#winningLotto);
     const returnRate = this.calculateRate(
       this.#purchaseAmount,
       rankCountResult,
@@ -64,10 +60,10 @@ class LottoGame {
     }
   }
 
-  compareLotto(purchasedLottos, winningNumbers, bonusNumber) {
+  compareLotto(purchasedLottos, winningLotto) {
     const rankCount = [0, 0, 0, 0, 0];
     purchasedLottos.forEach((lotto) => {
-      const rank = lotto.getRank(winningNumbers, bonusNumber);
+      const rank = lotto.getRank(winningLotto);
       if (rank !== 0) rankCount[rank - 1] += 1;
     });
 

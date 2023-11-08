@@ -1,4 +1,5 @@
 import Lotto from '../src/Lotto.js';
+import WinningLotto from '../src/WinningLotto.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -40,16 +41,16 @@ describe('로또 클래스 테스트', () => {
 
   test('getMatchingCount: 당첨 번호와 일치하는 개수를 반환한다.', () => {
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    const winningNumbers = [1, 2, 3, 4, 5, 7];
+    const winningLotto = new WinningLotto([1, 2, 3, 4, 5, 7]);
 
-    expect(lotto.getMatchingCount(winningNumbers)).toBe(5);
+    expect(lotto.getMatchingCount(winningLotto)).toBe(5);
   });
 
   test('getRank: 당첨 로또와 비교하여 등수를 반환한다.', () => {
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    const winningNumbers = [1, 2, 3, 4, 5, 7];
-    const bonusNumber = 9;
+    const winningLotto = new WinningLotto([1, 2, 3, 4, 5, 7]);
+    winningLotto.setBonusNumber(9);
 
-    expect(lotto.getRank(winningNumbers, bonusNumber)).toBe(3);
+    expect(lotto.getRank(winningLotto)).toBe(3);
   });
 });

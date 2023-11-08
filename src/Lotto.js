@@ -17,13 +17,16 @@ class Lotto {
     return this.#numbers;
   }
 
-  getMatchingCount(winningNumbers) {
+  getMatchingCount(winningLotto) {
+    const winningNumbers = winningLotto.getNumbers();
+
     return this.#numbers.filter((number) => winningNumbers.includes(number))
       .length;
   }
 
-  getRank(winningNumbers, bonusNumber) {
-    const matchingCount = this.getMatchingCount(winningNumbers);
+  getRank(winningLotto) {
+    const bonusNumber = winningLotto.getBonusNumber();
+    const matchingCount = this.getMatchingCount(winningLotto);
     const hasBonusNumber = this.#numbers.includes(bonusNumber);
 
     if (matchingCount === MATCHING_COUNT.first) return 1;

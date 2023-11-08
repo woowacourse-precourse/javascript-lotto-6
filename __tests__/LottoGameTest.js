@@ -2,6 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 
 import LottoGame from '../src/LottoGame.js';
 import Lotto from '../src/Lotto.js';
+import WinningLotto from '../src/WinningLotto.js';
 
 describe('LottoGame 클래스 테스트', () => {
   test('구입 금액에 해당하는 만큼 로또를 발행한다.', () => {
@@ -24,7 +25,7 @@ describe('LottoGame 클래스 테스트', () => {
   });
 
   describe('구매한 로또와 당첨 번호를 비교한다.', () => {
-    test.each([
+    const testCases = [
       {
         test: '1등 1개, 4등 1개, 5등 1개',
         purchasedLotto: [
@@ -32,7 +33,7 @@ describe('LottoGame 클래스 테스트', () => {
           new Lotto([1, 4, 5, 6, 10, 11]),
           new Lotto([1, 2, 3, 7, 10, 20]),
         ],
-        winningLotto: [1, 2, 3, 4, 5, 6],
+        winningLotto: new WinningLotto([1, 2, 3, 4, 5, 6]),
         bonusNumber: 7,
         expectedResult: [1, 1, 0, 0, 1],
       },
@@ -44,7 +45,7 @@ describe('LottoGame 클래스 테스트', () => {
           new Lotto([7, 11, 16, 35, 36, 44]),
           new Lotto([1, 8, 11, 31, 41, 42]),
         ],
-        winningLotto: [11, 16, 35, 36, 41, 44],
+        winningLotto: new WinningLotto([11, 16, 35, 36, 41, 44]),
         bonusNumber: 7,
         expectedResult: [1, 0, 0, 1, 0],
       },
@@ -54,19 +55,18 @@ describe('LottoGame 클래스 테스트', () => {
           new Lotto([1, 2, 3, 4, 5, 6]),
           new Lotto([1, 2, 3, 4, 5, 7]),
         ],
-        winningLotto: [11, 12, 13, 14, 15, 16],
+        winningLotto: new WinningLotto([11, 12, 13, 14, 15, 16]),
         bonusNumber: 42,
         expectedResult: [0, 0, 0, 0, 0],
       },
-    ])(
+    ];
+
+    test.each(testCases)(
       '각 등수에 몇 개가 당첨되었는지 확인할 수 있는 결과를 반환한다. ($test)',
       ({ purchasedLotto, winningLotto, bonusNumber, expectedResult }) => {
         const game = new LottoGame();
-        const result = game.compareLotto(
-          purchasedLotto,
-          winningLotto,
-          bonusNumber,
-        );
+        winningLotto.setBonusNumber(bonusNumber);
+        const result = game.compareLotto(purchasedLotto, winningLotto);
 
         expect(result).toEqual(expectedResult);
       },
