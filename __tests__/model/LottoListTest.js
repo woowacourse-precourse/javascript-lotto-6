@@ -1,1 +1,1 @@
-import LottoList from "../../src/model/LottoList.js";
+import LottoList from "../../src/models/LottoList.js";

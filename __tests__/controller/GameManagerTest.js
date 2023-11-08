@@ -1,1 +1,1 @@
-import GameManager from "../../src/controller/GameManager.js";
+import GameManager from "../../src/controllers/GameManager.js";
