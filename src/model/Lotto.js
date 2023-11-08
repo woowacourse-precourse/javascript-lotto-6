@@ -14,12 +14,12 @@ class Lotto {
     if (numbers.length !== 6) {
       throw (ERROR_MESSAGE.WINNING_NUM_COUNT);
     }
-    numbers.forEach((number) => {
+    numbers.forEach((number, index) => {
       if (number < 1 || number > 45) {
         throw (ERROR_MESSAGE.NUM_RANGE);
       }
-      if (numbers.indexOf(number)) {
-        throw (ERROR_MESSAGE.NUM_RANGE);
+      if (numbers.lastIndexOf(number) !== index) {
+        throw (ERROR_MESSAGE.WINNING_NUM_DUPLICATE);
       }
     })
   }

@@ -22,6 +22,7 @@ export const RESULT = Object.freeze([
 export const ERROR_MESSAGE = Object.freeze({
   AMOUNT: "[ERROR] 잘못된 금액입니다.\n",
   WINNING_NUM_COUNT: "[ERROR] 로또 번호는 6개여야 합니다.\n",
+  WINNING_NUM_DUPLICATE: "[ERROR] 서로 다른 6개의 숫자여야 합니다.\n",
   BONUS_NUM_COUNT: "[ERROR] 1개의 번호를 입력해주세요.\n",
   NUM_RANGE: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.\n",
 });
