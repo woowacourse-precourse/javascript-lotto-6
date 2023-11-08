@@ -12,14 +12,6 @@ describe("LottoModel 테스트", () => {
       expect(lottoModel.getPrice()).toBe(price);
     });
 
-    // test("사용자가 입력한 당첨 번호를 설정하고 가져오기", () => {
-    //   const numbers = [3, 7, 12, 18, 22, 45];
-
-    //   lottoModel.setLottoNumbers(numbers);
-
-    //   expect(lottoModel.setLottoNumbers()).toEqual(numbers);
-    // });
-
     test("사용자가 입력한 당첨 번호가 중복된 경우 예외 처리", () => {
       const invalidNumbers = [1, 2, 3, 4, 5, 5];
 
