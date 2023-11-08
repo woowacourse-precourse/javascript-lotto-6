@@ -1,10 +1,13 @@
 const ERROR_MESSAGE = {
   BUY_MONEY_1000:
-    '[ERROR] 구입 금액으로 1000원으로 나누어 떨어지는 수를 입력해주세요',
-  BUY_MONEY_NOT_NUM: '[ERROR] 구입 금액으로 숫자를 입력해주세요',
+    '[ERROR] 구입 금액으로 1000원으로 나누어 떨어지는 수를 입력해 주세요',
+  BUY_MONEY_NOT_NUM: '[ERROR] 구입 금액으로 숫자를 입력해 주세요',
+  BUY_MONEY_NOT_NEGATIVE: '[ERROR] 구입 금액으로 양수를 입력해 주세요',
   RANDOM_NUM_SIX: '[ERROR] 로또 번호는 6개여야 합니다.',
   RANDOM_NUM_DUPLICATE: '[ERROR] 서로 다른 당첨 번호를 입력해 주세요.',
   NUM_RANGE: '[ERROR] 1 ~ 45 사이의 숫자를 입력해 주세요.',
+  BONUSNUM_WINNING_DUPLICATE:
+    '[ERROR] 보너스 번호는 당첨번호와 중복되지 않게 입력해 주세요.',
 };
 
 const INPUT_MESSAGE = {

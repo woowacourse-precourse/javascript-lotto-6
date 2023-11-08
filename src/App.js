@@ -4,6 +4,7 @@ import Money from './Money.js';
 import Lottos from './Lottos.js';
 import Lotto from './Lotto.js';
 import WinningStatistics from './WinningStatistics.js';
+import BonusNum from './BonusNum.js';
 class App {
   async checkBuyMoney() {
     while (1) {
@@ -45,7 +46,7 @@ class App {
           INPUT_MESSAGE.INPUT_BONUSNUM
         );
         bonusNum = parseInt(bonusNum);
-        this.Lotto.checkNumRange(bonusNum);
+        this.BonusNum = new BonusNum(bonusNum, this.winningNum);
         return bonusNum;
       } catch (Err) {
         Console.print(Err);
@@ -57,17 +58,17 @@ class App {
     return buyMoney;
   }
   async play() {
-    const buyMoney = await this.checkBuyMoney();
-    this.Lottos = new Lottos(buyMoney);
+    this.buyMoney = await this.checkBuyMoney();
+    this.Lottos = new Lottos(this.buyMoney);
     this.Lottos.printNumOfLottos();
     this.Lottos.printCreatedLottos();
-    const winningNum = await this.inputWinningNum();
-    const bonusNum = await this.inputBonusNum();
+    this.winningNum = await this.inputWinningNum();
+    this.bonusNum = await this.inputBonusNum();
     this.winningStatistics = new WinningStatistics(
       this.Lottos.createdLottos,
-      bonusNum,
-      winningNum,
-      buyMoney
+      this.bonusNum,
+      this.winningNum,
+      this.buyMoney
     );
     this.winningStatistics.printResult();
   }
