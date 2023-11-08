@@ -17,7 +17,7 @@ class LottoManageModel {
   #bonusNumber;
 
   getWinningNumbers() {
-    return this.#winningNumbers.getNumbers();
+    return this.#winningNumbers?.getNumbers();
   }
 
   getBonusNumber() {
