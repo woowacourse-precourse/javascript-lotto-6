@@ -18,7 +18,7 @@ class LottoGenerator{
     });
   }
 
-  async lottoGenerator() {
+  lottoGenerator() {
     for (let i = 0; i < this.count; i++) {
       const num = Random.pickUniqueNumbersInRange(1, 45, 6);
 
@@ -27,4 +27,5 @@ class LottoGenerator{
     }
   }
 }
+
 export default LottoGenerator;

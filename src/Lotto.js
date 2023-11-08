@@ -26,6 +26,21 @@ class Lotto {
   {
 	  return this.#numbers;
   }
+
+  checkWinningNumbers(winNumbers) {
+    let count = 0;
+    for (const num of this.#numbers) {
+      if (winNumbers.includes(num)) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  checkBonusNumber(bonusNumber) {
+    if (this.#numbers.includes(bonusNumber)) return true;
+    return false;
+  }
 }
 
 export default Lotto;
