@@ -11,11 +11,7 @@ class LottoPurchase {
     }
     
     #generateRandomNumbers() {
-        const NUMBERS = [];
-        while(NUMBERS.length < 6){
-            const NUMBER = Random.pickNumberInRange(1,45);
-            if(!NUMBERS.includes(NUMBER)) NUMBERS.push(NUMBER);
-        }
+        const NUMBERS = Random.pickUniqueNumbersInRange(1,45,6);
         return NUMBERS;
     }
 
@@ -28,11 +24,16 @@ class LottoPurchase {
     }
 
     #printLottoNumber(number){
-        Console.print([number,this.LOTTO_NUMBER_OUTPUT_MESSEGE].join(''));
+        const numberCopy = `${number}`;
+        Console.print([numberCopy,this.LOTTO_NUMBER_OUTPUT_MESSEGE].join(''));
     }
 
     #printLottos(Lottos){
-        Lottos.forEach(Lotto => Console.print(Lotto.getNumbers()));
+        Lottos.forEach(Lotto => 
+            {   const numbers = Lotto.getNumbers();
+                const MESSAGE = `[${numbers.join(', ')}]`;
+                Console.print(MESSAGE);
+            })
     }
 
     async showPurchaseResult(){
