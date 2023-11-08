@@ -186,6 +186,30 @@ describe("inputBonusNumber 테스트", () => {
   });
 })
 
+describe("checkLottoResults 테스트", () => {
+  it("로또 티켓별로 당첨 여부 확인 및 결과 반환", () => {
+    // given
+    const app = new App();
+    const lottos = [
+    ];
+    const winningNumbers = [1, 2, 3, 4, 5, 6]; 
+    const bonusNumber = 7; 
+    const results = app.checkLottoResults(lottos, winningNumbers, bonusNumber);
+
+    // when
+    const expectedResults = [
+      { prize: 5000, count: 0 }, // 3개 일치
+      { prize: 50000, count: 0 }, // 4개 일치
+      { prize: 1500000, count: 0 }, // 5개 일치
+      { prize: 2000000000, count: 0 }, // 5개 일치 + 보너스 볼 일치
+      { prize: 30000000, count: 0 }, // 6개 일치
+    ];
+
+    // then
+    expect(results).toEqual(expectedResults);
+  });
+});
+
 
 
 
