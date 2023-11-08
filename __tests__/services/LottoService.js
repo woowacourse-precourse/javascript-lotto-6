@@ -1,5 +1,13 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
 import Account from '../../src/models/Account';
 import LottoService from '../../src/services/LottoService';
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
 
 describe('LottoService 테스트', () => {
   let lottoService;
@@ -60,5 +68,24 @@ describe('LottoService 테스트', () => {
     lottoService.setBonusNumber(input);
 
     expect(lottoService.getBonusNumber()).toEqual(input);
+  });
+
+  test('당첨 결과를 반환할 수 있다.', () => {
+    const input = [1, 2, 3, 4, 5, 6];
+    const output = {
+      firstPrizeCount: 1,
+      secondPrizeCount: 0,
+      thirdPrizeCount: 0,
+      fourthPrizeCount: 0,
+      fifthPrizeCount: 0,
+    };
+    
+    mockRandoms([input]);
+    lottoService.setPurchaseAmount(1000);
+    lottoService.buyLottos();
+    lottoService.setWinningNumbers(input);
+    lottoService.setBonusNumber(7);
+
+    expect(lottoService.getLottoResult()).toEqual(output);
   });
 });
