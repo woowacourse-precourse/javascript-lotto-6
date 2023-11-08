@@ -34,10 +34,16 @@ class LottoGame {
     return lottos;
   }
 
-  constructor(lottos, winningLotto, bonus) {
-    this.#lottos = lottos;
-    this.#winningLotto = winningLotto;
-    this.#bonus = bonus;
+  buyLottos(count) {
+    this.#lottos = LottoGame.getRandomLottos(count);
+  }
+
+  setWinningLotto(lotto) {
+    this.#winningLotto = lotto;
+  }
+
+  setBonus(number) {
+    this.#bonus = number;
   }
 
   getLottoPrizes() {
