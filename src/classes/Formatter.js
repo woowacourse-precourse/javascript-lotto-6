@@ -1,3 +1,5 @@
+import { MAX } from "../constant/lottoConstants";
+
 class Formatter {
   static numberFormat = new Intl.NumberFormat('ko-KR');
 
@@ -6,7 +8,7 @@ class Formatter {
       return number;
     }
 
-    return Number(number.toFixed(2));
+    return Number(number.toFixed(MAX.PROFIT_DECIMAL_LENGTH));
   }
 }
 

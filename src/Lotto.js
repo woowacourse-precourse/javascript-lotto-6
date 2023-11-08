@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "./constant/lottoConstants";
+import { ERROR_MESSAGE, MAX, MIN } from "./constant/lottoConstants";
 
 class Lotto {
   #numbers;
@@ -16,11 +16,11 @@ class Lotto {
   #validate(numbers) {
     numbers.forEach((number) => this.#validateNumber(number));
 
-    if (numbers.length !== 6) {
+    if (numbers.length !== MAX.LOTTO_NUMBERS) {
       throw ERROR_MESSAGE.LESS_LOTTO_NUMBERS;
     }
 
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== MAX.LOTTO_NUMBERS) {
       throw ERROR_MESSAGE.LOTTO_NUMBER_HAVE_DUPLICATE;
     }
   }
@@ -30,7 +30,7 @@ class Lotto {
       throw ERROR_MESSAGE.MUST_BE_NUMBER;
     }
 
-    if (number < 1 || number > 45) {
+    if (number < MIN.LOTTO_NUMBER || number > MAX.LOTTO_NUMBER) {
       throw ERROR_MESSAGE.INVALID_LOTTO_NUMBER_RANGE;
     }
   }

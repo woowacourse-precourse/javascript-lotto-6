@@ -43,3 +43,13 @@ export const MATCH_COUNT = {
   FIVE: 5,
   SIX: 6,
 };
+
+export const MAX = {
+  PROFIT_DECIMAL_LENGTH: 2,
+  LOTTO_NUMBER: 45,
+  LOTTO_NUMBERS: 6,
+};
+
+export const MIN = {
+  LOTTO_NUMBER: 1,
+};
