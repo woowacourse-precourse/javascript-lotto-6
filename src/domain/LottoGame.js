@@ -14,6 +14,9 @@ const lotto_prize = [
 
 class LottoGame {
 
+  /** @type {number} : 구입 금액 */
+  #purchaseAmount = null;
+
   /** @type {number} : 구매한 티켓 수량 */
   #purchaseQuantity = null;
 
@@ -26,13 +29,12 @@ class LottoGame {
   /** @type {number} : 보너스 번호 */
   #bonusNumber = null;
 
-  /**
-   * 구입금액에 따라 구입 가능한 티켓의 개수를 계산하여 저장한다.
-   * @param {number} purchaseAmount 구입금액
-   */
-  setPurchaseQuantityFromAmount(purchaseAmount) {
+  /** @type {number} : 수익률(%) */
+  #earningsRate = null;
+
+  calculatePurchaseQuantity() {
     // TODO: 상수 사용
-    this.#purchaseQuantity = purchaseAmount / 1000;
+    this.#purchaseQuantity = this.#purchaseAmount / 1000;
   }
 
   /** 랜덤 번호를 가진 로또 티켓을 구입 수량만큼 생성한다. */
@@ -75,6 +77,11 @@ class LottoGame {
 
   #determinePrize(match, bonusMatch) {
 
+  }
+
+  /** @param {number} 구입 금액 */
+  setPurchaseAmount(purchaseAmount) {
+    this.#purchaseAmount = purchaseAmount;
   }
 
   /** @returns {number} 티켓 구입 수량 */

@@ -28,11 +28,12 @@ class LottoGameController {
 	async #handleInputPurchaseAmount() {
 		const purchaseAmount = await this.#view.inputPurchaseAmount();
 		Validator.validatePurchaseAmount(purchaseAmount);
-		this.#lottoGame.setPurchaseQuantityFromAmount(purchaseAmount);
+		this.#lottoGame.setPurchaseAmount(purchaseAmount);
 	}
 
 	/** 티켓의 발행 로직을 담당한다. */
 	#handlePublishTickets() {
+		this.#lottoGame.calculatePurchaseQuantity();
 		this.#lottoGame.generateTickets();
 		this.#view.breakLine();
 		this.#view.displayPurchaseQuantity(this.#lottoGame.getPurchaseQuantity());
@@ -53,7 +54,6 @@ class LottoGameController {
 		);
 		this.#lottoGame.setWinningNumbers(winningNumbers);
 	}
-
 
 	/**
 	 * 당첨 번호(사용자 입력)에 대하여 전처리 및 유효성검사를 수행한다.
@@ -80,15 +80,32 @@ class LottoGameController {
 	}
 
 	/**
- * 보너스 번호(사용자 입력)에 대하여 전처리 및 유효성검사를 수행한다.
- * @param {string} bonusNumber 보너스 번호
- * @returns 전처리, 유효성검사가 완료된 보너스 번호
- */
+	 * 보너스 번호(사용자 입력)에 대하여 전처리 및 유효성검사를 수행한다.
+	 * @param {string} bonusNumber 보너스 번호
+	 * @returns 전처리, 유효성검사가 완료된 보너스 번호
+	 */
 	#preprocessBonusNumber(bonusNumber) {
 		let newBonusNumber = bonusNumber.trim();
 		const winningNumbers = this.#lottoGame.getWinningNumbers();
 		Validator.validateBonusNumber(newBonusNumber, winningNumbers);
 		return parseInt(newBonusNumber);
+	}
+
+	/**  */
+	handleGameResult() {
+		this.#handleAnalyzeResult();
+		this.#handleDisplayResult();
+	}
+
+	/** 게임 결과 분석 로직을 담당한다. */
+	#handleAnalyzeResult() {
+		this.#lottoGame.evaluateTicketMatches();
+		// TODO: 수익률
+	}
+
+	/** 게임 결과 출력 로직을 담당한다. */
+	#handleDisplayResult() {
+		// TODO: 결과 및 수익률 출력
 	}
 }
 
