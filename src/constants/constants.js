@@ -1,6 +1,7 @@
 export const INPUT_MESSAGE = {
     inputPurchaseAmount : "구입 금액을 입력해 주세요.\n",
-    inputWinningNumbers : "당첨 번호를 입력해 주세요.\n",
+    inputWinningNumbers : "\n당첨 번호를 입력해 주세요.\n",
+    inputBonusNumber : "\n보너스 번호를 입력해 주세요.\n",
 };
 
 export const OUTPUT_MESSAGE = {
@@ -14,4 +15,5 @@ export const ERROR_MESSAGE = {
     lottoDuplicatedError : "[ERROR] 로또 번호는 중복될 수 없습니다.",
     lottoRangeError : "[ERROR] 로또 번호의 범위는 1~45 폐구간 입니다.",
     lottoTypeError : "[ERROR] 로또 번호는 자연수입니다.",
+    bonusLengthError : "[ERROR] 보너스 번호는 1개여야 합니다."
 };
