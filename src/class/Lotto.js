@@ -2,11 +2,9 @@ import { Console } from "@woowacourse/mission-utils";
 import { Validator } from "../ValidateInput.js";
 
 class Lotto {
-  #numbers;
-
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.numbers = numbers;
   }
 
   #validate(numbers) {
@@ -16,15 +14,16 @@ class Lotto {
   }
 
   print() {
-    Console.print(`[${this.#numbers.join(", ")}]`);
+    Console.print(`[${this.numbers.join(", ")}]`);
   }
 
-  draw(winning) {
-    return this.#numbers.filter((number) => winning.includes(number)).length;
+  draw(winningNumber) {
+    return this.numbers.filter((number) => winningNumber.includes(number))
+      .length;
   }
 
   bonusDraw(bonusNumber) {
-    return this.#numbers.includes(bonusNumber);
+    return this.numbers.includes(bonusNumber);
   }
 }
 
