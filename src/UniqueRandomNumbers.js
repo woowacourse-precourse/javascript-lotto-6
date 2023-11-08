@@ -6,7 +6,6 @@ class UniqueRandomNumbers {
 
   constructor(amount) {
     this.#uniqueRandomNumbers = this.#generateUniqueRandomNumbers(amount);
-    this.#print(this.#uniqueRandomNumbers);
   }
 
   #generateUniqueRandomNumbers(amount) {
@@ -21,10 +20,6 @@ class UniqueRandomNumbers {
     }
 
     return [...numbers].sort((a, b) => a - b);
-  }
-
-  #print(numbers) {
-    MissionUtils.Console.print(numbers);
   }
 
   get() {

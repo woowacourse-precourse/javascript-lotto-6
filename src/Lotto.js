@@ -7,6 +7,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.#print(this.#numbers);
   }
 
   #validate(numbers) {
@@ -19,6 +20,9 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  #print(numbers) {
+    MissionUtils.Console.print(numbers);
+  }
 }
 
 export default Lotto;
