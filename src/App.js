@@ -22,6 +22,7 @@ class App {
 
     const winningNumsList = await this.getWinningNumbers();
     const bonus = await this.getBonus(winningNumsList);
+
     this.checkWinningResults(this.userMoney, winningNumsList, bonus);
   }
 
@@ -36,6 +37,7 @@ class App {
         throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
       }
       return this.userMoney;
+
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_USERMONEY_ERROR)
       await this.getUserMoney();
@@ -80,6 +82,7 @@ class App {
       this.checkNumsRange(winningNumsList);
 
       return winningNumsList;
+
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
       return await this.getWinningNumbers();
@@ -114,12 +117,10 @@ class App {
       this.checkInputIsNull(inputBonus);
       this.checkInputIsNaN(inputBonus);
       this.checkNumsRange(Number(inputBonus));
-
-      if (winningNumsList.includes(Number(inputBonus))) {
-        throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-      }
+      this.checkIsIncludes(inputBonus, winningNumsList);
       
       return Number(inputBonus);
+      
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
       await this.getBonus(winningNumsList);
@@ -129,6 +130,12 @@ class App {
   checkInputIsNaN(input) {
     if (isNaN(input)) {
       throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+    }
+  };
+
+  checkIsIncludes(input, list) {
+    if (list.includes(Number(input))) {
+      throw new Error(ERROR_MESSAGE.INPUT_ERROR)
     }
   };
 
