@@ -46,6 +46,14 @@ describe('로또 클래스 테스트', () => {
 		expect(() => new Lotto(lottoNumber)).toThrow('[ERROR]');
 	});
 
+	test('로또 번호 중에 로또 번호 범위를 벗어나는 값이 입력된 경우 에러가 발생한다.', () => {
+		// given
+		const lottoNumber = [1, 2, 3, 4, 5, 56];
+
+		// when, then
+		expect(() => new Lotto(lottoNumber)).toThrow('[ERROR]');
+	});
+
 	test('Lotto 인스턴스가 생성된다.', () => {
 		// given
 		const lottoNumber = [1, 2, 3, 4, 5, 6];
