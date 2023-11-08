@@ -10,6 +10,11 @@ const ERROR_MESSAGE = Object.freeze({
     LOTTO_DUPLICATE: "[ERROR] 로또 번호는 서로 중복될 수 없습니다.",
     LOTTO_COUNT: "[ERROR] 로또 번호는 6개로 구성되어야 합니다.",
     LOTTO_RANGE: "[ERROR] 로또 번호는 1과 45 사이의 값이어야 합니다",
+    
+    WINNING_NUMBER: "[ERROR] 당첨 번호는 숫자만 입력 가능합니다.",
+    WINNING_DUPLICATE: "[ERROR] 당첨 번호는 서로 중복될 수 없습니다.",
+    WINNING_COUNT: "[ERROR] 당첨 번호는 6개로 구성되어야 합니다.",
+    WINNING_RANGE: "[ERROR] 당첨 번호는 1과 45 사이의 값이어야 합니다.",
 });
   
   export default ERROR_MESSAGE;

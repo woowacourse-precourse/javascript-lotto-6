@@ -15,6 +15,7 @@ const Input = {
     const winningNumber = await Console.readLineAsync(
       PRINT_MESSAGE.REQUEST_WINNING_NUMBERS
     );
+    Validator.InputWinningNumber(winningNumber);
     return winningNumber;
   },
 };

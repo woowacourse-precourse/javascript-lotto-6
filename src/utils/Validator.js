@@ -28,6 +28,21 @@ const Validator = {
       if (RangeTest(numbers)) 
         throw new Error(ERROR_MESSAGE.LOTTO_RANGE);
     },
+
+    InputWinningNumber(input) {
+      const inputWinninNumbers = input.split(",");
+      if (input.replace(/\d|\,/g, "").length > 0)
+        throw new Error(ERROR_MESSAGE.WINNING_NUMBER);
+
+      if (inputWinninNumbers.length !== new Set(inputWinninNumbers).size)
+        throw new Error(ERROR_MESSAGE.LOTTO_DUPLICATE);
+  
+      if (inputWinninNumbers.length !== 6)
+        throw new Error(ERROR_MESSAGE.WINNING_COUNT);
+  
+      if (RangeTest(inputWinninNumbers))
+        throw new Error(ERROR_MESSAGE.WINNING_RANGE); 
+    },
   };
   
   export default Validator;
