@@ -25,6 +25,7 @@ class App {
     this.createLottoArray();
     this.printLottoNumbers();
     await this.enterWinningNumbers();
+    this.#matchLotto();
     this.printWinningResults();
   }
 
@@ -38,7 +39,6 @@ class App {
       Console.print(error.message);
       return await this.enterPurchaseAmount();
     }
-    
   }
 
   createLottoArray() {
@@ -54,8 +54,6 @@ class App {
     this.lottoArray.forEach(lottoClass => {
       lottoClass.printNumbers();
     })
-
-    Console.print("");
   }
 
   async enterWinningNumbers() {
@@ -67,7 +65,6 @@ class App {
       Console.print(error.message)
       return await this.enterWinningNumbers();
     }
-    
   }
 
   #matchLotto() {
@@ -89,7 +86,6 @@ class App {
   }
 
   printWinningResults() {
-    this.#matchLotto();
     Console.print("당첨 통계");
     Console.print("---")
     Console.print("3개 일치 (5,000원) - " + this.winningCounts[5] + "개");
