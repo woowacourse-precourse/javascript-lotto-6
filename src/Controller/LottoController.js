@@ -1,10 +1,11 @@
-import { INPUT_MESSAGE, MATCHING_RANK } from '../constants/messages.js';
+import { ERROR_MESSAGE, INPUT_MESSAGE, MATCHING_RANK } from '../constants/messages.js';
 import LottoMaker from '../Model/lottoMaker.js';
 import Lotto from '../Model/Lotto.js';
 import Statics from '../Model/Statics.js';
 import { validator } from '../validators/validator.js';
 import inputView from '../View/inputView.js';
 import outputView from '../View/outputView.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class LottoController {
 	#lottoMaker;
@@ -31,7 +32,8 @@ class LottoController {
 		try {
 			this.#lottoMaker = new LottoMaker(Number((await inputView.readPurchaseAmount()) / INPUT_MESSAGE.LOTTO_UNITS));
 			this.#lottoMaker.makeLotto(this.#lottoMaker.getAmount());
-		} catch {
+		} catch (error) {
+			Console.print(error.message);
 			await this.initializeLotto();
 		}
 	}
@@ -42,9 +44,14 @@ class LottoController {
 	}
 
 	async inputMatchNumbers() {
-		let matchNumbers = await inputView.readMatchNumbers();
-		const convertMatchNumbers = matchNumbers.split(',').map(Number);
-		this.#lotto = new Lotto(convertMatchNumbers);
+		try {
+			let matchNumbers = await inputView.readMatchNumbers();
+			const convertMatchNumbers = matchNumbers.split(',').map(Number);
+			this.#lotto = new Lotto(convertMatchNumbers);
+		} catch (error) {
+			Console.print(error.message);
+			await this.inputMatchNumbers();
+		}
 	}
 
 	async inputBonusNumber() {
