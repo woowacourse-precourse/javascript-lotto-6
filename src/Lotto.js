@@ -1,3 +1,5 @@
+import { MIN_NUMBER, MAX_NUMBER, COUNT_NUMBER, ERRORS } from './constants.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,18 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== COUNT_NUMBER) {
+      throw new Error(ERRORS.InvalidWinNumbersCount);
     }
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error(ERRORS.InvalidDuplicateNumber);
+    }
+    numbers.forEach((num) => {
+      if (num < MIN_NUMBER || num > MAX_NUMBER) {
+        throw new Error(ERRORS.InvalidRange);
+      }
+    });
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
