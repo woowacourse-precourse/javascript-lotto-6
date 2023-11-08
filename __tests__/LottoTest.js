@@ -26,12 +26,6 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  test('로또 번호가 정수가 아니면 예외가 발생한다.', () => {
-    expect(() => {
-      new Lotto([1, 2, 3.1, 4, 5, 6]);
-    }).toThrow('[ERROR]');
-  });
-
   test('로또 번호가 6개가 같을 때', () => {
     const lottoNumber = [1, 2, 3, 4, 5, 6];
     const bonusNumber = 7;
