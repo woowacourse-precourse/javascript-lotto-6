@@ -11,13 +11,6 @@ const mockQuestions = (inputs) => {
   });
 };
 
-const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
-};
-
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
@@ -85,7 +78,7 @@ describe('InputValidationService 클래스 테스트', () => {
       mockQuestions(['', '7']);
       await InputValidationService.setBonusNumber(
         INPUT_QUERY.BONUS_NUMBER,
-        '1,2,3,4,5,6',
+        '1,2,3,4,5,6'
       );
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
     });
@@ -95,7 +88,7 @@ describe('InputValidationService 클래스 테스트', () => {
       mockQuestions(['1', '2', '7']);
       await InputValidationService.setBonusNumber(
         INPUT_QUERY.BONUS_NUMBER,
-        '1,2,3,4,5,6',
+        '1,2,3,4,5,6'
       );
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
     });
@@ -105,7 +98,7 @@ describe('InputValidationService 클래스 테스트', () => {
       mockQuestions(['1,1,2,3,4,5', '1,2,3,4,5,6,7,8', '7']);
       await InputValidationService.setBonusNumber(
         INPUT_QUERY.BONUS_NUMBER,
-        '1,2,3,4,5,6',
+        '1,2,3,4,5,6'
       );
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
     });
@@ -115,7 +108,7 @@ describe('InputValidationService 클래스 테스트', () => {
       mockQuestions(['0', '100', '7']);
       await InputValidationService.setBonusNumber(
         INPUT_QUERY.BONUS_NUMBER,
-        '1,2,3,4,5,6',
+        '1,2,3,4,5,6'
       );
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
     });
