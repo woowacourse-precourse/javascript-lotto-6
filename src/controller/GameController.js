@@ -15,7 +15,7 @@ class GameController {
       Validator.purchasePrice(price);
       this.#purchasePrice = price;
     } catch (error) {
-      UserOutputView.printError(error);
+      UserOutputView.printError(error.message);
       await this.inputPurchasePrice();
     }
   }
