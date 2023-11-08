@@ -17,8 +17,9 @@ describe("LottoMachine 비즈니스 로직에 대한 테스트", () => {
 
     const result = lottoMachine.drawAll(lottos)
 
-    //3개 일치 예상, 5등
+    //3개 일치 예상, 5등, 250.0%의 수익률
     expect(result.fifthRank).toBe(1)
+    expect(result.earningRate).toBe(250.0)
 
     expect(result.firstRank).toBe(0)
     expect(result.secondRank).toBe(0)
