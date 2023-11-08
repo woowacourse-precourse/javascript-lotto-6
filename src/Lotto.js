@@ -17,6 +17,9 @@ class Lotto {
     if (!numbers.every((number) => this.isNumberValid(number))) {
       throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error("[ERROR] 중복된 로또 번호가 있습니다.");
+    }
   }
 
   isNumberValid(number) {
