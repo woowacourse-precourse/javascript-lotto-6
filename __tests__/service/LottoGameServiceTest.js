@@ -13,4 +13,12 @@ describe('로또 게임 서비스 클래스 테스트', () => {
 
     expect(purchaseCount).toStrictEqual(expected);
   });
+
+  test('주어진 개수만큼 로또를 생성한다.', () => {
+    const purchaseCount = 5;
+    const expected = 5;
+    const publishedLottos = lottoGameService.getPublishedLottos(purchaseCount);
+
+    expect(publishedLottos.length).toStrictEqual(expected);
+  });
 });
