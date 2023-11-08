@@ -1,4 +1,5 @@
 import GameResult from "./GameResult.js";
+import GameResultDisplayer from "./GameResultDisplayer.js";
 import LottoPurchase from "./LottoPurchase.js";
 import LottoPurchaseInput from "./LottoPurchaseInput.js";
 import WinningNumberInput from "./WinningNumberInput.js";
@@ -18,7 +19,8 @@ class App {
       Number(bonusNumberStr)
     );
 
-    gameResult.show();
+    const gameResultDisplayer = new GameResultDisplayer(gameResult);
+    gameResultDisplayer.show();
   }
 
   static parseWinningNumber(numbersStr) {
