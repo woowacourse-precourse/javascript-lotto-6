@@ -62,7 +62,7 @@ class App {
 
   async getBonusNumber() {
     const bonusNumber = parseInt(await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n'));
-    if (bonusNumber > MAX_LOTTO_NUMBER || bonusNumbeㅁr < MIN_LOTTO_NUMBER) {
+    if (bonusNumber > MAX_LOTTO_NUMBER || bonusNumbe < MIN_LOTTO_NUMBER) {
       throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
     }
     return bonusNumber;

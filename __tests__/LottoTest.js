@@ -15,4 +15,15 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("로또 번호 개수가 6개보다 작으면 예외 발생", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("numbers getter가 올바르게 작동하는지 확인", () => {
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto(numbers);
+    expect(lotto.numbers).toEqual(numbers);
+  });
 });
