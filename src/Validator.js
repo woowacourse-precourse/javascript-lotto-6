@@ -1,6 +1,6 @@
 class Validator {
 	static checkIsNaturalNumber(str) {
-		return /r'[1-9]\d*'/.test(str);
+		return /^[1-9]\d*$/.test(str);
 	}
 
 	static checkIsDividedByLottoPrice(str) {
@@ -61,13 +61,33 @@ class Validator {
 		return true;
 	}
 
-	static checkBonusNumberValidity(str) {
+	static generateBonusNumberValidateFunc(winningNumber) {
+		return (str) => {
+			Validator.checkBonusNumberCondition(str);
+			Validator.checkWinningNumberBonusNumberDup(winningNumber, str);
+		};
+	}
+
+	static checkBonusNumberCondition(str) {
 		const isStrNaturalNumber = Validator.checkIsNaturalNumber(str);
 		if (!isStrNaturalNumber) {
 			throw new Error('[ERROR] 자연수를 입력해주세요.');
 		}
 
+		const isNumberInRange = parseInt(str, 10) >= 1 && parseInt(str, 10) <= 45;
+		if (!isNumberInRange) {
+			throw new Error(
+				`[ERROR] ${1}에서 ${45}사이의 숫자를 입력해주세요.`,
+			);
+		}
+
 		return true;
+	}
+
+	static checkWinningNumberBonusNumberDup(winningNumber, bonusNumber) {
+		if (winningNumber.split(',').indexOf(bonusNumber) > -1) {
+			throw new Error('[ERROR] 보너스 번호도 중복을 피해주세요.');
+		}
 	}
 }
 export default Validator;
