@@ -1,22 +1,23 @@
 import Lotto from "./Lotto.js";
 import LottoView from "./LottoView.js";
+import InputView from "./InputView.js";
 import LottoValidator from "./Validator.js";
 import CalculateWinners from "./CalculateWinners.js";
 import calculateProfit from "./CalculateProfit.js";
-import { Random } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 
 class LottoController {
   constructor() {
     this.view = new LottoView();
+    this.inputView = new InputView();
     this.lottos = [];
     this.calculateWinners = new CalculateWinners();
     this.validator = new LottoValidator();
   }
 
   async purchaseLottos() {
-    const amount = await this.view.askPayment();
+    const amount = await this.inputView.askPayment();
     const countOfLotto = amount / 1000;
-    this.validator.validatePurchaseAmount(amount);
     this.lottos = this.makeLottoNumbers(countOfLotto);
     this.view.showLottoNumbers(countOfLotto, this.lottos);
   }
@@ -29,8 +30,8 @@ class LottoController {
   }
 
   async viewResults() {
-    const winningNumbers = await this.view.askWinningNumbers();
-    const bonusNumber = await this.view.askBonusNumber();
+    const winningNumbers = await this.inputView.askWinningNumbers();
+    const bonusNumber = await this.inputView.askBonusNumber();
     const countWinners = this.calculateWinners.manageWinners(
       this.lottos,
       winningNumbers,
