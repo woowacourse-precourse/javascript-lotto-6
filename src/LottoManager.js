@@ -17,7 +17,7 @@ class LottoManager {
     lottos.map((lotto) => this.#lottos.push(lotto));
   }
 
-  compareWinningNumber(winningNumber) {
+  #compareWinningNumber(winningNumber) {
     const result = [];
 
     this.#lottos.map((lotto) => {
@@ -28,7 +28,7 @@ class LottoManager {
     return result;
   }
 
-  compareBonusNumber(bonusNumber) {
+  #compareBonusNumber(bonusNumber) {
     const result = [];
 
     this.#lottos.map((lotto) => {
@@ -48,8 +48,8 @@ class LottoManager {
   }
 
   drawingLotto(winningNumber, bonusNumber) {
-    const winnings = this.compareWinningNumber(winningNumber);
-    const bonusNumbers = this.compareBonusNumber(bonusNumber);
+    const winnings = this.#compareWinningNumber(winningNumber);
+    const bonusNumbers = this.#compareBonusNumber(bonusNumber);
 
     winnings.map((winning, ticket) => {
       const rank = this.#rank(winning, bonusNumbers[ticket]);
