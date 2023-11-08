@@ -1,5 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
-
 import constant from '../constants/constant.js';
 import errorMessage from '../constants/errorMessage.js';
 
