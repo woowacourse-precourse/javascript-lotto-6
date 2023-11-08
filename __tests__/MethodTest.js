@@ -224,7 +224,6 @@ describe('getBonusNum 메서드 테스트', () => {
 describe('calculateWin 메서드 테스트', () => {
   test('calculateWin 메서드는 각 등수별 당첨 개수를 리턴해야한다.', async () => {
     //given
-    const app = new App();
     const tickets = [
       [1, 2, 3, 4, 5, 6]
     ];
@@ -232,6 +231,7 @@ describe('calculateWin 메서드 테스트', () => {
     const bonus = 7;
 
     //when
+    const app = new App();
     const winLog = app.calculateWin(tickets, winningNums, bonus);
 
     //then
@@ -246,11 +246,11 @@ describe('calculateWin 메서드 테스트', () => {
 describe('countMatchedNumbers 메서드 테스트', () => {
   test('countMatchedNumbers 메서드는 로또 번호와 당첨번호를 비교하여 일치하는 개수를 리턴해야한다.', () => {
     // given
-    const app = new App();
     const ticketNumbers = [1, 2, 3, 4, 5, 6];
     const winningNums = [1, 2, 3, 4, 5, 6];
 
     // when
+    const app = new App();
     const matchedCount = app.countMatchedNumbers(ticketNumbers, winningNums);
 
     // then
@@ -284,3 +284,19 @@ describe('printWinningStatistics 메서드 테스트', () => {
   });
 });
 
+describe('calculateProfit 메서드 테스트', () => {
+  test('calculateProfit 메서드는 수익률을 계산하여 출력해야한다.', () => {
+    // given
+    const count = 10;
+    const winLog = [1, 0, 0, 0, 0];
+    const logSpy = getLogSpy();
+
+    // when
+    const app = new App();
+    app.calculateProfit(count, winLog);
+
+    // then
+    const log = "총 수익률은 50%입니다."
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+  });
+});
