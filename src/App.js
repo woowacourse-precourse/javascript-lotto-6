@@ -39,7 +39,8 @@ class App {
     if(winningCount===5 && bonus) return 2;
     if(winningCount===5) return 3;
     if(winningCount===4) return 4;
-    if(winningCount===3) return 5;    
+    if(winningCount===3) return 5;
+    else return 0;    
   }
 
   getProfit() {
@@ -55,14 +56,20 @@ class App {
 
   async getWinningLotto() {
     const winningNumber = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    const lotto = new Lotto(winningNumber);
-    if(lotto) return winningNumber;
+    const winnigArray = winningNumber.split(",").map(Number);
+    try {
+      const lotto = new Lotto(winnigArray);
+      if(lotto) return winnigArray;
+    } catch(error) {
+      console.error(error.message);
+      this.getWinningLotto();
+    }
   }
 
   async getMoneyReturnCount() {
     const money = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
     if(money%1000 !== 0) throw new Error("[ERROR] 1000원 단위로 입력해 주세요.");
-    return money/1000;
+    return Math.floor(money/1000);
   }
 
   generateAndPrintLotto(count) {
