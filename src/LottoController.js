@@ -16,25 +16,31 @@ class LottoController {
   }
 
   async askBudget() {
-    try {
+    while (true) {
       const input = await View.input(InfoMsg.ASK_BUDGET);
-      this.validateBudget(input);
-      this.#budget = input;
-      this.getLottoCount(this.#budget);
-    } catch (err) {
-      View.output(err);
-      this.askBudget();
+      const isValid = this.validateBudget(input);
+      if (isValid === true) {
+        this.#budget = input;
+        this.getLottoCount();
+        break;
+      }
+      View.output(isValid);
     }
   }
 
   validateBudget(input) {
-    BudgetValidator.isNum(input);
-    BudgetValidator.minIsUnitPrice(input);
-    BudgetValidator.divisibleByUnitPrice(input);
+    try {
+      BudgetValidator.isNum(input);
+      BudgetValidator.minIsUnitPrice(input);
+      BudgetValidator.divisibleByUnitPrice(input);
+    } catch (err) {
+      return err;
+    }
+    return true;
   }
 
-  getLottoCount(budget) {
-    this.#lottoCount = Number(budget) / Constant.UNIT_PRICE;
+  getLottoCount() {
+    this.#lottoCount = Number(this.#budget) / Constant.UNIT_PRICE;
     View.output(`\n${this.#lottoCount}${InfoMsg.SHOW_LOTTO_COUNT}`);
   }
 
