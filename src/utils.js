@@ -6,11 +6,7 @@ export const splitAndTrim = (inputString) => {
     throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
   }
 
-  const items = inputString.split(',');
-
-  for (let i = 0; i < items.length; i++) {
-    items[i] = items[i].trim();
-  }
+  const items = inputString.split(',').map((item) => item.trim());
 
   return items;
 };
@@ -70,7 +66,9 @@ export const validateBonusNumber = (input, winningNumbers) => {
     throw new Error(ERROR_MESSAGES.OUT_OF_RANGE);
   }
 
-  if (input.some((num) => winningNumbers.includes(num))) {
+  if (winningNumbers.includes(bonusNumber)) {
     throw new Error(ERROR_MESSAGES.DUPLICATE_BONUS);
   }
+
+  return true;
 };
