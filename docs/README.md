@@ -75,7 +75,10 @@
 
 2. 예외 발생 경우는 다음과 같다.
 
-   ✦ 구입 금액이 1000원으로 나누어 떨어지지 않는 경우
+   ✦ 구입 금액으로 숫자가 아닌 값을 입력 받는 경우<br>
+   ✦ 구입 금액으로 1000원으로 나누어 떨어지지 않는 값을 입력 받는 경우<br>
+   ✦ 로또 번호가로 숫자가 아닌 값을 입력 받는 경우<br>
+   ✦ 로또 번호와 보너스 번호에 중복된 숫자가 있도록 입력 받는 경우
 
 <br>
 
@@ -88,3 +91,105 @@
 5. 함수(메소드)의 길이가 15라인이 넘지 안도록 한다.
 6. else를 지양한다.
 7. 제공된 `Lotto` 클래스를 활용하며 필드 추가는 불가능하다.
+
+<br>
+
+## :bricks: 디렉토리 구조
+
+<br>
+
+### :package: constants
+
+```
+constants               // 상수를 정의한다.
+ ┣ ErrorMessage.js      // 에러 메시지를 정의한다.
+ ┣ GameMessage.js       // 게임 내 출력 메세지를 정의한다.
+ ┣ LottoConstants.js    // 로또의 길이, 가격 등을 정의한다.
+ ┗ PrizeConstant.js     // 당첨 조건과 상금을 정의한다.
+```
+
+<br>
+
+### :package: controller
+
+```
+ controller             // 게임의 흐름을 관리한다.
+ ┗ LottoController.js
+```
+
+<br>
+
+### :package: model
+
+```
+ model                  // 게임내에 사용하는 객체를 정의한다.
+ ┣ Lotto.js             // 6개의 번호로 이루어진 로또를 정의한다.
+ ┣ LottoSet.js          // 로또의 집합을 정의한다.
+ ┣ Money.js             // 돈을 정의한다.
+ ┗ WinningLotto.js      // 당첨 로또를 정의한다.
+```
+
+<br>
+
+### :package: utils
+
+```
+ utils                  // 모델에서 사용할 데이터를 가공한다.
+ ┣ generateLottos.js
+ ┣ generateMoney.js
+ ┗ generateWinningLotto.js
+```
+
+<br>
+
+### :package: validator
+
+```
+ validator              // 모델에서 사용할 데이터를 검증한다.
+ ┣ lottoValidate.js
+ ┗ moneyValidate.js
+```
+
+<br>
+
+### :package: view
+
+```
+ view                   // 입력과 출력을 수행한다.
+ ┣ Input.js
+ ┗ Output.js
+```
+
+<br>
+
+## :books: 구현 기록
+
+<br>
+
+ <div align="center">
+
+보다 구체적인 작업 과정은 `docs/History.md`를 확인해주세요 👀
+
+</div>
+
+<br>
+
+<div align="center">
+
+**입력** ▷ **가공** ▷ **검증** ▷ **처리** ▷ **출력**
+
+</div>
+
+<br>
+
+모든 기능은 위와 같은 과정을 거쳐 수행된다. 기능은 네 가지로 **로또 구매** ▷ **로또 발급** ▷ **당첨 번호 생성** ▷ **결과 출력**으로 이어진다.
+
+또한 위의 과정이 잘들어나도록 디렉토리를 구성했다. 모델과 뷰는 서로를 호출하지 않는 등의 기본적인 MVC 패턴의 규칙과 더불어 일관적인 구현을 위해 아래의 규칙을 따른다.
+
+<br>
+
+1. 데이터는 반드시 모델화된다. 이때 모델 생성 전에 반드시 검증을 거친다.
+2. 모델에서는 스스로의 데이터를 생성하지 않는다. 대신 util에서 모델을 위한 데이터를 가공한다.
+3. 각 모델에 대한 검증 함수들은 `validator/${모델명}Valdiate.js`내에 존재하며 반드시 `is`로 시작한다.
+4. 각 모델에 대한 데이터 가공은 `utils/generate${모델명}.js`내에 존재하며 반드시 `generate`로 시작한다.
+5. Controller는 각 기능에 대해 하나의 함수만을 갖는다.
