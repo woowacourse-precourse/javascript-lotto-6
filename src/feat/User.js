@@ -11,6 +11,7 @@ class User {
     );
     Console.print("");
     if (this.validate.validatePurchaseAmount(userInputAmount)) {
+      // Console.print(userInputAmount);
       return userInputAmount;
     }
   }

@@ -5,8 +5,8 @@ class App {
   async play() {
     const computer = new Computer();
     const user = new User();
-    // computer.issuanceLotto(5);
-    user.purchaseAmount();
+    const lottoAmonut = await user.purchaseAmount();
+    computer.issuanceLotto(lottoAmonut);
   }
 }
 const app = new App();
