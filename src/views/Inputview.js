@@ -23,7 +23,6 @@ class Inputview {
 
     async readWinningNumbers() {
         try {
-            Console.print('\n');
             const winningnumbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
             const numbers = winningnumbers.split(',').map(Number);
             return new WinningLotto(numbers);
