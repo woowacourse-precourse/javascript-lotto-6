@@ -78,6 +78,7 @@ npm install
 ```
 📦src
  ┣ 📂Constant
+ ┃ ┣ 📜Error.js
  ┃ ┣ 📜message.js
  ┃ ┗ 📜stats.js
  ┣ 📂Controller
@@ -88,6 +89,7 @@ npm install
  ┃ ┣ 📜NumberCheck.js
  ┃ ┗ 📜User.js
  ┣ 📂Utils
+ ┃ ┣ 📜CustomError.js
  ┃ ┣ 📜Regex.js
  ┃ ┗ 📜validation.js
  ┣ 📂View
