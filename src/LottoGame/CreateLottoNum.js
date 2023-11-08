@@ -16,7 +16,7 @@ export class CreateLottoNum {
                 return a-b;
             }).join(', ')}]`)
         );
-        return lottoNum;
+        return { lottoNum, lottoCount };
     }
 }
 
