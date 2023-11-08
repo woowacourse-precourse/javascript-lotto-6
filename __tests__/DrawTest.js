@@ -34,7 +34,7 @@ describe("추첨 객체 테스트", () => {
 
     let matches = [1, 1, 2, 0];
     const bonus = 3;
-    const count = draw.getBounusMatches(matches, bonus);
+    const count = draw.getBonusMatches(matches, bonus);
 
     expect(count).toEqual(2);
   });
