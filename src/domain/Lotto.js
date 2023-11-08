@@ -20,9 +20,9 @@ class Lotto {
     return rank;
   }
 
-  countMatchedNums(winningNums) {
+  countMatchedNums(winningNumArr) {
     const matchedNums = this.#numbers.filter((num) =>
-      winningNums.includes(num)
+      winningNumArr.includes(num)
     );
     const matchedCount = matchedNums.length;
     return matchedCount;
