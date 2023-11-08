@@ -1,6 +1,6 @@
-import { CONSOLE_MESSAGE } from '../utils/Define';
-import inputView from './InputReader';
-import outputView from './OutputView';
+import { CONSOLE_MESSAGE } from '../utils/Define.js';
+import inputView from './InputReader.js';
+import outputView from './OutputView.js';
 
 class View {
   async getPurchaseAmount() {
@@ -8,13 +8,14 @@ class View {
     return purchaseAmount;
   }
 
-  async returnPurchaseLottos(lottos, quantitiy) {
-    const resultString = lottos
-      .map((lotto) => `[${lotto.getNumbers().join(', ')}]`) // 배열의 각 요소를 문자열로 변환하면서 공백을 추가합니다.
-      .join('');
-    await outputView(CONSOLE_MESSAGE.returnBuying, quantitiy, resultString);
-    return resultString;
+  async returnPurchaseLottos(lottos, quantity) {
+    await outputView(CONSOLE_MESSAGE.returnBuying(quantity));
+    await Promise.all(lottos.map(lotto => outputView(`[${lotto.getNumbers().join(', ')}]`)));
   }
+
+
+
+
 
   async getWinnigNumbers() {
     const winningNumbers = await inputView(CONSOLE_MESSAGE.requestLottoNumbers);
@@ -26,18 +27,22 @@ class View {
     return bonusNumber;
   }
 
-  async returnResult(lottoResult){
+  async returnResult(lottoResult) {
     await outputView(CONSOLE_MESSAGE.returnWinning);
-      Object.entries(lottoResult).sort((a, b) => b[0] - a[0]).forEach(async ([_, [prize, matches, rank, count]]) => {
-        await outputView(CONSOLE_MESSAGE.returnEachResult(matches, prize, count));
-      });
-    }
-
-
-  async returnLottoROI(lottoROI){
-    await outputView(CONSOLE_MESSAGE.returnLottoROI(lottoROI));
+    await outputView(CONSOLE_MESSAGE.returnFifthResult(lottoResult[0]));
+    await outputView(CONSOLE_MESSAGE.returnFourthResult(lottoResult[1]));
+    await outputView(CONSOLE_MESSAGE.returnThirdResult(lottoResult[2]));
+    await outputView(CONSOLE_MESSAGE.returnSecondResult(lottoResult[3]));
+    await outputView(CONSOLE_MESSAGE.returnFirstResult(lottoResult[4]));
   }
 
+
+
+
+
+  async returnLottoROI(lottoROI) {
+    await outputView(CONSOLE_MESSAGE.returnLottoROI(lottoROI));
+  }
 }
 
 export default View;

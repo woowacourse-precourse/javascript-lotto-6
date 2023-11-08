@@ -1,11 +1,14 @@
 const CONSOLE_MESSAGE = Object.freeze({
   requestBuying: '구입금액을 입력해 주세요.\n',
   returnBuying: (quantitiy) => `${quantitiy}개를 구매했습니다.\n`,
-  requestLottoNumbers: '당첨 번호를 입력해 주세요.\n',
+  requestLottoNumbers: '\n당첨 번호를 입력해 주세요.\n',
   requestBonusNumber: '보너스 번호를 입력해 주세요.\n',
   returnWinning: '당첨 통계\n---\n',
-  returnEachResult: (matchCount, reward, winCount) =>
-    `${matchCount}개 일치 (${reward}원) - ${winCount}개 \n`,
+  returnFifthResult:(winCount)=> `3개 일치 (5,000원) - ${winCount}개 \n`,
+  returnFourthResult:(winCount)=> `4개 일치 (50,000원) - ${winCount}개 \n`,
+  returnThirdResult:(winCount)=> `5개 일치 (1,500,000원) - ${winCount}개 \n`,
+  returnSecondResult:(winCount)=> `5개 일치, 보너스 볼 일치 (30,000,000원) - ${winCount}개 \n`,
+  returnFirstResult:(winCount)=> `6개 일치 (2,000,000,000원) - ${winCount}개 \n`,
   returnLottoROI: (lottoROI) => `총 수익률은 ${lottoROI}%입니다.\n`,
 });
 

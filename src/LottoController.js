@@ -8,16 +8,16 @@ class LottoController {
   constructor({ view, lottoService ,prizeService}) {
     this.#view = view;
     this.#lottoService = lottoService;
-    this.#prizeService = prizeService
+    this.#prizeService = prizeService;
   }
 
   async startGame() {
     const [lottos, quantitiy] = await this.#purchaseLottos();
-    this.#view.returnPurchaseLottos(lottos, quantitiy);
+    await this.#view.returnPurchaseLottos(lottos, quantitiy);
     const winningLotto = await this.#winningLotto();
     const [lottoResult, lottoROI] = this.#prizeService.prizeReward(lottos, winningLotto, quantitiy);
-    this.#view.returnResult(lottoResult);
-    this.#view.returnLottoROI(lottoROI);
+    await this.#view.returnResult(lottoResult);
+    await this.#view.returnLottoROI(lottoROI);
   }
 
 
@@ -27,10 +27,17 @@ class LottoController {
   }
 
   async #winningLotto() {
-    const winningNumbers = await this.#view.getWinnigNumbers();
+    let winningNumbers = await this.#view.getWinnigNumbers();
+    if (typeof winningNumbers === 'string') {
+      winningNumbers = winningNumbers.split(',').map(Number);
+    }
     const bonusNumber = await this.#view.getBonusNumber();
     return this.#lottoService.getWinningLotto(winningNumbers, bonusNumber);
   }
+
+
+
+
 
 
 }

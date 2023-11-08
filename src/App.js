@@ -1,6 +1,7 @@
-import LottoController from './LottoController';
-import View from './views/view';
-import LottoService from './LottoService';
+import LottoController from './LottoController.js';
+import View from './views/view.js';
+import LottoService from './service/LottoService.js';
+import PrizeService from './service/PrizeService.js';
 
 class App {
   #controller;
@@ -11,6 +12,7 @@ class App {
     this.#controller = new LottoController({
       view: new View(),
       lottoService: new LottoService(),
+      prizeService: new PrizeService(),
     });
   }
 

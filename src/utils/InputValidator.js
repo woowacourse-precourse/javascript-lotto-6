@@ -1,5 +1,5 @@
-import CustomError from './Errors';
-import { ERROR_MESSAGE } from './Define';
+import CustomError from './Errors.js';
+import { ERROR_MESSAGE } from './Define.js';
 
 const purchaseAmount = (input) => {
   if (!/^\d000$/.test(String(input))) {

@@ -1,6 +1,6 @@
-import Lotto from '../Lotto';
-import { ERROR_MESSAGE } from '../utils/Define';
-import CustomError from '../utils/Errors';
+import Lotto from '../Lotto.js';
+import { ERROR_MESSAGE } from '../utils/Define.js';
+import CustomError from '../utils/Errors.js';
 
 class WinningLotto extends Lotto {
   #bonusNumber;
@@ -15,15 +15,13 @@ class WinningLotto extends Lotto {
   #validates(bonusNumber) {
     this.validateOutOfRange(bonusNumber);
     if (this.includeNumber(bonusNumber)) {
-
       throw CustomError.lottoValidateError(ERROR_MESSAGE.notUniqueBonusNumber);
     }
   }
 
-  getBonusNumber(){
+  getBonusNumber() {
     return this.#bonusNumber;
   }
-
 }
 
 export default WinningLotto;

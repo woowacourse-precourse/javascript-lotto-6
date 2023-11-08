@@ -1,5 +1,5 @@
-import CustomError from './utils/Errors';
-import { ERROR_MESSAGE, LOTTO } from './utils/Define';
+import CustomError from './utils/Errors.js';
+import { ERROR_MESSAGE, LOTTO } from './utils/Define.js';
 
 class Lotto {
   #numbers;
@@ -12,7 +12,7 @@ class Lotto {
   #validate(numbers) {
     this.#validateLength(numbers);
     this.#validateNumbersRange(numbers);
-     this.#validateDuplicate(numbers);
+    this.#validateDuplicate(numbers);
   }
 
   #validateDuplicate(numbers) {
@@ -41,7 +41,6 @@ class Lotto {
     }
   }
 
-
   includeNumber(number) {
     return this.#numbers.includes(number);
   }
@@ -49,7 +48,6 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
-
 }
 
 export default Lotto;

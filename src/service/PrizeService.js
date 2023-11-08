@@ -1,32 +1,36 @@
 import {LOTTO} from "../utils/Define.js";
+import Prize from "../domain/Prize.js";
 
 class PrizeService {
-    constructor(prize) {
-        this.prize = prize;
+    constructor() {
+        this.prize = new Prize();
     }
 
     prizeReward(lottos,winningLotto, quantitiy){
-        const lottoResult = this.#compareNumbers(lottos,winningLotto);
-        const totalReward= this.#calculateReward(rankCounts,this.prize);
+        const lottoResult = this.#getRankCount(lottos,winningLotto);
+        const totalReward= this.#calculateReward(lottoResult,this.prize);
         const lottoROI = this.#calculateLottoROI(totalReward,quantitiy*LOTTO.price);
         return [lottoResult,lottoROI];
     }
 
-    #compareNumbers(lottos, winningLotto) {
-        return lottos.reduce((acc, lotto) => {
-            const rank = this.#compareLotto(lotto, winningLotto);
-            acc[rank] = acc[rank]
-                ? [rank, acc[rank][1] + 1, acc[rank][2], acc[rank][3]]
-                : [...this.prize.getPrizeAndMatches(rank), rank, 1];
-            return acc;
-        }, {});
+    #getRankCount(lottos, winningLotto) {
+        const rankCount = [0, 0, 0, 0, 0]; // 5등부터 1등 순서의 리스트 초기화
+
+        lottos.forEach(lotto => {
+            const rank = this.#compareLotto(lotto, winningLotto); // 각 로또의 등수 계산
+            if (rank >= 1 && rank <= 5) {
+                rankCount[5 - rank] += 1; // 해당 등수의 개수 증가
+            }
+        });
+
+        return rankCount;
     }
 
+
     #compareLotto(lotto, winningLotto) {
-        const matchCount = this.#compareSingleNumber(lotto.getNumbers(), winningLotto.getNumbers());
-        const isBonusMatched = this.#compareBonusNumber(lotto.getNumbers(), winningLotto.getBonusNumber());
-        const rank = this.#calculateRank(matchCount, isBonusMatched);
-        return rank;
+        const matchCount = this.#compareSingleNumber(lotto.getNumbers(), winningLotto.getNumbers()); // 숫자
+        const isBonusMatched = this.#compareBonusNumber(lotto.getNumbers(), winningLotto.getBonusNumber()); // true, false
+        return this.#calculateRank(matchCount, isBonusMatched); // 1~6까지 등수 (6은 당첨X)
     }
 
 
@@ -44,10 +48,12 @@ class PrizeService {
             '5true': 2,
             '5false': 3,
             '4': 4,
-            '3': 5
+            '3': 5,
+            '0': 6
         };
-        return rankMap[`${matchCount}${isBonusMatched}`] || 0;
+        return rankMap[`${matchCount}${isBonusMatched}`] ||6 ;
     }
+
 
     #calculateReward(rankCounts, prize) {
         return Object.keys(rankCounts).reduce((totalReward, rank) => {
