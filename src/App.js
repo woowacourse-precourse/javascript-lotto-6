@@ -47,6 +47,9 @@ class App {
         if (priceInput % 1000 !== 0) {
           throw new Error(ERROR.THOUSAND);
         }
+        if (priceInput === 0) {
+          throw new Error(ERROR.THOUSAND);
+        }
 
         this.price = priceInput;
         this.count = parseInt(priceInput / 1000);
