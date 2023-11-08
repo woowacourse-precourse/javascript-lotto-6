@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Validation from "./Validation.js";
+import { inputMessage } from "../Constant.js";
 
 const Console = MissionUtils.Console;
 
@@ -11,14 +12,14 @@ class WinningLotto {
 
   static async createWinningNumber() {
     const inputNumber = await Console.readLineAsync(
-      "당첨 번호를 입력해 주세요."
+      inputMessage.GET_WINNER_NUMBERS
     );
     return inputNumber;
   }
 
   static async createBonusNumber() {
     const lottoBonusNumber = await Console.readLineAsync(
-      "보너스 번호를 입력해 주세요."
+      inputMessage.GET_BONUS_NUMBER
     );
     return lottoBonusNumber;
   }

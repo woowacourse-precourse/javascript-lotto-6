@@ -2,17 +2,18 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
 import Validation from "./Validation.js";
 import WinningLotto from "./WinningLotto.js";
+import { gameConstant, prize, inputMessage } from "../constant.js";
 
 const Console = MissionUtils.Console;
 
 class Util {
   static async userMoney() {
-    const userMoney = await Console.readLineAsync("구입 금액을 입력해주세요.");
+    const userMoney = await Console.readLineAsync(inputMessage.GET_USER_MONEY);
     return userMoney;
   }
 
   static async validateUserMoney() {
-    while (true) {
+    while (gameConstant.WHILE_PARAMETER) {
       try {
         const money = await Util.userMoney();
         Validation.userMoney(money);
@@ -24,7 +25,7 @@ class Util {
   }
 
   static getPurchaseNumber(userMoney) {
-    return userMoney / 1000;
+    return userMoney / gameConstant.LOTTO_PRICE;
   }
 
   static getLottoArray(purchaseNumber) {
@@ -69,11 +70,11 @@ class Util {
 
   static totalPrize(rank) {
     return (
-      rank.first * 2000000000 +
-      rank.second * 30000000 +
-      rank.third * 1500000 +
-      rank.fourth * 50000 +
-      rank.fifth * 5000
+      rank.first * prize.FIRST +
+      rank.second * prize.SECOND +
+      rank.third * prize.THIRD +
+      rank.fourth * prize.FOURTH +
+      rank.fifth * prize.FIFTH
     );
   }
 

@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Util from "./classes/Util.js";
+import { inputMessage, resultMessage, rateMessage } from "./Constant.js";
 
 const Console = MissionUtils.Console;
 
@@ -7,7 +8,7 @@ class App {
   static async purchaseNumber() {
     const userMoney = await Util.validateUserMoney();
     const purchaseNumber = Util.getPurchaseNumber(userMoney);
-    Console.print(purchaseNumber + "개를 구매했습니다.");
+    Console.print(purchaseNumber + inputMessage.PURCHASENUMBER);
     return purchaseNumber;
   }
 
@@ -18,13 +19,13 @@ class App {
   }
 
   static printResult(rank) {
-    Console.print("3개 일치 (5,000원) - " + rank.fifth + "개");
-    Console.print("4개 일치 (50,000원) - " + rank.fourth + "개");
-    Console.print("5개 일치 (1,500,000원) - " + rank.third + "개");
+    Console.print(resultMessage.FIFTH + rank.fifth + resultMessage.END);
+    Console.print(resultMessage.FOURTH + rank.fourth + resultMessage.END);
+    Console.print(resultMessage.THIRD + rank.third + resultMessage.END);
     Console.print(
-      "5개 일치, 보너스 볼 일치 (30,000,000원) - " + rank.second + "개"
+      resultMessage.SECOND + rank.second + resultMessage.END
     );
-    Console.print("6개 일치 (2,000,000,000원) - " + rank.first + "개");
+    Console.print(resultMessage.FIRST + rank.first + resultMessage.END);
   }
 
   async play() {
@@ -37,7 +38,7 @@ class App {
     const total = Util.totalPrize(rank);
     const money = lottoClasses.length * 1000;
     const rate = Util.rate(total, money);
-    Console.print("총 수익률은 " + rate + "%입니다.");
+    Console.print(rateMessage.START + rate + rateMessage.END);
   }
 }
 

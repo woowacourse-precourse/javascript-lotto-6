@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { errorMessage, gameConstant } from "./Constant.js";
 
 const Random = MissionUtils.Random;
 const Console = MissionUtils.Console;
@@ -14,17 +15,21 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== gameConstant.LOTTO_LENGTH) {
+      throw new Error(errorMessage.NUMBER_LENGTH);
     }
     const setArray = new Set(numbers);
-    if (setArray.size !== 6) {
-      throw new Error("[ERROR] 로또 번호가 중복되었습니다.");
+    if (setArray.size !== gameConstant.LOTTO_LENGTH) {
+      throw new Error(errorMessage.NUMBER_OVERLAP);
     }
   }
 
   static createNumber() {
-    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const numbers = Random.pickUniqueNumbersInRange(
+      gameConstant.LOTTO_MIN,
+      gameConstant.LOTTO_MAX,
+      gameConstant.LOTTO_LENGTH
+    );
     return numbers;
   }
 

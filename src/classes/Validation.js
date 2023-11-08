@@ -1,40 +1,42 @@
+import { errorMessage, gameConstant } from "../constant.js";
+
 class Validation {
   static userMoney(userMoney) {
     if (!+userMoney) {
-      throw new Error("[ERROR] 숫자를 입력해주세요.");
+      throw new Error(errorMessage.NUMBER_EMPTY_OR_STRING);
     }
-    if (userMoney % 1000) {
-      throw new Error("[ERROR] 1000원 단위로 입금해주세요.");
+    if (userMoney % gameConstant.LOTTO_PRICE) {
+      throw new Error(errorMessage.NUMBER_REST);
     }
-    if (userMoney < 1000) {
-      throw new Error("[ERROR] 1000원 이상 입금해주세요.");
+    if (userMoney < gameConstant.LOTTO_PRICE) {
+      throw new Error(errorMessage.NUMBER_SMALL);
     }
   }
 
   static winningNumber(numbers) {
     const numberArray = numbers.split(",");
-    if (numberArray.length !== 6) {
-      throw new Error("[ERROR] 6자리를 입력해주세요.");
+    if (numberArray.length !== gameConstant.LOTTO_LENGTH) {
+      throw new Error(errorMessage.NUMBER_LENGTH);
     }
     numberArray.forEach((number) => {
       if (!+number) {
-        throw new Error("[ERROR] 숫자를 입력해주세요.");
+        throw new Error(errorMessage.NUMBER_EMPTY_OR_STRING);
       }
-      if (number < 1 || number > 45) {
-        throw new Error("[ERROR] 1~45 내의 숫자를 입력해주세요.");
+      if (number < gameConstant.LOTTO_MIN || number > gameConstant.LOTTO_MAX) {
+        throw new Error(errorMessage.NUMBER_NOT_INRANGE);
       }
     });
   }
 
   static bonusNumber(winningNumbers, bonusNumber) {
     if (winningNumbers.includes(bonusNumber)) {
-      throw new Error("[ERROR] 당첨 번호와 다른 번호를 입력하세요.");
+      throw new Error(errorMessage.BONUSNUMBER_OVERLAP_WINNINGNUMBER);
     }
     if (!+bonusNumber) {
-      throw new Error("[ERROR] 숫자를 입력하세요.");
+      throw new Error(errorMessage.NUMBER_EMPTY_OR_STRING);
     }
-    if (bonusNumber < 1 || bonusNumber > 45) {
-      throw new Error("[ERROR] 1~45 내의 숫자를 입력해주세요.");
+    if (bonusNumber < gameConstant.LOTTO_MIN || bonusNumber > gameConstant.LOTTO_MAX) {
+      throw new Error(errorMessage.NUMBER_NOT_INRANGE);
     }
   }
 }
