@@ -1,4 +1,5 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto';
 import SCENARIO from './constant/scenario';
 
 class LottoGame {
@@ -23,19 +24,46 @@ class LottoGame {
     }
   }
 
+  validateWinningNumber(winningNumber) {
+    if (winningNumber.length < 6 || winningNumber.length > 6) {
+      throw Error('[ERROR] 당첨 번호는 6개 숫자여야 합니다');
+    }
+  }
+
+  validateBonusNumber(bonusNumber) {
+    if (Number.isNaN(Number(bonusNumber))) {
+      throw Error('[ERROR] 보너스 번호는 숫자여야 합니다');
+    }
+  }
+
   calculateLottoCount(price) {
     return price / 1000;
+  }
+
+  addLottos() {
+    for (let i = 0; i < this.count; i++) {
+      this.addLotto(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)));
+    }
+  }
+
+  printLottos() {
+    this.lottos.map(lotto =>
+      Console.print(`[${lotto.getNumber().join(', ')}]`),
+    );
   }
 
   addLotto(lotto) {
     this.lottos.push(lotto);
   }
 
-  addWinningNumbers(numberArray) {
-    this.winningNumbers = numberArray.map(str => Number(str));
+  addWinningNumbers(inputNumber) {
+    const winningNumber = inputNumber.split(',');
+    this.validateWinningNumber(winningNumber);
+    this.winningNumbers = winningNumber.map(str => Number(str));
   }
 
   addBonusNumber(number) {
+    this.validateBonusNumber(number);
     this.bonusNumber = number;
   }
 
