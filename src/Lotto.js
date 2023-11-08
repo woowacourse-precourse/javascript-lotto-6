@@ -1,18 +1,36 @@
-class Lotto {
+import {validate} from "./validation.js";
+import {
+  Console, 
+} from "@woowacourse/mission-utils"
+
+export class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.validate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  validate(numbers) {
+    validate.winningNumbers(numbers);
   }
 
-  // TODO: 추가 기능 구현
-}
+  sortWinningNumber() {
+    this.#numbers.sort((a, b) => a - b);
+  }
 
-export default Lotto;
+  printWinningNumber() {
+    this.sortWinningNumber();
+    Console.print(`[${this.#numbers.join(", ")}]`);
+  }
+
+  getResult(winningNumbers, bonusNumber) {
+    let correctCount = 0;
+    this.#numbers.forEach((el) => {
+      if (winningNumbers.includes(el)) correctCount++;
+    });
+    if (correctCount === 6) return 1;
+    if (correctCount === 5 && this.#numbers.includes(bonusNumber)) return 2;
+    return 8 - correctCount;
+  }
+}
