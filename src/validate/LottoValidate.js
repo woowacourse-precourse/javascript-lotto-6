@@ -3,11 +3,14 @@ import { ERROR_MESSAGE } from "../comm/Message.js";
 class LottoValidate{
 
     inputPurchaseAmountValidate = (purchaseAmount) => {
-        if(purchaseAmount % 1000 !== 0){
+        if(purchaseAmount % 1000 !== 0 || purchaseAmount === 0){
             throw new Error(`${ERROR_MESSAGE.INPUT_PURCHASE_AMOUNT_ERROR}`);
         }
-        if(purchaseAmount.trim() === '' || purchaseAmount === undefined){
+        if(purchaseAmount === '' || purchaseAmount === undefined || purchaseAmount.includes(' ')){
             throw new Error(`${ERROR_MESSAGE.INPUT_BLANK_ERROR}`);
+        }
+        if(isNaN(purchaseAmount)){
+            throw new Error(`${ERROR_MESSAGE.INPUT_NUMBER_ERROR}`);
         }
     }
 
@@ -19,6 +22,9 @@ class LottoValidate{
             if (number < 1 || number > 45) {
                 throw new Error(`${ERROR_MESSAGE.INPUT_WINNING_NUMBERS_ERROR}`);
             }
+            if(isNaN(number)){
+                throw new Error(`${ERROR_MESSAGE.INPUT_NUMBER_ERROR}`);
+            }
         });
     }
 
@@ -26,8 +32,11 @@ class LottoValidate{
         if(bonusNumber < 1 || bonusNumber > 45){
             throw new Error(`${ERROR_MESSAGE.INPUT_WINNING_NUMBERS_ERROR}`);
         }
-        if(bonusNumber.trim() === '' || bonusNumber === undefined){
+        if(bonusNumber === '' || bonusNumber === undefined || bonusNumber.includes(' ')){
             throw Error(`${ERROR_MESSAGE.INPUT_BLANK_ERROR}`);
+        }
+        if(isNaN(bonusNumber)){
+            throw new Error(`${ERROR_MESSAGE.INPUT_NUMBER_ERROR}`);
         }
     }
 
