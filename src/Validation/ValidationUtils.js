@@ -20,6 +20,12 @@ class ValidationUtils {
       throw new Error(ERROR_MESSAGES.LOTTO.NO_LENGTH);
     }
   }
+  // 로또가 특정 범위 내 있는지 검증
+  static isOnRange(input) {
+    if (input >= LOTTO_RULE.RANGE.MIN && input <= LOTTO_RULE.RANGE.MAX) {
+      throw new Error(ERROR_MESSAGES.LOTTO.NO_RANGE);
+    }
+  }
 
   // 입력값이 없는 상태인지 검증
   static isEmptyInput(input) {
@@ -42,3 +48,5 @@ class ValidationUtils {
     }
   }
 }
+
+export default ValidationUtils;
