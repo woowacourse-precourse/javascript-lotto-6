@@ -65,14 +65,16 @@ class App {
       this.checkValidateInputBonus(this.bonusNumber);
     });
 
-    this.includedbonusArr = this.countBonuses(this.generatedLottoNumbers);
+    this.includedbonusArr = this.lottoManagement.countBonuses(
+      this.generatedLottoNumbers
+    );
 
-    this.matchingCounts = this.lottoResultChecker.compareInputNumAndRandomNum(
+    this.matchingCounts = this.lottoManagement.compareInputNumAndRandomNum(
       this.winningNumbers,
       generatedLottoNumbersArr
     );
 
-    this.matchingCountsResult = this.lottoResultChecker.getMatchingCounts(
+    this.matchingCountsResult = this.lottoManagement.getMatchingCounts(
       this.matchingCounts,
       this.includedbonusArr
     );
