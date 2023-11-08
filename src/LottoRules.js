@@ -1,4 +1,4 @@
-import WinningCondition from './WinningCondition';
+import WinningCondition from './WinningCondition.js';
 
 const DEFAULT_RULES = [
 	{ correctCnt: 3, bonusCnt: 0, winnings: 5000 },

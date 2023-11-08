@@ -1,5 +1,4 @@
 import LottoList from '../src/LottoList';
-import Validator from '../src/Validator';
 import { LOTTO_NUMBERS_CEIL, LOTTO_NUMBERS_FLOOR } from '../src/constant';
 
 describe('LottoList 클래스 테스트', () => {

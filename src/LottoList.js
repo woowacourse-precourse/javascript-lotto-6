@@ -1,11 +1,11 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
+import Lotto from './Lotto.js';
 import {
 	LOTTO_NUMBERS_CEIL,
 	LOTTO_NUMBERS_CNT,
 	LOTTO_NUMBERS_FLOOR,
 	LOTTO_PRICE,
-} from './constant';
+} from './constant.js';
 
 class LottoList {
 	#lottoList = [];
