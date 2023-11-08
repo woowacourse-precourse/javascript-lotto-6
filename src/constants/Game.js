@@ -1,12 +1,12 @@
 const GAME = Object.freeze({
-  lottoLength: 6,
-  threeMatchWinnings: 5000,
-  fourMatchWinnings: 50000,
-  fiveMatchWinnigs: 1500000,
-  fiveMatchWinnigsWithBonus: 30000000,
-  sixMatchWinnigs: 2000000000,
-  lottoMin: 1,
-  lottoMax: 45,
+  LOTTO_LENGTH: 6,
+  THREE_MATCH_WINNINGS: 5000,
+  FOUR_MATCH_WINNINGS: 50000,
+  FIVE_MATCH_WINNIGS: 1500000,
+  FIVE_MATCH_WINNIGS_WITH_BONUS: 30000000,
+  SIX_MATCH_WINNIGS: 2000000000,
+  LOTTO_MIN: 1,
+  LOTTO_MAX: 45,
 });
 
 export default GAME;

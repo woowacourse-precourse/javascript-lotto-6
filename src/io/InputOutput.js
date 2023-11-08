@@ -3,41 +3,41 @@ import GAME_MESSAGE from '../constants/GameMessage';
 
 const Input = {
     readMoney(){
-        return Console.readLineAsync(GAME_MESSAGE.readMoney);
+        return Console.readLineAsync(GAME_MESSAGE.READ_MONEY);
     },
     purchase(){
-        return Console.readLineAsync(GAME_MESSAGE.purchase);
+        return Console.readLineAsync(GAME_MESSAGE.PURCHASE);
     },
     readWinnigNumber(){
-        return Console.readLineAsync(GAME_MESSAGE.readWinnigNumber);
+        return Console.readLineAsync(GAME_MESSAGE.READ_WINNIG_NUMBER);
     },
     readBonusNumber(){
-        return Console.readLineAsync(GAME_MESSAGE.readBonusNumber);    
+        return Console.readLineAsync(GAME_MESSAGE.READ_BONUS_NUMBER);    
     },
 }
 
 const Output = {
     printResultHeader(){
-        Console.print(GAME_MESSAGE.resultHeader);
+        Console.print(GAME_MESSAGE.RESULT_HEADER);
     },
     printThreeMatch(num){
-        Console.print(`${GAME_MESSAGE.threeMatch}${GAME_MESSAGE.dash}${num}${GAME_MESSAGE.numberSuffix}`);
+        Console.print(`${GAME_MESSAGE.THREE_MATCH}${GAME_MESSAGE.DASH}${num}${GAME_MESSAGE.NUMBER_SUFFIX}`);
     },
     printFourMatch(num){
-        Console.print(`${GAME_MESSAGE.fourMatch}${GAME_MESSAGE.dash}${num}${GAME_MESSAGE.numberSuffix}`);
+        Console.print(`${GAME_MESSAGE.FOUR_MATCH}${GAME_MESSAGE.DASH}${num}${GAME_MESSAGE.NUMBER_SUFFIX}`);
     },
     printFiveMatch(num){
-        Console.print(`${GAME_MESSAGE.fiveMatch}${GAME_MESSAGE.dash}${num}${GAME_MESSAGE.numberSuffix}`);
+        Console.print(`${GAME_MESSAGE.FIVE_MATCH}${GAME_MESSAGE.DASH}${num}${GAME_MESSAGE.NUMBER_SUFFIX}`);
     },
     printFiveWithBonus(num){
-        Console.print(`${GAME_MESSAGE.fiveMatchWithBonus}${GAME_MESSAGE.dash}${num}${GAME_MESSAGE.numberSuffix}`);
+        Console.print(`${GAME_MESSAGE.FIVE_MATCH_WITH_BONUS}${GAME_MESSAGE.DASH}${num}${GAME_MESSAGE.NUMBER_SUFFIX}`);
     },
     printSixMatch(num){
-        Console.print(`${GAME_MESSAGE.sixMatch}${GAME_MESSAGE.dash}${num}${GAME_MESSAGE.numberSuffix}`);
+        Console.print(`${GAME_MESSAGE.SIX_MATCH}${GAME_MESSAGE.DASH}${num}${GAME_MESSAGE.NUMBER_SUFFIX}`);
     },
     printResultRate(rate){
-        Console.print(`${GAME_MESSAGE.resultRate} ${rate}${GAME_MESSAGE.resultSuffix}`);
+        Console.print(`${GAME_MESSAGE.RESULTRATE} ${rate}${GAME_MESSAGE.RESULTSUFFIX}`);
     },
 }
 
-export default Input;Output;
+export {Input,Output};
