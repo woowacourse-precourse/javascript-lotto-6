@@ -2,7 +2,7 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import Validate from './Validate.js';
 
 class InputAmount {
-  Pulished = {
+  Published = {
     numbers : [],
     rank : [0, 0, 0, 0, 0], // [1등, 2등, 3등, 4등, 5등],
     GAIN : [2e9, 3e7, 15e5, 5e4, 5e3],
@@ -24,7 +24,7 @@ class InputAmount {
     for (let i = 0; i < count; i += 1) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       numbers.sort((a, b) => a - b);
-      this.Pulished.numbers.push(numbers);
+      this.Published.numbers.push(numbers);
     }
   }  
 }
