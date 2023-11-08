@@ -109,6 +109,22 @@ export function printLottoTickets(ticketCount, lottoTickets) {
   }
 }
 
+export function calculateRateOfReturn(purchaseAmount, prizeList) {
+  let totalPrize = prizeList.reduce((acc, prize) => acc + prize, 0);
+  let rateOfReturn = (totalPrize / Number(purchaseAmount)) * 100;
+  return rateOfReturn.toFixed(1);
+}
+
+export function printPrizes(rateOfReturn, prizeList) {
+  MissionUtils.Console.print("당첨 통계\n---");
+  MissionUtils.Console.print(`3개 일치 (5,000원) - ${prizeList[0] / 5000}개`);
+  MissionUtils.Console.print(`4개 일치 (50,000원) - ${prizeList[1] / 50000}개`);
+  MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${prizeList[2] / 1500000}개`);
+  MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${prizeList[3] / 30000000}개`);
+  MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${prizeList[4] / 2000000000}개`);
+  MissionUtils.Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
+}
+
 class App {
   async play() {}
 }
