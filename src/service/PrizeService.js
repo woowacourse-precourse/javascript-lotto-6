@@ -17,12 +17,11 @@ class PrizeService {
         const rankCount = [0, 0, 0, 0, 0]; // 5등부터 1등 순서의 리스트 초기화
 
         lottos.forEach(lotto => {
-            const rank = this.#compareLotto(lotto, winningLotto); // 각 로또의 등수 계산
+            const rank = this.#compareLotto(lotto, winningLotto);
             if (rank >= 1 && rank <= 5) {
                 rankCount[5 - rank] += 1; // 해당 등수의 개수 증가
             }
         });
-
         return rankCount;
     }
 
@@ -30,6 +29,7 @@ class PrizeService {
     #compareLotto(lotto, winningLotto) {
         const matchCount = this.#compareSingleNumber(lotto.getNumbers(), winningLotto.getNumbers()); // 숫자
         const isBonusMatched = this.#compareBonusNumber(lotto.getNumbers(), winningLotto.getBonusNumber()); // true, false
+
         return this.#calculateRank(matchCount, isBonusMatched); // 1~6까지 등수 (6은 당첨X)
     }
 
@@ -44,14 +44,14 @@ class PrizeService {
 
     #calculateRank(matchCount, isBonusMatched) {
         const rankMap = {
-            '6': 1,
+            '6false': 1,
             '5true': 2,
             '5false': 3,
-            '4': 4,
-            '3': 5,
-            '0': 6
+            '4false': 4,
+            '3false': 5,
+            '0false': 6
         };
-        return rankMap[`${matchCount}${isBonusMatched}`] ||6 ;
+        return rankMap[`${matchCount}${isBonusMatched}`] ;
     }
 
 

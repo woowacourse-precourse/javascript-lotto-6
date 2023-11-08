@@ -13,10 +13,6 @@ class View {
     await Promise.all(lottos.map(lotto => outputView(`[${lotto.getNumbers().join(', ')}]`)));
   }
 
-
-
-
-
   async getWinnigNumbers() {
     const winningNumbers = await inputView(CONSOLE_MESSAGE.requestLottoNumbers);
     return winningNumbers;
@@ -35,10 +31,6 @@ class View {
     await outputView(CONSOLE_MESSAGE.returnSecondResult(lottoResult[3]));
     await outputView(CONSOLE_MESSAGE.returnFirstResult(lottoResult[4]));
   }
-
-
-
-
 
   async returnLottoROI(lottoROI) {
     await outputView(CONSOLE_MESSAGE.returnLottoROI(lottoROI));
