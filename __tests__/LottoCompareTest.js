@@ -1,4 +1,4 @@
-import LottoCompare from '../src/service/LottoCompare.js';
+import LottoCompare from '../src/domain/LottoCompare.js';
 
 describe('로또 번호 비교 테스트', () => {
   test.each([

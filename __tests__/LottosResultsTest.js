@@ -1,4 +1,4 @@
-import LottosResults from '../src/service/LottosResults.js';
+import LottosResults from '../src/domain/LottosResults.js';
 
 describe('로또 당첨 결과 테스트', () => {
   test.each([

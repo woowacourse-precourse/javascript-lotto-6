@@ -1,8 +1,8 @@
 import OutputView from '../view/OutputView.js';
 import InputView from '../view/InputView.js';
-import LottosGenerator from './LottosGenerator.js';
-import LottosResults from './LottosResults.js';
-import LottosReturns from './LottosReturns.js';
+import LottosGenerator from '../domain/LottosGenerator.js';
+import LottosResults from '../domain/LottosResults.js';
+import LottosReturns from '../domain/LottosReturns.js';
 
 class LottoService {
   #input;

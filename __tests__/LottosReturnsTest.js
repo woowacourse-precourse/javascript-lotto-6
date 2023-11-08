@@ -1,4 +1,4 @@
-import LottosRetruns from '../src/service/LottosReturns.js';
+import LottosRetruns from '../src/domain/LottosReturns.js';
 
 describe('로또 수익률 테스트', () => {
   test('로또 번호의 당첨 상금을 모두 더한다.', () => {
