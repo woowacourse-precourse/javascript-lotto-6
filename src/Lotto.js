@@ -3,6 +3,8 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class Lotto {
   #numbers;
   purchaseAmount;
+  numberPurchased;
+  randomLottoNumbers;
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -30,6 +32,7 @@ class Lotto {
         }
 
         this.purchaseAmount = amount;
+        this.numberPurchased = this.purchaseAmount / 1000;
         isValidInput = true;
       } catch (error) {
         console.error(error.message);
@@ -37,11 +40,31 @@ class Lotto {
     }
   }
 
+  lottoNumberAscendingPrint() {
+    const lottoNumberArr = [];
+    while (lottoNumberArr.length < 6) {
+      lottoNumberArr.push(MissionUtils.Random.pickNumberInRange(1, 45));
+    }
+    return lottoNumberArr.sort((a, b) => {
+      if (a > b) return 1;
+      if (a === b) return 0;
+      if (a < b) return -1;
+    });
+  }
+
+  lottoNumArrMultiplynumberPurchased() {
+    const result = [];
+    for (let i = 0; i < this.numberPurchased; i++) {
+      this.randomLottoNumbers = this.lottoNumberAscendingPrint();
+      result.push(this.randomLottoNumbers);
+    }
+    return result;
+  }
+
   async buyLotto() {
     await this.readPurchaseAmount();
-    MissionUtils.Console.print(
-      `${this.purchaseAmount / 1000}개를 구매했습니다.`
-    );
+    MissionUtils.Console.print(`${this.numberPurchased}개를 구매했습니다.`);
+    MissionUtils.Console.print(this.lottoNumArrMultiplynumberPurchased());
   }
 }
 export default Lotto;
