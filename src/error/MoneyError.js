@@ -1,9 +1,5 @@
 import CustomError from './CustomError.js';
 
-class MoneyError extends CustomError {
-  // constructor(message) {
-  //   super(message);
-  // }
-}
+class MoneyError extends CustomError {}
 
 export default MoneyError;

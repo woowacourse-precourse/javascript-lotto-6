@@ -1,9 +1,5 @@
 import CustomError from './CustomError.js';
 
-class LottoNumberError extends CustomError {
-  // constructor(message) {
-  //   super(message);
-  // }
-}
+class LottoNumberError extends CustomError {}
 
 export default LottoNumberError;
