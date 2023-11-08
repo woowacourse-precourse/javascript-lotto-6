@@ -6,6 +6,8 @@ import {
   INPUT_BONUS_NUMBER,
   INPUT_PRIZE_NUMBER,
   INPUT_PURCHASE_AMOUNT,
+  UNIT_OF_PURCHASE,
+  WINNING_PRICE,
 } from "./constants/index.js";
 
 class App {

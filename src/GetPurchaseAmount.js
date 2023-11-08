@@ -1,6 +1,8 @@
-import { ERROR_PRICE_INVALID, ERROR_PRICE_NOT_SPLITTED } from "./constants";
-
-const UNIT_OF_PURCHASE = 1000;
+import {
+  ERROR_PRICE_INVALID,
+  ERROR_PRICE_NOT_SPLITTED,
+  UNIT_OF_PURCHASE,
+} from "./constants";
 
 class GetPurchaseAmount {
   #purchase;
