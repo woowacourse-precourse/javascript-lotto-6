@@ -23,6 +23,10 @@ class Lotto {
   #print(numbers) {
     MissionUtils.Console.print(numbers);
   }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
