@@ -1,33 +1,29 @@
-import {
-  NUMBER_MAX_LENGTH,
-  NUMBER_MIN_LENGTH,
-  RANGE,
-} from '../../constants/lotto/numbers';
+import { RANGE } from '../../constants/lotto';
 import ERROR_MESSAGES from '../../constants/message/error';
-import ValidationError from '../../error/Validation';
+import { NUMBER_MAX_LENGTH, NUMBER_MIN_LENGTH } from '../../constants/validate';
 
 const validationUtils = {
-  isString: (input) => {
+  isStringToThrow: (input) => {
     if (typeof input !== 'string') {
-      throw new ValidationError(ERROR_MESSAGES.stringType);
+      throw new Error(ERROR_MESSAGES.stringType);
     }
   },
 
-  isInteger: (input) => {
+  isIntegerToThrow: (input) => {
     if (Number.isInteger(input) === false) {
-      throw new ValidationError(ERROR_MESSAGES.numberType);
+      throw new Error(ERROR_MESSAGES.numberType);
     }
   },
 
-  isArray: (input) => {
+  isArrayToThrow: (input) => {
     if (Array.isArray(input) === false) {
-      throw new ValidationError(ERROR_MESSAGES.arrayType);
+      throw new Error(ERROR_MESSAGES.arrayType);
     }
   },
 
   isObject: (input) => {
-    if (typeof input !== 'object' || obj === null) {
-      throw new ValidationError(ERROR_MESSAGES.objectType);
+    if (typeof input !== 'object' || input === null) {
+      throw new Error(ERROR_MESSAGES.objectType);
     }
   },
 
@@ -35,10 +31,10 @@ const validationUtils = {
    * 배열안에 정수타입만 있는지 확인한다
    * @param {number[]} numbers
    */
-  isArrayValueTypeNumber: (numbers) => {
+  isArrayValueTypeNumberToThrow: (numbers) => {
     const ret = numbers.map((number) => typeof number === 'number');
     if (ret.includes(false)) {
-      throw new ValidationError(ERROR_MESSAGES.notNumberArray);
+      throw new Error(ERROR_MESSAGES.notNumberArray);
     }
   },
 
@@ -47,8 +43,8 @@ const validationUtils = {
    * @param {string} input
    */
   zeroIndexValueNotZero: (input) => {
-    if (input[0] !== '0') {
-      throw new ValidationError(ERROR_MESSAGES.stringFirstCharactorZero);
+    if (input[0] === '0') {
+      throw new Error(ERROR_MESSAGES.stringFirstCharactorZero);
     }
   },
 
@@ -58,7 +54,7 @@ const validationUtils = {
    */
   checkStringLength: (input) => {
     if (input.length < NUMBER_MIN_LENGTH || input.length > NUMBER_MAX_LENGTH) {
-      throw new ValidationError(ERROR_MESSAGES.numberMaxLength);
+      throw new Error(ERROR_MESSAGES.numberMaxLength);
     }
   },
 
@@ -68,7 +64,7 @@ const validationUtils = {
    */
   checkRange: (number) => {
     if (number < RANGE.smallNumber || number > RANGE.largestNumber) {
-      throw new ValidationError(ERROR_MESSAGES.outOfRange);
+      throw new Error(ERROR_MESSAGES.outOfRange);
     }
   },
 
@@ -79,7 +75,7 @@ const validationUtils = {
   checkConvertStringToNumber: (input) => {
     const regularExpression = /^[0-9]+$/;
     if (regularExpression.test(input) === false) {
-      throw new ValidationError(ERROR_MESSAGES.outOfRange);
+      throw new Error(ERROR_MESSAGES.outOfRange);
     }
   },
 
@@ -89,7 +85,7 @@ const validationUtils = {
    */
   checkArrayDuplicate(input) {
     if (new Set(input).size !== input.length) {
-      throw new ValidationError(ERROR_MESSAGES.duplicate);
+      throw new Error(ERROR_MESSAGES.duplicate);
     }
   },
 };
