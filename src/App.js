@@ -79,7 +79,21 @@ class App {
 
   #calculateResult(lottos, winningNums, bonusNum) {
     const results = this.#calculateWinning(lottos, winningNums, bonusNum);
-    MissionUtils.Console.print(results);
+    const totalWinnings = this.#calculateTotalWinning(results);
+  }
+
+  #calculateTotalWinning(results) {
+    const prizeObject = {
+      3: 5000,
+      4: 50000,
+      5: 1500000,
+      5.5: 30000000,
+      6: 2000000000,
+    };
+    return Object.keys(results).reduce((winning, key) => {
+      const count = parseFloat(key);
+      return winning + results[count] * prizeObject[count];
+    }, 0);
   }
 }
 
