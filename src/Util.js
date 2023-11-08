@@ -25,7 +25,7 @@ export function validateLottoNumbers(numbers,bonusNumber) {
     if (isNaN(bonusNumber)) {
         throw new Error("[ERROR] 보너스 당첨 번호가 올바른 숫자 형식이 아닙니다.")
     }
-    if (bonusNumber < 1 && bonusNumber > 45) {
+    if (bonusNumber < 1 || bonusNumber > 45) {
         throw new Error("[ERROR] 보너스 당첨 번호는 1~45 사이의 번호여야 합니다.")
     }
 }
