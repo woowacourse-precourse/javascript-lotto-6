@@ -21,8 +21,8 @@ class LottoResult {
    */
   setWinningNumber(numbers, bonus) {
     Validation.validateLottoNumbersWithBonus(numbers, bonus);
-    this.#bonus = bonus;
     this.#numbers = numbers;
+    this.#bonus = bonus;
   }
 
   /**
@@ -44,7 +44,7 @@ class LottoResult {
       const rank = lotto.getRank(this.#numbers, this.#bonus);
       result[rank] += 1;
       return result;
-    }, new Array(6 + 1).fill(0));
+    }, new Array(7).fill(0));
   }
 
   /**

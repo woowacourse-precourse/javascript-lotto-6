@@ -17,12 +17,12 @@ const OutputView = {
    */
   getCorrectMessage: (rank) => {
     if (rank > 2) {
-      return "${6 - rank + 2}개 일치";
+      return `${6 - rank + 2}개 일치`;
     }
     if (rank === 2) {
-      return `${6 - 1}개 일치, 보너스 볼 일치`;
+      return "5개 일치, 보너스 볼 일치";
     }
-    return `${6}개 일치`;
+    return "6개 일치";
   },
 
   /**
@@ -35,7 +35,7 @@ const OutputView = {
       Console.print(
         `${OutputView.getCorrectMessage(5 - index)} (${[
           2_000_000_000, 30_000_000, 1_500_000, 50_000, 5_000,
-        ][5 - index - 1].toLocaleString()}원) - ${result}개`
+        ][index - 4].toLocaleString()}원) - ${result}개`
       );
     });
     Console.print(`총 수익률은 ${profit}%입니다.`);

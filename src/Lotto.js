@@ -9,14 +9,12 @@ class Lotto {
    * @constructor
    * @param {number[]} numbers
    */
-
   constructor(numbers) {
     Validation.validateLottoNumbers(numbers);
     this.#numbers = numbers;
   }
 
   /**
-   *
    * @returns {number[]}
    */
   static pickRandomNumbers() {
@@ -54,13 +52,13 @@ class Lotto {
   getRank(numbers, bonus) {
     const match = this.getMatchNumberCount(numbers);
 
-    if (match <= 6 - 5 + 1) {
+    if (match <= 2) {
       return 0;
     }
     if (match === 6) {
       return 1;
     }
-    if (match === 6 - 1 && this.#numbers.includes(bonus)) {
+    if (match === 5 && this.#numbers.includes(bonus)) {
       return 2;
     }
     return 6 - match + 2;
