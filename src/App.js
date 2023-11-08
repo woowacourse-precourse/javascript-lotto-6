@@ -18,10 +18,9 @@ class App {
       "구입금액을 입력해 주세요.\n"
     );
 
-    if (isNaN(parseInt(amount)))
-      throw new Error("[ERROR] 구입 금액은 숫자여야합니다.");
+    if (isNaN(amount)) throw new Error("[ERROR] 구입 금액은 숫자여야합니다.");
 
-    return amount;
+    return parseInt(amount);
   }
 
   quantityLotto(amount) {
@@ -55,13 +54,23 @@ class App {
 
     if (this.winningNumber.length !== 6)
       throw new Error("[ERROR] 당첨 번호는 6개여야합니다.");
+
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== numbers.length) {
+      throw new Error("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
+    }
   }
 
   async enterBosunNumber() {
     const number = await MissionUtils.Console.readLineAsync(
       "\n보너스 번호를 입력해 주세요.\n"
     );
-    // TODO: 보너스번호 예외처리
+
+    if (isNaN(number)) throw new Error("[ERROR] 보너스 번호는 숫자여야합니다.");
+
+    if (!(num >= 1 && num <= 45))
+      throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야합니다.");
+
     this.bonusNumber = parseInt(number);
   }
 
