@@ -101,6 +101,14 @@ export function countMatchingNumbers(lottoTicket, winningNumbers) {
   return lottoTicket.filter((number) => winningNumbers.includes(number)).length;
 }
 
+export function printLottoTickets(ticketCount, lottoTickets) {
+  MissionUtils.Console.print(`${ticketCount}개를 구매했습니다.`);
+  for (let i = 0; i < ticketCount; i++) {
+    let lottoTicketString = `[${lottoTickets[i].join(", ")}]`;
+    MissionUtils.Console.print(lottoTicketString);
+  }
+}
+
 class App {
   async play() {}
 }
