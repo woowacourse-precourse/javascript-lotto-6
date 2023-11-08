@@ -1,17 +1,17 @@
 import { ERROR, pattern, NUMBER } from '../constants.js';
 
 const validate = {
-  money(input) {
-    if (!input) throw new Error(ERROR.TYPE_CHECK);
-    if (pattern.notMoney.test(input)) throw new Error(ERROR.TYPE_CHECK);
-    if (input % NUMBER.DEFAULT_WON !== NUMBER.DEFAULT) throw new Error(ERROR.AMOUNT_CHECK);
+  money(inputNumber) {
+    if (!inputNumber) throw new Error(ERROR.TYPE_CHECK);
+    if (pattern.notMoney.test(inputNumber)) throw new Error(ERROR.TYPE_CHECK);
+    if (inputNumber % NUMBER.DEFAULT_WON !== NUMBER.DEFAULT) throw new Error(ERROR.AMOUNT_CHECK);
 
-    return input;
+    return inputNumber;
   },
 
-  winningNumbers(input) {
-    if (!input) throw new Error(ERROR.TYPE_CHECK);
-    const inputArray = input.split(',').map(Number).sort((a, b) => a - b);
+  winningNumbers(inputStr) {
+    if (!inputStr) throw new Error(ERROR.TYPE_CHECK);
+    const inputArray = inputStr.split(',').map(Number).sort((a, b) => a - b);
 
     if (inputArray.some((number) => !number)) throw new Error(ERROR.TYPE_CHECK);
     if (inputArray.some((number) => typeof number !== 'number')) throw new Error(ERROR.TYPE_CHECK);
@@ -25,12 +25,26 @@ const validate = {
     return inputArray;
   },
 
-  bonusNumber(input) {
-    if (!input) throw new Error(ERROR.TYPE_CHECK);
-    if (pattern.notNumber.test(input)) throw new Error(ERROR.TYPE_CHECK);
-    if (input > NUMBER.LAST) throw new Error(ERROR.RANGE_CHECK);
+  bonusNumber(inputNumber) {
+    if (!inputNumber) throw new Error(ERROR.TYPE_CHECK);
+    if (pattern.notNumber.test(inputNumber)) throw new Error(ERROR.TYPE_CHECK);
+    if (inputNumber > NUMBER.LAST) throw new Error(ERROR.RANGE_CHECK);
 
-    return input;
+    return inputNumber;
+  },
+
+  lottoNumbers(inputArray) {
+    if (!inputArray) throw new Error(ERROR.TYPE_CHECK);
+
+    if (inputArray.length !== NUMBER.LOTTO_LENGTH) throw new Error(ERROR.LENGTH_CHECK);
+
+    if (inputArray.length !== new Set(inputArray).size) throw new Error(ERROR.DUPLICATE);
+
+    if (!Array.isArray(inputArray)) throw new Error(ERROR.TYPE_CHECK);
+
+    const checkNumber = inputArray.every((number) => typeof number === 'number');
+
+    if (!checkNumber) throw new Error(ERROR.TYPE_CHECK);
   },
 };
 
