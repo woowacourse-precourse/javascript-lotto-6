@@ -45,6 +45,7 @@ class Lotto {
     if (matched.length === 5) return "five";
     if (matched.length === 4) return "four";
     if (matched.length === 3) return "three";
+    return null;
   }
 }
 
