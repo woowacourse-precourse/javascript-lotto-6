@@ -7,18 +7,11 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 class App {
   moneyList = ["5,000", "50,000", "1,500,000", "30,000,000", "2,000,000,000"];
-  logs = [
-    "3개 일치 (5,000원) - 1개",
-    "4개 일치 (50,000원) - 0개",
-    "5개 일치 (1,500,000원) - 0개",
-    "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
-    "6개 일치 (2,000,000,000원) - 0개",
-    "총 수익률은 62.5%입니다.",
-  ];
+
   async purchaseList(number, lottos) {
     await Console.print(`${number}개를 구매했습니다.`);
     lottos.map((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(", ")}]`);
     });
   }
   async winningNumberInput() {
@@ -87,7 +80,6 @@ class App {
     );
     moneys.rankingMoney(matchLottoNumber.getRank);
 
-    // for (let i = 0; i < 5; i++) {
     Console.print(
       `3개 일치 (${this.moneyList[0]}원) - ${moneys.getRankingCounts[4]}개`
     );
