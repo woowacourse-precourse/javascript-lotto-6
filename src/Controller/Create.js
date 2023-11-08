@@ -3,7 +3,7 @@ import Computer from '../Domain/Computer.js';
 import User from '../Domain/User.js';
 import Read from '../View/Input.js';
 import Print from '../View/Output.js';
-import { validateInput } from '../Utils/validation.js';
+import { checkValidateNumbers, validateInput } from '../Utils/validation.js';
 
 class Create {
   #randomNumbers;
@@ -44,6 +44,8 @@ class Create {
 
   async userBonusNumber() {
     const bonusNumber = await Read.input(MESSAGE.QUESTION_BONUS_NUMBER);
+    console.log(bonusNumber);
+    checkValidateNumbers(bonusNumber);
 
     return bonusNumber;
   }

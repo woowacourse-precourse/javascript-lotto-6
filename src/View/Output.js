@@ -12,6 +12,10 @@ class Print {
   static repeatResult(array) {
     array.forEach((el) => Console.print(el));
   }
+
+  static marginResult(margin) {
+    Console.print(`총 수익률은 ${margin}%입니다.`);
+  }
 }
 
 export default Print;
