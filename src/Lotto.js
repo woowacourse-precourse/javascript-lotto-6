@@ -1,18 +1,28 @@
+import { message } from './Constants.js';
+
+import validateLottoNumbers from './validation/validateLottoNumbers.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+    this.validate(numbers);
+    this.#numbers = this.sortNumbers(numbers);
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+  get numbersArray() {
+    return this.#numbers;
+  }
+
+  validate(numbers) {
+    if (!validateLottoNumbers(numbers)) {
+      throw new Error(message.ERROR);
     }
   }
 
-  // TODO: 추가 기능 구현
+  sortNumbers(numbers) {
+    return numbers.sort((a, b) => a - b);
+  }
 }
 
 export default Lotto;
