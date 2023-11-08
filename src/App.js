@@ -9,10 +9,11 @@ class App {
   async play() {
     await this.controller.buyLotto();
     await this.controller.inputWinningNum();
+    this.controller.winningStatement();
   }
 }
 
-const app = new App();
-await app.play();
-
 export default App;
+
+const app = new App();
+app.play();

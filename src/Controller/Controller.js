@@ -1,5 +1,7 @@
+import { Console } from '@woowacourse/mission-utils';
 import Input from '../View/Input.js';
 import Output from '../View/Output.js';
+import Lotto from '../Model/Lotto.js';
 import LottoService from '../Model/LottoService.js';
 
 class Controller {
@@ -18,15 +20,18 @@ class Controller {
 
   async buyLotto() {
     this.#amount = await this.input.inputPurchase();
-    while (this.#amount > 0) {
+    let buy = this.#amount;
+    while (buy > 0) {
       this.#lottoList.push(this.lottoService.createLotto());
-      this.#amount -= 1000;
+      buy -= 1000;
     }
     this.output.purchaseHistory(this.#lottoList);
   }
 
   async inputWinningNum() {
-    this.#winnginNum = await this.input.inputWinningNum();
+    const userInput = await this.input.inputWinningNum();
+    this.#winnginNum = userInput.split(',');
+    const lotto = new Lotto(this.#winnginNum);
     this.#bonusNum = await this.input.inputBonus();
   }
 
@@ -36,15 +41,8 @@ class Controller {
       this.#winnginNum,
       this.#bonusNum,
     );
-    this.output.winningDetails(
-      this.#matchHistory,
-      this.#winnginNum,
-      this.#bonusNum,
-    );
-  }
-
-  rateReturn() {
-    this.#rateOfReturn = this.lottoService.getrateReturn(this.#amount);
+    this.#rateOfReturn = this.lottoService.getRateReturn(this.#amount);
+    this.output.winningDetails(this.#matchHistory, this.#rateOfReturn);
   }
 }
 
