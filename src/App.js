@@ -1,7 +1,7 @@
 import Lotto from "./Lotto.js";
 import { input } from "./util/input.js";
 import { print } from "./util/output.js";
-import { PRINT_MESSAGE } from "./constants/message.js";
+import { PRINT_MESSAGE, RESULT } from "./constants/message.js";
 
 import { Random } from "@woowacourse/mission-utils";
 import {
@@ -13,6 +13,7 @@ import { validateMoney } from "./validation/money.js";
 import { PRIZE } from "./constants/prize.js";
 import { ERROR_MESSAGE } from "./constants/error.js";
 import { getInputValue } from "./validation/tryInput.js";
+import { SEPERATE } from "./constants/seperate.js";
 class App {
   lottos = [];
 
@@ -38,7 +39,7 @@ class App {
   }
 
   makeNumberArray(numberString) {
-    return numberString.split(",").map(Number);
+    return numberString.split(SEPERATE.NUMBERS).map(Number);
   }
 
   async getNumbers() {
@@ -46,7 +47,7 @@ class App {
       PRINT_MESSAGE.NUMBERS,
       validateNumbers
     );
-    return inputNumbers.split(",").map(Number);
+    return inputNumbers.split(SEPERATE.NUMBERS).map(Number);
   }
 
   getPrizeCounts(numbers, bonusNumber) {
@@ -87,16 +88,16 @@ class App {
   }
 
   async printResult(result) {
-    print("당첨통계");
-    print("---");
-    print(`3개 일치 (5,000원) - ${result.prizeCounts["3"]}개`);
-    print(`4개 일치 (50,000원) - ${result.prizeCounts["4"]}개`);
-    print(`5개 일치 (1,500,000원) - ${result.prizeCounts["5"]}개`);
+    print(RESULT.TITLE);
+    print(RESULT.LINE);
+    print(`${RESULT.PRIZE_3} - ${result.prizeCounts["3"]}개`);
+    print(`${RESULT.PRIZE_4} - ${result.prizeCounts["4"]}개`);
+    print(`${RESULT.PRIZE_5} - ${result.prizeCounts["5"]}개`);
     print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.prizeCounts["bonus"]}개`
+      `${RESULT.PRIZE_BONUS} - ${result.prizeCounts["bonus"]}개`
     );
-    print(`6개 일치 (2,000,000,000원) - ${result.prizeCounts["6"]}개`);
-    print(`총 수익률은 ${result.rate}%입니다.`);
+    print(`${RESULT.PRIZE_6} - ${result.prizeCounts["6"]}개`);
+    print(`${RESULT.RATE} ${result.rate}%입니다.`);
   }
 
   async getPrizeNumbers() {
