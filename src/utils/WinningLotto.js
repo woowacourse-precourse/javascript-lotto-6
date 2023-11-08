@@ -41,12 +41,11 @@ class WinningLotto {
 
   compareNumbers(myLottos, winningArr) {
     const [mainLotto, bonusLotto] = winningArr;
-    let places = [];
-    myLottos.map((lotto) => {
+    const places = myLottos.map((lotto) => {
       const sameNumbers = lotto.filter((num) => mainLotto.includes(num));
-      sameNumbers === 5 && lotto.includes(bonusLotto)
-        ? places.push("bonus")
-        : places.push(sameNumbers.length);
+      return sameNumbers.length === 5 && lotto.includes(bonusLotto)
+        ? "bonus"
+        : sameNumbers.length;
     });
     return places;
   }
