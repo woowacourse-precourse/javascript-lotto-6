@@ -17,6 +17,15 @@ class Lotto {
   getMatchCount(numbers) {
     return numbers.filter(n => this.#numbers.includes(n)).length;
   }
+
+  // 포함 여부 반환
+  getBonusNumberIsInclude(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
+
+  toString() {
+    return "[" + this.#numbers.join(", ") + "]";
+  }
 }
 
 export default Lotto;
