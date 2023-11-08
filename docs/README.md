@@ -21,6 +21,7 @@
 - [x] 당첨 번호와 보너스 번호가 중복되는 경우
 
 ### 디렉토리 설계
+```
 📦src
  ┣ 📂constant
  ┃ ┗ 📜ErrorMessage.js -------- 에러 메세지들을 관리
@@ -37,3 +38,4 @@
  ┣ 📜App.js ------------------- UserController와 MatchController를 사용하여 프로그램을 완성
  ┣ 📜index.js
  ┗ 📜Lotto.js ----------------- 제공된 Lotto 클래스는 models/Lotto.js에서 구현
+```
