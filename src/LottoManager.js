@@ -60,33 +60,43 @@ class LottoManager {
     Console.print(this.#userLottoBonusNumber);
   }
 
-  determineLotteryResult() {
-    const defaultResult = {
+  initializeResult() {
+    return {
       match3: 0,
       match4: 0,
       match5: 0,
       match5Bonus: 0,
       match6: 0,
     };
+  }
 
-    this.#result = this.#lottoArray.reduce((resultSum, lotto) => {
+  updateResultWithMatch(result, lotteryResult) {
+    switch (lotteryResult) {
+      case LottoResult.MATCH_3:
+        return { ...result, match3: result.match3 + 1 };
+      case LottoResult.MATCH_4:
+        return { ...result, match4: result.match3 + 1 };
+      case LottoResult.MATCH_5:
+        return { ...result, match5: result.match3 + 1 };
+      case LottoResult.MATCH_5_BONUS:
+        return { ...result, match5Bonus: result.match3 + 1 };
+      case LottoResult.MATCH_6:
+        return { ...result, match6: result.match3 + 1 };
+      default:
+        return result;
+    }
+  }
+
+  determineLotteryResult() {
+    let result = this.initializeResult(); // Initialize result object
+
+    for (const lotto of this.#lottoArray) {
       const lotteryResult = lotto.determineResult(this.#userLottoArray, this.#userLottoBonusNumber);
+      const updatedResult = this.updateResultWithMatch(result, lotteryResult);
+      result = updatedResult;
+    }
 
-      switch (lotteryResult) {
-        case LottoResult.MATCH_3:
-          return { ...resultSum, match3: resultSum.match3 + 1 };
-        case LottoResult.MATCH_4:
-          return { ...resultSum, match4: resultSum.match4 + 1 };
-        case LottoResult.MATCH_5:
-          return { ...resultSum, match5: resultSum.match5 + 1 };
-        case LottoResult.MATCH_5_BONUS:
-          return { ...resultSum, match5Bonus: resultSum.match5Bonus + 1 };
-        case LottoResult.MATCH_6:
-          return { ...resultSum, match6: resultSum.match6 + 1 };
-        default:
-          return resultSum;
-      }
-    }, defaultResult);
+    this.#result = result;
   }
 
   printResult() {
@@ -94,7 +104,7 @@ class LottoManager {
 
     Console.print('당첨 통계');
     Console.print('---');
-    
+
     Console.print(`3개 일치 (${LottoResult.MATCH_3.prize.toLocaleString('ko-KR')}원) - ${result.match3}개`);
     Console.print(`4개 일치 (${LottoResult.MATCH_4.prize.toLocaleString('ko-KR')}원) - ${result.match4}개`);
     Console.print(`5개 일치 (${LottoResult.MATCH_5.prize.toLocaleString('ko-KR')}원) - ${result.match5}개`);
