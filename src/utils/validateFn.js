@@ -4,6 +4,7 @@ export const validateEmpty = (input) => {
   if (!input) {
     throw ERROR_MESSAGE.INVALID_EMPTY_INPUT;
   }
+  return true;
 };
 
 export const validateNumber = (number) => {
@@ -14,30 +15,35 @@ export const validateNumber = (number) => {
       throw ERROR_MESSAGE.INVALID_INPUT_NUMBER;
     }
   });
+  return true;
 };
 
 export const validateDivisible = (number) => {
   if (number % 1000 !== 0 || number === '0') {
     throw ERROR_MESSAGE.INVALID_NON_DIVISIBLE;
   }
+  return true;
 };
 
 export const validateLength = (numberArr) => {
   if (numberArr.length !== 6) {
     throw ERROR_MESSAGE.INVALID_LOTTO_LENGTH;
   }
+  return true;
 };
 
 export const validateRange = (number) => {
   if (number < 1 || number > 45) {
     throw ERROR_MESSAGE.INVALID_LOTTO_RANGE;
   }
+  return true;
 };
 
 export const validateUnique = (numberArr) => {
   if (numberArr.length !== new Set(numberArr).size) {
     throw ERROR_MESSAGE.INVALID_LOTTO_UNIQUE;
   }
+  return true;
 };
 
 export const validateFindEqual = (numberArr, number) => {
@@ -48,4 +54,5 @@ export const validateFindEqual = (numberArr, number) => {
   ) {
     throw ERROR_MESSAGE.INVALID_LOTTO_BONUS;
   }
+  return true;
 };
