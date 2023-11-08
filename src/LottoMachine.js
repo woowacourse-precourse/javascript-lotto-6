@@ -53,10 +53,16 @@ class LottoMachine {
   }
 
   async setBonusNumber() {
-    const bonusNumber = await LottoView.getUserInput(
-      ENTER_MESSAGE.bonus_number
-    );
-    Validation.isProperBonusNumber(this.#winningNumbers, bonusNumber);
+    let bonusNumber;
+    while (true) {
+      try {
+        bonusNumber = await LottoView.getUserInput(ENTER_MESSAGE.bonus_number);
+        Validation.isProperBonusNumber(this.#winningNumbers, bonusNumber);
+        break;
+      } catch (error) {
+        LottoView.printMessage(error.message);
+      }
+    }
     this.#bonusNumber = Number(bonusNumber);
   }
 
