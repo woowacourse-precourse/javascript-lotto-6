@@ -37,7 +37,7 @@ class App {
 
   async play() {
     await this.#purchaseLotto();
-    const boughtLottos = this.#lottoMachine.getLotto();
+    const boughtLottos = this.#lottoMachine.getLottos();
     LottoViewer.purchasedLottos(boughtLottos);
     await this.#enterLottoNumbers();
     const { winningNumbers, bonusNumber } = this.#lotto.getWinningNumbers();

@@ -6,7 +6,7 @@ class LottoMachine {
 
   constructor(purchaseAmount) {
     this.#validator(purchaseAmount);
-    this.#generateLotto(purchaseAmount);
+    this.#generateLottoNumbers(purchaseAmount);
   }
 
   #validator(purchaseAmount) {
@@ -19,7 +19,7 @@ class LottoMachine {
     }
   }
 
-  #generateLotto(purchaseAmount) {
+  #generateLottoNumbers(purchaseAmount) {
     const lottoTickets = purchaseAmount / PRICE.LOTTO;
 
     for (let i = 0; i < lottoTickets; i += 1) {
@@ -27,7 +27,7 @@ class LottoMachine {
     }
   }
 
-  getLotto() {
+  getLottos() {
     return this.#lottos;
   }
 }
