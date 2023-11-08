@@ -27,14 +27,30 @@ class App {
       Console.print(error.message);
     }
   }
-  async inputPurchaseAmount() {
-    const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    const amount = Number(input);
-    if (amount % this.LOTTO_PRICE !== 0) {
-      throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
-    }
-    this.purchaseAmount = amount;
+  
+}
+
+async function inputPurchaseAmount() {
+  const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+  const amount = Number(input);
+  if (amount % this.LOTTO_PRICE !== 0) {
+    throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
+  }
+  this.purchaseAmount = amount;
+}
+
+function publishLottos() {
+  const lottoCount = this.purchaseAmount / this.LOTTO_PRICE;
+  for (let i = 0; i < lottoCount; i++) {
+    const numbers = Random.pickUniqueNumbersInRange(
+      this.NUMBER_RANGE[0],
+      this.NUMBER_RANGE[1],
+      this.NUMBER_COUNT
+    );
+    const lotto = new Lotto(numbers);
+    this.lottos.push(lotto);
   }
 }
+
 
 export default App;
