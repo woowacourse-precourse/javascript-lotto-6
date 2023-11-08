@@ -24,8 +24,7 @@ const LOG = Object.freeze({
 const ERROR = Object.freeze({
   header: '[ERROR] ',
   money: `구입 금액은 ${LOTTO.money_unit} 단위의 숫자로 입력해야 합니다.`,
-  winning_format: '당첨 번호는 쉼표로 구분해 입력해야 합니다.',
-  winning_length: '당첨 번호는 6개의 숫자로 입력해야 합니다.',
+  winning_format: '당첨 번호는 쉼표로 구분해 6개의 숫자로 입력해야 합니다.',
   winning_duplicate: '당첨 번호는 중복 없이 입력해야 합니다.',
   bonus_duplicate: '보너스 번호는 당첨 번호와 중복 없이 입력해야 합니다.',
   not_lotto: '로또가 정상적으로 생성되지 않았습니다.',
