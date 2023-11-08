@@ -10,10 +10,6 @@ import { ErrorMessage } from '../constants/ErrorMessage.js';
 class LottoController {
   #lottos;
 
-  #winningNumbers;
-
-  #bonusNumber;
-
   constructor() {
     this.#lottos = new PurchasedLotto();
   }
@@ -25,6 +21,7 @@ class LottoController {
   async #getAndValidateInputs() {
     const purchaseCost = await this.#getPurchaseCost();
     const lottos = this.#createLottos(purchaseCost);
+    const winningNumbers = await this.#getWinningNumbers();
     // this.#winningNumbers = await this.#getWinningNumbers();
     // this.#bonusNumber = await InputView.inputBonusNumber();
     // this.validateBonusNumber(this.#bonusNumber);
@@ -52,33 +49,14 @@ class LottoController {
   }
 
   async #getWinningNumbers() {
-    const winningNumbers = await InputView.inputWinningNumbers();
-    this.#winningNumbers = winningNumbers.split(',').map(number => {
-      const parseNumber = parseInt(number, 10);
-      if (Number.isNaN(parseNumber)) {
-        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+    while (true) {
+      try {
+        const winningNumbers = await InputView.inputWinningNumbers();
+        const winning = await Validator.winningNumberValidator(winningNumbers);
+        return winning;
+      } catch (error) {
+        printMessage(error);
       }
-      if (parseNumber < 1 || parseNumber > 45) {
-        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
-      }
-      return parseNumber;
-    });
-    if (this.#winningNumbers.length !== 6) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
-    }
-    return this.#winningNumbers;
-  }
-
-  validatePurchaseCost(cost) {
-    const purchaseCost = parseInt(cost, 10);
-    if (Number.isNaN(purchaseCost)) {
-      throw new Error(ErrorMessage.INVALID_PURCHASE_COST);
-    }
-    if (purchaseCost < 0) {
-      throw new Error(ErrorMessage.INVALID_PURCAHSE_COST_RANGE);
-    }
-    if (purchaseCost % 1000 !== 0) {
-      throw new Error(ErrorMessage.INVALID_PURCHASE_COST_UNIT);
     }
   }
 
@@ -92,14 +70,14 @@ class LottoController {
     }
   }
 
-  #calculateResults() {
-    const result = new Result(
-      this.#winningNumbers,
-      this.#bonusNumber,
-      this.#lottos,
-    );
-    return result.getResults();
-  }
+  // #calculateResults() {
+  //   const result = new Result(
+  //     this.#winningNumbers,
+  //     this.#bonusNumber,
+  //     this.#lottos,
+  //   );
+  //   return result.getResults();
+  // }
 
   #calculateProfit(results) {
     const totalPrize = Object.values(results).reduce(
