@@ -40,6 +40,9 @@ const ERROR_MESSAGE = Object.freeze({
   hasNonLotto: errorString("로또 객체가 아닌 값이 포함될 수 없습니다."),
   duplicateBonusNumber: errorString("보너스 번호는 당첨 번호와 겹칠 수 없습니다."),
   includeComma: errorString("여러 개의 값을 받을 수 없습니다."),
+  hasDuplicateNumber: errorString("중복된 값이 포함될 수 없습니다."),
+  hasNonNumber: errorString("숫자가 아닌 값이 포함될 수 없습니다."),
+  moreThanSixNumbers: errorString("로또 번호는 6개여야 합니다."),
 });
 
 export { INPUT_QUERY, OUTPUT_MESSAGE, ERROR_MESSAGE };

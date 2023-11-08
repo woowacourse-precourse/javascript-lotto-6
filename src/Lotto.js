@@ -1,4 +1,5 @@
 import { LOTTO_BUSINESS_RULES } from "./constants/lotto.js";
+import { ERROR_MESSAGE } from "./constants/messages.js";
 import { validateNumberInRange } from "./utils/validators.js";
 
 class Lotto {
@@ -33,14 +34,14 @@ class Lotto {
 
   #validateLengthSix(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR_MESSAGE.moreThanSixNumbers);
     }
   }
 
   // TODO: 추가 기능 구현
   static #validateNumbers(array) {
     if (!array.every((value) => typeof value === "number")) {
-      throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
+      throw new Error(ERROR_MESSAGE.hasNonNumber);
     }
   }
 
@@ -50,7 +51,7 @@ class Lotto {
 
   static #validateHasNoDuplicate(array) {
     if (new Set(array).size !== array.length) {
-      throw new Error("[ERROR] 로또에 중복된 값이 포함되어 있습니다.");
+      throw new Error(ERROR_MESSAGE.hasDuplicateNumber);
     }
   }
 }
