@@ -11,6 +11,7 @@ const ERROR = Object.freeze({
     WRONG_AMOUNT_MONEY: 11,
     INPUT_SIZE: 12,
     INPUT_RANGE: 13,
+    WRONG_BONUS: 14,
   }),
 
 });

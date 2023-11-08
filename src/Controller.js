@@ -19,6 +19,9 @@ const errorController = {
     if (e === ERROR.INPUT_SIZE) {
       return ERROR.STAGES.INPUT_SIZE;
     }
+    if (e === ERROR.WRONG_BONUS) {
+      return ERROR.STAGES.WRONG_BONUS;
+    }
     MissionUtils.Console.print(e.message);
     return 99;
   },
