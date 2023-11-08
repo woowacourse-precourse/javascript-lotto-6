@@ -8,7 +8,7 @@ import Lotto from '../models/Lotto.js';
 class LottoGameController {
   async startLottoGame() {
     const lottoList = await this.#getLotto();
-    // OutputView.outputLottoPurchaseAmount(lottoList);
+    OutputView.outputLottoPurchaseAmount(lottoList);
   }
 
   async #getInputPrice() {
