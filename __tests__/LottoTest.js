@@ -1,5 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../src/Lotto.js';
+import WinningLotto from '../Domain/WinningLotto.js';
+import WinningJudge from '../Domain/WinningJudge.js';
 import Random from '../utils/random.js';
 import LottoMachine from '../Domain/LottoMachine.js';
 
@@ -25,5 +27,29 @@ describe('로또 클래스 테스트', () => {
     random.validation([1, 2, 3, 4, 5, 6]);
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
+
+  test('당첨 순위 리스트 계산 - second(5개 일치 && 보너스 번호 일치)', () => {
+    // given
+    const lottoNumbers = [3, 7, 11, 14, 17, 24];
+    const winningNumbers = [4, 7, 11, 14, 17, 24];
+    const bonusNumber = 3;
+
+    const testWinner = {
+      first: 0,
+      second: 1,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+    };
+
+    // when
+    // const testLotto = new Lotto(lottoNumbers);
+    const testWinningLotto = new WinningLotto({ numbers: winningNumbers, bonusNumber });
+    const winningJudge = new WinningJudge();
+
+    // then // second === 1 이어야함
+    expect(winningJudge.countWinner(lottoNumbers, testWinningLotto)).toEqual(testWinner);
+    MissionUtils.Console.print(`testbench : ${winningJudge.countWinner(lottoNumbers, testWinningLotto)}`);
   });
 });

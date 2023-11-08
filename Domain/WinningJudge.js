@@ -23,17 +23,18 @@ class WinningJudge {
     return winnerList;
   }
 
-  countWinner(lotto, winningLotto) {
-    const matchingNumbers = winningLotto.filter((number) => lotto.includes(number));
-    const matchingCount = matchingNumbers.length;
+  countWinner(lottoNumber, winningLotto) {
+    const winningLottoNumber = winningLotto.getNumber();
     const bonusNumber = winningLotto.getBonusNumber();
-    const isBonusNumberIncluded = lotto.includes(bonusNumber);
+    const matchingNumbers = winningLottoNumber.filter((number) => lottoNumber.includes(number));
+    const matchingCount = matchingNumbers.length;
+    const isBonusNumberIncluded = lottoNumber.includes(bonusNumber);
 
-    if (matchingCount === 6) this.winner.first += 1;
-    if (matchingCount === 5 && isBonusNumberIncluded) this.winner.second += 1;
-    if (matchingCount === 5) this.winner.third += 1;
-    if (matchingCount === 4) this.winner.fourth += 1;
-    if (matchingCount === 3) this.winner.fifth += 1;
+    if (matchingCount === 6) this.#winner.first += 1;
+    if (matchingCount === 5 && isBonusNumberIncluded) this.#winner.second += 1;
+    if (matchingCount === 5 && !isBonusNumberIncluded) this.#winner.third += 1;
+    if (matchingCount === 4) this.#winner.fourth += 1;
+    if (matchingCount === 3) this.#winner.fifth += 1;
 
     return this.#winner;
   }
