@@ -14,8 +14,10 @@ export const MESSAGES = Object.freeze({
 
 const ERROR_PREFIX = "[ERROR]";
 export const ERROR_MESSAGE = Object.freeze({
+  INVALID_NUMBER: `${ERROR_PREFIX} 숫자가 잘못된 형식입니다.`,
   INVALID_AMOUNT: `${ERROR_PREFIX} 구입 금액이 1,000원 단위가 아닙니다.`,
+  INVALID_WINNING_NUMBER_RANGE: `${ERROR_PREFIX} 로또 번호는 1부터 45사이의 숫자여야 합니다`,
   DUPLICATED_WINNING_NUMBER: `${ERROR_PREFIX} 당첨 번호가 중복 되었습니다.`,
-  INVALID_WINNING_NUMBER: `${ERROR_PREFIX} 당첨 번호가 잘못된 형식입니다.`,
-  INVALID_BONUS_NUMBER: `${ERROR_PREFIX} 보너스 번호가 잘못된 형식입니다.`,
+  INVALID_WINNING_NUMBER: `${ERROR_PREFIX} 당첨 번호 숫자가 잘못된 형식입니다.`,
+  INVALID_BONUS_NUMBER: `${ERROR_PREFIX} 보너스 번호 숫자가 잘못된 형식입니다.`,
 });

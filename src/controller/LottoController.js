@@ -7,6 +7,7 @@ export default class LottoController {
 
   async start() {
     const purchaseAmount = await this.inputView.getPurchaseAmount();
+
     this.model.settingLottoValue(purchaseAmount);
     const purchaseCount = this.model.getPurchaseCount();
     const lottoArray = this.model.getLottoArray();
@@ -14,6 +15,7 @@ export default class LottoController {
 
     const winningNumber = await this.inputView.getWinningNumber();
     const bonusNumber = await this.inputView.getBonusNumber();
+    console.log(winningNumber, bonusNumber);
     this.model.settingWinningValue(winningNumber, bonusNumber);
 
     const { winningStatistics, roundedProfit } =
