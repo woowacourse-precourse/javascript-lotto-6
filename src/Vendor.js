@@ -1,9 +1,10 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import { CONSOLE_MASSAGE, ERROR_MESSAGE } from './constants/constant';
 
 export default class Vendor {
   async recieveMoney() {
     try {
-      const user = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      const user = await Console.readLineAsync(CONSOLE_MASSAGE.MONEY_TO_PAY);
       const paid = parseInt(user, 10);
       this.#validate(paid);
       return paid;
@@ -15,10 +16,10 @@ export default class Vendor {
 
   #validate(paid) {
     if (!Number.isInteger(paid)) {
-      throw new Error('[ERROR] 금액은 숫자만 입력가능합니다.');
+      throw new Error(ERROR_MESSAGE.NUMBERS_ONLY);
     }
     if (paid % 1000 !== 0 || paid < 1000) {
-      throw new Error('[ERROR] 로또는 1000원 단위로 구매 가능합니다.');
+      throw new Error(ERROR_MESSAGE.THOUSANDS_ONLY);
     }
   }
 

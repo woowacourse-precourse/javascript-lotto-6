@@ -1,9 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import { CONSOLE_MASSAGE, ERROR_MESSAGE } from './constants/constant.js';
 
 export default class Host {
   async getWinningNumbers() {
-    const user = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    const user = await Console.readLineAsync(CONSOLE_MASSAGE.WINNING_NUMBERS);
     const winningNumbers = user
       .split(',')
       .map((num) => parseInt(num, 10))
@@ -13,9 +14,7 @@ export default class Host {
 
   async getBonusNumber(winningNumbers) {
     try {
-      const user = await Console.readLineAsync(
-        '\n보너스 번호를 입력해 주세요.\n',
-      );
+      const user = await Console.readLineAsync(CONSOLE_MASSAGE.BONUS_NUMBER);
       const bonus = parseInt(user, 10);
       this.#validate(bonus, winningNumbers);
       return bonus;
@@ -27,10 +26,10 @@ export default class Host {
 
   #validate(bonus, winningNumbers) {
     if (!Number.isInteger(bonus) || bonus > 45 || bonus < 1) {
-      throw new Error('[ERROR] 1~45 사이의 정수만 입력 가능합니다.');
+      throw new Error(ERROR_MESSAGE.FROM_ONE_TO_FORTYFIVE_ONLY);
     }
     if (winningNumbers.includes(bonus)) {
-      throw new Error('[ERROR] 보너스 번호는 로또 번호와 중복이 불가합니다.');
+      throw new Error(ERROR_MESSAGE.DIFFERENT_BONUS);
     }
   }
 

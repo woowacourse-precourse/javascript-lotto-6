@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PRIZE } from './constants/constant.js';
+import { ERROR_MESSAGE, PRIZE } from './constants/constant.js';
 
 class Lotto {
   #numbers;
@@ -12,14 +12,14 @@ class Lotto {
   #validate(numbers) {
     numbers.forEach((number) => {
       if (!Number.isInteger(number) || number > 45 || number < 1) {
-        throw new Error('[ERROR] 1~45 사이의 정수만 입력 가능합니다.');
+        throw new Error(ERROR_MESSAGE.FROM_ONE_TO_FORTYFIVE_ONLY);
       }
     });
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR_MESSAGE.SIX_DIGITS_ONLY);
     }
     if (new Set(numbers).size < 6) {
-      throw new Error('[ERROR] 각 로또 번호는 중복이 불가합니다.');
+      throw new Error(ERROR_MESSAGE.DIFFERENT_DIGITS);
     }
   }
 
