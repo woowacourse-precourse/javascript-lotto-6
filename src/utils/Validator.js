@@ -39,6 +39,11 @@ const Validator = {
       throw new Error(ErrorMsg.NUM_OUT_OF_RANGE);
     }
   },
+  bonusNum(input) {
+    if (!Constant.REGEX_IS_A_NUM.test(input)) {
+      throw new Error(ErrorMsg.BONUS_NUM.IS_NOT_A_NUM);
+    }
+  },
 };
 
 export default Validator;

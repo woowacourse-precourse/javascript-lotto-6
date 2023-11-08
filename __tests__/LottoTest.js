@@ -57,14 +57,19 @@ describe("로또 클래스 테스트", () => {
 });
 
 describe("보너스 클래스 테스트", () => {
-  test("보너스 번호에 숫자가 아닌 문자열을 입력하면 예외가 발생한다", () => {
+  test("보너스 번호에 하나의 숫자 이외를 입력하면 예외가 발생한다", () => {
     expect(() => {
       new BonusNum("d");
-    }).toThrow(ErrorMsg.IS_NAN);
+    }).toThrow(ErrorMsg.BONUS_NUM.IS_NOT_A_NUM);
   });
   test("보너스 번호에 1미만 45초과를 입력하면 예외가 발생한다", () => {
     expect(() => {
       new BonusNum("555");
     }).toThrow(ErrorMsg.NUM_OUT_OF_RANGE);
+  });
+  test("보너스 번호를 2개이상 입력하면 예외가 발생한다", () => {
+    expect(() => {
+      new BonusNum("5 6");
+    }).toThrow(ErrorMsg.BONUS_NUM.IS_NOT_A_NUM);
   });
 });

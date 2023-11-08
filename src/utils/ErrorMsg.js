@@ -14,6 +14,9 @@ const ErrorMsg = {
     IS_REDUNDANCY: `${ERROR_TAG} 중복되지 않는 숫자를 입력해주세요`,
     WRONG_COUNT: `${ERROR_TAG} 로또 번호는 ${Constant.NUM_COUNT}개여야 합니다.`,
   },
+  BONUS_NUM: {
+    IS_NOT_A_NUM: `${ERROR_TAG} 보너스 번호는 1개의 숫자만 입력해주세요`,
+  },
 };
 
 export default ErrorMsg;

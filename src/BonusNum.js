@@ -9,7 +9,7 @@ class BonusNum {
   }
 
   #validate(input) {
-    Validator.isNum(input);
+    Validator.bonusNum(input);
     Validator.checkRange(input);
   }
 
