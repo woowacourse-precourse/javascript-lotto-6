@@ -9,13 +9,13 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.some(number => isNaN(number))) {
+      throw new Error(MESSAGES.NUMBER_ERROR);
+    } else if (numbers.length !== 6) {
       throw new Error(MESSAGES.COUNT_ERROR);
-    }
-    if (numbers.every(number => number < 1 || number > 45)) {
+    } else if (numbers.some(number => number < 1 || number > 45)) {
       throw new Error(MESSAGES.RANGE_ERROR);
-    }
-    if (new Set(numbers).size !== 6) {
+    } else if (new Set(numbers).size !== 6) {
       throw new Error(MESSAGES.DUPLICATION_ERROR);
     }
   }
