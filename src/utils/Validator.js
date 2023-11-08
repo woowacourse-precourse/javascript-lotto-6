@@ -1,5 +1,3 @@
-// import ERROR from "../static/Error.js";
-// import NUMBER from "../static/Number.js";
 import RangeFilter from './RangeFilter.js';
 
 const Validator = {
