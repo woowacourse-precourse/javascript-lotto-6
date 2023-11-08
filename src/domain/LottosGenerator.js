@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { LOTTO } from '../constants/lotto.js';
+import { COMMON } from '../constants/common.js';
 import Lotto from '../Lotto.js';
 
 class LottosGenerator {
@@ -10,15 +11,15 @@ class LottosGenerator {
   }
 
   #generateLottos(totalIssueCount) {
-    let currentIssueCount = 1;
+    let currentIssueCount = COMMON.zero;
 
-    while (currentIssueCount <= totalIssueCount) {
+    while (currentIssueCount < totalIssueCount) {
       const numbers = this.#generateLottoNumbers();
       const lotto = new Lotto(numbers);
 
       this.#lottos.push(lotto);
 
-      currentIssueCount += 1;
+      currentIssueCount += LOTTO.increseLottoUnit;
     }
   }
 
