@@ -15,6 +15,8 @@ const Input = {
 
     const NumberList = numbers.split(',');
     Validate.checkDuplicateNumber(NumberList);
+    Validate.checkNumberCount(NumberList);
+
     NumberList.forEach((number) => Validate.checkNumberRange(number));
 
     return NumberList.map((number) => Number(number));
