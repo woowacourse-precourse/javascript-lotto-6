@@ -1,9 +1,10 @@
 class Purchaser {
   #number;
 
-  constructor(number) {
-    this.#validate(number);
-    this.#number = number;
+  constructor(inputValue) {
+    const purchaseAmount = Number(inputValue);
+    this.#validate(purchaseAmount);
+    this.#number = purchaseAmount;
   }
 
   #validate(number) {
