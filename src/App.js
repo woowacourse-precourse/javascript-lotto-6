@@ -94,6 +94,18 @@ class App {
    * @param {Lotto} winningLotto
    * @return {number} */
   async getBonusNumber(winningLotto) {
+    const USER_STRING = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const Bonus = Number(USER_STRING);
+
+    if (isNaN(Bonus) || !Number.isInteger(Bonus) || Bonus < 1 || Bonus > 45) {
+      throw new Error('[ERROR] 숫자는 1~45 사이의 정수만 입력해야 합니다.');
+    }
+
+    if (winningLotto.contains(Bonus)) {
+      throw new Error('[ERROR] 보너스 볼은 당첨 번호와 중복될 수 없습니다.');
+    }
+
+    return Bonus;
   }
 
   /**
