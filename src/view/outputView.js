@@ -25,7 +25,7 @@ class OutputView {
       .toFixed(1)
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    Console.print(`\n총 수익률은 ${result}%입니다.`);
+    Console.print(`총 수익률은 ${result}%입니다.`);
   }
 }
 
