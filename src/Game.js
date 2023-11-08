@@ -1,3 +1,6 @@
+import InputOutput from "./InputOutput";
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Game {
   winMessages = [
     "",
@@ -9,6 +12,18 @@ class Game {
   ];
 
   winPrizes = [0, 2000000000, 30000000, 1500000, 50000, 5000, 0];
+
+  async getInputLoop(inputFunction, param = []) {
+    while (true) {
+      try {
+        const result = await inputFunction(...param);
+        return result;
+      } catch (error) {
+        InputOutput.print(error.message);
+      }
+    }
+  }
+
 }
 
 export default Game;
