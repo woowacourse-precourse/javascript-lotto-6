@@ -6,6 +6,7 @@ export const INPUT_MESSAGE = {
 
 export const OUTPUT_MESSAGE = {
   PURCHASE_SUMMARY: '개를 구매했습니다.',
+  TITLE: '\n당첨 통계\n---',
 };
 
 export const ERROR_MESSAGE = {

@@ -45,6 +45,10 @@ class LottoController {
     validation.validateBonusNumber(parsedInput, this.winningNumbers);
     this.bonusNumber = parsedInput;
   }
+
+  printResult() {
+    outputView.printTitle();
+  }
 }
 
 export default LottoController;

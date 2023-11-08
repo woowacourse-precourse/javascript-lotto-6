@@ -9,6 +9,10 @@ const outputView = {
   printLottoNumbersList(list) {
     MissionUtils.Console.print(`[${list.join(', ')}]`);
   },
+
+  printTitle() {
+    MissionUtils.Console.print(OUTPUT_MESSAGE.TITLE);
+  },
 };
 
 export default outputView;
