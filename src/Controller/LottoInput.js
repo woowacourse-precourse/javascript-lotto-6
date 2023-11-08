@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE_INPUT } from "../constant/Constant";
+import { MESSAGE_INPUT } from "../constants/constant";
 
 class LottoInput {
   async priceInput() {

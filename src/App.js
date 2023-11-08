@@ -14,6 +14,8 @@ class App {
 
     const winningNum = await this.lottoInput.winningInput();
     const bonusNum = await this.lottoInput.bonusInput();
+
+    this.lottoOutput.printWinning(winningNum, bonusNum);
   }
 }
 
