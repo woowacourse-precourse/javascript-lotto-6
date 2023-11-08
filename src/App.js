@@ -4,7 +4,6 @@ import LottoStore from "./LottoStore.js";
 import Buyer from "./Buyer.js";
 
 class App {
-  async play() {}
   constructor() {
     this.buyer = new Buyer();
     this.lottostore = new LottoStore();
@@ -22,9 +21,26 @@ class App {
     await this.lottoDrawing.inputWinningLotto();
     await this.lottoDrawing.inputBonusNumber();
   }
+
+  async printResult() {
+    const buyerLottos = this.buyer.getLottos();
+    const winningLotto = this.lottoDrawing.getWinningLotto();
+    const bonusNumber = this.lottoDrawing.getBonusNumber();
+
+    this.winnigStatistics = new WinnigStatistics(
+      buyerLottos,
+      winningLotto,
+      bonusNumber
+    );
+
+    this.winnigStatistics.printResult();
+    this.winnigStatistics.calculrateMargin(this.buyer.getPurchaseMoney());
+  }
+
   async play() {
     await this.buyLotto();
     await this.drawLotto();
+    this.printResult();
   }
 }
 
