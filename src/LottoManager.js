@@ -1,12 +1,16 @@
-class LottoSimulator {
+class LottoManager {
+  #lottoPrice
   #lottos
   #ranks
-  #prizeMoneys
 
   constructor() {
+    this.#lottoPrice = 1000;
     this.#lottos = [];
     this.#ranks = Array(5).fill(0);
-    this.#prizeMoneys = [5000, 50000, 1500000, 3000000, 2000000];
+  }
+
+  lottoTicketExchange(amount) {
+    return amount / this.getLottoPrice();
   }
 
   issueLotto(lottos) {
@@ -55,17 +59,8 @@ class LottoSimulator {
     })
   }
 
-  totalPrizeMoney() {
-    let money = 0;
-    this.#ranks.map((rank, index) => {
-      if(rank) money += (this.#prizeMoneys[index] * rank);
-    });
-
-    return money;
-  }
-
-  calculateEarningsPercent(money, amount) {
-    return ((money / amount) * 100).toFixed(1);
+  getLottoPrice() {
+    return this.#lottoPrice;
   }
 
   getLottos() {
@@ -77,4 +72,4 @@ class LottoSimulator {
   }
 }
 
-export default LottoSimulator;
+export default LottoManager;
