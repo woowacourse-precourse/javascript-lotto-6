@@ -25,4 +25,10 @@ describe('Issuer 클래스 테스트', () => {
       });
     });
   });
+  test('발행된 각 티켓이 오름차순으로 정렬되었는지 확인한다.', () => {
+    tickets.forEach((ticket) => {
+      const sortedTicket = [...ticket].sort((a, b) => a - b);
+      expect(ticket).toEqual(sortedTicket);
+    });
+  });
 });
