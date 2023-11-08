@@ -1,7 +1,7 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
-
+import LottoResultChecker from "../src/LottoResultChecker.js";
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
@@ -152,5 +152,22 @@ describe("로또 테스트", () => {
     const result = app.countBonuses(randomArrs);
 
     expect(result).toEqual([0, 0]);
+  });
+
+  test("입력된 번호와 랜덤 로또 번호 간의 일치하는 번호 개수 테스트", () => {
+    const lottoResultChecker = new LottoResultChecker();
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const generatedLottoNumbersArr = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 7],
+      [7, 8, 9, 10, 11, 12],
+    ];
+
+    const counts = lottoResultChecker.compareInputNumAndRandomNum(
+      winningNumbers,
+      generatedLottoNumbersArr
+    );
+
+    expect(counts).toEqual([6, 5, 0]);
   });
 });
