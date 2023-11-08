@@ -19,7 +19,7 @@ class SetGame {
   #validate(numbers) {
     Validation.validateBuyInput(numbers);
   }
-  // 로또 발행 하여 배열에 저장
+  // 로또 발행하여 배열로 저장
   #issueLotto() {
     for (let i = 0; i < this.#buyAmount; i++) {
       const lotto = new Lotto(Utils.generateRandomNumbers());
@@ -27,6 +27,7 @@ class SetGame {
     }
   }
 
+  // 당첨번호 배열로 저장
   getLottoNumbers() {
     const lottoList = [];
     for (let i = 0; i < this.#lottos.length; i++) {
