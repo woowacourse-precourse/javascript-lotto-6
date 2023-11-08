@@ -2,6 +2,10 @@ export const INPUT_MESSAGE = {
     inputPurchaseAmount : "구입 금액을 입력해 주세요.\n",
 };
 
+export const OUTPUT_MESSAGE = {
+    printPurchaseNumber : (count) => `\n${count}개 구매했습니다.`,
+};
+
 export const ERROR_MESSAGE = {
     purchaseError : "[ERROR] 구입 금액은 1000으로 나누어 떨어지는 수 입니다.",
     purchaseRangeError : "[ERROR] 구입 금액 범위는 양수인 정수입니다.",

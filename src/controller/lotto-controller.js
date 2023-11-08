@@ -1,22 +1,21 @@
 import MyLotto from "../domain/MyLotto.js";
 import InputView from "../view/input-view.js";
-import { Console } from "@woowacourse/mission-utils";
+import OutputView from "../view/output-view.js";
+
 
 class LottoController {
-    #inputView;
+    #inputView
+    #outputView
 
     constructor() {
         this.#inputView = new InputView();
+        this.#outputView = new OutputView();
     }
 
     async play() {
-        let count = await this.#inputView.readPurchaseAmount();
-        let lottos = new MyLotto(count);
-        Console.print(`\n${count}개를 구매했습니다.`);
-        for (let element of lottos.getMyLottos()){
-            Console.print(element.getNumbers());
-        }
-
+        let perchaseNumber = await this.#inputView.readPurchaseAmount();
+        let myLotto = new MyLotto(perchaseNumber);
+        this.#outputView.printMyLotto(perchaseNumber, myLotto);
     }
 }
 
