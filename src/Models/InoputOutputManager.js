@@ -2,9 +2,18 @@ import { Console } from '@woowacourse/mission-utils';
 
 class InputOutputManager {
 	static async getUserInput(message, validateFunction) {
-		const userInput = await Console.readLineAsync(message);
+		let userInput;
+		do {
+			try {
+				userInput = await Console.readLineAsync(message);
 
-		validateFunction(userInput);
+				if (validateFunction(userInput)) {
+					break;
+				}
+			} catch (error) {
+				Console.print(error.message);
+			}
+		} while (true);
 
 		return userInput;
 	}
