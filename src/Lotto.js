@@ -16,8 +16,9 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-  async buyTicket() {
-    while (true) {
+  async readPurchaseAmount() {
+    let isValidInput = false;
+    while (!isValidInput) {
       try {
         this.purchaseAmount = await MissionUtils.Console.readLineAsync(
           "구입 금액을 입력해 주세요."
@@ -29,12 +30,16 @@ class Lotto {
         }
 
         this.purchaseAmount = amount;
-        break;
+        isValidInput = true; // 유효한 입력이면 루프 종료
       } catch (error) {
         console.error(error.message);
-        throw error;
       }
     }
+  }
+
+  async buyTicket() {
+    await this.readPurchaseAmount();
+    // 이어서 다른 작업을 수행
   }
 }
 export default Lotto;
