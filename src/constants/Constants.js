@@ -1,3 +1,10 @@
+export const OPTIONS = Object.freeze({
+  priceUnit: 1000,
+  lottoNumberCount: 6,
+  lottoNumberMax: 45,
+  lottoNumberMin: 1,
+});
+
 export const MESSAGE = Object.freeze({
   enterPurchasePrice: `구입금액을 입력해 주세요.\n`,
   purchaseAmount: `개를 구매했습니다.\n`,

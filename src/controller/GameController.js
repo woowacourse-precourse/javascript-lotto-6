@@ -1,7 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Validator from '../utils/validation.js';
 import UserInputView from '../view/UserInputView.js';
-import { MESSAGE } from '../constants/Constants.js';
+import { MESSAGE, OPTIONS } from '../constants/Constants.js';
 
 class GameController {
   #purchasePrice;
@@ -13,7 +13,7 @@ class GameController {
     try {
       Validator.purchasePrice(inputPurchasePrice);
       this.#purchasePrice = inputPurchasePrice;
-      this.#tickectsCount = inputPurchasePrice / 1000;
+      this.#tickectsCount = inputPurchasePrice / OPTIONS.priceUnit;
       MissionUtils.Console.print(
         `${this.#tickectsCount}${MESSAGE.purchaseAmount}`,
       );

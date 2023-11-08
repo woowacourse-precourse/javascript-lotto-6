@@ -1,14 +1,14 @@
-import { ERROR } from '../constants/Constants.js';
+import { ERROR, OPTIONS } from '../constants/Constants.js';
 
 const Validator = {
   purchasePrice(input) {
     if (Number.isNaN(input)) {
       throw new Error(ERROR.invalidPriceNumber);
     }
-    if (input < 1000) {
+    if (input < OPTIONS.priceUnit) {
       throw new Error(ERROR.invalidPriceLeast);
     }
-    if (input % 1000 !== 0) {
+    if (input % OPTIONS.priceUnit !== 0) {
       throw new Error(ERROR.invalidPriceUnit);
     }
   },
