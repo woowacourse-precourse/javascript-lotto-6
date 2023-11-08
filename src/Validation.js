@@ -13,6 +13,13 @@ class Validation {
     }
   }
 
+  static validateRepeatedNumbers(numbers){
+    const SET_ANSWERS = new Set(numbers);
+    if (numbers.length !== SET_ANSWERS){
+      throw new Error(STRINGS.ERROR_REPEATED);
+    }
+  }
+
 }
 
 export default Validation;
