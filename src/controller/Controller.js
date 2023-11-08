@@ -1,6 +1,8 @@
+import { Console } from '@woowacourse/mission-utils';
 import PurchaseController from './PurchaseController.js';
 
 class Controller {
+  #lottos;
   #purchaseController;
 
   constructor() {
@@ -8,7 +10,7 @@ class Controller {
   }
 
   async play() {
-    await this.#purchaseController.inputPurchase();
+    this.#lottos = await this.#purchaseController.inputPurchase();
   }
 }
 
