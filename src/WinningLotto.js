@@ -45,6 +45,10 @@ class WinningLotto {
     ) {
       throw new Error('[ERROR] 1부터 45 사이의 정수를 입력해주세요.');
     }
+
+    if (this.#numbers.includes(bonusLotto)) {
+      throw new Error('[ERROR] 당첨번호와 중복된 숫자가 있는지 확인해주세요.');
+    }
   }
 
   getWinningLotto() {
