@@ -19,11 +19,14 @@ const validator = {
     },
     inputValidator(ANSWER) {
         const INPUT_ARR = ANSWER.split(",");
+        const SET_INPUT = new Set([...INPUT_ARR]);
         INPUT_ARR.forEach(v => {
             if (isNaN(v)) throw new Error(ErrorMessage.ONLY_NUMBER);
             if (v*1 !== parseInt(v)) throw new Error(ErrorMessage.ONLY_INTEGER);
             if (parseInt(v) <Constants.LOTTO_START || parseInt(v)  > Constants.LOTTO_END) throw new Error(ErrorMessage.OUT_RANGE);
         });
+        if (INPUT_ARR.length !== Constants.LOTTO_LENGTH) throw new Error(ErrorMessage.LENGTH);
+        if (SET_INPUT.size !== INPUT_ARR.length) throw new Error(ErrorMessage.DUPLICATE);
     },
 };
 export default validator;

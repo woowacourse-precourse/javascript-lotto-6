@@ -4,11 +4,9 @@ import ErrorMessage from "./constants/ErrorMessage.js";
 
 class App {
     async play() {
-        try {
-            await gameController();
-        } catch (e) {
-            MissionUtils.Console.print(ErrorMessage.LAST_MESSAGE);
-        }
+
+        await gameController();
+
     }
 }
 
