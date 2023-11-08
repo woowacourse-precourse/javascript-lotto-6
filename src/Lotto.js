@@ -1,18 +1,31 @@
+import Generator from './Generator.js';
+import ValidatorUtil from './validators/ValidatorUtil.js';
+
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
+  constructor(numbers, bonus) {
+    this.#validate(numbers, bonus);
     this.#numbers = numbers;
+    this.bonus = bonus;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  #validate(numbers, bonus) {
+    ValidatorUtil.duplicationValidate(numbers, bonus);
   }
 
-  // TODO: 추가 기능 구현
+  getResult(userNumbers) {
+    const lottoCount = Generator.lottoCountGenerator(
+      userNumbers,
+      this.#numbers
+    );
+
+    let isBonus = null;
+    if (lottoCount === 5)
+      isBonus = Generator.isBonusGenerator(userNumbers, this.bonus);
+
+    return { lottoCount, isBonus };
+  }
 }
 
 export default Lotto;
