@@ -39,10 +39,10 @@ class LottoResultChecker {
       if (count === 4) {
         matchingCounts.four += 1;
       }
-      if (count === 5 && !randomArr.includes(bonus)) {
+      if (count === 5 && bonus[i] === 0) {
         matchingCounts.five += 1;
       }
-      if (count === 5 && randomArr.includes(bonus)) {
+      if (count === 5 && bonus[i] === 1) {
         matchingCounts.fiveAndBonus += 1;
       }
       if (count === 6) {
