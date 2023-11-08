@@ -31,8 +31,6 @@ class App {
       this.setWinDetail();
       this.printResult();
     } catch (error) {
-      console.log("에러 발생", error.message);
-
       throw new Error(`[ERROR] ${error.message}`);
     }
   }
@@ -80,7 +78,6 @@ class App {
     }
   }
   validateBuyLotto(money) {
-    console.log("money", money);
     if (isNaN(money)) throw new Error("금액은 오로지 숫자만 입력가능합니다.");
     if (money < 1000) throw new Error("금액은 1000원 이상이어야 합니다.");
     if (money % 1000 !== 0)
