@@ -1,7 +1,7 @@
 import Lotto from "../Lotto.js";
 import { LOTTO_PRICE, PROFIT_FOR_PRIZE } from "../constants/lotto.js";
 import { ERROR_MESSAGE } from "../constants/messages.js";
-import SCALE from "../constants/scale.js";
+import SCALE from "../constants/Scale.js";
 import { typeValidator } from "../utils/validators.js";
 
 class LottoResultCalculator {
