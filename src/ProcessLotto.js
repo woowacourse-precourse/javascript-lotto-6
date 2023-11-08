@@ -91,7 +91,7 @@ class ProcessLotto {
     try {
       const money = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
       const intMoney = parseInt(money, 10);
-      if (Number.isNaN(intMoney)) {
+      if (Number.isNaN(intMoney) || !Number.isInteger(Number(money))) {
         throw new LottoError(LottoError.ERROR_MSG.notMoney);
       }
       this.#validatePurchaseAmount(intMoney);
