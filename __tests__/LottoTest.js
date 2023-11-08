@@ -43,7 +43,7 @@ describe("로또 클래스 테스트", () => {
         const result = ["5bonus", 6];
 
         await expect(
-            lotto.calculateLottoResult(winningNumber, bonusNumber, lottoResult)
+            lotto.calculateLotto(winningNumber, bonusNumber, lottoResult)
         ).toEqual(result);
     });
 });
