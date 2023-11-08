@@ -17,7 +17,7 @@ import splitNumbersToArray from '../utils/splitNumbersToArray.js';
 /**
  * @typedef LottoResult 로또 결과 정보입니다.
  * @property {LottoReward[]} rewards 로또의 결과 목록입니다.
- * @property {number} earningRate 유저의 수익률입니다.
+ * @property {string} earningRate 유저의 수익률입니다.
  */
 
 class Controller {

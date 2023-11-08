@@ -13,7 +13,7 @@ describe('퍼센테이지 변환 유틸리티 함수 테스트', () => {
     '입력값을 소숫점 $decimalPoint의 자리에 반올림하여 천 단위로 콤마를 찍는다.',
     ({ input, decimalPoint, output }) => {
       // given & when
-      const result = formatPercentage({ value: input, decimalPoint });
+      const result = formatPercentage(input, decimalPoint);
 
       // then
       expect(result).toBe(output);

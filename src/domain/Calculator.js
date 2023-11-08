@@ -3,6 +3,7 @@ import LottoReward from './LottoReward.js';
 import { invalidInstanceElement } from '../utils/validator.js';
 
 import ApplicationError from '../exceptions/ApplicationError.js';
+import formatPercentage from '../utils/formatPercentage.js';
 
 class Calculator {
   /**
@@ -31,17 +32,16 @@ class Calculator {
    * LottoRewards의 수익률을 계산합니다.
    * @param {number} income 지출입니다.
    * @param {LottoReward[]} rewards 로또 결과 배열입니다.
-   * @returns {number} 로또 결과의 수익률입니다.
+   * @returns {string} 로또 결과의 수익률입니다.
    */
   earningRate(income, rewards) {
     this.#validateEarningRate(income, rewards);
 
     const totalPrize = rewards.reduce((total, reward) => total + reward.getTotalPrize(), 0);
     const earningRate = (totalPrize / income) * 100;
+    const result = formatPercentage(earningRate, Calculator.DECIMAL_POINT);
 
-    return Number.isInteger(earningRate)
-      ? earningRate
-      : Number(earningRate.toFixed(Calculator.DECIMAL_POINT));
+    return result;
   }
 
   #validateEarningRate(income, rewards) {

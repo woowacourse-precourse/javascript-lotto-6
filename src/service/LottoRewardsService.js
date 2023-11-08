@@ -26,7 +26,7 @@ const LottoRewardsService = Object.freeze({
    * 입력받은 결과들을 기반으로 수익률을 체크합니다.
    * @param {number} income 지출입니다.
    * @param {LottoReward[]} rewards 수입입니다.
-   * @returns {number} 수익률입니다.
+   * @returns {string} 수익률입니다.
    */
   getEarningRate(income, rewards) {
     const calculator = Calculator.of();

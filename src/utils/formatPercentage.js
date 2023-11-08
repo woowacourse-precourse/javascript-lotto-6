@@ -4,13 +4,13 @@
  * @param {number} decimalPoint 반올림될 소숫점 자릿수입니다.
  * @returns {string} 변환된 퍼센트입니다.
  */
-const formatPercentage = ({ value, decimalPoint }) => {
+const formatPercentage = (value, decimalPoint) => {
   const formattedNumber = value.toFixed(decimalPoint);
+
   const parts = formattedNumber.toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  const result = `${parts.join('.')}%`;
 
-  return result;
+  return `${parts.join('.')}%`;
 };
 
 export default formatPercentage;
