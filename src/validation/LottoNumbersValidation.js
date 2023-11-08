@@ -7,10 +7,11 @@ const LottoNumbersValidation = {
    * @param {Array} value 로또번호(Lotto.numbers)
    */
   validate(value) {
+    this.checkIsLengthSix(value);
     this.checkIsNumeric(value);
     this.checkIsInteger(value);
     this.checkIsValidRange(value);
-    this.checkIsNotInWinningNumbers(value, winningNumbers);
+    this.checkIsUnique(value);
   },
 
   /** @throws 배열의 길이가 6이 아니라면 에러를 발생시킨다. */
