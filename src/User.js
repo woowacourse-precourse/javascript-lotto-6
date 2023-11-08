@@ -4,8 +4,13 @@ import LottoError from './LottoError.js';
 
 class User {
   async inputPurchaseAmount(){
-    this.purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.PURCHASE_AMOUNT);
-    this.#validatePurchaseAmount();
+    try {
+      this.purchaseAmount = await Console.readLineAsync(INPUT_MESSAGE.PURCHASE_AMOUNT);
+      this.#validatePurchaseAmount();
+    } catch (error) {
+      Console.print(error.message)
+      await this.inputPurchaseAmount();
+    }
     return this.purchaseAmount
   }
 
@@ -35,10 +40,14 @@ class User {
   }
 
   async inputWinNumbers(){
-    this.winNumbers = await Console.readLineAsync(INPUT_MESSAGE.WIN_NUMBER);
-    this.#validateWinNumber(this.winNumbers);
-    const formattedList = this.winNumbers.split(',').map(item => Number(item));
-    return formattedList;
+    try {
+      this.winNumbers = await Console.readLineAsync(INPUT_MESSAGE.WIN_NUMBER);
+      this.#validateWinNumber(this.winNumbers);
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputWinNumbers();
+    }
+    return this.winNumbers.split(',').map(item => Number(item));
   }
 
   #validateWinNumber(){
@@ -75,8 +84,13 @@ class User {
   }
 
   async inputBonusNumber(winNumbers){
-    this.bonusNumber = Number(await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER));
-    this.#validateBonusNumber(this.bonusNumber, winNumbers);
+    try {
+      this.bonusNumber = Number(await Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER));
+      this.#validateBonusNumber(this.bonusNumber, winNumbers);
+    } catch (error) {
+      Console.print(error.message);
+      await this.inputBonusNumber(winNumbers);
+    }
     return this.bonusNumber;
   }
 
