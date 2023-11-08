@@ -36,13 +36,8 @@ class lottoGame {
 
     async lottoWinNumber(){
         const WIN_NUMBER = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-        
         const LOTTO_WIN_NUMBER = WIN_NUMBER.split(",");
-        LOTTO_WIN_NUMBER.forEach(lottoNum => {
-            this.lottoNumberError(lottoNum);
-        });
         new Lotto(LOTTO_WIN_NUMBER);
-
         return WIN_NUMBER;
     }
 
@@ -53,9 +48,11 @@ class lottoGame {
             try {
                 const BONUS_NUMBER = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
                 this.lottoNumberError(BONUS_NUMBER);
+
                 if (LOTTO_WIN_NUMBER.includes(BONUS_NUMBER)) {
                     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
                 }
+
                 validInput = true;
                 return BONUS_NUMBER; // 올바른 입력을 받았을 때 반환
             } catch (error) {
