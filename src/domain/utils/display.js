@@ -1,4 +1,5 @@
 import IssuedLottInfo from '../info/IssuedLottoInfo.js';
+import ProfitRatioInfo from '../info/profitRatioInfo.js';
 import WinningStatisticsInfo from '../info/WinningStatisticsInfo.js';
 
 const display = {
@@ -12,6 +13,14 @@ const display = {
       lottoGenerator,
       lottoNumbers,
       bonusNumber,
+    });
+    info.printInfoMessage();
+  },
+
+  profitRatioInfo: ({ amount, totalProfit }) => {
+    const info = new ProfitRatioInfo({
+      amount,
+      totalProfit,
     });
     info.printInfoMessage();
   },

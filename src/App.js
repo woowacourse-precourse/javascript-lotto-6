@@ -4,18 +4,22 @@ import display from './domain/utils/display.js';
 import getWinningNumbers from './service/input/getWinningNumbers.js';
 import getBonusNumber from './service/input/getBonusNumber.js';
 import Lotto from './Lotto.js';
+import calculateTotalProfit from './domain/utils/calculateTotalProfit.js';
+import retryForError from '../src/domain/utils/retryForError.js';
 
 class App {
   #lottoAmount;
   #lottoGenerator;
   #lotto;
   #bonusNumber;
+  #totalProfit;
 
   constructor() {
     this.#lottoAmount = null;
     this.#lottoGenerator = null;
     this.#lotto = null;
     this.#bonusNumber = null;
+    this.#totalProfit = null;
   }
 
   async #issueLotto() {
@@ -33,9 +37,10 @@ class App {
   }
 
   async #drawWinningNumber() {
-    const winningNumbers = await getWinningNumbers();
-
-    this.#lotto = new Lotto(winningNumbers);
+    await retryForError(async () => {
+      const winningNumbers = await getWinningNumbers();
+      this.#lotto = new Lotto(winningNumbers);
+    });
 
     this.#drawBonuseNumber();
   }
@@ -53,6 +58,17 @@ class App {
       lottoGenerator: this.#lottoGenerator,
       lottoNumbers: this.#lotto.getNumbers(),
       bonusNumber: this.#bonusNumber,
+    });
+
+    this.#totalProfit = calculateTotalProfit({
+      lottoNumbers: this.#lotto.getNumbers(),
+      bonusNumber: this.#bonusNumber,
+      lottos: this.#lottoGenerator.getLottos(),
+    });
+
+    display.profitRatioInfo({
+      amount: this.#lottoAmount,
+      totalProfit: this.#totalProfit,
     });
   }
 
