@@ -25,6 +25,7 @@ class Lotto {
 
   #validate(numbers) {
     this.#validateLengthSix(numbers);
+    Lotto.#validateNumbers(numbers);
     const { minNumber, maxNumber } = LOTTO_BUSINESS_RULES;
     Lotto.#validateNumbersInRange(numbers, minNumber, maxNumber);
     Lotto.#validateHasNoDuplicate(numbers);
@@ -37,6 +38,12 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  static #validateNumbers(array) {
+    if (!array.every((value) => typeof value === "number")) {
+      throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
+    }
+  }
+
   static #validateNumbersInRange(numbers, minInclusive, maxInclusive) {
     numbers.forEach((number) => validateNumberInRange(number, minInclusive, maxInclusive));
   }
