@@ -242,3 +242,18 @@ describe('calculateWin 메서드 테스트', () => {
     expect(winLog[4]).toBe(0);
   });
 });
+
+describe('countMatchedNumbers 메서드 테스트', () => {
+  test('countMatchedNumbers 메서드는 로또 번호와 당첨번호를 비교하여 일치하는 개수를 리턴해야한다.', () => {
+    // given
+    const app = new App();
+    const ticketNumbers = [1, 2, 3, 4, 5, 6];
+    const winningNums = [1, 2, 3, 4, 5, 6];
+
+    // when
+    const matchedCount = app.countMatchedNumbers(ticketNumbers, winningNums);
+
+    // then
+    expect(matchedCount).toBe(6);
+  });
+});
