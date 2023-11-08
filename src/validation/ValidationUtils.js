@@ -17,7 +17,7 @@ class ValidationUtils {
   }
   
   // 로또 가격으로 나누어 떨어지지 않는지 검증
-  static isNotDivisible(input) {
+  static isNotDivisibleLottoPrice(input) {
     if (input % LOTTO_PRICE !== 0) {
       throw new Error(ERROR_MESSAGE.notDivisible);
     }

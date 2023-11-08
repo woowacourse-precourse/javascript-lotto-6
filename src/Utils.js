@@ -2,16 +2,12 @@ import { LOTTO_LENGTH, WINNIG_PROFITS } from './Constants.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 class Utils {
-  
   // 문자열을 ,를 기준으로 나누어 배열로 만듬
-  static splitComma(input) {
-    if (typeof input !== 'string') {
-      throw new Error('Input must be a string.');
-    }
-    return input.split(',');
+  static splitComma(str) {
+    return str.split(',');
   }
 
-  // 2차원 배열의 각 배열들을 오름차순으로 정렬
+  // 2차원 배열안의 각 배열요소들을 오름차순으로 정렬
   static sortLottoNumbers(arr) {
     arr.forEach((row) => row.sort((a, b) => a - b));
     return arr;
@@ -19,11 +15,15 @@ class Utils {
 
   // 1~45의 6개의 랜덤 번호 생성
   static generateRandomNumbers() {
-    const RANDOM_NUMBERS =  MissionUtils.Random.pickUniqueNumbersInRange(1, 45, LOTTO_LENGTH);
+    const RANDOM_NUMBERS = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      45,
+      LOTTO_LENGTH
+    );
     return RANDOM_NUMBERS;
   }
 
-  // key가 있다면 그 key값의 value에 1을 더하고, 그렇지 않다면 1이라는 value를 가진 새로운 속성 생성
+  // key가 있다면 그 key값의 value에 1을 더하고, 그렇지 않다면 그 key값의 value는 1인 새로운 속성 생성
   static addOrUpdatePropertyInObj(obj, key) {
     let newObj = { ...obj };
     if (!obj[key]) {
@@ -44,6 +44,7 @@ class Utils {
     }
     return OBJ;
   }
+  
   // WINNING_PROFITS의 key가 obj에 없다면 value가 0인 프로퍼티로 생성
   static addMissingElements(obj) {
     const OBJ = { ...obj };

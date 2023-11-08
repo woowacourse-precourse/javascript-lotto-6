@@ -6,7 +6,7 @@ class Validation {
     static validatepurchaseInput(input) {
         ValidationUtils.isemptyInput(input);
         ValidationUtils.isNotPositiveInteger(input);
-        ValidationUtils.isNotDivisible(input);
+        ValidationUtils.isNotDivisibleLottoPrice(input);
     }
 
     // 보너스 넘버 검증
