@@ -24,14 +24,12 @@ const Validation = {
   },
 
   /**
-   * 로또 번호들 중에서 중복이 있는지
    * @param {number[]} numbers
    * @returns {boolean}
    */
   isDuplicate: (numbers) => new Set(numbers).size !== numbers.length,
 
   /**
-   * 로또 번호들에 대한 유효성 검사
    * @param {number[]} numbers
    */
   validateLottoNumbers: (numbers) => {
