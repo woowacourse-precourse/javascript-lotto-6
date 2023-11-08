@@ -11,7 +11,7 @@ describe('IssuingLotto 클래스 테스트', () => {
     expect(lottoList).toHaveLength(count);
   });
 
-  test('발급한 로또의 숫자 범위 테스트', () => {
+  test('발급한 로또의 숫자 유효성 테스트', () => {
     const count = 5;
 
     const issuingLotto = new IssuingLotto(count);
