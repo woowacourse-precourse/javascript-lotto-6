@@ -63,7 +63,7 @@ export const INFORM_TEMPLATE = {
   numberSeperator: ', ',
   lottoSeperator: '\n',
   statisticHeader: '당첨 통계\n---',
-  statistic: (matchStandard, prize, count) =>
-    `${matchStandard}개 일치 (${prize}원) - ${count}개`,
+  statistic: (rankStandard, prize, count) =>
+    `${rankStandard} (${prize}원) - ${count}개`,
   profit: (profit) => `총 수익률은 ${profit}%입니다.`,
 };
