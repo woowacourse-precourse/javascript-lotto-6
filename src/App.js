@@ -9,6 +9,7 @@ class App {
       const user_lotto_list = makeNumbers(money);
       showNumbersList(user_lotto_list);
       const lotto = await makeWinningNumbers();
+      lotto.showResult(user_lotto_list);
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +62,7 @@ const makeWinningNumbers = async () => {
   input_winning_numbers.split(',').forEach((num) => {
     winning_numbers_arr.push(parseInt(num));
   });
-
+  winning_numbers_arr.sort((a, b) => a - b);
   const lotto = new Lotto(winning_numbers_arr);
   lotto.setBonusNumber(parseInt(input_bonus_number));
 
