@@ -1,5 +1,5 @@
-import InputAmount from "../src/InputAmount.js";
-import OrganizeResults from "../src/OrganizeResults.js";
+import InputAmount from '../src/InputAmount.js';
+import OrganizeResults from '../src/OrganizeResults.js';
 import Lotto from '../src/Lotto.js';
 import PrintResults from '../src/PrintResults.js';
 

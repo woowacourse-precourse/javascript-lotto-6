@@ -1,4 +1,4 @@
-import Validate from "../src/Validate.js";
+import Validate from '../src/Validate.js';
 
 
 describe('예외 처리 테스트', () => {
