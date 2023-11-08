@@ -20,6 +20,19 @@ class Lotto {
       throw new Error(`${ERROR.LOTTO_NUMBERS_DUPLICATED}`);
     }
   }
+
+  #setLottoNumbers() {
+    const randomNumbers = Random.pickUniqueNumbersInRange(
+      CONSTANTS.MIN_LOTTO_NUMBER,
+      CONSTANTS.MAX_LOTTO_NUMBER,
+      CONSTANTS.LOTTO_NUMBER_LENGTH
+    );
+    return randomNumbers;
+  }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
