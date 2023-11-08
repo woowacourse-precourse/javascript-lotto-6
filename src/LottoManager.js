@@ -1,6 +1,7 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 import LottoResult from './LottoResult';
+import { MONEY_CONSTANTS, LOTTO_CONSTANTS } from './constants/constants';
 
 class LottoManager {
   #money;
@@ -20,14 +21,14 @@ class LottoManager {
   }
 
   generateLottoNumber() {
-    const lottoNumberArray = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const lottoNumberArray = Random.pickUniqueNumbersInRange(LOTTO_CONSTANTS.minRange, LOTTO_CONSTANTS.maxRange, LOTTO_CONSTANTS.digits);
 
     return lottoNumberArray;
   }
 
   generateLottoTickets(money) {
     this.#money = money;
-    this.#count = parseInt(money / 1000);
+    this.#count = parseInt(money / MONEY_CONSTANTS.countUnit);
     const arr = Array(this.#count).fill(null);
     this.#lottoArray = arr.map(() => new Lotto(this.generateLottoNumber()));
   }
