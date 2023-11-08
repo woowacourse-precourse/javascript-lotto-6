@@ -46,6 +46,16 @@ class Customer {
     6개 일치 (2,000,000,000원) - ${lottoRanking.FIRST.count}개
     총 수익률은 ${profitRate}%입니다.`);
   }
+
+  lottoResult(winnigNumbers, bonusNumber) {
+    this.lottoList.forEach((lotto) => {
+      lotto.checkLottoRank(winnigNumbers, bonusNumber);
+    });
+
+    const profitRate = this.calculateProfitRate();
+
+    this.printResult(profitRate);
+  }
 }
 
 export default Customer;
