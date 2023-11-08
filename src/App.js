@@ -14,10 +14,7 @@ class App {
     const purchasePrice = await inputView.purchaseInput();
     validation.checkPurchasePrice(purchasePrice);
 
-    this.pickLottoNum(purchasePrice);
-    this.checkWinningNum();
-
-
+    return(this.pickLottoNum(purchasePrice));
   }
 
   pickLottoNum(purchasePrice){
@@ -31,7 +28,8 @@ class App {
 
     outputView.printLottoCount(lottoCount);
     lottos.forEach((lotto) => outputView.printLottoNum(lotto));
-    return lottos;
+
+    return this.checkWinningNum(lottos);
   }
 
   static arraySort(arr) {
@@ -43,10 +41,30 @@ class App {
     return lottoNum;
   }
 
-  async checkWinningNum() {
+  async checkWinningNum(lottos) {
     const winningNum = await inputView.winningNumInput();
         const winningNums = winningNum.split(',');
         validation.checkWinningNum(winningNums);
+    
+    const bonusNum = await inputView.bonusNumInput();
+      validation.checkBonusNum(winningNums, bonusNum);
+
+    return this.countLottoResult({lottos, winningNums, bonusNum});
+  }
+
+  countLottoResult({lottos, winningNums, bonusNum}) {
+    const matchScore = [];
+    const hasBonusNum = [];
+
+    lottos.forEach((lotto) => {
+      matchScore.push(lotto.getMatchCount(winningNums));
+      if (lotto.hasBonusNumber(bonusNum))
+        hasBonusNum.push(true);
+      else
+        hasBonusNum.push(false);
+    });
+    
+    return this.countLottoRank({matchScore, hasBonusNum});
   }
 }
 
