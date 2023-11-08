@@ -62,6 +62,8 @@ Functional과 MVC 모두 다음과 같이 게임이 진행됨
 
 - 이와 같은 특징에 따라 본 문서에서 제시된 모듈을 `import` 할 때, 모듈 하위 함수가 아닌 모듈 자체를 `import` 할 것을 권장
 
+- 구현할 기능은 해당 설명의 최하단에 존재
+
 ```jsx
  import { linebreak } from 'PrintSource';
  linebreak();//bad
@@ -108,6 +110,8 @@ play()의 진행 과정은 문서 초입부에 제시되어 있음
 사용자로부터 입력을 받아 특정한 값으로 바꾸어 주는 함수들
 
 사용자로부터 동기적으로 입력을 받아야 하므로 해당 모듈의 모든 함수들 앞에는 async가 붙어있음
+
+이 모듈의 `Object`형 반환 값은 모두 `Object.freeze()` 처리가 되어있음
 
 ### `async lottoArray()`
 
@@ -471,7 +475,27 @@ Lotto 객체
 
 `Get.lottoBoard()`로 만들어진 배열
 
+### `lottoReturnRatio(resultArray, numberOfLotto)`
 
+- `Get.resultArray()`에서 얻어지는 `resultArray`에 의한 로또 수익률을 반환
+
+```jsx
+const returnRatio = lottoReturnRatio([0,0,0,0,0,0,1,3,0,0,0,0,0],4);
+```
+
+**매개변수**
+
+`'매개변수'`
+
+'매개변수 설명'
+
+**반환**
+
+'반환 값'
+
+**예외**
+
+'예외 경우'
 
 
 구현해야할 기능

@@ -14,7 +14,7 @@ class Fucntional {
 
     const lottoResult = Get.lottoResult(lottoArray, lottoBoard);
     Print.lottoResult(lottoResult);
-    Print.returnRatio(Get.lottoReturnRatio(lottoResult, lottoArray.length));
+    Print.returnRatio(Get.lottoReturnRatio(lottoResult));
   }
 }
 

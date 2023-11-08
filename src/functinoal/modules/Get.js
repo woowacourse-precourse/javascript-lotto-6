@@ -57,7 +57,8 @@ class Get {
       .reduce((previous, current) => previous + lottoBoard[current], ZERO);
   }
 
-  static lottoReturnRatio(resultArray, numberOfLotto) {
+  static lottoReturnRatio(resultArray) {
+    const numberOfLotto = Get.sumOfArray(resultArray);
     return (
       (((resultArray[6] + resultArray[7]) * FIFTH_PLACE_WINNINGS +
         (resultArray[8] + resultArray[9]) * FOURTH_PLACE_WINNINGS +
@@ -67,6 +68,10 @@ class Get {
         (numberOfLotto * LOTTO_PRICE)) *
       100
     );
+  }
+
+  static sumOfArray(array) {
+    return array.reduce((previous, current) => previous + current, 0);
   }
 }
 
