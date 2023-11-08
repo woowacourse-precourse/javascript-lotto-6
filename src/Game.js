@@ -15,6 +15,8 @@ class Game {
 
   #winningDetails = { 3: 0, 4: 0, 5: 0, '5b': 0, 6: 0 };
 
+  #profit;
+
   static async #getLottoPrice() {
     const priceInput = await User.readInput(MESSAGE.enterPrice);
     return Validation.price(priceInput);
@@ -92,6 +94,23 @@ class Game {
     User.printMessage(MESSAGE.winningDetails(this.#winningDetails));
   }
 
+  #setProfit() {
+    this.#profit =
+      this.#winningDetails[3] * 5000 +
+      this.#winningDetails[4] * 50000 +
+      this.#winningDetails[5] * 1500000 +
+      this.#winningDetails['5b'] * 30000000 +
+      this.#winningDetails[6] * 2000000000;
+  }
+
+  #calculateProfitRate() {
+    return (this.#profit / this.#lottoAmount / 10).toFixed(1);
+  }
+
+  #printProfitRate() {
+    User.printMessage(MESSAGE.profitRate(this.#calculateProfitRate()));
+  }
+
   async play() {
     await this.#setLottoAmount();
     this.#setMyLotto();
@@ -100,6 +119,8 @@ class Game {
     await this.#setBonusNumber();
     this.#setWinningDetails();
     this.#printWinningDetails();
+    this.#setProfit();
+    this.#printProfitRate();
   }
 }
 
