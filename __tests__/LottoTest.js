@@ -20,4 +20,12 @@ describe("로또 클래스 테스트", () => {
       new Lotto([0, 1, 2, 3, 4, 5]);
     }).toThrow("[ERROR]");
   });
+
+  test("로또 정상 생성 테스트", () => {
+    expect(() => {
+      const LOTTO = new Lotto([1, 2, 3, 4, 5, 6]);
+
+      expect(LOTTO.numbers).toBe([1, 2, 3, 4, 5, 6]);
+    });
+  });
 });
