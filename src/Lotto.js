@@ -21,7 +21,7 @@ class Lotto {
       )
         throw new Error(ERROR_MESSAGES.IS_LOTTO_RANGE);
     });
-    
+
     if (new Set(numbers).size !== LOTTO_MESSAGES.MAX_LOTTO_COUNT)
       throw new Error(ERROR_MESSAGES.IS_DUPLICATION);
   }
