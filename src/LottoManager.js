@@ -85,6 +85,19 @@ class LottoManager {
     Console.print(`5개 일치, 보너스 볼 일치 (${LottoResult.CASE_5_BONUS.prize.toLocaleString('ko-KR')}원) - ${result.case5Bonus}개`);
     Console.print(`6개 일치 (${LottoResult.CASE_6.prize.toLocaleString('ko-KR')}원) - ${result.case6}개`);
   }
+
+  printYield() {
+    const totalPrize =
+      this.#result.case3 * LottoResult.CASE_3.prize +
+      this.#result.case4 * LottoResult.CASE_4.prize +
+      this.#result.case5 * LottoResult.CASE_5.prize +
+      this.#result.case5Bonus * LottoResult.CASE_5_BONUS.prize +
+      this.#result.case6 * LottoResult.CASE_6.prize;
+
+    const yieldRate = (totalPrize / this.#money) * 100;
+
+    Console.print(`총 수익률은 ${yieldRate.toFixed(1)}%입니다.`);
+  }
 }
 
 export default LottoManager;
