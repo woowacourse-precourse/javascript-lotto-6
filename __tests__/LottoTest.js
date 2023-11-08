@@ -44,4 +44,15 @@ describe('로또 클래스 테스트', () => {
       });
     },
   );
+
+  describe('convertNumber', () => {
+    test('배열을 안에 있는 string을 number로 바꿔줘야합니다. ', () => {
+      // given
+      const input = ['1', '2', '3', '4', '5', '6'];
+
+      // when
+      // then
+      expect(Lotto.convertNumber(input)).toEqual([1, 2, 3, 4, 5, 6]);
+    });
+  });
 });
