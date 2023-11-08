@@ -17,7 +17,7 @@ describe('로또 클래스 테스트', () => {
   });
 });
 
-describe('로또 등수 판정 테스트', () => {
+describe('DOMAIN: 로또 등수 판정 테스트', () => {
   const numbers = [1, 2, 3, 4, 5, 6];
   const bonusNumber = 7;
   const bonusNumberForSecond = 6;
