@@ -1,34 +1,16 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-import {
-  INPUT_MESSAGES,
-  OUTPUT_MESSAGES,
-  ERROR_MESSAGES,
-} from "./constants/Messages.js";
+import { INPUT_MESSAGES, OUTPUT_MESSAGES } from "./constants/Messages.js";
 import { PRIZE } from "./constants/Prize.js";
-import { validateWinningNumberCollection } from "./Validate/WinningNumber.js";
-import { validateBonusNumberCollection } from "./Validate/BonusNumber.js";
-
-/*
-추가된 요구 사항
-함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
-  함수(또는 메서드)가 한 가지 일만 잘 하도록 구현한다.
-else를 지양한다.
-  힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
-  때로는 if/else, switch문을 사용하는 것이 더 깔끔해 보일 수 있다. 어느 경우에 쓰는 것이 적절할지 스스로 고민해 본다.
-도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 제외한다.
-  핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
-  단위 테스트 작성이 익숙하지 않다면 __tests__/LottoTest.js를 참고하여 학습한 후 테스트를 구현한다.
-*/
-
-//TODO: 테스트 케이스 작성하기
-//TODO: 프로그래밍 요구 사항에 맞는지 확인
+import { validateWinningNumberCollection } from "./CoreLogic/Validate/WinningNumber.js";
+import { validateBonusNumberCollection } from "./CoreLogic/Validate/BonusNumber.js";
+import { validateCashCollection } from "./CoreLogic/Cash.js";
 
 class App {
   async play() {
     const INPUT_CASH = await this.validateCash();
     const ARRAY_OF_GAMES = this.pushLottoNumbers(
-      this.showGameNumbers(INPUT_CASH)
+      this.getGameNumbers(INPUT_CASH)
     );
     const VERIFIED_WINNING_NUMBER = await this.validateWinningNumber();
     const VERIFIED_BOUNUS_NUMBER = await this.validateBonusNumber(
@@ -39,7 +21,7 @@ class App {
       VERIFIED_WINNING_NUMBER,
       VERIFIED_BOUNUS_NUMBER
     );
-    this.showLottoResult(NUMBER_OF_WINS, INPUT_CASH);
+    this.printLottoResult(NUMBER_OF_WINS, INPUT_CASH);
   }
 
   async inputCash() {
@@ -53,29 +35,11 @@ class App {
     while (true) {
       try {
         const INPUT_CASH = await this.inputCash();
-        this.validateCashCollection(INPUT_CASH);
+        validateCashCollection(INPUT_CASH);
         return INPUT_CASH;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
-    }
-  }
-
-  validateCashCollection(INPUT_CASH) {
-    this.validateCashInteger(INPUT_CASH);
-    this.validateCashNone(INPUT_CASH);
-  }
-
-  validateCashInteger(INPUT_CASH) {
-    if (+INPUT_CASH % 1000 === 0) {
-      return INPUT_CASH;
-    }
-    throw new Error(ERROR_MESSAGES.CASH_NOT_INTEGER_IN_THOUSANDS);
-  }
-
-  validateCashNone(INPUT_CASH) {
-    if (typeof INPUT_CASH === "undefined" || INPUT_CASH.trim() === "") {
-      throw new Error(ERROR_MESSAGES.CASH_NOT_INTEGER_IN_THOUSANDS);
     }
   }
 
@@ -93,36 +57,39 @@ class App {
     return ARRAY_OF_GAMES;
   }
 
-  outputLottoNumbers(SORTED_LOTTO_NUMBER) {
-    MissionUtils.Console.print(`[${SORTED_LOTTO_NUMBER.join(", ")}]`);
-  }
-
-  showGameNumbers(INPUT_CASH) {
+  getGameNumbers(INPUT_CASH) {
     const NUMBER_OF_GAMES = INPUT_CASH / 1000;
-    MissionUtils.Console.print(
-      NUMBER_OF_GAMES + OUTPUT_MESSAGES.PURCHASE_QUANTITY
-    );
+    this.printGameNumbers(NUMBER_OF_GAMES);
     return NUMBER_OF_GAMES;
   }
 
+  printGameNumbers(NUMBER_OF_GAMES) {
+    MissionUtils.Console.print(
+      NUMBER_OF_GAMES + OUTPUT_MESSAGES.PURCHASE_QUANTITY
+    );
+  }
+
   inputWinningNumber() {
-    const WINNING_NUMBER = MissionUtils.Console.readLineAsync(
+    return MissionUtils.Console.readLineAsync(
       INPUT_MESSAGES.INPUT_WINNING_NUMBER
     );
-    return WINNING_NUMBER;
   }
 
   async validateWinningNumber() {
     while (true) {
       try {
         const WINNING_NUMBER = await this.inputWinningNumber();
-        const WINNING_NUMBER_ARRAY = WINNING_NUMBER.split(",").map(Number);
+        const WINNING_NUMBER_ARRAY = this.getWinningNumberArray(WINNING_NUMBER);
         validateWinningNumberCollection(WINNING_NUMBER_ARRAY);
         return WINNING_NUMBER_ARRAY;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
     }
+  }
+
+  getWinningNumberArray(WINNING_NUMBER) {
+    return WINNING_NUMBER.split(",").map(Number);
   }
 
   inputBonusNumber() {
@@ -137,12 +104,17 @@ class App {
       try {
         const BOUNUS_NUMBER = await this.inputBonusNumber();
         validateBonusNumberCollection(BOUNUS_NUMBER, VERIFIED_WINNING_NUMBER);
-        const VERIFIED_BOUNUS_NUMBER = Number(BOUNUS_NUMBER);
+        const VERIFIED_BOUNUS_NUMBER =
+          this.getNumberTypeBonusNumber(BOUNUS_NUMBER);
         return VERIFIED_BOUNUS_NUMBER;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
     }
+  }
+
+  getNumberTypeBonusNumber(BOUNUS_NUMBER) {
+    return Number(BOUNUS_NUMBER);
   }
 
   compareLottoNumber(lottoNumber, winningNumber, bonusNumber) {
@@ -159,24 +131,28 @@ class App {
     return NumberOfWins;
   }
 
-  showLottoResult(NUMBER_OF_WINS, cash) {
+  printLottoResult(NUMBER_OF_WINS, CASH) {
     const PRIZE_VALUE = this.getPrizeValue(NUMBER_OF_WINS);
     MissionUtils.Console.print(OUTPUT_MESSAGES.WINNING_STATISTICS);
     this.showEachPrize(NUMBER_OF_WINS);
-    const RATE_OF_RETURN = ((PRIZE_VALUE / cash) * 100).toFixed(1);
+    const RATE_OF_RETURN = this.getRateOfReturn(PRIZE_VALUE, CASH);
     MissionUtils.Console.print(
       OUTPUT_MESSAGES.RATE_OF_RETURN + RATE_OF_RETURN + "%입니다."
     );
   }
 
+  getRateOfReturn(PRIZE_VALUE, CASH) {
+    return ((PRIZE_VALUE / CASH) * 100).toFixed(1);
+  }
+
   getPrizeValue(NUMBER_OF_WINS) {
-    let prizeValue =
+    return (
       NUMBER_OF_WINS[3] * PRIZE.THREE_MATCHES +
       NUMBER_OF_WINS[4] * PRIZE.FOUR_MATCHES +
       NUMBER_OF_WINS[5] * PRIZE.FIVE_MATCHES +
       NUMBER_OF_WINS[6] * PRIZE.SIX_MATCHES +
-      NUMBER_OF_WINS["bonus"] * PRIZE.BONUS_MATCHES;
-    return prizeValue;
+      NUMBER_OF_WINS["bonus"] * PRIZE.BONUS_MATCHES
+    );
   }
 
   showEachPrize(NUMBER_OF_WINS) {
