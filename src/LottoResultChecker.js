@@ -22,7 +22,7 @@ class LottoResultChecker {
     return counts;
   }
 
-  getMatchingCounts(counts, bonus, randomArrs) {
+  getMatchingCounts(counts, bonus) {
     const matchingCounts = {
       three: 0,
       four: 0,
@@ -32,7 +32,7 @@ class LottoResultChecker {
     };
     for (let i = 0; i < counts.length; i++) {
       const count = counts[i];
-      const randomArr = randomArrs[i];
+
       if (count === 3) {
         matchingCounts.three += 1;
       }
