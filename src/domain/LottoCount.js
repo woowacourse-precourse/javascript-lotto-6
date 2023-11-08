@@ -5,7 +5,7 @@ class LottoCount {
     this.#lottoCount = Number(inputPurchaseAmount) / 1000;
   }
 
-  getAmount() {
+  getLottoCount() {
     return this.#lottoCount;
   }
 }
