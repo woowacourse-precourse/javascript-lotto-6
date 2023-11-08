@@ -54,6 +54,10 @@ class PlayView {
         this.#before = this.#now;
         this.#now = await this.#View.stage4View();
         break;
+      case STAGES.NUM_5:
+        this.#before = this.#now;
+        this.#now = await this.#View.stage5View();
+        break;
       default:
         errorView(stageNum);
         this.#now = this.#before;
@@ -77,6 +81,10 @@ class PlayView {
     stage4View: async function requestWinNumbers() {
       const tmp = await controller.switchStage(STAGES.NUM_4);
       return tmp;
+    },
+    stage5View: async function requestWinNumbers() {
+      MissionUtils.Console.print(`${TEXTVIEW.RESULT([1, 0, 0, 0, 0, 0, 0])}`);
+      return STAGES.EXIT;
     },
   };
 }
