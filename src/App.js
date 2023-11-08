@@ -10,7 +10,7 @@ class App {
     const machine = new LottoMachine(purchaseCount);
     LottoPrinter.printPurchaseComplete(purchaseCount);
     const tickets = await machine.getTickets(purchaseCount);
-
+    console.log('a = ', typeof player.amount);
     const winningNumbers = await player.enterWinningNumbers();
 
     const checker = new LottoChecker(tickets, winningNumbers);

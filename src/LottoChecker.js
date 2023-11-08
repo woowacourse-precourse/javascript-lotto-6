@@ -1,8 +1,11 @@
+import prize from './constants/prize';
+
 class LottoChecker {
   constructor(tickets, winningNumbers, bonusNumber) {
     this.tickets = tickets;
     this.winningNumbers = winningNumbers;
     this.bonusNumber = bonusNumber;
+    this.revenue = 0;
   }
 
   #countMatchingNumbers(ticket) {
@@ -19,6 +22,20 @@ class LottoChecker {
     return ticket.includes(this.bonusNumber);
   }
 
+  #getRevenue(results) {
+    let totalAmount = 0;
+    for (const [matchCount, count] of Object.entries(results)) {
+      if (matchCount >= 3) {
+        const amount = prize[matchCount]
+          ? parseInt(prize[matchCount].replace(/,/g, ''), 10)
+          : 0;
+        totalAmount += amount * count;
+      }
+    }
+    console.log('totalAmount = ', totalAmount);
+    this.revenue = totalAmount;
+  }
+
   getMatches() {
     const results = {};
 
@@ -32,7 +49,7 @@ class LottoChecker {
 
       results[matchKey] = (results[matchKey] || 0) + 1;
     });
-    console.log(results);
+    this.#getRevenue(results);
     return results;
   }
 }
