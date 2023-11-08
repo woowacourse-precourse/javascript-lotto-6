@@ -10,13 +10,13 @@ export default class Service {
     this.#winNumber = winNumber;
   }
 
-  compareEachNumber() {
+  compareNumber() {
     this.#myLotto.getQuickPicks().forEach((quickPick) => {
-      this.compareNumber(quickPick);
+      this.compareEachNumber(quickPick);
     });
   }
 
-  compareNumber(quickPick) {
+  compareEachNumber(quickPick) {
     const intersection = quickPick.filter((num) => this.#winNumber.getCommonWinNum().includes(num));
     if (
       intersection.length === LOTTOSET.bonusCnt &&

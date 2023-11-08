@@ -1,4 +1,5 @@
 import randomLotto from './utils/randomLotto.js';
+import winResult from './utils/winResult.js';
 import { MONEYSET } from '../Constant/SETTING.js';
 
 export default class MyLotto {
@@ -7,6 +8,8 @@ export default class MyLotto {
   #quickPicks;
 
   #winCountArr;
+
+  #winResultArr;
 
   constructor() {
     this.#quickPicks = [];
@@ -27,6 +30,10 @@ export default class MyLotto {
     this.#winCountArr.push(winCount);
   }
 
+  setWinResult() {
+    this.#winResultArr = winResult(this.#winCountArr);
+  }
+
   getLottoCount() {
     return this.#lottoCount;
   }
@@ -37,5 +44,9 @@ export default class MyLotto {
 
   getWinCountArr() {
     return this.#winCountArr;
+  }
+
+  getWinResultArr() {
+    return this.#winResultArr;
   }
 }
