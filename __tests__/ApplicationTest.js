@@ -95,21 +95,17 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 
-
   test("금액이 1000원 단위로 나누어 떨어지지 않으면 예외 처리한다.", async () => {
     // given
     const logSpy = getLogSpy();
 
-    mockRandoms([
-      [8, 21, 23, 41, 42, 43]
-    ]);
-    mockQuestions(["100","1000", "1,2,3,4,5,6", "7"]);
+    mockRandoms([[8, 21, 23, 41, 42, 43]]);
+    mockQuestions(["100", "1000", "1,2,3,4,5,6", "7"]);
 
     // when
     const app = new App();
     await app.play();
 
-    
     // then
     const logs = [
       "1개를 구매했습니다.",
@@ -146,12 +142,8 @@ describe("로또 테스트", () => {
     const app = new App();
     await app.play();
 
-
     // then
-    const logs = [
-      "1개를 구매했습니다.",
-      "[ERROR]",
-    ];
+    const logs = ["1개를 구매했습니다.", "[ERROR]"];
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
