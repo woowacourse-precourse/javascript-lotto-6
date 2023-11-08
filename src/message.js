@@ -1,0 +1,13 @@
+export const duplicateError = "[ERROR] 로또 번호는 중복되면 안됩니다.";
+export const GET_INPUT_MONEY = "구입금액을 입력해 주세요.\n";
+export const GET_INPUT_LOTTO = "당첨 번호를 입력해 주세요.\n";
+export const GET_INPUT_BONUS = "보너스 번호를 입력해 주세요.\n";
+export const ERROR_GET_INPUT_MONEY =  "[ERROR] 구입금액은 1000원 단위로 입력하셔야 합니다.";
+export const ERROR_GET_INPUT_BONUS = "[ERROR] 보너스 입력 형식이 틀렸습니다.";
+export const COUNTS_MESSAGE = "개를 구매했습니다.";
+export const BEFORE_RESULT = "당첨 통계\n---";
+export const FIRST_RANK_MESSAGE = "6개 일치 (2,000,000,000원) - ";
+export const SECOND_RANK_MESSAGE = "5개 일치, 보너스 볼 일치 (30,000,000원) - ";
+export const THIRD_RANK_MESSAGE = "5개 일치 (1,500,000원) - ";
+export const FOURTH_RANK_MESSAGE = "4개 일치 (50,000원) - ";
+export const FIFTH_RANK_MESSAGE = "3개 일치 (5,000원) - ";
