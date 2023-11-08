@@ -36,8 +36,11 @@ class LottoValidate{
             throw Error(`${ERROR_MESSAGE.INPUT_MORE_WINNING_NUMBERS_ERROR}`);
         }
         lottoNumber.forEach((number) => {
-            if (number < 1 || number > 45) {
+            if(number < 1 || number > 45) {
                 throw new Error(`${ERROR_MESSAGE.INPUT_WINNING_NUMBERS_ERROR}`);
+            }
+            if(isNaN(number)){
+                throw new Error(`${ERROR_MESSAGE.INPUT_NUMBER_ERROR}`);
             }
         });
     }
