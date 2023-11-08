@@ -1,4 +1,4 @@
-import ERRORPREFIX from '../constants/errorConstant.js';
+import ERROR_PREFIX from '../constants/errorConstant.js';
 
 export const commomValidator = (inputValue) => {
   if (Number.isNaN(inputValue)) throw Error('숫자 형식이 아닙니다.');
@@ -38,10 +38,10 @@ export const checkOverlapOnBonusNumber = (winningNumberList, bonusNumber) => {
 // Lotto에서 validate안에. numbers를 param으로 가짐
 export const checkTheNumberOfLottoNumbers = (numbers) => {
   if (numbers.length !== 6) {
-    throw new Error(`${ERRORPREFIX} 로또 번호는 6개여야 합니다.`);
+    throw new Error(`${ERROR_PREFIX} 로또 번호는 6개여야 합니다.`);
   }
 };
 export const checkOverlapInLottoNumbers = (lottoNumbers, targetNumber) => {
   if (lottoNumbers.filter((number) => number === targetNumber).length > 1)
-    throw Error(`${ERRORPREFIX} 중복된 번호가 존재합니다.`);
+    throw Error(`${ERROR_PREFIX} 중복된 번호가 존재합니다.`);
 };

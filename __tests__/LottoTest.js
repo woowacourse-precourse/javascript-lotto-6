@@ -26,8 +26,11 @@ describe('로또 클래스 테스트', () => {
   test('로또 번호가 오름차순으로 정렬된다.', () => {
     const testLotto = new Lotto([6, 5, 4, 2, 3, 1]);
     const logSpy = getLogSpy();
+
     outputLottoNummbers([testLotto]);
+
     const ascendingLottoNumber = '[1, 2, 3, 4, 5, 6]';
+
     expect(() => {
       expect(logSpy).toBe(ascendingLottoNumber);
     });

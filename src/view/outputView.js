@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import ERRORPREFIX from '../constants/errorConstant.js';
+import ERROR_PREFIX from '../constants/errorConstant.js';
 
 export const outputIssueComment = (numberOfLotto) =>
   Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
@@ -33,6 +33,6 @@ export const outputEarningRateCommnet = (earningRate) => {
 
 export const outputErrorComment = (error, errorStep) => {
   Console.print(
-    `${ERRORPREFIX} ${error.message}\n`.replace(`${errorStep}: `, ''),
+    `${ERROR_PREFIX} ${error.message}\n`.replace(`${errorStep}: `, ''),
   );
 };

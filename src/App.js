@@ -1,13 +1,11 @@
 /**
  * 추후, 맨 처음 docs 커밋 바꾸기 -> 동사로 시작하게.
  */
-import { Console } from '@woowacourse/mission-utils';
 import Lottery from './domain/Lottery.js';
-import ERRORPREFIX from './constants/errorConstant.js';
 import { outputErrorComment } from './view/outputView.js';
 
 class App {
-  #lottery = new Lottery();
+  lottery = new Lottery();
 
   #isInputStepEnd = {
     payMoney: false,
@@ -15,25 +13,36 @@ class App {
     bonusNumber: false,
   };
 
-  async readInputs() {
+  async handlePayMoneyInput() {
     if (!this.#isInputStepEnd.payMoney) {
-      await this.#lottery.readPayMoney();
+      await this.lottery.readPayMoney();
       this.#isInputStepEnd.payMoney = true;
     }
+  }
+
+  async handleWinningNumberInput() {
     if (!this.#isInputStepEnd.winningNumberList) {
-      await this.#lottery.readWinningNumberList();
+      await this.lottery.readWinningNumberList();
       this.#isInputStepEnd.winningNumberList = true;
     }
+  }
 
+  async handleBonusNumberInput() {
     if (!this.#isInputStepEnd.bonusNumber) {
-      await this.#lottery.readBonusNumber();
+      await this.lottery.readBonusNumber();
       this.#isInputStepEnd.bonusNumber = true;
     }
   }
 
+  async readInputs() {
+    await this.handlePayMoneyInput();
+    await this.handleWinningNumberInput();
+    await this.handleBonusNumberInput();
+  }
+
   resultIssues() {
-    this.#lottery.matchNumbers();
-    this.#lottery.printWinnigCount();
+    this.lottery.matchNumbers();
+    this.lottery.printWinnigCount();
   }
 
   checkErrorStep(error) {
