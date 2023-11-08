@@ -1,4 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
+import { OPTIONS, PRIZES } from '../constant/constants.js';
 
 class CalculateController {
   #lottos;
@@ -25,11 +25,10 @@ class CalculateController {
 
   rating() {
     let rate = 0;
-    const prizes = [5000, 50000, 1500000, 30000000, 2000000000];
-    prizes.forEach((prize, index) => {
+    PRIZES.forEach((prize, index) => {
       rate += prize * this.#state[index];
     });
-    return (rate / (this.#lottos.length * 1000)) * 100;
+    return (rate / (this.#lottos.length * OPTIONS.unit)) * 100;
   }
 }
 

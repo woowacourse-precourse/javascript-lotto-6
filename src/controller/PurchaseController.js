@@ -1,6 +1,7 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import { ERROR_MESSEGE } from '../constant/messages.js';
+import { OPTIONS } from '../constant/constants.js';
 import Lottos from '../model/Lottos.js';
 
 class PurchaseController {
@@ -27,7 +28,7 @@ class PurchaseController {
     if (!purchaseAmount) throw new Error(ERROR_MESSEGE.notInput);
     if (isNaN(purchaseAmount)) throw new Error(ERROR_MESSEGE.notNumber);
     if (purchaseAmount <= 0) throw new Error(ERROR_MESSEGE.notPositive);
-    if (purchaseAmount % 1000 !== 0) throw new Error(ERROR_MESSEGE.not1000Multiple);
+    if (purchaseAmount % OPTIONS.unit !== 0) throw new Error(ERROR_MESSEGE.not1000Multiple);
   }
 }
 

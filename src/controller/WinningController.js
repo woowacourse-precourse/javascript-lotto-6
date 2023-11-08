@@ -1,6 +1,7 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import { ERROR_MESSEGE } from '../constant/messages.js';
+import { OPTIONS } from '../constant/constants.js';
 
 class WinningController {
   async inputWinning() {
@@ -24,10 +25,10 @@ class WinningController {
 
     const winningNumbers = winningNumber.split(',');
 
-    if (winningNumbers.length !== 6) throw new Error(ERROR_MESSEGE.notSixNumbers);
+    if (winningNumbers.length !== OPTIONS.length) throw new Error(ERROR_MESSEGE.notSixNumbers);
     if (winningNumbers.some((number) => isNaN(number))) throw new Error(ERROR_MESSEGE.notNumber);
     if (winningNumbers.some((number) => number <= 0)) throw new Error(ERROR_MESSEGE.notPositive);
-    if (winningNumbers.some((number) => number < 1 || number > 45)) throw new Error(ERROR_MESSEGE.outOfRange);
+    if (winningNumbers.some((number) => number < OPTIONS.minNumber || number > OPTIONS.maxNumber)) throw new Error(ERROR_MESSEGE.outOfRange);
     if (this.#isDuplicates(winningNumbers)) throw new Error(ERROR_MESSEGE.duplicates);
   }
 
