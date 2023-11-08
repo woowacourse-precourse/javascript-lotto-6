@@ -14,6 +14,7 @@ const {
   FIFTH_PLACE_RESULT_HEADER,
   RETURN_RATIO_HEADER,
   RETURN_RATIO_FOOTER,
+  LOTTO_NUMBERS_SEPARATOR,
   DASH,
   SPACE,
   BLANK,
@@ -28,10 +29,11 @@ class Print {
   }
 
   static lottoNumbers(lotto) {
+    const PRINT_SEPARATOR = `${LOTTO_NUMBERS_SEPARATOR}${SPACE}`;
     Console.print(
       `${LOTTO_FRONT_COVER}${lotto
         .getNumbers()
-        .join(', ')}${LOTTO_BEHIND_COVER}`
+        .join(PRINT_SEPARATOR)}${LOTTO_BEHIND_COVER}`
     );
   }
 
