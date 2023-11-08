@@ -24,9 +24,8 @@ const InputManager = {
     const bonusNumber = await Console.readLineAsync(
       "보너스 번호를 입력해 주세요.\n"
     );
-    const bonusNumberAsNumber = Number(bonusNumber);
-    Validator.validateBonus(bonusNumber);
-    return bonusNumberAsNumber;
+
+    return bonusNumber;
   },
 };
 

@@ -1,5 +1,5 @@
 class BonusNumber {
-  constructor(bonusNumber, winningNumbers) {
+  constructor(bonusNumber) {
     this.value = bonusNumber;
   }
 }

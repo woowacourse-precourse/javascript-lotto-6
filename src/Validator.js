@@ -11,12 +11,6 @@ const Validator = {
       throw new Error("[ERROR] 1,000원 단위로 입력해주세요. ");
     }
   },
-  validateBonus(bonusNumber) {
-    const bonusnumber = Number(bonusNumber);
-    if (Number.isNaN(bonusnumber)) {
-      throw new Error("[ERROR] 숫자만 입력해주세요. ");
-    }
-  },
 };
 
 export default Validator;
