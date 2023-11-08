@@ -1,6 +1,6 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGES } from '../Constants.js';
-import { Validation } from '../Validation/Validation.js';
+import Validation from '../Validation/Validation.js';
 import Utils from '../Utils.js';
 
 class InputView {

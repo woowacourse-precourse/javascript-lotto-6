@@ -9,7 +9,7 @@ class LottoUtils {
   matchingCountToArray(winningNumbers) {
     const matchingCount = [];
     for (let i = 0; i < this.lottos.length; i++) {
-      matchingCount.push(this.lottos[i].getMatchedCount(winningNumbers));
+      matchingCount.push(this.lottos[i].getMatchingCount(winningNumbers));
     }
     return matchingCount;
   }
@@ -41,6 +41,7 @@ class LottoUtils {
   checkGameResult(object) {
     let result = { ...object };
     result = Utils.removeLessThanThree(result);
+    result = Utils.addMissingElement(result);
     return result;
   }
 }

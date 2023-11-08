@@ -1,11 +1,11 @@
-const LOTTO_RULE = Object.freeze({
+const LOTTO_RULE = {
   RANGE: {
     MIN: 1,
     MAX: 45,
   },
   LENGTH: 6,
   UNIT: 1000,
-});
+};
 const WINNING_NUMBERS = [3, 4, 5, 'bonus', 6];
 const WINNING_PROFITS = {
   3: 5000,
@@ -16,10 +16,10 @@ const WINNING_PROFITS = {
 };
 
 const INPUT_MESSAGES = Object.freeze({
-  BUY_INPUT: '구입금액을 입력해주세요',
-  BUY_PRINT: (n) => `\n${n}개를 구매했습니다`,
-  LOTTO_NUMBER: '당첨번호를 입력해주세요',
-  BONUS_NUMBER: '보너스 번호를 입력해주세요',
+  BUY_INPUT: '구입금액을 입력해주세요.\n',
+  BUY_PRINT: (n) => `${n}개를 구매했습니다.`,
+  LOTTO_NUMBER: '당첨번호를 입력해주세요.\n',
+  BONUS_NUMBER: '보너스 번호를 입력해주세요.\n',
 });
 
 const OUPUT_MESSAGES = Object.freeze({
@@ -31,11 +31,11 @@ const OUPUT_MESSAGES = Object.freeze({
     return `[${lottos.join(',')}]`;
   },
   WINNING_STATUS(matchingCount, winningStatus) {
-    const winingProfit = WINNING_PROFITS[matchingCount].toLocaleString();
+    const winningProfit = WINNING_PROFITS[matchingCount].toLocaleString();
     if (matchingCount === 'bonus') {
-      return `5개 일치, 보너스 볼 일치(${winingProfit}원) - ${winningStatus[matchingCount]}개`;
+      return `5개 일치, 보너스 볼 일치(${winningProfit}원) - ${winningStatus[matchingCount]}개`;
     }
-    return `${matchingCount}개 일치,(${winingProfit}원) - ${winningStatus[matchingCount]}개`;
+    return `${matchingCount}개 일치,(${winningProfit}원) - ${winningStatus[matchingCount]}개`;
   },
   PROFIT(profit) {
     return `총 수익률은 ${profit}%입니다.`;

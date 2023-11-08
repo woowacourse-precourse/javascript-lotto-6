@@ -14,8 +14,8 @@ class LottoGame {
   async buyLotto() {
     const buyAmount = await this.inputView.inputBuyAmount();
     this.setGame = new SetGame(buyAmount);
-    const sortLottos = Utils.sortLottoNumbers(this.setGame.getLottoNumbers());
-    this.ouputView.printLottoNumbers(sortLottos);
+    const sortedLottos = Utils.sortLottoNumbers(this.setGame.getLottoNumbers());
+    this.ouputView.printLottoNumbers(sortedLottos);
   }
   // 당첨 현황 계산
   async calcWinner() {
@@ -29,7 +29,7 @@ class LottoGame {
 
   // 당첨현황 및 수익률 계산 및 출력
   lottoResult() {
-    const profit = this.setGame.calcProfit();
+    const profit = this.setGame.calcProfit(this.winningStatus);
     this.ouputView.printWinningStatus(this.winningStatus);
     this.ouputView.printProfit(profit);
   }

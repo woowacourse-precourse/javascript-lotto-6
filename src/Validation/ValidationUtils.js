@@ -3,7 +3,7 @@ import { LOTTO_RULE, ERROR_MESSAGES } from '../Constants.js';
 class ValidationUtils {
   // 요소가 중복되지 않는지 검증
   static isUnique(input) {
-    if (new Set(input).size !== input.length) {
+    if (new Set(input).size !== LOTTO_RULE.LENGTH) {
       throw new Error(ERROR_MESSAGES.LOTTO.NO_UNIQUE);
     }
   }
@@ -22,7 +22,7 @@ class ValidationUtils {
   }
   // 로또가 특정 범위 내 있는지 검증
   static isOnRange(input) {
-    if (input >= LOTTO_RULE.RANGE.MIN && input <= LOTTO_RULE.RANGE.MAX) {
+    if (input < LOTTO_RULE.RANGE.MIN || input > LOTTO_RULE.RANGE.MAX) {
       throw new Error(ERROR_MESSAGES.LOTTO.NO_RANGE);
     }
   }
@@ -37,7 +37,7 @@ class ValidationUtils {
   //양의 정수를 입력하지 않았는지 검증
   static isNotPositiveInteger(input) {
     if (input % 1 !== 0 || input < 1) {
-      throw new Error(ERROR_MESSAGES.INPUT.NO_POSITIVE);
+      throw new Error(ERROR_MESSAGES.LOTTO.NO_POSITIVE);
     }
   }
 

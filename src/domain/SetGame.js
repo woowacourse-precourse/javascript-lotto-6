@@ -13,7 +13,7 @@ class SetGame {
     this.#lottos = [];
     this.#validate(buyAmount);
     this.#buyAmount = buyAmount;
-    this.#buyNumber - buyAmount / LOTTO_RULE.UNIT;
+    this.#buyNumber = buyAmount / LOTTO_RULE.UNIT;
     this.#issueLotto();
     this.lottoUtils = new LottoUtils(this.#lottos);
   }
@@ -23,7 +23,7 @@ class SetGame {
   }
   // 로또 발행하여 배열로 저장
   #issueLotto() {
-    for (let i = 0; i < this.#buyAmount; i++) {
+    for (let i = 0; i < this.#buyNumber; i++) {
       const lotto = new Lotto(Utils.generateRandomNumbers());
       this.#lottos.push(lotto);
     }
@@ -54,8 +54,8 @@ class SetGame {
   // 수익률 계산
   calcProfit(winningStatus) {
     let sumProfit = 0;
-    for (let i in winningStatus) {
-      sumProfit += WINNING_PROFITS[i] * winningStatus[i];
+    for (let winningNumber in winningStatus) {
+      sumProfit += WINNING_PROFITS[winningNumber] * winningStatus[winningNumber];
     }
     const profit = ((sumProfit / this.#buyAmount) * 100).toFixed(1);
     return profit;
