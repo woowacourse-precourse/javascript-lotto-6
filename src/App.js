@@ -1,8 +1,10 @@
-import { Console } from "@woowacourse/mission-utils";
+import {Console, MissionUtils} from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 
 class App {
   async play() {
     const COUNT = await this.getPurchaseAmount();
+    const TICKETS = this.createUniqueRandomNums(COUNT);
 
   }
 
@@ -16,12 +18,22 @@ class App {
     return COUNT;
   }
 
+  // 구입금액으로 몇개의 로또를 구매했는지 출력해주는 메서드
   printLottoCounts(COUNT) {
     Console.print(`${COUNT}개를 구매했습니다.`)
   }
 
-  // createUniqueRandomNums
   // 중복되지 않는 랜덤 숫자 6개를 생성해주는 메서드
+  createUniqueRandomNums(COUNT) {
+    const TICKETS = [];
+    for(let i = 0; i<COUNT; i++){
+      const UNIQUENUMS = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const TICKET = new Lotto(UNIQUENUMS);
+      TICKETS.push(TICKET);
+    }
+    return TICKETS;
+  }
+
   // printLottoNums
   // 생성된 로또의 번호를 출력하는 메서드
   // getWinningNum
