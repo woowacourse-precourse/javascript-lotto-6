@@ -14,14 +14,16 @@ class Controller {
 
   #bonusNumber;
 
+  #tickets;
+
   async progress() {
     await this.#handlerErrorAndProceed(this.#getPurchaseAmount);
-    const tickets = await this.#getLottoTicketList();
-    this.#displayLottoTicket(tickets);
+    this.#tickets = await this.#getLottoTicketList();
+    this.#displayLottoTicket(this.#tickets);
     await this.#handlerErrorAndProceed(this.#getWinningNumbers);
     await this.#handlerErrorAndProceed(this.#getBonusNumber);
     const matchStatus = await this.#getMatchStatus(
-      tickets,
+      this.#tickets,
       this.#winningNumbers,
       this.#bonusNumber,
     );
@@ -55,10 +57,15 @@ class Controller {
   async #getWinningNumbers() {
     this.inputWinningNumbers = await InputView.readLottoWinningNumbers();
     this.#validateWinningNumbers(this.inputWinningNumbers);
-    this.inputWinningNumbers = this.inputWinningNumbers.replace(/\s/g, '');
-    this.inputWinningNumbers = this.inputWinningNumbers.split(',');
-    this.inputWinningNumbers = this.inputWinningNumbers.map((number) => Number(number));
+    this.inputWinningNumbers = this.#convertWinningNumbers(this.inputWinningNumbers);
     this.#winningNumbers = new Lotto(this.inputWinningNumbers).winningNumbers;
+  }
+
+  #convertWinningNumbers(inputValue) {
+    return inputValue
+      .replace(/\s/g, '')
+      .split(',')
+      .map((number) => Number(number));
   }
 
   #validateWinningNumbers(inputWinningNumbers) {
