@@ -5,6 +5,8 @@ const Validate = {
   PurchaseAmount(purchaseAmount) {
     if (purchaseAmount % 1000 !== 0) {
       throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT);
+    } else if (Number.isNaN(purchaseAmount)) {
+      throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
     }
   },
 
@@ -13,9 +15,9 @@ const Validate = {
       throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
     } else if (this.checkSameNumber(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.INPUT_SAME_NUMB);
-    } else if (winningNumbers.length < 6) {
+    } else if (winningNumbers.length < 6 || winningNumbers.length > 6) {
       throw new Error(ERROR_MESSAGE.NOT_INPUT_6);
-    } else if (!this.checkBounds(winningNumbers)) {
+    } else if (this.checkBounds(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
     }
   },
@@ -38,11 +40,11 @@ const Validate = {
   checkBounds(winningNumbers) {
     winningNumbers.forEach((number) => {
       if (number < COMMON_VALUE.MIN || number > COMMON_VALUE.MAX) {
-        return false;
+        return true;
       }
     });
 
-    return true;
+    return false;
   },
 };
 
