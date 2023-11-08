@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=rounded&height=120&text=우테코%20프리코스%203주차%20미션%20|%20로또%20🎟️&color=ffffff&fontColor=121212&fontSize=35)
+![header](https://capsule-render.vercel.app/api?type=rounded&height=120&text=우테코%20프리코스%203주차%20미션%20|%20로또%20🎟️&color=fffded&fontColor=343434&fontSize=35)
 <br/>
 
 ## 📒 목차
@@ -143,7 +143,7 @@
 <tr>
 <td><b>service</b></td>
 <td><b>LottoYieldCalculator</b></td>
-<td>service</td>
+<td>당첨 통계과 수익률을 계산</td>
 </tr>
   <tr>
     <td rowspan="2"><b>view</b></td>
@@ -157,15 +157,15 @@
 <tr>
 <td rowspan="3"><b>validator</b></td>
 <td><b>LottoValidator</b></td>
-<td>설명</td>
+<td>로또 번호를 검증</td>
 </tr>
 <tr>
 <td><b>PurchaseAmountValidator</b></td>
-<td>설명</td>
+<td>구입 금액을 검증</td>
 </tr>
 <tr>
 <td><b>DrawnLottoValidator</b></td>
-<td>설명</td>
+<td>당첨 번호와 보너스 번호를 검증</td>
 </tr>
 
 <!-- <tr>
@@ -219,14 +219,14 @@
       <th>중앙 집중식 설정 관리 </th>
   </tr>
    <tr>
-   <td>클래스를 통해 모든 설정을 관리하여 설정 값의 중복 사용을 방지하고 일관성을 유지한다.</td>
+   <td>클래스를 통해 모든 설정을 관리하여 설정 값의 중복 사용을 방지하고 일관성을 유지</td>
   </tr>
   </tr>
   <tr>
   <th>유지보수 용이성 </th>
   </tr>
    <tr>
-   <td> 설정 값이나 게임 규칙 변경 시 LottoSettings 클래스만 수정하면 된다.</td>
+   <td> 설정 값이나 게임 규칙 변경 시 LottoSettings 클래스만 수정하면 된다</td>
   </tr>
 
 </table>
