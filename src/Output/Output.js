@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import PRINT_MESSAGE from "../constant/PrintMessage";
+import STATIC_RESULT from "../constant/StaticResult";
 
 const Output = {
   printLottoCount(lottoCount) {
@@ -13,19 +14,9 @@ const Output = {
   },
 
   printResultStatistic(winningStatic) {
-    Console.print("\n당첨통계\n---");
+    Console.print(PRINT_MESSAGE.WINNING_STATS);
     for (let i = 0; i < winningStatic.length; i++) {
-      Console.print(
-        `${
-          [
-            "3개 일치 (5,000원) - ",
-            "4개 일치 (50,000원) - ",
-            "5개 일치 (1,500,000원) - ",
-            "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
-            "6개 일치 (2,000,000,000원) - ",
-          ][i]
-        }${winningStatic[4 - i]}개`
-      );
+      Console.print(`${STATIC_RESULT[i]}${winningStatic[4 - i]}개`);
     }
   },
 };
