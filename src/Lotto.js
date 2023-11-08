@@ -5,8 +5,6 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    Lotto.#validateNumbersInRange(numbers, 1, 45);
-    Lotto.#validateHasNoDuplicate(numbers);
     this.#numbers = Lotto.sortInAscendingOrder(numbers);
   }
 
@@ -24,6 +22,12 @@ class Lotto {
   }
 
   #validate(numbers) {
+    this.#validateLengthSix(numbers);
+    Lotto.#validateNumbersInRange(numbers, 1, 45);
+    Lotto.#validateHasNoDuplicate(numbers);
+  }
+
+  #validateLengthSix(numbers) {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }

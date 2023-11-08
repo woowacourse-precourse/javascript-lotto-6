@@ -10,7 +10,7 @@ class LottoAnswer {
     LottoAnswer.#validateIsLotto(answerLotto);
     this.#answerLotto = answerLotto;
     const parsedBonusNumber = LottoAnswer.#parseSingleLottoNumber(bonusNumber);
-    this.#validateBonusNumber(parsedBonusNumber);
+    this.#validateNotInLottoAnswer(parsedBonusNumber);
     this.#bonusNumber = parsedBonusNumber;
   }
 
@@ -26,6 +26,22 @@ class LottoAnswer {
     return PRIZE_FOR_COUNT[correctCount];
   }
 
+  static #validateIsLotto(value) {
+    if (!value instanceof Lotto) {
+      throw new Error("[ERROR] 로또 객체가 아닌 값이 인자로 들어왔습니다.");
+    }
+  }
+
+  static #parseSingleLottoNumber(input) {
+    return LottoNumbersParser.parse(input)[0];
+  }
+
+  #validateNotInLottoAnswer(number) {
+    if (this.#answerLotto.has(number)) {
+      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 겹칠 수 없습니다.");
+    }
+  }
+
   #getLottoResult(lotto) {
     const lottoNumbers = lotto.getNumbers();
     const answerNumbers = this.#answerLotto.getNumbers();
@@ -38,27 +54,6 @@ class LottoAnswer {
 
   static #countIntersection(array, targetArray) {
     return array.reduce((acc, element) => (targetArray.includes(element) ? acc + 1 : acc), 0);
-  }
-
-  static #validateIsLotto(value) {
-    if (!value instanceof Lotto) {
-      throw new Error("[ERROR] 로또 객체가 아닌 값이 인자로 들어왔습니다.");
-    }
-  }
-
-  static #parseSingleLottoNumber(input) {
-    return LottoNumbersParser.parse(input)[0];
-  }
-
-  #validateBonusNumber(number) {
-    validateNumberInRange(number, 1, 45);
-    this.#validateNotInLottoAnswer(number);
-  }
-
-  #validateNotInLottoAnswer(number) {
-    if (this.#answerLotto.has(number)) {
-      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 겹칠 수 없습니다.");
-    }
   }
 }
 
