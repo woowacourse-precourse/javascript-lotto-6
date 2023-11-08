@@ -26,6 +26,7 @@ class LottoGame {
         Validation.isNumber(amountStr, ERROR_MSG.AMOUNT_FORMAT_ERROR);
         amount = Number(amountStr);
         Validation.isDivisible(amount);
+        
         flag = true;
       } catch(e) {
         IO.printMsg(e.message);
@@ -54,6 +55,7 @@ class LottoGame {
         Validation.isDuplicate(winningArr);
         winningArr.forEach(el => Validation.isNumber(el, ERROR_MSG.WINNING_FORMAT_ERROR));
         winningArr.forEach(el => Validation.isValidLottoNum(el));
+
         flag = true;
       } catch(e) {
         IO.printMsg(e.message);
@@ -63,12 +65,22 @@ class LottoGame {
     
     this.#winnings = winningArr.map(el => {return Number(el)});
 
-    const bonusStr = await IO.receiveUserInput(NORMAR_MSG.BONUS_INPUT);
-    Validation.isNumber(bonusStr, ERROR_MSG.BONUS_FORMAT_ERROR);
-    
-    this.#bonus = Number(bonusStr);
-    Validation.isValidLottoNum(this.#bonus);
-    Validation.isBonusInWinning(this.#winnings, this.#bonus);
+    flag = false;
+    let bonusStr = '';
+    do {
+      try {
+        bonusStr = await IO.receiveUserInput(NORMAR_MSG.BONUS_INPUT);
+        Validation.isNumber(bonusStr, ERROR_MSG.BONUS_FORMAT_ERROR);
+        
+        this.#bonus = Number(bonusStr);
+        Validation.isValidLottoNum(this.#bonus);
+        Validation.isBonusInWinning(this.#winnings, this.#bonus);
+
+        flag = true;
+      } catch(e) {
+        IO.printMsg(e.message);
+      }
+    } while(!flag);
 
     const resultObj = this.checkMatching();
 
