@@ -1,4 +1,4 @@
-import { Console, MissionUtils, Random } from "@woowacourse/mission-utils";
+import { Console, MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE, MESSAGE_INPUT, ERROR_MESSAGE, PRIZE } from "./constants/constant.js";
 
 class App {
@@ -52,9 +52,7 @@ class App {
       let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       randomNums.sort((a, b) => a - b); // 오름차순 정렬
       
-      if (randomNums.length !== new Set(randomNums).size) {
-        throw new Error(ERROR_MESSAGE.INVALID_ERROR);
-      }
+      this.checkDuplicateNums(randomNums);
 
       let randomNumsString = String(randomNums);
       let printedString = '';
@@ -72,6 +70,12 @@ class App {
     }
     return this.userRandomList;
   };
+
+  checkDuplicateNums(nums) {
+    if (nums.length !== new Set(nums).size) {
+      throw new Error(ERROR_MESSAGE.INVALID_ERROR);
+    }
+  }
 
   async getWinningNumbers(numRangePattern) {
     let winningNumsList;
