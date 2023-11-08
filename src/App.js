@@ -37,6 +37,7 @@ class App {
       this.play();
       return;
     }
+
     // 입력받은 가격에 대해 로또 생성
     this.buyLottos(price);
 
@@ -96,7 +97,7 @@ class App {
     }
   }
 
-  //결과 출력 함수
+  //결과 계산 함수
   calResult() {
     for (const ticket of this.lottos) {
       let count = ticket.answerCount(this.answer);
@@ -115,6 +116,8 @@ class App {
       }
     }
   }
+
+  //결과 출력 함수
   printResult() {
     MissionUtils.Console.print("당첨 통계");
     MissionUtils.Console.print("---");
@@ -130,6 +133,7 @@ class App {
       `6개 일치 (2,000,000,000원) - ${this.sixCorrect}개`
     );
   }
+
   //보너스 번호 입력
   async BonusInput() {
     try {
@@ -147,6 +151,7 @@ class App {
       return;
     }
   }
+
   //수익률 계산 함수
   calProfitRate(
     price,
