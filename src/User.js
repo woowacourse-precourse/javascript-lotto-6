@@ -5,6 +5,9 @@ class User {
 
   #winningNumbers;
 
+  #bonusNumber;
+
+  //   구입 금액
   async inputMoney() {
     const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
@@ -52,6 +55,33 @@ class User {
 
   get winningNumbers() {
     return this.#winningNumbers;
+  }
+
+  async inputBonusNumber() {
+    const number = await Console.readLineAsync(
+      '\n보너스 번호를 입력해 주세요.\n',
+    );
+
+    const bonusNumber = Number(number);
+    if (!this.#bonusNumberValidate(bonusNumber)) {
+      Console.print('[ERROR] 보너스 번호가 잘못된 형식입니다.');
+      return this.inputBonusNumber();
+    }
+
+    this.#bonusNumber = bonusNumber;
+  }
+
+  #bonusNumberValidate(number) {
+    return (
+      Number.isInteger(number) &&
+      number > 0 &&
+      number <= 45 &&
+      !this.#winningNumbers.includes(number)
+    );
+  }
+
+  get bonusNumber() {
+    return this.#bonusNumber;
   }
 }
 
