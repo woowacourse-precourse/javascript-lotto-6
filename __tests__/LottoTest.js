@@ -1,4 +1,5 @@
 import Lotto from '../src/Lotto.js';
+import PRIZE from '../src/constants/Prize.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -41,5 +42,37 @@ describe('로또 클래스 테스트', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, -1]);
     }).toThrow('[ERROR]');
+  });
+});
+
+describe('발행한 로또 번호와 추첨한 로또 번호 일치에 따른 상금 반환 테스트', () => {
+  let lotto;
+  beforeEach(() => {
+    lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+  });
+
+  test('로또 번호 6개 일치', () => {
+    const prize = lotto.compareLotto([1, 2, 3, 4, 5, 6], 7);
+    expect(prize).toBe(PRIZE.six);
+  });
+
+  test('로또 번호 5개 일치', () => {
+    const prize = lotto.compareLotto([1, 2, 3, 4, 5, 8], 7);
+    expect(prize).toBe(PRIZE.five);
+  });
+
+  test('로또 번호 5개, 보너스번호 일치', () => {
+    const prize = lotto.compareLotto([1, 2, 3, 4, 5, 8], 6);
+    expect(prize).toBe(PRIZE.fivePlus);
+  });
+
+  test('로또 번호 4개 일치', () => {
+    const prize = lotto.compareLotto([1, 2, 3, 4, 8, 9], 7);
+    expect(prize).toBe(PRIZE.four);
+  });
+
+  test('로또 번호 3개 일치', () => {
+    const prize = lotto.compareLotto([1, 2, 3, 8, 9, 10], 7);
+    expect(prize).toBe(PRIZE.three);
   });
 });
