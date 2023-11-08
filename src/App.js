@@ -5,6 +5,7 @@ import Input from './Input.js';
 import PurchasedLotto from './PurchasedLotto.js';
 import IssuedLotto from './IssuedLotto.js';
 import Lotto from './Lotto.js';
+import BonusBall from './BonusBall.js';
 
 class App {
   async play() {
@@ -12,6 +13,7 @@ class App {
       const input = new Input();
       const issuedLottos = await this.buyAndIssueLottos(input);
       const winningLotto = await this.getWinningLotto(input);
+      const bonusBall = await this.getBonusBall(input);
     } catch (err) {
       throw new Error(`[ERROR] ${err}`);
     }
@@ -43,7 +45,7 @@ class App {
   }
 
   async getWinningNumbersFromUser(input) {
-    const winningLottoNumbers = await input.inputChangeToArr('당첨번호를 입력해주세요\n');
+    const winningLottoNumbers = await input.inputChangeToArr('\n당첨번호를 입력해주세요\n');
     return winningLottoNumbers;
   }
 
@@ -51,6 +53,17 @@ class App {
     const winningLottoNumbers = await this.getWinningNumbersFromUser(input);
     const winningLotto = new Lotto(winningLottoNumbers);
     return winningLotto;
+  }
+
+  async getBonusBallFromUser(input) {
+    const bonusBall = await input.inputChangeToArr('\n보너스 번호를 입력해주세요\n');
+    return bonusBall;
+  }
+
+  async getBonusBall(input) {
+    const inputBonusBall = await this.getBonusBallFromUser(input);
+    const bonusBall = new BonusBall(inputBonusBall);
+    return bonusBall.getBonusBall();
   }
 }
 

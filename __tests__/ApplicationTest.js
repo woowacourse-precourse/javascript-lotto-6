@@ -78,9 +78,9 @@ describe('로또 테스트', () => {
     });
   });
 
-  // test('예외 테스트', async () => {
-  //   await runException('1000j');
-  // });
+  test('예외 테스트', async () => {
+    await runException('1000j');
+  });
 });
 
 describe('구입로또 클래스 테스트', () => {
