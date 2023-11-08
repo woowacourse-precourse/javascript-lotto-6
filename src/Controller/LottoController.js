@@ -44,7 +44,6 @@ class LottoController {
       this.#winningNumber.getWinningNumber()
     );
     this.#winningNumber = new BonusNumber(bonusNumber);
-    Console.print(this.#winningNumber.getBonusNumber());
   }
 }
 
