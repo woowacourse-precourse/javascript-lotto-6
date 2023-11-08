@@ -10,6 +10,7 @@ class Lotto {
 
   #validate(numbers) {
     Validation.isLottoNumbersValidated(numbers);
+    return this;
   }
 
   getLottoNumbers() {
