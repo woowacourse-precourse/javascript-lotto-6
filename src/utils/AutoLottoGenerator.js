@@ -1,10 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import AutoLottoValidator from './AutoLottoValidator.js';
-import {
-  COUNT,
-  DEFAULT_NUM,
-  LOTTO_NUM_RANGE,
-} from '../constants/conditions.js';
+import AutoLottoValidator from './AutoLottoValidator';
+import { COUNT, DEFAULT_NUM, LOTTO_NUM_RANGE } from '../constants/conditions';
 
 const { min, max, length } = LOTTO_NUM_RANGE;
 const { minus } = COUNT;

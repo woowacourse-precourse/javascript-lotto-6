@@ -3,7 +3,7 @@ import {
   DEFAULT_NUM,
   IS_BOUNS_INDEX,
   MATCH_COUNTS,
-} from './constants/conditions.js';
+} from './constants/conditions';
 
 export default class WinningResult {
   #matchingTable = {

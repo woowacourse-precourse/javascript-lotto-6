@@ -1,4 +1,4 @@
-import { PRIZE_MONEY } from './conditions.js';
+import { PRIZE_MONEY } from './conditions';
 
 const PRIZE = Object.freeze({
   three: PRIZE_MONEY.fifth,

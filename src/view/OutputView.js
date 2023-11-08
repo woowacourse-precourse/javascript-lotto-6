@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { LOTTO_END, LOTTO_START, RESULT_MESSAGE } from '../constants/output.js';
+import { LOTTO_END, LOTTO_START, RESULT_MESSAGE } from '../constants/output';
 
 const OutputView = {
   printError(message) {

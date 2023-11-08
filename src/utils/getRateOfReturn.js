@@ -2,8 +2,8 @@ import {
   DEFAULT_NUM,
   LOTTO_TICKET_PRICE,
   PERCENTAGE,
-} from '../constants/conditions.js';
-import PRIZE from '../constants/rankingPrize.js';
+} from '../constants/conditions';
+import PRIZE from '../constants/rankingPrize';
 
 export default function getRateOfReturn(matchingTable, purchaseAmount) {
   const inputMoney = purchaseAmount * LOTTO_TICKET_PRICE;

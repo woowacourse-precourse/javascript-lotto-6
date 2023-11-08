@@ -1,8 +1,5 @@
-import {
-  LOTTO_NUM_RANGE,
-  LOTTO_TICKET_PRICE,
-} from '../constants/conditions.js';
-import ERROR_MESSAGE from '../constants/error.js';
+import { LOTTO_NUM_RANGE, LOTTO_TICKET_PRICE } from '../constants/conditions';
+import ERROR_MESSAGE from '../constants/error';
 
 export default class InputValidator {
   static #isNumber(input) {

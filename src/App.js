@@ -1,17 +1,17 @@
-import Bonus from './Bonus.js';
-import Lotto from './Lotto.js';
-import InputValidator from './utils/InputValidator.js';
-import AutoLottoGenerator from './utils/AutoLottoGenerator.js';
-import InputView from './view/InputView.js';
-import OutputView from './view/OutputView.js';
+import Bonus from './Bonus';
+import Lotto from './Lotto';
+import InputValidator from './utils/InputValidator';
+import AutoLottoGenerator from './utils/AutoLottoGenerator';
+import InputView from './view/InputView';
+import OutputView from './view/OutputView';
 import {
   COUNT,
   DEFAULT_NUM,
   LOTTO_TICKET_PRICE,
   MATCH_COUNTS,
-} from './constants/conditions.js';
-import WinningResult from './WinningResult.js';
-import getRateOfReturn from './utils/getRateOfReturn.js';
+} from './constants/conditions';
+import WinningResult from './WinningResult';
+import getRateOfReturn from './utils/getRateOfReturn';
 
 class App {
   #winningLotto;

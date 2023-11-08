@@ -1,4 +1,4 @@
-import InputValidator from './utils/InputValidator.js';
+import InputValidator from './utils/InputValidator';
 
 export default class Bonus {
   #bonus;
