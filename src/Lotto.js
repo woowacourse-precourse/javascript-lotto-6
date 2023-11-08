@@ -26,26 +26,28 @@ class Lotto {
     numbers.forEach((number) => Validate.checkNumberRange(number));
   }
 
+  #choosePrize(number, bonus) {
+    switch (number) {
+      case 6:
+        return PRIZE.six;
+      case 5:
+        if (this.#numbers.includes(bonus)) {
+          return PRIZE.fivePlus;
+        }
+        return PRIZE.five;
+      case 4:
+        return PRIZE.four;
+      case 3:
+        return PRIZE.three;
+      default:
+        return 0;
+    }
+  }
+
   compareLotto(answer, bonus) {
     const correct = this.#numbers.filter((number) => answer.includes(number));
-
     const number = correct.length;
-    if (number === 6) {
-      return PRIZE.six;
-    }
-    if (number === 5 && this.#numbers.includes(bonus)) {
-      return PRIZE.fivePlus;
-    }
-    if (number === 5) {
-      return PRIZE.five;
-    }
-    if (number === 4) {
-      return PRIZE.four;
-    }
-    if (number === 3) {
-      return PRIZE.three;
-    }
-    return 0;
+    return this.#choosePrize(number, bonus);
   }
 }
 
