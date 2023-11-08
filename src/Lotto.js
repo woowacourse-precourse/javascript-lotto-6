@@ -16,6 +16,26 @@ class Lotto {
   showNumber() {
     console.log(this.#numbers);
   }
+
+  checkWinStatus(winningNumbers, bonusNumber) {
+    if (winningNumbers.length !== 6) {
+      throw new Error("[ERROR] 당첨 번호는 6개여야 합니다.");
+    }
+
+    let matches = 0;
+
+    for (let i = 0; i < winningNumbers.length; i++) {
+      if (this.#numbers.includes(winningNumbers[i])) {
+        matches++;
+      }
+    }
+
+    if (matches === 5 && this.#numbers.includes(bonusNumber)) {
+      return 7;
+    }
+
+    return matches;
+  }
 }
 
 export default Lotto;

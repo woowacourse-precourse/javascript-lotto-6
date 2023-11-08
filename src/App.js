@@ -38,7 +38,16 @@ class App {
     Console.print("");
     Console.print("보너스 번호를 입력해 주세요.");
     let bonusNumber = await Console.readLineAsync("");
+    if (isNaN(bonusNumber)) {
+      throw new Error("[ERROR] 숫자만 입력할 수 있습니다.");
+    }
     bonusNumber = parseInt(bonusNumber);
+
+    for (let i = 0; i < lottoInstances.length; i++) {
+      console.log(
+        lottoInstances[i].checkWinStatus(winningNumbers, bonusNumber)
+      );
+    }
   }
 }
 
