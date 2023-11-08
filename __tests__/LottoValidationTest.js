@@ -1,6 +1,6 @@
 import Lotto from "../src/Lotto.js";
 import { ERROR_MESSAGES } from "../src/LottoValidation.js";
-import InputError from "../src/errors/InputError.js";
+import { LottoNumbersError } from "../src/errors/index.js";
 
 describe("로또 유효성 검사 클래스 테스트", () => {
   test.each([
@@ -13,7 +13,7 @@ describe("로또 유효성 검사 클래스 테스트", () => {
       // when & then
       expect(() => {
         new Lotto(inputs);
-      }).toThrow(new InputError(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE));
+      }).toThrow(new LottoNumbersError(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE));
     }
   );
 
@@ -24,7 +24,7 @@ describe("로또 유효성 검사 클래스 테스트", () => {
     // when & then
     expect(() => {
       new Lotto(numbers);
-    }).toThrow(new InputError(ERROR_MESSAGES.LENGTH_NOT_MATCHED));
+    }).toThrow(new LottoNumbersError(ERROR_MESSAGES.LENGTH_NOT_MATCHED));
   });
 
   test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
@@ -34,6 +34,6 @@ describe("로또 유효성 검사 클래스 테스트", () => {
     // when & then
     expect(() => {
       new Lotto(numbers);
-    }).toThrow(new InputError(ERROR_MESSAGES.DUPLICATED_NUMBERS));
+    }).toThrow(new LottoNumbersError(ERROR_MESSAGES.DUPLICATED_NUMBERS));
   });
 });

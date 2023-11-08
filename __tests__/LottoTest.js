@@ -1,6 +1,22 @@
 import Lotto, { LOTTO_PRICE } from "../src/Lotto.js";
+import { getLogSpy } from "../test-utils/index.js";
 
 describe("로또 클래스 테스트", () => {
+  test("로또 번호를 출력한다.", () => {
+    // given
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const lotto = new Lotto(numbers);
+
+    const logSpy = getLogSpy();
+
+    // when
+    lotto.printNumbers();
+
+    // then
+    const expected = "[1, 2, 3, 4, 5, 6]";
+    expect(logSpy).toHaveBeenCalledWith(expected);
+  });
+
   test("로또의 갯수는 (구매 금액 / 로또 가격) 이다.", () => {
     // given
     const purchasePrice = 3000;
