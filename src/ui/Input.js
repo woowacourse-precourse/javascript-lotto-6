@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { USER_INPUT } from '../constants/Logs';
 import Validation from '../domain/Validation';
-import Lotto from '../domain/Lotto';
+import Lotto from '../Lotto';
 
 export async function getLottoPurchaseAmount() {
   try {

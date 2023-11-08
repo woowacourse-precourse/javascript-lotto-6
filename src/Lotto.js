@@ -1,4 +1,4 @@
-import Validation from './Validation';
+import Validation from './domain/Validation';
 
 class Lotto {
   #numbers;

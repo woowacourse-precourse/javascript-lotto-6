@@ -1,4 +1,4 @@
-import Lotto from '../src/domain/Lotto';
+import Lotto from '../src/Lotto';
 import { ERROR_MESSAGES } from '../src/constants/Errors';
 
 describe('로또 클래스 테스트', () => {
