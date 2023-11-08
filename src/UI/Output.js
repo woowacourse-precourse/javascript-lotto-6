@@ -1,10 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
 
-const FIRST_PRIZE = '2000000000';
-const SECOND_PRIZE = '30000000';
-const THIRD_PRIZE = '1500000';
-const FOURTH_PRIZE = '50000';
-const FIFTH_PRIZE = '5000';
+const FIRST_PRIZE = '2,000,000,000';
+const SECOND_PRIZE = '30,000,000';
+const THIRD_PRIZE = '1,500,000';
+const FOURTH_PRIZE = '50,000';
+const FIFTH_PRIZE = '5,000';
 const THREE_MATCH = 3;
 const FOUR_MATCH = 4;
 const FIVE_MATCH = 5;
