@@ -5,6 +5,7 @@ class App {
   async play() {
     let COUNT, TICKETS, WINNINGNUMS, BONUS, WINLOG;
 
+
     while (true) {
       try {
         COUNT = await this.getPurchaseAmount();
