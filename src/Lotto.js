@@ -1,3 +1,4 @@
+import { LOTTO_BUSINESS_RULES } from "./constants/lotto.js";
 import { validateNumberInRange } from "./utils/validators.js";
 
 class Lotto {
@@ -24,7 +25,8 @@ class Lotto {
 
   #validate(numbers) {
     this.#validateLengthSix(numbers);
-    Lotto.#validateNumbersInRange(numbers, 1, 45);
+    const { minNumber, maxNumber } = LOTTO_BUSINESS_RULES;
+    Lotto.#validateNumbersInRange(numbers, minNumber, maxNumber);
     Lotto.#validateHasNoDuplicate(numbers);
   }
 
