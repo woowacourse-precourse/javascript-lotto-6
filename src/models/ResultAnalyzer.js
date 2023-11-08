@@ -9,6 +9,10 @@ class ResultAnalyzer {
 
   #prize;
 
+  #profit;
+
+  #reward;
+
   constructor(winningNumber, bonusNumber, ticketList) {
     this.#winningNumber = winningNumber;
     this.#bonusNumber = bonusNumber;
@@ -17,19 +21,27 @@ class ResultAnalyzer {
       3: 0,
       4: 0,
       5: 0,
-      6: 0,
       bonus: 0,
+      6: 0,
     };
+    this.#reward = [5000, 50000, 1500000, 30000000, 2000000000];
+    this.#profit = 0;
   }
 
   getResult() {
     this.findResult();
+    const result = {
+      prize: this.#prize,
+      profit: this.#profit,
+    };
+    return result;
   }
 
   findResult() {
     this.#ticketList.forEach((ticket) => {
       this.countCorrect(ticket);
     });
+    this.calculateProfit();
   }
 
   countCorrect(ticket) {
@@ -45,6 +57,19 @@ class ResultAnalyzer {
     if (count > 2) {
       this.#prize.count += 1;
     }
+  }
+
+  calculateProfit() {
+    const prizeNumber = Object.values(this.#prize);
+    const profit = prizeNumber.map(
+      (number, index) => number * this.#reward[index],
+    );
+    const sum = profit.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0,
+    );
+    const pay = this.#ticketList.length;
+    this.#profit = (sum / pay).toFixed(1);
   }
 }
 

@@ -43,7 +43,8 @@ class Lotto {
   }
 
   getResult() {
-    this.#resultAnalizer.getResult();
+    const result = this.#resultAnalizer.getResult();
+    return result;
   }
 }
 
