@@ -1,9 +1,9 @@
 export const message = Object.freeze({
   ENTER_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
-  ENTER_WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-  ENTER_BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
-  PRINT_PURCHASE_AMOUNT: '개를 구매했습니다.\n',
-  PRINT_WIN_STATISTICS: '당첨 통계',
+  ENTER_WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  ENTER_BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
+  PRINT_PURCHASE_AMOUNT: '개를 구매했습니다.',
+  PRINT_WIN_STATISTICS: '\n당첨 통계',
   PRINT_DIVIDER: '---',
   PRINT_MATCH_3: '3개 일치 (5,000원) - ',
   PRINT_MATCH_4: '4개 일치 (50,000원) - ',
