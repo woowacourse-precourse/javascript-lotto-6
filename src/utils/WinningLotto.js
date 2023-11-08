@@ -40,8 +40,7 @@ class WinningLotto {
   }
 
   compareNumbers(myLottos, winningArr) {
-    const mainLotto = winningArr[0];
-    const bonusLotto = winningArr[1];
+    const [mainLotto, bonusLotto] = winningArr;
     let places = [];
     myLottos.map((lotto) => {
       const sameNumbers = lotto.filter((num) => mainLotto.includes(num));
