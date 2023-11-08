@@ -21,4 +21,18 @@ describe('로또 게임 서비스 클래스 테스트', () => {
 
     expect(publishedLottos.length).toStrictEqual(expected);
   });
+
+  test('당첨 번호와 일치하는 숫자의 개수를 구한다.', () => {
+    const publishedLotto = [1, 2, 3, 4, 5, 9];
+    const winningNumbers = [1, 2, 3, 4, 5, 7];
+    const bonusNumber = 9;
+    const expected = 7;
+    const matchingNumbers = lottoGameService.getMatchingNumbers(
+      publishedLotto,
+      winningNumbers,
+      bonusNumber,
+    );
+
+    expect(matchingNumbers).toStrictEqual(expected);
+  });
 });

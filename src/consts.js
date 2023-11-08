@@ -37,4 +37,6 @@ export const condition = Object.freeze({
   oneLottoPrice: 1000,
   correctRemain: 0,
   lottoNumbersLength: 6,
+  bonusNumberLength: 1,
+  bonusNumberChance: 5,
 });
