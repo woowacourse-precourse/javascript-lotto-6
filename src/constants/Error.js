@@ -7,4 +7,5 @@ export const ERROR = Object.freeze({
   amountUnit: '[ERROR] 로또 구입 금액은 1000원 단위여야 합니다.',
   bonusNumber: '[ERROR] 보너스 번호는 숫자여야 합니다.',
   bonusRange: '[ERROR] 보너스 번호는 1~45 사이여야 합니다.',
+  amountNull: '[ERROR] 투자 금액이 0입니다.',
 });

@@ -1,6 +1,8 @@
 import { MAGIC_NUMBER } from '../constants/MagicNumber.js';
+import { ERROR } from '../constants/Error.js';
 
 export default function ROI(amount, winningNumber) {
+  if (amount === 0) throw new Error(ERROR.amountNull);
   const prize = [
     MAGIC_NUMBER.prizeFifth,
     MAGIC_NUMBER.prizeFourth,
