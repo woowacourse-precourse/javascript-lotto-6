@@ -2,6 +2,15 @@ import { ERROR_MESSAGES } from '../constants/messages.js';
 import CONSTANT_VALIDATE_NUMBER from '../constants/validate.js';
 import CustomError from '../errors/CustomError.js';
 
+const validateWinningNumbers = (winningNumbers) => {
+  let flag =
+    checkInteger(winningNumbers) && checkDuplicate(winningNumbers) && checkLength(winningNumbers) && checkMax(winningNumbers) && checkMin(winningNumbers);
+
+  return flag;
+};
+
+export default validateWinningNumbers;
+
 const checkInteger = (winningNumbers) => {
   const integerFlag = winningNumbers.every((number) => Number.isInteger(number));
   if (!integerFlag) throw new CustomError(ERROR_MESSAGES.winningNumbersAndBonusNumber.winningNumbersType);
@@ -36,12 +45,3 @@ const checkMax = (winningNumbers) => {
 
   return true;
 };
-
-const validateWinningNumbers = (winningNumbers) => {
-  let flag =
-    checkInteger(winningNumbers) && checkDuplicate(winningNumbers) && checkLength(winningNumbers) && checkMax(winningNumbers) && checkMin(winningNumbers);
-
-  return flag;
-};
-
-export default validateWinningNumbers;
