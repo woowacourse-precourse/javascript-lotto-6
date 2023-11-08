@@ -3,6 +3,8 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#avoidDuplicate(numbers);
+    this.#checkInRange(numbers);
     this.#numbers = numbers;
   }
 
@@ -12,7 +14,32 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  #avoidDuplicate(numbers) {
+    const NUMBERSET = new Set([...numbers]);
+    if (NUMBERSET.size !== 6) {
+      throw new Error("[ERROR] 로또 번호는 중복되지 않은 6개의 숫자여야 합니다.");
+    }
+  }
+
+  #checkInRange(numbers) {
+    const ISINRANGE = numbers.every(num => {
+      if(1 <= num && num <= 45)
+        return true;
+    });
+    if(!ISINRANGE) {
+      throw new Error("[ERROR] 로또 번호는 1이상, 45이하의 숫자여야 합니다.");
+    }
+  }
+
+  sortNumbers(){
+    this.#numbers.sort((a, b) => a - b);
+    return this;
+  }
+
+  returnNumbers() {
+    return this.#numbers;
+  }
+
 }
 
 export default Lotto;
