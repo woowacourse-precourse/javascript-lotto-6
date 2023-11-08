@@ -3,7 +3,16 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import LottoManagement from "./LottoManagement.js";
 import LottoResultChecker from "./LottoResultChecker.js";
-const LOTTO_PRICE = 1000;
+import {
+  LOTTO_MAX_NUMBER,
+  LOTTO_MIN_NUMBER,
+  LOTTO_PRICE,
+  THREE_MATCH_PRICE,
+  FOUR_MATCH_PRICE,
+  FIVE_MATCH_PRICE,
+  FIVE_AND_BONUS_MATCH_PRICE,
+  SIX_MATCH_PRICE,
+} from "./constant/lotto.js";
 
 class App {
   constructor() {
@@ -105,7 +114,11 @@ class App {
   }
 
   checkValidateInputBonus(bonus) {
-    if (isNaN(Number(bonus)) || bonus < 1 || bonus > 45) {
+    if (
+      isNaN(Number(bonus)) ||
+      bonus < LOTTO_MIN_NUMBER ||
+      bonus > LOTTO_MAX_NUMBER
+    ) {
       throw new Error(
         "[ERROR] 1부터 45 사이의 숫자 한 개만 입력이 가능합니다."
       );
@@ -130,11 +143,11 @@ class App {
   }
   calculateTotalProfit() {
     const totalProfit =
-      5000 * this.matchingCountsResult.three +
-      10000 * this.matchingCountsResult.four +
-      1500000 * this.matchingCountsResult.five +
-      30000000 * this.matchingCountsResult.fiveAndBonus +
-      2000000000 * this.matchingCountsResult.six;
+      THREE_MATCH_PRICE * this.matchingCountsResult.three +
+      FOUR_MATCH_PRICE * this.matchingCountsResult.four +
+      FIVE_MATCH_PRICE * this.matchingCountsResult.five +
+      FIVE_AND_BONUS_MATCH_PRICE * this.matchingCountsResult.fiveAndBonus +
+      SIX_MATCH_PRICE * this.matchingCountsResult.six;
     return totalProfit;
   }
   roundProfitRate(profitRate) {
