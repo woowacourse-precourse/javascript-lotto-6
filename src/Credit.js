@@ -6,14 +6,14 @@ class Purchase {
     this.credit = 0;
   }
 
-  async getCredit(input) {
+  async getCredit() {
     try {
       const input = await Console.readLineAsync(INPUT.CREDIT);
       this.credit = this.isDividedBy1000(Number(input));
       return this.credit;
     } catch (error) {
       Console.print(error.message);
-      await this.getCredit();
+      return await this.getCredit();
     }
   }
 
