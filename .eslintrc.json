@@ -16,6 +16,7 @@
     "no-await-in-loop": ["off"],
     "prettier/prettier": ["error"],
     "no-console": "error",
+    "no-new": "off",
     "import/extentions": "off",
     "class-methods-use-this": "off",
     "import/no-cycle": "off"
