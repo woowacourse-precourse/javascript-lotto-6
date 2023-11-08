@@ -22,6 +22,9 @@ class Lotto {
       if (typeof number !== 'number' || isNaN(number)) {
         throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.');
       }
+      if (number > 45 || number < 1) {
+        throw new Error('[ERROR] 1-45 사이 숫자를 입력 해 주세요.');
+      }
     }
     if (numbers.some((item) => typeof item === 'string')) {
       throw new Error('[ERROR] 숫자만 입력 해 주세요.');
