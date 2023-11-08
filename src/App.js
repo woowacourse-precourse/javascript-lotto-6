@@ -63,8 +63,7 @@ class App {
     const parsedPurchaseAmount = Number(inputPurchaseAmount);
 
     this.validateAskPurchaseAmount(parsedPurchaseAmount);
-
-    this.createMyLottoList(parsedPurchaseAmount);
+    this.myLottoList = this.createMyLottoList(parsedPurchaseAmount);
   }
 
   validateAskPurchaseAmount(purchaseAmount) {
@@ -79,16 +78,18 @@ class App {
 
   createMyLottoList(parsedPurchaseAmount) {
     this.purchaseCount = parsedPurchaseAmount / CURRENCY_UNIT;
+    const myLottoList = [];
 
     let count = 0;
     while (count < this.purchaseCount) {
       const lottoNumbers = this.createLottoNumbers().sort((a, b) => a - b);
       const lotto = new Lotto(lottoNumbers);
 
-      this.myLottoList.push(lotto);
+      myLottoList.push(lotto);
 
       count += 1;
     }
+    return myLottoList;
   }
 
   createLottoNumbers() {
