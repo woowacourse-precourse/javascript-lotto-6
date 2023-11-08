@@ -13,10 +13,9 @@ class App {
     
     const myLottos = [];
     while(countOfLottos--){
-      const newLotto = Lotto.makeLotto();
-      myLottos.push(newLotto);
+      myLottos.push(Lotto.makeLotto());
     }
-    myLottos.forEach((lotto) => MissionUtils.Console.print(lotto.getLotto()));
+    myLottos.forEach((lotto) => MissionUtils.Console.print(`[${[...lotto.getLotto()].join(", ")}]`));
 
     const winningNumbers = await userInput.getInputWinningNumbers();
     const bonusNumber = await userInput.getInputBonusNumber();

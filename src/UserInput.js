@@ -1,3 +1,4 @@
+import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE, ERROR_MESSAGE } from "./Message.js";
 
@@ -7,24 +8,42 @@ class UserInput{
   #bonusNumber;
 
   async getInputMoney(){
-    const inputMoney = Number(await MissionUtils.Console.readLineAsync(MESSAGE.money));
-    this.#checkMoneyValidation(inputMoney);
-    this.#money = inputMoney;
-    return this.#money;
+    while(true){
+      try{
+        const inputMoney = Number(await MissionUtils.Console.readLineAsync(MESSAGE.money));
+        this.#checkMoneyValidation(inputMoney);
+        this.#money = inputMoney;
+        return this.#money;
+      } catch(error){
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
   
   async getInputWinningNumbers(){
-    const inputNumbers = (await MissionUtils.Console.readLineAsync(MESSAGE.winningNumbers)).split(',').map((element) => Number(element));
-    this.#checkWinningsNumbersValidation(inputNumbers);
-    this.#winningNumbers = inputNumbers;
-    return this.#winningNumbers;
+    while(true){
+      try{
+        const inputNumbers = (await MissionUtils.Console.readLineAsync(MESSAGE.winningNumbers)).split(',').map((element) => Number(element));
+        const lotto = new Lotto(inputNumbers);
+        this.#winningNumbers = lotto.getLotto();
+        return this.#winningNumbers;
+      } catch(error){
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   async getInputBonusNumber(){
-    const inputBonusNumber = Number(await MissionUtils.Console.readLineAsync(MESSAGE.bonusNumber));
-    this.#checkBonusNumberValidation(inputBonusNumber);
-    this.#bonusNumber = inputBonusNumber;
-    return this.#bonusNumber;
+    while(true){
+      try{
+        const inputBonusNumber = Number(await MissionUtils.Console.readLineAsync(MESSAGE.bonusNumber));
+        this.#checkBonusNumberValidation(inputBonusNumber);
+        this.#bonusNumber = inputBonusNumber;
+        return this.#bonusNumber;
+      } catch(error){
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   #checkMoneyValidation(inputMoney){
@@ -33,24 +52,6 @@ class UserInput{
     }
     if(!inputMoney || inputMoney % 1000){
       throw new Error(ERROR_MESSAGE.notMultiplesOf1000);
-    }
-  }
-
-  #checkWinningsNumbersValidation(inputNumbers){
-    if(inputNumbers.length !== 6){
-      throw new Error(ERROR_MESSAGE.notSixNumbers);
-    }
-    inputNumbers.forEach((number) => {
-      if(isNaN(number)){
-        throw new Error(ERROR_MESSAGE.notNumber);
-      }
-      if(number <= 0 || number > 45){
-        throw new Error(ERROR_MESSAGE.notLottoNumbers);
-      }
-    })
-    const set = new Set(inputNumbers);
-    if(set.size !== 6){
-      throw new Error(ERROR_MESSAGE.notUniqueNumbers);
     }
   }
 
