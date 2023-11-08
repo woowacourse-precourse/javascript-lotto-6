@@ -13,10 +13,6 @@ class Lotto {
     return this.#numbers;
   }
 
-  // static #printLottoNumber(numbers) {
-  //   Console.print(`[${numbers.sort((a, b) => a - b).join(', ')}]`);
-  // }
-
   static #validateNumbers(numbers) {
     if (numbers.length !== CONSTANTS.LENGTH_OF_LOTTO) {
       throw new Error(
