@@ -47,6 +47,7 @@ class App {
     for (let i = 0; i < this.#lottos.length; i += 1) {
       this.#lottos[i].printNumbers();
     }
+    MissionUtils.Console.print("\n");
   }
 
   static #isNumbers(numbers) {
@@ -154,6 +155,24 @@ class App {
     }
   }
 
+  printResults() {
+    MissionUtils.Console.print(
+      `3개 일치 (5,000원) - ${this.#winningList[0]}개`,
+    );
+    MissionUtils.Console.print(
+      `4개 일치 (50,000원) - ${this.#winningList[1]}개`,
+    );
+    MissionUtils.Console.print(
+      `5개 일치 (1,500,000원) - ${this.#winningList[2]}개`,
+    );
+    MissionUtils.Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#winningList[3]}개`,
+    );
+    MissionUtils.Console.print(
+      `6개 일치 (2,000,000,000원) - ${this.#winningList[4]}개`,
+    );
+  }
+
   async play() {
     await this.getMoneyInput();
     for (let i = 0; i < this.#money / 1000; i += 1) {
@@ -163,6 +182,7 @@ class App {
     await this.getWinningNumbers();
     await this.getBonusNumber();
     this.checkLottos();
+    this.printResults();
   }
 }
 
