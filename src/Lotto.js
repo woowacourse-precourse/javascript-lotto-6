@@ -30,15 +30,15 @@ class Lotto {
       const BONUS_MATCH = lotto.includes(bonusNumbers);
 
       if (MATCH_COUNT === 6) {
-        STATS[4] += 1;
+        STATS[0] += 1;
       } else if (MATCH_COUNT === 5 && BONUS_MATCH) {
-        STATS[3] += 1;
+        STATS[1] += 1;
       } else if (MATCH_COUNT === 5) {
         STATS[2] += 1;
       } else if (MATCH_COUNT === 4) {
-        STATS[1] += 1;
+        STATS[3] += 1;
       } else if (MATCH_COUNT === 3) {
-        STATS[0] += 1;
+        STATS[4] += 1;
       }
     });
 
