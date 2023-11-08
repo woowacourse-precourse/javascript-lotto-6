@@ -29,11 +29,16 @@ describe('App', () => {
 
         app.matchNumbers(winningNumbers, bonusNumber);
 
-        expect(app.matchedCount[3]).toBe(0);
-        expect(app.matchedCount[4]).toBe(0);
-        expect(app.matchedCount[5]).toBe(0);
-        expect(app.matchedCount['5B']).toBe(0);
-        expect(app.matchedCount[6]).toBe(1);
+        const expectedMatchedCounts = {3: 0, 4: 0, 5: 0, '5B': 0, 6: 1 };
+        for (const [match, count] of Object.entries(expectedMatchedCounts)) {
+            expect(app.matchedCount[match]).toBe(count);
+        }
+
+        // expect(app.matchedCount[3]).toBe(0);
+        // expect(app.matchedCount[4]).toBe(0);
+        // expect(app.matchedCount[5]).toBe(0);
+        // expect(app.matchedCount['5B']).toBe(0);
+        // expect(app.matchedCount[6]).toBe(1);
 
         expect(app.prizeMoney).toBe(2000000000);
     });
