@@ -1,3 +1,8 @@
+import { ERROR_MESSAGE } from '../modules/constant.js';
+import ValidationUtils from '../utils/ValidationUtils.js';
+
+const { checkIsNumber, checkIncludedZero, checkIsDuplicated } = ValidationUtils;
+
 class Lotto {
   #numbers;
 
@@ -7,9 +12,24 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    if (numbers.length !== 6) throw new Error(ERROR_MESSAGE.isNotSixLength);
+
+    const lottoNumberHasCharacter = numbers.filter(
+      (number) => !checkIsNumber(number)
+    );
+
+    if (lottoNumberHasCharacter.length !== 0)
+      throw new Error(ERROR_MESSAGE.isNotNumber);
+
+    const lottoNumbersIncludedZero = checkIncludedZero(numbers);
+    if (lottoNumbersIncludedZero) throw new Error(ERROR_MESSAGE.isNotInRange);
+
+    const lottoNumberIsDuplicated = checkIsDuplicated(numbers);
+    if (lottoNumberIsDuplicated) throw new Error(ERROR_MESSAGE.isDuplicated);
+  }
+
+  getLottoNumbers() {
+    return this.#numbers.sort((a, b) => a - b);
   }
 
   // TODO: 추가 기능 구현
