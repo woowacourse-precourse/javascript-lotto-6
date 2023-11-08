@@ -1,4 +1,4 @@
-import { INPUT_MESSAGE } from '../constants/messages.js';
+import { INPUT_MESSAGE, MATCHING_RANK } from '../constants/messages.js';
 import LottoMaker from '../Model/lottoMaker.js';
 import Lotto from '../Model/Lotto.js';
 import Statics from '../Model/Statics.js';
@@ -22,7 +22,7 @@ class LottoController {
 
 		this.getResult();
 
-		outputView.printMatchingStatics(this.#statics.getRateOfReturn());
+		outputView.printMatchingStatics(this.#statics.getProceed());
 	}
 
 	async initializeLotto() {
@@ -70,6 +70,8 @@ class LottoController {
 		this.numbersMatching();
 		this.bonusNumberMatching();
 		this.getTotalMatchingStatics();
+		this.addProceed();
+		console.log(this.calculateRateOfReturn().toFixed(1));
 	}
 
 	initializeStatics() {
@@ -96,8 +98,20 @@ class LottoController {
 
 	getTotalMatchingStatics() {
 		this.#statics.getMatchingStatics().forEach((statics) => {
-			this.#statics.countRateOfReturn(statics);
+			this.#statics.countProceed(statics);
 		});
+	}
+
+	addProceed() {
+		for (let i = 0; i < 5; i++) {
+			this.#statics.setTotalProceed(
+				this.#statics.getProceed().get(MATCHING_RANK[5 - i].matchingCount) * MATCHING_RANK[5 - i].proceed
+			);
+		}
+	}
+
+	calculateRateOfReturn() {
+		return (this.#statics.getTotalProceed() / (this.#lottoMaker.getAmount() * 1000)) * 100;
 	}
 }
 

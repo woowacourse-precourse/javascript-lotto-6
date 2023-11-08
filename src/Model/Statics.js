@@ -2,11 +2,12 @@ import { MATCHING_RANK } from '../constants/messages.js';
 
 class Statics {
 	#matchingStatics;
-	#rateOfReturn;
+	#proceed;
+	#totalProceed = 0;
 
 	constructor(statics) {
 		this.#matchingStatics = statics;
-		this.#rateOfReturn = new Map([
+		this.#proceed = new Map([
 			[MATCHING_RANK[5].matchingCount, 0],
 			[MATCHING_RANK[4].matchingCount, 0],
 			[MATCHING_RANK[3].matchingCount, 0],
@@ -23,13 +24,21 @@ class Statics {
 		this.#matchingStatics = count;
 	}
 
-	getRateOfReturn() {
-		return this.#rateOfReturn;
+	getProceed() {
+		return this.#proceed;
 	}
 
-	countRateOfReturn(matchCount) {
-		if (this.#rateOfReturn.get(matchCount) != undefined) {
-			this.#rateOfReturn.set(matchCount, this.#rateOfReturn.get(matchCount) + 1);
+	getTotalProceed() {
+		return this.#totalProceed;
+	}
+
+	setTotalProceed(number) {
+		this.#totalProceed += number;
+	}
+
+	countProceed(matchCount) {
+		if (this.#proceed.has(matchCount)) {
+			this.#proceed.set(matchCount, this.#proceed.get(matchCount) + 1);
 		}
 	}
 
