@@ -13,3 +13,9 @@ export const INITIAL_RESULT = Object.freeze({
   2: 0,
   1: 0,
 });
+
+export const CONSTANTS = Object.freeze({
+  errorPrefix: "[ERROR] ",
+  percentPlaceholder: "*",
+  localKr: "ko-KR",
+});

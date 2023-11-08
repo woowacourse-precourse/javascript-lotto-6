@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GUIDE_MESSAGE, WINNING_RESULT_DETAILS } from "../constants/Message";
+import { CONSTANTS } from "../constants/Constant";
 
 const OutputView = {
   printInsertMoneyMessage() {
@@ -26,7 +27,7 @@ const OutputView = {
   },
 
   printError(error) {
-    if (error.message.startsWith("[ERROR]")) {
+    if (error.message.startsWith(CONSTANTS.errorPrefix)) {
       Console.print(error.message);
       return;
     }
@@ -44,8 +45,8 @@ const OutputView = {
     Console.print(`${WINNING_RESULT_DETAILS.FIRST}${result[1]}${GUIDE_MESSAGE.amount}`);
     Console.print(
       GUIDE_MESSAGE.totalReturn.replace(
-        "*",
-        roi.toLocaleString("ko-KR", {
+        CONSTANTS.percentPlaceholder,
+        roi.toLocaleString(CONSTANTS.localKr, {
           minimumFractionDigits: 1,
           maximumFractionDigits: 1,
         }),
