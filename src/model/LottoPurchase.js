@@ -1,21 +1,23 @@
-import MESSAGES from '../constants/messages.js';
+import ERRORMESSAGES from '../constants/errorMessages.js';
 import NUMBERS from '../constants/numbers.js';
 
 class LottoPurchase {
   static validate(purchaseAmount) {
     if (purchaseAmount % NUMBERS.purchaseUnit !== 0) {
       throw new Error(
-        `${MESSAGES.errorHeader}${MESSAGES.nonThousandUnitMessage}`,
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.nonThousandUnitMessage}`,
       );
     }
 
     if (purchaseAmount > NUMBERS.maxPurchaseAmount) {
-      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.inputLimitMessage}`);
+      throw new Error(
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.inputLimitMessage}`,
+      );
     }
 
     if (!purchaseAmount.length) {
       throw new Error(
-        `${MESSAGES.errorHeader}${MESSAGES.emptyPurchaseAmountInput}`,
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.emptyPurchaseAmountInput}`,
       );
     }
   }

@@ -1,4 +1,4 @@
-import MESSAGES from '../constants/messages.js';
+import ERRORMESSAGES from '../constants/errorMessages.js';
 import NUMBERS from '../constants/numbers.js';
 
 class Lotto {
@@ -11,20 +11,20 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== NUMBERS.lottoNumberLength) {
-      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.invalidLength}`);
+      throw new Error(`${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.invalidLength}`);
     }
 
     const lottoNumberRange = number =>
       number >= NUMBERS.minLottoNumber && number <= NUMBERS.maxLottoNumber;
 
     if (!numbers.every(lottoNumberRange)) {
-      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.invalidRange}`);
+      throw new Error(`${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.invalidRange}`);
     }
 
     const deleteDuplication = new Set(numbers);
 
     if (numbers.length !== deleteDuplication.size) {
-      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.duplicatedNumber}`);
+      throw new Error(`${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.duplicatedNumber}`);
     }
   }
 }
