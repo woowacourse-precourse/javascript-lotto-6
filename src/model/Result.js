@@ -1,4 +1,4 @@
-import { LOTTO } from '../constant/constant.js';
+import {  LOTTO_PRIZE } from '../constant/constant.js';
 import { PRIZE_MESSAGE } from '../constant/mesaageFormat.js';
 
 class Result {
@@ -31,11 +31,11 @@ class Result {
   #setTotalPrize() {
     const { firstPrize, secondPrize, thirdPrize, fourthPrize, fifthPrize } = this.#prizeCount;
     const totalPrize =
-      firstPrize * LOTTO.firstPrize +
-      secondPrize * LOTTO.secondPrize +
-      thirdPrize * LOTTO.thirdPrize +
-      fourthPrize * LOTTO.fourthPrize +
-      fifthPrize * LOTTO.fifthPrize;
+      firstPrize * LOTTO_PRIZE.firstPrize +
+      secondPrize * LOTTO_PRIZE.secondPrize +
+      thirdPrize * LOTTO_PRIZE.thirdPrize +
+      fourthPrize * LOTTO_PRIZE.fourthPrize +
+      fifthPrize * LOTTO_PRIZE.fifthPrize;
 
     this.#totalPrize = totalPrize;
   }

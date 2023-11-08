@@ -9,6 +9,9 @@ export const LOTTO = Object.freeze({
   minRange: 1,
   maxRange: 45,
   length: 6,
+});
+
+export const LOTTO_PRIZE = Object.freeze({
   firstPrize: 2000000000,
   secondPrize: 30000000,
   thirdPrize: 1500000,
