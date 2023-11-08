@@ -1,4 +1,4 @@
-import { MESSAGE, NUMBER_OPTIONS } from './Constants.js';
+import { MESSAGE, NUMBER_OPTIONS, PURCHASE_OPTIONS } from './Constants.js';
 
 const Validation = {
   isNumber: (number) => {
@@ -32,7 +32,7 @@ const Validation = {
   },
 
   isValidWinningNumbersLength: (numbers) => {
-    const numbersLength = STANDARD.winningNumbersLength;
+    const numbersLength = NUMBER_OPTIONS.winningLength;
 
     if (numbers.length !== numbersLength) {
       throw new Error(
@@ -42,7 +42,7 @@ const Validation = {
   },
 
   isValidBonusNumberLength: (number) => {
-    const { bonusLength } = STANDARD;
+    const { bonusLength } = NUMBER_OPTIONS;
     const splitedNumber = number.split(',');
 
     if (splitedNumber.length !== bonusLength) {
@@ -53,7 +53,7 @@ const Validation = {
   },
 
   isDividedIntoUnitPrice: (cost) => {
-    const priceUnit = STANDARD.purchaseUnit;
+    const priceUnit = PURCHASE_OPTIONS.unitPrice;
 
     if (cost % priceUnit !== 0 || cost <= 0) {
       throw new Error(
