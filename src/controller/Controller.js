@@ -7,28 +7,27 @@ import Analyzer from '../models/Analyzer.js';
 import { ERROR } from '../constants/messages.js';
 
 class Controller {
+  #lottoBundle;
+
   constructor() {
     this.tiketBooth = new TiketBooth();
     this.announcer = new Announcer();
-    this.lottoBundle;
-    this.winNumbers;
-    this.bonusNumber;
-    this.matchedNumberList = [];
+    this.analyzer = new Analyzer();
+    this.#lottoBundle;
   }
 
   async startLottoGame() {
     await this.purchaseLotto();
     await this.drawWinNumbers();
     await this.drawBonusNumber();
-    this.confirmLottoPrizes();
-    this.drawLottoResults();
+    this.processLottoResults();
   }
 
   async purchaseLotto() {
     try {
       const amount = await this.tiketBooth.takePaymentForTickets();
-      this.lottoBundle = new LottoBundle(amount);
-      this.announcer.printLottoBundle(this.lottoBundle, amount);
+      this.#lottoBundle = new LottoBundle(amount);
+      this.announcer.printLottoBundle(this.#lottoBundle, amount);
     } catch (error) {
       Console.print(error.message + ERROR.invalideInput);
       await this.purchaseLotto();
@@ -37,7 +36,7 @@ class Controller {
 
   async drawWinNumbers() {
     try {
-      this.winNumbers = await this.tiketBooth.receiveWinNumbers();
+      await this.tiketBooth.receiveWinNumbers();
     } catch (error) {
       Console.print(error.message + ERROR.invalideInput);
       await this.drawWinNumbers();
@@ -46,23 +45,18 @@ class Controller {
 
   async drawBonusNumber() {
     try {
-      this.bonusNumber = await this.tiketBooth.receiveBonusNumber(
-        this.winNumbers
-      );
+      await this.tiketBooth.receiveBonusNumber();
     } catch (error) {
       Console.print(error.message + ERROR.invalideInput);
       await this.drawBonusNumber();
     }
   }
 
-  confirmLottoPrizes() {
-    const winLotto = new WinLotto(this.winNumbers, this.bonusNumber);
-    this.lottoBundle.populateWinResult(winLotto, this.matchedNumberList);
-  }
-
-  drawLottoResults() {
-    const analyzer = new Analyzer(this.matchedNumberList);
-    this.announcer.printPrizeInfo(analyzer);
+  processLottoResults() {
+    const winLotto = new WinLotto(this.tiketBooth.getWinNumbers());
+    const matchedNumberList = this.#lottoBundle.populateWinResult(winLotto);
+    this.analyzer.countWinningRank(matchedNumberList);
+    this.announcer.printPrize(this.analyzer);
   }
 }
 
