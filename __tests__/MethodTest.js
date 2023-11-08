@@ -257,3 +257,30 @@ describe('countMatchedNumbers 메서드 테스트', () => {
     expect(matchedCount).toBe(6);
   });
 });
+
+describe('printWinningStatistics 메서드 테스트', () => {
+  test('printWinningStatistics 메서드는 각 등수별 당첨 개수를 출력해야한다.', () => {
+    // given
+    const winLog = [1, 2, 3, 4, 5];
+    const logSpy = getLogSpy();
+
+    // when
+    const app = new App();
+    app.printWinningStatistics(winLog);
+
+    // then
+    const logs = [
+      "당첨 통계",
+      "---",
+      "3개 일치 (5,000원) - 1개",
+      "4개 일치 (50,000원) - 2개",
+      "5개 일치 (1,500,000원) - 3개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 5개",
+      "6개 일치 (2,000,000,000원) - 4개",
+    ];
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+});
+
