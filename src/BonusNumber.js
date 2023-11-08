@@ -1,4 +1,4 @@
-const validation = require("./Validation.js");
+const validation = require("./libs/Validation.js");
 
 class BonusNumber {
   constructor(bonusNumber) {

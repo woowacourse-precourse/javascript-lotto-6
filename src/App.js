@@ -1,6 +1,6 @@
-const { GAME_MESSAGE } = require("./Constant.js");
+const { GAME_MESSAGE } = require("./libs/Constant.js");
 const { Console } = require("@woowacourse/mission-utils");
-const validation = require("./Validation.js");
+const validation = require("./libs/Validation.js");
 const WinningNumbers = require("./WinningNumbers.js");
 const BonusNumber = require("./BonusNumber.js");
 const PublishedLottos = require("./PublishedLottos.js");

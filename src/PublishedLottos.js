@@ -1,6 +1,6 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const Lotto = require("./Lotto,js");
-const validation = require("./Validation.js");
+const validation = require("./libs/Validation.js");
 
 class PublishedLottos {
   constructor(money) {

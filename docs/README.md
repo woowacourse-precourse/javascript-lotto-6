@@ -76,15 +76,7 @@
 
 ### 4️⃣ 리팩토링
 
-- [x] 클래스 분리
-  - [x] `winningNumbers`, `BonusNumber`, `PublishedLotto` 클래스로 각각 분리
-  - `PublishedLotto` : 입력한 금액에 따라 출력된 로또들 관리
-  - `winningNumbers` : 당첨 번호 관리
-  - `BonusNumber` : 보너스 번호 관리
-- [x] method 이동 및 분리
-  - 구매 금액, 로또 번호, 당첨 번호, 보너스 번호의 유효성 검사는 새로운 인스턴스가 만들어지기 전에 진행한다.
-  - new lotto 발행하는 로직 분리
-- [ ] else 지양하도록 고민
+- [x] `libs` 폴더 생성 : `Constant.js`, `Validation.js` 포함된 폴더
 
 ### 5️⃣ 테스트 코드
 

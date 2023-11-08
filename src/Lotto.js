@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require("./Constant.js");
+const { ERROR_MESSAGE } = require("./libs/Constant.js");
 const { Console } = require("@woowacourse/mission-utils");
 
 class Lotto {
