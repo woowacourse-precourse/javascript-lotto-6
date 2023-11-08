@@ -1,5 +1,5 @@
 import { Random, Console } from "@woowacourse/mission-utils";
-import { MESSAGE_OUTPUT } from "../constants/Constant";
+import { MESSAGE_OUTPUT, PRIZE } from "../constants/Constant";
 
 class LottoOutput {
   constructor() {
@@ -13,15 +13,18 @@ class LottoOutput {
   }
 
   lottoCnt(money) {
-    Console.print(`${money / 1000}개를 구매했습니다.`);
-    this.printLottoNum(Number(money / 1000));
+    let lottoCnt = money / 1000;
+    Console.print(`${lottoCnt}개를 구매했습니다.`);
+    this.printLottoNum(lottoCnt);
   }
 
   printLottoNum(userCnt) {
     for (let i = 0; i < userCnt; i++) {
-      const lottoNum = Random.pickUniqueNumbersInRange(1, 45, 6);
-      Console.print(lottoNum);
-      this.lottoNumArr.push(lottoNum);
+      const lottoRandomNum = Random.pickUniqueNumbersInRange(1, 45, 6);
+      lottoRandomNum.sort((a, b) => a - b);
+
+      Console.print(lottoRandomNum);
+      this.lottoNumArr.push(lottoRandomNum);
     }
   }
 
@@ -35,6 +38,7 @@ class LottoOutput {
       if (this.lottoNumArr[i].includes(bonusNum)) {
         IS_BONUS = true;
       }
+
       switch (winningCount) {
         case 3:
           this.matchThree++;
@@ -64,11 +68,11 @@ class LottoOutput {
 
   printRate(money) {
     let sums =
-      this.matchThree * 5000 +
-      this.matchFour * 50000 +
-      this.matchFive * 1500000 +
-      this.matchBonus * 30000000 +
-      this.matchSix * 2000000000;
+      this.matchThree * PRIZE.PRIZE_THREE +
+      this.matchFour * PRIZE.PRIZE_FOUR +
+      this.matchFive * PRIZE.PRIZE_FIVE +
+      this.matchBonus * PRIZE.PRIZE_BONUS +
+      this.matchSix * PRIZE.PRIZE_SIX;
     this.rate = ((sums / money) * 100).toFixed(1);
 
     Console.print(MESSAGE_OUTPUT(this.rate).RATE);

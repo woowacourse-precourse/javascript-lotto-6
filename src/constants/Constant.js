@@ -16,4 +16,12 @@ const MESSAGE_OUTPUT = (num) =>
     RATE: `총 수익률은 ${num}%입니다.`,
   });
 
-export { MESSAGE_INPUT, MESSAGE_OUTPUT };
+const PRIZE = Object.freeze({
+  PRIZE_THREE: 5000,
+  PRIZE_FOUR: 50000,
+  PRIZE_FIVE: 1500000,
+  PRIZE_BONUS: 30000000,
+  PRIZE_SIX: 2000000000,
+});
+
+export { MESSAGE_INPUT, MESSAGE_OUTPUT, PRIZE };
