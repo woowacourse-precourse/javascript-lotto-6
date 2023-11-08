@@ -1,4 +1,5 @@
 import { model } from "./Model.js";
+import { errorComments } from "./Comment.js";
 
 export class Winning {
   #numbers
@@ -15,7 +16,7 @@ export class Winning {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 당첨 번호는 6개여야 합니다.");
+      throw new Error(errorComments.winning[0]);
     }
   }
 
@@ -29,13 +30,13 @@ export class Winning {
     if (/^[+]?[1-9]\d*$/.test(number)) {
       return Number(number);
     } 
-    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+    throw new Error(errorComments.winning[1]);
   }
 
   #winnningNumberDuplicateValidater(numbers) {
     for (let i = 0; i < numbers.length-1; i++) {
       if (numbers[i] === numbers[i+1]) {
-        throw new Error("[ERROR] 로또 번호가 중복되었습니다.")
+        throw new Error(errorComments.winning[2])
       }
     }
   }
@@ -48,7 +49,7 @@ export class Winning {
 
   #winnningEachNumberRangeValidater(number) {
     if (number > 45) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+      throw new Error(errorComments.winning[3])
     }
   }
 

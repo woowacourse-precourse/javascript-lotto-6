@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { model } from "./Model.js";
+import { comments } from "./Comment.js";
 
 export class Results {
   #results = [0,0,0,0,0];
@@ -77,7 +78,7 @@ export class Results {
   }
 
   #lottoResultsPrinter(results) {
-    this.#lottoResultComment();
+    comments.lottoResultComment();
 
     for (let i = 0; i < results.length; i++) {
       const prize = model.prize[i]
@@ -117,11 +118,5 @@ export class Results {
     MissionUtils.Console.print(
       `${model.same[i]}개 일치 (${prize}원) - ${result}개`
     );
-  }
-
-  #lottoResultComment() {
-    MissionUtils.Console.print("");
-    MissionUtils.Console.print("당첨 통계");
-    MissionUtils.Console.print("---");
   }
 }

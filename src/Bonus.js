@@ -1,4 +1,5 @@
 import { model } from "./Model.js";
+import { errorComments } from "./Comment.js";
 
 export class Bonus {
   #number;
@@ -16,19 +17,19 @@ export class Bonus {
     if (/^[+]?[1-9]\d*$/.test(number)) {
       return Number(number);
     } 
-    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+    throw new Error(errorComments.bonus[0]);
   }
 
   #bonusNumberRangeValidater(number) {
     if (number > 45) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+      throw new Error(errorComments.bonus[1])
     }
   }
 
   #bonusNumberDuplicateValidater(bonus, winning) {
     for (let i = 0; i < winning.length; i++) {
       if (winning[i] === bonus) {
-        throw new Error("[ERROR] 보너스 번호가 중복되었습니다.")
+        throw new Error(errorComments.bonus[2])
       }
     }
   }

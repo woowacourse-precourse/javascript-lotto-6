@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { model } from "./Model.js";
+import { errorComments } from "./Comment.js";
 
 class Lotto {
   #numbers;
@@ -14,14 +15,14 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(errorComments.lotto[0]);
     }
   }
 
   #validateDuplicate(numbers) {
     for (let i = 0; i < numbers.length-1; i++) {
       if (numbers[i] === numbers[i+1]) {
-        throw new Error("[ERROR] 로또 번호가 중복되었습니다.")
+        throw new Error(errorComments.lotto[1])
       }
     }
   }
@@ -33,7 +34,7 @@ class Lotto {
 
   #validateRangeEachNumber(number) {
     if (number > 45 || number < 1) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+      throw new Error(errorComments.lotto[2])
     }
   }
 

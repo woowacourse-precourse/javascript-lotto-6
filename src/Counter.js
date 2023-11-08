@@ -1,6 +1,7 @@
 import Lotto from "./Lotto.js";
 import { model } from "./Model.js";
 import { MissionUtils, Random } from "@woowacourse/mission-utils";
+import { errorComments } from "./Comment.js";
 
 const LOTTO_PRICE = 1000;
 
@@ -25,13 +26,13 @@ export class Counter {
     if (/^[+]?[1-9]\d*$/.test(money)) {
       return Number(money);
     } 
-    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+    throw new Error(errorComments.counter[0]);
   }
 
   #inputMoneyDivideValidater(money) {
     let price = LOTTO_PRICE;
     if (money%price !== 0) {
-      throw new Error("[ERROR] 구입 금액은 1000원 단위로 입력 가능합니다.");
+      throw new Error(errorComments.counter[1]);
     }
   }
 
