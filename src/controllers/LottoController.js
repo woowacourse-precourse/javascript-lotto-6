@@ -14,12 +14,12 @@ class LottoController {
   #statistics;
 
   async lottoStart() {
-    await this.#setMyLotto();
-    await this.#setWinningLotto();
-    this.#setMyLottoResult();
+    await this.setMyLotto();
+    await this.setWinningLotto();
+    this.setMyLottoResult();
   }
 
-  async #getValidInput(getInputFunction, validateFunction) {
+  async getValidInput(getInputFunction, validateFunction) {
     while (true) {
       try {
         const input = await getInputFunction();
@@ -31,51 +31,59 @@ class LottoController {
     }
   }
 
-  async #setMyLotto() {
-    const purchaseLottoAmount = await this.#getPurchaseLottoAmount();
-    const lottoCount = this.#calculateLottoCount(purchaseLottoAmount);
-    this.#printLottoCount(lottoCount);
+  async setMyLotto() {
+    const lottoCount = await this.setMyLottoCount();
+    this.createMyLotto(lottoCount);
+  }
 
+  async setMyLottoCount() {
+    const purchaseLottoAmount = await this.getPurchaseLottoAmount();
+    const lottoCount = this.calculateLottoCount(purchaseLottoAmount);
+    this.printLottoCount(lottoCount);
+    return lottoCount;
+  }
+
+  createMyLotto(lottoCount) {
     this.#myLotto = new MyLotto(lottoCount);
     this.#myLotto.printMyLottoNumbers();
   }
 
-  async #setWinningLotto() {
-    const winningNumbers = await this.#getWinningNumbers();
-    const bonusNumber = await this.#getBonusNumbers(winningNumbers);
+  async setWinningLotto() {
+    const winningNumbers = await this.getWinningNumbers();
+    const bonusNumber = await this.getBonusNumbers(winningNumbers);
     this.#winningLotto = new WinningLotto(winningNumbers, bonusNumber);
   }
 
-  #getPurchaseLottoAmount() {
-    return this.#getValidInput(
+  getPurchaseLottoAmount() {
+    return this.getValidInput(
       InputView.getPurchaseLottoAmount,
       ValidateController.validatePurchaseLottoAmount,
     );
   }
 
-  #calculateLottoCount(lottoAmount) {
+  calculateLottoCount(lottoAmount) {
     return parseInt(lottoAmount / NUMBER.PURCHASE_AMOUNT_UNIT, 10);
   }
 
-  #printLottoCount(lottoCount) {
+  printLottoCount(lottoCount) {
     OutputView.printLottoCount(lottoCount);
   }
 
-  #getWinningNumbers() {
-    return this.#getValidInput(
+  getWinningNumbers() {
+    return this.getValidInput(
       InputView.getWinningNumbers,
       ValidateController.validateWinningNumbers,
     );
   }
 
-  #getBonusNumbers(winningNumbers) {
-    return this.#getValidInput(
+  getBonusNumbers(winningNumbers) {
+    return this.getValidInput(
       () => InputView.getBonusNumber(winningNumbers),
       input => ValidateController.validateBonusNumber(winningNumbers, input),
     );
   }
 
-  #setMyLottoResult() {
+  setMyLottoResult() {
     const winningNumbers = this.#winningLotto.getWinningNumbers();
     const bonusNumber = this.#winningLotto.getBonusNumber();
     const matchingResult = this.#myLotto.findMatching(winningNumbers, bonusNumber);
