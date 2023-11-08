@@ -2,8 +2,8 @@ import { Console } from '@woowacourse/mission-utils';
 import PRIZE from '../constants/message.js';
 
 class OutputView {
-    static printPurchase(num) {
-        Console.print(`\n${num}개를 구매했습니다.`);
+    static printPurchaseAmount(amount) {
+        Console.print(`\n${amount}개를 구매했습니다.`);
     }
 
     static printLottoNumbers(lottos) {

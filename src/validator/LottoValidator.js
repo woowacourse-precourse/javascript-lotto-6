@@ -43,8 +43,8 @@ class LottoValidator {
     }
 
     static isValidBonus(numbers, bonus) {
-        isValidRange(bonus);
-        isDuplicatedBonus(numbers, bonus);
+        this.isValidRange(bonus);
+        this.isDuplicatedBonus(numbers, bonus);
     }
 }
 
