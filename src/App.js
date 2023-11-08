@@ -12,8 +12,7 @@ class App {
 
     // 기능 ➋ 로또를 구매 장수만큼 발행하기
     const lottoManager = new LottoManager(amount);
-    lottoManager.generateLottos();
-    OutputView.printLottoNumbers(lottoManager.getLottos());
+    OutputView.printPurchaseNumbers(lottoManager.getLottos());
 
     // 기능 ➌ 사용자에게 당첨 번호 입력받기
     const winNumbers = await InputView.readWinNumbers();

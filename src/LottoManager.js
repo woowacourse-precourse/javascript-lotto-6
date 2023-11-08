@@ -3,23 +3,25 @@ import Lotto from './Lotto.js';
 
 class LottoManager {
     #amount;
-    #lottos;
+    #purchaseLottos;
     #winLotto;
     #bonusNumber;
 
     constructor(amount) {
         this.#amount = amount;
-        this.#lottos = [];
+        this.#purchaseLottos = this.#generatePurchaseLottos();
         this.#winLotto;
         this.#bonusNumber;
         this.winCount = [0, 0, 0, 0, 0];
     }
 
-    generateLottos() {
-        for (let i = 0; i < this.#amount; i++) {
+    #generatePurchaseLottos() {
+        const lottos = Array.from({ length: this.#amount }, () => {
             const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-            this.#lottos.push(new Lotto(numbers));
-        }
+            numbers.sort((a, b) => a - b);
+            return new Lotto(numbers);
+        });
+        return lottos;
     }
 
     generateWinLotto(winNumbers) {
@@ -31,7 +33,7 @@ class LottoManager {
     }
 
     getLottos() {
-        return this.#lottos;
+        return this.#purchaseLottos;
     }
 
     setWinCount(player) {
@@ -50,7 +52,7 @@ class LottoManager {
     }
 
     setAllwinCount() {
-        this.#lottos.forEach((player) => this.setWinCount(player));
+        this.#purchaseLottos.forEach((player) => this.setWinCount(player));
     }
 
     getWinCount() {
