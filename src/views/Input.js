@@ -31,12 +31,10 @@ const inputView = {
 
     const isNotNumber = isNaN(Number(value));
 
-    switch (type) {
-      case inputType.PURCHASE:
-        throwErrorIf(isNotNumber, error.NOT_NUMBER);
-      case inputType.LOTTO:
-        throwErrorIf(isNotNumber, error.NATURAL_NUMBER_IN_RANGE);
-    }
+    if (type === inputType.PURCHASE)
+      throwErrorIf(isNotNumber, error.NOT_NUMBER);
+    if (type === inputType.LOTTO)
+      throwErrorIf(isNotNumber, error.NATURAL_NUMBER_IN_RANGE);
   },
 };
 
