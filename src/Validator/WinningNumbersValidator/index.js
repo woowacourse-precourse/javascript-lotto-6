@@ -14,7 +14,7 @@ class WinningNumbersValidator extends Validator {
   }
 
   static validateWinningNumbers(numbers) {
-    const formattedNumbers = Formatter.formatInputNumbers(numbers);
+    const formattedNumbers = Formatter.toNumbers(numbers);
 
     super.validateRangeOfNumbers(formattedNumbers);
     this.#validateDuplication(formattedNumbers);
