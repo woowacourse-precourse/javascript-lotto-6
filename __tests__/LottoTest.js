@@ -1,7 +1,6 @@
-import test from "node:test";
 import Lotto from "../src/Lotto.js";
 
-describe("로또 클래스 예외 테스트", () => {
+describe("로또 클래스 테스트", () => {
   test("로또 번호가 6개가 아니면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5]);
@@ -31,9 +30,7 @@ describe("로또 클래스 예외 테스트", () => {
       new Lotto([1, 2, 3, 4, 5, 6], [6]);
     }).toThrow("[ERROR]");
   });
-});
 
-describe("로또 클래스 기능 테스트", () => {
   test("로또 번호를 정상적으로 생성하는지 확인", () => {
     const lotto = new Lotto();
     const numbers = lotto.getLottoNumbers(5);

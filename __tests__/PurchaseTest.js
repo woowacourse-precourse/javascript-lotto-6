@@ -18,7 +18,7 @@ describe("로또 구매 테스트", () => {
     });
   });
 
-  test("구매한 로또 번호 테스트", () => {
+  test("구매한 로또 개수 테스트", () => {
     const lotto = new Lotto();
     const result = lotto.getLottoNumbers(3);
     expect(result.length).toBe(3);
