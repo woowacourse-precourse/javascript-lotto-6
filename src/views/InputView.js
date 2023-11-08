@@ -4,28 +4,46 @@ import InputValidation from "../validations/InputValidation.js";
 
 const InputView = {
   async receiveCost() {
-    const cost = await Console.readLineAsync(IN_GAME_MESSAGE.getCost);
-    InputValidation.checkCost(cost);
+    while (true) {
+      try {
+        const cost = await Console.readLineAsync(IN_GAME_MESSAGE.getCost);
+        InputValidation.checkCost(cost);
 
-    return cost;
+        return cost;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   },
 
   async receiveNumbers() {
-    const numbers = (
-      await Console.readLineAsync(IN_GAME_MESSAGE.getNumbers)
-    ).split(",");
-    InputValidation.checkNumbers(numbers);
+    while (true) {
+      try {
+        const numbers = (
+          await Console.readLineAsync(IN_GAME_MESSAGE.getNumbers)
+        ).split(",");
+        InputValidation.checkNumbers(numbers);
 
-    return numbers;
+        return numbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   },
 
   async receiveBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(
-      IN_GAME_MESSAGE.getBonusNumber
-    );
-    InputValidation.checkBonusNumber(bonusNumber);
+    while (true) {
+      try {
+        const bonusNumber = await Console.readLineAsync(
+          IN_GAME_MESSAGE.getBonusNumber
+        );
+        InputValidation.checkBonusNumber(bonusNumber);
 
-    return bonusNumber;
+        return bonusNumber;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   },
 };
 

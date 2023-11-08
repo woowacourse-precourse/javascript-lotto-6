@@ -1,9 +1,9 @@
+import { Console } from "@woowacourse/mission-utils";
 import LottoList from "../models/LottoList.js";
 import InputView from "../views/InputView.js";
 import OutputView from "../views/OutputView.js";
 import { PLACE, PERCENT } from "../models/Constants.js";
 import winningResults from "../models/WinningResults.js";
-import { Console } from "@woowacourse/mission-utils";
 
 const GameManager = {
   async playLottoGame() {
@@ -15,15 +15,7 @@ const GameManager = {
   },
 
   async issueLottos() {
-    let cost;
-    while (true) {
-      try {
-        cost = await InputView.receiveCost();
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+    const cost = await InputView.receiveCost();
 
     const amount = this.calculateAmout(cost);
     const lottos = new LottoList(amount).getLottoList();
@@ -34,25 +26,8 @@ const GameManager = {
   },
 
   async drawLottos(lottoList) {
-    let numbers;
-    while (true) {
-      try {
-        numbers = await InputView.receiveNumbers();
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
-
-    let bonusNumber;
-    while (true) {
-      try {
-        bonusNumber = await InputView.receiveBonusNumber();
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+    const numbers = await InputView.receiveNumbers();
+    const bonusNumber = await InputView.receiveBonusNumber();
 
     lottoList.forEach((lotto) => this.judgePrize(lotto, numbers, bonusNumber));
   },
@@ -69,7 +44,7 @@ const GameManager = {
       numberList.filter((number) => lotto.includes(Number(number)))
     ).size;
 
-    winningResults.forEach((result, index) => {
+    winningResults.forEach((_, index) => {
       if (prize === PLACE[index]) {
         if (index !== 1 || lotto.includes(bonusNumber)) {
           winningResults[index].ticket += 1;
