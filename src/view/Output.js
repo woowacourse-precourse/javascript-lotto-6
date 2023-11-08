@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT_LOTTO_COUNT } from '../constant/OutputMessage.js';
+import * as OUTPUT from '../constant/OutputMessage.js';
 
 const Output = {
   async printLottoCount(lottoCount) {
-    await Console.print(`\n${lottoCount}${OUTPUT_LOTTO_COUNT}`);
+    await Console.print(`\n${lottoCount}${OUTPUT.OUTPUT_LOTTO_COUNT}`);
   },
   async printLottoList(lottoList) {
     lottoList.map((lotto) => {
@@ -21,7 +21,7 @@ const Output = {
     });
   },
   printWinnerStatistics(resultMap) {
-    Console.print('\n당첨 통계\n---');
+    Console.print(OUTPUT.OUTPUT_WINNING_STATISTICS);
     const price = ['', '', '5,000', '50,000', '1,500,000', '2,000,000,000'];
 
     resultMap.forEach((totalCnt, sameNum) => {
