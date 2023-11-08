@@ -16,13 +16,17 @@ class Lotto {
   #numbers;
 
   /**
-   * @param {string} numbers
+   * @param {string[]} numbers
    */
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = Lotto.convertNumber(numbers);
   }
 
+  /**
+   * @param {string[]} input
+   * @returns {number[]}
+   */
   static convertNumber(input) {
     return input.map(Number);
   }
@@ -43,10 +47,19 @@ class Lotto {
     }
   }
 
+  /**
+   * @param {number} bonusNumber
+   * @returns {boolean}
+   */
   isDuplicatedWinningNumbers(bonusNumber) {
     return this.#numbers.includes(Number(bonusNumber));
   }
 
+  /**
+   * @param {number[]} userLotto
+   * @param {number} bonus
+   * @returns {string}
+   */
   compareWinningNumbers(userLotto, bonus) {
     const matchCount = this.#checkMatchCount(userLotto);
 
@@ -55,6 +68,11 @@ class Lotto {
     return LOTTO.rank[matchCount] ?? LOTTO.rank.undefined;
   }
 
+  /**
+   *
+   * @param {number[]} userLotto
+   * @returns {number}
+   */
   #checkMatchCount(userLotto) {
     return userLotto.reduce((acc, number) => {
       if (!this.#numbers.includes(number)) return acc;
@@ -63,6 +81,12 @@ class Lotto {
     }, 0);
   }
 
+  /**
+   * @param {number} count
+   * @param {number} bonus
+   * @param {number[]} userLotto
+   * @returns {boolean}
+   */
   static #isSecond(count, bonus, userLotto) {
     return count === 5 && userLotto.includes(bonus);
   }

@@ -7,6 +7,10 @@ import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 
 class LottoController {
+  /**
+   * @type {LottoModel}
+   * @private
+   */
   #model;
 
   constructor() {
@@ -61,6 +65,12 @@ class LottoController {
     }
   }
 
+  /**
+   * @param {string} message
+   * @param {string} process
+   * @param {Lotto} arg - winningNumber
+   * @returns {Promise<any>}
+   */
   #onError(message, process, arg) {
     LottoController.#printError(message);
 
@@ -75,6 +85,9 @@ class LottoController {
     return this.#purchaseLotto();
   }
 
+  /**
+   * @param {string} message
+   */
   static #printError(message) {
     OutputView.print(message);
   }

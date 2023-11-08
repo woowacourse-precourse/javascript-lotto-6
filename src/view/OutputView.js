@@ -19,6 +19,11 @@ const OutputView = {
     });
   },
 
+  /**
+   * @param {object} winningStatistics
+   * @param {Map} winningStatistics.ranks
+   * @param {number} winningStatistics.rateOfReturn
+   */
   printStatistics({ ranks, rateOfReturn }) {
     this.print(OUTPUT_MESSAGE.statisticsMessage);
     OUTPUT_MESSAGE.statistics.forEach((message, index) =>

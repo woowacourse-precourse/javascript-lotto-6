@@ -5,8 +5,15 @@ import handleValidationError from './utils/error/index.js';
 import { isDivisibleBy, isNumber, isOverMaxPurchaseAmount } from './utils/validators/index.js';
 
 class PurchaseAmount {
+  /**
+   * @type {number}
+   * @private
+   */
   #purchaseAmount;
 
+  /**
+   * @param {string} input
+   */
   constructor(input) {
     this.#validate(input);
 
@@ -30,6 +37,9 @@ class PurchaseAmount {
     return new PurchaseAmount(input);
   }
 
+  /**
+   * @returns {number}
+   */
   getLottoCount() {
     return this.#purchaseAmount / PURCHASE_AMOUNT.divisor;
   }

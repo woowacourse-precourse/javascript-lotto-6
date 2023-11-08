@@ -1,11 +1,20 @@
+import Lotto from './Lotto.js';
 import { ERROR_MESSAGE, ERROR_MESSAGE_FUNCTION } from './constants/Messages.js';
 
 import handleValidationError from './utils/error/index.js';
 import { isInteger, isNumber, isNumberValidScope } from './utils/validators/index.js';
 
 class Bonus {
+  /**
+   * @type {number}
+   * @private
+   */
   #bonusNumber;
 
+  /**
+   * @param {string} bonus
+   * @param {Lotto} winningNumbers
+   */
   constructor(bonus, winningNumbers) {
     this.#validate(bonus, winningNumbers);
 
@@ -27,6 +36,9 @@ class Bonus {
     }
   }
 
+  /**
+   * @returns {number}
+   */
   getBonusNumber() {
     return this.#bonusNumber;
   }
