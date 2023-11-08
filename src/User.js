@@ -2,12 +2,26 @@ import { Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 
 class User {
-  async inputLottoPurchaseAmount() {
-    const purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+  validatePurchaseAmount(purchaseAmount) {
+    const splitedPurchaseAmount = purchaseAmount.split('');
+
+    splitedPurchaseAmount.forEach(char => {
+
+      if (isNaN(parseInt(char))) {
+        throw new Error("[ERROR] 로또 구입 금액은 숫자로 입력해야 합니다.");
+      }
+    })
 
     if (parseInt(purchaseAmount) % 1000 !== 0) {
       throw new Error("[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다.");
     }
+  }
+
+  async inputLottoPurchaseAmount() {
+    const purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    
+    this.validatePurchaseAmount(purchaseAmount);
+    
     return parseInt(purchaseAmount) / 1000;
   }
 
@@ -15,7 +29,7 @@ class User {
     Console.print(`\n${lottos.length}개를 구매했습니다.`);
     lottos.forEach(lotto => {
       const lottoNumbers = lotto.myNumbers;
-      Console.print(lottoNumbers);
+      Console.print(`[${lottoNumbers.join(', ')}]`);
     });
   }
 
@@ -40,7 +54,7 @@ class User {
   async inputLottoBonusNumber() {
     const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     this.validateLottoNumberRange([parseInt(bonusNumber)]);
-    
+
     return parseInt(bonusNumber);
   }
 
@@ -49,14 +63,18 @@ class User {
 
     Object.values(allLottoResult).forEach(value => {
       const {rankingDetail, reward, count} = value;
-      result += `\n${rankingDetail.theNumberOfMatches}개 일치${rankingDetail.haveBonusNumber?', 보너스 볼 일치':''} (${reward.toLocaleString('ko-KR')}) - ${count}개`;
+      result += `\n${rankingDetail.theNumberOfMatches}개 일치${rankingDetail.haveBonusNumber?', 보너스 볼 일치':''} (${reward.toLocaleString('ko-KR')}원) - ${count}개`;
     });
 
     Console.print(result);
   }
 
   printLottoProfitRate(profitRate) {
-    const roundedProfitRate = Math.round(profitRate * 10) / 10;
+    let roundedProfitRate = Math.round(profitRate * 10) / 10;
+
+    if (roundedProfitRate < 0) {
+      roundedProfitRate += 100;
+    }
 
     Console.print(`총 수익률은 ${roundedProfitRate}%입니다.`);
   }
