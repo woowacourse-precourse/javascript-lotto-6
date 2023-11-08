@@ -1,5 +1,4 @@
 import Input from "../src/core/Input.js";
-import { WinningNumberError } from "../src/utils/Error.js";
 import { getLogSpy, mockQuestions } from "./utils.js";
 
 describe("Input 클래스 테스트", () => {

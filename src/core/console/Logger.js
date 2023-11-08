@@ -1,7 +1,7 @@
 //@ts-check
 
 import { Console } from "@woowacourse/mission-utils";
-import { WINNING_FIELD_INDEX, WINNING_PRICES } from "./const.js";
+import { WINNING_FIELD_INDEX, WINNING_PRICES } from "../const.js";
 
 export default class Logger {
   constructor() {}

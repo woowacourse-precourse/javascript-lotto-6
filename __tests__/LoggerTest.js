@@ -1,5 +1,5 @@
-import Logger from "../src/core/Logger.js";
-import { getLogSpy } from "./utils";
+import Logger from "../src/core/console/Logger.js";
+import { getLogSpy } from "./utils.js";
 
 describe("Logger 클래스 테스트", () => {
   /** @type {Logger} */

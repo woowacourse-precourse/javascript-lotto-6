@@ -1,8 +1,8 @@
 //@ts-check
 
 import { Console } from "@woowacourse/mission-utils";
-import Assert from "./Assert.js";
-import { parseToCommaSeperatedIntegers } from "../utils/parse.js";
+import Assert from "../Assert.js";
+import { parseToCommaSeperatedIntegers } from "../../utils/parse.js";
 
 export default class Input {
   /** @type {Assert} */
