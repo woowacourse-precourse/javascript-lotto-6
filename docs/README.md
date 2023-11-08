@@ -186,28 +186,28 @@ node src/index
 <br>
 
 ## 📂 파일 관계도    
-       
 
-src
- ┣ constants       
- ┃ ┣ BusinessNumber.js   `상수화된 숫자 모음`       
- ┃ ┗ Messeage.js   `상수화된 게임 메세지 모음`      
- ┣ domain       
- ┃ ┣ LotteryMachine.js   `로또 티켓 생성기`     
- ┃ ┣ LottoRankMaker.js   `로또 등수 계산기`      
- ┃ ┣ LottoReader.js   `로또 티켓, 당첨번호 데이터 처리 및 이동`       
- ┃ ┗ LottoStatistics.js   `당첨 통계 계산기`      
- ┣ error       
- ┃ ┣ CustomError.js  `에러 메세지 PREFIX [ERROR] 생성`       
- ┃ ┗ Validation.js   `사용자 입력 유효성 검증`        
- ┣ ui        
- ┃ ┣ LottoManager.js   `입력 담당`        
- ┃ ┗ LottoStamper.js   `출력 담당`      
- ┣ util       
- ┃ ┗ EarningRate.js   `증가율 공식`      
- ┣ App.js   `프로그램 시작점`      
- ┣ Lotto.js       
- ┗ index.js       
+src                                     
+ ┣ constants              
+ ┃ ┣ BusinessNumber.js  `로또 게임 관련 수치 상수화`                
+ ┃ ┗ Messeage.js  `상수화된 게임 메세지 모음`        
+ ┣ domain                 
+ ┃ ┣ Bonus.js  `보너스 번호 유효성 검증`       
+ ┃ ┣ LotteryMachine.js  `구입금액 유효성 검증,로또 티켓 생성 및 발급`               
+ ┃ ┣ LottoRankMaker.js  `로또 당첨 등수 채점기`                    
+ ┃ ┣ LottoReader.js  `로또 티켓, 당첨번호 데이터를 핵심 로직에 분배`                              
+ ┃ ┗ LottoStatistics.js  `당첨 통계 계산`                  
+ ┣ error                             
+ ┃ ┗ CustomError.js  `에러 메세지 PREFIX [ERROR] 생성`   
+ ┣ ui                                       
+ ┃ ┣ LottoManager.js  `사용자 입력 및 로또 시뮬레이션 컨트롤`                                                                 
+ ┃ ┗ LottoStamper.js  `로또 출력 결과 활자판`                   
+ ┣ util                                
+ ┃ ┗ EarningRate.js  `증가율 공식`                 
+ ┣ App.js  `프로그램 시작점`                
+ ┣ Lotto.js  `로또 번호 유효성 검증`                  
+ ┗ index.js                              
+       
 
 <br>
 
