@@ -63,14 +63,17 @@ class App {
       
       this.checkDuplicateNums(randomNums);
       this.checkListLength(randomNums);
-
-      const printedString = `[${randomNums.join(', ')}]`;
-      Console.print(printedString)
+      this.arrayToString(randomNums);
       
       this.userRandomList.push(randomNums);
     }
     return this.userRandomList;
   };
+
+  arrayToString(randomNums) {
+    const printedString = `[${randomNums.join(', ')}]`;
+    Console.print(printedString)
+  }
 
   checkDuplicateNums(nums) {
     if (nums.length !== new Set(nums).size) {
@@ -144,12 +147,12 @@ class App {
 
   checkIsIncludes(input, list, bonusCase) {
     if (list.includes(Number(input))) {
-    switch (bonusCase) {
-      case false:
-        throw new Error(ERROR_MESSAGE.INPUT_ERROR);
-      default:
-        this.isBonus = true;
-    }
+      switch (bonusCase) {
+        case false:
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+        default:
+          this.isBonus = true;
+      }
     }
   };
 
