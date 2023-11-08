@@ -4,8 +4,7 @@ import SCENARIO from './constant/scenario';
 
 class LottoGame {
   constructor(price) {
-    this.validatePrice(price);
-    this.price = price;
+    this.price = this.validatePrice(price);
     this.count = this.calculateLottoCount(price);
     this.lottos = [];
     this.winningNumbers = [];
@@ -22,6 +21,7 @@ class LottoGame {
     if (Number.isNaN(Number(price))) {
       throw Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
     }
+    return price;
   }
 
   validateWinningNumber(winningNumber) {
