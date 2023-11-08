@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import GAME_MESSAGE from '../constants/GameMessage';
 
-const Input = {
+const lottoInput = {
     readMoney(){
         return Console.readLineAsync(GAME_MESSAGE.READ_MONEY);
     },
@@ -16,7 +16,7 @@ const Input = {
     },
 }
 
-const Output = {
+const lottoOutput = {
     printResultHeader(){
         Console.print(GAME_MESSAGE.RESULT_HEADER);
     },
@@ -40,4 +40,4 @@ const Output = {
     },
 }
 
-export {Input,Output};
+export {lottoInput,lottoOutput};
