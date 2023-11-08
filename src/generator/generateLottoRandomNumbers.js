@@ -1,8 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { RANDOM_COUNT, RANDOM_MAX, RANDOM_MIN } from "../constant/constant";
+import OPTIONS from "../constant/option";
 
 const generateLottoRandomNumbers = () => {
-    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(RANDOM_MIN, RANDOM_MAX, RANDOM_COUNT);
+    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(OPTIONS.minRandomNumber, OPTIONS.maxRandomNumber, OPTIONS.randomCount);
     return randomNumbers;
 }
 
