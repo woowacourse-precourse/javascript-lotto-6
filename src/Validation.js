@@ -42,6 +42,11 @@ class Validation {
     }
   }
 
+  static validateBonusNumber(answerNumbers, inputBonusNumber){
+    const compareNumberArray = answerNumbers.push(inputBonusNumber);
+    this.validateRepeatedNumbers(compareNumberArray);
+    this.validateRangeNumbers(inputBonusNumber);
+  }
 }
 
 export default Validation;
