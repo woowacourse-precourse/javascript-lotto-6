@@ -99,4 +99,20 @@ export default class WinController {
   printProfitRate() {
     this.outputView.printProfitRate(this.#profitRate);
   }
+
+  getPurchaseLottos() {
+    return this.#purchasedLottos;
+  }
+
+  getWinningCount() {
+    return this.#winningCount;
+  }
+
+  getWin5andBonus() {
+    return this.#win5andBonus;
+  }
+
+  getProfitRate() {
+    return this.#profitRate;
+  }
 }
