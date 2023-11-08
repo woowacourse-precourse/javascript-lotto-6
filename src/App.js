@@ -3,15 +3,23 @@ import Lotto from './Lotto.js';
 
 class App {
   async play() {
-    Console.print('로또 게임을 시작합니다.');
+    try {
+      Console.print('로또 게임을 시작합니다.');
 
-    const purchaseAmount = await this.inputPurchaseAmount();
-    const lottos = await this.generateLottos(purchaseAmount);
+      const purchaseAmount = await this.inputPurchaseAmount();
+      const lottos = await this.generateLottos(purchaseAmount);
 
-    this.displayPurchasedLottos(lottos);
+      this.displayPurchasedLottos(lottos);
 
-    const winningNumbers = await this.inputWinningNumbers();
-    const bonusNumber = await this.inputBonusNumber();
+      const winningNumbers = await this.inputWinningNumbers();
+      const bonusNumber = await this.inputBonusNumber();
+
+      const results = this.checkLottoResults(lottos, winningNumbers, bonusNumber);
+      this.displayResults(results, purchaseAmount);
+
+    } catch (error) {
+      Console.print(`[ERROR] ${error.message}`);
+    }
   }
 
   // 2. 로또 구입하기: 로또 구입 금액 입력
@@ -93,6 +101,37 @@ class App {
         return bonusNumber;
       }
     }
+  }
+
+  // 3. 당첨 확인: 로또 티켓별로 당첨 여부 확인 및 결과 반환
+  checkLottoResults(lottos, winningNumbers, bonusNumber) {
+    const results = {
+      3: { prize: 5000, count: 0 },
+      4: { prize: 50000, count: 0 },
+      5: { prize: 1500000, count: 0 },
+      '5+bonus': { prize: 30000000, count: 0 },
+      6: { prize: 2000000000, count: 0 }
+    };
+
+    lottos.forEach(lotto => {
+      const matchingNumbers = lotto.getNumbers().filter(number => winningNumbers.includes(number));
+      const bonusMatching = lotto.getNumbers().includes(bonusNumber);
+
+      if (matchingNumbers.length === 3) {
+        results[3].count++;
+      } else if (matchingNumbers.length === 4) {
+        results[4].count++;
+      } else if (matchingNumbers.length === 5 && bonusMatching) {
+        results['5+bonus'].count++;
+      } else if (matchingNumbers.length === 5) {
+        results[5].count++;
+      } else if (matchingNumbers.length === 6) {
+        results[6].count++;
+      }
+    });
+
+    // 3. 당첨 확인: 당첨 결과 반환
+    return Object.values(results);
   }
 }
 
