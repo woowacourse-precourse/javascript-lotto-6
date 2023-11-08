@@ -82,6 +82,17 @@ class App {
       );
     };
     printTotalNumber(totalWinningCount);
+
+    //당첨 수익률 계산
+    const calcTotalProfitPercent = (totalWinningMoney, totalCost) => {
+      const totalProfitPercent = (totalWinningMoney / totalCost) * 100;
+      const temp = Number((Math.abs(totalProfitPercent) * 100).toPrecision(15));
+      return (Math.round(temp) / 100) * Math.sign(totalProfitPercent);
+    };
+    const totalProfit = calcTotalProfitPercent(totalWinningMoney, totalCost);
+
+    //당첨 수익률 출력
+    MissionUtils.Console.print(`총 수익률은 ${totalProfit}%입니다.`);
   }
 }
 
