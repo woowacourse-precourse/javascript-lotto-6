@@ -27,4 +27,16 @@ describe('로또 클래스 테스트', () => {
     // then
     expect(logSpy).toHaveBeenCalledWith(numbers);
   });
+
+  test('로또 번호를 얻는다.', () => {
+    // given
+    const numbers = [1, 2, 3, 4, 5, 6];
+
+    // when
+    const lotto = new Lotto(numbers);
+
+    // then
+    expect(lotto.length).toBe(numbers.length);
+    expect(lotto).toEqual(numbers);
+  });
 });
