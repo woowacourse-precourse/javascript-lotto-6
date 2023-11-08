@@ -68,6 +68,7 @@ class App {
     const STATS = this.lotto.calculateWinningStats(this.#lottos, [...this.#winningNumbers, this.#bonusNumber]);
     const profits = this.lotto.getProfits(STATS)
     const rate = this.lotto.calculateRate(profits, this.#money)
+    console.log(`rate: ${rate}`)
     
     this.output.printStats(STATS)
     this.output.printRate(rate);
