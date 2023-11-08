@@ -13,3 +13,11 @@ export const ERROR_MESSEGE = Object.freeze({
   outOfRange: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.\n',
   duplicates: '[ERROR] 중복된 숫자가 있습니다.\n',
 });
+
+export const RESULT_MESSEGE = Object.freeze([
+  '3개 일치 (5,000원) - ',
+  '4개 일치 (50,000원) - ',
+  '5개 일치 (1,500,000원) - ',
+  '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  '6개 일치 (2,000,000,000원) - ',
+]);
