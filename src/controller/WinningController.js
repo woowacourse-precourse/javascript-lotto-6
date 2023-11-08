@@ -55,7 +55,7 @@ class WinningController {
       (this.#winning.getWinningTotalPrice() /
         (this.#lottos.length * CONSTRAINTS.PRICE_UNIT)) *
       100
-    );
+    ).toFixed(1);
   }
 
   calculateRank(matchCount, lottoNumbers) {
