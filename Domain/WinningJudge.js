@@ -1,6 +1,3 @@
-import Lotto from './Lotto.js';
-import WinningLotto from './WinningLotto.js';
-
 class WinningJudge {
   #winner = {
     first: 0,
@@ -14,7 +11,7 @@ class WinningJudge {
     return this.#winner;
   }
 
-  calculateWinner({ lottoList, winningLotto }) {
+  calculateWinner(lottoList, winningLotto) {
     let winnerList;
     lottoList.forEach((lotto) => {
       const lottoNumber = lotto.getNumber();

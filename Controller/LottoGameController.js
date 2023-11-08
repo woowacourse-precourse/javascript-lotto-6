@@ -1,3 +1,5 @@
+import WinningLotto from '../Domain/WinningLotto.js';
+
 class LottoGameController {
   #lottoMachine;
 
@@ -34,10 +36,14 @@ class LottoGameController {
   async makeWinningLotto() {
     const winningLottoNumber = await this.#inputview.readWinningLottoNumber();
     const bonusNumber = await this.#inputview.readBonusNumber();
+    const winngLotto = new WinningLotto({ numbers: winningLottoNumber, bonusNumber });
+
+    return winngLotto;
   }
 
   async printGameResult() {
-    await this.makeWinningLotto();
+    const winngLotto = await this.makeWinningLotto();
+    this.#winningJudge.calculateWinner(this.#lottoList, winngLotto);
     const winnerList = this.#winningJudge.getWinnerList();
     this.#outputview.printresult(winnerList);
   }
