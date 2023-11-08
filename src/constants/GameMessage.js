@@ -1,6 +1,6 @@
 const GAME_MESSAGE = Object.freeze({
   READ_MONEY: '구입금액을 입력해 주세요.\n',
-  PURCHASE: '개를 구매했습니다.\n',
+  PURCHASE: '개를 구매했습니다.',
   READ_WINNIG_NUMBER: '당첨 번호를 입력해 주세요.\n',
   READ_BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
   RESULT_HEADER: '당첨 통계\n---\n',

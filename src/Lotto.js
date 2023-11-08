@@ -1,4 +1,5 @@
 import ERROR from './constants/Error.js';
+import { Console } from '@woowacourse/mission-utils';
 class Lotto {
   #numbers;
 
@@ -6,6 +7,7 @@ class Lotto {
     this.#validate(numbers);
     this.#sortLotto(numbers);
     this.#numbers = numbers;
+    this.#printLotto(this.#numbers);
   }
 
   #validate(numbers) {
@@ -28,6 +30,9 @@ class Lotto {
   // TODO: 추가 기능 구현
   #sortLotto(numbers) {
     return numbers.sort((a, b) => a - b);
+  }
+  #printLotto(numbers){
+    Console.print(numbers);
   }
 }
 

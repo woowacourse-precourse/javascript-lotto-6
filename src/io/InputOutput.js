@@ -4,10 +4,7 @@ import GAME_MESSAGE from '../constants/GameMessage';
 const lottoInput = {
     readMoney(){
         return Console.readLineAsync(GAME_MESSAGE.READ_MONEY);
-    },
-    purchase(){
-        return Console.readLineAsync(GAME_MESSAGE.PURCHASE);
-    },
+    },    
     readWinnigNumber(){
         return Console.readLineAsync(GAME_MESSAGE.READ_WINNIG_NUMBER);
     },
@@ -17,6 +14,9 @@ const lottoInput = {
 }
 
 const lottoOutput = {
+    printPurchase(tickets){
+        Console.print(`${tickets}${GAME_MESSAGE.PURCHASE}`);
+    },
     printResultHeader(){
         Console.print(GAME_MESSAGE.RESULT_HEADER);
     },
@@ -37,6 +37,9 @@ const lottoOutput = {
     },
     printResultRate(rate){
         Console.print(`${GAME_MESSAGE.RESULTRATE} ${rate}${GAME_MESSAGE.RESULTSUFFIX}`);
+    },
+    printLine(){
+        Console.print('');
     },
 }
 
