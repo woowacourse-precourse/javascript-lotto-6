@@ -1,3 +1,3 @@
 import { PRICE } from "../constant/NUMBER.js";
 
-export const purchaseSize = (size) => +(size / PRICE);
+export const purchaseSize = (money) => +(money / PRICE);
