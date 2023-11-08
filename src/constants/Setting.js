@@ -2,6 +2,7 @@ const LOTTO_SETTING = Object.freeze({
   minNumber: 1,
   maxNumber: 45,
   numbersLength: 6,
+  bonusNumberLength: 1,
   pricePerLotto: 1000,
 });
 
