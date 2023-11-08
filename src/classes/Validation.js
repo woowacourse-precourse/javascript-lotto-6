@@ -1,4 +1,4 @@
-import { errorMessage, gameConstant } from "../constant.js";
+import { errorMessage, gameConstant } from "../Constant.js";
 
 class Validation {
   static userMoney(userMoney) {

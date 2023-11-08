@@ -2,7 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
 import Validation from "./Validation.js";
 import WinningLotto from "./WinningLotto.js";
-import { gameConstant, prize, inputMessage } from "../constant.js";
+import { gameConstant, prize, inputMessage } from "../Constant.js";
 
 const Console = MissionUtils.Console;
 
