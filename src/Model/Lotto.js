@@ -6,6 +6,10 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   #validate(numbers) {
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== numbers.length) {
