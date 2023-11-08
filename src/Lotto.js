@@ -1,7 +1,8 @@
-import { Console } from "@woowacourse/mission-utils";
-import { lottoCount } from "./constants/constants";
-import { errorMessage } from "./constants/messages";
-import Validation from "./validations/Validation";
+import { Console } from '@woowacourse/mission-utils';
+import { lottoCount } from './constants/constants';
+import { errorMessage } from './constants/messages';
+
+import Validation from './validations/Validation';
 
 class Lotto {
   #numbers;
@@ -10,7 +11,7 @@ class Lotto {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
-  
+
   #validate(numbers) {
     if (Validation.checkLength(numbers)) {
       throw new Error(errorMessage.INVALID_LENGTH);
@@ -23,37 +24,26 @@ class Lotto {
     }
   }
 
-  printLottoNumbers() {
-    Console.print(`[${this.#numbers.join(", ")}]`);
+  getLottoNumbers() {
+    return this.#numbers;
   }
 
-  getBonus(number) {
-    this.#validateBonus(number);
-    this.bonus = number;
-  }
-  
-  #validateBonus(number) {
-    if (Validation.checkBonusNumber(number)) {
-      throw new Error(errorMessage.INVALID_RANGE);
-    }
-    if (Validation.checkBonusDuplicates(this.#numbers, number)) {
-      throw new Error(errorMessage.BONUS_DUPLICATES);
-    }
+  printLottoNumbers() {
+    Console.print(`[${this.#numbers.join(', ')}]`);
   }
 
   compareLotto(winningLotto) {
-    const compareCount = this.#numbers.filter((number) =>
-      winningLotto.#numbers.includes(number)
+    const compareCount = this.getLottoNumbers().filter(number =>
+      winningLotto.getLottoNumbers().includes(number),
     );
     if (
       compareCount.length === lottoCount.THIRD &&
-      this.#numbers.includes(winningLotto.bonus)
+      this.getLottoNumbers().includes(winningLotto.bonus)
     ) {
       return lottoCount.SECOND;
     }
     return compareCount.length;
   }
 }
-
 
 export default Lotto;
