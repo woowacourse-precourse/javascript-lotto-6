@@ -6,6 +6,11 @@ class InputView {
     const purchaseAmount = await Console.readLineAsync(INPUT_MESSEGE.purchase);
     return purchaseAmount;
   }
+
+  static async inputWinningNumber() {
+    const winningNumber = await Console.readLineAsync(INPUT_MESSEGE.winning);
+    return winningNumber;
+  }
 }
 
 export default InputView;
