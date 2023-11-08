@@ -4,19 +4,19 @@ import WinningNumbersValidator from "../validate/WinningNumbersValidator";
 import BonusNumberValidator from "../validate/BonusNumberValidator";
 import OutputView from "./OutputView";
 
-export default class InputView {
-  static async getPurchasePrice() {
+const InputView = {
+  async getPurchasePrice() {
     try {
       const purchasePrice = await Console.readLineAsync("");
       PurchasePriceValidator.validatePurchasePrice(purchasePrice);
       return purchasePrice;
     } catch (error) {
       OutputView.printError(error);
-      return this.getPurchasePrice(); 
+      return this.getPurchasePrice();
     }
-  }
+  },
 
-  static async getWinningNumbers() {
+  async getWinningNumbers() {
     try {
       const winningNumbers = await Console.readLineAsync("");
       const numbersArray = winningNumbers.split(',').map(num => parseInt(num.trim()));
@@ -26,9 +26,9 @@ export default class InputView {
       OutputView.printError(error);
       return this.getWinningNumbers();
     }
-  }
+  },
 
-  static async getBonusNumber(winningNumbers) {
+  async getBonusNumber(winningNumbers) {
     try {
       const bonusNumber = await Console.readLineAsync("");
       BonusNumberValidator.validateBonusNumber(bonusNumber, winningNumbers);
@@ -38,4 +38,6 @@ export default class InputView {
       return this.getBonusNumber(winningNumbers);
     }
   }
-}
+};
+
+export default InputView;
