@@ -29,6 +29,27 @@ export function generateLottoTickets(ticketCount) {
   return lottoTickets;
 }
 
+export async function enterWinningNumbers() {
+  try {
+    let winningNumbers = await MissionUtils.Console.readLineAsync(
+      "당첨 번호를 입력해 주세요.\n"
+    );
+    let winningNumbersArray = winningNumbers.split(",").map(Number);
+    if (
+      winningNumbersArray.length !== new Set(winningNumbersArray).size ||
+      winningNumbersArray.length !== 6 ||
+      winningNumbersArray.some((number) => number < 1) ||
+      winningNumbersArray.some((number) => number > 45)
+    ) {
+      throw new Error("[ERROR] 올바른 당첨 번호 형식이 아닙니다.");
+    }
+    return winningNumbersArray;
+  } catch (error) {
+    MissionUtils.Console.print(error.message);
+    return await enterWinningNumbers();
+  }
+}
+
 class App {
   async play() {}
 }
