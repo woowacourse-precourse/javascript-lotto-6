@@ -39,9 +39,8 @@ export class Results {
 
   #lottoResultCounter(result) {
     for (let i = 3; i < 7; i++) {
-      if (result[0] === i && i !== 5) {
-        model.winning[i-3] += 1;
-        model.totalPrize += model.prize[i-3];
+      if (result[0] === i && result[0] !== 5) {
+        this.#lottoRatingCounter(result[0]);
       }
     }
     if (result[0] === 5) {
@@ -49,11 +48,28 @@ export class Results {
     }
   }
 
+  #lottoRatingCounter(sameCounts) {
+    if (sameCounts === 3) {
+      model.winning[0] += 1;
+      model.totalPrize += model.prize[0];
+      return true;
+    }
+    if (sameCounts === 4) {
+      model.winning[1] += 1;
+      model.totalPrize += model.prize[1];
+      return true;
+    }
+    model.winning[4] += 1;
+    model.totalPrize += model.prize[4];
+  }
+
   #lottoResultBonusCounter(result) {
     if (result[1] === 0) {
       model.winning[2] += 1;
       model.totalPrize += model.prize[2];
+      return true;
     }
+    model.winning[3] += 1;
     model.totalPrize += model.prize[3];
   }
 
