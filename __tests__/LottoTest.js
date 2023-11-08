@@ -162,4 +162,52 @@ describe('당첨 로또 클래스 테스트', () => {
     const lottoResult = winningLotto.getStatistics(lottos);
     expect(lottoResult).toEqual(result);
   });
+
+  const first = [1, 2, 3, 4, 5, 6];
+  const second = [1, 2, 3, 4, 5, 7];
+  const third = [1, 2, 3, 4, 5, 8];
+  const fourth = [1, 2, 3, 4, 9, 10];
+  const fifth = [1, 2, 3, 8, 9, 10];
+  const none = [10, 11, 12, 13, 14, 15];
+  function calculateProfitRate(amount, count) {
+    return ((amount * 100) / (count * LOTTO.PRICE)).toFixed(1);
+  }
+  test.each([
+    [
+      {
+        lottoNumbers: [first, second, third, fourth, fifth],
+        profit: calculateProfitRate(FIRST + SECOND + THIRD + FOURTH + FIFTH, 5),
+      },
+      {
+        lottoNumbers: [first, second, third, fourth, none],
+        profit: calculateProfitRate(FIRST + SECOND + THIRD + FOURTH, 5),
+      },
+      {
+        lottoNumbers: [first, second, third, none, none],
+        profit: calculateProfitRate(FIRST + SECOND + THIRD, 5),
+      },
+      {
+        lottoNumbers: [first, second, none, none, none],
+        profit: calculateProfitRate(FIRST + SECOND, 5),
+      },
+      {
+        lottoNumbers: [first, none, none, none, none],
+        profit: calculateProfitRate(FIRST, 5),
+      },
+      {
+        lottoNumbers: [none, none, none, none, none],
+        profit: calculateProfitRate(0, 5),
+      },
+      {
+        lottoNumbers: [fifth, none, none, none, none, none, none, none],
+        profit: calculateProfitRate(FIFTH, 8),
+      },
+    ],
+  ])('수익률 테스트', (input) => {
+    const { lottoNumbers, profit } = input;
+    const lottos = lottoNumbers.map((numbers) => new Lotto(numbers));
+    const statistics = winningLotto.getStatistics(lottos);
+    const lottoResult = winningLotto.getProfitRate(statistics, lottoNumbers.length * LOTTO.PRICE);
+    expect(lottoResult).toBe(profit);
+  });
 });
