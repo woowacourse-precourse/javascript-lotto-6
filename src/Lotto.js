@@ -1,4 +1,4 @@
-import Validator from './validator/Validator';
+import Validator from './Validator/Validator';
 import { WINNING_AMOUNTS } from './constants/constants';
 
 class Lotto {

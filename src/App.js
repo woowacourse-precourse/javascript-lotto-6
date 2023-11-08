@@ -1,7 +1,7 @@
 import LottoTickets from './LottoTickets';
 import BonusNumber from './BonusNumber'
-import Input from './view/Input';
-import Output from './view/Output';
+import Input from './View/Input';
+import Output from './View/Output';
 import Lotto from './Lotto';
 
 class App {

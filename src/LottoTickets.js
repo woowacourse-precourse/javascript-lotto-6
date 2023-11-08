@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { GUIDE_MESSAGE, LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants";
-import Validator from "./validator/Validator";
+import { LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants";
+import Validator from "./Validator/Validator";
 import Lotto from "./Lotto";
 
 
