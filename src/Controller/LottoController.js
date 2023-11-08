@@ -12,6 +12,7 @@ class LottoController {
   #winningNumber;
   #bonusNumber;
   #winningStatistics;
+  #revenueRate;
 
   constructor() {}
 
@@ -57,6 +58,10 @@ class LottoController {
       bonusNumber: this.#bonusNumber.getBonusNumber(),
     });
     Output.printResultStatistic(winningStatistic);
+
+    this.#revenueRate = this.#lottoCount.getRevenueRate(winningStatistic);
+    Output.printRevenueResult(this.#revenueRate);
+    return;
   }
 }
 

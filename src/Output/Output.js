@@ -19,6 +19,10 @@ const Output = {
       Console.print(`${STATIC_RESULT[i]}${winningStatic[4 - i]}개`);
     }
   },
+
+  printRevenueResult(revenue) {
+    Console.print(`총 수익률은 ${revenue}%입니다.\n`);
+  },
 };
 
 export default Output;
