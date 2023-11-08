@@ -67,7 +67,6 @@ class App {
 
     if (isBonus) {
       const bonusNumber = parseInt(input.trim(), 10);
-
       MissionUtils.Console.print(`${bonusNumber}\n`)
       return bonusNumber;
     } else {
@@ -117,9 +116,7 @@ class App {
     5개 일치 (1,500,000원) - ${this.matchedCount[5]}개
     5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.matchedCount['5B']}개
     6개 일치 (2,000,000,000원) - ${this.matchedCount[6]}개
-    총 수익률은 ${rateOfReturn}%입니다.
-    `;
-
+    총 수익률은 ${rateOfReturn}%입니다.`;
     MissionUtils.Console.print(resultString);
   }
 }

@@ -12,6 +12,20 @@ MissionUtils.Random = {
     pickUniqueNumbersInRange: mockPickUniqueNumbersInRange
 };
 
+
+function setupWinningNumbers(winningNumbers, bonusNumber) {
+    MissionUtils.Console.readLineAsync
+        .mockResolvedValueOnce(winningNumbers.join(',')) // 당첨 번호 반환
+        .mockResolvedValueOnce(bonusNumber.toString()); // 보너스 번호 반환
+}
+
+function verifyNumbers(numbers, winningNumbers, bonusNumber) {
+    expect(numbers).toHaveLength(7);
+    expect(new Set(numbers).size).toBe(numbers.length); // 모든 숫자가 중복되지 않는지 확인
+    expect(numbers.slice(0, -1)).toEqual(winningNumbers); // 처음 6개 숫자가 당첨 번호와 일치하는지 확인
+    expect(numbers[numbers.length - 1]).toEqual(bonusNumber); // 마지막 숫자가 보너스 번호와 일치하는지 확인
+}
+
 describe('App', () => {
     let app;
 
@@ -26,14 +40,8 @@ describe('App', () => {
         const winningNumbers = [1, 2, 3, 4, 5, 6];
         const bonusNumber = 7;
 
-        MissionUtils.Console.readLineAsync
-        .mockResolvedValueOnce(winningNumbers.join(',')) // 당첨 번호 반환
-        .mockResolvedValueOnce(bonusNumber.toString()); // 보너스 번호 반환
-
+        setupWinningNumbers(winningNumbers, bonusNumber);
         const numbers = await app.requestWinningNumbers();
-        expect(numbers).toHaveLength(7);
-        expect(new Set(numbers).size).toBe(numbers.length); // 모든 숫자가 중복되지 않는지 확인
-        expect(numbers.slice(0, -1)).toEqual(winningNumbers); // 처음 6개 숫자가 당첨 번호와 일치하는지 확인
-        expect(numbers[numbers.length - 1]).toEqual(bonusNumber); // 마지막 숫자가 보너스 번호와 일치하는지 확인
+        verifyNumbers(numbers, winningNumbers, bonusNumber);
     });
 });
