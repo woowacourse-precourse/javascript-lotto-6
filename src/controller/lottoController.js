@@ -3,7 +3,6 @@ import WORD from "../lib/constants/word";
 import InputError from "../lib/utils/error";
 import InputView from "../views/inputView";
 import OutputView from "../views/outputView";
-import { Console } from "@woowacourse/mission-utils";
 
 class LottoController {
   #user;
