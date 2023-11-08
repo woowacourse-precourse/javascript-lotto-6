@@ -12,6 +12,7 @@ export const ERROR_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
   lottoCounts: (count) => `${count}개를 구매했습니다.`,
+  result: "당첨 통계\n---",
 });
 
 export const LOTTO_NUMBER = Object.freeze({

@@ -15,8 +15,7 @@ class ConsolePrint {
   }
 
   printPrize(winningCounts) {
-    Console.print("당첨 통계");
-    Console.print("---");
+    Console.print(OUTPUT_MESSAGE.result);
 
     Object.entries(winningCounts).forEach(([key, value]) => {
       console.log(key, value);
