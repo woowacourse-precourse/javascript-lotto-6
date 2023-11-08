@@ -1,0 +1,37 @@
+export const LOTTO = {
+  NUMBER_RANGE: {
+    MIN: 1,
+    MAX: 45,
+  },
+  NUMBER_COUNT: 6,
+  SELLING_PRICE: 1000,
+};
+
+export const LIMIT_PER_DAY_PURCHASABLE_COUNT = 10;
+export const LIMIT_PER_DAY_PURCHASABLE_TOTAL_PRICE =
+  LOTTO.SELLING_PRICE * LIMIT_PER_DAY_PURCHASABLE_COUNT;
+
+export const MATCHED_COUNT = {
+  SIX: 6,
+  FIVE: 5,
+  FIVE_WITH_BONUS: 5,
+  FOUR: 4,
+  THREE: 3,
+  QQUANG: 2,
+};
+
+export const GRADE = {
+  FIRST: 1,
+  SECOND: 2,
+  THIRD: 3,
+  FOURTH: 4,
+  FIFTH: 5,
+};
+
+export const PIRZE = {
+  FIRST: 2000000000,
+  SECOND: 30000000,
+  THIRD: 1500000,
+  FOURTH: 50000,
+  FIFTH: 5000,
+};
