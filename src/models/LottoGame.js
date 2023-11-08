@@ -18,7 +18,7 @@ class LottoGame {
   setCount(amount) {
     validation.validateInputNumber(amount);
     validation.validatePurchaseAmount(amount);
-    this.#count = Number(amount) / GAME_NUMBER.MONEY_UNIT;
+    this.#count = this.calculateCount(amount);
   }
 
   setLottos() {
@@ -64,6 +64,10 @@ class LottoGame {
     ).map(Number);
   }
 
+  calculateCount(amount) {
+    return Number(amount) / GAME_NUMBER.MONEY_UNIT;
+  }
+
   calculateResults() {
     const status = Array.from({ length: 6 }, () => 0);
     this.#lottos.forEach((lotto) => {
@@ -88,8 +92,19 @@ class LottoGame {
     return RANK.NONE;
   }
 
-  calculateEarningRate() {
+  getEarningRate(result) {
     const amount = this.#count * GAME_NUMBER.MONEY_UNIT;
+    const earning = this.calculateEarning(result);
+    const earningRate = this.calculateEarningRate(amount, earning);
+    return earningRate;
+  }
+
+  calculateEarningRate(amount, earning) {
+    const earningRate = (earning / amount) * 100;
+    return earningRate.toLocaleString(undefined, { maximumFractionDigits: 1 });
+  }
+
+  calculateEarning(result) {
     const prizeMoney = [
       PRIZE.NONE,
       PRIZE.FIRST,
@@ -98,12 +113,11 @@ class LottoGame {
       PRIZE.FOURTH,
       PRIZE.FIFTH,
     ];
-    const earning = this.#result.reduce((acc, value, index) => {
+
+    const earning = result.reduce((acc, value, index) => {
       return acc + value * prizeMoney[index];
     }, 0);
-    const earningRate = (earning / amount) * 100;
-
-    return earningRate.toLocaleString(undefined, { maximumFractionDigits: 1 });
+    return earning;
   }
 }
 

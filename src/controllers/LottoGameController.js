@@ -16,8 +16,7 @@ class LottoGameController {
     this.printLottos();
     await this.enterWinningNumbers();
     await this.enterBonusNumber();
-    this.printStatus();
-    this.printEarningRate();
+    this.printResult();
   }
 
   async purchaseLottos() {
@@ -61,13 +60,10 @@ class LottoGameController {
     }
   }
 
-  printStatus() {
+  printResult() {
     const result = this.#lottoGame.calculateResults();
     OutputView.printStatus(result);
-  }
-
-  printEarningRate() {
-    const earningRate = this.#lottoGame.calculateEarningRate();
+    const earningRate = this.#lottoGame.getEarningRate(result);
     OutputView.printEarningRate(earningRate);
   }
 }
