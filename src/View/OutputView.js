@@ -7,10 +7,8 @@ const OutputView = {
     },
 
     // 구매한 로또 번호 출력
-    printLottoList(lottoList){
-        lottoList.forEach(lotto => {
-            MissionUtils.Console.print(`[${lotto.join(', ')}]`)
-        })
+    printLottoList(lotto){
+        MissionUtils.Console.print(`[${lotto.join(', ')}]`)
     },
 
     // 결과 출력

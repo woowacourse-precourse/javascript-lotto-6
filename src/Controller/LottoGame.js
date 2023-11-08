@@ -1,13 +1,14 @@
 import InputView from '../View/InputView'
 import OutputView from '../View/OutputView'
+import Lotto from '../Model/Lotto'
 import { MissionUtils } from '@woowacourse/mission-utils'
 
 class LottoGame{
     #money // 사용자의 구입 금액
     #count // 로또 구매 개수
-    #winningLotto // 당첨 번호
+    #winningLotto // 당첨 번호가 담긴 Lotto 객체
     #bonus // 보너스 번호
-    #lottoList // 사용자가 구매한 로또 번호
+    #lottoList // 사용자가 구매한 로또 번호가 담긴 Lotto 객체
     #result // 당첨 결과 저장
 
     constructor(){
@@ -29,10 +30,12 @@ class LottoGame{
 
         // 구매한 로또 리스트 출력
         this.#lottoList = await this.getLottoNumList()
-        OutputView.printLottoList(this.#lottoList)
-
+        this.#lottoList.forEach((lotto) => {
+            OutputView.printLottoList(lotto.getNumbers())
+        })
+        
         // 당첨 번호, 보너스 번호 입력받기
-        this.#winningLotto = await InputView.getWinningLotto()
+        this.#winningLotto = await this.getWinningLotto()
         this.#bonus = await InputView.getBonus()
 
         // 결과 생성 및 출력
@@ -52,7 +55,7 @@ class LottoGame{
         const lottoNumList = []
         for(let i=0; i<this.#count; i++){
             const lottoNum = await this.getLottoNum()
-            lottoNumList.push(lottoNum)
+            lottoNumList.push(new Lotto(lottoNum))
         }
 
         return lottoNumList
@@ -65,19 +68,28 @@ class LottoGame{
         return sortedLottoNum
     }
 
+    async getWinningLotto(){
+        const winningLotto = await InputView.getWinningLotto()
+        return new Lotto(winningLotto)
+    }
+
     // 구매개수에 맞게 당첨번호와 로또번호리스트 대조
     makeResult(){
         this.#lottoList.forEach(lotto => {
-            this.compareLotto(lotto)
+            this.compareLotto(lotto.getNumbers())
         })
     }
 
     // 로또 1장과 당첨번호 대조
     compareLotto(lotto){
+        const winningLotto = this.#winningLotto.getNumbers()
 
         // 당첨번호와 일치한 번호 개수 계산
         let count = 0
-        lotto.forEach(lotto => { if(this.#winningLotto.includes(lotto)) count += 1 })
+        lotto.forEach(lotto => { 
+            if(winningLotto.includes(lotto)) 
+                count += 1 
+        })
 
         // 로또 당첨 결과 저장
         switch(count){
