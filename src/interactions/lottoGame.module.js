@@ -38,11 +38,11 @@ const processWinningResult = ({
  * @returns {Promise<import('../utils/jsDoc.js').WinningLottoInfo>} 당첨 로또 정보의 promise 객체
  */
 const processInputWinningLottoInfo = async () => {
-  const winningLottoNumber = await systemErrorHandler.retryOnErrors(
+  const winningLottoNumber = await systemErrorHandler.retryAsyncWithErrorLogging(
     readWinningLottoNumber.bind(lottoGameConsole.input),
   );
 
-  const bonusNumber = await systemErrorHandler.retryOnErrors(() =>
+  const bonusNumber = await systemErrorHandler.retryAsyncWithErrorLogging(() =>
     readBonusNumber.bind(lottoGameConsole.input)(winningLottoNumber),
   );
 
@@ -66,7 +66,7 @@ const processLottoPurchase = (purchasedLottoAmount) => {
  * @returns {Promise<number>} 구매 가격 만큼의 로또 번호들
  */
 const processInputPurchasedLottoAmount = async () => {
-  const purchasedLottoAmount = await systemErrorHandler.retryOnErrors(
+  const purchasedLottoAmount = await systemErrorHandler.retryAsyncWithErrorLogging(
     readPurchasedLottoAmount.bind(lottoGameConsole.input),
   );
 

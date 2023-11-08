@@ -11,12 +11,12 @@ const systemErrorHandler = {
    * @param {Function} executeFunction - 실행할 비동기 함수
    * @returns {Promise<T>} 비동기 함수가 성공적으로 완료되면 그 결과를 반환
    */
-  async retryOnErrors(executeFunction) {
+  async retryAsyncWithErrorLogging(executeFunction) {
     try {
       return await executeFunction();
     } catch (error) {
       Console.print(error.message);
-      return this.retryOnErrors(executeFunction);
+      return this.retryAsyncWithErrorLogging(executeFunction);
     }
   },
 };
