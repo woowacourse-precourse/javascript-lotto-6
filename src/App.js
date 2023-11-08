@@ -47,6 +47,12 @@ class App {
     }
   }
 
+  async getWinningNumbers() {
+    const winningNumbersInput = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    const winningNumbers = new Lotto(winningNumbersInput.split(','));
+    return winningNumbers;
+  }
+
 async play() {
     const lottoAmount = await this.getLottoAmount();
     this.validateLottoAmount(lottoAmount);
@@ -54,6 +60,7 @@ async play() {
     this.printLottoCount(lottoCount);
     this.generateLottoNumbers(lottoCount);
     this.printLottoNumbers();
+    const winningNumbers = await this.getWinningNumbers();
   }
 }
 
