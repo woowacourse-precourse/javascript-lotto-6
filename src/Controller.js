@@ -4,23 +4,27 @@ import Lotto from './Lotto.js';
 import Issuer from './Issuer.js';
 import Matcher from './Matcher.js';
 import OutputView from './OutputView.js';
-import ReturnCalculator from './ReturnCalculator.js';
+import Calculator from './Calculator.js';
+import Purchaser from './Purchaser.js';
 
 class Controller {
   #purchaseAmount;
-
-  #lottoTicketList;
 
   #winningNumbers;
 
   #bonusNumber;
 
   async progress() {
-    await this.#handlerErrorAndProceed(this.#getLottoTicketList);
-    this.#displayLottoTicket();
+    await this.#handlerErrorAndProceed(this.#getPurchaseAmount);
+    const tickets = await this.#getLottoTicketList();
+    this.#displayLottoTicket(tickets);
     await this.#handlerErrorAndProceed(this.#getWinningNumbers);
     await this.#handlerErrorAndProceed(this.#getBonusNumber);
-    const matchStatus = await this.#getMatchStatus();
+    const matchStatus = await this.#getMatchStatus(
+      tickets,
+      this.#winningNumbers,
+      this.#bonusNumber,
+    );
     this.#displayWinningStat(matchStatus);
     const rateOfReturn = await this.#getRateOfReturn(this.#purchaseAmount, matchStatus);
     this.#displayRateOfReturn(rateOfReturn);
@@ -35,14 +39,17 @@ class Controller {
     }
   }
 
-  async #getLottoTicketList() {
-    const inputLottoPurchaseAmount = await InputView.readLottoPurchaseAmount();
-    this.#lottoTicketList = new Issuer(inputLottoPurchaseAmount).tickets;
-    this.#purchaseAmount = Number(inputLottoPurchaseAmount);
+  async #getPurchaseAmount() {
+    const inputLottoPurchaseAmount = Number(await InputView.readLottoPurchaseAmount());
+    this.#purchaseAmount = new Purchaser(inputLottoPurchaseAmount).purchaseAmount;
   }
 
-  #displayLottoTicket() {
-    OutputView.printLottoTicket(this.#lottoTicketList);
+  async #getLottoTicketList() {
+    return new Issuer(this.#purchaseAmount).tickets;
+  }
+
+  #displayLottoTicket(tickets) {
+    OutputView.printLottoTicket(tickets);
   }
 
   async #getWinningNumbers() {
@@ -61,16 +68,16 @@ class Controller {
   }
 
   async #getBonusNumber() {
-    this.inputBonusNumber = await InputView.readLottoBonusNumber();
+    this.inputBonusNumber = Number(await InputView.readLottoBonusNumber());
     this.#bonusNumber = new Bonus(this.#winningNumbers, this.inputBonusNumber).bonusNumber;
   }
 
-  async #getMatchStatus() {
-    return new Matcher(this.#lottoTicketList, this.#winningNumbers, this.#bonusNumber).matchStatus;
+  async #getMatchStatus(tickets, winningNumbers, bonusNumber) {
+    return new Matcher(tickets, winningNumbers, bonusNumber).matchStatus;
   }
 
   async #getRateOfReturn(purchaseAmount, matchStatus) {
-    return new ReturnCalculator(purchaseAmount, matchStatus).rateOfReturn;
+    return new Calculator(purchaseAmount, matchStatus).rateOfReturn;
   }
 
   #displayWinningStat(matchStatus) {

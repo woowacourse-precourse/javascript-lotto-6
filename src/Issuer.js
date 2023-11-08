@@ -5,23 +5,9 @@ class Issuer {
 
   #tickets;
 
-  constructor(inputValue) {
-    const purchaseAmount = Number(inputValue);
-    this.#validate(inputValue);
+  constructor(purchaseAmount) {
     this.#lottoCount = purchaseAmount / 1000;
-    this.#generate();
-  }
-
-  #validate(purchaseAmount) {
-    if (Number.isNaN(purchaseAmount)) {
-      throw new Error('[ERROR] 구매 금액은 숫자여야 합니다.');
-    }
-    if (purchaseAmount < 1000) {
-      throw new Error('[ERROR] 최소 구매 금액은 1000원입니다.');
-    }
-    if (purchaseAmount % 1000 !== 0) {
-      throw new Error('[ERROR] 구매 금액은 1000원 단위여야 합니다.');
-    }
+    this.#tickets = this.#generate();
   }
 
   #generate() {
@@ -30,7 +16,7 @@ class Issuer {
       const sortedRandomNumbers = RandomNumberGenerator().sort((a, b) => a - b);
       issuedLottoList.push(sortedRandomNumbers);
     }
-    this.#tickets = issuedLottoList;
+    return issuedLottoList;
   }
 
   get tickets() {
