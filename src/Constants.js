@@ -35,6 +35,10 @@ export const BONUS_NUMBER_ERROR_MESSAGES = Object.freeze({
   DUPLICATED_WITH_WINNING_NUMBER: `[ERROR] 당첨 번호와 동일한 보너스 번호가 있습니다.`,
 });
 
+export const LOTTO_NUMBERS_ERROR_MESSAGES = Object.freeze({
+  NOT_GENERATED: '[ERROR] 로또 번호가 셍성되지 않았습니다.',
+});
+
 export const GAEM_RESULT_MESSAGE = `\n당첨 통계\n---`;
 
 export const NUMBER_OF_PURCHASED_LOTTO_MESSAGE = (numberOfLottos) =>

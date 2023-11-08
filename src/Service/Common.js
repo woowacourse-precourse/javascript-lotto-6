@@ -47,3 +47,7 @@ export const isDuplicated = (input) => {
 export const isDuplicatedWithWinningNumber = (input, winningNumbers) => {
   return winningNumbers.includes(Number(input));
 };
+
+export const isArrayType = (input) => {
+  return Array.isArray(input);
+};
