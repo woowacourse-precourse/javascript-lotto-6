@@ -25,13 +25,13 @@ class Validator {
     }
   }
 
-  isNotNumber(numbers){
-    numbers.forEach(num => {
+  isNotNumber(numbers) {
+    numbers.forEach((num) => {
       if (!sNaN(num)) {
-        return true
+        return true;
       }
-    })
-    return false
+    });
+    return false;
   }
 
   static isNumbersValid(input) {
@@ -41,7 +41,7 @@ class Validator {
       .sort((a, b) => a - b)
       .join('');
     const FILTERED_NUMBERS = WINNINGS.filter((num) => num < 1 || num > 45);
-    const FILTER_STRINGS = WINNINGS.filter(num => isNaN(num))
+    const FILTER_STRINGS = WINNINGS.filter((num) => isNaN(num));
 
     if (FILTER_STRINGS.length > 0) {
       throw new CustomError(COMMON_ERROR_MESSAGE.emptyString);

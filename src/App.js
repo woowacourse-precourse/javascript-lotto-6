@@ -1,7 +1,7 @@
 import LottoTickets from './LottoTickets.js';
 import BonusNumber from './BonusNumber.js';
 import Input from './view/Input.js';
-import Output from './view/Output.js'
+import Output from './view/Output.js';
 import Lotto from './Lotto.js';
 
 class App {
@@ -71,11 +71,11 @@ class App {
       this.#winningNumbers,
       this.#bonusNumber
     );
-    const profits = this.lotto.getProfits(STATS);
-    const rate = this.lotto.calculateRate(profits, this.#money);
+    const PROFITS = this.lotto.getProfits(STATS);
+    const RATE = this.lotto.calculateRate(PROFITS, this.#money);
 
     this.output.printStats(STATS);
-    this.output.printRate(rate);
+    this.output.printRate(RATE);
   }
 }
 
