@@ -1,6 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import { deepFreeze } from '../utils/deepFreeze.js';
 
-export const OutputView = {
+export const OutputView = deepFreeze({
   printLine(message) {
     MissionUtils.Console.print(message);
   },
@@ -8,4 +9,4 @@ export const OutputView = {
   divideLine() {
     MissionUtils.Console.print('');
   },
-};
+});
