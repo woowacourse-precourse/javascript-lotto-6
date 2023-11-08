@@ -22,7 +22,7 @@ class LottoGame {
   #bonusNumber = null;
 
   /** @type {object} : 등수 별 당첨 수 */
-  #prizeStats = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  #prizeStats = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
   /** @type {number} : 총 당첨금액 */
   #totalPrizeAmount = 0;
@@ -37,18 +37,12 @@ class LottoGame {
 
   /** 랜덤 번호를 가진 로또 티켓을 구입 수량만큼 생성한다. */
   generateTickets() {
-    //TEST:
-    this.#tickets.push(new Lotto([1, 2, 3, 4, 5, 6]));
-    this.#tickets.push(new Lotto([1, 2, 3, 4, 5, 7]));
-    this.#tickets.push(new Lotto([1, 2, 3, 4, 5, 8]));
-    this.#tickets.push(new Lotto([1, 2, 3, 4, 8, 8]));
-    this.#tickets.push(new Lotto([1, 2, 3, 8, 8, 8]));
-    this.#tickets.push(new Lotto([1, 2, 8, 8, 8, 8]));
-    // for (let i = 0; i < this.#purchaseQuantity; i++) {
-    //   const numbers = Random.pickUniqueNumbersInRange(
-    //     OPT.min_number, OPT.max_number, lotto_number_count
-    //   ).sort(ASC);
-    //   this.#tickets.push(new Lotto(numbers));
+    for (let i = 0; i < this.#purchaseQuantity; i++) {
+      const numbers = Random.pickUniqueNumbersInRange(
+        OPT.min_number, OPT.max_number, OPT.lotto_number_count
+      ).sort(ASC);
+      this.#tickets.push(new Lotto(numbers));
+    }
   }
 
   /** 각 티켓을 당첨번호와 비교하여 당청 등수를 계산한다. */
@@ -87,9 +81,9 @@ class LottoGame {
    * @returns {number} 당첨 등수 (0 : 낙첨)
    */
   #determinePrizeRank(ticket) {
-    for (const prize of OPT.prize_conditions) {
-      if (this.#isPrizeMatch(ticket, prize)) {
-        return prize.rank;
+    for (const rank of OPT.rank) {
+      if (this.#isPrizeMatch(ticket, OPT.prize[rank])) {
+        return rank;
       }
     }
     return 0;
@@ -103,7 +97,8 @@ class LottoGame {
    */
   #isPrizeMatch(ticket, prize) {
     const numberMatchs = ticket.getMatch() === prize.match;
-    const bonusMatch = prize.bonusMatch === true ? ticket.getBonusMatch() : true;
+    const bonusMatch = prize.bonusMatch === undefined ? true :
+      prize.bonusMatch === ticket.getBonusMatch();
     return numberMatchs && bonusMatch;
   }
 
@@ -111,7 +106,10 @@ class LottoGame {
   calculateTotalPrizeAmount() {
     let totalPrizeAmount = 0;
     this.#tickets.forEach((ticket) => {
-      totalPrizeAmount += OPT.prize_amount[ticket.getPrizeRank()];
+      const rank = ticket.getPrizeRank();
+      if (rank !== 0) {
+        totalPrizeAmount += OPT.prize[rank].amount;
+      }
     });
     this.#totalPrizeAmount = totalPrizeAmount
   }

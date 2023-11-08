@@ -3,6 +3,7 @@ import LottoGameView from '../view/LottoGameView.js'
 import LottoGameValidator from '../validation/LottoGameValidator.js'
 import { MESSAGES as MSG } from '../constant/Messages.js';
 import { LOTTO_GAME_OPTIONS as OPT } from '../constant/Options.js';
+import { Console } from '@woowacourse/mission-utils';
 
 const Validator = LottoGameValidator;
 
@@ -28,9 +29,16 @@ class LottoGameController {
 
 	/** 구입 금액을 입력 받는 로직을 담당한다. */
 	async #handleInputPurchaseAmount() {
-		const purchaseAmount = await this.#view.inputPurchaseAmount();
-		Validator.validatePurchaseAmount(purchaseAmount);
-		this.#lottoGame.setPurchaseAmount(purchaseAmount);
+		while (true) {
+			try {
+				const purchaseAmount = await this.#view.inputPurchaseAmount();
+				Validator.validatePurchaseAmount(purchaseAmount);
+				this.#lottoGame.setPurchaseAmount(purchaseAmount);
+				break;
+			} catch ({ message }) {
+				this.#view.print(message);
+			}
+		}
 	}
 
 	/** 티켓의 발행 로직을 담당한다. */
@@ -50,11 +58,17 @@ class LottoGameController {
 
 	/** 당첨 번호의 입력 로직을 담당한다. */
 	async#handleInputWinningNumbers() {
-		this.#view.breakLine();
-		const winningNumbers = this.#preprocessWinningNumbers(
-			await this.#view.inputWinningNumbers()
-		);
-		this.#lottoGame.setWinningNumbers(winningNumbers);
+		while (true) {
+			try {
+				this.#view.breakLine();
+				let winningNumbers = await this.#view.inputWinningNumbers();
+				winningNumbers = this.#preprocessWinningNumbers(winningNumbers);
+				this.#lottoGame.setWinningNumbers(winningNumbers);
+				break;
+			} catch ({ message }) {
+				this.#view.print(message);
+			}
+		}
 	}
 
 	/**
@@ -73,11 +87,17 @@ class LottoGameController {
 
 	/** 보너스 번호의 입력 로직을 담당한다. */
 	async #handleInputBonusNumber() {
-		this.#view.breakLine();
-		const bonusNumber = this.#preprocessBonusNumber(
-			await this.#view.inputBonusNumber()
-		);
-		this.#lottoGame.setBonusNumber(bonusNumber);
+		while (true) {
+			try {
+				this.#view.breakLine();
+				let bonusNumber = await this.#view.inputBonusNumber();
+				bonusNumber = this.#preprocessBonusNumber(bonusNumber);
+				this.#lottoGame.setBonusNumber(bonusNumber);
+				break;
+			} catch ({ message }) {
+				this.#view.print(message);
+			}
+		}
 	}
 
 	/**

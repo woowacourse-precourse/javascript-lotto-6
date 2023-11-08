@@ -16,40 +16,39 @@ class LottoGameView {
   }
 
   /**
-   * "구입금액을 입력해 주세요."
+   * 문자열을 출력한다.
+   * @param {string} message 출력할 문자열
+   */
+  print(message) {
+    Console.print(message);
+  }
+
+  /**
+   * 구입금액을 입력받는다.
    * @returns {string} 구입 금액
    */
   async inputPurchaseAmount() {
-    // TEST:
-    return '5000';
-
     return await Console.readLineAsync(MSG.prompt_purchase_amount);
   }
 
   /**
-   * "당첨 번호를 입력해 주세요."
+   * 당첨번호를 입력받는다.
    * @returns {string} 쉼표로 구분된 당첨 번호 목록
    */
   async inputWinningNumbers() {
-    // TEST:
-    return '1,2,3,4,5,6';
-
     return await Console.readLineAsync(MSG.prompt_winning_numbers);
   }
 
   /**
-   * "보너스 번호를 입력해 주세요."
+   * 보너스번호를 입력받는다.
    * @returns {string} 보너스 번호
    */
   async inputBonusNumber() {
-    // TEST:
-    return '7';
-
     return await Console.readLineAsync(MSG.prompt_bonus_number);
   }
 
   /**
-   * "${purchaseQuantity}개를 구매했습니다."
+   * 티켓 구입 수량 안내 메시지를 출력한다.
    * @param {number} purchaseQuantity 구입 수량
    */
   displayPurchaseQuantity(purchaseQuantity) {
@@ -60,7 +59,7 @@ class LottoGameView {
   }
 
   /**
-   * "[${n1}, ${n2}, ${n3}, ${n4}, ${n5}, ${n6}]"
+   * 티켓들의 로또 번호를 출력한다.
    * @param {Array<Lotto>} tickets 구입한 티켓 배열
    */
   displayTickets(tickets) {
@@ -73,20 +72,33 @@ class LottoGameView {
   }
 
   /**
-   * 
+   * 당첨 통계를 출력한다.
    * @param {object} prizeStats 등수 별 당첨 횟수
    * @param {number} earningsRate 수익률(%)
    */
   displayPrizeStats(prizeStats, earningsRate) {
     Console.print(MSG.winning_stats);
     Console.print(MSG.winning_stats_separator);
-    // TODO: 당첨통계
+
+    OPT.prize_stats_sequence.forEach((rank) => {
+      const prize = OPT.prize[rank];
+      Console.print(FormatString(
+        MSG.winning_result_f, [
+        prize.match,
+        prize.bonusMatch === true ? MSG.bonus_match : MSG.null,
+        FormatNumberWithCommas(prize.amount),
+        prizeStats[rank]
+      ]
+      ));
+    });
+
     Console.print(FormatString(
-      MSG.total_profit_rate_f,
-      [FormatNumberWithCommas(
+      MSG.total_profit_rate_f, [
+      FormatNumberWithCommas(
         FormatNumberRound(
           earningsRate,
-          OPT.rounding_precision)
+          OPT.rounding_precision
+        )
       )]
     ));
   }

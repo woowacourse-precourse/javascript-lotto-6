@@ -6,9 +6,9 @@ export const MESSAGES = Object.freeze({
   new_line: '\n',
 
   // 프롬프트 안내
-  prompt_purchase_amount: '구입금액을 입력해 주세요.',
-  prompt_winning_numbers: '당첨 번호를 입력해 주세요.',
-  prompt_bonus_number: '보너스 번호를 입력해 주세요.',
+  prompt_purchase_amount: '구입금액을 입력해 주세요.\n',
+  prompt_winning_numbers: '당첨 번호를 입력해 주세요.\n',
+  prompt_bonus_number: '보너스 번호를 입력해 주세요.\n',
 
   // 티켓 구입 결과
   purchase_result_f: '{0}개를 구매했습니다.',
