@@ -31,5 +31,7 @@ module.exports = {
     'no-new': 'off',
     'import/no-cycle': 'off',
     'no-restricted-globals': 'off',
+    'no-sparse-arrays': 'off',
+    'default-case': 'off',
   },
 };

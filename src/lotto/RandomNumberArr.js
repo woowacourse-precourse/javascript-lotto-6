@@ -6,17 +6,30 @@ export default class RandomNumber {
   #randomNumber;
 
   constructor(cnt) {
-    // this.#validate(numbers);
     this.#randomNumber = this.createRandomNumber(cnt);
   }
 
-  // #validate(numbers) {}
-
   printRandomNumber() {
     this.#randomNumber.forEach((numbers, idx) => {
-      printMethod(numbers);
+      const tmp = this.#makeArrStr(numbers);
+      printMethod(tmp);
       if (idx === this.#randomNumber.length - 1) printMethod('\n');
     });
+  }
+
+  #makeArrStr(arr) {
+    const tmpArr = arr.slice();
+    let tmpStr = '';
+    tmpStr += '[';
+    tmpStr += `${tmpArr.shift()}, `;
+    tmpStr += `${tmpArr.shift()}, `;
+    tmpStr += `${tmpArr.shift()}, `;
+    tmpStr += `${tmpArr.shift()}, `;
+    tmpStr += `${tmpArr.shift()}, `;
+    tmpStr += `${tmpArr.shift()}`;
+    tmpStr += ']';
+
+    return tmpStr;
   }
 
   createNumbers() {
