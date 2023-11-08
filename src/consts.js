@@ -34,4 +34,6 @@ export const condition = Object.freeze({
   lottoMaxNumber: 45,
   inputEmptyLength: 0,
   separator: ',',
+  oneLottoPrice: 1000,
+  correctRemain: 0,
 });
