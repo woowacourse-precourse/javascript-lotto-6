@@ -41,6 +41,22 @@ class Game {
     return drawingLotto.includes(bonusNumber);
   }
 
+  calculateAllLottoMatches(lotto, drawingLottoArray, bonusNumber) {
+    drawingLottoArray.forEach((drawingLotto) => {
+      const matchCounts = this.#calculateOneLottoMatch(lotto, drawingLotto);
+      this.#countWinning(matchCounts, this.matchingResults);
+
+      if (
+        matchCounts === 5 &&
+        this.#isMatchBonusBall(bonusNumber, drawingLotto)
+      ) {
+        this.matchingResults[4]++;
+      }
+    });
+
+    return this.matchingResults;
+  }
+
 }
 
 export default Game;
