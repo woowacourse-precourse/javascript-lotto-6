@@ -4,6 +4,7 @@ import Lotto from "./Lotto.js";
 class App {
   async play() {
     const COUNT = await this.getPurchaseAmount();
+    this.printLottoCounts(COUNT);
     const TICKETS = this.createUniqueRandomNums(COUNT);
     const WINNINGNUMS = await this.getWinningNum();
     const BONUS = await this.getBonusNum();
@@ -17,9 +18,7 @@ class App {
     const INPUTPRICE = parseInt(await Console.readLineAsync("구입금액을 입력해 주세요."));
     if(INPUTPRICE % 1000 !== 0)
       throw new Error("[ERROR] 구입 금액은 1,000원 단위여야 합니다.")
-    const COUNT = INPUTPRICE/1000;
-    this.printLottoCounts(COUNT);
-    return COUNT;
+    return INPUTPRICE/1000;
   }
 
   // 구입금액으로 몇개의 로또를 구매했는지 출력해주는 메서드
