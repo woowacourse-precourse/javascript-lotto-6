@@ -8,6 +8,7 @@ class PrintLottoResult {
   }
 
   printResult() {
+    Console.print('');
     Console.print('당첨 통계');
     Console.print('---');
     Console.print(`3개 일치 (5,000원) - ${this.#lottoResult.grade.fifth}개`);
