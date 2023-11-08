@@ -20,6 +20,19 @@ class App {
       const result = this.getResultInOneLotto(oneLotto, winningLotto, bonusLotto);
       resultArray.push(result);
     }
+    const profit = this.getProfit(resultArray);
+    this.printResult(resultArray, profit)
+  }
+
+  printResult(result, prof) {
+    
+    MissionUtils.Console.print(`당첨 통계\n---`);
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${result.filter(e=>e===5).length}개`)
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${result.filter(e=>e===4).length}개`)
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${result.filter(e=>e===3).length}개`)
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.filter(e=>e===2).length}개`)
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${result.filter(e=>e===1).length}개`)
+    MissionUtils.Console.print(`총 수익률은 ${prof}%입니다.`)
   }
 
   getResultInOneLotto(oneLotto, winningLotto, bonusLotto) {
@@ -43,8 +56,16 @@ class App {
     else return 0;    
   }
 
-  getProfit() {
-
+  getProfit(result) {
+    const sum = 0;
+    result.forEach(rank=>{
+      if(rank===1) sum+=2000000000;
+      else if(rank===2) sum+=30000000;
+      else if(rank===3) sum+=1500000;
+      else if(rank===4) sum+=50000;
+      else if(rank===5) sum+=5000;
+    })
+    return sum;
   }
   
 
