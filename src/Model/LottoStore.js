@@ -6,6 +6,7 @@ import {
   LOTTO_WINNING_AMOUNT,
   MATH_FACTORS,
   PURCHASE_AMOUNT,
+  WINNING_CONDITIONS
 } from "../constants/lotto.js";
 import { MESSAGE_FACTOR } from "../constants/message.js";
 
@@ -69,18 +70,14 @@ class LottoStore {
   }
 
   #compareMatchResult({ lottoWinningNumbersMatchCount, bonusNumberMatchCount }) {
-    if (lottoWinningNumbersMatchCount === 3) 
-      this.#LottoMatchResult.fifthPlace++;
-    if (lottoWinningNumbersMatchCount === 4) 
-      this.#LottoMatchResult.fourthPlace++;
-    if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 0)
-      this.#LottoMatchResult.thirdPlace++;
-    if (lottoWinningNumbersMatchCount === 5 && bonusNumberMatchCount === 1)
-      this.#LottoMatchResult.secondPlace++;
-    if (lottoWinningNumbersMatchCount === 6) 
-      this.#LottoMatchResult.firstPlace++;
+    for (const [place, conditions] of Object.entries(WINNING_CONDITIONS)) {
+      if (lottoWinningNumbersMatchCount === conditions.lottoWinningNumbersMatchCount &&
+        conditions.bonusNumberMatchCount.includes(bonusNumberMatchCount)) {
+        this.#LottoMatchResult[place]++;
+      }
+    }
   }
-
+  
   #calculateReturnRate() {
     const totalWinningAmount = this.#calculateTotalWinningAmount();
     const returnRate = (totalWinningAmount / (this.#lottos.length * PURCHASE_AMOUNT.unit)) * MATH_FACTORS.percentage;

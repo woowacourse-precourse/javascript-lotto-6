@@ -6,6 +6,29 @@ export const LOTTO_WINNING_AMOUNT = Object.freeze({
   firstPlace: 2000000000,
 });
 
+export const WINNING_CONDITIONS = Object.freeze({
+  fifthPlace: {
+    lottoWinningNumbersMatchCount: 3,
+    bonusNumberMatchCount: [0, 1],
+  },
+  fourthPlace: {
+    lottoWinningNumbersMatchCount: 4,
+    bonusNumberMatchCount: [0, 1],
+  },
+  thirdPlace: {
+    lottoWinningNumbersMatchCount: 5,
+    bonusNumberMatchCount: [0],
+  },
+  secondPlace: {
+    lottoWinningNumbersMatchCount: 5,
+    bonusNumberMatchCount: [1],
+  },
+  firstPlace: {
+    lottoWinningNumbersMatchCount: 6,
+    bonusNumberMatchCount: [0, 1],
+  },
+});
+
 export const LOTTO = Object.freeze({
   numberLength: 6,
   bonusNumberLength: 1,
