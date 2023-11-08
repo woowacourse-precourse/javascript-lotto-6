@@ -12,6 +12,12 @@ class App {
     const priceInput = await Console.readLineAsync(
       CONSOLE_MESSAGE.PROMPT_USER_PRICE
     );
+    this.validatePriceInput(priceInput);
+
+    return Number(priceInput);
+  }
+
+  validatePriceInput(priceInput) {
     if (!Price.isValidPrice(priceInput)) {
       throw new Error(
         isNaN(priceInput)
@@ -19,8 +25,6 @@ class App {
           : ERROR_MESSAGE.PRICE_UNIT_ERROR
       );
     }
-    const price = Number(priceInput);
-    return price;
   }
 
   generateLottos(lottoAmount) {
