@@ -19,6 +19,7 @@ class CirculateRate {
   static revenueRate(winnings, purchaseAmount) {
     const reword = this.winningReword(winnings);
     const rate = this.calculateRevenueRate(reword, purchaseAmount);
+
     return rate;
   }
 }

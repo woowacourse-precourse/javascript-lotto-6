@@ -1,12 +1,21 @@
-import { MAGIC_NUMBER } from '../constants/number';
+import { 
+  MAGIC_NUMBER, 
+  MATCH_NUMBER, 
+  WINNING_INDEX 
+} from '../constants/number';
 
 class Winning {
   static countMatchNumber(lottos, winningNumbers, bonusNumber) {
     const matchNumber = lottos.filter((number) => winningNumbers.includes(number)).length;
-    if (matchNumber === MAGIC_NUMBER.three) return 0;
-    if (matchNumber === MAGIC_NUMBER.four) return 1;
-    if (matchNumber === MAGIC_NUMBER.five) return lottos.includes(bonusNumber) ? 3 : 2;
-    if (matchNumber === MAGIC_NUMBER.six) return 4;
+    if (matchNumber === MATCH_NUMBER.three) return WINNING_INDEX.zero;
+    if (matchNumber === MATCH_NUMBER.four) return WINNING_INDEX.first;
+
+    if (matchNumber === MATCH_NUMBER.five) {
+      return lottos.includes(bonusNumber) ? WINNING_INDEX.third : WINNING_INDEX.second;
+    }
+
+    if (matchNumber === MATCH_NUMBER.six) return WINNING_INDEX.fourth;
+
     return MAGIC_NUMBER.failure;
   }
 
