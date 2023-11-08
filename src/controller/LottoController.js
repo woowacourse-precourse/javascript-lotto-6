@@ -16,6 +16,7 @@ class LottoController {
     this.#buyLottos();
     this.#printLottos();
     await this.#readWinningNumbers();
+    await this.#readBonusNumber();
   }
 
   // 스택 오버플로우를 방지하기 위해 재귀 대신 while loop를 사용
@@ -49,6 +50,19 @@ class LottoController {
       try {
         const winningNumbers = await this.#view.readWinningNumbers();
         this.#service.setWinningNumbers(winningNumbers);
+      } catch (error) {
+        this.#view.print(error.message);
+      }
+    }
+    this.#view.printNewLine();
+  }
+
+  // 스택 오버플로우를 방지하기 위해 재귀 대신 while loop를 사용
+  async #readBonusNumber() {
+    while (!this.#service.getBonusNumber()) {
+      try {
+        const bonusNumber = await this.#view.readBonusNumber();
+        this.#service.setBonusNumber(bonusNumber);
       } catch (error) {
         this.#view.print(error.message);
       }

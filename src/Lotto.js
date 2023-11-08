@@ -1,7 +1,7 @@
 import MESSAGE from './constants/message.js';
 import OPTION from './constants/option.js';
 import InputError from './error/InputError.js';
-import numbersInRange from './utils/numbersInRange.js';
+import { numbersInRange } from './utils/number.js';
 
 class Lotto {
   #numbers;

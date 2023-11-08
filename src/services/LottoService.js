@@ -3,11 +3,14 @@ import Account from '../models/Account.js';
 import Lotto from '../Lotto.js';
 import getRandomLottoNumbers from '../utils/random.js';
 import sortAscendingNumber from '../utils/sort.js';
+import BonusNumber from '../models/BonusNumber.js';
 
 class LottoService {
   #account;
 
   #winningLotto;
+
+  #bonusNumber;
 
   constructor() {
     this.#account = new Account();
@@ -20,6 +23,10 @@ class LottoService {
   setWinningNumbers(winningNumbers) {
     const lottoNumbers = sortAscendingNumber(winningNumbers);
     this.#winningLotto = new Lotto(lottoNumbers);
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = new BonusNumber(bonusNumber, this.getWinningNumbers());
   }
 
   buyLottos() {
@@ -42,6 +49,12 @@ class LottoService {
     if (!this.#winningLotto) return undefined;
 
     return this.#winningLotto.getNumbers();
+  }
+
+  getBonusNumber() {
+    if (!this.#bonusNumber) return undefined;
+
+    return this.#bonusNumber.getNumber();
   }
 }
 

@@ -23,6 +23,11 @@ class LottoView {
     return result.split(OPTION.inputSeparator).map(Number);
   }
 
+  async readBonusNumber() {
+    const result = await this.#inputView.read(MESSAGE.read.readBonusNumber);
+    return Number(result);
+  }
+
   print(query) {
     this.#outputView.print(query);
   }
