@@ -45,8 +45,8 @@ class LottoCycle {
 
 	checkLottosRank() {
 		this.#userLottos.forEach((lotto) => {
-			const correctCount = LottoCheck.checkCorrectNumber(this.#winnerLotto, lotto);
-			const isCorrectBonus = lotto.includes(this.#bonusLotto);
+			const correctCount = LottoCheck.checkCorrectNumber(this.#winnerLotto.numbers, lotto);
+			const isCorrectBonus = lotto.includes(this.#bonusLotto.bonusNumber);
 			this.#updateScoreCount(correctCount, isCorrectBonus);
 		});
 	}
@@ -58,7 +58,10 @@ class LottoCycle {
 			totalReward += LOTTO_REWARD_CONSTANTS[rank] * this.#scoreCount[rank];
 		}
 
-		return ((totalReward / this.#purchaseCost) * 100).toFixed(1);
+		const fixedTotalReward = ((totalReward / this.#purchaseCost) * 100).toFixed(1);
+		const formattedTotalReward = new Intl.NumberFormat('en-US').format(fixedTotalReward);
+
+		return formattedTotalReward;
 	}
 
 	printLottoResult() {
@@ -69,15 +72,15 @@ class LottoCycle {
 		for (const rank in this.#scoreCount) {
 			const rewardString = new Intl.NumberFormat('en-US').format(LOTTO_REWARD_CONSTANTS[rank]);
 
-			if (rank === 2) {
-				Console.log(
+			if (rank == 2) {
+				Console.print(
 					`${LOTTO_RANK_STANDARD[rank]}개 일치, 보너스 불 일치 (${rewardString}원) - ${
 						this.#scoreCount[rank]
 					}개`,
 				);
 			}
 
-			Console.log(
+			Console.print(
 				`${LOTTO_RANK_STANDARD[rank]}개 일치 (${rewardString}원) - ${this.#scoreCount[rank]}개`,
 			);
 		}
