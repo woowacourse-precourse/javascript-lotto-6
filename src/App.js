@@ -6,6 +6,8 @@ import checkBonus from "../domain/Bonus";
 
 
 class App {
+#priceAttempt = 0;
+#maxPriceAttempt = 3;
 
   constructor() {
     this.price = 0;
@@ -34,29 +36,17 @@ class App {
 
   async getLottoPrice() {
     let validPriceInput = false;
-    let priceAttempts = 0;
-    const maxPriceAttempts = 3; // 최대 시도 횟수를 설정합니다.
-    while (!validPriceInput && priceAttempts < maxPriceAttempts) {
+    while (!validPriceInput && this.#priceAttempt < this.#maxPriceAttempt) {
       const priceInput = await Console.readLineAsync(MESSAGE.BUY);
-
       try {
-        if (isNaN(Number(priceInput))) {
-          throw new Error(ERROR.NAN);
-        }
-
-        if (priceInput % 1000 !== 0) {
-          throw new Error(ERROR.THOUSAND);
-        }
-        if (priceInput === 0) {
-          throw new Error(ERROR.THOUSAND);
-        }
-
+        if (isNaN(Number(priceInput))) {throw new Error(ERROR.NAN);}
+        if (priceInput % 1000 !== 0 || priceInput === 0) {throw new Error(ERROR.THOUSAND);}
         this.price = priceInput;
         this.count = parseInt(priceInput / 1000);
         validPriceInput = true;
       } catch (error) {
         Console.print(error.message);
-        priceAttempts++;
+        this.#priceAttempt++;
       }
     }
   }
@@ -79,21 +69,14 @@ class App {
   
   async getNumbers() {
     let winningNumbers;
-    
     const getWinningNumbers = await Console.readLineAsync(MESSAGE.WINNING_NUMBER);
     const bonusNumbers = await Console.readLineAsync(MESSAGE.BONUS_NUMBER);
-
       try {
-    
-        Console.print(getWinningNumbers);
         const checkWinning = new Lotto(getWinningNumbers.split(',').map(Number));
-        const temporaryBonus = Number(bonusNumbers);
         winningNumbers = getWinningNumbers.split(',').map(Number); // 쉼표로 구분된 값을 배열로 변환합니다.
         this.winning = Array.from(winningNumbers);
-        const number = [...this.winning, temporaryBonus];
+        const number = [...this.winning, Number(bonusNumbers)];
         const checkbonus = new checkBonus(number);
-        
-        validInput = true;
       } catch (error) {
         Console.print(error.message);
       }
@@ -130,15 +113,9 @@ class App {
   
   printWinningStatics() {
     let winningPrice = 
-    this.sameNumbersObject['three'] * 5000 
-    + this.sameNumbersObject['four']* 50000
-    + this.sameNumbersObject['five'] * 1500000
-    + this.sameNumbersObject['bonus'] * 30000000 
-    + this.sameNumbersObject['six'] * 2000000000;
-
+    this.sameNumbersObject['three'] * 5000 + this.sameNumbersObject['four']* 50000 + this.sameNumbersObject['five'] * 1500000 + this.sameNumbersObject['bonus'] * 30000000 + this.sameNumbersObject['six'] * 2000000000;
     const rate = winningPrice/this.price *100;
     const percent = rate.toFixed(1);
-    
     Console.print(
     `당첨 통계
     ---
@@ -149,7 +126,6 @@ class App {
     6개 일치 (2,000,000,000원) - ${this.sameNumbersObject['six']}개
     총 수익률은 ${percent}%입니다.`)
   }
-  
 }
 
 export default App;
