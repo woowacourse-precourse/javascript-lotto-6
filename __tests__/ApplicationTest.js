@@ -28,7 +28,7 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
@@ -40,12 +40,29 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
+
+const runExcept = async (input) => {
+  // given
+  const logSpy = getLogSpy();
+
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+
+  mockRandoms([RANDOM_NUMBERS_TO_END]);
+  mockQuestions(input);
+
+  // when
+  const app = new App();
+  await app.play();
+
+  // then
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -94,5 +111,24 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
-});
 
+  test("1000원 단위로 떨어지는지 확인", async () => {
+    await runException("1234");
+  });
+
+  test("당첨번호의 개수가 다른 경우", async () => {
+    await runException("1000");
+  });
+
+  test("당첨번호가 5개로 들어오는 경우", async () => {
+    await runExcept(["1000", "1,2,3,4,6", "1,2,3,4,5,6", "7"]);
+  });
+
+  test("당첨번호가 쉼표로 들어오지 않는 경우", async () => {
+    await runExcept(["1000", "1,2,3,4,5.6", "1,2,3,4,5,6", "7"]);
+  });
+
+  test("당첨번호가 중복으로 들어오는 경우", async () => {
+    await runExcept(["1000", "1,2,3,4,5,5", "1,2,3,4,5,6", "7"]);
+  });
+});
