@@ -1,5 +1,3 @@
-import SETTINGS from '../constants/Settings.js';
-
 class Utils {
   /**
    * 문자열 형식의 input을 숫자 배열로 반환
@@ -41,9 +39,9 @@ class Utils {
    * @returns {string} 문자열 ('1, 2, 3, 4, 5, 6')
    */
   static numberArrayToString(array) {
-    let stringArray = [];
-    
-    array.forEach((number) => {
+    const stringArray = [];
+
+    array.forEach(number => {
       stringArray.push(number.toString());
     });
     const result = `[${stringArray.join(', ')}]`;

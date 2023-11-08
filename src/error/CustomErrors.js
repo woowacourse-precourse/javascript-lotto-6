@@ -49,5 +49,3 @@ export class BonusIncludedError extends Error {
     super(errorMessage(ERRORS.bonusIncluded, input));
   }
 }
-
-
