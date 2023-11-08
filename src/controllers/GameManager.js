@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import LottoList from "../models/LottoList.js";
 import InputView from "../views/InputView.js";
 import OutputView from "../views/OutputView.js";
