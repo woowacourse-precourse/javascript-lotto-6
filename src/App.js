@@ -89,7 +89,6 @@ class App {
     lotto.map((random) => Console.print(random.number));
     Console.print("");
   }
-  async getCountAll(lotto, randomLottos, bonus, randombonus) {}
   async getCountLotto(lotto, randomLottos) {
     const scoreLottos = await randomLottos.map((random) => {
       let counts = 0;
@@ -113,15 +112,7 @@ class App {
     await this.printRateOfReturn(rank, money);
   }
   getRank(result, bonus) {
-    const rank = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      bonus: 0,
-    };
+    const rank = {1: 0,2: 0,3: 0,4: 0,5: 0,6: 0,bonus: 0};
 
     result.map((element) => {
       if (element.count === 5 && this.checkBonus(element.number, bonus))
