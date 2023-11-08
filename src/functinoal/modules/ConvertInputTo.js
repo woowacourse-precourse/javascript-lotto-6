@@ -20,7 +20,7 @@ const {
 class ConvertInputTo {
   static async lottoArray() {
     return await ConvertInputTo.purchasePrice().then(purchasePrice =>
-      Get.randomLottoArray(purchasePrice / LOTTO_PRICE)
+      Object.freeze(Get.randomLottoArray(purchasePrice / LOTTO_PRICE))
     );
   }
 
@@ -39,38 +39,36 @@ class ConvertInputTo {
   }
 
   static async lottoBoard() {
-    const board = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
-    (await ConvertInputTo.lottoNumbersArray()).forEach(
-      number => (board[number] = HIT_STATE)
-    );
-
+    const winningNumbers = await ConvertInputTo.lottoNumbers();
     Print.lineBreak();
+    const bonusNumber = await ConvertInputTo.bonusNumber(winningNumbers);
 
-    board[await ConvertInputTo.bonusNumber(board)] = BONUS_STATE;
-    return Object.freeze(board);
+    return Object.freeze(Get.lottoBoard(winningNumbers, bonusNumber));
   }
 
-  static async lottoNumbersArray() {
+  static async lottoNumbers() {
     while (true) {
       const numbersString = await Console.readLineAsync(
         WINNING_NUMBER_INPUT_MESSAGE
       );
       try {
         ErrorCheck.lottoNumbersString(numbersString);
-        return numbersString.split(LOTTO_NUMBERS_SEPARATOR).map(Number);
+        return Object.freeze(
+          numbersString.split(LOTTO_NUMBERS_SEPARATOR).map(Number)
+        );
       } catch (error) {
         Print.errorMessage(error);
       }
     }
   }
 
-  static async bonusNumber(lottoBoard) {
+  static async bonusNumber(winningNumbers) {
     while (true) {
       const numberString = await Console.readLineAsync(
         BONUS_NUMBER_INPUT_MESSAGE
       );
       try {
-        ErrorCheck.bonusNumberString(numberString, lottoBoard);
+        ErrorCheck.bonusNumberString(numberString, winningNumbers);
         return Number(numberString);
       } catch (error) {
         Print.errorMessage(error);

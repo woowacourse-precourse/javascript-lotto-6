@@ -3,16 +3,14 @@ import Is from './Is.js';
 import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const {
-  NOT_POSITIVE_INTEGER_ERROR_MESSAGE: NOT_AN_INTEGER_ERROR_MESSAGE,
+  NOT_POSITIVE_INTEGER_ERROR_MESSAGE,
   NOT_MULTIPLES_ERROR_MESSAGE,
   SAME_ELEMENT_IN_ARRAY_ERROR_MESSAGE,
-  EXIST_NUMBER_IN_BOARD_ERROR_MESSAGE,
   WRONG_LENGTH_ERROR_MESSAGE,
   WRONG_RANGE_NUMBER_ERROR_MESSAGE,
   NUMBER_OF_LOTTO_NUMBERS,
   LOTTO_NUMBER_LOWER,
   LOTTO_NUMBER_UPPER,
-  MISS_STATE,
 } = CONSTANTS;
 
 class ErrorCheck {
@@ -28,9 +26,11 @@ class ErrorCheck {
     ErrorCheck.differentElementArray(arrayFromString);
   }
 
-  static bonusNumberString(string, lottoBoard) {
+  static bonusNumberString(string, winningNumbers) {
     ErrorCheck.lottoNumberString(string);
-    ErrorCheck.differeNumberInLottoBoard(Number(string), lottoBoard);
+    const winningNumbersAddedNumber = [...winningNumbers];
+    winningNumbersAddedNumber.push(Number(string));
+    ErrorCheck.differentElementArray(winningNumbersAddedNumber);
   }
 
   static lottoNumberString(string) {
@@ -42,14 +42,9 @@ class ErrorCheck {
     );
   }
 
-  static differeNumberInLottoBoard(lottoNumber, lottoBoard) {
-    if (lottoBoard[lottoNumber] !== MISS_STATE)
-      throw new Error(EXIST_NUMBER_IN_BOARD_ERROR_MESSAGE);
-  }
-
   static positiveIntegerString(string) {
     if (!Is.positiveIntegerString(string))
-      throw new Error(NOT_AN_INTEGER_ERROR_MESSAGE);
+      throw new Error(NOT_POSITIVE_INTEGER_ERROR_MESSAGE);
   }
 
   static multiplesInPositive(multiplier, multiplicand) {

@@ -5,6 +5,8 @@ import CONSTANTS from '../../constants/CONSTANTS.js';
 
 const {
   ZERO,
+  MISS_STATE,
+  BONUS_STATE,
   HIT_STATE,
   LOTTO_PRICE,
   NUMBER_OF_LOTTO_NUMBERS,
@@ -30,6 +32,14 @@ class Get {
         NUMBER_OF_LOTTO_NUMBERS
       ).sort((a, b) => a - b)
     );
+  }
+
+  static lottoBoard(winningNumbers, bonusNumber) {
+    const board = new Array(LOTTO_NUMBER_UPPER + 1).fill(MISS_STATE);
+    winningNumbers.forEach(number => (board[number] = HIT_STATE));
+    board[bonusNumber] = BONUS_STATE;
+
+    return board;
   }
 
   static lottoResult(lottoArray, lottoBoard) {

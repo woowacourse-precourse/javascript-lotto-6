@@ -22,7 +22,7 @@ describe('lottoNumbersArray', () => {
     mockQuestions(input);
 
     //when
-    const lottoNumbers = await ConvertInputTo.lottoNumbersArray();
+    const lottoNumbers = await ConvertInputTo.lottoNumbers();
 
     //then
     expect(lottoNumbers).toEqual(expectedValue);
@@ -62,7 +62,7 @@ describe('lottoNumbersArray', () => {
     mockQuestions(input);
 
     //when
-    const lottoNumbers = await ConvertInputTo.lottoNumbersArray();
+    const lottoNumbers = await ConvertInputTo.lottoNumbers();
 
     //then
     expect(lottoNumbers).toEqual(expectedValue);

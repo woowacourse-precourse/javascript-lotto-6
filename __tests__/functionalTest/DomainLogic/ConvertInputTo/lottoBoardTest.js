@@ -3,8 +3,7 @@ import ConvertInputTo from '../../../../src/functinoal/modules/ConvertInputTo';
 
 import CONSTANTS from '../../../../src/constants/CONSTANTS';
 
-const { ERROR_HEADER, MISS_STATE, BONUS_STATE, HIT_STATE, LOTTO_NUMBER_UPPER } =
-  CONSTANTS;
+const { MISS_STATE, BONUS_STATE, HIT_STATE, LOTTO_NUMBER_UPPER } = CONSTANTS;
 
 const mockQuestions = inputs => {
   let nowIndex = 0;
