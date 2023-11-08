@@ -45,6 +45,18 @@ class App {
     }
   }
 
+  async inputBonusNum() {
+    try {
+      const input = await Console.readLineAsync(BONUS_NUMBER_MESSAGE);
+      if (this.#winNumber.includes(input)) throw new Error(ERRORS.InvalidDuplicateNumber);
+      if (input < 1 || input > 45) throw new Error(ERRORS.InvalidRange);
+      this.#bonusNumber = input;
+    } catch (e) {
+      Console.print(e.message);
+      return this.inputBonusNum();
+    }
+  }
+
   async play() {}
 }
 
