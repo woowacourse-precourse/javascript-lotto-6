@@ -5,8 +5,8 @@ import {
   TOTAL_LOTTO_NUMBERS,
   BONUS_NUMBER_ERROR_MESSAGE,
   WINNING_NUMBERS_ERROR_MESSAGE
-} from '../constants/constants';
-import CustomError from '../View/CustomError';
+} from '../constants/constants.js';
+import CustomError from '../View/CustomError.js';
 
 class Validator {
   static isMoneyValid(input) {

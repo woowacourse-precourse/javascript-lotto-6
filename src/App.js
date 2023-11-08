@@ -1,8 +1,8 @@
-import LottoTickets from './LottoTickets';
-import BonusNumber from './BonusNumber'
-import Input from './View/Input';
-import Output from './View/Output';
-import Lotto from './Lotto';
+import BonusNumber from './BonusNumber.js';
+import Lotto from './Lotto.js';
+import LottoTickets from './LottoTickets.js';
+import Input from './View/Input.js'
+import Output from './View/Output.js'
 
 class App {
   #money

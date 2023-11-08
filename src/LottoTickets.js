@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants";
-import Validator from "./Validator/Validator";
-import Lotto from "./Lotto";
+import { LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants.js";
+import Validator from "./Validator/Validator.js";
+import Lotto from "./Lotto.js";
 
 
 // @NOTE - 로또 발행 및 로또 개수 출력

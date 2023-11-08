@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { GUIDE_MESSAGE } from "../constants/constants";
+import { GUIDE_MESSAGE } from "../constants/constants.js";
 
 class Input {
   async getPurchaseAmount(){
