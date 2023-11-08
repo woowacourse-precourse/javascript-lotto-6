@@ -2,7 +2,7 @@ import Validator from './Validator.js';
 import { FIVE_COUNT, FOUR_COUNT, INCREMENT, INITIAL_VALUE, SIX_COUNT, THREE_COUNT } from './constants/constants.js';
 
 class Lotto {
-  #lottoNumbers;
+  #numbers;
   #result = {
     fifthPlaceWin: INITIAL_VALUE,
     fourthPlaceWin: INITIAL_VALUE,
@@ -13,7 +13,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#lottoNumbers = numbers;
+    this.#numbers = numbers;
   }
 
   #validate(numbers) {
@@ -25,10 +25,10 @@ class Lotto {
   }
 
   checkLotto(drawnLotto) {
-    const matchingNumbers = this.#lottoNumbers.filter(
+    const matchingNumbers = this.#numbers.filter(
       (number) => drawnLotto.numbers.includes(number.toString())
     );
-    const bonusMatch = this.#lottoNumbers.includes(Number(drawnLotto.bonusNumber));
+    const bonusMatch = this.#numbers.includes(Number(drawnLotto.bonusNumber));
     const matchCount = matchingNumbers.length;
 
     if (matchCount === THREE_COUNT) {
@@ -53,7 +53,7 @@ class Lotto {
   }
 
   getLottoNumbers() {
-    return this.#lottoNumbers;
+    return this.#numbers;
   }
 
   getResult() {
@@ -61,7 +61,7 @@ class Lotto {
   }
 
   toString() {
-    return JSON.stringify(this.#lottoNumbers).replace(/,/g, ', ');
+    return JSON.stringify(this.#numbers).replace(/,/g, ', ');
   }
 }
 

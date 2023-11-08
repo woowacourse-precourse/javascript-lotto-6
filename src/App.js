@@ -96,7 +96,6 @@ class App {
   }
 
   calculateIncomePercentage(purchaseAmount) {
-    console.log()
     return this.calculateIncome() / Number(purchaseAmount) * FULL_PERCENTAGE_NUMBER;
   }
 }
