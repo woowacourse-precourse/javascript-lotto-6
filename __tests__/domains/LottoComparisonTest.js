@@ -1,17 +1,8 @@
 import LottoComparison from '../../src/domains/LottoComparison';
-import { MissionUtils } from '@woowacourse/mission-utils';
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
 
 describe('LottoComparison 클래스 테스트', () => {
-  test('로또 번호를 당첨 번호와 보너스 번호와 비교하여 결과를 출력한다.', async () => {
+  test('로또 번호를 당첨 번호와 보너스 번호와 비교하여 결과와 수익률을 반환한다.', async () => {
     // Arrange
-    const logSpy = getLogSpy();
-
     const myLotto = [
       [1, 2, 3, 4, 5, 6],
       [2, 3, 4, 5, 6, 7],
@@ -21,18 +12,24 @@ describe('LottoComparison 클래스 테스트', () => {
       bonusNumber: 7,
     };
 
-    const outputs = [
-      '\n당첨 통계\n---',
-      '3개 일치 (5,000원) - 1개',
-      '4개 일치 (50,000원) - 0개',
-      '5개 일치 (1,500,000원) - 0개',
-      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
-      '6개 일치 (2,000,000,000원) - 0개',
-      '총 수익률은 250%입니다.',
-    ];
+    const outputRank = new Map([
+      [3, 1],
+      [4, 0],
+      [5, 0],
+      [5.5, 0],
+      [6, 0],
+    ]);
+    const outputRateOfReturn = 250;
+
     // Act
-    new LottoComparison(myLotto, winningLottoMachine).run();
+    const lottoCompare = new LottoComparison(myLotto, winningLottoMachine);
+    lottoCompare.run();
+
     // Assert
-    outputs.forEach((output) => expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output)));
+    const expectedRank = lottoCompare.rank;
+    const expectedRateOfReturn = lottoCompare.rateOfReturn;
+
+    expect(expectedRank).toEqual(outputRank);
+    expect(expectedRateOfReturn).toEqual(outputRateOfReturn);
   });
 });

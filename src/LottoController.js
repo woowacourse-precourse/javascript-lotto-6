@@ -7,18 +7,21 @@ import printEachLotto from './print/printEachLotto.js';
 import { OUTPUT_MESSAGES } from './constants/messages.js';
 
 class LottoController {
-  #myLotto;
+  #myLottos;
+  #rank;
+  #rateOfReturn;
 
   async run() {
     await this.#buyLotto();
-    this.#printLotto(this.#myLotto.length, this.#myLotto);
+    this.#printLotto(this.#myLottos.length, this.#myLottos);
     await this.#compareWithWinningNumbersAndBonusNumber();
+    this.#printLottoResult(this.#rank, this.#rateOfReturn);
   }
 
   async #buyLotto() {
     const inputAmount = await getInputAmount();
     const counter = new Counter(inputAmount);
-    this.#myLotto = counter.giveLotto();
+    this.#myLottos = counter.giveLotto();
   }
 
   #printLotto(lottoTicketNumber, lottos) {
@@ -28,7 +31,16 @@ class LottoController {
 
   async #compareWithWinningNumbersAndBonusNumber() {
     const winningLottoMachine = await WinningLottoMachine.machineStart();
-    new LottoComparison(this.#myLotto, winningLottoMachine).run();
+    const compareLotto = new LottoComparison(this.#myLottos, winningLottoMachine);
+    compareLotto.run();
+
+    this.#rank = compareLotto.rank;
+    this.#rateOfReturn = compareLotto.rateOfReturn;
+  }
+
+  #printLottoResult(rank, rateOfReturn) {
+    OUTPUT_MESSAGES.result(rank).forEach((result) => Console.print(result));
+    Console.print(OUTPUT_MESSAGES.rate(rateOfReturn));
   }
 }
 

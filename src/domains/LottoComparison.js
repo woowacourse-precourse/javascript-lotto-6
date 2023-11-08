@@ -2,12 +2,10 @@ import compareLottoNumbers from '../utils/compareLottoNumbers.js';
 import RANK from '../constants/rank.js';
 import RATE from '../constants/rate.js';
 import PRIZE from '../constants/prize.js';
-import { OUTPUT_MESSAGES } from '../constants/messages.js';
 import LOTTO_CONSTANT from '../constants/lotto.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class LottoComparison {
-  #myLotto;
+  #myLottos;
   #winningNumbers;
   #bonusNumber;
   #rank = new Map([
@@ -17,29 +15,37 @@ class LottoComparison {
     [RANK.second, 0],
     [RANK.first, 0],
   ]);
+  #rateOfReturn;
 
-  constructor(myLotto, winningLottoMachine) {
-    this.#myLotto = myLotto;
+  constructor(lottoBox, winningLottoMachine) {
+    this.#myLottos = lottoBox;
     this.#winningNumbers = winningLottoMachine.winningNumbers;
     this.#bonusNumber = winningLottoMachine.bonusNumber;
   }
 
   run() {
-    this.#compare(this.#myLotto);
-    this.#printResult(this.#myLotto.length, this.#rank);
+    this.#compare(this.#myLottos);
+    this.#calculateRateOfReturn(this.#myLottos.length, this.#rank);
   }
 
   #compare(lottos) {
     lottos.forEach((lotto) => compareLottoNumbers(lotto, this.#winningNumbers, this.#bonusNumber, this.#rank));
   }
 
-  #printResult(lottoTicketNumber, ranks) {
-    const income = Array.from(ranks).reduce((acc, [_, value], idx) => acc + value * PRIZE[idx], 0);
+  #calculateRateOfReturn(lottoTicketNumber, rank) {
+    const income = Array.from(rank).reduce((acc, [_, value], idx) => acc + value * PRIZE[idx], 0);
     const input = lottoTicketNumber * LOTTO_CONSTANT.price;
     const rateOfReturn = +((income / input) * RATE.percent).toFixed(RATE.float);
 
-    OUTPUT_MESSAGES.result(ranks).forEach((result) => Console.print(result));
-    Console.print(OUTPUT_MESSAGES.rate(rateOfReturn));
+    this.#rateOfReturn = rateOfReturn;
+  }
+
+  get rank() {
+    return this.#rank;
+  }
+
+  get rateOfReturn() {
+    return this.#rateOfReturn;
   }
 }
 
