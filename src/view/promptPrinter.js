@@ -3,6 +3,7 @@ import paramType from '../lib/paramType/src/paramType.js';
 import { UserInputError } from '../errors/UserInputErrors.js';
 import { PRINT_MESSSAGE } from '../constants/message.js';
 import LottoReward from '../domains/LottoReward.js';
+import krwCurrencyAsWonFormat from '../utils/krwCurrencyAsWonFormat.js';
 
 export default class PromptPrinter {
   static GRADE_CORRECT_COUNT = {
@@ -34,15 +35,14 @@ export default class PromptPrinter {
   drawResult(result, _ = paramType(result, Object)) {
     const resultText = Object.entries(result).reduce(
       (accString, [grade, count]) => {
-        const gradeString = String(grade);
         if (grade === '2') {
           return (accString += `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`);
         }
         return (accString += `${
-          PromptPrinter.GRADE_CORRECT_COUNT[gradeString]
-        }개 일치 (${LottoReward.GRADE_PRIZE[gradeString].toLocaleString(
-          'ko-KR',
-        )}원) - ${count}개\n`);
+          PromptPrinter.GRADE_CORRECT_COUNT[grade]
+        }개 일치 (${krwCurrencyAsWonFormat(
+          LottoReward.GRADE_PRIZE[grade],
+        )}) - ${count}개\n`);
       },
       '',
     );
