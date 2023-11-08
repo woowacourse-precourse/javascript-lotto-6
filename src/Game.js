@@ -66,6 +66,12 @@ class Game {
     return lottoTickets;
   }
 
+  printLottoResult(winInfoArray, lottoCount) {
+    for (let i = 5; i > 0; i--) {
+      InputOutput.print(`${this.winMessages[i]}${winInfoArray[i]}개`);
+    }
+  }
+
 }
 
 export default Game;
