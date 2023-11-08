@@ -8,7 +8,7 @@ class WinningNumbers{
     }
 
     winningNumberValidate = (winningNumber) => {
-        new LottoValidate().inputWinningNumbersValidate(winningNumber.split(','));
+        new LottoValidate().inputWinningNumbersValidate(winningNumber.split(',').map(Number));
     }
 
 }
