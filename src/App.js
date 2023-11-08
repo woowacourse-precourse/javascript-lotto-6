@@ -1,6 +1,6 @@
-import Customer from "./Customer.js";
-import lottoRanking from "./lottoRanking.js";
-import inputHandlers from "../input/inputHandlers.js";
+import Customer from "./game/Customer.js";
+import lottoRanking from "./game/lottoRanking.js";
+import inputHandlers from "./input/inputHandlers.js";
 
 class App {
   #customer;
