@@ -2,7 +2,7 @@ export const PURCHASE_SIZE = (size) => {
   return `${size}개를 구매했습니다.`;
 };
 
-export const LOTTO_RESULT = (prize, matchingCount) => {
+export const LOTTO_STAT = (prize, matchingCount) => {
   return `당첨 통계
 ---
 3개 일치 (${prize[0].toLocaleString("ko-KR")}원) - ${matchingCount[0]}개

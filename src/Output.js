@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import {
   PURCHASE_SIZE,
-  LOTTO_RESULT,
+  LOTTO_STAT,
   EARNING_RATE,
 } from "./constant/GAME_RESULT.js";
 import { PRIZE } from "./constant/NUMBER.js";
@@ -18,7 +18,7 @@ export const Output = {
   },
 
   winningReport(matchingCount, rate) {
-    Console.print(LOTTO_RESULT(PRIZE, matchingCount) + EARNING_RATE(rate));
+    Console.print(LOTTO_STAT(PRIZE, matchingCount) + EARNING_RATE(rate));
   },
 
   showEnter() {
