@@ -1,13 +1,15 @@
+import { num } from '../Constants.js';
+
 function validateBonusNumber(bonusNumberInput, winningNumbers) {
-  if (!/^[1-9]\d*$/.test(bonusNumberInput) || Number(bonusNumberInput) > 45) {
-    return false;
+  const isWithinRange = Number(bonusNumberInput) <= num.LOTTO_UPPER_LIMIT;
+  const isNumber = /^[1-9]\d*$/.test(bonusNumberInput);
+  const isWithoutRecurrences = !winningNumbers.includes(Number(bonusNumberInput));
+
+  if (isWithinRange && isNumber && isWithoutRecurrences) {
+    return true;
   }
 
-  if (winningNumbers.includes(Number(bonusNumberInput))) {
-    return false;
-  }
-
-  return true;
+  return false;
 }
 
 export default validateBonusNumber;
