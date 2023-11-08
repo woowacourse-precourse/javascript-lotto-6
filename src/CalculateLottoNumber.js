@@ -1,7 +1,7 @@
-const CalculateLottoNumber = (amount) => {
+const calculateLottoNumber = (amount) => {
   const lottoNumber = amount / 1000;
 
   return lottoNumber;
 };
 
-export default CalculateLottoNumber;
+export default calculateLottoNumber;
