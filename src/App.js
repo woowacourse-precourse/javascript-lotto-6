@@ -1,5 +1,5 @@
 import { LOTTO_CONSTANTS } from './Constants/LottoContstants.js';
-import InputOutputManager from './Models/InoputOutputManager.js';
+import InputOutputManager from './View/InoputOutputManager.js';
 import VarirficationManager from './Models/VarificationManager.js';
 import Computer from './Models/Computer.js';
 import { Console } from '@woowacourse/mission-utils';
@@ -8,6 +8,7 @@ import LottoCycle from './Models/LottoCycle.js';
 import Lotto from './Lotto.js';
 import LottoBonus from './Models/LottoBouns.js';
 import StringUtil from './Utils/StringUti.js';
+import { SYSTEM_MESSAGE } from './Constants/MessageConstants.js';
 
 class App {
 	userLottoSheet;
@@ -27,7 +28,7 @@ class App {
 	}
 
 	showUserLottoInfo() {
-		Console.print(`${this.userLottoSheet.length}개를 구매했습니다.`);
+		Console.print(SYSTEM_MESSAGE.numberOfTicket(this.userLottoSheet.length));
 
 		this.userLottoSheet.forEach((lottoNumber) => {
 			const lottoText = `[${lottoNumber.join(', ')}]`;
@@ -42,18 +43,18 @@ class App {
 
 	async getUserLottoValues() {
 		const purchaseCost = await InputOutputManager.getUserInput(
-			'구입 금액을 입력해주세요.\n',
+			SYSTEM_MESSAGE.askPurchaseCost,
 			VarirficationManager.checkPurchaseCost,
 		);
 
 		let lottoWinningNumber = await InputOutputManager.getUserInput(
-			'\n당첨 번호를 입력해 주세요.\n',
+			SYSTEM_MESSAGE.askWinnerLottoNumber,
 			VarificationManager.checkLottoNumber,
 		);
 		lottoWinningNumber = StringUtil.stringToNumberArray(lottoWinningNumber);
 
 		const lottoBonusNumber = await InputOutputManager.getUserInput(
-			'\n보너스 번호를 입력해 주세요.\n',
+			SYSTEM_MESSAGE.askBonusLottoNumber,
 			(value) => VarificationManager.checkBonusLottoNumber(value, lottoWinningNumber),
 		);
 

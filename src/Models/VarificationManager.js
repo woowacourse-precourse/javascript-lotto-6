@@ -1,14 +1,15 @@
 import Varificator from '../Utils/Varification.js';
 import { LOTTO_CONSTANTS } from '../Constants/LottoContstants.js';
 import StringUtil from '../Utils/StringUti.js';
+import { ERROR_MESSAGE } from '../Constants/MessageConstants.js';
 
 class VarificationManager {
 	static checkPurchaseCost(value) {
 		if (Varificator.isInvalidNumber(value)) {
-			throw new Error('[ERROR] 유효하지 않은 숫자입니다.');
+			throw new Error(ERROR_MESSAGE.inValidNumber);
 		}
 		if (Varificator.isNotDividableWithStandardCost(value, LOTTO_CONSTANTS.standartLottoCost)) {
-			throw new Error(`[ERROR] ${LOTTO_CONSTANTS.standartLottoCost}원 단위로 입력해주세요.`);
+			throw new Error(ERROR_MESSAGE.inValidLottoCost);
 		}
 
 		return true;
@@ -22,13 +23,13 @@ class VarificationManager {
 		}
 
 		if (parsedNumber.some((number) => Varificator.isInvalidNumber(number))) {
-			throw new Error('[ERROR] 유효하지 않은 숫자가 포함되어 있습니다.');
+			throw new Error(ERROR_MESSAGE.inCludeInValidNumber);
 		}
 		if (Varificator.isNotFitWithLottoLength(parsedNumber, LOTTO_CONSTANTS.lottoNumberCount)) {
-			throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+			throw new Error(ERROR_MESSAGE.inValidLottoLength);
 		}
 		if (Varificator.isDuplicatedNumber(parsedNumber)) {
-			throw new Error('[ERROR] 중복된 번호가 존재합니다.');
+			throw new Error(ERROR_MESSAGE.duplicatedNumber);
 		}
 		if (
 			parsedNumber.some((number) =>
@@ -39,9 +40,7 @@ class VarificationManager {
 				),
 			)
 		) {
-			throw new Error(
-				`[ERROR] ${LOTTO_CONSTANTS.minLottoNumber}과 ${LOTTO_CONSTANTS.maxLottoNumber} 사이 숫자만 입력 가능합니다.`,
-			);
+			throw new Error(ERROR_MESSAGE.outOfNumberScale);
 		}
 
 		return true;
@@ -55,11 +54,11 @@ class VarificationManager {
 		}
 
 		if (Varificator.isInvalidNumber(bonusNumber)) {
-			throw new Error('[ERROR] 유효하지 않은 숫자입니다.');
+			throw new Error(ERROR_MESSAGE.inValidNumber);
 		}
 
 		if (Varificator.isNumberInArray(lottoNumbers, bonusNumber)) {
-			throw new Error('[ERROR] 중복된 숫자가 존재합니다.');
+			throw new Error(ERROR_MESSAGE.duplicatedNumber);
 		}
 
 		if (
@@ -69,9 +68,7 @@ class VarificationManager {
 				LOTTO_CONSTANTS.minLottoNumber,
 			)
 		) {
-			throw new Error(
-				`[ERROR] ${LOTTO_CONSTANTS.minLottoNumber}과 ${LOTTO_CONSTANTS.maxLottoNumber} 사이 숫자만 입력 가능합니다.`,
-			);
+			throw new Error(ERROR_MESSAGE.outOfNumberScale);
 		}
 
 		return true;

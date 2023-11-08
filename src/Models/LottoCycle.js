@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_RANK_STANDARD, LOTTO_REWARD_CONSTANTS } from '../Constants/LottoContstants.js';
 import LottoCheck from '../Utils/lottoCheck.js';
+import { SYSTEM_MESSAGE } from '../Constants/MessageConstants.js';
 
 class LottoCycle {
 	#purchaseCost;
@@ -67,25 +68,31 @@ class LottoCycle {
 	printLottoResult() {
 		const earnRate = this.calculateEarnRate();
 
-		Console.print('\n당첨통계\n---\n');
+		Console.print(SYSTEM_MESSAGE.lottoResultTitle);
 
 		for (const rank in this.#scoreCount) {
 			const rewardString = new Intl.NumberFormat('en-US').format(LOTTO_REWARD_CONSTANTS[rank]);
 
 			if (rank == 2) {
 				Console.print(
-					`${LOTTO_RANK_STANDARD[rank]}개 일치, 보너스 불 일치 (${rewardString}원) - ${
-						this.#scoreCount[rank]
-					}개`,
+					SYSTEM_MESSAGE.lottoRankResultMessageWithBonus(
+						LOTTO_RANK_STANDARD[rank],
+						rewardString,
+						this.#scoreCount[rank],
+					),
 				);
 			}
 
 			Console.print(
-				`${LOTTO_RANK_STANDARD[rank]}개 일치 (${rewardString}원) - ${this.#scoreCount[rank]}개`,
+				SYSTEM_MESSAGE.lottoRankResultMessage(
+					LOTTO_RANK_STANDARD[rank],
+					rewardString,
+					this.#scoreCount[rank],
+				),
 			);
 		}
 
-		Console.print(`총 수익률은 ${earnRate}%입니다.`);
+		Console.print(SYSTEM_MESSAGE.lottoEarnRateMessage(earnRate));
 	}
 
 	get purchaseCost() {

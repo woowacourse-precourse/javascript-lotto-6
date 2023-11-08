@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from '../src/Constants/MessageConstants';
 import LottoBonus from '../src/Models/LottoBouns';
 
 describe('Lotto 보너스 번호 테스트', () => {
@@ -7,7 +8,7 @@ describe('Lotto 보너스 번호 테스트', () => {
 		const bounsNumber = 6;
 
 		// when, then
-		expect(() => new LottoBonus(bounsNumber, lottoNumber)).toThrow('[ERROR]');
+		expect(() => new LottoBonus(bounsNumber, lottoNumber)).toThrow(ERROR_MESSAGE.errorPrefix);
 	});
 
 	test.each([
@@ -21,6 +22,6 @@ describe('Lotto 보너스 번호 테스트', () => {
 		const lottoNumber = [1, 2, 3, 4, 5, 6];
 		const bounsNumber = value;
 
-		expect(() => new LottoBonus(bounsNumber, lottoNumber)).toThrow('[ERROR]');
+		expect(() => new LottoBonus(bounsNumber, lottoNumber)).toThrow(ERROR_MESSAGE.errorPrefix);
 	});
 });
