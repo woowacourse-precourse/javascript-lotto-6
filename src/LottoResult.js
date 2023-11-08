@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { GAME_RESULT } from "./constants.js";
 
 class LottoResult {
   #lottoList = [];
@@ -74,16 +75,14 @@ class LottoResult {
   }
 
   printResult() {
-    Console.print(`\n당첨 통계`);
-    Console.print(`---`);
-    Console.print(`3개 일치 (5,000원) - ${this.#resultList[0]}개`);
-    Console.print(`4개 일치 (50,000원) - ${this.#resultList[1]}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${this.#resultList[2]}개`);
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#resultList[3]}개`
-    );
-    Console.print(`6개 일치 (2,000,000,000원) - ${this.#resultList[4]}개`);
-    Console.print(`총 수익률은 ${this.#profit}%입니다.`);
+    Console.print(GAME_RESULT.RESULT);
+    Console.print(GAME_RESULT.DIVIDER);
+    Console.print(`${GAME_RESULT.MATCH_3}${this.#resultList[0]}개`);
+    Console.print(`${GAME_RESULT.MATCH_4}${this.#resultList[1]}개`);
+    Console.print(`${GAME_RESULT.MATCH_5}${this.#resultList[2]}개`);
+    Console.print(`${GAME_RESULT.MATCH_5_BONUS}${this.#resultList[3]}개`);
+    Console.print(`${GAME_RESULT.MATCH_6}${this.#resultList[4]}개`);
+    Console.print(`${GAME_RESULT.PROFIT}${this.#profit}%입니다.`);
   }
 }
 export default LottoResult;

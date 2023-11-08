@@ -2,6 +2,7 @@ import { Console, Random } from "@woowacourse/mission-utils";
 import { validateBonusNumber, validateInputMoney } from "./Validator.js";
 import Lotto from "./Lotto.js";
 import LottoResult from "./LottoResult.js";
+import { GAME_MESSAGE } from "./constants.js";
 
 class LottoGame {
   #gameCount;
@@ -19,7 +20,7 @@ class LottoGame {
   async getUserInputMoney() {
     try {
       const userInputMoney = await Console.readLineAsync(
-        "구입금액을 입력해 주세요.\n"
+        GAME_MESSAGE.INPUT_MONEY
       );
       validateInputMoney(userInputMoney);
       this.#gameCount = userInputMoney / 1000;
@@ -27,6 +28,7 @@ class LottoGame {
       this.generateLottoNumbers();
     } catch (error) {
       Console.print(error.message);
+      throw error;
     }
   }
 
@@ -46,7 +48,7 @@ class LottoGame {
   }
 
   printLottoNumbers() {
-    Console.print(`\n${this.#gameCount}개를 구매했습니다.`);
+    Console.print(`\n${this.#gameCount}${GAME_MESSAGE.BUY_COUNT}`);
     this.#lottoList.forEach((lottoNum) => {
       Console.print(`[${lottoNum.join(", ")}]`);
     });
@@ -55,7 +57,7 @@ class LottoGame {
   async getWinningNumber() {
     try {
       const WinningInput = await Console.readLineAsync(
-        "\n당첨 번호를 입력해 주세요.\n"
+        GAME_MESSAGE.WINNING_NUMBER
       );
       this.#winningNumber = new Lotto(WinningInput.split(",").map(Number));
       await this.getBonusNumber();
@@ -68,9 +70,9 @@ class LottoGame {
   async getBonusNumber() {
     try {
       this.#bonusNumber = await Console.readLineAsync(
-        "\n보너스 번호를 입력해 주세요.\n"
+        GAME_MESSAGE.BONUS_NUMBER
       );
-      validateBonusNumber(this.#bonusNumber);
+      validateBonusNumber(this.#bonusNumber, this.#winningNumber);
     } catch (error) {
       Console.print(error.message);
       return this.getBonusNumber();
