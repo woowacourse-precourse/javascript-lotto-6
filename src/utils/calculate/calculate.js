@@ -27,11 +27,31 @@ const filterLottoNumbers = (winningNumbers, lottoNumbers) => {
 const matchedLottoNumbers = (lottoResults, matchedNumbers, matchedBonus) => {
   const updatedResults = { ...lottoResults };
 
-  if (matchedNumbers.length === 6) updatedResults[RESULT.FIRST] += 1;
-  if (matchedNumbers.length === 5 && matchedBonus) updatedResults[RESULT.SECOND] += 1;
-  if (matchedNumbers.length === 5) updatedResults[RESULT.THIRD] += 1;
-  if (matchedNumbers.length === 4) updatedResults[RESULT.FOURTH] += 1;
-  if (matchedNumbers.length === 3) updatedResults[RESULT.FIFTH] += 1;
+  switch (matchedNumbers.length) {
+    case 6:
+      updatedResults[RESULT.FIRST] += 1;
+      break;
+
+    case 5:
+      if (!matchedBonus) {
+        updatedResults[RESULT.THIRD] += 1;
+        break;
+      }
+
+      updatedResults[RESULT.SECOND] += 1;
+      break;
+
+    case 4:
+      updatedResults[RESULT.FOURTH] += 1;
+      break;
+
+    case 3:
+      updatedResults[RESULT.FIFTH] += 1;
+      break;
+
+    default:
+      break;
+  }
 
   return updatedResults;
 };
