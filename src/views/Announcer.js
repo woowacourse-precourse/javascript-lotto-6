@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { PROMPT_MESSEGE, RESULT_MESSEGE } from '../constants/messages.js';
 
 const purchase = (amount) => `\n${amount}개를 구매했습니다.`;
-const formatLotto = (lotto) => `[${lotto.join(', ')}]\n`;
+const formatLotto = (lotto) => `[${lotto.join(', ')}]`;
 const profitRate = (rate) => `총 수익률은 ${rate}%입니다.`;
 
 class Announcer {
@@ -13,10 +13,9 @@ class Announcer {
     lottoList.forEach((lotto) => {
       Console.print(formatLotto(lotto.getLotto()));
     });
-    Console.print(PROMPT_MESSEGE.newLine);
   }
 
-  printPrizeInfo(analyzer) {
+  printPrize(analyzer) {
     Console.print(PROMPT_MESSEGE.lottoResult);
 
     const rankedLotto = analyzer.getRankedLotto();

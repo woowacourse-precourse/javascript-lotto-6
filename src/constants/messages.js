@@ -9,13 +9,12 @@ export const ERROR = {
 
 export const INPUT_MESSEGE = {
   purchase: '구입금액을 입력해 주세요.\n',
-  win: '당첨 번호를 입력해 주세요.\n',
+  win: '\n당첨 번호를 입력해 주세요.\n',
   bonus: '\n보너스 번호를 입력해 주세요.\n',
 };
 
 export const PROMPT_MESSEGE = {
-  lottoResult: '\n당첨 통계\n---\n',
-  newLine: '\n',
+  lottoResult: '\n당첨 통계\n---',
 };
 
 export const RESULT_MESSEGE = [
