@@ -9,7 +9,7 @@ class App {
     await controller.askWinningNum();
     await controller.askBonusNum();
     controller.checkResult();
-    controller.printRankStat();
+    controller.printTotalRate();
   }
 }
 

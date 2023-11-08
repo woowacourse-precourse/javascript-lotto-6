@@ -9,10 +9,12 @@ const Constant = {
   FOURTH: 4,
   THIRD: 5,
   FIRST: 6,
-  FIFTH_PRIZE: 5000,
-  FOURTH_PRIZE: 50000,
-  THIRD_PRIZE: 1500000,
-  SECOND_PRIZE: 30000000,
-  FIRST_PRIZE: 2000000000,
+  PRIZE: {
+    1: 2000000000,
+    2: 30000000,
+    3: 1500000,
+    4: 50000,
+    5: 5000,
+  },
 };
 export default Constant;

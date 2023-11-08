@@ -27,7 +27,7 @@ class LottoController {
       const input = await View.input(InfoMsg.ASK_BUDGET);
       const isValid = this.validateBudget(input);
       if (isValid === true) {
-        this.#budget = input;
+        this.#budget = Number(input);
         this.getLottoCount();
         break;
       }
@@ -133,6 +133,20 @@ class LottoController {
     View.output(InfoMsg.thirdRankResult(this.#rankStats[3] || 0));
     View.output(InfoMsg.secondRankResult(this.#rankStats[2] || 0));
     View.output(InfoMsg.firstRankResult(this.#rankStats[1] || 0));
+  }
+
+  sumTotalProfit() {
+    let sum = 0;
+    for (const [rank, count] of Object.entries(this.#rankStats)) {
+      sum += Constant.PRIZE[rank] * count;
+    }
+    return sum;
+  }
+
+  printTotalRate() {
+    const totalProfit = this.sumTotalProfit();
+    const rate = ((totalProfit / this.#budget) * 100).toFixed(2);
+    View.output(InfoMsg.totalRate(rate));
   }
 }
 
