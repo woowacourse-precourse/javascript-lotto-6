@@ -26,6 +26,9 @@ export const RESULT_MESSAGE = Object.freeze({
 export const ERROR_MESSAGE = Object.freeze({
   INPUT_EXIST_ERROR: "[ERROR] 값을 입력해주세요.",
   INPUT_NUMBER_LENGTH_ERROR: "[ERROR] 6개의 숫자를 입력하세요.",
+  INPUT_PAYMENT_ERROR: "[ERROR] 1,000원 단위의 숫자 1개를 입력하세요.",
   INPUT_NUMBER_IS_NOT_DISTINCT_ERROR:
     "[ERROR] 6개의 서로 다른 숫자를 입력하세요.",
+  INPUT_DATA_TYPE_ERROR: "[ERROR] 숫자만 입력하세요.",
+  POSITIVE_NUMBER_ERROR: "[ERROR] 양수만 입력하세요.",
 });

@@ -1,10 +1,16 @@
 import User from "../User";
 import WORD from "../lib/constants/word";
+import InputError from "../lib/utils/error";
 import InputView from "../views/inputView";
 import OutputView from "../views/outputView";
+import { Console } from "@woowacourse/mission-utils";
 
 class LottoController {
   #user;
+
+  constructor() {
+    this.Error = new InputError();
+  }
 
   async play() {
     await this.readUserPayment();
@@ -12,9 +18,15 @@ class LottoController {
   }
 
   async readUserPayment() {
-    const payment = await InputView.inputPayment();
-    const userLottoQuanitiy = payment / WORD.LOTTOPRICE;
-    this.creatUserObject(userLottoQuanitiy);
+    try {
+      const payment = await InputView.inputPayment();
+      this.Error.validatePaymentInput(payment);
+      const userLottoQuanitiy = payment / WORD.LOTTOPRICE;
+      this.creatUserObject(userLottoQuanitiy);
+    } catch (e) {
+      OutputView.printErrorMessage(e.message);
+      return this.readUserPayment();
+    }
   }
 
   creatUserObject(userLottoQuanitiy) {

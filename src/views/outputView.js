@@ -3,6 +3,10 @@ import { RESULT_MESSAGE } from "../lib/constants/message.js";
 import WORD from "../lib/constants/word.js";
 
 const OutputView = {
+  printErrorMessage(message) {
+    Console.print(message);
+  },
+
   printUserLottoQuanitiy(userLottoQuanitiy) {
     Console.print(`${userLottoQuanitiy}${RESULT_MESSAGE.COUNT}`);
   },
