@@ -1,3 +1,5 @@
+import { Validator } from "./controller/validator";
+
 class Lotto {
   #numbers;
 
@@ -10,9 +12,14 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    Validator.validNumbers(numbers);
+    Validator.validDuplicate(numbers);
+    Validator.validListNumberRange(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
