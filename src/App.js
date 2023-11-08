@@ -3,8 +3,6 @@ import LottoView from './views/LottoView.js';
 class App {
   
   #lottoView
-  #user
-  #lotto
 
   constructor() {
     this.#lottoView = new LottoView();
