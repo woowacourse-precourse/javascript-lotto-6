@@ -3,8 +3,11 @@ import MESSAGE from './MESSAGE.js';
 const Validation = {
   price: (input) => {
     const price = Number(input);
+    if (!Number.isSafeInteger(price)) {
+      throw new Error(MESSAGE.formatError('0 이상의 정수를 입력해주세요.'));
+    }
     if (price === 0) {
-      throw new Error(MESSAGE.formatError('에러입니다!'));
+      throw new Error(MESSAGE.formatError('0 이상의 정수를 입력해주세요.'));
     }
     return price;
   },
