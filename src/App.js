@@ -3,35 +3,40 @@ import print from './utils/print.js';
 import getRandomUniqueNumbers from './utils/getRandomUniqueNumbers.js';
 import Lotto from './Lotto.js';
 import Computer from './Computer.js';
-import isValidCost from './modules/isValidCost.js';
-import isValidWinnerNumber from './modules/isValidWinnerNumber.js';
-import isValidBonusNumber from './modules/isValidBonusNumber.js';
+import CheckList from './datas/CheckList.js';
 import { prize, rank } from './datas/prize.js';
 import { NUMBER, PROMPT } from './datas/constants.js';
 
 const inputStep = {
   cost: {
     prompt: PROMPT.costInput,
-    validate: isValidCost,
   },
   winnerNumbers: {
     prompt: PROMPT.prizeNumberInput,
-    validate: isValidWinnerNumber,
   },
   bonusNumber: {
     prompt: PROMPT.bonusNumberInput,
-    validate: isValidBonusNumber,
   },
 };
 
 class App {
   #lottos;
+  #prizeNumber;
 
-  async getInput(prompt, validateFunc) {
+  checkValidation(inputValue, checkList) {
+    const inValidObject = checkList.find((elem) => !elem.check(inputValue, this.#prizeNumber));
+    const isValid = inValidObject === undefined;
+
+    if (!isValid) {
+      throw new Error(inValidObject.errorMessage);
+    }
+  }
+
+  async getInput(prompt, inputType) {
     while (true) {
       try {
         const inputValue = await input(prompt);
-        validateFunc(inputValue);
+        this.checkValidation(inputValue, CheckList[inputType]);
 
         return inputValue;
       } catch (error) {
@@ -42,6 +47,7 @@ class App {
 
   createLotto(cost) {
     const lottoNumber = Array.from({ length: cost / NUMBER.divisor }, (_, i) => i);
+
     this.#lottos = lottoNumber.map((elem) => {
       const randomNumbers = getRandomUniqueNumbers();
       return new Lotto(randomNumbers);
@@ -49,7 +55,7 @@ class App {
   }
 
   async play() {
-    const cost = await this.getInput(inputStep.cost.prompt, inputStep.cost.validate);
+    const cost = await this.getInput(inputStep.cost.prompt, 'cost');
     this.createLotto(cost);
     print(`${cost / 1000}개를 구매했습니다.`);
 
@@ -57,23 +63,17 @@ class App {
       print(`[${lotto.getNumbers().join(', ')}]`);
     });
 
-    let winnerNumbers = await this.getInput(
-      inputStep.winnerNumbers.prompt,
-      inputStep.winnerNumbers.validate,
-    );
-    winnerNumbers = winnerNumbers.split(',').map((elem) => Number(elem));
+    let winnerNumbers = await this.getInput(inputStep.winnerNumbers.prompt, 'prizeNumber');
+    this.#prizeNumber = winnerNumbers.split(',').map((elem) => Number(elem));
 
-    let bonusNumber = await this.getInput(inputStep.bonusNumber.prompt, (input) => {
-      inputStep.bonusNumber.validate(input, winnerNumbers);
-    });
+    let bonusNumber = await this.getInput(inputStep.bonusNumber.prompt, 'bonusNumber');
     bonusNumber = Number(bonusNumber);
 
     print(PROMPT.prize);
     print(PROMPT.dividingLine);
 
-    const computer = new Computer(winnerNumbers, bonusNumber, cost);
+    const computer = new Computer(this.#prizeNumber, bonusNumber, cost);
     computer.setPrizeResult(this.#lottos);
-
     const reuslt = computer.getPrizeResult();
     rank.reverse().forEach((elem) => {
       print(
