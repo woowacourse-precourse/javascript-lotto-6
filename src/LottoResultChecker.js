@@ -30,9 +30,7 @@ class LottoResultChecker {
       fiveAndBonus: 0,
       six: 0,
     };
-    for (let i = 0; i < counts.length; i++) {
-      const count = counts[i];
-
+    counts.map((count, i) => {
       if (count === 3) {
         matchingCounts.three += 1;
       }
@@ -48,7 +46,8 @@ class LottoResultChecker {
       if (count === 6) {
         matchingCounts.six += 1;
       }
-    }
+    });
+
     return matchingCounts;
   }
 }
