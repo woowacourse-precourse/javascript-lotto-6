@@ -19,7 +19,7 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-  #compare(prizeNumber,bonusNumber){
+  compare(prizeNumber,bonusNumber){
     const matchCount = this.#numbers.filter(number => prizeNumber.includes(number)).length;
     const hasBonus = this.#numbers.includes(bonusNumber);
     if(matchCount === 6){
