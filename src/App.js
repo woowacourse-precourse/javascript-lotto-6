@@ -1,10 +1,10 @@
 import { MissionUtils, Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import { validatePrice, validateBonusNumber } from "./validate.js";
 import { ERROR_MESSAGE } from "./constants.js";
 class App {
   async play() {
-    const inputPrice = await Console.readLineAsync("구입금액을 입력해 주세요.");
-    //this.validatePrice(inputPrice); // 입력 금액 검증
+    const inputPrice = await this.inputBuyPrice(); // 구입 금액 입력
 
     const countOfLotto = this.countOfLotto(inputPrice); // 로또 개수 구하기
     Console.print(`${countOfLotto}개를 구매했습니다.`);
@@ -14,23 +14,19 @@ class App {
       Console.print(`[${randomNumbers[i].join(", ")}]\n`);
     }
 
-    const inputPickNumbers = await Console.readLineAsync("\n당첨 번호를 입력해 주세요.\n");
-    const pickNumbers = inputPickNumbers.split(",").map((number) => Number(number)); // 당첨 번호 배열로 변환
-    this.sortNumbers(pickNumbers); // 당첨 번호 정렬
-    const loto = new Lotto(pickNumbers); // 로또 인스턴스 생성
-
+    const lotto = await this.inputPickNumbers(); // 당첨 번호 입력
     const inputBonusNumbers = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
-    this.validateBonusNumber(Number(inputBonusNumbers));
+    validateBonusNumber(Number(inputBonusNumbers));
 
     for (let i = 0; i < randomNumbers.length; i += 1) {
-      loto.winningResult(randomNumbers[i], Number(inputBonusNumbers)); // 당첨 결과 구하기
+      lotto.winningResult(randomNumbers[i], Number(inputBonusNumbers)); // 당첨 결과 구하기
     }
-    loto.printWinningResult();
-    loto.printCalculateRate(inputPrice);
+    lotto.printWinningResult();
+    lotto.printCalculateRate(inputPrice);
   }
 
   countOfLotto(inputPrice) {
-    return Number(inputPrice) / 1000;
+    return inputPrice / 1000;
   }
 
   generateRandomNumber(countOfLotto) {
@@ -49,28 +45,30 @@ class App {
     numbers.sort((a, b) => a - b);
   }
 
-  validatePrice(inputPrice) {
-    // 입력 금액 검증
-    if (Number(inputPrice) < 1000) {
-      throw new Error(ERROR_MESSAGE.UNDER_PRICE);
-    }
-    if (Number(inputPrice) % 1000 !== 0 && !isNaN(inputPrice)) {
-      throw new Error(ERROR_MESSAGE.NOT_PRICE);
-    }
-    if (isNaN(inputPrice)) {
-      throw new Error(ERROR_MESSAGE.NOT_NUMBER_PRICE);
-    }
+  async inputBuyPrice() {
+    const inputBuy = await MissionUtils.Console.readLineAsync("구입 금액을 입력해 주세요.");
+    const buyPrice = Number(inputBuy);
+    validatePrice(buyPrice);
+    return buyPrice;
   }
 
-  validateBonusNumber(bonusNumber) {
-    // 보너스 번호 검증
-    if (isNaN(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+  async inputPickNumbers() {
+    let pickLotto;
+    while (!pickLotto) {
+      try {
+        const inputPickNumbers = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+        const pickNumbers = inputPickNumbers.split(",").map((number) => Number(number));
+
+        if (pickNumbers.some(isNaN)) {
+          throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+        }
+
+        pickLotto = new Lotto(pickNumbers);
+      } catch (e) {
+        MissionUtils.Console.print(e.message);
+      }
     }
-    if (bonusNumber < 1 || bonusNumber > 45) {
-      throw new Error(ERROR_MESSAGE.OVER_NUMBER);
-    }
+    return pickLotto;
   }
 }
-
 export default App;
