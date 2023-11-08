@@ -15,7 +15,7 @@ class App {
 
     this.printCnt(count, change);
     const lotto = this.printLottoNumber(count);
-    
+
     while (true) {
       try {
         winNumber = await this.userWinningInput();
@@ -25,13 +25,23 @@ class App {
         // throw error;
       }
     }
+
+    while (true) {
+      try {
+        const bonusNumber = await this.userBonusInput();
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
+
   }
   async userPriceInput() {
     try {
       const price = await MissionUtils.Console.readLineAsync (
         "구입금액을 입력해 주세요.\n"
       );
-      if (this.isNumber(price)) {
+      if (!this.isNumber(price)) {
         throw new Error("[ERROR] 잘못된 형식입니다. 숫자를 입력해주세요.")
       }
       const cnt = price / 1000;
@@ -82,11 +92,27 @@ class App {
         "당첨 번호를 입력해 주세요."
       );
       winNumber = winNumber.split(',').map(Number);
-      if (this.isNumber(winNumber)) {
+      if (!this.isNumber(winNumber)) {
         throw new Error("[ERROR] 잘못된 형식입니다. 숫자를 입력해주세요.")
       }
-      if (this.isLottoNumber(winNumber)) {
+      if (!this.isLottoNumber(winNumber)) {
         throw new Error("[ERROR] 잘못된 로또 번호 입니다. 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async userBonusInput() {
+    try {
+      let bonusNumber = await MissionUtils.Console.readLineAsync(
+        "보너스 번호를 입력해 주세요.\n"
+      );
+      if (!this.isNumber(bonusNumber)) {
+        throw new Error("[Error] 잘못된 형식입니다. 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+      }
+      if (!this.isLottoNumber(bonusNumber)) {
+        throw new Error("[Error] 잘못된 로또 번호 입니다. 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
       }
     } catch (error) {
       throw error;
