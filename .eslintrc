@@ -1,0 +1,38 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["airbnb-base", "plugin:jsdoc/recommended"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "max-depth": ["error", 2],
+
+    // esm 사용을 위한 침묵
+    "import/extensions": ["error", "always", { "ignorePackages": true }],
+
+    // validate 은닉을 위한 침묵
+    "class-methods-use-this": "off",
+
+    // 메서드의 길이 제한
+    "max-lines-per-function": ["error", { "max": 15 }],
+
+    "jsdoc/no-unused-vars": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "LottoTest.js", "ApplicationTest.js"],
+      "rules": {
+        // 테스트 파일에 대해서는 max-lines-per-function 룰을 비활성화합니다.
+        "max-lines-per-function": "off",
+
+        // 테스트 파일에 대해서는 예외처리를 위해 no-new 룰을 비활성화합니다.
+        "no-new": "off"
+      }
+    }
+  ]
+}
