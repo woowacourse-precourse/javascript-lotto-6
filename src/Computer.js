@@ -1,4 +1,5 @@
 import Lotto from "./Lotto.js"
+import { Console } from '@woowacourse/mission-utils';
 
 class Computer {
   static purchaseList(lottoNumber) {
@@ -15,7 +16,7 @@ class Computer {
   }
 
   static lotto(lottoNumber,lottoList) {
-    console.log(lottoNumber.split(',').filter(x => lottoList.includes(x)));
+    return lottoNumber.split(',').filter(x => lottoList.includes(x));
   }
 }
 
