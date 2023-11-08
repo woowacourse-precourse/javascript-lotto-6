@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE_INPUT } from "../constants/constant";
+import { MESSAGE_INPUT } from "../constants/Constant";
 
 class LottoInput {
   async priceInput() {
@@ -16,13 +16,13 @@ class LottoInput {
   async winningInput() {
     let winningNum = [];
     const winNum = await Console.readLineAsync(MESSAGE_INPUT.WINNING_INPUT);
-    winningNum = winNum.split(",");
+    winningNum = winNum.split(",").map(Number);
     return winningNum;
   }
 
   async bonusInput() {
     const bonusNum = await Console.readLineAsync(MESSAGE_INPUT.BONUS_INPUT);
-    return bonusNum;
+    return Number(bonusNum);
   }
 }
 

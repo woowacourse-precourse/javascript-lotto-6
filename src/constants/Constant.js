@@ -1,10 +1,10 @@
-export const MESSAGE_INPUT = Object.freeze({
+const MESSAGE_INPUT = Object.freeze({
   PRICE: "구입금액을 입력해 주세요.",
   WINNING_INPUT: "당첨 번호를 입력해 주세요.",
   BONUS_INPUT: "보너스 번호를 입력해 주세요.",
 });
 
-export const MESSAGE_OUTPUT = (num) =>
+const MESSAGE_OUTPUT = (num) =>
   Object.freeze({
     WINNING_OUTPUT: "당첨 통계\n---",
     COUNT: `${num}개를 구매했습니다.`,
@@ -16,4 +16,4 @@ export const MESSAGE_OUTPUT = (num) =>
     RATE: `총 수익률은 ${num}%입니다.`,
   });
 
-export { MESSAGEs_INPUT, MESSAGE_OUTPUT };
+export { MESSAGE_INPUT, MESSAGE_OUTPUT };

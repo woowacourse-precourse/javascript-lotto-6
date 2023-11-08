@@ -1,6 +1,5 @@
 import LottoInput from "./Controller/LottoInput";
 import LottoOutput from "./Controller/LottoOutput";
-import { Random, Console } from "@woowacourse/mission-utils";
 
 class App {
   constructor() {

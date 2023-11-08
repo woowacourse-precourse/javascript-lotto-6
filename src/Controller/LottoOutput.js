@@ -4,6 +4,11 @@ import { MESSAGE_OUTPUT } from "../constants/Constant";
 class LottoOutput {
   constructor() {
     this.lottoNumArr = [];
+    this.matchThree = 0;
+    this.matchFour = 0;
+    this.matchFive = 0;
+    this.matchBonus = 0;
+    this.matchSix = 0;
   }
 
   lottoCnt(money) {
@@ -20,8 +25,6 @@ class LottoOutput {
   }
 
   printWinning(winningNum, bonusNum) {
-    let [matchThree, matchFour, matchFive, matchBonus, matchSix] = 0;
-
     for (let i = 0; i < this.lottoNumArr.length; i++) {
       let winningCount = this.lottoNumArr[i].filter((x) =>
         winningNum.includes(x)
@@ -31,33 +34,31 @@ class LottoOutput {
       if (this.lottoNumArr[i].includes(bonusNum)) {
         IS_BONUS = true;
       }
-
       switch (winningCount) {
         case 3:
-          matchThree++;
+          this.matchThree++;
           break;
         case 4:
-          matchFour++;
+          this.matchFour++;
           break;
         case 5:
           if (IS_BONUS) {
-            matchBonus++;
+            this.matchBonus++;
             break;
           }
-          matchFive++;
+          this.matchFive++;
           break;
         case 6:
-          matchSix++;
+          this.matchSix++;
           break;
       }
     }
-
-    Console.print(MESSAGE_OUTPUT.WINNING_OUTPUT);
-    Console.print(MESSAGE_OUTPUT.WINNING_THREE(matchThree));
-    Console.print(MESSAGE_OUTPUT.WINNING_FOUR(matchFour));
-    Console.print(MESSAGE_OUTPUT.WINNING_FIVE(matchFive));
-    Console.print(MESSAGE_OUTPUT.WINNING_BONUS(matchBonus));
-    Console.print(MESSAGE_OUTPUT.WINNING_SIX(matchSix));
+    Console.print(MESSAGE_OUTPUT().WINNING_OUTPUT);
+    Console.print(MESSAGE_OUTPUT(this.matchThree).WINNING_THREE);
+    Console.print(MESSAGE_OUTPUT(this.matchFour).WINNING_FOUR);
+    Console.print(MESSAGE_OUTPUT(this.matchFive).WINNING_FIVE);
+    Console.print(MESSAGE_OUTPUT(this.matchBonus).WINNING_BONUS);
+    Console.print(MESSAGE_OUTPUT(this.matchSix).WINNING_SIX);
   }
 }
 
