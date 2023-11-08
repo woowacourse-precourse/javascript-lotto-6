@@ -31,6 +31,11 @@ class Validation {
     }
   }
 
+  static validateRandomNumbers(randomNumbers){
+    this.validateNumbersLength(randomNumbers);
+    this.validateRepeatedNumbers(randomNumbers);
+  }
+
 }
 
 export default Validation;
