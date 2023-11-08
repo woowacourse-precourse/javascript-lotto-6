@@ -1,10 +1,10 @@
-import { Random } from '@woowacourse/mission-utils';
-import { LOTTO } from '../constant/constant.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
-class MakeLottoNumber {
-  createRandom() {
-    return Random.pickUniqueNumbersInRange(LOTTO.MIN, LOTTO.MAX, LOTTO.COUNT).sort((a, b) => a - b);
+class Random {
+  static makeNumber() {
+    const number = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+    return number;
   }
 }
 
-export default MakeLottoNumber;
+export default Random;
