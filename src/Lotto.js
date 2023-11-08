@@ -1,3 +1,6 @@
+import { Random } from '@woowacourse/mission-utils';
+import Exception from './utils/Exception.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,27 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    this.#numbers = numbers;
+    Exception.isValidDigit(this.#numbers);
+    Exception.isDuplicate(this.#numbers);
+    Exception.isAscending(this.#numbers);
+    this.#numbers.map((num) => Exception.isValidRange(num));
   }
 
-  // TODO: 추가 기능 구현
+  static generateRandomLotto() {
+    const lottoNum = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const sortedLottoNum = lottoNum.sort((a, b) => a - b);
+    return new Lotto(sortedLottoNum);
+  }
+
+  static generateAndStoreLotto(arr) {
+    const lottoNumbers = Lotto.generateRandomLotto();
+    arr.push(lottoNumbers);
+  }
+
+  getLottoNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
