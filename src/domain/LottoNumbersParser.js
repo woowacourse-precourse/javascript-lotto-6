@@ -12,6 +12,7 @@ const LottoNumbersParser = {
   },
 
   parseSingle(input) {
+    this.validateSingle(input);
     return this.parse(input)[0];
   },
 
@@ -22,6 +23,10 @@ const LottoNumbersParser = {
   validateInput(array) {
     this.validateHasOnlyPositiveInt(array);
     this.validateVaildLottoNumbers(array);
+  },
+
+  parseInts(array) {
+    return array.map((value) => parseInt(value, 10));
   },
 
   validateHasOnlyPositiveInt(array) {
@@ -36,8 +41,10 @@ const LottoNumbersParser = {
     numbers.forEach((number) => validateNumberInRange(number, minNumber, maxNumber));
   },
 
-  parseInts(array) {
-    return array.map((value) => parseInt(value, 10));
+  validateSingle(input) {
+    if (input.includes(",")) {
+      throw new Error(ERROR_MESSAGE.includeComma);
+    }
   },
 };
 

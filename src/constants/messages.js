@@ -38,6 +38,7 @@ const ERROR_MESSAGE = Object.freeze({
   overLottoStock: errorString("남아있는 로또의 재고 수를 초과하여 구매할 수 없습니다."),
   hasNonLotto: errorString("로또 객체가 아닌 값이 포함될 수 없습니다."),
   duplicateBonusNumber: errorString("보너스 번호는 당첨 번호와 겹칠 수 없습니다."),
+  includeComma: errorString("여러 개의 값을 받을 수 없습니다."),
 });
 
 export { INPUT_QUERY, OUTPUT_MESSAGE, ERROR_MESSAGE };
