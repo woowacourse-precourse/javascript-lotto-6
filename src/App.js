@@ -34,7 +34,7 @@ class App {
 
     // 4. 보너스 번호 입력받기
     const bonus_number = new BonusNumber();
-    this.bonus_number = await bonus_number.getBonusNumber();
+    this.bonus_number = await bonus_number.getBonusNumber(this.winning_number);
 
     // 5. 로또 번호와 당첨 번호 비교하기
     const ranking = new Ranking();
