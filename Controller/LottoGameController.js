@@ -38,6 +38,8 @@ class LottoGameController {
 
   async printGameResult() {
     await this.makeWinningLotto();
+    const winnerList = this.#winningJudge.getWinnerList();
+    this.#outputview.printresult(winnerList);
   }
 }
 
