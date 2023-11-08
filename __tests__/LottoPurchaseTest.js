@@ -26,7 +26,7 @@ describe("로또 구매 클래스", () => {
     const lottoPurchase = new LottoPurchase(VALID_PURCHASE_AMOUT);
 
     // when
-    const lottos = lottoPurchase.generateLottos();
+    const lottos = lottoPurchase.getLottos();
 
     // then
     expect(lottos.length).toBe(5); // 5개 구매
