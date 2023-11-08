@@ -13,7 +13,7 @@ const compareNumberArr = (baseArr, targetArr) => {
   return matchCount;
 };
 
-const addCountOnResultBoard = (matchCount, numbers, bonus) => {
+const addCount = (matchCount, numbers, bonus) => {
   switch (matchCount) {
     case 3:
       return MATCH_COUNT.three;
@@ -29,19 +29,19 @@ const addCountOnResultBoard = (matchCount, numbers, bonus) => {
   }
 };
 
-const addProfit = (matchNumber) => {
-  switch (matchNumber[0]) {
-    case MATCH_COUNT.three:
-      return matchNumber[1] * PRIZE_MONEY.fifth;
-    case MATCH_COUNT.four:
-      return matchNumber[1] * PRIZE_MONEY.fourth;
-    case MATCH_COUNT.five:
-      return matchNumber[1] * PRIZE_MONEY.third;
-    case MATCH_COUNT.fiveBonus:
-      return matchNumber[1] * PRIZE_MONEY.second;
-    case MATCH_COUNT.six:
-      return matchNumber[1] * PRIZE_MONEY.first;
-  }
+const addProfit = (number) => {
+  const matchNumber = number[0];
+  const matchCount = number[1];
+
+  const profitObj = {
+    [MATCH_COUNT.three]: PRIZE_MONEY.fifth,
+    [MATCH_COUNT.four]: PRIZE_MONEY.fourth,
+    [MATCH_COUNT.five]: PRIZE_MONEY.third,
+    [MATCH_COUNT.fiveBonus]: PRIZE_MONEY.second,
+    [MATCH_COUNT.six]: PRIZE_MONEY.first,
+  };
+
+  return matchCount * profitObj[matchNumber];
 };
 
 const LottoResult = {
@@ -51,7 +51,7 @@ const LottoResult = {
 
     purchasedNumbers.forEach((numbers) => {
       matchCount = compareNumberArr(numbers, lottoNumber);
-      let matchNumber = addCountOnResultBoard(matchCount, numbers, bonusNumber);
+      let matchNumber = addCount(matchCount, numbers, bonusNumber);
       if (matchNumber !== MATCH_COUNT.zero) resultBoard[matchNumber] += 1;
     });
 
