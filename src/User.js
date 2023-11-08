@@ -1,7 +1,7 @@
 import inputView from './views/inputView';
 import validator from './utils/validator';
 import { ERROR_MESSAGE } from './constants/message';
-import converter from './utils/Converter';
+import converter from './utils/converter';
 import { LOTTO, PURCHASE_AMOUNT } from './constants/api';
 import outputView from './views/outputView';
 

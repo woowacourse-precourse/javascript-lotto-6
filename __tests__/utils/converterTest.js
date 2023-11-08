@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from '../../src/constants/message';
-import converter from '../../src/utils/Converter';
+import converter from '../../src/utils/converter';
 
 describe('numbericStringToNumber 함수 테스트', () => {
   it('숫자로 구성된 문자열을 숫자로 형변환하여 반환한다.', () => {

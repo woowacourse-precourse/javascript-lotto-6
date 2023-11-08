@@ -1,4 +1,4 @@
-import converter from '../utils/Converter';
+import converter from '../utils/converter';
 import { LOTTO } from './api';
 
 export const INPUT_MESSAGE = Object.freeze({
