@@ -171,6 +171,21 @@ describe("inputWinningNumbers 테스트", () => {
   });
 })
 
+describe("inputBonusNumber 테스트", () => {
+  it("유효한 보너스 번호를 올바르게 입력받아야 합니다", async () => {
+    // given
+    const validInput = "7"; // 유효한 보너스 번호 입력
+    MissionUtils.Console.readLineAsync.mockResolvedValueOnce(validInput);
+
+    // when
+    const app = new App();
+    const bonusNumber = await app.inputBonusNumber();
+
+    // then
+    expect(bonusNumber).toBe(7); // 올바른 입력값을 반환하는지 확인
+  });
+})
+
 
 
 
