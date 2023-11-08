@@ -31,22 +31,22 @@
 - [x] 구매한 로또 개수와 로또 번호 출력
 - [x] 게임 종료 후, 일치하는 번호의 개수와 당첨금, 수익률 출력
 
-## 폴더 구조 설계
+## 폴더 구조
 
 ```
 lotto
   ├── App.js
   ├── index.js
+  ├── Lotto.js
+  ├── WinningLotto.js
   ├── lottoGame
   │   ├── LottoGame.js
   │   ├── LottoGameUtils.js
   │
   ├── utils
   │   ├── UserInput.js
+  │   ├── InputValidate.js
   │   ├── constants.js
-  │
-  ├── models
-  │   ├── Lotto.js
   │
   ├── errors
   │   ├── InputError.js
@@ -54,27 +54,24 @@ lotto
 ```
 
 📄 App.js ...게임 시작부터 종료까지 루틴을 관리하는 로직
+📄 Lotto.js ... 랜덤 로또 클래스
+📄 WinningLotto.js ... 당첨 로또 클래스(사용자 입력)
 
 📂 **lottoGame** 로또 게임 진행에 필요한 파일을 관리하는 폴더  
  ㄴ📄 LottoGame.js ...로또 게임에 필요한 함수들을 관리하는 클래스  
   ㄴ➰ generateLotto() ...구입 금액에 따라 로또를 발행하는 함수  
-  ㄴ➰ calculateWinners() ...최종 결과 계산하는 함수 (추후 분리할 예정)  
+  ㄴ➰ calculateWinners() ...최종 결과 계산하는 함수  
  ㄴ📄 lottoGameUtils.js ...LottoGame 클래스 내부의 유틸리티 함수를 관리하는 파일  
   ㄴ➰ generateRandomNumber() ...랜덤 숫자 생성하는 함수  
   ㄴ➰ ascendingSort() ...오름차순 정렬 함수
 
 📂 **utils** 유틸들을 모아놓은 폴더  
- ㄴ📄 UserInput.js ...유저에게 입력을 받고 입력 받은 값을 검증 후 리턴하는 함수들이 저장된 클래스  
+ ㄴ📄 UserInput.js ...유저에게 입력을 받고 리턴하는 함수들이 저장된 클래스  
   ㄴ➰ getPurchaseAmount() ...구매 금액 입력  
   ㄴ➰ getLottoNumbers() ...당첨 번호 입력  
   ㄴ➰ getBonusNumber() ...보너스 번호 입력  
+ ㄴ📄 InputValidate.js ...입력 받은 값을 검증 후 리턴하는 함수들이 저장된 클래스  
  ㄴ📄 constants.js ...상수값을 관리하는 함수
 
-📂 **models** 모델을 관리하는 폴더  
- ㄴ📄 Lotto.js ... 로또 한 장 클래스
-
 📂 **errors** 예외 처리 파일을 관리하는 폴더  
- ㄴ📄 InputError.js  
-  ㄴ➰ lottoAmountError() ...자동차 이름 입력받을 시, 에러 종류에 따라 에러 메시지 리턴  
-  ㄴ➰ lottoNumberError() ...시도횟수 입력받을 시, 에러 종류에 따라 에러 메시지 리턴  
-  ㄴ➰ commonError() ...공통 에러 발생 시, 에러 종류에 따라 에러 메시지 리턴
+ ㄴ📄 InputError.js ...입력 시 발생하는 에러들을 관리하는 클래스
