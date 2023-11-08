@@ -1,12 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from './constants.js';
-import InputValidation from './InputValidation.js';
+import InputValidator from './InputValidator.js';
 
 export default class UserInput {
   static async getPurchaseAmount() {
     const input = await Console.readLineAsync(MESSAGE.INPUT_PURCHASE_AMOUNT);
     try {
-      InputValidation.checkPurchaseAmount(input);
+      InputValidator.checkPurchaseAmount(input);
       return Number(input);
     } catch (exception) {
       this.printError(exception.message);
@@ -17,7 +17,7 @@ export default class UserInput {
   static async getWinningNumbers() {
     const input = await Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBERS);
     try {
-      InputValidation.checkWinningNumbers(input);
+      InputValidator.checkWinningNumbers(input);
       return input.split(',').map(Number);
     } catch (exception) {
       this.printError(exception.message);
@@ -28,7 +28,7 @@ export default class UserInput {
   static async getBonusNumber(winningNumbers) {
     const input = await Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
     try {
-      InputValidation.checkBonusNumber(winningNumbers, input);
+      InputValidator.checkBonusNumber(winningNumbers, input);
       return Number(input);
     } catch (exception) {
       this.printError(exception.message);
