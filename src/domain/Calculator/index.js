@@ -13,21 +13,31 @@ export class Calculator {
   #bonusNumber;
 
   async promptWinningNumber() {
-    const inputWinningNumbersStr = await InputView.readLine(
-      MESSAGES.WINNING_NUMBER.PLACE_HOLDER
-    );
-    const winningNumbers = this.#formatWinningNumber(inputWinningNumbersStr);
-    this.#validateWinningNumber(winningNumbers);
-    this.#winningNumbers = winningNumbers;
+    try {
+      const inputWinningNumbersStr = await InputView.readLine(
+        MESSAGES.WINNING_NUMBER.PLACE_HOLDER
+      );
+      const winningNumbers = this.#formatWinningNumber(inputWinningNumbersStr);
+      this.#validateWinningNumber(winningNumbers);
+      this.#winningNumbers = winningNumbers;
+    } catch (error) {
+      OutputView.print(error.message);
+      await this.promptWinningNumber();
+    }
   }
 
   async promptBonusNumber() {
-    const inputBonusNumberStr = await InputView.readLine(
-      MESSAGES.BONUS_NUMBER.PLACE_HOLDER
-    );
-    const bonusNumber = Number(inputBonusNumberStr);
-    this.#validateBonusNumber(bonusNumber);
-    this.#bonusNumber = bonusNumber;
+    try {
+      const inputBonusNumberStr = await InputView.readLine(
+        MESSAGES.BONUS_NUMBER.PLACE_HOLDER
+      );
+      const bonusNumber = Number(inputBonusNumberStr);
+      this.#validateBonusNumber(bonusNumber);
+      this.#bonusNumber = bonusNumber;
+    } catch (error) {
+      OutputView.print(error.message);
+      await this.promptBonusNumber();
+    }
   }
 
   getWinningsResult(lottos) {
