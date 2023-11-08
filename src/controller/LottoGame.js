@@ -56,6 +56,9 @@ class LottoGame {
     validateDivisible(input);
   }
 
+  /**
+   * 입력받은 돈의 액수에 비례해 로또리스트에 로또 추가
+   */
   #setMyLottoList() {
     const amount = this.#money / 1000;
     for (let i = 0; i < amount; i++) {
@@ -67,6 +70,9 @@ class LottoGame {
     return this.#myLottos;
   }
 
+  /**
+   * 당첨번호와 보너스번호 입력
+   */
   async drawLotto() {
     await this.#winningLotto.setWinningNumber();
     await this.#winningLotto.setBonusNumber();
@@ -76,6 +82,9 @@ class LottoGame {
     return this.#winningLotto;
   }
 
+  /**
+   * 당첨된 로또 계산 및 통계 출력
+   */
   async result() {
     printBeforeResult();
     this.#compareWinningNumber();
@@ -83,6 +92,9 @@ class LottoGame {
     printMyBenefit(this.#calculateTotalBenefit());
   }
 
+  /**
+   * 매칭된 갯수와 보너스 넘버 매칭 유무를 바탕으로 rewardCount set
+   */
   #compareWinningNumber() {
     const myLottoList = this.#myLottos.getMyLottoList();
     const winningNumbers = this.#winningLotto.getWinningNumber();
@@ -102,6 +114,13 @@ class LottoGame {
     return this.#rewardCount;
   }
 
+  /**
+   * 한개의 로또와 당첨번호,보너스 번호를 비교
+   * @param {number[]} lotto 한개의 로또
+   * @param {number[]} winningNumbers 입력된 당첨 번호
+   * @param {number} bonusNumber 입력된 보너스 번호
+   * @returns 매칭된 로또 번호 갯수, 보너스 번호 매칭 유무 반환
+   */
   #matchingOneLottery(lotto, winningNumbers, bonusNumber) {
     const matchCount = lotto.filter((num) =>
       winningNumbers.includes(num),
