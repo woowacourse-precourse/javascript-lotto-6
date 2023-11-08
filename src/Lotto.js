@@ -29,11 +29,6 @@ class Lotto {
     return numbers.sort((a, b) => a - b);
   }
 
-  matchNumbers(winningNumbers) {
-    return this.#numbers.filter((number) => winningNumbers.includes(number))
-      .length;
-  }
-
   getRanking(winningNumbers, bonusNumber) {
     if (this.matchNumbers(winningNumbers) === 6) {
       return 1;
@@ -49,6 +44,11 @@ class Lotto {
     } else if (this.matchNumbers(winningNumbers) === 3) {
       return 5;
     }
+  }
+
+  matchNumbers(winningNumbers) {
+    return this.#numbers.filter((number) => winningNumbers.includes(number))
+      .length;
   }
 }
 

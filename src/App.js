@@ -26,12 +26,6 @@ class App {
     this.printLottoRanking();
   }
 
-  async enterAmount() {
-    this.amount = await MissionUtils.Console.readLineAsync(
-      '구입금액을 입력해 주세요.\n'
-    );
-  }
-
   async start() {
     while (!this.amount) {
       try {
@@ -46,8 +40,10 @@ class App {
     }
   }
 
-  getLottoNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  async enterAmount() {
+    this.amount = await MissionUtils.Console.readLineAsync(
+      '구입금액을 입력해 주세요.\n'
+    );
   }
 
   getLottos() {
@@ -58,6 +54,10 @@ class App {
     }
   }
 
+  getLottoNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
   printLottos() {
     MissionUtils.Console.print(`${this.lottosCount}개를 구매했습니다.`);
     let i = 0;
@@ -66,13 +66,6 @@ class App {
       i += 1;
     }
     MissionUtils.Console.print('');
-  }
-
-  async enterWinningNumbers() {
-    const numbers = await MissionUtils.Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.\n'
-    );
-    this.winningNumbers = numbers.split(',').map(Number);
   }
 
   async getWinningNumbers() {
@@ -89,10 +82,11 @@ class App {
     }
   }
 
-  async enterBonusNumber() {
-    this.bonusNumber = +(await MissionUtils.Console.readLineAsync(
-      '보너스 번호를 입력해 주세요.\n'
-    ));
+  async enterWinningNumbers() {
+    const numbers = await MissionUtils.Console.readLineAsync(
+      '당첨 번호를 입력해 주세요.\n'
+    );
+    this.winningNumbers = numbers.split(',').map(Number);
   }
 
   async getBonusNumber() {
@@ -109,15 +103,10 @@ class App {
     }
   }
 
-  setRanks() {
-    for (let i = 0; i < 5; i += 1) {
-      const rank = new Rank(
-        RANK_INFO[i].ranking,
-        RANK_INFO[i].matchNumbers,
-        RANK_INFO[i].winnings
-      );
-      this.ranks.push(rank);
-    }
+  async enterBonusNumber() {
+    this.bonusNumber = +(await MissionUtils.Console.readLineAsync(
+      '보너스 번호를 입력해 주세요.\n'
+    ));
   }
 
   getLottoRanking() {
@@ -131,6 +120,26 @@ class App {
     }
   }
 
+  setRanks() {
+    for (let i = 0; i < 5; i += 1) {
+      const rank = new Rank(
+        RANK_INFO[i].ranking,
+        RANK_INFO[i].matchNumbers,
+        RANK_INFO[i].winnings
+      );
+      this.ranks.push(rank);
+    }
+  }
+
+  printLottoRanking() {
+    MissionUtils.Console.print('당첨 통계');
+    MissionUtils.Console.print('---');
+    for (let i = 0; i < this.ranks.length; i += 1) {
+      this.ranks[i].printRank();
+    }
+    MissionUtils.Console.print(`총 수익률은 ${this.getEarningsRate()}입니다.`);
+  }
+
   getEarningsRate() {
     let winningAmount = 0;
     this.ranks.map((rank) => {
@@ -142,15 +151,6 @@ class App {
     return (
       earningsRate.toLocaleString('ko-kr', { minimumFractionDigits: 1 }) + '%'
     );
-  }
-
-  printLottoRanking() {
-    MissionUtils.Console.print('당첨 통계');
-    MissionUtils.Console.print('---');
-    for (let i = 0; i < this.ranks.length; i += 1) {
-      this.ranks[i].printRank();
-    }
-    MissionUtils.Console.print(`총 수익률은 ${this.getEarningsRate()}입니다.`);
   }
 }
 
