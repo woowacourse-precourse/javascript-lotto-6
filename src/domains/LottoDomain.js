@@ -39,11 +39,12 @@ class LottoMachine {
     resultObject.forEach((result) => {
       const { matchCount, notMatchNumber } = result;
       if (matchCount === NUMBER.LOTTO_LENGTH) rank[number.first] += NUMBER.ADD;
-      else if (matchCount === NUMBER.FOURTH) rank[number.fourth] += NUMBER.ADD;
-      else if (matchCount === NUMBER.FIFTH) rank[number.fifth] += NUMBER.ADD;
-      else if (matchCount === NUMBER.SECOND_THIRD && notMatchNumber === bonusNumber) {
+      if (matchCount === NUMBER.FOURTH) rank[number.fourth] += NUMBER.ADD;
+      if (matchCount === NUMBER.FIFTH) rank[number.fifth] += NUMBER.ADD;
+      if (matchCount === NUMBER.SECOND_THIRD && notMatchNumber === bonusNumber) {
         rank[number.second] += NUMBER.ADD;
-      } else if (matchCount === NUMBER.SECOND_THIRD && notMatchNumber !== bonusNumber) {
+      }
+      if (matchCount === NUMBER.SECOND_THIRD && notMatchNumber !== bonusNumber) {
         rank[number.third] += NUMBER.ADD;
       }
     });
