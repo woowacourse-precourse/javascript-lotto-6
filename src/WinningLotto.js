@@ -33,13 +33,13 @@ export default class WinningLotto extends Lotto {
       [FIFTH]: 0,
     };
     lottos.forEach((lotto) => {
-      const rank = this.calculate(lotto);
+      const rank = this.calculatePrizeAmount(lotto);
       if (rank !== NONE) statistics[rank] += 1;
     });
 
     return statistics;
   }
-  calculate(lotto) {
+  calculatePrizeAmount(lotto) {
     const matchCount = this.#getMatchCountWithoutBonusNumber(lotto);
     const isBonusNumberMatched = this.#isMatchBonusNumber(lotto);
 
