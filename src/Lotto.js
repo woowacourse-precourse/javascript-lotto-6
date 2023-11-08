@@ -1,5 +1,3 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-
 class Lotto {
   #numbers;
   constructor(numbers) {
@@ -11,7 +9,7 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개 여야 합니다.");
     }
-
+    //로또번호가 1 ~ 45사이의 숫자임을 검사
     for (let i = 0; i < numbers.length; i++) {
       let num = numbers[i];
       if (num < 1 || num > 45) {
@@ -24,7 +22,7 @@ class Lotto {
       throw new Error("[ERROR] 숫자가 중복됩니다.");
     }
   }
-
+  //로또 번호(answer)와 생성한 번호(this.#numbers) 비교
   answerCount(answer) {
     let count = 0;
     for (const n of this.#numbers) {
@@ -34,7 +32,7 @@ class Lotto {
     }
     return count;
   }
-
+  //보너스 번호(bonus)와 생성한 번호(this.#numbers) 비교
   bonusMatch(bonus) {
     if (this.#numbers.includes(bonus)) {
       return true;
@@ -42,6 +40,5 @@ class Lotto {
     return false;
   }
 }
-// TODO: 추가 기능 구현
 
 export default Lotto;

@@ -50,6 +50,9 @@ class App {
     //보너스 번호 실행
     await this.BonusInput();
 
+    //당첨 결과 실행
+    this.calResult();
+
     //당첨 결과 발표 실행
     this.printResult();
 
@@ -70,8 +73,6 @@ class App {
     MissionUtils.Console.print(`${numOfLottos}개를 구매했습니다.`);
     this.generateNumbers(numOfLottos);
   }
-
-  //로또 당첨 번호 생성
 
   //내가 선택하는 복권 번호
   generateNumbers(numOfLottos) {
@@ -96,7 +97,7 @@ class App {
   }
 
   //결과 출력 함수
-  printResult() {
+  calResult() {
     for (const ticket of this.lottos) {
       let count = ticket.answerCount(this.answer);
       if (count === 3) {
@@ -113,7 +114,8 @@ class App {
         this.sixCorrect++;
       }
     }
-
+  }
+  printResult() {
     MissionUtils.Console.print("당첨 통계");
     MissionUtils.Console.print("---");
     MissionUtils.Console.print(`3개 일치 (5,000원) - ${this.threeCorrect}개`);
