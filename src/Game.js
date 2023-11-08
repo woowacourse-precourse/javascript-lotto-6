@@ -1,5 +1,7 @@
 import InputOutput from "./InputOutput";
 import Validate from "./Validate";
+import Lotto from "./Lotto";
+import ErrorMessages from "./Error";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Game {
@@ -53,6 +55,16 @@ class Game {
     if (winningNumbers.includes(bonusNumber)) throw new Error(ErrorMessages.bonusNumberError);
     return bonusNumber;
   };
+
+  createAndPrintLottoTickets(lottoCount) {
+    const lottoTickets = [...Array(lottoCount)].map((_) => {
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lotto = new Lotto(numbers);
+      lotto.printLottoNumbers();
+      return lotto;
+    });
+    return lottoTickets;
+  }
 
 }
 
