@@ -35,7 +35,7 @@ describe('getPurchaseAmount 메서드 테스트', () => {
     const app = new App();
     let error;
     try {
-      const getPurchaseAmount = await app.getPurchaseAmount();
+      const purchaseAmount = await app.getPurchaseAmount();
     } catch (err) {
       error = err;
     }
@@ -55,7 +55,7 @@ describe('getPurchaseAmount 메서드 테스트', () => {
     const app = new App();
     let error;
     try {
-      const getPurchaseAmount = await app.getPurchaseAmount();
+      const purchaseAmount = await app.getPurchaseAmount();
     } catch (err) {
       error = err;
     }
@@ -73,10 +73,10 @@ describe('getPurchaseAmount 메서드 테스트', () => {
 
     //when
     const app = new App();
-    const PurchaseAmount = await app.getPurchaseAmount();
+    const purchaseAmount = await app.getPurchaseAmount();
 
     //then
-    expect(PurchaseAmount).toBe(5);
+    expect(purchaseAmount).toBe(5);
   });
 });
 
@@ -90,8 +90,8 @@ describe('printLottoCounts 메서드 테스트', () => {
 
     //when
     const app = new App();
-    const PurchaseAmount = await app.getPurchaseAmount();
-    app.printLottoCounts(PurchaseAmount);
+    const purchaseAmount = await app.getPurchaseAmount();
+    app.printLottoCounts(purchaseAmount);정
 
     //then
     expect(logSpy).toHaveBeenCalledWith("13개를 구매했습니다.");
