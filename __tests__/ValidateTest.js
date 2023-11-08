@@ -76,4 +76,21 @@ describe('로또 번호 생성 및 당첨 번호 입력', () => {
       expect(error).toEqual(ERROR_MESSAGE.INVALID_LOTTO_LENGTH);
     }
   });
+
+  test('로또의 각 번호들이 1~45 사이인 경우', () => {
+    const validInput = [1, 2, 45, 18, 32, 12];
+    validInput.forEach((lottoNum) => {
+      expect(validateRange(lottoNum)).toBe(true);
+    });
+  });
+  test('로또의 각 번호들이 1~45 사이가 아닌 경우', () => {
+    const invalidInput = [1, 2, 46, 100, 0, 12];
+    try {
+      invalidInput.forEach((lottoNum) => {
+        expect(validateRange(lottoNum)).toBe(true);
+      });
+    } catch (error) {
+      expect(error).toEqual(ERROR_MESSAGE.INVALID_LOTTO_RANGE);
+    }
+  });
 });
