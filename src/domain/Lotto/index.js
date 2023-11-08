@@ -24,18 +24,22 @@ export class Lotto {
     }
 
     numbers.every((number) => {
-      if (!Validation.isNumber(number)) {
-        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
-      }
-
-      if (!Validation.isOnRange(number, MIN, MAX)) {
-        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_ON_RANGE(MIN, MAX));
-      }
-
-      if (!Validation.isInteger(number)) {
-        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_INTEGER);
-      }
+      this.#validateLottoNumber(number);
     });
+  }
+
+  #validateLottoNumber(number) {
+    if (!Validation.isNumber(number)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
+    }
+
+    if (!Validation.isOnRange(number, MIN, MAX)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_ON_RANGE(MIN, MAX));
+    }
+
+    if (!Validation.isInteger(number)) {
+      throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_INTEGER);
+    }
   }
 
   getNumbers() {
