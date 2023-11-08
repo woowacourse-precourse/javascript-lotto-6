@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Inspector from "./utils/Inspector.js";
 
 class Lotto {
   #numbers;
@@ -38,15 +39,19 @@ class Lotto {
   ];
 
   constructor(numbers, bonusNumber) {
-    this.#validate(numbers);
+    this.#validate(numbers, bonusNumber);
     this.#numbers = numbers.sort((a, b) => a-b, 0);
     this.#bonusNumber = bonusNumber;
   }
-
-  #validate(numbers) {
-    if (numbers.length !== 6) {
+  
+  #validate(splited, bonusNumber) {
+    const inspector = new Inspector();
+    if (splited.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+
+    const ableWinnerLotto = splited ? inspector.getIsAble(splited) : null;
+    inspector.getIsDuplicate(ableWinnerLotto, bonusNumber);
   }
 
   // TODO: 추가 기능 구현
@@ -61,7 +66,7 @@ class Lotto {
   }
 
   getIsBonus (lottoNumber) {
-    console.log(lottoNumber, this.#bonusNumber);
+    // console.log(lottoNumber, this.#bonusNumber);
     if (lottoNumber.includes(Number(this.#bonusNumber))) {
       return true;
     } else if (!lottoNumber.includes(Number(this.#bonusNumber))) {
@@ -92,10 +97,12 @@ class Lotto {
     return this.#prizeAsCount.filter(prize => prize.order === order)[0].money;
   }
 
-  printResult(order) {
-    const prize = this.#prizeAsCount.filter(prize => prize.order === order)[0];
-    const message = `${prize.order}등: ${prize.count}개 번호 일치 ${prize.isBonus ? '+ 보너스 번호 일치 /' : '/'} ${prize.moneyString}원`
-    MissionUtils.Console.print(message);
+  printResult(winCount) { // {"1" : 1, "2": 2, "3": 0}
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${winCount["5"] || 0}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${winCount["4"] || 0}개`);
+    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${winCount["3"] || 0}개`);
+    MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${winCount["2"] || 0}개`);
+    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${winCount["1"] || 0}개`);
   }
 }
 

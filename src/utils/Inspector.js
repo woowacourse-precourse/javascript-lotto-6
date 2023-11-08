@@ -5,7 +5,7 @@ class Inspector {
     if (number.match(regExpNumber)) {
       return true;
     } else {
-      throw new Error("[ERROR] 구입금액은 숫자로만 이루어져야 합니다.") ;
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.") ;
     };
   }
 
@@ -13,7 +13,7 @@ class Inspector {
     if (number % 1000 === 0) {
       return true;
     } else {
-      throw new Error("[ERROR] 구입금액은 숫자로만 이루어져야 합니다.") ;
+      throw new Error("[ERROR] 구입금액은 1000으로 나누어떨어져야 합니다.") ;
     }
   }
 
