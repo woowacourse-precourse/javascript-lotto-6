@@ -28,10 +28,11 @@ class LottoStatistics {
 
   #countRank(result) {
     if (result.count === MATCHING_COUNT.FIRST) this.#lottoStatistics.FIRST += 1;
-    if (result.count === MATCHING_COUNT.SECOND && result.bonus) this.#lottoStatistics.SECOND += 1;
-    if (result.count === MATCHING_COUNT.THIRD) this.#lottoStatistics.THIRD += 1;
-    if (result.count === MATCHING_COUNT.FOURTH) this.#lottoStatistics.FOURTH += 1;
-    if (result.count === MATCHING_COUNT.FIFTH) this.#lottoStatistics.FIFTH += 1;
+    else if (result.count === MATCHING_COUNT.SECOND && result.bonus)
+      this.#lottoStatistics.SECOND += 1;
+    else if (result.count === MATCHING_COUNT.THIRD) this.#lottoStatistics.THIRD += 1;
+    else if (result.count === MATCHING_COUNT.FOURTH) this.#lottoStatistics.FOURTH += 1;
+    else if (result.count === MATCHING_COUNT.FIFTH) this.#lottoStatistics.FIFTH += 1;
   }
 
   #getWinningAmount() {
