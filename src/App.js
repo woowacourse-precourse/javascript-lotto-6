@@ -1,3 +1,7 @@
+import { Console, Random } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
+import { INPUT_LENGTH, MAX_NUMBER, MIN_NUMBER } from "./constant/LottoRules.js";
+
 class App {
   LOTTO_UNIT = 1000;
   LOTTO_REWARD = [0, 2000000, 30000, 1500, 50, 5];
@@ -16,6 +20,8 @@ class App {
     const lottoList = this.getPickedLottoList(lottoCount);
 
     this.printPickedLotto(lottoCount, lottoList);
+
+    const winningNumbers = await this.getWinningNumber();
   async getPayment() {
     try {
       const payment =
@@ -55,6 +61,20 @@ class App {
       Console.print(`[${lotto.getNumber()?.join(", ")}]`)
     );
   }
+
+  async getWinningNumber() {
+    try {
+      const numbers = await Console.readLineAsync(
+        "\n당첨 번호를 입력해 주세요.\n"
+      );
+      const winningNumber = numbers.split(",");
+      return new Lotto(winningNumber);
+    } catch (e) {
+      Console.print(e.message);
+      return this.getWinningNumber();
+    }
+  }
+
 }
 
 export default App;
