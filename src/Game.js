@@ -72,14 +72,14 @@ class Game {
     }
   }
 
-  getReturn() {
-    let totalReturn = 0;
+  getProfitRate() {
+    let totalProfit = 0;
 
     for (const { winningCount, reward } of Object.values(this.drawInfo)) {
-      totalReturn += Number(winningCount * reward);
+      totalProfit += Number(winningCount * reward);
     }
 
-    return totalReturn;
+    return (totalProfit / this.amount) * 100;
   }
 }
 
