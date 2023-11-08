@@ -23,7 +23,7 @@ class App {
     this.#lotto.printLottoResult(results);
 
     const earnings = this.#lotto.calculateEarningsRate(results);
-    this.#lotto.printLottoResult(earnings, this.#user.getPurchaseAmount());
+    this.#lotto.printEarningsRate(earnings, this.#user.getPurchaseAmount());
   }
 }
 
