@@ -1,10 +1,10 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import ValidateMoney from './ValidateMoney.js';
-import PrintLottoNumber from './PrintLottoNumber.js';
-import ValidateBonusNumber from './ValidateBonusNumber.js';
-import CalculatePrize from './CalculatePrize.js';
-import CalculateTotalMoney from './CalculateTotalMoney.js';
+import ValidateMoney from './Validation/ValidateMoney.js';
+import PrintLottoNumber from './Utils/PrintLottoNumber.js';
+import ValidateBonusNumber from './Validation/ValidateBonusNumber.js';
+import CalculatePrize from './Utils/CalculatePrize.js';
+import CalculateTotalMoney from './Utils/CalculateTotalMoney.js';
 
 class App {
   async play() {
