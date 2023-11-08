@@ -6,6 +6,8 @@ import {
   ERROR_MESSAGES,
 } from "./constants/Messages.js";
 import { PRIZE } from "./constants/Prize.js";
+import { validateWinningNumberCollection } from "./Validate/WinningNumber.js";
+import { validateBonusNumberCollection } from "./Validate/BonusNumber.js";
 
 /*
 추가된 요구 사항
@@ -115,36 +117,11 @@ class App {
       try {
         const WINNING_NUMBER = await this.inputWinningNumber();
         const WINNING_NUMBER_ARRAY = WINNING_NUMBER.split(",").map(Number);
-        this.validateWinningNumberCollection(WINNING_NUMBER_ARRAY);
+        validateWinningNumberCollection(WINNING_NUMBER_ARRAY);
         return WINNING_NUMBER_ARRAY;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
-    }
-  }
-
-  validateWinningNumberCollection(WINNING_NUMBER_ARRAY) {
-    this.validateWinningNumberSix(WINNING_NUMBER_ARRAY);
-    this.validateWinningNumberOutOfBounds(WINNING_NUMBER_ARRAY);
-    this.validateWinningNumberDuplication(WINNING_NUMBER_ARRAY);
-  }
-
-  validateWinningNumberSix(WINNING_NUMBER_ARRAY) {
-    if (WINNING_NUMBER_ARRAY.length !== 6) {
-      throw new Error(ERROR_MESSAGES.WINNING_NUMBER_NOT_SIX);
-    }
-  }
-
-  validateWinningNumberOutOfBounds(WINNING_NUMBER_ARRAY) {
-    if (!WINNING_NUMBER_ARRAY.every((number) => number >= 1 && number <= 45)) {
-      throw new Error(ERROR_MESSAGES.WINNING_NUMBER_OUT_OF_BOUNDS);
-    }
-  }
-
-  validateWinningNumberDuplication(WINNING_NUMBER_ARRAY) {
-    const UNIQUE_ARRAY = [...new Set(WINNING_NUMBER_ARRAY)];
-    if (WINNING_NUMBER_ARRAY.length !== UNIQUE_ARRAY.length) {
-      throw new Error(ERROR_MESSAGES.WINNING_NUMBER_DUPLICATION);
     }
   }
 
@@ -159,47 +136,12 @@ class App {
     while (true) {
       try {
         const BOUNUS_NUMBER = await this.inputBonusNumber();
-        this.validateBonusNumberCollection(
-          BOUNUS_NUMBER,
-          VERIFIED_WINNING_NUMBER
-        );
+        validateBonusNumberCollection(BOUNUS_NUMBER, VERIFIED_WINNING_NUMBER);
         const VERIFIED_BOUNUS_NUMBER = Number(BOUNUS_NUMBER);
         return VERIFIED_BOUNUS_NUMBER;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
-    }
-  }
-
-  validateBonusNumberCollection(BOUNUS_NUMBER, VERIFIED_WINNING_NUMBER) {
-    this.validateBonusNumberOutOfBounds(BOUNUS_NUMBER);
-    this.validateBonusNumberDuplicatedWithWinningNumber(
-      VERIFIED_WINNING_NUMBER,
-      BOUNUS_NUMBER
-    );
-    this.validateBonusNumberInteger(BOUNUS_NUMBER);
-  }
-
-  validateBonusNumberOutOfBounds(BOUNUS_NUMBER) {
-    if (BOUNUS_NUMBER < 1 || BOUNUS_NUMBER > 45) {
-      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_OUT_OF_BOUNDS);
-    }
-  }
-
-  validateBonusNumberDuplicatedWithWinningNumber(
-    VERIFIED_WINNING_NUMBER,
-    BOUNUS_NUMBER
-  ) {
-    if (VERIFIED_WINNING_NUMBER.includes(+BOUNUS_NUMBER)) {
-      throw new Error(
-        ERROR_MESSAGES.BONUS_NUMBER_DUPLICATION_WITH_WINNING_NUMBER
-      );
-    }
-  }
-
-  validateBonusNumberInteger(BOUNUS_NUMBER) {
-    if (!Number.isInteger(+BOUNUS_NUMBER)) {
-      throw new Error(ERROR_MESSAGES.BONUS_NUMBER_NOT_INTEGER);
     }
   }
 
@@ -210,9 +152,7 @@ class App {
         winningNumber,
         bonusNumber
       );
-      if (correctCount !== 5 && correctCount >= 3) {
-        NumberOfWins[correctCount]++;
-      }
+      if (correctCount !== 5 && correctCount >= 3) NumberOfWins[correctCount]++;
       if (correctCount === 5 && bonusFlag) NumberOfWins["bonus"]++;
       if (correctCount === 5 && !bonusFlag) NumberOfWins[5]++;
     }
