@@ -3,12 +3,14 @@ import WinningNumbers from "./WinningNumbers.js";
 class CalculateWinnings {
   #results;
 
+  #profitRate;
+
   constructor(lottos, inputWinningNumbers, inputBonusNumbers) {
     const winningNumber = new WinningNumbers(
       inputWinningNumbers,
       inputBonusNumbers
     );
-    this.lottoTickets = lottos.getLottoTickets();
+    this.lottos.this.lottoTickets = lottos.getLottoTickets();
     this.winningNumbers = winningNumber.getWinningNumbers();
     this.bonusNumber = winningNumber.getBonus();
 
@@ -59,6 +61,16 @@ class CalculateWinnings {
     } else if (matchedNumbers.length === 6) {
       this.#results.six += 1;
     }
+  }
+
+  calculateProfitRate(purchaseAmount) {
+    const profit =
+      this.#results.three * 5000 +
+      this.#results.four * 50000 +
+      this.#results.five * 1500000 +
+      this.#results.fiveBonus * 30000000 +
+      this.#results.six * 2000000000;
+    this.#profitRate = (profit / purchaseAmount) * 100;
   }
 }
 
