@@ -100,5 +100,109 @@ describe('모든 로또 당첨 확인 테스트', () => {
     const app = new App();
 
     expect(app.checkAllLottoResult(myLottos, lottoWinningNumber, lottoBonusNumber)).toEqual(allLottoResult);
-  })
-})
+  });
+});
+
+describe('로또 수익률 계산 테스트', () => {
+  test('로또 수익이 구입 금액보다 큰 경우에 대해 수익률을 계산한다.', () => {
+    const allLottoResult = {
+      Ranking5: {
+        rankingDetail: {
+          theNumberOfMatches: 3,
+          haveBonusNumber: false
+        },
+        reward: 5000,
+        count: 2
+      },
+      Ranking4: {
+        rankingDetail: {
+          theNumberOfMatches: 4,
+          haveBonusNumber: false
+        },
+        reward: 50000,
+        count: 0
+      },
+      Ranking3: {
+        rankingDetail: {
+          theNumberOfMatches: 5,
+          haveBonusNumber: false
+        },
+        reward: 1500000,
+        count: 0
+      },
+      Ranking2: {
+        rankingDetail: {
+          theNumberOfMatches: 5,
+          haveBonusNumber: true
+        },
+        reward: 30000000,
+        count: 0
+      },
+      Ranking1: {
+        rankingDetail: {
+          theNumberOfMatches: 6,
+          haveBonusNumber: false
+        },
+        reward: 2000000000,
+        count: 0
+      }
+    };
+    const theNumberOfLotto = 2;
+    const profitRate = 400;
+
+    const app = new App();
+
+    expect(app.calculateProfitRate(allLottoResult, theNumberOfLotto)).toEqual(profitRate);
+  });
+
+  test('로또 수익이 구입 금액보다 작은 경우에 대해 수익률을 계산한다.', () => {
+    const allLottoResult = {
+      Ranking5: {
+        rankingDetail: {
+          theNumberOfMatches: 3,
+          haveBonusNumber: false
+        },
+        reward: 5000,
+        count: 1
+      },
+      Ranking4: {
+        rankingDetail: {
+          theNumberOfMatches: 4,
+          haveBonusNumber: false
+        },
+        reward: 50000,
+        count: 0
+      },
+      Ranking3: {
+        rankingDetail: {
+          theNumberOfMatches: 5,
+          haveBonusNumber: false
+        },
+        reward: 1500000,
+        count: 0
+      },
+      Ranking2: {
+        rankingDetail: {
+          theNumberOfMatches: 5,
+          haveBonusNumber: true
+        },
+        reward: 30000000,
+        count: 0
+      },
+      Ranking1: {
+        rankingDetail: {
+          theNumberOfMatches: 6,
+          haveBonusNumber: false
+        },
+        reward: 2000000000,
+        count: 0
+      }
+    };
+    const theNumberOfLotto = 8;
+    const profitRate = -37.5;
+
+    const app = new App();
+
+    expect(app.calculateProfitRate(allLottoResult, theNumberOfLotto)).toEqual(profitRate);
+  });
+});
