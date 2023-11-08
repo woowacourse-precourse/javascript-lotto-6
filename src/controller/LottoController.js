@@ -1,11 +1,14 @@
+import LottoHandler from "../lottoHandler/LottoHandler";
+import View from "../view/View";
+
 class LottoController {
   #view;
-  
+
   #lottoHandler;
 
-  constructor({ view, lottoHandler }) {
-    this.#view = view;
-    this.#lottoHandler = lottoHandler;
+  constructor() {
+    this.#view = new View();
+    this.#lottoHandler = new LottoHandler();
   }
 
   async startLotto() {
@@ -25,7 +28,7 @@ class LottoController {
     const count = this.#lottoHandler.getLottoCount(cash);
 
     return Array.from({ length: count }, () =>
-      this.#lottoHandler.createLotto(),
+      this.#lottoHandler.createLotto()
     );
   }
 
@@ -37,10 +40,7 @@ class LottoController {
   }
 
   #getLottoRanking(lottoArray, winningLotto) {
-    const winningCount = this.#lottoHandler.getLottoResult(
-      lottoArray,
-      winningLotto,
-    );
+    const winningCount = this.#lottoHandler.getLottoResult(lottoArray, winningLotto);
 
     return this.#lottoHandler.getRanking(winningCount);
   }
