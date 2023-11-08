@@ -1,24 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
-import { LOTTO } from '../Constant/Constants';
-import validate from '../util/validation';
-
+import { MESSAGE } from '../Constant/Constants';
 const InputView = {
-  async moneyInput() {
-    const money = await Console.readLineAsync(LOTTO.INPUT_START);
-    await validate.moneyValidation(money);
-    const ticketCount = Number(money) / LOTTO.MONEY_UNIT;
-    return ticketCount;
+  readLottoAmount() {
+    return Console.readLineAsync(MESSAGE.INPUT_AMOUNT);
   },
-
-  async winningNumerInput() {
-    const winningNumber = await Console.readLineAsync(LOTTO.INPUT_WINNING_NUM);
-    const numList = winningNumber.split(',').map((num) => Number(num));
-    return numList;
+  readWinningNumber() {
+    return Console.readLineAsync(MESSAGE.INPUT_WINNING_NUMBER);
   },
-
-  async bonusNumberInput() {
-    const bonusNumber = await Console.readLineAsync(LOTTO.INPUT_BONUS_NUM);
-    return Number(bonusNumber);
+  readBonusNumber() {
+    return Console.readLineAsync(MESSAGE.INPUT_BONUS_NUMBER);
   },
 };
 
