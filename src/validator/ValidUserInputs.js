@@ -2,11 +2,13 @@ import paramType from '../lib/paramType/src/paramType.js';
 import PurchasePirceUserInputValidator from './PurchasePriceUserInputValidator.js';
 import WinningNumbersUserInputValidator from './WinningNumbersUserInputValidator.js';
 import BonusNumberUserInputValidator from './BonusNumberUserInputValidator.js';
+import LottoListValidator from './LottoListValidator.js';
 
 export default class ValidUserInputs {
   #purchasePrice;
   #winningNumbers;
   #bonusNumber;
+  #lottoList;
 
   addPurchasePrice(purchasePrice, _ = paramType(purchasePrice, 'string')) {
     new PurchasePirceUserInputValidator(purchasePrice);
@@ -23,15 +25,24 @@ export default class ValidUserInputs {
     this.#bonusNumber = bonusNumber;
   }
 
+  addLottoList(lottoList, _ = paramType(lottoList, Array)) {
+    new LottoListValidator(lottoList);
+    this.#lottoList = lottoList;
+  }
+
   get purchasePrice() {
     return Number(this.#purchasePrice);
   }
 
   get winningNumbers() {
-    return this.#winningNumbers.split(',').map((number) => Number(number));
+    return [...this.#winningNumbers.split(',')].map((number) => Number(number));
   }
 
   get bonusNumber() {
     return Number(this.#bonusNumber);
+  }
+
+  get lottoList() {
+    return [...this.#lottoList].map((lotto) => lotto.getNumbers());
   }
 }

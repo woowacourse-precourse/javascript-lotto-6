@@ -11,6 +11,7 @@ export const REQUEST_MESSAGE = {
 };
 
 export const ERROR_MESSAGE = {
+  HAVE_NOT_LOTTO_INSTANCE: 'Lotto 인스턴스가 아닌 값이 있습니다.',
   INVALID_RESPONSE: '예기치 못한 입력이 들어왔습니다.',
   HAVE_OVER_RANGE_NUMBERS: '입력받은 범위 밖의 숫자가 생성되었습니다.',
   HAVE_NOT_NUMBER_TYPE:
