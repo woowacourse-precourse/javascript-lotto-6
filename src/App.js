@@ -4,8 +4,7 @@ import {MissionUtils} from "@woowacourse/mission-utils";
 
 class App {
     checkInputPurchasedAmount(purchasedAmount) {
-        if (isNaN(purchasedAmount) || purchasedAmount % 1000 !== 0)
-            throw new Error("[ERROR] 잘못된 숫자를 입력하셨습니다.");
+        if (isNaN(purchasedAmount) || purchasedAmount % 1000 !== 0) throw new Error("[ERROR] 잘못된 숫자를 입력하셨습니다.");
     }
 
 
@@ -13,7 +12,7 @@ class App {
         while (true) {
             try {
                 const purchasedAmount = await MissionUtils.Console.readLineAsync("구입금액을 입력해주세요.\n");
-                this.checkInputPurchasedAmount(purchasedAmount);햐
+                this.checkInputPurchasedAmount(purchasedAmount);
                 return purchasedAmount / 1000;
             } catch (e) {
                 console.log(e.message);
@@ -39,7 +38,7 @@ class App {
     }
 
     isInputRangeError(number) {
-        if(number < 1 || number > 45){
+        if (number < 1 || number > 45) {
             throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.')
         }
     }
@@ -48,29 +47,47 @@ class App {
         const lottoNumbers = lottoNumber.split(',').map(number => parseInt(number))
         lottoNumbers.forEach(number => this.isInputRangeError(number))
         const checkDuplicated = lottoNumbers.filter((number, index) => lottoNumbers.indexOf(number) !== index)
-        if(lottoNumbers.length !== 6 || lottoNumbers.includes(NaN) || checkDuplicated.length !== 0){
+        if (lottoNumbers.length !== 6 || lottoNumbers.includes(NaN) || checkDuplicated.length !== 0) {
             throw new Error(`[ERROR] 잘못된 당첨번호를 입력하셨습니다.`)
         }
     }
+
     isInputWinningBonusNumberError(lottoNumber, bonusNumber) {
         this.isInputRangeError(bonusNumber)
-        if(lottoNumber.includes(bonusNumber) || bonusNumber.length !== 1){
+        if (lottoNumber.includes(bonusNumber) || bonusNumber.length !== 1) {
             throw new Error(`[ERROR] 잘못된 보너스 번호를 입력하셨습니다.`)
         }
     }
 
     async getLottoWinningNumber() {
         while (true) {
-            try{
+            try {
                 const lottoWinningNumber = await MissionUtils.Console.readLineAsync(`\n당첨 번호를 입력해 주세요.\n`)
                 this.isInputWinningNumberError(lottoWinningNumber);
                 const lottoBonusNumber = await MissionUtils.Console.readLineAsync(`\n보너스 번호를 입력해 주세요.\n`)
                 this.isInputWinningBonusNumberError(lottoWinningNumber, lottoBonusNumber)
                 return `${lottoWinningNumber},${lottoBonusNumber}`.split(',').map(number => parseInt(number))
-            }catch (error){
+            } catch (error) {
                 console.log(error.message)
             }
         }
+    }
+
+    checkingWinningLottoNumber(lottoWinningNumber, buyLottoNumber) {
+        const [winningNumber, bonusNumber] = [lottoWinningNumber.slice(0, 6), lottoWinningNumber.slice(6)]
+        const winningLottoResult = buyLottoNumber.reduce((result, lotto) => {
+            const matchCount = winningNumber.filter(matchedNumber => lotto.includes(matchedNumber)).length
+            if (matchCount === 3) result.matchedThree++; else if (matchCount === 4) result.matchedFour++; else if (matchCount === 5) result.matchedFive++; else if (matchCount === 5 && bonusNumber.some(matchedNumber => lotto.includes(matchedNumber))) result.matchedFiveBonus++; else if (matchCount === 6) result.matchedFull++;
+            return result
+        }, {
+            matchedThree: 0,
+            matchedFour: 0,
+            matchedFive: 0,
+            matchedFiveBonus: 0,
+            matchedFull: 0,
+            lottoPurchasedAmount: buyLottoNumber.length * 1000
+        })
+        return winningLottoResult
     }
 
     async play() {
@@ -78,6 +95,8 @@ class App {
         const buyLottoNumbers = this.generatingLottoNumbers(purchasedLottoCount)
         this.printingBuyingLottoNumbers(buyLottoNumbers)
         const lottoWinningNumber = await this.getLottoWinningNumber()
+        const winningLottoResult = this.checkingWinningLottoNumber(lottoWinningNumber, buyLottoNumbers)
+
     }
 }
 
