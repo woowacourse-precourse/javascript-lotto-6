@@ -12,7 +12,7 @@ class App {
       const purchase = await this.getPurchase();
       const lottoTickets = this.getLottoTicket(purchase);
       const lottoNumber = await this.getLottoNumber();
-      const bonusNumber = await this.getBonusNumber();
+      const bonusNumber = await this.getBonusNumber(lottoNumber);
 
       const result = this.getResult(lottoTickets, lottoNumber, bonusNumber);
     } catch (error) {
@@ -74,19 +74,22 @@ class App {
   /** 당첨 번호 받기 */
   async getLottoNumber() {
     const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.");
-    const lottoNumbers = input.split(",").map(Number);
+    const lottoNumbers = input.split(",").map(Number)
+    // set으로 변환
+    const lottoNumbersNoDuplicate = new Set (lottoNumbers);
 
-    // 겹치지 않도록 검증
-
-    return lottoNumbers;
+    return lottoNumbersNoDuplicate;
   }
 
   /** 보너스 번호 받기 */
-  async getBonusNumber() {
+  async getBonusNumber(lottoNumbers) {
     const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.");
     const bonusNumber = parseInt(input);
 
     // 당첨 번호와 겹치지 않도록 검증
+    if ( lottoNumbers.includes(bonusNumber) ) {
+      throw new Error;
+    }
 
     return bonusNumber;
   }
