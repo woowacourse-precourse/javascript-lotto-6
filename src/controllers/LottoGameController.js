@@ -1,10 +1,11 @@
-import { LOTTO_SETTING } from '../constants/Setting.js';
+import { LOTTO_SETTING, WINNING_CRETERIA } from '../constants/Setting.js';
 import { Random } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
 import InputValidator from '../validators/InputValidator.js';
 import OutputView from '../views/OutputView.js';
 import Lotto from '../models/Lotto.js';
 import WinningNumber from '../models/WinningNumber.js';
+import WinningResult from '../models/WinningResult.js';
 
 class LottoGameController {
   async startLottoGame() {
@@ -12,9 +13,9 @@ class LottoGameController {
     OutputView.outputLottoPurchaseAmount(lottoList);
 
     const winningNumber = await this.#setWinningNumber();
-    const bonusNumber = await this.#setBonusNumber(winningNumber);
+    await this.#setBonusNumber(winningNumber);
 
-    console.log(winningNumber.getWinningNumber(), winningNumber.getBonusNumber());
+    const lottoGameResult = this.#createLotteryResult(lottoList, winningNumber);
   }
 
   async #getLotto() {
@@ -75,6 +76,31 @@ class LottoGameController {
         OutputView.outputMessage(error.message);
       }
     }
+  }
+
+  #createLotteryResult(lottoList, winningNumber) {
+    const result = new WinningResult(lottoList.length * LOTTO_SETTING.pricePerLotto);
+    const winningNumbers = winningNumber.getWinningNumber();
+    const bonusNumber = winningNumber.getBonusNumber();
+    lottoList.forEach((lotto) => {
+      const matchingNumbers = lotto
+        .getNumbers()
+        .filter((value) => winningNumbers.includes(value)).length;
+      const isIncludingBonusNumber = lotto.getNumbers().includes(bonusNumber);
+      console.log(matchingNumbers, isIncludingBonusNumber);
+      this.#setLottoPrize(result, matchingNumbers, isIncludingBonusNumber);
+    });
+    return result;
+  }
+
+  #setLottoPrize(result, matchingNumbers, isIncludingBonusNumber) {
+    if (matchingNumbers === WINNING_CRETERIA.firstPrize) result.addPrizeToResult(1);
+    if (matchingNumbers === WINNING_CRETERIA.secondPrize && isIncludingBonusNumber)
+      result.addPrizeToResult(2);
+    if (matchingNumbers === WINNING_CRETERIA.thirdPrize && !isIncludingBonusNumber)
+      result.addPrizeToResult(3);
+    if (matchingNumbers === WINNING_CRETERIA.fourthPrize) result.addPrizeToResult(4);
+    if (matchingNumbers === WINNING_CRETERIA.fifthPrize) result.addPrizeToResult(5);
   }
 }
 

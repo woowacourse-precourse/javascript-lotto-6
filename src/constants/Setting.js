@@ -4,11 +4,12 @@ const LOTTO_SETTING = Object.freeze({
   numbersLength: 6,
   bonusNumberLength: 1,
   pricePerLotto: 1000,
+  prizeNumber: 5,
 });
 
 const WINNING_CRETERIA = Object.freeze({
   firstPrize: 6,
-  secondPrize: 6,
+  secondPrize: 5,
   thirdPrize: 5,
   fourthPrize: 4,
   fifthPrize: 3,
