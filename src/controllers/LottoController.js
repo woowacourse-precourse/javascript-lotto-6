@@ -3,6 +3,8 @@ import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import Result from '../models/Result.js';
 import PurchasedLotto from '../models/purchasedLottos.js';
+import Validator from '../utils/Validator.js';
+import { printMessage } from '../utils/messages.js';
 import { ErrorMessage } from '../constants/ErrorMessage.js';
 
 class LottoController {
@@ -21,8 +23,7 @@ class LottoController {
   }
 
   async #getAndValidateInputs() {
-    const purchaseCost = await InputView.inputParchaseCost();
-    this.validatePurchaseCost(purchaseCost);
+    const purchaseCost = await this.#getPurchaseCost();
     const lottos = this.#createLottos(purchaseCost);
     // this.#winningNumbers = await this.#getWinningNumbers();
     // this.#bonusNumber = await InputView.inputBonusNumber();
@@ -30,6 +31,18 @@ class LottoController {
     // const results = this.#calculateResults();
     // OutputView.printResults(results);
     // OutputView.printProfit(this.#calculateProfit(results));
+  }
+
+  async #getPurchaseCost() {
+    while (true) {
+      try {
+        const inputCost = await InputView.inputParchaseCost();
+        Validator.purchaseCostValidator(inputCost);
+        return inputCost;
+      } catch (error) {
+        printMessage(error);
+      }
+    }
   }
 
   #createLottos(purchaseCost) {
