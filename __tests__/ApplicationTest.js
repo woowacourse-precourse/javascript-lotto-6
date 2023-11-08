@@ -91,8 +91,12 @@ describe("로또 테스트", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("입력 금액이 문자일 경우 예외 테스트", async () => {
     await runException("1000j");
+  });
+
+  test("입력 금액이 단위를 지키지 못했을 경우 예외 테스트", async () => {
+    await runException("1500");
   });
 });
 
