@@ -1,7 +1,7 @@
 import LottoController from '../src/controller/LottoController.js';
 import inputView from '../src/view/inputView.js';
 
-jest.mock('../src/view/inputView.js'); // Replace with the correct path
+jest.mock('../src/view/inputView.js');
 
 inputView.winningNumbers = jest.fn();
 inputView.bonusNumber = jest.fn();
