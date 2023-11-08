@@ -5,6 +5,7 @@ import Print from './modules/Print.js';
 class Fucntional {
   static async play() {
     const lottoArray = await ConvertInputTo.lottoArray();
+    Print.lineBreak();
     Print.purchasedLotto(lottoArray);
     Print.lineBreak();
 

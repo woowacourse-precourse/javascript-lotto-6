@@ -23,7 +23,6 @@ const {
 
 class Print {
   static purchasedLotto(lottoArray) {
-    Print.lineBreak();
     Console.print(`${lottoArray.length}${PURCHASED_LOTTO_FORMAT}`);
     lottoArray.forEach(Print.lottoNumbers);
   }
