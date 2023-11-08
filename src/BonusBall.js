@@ -1,4 +1,5 @@
 import Validator from './validator/Validator.js';
+import { ERROR_MESSAGE } from './constants/message.js';
 
 class BonusBall {
   #number;
@@ -12,9 +13,7 @@ class BonusBall {
     Validator.range([number]);
 
     if (lotto.includes(number)) {
-      throw new Error(
-        '[ERROR] 보너스 번호는 당첨 번호에 포함되지 않은 숫자여야 합니다.'
-      );
+      throw new Error(ERROR_MESSAGE.INCLUSION);
     }
   }
 
