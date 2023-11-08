@@ -79,15 +79,15 @@ class LottoGameController {
   }
 
   #createLotteryResult(lottoList, winningNumber) {
-    const result = new WinningResult(lottoList.length * LOTTO_SETTING.pricePerLotto);
+    const result = new WinningResult(lottoList.length);
     const winningNumbers = winningNumber.getWinningNumber();
     const bonusNumber = winningNumber.getBonusNumber();
     lottoList.forEach((lotto) => {
-      const matchingNumbers = lotto
-        .getNumbers()
-        .filter((value) => winningNumbers.includes(value)).length;
+      const matchingNumbers = lotto.getNumbers().reduce((count, number) => {
+        if (winningNumbers.includes(number)) count += 1;
+        return count;
+      }, 0);
       const isIncludingBonusNumber = lotto.getNumbers().includes(bonusNumber);
-      console.log(matchingNumbers, isIncludingBonusNumber);
       this.#setLottoPrize(result, matchingNumbers, isIncludingBonusNumber);
     });
     return result;

@@ -1,11 +1,13 @@
+import { LOTTO_SETTING } from '../constants/Setting.js';
+
 class WinningResult {
   #boughtPrice;
   #result;
   #prizeAmount;
   #profitRate;
 
-  constructor(boughtPrice) {
-    this.#boughtPrice = boughtPrice;
+  constructor(boughtAmount) {
+    this.#boughtPrice = boughtAmount * LOTTO_SETTING.pricePerLotto;
     this.#result = {
       firstPrize: 0,
       secondPrize: 0,
