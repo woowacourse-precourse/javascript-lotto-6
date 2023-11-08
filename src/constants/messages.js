@@ -29,11 +29,11 @@ const MESSAGES = Object.freeze({
   },
 
   /**
-   * @param {number} earningRate
+   * @param {string} earningRate
    * @returns {string}
    */
   printEarningRate(earningRate) {
-    return `총 수익률은 ${earningRate.toLocaleString()}%입니다.`;
+    return `총 수익률은 ${earningRate}입니다.`;
   },
 
   printWinningStatistics: '\n당첨 통계\n---',
