@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGES, ERROR_PREFIX } from '../Constants';
+import { MESSAGES, STRINGS, ERROR_PREFIX } from '../Constants';
 import Validator from '../Validator';
 
 class Screen {
@@ -22,6 +22,15 @@ class Screen {
     lottos.forEach((lotto) => {
       Console.print(lotto.getString());
     });
+  }
+
+  static async inputWinningLotto() {
+    Console.print(MESSAGES.winningLottoInputMessage);
+    const numbers = await Console.readLineAsync();
+
+    return numbers
+      .split(STRINGS.winningDelimiter)
+      .map((number) => Number(number.trim()));
   }
 }
 

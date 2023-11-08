@@ -3,6 +3,7 @@ export const ERROR_PREFIX = '[ERROR]';
 export const MESSAGES = Object.freeze({
   purchaseMoneyInputMessage: '구입금액을 입력해 주세요.',
   purchaseLottoCountsMessage: '개를 구매했습니다.',
+  winningLottoInputMessage: '당첨 번호를 입력해 주세요.',
 });
 
 export const ERROR = Object.freeze({
@@ -14,6 +15,7 @@ export const STRINGS = Object.freeze({
   lottoPrefix: '[',
   lottoSuffix: ']',
   lottoDelimiter: ', ',
+  winningDelimiter: ',',
 });
 
 export const MONEY_UNIT = 1000;

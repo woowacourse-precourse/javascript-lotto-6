@@ -6,12 +6,15 @@ import { MONEY_UNIT, MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH } from '../Constants';
 class LottoGame {
   #lottos = [];
   #count;
+  #winningLotto;
 
   async start() {
     await this.#inputPurchaseCount();
 
     this.#issueLottos();
     this.#printLottos();
+
+    await this.#inputWinningLotto();
   }
 
   async #inputPurchaseCount() {
@@ -34,6 +37,10 @@ class LottoGame {
 
   #printLottos() {
     Screen.printLottoNumbers(this.#lottos);
+  }
+
+  async #inputWinningLotto() {
+    this.#winningLotto = new Lotto(await Screen.inputWinningLotto());
   }
 }
 
