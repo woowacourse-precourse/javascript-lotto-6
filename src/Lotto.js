@@ -23,6 +23,11 @@ class Lotto {
     return numbers.slice().sort((a, b) => a - b);
   }
 
+  printLottoNumbers() {
+    const str = this.#numbers.join(", "); // 로또 번호 배열을 쉼표와 공백으로 구분하여 문자열로 변환합니다.
+    MissionUtils.Console.print(`[${str}]`); // 문자열을 대괄호로 묶고 출력합니다.
+  }
+
   // TODO: 추가 기능 구현
 }
 
