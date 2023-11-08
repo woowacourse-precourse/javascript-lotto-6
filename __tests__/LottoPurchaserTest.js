@@ -1,7 +1,7 @@
-import Lotto from '../src/Lotto';
-import LottoPurchaser from '../src/LottoPurchaser';
-import WinningLotto from '../src/WinningLotto';
-import WinningResults from '../src/WinningResults';
+import Lotto from '../src/Lotto.js';
+import LottoPurchaser from '../src/LottoPurchaser.js';
+import WinningLotto from '../src/WinningLotto.js';
+import WinningResults from '../src/WinningResults.js';
 
 describe('로또 구매자 클래스 테스트', () => {
   const lottoPurchaser = new LottoPurchaser(new WinningResults());

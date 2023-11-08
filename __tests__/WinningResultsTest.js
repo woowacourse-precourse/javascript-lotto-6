@@ -1,4 +1,4 @@
-import WinningResults from '../src/WinningResults';
+import WinningResults from '../src/WinningResults.js';
 
 describe('당첨 결과 클래스 테스트', () => {
   describe('총 수익률에 대한 테스트', () => {
