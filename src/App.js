@@ -26,7 +26,22 @@ class App {
     const price = await this.#userInputHandler.getUserInput(
       "구입금액을 입력해 주세요\n"
     );
-    this.#price = parseInt(price);
+
+    try {
+      const parsedPrice = Number(price);
+      if (
+        isNaN(price) ||
+        !Number.isInteger(parsedPrice) ||
+        parsedPrice === 0 ||
+        parsedPrice % 1000
+      ) {
+        throw new Error("[ERROR] : 잘못된 구입금액입니다.");
+      }
+    } catch ({ message }) {
+      Console.print(message);
+      return this.getPriceInput();
+    }
+
     const lottoCount = parseInt(price / 1000);
 
     Console.print(`\n${lottoCount}개를 구매했습니다.`);
@@ -39,19 +54,70 @@ class App {
     this.#lottos.forEach((lotto) => lotto.printNumbers());
   }
 
-  async getWinningInput() {
-    const winningInputs = await this.#userInputHandler.getUserInput(
-      "\n당첨 번호를 입력해 주세요.\n"
-    );
-    this.#winningNumbers = winningInputs.split(",").map(Number);
-    Console.print(`[${this.#winningNumbers.join(", ")}]\n`);
+  //TODO 1. 6개인지 2. 중복된 것이 없는지 3. 숫자인지 4. 1~45인지 5. int인지
+  validateWinningNumbers() {
+    const uniqueWinningNumber = new Set(this.#winningNumbers);
+
+    if (this.#winningNumbers.length !== 6) {
+      throw new Error("[ERROR] : 6개의 숫자를 입력해주세요");
+    }
+
+    if (uniqueWinningNumber.size !== 6) {
+      throw new Error("[ERROR] : 중복된 숫자가 있습니다");
+    }
+
+    this.#winningNumbers.forEach((winningNumber) => {
+      if (
+        isNaN(winningNumber) ||
+        !Number.isInteger(winningNumber) ||
+        winningNumber < 1 ||
+        winningNumber > 45
+      ) {
+        throw new Error("[ERROR] : 잘못된 로또 입력값입니다");
+      }
+    });
   }
 
+  async getWinningInput() {
+    try {
+      const winningInputs = await this.#userInputHandler.getUserInput(
+        "\n당첨 번호를 입력해 주세요.\n"
+      );
+
+      this.#winningNumbers = winningInputs.split(",").map(Number);
+      this.validateWinningNumbers();
+      Console.print(`[${this.#winningNumbers.join(", ")}]\n`);
+    } catch ({ message }) {
+      Console.print(message);
+      return this.getWinningInput();
+    }
+  }
+
+  //숫자인지, 1~45인지, winning과 중복인지, int인지
   async getBonusInput() {
-    const bonusInput = await this.#userInputHandler.getUserInput(
-      "보너스 번호를 입력해 주세요.\n"
-    );
-    this.#bonusNumber = parseInt(bonusInput);
+    try {
+      const bonusInput = await this.#userInputHandler.getUserInput(
+        "보너스 번호를 입력해 주세요.\n"
+      );
+      const parsedBonus = Number(bonusInput);
+
+      const uniqueWinningNumber = new Set(this.#winningNumbers);
+
+      if (
+        isNaN(bonusInput) ||
+        !Number.isInteger(parsedBonus) ||
+        uniqueWinningNumber.has(parsedBonus) ||
+        parsedBonus < 1 ||
+        parsedBonus > 45
+      ) {
+        throw new Error("[ERROR] : 잘못된 로또 입력값입니다");
+      }
+
+      this.#bonusNumber = parsedBonus;
+    } catch ({ message }) {
+      Console.print(message);
+      this.getBonusInput();
+    }
   }
 
   calculateResult() {
@@ -89,14 +155,22 @@ class App {
     });
   }
 
-  printResult() {
-    const allRevenue = [5000, 50000, 1500000, 30000000, 2000000000].reduce(
+  getAllRevenue() {
+    return [5000, 50000, 1500000, 30000000, 2000000000].reduce(
       (prev, current, index) => {
         return prev + current * this.#result[index];
       },
       0
     );
-    console.log(allRevenue, (allRevenue / this.#price) * 100);
+  }
+
+  getPrice() {
+    return this.#lottos.length * 1000;
+  }
+
+  printResult() {
+    const allRevenue = this.getAllRevenue();
+    console.log(allRevenue, (allRevenue / this.getPrice()) * 100);
     Console.print(`\n당첨 통계\n---`);
     Console.print(`3개 일치 (5,000원) - ${this.#result[0]}개`);
     Console.print(`4개 일치 (50,000원) - ${this.#result[1]}개`);
@@ -106,7 +180,7 @@ class App {
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${this.#result[4]}개`);
     Console.print(
-      `총 수익률은 ${((allRevenue / this.#price) * 100).toFixed(1)}%입니다.`
+      `총 수익률은 ${((allRevenue / this.getPrice()) * 100).toFixed(1)}%입니다.`
     );
   }
 
