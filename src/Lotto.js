@@ -28,9 +28,9 @@ class Lotto {
       throw new Error(ErrorMessage.ERROR_NOT_NUMBER);
   }
 
-  getNumbers() {
-    return this.#numbers;
-  }
+  // getNumbers() {
+  //   return this.#numbers;
+  // }
 }
 
 export default Lotto;
