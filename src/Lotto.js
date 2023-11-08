@@ -1,3 +1,7 @@
+import CustomError from './errors/CustomError.js';
+import { ERROR_MESSAGES } from './constants/messages.js';
+import LOTTO_CONSTANT_NUMBER from './constants/lotto.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +11,15 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    if (numbers.length !== LOTTO_CONSTANT_NUMBER.winningNumbersLength) throw new CustomError(ERROR_MESSAGES.lottoNumberLength);
+
+    const duplicateFlag = new Set(numbers).size !== numbers.length;
+    if (duplicateFlag) throw new CustomError(ERROR_MESSAGES.lottoNumberDuplicate);
   }
 
-  // TODO: 추가 기능 구현
+  get numbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
