@@ -1,6 +1,7 @@
 import { INPUT_MESSAGE } from '../constants/messages.js';
 import LottoMaker from '../Model/lottoMaker.js';
 import Lotto from '../Model/Lotto.js';
+import Statics from '../Model/Statics.js';
 import { validator } from '../validators/validator.js';
 import inputView from '../View/inputView.js';
 import outputView from '../View/outputView.js';
@@ -8,6 +9,7 @@ import outputView from '../View/outputView.js';
 class LottoController {
 	#lottoMaker;
 	#lotto;
+	#statics;
 
 	constructor() {}
 
@@ -20,7 +22,7 @@ class LottoController {
 
 		this.getResult();
 
-		outputView.printMatchingStatics(this.#lotto.getRateOfReturn());
+		outputView.printMatchingStatics(this.#statics.getRateOfReturn());
 	}
 
 	async initializeLotto() {
@@ -71,26 +73,30 @@ class LottoController {
 	}
 
 	initializeStatics() {
-		this.#lotto.setMatchingStatics(Array.from({ length: this.#lottoMaker.getAmount() }, () => 0));
+		this.#statics = new Statics(Array.from({ length: this.#lottoMaker.getAmount() }, () => 0));
 	}
 
 	numbersMatching() {
 		for (let i = 0; i < this.#lottoMaker.getAmount(); i++) {
-			this.#lotto.compareMatching(i, this.#lottoMaker.getLottoNumbers()[i]);
+			this.#statics.compareMatching(i, this.#lottoMaker.getLottoNumbers()[i], this.#lotto.getNumbers());
 		}
 	}
 
 	bonusNumberMatching() {
-		this.#lotto.getMatchingStatics().forEach((matchingStatic, index) => {
+		this.#statics.getMatchingStatics().forEach((matchingStatic, index) => {
 			if (matchingStatic === INPUT_MESSAGE.BONUS_CHECK_NUMBER) {
-				this.#lotto.bonusCompareMatching(index, this.#lottoMaker.getLottoNumbers()[index]);
+				this.#statics.bonusCompareMatching(
+					index,
+					this.#lottoMaker.getLottoNumbers()[index],
+					this.#lotto.getBonusNumber()
+				);
 			}
 		});
 	}
 
 	getTotalMatchingStatics() {
-		this.#lotto.getMatchingStatics().forEach((statics) => {
-			this.#lotto.countRateOfReturn(statics);
+		this.#statics.getMatchingStatics().forEach((statics) => {
+			this.#statics.countRateOfReturn(statics);
 		});
 	}
 }
