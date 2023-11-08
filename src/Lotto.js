@@ -5,6 +5,7 @@ class Lotto {
     this.#validate(numbers);
     this.#duplicate(numbers);
     this.#between1And45(numbers);
+    this.#sort(numbers);
     this.#numbers = numbers;
   }
 
@@ -14,7 +15,6 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
   #duplicate(numbers) {
     const set = new Set(numbers);
     if (set.size !== 6) {
@@ -32,6 +32,14 @@ class Lotto {
         throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
       }
     }
+  }
+
+  #sort(numbers) {
+    this.#numbers = numbers.sort((a, b) => a - b);
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 
