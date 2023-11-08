@@ -30,7 +30,6 @@ class InputView {
         if (isNaN(playerInputMoney)) {
           throw new Error('[ERROR] 금액은 숫자로 입력해주세요.');
         }
-
         return Number(playerInputMoney);
       } catch (error) {
         Console.print(error.message);
@@ -43,11 +42,11 @@ class InputView {
       try {
         const playerInputBonus = await Console.readLineAsync(INPUT_BONUST_NUMBER);
         if (!isNaN(playerInputBonus)) {
-          this.bonusNumber = Number(playerInputBonus);
+          throw new Error('[ERROR] 보너스 숫자는 숫자로 입력해주세요.');
+          
+        } 
+        this.bonusNumber = Number(playerInputBonus);
           return this.bonusNumber;
-        } else {
-          Console.print('[ERROR] 보너스 숫자는 숫자로 입력해주세요.');
-        }
       } catch (error) {
         Console.print(`[ERROR] ${error.message}`);
       }
