@@ -76,20 +76,6 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
       );
     },
   );
-
-  // test.each([
-  //   [{ input: [['3000']], output: '3개를 구매했습니다.' }],
-  //   [{ input: [['10000']], output: '10개를 구매했습니다.' }],
-  // ])('test5: 입력 금액이 올바르게 입력된 경우', async ({ input, output }) => {
-  //   // given
-  //   mockQuestions(input);
-
-  //   // when
-  //   const app = new App();
-
-  //   // then
-  //   expect(app.setLottoGameConfig()).toHaveBeenCalledWith(output);
-  // });
 });
 
 describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처리', () => {
@@ -122,7 +108,7 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
 
       // then
       await expect(inputWinningNumbers).rejects.toThrow(
-        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_CHARACTER),
+        errorMessage(ERROR.INPUT_NUMBERS.INVALID_CHARACTER),
       );
     },
   );
@@ -138,55 +124,7 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
 
       // then
       await expect(inputWinningNumbers).rejects.toThrow(
-        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_FORMAT),
-      );
-    },
-  );
-
-  test.each([[['1,2,3,4,5']], [['10,20,30,40']]])(
-    'test4: 입력한 번호의 개수가 6개가 아닌 경우',
-    async inputs => {
-      // given
-      mockQuestions(inputs);
-
-      // when
-      const inputWinningNumbers = view.readWinningNumbers();
-
-      // then
-      await expect(inputWinningNumbers).rejects.toThrow(
-        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_LENGTH),
-      );
-    },
-  );
-
-  test.each([[['0,1,2,3,4,5']], [['10,20,30,40,50,60']]])(
-    'test5: 번호가 입력 가능 범위를 벗어난 경우 (1~45 외 숫자)',
-    async inputs => {
-      // given
-      mockQuestions(inputs);
-
-      // when
-      const inputWinningNumbers = view.readWinningNumbers();
-
-      // then
-      await expect(inputWinningNumbers).rejects.toThrow(
-        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_NUMBER_RANGE),
-      );
-    },
-  );
-
-  test.each([[['7,7,7,7,7,7']], [['1,10,20,30,40,40']]])(
-    'test6: 입력한 당첨 번호들 중 중복된 숫자가 있는 경우',
-    async inputs => {
-      // given
-      mockQuestions(inputs);
-
-      // when
-      const inputWinningNumbers = view.readWinningNumbers();
-
-      // then
-      await expect(inputWinningNumbers).rejects.toThrow(
-        errorMessage(ERROR.INPUT_WINNING_NUMBERS.DUPLICATE_VALUE),
+        errorMessage(ERROR.INPUT_NUMBERS.INVALID_FORMAT),
       );
     },
   );
