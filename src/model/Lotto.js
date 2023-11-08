@@ -1,5 +1,5 @@
 import { LOTTO_ERROR_MESSAGE } from '../constants/errorMessage';
-import Validate from '../Validate';
+import Validation from '../Validation';
 
 class Lotto {
   #numbers;
@@ -15,7 +15,7 @@ class Lotto {
 
   static #validate(numbers) {
     const { sixNumber, duplicate, integer, inRange } = LOTTO_ERROR_MESSAGE;
-    new Validate(numbers)
+    new Validation(numbers)
       .isSixNumbers(sixNumber)
       .isDuplicate(duplicate)
       .isInteger(integer)

@@ -1,4 +1,4 @@
-class Validate {
+class Validation {
   #numbers;
 
   constructor(numbers) {
@@ -7,35 +7,35 @@ class Validate {
 
   isSixNumbers(errorMessage) {
     if (this.#numbers.length !== 6) {
-      Validate.#throwError(errorMessage);
+      Validation.#throwError(errorMessage);
     }
     return this;
   }
 
   isDuplicate(errorMessage) {
     if (new Set([...this.#numbers]).size !== this.#numbers.length) {
-      Validate.#throwError(errorMessage);
+      Validation.#throwError(errorMessage);
     }
     return this;
   }
 
   isInteger(errorMessage) {
     if (!this.#numbers.every((number) => Number.isInteger(number))) {
-      Validate.#throwError(errorMessage);
+      Validation.#throwError(errorMessage);
     }
     return this;
   }
 
   isInRange(errorMessage) {
     if (!this.#numbers.every((number) => number >= 1 && number <= 45)) {
-      Validate.#throwError(errorMessage);
+      Validation.#throwError(errorMessage);
     }
     return this;
   }
 
   isMultipleThousand(errorMessage) {
     if (!this.#numbers.every((number) => number % 1000 === 0)) {
-      Validate.#throwError(errorMessage);
+      Validation.#throwError(errorMessage);
     }
     return this;
   }
@@ -43,7 +43,7 @@ class Validate {
   isNumberNotInNumbers(tagetNumbers, errorMessage) {
     this.#numbers.forEach((number) => {
       if (tagetNumbers.includes(number)) {
-        Validate.#throwError(errorMessage);
+        Validation.#throwError(errorMessage);
       }
     });
     return this;
@@ -54,4 +54,4 @@ class Validate {
   }
 }
 
-export default Validate;
+export default Validation;

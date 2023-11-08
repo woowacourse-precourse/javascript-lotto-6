@@ -2,7 +2,7 @@ import {
   WINNING_NUMBERS_ERROR_MESSAGE,
   WINNING_BONUS_ERROR_MESSAGE,
 } from '../constants/errorMessage';
-import Validate from '../Validate';
+import Validation from '../Validation';
 
 class Winning {
   #winningNumbers;
@@ -40,7 +40,7 @@ class Winning {
 
   static #validateWinningNumbers(winningNumbers) {
     const { sixNumber, duplicate, integer, inRange } = WINNING_NUMBERS_ERROR_MESSAGE;
-    new Validate(winningNumbers)
+    new Validation(winningNumbers)
       .isSixNumbers(sixNumber)
       .isDuplicate(duplicate)
       .isInteger(integer)
@@ -49,7 +49,7 @@ class Winning {
 
   static #validateBonusNumber(winningNumbers, bonusNumber) {
     const { integer, inRange, notInNumberSet } = WINNING_BONUS_ERROR_MESSAGE;
-    new Validate([bonusNumber])
+    new Validation([bonusNumber])
       .isInteger(integer)
       .isInRange(inRange)
       .isNumberNotInNumbers(winningNumbers, notInNumberSet);

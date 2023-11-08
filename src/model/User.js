@@ -1,4 +1,4 @@
-import Validate from '../Validate';
+import Validation from '../Validation';
 import { PURCHASE_AMOUNT_ERROR_MESSAGE } from '../constants/errorMessage';
 
 class User {
@@ -25,7 +25,7 @@ class User {
 
   static #validatePurchaseAmount(purchaseAmount) {
     const { integer, multipleThousand } = PURCHASE_AMOUNT_ERROR_MESSAGE;
-    new Validate([purchaseAmount]).isInteger(integer).isMultipleThousand(multipleThousand);
+    new Validation([purchaseAmount]).isInteger(integer).isMultipleThousand(multipleThousand);
   }
 }
 
