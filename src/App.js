@@ -5,11 +5,13 @@ import makeLottoNumber from "./components/makeLottoNumber.js";
 import printLottoNumber from "./components/printLottoNumbers.js";
 import getLottoNumberInput from "./components/getLottoNumberInput.js";
 import getBounsNumberInput from "./components/getBonusNumberInput.js";
+import calcResult from "./components/calcResult.js";
+import printResult from "./components/printResult.js";
 
 class App {
   async play() {
     const priceInput = await getLottoPriceInput();
-    MissionUtils.Console.print(`${priceInput}개를 구매했습니다`);
+    MissionUtils.Console.print(`${priceInput}개를 구매했습니다.`);
     const lottoNumbers = [];
     // 로또 번호 생성 및 출력
     for (let index = 0; index < priceInput; index++) {
@@ -22,6 +24,8 @@ class App {
     const inputLottoNumber = await getLottoNumberInput();
     const inputBonusNumber = await getBounsNumberInput();
     const winningNumber = new Lotto(inputLottoNumber, inputBonusNumber);
+    const resultArray = calcResult(winningNumber, lottoNumbers);
+    printResult(resultArray, priceInput);
   }
 }
 
