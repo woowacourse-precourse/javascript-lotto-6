@@ -1,6 +1,6 @@
 import CalculateStats from '../src/CalculateStats';
 
-describe('CalculateStats', () => {
+describe('CalculateStats클래스 테스트', () => {
   let calculateStats;
 
   beforeEach(() => {
