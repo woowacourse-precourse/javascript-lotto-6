@@ -8,8 +8,8 @@ class winningStatistics {
     this.buyMoney = buyMoney;
     this.result = [];
     this.winningBonusNum = []; //true, false로 보너스 일치 여부 확인
-    this.rank = [0, 0, 0, 0, 0, 0, 0]; //index값을 등수로 설정.
-    this.rateOfReturn;
+    this.rank = [0, 0, 0, 0, 0, 0]; //index값을 등수로 설정.
+    this.rateOfReturn = 0;
     this.checkRank();
   }
 
@@ -43,9 +43,11 @@ class winningStatistics {
       this.rank[1] * 2000000000;
 
     this.rateOfReturn = (totalRevenue / this.buyMoney) * 100;
-    this.rateOfReturn = parseFloat(this.rateOfReturn.toFixed(2));
+    this.calculateRevenue(this.rateOfReturn);
   }
-
+  calculateRevenue(rateOfReturn) {
+    return parseFloat(rateOfReturn.toFixed(1));
+  }
   printResult() {
     this.checkRevenue();
     Console.print(`${OUTPUT_MESSAGE.RESULT}`);
