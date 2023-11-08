@@ -24,6 +24,12 @@ class Game {
     }
   }
 
+  calculateLottoCountFromMoney(money) {
+    const lottoCount = money / 1000;
+    InputOutput.print(`${lottoCount}개를 구매했습니다.`);
+    return lottoCount;
+  }
+
 }
 
 export default Game;
