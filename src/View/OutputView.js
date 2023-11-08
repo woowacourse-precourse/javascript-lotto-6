@@ -1,16 +1,19 @@
 import { MissionUtils } from '@woowacourse/mission-utils'
 
 const OutputView = {
+    // 구매 개수 출력
     printCount(count){
         MissionUtils.Console.print(`${count}개를 구매했습니다.`)
     },
 
+    // 구매한 로또 번호 출력
     printLottoList(lottoList){
         lottoList.forEach(lotto => {
             MissionUtils.Console.print(`[${lotto.join(', ')}]`)
         })
     },
 
+    // 결과 출력
     printResult(result, returnRate){
         MissionUtils.Console.print(`당첨 통계`)
         MissionUtils.Console.print(`---`)
