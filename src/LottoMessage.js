@@ -1,3 +1,5 @@
+import { LOTTO } from './LottoInfo';
+
 const QUERY = {
   purchaseAmount: '구입금액을 입력해 주세요.\n',
   winningNumbers: '당첨 번호를 입력해 주세요.\n',
@@ -6,13 +8,12 @@ const QUERY = {
 Object.freeze(QUERY);
 
 const ERROR = {
-  falsy: '[ERROR] 정확한 숫자를 입력하셔야 합니다.\n',
-  notBeDividedByThousand: '[ERROR] 1000으로 나누어 떨어져야 합니다.\n',
-  notSix: '[ERROR] 로또 번호는 6개여야 합니다.\n',
-  notUnique: '[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.\n',
-  notOneToFortyFive: '[Error] 로또 번호는 1에서 45 사이의 숫자여야 합니다.\n',
-  notUniqueBonusNumber:
-    '[ERROR] 로또 번호에 보너스 번호 숫자가 없어야 합니다.\n',
+  positiveNumber: '[ERROR] 정확한 숫자를 입력하셔야 합니다.\n',
+  canDividedByPrice: `[ERROR] ${LOTTO.price}으로 나누어 떨어져야 합니다.\n`,
+  count: `[ERROR] 로또 번호는 ${LOTTO.count}개여야 합니다.\n`,
+  unique: '[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.\n',
+  between: `[Error] 로또 번호는 ${LOTTO.number.min}에서 ${LOTTO.number.max} 사이의 숫자여야 합니다.\n`,
+  uniqueBonusNumber: '[ERROR] 로또 번호에 보너스 번호 숫자가 없어야 합니다.\n',
 };
 Object.freeze(ERROR);
 

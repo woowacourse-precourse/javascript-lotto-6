@@ -25,14 +25,14 @@ class LottoShop {
   }
 
   #validate(amount) {
-    if (amount === 0) {
-      throw new Error(ERROR.falsy);
-    }
     if (Number.isNaN(amount)) {
-      throw new Error(ERROR.falsy);
+      throw new Error(ERROR.positiveNumber);
+    }
+    if (amount === 0) {
+      throw new Error(ERROR.positiveNumber);
     }
     if (amount % LOTTO.price !== 0) {
-      throw new Error(ERROR.notBeDividedByThousand);
+      throw new Error(ERROR.canDividedByPrice);
     }
   }
 }

@@ -8,6 +8,7 @@ class WinningLotto {
 
   constructor(winningNumbers, bonusNumber) {
     this.#lotto = new Lotto(winningNumbers);
+
     this.#validate(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
@@ -24,10 +25,10 @@ class WinningLotto {
 
   #validate(bonusNumber) {
     if (bonusNumber < LOTTO.number.min || bonusNumber > LOTTO.number.max) {
-      throw new Error(ERROR.notOneToFortyFive);
+      throw new Error(ERROR.between);
     }
     if (this.#lotto.includes(bonusNumber)) {
-      throw new Error(ERROR.notUniqueBonusNumber);
+      throw new Error(ERROR.uniqueBonusNumber);
     }
   }
 }

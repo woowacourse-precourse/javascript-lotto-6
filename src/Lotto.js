@@ -26,17 +26,14 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== LOTTO.count) {
-      throw new Error(ERROR.notSix);
+      throw new Error(ERROR.count);
     }
     if (numbers.length !== new Set(numbers).size) {
-      throw new Error(ERROR.notUnique);
+      throw new Error(ERROR.unique);
     }
-    if (
-      numbers.some(
-        (number) => number < LOTTO.number.min || number > LOTTO.number.max,
-      )
-    ) {
-      throw new Error(ERROR.notOneToFortyFive);
+    const { min, max } = LOTTO.number;
+    if (numbers.some((number) => number < min || number > max)) {
+      throw new Error(ERROR.between);
     }
   }
 }
