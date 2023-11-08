@@ -1,4 +1,4 @@
-import LottoValidator from "../validator/LottoValidator.js";
+import LottoValidator from '../validator/LottoValidator.js';
 
 class Lotto {
   #numbers;
@@ -18,7 +18,7 @@ class Lotto {
 
   isIncludeBonus(bonus) {
     if (this.#numbers.includes(bonus)) {
-      return true
+      return true;
     }
     return false;
   }
@@ -28,7 +28,7 @@ class Lotto {
    * 일치하는 숫자의 개수를 반환하는 메소드
    */
   static getMatchCount(win, purchase) {
-    const matchNumbers = win.getNumbers().filter((number) => {
+    const matchNumbers = win.getNumbers().filter(number => {
       return purchase.getNumbers().includes(number);
     });
     return matchNumbers.length;
