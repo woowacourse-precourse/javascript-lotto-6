@@ -7,23 +7,37 @@ import Lotto from '../models/Lotto.js';
 
 class LottoGameController {
   async startLottoGame() {
+    const lottoList = this.#getLotto();
+  }
+
+  async #getInputPrice() {
     const price = await InputView.inputPrice();
     try {
       InputValidator.validateInputPrice(price);
-      const lottoAmount = parseInt(price) / LOTTO_SETTING.pricePerLotto;
-      const lotto = this.#generateLotto(lottoAmount);
-      generate;
+      return price;
     } catch (error) {
       OutputView.outputMessage(error.message);
-      this.startLottoGame();
-      return;
+      this.#getInputPrice();
     }
+  }
+
+  #getLotto() {
+    const purchaseAmount = parseInt(this.#getInputPrice() / LOTTO_SETTING.pricePerLotto);
+    return this.#generateLotto(purchaseAmount);
   }
 
   #generateLotto(amount) {
     const lotto = [];
     for (let i = 0; i < amount; i += 1) {
-      lotto.push(new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6)));
+      lotto.push(
+        new Lotto(
+          Random.pickUniqueNumbersInRange(
+            LOTTO_SETTING.minNumber,
+            LOTTO_SETTING.maxNumber,
+            LOTTO_SETTING.numbersLength,
+          ),
+        ),
+      );
     }
     return lotto;
   }
