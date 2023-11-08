@@ -90,13 +90,13 @@ class Lotto {
 
   static calcTotalResult(numbersArray, winningNumbers, bonusNumber) {
     const result = new Map([
-      [0, LOTTO.FAILED_LOTTO_KEY],
-      [0, LOTTO.MATCHES_3_KEY],
-      [0, LOTTO.MATCHES_4_KEY],
-      [0, LOTTO.MATCHES_5_KEY],
-      [0, LOTTO.MATCHES_5_BONUS_KEY],
-      [0, LOTTO.MATCHES_6_KEY],
-      [0, LOTTO.TOTAL_PRICE_KEY],
+      [LOTTO.FAILED_LOTTO_KEY, 0],
+      [LOTTO.MATCHES_3_KEY, 0],
+      [LOTTO.MATCHES_4_KEY, 0],
+      [LOTTO.MATCHES_5_KEY, 0],
+      [LOTTO.MATCHES_5_BONUS_KEY, 0],
+      [LOTTO.MATCHES_6_KEY, 0],
+      [LOTTO.TOTAL_PRICE_KEY, 0],
     ]);
 
     for (let numbers of numbersArray) {

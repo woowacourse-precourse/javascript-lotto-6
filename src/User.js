@@ -3,6 +3,7 @@ import validator from './utils/validator';
 import { ERROR_MESSAGE } from './constants/message';
 import converter from './utils/Converter';
 import { LOTTO, PURCHASE_AMOUNT } from './constants/api';
+import outputView from './views/outputView';
 
 class User {
   constructor() {
@@ -10,6 +11,10 @@ class User {
   }
 
   validatePurchaseAmount(purchaseAmount) {
+    if (!validator.isPositiveInteger(purchaseAmount)) {
+      throw new Error(ERROR_MESSAGE.NOT_POSITIVE_INTEGER);
+    }
+
     if (!validator.isPositiveInteger(purchaseAmount)) {
       throw new Error(ERROR_MESSAGE.NOT_POSITIVE_INTEGER);
     }
@@ -25,17 +30,23 @@ class User {
   }
 
   async setPurchaseAmount() {
-    // 입력
-    this.purchaseAmount = await inputView.inputPurchaseAmount();
+    try {
+      // 입력
+      this.purchaseAmount = await inputView.inputPurchaseAmount();
 
-    // 형변환
-    if (!validator.isNumericString(this.purchaseAmount)) {
-      throw new Error(ERROR_MESSAGE.NAN);
+      // 형변환
+      if (!validator.isNumericString(this.purchaseAmount)) {
+        throw new Error(ERROR_MESSAGE.NAN);
+      }
+      this.purchaseAmount = converter.numbericStringToNumber(this.purchaseAmount);
+  
+      // 검증
+      this.validatePurchaseAmount(this.purchaseAmount);
+    } catch (e) {
+      outputView.printError(e.message);
+
+      return this.setPurchaseAmount();
     }
-    this.purchaseAmount = converter.numbericStringToNumber(this.purchaseAmount);
-
-    // 검증
-    this.validatePurchaseAmount(this.purchaseAmount);
   }
 
   buyLottos(numberOfLottos, generator) {
