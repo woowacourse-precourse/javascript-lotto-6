@@ -4,7 +4,7 @@ import { ERROR } from './LottoMessage.js';
 import LottoNumbersGenerator from './LottoNumbersGenerator.js';
 
 class LottoShop {
-  sellTo(purchaser, amount) {
+  static sellTo(purchaser, amount) {
     LottoShop.#validate(amount);
 
     const lottoCount = LottoShop.#calculateLottoCount(amount);

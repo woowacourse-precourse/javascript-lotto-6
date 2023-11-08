@@ -24,7 +24,7 @@ class LottoGame {
 
   async #purchaseLottos() {
     try {
-      new LottoShop().sellTo(
+      LottoShop.sellTo(
         this.#lottoPurchaser,
         await InputView.askPurchaseAmount(),
       );
