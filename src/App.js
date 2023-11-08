@@ -15,10 +15,9 @@ class App {
   async purchase() {
     const amount = await Input.readLineLoop(INPUT_MESSAGE.AMOUNT_TO_BUY, LottoValidation.amount);
     const lottos = Lotto.createLottos(amount);
+    this.#lottos = lottos;
 
     Output.purchasedLottosNumber(lottos);
-
-    this.#lottos = lottos;
   }
 
   async draw() {
