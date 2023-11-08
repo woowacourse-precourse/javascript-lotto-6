@@ -1,5 +1,6 @@
 import Customer from "../src/Customer";
 import inputHandlers from "./inputHandlers";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async play() {
@@ -9,8 +10,9 @@ class App {
     customer.buyLottoTickets();
 
     const winnigNumbers = await inputHandlers.inputWinningNumbers();
-    const bonusNumber = await inputHandlers.inputBonusNumber();
-
+    const bonusNumber = await inputHandlers.inputBonusNumber(winnigNumbers);
+    
+    customer.lottoResult(winnigNumbers, bonusNumber);
   }
 }
 

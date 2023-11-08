@@ -1,5 +1,5 @@
-import { Console } from '@woowacourse/mission-utils';
 import inputValidators from './inputValidators.js';
+import { Console } from '@woowacourse/mission-utils';
 
 const inputHandlers = {
   async inputPayment() {

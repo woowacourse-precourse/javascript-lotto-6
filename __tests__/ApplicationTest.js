@@ -1,7 +1,7 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-export const mockQuestions = (inputs) => {
+const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
   MissionUtils.Console.readLineAsync.mockImplementation(() => {
@@ -11,20 +11,20 @@ export const mockQuestions = (inputs) => {
   });
 };
 
-export const mockRandoms = (numbers) => {
+const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
   }, MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
-export const getLogSpy = () => {
+const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
   logSpy.mockClear();
   return logSpy;
 };
 
-export const runException = async (input) => {
+const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
@@ -95,4 +95,3 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 });
-

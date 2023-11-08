@@ -1,3 +1,4 @@
+import lottoRanking from "./lottoRanking";
 import { Random } from "@woowacourse/mission-utils";
 
 class Lotto {
@@ -28,9 +29,9 @@ class Lotto {
     return this.#numbers;
   }
 
-  checkPrizeRank(winnigNumbers, bonusNumber) {
-    let prizeRank = 0;
+  checkLottoRank(winnigNumbers, bonusNumber) {
     let matchCount = 0;
+    let bonus = false;
 
     winnigNumbers.forEach(winningNumber => {
       if (this.#numbers.includes(winningNumber)) {
@@ -38,27 +39,34 @@ class Lotto {
       }
     });
 
+    if (this.#numbers.includes(bonusNumber)) {
+      bonus = true;
+    }
+    
+    return this.modifyRankingCount(matchCount, bonus);
+  }
+
+  modifyRankingCount(matchCount, bonus) {
     switch(matchCount) {
       case 3: 
-        prizeRank = 5;
-        break;
+        lottoRanking.FIFTH.count++;
+        return 5;
       case 4:
-        prizeRank = 4;
-        break;
+        lottoRanking.FOURTH.count++;
+        return 4;
       case 5:
-        if (this.#numbers.includes(bonusNumber)) {
-          prizeRank = 2;
-          break;
+        if (bonus) {
+          lottoRanking.SECOND.count++;
+          return 2;
         }
-        prizeRank = 3;
-        break;
+        lottoRanking.THIRD.count++;
+        return 3;
       case 6:
-        prizeRank = 1;
-        break;
+        lottoRanking.FIRST.count++;
+        return 1;
     }
-
-    return prizeRank;
   }
+
 }
 
 export default Lotto;

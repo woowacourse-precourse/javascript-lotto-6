@@ -1,5 +1,18 @@
 import Customer from "../src/Customer";
-import { mockRandoms, getLogSpy} from './ApplicationTest.js';
+import { MissionUtils } from "@woowacourse/mission-utils";
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickUniqueNumbersInRange);
+};
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
 
 describe("고객 클래스 테스트", () => {
   test("지불한 금액만큼 로또를 구입", () => {
@@ -18,8 +31,8 @@ describe("고객 클래스 테스트", () => {
     customer.buyLottoTickets();
     const logs = [
       "2개를 구매했습니다.",
-      "1,2,3,4,5,6",
-      "11,12,13,14,15,16"
+      "[1, 2, 3, 4, 5, 6]",
+      "[11, 12, 13, 14, 15, 16]"
     ];
 
     logs.forEach((log) => {

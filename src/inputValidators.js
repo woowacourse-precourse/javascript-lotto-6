@@ -1,6 +1,6 @@
 const inputValidators = {
   validatePayment(payment) {
-    if (!/^[1-9]+$/.test(payment)) {
+    if (!/^\d+$/.test(payment)) {
       throw new Error("[ERROR] 유효한 입력 형식이 아닙니다.");
     }
 
@@ -18,9 +18,7 @@ const inputValidators = {
       throw new Error("[ERROR] 6개의 번호를 쉼표(,)를 기준으로 구분해주세요.");
     }
 
-    if (!winnigNumbers.every((number) =>
-        this.isInRange(number)
-    )) {
+    if (!winnigNumbers.every((number) => this.isInRange(number))) {
       throw new Error("[ERROR] 1~45 자리의 정수로 입력해주세요.");
     }
 
