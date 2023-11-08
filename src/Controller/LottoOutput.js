@@ -28,7 +28,7 @@ class LottoOutput {
     }
   }
 
-  printWinning(winningNum, bonusNum) {
+  checkWinCnt(winningNum, bonusNum) {
     for (let i = 0; i < this.lottoNumArr.length; i++) {
       let winningCount = this.lottoNumArr[i].filter((x) =>
         winningNum.includes(x)
@@ -38,26 +38,34 @@ class LottoOutput {
       if (this.lottoNumArr[i].includes(bonusNum)) {
         IS_BONUS = true;
       }
-
-      switch (winningCount) {
-        case 3:
-          this.matchThree++;
-          break;
-        case 4:
-          this.matchFour++;
-          break;
-        case 5:
-          if (IS_BONUS) {
-            this.matchBonus++;
-            break;
-          }
-          this.matchFive++;
-          break;
-        case 6:
-          this.matchSix++;
-          break;
-      }
+      this.matchWinCnt(winningCount, IS_BONUS);
     }
+  }
+
+  matchWinCnt(winningCount, IS_BONUS) {
+    switch (winningCount) {
+      case 3:
+        this.matchThree++;
+        break;
+      case 4:
+        this.matchFour++;
+        break;
+      case 5:
+        if (IS_BONUS) {
+          this.matchBonus++;
+          break;
+        }
+        this.matchFive++;
+        break;
+      case 6:
+        this.matchSix++;
+        break;
+    }
+  }
+
+  printWinning(winningNum, bonusNum) {
+    this.checkWinCnt(winningNum, bonusNum);
+
     Console.print(MESSAGE_OUTPUT().WINNING_OUTPUT);
     Console.print(MESSAGE_OUTPUT(this.matchThree).WINNING_THREE);
     Console.print(MESSAGE_OUTPUT(this.matchFour).WINNING_FOUR);
