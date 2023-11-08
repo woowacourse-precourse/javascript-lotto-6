@@ -76,4 +76,23 @@ describe('로또 클래스 메서드 테스트', () => {
 			expect(() => lotto.validateLottoBonusNumber(winningNumber)).not.toThrow();
 		});
 	});
+
+	describe('getMatchingNumbersArray 메서드 테스트', () => {
+		test('자동으로 생성된 나의 복권 티켓에서 일치하는 번호의 개수가 나오는지 테스트', () => {
+			const lottoTicketsArray = [
+				[8, 21, 23, 41, 42, 43],
+				[3, 5, 11, 16, 32, 38],
+				[7, 11, 16, 35, 36, 44],
+				[1, 8, 11, 31, 41, 42],
+				[1, 3, 5, 14, 22, 45],
+			];
+			const lottoWinningNumberArray = [1, 3, 5, 9, 10, 39];
+			const expectArray = [0, 2, 0, 1, 3];
+			lotto = new Lotto(lottoTicketsArray);
+
+			expect(lotto.getMatchingNumbersArray(lottoWinningNumberArray)).toEqual(
+				expectArray
+			);
+		});
+	});
 });
