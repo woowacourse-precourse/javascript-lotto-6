@@ -10,6 +10,10 @@ class ErrorMessages {
   static bonusNumberError() {
     return "[ERROR] 보너스 번호는 로또번호와 달라야 합니다.";
   }
+
+  static lottoFormatError() {
+    return "[ERROR] 로또 형식에 부합하지 않습니다.";
+  }
 }
 
 export default ErrorMessages;
