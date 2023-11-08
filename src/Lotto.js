@@ -39,11 +39,11 @@ class Lotto {
       if (winningNumbers.includes(number)) {
         winningCount += 1;
       }
-    })
 
-    if (this.#numbers.includes(winningBonusNumber)) {
-      doesBonusMatch = true;
-    }
+      if (number == winningBonusNumber) {
+        doesBonusMatch = true;
+      }
+    })
 
     return this.#ranking(winningCount, doesBonusMatch);
   }
