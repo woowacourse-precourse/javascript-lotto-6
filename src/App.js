@@ -30,9 +30,15 @@ class App {
   }
 
   async inputNumbers() {
-    const numbers = await InputView.readNumbers();
-    const bonus = await InputView.readBonus();
-    this.lottoResult.setWinningNumber(numbers, bonus);
+    try {
+      const numbers = await InputView.readNumbers();
+      const bonus = await InputView.readBonus();
+      this.lottoResult.setWinningNumber(numbers, bonus);
+      await this.printResult();
+    } catch (e) {
+      OutputView.printError(e);
+      await this.inputNumbers();
+    }
   }
 
   async printResult() {
