@@ -28,7 +28,11 @@ class LottoProcess {
     const userLottoNumbers = [];
     let lotto;
     for (let i = 0; i < amount; i += 1) {
-      lotto = new Lotto(this.generateLottoNumber().sort((a, b) => a - b));
+      lotto = new Lotto(
+        this.generateLottoNumber().sort(
+          (firstNumber, secondNumber) => firstNumber - secondNumber,
+        ),
+      );
       userLottoNumbers.push(lotto.getNumbers());
     }
     return userLottoNumbers;
