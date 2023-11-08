@@ -1,4 +1,4 @@
-import ErrorMessages from "./ErrorMessages.js";
+import ErrorMessages from './ErrorMessages.js';
 
 class Lotto {
   #numbers;
@@ -19,6 +19,7 @@ class Lotto {
       throw new Error(ErrorMessages.NUMBER_OUT_OF_RANGE);
     }
   }
+
   get numbers() {
     return this.#numbers;
   }

@@ -1,5 +1,5 @@
-import * as Utils from "./ValidatorUtils.js";
-import ErrorMessages from "./ErrorMessages.js";
+import * as Utils from './ValidatorUtils.js';
+import ErrorMessages from './ErrorMessages.js';
 
 class LottoValidator {
   validatePurchaseAmount(amount) {
@@ -16,10 +16,6 @@ class LottoValidator {
     });
     Utils.isNotDuplicate(numbers);
     Utils.validLength(numbers, 6);
-  }
-
-  validateWinningNumbers(winningNumbers) {
-    this.validateNumbers(winningNumbers);
   }
 
   validateBonusNumber(bonusNumber, winningNumbers) {

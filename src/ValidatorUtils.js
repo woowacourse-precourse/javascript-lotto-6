@@ -1,4 +1,4 @@
-import ErrorMessages from "./ErrorMessages.js";
+import ErrorMessages from './ErrorMessages.js';
 
 export function isNotEmpty(input) {
   if (!input.trim().length) {

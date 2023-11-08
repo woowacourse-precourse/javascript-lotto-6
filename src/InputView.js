@@ -1,6 +1,6 @@
-import { Console } from "@woowacourse/mission-utils";
-import LottoValidator from "./Validator.js";
-import MESSAGES from "./messages.js";
+import { Console } from '@woowacourse/mission-utils';
+import LottoValidator from './Validator.js';
+import MESSAGES from './messages.js';
 
 class InputView {
   constructor() {
@@ -20,9 +20,9 @@ class InputView {
   async askWinningNumbers() {
     try {
       const input = await Console.readLineAsync(MESSAGES.ASK_WINNING_NUMBERS);
-      const winnerNumber = input.split(",").map(Number);
+      const winnerNumber = input.split(',').map(Number);
       this.validator.validateNumbers(winnerNumber);
-      return input.split(",").map(Number);
+      return input.split(',').map(Number);
     } catch (e) {
       Console.print(e.message);
       return this.askWinningNumbers();

@@ -1,4 +1,4 @@
-import COUNT_WINNERS from "./CountWinners.js";
+import COUNT_WINNERS from './CountWinners.js';
 
 const calculateProfit = (amount, countWinners) => {
   const winnings = Object.keys(countWinners).reduce(
