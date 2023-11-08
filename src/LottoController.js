@@ -3,6 +3,7 @@ import BudgetValidator from "./utils/BudgetValidator.js";
 import Constant from "./utils/Constant.js";
 import View from "./View/View.js";
 import LottoNumGenerator from "./utils/LottoNumGenerator.js";
+import Lotto from "./Lotto.js";
 
 class LottoController {
   #budget;
@@ -57,6 +58,29 @@ class LottoController {
 
   showLottoTickets() {
     this.#lottoTickets.forEach((ticket) => View.output(ticket));
+  }
+
+  async askWinningNum() {
+    while (true) {
+      const input = await View.input(InfoMsg.ASK_LOTTO_NUM);
+      const isValid = this.validateWinningNum(input);
+
+      if (isValid === true) {
+        break;
+      }
+    }
+  }
+
+  validateWinningNum(input) {
+    let winningNum;
+    try {
+      winningNum = new Lotto(input);
+    } catch (err) {
+      View.output(err);
+      return false;
+    }
+    this.winningNum = winningNum;
+    return true;
   }
 }
 

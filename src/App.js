@@ -6,6 +6,7 @@ class App {
     await controller.askBudget();
     controller.createLottoTickets();
     controller.showLottoTickets();
+    controller.askWinningNum();
   }
 }
 
