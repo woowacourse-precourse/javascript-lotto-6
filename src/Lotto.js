@@ -1,3 +1,6 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+import { ErrorMessage } from "./Message";
+
 class Lotto {
   #numbers;
 
@@ -8,8 +11,25 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ErrorMessage.INVALID_LOTTO_LENGTH);
     }
+
+    if (!numbers.every((num) => !/\D/.test(num))) {
+      throw new Error(ErrorMessage.INVALID_LOTTO_TYPE);
+    }
+
+    if (!numbers.every((num) => num >= 1 && num <= 45)) {
+      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBER);
+    }
+
+    const isDuplicate = new Set(numbers).size;
+    if (isDuplicate !== 6) {
+      throw new Error(ErrorMessage.DUPLICATE_LOTTO_NUMBER);
+    }
+  }
+
+  getLottoNumber() {
+    return this.#numbers;
   }
 
   // TODO: 추가 기능 구현
