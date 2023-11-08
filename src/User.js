@@ -6,7 +6,6 @@ class User {
     const splitedPurchaseAmount = purchaseAmount.split('');
 
     splitedPurchaseAmount.forEach(char => {
-
       if (isNaN(parseInt(char))) {
         throw new Error("[ERROR] 로또 구입 금액은 숫자로 입력해야 합니다.");
       }
@@ -18,10 +17,20 @@ class User {
   }
 
   async inputLottoPurchaseAmount() {
-    const purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    let isValidInput = false;
+    let purchaseAmount;
     
-    this.validatePurchaseAmount(purchaseAmount);
-    
+    while (!isValidInput) {
+      purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      
+      try {
+        this.validatePurchaseAmount(purchaseAmount);
+        isValidInput = true;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
+
     return parseInt(purchaseAmount) / 1000;
   }
 
@@ -36,24 +45,47 @@ class User {
   validateLottoNumberRange(lottoNumebers) {
     lottoNumebers.forEach(number => {
       if (number <1 || number > 45) {
-        throw new Error("[ERROR] 로또 번호는 1~45여야 합니다.");
+        throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
       }
     });
   }
 
   async inputLottoWinningNumber() {
-    const winningNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-    const winningNumbers = winningNumber.split(',').map(number => parseInt(number));
+    let isValidInput = false;
+    let inputNumber;
+    let winningNumber;
 
-    this.validateLottoNumberRange(winningNumbers);
-    new Lotto(winningNumbers);
+    
+    while (!isValidInput) {
+      inputNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+      winningNumber = inputNumber.split(',').map(number => parseInt(number));
 
-    return winningNumbers;
+      try {
+        new Lotto(winningNumber);
+        isValidInput = true;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
+
+    return winningNumber;
   }
 
   async inputLottoBonusNumber() {
-    const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
-    this.validateLottoNumberRange([parseInt(bonusNumber)]);
+    let isValidInput = false;
+    let bonusNumber;
+
+    
+    while (!isValidInput) {
+      bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+
+      try {
+        this.validateLottoNumberRange([parseInt(bonusNumber)]);
+        isValidInput = true;
+      } catch (e) {
+        Console.print(e.message);
+      }
+    }
 
     return parseInt(bonusNumber);
   }
