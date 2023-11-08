@@ -1,4 +1,4 @@
-export const ERROR = {
+export const ERROR_MESSEGE = {
   notNumber: '[ERROR] 입력값은 숫자만 가능합니다.',
   invalidUnit: '[ERROR] 로또 구매는 1,000원 단위로만 가능합니다.',
   length: '[ERROR] 로또 번호는 6개여야 합니다.',

@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { REGEXS } from '../constants/options.js';
-import { INPUT_MESSEGE, ERROR } from '../constants/messages.js';
+import { INPUT_MESSEGE, ERROR_MESSEGE } from '../constants/messages.js';
 import Lotto from '../models/Lotto.js';
 
 class TiketBooth {
@@ -37,13 +37,13 @@ class TiketBooth {
 
   #validateNumber(number) {
     if (!REGEXS.number.test(number)) {
-      throw new Error(ERROR.notNumber);
+      throw new Error(ERROR_MESSEGE.notNumber);
     }
   }
 
   #validateMoney(paymentAmount) {
     if (paymentAmount < 1000 || Number(paymentAmount) % 1000 !== 0) {
-      throw new Error(ERROR.invalidUnit);
+      throw new Error(ERROR_MESSEGE.invalidUnit);
     }
   }
 
@@ -55,7 +55,7 @@ class TiketBooth {
 
   #validateBonusNumber(winNumbers, bonusNumber) {
     if (winNumbers.getLotto().includes(Number(bonusNumber))) {
-      throw new Error(ERROR.duplicate);
+      throw new Error(ERROR_MESSEGE.duplicate);
     }
   }
 }

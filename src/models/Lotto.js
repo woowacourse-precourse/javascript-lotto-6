@@ -1,4 +1,4 @@
-import { ERROR } from '../constants/messages.js';
+import { ERROR_MESSEGE } from '../constants/messages.js';
 
 class Lotto {
   #numbers;
@@ -21,14 +21,14 @@ class Lotto {
 
   #validateSize(numbers) {
     if (numbers.length !== 6) {
-      throw new Error(ERROR.length);
+      throw new Error(ERROR_MESSEGE.length);
     }
   }
 
   #validateDuplicate(numbers) {
     numbers.forEach((number) => {
       if (this.#duplicateCount(numbers, number) >= 2) {
-        throw new Error(ERROR.duplicate);
+        throw new Error(ERROR_MESSEGE.duplicate);
       }
     });
   }
@@ -40,7 +40,7 @@ class Lotto {
   #validateRange(numbers) {
     numbers.forEach((number) => {
       if (1 < number && number > 45) {
-        throw new Error(ERROR.notInRange);
+        throw new Error(ERROR_MESSEGE.notInRange);
       }
     });
   }
