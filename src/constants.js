@@ -1,57 +1,53 @@
-export const ONE_LOTTO_PRICE = 1000;
-export const LOTTO_NUMBERS_LENGTH = 6;
-export const BONUS_NUMBER_LENGTH = 1;
-export const POSSIBLE_MIN_NUMBER = 1;
-export const POSSIBLE_MAX_NUMBER = 45;
-// export const POSSIBLE_MIN_INPUT_LENGTH = 11;
-// export const POSSIBLE_MAX_INPUT_LENGTH = 17;
-export const LOTTO_TO_MONEY = {
+//number
+
+const LOTTO = {
+	PRICE: 1000,
+	LENGTH: 6,
+	MIN_NUMBER: 1,
+	MAX_NUMBER: 45,
+};
+const MONEY = {
 	THREE: 5000,
 	FOUR: 50000,
 	FIVE: 1500000,
-	FIVE_AND_BONUS: 30000000,
-	SIX: 2000000000
+	SIX: 2000000000,
+	BONUS: 30000000,
 };
-export const TYPE_MONEY = 'money';
-export const TYPE_LOTTO = 'lotto';
-export const TYPE_BONUS = 'bonus';
-export const EMPTY = '';
-export const ASK_MONEY = '구입금액을 입력해 주세요.';
-export const TELL_HOW_MANY_LOTTOS_BOUGHT = '개를 구매했습니다.';
-export const ASK_LOTTO_NUMBER = `${NEW_LINE}당첨 번호를 입력해 주세요.`;
-export const INPUT_CONDITION = `${POSSIBLE_MIN_NUMBER}~${POSSIBLE_MAX_NUMBER}사이의 고유한 번호 ${LOTTO_NUMBERS_LENGTH}개를 입력해주세요. 번호는 쉼표(,)로 구분합니다.`;
-export const BONUS_INPUT_CONDITION = `${POSSIBLE_MIN_NUMBER}~${POSSIBLE_MAX_NUMBER}사이의 번호 ${BONUS_NUMBER_LENGTH}개를 입력해주세요.`;
-export const ASK_BONUS_NUMBER = `${NEW_LINE}보너스 번호를 입력해 주세요.`;
-export const RESULT = `${NEW_LINE}당첨 통계`;
-export const DIVISION_LINE = '---';
-export const UNIT_GAE = '개';
-export const THREE_EQUAL = '3개 일치 (5,000원) - ';
-export const FOUR_EQUAL = '4개 일치 (50,000원) - ';
-export const FIVE_EQUAL = '5개 일치 (1,500,000원) - ';
-export const FIVE_AND_BONUS_EQUAL =
-	'5개 일치, 보너스 볼 일치 (30,000,000원) - ';
-export const SIX_EQUAL = '6개 일치 (2,000,000,000원) - ';
-
-export const ERROR = {
-	name: '[ERROR]',
-	message: {
-		OK_INPUT: `${POSSIBLE_MIN_NUMBER}~${POSSIBLE_MAX_NUMBER}사이의 고유한 번호 ${LOTTO_NUMBERS_LENGTH}개를 입력해주세요.`,
-		NO_INPUT: '입력값이 없습니다. ',
-		NO_DUPLICATE: '중복되는 번호가 있습니다. ',
-		NO_BLANK: '공백" "을 사용할 수 없습니다. ',
-		EXCEPT_COMMA: '쉼표","를 제외하고',
-		NO_CHARS: '특수문자/문자는 입력할 수 없습니다. ',
-		LENGTH(length) {
-			return `${length}개의 번호를 입력해주세요. `;
-		},
-		MORE_MONEY: '1000 이상을 입력해주세요. ',
-		NO_DIVIDE_THOUSAND: '1000의 배수를 입력해주세요. '
-	}
+const DIVIDER = ',';
+const EMPTY = '';
+const BLANK = ' ';
+const TYPE = {
+	MONEY: 'money',
+	NUMBERS: 'numbers',
+	BONUS: 'bonus',
+};
+const REQUEST = {
+	MONEY: '구입금액을 입력해주세요.',
+	NUMBERS: '당첨 번호를 알려주세요.',
+	BONUS: '보너스 번호를 입력해주세요.',
+};
+const RESPONSE = {
+	AMOUNT_IS: (amount) => `${amount}개를 구매했습니다.`,
+	PROFITS_RATE_IS: (percent) => `총 수익률 ${percent}%입니다`,
+};
+const STATISTICS = {
+	RESULT_IS: '\n당첨 통계\n\n---',
+	THREE_SAME: (amount) => `3개 일치 (5,000원) - ${amount}개 출력`,
+	FOUR_SAME: (amount) => `4개 일치 (50,000원) - ${amount}개 출력`,
+	FIVE_SAME: (amount) => `5개 일치 (1,500,000원) - ${amount}개  출력`,
+	SIX_SAME: (amount) => `6개 일치 (2,000,000,000원) - ${amount}개  출력`,
+	BONUS: (amount) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${amount}개  출력`,
 };
 
-export const NEW_LINE = '\n';
+const ERROR = {
+	NO_INPUT: '[ERROR] 값을 입력해주세요.',
+	ONLY_LENGTH_SIX: `[ERROR] 로또 번호는 ${LOTTO.LENGTH}개여야 합니다.`,
+	ONLY_NUMBER: '[ERROR] 숫자만 입력 가능합니다.',
+	MONEY_UNIT: `[ERROR] ${LOTTO.PRICE}원 단위로만 입력 가능합니다.`,
+	NO_NUMBER_DUPLICATE: '[ERROR] 번호는 중복될 수 없습니다.',
+	NUMBER_RANGE: `[ERROR] ${LOTTO.MIN_NUMBER}부터 ${LOTTO.MAX_NUMBER}까지만 입력 가능합니다.`,
+};
+
+export { TYPE, LOTTO, MONEY, EMPTY, BLANK, DIVIDER, REQUEST, RESPONSE, STATISTICS, ERROR };
+
 export const REG_EXP = /[a-zA-Z가-힣[!@#$%^&*()_+{}[\]:;<>.,?~\\/-]]/g;
-export const REG_EXP_EXCEPT_COMMA =
-	/[a-zA-Z가-힣[!@#$%^&*()_+{}[\]:;<>.?~\\/-]]/g;
-
-export const PROFITS_RATE_IS = number => `총 수익률은 ${number}%입니다.`;
