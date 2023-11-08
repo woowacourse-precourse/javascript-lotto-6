@@ -32,4 +32,22 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 2, 3, 9, 5]);
     }).toThrow('[ERROR]');
   });
+
+  test('보너스 번호가 1 ~ 45 숫자가 아니면 예외 발생', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], 'ㅁ');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], 0);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], 46);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], 'a');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 6], '*');
+    }).toThrow('[ERROR]');
+  });
 });
