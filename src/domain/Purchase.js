@@ -31,6 +31,10 @@ class Purchase {
     }
   }
 
+  calcPurchaseQuantity(input) {
+    return input / PURCHASE_AMOUNT_UNIT;
+  }
+
   async #getPurchaseAmount() {
     while (true) {
       try {

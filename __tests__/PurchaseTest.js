@@ -21,4 +21,11 @@ describe("로또 구매 클래스 테스트", () => {
       purchase.validateIsCorrectUnit(1300);
     }).toThrow("[ERROR]");
   });
+
+  test("구매 수량이 구입 금액을 1000으로 나눈 값과 일치하지 않으면 예외가 발생한다.", () => {
+    const purchase = new Purchase();
+    const quantity = purchase.calcPurchaseQuantity(3000);
+
+    expect(quantity).toBe(3);
+  });
 });
