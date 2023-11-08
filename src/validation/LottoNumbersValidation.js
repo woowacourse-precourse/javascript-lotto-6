@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES as ERROR } from "../constant/ErrorMessages.js";
+import { LOTTO_NUMBER_EXCEPTION as ERROR } from "../constant/ErrorMessages.js";
 
 const LottoNumbersValidation = {
 
@@ -17,7 +17,7 @@ const LottoNumbersValidation = {
   /** @throws 배열의 길이가 6이 아니라면 에러를 발생시킨다. */
   checkIsLengthSix(value) {
     if (value.length !== 6) {
-      throw new Error(ERROR.invalid_winning_numbers_length);
+      throw new Error(ERROR.invalid_length_exception);
     }
   },
 
@@ -25,7 +25,7 @@ const LottoNumbersValidation = {
   checkIsNumeric(value) {
     value.forEach((item) => {
       if (typeof item !== 'number') {
-        throw new Error(ERROR.invalid_winning_numbers_format);
+        throw new Error(ERROR.invalid_format_exception);
       }
     });
   },
@@ -34,7 +34,7 @@ const LottoNumbersValidation = {
   checkIsInteger(value) {
     value.forEach((item) => {
       if (!Number.isInteger(item)) {
-        throw new Error(ERROR.invalid_winning_numbers_integer);
+        throw new Error(ERROR.non_integer_exception);
       }
     });
   },
@@ -43,7 +43,7 @@ const LottoNumbersValidation = {
   checkIsValidRange(value) {
     value.forEach((item) => {
       if (item < 1 || item > 45) {
-        throw new Error(ERROR.invalid_winning_numbers_range);
+        throw new Error(ERROR.invalid_range_exception);
       }
     });
   },
@@ -51,7 +51,7 @@ const LottoNumbersValidation = {
   /** @throws 중복된 값이 포함되어 있다면 에러를 발생시킨다. */
   checkIsUnique(value) {
     if (value.length !== new Set(value).size) {
-      throw new Error(ERROR.duplicate_winning_numbers);
+      throw new Error(ERROR.duplication_exception);
     }
   }
 }
