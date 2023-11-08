@@ -75,7 +75,7 @@ class UserLottoModel {
   }
 
   #isNotEnoughAmount(amount) {
-    throwError(ERROR_MESSAGE.amount_division, amount < LOTTO.amount_unit);
+    throwError(ERROR_MESSAGE.amount_min, amount < LOTTO.amount_unit);
   }
 }
 
