@@ -18,50 +18,50 @@ describe("InputView 객체 테스트", () => {
   };
 
   describe("로또 구입 금액 입력 테스트", () => {
-    const nullMoney = "";
-    const blankMoney = "14 000";
-    const charMoney = "14a00";
-    const indivisibleMoney = "14999";
-    const validMoney = "14000";
+    const nullCost = "";
+    const blankCost = "14 000";
+    const charCost = "14a00";
+    const indivisibleCost = "14999";
+    const validCost = "14000";
 
     test("아무 입력을 안하고 엔터 누르면 예외 발생", async () => {
-      mockQuestions([nullMoney]);
+      mockQuestions([nullCost]);
 
-      await expect(InputView.receiveMoney()).rejects.toThrow(
+      await expect(InputView.receiveCost()).rejects.toThrow(
         `${INPUT_ERROR.null}`
       );
     });
 
     test("숫자 내 공백 존재할 때 예외 발생", async () => {
-      mockQuestions([blankMoney]);
+      mockQuestions([blankCost]);
 
-      await expect(InputView.receiveMoney()).rejects.toThrow(
+      await expect(InputView.receiveCost()).rejects.toThrow(
         `${INPUT_ERROR.blank}`
       );
     });
 
     test("문자(공백 포함) 입력할 때 예외 발생", async () => {
-      mockQuestions([charMoney]);
+      mockQuestions([charCost]);
 
-      await expect(InputView.receiveMoney()).rejects.toThrow(
+      await expect(InputView.receiveCost()).rejects.toThrow(
         `${INPUT_ERROR.char}`
       );
     });
 
     test("1,000원으로 나누어 떨어지지 않는 경우 예외 발생", async () => {
-      mockQuestions([indivisibleMoney]);
+      mockQuestions([indivisibleCost]);
 
-      await expect(InputView.receiveMoney()).rejects.toThrow(
+      await expect(InputView.receiveCost()).rejects.toThrow(
         `${INPUT_ERROR.indivisible}`
       );
     });
 
     test("올바른 구입 금액을 입력", async () => {
-      mockQuestions([validMoney]);
+      mockQuestions([validCost]);
 
-      const result = await InputView.receiveMoney();
+      const result = await InputView.receiveCost();
 
-      expect(result).toEqual(validMoney);
+      expect(result).toEqual(validCost);
     });
   });
 

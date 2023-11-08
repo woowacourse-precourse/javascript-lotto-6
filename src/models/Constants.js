@@ -1,5 +1,5 @@
 const IN_GAME_MESSAGE = Object.freeze({
-  getMoney: "구입금액을 입력해 주세요.\n",
+  getCost: "구입금액을 입력해 주세요.\n",
   amount: "개를 구매했습니다.\n",
   getNumbers: "\n당첨 번호를 입력해 주세요.\n",
   getBonusNumber: "\n보너스 번호를 입력해 주세요.\n",

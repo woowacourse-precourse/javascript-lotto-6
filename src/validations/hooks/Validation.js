@@ -24,8 +24,8 @@ const ValidationHook = {
     }
   },
 
-  checkIndivisible(money) {
-    if (Number(money) % UNIT !== 0) {
+  checkIndivisible(cost) {
+    if (Number(cost) % UNIT !== 0) {
       throw new Error(INPUT_ERROR.indivisible);
     }
   },

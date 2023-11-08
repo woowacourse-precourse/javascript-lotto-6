@@ -14,7 +14,7 @@ describe("OutputView 객체 테스트", () => {
   };
 
   const mockLottoGame = {
-    money: 8000,
+    cost: 8000,
     amount: 8,
     lottos: [
       [8, 21, 23, 41, 42, 43],
@@ -29,11 +29,11 @@ describe("OutputView 객체 테스트", () => {
     winningNumbers: [1, 2, 3, 4, 5, 6],
     bonusNumber: 7,
     winningResults: [
-      { price: 5000, ticket: 1 },
-      { price: 50000, ticket: 0 },
-      { price: 1500000, ticket: 0 },
-      { price: 30000000, ticket: 0 },
-      { price: 2000000000, ticket: 0 },
+      { history: "3개 일치", price: 5000, ticket: 1 },
+      { history: "4개 일치", price: 50000, ticket: 0 },
+      { history: "5개 일치", price: 1500000, ticket: 0 },
+      { history: "5개 일치, 보너스 볼 일치", price: 30000000, ticket: 0 },
+      { history: "6개 일치", price: 2000000000, ticket: 0 },
     ],
     totalProfit: 5000,
     profitRatio: 62.5,
@@ -42,7 +42,7 @@ describe("OutputView 객체 테스트", () => {
   describe("로또 구매 내역 출력 테스트", () => {
     test("발행한 로또 수량 출력", () => {
       const expected = `${mockLottoGame.amount}개를 구매했습니다.`;
-      const result = OutputView.printAmount(mockLottoGame.money);
+      const result = OutputView.printAmount(mockLottoGame.cost);
 
       expect(result).toHaveBeenCalledWith(expected);
     });
