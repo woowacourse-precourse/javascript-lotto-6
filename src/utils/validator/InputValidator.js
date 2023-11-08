@@ -19,30 +19,28 @@ const InputValidator = {
     }
   },
 
-  validateWinningNums(nums) {
-    const numArr = nums.split(SEPARATOR.comma);
+  validateLength(numArr) {
     if (numArr.length != STATIC_NUMBER.LottoNumLen) {
       throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.invalidLength}`);
     }
-    numArr.map((num) => {
-      if (!regExLottoNum.test(num)) {
-        throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.invalidNum}`);
-      }
-    });
+  },
+
+  validateNumRange(num) {
+    if (!regExLottoNum.test(num)) {
+      throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.invalidNum}`);
+    }
+  },
+
+  validateDuplication(numArr) {
     const numSet = new Set(numArr);
     if (numSet.size != STATIC_NUMBER.LottoNumLen) {
       throw new Error(
         `${MESSAGE_ERROR.header} ${MESSAGE_ERROR.duplicatedWinningNums}`
       );
     }
-
-    return numArr;
   },
 
-  validateBonusNum(bonusNum, winningNums) {
-    if (!regExLottoNum.test(bonusNum)) {
-      throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.invalidNum}`);
-    }
+  validateInWinningNums(bonusNum, winningNums) {
     if (winningNums.includes(Number(bonusNum))) {
       throw new Error(`${MESSAGE_ERROR.header} ${MESSAGE_ERROR.inWinningNums}`);
     }

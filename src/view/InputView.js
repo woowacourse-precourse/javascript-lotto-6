@@ -3,6 +3,7 @@ import Calculator from "../utils/calc/Calculator.js";
 import { MESSAGE_ASK } from "../static/Static.js";
 import InputValidator from "../utils/validator/InputValidator.js";
 import OutputView from "./OutputView.js";
+import { SEPARATOR } from "../static/Static.js";
 
 const InputView = {
   async readPurchasePrice() {
@@ -29,7 +30,12 @@ const InputView = {
           MESSAGE_ASK.winningNums
         );
         InputValidator.validateEmptyString(winningNums);
-        const winningNumArr = InputValidator.validateWinningNums(winningNums);
+        const winningNumArr = winningNums.split(SEPARATOR.comma);
+        InputValidator.validateLength(winningNumArr);
+        InputValidator.validateDuplication(winningNumArr);
+        winningNumArr.map((num) => {
+          InputValidator.validateNumRange(num);
+        });
         return winningNumArr;
       } catch (error) {
         OutputView.printErrorMessage(error);
@@ -43,7 +49,8 @@ const InputView = {
       try {
         const bonusNum = await Console.readLineAsync(MESSAGE_ASK.bonusNum);
         InputValidator.validateEmptyString(bonusNum);
-        InputValidator.validateBonusNum(bonusNum, winningNums);
+        InputValidator.validateNumRange(bonusNum);
+        InputValidator.validateInWinningNums(bonusNum, winningNums);
         return bonusNum;
       } catch (error) {
         OutputView.printErrorMessage(error);
