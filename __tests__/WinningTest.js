@@ -1,7 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import App from "../src/App.js";
+import Lotto from "../src/Lotto.js";
 import MESSAGE from "../src/constants/message.js";
-import publishService from "../src/services/publishService.js";
+import winningService from "../src/services/winningService.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -89,5 +90,29 @@ describe("로또 당첨 테스트", () => {
   test("보너스 번호 입력 시 입력값 검증", async () => {
     const input = ["48", "1"];
     await runExceptionByBonusNumInput(input);
+  });
+
+  test("당첨 번호 비교 검증", () => {
+    // given
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const winLotto = new Lotto([5, 6, 7, 8, 9, 10]);
+
+    // when
+    const result = winningService.getMatchedCount(lotto, winLotto);
+
+    // then
+    expect(result).toBe(2);
+  });
+
+  test("보너스 번호 비교 검증", () => {
+    // given
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const bonusNum = 6;
+
+    // when
+    const result = winningService.getBonusCount(lotto, bonusNum);
+
+    // then
+    expect(result).toBe(10);
   });
 });
