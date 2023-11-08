@@ -1,23 +1,21 @@
-import { LOTTO_NUM_RANGE } from '../constants/conditions.js';
-import ERROR_MESSAGE from '../constants/error.js';
+import { LOTTO_NUM_RANGE } from '../constants/conditions';
+import ERROR_MESSAGE from '../constants/error';
 
-const AutoLottoValidator = {
-  isCorrectLotto(lottos) {
+export default class AutoLottoValidator {
+  static #isCorrectLotto(lottos) {
     return lottos.every(
       (lotto) =>
         Array.isArray(lotto) && lotto.length === LOTTO_NUM_RANGE.length,
     );
-  },
+  }
 
-  isNotDuplicated(lottos) {
+  static #isNotDuplicated(lottos) {
     return lottos.every((lotto) => lotto.length === new Set(lotto).size);
-  },
+  }
 
-  validateAutoLotto(lottos) {
-    if (!this.isCorrectLotto(lottos) || !this.isNotDuplicated(lottos))
+  static validateAutoLotto(lottos) {
+    if (!this.#isCorrectLotto(lottos) || !this.#isNotDuplicated(lottos))
       throw new Error(ERROR_MESSAGE.generateIssue);
     return lottos;
-  },
-};
-
-export default AutoLottoValidator;
+  }
+}
