@@ -8,6 +8,7 @@ export const GAME = Object.freeze({
 });
 
 export const ERROR = Object.freeze({
+  INPUT: "[ERROR] 입력을 실패하였습니다.",
   NOT_NUMBER: "[ERROR] 0 이상의 자연수로 입력해야 합니다.",
   INVALID_AMOUNT: "[ERROR] 구입 금액은 1000원 단위로 입력해야 합니다.",
   INVALID_ARRAY_LENGTH: "[ERROR] 로또 번호는 6개여야 합니다.",
