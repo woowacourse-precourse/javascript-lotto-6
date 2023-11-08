@@ -1,10 +1,10 @@
 import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
+  Console.readLineAsync = jest.fn();
 
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
+  Console.readLineAsync.mockImplementation(() => {
     const input = inputs.shift();
 
     return Promise.resolve(input);
@@ -12,14 +12,14 @@ const mockQuestions = (inputs) => {
 };
 
 const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
+  }, Random.pickUniqueNumbersInRange);
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(Console, "print");
   logSpy.mockClear();
   return logSpy;
 };
