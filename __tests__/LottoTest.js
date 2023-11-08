@@ -14,5 +14,15 @@ describe('로또 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test('CommonError-> 당첨 번호가 1~45가 아닐경우 예외가 발생한다', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 46]);
+    }).toThrow('[ERROR] 1~45 숫자가 아닙니다.');
+  });
+
+  test('CommonError-> 당첨 번호가 숫자가 아닐경우 예외가 발생한다', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, NaN]);
+    }).toThrow('[ERROR] 숫자가 아닙니다.');
+  });
 });
