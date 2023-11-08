@@ -3,7 +3,7 @@ import Lotto from "./Lotto.js";
 import Bonus from "./Bonus.js";
 import Result from "./Result.js";
 import { Console, Random } from "@woowacourse/mission-utils";
-import { NUMBER } from "./utils/constants.js";
+import { NUMBER, RESULT } from "./utils/constants.js";
 import { INPUT, OUTPUT } from "./utils/messages.js";
 
 class App {
@@ -12,24 +12,13 @@ class App {
   #userWinningNumbers;
   #userBonusNumber;
   #result;
-  #profit = 0;
-
-  constructor() {
-    this.profitList = {
-      three: 5000,
-      four: 50000,
-      five: 1500000,
-      fiveBonus: 30000000,
-      six: 2000000000,
-    };
-  }
+  #profit;
 
   async play() {
     await this.getLottoCount();
     this.generateWinningNumbers();
     await this.getUserWinningAndBonusNumbers();
     this.getResult();
-    this.getProfit();
     this.printResult();
   }
 
@@ -96,34 +85,18 @@ class App {
       this.#userBonusNumber
     );
 
-    this.#result = result.getResult();
-  }
-
-  getProfit() {
-    Object.entries(this.#result).forEach(([count, score]) => {
-      if (score !== 0) {
-        this.#profit = this.profitList[count] * score;
-      }
-    });
-
-    this.#profit =
-      (this.#profit / (this.#lottoCount * NUMBER.DIVISOR)) * NUMBER.PERCENTAGE;
+    this.#result = result.calculateResult();
+    this.#profit = result.calculateProfit(this.#lottoCount);
   }
 
   printResult() {
-    const { three, four, five, fiveBonus, six } = this.#result;
-
     Console.print(OUTPUT.STATISTICS);
-    Console.print(`${OUTPUT.THREE} - ${three}개`);
-    Console.print(`${OUTPUT.FOUR} - ${four}개`);
-    Console.print(`${OUTPUT.FIVE} - ${five}개`);
-    Console.print(`${OUTPUT.FIVE_BONUS} - ${fiveBonus}개`);
-    Console.print(`${OUTPUT.SIX} - ${six}개`);
-    Console.print(
-      `총 수익률은 ${this.#profit
-        .toFixed(1)
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%입니다.`
-    );
+
+    for (let score in this.#result) {
+      Console.print(`${RESULT[score].message} - ${this.#result[score]}개`);
+    }
+
+    Console.print(`총 수익률은 ${this.#profit}%입니다.`);
   }
 }
 

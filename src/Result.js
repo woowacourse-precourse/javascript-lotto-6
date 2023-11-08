@@ -1,11 +1,14 @@
+import { NUMBER, RESULT } from "./utils/constants.js";
+
 class Result {
   #result = {
-    three: 0,
-    four: 0,
-    five: 0,
-    fiveBonus: 0,
-    six: 0,
+    THREE: 0,
+    FOUR: 0,
+    FIVE: 0,
+    FIVE_BONUS: 0,
+    SIX: 0,
   };
+  #profit = 0;
 
   constructor(winningNumberList, userWinningNumbers, userBonusNumber) {
     this.winningNumberList = winningNumberList;
@@ -13,7 +16,18 @@ class Result {
     this.bonusNumber = userBonusNumber;
   }
 
-  getResult() {
+  compare(matchingNumbers, isBonusNumber) {
+    const length = matchingNumbers.length;
+
+    if (length === RESULT.THREE.matches) return this.#result.THREE++;
+    else if (length === RESULT.FOUR.matches) return this.#result.FOUR++;
+    else if (length === RESULT.FIVE.matches) {
+      if (isBonusNumber) return this.#result.FIVE_BONUS++;
+      return this.#result.FIVE++;
+    } else if (length === RESULT.SIX.matches) return this.#result.SIX++;
+  }
+
+  calculateResult() {
     this.winningNumberList.forEach((winningNumbers) => {
       const matchingNumbers = winningNumbers.filter((number) =>
         this.userWinningNumbers.includes(number)
@@ -26,15 +40,14 @@ class Result {
     return this.#result;
   }
 
-  compare(matchingNumbers, isBonusNumber) {
-    const length = matchingNumbers.length;
+  calculateProfit(lottoCount) {
+    for (let score in this.#result) {
+      this.#profit += this.#result[score] * RESULT[score].prize;
+    }
 
-    if (length === 3) return this.#result.three++;
-    else if (length === 4) return this.#result.four++;
-    else if (length === 5) {
-      if (isBonusNumber) return this.#result.fiveBonus++;
-      return this.#result.five++;
-    } else if (length === 6) return this.#result.six++;
+    this.#profit =
+      (this.#profit / (lottoCount * NUMBER.DIVISOR)) * NUMBER.PERCENTAGE;
+    return this.#profit.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 }
 
