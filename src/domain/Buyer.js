@@ -5,11 +5,15 @@ import LottoFactory from './LottoFactory.js';
 class Buyer {
   #money;
 
-  #lottos;
+  #lottos; // @type {Array<Lotto>}
 
   constructor(money) {
     this.#validate(money);
     this.#money = money;
+  }
+
+  getLottos() {
+    return this.#lottos;
   }
 
   buyLottos(lottoFactory = new LottoFactory()) {
