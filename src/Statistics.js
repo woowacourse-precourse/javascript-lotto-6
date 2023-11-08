@@ -14,14 +14,14 @@ class Statistics {
 
   #earningRate;
 
-  constructor(winningNumber, bonusNumber, lottos) {
+  constructor({ winningNumbers, bonusNumber }, lottos) {
     this.#first = 0;
     this.#second = 0;
     this.#third = 0;
     this.#fourth = 0;
     this.#fifth = 0;
     this.#earningRate = 0;
-    this.#calculateStatistics(winningNumber, bonusNumber, lottos);
+    this.#calculateResult(winningNumbers, bonusNumber, lottos);
     this.#calculateEarningRate(lottos.length);
   }
 
@@ -43,9 +43,9 @@ class Statistics {
     this.#earningRate = Number(earningRate).toLocaleString('ko-KR');
   }
 
-  #calculateStatistics(winningNumber, bonusNumber, lottos) {
+  #calculateResult(winningNumbers, bonusNumber, lottos) {
     lottos.forEach((lotto) => {
-      const score = lotto.filter((number) => winningNumber.includes(number)).length;
+      const score = lotto.filter((number) => winningNumbers.includes(number)).length;
       if (score === 6) this.#first += 1;
       else if (score === 5 && lotto.includes(bonusNumber)) this.#second += 1;
       else if (score === 5) this.#third += 1;
