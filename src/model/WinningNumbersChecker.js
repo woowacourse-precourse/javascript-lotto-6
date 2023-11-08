@@ -1,14 +1,14 @@
 import ValidationError from '../Error/ValidationError';
 import ERROR_CONSTANT from '../Constant/ErrorConstant';
 import DATATYPE_CONSTANT from '../Constant/DataTypeConstant';
-import NUMBER_CONSTANT from '../Constant/NumberConstant'
+import NUMBER_CONSTANT from '../Constant/NumberConstant';
 import Formattor from '../View/Formattor';
 import RULE_CONSTANT from '../Constant/RuleConstant';
 
 class WinningNumbersChecker {
-  #commonWinningNumbers
-  #bonusWinningNumber
-  #winningConditions
+  #commonWinningNumbers;
+  #bonusWinningNumber;
+  #winningConditions;
 
   constructor(commonWinningNumbers, bonusWinningNumber, winningConditions) {
     if (!Array.isArray(commonWinningNumbers)) {
@@ -38,14 +38,14 @@ class WinningNumbersChecker {
   }
 
   checkWinningRank(numbers) {
-    const equlsCountArray = this.#checkEqulsCount(numbers);
-    for (const [rank, condition] of Object.entries(this.#winningConditions)) {
-      if (
-        condition[NUMBER_CONSTANT.ZERO] === equlsCountArray[NUMBER_CONSTANT.ZERO] &&
-        condition[NUMBER_CONSTANT.ONE] === equlsCountArray[NUMBER_CONSTANT.ONE]
-        ) {
-        return (rank);
-      }
+    const [common, bonus] = this.#checkEqulsCount(numbers);
+
+    const target = Object.entries(this.#winningConditions).find(
+      ([, [commonCount, bonusCount]]) => commonCount === common && bonusCount === bonus,
+    );
+
+    if (target) {
+      return target[NUMBER_CONSTANT.ZERO];
     }
     return (RULE_CONSTANT.OPTION_NONE);
   }

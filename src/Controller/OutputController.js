@@ -6,15 +6,15 @@ import NUMBER_CONSTANT from '../Constant/NumberConstant';
 
 const outputPurchaseCount = (count) => {
   Output.outputString(`${count}${OUTPUT_CONSTANT.PURCHASE_COUNT}`);
-}
+};
 
 const outputLottoNumbers = (lottos) => {
   lottos.forEach((lotto) => Output.outputArray(lotto.getLottoNumbers()));
-}
+};
 
 const outputTotalStatistics = (winningStatistics) => {
   const keys = Object.keys(RULE_CONSTANT.WINNUNG_CONDITIONS).reverse();
-  
+
   Output.outputString('');
   Output.outputString(winningStatistics.getName());
   Output.outputString(RULE_CONSTANT.HYPON.repeat(3));
@@ -23,10 +23,10 @@ const outputTotalStatistics = (winningStatistics) => {
     winningStatistics.totalAmount += winningStatistics[item].getTotalPurchase();
     winningStatistics.totalCount += winningStatistics[item].getCount();
   });
-  winningStatistics.totalCount += + winningStatistics[RULE_CONSTANT.OPTION_NONE];
+  winningStatistics.totalCount += winningStatistics[RULE_CONSTANT.OPTION_NONE];
   const message = (outputWinningStatistics(winningStatistics)).getMessage();
   Output.outputString(message);
-}
+};
 
 const outputWinningStatistics = (winningStatistics) => {
   const purchaseCount = winningStatistics.totalCount * RULE_CONSTANT.LOTTO_TICKET_PRICE;
@@ -34,15 +34,15 @@ const outputWinningStatistics = (winningStatistics) => {
     RULE_CONSTANT.STATISTICS_PREFIX,
     Formattor.divideValue(winningStatistics.totalAmount ,purchaseCount) * NUMBER_CONSTANT.HUNDRED,
     RULE_CONSTANT.STATISTICS_SUFFIX
-  )
+  );
   const getMessage = () => message;
   return {
     getMessage,
   };
-}
+};
 
 export default {
   outputPurchaseCount,
   outputLottoNumbers,
   outputTotalStatistics,
-}
+};

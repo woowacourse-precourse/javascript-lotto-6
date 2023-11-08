@@ -9,7 +9,7 @@ const outputString = (output) => {
   }
 
   Console.print(output);
-}
+};
 
 const outputArray = (output) => {
   if (!Array.isArray(output)) {
@@ -18,9 +18,9 @@ const outputArray = (output) => {
 
   const message = output.join(', ');
   Console.print(`[${message}]`);
-}
+};
 
 export default {
   outputString,
   outputArray,
-}
+};

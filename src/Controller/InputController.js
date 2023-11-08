@@ -16,26 +16,30 @@ const ValidateNoProblemNumber = (amountString) => {
   Validator.assertRemainderNotEqual(
     parsedAmountNumber,
     RULE_CONSTANT.LOTTO_TICKET_PRICE,
-    NUMBER_CONSTANT.ZERO
+    NUMBER_CONSTANT.ZERO,
   );
   return (parsedAmountNumber);
-}
+};
 
 const controllerLottoPurchase = async () => {
   let parsedAmountNumber = 0;
-  while(TRUE) {
+  while (TRUE) {
     try {
-      const amountString = await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_PURCHASE_AMOUNT_MESSAGE);
+      const amountString = (
+        await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_PURCHASE_AMOUNT_MESSAGE)
+      );
       parsedAmountNumber = ValidateNoProblemNumber(amountString);
-      break ;
-    } catch(error) {
+      break;
+    } catch (error) {
       Output.outputString(error.message);
     }
   }
   const getLottoTicketCount = () => (
     Formattor.getDivisionQuotient(parsedAmountNumber, RULE_CONSTANT.LOTTO_TICKET_PRICE)
-  )
-  return {getLottoTicketCount};
+  );
+  return {
+    getLottoTicketCount,
+  };
 };
 
 const controllerCommonLottoWinningNumbersElements = (lottoCommonWinningNumbersArray) => {
@@ -46,14 +50,16 @@ const controllerCommonLottoWinningNumbersElements = (lottoCommonWinningNumbersAr
     Validator.assertValueInRange(
       itemNumber,
       RULE_CONSTANT.LOTTO_MIN_NUMBER,
-      RULE_CONSTANT.LOTTO_MAX_NUMBER
+      RULE_CONSTANT.LOTTO_MAX_NUMBER,
     );
   });
   const getNumberArray = () => (
     Formattor.formatStringArrayToNumberArray(lottoCommonWinningNumbersArray)
   );
-  return {getNumberArray};
-}
+  return {
+    getNumberArray,
+  };
+};
 
 const controllerCommonLottoWinningNumbers = async () => {
   let lottoCommonWinningNumbersArray = [];
@@ -71,16 +77,18 @@ const controllerCommonLottoWinningNumbers = async () => {
         RULE_CONSTANT.COMMON_WINNING_NUMBERS_SIZE
       );
       Validator.assertNotInDuplicateValueInArray(lottoCommonWinningNumbersArray);
-      break ;
-    } catch(error) {
+      break;
+    } catch (error) {
       Output.outputString(error.message);
     }
   }
   const getlottoCommonWinningNumbersArray = () => (
     controllerCommonLottoWinningNumbersElements(lottoCommonWinningNumbersArray).getNumberArray()
   );
-  return {getlottoCommonWinningNumbersArray};
-}
+  return {
+    getlottoCommonWinningNumbersArray
+  };
+};
 
 const controllerBonusLottoWinningNumber = async (array) => {
   let lottoBonusWinningNumber = 0;
@@ -98,18 +106,19 @@ const controllerBonusLottoWinningNumber = async (array) => {
         RULE_CONSTANT.LOTTO_MAX_NUMBER
       );
       Validator.assertNotInDuplicateInputValueInArray(array, lottoBonusWinningNumber);
-      break ;
-    } catch(error) {
+      break;
+    } catch (error) {
       Output.outputString(error.message);
     }
-
   }
   const getlottoBonusWinningNumber = () => lottoBonusWinningNumber;
-  return {getlottoBonusWinningNumber};
-}
+  return {
+    getlottoBonusWinningNumber,
+  };
+};
 
 export default {
   controllerLottoPurchase,
   controllerCommonLottoWinningNumbers,
   controllerBonusLottoWinningNumber,
-}
+};

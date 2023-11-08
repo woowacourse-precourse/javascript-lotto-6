@@ -41,34 +41,37 @@ const WINNUNG_CONDITIONS = {
   '5개 일치': [5, 0],
   '4개 일치': [4, 0],
   '3개 일치': [3, 0],
-}
+};
 
 const THREE_MATCHS = {
   name: THREE_MATCH,
   amountString: THREE_MATCH_AMOUNT_STRING,
-  amount: THREE_MATCH_AMOUNT
-}
+  amount: THREE_MATCH_AMOUNT,
+};
+
 const FOUR_MATCHS = {
   name: FOUR_MATCH,
   amountString: FOUR_MATCH_AMOUNT_STRING,
-  amount: FOUR_MATCH_AMOUNT
-}
+  amount: FOUR_MATCH_AMOUNT,
+};
+
 const FIVE_MATCHS = {
   name: FIVE_MATCH,
   amountString: FIVE_MATCH_AMOUNT_STRING,
-  amount: FIVE_MATCH_AMOUNT
-}
+  amount: FIVE_MATCH_AMOUNT,
+};
+
 const FIVE_AND_BONUS_MATCHS = {
   name: FIVE_AND_BONUS_MATCH,
   amountString: FIVE_AND_BONUS_MATCH_AMOUNT_STRING,
-  amount: FIVE_AND_BONUS_MATCH_AMOUNT
-}
+  amount: FIVE_AND_BONUS_MATCH_AMOUNT,
+};
+
 const SIX_MATCHS = {
   name: SIX_MATCH,
   amountString: SIX_MATCH_AMOUNT_STRING,
-  amount: SIX_MATCH_AMOUNT
-}
-
+  amount: SIX_MATCH_AMOUNT,
+};
 
 export default {
   LOTTO_TICKET_PRICE,
@@ -100,4 +103,4 @@ export default {
   SIX_MATCHS,
   STATISTICS_SUFFIX,
   STATISTICS_PREFIX,
-}
+};

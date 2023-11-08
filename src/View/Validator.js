@@ -12,7 +12,7 @@ const assertNonEmptyString = (input) => {
   if (input.length === NUMBER_CONSTANT.ZERO) {
     throw new ValidationError(ERROR_CONSTANT.EMPTY_STRING);
   }
-}
+};
 
 const assertParsableAsInteger = (input) => {
   if (typeof input !== DATATYPE_CONSTANT.STRING) {
@@ -22,12 +22,12 @@ const assertParsableAsInteger = (input) => {
   const inputLength = input.length;
   if (
     input.includes(DOT) ||
-    !/^[1-9]*$/.test(input[NUMBER_CONSTANT.ZERO]) ||
-    !/^[0-9]*$/.test(input[inputLength - NUMBER_CONSTANT.ONE])
+    !/^[1-9]*$/.test(input[NUMBER_CONSTANT.ZERO])
+    || !/^[0-9]*$/.test(input[inputLength - NUMBER_CONSTANT.ONE])
   ) {
     throw new ValidationError(ERROR_CONSTANT.UNCONVERTIBLE_STRING);
   }
-}
+};
 
 const assertPositiveNumber = (input) => {
   if (typeof input !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(input)) {
@@ -36,7 +36,7 @@ const assertPositiveNumber = (input) => {
   if (input < NUMBER_CONSTANT.ZERO) {
     throw new ValidationError(ERROR_CONSTANT.NEGATIVE_AMOUNT);
   }
-}
+};
 
 const assertRemainderNotEqual = (value1, value2, expectedRemainderValue) => {
   if (typeof value1 !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(value1)) {
@@ -47,14 +47,16 @@ const assertRemainderNotEqual = (value1, value2, expectedRemainderValue) => {
     throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
   }
 
-  if (typeof expectedRemainderValue !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(expectedRemainderValue)) {
+  if (typeof expectedRemainderValue !== DATATYPE_CONSTANT.NUMBER
+    || Number.isNaN(expectedRemainderValue)) {
     throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
   }
 
   const remainder = value1 % value2;
-  if (remainder !== expectedRemainderValue)
+  if (remainder !== expectedRemainderValue) {
     throw new ValidationError(ERROR_CONSTANT.REMAINDER_MISMATCH);
-}
+  }
+};
 
 const assertArraySizeEqual = (inputArray, expectedSize) => {
   if (!Array.isArray(inputArray)) {
@@ -69,7 +71,7 @@ const assertArraySizeEqual = (inputArray, expectedSize) => {
   if (inputArraySize !== expectedSize) {
     throw new ValidationError(ERROR_CONSTANT.ARRAY_SIZE_MISMATCH);
   }
-}
+};
 
 const assertValueInRange = (value, minValue, maxValue) => {
   if (typeof value !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(value)) {
@@ -87,7 +89,7 @@ const assertValueInRange = (value, minValue, maxValue) => {
   if (!(value >= minValue && value <= maxValue)) {
     throw new ValidationError(ERROR_CONSTANT.VALUE_NOT_IN_RANGE);
   }
-}
+};
 
 const assertNotInDuplicateValueInArray = (inputArray) => {
   if (!Array.isArray(inputArray)) {
@@ -98,7 +100,7 @@ const assertNotInDuplicateValueInArray = (inputArray) => {
   if (inputSet.size !== inputArray.length) {
     throw new ValidationError(ERROR_CONSTANT.DUPLICATE_VALUE_IN_ARRAY);
   }
-}
+};
 
 const assertNotInDuplicateInputValueInArray = (inputArray, inputValue) => {
   if (!Array.isArray(inputArray)) {
@@ -111,7 +113,7 @@ const assertNotInDuplicateInputValueInArray = (inputArray, inputValue) => {
   if (inputArray.includes(inputValue)) {
     throw new ValidationError(ERROR_CONSTANT.DUPLICATE_VALUE_IN_ARRAY);
   }
-}
+};
 
 export default {
   assertNonEmptyString,

@@ -1,8 +1,15 @@
 import lottoController from './Controller/LottoContoller';
 
 class App {
+  #controller;
+
+  constructor() {
+    this.#controller = lottoController;
+  }
+
   async play() {
-    await lottoController();
+    await this.#controller();
   }
 }
+
 export default App;

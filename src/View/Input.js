@@ -11,6 +11,6 @@ const getUserInputAsync = (async (message) => {
   const lottoPurchaseAmount = await Console.readLineAsync(message);
 
   return (lottoPurchaseAmount);
-})
+});
 
 export default getUserInputAsync;

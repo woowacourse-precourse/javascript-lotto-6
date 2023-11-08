@@ -13,26 +13,28 @@ const lottopurchaseController = async () => {
   return {
     getLottoCards,
   };
-}
+};
 
 const lottoCheckWinningController = async () => {
   const commonLottoNumbers = (
-    (await InputController.controllerCommonLottoWinningNumbers())
-    .getlottoCommonWinningNumbersArray()
-  );
+    await InputController.controllerCommonLottoWinningNumbers()
+  ).getlottoCommonWinningNumbersArray();
   const bonusLottoNumber = (
-    (await InputController.controllerBonusLottoWinningNumber(commonLottoNumbers)).getlottoBonusWinningNumber()
-  );
-  Validator.assertNotInDuplicateInputValueInArray(commonLottoNumbers, bonusLottoNumber);
-  const checker = (ModelController.WinningNumbersCheckerController(
+    await InputController.controllerBonusLottoWinningNumber(commonLottoNumbers)
+  ).getlottoBonusWinningNumber();
+  Validator.assertNotInDuplicateInputValueInArray(
     commonLottoNumbers,
     bonusLottoNumber,
-  )).getWinningNumbersChecker();
+  );
+  const checker = ModelController.WinningNumbersCheckerController(
+    commonLottoNumbers,
+    bonusLottoNumber,
+  ).getWinningNumbersChecker();
   const getChecker = () => checker;
   return {
     getChecker,
   };
-}
+};
 
 const lottoController = async () => {
   const lottoCards = (await lottopurchaseController()).getLottoCards();
@@ -47,6 +49,6 @@ const lottoController = async () => {
     }
   });
   OutputController.outputTotalStatistics(winningStatistics);
-}
+};
 
 export default lottoController;
