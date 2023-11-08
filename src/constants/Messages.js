@@ -1,4 +1,4 @@
-import { USER_MONEY_CONDITION, LOTTO_PURCHASE_UNIT, LOTTO_NUMBER, PRIZE } from './Condition.js';
+import { USER_MONEY_CONDITION, LOTTO_PURCHASE_UNIT, LOTTO_NUMBER } from './Condition.js';
 
 export const INPUT = {
   user_money: '구입 금액을 입력해 주세요.\n',
@@ -27,8 +27,4 @@ export const INPUT_ERROR = {
   duplicate: '[ERROR] 입력에 중복된 값이 있습니다.',
   duplicate_winning: '[ERROR] 입력이 당첨 번호와 중복되는 값입니다.',
   length: (count) => `[ERROR] 입력이 ${count}개가 아닙니다.`,
-};
-
-export const LOTTO_ERROR = {
-  length: '[ERROR] 로또 번호는 6개여야 합니다.',
 };
