@@ -17,11 +17,9 @@ const calculateProfitRate = (startMoney, winningMoney) => {
 };
 
 const filterLottoNumbers = (winningNumbers, lottoNumbers) => {
-  const filteredNumber = lottoNumbers.filter(number => {
+  return lottoNumbers.filter(number => {
     return winningNumbers.includes(number);
   });
-
-  return filteredNumber;
 };
 
 const matchedLottoNumbers = (lottoResults, matchedNumbers, matchedBonus) => {

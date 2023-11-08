@@ -23,8 +23,7 @@ const randomLottoNumbers = () => {
 };
 
 const sortLottoNumbers = numbers => {
-  const sortedNumbers = [...numbers].sort((firstNumber, nextNumber) => firstNumber - nextNumber);
-  return sortedNumbers;
+  return [...numbers].sort((firstNumber, nextNumber) => firstNumber - nextNumber);
 };
 
 export { parseStringsToIntegers, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers };

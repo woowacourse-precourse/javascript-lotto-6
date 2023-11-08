@@ -26,4 +26,4 @@ const validateAndEnsurePrice = inputPrice => {
   validateLottoPurchase(inputPrice);
 };
 
-export { ensureIsNumberString, ensureBonusNumberIsNotIncluded, validateAndEnsurePrice };
+export { ensureIsNumberString, ensureBonusNumberIsNotIncluded, validateAndEnsurePrice, validateLottoPurchase };
