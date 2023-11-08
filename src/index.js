@@ -1,4 +1,4 @@
-import App from './App.js';
+import App from './Ui/Start.js';
 
 const app = new App();
 await app.play();

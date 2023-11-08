@@ -1,22 +1,15 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { LottoMachine } from './LottoMachine.js';
-import { Lotto } from './Lotto.js';
-import { BonusNumberValidate, CashValidate } from './Validate.js';
+import { LottoGame } from '../Domain/LottoGame.js';
 
-export class LottoGame {
-  constructor() {
-    this.lottoMachine = new LottoMachine();
-    this.playerLottos;
-    this.bonusNumber;
-    this.winningNumbers;
+export class InputLotto {
+  constructor(lottoGame) {
+    this.lottoGame = lottoGame;
   }
 
   async buyLottos() {
     try {
       const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
-      CashValidate.cashValidate(Number(cash));
-      const lottoCount = Number(cash) / 1000;
-      this.playerLottos = this.lottoMachine.buyLottos(lottoCount);
+      this.lottoGame.buyLottos(cash);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.buyLottos();
@@ -27,8 +20,7 @@ export class LottoGame {
   async winLottos() {
     try {
       const winningNumber = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
-      const winningNumbers = new Lotto(winningNumber.split(',').map(Number));
-      this.winningNumbers = winningNumbers.numbers;
+      this.lottoGame.winLottos(winningNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.winLottos();
@@ -39,8 +31,7 @@ export class LottoGame {
   async isBonusNumber() {
     try {
       const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.');
-      BonusNumberValidate.bonusNumberValidate(bonusNumber.split(','), this.winningNumbers);
-      this.bonusNumber = Number(bonusNumber);
+      this.lottoGame.isBonusNumber(bonusNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       await this.isBonusNumber();

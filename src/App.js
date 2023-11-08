@@ -1,4 +1,4 @@
-import { Start } from './start.js';
+import { Start } from './Ui/Start.js';
 
 class App {
   async play() {

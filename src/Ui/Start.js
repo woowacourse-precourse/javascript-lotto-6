@@ -1,15 +1,17 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { LottoGame } from './LottoGame.js';
-import { LottoStatistics } from './LottoStatistics';
+import { LottoGame } from '../Domain/LottoGame.js';
+import { InputLotto } from './InputLotto.js';
+import { LottoStatistics } from '../Domain/LottoStatistics.js';
 
 export class Start {
   constructor() {
     this.lottoGame = new LottoGame();
+    this.inputLotto = new InputLotto(this.lottoGame);
   }
   async run() {
-    await this.lottoGame.buyLottos();
-    await this.lottoGame.winLottos();
-    await this.lottoGame.isBonusNumber();
+    await this.inputLotto.buyLottos();
+    await this.inputLotto.winLottos();
+    await this.inputLotto.isBonusNumber();
 
     const statistics = new LottoStatistics(
       this.lottoGame.playerLottos,
