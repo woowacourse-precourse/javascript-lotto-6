@@ -14,6 +14,13 @@ class InputView {
     );
     return lottoNumbers;
   }
+
+  async readBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+      "보너스 번호를 입력해 주세요."
+    );
+    return bonusNumber;
+  }
 }
 
 export default InputView;

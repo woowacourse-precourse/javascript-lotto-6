@@ -2,26 +2,31 @@ import Validator from "../utils/Validator";
 import RandomNumberGenerator from "../utils/RandomNumberGenerator";
 
 class LottoDataProcessor {
-  #random;
-  #lottoResultArr;
   #purchaseAmount;
+  #lottoResults;
 
   constructor(purchaseAmount) {
     this.#purchaseAmount = Number(purchaseAmount);
     this.#validate(this.#purchaseAmount);
-    this.#lottoResultArr = [];
-    this.#random = new RandomNumberGenerator();
+    this.#lottoResults = [];
+    this.#lottoResults(purchaseAmount / 1000);
   }
 
   #validate() {
     Validator.validatePurchaseAmount(this.#purchaseAmount);
   }
 
-  lottoResults(count) {
+  getLottoResults() {
+    return this.#lottoResults;
+  }
+
+  #generateLottoResults(count) {
     for (let i = 0; i < count; i++) {
-      this.#lottoResultArr.push(this.#random.generateRandomNumber(1, 45, 6));
+      this.#lottoResults.push(
+        RandomNumberGenerator.generateRandomNumber(1, 45, 6)
+      );
     }
-    return this.#lottoResultArr;
+    return this.#lottoResults;
   }
 }
 
