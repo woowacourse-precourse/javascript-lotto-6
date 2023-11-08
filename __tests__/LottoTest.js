@@ -1,18 +1,28 @@
-import Lotto from "../src/Lotto.js";
+import { Lotto } from '../src/Validate/Lotto.js';
 
-describe("로또 클래스 테스트", () => {
-  test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
+describe('로또 클래스 테스트', () => {
+  test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6, 7]);
-    }).toThrow("[ERROR]");
+    }).toThrow('[ERROR]');
   });
 
   // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
-  test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
+  test('로또 번호에 중복된 숫자가 있으면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
-    }).toThrow("[ERROR]");
+    }).toThrow('[ERROR]');
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test('CommonError-> 당첨 번호가 1~45가 아닐경우 예외가 발생한다', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 46]);
+    }).toThrow('[ERROR] 1~45 숫자가 아닙니다.');
+  });
+
+  test('CommonError-> 당첨 번호가 숫자가 아닐경우 예외가 발생한다', () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, NaN]);
+    }).toThrow('[ERROR] 숫자가 아닙니다.');
+  });
 });
