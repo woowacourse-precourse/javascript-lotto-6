@@ -9,7 +9,7 @@ class Output {
             const innerArrayString = lotto.join(', ');
             return `[${innerArrayString}]`;
         });
-        return await Console.print(stringArrays.join('\n'));
+        return Console.print(stringArrays.join('\n'));
         }
 
     async outPutQuantity(lotto) {

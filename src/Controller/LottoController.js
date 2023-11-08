@@ -27,17 +27,12 @@ class LottoController{
     }
 
     async start() {
-        
         await this.occurIssuePurchaseAmount();
         this.generateLotto = this.#lottoGenerator.generateRandomNumbers(this.#purchaseAmount/1000);
-    
-        this.#output.printLotto(this.generateLotto);
         await this.occurIssueWinningNumbers();
         await this.occurIssueBonusNumber();
-        
         for (let i = 0; i < this.generateLotto.length; i++) {
-
-            this.comapreLotto(this.#winningNumbers,this.generateLotto[i],this.bonusNumber)
+            this.comapreLotto(this.#winningNumbers,this.generateLotto[i],this.#bonusNumber)
         }
         this.#output.printStatistics(this.#dicQuantity);
         const totalRate = this.getTotalRate(this.#purchaseAmount);
@@ -47,8 +42,8 @@ class LottoController{
     async occurIssuePurchaseAmount() {
         try {
             this.#purchaseAmount = await this.#userInput.inputPurchaseAmount();
-        } catch (e){
-            this.#userInput.printError(e.message);
+        } catch (error){
+            this.#userInput.printError(error.message);
             await this.occurIssuePurchaseAmount();
         }
     }
@@ -56,17 +51,17 @@ class LottoController{
     async occurIssueWinningNumbers() {
         try {
             this.#winningNumbers = await this.#userInput.inputWinningNumbers();
-        } catch (e) {
-            this.#userInput.printError(e.message);
+        } catch (error) {
+            this.#userInput.printError(error.message);
             await this.occurIssueWinningNumbers();
         }
     }
 
     async occurIssueBonusNumber() {
         try {
-            this.bonusNumber = await this.#userInput.inputBonusNumber(this.#winningNumbers);
-        } catch (e) {
-            this.#userInput.printError(e.message);
+            this.#bonusNumber = await this.#userInput.inputBonusNumber(this.#winningNumbers);
+        } catch (error) {
+            this.#userInput.printError(error.message);
             await this.occurIssueBonusNumber();
         }
     }
@@ -79,10 +74,8 @@ class LottoController{
             }
         }
 
-        if (matchCount == 5) {
-            if (lotto.includes(bonusNumber)) {
-                matchCount += 2;
-            }
+        if (matchCount == 5 && lotto.includes(bonusNumber)) {
+            matchCount += 2;
         }
 
         if (this.#dicQuantity[matchCount] !== undefined) {
@@ -91,16 +84,17 @@ class LottoController{
     }
 
     getTotalRate(purchaseAmount) { 
-        let totalReturn = 0;
-        totalReturn = totalReturn + this.#dicQuantity[3]*5000;
-        totalReturn = totalReturn + this.#dicQuantity[4]*50000;
-        totalReturn = totalReturn + this.#dicQuantity[5]*1500000;
-        totalReturn = totalReturn + this.#dicQuantity[7]*30000000;
-        totalReturn = totalReturn + this.#dicQuantity[6]*2000000000;
+        const WINNING_PRIZES = { 3: 5000, 4: 50000, 5: 1500000, 6: 2000000000, 7: 30000000 };
 
+        let totalReturn = 0;
+
+        for (const key of Object.keys(this.#dicQuantity)) {
+            if (WINNING_PRIZES[key]) {
+                totalReturn += this.#dicQuantity[key] * WINNING_PRIZES[key];
+            }
+        }
         return (totalReturn / purchaseAmount) * 100;
     }
-
 }
 
 export default LottoController;
