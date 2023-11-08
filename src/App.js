@@ -58,21 +58,26 @@ class App {
 
   // 사용자로부터 당첨 번호를 입력받는 메서드
   async getWinningNum() {
-    const INPUTNUMS = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
+    const INPUTNUMS = await Console.readLineAsync("당첨 번호를 입력해 주세요");
+
+    if (INPUTNUMS.includes(" ")) {
+      throw new Error("[ERROR] 띄어쓰기 대신 쉼표로만 입력해주세요.");
+    }
+
     const SPLITINPUT = INPUTNUMS.split(",");
 
-    if (INPUTNUMS.includes(" "))
-      throw new Error("[ERROR] 띄어쓰기 대신 쉼표로만 입력해주세요.");
     const WINNUM = [];
 
     for (let i = 0; i < SPLITINPUT.length; i++) {
       let num = parseInt(SPLITINPUT[i]);
       WINNUM.push(num);
     }
+
     const WINNINGNUM = new Lotto(WINNUM);
     WINNINGNUM.sortNumbers();
     return WINNINGNUM.returnNumbers();
   }
+
 
   // 사용자로부터 보너스 번호를 입력받는 메서드
   async getBonusNum(WINNINGNUMS) {
