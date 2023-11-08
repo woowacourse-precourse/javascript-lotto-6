@@ -13,3 +13,11 @@ export const CONSTANT_VALUE = {
   dailyLimitPrice: 100000,
   numberCheck: /^[0-9]+$/,
 };
+
+export const PRIZE_AMOUNTS = {
+  threeMatch: 5000,
+  fourMatch: 50000,
+  fiveMatch: 1500000,
+  fiveAndBonusMatch: 30000000,
+  sixMatch: 2000000000,
+};

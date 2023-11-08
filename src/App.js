@@ -12,7 +12,7 @@ class App {
   }
 
   async generateBonusNumber() {
-    const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const bonusNumber = await MissionUtils.Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
 
     return Number(bonusNumber);
   }
