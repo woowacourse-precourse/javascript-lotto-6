@@ -21,11 +21,11 @@ const OutputView = {
   },
 
   // 도메인 생성 후 작업 에정
-  printResultStatistic(winningStatic) {
+  printResultStatistic(winningStatistic) {
     Console.print(MESSAGE.resultStatic);
-    for (let i = 0; i < winningStatic.length; i++) {
+    for (let i = 0; i < winningStatistic.length; i++) {
       Console.print(
-        `${STATIC_RESULT[i]}${winningStatic[4 - i]}${MESSAGE.staticSuffix}`
+        `${STATIC_RESULT[i]}${winningStatistic[4 - i]}${MESSAGE.staticSuffix}`
       );
     }
   },
