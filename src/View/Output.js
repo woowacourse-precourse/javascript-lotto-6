@@ -31,6 +31,10 @@ class Output {
   printProfitRate(profitRate) {
     Console.print(`총 수익률은 ${profitRate.toFixed(1)}%입니다.`);
   }
+
+  printErrorMesage(error) {
+    Console.print(error);
+  }
 }
 
 export default Output;

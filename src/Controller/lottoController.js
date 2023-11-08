@@ -21,7 +21,7 @@ class LottoController {
         }
         break;
       } catch (error) {
-        Console.print(error.message);
+        this.output.printErrorMesage(error.message);
       }
     }
     this.lottos.createLottos(purchaseAmount);
