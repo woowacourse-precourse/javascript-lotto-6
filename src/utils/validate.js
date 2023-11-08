@@ -1,4 +1,4 @@
-import { ERROR, GAME } from "../constant/gameMessge.js";
+import { GAME, ERROR } from "../constant/GameConfig.js";
 
 function validatePurchaseAmountMinimun(amount) {
   if (amount < GAME.settings.unit) {

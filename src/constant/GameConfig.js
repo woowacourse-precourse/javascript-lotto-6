@@ -1,4 +1,4 @@
-const RESULT_ORDER = [3, 4, 5, "5bonus", 6];
+const RESULT_KEY = [3, 4, 5, "5bonus", 6];
 
 const GAME = Object.freeze({
   settings: {
@@ -16,7 +16,7 @@ const GAME = Object.freeze({
     6: "6개 일치",
   },
 
-  prizeMap: {
+  prize: {
     3: 5000,
     4: 50000,
     5: 1500000,
@@ -26,16 +26,16 @@ const GAME = Object.freeze({
 });
 
 const MESSAGE = Object.freeze({
-  purchase: {
-    amount: "구입 금액을 입력해주세요.\n",
-    winningNumber: "\n당첨 번호를 입력해주세요.\n",
+  input: {
+    purchase: "구입 금액을 입력해주세요.\n",
+    winningNumbers: "\n당첨 번호를 입력해주세요.\n",
     bonusNumber: "보너스 번호를 입력해주세요.",
   },
 
-  result: {
-    Amount: (quantity) => `\n${quantity}개를 구매했습니다.`,
-    title: "\n당첨 통계\n---",
-    benefit: (input) => `총 수익률은 ${input}%입니다.`,
+  output: {
+    amount: (amount) => `\n${amount}개를 구매했습니다.`,
+    statistics: "\n당첨 통계\n---",
+    roi: (roi) => `총 수익률은 ${roi}%입니다.`,
   },
 });
 
@@ -46,10 +46,12 @@ const ERROR = Object.freeze({
     numeric: "[ERROR] 로또 번호는 숫자여야 합니다.",
     duplicate: "[ERROR] 중복된 숫자입니다.",
   },
+
   bonus: {
     duplicate: "[ERROR] 보너스 번호가 당첨번호와 중복되었습니다.",
     numeric: "[ERROR] 보너스 번호는 숫자여야 합니다.",
   },
+
   purchase: {
     amountUnit: "[ERROR] 구입 금액은 1000원 단위입니다.",
     numeric: "[ERROR] 숫자만 입력해주세요.",
@@ -57,4 +59,4 @@ const ERROR = Object.freeze({
   },
 });
 
-export { RESULT_ORDER, GAME, MESSAGE, ERROR };
+export { RESULT_KEY, GAME, MESSAGE, ERROR };

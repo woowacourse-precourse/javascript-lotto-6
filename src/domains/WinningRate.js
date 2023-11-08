@@ -1,8 +1,7 @@
 import { validateBonusNumber } from "../utils/validate.js";
 
-class WinningRate {
+class WinningNumbers {
   #lotto;
-
   #bonusNumber;
 
   constructor(lotto, bonusNumber) {
@@ -27,4 +26,4 @@ class WinningRate {
   }
 }
 
-export default WinningRate;
+export default WinningNumbers;

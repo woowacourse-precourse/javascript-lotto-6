@@ -1,26 +1,24 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { MESSAGE } from "../constant/gameMessge.js";
 import { validatePurchaseAmount } from "../utils/validate.js";
+import { MESSAGE } from "../constant/GameConfig.js";
 
 const InputView = {
-  async getUserPurchaseAmout() {
+  async getPurchaseAmout() {
     try {
-      const userPurchaseAmout = await MissionUtils.Console.readLineAsync(
-        `${MESSAGE.purchase.amount}`,
-      );
-      validatePurchaseAmount(userPurchaseAmout);
+      const purchaseAmout = await MissionUtils.Console.readLineAsync(`${MESSAGE.input.purchase}`);
+      validatePurchaseAmount(purchaseAmout);
 
-      return userPurchaseAmout;
+      return purchaseAmout;
     } catch (error) {
       MissionUtils.Console.print(error.message);
-      return await this.getUserPurchaseAmout();
+      return await this.getPurchaseAmout();
     }
   },
 
   async getWinningNumbers() {
     try {
       const userInputWinningNumbers = await MissionUtils.Console.readLineAsync(
-        `${MESSAGE.purchase.winningNumber}`,
+        `${MESSAGE.input.winningNumbers}`,
       );
 
       return userInputWinningNumbers.split(",").map((number) => Number(number.trim()));
@@ -29,13 +27,13 @@ const InputView = {
     }
   },
 
-  async getBonusNumbers() {
+  async getBonusNumber() {
     try {
-      const userInputBonusNumbers = await MissionUtils.Console.readLineAsync(
-        `\n${MESSAGE.purchase.bonusNumber}\n`,
+      const userInputBonusNumber = await MissionUtils.Console.readLineAsync(
+        `\n${MESSAGE.input.bonusNumber}\n`,
       );
 
-      return Number(userInputBonusNumbers);
+      return Number(userInputBonusNumber);
     } catch (error) {
       MissionUtils.Console.print(error.message);
     }

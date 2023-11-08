@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { GAME } from "./constant/gameMessge.js";
 import { validateLotto } from "./utils/validate.js";
+import { GAME } from "./constant/GameConfig.js";
 
 class Lotto {
   #numbers;
@@ -25,7 +25,7 @@ class Lotto {
     return new Lotto(numbers);
   }
 
-  static buyLottoTickets(money) {
+  static purchaseLotto(money) {
     const purchaseAmount = money / GAME.settings.unit;
 
     return Array.from({ length: purchaseAmount }).map(() => Lotto.generateLottoNumber());
