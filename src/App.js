@@ -15,6 +15,8 @@ class App {
 
       Console.print(`\n${lottoAmount}${MESSAGE.SHOW_TICKETS}`);
       lottoTickets.forEach((lotto) => Console.print(lotto));
+
+      await this.user.makeWinningNumbers();
     } catch (error) {
       Console.print(error);
     }
