@@ -13,7 +13,7 @@ class BonusNumber {
 
   #validate(number, winningNumbers) {
     if (!numberInRange(number, OPTION.minLottoNumber, OPTION.maxLottoNumber)) {
-      throw new InputError(MESSAGE.error.lottoNumbersMustBeInRange);
+      throw new InputError(MESSAGE.error.bonuseNumberMustBeInRange);
     }
     if (winningNumbers.includes(number)) {
       throw new InputError(MESSAGE.error.bonusNumberMustBeUnique);

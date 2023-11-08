@@ -17,7 +17,8 @@ const error = Object.freeze({
   lottoNumbersMustBeLottoLength: `로또 번호는 ${OPTION.lottoLength}개여야 합니다.`,
   lottoNumbersMustBeUnique: `로또 번호는 중복되지 않아야 합니다.`,
   lottoNumbersMustBeInRange: `로또 번호는 ${OPTION.minLottoNumber}부터 ${OPTION.maxLottoNumber} 사이의 숫자여야 합니다.`,
-  bonusNumberMustBeUnique: `보너스 번호는 중복되지 않아야 합니다.`,
+  bonuseNumberMustBeInRange: `보너스 번호는 ${OPTION.minLottoNumber}부터 ${OPTION.maxLottoNumber} 사이의 숫자여야 합니다.`,
+  bonusNumberMustBeUnique: `보너스 번호는 로또 번호와 중복되지 않아야 합니다.`,
 });
 
 const MESSAGE = Object.freeze({ read, print, error });
