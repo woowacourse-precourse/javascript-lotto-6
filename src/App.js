@@ -51,7 +51,7 @@ class App {
 
   printLottoNumbers() {
     for (const lotto of this.lottoNumbers) {
-      Console.print(lotto.numbers);
+      Console.print(`[${lotto.numbers.join(', ')}]`);
     }
   }
 
@@ -104,8 +104,8 @@ class App {
     for (let i = 0; i < winningStatistics.length; i++) {
       winningProfit += WINNING_PROFITS[i] * winningStatistics[i];
     }
-    const profitRate = parseFloat(((winningProfit - lottoAmount) / lottoAmount * 100).toFixed(1));
-    return profitRate;
+    const profitRate = parseFloat(((winningProfit - lottoAmount) / lottoAmount * 100).toFixed(1)).toFixed(1);
+    return parseFloat(profitRate).toFixed(1);
   }
 
   printProfitRate(profitRate) {
