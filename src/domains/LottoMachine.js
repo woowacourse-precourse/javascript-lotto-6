@@ -24,6 +24,7 @@ export default class LottoMachine {
     this.#validateUserInputMoney(money);
     const purchaseLottoCount = this.#calculateCreateLottoCount(money);
     const lottoList = this.#createLottoList(purchaseLottoCount);
+    this.#validateIsAllLottoInstance(lottoList);
 
     return lottoList;
   }
@@ -37,6 +38,7 @@ export default class LottoMachine {
       const lottoNumbers = this.#randomNumberGenerator.numbers();
       return this.#createLotto(lottoNumbers);
     });
+
     return lottoList;
   }
 
@@ -62,6 +64,12 @@ export default class LottoMachine {
     }
     if (!Number.isInteger(this.#calculateCreateLottoCount(money))) {
       throw new GameError(ERROR_MESSAGE.INVALID_PURCHASE_PRICE_CURRENCY);
+    }
+  }
+
+  #validateIsAllLottoInstance(lottoList, _ = paramType(lottoList, Array)) {
+    if (lottoList.some((lotto) => !(lotto instanceof Lotto))) {
+      throw new GameError('로또가 잘못 생성되었습니다.');
     }
   }
 }
