@@ -1,5 +1,5 @@
 import { RANK } from "../static/Static.js";
-import lottoValidator from "../utils/validator/lottoValidator.js";
+import Validator from "../utils/validator/Validator.js";
 class Lotto {
   #numbers;
 
@@ -9,8 +9,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    lottoValidator.validateLength(numbers);
-    lottoValidator.validateDuplication(numbers);
+    Validator.validateLength(numbers);
+    Validator.validateDuplication(numbers);
   }
 
   checkResult(winningNums, bonusNum) {
