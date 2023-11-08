@@ -1,10 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import { LOTTO_PRICE } from './constants.js';
+import { LOTTO_PRICE, MESSAGES } from './constants.js';
 
 const OutputView = {
   printLottoPricePurchased(price) {
     const totalCounts = price / LOTTO_PRICE;
-    Console.print(`\n${totalCounts}개를 구매했습니다.`);
+    Console.print(`\n${totalCounts}${MESSAGES.PURCHASE_MESSAGE_TEMPLATE}`);
   },
 
   printLottoNumbers(lottos) {
@@ -14,7 +14,7 @@ const OutputView = {
   },
 
   printResult(result) {
-    Console.print('\n당첨 통계\n---');
+    Console.print(MESSAGES.RESULT_HEADER);
     for (const key in result) {
       const { prize, count } = result[key];
       Console.print(`${key} (${prize.toLocaleString()}원) - ${count}개`);
