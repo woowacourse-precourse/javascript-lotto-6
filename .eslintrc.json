@@ -7,7 +7,9 @@
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
+
     },
+    "parser": "@babel/eslint-parser",
     "rules": {
         "max-lines-per-function": ["error", {"max": 15, "skipComments": true}],
         "max-depth": ["error", 2],
@@ -17,7 +19,9 @@
         ],
         "lines-between-class-members": "off",
         "class-methods-use-this": "off",
+        "import/no-named-as-default": "off",
+        "object-curly-newline": "off",
         "max-len": ["error", {"code": 120}]
     },
-    "ignorePatterns": ["__tests__/**/*", "node_modules/**/*"]
+    "ignorePatterns": ["__tests__/**/*", "node_modules/"]
 }
