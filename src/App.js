@@ -79,8 +79,7 @@ class App {
 
     this.matchingCountsResult = this.lottoResultChecker.getMatchingCounts(
       this.matchingCounts,
-      this.includedbonusArr,
-      generatedLottoNumbersArr
+      this.includedbonusArr
     );
 
     this.totalProfit = this.calculateTotalProfit();
