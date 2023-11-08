@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
 import { LOTTO_GAME } from './utils/constants.js';
 import Lotto from './Lotto.js';
 
@@ -25,6 +25,7 @@ class LottoGenerator {
 
   #generateLottoTicket() {
     const numbers = this.#generateUniqueRandomNumbers();
+    this.#printNumbers(numbers);
     return new Lotto(numbers);
   }
 
@@ -33,7 +34,15 @@ class LottoGenerator {
       LOTTO_GAME.MIN_NUMBER,
       LOTTO_GAME.MAX_NUMBER,
       LOTTO_GAME.TOTAL_NUMBERS
-    );
+    ).sort((a, b) => a - b);
+  }
+
+  #printNumbers(numbers) {
+    Console.print(`[${numbers.join(', ')}]`);
+  }
+
+  getLottoTickets() {
+    return this.#lottoTickets;
   }
 }
 
