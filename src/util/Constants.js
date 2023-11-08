@@ -10,6 +10,28 @@ export const MESSAGE = Object.freeze({
   SIX_MATCH: "6개 일치 (2,000,000,000원) - ",
 });
 
+export const MATCH = Object.freeze({
+  THREE: 3,
+  FOUR: 4,
+  FIVE: 5,
+  SIX: 6,
+})
+
+export const MONEY = Object.freeze({
+  THREE_MATCH: 5000,
+  FOUR_MATCH: 50000,
+  FIVE_MATCH: 1500000,
+  FIVE_BONUS_MATCH: 30000000,
+  SIX_MATCH: 2000000000,
+})
+
+export const NUMBER = Object.freeze({
+  INCREASE: 1,
+  LOTTO_MIN: 1,
+  LOTTO_MAX: 45,
+  LOTTO_LENGTH: 6,
+})
+
 
 
 

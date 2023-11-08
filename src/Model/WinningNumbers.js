@@ -1,5 +1,4 @@
-import { ERROR } from "../util/Constants";
-
+import { ERROR, NUMBER } from "../util/Constants";
 class WinningNumbers {
   #winningNumbers = [];
 
@@ -39,21 +38,21 @@ class WinningNumbers {
   }
 
   checkLength() {
-    if (this.#winningNumbers.length !== 6) {
+    if (this.#winningNumbers.length !== NUMBER.LOTTO_LENGTH) {
       throw new Error(ERROR.INVALID_SIX_NUMBERS);
     }
   }
 
   checkRange() {
-    if (!this.#winningNumbers.every((number) => number >= 1 && number <= 45)) {
+    if (!this.#winningNumbers.every((number) => number >= NUMBER.LOTTO_MIN && number <= NUMBER.LOTTO_MAX)) {
       throw new Error(ERROR.INVALID_NUMBER);
     }
-    if (!(this.#bonusNumber >= 1 && this.#bonusNumber <= 45))
+    if (!(this.#bonusNumber >= NUMBER.LOTTO_MIN && this.#bonusNumber <= NUMBER.LOTTO_MAX))
       throw new Error(ERROR.INVALID_NUMBER);
   }
 
   checkDuplication() {
-    if (new Set(this.#winningNumbers).size !== 6) {
+    if (new Set(this.#winningNumbers).size !== NUMBER.LOTTO_LENGTH) {
       throw new Error(ERROR.INVALID_DUPLICATION);
     }
 

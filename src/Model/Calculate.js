@@ -1,4 +1,5 @@
 import WinningNumbers from "./WinningNumbers.js";
+import { MATCH, MONEY, NUMBER } from "../util/Constants.js";
 
 class Calculate {
   #results;
@@ -52,28 +53,28 @@ class Calculate {
   }
 
   countWinnings(matchedNumbers, bonusMatch) {
-    if (matchedNumbers.length === 3) {
-      this.#results.three += 1;
-    } else if (matchedNumbers.length === 4) {
-      this.#results.four += 1;
-    } else if (matchedNumbers.length === 5) {
+    if (matchedNumbers.length === MATCH.THREE) {
+      this.#results.three += NUMBER.INCREASE;
+    } else if (matchedNumbers.length === MATCH.FOUR) {
+      this.#results.four += NUMBER.INCREASE;
+    } else if (matchedNumbers.length === MATCH.FIVE) {
       if (bonusMatch) {
-        this.#results.fiveBonus += 1;
+        this.#results.fiveBonus += NUMBER.INCREASE;
       } else {
-        this.#results.five += 1;
+        this.#results.five += NUMBER.INCREASE;
       }
-    } else if (matchedNumbers.length === 6) {
-      this.#results.six += 1;
+    } else if (matchedNumbers.length === MATCH.SIX) {
+      this.#results.six += NUMBER.INCREASE;
     }
   }
 
   calculateProfitRate(purchaseAmount) {
     const profit =
-      this.#results.three * 5000 +
-      this.#results.four * 50000 +
-      this.#results.five * 1500000 +
-      this.#results.fiveBonus * 30000000 +
-      this.#results.six * 2000000000;
+      this.#results.three * MONEY.THREE_MATCH +
+      this.#results.four * MONEY.FOUR_MATCH +
+      this.#results.five * MONEY.FIVE_MATCH +
+      this.#results.fiveBonus * MONEY.FIVE_BONUS_MATCH +
+      this.#results.six * MONEY.SIX_MATCH;
     this.#profitRate = (profit / purchaseAmount) * 100;
   }
 }

@@ -1,4 +1,4 @@
-import { ERROR } from "../util/Constants";
+import { ERROR, NUMBER } from "../util/Constants";
 
 class Lotto {
   #numbers;
@@ -17,7 +17,7 @@ class Lotto {
     if (uniqueNumbers.size !== numbers.length) {
       throw new Error(ERROR.INVALID_DUPLICATION);
     }
-    if (numbers.length !== 6) {
+    if (numbers.length !== NUMBER.LOTTO_LENGTH) {
       throw new Error(ERROR.INVALID_SIX_NUMBERS);
     }
   }
