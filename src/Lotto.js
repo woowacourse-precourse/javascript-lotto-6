@@ -5,6 +5,7 @@ class Lotto {
   purchaseAmount;
   numberPurchased;
   randomLottoNumbers;
+  isValidWinningNumber;
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -61,10 +62,44 @@ class Lotto {
     return result;
   }
 
+  async enterWinningNumber() {
+    let isValidInput = false;
+    while (!isValidInput) {
+      try {
+        const winningNumber = await MissionUtils.Console.readLineAsync(
+          "당첨 번호를 입력해 주세요. 숫자의 구분은 쉼표(,)로 합니다."
+        ); //1,2,3,4,5,6
+        this.isValidWinningNumber = winningNumber.split(","); //['1','2','3','4','5','6']
+        this.exceptionHandlingCommaSix();
+        this.exceptionHandling45();
+        isValidInput = true;
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+  }
+
+  exceptionHandlingCommaSix() {
+    if (this.isValidWinningNumber.length !== 6) {
+      throw new Error(
+        "[ERROR] 쉼표(,)로 구분하여 6개의 당첨 번호를 입력해주세요."
+      );
+    }
+  }
+
+  exceptionHandling45() {
+    for (let i = 0; i < this.isValidWinningNumber.length; i++) {
+      if (this.isValidWinningNumber[i] > 45) {
+        throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+      }
+    }
+  }
+
   async buyLotto() {
     await this.readPurchaseAmount();
     MissionUtils.Console.print(`${this.numberPurchased}개를 구매했습니다.`);
     MissionUtils.Console.print(this.lottoNumArrMultiplynumberPurchased());
+    await this.enterWinningNumber();
   }
 }
 export default Lotto;
