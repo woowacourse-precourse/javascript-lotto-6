@@ -114,4 +114,31 @@ describe('로또 클래스 메서드 테스트', () => {
 			);
 		});
 	});
+
+	describe('getTotalPrize 메서드 테스트', () => {
+		test('총 상금 계산', () => {
+			const matchingNumbersArray = [3, 0, 5, 0, 1];
+			const matchingBonusNumberArray = [0, 0, 1, 1, 0];
+			const WINNING_RULES = [
+				{ match: 3, prize: '5,000원', prizeNumber: 5000 },
+				{ match: 4, prize: '50,000원', prizeNumber: 50000 },
+				{ match: 5, prize: '1,500,000원', prizeNumber: 1500000 },
+				{
+					match: 5,
+					bonus: true,
+					prize: '30,000,000원',
+					bonusText: ', 보너스 볼 일치',
+					prizeNumber: 30000000,
+				},
+				{ match: 6, prize: '2,000,000,000원', prizeNumber: 2000000000 },
+			];
+			const expectTotalPrize = 30005000;
+
+			lotto = new Lotto(matchingNumbersArray);
+
+			expect(lotto.getTotalPrize(matchingBonusNumberArray)).toBe(
+				expectTotalPrize
+			);
+		});
+	});
 });
