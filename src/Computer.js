@@ -9,8 +9,11 @@ export default class Computer {
     this.resetLotto();
   }
 
-  async issueLottoForUserInput() {
+  async getPurchaseAmountFromUserInput() {
     this.purchaseAmount = await InputManager.getPurchaseAmount();
+  }
+
+  issueLottoForPurchaseAmount() {
     const lottoCnt = this.purchaseAmount / 1000;
     Console.print(MESSAGE.PURCHASE_COUNT(lottoCnt));
 

@@ -3,7 +3,8 @@ import Computer from './Computer.js';
 class App {
   async play() {
     const computer = new Computer();
-    await computer.issueLottoForUserInput();
+    await computer.getPurchaseAmountFromUserInput();
+    computer.issueLottoForPurchaseAmount();
     computer.printLotto();
     await computer.getWinningNumbersrFromUserInput();
     await computer.getBonusNumberFromUserInput();
