@@ -2,6 +2,7 @@ import LottoPrinter from './LottoPrinter';
 import LottoPlayer from './LottoPlayer';
 import LottoMachine from './LottoMachine';
 import LottoChecker from './LottoChecker';
+import LottoCalculator from './LottoCalculator';
 
 class App {
   async play() {
@@ -10,12 +11,16 @@ class App {
     const machine = new LottoMachine(purchaseCount);
     LottoPrinter.printPurchaseComplete(purchaseCount);
     const tickets = await machine.getTickets(purchaseCount);
-    console.log('a = ', typeof player.amount);
     const winningNumbers = await player.enterWinningNumbers();
 
     const checker = new LottoChecker(tickets, winningNumbers);
     const matches = checker.getMatches();
     LottoPrinter.printMatches(matches);
+    const returnRate = LottoCalculator.getReturnRate(
+      checker.revenue,
+      player.amount,
+    );
+    LottoPrinter.printReturnRate(returnRate);
   }
 }
 
