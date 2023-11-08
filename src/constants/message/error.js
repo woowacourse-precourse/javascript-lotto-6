@@ -10,6 +10,7 @@ const ERROR_MESSAGES = {
   numberMaxLength: '[ERROR] Number must be no more than 2 characters',
   duplicate: '[ERROR] Duplicate numbers exist in the lotto',
   notNumberArray: '[ERROR] Not an array of numbers',
+  notObjextKey: '[ERROR] No key in the object',
 };
 
 export default ERROR_MESSAGES;
