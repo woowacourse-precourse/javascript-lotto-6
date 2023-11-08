@@ -168,6 +168,21 @@ class App {
   printProfit(profit) {
     MissionUtils.Console.print(`총 수익률은 ${profit}%입니다.`);
   }
+
+  async play() {
+    const money = await this.inputMoney();
+    const lottos = this.publishLotto(money);
+    this.printLottos(lottos);
+    await this.inputNumbers();
+    await this.inputBonusNumber();
+    const result = this.computeTotalResult(
+      lottos,
+      this.winningNumbers,
+      this.mber
+    );
+    this.printResult(result);
+    const profit = this.computeProfit(result, money);
+    this.printProfit(profit);
   }
 }
 
