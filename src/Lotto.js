@@ -12,7 +12,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    this.Error.validateLottoInput(numbers);
+    this.Error.validateLottoNumber(numbers);
   }
 
   getLottoNumber() {

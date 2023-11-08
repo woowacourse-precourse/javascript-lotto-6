@@ -8,7 +8,7 @@ class InputError {
     }
   }
 
-  validateLottoInputLength(input) {
+  validateLottoNumberLength(input) {
     if (input.length !== 6) {
       throw new Error(ERROR_MESSAGE.INPUT_NUMBER_LENGTH_ERROR);
     }
@@ -39,9 +39,9 @@ class InputError {
     }
   }
 
-  validateLottoInput(input) {
+  validateLottoNumber(input) {
     this.validateInputExist(input);
-    this.validateLottoInputLength(input);
+    this.validateLottoNumberLength(input);
     this.validateLottoIsDistinct(input);
   }
 
