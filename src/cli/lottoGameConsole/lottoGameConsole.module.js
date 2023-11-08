@@ -28,8 +28,10 @@ const lottoGameConsole = Object.freeze({
      * @returns {Promise<number>} 구매 로또 금액
      */
     async readPurchasedLottoAmount() {
-      const purchasedLottoAmount = await systemConsole.read(this.messages.purchasedLottoAmount);
-      purchasedLottoAmountValidation.check(Number(purchasedLottoAmount));
+      const purchasedLottoAmount = Number(
+        await systemConsole.read(this.messages.purchasedLottoAmount),
+      );
+      purchasedLottoAmountValidation.check(purchasedLottoAmount);
       return purchasedLottoAmount;
     },
 
@@ -79,7 +81,7 @@ const lottoGameConsole = Object.freeze({
        * @returns {string} 포맷팅 된 메시지
        */
       lottoNumbers(lottoNumbers) {
-        const formatWithComma = (lottoNumber) => lottoNumber.join(', ');
+        const formatWithComma = (lottoNumber) => lottoNumber.join(`${SYMBOLS.comma} `);
         const wrapWithBrackets = (text) => `[${text}]`;
         const formatLottoNumber = (lottoNumber) => wrapWithBrackets(formatWithComma(lottoNumber));
 
