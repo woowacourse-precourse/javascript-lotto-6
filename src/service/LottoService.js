@@ -1,8 +1,8 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto';
-import { LOTTO } from './utils/Define';
-import WinningLotto from './domain/WinningLotto';
-import InputValidator from "./utils/InputValidator.js";
+import Lotto from '../Lotto.js';
+import { LOTTO } from '../utils/Define.js';
+import WinningLotto from '../domain/WinningLotto.js';
+import InputValidator from "../utils/InputValidator.js";
 
 class LottoService {
   sellLotto(purchaseAmount) {

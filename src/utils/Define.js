@@ -4,8 +4,8 @@ const CONSOLE_MESSAGE = Object.freeze({
   requestLottoNumbers: '당첨 번호를 입력해 주세요.\n',
   requestBonusNumber: '보너스 번호를 입력해 주세요.\n',
   returnWinning: '당첨 통계\n---\n',
-  returnEachResult: (matchCount, prize, winCount) =>
-    `${matchCount}개 일치 (${prize}원) - ${winCount}개 \n`,
+  returnEachResult: (matchCount, reward, winCount) =>
+    `${matchCount}개 일치 (${reward}원) - ${winCount}개 \n`,
   returnLottoROI: (lottoROI) => `총 수익률은 ${lottoROI}%입니다.\n`,
 });
 
@@ -29,4 +29,12 @@ const LOTTO = Object.freeze({
   numberCount: 6,
 });
 
-export { CONSOLE_MESSAGE, ERROR_MESSAGE, LOTTO };
+const PRIZE = Object.freeze({
+  firstPlaceReward: 2000000000,
+  secondPlaceReward: 30000000,
+  thirdPlaceReward: 1500000,
+  fourthPlaceReward: 50000,
+  fifthPlaceReward: 5000,
+});
+
+export { CONSOLE_MESSAGE, ERROR_MESSAGE, LOTTO ,PRIZE};

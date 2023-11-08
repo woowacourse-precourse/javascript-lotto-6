@@ -20,6 +20,10 @@ class WinningLotto extends Lotto {
     }
   }
 
+  getBonusNumber(){
+    return this.#bonusNumber;
+  }
+
 }
 
 export default WinningLotto;
