@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { LOTTO, OUTPUT_MESSAGE } from '../constants/index.js';
+import { LOTTO, OUTPUT_MESSAGE } from '../constant/index.js';
 
 export default class Output {
   static purchasedLottosNumber(lottos) {
@@ -15,14 +15,13 @@ export default class Output {
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = LOTTO.WINNING;
 
     Console.print(OUTPUT_MESSAGE.STATISTICS);
-    Console.print('---------');
-    Console.print(`${FIFTH.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(FIFTH.PRIZE, statistics[FIFTH])}`);
-    Console.print(`${FOURTH.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(FOURTH.PRIZE, statistics[FOURTH])}`);
-    Console.print(`${THIRD.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(THIRD.PRIZE, statistics[THIRD])}`);
+    Console.print(`${FIFTH.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(FIFTH.PRIZE, statistics[FIFTH.PRIZE])}`);
+    Console.print(`${FOURTH.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(FOURTH.PRIZE, statistics[FOURTH.PRIZE])}`);
+    Console.print(`${THIRD.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(THIRD.PRIZE, statistics[THIRD.PRIZE])}`);
     Console.print(
-      `${SECOND.COUNT}개 일치, 보너스 볼 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(SECOND.PRIZE, statistics[SECOND])}`,
+      `${SECOND.COUNT}개 일치, 보너스 볼 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(SECOND.PRIZE, statistics[SECOND.PRIZE])}`,
     );
-    Console.print(`${FIRST.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(FIRST.PRIZE, statistics[FIRST])}`);
+    Console.print(`${FIRST.COUNT}개 일치 ${OUTPUT_MESSAGE.WINNING_COUNT(FIRST.PRIZE, statistics[FIRST.PRIZE])}`);
   }
 
   static profitRate(rate) {
