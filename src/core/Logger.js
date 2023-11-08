@@ -30,7 +30,6 @@ export default class Logger {
    *    five: number;
    *    bonusFive: number;
    *    six: number;
-   *    returnRate: number;
    * }} board
    * @param {number} returnRate
    */
