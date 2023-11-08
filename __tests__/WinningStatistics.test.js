@@ -1,4 +1,5 @@
 import { getLogSpy } from './mockMissionUtils';
+import WinningStatistics from '../src/WinningStatistics';
 
 describe('당첨 통계', () => {
   test('일치 금액 및 개수, 총 수익률', () => {
